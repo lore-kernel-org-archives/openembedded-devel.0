@@ -2,349 +2,488 @@ Return-Path: <saravanan.kadambathursubramaniyam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CD0ED111A8
-	for <webhook@archiver.kernel.org>; Sun, 30 Nov 2025 11:52:54 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2887.1764503573300176699
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55E6BD111A8
+	for <webhook@archiver.kernel.org>; Sun, 30 Nov 2025 12:20:34 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3297.1764505222260581212
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 30 Nov 2025 03:52:53 -0800
+ Sun, 30 Nov 2025 04:20:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ldJVKIxa;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4429d7dc3a=saravanan.kadambathursubramaniyam@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AUBWkoB1590859
-	for <openembedded-devel@lists.openembedded.org>; Sun, 30 Nov 2025 11:52:52 GMT
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=KXnyIvH4;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4429d7dc3a=saravanan.kadambathursubramaniyam@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5AUCKL7S3129642;
+	Sun, 30 Nov 2025 04:20:21 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=IEcOlji8OcxQHqCFdKMA
-	4872GUZ+iEDbiMD9kswuACg=; b=ldJVKIxalAovjWBqqRYjI1Vx/RyGFZDWFbW+
-	TE6txl2KHZzvzvD8kLNDu0lKAD91Rz+Tz1wfLBZWxdymkWT1ETiKnyFSxQLlhUVx
-	Alyk/aNFiY+HkfJl6+UiY/AjVZsOFEn/ulnL3x9cRLaO25GWU06maSzNWM19mBGd
-	HFb12ieP3lvRPqPmU8aMlqXLfOJsswi9D58D3+j9xYuj9rQU/+X0FCXOcTYwS+rq
-	gLQQriDNPAPfHLosEh/ifCDCMWMhLG04H9SeV1gZUaTs1l4d6mZMcL8mvmzyfgx9
-	IEMuvErpODDYg4hh7ZUhrfkbphvD9ckJtDfhcsqGUpZ6qAvUsg==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aqp21rwgg-1
+	:mime-version:subject:to; s=PPS06212021; bh=Wax9JSRlu2hkH29Vaqkd
+	fcOeOxd10TFa/hev130dyi4=; b=KXnyIvH4MfbID/b2r3HcLDxrHbgmeRbnS5fv
+	zwe8Yn9vF+akkqE7OmsjKX/xc2vA017+JweyNhOPGvZtTrr0QLBXN5C1uAPGUaQ2
+	u4Qyr0q2pt39eVWYhZlxf+MRoclpQHf5M4eUhRJiXlZFpWVh64Blx6jA50bGSiId
+	Ak/4fcDDgziqLj/h0Zl86TXgusoOGOBd3G4FbbMovRrOmklaVICWsZy/NrpcmdbK
+	+g42JHZUnN8A/dVewZRLO2cveMZvwpwBnSyX9PuhPg4U/Km+ASnO85F4p/zWjvVK
+	pEtNdE7Z8ALX5AeJYQnQCicgbPmxwmWR/lY6gjCffwrrxcb1XQ==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ar17mrk8b-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 30 Nov 2025 11:52:52 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 30 Nov 2025 04:20:21 -0800 (PST)
 Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Sun, 30 Nov 2025 03:52:51 -0800
+ 15.1.2507.61; Sun, 30 Nov 2025 04:20:20 -0800
 Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
  ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Sun, 30 Nov 2025 03:52:49 -0800
+ 15.1.2507.61 via Frontend Transport; Sun, 30 Nov 2025 04:20:19 -0800
 From: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2024-39329
-Date: Sun, 30 Nov 2025 17:22:48 +0530
-Message-ID: <20251130115248.3043692-1-saravanan.kadambathursubramaniyam@windriver.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2024-39330
+Date: Sun, 30 Nov 2025 17:50:17 +0530
+Message-ID: <20251130122017.3078236-1-saravanan.kadambathursubramaniyam@windriver.com>
 X-Mailer: git-send-email 2.35.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: 0hJ9UQp1lG_7VEtmLtQyE6aouHAENMKM
-X-Authority-Analysis: v=2.4 cv=OLAqHCaB c=1 sm=1 tr=0 ts=692c3014 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+X-Proofpoint-ORIG-GUID: RDI3ojISezdeU3OZ8tdyS56Zkko9HLIO
+X-Authority-Analysis: v=2.4 cv=Ws4m8Nfv c=1 sm=1 tr=0 ts=692c3685 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
  a=6UeiqGixMTsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=W8_ZnyXlAAAA:8 a=Tg3y5bO43fjKMMuT0IcA:9
- a=FdTzh2GWekK77mhwV6Dw:22 a=eqgIXyRJRr-I_B2loWo7:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTMwMDEwMSBTYWx0ZWRfXyESeCci+azTE
- PA2eAOWPTkfaQjipvG53gr6UVK6zxlfadEi4gwJHXQQur7Hzi/uU4gg7lkCic0a47O+HLKubSn+
- 15Ap1UJjp7ZBueQLJPpc+MSnG2NpfGWPTeFF9OKlw7FkIxlLfR4A2XbZTJycuYtPcn75MRQAlJR
- IyoyWL1SOrMDeZ/20lOwD4lN8dbpss8pfISCOuaL8ST6lVGoycVhMMnr+IS6eYcWHe5Je+TYAr5
- bmhaG/vvrYRqvdp5/LhyvlkiH7fXqlGYUOpa853o0qHlGK9Lust8BP5tUXo+3ejWXkyap8WEAsA
- CcXXUtA8yBKzM8u0bE7svHR/CKn/AMdE9OA2vYSrDT52pKwms7NmjAZmDUJh2Z24yNtotdXvSqs
- 7u/pJjYQBOP4+yqxGUnssku1AKJ6Mg==
-X-Proofpoint-ORIG-GUID: 0hJ9UQp1lG_7VEtmLtQyE6aouHAENMKM
+ a=t7CeM3EgAAAA:8 a=AoAGiEJO2RIqMTtk4XMA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: RDI3ojISezdeU3OZ8tdyS56Zkko9HLIO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMTMwMDEwNiBTYWx0ZWRfX47EVDvtNZZ+g
+ MBHst7zGlu8HtZQQTiHo7FoI3vkB8SVqPSh42tHcS+DXIz1Kaw422Kuxo6QHK8zCRdrc9Zsid3M
+ z4lyoYKi/z6mAa+E4KNYOJwcL7G8QJV6dMcvyKjjM4GOOMWb4M92St5pMpdB1m2VcJweYi8aFAq
+ wWBJfjA4zEVvvgEjX52OpPnos5n290fR35In/x9U+6wKX8pYVa7cYQBxgpBfyvyp87YbvZMzojw
+ DVB9+xKCNRn4ux4hwNFSLjoNoSqFw6cCYLE50DCEzopENgHqtvObxsYmw2qhf9T5QsL9LoHORGz
+ dHBm3wZnfBpoY2BfJmgdJTCZQ8k0QkIvTwXL7Fr9+gHPA+4JjIsXrUACDPzvGiBrAx02SiQTvKt
+ xERI6U1pDyHUns1hAffdcdkLRJEl4g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2025-11-28_08,2025-11-27_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 phishscore=0 clxscore=1015 bulkscore=0
- impostorscore=0 spamscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
+ impostorscore=0 malwarescore=0 spamscore=0 phishscore=0 suspectscore=0
+ bulkscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511300101
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2511300106
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 30 Nov 2025 11:52:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122168
+ <openembedded-devel@lists.openembedded.org>; Sun, 30 Nov 2025 12:20:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122169
 
 Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2024-39329
+https://nvd.nist.gov/vuln/detail/CVE-2024-39330
 
 Upstream-patch:
-https://github.com/django/django/commit/156d3186c96e3ec2ca73b8b25dc2ef366e38df14
+https://github.com/django/django/commit/2b00edc0151a660d1eb86da4059904a0fc4e095e
 
 Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 ---
- .../CVE-2024-39329.patch                      | 114 ++++++++++++++++++
- .../python3-django/CVE-2024-39329.patch       | 111 +++++++++++++++++
+ .../CVE-2024-39330.patch                      | 184 ++++++++++++++++++
+ .../python3-django/CVE-2024-39330.patch       | 181 +++++++++++++++++
  .../python/python3-django_2.2.28.bb           |   1 +
  .../python/python3-django_3.2.25.bb           |   1 +
- 4 files changed, 227 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39329.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2024-39329.patch
+ 4 files changed, 367 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39330.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2024-39330.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39329.patch b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39329.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39330.patch b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39330.patch
 new file mode 100644
-index 0000000000..9f2883885f
+index 0000000000..81e9a38ed1
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39329.patch
-@@ -0,0 +1,114 @@
-+From 156d3186c96e3ec2ca73b8b25dc2ef366e38df14 Mon Sep 17 00:00:00 2001
-+From: Michael Manfre <mike@manfre.net>
-+Date: Fri, 14 Jun 2024 22:12:58 -0400
-+Subject: [PATCH] Fixed CVE-2024-39329 -- Standarized timing of
-+ verify_password() when checking unusuable passwords.
++++ b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-39330.patch
+@@ -0,0 +1,184 @@
++From 2b00edc0151a660d1eb86da4059904a0fc4e095e Mon Sep 17 00:00:00 2001
++From: Natalia <124304+nessita@users.noreply.github.com>
++Date: Wed, 20 Mar 2024 13:55:21 -0300
++Subject: [PATCH] Fixed CVE-2024-39330 -- Added extra file name validation in
++ Storage's save method.
 +
-+Refs #20760.
++Thanks to Josh Schneier for the report, and to Carlton Gibson and Sarah
++Boyce for the reviews.
 +
-+Thanks Michael Manfre for the fix and to Adam Johnson for the review.
-+
-+CVE: CVE-2024-39329
++CVE: CVE-2024-39330
 +
 +Upstream-Status: Backport
-+https://github.com/django/django/commit/156d3186c96e3ec2ca73b8b25dc2ef366e38df14
++https://github.com/django/django/commit/2b00edc0151a660d1eb86da4059904a0fc4e095e
 +
-+Signed-off-by: Michael Manfre <mike@manfre.net>
 +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 +---
-+ django/contrib/auth/hashers.py   | 10 ++++++++--
-+ docs/releases/3.2.25.txt         |  7 +++++++
-+ tests/auth_tests/test_hashers.py | 32 ++++++++++++++++++++++++++++++++
-+ 3 files changed, 47 insertions(+), 2 deletions(-)
++ django/core/files/storage.py    | 11 ++++++
++ django/core/files/utils.py      |  7 ++--
++ docs/releases/3.2.25.txt        | 12 ++++++
++ tests/file_storage/test_base.py | 70 +++++++++++++++++++++++++++++++++
++ tests/file_storage/tests.py     |  6 ---
++ 5 files changed, 96 insertions(+), 10 deletions(-)
++ create mode 100644 tests/file_storage/test_base.py
 +
-+diff --git a/django/contrib/auth/hashers.py b/django/contrib/auth/hashers.py
-+index 86ae7f4..ee81b64 100644
-+--- a/django/contrib/auth/hashers.py
-++++ b/django/contrib/auth/hashers.py
-+@@ -36,14 +36,20 @@ def check_password(password, encoded, setter=None, preferred='default'):
-+     If setter is specified, it'll be called when you need to
-+     regenerate the password.
-+     """
-+-    if password is None or not is_password_usable(encoded):
-+-        return False
-++    fake_runtime = password is None or not is_password_usable(encoded)
++diff --git a/django/core/files/storage.py b/django/core/files/storage.py
++index 22984f9..680f5ec 100644
++--- a/django/core/files/storage.py
+++++ b/django/core/files/storage.py
++@@ -50,7 +50,18 @@ class Storage:
++         if not hasattr(content, 'chunks'):
++             content = File(content, name)
 + 
-+     preferred = get_hasher(preferred)
-+     try:
-+         hasher = identify_hasher(encoded)
-+     except ValueError:
-+         # encoded is gibberish or uses a hasher that's no longer installed.
-++        fake_runtime = True
+++        # Ensure that the name is valid, before and after having the storage
+++        # system potentially modifying the name. This duplicates the check made
+++        # inside `get_available_name` but it's necessary for those cases where
+++        # `get_available_name` is overriden and validation is lost.
+++        validate_file_name(name, allow_relative_path=True)
 ++
-++    if fake_runtime:
-++        # Run the default password hasher once to reduce the timing difference
-++        # between an existing user with an unusable password and a nonexistent
-++        # user or missing hasher (similar to #20760).
-++        make_password(get_random_string(UNUSABLE_PASSWORD_SUFFIX_LENGTH))
-+         return False
+++        # Potentially find a different name depending on storage constraints.
++         name = self.get_available_name(name, max_length=max_length)
+++        # Validate the (potentially) new name.
+++        validate_file_name(name, allow_relative_path=True)
+++
+++        # The save operation should return the actual name of the file saved.
++         name = self._save(name, content)
++         # Ensure that the name returned from the storage system is still valid.
++         validate_file_name(name, allow_relative_path=True)
++diff --git a/django/core/files/utils.py b/django/core/files/utils.py
++index f28cea1..a1fea44 100644
++--- a/django/core/files/utils.py
+++++ b/django/core/files/utils.py
++@@ -10,10 +10,9 @@ def validate_file_name(name, allow_relative_path=False):
++         raise SuspiciousFileOperation("Could not derive file name from '%s'" % name)
 + 
-+     hasher_changed = hasher.algorithm != preferred.algorithm
++     if allow_relative_path:
++-        # Use PurePosixPath() because this branch is checked only in
++-        # FileField.generate_filename() where all file paths are expected to be
++-        # Unix style (with forward slashes).
++-        path = pathlib.PurePosixPath(name)
+++        # Ensure that name can be treated as a pure posix path, i.e. Unix
+++        # style (with forward slashes).
+++        path = pathlib.PurePosixPath(str(name).replace("\\", "/"))
++         if path.is_absolute() or '..' in path.parts:
++             raise SuspiciousFileOperation(
++                 "Detected path traversal attempt in '%s'" % name
 +diff --git a/docs/releases/3.2.25.txt b/docs/releases/3.2.25.txt
-+index a2a58b5..a613b08 100644
++index a613b08..60236d5 100644
 +--- a/docs/releases/3.2.25.txt
 ++++ b/docs/releases/3.2.25.txt
-+@@ -40,6 +40,13 @@ CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
-+ using a suitably crafted dictionary, with dictionary expansion, as the
-+ ``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
++@@ -47,6 +47,18 @@ The :meth:`~django.contrib.auth.backends.ModelBackend.authenticate()` method
++ allowed remote attackers to enumerate users via a timing attack involving login
++ requests for users with unusable passwords.
 + 
-++CVE-2024-39329: Username enumeration through timing difference for users with unusable passwords
-++================================================================================================
+++CVE-2024-39330: Potential directory-traversal via ``Storage.save()``
+++====================================================================
 ++
-++The :meth:`~django.contrib.auth.backends.ModelBackend.authenticate()` method
-++allowed remote attackers to enumerate users via a timing attack involving login
-++requests for users with unusable passwords.
+++Derived classes of the :class:`~django.core.files.storage.Storage` base class
+++which override :meth:`generate_filename()
+++<django.core.files.storage.Storage.generate_filename()>` without replicating
+++the file path validations existing in the parent class, allowed for potential
+++directory-traversal via certain inputs when calling :meth:`save()
+++<django.core.files.storage.Storage.save()>`.
+++
+++Built-in ``Storage`` sub-classes were not affected by this vulnerability.
 ++
 + Bugfixes
 + ========
 + 
-+diff --git a/tests/auth_tests/test_hashers.py b/tests/auth_tests/test_hashers.py
-+index 8bc61bc..a1ae940 100644
-+--- a/tests/auth_tests/test_hashers.py
-++++ b/tests/auth_tests/test_hashers.py
-+@@ -474,6 +474,38 @@ class TestUtilsHashPass(SimpleTestCase):
-+             check_password('wrong_password', encoded)
-+             self.assertEqual(hasher.harden_runtime.call_count, 1)
-+ 
-++    def test_check_password_calls_make_password_to_fake_runtime(self):
-++        hasher = get_hasher("default")
-++        cases = [
-++            (None, None, None),  # no plain text password provided
-++            ("foo", make_password(password=None), None),  # unusable encoded
-++            ("letmein", make_password(password="letmein"), ValueError),  # valid encoded
-++        ]
-++        for password, encoded, hasher_side_effect in cases:
-++            with (
-++                self.subTest(encoded=encoded),
-++                mock.patch(
-++                    "django.contrib.auth.hashers.identify_hasher",
-++                    side_effect=hasher_side_effect,
-++                ) as mock_identify_hasher,
-++                mock.patch(
-++                    "django.contrib.auth.hashers.make_password"
-++                ) as mock_make_password,
-++                mock.patch(
-++                    "django.contrib.auth.hashers.get_random_string",
-++                    side_effect=lambda size: "x" * size,
-++                ),
-++                mock.patch.object(hasher, "verify"),
-++            ):
-++                # Ensure make_password is called to standardize timing.
-++                check_password(password, encoded)
-++                self.assertEqual(hasher.verify.call_count, 0)
-++                self.assertEqual(mock_identify_hasher.mock_calls, [mock.call(encoded)])
-++                self.assertEqual(
-++                    mock_make_password.mock_calls,
-++                    [mock.call("x" * UNUSABLE_PASSWORD_SUFFIX_LENGTH)],
-++                )
++diff --git a/tests/file_storage/test_base.py b/tests/file_storage/test_base.py
++new file mode 100644
++index 0000000..c5338b8
++--- /dev/null
+++++ b/tests/file_storage/test_base.py
++@@ -0,0 +1,70 @@
+++import os
+++from unittest import mock
 ++
+++from django.core.exceptions import SuspiciousFileOperation
+++from django.core.files.storage import Storage
+++from django.test import SimpleTestCase
+++
+++
+++class CustomStorage(Storage):
+++    """Simple Storage subclass implementing the bare minimum for testing."""
+++
+++    def exists(self, name):
+++        return False
+++
+++    def _save(self, name):
+++        return name
+++
+++
+++class StorageValidateFileNameTests(SimpleTestCase):
+++    invalid_file_names = [
+++        os.path.join("path", "to", os.pardir, "test.file"),
+++        os.path.join(os.path.sep, "path", "to", "test.file"),
+++    ]
+++    error_msg = "Detected path traversal attempt in '%s'"
+++
+++    def test_validate_before_get_available_name(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is not valid nor safe, fail early.
+++        for name in self.invalid_file_names:
+++            with (
+++                self.subTest(name=name),
+++                mock.patch.object(s, "get_available_name") as mock_get_available_name,
+++                mock.patch.object(s, "_save") as mock_internal_save,
+++            ):
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save(name, content="irrelevant")
+++                self.assertEqual(mock_get_available_name.mock_calls, [])
+++                self.assertEqual(mock_internal_save.mock_calls, [])
+++
+++    def test_validate_after_get_available_name(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is valid and safe, but the returned
+++        # name from `get_available_name` is not.
+++        for name in self.invalid_file_names:
+++            with (
+++                self.subTest(name=name),
+++                mock.patch.object(s, "get_available_name", return_value=name),
+++                mock.patch.object(s, "_save") as mock_internal_save,
+++            ):
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save("valid-file-name.txt", content="irrelevant")
+++                self.assertEqual(mock_internal_save.mock_calls, [])
+++
+++    def test_validate_after_internal_save(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is valid and safe, but the result
+++        # from `_save` is not (this is achieved by monkeypatching _save).
+++        for name in self.invalid_file_names:
+++            with (
+++                self.subTest(name=name),
+++                mock.patch.object(s, "_save", return_value=name),
+++            ):
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save("valid-file-name.txt", content="irrelevant")
++diff --git a/tests/file_storage/tests.py b/tests/file_storage/tests.py
++index 7238093..6d17a71 100644
++--- a/tests/file_storage/tests.py
+++++ b/tests/file_storage/tests.py
++@@ -297,12 +297,6 @@ class FileStorageTests(SimpleTestCase):
 + 
-+ class BasePasswordHasherTests(SimpleTestCase):
-+     not_implemented_msg = 'subclasses of BasePasswordHasher must provide %s() method'
++         self.storage.delete('path/to/test.file')
++ 
++-    def test_file_save_abs_path(self):
++-        test_name = 'path/to/test.file'
++-        f = ContentFile('file saved with path')
++-        f_name = self.storage.save(os.path.join(self.temp_dir, test_name), f)
++-        self.assertEqual(f_name, test_name)
++-
++     def test_save_doesnt_close(self):
++         with TemporaryUploadedFile('test', 'text/plain', 1, 'utf8') as file:
++             file.write(b'1')
 +-- 
-+2.40.0
++2.48.1
 +
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2024-39329.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2024-39329.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2024-39330.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2024-39330.patch
 new file mode 100644
-index 0000000000..c302c0df18
+index 0000000000..759716617a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2024-39329.patch
-@@ -0,0 +1,111 @@
-+From 156d3186c96e3ec2ca73b8b25dc2ef366e38df14 Mon Sep 17 00:00:00 2001
-+From: Michael Manfre <mike@manfre.net>
-+Date: Fri, 14 Jun 2024 22:12:58 -0400
-+Subject: [PATCH] Fixed CVE-2024-39329 -- Standarized timing of
-+ verify_password() when checking unusuable passwords.
++++ b/meta-python/recipes-devtools/python/python3-django/CVE-2024-39330.patch
+@@ -0,0 +1,181 @@
++From 2b00edc0151a660d1eb86da4059904a0fc4e095e Mon Sep 17 00:00:00 2001
++From: Natalia <124304+nessita@users.noreply.github.com>
++Date: Wed, 20 Mar 2024 13:55:21 -0300
++Subject: [PATCH] Fixed CVE-2024-39330 -- Added extra file name validation in
++ Storage's save method.
 +
-+Refs #20760.
++Thanks to Josh Schneier for the report, and to Carlton Gibson and Sarah
++Boyce for the reviews.
 +
-+Thanks Michael Manfre for the fix and to Adam Johnson for the review.
-+
-+CVE: CVE-2024-39329
++CVE: CVE-2024-39330
 +
 +Upstream-Status: Backport
-+https://github.com/django/django/commit/156d3186c96e3ec2ca73b8b25dc2ef366e38df14
++https://github.com/django/django/commit/2b00edc0151a660d1eb86da4059904a0fc4e095e
 +
-+Signed-off-by: Michael Manfre <mike@manfre.net>
 +Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
 +---
-+ django/contrib/auth/hashers.py   | 10 ++++++++--
-+ docs/releases/2.2.28.txt         |  7 +++++++
-+ tests/auth_tests/test_hashers.py | 32 ++++++++++++++++++++++++++++++++
-+ 3 files changed, 47 insertions(+), 2 deletions(-)
++ django/core/files/storage.py    | 11 ++++++
++ django/core/files/utils.py      |  7 ++--
++ docs/releases/2.2.28.txt        | 12 ++++++
++ tests/file_storage/test_base.py | 70 +++++++++++++++++++++++++++++++++
++ tests/file_storage/tests.py     |  6 ---
++ 5 files changed, 96 insertions(+), 10 deletions(-)
++ create mode 100644 tests/file_storage/test_base.py
 +
-+diff --git a/django/contrib/auth/hashers.py b/django/contrib/auth/hashers.py
-+index 1e8d754..4acb81d 100644
-+--- a/django/contrib/auth/hashers.py
-++++ b/django/contrib/auth/hashers.py
-+@@ -36,14 +36,20 @@ def check_password(password, encoded, setter=None, preferred='default'):
-+     If setter is specified, it'll be called when you need to
-+     regenerate the password.
-+     """
-+-    if password is None or not is_password_usable(encoded):
-+-        return False
-++    fake_runtime = password is None or not is_password_usable(encoded)
++diff --git a/django/core/files/storage.py b/django/core/files/storage.py
++index ea5bbc8..8c633ec 100644
++--- a/django/core/files/storage.py
+++++ b/django/core/files/storage.py
++@@ -50,7 +50,18 @@ class Storage:
++         if not hasattr(content, 'chunks'):
++             content = File(content, name)
 + 
-+     preferred = get_hasher(preferred)
-+     try:
-+         hasher = identify_hasher(encoded)
-+     except ValueError:
-+         # encoded is gibberish or uses a hasher that's no longer installed.
-++        fake_runtime = True
+++        # Ensure that the name is valid, before and after having the storage
+++        # system potentially modifying the name. This duplicates the check made
+++        # inside `get_available_name` but it's necessary for those cases where
+++        # `get_available_name` is overriden and validation is lost.
+++        validate_file_name(name, allow_relative_path=True)
 ++
-++    if fake_runtime:
-++        # Run the default password hasher once to reduce the timing difference
-++        # between an existing user with an unusable password and a nonexistent
-++        # user or missing hasher (similar to #20760).
-++        make_password(get_random_string(UNUSABLE_PASSWORD_SUFFIX_LENGTH))
-+         return False
+++        # Potentially find a different name depending on storage constraints.
++         name = self.get_available_name(name, max_length=max_length)
+++        # Validate the (potentially) new name.
+++        validate_file_name(name, allow_relative_path=True)
+++
+++        # The save operation should return the actual name of the file saved.
++         name = self._save(name, content)
++         # Ensure that the name returned from the storage system is still valid.
++         validate_file_name(name, allow_relative_path=True)
++diff --git a/django/core/files/utils.py b/django/core/files/utils.py
++index f28cea1..a1fea44 100644
++--- a/django/core/files/utils.py
+++++ b/django/core/files/utils.py
++@@ -10,10 +10,9 @@ def validate_file_name(name, allow_relative_path=False):
++         raise SuspiciousFileOperation("Could not derive file name from '%s'" % name)
 + 
-+     hasher_changed = hasher.algorithm != preferred.algorithm
++     if allow_relative_path:
++-        # Use PurePosixPath() because this branch is checked only in
++-        # FileField.generate_filename() where all file paths are expected to be
++-        # Unix style (with forward slashes).
++-        path = pathlib.PurePosixPath(name)
+++        # Ensure that name can be treated as a pure posix path, i.e. Unix
+++        # style (with forward slashes).
+++        path = pathlib.PurePosixPath(str(name).replace("\\", "/"))
++         if path.is_absolute() or '..' in path.parts:
++             raise SuspiciousFileOperation(
++                 "Detected path traversal attempt in '%s'" % name
 +diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
-+index f3fb298..22fa80e 100644
++index 22fa80e..3503f38 100644
 +--- a/docs/releases/2.2.28.txt
 ++++ b/docs/releases/2.2.28.txt
-+@@ -124,3 +124,10 @@ CVE-2025-57833: Potential SQL injection in ``FilteredRelation`` column aliases
-+ using a suitably crafted dictionary, with dictionary expansion, as the
-+ ``**kwargs`` passed to :meth:`.QuerySet.annotate` or :meth:`.QuerySet.alias`.
++@@ -131,3 +131,15 @@ The :meth:`~django.contrib.auth.backends.ModelBackend.authenticate()` method
++ allowed remote attackers to enumerate users via a timing attack involving login
++ requests for users with unusable passwords.
 + 
-++CVE-2024-39329: Username enumeration through timing difference for users with unusable passwords
-++================================================================================================
+++CVE-2024-39330: Potential directory-traversal via ``Storage.save()``
+++====================================================================
 ++
-++The :meth:`~django.contrib.auth.backends.ModelBackend.authenticate()` method
-++allowed remote attackers to enumerate users via a timing attack involving login
-++requests for users with unusable passwords.
+++Derived classes of the :class:`~django.core.files.storage.Storage` base class
+++which override :meth:`generate_filename()
+++<django.core.files.storage.Storage.generate_filename()>` without replicating
+++the file path validations existing in the parent class, allowed for potential
+++directory-traversal via certain inputs when calling :meth:`save()
+++<django.core.files.storage.Storage.save()>`.
 ++
-+diff --git a/tests/auth_tests/test_hashers.py b/tests/auth_tests/test_hashers.py
-+index ee6441b..391b3cc 100644
-+--- a/tests/auth_tests/test_hashers.py
-++++ b/tests/auth_tests/test_hashers.py
-+@@ -433,6 +433,38 @@ class TestUtilsHashPass(SimpleTestCase):
-+             check_password('wrong_password', encoded)
-+             self.assertEqual(hasher.harden_runtime.call_count, 1)
-+ 
-++    def test_check_password_calls_make_password_to_fake_runtime(self):
-++        hasher = get_hasher("default")
-++        cases = [
-++            (None, None, None),  # no plain text password provided
-++            ("foo", make_password(password=None), None),  # unusable encoded
-++            ("letmein", make_password(password="letmein"), ValueError),  # valid encoded
-++        ]
-++        for password, encoded, hasher_side_effect in cases:
+++Built-in ``Storage`` sub-classes were not affected by this vulnerability.
+++
++diff --git a/tests/file_storage/test_base.py b/tests/file_storage/test_base.py
++new file mode 100644
++index 0000000..c5338b8
++--- /dev/null
+++++ b/tests/file_storage/test_base.py
++@@ -0,0 +1,70 @@
+++import os
+++from unittest import mock
+++
+++from django.core.exceptions import SuspiciousFileOperation
+++from django.core.files.storage import Storage
+++from django.test import SimpleTestCase
+++
+++
+++class CustomStorage(Storage):
+++    """Simple Storage subclass implementing the bare minimum for testing."""
+++
+++    def exists(self, name):
+++        return False
+++
+++    def _save(self, name):
+++        return name
+++
+++
+++class StorageValidateFileNameTests(SimpleTestCase):
+++    invalid_file_names = [
+++        os.path.join("path", "to", os.pardir, "test.file"),
+++        os.path.join(os.path.sep, "path", "to", "test.file"),
+++    ]
+++    error_msg = "Detected path traversal attempt in '%s'"
+++
+++    def test_validate_before_get_available_name(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is not valid nor safe, fail early.
+++        for name in self.invalid_file_names:
 ++            with (
-++                self.subTest(encoded=encoded),
-++                mock.patch(
-++                    "django.contrib.auth.hashers.identify_hasher",
-++                    side_effect=hasher_side_effect,
-++                ) as mock_identify_hasher,
-++                mock.patch(
-++                    "django.contrib.auth.hashers.make_password"
-++                ) as mock_make_password,
-++                mock.patch(
-++                    "django.contrib.auth.hashers.get_random_string",
-++                    side_effect=lambda size: "x" * size,
-++                ),
-++                mock.patch.object(hasher, "verify"),
+++                self.subTest(name=name),
+++                mock.patch.object(s, "get_available_name") as mock_get_available_name,
+++                mock.patch.object(s, "_save") as mock_internal_save,
 ++            ):
-++                # Ensure make_password is called to standardize timing.
-++                check_password(password, encoded)
-++                self.assertEqual(hasher.verify.call_count, 0)
-++                self.assertEqual(mock_identify_hasher.mock_calls, [mock.call(encoded)])
-++                self.assertEqual(
-++                    mock_make_password.mock_calls,
-++                    [mock.call("x" * UNUSABLE_PASSWORD_SUFFIX_LENGTH)],
-++                )
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save(name, content="irrelevant")
+++                self.assertEqual(mock_get_available_name.mock_calls, [])
+++                self.assertEqual(mock_internal_save.mock_calls, [])
 ++
+++    def test_validate_after_get_available_name(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is valid and safe, but the returned
+++        # name from `get_available_name` is not.
+++        for name in self.invalid_file_names:
+++            with (
+++                self.subTest(name=name),
+++                mock.patch.object(s, "get_available_name", return_value=name),
+++                mock.patch.object(s, "_save") as mock_internal_save,
+++            ):
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save("valid-file-name.txt", content="irrelevant")
+++                self.assertEqual(mock_internal_save.mock_calls, [])
+++
+++    def test_validate_after_internal_save(self):
+++        s = CustomStorage()
+++        # The initial name passed to `save` is valid and safe, but the result
+++        # from `_save` is not (this is achieved by monkeypatching _save).
+++        for name in self.invalid_file_names:
+++            with (
+++                self.subTest(name=name),
+++                mock.patch.object(s, "_save", return_value=name),
+++            ):
+++                with self.assertRaisesMessage(
+++                    SuspiciousFileOperation, self.error_msg % name
+++                ):
+++                    s.save("valid-file-name.txt", content="irrelevant")
++diff --git a/tests/file_storage/tests.py b/tests/file_storage/tests.py
++index 4c6f692..0e69264 100644
++--- a/tests/file_storage/tests.py
+++++ b/tests/file_storage/tests.py
++@@ -291,12 +291,6 @@ class FileStorageTests(SimpleTestCase):
 + 
-+ class BasePasswordHasherTests(SimpleTestCase):
-+     not_implemented_msg = 'subclasses of BasePasswordHasher must provide %s() method'
++         self.storage.delete('path/to/test.file')
++ 
++-    def test_file_save_abs_path(self):
++-        test_name = 'path/to/test.file'
++-        f = ContentFile('file saved with path')
++-        f_name = self.storage.save(os.path.join(self.temp_dir, test_name), f)
++-        self.assertEqual(f_name, test_name)
++-
++     def test_save_doesnt_close(self):
++         with TemporaryUploadedFile('test', 'text/plain', 1, 'utf8') as file:
++             file.write(b'1')
 +-- 
-+2.40.0
++2.48.1
 +
 diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index 82cdcb2328..3000e93f81 100644
+index 3000e93f81..b5b2570ddb 100644
 --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -28,6 +28,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2025-26699.patch \
+@@ -29,6 +29,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
              file://CVE-2024-56374.patch \
              file://CVE-2025-57833.patch \
-+            file://CVE-2024-39329.patch \
+             file://CVE-2024-39329.patch \
++            file://CVE-2024-39330.patch \
             "
  
  SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
 diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
-index fe438016f9..4301eccaae 100644
+index 4301eccaae..2d94b2109c 100644
 --- a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
-@@ -10,6 +10,7 @@ SRC_URI += "\
-        file://CVE-2025-26699.patch \
+@@ -11,6 +11,7 @@ SRC_URI += "\
         file://CVE-2024-56374.patch \
         file://CVE-2025-57833.patch \
-+       file://CVE-2024-39329.patch \
+        file://CVE-2024-39329.patch \
++       file://CVE-2024-39330.patch \
  "
  
  # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
