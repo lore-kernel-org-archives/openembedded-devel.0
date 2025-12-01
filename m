@@ -2,97 +2,109 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C14AFD116F1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1FB2D116F5
 	for <webhook@archiver.kernel.org>; Mon,  1 Dec 2025 11:20:59 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19325.1764588051375991134
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19323.1764588050373385930
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Dec 2025 03:20:51 -0800
+ Mon, 01 Dec 2025 03:20:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=OO6HI9y8;
- spf=pass (domain: konsulko.com, ip: 209.85.128.54, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47774d3536dso32523185e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Dec 2025 03:20:51 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EhO2ZBsy;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e77f519so982274f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Dec 2025 03:20:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1764588049; x=1765192849; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=YpcCCKFX50f+6wShU8qrUnCYeDGCN8pM35wr46IwlPg=;
-        b=OO6HI9y8SStgRYP2HBnp0w/BJFoZaLLJV70aUHVI1GwSDszAMbAdIdWCxISt7LBxDE
-         e1HMYCgO/qLZhQkmEBwixurMQf2cjnP/dHBDZZuED0orqkUdmZa1y8ZFnX5tSkrs89jW
-         PpMviNax5SlvcCFtYEvOtumb0tbpONyZbnKQc=
+        d=konsulko.com; s=google; t=1764588048; x=1765192848; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fTXjzCc1mw4plCD8robJWieMlevnfb31xN2qksopRqg=;
+        b=EhO2ZBsymOcCA+bJ9fPYPbYdDvJCV5JqGavqDxIxUNV5eg0JcycXudHa79FjTJUbLN
+         lxi6o+nHZ02VdBdli5ctcLkdnRdAq7WpGpK+AiRAh/LotvuMLGr93siVowP617ZhYwdV
+         KblAbNyHq34bt0LI31dRBwDgRY/1JdDTfHLh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764588049; x=1765192849;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=YpcCCKFX50f+6wShU8qrUnCYeDGCN8pM35wr46IwlPg=;
-        b=hvF/we+Mp6N5zZQwYIyKzA/6D/MSKjLh58hDIzjTrVDy+vDfq/6KcR1+7J8EZtzVDO
-         YUT59mFLh7agEudwmxSgadDvALP9DZRTBrpmJAN9pknC0krk0VRbuFXlBWjPBUgspn5y
-         lRf7k62QFCwatY6D8twF1lj36uWcuOrL7ejl1cMUSCTlZyk+Eyv5nC2URdWH+spU14eY
-         7pzvkmPVV5v/v5zJ/spslCq27o4qOAMqOvQ5aOSPXNcHPJ+c4RPkJEbubRPmUmCjOMZw
-         9kbpYolES2RxMTn0tX8b/uK6FzddXtdUngBR0AEHysumUmvnA5/8Tmv+wPYz/WPk3qXa
-         6uvA==
-X-Gm-Message-State: AOJu0Yyu+h0r8+ev2rUFE367ZSGC7AaeT2SDw7hSq3vN66IxKNJZDVjU
-	8JRYa9HtfTHMPsYgV9uRdfwhsLA28k2gKuLEVtRRxu4tMfWDS/l3h/txgoTdZD1AiBODmbS5i17
-	ucg1U
-X-Gm-Gg: ASbGnctUOP8k3tuCBHl6gzKRy9TOmvNNeBtMTp54fUwHNDv/NpK5X76ogSxOVjJtZ/a
-	pKtNHalG7ApQAXll5HQBvtjKXQyLqJie9CNwm3mng012ZR8BzZRblOA8Tj4hXUW7+ANnKNyuEOY
-	YxZcPsW79I5QDaXLIlHhxNFt0qC9iUewgE4HOM76YJzfQSRjZZAdU30P7yV3qlqwt8bPO2ScW1a
-	cFpENVuyyec66xFOMFk5/rf+7xOyoYVXNrw19nl6YJzUwnHEeyGZsIDvSfdW/O++92garRT6U0H
-	HLClhQqRv4nMBa2yR8lfwAyEu82GwjycIH1BW7sXoqhiHVvrkXYrdAQNOPG3bo0APuqL4aqq0Y9
-	xWPYezrcQjoAR178iuDyd8a4qRoGR+Y+UN9zGkG1ApR08lv0wIh110GDu9vD5LdYzq5flauGzdL
-	BxxGkt92EEJ5VtfybZDtjTUF0F+eCIg5p8K/o=
-X-Google-Smtp-Source: AGHT+IHznInsNsLG/kFY+x3/lJwSuWFj2x6PUMV08qsfVl1Y8Mp7cLExDRx0rx3lS54XrDIBtPryxw==
-X-Received: by 2002:a05:600d:17:b0:477:9cec:c83e with SMTP id 5b1f17b1804b1-477b9ea35b6mr324106755e9.1.1764588049527;
-        Mon, 01 Dec 2025 03:20:49 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764588048; x=1765192848;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=fTXjzCc1mw4plCD8robJWieMlevnfb31xN2qksopRqg=;
+        b=eGsKKwgTL5o36m3CCnodRcxr7G12dd2j4hUJbCYhfKtjYX8/SKf2v20xq7HIf/I0+Z
+         NAKZIGJi1LyOGuWbstTjPe44d2E0ozV+m/apF+3WyolsTh5Wk+V15+vHXC1fnaBqtsgZ
+         lamHkw5a8npQXDupLrhYE1BSZ1lvcDB8r3FlQm5FmRZk88odzhDPQQRDNj1CtqYsZ0hR
+         ZipEgcz7cRvEhW21o0AHgCNQn0KNfUhlpU9g4iYQECGUxAgs0fRHCuoPoMvzbv3L7TCi
+         FD+JPBlWv5Bg/trl3TBGkK7rNgTpCF7RYds7RRIUQmKGNm6OddjaXpvf+IRF80/Y9vPc
+         akDw==
+X-Gm-Message-State: AOJu0YzxqTLS8DAuUQIRNd3Wd4HirIOLlQ0xvRPbW2pMbffdyuGKT0Va
+	OVStEAV+04Z9U8eXpYtHUZ88EC8jxx4RKqAnja/B5CziyYU9kkyVMQVaBTWNERMOA5wsYfh3Wlj
+	vNDns
+X-Gm-Gg: ASbGncsHck0rjZWpCHLe1mkeCBVxghBjgwMlToVHyy3OfUEUgW5/HDMmKFsr3wZPl7a
+	qj0NODkN9NDbC4dVieChXFm0GFaN4knXsnqzDfCQIT5cBmuXTLfmGnH05APX95wilQwNqEn4OVy
+	U12L24TRkV1MlpJuTEbl2ckRuGKmDGejLxULsNgs6BmdW1g42jBT9rdZBiEM4MDHyeKQrILw9/y
+	vT9dD4vLNhTaDJnF+BbMEJbkZfq4gtX5U+U4r/QsKQScDVvwaqfS+uYMNL7EGG/v9NXWLMkURVF
+	jqTu6YohrAPxvwpzmNrx+JnaYZ3ytp3iU0kqZqF2F79ujQAQFLtdBmYEIdIrJjgdlIxi20eOFWO
+	IxnFDIVl8f1/ryaxsamrAnTWs8bK1ylkiRx+/fToyGSQxDFth1r8v9aMdDxn2LEhvTAaRIiBRCL
+	4qvgNe+XLa0ir7f+uRlhNApU5q
+X-Google-Smtp-Source: AGHT+IHDsIsTDqyF5FAy+V7SgLwffxgwzWSu7whOd0YXgeVZ1MPM4ilFJZdvKfBgpJ2NyIZnEVAQrQ==
+X-Received: by 2002:a05:6000:610:b0:42b:3366:634e with SMTP id ffacd0b85a97d-42e0f3567d0mr24694601f8f.50.1764588048100;
+        Mon, 01 Dec 2025 03:20:48 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5c3041sm24524527f8f.6.2025.12.01.03.20.48
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5c3041sm24524527f8f.6.2025.12.01.03.20.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Dec 2025 03:20:49 -0800 (PST)
+        Mon, 01 Dec 2025 03:20:47 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-zeroconf: Upgrade 0.147.2 -> 0.148.0
-Date: Mon,  1 Dec 2025 13:20:44 +0200
-Message-ID: <20251201112044.369630-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-gast: Upgrade 0.6.0 -> 0.7.0
+Date: Mon,  1 Dec 2025 13:20:42 +0200
+Message-ID: <20251201112044.369630-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20251201112044.369630-1-leon.anavi@konsulko.com>
-References: <20251201112044.369630-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 01 Dec 2025 11:20:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122204
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122202
 
-Upgrade to release 0.148.0:
+Upgrade to release 0.7.0:
 
-- Trigger semantic releases for 0.x branch
+- Update unparser to harmonize output across revisions and handle
+  python 3.12+ features
+- Fix support for TypeVar, TypeVarTupe and ParamSpec￼
+- Support t-string from python 3.14
+- Adjust test incompatible with py2
+- Support _field_types field for every AST class
+- Make gast.dump more generic across python version
+- Only pass existing attributes as keyword parameters in gast_to_ast
+- Initial oss-fuzz integration
+- Support [g]ast.get_source_segment
+- Fix gast.get_docstring implementation
+- Initialize ast node with known fields to avoid deprecation warning
+  in Python 3.13
+- Add missing type_params attribute for ClassDef node before
+  Python 3.12
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-zeroconf_0.147.2.bb => python3-zeroconf_0.148.0.bb} | 2 +-
+ .../python/{python3-gast_0.6.0.bb => python3-gast_0.7.0.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.147.2.bb => python3-zeroconf_0.148.0.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-gast_0.6.0.bb => python3-gast_0.7.0.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb
-index 31d671ceca..fd083d6ee8 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.147.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9fe712b1bc27c5c4e9ecd7f31d208900"
+diff --git a/meta-python/recipes-devtools/python/python3-gast_0.6.0.bb b/meta-python/recipes-devtools/python/python3-gast_0.7.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-gast_0.6.0.bb
+rename to meta-python/recipes-devtools/python/python3-gast_0.7.0.bb
+index af46c3feb7..93301f0943 100644
+--- a/meta-python/recipes-devtools/python/python3-gast_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-gast_0.7.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3ad9b6802e713fc5e307e1230f1ea90"
  
--SRC_URI[sha256sum] = "2f91e2544433acfa928c8dbaea7af8bf0644e06904610799d6b762fd599d81bd"
-+SRC_URI[sha256sum] = "03fcca123df3652e23d945112d683d2f605f313637611b7d4adf31056f681702"
+-SRC_URI[sha256sum] = "88fc5300d32c7ac6ca7b515310862f71e6fdf2c029bbec7c66c0f5dd47b6b1fb"
++SRC_URI[sha256sum] = "0bb14cd1b806722e91ddbab6fb86bba148c22b40e7ff11e248974e04c8adfdae"
  
- inherit pypi python_poetry_core cython
+ inherit pypi setuptools3
  
 -- 
 2.47.3
