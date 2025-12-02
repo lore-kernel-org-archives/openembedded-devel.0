@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8664ED12671
-	for <webhook@archiver.kernel.org>; Tue,  2 Dec 2025 20:44:12 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3364.1764708251656270404
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D37FD12671
+	for <webhook@archiver.kernel.org>; Tue,  2 Dec 2025 20:44:22 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3366.1764708253969338176
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Dec 2025 12:44:11 -0800
+ Tue, 02 Dec 2025 12:44:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cc6gBA4k;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47774d3536dso1916125e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 12:44:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NLmShcuG;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-477770019e4so50118005e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 12:44:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764708250; x=1765313050; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764708252; x=1765313052; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MFjEOBy+aW3IHdNBeoO5oa2nZgfHGmVuyDRNngROJt8=;
-        b=cc6gBA4kTsMfuHkq0E3W8qFoMZ/X4eq9q5SYiLENDUmparaGq3OhijAli5M4fMtuKG
-         IGgWMwI2llY6DjD7vcLU0SBxNUzfMF70jJpNCN0FpoW5k/8IQJ5ArLBPFiAzIw8C0jGf
-         lpBahvO6forlnSt+PDrfnC1yNm6jZk6In6+a5Rd9CdklYaGinuCOeg5zSs55gZLt8lCR
-         PWVbIq73glmNcenX/D24L6ZeECYrFTeJiLx3TBHY48djXGRTrPggm/GTMHKewgwqHV4s
-         OR4UzPbat0pSQxC44xY4G/8STWXzG5UKc/LdAD/vLMRlvxD79ltu3BHbpsIOqLdSs2qh
-         vkgQ==
+        bh=bq1e0MQ6b/sCqJ+tOP22UcXmOODbnHEcgOnZQCta53U=;
+        b=NLmShcuG2lASh5eW6jQRJC25vHkLJplKJWQ7ygpqRQ4FosvqsUL02h+57dT7sABZLJ
+         Azq4742yX4YfM2xu8bfjBae8VH20QP7Qqwe/cVlIhCvUYExE5pXz68oC7BxM6LsGblvj
+         ZIOtD97HFejmM4YpA8XOZ0PeMClb7vN46zqAM++aOUe+e23BxUzbFdoVpR/NYa3tFHrf
+         K8+ysAVa+yqJE9lfJ4MPOXjIDdQtVn8SlVo3dgJD4uMssZ0zZ1H1xN6ycqVWxZN716yO
+         RHtYGNarhrnSu0OGWTB8Erc1jeOlbsq9iBLFacxKoyr9sVyfM6xCwFY6uHfCOOnMshU2
+         U3sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764708250; x=1765313050;
+        d=1e100.net; s=20230601; t=1764708252; x=1765313052;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=MFjEOBy+aW3IHdNBeoO5oa2nZgfHGmVuyDRNngROJt8=;
-        b=Er+3+hLaDAIJjOceiM8ZuVDlp8y8JiF+GyBMHpeQRNsE7EgejwxAuW/0Aca9QdNRld
-         tC3wcJFRBgyTIOuT85uCzUNhlSz/85JgDHKwr+LB+2NkLbjUImueauHvgy4k8A7gqxVQ
-         hQkpF1Yki7IDMB1NVJkSE3l7Nal7bF3a9WaB35WIjZ4OOMj22kf5kfsRgYKXF4aZtsBn
-         sLbgeI0A+W4mk4qdrQ9cSurZRnBAkdaBW424HCjMIFG086yNz5HDDJ1WwXWzM6+GDTvi
-         NAMdlJPjrkf4oV3uCO/XO5hUzECi0BzqOXdAq7SMfmSGpNBjkHg25c/mCnRaVo3ZOvxL
-         bs2Q==
-X-Gm-Message-State: AOJu0YzYxHA09rS3wDllmdebDItrGBJ4V3Io9AXKeNexsitRXKKDzJ93
-	od1r4k8ii2BYkc85EwiNDPhuBPcLNPflfuAuRal2CYNpNhJysOxdr58UZZivCg==
-X-Gm-Gg: ASbGncvgKPen82uvPRiiaFjQIzZFG969lKUp9ck+khZg88+OsJH8z/Dh6yBrSzPspeZ
-	GXgMcdblX+MZ3srYTcCr7UxrWJLR0CdvgrbevSMwpsAhv+W1YIOZ14E1Gd/ZTBc/6gpZ+KK6XR9
-	gi/wrHv2VN4OBBwZSbI5AH9CjLoD/Vgbv7Yf2BF5YDQ+UNBVv5eZ9JFRaymfrBWcryb6tbC4OKc
-	djUMa+epgS6zIAtRlbhQYushkvzX/+vwEBODjrSxdMghaeg6LXd8XqSgaG89wzba2/CbDY0xI4w
-	3KPi1naX22gXZ5rdKjX0usiW1kBQOeF/aYdcOmDqwER77qVAicJ6XsJlbALv1qJXGaIlg55t5d+
-	c3Ai+RHXVp6EeRYq+inzt+a0m3cSka2CkAW8Z4tswL/CzpmmFHJqoCjt3rjy8wsUzJGidgBqsHk
-	JaiRl3ML3NRXxwNH/pmLM=
-X-Google-Smtp-Source: AGHT+IGhuuYKgiyXpJYR89VWr8UaQtI1xlkLSJ7IPONG3GEBxGlfDZqIrVDx61kOBiuTXp7hkQyJEw==
-X-Received: by 2002:a05:600c:3541:b0:46f:a2ba:581f with SMTP id 5b1f17b1804b1-47926fc1d3bmr49855465e9.16.1764708249858;
-        Tue, 02 Dec 2025 12:44:09 -0800 (PST)
+        bh=bq1e0MQ6b/sCqJ+tOP22UcXmOODbnHEcgOnZQCta53U=;
+        b=qzsWL8kcjR83eHYm9uw3Z4/ilI9xJFF3jAcpwV9P/nLeoZGOfFxnBHKtgLZTkpPlnB
+         pppV4CKpxPnsA6JgKkSz6eAwmfSnUp9X5KFINm/0cXLQRxMvzOb92TdaxbQYti9EMRwH
+         sw4Os5KKfMNRuTDI7ROPKim5licw++cCCQzTtcI9UQMlRig9gOaTEJcF+QcqxIz9rfDZ
+         hJRjwqu6P4b2uCRo/LTQ0CmN/pZwTqBG1Wswi+bOq/TxIo9t6Adi6CHzAdskHycuo9j2
+         9Plcb4NjZu9L5/Hg9rnmu/tdfkAhS860OMbIFs8gjxN0Ed+uxkujv+JM54ta003kuOv5
+         cBgQ==
+X-Gm-Message-State: AOJu0YxyzdlJAzbIGOoX7sBOawmMtfxHjx+5dLJ1U6V7SrvWdNO7f5JR
+	sXzHil8XULw863HyS4g077iGQz6C14LV0BZv8ua/Sg2w6BS6mzvu78HH5AWmYA==
+X-Gm-Gg: ASbGncurlSN5h9rwnJ8F9HuKS6+svC/Xjbfac2izXou3eISKOdxRLdCeLQvNIFbNu3/
+	wjY6C/cixr+Vi8/m+wr7aBkAFAbshpaQViZZlBWGcr62KMSHUxYdPq0AL3LGgINaqZCkEhAQQPC
+	42k+9mfUaNZbdBoST6PLUCwkPuiO+wsKjlbjSLZyNXr3PnxgWjqfk6pA8TU/6SNBv/7BTMhp6Dk
+	YvPX2Afox6zKg5yyRcvuDPJcKqLV0N/taKAwgxPfMbwHtqTCYTJpugBdF9fRfQFOSJY3IZ46oVx
+	TRYinUvVHK6VCQmzkaqfortpaLF8bDjxQlz5GxQlMNywsHOy662AY3E89gpKZp1TRpvaxOZzYsk
+	Xu58dF/CMjY9kis5fpLWY4V0mMutY/ECZgGvWuKGFSJLM5EK1IkCZpwjrhg/rA7isT5g2g57y30
+	pKssUxN8wF1q+jDR9ai5Q=
+X-Google-Smtp-Source: AGHT+IErFvbz1CEKb7L2FUvfr+FoT4jiIlWejU/VWVM7jV3LU9Osh1qIDR9cHXribOWNEU7zYXu/+w==
+X-Received: by 2002:a05:600c:3587:b0:471:131f:85aa with SMTP id 5b1f17b1804b1-47904aecfd9mr317227985e9.13.1764708252264;
+        Tue, 02 Dec 2025 12:44:12 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4792a7971c7sm8383295e9.2.2025.12.02.12.44.09
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4792a7971c7sm8383295e9.2.2025.12.02.12.44.11
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Dec 2025 12:44:09 -0800 (PST)
+        Tue, 02 Dec 2025 12:44:11 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 3/6] gupnp: upgrade 1.6.6 -> 1.6.9
-Date: Tue,  2 Dec 2025 21:44:04 +0100
-Message-ID: <20251202204407.3755450-3-skandigraun@gmail.com>
+Subject: [meta-multimedia][PATCH 5/6] gupnp-av: upgrade 0.14.1 -> 0.14.4
+Date: Tue,  2 Dec 2025 21:44:06 +0100
+Message-ID: <20251202204407.3755450-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251202204407.3755450-1-skandigraun@gmail.com>
 References: <20251202204407.3755450-1-skandigraun@gmail.com>
@@ -67,94 +67,98 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 20:44:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122268
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 20:44:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122270
 
-Drop patch that was incorporated in this release.
+Drop patch that is included in this release.
 
 Changelog:
-
-1.6.9:
- - Linux-CM: Fix a potential memory leak
- - Fix documentation link for libsoup
- - Fix unnecessary g_thread_unref in tests
- - Fix issues with Since: in documentation
-1.6.8:
- - ServiceProxyAction: Remove some left-over debug output
- - ServiceProxyAction: Stop leaking the HTTP response
- - Docs: Fix various issues
- - ServiceProxyAction: Add get_value_as()
- - Linux-CM: Silence a false-positive with scan-build
-1.6.7:
- - Fix compatiblity with libxml2 2.12.x
- - Improve reproducability
- - ControlPoint: Fix re-scan
- - ContextManager: Fix boot-id update
- - Context: Fix crash if served URI is not an IP address
+0.14.4:
+- Move documentation to gi-docgen
+0.14.3:
+- CI fixes
+0.14.2:
+- xml: Fix compatibility with libxml2 2.12.x
+- Add missing array annotation
+- build: Fix Requires: line of pkg-config file
+- Loosen restriction on dc:date verification
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...mplate-use-basename-instead-of-filen.patch | 32 -------------------
- .../gupnp/{gupnp_1.6.6.bb => gupnp_1.6.9.bb}  |  5 +--
- 2 files changed, 1 insertion(+), 36 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-gupnp-enums.c.template-use-basename-instead-of-filen.patch
- rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.6.6.bb => gupnp_1.6.9.bb} (83%)
+ .../0001-all-Drop-xmlRecoverMemory.patch      | 44 -------------------
+ ...{gupnp-av_0.14.1.bb => gupnp-av_0.14.4.bb} |  8 ++--
+ 2 files changed, 3 insertions(+), 49 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
+ rename meta-multimedia/recipes-connectivity/gupnp/{gupnp-av_0.14.1.bb => gupnp-av_0.14.4.bb} (51%)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-gupnp-enums.c.template-use-basename-instead-of-filen.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-gupnp-enums.c.template-use-basename-instead-of-filen.patch
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
 deleted file mode 100644
-index 373eb4548e..0000000000
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-gupnp-enums.c.template-use-basename-instead-of-filen.patch
+index 92b52ad98a..0000000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av/0001-all-Drop-xmlRecoverMemory.patch
 +++ /dev/null
-@@ -1,32 +0,0 @@
--From f875a0afe24fdebdefc46d132f6722dfcb55115a Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Wed, 24 Apr 2024 18:52:45 +0200
--Subject: [PATCH] gupnp-enums.c.template: use @basename@ instead of @filename@
+@@ -1,44 +0,0 @@
+-From d99f71a4a52da7582d5e26992a1ab303b280d28a Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 30 Jun 2023 03:23:12 -0700
+-Subject: [PATCH] Drop xmlRecoverMemory
 -
--This would prevent the build path from leaking into the source code.
+-newer libxml has deprecated xmlRecoverMemory therefore replace it with xmlReadMemory
 -
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit/80e68995b745a5900eaaa1d0c424d3a9d354e42d]
 -
--Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gupnp/-/merge_requests/36]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- libgupnp/gupnp-enums.c.template | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+- gupnp-didl-lite-parser.c    | 2 +-
+- gupnp-feature-list-parser.c | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
--diff --git a/libgupnp/gupnp-enums.c.template b/libgupnp/gupnp-enums.c.template
--index 3ce5fa4..a7ff89c 100644
----- a/libgupnp/gupnp-enums.c.template
--+++ b/libgupnp/gupnp-enums.c.template
--@@ -3,8 +3,8 @@
+-diff --git a/gupnp-didl-lite-parser.c b/gupnp-didl-lite-parser.c
+-index 3a5727f..840d718 100644
+---- a/libgupnp-av/gupnp-didl-lite-parser.c
+-+++ b/libgupnp-av/gupnp-didl-lite-parser.c
+-@@ -230,7 +230,7 @@ gupnp_didl_lite_parser_parse_didl_recursive (GUPnPDIDLLiteParser *parser,
+-         GUPnPAVXMLDoc *xml_doc = NULL;
+-         gboolean       result;
 - 
-- /*** END file-header ***/
-- /*** BEGIN file-production ***/
---/* enumerations from "@filename@" */
---#include "@filename@"
--+/* enumerations from "@basename@" */
--+#include "@basename@"
-- /*** END file-production ***/
-- /*** BEGIN value-header ***/
-- GType
+--        doc = xmlRecoverMemory (didl, strlen (didl));
+-+        doc = xmlReadMemory (didl, strlen (didl), NULL, NULL, XML_PARSE_NONET | XML_PARSE_RECOVER);
+-         if (doc == NULL) {
+-                 g_set_error (error,
+-                              G_MARKUP_ERROR,
+-diff --git a/gupnp-feature-list-parser.c b/gupnp-feature-list-parser.c
+-index 16208b5..f804fe7 100644
+---- a/libgupnp-av/gupnp-feature-list-parser.c
+-+++ b/libgupnp-av/gupnp-feature-list-parser.c
+-@@ -114,7 +114,7 @@ gupnp_feature_list_parser_parse_text
+-         xmlNode      *element;
+-         GList        *feature_list = NULL;
+- 
+--        doc = xmlRecoverMemory (text, strlen (text));
+-+        doc = xmlReadMemory (text, strlen (text), NULL, NULL, XML_PARSE_NONET | XML_PARSE_RECOVER);
+-         if (doc == NULL) {
+-                 g_set_error (error,
+-                              G_MARKUP_ERROR,
 --- 
--2.44.0
+-2.41.0
 -
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.9.bb
-similarity index 83%
-rename from meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
-rename to meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.9.bb
-index 7d9b8a477f..ee980cd382 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.9.bb
-@@ -6,10 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- DEPENDS = "e2fsprogs gssdp libsoup-3.0 libxml2"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.4.bb
+similarity index 51%
+rename from meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.1.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.4.bb
+index 2a5c0808ee..21f0449762 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.1.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-av_0.14.4.bb
+@@ -6,9 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
  
- inherit gnomebase pkgconfig vala gobject-introspection
--
--SRC_URI[archive.sha256sum] = "c9dc50e8c78b3792d1b0e6c5c5f52c93e9345d3dae2891e311a993a574f5a04f"
--SRC_URI += "file://0001-gupnp-enums.c.template-use-basename-instead-of-filen.patch"
--
-+SRC_URI[archive.sha256sum] = "2edb6ee3613558e62f538735368aee27151b7e09d4e2e2c51606833da801869b"
+ DEPENDS = "gupnp"
  
- SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
+-inherit meson pkgconfig gobject-introspection vala
++inherit gi-docgen meson pkgconfig gobject-introspection vala
  
+-SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz \
+-           file://0001-all-Drop-xmlRecoverMemory.patch \
+-          "
+-SRC_URI[sha256sum] = "b79ce0cc4b0c66d9c54bc22183a10e5709a0011d2af272025948efcab33a3e4f"
++SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz"
++SRC_URI[sha256sum] = "21d974b3275cb5dcf5b8aa1d9a3fc80e7edca706935f6fbd004c79787138f8c7"
 
