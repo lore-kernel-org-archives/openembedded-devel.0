@@ -2,183 +2,94 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBB01CFD2F6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F15EED116F6
 	for <webhook@archiver.kernel.org>; Tue,  2 Dec 2025 12:34:00 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6757.1764678835306348963
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6583.1764678834713766404
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 02 Dec 2025 04:33:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iF4RJkko;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-47796a837c7so38766515e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 04:33:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dtYpCd+t;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-477a219dbcaso48995805e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 04:33:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764678834; x=1765283634; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oJF8m9Gz00Hjw1jToUI32zivRED89jXfKHbOCw8Osxc=;
-        b=iF4RJkkoU2AgNV6eEbAdrtCkqsVFZYXcorupC7aWcFKgnvu67R5kh60a8vOtygDWpq
-         uA4JGDVVJ1SA9OJ/enmBk2+HRdPaBrB46I7BNrEAIdb3Qe+o2+GlMtxhjd/GXUc4LX7Z
-         VedKWAbc1sexksTMF9CXicgX0wsFgC2FvA4Zm6trv+0pJBrz4sYPyiuIPPtPraE1MB6O
-         YhI7HP/zMkWyRqpLVEEC2RAtHPNiSHYi6PX3JKu24cstB5ll/Z7uNqCPihHDC7UfoY1A
-         uAyRRoM4VMWe4AGLKWa+wG1R8nu24moDUUOEhzUb837hC2iL/B6bPLPLyYehL2BPC5Rh
-         mBSA==
+        d=gmail.com; s=20230601; t=1764678833; x=1765283633; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=wLfgY+MP4zpFLUAonRNRpjtY4ofPeoUYvMJZZE0JAko=;
+        b=dtYpCd+tJsDDhdKVyGDJpYkYHFkYfAFPXHVH7gSPlOfejIKwz1JHBS6zzo+pULuhkn
+         a9FdS6HXMaZJZmOAPV+prNQKEtHBSi/w6iMx5vILlyWDqi+ucDDZoWVEVMIoh9pypybt
+         kQedZNlHF39xECnzgyupFV+S0S3tjWdmNVBU2svXe9GCpayt24cjn+QNzrOrNMr5J9Z4
+         54gFPDIOJHUepEf/hZ0TobAapXSVfejjho3AQ/kf3dKC5cunFMaaJjootDYr+v+VtwVH
+         +RHmtuvaFYQYPd6QTgzpRDMxrszHO9QvS0Soq44NEZo7ObjgUi9QjwUeQOHACBLSnQ6B
+         3AQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764678834; x=1765283634;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=oJF8m9Gz00Hjw1jToUI32zivRED89jXfKHbOCw8Osxc=;
-        b=DDP4qGZ2V7Jk0Eu7r73yl2Xr3XXsceyoEIIwfZeMJZmuQgOGETpQ12EfGZq9d+Pe/G
-         Pn5niLsr3xriRrskuUfUbi3NNGCeXnmjXIaziuX8CL2lR1XxTvCqgQxokgy+xidBmb+w
-         CIgCOYgneHtLFtmtZk244bRj45hOB3pOhxJtw8814O+1DZjGAzzeo7jDBsR2zB/ykF4+
-         N3fh0QyC8dmUsQK+0SwSaEKBZ68qvuVPTGM3U+BK8aC4fJkv22ibsrhmqA3ON2bIk2GB
-         w8sly+r/ImhbgQyg6scwFoOJ/TVb0Sys+xy80Y9ciMl/XsEhhGsy3De0wFw7KyI2ZzEh
-         uejg==
-X-Gm-Message-State: AOJu0YwSnd+nEQU7DgKkwPEqwOE+tgNPlQCPLxQa4oj+XIDU5JqwfZwS
-	pk+KQ3CWAa1qGoKMW7vHHeB5kUyOiyDVR+9pEBoMZUQvossQXTT1990F1f/NLw==
-X-Gm-Gg: ASbGncu65A45b5/fdQRs0VckkzIwAk7TBd9Cy0VZhK5xFNsC7YfvgtA2u22XmMhpV4L
-	cM2SewrV4djbMdYIF+gy15NEx/lHnNz546UvT7bhBYGGNZNhOUJu98Y9ZB+RUKC5JkdtED1/u8j
-	j9XEUWZe7PvHRC1roISyxXm0oYFpwYnCmMHgiZMXa8OyRdq9PnCiMBGFNcYnpH0XNknrCqFpkf1
-	l5lHt0QA8GBLTQlYnH9BQGcBGrG0fjdSfCsqpGn0JZwmafpalJSKPNdQwU2djWSpaR53NJiWJyT
-	WvJ5h8/1mPgrFaFPmS/WsrverIrEvvPceGQy4r9U3dDuB+9a5oN9iQ9o+e4ZG8ofQf8swCkwJGi
-	my9V0KoKosgfd6C5k7FOK7F9h9A4EV8h1F6eDpyHwqpLgit5czoTvcmX4bCqkgbyNf/cZ56PF3G
-	dYrvKrjr8+
-X-Google-Smtp-Source: AGHT+IGBjogJpdqBECxdqNJHCrUJJr7NlQdtMt5iEtD1VpvFcm33NjPEMGNwwwua21p4gOBVEvBwdw==
-X-Received: by 2002:a05:600c:4f83:b0:46e:396b:f5ae with SMTP id 5b1f17b1804b1-477c01b23b1mr483028995e9.16.1764678833518;
-        Tue, 02 Dec 2025 04:33:53 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764678833; x=1765283633;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wLfgY+MP4zpFLUAonRNRpjtY4ofPeoUYvMJZZE0JAko=;
+        b=Jm63dsfjfZNRonZWYsgl26T+VIL/8+o6uh91yX2ylSHdilFIxyR4x7cA6c3cqaBDic
+         nsQQWsHCXKNx6DNsfZImAyuDFOazjS1g5P1t9TLiBYGGulDNbDA0X2hoTq/jsyXcnqOn
+         2tdvIea+h8MDShXjbhTpFyOBKHmoMP8FYKS1YQBjxQWkZtEne5ZBZe2PBisS6n9OiRF6
+         iocKXXIzT4lfBCbdApD4SyvnNdO3YpSgVd4OA5p4WGi8iDK5YbNDMnd44Y3cZey1tIeN
+         6ZinLRIch5uhjTbfb9DEbzq1KP0DEjUMAM44k+oe4o0OjLmjtkc6HA2j9fFOQbQYrHSS
+         pBlg==
+X-Gm-Message-State: AOJu0YxtUkUO4l1BfdnD6hRNi7i/Uf7i4yfLqqtSlznmcv7TtdQrLfNs
+	Jh9TmZanwLxGIdDNI4Xq3C8WGGUp1GPene7uMERPXvur5UOnEfpVp3nrOVyAww==
+X-Gm-Gg: ASbGnctqvjnBy/ELSVyYqd+oikeASGTXrEI+yzq+euio3W8Ikqa0ccvWQ97yQDp0dSt
+	9FDMA1fuPEHVS8aDtHJSzeYTX2C8HCeSU09BKrFRXrdDz9S/7zas2dhpdabPYI3Hh7ONNLz8+d7
+	ypndqJNcfxr67HtwPJ9EV2qR+2COAuK1IDqB/zcZvdBUJ+V/P9bgL/Id+NTvJ3LgP3FjY2AKTjq
+	LhGFaw3514o0wFnxVVFVr28qk1qBbsfUPEJ+Axxnn5QVSnSg7otLkANkS+uWuZF3wyEDyiyTgbk
+	1KGn1AlQ/CnR+mMBYaToyaI2/uOl3XnvnvAHpsNteg51BiwXSrD0NWnzY5IismG60LVHyR5XK9x
+	jCzgvcvuDgwxlt4w7wUoPoDjtLlBiysAO9c8E74e7tHfBm6jN1nRLise4Gy4ZIxfTXP73nZv1Rd
+	ANY9Vuzujr
+X-Google-Smtp-Source: AGHT+IEvXWQPkbse+1TZFYvV9GFzs3TTKhUQHH6xAG6PoHPjcvvJBrVljAaaP1qKdRS2oerdUw662A==
+X-Received: by 2002:a05:600c:4506:b0:477:7bca:8b2b with SMTP id 5b1f17b1804b1-477c0190e57mr490716025e9.15.1764678832650;
+        Tue, 02 Dec 2025 04:33:52 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4791164ceecsm303438075e9.14.2025.12.02.04.33.52
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4791164ceecsm303438075e9.14.2025.12.02.04.33.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 02 Dec 2025 04:33:52 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 2/3] gradm: fix installation with usrmerge enabled
-Date: Tue,  2 Dec 2025 13:33:50 +0100
-Message-ID: <20251202123351.1645828-2-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 1/3] babeld: fix installation with usrmerge
+Date: Tue,  2 Dec 2025 13:33:49 +0100
+Message-ID: <20251202123351.1645828-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251202123351.1645828-1-skandigraun@gmail.com>
-References: <20251202123351.1645828-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 Dec 2025 12:34:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122262
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122261
 
-In case usrmerge DISTRO_FEATURE is enabled, the recipe installs its
-binaries into /sbin folder, which however supposed to be a symlink
-to /usr/sbin folder, thus ultimately failing the installation.
+In case usrmerge DISTRO_FEATURE is enabled, the recipe installed
+the application to /bin folder, which is however a symlink to /usr/bin,
+so the installation ultimately failed.
 
-To avoid this problem, backport a patch from master branch that allows
-specifying the installation location.
+To fix this, set the correct prefix for the installation.
 
-This is a partial backport of 682657248c654c54ac87edc9bf0a95fb59ff0b1e
+This is a partial backport of f91983f1f3e897d25ab477fdfb5baed89ccc0daf
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gradm/0001-make-Define-SBINDIR-flag.patch | 69 +++++++++++++++++++
- .../gradm/gradm_3.1-201903191516.bb           |  2 +
- 2 files changed, 71 insertions(+)
- create mode 100644 meta-oe/recipes-support/gradm/gradm/0001-make-Define-SBINDIR-flag.patch
+ meta-networking/recipes-protocols/babeld/babeld_1.10.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gradm/gradm/0001-make-Define-SBINDIR-flag.patch b/meta-oe/recipes-support/gradm/gradm/0001-make-Define-SBINDIR-flag.patch
-new file mode 100644
-index 0000000000..1c0f3bfbae
---- /dev/null
-+++ b/meta-oe/recipes-support/gradm/gradm/0001-make-Define-SBINDIR-flag.patch
-@@ -0,0 +1,69 @@
-+From 12bc62ac26df012fc143913b6e046a3cf5127db2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 23 Apr 2022 09:20:49 -0700
-+Subject: [PATCH] make: Define SBINDIR flag
-+
-+Provides a facility to control install locations of /sbin elements from
-+environment
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 17 +++++++++--------
-+ 1 file changed, 9 insertions(+), 8 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index deed94c..9190fe9 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -25,6 +25,7 @@ MKNOD=/bin/mknod
-+ CC=/usr/bin/gcc
-+ FIND=/usr/bin/find
-+ LIBS := $(shell if [ "`uname -m`" != "sparc64" -a "`uname -m`" != "x86_64" ]; then echo "-lfl" ; else echo "" ; fi)
-++SBINDIR=/sbin
-+ OPT_FLAGS := -O2
-+ # for older versions of grsecurity, comment the above line and uncomment the below:
-+ #OPT_FLAGS := $(shell if [ "`uname -m`" != "sparc64" ] && [ "`uname -m`" != "x86_64" ]; then echo "-O2" ; else echo "-O2 -m64" ; fi)
-+@@ -136,15 +137,15 @@ lex.learn_pass1.o: lex.learn_pass1.c learn_pass1.tab.h
-+ lex.learn_pass2.o: lex.learn_pass2.c learn_pass2.tab.h
-+ 
-+ install: $(GRADM_BIN) gradm.8 policy grlearn
-+-	@mkdir -p $(DESTDIR)/sbin
-++	@mkdir -p $(DESTDIR)$(SBINDIR)
-+ 	@echo "Installing gradm..."
-+-	@$(INSTALL) -m 0755 $(GRADM_BIN) $(DESTDIR)/sbin
-++	@$(INSTALL) -m 0755 $(GRADM_BIN) $(DESTDIR)$(SBINDIR)
-+ 	@if [ -f $(GRADM_PAM) ] ; then \
-+ 		echo "Installing gradm_pam..." ; \
-+-		$(INSTALL) -m 4755 $(GRADM_PAM) $(DESTDIR)/sbin ; \
-++		$(INSTALL) -m 4755 $(GRADM_PAM) $(DESTDIR)$(SBINDIR) ; \
-+ 	fi
-+ 	@echo "Installing grlearn..."
-+-	@$(INSTALL) -m 0700 grlearn $(DESTDIR)/sbin
-++	@$(INSTALL) -m 0700 grlearn $(DESTDIR)$(SBINDIR)
-+ 	@mkdir -p -m 700 $(DESTDIR)$(GRSEC_DIR)
-+ 	@if [ ! -f $(DESTDIR)$(GRSEC_DIR)/policy ] ; then \
-+ 		if [ -f $(DESTDIR)$(GRSEC_DIR)/acl ] ; then \
-+@@ -170,15 +171,15 @@ install: $(GRADM_BIN) gradm.8 policy grlearn
-+ 		echo "KERNEL==\"grsec\",          MODE=\"0622\"" >> $(DESTDIR)/etc/udev/rules.d/80-grsec.rules ; \
-+ 		echo "LABEL=\"permissions_end\"" >> $(DESTDIR)/etc/udev/rules.d/80-grsec.rules ; \
-+ 	fi
-+-	@if [ -f $(DESTDIR)/sbin/udevadm ] ; then \
-+-		$(DESTDIR)/sbin/udevadm trigger --action=change ; \
-++	@if [ -f $(DESTDIR)$(SBINDIR)/udevadm ] ; then \
-++		$(DESTDIR)$(SBINDIR)/udevadm trigger --action=change ; \
-+ 	fi
-+ 	@echo "Installing gradm manpage..."
-+ 	@mkdir -p $(DESTDIR)$(MANDIR)/man8
-+ 	@$(INSTALL) -m 0644 gradm.8 $(DESTDIR)$(MANDIR)/man8/$(GRADM_BIN).8
-+-	@if [ -x /sbin/$(GRADM_BIN) ] ; then \
-++	@if [ -x $(SBINDIR)/$(GRADM_BIN) ] ; then \
-+ 		if [ -z $(DESTDIR) ] && [ ! -f $(GRSEC_DIR)/pw ] ; then \
-+-			/sbin/$(GRADM_BIN) -P ; \
-++			$(SBINDIR)/$(GRADM_BIN) -P ; \
-+ 		fi \
-+ 	fi
-+ 	@true
-+-- 
-+2.36.0
-+
-diff --git a/meta-oe/recipes-support/gradm/gradm_3.1-201903191516.bb b/meta-oe/recipes-support/gradm/gradm_3.1-201903191516.bb
-index 0513f0dca0..796659e8b0 100644
---- a/meta-oe/recipes-support/gradm/gradm_3.1-201903191516.bb
-+++ b/meta-oe/recipes-support/gradm/gradm_3.1-201903191516.bb
-@@ -14,6 +14,7 @@ DEPENDS = "flex-native bison-native ${@bb.utils.contains('DISTRO_FEATURES', 'pam
- SRC_URI = "http://grsecurity.net/stable/${BP}.tar.gz \
-            file://0001-Makefile-remove-strip.patch \
-            file://0001-Makefile-Append-instead-of-overriding-LDFLAGS.patch \
-+           file://0001-make-Define-SBINDIR-flag.patch \
-            "
- SRC_URI[md5sum] = "5099c715433981d5a3eed8ded7c5bbc0"
- SRC_URI[sha256sum] = "d3a0b6383ff97a2054941d71133c737efae66afdd8eef59346c031ae15c75ff3"
-@@ -35,6 +36,7 @@ do_compile() {
- do_install() {
-     oe_runmake 'CC=${CC}'                               \
-                'DESTDIR=${D}'                           \
-+               'SBINDIR=${base_sbindir}'                \
-                'LIBS='                                  \
-                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
-                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
+diff --git a/meta-networking/recipes-protocols/babeld/babeld_1.10.bb b/meta-networking/recipes-protocols/babeld/babeld_1.10.bb
+index 529cccf872..79b954478f 100644
+--- a/meta-networking/recipes-protocols/babeld/babeld_1.10.bb
++++ b/meta-networking/recipes-protocols/babeld/babeld_1.10.bb
+@@ -24,6 +24,6 @@ do_compile () {
+ }
+ 
+ do_install () {
+-	oe_runmake install.minimal PREFIX=${D}
++	oe_runmake install.minimal TARGET=${D} PREFIX=${root_prefix}
+ }
+ 
 
