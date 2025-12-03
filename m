@@ -1,410 +1,174 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <jan.claussen10@web.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72361D1BDE8
-	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 21:30:10 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27244.1764797400667078450
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CF16D1BDEB
+	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 21:32:40 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.27389.1764797550335946043
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Dec 2025 13:30:01 -0800
+ Wed, 03 Dec 2025 13:32:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MnLuzIdF;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so2474185e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 13:30:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764797399; x=1765402199; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nM5SiO+Vq6w9oLpjZ70aFh9RBMYLniAlO5FjlnmfeXg=;
-        b=MnLuzIdFTNi2Xle2eYtVi+aJWP1dhm+Pk+UvI+SE4C7nQoCxNP0LT6iwl/0+/YSKZi
-         FmYrWNv0zSYuBiurlG5xGfnd4bJv4+RPdhpaE/qIRULAkP6f2A9+6pLp/SJ6bXQIr24W
-         qDIRI4nao//rvCnxtC1mJWYaxW49Raw2hOgrl/V7P/BWSQg3yF0PwWugOq1vKaunTU/F
-         GMcSmZAdpL1jqMxSypfGZTJ7hLuvaXRqJn7jKuNhHzU5Ibl6DZI8mktFQUbAoshhww6w
-         MxcEsfApXgVu2dxM1GiiDFT3uFf3OUQRgtkcXU4rvXQad86WCW+7QPSZrW93nxWzufou
-         feuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764797399; x=1765402199;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=nM5SiO+Vq6w9oLpjZ70aFh9RBMYLniAlO5FjlnmfeXg=;
-        b=AgHaqwLoQcwvwn5R63PLNx0/2vRbARtQl2K5oHZ7OeNXcWUI8MHGpT7uL/aHn2PH06
-         9GcPrBu79vhbi1TCX34xgxAXnqSBQjyEEb/htUdmbj/SFsWCRzof36jTKULuEL0XhvV4
-         0sNGFB3f14L2IoiaQlinzKKTIY2FxOWdevRR4NMV2alFBhQpxnybheZjibAtOViecbwJ
-         W98PFH6Fphc5n1ZTpT+YzjxG2pqN39JIh4hLCcMEqVL8r4KxGQSCrDH/h2vlC6mJfbuG
-         i9vpiEo16EnkX9IX4aHCnDCn/nGZXMwQagIHyqJOryv2WEHq2EYWzZTuDOKNnsfbDbT7
-         2RuA==
-X-Gm-Message-State: AOJu0YzpqMQwUIgJh2P3wtGHJZhq5eIP/3sgEC6YcaQNcIx0gK2DK9rv
-	V5HrJ3uNip3942onHPoHeUqWpOctHdn4O9mtScrIISMZtKOEQ/EyG2td6qFvAQ==
-X-Gm-Gg: ASbGnctMn/XdYOup+q/4TVcQ21hizDkWDciA+ZnwYdAzNfWMIPKSf1BAFqYPLFIganr
-	PgVnFLHOqvES49ZQCttOvRqNuRorM5giSsTiHhLU7tJ6JHjaM6HvX9CgXSPhOqMdORLjh9uP1Cu
-	LETGO0Tp4SWylweEccsmOKgo0xAJsxbcNcdNQ6/2P1tDWlJTBN8H4T2RjngJOv9IjJdwPVqp4cn
-	ySFLx7VSKmYzNzTrO1NpUlwKjp4Dtf0+iwJvTHowPtCyGC0UAIcmqxg8qWtcXCEwkz/3D//L+6D
-	nkM05YV/jIQRr2P2JNjGQLuw6bG4f9Rpy02M5+QXhEjf4DnlJzmQ4Nkc+oUnfVZf3rfqwyIeSbu
-	Po+F0qZMqRPZANfgysmFxo2eiSA19l3MMV6HCSEDw5wh/hUvVRlIZ02cQLtcJMmKp+UY7bPd48e
-	UAi1KTMyTK
-X-Google-Smtp-Source: AGHT+IFX8oygzl0+iiezR+fYPMjybfJOXm2ojBATpWazuYLv51YcgcC+eiCJglMiML7ygdPo2yW5Xg==
-X-Received: by 2002:a05:6000:1a8d:b0:429:c709:7b58 with SMTP id ffacd0b85a97d-42f7985c6afmr348933f8f.50.1764797398892;
-        Wed, 03 Dec 2025 13:29:58 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f6ffa18ffsm10722885f8f.5.2025.12.03.13.29.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Dec 2025 13:29:58 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=fail reason="dkim: signature did not verify: crypto/rsa: verification error" header.i=jan.claussen10@web.de header.s=s29768273 header.b=jbUUaEus;
+ spf=pass (domain: web.de, ip: 212.227.15.4, mailfrom: jan.claussen10@web.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1764797548; x=1765402348; i=jan.claussen10@web.de;
+	bh=874cJoZdaI2WznJ5uw2GkxX5r0HHaBU0rzHSlG9SwLs=;
+	h=X-UI-Sender-Class:Content-Type:Content-Transfer-Encoding:From:
+	 Mime-Version:Subject:Date:Message-Id:References:In-Reply-To:To:cc:
+	 content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=jbUUaEusbCRlVKeiU3laGS/jEXKrBY8mVpGm5TLLwGjXtGACmB7NiRdkzfpFHJQg
+	 YbUctjoOg8MkLinTm3rgtLcezH3nre4eTBva4EKeb6KyNjzbjz9gS+QdFzYKJtncO
+	 FyahE5ppo91R05cetxSsXKA3eV1CWaM9UsPLyphDKav4IzQxC9+GnowJHaWvJaMTI
+	 OsLFc/vkGXDJ3ziJ5hXJ3LHY2hyYoaUmd54QyQ48is8VzD6jmeJjFhReOAsAsniA0
+	 noNiXBTPYfpMGp+/Zqhg+eV9JrSlMOfMd9+4tukgprG4DW1dfAYd4FUt+RxfKCVUO
+	 JzQXjAJlcyRKh+hwtQ==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from smtpclient.apple ([31.29.37.14]) by smtp.web.de (mrweb006
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1Mho04-1vvaW41mvA-00pC7m for
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 22:32:28 +0100
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+From: =?utf-8?Q?Jan_Clau=C3=9Fen?= <jan.claussen10@web.de>
+Mime-Version: 1.0 (1.0)
+Subject: Re: [meta-python][PATCH v2] python3-soundcard: Add recipe
+Date: Wed, 3 Dec 2025 22:32:17 +0100
+Message-Id: <4C07461B-CB4E-432A-AA42-E6FCC8D8317B@web.de>
+References: <20251129100636.2844306-1-jan.claussen10@web.de>
+In-Reply-To: <20251129100636.2844306-1-jan.claussen10@web.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 12/12] xrdp: patch CVE-2023-42822
-Date: Wed,  3 Dec 2025 22:29:49 +0100
-Message-ID: <20251203212949.4046524-12-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251203212949.4046524-1-skandigraun@gmail.com>
-References: <20251203212949.4046524-1-skandigraun@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Mailer: iPhone Mail (22H124)
+X-Provags-ID: V03:K1:IqQl6zY+vODQ/0pye+woUgJMt5qBwKQuCvZmjejneMVS1ubRrvX
+ AVHZFHdKh5dzT9/LSwpQDAHkWoLHOOrkZOcGAdKMYZ3JLwlnqtDnMzVmQR7yFi1hzkwBdw8
+ 3EbOGDjixkKZjWTmwwc2zYPgstuKtaa9vpz6KIPmWuxnhTIq03PzLeRjqfoTpvgCUhOrpOX
+ neUfaMBdvEQ4nx4pcOB+w==
+UI-OutboundReport: notjunk:1;M01:P0:T7wcP+gZSV0=;LaT3n3LxrnjCa+sHQPb3s1UvRsp
+ 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
+ ZGUvdkp/jIrr0Pq/U=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 21:30:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122290
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 21:32:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122291
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-42822
+This one good too? I forgot to name the [master] in the topic, but the recip=
+e should work!
 
-Pick the patch the references the github advisory[1] and the cve ID also from
-the nvd report. The patch is a backported version of the patch referenced by
-the nvd report.
+> Am 29.11.2025 um 11:06 schrieb Jan Clau=C3=9Fen <jan.claussen10@web.de>:
+>=20
+> =EF=BB=BFSoundCard is a library for playing and recording audio without re=
+sorting to a CPython extension.
+>=20
+> Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
+> ---
+> .../python/python3-soundcard_0.4.5.bb         | 20 +++++++++++++++++++
+> 1 file changed, 20 insertions(+)
+> create mode 100644 meta-python/recipes-devtools/python/python3-soundcard_0=
+.4.5.bb
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.b=
+b b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+> new file mode 100644
+> index 0000000000..5116892dad
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY =3D "Python library for accessing soundcards"
+> +DESCRIPTION =3D "SoundCard is a library for playing and recording audio w=
+ithout resorting to a CPython extension"
+> +HOMEPAGE =3D "https://github.com/bastibe/SoundCard"
+> +SECTION =3D "devel/python"
+> +
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De39df1540c06c17ca310ce87c36b04=
+2c"
+> +
+> +SRC_URI[sha256sum] =3D "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08=
+f54b832a56946aa"
+> +
+> +inherit pypi setuptools3 features_check
+> +
+> +REQUIRED_DISTRO_FEATURES =3D "pulseaudio"
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +    libpulse \
+> +    pulseaudio-server \
+> +    python3-cffi \
+> +    python3-numpy \
+> +"
+> --
+> 2.52.0
+>=20
 
-[1]: https://github.com/neutrinolabs/xrdp/security/advisories/GHSA-2hjx-rm4f-r9hw
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../xrdp/xrdp/CVE-2023-42822.patch            | 304 ++++++++++++++++++
- meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |   1 +
- 2 files changed, 305 insertions(+)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch
-
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch
-new file mode 100644
-index 0000000000..2cf7968f3c
---- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch
-@@ -0,0 +1,304 @@
-+From 58c9c1f06aeb5c91386bca20fa1609d68bf37ae0 Mon Sep 17 00:00:00 2001
-+From: matt335672 <30179339+matt335672@users.noreply.github.com>
-+Date: Mon, 25 Sep 2023 11:25:04 +0100
-+Subject: [PATCH] CVE-2023-42822
-+
-+- font_items in struct xrdp_font renamed to chars to catch all
-+  accesses to it. This name is consistent with the type of
-+  the array elements (struct xrdp_font_char).
-+- Additional fields added to struct xrdp_font to allow for range
-+  checking and for a default character to be provided
-+- Additional checks and logic added to xrdp_font_create()
-+- New macro XRDP_FONT_GET_CHAR() added to perform checked access
-+  to chars field in struct xrdp_font
-+
-+CVE: CVE-2023-42822
-+Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/fd25fc546a68a94163413ff2cf3989c1e239e762]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ xrdp/xrdp.h         |   9 ++++
-+ xrdp/xrdp_font.c    | 113 +++++++++++++++++++++++++++++++++++++-------
-+ xrdp/xrdp_painter.c |  10 ++--
-+ xrdp/xrdp_types.h   |   8 +++-
-+ 4 files changed, 115 insertions(+), 25 deletions(-)
-+
-+diff --git a/xrdp/xrdp.h b/xrdp/xrdp.h
-+index 36d8f87a9a..be008aa227 100644
-+--- a/xrdp/xrdp.h
-++++ b/xrdp/xrdp.h
-+@@ -345,6 +345,15 @@ xrdp_font_delete(struct xrdp_font *self);
-+ int
-+ xrdp_font_item_compare(struct xrdp_font_char *font1,
-+                        struct xrdp_font_char *font2);
-++/**
-++ * Gets a checked xrdp_font_char from a font
-++ * @param f Font
-++ * @param c32 Unicode codepoint
-++ */
-++#define XRDP_FONT_GET_CHAR(f, c32) \
-++    (((unsigned int)(c32) >= ' ') && ((unsigned int)(c32) < (f)->char_count) \
-++     ? ((f)->chars + (unsigned int)(c32)) \
-++     : (f)->default_char)
-+ 
-+ /* funcs.c */
-+ int
-+diff --git a/xrdp/xrdp_font.c b/xrdp/xrdp_font.c
-+index c089db0075..2b34f36ca6 100644
-+--- a/xrdp/xrdp_font.c
-++++ b/xrdp/xrdp_font.c
-+@@ -65,6 +65,12 @@ static char w_char[] =
-+ };
-+ #endif
-+ 
-++// Unicode definitions
-++#define UNICODE_WHITE_SQUARE 0x25a1
-++
-++// First character allocated in the 'struct xrdp_font.chars' array
-++#define FIRST_CHAR ' '
-++
-+ /*****************************************************************************/
-+ struct xrdp_font *
-+ xrdp_font_create(struct xrdp_wm *wm)
-+@@ -74,7 +80,7 @@ xrdp_font_create(struct xrdp_wm *wm)
-+     int fd;
-+     int b;
-+     int i;
-+-    int index;
-++    unsigned int char_count;
-+     int datasize;
-+     int file_size;
-+     struct xrdp_font_char *f;
-+@@ -100,17 +106,39 @@ xrdp_font_create(struct xrdp_wm *wm)
-+     }
-+ 
-+     self = (struct xrdp_font *)g_malloc(sizeof(struct xrdp_font), 1);
-++    if (self == NULL)
-++    {
-++        LOG(LOG_LEVEL_ERROR, "xrdp_font_create: "
-++            "Can't allocate memory for font");
-++        return self;
-++    }
-+     self->wm = wm;
-+     make_stream(s);
-+     init_stream(s, file_size + 1024);
-+     fd = g_file_open(file_path);
-+ 
-+-    if (fd != -1)
-++    if (fd < 0)
-++    {
-++        LOG(LOG_LEVEL_ERROR,
-++            "xrdp_font_create: Can't open %s - %s", file_path,
-++            g_get_strerror());
-++        g_free(self);
-++        self = NULL;
-++    }
-++    else
-+     {
-+         b = g_file_read(fd, s->data, file_size + 1024);
-+         g_file_close(fd);
-+ 
-+-        if (b > 0)
-++        // Got at least a header?
-++        if (b < (4 + 32 + 2 + 2 + 8))
-++        {
-++            LOG(LOG_LEVEL_ERROR,
-++                "xrdp_font_create: Font %s is truncated", file_path);
-++            g_free(self);
-++            self = NULL;
-++        }
-++        else
-+         {
-+             s->end = s->data + b;
-+             in_uint8s(s, 4);
-+@@ -118,11 +146,27 @@ xrdp_font_create(struct xrdp_wm *wm)
-+             in_uint16_le(s, self->size);
-+             in_uint16_le(s, self->style);
-+             in_uint8s(s, 8);
-+-            index = 32;
-++            char_count = FIRST_CHAR;
-+ 
-+-            while (s_check_rem(s, 16))
-++            while (!s_check_end(s))
-+             {
-+-                f = self->font_items + index;
-++                if (!s_check_rem(s, 16))
-++                {
-++                    LOG(LOG_LEVEL_WARNING,
-++                        "xrdp_font_create: "
-++                        "Can't parse header for character U+%X", char_count);
-++                    break;
-++                }
-++
-++                if (char_count >= MAX_FONT_CHARS)
-++                {
-++                    LOG(LOG_LEVEL_WARNING,
-++                        "xrdp_font_create: "
-++                        "Ignoring characters >= U+%x", MAX_FONT_CHARS);
-++                    break;
-++                }
-++
-++                f = self->chars + char_count;
-+                 in_sint16_le(s, i);
-+                 f->width = i;
-+                 in_sint16_le(s, i);
-+@@ -139,23 +183,56 @@ xrdp_font_create(struct xrdp_wm *wm)
-+                 if (datasize < 0 || datasize > 512)
-+                 {
-+                     /* shouldn't happen */
-+-                    LOG(LOG_LEVEL_ERROR, "error in xrdp_font_create, datasize wrong "
-+-                        "width %d, height %d, datasize %d, index %d",
-+-                        f->width, f->height, datasize, index);
-++                    LOG(LOG_LEVEL_ERROR,
-++                        "xrdp_font_create: "
-++                        "datasize for U+%x wrong "
-++                        "width %d, height %d, datasize %d",
-++                        char_count, f->width, f->height, datasize);
-+                     break;
-+                 }
-+ 
-+-                if (s_check_rem(s, datasize))
-++                if (!s_check_rem(s, datasize))
-+                 {
-+-                    f->data = (char *)g_malloc(datasize, 0);
-+-                    in_uint8a(s, f->data, datasize);
-++                    LOG(LOG_LEVEL_ERROR,
-++                        "xrdp_font_create: "
-++                        "Not enough data for character U+%X", char_count);
-++                    break;
-+                 }
-+-                else
-++
-++                if ((f->data = (char *)g_malloc(datasize, 0)) == NULL)
-+                 {
-+-                    LOG(LOG_LEVEL_ERROR, "error in xrdp_font_create");
-++                    LOG(LOG_LEVEL_ERROR,
-++                        "xrdp_font_create: "
-++                        "Allocation error for character U+%X", char_count);
-++                    break;
-+                 }
-++                in_uint8a(s, f->data, datasize);
-++
-++                ++char_count;
-++            }
-+ 
-+-                index++;
-++            self->char_count = char_count;
-++            if (char_count <= FIRST_CHAR)
-++            {
-++                /* We read no characters from the font */
-++                xrdp_font_delete(self);
-++                self = NULL;
-++            }
-++            else
-++            {
-++                // Find a default glyph
-++                if (char_count > UNICODE_WHITE_SQUARE)
-++                {
-++                    self->default_char = &self->chars[UNICODE_WHITE_SQUARE];
-++                }
-++                else if (char_count > '?')
-++                {
-++                    self->default_char = &self->chars['?'];
-++                }
-++                else
-++                {
-++                    self->default_char = &self->chars[FIRST_CHAR];
-++                }
-+             }
-+         }
-+     }
-+@@ -178,16 +255,16 @@ xrdp_font_create(struct xrdp_wm *wm)
-+ void
-+ xrdp_font_delete(struct xrdp_font *self)
-+ {
-+-    int i;
-++    unsigned int i;
-+ 
-+     if (self == 0)
-+     {
-+         return;
-+     }
-+ 
-+-    for (i = 0; i < NUM_FONTS; i++)
-++    for (i = FIRST_CHAR; i < self->char_count; i++)
-+     {
-+-        g_free(self->font_items[i].data);
-++        g_free(self->chars[i].data);
-+     }
-+ 
-+     g_free(self);
-+diff --git a/xrdp/xrdp_painter.c b/xrdp/xrdp_painter.c
-+index b02c9072b6..832186ff22 100644
-+--- a/xrdp/xrdp_painter.c
-++++ b/xrdp/xrdp_painter.c
-+@@ -455,7 +455,7 @@ xrdp_painter_text_width(struct xrdp_painter *self, const char *text)
-+ 
-+     for (index = 0; index < len; index++)
-+     {
-+-        font_item = self->font->font_items + wstr[index];
-++        font_item = XRDP_FONT_GET_CHAR(self->font, wstr[index]);
-+         rv = rv + font_item->incby;
-+     }
-+ 
-+@@ -493,7 +493,7 @@ xrdp_painter_text_height(struct xrdp_painter *self, const char *text)
-+ 
-+     for (index = 0; index < len; index++)
-+     {
-+-        font_item = self->font->font_items + wstr[index];
-++        font_item = XRDP_FONT_GET_CHAR(self->font, wstr[index]);
-+         rv = MAX(rv, font_item->height);
-+     }
-+ 
-+@@ -870,7 +870,7 @@ xrdp_painter_draw_text(struct xrdp_painter *self,
-+             total_height = 0;
-+             for (index = 0; index < len; index++)
-+             {
-+-                font_item = font->font_items + wstr[index];
-++                font_item = XRDP_FONT_GET_CHAR(font, wstr[index]);
-+                 k = font_item->incby;
-+                 total_width += k;
-+                 total_height = MAX(total_height, font_item->height);
-+@@ -904,7 +904,7 @@ xrdp_painter_draw_text(struct xrdp_painter *self,
-+                                      draw_rect.bottom - draw_rect.top);
-+                     for (index = 0; index < len; index++)
-+                     {
-+-                        font_item = font->font_items + wstr[index];
-++                        font_item = XRDP_FONT_GET_CHAR(font, wstr[index]);
-+                         g_memset(&pat, 0, sizeof(pat));
-+                         pat.format = PT_FORMAT_c1;
-+                         pat.width = font_item->width;
-+@@ -946,7 +946,7 @@ xrdp_painter_draw_text(struct xrdp_painter *self,
-+ 
-+     for (index = 0; index < len; index++)
-+     {
-+-        font_item = font->font_items + wstr[index];
-++        font_item = XRDP_FONT_GET_CHAR(font, wstr[index]);
-+         i = xrdp_cache_add_char(self->wm->cache, font_item);
-+         f = HIWORD(i);
-+         c = LOWORD(i);
-+diff --git a/xrdp/xrdp_types.h b/xrdp/xrdp_types.h
-+index 41b65702f0..b794890b08 100644
-+--- a/xrdp/xrdp_types.h
-++++ b/xrdp/xrdp_types.h
-+@@ -574,7 +574,7 @@ struct xrdp_bitmap
-+     int crc16;
-+ };
-+ 
-+-#define NUM_FONTS 0x4e00
-++#define MAX_FONT_CHARS 0x4e00
-+ #define DEFAULT_FONT_NAME "sans-10.fv1"
-+ 
-+ #define DEFAULT_ELEMENT_TOP   35
-+@@ -594,7 +594,11 @@ struct xrdp_bitmap
-+ struct xrdp_font
-+ {
-+     struct xrdp_wm *wm;
-+-    struct xrdp_font_char font_items[NUM_FONTS];
-++    // Font characters, accessed by Unicode codepoint. The first 32
-++    // entries are unused.
-++    struct xrdp_font_char chars[MAX_FONT_CHARS];
-++    unsigned int char_count; // # elements in above array
-++    struct xrdp_font_char *default_char; // Pointer into above array
-+     char name[32];
-+     int size;
-+     int style;
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-index 5a1d904a15..d2ace79c55 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-@@ -28,6 +28,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
-            file://CVE-2022-23484.patch \
-            file://CVE-2022-23493.patch \
-            file://CVE-2023-40184.patch \
-+           file://CVE-2023-42822.patch \
-            "
- 
- SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
 
