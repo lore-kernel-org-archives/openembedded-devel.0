@@ -1,210 +1,148 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8032DD15DAB
-	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 16:53:18 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20375.1764780789164597701
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 282C8D1BDE8
+	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 21:30:00 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27236.1764797395785953236
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Dec 2025 08:53:09 -0800
+ Wed, 03 Dec 2025 13:29:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aawYl4IX;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-63f996d4e1aso7522448d50.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 08:53:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=i5hBgGNO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so2473515e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 13:29:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764780788; x=1765385588; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=qcd8ESF/b3CbeorqLaoZy/IOpKf9NNmLski6tMFp7LU=;
-        b=aawYl4IX1PkiG4trK5A+oRUc1A/p1+JgSrcZ3ycQBtBn1eEQ4m9XUoaklpJlZRYb4+
-         EmY5TBU40flF7fYBcwI2hd32o59CnkiFP8bF1NbAkyp9zAf73wPgDU/buzgxEBG6IIpL
-         C146oUKEDvsEw0ua0hi9CMueCO2CvNV8JninKOl23P1KpYikCO+4M8oxLYcuu6BtHuZ1
-         PunBFOZ2JI6r9IkV5U5njoSCB2o7ESoyyusxzEUBf9UqoXTi23TYoNGNsjNklbfcJOPK
-         kR8PW5WzyfEq+HmiuvQYAGWzIwkPP+BkP8wqtQ1TC9C6HJ4kDuNzFV7hrKvrN/CTxaW0
-         37yQ==
+        d=gmail.com; s=20230601; t=1764797394; x=1765402194; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ssszST3OXZH8Pr9rYskEy2b4V4o2vYxrn4pUE43bTZY=;
+        b=i5hBgGNO79nSzaW+cdSHUIUJKmDwguwmT8LbnN90Tafjd+45GxX2XtOWNWHCX1LLv3
+         C7tPl/2ZmHmTYP35SY01to4MVzrl6BLLa4jh7GqoVra1ecJHfFJWMlk5Sok2IM3lVPom
+         6z5AM0pZe6e7Zrup7cmz8LMchkwd+Luf21ofEiRbbMjfD80SYHyGcSXj/qVOU0ntDui0
+         3dHrqTg8hUrtohR8zCKYNHA2QzZmiVecSqP0G2usjx1yBsOMCPS3jyY+4MqQzdJtRA8W
+         SWEF/DRvww1pztlW+Ltl5k60GDjcSp2dRupe8UhwD452DhWQurPljjBJOxPIDgWbHZCU
+         hf6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764780788; x=1765385588;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qcd8ESF/b3CbeorqLaoZy/IOpKf9NNmLski6tMFp7LU=;
-        b=Dz2MNdctTvYkyZtcJnGAD9EVvR9CXD+AyleoCpdBMPcXLmri6N8ijRgZuawXVomlow
-         qTj5CGH6e7mMRX/+Ur+bPGfj+iR+nCZwdMaXbKXed3h0iC9ZK8MMQwlmvs+PYP0XHw7j
-         L9eMsJCnAgSMSr3XJIWbnrTx4VMx4iLJLSWKavLDGMP0+uXlBirrlOu1gUgorRkufOgH
-         tlNq0Noq41VQUrd8ElMqi1Ku5EIZ580TgkXLY6dIEl0E1hkHTksQM2SxaT3hq28OFtTI
-         8gN0PvKcISkvxFh1cnXw7YVkZnbzkNGySaW7HxLVz2JlHLOJ+QnhBi0tHwVk98fk5GtG
-         OzvA==
-X-Gm-Message-State: AOJu0Yww9+eRg0+4zTIZ8ObTb+VoJs8KDIyCb8rq1t7OmyO7ti4ZIp8e
-	nz4dWXT4FWaWtr746NuZB0E+A7C0WlYoxqLNgv3P2dYMsk5KBYERsGaKiwnG13/Ai8haia4t1xQ
-	7QwRVZrBkqfsz0Dcv7AcQ610B1XeKGL0=
-X-Gm-Gg: ASbGnctMVzFMMoSWdCFqZQOVhHnSl3Q8K5o9q7JD8Xl7vUAsUnbUopxEUcRhOX7REHS
-	MKSOwqFjdVIDVUjhyhr39Fvd7WukDcUQiwLUYrGgm6y03hqnP6AksohBUmAXP09TPDTzT85qg0Z
-	AHP8/ab10gP5koStKvJPXMkukvvlC0iowemhAQ6VweznTLfW9QmXRIyS8CPglwo2aEWj9C2XZiZ
-	cz26DUoEmAailGQrcDb6czXc0uz1lQEFoNHG6GvUb9waWQ+iFqMOsFW4vh3EMTGVVfPkmxno0+x
-	cuuVHS6Tk4P/wWaRyePoEp3tBRD7gjIAVwZS2BGD8zdph/4N5c2Vf599sIgjsccDg9bV1vTiwqP
-	1E7qiO3bxxYct
-X-Google-Smtp-Source: AGHT+IFlsvm+72Dw7xBjHCpQ49ij00lWMWa1MRaYO4lKXAyIU2UHiHyNw7JYhjJwU22S1f53ZbUpKy+fz+t8EVy4Ox8=
-X-Received: by 2002:a05:690e:2511:10b0:63c:ed4b:e53 with SMTP id
- 956f58d0204a3-64436fc4517mr1969006d50.25.1764780787221; Wed, 03 Dec 2025
- 08:53:07 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764797394; x=1765402194;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=ssszST3OXZH8Pr9rYskEy2b4V4o2vYxrn4pUE43bTZY=;
+        b=DKqNsQCGXHhZP71TFw3ttbQNwa2RVIPWKlvIMq4M3QD9yojH+yJ+wV6oUxW/0Uas2Q
+         UjJYuKHrQf7huCdtT86EqHOAkiaicJ/GIswo3fKQ+itr1G8pstE/WWQd3lRteAXaBLg7
+         hJqc3GHYZyD1DMyzY81WQIQosVlxOWqemHWZS496x9LiOYPfgZN+Vf1LZCD+Gd8iRVUf
+         jWWgWxVg9+/LsXxmTPhzMrZ55bnel0UWW9C4kOzY5Gvddm+Suoj5/FLEu3ul9PnvO/5z
+         FsgU0XxGYoYjgeZpcGu/s3cHo/zx6JmI6+nZYh6aml9Z7Mi5A7JLryPGZMxAVWUON3ZU
+         B4Nw==
+X-Gm-Message-State: AOJu0YwKhikJEwJyPThlYoAHyf9fmgCiidBAc/9mDOeAbgX6KlCJok/1
+	iquRgjWMOrhTKTLNAaEugy42ITxSu0RmHvNfOXDYjF64DQXppSGV/q2Fq7+baA==
+X-Gm-Gg: ASbGnctOfqjJHsbphZTQYYPxvz9j6QgVDf9D2H31U3GVNCSNec+p09RZWrLsX5A7NiS
+	ak1FAEUEAc9QuKLrSn8ZcZQhYGJs3T9c1N2sYG3CQCbSAMefDnx5X3L874udYUuUjmXI0lZ5/fp
+	l6pAUTmBKfGEFm9ehRO3gX0rdOe67vxSQiueyvQ40iSo6gZLD3O1jClNgZmWjeWNEb6s71iAYPv
+	aA2ab39KAe+a16/yLWqUNQ0kWNfttNH/aoMrVvU0ob5f+l2YaTka9n+lpwCWzfcFso8yDI+A11d
+	P3LCNrtaO/mNMByZ01FDzdZD5ATW1UwbiMD0F5B+0XomtjoCFNxXUeu7oRqh5fkxh0rhbiDp8ax
+	tg+kJ1Z2UjcdSfAXZrbZNcSHPDVM1QTBXBCudGWHYRYA6att+bU0j5E/vHKj0Njmo6FjkdhREbo
+	kaK2TaQXQv
+X-Google-Smtp-Source: AGHT+IHg0gLU+EQEOkmV1AoPTDFQHV5CAs5bmz1EJ7tNjR44gCh/Gz3Bba53XaLPUDtEyC7USUfcOg==
+X-Received: by 2002:a05:6000:18a6:b0:42b:4069:428a with SMTP id ffacd0b85a97d-42f79514c50mr461873f8f.12.1764797394026;
+        Wed, 03 Dec 2025 13:29:54 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f6ffa18ffsm10722885f8f.5.2025.12.03.13.29.53
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 03 Dec 2025 13:29:53 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][scarthgap][PATCH 06/12] xrdp: patch CVE-2022-23481
+Date: Wed,  3 Dec 2025 22:29:43 +0100
+Message-ID: <20251203212949.4046524-6-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251203212949.4046524-1-skandigraun@gmail.com>
+References: <20251203212949.4046524-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-References: <20251203143659.736329-1-pkj@axis.com>
-In-Reply-To: <20251203143659.736329-1-pkj@axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Dec 2025 08:52:40 -0800
-X-Gm-Features: AWmQ_bmvkfBswi-e6Z83keNeO4fuuE9_SFBbQ0huqSfZwgXkDJ5F0YM5VNa_Nks
-Message-ID: <CAMKF1spc9tibcU_NAzuH-8YJR9O9Lckfat9my0BcP5jZYmQS0g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] Revert "proj: Fix do_package QA issue
- for unshipped bash-completion files"
-To: peter.kjellerstedt@axis.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000edc67506450f0b67"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 16:53:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122278
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 21:30:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122284
 
---000000000000edc67506450f0b67
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23481
 
-Thanks, please send a reminder once it's merged in OE-core lest I forget
-about it.
+Pick the patch that mentions this vulnerability explicitly.
 
-On Wed, Dec 3, 2025 at 6:35=E2=80=AFAM Peter Kjellerstedt via lists.openemb=
-edded.org
-<peter.kjellerstedt=3Daxis.com@lists.openembedded.org> wrote:
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../xrdp/xrdp/CVE-2022-23481.patch            | 46 +++++++++++++++++++
+ meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch
 
-> This reverts commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d.
->
-> Since this recipe inherits bash-completion, adding
-> ${datadir}/bash-completion to FILES:${PN} should not be needed (in
-> addition to being the wrong thing to do as the files are expected to be
-> packaged in the ${PN}-bash-completion package). The reason the problem
-> addressed in commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d turned up
-> is due to the recent change to the bash-completion bbclass, where it
-> started to use PACKAGE_BEFORE_PN. This clashed with the lib_package
-> bbclass, which used to set rather than add to PACKAGE_BEFORE_PN, and
-> since it is inherited after bash-completion, it overrid what
-> bash-completion does.
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->
-> I have sent a patch to openembedded-core to correct lib_package.bbclass,
-> and it obviously needs to be accepted before this is integrated.
->
->  meta-oe/recipes-navigation/proj/proj_9.7.0.bb | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
-> b/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
-> index eb9fe46f30..2a41f1ec52 100644
-> --- a/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
-> +++ b/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
-> @@ -12,9 +12,7 @@ inherit bash-completion cmake lib_package pkgconfig
->
->  EXTRA_OECMAKE =3D "-DBUILD_TESTING=3DOFF"
->
-> -FILES:${PN} +=3D " \
-> -       ${datadir}/proj \
-> -       ${datadir}/bash-completion"
-> +FILES:${PN} +=3D "${datadir}/proj"
->
->  BBCLASSEXTEND =3D "native"
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122277):
-> https://lists.openembedded.org/g/openembedded-devel/message/122277
-> Mute This Topic: https://lists.openembedded.org/mt/116594502/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000edc67506450f0b67
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks, please send a reminder once it&#39;s merged in OE-=
-core lest I forget about it.</div><br><div class=3D"gmail_quote gmail_quote=
-_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 3, 2025 at 6:=
-35=E2=80=AFAM Peter Kjellerstedt via <a href=3D"http://lists.openembedded.o=
-rg">lists.openembedded.org</a> &lt;peter.kjellerstedt=3D<a href=3D"mailto:a=
-xis.com@lists.openembedded.org">axis.com@lists.openembedded.org</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">This reverts=
- commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d.<br>
-<br>
-Since this recipe inherits bash-completion, adding<br>
-${datadir}/bash-completion to FILES:${PN} should not be needed (in<br>
-addition to being the wrong thing to do as the files are expected to be<br>
-packaged in the ${PN}-bash-completion package). The reason the problem<br>
-addressed in commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d turned up<br>
-is due to the recent change to the bash-completion bbclass, where it<br>
-started to use PACKAGE_BEFORE_PN. This clashed with the lib_package<br>
-bbclass, which used to set rather than add to PACKAGE_BEFORE_PN, and<br>
-since it is inherited after bash-completion, it overrid what<br>
-bash-completion does.<br>
-<br>
-Signed-off-by: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@=
-axis.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
----<br>
-<br>
-I have sent a patch to openembedded-core to correct lib_package.bbclass,<br=
->
-and it obviously needs to be accepted before this is integrated.<br>
-<br>
-=C2=A0meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">proj_9.7.0.bb</a> | 4 +---<br>
-=C2=A01 file changed, 1 insertion(+), 3 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">proj_9.7.0.bb</a> b/meta-oe/recipes=
--navigation/proj/<a href=3D"http://proj_9.7.0.bb" rel=3D"noreferrer" target=
-=3D"_blank">proj_9.7.0.bb</a><br>
-index eb9fe46f30..2a41f1ec52 100644<br>
---- a/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">proj_9.7.0.bb</a><br>
-+++ b/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">proj_9.7.0.bb</a><br>
-@@ -12,9 +12,7 @@ inherit bash-completion cmake lib_package pkgconfig<br>
-<br>
-=C2=A0EXTRA_OECMAKE =3D &quot;-DBUILD_TESTING=3DOFF&quot;<br>
-<br>
--FILES:${PN} +=3D &quot; \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0${datadir}/proj \<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0${datadir}/bash-completion&quot;<br>
-+FILES:${PN} +=3D &quot;${datadir}/proj&quot;<br>
-<br>
-=C2=A0BBCLASSEXTEND =3D &quot;native&quot;<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#122277): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/122277" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/122277</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116594502/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116594502/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000edc67506450f0b67--
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch
+new file mode 100644
+index 0000000000..b138b535e3
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch
+@@ -0,0 +1,46 @@
++From c77e974080da8267d902f99ca5ab7d22ea02d98c Mon Sep 17 00:00:00 2001
++From: matt335672 <30179339+matt335672@users.noreply.github.com>
++Date: Wed, 7 Dec 2022 10:40:25 +0000
++Subject: [PATCH] CVE-2022-23481
++
++Add length checks to client confirm active PDU parsing
++
++CVE: CVE-2022-23481
++Upstream-Status: Backport[https://github.com/neutrinolabs/xrdp/commit/c77e974080da8267d902f99ca5ab7d22ea02d98c]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ libxrdp/xrdp_caps.c | 14 ++++++++++++++
++ 1 file changed, 14 insertions(+)
++
++diff --git a/libxrdp/xrdp_caps.c b/libxrdp/xrdp_caps.c
++index 5c5e74a579..ac21cc0a18 100644
++--- a/libxrdp/xrdp_caps.c
+++++ b/libxrdp/xrdp_caps.c
++@@ -667,13 +667,27 @@ xrdp_caps_process_confirm_active(struct xrdp_rdp *self, struct stream *s)
++     int len;
++     char *p;
++ 
+++    if (!s_check_rem_and_log(s, 10,
+++                             "Parsing [MS-RDPBCGR] TS_CONFIRM_ACTIVE_PDU"
+++                             " - header"))
+++    {
+++        return 1;
+++    }
++     in_uint8s(s, 4); /* rdp_shareid */
++     in_uint8s(s, 2); /* userid */
++     in_uint16_le(s, source_len); /* sizeof RDP_SOURCE */
++     in_uint16_le(s, cap_len);
+++
+++    if (!s_check_rem_and_log(s, source_len + 2 + 2,
+++                             "Parsing [MS-RDPBCGR] TS_CONFIRM_ACTIVE_PDU"
+++                             " - header2"))
+++    {
+++        return 1;
+++    }
++     in_uint8s(s, source_len);
++     in_uint16_le(s, num_caps);
++     in_uint8s(s, 2); /* pad */
+++
++     LOG_DEVEL(LOG_LEVEL_TRACE, "Received [MS-RDPBCGR] TS_CONFIRM_ACTIVE_PDU "
++               "shareID (ignored), originatorID (ignored), lengthSourceDescriptor %d, "
++               "lengthCombinedCapabilities  %d, sourceDescriptor (ignored), "
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
+index 55dab2e867..ff14cf8397 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
+@@ -22,6 +22,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
+            file://CVE-2022-23479.patch \
+            file://CVE-2022-23480-1.patch \
+            file://CVE-2022-23480-2.patch \
++           file://CVE-2022-23481.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
 
