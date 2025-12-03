@@ -1,132 +1,97 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B169D15D85
-	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 21:35:40 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.27364.1764797739472793063
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C95C2D1CDA2
+	for <webhook@archiver.kernel.org>; Wed,  3 Dec 2025 22:15:50 +0000 (UTC)
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28434.1764800147665641215
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Dec 2025 13:35:39 -0800
+ Wed, 03 Dec 2025 14:15:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KFveg60h;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-477a219db05so1582215e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 13:35:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764797738; x=1765402538; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=jg7Ruioj/R3oclCAIfpAmCkS18EWCuhG+5VdQkqjVU4=;
-        b=KFveg60hCYVmrcyGhVD++NNoAJL3s/UYaWGxbWmLGrgY2nVOXwONIYo+Bv1NRob/rm
-         Hd9A/3Lwvxxq1ROnie5q2/mX7vDFYpSl/u/Y5SWqEJLix+oXWd/l2fGVYnVO+/ZNEJEV
-         6BQG4vvYBRBAvX4AvQemoM3qvmxr2MxW8g4DljDVFUKJYc5JJ8KtNsGF0KVdlpdbEqf/
-         OC9heftPdKMoHeA6H5g2RF7iIHgPw8tknICXDrsmg6e/4gwFdHChSQC1gyIkYZSjC6Ig
-         qPvnf9YNQnGzoD3sr5hcLvSrt8Qdt4p9s+qhG8tahkwwCn/4D6X7KmeUON/Z+rYRKf8S
-         B7TA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764797738; x=1765402538;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jg7Ruioj/R3oclCAIfpAmCkS18EWCuhG+5VdQkqjVU4=;
-        b=gLQFC1Ry6BjyIm+WvWVX8M3pb5Xq4yKPZu85vMlmi3rR/ImJ8F6eKgx0RQfkbk9alw
-         MEa6HwcB4rOICcvnvDjI3LiQlTJoaEwdT62PSBZns280uKyFYxKoFjvFGqd5Nmb6Hr9F
-         9hvd/ldL05PVmMkjWEa4RLvJW95J8OgzqyMAwAhSDuwd0n6Mf+llgn4dkNpU57sWqUwo
-         Xp2k6Q9BiIrlVzaVuu0Sw9P3XS/aWVsq7o+x5tAAXeEeBw8Jf06PXO0ETlap3X3D65BL
-         eNnjktCu+bSpNiIMURrna8gmj/G2G0GZuNTu6RYY5vH6R3gBR18XQiWqYkUUQC3+tTEb
-         rt5w==
-X-Forwarded-Encrypted: i=1; AJvYcCXmNGGQuYpiqcmAQkCM+Nlh8P9IxhNmPKCwxbL6fldAVGGM4yCt1DQFB6VX2aTlomzBu1wVllFd58a/TlQ2ktmrpsU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzNntPFeYQFdNxh7u2qH0SwGMCYEAqtgtzDygsn30zxePBPDe7h
-	WaqQPzjtAKDzicZXBBGexJCX4X3kE69sSG4kyc2AiPz28bCWRdZqUmUg9nIhBA==
-X-Gm-Gg: ASbGnctBhEc5n47tIVZ+9Sed4x2s33+J73ibH/PYsm96EJNn1Rjy1ch0L2kLC7Arqkm
-	6dP0PTMks954tQerMzio0fr8lTMoCZMKTjVuoRtbSs4PJ5fDL0wkB9OrnhMKUK/HsWpIPkn42r3
-	vZJhG2y48iYgMTGio2MaE5/zgypNVAARZjKvM5nG17WHsLbuS7KrXYMBxUEZeb7+ctl+Ln72RNP
-	e9+yqLCsjx96RfuzeIshqbtEnHh5PZfltq76UOdOVIGZVlFRqQT/IDdIPw7QPvlvw7oFNI5Cbd1
-	IBuo44UlhePGN901FtgfnuCkmm3P4zmWu8KlndVHdeCW8U/nsOAzM5jD2hI2d6PbI6QS7wNPCYr
-	B/GhNHMQvXQvu68kGElksDP5k/ovAVRCaT+g+Q8i82wYyEh1mzcZH6Xj1I3dBFbiiUYW6G4phKl
-	LKfRrBKCZ44l8P/CulvTGSZim76opHZQ==
-X-Google-Smtp-Source: AGHT+IHqzl2a/TSnA7Z/8CY00Kpen+sN+SCnXSjvGooVdD/n8CPuDq7jXdBlpEoGYbAQcGvRM1ry8Q==
-X-Received: by 2002:a05:6000:611:b0:429:d1a8:3fa2 with SMTP id ffacd0b85a97d-42f731c553fmr3848282f8f.48.1764797737637;
-        Wed, 03 Dec 2025 13:35:37 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42e1c5c30b8sm41668297f8f.7.2025.12.03.13.35.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 03 Dec 2025 13:35:37 -0800 (PST)
-Message-ID: <123d3039-602d-45b1-a70e-bd22c2636cf4@gmail.com>
-Date: Wed, 3 Dec 2025 22:35:36 +0100
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=C5TydYZs;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-202512032215437781272bd600020754-aykf_g@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202512032215437781272bd600020754
+        for <openembedded-devel@lists.openembedded.org>;
+        Wed, 03 Dec 2025 23:15:44 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=5Lh4cKcW4luvJzyC9aE1eCHmBtRJmN7Qgd4WHDStR7g=;
+ b=C5TydYZs5fabpyGfS+yc35/hqzt7MLY97Vl/jFiSzxMWenX5v9lYrX71GkUGePTpYiQjG0
+ rYvrU1ThTznPDNIqOepFUEa1f23CXKh/+SxrGdmF96YIZN1CchCVsxgdJc0rVHdhKk1W37wx
+ bflHpoA/d3aK6UqYCyNUyXgTPWLEgeKvBzx6I8U8ld88+6BnEqYU3GjvReFgkhyQ5+ioWoE1
+ Oav2YTmRFmeTub7+BJfo5epwaBPuhtZbKtpjde5iUMRQEzJ6TCYRbghe6jLSfkf9cXkXH3qc
+ lDR7suSwmmlu8wyNbv2hXN0ldJZk/uANBaTNewr6/laXmve+1PTNvXcA==;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][PATCH] libcoap: upgrade 4.3.5 -> 4.3.5a
+Date: Wed,  3 Dec 2025 23:15:41 +0100
+Message-Id: <20251203221541.2247324-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH v2] python3-soundcard: Add recipe
-To: jan.claussen10@web.de, openembedded-devel@lists.openembedded.org
-References: <20251129100636.2844306-1-jan.claussen10@web.de>
- <4C07461B-CB4E-432A-AA42-E6FCC8D8317B@web.de>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <4C07461B-CB4E-432A-AA42-E6FCC8D8317B@web.de>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 21:35:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122292
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 22:15:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122293
 
-On 12/3/25 22:32, Jan Claußen via lists.openembedded.org wrote:
-> This one good too? I forgot to name the [master] in the topic, but the recipe should work!
+From: Peter Marko <peter.marko@siemens.com>
 
-This was accepted to master branch a few days ago:
-https://git.openembedded.org/meta-openembedded/commit/?id=4f461e498567bea07b46dcfbd195ffb8f04a4a70
+Changelog [1]:
+  * Fixes the following CVEs
+    CVE-2025-59391
+    CVE-2025-65494
+    CVE-2025-65495
+    CVE-2025-65496
+    CVE-2025-65497
+    CVE-2025-65498
+    CVE-2025-65499
+    CVE-2025-65500
+    CVE-2025-65501
+  * CVE-2025-50518 not fixed as user application error.
+  * Support for Mbed TLS 3.6.3.
+  * Support for RIOT update changes.
+  * Fixes for later CI environment builds.
+  * Critical reported bugs fixed.
 
->> Am 29.11.2025 um 11:06 schrieb Jan Claußen <jan.claussen10@web.de>:
->>
->> ﻿SoundCard is a library for playing and recording audio without resorting to a CPython extension.
->>
->> Signed-off-by: Jan Claußen <jan.claussen10@web.de>
->> ---
->> .../python/python3-soundcard_0.4.5.bb         | 20 +++++++++++++++++++
->> 1 file changed, 20 insertions(+)
->> create mode 100644 meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
->> new file mode 100644
->> index 0000000000..5116892dad
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-soundcard_0.4.5.bb
->> @@ -0,0 +1,20 @@
->> +SUMMARY = "Python library for accessing soundcards"
->> +DESCRIPTION = "SoundCard is a library for playing and recording audio without resorting to a CPython extension"
->> +HOMEPAGE = "https://github.com/bastibe/SoundCard"
->> +SECTION = "devel/python"
->> +
->> +LICENSE = "BSD-3-Clause"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e39df1540c06c17ca310ce87c36b042c"
->> +
->> +SRC_URI[sha256sum] = "07272ba927e32cafdf634e4a1ca53b9a3218321a60c7d2e08f54b832a56946aa"
->> +
->> +inherit pypi setuptools3 features_check
->> +
->> +REQUIRED_DISTRO_FEATURES = "pulseaudio"
->> +
->> +RDEPENDS:${PN} += " \
->> +    libpulse \
->> +    pulseaudio-server \
->> +    python3-cffi \
->> +    python3-numpy \
->> +"
->> --
->> 2.52.0
->>
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122291): https://lists.openembedded.org/g/openembedded-devel/message/122291
-> Mute This Topic: https://lists.openembedded.org/mt/116524375/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Add tag to SRC_URI for hash verification.
 
+License-Update: copyright years refreshed [2]
+
+[1] https://github.com/obgm/libcoap/blob/v4.3.5a/ChangeLog
+[2] https://github.com/obgm/libcoap/commit/993c12ac92ce6a24a409924fe78a5c0fe7246699
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ .../libcoap/{libcoap_4.3.5.bb => libcoap_4.3.5a.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-devtools/libcoap/{libcoap_4.3.5.bb => libcoap_4.3.5a.bb} (93%)
+
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+similarity index 93%
+rename from meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb
+rename to meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+index a4e5f5ca46..0a8dacc377 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+@@ -5,12 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
+ HOMEPAGE = "https://libcoap.net/"
+ 
+ LICENSE = "BSD-2-Clause & BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9aa68c0f6785376aa8ec7f4f1aa6ae3c"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=05d17535846895e23ea4c79b16a9e904"
+ 
+-SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
++SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https;tag=v${PV} \
+            file://run-ptest \
+            "
+-SRCREV = "7cf7465b784baded4de183290c547d582becfd28"
++SRCREV = "e3fdcdcfbd1588754fe9dd4b754ac9397260f0f9"
+ 
+ 
+ inherit autotools manpages pkgconfig ptest
 
