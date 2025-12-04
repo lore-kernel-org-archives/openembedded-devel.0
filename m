@@ -1,502 +1,155 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0D33D216BE
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 16:52:37 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.48492.1764867149290885203
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA719D2444B
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 17:22:57 +0000 (UTC)
+Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.49535.1764868971061864046
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 08:52:29 -0800
+ Thu, 04 Dec 2025 09:22:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=wgqbZvuF;
- spf=pass (domain: smile.fr, ip: 209.85.221.49, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e445dbbso622545f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 08:52:29 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=NmtA5urT;
+ spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1764867148; x=1765471948; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=geLtHCoy3nDeTHrDCwWsb3RdtgSQd2UpORt7xQyUBo4=;
-        b=wgqbZvuFCe7CE3gKVzVBq4Ew1jjhHLnBKbdiX8P+F3G1tnw4B2pzOaAkGons00jGmD
-         zDi17G9yxUBs5wf4JZ/MWuXWKOHqK1ETE0mJPFRBqTglc2dC42tGttaroulyhwd43+HE
-         /a0m5H4z7P8UVWZOp8/xsWT1IPeKAK8tCwKg4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764867148; x=1765471948;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=geLtHCoy3nDeTHrDCwWsb3RdtgSQd2UpORt7xQyUBo4=;
-        b=rORiMTpywdZOmM3h341moX0cx2sGfFSLyVaBvp1SQXWACfO7mKTQc/LnVKJ8ArgonV
-         u51/htXDXlALM73oFQ65l5W5h4rcIrarOvRsdZ56lfWiPXjoYVfO5BzzQGWA7B7xdXaO
-         DGZej2x+lqOR9+cbcOx9m5pnZEU+ub68jEydL+6HWpbwR3tgb8GEJjHVZiSN3vKQtPey
-         3U4gkPAs9IISVc4QSVuGuUFQMjo2hM2hTiu7g5u9DAgzPS1ElO4FiwBIwhJF2QbIO1el
-         ap2qNvEJWRkIw8KOb2XN68XZ4t5ZvyyANtnv1/cGhM1VoNecSrzeZse/oNx7pQcowAg7
-         tVrg==
-X-Gm-Message-State: AOJu0YyMkcbt9fhtsGjv7MB5pd3ubPRLQTtlQRKBd4egZIOqLt1UFh/r
-	O/AhueJexNmcD/lCdUIjGfxEaPsK4t685R3t9QNufMEabMZ5BvmkYokfJ6cmAWZIP4q7Zfl+mXU
-	qh9pLUmJgS+znmsMO7uxVFRvnwnub5g6cJY/xTYCRDQ==
-X-Gm-Gg: ASbGncvHadXzLZYAkHX99WQN1vNzLTWHvWgFhn+pTor3tDzCs/4j2HQho4DQbX1Ua2E
-	bNDaA0BVmwdWWPz1kmlfMaBQH3wp0b3aH1JduimpEUlWwu6xY+LSj1YjeGUg82JpPHKPM1qMO+9
-	Z6T7winSJgUJeJcvgs37dKcZDvxi/qF+XlmBMIsi1xJsQ7CywmJTFJeAwvekbCyOLP8QNV1SmZ9
-	6wsu98taG1O/9GMh90Zl+/FxjRd27LZuQFkQXMW7jZI8ESBbASq2VB1sEPL/QBYvQ6VHO61EQO9
-	u+IJJ06X3Usu3By7/uZhgV3NEd68
-X-Google-Smtp-Source: AGHT+IEG/47mA12E2IB+cuqdnYGQVIuy+gLH+jtXgZwX34UjF5Mw2bftV+6b3tfDqWnlv/X4xWvKjyQCl0uxHp1TFSA=
-X-Received: by 2002:a05:6000:2407:b0:429:66bf:1475 with SMTP id
- ffacd0b85a97d-42f73171fe9mr7228774f8f.3.1764867147496; Thu, 04 Dec 2025
- 08:52:27 -0800 (PST)
+  d=cisco.com; i=@cisco.com; l=3867; q=dns/txt;
+  s=iport01; t=1764868971; x=1766078571;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=yCI75gtT5KvWSngemXSS34fW8tRpZaN5seuUIH6gzf4=;
+  b=NmtA5urTTyUxDz7sUXxnBbfRPndlfDf4cc/kr1Tw+BH8VVl7mVAIvJNd
+   8y+9mJZtRim+Ogz47FUZLLJwKttcDgUC0kZjdxZFSXO705tjLJTWYSNpz
+   MFVaLqrTMX0JqVnSjocy+x/ttHtNFK2q5lbGyKqedrTNwBRRrk4mMbIwP
+   uRL186+MCwhnGNBDnARIHJaJbeMkO4AsVi9E+RrxDxwBfV3roKWTv9tzn
+   uzOFe8goPOxKlGHN9oQBuOEac2PlQUPBA0+ZHCtD9ZmtniHQtzCwfeGUw
+   ODzEP5C5SzWm0oOMpHUtZFTMZY39zqbnU7LyKzU5Sk7UPPEOMpL5koFsh
+   A==;
+X-CSE-ConnectionGUID: tNy1qf1UTKiRhj3cKhaAsw==
+X-CSE-MsgGUID: pnk/8D3QQlqzEMQhrJLhgA==
+X-IPAS-Result: =?us-ascii?q?A0DbBQDEwTFp/5D/Ja1aglmCR39fQkmUJ4Ihi2eSNoF/D?=
+ =?us-ascii?q?wEBAQ9EDQQBAZFvAiY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4ZPDYZaATgBcgMBAk8LIyGDAgGCOgM2AgERBrJJgiyBAYNsQU/YR?=
+ =?us-ascii?q?A2CVQaBS4U7gnmFHVgZhHgnGxuBcoJQgTcHb4IfQgICiCIEgiKBDoF1hCp4i?=
+ =?us-ascii?q?QAGiT1IgR4DWSwBVRMNCgsHBYFjAzUMCyoVbjIdgSM+F3OEXR5nDwaBEYNPi?=
+ =?us-ascii?q?RYPijgpAwsYDUgRLDcUGwY+bgeUHk+CMmEtASkCGGNScJMukjWgHXEKKIN0j?=
+ =?us-ascii?q?B6PPYV8GjOqa5kGjgiECZJHhGiBaDyBWXAVgyJSGQ+OX4NChRO4EyI1AgkxA?=
+ =?us-ascii?q?gcLAQEDCZNnAQE?=
+IronPort-Data: A9a23:GgJrGKJIraxZaoLHFE+RgZQlxSXFcZb7ZxGr2PjKsXjdYENS1D1Sy
+ 2EbWz/SPa7bMGbxKtp0Otiw9R5TucLVm4JhTAUd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
+ 63yUvGZcoZsCCSa/kvxWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnV0
+ T/Oi5eHYgL8gWYoajh8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
+ vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
+ /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1yKlBvJINBx9pUAFtO9
+ 6cTCzAERwuc0rfeLLKTEoGAh+w5J8XteYdasXZ6wHSBUrAtQIvIROPB4towMDUY358VW62BI
+ ZBENHw2MEiojx5nYj/7DLoykeqyj2X/dBVTqUmeouw85G27IAlZjOGyaYaOJIzXLSlTtl6ep
+ SWW0z/AOxUDJvG68Dqf0FasicaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
+ FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl7GQGMFVTVGLtchsafaWAAX6
+ 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
+IronPort-HdrOrdr: A9a23:MataDKmqJgVgLgDreqmbFah6O3jpDfI53DAbv31ZSRFFG/Fw8P
+ re/sjzuiWbtN98YhwdcLO7Scq9qBHnlKKdiLN5VdzJYOCMggSVxe9ZgbcKuweBJ8U7ndQtsZ
+ uJtMNFebjNMWQ=
+X-Talos-CUID: 9a23:3p+hcWwjgkd2MdFtS5DrBgUIPNF8a3OE8UvzInW4Cz1ia72cYESPrfY=
+X-Talos-MUID: 9a23:mJsQswW2Xk8nI9Lq/Cfqh3YyGJxR2qC3Gm0oqJUcme2EOgUlbg==
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.20,249,1758585600"; 
+   d="scan'208";a="417143685"
+Received: from rcdn-l-core-07.cisco.com ([173.37.255.144])
+  by rcdn-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 04 Dec 2025 17:22:50 +0000
+Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-07.cisco.com (Postfix) with ESMTPS id EE6CF18000200
+	for <openembedded-devel@lists.openembedded.org>; Thu,  4 Dec 2025 17:22:49 +0000 (GMT)
+Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
+	id 94511CC12B5; Thu,  4 Dec 2025 09:22:49 -0800 (PST)
+From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded] [scarthgap] [PATCH] hdf5 1.14.4-3: Fix CVE tag format in patches
+Date: Thu,  4 Dec 2025 09:22:18 -0800
+Message-ID: <20251204172240.3268565-1-deeratho@cisco.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
-References: <20251201220957.2629951-1-skandigraun@gmail.com>
-In-Reply-To: <20251201220957.2629951-1-skandigraun@gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Thu, 4 Dec 2025 17:52:01 +0100
-X-Gm-Features: AWmQ_bnalMB3HmPDpvOSR1bTegLPSxRbFhvWcQVLAA_bCQ7XsHOd2ox_EwcpbKw
-Message-ID: <CAMSfU+6MEFLLqzQdYgt0W12bwenvw-B3JY0zpcHXrDrdPOfoEQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] yasm: drop recipe
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, 
-	Ross Burton <ross.burton@arm.com>, Yogesh Tyagi <yogesh.tyagi@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
+X-Outbound-Node: rcdn-l-core-07.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 16:52:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122325
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 17:22:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122326
 
-Le lun. 1 d=C3=A9c. 2025 =C3=A0 23:10, Gyorgy Sarvari via lists.openembedde=
-d.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
->
-> Yasm was introduced as a rewrite of nasm, however its commits
-> have dried up over the years, while its unmitigated CVEs keep
-> piling up. Also, nasm is a healthier project with regular
-> contributions still.
->
-> There are no known recipes depending on yasm.
->
-> Let's remove it.
+From: Deepak Rathore <deeratho@cisco.com>
 
-Can you also remove it from the package groups?
+- The CVE tags in multiple hdf5 patches were using comma-separated
+format which caused false positives in CVE reports.
+- Multiple CVEs should be separated by space in CVE-ID.patch file as
+per recipe style guide in Yocto documentation so CVE report tool can
+scan those CVEs and mark it as patched.
 
-From https://autobuilder.yoctoproject.org/valkyrie/?#/builders/82/builds/53=
-7/steps/13/logs/stdio
-(line 50+):
-stdio: WARNING: Nothing RPROVIDES 'yasm' (but
-/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-oe/=
-recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
-stdio: WARNING: Nothing RPROVIDES 'packagegroup-meta-oe-shells' (but
-/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-oe/=
-recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
-stdio: WARNING: Nothing RPROVIDES 'packagegroup-meta-oe-security' (but
-/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-oe/=
-recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
-stdio: WARNING: Nothing RPROVIDES 'packagegroup-meta-oe-multimedia'
-(but /srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/met=
-a-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
-stdio: WARNING: Nothing RPROVIDES 'packagegroup-meta-oe-test' (but
-/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-oe/=
-recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
-stdio: WARNING: Nothing RPROVIDES 'packagegroup-meta-oe-bsp' (but
-/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-oe/=
-recipes-core/packagegroups/packagegroup-meta-oe.bb
-RDEPENDS on or otherwise requires it)
+Fixed the following patches:
+- CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch
+- CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch
+- CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch
 
-Thanks!
+Reference:
+- https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html#cve-patches
 
->
-> Cc: Ross Burton <ross.burton@arm.com>
-> Cc: Yogesh Tyagi <yogesh.tyagi@intel.com>
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->
-> v2: added Yogesh Tyagi on Cc, as the maintainer of meta-intel
->
->  .../0001-bitvect-fix-build-with-gcc-15.patch  | 38 -----------------
->  ...-Set-build-date-to-SOURCE_DATE_EPOCH.patch | 37 ----------------
->  ...m-Use-BUILD_DATE-for-reproducibility.patch | 42 -------------------
->  .../yasm/yasm/CVE-2021-33456.patch            | 35 ----------------
->  .../yasm/yasm/CVE-2021-33464.patch            | 34 ---------------
->  .../yasm/yasm/CVE-2023-29579.patch            | 39 -----------------
->  meta-oe/recipes-devtools/yasm/yasm_git.bb     | 40 ------------------
->  7 files changed, 265 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/0001-bitvect-fix-b=
-uild-with-gcc-15.patch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-buil=
-d-date-to-SOURCE_DATE_EPOCH.patch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUIL=
-D_DATE-for-reproducibility.patch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33456.pat=
-ch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33464.pat=
-ch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2023-29579.pat=
-ch
->  delete mode 100644 meta-oe/recipes-devtools/yasm/yasm_git.bb
->
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/0001-bitvect-fix-build-wi=
-th-gcc-15.patch b/meta-oe/recipes-devtools/yasm/yasm/0001-bitvect-fix-build=
--with-gcc-15.patch
-> deleted file mode 100644
-> index f3f2c431d5..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/0001-bitvect-fix-build-with-gcc-=
-15.patch
-> +++ /dev/null
-> @@ -1,38 +0,0 @@
-> -From 64ef740eb262f329e55eebadf2ce276b146d44e9 Mon Sep 17 00:00:00 2001
-> -From: Martin Jansa <martin.jansa@gmail.com>
-> -Date: Tue, 22 Apr 2025 19:06:24 +0200
-> -Subject: [PATCH] bitvect: fix build with gcc-15
-> -
-> -* fixes:
-> -libyasm/bitvect.h:86:32: error: cannot use keyword 'false' as enumeratio=
-n constant
-> -   86 |         typedef enum boolean { false =3D FALSE, true =3D TRUE } =
-boolean;
-> -      |                                ^~~~~
-> -../git/libyasm/bitvect.h:86:32: note: 'false' is a keyword with '-std=3D=
-c23' onwards
-> -
-> -as suggested in:
-> -https://github.com/yasm/yasm/issues/283#issuecomment-2661108816
-> -
-> -Upstream-Status: Submitted [https://github.com/yasm/yasm/pull/287]
-> -
-> -Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> ----
-> - libyasm/bitvect.h | 6 +++++-
-> - 1 file changed, 5 insertions(+), 1 deletion(-)
-> -
-> -diff --git a/libyasm/bitvect.h b/libyasm/bitvect.h
-> -index 3aee3a53..a13470ad 100644
-> ---- a/libyasm/bitvect.h
-> -+++ b/libyasm/bitvect.h
-> -@@ -83,7 +83,11 @@ typedef  Z_longword         *Z_longwordptr;
-> -     #ifdef MACOS_TRADITIONAL
-> -         #define boolean Boolean
-> -     #else
-> --        typedef enum boolean { false =3D FALSE, true =3D TRUE } boolean=
-;
-> -+        #if __STDC_VERSION__ < 202311L
-> -+             typedef enum boolean { false =3D FALSE, true =3D TRUE } bo=
-olean;
-> -+        #else
-> -+             typedef bool boolean;
-> -+        #endif
-> -     #endif
-> - #endif
-> -
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-=
-to-SOURCE_DATE_EPOCH.patch b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-S=
-et-build-date-to-SOURCE_DATE_EPOCH.patch
-> deleted file mode 100644
-> index 42f5559e3f..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOUR=
-CE_DATE_EPOCH.patch
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -From eb164bb201c0f792fa8aa78270c47294065183a3 Mon Sep 17 00:00:00 2001
-> -From: Oleh Matiusha <omatiush@cisco.com>
-> -Date: Tue, 6 Feb 2024 09:33:11 +0000
-> -Subject: [PATCH 1/2] yasm: Set build date to SOURCE_DATE_EPOCH
-> -
-> -If SOURCE_DATE_EPOCH is set, use it to generate a reproducible
-> -string for BUILD_DATE.
-> -
-> -Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
-> -
-> -Upstream-Status: Pending
-> ----
-> - configure.ac | 8 ++++++++
-> - 1 file changed, 8 insertions(+)
-> -
-> -diff --git a/configure.ac b/configure.ac
-> -index 2823ecd..eeb51ce 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -103,6 +103,14 @@ AM_WITH_DMALLOC
-> - #
-> - AC_CHECK_HEADERS([strings.h libgen.h unistd.h direct.h sys/stat.h])
-> -
-> -+# Use reproducible build date and time
-> -+if test "$SOURCE_DATE_EPOCH"; then
-> -+      DATE_FMT=3D"%d %b %Y %H:%M:%S"
-> -+      BUILD_DATE=3D$(LC_ALL=3DC date -u -d "@$SOURCE_DATE_EPOCH" "+$DAT=
-E_FMT")
-> -+      AC_DEFINE_UNQUOTED([BUILD_DATE], ["$BUILD_DATE"], [Use reproducid=
-le build date])
-> -+fi
-> -+
-> -+
-> - #
-> - # Checks for typedefs, structures, and compiler characteristics.
-> - #
-> ---
-> -2.33.0
-> -
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-=
-for-reproducibility.patch b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Us=
-e-BUILD_DATE-for-reproducibility.patch
-> deleted file mode 100644
-> index 4b9c933d01..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-rep=
-roducibility.patch
-> +++ /dev/null
-> @@ -1,42 +0,0 @@
-> -From 19fffab74a201dc41c3da7e74d86eafa8f68bbc6 Mon Sep 17 00:00:00 2001
-> -From: Oleh Matiusha <omatiush@cisco.com>
-> -Date: Tue, 6 Feb 2024 09:34:26 +0000
-> -Subject: [PATCH] yasm: Use BUILD_DATE for reproducibility
-> -
-> -Use reproducible build date instead of compilation time and date.
-> -
-> -Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
-> -
-> -
-> -Upstream-Status: Pending
-> ----
-> - tools/re2c/parser.c | 5 +++++
-> - 1 file changed, 5 insertions(+)
-> -
-> -diff --git a/tools/re2c/parser.c b/tools/re2c/parser.c
-> -index 02d5c66..1c90aee 100644
-> ---- a/tools/re2c/parser.c
-> -+++ b/tools/re2c/parser.c
-> -@@ -5,6 +5,7 @@
-> - #include "tools/re2c/globals.h"
-> - #include "tools/re2c/parse.h"
-> - #include "tools/re2c/parser.h"
-> -+#include "config.h"
-> -
-> - int yylex(void);
-> - static RegExp *parse_expr(void);
-> -@@ -233,7 +234,11 @@ void parse(FILE *i, FILE *o){
-> -     peektok =3D NONE;
-> -
-> -     fputs("/* Generated by re2c 0.9.1-C on ", o);
-> -+#ifndef BUILD_DATE
-> -     fprintf(o, "%-24s", ctime(&now));
-> -+#else
-> -+    fprintf(o, "%-24s", BUILD_DATE " ");
-> -+#endif
-> -     fputs(" */\n", o); oline+=3D2;
-> -
-> -     in =3D Scanner_new(i);
-> ---
-> -2.33.0
-> -
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33456.patch b/me=
-ta-oe/recipes-devtools/yasm/yasm/CVE-2021-33456.patch
-> deleted file mode 100644
-> index 2340d8ed75..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33456.patch
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -From 1126140b8f5ece18c58640725f0e4c08e5ec97b0 Mon Sep 17 00:00:00 2001
-> -From: Gyorgy Sarvari <skandigraun@gmail.com>
-> -Date: Sat, 15 Nov 2025 13:34:15 +0100
-> -Subject: [PATCH] A potential null pointer difference is that the return =
-value
-> - of the hash may be null. This fixes CVE-2021-33456.
-> -
-> -From: lixuebing <lixuebing@cqsoftware.com.cn>
-> -Date: Mon, 25 Aug 2025 13:51:28 +0800
-> -Subject: Fix null-pointer-dereference in hash
-> -Bug: https://github.com/yasm/yasm/issues/175
-> -Origin: https://github.com/yasm/yasm/pull/290
-> -
-> -CVE: CVE-2021-33456
-> -Upstream-Status: Submitted [https://github.com/yasm/yasm/pull/290]
-> -
-> -Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ----
-> - modules/preprocs/nasm/nasm-pp.c | 4 ++++
-> - 1 file changed, 4 insertions(+)
-> -
-> -diff --git a/modules/preprocs/nasm/nasm-pp.c b/modules/preprocs/nasm/nas=
-m-pp.c
-> -index f9f92dd1..473d98c1 100644
-> ---- a/modules/preprocs/nasm/nasm-pp.c
-> -+++ b/modules/preprocs/nasm/nasm-pp.c
-> -@@ -1102,6 +1102,10 @@ hash(char *s)
-> - {
-> -     unsigned int h =3D 0;
-> -     unsigned int i =3D 0;
-> -+    /* Check if the input string is NULL to avoid null pointer derefere=
-nce */
-> -+    if (s =3D=3D NULL) {
-> -+        return 0;
-> -+    }
-> -     /*
-> -      * Powers of three, mod 31.
-> -      */
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33464.patch b/me=
-ta-oe/recipes-devtools/yasm/yasm/CVE-2021-33464.patch
-> deleted file mode 100644
-> index ebae250ff9..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33464.patch
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -From 3c3f968d48d768c1e355199d4067d99cb72abc26 Mon Sep 17 00:00:00 2001
-> -From: Gyorgy Sarvari <skandigraun@gmail.com>
-> -Date: Sat, 15 Nov 2025 13:30:12 +0100
-> -Subject: [PATCH] Handle file descriptors with nonexisting env names bett=
-er.
-> - Avoid writing past allocated memory.
-> -
-> -This fixes CVE-2021-33464.
-> -Author: Petter Reinholdtsen <pere@debian.org>
-> -Bug: https://github.com/yasm/yasm/issues/164
-> -Bug-Debian: https://bugs.debian.org/1016353
-> -Forwarded: https://github.com/yasm/yasm/issues/164
-> -Last-Update: 2025-04-30
-> -
-> -CVE: CVE-2021-33464
-> -Upstream-Status: Submitted [https://github.com/yasm/yasm/issues/164]
-> -
-> -Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ----
-> - modules/preprocs/nasm/nasm-pp.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/modules/preprocs/nasm/nasm-pp.c b/modules/preprocs/nasm/nas=
-m-pp.c
-> -index 512f02c3..f9f92dd1 100644
-> ---- a/modules/preprocs/nasm/nasm-pp.c
-> -+++ b/modules/preprocs/nasm/nasm-pp.c
-> -@@ -1815,7 +1815,7 @@ inc_fopen(char *file, char **newname)
-> -             error(ERR_WARNING, "environment variable `%s' does not exis=
-t",
-> -                   p1+1);
-> -             *p2 =3D '%';
-> --            p1 =3D p2+1;
-> -+            pb =3D p1 =3D p2+1;
-> -             continue;
-> -         }
-> -         /* need to expand */
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-29579.patch b/me=
-ta-oe/recipes-devtools/yasm/yasm/CVE-2023-29579.patch
-> deleted file mode 100644
-> index 58b4ed1996..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm/CVE-2023-29579.patch
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -From 81c1b7b0a28f052eaadddcb010944bf67e6ae257 Mon Sep 17 00:00:00 2001
-> -From: Gyorgy Sarvari <skandigraun@gmail.com>
-> -Date: Sat, 15 Nov 2025 13:24:21 +0100
-> -Subject: [PATCH] Make sure CPU feature parsing use large enough string b=
-uffer.
-> -  Fixes CVE-2023-29579.
-> -
-> -Author: Petter Reinholdtsen <pere@debian.org>
-> -Bug: https://github.com/yasm/yasm/issues/214
-> -Bug-Debian: https://bugs.debian.org/1035951
-> -Forwarded:  https://github.com/yasm/yasm/issues/214
-> -Last-Update: 2025-04-30
-> -
-> -This patch is taken from Debian:
-> -https://sources.debian.org/patches/yasm/1.3.0-8/1000-x86-dir-cpu-CVE-202=
-3-29579.patch/
-> -
-> -CVE: CVE-2023-29579
-> -Upstream-Status: Submitted [https://github.com/yasm/yasm/issues/214]
-> -
-> -Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ----
-> - modules/arch/x86/x86arch.c | 5 +++--
-> - 1 file changed, 3 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/modules/arch/x86/x86arch.c b/modules/arch/x86/x86arch.c
-> -index bac11774..58327958 100644
-> ---- a/modules/arch/x86/x86arch.c
-> -+++ b/modules/arch/x86/x86arch.c
-> -@@ -165,8 +165,9 @@ x86_dir_cpu(yasm_object *object, yasm_valparamhead *=
-valparams,
-> -                 yasm_error_set(YASM_ERROR_SYNTAX,
-> -                                N_("invalid argument to [%s]"), "CPU");
-> -             else {
-> --                char strcpu[16];
-> --                sprintf(strcpu, "%lu", yasm_intnum_get_uint(intcpu));
-> -+                char strcpu[21]; /* 21 =3D ceil(log10(LONG_MAX)+1) */
-> -+                assert(8*sizeof(unsigned long) <=3D 64);
-> -+                snprintf(strcpu, sizeof(strcpu), "%lu", yasm_intnum_get=
-_uint(intcpu));
-> -                 yasm_x86__parse_cpu(arch_x86, strcpu, strlen(strcpu));
-> -             }
-> -         } else
-> diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-=
-devtools/yasm/yasm_git.bb
-> deleted file mode 100644
-> index 6ddd94621a..0000000000
-> --- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-> +++ /dev/null
-> @@ -1,40 +0,0 @@
-> -SUMMARY =3D "x86 (SSE) assembler supporting NASM and GAS-syntaxes"
-> -LICENSE =3D "MIT"
-> -HOMEPAGE =3D "http://www.tortall.net/projects/yasm/"
-> -
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Da12d8903508fb6bfd49d8d82c6170=
-dd9"
-> -
-> -DEPENDS +=3D "flex-native bison-native"
-> -PACKAGECONFIG[docs] =3D ",,xmlto-native,"
-> -
-> -PV =3D "1.3.0+git"
-> -# v1.3.0-87
-> -SRCREV =3D "121ab150b3577b666c79a79f4a511798d7ad2432"
-> -SRC_URI =3D "git://github.com/yasm/yasm.git;branch=3Dmaster;protocol=3Dh=
-ttps \
-> -           file://0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch \
-> -           file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
-> -           file://0001-bitvect-fix-build-with-gcc-15.patch \
-> -           file://CVE-2023-29579.patch \
-> -           file://CVE-2021-33464.patch \
-> -           file://CVE-2021-33456.patch \
-> -           "
-> -
-> -
-> -inherit autotools gettext python3native
-> -
-> -CACHED_CONFIGUREVARS =3D "CCLD_FOR_BUILD=3D'${CC_FOR_BUILD}'"
-> -
-> -BBCLASSEXTEND =3D "native"
-> -
-> -PARALLEL_MAKE =3D ""
-> -
-> -do_configure:prepend() {
-> -     # Don't include $CC (which includes path to sysroot) in generated h=
-eader.
-> -     sed -i -e "s/^echo \"\/\* generated \$ac_cv_stdint_message \*\/\" >=
->\$ac_stdint$"// ${S}/m4/ax_create_stdint_h.m4
-> -}
-> -
-> -CVE_STATUS_GROUPS +=3D "CVE_STATUS_HASH_UPDATE"
-> -CVE_STATUS_HASH_UPDATE =3D "CVE-2021-33454 CVE-2023-31975 CVE-2023-37732=
-"
-> -CVE_STATUS_HASH_UPDATE[status] =3D "fixed-version: patched in current gi=
-t hash"
-> -
-> -CVE_PRODUCT +=3D "tortall:yasm yasm_project:yasm"
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122221): https://lists.openembedded.org/g/openembedde=
-d-devel/message/122221
-> Mute This Topic: https://lists.openembedded.org/mt/116566260/4316185
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [y=
-oann.congal@smile.fr]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch b/meta-oe/recipes-support/hdf5/files/CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch
+index 47dc6b1ac7..6f1359744c 100644
+--- a/meta-oe/recipes-support/hdf5/files/CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch
+@@ -13,11 +13,12 @@ against the actual value as chunks are being deserialized.
+ 
+ Fixes CVE-2025-6816, CVE-2025-6856, CVE-2025-2923
+ 
+-CVE: CVE-2025-2923, CVE-2025-6816, CVE-2025-6856
++CVE: CVE-2025-2923 CVE-2025-6816 CVE-2025-6856
+ Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/29c847a43db0cdc85b01cafa5a7613ea73932675]
+ 
+ (cherry picked from commit 29c847a43db0cdc85b01cafa5a7613ea73932675)
+ Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+ ---
+  src/H5Oint.c | 17 +++++++++++------
+  1 file changed, 11 insertions(+), 6 deletions(-)
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch b/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch
+index c09ade1c4c..9d8da0a1f9 100644
+--- a/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch
+@@ -3,10 +3,11 @@ From: aled-ua <bugbuster.cc@gmail.com>
+ Date: Wed, 15 Jan 2025 15:02:25 -0600
+ Subject: [PATCH] Fix vuln OSV-2023-77 (#5210)
+ 
+-CVE: CVE-2025-6269, CVE-2025-6270, CVE-2025-6516
++CVE: CVE-2025-6269 CVE-2025-6270 CVE-2025-6516
+ Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/7f27ba8c3a8483c3d7e5e2cb21fefb2c7563422d]
+ (cherry picked from commit 7f27ba8c3a8483c3d7e5e2cb21fefb2c7563422d)
+ Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+ ---
+  src/H5Cimage.c | 13 +++++++++----
+  1 file changed, 9 insertions(+), 4 deletions(-)
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch b/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch
+index f7324f58c1..744032c18a 100644
+--- a/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch
+@@ -15,10 +15,11 @@ This PR addressed them by:
+ These changes addressed the crashes reported.  However, there is a skiplist
+ crash during the unwinding process that has to be investigated.
+ 
+-CVE: CVE-2025-6269, CVE-2025-6270, CVE-2025-6516
++CVE: CVE-2025-6269 CVE-2025-6270 CVE-2025-6516
+ Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/3914bb7f7ec7105d8bfbeb3aebd92e867cff5b70]
+ (cherry picked from commit 3914bb7f7ec7105d8bfbeb3aebd92e867cff5b70)
+ Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+ ---
+  src/H5Cimage.c | 84 ++++++++++++++++++++++++++++++++++++++------------
+  src/H5Ocont.c  |  5 +--
+-- 
+2.35.6
 
---=20
-Yoann Congal
-Smile ECS
 
