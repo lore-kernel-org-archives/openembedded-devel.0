@@ -1,264 +1,291 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7779FD1CDCE
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 04:02:32 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.34669.1764820946415114816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF8BBD1D862
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 04:33:32 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35455.1764822809599502540
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Dec 2025 20:02:26 -0800
+ Wed, 03 Dec 2025 20:33:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=nlRQeb6A;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=MSWk3ZbH;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5B40ODxo4027088
-	for <openembedded-devel@lists.openembedded.org>; Thu, 4 Dec 2025 04:02:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	43UkzFJ+q2q+3OpaKDYrpKKA8Csc0h4V+4YO5vR+lZM=; b=nlRQeb6A9l/ZTsq8
-	FLYVdCCOylubfBKJwkXSeghQarTg6Yg3vXFBgNtNZ1YKizrsmLU+rizubaIi9jVM
-	UPj8WD5DLSyegodvlav+gMKzWflLbaxnROeUk4rRA2tqBNH91OWCneqra5gtQZP4
-	mHj5L1WmpTOocU3nencPyoqceVb81WFP4PhMIVAeRawfOEojaaIuVuLBrF0Zm3z/
-	km1eIT14TKCRmZ/Yd/M9VDiEkvw6R433tq1RfAzihVfiwVLKuld/jPLLUFTmqi8u
-	jpwd45nPm2ZeMb5pNBKI/drCcI4jUhSJ0vBPJEvh++opnDpucYMKh1wzRPM5bYMF
-	doaa6w==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4atmmdaj7q-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 04:02:25 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-8823c1345c0so5433706d6.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 20:02:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=I9m/QkFK;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-786d1658793so4528607b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 20:33:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1764820944; x=1765425744; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=43UkzFJ+q2q+3OpaKDYrpKKA8Csc0h4V+4YO5vR+lZM=;
-        b=MSWk3ZbHUF/1XBcNqc8bnp1j2AvVt1iLeX2fXaMezps0ow6nwXgVMhDPzKDBe5S8yY
-         MBB16tqcsDkkPsPJA2epWT9b2xUB1dAip32w1JVmA3HjWwfLPZ379JV7H5EdwOFYll+t
-         nJzWcWGgRcZ3m81mGuiLeMZI4vg+NWaluhCUvMbyHzoZJc9DYeYumVeJdcvguHU90h+O
-         itdxtnqKym+BMhb9FdUusrdkwm84+D2V30aIRCPSbrdRd3XKus7oNrfCA/xHS31I5Baw
-         kH3d8ybzUVhnHLvGOYphjLw8trF855bi52iHpN6WidytHaIb+AfsSZSKUGriLZPRwn5Z
-         2OFw==
+        d=gmail.com; s=20230601; t=1764822809; x=1765427609; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=YhZDUKDSj+p9jEH3nEdF+67/7lfRWPoBouQKbQ8BqXg=;
+        b=I9m/QkFKaLuUytnyfDIBnu85XN1Zo3UnAVfUu2UEvzlfri6aztLcAcqj46jjM69JGq
+         IyRN0VSTig7vbUzBS089Ae+PwxsFpY0fTWNTNmmEX35OPiyIqAm3azb/TDRB1GkDtcDv
+         1poxzoAWpGUIjPYifNBigjZt0oDfv7ngeRyughMaoa9zt8S1Mnx1a0xSkhBhSNqmh0jl
+         OB0KdjwuicEJiVT1NCMD4XGQ4YLERQZs6sNAmvLp5LOK2vjGAMOch5d59lZ8Xlsh7iDN
+         Z+jSMOA11TjkZKWUSMLcvCQt01FPTpDR+a8zQQ0Sb7qcDr1w+TW9xWOn1Gqu7D95uvVH
+         4zIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764820944; x=1765425744;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=43UkzFJ+q2q+3OpaKDYrpKKA8Csc0h4V+4YO5vR+lZM=;
-        b=vyBms/MdXetTkF66DNNTXIDWCYxxyLvsXErCcDKSzdpeZKEYLynaBjJUf9H8CBD64e
-         j9nwsB2b3tSpesDp/USRi/oJTJ5TW8RcZlZp5KzgsbebvZmahSs3qerDFNXrB+SbNAeU
-         2sd362FXN2FoIV6SzwfhtldJZvOywFcOisX5reKgDRJtSLYt8PotJ0fxsclbcEGv0PlK
-         WTKzwigBPpo2aZ9jB9CX0deY9Gd18CXW+AKLbSzqQuMWSdX4q1WdK0c7eaAnwHZfIFBG
-         d/qiGWXO5S/v46yS9ZhA7NempfvEwMj6mUKEOj99cJ4GPpSCz0T6JouQycd9nV48G5Ss
-         VP9Q==
-X-Gm-Message-State: AOJu0YypUptBbQzu7RvAkIYWNThRMPvXFT3+25GQQYnJi0W7gbS8ch/m
-	MHMfpn9AK9xGlapV4kCcfhDK0On0/fhx8eNnAWHMLClY5qlTN8tsFcnUoWCKUAIkKsq+Z3vIAHi
-	ds+bhLFvMTpM5F6AJGlomuLKKFyXTHKZvoaKZSNS6CfyT974XDWZW24mzBVASHWtM7ZDxvzqo8T
-	17t+uOZQw6p6pUc9SwtY2+uGXeb3T05ZpK/NCOcajR1wSmRgt+PkczthS39sWKWAnBRvXFbA==
-X-Gm-Gg: ASbGncvcyyKsz9vzZlue/cV0epZw3e1RYQidFTpHDbFRNqB6t/IuxZ01BJ8hC+J5low
-	25/fnx+aEL7ILgMDkJIOG07pIEDh3M4GtOeqVMQ61hh4ZoX0dl1ruvQhMp980kBVm1Bw7iicCWM
-	ngW4/XNEzMhcrBBEQoKF2CQqNBjm0Sf4FHPlZkKu/y3pNa66yodwy+IZyOAGWBoRfoee4=
-X-Received: by 2002:a05:6214:528f:b0:880:5851:3c61 with SMTP id 6a1803df08f44-8882471e5ffmr28005466d6.0.1764820944424;
-        Wed, 03 Dec 2025 20:02:24 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEY0l0Q8sr3IkZGqwHo6dXRYx/XUVOhpyS10i/AHoRNm0cYwPDBnLXNgmCO4suhHwn5pI+nq/P7uyFDrJMXRCA=
-X-Received: by 2002:a05:6214:528f:b0:880:5851:3c61 with SMTP id
- 6a1803df08f44-8882471e5ffmr28005176d6.0.1764820943971; Wed, 03 Dec 2025
- 20:02:23 -0800 (PST)
+        d=1e100.net; s=20230601; t=1764822809; x=1765427609;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YhZDUKDSj+p9jEH3nEdF+67/7lfRWPoBouQKbQ8BqXg=;
+        b=IMtkUn1qh0ILq7XkG41jbH4wq2iJ+2x2dFaNv4T1D/meG7KWqzvSuXvvZ/XQigVnmT
+         CPUv0Sv4WqKNUjLTIcD0fiJJCbhopch4fKaEKscC+xOaW/kDnw5TuMHhJGDn779PBMbN
+         yKxfQ71F+QflHl+Y1jrHU0OgHFJWVOBN+sN3TYiS9PFJ+7WBrvLOo1ZIYI7gtmq3ZaQt
+         Ur5qmrVs2ca0XgShESvPq+E3bPiaNeQ8qh3uLLj3WIou7UzpjdlIQM7/Avi4d65wp65o
+         0PSs2Hxlr5PDua82QD+xwNYfuaK/vDkEXAowoLvI18/pXrIy5BQclELpGoH5gXoM67M1
+         bcTg==
+X-Gm-Message-State: AOJu0Yxp+Fq+EoN7tVL+7+3xKyhTb26N51RLVgaI56JoR2YansijT3JP
+	UgdiI7oA8RDWqSrIcpGIBWyB8sbf0m2vM1LkDcLMsso2Otvk+PkbfDB5pSPHQ9la8vvO07pu1G0
+	ePFRE147LDmPFBvt+xKPVMeXjI+MVI9Y/lBSUbe8=
+X-Gm-Gg: ASbGncus0bDKOrmI6i1m1SX0h2XP7b833GZUVdIAgxG9ptBqEFklIRB7yXZvwgtVmqI
+	h8F7jSZyKtmXb7/nGsgpcW9NzdMSTDtjI0RpTb7mXXZNJKkYE+e5/Ts6IwwmvgrXHBJrg79Tmgg
+	tHA+p392E26YmtoIu3oHyuUWiSY+e0S1FJktAahg/jnUU+Im1Ml9vJ0kMB0gKVBR6Zp4/bN7MmW
+	Bm5dZTEirHGu/MZckis02VALobBF406UGePA6ko7EwUTMXSeWqlwLiSZdyGfN09Xo3I96VomAiS
+	figl2+MIEXyTMxmFoZ+iNXnQldd2bWRF4VLwwQGONdKawPVczkg27KXXUuC4iwrkw0PY8sqHs0k
+	I1HSwauyDrzqF
+X-Google-Smtp-Source: AGHT+IHc8xLVxZlSvZyHKbVAhoztFht2AmxhNpOOm6/7sz/B512LvkTd6u8CN0RHVZViiDQd1JqaSDm6Tw6Phse70bM=
+X-Received: by 2002:a05:690c:7208:b0:783:6f8d:e7a6 with SMTP id
+ 00721157ae682-78c1890b51amr25315087b3.51.1764822808508; Wed, 03 Dec 2025
+ 20:33:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20251203212949.4046524-1-skandigraun@gmail.com> <20251203212949.4046524-7-skandigraun@gmail.com>
-In-Reply-To: <20251203212949.4046524-7-skandigraun@gmail.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 4 Dec 2025 09:32:13 +0530
-X-Gm-Features: AWmQ_bk9gNG1UxCtBaUtVA4a7YKj9YeXto3GSxeQ8dMGT6vJbGLaAnVafu-41nM
-Message-ID: <CA+s=J=yaHySJQz4O2EmkqD=r_ZsN24keObg9q8c06UHcJadcPQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 07/12] xrdp: patch CVE-2022-23482
-To: skandigraun@gmail.com
+References: <20251203221541.2247324-1-peter.marko@siemens.com>
+In-Reply-To: <20251203221541.2247324-1-peter.marko@siemens.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 3 Dec 2025 20:33:02 -0800
+X-Gm-Features: AWmQ_bkG-4LMcs2jE9E94bFBkYKO-WGNvytsar5vSSfS0mZZKX-eowFx_jCRPtc
+Message-ID: <CAMKF1so1WDamJ=kmkbAGto5FpHP67yXPi04V_jpAk7DqjoW82g@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] libcoap: upgrade 4.3.5 -> 4.3.5a
+To: peter.marko@siemens.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: RVNlsHUasnXgica9M4xrVCPQtlFNxqLO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA0MDAzMCBTYWx0ZWRfX1XjVkSLx4ORD
- DKprrjtOv18CvKdAXnc+JXnHN5LDRo4CWb9YPMmYUw+gHi2iM6aqvLUPJCadONCGT+3WzyhoLFr
- 6eDLVB4UBvOZZgBYXarU5U0lm5dIczZNe8Ah9ekBVogowrFD62Z3h8HITtptGUPeXL62tdYk5Oe
- dYp7sKL4bD2zVE45bS4pvYWfgOX+6JjqpG1j9LxFLFrsdEkoWfeoDdzSlww2agC9m+yb3aAfqHS
- qpizeXydL2ZJEkS5xI1Ht4tWgnoGtrNnNFvfDb2+/AUxorlgsHbFyEMjgwYdrXewnmILvEFsfSt
- QXVzOx4Jbp5gPfm+7B3FcHn7Q/rqLmdFd0F5TZOahQF/5eWEhtdBfl12GoLevp+OaM2PckK6wj5
- plg4rF4m+UkC5FLRuJTsnvwV3leIIw==
-X-Proofpoint-ORIG-GUID: RVNlsHUasnXgica9M4xrVCPQtlFNxqLO
-X-Authority-Analysis: v=2.4 cv=Ctays34D c=1 sm=1 tr=0 ts=693107d1 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
- a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=BYj4JOyFqgrvn8tvg9YA:9
- a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-04_01,2025-12-03_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0 lowpriorityscore=0
- clxscore=1015 priorityscore=1501 adultscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512040030
+Content-Type: multipart/alternative; boundary="00000000000097bd48064518d4cf"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 04:02:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122298
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 04:33:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122299
 
-On Thu, Dec 4, 2025 at 3:00=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
+--00000000000097bd48064518d4cf
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 3, 2025 at 2:15=E2=80=AFPM Peter Marko via lists.openembedded.o=
+rg
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+
+> From: Peter Marko <peter.marko@siemens.com>
 >
-> Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23482
+> Changelog [1]:
+>   * Fixes the following CVEs
+>     CVE-2025-59391
+>     CVE-2025-65494
+>     CVE-2025-65495
+>     CVE-2025-65496
+>     CVE-2025-65497
+>     CVE-2025-65498
+>     CVE-2025-65499
+>     CVE-2025-65500
+>     CVE-2025-65501
+>   * CVE-2025-50518 not fixed as user application error.
+>   * Support for Mbed TLS 3.6.3.
+>   * Support for RIOT update changes.
+>   * Fixes for later CI environment builds.
+>   * Critical reported bugs fixed.
 >
-> Pick the patch that mentions this vulnerability explicitly.
+> Add tag to SRC_URI for hash verification.
 >
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> License-Update: copyright years refreshed [2]
+>
+> [1] https://github.com/obgm/libcoap/blob/v4.3.5a/ChangeLog
+> [2]
+> https://github.com/obgm/libcoap/commit/993c12ac92ce6a24a409924fe78a5c0fe7=
+246699
+>
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
 > ---
->  .../xrdp/xrdp/CVE-2022-23482.patch            | 69 +++++++++++++++++++
->  meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  1 +
->  2 files changed, 70 insertions(+)
->  create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patc=
-h
+>  .../libcoap/{libcoap_4.3.5.bb =3D> libcoap_4.3.5a.bb}         | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-devtools/libcoap/{libcoap_4.3.5.bb =3D>
+> libcoap_4.3.5a.bb} (93%)
 >
-> diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch b/met=
-a-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
-> new file mode 100644
-> index 0000000000..5c22701d35
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
-> @@ -0,0 +1,69 @@
-> +From bb9766c79f24a0238644e273bbcdcb2c9d2df1bf Mon Sep 17 00:00:00 2001
-> +From: matt335672 <30179339+matt335672@users.noreply.github.com>
-> +Date: Wed, 7 Dec 2022 11:05:46 +0000
-> +Subject: [PATCH] CVE-2022-23482
-> +
-> +Check minimum length of TS_UD_CS_CORE message
-> +
-> +CVE: CVE-2022-23482
-> +Upstream-Status: Backport[https://github.com/neutrinolabs/xrdp/commit/bb=
-9766c79f24a0238644e273bbcdcb2c9d2df1bf]
+> diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb
+> b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+> similarity index 93%
+> rename from meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb
+> rename to meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+> index a4e5f5ca46..0a8dacc377 100644
+> --- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5.bb
+> +++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+> @@ -5,12 +5,12 @@ RF range, memory, bandwith, or network packet sizes."
+>  HOMEPAGE =3D "https://libcoap.net/"
+>
+>  LICENSE =3D "BSD-2-Clause & BSD-3-Clause"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D9aa68c0f6785376aa8ec7f4f1aa6a=
+e3c"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D05d17535846895e23ea4c79b16a9e=
+904"
+>
+> -SRC_URI =3D "git://github.com/obgm/libcoap.git;branch=3Dmain;protocol=3D=
+https \
+> +SRC_URI =3D "git://
+> github.com/obgm/libcoap.git;branch=3Dmain;protocol=3Dhttps;tag=3Dv${PV}
+> <http://github.com/obgm/libcoap.git;branch=3Dmain;protocol=3Dhttps;tag=3D=
+v$%7BPV%7D>
+> \
+>
 
-This causes yocto-check-layer to fail for this and other patches in
-this series with same issue:
+This fails to fetch because the commit it not on main branch but
+on release-4.3.5-patches branch
+see
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/4396669/raw_inlin=
+e
 
-AssertionError: 9 !=3D 0 : Found following patches with malformed or
-missing upstream status:
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23481.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23483.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23480-2.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23468.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23479.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23480-1.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23478.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23477.patch
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes=
--support/xrdp/xrdp/CVE-2022-23482.patch
+I think bitbake -ccleanall <recipe> && bitbake <recipe>
 
+should reveal it
 
-
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + libxrdp/xrdp_sec.c | 23 ++++++++++++++++++++++-
-> + 1 file changed, 22 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/libxrdp/xrdp_sec.c b/libxrdp/xrdp_sec.c
-> +index 691d4f04f3..084fca6b8d 100644
-> +--- a/libxrdp/xrdp_sec.c
-> ++++ b/libxrdp/xrdp_sec.c
-> +@@ -1946,6 +1946,17 @@ xrdp_sec_send_fastpath(struct xrdp_sec *self, str=
-uct stream *s)
-> + static int
-> + xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec *self, struct stream =
-*s)
-> + {
-> ++#define CS_CORE_MIN_LENGTH \
-> ++    (\
-> ++     4 +            /* Version */ \
-> ++     2 + 2 +        /* desktopWidth + desktopHeight */ \
-> ++     2 + 2 +        /* colorDepth + SASSequence */ \
-> ++     4 +            /* keyboardLayout */ \
-> ++     4 + 32 +       /* clientBuild + clientName */ \
-> ++     4 + 4 + 4 +    /* keyboardType + keyboardSubType + keyboardFunctio=
-nKey */ \
-> ++     64 +           /* imeFileName */ \
-> ++     0)
-> ++
-> +     int version;
-> +     int colorDepth;
-> +     int postBeta2ColorDepth;
-> +@@ -1956,7 +1967,12 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec=
- *self, struct stream *s)
-> +
-> +     UNUSED_VAR(version);
-> +
-> +-    /* TS_UD_CS_CORE requiered fields */
-> ++    /* TS_UD_CS_CORE required fields */
-> ++    if (!s_check_rem_and_log(s, CS_CORE_MIN_LENGTH,
-> ++                             "Parsing [MS-RDPBCGR] TS_UD_CS_CORE"))
-> ++    {
-> ++        return 1;
-> ++    }
-> +     in_uint32_le(s, version);
-> +     in_uint16_le(s, self->rdp_layer->client_info.width);
-> +     in_uint16_le(s, self->rdp_layer->client_info.height);
-> +@@ -1994,6 +2010,10 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec=
- *self, struct stream *s)
-> +               clientName);
-> +
-> +     /* TS_UD_CS_CORE optional fields */
-> ++    if (!s_check_rem(s, 2))
-> ++    {
-> ++        return 0;
-> ++    }
-> +     in_uint16_le(s, postBeta2ColorDepth);
-> +     LOG_DEVEL(LOG_LEVEL_TRACE, "Received [MS-RDPBCGR] TS_UD_CS_CORE "
-> +               "<Optional Field> postBeta2ColorDepth %s",
-> +@@ -2138,6 +2158,7 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec =
-*self, struct stream *s)
-> +               "<Optional Field> desktopOrientation (ignored)");
-> +
-> +     return 0;
-> ++#undef CS_CORE_MIN_LENGTH
-> + }
-> +
-> + /**********************************************************************=
-*******/
-> diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb b/meta-oe/recipe=
-s-support/xrdp/xrdp_0.9.20.bb
-> index ff14cf8397..29245f3747 100644
-> --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-> @@ -23,6 +23,7 @@ SRC_URI =3D "https://github.com/neutrinolabs/${BPN}/rel=
-eases/download/v${PV}/${BPN
->             file://CVE-2022-23480-1.patch \
->             file://CVE-2022-23480-2.patch \
->             file://CVE-2022-23481.patch \
-> +           file://CVE-2022-23482.patch \
+            file://run-ptest \
 >             "
+> -SRCREV =3D "7cf7465b784baded4de183290c547d582becfd28"
+> +SRCREV =3D "e3fdcdcfbd1588754fe9dd4b754ac9397260f0f9"
 >
->  SRC_URI[sha256sum] =3D "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d33=
-02b0c47653277abb"
+>
+>  inherit autotools manpages pkgconfig ptest
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#122285): https://lists.openembedded.org/g/openembedde=
-d-devel/message/122285
-> Mute This Topic: https://lists.openembedded.org/mt/116602085/3616702
+> View/Reply Online (#122293):
+> https://lists.openembedded.org/g/openembedded-devel/message/122293
+> Mute This Topic: https://lists.openembedded.org/mt/116602955/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
+>
+
+--00000000000097bd48064518d4cf
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 3, =
+2025 at 2:15=E2=80=AFPM Peter Marko via <a href=3D"http://lists.openembedde=
+d.org">lists.openembedded.org</a> &lt;peter.marko=3D<a href=3D"mailto:sieme=
+ns.com@lists.openembedded.org">siemens.com@lists.openembedded.org</a>&gt; w=
+rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
+x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Pete=
+r Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" target=3D"_blank">pe=
+ter.marko@siemens.com</a>&gt;<br>
+<br>
+Changelog [1]:<br>
+=C2=A0 * Fixes the following CVEs<br>
+=C2=A0 =C2=A0 CVE-2025-59391<br>
+=C2=A0 =C2=A0 CVE-2025-65494<br>
+=C2=A0 =C2=A0 CVE-2025-65495<br>
+=C2=A0 =C2=A0 CVE-2025-65496<br>
+=C2=A0 =C2=A0 CVE-2025-65497<br>
+=C2=A0 =C2=A0 CVE-2025-65498<br>
+=C2=A0 =C2=A0 CVE-2025-65499<br>
+=C2=A0 =C2=A0 CVE-2025-65500<br>
+=C2=A0 =C2=A0 CVE-2025-65501<br>
+=C2=A0 * CVE-2025-50518 not fixed as user application error.<br>
+=C2=A0 * Support for Mbed TLS 3.6.3.<br>
+=C2=A0 * Support for RIOT update changes.<br>
+=C2=A0 * Fixes for later CI environment builds.<br>
+=C2=A0 * Critical reported bugs fixed.<br>
+<br>
+Add tag to SRC_URI for hash verification.<br>
+<br>
+License-Update: copyright years refreshed [2]<br>
+<br>
+[1] <a href=3D"https://github.com/obgm/libcoap/blob/v4.3.5a/ChangeLog" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/obgm/libcoap/blob/v4.3=
+.5a/ChangeLog</a><br>
+[2] <a href=3D"https://github.com/obgm/libcoap/commit/993c12ac92ce6a24a4099=
+24fe78a5c0fe7246699" rel=3D"noreferrer" target=3D"_blank">https://github.co=
+m/obgm/libcoap/commit/993c12ac92ce6a24a409924fe78a5c0fe7246699</a><br>
+<br>
+Signed-off-by: Peter Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" t=
+arget=3D"_blank">peter.marko@siemens.com</a>&gt;<br>
+---<br>
+=C2=A0.../libcoap/{<a href=3D"http://libcoap_4.3.5.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">libcoap_4.3.5.bb</a> =3D&gt; <a href=3D"http://libcoap_4.3=
+.5a.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5a.bb</a>}=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0| 6 +++---<br>
+=C2=A01 file changed, 3 insertions(+), 3 deletions(-)<br>
+=C2=A0rename meta-networking/recipes-devtools/libcoap/{<a href=3D"http://li=
+bcoap_4.3.5.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5.bb</a> =
+=3D&gt; <a href=3D"http://libcoap_4.3.5a.bb" rel=3D"noreferrer" target=3D"_=
+blank">libcoap_4.3.5a.bb</a>} (93%)<br>
+<br>
+diff --git a/meta-networking/recipes-devtools/libcoap/<a href=3D"http://lib=
+coap_4.3.5.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5.bb</a> b/=
+meta-networking/recipes-devtools/libcoap/<a href=3D"http://libcoap_4.3.5a.b=
+b" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5a.bb</a><br>
+similarity index 93%<br>
+rename from meta-networking/recipes-devtools/libcoap/<a href=3D"http://libc=
+oap_4.3.5.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5.bb</a><br>
+rename to meta-networking/recipes-devtools/libcoap/<a href=3D"http://libcoa=
+p_4.3.5a.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5a.bb</a><br>
+index a4e5f5ca46..0a8dacc377 100644<br>
+--- a/meta-networking/recipes-devtools/libcoap/<a href=3D"http://libcoap_4.=
+3.5.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5.bb</a><br>
++++ b/meta-networking/recipes-devtools/libcoap/<a href=3D"http://libcoap_4.=
+3.5a.bb" rel=3D"noreferrer" target=3D"_blank">libcoap_4.3.5a.bb</a><br>
+@@ -5,12 +5,12 @@ RF range, memory, bandwith, or network packet sizes.&quot=
+;<br>
+=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://libcoap.net/" rel=3D"noreferrer=
+" target=3D"_blank">https://libcoap.net/</a>&quot;<br>
+<br>
+=C2=A0LICENSE =3D &quot;BSD-2-Clause &amp; BSD-3-Clause&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D9aa68c0f6785376aa8ec7f4f1a=
+a6ae3c&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D05d17535846895e23ea4c79b16=
+a9e904&quot;<br>
+<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://github.com/obgm/libcoap.git;bran=
+ch=3Dmain;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.com=
+/obgm/libcoap.git;branch=3Dmain;protocol=3Dhttps</a> \<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/obgm/libcoap.git;bran=
+ch=3Dmain;protocol=3Dhttps;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=3D"_=
+blank">github.com/obgm/libcoap.git;branch=3Dmain;protocol=3Dhttps;tag=3Dv${=
+PV}</a> \<br></blockquote><div><br></div><div>This fails to fetch because t=
+he commit it not on main branch but on=C2=A0release-4.3.5-patches branch</d=
+iv><div>see=C2=A0</div><div><a href=3D"https://autobuilder.yoctoproject.org=
+/valkyrie/api/v2/logs/4396669/raw_inline">https://autobuilder.yoctoproject.=
+org/valkyrie/api/v2/logs/4396669/raw_inline</a></div><div><br></div><div>I =
+think bitbake -ccleanall=C2=A0&lt;recipe&gt; &amp;&amp; bitbake &lt;recipe&=
+gt;</div><div><br></div><div>should reveal it</div><div><br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://run-ptest \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+-SRCREV =3D &quot;7cf7465b784baded4de183290c547d582becfd28&quot;<br>
++SRCREV =3D &quot;e3fdcdcfbd1588754fe9dd4b754ac9397260f0f9&quot;<br>
+<br>
+<br>
+=C2=A0inherit autotools manpages pkgconfig ptest<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122293): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122293" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122293</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116602955/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116602955/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000097bd48064518d4cf--
 
