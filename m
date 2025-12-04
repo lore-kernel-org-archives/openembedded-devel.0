@@ -1,92 +1,182 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0851D29FB1
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 19:15:59 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.52384.1764875749597937155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECE60D2A521
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 19:54:59 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.53057.1764878095479049009
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 11:15:49 -0800
+ Thu, 04 Dec 2025 11:54:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IhwWS5FI;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47795f6f5c0so9318525e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:15:49 -0800 (PST)
+ dkim=pass header.i=@smile.fr header.s=google header.b=mKfp8vEi;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4775ae77516so15269415e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764875748; x=1765480548; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=2IFWHix6LsG3lprGDCuMKXnLUSnOtjB+x3gAg8qYw0Y=;
-        b=IhwWS5FIcAJLuRyzTnQJlCDNyGX+6TUqyUswhUj0ZIiAAcC5Pk9KJgW9baAoGPuQEi
-         xjzciDc//jPsZC+xeRdlZc9It13TsiDWsb75SC6f20+o7PJrFuQ53lfn1JPo8B5NrDQQ
-         9jCdjgNkuyMVNO/LZtLQxyjdJRnMr2/9YY6hdPPGsHnTK7EPbAIWEjntmC0EnRa6RwKU
-         EnmYVJrKhbYEeT9kuq7JmgK4fLIAgEoYXfTOjclipHe0C0SzJYpAM2HJCCJB8gIk0WOv
-         GrtVl7tgMtgEbqqVfML3TgyefoKWyq/jS+98B1vlWTyhP2AwjTbA6g4DCChDk3AiNSt7
-         IlDg==
+        d=smile.fr; s=google; t=1764878094; x=1765482894; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=bueAQHi4TsymY53QYgriLH4P7midKWsEW9B9CujDIYI=;
+        b=mKfp8vEi5LaxMf3Vgns61cIQhmebJ2BEMwws2Rp0MgJ/71zrqOrSzEfAjHzimyztPF
+         OHR+p8lt2urjl5G7DZpvNA71UZtwrdACE2G4sju/UIU9OY3kzyPy3elu6Y9H7F4BgofZ
+         SVqnd67vitsRFwmmrgpqtlQk/6E3QQ4jgtsE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764875748; x=1765480548;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=2IFWHix6LsG3lprGDCuMKXnLUSnOtjB+x3gAg8qYw0Y=;
-        b=rpGbe7URumB/FV7eJ6eL3gcKzetljFGScQZIKIoGK4bhJrCa/r19iLphSVVYlxe6T1
-         pVVFNSbfpRQ/88j5UzrZmQo49M1F0HZ9X4duGrKxERi7wp8+b0urF5qXdjQnY+Lj30f5
-         PuNc8FDVJ0fE2uT4sPbowgpzIqNMJM4V6Kj0pAvSf8topAqrPsEvjfmWh/vxCgC2CY/R
-         jgCBo90a53u0rdGJpd+jk2UVhi+at96LOhj+0Qvqto++OfrOXDHAY2pG/aPc324nZIze
-         fHAMlNjHQwg78/0w+pY8zl92fSewIerzVQX4Vlt91ZX+nW8ZWF058s1GoFaWc1OaqlvX
-         z3AA==
-X-Gm-Message-State: AOJu0YxOaHCaZ6DynGPu7nxvBp88iq0UnLoE9KYbUxUrOQGiH9OWNpQi
-	rR3rITskNgq4LCnv4nnEEHREjI/MPmiqRHHDB2nhRKd+cVmSjbXaBj/B
-X-Gm-Gg: ASbGncvFIpk12pkk8tQfePVeNSdJuEMieO//usq4nwRmqUT+lUYbiOfA51ZOR8HOurB
-	5nZ7IYd04x5Bkwy5ZhiLfWiOH5sUh2ehjaO3ree2jSkfKxcaUR2ISsW1f2Awq5oNmi9JZW7STRN
-	DUWu+j4hswJ+pPWr/BYM1gv9mvg9MRlKBJflLCwEwv4Vj/PBjMlfYmvJHEWBv+GEwcJ9ZPRGwqm
-	WJbVeSifeNN3o11eL7RMj8YObfA8WBpksa6umUg4l5pvxu8LRmjfEOQOGIEL7cibbrtPYVlgREA
-	V/3ICM19lm1P/5bn5RXi5G+NDGq2maxGwPTBCE4//w5R3s/Fb7aIBB3mb0jZoyItx/QUVep6N5O
-	h6+98LwCGwDcJrRGhuAq3IbwuBLGySy6eZyXEkw0j8Au+X1sVrwLGihjIlCcbj1n0SZ2UpkmgxV
-	7zp/8d2mIKrVxrle09CnM=
-X-Google-Smtp-Source: AGHT+IEo5nhSVbmeTxh0CgpZAoyijeuC8qaDzWz6WfWDS7zbxgObN44joZVDKiuLb1QJ+WO0K8u4UQ==
-X-Received: by 2002:a05:600c:1390:b0:477:a3f9:fda5 with SMTP id 5b1f17b1804b1-4792aef1a50mr62568605e9.9.1764875747735;
-        Thu, 04 Dec 2025 11:15:47 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-479310a6dc7sm43403895e9.3.2025.12.04.11.15.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 04 Dec 2025 11:15:47 -0800 (PST)
-Message-ID: <ca7e60de-1fc2-465b-bcf0-c7abd15179fc@gmail.com>
-Date: Thu, 4 Dec 2025 20:15:46 +0100
+        d=1e100.net; s=20230601; t=1764878094; x=1765482894;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bueAQHi4TsymY53QYgriLH4P7midKWsEW9B9CujDIYI=;
+        b=DSGcT/fFYbWgQNvCcFW4ounldvxowA6z99QamT+u7E9C5I3wgFBUVXaBF9fzLN/ItN
+         ItSOLk/gU7SCquOAnPlzDK7Z3BrnujgqsrPeNjAcJOkayJqd7V+FgITJQZ+HrZCIv7wr
+         8b3WZdWCMNdxT/mXIT3mhILP7ACTztBjrTcZ7WKDPfXMSLVy4yKytzNs9fHfmcnEbejk
+         tFmb/9jnj/IZUbzFjhkXfPeEQaZr8+OouKjN+turi7wHY3Fq1wWXLOGYQD59nZa+6xRs
+         p+S/LURMSVKgj3EGP1kElcTIFHQIgpMuuIUFz4oW7g+qikNqKOKHQDFcbA+B5Hc2v5Vl
+         DXjQ==
+X-Gm-Message-State: AOJu0YzirvBCqdCFyTImw3TW1dCPRPBsERtwbUrSprN6uEUdT9y5pD70
+	9deI0bdwNEMrVmiiKO/f59yuyFc2IwP/OriZNX2iCZBDhalxPZexfulohNIlJkZZzC0X1KkEXeE
+	Arj8jYQzEdvCWRshPqSdrvHdehLjg7wYEHBX4ffcXRQ==
+X-Gm-Gg: ASbGnctBz/4sTwPD2PDA7nKEvztlIgL/SvZyCF3GLLBweSlBksOjXwfzi0+QVnoJ1hD
+	a/gZa3eDvp3MmOo29PxBymsxRB6ORBFIFUWWT5EQee04AJRZOtL/Ngva+rxExjB4+eGEJ0I3o+S
+	yrifx6Qrn5JBPbRhMiNAhrwE9pg7oK6RYz8KSIiXxFdfqcx7fIhnpijhXOx/PvVPXi2/DGUBrdH
+	lR0HSGucGj8YNpLQif2vQo73TMgvlNItQGdta9WsEksVesbKNCg+fJKAXh2FkOaEcoQL+DdvGPM
+	pWQKrWu93Av/UXNRtwkPtYZrkf83
+X-Google-Smtp-Source: AGHT+IFQMdYU5nA4e9OZSnKVbAVbbKcIb2WOckvYTlwA7hhW1ST2w3qRtj9zN8btEA6nZEN0rMJYoRdLowAxy0xJxtk=
+X-Received: by 2002:a05:600c:1c0c:b0:477:5cc6:7e44 with SMTP id
+ 5b1f17b1804b1-4792aeeb9c4mr84157275e9.11.1764878093544; Thu, 04 Dec 2025
+ 11:54:53 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH v2] yasm: drop recipe
-To: Yoann Congal <yoann.congal@smile.fr>
-Cc: openembedded-devel@lists.openembedded.org,
- Ross Burton <ross.burton@arm.com>, Yogesh Tyagi <yogesh.tyagi@intel.com>
-References: <20251201220957.2629951-1-skandigraun@gmail.com>
- <CAMSfU+6MEFLLqzQdYgt0W12bwenvw-B3JY0zpcHXrDrdPOfoEQ@mail.gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CAMSfU+6MEFLLqzQdYgt0W12bwenvw-B3JY0zpcHXrDrdPOfoEQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20251204191552.1203671-1-skandigraun@gmail.com>
+In-Reply-To: <20251204191552.1203671-1-skandigraun@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Thu, 4 Dec 2025 20:54:42 +0100
+X-Gm-Features: AWmQ_bl53rOwnTJywSbEceOvae1YGOZFsX0mQf52rriXFw36x_0OkoQbRZfVoPY
+Message-ID: <CAMSfU+4b8Q9mccmoLqXWLDyDa_-YJUF_uDA8CR1TP6YUu3YoPw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] yasm: drop from packagegroup also
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000d6801d064525b383"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 19:15:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122328
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 19:54:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122330
 
-On 12/4/25 17:52, Yoann Congal wrote:
-> Le lun. 1 déc. 2025 à 23:10, Gyorgy Sarvari via lists.openembedded.org
-> <skandigraun=gmail.com@lists.openembedded.org> a écrit :
->> Yasm was introduced as a rewrite of nasm, however its commits
->> have dried up over the years, while its unmitigated CVEs keep
->> piling up. Also, nasm is a healthier project with regular
->> contributions still.
->>
->> There are no known recipes depending on yasm.
->>
->> Let's remove it.
-> Can you also remove it from the package groups?
+--000000000000d6801d064525b383
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Le jeu. 4 d=C3=A9c. 2025 =C3=A0 20:15, Gyorgy Sarvari via lists.openembedde=
+d.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+
+> It should have been done when the recipe was dropped, but it was missed.
 >
-Sure
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>
+
+Thank you!
+
+---
+>  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> index d7d6c08693..d873a7b817 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> @@ -294,7 +294,6 @@ RDEPENDS:packagegroup-meta-oe-devtools =3D "\
+>      xerces-c-samples \
+>      xmlrpc-c \
+>      yajl \
+> -    yasm \
+>  "
+>  RDEPENDS:packagegroup-meta-oe-devtools:append:x86 =3D " cpuid pahole"
+>  RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 =3D " cpuid pahole
+> pcimem"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122329):
+> https://lists.openembedded.org/g/openembedded-devel/message/122329
+> Mute This Topic: https://lists.openembedded.org/mt/116617941/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000d6801d064525b383
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><br><div class=3D"gmail_quote gmail_quote_co=
+ntainer"><div dir=3D"ltr" class=3D"gmail_attr">Le jeu. 4 d=C3=A9c. 2025 =C3=
+=A0 20:15, Gyorgy Sarvari via <a href=3D"http://lists.openembedded.org">lis=
+ts.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists=
+.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; a =C3=A9crit=C2=
+=A0:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">It should h=
+ave been done when the recipe was dropped, but it was missed.<br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank" rel=3D"noreferrer">skandigraun@gmail.com</a>&gt;<br></blo=
+ckquote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">Thank you=
+!</div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_qu=
+ote gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">
+---<br>
+=C2=A0meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-met=
+a-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta-=
+oe.bb</a> | 1 -<br>
+=C2=A01 file changed, 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegr=
+oup-meta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegrou=
+p-meta-oe.bb</a> b/meta-oe/recipes-core/packagegroups/<a href=3D"http://pac=
+kagegroup-meta-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packa=
+gegroup-meta-oe.bb</a><br>
+index d7d6c08693..d873a7b817 100644<br>
+--- a/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-met=
+a-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta-=
+oe.bb</a><br>
++++ b/meta-oe/recipes-core/packagegroups/<a href=3D"http://packagegroup-met=
+a-oe.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">packagegroup-meta-=
+oe.bb</a><br>
+@@ -294,7 +294,6 @@ RDEPENDS:packagegroup-meta-oe-devtools =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0xerces-c-samples \<br>
+=C2=A0 =C2=A0 =C2=A0xmlrpc-c \<br>
+=C2=A0 =C2=A0 =C2=A0yajl \<br>
+-=C2=A0 =C2=A0 yasm \<br>
+=C2=A0&quot;<br>
+=C2=A0RDEPENDS:packagegroup-meta-oe-devtools:append:x86 =3D &quot; cpuid pa=
+hole&quot;<br>
+=C2=A0RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 =3D &quot; cpuid=
+ pahole pcimem&quot;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122329): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122329" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">https://lists.openembedded.org/g/openembedded-devel/message/122329</a=
+><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116617941/431=
+6185" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
+edded.org/mt/116617941/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
+openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@=
+smile.fr" target=3D"_blank" rel=3D"noreferrer">yoann.congal@smile.fr</a>]<b=
+r>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div></div>
+
+--000000000000d6801d064525b383--
 
