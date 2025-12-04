@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E1DD1D88A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2845D1D88F
 	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 07:56:43 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.38416.1764835001964821257
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.38234.1764835002620484059
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 03 Dec 2025 23:56:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XsOGCfoV;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47774d3536dso5827675e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 23:56:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f/g3JM5R;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-42e2b90ad22so264231f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Dec 2025 23:56:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764835000; x=1765439800; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764835001; x=1765439801; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LCJ3jEbfEkYMjxyOgPGINNeFdo0g0y2SksI96euDRxw=;
-        b=XsOGCfoVuGmif2+amtg1V6kFezNDXaVA6tHKEC7f2dNBJ583OFIiPlDiqQIgxiw5bW
-         M9HciGNJFUK/QTj0N/vqiZdoPthoZucPPG22uquzRfRwlAq3vEsZy9Y5olMOkbPxfnjy
-         DrOF7O0MgzaNm1S1xv8pgpfPG4NeWspZNFwacW6lLHPlk8RXRfxeSo3aakL/gAEPrEbH
-         njdHPqNAhQP/Rq8bb61BVxmm+suXz5bof2YbSBu+REKLfwPY3N6JZq+3Qq0BdkMDO1v8
-         qa9LAJZQdUe72dY+lBJLc9ZVRhpcWnG0+IONKHGn+JEkrFMv4cfxAFlXa356e81ayjxo
-         5y2Q==
+        bh=KA8XjBRto44Zu9VVyVFytZ8S7rQDQBX6T8Rf6p7yCeY=;
+        b=f/g3JM5RBUtyTNW3j4pFjmxfgrPY1Ti+duUJP09h3dUhNAcZugBliBI3VTU2f41KOF
+         DDQ5NW11MOc5njYcckA6dGX8dkyowtzZYPp8hqj7WpXpl+RSvkS0zCl+lh23PP+/tRgN
+         So5ZYKgDVoDW6Ng65pIcUI9ty2r4bybt/UqwSzlsdokwExsQDWJIYXAZYO0v3jXRXeMH
+         iiGEB2j4O4/qHBcb5He1+SOWNwQL+lVHtkD17tQUJ3A/04o8YGrJadPDYbRHiUWg0W19
+         xoWnUzxO+15QfIrtkl94SDAG+32DhJFCL22Ke81KfjDuSFky0HtdBdwhYFPHrzoHolJJ
+         IFdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764835000; x=1765439800;
+        d=1e100.net; s=20230601; t=1764835001; x=1765439801;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=LCJ3jEbfEkYMjxyOgPGINNeFdo0g0y2SksI96euDRxw=;
-        b=hkqLPrjUQqEwAxkyOILiSyh1HFYuoHLLTvni5yfToYDITXgIQFEnZ6FpxPgm0t0Shc
-         2ygVNY+y7XJgmLn/qBZ7/BmsWE16oKm1WpsqtSOKA0TeqwwqJPpf05lM4aZShFN5Kktq
-         33t0Mj+LOVV+4vmCxnThlNA3EgoKKP3u7m4egjcejmBU66wtphbwvC9NghcKe55RB38m
-         NeTejl0EY2XVoxvNcjdgU5yO7/QckefdPCGC3O2hNbyfM4gp61RGt0G46PX0RlT+/LSx
-         ICKMWgL+CVijT0MxiqPjsfkiJk4d98lNHSODSA2js+RKb2wQcmF3TlSS12pKL0gXs9z6
-         ZU9A==
-X-Gm-Message-State: AOJu0Yyl0eHfwwsI0re0WMRhZFci4mFt26LmVOewBqVS2pCSh+OeNKUA
-	XBWYb5wCTP/XSLRtsZ/juCSYQZ9zFZYKVrwcNaCDna7tiG7QLNSpqbsmi7SK/w==
-X-Gm-Gg: ASbGncvISy3QFNtVRNttWW2A9qCXnARqKRSDRvdnOZgOYrtdRWcIjZojZmV6u9123PZ
-	YDakLVwtPcYI5qIkMdywkNjQDVixdedMBZGOSAuSBH8reYHIeYUYIL1BfoGuDXQplYNZUgfyOYG
-	dU+6CViLTHp64zLsokHb4iY7eTrD+wXK2M3vXqfIrEPR1xW10DbN/8VabpuJFOfZH7pT41aYZLL
-	jTFyk1SolZHsb4jh273e4P21STqWeMej53sPjPkZvmHRmA8MIS7W0bx7BNUqOz+i36U9or1B2p6
-	b2sTRH5tciWwFim/8ol3neP/auaMeC1/H7GUnBg9qUGPx1bg64orbKVtaS/+2NAH5QTG/3BrdEt
-	Kb9gI0PEfhKdvgktWpaw5GM41OXH5C1wlq6trNsgY8C+/GePSmTt3WuR3CRcOJjAUIZYWkzRJpN
-	8uuA2LOnNR
-X-Google-Smtp-Source: AGHT+IHNNa8SuNXPXG4yQjix+gjvXa8HIRs8hNFeEfZ7oH7BpyONyLbaaCsjeNmoYrZf060QE/1/lw==
-X-Received: by 2002:a05:600c:2f97:b0:477:9a61:fd06 with SMTP id 5b1f17b1804b1-4792eb1a02emr15057155e9.8.1764835000256;
+        bh=KA8XjBRto44Zu9VVyVFytZ8S7rQDQBX6T8Rf6p7yCeY=;
+        b=gaBjIK8634vay7I/RM4e83bB/3tfQn4SWM3DwtZ5bQt4ATwvQEOChvoWVpDlNkLwKI
+         WEUNHFQfx1xq+zrLXSy2G4SUURehF1706YLmJkm+gAdELa47rLGB7iSr+6EU3w6ZvyLb
+         kF0XZKNHrr1NrdkevornYOLYYnPDBx3IAvr6Qc3s+VEuFb5lDLDsq4qw0aBViF1Swy8d
+         9NLJNwxEIXr/KCIbbdCi7Ikj5S0RBf56y6FriyAu+kzPf3Bo8KSubnLIJqiZfSqaECPG
+         NVCrNkptdKJOv5p0a5jXO41XRopV+lBmFurIW8pCHFOAHh42kLUtIapSH2jrWCwV6LP9
+         3iLg==
+X-Gm-Message-State: AOJu0YyBgrKaiy0plxx8+lkUg0QtZPp4Y4PpcigKAN0k4qXSg+aPulDL
+	I/44nvFp8QWXYA7HniuVIxePzgEn0TzLZY+mZooHUutqxXgaeLJBeIbiN4Vuxg==
+X-Gm-Gg: ASbGncviSi2LIhtNkuyXh36IlN129UTJ+7rfIDPKAe9t57T8HpaQrdO1SUzMU/0DUth
+	T95VopXaO6ZG8k1qthxFynJp0r+9TyIUGJt6uS4d6xcOvbAX7V4LqHQhjgI87U2IlKFWyv5njQf
+	dZY8LC5oymqLQN38X5Mc+jZtFNEWZJ+XNukrBJhwH2cxrHE+jUG53V5H5TgxBOZWRE28VQ0Rnrd
+	IwhtCm9hu9DNmy2AojDdFn+L+vxN7e3Jzrb+UO86C3qPww3yWQRMZS4rbXtlfjiz9If917knh5h
+	Jf03oAzUZsk/02rD6SvhyUK2Wihjw9hYQQeFqa15hQ5crH8/OkY0MHN7wNamRUCsbBpv2XCq+it
+	2ozeRZqQA53RDMtFAIYlTWgQWwppkZhDIiC+A1EI5VPkxFYC1fTA/XcpnpQijK/mRiX08Mvlw2+
+	cHQAf2OCVFWKIsOnC16l8=
+X-Google-Smtp-Source: AGHT+IETESwCg/KV5Uk+awwaGsMPXDJqbFAvXDjAsytMCw+s/1v/UVkUsOF7HirM3a4MTE2ECKQksg==
+X-Received: by 2002:a05:6000:1887:b0:42b:2f90:bd05 with SMTP id ffacd0b85a97d-42f731c3290mr4812598f8f.45.1764835000871;
         Wed, 03 Dec 2025 23:56:40 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7d331e29sm1730883f8f.32.2025.12.03.23.56.39
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7d331e29sm1730883f8f.32.2025.12.03.23.56.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Dec 2025 23:56:39 -0800 (PST)
+        Wed, 03 Dec 2025 23:56:40 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH v2 07/12] xrdp: patch CVE-2022-23482
-Date: Thu,  4 Dec 2025 08:56:30 +0100
-Message-ID: <20251204075635.1088007-7-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH v2 08/12] xrdp: patch CVE-2022-23483
+Date: Thu,  4 Dec 2025 08:56:31 +0100
+Message-ID: <20251204075635.1088007-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251204075635.1088007-1-skandigraun@gmail.com>
 References: <20251204075635.1088007-1-skandigraun@gmail.com>
@@ -68,9 +68,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 07:56:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122309
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122310
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23482
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23483
 
 Pick the patch that mentions this vulnerability explicitly.
 
@@ -79,95 +79,91 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 
 v2: fix upstream-sattus formatting
 
- .../xrdp/xrdp/CVE-2022-23482.patch            | 69 +++++++++++++++++++
+ .../xrdp/xrdp/CVE-2022-23483.patch            | 65 +++++++++++++++++++
  meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch
 new file mode 100644
-index 0000000000..ef99baa8cf
+index 0000000000..7172a8264c
 --- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
-@@ -0,0 +1,69 @@
-+From bb9766c79f24a0238644e273bbcdcb2c9d2df1bf Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch
+@@ -0,0 +1,65 @@
++From 35cca701c753db65d3c05b7ea4fff9bd09e76661 Mon Sep 17 00:00:00 2001
 +From: matt335672 <30179339+matt335672@users.noreply.github.com>
-+Date: Wed, 7 Dec 2022 11:05:46 +0000
-+Subject: [PATCH] CVE-2022-23482
++Date: Wed, 7 Dec 2022 10:21:41 +0000
++Subject: [PATCH] CVE-2022-23483
 +
-+Check minimum length of TS_UD_CS_CORE message
++Sanitise channel data being passed from application
 +
-+CVE: CVE-2022-23482
-+Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/bb9766c79f24a0238644e273bbcdcb2c9d2df1bf]
++Avoids OOB read if the size field is incorrect.
++
++CVE: CVE-2022-23483
++Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/35cca701c753db65d3c05b7ea4fff9bd09e76661]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ libxrdp/xrdp_sec.c | 23 ++++++++++++++++++++++-
-+ 1 file changed, 22 insertions(+), 1 deletion(-)
 +
-+diff --git a/libxrdp/xrdp_sec.c b/libxrdp/xrdp_sec.c
-+index 691d4f04f3..084fca6b8d 100644
-+--- a/libxrdp/xrdp_sec.c
-++++ b/libxrdp/xrdp_sec.c
-+@@ -1946,6 +1946,17 @@ xrdp_sec_send_fastpath(struct xrdp_sec *self, struct stream *s)
++---
++ xrdp/xrdp_mm.c | 33 +++++++++++++++++++++------------
++ 1 file changed, 21 insertions(+), 12 deletions(-)
++
++diff --git a/xrdp/xrdp_mm.c b/xrdp/xrdp_mm.c
++index 74b0516afa..64ae229e01 100644
++--- a/xrdp/xrdp_mm.c
+++++ b/xrdp/xrdp_mm.c
++@@ -676,22 +676,31 @@ xrdp_mm_trans_send_channel_setup(struct xrdp_mm *self, struct trans *trans)
 + static int
-+ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec *self, struct stream *s)
++ xrdp_mm_trans_process_channel_data(struct xrdp_mm *self, struct stream *s)
 + {
-++#define CS_CORE_MIN_LENGTH \
-++    (\
-++     4 +            /* Version */ \
-++     2 + 2 +        /* desktopWidth + desktopHeight */ \
-++     2 + 2 +        /* colorDepth + SASSequence */ \
-++     4 +            /* keyboardLayout */ \
-++     4 + 32 +       /* clientBuild + clientName */ \
-++     4 + 4 + 4 +    /* keyboardType + keyboardSubType + keyboardFunctionKey */ \
-++     64 +           /* imeFileName */ \
-++     0)
-++
-+     int version;
-+     int colorDepth;
-+     int postBeta2ColorDepth;
-+@@ -1956,7 +1967,12 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec *self, struct stream *s)
++-    int size;
++-    int total_size;
+++    unsigned int size;
+++    unsigned int total_size;
++     int chan_id;
++     int chan_flags;
++-    int rv;
++-
++-    in_uint16_le(s, chan_id);
++-    in_uint16_le(s, chan_flags);
++-    in_uint16_le(s, size);
++-    in_uint32_le(s, total_size);
++-    rv = 0;
+++    int rv = 0;
 + 
-+     UNUSED_VAR(version);
-+ 
-+-    /* TS_UD_CS_CORE requiered fields */
-++    /* TS_UD_CS_CORE required fields */
-++    if (!s_check_rem_and_log(s, CS_CORE_MIN_LENGTH,
-++                             "Parsing [MS-RDPBCGR] TS_UD_CS_CORE"))
++-    if (rv == 0)
+++    if (!s_check_rem_and_log(s, 10, "Reading channel data header"))
 ++    {
-++        return 1;
+++        rv = 1;
 ++    }
-+     in_uint32_le(s, version);
-+     in_uint16_le(s, self->rdp_layer->client_info.width);
-+     in_uint16_le(s, self->rdp_layer->client_info.height);
-+@@ -1994,6 +2010,10 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec *self, struct stream *s)
-+               clientName);
+++    else
++     {
++-        rv = libxrdp_send_to_channel(self->wm->session, chan_id, s->p, size, total_size,
++-                                     chan_flags);
+++        in_uint16_le(s, chan_id);
+++        in_uint16_le(s, chan_flags);
+++        in_uint16_le(s, size);
+++        in_uint32_le(s, total_size);
+++        if (!s_check_rem_and_log(s, size, "Reading channel data data"))
+++        {
+++            rv = 1;
+++        }
+++        else
+++        {
+++            rv = libxrdp_send_to_channel(self->wm->session, chan_id,
+++                                         s->p, size, total_size, chan_flags);
+++        }
++     }
 + 
-+     /* TS_UD_CS_CORE optional fields */
-++    if (!s_check_rem(s, 2))
-++    {
-++        return 0;
-++    }
-+     in_uint16_le(s, postBeta2ColorDepth);
-+     LOG_DEVEL(LOG_LEVEL_TRACE, "Received [MS-RDPBCGR] TS_UD_CS_CORE "
-+               "<Optional Field> postBeta2ColorDepth %s",
-+@@ -2138,6 +2158,7 @@ xrdp_sec_process_mcs_data_CS_CORE(struct xrdp_sec *self, struct stream *s)
-+               "<Optional Field> desktopOrientation (ignored)");
-+ 
-+     return 0;
-++#undef CS_CORE_MIN_LENGTH
-+ }
-+ 
-+ /*****************************************************************************/
++     return rv;
 diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-index ff14cf8397..29245f3747 100644
+index 29245f3747..f9e2105500 100644
 --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
 +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-@@ -23,6 +23,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
-            file://CVE-2022-23480-1.patch \
+@@ -24,6 +24,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
             file://CVE-2022-23480-2.patch \
             file://CVE-2022-23481.patch \
-+           file://CVE-2022-23482.patch \
+            file://CVE-2022-23482.patch \
++           file://CVE-2022-23483.patch \
             "
  
  SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
