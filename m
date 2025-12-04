@@ -1,346 +1,234 @@
-Return-Path: <saravanan.kadambathursubramaniyam@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C85BD2069B
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 13:51:16 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.43793.1764856271653290564
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1E50D206A9
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 14:14:46 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44763.1764857684819928536
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 05:51:11 -0800
+ Thu, 04 Dec 2025 06:14:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CceSPcmv;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=443304842b=saravanan.kadambathursubramaniyam@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5B4DR29E1549055
-	for <openembedded-devel@lists.openembedded.org>; Thu, 4 Dec 2025 13:51:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=aUIL/5bdC8RTSCdDYza5
-	7wwL1E5B6YSQGBUbD5WNf/w=; b=CceSPcmvaMlTQob6NMkRfXfox3xHsMR3Gx3g
-	cEiZVIqDZy1CCwVXgggaO6aZ5LZXYF1C7w08JUFV3yO5vr/5gbpR8DNen0EMD6RE
-	GDaBAh5gXVyL48tYs6wDuLBViKDrmDx2lcHlV+4/jT5gBu4GbW/bFqYDxLZ6DRtS
-	sP57PM/flzq2Ld+0+D667hSx0atZLJeDyZQ1ZU/RD3aXYYvQKU415wBfB0M4x4Gt
-	qAf5pzYVtU4NNMZYV6e5+iAqx6AvixR1TJT907Uvu78zLVL4Om/tapY38Go7lZwg
-	fiKM/LmALTiPN4Axeqhdnl2EEZDvkXkv8X6X+xIoeNW8MLgIRg==
-Received: from ala-exchng01.corp.ad.wrs.com ([128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aqqt6edcu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 13:51:10 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Thu, 4 Dec 2025 05:51:09 -0800
-Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Thu, 4 Dec 2025 05:51:08 -0800
-From: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2025-32873
-Date: Thu, 4 Dec 2025 19:21:06 +0530
-Message-ID: <20251204135106.971710-1-saravanan.kadambathursubramaniyam@windriver.com>
-X-Mailer: git-send-email 2.35.5
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W/LLw8IC;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6408f9cb1dcso1463407a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 06:14:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1764857683; x=1765462483; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=CwPUaFOFqXO5MGMoqJ+eI+f79ddpeLJ+yqFFfAQpJgc=;
+        b=W/LLw8ICrj1nDXNVUAWHEALCWxTxzNxXzrbe/YaHniqqjxuuoj6rYcpdZ4sCeD8VEX
+         5cN52bRV7bvW+Qw4Pi0htqbwTwRTFTBr/YR0BZ71GBiGTvcGVTTvvOCOSxSFkd6g+eGt
+         LFnVUkHWQwHLxm08EvWI+CT3JGdj4KnAyIu6e9dVOCNeY5m9N01fFRmKw8wtlURiZE3x
+         aCo3MJ4OIgaotlW2IXcDh69mVrXGHhhHbQr+mnP7CVWtXAwl6wNznHuEUgs7SkOTQQgN
+         4vhLVeyZmA0n3qDn9xQHD6Oc4OlQkPrzXcJ9QVBv9GdxXwaSUoxKzJiP5y6DP/lvbPFV
+         BpUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764857683; x=1765462483;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=CwPUaFOFqXO5MGMoqJ+eI+f79ddpeLJ+yqFFfAQpJgc=;
+        b=ueJErJvbx9/INcPRX4pxKDdtKE6lvbl5oP8lfZPvxSJBZhHuq54Iljt8PQ2/EOunlW
+         vWqF6QzfxSjx9VShvTmf0yMOCfw5I3ftZ7edZgU1Z0Pci1ZnKEYkmpw3niQ2PzdOrbKd
+         eXu9hsjscIXJhqTjLSL6V/mKPT39+TXGHpLLB3TblNzhe0CyoUfc1DZ8vL2e8lXtNDRN
+         c4Esju56ALJkp2yq4Uq6P+uN6bLzopYgiCjpmcl5daEKfnA/fjmQCnJeFCmHbU/0O0Nc
+         tR4U4O1MqxusKJnakbwDcAvM/xKf2LC/ocPTdFrq018oUZ60JExb8ZxGIrWGlaGltKII
+         12NA==
+X-Forwarded-Encrypted: i=1; AJvYcCXfxgjuN8MFENoChqyRVNK82osoWqu4NcOG5u0p3tBETXEmIrpPdWHRsv7rS73Wclai8L9KzgOqdhB8/0FchmNpg1M=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxIcwCeMW2j8rKWKrNI7YPg54m/Nk7NnvrVB2lFVyJG3pq+icOf
+	7zc1McLoGawd8pi86SoP/GsNN6JRPjCVW3fLx4VLWagH3dVH4uZUp0/2TdfZnhxN7JSPyJAd4lZ
+	XAHoOaoTNcB1H5vXx2JX5I4/BalXUoTA=
+X-Gm-Gg: ASbGncv+1CJO/EBjnTXaXb5i55UtGxDFgVpgw0P0PZNk4+1DAwNooh8wgtV/ol/x1y8
+	jWoJJIW7CUFzDNVYPWbLj++azN/WjXBcScKk2GHHmwdqOxiIJz9niePBjLBwgIqw+fXjdqGjn9o
+	FH7d0iPSs/bR2SDP9F4NMTXiY3IKNd9jJTS6tsG6TBniuN0CSBIcIECJ+B4hesgmG6IvjLKRANH
+	MSPwkmIzMdJ8o3xOzpHLvD7cMZVKuKfESKZ8d6Qa9jV6nriwbbyXUhN1MMeZSx8Ykm3ZjOYiISH
+	W0GageE+YX9fIAxaNoavB6r660k+/qi5gHSCsmFNr6GhNWkDGLlKng35mxtMFBqlPzz+XsZsMR2
+	Y7HHIXcmsYwhI
+X-Google-Smtp-Source: AGHT+IEO+WN2ARYxuldJJWqy15VB5jqxiqEi1BdXdC+xT6LTsRy482+zS/e3iSP3cHZwLj4ZstNfl712Cqbp/fB+rQQ=
+X-Received: by 2002:a05:6402:4403:b0:647:7a35:a7d5 with SMTP id
+ 4fb4d7f45d1cf-647abddda6fmr2406232a12.25.1764857682801; Thu, 04 Dec 2025
+ 06:14:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA0MDExMiBTYWx0ZWRfXwilmazBjzPAg
- 22URI3ep2aeRGxf6/i64UDzNsC4XE/sLNnurkC8oSs912AyB3hiSCwr8PetQy+TpsjA3U89eIve
- artt7CMguEBauTUJPYvsScy888+aEzOBxGjYMyoRtHvltoxDPcQ1ZRJaNsTD5L6yfDw8GkafXWb
- abemBLKYaMNS6iv41lJ9CTvV7O1xt/F66zR9mS0Q576IVTU+BRPIXjyZKyywC7UWZWOQYV+u424
- wSqlehgT+kGvt/Tf+h/+9zQ5xpasTd/lkl/DWjdc2e3QGTczxymUWrefdXK+2qJ9VlFg4SoCxlr
- Xc983BeX1msSLtBlS0ga1FY/lrRXZJHpp4Wj4BCV3Wp111BzdXxmGPVsYguYKhHxMdET9+N33JC
- iD9U2xrvd38PD40MCwF/kF+mHl1tdA==
-X-Authority-Analysis: v=2.4 cv=Adq83nXG c=1 sm=1 tr=0 ts=693191ce cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=fxJcL_dCAAAA:8 a=1Uybnkrj48FxV8wdWEkA:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: 4ACsb_ZP5Mt6rNjmqO4aA9B5ggpp9HsW
-X-Proofpoint-GUID: 4ACsb_ZP5Mt6rNjmqO4aA9B5ggpp9HsW
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-04_03,2025-12-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
- impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512040112
+References: <20251203090342.2024473-1-changqing.li@windriver.com>
+ <FA59CAA8-D404-4977-A8A2-FF02AA4E9BD5@arm.com> <fe857264-7b6f-4f2e-9bb5-582a57a5018f@windriver.com>
+ <35688177-1593-4499-AEFE-3EE8775009DF@arm.com>
+In-Reply-To: <35688177-1593-4499-AEFE-3EE8775009DF@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 4 Dec 2025 06:14:15 -0800
+X-Gm-Features: AWmQ_bkKl76TrVz-BtMyO9O-PdlYBAmJ5WszGIBPZdfiQPxNwMaCFuVprgBHkkU
+Message-ID: <CAMKF1srz4CSK7YviyMzrweHaEar7-zNiN=+AOauPpVukVHvo+w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libmng: correct version of libmng
+To: ross.burton@arm.com
+Cc: Changqing Li <changqing.li@windriver.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000004339b1064520f35b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 13:51:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122321
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 14:14:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122322
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2025-32873
+--0000000000004339b1064520f35b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upstream-patch:
-https://github.com/django/django/commit/9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c/
+On Thu, Dec 4, 2025 at 3:05=E2=80=AFAM Ross Burton via lists.openembedded.o=
+rg
+<ross.burton=3Darm.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
----
- .../CVE-2025-32873.patch                      | 110 ++++++++++++++++++
- .../python3-django/CVE-2025-32873.patch       | 107 +++++++++++++++++
- .../python/python3-django_2.2.28.bb           |   1 +
- .../python/python3-django_3.2.25.bb           |   1 +
- 4 files changed, 219 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2025-32873.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2025-32873.patch
+>
+>
+> > On 4 Dec 2025, at 02:35, Changqing Li <changqing.li@windriver.com>
+> wrote:
+> >
+> >
+> > On 12/3/25 19:08, Ross Burton wrote:
+> >> CAUTION: This email comes from a non Wind River email account!
+> >> Do not click links or open attachments unless you recognize the sender
+> and know the content is safe.
+> >>
+> >> On 3 Dec 2025, at 09:03, Changqing Li via lists.openembedded.org <
+> changqing.li=3Dwindriver.com@lists.openembedded.org> wrote:
+> >>
+> >>> From: Changqing Li <changqing.li@windriver.com>
+> >>>
+> >>> Current version is 2.0.3, the lastrelease of libmng is in 2015,
+> >>> add a patch to fix it
+> >>>
+> >> Last release a decade ago, for a image format that was designed to
+> replace GIF, but no browsers actually support, and has been superseded by
+> APNG which is supported by all browsers and a W3C Recommendation?
+> >>
+> >> Sounds like the follow-up patch to this cleanup should be to delete th=
+e
+> recipe=E2=80=A6
+> > Thanks for sharing the background.
+> > I searched under meta-openembeded, there is one recipe might depend on
+> this.
+> >
+> https://git.openembedded.org/meta-openembedded/tree/meta-gnome/recipes-gi=
+mp/gimp/gimp_3.0.6.bb?id=3D1d3c3ad93c962ee1c27d88076b63d08e53c8b318#n80
+> > Another recipe that depend on this:
+> >
+> https://code.qt.io/cgit/yocto/meta-qt6.git/tree/recipes-qt/qt6/qtimagefor=
+mats_git.bb?h=3D6.10#n19
+> > Seems we cannot delete the recipe unless we don't support those
+> PACKAGECONFIG mng.
+> > //Changqing
+>
+> The gimp option is easily removed (or at least, disabled by default) in
+> the same patch set, and meta-qt will just have to update. MNG _is_ dead, =
+so
+> there=E2=80=99s no reason to keep the code around in our layers.
+>
+>
+There was a need of it in webkit too IIRC in past.
+I agree, for now I have moved with the patch and if we can get more
+awareness of its removal then perhaps we should revisit and remove it.
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2025-32873.patch b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2025-32873.patch
-new file mode 100644
-index 0000000000..ae417c92c1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2025-32873.patch
-@@ -0,0 +1,110 @@
-+From 9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c Mon Sep 17 00:00:00 2001
-+From: Marc Deslauriers <marc.deslauriers@ubuntu.com>
-+Date: Wed, 30 Apr 2025 10:34:27 -0400
-+Subject: [PATCH] Fixed CVE-2025-32873 -- Mitigated potential DoS in 
-+ strip_tags().
-+
-+Thanks to Elias Myllymaki for the report, and Shai Berger and Jake
-+Howard for the reviews.
-+
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
-+
-+Backport of 9f3419b from main.
-+
-+CVE: CVE-2025-32873
-+
-+Upstream-Status: Backport
-+https://github.com/django/django/commit/9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c/
-+
-+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+---
-+ django/utils/html.py           |  6 ++++++
-+ docs/releases/3.2.25.txt       | 11 +++++++++++
-+ tests/utils_tests/test_html.py | 15 ++++++++++++++-
-+ 3 files changed, 31 insertions(+), 1 deletion(-)
-+
-+diff --git a/django/utils/html.py b/django/utils/html.py
-+index 5887bf1..1a3033e 100644
-+--- a/django/utils/html.py
-++++ b/django/utils/html.py
-+@@ -33,6 +33,9 @@ simple_url_2_re = _lazy_re_compile(
-+ MAX_URL_LENGTH = 2048
-+ MAX_STRIP_TAGS_DEPTH = 50
-+ 
-++# HTML tag that opens but has no closing ">" after 1k+ chars.
-++long_open_tag_without_closing_re = _lazy_re_compile(r"<[a-zA-Z][^>]{1000,}")
-++
-+ 
-+ @keep_lazy(str, SafeString)
-+ def escape(text):
-+@@ -184,6 +187,9 @@ def _strip_once(value):
-+ def strip_tags(value):
-+     """Return the given HTML with all tags stripped."""
-+     value = str(value)
-++    for long_open_tag in long_open_tag_without_closing_re.finditer(value):
-++        if long_open_tag.group().count("<") >= MAX_STRIP_TAGS_DEPTH:
-++            raise SuspiciousOperation
-+     # Note: in typical case this loop executes _strip_once twice (the second
-+     # execution does not remove any more tags).
-+     strip_tags_depth = 0
-+diff --git a/docs/releases/3.2.25.txt b/docs/releases/3.2.25.txt
-+index f21bb47..2e113cc 100644
-+--- a/docs/releases/3.2.25.txt
-++++ b/docs/releases/3.2.25.txt
-+@@ -82,6 +82,17 @@ Remember that absolutely NO guarantee is provided about the results of
-+ ``strip_tags()`` call without escaping it first, for example with
-+ :func:`django.utils.html.escape`.
-+ 
-++CVE-2025-32873: Denial-of-service possibility in ``strip_tags()``
-++=================================================================
-++
-++:func:`~django.utils.html.strip_tags` would be slow to evaluate certain inputs
-++containing large sequences of incomplete HTML tags. This function is used to
-++implement the :tfilter:`striptags` template filter, which was thus also
-++vulnerable.
-++
-++:func:`~django.utils.html.strip_tags` now raises a :exc:`.SuspiciousOperation`
-++exception if it encounters an unusually large number of unclosed opening tags.
-++
-+ Bugfixes
-+ ========
-+ 
-+diff --git a/tests/utils_tests/test_html.py b/tests/utils_tests/test_html.py
-+index 231f5d8..5c2de01 100644
-+--- a/tests/utils_tests/test_html.py
-++++ b/tests/utils_tests/test_html.py
-+@@ -94,17 +94,30 @@ class TestUtilsHtml(SimpleTestCase):
-+             ('><!' + ('&' * 16000) + 'D', '><!' + ('&' * 16000) + 'D'),
-+             ('X<<<<br>br>br>br>X', 'XX'),
-+             ("<" * 50 + "a>" * 50, ""),
-++            (">" + "<a" * 500 + "a", ">" + "<a" * 500 + "a"),
-++            ("<a" * 49 + "a" * 951, "<a" * 49 + "a" * 951),
-++            ("<" + "a" * 1_002, "<" + "a" * 1_002),
-+         )
-+         for value, output in items:
-+             with self.subTest(value=value, output=output):
-+                 self.check_output(strip_tags, value, output)
-+                 self.check_output(strip_tags, lazystr(value), output)
-+ 
-+-    def test_strip_tags_suspicious_operation(self):
-++    def test_strip_tags_suspicious_operation_max_depth(self):
-+         value = "<" * 51 + "a>" * 51, "<a>"
-+         with self.assertRaises(SuspiciousOperation):
-+             strip_tags(value)
-+ 
-++    def test_strip_tags_suspicious_operation_large_open_tags(self):
-++        items = [
-++            ">" + "<a" * 501,
-++            "<a" * 50 + "a" * 950,
-++        ]
-++        for value in items:
-++            with self.subTest(value=value):
-++                with self.assertRaises(SuspiciousOperation):
-++                    strip_tags(value)
-++
-+     def test_strip_tags_files(self):
-+         # Test with more lengthy content (also catching performance regressions)
-+         for filename in ('strip_tags1.html', 'strip_tags2.txt'):
-+-- 
-+2.40.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2025-32873.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2025-32873.patch
-new file mode 100644
-index 0000000000..701f9b5746
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2025-32873.patch
-@@ -0,0 +1,107 @@
-+From 9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c Mon Sep 17 00:00:00 2001
-+From: Marc Deslauriers <marc.deslauriers@ubuntu.com>
-+Date: Wed, 30 Apr 2025 10:34:27 -0400
-+Subject: [PATCH] Fixed CVE-2025-32873 -- Mitigated potential DoS in
-+ strip_tags().
-+
-+Thanks to Elias Myllymaki for the report, and Shai Berger and Jake
-+Howard for the reviews.
-+
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
-+
-+Backport of 9f3419b519799d69f2aba70b9d25abe2e70d03e0 from main.
-+
-+CVE: CVE-2025-32873
-+
-+Upstream-Status: Backport
-+https://github.com/django/django/commit/9cd8028f3e38dca8e51c1388f474eecbe7d6ca3c
-+
-+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
-+---
-+ django/utils/html.py           |  6 ++++++
-+ docs/releases/2.2.28.txt       | 11 +++++++++++
-+ tests/utils_tests/test_html.py | 15 ++++++++++++++-
-+ 3 files changed, 31 insertions(+), 1 deletion(-)
-+
-+diff --git a/django/utils/html.py b/django/utils/html.py
-+index 0d5ffd2..858a517 100644
-+--- a/django/utils/html.py
-++++ b/django/utils/html.py
-+@@ -37,6 +37,9 @@ _html_escapes = {
-+     ord("'"): '&#39;',
-+ }
-+ 
-++# HTML tag that opens but has no closing ">" after 1k+ chars.
-++long_open_tag_without_closing_re = _lazy_re_compile(r"<[a-zA-Z][^>]{1000,}")
-++
-+ 
-+ @keep_lazy(str, SafeText)
-+ def escape(text):
-+@@ -188,6 +191,9 @@ def _strip_once(value):
-+ def strip_tags(value):
-+     """Return the given HTML with all tags stripped."""
-+     value = str(value)
-++    for long_open_tag in long_open_tag_without_closing_re.finditer(value):
-++        if long_open_tag.group().count("<") >= MAX_STRIP_TAGS_DEPTH:
-++            raise SuspiciousOperation
-+     # Note: in typical case this loop executes _strip_once twice (the second
-+     # execution does not remove any more tags).
-+     strip_tags_depth = 0
-+diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
-+index 3503f38..1676bbd 100644
-+--- a/docs/releases/2.2.28.txt
-++++ b/docs/releases/2.2.28.txt
-+@@ -143,3 +143,14 @@ directory-traversal via certain inputs when calling :meth:`save()
-+ 
-+ Built-in ``Storage`` sub-classes were not affected by this vulnerability.
-+ 
-++CVE-2025-32873: Denial-of-service possibility in ``strip_tags()``
-++=================================================================
-++
-++:func:`~django.utils.html.strip_tags` would be slow to evaluate certain inputs
-++containing large sequences of incomplete HTML tags. This function is used to
-++implement the :tfilter:`striptags` template filter, which was thus also
-++vulnerable.
-++
-++:func:`~django.utils.html.strip_tags` now raises a :exc:`.SuspiciousOperation`
-++exception if it encounters an unusually large number of unclosed opening tags.
-++
-+diff --git a/tests/utils_tests/test_html.py b/tests/utils_tests/test_html.py
-+index 2f412e1..653deb2 100644
-+--- a/tests/utils_tests/test_html.py
-++++ b/tests/utils_tests/test_html.py
-+@@ -92,17 +92,30 @@ class TestUtilsHtml(SimpleTestCase):
-+             ('><!' + ('&' * 16000) + 'D', '><!' + ('&' * 16000) + 'D'),
-+             ('X<<<<br>br>br>br>X', 'XX'),
-+             ("<" * 50 + "a>" * 50, ""),
-++            (">" + "<a" * 500 + "a", ">" + "<a" * 500 + "a"),
-++            ("<a" * 49 + "a" * 951, "<a" * 49 + "a" * 951),
-++            ("<" + "a" * 1_002, "<" + "a" * 1_002),
-+         )
-+         for value, output in items:
-+             with self.subTest(value=value, output=output):
-+                 self.check_output(strip_tags, value, output)
-+                 self.check_output(strip_tags, lazystr(value), output)
-+ 
-+-    def test_strip_tags_suspicious_operation(self):
-++    def test_strip_tags_suspicious_operation_max_depth(self):
-+         value = "<" * 51 + "a>" * 51, "<a>"
-+         with self.assertRaises(SuspiciousOperation):
-+             strip_tags(value)
-+ 
-++    def test_strip_tags_suspicious_operation_large_open_tags(self):
-++        items = [
-++            ">" + "<a" * 501,
-++            "<a" * 50 + "a" * 950,
-++        ]
-++        for value in items:
-++            with self.subTest(value=value):
-++                with self.assertRaises(SuspiciousOperation):
-++                    strip_tags(value)
-++
-+     def test_strip_tags_files(self):
-+         # Test with more lengthy content (also catching performance regressions)
-+         for filename in ('strip_tags1.html', 'strip_tags2.txt'):
-+-- 
-+2.40.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index b5b2570ddb..87830e4bc3 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -30,6 +30,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2025-57833.patch \
-             file://CVE-2024-39329.patch \
-             file://CVE-2024-39330.patch \
-+            file://CVE-2025-32873.patch \
-            "
- 
- SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
-diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
-index 04dbe1cd19..68b60a784e 100644
---- a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
-@@ -14,6 +14,7 @@ SRC_URI += "\
-        file://CVE-2024-39330.patch \
-        file://CVE-2024-41991.patch \
-        file://CVE-2024-53907.patch \
-+       file://CVE-2025-32873.patch \
- "
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
--- 
-2.35.5
 
+> Ross
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122318):
+> https://lists.openembedded.org/g/openembedded-devel/message/122318
+> Mute This Topic: https://lists.openembedded.org/mt/116591341/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--0000000000004339b1064520f35b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Dec 4, =
+2025 at 3:05=E2=80=AFAM Ross Burton via <a href=3D"http://lists.openembedde=
+d.org">lists.openembedded.org</a> &lt;ross.burton=3D<a href=3D"mailto:arm.c=
+om@lists.openembedded.org">arm.com@lists.openembedded.org</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+<br>
+&gt; On 4 Dec 2025, at 02:35, Changqing Li &lt;<a href=3D"mailto:changqing.=
+li@windriver.com" target=3D"_blank">changqing.li@windriver.com</a>&gt; wrot=
+e:<br>
+&gt; <br>
+&gt; <br>
+&gt; On 12/3/25 19:08, Ross Burton wrote:<br>
+&gt;&gt; CAUTION: This email comes from a non Wind River email account!<br>
+&gt;&gt; Do not click links or open attachments unless you recognize the se=
+nder and know the content is safe.<br>
+&gt;&gt; <br>
+&gt;&gt; On 3 Dec 2025, at 09:03, Changqing Li via <a href=3D"http://lists.=
+openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.o=
+rg</a> &lt;<a href=3D"http://changqing.li" rel=3D"noreferrer" target=3D"_bl=
+ank">changqing.li</a>=3D<a href=3D"mailto:windriver.com@lists.openembedded.=
+org" target=3D"_blank">windriver.com@lists.openembedded.org</a>&gt; wrote:<=
+br>
+&gt;&gt; <br>
+&gt;&gt;&gt; From: Changqing Li &lt;<a href=3D"mailto:changqing.li@windrive=
+r.com" target=3D"_blank">changqing.li@windriver.com</a>&gt;<br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; Current version is 2.0.3, the lastrelease of libmng is in 2015=
+,<br>
+&gt;&gt;&gt; add a patch to fix it<br>
+&gt;&gt;&gt; <br>
+&gt;&gt; Last release a decade ago, for a image format that was designed to=
+ replace GIF, but no browsers actually support, and has been superseded by =
+APNG which is supported by all browsers and a W3C Recommendation?<br>
+&gt;&gt; <br>
+&gt;&gt; Sounds like the follow-up patch to this cleanup should be to delet=
+e the recipe=E2=80=A6<br>
+&gt; Thanks for sharing the background.<br>
+&gt; I searched under meta-openembeded, there is one recipe might depend on=
+ this.<br>
+&gt; <a href=3D"https://git.openembedded.org/meta-openembedded/tree/meta-gn=
+ome/recipes-gimp/gimp/gimp_3.0.6.bb?id=3D1d3c3ad93c962ee1c27d88076b63d08e53=
+c8b318#n80" rel=3D"noreferrer" target=3D"_blank">https://git.openembedded.o=
+rg/meta-openembedded/tree/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb?id=3D1=
+d3c3ad93c962ee1c27d88076b63d08e53c8b318#n80</a><br>
+&gt; Another recipe that depend on this:<br>
+&gt; <a href=3D"https://code.qt.io/cgit/yocto/meta-qt6.git/tree/recipes-qt/=
+qt6/qtimageformats_git.bb?h=3D6.10#n19" rel=3D"noreferrer" target=3D"_blank=
+">https://code.qt.io/cgit/yocto/meta-qt6.git/tree/recipes-qt/qt6/qtimagefor=
+mats_git.bb?h=3D6.10#n19</a><br>
+&gt; Seems we cannot delete the recipe unless we don&#39;t support those PA=
+CKAGECONFIG mng.<br>
+&gt; //Changqing<br>
+<br>
+The gimp option is easily removed (or at least, disabled by default) in the=
+ same patch set, and meta-qt will just have to update. MNG _is_ dead, so th=
+ere=E2=80=99s no reason to keep the code around in our layers.<br>
+<br></blockquote><div><br></div><div>There was a need of it in webkit too I=
+IRC in past.</div><div>I agree, for now I have moved with the patch and if =
+we can get more awareness of its removal then perhaps we should revisit and=
+ remove it.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+Ross<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122318): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122318" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122318</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116591341/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116591341/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--0000000000004339b1064520f35b--
 
