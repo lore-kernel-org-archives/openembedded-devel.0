@@ -1,137 +1,89 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0FC4D2444C
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 17:26:47 +0000 (UTC)
-Received: from rcdn-iport-3.cisco.com (rcdn-iport-3.cisco.com [173.37.86.74])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.49292.1764869205428063896
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1908D29FB5
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 19:15:59 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.52124.1764875755187734180
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 09:26:45 -0800
+ Thu, 04 Dec 2025 11:15:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=l0wFbMO1;
- spf=pass (domain: cisco.com, ip: 173.37.86.74, mailfrom: deeratho@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=U3i0ilQp;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42e2e239ec0so882564f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:15:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3175; q=dns/txt;
-  s=iport01; t=1764869205; x=1766078805;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=xckbq6ilje5usboFCngIXAXvubCUTDGOLrmIDDdfPdg=;
-  b=l0wFbMO1C9FieAraOI3HM9aWGwQDhT64+J95Nz0jZ9Bt47mSvv1wQ3NO
-   aBHH9pLePJgTwUd27QN7eiJ/mIwme3MCEHQRC42mgvvq+91KBRaxIoKf6
-   QX5vPvjZPN6Zp4pcSjhVRNcUTOkKffis0+HG7641WGdUGXFuhbmZPUd1a
-   5IUJTUcrAC/9KRsQdV50uM9ntK4ij4q3ffWbPyzS+NWf78B+gSxFzqUBn
-   yb0DyJqT76EntJnXtaY9S76sV1dMs1MzzskWPf0TvAc5GNqmrrwstn5zE
-   7/ZWqTLcu9ZLRwro31qPRXNkoe0s3pAJ+3s0jamncj6JCuWYJP23jfmeP
-   g==;
-X-CSE-ConnectionGUID: 62eDu9lyRFCtr5YebB/0FA==
-X-CSE-MsgGUID: Qca+gGnhTNaTqLgRbwVkPA==
-X-IPAS-Result: =?us-ascii?q?A0AMBACnwzFp/5P/Ja1aglmCR39fQkmUJ6A+gX8PAQEBD?=
- =?us-ascii?q?0QNBAEBkW8CJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFg?=
- =?us-ascii?q?Q4Thk8NhxMBGAFdXESDAgGCcwIBEbF0GjeCLIEBgygBMQMCCQJDT9ssgUuFO?=
- =?us-ascii?q?4gWcYR4JxsbgXKEfYEFgVwBBIghBIIigQ6GH4IjA0qQS0iBHgNZLAFVEw0KC?=
- =?us-ascii?q?wcFgWMDNQwLKhVuMh2BIz4Xc4RdHmcPBoERg0+JFg+KOCkDCxgNSBEsNxQbB?=
- =?us-ascii?q?j5uB5QeT4NrASCBOpQbkiuhDgoog3SMHpU5GjOEBIFXpRCZBoJYizCVZ2mEa?=
- =?us-ascii?q?IFoPIFHCwdwFYMiCUkZD444g2mBf2WCL7gQIjUCCTECBwsBAQMJk2cBAQ?=
-IronPort-Data: A9a23:XpjtwKMSugFxGQ/vrR31lsFynXyQoLVcMsEvi/4bfWQNrUohhmEAy
- GccWDvTM6mMZzT9edB+bNmw804G6pDQzIVhT3M5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVvlV
- e/a+ZWFZQb/g2IsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
- 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
- I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj66s0AW0rbIkJwMhcHXsTx
- PESAndVQDnW0opawJrjIgVtrt4oIM+uOMYUvWttiGiBS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
- ZdEL2MzM3wsYDUXUrsTIJ4zkf2hmnn4WzZZs1mS46Ew5gA/ySQtiuaxbIOIKo3iqcN9p02R5
- W3p+WTFJBgmLfiQ8zCazHGUr7qa9c/8cMdIfFGizdZtmFCVy2kZBREaWFf+rfSnh0qWX9NEN
- 1dS/TIjq6U3/kGnQtTxGRqirxa5UgU0QdFcFag+rQqK0KeRul7fDWkfRTkHY9sj3CMreQEXO
- payt4uBLVRSXHe9EBpxKp/8QeuOBBUo
-IronPort-HdrOrdr: A9a23:2MCLlqEI6rMxpip+pLqE/ceALOsnbusQ8zAXPidKOH5om6Oj+f
- xG8M536faWskdzZJhDo7G90cC7KBu2n6KdirN/AV7NZmXbUROTTL2LKeDZslnd8+qUzJ856Z
- td
-X-Talos-CUID: 9a23:flWDTGH7xQs/BF/iqmI5rkM4B5EhY0fz52vKfn61A0wuEJO8HAo=
-X-Talos-MUID: 9a23:pdhiJws59t3bMxBTss2nvTprd8hH5aSSLkkxiLEJgcObCy9IEmLI
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.20,249,1758585600"; 
-   d="scan'208";a="426441589"
-Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
-  by rcdn-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 04 Dec 2025 17:26:42 +0000
-Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id C4672180000F5
-	for <openembedded-devel@lists.openembedded.org>; Thu,  4 Dec 2025 17:26:42 +0000 (GMT)
-Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id 55438CC12B5; Thu,  4 Dec 2025 09:26:40 -0800 (PST)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+        d=gmail.com; s=20230601; t=1764875753; x=1765480553; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=a8SRMImV74yGLrCh6MfmxzWQkEX+uG7/AgY+CVqbN6w=;
+        b=U3i0ilQprdT48O4KjErJV46IXS+5lYa1W57Yry02ugUI2GYbbuyVXmNRw0qm5QqBf6
+         y20tR6tQUURur0VP8k1ehylpECiX0kTA7V0+4ylPimlJsLpyWxtsropskR+eIUJGwMkf
+         xpyq72kcQK2K0jzskPvdXUee1olAtAi19aARhQJtVFn0jJ4J+BcGWHWpXoRRZZ9Hv0Wz
+         8BXkex+ZtF6HbN0ne4gBQxOxI8FB2YjFG6I5p40+A8m/ojbzFY9znja7PCgVA3Z0VOZu
+         b41yDPNeIC8N8A9UHPtwUK4M7D+cpe730roZ8BjwaCv9JvBbkh+0OebFsF38vSS1x8V8
+         f6CA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764875753; x=1765480553;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=a8SRMImV74yGLrCh6MfmxzWQkEX+uG7/AgY+CVqbN6w=;
+        b=Qxz+tXPNWWNxtlg1xKsxIeEuG4fM7sfbjIb59e8RrQiaD0AJv16DLZSqfIL7uZNh7w
+         RJryCTX6DQo+hHfaeWtMa1OlXtYD+uUQcAIUplhJw6OOipeSja0+xga0ku8t6dSzdi3l
+         yMao1v0Q9Docki08ZU27dBDVNfPPTFGkvcDZcMngq+IS2o8HAeNC4JeQZu/0dcbsh23v
+         uECDeeg7kMMhMx+GltO4UERo/cVdHbxw2hh+9F8oD1ocbr4XrpvjlcxPa9p/1X13Xetr
+         RT43pK6cDif/qrklp8JJ0lc+p3Sof6KSChY6OQMcdq6iCkDF7TPGmf9bYGmnRyIYAOOY
+         GaOQ==
+X-Gm-Message-State: AOJu0YyZEi4nwJmhJGhNz/awIVYmhpbN69mAHLnP6nGpMdgTYABIX5Mw
+	E+WiRiSCjeAp/X9w76PeUQLfrF9KsFj/O8ZFtYobTlrYddW2IRY9kesnUliQ8g==
+X-Gm-Gg: ASbGncuisXJ7exJGogt7/2rHm8gwBl+3UtiB1pnleEoNDSDzwM0ApPC8vItlS/A85qj
+	UoqUKleQyzmCc8ZqIbiovn1jyVqp8VPitjHL68ZwJJsc0hh71TgOSzMn/P16gTShFAoD14aqcZt
+	DSDekTgroRVXI9Th6nbLb4N3ojJvIHmX2xy11kO8KqrEejgsCgAFocmvD8otPSXSwJHzrbq86bF
+	q53ImCtkk8KQZBA10lrNraDcpYhZcuOdeTSNtoIXC9w26N5GfHZ4AAMIZ2sFaIMvm4R6LejAjZQ
+	n6gMT+ZdROEm6dKtOB7Xy2M159vc/24YaOPj/nZuT1NJdZ3+eM1QNRMu48xaogK/bnLvbelYOzz
+	rPMDb8X51Cvv4Tb5pMBm7nHoNkI+SJZR9a9ZovIedamLxjsWwYqmgF5nbeHYP0hMIFWhrjWvIg3
+	O1uU3TwT/3gxfntd11iac=
+X-Google-Smtp-Source: AGHT+IGawb4813XxTpXhxO6HL6BvNlF273MeclRGfQ3gMR0NHndFHiUj1RkIVvC+/osQCmE52RFqgw==
+X-Received: by 2002:a05:6000:144c:b0:42b:3b62:cd9b with SMTP id ffacd0b85a97d-42f7319b198mr8012571f8f.37.1764875753371;
+        Thu, 04 Dec 2025 11:15:53 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7cbfeb38sm4615583f8f.12.2025.12.04.11.15.52
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Dec 2025 11:15:52 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] [master] [PATCH] redis: Refine CVE-2022-0543 status description
-Date: Thu,  4 Dec 2025 09:25:10 -0800
-Message-ID: <20251204172632.3277988-1-deeratho@cisco.com>
-X-Mailer: git-send-email 2.44.1
+Subject: [meta-oe][PATCH] yasm: drop from packagegroup also
+Date: Thu,  4 Dec 2025 20:15:52 +0100
+Message-ID: <20251204191552.1203671-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 17:26:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122327
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 19:15:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122329
 
-From: Deepak Rathore <deeratho@cisco.com>
+It should have been done when the recipe was dropped, but it was missed.
 
-Refine the CVE_STATUS description for CVE-2022-0543 to provide
-a more precise explanation of this Debian-specific vulnerability.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-The vulnerability originates from Debian's packaging methodology,
-which loads system-wide Lua libraries (lua-cjson, lua-cmsgpack),
-enabling Lua sandbox escape. Upstream Redis builds, including
-those built by Yocto/OpenEmbedded, utilize embedded Lua from the
-deps/ directory and are therefore not affected by this issue.
-
-It is also fixed in Debian with this commit:
-https://salsa.debian.org/lamby/pkg-redis/-/commit/c7fd665150dc4769402cae97d1152b3c6e4366f0
-
-References:
-- https://www.ubercomp.com/posts/2022-01-20_redis_on_debian_rce
-- https://nvd.nist.gov/vuln/detail/CVE-2022-0543
-
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.21.bb b/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-index 6166769ffa..0466e34000 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-@@ -21,7 +21,12 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
- SRC_URI[sha256sum] = "6383b32ba8d246f41bbbb83663381f5a5f4c4713235433cec22fc4a47e9b6d5f"
- 
- CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
--CVE_STATUS[CVE-2022-0543] = "not-applicable-config: the vulnerability is not present in upstream, only in Debian-packaged version"
-+# The vulnerability originates from Debian's packaging methodology,
-+# which loads system-wide Lua libraries (lua-cjson, lua-cmsgpack),
-+# enabling Lua sandbox escape. Upstream Redis builds, including
-+# those built by Yocto/OpenEmbedded, utilize embedded Lua from the
-+# deps/ directory and are therefore not affected by this issue.
-+CVE_STATUS[CVE-2022-0543] = "not-applicable-config: Debian-specific packaging issue caused by loading system-wide Lua libraries; upstream builds use embedded Lua and are not affected"
- CVE_STATUS[CVE-2022-3734] = "not-applicable-config: only affects Windows"
- 
- inherit update-rc.d systemd useradd
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-index 6527fb6996..0989ed5e8d 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-@@ -78,4 +78,9 @@ INITSCRIPT_PARAMS = "defaults 87"
- SYSTEMD_SERVICE:${PN} = "redis.service"
- 
- CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
--CVE_STATUS[CVE-2022-0543] = "not-applicable-platform: Debian-specific CVE"
-+# The vulnerability originates from Debian's packaging methodology,
-+# which loads system-wide Lua libraries (lua-cjson, lua-cmsgpack),
-+# enabling Lua sandbox escape. Upstream Redis builds, including
-+# those built by Yocto/OpenEmbedded, utilize embedded Lua from the
-+# deps/ directory and are therefore not affected by this issue.
-+CVE_STATUS[CVE-2022-0543] = "not-applicable-config: Debian-specific packaging issue caused by loading system-wide Lua libraries; upstream builds use embedded Lua and are not affected"
--- 
-2.44.1
-
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index d7d6c08693..d873a7b817 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -294,7 +294,6 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
+     xerces-c-samples \
+     xmlrpc-c \
+     yajl \
+-    yasm \
+ "
+ RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid pahole"
+ RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid pahole pcimem"
 
