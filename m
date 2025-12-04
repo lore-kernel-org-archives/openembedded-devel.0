@@ -2,88 +2,91 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C1908D29FB5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0851D29FB1
 	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 19:15:59 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.52124.1764875755187734180
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.52384.1764875749597937155
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 11:15:55 -0800
+ Thu, 04 Dec 2025 11:15:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U3i0ilQp;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42e2e239ec0so882564f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:15:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IhwWS5FI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47795f6f5c0so9318525e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:15:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764875753; x=1765480553; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=a8SRMImV74yGLrCh6MfmxzWQkEX+uG7/AgY+CVqbN6w=;
-        b=U3i0ilQprdT48O4KjErJV46IXS+5lYa1W57Yry02ugUI2GYbbuyVXmNRw0qm5QqBf6
-         y20tR6tQUURur0VP8k1ehylpECiX0kTA7V0+4ylPimlJsLpyWxtsropskR+eIUJGwMkf
-         xpyq72kcQK2K0jzskPvdXUee1olAtAi19aARhQJtVFn0jJ4J+BcGWHWpXoRRZZ9Hv0Wz
-         8BXkex+ZtF6HbN0ne4gBQxOxI8FB2YjFG6I5p40+A8m/ojbzFY9znja7PCgVA3Z0VOZu
-         b41yDPNeIC8N8A9UHPtwUK4M7D+cpe730roZ8BjwaCv9JvBbkh+0OebFsF38vSS1x8V8
-         f6CA==
+        d=gmail.com; s=20230601; t=1764875748; x=1765480548; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=2IFWHix6LsG3lprGDCuMKXnLUSnOtjB+x3gAg8qYw0Y=;
+        b=IhwWS5FIcAJLuRyzTnQJlCDNyGX+6TUqyUswhUj0ZIiAAcC5Pk9KJgW9baAoGPuQEi
+         xjzciDc//jPsZC+xeRdlZc9It13TsiDWsb75SC6f20+o7PJrFuQ53lfn1JPo8B5NrDQQ
+         9jCdjgNkuyMVNO/LZtLQxyjdJRnMr2/9YY6hdPPGsHnTK7EPbAIWEjntmC0EnRa6RwKU
+         EnmYVJrKhbYEeT9kuq7JmgK4fLIAgEoYXfTOjclipHe0C0SzJYpAM2HJCCJB8gIk0WOv
+         GrtVl7tgMtgEbqqVfML3TgyefoKWyq/jS+98B1vlWTyhP2AwjTbA6g4DCChDk3AiNSt7
+         IlDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764875753; x=1765480553;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1764875748; x=1765480548;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=a8SRMImV74yGLrCh6MfmxzWQkEX+uG7/AgY+CVqbN6w=;
-        b=Qxz+tXPNWWNxtlg1xKsxIeEuG4fM7sfbjIb59e8RrQiaD0AJv16DLZSqfIL7uZNh7w
-         RJryCTX6DQo+hHfaeWtMa1OlXtYD+uUQcAIUplhJw6OOipeSja0+xga0ku8t6dSzdi3l
-         yMao1v0Q9Docki08ZU27dBDVNfPPTFGkvcDZcMngq+IS2o8HAeNC4JeQZu/0dcbsh23v
-         uECDeeg7kMMhMx+GltO4UERo/cVdHbxw2hh+9F8oD1ocbr4XrpvjlcxPa9p/1X13Xetr
-         RT43pK6cDif/qrklp8JJ0lc+p3Sof6KSChY6OQMcdq6iCkDF7TPGmf9bYGmnRyIYAOOY
-         GaOQ==
-X-Gm-Message-State: AOJu0YyZEi4nwJmhJGhNz/awIVYmhpbN69mAHLnP6nGpMdgTYABIX5Mw
-	E+WiRiSCjeAp/X9w76PeUQLfrF9KsFj/O8ZFtYobTlrYddW2IRY9kesnUliQ8g==
-X-Gm-Gg: ASbGncuisXJ7exJGogt7/2rHm8gwBl+3UtiB1pnleEoNDSDzwM0ApPC8vItlS/A85qj
-	UoqUKleQyzmCc8ZqIbiovn1jyVqp8VPitjHL68ZwJJsc0hh71TgOSzMn/P16gTShFAoD14aqcZt
-	DSDekTgroRVXI9Th6nbLb4N3ojJvIHmX2xy11kO8KqrEejgsCgAFocmvD8otPSXSwJHzrbq86bF
-	q53ImCtkk8KQZBA10lrNraDcpYhZcuOdeTSNtoIXC9w26N5GfHZ4AAMIZ2sFaIMvm4R6LejAjZQ
-	n6gMT+ZdROEm6dKtOB7Xy2M159vc/24YaOPj/nZuT1NJdZ3+eM1QNRMu48xaogK/bnLvbelYOzz
-	rPMDb8X51Cvv4Tb5pMBm7nHoNkI+SJZR9a9ZovIedamLxjsWwYqmgF5nbeHYP0hMIFWhrjWvIg3
-	O1uU3TwT/3gxfntd11iac=
-X-Google-Smtp-Source: AGHT+IGawb4813XxTpXhxO6HL6BvNlF273MeclRGfQ3gMR0NHndFHiUj1RkIVvC+/osQCmE52RFqgw==
-X-Received: by 2002:a05:6000:144c:b0:42b:3b62:cd9b with SMTP id ffacd0b85a97d-42f7319b198mr8012571f8f.37.1764875753371;
-        Thu, 04 Dec 2025 11:15:53 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7cbfeb38sm4615583f8f.12.2025.12.04.11.15.52
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Dec 2025 11:15:52 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] yasm: drop from packagegroup also
-Date: Thu,  4 Dec 2025 20:15:52 +0100
-Message-ID: <20251204191552.1203671-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        bh=2IFWHix6LsG3lprGDCuMKXnLUSnOtjB+x3gAg8qYw0Y=;
+        b=rpGbe7URumB/FV7eJ6eL3gcKzetljFGScQZIKIoGK4bhJrCa/r19iLphSVVYlxe6T1
+         pVVFNSbfpRQ/88j5UzrZmQo49M1F0HZ9X4duGrKxERi7wp8+b0urF5qXdjQnY+Lj30f5
+         PuNc8FDVJ0fE2uT4sPbowgpzIqNMJM4V6Kj0pAvSf8topAqrPsEvjfmWh/vxCgC2CY/R
+         jgCBo90a53u0rdGJpd+jk2UVhi+at96LOhj+0Qvqto++OfrOXDHAY2pG/aPc324nZIze
+         fHAMlNjHQwg78/0w+pY8zl92fSewIerzVQX4Vlt91ZX+nW8ZWF058s1GoFaWc1OaqlvX
+         z3AA==
+X-Gm-Message-State: AOJu0YxOaHCaZ6DynGPu7nxvBp88iq0UnLoE9KYbUxUrOQGiH9OWNpQi
+	rR3rITskNgq4LCnv4nnEEHREjI/MPmiqRHHDB2nhRKd+cVmSjbXaBj/B
+X-Gm-Gg: ASbGncvFIpk12pkk8tQfePVeNSdJuEMieO//usq4nwRmqUT+lUYbiOfA51ZOR8HOurB
+	5nZ7IYd04x5Bkwy5ZhiLfWiOH5sUh2ehjaO3ree2jSkfKxcaUR2ISsW1f2Awq5oNmi9JZW7STRN
+	DUWu+j4hswJ+pPWr/BYM1gv9mvg9MRlKBJflLCwEwv4Vj/PBjMlfYmvJHEWBv+GEwcJ9ZPRGwqm
+	WJbVeSifeNN3o11eL7RMj8YObfA8WBpksa6umUg4l5pvxu8LRmjfEOQOGIEL7cibbrtPYVlgREA
+	V/3ICM19lm1P/5bn5RXi5G+NDGq2maxGwPTBCE4//w5R3s/Fb7aIBB3mb0jZoyItx/QUVep6N5O
+	h6+98LwCGwDcJrRGhuAq3IbwuBLGySy6eZyXEkw0j8Au+X1sVrwLGihjIlCcbj1n0SZ2UpkmgxV
+	7zp/8d2mIKrVxrle09CnM=
+X-Google-Smtp-Source: AGHT+IEo5nhSVbmeTxh0CgpZAoyijeuC8qaDzWz6WfWDS7zbxgObN44joZVDKiuLb1QJ+WO0K8u4UQ==
+X-Received: by 2002:a05:600c:1390:b0:477:a3f9:fda5 with SMTP id 5b1f17b1804b1-4792aef1a50mr62568605e9.9.1764875747735;
+        Thu, 04 Dec 2025 11:15:47 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-479310a6dc7sm43403895e9.3.2025.12.04.11.15.46
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 04 Dec 2025 11:15:47 -0800 (PST)
+Message-ID: <ca7e60de-1fc2-465b-bcf0-c7abd15179fc@gmail.com>
+Date: Thu, 4 Dec 2025 20:15:46 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH v2] yasm: drop recipe
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: openembedded-devel@lists.openembedded.org,
+ Ross Burton <ross.burton@arm.com>, Yogesh Tyagi <yogesh.tyagi@intel.com>
+References: <20251201220957.2629951-1-skandigraun@gmail.com>
+ <CAMSfU+6MEFLLqzQdYgt0W12bwenvw-B3JY0zpcHXrDrdPOfoEQ@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CAMSfU+6MEFLLqzQdYgt0W12bwenvw-B3JY0zpcHXrDrdPOfoEQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 19:15:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122329
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122328
 
-It should have been done when the recipe was dropped, but it was missed.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d7d6c08693..d873a7b817 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -294,7 +294,6 @@ RDEPENDS:packagegroup-meta-oe-devtools = "\
-     xerces-c-samples \
-     xmlrpc-c \
-     yajl \
--    yasm \
- "
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86 = " cpuid pahole"
- RDEPENDS:packagegroup-meta-oe-devtools:append:x86-64 = " cpuid pahole pcimem"
+On 12/4/25 17:52, Yoann Congal wrote:
+> Le lun. 1 déc. 2025 à 23:10, Gyorgy Sarvari via lists.openembedded.org
+> <skandigraun=gmail.com@lists.openembedded.org> a écrit :
+>> Yasm was introduced as a rewrite of nasm, however its commits
+>> have dried up over the years, while its unmitigated CVEs keep
+>> piling up. Also, nasm is a healthier project with regular
+>> contributions still.
+>>
+>> There are no known recipes depending on yasm.
+>>
+>> Let's remove it.
+> Can you also remove it from the package groups?
+>
+Sure
 
