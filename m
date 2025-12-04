@@ -1,236 +1,290 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <saravanan.kadambathursubramaniyam@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 139AFD1F9BC
-	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 11:06:05 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.24])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.41008.1764846356622942891
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC7E0D20697
+	for <webhook@archiver.kernel.org>; Thu,  4 Dec 2025 13:41:26 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.43614.1764855678638404101
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Dec 2025 03:05:57 -0800
+ Thu, 04 Dec 2025 05:41:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=gDegx50k;
- dkim=pass header.i=@arm.com header.s=selector1 header.b=gDegx50k;
- spf=pass (domain: arm.com, ip: 52.101.65.24, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=IUe0e1tIsXigqY9v5ddWb22aqSJeIM5PNvbDiwQzjpwh2WZPeeJsYT2HM2D0wCoxQF7rZBbnTW537UG9mK1kd7b4eRBYohCzNgwiph7T8PsQqtxgJjGEzHqu62eDos8JGQjCPCeSju/t+0HjQRvYeGMc8hxo5KJiQuYZrPa0mR9mvltENMGZjd+EUCJH/yPtR5PSywzd2eVg74gJewpAmwpe01N8Pi4fmVvC8R8Vn/yO1xnaPAioQMLmg9MjcFV2IuZrnGEqVfxPtkeCuXc/EnEVyaj+Ua8dT0stycudlWDxCUy0eu1QJl/1hMQ6dLsNRdBQngO9BPXL/DQWGxLsOQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ytq/ThvO97kwfc0tRMAWLjvO+NRx25UD030zA+WHh6Q=;
- b=n/v3a4NshVX6Gnh3vWsbRw5LS54xodJe/mqpcMGg+B1lRFPNeocsIWrFViXn4GYQcX7YfUbNFlcfqlIxaGz+dUmGIBpvnR01nsH56qy+39loIpVb6mnZSvBQy1V3595JhirAQ66ZEWPg/eo7bBbWET83je/569w2lMvF27WyoiWsWBzYBLWyG24UJZtPvLRboNMQMKU2EG4QIbekeAsFhrKbre4ferP3dTV3CozA6vrRALZLvf1PnGl38CZChohfX0cAiLvokSbhxGse+/1Syavvwcw0fAy1cjIuZ0EYHYFFIPJ7hIV0rIvvpe2UXPxTirgmk2mkeHnuRGMXDEMVkA==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=windriver.com smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ytq/ThvO97kwfc0tRMAWLjvO+NRx25UD030zA+WHh6Q=;
- b=gDegx50kuKS6IDqHdsi8UKRyWTsfcxuSqvpAPRZewGchMsMS7Mp/UfcFIHPPy23+SXPLYudmyPT1DdrtuhzqqfJ0auotyORs1DgQ/j6Zz7YBJ0ZForIQVaTpZRsSMQ9SNru1D/BconcQs8vYnsrDN+uR0eykbgOkEuyWlsFMP8o=
-Received: from DB3PR06CA0020.eurprd06.prod.outlook.com (2603:10a6:8:1::33) by
- AM8PR08MB6323.eurprd08.prod.outlook.com (2603:10a6:20b:354::5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9366.17; Thu, 4 Dec 2025 11:05:51 +0000
-Received: from DB1PEPF000509F9.eurprd02.prod.outlook.com
- (2603:10a6:8:1:cafe::2c) by DB3PR06CA0020.outlook.office365.com
- (2603:10a6:8:1::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9366.17 via Frontend Transport; Thu,
- 4 Dec 2025 11:05:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB1PEPF000509F9.mail.protection.outlook.com (10.167.242.155) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9388.8
- via Frontend Transport; Thu, 4 Dec 2025 11:05:49 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cqu63TuDDDAGwaVa2rE6UevR7RJriZzCcsHofJBeqZ49JY/pghOoojkr+7F23RpFi+XgyDAOT3A+ue61gNFrqyw1kpjAm1gu9nA0prZkW7xq5/NSgWlFwOQJp4Ee7plCh91tucEvBkHJR1UX0Tbsf0UrS4eGSioBD6cATI5CVZyzGkeDJhIuEzQEiTXtYi8Ak7knJCi2DV1AoDR7sD2zhiw/t2HaJMMZmDIM+m7h3sc2JEB6R7mXZmHwwGj4v8Zy0qs6LMR4GmEBkmiptMvUqjCm4Xq+CIxV0ejN1VE/BKThU80gkl424+KswPayxra4bjyDj3u2Z5t9GnFW723S6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ytq/ThvO97kwfc0tRMAWLjvO+NRx25UD030zA+WHh6Q=;
- b=gZdhwjWFAC7hdlCbQW7gTIAj7aJViYBk/Op5nR42VxsqdKHXKmBZJcdxP2/6zPC/0gjIQJIA/RPGa5jwdTnNWAc7DQLZRqVvLYxIRhZ1NjoboikWpuDzZHS6D5i6DE/o21A3R1DGAPbWY1xTRMNamBp4eu9zW4locuK49FD6/BcheaQrfX9aptSXjYopubjenUCweRIg3YQetzR/Egrm3vL+AVDfbO6BZOXpX0b0JnVC3yrEIMBGElKohXTYRxMnobuB16MRr7j3BflGeUKHSSjRaUQQ535sY06TlazNnp3cceKrfjvBcVMMMSqC41vGLc74qBCinHs8tL6g2ci+Eg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ytq/ThvO97kwfc0tRMAWLjvO+NRx25UD030zA+WHh6Q=;
- b=gDegx50kuKS6IDqHdsi8UKRyWTsfcxuSqvpAPRZewGchMsMS7Mp/UfcFIHPPy23+SXPLYudmyPT1DdrtuhzqqfJ0auotyORs1DgQ/j6Zz7YBJ0ZForIQVaTpZRsSMQ9SNru1D/BconcQs8vYnsrDN+uR0eykbgOkEuyWlsFMP8o=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by DBBPR08MB6011.eurprd08.prod.outlook.com (2603:10a6:10:209::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9388.11; Thu, 4 Dec
- 2025 11:04:46 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::7f73:806a:3493:7d50]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::7f73:806a:3493:7d50%4]) with mapi id 15.20.9366.012; Thu, 4 Dec 2025
- 11:04:46 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: Changqing Li <changqing.li@windriver.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH] libmng: correct version of libmng
-Thread-Topic: [oe] [meta-oe][PATCH] libmng: correct version of libmng
-Thread-Index: AQHcZDPCfxU1fIRu4E6G7zvQUfZljbUPwduAgAEC8oCAAI5YgA==
-Date: Thu, 4 Dec 2025 11:04:45 +0000
-Message-ID: <35688177-1593-4499-AEFE-3EE8775009DF@arm.com>
-References: <20251203090342.2024473-1-changqing.li@windriver.com>
- <FA59CAA8-D404-4977-A8A2-FF02AA4E9BD5@arm.com>
- <fe857264-7b6f-4f2e-9bb5-582a57a5018f@windriver.com>
-In-Reply-To: <fe857264-7b6f-4f2e-9bb5-582a57a5018f@windriver.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3826.700.81.1.3)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|DBBPR08MB6011:EE_|DB1PEPF000509F9:EE_|AM8PR08MB6323:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4931d049-fc8f-4100-83cc-08de33251532
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: 
- BCL:0;ARA:13230040|1800799024|366016|376014|38070700021;
-X-Microsoft-Antispam-Message-Info-Original: 
- =?utf-8?B?dUlUeDNkMUZoVy8ycHlDK3JqZHVySDJvNWlDQUIwbHBKTGZJSXovb2xtQzhJ?=
- =?utf-8?B?Q3RvMkJHcG03OVViVFJCQU9lZDFLQS95MjZhSHdZbjNKMEhUSno1SVI2R1F2?=
- =?utf-8?B?UVJjUm9OeCtvSU00TEhjS09uS2kxeC92SXkrSmtKeGtHdHRmeVpZQjdtNW1j?=
- =?utf-8?B?dUdxTTBhRG1rTVI1SzB5S09pUFpGYU4zcDdoaTEzWTZJNlhtR2piOWUvSXB6?=
- =?utf-8?B?MG5nKzR5NnZ1VlRrWFhIRkcrQzVMRzh0ZklFSFB3NjlaZFBRd0Rjai9Wb004?=
- =?utf-8?B?VDg0eEhwWSsyYXZlUEFYNXM4MTU3bUEwbFhQRHFnVkR2RlJnRTZISnRKajlK?=
- =?utf-8?B?YS9Kam13RjVFcHI2anlVSCtsSnRIeDBJeU1FdFIwcmxVK1JUNXFPK0VlSmFY?=
- =?utf-8?B?T2NocVVpZkRnNFhvR01ST0h5UjBpbDdQTEZ5M2RkdEh0OUgwNG9KWC9BQjdP?=
- =?utf-8?B?ZTVlRTE0bDdyMDZVeWhXbWwyQ1FFb2NYV3lPT0RwMWM2cUtPRXo1T3BxbExR?=
- =?utf-8?B?WlRFNjY5TEVQd1gvMHlkVDRPNU5XckVFV0kvSkxIQUN1UE9mdEhFanBYWSt6?=
- =?utf-8?B?N3QxWi9kNHJtL3N0Z3hpeDRUNHZHeXd1ZkJEZktEYlNzbkM0czdiQlhKVGtr?=
- =?utf-8?B?T2F1TDhidDR1YnRrK1JoL2ROU2NQeVlYek1xYU9EREFaQWloOTN3TnIvYXR6?=
- =?utf-8?B?R0F4cTFpVlg4L3FBL2FCbGdkOXBJVHdqcjJ1b3BJMlc0dzF5ckZ4MXlva1RX?=
- =?utf-8?B?ZHU2Zk5JNmt4WnpHRkM2d1pKRGN2MzdjeEViTGVRNFNoTy91Nk92VXZOcWwr?=
- =?utf-8?B?M2NMZkh6VStCbldBNU1SZXRxRitPT1RQcFc5cnhrQkoyRUFZRHp0ekJsc0Va?=
- =?utf-8?B?TXFjMjNrTnhhcGM3cGFPb0hLYUZIOG5IanhRNldSUG5YMkVkc2pCMEZpREFt?=
- =?utf-8?B?MFRuTGJkblZYY05mcnhhMWxZbWo1eXRLMTZvcnRjeElYVlV4WDdSKzY3WWZE?=
- =?utf-8?B?OWFMazNDby8vQXRZQzZYR0Z3SHJQbFJycGYrZGVoTUFrMXJSUHRIeGg1QzVE?=
- =?utf-8?B?SkphVkxFQkpzRmUxazFVL3VhUHcxQUtrelFTelVsUUw2eVg5YTFndDlwL1Zn?=
- =?utf-8?B?NG1Tc29KMm9JSlFHbmFOaEl4MlhST2xQV0pRYmxXam9WZkc5Yy94RkRpSUc1?=
- =?utf-8?B?L1lKSzROV3BrQS9YT0NBNVIwd2FHRzFkOU1WQ3AwY1k3Z3dtWStVNUNBMFla?=
- =?utf-8?B?TXFVWUZHTi9GNGo4RU5VTjZ2L2tGd3grMWFSYi9PYVFsd1l0bDFJanVIYVls?=
- =?utf-8?B?aFpVallFWE0rTGhocStUZElBRXVKRUp4MXdvWTZzNDJ3K3N4Qk1ieUhnVzcv?=
- =?utf-8?B?aGpSYk1MMTB4RDEyUjdTeFR2QTJqMjRpdHZqSlcweE5raENETENQWUtxdXp1?=
- =?utf-8?B?WFM2UVRONHlDOHJyZ2JuaVlUczBmUjZXMGhSQll6b1ptS1QvUmVtN1M0WThk?=
- =?utf-8?B?UzFYSms1T0t3dTVobUVHZjFqWmJZVHcvR0pTL01ncGtjd1RnUXpKZ0dnSkRE?=
- =?utf-8?B?aFBZNUk0OE14U3JrSnpCQW9yTHF1WnhYTlA0UTVPMkQ5U1p4Zm5hWlJKQzZK?=
- =?utf-8?B?L3gvM0VyVGw5VjkzN3Z2d2ZpbDBUakY1bUFvS1h4ZDVsZVdoWlZvWUNGM1VU?=
- =?utf-8?B?ZDBPaWNNbDdVRUhUUk5Rd0dVelNmak0rcDYrdmEzVlpmNDNiVUlCVEJKS3Zn?=
- =?utf-8?B?Z28wcERvTTZlK1VoU05qMEdBblh1clByMmgvUXMvN0wvOFVxWVROOWJEMUd3?=
- =?utf-8?B?T2lRRXhITVg3WThROWFic2V2R3lXM2NhcG5ySGlMSXZSTi9UajZuYXNMSC9o?=
- =?utf-8?B?ZjRpT3RTdWZUbmJkZnRnT0oyWDZDTW93VHlGZEQ0OEYxTVRzNFN2RnVpSXBE?=
- =?utf-8?B?TlVSdi9uNmtGN2J0WlQ2REdKbjBtRlpkZGhnL0Y1YitjdzlLS0RhUm9KZ3ph?=
- =?utf-8?B?Q201Z3JGZy9BPT0=?=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700021);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <584602063D0F964DB180C0F7CF7AB5A3@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=fhm/4MRy;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=443304842b=saravanan.kadambathursubramaniyam@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5B46bFGJ863150
+	for <openembedded-devel@lists.openembedded.org>; Thu, 4 Dec 2025 13:41:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=mLBcdYcLFDWeTfCtVSOA
+	zABRWqeUBwFJkqJvm+/w+2Y=; b=fhm/4MRyshZNHeJpyueMtnykQVG6N3EiY9Tx
+	DzKc2/Qk35tLmGJNUldvPSUTzSv02gyZMCN9U0pyoZjguEyDnhL0uG8Ipe5mfvBx
+	J5/LQU/+Km7LyWYBq9KyU5+u5Owby1VmehoMRAxARoMhZcodgbsDywCzEQAyy0oE
+	0oSe+y2HpSDOquTELPTK5KRfD5XIEts+pALS0Sxi+jRu7AhowOUckAgTikVNWhH5
+	oyFfoF86YVN1pooRbulTPfOnxwiAPsO2cLo4ZCftvpeoYbn06Dg/1MGJa+XYfsLu
+	Q22pQpA5NLQcKqCUFLiHoIr6W3D5MhmZv8TORE8VxnXFqenplw==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4aqqt6ed23-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 13:41:17 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Thu, 4 Dec 2025 05:41:15 -0800
+Received: from blr-linux-engg1.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Thu, 4 Dec 2025 05:41:14 -0800
+From: Saravanan <saravanan.kadambathursubramaniyam@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] python3-django: fix CVE-2024-41991
+Date: Thu, 4 Dec 2025 19:11:13 +0530
+Message-ID: <20251204134113.960199-1-saravanan.kadambathursubramaniyam@windriver.com>
+X-Mailer: git-send-email 2.35.5
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB6011
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- DB1PEPF000509F9.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	8764dd5f-81c5-40b5-179d-08de3324ef4b
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|35042699022|14060799003|36860700013|82310400026|376014|7053199007;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?RWhESERqNWx1bTkxT00reGxzTTBWZUJNQlkyVEZLSGxPR1BvQW9wTzFUR2h5?=
- =?utf-8?B?RVNuNHREdjJsaXJGL1BUSHpJMUFCekNSSXFKOHFpNVNJaW5QN0FteDEyQ3hQ?=
- =?utf-8?B?M041VVBwa25TTmpZa2RwVFZQdTR2Tjh2S0kyUXNOTHZNNjRxb1JyeDRxRmRZ?=
- =?utf-8?B?Y1pGbEE3WHVhQkpEV3R4VnpwNjExVlpSSkhUdTd2TFJQblR1emlDWS9mRlFW?=
- =?utf-8?B?emRZS2lJVXk4MDFPU0loOWw3M3c3VUN4NzBnazQvZm9IdkRoYm1TRWlIN1RC?=
- =?utf-8?B?TVNmaHJGdmlHTE1HWjlWaHNSSFJOemZCaXlZaEN3aFhGNU1WTHZ1akJxR3FX?=
- =?utf-8?B?d1NNb3Z0N1k1OEFVTDluNGI5VUdxdndXeHF1RVhGWHkybXUxdnB1a3QzTU9x?=
- =?utf-8?B?YzdOaW1jYmVUZkV1SmhldGdkKzJjRmFDODFmSlV3T3lsZ2ZFL1JnYXIxTjAr?=
- =?utf-8?B?NlVtc2d5MklWbmJKcHNBNnl3clZNcUhKaW9kbExUZ01IVkRSRHNTR0Nveksr?=
- =?utf-8?B?NUdvd09KZlcwOUxZWnJUeUI4NHcwNCs3NlZORHJndW81dlpDaWtncHpucjl4?=
- =?utf-8?B?cFNTa1NnRVJkY1U5VXhGcHp3MW8rUWVWVGFXeVU2K3RDeU10VFZNVUh3bm5P?=
- =?utf-8?B?dVMvYWR4eUlyclVZeXlkOVllSUJNSllqWFA2T1pCOFRRQ2NQK1RyOVVhV2ov?=
- =?utf-8?B?Wkgycm9KRG4zQ1BaREZSNDNzanV6ZGc0RVA5cGw3T1BGNU8vYVFqVFp5NWhV?=
- =?utf-8?B?eHhxc0UzaGR3bERnSDBPdnVhMWYvbXZzbDdwc0lMZFZwdEkxZmZOeUx5VklT?=
- =?utf-8?B?eUNPam5tNWZib1VnZitlaFRlSzNpSytKdmdhWjJLUDJwUm9BSjZnVlRGM1FF?=
- =?utf-8?B?WFU3V1kvMUszNDJqUHM1c2J2MHJvK1pIRlhpTGp0cWRFb0NnWm5CV2JaVith?=
- =?utf-8?B?NDlyaTJLcHVNL2wwazBHUTFPYWtHWW5aeGorU1BTM2xGL2Zud2JGVjE4STdW?=
- =?utf-8?B?VERNL2o0T2VUVTZNRTJveGQ5UFFPZ2VScFZPRGhMUEMxb25vU0gyMCt5MWt2?=
- =?utf-8?B?SmlsNEtzcVQwTE1jMjFvbWFvbEM1eVFCb1g1d1hOUDF1bC9JcWI0RzBJMW9H?=
- =?utf-8?B?N2NwWE1WcjVsMWJYRGl0ZTMvNG1sQTQ3VFg2T1pYTHp1TTA5U29ZYkhyZ1dS?=
- =?utf-8?B?R0FOcFFGZExRTFJIZFZPMGtLTkc3RXZ4V3lHQjZKalV6TStMTFB2ZjRrMnpN?=
- =?utf-8?B?c3JGVHVZNURLTzAyQlJnbDh1WE5vTnAvSXdocHM5VTMrdWkvSHBsY29iRXRG?=
- =?utf-8?B?cExoZnVybDVlQWs4bDZlNXRqaG1CVGdsdHllTGNrQk9nWEpNVTRCaXQrcVlP?=
- =?utf-8?B?cGk1empyeXphVUFBNldoNXZ1VjgreTZYeDNabG9vRU4vL29ZTTBtWUtaamY1?=
- =?utf-8?B?MHR5bXQvMWwrUGVpejhYaFFWdTc5Y05NdnJybURzZDlRRHFWdUN5ZlNiUy9H?=
- =?utf-8?B?RUExdVR4TkkzcEN6NFZ0OXY5N3lmODRGUFd3ZGo3YnBvZUJRT005cUhMOTha?=
- =?utf-8?B?U2phci9UeEJVQzQzZk8yS0d4bTV3aDE5aThyZkVhTmxJQmRaTnFtUTFPUzl0?=
- =?utf-8?B?OHkzZVhVZDdjUUdsVHpHdy9ZU0k2RWVjb05PNnlBVlRqTm13R3lFVlFYc0tS?=
- =?utf-8?B?b1hiUDVQSERydmJ3My91ZVdlWW1YSVVpd2pQUnN4UUpiZjY0cmNqWnozck5w?=
- =?utf-8?B?MzdxSnYzdGs3a0VLT09RcXM4TklRY1owTUFxVzJCMFVoZkJScWhEMU9YL3Bj?=
- =?utf-8?B?R0E4U3FTNVNKV3RnSVNscFg1dE5rbDBGMExnQ043MHhmSTFDQ0VlTUNGRmRy?=
- =?utf-8?B?ZlZmaVo4RWVNd1QrZ0hnMnJIcndyejJBUmlIUHQ0d0tZZWdDaEt0QVZzSmpP?=
- =?utf-8?B?amFXQVdaTGs3M2Zhdm16ZlJUbGdhVER3eUl6bStYTXFtV1pHRlBKWlJsSzFO?=
- =?utf-8?Q?GBXWbsqn7R+NhEUeSBiA6+PUpX2J8I=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(35042699022)(14060799003)(36860700013)(82310400026)(376014)(7053199007);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2025 11:05:49.5049
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4931d049-fc8f-4100-83cc-08de33251532
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB1PEPF000509F9.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6323
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjA0MDExMSBTYWx0ZWRfXwAtEBelGjvBl
+ cbBSa9KVKxzOEJwf3baDteXD/1r7CCo3XLIxGeSvP3bxQ4+0htOBmjIi4g0r28m+Sp3S0r87BAn
+ AkxSkyGDPK9Vqcdj+QC3jWETmndOhHVZ7U9YT7070LGtGJY2OAYBaAO5O+iPax0YtDwogVU/7bo
+ Rg4Drj3doXDr00RRGiZfwXZ1ZmxxeJf9HbZ1slhl10s54DbHtewgagSfYFueHgZoeefGdkrNmvC
+ 3DUrau9dbFfEOzmdsp/f1Fdw8uBIMQvupar023rbe+HOqZcjJtlZ98H4AThNSV/KE1chhOW+pkn
+ kqbKJ3ErtQ80hovZhx7SxFpcg52QdcWVQOXPkimoBtLOVtfFkxKQdrmXBF5RR69DxTuLF8yaRlf
+ ACilQyP4zi7LBUh+c2YK5YyNkh6U1g==
+X-Authority-Analysis: v=2.4 cv=Adq83nXG c=1 sm=1 tr=0 ts=69318f7d cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=A1X0JdhQAAAA:8 a=1XWaLZrsAAAA:8
+ a=t7CeM3EgAAAA:8 a=fxJcL_dCAAAA:8 a=P5wrnlEIAAAA:8 a=6d3UJljkSgCbymwdqX8A:9
+ a=lqcHg5cX4UMA:10 a=r-HJ9bD__24A:10 a=Wpz8ju6o9T4A:10 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22 a=aoaxo0Z0h-rxbPFMW5aL:22
+X-Proofpoint-ORIG-GUID: lrCYasOBC1rBxhXSEWrrujYYnxaNdcEF
+X-Proofpoint-GUID: lrCYasOBC1rBxhXSEWrrujYYnxaNdcEF
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-04_03,2025-12-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1015
+ impostorscore=0 phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512040111
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 5B46bFGJ863150
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 11:06:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122318
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Dec 2025 13:41:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122319
 
-DQoNCj4gT24gNCBEZWMgMjAyNSwgYXQgMDI6MzUsIENoYW5ncWluZyBMaSA8Y2hhbmdxaW5nLmxp
-QHdpbmRyaXZlci5jb20+IHdyb3RlOg0KPiANCj4gDQo+IE9uIDEyLzMvMjUgMTk6MDgsIFJvc3Mg
-QnVydG9uIHdyb3RlOg0KPj4gQ0FVVElPTjogVGhpcyBlbWFpbCBjb21lcyBmcm9tIGEgbm9uIFdp
-bmQgUml2ZXIgZW1haWwgYWNjb3VudCENCj4+IERvIG5vdCBjbGljayBsaW5rcyBvciBvcGVuIGF0
-dGFjaG1lbnRzIHVubGVzcyB5b3UgcmVjb2duaXplIHRoZSBzZW5kZXIgYW5kIGtub3cgdGhlIGNv
-bnRlbnQgaXMgc2FmZS4NCj4+IA0KPj4gT24gMyBEZWMgMjAyNSwgYXQgMDk6MDMsIENoYW5ncWlu
-ZyBMaSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8Y2hhbmdxaW5nLmxpPXdpbmRyaXZlci5j
-b21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gd3JvdGU6DQo+PiANCj4+PiBGcm9tOiBDaGFuZ3Fp
-bmcgTGkgPGNoYW5ncWluZy5saUB3aW5kcml2ZXIuY29tPg0KPj4+IA0KPj4+IEN1cnJlbnQgdmVy
-c2lvbiBpcyAyLjAuMywgdGhlIGxhc3RyZWxlYXNlIG9mIGxpYm1uZyBpcyBpbiAyMDE1LA0KPj4+
-IGFkZCBhIHBhdGNoIHRvIGZpeCBpdA0KPj4+IA0KPj4gTGFzdCByZWxlYXNlIGEgZGVjYWRlIGFn
-bywgZm9yIGEgaW1hZ2UgZm9ybWF0IHRoYXQgd2FzIGRlc2lnbmVkIHRvIHJlcGxhY2UgR0lGLCBi
-dXQgbm8gYnJvd3NlcnMgYWN0dWFsbHkgc3VwcG9ydCwgYW5kIGhhcyBiZWVuIHN1cGVyc2VkZWQg
-YnkgQVBORyB3aGljaCBpcyBzdXBwb3J0ZWQgYnkgYWxsIGJyb3dzZXJzIGFuZCBhIFczQyBSZWNv
-bW1lbmRhdGlvbj8NCj4+IA0KPj4gU291bmRzIGxpa2UgdGhlIGZvbGxvdy11cCBwYXRjaCB0byB0
-aGlzIGNsZWFudXAgc2hvdWxkIGJlIHRvIGRlbGV0ZSB0aGUgcmVjaXBl4oCmDQo+IFRoYW5rcyBm
-b3Igc2hhcmluZyB0aGUgYmFja2dyb3VuZC4NCj4gSSBzZWFyY2hlZCB1bmRlciBtZXRhLW9wZW5l
-bWJlZGVkLCB0aGVyZSBpcyBvbmUgcmVjaXBlIG1pZ2h0IGRlcGVuZCBvbiB0aGlzLg0KPiBodHRw
-czovL2dpdC5vcGVuZW1iZWRkZWQub3JnL21ldGEtb3BlbmVtYmVkZGVkL3RyZWUvbWV0YS1nbm9t
-ZS9yZWNpcGVzLWdpbXAvZ2ltcC9naW1wXzMuMC42LmJiP2lkPTFkM2MzYWQ5M2M5NjJlZTFjMjdk
-ODgwNzZiNjNkMDhlNTNjOGIzMTgjbjgwDQo+IEFub3RoZXIgcmVjaXBlIHRoYXQgZGVwZW5kIG9u
-IHRoaXM6DQo+IGh0dHBzOi8vY29kZS5xdC5pby9jZ2l0L3lvY3RvL21ldGEtcXQ2LmdpdC90cmVl
-L3JlY2lwZXMtcXQvcXQ2L3F0aW1hZ2Vmb3JtYXRzX2dpdC5iYj9oPTYuMTAjbjE5DQo+IFNlZW1z
-IHdlIGNhbm5vdCBkZWxldGUgdGhlIHJlY2lwZSB1bmxlc3Mgd2UgZG9uJ3Qgc3VwcG9ydCB0aG9z
-ZSBQQUNLQUdFQ09ORklHIG1uZy4NCj4gLy9DaGFuZ3FpbmcNCg0KVGhlIGdpbXAgb3B0aW9uIGlz
-IGVhc2lseSByZW1vdmVkIChvciBhdCBsZWFzdCwgZGlzYWJsZWQgYnkgZGVmYXVsdCkgaW4gdGhl
-IHNhbWUgcGF0Y2ggc2V0LCBhbmQgbWV0YS1xdCB3aWxsIGp1c3QgaGF2ZSB0byB1cGRhdGUuIE1O
-RyBfaXNfIGRlYWQsIHNvIHRoZXJl4oCZcyBubyByZWFzb24gdG8ga2VlcCB0aGUgY29kZSBhcm91
-bmQgaW4gb3VyIGxheWVycy4NCg0KUm9zcw==
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2024-41991
+
+Upstream-patch:
+https://github.com/django/django/commit/efea1ef7e2190e3f77ca0651b5458297b=
+c0f6a9f/
+
+Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.com=
+>
+---
+ .../CVE-2024-41991.patch                      | 143 ++++++++++++++++++
+ .../python/python3-django_3.2.25.bb           |   1 +
+ 2 files changed, 144 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-3.=
+2.25/CVE-2024-41991.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-django-3.2.25/CV=
+E-2024-41991.patch b/meta-python/recipes-devtools/python/python3-django-3=
+.2.25/CVE-2024-41991.patch
+new file mode 100644
+index 0000000000..1531de5b2f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django-3.2.25/CVE-2024-=
+41991.patch
+@@ -0,0 +1,143 @@
++From efea1ef7e2190e3f77ca0651b5458297bc0f6a9f Mon Sep 17 00:00:00 2001
++From: Marc Deslauriers <marc.deslauriers@ubuntu.com>
++Date: Wed, 30 Apr 2025 10:34:27 -0400
++Subject: [PATCH] Fixed CVE-2024-41991 -- Prevented potential ReDoS in
++ django.utils.html.urlize() and AdminURLFieldWidget.
++
++Thanks Seokchan Yoon for the report.
++
++Co-authored-by: Sarah Boyce <42296566+sarahboyce@users.noreply.github.co=
+m>
++
++CVE: CVE-2024-41991
++
++Upstream-Status: Backport
++https://github.com/django/django/commit/efea1ef7e2190e3f77ca0651b5458297=
+bc0f6a9f/
++
++Signed-off-by: Saravanan <saravanan.kadambathursubramaniyam@windriver.co=
+m>
++---
++ django/contrib/admin/widgets.py |  2 +-
++ django/utils/html.py            | 10 ++++++++--
++ docs/releases/3.2.25.txt        |  7 +++++++
++ tests/admin_widgets/tests.py    |  7 ++++++-
++ tests/utils_tests/test_html.py  | 13 +++++++++++++
++ 5 files changed, 35 insertions(+), 4 deletions(-)
++
++diff --git a/django/contrib/admin/widgets.py b/django/contrib/admin/widg=
+ets.py
++index aeb7477..b7dd0d8 100644
++--- a/django/contrib/admin/widgets.py
+++++ b/django/contrib/admin/widgets.py
++@@ -339,7 +339,7 @@ class AdminURLFieldWidget(forms.URLInput):
++         context =3D super().get_context(name, value, attrs)
++         context['current_label'] =3D _('Currently:')
++         context['change_label'] =3D _('Change:')
++-        context['widget']['href'] =3D smart_urlquote(context['widget'][=
+'value']) if value else ''
+++        context['widget']['href'] =3D smart_urlquote(context['widget'][=
+'value']) if url_valid else ''
++         context['url_valid'] =3D url_valid
++         return context
++=20
++diff --git a/django/utils/html.py b/django/utils/html.py
++index 3bc02b8..44c6b7b 100644
++--- a/django/utils/html.py
+++++ b/django/utils/html.py
++@@ -29,6 +29,8 @@ simple_url_2_re =3D _lazy_re_compile(
++     re.IGNORECASE
++ )
++=20
+++MAX_URL_LENGTH =3D 2048
+++
++=20
++ @keep_lazy(str, SafeString)
++ def escape(text):
++@@ -298,6 +300,10 @@ def urlize(text, trim_url_limit=3DNone, nofollow=3D=
+False, autoescape=3DFalse):
++         except ValueError:
++             # value contains more than one @.
++             return False
+++        # Max length for domain name labels is 63 characters per RFC 10=
+34.
+++        # Helps to avoid ReDoS vectors in the domain part.
+++        if len(p2) > 63:
+++            return False
++         # Dot must be in p2 (e.g. example.com)
++         if '.' not in p2 or p2.startswith('.'):
++             return False
++@@ -316,9 +322,9 @@ def urlize(text, trim_url_limit=3DNone, nofollow=3DF=
+alse, autoescape=3DFalse):
++             # Make URL we want to point to.
++             url =3D None
++             nofollow_attr =3D ' rel=3D"nofollow"' if nofollow else ''
++-            if simple_url_re.match(middle):
+++            if len(middle) <=3D MAX_URL_LENGTH and simple_url_re.match(=
+middle):
++                 url =3D smart_urlquote(html.unescape(middle))
++-            elif simple_url_2_re.match(middle):
+++            elif len(middle) <=3D MAX_URL_LENGTH and simple_url_2_re.ma=
+tch(middle):
++                 url =3D smart_urlquote('http://%s' % html.unescape(midd=
+le))
++             elif ':' not in middle and is_email_simple(middle):
++                 local, domain =3D middle.rsplit('@', 1)
++diff --git a/docs/releases/3.2.25.txt b/docs/releases/3.2.25.txt
++index 60236d5..67dc8a2 100644
++--- a/docs/releases/3.2.25.txt
+++++ b/docs/releases/3.2.25.txt
++@@ -59,6 +59,13 @@ directory-traversal via certain inputs when calling :=
+meth:`save()
++=20
++ Built-in ``Storage`` sub-classes were not affected by this vulnerabilit=
+y.
++=20
+++CVE-2024-41991: Potential denial-of-service vulnerability in ``django.u=
+tils.html.urlize()`` and ``AdminURLFieldWidget``
+++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+++
+++:tfilter:`urlize`, :tfilter:`urlizetrunc`, and ``AdminURLFieldWidget`` =
+were
+++subject to a potential denial-of-service attack via certain inputs with=
+ a very
+++large number of Unicode characters.
+++
++ Bugfixes
++ =3D=3D=3D=3D=3D=3D=3D=3D
++=20
++diff --git a/tests/admin_widgets/tests.py b/tests/admin_widgets/tests.py
++index f701f1a..c532199 100644
++--- a/tests/admin_widgets/tests.py
+++++ b/tests/admin_widgets/tests.py
++@@ -353,7 +353,12 @@ class AdminSplitDateTimeWidgetTest(SimpleTestCase):
++ class AdminURLWidgetTest(SimpleTestCase):
++     def test_get_context_validates_url(self):
++         w =3D widgets.AdminURLFieldWidget()
++-        for invalid in ['', '/not/a/full/url/', 'javascript:alert("Dang=
+er XSS!")']:
+++        for invalid in [
+++            "",
+++            "/not/a/full/url/",
+++            'javascript:alert("Danger XSS!")',
+++            "http://" + "=ED=95=9C.=EA=B8=80." * 1_000_000 + "com",
+++        ]:
++             with self.subTest(url=3Dinvalid):
++                 self.assertFalse(w.get_context('name', invalid, {})['ur=
+l_valid'])
++         self.assertTrue(w.get_context('name', 'http://example.com', {})=
+['url_valid'])
++diff --git a/tests/utils_tests/test_html.py b/tests/utils_tests/test_htm=
+l.py
++index 30f5ba6..93458ac 100644
++--- a/tests/utils_tests/test_html.py
+++++ b/tests/utils_tests/test_html.py
++@@ -255,6 +255,15 @@ class TestUtilsHtml(SimpleTestCase):
++                 'Search for <a href=3D"http://google.com/?q=3D">google.=
+com/?q=3D</a>!'
++             ),
++             ('foo@example.com', '<a href=3D"mailto:foo@example.com">foo=
+@example.com</a>'),
+++            (
+++                "test@" + "=ED=95=9C.=EA=B8=80." * 15 + "aaa",
+++                '<a href=3D"mailto:test@'
+++                + "xn--6q8b.xn--bj0b." * 15
+++                + 'aaa">'
+++                + "test@"
+++                + "=ED=95=9C.=EA=B8=80." * 15
+++                + "aaa</a>",
+++            ),
++         )
++         for value, output in tests:
++             with self.subTest(value=3Dvalue):
++@@ -263,6 +272,10 @@ class TestUtilsHtml(SimpleTestCase):
++     def test_urlize_unchanged_inputs(self):
++         tests =3D (
++             ('a' + '@a' * 50000) + 'a',  # simple_email_re catastrophic=
+ test
+++            # Unicode domain catastrophic tests.
+++            "a@" + "=ED=95=9C.=EA=B8=80." * 1_000_000 + "a",
+++            "http://" + "=ED=95=9C.=EA=B8=80." * 1_000_000 + "com",
+++            "www." + "=ED=95=9C.=EA=B8=80." * 1_000_000 + "com",
++             ('a' + '.' * 1000000) + 'a',  # trailing_punctuation catast=
+rophic test
++             'foo@',
++             '@foo.com',
++--=20
++2.40.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb=
+ b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
+index 2d94b2109c..c5d97ae482 100644
+--- a/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
++++ b/meta-python/recipes-devtools/python/python3-django_3.2.25.bb
+@@ -12,6 +12,7 @@ SRC_URI +=3D "\
+        file://CVE-2025-57833.patch \
+        file://CVE-2024-39329.patch \
+        file://CVE-2024-39330.patch \
++       file://CVE-2024-41991.patch \
+ "
+=20
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+--=20
+2.35.5
+
 
