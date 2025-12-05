@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC4F9D33998
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB57DD33992
 	for <webhook@archiver.kernel.org>; Fri,  5 Dec 2025 17:11:47 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24.1764954697775132241
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.38.1764954703638115814
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Dec 2025 09:11:38 -0800
+ Fri, 05 Dec 2025 09:11:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZDPvPBIn;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so30060085e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 09:11:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YDQf858p;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-477632b0621so17217045e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 09:11:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764954696; x=1765559496; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1764954702; x=1765559502; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=hnLfxVLAjuzRZqFjVjHDs6L8U0nBd1pVUdgeSkMv1cw=;
-        b=ZDPvPBInRep/mq3d1PiWLaM1HExCWfbT4gFDAVFjMlZGkIPphjMQI264vwGpr7T5j9
-         jh4iDNFzhoiLWrVUUUiDhKa1ls/WE7L6N4Vp0N7MdWcsjb38wEhXAeexfvQUlQdDwdUm
-         3hPy3VMvU71SNEf3DVYPKAmdil2c7TN+hUFTSALjDWXLqyB5ppW5zOad12RumnOFZtvZ
-         khCNmZlaJRyAZBVavi2EN0JGmD+svTOczg/ho4BYviRjMPn5KXw3ma/xR3M3DhLSLsGV
-         4t579MWYeBK4t0qurTi00D5lJ1agi+Qov2zZJkjPyObMJ4q6i2z85GuF04nmXM236Vlx
-         aZIw==
+        bh=3oXfesDdKPXstCM620W+/7DfSh+9R6AoRJ8TQTGyVQU=;
+        b=YDQf858pkj2OKM5MST2ABrOMpdhc16haIQDZ12MnEs/oKo6hGSO5skHmNLlDpWWTT+
+         BJkEN0Eae0ayo6VW9iOp1O6Tn2tXCIwS8bnabmyWUzWY0LZnnG17+vryWXPDpXCPwSo8
+         x5xIRwpeyOs5OZAvdKuz0m4Acm6fiWk3RHArL4tSrp9DES409ueXgWUOC2Jtmf3tziWE
+         VRAqTta4yZPqUVNk1AuJm1nd6QiqjbbaNb3+cCI/OPRhC1zbsuj1DSgZzCyeyPgi8cdq
+         RsZONY7SrrN/KISLp3bVujE+YLoTTJK5PNnSSQLkrDTe2/oO7TT5Ogh+jrmrsLcRgQNr
+         rC5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764954696; x=1765559496;
+        d=1e100.net; s=20230601; t=1764954702; x=1765559502;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=hnLfxVLAjuzRZqFjVjHDs6L8U0nBd1pVUdgeSkMv1cw=;
-        b=Zf+9nPtP8BVn83vJsiFVYuHasuQqgy2Cq9vzEXCN6WpiNiZHhyXSwSd5OgB6uUVJNK
-         cvAK5e1dkG3ks2Li0SjS7dtTwFLP5oSgSPKqY3hfClW/2kytRg9sx2wIlQKHNXpSviA7
-         WkVDQs1rq6uFpPHgRzqVO2W//gIhvCiniIlHviJCTLjuoJCdvpnttH6kkpbP4l8yozAK
-         ELaC7S5IdFvZXnRfBncIXgy4lj6kz1ye/mW6IdBQaEUJRF7I5cN2DUmYIUvR1Qyo94/u
-         JGKH+/6ff92VXB8kjDa7p8q1csVPLFfyxrE+K3FuIq581dn4GR65SO4o4UpGX8sklVqf
-         1Heg==
-X-Gm-Message-State: AOJu0YwbcL2b+6fBlQD8wDXf/ImbS2R/lSpQY/Wuc1hXaoZgzIc/li9R
-	DMOUpW2z5BaNqD/CLVZ0LWKMwKuZTo7nUziBTA6HbdHkMzHPkZjPo5NHaEwZ7g==
-X-Gm-Gg: ASbGncvImZH9BuCkol5Qh69oF5hGfoErbo5OB87nYCTh1WI+aVRzPdKux+3TtIPi7hu
-	YdtuZgk90Uu0JP8+Bc0cgCyOQ0j+NeMP+GzEOXgHsyNi3oXlrQBllliLji31x+Zn8sFAhfg1L0b
-	y1CT3MnxcblUzaSPXRemw8v23kVfVzTgMA7IiD2MLyLa0XUaDwzgxUyiCHcoD94bECKDv2RAk+R
-	tOlZm+OEM4RWixgjnk9ValRbTFmmggLGOh257tKulniPPppwnwtKfbhVLqXKs4vh80ddHZEyfGD
-	B2K7v/tXJj0bSmP9ez/1FmdMqd/qYtR0PSaqg4qcjjjcW1LRNSlJqbmxq6gJSlWJicXcAkiXss6
-	5MS8lAjQUV/6RnE+e6g99+FsPlrUbiCWXi2svfTb9aYirJtHAUbnpyiH5z0RbvdtdUSA5AgpWCI
-	MLH7PXomU9tz2dCFIcbLo=
-X-Google-Smtp-Source: AGHT+IHH1354UksQYjfj090VNEAlFFGqz6nJ44zoX4Xnsgdue0/MMy2W6nYtzUhkSiewnSjIBGuXQQ==
-X-Received: by 2002:a05:600c:4f0f:b0:45d:d8d6:7fcc with SMTP id 5b1f17b1804b1-4792f38d58amr77373225e9.27.1764954695788;
-        Fri, 05 Dec 2025 09:11:35 -0800 (PST)
+        bh=3oXfesDdKPXstCM620W+/7DfSh+9R6AoRJ8TQTGyVQU=;
+        b=V6fntuzhNHm07zJwmlD83fawKbJPCbC0SDhwKMOL97QaXxspZb0k/RY4CSzyvpfOh5
+         JRDGnEY9aq2jXybSJADQ/Yrgp5UHH0nAqz3mrBiXIxfSQ7Ve1yOXrZmeF2skrAPQ+v0W
+         WjDzCv4P+MtnZ4NEhMxoVaPKJiFX4NClm8xOrngvKyrnAGMf7dzbQ5znPJpqJJ7URDTU
+         iJyNyfB3OjEuu/YDCrh+cZoWLCEmlaxfr/WiOis60vt3BncZKEIsOdsynXaNpJ2ttQpK
+         eolePQfiLkkm28Royk7LvklhY7g3hNucKh5eLMo0zYH7NHpWS7n1/8IgG8Q8i91quHrK
+         pMyA==
+X-Gm-Message-State: AOJu0YyB9+eGUANpRG9GMDpEm3hopCiZJ29zl3u6dBPD1JZtJAW07/eB
+	7AIxAwsxPnoKEzipIsttst3MdjQN6QMvsK2mkxw6Unt79ThDPoKYgXoll/2r/w==
+X-Gm-Gg: ASbGncvjuwgY6jkUlFwdyjr8tJvejGaAnDGSc0voF5Pqg8juvzHmjeYqlMI/l9Gg1Lt
+	2Lkr8vOm3XB1HdytuiiUX/Q0KsAxyeGNToCnnHgcGJv8ZRwef/Mfa+Wz2m0WkUts8RFfu3ftZI0
+	rr6H1Eu8xklEKk528U4p4LlPrFXeHjIRHNEKZL66Wzm3gGNCpqKXroVaVjVS6tVVE56UK+g+Unv
+	5bR38/kA3i9ts0aNJXl5teoAtxo1LuLpcySFAzTImmTCbNMdNJR8+1Rl6OFVQYm3Oo3RgV/9GMU
+	lATGXo4D1lTFqQD902p0gxGwXG9pcflshqgUygzuRHWdUnaoYzDBAzw9iEuti15AY7yTdFgajG2
+	sE3MJJKvBfvTvXf0nWrmUg4uS9Vak5BqZKKcD9raHOWQhWZjZE1jbzeQxwJVEBqCd22qEmi7Zam
+	Aju2Ql+vUp
+X-Google-Smtp-Source: AGHT+IGZr1oNrb1jDHHjK2Y5UZOkSQUZGsSwsoagU8+AD3Dp5ynx22px/V1Mj+quKr3ZQrISNEuneA==
+X-Received: by 2002:a05:600c:4ed3:b0:45d:f83b:96aa with SMTP id 5b1f17b1804b1-47939df12f6mr226205e9.7.1764954701850;
+        Fri, 05 Dec 2025 09:11:41 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-479310a6db3sm98563435e9.1.2025.12.05.09.11.35
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-479310a6db3sm98563435e9.1.2025.12.05.09.11.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Dec 2025 09:11:35 -0800 (PST)
+        Fri, 05 Dec 2025 09:11:41 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 02/10] xrdp: patch CVE-2022-23468
-Date: Fri,  5 Dec 2025 18:11:26 +0100
-Message-ID: <20251205171134.1346494-2-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 10/10] xrdp: patch CVE-2022-23493
+Date: Fri,  5 Dec 2025 18:11:34 +0100
+Message-ID: <20251205171134.1346494-10-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251205171134.1346494-1-skandigraun@gmail.com>
 References: <20251205171134.1346494-1-skandigraun@gmail.com>
@@ -68,68 +68,67 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 17:11:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122348
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122356
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23468
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23493
 
 Pick the patch that mentions this vulnerability explicitly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../xrdp/xrdp/CVE-2022-23468.patch            | 34 +++++++++++++++++++
+ .../xrdp/xrdp/CVE-2022-23493.patch            | 33 +++++++++++++++++++
  meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch
 new file mode 100644
-index 0000000000..6f8b3a0fb1
+index 0000000000..de3f7a42f3
 --- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch
-@@ -0,0 +1,34 @@
-+From 43cf272b1138462c1bdfc48ef7e9142208194382 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch
+@@ -0,0 +1,33 @@
++From 030db5524be7616967ae9e7d26b3d4477cf6082d Mon Sep 17 00:00:00 2001
 +From: matt335672 <30179339+matt335672@users.noreply.github.com>
-+Date: Wed, 7 Dec 2022 09:16:44 +0000
-+Subject: [PATCH] CVE-2022-23468
++Date: Wed, 7 Dec 2022 10:49:06 +0000
++Subject: [PATCH] CVE-2022-23493
 +
-+Login window - replace g_sprintf() withl g_snprintf() calls
++Check chansrv channel ID on a channel close
 +
-+CVE: CVE-2022-23468
-+Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/43cf272b1138462c1bdfc48ef7e9142208194382]
++Prevent OOB read if an invalid channel ID is sent.
++
++CVE: CVE-2022-23493
++Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/030db5524be7616967ae9e7d26b3d4477cf6082d]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ xrdp/xrdp_login_wnd.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ xrdp/xrdp_mm.c | 6 ++++++
++ 1 file changed, 6 insertions(+)
 +
-+diff --git a/xrdp/xrdp_login_wnd.c b/xrdp/xrdp_login_wnd.c
-+index 7a3134fd3e..28748676a1 100644
-+--- a/xrdp/xrdp_login_wnd.c
-++++ b/xrdp/xrdp_login_wnd.c
-+@@ -722,13 +722,13 @@ xrdp_login_wnd_create(struct xrdp_wm *self)
-+     if (globals->ls_title[0] == 0)
-+     {
-+         g_gethostname(buf1, 256);
-+-        g_sprintf(buf, "Login to %s", buf1);
-++        g_snprintf(buf, sizeof(buf), "Login to %s", buf1);
-+         set_string(&self->login_window->caption1, buf);
++diff --git a/xrdp/xrdp_mm.c b/xrdp/xrdp_mm.c
++index 74b0516afa..068424885e 100644
++--- a/xrdp/xrdp_mm.c
+++++ b/xrdp/xrdp_mm.c
++@@ -1435,6 +1435,12 @@ xrdp_mm_trans_process_drdynvc_channel_close(struct xrdp_mm *self,
++         return 1;
 +     }
-+     else
-+     {
-+         /*self->login_window->caption1 = globals->ls_title[0];*/
-+-        g_sprintf(buf, "%s", globals->ls_title);
-++        g_snprintf(buf, sizeof(buf), "%s", globals->ls_title);
-+         set_string(&self->login_window->caption1, buf);
-+     }
-+ 
++     in_uint32_le(s, chansrv_chan_id);
+++    if (chansrv_chan_id < 0 || chansrv_chan_id > 255)
+++    {
+++        LOG(LOG_LEVEL_ERROR, "Attempting to close invalid chansrv channel %d",
+++            chansrv_chan_id);
+++        return 1;
+++    }
++     chan_id = self->cs2xr_cid_map[chansrv_chan_id];
++     /* close dynamic channel */
++     error = libxrdp_drdynvc_close(self->wm->session, chan_id);
 diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
-index 354eb11730..2a47b6c68f 100644
+index e78dba945d..5526027712 100644
 --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
 +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
-            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
-            file://0001-Fix-the-compile-error.patch \
-            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
-+           file://CVE-2022-23468.patch \
+@@ -24,6 +24,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
+            file://CVE-2022-23481.patch \
+            file://CVE-2022-23483.patch \
+            file://CVE-2022-23484.patch \
++           file://CVE-2022-23493.patch \
             "
  
  SRC_URI[sha256sum] = "f76aa16034689bb8997e56fd554db29ba57caa1bab228a6eda28be4389dedeb9"
