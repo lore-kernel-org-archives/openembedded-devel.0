@@ -2,109 +2,98 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 772C9D2F7DB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75125D2F7DA
 	for <webhook@archiver.kernel.org>; Fri,  5 Dec 2025 10:54:10 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2909.1764932039938473773
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2991.1764932041048529787
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Dec 2025 02:54:00 -0800
+ Fri, 05 Dec 2025 02:54:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=OgpOoowI;
- spf=pass (domain: konsulko.com, ip: 209.85.218.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b73545723ebso312516366b.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 02:53:59 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=KpKxxfHM;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.49, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b79f8f7ea43so275236266b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 02:54:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1764932038; x=1765536838; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8sdOjNLEC3GBD3bru9tt0pWCsZU7whwmAMM7ajWgwrQ=;
-        b=OgpOoowIulxFPxXCfLTCfDqej31cMppEXTz4I4iinrqwRjzvIkdiPiE5POhc7nU2S5
-         DiLofeZ8N90jMCd2LVbgbrWy2YxRMeO2B5qBYojwhqtI/LaoicRHyxI6zYQv5SOp8M9N
-         gTtthzTvrpTUuaFS+MF1TXPXaQGKkPwoFgJDM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764932038; x=1765536838;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1764932039; x=1765536839; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8sdOjNLEC3GBD3bru9tt0pWCsZU7whwmAMM7ajWgwrQ=;
-        b=s6UvtKRWOXS7WXlUUEZcdX9a7mf7XTqIGUEI4v8cgGMRLCU02FlqtBQJxK8/kAJuqL
-         HjeuRzXn3cmtoWakQcBmKywheG3lsJceMYP/hFahrAH2Ca38RTRdW1YvYjMSDngIGJgZ
-         L79ReQ+qeKbkuGBXt0VjM59ddz0FXrI+iv2p8LKW9ODoENLGNN5qvBl0O12Ms7sZ/UDP
-         OWIbXhqxUhJuhh5MIPzVK4QpduubXH34IPFIBL00OOWQBA+/MUH1YeKR+adlu06XcYxc
-         5J8IzaeF6pH1T1bpb+ONMlLfepV+eZONif7lheRaF/tpwaP6RtsBROXUzl6SeGX2r/s7
-         QLow==
-X-Gm-Message-State: AOJu0YzrOVOax8Vm+BA6KvwfHt9EtUsLV9dryC7qNvkZ0CGlYoF9UCBY
-	5WD57w18fPdZP/Uh4X9xjFVIB/b/5HdU2VwnZBOnX8mN6FfvXgYm9qxuTl9oaqg7Rsi8uMwzNKe
-	py6sq
-X-Gm-Gg: ASbGncthSIW6xXpEMSgsQ4H+ETgAkZ1VXeW0v0SEsUWsUE5SNs1LdSpXsMPrXrul1pc
-	/gYIorKX56xEkb3yNyPVDuuBk1IsCZQXlcBlX0ebpB4qm49DPrMBFE52ySVcLHGWrE5ILudYmDo
-	sToMOUNwGyUI5jC03g96jCdTaZi4dINLb+oy42wUIoPSRc0eXIiTKBQbUKhkC0+jYfJ4i3+D8kK
-	UTHUdismZP2sFYeAJEHw5MUfIAelxA1S1FGKlW1AKyTYbzPZCHrJFR7EzIohD6UR63tjZqBOW2q
-	vXBQXC0yezHKPHeWx52YYJ/8TYC9kUk0/3ssRiAY7uzAj2HT5jXa86sVS9T7fzJv16D3arQv+LI
-	IsP1eEPJv63hoZggHNkzrPOtsJ7TQ7uIFVn9JAvEnj+mTCiVLHdw/jB88hejQrjAJvP7VtprG4H
-	+PN9bhzDR1kxmZJhnsDebnD7HVNcxAi2v0Sow=
-X-Google-Smtp-Source: AGHT+IH3DaGsj7ZkFMbGEgB3RVrFSJ/86d2BNl0GP0OfImJ0zj5IQainW3XxYyK5D2/7ZkBtt3Lb8w==
-X-Received: by 2002:a17:907:3da1:b0:b76:49ae:6ee6 with SMTP id a640c23a62f3a-b79dbe8e721mr1005215266b.15.1764932037898;
-        Fri, 05 Dec 2025 02:53:57 -0800 (PST)
+        bh=wAMT8e0O/rHgkPvsJpK9n8AVy0pZxDaPnbN4KeLIxy4=;
+        b=KpKxxfHM6hTf0Ve8Jl7kNsAmy0+5nliFcwg+y+s9H2JztADC0oDrPlIsPlQsLQ1z8j
+         rXz+jcw/Wdh3OLKO7RqEiVy6CfeaVBv/qF6CiyDR+32dFtSZmmrxIyrfkpgBiTLq3WQ3
+         eBG5pqFKdbfpeorE/PoH6tlIIzOADOS1d9NXs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1764932039; x=1765536839;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=wAMT8e0O/rHgkPvsJpK9n8AVy0pZxDaPnbN4KeLIxy4=;
+        b=OQWNFAq48Q+zQ8pxDLgu/IfvGNsynAtqCZol+JfL+JpN8sbpIkQ20z4CcLituyxTGy
+         lZ9M3ZeUDEX7DI7h8aK2VRrSVB54OjLMxog2nvvpkufNlCN1wt0sLdrUUONVqj+GRuG9
+         DBGZVwtH7swcAeV36vtE/0Jy/L+LQ4q3ALdsgsuAYmNOimgq8k6Tz7FSXzwl9084YMdU
+         3b6upRZj9PZqISWodO1Wm9YqO7PJHi0Vmj7sUGA2vid6AtdQz+Ks/XLRJwKohN1a5DtI
+         7cp2hgKanqR6jJdKyVQEqOgI0+Odfs/A5wBTnNm4xnfIBNCT0Xr0k7rkZ/qzp805/Agf
+         9zpg==
+X-Gm-Message-State: AOJu0YxTFcEXpU3wmHRf5kZDaWuzGvY7I93rvZO5vs9K7U1Q6wvCp6IN
+	T4P7Qzq2H0YJsaGK22SacYhp2/mv7KpY8FawO3lIb6X+kdD3lBtDSjSJMAlV9tWSxEDyRHfTOM4
+	u5RKi
+X-Gm-Gg: ASbGncsJ5lYkY2kTOVVfMEI81Q2luALmmn35ey7M/rkTJlexeRstJsjpp5+dX0nUqoD
+	VDLDfBEJ6MGwgBH2HIwfbeAc+oDDtyMCW13GLllTKb7XNU9GqeyqO+WIWB3aflxX0ft7tiHQtKr
+	5D4TruYum170gu7eM1urMDOx6UolezrgKzHyvgVJd89zgNg6u6WQFW0IZP0nmIjB3L/lfJl09CU
+	KpSF3dEZKut1XrHQkmIrf44uhg2aPwoeqHkfUAGsQmHLZuRebWxC8VZESNXd31hJT0ELLu8aXdN
+	o2Ia7XXj8ltQML5jZTUClToJyVJkxFS4jWtLD4GOmSD8ZxQWRoLSXPSubMrU/9RN3VXkOLuJBbu
+	vYpp0K26ZNQolgWAGFx6tJLNYqpKATK3DSowP1ogqC2Cc1Sf1i9Fc31CNp1O2dJow+qIHgMZ9Pl
+	hIuMjAq5SaI9+BW06DAANE5LySEKgYObkB5BM=
+X-Google-Smtp-Source: AGHT+IHhtjDsaEjPn/WHuk8YhCpY+Na3eF/lEcwiMvzvyuBWUzJLUcsOrXlNvuQGNQ6y8OayUKwnfw==
+X-Received: by 2002:a17:906:7304:b0:b6d:5262:a615 with SMTP id a640c23a62f3a-b79ec6b93bcmr688179066b.41.1764932038901;
+        Fri, 05 Dec 2025 02:53:58 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b79f44597e6sm346398466b.12.2025.12.05.02.53.57
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b79f44597e6sm346398466b.12.2025.12.05.02.53.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Dec 2025 02:53:57 -0800 (PST)
+        Fri, 05 Dec 2025 02:53:58 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-multidict: Upgrade 6.6.3 -> 6.7.0
-Date: Fri,  5 Dec 2025 12:53:54 +0200
-Message-ID: <20251205105355.1922620-1-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-huey: Upgrade 2.5.4 -> 2.5.5
+Date: Fri,  5 Dec 2025 12:53:55 +0200
+Message-ID: <20251205105355.1922620-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20251205105355.1922620-1-leon.anavi@konsulko.com>
+References: <20251205105355.1922620-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 10:54:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122344
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122345
 
-Upgrade to release 6.7.0:
+Upgrade to release 2.5.5:
 
-- Updated tests and added CI for CPython 3.14
-
-From 6.6.4:
-
-- Fixed MutliDict & CIMultiDict memory leak when deleting values
-  or clearing them
-- The type preciseness coverage report generated by MyPy is now
-  uploaded to Coveralls and will not be included in the Codecov
-  views going forward
-- Added memory leak test for popping or deleting attributes from
-  a multidict to prevent future issues or bogus claims
+- Fix for pypi
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...ython3-multidict_6.6.3.bb => python3-multidict_6.7.0.bb} | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-multidict_6.6.3.bb => python3-multidict_6.7.0.bb} (69%)
+ .../python/{python3-huey_2.5.4.bb => python3-huey_2.5.5.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-huey_2.5.4.bb => python3-huey_2.5.5.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.6.3.bb b/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
-similarity index 69%
-rename from meta-python/recipes-devtools/python/python3-multidict_6.6.3.bb
-rename to meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
-index 5b262ed933..857cc6173b 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_6.6.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
-@@ -6,11 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b4fef6e4b0828c2401fb983363985b39"
+diff --git a/meta-python/recipes-devtools/python/python3-huey_2.5.4.bb b/meta-python/recipes-devtools/python/python3-huey_2.5.5.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-huey_2.5.4.bb
+rename to meta-python/recipes-devtools/python/python3-huey_2.5.5.bb
+index 9402dee2f1..d80ece1fc7 100644
+--- a/meta-python/recipes-devtools/python/python3-huey_2.5.4.bb
++++ b/meta-python/recipes-devtools/python/python3-huey_2.5.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cac039fcc82f01141cc170b48f315d4"
  
- inherit pypi python_setuptools_build_meta ptest-python-pytest
+ PYPI_PACKAGE = "huey"
  
--PV .= "+git"
--
--SRCREV = "dbd686f37c1bc14355dce9c16dbbfae82f11dc00"
--PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
--S = "${UNPACKDIR}/python3-multidict-${PV}"
-+SRC_URI[sha256sum] = "c6e99d9a65ca282e578dfea819cfa9c0a62b2499d8677392e09feaf305e9e6f5"
+-SRC_URI[sha256sum] = "4b7fb217b640fbb46efc4f4681b446b40726593522f093e8ef27c4a8fcb6cfbb"
++SRC_URI[sha256sum] = "a39010628a9a1a9e91462f9bf33dc243b006a9f21193026ea47ae18949a12581"
  
- RDEPENDS:${PN}-ptest += " \
-     python3-objgraph \
+ RDEPENDS:${PN} += " \
+ 	python3-datetime \
 -- 
 2.47.3
 
