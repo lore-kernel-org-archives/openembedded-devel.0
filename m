@@ -2,138 +2,173 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A91D37499
-	for <webhook@archiver.kernel.org>; Fri,  5 Dec 2025 20:10:32 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2827.1764965424143563149
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2CBFD3B7DC
+	for <webhook@archiver.kernel.org>; Sat,  6 Dec 2025 17:59:22 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11943.1765043953983090427
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Dec 2025 12:10:24 -0800
+ Sat, 06 Dec 2025 09:59:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=F+M6NAQk;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so31191265e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 12:10:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OeMxPI06;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so39856315e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Dec 2025 09:59:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1764965422; x=1765570222; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765043952; x=1765648752; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y2KRjUXpEyhOz59UX8n89goMOSUWhnkiHBgJ3rB1i/o=;
-        b=F+M6NAQkqQ9GT33PUszuCoOTuDwuA5qF+LpZDY9jk6lpJVyraXhG0wabayfkiN/cwS
-         CVg014A60AqrOKY6USgOFCzfiIGGCMmoj0tYohVlGvi/ohcBknQrixcmdO3IqVoiHS+H
-         yyjUgWpbs6rC/ZPk7Vh7IDofwifRobyCr/Kkx1zzUhcdkHPtGN/vsWFGVORdv6YUIgiP
-         oA7X+LUoMOE76C9iR2kKT07/9fovSeavG0Yum5e1nqxfYDwNdeM//Qd6lF4zp2e3ML7n
-         ePjFhHcqvccjkEnrccYT/05d1VsR97Jecr8apaJvomY2QWU5B0meJNZmTmdsZL0iBimJ
-         PDlw==
+        bh=ZWD+qW9WCaUc2RSZGBWXPRtAOBuglU1VWDICS49AL2k=;
+        b=OeMxPI06ACil4REfKowghlU4ZyYVN7CFD0tcRflgFSzpytBj/eupzDyuABDU3QPvto
+         +LJQSw9KY0gC5Atm4h+Qk5bcUuy51+p5J1/8AiyTVzmdJjPce/gg2l5ElCPkZZUKVQfV
+         rmPKlu79up15TI2yvro8VwV2wmxVfcSJbajU6jpIne6cUGYE3+1f9oeY7ssfaeywTl7I
+         3UYkAU0WE8F9MgxJgPqk7OXY711D9+10l1nc5hL5v58sigqcAQPJEd6rWpUgOMx79PzW
+         T3EDYjgnDKj8WCy478ZQe3+dqxIw6hKz+DiJKifQSLBiTATjsNu6H3xdH8CcQWTM+QTe
+         wyTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1764965422; x=1765570222;
+        d=1e100.net; s=20230601; t=1765043952; x=1765648752;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Y2KRjUXpEyhOz59UX8n89goMOSUWhnkiHBgJ3rB1i/o=;
-        b=Rkvq7kSPkov0i0ux8JBP8Dp19/QbX93Oex3fU4mmnMZm0Qkry9gNjfJgiOcordtCE5
-         GdSNhV+z3K+V8PPs+kfh6DK/9oixhAFoeT6N+B0kj0ck00vcLZ9TZPtKptqmhJ174nK3
-         d4xyMDQL0qdS/gYq0axfPdUqQCiSrcRuZRI+6s0GPWGz2gAds3jrzvn8jU3gSafPvGcx
-         fb/S5OVq1zwXxzIa4jZL98fNhLhWq6w+P4nSAjS15Kb8lMQCIMyd/wbZ1XOmElRwIPpM
-         QvMZl60a+kzbJRCRF9tpJZvtTUHpWMGBbfNc8xyTOhscCftB1XdSo6ylNh6SUTTfDyZ/
-         cR3Q==
-X-Gm-Message-State: AOJu0Yw9Un6fv2JqRYo90op3ysV7/6Mz3e3u7j3NreT6W+eldZOFK4Hr
-	qqVlLHe0C+0ieQOz5XrWtR/XElWlWJzA9hdKW/2v1/wfXIZcZ/aDlrqLyS543Q==
-X-Gm-Gg: ASbGncuCDH2bOz+3EkKQECS4og4tx8rYUX3sAwhwaFkNnYiJhvDKZ0Nq0na7+iImQzx
-	lJLNH3v+KDhXJc5HBn0r7uS8+b5uHAqVwE0AvEnVCOaJIUvBk7XeoXxOQ+cI2CN2wIqu8ttItz6
-	npR/JLkzVGo5De3d8hH8ukRdLZpU21daWC0F0q2HDXqyqTjUoeYn9THR0q8OVy59UUmRrNflS1t
-	cQD+sXRDsONkehxtreYsd2vPDITwVX8k74gZBSq0aURXxWaJxIPi51Js/fRImEDyXUSOhT11xVp
-	RWfK4/xB0BJlvpjcMvjcSWML0dVmglayUBr3goJlU0fa8wcseLH8ys2hBz8t8zzXPwq/GptNYxW
-	e2JkuCBUiedfpgpl57kKcCL1WJ9/xYbQmNRLSvRIC3KCatQRHhxmlXkaBxE6xWyyTy1kwO0gn7F
-	q3SUcWouTx
-X-Google-Smtp-Source: AGHT+IG4MA5FKkiY8yWS/rrL4YgM7qvleeJ3nZAmr1Kttno9rwFMNwUryVL09T7fYR0Zo6zFpjYINQ==
-X-Received: by 2002:a05:600c:3593:b0:477:5c58:3d42 with SMTP id 5b1f17b1804b1-47939df8334mr5312265e9.10.1764965422252;
-        Fri, 05 Dec 2025 12:10:22 -0800 (PST)
+        bh=ZWD+qW9WCaUc2RSZGBWXPRtAOBuglU1VWDICS49AL2k=;
+        b=f4wRILIEGZCkJDdf93VemF0dY4qFNFUlxS9mSETwSlR1h46cQTHxKZFAYmPH8sNxV+
+         jWkVMjqIZ5Gj1cL+QSQWLePfa5VbMpS1g8ORr+8vwH7PEZWm+89oKo6VRTv6t9rMES0U
+         Tn5B6h8Xr2cCWaFKafPP2Nb8PYTlFijW3R3/RpQO5sXBpdmzo5hn9fIx/GaGr5ASJ8Ws
+         lGX03fp7k0wsPcCeiHOWiSn+QgcoiPd/kOyoEHe3YN2oyeytXBtHTPn/7ozqDE3kiWft
+         Sga52TSz+noxmLyjGEsACymIpSjNbCk8nArkHWkx2Dx/jLpQmjT2dVReBPjihAf20ldt
+         L8QQ==
+X-Gm-Message-State: AOJu0Yzfkbza12HodsOjPUnCUBrmYatysOdbYDiG8Nz4eS9AvHq3T3tm
+	dboORpSpupDELaoVouW9S9n6OqNBPghtK6g4Rft4XoOQ30lTOrtoeqDc/Td0rQ==
+X-Gm-Gg: ASbGncubZwC6+QohO4CQX/aqvbw69e5sQd8vmAbQIhi0DzKVkdFTPii6ROuv2Kmcq0q
+	2uEljhJsVf6KpzBafsIpEt8D5m19oAvSgVQhf5suhM85t+flR+LV8lLmEh+LA3UGQcrVgAN7U+1
+	iyw6z8TcWPNtADGTk7IaJ8ekKXpdq/8NnhnxeUQswOwM9F4cTwYPGecdsnfIXeoLr6XfvsOVFd2
+	OPh2qT5Lq4SJOxJGPaQv2vaAf4a0mVsGcnSnsaGF63b2z9bwKzreRXd7zx3gLV+tugl/sfQKlyS
+	GNaLnyrJ+MucRj2JWWzbLdkBLa+9rT3pGuYjZoUmp44hgXKlJPucb6EiuNyVDSuvLbpaTX0j1J7
+	eD0y3hZDlp7MtOj+VPrMv7ctbJ91p1Y8sKfTdMuoi3oOCJxn1BJH2uitwe8Ac39aKDyVJ5GybuJ
+	QTqk8da9cg8Lxru2VSJxE=
+X-Google-Smtp-Source: AGHT+IEqjkwuKnee9y/eVCzeNpCG/Nv3awW5iYKc3rrafgn8VAWLamgmTGfHD6qFwx462Tssixz0kA==
+X-Received: by 2002:a05:600c:1ca5:b0:475:e007:bae0 with SMTP id 5b1f17b1804b1-47939e20b01mr40947175e9.16.1765043951818;
+        Sat, 06 Dec 2025 09:59:11 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4792b157783sm74993245e9.5.2025.12.05.12.10.21
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-479310a6dc7sm144953095e9.3.2025.12.06.09.59.11
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Dec 2025 12:10:21 -0800 (PST)
+        Sat, 06 Dec 2025 09:59:11 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH v2] gupnp-igd: add ptest support
-Date: Fri,  5 Dec 2025 21:10:20 +0100
-Message-ID: <20251205201020.1669530-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] xrdp: add ptest support
+Date: Sat,  6 Dec 2025 18:59:10 +0100
+Message-ID: <20251206175910.3426096-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Dec 2025 20:10:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122361
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Dec 2025 17:59:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122362
 
-Execution takes around 10 seconds.
+It takes under 10 seconds to run the suite.
+Executed succesfully on x86-64, with musl and glibc.
+
+The recipe requires pam DISTRO_FEATURE to be present.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 54ca51b6c6c90ad464a488e1ee271d3fff708955)
+
+Adapted to Kirkstone
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+ meta-oe/recipes-support/xrdp/xrdp/run-ptest   | 13 +++++++
+ meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb | 35 +++++++++++++++++--
+ 2 files changed, 46 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/run-ptest
 
-v2: fix test binary installation directory. The first verison was working, because
-    run-ptest searches the test folder completely in-depth, but the binary was installed into
-    a deep subfolder unnecessarily.
-
- .../include/ptest-packagelists-meta-multimedia.inc  |  1 +
- .../recipes-connectivity/gupnp/gupnp-igd/run-ptest  | 13 +++++++++++++
- .../recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb   | 11 ++++++++++-
- 3 files changed, 24 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
-
-diff --git a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
-index ec10edfb83..eb8d4ffe89 100644
---- a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
-+++ b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
-@@ -9,6 +9,7 @@
- PTESTS_FAST_META_MULTIMEDIA = "\
-     gssdp \
-     gupnp-av \
-+    gupnp-igd \
-     libopenmpt\
- "
- 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/run-ptest b/meta-oe/recipes-support/xrdp/xrdp/run-ptest
 new file mode 100644
-index 0000000000..05aa2a9b3a
+index 0000000000..4db66da65e
 --- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd/run-ptest
++++ b/meta-oe/recipes-support/xrdp/xrdp/run-ptest
 @@ -0,0 +1,13 @@
 +#!/bin/sh
-+RET=0
 +
-+cd test
++RESULT=0
++cd tests
 +for t in $(find . -type f -executable); do
-+    if ./$t; then
-+        echo PASS: $t
-+    else
-+        echo FAIL: $t
-+        RET=1
++    ./$t > $t.out
++    ret=$?
++    if [ $ret -ne 0 ]; then
++        RESULT=$ret
 +    fi
++    sed -e "s/^ok/PASS: /g" -e "s/^not ok/FAIL: /g" ./$t.out
 +done
-+exit $RET
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-index d8dbc262cd..307d912483 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_1.6.0.bb
-@@ -5,8 +5,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
++exit $RESULT
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
+index 5526027712..48d451ea8c 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.18.1.bb
+@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
+ "
  
- DEPENDS = "glib-2.0 gssdp gupnp"
+-inherit features_check autotools pkgconfig useradd systemd
++inherit features_check autotools pkgconfig useradd systemd ptest
  
--inherit gnomebase pkgconfig gtk-doc gobject-introspection
-+inherit gnomebase pkgconfig gtk-doc gobject-introspection ptest
+ DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native imlib2 pixman libsm"
  
-+SRC_URI += "file://run-ptest"
- SRC_URI[archive.sha256sum] = "4099978339ab22126d4968f2a332b6d094fc44c78797860781f1fc2f11771b74"
+@@ -12,6 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
  
- GTKDOC_MESON_OPTION = "gtk_doc"
-+
-+do_install_ptest(){
-+    cd ${B}/tests/gtest
-+    for t in $(find . -type f -executable); do
-+        install -D $t ${D}${PTEST_PATH}/test/$t
-+    done
-+    install -m 0644 ${S}/tests/gtest/*.xml ${D}${PTEST_PATH}/test/
+ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
+            file://xrdp.sysconfig \
++           file://run-ptest \
+            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
+            file://0001-Fix-the-compile-error.patch \
+            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
+@@ -31,8 +32,9 @@ SRC_URI[sha256sum] = "f76aa16034689bb8997e56fd554db29ba57caa1bab228a6eda28be4389
+ 
+ CFLAGS += " -Wno-deprecated-declarations"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'test', '', d)}"
+ PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse"
++PACKAGECONFIG[test] = " --enable-tests, , libcheck cmocka"
+ 
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM:${PN} = "--system xrdp"
+@@ -79,6 +81,35 @@ do_install:append() {
+ 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
+ }
+ 
++do_compile_ptest() {
++	for testdir in $(find ./tests -type d -mindepth 1); do
++		cd $testdir
++		echo 'buildtest-TESTS: $(check_PROGRAMS)' >> Makefile
++		# change the test-data folder to ./data instead of ${S}
++		sed -i 's|-D TOP_SRCDIR=[^ ]*|-D TOP_SRCDIR=\\"./data\\"|' Makefile
++		# another test data folder redirection
++		sed -i 's|-D IMAGEDIR=[^ ]*|-D IMAGEDIR=\\"./data\\"|' Makefile
++		# and another
++		sed -i 's|-DXRDP_TOP_SRCDIR=[^ ]*|-DXRDP_TOP_SRCDIR=\\"..\\"|' Makefile
++		oe_runmake buildtest-TESTS
++		cd -
++	done
 +}
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/tests/data/xrdp
++	for testbin in $(find ./tests -type f -executable -mindepth 3); do
++		install $testbin ${D}${PTEST_PATH}/tests/
++	done
++	install -m 666 ${S}/xrdp/xrdp256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
++	install -m 666 ${S}/xrdp/ad256.bmp ${D}${PTEST_PATH}/tests/data/xrdp/
++	install -m 666 ${S}/tests/xrdp/*.bmp ${D}${PTEST_PATH}/tests/data/
++	install -m 666 ${S}/tests/xrdp/test1.jpg ${D}${PTEST_PATH}/tests/data/
++	install -m 666 ${S}/tests/xrdp/test_alpha_blend.png ${D}${PTEST_PATH}/tests/data/
++}
++
++RDEPENDS:${PN}-ptest += "imlib2-loaders"
++
+ SYSTEMD_SERVICE:${PN} = "xrdp.service xrdp-sesman.service"
+ 
+ pkg_postinst:${PN}() {
 
