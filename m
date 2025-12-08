@@ -1,286 +1,331 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB2C7D3B7E2
-	for <webhook@archiver.kernel.org>; Mon,  8 Dec 2025 19:02:47 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.672.1765220564899597515
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22CBAD3B7EA
+	for <webhook@archiver.kernel.org>; Mon,  8 Dec 2025 19:50:18 +0000 (UTC)
+Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1752.1765223415800353319
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Dec 2025 11:02:44 -0800
+ Mon, 08 Dec 2025 11:50:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eLXCccUm;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2958db8ae4fso46944065ad.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Dec 2025 11:02:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kaGVYQz6;
+ spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6430834244aso3881735d50.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Dec 2025 11:50:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765220564; x=1765825364; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KoDknuZtItRvl7QR5vEj7fely9b7KJN6lzHsF1OoamI=;
-        b=eLXCccUmvvuzenAvbTg/NkQ569aqETI4kelMkiUX5B4qfL/jDgN82dUJ8lKIHfSEU8
-         SnPJ0IH5Eo2MG5MxyKyKMSXZh60SIaxlJlFlJX6RK0OpItcmdyyX05dGY0vv7RU7COJ4
-         yCxUMWlgWfAGZ5Aty1kFKf/T3lxXCz+s+8k/Gr/VquWZjz1iQmZ24OuJaDNd/4XQ+iE7
-         5RJnSHdRivcNB2RTE1zc8xi6sutlzUy+EcSX2rh1joPhwuJD7LfRBzIbY4E6H2+J+wrx
-         G03XibfFvCjrZ8fXZloFWWezSbEaFyJ6O6NNLW3cP8wWwfI8ss8wwg8XCBeC7yruWVhg
-         LR+Q==
+        d=gmail.com; s=20230601; t=1765223415; x=1765828215; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=GdZDzTHRfnUponjRboKs3bz2PDF6/Y25FvLl5P2a50c=;
+        b=kaGVYQz6e43fJiCC1YrI+uzibKFKilBlGbAQEm4pp05EXUi5ZKb5CwTf82iWrgndRe
+         0V0pgB6ZmX1WI0RMrJ+V8HtBPeVhyb92TZ3P+OW4qEqD/fVbNDRNc5h/3kr+GZOy7BMf
+         F6TSreYyah7NLF0kznbsM1RVuV7GDZXRLmHg9fZsq5pKSt9XRSf1nAneKhMTnX+vQy8S
+         j5lsVkwmLWFAmfZhV/bSqEaLRPNUwh+w+QD6pJAzmokn0lSuOkMEGkScqimz9tm3S+zf
+         kwkCOQNl0DpZp95w5mDVGhcQ4dA4OwircHH7zRkCeMVtYgi77011b7I7EQDoW1yacg/3
+         0zNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765220564; x=1765825364;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1765223415; x=1765828215;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=KoDknuZtItRvl7QR5vEj7fely9b7KJN6lzHsF1OoamI=;
-        b=roj94NEpd1DpNJlPse9Z5zijhdLqYtSKuMaXHOkHqT9b0As76IBNHVPGvLBYhoOff0
-         uPBKY5I3UvsYwHlWmLryFtacut+WSagb1uftGi/+F6+yddo2Z+ygPoBTKGI0+mvFKOcl
-         sQ0qzWthvYz/1aJQLYSvn+d7eFJht2IISQGko4FmMtG4xpWH7qZ6zYpz63ONU7DE+5XD
-         8WbrpFaRCFNcM6IXqrJuukJlj1w7McIlXyQcm6o83G9rvtLFK6L5bG79hm+ixtOk/mMi
-         d+kOMDjeeXd4ts6JSAhg6VGV8coLfl1r9z94IiMYmmATpn3R+UmTUIAufQuGLJAtX/hB
-         kthA==
-X-Gm-Message-State: AOJu0YyIcSScOsDpbUVDVqgwnz8NwectLEkOBXq3RJiV/iJRsdJ6GKUc
-	bus0cgzW7a4a87xLn60SKcoPz3XpsEf+lXo6JPM5dc8UC57ifI/3kIUvi4V+6A==
-X-Gm-Gg: ASbGncufHPCxoY3LS2/JYcSbW+n37A1jxYX3+hB9Uwa7HZQVdQbeHeCEEUUvF82jd9+
-	Nh9V9JvVbzWjMNOzCMxK76ypNrOnert5ZDpMNnyvhWZFJHjpVCQQTm7eM/VToXriKcz81io8TbI
-	Zc3BZDjXKebla86MCl/nx2gmoyLoV4Oo/77YNVdNpaW4/TO+qAP5Nn+3sYIFXAnFe5xWsS6lNqN
-	hbn/BXLZfHQEBXIUoMwvTBtbMW2LTv8h02/PzeiS6a7IDfIkXyZlkpEwuQrroJA8GlKT5FxsOQe
-	Vz2GaQLlJ5rkxnYyzby8VfocFcl3HBXXup+a/tctsqMj0Nt/3P9O+eJ4GNLBnJVxcVw7R2OiGs1
-	SkGt/LmDuM5x7qGtFWdoU4cbiOYD5ECt+qXpzJLBmu/kVGlwowcmBKwSX0hqf0eF8RNNXilb33O
-	Yj13W4aXMKi7onHZ2lIsX27VC8
-X-Google-Smtp-Source: AGHT+IEFZDKWLrvLhbb7oEf1OjPrtxMFbB745aw038KXO0F5LRnAaHA87SpZaiYQaqtQSUOoIbqsgg==
-X-Received: by 2002:a17:903:b0e:b0:295:8a21:155a with SMTP id d9443c01a7336-29df5bb4030mr89732495ad.35.1765220563991;
-        Mon, 08 Dec 2025 11:02:43 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([136.226.250.253])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29dae49cbf0sm130485845ad.4.2025.12.08.11.02.41
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Dec 2025 11:02:43 -0800 (PST)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][scarthgap][PATCH] libavif: patch CVE-2025-48174
-Date: Tue,  9 Dec 2025 08:02:33 +1300
-Message-ID: <20251208190233.3120323-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=GdZDzTHRfnUponjRboKs3bz2PDF6/Y25FvLl5P2a50c=;
+        b=o8Jb6esPY+vNEsK4yE9wGffFouDnJWuDIKqDmCiq6CHOCprsxt3L20PdgQIVIwdvNY
+         /u/V7Whx/yALIqbdWG23LQtjaMJfg8MmJ5BcmGxyOv6MPPDiscgbtesWttCO85xTrjNw
+         wAXIX1vHeEUDNvu++gEN6IC+5ZN1CFDTzyJXh6KFmDHpYpx/UihrOmOnhSr5ydwb7SGE
+         zv66IN+UhElbl8qR2NzMaGWn7Tc5szlS+G61mlN/Bwq4hwDPn+tJ7+cqZepvNzpaovKl
+         s/WsRLgR9faoOo5iTrR7MH1/fmcLHjwp4A4dBjF6CaC6jt0Q1p/1drhtK+Bi3CPZOuJj
+         xz1Q==
+X-Forwarded-Encrypted: i=1; AJvYcCUVt8Hd2ZaOgLp41XBzZpgyRalGC2ZMKoRZF7nH5FRP9OimGKLTIjZ8K9ztRYaCAu1/sAg7kj2I6um+8a6wO7Dv+Sw=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yxu+ChfRduE15tQSwTN1WN8TJUVV1aNDqIoHq+/UV5Id4ULvelA
+	5q16JdMVJaaDmqHI2hFNcVjXHXHdZHzMtDXs7sjsGcOfeVUH/sNyh8GaLIJAeQyiBs0BK+f0FB/
+	oBcwPQz4knXemCAATPYVEsJrmPyQnB35QL51DaFs=
+X-Gm-Gg: ASbGnctnN1gTLaY6QTe88twWlkPmPEj2VsRTL58VcskvzdWpD9OvRskHK07E3NQRgQ+
+	5lygOq2mjMGSb52SrcEI2dS1rHrnI7rv3BKfak+bfkkzNzBJe75Zacteoi8x8RL8Yhq0dl37KoE
+	S9M71IVnAbPIh1FkfZ4En4KsmE1s78Nxl6rGvIFvAgKGtYZhaymsDUq9JQ35mbyueDUQCV72f5k
+	0OkF8C3cQQGhqjy5Ft0GoDBr7O1w0V1rAx5mAbyhCVG7CD2G6Sllg6J/Nz1oo/SEWNTecRs2d80
+	/gBP2gDacd03l1STujeoGlvk5wZd37I2KwhcwztYaNJJaWLlkLP8PfBp/JEqpUuFY8txJgtH3p1
+	xbyeOpDNXlGdTC8NVhH8t40Yqnsn83MWAMCeagRz3gg==
+X-Google-Smtp-Source: AGHT+IGUCuw4y0kgPoW2vwPjYUWrSQBjdKqeStp2AZSdxi11iTCBcXsZAq4qEKYbGcseUe9yGsC7ik9TOp/n7Zdw2Kk=
+X-Received: by 2002:a05:690e:1307:b0:644:60d9:7516 with SMTP id
+ 956f58d0204a3-64460d978a3mr1673385d50.90.1765223414742; Mon, 08 Dec 2025
+ 11:50:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251208091300.21039-1-liuyd.fnst@fujitsu.com> <83e4a981-fdaf-47ec-9f4d-a8e05b3513e9@gmail.com>
+In-Reply-To: <83e4a981-fdaf-47ec-9f4d-a8e05b3513e9@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 Dec 2025 11:49:47 -0800
+X-Gm-Features: AQt7F2qy3CGa1FJAnS0wrdIdMuH9O1qzvV7_CSjx8vJQxIZrblcJQ0SJRUW1_LM
+Message-ID: <CAMKF1sr6E79FvKP3_W7nHvg=YjhM=9M0bkx+XfpuLft7U0pOWQ@mail.gmail.com>
+Subject: Re: [oe][meta-gnome][PATCH 2/2] gnome-control-center: upgrade 48.3 -> 49.2.2
+To: skandigraun@gmail.com
+Cc: liuyd.fnst@fujitsu.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000095c55f0645761a8c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Dec 2025 19:02:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122388
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Dec 2025 19:50:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122389
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+--00000000000095c55f0645761a8c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-48174
+On Mon, Dec 8, 2025 at 1:54=E2=80=AFAM Gyorgy Sarvari via lists.openembedde=
+d.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../libavif/libavif/CVE-2025-48174_1.patch    | 27 +++++++
- .../libavif/libavif/CVE-2025-48174_2.patch    | 31 ++++++++
- .../libavif/libavif/CVE-2025-48174_3.patch    | 27 +++++++
- .../libavif/libavif/CVE-2025-48174_4.patch    | 72 +++++++++++++++++++
- .../libavif/libavif_1.0.1.bb                  |  7 +-
- 5 files changed, 163 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch
+> Doesn't gnome-control-center follow an "odd-versions-are-unstable"
+> versioning pattern, making this version to be kinda-beta?
+>
 
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch
-new file mode 100644
-index 0000000000..c9bee6c62a
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch
-@@ -0,0 +1,27 @@
-+From d9c933e79109becdbc6be9ddf9fbe00be03d533e Mon Sep 17 00:00:00 2001
-+From: DanisJiang <43723722+DanisJiang@users.noreply.github.com>
-+Date: Fri, 18 Apr 2025 17:31:53 +0800
-+Subject: [PATCH] Add integer overflow checks to makeRoom.
-+
-+CVE: CVE-2025-48174
-+Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/commit/e5fdefe7d1776e6c4cf1703c163a8c0535599029]
-+(cherry picked from commit e5fdefe7d1776e6c4cf1703c163a8c0535599029)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/stream.c | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/src/stream.c b/src/stream.c
-+index c85ca31b..70e8bfaa 100644
-+--- a/src/stream.c
-++++ b/src/stream.c
-+@@ -320,6 +320,9 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
-+ static avifResult makeRoom(avifRWStream * stream, size_t size)
-+ {
-+     size_t neededSize = stream->offset + size;
-++    if (neededSize < stream->offset) {
-++        return AVIF_RESULT_INVALID_ARGUMENT;
-++    }
-+     size_t newSize = stream->raw->size;
-+     while (newSize < neededSize) {
-+         newSize += AVIF_STREAM_BUFFER_INCREMENT;
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch
-new file mode 100644
-index 0000000000..4ba27d5a57
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch
-@@ -0,0 +1,31 @@
-+From 5bd6529e7e729718ac2d164859965771466c8410 Mon Sep 17 00:00:00 2001
-+From: DanisJiang <43723722+DanisJiang@users.noreply.github.com>
-+Date: Mon, 21 Apr 2025 10:45:59 +0800
-+Subject: [PATCH] Add integer overflow check to makeRoom.
-+
-+CVE: CVE-2025-48174
-+Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/commit/50a743062938a3828581d725facc9c2b92a1d109]
-+(cherry picked from commit 50a743062938a3828581d725facc9c2b92a1d109)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/stream.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/stream.c b/src/stream.c
-+index 70e8bfaa..893ba3f0 100644
-+--- a/src/stream.c
-++++ b/src/stream.c
-+@@ -319,10 +319,10 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
-+ #define AVIF_STREAM_BUFFER_INCREMENT (1024 * 1024)
-+ static avifResult makeRoom(avifRWStream * stream, size_t size)
-+ {
-+-    size_t neededSize = stream->offset + size;
-+-    if (neededSize < stream->offset) {
-+-        return AVIF_RESULT_INVALID_ARGUMENT;
-++    if (size > SIZE_MAX - stream->offset) {
-++        return  AVIF_RESULT_OUT_OF_MEMORY;
-+     }
-++    size_t neededSize = stream->offset + size;
-+     size_t newSize = stream->raw->size;
-+     while (newSize < neededSize) {
-+         newSize += AVIF_STREAM_BUFFER_INCREMENT;
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch
-new file mode 100644
-index 0000000000..2fddbeeb81
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch
-@@ -0,0 +1,27 @@
-+From 0b0b88596f21821af605ed316e996739820d3b17 Mon Sep 17 00:00:00 2001
-+From: "Danis Jiang (Yuhao Jiang)"
-+ <43723722+DanisJiang@users.noreply.github.com>
-+Date: Thu, 24 Apr 2025 10:39:19 +0800
-+Subject: [PATCH] Fix format errors
-+
-+CVE: CVE-2025-48174
-+Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/commit/c9f1bea437f21cb78f9919c332922a3b0ba65e11]
-+(cherry picked from commit c9f1bea437f21cb78f9919c332922a3b0ba65e11)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/stream.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/stream.c b/src/stream.c
-+index 893ba3f0..b38c93c6 100644
-+--- a/src/stream.c
-++++ b/src/stream.c
-+@@ -320,7 +320,7 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
-+ static avifResult makeRoom(avifRWStream * stream, size_t size)
-+ {
-+     if (size > SIZE_MAX - stream->offset) {
-+-        return  AVIF_RESULT_OUT_OF_MEMORY;
-++        return AVIF_RESULT_OUT_OF_MEMORY;
-+     }
-+     size_t neededSize = stream->offset + size;
-+     size_t newSize = stream->raw->size;
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch
-new file mode 100644
-index 0000000000..ecdef9e5bc
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch
-@@ -0,0 +1,72 @@
-+From 083ce38f549183a3d74a0a6d2dc4d3f4b195867f Mon Sep 17 00:00:00 2001
-+From: Wan-Teh Chang <wtc@google.com>
-+Date: Sun, 27 Apr 2025 14:34:35 -0700
-+Subject: [PATCH] Add another integer overflow check to makeRoom
-+
-+Replace the while loop with a formula in makeRoom.
-+
-+Test the integer overflow checks in makeRoom.
-+
-+See https://github.com/AOMediaCodec/libavif/pull/2768.
-+
-+CVE: CVE-2025-48174
-+Upstream-Status: Backport [https://github.com/AOMediaCodec/libavif/commit/32eae7c5c1e72d9999cb31d02e333b6a76029bad]
-+(cherry picked from commit 32eae7c5c1e72d9999cb31d02e333b6a76029bad)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/stream.c                  | 16 +++++++++-------
-+ tests/gtest/avifstreamtest.cc | 13 +++++++++++++
-+ 2 files changed, 22 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/stream.c b/src/stream.c
-+index b38c93c6..e79e9691 100644
-+--- a/src/stream.c
-++++ b/src/stream.c
-+@@ -319,14 +319,16 @@ avifBool avifROStreamReadAndEnforceVersion(avifROStream * stream, uint8_t enforc
-+ #define AVIF_STREAM_BUFFER_INCREMENT (1024 * 1024)
-+ static avifResult makeRoom(avifRWStream * stream, size_t size)
-+ {
-+-    if (size > SIZE_MAX - stream->offset) {
-+-        return AVIF_RESULT_OUT_OF_MEMORY;
-+-    }
-+-    size_t neededSize = stream->offset + size;
-+-    size_t newSize = stream->raw->size;
-+-    while (newSize < neededSize) {
-+-        newSize += AVIF_STREAM_BUFFER_INCREMENT;
-++    AVIF_CHECKERR(size <= SIZE_MAX - stream->offset, AVIF_RESULT_OUT_OF_MEMORY);
-++    size_t newSize = stream->offset + size;
-++    if (newSize <= stream->raw->size) {
-++        return AVIF_RESULT_OK;
-+     }
-++    // Make newSize a multiple of AVIF_STREAM_BUFFER_INCREMENT.
-++    size_t rem = newSize % AVIF_STREAM_BUFFER_INCREMENT;
-++    size_t padding = (rem == 0) ? 0 : AVIF_STREAM_BUFFER_INCREMENT - rem;
-++    AVIF_CHECKERR(newSize <= SIZE_MAX - padding, AVIF_RESULT_OUT_OF_MEMORY);
-++    newSize += padding;
-+     return avifRWDataRealloc(stream->raw, newSize);
-+ }
-+ 
-+diff --git a/tests/gtest/avifstreamtest.cc b/tests/gtest/avifstreamtest.cc
-+index af94bb82..e768939b 100644
-+--- a/tests/gtest/avifstreamtest.cc
-++++ b/tests/gtest/avifstreamtest.cc
-+@@ -204,6 +204,19 @@ TEST(StreamTest, Roundtrip) {
-+   EXPECT_FALSE(avifROStreamSkip(&ro_stream, /*byteCount=*/1));
-+ }
-+ 
-++// Test the overflow checks in the makeRoom() function in src/stream.c.
-++TEST(StreamTest, OverflowChecksInMakeRoom) {
-++  testutil::AvifRwData rw_data;
-++  avifRWStream rw_stream;
-++  avifRWStreamStart(&rw_stream, &rw_data);
-++  const char ten_bytes[10] = {0};
-++  EXPECT_EQ(avifRWStreamWrite(&rw_stream, ten_bytes, 10), AVIF_RESULT_OK);
-++  EXPECT_EQ(avifRWStreamWrite(&rw_stream, ten_bytes, SIZE_MAX - 9),
-++            AVIF_RESULT_OUT_OF_MEMORY);
-++  EXPECT_EQ(avifRWStreamWrite(&rw_stream, ten_bytes, SIZE_MAX - 10),
-++            AVIF_RESULT_OUT_OF_MEMORY);
-++}
-++
-+ //------------------------------------------------------------------------------
-+ 
-+ }  // namespace
-diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
-index 8ddd16ee2a..bca6e40409 100644
---- a/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
-+++ b/meta-multimedia/recipes-multimedia/libavif/libavif_1.0.1.bb
-@@ -4,7 +4,12 @@ SECTION = "libs"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c528b75b07425b5c1d2e34de98c397b5"
- 
--SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x"
-+SRC_URI = "git://github.com/AOMediaCodec/libavif.git;protocol=https;branch=v1.0.x \
-+           file://CVE-2025-48174_1.patch \
-+           file://CVE-2025-48174_2.patch \
-+           file://CVE-2025-48174_3.patch \
-+           file://CVE-2025-48174_4.patch \
-+"
- 
- S = "${WORKDIR}/git"
- SRCREV = "d1c26facaf5a8a97919ceee06814d05d10e25622"
+IIRC that policy changed with gnome 40 - see
+https://handbook.gnome.org/release-planning.html
+
+specifically the section called "Versioning"
+
+
+>
+> On 12/8/25 10:13, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
+> > Changelog:
+> > - Revert libgxdp updates
+> >
+> >   The libgxdp updates depend on changes in gsettings-desktop-schemas
+> >   that are part of the GNOME 50 cycle. Revert the pinned ref
+> >   to the one we had before, until we branch libgxdp for GNOME 49.
+> >
+> > Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+> > ---
+> >  ...l-center_48.3.bb =3D> gnome-control-center_49.2.2.bb} | 10 +++++++-=
+--
+> >  1 file changed, 7 insertions(+), 3 deletions(-)
+> >  rename meta-gnome/recipes-gnome/gnome-control-center/{
+> gnome-control-center_48.3.bb =3D> gnome-control-center_49.2.2.bb} (79%)
+> >
+> > diff --git a/meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_48.3.bb
+> b/meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_49.2.2.bb
+> > similarity index 79%
+> > rename from meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_48.3.bb
+> > rename to meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_49.2.2.bb
+> > index d8d5849534..9bb0228d50 100644
+> > --- a/meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_48.3.bb
+> > +++ b/meta-gnome/recipes-gnome/gnome-control-center/
+> gnome-control-center_49.2.2.bb
+> > @@ -32,19 +32,22 @@ DEPENDS =3D " \
+> >      udisks2 \
+> >      upower \
+> >      ${@' libxslt-native docbook-xsl-stylesheets-native' if
+> d.getVar('GIDOCGEN_ENABLED') =3D=3D 'True' else ''} \
+> > +    blueprint-compiler-native \
+> >  "
+> >
+> >  inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-docgen
+> upstream-version-is-even bash-completion features_check
+> >
+> >  REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
+> >
+> > +SRC_URI =3D "
+> https://download.gnome.org/sources/gnome-control-center/${@oe.utils.trim_=
+version('${PV}',
+> 1)}/gnome-control-center-${PV}.tar.xz"
+> > +SRC_URI[sha256sum] =3D
+> "c23ae220d6c1237d285925de7801e0e36338b9cc1a8bb51c2e37e715e6b503ad"
+> > +
+> >  SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
+> > -SRC_URI[archive.sha256sum] =3D
+> "c0698245a6420badd077c16ffb218860e457cd7300612718eabf9aba47222bae"
+> >
+> > -PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES',
+> 'wayland', d)}"
+> > +PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'x11',
+> d)}"
+> >  PACKAGECONFIG[cups] =3D ",,cups,cups system-config-printer cups-pk-hel=
+per"
+> >  PACKAGECONFIG[ibus] =3D "-Dibus=3Dtrue, -Dibus=3Dfalse, ibus"
+> > -PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue, -Dwayland=3Dfalse, wayla=
+nd"
+> > +PACKAGECONFIG[x11] =3D "-Dx11=3Dtrue, -Dx11=3Dfalse, virtual/libx11"
+> >  PACKAGECONFIG[file-share] =3D ",,,gnome-user-share"
+> >  PACKAGECONFIG[media-share] =3D ",,,rygel-meta tumbler"
+> >  PACKAGECONFIG[malcontent] =3D
+> "-Dmalcontent=3Dtrue,-Dmalcontent=3Dfalse,malcontent,malcontent-ui"
+> > @@ -54,6 +57,7 @@ EXTRA_OEMESON +=3D "-Doe_sysroot=3D${STAGING_DIR_HOST=
+}"
+> >  GIDOCGEN_MESON_OPTION =3D 'documentation'
+> >
+> >  export XDG_DATA_DIRS =3D "${STAGING_DATADIR}"
+> > +export GI_TYPELIB_PATH =3D "${RECIPE_SYSROOT}${libdir}/girepository-1.=
+0"
+> >
+> >  FILES:${PN} +=3D " \
+> >      ${datadir}/dbus-1 \
+> >
+> >
+> >
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122373):
+> https://lists.openembedded.org/g/openembedded-devel/message/122373
+> Mute This Topic: https://lists.openembedded.org/mt/116673072/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000095c55f0645761a8c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec 8, =
+2025 at 1:54=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://lists.openembe=
+dded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gm=
+ail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wr=
+ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
+ 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Doesn&#39;t=
+ gnome-control-center follow an &quot;odd-versions-are-unstable&quot;<br>
+versioning pattern, making this version to be kinda-beta?<br></blockquote><=
+div><br></div><div>IIRC that policy changed with gnome 40 - see=C2=A0<a hre=
+f=3D"https://handbook.gnome.org/release-planning.html">https://handbook.gno=
+me.org/release-planning.html</a></div><div><br></div><div>specifically the =
+section called &quot;Versioning&quot;</div><div>=C2=A0</div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">
+<br>
+On 12/8/25 10:13, Yiding Liu (Fujitsu) via <a href=3D"http://lists.openembe=
+dded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> w=
+rote:<br>
+&gt; Changelog:<br>
+&gt; - Revert libgxdp updates<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0The libgxdp updates depend on changes in gsettings-desktop=
+-schemas<br>
+&gt;=C2=A0 =C2=A0that are part of the GNOME 50 cycle. Revert the pinned ref=
+<br>
+&gt;=C2=A0 =C2=A0to the one we had before, until we branch libgxdp for GNOM=
+E 49.<br>
+&gt;<br>
+&gt; Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.com=
+" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 ...<a href=3D"http://l-center_48.3.bb" rel=3D"noreferrer" target=
+=3D"_blank">l-center_48.3.bb</a> =3D&gt; <a href=3D"http://gnome-control-ce=
+nter_49.2.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-control-center_4=
+9.2.2.bb</a>} | 10 +++++++---<br>
+&gt;=C2=A0 1 file changed, 7 insertions(+), 3 deletions(-)<br>
+&gt;=C2=A0 rename meta-gnome/recipes-gnome/gnome-control-center/{<a href=3D=
+"http://gnome-control-center_48.3.bb" rel=3D"noreferrer" target=3D"_blank">=
+gnome-control-center_48.3.bb</a> =3D&gt; <a href=3D"http://gnome-control-ce=
+nter_49.2.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-control-center_4=
+9.2.2.bb</a>} (79%)<br>
+&gt;<br>
+&gt; diff --git a/meta-gnome/recipes-gnome/gnome-control-center/<a href=3D"=
+http://gnome-control-center_48.3.bb" rel=3D"noreferrer" target=3D"_blank">g=
+nome-control-center_48.3.bb</a> b/meta-gnome/recipes-gnome/gnome-control-ce=
+nter/<a href=3D"http://gnome-control-center_49.2.2.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">gnome-control-center_49.2.2.bb</a><br>
+&gt; similarity index 79%<br>
+&gt; rename from meta-gnome/recipes-gnome/gnome-control-center/<a href=3D"h=
+ttp://gnome-control-center_48.3.bb" rel=3D"noreferrer" target=3D"_blank">gn=
+ome-control-center_48.3.bb</a><br>
+&gt; rename to meta-gnome/recipes-gnome/gnome-control-center/<a href=3D"htt=
+p://gnome-control-center_49.2.2.bb" rel=3D"noreferrer" target=3D"_blank">gn=
+ome-control-center_49.2.2.bb</a><br>
+&gt; index d8d5849534..9bb0228d50 100644<br>
+&gt; --- a/meta-gnome/recipes-gnome/gnome-control-center/<a href=3D"http://=
+gnome-control-center_48.3.bb" rel=3D"noreferrer" target=3D"_blank">gnome-co=
+ntrol-center_48.3.bb</a><br>
+&gt; +++ b/meta-gnome/recipes-gnome/gnome-control-center/<a href=3D"http://=
+gnome-control-center_49.2.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-=
+control-center_49.2.2.bb</a><br>
+&gt; @@ -32,19 +32,22 @@ DEPENDS =3D &quot; \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 udisks2 \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 upower \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 ${@&#39; libxslt-native docbook-xsl-stylesheets-na=
+tive&#39; if d.getVar(&#39;GIDOCGEN_ENABLED&#39;) =3D=3D &#39;True&#39; els=
+e &#39;&#39;} \<br>
+&gt; +=C2=A0 =C2=A0 blueprint-compiler-native \<br>
+&gt;=C2=A0 &quot;<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext gi-=
+docgen upstream-version-is-even bash-completion features_check<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 REQUIRED_DISTRO_FEATURES +=3D &quot;opengl polkit pulseaudio sys=
+temd x11&quot;<br>
+&gt;=C2=A0 <br>
+&gt; +SRC_URI =3D &quot;<a href=3D"https://download.gnome.org/sources/gnome=
+-control-center/$%7B@oe.utils.trim_version(&#39;$%7BPV%7D" rel=3D"noreferre=
+r" target=3D"_blank">https://download.gnome.org/sources/gnome-control-cente=
+r/${@oe.utils.trim_version(&#39;${PV}</a>&#39;, 1)}/gnome-control-center-${=
+PV}.tar.xz&quot;<br>
+&gt; +SRC_URI[sha256sum] =3D &quot;c23ae220d6c1237d285925de7801e0e36338b9cc=
+1a8bb51c2e37e715e6b503ad&quot;<br>
+&gt; +<br>
+&gt;=C2=A0 SRC_URI +=3D &quot;file://0001-Add-meson-option-to-pass-sysroot.=
+patch&quot;<br>
+&gt; -SRC_URI[archive.sha256sum] =3D &quot;c0698245a6420badd077c16ffb218860=
+e457cd7300612718eabf9aba47222bae&quot;<br>
+&gt;=C2=A0 <br>
+&gt; -PACKAGECONFIG ??=3D &quot;ibus ${@bb.utils.filter(&#39;DISTRO_FEATURE=
+S&#39;, &#39;wayland&#39;, d)}&quot;<br>
+&gt; +PACKAGECONFIG ??=3D &quot;ibus ${@bb.utils.filter(&#39;DISTRO_FEATURE=
+S&#39;, &#39;x11&#39;, d)}&quot;<br>
+&gt;=C2=A0 PACKAGECONFIG[cups] =3D &quot;,,cups,cups system-config-printer =
+cups-pk-helper&quot;<br>
+&gt;=C2=A0 PACKAGECONFIG[ibus] =3D &quot;-Dibus=3Dtrue, -Dibus=3Dfalse, ibu=
+s&quot;<br>
+&gt; -PACKAGECONFIG[wayland] =3D &quot;-Dwayland=3Dtrue, -Dwayland=3Dfalse,=
+ wayland&quot;<br>
+&gt; +PACKAGECONFIG[x11] =3D &quot;-Dx11=3Dtrue, -Dx11=3Dfalse, virtual/lib=
+x11&quot;<br>
+&gt;=C2=A0 PACKAGECONFIG[file-share] =3D &quot;,,,gnome-user-share&quot;<br=
+>
+&gt;=C2=A0 PACKAGECONFIG[media-share] =3D &quot;,,,rygel-meta tumbler&quot;=
+<br>
+&gt;=C2=A0 PACKAGECONFIG[malcontent] =3D &quot;-Dmalcontent=3Dtrue,-Dmalcon=
+tent=3Dfalse,malcontent,malcontent-ui&quot;<br>
+&gt; @@ -54,6 +57,7 @@ EXTRA_OEMESON +=3D &quot;-Doe_sysroot=3D${STAGING_DI=
+R_HOST}&quot;<br>
+&gt;=C2=A0 GIDOCGEN_MESON_OPTION =3D &#39;documentation&#39;<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 export XDG_DATA_DIRS =3D &quot;${STAGING_DATADIR}&quot;<br>
+&gt; +export GI_TYPELIB_PATH =3D &quot;${RECIPE_SYSROOT}${libdir}/gireposit=
+ory-1.0&quot;<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 FILES:${PN} +=3D &quot; \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 ${datadir}/dbus-1 \<br>
+&gt;<br>
+&gt; <br>
+&gt;<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122373): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122373" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122373</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116673072/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116673072/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000095c55f0645761a8c--
 
