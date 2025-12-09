@@ -1,932 +1,204 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E896D3B98C
-	for <webhook@archiver.kernel.org>; Tue,  9 Dec 2025 18:26:34 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14899.1765304791979683867
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF169D3B98F
+	for <webhook@archiver.kernel.org>; Tue,  9 Dec 2025 19:15:44 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16056.1765307740400442289
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Dec 2025 10:26:32 -0800
+ Tue, 09 Dec 2025 11:15:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g8pYQS54;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47a80d4a065so6108835e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 10:26:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FMeXdRDJ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-787ff3f462bso2025567b3.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 11:15:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765304790; x=1765909590; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=a/6Iw7GsSNqcGbud4dES8QBrK49OMC3Y7nYzQL7Vaqc=;
-        b=g8pYQS54JOXC0jJbh50mg2i121h6rGWh9r04iSfmPlhNgiJrtYd3dkm0st3xNgRVQd
-         +3gAhcChvtjU5ysiWBRdKMtMYkskeoaqtMOZ7CV6b0Y1rD9oQmdNWeWnPbpS/SlBqjdF
-         N/0CE0TTUkUrxXdRj3CZYHiZ/xooVW2sleCALAgHlXqBPshz0zMf+BYp4zHgWm8uGOfg
-         QTPu7iS7UYS7jX9K8DQp/5MnkI8AkFbXkmeGwF8FX3YmpQHyvGw3HT82Q1dzS+1lzGog
-         P7dqvPn8UeusZgJsCl3A00+i359MDty05fw22j3T0acYuKQzL/QVWKYEc6eHb2OQ+vnO
-         cNeg==
+        d=gmail.com; s=20230601; t=1765307739; x=1765912539; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=RzTD+26PiQG4LGnc3PkssEV72kVsFKNCb8bsQxB8AuQ=;
+        b=FMeXdRDJXWpFptfJdBrCBti5BipzdfzeTr47es66Btdp9F/dy2i6gMi6hNCq/IYFmi
+         oTidkfMjtUZTuUGiKD2Rlqovn4yRwcasHO2pN0gBrUz+ppb6PKWadKFNyVh4J2g0Z2ux
+         W0OxF6MlNNVOqQ+JpSBZVvMsFuTJhNn6FNvBrxDJKEiFfqHk1VEcIi5gv+KbYpzvvcuO
+         4lzkltTrjIwO9JTfoP2kQYTL9YTPUH4dCgZL3veBwdPAdN4EJGSmWm9TDtIOu4zkl2le
+         pZVl9lBoqpAW0mv61rb4lO1FSA73dOIpsHr8RoE7oV8gYY1cTg7kcCYnHEBGyCin6gOh
+         Ugiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765304790; x=1765909590;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=a/6Iw7GsSNqcGbud4dES8QBrK49OMC3Y7nYzQL7Vaqc=;
-        b=PSxRerLvK5FT86BhBBGmpv84VW5IR0Sd7Yj0fN+ZH4dBWp6wO5TaXjp3xZaXYOeDp+
-         Tuz3dqyrtLjXaapVPohcXFk3v53hKUg/RQYcBxhZKscsUAmiH6W4AsPVSBtVzSxuZN5n
-         cWtXbdFtwsZw6bKwZ8r+gkF/F8qA+Lgz6Upw5AS2ZB3IyOEW3VeYi/B+VtiNzEvFW+1C
-         yjJtv88p6N4D4j8qrrYPD57mYWeKl9Axa0DVzP0WKxJwfD/F/wKzC2G7d0dk6nCQ0pS4
-         zaQJb8uGOGafeQnNSEor1N/CKXFWTi1ndr4EZolvwUrOyxCDHQl4B21V/pCTC6sdaPmi
-         bbDg==
-X-Gm-Message-State: AOJu0YwJpoNIWNWzu7GdM/72tlDzkJzFUQj8FpF4U1NlYqPJaaiXcIoX
-	HPN5qUIrwtgFEMbc32zUxZmfi/tpYrXszE9aQVhHdnF5OLyk/0Et710zBILeGw==
-X-Gm-Gg: AY/fxX7dFqzikerzMzJoDq7h1BcgJe1rTVde6zA0jE/0bdMlPe12i69XLwLb6GfhpHZ
-	AV6tZgCKkbVPblCEyg4Gdcm98rX1BG+KLQGjIoBatkkU5U4dUAw9mjS8q0XJ3X5tCnf5iVF8Fzd
-	h5T5Uf7XpC6q/KFv85J7SklE+QHEwAaALU3DOmrMVD+YserGhnne1+TdC6RAOXOSMQL76IGsYWf
-	fW4bxwlf0jv76GoHzDe5yygP/dGCmlsEgd2+njANPCcp1YpCGpQcBS62fuNXV7NjW/8R20WnR5G
-	sUgbtmwi++zrIOzbkh/Ug11gHCMGWZXXg76PzXXDzloykOCKugohof6u+AXv+CvLG3vvObBPhBx
-	obSMSThS9X0AUIub46dwpsL9DP4nhcqtav+6+VhI8yq50Pk/pBBbGXVvOB6mnD0jy7wzCMDFEl/
-	pRzNKpMtGh
-X-Google-Smtp-Source: AGHT+IHRsZVYAyCdJKO7WLvKnsEmn1S2W+cl/tz8yzTwhfMOrWjz7RrZbt90WygkeGJe/RHOxm2Z1A==
-X-Received: by 2002:a5d:5f93:0:b0:42b:3ab7:b8a3 with SMTP id ffacd0b85a97d-42f89f0fb38mr13807138f8f.27.1765304789668;
-        Tue, 09 Dec 2025 10:26:29 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-42f7d330b20sm32084507f8f.29.2025.12.09.10.26.28
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Dec 2025 10:26:29 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] wolfssl: upgrade 5.8.0 -> 5.8.4
-Date: Tue,  9 Dec 2025 19:26:28 +0100
-Message-ID: <20251209182628.1507509-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1765307739; x=1765912539;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RzTD+26PiQG4LGnc3PkssEV72kVsFKNCb8bsQxB8AuQ=;
+        b=TM3qeTzGIAEWrJXtQn5EIwIQGG03l5tyBzH244KyHC3YeLqheao2psGgJG4P9Ubtk4
+         S5RiDfrKKhL/z/EYJuyTkGbLOHBaBf6KKnhOE6tm9mLbWivytt2IhwlW8ajmRBnHcgtk
+         c/RpikTFylWRrECnIhh/DZ9ihOVLAFXII6gcRE/LIOfy9rCDXAalXVubrIgvGGAl9NVQ
+         XX7EyJjMWcOybReSONUtgZgDON0NQXtThcizIUpoawCpbqSmgwfEo9OVJd14oabgzM4b
+         9RvKEZnWVyi6gTys0YcwSSybt2/jRbf2pRjOqz0HPMLOmT5FtQ/7jgrJdje/fr11bbp1
+         YSVQ==
+X-Gm-Message-State: AOJu0Yxf8Rrpxwy6VmccSCNFLYoeDlPVQ26fhl4b5TPBSsLVR1FRM5En
+	8mA9wsE2xNMVZhJvLH5FZDrIUlP2KYH88bnZw5cmG24EeH67k+q/nU0i77hsNt+4a1ohdu4f24x
+	LvY717nC7c9SKlDvnKwSAR9RxV4ikeNo0NDVP3YQ=
+X-Gm-Gg: AY/fxX4ozFcKp173cGt6EtuI7iDK5QwMGSvloXo4CecFOaDQL5nF4sHUKnbNZq7i9m2
+	UEcSpXgsQH2jltLwHFDdF5r6EXjdufFigtKjJ2sKJnV4DeO46Th050GrB3wG33ec3yKGAYqQeY+
+	iUJPs0LdJide4PQWDonSxhUosnjwNSdpr0lDgRblVLJ4hsRDn/D2AFRytZUlSg7mpskMvK/ajVL
+	t0Sy5umTrvSZB99b6rc3AzsPctljDhSEfbqlDr59Wp3TdzJIu96HoInK334vyo86bO8KqjmYpPk
+	ITPcmrsm0GhZ5fGlXdg/YJMuI1d+hT3A4T0/JFrWj1sALYLVQUXYniCdctETQVYqA1MbFnprvxi
+	JI5YbzyC9gahd1T18i6TOFQPMTGaosUMnm4CNg+rX
+X-Google-Smtp-Source: AGHT+IFla4NNm8EylmhEc4SMqZbUH2b9F0kvI78dlJOQbuOrPIjCAriIkoOfq/9zc42zYxKSZDjMe7F/TqIR2DxeCJI=
+X-Received: by 2002:a05:690e:13c9:b0:644:4259:9b6f with SMTP id
+ 956f58d0204a3-644678d1835mr2099819d50.3.1765307739342; Tue, 09 Dec 2025
+ 11:15:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251209163552.1419590-1-skandigraun@gmail.com>
+In-Reply-To: <20251209163552.1419590-1-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 9 Dec 2025 11:15:13 -0800
+X-Gm-Features: AQt7F2rBBDlmEGOkcbSDe0wVARQQx3WhOd36xR8qb-XWQpqLjX0_QvWq6D0Qonk
+Message-ID: <CAMKF1so8M280n2nwca-paKr23dPUoMfuzEiNFgy38P98Wosgmw@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 0/4] Drop dleyna recipes
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000b909ea064589bc21"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 18:26:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122471
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 19:15:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122472
 
-License-Update: the project was relicensed from GPL-2 to GPL-3
+--000000000000b909ea064589bc21
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Inludes fixes for the following vulnerabilities:
-CVE-2025-7394, CVE-2025-7395, CVE-2025-7396, CVE-2025-12888, CVE-2025-11936,
-CVE-2025-11935, CVE-2025-11934, CVE-2025-11933, CVE-2025-11932, CVE-2025-11931,
-CVE-2025-12889
+This is a good cleanup. Thanks
 
-Drop patch that is incorporated in this release.
+On Tue, Dec 9, 2025 at 8:35=E2=80=AFAM Gyorgy Sarvari via lists.openembedde=
+d.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-Changelog: https://github.com/wolfSSL/wolfssl/blob/master/ChangeLog.md
+> All these recipes have been disabled since at least Scarthgap, due to bei=
+ng
+> unmaintained, and they fail to compile with the latest gupnp. The upstrea=
+m
+> repository has been switched to maintenance mode in 2021.
+>
+> Could not find any dependendees in the layer index.
+>
+> ---
+>
+> Gyorgy Sarvari (4):
+>   dleyna-connector-dbus: drop recipe
+>   dleyna-core: drop recipe
+>   dleyna-renderer: drop recipe
+>   dleyna-server: drop recipe
+>
+>  .../dleyna/dleyna-connector-dbus_0.3.0.bb     |  19 ---
+>  .../dleyna/dleyna-core_0.6.0.bb               |  21 ---
+>  .../0001-add-gupnp-1.2-API-support.patch      | 123 ------------------
+>  .../dleyna/dleyna-renderer_0.6.0.bb           |  26 ----
+>  .../dleyna/dleyna-server_0.6.0.bb             |  23 ----
+>  5 files changed, 212 deletions(-)
+>  delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/
+> dleyna-connector-dbus_0.3.0.bb
+>  delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/
+> dleyna-core_0.6.0.bb
+>  delete mode 100644
+> meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer/0001-add-gupnp-=
+1.2-API-support.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/
+> dleyna-renderer_0.6.0.bb
+>  delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/
+> dleyna-server_0.6.0.bb
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122466):
+> https://lists.openembedded.org/g/openembedded-devel/message/122466
+> Mute This Topic: https://lists.openembedded.org/mt/116696338/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Ptests passed:
+--000000000000b909ea064589bc21
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-START: ptest-runner
-2025-12-09T18:23
-BEGIN: /usr/lib/wolfssl/ptest
-Wolfssl ptest logs are stored in /tmp/wolfss_temp.6rsnys/ptest.log
-Test script returned: 0
-unit_test: Success for all configured tests.
-PASS: Wolfssl
-DURATION: 13
-END: /usr/lib/wolfssl/ptest
-2025-12-09T18:23
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+<div dir=3D"ltr">This is a good cleanup. Thanks</div><br><div class=3D"gmai=
+l_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue=
+, Dec 9, 2025 at 8:35=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://lists=
+.openembedded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"=
+mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Al=
+l these recipes have been disabled since at least Scarthgap, due to being<b=
+r>
+unmaintained, and they fail to compile with the latest gupnp. The upstream<=
+br>
+repository has been switched to maintenance mode in 2021.<br>
+<br>
+Could not find any dependendees in the layer index.<br>
+<br>
+---<br>
+<br>
+Gyorgy Sarvari (4):<br>
+=C2=A0 dleyna-connector-dbus: drop recipe<br>
+=C2=A0 dleyna-core: drop recipe<br>
+=C2=A0 dleyna-renderer: drop recipe<br>
+=C2=A0 dleyna-server: drop recipe<br>
+<br>
+=C2=A0.../dleyna/<a href=3D"http://dleyna-connector-dbus_0.3.0.bb" rel=3D"n=
+oreferrer" target=3D"_blank">dleyna-connector-dbus_0.3.0.bb</a>=C2=A0 =C2=
+=A0 =C2=A0|=C2=A0 19 ---<br>
+=C2=A0.../dleyna/<a href=3D"http://dleyna-core_0.6.0.bb" rel=3D"noreferrer"=
+ target=3D"_blank">dleyna-core_0.6.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 21 ---<br>
+=C2=A0.../0001-add-gupnp-1.2-API-support.patch=C2=A0 =C2=A0 =C2=A0 | 123 --=
+----------------<br>
+=C2=A0.../dleyna/<a href=3D"http://dleyna-renderer_0.6.0.bb" rel=3D"norefer=
+rer" target=3D"_blank">dleyna-renderer_0.6.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 26 ----<br>
+=C2=A0.../dleyna/<a href=3D"http://dleyna-server_0.6.0.bb" rel=3D"noreferre=
+r" target=3D"_blank">dleyna-server_0.6.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 23 ----<br>
+=C2=A05 files changed, 212 deletions(-)<br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/<a href=
+=3D"http://dleyna-connector-dbus_0.3.0.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">dleyna-connector-dbus_0.3.0.bb</a><br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/<a href=
+=3D"http://dleyna-core_0.6.0.bb" rel=3D"noreferrer" target=3D"_blank">dleyn=
+a-core_0.6.0.bb</a><br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/dleyna-r=
+enderer/0001-add-gupnp-1.2-API-support.patch<br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/<a href=
+=3D"http://dleyna-renderer_0.6.0.bb" rel=3D"noreferrer" target=3D"_blank">d=
+leyna-renderer_0.6.0.bb</a><br>
+=C2=A0delete mode 100644 meta-multimedia/recipes-multimedia/dleyna/<a href=
+=3D"http://dleyna-server_0.6.0.bb" rel=3D"noreferrer" target=3D"_blank">dle=
+yna-server_0.6.0.bb</a><br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122466): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122466" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122466</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116696338/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116696338/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- ...t-logging.h-and-wolfcrypt-src-loggin.patch | 791 ------------------
- .../{wolfssl_5.8.0.bb => wolfssl_5.8.4.bb}    |   9 +-
- 2 files changed, 4 insertions(+), 796 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/wolfssl/files/0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch
- rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.8.0.bb => wolfssl_5.8.4.bb} (87%)
-
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch b/meta-networking/recipes-connectivity/wolfssl/files/0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch
-deleted file mode 100644
-index f4f149c7e8..0000000000
---- a/meta-networking/recipes-connectivity/wolfssl/files/0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch
-+++ /dev/null
-@@ -1,791 +0,0 @@
--From 04975ac158e6d33875c2855f74792efb2258bb93 Mon Sep 17 00:00:00 2001
--From: Daniel Pouzzner <douzzer@wolfssl.com>
--Date: Tue, 13 May 2025 20:30:48 -0500
--Subject: [PATCH] wolfssl/wolfcrypt/logging.h and wolfcrypt/src/logging.c: add 
--  WOLFSSL_DEBUG_PRINTF() macro adapted from wolfssl_log(), refactor  
-- wolfssl_log() to use it, and move printf setup includes/prototypes from  
-- logging.c to logging.h;
--
--src/ssl_load.c: add source_name arg and WOLFSSL_DEBUG_CERTIFICATE_LOADS clauses
--  to ProcessBuffer() and ProcessChainBuffer(), and pass reasonable values from
--  callers;
--
--remove expired "Baltimore CyberTrust Root" from certs/external/ca_collection.pem
--  and certs/external/baltimore-cybertrust-root.pem.
--
--Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/55460a52619626f614e86d528b9a60445562eb34]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- certs/external/baltimore-cybertrust-root.pem |  21 ---
-- certs/external/ca_collection.pem             |  77 ----------
-- src/ssl_load.c                               | 111 +++++++++++----
-- wolfcrypt/src/error.c                        |   4 +-
-- wolfcrypt/src/logging.c                      | 142 ++-----------------
-- wolfssl/internal.h                           |   3 +-
-- wolfssl/wolfcrypt/logging.h                  |  93 +++++++++++-
-- 7 files changed, 190 insertions(+), 261 deletions(-)
-- delete mode 100644 certs/external/baltimore-cybertrust-root.pem
--
--diff --git a/certs/external/baltimore-cybertrust-root.pem b/certs/external/baltimore-cybertrust-root.pem
--deleted file mode 100644
--index 519028c63..000000000
----- a/certs/external/baltimore-cybertrust-root.pem
--+++ /dev/null
--@@ -1,21 +0,0 @@
--------BEGIN CERTIFICATE-----
---MIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ
---RTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD
---VQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX
---DTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y
---ZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy
---VHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr
---mD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr
---IZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK
---mpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu
---XmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy
---dc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye
---jl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1
---BE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3
---DQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92
---9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx
---jkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0
---Epn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz
---ksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS
---R9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp
--------END CERTIFICATE-----
--diff --git a/certs/external/ca_collection.pem b/certs/external/ca_collection.pem
--index ddfdf9cee..c76d6c605 100644
----- a/certs/external/ca_collection.pem
--+++ b/certs/external/ca_collection.pem
--@@ -1,80 +1,3 @@
---Certificate:
---    Data:
---        Version: 3 (0x2)
---        Serial Number: 33554617 (0x20000b9)
---        Signature Algorithm: sha1WithRSAEncryption
---        Issuer: C = IE, O = Baltimore, OU = CyberTrust, CN = Baltimore CyberTrust Root
---        Validity
---            Not Before: May 12 18:46:00 2000 GMT
---            Not After : May 12 23:59:00 2025 GMT
---        Subject: C = IE, O = Baltimore, OU = CyberTrust, CN = Baltimore CyberTrust Root
---        Subject Public Key Info:
---            Public Key Algorithm: rsaEncryption
---                RSA Public-Key: (2048 bit)
---                Modulus:
---                    00:a3:04:bb:22:ab:98:3d:57:e8:26:72:9a:b5:79:
---                    d4:29:e2:e1:e8:95:80:b1:b0:e3:5b:8e:2b:29:9a:
---                    64:df:a1:5d:ed:b0:09:05:6d:db:28:2e:ce:62:a2:
---                    62:fe:b4:88:da:12:eb:38:eb:21:9d:c0:41:2b:01:
---                    52:7b:88:77:d3:1c:8f:c7:ba:b9:88:b5:6a:09:e7:
---                    73:e8:11:40:a7:d1:cc:ca:62:8d:2d:e5:8f:0b:a6:
---                    50:d2:a8:50:c3:28:ea:f5:ab:25:87:8a:9a:96:1c:
---                    a9:67:b8:3f:0c:d5:f7:f9:52:13:2f:c2:1b:d5:70:
---                    70:f0:8f:c0:12:ca:06:cb:9a:e1:d9:ca:33:7a:77:
---                    d6:f8:ec:b9:f1:68:44:42:48:13:d2:c0:c2:a4:ae:
---                    5e:60:fe:b6:a6:05:fc:b4:dd:07:59:02:d4:59:18:
---                    98:63:f5:a5:63:e0:90:0c:7d:5d:b2:06:7a:f3:85:
---                    ea:eb:d4:03:ae:5e:84:3e:5f:ff:15:ed:69:bc:f9:
---                    39:36:72:75:cf:77:52:4d:f3:c9:90:2c:b9:3d:e5:
---                    c9:23:53:3f:1f:24:98:21:5c:07:99:29:bd:c6:3a:
---                    ec:e7:6e:86:3a:6b:97:74:63:33:bd:68:18:31:f0:
---                    78:8d:76:bf:fc:9e:8e:5d:2a:86:a7:4d:90:dc:27:
---                    1a:39
---                Exponent: 65537 (0x10001)
---        X509v3 extensions:
---            X509v3 Subject Key Identifier: 
---                E5:9D:59:30:82:47:58:CC:AC:FA:08:54:36:86:7B:3A:B5:04:4D:F0
---            X509v3 Basic Constraints: critical
---                CA:TRUE, pathlen:3
---            X509v3 Key Usage: critical
---                Certificate Sign, CRL Sign
---    Signature Algorithm: sha1WithRSAEncryption
---         85:0c:5d:8e:e4:6f:51:68:42:05:a0:dd:bb:4f:27:25:84:03:
---         bd:f7:64:fd:2d:d7:30:e3:a4:10:17:eb:da:29:29:b6:79:3f:
---         76:f6:19:13:23:b8:10:0a:f9:58:a4:d4:61:70:bd:04:61:6a:
---         12:8a:17:d5:0a:bd:c5:bc:30:7c:d6:e9:0c:25:8d:86:40:4f:
---         ec:cc:a3:7e:38:c6:37:11:4f:ed:dd:68:31:8e:4c:d2:b3:01:
---         74:ee:be:75:5e:07:48:1a:7f:70:ff:16:5c:84:c0:79:85:b8:
---         05:fd:7f:be:65:11:a3:0f:c0:02:b4:f8:52:37:39:04:d5:a9:
---         31:7a:18:bf:a0:2a:f4:12:99:f7:a3:45:82:e3:3c:5e:f5:9d:
---         9e:b5:c8:9e:7c:2e:c8:a4:9e:4e:08:14:4b:6d:fd:70:6d:6b:
---         1a:63:bd:64:e6:1f:b7:ce:f0:f2:9f:2e:bb:1b:b7:f2:50:88:
---         73:92:c2:e2:e3:16:8d:9a:32:02:ab:8e:18:dd:e9:10:11:ee:
---         7e:35:ab:90:af:3e:30:94:7a:d0:33:3d:a7:65:0f:f5:fc:8e:
---         9e:62:cf:47:44:2c:01:5d:bb:1d:b5:32:d2:47:d2:38:2e:d0:
---         fe:81:dc:32:6a:1e:b5:ee:3c:d5:fc:e7:81:1d:19:c3:24:42:
---         ea:63:39:a9
--------BEGIN CERTIFICATE-----
---MIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJ
---RTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYD
---VQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoX
---DTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9y
---ZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVy
---VHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKr
---mD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjr
---IZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeK
---mpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSu
---XmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZy
---dc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/ye
---jl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1
---BE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3
---DQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT92
---9hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3Wgx
---jkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0
---Epn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhz
---ksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLS
---R9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp
--------END CERTIFICATE-----
-- Certificate:
--     Data:
--         Version: 3 (0x2)
--diff --git a/src/ssl_load.c b/src/ssl_load.c
--index 24c8af1be..d803b4093 100644
----- a/src/ssl_load.c
--+++ b/src/ssl_load.c
--@@ -2352,11 +2352,13 @@ static int ProcessBufferResetSuites(WOLFSSL_CTX* ctx, WOLFSSL* ssl, int type)
--  * @param [out]     used       Number of bytes consumed.
--  * @param [in[      userChain  Whether this certificate is for user's chain.
--  * @param [in]      verify     How to verify certificate.
--+ * @param [in]      source_name Associated filename or other source ID.
--  * @return  1 on success.
--  * @return  Less than 1 on failure.
--  */
-- int ProcessBuffer(WOLFSSL_CTX* ctx, const unsigned char* buff, long sz,
---    int format, int type, WOLFSSL* ssl, long* used, int userChain, int verify)
--+    int format, int type, WOLFSSL* ssl, long* used, int userChain, int verify,
--+    const char *source_name)
-- {
--     DerBuffer*    der = NULL;
--     int           ret = 0;
--@@ -2367,6 +2369,11 @@ int ProcessBuffer(WOLFSSL_CTX* ctx, const unsigned char* buff, long sz,
--     EncryptedInfo  info[1];
-- #endif
--     int           algId = 0;
--+#ifdef WOLFSSL_DEBUG_CERTIFICATE_LOADS
--+    long usedAtStart = used ? *used : 0L;
--+#else
--+    (void)source_name;
--+#endif
-- 
--     WOLFSSL_ENTER("ProcessBuffer");
-- 
--@@ -2444,6 +2451,22 @@ int ProcessBuffer(WOLFSSL_CTX* ctx, const unsigned char* buff, long sz,
--                 CLEAR_ASN_NO_PEM_HEADER_ERROR(pemErr);
--                 ret = 0;
--             }
--+#ifdef WOLFSSL_DEBUG_CERTIFICATE_LOADS
--+            if (ret < 0) {
--+#ifdef NO_ERROR_STRINGS
--+                WOLFSSL_DEBUG_PRINTF(
--+                    "ERROR: ProcessUserChain: certificate from %s at offset %ld"
--+                    " rejected with code %d\n",
--+                    source_name, usedAtStart, ret);
--+#else
--+                WOLFSSL_DEBUG_PRINTF(
--+                    "ERROR: ProcessUserChain: certificate from %s at offset %ld"
--+                    " rejected with code %d: %s\n",
--+                    source_name, usedAtStart, ret,
--+                    wolfSSL_ERR_reason_error_string(ret));
--+#endif
--+            }
--+#endif /* WOLFSSL_DEBUG_CERTIFICATE_LOADS */
--         }
-- 
--     #ifdef WOLFSSL_SMALL_STACK
--@@ -2455,6 +2478,22 @@ int ProcessBuffer(WOLFSSL_CTX* ctx, const unsigned char* buff, long sz,
--             /* Process the different types of certificates. */
--             ret = ProcessBufferCertTypes(ctx, ssl, buff, sz, der, format, type,
--                 verify);
--+#ifdef WOLFSSL_DEBUG_CERTIFICATE_LOADS
--+            if (ret < 0) {
--+#ifdef NO_ERROR_STRINGS
--+                WOLFSSL_DEBUG_PRINTF(
--+                    "ERROR: ProcessBufferCertTypes: certificate from %s at"
--+                    " offset %ld rejected with code %d\n",
--+                    source_name, usedAtStart, ret);
--+#else
--+                WOLFSSL_DEBUG_PRINTF(
--+                    "ERROR: ProcessBufferCertTypes: certificate from %s at"
--+                    " offset %ld rejected with code %d: %s\n",
--+                    source_name, usedAtStart, ret,
--+                    wolfSSL_ERR_reason_error_string(ret));
--+#endif
--+            }
--+#endif /* WOLFSSL_DEBUG_CERTIFICATE_LOADS */
--         }
--         else {
--             FreeDer(&der);
--@@ -2515,12 +2554,14 @@ static int ProcessChainBufferCRL(WOLFSSL_CTX* ctx, const unsigned char* buff,
--  * @param [in]      sz      Size of data in buffer.
--  * @param [in]      type    Type of data.
--  * @param [in]      verify  How to verify certificate.
--+ * @param [in]      source_name   Associated filename or other source ID.
--  * @return  1 on success.
--  * @return  0 on failure.
--  * @return  MEMORY_E when dynamic memory allocation fails.
--  */
-- static int ProcessChainBuffer(WOLFSSL_CTX* ctx, WOLFSSL* ssl,
---    const unsigned char* buff, long sz, int type, int verify)
--+    const unsigned char* buff, long sz, int type, int verify,
--+    const char *source_name)
-- {
--     int  ret    = 0;
--     long used   = 0;
--@@ -2529,11 +2570,11 @@ static int ProcessChainBuffer(WOLFSSL_CTX* ctx, WOLFSSL* ssl,
--     WOLFSSL_MSG("Processing CA PEM file");
--     /* Keep processing file while no errors and data to parse. */
--     while ((ret >= 0) && (used < sz)) {
---        long consumed = 0;
--+        long consumed = used;
-- 
--         /* Process the buffer. */
--         ret = ProcessBuffer(ctx, buff + used, sz - used, WOLFSSL_FILETYPE_PEM,
---            type, ssl, &consumed, 0, verify);
--+            type, ssl, &consumed, 0, verify, source_name);
--         /* Memory allocation failure is fatal. */
--         if (ret == WC_NO_ERR_TRACE(MEMORY_E)) {
--             gotOne = 0;
--@@ -2665,6 +2706,12 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
--         {
--             /* Not a header that we support. */
--             WOLFSSL_MSG("Failed to detect certificate type");
--+#ifdef WOLFSSL_DEBUG_CERTIFICATE_LOADS
--+            WOLFSSL_DEBUG_PRINTF(
--+                "ERROR: ProcessFile: Failed to detect certificate type"
--+                " of \"%s\"\n",
--+                fname);
--+#endif
--             ret = WOLFSSL_BAD_CERTTYPE;
--         }
--     }
--@@ -2673,7 +2720,7 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
--         if (((type == CA_TYPE) || (type == TRUSTED_PEER_TYPE)) &&
--                 (format == WOLFSSL_FILETYPE_PEM)) {
--             ret = ProcessChainBuffer(ctx, ssl, content.buffer, sz, type,
---                verify);
--+                verify, fname);
--         }
-- #ifdef HAVE_CRL
--         else if (type == CRL_TYPE) {
--@@ -2690,18 +2737,18 @@ int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format, int type,
--             long consumed = 0;
-- 
--             ret = ProcessBuffer(ctx, content.buffer, sz, format, type, ssl,
---                &consumed, userChain, verify);
--+                &consumed, userChain, verify, fname);
--             if ((ret == 1) && (consumed < sz)) {
--                 ret = ProcessBuffer(ctx, content.buffer + consumed,
--                     sz - consumed, format, ALT_PRIVATEKEY_TYPE, ssl, NULL, 0,
---                    verify);
--+                    verify, fname);
--             }
--         }
-- #endif
--         else {
--             /* Load all other certificate types. */
--             ret = ProcessBuffer(ctx, content.buffer, sz, format, type, ssl,
---                NULL, userChain, verify);
--+                NULL, userChain, verify, fname);
--         }
--     }
-- 
--@@ -3030,7 +3077,8 @@ static int LoadSystemCaCertsWindows(WOLFSSL_CTX* ctx, byte* loaded)
--                     if (ProcessBuffer(ctx, certCtx->pbCertEncoded,
--                           certCtx->cbCertEncoded, WOLFSSL_FILETYPE_ASN1,
--                           CA_TYPE, NULL, NULL, 0,
---                          GET_VERIFY_SETTING_CTX(ctx)) == 1) {
--+                          GET_VERIFY_SETTING_CTX(ctx),
--+                          storeNames[i]) == 1) {
--                         /*
--                          * Set "loaded" as long as we've loaded one CA
--                          * cert.
--@@ -3105,7 +3153,8 @@ static int LoadSystemCaCertsMac(WOLFSSL_CTX* ctx, byte* loaded)
--                     if (ProcessBuffer(ctx, CFDataGetBytePtr(der),
--                           CFDataGetLength(der), WOLFSSL_FILETYPE_ASN1,
--                           CA_TYPE, NULL, NULL, 0,
---                          GET_VERIFY_SETTING_CTX(ctx)) == 1) {
--+                          GET_VERIFY_SETTING_CTX(ctx),
--+                          "MacOSX trustDomains") == 1) {
--                         /*
--                          * Set "loaded" as long as we've loaded one CA
--                          * cert.
--@@ -3644,7 +3693,8 @@ int wolfSSL_use_certificate(WOLFSSL* ssl, WOLFSSL_X509* x509)
--         /* Get DER encoded certificate data from X509 object. */
--         ret = ProcessBuffer(NULL, x509->derCert->buffer, x509->derCert->length,
--             WOLFSSL_FILETYPE_ASN1, CERT_TYPE, ssl, &idx, 0,
---            GET_VERIFY_SETTING_SSL(ssl));
--+            GET_VERIFY_SETTING_SSL(ssl),
--+            "x509 buffer");
--     }
-- 
--     /* Return 1 on success or 0 on failure. */
--@@ -3676,7 +3726,8 @@ int wolfSSL_use_certificate_ASN1(WOLFSSL* ssl, const unsigned char* der,
--         long idx = 0;
-- 
--         ret = ProcessBuffer(NULL, der, derSz, WOLFSSL_FILETYPE_ASN1, CERT_TYPE,
---            ssl, &idx, 0, GET_VERIFY_SETTING_SSL(ssl));
--+            ssl, &idx, 0, GET_VERIFY_SETTING_SSL(ssl),
--+            "asn1 buffer");
--     }
-- 
--     /* Return 1 on success or 0 on failure. */
--@@ -3884,12 +3935,13 @@ int wolfSSL_CTX_load_verify_buffer_ex(WOLFSSL_CTX* ctx, const unsigned char* in,
-- 
--     /* When PEM, treat as certificate chain of CA certificates. */
--     if (format == WOLFSSL_FILETYPE_PEM) {
---        ret = ProcessChainBuffer(ctx, NULL, in, sz, CA_TYPE, verify);
--+        ret = ProcessChainBuffer(ctx, NULL, in, sz, CA_TYPE, verify,
--+                                 "PEM buffer");
--     }
--     /* When DER, load the CA certificate. */
--     else {
--         ret = ProcessBuffer(ctx, in, sz, format, CA_TYPE, NULL, NULL,
---            userChain, verify);
--+            userChain, verify, "buffer");
--     }
-- #if defined(WOLFSSL_TRUST_PEER_CERT) && defined(OPENSSL_COMPATIBLE_DEFAULTS)
--     if (ret == 1) {
--@@ -3973,12 +4025,12 @@ int wolfSSL_CTX_trust_peer_buffer(WOLFSSL_CTX* ctx, const unsigned char* in,
--         /* When PEM, treat as certificate chain of trusted peer certificates. */
--         if (format == WOLFSSL_FILETYPE_PEM) {
--             ret = ProcessChainBuffer(ctx, NULL, in, sz, TRUSTED_PEER_TYPE,
---                verify);
--+                verify, "peer");
--         }
--         /* When DER, load the trusted peer certificate. */
--         else {
--             ret = ProcessBuffer(ctx, in, sz, format, TRUSTED_PEER_TYPE, NULL,
---                NULL, 0, verify);
--+                NULL, 0, verify, "peer");
--         }
--     }
-- 
--@@ -4004,7 +4056,7 @@ int wolfSSL_CTX_use_certificate_buffer(WOLFSSL_CTX* ctx,
-- 
--     WOLFSSL_ENTER("wolfSSL_CTX_use_certificate_buffer");
--     ret = ProcessBuffer(ctx, in, sz, format, CERT_TYPE, NULL, NULL, 0,
---        GET_VERIFY_SETTING_CTX(ctx));
--+        GET_VERIFY_SETTING_CTX(ctx), "buffer");
--     WOLFSSL_LEAVE("wolfSSL_CTX_use_certificate_buffer", ret);
-- 
--     return ret;
--@@ -4030,7 +4082,7 @@ int wolfSSL_CTX_use_PrivateKey_buffer(WOLFSSL_CTX* ctx, const unsigned char* in,
--     WOLFSSL_ENTER("wolfSSL_CTX_use_PrivateKey_buffer");
-- 
--     ret = ProcessBuffer(ctx, in, sz, format, PRIVATEKEY_TYPE, NULL, &consumed,
---        0, GET_VERIFY_SETTING_CTX(ctx));
--+        0, GET_VERIFY_SETTING_CTX(ctx), "key buffer");
-- #ifdef WOLFSSL_DUAL_ALG_CERTS
--     if ((ret == 1) && (consumed < sz)) {
--         /* When support for dual algorithm certificates is enabled, the
--@@ -4038,7 +4090,8 @@ int wolfSSL_CTX_use_PrivateKey_buffer(WOLFSSL_CTX* ctx, const unsigned char* in,
--          * private key. Hence, we have to parse both of them.
--          */
--         ret = ProcessBuffer(ctx, in + consumed, sz - consumed, format,
---            ALT_PRIVATEKEY_TYPE, NULL, NULL, 0, GET_VERIFY_SETTING_CTX(ctx));
--+            ALT_PRIVATEKEY_TYPE, NULL, NULL, 0, GET_VERIFY_SETTING_CTX(ctx),
--+            "key buffer");
--     }
-- #endif
-- 
--@@ -4056,7 +4109,7 @@ int wolfSSL_CTX_use_AltPrivateKey_buffer(WOLFSSL_CTX* ctx,
-- 
--     WOLFSSL_ENTER("wolfSSL_CTX_use_AltPrivateKey_buffer");
--     ret = ProcessBuffer(ctx, in, sz, format, ALT_PRIVATEKEY_TYPE, NULL,
---        NULL, 0, GET_VERIFY_SETTING_CTX(ctx));
--+        NULL, 0, GET_VERIFY_SETTING_CTX(ctx), "alt key buffer");
--     WOLFSSL_LEAVE("wolfSSL_CTX_use_AltPrivateKey_buffer", ret);
-- 
--     return ret;
--@@ -4271,7 +4324,8 @@ static int wolfSSL_CTX_use_certificate_ex(WOLFSSL_CTX* ctx,
--     }
-- 
--     ret = ProcessBuffer(ctx, certData, certDataLen, certFormat,
---        CERT_TYPE, NULL, NULL, 0, GET_VERIFY_SETTING_CTX(ctx));
--+        CERT_TYPE, NULL, NULL, 0, GET_VERIFY_SETTING_CTX(ctx),
--+        label ? label : "cert buffer");
-- 
-- exit:
--     XFREE(certData, ctx->heap, DYNAMIC_TYPE_CERT);
--@@ -4333,7 +4387,7 @@ int wolfSSL_CTX_use_certificate_chain_buffer_format(WOLFSSL_CTX* ctx,
-- {
--     WOLFSSL_ENTER("wolfSSL_CTX_use_certificate_chain_buffer_format");
--     return ProcessBuffer(ctx, in, sz, format, CERT_TYPE, NULL, NULL, 1,
---        GET_VERIFY_SETTING_CTX(ctx));
--+        GET_VERIFY_SETTING_CTX(ctx), "cert chain buffer");
-- }
-- 
-- /* Load a PEM encoded certificate chain in a buffer into SSL context.
--@@ -4376,7 +4430,7 @@ int wolfSSL_use_certificate_buffer(WOLFSSL* ssl, const unsigned char* in,
--     }
--     else {
--         ret = ProcessBuffer(ssl->ctx, in, sz, format, CERT_TYPE, ssl, NULL, 0,
---            GET_VERIFY_SETTING_SSL(ssl));
--+            GET_VERIFY_SETTING_SSL(ssl), "cert buffer");
--     }
-- 
--     return ret;
--@@ -4407,7 +4461,7 @@ int wolfSSL_use_PrivateKey_buffer(WOLFSSL* ssl, const unsigned char* in,
--     }
--     else {
--         ret = ProcessBuffer(ssl->ctx, in, sz, format, PRIVATEKEY_TYPE, ssl,
---            &consumed, 0, GET_VERIFY_SETTING_SSL(ssl));
--+            &consumed, 0, GET_VERIFY_SETTING_SSL(ssl), "key buffer");
--     #ifdef WOLFSSL_DUAL_ALG_CERTS
--         if ((ret == 1) && (consumed < sz)) {
--             /* When support for dual algorithm certificates is enabled, the
--@@ -4415,7 +4469,8 @@ int wolfSSL_use_PrivateKey_buffer(WOLFSSL* ssl, const unsigned char* in,
--              * private key. Hence, we have to parse both of them.
--              */
--             ret = ProcessBuffer(ssl->ctx, in + consumed, sz - consumed, format,
---                ALT_PRIVATEKEY_TYPE, ssl, NULL, 0, GET_VERIFY_SETTING_SSL(ssl));
--+                ALT_PRIVATEKEY_TYPE, ssl, NULL, 0, GET_VERIFY_SETTING_SSL(ssl),
--+                "key buffer");
--         }
--     #endif
--     }
--@@ -4431,7 +4486,7 @@ int wolfSSL_use_AltPrivateKey_buffer(WOLFSSL* ssl, const unsigned char* in,
-- 
--     WOLFSSL_ENTER("wolfSSL_use_AltPrivateKey_buffer");
--     ret = ProcessBuffer(ssl->ctx, in, sz, format, ALT_PRIVATEKEY_TYPE, ssl,
---        NULL, 0, GET_VERIFY_SETTING_SSL(ssl));
--+        NULL, 0, GET_VERIFY_SETTING_SSL(ssl), "alt key buffer");
--     WOLFSSL_LEAVE("wolfSSL_use_AltPrivateKey_buffer", ret);
-- 
--     return ret;
--@@ -4669,7 +4724,7 @@ int wolfSSL_use_certificate_chain_buffer_format(WOLFSSL* ssl,
--     }
--     else {
--         ret = ProcessBuffer(ssl->ctx, in, sz, format, CERT_TYPE, ssl, NULL, 1,
---            GET_VERIFY_SETTING_SSL(ssl));
--+            GET_VERIFY_SETTING_SSL(ssl), "cert chain buffer");
--     }
-- 
--     return ret;
--@@ -4826,7 +4881,7 @@ long wolfSSL_CTX_add_extra_chain_cert(WOLFSSL_CTX* ctx, WOLFSSL_X509* x509)
-- 
--         /* Process buffer makes first certificate the leaf. */
--         ret = ProcessBuffer(ctx, der, derSz, WOLFSSL_FILETYPE_ASN1, CERT_TYPE,
---            NULL, NULL, 1, GET_VERIFY_SETTING_CTX(ctx));
--+            NULL, NULL, 1, GET_VERIFY_SETTING_CTX(ctx), "extra chain buffer");
--         if (ret != 1) {
--             ret = 0;
--         }
--diff --git a/wolfcrypt/src/error.c b/wolfcrypt/src/error.c
--index af5ba36b4..9ec9484d4 100644
----- a/wolfcrypt/src/error.c
--+++ b/wolfcrypt/src/error.c
--@@ -182,10 +182,10 @@ const char* wc_GetErrorString(int error)
--         return "ASN date error, bad size";
-- 
--     case ASN_BEFORE_DATE_E :
---        return "ASN date error, current date before";
--+        return "ASN date error, current date is before start of validity";
-- 
--     case ASN_AFTER_DATE_E :
---        return "ASN date error, current date after";
--+        return "ASN date error, current date is after expiration";
-- 
--     case ASN_SIG_OID_E :
--         return "ASN signature error, mismatched oid";
--diff --git a/wolfcrypt/src/logging.c b/wolfcrypt/src/logging.c
--index 29b9221df..b80fc3a56 100644
----- a/wolfcrypt/src/logging.c
--+++ b/wolfcrypt/src/logging.c
--@@ -230,42 +230,6 @@ void WOLFSSL_TIME(int count)
-- 
-- #ifdef DEBUG_WOLFSSL
-- 
---#if defined(ARDUINO)
---    /* see Arduino wolfssl.h for wolfSSL_Arduino_Serial_Print */
---#elif defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
---    /* see wc_port.h for fio.h and nio.h includes */
---#elif defined(WOLFSSL_SGX)
---    /* Declare sprintf for ocall */
---    int sprintf(char* buf, const char *fmt, ...);
---#elif defined(WOLFSSL_DEOS)
---#elif defined(MICRIUM)
---    #if (BSP_SER_COMM_EN  == DEF_ENABLED)
---        #include <bsp_ser.h>
---    #endif
---#elif defined(WOLFSSL_USER_LOG)
---    /* user includes their own headers */
---#elif defined(WOLFSSL_ESPIDF)
---    #include "esp_types.h"
---    #include "esp_log.h"
---#elif defined(WOLFSSL_TELIT_M2MB)
---    #include <stdio.h>
---    #include "m2m_log.h"
---#elif defined(WOLFSSL_ANDROID_DEBUG)
---    #include <android/log.h>
---#elif defined(WOLFSSL_XILINX)
---    #include "xil_printf.h"
---#elif defined(WOLFSSL_LINUXKM)
---    /* the requisite linux/kernel.h is included in wc_port.h, with incompatible warnings masked out. */
---#elif defined(FUSION_RTOS)
---    #include <fclstdio.h>
---    #define fprintf FCL_FPRINTF
---#else
---    #include <stdio.h>  /* for default printf stuff */
---#endif
---
---#if defined(THREADX) && !defined(THREADX_NO_DC_PRINTF)
---    int dc_log_printf(char*, ...);
---#endif
-- 
-- #ifdef HAVE_STACK_SIZE_VERBOSE
-- #include <wolfssl/wolfcrypt/mem_track.h>
--@@ -281,106 +245,30 @@ static void wolfssl_log(const int logLevel, const char* const file_name,
--     else {
-- #if defined(WOLFSSL_USER_LOG)
--         WOLFSSL_USER_LOG(logMessage);
---#elif defined(ARDUINO)
---        wolfSSL_Arduino_Serial_Print(logMessage);
---#elif defined(WOLFSSL_LOG_PRINTF)
---        if (file_name != NULL)
---            printf("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            printf("%s\n", logMessage);
---#elif defined(THREADX) && !defined(THREADX_NO_DC_PRINTF)
---        if (file_name != NULL)
---            dc_log_printf("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            dc_log_printf("%s\n", logMessage);
---#elif defined(WOLFSSL_DEOS)
---        if (file_name != NULL)
---            printf("[%s L %d] %s\r\n", file_name, line_number, logMessage);
---        else
---            printf("%s\r\n", logMessage);
---#elif defined(MICRIUM)
---        if (file_name != NULL)
---            BSP_Ser_Printf("[%s L %d] %s\r\n",
---                           file_name, line_number, logMessage);
---        else
---            BSP_Ser_Printf("%s\r\n", logMessage);
---#elif defined(WOLFSSL_MDK_ARM)
---        fflush(stdout) ;
---        if (file_name != NULL)
---            printf("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            printf("%s\n", logMessage);
---        fflush(stdout) ;
---#elif defined(WOLFSSL_UTASKER)
---        fnDebugMsg((char*)logMessage);
---        fnDebugMsg("\r\n");
---#elif defined(MQX_USE_IO_OLD)
---        if (file_name != NULL)
---            fprintf(_mqxio_stderr, "[%s L %d] %s\n",
---                    file_name, line_number, logMessage);
---        else
---            fprintf(_mqxio_stderr, "%s\n", logMessage);
---#elif defined(WOLFSSL_APACHE_MYNEWT)
---        if (file_name != NULL)
---            LOG_DEBUG(&mynewt_log, LOG_MODULE_DEFAULT, "[%s L %d] %s\n",
---                      file_name, line_number, logMessage);
---        else
---            LOG_DEBUG(&mynewt_log, LOG_MODULE_DEFAULT, "%s\n", logMessage);
---#elif defined(WOLFSSL_ESPIDF)
---        if (file_name != NULL)
---            ESP_LOGI("wolfssl", "[%s L %d] %s",
---                     file_name, line_number, logMessage);
---        else
---            ESP_LOGI("wolfssl", "%s", logMessage);
---#elif defined(WOLFSSL_ZEPHYR)
---        if (file_name != NULL)
---            printk("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            printk("%s\n", logMessage);
---#elif defined(WOLFSSL_TELIT_M2MB)
---        if (file_name != NULL)
---            M2M_LOG_INFO("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            M2M_LOG_INFO("%s\n", logMessage);
---#elif defined(WOLFSSL_ANDROID_DEBUG)
---        if (file_name != NULL)
---            __android_log_print(ANDROID_LOG_VERBOSE, "[wolfSSL]", "[%s L %d] %s",
---                                file_name, line_number, logMessage);
---        else
---            __android_log_print(ANDROID_LOG_VERBOSE, "[wolfSSL]", "%s",
---                                logMessage);
---#elif defined(WOLFSSL_XILINX)
---        if (file_name != NULL)
---            xil_printf("[%s L %d] %s\r\n", file_name, line_number, logMessage);
---        else
---            xil_printf("%s\r\n", logMessage);
---#elif defined(WOLFSSL_LINUXKM)
---        if (file_name != NULL)
---            printk("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            printk("%s\n", logMessage);
---#elif defined(WOLFSSL_RENESAS_RA6M4)
---        if (file_name != NULL)
---            myprintf("[%s L %d] %s\n", file_name, line_number, logMessage);
---        else
---            myprintf("%s\n", logMessage);
---#elif defined(STACK_SIZE_CHECKPOINT_MSG) && \
---      defined(HAVE_STACK_SIZE_VERBOSE) && defined(HAVE_STACK_SIZE_VERBOSE_LOG)
---        STACK_SIZE_CHECKPOINT_MSG(logMessage);
---#else
--+#elif defined(WOLFSSL_DEBUG_PRINTF)
--         if (log_prefix != NULL) {
--             if (file_name != NULL)
---                fprintf(stderr, "[%s]: [%s L %d] %s\n",
--+                WOLFSSL_DEBUG_PRINTF("[%s]: [%s L %d] %s\n",
--                         log_prefix, file_name, line_number, logMessage);
--             else
---                fprintf(stderr, "[%s]: %s\n", log_prefix, logMessage);
--+                WOLFSSL_DEBUG_PRINTF("[%s]: %s\n", log_prefix, logMessage);
--         } else {
--             if (file_name != NULL)
---                fprintf(stderr, "[%s L %d] %s\n",
--+                WOLFSSL_DEBUG_PRINTF("[%s L %d] %s\n",
--                         file_name, line_number, logMessage);
--             else
---                fprintf(stderr, "%s\n", logMessage);
--+                WOLFSSL_DEBUG_PRINTF("%s\n", logMessage);
--         }
--+#elif defined(ARDUINO)
--+        wolfSSL_Arduino_Serial_Print(logMessage);
--+#elif defined(WOLFSSL_UTASKER)
--+        fnDebugMsg((char*)logMessage);
--+        fnDebugMsg("\r\n");
--+#elif defined(STACK_SIZE_CHECKPOINT_MSG) && \
--+      defined(HAVE_STACK_SIZE_VERBOSE) && defined(HAVE_STACK_SIZE_VERBOSE_LOG)
--+        STACK_SIZE_CHECKPOINT_MSG(logMessage);
--+#else
--+    #error No log method defined.
-- #endif
--     }
-- }
--diff --git a/wolfssl/internal.h b/wolfssl/internal.h
--index 9cdbdb697..dd191fb1a 100644
----- a/wolfssl/internal.h
--+++ b/wolfssl/internal.h
--@@ -6389,7 +6389,8 @@ WOLFSSL_TEST_VIS   void wolfSSL_ResourceFree(WOLFSSL* ssl);   /* Micrium uses */
-- 
--     WOLFSSL_LOCAL int ProcessBuffer(WOLFSSL_CTX* ctx, const unsigned char* buff,
--                                     long sz, int format, int type, WOLFSSL* ssl,
---                                    long* used, int userChain, int verify);
--+                                    long* used, int userChain, int verify,
--+                                    const char *source_name);
--     WOLFSSL_LOCAL int ProcessFile(WOLFSSL_CTX* ctx, const char* fname, int format,
--                                  int type, WOLFSSL* ssl, int userChain,
--                                 WOLFSSL_CRL* crl, int verify);
--diff --git a/wolfssl/wolfcrypt/logging.h b/wolfssl/wolfcrypt/logging.h
--index 49de70147..8b3cf0fd8 100644
----- a/wolfssl/wolfcrypt/logging.h
--+++ b/wolfssl/wolfcrypt/logging.h
--@@ -89,11 +89,6 @@ enum wc_FuncNum {
-- };
-- #endif
-- 
---#if defined(ARDUINO)
---/* implemented in Arduino wolfssl.h */
---extern WOLFSSL_API int wolfSSL_Arduino_Serial_Print(const char* const s);
---#endif /* ARDUINO */
---
-- typedef void (*wolfSSL_Logging_cb)(const int logLevel,
--                                    const char *const logMessage);
-- 
--@@ -157,6 +152,10 @@ WOLFSSL_API void wolfSSL_SetLoggingPrefix(const char* prefix);
--     #define WOLFSSL_TIME(n)  WC_DO_NOTHING
-- #endif
-- 
--+#if defined(DEBUG_WOLFSSL) && !defined(WOLFSSL_DEBUG_CERTIFICATE_LOADS)
--+    #define WOLFSSL_DEBUG_CERTIFICATE_LOADS
--+#endif
--+
-- #if defined(DEBUG_WOLFSSL) && !defined(WOLFSSL_DEBUG_ERRORS_ONLY)
--     #if defined(_WIN32)
--         #if defined(INTIME_RTOS)
--@@ -268,6 +267,90 @@ WOLFSSL_API void wolfSSL_SetLoggingPrefix(const char* prefix);
--     extern WOLFSSL_API THREAD_LS_T void *StackSizeCheck_stackOffsetPointer;
-- #endif
-- 
--+/* Port-specific includes and printf methods: */
--+
--+#if defined(ARDUINO)
--+    /* implemented in Arduino wolfssl.h */
--+    extern WOLFSSL_API int wolfSSL_Arduino_Serial_Print(const char* const s);
--+#elif defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
--+    /* see wc_port.h for fio.h and nio.h includes */
--+#elif defined(WOLFSSL_SGX)
--+    /* Declare sprintf for ocall */
--+    int sprintf(char* buf, const char *fmt, ...);
--+#elif defined(WOLFSSL_DEOS)
--+#elif defined(MICRIUM)
--+    #if (BSP_SER_COMM_EN  == DEF_ENABLED)
--+        #include <bsp_ser.h>
--+    #endif
--+#elif defined(WOLFSSL_USER_LOG)
--+    /* user includes their own headers */
--+#elif defined(WOLFSSL_ESPIDF)
--+    #include "esp_types.h"
--+    #include "esp_log.h"
--+#elif defined(WOLFSSL_TELIT_M2MB)
--+    #include <stdio.h>
--+    #include "m2m_log.h"
--+#elif defined(WOLFSSL_ANDROID_DEBUG)
--+    #include <android/log.h>
--+#elif defined(WOLFSSL_XILINX)
--+    #include "xil_printf.h"
--+#elif defined(WOLFSSL_LINUXKM)
--+    /* the requisite linux/kernel.h is included in linuxkm_wc_port.h, with
--+     * incompatible warnings masked out.
--+     */
--+#elif defined(FUSION_RTOS)
--+    #include <fclstdio.h>
--+    #define fprintf FCL_FPRINTF
--+#else
--+    #include <stdio.h>  /* for default printf stuff */
--+#endif
--+
--+#if defined(THREADX) && !defined(THREADX_NO_DC_PRINTF)
--+    int dc_log_printf(char*, ...);
--+#endif
--+
--+#ifdef WOLFSSL_DEBUG_PRINTF
--+    /* user-supplied definition */
--+#elif defined(ARDUINO)
--+    /* ARDUINO only has print and sprintf, no printf. */
--+#elif defined(WOLFSSL_LOG_PRINTF) || defined(WOLFSSL_DEOS)
--+    #define WOLFSSL_DEBUG_PRINTF(...) printf(__VA_ARGS__)
--+#elif defined(THREADX) && !defined(THREADX_NO_DC_PRINTF)
--+    #define WOLFSSL_DEBUG_PRINTF(...) dc_log_printf(__VA_ARGS__)
--+#elif defined(MICRIUM)
--+    #define WOLFSSL_DEBUG_PRINTF(...) BSP_Ser_Printf(__VA_ARGS__)
--+#elif defined(WOLFSSL_MDK_ARM)
--+    #define WOLFSSL_DEBUG_PRINTF(...) do { \
--+            fflush(stdout);                \
--+            printf(__VA_ARGS__);           \
--+            fflush(stdout);                \
--+        } while (0)
--+#elif defined(WOLFSSL_UTASKER)
--+    /* WOLFSSL_UTASKER only has fnDebugMsg and related primitives, no printf. */
--+#elif defined(MQX_USE_IO_OLD)
--+    #define WOLFSSL_DEBUG_PRINTF(...) fprintf(_mqxio_stderr, __VAR_ARGS)
--+#elif defined(WOLFSSL_APACHE_MYNEWT)
--+    #define WOLFSSL_DEBUG_PRINTF(...) LOG_DEBUG(&mynewt_log, \
--+        LOG_MODULE_DEFAULT, __VA_ARGS__)
--+#elif defined(WOLFSSL_ESPIDF)
--+    #define WOLFSSL_DEBUG_PRINTF(...) ESP_LOGI("wolfssl", __VA_ARGS__)
--+#elif defined(WOLFSSL_ZEPHYR)
--+    #define WOLFSSL_DEBUG_PRINTF(...) printk(__VA_ARGS__)
--+#elif defined(WOLFSSL_TELIT_M2MB)
--+    #define WOLFSSL_DEBUG_PRINTF(...) M2M_LOG_INFO(__VA_ARGS__)
--+#elif defined(WOLFSSL_ANDROID_DEBUG)
--+    #define WOLFSSL_DEBUG_PRINTF(...) __android_log_print(ANDROID_LOG_VERBOSE, \
--+                                                    "[wolfSSL]", __VA_ARGS__)
--+#elif defined(WOLFSSL_XILINX)
--+    #define WOLFSSL_DEBUG_PRINTF(...) xil_printf(__VA_ARGS__)
--+#elif defined(WOLFSSL_LINUXKM)
--+    #define WOLFSSL_DEBUG_PRINTF(...) printk(__VA_ARGS__)
--+#elif defined(WOLFSSL_RENESAS_RA6M4)
--+    #define WOLFSSL_DEBUG_PRINTF(...) myprintf(__VA_ARGS__)
--+#else
--+    #define WOLFSSL_DEBUG_PRINTF(...) fprintf(stderr, __VA_ARGS__)
--+#endif
--+
-- #ifdef __cplusplus
-- }
-- #endif
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
-similarity index 87%
-rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
-index af591cfd7a..8512269912 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
-@@ -6,19 +6,18 @@ DESCRIPTION = "wolfSSL, formerly CyaSSL, is a lightweight SSL library written \
- HOMEPAGE = "https://www.wolfssl.com/products/wolfssl"
- BUGTRACKER = "https://github.com/wolfssl/wolfssl/issues"
- SECTION = "libs"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- PROVIDES += "cyassl"
- RPROVIDES:${PN} = "cyassl"
- 
- SRC_URI = " \
--    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
--    file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch \
-+    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master;tag=v${PV}-stable \
-     file://run-ptest \
- "
- 
--SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
-+SRCREV = "59f4fa568615396fbf381b073b220d1e8d61e4c2"
- 
- 
- inherit autotools ptest
+--000000000000b909ea064589bc21--
 
