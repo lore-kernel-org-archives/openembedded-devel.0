@@ -1,154 +1,173 @@
-Return-Path: <sudumbha@cisco.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D0BED3B7EA
-	for <webhook@archiver.kernel.org>; Tue,  9 Dec 2025 05:00:19 +0000 (UTC)
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17.1765256414535553262
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49943D1CDC6
+	for <webhook@archiver.kernel.org>; Tue,  9 Dec 2025 05:54:49 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.840.1765259680893152073
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Dec 2025 21:00:14 -0800
+ Mon, 08 Dec 2025 21:54:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=HpYFE/D0;
- spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: sudumbha@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=3326; q=dns/txt;
-  s=iport01; t=1765256414; x=1766466014;
-  h=from:to:cc:subject:date:message-id:mime-version:
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Lg9F20fZ;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1765259681; x=1796795681;
+  h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=hVxLgCY3xrSkDPC5GacPXStKUcbZ8/B3vLEjB9DpwiM=;
-  b=HpYFE/D04i3S7hX2mfy5PKaUHsKXA/ME9BVh5lR0mEdJn282/7yIMVTh
-   iAhxCNs2EhXPCdzvD3hhO9ZFJ7ddaog1yGEb44P0sDIOjeIwXBrvR9rgA
-   ImgZwrVS/0rbCm9FZvcCmuZTVpm8GOFTn8LoApfWKB1Z9yyZxVTUQkAjg
-   y57QU36ZWtq1SXWVO2sXz9QAnNCwm6l1uHbnjevPdOKJwPJoDdXClRf1C
-   8geUK+sPpKw42bwvaQKWjD36OC3dcdDSLxStc1A7KPX7BjuWYfjvzdbU8
-   IzSYmnZGP5IB9cBdCU0xcgeKJ+gTP+O8i7I6/ajb01scPc291CctoI5H+
-   w==;
-X-CSE-ConnectionGUID: MswEd5ehQ7OGYYUc92l5cg==
-X-CSE-MsgGUID: WmKDoywBQM2zzKOH85k5wA==
-X-IPAS-Result: =?us-ascii?q?A0AaEAD9qzdp/5P/Ja1aHQEBPAEFBQECAQkBgWUCgkV/X?=
- =?us-ascii?q?0JJh1+OaYtnkjaBfw8BAQEPFAI0BwQBAYUHjGkCJjQJDgECBAEBAQEDAgMBA?=
- =?us-ascii?q?QEBAQEBAQEBAQsBAQUBAQECAQcFgQ4Thk8Nhl02ARgBLTBRC0SDAgGCOgM2A?=
- =?us-ascii?q?gERryuCLIEBgwkfATEFCQJDT9hEDYJbgUsBhTqCeYUdcAGEeCcbG4FyglCCL?=
- =?us-ascii?q?YEFgRpCAQECGIgKBIINFYEOgXWEKoJSHhCGeQaJLEiBHgNZLAFVEw0KCwcFg?=
- =?us-ascii?q?WMDNQwLKhVuMh2BIz4Xc4RdHmgPBoERg08GiRQPiXsyAwsYDUgRLDcUGwY+b?=
- =?us-ascii?q?geUDE6CMnIJEwETGCACgVsLJA8CIZJzCZAlgiGBNZ5ocQoog3SMHo89hXwaM?=
- =?us-ascii?q?6prmQaOCIQJkkeEaIFoPIFHCwdwFYMiCQo/GQ+OOINpgX+DFLxiIjUCAQEHM?=
- =?us-ascii?q?QIHCwEBAwmTZwEB?=
-IronPort-Data: A9a23:Gj7y+aL4Ucozw17sFE+RgZQlxSXFcZb7ZxGr2PjKsXjdYENShWBUn
- TMbUGHUa6zYN2H2e91/a9iz/BkCvZ+BxtViTAsd+CA2RRqmiyZq6fd1j6vUF3nPRiEWZBs/t
- 63yUvGZcoZsCCSa/kvxWlTYhSEU/bmSQbbhA/LzNCl0RAt1IA8skhsLd9QR2uaEuvDnRVnV0
- T/Oi5eHYgL8gWYkajl8B5+r8XuDgtyj4Fv0gXRmDRx7lAe2v2UYCpsZOZawIxPQKqFIHvS3T
- vr017qw+GXU5X8FUrtJRZ6iLyXm6paLVeS/oiI+t5qK23CulQRuukoPD8fwXG8M49m/c3+d/
- /0W3XC4YV9B0qQhA43xWTEAe811FfUuFLMqvRFTvOTLp3AqfUcAzN1LF14bMdAV+t8oJk5/x
- METeWoJMxuM0rfeLLKTEoGAh+w5J8XteYdasXZ6wHSAVbAtQIvIROPB4towMDUY358VW62BI
- ZBENHw2MEuojx5nYj/7DLolgeu1g3P/ehVTqUmeouw85G27IAlZjOKzboqOIILXLSlTtnmdh
- U7B7nvTOzRAJs687hrVr3HxmcaayEsXX6pXTtVU7MVCh0WewGEWAhAaWVa35PW0lEO6c9ZeM
- FAPvC02oK4/8UamQtXwU1u/unHsg/IHc8BbH+t/7ESGzbDZpl/BQGMFVTVGLtchsafaWAAX6
- 7NApPuxbRQHjVFfYSv1Gmu8xd9qBRUoEA==
-IronPort-HdrOrdr: A9a23:e/FY1K9SnrfD7q7ko4Vuk+DTI+orL9Y04lQ7vn2ZhyY7TiX+rb
- HKoB11737JYVoqNU3I+urwWpVoI0m9yXcd2+B4Vt2ftWLd1ldAQrsP0WKb+UyCJ8U7ndQtsp
- uJtMNFebnNMWQ=
-X-Talos-CUID: =?us-ascii?q?9a23=3ANr5mxmjKktwS9I/Ts+0eV8pcajJuV2bC4XuNLk+?=
- =?us-ascii?q?BVkFGeYyoQg7K/P5vnJ87?=
-X-Talos-MUID: 9a23:H9C9lwpBtUjArc8hRq0ezw5nF+tv8ruEMWVXg4clnOnUaC8tJB7I2Q==
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.20,260,1758585600"; 
-   d="scan'208";a="426683265"
-Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
-  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Dec 2025 05:00:11 +0000
-Received: from sjc-ads-3824.cisco.com (sjc-ads-3824.cisco.com [171.68.251.21])
+  bh=x3dYIhO27A4/WiSJnDKqUTAYVIm3Ooxrs2sKJDNI28E=;
+  b=Lg9F20fZPEceRP07Zr53lebgoQkg5/8axzBuWcktkgV7x/TNhY7TNEFz
+   KPRdbHahp7ZHUomqSxlH1Wca+Us4OwTvzftW3TsHhN0xyrkbpmPaRiU10
+   ZXB2igORAIsHZdXQDwpV8FqnzPbjxRJiHKujgC2hxGuRoIBIbVJqdp7c6
+   vPvqtfsRf0MP/sWRbrun71tVShmZSIi4jxRBT3K3Zr4AIfux4r8vDnahK
+   xmVlvwbZYyspvePk/mysmHWUyE9FNcY5GNDQoJralXdR2kMsErSAHb+eq
+   zg6p+gkX8a8rck/RjIjNS4LTAZQeFOPZRPAnuvNLf60qa9xW1IiOoR1k4
+   g==;
+X-CSE-ConnectionGUID: FbWdKHQAQyGxLRqEZVGyMg==
+X-CSE-MsgGUID: t/xJsn97RRGOQV12ojl30g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11636"; a="221954179"
+X-IronPort-AV: E=Sophos;i="6.20,260,1758553200"; 
+   d="scan'208";a="221954179"
+Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2025 14:54:39 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id C607418000880;
-	Tue,  9 Dec 2025 05:00:11 +0000 (GMT)
-Received: by sjc-ads-3824.cisco.com (Postfix, from userid 1840713)
-	id 6B2F9CCF82B; Mon,  8 Dec 2025 21:00:09 -0800 (PST)
-From: "Sudhir Dumbhare -X (sudumbha - E INFOCHIPS PRIVATE LIMITED at Cisco)" <sudumbha@cisco.com>
+	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 035FE142D
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Dec 2025 05:54:39 +0000 (UTC)
+Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id A0EBC1C0014F
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Dec 2025 05:54:38 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 659671000610
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Dec 2025 05:54:36 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: vchavda@cisco.com
-Subject: [meta-oe][Scarthgap][PATCH] hdf5 1.14.4-3: fix CVE-2025-2912
-Date: Mon,  8 Dec 2025 20:59:14 -0800
-Message-ID: <20251209050003.192253-1-sudumbha@cisco.com>
-X-Mailer: git-send-email 2.44.4
+Subject: [oe][meta-oe][PATCH 1/5] gflags: upgrade 2.2.2 -> 2.3.0
+Date: Tue,  9 Dec 2025 13:54:28 +0800
+Message-ID: <20251209055428.22306-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 171.68.251.21, sjc-ads-3824.cisco.com
-X-Outbound-Node: rcdn-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 05:00:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122393
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Dec 2025 05:54:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122394
 
-From: Sudhir Dumbhare <sudumbha@cisco.com>
+1.Change log:
+  https://github.com/gflags/gflags/releases/tag/v2.3.0
 
-Upstream Repository: https://github.com/HDFGroup/hdf5.git
+2. Drop 0001-allow-build-with-cmake-4.patch as it was mergerd upstream.
 
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2912
-Type: Security Fix
-CVE: CVE-2025-2912
-Score: 4.8
-Patch: https://github.com/HDFGroup/hdf5/commit/7cc8b5e1010a
-
-Analysis:
-- CVE-2025-2913 was previously fixed by [1], which is also addresses CVE-2025-2912
-  as noted in [4].
-- NVD [2] references the GitHub discussion [3] for CVE-2025-2912, and we successfully
-  reproduced the issue following the steps outlined there.
-- Applied the fix from [4] and verified resolution using the reproduction steps.
-- The same patch [4] is already included in OE-scarthgap [5] for CVE-2025-2913.
-- Therefore, reused the patch from [5] to resolve CVE-2025-2912.
-
-References:
-[1] https://github.com/HDFGroup/hdf5/commit/7cc8b5e1010a
-[2] https://nvd.nist.gov/vuln/detail/CVE-2025-2912
-[3] https://github.com/HDFGroup/hdf5/issues/5370#issue-2917388806
-[4] https://github.com/HDFGroup/hdf5/issues/5370#issuecomment-3542881855
-[5] https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-support/hdf5?h=scarthgap&id=b42e6eb3e51a
-
-Signed-off-by: Sudhir Dumbhare <sudumbha@cisco.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../{CVE-2025-2913.patch => CVE-2025-2913-CVE-2025-2912.patch} | 3 ++-
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb                  | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/hdf5/files/{CVE-2025-2913.patch => CVE-2025-2913-CVE-2025-2912.patch} (94%)
+ .../0001-allow-build-with-cmake-4.patch       | 69 -------------------
+ .../{gflags_2.2.2.bb => gflags_2.3.0.bb}      |  5 +-
+ 2 files changed, 2 insertions(+), 72 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
+ rename meta-oe/recipes-support/gflags/{gflags_2.2.2.bb => gflags_2.3.0.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-2913.patch b/meta-oe/recipes-support/hdf5/files/CVE-2025-2913-CVE-2025-2912.patch
-similarity index 94%
-rename from meta-oe/recipes-support/hdf5/files/CVE-2025-2913.patch
-rename to meta-oe/recipes-support/hdf5/files/CVE-2025-2913-CVE-2025-2912.patch
-index e1614bee9b..47c887597a 100644
---- a/meta-oe/recipes-support/hdf5/files/CVE-2025-2913.patch
-+++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-2913-CVE-2025-2912.patch
-@@ -9,10 +9,11 @@ one of the free lists.  It appeared that the library came to this vulnerability
- after it encountered an undetected reading of a bad value.  The fuzzer now failed
- with an appropriate error message.
+diff --git a/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch b/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
+deleted file mode 100644
+index bc3ca94de8..0000000000
+--- a/meta-oe/recipes-support/gflags/gflags/0001-allow-build-with-cmake-4.patch
++++ /dev/null
+@@ -1,69 +0,0 @@
+-From b533cf275db99b1d37ba20d96497cafcedc9ace0 Mon Sep 17 00:00:00 2001
+-From: Alper Ak <alperyasinak1@gmail.com>
+-Date: Tue, 8 Jul 2025 18:57:26 +0300
+-Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
+- compatibility
+-
+-Fix:
+-
+-| CMake Error at CMakeLists.txt:73 (cmake_minimum_required):
+-|   Compatibility with CMake < 3.5 has been removed from CMake.
+-|
+-|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+-|   to tell CMake that the project requires at least <min> but has been updated
+-|   to work with policies introduced by <max> or earlier.
+-|
+-|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+-|
+-|
+-| -- Configuring incomplete, errors occurred!
+-
+-Upstream-Status: Backport [https://github.com/gflags/gflags/commit/70c01a642f08734b7bddc9687884844ca117e080]
+-
+-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+----
+- CMakeLists.txt             | 2 +-
+- test/config/CMakeLists.txt | 2 +-
+- test/nc/CMakeLists.txt     | 2 +-
+- 3 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 657a1f4..a5440bb 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -70,7 +70,7 @@
+- ## - GFLAGS_INSTALL_SHARED_LIBS
+- ## - GFLAGS_INSTALL_STATIC_LIBS
+- 
+--cmake_minimum_required (VERSION 3.0.2 FATAL_ERROR)
+-+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
+- 
+- if (POLICY CMP0042)
+-   cmake_policy (SET CMP0042 NEW)
+-diff --git a/test/config/CMakeLists.txt b/test/config/CMakeLists.txt
+-index 6190b25..205121e 100644
+---- a/test/config/CMakeLists.txt
+-+++ b/test/config/CMakeLists.txt
+-@@ -1,6 +1,6 @@
+- ## gflags package configuration tests
+- 
+--cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+-+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
+- 
+- project (gflags_${TEST_NAME})
+- 
+-diff --git a/test/nc/CMakeLists.txt b/test/nc/CMakeLists.txt
+-index d00b07d..1b4d511 100644
+---- a/test/nc/CMakeLists.txt
+-+++ b/test/nc/CMakeLists.txt
+-@@ -1,6 +1,6 @@
+- ## gflags negative compilation tests
+- 
+--cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+-+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
+- 
+- if (NOT TEST_NAME)
+-   message (FATAL_ERROR "Missing TEST_NAME CMake flag")
+--- 
+-2.43.0
+-
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb b/meta-oe/recipes-support/gflags/gflags_2.3.0.bb
+similarity index 79%
+rename from meta-oe/recipes-support/gflags/gflags_2.2.2.bb
+rename to meta-oe/recipes-support/gflags/gflags_2.3.0.bb
+index 925aa6d6e6..0e510bb59a 100644
+--- a/meta-oe/recipes-support/gflags/gflags_2.2.2.bb
++++ b/meta-oe/recipes-support/gflags/gflags_2.3.0.bb
+@@ -3,9 +3,8 @@ HOMEPAGE = "https://github.com/gflags/gflags"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
  
--CVE: CVE-2025-2913
-+CVE: CVE-2025-2913 CVE-2025-2912
- Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/7cc8b5e1010a09c892bc97ac32d9515c3777ce07]
- (cherry picked from commit 7cc8b5e1010a09c892bc97ac32d9515c3777ce07)
- Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+Signed-off-by: Sudhir Dumbhare <sudumbha@cisco.com>
- ---
-  src/H5Ocont.c | 2 ++
-  1 file changed, 2 insertions(+)
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-index 8a37323536..e8432f0d6b 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-@@ -15,7 +15,7 @@ SRC_URI = " \
-     https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.14/hdf5-1.14.4/src/${BPN}-${PV}.tar.gz \
-     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
-     file://0001-cmake-remove-build-flags.patch \
--    file://CVE-2025-2913.patch \
-+    file://CVE-2025-2913-CVE-2025-2912.patch \
-     file://CVE-2025-2914.patch \
-     file://CVE-2025-2915.patch \
-     file://CVE-2025-2923-CVE-2025-6816-CVE-2025-6856.patch \
+-SRC_URI = "git://github.com/gflags/gflags.git;branch=master;protocol=https \
+-        file://0001-allow-build-with-cmake-4.patch"
+-SRCREV = "e171aa2d15ed9eb17054558e0b3a6a413bb01067"
++SRC_URI = "git://github.com/gflags/gflags.git;branch=main;protocol=https"
++SRCREV = "33bb3461e10864b5406353d3a1fb7ff34c2314b8"
+ 
+ inherit cmake
+ 
 -- 
-2.44.4
+2.43.0
 
 
