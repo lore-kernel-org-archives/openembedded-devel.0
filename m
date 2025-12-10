@@ -2,98 +2,100 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 490E9D3C55F
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:27:53 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15363.1765373272197602727
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B500D3C902
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:28:03 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15674.1765373282999186560
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 05:27:52 -0800
+ Wed, 10 Dec 2025 05:28:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UF/y9i85;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-7bab7c997eeso7805952b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:27:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Uoyg3IDg;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7e2762ad850so7128706b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:28:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765373271; x=1765978071; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=imuFr1gkAuGVwWlvTO5rGr+vRYTiVzbDzJBqB/wvpGI=;
-        b=UF/y9i859JYif6+mQX8vjeVUPnuy5bf/szYK3EeZwITX0yn+Ae3aeY3KgbEk9lSe/J
-         BXDHSfkJLYX0Npvxk9imvL8mCulFBRujty5SSRQRuTt7l1QzZKaJ5cnC56ydLxULE+NI
-         xTyJ1GXnon10K43vk/JTsvNkTGP7id6GbnSnrwC3DDYg+dRHRC509UTZBhZxgV7EKr/V
-         0slowXBvPCPBpQUlKJzofi8wQyY3wk6A1XCGsRx9dyzFPODHr0/xj1Gox4LjU8c+Xv1B
-         m1vGT8cj0UlLKkp6/ZKWTsLzQanPxLb1RZ2Nf5qvcyrfI7CafMNh1+p7HRNTT9wY2rC3
-         tOJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765373271; x=1765978071;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1765373282; x=1765978082; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=imuFr1gkAuGVwWlvTO5rGr+vRYTiVzbDzJBqB/wvpGI=;
-        b=o3laZzbf8l2p6m1NYRDpOREjsGp5i/rTBA6aL0Yzv0shEEDUOvjNEyOzS0mO6VRXPw
-         d0TNY46I43sLEAPLx39Me/ygb74VUm61dpH88yXExnsMQ54dnbG00i1khI8IGoCy0S2m
-         2Xxxq5CNftyuLsgUW8yNmVWXq7MPntm3baPAChNLEYUDjTe/Yxfcbk9EEHGbJ4/0Q1jQ
-         LOd7KBpvu9/snE+EI6qWXi0cbc4mk8sJLtkhe5+gGBUq1iXfRa2riaNIUIb9JApOcJ+a
-         6KM6/HMqY4q85rFszwgzhO5Io5xCSTHRflLGkuiQjNwQIi6KP+u8qV01SqkwqwIGDLoV
-         eRSA==
-X-Gm-Message-State: AOJu0Yx/95kChIOcb5bun0i7OXRfJb8UJ2yt+2ZT5DkUwqd7wqeg5ob6
-	MXQdxNVbpQ0a7j+0gye2x+fVXt3HnIm90glTdOEp0hCt22AlGN2/Ms9Qi/AXGw==
-X-Gm-Gg: AY/fxX6mnOAC4y54+n1zpkoVB4DoLcUDYmHJzhuB7hvJrWlebXbVetdyVVnsAwCHCNC
-	iP7FnLIvp2cmqmeSNSHRaeJ5MeOo0cROKd3ycSh6lk2dDpWR/s1abFf+JPHBw9TXRV9ZhDmPuiR
-	/c+mlNHf354T/mQz2WRcQ1g0tSsoHJgNT0lFOCHkcXlUuN/dwHaShv0jERaIQEP0r9rxlIuVUU+
-	wZ47vLZmDprlmwJc0g9+Wkeh/NbIeNfOaq9T3gAMzEOI8jkJGDW1JAr+7j69mEHu68KhhqB//Ol
-	zM59it9m3FIxB9QxOiZsvLWnRZfnAZlaRB+ZuWVDScWp/CpzWhH3h9JLvUpDkUbO3hY8l42mjo+
-	AUjV9/VgdxgMNRbtDeL5LTOx4rYySszQNd2ZL1Iqs52EvgKWGomo4Tszn2QQsI2K4jCxAoOzISC
-	WrgytfuLpJacpytMP5j7JF7Ns=
-X-Google-Smtp-Source: AGHT+IEGEktLPQppGpBhigZJNE3bd0cqcHgZJA8Wn+P1oDfvoEfCcXu4/W4435BfSiq+X41tHOLTgQ==
-X-Received: by 2002:a05:6a00:2ea8:b0:7b2:1fb0:6da3 with SMTP id d2e1a72fcca58-7f22d20a6c0mr2266304b3a.24.1765373271418;
-        Wed, 10 Dec 2025 05:27:51 -0800 (PST)
+        bh=SxURYvzP2mHWkeRAm1GmK7o0zbVz/+hxQDyIyxjvTNQ=;
+        b=Uoyg3IDgW2Qk7aOyjGp8ney/I02i0P2bUTtnGntDImluPag2luQvY4tdaRax4wyv6u
+         BltO57SmnXwrhoo2Srk3O72MeCNIvqh6CTqJND8agZGPOxiuqdGMZ01P1y13dSEMZWDw
+         EYdzEd50QdVcmzfKQ8ovi4H0c2POlNMc08Qkthn/okK3kTKeWYOX57YGGhlT38/YfFLI
+         JFyiuTnYLRrggJ4zZnR1ML7Sk4t2BxysduOQB8UixV5+ZN/aAsYPaA56bf8X3cNtxvr5
+         UAvwTJt13ecXgHQ5sL6ETbDNeyp0KzxEb21WjoXBe7w3M8rJSR48F8qiXS8WZIO96Lbl
+         PF/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765373282; x=1765978082;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=SxURYvzP2mHWkeRAm1GmK7o0zbVz/+hxQDyIyxjvTNQ=;
+        b=YycXty/kdf9ASxO7YBaLp9hSLvljjqmvdMxzmIpOWSte0XxZKeX42UY2ilFkKf8N/1
+         vUQHcaY3MVr9MXaoUdKAkd9qge7D2uT9Sawc3d+KdGVXme9mKxL3tJcckVqFqpLEPvcg
+         Uhkd8n52t6uvXu3YW7MFIptKek46J7MeNQOh5QqIgEeaqjzKr//Vxhl6xb0ZdWvsbA3r
+         CTHe+XYLrExUINJ6TJ63pyCwj66R8Ky6KNN3pmJI6VFnoTVgY+9gUuNntLxLKv9v88lJ
+         hbfsIb/SK56G0FZODF091Cc/L48FH+18IeEoz+hvzQOa1tFuAdiFHmVol3IRTJwDxWXy
+         NGfw==
+X-Gm-Message-State: AOJu0YzqRpYjuqaC6n8q1uQvoGLmhIDbmoOTzhiDKYZM3Qdsk56Y8mFD
+	/PmIyUUSGcSAzw8XWThC8N6xwTsbya2vox1qGO43lSHY53aYDBTbNAS3qPKHgA==
+X-Gm-Gg: AY/fxX5V1cnNMY3QonVCz83ZXRuIjApQBkHzVNjCmFELk3IVfnbI7SDS6p5NuSvY2jY
+	i/ZPEcgso8rEhJTvEOtwdfE5LSbBDzcSjtIEEfBwak/CJnMrBiLaFtVmLwlU+zRilRahNPgd7Co
+	omVic26ApR2qLSFp5k60rnRLY6nt8k5GouP0NxJ5RETzoNdzXuPUcGyw/vxn5HVckkwOav5CKfW
+	Zmyw4a+W2XpvCvjpCV/73abuzPRTfeF1gCOAD7YGfyPde94OfyKmpzh34IzJ1pEHUmJPditHcFI
+	N0KyDTsUU9jIiEqFx3IszwC6husQBEKoLyFKGWE4FUfkf814mYsygt91V5EfOu53NKfL5e4IRMD
+	LB3hljYnScGwSbxlcAiQIbm+E3e905a1/dGmQ4/xQIKvD40/luibEjnEiQT2nWZKf5wbEYQEq7u
+	uT4/9HGliEgp5wiYHuNl3+T4w=
+X-Google-Smtp-Source: AGHT+IEhIsdSJecq4GCH0+zIavkZWFYwcpeF21VsgJwOm0WUWcFng/jMtYCuiPwjM53fRKmSHoGOuA==
+X-Received: by 2002:a05:6a00:3d08:b0:7aa:5c32:17a3 with SMTP id d2e1a72fcca58-7f22dfa61a1mr2396642b3a.17.1765373282161;
+        Wed, 10 Dec 2025 05:28:02 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.27.49
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.27.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 05:27:51 -0800 (PST)
+        Wed, 10 Dec 2025 05:28:01 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Changqing Li <changqing.li@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 36/43] parallel: upgrade 20251022 -> 20251122
-Date: Wed, 10 Dec 2025 18:57:37 +0530
-Message-ID: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 40/43] version-check.conf: mute version mismatch warning for flite
+Date: Wed, 10 Dec 2025 18:57:41 +0530
+Message-ID: <20251210132744.336180-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
+References: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:27:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122540
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:28:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122544
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+* flite --version return 1 block version output for
+  check-version-mismatch.bbclass
+* even with version output flite-2.2-current, regular version match
+  regexp cannot match the version
+
+so mute version mismatch warning for flite
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c9c4b5a88718822697ad41d86b8b89961fb23c10)
+(cherry picked from commit d819512cb3d9e58e7f664aa11cd00b797f219af7)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../parallel/{parallel_20251022.bb => parallel_20251122.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/parallel/{parallel_20251022.bb => parallel_20251122.bb} (93%)
+ meta-oe/conf/version-check.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/parallel/parallel_20251022.bb b/meta-oe/recipes-extended/parallel/parallel_20251122.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/parallel/parallel_20251022.bb
-rename to meta-oe/recipes-extended/parallel/parallel_20251122.bb
-index 9fa1b6052d..c2775472d7 100644
---- a/meta-oe/recipes-extended/parallel/parallel_20251022.bb
-+++ b/meta-oe/recipes-extended/parallel/parallel_20251122.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
- "
- 
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "474326d59688d2fc078cf89a7b0b4a11cc9684229b3fa0158fe8bc03f1b69ee1"
-+SRC_URI[sha256sum] = "368d1982cfd9dbebb8cd0e444de6199559df94ac2dd1edf95f74350f0af1e84d"
- 
- inherit autotools bash-completion
- 
+diff --git a/meta-oe/conf/version-check.conf b/meta-oe/conf/version-check.conf
+index b41c9e8d22..d1a6cdf7a5 100644
+--- a/meta-oe/conf/version-check.conf
++++ b/meta-oe/conf/version-check.conf
+@@ -35,3 +35,4 @@ CHECK_VERSION_PV:pn-pps-tools = '%'
+ CHECK_VERSION_PV:pn-libusb-compat = "0.1.12"
+ CHECK_VERSION_PV:pn-jemalloc = "${@d.getVar('PV').split('+')[0]}%"
+ CHECK_VERSION_PV:pn-dialog = "${@d.getVar('PV').split('-')[0]}%"
++CHECK_VERSION_PV:pn-flite = '%'
 
