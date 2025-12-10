@@ -2,64 +2,64 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC8A2D2CE17
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAA0FD3C529
 	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 08:16:20 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10812.1765354576756423498
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10811.1765354574724341858
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 00:16:16 -0800
+ Wed, 10 Dec 2025 00:16:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HvpM1Cq6;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7ade456b6abso5655247b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 00:16:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G0DaaTPu;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-7b89c1ce9easo7529413b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 00:16:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765354576; x=1765959376; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765354574; x=1765959374; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VTvkL13A2xd55VMIfoN7ZenwiqA+9LAtmMWoJuTw9Fk=;
-        b=HvpM1Cq6hJMCnGHYN5fEpidrL/4+ZpG9GZ9Cwt3qWS30BXh6vjm9MPNNdP8pQdBNXP
-         4a5V0WSGjfqt9iVWWJbE3i9ZJOWcj4vH4HUTOmIDW2EaDahgmTeSjTQoAa2GxwzORZFu
-         H9dpZa8jqCpFHBFl5x7y+PJHarhyk5Hozmw5m6zaKAORuHXXwSly1FeAEKqj7PsCS8Wl
-         mMXsWCo3NbcSY3a2LccOZDrgEHJTCgnPOfrh4/qQd+rYUxkqHjvYOQNwzDk3GsdQNPui
-         7PgmpT0HC3af6hesHKGj6S4psJum8v2I/hrH0elI0RIVVoAZyUpKBDYn3da/o/ytfH8l
-         grvw==
+        bh=jiKiArVKEC7R4vwkfHXBKcRv3x95T9284sojGs/dhuY=;
+        b=G0DaaTPuGbrbhvbNgTTeSz7jn8K0imyxykTdKDz+JJgE8aL6bG3vcJ98DklDmyRYSC
+         tB4lo135Pwvnr2l+6VM7yz+o396kDgtMeExnHNTdclCn58js3yuYksQ4j1cVZuVUGr7P
+         iHaWA88Cw/uAKfhPR1sbR7lJDrN/OZND3KOyBlsq7mAhAvvBAvmokptgMkw+kkcKEA37
+         yafjbIZYTKILe0c71jEGlmg1TPf4mpDW2RAz35+C9Jv6Vximl4FYLIlg8d3zt+g3dO1g
+         +qL0/etDN3KKtBH8B1sEohx2R5HRAGD7wKRKFuYV8BXiqZzo9C3EvR/sOGPPe9rU5CfV
+         JMeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765354576; x=1765959376;
+        d=1e100.net; s=20230601; t=1765354574; x=1765959374;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=VTvkL13A2xd55VMIfoN7ZenwiqA+9LAtmMWoJuTw9Fk=;
-        b=m8N0a2niLlVqB0WwzHAd6KE7GlcnSpOvQOTpYsddt3R0bJo3AeCAfZHlxaR/VI7o5S
-         28zzk55ln+/UTH1YGG7lX+lXAv9TFgXuIQd3KM6kXbg9TDeBxw3Ec31zZsnxN6BzzjVA
-         ArvdmNJjQUWzJRtAqX0b23bEmI4dpQfpkst/QXA2mXAcaAzKQul5gSy5qepxabrPrs/S
-         Wm8UGt0CPNyz8vIWtO7SmNipwDqe/vrKGeExg73q5q/K1DxxIkHugyvGKgrArqFaWai/
-         YtUV1KpVopaBkdPuIz/grooEW5t07bWVlCFRQoguDreQ75EU48OlMpbpDmQ+AQ2aHbKo
-         vReA==
-X-Gm-Message-State: AOJu0YytHgYq5Fi68nztle6RETTeQ8OdvIVhf5Ip5kKsW6QQp2Sx8YOK
-	zCCvM2FY7dOyHgZWMAhewl5Mupb+5jHAs4hHWLZxEnKeYV2P4v2W3IUcKDSxD274
-X-Gm-Gg: ASbGnct/Vb9atg37USkP7cd4xA6BZeu7MfReSf855hr3jsFeC5aFw6JKbha/ROd1II4
-	9jLFUZKmeKlQ26cDiEpk0X/xKuAnY/VdULBVuBLkeqqsQegY7DtCtHhsSLaU5Njbb6Wsc59yoMp
-	Zk3zTYieu9aO1hh3HQne2ts1rKWNy2QdVhmvZXaR3QvHlNLXKKssqeF6tEumxoWjHQHZuQuyg0G
-	mShG/v4qjNv3UMCRFh2XjsDPH2EtW8eyCDKxHp/YRLU8YqJeRWOTQ7UpgUY+rm1PGbUGYUsQ4eJ
-	ZD4wJ/Y1Sa81HApsBrzR+s441ZPcEmP/dTmB/sX++FNzpZiYjgsppuKFhqyICQsp4ywbVwlkYB5
-	MWcf72S24QhKHfRyVwD60SdMoyR/7gqw3jV/hkDuuWlLzrLCXQ7k+/DLy3nzxr+BRzZblNlHcah
-	+j+uIxU0KOEAGBQnuiJXO980TMCYvjfGYYSrR/7VZpTjCq1rq8oLsDzFiTYziSxWRZS0++PUJ36
-	yphCs2ueUdAWTMoBhmBoUEFGMso4zgXIUYV9s+L/oM=
-X-Google-Smtp-Source: AGHT+IHtc9LSF401XjgSVrDVFzb/appB40Pon6exSBxc8vCC646YYpkVsGJ6pJ1dlk9elLFrGG+IYg==
-X-Received: by 2002:a05:7022:6392:b0:11b:9152:b3ad with SMTP id a92af1059eb24-11f296a2fb4mr1275063c88.31.1765354575652;
-        Wed, 10 Dec 2025 00:16:15 -0800 (PST)
+        bh=jiKiArVKEC7R4vwkfHXBKcRv3x95T9284sojGs/dhuY=;
+        b=gRGbtsvPtefUjXs5s1AIEmxhHw3nx6WKPiRpwccibXIYcAb3fDxctolI9g9Zj1rneB
+         jYFr6HK+r9v/I2FshUS4l+HcZBb5OzfErwS17GsLlEkHNxbJY6AAjjCkgZahs4T+kPr3
+         lDzkwAy/0gBcPtucw1rvHGE6aBk5dA2XAeQVba9ClNrn41D6WWNZxzrjGEXJZIvPjKkx
+         3MlsGk6dfcvHCkHCDyRPCkoBCpcZmnY6Rh/Lo4RgIg7++6BWiasb7hXTX3yO2IpdhpRi
+         /+eRlL25+8csTN7/TA/qSOqVtUdsCVsFDx61QQ/h43q16aaEFP1xdex52l8PgFm3+vfD
+         wwaw==
+X-Gm-Message-State: AOJu0YzOj7/+q/tS4niz+yBMECuBd/2me7+VBhIRDIaFRqamNfNLg3Ms
+	Axp3HXDhmN9OT/8oYWtk8talmLC25TIrUu4RpQF6ZibLEsf1C4CwITGwyPp45AON
+X-Gm-Gg: ASbGncs9qhOInYWMUaeh6so2aqmWt7bGV5eVnqx4QVSfLgaOyAnnQsVTXtDm+LF0NgH
+	VAb6qn7lVZXr/xuiuJqTL9bFqmL8dxxMb4odmw1TZyuR5qIlkbgSyjsZSNMT4/HSCn7DuA8Gy8q
+	PPC4ZO4IR10qyNFaMkTrO7VXPg3uk+hqJmI9iu8AmWB5T+CG8TAK4n089nk0GdaQoniaY1cH+Vt
+	wGOrZ8D4us+I4GG3zpTZtKLiSOiQ1AnIsUOeidnR32XZjSG2Bv6h1o5CWHNdcFXJV2frIdXbjay
+	JPIRyFl1d6SxQtyfxm5bZwS/0gENvSxWNryb2cBi8Zhe0yyPt33D2KuHQC86sU69Kn/XgdTpPKT
+	pjxKp4ms9v/Kvsv73a4o0LIw3wHPzUfEVD8IxFqFddIPOumDgvOhTADd1Z9Xlok/gLIXjUc538z
+	yFXHKfSjbSVKH9EaKBsso45bVVvtRy/xtad8MqktCD4JbItJw6NhntDkvuSG4dWsaq3C/kZVVNt
+	7bOV5it03oApjbAhmjYNq+pUv2/XnJz+aRePw4YNxs=
+X-Google-Smtp-Source: AGHT+IEfxDwTU6oDW1e4TAToMV0Mp3AXVT25UPgm6bf6PP8118WfD4O35pjNeUT2qwSeC95l0hMhHA==
+X-Received: by 2002:a05:7022:60d:b0:11b:65e:f40 with SMTP id a92af1059eb24-11f2966bd19mr1465697c88.5.1765354573502;
+        Wed, 10 Dec 2025 00:16:13 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11df7703bd7sm80613086c88.10.2025.12.10.00.16.14
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11df7703bd7sm80613086c88.10.2025.12.10.00.16.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 00:16:14 -0800 (PST)
+        Wed, 10 Dec 2025 00:16:12 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 7/7] python3-betamax: Skip ptests accessing network
-Date: Wed, 10 Dec 2025 00:16:07 -0800
-Message-ID: <20251210081607.3196421-7-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 5/7] python3-multidict: Add missing dependency on psutils modules for ptests
+Date: Wed, 10 Dec 2025 00:16:05 -0800
+Message-ID: <20251210081607.3196421-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251210081607.3196421-1-raj.khem@gmail.com>
 References: <20251210081607.3196421-1-raj.khem@gmail.com>
@@ -69,74 +69,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:16:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122494
-
-cassette fixtures are not installed in ptests so skip
-test_requests_with_json_body
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122492
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...s-use-pytest-vcr-or-skip-if-cassette.patch | 40 +++++++++++++++++++
- .../python/python3-betamax_0.9.0.bb           |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-betamax/0001-test_placeholders-use-pytest-vcr-or-skip-if-cassette.patch
+ meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-betamax/0001-test_placeholders-use-pytest-vcr-or-skip-if-cassette.patch b/meta-python/recipes-devtools/python/python3-betamax/0001-test_placeholders-use-pytest-vcr-or-skip-if-cassette.patch
-new file mode 100644
-index 0000000000..64ff9be249
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-betamax/0001-test_placeholders-use-pytest-vcr-or-skip-if-cassette.patch
-@@ -0,0 +1,40 @@
-+From a7f1d08e073e60167c6ac9c72a0110c65f87a937 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 9 Dec 2025 23:04:45 -0800
-+Subject: [PATCH] test_placeholders: use pytest-vcr or skip if cassette missing
-+
-+Upstream-Status: Inappropriate [OE ptest specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tests/integration/test_placeholders.py | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+--- a/tests/integration/test_placeholders.py
-++++ b/tests/integration/test_placeholders.py
-+@@ -1,3 +1,6 @@
-++import pytest
-++import os
-++
-+ from betamax import Betamax
-+ from betamax.cassette import Cassette
-+
-+@@ -18,6 +21,8 @@ class TestPlaceholders(IntegrationHelper
-+         super(TestPlaceholders, self).tearDown()
-+         Cassette.default_cassette_options = original_cassette_options
-+
-++    @pytest.mark.skipif(not os.path.exists('tests/cassettes/test_placeholders.json'),
-++                    reason="Cassette fixture missing")
-+     def test_placeholders_work(self):
-+         placeholders = Cassette.default_cassette_options['placeholders']
-+         assert placeholders == [{
-+--- a/tests/regression/test_requests_2_11_body_matcher.py
-++++ b/tests/regression/test_requests_2_11_body_matcher.py
-+@@ -13,6 +13,7 @@ class TestRequests211BodyMatcher(unittes
-+
-+     @pytest.mark.skipif(requests.__build__ < 0x020401,
-+                         reason="No json keyword.")
-++    @pytest.mark.skip(reason="Requires cassette fixture not available in ptest")
-+     def test_requests_with_json_body(self):
-+         s = requests.Session()
-+         with Betamax(s).use_cassette('requests_2_11_body_matcher',
-diff --git a/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb b/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
-index f88d43a21a..8dbd21a938 100644
---- a/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-betamax_0.9.0.bb
-@@ -10,6 +10,7 @@ SRC_URI += " \
-         file://run-ptest \
-         git://github.com/betamaxpy/betamax;protocol=https;branch=main \
-         file://0001-Drop-ptests-fixtures-and-recorde_modes.patch \
-+        file://0001-test_placeholders-use-pytest-vcr-or-skip-if-cassette.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb b/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
+index 857cc6173b..821a880291 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_6.7.0.bb
+@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "c6e99d9a65ca282e578dfea819cfa9c0a62b2499d8677392e09feaf305
+
+ RDEPENDS:${PN}-ptest += " \
+     python3-objgraph \
++    python3-psutil \
+     python3-pytest-cov \
+     python3-pytest-codspeed \
  "
-
-
 
