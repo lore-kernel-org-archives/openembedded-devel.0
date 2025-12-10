@@ -1,157 +1,226 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E750BD3C929
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 16:14:38 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.852.1765383272460445149
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6191D3C92B
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 16:14:58 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.862.1765383297116205210
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 08:14:32 -0800
+ Wed, 10 Dec 2025 08:14:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=J9WxZBzU;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=dYQGMwAF;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5BAAUH4u1604806
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 16:14:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=Ruif3gdNHliypUeTXroam3nFmTuJ018YI7J
-	7BXALgq0=; b=J9WxZBzUbJBcIHQGgfRZ0m1UCAnLufNOJZOHJAR+tPNqSpwId4k
-	eDyV7d4P0DplJcm+5BBnCB5xvAwuSPwKaYuJBx92tBBmx+Z2khSbOVZ763mAw43I
-	4lEcFtTFqukNguwV8SH7CIQfdeM0Wprs8OpfRmemt2WyAJeYBxA3q9SCRwN4v4TV
-	CEj6/OE9DXpUUgVUVlKHA0Z4PLAevi8aXcn55xKxHfu7BxhlJLoVEeEafWw76/yV
-	jJ6nqy1xZNRce1EOU9YxlcdM7nic00Dk8jjuNhX3JUyWXkGdEgSzxIM8idEqmjRM
-	K44D2G8sd7ZnBlGfNrq9j35CjEb0pAyJyhw==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ay75q92cw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 16:14:31 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-8823acf4db3so159494796d6.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:14:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KBRUyO7I;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-349ae58a7baso13175a91.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:14:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1765383271; x=1765988071; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765383296; x=1765988096; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ruif3gdNHliypUeTXroam3nFmTuJ018YI7J7BXALgq0=;
-        b=dYQGMwAFncG4Zuq7e8MykK3BUjkR8tJYchqL/P+0Ci7/T2n6NyGJ00LAZd97eOCJC1
-         CRjUOz5kEMebEbt6j8f4y4X+G/Lj6WqVczNDZWBvsmqQT3nj684Bvgw9bELuBDfl40T0
-         oQNyTdKIxEeQSvQU0BJ4T7/9/9kviXFRxUXne/nNFce+pcXPqzai7JtjrF45lCqcMQ+e
-         lAhILEc/O1zt34jkvmO1ydic2H7+8avYdQbDZ6o2wu9Mzn637B9AbSNP1AinE40zKd+V
-         5PfW7X2t9zt+zVkyI4zBF4CGrbhpP+p3L75XlcQnLO1pmaxP0U7mD+n/E+3DSwgriV/7
-         IGZw==
+        bh=x519m5TOK6LI62WYiDND62nZMP+efU69vobMjeqJwoQ=;
+        b=KBRUyO7ICUzPvNqe0yr/+7uAJtdIM4FwvIvqqr/JQUk2isxSFOwlhLgJNVyKaVu79J
+         J3o13N2SNQ4h7tVn7KMlCWrbL4UTqS36qi47vf0gkT9SmwWhFSqEb9K5k6NLIDLUNuCb
+         zXIIyDDbiuZGYoyzLYv2HkQyGhc92JHV2+wqa1Kp7+CKGqS6DZSadkkLfIamO0LroQaq
+         jtX85FBnSa17GXmNIAeedudPcfiOq6JZVjbtZDAbTreeQKEoVYu200OLNSifaiQ+wL4N
+         sy9NtofbbZpaXXQ1YJc5GbARSCREgvOEKWpmBdYUBHhQeosQNpAH7tX3PsObpmqarFLh
+         LCGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765383271; x=1765988071;
+        d=1e100.net; s=20230601; t=1765383296; x=1765988096;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ruif3gdNHliypUeTXroam3nFmTuJ018YI7J7BXALgq0=;
-        b=WcntkCcbj/qhMddqOOS0Ffdc8iBE4KVEM/xWU6m4XBHuvRTB9zpTNN6+4oUue9E7dF
-         dmL3eeATGe/BiDc/0nyZe027OwfCs6MNrUCg5+IdPxGnkxqcfA6wEzD26VN3VR2AwJg7
-         XX49szo1E2mXLXzy0KZTBczT1cZ4az2SUj6oBl5gPaauluSG56oG5CrrYcU+eagAS7v2
-         s6PZ8iFxnH8tuTF3uiSKK/L22oe4RhMNcDVbavyHe8JhLjMaXR7sWlRZXtcBaprqvhNk
-         u9SpeHStaIABU6m5JfjPEXpOVdALq3ub4+kUyKd4vmfcuBcwTWY4lgTy+jgdAIw6+yS1
-         cYDw==
-X-Gm-Message-State: AOJu0YxY9oFD5vv/0TWmjn/cFIWvQL0K2uCJIv+YB3QJoWuQf4ZcCbX1
-	oQNteOxpDdbVyX1nUKdF8QAdmxo4skC0UZ5yWUP5HpQkgleVPp0toecw/b6DuVEOhzqyo0UERJU
-	EPXM4Ms6EC6z2i4AAGWSuvQLOachPj4jhwne7BMRhZEKMYK+oa90sNMn2EtYDEQHY3pk0tERrgB
-	KoLYXX0vKQgmqaBvgx
-X-Gm-Gg: ASbGncsmz3/j3Z0akOE7BzDLcpon1BKqEl4jRF95PphwiuYkPfhAhI8Z5EG1H9TMSB7
-	ufofhayYBwrYtG9GRpB7cRT/BAgr9qdR6/C//urVTBbftQKntExMLEluizOUt9cYypWqQ2Rvcec
-	jY7+PEk3HiDIKM4IwOMQLwNqpNzuZ7YG8XQiukJu/Y8y96ge+3Ir2jFZoIcZMIcOfObII/wk/Nt
-	4sIWRrcZLXB0Kso/TR8sdfg3x6PVt5z0CthA0VI3JZDnzh9j/6z/wKGslWsAOR9Sxe/OuZfPpRo
-	u8gyhd3nDGGIB7m6OY4j6gFG5DX3IrPVLUgCcpBj/2zoWAyzOO1NMttdo/w0WtY01rFuuUzhaga
-	jfga+jRUvTuBn8LNgA007XQi7bgyNf1IEZS3WVLbTdPhiCg2sne2zI8TvbLt2Vjl+y/h+rnAAln
-	YuKv+ql4YZhiQnBQiqsijEPVY=
-X-Received: by 2002:a05:622a:5c6:b0:4ee:7ee:df72 with SMTP id d75a77b69052e-4f1b1a1ac4cmr33412461cf.28.1765383270517;
-        Wed, 10 Dec 2025 08:14:30 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHEuHW0mKuPouUaoANOWofjz9PdPOpVAlpGA8bjNFn/MqyIQdOtuKF7gEf6SAjDhHOHqkbVRw==
-X-Received: by 2002:a05:622a:5c6:b0:4ee:7ee:df72 with SMTP id d75a77b69052e-4f1b1a1ac4cmr33411091cf.28.1765383269010;
-        Wed, 10 Dec 2025 08:14:29 -0800 (PST)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-597d7c2eb84sm6429608e87.100.2025.12.10.08.14.26
+        bh=x519m5TOK6LI62WYiDND62nZMP+efU69vobMjeqJwoQ=;
+        b=LeXmp7zT9tsAccTIcOE98B9Lr35ZzeiYSoslKUsUucwm8v3hd96Du8pfBmZPz25VEn
+         BnYmVFb/sypa3Yg4wxSj1LA1wFTYJQ3WLNZNVNGCf/JiL+yf1tBX4MqDyCsLStK+uwKx
+         ed35N3KZSYfEngHJqCouRF9PoBCvyT8iWBoS8R5SZ9/r90XTYSAc/f7lqij5K/BWikjj
+         7aQCe/sJF9NxCtz7IbeewdgBvvL6vcOMxLWwmVLyAFh/NyilUVHwIWtnsxqsd7ZaXNak
+         gQ7aZ0i/NF6EZbLOOSkyciOBjriiqHaKwS39bcqjg/rTmZf4yHvUb0Fi8cjhwH5x9eNA
+         FjDQ==
+X-Gm-Message-State: AOJu0Yx8SeROw9G5ZA5l4vcZyJPJmwzxgooqgaBTyn1ZlBn1Tlq1W31a
+	99oaBbaIyixO8H5wCtyRH2AomnJmLb6lq0SduGBBEzYVmZFw/qiLtcfCZiAlTjSw
+X-Gm-Gg: AY/fxX4mPXG8Cyiq3jl1kv77q81IQILYoz3p1Rl69S9axixW7WZHFOvu+D0KiLkZWL0
+	sY8gRV99cto5s0docEq9tRf8j2cwzoWoHftaEfspJHc9A3wfBlDrXRPpZe1jAoQxjqXAvHfwHRy
+	DqLPkRuMdoc5DCbC1e2vZGgpDCfoUUZwLSclmKDiEC1QFdQy0c6ARxy1Kn5bJpeWqAhdbs9Fslr
+	v+CI23XH8ujxV02t2/t/RqCMhMed5GS3fUYj1mMr/1DDisVjCLCV8iS+dBigIMwCTnRcQxUnHck
+	cfks2nr7kxGgrauQzCwxnbobei3yQoTDg4aR5YoRjLwAMgpzOOnM6K1Os9m+YM96qOUQSDnjY18
+	9RNTSYfBXjxieyKjBRjPGQj3glDrq0lBBcSX3hd0Pb/dUTrj/SuqC/V7Q1X6O4YeiHFyuNpJzdh
+	OQ+tVM8ldeacDDVQXki6+m8Tg=
+X-Google-Smtp-Source: AGHT+IFfH+9A3M2OeEGE1v4pHFMfKPlVz9a9YiIOoCqiSST4IeRHMLFq4etxPa7HEweatmZYv1D1Kg==
+X-Received: by 2002:a17:90b:2d4d:b0:349:3fe6:ab8b with SMTP id 98e67ed59e1d1-34a7289e99amr2681791a91.36.1765383296174;
+        Wed, 10 Dec 2025 08:14:56 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34a70427ea6sm2928546a91.3.2025.12.10.08.14.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 08:14:27 -0800 (PST)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+        Wed, 10 Dec 2025 08:14:55 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Pulkit Singh Tak <ptak@qti.qualcomm.com>
-Subject: [meta-oe][PATCH] opencv: fill in missing FastCV gaps
-Date: Wed, 10 Dec 2025 18:14:26 +0200
-Message-ID: <20251210161426.3443562-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH v2] dbus-broker: add ptest support
+Date: Wed, 10 Dec 2025 21:44:39 +0530
+Message-ID: <20251210161440.2151692-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: jmoyCZu6dXqvyWiroRqvzrFLhNI1FmC8
-X-Proofpoint-ORIG-GUID: jmoyCZu6dXqvyWiroRqvzrFLhNI1FmC8
-X-Authority-Analysis: v=2.4 cv=NtrcssdJ c=1 sm=1 tr=0 ts=69399c68 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=xqWC_Br6kY4A:10 a=wP3pNCr1ah4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8
- a=Selk-fcwuKjAfKUjrewA:9 a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjEwMDEzMSBTYWx0ZWRfX3TWTf7qgGxKJ
- xqwz4fDiUSMP69QDQ1UX38AuQwwSMQ5LQaarD/NJ37gfE2G6ck2Ix0f0jkf+Lt0Nyjcc4qgKHVx
- 0Q81OlKqpp5tK03S9R4uupWeFbebt7yQXU2j399YJBzItum8LNCXac+fVlmJlcDV+4iK7ITnZ1O
- y8PKT4CrhTzV4Qw8nIENKrz3qg5yShTyMLdErhXvsGRgk7Qd/IhRKJipudd8vgmDbZ0c7Ikjb8K
- FLLYkgQw8k0axIj4aISvokkKaJ03jvZnCn+n1x8vDGBi6eMb+ocmo3P+vIPRyAv+NbTIPcxm3dc
- c9meGXEFP94RIA654pO6SPMayafbgF85u4Uvx296v3bnk5cWPYFJxVzzUpi9XFF8M2JQNDXNKCW
- LnJzIlLPUcQzuBBuAT5d4bG1AJOEXw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-10_01,2025-12-09_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 malwarescore=0 bulkscore=0 priorityscore=1501
- clxscore=1015 suspectscore=0 spamscore=0 phishscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512100131
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 16:14:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122558
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 16:14:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122559
 
-When OpenCV is being built with the "fastcv" packageconfig, several
-OpenCV libs are linked against the libfastcv.a. At runtime this lib will
-dlopen(libfastcvopt.so.1), providing a fallback to slow algorithms, etc.
-However as it is dlopen() rather than dynamic linking, there is no
-runtime dependency.
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-In Yocto, if we enable a feature, we expect that all runtime
-dependencies are pulled in. Utilize the qcom-fastcv-binaries recipe
-provided by the meta-qcom layer and pull in libfastcvopt1 package as
-required.
+It takes less than 30 seconds to execute.
 
-Cc: Pulkit Singh Tak <ptak@qti.qualcomm.com>
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Add a backported patch that fixes a broken test.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 05230420abafb2d1a7da86c77f22434f415af8fb)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.12.0.bb | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+changes in v2:
+- rebased on whinlatter branch
+---
+ .../include/ptest-packagelists-meta-oe.inc    |  1 +
+ ...-loosen-verification-of-stale-pidfds.patch | 52 +++++++++++++++++++
+ .../recipes-core/dbus/dbus-broker/run-ptest   | 19 +++++++
+ meta-oe/recipes-core/dbus/dbus-broker_37.bb   | 12 ++++-
+ 4 files changed, 82 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0001-test-sockopt-loosen-verification-of-stale-pidfds.patch
+ create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/run-ptest
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-index aa11d3da43fd..c0b657f1039a 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-@@ -122,7 +122,7 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
- PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
- PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
--PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,,"
-+PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,qcom-fastcv-binaries,"
- 
- inherit pkgconfig cmake setuptools3-base python3native
- 
-@@ -165,6 +165,11 @@ python populate_packages:prepend () {
-         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
-             metapkg_rdepends.append(pkg)
-     d.setVar('RDEPENDS:' + metapkg, ' '.join(metapkg_rdepends))
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index 860c09119b..d092c3c327 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -12,6 +12,7 @@ PTESTS_FAST_META_OE = "\
+     cli11 \
+     cmocka \
+     cunit \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'dbus-broker', '', d)} \
+     duktape \
+     exiv2 \
+     fuse3 \
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0001-test-sockopt-loosen-verification-of-stale-pidfds.patch b/meta-oe/recipes-core/dbus/dbus-broker/0001-test-sockopt-loosen-verification-of-stale-pidfds.patch
+new file mode 100644
+index 0000000000..fac5be1917
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/dbus-broker/0001-test-sockopt-loosen-verification-of-stale-pidfds.patch
+@@ -0,0 +1,52 @@
++From cc7f9da25b103aacbb1595d04af9cb70ef8f43d9 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 4 Sep 2025 10:23:36 +0200
++Subject: [PATCH] test/sockopt: loosen verification of stale pidfds
 +
-+    fastcv_pkgs = ["libopencv-core", "libopencv-fastcv", "libopencv-imgproc"]
-+    if bb.utils.contains('PACKAGECONFIG', 'fastcv', True, False, d):
-+        for pkg in fastcv_pkgs:
-+            d.appendVar('RDEPENDS:' + pkg, " libfastcvopt1")
- }
++From: David Rheinsberg <david@readahead.eu>
++
++Newer kernels now properly return stale pidfds from AF_UNIX sockets,
++rather than refusing the operation. Ensure that our tests adopt to this
++and properly verify staleness.
++
++Signed-off-by: David Rheinsberg <david@readahead.eu>
++Upstream-Status: Backport [https://github.com/bus1/dbus-broker/commit/fd5c6e191bffcf5b3e6c9abb8b0b03479accc04b]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/util/test-sockopt.c | 16 ++++++++++++----
++ 1 file changed, 12 insertions(+), 4 deletions(-)
++
++diff --git a/src/util/test-sockopt.c b/src/util/test-sockopt.c
++index 04148af..eaa8fba 100644
++--- a/src/util/test-sockopt.c
+++++ b/src/util/test-sockopt.c
++@@ -81,17 +81,25 @@ static void test_peerpidfd_client(
++ 
++         r = sockopt_get_peerpidfd(fd, &pidfd);
++         if (r != SOCKOPT_E_UNSUPPORTED) {
++-                if (stale) {
++-                        c_assert(r == SOCKOPT_E_REAPED);
+++                if (r == SOCKOPT_E_REAPED) {
+++                        /*
+++                         * Old kernels refused to return stale pidfds. Hence,
+++                         * in that case verify that we expected a stale pidfd.
+++                         */
+++                        c_assert(stale);
++                 } else {
++                         c_assert(!r);
++                         c_assert(pidfd >= 0);
++ 
++                         r = proc_resolve_pidfd(pidfd, &pid_socket);
++                         c_assert(!r);
++-                        c_assert(pid_socket > 0);
++ 
++-                        c_assert(pid_socket == pid_server);
+++                        if (stale) {
+++                                c_assert(pid_socket == -1);
+++                        } else {
+++                                c_assert(pid_socket > 0);
+++                                c_assert(pid_socket == pid_server);
+++                        }
++                 }
++         }
++ }
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker/run-ptest b/meta-oe/recipes-core/dbus/dbus-broker/run-ptest
+new file mode 100644
+index 0000000000..789000523e
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/dbus-broker/run-ptest
+@@ -0,0 +1,19 @@
++#!/bin/sh
++RET=0
++
++run_tests(){
++  for t in *; do
++    if ./$t; then
++      echo PASS: $t
++    else
++      echo FAIL: $t
++      RET=1
++    fi
++  done
++}
++
++cd /usr/lib/dbus-broker/tests/dbus
++run_tests
++cd /usr/lib/dbus-broker/tests/unit
++run_tests
++exit $RET
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_37.bb b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+index f0312181b6..c531f555d2 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_37.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_37.bb
+@@ -10,7 +10,10 @@ DEPENDS = "\
+     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux (>= 3.2)', '', d)} \
+ "
  
- PACKAGES_DYNAMIC += "^libopencv-.*"
--- 
-2.47.3
-
+-SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/${BP}.tar.xz"
++SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/${BP}.tar.xz \
++           file://0001-test-sockopt-loosen-verification-of-stale-pidfds.patch \
++           file://run-ptest \
++           "
+ SRC_URI[sha256sum] = "f819a8db8795fa08c767612e3823fd594694a0990f2543ecf35d6a1a6bf2ab5b"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
+@@ -18,10 +21,11 @@ UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+)"
+ 
+ SYSTEMD_SERVICE:${PN} = "${BPN}.service"
+ 
+-inherit meson pkgconfig systemd features_check
++inherit meson pkgconfig systemd features_check ptest
+ 
+ EXTRA_OEMESON += "-Daudit=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
+ EXTRA_OEMESON += "-Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
++EXTRA_OEMESON += "-Dtests=${@bb.utils.contains('PTEST_ENABLED', '1', 'true', 'false', d)}"
+ 
+ REQUIRED_DISTRO_FEATURES = "systemd"
+ 
+@@ -36,3 +40,7 @@ RDEPENDS:${PN} += "dbus-common dbus-tools"
+ FILES:${PN} += "${nonarch_libdir}/systemd/catalog"
+ FILES:${PN} += "${systemd_system_unitdir}"
+ FILES:${PN} += "${systemd_user_unitdir}"
++FILES:${PN}-ptest += "${libdir}/${PN}/tests"
++
++# test-sockopt fails to compile with musl without this flag
++CFLAGS:append:libc-musl = "${@bb.utils.contains('PTEST_ENABLED', '1', ' -Wno-error=incompatible-pointer-types ', '', d)}"
 
