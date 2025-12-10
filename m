@@ -2,64 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21998D3C559
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 219D1D3C55A
 	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:27:03 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15648.1765373213794905182
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15656.1765373222130656932
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 05:26:53 -0800
+ Wed, 10 Dec 2025 05:27:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Cyv8+R4C;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-29568d93e87so61313975ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:26:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mQRn/wwH;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-29853ec5b8cso87723265ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:27:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765373213; x=1765978013; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765373221; x=1765978021; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7nquWpF1/ipfg2Rlho2gkuhJi/5a0XCxjFOUOWIfI8E=;
-        b=Cyv8+R4CFmvrmu3XfLOOlMy+31bJCOeNOUgRufMbusXxs4VwOiL2gc+iOqePr/E64W
-         9bX9pPxpzOer1Ba7jqwf6l33l57a0F8XPNbfnj8J/bTUBtpqdWTVciL7PjDBC5EXAMxT
-         +gYEiHSJp8wSbQu9Il9nZOIzroMOVfgQCOUCCUyKt4VyIh6QbqXdWaiV+1ezEAMUoKly
-         cKaz4ISuZ75g+cqc0tWPqnsPMRPhUFIQppa8+bBe3QgGvzTAQMI88rusFiBQW2faDaH1
-         klaYfGh8RNnbYtnO9OgyiNEp1Okxw9JvvLEOuc3ogm24BHSpoDycaI9/V3ontMtSLdl3
-         pxOA==
+        bh=qAbJ2RwJTIOaWZgXPE/NKuzykG05q90SsHc8LuSw2WY=;
+        b=mQRn/wwH3G3QEEEgcQBafB3KT+9SnFx0geCH8R6xnEWV/wHJE+NgNUyC25nZAyj+yr
+         vBRDo2LFCTvShs1+IY5vQ8mUArDsJzSJ47xc5igecnyJGln3xwE0FWE3BMv6L/VOXEoy
+         w04Fw5QYqvR267eKkJeBES1sCcLrk3B+jT+tUPaftTZctfSXoPcSEukUsixHacrwaTFV
+         Pg5ennjyZ1t1MZ4JkCK9SfGh4PP3ZjdPfzm3QMDYYUzVP1XoMtThuvu6UXohDxerQtX1
+         oqsJxT/Bj8f3f6FbT/eeG9bNsiLgxsFa1aLpG37IwijQuUS+nRmHVgBAyjhNdsKlmfRI
+         9hcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765373213; x=1765978013;
+        d=1e100.net; s=20230601; t=1765373221; x=1765978021;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=7nquWpF1/ipfg2Rlho2gkuhJi/5a0XCxjFOUOWIfI8E=;
-        b=J/PHxc0frl2xkshRk5CkuC39DY8OeuSSyrC7p6X3sDnwUlFFRZgvjqA3+XYmG5Oy67
-         Y6pelSewyNYYmKAyr38YijH7cl5sO2LHB4aSJK0tjps7NjRSLhnBj9FxS455lVap5n0T
-         QtI+ck9ynIrXlumuXiznfLOV4CzFsyAIW68INy2K05GAOitfpkdEohhvV0fiwiRq+soU
-         VEW1M9U6msBu1YJg50pxFy5SU503emMMgEGuRtksEIOc0km8wkIqJ3B6MHojpRzAgg8I
-         zzV2djyoMHA88M5QdHRURzZkhsKe3syjWLXX/1nadI4MSkqKZq3U18lyRryxp3xA5PI1
-         v0Jg==
-X-Gm-Message-State: AOJu0YwHjCwvmKPFcU0GjJTuvtgzsxx8q8uc6lfhu8GFosGeLYTsRcSz
-	EPU40iVILJMYi/TzQmp6qtGbR0n/Hawn2tn6Mkztgx9VOAhKafzYXwBkNxgnPg==
-X-Gm-Gg: AY/fxX41hUz0w+VfE9R+WEX4wXJdvn2GUnXMRkxZBN55Xr4xSm84LG+sGyJI6r556BF
-	grPaOAaZVCvtfL2d+sUYL9/C6qTkBBdJpKpsnCiJ/L7PdyOnrqoED29Jsc6yPJYg1hU8kO8bLgB
-	ukgp/VCO9X81IoLgCvUu7c6osSemRYLfJwtra67QAIZ8To1+CY87RQ10oDE+VuvwdYOafvEVEHr
-	u8RhwpyJViKo3E4gp7nNSX7wf6i0mvg6KU1K4gN4h4lWGTQcOGnnYEVaXAwePm522MRMyShQ4gy
-	Mfvi4Jwk8sI96cwGclk5cuYLobIOge95SlbO3YKl8Ye8TSv7A8F5wu8VUKvDpUIBPFtBtuDbDpA
-	IuJsPQO6eataMZUu7FZfOsxoF1GaoaOFeeJVCg40UrZ3Bmiz34WqKMXn6DOgY8omC5e/B8qRDYN
-	iM+zzTcF/BJTDkFkv/g7bQdXo=
-X-Google-Smtp-Source: AGHT+IGP41vUUrcJo8Tpj9xwJnYO2zYbT8oRuWkgBnal/pKjUlAt2Cid5sswioPJ/DjkHs4y1E2EfQ==
-X-Received: by 2002:a17:902:e784:b0:29e:9387:f2b9 with SMTP id d9443c01a7336-29ec22ef35bmr23046925ad.24.1765373212911;
-        Wed, 10 Dec 2025 05:26:52 -0800 (PST)
+        bh=qAbJ2RwJTIOaWZgXPE/NKuzykG05q90SsHc8LuSw2WY=;
+        b=DQ0RCAE1FeqgnBOFXrl/gFoeJ8OAtftD7+TEV2RvBWsqDOtFQZlLF4fk8AgC1ECDBy
+         f9m9lcY+ExeJIqku9LyGMsvklaBorg/Ercji2vp+sXW3pmuqOH6RJsEzmADkJqIFr3ee
+         tU2pmKCP0FzYDpRkeBHVwv1FIyzFqrj4t+wJFMKAzge6S06oQNkx1vJep4pbhTcwUt5Y
+         FuQD8i/uEJUuQt20JS0x/6LgZlpDPQPu+MNJsLbw3LrzSrSR1uSNp1E+awqbbGjZ5u68
+         brP+Gda66WHXIvzUnQw3bDrwNsMpj5fHSYKid1v1FGHaFfva/7EPaQEarkB/3gQk7tdY
+         cEPQ==
+X-Gm-Message-State: AOJu0YyQtWDzkZdwZx7ge9b261Au8PePE4NaxXKCqv3nqHW5UyOrR/w1
+	dAf/45Jee0LAuvnvuotKYAHRsAf6vHYNx1qwBkKE0X7ozH30TfTRiZYlkhXmXQ==
+X-Gm-Gg: AY/fxX7cHU6Mkn/USXseok04xFCPsfK3qiAgqkgHSCWNjX9bIswLK7qQYcWGtrtsB3V
+	in+it8AUROhVHFOJx/h8He7SqQn6ub9R0+Ksq2EHDj1BFz6gbNqVAkfcNmWd5HdmzoZ5PKZ8bWc
+	KkTDpW+KkFqiKCWZLOPYRI9xBWSUCk1Mr4lLiVUYSGwAGPNMDlA28GMOhiYZRPo9LuLx3NiIJE4
+	Zy7JVO085ULGdk1nWBnDuz8CeqTYvvhBlQbdLclnOss4ngluboR5IngFr3UfZqyfYGxoLgnLspS
+	THIXo4yywpagy+bNq3cLZUV87dYJJdEc+YLeFdxo/5lUpauAx3UMTs6asgoc0rGQs51KZfPQDPE
+	zD1AQ4NMvBO8+ajkIxOB54zXhsDSEArholU8YIVOaD53U19hMcJ7LbhbStUExq4PyoyWrKnc1rP
+	PcO+FZ1A8fEdCXdg9spJH6lOFxeDqGaX+85A==
+X-Google-Smtp-Source: AGHT+IEfhEQdeHij+BzgBqjARxwaLFM9q4EkEPbIP3u/toWz43gaK/1eMGTVmloBzxYO6+tCA54XIQ==
+X-Received: by 2002:a17:903:244a:b0:258:f033:3ff9 with SMTP id d9443c01a7336-29ec27d24dbmr23586935ad.48.1765373221101;
+        Wed, 10 Dec 2025 05:27:01 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29dae99f20bsm182972465ad.46.2025.12.10.05.26.51
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29dae99f20bsm182972465ad.46.2025.12.10.05.26.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 05:26:52 -0800 (PST)
+        Wed, 10 Dec 2025 05:27:00 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
+Cc: Changqing Li <changqing.li@windriver.com>,
+	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 28/43] fuse3: Fix build with clang on riscv32
-Date: Wed, 10 Dec 2025 18:56:34 +0530
-Message-ID: <20251210132641.323679-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 31/43] hdf5: inherit pkgconfig
+Date: Wed, 10 Dec 2025 18:56:37 +0530
+Message-ID: <20251210132641.323679-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251210132641.323679-1-ankur.tyagi85@gmail.com>
 References: <20251210132641.323679-1-ankur.tyagi85@gmail.com>
@@ -69,35 +70,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:27:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122532
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122535
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Clang needs 64-bit atomics on rv32 here and builtins does
-not have them so help it by linking with libatomic
+inherit pkgconfig, and fix install conflict when enable multilib, this
+can also improve reproducibility
 
-Fixes
- riscv32-yoe-linux-musl-ld.lld: error: undefined symbol: __atomic_fetch_add_8
-
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e3257c3360a732914ae02a07a7c0fe8c845a492f)
+(cherry picked from commit a2f2c06ec813bfc93718b1851a207343aaa7c663)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-support/fuse/fuse3_3.16.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
-index 2747e6c8be..4fc94b4e52 100644
---- a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
-+++ b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
-@@ -25,6 +25,9 @@ CVE_PRODUCT = "fuse_project:fuse"
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+index 798ca1b83f..93fe352b99 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb
+@@ -7,7 +7,7 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=71a191398102f76050a4e56e78cb4891"
  
- inherit meson pkgconfig ptest
+-inherit cmake siteinfo qemu multilib_header
++inherit cmake pkgconfig siteinfo qemu multilib_header multilib_script
  
-+# fix  riscv32-yoe-linux-musl-ld.lld: error: undefined symbol: __atomic_fetch_add_8
-+LDFLAGS:append:toolchain-clang:riscv32 = " -latomic"
+ DEPENDS += "qemu-native zlib"
+ 
+@@ -48,8 +48,11 @@ do_configure:append() {
+ do_install:append() {
+     # Used for generating config files on target
+     oe_multilib_header H5pubconf.h
++    sed -i -e 's|${RECIPE_SYSROOT_NATIVE}||g' ${D}${bindir}/h5cc
+ }
+ 
++MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc"
 +
- SRC_URI += " \
-     file://run-ptest \
-     file://fuse3.conf \
+ BBCLASSEXTEND = "native"
+ 
+ # h5fuse.sh script needs bash
 
