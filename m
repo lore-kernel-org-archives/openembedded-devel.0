@@ -1,97 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <Pascal.Weisser.ext@karlstorz.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F14F9D3C52B
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 08:16:20 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10810.1765354572210338782
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30F66D3B9A9
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 10:43:52 +0000 (UTC)
+Received: from mx08-0040c702.pphosted.com (mx08-0040c702.pphosted.com [185.183.31.154])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12675.1765363429697808890
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 00:16:12 -0800
+ Wed, 10 Dec 2025 02:43:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lZMUlL/0;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-c05d66dbab2so1470360a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 00:16:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765354571; x=1765959371; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ErPeb4d/pVX8oeJjRaHeQy5jyoLZVlA3a6ihyeF/RCc=;
-        b=lZMUlL/03Rm320eowX9c4w+KJPP4TBk7MwJZaRO0wtsCSEa4UNvGvkMkMTnCUvllUh
-         Y8S35Y/CPp/cSndzVnIF0G3Fj0tntMqNm6G4mFxUaBW61R4t+KbPxLqiquU6qnwhFa44
-         D+ouUmECGMLA53C7sJ3VSH85kl03ZwhLx5dBHgpC6dDZJJE6VtnAwjBKVmeLMx0bEl5b
-         iY/cA1U7afZIZ5Pf8QISbqbiY3xLt+PPzg/p89xC9+lf8i/E8g1c0tWLvE9FCFwggBSi
-         MQtp58/dTiHBhi/0PCTjuW0RCkV9a8g4nbLyUfhAvz4hBByszANtB1b4rzW5Zgc1ULlT
-         pXDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765354571; x=1765959371;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ErPeb4d/pVX8oeJjRaHeQy5jyoLZVlA3a6ihyeF/RCc=;
-        b=MWxc1OADg6DFYW8Nl5YxhH2fq8UlhH/mIHLKTn70fZudvIZq8EHw4tBFjVXc56GN/f
-         bcvGmNL6oM3LRzpvmBO6iFBW/TEPeXV4ogtSFkGo2tFGgYxNcNArhlOXYnAGfTK9H0UB
-         V2bdNkYNUL9aZSzoxa3fSCcCGJpquTJ7jK25HXk+9eMkG2xZNLLwi+8iV1lTm8bV4ML1
-         j2z2DdrVSh+oOtcOhGh3xWXk9PLkztVx/WwuvQ6wev5Nc6CRkIlTpgs2HG6rN/eR+c5x
-         D7jo1LrgczOxQeRVyalNvdRv0vMUFXN+GkNHwHe9ll9stSjyGVt3CcCxGM79f64xqTlC
-         3jMA==
-X-Gm-Message-State: AOJu0Yw1kTI+UHhP4AslvbiWWDgpQen8n3RitxrLSOGvN3qUKC4Js1Dm
-	iTa5pUEDAIZWN2JkoXCSeq4e6Qs7p8Ak8cSYaQhPpkOAKRHEBttjHMVKiSG1jTod
-X-Gm-Gg: ASbGncsnCUmD/jltp3k8HUUfAaL7noa6LSpGw0hJHWNSixv87qlWnzbYZ1gbJ+GGYlr
-	jMeCbucMsEK64vpBUFvqRQKWbg4U3E9GIZHR5fcw8j1xRP0RV6yCjs/L7eO1Wo8NJbKLFws0nS9
-	zbSMCy0ERHVr0SOAItTHKOY6pxx4TicOLgMhErGuztApa3zNCCUyg6PxQDn4kkPpxKCbrTSIKa3
-	sLEYhrRSYiWdr/5NMj+eaJFwOfNXqDmw2qu4DRIHCW9Yr1s5qVzdbrnC1z8yM5vtdhIG3X0VAJQ
-	prdaKsJxj72PYPAzo0sj8QTrDBupF5WChFijwk336VLIPjjI5ZqTbMCYJrUBtqG1k8vpKXuSctG
-	p2zyMGH7CHtX+Gsj0E6LDKFcynuIgOVGxQPeiUK+brbjeAKqOaA4rUKwF90NDEYUgH12DNJ8Lpa
-	Uy5mdH4iugKXrXfPHZSDL4TKLio/Kd8hjM+DZa4LTwv3z/NjtiRFbPb2VGcUBHpi8B8u4eTgCcR
-	odmz6y9zBWSpP6nmyTbGBRSfe9Ra/Wo
-X-Google-Smtp-Source: AGHT+IEOJeWwQ5BLNgbVana7JL1aQw4JmTLyQpPZY19xRt+ZfN+xDlXiUES7dEGc/APUJA9JxtSBtQ==
-X-Received: by 2002:a05:7022:2384:b0:11b:8278:9f3a with SMTP id a92af1059eb24-11f2966a6afmr1413486c88.8.1765354571215;
-        Wed, 10 Dec 2025 00:16:11 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11df7703bd7sm80613086c88.10.2025.12.10.00.16.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 00:16:10 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 3/7] python3-pyzstd: Remove setup.py tweak for lto/clang
-Date: Wed, 10 Dec 2025 00:16:03 -0800
-Message-ID: <20251210081607.3196421-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251210081607.3196421-1-raj.khem@gmail.com>
-References: <20251210081607.3196421-1-raj.khem@gmail.com>
+ dkim=pass header.i=@karlstorz.com header.s=S-DKIM-20210427 header.b=J2RxHPor;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: karlstorz.com, ip: 185.183.31.154, mailfrom: prvs=24394d3a2e=pascal.weisser.ext@karlstorz.com)
+Received: from pps.filterd (m0267678.ppops.net [127.0.0.1])
+	by mx07-0040c702.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5BA9hvlv086678;
+	Wed, 10 Dec 2025 10:43:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=karlstorz.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=S-DKIM-20210427; bh=02LhJ
+	y+LgZDpHBoJCjxQSzVNHh/chPclZNcT2mhNyM0=; b=J2RxHPor9Chsmf2h1DEwI
+	DtzVXd9nkpr1VjAGPyZfuTNyZg47zv4d1BR/9JeAZzcvAmEC3iiLUkHA/auYn0GR
+	f4NR2QulE/OtFMNCdix0QjFxwXg4deVWqY9FZli6GDJPRHd9MWGbs7vv1dey/8ig
+	JzAa72l/AsuyfjpHe9gGxOu/XjOwDrkj9Veq7AEMjG8a1LkQS2l51DD/MgLfFWv0
+	P7LMgBXkhmEdLHu2bxf3wBqswL/kFK8V77zpCnfKMvAoK+XQ6x4fcwWTU8K6oK0g
+	K/nCvSBBFB2K3dx8g90Dxt7DYrc+7r+NNQAbztNlj5+0Gn9f7ZfvF/mFWaBU+rNV
+	w==
+Received: from tut-ex01-pv.kstg.corp ([62.134.76.232])
+	by mx07-0040c702.pphosted.com (PPS) with ESMTPS id 4axts7swya-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 10 Dec 2025 10:43:47 +0000 (GMT)
+Received: from TUT-EX01-PV.KSTG.corp (10.0.10.190) by TUT-EX01-PV.KSTG.corp
+ (10.0.10.190) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 10 Dec
+ 2025 11:43:46 +0100
+Received: from tutn-bpfb5m3.kstg.corp (10.0.10.41) by
+ InternalSMTPRelay.KSTG.corp (10.0.10.190) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Wed, 10 Dec 2025 11:43:46 +0100
+From: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <brgl@bgdev.pl>, "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
+Subject: [meta-oe][PATCH v2 0/9] Add HOMEPAGE variable to several recipes.
+Date: Wed, 10 Dec 2025 11:43:16 +0100
+Message-ID: <20251210104325.175100-1-pascal.weisser.ext@karlstorz.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: oFtDdHVlHHkFEZxghtk8o1ilzvQ5zwjh
+X-Proofpoint-GUID: oFtDdHVlHHkFEZxghtk8o1ilzvQ5zwjh
+X-Authority-Analysis: v=2.4 cv=N9Ek1m9B c=1 sm=1 tr=0 ts=69394ee3 cx=c_pps
+ a=OToaj9FDvIz41JSycRbD4A==:117 a=OToaj9FDvIz41JSycRbD4A==:17
+ a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22 a=QmTELifqY9-FJ72p2CcA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjEwMDA4NiBTYWx0ZWRfXyVG9o0CZ/Vos
+ 9e/WYgaYmXcYtirLACD6qPv4VUBv/9DvLK8iHCr4n9wdlqYnMf4qQ6EtdPAUcx1QGKtzdsvGcrM
+ 1XLDOHn/CsQbR02zFLCgjW0N1JuyrfMZWFero2L6YlnH7aTiV6Icqb64AJgvXmmI7gF11uNCv+4
+ IcqQkbLUAaKB3jbV9BFWKb774UrWlx3pO6rmSq6PLI08PiKhx0CUgkLqsW9tRngYWF1TmNzpAp9
+ NrS6ZeLDxvKedTZnAXBONXvnJ12LBYhtPgjje9iUX3NXs+StVBZIy3D+YAgNpKOt2eQya6qouAX
+ 45CTvsmx2KGTpeCvHNlov5RIWGC6JX802PtdBUn9E0Nl5Roh5e/z6RN6NGKy3hdKW1xLd1s47OG
+ F2skMaQ5UfkgcySiZJLJeo4aRo7/og==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-09_05,2025-12-09_03,2025-10-01_01
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:16:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122490
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 10:43:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122495
 
-This tweak was specific to clang-16, its no longer needed
-moreover, setup.py is no longer there in latest 0.19.x
-release
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python3-pyzstd_0.19.0.bb | 5 -----
- 1 file changed, 5 deletions(-)
+Weisser, Pascal (9):
+  libgpiod: Add HOMEPAGE variable
+  trace-cmd: Add HOMEPAGE variable
+  upower: Add HOMEPAGE variable
+  polkit-group-rule.inc: Add HOMEPAGE variable
+  v4l-utils: Add HOMEPAGE variable
+  vboxguestdrivers: Add HOMEPAGE variable
+  pointercal: Add HOMEPAGE variable
+  can-utils: Add HOMEPAGE variable
+  rwmem: Add HOMEPAGE variable
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyzstd_0.19.0.bb b/meta-python/recipes-devtools/python/python3-pyzstd_0.19.0.bb
-index 31d3db3f00..baaab182d5 100644
---- a/meta-python/recipes-devtools/python/python3-pyzstd_0.19.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzstd_0.19.0.bb
-@@ -14,9 +14,4 @@ inherit pypi python_setuptools_build_meta ptest-python-pytest python_hatchling
+ .../dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb   | 1 +
+ meta-oe/recipes-bsp/pointercal/pointercal_0.0.bb                | 1 +
+ meta-oe/recipes-extended/polkit/polkit-group-rule.inc           | 2 ++
+ meta-oe/recipes-extended/socketcan/can-utils_2025.01.bb         | 1 +
+ meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb             | 1 +
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.28.1.bb         | 1 +
+ meta-oe/recipes-support/libgpiod/libgpiod.inc                   | 1 +
+ meta-oe/recipes-support/upower/upower_1.91.0.bb                 | 1 +
+ .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb  | 1 +
+ 9 files changed, 10 insertions(+)
 
- DEPENDS += "python3-hatch-vcs-native"
+-- 
+2.50.1
 
--# clang-16 with -flto segfaults on arm, therefore ignore flto for now
--do_configure:append:arm:toolchain-clang() {
--    sed -i -e "s|'-flto'|''|" ${S}/setup.py
--}
--
- RDEPENDS:${PN}-ptest += "python3-backports-zstd"
 
