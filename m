@@ -2,97 +2,102 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EBF0D3C906
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B984D3C907
 	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:28:13 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15370.1765373285832514840
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15681.1765373291142347330
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 05:28:05 -0800
+ Wed, 10 Dec 2025 05:28:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EzJx78s4;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-7bab7c997eeso7806198b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:28:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N8PxNJLU;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7d26a7e5639so7685273b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:28:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765373285; x=1765978085; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765373290; x=1765978090; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9BxEeZdM73+PFWkv/vngxzlHJMXLZunZ+Petvx+8ms0=;
-        b=EzJx78s4cWI+aPk07mneXxtzxxuNXDvKCt2w0xr4OuAZmX2hn0ngDdTUz4xf7YjpOR
-         cwGyv853ScRqqsVrq802VXOhrnQbN1h52fBaG4ciLEPY+g0WCV9VtTRQz3rvNZD68ywI
-         zU90WjFFJUgy4eyBxlqc8vV93npAHb3qkd614R8Xktj6ZY9afbjdeUrbNH2UtI5ZaBXp
-         YDGP9Uum/R33X0uhF7ZKSQnfANsgjXhlhLViGMagmqZmsGfqT2hFbtj5U8HdEkd2jJY3
-         aJ9F3qCUAvnDPw90Mvi1eZx4c7QEuR9FJ0TQPRXFMAErLP7NhCm/qg8tuASpeunOQm86
-         FzGQ==
+        bh=HLh5IO58EcxYaoDjEkbcGFVT4TdPaoavSUSgEo5VXro=;
+        b=N8PxNJLUsZ+LZJxiEAurrcqMxN8qGNPySq1f9YR17p+8Pzj/oKmjiHmtu0oObKUNCM
+         zZUe0+hQXjYddYcvaDjnYUNKH8mZYji2yyyM/LtaZcaxWTwfL0iQedRwfpVcFYxG5s3n
+         eNq7rbMh0EQfSX82YwDImjyPKhDpxKXIaC56of2KktzRGhS2XITN4VlHGTavSDT9h2Tw
+         6EAdt7NEOLcKIgxr8Nn2ZdeF7PbLKLSP7gMQQ/taTsFae3TKTuj9zeg3GHaRpMfllCrZ
+         8oBk8K5mTouErP4NcN0Mrl2ec+lJz1tY8E0FFzhrBbDpavnO1aHzCFWyVuBNyJi2IALR
+         /l6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765373285; x=1765978085;
+        d=1e100.net; s=20230601; t=1765373290; x=1765978090;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=9BxEeZdM73+PFWkv/vngxzlHJMXLZunZ+Petvx+8ms0=;
-        b=uKbdlBWLNe2h5vGcUjXH9IDviD8q2+u1tPo//ZR2zlq1K7feri0QCGZa3Kb8SU17kl
-         vnDHItONsXLKGgusehBlOub+862rSdmMXNmGVwwuM8ynNEQr58brH9qyHTrCwb1uJKt3
-         MUTvKxO3ekqFkv23M8aP4RKuZvnolbGsmmkyY/kq8g7qtMJ7NrNt9lkFsVfmETBDv8mu
-         d/JhLOLxio4iRpOrkJuwuRnM+EfQ0HSX/3X3kBOmcvZ9ulSac5so3Or1sR+ApqbyEf6u
-         y6S0hSN5x9DfNHHy2GCwQ60tz9HMJCm0Oky+ZzqCLxuc2kgL2/1CrZJAw9NUM93fbZAY
-         YvJA==
-X-Gm-Message-State: AOJu0YyCineEj++kXAsbu/XUJ26SDSD10ha7T3mh5tW12+dx/H3uu3MM
-	etlwnsf0NpmZ0eaBz5ZBgVir9PXghCHeZ/tmV6R6qBQX4jvJwi7thgnbvD+UCw==
-X-Gm-Gg: ASbGncuFICKoEsdAls4Dq4/xPkwKFtnS9cyZu83PnVcaLObrePE70RotLNYMEMI3ai8
-	l8y24lAH9XC7f9zEyNw042ZQe4gun/zTNhF8C1En2K99g5FoIRIKxyl3W9PMHg6DWI8zkRLmqeB
-	25d4bc2J/t7QVkvw5GBgVs0XE0KtTTEuY6CxEbKohTxJb4Vflq8WTGhphP0AhVKJKZ8ylqO0Qwy
-	ftLCrrGgTpZt77Olnf1rsYGj1ZeS2SF3+S8QWgFOKxvubP++pBrXMSr2NEGhJ0DVWPtFP7uht0R
-	J7E6XahZL9SdeDFlvaBLHEa1GbJBlgTddk6PAGD7H5pugYocu9P7Qn+M6W+sbfs8qRkZiWdl9Mr
-	Wb8bLx3v6tRHnWKVMnxQ8ekpj2o6tFaXs2uqbe/2Mq0pmS2Odu32Q+5t+kS7dvCHjf8ysuD3/Rw
-	llvQhEl86ZsJE20xvzDVAxH8c=
-X-Google-Smtp-Source: AGHT+IGIErmNjcEKAim5tUcXcEiENyuxt9QmtYYoA8EsPJHUyWd0uRaqnOXr69Y65flXW+3GHxZefA==
-X-Received: by 2002:a05:6a00:1785:b0:77f:2efb:11d5 with SMTP id d2e1a72fcca58-7f22c93a8ebmr2353111b3a.1.1765373285015;
-        Wed, 10 Dec 2025 05:28:05 -0800 (PST)
+        bh=HLh5IO58EcxYaoDjEkbcGFVT4TdPaoavSUSgEo5VXro=;
+        b=ZKKQACS2zDGPYrvgIYaS4tsmjQ990KK2UFiirV2nifpQRU+OoyEaFKe5FrTwzdpo7q
+         fMEUMvazoM0lRlTfiPCMO9rNAqUabE4aSYg9KqXh8jMG8VtFMWoTonkRwTglKcOWWshN
+         EoH/ELShEsGQ7w1rTSKiFEGhzXppLe8n1SU2U6ZS4XgJ7WkPOx2YCQ1HXhP4tHL5CEkb
+         q71NxMX8UHXH0WcHZxvAxd2ywjNFP8bKETulveN+MdOACxI1kAYvJDoGf7c/cWT7Ysnc
+         7b2rDMOo1UuY8Wn8zbeZ7UPJIR31BWWlZbx+aTBOwIj1bpzgHLqnEsgbtXkzgRnbKhMq
+         xq5g==
+X-Gm-Message-State: AOJu0YzN0yVKYNMAIQ+n3bPrEPwthkQ0FU7J2d6xBH2qYvHejVq0Bi9o
+	iSqSR4mfoWbouY/eQJYssdH3H9cJ49PsAfQ3TPSxZH/6smwbjemJGU4QB8INIA==
+X-Gm-Gg: AY/fxX7jyh1S55tfK0vc/yVFDSR7bacvnxGr2Pkds8yeNOcbN8iMI0OVtx1BntZUxn/
+	p99PifVn0mTa1RQjh1p7StKlfEWFhNXMZbltdiXTozAwDJEARAlCVAtKUSBzgwl93E1owtFZipq
+	NkUxJAL0gvrgzJqElRW1lHjwDBuAFV88pAOnEi/a7Ro0s6OSUqoYZl3piQuJo4UDg5rs9Op8ANW
+	DDjuCqYvvZxFrAUWM9eQ+k/EIDUWTXBfKYucMrcykvFQ4JTF44Zg6X+ZIN36H07PD7NRLWlelHa
+	f4XOO7GotseOD7j35BjuEvWcKjwhzW7akUIS0ikEFmwnJgsrDMIYnC1n+p0T7Xz5D1qHMqbsEhG
+	AljvXDyp833FCGiXPb4g1+PCYZStgsAm3+BxiyZCY8CX3gEJrwQ3bRb46yU32GgDhmff864C2H2
+	rIRM9oddMSObzcMFJV9yREMhQ=
+X-Google-Smtp-Source: AGHT+IGa6BO5lD8i2Mk9Y9h4eyffTDJZ4r1NBX/HF6xgiz4tgQib//+D5pE8cYlU7HWKNf7PnY8C/Q==
+X-Received: by 2002:a05:6a00:983:b0:7e8:450c:61c0 with SMTP id d2e1a72fcca58-7f22ffcc0e4mr1935762b3a.48.1765373290350;
+        Wed, 10 Dec 2025 05:28:10 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.28.02
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.28.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 05:28:04 -0800 (PST)
+        Wed, 10 Dec 2025 05:28:10 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Changqing Li <changqing.li@windriver.com>,
+Cc: Mingli Yu <mingli.yu@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 41/43] version-check.conf: mute version mismatch warning for bpftrace
-Date: Wed, 10 Dec 2025 18:57:42 +0530
-Message-ID: <20251210132744.336180-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 43/43] bpftool-native: Empty DEBUG_PREFIX_MAP_EXTRA
+Date: Wed, 10 Dec 2025 18:57:44 +0530
+Message-ID: <20251210132744.336180-8-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
 References: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:28:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122545
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122547
 
-From: Changqing Li <changqing.li@windriver.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-bpftrace set the version by "git describe --dirty", since we have local
-patch for bpftrace, '-dirty' will be added into the version, set
-CHECK_VERSION_PV to mute the version mismatch warning
+Most host gcc doesn't support -fcanon-prefix-map right now, so
+empty DEBUG_PREFIX_MAP_EXTRA to fix the below build error.
+ | gcc: error: unrecognized command-line option ‘-fcanon-prefix-map’; did you mean ‘-fmacro-prefix-map=’?
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 219328f37cbf6aa4b2d7b77d21e00240543d73ad)
+(cherry picked from commit 31a08525bedd960c21214f84c256f67c6090bb5a)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/conf/version-check.conf | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/conf/version-check.conf b/meta-oe/conf/version-check.conf
-index d1a6cdf7a5..3ff0bccfd6 100644
---- a/meta-oe/conf/version-check.conf
-+++ b/meta-oe/conf/version-check.conf
-@@ -36,3 +36,4 @@ CHECK_VERSION_PV:pn-libusb-compat = "0.1.12"
- CHECK_VERSION_PV:pn-jemalloc = "${@d.getVar('PV').split('+')[0]}%"
- CHECK_VERSION_PV:pn-dialog = "${@d.getVar('PV').split('-')[0]}%"
- CHECK_VERSION_PV:pn-flite = '%'
-+CHECK_VERSION_PV:pn-bpftrace = '${PV}%'
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb b/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+index bc7712ce4d..fe3ad6138e 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab48516bcc1be
+ 
+ S = "${UNPACKDIR}/linux-${PV}"
+ 
++DEBUG_PREFIX_MAP_EXTRA:toolchain-gcc = ""
++
+ EXTRA_OEMAKE = "\
+     V=1 \
+     -C ${S}/tools/bpf/bpftool \
 
