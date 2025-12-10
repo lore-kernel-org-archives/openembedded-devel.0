@@ -2,150 +2,135 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE50BD3E77B
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 19:31:54 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4622.1765395105898543808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB159D3E781
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 22:34:55 +0000 (UTC)
+Received: from mail-dl1-f54.google.com (mail-dl1-f54.google.com [74.125.82.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8905.1765406086087489077
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 11:31:45 -0800
+ Wed, 10 Dec 2025 14:34:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YT4DlTMP;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-7b89c1ce9easo181813b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 11:31:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=en4kYNHI;
+ spf=pass (domain: gmail.com, ip: 74.125.82.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f54.google.com with SMTP id a92af1059eb24-11b6bc976d6so1914483c88.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 14:34:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765395105; x=1765999905; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765406085; x=1766010885; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kHgdQL1DDaRUnt21cNzixWlMMG4SwPzu2KzJIQMFyi0=;
-        b=YT4DlTMP1Vq+DwH6B+p9jNV8GRCCyeyKQ3vGOgMPcC1ZQwObkQwmr2wiZEodGUxxHI
-         3phuOJm6I1ScvGecb1eB1TckShhybNAwHu47jMmqytiuKWsLnjUtSCIo5mHf8Z+wGJaF
-         p7HGOKVi6kepCRPGQDnu37F77X3/HGsqI+tKVtGqo7zq/0ZX1vK22g4CN0wuhjtyLzjy
-         dnSwQGYCP0fY/eRTNWtOE+VFVDzDYT1TETjlxXJCDK8o6ZkSLDktm+47KD7Gon2uYNVy
-         sFj9jLcoqSc80P1lFWDDJbS6ZbVOVc/m+B7TQPZ3OAv4jzpxQ51lrCENgkojcT4T4LUG
-         giEg==
+        bh=JpS6FdvyNb3WW13Qk2KvxYj3K6EpOSC5n3AGtXbRp5s=;
+        b=en4kYNHIL29+OcpG9eWavsEWrKzAUnQU3HF880qQxIT+5Tdg9cDqpoYVMv9O+oTt4k
+         Q44RPfmhawwwe+FvciNAAgPiLP1QK2F5wcs5dRNo5yxf5ZuJvhotJMX3fipDRX8kwcnY
+         0BdHoBH5jCf38UgdT3/c0XQqI4sqa9XtsmzT2/ARTWWypxqupk0iP2SlhLrkrMH61DUQ
+         YfPFKWd012vL5ndjtY4+XR4ahaikXp8N8++0icu9gfWnwvejhe9tPioJsYQrXFtQZ31W
+         DLjJ9n6c909uhKsAv6uauAdhKQ/kts9SU2nltWwmRzUSNlfWWuFTxS7CGtvvHOQzT/nu
+         +igg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765395105; x=1765999905;
+        d=1e100.net; s=20230601; t=1765406085; x=1766010885;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kHgdQL1DDaRUnt21cNzixWlMMG4SwPzu2KzJIQMFyi0=;
-        b=rv6XS19LHw1Q80mTGqdAU+qb87GAnczmpZuoalBApcHMcm1qD7sLyDI6iIkLnQYz5P
-         tEjq6f2Wr9AS43sEI30pLJ2RA/vfWyLgZaeRkLs6Hs9iEuYM+gwfXDfjWet6GZgcbRXO
-         pm3ydjvlVv2d8XbBvFS+TlrbxyoReoH7DcCIdp5Kv4IYuL+z+i0kRsn325/hYnGiiE7A
-         cA8N6+0KKoLhy6e1yLPzscQNwzK/i/M0fkZMBZdmeOWzRRJuisF9387qNoqMUNDBLmla
-         atsJ1U47+14/gTbC7XpX/KUilBJ23dprmgfYw6FZKN2izJwhkNA4TFz9akyKNjU120lz
-         gkTw==
-X-Gm-Message-State: AOJu0YzcwhVYSrgTUBQ/mTQ7EETSopMu3Mm343bfzNkmfZlqseSmzoW7
-	A4ZwoOEMkgqpsaIKKxju0IGSaHRmv/RjG68FkGS97M1id33pEMkKYOJsH/OmH7gG
-X-Gm-Gg: ASbGnctH5WTMrbgwII+JFGxu1Wg+QoeOCjxxjV7tFebaMjFoWWeHYQ1kAunYtRvkCJq
-	z109SHWZccXcNxgXyzycn4//ZFNSp1gXbaUtQsSgGracmtWvJU/aBGo/aigTCuNfKO9aoXJd/KH
-	XjVbXdS2Lb5AliLbaoL7nJwIbkigdw8DMHdnIIcpBmprfP0oPT6v9Q2pTrF0XUvuOhp0CdPyISK
-	C+sgQ8gOnwNZWspIpEIVPCojK5+ImZJ0TKBYyYbU8ifMwYsY7DNYF3uSHXt6u+wLMaASuu2WjQx
-	cdvS7cBBi9L5ua1wR8EoY5jI+ku7PTvV9sOexIvfYWCIeJt3gFhbO0SNOuqh1m3NOP8LgIYHCr1
-	AQyyzfStmaeT3z3IP5T1CHTjFlidxdQc3twW2aTuOU29sjouiFAZId+N6avhAML/S7DMVnoCLuC
-	WIFPB8mKfNzj38+6cwqTVYWLSrR6XY0Znnmh5jjfbCepfcvN56qd9vcmuyRPNsigScMshReo6vE
-	wV70R00D17G8r2UxlfsqEsfie9CsuK7
-X-Google-Smtp-Source: AGHT+IFl5B2qKX3mZ9JO40C9yPG5xa+a+8MPWkYLjuHq7brw3lPTCP3u6adwTRT2zJl1f9iy7GoTVg==
-X-Received: by 2002:a05:7022:f91:b0:119:e569:f26d with SMTP id a92af1059eb24-11f29699af9mr2715301c88.22.1765395104782;
-        Wed, 10 Dec 2025 11:31:44 -0800 (PST)
+        bh=JpS6FdvyNb3WW13Qk2KvxYj3K6EpOSC5n3AGtXbRp5s=;
+        b=T38EDQXKx2T856H0YnR668QMWfbwNjPX0hEdUvjwKlDwYcPnBiKHWN6zVKVXB0X3X5
+         /oRKtkqullNf8DQT16oRd79ZltCltNeCGX8bcE6ZrlRMRssj/9ZKQ4Edu9+yc50DksgT
+         d8AlZAI6k2UHFbRRlN8+6YBw3eCqJ3t7ESAUJLCgIUf4ypFah08aNbLiZbOo0I3RyOlq
+         KZwhYr+LdY4e6s279MqJY4DM95uur4De9Fe0fWHAUxGXv+eharySlAiAaFwyetOWpPCs
+         171Gmklsoi4oHT3eat5N0BwGhnbsdI25BJdf1vJrG1Zvd5OfYstvBqi7r07IDjiaOBTd
+         nGeQ==
+X-Gm-Message-State: AOJu0YwIsCoUyHjrrdGAlBIGsgc4X4QdhQLQx9oGE51psGYrqEVwJ4u9
+	DygJ95nejYsCuia5zHIcfLMnv8zZj9lcA/lvv+r4MX2Vi6fCBdZbLVQrLckAbOSl
+X-Gm-Gg: ASbGncvDbuUjbajdnV08N+qLxzkOssAxq+wN+2jpUT5sDSsutcvlrDMY4bKWOFR6YWD
+	Y8L06ydiivpkmnEF6EXPxQzMs4MUr6PMKqCg0dkxPoZvT0ncBU7xPL1GSFruqZ9+i7uML+p9P1p
+	ea7Fys4omotM4Qego0eqKKMIps4TmsLSkuNCQQlcxsvxVJnMGnrOo3Y0i3iXBA2am2zvgwMXbX3
+	SKegnmcA9YUzJPdQoEFBexUD6nKxIgEzBFdCBlYXGF3yH4BHcLyYT6fupgcFGjxsrI/lzxx4+aZ
+	rOI6kDtE8nSCUExeuRCddDD+39mAC8Ny0c5c22V34dCW1ERmnUHCMeT4KbwD3wNF2JPY3LT08LJ
+	1o+faR0lS0n+54C5Q6cISiqZlIh+HNMSyIUwqvY9bCZJ/3j1eN1tGkyFmNu7/nYVGezXDN57sif
+	tdIA6v4OPy0Qrculb3hdB0R5r/3RrcdLOQS6D7ijqHp+KfoZsXhQe+R/EuP/Uny1n14L/4xMjp8
+	SbXGYfSyXfyvKTDl3wtdU0OYlPg7Zf+
+X-Google-Smtp-Source: AGHT+IHvcw6mYLM7hc2P13njk5rGk5pP/E8uYE+qtM/DzABIi6+z1+1RI5HHWOoliXtTkg+dXfCHdg==
+X-Received: by 2002:a05:7022:98c:b0:11f:1e5b:2dd6 with SMTP id a92af1059eb24-11f2ededcdamr10393c88.17.1765406084935;
+        Wed, 10 Dec 2025 14:34:44 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f2e2ff110sm997534c88.10.2025.12.10.11.31.44
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f2e2b4bb8sm1726654c88.7.2025.12.10.14.34.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 11:31:44 -0800 (PST)
+        Wed, 10 Dec 2025 14:34:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] aom: Upgrade to 3.13.1
-Date: Wed, 10 Dec 2025 11:31:41 -0800
-Message-ID: <20251210193141.471298-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
+Subject: [meta-oe][PATCH] fd-find: Fix build on riscv32
+Date: Wed, 10 Dec 2025 14:34:41 -0800
+Message-ID: <20251210223442.851534-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 19:31:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122578
-
-* Fix build with nasm 3.01
-* Improved VOD encoding and RTC encoding performance
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 22:34:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122579
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
 ---
- .../0001-cmake-fix-nasm-detection-w-3.0.patch | 40 +++++++++++++++++++
- .../aom/{aom_3.12.1.bb => aom_3.13.1.bb}      |  8 ++--
- 2 files changed, 44 insertions(+), 4 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/aom/aom/0001-cmake-fix-nasm-detection-w-3.0.patch
- rename meta-multimedia/recipes-multimedia/aom/{aom_3.12.1.bb => aom_3.13.1.bb} (88%)
+ ...fine-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch | 26 +++++++++++++++++++
+ .../fd-find/fd-find_10.3.0.bb                 |  7 ++---
+ 2 files changed, 30 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/fd-find/fd-find/0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/aom/aom/0001-cmake-fix-nasm-detection-w-3.0.patch b/meta-multimedia/recipes-multimedia/aom/aom/0001-cmake-fix-nasm-detection-w-3.0.patch
+diff --git a/meta-oe/recipes-extended/fd-find/fd-find/0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch b/meta-oe/recipes-extended/fd-find/fd-find/0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch
 new file mode 100644
-index 0000000000..105e4d9d70
+index 0000000000..82eac5e1a5
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/aom/aom/0001-cmake-fix-nasm-detection-w-3.0.patch
-@@ -0,0 +1,40 @@
-+From 83c37c8bc1f4cd7e604c34df7888c425a8cb6b26 Mon Sep 17 00:00:00 2001
-+From: James Zern <jzern@google.com>
-+Date: Tue, 7 Oct 2025 14:08:44 -0700
-+Subject: [PATCH] cmake: fix nasm detection w/3.0
++++ b/meta-oe/recipes-extended/fd-find/fd-find/0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch
+@@ -0,0 +1,26 @@
++From 7582be50050b36e3275f6d4eacd8eceada8b6afd Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 10 Dec 2025 11:58:21 -0800
++Subject: [PATCH] Define ALIGNOF_MAX_ALIGN_T for riscv32
 +
-+nasm 3.0 separated Oflags (-Ox) output to `-hO` which is used to
-+validate the nasm binary. This change is compatible with older versions
-+(tested with NASM version 2.16.03 & 2.13.02).
++Long double is 16byte aligned on both rv32 and rv64
 +
-+Upstream-Status: Backport [https://aomedia-review.googlesource.com/c/aom/+/203481]
-+Bug: aomedia:448994065
-+Fixed: aomedia:448994065
-+Change-Id: I704dcfe39ac6e68bc4d5b9e409fb59a0d277170e
++Upstream-Status: Submitted [https://github.com/tikv/jemallocator/pull/153]
++
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ build/cmake/aom_optimization.cmake | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
++ src/lib.rs | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/build/cmake/aom_optimization.cmake b/build/cmake/aom_optimization.cmake
-+index 9cc34de..2750a0b 100644
-+--- a/build/cmake/aom_optimization.cmake
-++++ b/build/cmake/aom_optimization.cmake
-+@@ -212,7 +212,7 @@ endfunction()
-+ # Currently checks only for presence of required object formats and support for
-+ # the -Ox argument (multipass optimization).
-+ function(test_nasm)
-+-  execute_process(COMMAND ${CMAKE_ASM_NASM_COMPILER} -hf
-++  execute_process(COMMAND ${CMAKE_ASM_NASM_COMPILER} -hO
-+                   OUTPUT_VARIABLE nasm_helptext)
-+
-+   if(NOT "${nasm_helptext}" MATCHES "-Ox")
-+@@ -220,6 +220,8 @@ function(test_nasm)
-+       FATAL_ERROR "Unsupported nasm: multipass optimization not supported.")
-+   endif()
-+
-++  execute_process(COMMAND ${CMAKE_ASM_NASM_COMPILER} -hf
-++                  OUTPUT_VARIABLE nasm_helptext)
-+   if("${AOM_TARGET_CPU}" STREQUAL "x86")
-+     if("${AOM_TARGET_SYSTEM}" STREQUAL "Darwin")
-+       if(NOT "${nasm_helptext}" MATCHES "macho32")
-diff --git a/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb b/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
-similarity index 88%
-rename from meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb
-rename to meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
-index 72baf58cf0..141b02306d 100644
---- a/meta-multimedia/recipes-multimedia/aom/aom_3.12.1.bb
-+++ b/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
-@@ -5,11 +5,11 @@ LICENSE = "BSD-2-Clause & AOM-Patent-License-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
-                     file://PATENTS;md5=a111d47497d3bb49e04eef71377eb8ba \
-                    "
--SRCREV = "10aece4157eb79315da205f39e19bf6ab3ee30d0"
-+SRCREV = "d772e334cc724105040382a977ebb10dfd393293"
- SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main;tag=v${PV} \
--           file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch"
--
--
-+           file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch \
-+		   file://0001-cmake-fix-nasm-detection-w-3.0.patch \
-+		  "
- inherit cmake pkgconfig
++diff --git a/src/lib.rs b/src/lib.rs
++index 165660e..5f6a2a0 100644
++--- a/src/lib.rs
+++++ b/src/lib.rs
++@@ -57,6 +57,7 @@ const ALIGNOF_MAX_ALIGN_T: usize = 8;
++     target_arch = "powerpc64le",
++     target_arch = "loongarch64",
++     target_arch = "mips64",
+++    target_arch = "riscv32",
++     target_arch = "riscv64",
++     target_arch = "s390x",
++     target_arch = "sparc64"
+diff --git a/meta-oe/recipes-extended/fd-find/fd-find_10.3.0.bb b/meta-oe/recipes-extended/fd-find/fd-find_10.3.0.bb
+index 3df88c88b0..3a28009471 100644
+--- a/meta-oe/recipes-extended/fd-find/fd-find_10.3.0.bb
++++ b/meta-oe/recipes-extended/fd-find/fd-find_10.3.0.bb
+@@ -12,14 +12,15 @@ LIC_FILES_CHKSUM = " \
+ "
 
- DEPENDS = " nasm-native"
+ SRC_URI = "crate://crates.io/fd-find/${PV};name=fd-find"
++SRC_URI += "file://0001-Define-ALIGNOF_MAX_ALIGN_T-for-riscv32.patch;patchdir=../tikv-jemallocator-0.6.0"
+ SRC_URI[fd-find.sha256sum] = "2fbf004b5bbdefab92e76237e2022c77842cdef5d3213fe09fd804e0474785db"
+ S = "${CARGO_VENDORING_DIRECTORY}/fd-find-${PV}"
+
+ inherit cargo cargo-update-recipe-crates
+
+-#Upstream fd-find sets strip = true in [profile.release], which causes Cargo
+-#to strip the binary during compilation. This interferes with Yocto’s normal
+-#do_package stripping process.By adding the following flag, we ensure that
++#Upstream fd-find sets strip = true in [profile.release], which causes Cargo
++#to strip the binary during compilation. This interferes with Yocto’s normal
++#do_package stripping process.By adding the following flag, we ensure that
+ #stripping is handled by Yocto as usual:
+ CARGO_BUILD_FLAGS += " --config profile.release.strip=false"
+
 
