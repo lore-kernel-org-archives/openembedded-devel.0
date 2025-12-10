@@ -1,96 +1,99 @@
-Return-Path: <brgl@bgdev.pl>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0105D3C90B
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:57:43 +0000 (UTC)
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16247.1765375062590815294
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C77A0D3C90F
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 14:16:53 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16389.1765376207888610478
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 05:57:43 -0800
+ Wed, 10 Dec 2025 06:16:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=0tiOySqZ;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.208.169, mailfrom: brgl@bgdev.pl)
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-37b96cbd875so51850751fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:57:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cQDPyGWV;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-29ba9249e9dso96981965ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 06:16:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1765375061; x=1765979861; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lRpbg2Q+RMOdgMRsY20i79toOUivBfEI3R3ncw2XDGo=;
-        b=0tiOySqZFatqeWij+FvF2eD40IQNkgqfsGyYnCMNS0OBiOcWXr/+QJ5wehTBfQstab
-         RN9warSkplBZ9d+7WDprFnH4+CeNEN5+XBoTAJ74skiWhbvFcVcz5sEwPknKxr61sE/d
-         JKoWpH2EI8CyzZKSpNrLwUmNgaFwHPvmJGZw/0EL59FYPeCciZe6X267CLxtJPyhLCIr
-         grESnTvWBdVX8YArWsuWkYFNLW+Kt4JrumGkDxlchVzFLwl7IuWi+5NeRuHyW+X1+Dx+
-         JdxD5ATiLLaFV74+nc+PEornmGRzLSGLCuqYdPYLKxxhk6mDJC4Vmse0aIJLJxgf/DOE
-         J/Fw==
+        d=gmail.com; s=20230601; t=1765376207; x=1765981007; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0A62RDy4XePkjPIWHwe3f6TytCVEEl15NqiLrlDjIe8=;
+        b=cQDPyGWVGd0lDJeo0/2mqZkXohw8P36tc/NtDCVxrqaIs/Q7IFwkX0PX85CUhFinMy
+         VdpD76vQyc1agmRE56LF32qs/9pqSqj4r7SKtlDAl1jTdgsp76kg6/3adzeBJnHIDmWr
+         7wObiomC4OY45OJRV7OfMESQbTowCFJR9LlZeJinra47WB85rs5JwuzOD6gHjswliULw
+         gLOqLudr2tt0ikDtW57akdeOHN84mGUnPBtvTdgVaJAvID5QDrih33FONBxLlFglZGvt
+         K6jWo++UhjYGH46yPOlEhqls//6Is3Tg/8Zs+obFYBaDPb5a7nDhRArQb1zHhHKvUKNX
+         AqaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765375061; x=1765979861;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=lRpbg2Q+RMOdgMRsY20i79toOUivBfEI3R3ncw2XDGo=;
-        b=Kz+pLogKnPZPRx9I0z639shwPFC7W2aaGMwD90CREvbdYiqYMc32mv4Ikay7iWPUZO
-         SEuRV5GtofSfFofa3pEMf7201UKAmBP85F8kDktUrq4PFBPFFYX5ppNU3V9l/xhrVy8a
-         Kh/quvmPPigiRt1Wnufcd7FZXLLIMo0HmBOfmswA/4HGc4p7aWP14lKa+7+dskBmWtsd
-         C1uWX9w/wlxwgH4FuIzEqXYFtbJfBm8vQDrlZBYQJp0nhlUaU1CNAjuLEweMm2ycjnWo
-         A50i5ZqiDRRN90I9Xhd1oG1m/DiM4tdD0dCdG+++/XwjL0uWVvx6McwKuT7VbzWbLGoP
-         BydA==
-X-Gm-Message-State: AOJu0YzpUq/JOo/OP3AaA2odwITEXOtH5PbD8uq+3ZxK6lZFzmwQVusu
-	oyRPulU0v8LuLPLmfwPO/+c6Vy7JeTY0UeRLTL2Ea09CdcLdb1vHttMy/GhjwLYC+Pxf/A1+g4g
-	9Ztlf66Qruhv5U5zG/2tGKSkkVF+PlUcv9oqjiSklzw==
-X-Gm-Gg: AY/fxX7UvCnVRTYZc8FDQNjs9a7ASzhLpli0N9tDU+rNmhQgEeUS2KV3VBqWMZA+ZMU
-	2fjYdSMBQAyPLIkzkcg2pkK2/PG1JHNmaNhmDK6mqz5kP3qcEzo7vqAKNKkds5UFPc8gV0V1qLN
-	0E7JNhohrydLc0zS5xchp//ci+qenFFJg3OECyLwCvdEJhxyC2Ifp1RF6y8kgKBo/SuHbERV6Q4
-	hR8BeR1IUyJpmxfAwUgWtHkeozJ65ubJCiZhB1G1OQa/mQmNsplY2sRUS26ZPMb1cN/YL/o
-X-Google-Smtp-Source: AGHT+IHuf5TAKH5/L7YDvCb/t3P7gBf6PwUXPiL84E8dgvvCagDCuvd5is0tDN1P3KBIxWWX1tOAR+7lUU5otakiPvM=
-X-Received: by 2002:a2e:a991:0:b0:37f:aa88:83fb with SMTP id
- 38308e7fff4ca-37fb217ac8fmr7882991fa.32.1765375060396; Wed, 10 Dec 2025
- 05:57:40 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765376207; x=1765981007;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0A62RDy4XePkjPIWHwe3f6TytCVEEl15NqiLrlDjIe8=;
+        b=BRPEkWbvYoo0eGris1qH3befz9Ur9Y6W+OG+yNCWLm/V7VplGabPejazt37Oaz1hdO
+         XwINAb6whUWQY0lYI4NGYvJ5aongDM5/q3VJIcGxUTO2OWNM9awiu+dZl9aiTs35RNbw
+         jbt1lg8mXUMlmSsBxqhyFOSmHsHwp+2sHpu/aU2zrUqRN5m0KGbnNm9HAie1TnB0vuF9
+         yf8VV2i/r1ZuziuQLZZbqOZRQ9K2FeLD7anlzNFSQIU/+SkzvIM47cTD4EqqKXle7CXX
+         FWtlHXl1MNpi721iy1CzkQSfKKUUM1H3QqDuJqG/vvuqZrWri1HIckgn7J289BXljnFU
+         WD7g==
+X-Gm-Message-State: AOJu0YwEpXNokO3Z3yXd37Eb2dkvD7Rvln20jhVxjOErq4HcqlO+v4Qv
+	TcMHcGVan1g2+e9CScNzj9pWg0cLxEGQIZ1SwT61uE3WJrpx7TQHBrZf8yXa/Q==
+X-Gm-Gg: AY/fxX6JFzD3bSv+WSm5Q7lT9d39oQ2UjVsmX3PK+Lo8u5QNbF4OfKjlrrVzeR1oHRq
+	0YOizbpoHtGBPxYG8bPuoERF5NuMIt/8o2Z8PaB2SUqn8ak64nKQoI3p6xBRcG11idYHyEuYkcY
+	3ll6GjdqXeyxMEXYXYDF34hostDIgVgITBZDU8NN3usu/34Wlw4mUzb/IPW6KGDahtmYzgo8BWP
+	XnCYBnGbnScEZ5WuREd3vyvg3N48P+CPZWLDSUSi0ayj2boFYfCgnuTNQL4rMdKucbCEYxSRe8G
+	MdM+LHAsOwjG7H5tEotdeIjd5Hwuh1KUEQX1glV8MDS5keRS8Za1iZmrph45klF2kSuAnbBfDu8
+	CKjbPOWDwAtGqGnH6//i0zQRneDYVsMIInvDeFNHimbj8KMaklOcatH6mElzd3LeKUOuuaK8lml
+	eiEZJchqgiQgh9aku8vb5U2LE=
+X-Google-Smtp-Source: AGHT+IFJvI3l9vDyUuwQjoWtIDHWQi312pkPTDGeTlYSJ12Llcszijh/Q+YZ6884xIXPHG2pKbCVng==
+X-Received: by 2002:a17:903:3205:b0:29e:9c82:a91e with SMTP id d9443c01a7336-29ec229cbfbmr27858885ad.7.1765376206918;
+        Wed, 10 Dec 2025 06:16:46 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-bfa0ad20207sm15955166a12.11.2025.12.10.06.16.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Dec 2025 06:16:46 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Hongxu Jia <hongxu.jia@windriver.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][whinlatter][PATCH 1/7] nginx: switch to libpcre2
+Date: Wed, 10 Dec 2025 19:46:33 +0530
+Message-ID: <20251210141639.1397030-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251210104325.175100-1-pascal.weisser.ext@karlstorz.com> <20251210104325.175100-2-pascal.weisser.ext@karlstorz.com>
-In-Reply-To: <20251210104325.175100-2-pascal.weisser.ext@karlstorz.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Wed, 10 Dec 2025 14:57:27 +0100
-X-Gm-Features: AQt7F2r3JuxvazFCGPOcSnLvVwYrNOuz4Z0-9FNClRhyXBfJZnuC_daydjptvT8
-Message-ID: <CAMRc=MfXu8A1hrkySbG29io_-V84fr7A_mzQEQAk2E9ij7gHfQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v2 1/9] libgpiod: Add HOMEPAGE variable
-To: "Weisser, Pascal" <pascal.weisser.ext@karlstorz.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:57:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122548
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 14:16:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122549
 
-On Wed, Dec 10, 2025 at 11:44=E2=80=AFAM Weisser, Pascal
-<pascal.weisser.ext@karlstorz.com> wrote:
->
-> Add HOMEPAGE variable to libgpiod recipe.
->
-> Signed-off-by: Weisser, Pascal <pascal.weisser.ext@karlstorz.com>
-> ---
->  meta-oe/recipes-support/libgpiod/libgpiod.inc | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.inc b/meta-oe/reci=
-pes-support/libgpiod/libgpiod.inc
-> index fb309c5644..63ffdc2466 100644
-> --- a/meta-oe/recipes-support/libgpiod/libgpiod.inc
-> +++ b/meta-oe/recipes-support/libgpiod/libgpiod.inc
-> @@ -1,4 +1,5 @@
->  SUMMARY =3D "C library and tools for interacting with the linux GPIO cha=
-racter device"
-> +HOMEPAGE =3D "https://libgpiod.readthedocs.io/"
->  RECIPE_MAINTAINER =3D "Bartosz Golaszewski <brgl@bgdev.pl>"
->
->  inherit autotools pkgconfig ptest
-> --
-> 2.50.1
->
+From: Hongxu Jia <hongxu.jia@windriver.com>
 
-Reviewed-by: Bartosz Golaszewski <brgl@bgdev.pl>
+NGINX 1.22 and later supports PCRE2 [1]
+
+[1] https://github.com/nginx/nginx/commit/c6fec0b027569a4e0b1d8aaee7dea0f2e4d6052b
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 3e308aacb03631eb1ed27baad7fc28f21075e3a4)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index bcc384bd8a..fe23eb397b 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -9,7 +9,7 @@ LICENSE = "BSD-2-Clause"
+ 
+ SECTION = "net"
+ 
+-DEPENDS = "libpcre zlib"
++DEPENDS = "libpcre2 zlib"
+ 
+ SRC_URI = " \
+     http://nginx.org/download/nginx-${PV}.tar.gz \
 
