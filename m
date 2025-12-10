@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FE6DD3C907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56FE5D3C905
 	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 13:28:03 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15368.1765373280442126862
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15673.1765373277566960780
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 05:28:00 -0800
+ Wed, 10 Dec 2025 05:27:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m0XB1OmK;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-7bab7c997eeso7806099b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:28:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ry2DRFV7;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7b9387df58cso10466255b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 05:27:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765373280; x=1765978080; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765373277; x=1765978077; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ig/EaB+HFSIR2dJO30cBjHIKvw6Hq4STu1urwK1LiAA=;
-        b=m0XB1OmKJSUzd07Gg7hX1aV5xzsbjco2mFKLEaVSmEcSHSGHMk1x1WDqQK19kWJaYV
-         9+IsXapFvQx9+GeiO6qf/PXJUa+nA05Xb/BXmgUCyBRqQhTh8kN8jEi/NKOW+Jf5NTe7
-         GU1VPVEobMdmdNv2ZsbaYwPRSxR1tEp/+uLHq1dI5vvFS+SkmsvMQmb3Sf8DATqjcb88
-         WjkdhpqATwVzlBeq2wj+8MCt85rW/cgZhGe9jMBYHv7e9oDG1gi6mgtPj0RNyjdl8C46
-         s4h0tGESuazqwzKaBowDa1hjdODzJ4Fagx+l+7U+n6bACwd3X+9/S+stSaxTZW0R/vfN
-         jbVg==
+        bh=PE7gQIcqBUVsyhwzSUpmACNMUxwDj2nViQLvMIbMbYA=;
+        b=Ry2DRFV7VeDVXossr+pjguapmhsPxbdTyjwC+AHUKVsfVI6xOdf4l+m3exZnUzev/4
+         qb36WIYkJnOcg4V5+uXG8jzZvFlURHy4VXF3uz+br/2LMOhl3SptT7fRj6b8r3z33mK+
+         kJzgz0huqSYXhxDxAdJ5dLMLW24ZDA0Ty+Hy8LU26qBCejE97nONHw66luG8ncmMo606
+         BSL6xpH2iuYDHqYw3O4yufJqrA30NxgI0D1AZMiwWJebQVpaEV2N2qK6VAaZr3Z5gHEs
+         gaWzY3JYLBHSqarXXAYCfNgtbGiRbvXaHEOyp7GwZd4tmPh+SwMgLIHVT+EKcVAqVnm8
+         fWkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765373280; x=1765978080;
+        d=1e100.net; s=20230601; t=1765373277; x=1765978077;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Ig/EaB+HFSIR2dJO30cBjHIKvw6Hq4STu1urwK1LiAA=;
-        b=buxbmlEvpZN5KsWWi+xUXet0/TcTySHlQfyuI4IMM8BVqYLJz+nBgZjbe7F4rS/HoY
-         4x3+lcYzJoYS5dl1+KPvC2RMtPh8c9Qg23B3BUe0zqqOUsLqBD/ux6RC7HbmDRePcoby
-         jwojkJ0WQl/pjpbgMe0u1ZOTklaJDdGKSRU3Kzv9+eK3XX9iSySC4bpVXJKESyi9R0I1
-         C1PGBLzsWEBvuIXGHHHroXSDeQmQQDmsMoJoOaXltIayr/sy++ar78142XL1eFC7Xo/p
-         KPoC1JRwAYhsi0nXQo4qld1LtaNu30mcQWaZi9rJ2OmAHqFlLsIc2mPahZWiCh2DV0j9
-         ZSvQ==
-X-Gm-Message-State: AOJu0YxC54tKU1X3QASpi8r6QfctyuiDOCHsJkwJM00B/wX+mQXxMv8B
-	hpUVsqT3i8Drrh2W+ozRbXaiNZvBtgmnTYUYid4VRJe0lQMmRFZkFmr4HbdpMA==
-X-Gm-Gg: AY/fxX6gNELSVK7PaGNw05opsIo980Ks3NGCmZJgZlagNd7kna8XIKsIFVRGqx8HNNz
-	vEJkWvSLjW+OapG9UBa3ebn0cE/O1fCRC3mUm3HVxeurGylhmkTKDASvxB+0P/She0JyfFgM+tI
-	8aWukXHTZfmYjHshRvQPkEJ5nCsOnkAkw7nA7qUvfz9YDDYVK6/Adpucwqisk8eg3OeuIouemBR
-	6tllJZ7y0w6bPZZiuUKOptP8SJAsMv6b6fqPgqAX7Q/Wyd6QuWKphoyD+DSIcXcTPH0U7U12pvF
-	QSz9KmD5+X1G4NIThQ9sNWNFSORr6khWlrsRHat3eFbmm8g+x+gFYcojiT8OMHKAGKhhWuO13cb
-	tplI/MstHxg40EodYYuuGNhIDAhZQMUE3s9PN7JibDFVaNOBL5yzMZ869Mhab5ZGORp1qFwzUk3
-	5LzEKw9ERJrEBwvwe+oNV90i4=
-X-Google-Smtp-Source: AGHT+IH3pSzKIqSru1+Y4UFAmDFzx89OjF4aHuHSCkp+pKr/JGQUEqQwe9I41dUWSzUZ7un27Drq6A==
-X-Received: by 2002:a05:6a00:3e1b:b0:7ad:4136:946b with SMTP id d2e1a72fcca58-7f22d300ba8mr2432126b3a.28.1765373279456;
-        Wed, 10 Dec 2025 05:27:59 -0800 (PST)
+        bh=PE7gQIcqBUVsyhwzSUpmACNMUxwDj2nViQLvMIbMbYA=;
+        b=cfP2bXpogbU6IeWqoigE02yskEMozsUqBwfzGnEb4y7MjFyxiU8TkFBqzXAmLWuHNT
+         iMvzxtFhrOGNWkX73xRsTAS+LVzCzk4avLKRLbv6v1m72MbUKB40Yskfk6+pkEa03AQU
+         fbc5zEfC5+/yRdcaE9DSLMRwZ5NtcniO/WxivGqzrflwSmlBVSM5R/HOXHqGRYXyRurN
+         XuZzrYUlyP7AvAHUvNSfJM2RUsMOyOpPhjHwjJt/4Uy5uxkHdDSnEyQf4nTHUWGbvl00
+         Bwy79g5ybPVsAkRtcGtGKvv5iuscZBwxs0GfOlIaP9TIYALXaiyacxHTZB5gzM5d2cTj
+         8zkA==
+X-Gm-Message-State: AOJu0Yx6/5fgoKppRlA+LXY9ayBz3A6Rmdr3nfJuAojbtYeMA3Sjtpln
+	UIqezj2NACDlAWkGe0u2RHKxOW6/TX7uQA0HaQsLZXqGCm5S3H2I+17XhqyK9w==
+X-Gm-Gg: AY/fxX75RnwqiFyLslVLP2Z128S+rDZZ9+t82tekhueOghy4qEcRc5dKorzghQ3CC4M
+	tjpvJhPuifn6MZT1bAk5i0X4Pl+zoNvdPP+F3cy14EXlsjwoVugKj0PhZ3Rg7VyzceS1INEJXqQ
+	fWexvw6B2XymLoTmDEJX3HztNmXZy9++TAoKKNW3aMF3unk1FxwzogDO/fZKEgxBB289n+E/NfJ
+	sd/n5jiMnr87yXsKWtWWqXmCc7OZlSwyYiVGOL4GZeTPYOnbCVFC3cpBzvw0k2T3bWhXx2/P1Cj
+	YxLCiUpFW8pclXtCS8gwVbuSWLDOWkzvCt1JeuirvBUCanVP1OsaTyOcgSQpsNz13+Zec4jx0DU
+	B8BScqS+yYtyTsPeIQ8XPC3a2MlP3hVXUMR7IrgcrDS94tkvgZUMw44rQCPPwDEJstiFQQ7JFd8
+	uoNk86dk8rqp/uRlR/RIflSDY=
+X-Google-Smtp-Source: AGHT+IFVhqnUPL00DHxFjAqGQbkqie44d7uqNwk3M04cEGesVllK4yFzdTzvF+KofyxFBbpcXvTseA==
+X-Received: by 2002:a05:6a00:198e:b0:7f0:665d:efd8 with SMTP id d2e1a72fcca58-7f22ee59c37mr2320732b3a.67.1765373276817;
+        Wed, 10 Dec 2025 05:27:56 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.27.57
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7e2ae6fa824sm19163006b3a.47.2025.12.10.05.27.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Dec 2025 05:27:59 -0800 (PST)
+        Wed, 10 Dec 2025 05:27:56 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 39/43] xdotool: upgrade 3.20211022.1 -> 4.20251130.1
-Date: Wed, 10 Dec 2025 18:57:40 +0530
-Message-ID: <20251210132744.336180-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 38/43] upower: upgrade 1.90.10 -> 1.91.0
+Date: Wed, 10 Dec 2025 18:57:39 +0530
+Message-ID: <20251210132744.336180-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
 References: <20251210132744.336180-1-ankur.tyagi85@gmail.com>
@@ -70,50 +70,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 13:28:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122543
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122542
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-- Fix bug in typing/keyboard causing xdotool to send extra modifier
-  keys in certain cases. When xkeyboard-config 2.46 is installed,
-  xdotool would send incorrect key sequences for function keys, for
-  example incorrectly sending "Alt + F3" when F3 was requested.
-- Add 'windowlower' command
-- Fix some crashes in xdo_get_desktop_for_window
-- Fix mouse movement under Xwayland when multiple screens are present
-- mousemove --sync no only waits if the cursor is expected to actually move
-- Remove dependency on libXi that was leftover from Wayland detection code no
-  longer used in xdotool
-- Bump SONAME to 4 hopefully to resolve ABI issues with previous versions of libxdo.
-- Code improvements intended to reduce compiler warnings
-- Add support for Cygwin when building
-- Test suite works again!
+===========
+- New feature: Support multiple keyboard backlight LED control.
+- Make installation of tests optional
+- Support conf.d style config file
+- Deprecate CapacityLevel property
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 1964be81d37b235769e2bee9ed374c760824cb2c)
+(cherry picked from commit 07dae4fd4e475e4f3eebd28f84e7a0813a8b6140)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{xdotool_3.20211022.1.bb => xdotool_4.20251130.1.bb}        | 2 +-
+ .../upower/{upower_1.90.10.bb => upower_1.91.0.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/xdotool/{xdotool_3.20211022.1.bb => xdotool_4.20251130.1.bb} (90%)
+ rename meta-oe/recipes-support/upower/{upower_1.90.10.bb => upower_1.91.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-graphics/xdotool/xdotool_3.20211022.1.bb b/meta-oe/recipes-graphics/xdotool/xdotool_4.20251130.1.bb
-similarity index 90%
-rename from meta-oe/recipes-graphics/xdotool/xdotool_3.20211022.1.bb
-rename to meta-oe/recipes-graphics/xdotool/xdotool_4.20251130.1.bb
-index 45defe82d6..75fa636838 100644
---- a/meta-oe/recipes-graphics/xdotool/xdotool_3.20211022.1.bb
-+++ b/meta-oe/recipes-graphics/xdotool/xdotool_4.20251130.1.bb
-@@ -10,7 +10,7 @@ inherit features_check pkgconfig perlnative
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-support/upower/upower_1.90.10.bb b/meta-oe/recipes-support/upower/upower_1.91.0.bb
+similarity index 95%
+rename from meta-oe/recipes-support/upower/upower_1.90.10.bb
+rename to meta-oe/recipes-support/upower/upower_1.91.0.bb
+index a7effcd7de..9d20e0a432 100644
+--- a/meta-oe/recipes-support/upower/upower_1.90.10.bb
++++ b/meta-oe/recipes-support/upower/upower_1.91.0.bb
+@@ -12,7 +12,7 @@ DEPENDS = " \
+ "
  
- SRC_URI = "https://github.com/jordansissel/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
--SRC_URI[sha256sum] = "96f0facfde6d78eacad35b91b0f46fecd0b35e474c03e00e30da3fdd345f9ada"
-+SRC_URI[sha256sum] = "eee789b00d6a13d47b31bbc139727e6408c21b5f6ba5e804fdf6ecfb8c781356"
+ SRC_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/archive/v${PV}/${BPN}-v${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "c1baf418b685ffe4150c8a75c04da0cec70323fe094b5b257b287eea564d3f56"
++SRC_URI[sha256sum] = "954f8ee8d1422c813615862bc6249cb9b31ace1d905fd1f06549c4e47f4ba401"
+ S = "${UNPACKDIR}/${BPN}-v${PV}"
  
- EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLLIB=${libdir} INSTALLMAN=${mandir} WITHOUT_RPATH_FIX=1"
- 
+ UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/${BPN}/${BPN}/-/tags"
 
