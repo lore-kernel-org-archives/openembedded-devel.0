@@ -1,114 +1,161 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91D85D3B9A9
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 08:05:10 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10859.1765353903671342534
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8CBAD3B9A9
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 08:16:20 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10809.1765354570500410647
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 00:05:04 -0800
+ Wed, 10 Dec 2025 00:16:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=K2IkZcRO;
- spf=pass (domain: smile.fr, ip: 209.85.221.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-42e2cf93f7dso4626669f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 00:05:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bzP962V3;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-7d26a7e5639so7376559b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 00:16:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1765353902; x=1765958702; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UgTpuNGPh0k2Pv1CvD5RUiTNlurfECDP7Oem+v44vdI=;
-        b=K2IkZcROUg2v2VcZo9SAwklLeQoelTC8zgwn5cC06e1LtktHMcVbJptyIbpFGQItnh
-         g3AwtKLXjyUyiEnwwLNUSUGJsl1S7vxAi04tH1h+40jLPSoyE7/EHtAsLmZgtltnCAQG
-         pmgVbZdenLARTod2heOJt+b30asUl0eJycF+o=
+        d=gmail.com; s=20230601; t=1765354569; x=1765959369; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=a7FIw2YvssA0u6cBbGcbM5wY5Bl9n2J4AZmeRBKmKQU=;
+        b=bzP962V3dpp3rXGVfwpEKLMhYik4Wy4nOq+fYLMyHlvxGW9YQi+9Txyma0WhDzkiWb
+         7p+a16vyVNJLObpU+UmQAzeQnR41LlO37pqn0+hw8aNu19bdCeYbMoViACQWfzY/j+Go
+         0JQyHLafXkZPDjpzsbjjY3lNDL/eS8pfJM7z3YrrGgECx6CovCtTjXxOOWIQ4ysx7ebb
+         P3yGp5smSlE1osFcoFMFxl9p4ErM64LXxIGDIlmEb5rbfGtO/vnZaHjJaHLOCWMEWeIW
+         TGP2mPXictSb26SY06+LYuDDTIOk9Xy4oXyDbWYsljdAuaxcp/DKbg8NwMBjZk58WxYK
+         Hgqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765353902; x=1765958702;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=UgTpuNGPh0k2Pv1CvD5RUiTNlurfECDP7Oem+v44vdI=;
-        b=BcV7tBGBkY7fIPJLkGbww9Lnke9XNSfOLJZ7WgqSV7oJwQcvT5jXj4teaSGl24RnxV
-         5qRvf8sGzFq0OWn5WFi9aqC9mfzhpdCXjVmb+7Ikwj8iI9qm7S1W6RbZ2RMbfyZ9fvbc
-         smQfftqKJqEFeYfCXoHcKRIHE9hqN/bm0tClY1nTEXpVlOItfTVWbVQVbb7w/pKRwQOf
-         jBfvsDCsafrm89Hc1A8FZRaHJZ47VDtDNbbcdB1ieyVJ7HZrzThPDBsmXy6yM+YKvVLW
-         YAesO8waZ8nOxfSg8iW4yvOqGeM7e5BoD1hb+BLEewDUU/q7ltEgW6aqwHpghij2f0JN
-         23eg==
-X-Gm-Message-State: AOJu0Yyr5mBkkATuOkiAhylnse4ASgtITrI3jAW/yOjZ/4Tmcs1RTmyy
-	LuCMIF+fIgi/8f9bZAJyWJxBD0D+RwRT/u5gIYtP9m5AMXhMAZlpkNZmPpbUwbcQ4DL2/YMuqDY
-	KS4vdUzsjxhhkWkwnh7+ugwMV0NgX7komQ33chlnaTg==
-X-Gm-Gg: AY/fxX4Rj4Rgk9LWsOOoxkAE/awnPs3MmQCMEOKp1LlmmgDiX26GI79WVatxhaPdqZ0
-	TohLtNvWbRnIpwUSsX9IFmr+zX8qorv3TAkNjoL4IgikrW4emtPz5bG3KPLbjlHJ1fvm+DlS8WZ
-	0dIwP6/oUKGQOUvGg+ISm2VMrvPSKMkr8Vz81lOsEAEU/1O0CjyzazEgQPCTkkgMtO2wBkkbEIb
-	PxPQ1CpNNTkMbW0Qz/O7eJYIZKUKiVl0/9dat4vpVWczSYK+SINaNqpL+IZNftef+WxeXQNcQ==
-X-Google-Smtp-Source: AGHT+IGClrpQmFjjJ2RCUFlauGS6CmUc+1+BJQnjBV29s8eLOjvsjY8YCPPTTRpCRndUmd/2toYnGbqK6lGtBN72AJQ=
-X-Received: by 2002:a05:6000:2312:b0:42b:3d9d:c605 with SMTP id
- ffacd0b85a97d-42fa3b052dbmr1357004f8f.49.1765353902037; Wed, 10 Dec 2025
- 00:05:02 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765354569; x=1765959369;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=a7FIw2YvssA0u6cBbGcbM5wY5Bl9n2J4AZmeRBKmKQU=;
+        b=v3k0mDJ9B4zP3kgYzmBuPyNiPcZcU4UslgcpY9uUnK2/IkRdVnA8JiDDwCqoeEfSUP
+         mMR/tBXMJBIonjp/PJQIaFlTPwLA2u/lYg+mwvEwoKrNHie4gmBpbsGVgjwx1y7VwR9E
+         6gbOnfpW1q/lXjL3rMW+asUeFv+34jwIG/tkdBMk1InMmgtQqYx45uO0+iHBwU0WoHuV
+         0wOHO9i1mKams5DLD1xTP2lEnfEdXnpTp+wgpYdZ+3DUX14J/h4qyEpWpzEJrZL2EAhB
+         Qdrnj8slyugEO65/i1uy/oUXvsvmLg4eWZvE+L5nGTSqv4Xlj/7/poARtS52ORxyT1L5
+         rdsA==
+X-Gm-Message-State: AOJu0YxMkOV+Ryb4Q+sY2tr4u0XXv2ofGfykefh8GBKtytI+GG9bX1LU
+	eW6HRpdOhnkjc8uJ6HeNfMOTcrg4q4IE7cjTSNYcsabtkQ9Gqw/GUbqmeaT1ASOW
+X-Gm-Gg: ASbGncsph3QwjTfC7x9HvX+r/IdKvtcJj0/RZ+2hK16x11CZhMCMXV1083mG6uUpBHQ
+	rQH6jHL3suXHuAy16vZmxbvFRXPyPjWSv59IuYBljt6gpHjKtwkqtE0A31PS8RX6amXwjV7nXdF
+	3gU6FHovdkOrVD/n0WocPYN8zk7X/IgowYety19TtjjjWprkApACZfkmdMBwwLb1WIG+Dgr5pfb
+	KJMklQTqdVarH3eJ9V8lf5hSNSGwfoyICZ6njDhyorVyMTAOsu/o/sIJ4Qy8+3ggdHACyS3SWgR
+	dLm4RjaU861or6w29V5fbZoUcBX1sWLYMdB0vaUhZk/cSpLXZB+LNp2odkHhupfJJqaMqdQrMv+
+	WV25dXUwcX/RJ6Ut1iLrCH+ipvXatTyXTqrJkdxBFGj7oEHyagcMoK0t8D4nBRTvoOrbgM8Ynf5
+	0unOUBZfXQOUALHyqVtuMu3EoVvtJ/4ANOPpTdpV9YBsZempz1X6Xml2v2hsBpcdLJTVRpwvj6P
+	7TIl1GQy/V8+UqJQc6G7PY8t7adwuku
+X-Google-Smtp-Source: AGHT+IHAU/66Mt2slyCFS1K1GJsyByiR9AMab5gXBW1MXqIIQVyHACcVCUEwdb6dsaHCs+aIygVG3A==
+X-Received: by 2002:a05:7022:4181:b0:119:e569:fbb7 with SMTP id a92af1059eb24-11f296c5217mr1347644c88.38.1765354569234;
+        Wed, 10 Dec 2025 00:16:09 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11df7703bd7sm80613086c88.10.2025.12.10.00.16.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Dec 2025 00:16:08 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/7] frr: Upgrade to 10.5.0
+Date: Wed, 10 Dec 2025 00:16:01 -0800
+Message-ID: <20251210081607.3196421-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20251210070022.175967-1-yoann.congal@smile.fr> <adcafc6d-0e0f-4342-8cc0-06e3eb60fdcd@gmail.com>
-In-Reply-To: <adcafc6d-0e0f-4342-8cc0-06e3eb60fdcd@gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Wed, 10 Dec 2025 09:04:35 +0100
-X-Gm-Features: AQt7F2qOJxtGFoiitdwde_a5pkbeoR0FIeMZ7l75BNVNZgfpUk2Bv-VF02RXBmI
-Message-ID: <CAMSfU+47ZGFcYtOzCUY=4nk51fegCOroTursvY--djTvS3J8Nw@mail.gmail.com>
-Subject: Re: [meta-networking][kirkstone][PATCH] http-parser: fix SRC_URI branch
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:05:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122487
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 08:16:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122488
 
-Le mer. 10 d=C3=A9c. 2025 =C3=A0 08:25, Gyorgy Sarvari <skandigraun@gmail.c=
-om> a =C3=A9crit :
->
-> This is part of the currently pending PR[1] - second entry in the list
-> under my name.
->
-> [1]: https://lists.openembedded.org/g/openembedded-devel/message/122459
+Relase Overview:
 
-Ha! Missed it!
-Thanks Gyorgy.
+* BFD the ability to listen for specific VRFs only
+  - Configure which VRFs the BFD daemon will listen to. By default, BFD listens to  all VRFs
+    present in the system, including the default VRF. Default VRF must be specified as `default`.
 
->
-> On 12/10/25 08:00, Yoann Congal wrote:
-> > From: Gyorgy Sarvari <skandigraun@gmail.com>
-> >
-> > master was renamed to main
-> >
-> > Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > (cherry picked from commit 8fb37f0f954e234d132468adba2072a70812a818)
-> > Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> > ---
-> >  .../recipes-support/http-parser/http-parser_2.9.4.bb            | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/recipes-support/http-parser/http-parser_2.=
-9.4.bb b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
-> > index d4f76850d3..09e26e9f1e 100644
-> > --- a/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
-> > +++ b/meta-networking/recipes-support/http-parser/http-parser_2.9.4.bb
-> > @@ -12,7 +12,7 @@ SECTION =3D "libs"
-> >  LICENSE =3D "MIT"
-> >  LIC_FILES_CHKSUM =3D "file://LICENSE-MIT;md5=3D9bfa835d048c194ab30487a=
-f8d7b3778"
-> >
-> > -SRC_URI =3D "git://github.com/nodejs/http-parser.git;branch=3Dmaster;p=
-rotocol=3Dhttps"
-> > +SRC_URI =3D "git://github.com/nodejs/http-parser.git;branch=3Dmain;pro=
-tocol=3Dhttps"
-> >  SRCREV =3D "2343fd6b5214b2ded2cdcf76de2bf60903bb90cd"
-> >
-> >  S =3D "${WORKDIR}/git"
->
+* BGP SRv6/MPLS coexistence
+  - Allow MPLS and SRv6 to coexist on the same L3VRF, even for a given prefix. This feature is
+    important in brown fields where some operators want to migrate from MPLS to SRv6 backbone.
+
+* BGP SRv6 locator per VRF support
+  - Ability to choose SRv6 locator per VRF.
+
+* BGP Error handling (RFC 7606) for iBGP peers
+  - Before 10.5.0, once we received a malformed packet between iBGP peers, we always reset the
+    session, and with this release, we handle malformed packets the same way as for eBGP
+    (by withdrawing or discarding the malformed packets).
+
+* BGP IPv6 Link-Local Capability is disabled by default
+  - In 10.4.0, this capability was enabled by default for a “datacenter” profile, but it’s disabled
+    for 10.5.0 and will be backported to 10.4.2 as well. The problem arises when the receiver has
+    configured a route-map with `set ipv6 next-hop prefer-global` and we send only an IPv6 Link-Local
+    address; therefore, it was decided to revert it to be disabled by default.
+
+* BGP BGPID Next-Hop Characteristic
+  - In some cases, the BGP speaker sending a route might encode only a link-local address and no
+    global address. To provide uniqueness in this case, it is sufficient to associate the BGP
+    Identifier and AS Number of the route's sender. The BGP Identifier Characteristic
+    (BGPID) provides a way to convey this information if required.
+
+* BGP EVPN flooding per VNI support
+  - Add an ability to adjust BUM flooding per VNI, instead of just globally. E.g., disable flooding
+    only for an arbitrary VNI.
+
+* BGP RPKI strict mode
+  - RPKI strict mode prevents BGP from establishing a session if no RPKI cache server
+    is connected.
+
+* BGP rejects AS_SET by default**
+  - Until 10.5.0, it was disabled by default, and since RFC 9774 was published, we switched this on
+    by default (to reject).
+
+* BGP has lots of improvements for Graceful-Restart**
+
+* PIM/PIMv6 route-map support to allow users to filter IGMP/MLD joins using source, group, and
+  interface combinations
+
+* Support for multiple SRv6 locators
+  - This extends the SRv6 SID Manager to add support for multiple locators.
+
+* Zebra 16-bit next hop weights support
+  - The weights used in ECMP’s consistent hashing have been widened from 8 bits to 16 bits since
+    the 6.12 Linux kernel.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-protocols/frr/{frr_10.4.1.bb => frr_10.5.0.bb}  | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-networking/recipes-protocols/frr/{frr_10.4.1.bb => frr_10.5.0.bb} (97%)
+
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.4.1.bb b/meta-networking/recipes-protocols/frr/frr_10.5.0.bb
+similarity index 97%
+rename from meta-networking/recipes-protocols/frr/frr_10.4.1.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.5.0.bb
+index ce455ab8bf..b1f863a47b 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.4.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.5.0.bb
+@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
 
 
---=20
-Yoann Congal
-Smile ECS
+-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;tag=frr-${PV} \
++SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.5;tag=frr-${PV} \
+            file://frr.pam \
+            "
+-
+-SRCREV = "88f5c06cbc1cc4d62e1cba3e7791f5cea4179ba5"
++SRCREV = "c41ba202c3f821a43091781181c73772501034ae"
+
+ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+
+@@ -124,7 +123,6 @@ do_install:append:class-target () {
+         echo "d /run/frr 0755 frr frr -" \
+             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+     fi
+-    oe_multilib_header frr/version.h
+ }
+
+ USERADD_PACKAGES = "${PN}"
 
