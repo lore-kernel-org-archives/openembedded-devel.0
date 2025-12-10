@@ -2,109 +2,135 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA7B8D3C934
-	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 17:41:53 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1880.1765388509169686887
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD6AD3C93C
+	for <webhook@archiver.kernel.org>; Wed, 10 Dec 2025 17:49:03 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2043.1765388936075181766
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Dec 2025 09:41:49 -0800
+ Wed, 10 Dec 2025 09:48:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KPjAQ9/e;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-3f0cbfae787so22922fac.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 09:41:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Crfqkvlk;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-7e1651ae0d5so45734b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 09:48:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765388508; x=1765993308; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=5DtChqu9cE/2evdTQ1paqMYy9th3oBiUW3/sWdEZm9o=;
-        b=KPjAQ9/e22wRAZo1tqGlRkEs+OCjE4xz8cBIPYpyfu5y+Q7kIo3urK1zkkKxQU8SGO
-         4RyRkTGnCFMVQUWe+IRAfeKlKIGMIZJfI03SlwTXafkDs9xSHxFWOlzazjPIxtueDbzH
-         aaF8ROa5p4DVG72xT1KQq7XcNJRsaZ9lBtnlfKQmNAu+PRLDoMNf9bj15k1zsCpigXwU
-         Acu926cstVQC/6JrbezMmAkGNDmPIMZnMrlcUh2jqsBuqWwTVIPsjnlSbJQ7SeL73lNd
-         eYla1Uo7j+xi6bQyRB7OT7ld9hKkYUw4bVUQdLkTV3BcI7JEFqhoVApqEUm/0i6rOgtL
-         Blvw==
+        d=gmail.com; s=20230601; t=1765388935; x=1765993735; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WuKWAsirCmETzn7NJA7fCeO6I79QGdn2yWHtzZcDyoo=;
+        b=CrfqkvlkkHUgq6JaS7f5Q13JQfoe84DG2nIdWFeoS+z591dnVUdQRN6bFpArsvy5Tk
+         LPa5VrG0zULNxH7mbr8sWyBaYNxLRqKuR9Yy0TErY7AHr/2tNuYTx0jFRzhpQzFEfU2v
+         tslFjY6dDJe2YnB6GGp/uVQZ7scmKjV08bJw7g37pnAKDueoasp3wn/qVZ3a3E8LFUrQ
+         NziQMQwd451chTTaOiv2kHOJLBCYl9TKrl5kTnOjhUh/GZhvtutaOzFxEldZAwcn+85k
+         m484vEMhAs8+NsVxo2nqyHsQGD8WGdre70R5T+VC1Kp/eBOMQQi4Dtpr40Vs0Ct1Qy1+
+         I51w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765388508; x=1765993308;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=5DtChqu9cE/2evdTQ1paqMYy9th3oBiUW3/sWdEZm9o=;
-        b=cpFMFz9Qd4sGMlCaTuwxQC8B7w0N0HiR+kIUQz8KfiYlx4Do4u9l7EzFuFtepD+tyk
-         VY7EObtJM0fkqmfC7Tvemf6p1+iV5CQOw3GBy9MqFjVJTmjVPMaSIWqNyGYsUuijFO1s
-         E8CkDa9vwdwHWuI5TMbAVzewCxFMjJoysMP/ye8b6D9bRrWi+YPEg95hBBUhOa9Umy8l
-         AbsFlbz7JynTqt/VcdHnaNDjg/06VSbWmLj9I+Jn2jbkPTxtEPEPbxjcRLhIo0n8VV+P
-         sSWsXdNpWdO6gASmdCMs7pPkgpZ43Jbr1qY86bD+/pDRWd3ZLWY9YZufWC5q9wiLefk+
-         7H9Q==
-X-Gm-Message-State: AOJu0YzW2PIhzM36K2CziMBx0OkkXF0nZiVIEiJxzBvh2aXit/ZsEx1l
-	GrfVsn0VaUy7W7D7OitFKCQXyE1O8ySI0u07cXeoKLUuqCJ06AbKHKQ8DGR+Dzk1KY/7pXyBADA
-	yMP1VzEHhIIq54/j09GY7bgM7t9KzayzqPHhYv5Y=
-X-Gm-Gg: AY/fxX67/I+1YhDDG/7zDGJJC8cCqp/ZF87WDWMLcNvO+nEjpiG3hLzzf3UDEvY3Snr
-	zeWpk8/SHtOJnpSL+fO9ZU802CUhSAJuvOrcUhKf7fHaihekeTpA7RZmT7oiEHJ5Dv3Fe5KSVeH
-	UuWwYYmqWKRRH5biKlsLe2w+wNfpgEevhU2HYm0S4IvSbYprtCJ//LOggXq6RhBZZ2JgkKXae+W
-	jnTuJmgKMsO2shRg/YsaA7Al8YTgUpmrFT5Flc7sz4zYzyfgw2h3aDkfao9BEVcxq1H9DLW
-X-Google-Smtp-Source: AGHT+IFmA4KAPtRzb0ghxYL/YZOo6hu2e3faDOvmdujIANfRtaHX78l2rutkdum5szRFh3eQ9IGBx5Vfbo3ze993kCo=
-X-Received: by 2002:a05:6870:9386:b0:3ec:89da:3958 with SMTP id
- 586e51a60fabf-3f5bdcc31a8mr2226299fac.55.1765388508392; Wed, 10 Dec 2025
- 09:41:48 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765388935; x=1765993735;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WuKWAsirCmETzn7NJA7fCeO6I79QGdn2yWHtzZcDyoo=;
+        b=aN5dPD3amBvAtP//IVwaDNJ0y6r/vmfLbSS2LeGrjedFtC3puM8SQ8f6oiGoYv7N9F
+         M4NjFa35l2G/RyEfzzbC3rBq6wjcZ1v6/n+gZMzRbgk3SSXu1zl/bqr4FAUEzVbDowd+
+         WUkeZwBJ1ARXLNJolwYxzgr/xhCWFMKT2FYrwXrox0xGWPVvYQDEhjt1OdJv/+Cr1UbL
+         1Yaprn3+1182h+HAEhi9x4KpGKjKuBDI9D6T3uv/9X8NnSuIMX8PGzIQi+ctG8tSl+CT
+         ZV+XwHte1cFrnjOOmvq36UMklAaFfrOZgSPNSXoj8ARuNRJKnyCaPMsp7JvyxrIeSwEw
+         kDuw==
+X-Gm-Message-State: AOJu0Ywp8DVzRNErt2IDLWwMTJnl3vsIcDEG5wiMqoZ6+SH/PScpxzsz
+	sTnkMeXy4kByfXFkiybEQbY7KbF8Q3SbbGK825ve7Gy5G4uiOcNnX4/N3lFITHLL
+X-Gm-Gg: ASbGncuMn+FLf/68uZyadYx5lIJhMHK0L6UMOBK3gd9zwe0Bijqp7i0Rkz08nqued6f
+	h9GMmESa9ZeV21/ahv4ig58rUmOuCKCqo4jZo4nB25ALaMWO6jkMBxBSf9YnDUno7G8C+Mohm0C
+	AX9pMSVNaDXaeD0y9cNiqvKHDSQTZAQoEYxsjfVEUECtHc1uuluZ7DCms0i55xP5KEygDH19jNQ
+	uSMaIfzOjto6hm0V2z+YzhHcPnCwxzYx+W27d+GiyG5xDy9G2rBDff+63BupyGAts9mmqw+v296
+	xURME4I7RIcVfmSx3Xto83HnFUDtLMLhqLUjITJtR1NXtClPaKQfG9238FrQxWCmzP0XZgnSa3V
+	qkfFXOv6VfcwwhSiM4kpihvhwTyku8bEi99AusBLrDzPoV3GCfVC5fv062NKrUebPWqwG9mWB8u
+	+PEUzMKUg1xrSkwVNBnluG2Uw=
+X-Google-Smtp-Source: AGHT+IEd+biuDx8RFIEwAU9tR/HXRxDeKcYCkivDNwiFGXi63197NWTRND5vwKf86wrleM4QL+jooA==
+X-Received: by 2002:a05:6a20:918e:b0:35f:46d3:f27a with SMTP id adf61e73a8af0-366e0ae7ec5mr3257838637.5.1765388935147;
+        Wed, 10 Dec 2025 09:48:55 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c0c264211cbsm124658a12.11.2025.12.10.09.48.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Dec 2025 09:48:54 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 01/10] openvpn: upgrade 2.6.15 -> 2.6.16
+Date: Wed, 10 Dec 2025 23:18:38 +0530
+Message-ID: <20251210174847.2828731-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20251210141639.1397030-1-ankur.tyagi85@gmail.com> <CAMKF1srzd+BgonkfytGjeT2Hi9XGYHbUxWCAcy4e8djiMt_4dA@mail.gmail.com>
-In-Reply-To: <CAMKF1srzd+BgonkfytGjeT2Hi9XGYHbUxWCAcy4e8djiMt_4dA@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 11 Dec 2025 06:41:36 +1300
-X-Gm-Features: AQt7F2qsO8hklAuSshvRG8sjJhwWO7q-vBN_X1JuwNp9B_E-cTGV2kqHus_1ZMQ
-Message-ID: <CADySD0GowWOE06X=FWpDtTumzSs3u4V3NA7i8Cb=2hc_JiLnCg@mail.gmail.com>
-Subject: Re: [oe][meta-webserver][whinlatter][PATCH 1/7] nginx: switch to libpcre2
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Hongxu Jia <hongxu.jia@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 17:41:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122566
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Dec 2025 17:49:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122567
 
-On Wed, Dec 10, 2025 at 11:06=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrot=
-e:
->
-> Not sure of switching defaults on a release branch is going to pan out.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Thanks for the comment Khem, I am neutral on this one and ok to drop
-it if everyone agrees.
+Code maintenance / Compat changes
+---------------------------------
+- adapt to new "encrypt-then-mac" cipher suites in OpenSSL 3.6.0 - these
+  need special handling which we don't do, so the t_lpback self-test
+  failed on them.  Exclude from list of allowed ciphers, as there is no
+  strong reason today to make OpenVPN use these.
+- fix various compile-time warnings
 
->
-> On Wed, Dec 10, 2025 at 6:16=E2=80=AFAM <ankur.tyagi85@gmail.com> wrote:
->>
->> From: Hongxu Jia <hongxu.jia@windriver.com>
->>
->> NGINX 1.22 and later supports PCRE2 [1]
->>
->> [1] https://github.com/nginx/nginx/commit/c6fec0b027569a4e0b1d8aaee7dea0=
-f2e4d6052b
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> (cherry picked from commit 3e308aacb03631eb1ed27baad7fc28f21075e3a4)
->> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
->> ---
->>  meta-webserver/recipes-httpd/nginx/nginx.inc | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserv=
-er/recipes-httpd/nginx/nginx.inc
->> index bcc384bd8a..fe23eb397b 100644
->> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
->> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
->> @@ -9,7 +9,7 @@ LICENSE =3D "BSD-2-Clause"
->>
->>  SECTION =3D "net"
->>
->> -DEPENDS =3D "libpcre zlib"
->> +DEPENDS =3D "libpcre2 zlib"
->>
->>  SRC_URI =3D " \
->>      http://nginx.org/download/nginx-${PV}.tar.gz \
+Documentation updates
+---------------------
+- fix outdated and non-HTTPS URLs throughout the tree (doxygen, warnings,
+  manpage, ...)
+
+Bugfixes
+--------
+- Fix memcmp check for the hmac verification in the 3way handshake.
+  This bug renders the HMAC based protection against state exhaustion on
+  receiving spoofed TLS handshake packets in the OpenVPN server inefficient.
+  CVE: 2025-13086
+- fix invalid pointer creation in tls_pre_decrypt() - technically this is
+  a memory over-read issue, in practice, the compilers optimize it away
+  so no negative effects could be observed.
+- Windows: in the interactive service, fix the "undo DNS config" handling.
+- Windows: in the interactive service, disallow using of "stdin" for the
+  config file, unless the caller is authorized OpenVPN Administrator
+- Windows: in the interactive service, change all netsh calls to use
+  interface index and not interface name - sidesteps all possible attack
+  avenues with special characters in interface names.
+- Windows: in the interactive service, improve error handling in
+  some "unlikely to happen" paths.
+- auth plugin/script handling: properly check for errors in creation on
+  $auth_failed_reason_file (arf).
+- for incoming TCP connections, close-on-exec option was applied to
+  the wrong socket fd, leaking socket FDs to child processes.
+- sitnl: set close-on-exec flag on netlink socket
+- ssl_mbedtls: fix missing perf_pop() call (optional performance profiling)
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 351ac662131944f4c40ea8410a0077cc715053a2)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ .../openvpn/{openvpn_2.6.15.bb => openvpn_2.6.16.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.6.15.bb => openvpn_2.6.16.bb} (98%)
+
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
+similarity index 98%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
+index 8a88282cd5..88f564313f 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.6.15.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+ 
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ 
+-SRC_URI[sha256sum] = "e35513ee15995e3c71adfd8891b9f33522896c70b3baa2ed9a23c7a42c4d7bde"
++SRC_URI[sha256sum] = "05cb5fdf1ea33fcba719580b31a97feaa019c4a3050563e88bc3b34675e6fed4"
+ 
+ CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ 
 
