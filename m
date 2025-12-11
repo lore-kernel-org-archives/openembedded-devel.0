@@ -1,187 +1,307 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EECEED41C3C
-	for <webhook@archiver.kernel.org>; Thu, 11 Dec 2025 14:05:32 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9907.1765461930058827551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CC92D41D6C
+	for <webhook@archiver.kernel.org>; Thu, 11 Dec 2025 17:16:14 +0000 (UTC)
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15030.1765473369162074340
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Dec 2025 06:05:30 -0800
+ Thu, 11 Dec 2025 09:16:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ID388cCF;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=QOl5gJv3;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5BBCIiln1593213
-	for <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 14:05:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=I/iMiH+SlIBcpg72MbyxWD6jgvrxmJsRYbk
-	4AUh9FUI=; b=ID388cCFa+2APWD3C/MT+LYqYPNrslbAyATzznOSPDS3zOhG4a2
-	US+nLttrVUcjxUeFINMYLWNynR8DOtEAaaOkSM/FI30K4ZHhgqnt7LrpbAnqBG2h
-	7bT9wON3VcQavH69I4ZKgDEv6tvceLzeJdBuKMfydjOa/l+WecI+a6NYrPnTFzCj
-	SqOYwuE0sdiSNs+vO3vZsCIqlWU/ch4LbmfBVDZQUaXXTZCG5mOlAaglkUXKRIfv
-	CACFl/uIE+TpkLqdhjlUrES9IXn99fqszaIUknVCVmpCcws+A4nIhM5VgO3f3xZ7
-	ScttPW85tKRrFguSdiq6waUVekbjXuJrgFg==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ays4qhb9y-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 14:05:28 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-34943cc3221so136674a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 06:05:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ncb8IaZy;
+ spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-6446704997cso348282d50.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 09:16:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1765461928; x=1766066728; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I/iMiH+SlIBcpg72MbyxWD6jgvrxmJsRYbk4AUh9FUI=;
-        b=QOl5gJv30i9vxMHz5AGY+LiAnKCXwHsaWZPqJI3wkRq1jgLygoG8XNHi6SByQCHBuM
-         aCdfl2GAbqMTtlEK9hp74tcYzwYJjFAvzZN53F5vwxcNTWZ0vs3gIygNYxI31RATjpy2
-         nslJjAmYlfu2kyd5bm/riDewWRA415Qg86XfoQgbY27ukQFwHP1FKpHuBg63+G8Q8v+x
-         Cg1iPK0QzaQcUr3LE4fLXQ5un81zc1reatwA2xIzYGJnvpcRxIuMOS0GvRYxpM5Wz4kZ
-         529+3bQBlKcDtBIRr8YskKpD1IdOGC8xugO/QuJXpRcU2LAs2ibLLF958WyikHfL23Bj
-         VeZw==
+        d=gmail.com; s=20230601; t=1765473368; x=1766078168; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=UmNOoZsNrvCDZBKPmPuoNrf0j1jQkH4n9dmf84t4u1o=;
+        b=Ncb8IaZyn6YuHT/1cD4rbgeJkfoFK5/El39NPT9iyBC8Wcw5Cy+dIB32G9QR+dlCrJ
+         PwWbawGFiWjRLvPOAVrCB2hZm5QG07Bcl8fQbH0Yg3SADnaNd8wkyZhtmmkkKyKXXhe8
+         IqVkGcs32WhFfOZtUiS88HMjwPAykvEEnsPq/p8/rVVMDJduWhs89yB4nZ2LP1xffnsK
+         9UMC+S/5jcO0rbCX88Dv1a4CuMsNsTPEFINkjIeAL9g8MTo+9vfLEnUpwtiuxu4yrQu1
+         MXQb8p1vZYg3NuiCmBGz3gHG81li3YA4vuXUcHciAM0jAa5LRHHGN7doXIvkGGAqfXYl
+         xeEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765461928; x=1766066728;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=I/iMiH+SlIBcpg72MbyxWD6jgvrxmJsRYbk4AUh9FUI=;
-        b=mnrB+YCeBH0JToFFyMnmRduEAOCl0+4z22zBwFfL8BQfraquT53fx7gniql/BPYwVD
-         fWUROHCDxxeDitdyrrYFxY5zhnJx66yVk7UMBpK1RSAtXI+DAK1dBkh0nRVDw7Ygx+LS
-         FhSpj/X+x99u7gxGCVqoRTIz2F7O8MOfqbJadIoTqkflJ6WR9NaIbFo7KyvV7+2n5DxP
-         okomlbJMjfBbbJUTf/m4ybwGkfx0ZS5lYhe9pWfDesG6jsI87dEMEhdDIXRkjR7oTYrY
-         i927i5luvSv52McZoBLrO8ama282IxnEMNpShJ7EYY7AbV1SbPoXI8usMX66/Lgk4t8+
-         6VtQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUWdaqXX+URpS7YFPw+EzkNPKZaFAJgCZ40VyYqVmD8G0lcap7+7d/6VX1Q/zMusWeslI3B1sSEiijiPurQfDsvYuM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzJTm3SNndtdX5HT8gSKmMRxqJ8VAiZoOzbdfVEKRGtOCSL7eE3
-	BSk9XQA9n7Bqm3T910ewrRDcX31jOJORMWE2YvOlj643bZwOjIdu0q+5QMxJjljGk2ZfInB0EHt
-	MDUatjjM5kN2G0EGEtZQFWqAhJ29ixpbVLghhQm4cTEpSBkIhpXCWS4b9q3eyOxbvzerYVOKTfJ
-	KH8fbcoGz4
-X-Gm-Gg: AY/fxX5RYuDDJAydLxezoh9TAml6S9FvrkRNQYIMq5yUc9ydSpBdAFxoHlUmi0aJCNG
-	6dKVBXjf3PtgVvuqLrPHmVCUO1mQNzqjBKus4QysRjVcoOxVEgtGHWiRGRTkmd4PKvBZHLZQ3UC
-	bJEJCGWNKaTQXWFTJecGmXx8vkZp9Oc+jbgwk7lhEV0FbfAy5KqF6RoZ0kti+blQ1cZsYsCdFno
-	/poJ9wAUbThZkqXbvBL+rQAkIVIBgrjPZdzLCVAievm+mA98rFMf7vC9/hx/XvtpGOP4v5LWbJd
-	TJ2VaIvrwp8gRhZafIy/xbJu0D2M8T7rNdWzNyGYNx6wlrcyN3cdReg7VyMyZcF/NM6DV44W4OA
-	Ucntf0ihUpLU2ImA9tcsGH7De6wxXWyy0pLoiOSZS
-X-Received: by 2002:a17:90b:2541:b0:32e:4924:6902 with SMTP id 98e67ed59e1d1-34a72809b50mr6175475a91.3.1765461927639;
-        Thu, 11 Dec 2025 06:05:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGqut5eXGyqu2kRI3KyTItKBQfSNjIuKTQ4+bgYTYuZ6BfmK1MVhkNhpfT/hs8/wQIZlUNX/w==
-X-Received: by 2002:a17:90b:2541:b0:32e:4924:6902 with SMTP id 98e67ed59e1d1-34a72809b50mr6175280a91.3.1765461925799;
-        Thu, 11 Dec 2025 06:05:25 -0800 (PST)
-Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c0c2bfa0845sm2508050a12.28.2025.12.11.06.05.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Dec 2025 06:05:25 -0800 (PST)
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
-Subject: [PATCH 00/10] Scarthgap pull request
-Date: Thu, 11 Dec 2025 19:35:10 +0530
-Message-ID: <cover.1765460789.git.anuj.mittal@oss.qualcomm.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1765473368; x=1766078168;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UmNOoZsNrvCDZBKPmPuoNrf0j1jQkH4n9dmf84t4u1o=;
+        b=PCUBgEg2lmzs/VC8CzU5rjxjHw2s7REJb+FY+MrVpE72OEzOkn2G86ASS93NNRhH8x
+         Y/bz6s3FmpRJrshjQ8Kacx8QEPt+AO7LWmZ7ql1eZRsDo7IafYBcBVAJMCY3h9O3F24f
+         iW7+tBQhSrRIrksUXhlUdmGfbLoenI8HX/itXSlcIWfzxb6/yKaFMUu/+hVpHxs/NLoV
+         EuZwltkBrBJ6PwI4bTparvLqX5bXDlSkUYBQsCI9qcWdEgCz+jUTx7BWapgLNwg+KtM5
+         KJAZEM2vBJoGxmMdDyI/72EfssGzvQ8lBWiMxI84kuvcwr5r5LNmIVogciePSpaqnrKG
+         cmUg==
+X-Gm-Message-State: AOJu0YzoYfjyfiXqQVbNeLwnlRs08Py8BISVcvU2LCBtzIyfno4FeA9g
+	kLIvoPUvTT4alwOpAZXZskV2PS+rJ2JsEEvyTq0fWf68UaDS95LHaBxiKQt0Q8qW/s5ckvClrqV
+	B2G3rW23xuBmV+VoCrDWd2X06azLrri0=
+X-Gm-Gg: AY/fxX7CE8Ln8BIEgqRjGTg7fKr9t67dhHfBIhHsilrc9ctX21Q8d77IbkK1iCo/tCX
+	SK+SWg8SKLojuR8fu7UiCXJkcZ6Pz9xbLovDYAxNQwnwDFcc1dCY1cQFdmmyn5csuIUu9RJpKJN
+	lQpetJV//bsyJxzOPQyBHzmGMijczS2pZo7xiO25/4gTr9p5P12ckyORtmOhJa2A26MhVxeO+VC
+	dyEWRY6jnpqip2tN//KfILJ5b7P0HeLPVkoO3ETOeBvAjwI9KTPxh+1190MfHYAzSq1JwVjlJlx
+	tYXqEF5ezz6yIiKGuHx9t9KNS8T+yJRhCU5RKE+fGi/pRfCun20IUdaWV4U7w9Ui9okvGuZyOXy
+	mQWO3fhL2ukti5waDmbu9yO+SbACpMUVHTyOpnRaTipYsqg==
+X-Google-Smtp-Source: AGHT+IEM2grrk/roowXN9NMgGmLAnJLmITcsd10pwY7A69+lt9AkbMJ8G4Nul0nt+jFy9p0VQDdvazt6dbP/d0zz2D4=
+X-Received: by 2002:a05:690e:1486:b0:644:4625:8868 with SMTP id
+ 956f58d0204a3-6446e938042mr6354693d50.31.1765473368110; Thu, 11 Dec 2025
+ 09:16:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 9kfHQuoAgGIMhmG_B1QgBKVvuAVnCXBh
-X-Proofpoint-ORIG-GUID: 9kfHQuoAgGIMhmG_B1QgBKVvuAVnCXBh
-X-Authority-Analysis: v=2.4 cv=B/S0EetM c=1 sm=1 tr=0 ts=693acfa8 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=wP3pNCr1ah4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=iGHA9ds3AAAA:8 a=Q4-j1AaZAAAA:8 a=F0GqM6MxzMfmm7JvySoA:9
- a=iS9zxrgQBfv6-_F4QbHw:22 a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjExMDExMCBTYWx0ZWRfX5Uh+aTiP8OXT
- Iy3jGZwTXIRKRAvJyPaq/BgbI/gbN/PhqZc5eQOQXF5AuL/1CPQpH/IQ/z/RHA1jck9qn/mvh2j
- Yh24tYvl9Gh5fpXYgl7Wrw/WM+/PmIW9FqlmMR5cnO2mvKU4lg2EFFTTLj3OEUMBzmsErzsthVV
- QUN08lbR8cv/P57QrRswWQT6QydyjK7QIi+rUXvh2DhF91+NGef9ZqR9LDOcKTh2XPhvIgV0vm8
- GhDuRb4tIvx91TyxtjkOHDf+5B43SW0q1aO6A7j/1vGxoNRDTHgoAjzVLjfyU2fqTfuhyTcH+1u
- bRbCrR22wa9q0OqAjxOoM0BnBB/2NeqCPDQ/9BkaPGe+2GQbYOUxjndAx/ZPfRRa6fTmjj8AH/P
- D5bu5uQ2X5I+jDIZzm0vAe7DGWzfiA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2025-12-11_01,2025-12-09_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 bulkscore=0 spamscore=0 clxscore=1015
- impostorscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512110110
+References: <20251203143659.736329-1-pkj@axis.com> <CAMKF1spc9tibcU_NAzuH-8YJR9O9Lckfat9my0BcP5jZYmQS0g@mail.gmail.com>
+ <DB5PR02MB10213036046260AF9962E6583EFA1A@DB5PR02MB10213.eurprd02.prod.outlook.com>
+In-Reply-To: <DB5PR02MB10213036046260AF9962E6583EFA1A@DB5PR02MB10213.eurprd02.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 Dec 2025 09:15:56 -0800
+X-Gm-Features: AQt7F2qeRqe4KrP-MBFsHnee0PybqPAk-OXlv3Nb94rKL_wGSspwER2JRXqHDwA
+Message-ID: <CAMKF1so=qfg9k+EpAkSpn9Rdqr7F7nAcF66kfONfbQ54tOSrPA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/1] Revert "proj: Fix do_package QA issue
+ for unshipped bash-completion files"
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000f7838d0645b04c14"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 14:05:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122586
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Dec 2025 17:16:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122587
 
-Please merge these changes in scarthgap.
+--000000000000f7838d0645b04c14
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1172
+On Thu, Dec 11, 2025 at 5:57=E2=80=AFAM Peter Kjellerstedt <
+peter.kjellerstedt@axis.com> wrote:
 
-The following changes since commit 7ed4330bcf1ecd4aa34bfbe1fd7079381b62b1e7:
+> This can be integrated now as the fix for OE-Core has been applied.
+>
+>
+Thanks for the nudge
 
-  net-snmp: Update Upstream-status in the net-snmp-5.9.4-kernel-6.7.patch (2025-12-05 17:46:29 +0530)
+>
+>
+> //Peter
+>
+>
+>
+> *From:* Khem Raj <raj.khem@gmail.com>
+> *Sent:* den 3 december 2025 17:53
+> *To:* Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> *Cc:* openembedded-devel@lists.openembedded.org
+> *Subject:* Re: [oe] [meta-oe][PATCH 1/1] Revert "proj: Fix do_package QA
+> issue for unshipped bash-completion files"
+>
+>
+>
+> Thanks, please send a reminder once it's merged in OE-core lest I forget
+> about it.
+>
+>
+>
+> On Wed, Dec 3, 2025 at 6:35=E2=80=AFAM Peter Kjellerstedt via
+> lists.openembedded.org <peter.kjellerstedt=3Daxis.com@lists.openembedded.=
+org>
+> wrote:
+>
+> This reverts commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d.
+>
+> Since this recipe inherits bash-completion, adding
+> ${datadir}/bash-completion to FILES:${PN} should not be needed (in
+> addition to being the wrong thing to do as the files are expected to be
+> packaged in the ${PN}-bash-completion package). The reason the problem
+> addressed in commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d turned up
+> is due to the recent change to the bash-completion bbclass, where it
+> started to use PACKAGE_BEFORE_PN. This clashed with the lib_package
+> bbclass, which used to set rather than add to PACKAGE_BEFORE_PN, and
+> since it is inherited after bash-completion, it overrid what
+> bash-completion does.
+>
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> ---
+>
+> I have sent a patch to openembedded-core to correct lib_package.bbclass,
+> and it obviously needs to be accepted before this is integrated.
+>
+>  meta-oe/recipes-navigation/proj/proj_9.7.0.bb | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
+> b/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
+> index eb9fe46f30..2a41f1ec52 100644
+> --- a/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
+> +++ b/meta-oe/recipes-navigation/proj/proj_9.7.0.bb
+> @@ -12,9 +12,7 @@ inherit bash-completion cmake lib_package pkgconfig
+>
+>  EXTRA_OECMAKE =3D "-DBUILD_TESTING=3DOFF"
+>
+> -FILES:${PN} +=3D " \
+> -       ${datadir}/proj \
+> -       ${datadir}/bash-completion"
+> +FILES:${PN} +=3D "${datadir}/proj"
+>
+>  BBCLASSEXTEND =3D "native"
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122277):
+> https://lists.openembedded.org/g/openembedded-devel/message/122277
+> Mute This Topic: https://lists.openembedded.org/mt/116594502/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-are available in the Git repository at:
+--000000000000f7838d0645b04c14
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-  https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
-  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
+<div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Thu, Dec 11, 2025 at 5:57=E2=80=AFAM Peter Kjellers=
+tedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis.com">peter.kjellerstedt@=
+axis.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
 
-Ankur Tyagi (3):
-  python3-django: upgrade 5.0.11 -> 5.0.14
-  smarty: update CVE_PRODUCT
-  libavif: patch CVE-2025-48174
 
-Hitendra Prajapati (1):
-  wireshark: fix CVE-2025-13499
 
-Peter Marko (1):
-  nftables: remove python dependency from main package
 
-Sudhir Dumbhare (1):
-  hdf5 1.14.4-3: fix CVE-2025-2912
 
-Valeria Petrov (1):
-  apache2: upgrade 2.4.65 -> 2.4.66
+<div lang=3D"SV" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:break-wo=
+rd">
+<div class=3D"m_8835890952487668913WordSection1">
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#943634">This can be integrated=
+ now as the fix for OE-Core has been applied.</span></p></div></div><div la=
+ng=3D"SV" link=3D"blue" vlink=3D"purple" style=3D"word-wrap:break-word"><di=
+v class=3D"m_8835890952487668913WordSection1"><p class=3D"MsoNormal"><span =
+lang=3D"EN-US" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#943634"><u></u><u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#943634"><u></u></span></p></di=
+v></div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Thanks f=
+or the nudge=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+ 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div lang=3D"SV" lin=
+k=3D"blue" vlink=3D"purple" style=3D"word-wrap:break-word"><div class=3D"m_=
+8835890952487668913WordSection1"><p class=3D"MsoNormal" dir=3D"auto"><span =
+lang=3D"EN-US" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sa=
+ns-serif;color:#943634">=C2=A0<u></u></span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#943634">//Peter<u></u><u></u><=
+/span></p>
+<p class=3D"MsoNormal"><span lang=3D"EN-US" style=3D"font-size:11.0pt;font-=
+family:&quot;Calibri&quot;,sans-serif;color:#943634"><u></u>=C2=A0<u></u></=
+span></p>
+<div style=3D"border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm =
+4.0pt">
+<div>
+<div style=3D"border:none;border-top:solid #e1e1e1 1.0pt;padding:3.0pt 0cm =
+0cm 0cm">
+<p class=3D"MsoNormal"><b><span lang=3D"EN-US" style=3D"font-size:11.0pt;fo=
+nt-family:&quot;Calibri&quot;,sans-serif">From:</span></b><span lang=3D"EN-=
+US" style=3D"font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"> =
+Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.kh=
+em@gmail.com</a>&gt;
+<br>
+<b>Sent:</b> den 3 december 2025 17:53<br>
+<b>To:</b> Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@axis=
+.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
+<b>Cc:</b> <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
+get=3D"_blank">openembedded-devel@lists.openembedded.org</a><br>
+<b>Subject:</b> Re: [oe] [meta-oe][PATCH 1/1] Revert &quot;proj: Fix do_pac=
+kage QA issue for unshipped bash-completion files&quot;<u></u><u></u></span=
+></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<p class=3D"MsoNormal">Thanks, please send a reminder once it&#39;s merged =
+in OE-core lest I forget about it.<u></u><u></u></p>
+</div>
+<p class=3D"MsoNormal"><u></u>=C2=A0<u></u></p>
+<div>
+<div>
+<p class=3D"MsoNormal">On Wed, Dec 3, 2025 at 6:35<span style=3D"font-famil=
+y:&quot;Arial&quot;,sans-serif">=E2=80=AF</span>AM Peter Kjellerstedt via
+<a href=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembed=
+ded.org</a> &lt;peter.kjellerstedt=3D<a href=3D"mailto:axis.com@lists.opene=
+mbedded.org" target=3D"_blank">axis.com@lists.openembedded.org</a>&gt; wrot=
+e:<u></u><u></u></p>
+</div>
+<blockquote style=3D"border:none;border-left:solid #cccccc 1.0pt;padding:0c=
+m 0cm 0cm 6.0pt;margin-left:4.8pt;margin-right:0cm">
+<p class=3D"MsoNormal" style=3D"margin-bottom:12.0pt">This reverts commit 1=
+175d5c8c13d73568d4ab55a3cf628456fcc1a7d.<br>
+<br>
+Since this recipe inherits bash-completion, adding<br>
+${datadir}/bash-completion to FILES:${PN} should not be needed (in<br>
+addition to being the wrong thing to do as the files are expected to be<br>
+packaged in the ${PN}-bash-completion package). The reason the problem<br>
+addressed in commit 1175d5c8c13d73568d4ab55a3cf628456fcc1a7d turned up<br>
+is due to the recent change to the bash-completion bbclass, where it<br>
+started to use PACKAGE_BEFORE_PN. This clashed with the lib_package<br>
+bbclass, which used to set rather than add to PACKAGE_BEFORE_PN, and<br>
+since it is inherited after bash-completion, it overrid what<br>
+bash-completion does.<br>
+<br>
+Signed-off-by: Peter Kjellerstedt &lt;<a href=3D"mailto:peter.kjellerstedt@=
+axis.com" target=3D"_blank">peter.kjellerstedt@axis.com</a>&gt;<br>
+---<br>
+<br>
+I have sent a patch to openembedded-core to correct lib_package.bbclass,<br=
+>
+and it obviously needs to be accepted before this is integrated.<br>
+<br>
+=C2=A0meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" targ=
+et=3D"_blank">proj_9.7.0.bb</a> | 4 +---<br>
+=C2=A01 file changed, 1 insertion(+), 3 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.b=
+b" target=3D"_blank">proj_9.7.0.bb</a> b/meta-oe/recipes-navigation/proj/<a=
+ href=3D"http://proj_9.7.0.bb" target=3D"_blank">proj_9.7.0.bb</a><br>
+index eb9fe46f30..2a41f1ec52 100644<br>
+--- a/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" targ=
+et=3D"_blank">proj_9.7.0.bb</a><br>
++++ b/meta-oe/recipes-navigation/proj/<a href=3D"http://proj_9.7.0.bb" targ=
+et=3D"_blank">proj_9.7.0.bb</a><br>
+@@ -12,9 +12,7 @@ inherit bash-completion cmake lib_package pkgconfig<br>
+<br>
+=C2=A0EXTRA_OECMAKE =3D &quot;-DBUILD_TESTING=3DOFF&quot;<br>
+<br>
+-FILES:${PN} +=3D &quot; \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0${datadir}/proj \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0${datadir}/bash-completion&quot;<br>
++FILES:${PN} +=3D &quot;${datadir}/proj&quot;<br>
+<br>
+=C2=A0BBCLASSEXTEND =3D &quot;native&quot;<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122277): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122277" target=3D"_blank">
+https://lists.openembedded.org/g/openembedded-devel/message/122277</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116594502/199=
+7914" target=3D"_blank">
+https://lists.openembedded.org/mt/116594502/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">
+openembedded-devel+owner@lists.openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" target=3D"_blank">
+https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"m=
+ailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<u></u><u></u></p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
 
-Vijay Anusuri (1):
-  proftpd: Fix CVE-2023-48795
+</blockquote></div></div>
 
-Viswanath Kraleti (1):
-  gflags: switch Git branch from master to main
-
-Wang Mingyu (1):
-  corosync: upgrade 3.1.9 -> 3.1.10
-
- .../libavif/libavif/CVE-2025-48174_1.patch    |  27 +
- .../libavif/libavif/CVE-2025-48174_2.patch    |  31 +
- .../libavif/libavif/CVE-2025-48174_3.patch    |  27 +
- .../libavif/libavif/CVE-2025-48174_4.patch    |  72 ++
- .../libavif/libavif_1.0.1.bb                  |   7 +-
- .../proftpd/files/CVE-2023-48795.patch        | 785 ++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.7f.bb |   1 +
- .../corosync/corosync/CVE-2025-30472.patch    |  69 --
- .../{corosync_3.1.9.bb => corosync_3.1.10.bb} |   5 +-
- .../recipes-filter/nftables/nftables_1.0.9.bb |   2 +
- .../wireshark/files/CVE-2025-13499.patch      |  45 +
- .../wireshark/wireshark_4.2.14.bb             |   1 +
- .../recipes-support/gflags/gflags_2.2.2.bb    |   2 +-
- ...atch => CVE-2025-2913-CVE-2025-2912.patch} |   3 +-
- meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   2 +-
- .../recipes-support/smarty/smarty_4.4.1.bb    |   2 +
- .../python3-django/CVE-2025-26699.patch       | 100 ---
- ...ngo_5.0.11.bb => python3-django_5.0.14.bb} |   4 +-
- .../{apache2_2.4.65.bb => apache2_2.4.66.bb}  |   2 +-
- 19 files changed, 1007 insertions(+), 180 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch
- delete mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
- rename meta-networking/recipes-extended/corosync/{corosync_3.1.9.bb => corosync_3.1.10.bb} (94%)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2025-13499.patch
- rename meta-oe/recipes-support/hdf5/files/{CVE-2025-2913.patch => CVE-2025-2913-CVE-2025-2912.patch} (94%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch
- rename meta-python/recipes-devtools/python/{python3-django_5.0.11.bb => python3-django_5.0.14.bb} (65%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.65.bb => apache2_2.4.66.bb} (99%)
-
--- 
-2.52.0
-
+--000000000000f7838d0645b04c14--
 
