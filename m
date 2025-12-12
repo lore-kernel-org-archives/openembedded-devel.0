@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D01E3D4920F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D065DD49213
 	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 11:58:04 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11037.1765540684556868213
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11034.1765540682365672324
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Dec 2025 03:58:04 -0800
+ Fri, 12 Dec 2025 03:58:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DkAGmLgd;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-7b8e49d8b35so1416945b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 03:58:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KEZh7SK0;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-7bb710d1d1dso1565556b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 03:58:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765540684; x=1766145484; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765540681; x=1766145481; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5U80qVxHhT2MXMwTnRPgI1Eqb4r9hIHQAX7+md0de3o=;
-        b=DkAGmLgdBmYpsJBfE9uftSdcyNjTFIQMvCINcJr2tpsRC6Pw8W69XLMNG4b8rY5EPK
-         BIxnkiLdr5VzWcbD5jes+HWI46bXWrBXQ5kXCSJMqFqj+DiWEhbTjF3XkW/H+LQKowvE
-         eBv6kYy6tDHzqyREOv9KziW73c8eJbqS5ujxUPNEuST8oJNlb1Z/PSRiCfpTnnwGq+dJ
-         9X/D1mzxs9Tl0Zw9dPN/exCsDnufKFrpO0iRQGIFeu6i+yInm7eZ33EgOZTRv0O2Xv8D
-         pgxERu5JYWypEpP+lvYlUmKhYUKBuMjxhiEin718njSZHOBuz/wkVTM+cMPV4ycQ0BOb
-         IuDQ==
+        bh=FzomywuGiiy3DMbtjjueyzdnWw6uQ8BBZ/fPwuMd708=;
+        b=KEZh7SK0Uqn8/YwLUrUKObiYTT2Vgl1inUzcw3q0n0QcIdqFdlBmHWGvC+F3NOu0z6
+         TN8aokD4p3zUY2W2uw0bCl76nZEn2GF6F80abt3b6fzL3bayAb6V6XYCX0/V8kWUBZbV
+         hI4Oidzl/zUNnIlT9IrEXOSNQHClVvYhvG35Ft6945aAt4C8k8H9nyU6QgXC5aOw0MtD
+         nJh15QguA03cIsYVEVzcDluZu2UxIEpZ4b/OIEcGv35Vxr/MA8kicg4+FxXktNEXh1y8
+         aA+bbEL77qxNJvykqlJXx7KSrObV7PFqrMcmMGxyuEs4wibEZZNH4nCEYRJs/QefCFE/
+         yyNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765540684; x=1766145484;
+        d=1e100.net; s=20230601; t=1765540681; x=1766145481;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=5U80qVxHhT2MXMwTnRPgI1Eqb4r9hIHQAX7+md0de3o=;
-        b=IrsJ+/1cIdZW52q+4PPVRA37O9eMM5QYOWHOQxUgGh4SQpKMymm2GLUSHn+Xc0bJ3S
-         fgmGdpKp9kgBLGSR25YPFjqGAcWkp0MKM3UXzuafM37muFqzzaLTy5TzIgnX4wrwZ2w3
-         /EZmETUeVqu8J7zll+OBDKUmNQ4YQqcsJaLmZZaLQgmBRahfq+/dwo9bTRquVz+JhVf5
-         m/ZmPdBv1gXIa0OvmYfgaLUL3rBer6x05UyCucKLUyeEs4O1JJ/LYzZVatsLg6lrFncd
-         cRxAnCk7ssNM0oGdDsfAJYOvQ7kFQki86e0wgq5vORhYC+E2uii/va4ncr460OFfQqpI
-         O1Nw==
-X-Gm-Message-State: AOJu0Yy0Ql7q6swbDGT4sSpI1eUHKhVDsza53lSMIVU6iHao2Y8ZPCk1
-	g1YGW1gJxjbrBvP4tVM1y/0UaIV/sYQHwdE5JcEyHQACRVGQutDymQj2oEhqEg==
-X-Gm-Gg: AY/fxX46DOUxesDd6VUNpwrNrnPJEyk1DN2IKNUJI7iJCXeu6sj4UC+26yvJWS+7jH2
-	oxJMSk5dkHpT4VwKvvy9tvvBu0CflfbWk0PK/i+GOOL9b1DkSFeYquIi7UxY92F9hQxJGsfu4sp
-	GH3dPjEOXqLscDptbAfLOA7i1rEZU2garnpL1aRBeZEOwCUzOfmgnaoHPHGhD8ZSGWwiiFa0VEX
-	qbEfq6YzsZ+txAwdFXOMm/SSbrmekpkeeB/Abw/rgSVOwvJJTjXg2q6dMSfxnYB5J0uBvVtOpZZ
-	NE9Ra7UgHeI6Ug6gT+3DMatE6WXaIJBy64URYxLE9CdhjU56C4GtiLBT64eX/6VHPJoHUEdRmJj
-	0HabqPLSnr/ehmuhcmdzhA0fkUYNrVcx5jEbUgXLKr2ezf3ONGA8dbdMEd7vnYSMr8aqUT+0FRE
-	/aXUD8ZcNWMrGRohtcgNBZ6u0=
-X-Google-Smtp-Source: AGHT+IFaTZVX9QmzrFBQTZMx2Oww38RPiXOvtZlV9dq0fJ3fPDpjt0vNP+0Pnr47p8aN0nStY2TsZw==
-X-Received: by 2002:a05:6a00:414b:b0:7a9:b9e0:551c with SMTP id d2e1a72fcca58-7f667936469mr1875276b3a.21.1765540683794;
-        Fri, 12 Dec 2025 03:58:03 -0800 (PST)
+        bh=FzomywuGiiy3DMbtjjueyzdnWw6uQ8BBZ/fPwuMd708=;
+        b=wezervEUcSiGW/n/+5ilX3LAyhY7ShkbMPv4EGl6EUpVNA2Pbe9lm+K3aTvx41t7yJ
+         ln17oZB54KIZwmq+J9th/xqxn2TXyr5Oht6ha+RN/0ImW+OSwMHCiJussWa3gZSmQpQN
+         8AwutXZRskTjAqzIdiBxS81bXGdDgLqVsWy6HstRZ6cIpiOqTUGxjVreDKPSeF3p9wgz
+         YWfzWRXYJ3VSdu375OeDYVBImuqnEvqe2DEZuZkx+VaizC9ZEFdByQXoZn5sre+YtR/v
+         yeXyOUa85nJMhz3GVGavjmQ4Y9qhBjy7XtxZlsQxKel/17X0i+FTIdOIrHyAdRXVrlig
+         cifg==
+X-Gm-Message-State: AOJu0YyBlTOSpoP1FXVL6GSi/rsuLcBjEtEulKjcdlPNO++Yb+mZEd8V
+	clm9ny2ckZyiDK5UjO631S3VcwsYjQyjzZnxS1G1B2RexCBJR0VrJB6KOTusOA==
+X-Gm-Gg: AY/fxX5uzdsrj47w56y3I8XwR9oCK2wlHbfGnqpDfYR5hYcu6P/9zVqb96YUc0BB6nE
+	YoFQ8rjxBnHGT5YJeu2sMQQlEQoNCvz57kARekd65Fd50t+SC/1tiyR4V1WKL4Oz6X/+xItrudL
+	Dnoxdd+Z6nCNWYy7/ixHs9NHHPJdz+ireVoMXRcJPCYZEUBmLLxl+hrEK0AXOMoS7stizzUPSRD
+	IXDGiMhJ4qzklr/FQ+S+pxgrZTIxul2+zujXxJ+IHrvrlm00dM4v0E5YckCEFj4v8FQMD4WMQtA
+	uMe3SQgzrkHK1WTYnInteUOSx7/1hYyleVK4Ft1XlCYt8N41+KutuxbDoKCGUBm/mWAemWvegN8
+	bMOI3VxAiPFC5t6YIUtBthLP49GhOrdCMGsh1ONnOZVvvWdAKk1gS0brvb0uOZSEG4rSMIYByiM
+	+Av6PHN5wNct4EWwXURmFYfDg=
+X-Google-Smtp-Source: AGHT+IFHo3eGykseysbKqxwdNYVWTKJvqzT9nn1bRM4ZUGZ4DVAgMpYGWmf5Xf7lZcO/eZaRofT+Ww==
+X-Received: by 2002:a05:6a00:6caa:b0:7e8:450c:619a with SMTP id d2e1a72fcca58-7f6696a343cmr1608241b3a.49.1765540681564;
+        Fri, 12 Dec 2025 03:58:01 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c27771b3sm5163198b3a.27.2025.12.12.03.58.01
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c27771b3sm5163198b3a.27.2025.12.12.03.57.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Dec 2025 03:58:03 -0800 (PST)
+        Fri, 12 Dec 2025 03:58:01 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Leon Anavi <leon.anavi@konsulko.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][whinlatter][PATCH 07/15] python3-eventlet: upgrade 0.40.3 -> 0.40.4
-Date: Fri, 12 Dec 2025 17:27:36 +0530
-Message-ID: <20251212115744.569676-7-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][whinlatter][PATCH 06/15] python3-pillow: Add nativesdk to BBCLASSEXTEND
+Date: Fri, 12 Dec 2025 17:27:35 +0530
+Message-ID: <20251212115744.569676-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251212115744.569676-1-ankur.tyagi85@gmail.com>
 References: <20251212115744.569676-1-ankur.tyagi85@gmail.com>
@@ -70,41 +70,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 11:58:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122607
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122606
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
 
-Changelog:
-============
-* Remove legacy setuptools configuration files
-* add 3.14 to supported versions
-* Emit warning on startup that eventlet is deprecated
-* Fix Python 3.14 on macOS
-* Workaround for #1068
+Add nativesdk to BBCLASSEXTEND because python3-pikepdf requires
+nativesdk-python3-pillow.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 768580103b8df1bf41ffb3f2f81c141057c2d0d9)
+(cherry picked from commit 9245fda941a140931086f51c9701214843aa5aa9)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{python3-eventlet_0.40.3.bb => python3-eventlet_0.40.4.bb}  | 2 +-
+ meta-python/recipes-devtools/python/python3-pillow_12.0.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-eventlet_0.40.3.bb => python3-eventlet_0.40.4.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.40.4.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb
-rename to meta-python/recipes-devtools/python/python3-eventlet_0.40.4.bb
-index 057b73013a..21b1e095eb 100644
---- a/meta-python/recipes-devtools/python/python3-eventlet_0.40.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-eventlet_0.40.4.bb
-@@ -5,7 +5,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_12.0.0.bb b/meta-python/recipes-devtools/python/python3-pillow_12.0.0.bb
+index 4db5db1572..0730ac7d32 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_12.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_12.0.0.bb
+@@ -64,4 +64,4 @@ CVE_PRODUCT = "pillow"
  
- SRC_URI += "file://d19ad6cc086684ee74db250f5fd35227c98e678a.patch"
--SRC_URI[sha256sum] = "290852db0065d78cec17a821b78c8a51cafb820a792796a354592ae4d5fceeb0"
-+SRC_URI[sha256sum] = "69bef712b1be18b4930df6f0c495d2a882bf7b63aa111e7b6eeff461cfcaf26f"
+ RPROVIDES:${PN} += "python3-imaging"
  
- inherit pypi python_hatchling
- 
+-BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
 
