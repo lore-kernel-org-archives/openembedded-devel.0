@@ -2,65 +2,65 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBD60D49212
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA5D7D49214
 	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 11:58:14 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11039.1765540689396446635
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11138.1765540692018531183
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Dec 2025 03:58:09 -0800
+ Fri, 12 Dec 2025 03:58:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=V2VYGHJn;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-7f0da2dfeaeso1178922b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 03:58:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hQ1dXtag;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-7bab7c997eeso1337150b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 03:58:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765540689; x=1766145489; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765540691; x=1766145491; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=38MmH9yy3T9+85ySO13dupJqa6go2XqoK3GHpjZV6ZM=;
-        b=V2VYGHJnpazRqL9Rq2APymsoZWP9ynms39LOwdyhxFWB51FF8wUX3+FRJND1ZKZOuK
-         h52Yvtx+YncBYfPPcPYmv3uV8P0Vr6Gg14pySuKlnhyd+/GpxwIsHsp2u2qZx3emfLKi
-         3w8XlYGoW7g7yPn/Dg9btw4NY7MkG1zCBloQKm7DkrURovXeRFO5ZxWLjNY9DW4z50hi
-         cxwXEZ5zUH7kpxwp2pJXecaLYpgbhR/1Olc3t7TDut/klsI6J82mD5uzKQaBi7wO54sb
-         gdkNMroEBadC1rnQ+D2P2ofGcBMHNB+PPxdMN5xdlDVQwjB9LS7s7Z2iJiCcn6syeYuD
-         NshA==
+        bh=MDatInHacsdHXy+vOmJrh+tnwvoYvgT3dP3ULJOD/ho=;
+        b=hQ1dXtagLaw9gq53bIqFLvPOp+vTfr73wQULl3s2IrKp88ZowM3XVPpgyy45CTRV1Y
+         zzAZ/h+yVpSMqU6BZLuv5zD/2jqPNOhGPLDryVGlzNtiBdI0iUuFsibaiOXmuwgk02KO
+         J/+q2Q+qGgXNdDDc5YuMF/gnltdo/6PGX+Gni5So7MyDv0OzhZPGLt0S4j+eI5NCav1E
+         NWZc5m5Xj1cbLlgYrNV1VN4cV2SgBFtRbv60Ngr5VMG6C4w7u2+8SehqYDeVeefVnfdI
+         OsngKWNvIUIAsZbRlxTzaELtwG4gy4Hj2EctLtOTjqXmhb3MGMNGx2ymHK8aN7IwdtD1
+         sICg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765540689; x=1766145489;
+        d=1e100.net; s=20230601; t=1765540691; x=1766145491;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=38MmH9yy3T9+85ySO13dupJqa6go2XqoK3GHpjZV6ZM=;
-        b=PG8ahu/TS/BKPX2fyujaNkUbdhiqW69AoPen+HhvJUgUhZo7yPdTbOWPOga49aFfes
-         RQFw7w3RT86a42XmWs0uMqEOebXtGk9zXiUWnopfaKf2Q9vR/AX/Vb09HPgM6rIq66MF
-         wMWKo+MvghXwRwyaVzRMFGNY4x4Hx7IiGasBY/NSd2AzbrpOwNLp5KevdaaYJEy5R3LD
-         NkoxNMli1aoM7z33C+YZl1UVyPgmwsg6nbfCO9qfsy0UAcRQBlQ+z7A5qvUkHXItazm2
-         qCit2sVU+5nkgO78gRjaFRrgZ1VyZcDOniL4axH/oKX5zFZNcPwhgn//MlTKpIwUM9E7
-         JEmA==
-X-Gm-Message-State: AOJu0YyUq4/px1r7xKPgQcBv0IF+dXgA2oAPZX/UBsGYy+5wdLLs5m4/
-	kmui1dbZQFP9BRw2/n2qTigsZojh4UzKXfFjLtX5zV0KdqxC1Qimye/MxijBoQ==
-X-Gm-Gg: AY/fxX6aNHB+kWrXGq+Mxr65za5qiFekpoJsXJ2c/hHm1sbslwC5mToeUzmIv2CS5ay
-	3o5EFx/YNq85OuiLmx8fZ/ty2cknxK06VQTrkWRWe6vv/tlkzWeGnvSQmSdh+A/c4nqn66Gbzcv
-	nOj3wS8y8cXpVOvCIaXYBdWrRmNQwUmR3CXwi63hs3oXERA/QStyGFSWwEO5CBVQ3qToBXFWtu+
-	siGY7SDMkTofee8tuqD6zhXBQn8vuw4nZNrUob4Vta9PcnJfqJAwqPV4dz0Yb5T6ateLiUsVHR5
-	TRtIfyTOp0X4WDr7IJr0mWC755hye1Rpto6Xd/gJE5Lw9jyxB8gHWR2xf6NlOcUOuy+Thgwa+jj
-	1lrBCWpjrRQGUSbDc+Fg4vjXYDVkdIRGhUN5aecWjvtAMYv0cXjq9IZFNoN+Ttglo7p6NfAD+oF
-	tWAUNuBLNM8AG0jauG9RaubLA=
-X-Google-Smtp-Source: AGHT+IFkvlKqQrb8D7hFGcX87OSn5/s4Fw4R5wWEOp///XGK2GxD7NajJZy+ClWseBymUUCoVGdNmA==
-X-Received: by 2002:a05:6a00:2884:b0:781:d98e:ebda with SMTP id d2e1a72fcca58-7f667e16cd3mr1850592b3a.30.1765540688657;
-        Fri, 12 Dec 2025 03:58:08 -0800 (PST)
+        bh=MDatInHacsdHXy+vOmJrh+tnwvoYvgT3dP3ULJOD/ho=;
+        b=LZ5okreAqJZtvGzfcop1/r3weEoBIAUR1Ljk8pjg/E9ip/XnZGKI3gW34DktvdUEkJ
+         C4/6ATO/Q2YFjqrFEQFj9sWNlID4o6K1Rq9tODci2AfaG9ivYYPyntlqlxvMMXumWHEb
+         PbsKU0AFZD5sLj1LdlHvCO8Q1OWCghyR98AxfjzynDqGeBL+EwKGr4nDKipmkhLZtVZM
+         IFEYJTXr6n+dynzuvGn9U5TvxyFP/sN7bnfoClzwTRLRUEVOHBzR/OIbyU5EqxgMlYN4
+         O3HLnShR7S5G6OrM9ceUyeGbWdPkzXSmYYS/q22puaDy7uZxN4ml66a79K5JiXTI+mm0
+         7PFw==
+X-Gm-Message-State: AOJu0Yz+TTddrFFyHY2eDbWrDCYWtf2C6CEk9x7IHt41J0jfkyIwQhle
+	rZZCYJAE2G6T/Gnvb4dH4OeWlKsNTq4e7eQdSOD5gaxBdye7IaPka4FrvKYzKQ==
+X-Gm-Gg: AY/fxX4TpmNmsyvtCPCSjnrP5k6zOtuyUzDyRP+7Z51nEXyIHoPHl1TttdgsthrsLJH
+	YHSd1nakXddcfAclT5r1y/zEnFgrZK0K5YlNE+rHNsdxkZcYm0ZhTy/3rwNZkN8UQ9yY7UAT9ub
+	DT4aRzaEHmFGa/5YQLXQve/9B4OwDIdYWafC2iUMZCLz2pyz5Zmw1U0csD+XApIM6qCiqNVpE8F
+	wGUw66lgt/DDvX3NMTwe4UFl/TVrSJAApJfZSurCVnZS7OUTq5SPrrg65gtq+oEMc5/vj+tx7p6
+	iN95rkZOy8wk7czDMdgAHskZewIiq1QhmhPAKYX4Aj3AgxJWXeL6Drxl9ZmNzn8Zgp8enTUsJTw
+	CjUYy4WtatpBPiNvlsYqQDYL28eXxr7d0Imtq9Id3yvzCXd2LTfBNxBexauPm4yqg8DyzeqeWqo
+	2SKn7Tv/a3H3ZNQsAcq/ZRuNY=
+X-Google-Smtp-Source: AGHT+IEWQBWIrOqK2eTssJU/l75oBh5EmYZlgj3W0mQi+xPqigHA9PGMwD4hzuS4pmnhYHPO3bhXlA==
+X-Received: by 2002:a05:6a00:8006:b0:7e8:4471:ae6b with SMTP id d2e1a72fcca58-7f669a93aa1mr1736130b3a.55.1765540691244;
+        Fri, 12 Dec 2025 03:58:11 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c27771b3sm5163198b3a.27.2025.12.12.03.58.06
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c27771b3sm5163198b3a.27.2025.12.12.03.58.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Dec 2025 03:58:08 -0800 (PST)
+        Fri, 12 Dec 2025 03:58:10 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][whinlatter][PATCH 09/15] python3-pybcj: upgrade 1.0.6 -> 1.0.7
-Date: Fri, 12 Dec 2025 17:27:38 +0530
-Message-ID: <20251212115744.569676-9-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][whinlatter][PATCH 10/15] python3-pymodbus: upgrade 3.11.3 -> 3.11.4
+Date: Fri, 12 Dec 2025 17:27:39 +0530
+Message-ID: <20251212115744.569676-10-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251212115744.569676-1-ankur.tyagi85@gmail.com>
 References: <20251212115744.569676-1-ankur.tyagi85@gmail.com>
@@ -70,38 +70,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 11:58:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122609
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122610
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-- Support for python 3.14
-- ci: fix test and release workflows
+ full support for python 3.14 and a number of packages (like mypy) have been updated.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 797e29ed4222dad9539f72c846e3435c92d50604)
+(cherry picked from commit b745baf4784f01b1eed82607d0d69004df6ed025)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python/{python3-pybcj_1.0.6.bb => python3-pybcj_1.0.7.bb}   | 2 +-
+ .../{python3-pymodbus_3.11.3.bb => python3-pymodbus_3.11.4.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pybcj_1.0.6.bb => python3-pybcj_1.0.7.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-pymodbus_3.11.3.bb => python3-pymodbus_3.11.4.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pybcj_1.0.6.bb b/meta-python/recipes-devtools/python/python3-pybcj_1.0.7.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pybcj_1.0.6.bb
-rename to meta-python/recipes-devtools/python/python3-pybcj_1.0.7.bb
-index 1d3d0ee245..299677b072 100644
---- a/meta-python/recipes-devtools/python/python3-pybcj_1.0.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybcj_1.0.7.bb
-@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-or-later"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-python/recipes-devtools/python/python3-pymodbus_3.11.3.bb b/meta-python/recipes-devtools/python/python3-pymodbus_3.11.4.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pymodbus_3.11.3.bb
+rename to meta-python/recipes-devtools/python/python3-pymodbus_3.11.4.bb
+index c7dbcb1ce8..6d961fda1a 100644
+--- a/meta-python/recipes-devtools/python/python3-pymodbus_3.11.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pymodbus_3.11.4.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/riptideio/pymodbus/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=12a490c6cffa2e76a6df8aa1fa29e183"
  
--SRC_URI[sha256sum] = "70bbe2dc185993351955bfe8f61395038f96f5de92bb3a436acb01505781f8f2"
-+SRC_URI[sha256sum] = "72d64574069ffb0a800020668376b7ebd7adea159adbf4d35f8effc62f0daa67"
+-SRC_URI[sha256sum] = "10c2902838ad5a233baefb64b1c1fb064fa762b22b221bf35191bf39f01449a8"
++SRC_URI[sha256sum] = "6910e385cb6b2f983cd457e9ecee2ff580dbb23cf3d84aefec0845e71edd606a"
  
- inherit pypi python_setuptools_build_meta pypi
+ inherit pypi python_setuptools_build_meta
  
 
