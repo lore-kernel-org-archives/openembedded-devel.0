@@ -2,47 +2,47 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F4091D59F46
-	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 21:03:43 +0000 (UTC)
-Received: from PNYPR01CU001.outbound.protection.outlook.com (PNYPR01CU001.outbound.protection.outlook.com [52.101.225.65])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14856.1765552577479725594
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 030CBD59F49
+	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 21:03:44 +0000 (UTC)
+Received: from MA0PR01CU009.outbound.protection.outlook.com (MA0PR01CU009.outbound.protection.outlook.com [52.101.227.57])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15017.1765552653352545030
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Dec 2025 07:16:18 -0800
+ Fri, 12 Dec 2025 07:17:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=h21WYFyK;
- spf=pass (domain: bmwtechworks.in, ip: 52.101.225.65, mailfrom: divyanshu.rathore@bmwtechworks.in)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bmwtechworks.in header.s=selector1 header.b=NPbdP9Ut;
+ spf=pass (domain: bmwtechworks.in, ip: 52.101.227.57, mailfrom: divyanshu.rathore@bmwtechworks.in)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bS3nYdwE7ReKGNxMxD8Qo/pLYbjLzsb8XeKllyqp+tnYKqT3i0i/8W7xUJF6fE+XbT0BtwIgOYWKUKVzNUdKe0ox3FZ8tB0wtqxdITX/GFsKyF9QJOdMuFJWihiFQbEjOGU79GwQRe9yWCoJzXzCZViUDlHTBzBO90AU72tu7IxRrPkXrYub1UWaz9yNuNrfRNC/nvxIo4QDnrUj5UJI2zK6HXPqQm4qBh+2ya9R1jVQE+8Mxg/WULmTF/a6aUEgP58Ugve/hBz28V681NhxwNTuY8pGsTteJhV9WlyfHSIdlXhriE5i+A2caLEWQto/b71xtzxWyuMBZSNScXjWxQ==
+ b=eceRPqLrh6I7x83GTVw+dkjnLtrCUTa241KlAh44EPdvqWjkNqlF0ENgV+6olgVePD64Z9/X71HktWL8DaFKwoq7+PVzvBSyxHHTFXymSATeYFczDECo3Mx/PiyBp01V7kKIaTB9Tql2y06TpFSigQwSWu9gG7/BB19difsKGR7HjIfUOzFYZ+Z+wEyEP70xyp8FEvaKLgO3Yax5W98CYsF7mP8Yeg3u7j62mDBDSElGObZkvhFC6o2lhIAHimqSUhiEg8iY4Fr9DXOwNW5b1WBaB5JdsyL0G42xcelBxUcuYw2jcs7s+xYxMqfjEt4nDPvdEZ5dZ2wsftzRhU1Cfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bHqheRIWs9xYJJpkPwh0cR1xFggJH1i2ga6dLkPQHLM=;
- b=IfhIQMCPlr5j/wpc/Z/nE3XHSgc38QlUffd/gqHa2WWf8WqhMph0kK4GRdmcwCHcRrMuH+zFoORoX+R6gEVESbJDcC4sqXz9+dy4Spxbyc/Of4LjL+cSGqpAvnjoGgwLgp4heF5NURqRncn0LqS8peMT1pphfVA/oqc+ebY3xrXmkLF/amG13LTvdD1tgcNc3cjH4LkLOnIhxbuOrKEzdZtIWomCjdGoL3TldbAoxYX/4oP+MEKHuHZiSyFt9Nk5ulGLzah749EvbongUPE24AVxvOKkuBitsmZ8dpnzceS8bcjGOUIQ1fzDYYwSrmEPkuBlu3GP0Ffic24qwsRSeQ==
+ bh=KE+1UHmnrHJfCGVulku3Eem+JVFkciPEFZyrQmCBTYU=;
+ b=uU9RQAQmXZysAyngxa4wFzBCbziHKM8HVXOvFpa2WAsmvDS9aoayjY40ELYZPtZcukUCW7faA48UMuZ3Ytcd43MgZryy/2cZZ5FGeXgYwSJtO8YeQSu3NMtOKHbNxwvi96PGURbXHfcppDg8YEtm1Uy+s1wC9PqDv33kPdXQeVbjIYLSulpoQufx5tLRKcZ1X4YFS9CfL17Mw/MbGc1QXdF4rEWhbe1aCVepyxVo5NMj9UUuP/KR8zTMvbj9Jlu1W4vvOKSesG5faNrF4wTM5cb76Tefon3UK50p/SOffeMXupQSo9hW0+RyMerh5Fh0CJexPslIVBNBS2wq5aE70w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
  header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bHqheRIWs9xYJJpkPwh0cR1xFggJH1i2ga6dLkPQHLM=;
- b=h21WYFyKqZfDTL2yExn7HhpHXigNzaPvYcxGjpRIXn3VWATSXVSQrPoqhz46WuIpAwdMxbvMbUm+Li/dfAeMSc4uxqA8MGq0CudLsRW4AXJ0vb1GyT1YNg44lQ8Rp+6eRxeJgtTDAT1P0uLzVNXnEXTZwIti/9UD9L8g7rqjqWmX8PDFq8y5CazxVJEEZ3eshFmK38ZN1/CdBQ8v06NgpYvGiE5EkUCPOpY64Dj3NSGfAhUVq7Y80v/6nlu6+ZZvmJ2nL+1hR9mpYgUgaSmoknN82dtA9MUaPHBrI7wwxsfoByTwraXROKGfUyrnr2ZLveEiGjpAugdX0rbePylVLw==
+ bh=KE+1UHmnrHJfCGVulku3Eem+JVFkciPEFZyrQmCBTYU=;
+ b=NPbdP9UtrTinuaP8PzvhQe3UQhD866l/H804e2damkvfwLBvC6GsebdSL/JVT+yHJdW4e4ZENiTC9fgJ1dgx0tOe8082qFtghJ9hhWHuEaONg7Y789zj77451/fQpLbXKCtayOFYYDzwjbsD3WJE+FGP1zTo8cNXBvQ3iw22T4WzIEgXFd8t10vV8UZE4IJeI7nKU1HrIHf+PoJz1N0qvygUOS1WTyLgq3RpsSrxl6qB/pKRmqi8zqPjQBKG9dilL5scyeJ2b2IzfvPkUFIf70qqyfgv02IUO1euoXzK/zgPWumw6lnoJBIvfOAde/DrA0/6Ne4LJgv0CRWpYUxOmg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
 Received: from MA0P287MB3378.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:143::11)
  by PN0P287MB1122.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:139::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9412.10; Fri, 12 Dec
- 2025 15:00:18 +0000
+ 2025 15:00:17 +0000
 Received: from MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
  ([fe80::9a89:c69c:9878:e483]) by MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
  ([fe80::9a89:c69c:9878:e483%6]) with mapi id 15.20.9412.005; Fri, 12 Dec 2025
- 15:00:18 +0000
+ 15:00:17 +0000
 From: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 To: openembedded-devel@lists.openembedded.org
 CC: Divyanshu.Rathore@bmwtechworks.in
-Subject: [meta-oe][kirkstone][PATCH v2 08/11] ImageMagick: Fix CVE-2025-57807
-Date: Fri, 12 Dec 2025 20:29:44 +0530
-Message-ID: <20251212145947.7434-8-Divyanshu.Rathore@bmwtechworks.in>
+Subject: [meta-oe][kirkstone][PATCH v2 07/11] ImageMagick: Fix CVE-2025-57803
+Date: Fri, 12 Dec 2025 20:29:43 +0530
+Message-ID: <20251212145947.7434-7-Divyanshu.Rathore@bmwtechworks.in>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251212145947.7434-1-Divyanshu.Rathore@bmwtechworks.in>
 References: <20251212145947.7434-1-Divyanshu.Rathore@bmwtechworks.in>
@@ -52,183 +52,281 @@ X-ClientProxiedBy: PN0PR01CA0009.INDPRD01.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MA0P287MB3378:EE_|PN0P287MB1122:EE_
-X-MS-Office365-Filtering-Correlation-Id: e6d03139-634c-44c2-1a73-08de398f2a61
+X-MS-Office365-Filtering-Correlation-Id: 7e0e63f3-fcaa-4402-5a1f-08de398f2982
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|38350700014|13003099007;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?VAIIMwpmJzYnOpOY0X2aBqjrnqYpGrJ9Nx6VnNt5TMsZARRHGya891BVoawR?=
- =?us-ascii?Q?6xdNZMKw7h2EEUULgRnbESJWk96YEuhjTnfZC//MgHhaUYCAcU+UxBBNap2r?=
- =?us-ascii?Q?CyOtkrU4pFLANUsigzY+BN7nqV51R8eVffoxCZe7RsWnGqB1NXsBuh3585YT?=
- =?us-ascii?Q?nFsI3xI6rTOfNNN7684W9ZJFzARGA8aezF+0PywXl4aUtYYnbSYGwugTOmXq?=
- =?us-ascii?Q?yrov+0t2+mJ5nK07ICtyE1z0q6It/o8TlU/6HRgdywAa3GwiAcf6w1AJBRh5?=
- =?us-ascii?Q?jQrjZJlS84iNvDnNxcMO6GBFOSLkEstpa9FJ9mxYp975w6qZiKK2/+VL/hzz?=
- =?us-ascii?Q?d2Tytz8JMAafK495S9mCHBrERcF9OutHoVLNEaUAuXjx1Q7vg1hnDDDZF6Mp?=
- =?us-ascii?Q?ZrZAXPgNElnWX+PTqjcCx8aXU/csnNnHfdbnotGcApPFa5LbAKcXnuuF9LG7?=
- =?us-ascii?Q?DVg9RjXs5n5d3JDUCAqyxSpwniAA2/fftH+s55y7/pPFV0TK5Qk7UoZbYb5T?=
- =?us-ascii?Q?4UqnePanDzGtLlpUlOOGi+ASP2orXfaCZhoKgJObyBL3UvmXwifSPLE/D9HF?=
- =?us-ascii?Q?W/pbQNxktQvaRv3LR45IsdZDSAIeCzyp4Wo6sjaaHUsJS+wylbk7pQT5nbai?=
- =?us-ascii?Q?/gsspjp+CkYYedi2wcIFWuECMZ4hfYAY3aThquaKSfwWUIeKB+25Aqm9i12Q?=
- =?us-ascii?Q?S+iZ5KOHTidzyVVOrjFzqT9caglp5dNijE3qtooSSUBjfgCCPxyoMM97KZZJ?=
- =?us-ascii?Q?b/EVrtafqV6l5eJwtVjSBKlt0RO+bszDY5v1K/tfDMQCvoEwQClLGRi8lrbs?=
- =?us-ascii?Q?8FFrYeBX6d6rVCBqBymT5PDfUv4KBzykEf4f0hjDkso1vAG3a08RQQwfubs8?=
- =?us-ascii?Q?4wH3+zSOZuHl2VWXVVc8Hin49EBkHXvJMTwvQQyQHWHwCoKtxwb9G5fn8Ogf?=
- =?us-ascii?Q?zJuGHH6euKP9pVHhSVZ3ZH6MG7qg4+vNqF31moW6YBiya0KbpZnA25eieZtK?=
- =?us-ascii?Q?4DnJY+lw+j6xPnvqjbWBQ+i6NsJewXwEHCTdFJz3gJfd4DVkICj8W0Tv84c8?=
- =?us-ascii?Q?MNUsIKWEjW0KXWVLx2vQxBWN9QAPjNACJeIh9rb6rb0hWsYtUeYJjEQ3EucL?=
- =?us-ascii?Q?kKQig1dgxoHveDRPdyuZ/BrtqqXA5l7IB1vxmHEY2x6X4Lc+xDFLuumuLpRI?=
- =?us-ascii?Q?iLz5DD6eW6aCboprwdCptQCF+PpoVWQzjNrBCA04l8EE+cXv/eZh/CNdNuPY?=
- =?us-ascii?Q?TQ6ec/b5VU0k5gS6F10ZZRR/Ygar1RPTrCdc9K6TPz7WbyRX36wo5OD1RU21?=
- =?us-ascii?Q?TTw54DnPgodvvzHSpIuNKO41O9ITrR8c3OfzunUB8JgdVzie/ayh8uEwVEG5?=
- =?us-ascii?Q?F7HPf3eQ/FgnRDR1VTL0Cc41zSQXAQldiXdJ72tjPr5Mj3mKYXId0nDEnMb9?=
- =?us-ascii?Q?8ZBDXuDqvH5Z99ZPRx2mq+MmIOYqA9W37dU1+iHl4F457Nm+ZIZOlg=3D=3D?=
+	=?us-ascii?Q?V0/QRXLxRtvqYDcqnbRMwQuTVAOOc/tljoLXFUXqf2woWBkF0nO4f8Mt2lnv?=
+ =?us-ascii?Q?Kc4Vq0AaNKew8ue6Tc0sHeiUOltUGQvYUf3gAzSobpozk8MQ6Rnr7NE4/2TV?=
+ =?us-ascii?Q?iuIgPlgggzy5oLp1MBrHwYO/RiUeAYUG6VpBSKzd/Kd0dhokGRwIPkyJgWNF?=
+ =?us-ascii?Q?dB0uwW9ckEli0tdx0O+Fb9Xu49+bNoef7WFgiUwbh17ouMBVHM4nQi6fMbjs?=
+ =?us-ascii?Q?R+AmRAR+tUfoEh5H56yhGrq3kYQylf7PMXg39vdsxruFoX8ctpLSEJ6SVoTz?=
+ =?us-ascii?Q?WYmPqNfxIqnVL1F1oL8pf2fvW8+xgshk6kXY+vfy/IGLV/+ixedXHW1R8Zka?=
+ =?us-ascii?Q?J6hy611bnnLEKSwMJ7R8Vd6JPuHENyiioB/Xdc2TJZXRFx79nlkey8h40XDu?=
+ =?us-ascii?Q?heEgM4q1UDYGIHZCSVL7NnSBI3IhvOrl/MU7IYLJymLnjI1GCYtSUfii3Wkw?=
+ =?us-ascii?Q?ohkEVtnnWfprWCrY35a4Xe/xKn0vnqxvNC0Vd/kKNro0N18F7RDWdupck0fZ?=
+ =?us-ascii?Q?r5EKKSM5DIZb0y90r+AIugexlWG5GN3P55OwmLrka+DMYl9z2WEffs5p+nRe?=
+ =?us-ascii?Q?afSmq1v6iFWA2uapkrSVikEt6AL3eG2siPlix3U0nHvPaE//+zVs93cC/POo?=
+ =?us-ascii?Q?CHJkcMU3m3K/aLy0YUuAPw8ghScbx9gXMxKWqWPblB9882lGNDtoHUjdVxVB?=
+ =?us-ascii?Q?yq4O+JvYPmBhIQSdOMCnkfAnHwYE0yzCIlsmby4Rc+q/yS8GpVKcSWf1xnnY?=
+ =?us-ascii?Q?7VQgJtCTz+2j/32eEwPczrCITPVSHNg4c3aGo69T/qZy+oqazP7956HnmIY7?=
+ =?us-ascii?Q?T7HFkNSeQu25LKjvFxG/3N+a1fHV94iVYQbd7CJa78+URgvJuAZ568O4F1+D?=
+ =?us-ascii?Q?jDYuN+od30xzA1qeYp11v6MonOcPH2d+Vr6n1OMqT6QHlpn/n/sRRCmukUau?=
+ =?us-ascii?Q?tIXXliyu3IaR825nyLwbIpwFJKuJ2nsVvlUvFSGHT4Zn4+FE08To+rUMp0km?=
+ =?us-ascii?Q?8+8rx05SMUfF6xTRV8IrmvRvifox6kRBKtMlknj/5xXmvINNWiZ5SyWEjSiE?=
+ =?us-ascii?Q?pIxYuUAQSRulKQf7J7Fm4wF0tWexNRQmhZIi5bD+Ln5h/i099Y9zZ4+Psa8O?=
+ =?us-ascii?Q?DqSR1V4tsEbjkFHNy6VHQvw8y294dH2ImWsr871nqpplgWWgiTwikweTvoxB?=
+ =?us-ascii?Q?8c/GIUQpC5c2ub/TjcmGIsAHTDqAJz0s6raPvzm1uIdIr9Z/SDVHBAQIj3rL?=
+ =?us-ascii?Q?97uiW0zjFEWq5q9yncNMdObbWBGXBNAM9T0yZUKC+C5bPzjElmPzk9xjLcRN?=
+ =?us-ascii?Q?9Nwoat0fdoX3CoMuJzeb8ZdBaJStjTQ8h/uerUX/MAWVAeMOzenBgf/cugw8?=
+ =?us-ascii?Q?/fCLBSG3lMni2364L1j6BGDm5yklziAZ1P5RRCKNX81wCZntXVUr2QFCxbk1?=
+ =?us-ascii?Q?Ho9TpvqRN2LcN8/5jXi2v9BbcZlxl1ej8M1pRKxurOeAKWa5SU/hfg=3D=3D?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA0P287MB3378.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?i4RZFxMX3QzFWUaK6ppdQ7RWHUXnAhVEOBO4DZUHwuLS+YfjVLCvwSOhU3gg?=
- =?us-ascii?Q?rct348uryPTIjxm4AI1X1qV5O+PmxpipiCh1pOCqaXEap2iekgoFyXXEMvYd?=
- =?us-ascii?Q?piwfRZoRo8nYlOq8TdwhwhDl7E7JnPFi3WeLLMLxOJlZlltu75kE64xhyRRz?=
- =?us-ascii?Q?36a+TPaKnZ4ZsRfAwslOukQda2h500IkuJgXDHipNUMIHAlymDnzikJilSzi?=
- =?us-ascii?Q?57ZE5qqOVM0FlSwdApyqRS6bPOu+Qx+astDMLqSwO3Xm9Idqa3Bd/pVAbw5g?=
- =?us-ascii?Q?9g1g72e0s1sbisH43Czt9V7ihe63j3DhgNIx2maJIr5gkHBRiLYOhANDFmdx?=
- =?us-ascii?Q?DaPOKxWzWQ6xq9Kvm4XDIhhAHbocpDlh21yDY4m2m4t8iYXuSve/xq0Zw6js?=
- =?us-ascii?Q?V2WxYQzsRZE0ee7QJ2gnHQMtrF/1izz/A6SflqvZTiLoSK+Z8xXiqSbjYpV5?=
- =?us-ascii?Q?R/gaC4oFaLRV/b+uoJiNFB73etZYic/6UFIk7FsNYuiPU+ofh37PosMCUkL6?=
- =?us-ascii?Q?FOQ4jxzZa1PaVNbRy2zx200XWviw41JERsB87KXZZ1bD3PFJnPYEjj5ufpo3?=
- =?us-ascii?Q?1RWg73809ywbA5pBNcfLD81FVbzYFFIxo4PZdWp7jbwFXxxb1NQ256pu8HbV?=
- =?us-ascii?Q?hE7OUJqGpbmhZzDGDbvwnAwQgdlJN53lImYHM7dUngveQys8FoUiLYF5G0HL?=
- =?us-ascii?Q?R2k+md2akgqVPxN9oOeTGuWxCec63jm0qGPGcMfzz7z9bgsTu/qcu3cAtkFo?=
- =?us-ascii?Q?Y59+ZfbYcICBRjqySmjITY4YnUazVpsBmK8n0p+eXCEjU52TceoTEfQcCCbi?=
- =?us-ascii?Q?eCgu/RE6dv6b9Dp46/Kx58JA6LI45NiQzd0BJogCyTTdLN81zf6d40k7SagO?=
- =?us-ascii?Q?q3E7xQhfSEfnXPIzI8n54OtnQgYSxziiMFzUH8ntVqfew4xnwzmTYWGtau58?=
- =?us-ascii?Q?z6ZVRsOCMxIq4VNnCRMdnlO/TciVE46j1uzt0QvSg6Ctf8H9XOVyz4B8ijF6?=
- =?us-ascii?Q?0lfY3LppmqM+NqoTZkCQ2M3Pwy0W9zgSXLH9vWfPW1wAFBUsw1tNn5BKdM6K?=
- =?us-ascii?Q?GjgA7ZpuVoQFInYUHuG4/dISLrUlU+y/BOMfrtJfzsQh78LRo8rHy76xg++3?=
- =?us-ascii?Q?n3JTBU2jTdAPX+qiaORLbajKqqSMA1OJP2eEYEjitRJiFhNgFYvYyYAPrHaA?=
- =?us-ascii?Q?K4QbLYWpJLJBA2SgXvPXpABZjbcltiXlVQp/LdvWpICTrrm/ISjVoHtyaSrC?=
- =?us-ascii?Q?vrJqVFqL6jl2vhbzYRHKtqcbqprDXCWejy0ZxRStnDOYVgENqja1u3/SQNRc?=
- =?us-ascii?Q?+2Tmkp5e3fec+ALaAxHN+dYaG6iSP+5moCfCevmCfZnKT02O8osGymAm/quU?=
- =?us-ascii?Q?lF1l0hnmre4RJl4Fl8zZ50kz6pB3I5u8TdID9P3y9LRi4a5nDUUzfjfpQVsE?=
- =?us-ascii?Q?vZL1L5lKjNfr7ukILKPhoKYz0dWmJ+H6M9yjnhn/kvP4bOtiNqYxUymKCUgJ?=
- =?us-ascii?Q?q+WZvk1K7BpH2nYdMoK+bxmECLYdZCIPuRMUMzqeykLlSOU/9hoySp+OH8WG?=
- =?us-ascii?Q?tJEnsNKPMykX2zo4FbCTfxrWLlB7RsrtK29Gna6Cixl1y8jWu2FfpSDwxXsp?=
- =?us-ascii?Q?1a/NzL4SA6vyT9FkoqIaHfk=3D?=
+	=?us-ascii?Q?RM5+pTCtsRl16D0l839PJEatHvhRYoMiSRCj1mVF9t4ax5Y8JPAKS15+y8++?=
+ =?us-ascii?Q?rEGCXwfZCLKRh6QIjw9RtyVuQ/BmFZxXmejXtdMQF7JPLgaKntjdigmAn3id?=
+ =?us-ascii?Q?cboKDlOKRBu6+YGR01pidqLqoq7S6T8ECxg3Ycb6B/pQDzkN6deSQDuYx6ee?=
+ =?us-ascii?Q?MvyZFbC9Y5kQ/S1/8Ii6tmhQi+Us5+C0o4nGeI6vt0gKFQwT6NthBazH1Dtj?=
+ =?us-ascii?Q?r4WqbqfQOYhox1kY4KtI/gHHgtGdtGkmyzoWYptHiRE95S4qsmZ9KluD0GEf?=
+ =?us-ascii?Q?tCvfHylrcGQo7az/u7gNZZ1q0Zv92OWEkj9pte19vMLmMOMy0Q114BxpOWU3?=
+ =?us-ascii?Q?yaRNQommbV8TvoqxKhIGhL3iXrvJBYY+smzzgz98LtS/E95UxNbe5chjJh77?=
+ =?us-ascii?Q?Ias/pOVnwOf74lGX1tBg2JET1OqOj9Ax/JO0uUxZmF9snKESq/B8oNPGZMnS?=
+ =?us-ascii?Q?3/77yriQHTD9JPQfRXbuNuT9eH89BzkJ8iZZD1x3NIqmgjR8Uw7cm8Uz73zz?=
+ =?us-ascii?Q?bmUsG5Wnva3O7Qo6/H4L2LUpUSikk4ZX5nad/t9SHhZReLFV+BsAFe/NSV9o?=
+ =?us-ascii?Q?phCHzT/EZL2pz0xp/qjl7hh6uwTozqRVbjKhbZ1oey3rWBFJjeC/R3V54sdi?=
+ =?us-ascii?Q?u2yojI1KPHEQ6q/RXghgV4rIaOBHUFRYc9K+UjjqnO+tLU60Gk+WYHVWdZSz?=
+ =?us-ascii?Q?8i4ChjMI+vaAi1+VoHTimD1DiAYXoo58LeA/MNwS4FYI+4Owvv6cLhbm3UYr?=
+ =?us-ascii?Q?YJ4N71OeLyzSvXbllKqy9U1rXvsrDdpcKn2zt1etauS5Z0dbdGbB46niaQxt?=
+ =?us-ascii?Q?RTr1i3cgc3Gqv8aBbhxTUn1LlIL+syDPJaFliDyzL93QVdW5tIYQO7g89+DI?=
+ =?us-ascii?Q?BgOAj5D/xdwwfWTUOEl43FCbVa3Yvyw6OxY+jCgpOskFCs1PpGtTvSc6gEnB?=
+ =?us-ascii?Q?OPiVi8AvkR5mWJkIgIrj5C2Kz8BSZbbtiJyAJlWrd/sqbrv9kA+dIitinPZU?=
+ =?us-ascii?Q?Dgewd9vPv8LWnyhqr6L5mmejeYM5CrM184hTiRieT7Uf3M61b0mSu9ds+lsv?=
+ =?us-ascii?Q?6Zalxi4C8cHgdK+117+TFz5RqCd0CYnrRWlT0kbElcvBiPkz+dL0zxsfUbd9?=
+ =?us-ascii?Q?mqFeNb/cDiRX3AHSYXDYNkBJvfZPVuBABhLvow3J+un68pO3uia6tn8BLK4T?=
+ =?us-ascii?Q?reoy7O5KlTFqrbXcfOodDQeert6wZq7DcSB67gBv6445vv4W/lTSCpoxfFBf?=
+ =?us-ascii?Q?8gn907x+n0SnrfPb9o18uUDSrA39SVuzObLj6IQ0TQnXsl0m56lPllR96Wx1?=
+ =?us-ascii?Q?DtLj1LncCTyRLrQLcPJsWXU7Sgh0LdmI5vslLiGcapMIltdJkJ4qrJigVxyW?=
+ =?us-ascii?Q?xH6lRc8qwkn1DPTrZ80x/rXb/txIGuTJSv9rMK+FgtAS7rOjfpatGoDusGX0?=
+ =?us-ascii?Q?KteNvYpd/SFfUM2ZrqDySXILenl22easOa6NgK9ixU2SMWvSWDDzuVYO2q1Z?=
+ =?us-ascii?Q?tN7gXrOOlr2azG4iJobKieisM9WoSh6m5HSVUIsJq56nY98G62Lr0bqokjcT?=
+ =?us-ascii?Q?HspcpcR4coBsQnO2Esa2u9YFGzeBwrqFyY9cxd5LhrVWCyimpthVk6xsHoBY?=
+ =?us-ascii?Q?MdiMOiuXP1sG+9AIcLoo+H4=3D?=
 X-OriginatorOrg: bmwtechworks.in
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6d03139-634c-44c2-1a73-08de398f2a61
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e0e63f3-fcaa-4402-5a1f-08de398f2982
 X-MS-Exchange-CrossTenant-AuthSource: MA0P287MB3378.INDP287.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 15:00:18.8086
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2025 15:00:17.5952
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gdI7vRpwv9Ja8QaGHzvbq72kw7JhEGlM7FGAa4y1M/9wgWh+/OXGOeeuzOFDr8wdMaQto9iXUuJoQedSKB0MkjU6x2vVrJZi9pxc6kVib10ByG08MbjivYDJ6YV6k4k5
+X-MS-Exchange-CrossTenant-UserPrincipalName: rZGOUAOqUTm5vuHbnzmK9m26BBdoYNmXoOLIUhmRiQqJK0g35LOmzvMcRCDfk/kvGiTSWCte+vAr5CYJ2JJFK4YFnRG3XUVa2Mka9XUgIsshV94tIYtf6PhWnTokg76f
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN0P287MB1122
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 21:03:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122625
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 21:03:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122626
 
-Backport the fix for CVE-2025-57807
+Backport the fix for CVE-2025-57803
 
 Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commi=
-t/077a417a19a5ea8c85559b602754a5b928eef23e]
+t/61f444e5457e4e506c73f18460133c80c235ebb6]
 
 Add below patch to fix
-0008-ImageMagick-Fix-CVE-2025-57807.patch
+0007-ImageMagick-Fix-CVE-2025-57803.patch
+
+Add below support patch to fix
+0007-ImageMagick-Add-support-patch-to-fix-CVE-2025-57803.patch
 
 Signed-off-by: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 ---
- .../0008-ImageMagick-Fix-CVE-2025-57807.patch | 51 +++++++++++++++++++
- .../imagemagick/imagemagick_7.0.10.bb         |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/files/0008-ImageMag=
-ick-Fix-CVE-2025-57807.patch
+ ...-support-patch-to-fix-CVE-2025-57803.patch | 58 +++++++++++++++++
+ .../0007-ImageMagick-Fix-CVE-2025-57803.patch | 65 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.0.10.bb         |  2 +
+ 3 files changed, 125 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/0007-ImageMag=
+ick-Add-support-patch-to-fix-CVE-2025-57803.patch
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/0007-ImageMag=
+ick-Fix-CVE-2025-57803.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/files/0008-ImageMagick-Fix=
--CVE-2025-57807.patch b/meta-oe/recipes-support/imagemagick/files/0008-Imag=
-eMagick-Fix-CVE-2025-57807.patch
+diff --git a/meta-oe/recipes-support/imagemagick/files/0007-ImageMagick-Add=
+-support-patch-to-fix-CVE-2025-57803.patch b/meta-oe/recipes-support/imagem=
+agick/files/0007-ImageMagick-Add-support-patch-to-fix-CVE-2025-57803.patch
 new file mode 100644
-index 0000000000..a0aab8afc3
+index 0000000000..ef570a496a
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/files/0008-ImageMagick-Fix-CVE-20=
-25-57807.patch
-@@ -0,0 +1,51 @@
-+From 3d1a6ecbeff10e05d0609125b6feec9ecace7b85 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/imagemagick/files/0007-ImageMagick-Add-suppor=
+t-patch-to-fix-CVE-2025-57803.patch
+@@ -0,0 +1,58 @@
++From 558a3a71c2b107483d8e88cd2d20242358b6633d Mon Sep 17 00:00:00 2001
 +From: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
-+Date: Fri, 24 Oct 2025 12:37:14 +0530
-+Subject: [PATCH 08/18] ImageMagick: Fix CVE-2025-57807
-+
-+CVE: CVE-2025-57807
++Date: Fri, 5 Dec 2025 13:43:17 +0530
++Subject: [PATCH 1/1] ImageMagick: Add support patch to fix CVE-2025-57803
 +
 +Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/comm=
-it/077a417a19a5ea8c85559b602754a5b928eef23e]
+it/61f444e5457e4e506c73f18460133c80c235ebb6]
 +
 +Comment: Refreshed hunk to match latest kirkstone
 +
 +Signed-off-by: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
 +---
-+ MagickCore/blob.c | 11 +++++++----
-+ 1 file changed, 7 insertions(+), 4 deletions(-)
++ coders/bmp.c | 17 ++++++-----------
++ 1 file changed, 6 insertions(+), 11 deletions(-)
 +
-+diff --git a/MagickCore/blob.c b/MagickCore/blob.c
-+index 6a15d4808..38af749fe 100644
-+--- a/MagickCore/blob.c
-++++ b/MagickCore/blob.c
-+@@ -1598,7 +1598,7 @@ static inline ssize_t WriteBlobStream(Image *image,c=
-onst size_t length,
-+   extent=3D(MagickSizeType) (blob_info->offset+(MagickOffsetType) length)=
++diff --git a/coders/bmp.c b/coders/bmp.c
++index a46448a95..703ad0483 100644
++--- a/coders/bmp.c
+++++ b/coders/bmp.c
++@@ -968,18 +968,18 @@ static Image *ReadBMPImage(const ImageInfo *image_in=
+fo,ExceptionInfo *exception)
++       ThrowReaderException(CorruptImageError,"ImproperImageHeader");
++     if (bmp_info.compression =3D=3D BI_RLE4)
++       bmp_info.bits_per_pixel<<=3D1;
++-    bytes_per_line=3D4*((image->columns*bmp_info.bits_per_pixel+31)/32);
+++    bytes_per_line=3Dimage->columns*(4*(bmp_info.bits_per_pixel+31)/32);
++     length=3D(size_t) bytes_per_line*image->rows;
++     if ((MagickSizeType) (length/256) > blob_size)
++       ThrowReaderException(CorruptImageError,"InsufficientImageDataInFile=
+");
+++    pixel_info=3DAcquireVirtualMemory(image->rows,
+++      MagickMax(bytes_per_line,image->columns+256UL)*sizeof(*pixels));
+++    if (pixel_info =3D=3D (MemoryInfo *) NULL)
+++      ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed");
+++    pixels=3D(unsigned char *) GetVirtualMemoryBlob(pixel_info);
++     if ((bmp_info.compression =3D=3D BI_RGB) ||
++         (bmp_info.compression =3D=3D BI_BITFIELDS))
++       {
++-        pixel_info=3DAcquireVirtualMemory(image->rows,
++-          MagickMax(bytes_per_line,image->columns+256UL)*sizeof(*pixels))=
 ;
-+   if (extent >=3D blob_info->extent)
-+     {
-+-      extent=3Dblob_info->extent+blob_info->quantum+length;
-++      extent+=3Dblob_info->quantum+length;
-+       blob_info->quantum<<=3D1;
-+       if (SetBlobExtent(image,extent) =3D=3D MagickFalse)
-+         return(0);
-+@@ -5774,12 +5774,15 @@ MagickExport ssize_t WriteBlob(Image *image,const =
-size_t length,
-+     }
-+     case BlobStream:
-+     {
-+-      if ((blob_info->offset+(MagickOffsetType) length) >=3D
-+-          (MagickOffsetType) blob_info->extent)
-++      MagickSizeType
-++        extent;
-++
-++      extent=3D(MagickSizeType) (blob_info->offset+(MagickOffsetType) len=
-gth);
-++      if (extent >=3D blob_info->extent)
-+         {
-+           if (blob_info->mapped !=3D MagickFalse)
-+             return(0);
-+-          blob_info->extent+=3Dlength+blob_info->quantum;
-++          blob_info->extent=3Dextent+blob_info->quantum+length;
-+           blob_info->quantum<<=3D1;
-+           blob_info->data=3D(unsigned char *) ResizeQuantumMemory(
-+             blob_info->data,blob_info->extent+1,sizeof(*blob_info->data))=
++-        if (pixel_info =3D=3D (MemoryInfo *) NULL)
++-          ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed=
+");
++-        pixels=3D(unsigned char *) GetVirtualMemoryBlob(pixel_info);
++         if (image->debug !=3D MagickFalse)
++           (void) LogMagickEvent(CoderEvent,GetMagickModule(),
++             "  Reading pixels (%.20g bytes)",(double) length);
++@@ -996,11 +996,6 @@ static Image *ReadBMPImage(const ImageInfo *image_inf=
+o,ExceptionInfo *exception)
++         /*
++           Convert run-length encoded raster pixels.
++         */
++-        pixel_info=3DAcquireVirtualMemory(image->rows,
++-          MagickMax(bytes_per_line,image->columns+256UL)*sizeof(*pixels))=
 ;
++-        if (pixel_info =3D=3D (MemoryInfo *) NULL)
++-          ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed=
+");
++-        pixels=3D(unsigned char *) GetVirtualMemoryBlob(pixel_info);
++         status=3DDecodeImage(image,bmp_info.compression,pixels,
++           image->columns*image->rows);
++         if (status =3D=3D MagickFalse)
++--=20
++2.34.1
++
+diff --git a/meta-oe/recipes-support/imagemagick/files/0007-ImageMagick-Fix=
+-CVE-2025-57803.patch b/meta-oe/recipes-support/imagemagick/files/0007-Imag=
+eMagick-Fix-CVE-2025-57803.patch
+new file mode 100644
+index 0000000000..9a26aa6892
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/files/0007-ImageMagick-Fix-CVE-20=
+25-57803.patch
+@@ -0,0 +1,65 @@
++From 9624a36f5c77d81cfdce20d0978850fa0db1543c Mon Sep 17 00:00:00 2001
++From: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
++Date: Thu, 23 Oct 2025 23:41:32 +0530
++Subject: [PATCH 07/18] ImageMagick: Fix CVE-2025-57803
++
++CVE: CVE-2025-57803
++
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/comm=
+it/2c55221f4d38193adcb51056c14cf238fbcc35d7.patch]
++
++Comment: Refreshed hunk to match latest kirkstone
++
++Signed-off-by: Divyanshu Rathore <Divyanshu.Rathore@bmwtechworks.in>
++---
++ coders/bmp.c | 31 +++++++++++++++++++------------
++ 1 file changed, 19 insertions(+), 12 deletions(-)
++
++diff --git a/coders/bmp.c b/coders/bmp.c
++index a46448a95..beff10bb5 100644
++--- a/coders/bmp.c
+++++ b/coders/bmp.c
++@@ -506,6 +506,10 @@ static MagickBooleanType IsBMP(const unsigned char *m=
+agick,const size_t length)
++ %    o exception: return any errors or warnings in this structure.
++ %
++ */
+++static inline MagickBooleanType BMPOverflowCheck(size_t x,size_t y)
+++{
+++  return((y !=3D 0) && (x > 4294967295UL/y) ? MagickTrue : MagickFalse);
+++}
++
++ static Image *ReadBMPImage(const ImageInfo *image_info,ExceptionInfo *exc=
+eption)
++ {
++@@ -546,6 +550,7 @@ static Image *ReadBMPImage(const ImageInfo *image_info=
+,ExceptionInfo *exception)
++   size_t
++     bit,
++     bytes_per_line,
+++    extent,
++     length;
++
++   ssize_t
++@@ -968,12 +973,18 @@ static Image *ReadBMPImage(const ImageInfo *image_in=
+fo,ExceptionInfo *exception)
++       ThrowReaderException(CorruptImageError,"ImproperImageHeader");
++     if (bmp_info.compression =3D=3D BI_RLE4)
++       bmp_info.bits_per_pixel<<=3D1;
++-    bytes_per_line=3Dimage->columns*(4*(bmp_info.bits_per_pixel+31)/32);
++-    length=3D(size_t) bytes_per_line*image->rows;
+++    extent=3Dimage->columns*bmp_info.bits_per_pixel;
+++    bytes_per_line=3D4*((extent+31)/32);
+++    if (BMPOverflowCheck(bytes_per_line,image->rows) !=3D MagickFalse)
+++      ThrowReaderException(CorruptImageError,"InsufficientImageDataInFile=
+");
+++    length=3Dbytes_per_line*image->rows;
++     if ((MagickSizeType) (length/256) > blob_size)
++       ThrowReaderException(CorruptImageError,"InsufficientImageDataInFile=
+");
++-    pixel_info=3DAcquireVirtualMemory(image->rows,
++-      MagickMax(bytes_per_line,image->columns+256UL)*sizeof(*pixels));
+++    extent=3DMagickMax(bytes_per_line,image->columns+1UL);
+++    if ((BMPOverflowCheck(image->rows,extent) !=3D MagickFalse) ||
+++        (BMPOverflowCheck(extent,sizeof(*pixels)) !=3D MagickFalse))
+++      ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed");
+++    pixel_info=3DAcquireVirtualMemory(image->rows,extent*sizeof(*pixels))=
+;
++     if (pixel_info =3D=3D (MemoryInfo *) NULL)
++       ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed");
++     pixels=3D(unsigned char *) GetVirtualMemoryBlob(pixel_info);
 +--=20
 +2.34.1
 +
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/me=
 ta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index 3566932fa2..351e1eaf8c 100644
+index c209faa29c..3566932fa2 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -32,6 +32,7 @@ SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git=
+@@ -30,6 +30,8 @@ SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git=
 ;branch=3Dmain;protocol=3Dhtt
+     file://0004-ImageMagick-Fix-CVE-2025-55005.patch \
+     file://0005-ImageMagick-Fix-CVE-2025-53019.patch \
      file://0006-ImageMagick-Fix-CVE-2025-55004.patch \
-     file://0007-ImageMagick-Add-support-patch-to-fix-CVE-2025-57803.patch =
++    file://0007-ImageMagick-Add-support-patch-to-fix-CVE-2025-57803.patch =
 \
-     file://0007-ImageMagick-Fix-CVE-2025-57803.patch \
-+    file://0008-ImageMagick-Fix-CVE-2025-57807.patch \
++    file://0007-ImageMagick-Fix-CVE-2025-57803.patch \
  "
 =20
  SRCREV =3D "35b4991eb0939a327f3489988c366e21068b0178"
