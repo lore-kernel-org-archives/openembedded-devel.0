@@ -1,111 +1,362 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73585D44160
-	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 09:29:13 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9215.1765531745195206774
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C5A4D4417C
+	for <webhook@archiver.kernel.org>; Fri, 12 Dec 2025 11:00:14 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10212.1765537212993970825
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Dec 2025 01:29:05 -0800
+ Fri, 12 Dec 2025 03:00:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Cp1Xz0A2;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-29812589890so12657545ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 01:29:05 -0800 (PST)
+ dkim=pass header.i=@smile.fr header.s=google header.b=yJdoGYT+;
+ spf=pass (domain: smile.fr, ip: 209.85.221.51, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42fb4eeb482so265661f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 03:00:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765531744; x=1766136544; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Oj3iCaXCUUW4SuHCHg9x0jgdhGe0bMLMA60z/GuNv7E=;
-        b=Cp1Xz0A2xFRsaHecuhDF6j8XeKGNM4kxxPYqBdamOkSaGLY5kLq/rzBJNWFUBA5UT3
-         79h6rVLsPA5ND4y0N9iGeFugFqMyZfcn6WrAtjB98Mmv/zmDfp5vz0j+GctVaCb2muS1
-         v6KgbSAiRc0UjAY1c9rJNxs2lz0OtD6YxmCccUKnC93XYStK8RSSzgVpNeGEoeX47QwO
-         UxkmUGpeam9sEiibRvvKpLthA4HeVNU0/AhSdzHKyOk8mskhq//WDtu8sPbPsXIqZfh1
-         aRlvztYVM1XJiYzMqt4pvYVSgV7UyUo/R1Kbg3XXgJIO0iFJxW6/XU6o2y3JtGZKJFro
-         7eCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765531744; x=1766136544;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=smile.fr; s=google; t=1765537211; x=1766142011; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Oj3iCaXCUUW4SuHCHg9x0jgdhGe0bMLMA60z/GuNv7E=;
-        b=IO1iSvyuhhrg5/PYzRtg72euZJc0LY+tmHy/jJ4DXv/wvMbkzOSyQor/U9bXI4ip3K
-         xrEGNATAVyUguTnk/IIfZU4t+uwPSuGFqSkcGlFtnlHJ2v15dzi9O7EwX9vsj79R3g8Y
-         jdFVXeMLIAG2EZlJWqgDcHNkfvqzYWySmfITbOxCtxsGy0hOiTMmQE4s1/Q3cbtHGxZW
-         mS5f1/ycl50OvBPoORoVsaB1Cq46PaqY5gOtuylnDwxjA48cnpdys3NYh9ylkGV7v/2Z
-         n/4EHJ2574XeQWtXFQJghY/DvmKs1bjqAjn9GyP0x61KxvW9mAUn9k9OTQEshQdv8+Tv
-         aA7g==
-X-Gm-Message-State: AOJu0YxH3NQ6qOhkOa465TS4sl++TWB/CW6DG0WF0C8TOjLpbZ8mN0lK
-	qAs3PTiTpeI8clysiod4oDidLlwOXSMys7dP6pInBuGWmB/UIR7oljZzTtqcxg==
-X-Gm-Gg: AY/fxX5O+gU93CLm/b/CxdeapjkIzxsH9KM9Cdn7LwncyvBIXxcUwHk3fJRIMABjz1i
-	i5uYdjRSvYLQYpH2p63LSAhCisoqpZ+geWuPNtwXeRwJ3ZUqgMkIUKK5TIap3hqmX53jFJpPRqk
-	dETW6Dgl9LsL66S3jRl6eerA9Ob93/FZSS+lN5J3EsekgoS3il1x+dUXSMKOLT1gBf9KyQXL69w
-	zQTAnUg2zw879DuTikHNvynGVIuja6h6IO6bIJjtwL5j2vhJTAtjyx3XDoXSxoT8UQCLOblkPEP
-	DhBYWNtXbFN2yGLQvpCXnGPpdBm0S74yDgWpVRf9An7i57DwyfhE2zJ1K0pg8MWyCfyc2sMPaD+
-	z/HdSjIiRxFLVqSd5YufTEiFmokW1YlBIkcSyDw6YiS9BGAoQqMUbtMMIMr65T8a+Qoip/dBU9B
-	PEALVyFMrUV8U6zYF52cDKq9fHVs3uY73HUw==
-X-Google-Smtp-Source: AGHT+IEiwjoLWjuEXK2wgB82e4UzwHpHiCieGXNLyKIMs6pTVNYdmsztzKIvAk0Ub1kOPWBbyYSNMg==
-X-Received: by 2002:a17:902:da47:b0:29f:13d2:1c67 with SMTP id d9443c01a7336-29f26d0d376mr12813645ad.16.1765531744303;
-        Fri, 12 Dec 2025 01:29:04 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([122.161.48.114])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29ee9b36c98sm48025805ad.8.2025.12.12.01.29.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Dec 2025 01:29:03 -0800 (PST)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-filesystems][whinlatter][PATCH] e2tools: Fix buildpaths in ptests
-Date: Fri, 12 Dec 2025 14:58:57 +0530
-Message-ID: <20251212092857.211174-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=qc8GiM0G8h4CcbGculR4DjRjnR5DhNAeWy4j+MmN7ig=;
+        b=yJdoGYT+p3kuGJ/0OR+/Blb8bWUPoeyFjxW472nk5PrezovtjkHlg/zUUiBWX7yBBj
+         hPYNo0NY6ofr7eKwxm6klkMD8ADvkTw8/ogEIUnVvrP15o7h4qlDzXQsFi/3s5JMf2eP
+         dqK29/MdnC/9T13c6LtkSYP/SxIzoGYefJCjM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765537211; x=1766142011;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=qc8GiM0G8h4CcbGculR4DjRjnR5DhNAeWy4j+MmN7ig=;
+        b=baQmk/fwQ3MMl7QBX4HZYovH9ACY1h4MdxVpXrxSxyXRZs4SNzLw0tiSXaNK0dZdkx
+         xP1KCmaW/rdPZVIGpnJNpOSXrUU4WWaIwTwi4ENA/Iwrp6/1qeLyvvBTw2thlgzVJp5f
+         jwfORSzo2+xPBxs35ph0ce9XsIIbHMawsg/CcfUrXY8wHHZntbXeDE1nXClLjPF49Mq0
+         3gMQ2o8OVBO1a44Pjn9FxvPO0D/70qb+lm5mZv67zkTJJA+gEYtYkGEpGY67Mp8MOL41
+         WoMz5AjRm5QxL2KQVHEFKixRxPeqKtGf3vlhFMvyNh0p7PLU3DQ85R4tM3mUKJehLMcn
+         XySA==
+X-Gm-Message-State: AOJu0YxhB/FaDuLxIM4gMvDYRNF5BVlvGxtixcXtbHz/nJblFWoy9lUH
+	BH+OUrJt+U1TxMN8WycpcleEiFf6xvzk/fmYYOxil1EYLJNq7WZJ3AJlP47qtCe4nfQ5HbNpkxA
+	5QfYEQeMXoHfaEDnyLGC9N7S9tWxXxb8mjBVuy5P7XA==
+X-Gm-Gg: AY/fxX71i6mxfyGUrIyLgZnz5SyCwQARFzX9xxgr7b5ZDEFpYSApHi0eVauznWKKHiC
+	9/x5mKnnL80qGBVUIxKEQR6nn+DoIueFvEatQPRUtRmMxI0yOc/ukNlpjnEgfsE7qjVcjPwSIGO
+	qv8DjoYA76ZP9o8CPeO0XbsTHSdNPuBgiYgGSky6Z6qdfkOQoG9UA1sjd+ZX2FlEvOJg5BJVJoL
+	lR8SC492ZnpoLRBoN24L2L6lmcwugNdWd3Stj0rIZ3Bw45eYj7I20VOs5/A53Qaf0GuscbcTZIg
+	gc+EaV3NFcgYVKFsBOAB6awBr5Dm
+X-Google-Smtp-Source: AGHT+IGuFZN4wxgH7jZagYYLpEW5cTT5G4QeyLxFdyjuCvHtnsL8Qq1dbsnqxsdFMbDW7dAthLVH5vm5qwf8cFSHkZ4=
+X-Received: by 2002:a5d:5550:0:b0:42f:b683:b3bf with SMTP id
+ ffacd0b85a97d-42fb683b57amr1149439f8f.19.1765537210683; Fri, 12 Dec 2025
+ 03:00:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251209085645.1437344-1-Deepesh.Varatharajan@windriver.com> <20251209085645.1437344-2-Deepesh.Varatharajan@windriver.com>
+In-Reply-To: <20251209085645.1437344-2-Deepesh.Varatharajan@windriver.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Fri, 12 Dec 2025 11:59:43 +0100
+X-Gm-Features: AQt7F2oHSdFjXpsKzfOI6b28JLfTSftCF-dqRjt7rOI8wpVdi252a0w_tEg-mZk
+Message-ID: <CAMSfU+5zhRGA56u6=zVMXOiOxV7vZ46ytoaYw1o-bHf_t_FoHg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 2/2] ripgrep: Add ripgrep recipe
+To: deepesh.varatharajan@windriver.com
+Cc: openembedded-devel@lists.openembedded.org, Sundeep.Kokkonda@windriver.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 09:29:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122599
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Dec 2025 11:00:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122600
 
-From: Khem Raj <raj.khem@gmail.com>
+Le mar. 9 d=C3=A9c. 2025 =C3=A0 09:57, Varatharajan, Deepesh via
+lists.openembedded.org
+<deepesh.varatharajan=3Dwindriver.com@lists.openembedded.org> a =C3=A9crit =
+:
+>
+> From: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
+>
+> ripgrep is a fast, line-oriented search tool written in Rust.
+> Add recipe for the latest release (15.1.0)
+>
+> - Recursively searches the current directory using a regex pattern
+> - Respects .gitignore rules
+> - Provides first-class support on Linux
+> - 'rg' is significantly faster than grep
+>
+> More information: https://crates.io/crates/ripgrep
+>
+> Upstream Benchmarks:
+> Task                                 ripgrep               GNU grep      =
+         Speedup vs grep
+> Basic search (Unicode)          536 lines, 0.082s       536 lines, 0.273s=
+       ripgrep ~3.3=C3=97 faster
+> Ignoring gitignore files        447 lines, 0.063s       447 lines, 0.674s=
+       ripgrep ~10=C3=97 faster
+> Large single file (~13GB)       7882 lines, 1.042s      7882 lines, 6.577=
+s      ripgrep ~6.3=C3=97 faster
+>
+> Bechmarks inside qemu (ripgrep built from this recipe):
+> Tool & Command                      Real Time    User Time    Sys Time   =
+ Speedup vs grep
+> ripgrep (rg "printf" /usr)           0.496 s      0.511 s     0.604 s    =
+   3.1=C3=97 faster
+> grep (grep -R "printf" /usr)         1.533 s      0.633 s     0.897 s    =
+        =E2=80=94
+>
+> Signed-off-by: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
+> ---
+>  .../ripgrep/ripgrep-crates.inc                | 116 ++++++++++++++++++
+>  .../ripgrep/ripgrep_15.1.0.bb                 |  22 ++++
+>  2 files changed, 138 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/ripgrep/ripgrep-crates.inc
+>  create mode 100644 meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+>
+> diff --git a/meta-oe/recipes-extended/ripgrep/ripgrep-crates.inc b/meta-o=
+e/recipes-extended/ripgrep/ripgrep-crates.inc
+> new file mode 100644
+> index 0000000000..aa7e3f9dd2
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/ripgrep/ripgrep-crates.inc
+> @@ -0,0 +1,116 @@
+> +# Autogenerated with 'bitbake -c update_crates ripgrep'
+> +
+> +# from Cargo.lock
+> +SRC_URI +=3D " \
+> +    crate://crates.io/aho-corasick/1.1.3 \
+> +    crate://crates.io/anyhow/1.0.100 \
+> +    crate://crates.io/bstr/1.12.0 \
+> +    crate://crates.io/cc/1.2.41 \
+> +    crate://crates.io/cfg-if/1.0.4 \
+> +    crate://crates.io/crossbeam-deque/0.8.6 \
+> +    crate://crates.io/crossbeam-epoch/0.9.18 \
+> +    crate://crates.io/crossbeam-utils/0.8.21 \
+> +    crate://crates.io/encoding_rs/0.8.35 \
+> +    crate://crates.io/encoding_rs_io/0.1.7 \
+> +    crate://crates.io/find-msvc-tools/0.1.4 \
+> +    crate://crates.io/getrandom/0.3.4 \
+> +    crate://crates.io/globset/0.4.18 \
+> +    crate://crates.io/grep/0.4.1 \
+> +    crate://crates.io/grep-cli/0.1.12 \
+> +    crate://crates.io/grep-matcher/0.1.8 \
+> +    crate://crates.io/grep-pcre2/0.1.9 \
+> +    crate://crates.io/grep-printer/0.3.1 \
+> +    crate://crates.io/grep-regex/0.1.14 \
+> +    crate://crates.io/grep-searcher/0.1.16 \
+> +    crate://crates.io/ignore/0.4.24 \
+> +    crate://crates.io/itoa/1.0.15 \
+> +    crate://crates.io/jobserver/0.1.34 \
+> +    crate://crates.io/lexopt/0.3.1 \
+> +    crate://crates.io/libc/0.2.177 \
+> +    crate://crates.io/log/0.4.28 \
+> +    crate://crates.io/memchr/2.7.6 \
+> +    crate://crates.io/memmap2/0.9.9 \
+> +    crate://crates.io/pcre2/0.2.11 \
+> +    crate://crates.io/pcre2-sys/0.2.10 \
+> +    crate://crates.io/pkg-config/0.3.32 \
+> +    crate://crates.io/proc-macro2/1.0.101 \
+> +    crate://crates.io/quote/1.0.41 \
+> +    crate://crates.io/r-efi/5.3.0 \
+> +    crate://crates.io/regex-automata/0.4.13 \
+> +    crate://crates.io/regex-syntax/0.8.8 \
+> +    crate://crates.io/ryu/1.0.20 \
+> +    crate://crates.io/same-file/1.0.6 \
+> +    crate://crates.io/serde/1.0.228 \
+> +    crate://crates.io/serde_core/1.0.228 \
+> +    crate://crates.io/serde_derive/1.0.228 \
+> +    crate://crates.io/serde_json/1.0.145 \
+> +    crate://crates.io/shlex/1.3.0 \
+> +    crate://crates.io/syn/2.0.107 \
+> +    crate://crates.io/termcolor/1.4.1 \
+> +    crate://crates.io/textwrap/0.16.2 \
+> +    crate://crates.io/tikv-jemalloc-sys/0.6.1+5.3.0-1-ge13ca993e8ccb9ba9=
+847cc330696e02839f328f7 \
+> +    crate://crates.io/tikv-jemallocator/0.6.1 \
+> +    crate://crates.io/unicode-ident/1.0.20 \
+> +    crate://crates.io/walkdir/2.5.0 \
+> +    crate://crates.io/wasip2/1.0.1+wasi-0.2.4 \
+> +    crate://crates.io/winapi-util/0.1.11 \
+> +    crate://crates.io/windows-link/0.2.1 \
+> +    crate://crates.io/windows-sys/0.61.2 \
+> +    crate://crates.io/wit-bindgen/0.46.0 \
+> +"
+> +
+> +SRC_URI[aho-corasick-1.1.3.sha256sum] =3D "8e60d3430d3a69478ad0993f19238=
+d2df97c507009a52b3c10addcd7f6bcb916"
+> +SRC_URI[anyhow-1.0.100.sha256sum] =3D "a23eb6b1614318a8071c9b2521f36b424=
+b2c83db5eb3a0fead4a6c0809af6e61"
+> +SRC_URI[bstr-1.12.0.sha256sum] =3D "234113d19d0d7d613b40e86fb654acf95891=
+0802bcceab913a4f9e7cda03b1a4"
+> +SRC_URI[cc-1.2.41.sha256sum] =3D "ac9fe6cdbb24b6ade63616c0a0688e45bb5673=
+2262c158df3c0c4bea4ca47cb7"
+> +SRC_URI[cfg-if-1.0.4.sha256sum] =3D "9330f8b2ff13f34540b44e946ef35111825=
+727b38d33286ef986142615121801"
+> +SRC_URI[crossbeam-deque-0.8.6.sha256sum] =3D "9dd111b7b7f7d55b72c0a6ae36=
+1660ee5853c9af73f70c3c2ef6858b950e2e51"
+> +SRC_URI[crossbeam-epoch-0.9.18.sha256sum] =3D "5b82ac4a3c2ca9c3460964f02=
+0e1402edd5753411d7737aa39c3714ad1b5420e"
+> +SRC_URI[crossbeam-utils-0.8.21.sha256sum] =3D "d0a5c400df2834b80a4c3327b=
+3aad3a4c4cd4de0629063962b03235697506a28"
+> +SRC_URI[encoding_rs-0.8.35.sha256sum] =3D "75030f3c4f45dafd7586dd6780965=
+a8c7e8e285a5ecb86713e63a79c5b2766f3"
+> +SRC_URI[encoding_rs_io-0.1.7.sha256sum] =3D "1cc3c5651fb62ab8aa3103998da=
+de57efdd028544bd300516baa31840c252a83"
+> +SRC_URI[find-msvc-tools-0.1.4.sha256sum] =3D "52051878f80a721bb68ebfbc93=
+0e07b65ba72f2da88968ea5c06fd6ca3d3a127"
+> +SRC_URI[getrandom-0.3.4.sha256sum] =3D "899def5c37c4fd7b2664648c28120ece=
+c138e4d395b459e5ca34f9cce2dd77fd"
+> +SRC_URI[globset-0.4.18.sha256sum] =3D "52dfc19153a48bde0cbd630453615c815=
+1bce3a5adfac7a0aebfbf0a1e1f57e3"
+> +SRC_URI[grep-0.4.1.sha256sum] =3D "309217bc53e2c691c314389c7fa91f9cd1a99=
+8cda19e25544ea47d94103880c3"
+> +SRC_URI[grep-cli-0.1.12.sha256sum] =3D "cf32d263c5d5cc2a23ce587097f5ddaf=
+db188492ba2e6fb638eaccdc22453631"
+> +SRC_URI[grep-matcher-0.1.8.sha256sum] =3D "36d7b71093325ab22d780b40d7df3=
+066ae4aebb518ba719d38c697a8228a8023"
+> +SRC_URI[grep-pcre2-0.1.9.sha256sum] =3D "667bb90a3ee51f8f6e2aadf1d0f106e=
+a42efca4cf28f0e71f0fdec1137d7f9b0"
+> +SRC_URI[grep-printer-0.3.1.sha256sum] =3D "fd76035e87871f51c1ee5b793e321=
+22b3ccf9c692662d9622ef1686ff5321acb"
+> +SRC_URI[grep-regex-0.1.14.sha256sum] =3D "0ce0c256c3ad82bcc07b812c15a45e=
+c1d398122e8e15124f96695234db7112ef"
+> +SRC_URI[grep-searcher-0.1.16.sha256sum] =3D "ac63295322dc48ebb20a2534814=
+7905d816318888e64f531bfc2a2bc0577dc34"
+> +SRC_URI[ignore-0.4.24.sha256sum] =3D "81776e6f9464432afcc28d03e52eb101c9=
+3b6f0566f52aef2427663e700f0403"
+> +SRC_URI[itoa-1.0.15.sha256sum] =3D "4a5f13b858c8d314ee3e8f639011f7ccefe7=
+1f97f96e50151fb991f267928e2c"
+> +SRC_URI[jobserver-0.1.34.sha256sum] =3D "9afb3de4395d6b3e67a780b6de64b51=
+c978ecf11cb9a462c66be7d4ca9039d33"
+> +SRC_URI[lexopt-0.3.1.sha256sum] =3D "9fa0e2a1fcbe2f6be6c42e342259976206b=
+383122fc152e872795338b5a3f3a7"
+> +SRC_URI[libc-0.2.177.sha256sum] =3D "2874a2af47a2325c2001a6e6fad9b16a53b=
+802102b528163885171cf92b15976"
+> +SRC_URI[log-0.4.28.sha256sum] =3D "34080505efa8e45a4b816c349525ebe327cea=
+a8559756f0356cba97ef3bf7432"
+> +SRC_URI[memchr-2.7.6.sha256sum] =3D "f52b00d39961fc5b2736ea853c9cc86238e=
+165017a493d1d5c8eac6bdc4cc273"
+> +SRC_URI[memmap2-0.9.9.sha256sum] =3D "744133e4a0e0a658e1374cf3bf8e415c40=
+52a15a111acd372764c55b4177d490"
+> +SRC_URI[pcre2-0.2.11.sha256sum] =3D "9e970b0fcce0c7ee6ef662744ff711f21cc=
+d6f11b7cf03cd187a80e89797fc67"
+> +SRC_URI[pcre2-sys-0.2.10.sha256sum] =3D "18b9073c1a2549bd409bf4a32c94d90=
+3bb1a09bf845bc306ae148897fa0760a4"
+> +SRC_URI[pkg-config-0.3.32.sha256sum] =3D "7edddbd0b52d732b21ad9a5fab5c70=
+4c14cd949e5e9a1ec5929a24fded1b904c"
+> +SRC_URI[proc-macro2-1.0.101.sha256sum] =3D "89ae43fd86e4158d6db51ad8e2b8=
+0f313af9cc74f5c0e03ccb87de09998732de"
+> +SRC_URI[quote-1.0.41.sha256sum] =3D "ce25767e7b499d1b604768e7cde645d14cc=
+8584231ea6b295e9c9eb22c02e1d1"
+> +SRC_URI[r-efi-5.3.0.sha256sum] =3D "69cdb34c158ceb288df11e18b4bd39de994f=
+6657d83847bdffdbd7f346754b0f"
+> +SRC_URI[regex-automata-0.4.13.sha256sum] =3D "5276caf25ac86c8d810222b3db=
+b938e512c55c6831a10f3e6ed1c93b84041f1c"
+> +SRC_URI[regex-syntax-0.8.8.sha256sum] =3D "7a2d987857b319362043e95f5353c=
+0535c1f58eec5336fdfcf626430af7def58"
+> +SRC_URI[ryu-1.0.20.sha256sum] =3D "28d3b2b1366ec20994f1fd18c3c594f05c5dd=
+4bc44d8bb0c1c632c8d6829481f"
+> +SRC_URI[same-file-1.0.6.sha256sum] =3D "93fc1dc3aaa9bfed95e02e6eadabb4ba=
+f7e3078b0bd1b4d7b6b0b68378900502"
+> +SRC_URI[serde-1.0.228.sha256sum] =3D "9a8e94ea7f378bd32cbbd37198a4a91436=
+180c5bb472411e48b5ec2e2124ae9e"
+> +SRC_URI[serde_core-1.0.228.sha256sum] =3D "41d385c7d4ca58e59fc732af25c39=
+83b67ac852c1a25000afe1175de458b67ad"
+> +SRC_URI[serde_derive-1.0.228.sha256sum] =3D "d540f220d3187173da220f885ab=
+66608367b6574e925011a9353e4badda91d79"
+> +SRC_URI[serde_json-1.0.145.sha256sum] =3D "402a6f66d8c709116cf22f558eab2=
+10f5a50187f702eb4d7e5ef38d9a7f1c79c"
+> +SRC_URI[shlex-1.3.0.sha256sum] =3D "0fda2ff0d084019ba4d7c6f371c95d8fd75c=
+e3524c3cb8fb653a3023f6323e64"
+> +SRC_URI[syn-2.0.107.sha256sum] =3D "2a26dbd934e5451d21ef060c018dae56fc07=
+3894c5a7896f882928a76e6d081b"
+> +SRC_URI[termcolor-1.4.1.sha256sum] =3D "06794f8f6c5c898b3275aebefa6b8a1c=
+b24cd2c6c79397ab15774837a0bc5755"
+> +SRC_URI[textwrap-0.16.2.sha256sum] =3D "c13547615a44dc9c452a8a534638acdf=
+07120d4b6847c8178705da06306a3057"
+> +SRC_URI[tikv-jemalloc-sys-0.6.1+5.3.0-1-ge13ca993e8ccb9ba9847cc330696e02=
+839f328f7.sha256sum] =3D "cd8aa5b2ab86a2cefa406d889139c162cbb230092f7d1d7cb=
+c1716405d852a3b"
+> +SRC_URI[tikv-jemallocator-0.6.1.sha256sum] =3D "0359b4327f954e0567e69fb1=
+91cf1436617748813819c94b8cd4a431422d053a"
+> +SRC_URI[unicode-ident-1.0.20.sha256sum] =3D "462eeb75aeb73aea900253ce739=
+c8e18a67423fadf006037cd3ff27e82748a06"
+> +SRC_URI[walkdir-2.5.0.sha256sum] =3D "29790946404f91d9c5d06f9874efddea1d=
+c06c5efe94541a7d6863108e3a5e4b"
+> +SRC_URI[wasip2-1.0.1+wasi-0.2.4.sha256sum] =3D "0562428422c63773dad2c345=
+a1882263bbf4d65cf3f42e90921f787ef5ad58e7"
+> +SRC_URI[winapi-util-0.1.11.sha256sum] =3D "c2a7b1c03c876122aa43f3020e6c3=
+c3ee5c05081c9a00739faf7503aeba10d22"
+> +SRC_URI[windows-link-0.2.1.sha256sum] =3D "f0805222e57f7521d6a62e36fa916=
+3bc891acd422f971defe97d64e70d0a4fe5"
+> +SRC_URI[windows-sys-0.61.2.sha256sum] =3D "ae137229bcbd6cdf0f7b80a31df61=
+766145077ddf49416a728b02cb3921ff3fc"
+> +SRC_URI[wit-bindgen-0.46.0.sha256sum] =3D "f17a85883d4e6d00e8a97c586de76=
+4dabcc06133f7f1d55dce5cdc070ad7fe59"
+> diff --git a/meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb b/meta-oe=
+/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+> new file mode 100644
+> index 0000000000..7bb6be1cb6
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY =3D "ripgrep - Fast, recursive search tool like grep, written in=
+ Rust"
+> +HOMEPAGE =3D "https://crates.io/crates/ripgrep"
+> +DESCRIPTION =3D "ripgrep recursively searches directories for a regex pa=
+ttern \
+> +               while respecting .gitignore. It's fast, safe, and written=
+ \
+> +               entirely in Rust."
+> +
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D " \
+> +    file://LICENSE-MIT;md5=3D8d0d0aa488af0ab9aafa3b85a7fc8e12 \
+> +"
+> +
+> +SRC_URI =3D "crate://crates.io/ripgrep/${PV};name=3Dripgrep"
+> +SRC_URI[ripgrep.sha256sum] =3D "f388c4955f85477c28a8667355819844a06614b0=
+83c23517f0e86bd1d6d82b73"
+> +S =3D "${CARGO_VENDORING_DIRECTORY}/ripgrep-${PV}"
+> +
+> +inherit cargo cargo-update-recipe-crates
+> +
+> +DEPENDS +=3D "libstd-rs"
+> +
+> +require ${BPN}-crates.inc
+> +
+> +BBCLASSEXTEND =3D "native"
+This BBCLASSEXTEND creates warning on AB[0]:
+stdio: WARNING: Nothing PROVIDES 'libstd-rs-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+DEPENDS on or otherwise requires it). Close matches:
+stdio: WARNING: Nothing RPROVIDES 'ripgrep-dev-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+RDEPENDS on or otherwise requires it)
+stdio: WARNING: Nothing RPROVIDES 'ripgrep-native' (but
+virtual:native:/srv/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openem=
+bedded/meta-oe/recipes-extended/ripgrep/ripgrep_15.1.0.bb
+RDEPENDS on or otherwise requires it)
 
-Currently the path checks are escaping QA check for buildpath detection but config.status
-still has paths which show up in reproduciblity failures, comparing build in path A and
-build in path B, content of config.status don't end up same.
+Can you look into it?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0856c5613234c61d809b9c983bc45c750144ebd8)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../recipes-utils/e2tools/e2tools_0.1.2.bb       | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+Thanks!
+[0]: https://autobuilder.yoctoproject.org/valkyrie/?#/builders/82/builds/54=
+6
 
-diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb b/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
-index 219735acd1..b7b925da0e 100644
---- a/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
-+++ b/meta-filesystems/recipes-utils/e2tools/e2tools_0.1.2.bb
-@@ -39,7 +39,21 @@ do_install_ptest() {
-         ${D}${PTEST_PATH}/build/autom4te.cache \
-         ${D}${PTEST_PATH}/*/*/.git ${D}${PTEST_PATH}/*/*/.github \
-         ${D}${PTEST_PATH}/*/*/autom4te.cache
--    sed -i -e 's;${TMPDIR};;g' ${D}${PTEST_PATH}/build/config.status
-+    sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*--sysroot=[^ "]*@@g' \
-+        -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
-+        -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
-+        -e '/EXT2FS_CFLAGS/d' \
-+        -e '/LDFLAGS/d' \
-+        -e '/PKG_CONFIG_PATH/d' \
-+        -e '/PKG_CONFIG_LIBDIR/d' \
-+        -e 's@${S}@${PTEST_PATH}@g' \
-+        -e 's@${B}@${PTEST_PATH}/build@g' \
-+        -e 's@${HOSTTOOLS_DIR}@@g' \
-+        -e 's@${RECIPE_SYSROOT}@@g' \
-+        -i ${D}${PTEST_PATH}/build/config.status
- }
- 
- RDEPENDS:${PN}-ptest += "bash coreutils e2fsprogs e2tools gawk make perl"
+> --
+> 2.49.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122403): https://lists.openembedded.org/g/openembedde=
+d-devel/message/122403
+> Mute This Topic: https://lists.openembedded.org/mt/116691253/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [y=
+oann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+
+
+--=20
+Yoann Congal
+Smile ECS
 
