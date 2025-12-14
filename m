@@ -1,97 +1,176 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B01D5B16C
-	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 17:43:08 +0000 (UTC)
-Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29616.1765734187582661580
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DFFAAD59D99
+	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 18:04:58 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.30040.1765735491536033293
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Dec 2025 09:43:07 -0800
+ Sun, 14 Dec 2025 10:04:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kSrlJSt4;
- spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-6432842cafdso2498977d50.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 09:43:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765734186; x=1766338986; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/3Ja/Kxf1smp77i1SMYs05f+Qp3Y3DeZvU5n361EEV8=;
-        b=kSrlJSt4g+x2c0p7GYKGaE9MEsE4qFXAYvakBF38d8HadXfwC/VA7RypSYvgj+4+9q
-         SkqmzOQvWuLqRt+96Xxxp0Oa2X7yGoOTxzVCBVi9qkQVg1vWkFj6whGU+cKmdsOoWGII
-         jNM2QQpcUHPuZ9DtXkr0fRIEfTcnwOU9OxMHa8apvwYNFxwoYY1bL43uC4s7oMJSczT4
-         Dc7bIQ0/qTZQHS2t2+H/cJZx1LI+t/oUgpFWgKhCFQoppix7Od5oIkrG0vqADeFNXQfR
-         plxwUkQs/5+jffJBjM8ZUaldI/zWtbPpe3aCyN99/vtJqoB5GPq73ZRLyk5itCiHlFtk
-         LH8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765734186; x=1766338986;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/3Ja/Kxf1smp77i1SMYs05f+Qp3Y3DeZvU5n361EEV8=;
-        b=YVraS4dKItAPt5nZ7yQjkXTaXdGZaK/f6C39pwCVz6D5ORRCrTAW4qit6DTL2/N1Gd
-         ouWKjELl/5aq8EOetWoLkKRJj35twp5ew6P9lSHc17ppIGuq8L8LrCf15lNd+BDUcptM
-         wnir6A+tAcwLWgnqBDRUE8roeBI5rmqs/46b7AhfqXjbIu8c/IdOhC0cW8I/Yhsbqmor
-         yCZJi8BQNaXaY8mVYE46fuUg4Kz8ExE46otavBfArDh+E7cbziOA6C7fqtOsebOI2tKt
-         3YLtChJKZViyKceJKzVMIv6CbXrOQq9B7P7+hcK4zTQo+yyr9pVsugsHVuSmHxNO0PMw
-         2/hQ==
-X-Gm-Message-State: AOJu0YymGrwfDvXTli5s6yJs2zQ9ooD1J1shx7I71vqSBwqbkbNyysEs
-	Y7j1j4Na22GZym+/iYYdAcKvsIVjOJ4vJIClgprkXSW8YHUGNVZtrR4ama9ltxiK
-X-Gm-Gg: AY/fxX4fEHFwyTcd+N7Ma7kk2rRZTGLCL4sSGO/kQULKvF9FKW9oeZvpGgciET6sWv0
-	lUtNKdxq5MiHPXrrHpF1kxuOTqwLCbr4Dm2aXjXfRPhY3qWv7I1BORdSBWtR07dFudY1xJTNK5o
-	9bUrNujpzmNbm6rEKhJRd1EFzxGpfaRWTVV1XNynhpxoGWG17nO8MS8/MAVXhyiBu0olNVMHbd4
-	lznQl72wAgSsXtdS1Uj+ixDgzCEPlmkvg4gS9BXeEG7yasJPHUvT+KhbZo7YAnyjRt4LkxYzlbf
-	cxfRHP2PuRjPO4/GE/nQq0KP77GfbOsdjd2E6TtS1G4yUw8o/U5mV19EiV2Dp9yolUWnS0hICUM
-	+13J+yUSVedeA4/h6p693Ut7L7pmBDgYTrcVo9PWOOiJqvPA/2zYHfOzjynbU87zSv6NjSxsTrs
-	hJ0zEP81T1vxwhOQlaumZN2kRhLVwdDfY8vOh6NpTRArZdoBmhgoj/xFcs/do42qUFp1BhUzkxv
-	2PHwuwIeWRrbjUbjx/Xigm0xO6X0KDNmJCizPgpQU+r/xnIHwMMPcpB12+uXk8EEw==
-X-Google-Smtp-Source: AGHT+IEceVQ93memKN14Ibb9PdmOEnYjkWwyc2H1WBNKnCQQibbujFajJtemyKjtzi4ZeqH+XTRVPA==
-X-Received: by 2002:a05:690e:28e:b0:643:1ef1:960b with SMTP id 956f58d0204a3-6455564e8ddmr4738646d50.56.1765734186234;
-        Sun, 14 Dec 2025 09:43:06 -0800 (PST)
-Received: from localhost.localdomain (71-208-12-78.ftmy.qwest.net. [71.208.12.78])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-78e749e550csm19497927b3.29.2025.12.14.09.43.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Dec 2025 09:43:05 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-networking][PATCH] nopoll: Upgrade to 0.4.7.b429
-Date: Sun, 14 Dec 2025 12:42:38 -0500
-Message-ID: <20251214174238.28948-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=R7sF7pYo;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=444390f874=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 5BEHvkC92344344
+	for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 18:04:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=MD3Wv48cMYwSyyqfbS4G
+	lj/8qVg18e+JGIX5/p0Hq2g=; b=R7sF7pYoEpAzawFX5j2Jj+qccR4qqyrIh1TW
+	UyW76AtZx7hoC9zcm7ygf4w/iFAffWi2ZFXhPLn1iTbXZ/kWv38o5yxGhjh7muwg
+	1q6S6yaoxIKdQfj2/0jorO/rYcmQBpmeNgdOskaFaR1BHbvVamuG0LBRwIYaS3XK
+	FC9PsfUVuizl3rkXo4dfIQPKM2PZACFiu9x8koSzQYRmOrIOWmqgkadBvOTkkhpc
+	6Yb8EeOwOLT6oExpxPa0QPUN4CrFqaqA8LQMBYSUdWFIx33I3JC7uFFDx202O7+m
+	y+B3FnICkuZ/hb3fe9UJ1r32lZAkRbG0I36MJ5Y82rlnQ1a9jw==
+Received: from ala-exchng02.corp.ad.wrs.com ([128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4b0wc0h6x6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 18:04:50 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Sun, 14 Dec 2025 10:04:49 -0800
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Sun, 14 Dec 2025 10:04:48 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [scarthgap][PATCH] mbedtls: fix CVE-2025-47917
+Date: Mon, 15 Dec 2025 02:04:46 +0800
+Message-ID: <20251214180446.2682162-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMjE0MDE2NyBTYWx0ZWRfX72lckLc8Qqfl
+ WZSt80GPamgwlmOHPgEHTNPebdojBTO5VIdWtHgG3OV+01O/pPDXk+i1JUh684ivxJMrmxuezdj
+ f2z6/JR/Sioog5LW4nPojvEhm7k/tLUfjaqSlFD8iYoEyvAdVV7gkHgZsPo0xk9FtcDyv2fcDwL
+ qhNB3Gb5T/zw/fWgFNLbqwDtcIF8qMudPJ4RUFFTqHIhhrtCTfHga9GrhndVeW43QA0BC/h0K7Z
+ llf4xfsf+swrjSbjvKqpnxKDBxsaaQnW/wh6XTcpdShK1I3g/m4gvzHAsF22SRfBdglTQxHLAQ4
+ B728IJj+sDqc5yMBbTlc61X6aMeOarg51ruNtcJsmNoxODUY7+UiEBIfuav7RSl+XQBUWk7irX7
+ 7hB0RlWv2/WvKrAW7vJbifn7Ndhz5A==
+X-Proofpoint-GUID: vL0Hb4WDvKQ0tzkMDQBw8y32Zd27PHQ5
+X-Proofpoint-ORIG-GUID: vL0Hb4WDvKQ0tzkMDQBw8y32Zd27PHQ5
+X-Authority-Analysis: v=2.4 cv=B/60EetM c=1 sm=1 tr=0 ts=693efc42 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=IkcTkHD0fZMA:10 a=wP3pNCr1ah4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=7CQSdrXTAAAA:8 a=McYcvuQCY6QHsMojYNUA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22
+ a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2025-12-14_05,2025-12-11_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 malwarescore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2510240001 definitions=main-2512140167
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 5BEHvkC92344344
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 17:43:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122651
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 18:04:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122652
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+From: Kai Kang <kai.kang@windriver.com>
+
+CVE-2025-47917 is that the function mbedtls_x509_string_to_names() takes
+a head argument and performs a deep free() on it.
+
+Backport patch to fix CVE-2025-47917 and drop the modification in doc
+file and comment in header file which lack of context.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../nopoll/{nopoll_0.4.6.b400.bb => nopoll_0.4.7.b429.bb}      | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-protocols/nopoll/{nopoll_0.4.6.b400.bb => nopoll_0.4.7.b429.bb} (84%)
+ .../mbedtls/mbedtls/CVE-2025-47917.patch      | 52 +++++++++++++++++++
+ .../mbedtls/mbedtls_2.28.10.bb                |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/=
+CVE-2025-47917.patch
 
-diff --git a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.7.b429.bb
-similarity index 84%
-rename from meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
-rename to meta-networking/recipes-protocols/nopoll/nopoll_0.4.7.b429.bb
-index 816e513a15..b4f8605136 100644
---- a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.6.b400.bb
-+++ b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.7.b429.bb
-@@ -13,8 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f0504124678c1b3158146e0630229298 \
- DEPENDS = "openssl"
- SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-202=
+5-47917.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-=
+2025-47917.patch
+new file mode 100644
+index 0000000000..75c4829191
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/CVE-2025-47917=
+.patch
+@@ -0,0 +1,52 @@
++From 19d2c9165a13decf754177adda2bf59fd0e32aa1 Mon Sep 17 00:00:00 2001
++From: =3D?UTF-8?q?Manuel=3D20P=3DC3=3DA9gouri=3DC3=3DA9-Gonnard?=3D
++ <manuel.pegourie-gonnard@arm.com>
++Date: Mon, 5 May 2025 16:41:52 +0200
++Subject: [PATCH] Fix undocumented free() in x509_string_to_names()
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++Now programs/x509/cert_write san=3D"DN:CN=3D#0000;DN:CN=3D#0000" is no l=
+onger
++crashing with use-after-free, instead it's now failing cleanly:
++
++ failed
++  !  mbedtls_x509_string_to_names returned -0x2800 - X509 - Input invali=
+d
++
++That's better of course but still not great, will be fixed by future
++commits.
++
++Signed-off-by: Manuel P=C3=A9gouri=C3=A9-Gonnard <manuel.pegourie-gonnar=
+d@arm.com>
++
++CVE: CVE-2025-47917
++
++Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/43=
+a1e73]
++
++Backport patch to fix CVE-2025-47917 and drop the modification in doc
++file and comment in header file which lack of context.
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ library/x509_create.c                          |  8 ++++++--
++ 1 files changed, 6 insertions(+), 2 deletions(-)
++ create mode 100644 ChangeLog.d/fix-string-to-names-memory-management.tx=
+t
++
++diff --git a/library/x509_create.c b/library/x509_create.c
++index 839b5df226..420e36b81b 100644
++--- a/library/x509_create.c
+++++ b/library/x509_create.c
++@@ -122,8 +122,12 @@ int mbedtls_x509_string_to_names(mbedtls_asn1_named=
+_data **head, const char *nam
++     char data[MBEDTLS_X509_MAX_DN_NAME_SIZE];
++     char *d =3D data;
++=20
++-    /* Clear existing chain if present */
++-    mbedtls_asn1_free_named_data_list(head);
+++    /* Ensure the output parameter is not already populated.
+++     * (If it were, overwriting it would likely cause a memory leak.)
+++     */
+++    if (*head !=3D NULL) {
+++        return MBEDTLS_ERR_X509_BAD_INPUT_DATA;
+++    }
++=20
++     while (c <=3D end) {
++         if (in_tag && *c =3D=3D '=3D') {
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10=
+.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
+index 62e6c90f63..53462953ef 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
+@@ -26,6 +26,7 @@ S =3D "${WORKDIR}/git"
+ SRCREV =3D "2fc8413bfcb51354c8e679141b17b3f1a5942561"
+ SRC_URI =3D "git://github.com/Mbed-TLS/mbedtls.git;protocol=3Dhttps;bran=
+ch=3Darchive/mbedtls-2.28 \
+            file://run-ptest \
++           file://CVE-2025-47917.patch \
            "
--SRC_URI[md5sum] = "8d333f158b5d5a8975a6149e6ef8db63"
--SRC_URI[sha256sum] = "7f1b20f1d0525f30cdd2a4fc386d328b4cf98c6d11cef51fe62cd9491ba19ad9"
-+SRC_URI[sha256sum] = "d5c020fec25e3fa486c308249833d06bed0d76bde9a72fd5d73cfb057c320366"
- 
- inherit autotools pkgconfig
- 
--- 
-2.43.0
+=20
+ inherit cmake update-alternatives ptest
+--=20
+2.34.1
 
 
