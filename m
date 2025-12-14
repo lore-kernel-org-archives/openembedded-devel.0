@@ -2,82 +2,98 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B7A2D59D99
-	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 19:15:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BBE6D5B16C
+	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 19:20:19 +0000 (UTC)
 Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31423.1765739712106759859
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.31642.1765740008730177121
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Dec 2025 11:15:12 -0800
+ Sun, 14 Dec 2025 11:20:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TpBo1/nW;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=R3oRm3MP;
  spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42fbab737f5so1090898f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 11:15:11 -0800 (PST)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e77f519so1397897f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 11:20:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765739710; x=1766344510; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765740007; x=1766344807; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=y7cDOPEzc4IqTE/yZcvjQIxV7vr3cw3RWMppzsIt6vY=;
-        b=TpBo1/nWaqrL47sEAWX/rke2JP2bw1YQovj/3FyjtaviFJ2lB7F+u7ehGJQUufm3BP
-         7OXLSSZXPhwtZGeCe3Vhxm6HCSpND44qID19NVyOwenwv4U5j30FyMQeQOuaB37Zz6wv
-         Z+yw70mfN6nTB1hy+Bh1TkqhTaBWX33nhD4N9ZlBoc6nIvxUnAfXiRZB7LAhvvwqy4tg
-         gIr0b5vPmPaSD0wez1hRp5yANqcgzDldn1s5P8rndSlRI+Y657yZLz0UimyozCtTx1nh
-         WZRvdbZBXtaYOM7urWUKmzz41oCB1DelJ/0892WM5NPaID0PDxpgYO1ES+5GFwth1C1j
-         GG2A==
+        bh=C4JhGJk7mdvYABkI1BBEbpaL/q5WEGbowe9E4tp7i60=;
+        b=R3oRm3MPOMq9jYDnW92YPForLKaPLJY5cPrjdQlnM7EkkveI6e1Tz5Exyu8OLu3YhS
+         WZmqvoIOKO6zKuEw0TdoMegDIQVCSsxqUJqsfCOsv8Je6Nq5qOtezMzprH2mEYy+8mya
+         /1agRjlramuyMJVszHrgIsdr5meZIzMAq+oc/1nJFBcNSmCcZcDTmbUUExBF2ErNAv+A
+         dSTXkbiYH8n7sx8Jo1Eo+Cud4Z3XzDiHWKkrCAvUlC4TILdUft57GBI4q9EU/CTJeEyk
+         BM66FeWCesHHL7gP7KGki2BsePRYLyn0R6tGu8UMRPJpbBTvCmhziWh/HdDs/RhbSNTi
+         i7OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765739710; x=1766344510;
+        d=1e100.net; s=20230601; t=1765740007; x=1766344807;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=y7cDOPEzc4IqTE/yZcvjQIxV7vr3cw3RWMppzsIt6vY=;
-        b=ZTjdjUruf2zYjvmPUISrfttknIirbxwhXePx6fd3gaWzw/OfvQtTEoSDZKtlGPsQSR
-         4CPFf5GXHqtqAOL4sGMUW2CoFld1gvvDaHboJGfMjBet4ZL+qUVEqpe9OieDjypq/e5x
-         qWdXsYc9G1QYRNDKhoUbPrl4/m71izK1YbqzhbbPkQMWHoXB5A9XR3iNUSWPeCWpxmUe
-         lKbgnRZ6EpdAn8m0gBNXJJcIrC71dgQ4s/RyBICmjaTliTRf0NuLAAqzcBRIHicgTs1j
-         DUzTXWXsQUtVSSWpP4x7HguvroWXu6dSqxB7nKgUjJzBKAj/BLYYWTj9ffBfvcF07AZQ
-         RM0g==
-X-Gm-Message-State: AOJu0YwQ959afIcEmkkWDT0zy1e0ohq/EEP4CphyWCzeZ7YstORVXAkv
-	hf5cJIw0beOzrbPU8bHYj8lmy8QIW7ijroC5PIG4ifXz9xIsO03goddO1OykmA==
-X-Gm-Gg: AY/fxX4gj2Jt71FOmP06Dg9hI7ZVjaPUpbGQ5LMTFV32Kn0k6Kc/u3oZJKjT3nzyUiL
-	7XqSy4WndvF7Edaj3Xa+Q2bEXhdws/OVgPWMcNOt9kqdKGZ1TeIB+hamofAL3ozQo4YonmN4Lht
-	PkXXDijCW5IYrQNrFZsE/E7BLEz2m0k7Q/AgXHqZxmJTA23TxOLGpjG+xcfSsxxkc+3zzDsZQBU
-	zWWAy5mxdXlneku71tVwDw981RxLuwNTKUDipZ6l6gpMfs+kO80QSoS/dyhNmClO+g2PkFZ9oV6
-	1gS3Tn9HuDzvXrOKI+SD5JzOTspzXYxsgHEWyK849Kw+SK17T3Xr26t8mmTttAuWUyUhSvU8xiq
-	Mcvl5CnCo7JwDnwE9UnthDc5dhf1YOnhmYLMHH0aGGOa2XHUyHyf0yUisjIgpKQy7t9WXlX7t/i
-	0gb2nlFwZi
-X-Google-Smtp-Source: AGHT+IEXkCIIN9rvONgFwPHsOaTk/Wt94HR+Zn17HThCaTxdhybth8fKAka6nCh+xOaLkZm4SIGvlA==
-X-Received: by 2002:a05:6000:144d:b0:429:b963:cdd5 with SMTP id ffacd0b85a97d-42fb3e4492amr8679683f8f.5.1765739710191;
-        Sun, 14 Dec 2025 11:15:10 -0800 (PST)
+        bh=C4JhGJk7mdvYABkI1BBEbpaL/q5WEGbowe9E4tp7i60=;
+        b=AeFk1bzJfVLjYxc1N1SOf9bNDTW5FdX/QEEJxytYMfSa7MQGTAOV//EV/mPDKFWGmO
+         +TN8bNSsvSD+Lm34tNQBwK9LrRdfR7bE2Tb7HUbb9FPSIbiqfOar1s6d0BUtcd4bLOHD
+         iI/QQhDCIwWv8u7PvrDvmkXoIsmzjSgz8s4UAdFWWJnGvEOz3FL6HZfUBLRUuuMgrDHw
+         2zrjnImoNWPc4C2mN9ZbKjJEGONir6kIu2MGI9/IifNar450elJEZ4TYVEIE3hJsm7iu
+         rTPpSB0IGIQMH+A9GbXpRoX/VzcwZtXulKxI1EoSF12VwtCvOt827lnG7g3b4PVabjrg
+         D34Q==
+X-Gm-Message-State: AOJu0YzvCmktR/IOSK4U5G14OJiEmRmrJLaPL92okq8gg0j0eBk+0yeL
+	fAUjA0jRABaDwGBTNugiGTtwGbr4tQT+AxIMsAtB7UrGsHquAIGp1W786kKkrw==
+X-Gm-Gg: AY/fxX7XgbcMRYjqvd0pxzoEjep0hoQWvrQ/0y1nOt/7Ww9E9rVlRUNGlo9sQ4mg8UD
+	QxbVGfE2IyyGUcV73+lKosRtxtRsIlrZkgHu9NBWXVICCyvyx+RGE0xbAlQ8xVAKAAW+yaIt72G
+	fW4iEw/2Hr/gfZ6alr8itkg8+fsEnL90qhs+sihbXNRXt5ICRF1/oN0P24eJf8F4ierK7w/Manm
+	4m0SETBfArOgM4gL1uG1gg4drErW00TrlaIakECmp19dmsczBd6AAxJl9iw0LaLBJy6NU4A7/AK
+	MymfrAq6LdwVC32OTHEalchAUQSZASwSDZu1ti6aDP+rCEaHYzx1SK1AWM6FzH8pDwv5YGSUS2q
+	/S9dJjJyOZlrmGgyDXPHeC3+YtWaFVPrGi+nK9slPIV9hwcS1zdwO8n1JWakCVKDL03BhGODpL8
+	Ugs4IEvMt44NnhlvMihEI=
+X-Google-Smtp-Source: AGHT+IGHRR6pbZ4IViVL+eguay0TWz3RPUz0iIDU92/xvb4JScpaKxGwZ3LX543B2rb3KfwPbZIMWg==
+X-Received: by 2002:a05:6000:2083:b0:430:fc0f:8f9f with SMTP id ffacd0b85a97d-430fc0f90camr1840516f8f.37.1765740006832;
+        Sun, 14 Dec 2025 11:20:06 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430f42a3290sm9020722f8f.17.2025.12.14.11.15.08
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430f42a3290sm9041814f8f.17.2025.12.14.11.20.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Dec 2025 11:15:08 -0800 (PST)
+        Sun, 14 Dec 2025 11:20:06 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libconfig: drop recipe
-Date: Sun, 14 Dec 2025 20:15:08 +0100
-Message-ID: <20251214191508.2317265-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2] libconfig: drop recipe
+Date: Sun, 14 Dec 2025 20:20:05 +0100
+Message-ID: <20251214192005.2317836-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 19:15:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122653
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 19:20:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122654
 
 The recipe has been moved to oe-core:
 https://git.openembedded.org/openembedded-core/commit/?id=1a0196a794f8858c4715871558e97c3d69deb19e
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+
+v2: drop recipe from packagegroup also
+
+ .../packagegroups/packagegroup-meta-oe.bb     |  1 -
  ...larations-to-allow-build-with-gcc-15.patch | 38 -------------------
  .../libconfig/libconfig_1.7.3.bb              | 24 ------------
- 2 files changed, 62 deletions(-)
+ 3 files changed, 63 deletions(-)
  delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
  delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
 
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 50b897181f..9b92e7e3d5 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -350,7 +350,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
+     jpnevulator \
+     libblockdev \
+     libcec \
+-    libconfig \
+     libdivecomputer \
+     libfastjson \
+     libfile-fnmatch-perl \
 diff --git a/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
 deleted file mode 100644
 index 00ceadb10d..0000000000
