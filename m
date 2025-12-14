@@ -2,200 +2,132 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02125D3E787
-	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 10:44:46 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.23416.1765709082975349850
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0CA1CFD314
+	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 10:44:56 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.23498.1765709084387970701
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Dec 2025 02:44:43 -0800
+ Sun, 14 Dec 2025 02:44:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cGUC4WRQ;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2a0a95200e8so5301945ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 02:44:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=m7wjDnos;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-343ea89896eso2619883a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 02:44:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765709082; x=1766313882; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0Gj/sdzlJ2JhZ84qd+dGH6sCe5vdBq7OyNByM0t4ixE=;
-        b=cGUC4WRQjR6VuSYlNZ7GJys6d+VjM8I4IbAkrSeauHU5PjdCS0/Miwg09fMGsI/A1Z
-         UvfVKFmxPSxU13HiK5TYYrnJb78Pi92bEbJDUzgGyRlq6TYRtCUtVH0AJvUYLHSun/zR
-         7jwhTGKmdKr6B/KXp5WGNKx9Zh2IGq0B2A0Iq/OwziVEODxN7JJ99L+s757ugLi19NyO
-         6WyQzSDABuBiQF47PBvQlacP0F92jym68cyRaAdCQxgojPh74a0E+kutJndgzCb+pVoQ
-         gED9yE37rWxbc3Zmlq8f0dHgQi2sDxOZ2Be2bQAbKZQjF7gfMfeH31UyRESmo9eboiMy
-         /kHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765709082; x=1766313882;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1765709083; x=1766313883; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0Gj/sdzlJ2JhZ84qd+dGH6sCe5vdBq7OyNByM0t4ixE=;
-        b=kWA8z+XX6D/VSc6XCFdsPHkBTconOBw0p7rOna/VusZSWLMWHCxNf/wJETZEYtMiaM
-         GhbxcY/nmmuaEGfSpbwU4c17Z8+UxXLzG06VyJxiIleBoAKRkHnZ8Cuwrp4N1eXBk/Zr
-         bPkzZKuyCXtJmPKpJZNX+0oalaqFfHEEom/4HtqpblQb/Llv6CqYJezB8TyVJsO9QGE7
-         2IWSVqM6p0JGddckbRcOrTP/QI3hatTAgD5LfbEqNCZDfz7yCzp2qTNOZe1ZejlaaJQd
-         sv6oIpTCtvd83zNFuwvXmTOQ18dtuW+KoDAlcCI3N7iKVhm+PfF0wl95R2f/9beCLkDp
-         nVBg==
-X-Gm-Message-State: AOJu0YyvexFdSqNiKS6WduR0g94hsuHUf1ZY8hgqf847GwhEXfoytRd2
-	7iAFo9dssV2QvTtP7h3SsAslhQTzVKq5Jg8z45Eb8KU1PHxbxXDcQYzRh619csRh
-X-Gm-Gg: AY/fxX45WiV/WjWNPgTGxo28Kmomj415kRPC4knMARCKWDC+Sv+0kMpSZwWYOd1l7CJ
-	RVw9fjvJ2LxX6sipQEI3r666VfYeuUuCRSsHE078ENR8DBknQ3QZlcLfJvILUD2Zlm862/3RQdd
-	ucmW8lrfs63ffL4JwZC+co0kvLgud/dSwvxc+a0SwPDBrs3d/8IxhPoOTRFBn3ltDlv2lWGUk/0
-	c8Emd3aEKVm0CWW1OOnXHKlLYvhmzehcM9v7g6Ra5VI02AVK0YSecShLIxpGT/c3/kgtb243Zx/
-	QmYIh3Tfe+mybhptjLhIsJEMB+17o9WZm4ovke5Q77DOfEAQXgkXvqWCuZEz28wabH1cyVPbuKG
-	6twGKlhR9quh4J9E2bas7BBvgPKXZd2zNiXBd3IMHR/zyaDpCmXoWeuEIRoMMU08wBzd1cnoW3U
-	3pBXB40GNc1DJJaIVDsGeqjSZZpPONookDzPoNX31nUqOn0HGRQUGO2CIeCQDMYSsFUxPQS813c
-	Rz15ckQTCGrwbVlvmb8T4zgLrx2fWoA
-X-Google-Smtp-Source: AGHT+IFG+STmDZDBhSm6nVq1rYbeEs+HTsxk+E2BaolX6qfPIUb8BhmIS2nM0LeUZ5cjsaCKVB21Dw==
-X-Received: by 2002:a05:7022:e88e:b0:11b:af12:ba30 with SMTP id a92af1059eb24-11f34bde21bmr5169242c88.8.1765709081701;
-        Sun, 14 Dec 2025 02:44:41 -0800 (PST)
+        bh=s2YQ8xc4d6pPZBY8tZunACU1lE6Kk+WrUhGmTjOeQTc=;
+        b=m7wjDnosgyufVCtONBOQcU8tnTbO/6LUVL+mQS7Kav8nY5Sbwipt3+npi2hxvTalV8
+         0Y1Fu6kGYcbVJVpDwjCFc3817nCh/owlqR4pUZlrpmAAK26gZdSXEYKSG3eTN5El0UoB
+         IadXLHBtutxSRSld0vJ9nF4h8pjhaPeXtCWvve0+xa5Z1LI9xE3Oivj7zqAn94BlcJnQ
+         xHFTJ5OjaBbSiumkK8FdPun/0P06kCrEGNOuJxKauAZn3t2qXkOXzN/2nmVMg6EufyjT
+         k8ETaTLJkj45uHjOCrNd2GximUzpsZhEsYIFBHYyY2W5azmU63NaarydNqYKbwUVdN6Y
+         xNTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765709083; x=1766313883;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=s2YQ8xc4d6pPZBY8tZunACU1lE6Kk+WrUhGmTjOeQTc=;
+        b=paLJ3COp6/tvpTxWMjuGW0Lr/+jcOEcskZnrXoveHsT8oY1yhojTQ0ozAqH6tMW+7x
+         SNVuRQRv9x44mQghXQPd7xHGTqnBoCVrv45jdBlKq0SGQYOVFOboEVLVJ9pzIdJDBAJ0
+         BcB8i7vF28KuTklicfMuXWisUiictAUVpsl8iYjNWABqn3HvgAQJpzVFOB650UUJLKWW
+         Soc11Xa7TLEf1pt7F/mQ7ZdZxk+VH/IiFE27LLff+gBRaNneSzbkwM6ZZbG+NrTa3kFu
+         zDDHQm3uKrOmhozbXpeKe0jktfDUuA+xO9xEdOH7TBBE9KUvukQhkVMuU5iMVK+bn+Q3
+         Qbdg==
+X-Gm-Message-State: AOJu0Yz2gCQGXJHi4NQjlBCeQSQITzpHI7lPJGqXMGTvMojnIFitGRxW
+	wu5JoRwtNgZRoCTuq0YV98d/kES4NR4yWQUTKVuiXtgBCTgDyXBUp2CJm2Yctl5M
+X-Gm-Gg: AY/fxX4HQO4HCqKvdQw2QwapFkVkQTK5gD+A8IvkndMc4yqK+ZVyeL+hWAC8PgdEImx
+	uRNOgTQtlF58aln5mwif+nP8MWUOThszIFPjEoehiv7zh6Xmdvh3RW5v1cR/8FJMZxQaq8HCsZM
+	thh8BcairboLQMZX3rZ8Mas1YwoqzNmHMiY7n9LUZmjep0kF2nahONJkbNi6AYwooZz9uPTNXFN
+	9ZviJhiZwwjSICtfMgCyIPTEsofc1hEAKUfmeNoOZx+5PQ7AwpmClk0iSvCq/Z+u2bvbo0Btu70
+	VHaYAzp6kBKrOSjdDuZy/AkaOsYoZ/q+ZjE97yeHNa4OWibLVBkTaTcNr5f987S9+50U91CApST
+	5KbZoDE3gLNTrKAE+8sl1AZ/m+CXHqktBlZHGMXXGgymctQUT0g7Q5O9SPvqlpMOZDC1wynHRWj
+	VPvkQKev1TDDDbhxgX4y/DKJISkmfrt61byGi/Y9BTJKRrbeAbDnKoEo7kWpHwSh7R65CgbVMhM
+	SiyFgQ7UaTM3w+/R5Zngw5sqQBt4T9Bb3v+1baiq8o=
+X-Google-Smtp-Source: AGHT+IGOGqDB1i5UCc/hOS1ZTAkY3wT7vL+rsI9V0gUfmcGWxUwFY/jX/I/REpDTKWo0gorVTBLIVQ==
+X-Received: by 2002:a05:7022:428d:b0:119:e569:f279 with SMTP id a92af1059eb24-11f34c19265mr6978722c88.34.1765709083183;
+        Sun, 14 Dec 2025 02:44:43 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f2e2b51b2sm33026160c88.8.2025.12.14.02.44.40
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f2e2b51b2sm33026160c88.8.2025.12.14.02.44.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Dec 2025 02:44:41 -0800 (PST)
+        Sun, 14 Dec 2025 02:44:42 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/4] geany-plugins: Delete unused patches
-Date: Sun, 14 Dec 2025 02:44:36 -0800
-Message-ID: <20251214104439.1085235-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] vk-gl-cts: Delete unused patch
+Date: Sun, 14 Dec 2025 02:44:38 -0800
+Message-ID: <20251214104439.1085235-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251214104439.1085235-1-raj.khem@gmail.com>
+References: <20251214104439.1085235-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 10:44:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122647
+ <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 10:44:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122649
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Do-not-tinker-with-pkg-config-paths.patch | 32 -----------------
- ...bar-Adjust-structs-for-libgit2-1.4.x.patch | 36 -------------------
- ...e-Use-0-instead-of-NULL-for-gboolean.patch | 34 ------------------
- 3 files changed, 102 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
- delete mode 100644 meta-oe/recipes-devtools/geany/geany-plugins/0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch
- delete mode 100644 meta-oe/recipes-devtools/geany/geany-plugins/0001-scope-Use-0-instead-of-NULL-for-gboolean.patch
+ ...clude-cstdint-causing-build-failures.patch | 47 -------------------
+ 1 file changed, 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-Fix-missing-include-cstdint-causing-build-failures.patch
 
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch b/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-Fix-missing-include-cstdint-causing-build-failures.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-Fix-missing-include-cstdint-causing-build-failures.patch
 deleted file mode 100644
-index cd417e0d7b..0000000000
---- a/meta-oe/recipes-devtools/geany/geany-plugins/0001-geany.m4-Do-not-tinker-with-pkg-config-paths.patch
+index 44632bc74f..0000000000
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-Fix-missing-include-cstdint-causing-build-failures.patch
 +++ /dev/null
-@@ -1,32 +0,0 @@
--From b2187b45f61ce362a9d58d9081d66daddb4e577f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 20 Mar 2022 15:54:14 -0700
--Subject: [PATCH] geany.m4: Do not tinker with pkg-config paths
+@@ -1,47 +0,0 @@
+-From 1d80b54aefd1f5f361990b1223c6fe308a8d3085 Mon Sep 17 00:00:00 2001
+-From: Ricardo Garcia <rgarcia@igalia.com>
+-Date: Mon, 21 Apr 2025 12:30:05 +0200
+-Subject: [PATCH] Fix missing #include <cstdint> causing build failures
 -
--OE sets up these paths correctly w.r.t. target sysroot
+-Tested on Fedora 42 with clang.
 -
--Upstream-Status: Inappropriate [OE-Specific]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Submitted [https://github.com/google/amber/pull/1092]
+-
+-Fixes:
+-http://errors.yoctoproject.org/Errors/Details/852849/
+-
+-In file included from TOPDIR/tmp/work/core2-64-oe-linux/vulkan-cts/1.4.1.0/git/external/amber/src/src/type.cc:15:
+-TOPDIR/tmp/work/core2-64-oe-linux/vulkan-cts/1.4.1.0/git/external/amber/src/src/type.h:56:39: error: 'uint32_t' has not been declared
+-   56 |   static bool IsInt8(FormatMode mode, uint32_t num_bits) {
+-      |                                       ^~~~~~~~
+-
+-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ----
-- build/geany.m4 | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+- src/tokenizer.h | 1 +
+- src/type.h      | 1 +
+- 2 files changed, 2 insertions(+)
 -
----- a/build/geany.m4
--+++ b/build/geany.m4
--@@ -32,7 +32,8 @@ AC_DEFUN([GP_CHECK_GEANY],
-- [
--     AC_REQUIRE([PKG_PROG_PKG_CONFIG])
+-diff --git a/src/tokenizer.h b/src/tokenizer.h
+-index 53efec60..ea4f19df 100644
+---- a/src/tokenizer.h
+-+++ b/src/tokenizer.h
+-@@ -16,6 +16,7 @@
+- #define SRC_TOKENIZER_H_
 -
---    GP_GEANY_PKG_CONFIG_PATH_PUSH
--+    dnl GP_GEANY_PKG_CONFIG_PATH_PUSH
--+    AC_REQUIRE([_GP_GEANY_LIBDIR])
+- #include <cstdlib>
+-+#include <cstdint>
+- #include <memory>
+- #include <string>
 -
--     PKG_CHECK_MODULES([GEANY], [geany >= $1])
--     geanypluginsdir=$geany_libdir/geany
--@@ -40,5 +41,5 @@ AC_DEFUN([GP_CHECK_GEANY],
--     AC_SUBST([geanypluginsdir])
--     AC_SUBST([GEANY_VERSION])
+-diff --git a/src/type.h b/src/type.h
+-index c63779ba..97720f29 100644
+---- a/src/type.h
+-+++ b/src/type.h
+-@@ -16,6 +16,7 @@
+- #define SRC_TYPE_H_
 -
---    GP_GEANY_PKG_CONFIG_PATH_POP
--+    dnl GP_GEANY_PKG_CONFIG_PATH_POP
-- ])
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins/0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch b/meta-oe/recipes-devtools/geany/geany-plugins/0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch
-deleted file mode 100644
-index fe2d9f54ba..0000000000
---- a/meta-oe/recipes-devtools/geany/geany-plugins/0001-git-changebar-Adjust-structs-for-libgit2-1.4.x.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From 90c46235ad69a411d83a5e978492421e8e378934 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 18 Feb 2022 23:35:58 -0800
--Subject: [PATCH] git-changebar: Adjust structs for libgit2 1.4.x
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- git-changebar/src/gcb-plugin.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/git-changebar/src/gcb-plugin.c b/git-changebar/src/gcb-plugin.c
--index f8ce20c..4488b22 100644
----- a/git-changebar/src/gcb-plugin.c
--+++ b/git-changebar/src/gcb-plugin.c
--@@ -216,7 +216,7 @@ static int
-- gcb_git_buf_grow (git_buf  *buf,
--                   size_t    target_size)
-- {
---  if (buf->asize == 0) {
--+  if (buf->reserved == 0) {
--     if (target_size == 0) {
--       target_size = buf->size;
--     }
--@@ -234,7 +234,7 @@ buf_zero (git_buf *buf)
--   if (buf) {
--     buf->ptr = NULL;
--     buf->size = 0;
---    buf->asize = 0;
--+    buf->reserved = 0;
--   }
-- }
--
----
--2.35.1
--
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins/0001-scope-Use-0-instead-of-NULL-for-gboolean.patch b/meta-oe/recipes-devtools/geany/geany-plugins/0001-scope-Use-0-instead-of-NULL-for-gboolean.patch
-deleted file mode 100644
-index bb03fa63de..0000000000
---- a/meta-oe/recipes-devtools/geany/geany-plugins/0001-scope-Use-0-instead-of-NULL-for-gboolean.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 9ee9388bc66e6cf68db96b2014dca2115f745dc9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 30 Aug 2022 22:33:46 -0700
--Subject: [PATCH] scope: Use 0 instead of NULL for gboolean
--
--Fixes warnings with clang 15+
--
--scope/src/stack.c:168:11: error: incompatible pointer to integer conversion initializing 'gboolean' (aka 'int') with an expression of type 'void *' [-Wint-conversion]
--        gboolean entry = NULL;
--                 ^       ~~~~
--1 error generated.
--
--Upstream-Status: Submitted [https://github.com/geany/geany-plugins/pull/1191]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- scope/src/stack.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/scope/src/stack.c b/scope/src/stack.c
--index b03909fe..041dd415 100644
----- a/scope/src/stack.c
--+++ b/scope/src/stack.c
--@@ -165,7 +165,7 @@ void on_stack_follow(GArray *nodes)
-- gboolean stack_entry(void)
-- {
-- 	GtkTreeIter iter;
---	gboolean entry = NULL;
--+	gboolean entry = 0;
--
-- 	if (gtk_tree_selection_get_selected(selection, NULL, &iter))
-- 	{
----
--2.37.3
--
+- #include <cassert>
+-+#include <cstdint>
+- #include <memory>
+- #include <string>
+- #include <vector>
 
