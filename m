@@ -1,171 +1,101 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BBE6D5B16C
-	for <webhook@archiver.kernel.org>; Sun, 14 Dec 2025 19:20:19 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31642.1765740008730177121
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1662D59D99
+	for <webhook@archiver.kernel.org>; Mon, 15 Dec 2025 00:17:10 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36650.1765757824041919699
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 14 Dec 2025 11:20:09 -0800
+ Sun, 14 Dec 2025 16:17:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R3oRm3MP;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e77f519so1397897f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 11:20:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZBpT3255;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-34c5f0222b0so585092a91.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 16:17:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765740007; x=1766344807; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=C4JhGJk7mdvYABkI1BBEbpaL/q5WEGbowe9E4tp7i60=;
-        b=R3oRm3MPOMq9jYDnW92YPForLKaPLJY5cPrjdQlnM7EkkveI6e1Tz5Exyu8OLu3YhS
-         WZmqvoIOKO6zKuEw0TdoMegDIQVCSsxqUJqsfCOsv8Je6Nq5qOtezMzprH2mEYy+8mya
-         /1agRjlramuyMJVszHrgIsdr5meZIzMAq+oc/1nJFBcNSmCcZcDTmbUUExBF2ErNAv+A
-         dSTXkbiYH8n7sx8Jo1Eo+Cud4Z3XzDiHWKkrCAvUlC4TILdUft57GBI4q9EU/CTJeEyk
-         BM66FeWCesHHL7gP7KGki2BsePRYLyn0R6tGu8UMRPJpbBTvCmhziWh/HdDs/RhbSNTi
-         i7OA==
+        d=gmail.com; s=20230601; t=1765757823; x=1766362623; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=g/lj+tI4HgHi8iuh7Y9lNd4iVDvdFt2Ykm4Ug81VNj4=;
+        b=ZBpT3255m9pY73XkJmNiNMixC79E18MVt7o7U24GEW491UqknYoFcKPCV1UFj5w7hV
+         do4T1i4fpVsEn83i0WUCLi4x3bdU5FPKX5+DZRI0nzvAnH015Rv6f6BHwjOZnAfwvq7x
+         AMLmRS+/p2ipLNKUyiNEZMbvZNQeP2HNJP+6WRWLLBMVTfD4heDc7aFC4yPQ4Js3STV2
+         jw+SAqBxc16Qa3rl+HKjlaHZugAd7rAMbLUJtjdM4OkMqZ8oBzRceyFRLS2HbK/rXG3k
+         g8jFw9fOb59PfDQ3gW/1cHd3TuWXaym362BssWl+T1yCyuahU8LpM9dj5lHOLlzyTcSE
+         +i4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765740007; x=1766344807;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=C4JhGJk7mdvYABkI1BBEbpaL/q5WEGbowe9E4tp7i60=;
-        b=AeFk1bzJfVLjYxc1N1SOf9bNDTW5FdX/QEEJxytYMfSa7MQGTAOV//EV/mPDKFWGmO
-         +TN8bNSsvSD+Lm34tNQBwK9LrRdfR7bE2Tb7HUbb9FPSIbiqfOar1s6d0BUtcd4bLOHD
-         iI/QQhDCIwWv8u7PvrDvmkXoIsmzjSgz8s4UAdFWWJnGvEOz3FL6HZfUBLRUuuMgrDHw
-         2zrjnImoNWPc4C2mN9ZbKjJEGONir6kIu2MGI9/IifNar450elJEZ4TYVEIE3hJsm7iu
-         rTPpSB0IGIQMH+A9GbXpRoX/VzcwZtXulKxI1EoSF12VwtCvOt827lnG7g3b4PVabjrg
-         D34Q==
-X-Gm-Message-State: AOJu0YzvCmktR/IOSK4U5G14OJiEmRmrJLaPL92okq8gg0j0eBk+0yeL
-	fAUjA0jRABaDwGBTNugiGTtwGbr4tQT+AxIMsAtB7UrGsHquAIGp1W786kKkrw==
-X-Gm-Gg: AY/fxX7XgbcMRYjqvd0pxzoEjep0hoQWvrQ/0y1nOt/7Ww9E9rVlRUNGlo9sQ4mg8UD
-	QxbVGfE2IyyGUcV73+lKosRtxtRsIlrZkgHu9NBWXVICCyvyx+RGE0xbAlQ8xVAKAAW+yaIt72G
-	fW4iEw/2Hr/gfZ6alr8itkg8+fsEnL90qhs+sihbXNRXt5ICRF1/oN0P24eJf8F4ierK7w/Manm
-	4m0SETBfArOgM4gL1uG1gg4drErW00TrlaIakECmp19dmsczBd6AAxJl9iw0LaLBJy6NU4A7/AK
-	MymfrAq6LdwVC32OTHEalchAUQSZASwSDZu1ti6aDP+rCEaHYzx1SK1AWM6FzH8pDwv5YGSUS2q
-	/S9dJjJyOZlrmGgyDXPHeC3+YtWaFVPrGi+nK9slPIV9hwcS1zdwO8n1JWakCVKDL03BhGODpL8
-	Ugs4IEvMt44NnhlvMihEI=
-X-Google-Smtp-Source: AGHT+IGHRR6pbZ4IViVL+eguay0TWz3RPUz0iIDU92/xvb4JScpaKxGwZ3LX543B2rb3KfwPbZIMWg==
-X-Received: by 2002:a05:6000:2083:b0:430:fc0f:8f9f with SMTP id ffacd0b85a97d-430fc0f90camr1840516f8f.37.1765740006832;
-        Sun, 14 Dec 2025 11:20:06 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430f42a3290sm9041814f8f.17.2025.12.14.11.20.06
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1765757823; x=1766362623;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=g/lj+tI4HgHi8iuh7Y9lNd4iVDvdFt2Ykm4Ug81VNj4=;
+        b=MVk8at/KRMEtvbJ4DMDXE5tBe6DEK73NQQ6LAjxnr4ArsmhDm6Yh/JTb1NA7terHmG
+         KvhWOgiwHHFcEcmyzqFDFZgJvZusVjAzwLcHsNRy/EInXeA8uSRYECtdPUYW2Sp3Zz4S
+         LjACmi0qDoFp/CeQQBYMTUj4FRpydCM6S4JOfLmMqwM35pCcZcL8oG6WJTDIu4l1HQut
+         5Q33kOQYZqMbvUcaI4XWijJd5qmcpD4qOX4a6lfAV+te0rVImyyl4gF+PdobQKwRl4xo
+         TEbhSTqVji4gfwpz//Vrrz0hQXzwx72oN7xbImacZYY9ia3s2RQAzyCHCZHPJBjFH/ob
+         PdKw==
+X-Gm-Message-State: AOJu0YwGKWszWp+Plaace+pmc0oMMRMI/FoZEufbJIzV7EtKxMDA+RVb
+	HvFUe1bijJ1MsvckMh+RYExunu3hLJWUUp4pOvh3Uf3jcljCG1++b3mc9mkz6p8x
+X-Gm-Gg: AY/fxX66ebApv4CGNGIJbNfCkzDwwgnmUjwx7QV3Fofkqe8Vp9YOkJBmzgFHu65vl81
+	qkXUn+S4budqaDmmDGZ47B8H+0CBs/q2Gz8pwL8v7gyGJh+jltOjmThzpN0Is6aULeNolKVfyOa
+	+rtqjWEtXE7zwBDc21qmZdRtkGbNUERgXG27zZYT08kl2sVvrbjhZVAODPSQA3BM3dajsfsgOOX
+	XwxmZHG5x6kBwtS9CA8S2Wa6DWOI6SMwDLMAj2MsbSmcbtguhhHjO7OkHBAYyw10v5vnorNN5v7
+	cla3Z6cGINLxFzU4+m0/u7TSohnmalLmoo4GqEs/tZH2IFIA5JVOCZUOUYlEm/uWkq6t1xaDItU
+	XqjP2+nr5YRG24uFUktm520Qo4DB+yYC5piHIATH1OAu9w/UVAasl9y5NBS0GpRRvBCkadVcG6+
+	aqrqW/sonZ08Rrw2XOkdCmIfaDj3qkZlZS/8/GhZcBElDJfRmG7D/Y8Kx20ERilU+ha+3i6ShEF
+	lfY15XxCgjw9vgjhNosrM1qypqLQoI8
+X-Google-Smtp-Source: AGHT+IFiu/UaYgrj7c46qD256nCpbVbrJwDIPEKhX4MLbpc+kJ84N4VG9m6vh4dQfGN6MP/UvHc2/w==
+X-Received: by 2002:a05:701b:2305:b0:11d:fcb2:3309 with SMTP id a92af1059eb24-11f34bde364mr4662088c88.4.1765757822967;
+        Sun, 14 Dec 2025 16:17:02 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::69b8])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-11f446460c8sm4043278c88.10.2025.12.14.16.17.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 14 Dec 2025 11:20:06 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Sun, 14 Dec 2025 16:17:02 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] libconfig: drop recipe
-Date: Sun, 14 Dec 2025 20:20:05 +0100
-Message-ID: <20251214192005.2317836-1-skandigraun@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] libopus: Make ne10 dependency to be target specific for arm/arm64
+Date: Sun, 14 Dec 2025 16:17:00 -0800
+Message-ID: <20251215001700.43966-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 14 Dec 2025 19:20:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122654
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Dec 2025 00:17:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122655
 
-The recipe has been moved to oe-core:
-https://git.openembedded.org/openembedded-core/commit/?id=1a0196a794f8858c4715871558e97c3d69deb19e
+This ends up in the native/nativesdk depchains especially when
+building on arm64 build hosts.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Fixes errors e.g.
+
+WARNING: Nothing RPROVIDES 'nativesdk-libopus-dev' (but virtual:nativesdk:/srv/build/yoe/sources/meta-openembedded/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'nativesdk-libopus-dev'
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-v2: drop recipe from packagegroup also
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
+index 642f34f71d..9f1a79ace2 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
++++ b/meta-oe/recipes-multimedia/libopus/libopus_1.5.2.bb
+@@ -28,9 +28,9 @@ EXTRA_OECONF = " \
+ "
 
- .../packagegroups/packagegroup-meta-oe.bb     |  1 -
- ...larations-to-allow-build-with-gcc-15.patch | 38 -------------------
- .../libconfig/libconfig_1.7.3.bb              | 24 ------------
- 3 files changed, 63 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
- delete mode 100644 meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
+ # ne10 is available only for armv7a, armv7ve and aarch64
+-DEPENDS:append:aarch64 = " ne10"
+-DEPENDS:append:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
+-DEPENDS:append:armv7ve = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
++DEPENDS:append:class-target:aarch64 = " ne10"
++DEPENDS:append:class-target:armv7a = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
++DEPENDS:append:class-target:armv7ve = "${@bb.utils.contains("TUNE_FEATURES","neon"," ne10","",d)}"
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 50b897181f..9b92e7e3d5 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -350,7 +350,6 @@ RDEPENDS:packagegroup-meta-oe-extended = "\
-     jpnevulator \
-     libblockdev \
-     libcec \
--    libconfig \
-     libdivecomputer \
-     libfastjson \
-     libfile-fnmatch-perl \
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch b/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
-deleted file mode 100644
-index 00ceadb10d..0000000000
---- a/meta-oe/recipes-extended/libconfig/libconfig/0001-Fix-declarations-to-allow-build-with-gcc-15.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 0511e285f3c886a388b8e9c6a4829752d60ab44c Mon Sep 17 00:00:00 2001
--From: Rudi Heitbaum <rudi@heitbaum.com>
--Date: Thu, 5 Dec 2024 06:47:40 +0000
--Subject: [PATCH] Fix declarations to allow build with gcc 15
--
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
--
--Upstream-Status: Backport [690342b Fix declarations to allow build with gcc 15]
-----
-- lib/grammar.y | 8 ++++++--
-- 1 file changed, 6 insertions(+), 2 deletions(-)
--
--diff --git a/lib/grammar.y b/lib/grammar.y
--index 87dac00..0e9d0bb 100644
----- a/lib/grammar.y
--+++ b/lib/grammar.y
--@@ -40,8 +40,7 @@
-- #include "wincompat.h"
-- 
-- /* These declarations are provided to suppress compiler warnings. */
---extern int libconfig_yylex();
---extern int libconfig_yyget_lineno();
--+extern int libconfig_yyget_lineno(void *);
-- 
-- static const char *err_array_elem_type = "mismatched element type in array";
-- static const char *err_duplicate_setting = "duplicate setting name";
--@@ -80,6 +79,11 @@ void libconfig_yyerror(void *scanner, struct parse_context *ctx,
--   char *sval;
-- }
-- 
--+%{
--+/* These declarations are provided to suppress compiler warnings. */
--+extern int libconfig_yylex(YYSTYPE *, void *);
--+%}
--+
-- %token <ival> TOK_BOOLEAN TOK_INTEGER TOK_HEX
-- %token <llval> TOK_INTEGER64 TOK_HEX64
-- %token <fval> TOK_FLOAT
-diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-deleted file mode 100644
-index bd7d7e64b8..0000000000
---- a/meta-oe/recipes-extended/libconfig/libconfig_1.7.3.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--SUMMARY = "C/C++ Configuration File Library"
--DESCRIPTION = "Library for manipulating structured configuration files"
--HOMEPAGE = "https://hyperrealm.github.io/libconfig/"
--BUGTRACKER = "https://github.com/hyperrealm/libconfig/issues"
--SECTION = "libs"
--
--LICENSE = "LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
--
--SRC_URI = "git://github.com/hyperrealm/libconfig.git;protocol=https;branch=master;tag=v${PV} \
--    file://0001-Fix-declarations-to-allow-build-with-gcc-15.patch \
--"
--SRCREV = "525922a6b49ca19235cdf307376e7c9c539d1b93"
--
--# needed when we modify grammar.y with above patch
--DEPENDS += "bison-native"
--
--UPSTREAM_CHECK_URI = "https://github.com/hyperrealm/libconfig/releases"
--UPSTREAM_CHECK_REGEX = "Version (?P<pver>\d+(\.\d+)+)"
--
--inherit autotools-brokensep pkgconfig
--
--PACKAGE_BEFORE_PN = "${PN}++"
--FILES:${PN}++ = "${libdir}/${BPN}++*${SOLIBS}"
+ python () {
+     if d.getVar('TARGET_FPU') in [ 'soft' ]:
 
