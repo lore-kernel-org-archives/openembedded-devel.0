@@ -1,113 +1,91 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F2CAD5CCA4
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 09:54:54 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18910.1765878885364881219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3586AD5E133
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 11:14:45 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20017.1765883679394391593
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Dec 2025 01:54:45 -0800
+ Tue, 16 Dec 2025 03:14:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=zrrO+sJY;
- spf=pass (domain: smile.fr, ip: 209.85.128.42, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so48226185e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 01:54:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XxWLwh+u;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fbad1fa90so3142520f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 03:14:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1765878884; x=1766483684; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8Y1YF48t9ZgrMngi94mr8pm1TeRyxSCU+RH/MH9MgK8=;
-        b=zrrO+sJYdj+PXgDkRA3AHGVBtKp4BrRdXavkPDYBnjWZM1+om5Lij6tfPIl1YMBT+h
-         nqjtFTBaJYwEjbPxHkz2NskytR5vO0jWEzk6mpVVx9GOZfjTYJAewcAna0BCF30OmAcL
-         zCQ06czqkVWxlEKZw+L38O54LUXPcpw5bf6xQ=
+        d=gmail.com; s=20230601; t=1765883677; x=1766488477; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=CqqS+3bQlumhQyz5NsrDQ5Jaxgq+hFyR0G8ORVLe1/Y=;
+        b=XxWLwh+ud29zVEcWLH6f+3TuIP0CYPYBGYUW8oCjLtU6kMX62G2dhjZnsh5NhO+Bfi
+         89t+JcKvzFNGceWNBDDTR9jahKq38KlyXTt3T8/tIC567eDWG5hEzXh7VLbKC2Wj0wBU
+         6zPoVW25zy/pDNzaOjTCXNw8J8K/Ip8FGoh1b0NsT9O8gEJDGv/LLBWQz1yVQzGMmKwZ
+         6lUDDvSfd2giMJZU+fdRrMkFCbochx7kIuSJsDszaPKELb2g0i6NeTN2MvmDO2WB1ZLx
+         I+SIB2YYLtz7O/HsR9MTj+OnV13LK1c3o7dYW56vMyN858Fb1c3FLfbB7nFha/3K9LlT
+         W8WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765878884; x=1766483684;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=8Y1YF48t9ZgrMngi94mr8pm1TeRyxSCU+RH/MH9MgK8=;
-        b=uyuovfwpufqbnFaiuU/5HHnVLgk0ek3a3JfKw1UAuttpd1D8T/etjfQ+UhjRlLcFEm
-         F2vo1cqzPjX39oQofIoCZfmDZB4ArRwRfDNtT/Pnku5eRNpsCLiLqNdgr2CiC4uKZwAg
-         nhPjcURDNRp1Z0c1u5mWEBNwMQatL7r9uUcfyJYZ/lTUm7dMk36Wd6upmQbrJMT19b2G
-         8t7f1CTTr167SdbNGI28RDNK6FE1xz1RCbhjKfgfWH/oFKcfTjCaOMc/7t2y2Mnct/DO
-         4eCSftThvc22KXOBdW5k6NTrlft3XYs62KPcU5VKqUsXBF0kIXV3Ul+X+mW2DAyjlsuF
-         j6SA==
-X-Gm-Message-State: AOJu0Yz67mcdvcTj1XHdmtrh7zq/YUNhCMwZ+B3e+ZFCXiZDVnM2agRy
-	Qj7tE0+OjSDUFw0358FvPbNWHZKNyhrFqea48BNguC9wu5IiApDk0Kes76AmsFSNtL6koKkXPbi
-	w/o9ewhEci6k0nOWLus2qCDyqRSZKv4REdoi6ZKfKqg==
-X-Gm-Gg: AY/fxX65G2WqnPCr5Ma+0K6UiwoDDccorvmtIJIoapxh1/XBF+sf6Mf6EttxYB9x/jR
-	iphXlz5qnVf3jzlgzAIanYRFPwFje4hnMlQ5/rOVSa79oNCL+J/ZElZcQVW9fY/z/I2Ag6EsNh3
-	hhD6O9+WNHQn18SMFvHTJfH1+3p+hmOPJ2e0tlxFHcV2lt0J1M4c2EuBlaV4Riczd+lVmCzH86R
-	3o2iA+/xfvP2whHYT2xYv5CG3Fb8M/V0HKmblSwQt76ZoTEOUKTMr0o0EvR8B5074LGrt4+Zg==
-X-Google-Smtp-Source: AGHT+IHaoa4OIGCGznHQ85bKy1rT+/GjCIkvpxa1/m5ueCg+3yFlSC1Mez/LQGFruBtkNBk94a1CT/C1bX6+RW6+Khg=
-X-Received: by 2002:a05:6000:4026:b0:42f:8816:9504 with SMTP id
- ffacd0b85a97d-42fb490d2a0mr13707855f8f.60.1765878883590; Tue, 16 Dec 2025
- 01:54:43 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765883677; x=1766488477;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=CqqS+3bQlumhQyz5NsrDQ5Jaxgq+hFyR0G8ORVLe1/Y=;
+        b=rgwEW042qst7IUcqze7Ct2UCr/6VzrjU+gPkJCWqrsItBeSIWVriynlk/wCdlZmYbE
+         rclqkAyEowNze7TWr6KTZIt1qH22J7vx4nTIfvs+BTXUyjBtx7kRlxCSeUz3iInnSIG4
+         8XfPEk1gN34dsGV0mkzcl/7M1MtXiJyO7tcQINf84pFH8fP0kXl1fWybPFS0NEEDg4/U
+         cT+nfNCcdLyZM4noW3TWFi8uMT/FyeoHGW1q7rqoYT2F6XyFYiPZK+1xcVWY6OwjdIfb
+         dxFfbM+MtPBRxdWKz+q/xGPHhDQddvrlgdjJTkvZ/cGQ2gTqEui9Y2X8uCtzxtPUFG5F
+         wB9A==
+X-Gm-Message-State: AOJu0YxvmkBpAIBWUqP+T3EsWldc9k9OQ/F1deP0A/tliFtc0jo39fbO
+	g+M6Zn5wXXV3AYXgnX2iXDLgIMrYEkA3GfeL2kdj39ebNsoLntHTbnB42A5iLA==
+X-Gm-Gg: AY/fxX7lLkmcrlydAPXRdHhRS1dw869gB5uhGToMRKg0XStKnfhky5RN3m26HE4V1qq
+	dZwFV6NL6isaiwioXxpxfrRFYpTY0BkxyaUo5qPkOVfoUHnJFVRAEVBw9u94GSeiHWKoLPuPk5H
+	7ChVtbkxZ01R0YR0YLCK6GQ42kXqVW+xv2B9U3XPOmPRejvVD8KuGsRBgMWzoOTmqb6F0saHvLG
+	EFOTY9pyyNUk+SPVXdvce6soYNZI7WdmmmyTBDCJtdamkRM+rNI+zTwd6pW7+YMJRwYqhh7tlrO
+	hc6BpxlsNKnBh2X3bFQKv99Secag1spCEP9a31+DgrQOdWf9hgCbBxVPWxVf02fEf4F2J+8J43u
+	H37ElC7sxGxf+u3yQhbaABVwHXa0adJ0Vw03leh8x1u/xoIg9QNBxPyoOIT/xfSYpp8cDVGInQn
+	yiizz6l9Pp
+X-Google-Smtp-Source: AGHT+IGd1QRehgbx6xEIl7cqpdEWg4v5JyxjeCRqAY4QU3EQxTNIDUrLTypBVtq9NGdBsVuGBoSBDQ==
+X-Received: by 2002:a5d:5887:0:b0:430:f879:a0ee with SMTP id ffacd0b85a97d-430f879a253mr9202928f8f.5.1765883677381;
+        Tue, 16 Dec 2025 03:14:37 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430fdcc6bbdsm11221138f8f.14.2025.12.16.03.14.36
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Dec 2025 03:14:37 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] libcoap: ignore CVE-2025-50518
+Date: Tue, 16 Dec 2025 12:14:36 +0100
+Message-ID: <20251216111436.1553787-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20251216094653.2704060-1-t.f.g.geelen@gmail.com>
-In-Reply-To: <20251216094653.2704060-1-t.f.g.geelen@gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Date: Tue, 16 Dec 2025 10:54:16 +0100
-X-Gm-Features: AQt7F2rg5k5A8lGBRAPqMErggIZYaW3odjRV-fFmClSMw0sfF3C8IkLC8WG0K1o
-Message-ID: <CAMSfU+5rn65PL+SuogmX_MxnLfiZBT3syQfn=KdG3y5t+659ZA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-async-timeout: add
- BBCLASSEXTEND for native and nativesdk
-To: t.f.g.geelen@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 09:54:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122692
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 11:14:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122693
 
-Le mar. 16 d=C3=A9c. 2025 =C3=A0 10:47, Tom Geelen via lists.openembedded.o=
-rg
-<t.f.g.geelen=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
->
-> Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
-> ---
->  .../recipes-devtools/python/python3-async-timeout_4.0.3.bb      | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-async-timeout_4.=
-0.3.bb b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-> index 3d35780b65..480d4cb02e 100644
-> --- a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-> +++ b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-> @@ -16,3 +16,5 @@ inherit pypi python_setuptools_build_meta
->  RDEPENDS:${PN} =3D "\
->      python3-asyncio \
->  "
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-50518
 
-Thank you, that does fix my problem with "[meta-python][PATCH 2/5]
-python3-aiohttp: add BBCLASSEXTEND: native and nativesdk to the
-recipe"
+The vulnerability is disputed by upstream, because the vulnerability
+requires a user error, incorrect library usage. See also an upstream
+discussion in a related (rejected) PR: https://github.com/obgm/libcoap/pull/1726
 
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122691): https://lists.openembedded.org/g/openembedde=
-d-devel/message/122691
-> Mute This Topic: https://lists.openembedded.org/mt/116807309/4316185
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [y=
-oann.congal@smile.fr]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
-
-
---=20
-Yoann Congal
-Smile ECS
+diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+index 55c5ed8775..1a8d7ed725 100644
+--- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
++++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
+@@ -60,3 +60,5 @@ PACKAGE_BEFORE_PN += "\
+ 
+ FILES:${PN}-bin = "${bindir}"
+ FILES:${PN}-dev += "${datadir}/${BPN}/examples"
++
++CVE_STATUS[CVE-2025-50518] = "disputed: happens only when library is used incorrectly"
 
