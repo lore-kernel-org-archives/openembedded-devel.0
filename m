@@ -2,90 +2,183 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3586AD5E133
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 11:14:45 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20017.1765883679394391593
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65441D5E13F
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 11:58:45 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20586.1765886321470181050
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Dec 2025 03:14:39 -0800
+ Tue, 16 Dec 2025 03:58:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XxWLwh+u;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fbad1fa90so3142520f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 03:14:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=R2gS4dOZ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47774d3536dso45191505e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 03:58:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765883677; x=1766488477; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CqqS+3bQlumhQyz5NsrDQ5Jaxgq+hFyR0G8ORVLe1/Y=;
-        b=XxWLwh+ud29zVEcWLH6f+3TuIP0CYPYBGYUW8oCjLtU6kMX62G2dhjZnsh5NhO+Bfi
-         89t+JcKvzFNGceWNBDDTR9jahKq38KlyXTt3T8/tIC567eDWG5hEzXh7VLbKC2Wj0wBU
-         6zPoVW25zy/pDNzaOjTCXNw8J8K/Ip8FGoh1b0NsT9O8gEJDGv/LLBWQz1yVQzGMmKwZ
-         6lUDDvSfd2giMJZU+fdRrMkFCbochx7kIuSJsDszaPKELb2g0i6NeTN2MvmDO2WB1ZLx
-         I+SIB2YYLtz7O/HsR9MTj+OnV13LK1c3o7dYW56vMyN858Fb1c3FLfbB7nFha/3K9LlT
-         W8WA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765883677; x=1766488477;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1765886320; x=1766491120; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=CqqS+3bQlumhQyz5NsrDQ5Jaxgq+hFyR0G8ORVLe1/Y=;
-        b=rgwEW042qst7IUcqze7Ct2UCr/6VzrjU+gPkJCWqrsItBeSIWVriynlk/wCdlZmYbE
-         rclqkAyEowNze7TWr6KTZIt1qH22J7vx4nTIfvs+BTXUyjBtx7kRlxCSeUz3iInnSIG4
-         8XfPEk1gN34dsGV0mkzcl/7M1MtXiJyO7tcQINf84pFH8fP0kXl1fWybPFS0NEEDg4/U
-         cT+nfNCcdLyZM4noW3TWFi8uMT/FyeoHGW1q7rqoYT2F6XyFYiPZK+1xcVWY6OwjdIfb
-         dxFfbM+MtPBRxdWKz+q/xGPHhDQddvrlgdjJTkvZ/cGQ2gTqEui9Y2X8uCtzxtPUFG5F
-         wB9A==
-X-Gm-Message-State: AOJu0YxvmkBpAIBWUqP+T3EsWldc9k9OQ/F1deP0A/tliFtc0jo39fbO
-	g+M6Zn5wXXV3AYXgnX2iXDLgIMrYEkA3GfeL2kdj39ebNsoLntHTbnB42A5iLA==
-X-Gm-Gg: AY/fxX7lLkmcrlydAPXRdHhRS1dw869gB5uhGToMRKg0XStKnfhky5RN3m26HE4V1qq
-	dZwFV6NL6isaiwioXxpxfrRFYpTY0BkxyaUo5qPkOVfoUHnJFVRAEVBw9u94GSeiHWKoLPuPk5H
-	7ChVtbkxZ01R0YR0YLCK6GQ42kXqVW+xv2B9U3XPOmPRejvVD8KuGsRBgMWzoOTmqb6F0saHvLG
-	EFOTY9pyyNUk+SPVXdvce6soYNZI7WdmmmyTBDCJtdamkRM+rNI+zTwd6pW7+YMJRwYqhh7tlrO
-	hc6BpxlsNKnBh2X3bFQKv99Secag1spCEP9a31+DgrQOdWf9hgCbBxVPWxVf02fEf4F2J+8J43u
-	H37ElC7sxGxf+u3yQhbaABVwHXa0adJ0Vw03leh8x1u/xoIg9QNBxPyoOIT/xfSYpp8cDVGInQn
-	yiizz6l9Pp
-X-Google-Smtp-Source: AGHT+IGd1QRehgbx6xEIl7cqpdEWg4v5JyxjeCRqAY4QU3EQxTNIDUrLTypBVtq9NGdBsVuGBoSBDQ==
-X-Received: by 2002:a5d:5887:0:b0:430:f879:a0ee with SMTP id ffacd0b85a97d-430f879a253mr9202928f8f.5.1765883677381;
-        Tue, 16 Dec 2025 03:14:37 -0800 (PST)
+        bh=4SI3QP+4/bZtymkM9hrQQuU/mfMGV5FPT/s3TA2xuI8=;
+        b=R2gS4dOZQFr8n1qGeWossF2WISnGoWlsQ2PXVH5lXdXWBO4KKyaCsY2cSwfwggjRxg
+         AGCDMmF4ihjwcO8PzX2opqf+ag2oyBrf7xmSdl4M2Wj52BQNbyym40S7BQSwS0tL60mk
+         RTjXCMg+HVDA4h/vOvuW2Ndlw24a8IsF6wtywvpk3YmxXh79kUC4x+jvThs0tsAeSc2Z
+         d1RxcIIuCfzDIjjGkmtlt9tnGEkodqnvHNItIUXv6fzpjeoMCFqXMNg1+siAiqmsePC4
+         RFZKPgwHAhvcdlraojxl3lCFEWnRA6mcov5td5Bco4+XVQUhxQDeMre8o+DSVT809KlJ
+         vg1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765886320; x=1766491120;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=4SI3QP+4/bZtymkM9hrQQuU/mfMGV5FPT/s3TA2xuI8=;
+        b=QihOyBf78R3SROJOtGyN6Y+1Uk5Omq2Y8wRVraiFC0OCezvBIKKNdFOx21JZr2YAtj
+         m6M+LEGmCfTNPbAv9wyPVvYOyFDmdsl36gjN9RaXXpkXL+l1w5BvlTgzVU8aSAPL1+Rh
+         Lgt+pDvJUmZ/VwlRS+6xlSLpqmbujkJAFAI0cVWRFdIDHbksn5dR5Jr79E/05f+ep9/K
+         BNvmzvsxzqSFC73sBOIS5j7hR/zYcSLbeHnQlaHPyLcYTOuTzgDHsV6f8HARq2GDxpvx
+         VThAlKWL6chl+Iuy1aFJLnoUvXNS+vheaRv7RHMwzHFR+TEASf4r259rOB7539eMZUyy
+         CMfw==
+X-Gm-Message-State: AOJu0YwNCQi7Xr59zxWccEb8/jVMnEIVvoAQShXLtUbcfV3e/WVzW/bz
+	MkedlF73gsSBO8o+BEOnfd6i1a46TdIAZmmdJRL981GxxQGZ4hSBI0efVKUZ4g==
+X-Gm-Gg: AY/fxX7CFS2KkqvLIABgxPQ76oq7QRiwWa6LsLT5QncJIjx/K2MVveZ0N0LYa1ZlmpW
+	lbRx89RaXxe8etj5KToSKe6EsC0B97ZpXy0nR9OKcseFZje2RHpT+fDWuTcm/DRVE17Qx2SNzgN
+	z/ZZnMPXLGYik7/YWYvQ5g2B/IhBY0t85H8b/L+YlhaWTyf75JDcVT0FzauPoRICEoUaTLgsZd/
+	rBSV+R6m1dteR46XIByMFNu7QplF/Tprbx2iJIthkZADIa+azUKHZjZoNCntimClxy1Tu7Fc9Ho
+	Nt+eq/Y/j4txe+5johSJ43O/HSORcHfRxxg1+SD1+SsSANj8F0rLhujvxc/HdR3Z2rYefZHWYWj
+	fvjQwKxO/q2PrtmXpa/ZFrUUo+J4o13GgcxG1bycY+v+fzjpimyV5mgh5u726pM+8INPBZK4NND
+	Vqa62Z7VCm
+X-Google-Smtp-Source: AGHT+IGUYWdxACMFsx6WHHWYy8mY50d8ul2ZLk3N6+NnaYhQEpQLi/0UVp/NHLKnD+CkZDxOC0go1w==
+X-Received: by 2002:a05:600c:84c8:b0:47a:8383:f2b2 with SMTP id 5b1f17b1804b1-47a89ee2f54mr127101325e9.17.1765886319721;
+        Tue, 16 Dec 2025 03:58:39 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430fdcc6bbdsm11221138f8f.14.2025.12.16.03.14.36
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47a8f4b1347sm261010495e9.8.2025.12.16.03.58.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Dec 2025 03:14:37 -0800 (PST)
+        Tue, 16 Dec 2025 03:58:39 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] libcoap: ignore CVE-2025-50518
-Date: Tue, 16 Dec 2025 12:14:36 +0100
-Message-ID: <20251216111436.1553787-1-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH 2/2] unbound: complete ptest support
+Date: Tue, 16 Dec 2025 12:58:37 +0100
+Message-ID: <20251216115837.1669852-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251216115837.1669852-1-skandigraun@gmail.com>
+References: <20251216115837.1669852-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 11:14:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122693
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 11:58:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122695
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-50518
+The recipe had already an almost working ptest config which
+wasn't enabled, it just needed some small fixes to make it work:
+correct the output of the run-ptest script, and install some
+extra testdata.
 
-The vulnerability is disputed by upstream, because the vulnerability
-requires a user error, incorrect library usage. See also an upstream
-discussion in a related (rejected) PR: https://github.com/obgm/libcoap/pull/1726
+Execution is quick, single digit seconds:
+
+root@qemux86-64:/usr/lib/unbound/ptest/tests# ptest-runner
+START: ptest-runner
+2025-12-16T11:53
+BEGIN: /usr/lib/unbound/ptest
+Start of unbound 1.24.2 unit test.
+test authzone functions
+test negative cache functions
+test ub_random functions
+[...many lines...]
+PASS: ./testdata/val_unsecds_negcache.rpl
+PASS: ./testdata/val_unsecds_qtypeds.rpl
+PASS: ./testdata/val_wild_pos.rpl
+PASS: ./testdata/version_bind.rpl
+PASS: ./testdata/version_bind_hide.rpl
+PASS: ./testdata/views.rpl
+DURATION: 4
+END: /usr/lib/unbound/ptest
+2025-12-16T11:53
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../ptest-packagelists-meta-networking.inc    |  1 +
+ .../recipes-support/unbound/unbound/run-ptest | 20 +++++++++++++++----
+ .../recipes-support/unbound/unbound_1.24.2.bb |  8 +++++++-
+ 3 files changed, 24 insertions(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
-index 55c5ed8775..1a8d7ed725 100644
---- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.5a.bb
-@@ -60,3 +60,5 @@ PACKAGE_BEFORE_PN += "\
+diff --git a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+index 838aee94d3..9bbae5ac91 100644
+--- a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
++++ b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
+@@ -23,6 +23,7 @@ PTESTS_FAST_META_NETWORKING = "\
+     python3-scapy \
+     squid \
+     tcpdump \
++    unbound \
+     wolfssl \
+ "
+ PTESTS_FAST_META_NETWORKING:remove:libc-musl = "\
+diff --git a/meta-networking/recipes-support/unbound/unbound/run-ptest b/meta-networking/recipes-support/unbound/unbound/run-ptest
+index 433a687c65..3801233eeb 100644
+--- a/meta-networking/recipes-support/unbound/unbound/run-ptest
++++ b/meta-networking/recipes-support/unbound/unbound/run-ptest
+@@ -2,15 +2,27 @@
  
- FILES:${PN}-bin = "${bindir}"
- FILES:${PN}-dev += "${datadir}/${BPN}/examples"
+ cd tests || exit 1
+ retVal=0
+-./unittest
+-./testbound -s
++if ./unittest; then
++    echo PASS: unittest
++else
++    echo FAIL: unittest
++    retVal=1
++fi
 +
-+CVE_STATUS[CVE-2025-50518] = "disputed: happens only when library is used incorrectly"
++if ./testbound -s; then
++    echo PASS: testbound selftest
++else
++    echo FAIL: testbound selftest
++    retVal=1
++fi
++
+ for x in ./testdata/*.rpl; do
+ 	output="$(./testbound -p $x -o -vvvvv 2>&1)"
+         if test $? -eq 0; then
+-                echo "$x :Pass"
++                echo "PASS: $x"
+         else
+                 echo "$output"
+-                echo "$x :Fail"
++                echo "FAIL: $x"
+                 retVal=1
+         fi
+ done
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
+index 4ae8db4d08..e41e2dc065 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.24.2.bb
+@@ -47,8 +47,11 @@ do_install:append() {
+ }
+ 
+ do_install_ptest() {
+-        install -d ${D}${PTEST_PATH}/tests
+         install -d ${D}${PTEST_PATH}/tests/testdata
++        install -d ${D}${PTEST_PATH}/sources/${BP}
++        # unittests are looking for the data in the source folder, though it's the
++        # same data used by the other tests
++        ln -sr ${D}${PTEST_PATH}/tests ${D}${PTEST_PATH}/sources/${BP}/testdata
+ 
+         install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
+         install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
+@@ -56,7 +59,10 @@ do_install_ptest() {
+         install -m 0664 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/
+         install -m 0664 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/
+         install -m 0664 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/test_ldnsrr* ${D}${PTEST_PATH}/tests/
++        install -m 0664 ${S}/testdata/zonemd.example* ${D}${PTEST_PATH}/tests/
+         install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
++
+ }
+ 
+ SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
