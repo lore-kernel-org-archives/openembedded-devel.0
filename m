@@ -2,258 +2,126 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15B3FD5C0C0
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 07:16:03 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16742.1765869355291198922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 370A3D5B87C
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 07:18:53 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16558.1765869530638276667
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Dec 2025 23:15:55 -0800
+ Mon, 15 Dec 2025 23:18:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z6qLOVlt;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-7f651586be1so1916310b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Dec 2025 23:15:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HCHFmuqE;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7fbbb84f034so257007b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Dec 2025 23:18:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765869354; x=1766474154; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WYk/wYGUmQmnuQXzlWo+K1vOqnRoRHtIChlv8BT9w08=;
-        b=Z6qLOVltcC/3aS34RmzIh/laamASwIn5/l8g8TQJH8th70jyOJwWmCGmNW+aRW5Lmu
-         LstUkcCbPuUMZguJGSRz1EcRGQm3G5MGXik3OY0ZOA8xL3d7O0aLnEwHOLQlgci6Layo
-         BRKl1pNrYcaGdFnxMWIZPOykzeuyMRIHYxiPabtT0re06iQVdG/XwQXhAfyffad2DOaE
-         f3NiDgvzYd6v8vRANWEuUNm9eeowzTpxqmllr9VKVnyiWhwbpdZF6iP/QyARYmYrQgfY
-         StNgBwW5tNHSgynak356IEyt+MqOQIW8cg2qJLPG6kbD7Ozq1WZMf2nUdOcqYSQBpe30
-         fTPA==
+        d=gmail.com; s=20230601; t=1765869530; x=1766474330; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4AR+Dce+hdRk/kbGoTBFuh6NUIKFjYa2ppTi9o64eAo=;
+        b=HCHFmuqEdxuaw9hu1KUzu1s6jwekj3+dc1kl2A5UmvIJ2cB2uq2BnviI2Nac1S227O
+         xE5ly7spBEsRcwAvFKXFir0yX126YP6+3M5N2i9HXw8siTHIHl9gwn3NkkEJPGTh45jD
+         SN1OqM//qnBIzAbxqy7mn6UvApWUbZKl+/BtZAr+viJ1Wrp+uRU/fH+ngQyK3qcpmHgY
+         nasjp3ZgcLQbCF7v/BYBNwRpdDxsGD+2Lu0YeuAUKy9n/AZofMHF43H7A1EhnVq7pPVv
+         zoOq/B1se2LJfytK1GtqAcp54FsdTmhwNNXCrQQpQclqaqStjg+rOcI8aQq/GT7fwT4n
+         oReQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765869354; x=1766474154;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WYk/wYGUmQmnuQXzlWo+K1vOqnRoRHtIChlv8BT9w08=;
-        b=XW8H4SAEFeXoYHQ7gozr4/rFResIqLdz6lLiOuzxRIWPGpXeT3KqB1+d6UoPKBVvpe
-         aNm9c0WEqR/ohteYNxeVj+J3DC8NhfZjaqtB7GPYLgvUW4WVGFkOfiDxxVQQJ9CDxQbb
-         ALmUJeqjRJNKh3kNKNHlk5d5efs4d7AxMEbWuzipHcEtOXE8aD9QW1QNgMsoPvbvHza6
-         c076Te1MQoTtalUAtXUiMLwpH5ycpQdEqRwRXRFeYfq8d0ZuysmFhSrgfhm9OnGPLnEI
-         FuWYPhEGQIeNzDxoGaWWwFvKuoholgTQApjoiToRoedcyT/GNH+ipteOTj1Px0YGsX30
-         P6qA==
-X-Gm-Message-State: AOJu0YwBqXxjoARcTsY9habNKM2uhL/SfK4QSwFoqiyp6TJ3VpbAAhum
-	01M/rWVBMh44jWG2h1W3HU985GCkXXpnRcDHb0DzeeAsHN586uNLewZ7KKmZVg==
-X-Gm-Gg: AY/fxX4NpqYAB+1e1j+0UofxoeSqQg+hnZq8seovlk7lfDi3lCOm372cVwgmGIKZkn+
-	mIv3XoZSHkpGVXd+v6VVFWX67H2+zP8Kb64GV9eSyfSfALEJTpaTpk0cWnSjhpTsqVjsFnHW1td
-	wwAvjNWpJbgbhPUeDsyOfsaKRnNLTeZhftbibWDTlh14lcmIOgW5X+QKf2+EGNwp4wWggthtI4V
-	GYn1PAfnjxb8DFvZhrVXLZ1+/dl7pJZcI6A3zWRbnG+X0WfXSoommS8E9Sdc1mhriwQ6SzdlGHW
-	5xqJahtD6ykEqrkjDZBiwSOWP3MCqpGlVyW4HGzlLR+hcpDJjWquAcRmii1EByhksU4VPj3fvJL
-	WZWTzqaBLLHRgl+BzZ5WsbqedCnc9Ki814KVRh0pK1FHk16QBOHOczHsh4Jkju9OTE2SAEehJaf
-	9ZRq0L9v0wYHHR9iqVfPzHmJ4Dw8xvmi/YEO0=
-X-Google-Smtp-Source: AGHT+IG1lz2Od1obZBeTivH62Gh4AJ0++ijBOJPLBFlsatAD+6qAx4tCtQ44cGOCjFZhl8rIjR2udw==
-X-Received: by 2002:a05:6a00:8b07:b0:7e8:3fcb:9b01 with SMTP id d2e1a72fcca58-7f51e0e81e8mr11496925b3a.23.1765869354361;
-        Mon, 15 Dec 2025 23:15:54 -0800 (PST)
+        d=1e100.net; s=20230601; t=1765869530; x=1766474330;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4AR+Dce+hdRk/kbGoTBFuh6NUIKFjYa2ppTi9o64eAo=;
+        b=TwyFH+9R6SaWi1Z7wzqEOtUtELvh7grpmuE7mEeiNXmUBiaQf/uP9jM1QelE/LHyak
+         OGFY4hP0j/TxMJWDH4Emxj2uSDdjGDASStqZbWfdJ2cJc9Wi5hKoJYq5Ho9xrMsqGaLh
+         ApFrSFZL+PuRLb2rQuto3+JVRHjwerjXURk2sz5yc9UUgukDvKDXmFK1qAnrs2ATkDVe
+         0jgP42NqjbBaImRnzrHgjjR+gUksIble7nF8F2MvIMUypaw8Od9mcYL7qSd+/MZK9IkJ
+         8qo7F9+vJ4eeF+oK3yezkejHqP7Lc+sio/7Upx/We/KgawjfSXCkKedJRAhiNnprgJTV
+         hSeQ==
+X-Gm-Message-State: AOJu0YyepNNKWRv+mIlIgg7F8wCeTmLBsN3403esPxret6L3zkTY5Qgl
+	DwhZHYG1TV59fgGXt0qJgeOPl6aH+7Xwsp0WgzdzGve4O3Gz9KYwlWyAoFf7vA==
+X-Gm-Gg: AY/fxX6H3+tiap24TU6AhwmgthoZPaG4YIhj9G238kzKZkiwqBqX4xnoID/YpBq5YQD
+	KYBFNFrT9LIOazdvD8iESlT3qX0z5Q14eC3HTvw17Jc3f5utlqyA0ecAbAvho8vRG7kscjslcnE
+	NdtazKEwMher3NzRaXq0zple+dQB1dxf3ASpNiL3GVMvsNUm7whS4RQFbRWa2e1+swXrpFQJxvB
+	d3lwaX/4eZpjUpFB1MV2wcFyM4E4F6QfvYeMJbBbLgGW5/cnu1wkVE3rS4AfNOXWV1ivC4EG1mR
+	vKKizc0OmLBZadoWM2mVIkZUGv3khZYjHg4raec7j8p3Gxxl+rKBy9nlIuvVYMcZatezrhjOgJ+
+	2Nhc15l6jB4weKIdwN3Y+7hbP+6tRmQDl+iaqMJFoz7hOICXSfV4yR77EJISBmCpm0hsp96b5Pu
+	/+uilzhJoQLwItLlW1/YDekuU8
+X-Google-Smtp-Source: AGHT+IFJIQCfBr+vZBJHsw0/cSbmFmdQXSxRNKcjAxrq1x4h/5MlTuYlcwoVZiDdB61qRiozIroadA==
+X-Received: by 2002:a05:6a20:e292:b0:366:14b0:4b12 with SMTP id adf61e73a8af0-369afff1e93mr14628814637.78.1765869529732;
+        Mon, 15 Dec 2025 23:18:49 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([165.225.124.223])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c2d48514sm14471448b3a.30.2025.12.15.23.15.52
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-29ee9d50f9fsm152598275ad.44.2025.12.15.23.18.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 23:15:53 -0800 (PST)
+        Mon, 15 Dec 2025 23:18:49 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 6/6] openvpn: patch CVE-2025-13086
-Date: Tue, 16 Dec 2025 12:45:37 +0530
-Message-ID: <20251216071537.3174578-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][scarthgap][PATCH] openh264: patch CVE-2025-27091
+Date: Tue, 16 Dec 2025 12:48:40 +0530
+Message-ID: <20251216071840.3180374-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251216071537.3174578-1-ankur.tyagi85@gmail.com>
-References: <20251216071537.3174578-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 07:16:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122685
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 07:18:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122686
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-13086
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-27091
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../openvpn/openvpn/CVE-2025-13086.patch      | 157 ++++++++++++++++++
- .../recipes-support/openvpn/openvpn_2.6.14.bb |   1 +
- 2 files changed, 158 insertions(+)
- create mode 100644 meta-networking/recipes-support/openvpn/openvpn/CVE-2025-13086.patch
+ .../openh264/openh264/CVE-2025-27091.patch    | 28 +++++++++++++++++++
+ .../openh264/openh264_2.3.1.bb                |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/openh264/openh264/CVE-2025-27091.patch
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/CVE-2025-13086.patch b/meta-networking/recipes-support/openvpn/openvpn/CVE-2025-13086.patch
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264/CVE-2025-27091.patch b/meta-multimedia/recipes-multimedia/openh264/openh264/CVE-2025-27091.patch
 new file mode 100644
-index 0000000000..a37ef84a8d
+index 0000000000..fc7ccceec7
 --- /dev/null
-+++ b/meta-networking/recipes-support/openvpn/openvpn/CVE-2025-13086.patch
-@@ -0,0 +1,157 @@
-+From c56eb06a59ce8ccd601f1d58aa71cbd1211ee8d6 Mon Sep 17 00:00:00 2001
-+From: Arne Schwabe <arne@rfc2549.org>
-+Date: Mon, 27 Oct 2025 10:05:55 +0100
-+Subject: [PATCH] Fix memcmp check for the hmac verification in the 3way
-+ handshake being inverted
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264/CVE-2025-27091.patch
+@@ -0,0 +1,28 @@
++From 09672b2fe25ca0ca6537412eb835209b6c7c791b Mon Sep 17 00:00:00 2001
++From: BenzhengZhang <140143892+BenzhengZhang@users.noreply.github.com>
++Date: Thu, 19 Dec 2024 17:12:42 +0800
++Subject: [PATCH] Potential bug fix (#3818)
 +
-+This is a stupid mistake but causes all hmac cookies to be accepted,
-+thus breaking source IP address validation.   As a consequence, TLS
-+sessions can be openend and state can be consumed in the server from
-+IP addresses that did not initiate an initial connection.
-+
-+While at it, fix check to only allow [t-2;t] timeslots, disallowing
-+HMACs coming in from a future timeslot.
-+
-+Github: OpenVPN/openvpn-private-issues#56
-+
-+CVE: 2025-13086
-+
-+Reported-By: Joshua Rogers <contact@joshua.hu>
-+Found-by: ZeroPath (https://zeropath.com/)
-+Reported-By: stefan@srlabs.de
-+
-+Change-Id: I9cbe2bf535575b47ddd7f34e985c5c1c6953a6fc
-+Signed-off-by: Arne Schwabe <arne@rfc2549.org>
-+Acked-by: Max Fillinger <max@max-fillinger.net>
-+(cherry picked from commit 68ec931e7fb4af11d5ba0d4283df0350083fd373)
-+
-+CVE: CVE-2025-13086
-+Upstream-Status: Backport [https://github.com/OpenVPN/openvpn/commit/fa6a1824b0f37bff137204156a74ca28cf5b6f83]
++CVE: CVE-2025-27091
++Upstream-Status: Backport [https://github.com/cisco/openh264/commit/63db555e30986e3a5f07871368dc90ae78c27449]
++(cherry picked from commit 63db555e30986e3a5f07871368dc90ae78c27449)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/openvpn/ssl_pkt.c               |  7 ++--
-+ tests/unit_tests/openvpn/test_pkt.c | 57 ++++++++++++++++++++++++++++-
-+ 2 files changed, 60 insertions(+), 4 deletions(-)
++ codec/decoder/core/src/decoder.cpp | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/src/openvpn/ssl_pkt.c b/src/openvpn/ssl_pkt.c
-+index 41299f46..e820dc93 100644
-+--- a/src/openvpn/ssl_pkt.c
-++++ b/src/openvpn/ssl_pkt.c
-+@@ -545,13 +545,14 @@ check_session_id_hmac(struct tls_pre_decrypt_state *state,
-+         return false;
-+     }
++diff --git a/codec/decoder/core/src/decoder.cpp b/codec/decoder/core/src/decoder.cpp
++index dba6711b..c639cf7c 100644
++--- a/codec/decoder/core/src/decoder.cpp
+++++ b/codec/decoder/core/src/decoder.cpp
++@@ -848,6 +848,10 @@ int32_t WelsDecodeBs (PWelsDecoderContext pCtx, const uint8_t* kpBsBuf, const in
++             return pCtx->iErrorCode;
++           }
 + 
-+-    /* check adjacent timestamps too */
-+-    for (int offset = -2; offset <= 1; offset++)
-++    /* check adjacent timestamps too, the handwindow is split in 2 for the
-++     * offset, so we check the current timeslot and the two before that */
-++    for (int offset = -2; offset <= 0; offset++)
-+     {
-+         struct session_id expected_id =
-+             calculate_session_id_hmac(state->peer_session_id, from, hmac, handwindow, offset);
-+ 
-+-        if (memcmp_constant_time(&expected_id, &state->server_session_id, SID_SIZE))
-++        if (memcmp_constant_time(&expected_id, &state->server_session_id, SID_SIZE) == 0)
-+         {
-+             return true;
-+         }
-+diff --git a/tests/unit_tests/openvpn/test_pkt.c b/tests/unit_tests/openvpn/test_pkt.c
-+index 74d7311f..4e97384d 100644
-+--- a/tests/unit_tests/openvpn/test_pkt.c
-++++ b/tests/unit_tests/openvpn/test_pkt.c
-+@@ -429,6 +429,8 @@ test_verify_hmac_tls_auth(void **ut_state)
-+     hmac_ctx_t *hmac = session_id_hmac_init();
-+ 
-+     struct link_socket_actual from = { 0 };
-++    from.dest.addr.sa.sa_family = AF_INET;
-++    from.dest.addr.in4.sin_addr.s_addr = ntohl(0x01020304);
-+     struct tls_auth_standalone tas = { 0 };
-+     struct tls_pre_decrypt_state state = { 0 };
-+ 
-+@@ -456,10 +458,12 @@ test_verify_hmac_tls_auth(void **ut_state)
-+ static void
-+ test_verify_hmac_none(void **ut_state)
-+ {
-++    now = 1000;
-+     hmac_ctx_t *hmac = session_id_hmac_init();
-+ 
-+     struct link_socket_actual from = { 0 };
-+     from.dest.addr.sa.sa_family = AF_INET;
-++    from.dest.addr.in4.sin_addr.s_addr = ntohl(0x01020304);
-+ 
-+     struct tls_auth_standalone tas = { 0 };
-+     struct tls_pre_decrypt_state state = { 0 };
-+@@ -475,8 +479,59 @@ test_verify_hmac_none(void **ut_state)
-+     assert_int_equal(verdict, VERDICT_VALID_ACK_V1);
-+ 
-+     bool valid = check_session_id_hmac(&state, &from.dest, hmac, 30);
-++    assert_false(valid);
+++          if (pCtx->iErrorCode != ERR_NONE && !(pCtx->iErrorCode & dsDataErrorConcealed)) {
+++              return pCtx->iErrorCode;
+++          }
 ++
-++    struct session_id client_id = { { 0xae, 0xb9, 0xaf, 0xe1, 0xf0, 0x1d, 0x79, 0xc8 } };
-++    assert_memory_equal(&client_id, &state.peer_session_id, sizeof(struct session_id));
-++
-++    struct session_id expected_id = calculate_session_id_hmac(client_id, &from.dest, hmac, 30, 0);
-++
-++    free_tls_pre_decrypt_state(&state);
-++    buf_reset_len(&buf);
-++
-++    /* Write the packet again into the buffer but this time, replacing the peer packet
-++     * id with the expected one */
-++    buf_write(&buf, client_ack_none_random_id, sizeof(client_ack_none_random_id) - 8);
-++    buf_write(&buf, expected_id.id, 8);
-++
-++    verdict = tls_pre_decrypt_lite(&tas, &state, &from, &buf);
-++    assert_int_equal(verdict, VERDICT_VALID_ACK_V1);
-++    valid = check_session_id_hmac(&state, &from.dest, hmac, 30);
-++
-+     assert_true(valid);
-+ 
-++    /* Our handwindow is 30 so the slices are half of that, so they are
-++     * (975,990), (990, 1005), (1005, 1020), (1020, 1035), (1035, 1050)
-++     * So setting time to the two future ones should work
-++     */
-++    now = 980;
-++    assert_false(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++    now = 1040;
-++    assert_false(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++    now = 1002;
-++    assert_true(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++    now = 1022;
-++    assert_true(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++    now = 1010;
-++    assert_true(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++
-++    /* Changing the IP address should make this invalid */
-++    from.dest.addr.in4.sin_addr.s_addr = ntohl(0x01020305);
-++    assert_false(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++
-++    /* Change to the correct one again */
-++    from.dest.addr.in4.sin_addr.s_addr = ntohl(0x01020304);
-++    assert_true(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++
-++    /* Modify the peer id, should now fail hmac verification */
-++    buf_inc_len(&buf, -4);
-++    buf_write_u32(&buf, 0x12345678);
-++
-++    free_tls_pre_decrypt_state(&state);
-++    verdict = tls_pre_decrypt_lite(&tas, &state, &from, &buf);
-++    assert_int_equal(verdict, VERDICT_VALID_ACK_V1);
-++    assert_false(check_session_id_hmac(&state, &from.dest, hmac, 30));
-++
-+     free_tls_pre_decrypt_state(&state);
-+     free_buf(&buf);
-+     hmac_ctx_cleanup(hmac);
-+@@ -663,12 +718,12 @@ int
-+ main(void)
-+ {
-+     const struct CMUnitTest tests[] = {
-++        cmocka_unit_test(test_verify_hmac_none),
-+         cmocka_unit_test(test_tls_decrypt_lite_none),
-+         cmocka_unit_test(test_tls_decrypt_lite_auth),
-+         cmocka_unit_test(test_tls_decrypt_lite_crypt),
-+         cmocka_unit_test(test_parse_ack),
-+         cmocka_unit_test(test_calc_session_id_hmac_static),
-+-        cmocka_unit_test(test_verify_hmac_none),
-+         cmocka_unit_test(test_verify_hmac_tls_auth),
-+         cmocka_unit_test(test_generate_reset_packet_plain),
-+         cmocka_unit_test(test_generate_reset_packet_tls_auth),
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-index 5361709f0c..305a69bec4 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-@@ -10,6 +10,7 @@ inherit autotools systemd update-rc.d pkgconfig
- SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
-            file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
-            file://openvpn \
-+           file://CVE-2025-13086.patch \
-           "
++           pDstNal += (iDstIdx + 4); //init, increase 4 reserved zero bytes, used to store the next NAL
++           if ((iSrcLength - iSrcConsumed + 4) > (pRawData->pEnd - pDstNal)) {
++             pDstNal = pRawData->pCurPos = pRawData->pHead;
+diff --git a/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb b/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
+index 6dfd759355..f0fe4f874f 100644
+--- a/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
++++ b/meta-multimedia/recipes-multimedia/openh264/openh264_2.3.1.bb
+@@ -17,6 +17,7 @@ BRANCH = "openh264v${PV}"
+ SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
+            file://0001-Makefile-Use-cp-options-to-preserve-file-mode.patch \
+            file://0002-Makefile-add-possibility-to-disable-NEON-extension.patch \
++           file://CVE-2025-27091.patch \
+            "
  
- UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ COMPATIBLE_MACHINE:armv7a = "(.*)"
 
