@@ -2,96 +2,100 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E4DED5C0F9
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 09:02:24 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18232.1765875737449991626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BD60D5CC89
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 09:09:44 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18143.1765876180811838784
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Dec 2025 01:02:17 -0800
+ Tue, 16 Dec 2025 01:09:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZopCqI86;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-42e2d5e119fso1955262f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 01:02:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=StcshjHy;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47118259fd8so43623045e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 01:09:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765875736; x=1766480536; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765876179; x=1766480979; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nEEGEsxZ07bVEV+9n+3rN98zf4NJ6QkXVtv5O3Y+L9M=;
-        b=ZopCqI86NYG9RBJQaJBJAAt1syDaoZ774ntoogO6j0FEtPrHaM+x5ZK0buEzlaUsBl
-         9mtN0p+JNKjgkzyXglzW6nSlavPERQfYpBLmm+l5qTcvY2fr+C9/bUI22S6Zue4bgdNO
-         qmnO3dGcdd1GTislNKAqSq5lBee+icbYmePnYCU9wci1beU7rZrw7hBUIGwxQEllNcBK
-         q/oYk/ZfPURc2JFXSCWqeQu+/bjabDHo0ADgLGkh3dWA/MiMCNdPT0d/9MtzVspP8NOw
-         n7SY+3WQu0a0BCHCciAu0AYhjMqHRZjH6hBpGowPiSEJ2iGCTWScHOGFHQkfDy5sdgbR
-         qOXQ==
+        bh=ljX1zfpVW3H7X6ScoBkYaNwHs6lQmfAvm05iyWFlEoA=;
+        b=StcshjHyam36q7Bzaf8v7Mg2ghk7+cTMqlkbjBLVctEQ69vt7H2JfC7AE+qBxx5LCO
+         D4S+khopjp0uG+qJU4tE2WVpRlyPJPNVNSdhkccp2LwSmZV0WfHZTgcDrpRilPQULYoL
+         ToeB6m1VlPSzs1+HwOWtl5v1j9SBGYZxBt4hMV0JZDD1eBfSgVOQDJsDI5e7abmTSini
+         vy9piQl1rCWnIk55x9UehFFuvwgpjZ1JAuy8CxBdlRySk9jvkSBv1GFPTlH820R1ddZ7
+         hA3UM3waWg7VWpS3ftXuzLl808Dm+7xuvWSDiLf022Lh5+9/k/KOleR8Ne20eunf/xeG
+         5zpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765875736; x=1766480536;
+        d=1e100.net; s=20230601; t=1765876179; x=1766480979;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=nEEGEsxZ07bVEV+9n+3rN98zf4NJ6QkXVtv5O3Y+L9M=;
-        b=ezp8WRZvi6wZynkQZTJ04SwpCWXeAcqn84UQTU97VxokUGXG8tbuf3jew+2VE3Qnym
-         hhWZNK581dKhkTVQcI5p2yFAtySMb+Wlby+tJU1+9i8SUgEzgT98PztrUg+4wafsBUJV
-         jsoIPnSByfnMGuLqQploGGKQXgChX+Vhr8Ql+L13HogZ+eyLFJlxG69aV7rpXwkU971b
-         HHw5zvw89AcS4cI0T6RK7yV1xDzVm1MCeC79wwJbQr5vniu3/+7mDFISirAiNn10wPvG
-         E8kY97WKnwcttMkZ9RQHlBdVUGlCQTBxzP/Hd7GklYhiImWJfyGr8C4yDIiZxpjA/c7m
-         bVDg==
-X-Gm-Message-State: AOJu0YxESoJuFxVPu91UUAUEOaAIKNy2KxeOh0xhEuy71RnxYes3iJ4f
-	Ovg7f7IAUpDGv6VZK9q8k+/J/4aTo4TyEl3z7j8nJpC1FZ4vJx+co2suHbbcUw==
-X-Gm-Gg: AY/fxX7h0WFkdPBg1Ic6hEtis1SZuyA76GZOD2napqtayHsjh6TUGa9lJYU4t4z6wnt
-	R2xAC/3ZeNR7p+iWCvsxOUtn4yCdfUMxjpi3YdygRm2gafITqb7n1kaE0EN4X+HYyL6tdZeZ8FZ
-	mtRc+bZmp3eYWEablZspDrnzv5cjUfWHG8Q2NBlpM0/4dAN2da/bEPhxSI0dXFTylPCpNaGYL2J
-	GqA1TKypJ/gmKGYTZD+XRzCboQYigUP1dJrre9qC9TwJxfScoIOIvNsoP23M8wnqoeI6ihBCHz8
-	8FO5O7500m6kh1BgGzafDW0LwIa2UzabXaSU9rNwen4ZC3eAEe05UHJLETFgvKN6ZfZOeJXnIuY
-	Bb0APqFOrNy9XWn+3GpDlNWGoJxY7nGxfllCKF4JO9NPqLFAuXUqz0qRdYNrJYYNeHiUSmOh3nI
-	8kXMMVOFE1
-X-Google-Smtp-Source: AGHT+IHn9JwaMD4yAQUCpjJLN5NRwCgsk9jQYHpvJiFBvMRR/2PpVo2HtUIWsvZpKHh81QfR9i89Nw==
-X-Received: by 2002:a05:6000:1868:b0:42b:3963:d08e with SMTP id ffacd0b85a97d-42fb44e21d8mr14149697f8f.22.1765875735471;
-        Tue, 16 Dec 2025 01:02:15 -0800 (PST)
+        bh=ljX1zfpVW3H7X6ScoBkYaNwHs6lQmfAvm05iyWFlEoA=;
+        b=a6zjL+gEzLZFvy2bJr3+hlyYtrumuZ7WL3WER+P8Zgh52XjJQAdsVcCGl0Ee2i7e49
+         UyuExIaAZZYEINGAecT7Ftxl4CHMjQNl4UrMV8ZiAxV5hjJn406y1y6PGfwWJam8LXPn
+         SA/AvRGCWrBvGdcUfMctk1ic6HtDjvb6bKmgjK1Q7BLGJjOrrP2En5CFi6nk3OnYc9DU
+         yK+dF6M9EmI18sK3VxzPdLBdgl3EytIDeF33Q19O16LAVpAutzXC5tjMjCIUW7znkgfp
+         jjYmKONG2TXd9iBGioeJopjNLWyK/chKGZD5K0vJ+F0xfKz8WY+9fzlBRiVXNMmfcAmv
+         k1iw==
+X-Gm-Message-State: AOJu0Yz4+PN0SSnsYv7gSMnm4MBnaqncDhocK3KFXvd0661Y9Y7D/LHs
+	a5ev3xyDNsQ7rKFKsoDYfgfgOfFp5cdDJiP0TsaXQpOqtd5TGasUHSinyfxBWg==
+X-Gm-Gg: AY/fxX5GNVKZLB/+/UrNSazGT69WssuAuRD3J/kOqfVlomRZCM6kuE+DtSxrxZKhX17
+	2gGTkiNn1OWSkrnZoYbwAoUIYt97ybMagRLUHUHBSLriipgIfDwqqqK3cdDTgfvzCq8q1uRzrtf
+	T9Vpec2yJ2ywOdBaM6for5kCyRohmTHBx8OoO4GTMzMFko5/1VaRop7ag50783s3obeG0Grqw3Q
+	Vuh/S+LHUu3mfu7+cASlIhdy/naYHv+Aca9FrC83ysYYP65vlSs26i3nDTdyklRmyyxR0bsQpAk
+	kx1SyIuS7aXdLqTMRlRmg+yObpRIX7+pD/UyqQT6Zbc03fTZi2WqFDDTbssWhhpJ/VcmyVh9c86
+	pgtbkQnYn4cbTvJ1ZTmMaM/tFWFNlt+HKh05NRDZTgAMUwhbv+D+CqO1mxn81H0Y4LD1KC3CtYd
+	S8LVP4A1GTjZ0me8dVvK4=
+X-Google-Smtp-Source: AGHT+IHaTCRNiUU3+4CNihvlBSwjUp39GyfHSAjcB1sQUtYcUyM3225byn0XbxAvP7IKcDMgUlBpSg==
+X-Received: by 2002:a05:6000:2909:b0:42b:3b55:8929 with SMTP id ffacd0b85a97d-42fb44bb495mr14233312f8f.19.1765876178937;
+        Tue, 16 Dec 2025 01:09:38 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430f1fa232csm20156648f8f.6.2025.12.16.01.02.14
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-430fb078e56sm13435480f8f.21.2025.12.16.01.09.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Dec 2025 01:02:14 -0800 (PST)
+        Tue, 16 Dec 2025 01:09:38 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] minio: ignore irrelevant CVEs
-Date: Tue, 16 Dec 2025 10:02:14 +0100
-Message-ID: <20251216090214.1404629-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] openvpn: upgrade 2.6.16 -> 2.6.17
+Date: Tue, 16 Dec 2025 10:09:37 +0100
+Message-ID: <20251216090937.1426703-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 09:02:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122689
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 09:09:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122690
 
-The minio umbrella covers multiple projects. The recipe itself builds
-"minio client", which is a set of basic tools to query data from
-"minio server" - like ls, mv, find...
-
-The CVEs were files against minio server. Looking at the go mod list,
-this recipe doesn't use minio server even as a build dependency - so ignore
-the CVEs.
+Changelog:
+- Windows/interactive service: fix erroneous exit on error that could
+  be used by a local Windows users to achieve a local denial-of-service
+  (CVE-2025-13751)
+- Windows/interactive service: improve service pipe robustness against
+  file access races (uuid) and access by unauthorized processes (ACL).
+  upgrade bundled build instruction (vcpkg and patch) for pkcs11-helper
+  to 1.31, fixing a parser bug
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-extended/minio/minio_git.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../openvpn/{openvpn_2.6.16.bb => openvpn_2.6.17.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.6.16.bb => openvpn_2.6.17.bb} (98%)
 
-diff --git a/meta-oe/recipes-extended/minio/minio_git.bb b/meta-oe/recipes-extended/minio/minio_git.bb
-index f278a728fd..511dd4d869 100644
---- a/meta-oe/recipes-extended/minio/minio_git.bb
-+++ b/meta-oe/recipes-extended/minio/minio_git.bb
-@@ -164,3 +164,9 @@ do_install() {
-     install -d ${D}/${sbindir}
-     install ${S}/src/${GO_IMPORT}/mc ${D}/${sbindir}/mc
- }
-+
-+CVE_STATUS_GROUPS += "CVE_STATUS_WRONG_CPE"
-+CVE_STATUS_WRONG_CPE[status] = "cpe-incorrect: The vulnerability is in minio server, not in minio client-tools"
-+CVE_STATUS_WRONG_CPE = "CVE-2018-1000538 CVE-2020-11012 CVE-2021-21287 CVE-2021-21362 \
-+                        CVE-2021-21390 CVE-2021-43858 CVE-2022-35919 CVE-2023-28433 \
-+                        CVE-2023-28434 CVE-2024-36107"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb
+similarity index 98%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb
+index 88f564313f..c454a93276 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.6.16.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+ 
+ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
+ 
+-SRC_URI[sha256sum] = "05cb5fdf1ea33fcba719580b31a97feaa019c4a3050563e88bc3b34675e6fed4"
++SRC_URI[sha256sum] = "4cc8e63f710d3001493b13d8a32cf22a214d5e4f71dd37d93831e2fd3208b370"
+ 
+ CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
+ 
 
