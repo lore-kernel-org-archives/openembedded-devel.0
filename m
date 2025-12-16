@@ -2,352 +2,147 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28E26D5B161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33447D5C0CA
 	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 07:15:53 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16738.1765869345124623191
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16512.1765869349054522073
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Dec 2025 23:15:45 -0800
+ Mon, 15 Dec 2025 23:15:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aQmHjMGS;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-7b75e366866so1731174b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Dec 2025 23:15:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kQDptEAH;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-7bb710d1d1dso6333900b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Dec 2025 23:15:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765869344; x=1766474144; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wiBpiEGOegSJr87GamKseI/QUqa8FZoMJ/bm71sxtEU=;
-        b=aQmHjMGSOlLfJ8qSiBMeqCy8XbsmUycisCD0Mq8iJGJmsQTsgDe3EWhp19pvSa1jnu
-         9Vk6jEQYfsOR7dGRmnR83kZN1VGlEBObvHfgDLfZJKEqE4CspRdpontZ42dWuKt+OVne
-         Q09jj3xcssmULG3q8TvLvSR4Q3ffisGFIYi0XY8YvlRZzFUwDzjNatHkWW6ZH9bPzxDr
-         Bk+q23SHgDR7bt/dkPER0AZL7stetK+0ERMxOtOxzZPIXCY22qKIw63MqzgCEpnbn8/d
-         BInoYGCED2ixjTAd7FFYSLW9F566s0aEBFJ6A08y/Ii8acgD2NV/og6ISrd3Rtg7L6cO
-         emBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765869344; x=1766474144;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1765869348; x=1766474148; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=wiBpiEGOegSJr87GamKseI/QUqa8FZoMJ/bm71sxtEU=;
-        b=d8hIV64nbFyc5Yxd5rt/olawaXl1+jsUYcORBBav3L789yCe82SV1AEaG37kJgP5mh
-         3gIUT8C3M+vVq9SoVV2FmFPIi+wcv0dEu/WB3wq7H7bChdPSzJ6nWtZN4dGdEQ8FeLDS
-         2IU1II21qd6P6M98QiYhSr2kFlwgGUbCh/gaVd04BUltkAcPR+0SwOivMOT4aztVmSDf
-         jFpxFIHvDx3CNlvLfeSJqdoDHhm0/m7YfmzeRVAO9JOgs3Epr8SxudJMNRu9+ILeGzUx
-         OnGL8kxlv2n7N+UVPdn1KYWuRvAoNRq1G7Vz8Fr7t12Q+LTvBts3zCMyeaPbVzjn8HH9
-         iwJQ==
-X-Gm-Message-State: AOJu0YwfbRx+cz3tF9NqaKFOS9Bj84k7iCgEA/aRJmDfCuAxul3YbOOR
-	N0hEK2Z+SPCb65mWib3fLSzZP/GxQ4ZBNmKMhKzPnq8dkiBugJMP2qQkoVDoTA==
-X-Gm-Gg: AY/fxX6HcMkwFzy8TTSV5c9jyYNCB8gWBsh/IyfIq5HOK1d+8uAl8K3VtB+l3JXKZYP
-	dn5JNU/vzFggCIApOo0y8kFVsQ9dri5RPl22WvNwTCDV7qcbxxNi7h+MVshXKF7KYHKlumY2uSo
-	z+HJwR7ypH3f4eWgb1zacy/Ssc/PNYfjZNV3P3+j6SmzW9KMYgaHF56eUbF+Z1e0jy3lhgUrrgS
-	bkLApumfGkUaQSaQO5afxpDIBN0/1sEbuO1Y1NSaRJ2AkzZgy9hv9qQ9u9hsPfeOm/QHC0gy0bU
-	RWbHEz8p0OeDXi2ZCLzDLaxJblVcXfjoElaXCuLS3c63E2Wrcw0aFCxo8oLMMb+xrthOe0iWgLE
-	vneISO0ZfufiWOdJw5MxCcXOEzQHGzPybiJ/fOLKJQ7snniGKdOHYlpI6qERvRkX2WWBh06socZ
-	kuy1sLXGhUNhJoPtlsQ1ndAW/k
-X-Google-Smtp-Source: AGHT+IESjJKIiDqqCcHoAcS9nREnaSrSl0nSB17k9C/x9VNWMW/yWCcf1OW0VTlMI91nprKLpsZrjw==
-X-Received: by 2002:a05:6a00:1824:b0:7f7:52ae:6b9a with SMTP id d2e1a72fcca58-7f752ae6e23mr9502394b3a.9.1765869344146;
-        Mon, 15 Dec 2025 23:15:44 -0800 (PST)
+        bh=mBjQhYYsr4snQU3wEg5ISjOg2XI5frfS7he11dl91FY=;
+        b=kQDptEAHk62+Jib9lHei0fxevd/yOmOBXQ0/wnkKDfIGY2xmND16PYreejdwoKbTo+
+         nMy4hhddX4XCi8bhSmqEmzT5xRjlpWvDm2701hrTUUP0/v9A6OWyTKDuHMfUDF7XjTVE
+         /kZP9KHHvXsE8GZ8wq7/FDRz8Uya1NYIEEqG88euGneerB01a78hZ3zM7/+DF1tgLDKr
+         itJx3+pe/hPE0SCilPaWJhiBLyzVDxmf7eAAK824uZ+SA4nCEvK4p2c09gHGbQB4J2PE
+         3zk+0C1aqY3zY5spi2FKMGLPZZppqCcMBGUUswzyVbCDiAPzUUiYvY5mv4YYJduCo1ee
+         MJAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765869348; x=1766474148;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=mBjQhYYsr4snQU3wEg5ISjOg2XI5frfS7he11dl91FY=;
+        b=VEBvuH43JfUDqwzVf42OFnsOOVYK0aGQKpMlx5O+LIkQAuDGWh2G8bSsMCwKFcatot
+         BxMZy6K2O+lNd2c5qksc0PMTfpiyQOtyGPPtFzWKLtqAOEqP/BLc4MHZFWpd6YICDLVh
+         cYsarQ3/tpSbRY5nsM0DUvdd/59Iy4hZJ3q+oS8qQms+I4xOWfNSQHVgK7an0FcFuF4F
+         vIhKGwDDt3nOV3m8a7AagVQOOKt83cQ7ZK6BYXuQm18MLH6DWlVQwqFVqNIrxYGFYEN5
+         CIpGyMLPnAAz2S3eOwLwD3LhGpIrWUCqIGNvmAjdyt+Wih/6s7VTncAcdPFL7+Imbwzw
+         ll6w==
+X-Gm-Message-State: AOJu0Yw+AcFTz34o5Sc4IP3wAwPe7pNfHGgKtsLSADzdFBwj70Ydef0p
+	D74ecTRwVzBAfG1+3HCmgcWkXUEws6TKHXtQGxe0T8tbzbqfLieiBMx03AZ89w==
+X-Gm-Gg: AY/fxX47I7/wxL0jORnPTlq6QAZQynxbn++fiyskq1QMovWPVMNtdNDMFyfXrWgDd67
+	cNKJqqUj2RKubITe/G3Xc4Y1r7ecAAKviEu9AY2ej9v9YDaDgXy+2T56pP3W6h9HNMnpymJJtLo
+	r+ln+yIrVumTV2M2gKhPZdFi/RHmEz23cKQjzM0I+nfNPdHNjQIox9YOwO7YKZ42D/7/qFv6Dus
+	BMtI5YggqPFNtllCl7l+vWWI09mSUiT/3lumUPzyqhkesb4JFV1efEqR9NxhFpAJlMBZP3MMU1Q
+	Wn2Yc1r7DJnvz/BU710+RL985sEQIzZccmYBWnP6sQxHkYg/aiSF4e4IxMAYvXddbxr1ZLJ6V1A
+	kyRusii8k0A0Kk1X+HdpzFCrq1c04zhK6JhVdlJLcsVVO/ATkVWRb/h29/4mdSQrneUOuT3HIsM
+	qhKAoJ4GhJH9foDkwejpWiTqUk
+X-Google-Smtp-Source: AGHT+IH+K1X+0L9eoU7/Z7EBy11TWhvV7VrGSbXKIq488HBjz4lZ3KFebb880AJ7iNYKf0jzC0k8Zw==
+X-Received: by 2002:a05:6a00:2993:b0:7ab:653a:ca0e with SMTP id d2e1a72fcca58-7f6679361demr13887140b3a.23.1765869348092;
+        Mon, 15 Dec 2025 23:15:48 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([165.225.124.223])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c2d48514sm14471448b3a.30.2025.12.15.23.15.42
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7f4c2d48514sm14471448b3a.30.2025.12.15.23.15.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Dec 2025 23:15:43 -0800 (PST)
+        Mon, 15 Dec 2025 23:15:47 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 1/6] civetweb: patch CVE-2025-9648
-Date: Tue, 16 Dec 2025 12:45:32 +0530
-Message-ID: <20251216071537.3174578-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 3/6] unbound: patch CVE-2024-43167
+Date: Tue, 16 Dec 2025 12:45:34 +0530
+Message-ID: <20251216071537.3174578-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251216071537.3174578-1-ankur.tyagi85@gmail.com>
+References: <20251216071537.3174578-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 07:15:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122680
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122682
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-9648
+Details https://nvd.nist.gov/vuln/detail/CVE-2024-43167
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../civetweb/civetweb/CVE-2025-9648.patch     | 254 ++++++++++++++++++
- .../civetweb/civetweb_1.16.bb                 |   1 +
- 2 files changed, 255 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-9648.patch
+ .../unbound/unbound/CVE-2024-43167.patch      | 46 +++++++++++++++++++
+ .../recipes-support/unbound/unbound_1.19.3.bb |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2024-43167.patch
 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-9648.patch b/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-9648.patch
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2024-43167.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2024-43167.patch
 new file mode 100644
-index 0000000000..0456203248
+index 0000000000..23efc49338
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb/CVE-2025-9648.patch
-@@ -0,0 +1,254 @@
-+From 6f10111d24f9f7bdb637bba77c27700ecff56244 Mon Sep 17 00:00:00 2001
-+From: bel2125 <bel2125@gmail.com>
-+Date: Tue, 2 Sep 2025 14:08:41 +0200
-+Subject: [PATCH] Make parsing of URL encoded forms more robust
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2024-43167.patch
+@@ -0,0 +1,46 @@
++From 81b41525fd07660f60ccca0378d1e1650d0b45b7 Mon Sep 17 00:00:00 2001
++From: zhailiangliang <zhailiangliang@loongson.cn>
++Date: Tue, 21 May 2024 08:40:16 +0000
++Subject: [PATCH] fix null pointer dereference issue in function ub_ctx_set_fwd
++ of file libunbound/libunbound.c
 +
-+Reject requests that obviously violate the URL encoding.
-+Fixes #1348
-+
-+CVE: CVE-2025-9648
-+Upstream-Status: Backport [https://github.com/civetweb/civetweb/commit/782e18903515f43bafbf2e668994e82bdfa51133]
-+(cherry picked from commit 782e18903515f43bafbf2e668994e82bdfa51133)
++CVE: CVE-2024-43167
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/8e43e2574c4e02f79c562a061581cdcefe136912]
++(cherry picked from commit 8e43e2574c4e02f79c562a061581cdcefe136912)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/civetweb.c      |  7 ++++++-
-+ src/handle_form.inl | 46 +++++++++++++++++++++++++++++++++++++--------
-+ 2 files changed, 44 insertions(+), 9 deletions(-)
++ libunbound/libunbound.c | 7 +++++--
++ 1 file changed, 5 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/civetweb.c b/src/civetweb.c
-+index 5452b36d..f843300c 100644
-+--- a/src/civetweb.c
-++++ b/src/civetweb.c
-+@@ -1,4 +1,4 @@
-+-/* Copyright (c) 2013-2021 the Civetweb developers
-++/* Copyright (c) 2013-2025 the Civetweb developers
-+  * Copyright (c) 2004-2013 Sergey Lyubka
-+  *
-+  * Permission is hereby granted, free of charge, to any person obtaining a copy
-+@@ -7052,6 +7052,7 @@ mg_url_decode(const char *src,
-+               int is_form_url_encoded)
-+ {
-+ 	int i, j, a, b;
-++
-+ #define HEXTOI(x) (isdigit(x) ? (x - '0') : (x - 'W'))
-+ 
-+ 	for (i = j = 0; (i < src_len) && (j < (dst_len - 1)); i++, j++) {
-+@@ -7064,11 +7065,15 @@ mg_url_decode(const char *src,
-+ 			i += 2;
-+ 		} else if (is_form_url_encoded && (src[i] == '+')) {
-+ 			dst[j] = ' ';
-++		} else if ((unsigned char)src[i] <= ' ') {
-++			return -1; /* invalid character */
-+ 		} else {
-+ 			dst[j] = src[i];
-+ 		}
++diff --git a/libunbound/libunbound.c b/libunbound/libunbound.c
++index 80a82bb4..c52114d9 100644
++--- a/libunbound/libunbound.c
+++++ b/libunbound/libunbound.c
++@@ -976,7 +976,8 @@ ub_ctx_set_fwd(struct ub_ctx* ctx, const char* addr)
++ 	if(!addr) {
++ 		/* disable fwd mode - the root stub should be first. */
++ 		if(ctx->env->cfg->forwards &&
++-			strcmp(ctx->env->cfg->forwards->name, ".") == 0) {
+++			(ctx->env->cfg->forwards->name &&
+++			strcmp(ctx->env->cfg->forwards->name, ".") == 0)) {
++ 			s = ctx->env->cfg->forwards;
++ 			ctx->env->cfg->forwards = s->next;
++ 			s->next = NULL;
++@@ -996,7 +997,8 @@ ub_ctx_set_fwd(struct ub_ctx* ctx, const char* addr)
++ 	/* it parses, add root stub in front of list */
++ 	lock_basic_lock(&ctx->cfglock);
++ 	if(!ctx->env->cfg->forwards ||
++-		strcmp(ctx->env->cfg->forwards->name, ".") != 0) {
+++		(ctx->env->cfg->forwards->name &&
+++		strcmp(ctx->env->cfg->forwards->name, ".") != 0)) {
++ 		s = calloc(1, sizeof(*s));
++ 		if(!s) {
++ 			lock_basic_unlock(&ctx->cfglock);
++@@ -1014,6 +1016,7 @@ ub_ctx_set_fwd(struct ub_ctx* ctx, const char* addr)
++ 		ctx->env->cfg->forwards = s;
++ 	} else {
++ 		log_assert(ctx->env->cfg->forwards);
+++		log_assert(ctx->env->cfg->forwards->name);
++ 		s = ctx->env->cfg->forwards;
 + 	}
-+ 
-++#undef HEXTOI
-++
-+ 	dst[j] = '\0'; /* Null-terminate the destination */
-+ 
-+ 	return (i >= src_len) ? j : -1;
-+diff --git a/src/handle_form.inl b/src/handle_form.inl
-+index be477a05..0ebaf560 100644
-+--- a/src/handle_form.inl
-++++ b/src/handle_form.inl
-+@@ -1,4 +1,4 @@
-+-/* Copyright (c) 2016-2021 the Civetweb developers
-++/* Copyright (c) 2016-2025 the Civetweb developers
-+  *
-+  * Permission is hereby granted, free of charge, to any person obtaining a copy
-+  * of this software and associated documentation files (the "Software"), to deal
-+@@ -39,7 +39,7 @@ url_encoded_field_found(const struct mg_connection *conn,
-+ 	    mg_url_decode(key, (int)key_len, key_dec, (int)sizeof(key_dec), 1);
-+ 
-+ 	if (((size_t)key_dec_len >= (size_t)sizeof(key_dec)) || (key_dec_len < 0)) {
-+-		return MG_FORM_FIELD_STORAGE_SKIP;
-++		return MG_FORM_FIELD_STORAGE_ABORT;
-+ 	}
-+ 
-+ 	if (filename) {
-+@@ -53,7 +53,7 @@ url_encoded_field_found(const struct mg_connection *conn,
-+ 		    || (filename_dec_len < 0)) {
-+ 			/* Log error message and skip this field. */
-+ 			mg_cry_internal(conn, "%s: Cannot decode filename", __func__);
-+-			return MG_FORM_FIELD_STORAGE_SKIP;
-++			return MG_FORM_FIELD_STORAGE_ABORT;
-+ 		}
-+ 		remove_dot_segments(filename_dec);
-+ 
-+@@ -95,6 +95,7 @@ url_encoded_field_get(
-+     struct mg_form_data_handler *fdh)
-+ {
-+ 	char key_dec[1024];
-++	int key_dec_len;
-+ 
-+ 	char *value_dec = (char *)mg_malloc_ctx(*value_len + 1, conn->phys_ctx);
-+ 	int value_dec_len, ret;
-+@@ -108,7 +109,8 @@ url_encoded_field_get(
-+ 		return MG_FORM_FIELD_STORAGE_ABORT;
-+ 	}
-+ 
-+-	mg_url_decode(key, (int)key_len, key_dec, (int)sizeof(key_dec), 1);
-++	key_dec_len = mg_url_decode(
-++	    key, (int)key_len, key_dec, (int)sizeof(key_dec), 1);
-+ 
-+ 	if (*value_len >= 2 && value[*value_len - 2] == '%')
-+ 		*value_len -= 2;
-+@@ -117,6 +119,11 @@ url_encoded_field_get(
-+ 	value_dec_len = mg_url_decode(
-+ 	    value, (int)*value_len, value_dec, ((int)*value_len) + 1, 1);
-+ 
-++	if ((key_dec_len < 0) || (value_dec_len < 0)) {
-++		mg_free(value_dec);
-++		return MG_FORM_FIELD_STORAGE_ABORT;
-++	}
-++
-+ 	ret = fdh->field_get(key_dec,
-+ 	                     value_dec,
-+ 	                     (size_t)value_dec_len,
-+@@ -136,9 +143,13 @@ unencoded_field_get(const struct mg_connection *conn,
-+                     struct mg_form_data_handler *fdh)
-+ {
-+ 	char key_dec[1024];
-++	int key_dec_len;
-+ 	(void)conn;
-+ 
-+-	mg_url_decode(key, (int)key_len, key_dec, (int)sizeof(key_dec), 1);
-++	key_dec_len = mg_url_decode(key, (int)key_len, key_dec, (int)sizeof(key_dec), 1);
-++	if (key_dec_len < 0) {
-++		return MG_FORM_FIELD_STORAGE_ABORT;
-++	}
-+ 
-+ 	return fdh->field_get(key_dec, value, value_len, fdh->user_data);
-+ }
-+@@ -188,6 +199,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 	int buf_fill = 0;
-+ 	int r;
-+ 	int field_count = 0;
-++	int abort_read = 0;
-+ 	struct mg_file fstore = STRUCT_FILE_INITIALIZER;
-+ 	int64_t file_size = 0; /* init here, to a avoid a false positive
-+ 	                         "uninitialized variable used" warning */
-+@@ -278,6 +290,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 				    conn, data, (size_t)keylen, val, (size_t *)&vallen, fdh);
-+ 				if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 					/* Stop request handling */
-++					abort_read = 1;
-+ 					break;
-+ 				}
-+ 				if (r == MG_FORM_FIELD_HANDLE_NEXT) {
-+@@ -320,6 +333,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 							r = field_stored(conn, path, file_size, fdh);
-+ 							if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 								/* Stop request handling */
-++								abort_read = 1;
-+ 								break;
-+ 							}
-+ 
-+@@ -358,6 +372,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 			if ((field_storage & MG_FORM_FIELD_STORAGE_ABORT)
-+ 			    == MG_FORM_FIELD_STORAGE_ABORT) {
-+ 				/* Stop parsing the request */
-++				abort_read = 1;
-+ 				break;
-+ 			}
-+ 
-+@@ -386,7 +401,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 		 * Here we use "POST", and read the data from the request body.
-+ 		 * The data read on the fly, so it is not required to buffer the
-+ 		 * entire request in memory before processing it. */
-+-		for (;;) {
-++		while (!abort_read) {
-+ 			const char *val;
-+ 			const char *next;
-+ 			ptrdiff_t keylen, vallen;
-+@@ -440,6 +455,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 			if ((field_storage & MG_FORM_FIELD_STORAGE_ABORT)
-+ 			    == MG_FORM_FIELD_STORAGE_ABORT) {
-+ 				/* Stop parsing the request */
-++				abort_read = 1;
-+ 				break;
-+ 			}
-+ 
-+@@ -468,6 +484,15 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 				} else {
-+ 					vallen = (ptrdiff_t)strlen(val);
-+ 					end_of_key_value_pair_found = all_data_read;
-++					if ((buf + buf_fill) > (val + vallen)) {
-++						/* Avoid DoS attacks by having a zero byte in the middle of
-++						 * a request that is supposed to be URL encoded. Since this
-++						 * request is certainly invalid, according to the protocol
-++						 * specification, stop processing it. Fixes #1348 */
-++						abort_read = 1;
-++						break;
-++					}
-++
-+ 				}
-+ 
-+ 				if (field_storage == MG_FORM_FIELD_STORAGE_GET) {
-+@@ -489,6 +514,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 					get_block++;
-+ 					if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 						/* Stop request handling */
-++						abort_read = 1;
-+ 						break;
-+ 					}
-+ 					if (r == MG_FORM_FIELD_HANDLE_NEXT) {
-+@@ -557,7 +583,6 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 						val = buf;
-+ 					}
-+ 				}
-+-
-+ 			} while (!end_of_key_value_pair_found);
-+ 
-+ #if !defined(NO_FILESYSTEMS)
-+@@ -568,6 +593,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 					r = field_stored(conn, path, file_size, fdh);
-+ 					if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 						/* Stop request handling */
-++						abort_read = 1;
-+ 						break;
-+ 					}
-+ 				} else {
-+@@ -581,7 +607,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 			}
-+ #endif /* NO_FILESYSTEMS */
-+ 
-+-			if (all_data_read && (buf_fill == 0)) {
-++			if ((all_data_read && (buf_fill == 0)) || abort_read) {
-+ 				/* nothing more to process */
-+ 				break;
-+ 			}
-+@@ -937,6 +963,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 					get_block++;
-+ 					if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 						/* Stop request handling */
-++						abort_read = 1;
-+ 						break;
-+ 					}
-+ 					if (r == MG_FORM_FIELD_HANDLE_NEXT) {
-+@@ -1011,6 +1038,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 				                        fdh);
-+ 				if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 					/* Stop request handling */
-++					abort_read = 1;
-+ 					break;
-+ 				}
-+ 				if (r == MG_FORM_FIELD_HANDLE_NEXT) {
-+@@ -1039,6 +1067,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 							r = field_stored(conn, path, file_size, fdh);
-+ 							if (r == MG_FORM_FIELD_HANDLE_ABORT) {
-+ 								/* Stop request handling */
-++								abort_read = 1;
-+ 								break;
-+ 							}
-+ 						} else {
-+@@ -1057,6 +1086,7 @@ mg_handle_form_request(struct mg_connection *conn,
-+ 			if ((field_storage & MG_FORM_FIELD_STORAGE_ABORT)
-+ 			    == MG_FORM_FIELD_STORAGE_ABORT) {
-+ 				/* Stop parsing the request */
-++				abort_read = 1;
-+ 				break;
-+ 			}
-+ 
-diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-index a546efca7b..0c860f85a3 100644
---- a/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-+++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
-@@ -9,6 +9,7 @@ SRCREV = "d7ba35bbb649209c66e582d5a0244ba988a15159"
- SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
-            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
-            file://0001-Fix-heap-overflow-in-directory-URI-slash-redirection.patch \
-+           file://CVE-2025-9648.patch \
++ 	dupl = strdup(addr);
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+index 0542ae454b..9a537c2dc2 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;nobranch=1 \
+            file://CVE-2024-8508.patch \
+            file://CVE-2024-33655.patch \
+            file://CVE-2025-11411.patch \
++           file://CVE-2024-43167.patch \
             "
+ SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
  
- S = "${WORKDIR}/git"
 
