@@ -1,88 +1,113 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 759ADD5CC9E
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 09:47:04 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18627.1765878418692074009
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F2CAD5CCA4
+	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 09:54:54 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18910.1765878885364881219
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Dec 2025 01:46:58 -0800
+ Tue, 16 Dec 2025 01:54:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lyj5aME7;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b734fcbf1e3so897622166b.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 01:46:58 -0800 (PST)
+ dkim=pass header.i=@smile.fr header.s=google header.b=zrrO+sJY;
+ spf=pass (domain: smile.fr, ip: 209.85.128.42, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so48226185e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 01:54:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765878417; x=1766483217; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kkzLP4qrB1OraF/UlSKyY4uSpexAC2N9NTFoQ3t3WR4=;
-        b=lyj5aME7bIJkTeeGJiBwm47ae69ipRWhyJy3LvqnbfG3Du3JK4A+htugg4lrn/mOCs
-         oyDlSn3ZTX/udx2TPHE3fRXmHkzxS8zfkVWbo0W83phELS39NuWyznhWOepUKQmvOyHn
-         hsrZPJl3RQYxrN5nqw3nwqWpgMvnSnn2qRg/K8FYIRRvsWpylnrjsKxxOM9AdT/Rt84e
-         yTR30k4J/4x5JMGdHe5aH4Gwi4OWFh70fptDZL0iYX2pLVqpazmaAXq+afpqsse3kywD
-         x8kLBGlYgwWQr7+DNc90/aTdg4j4TXBq/D2JKmSblyz51olnKzbxtHgSr9Cnfv8j9T5N
-         Q5bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765878417; x=1766483217;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=smile.fr; s=google; t=1765878884; x=1766483684; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kkzLP4qrB1OraF/UlSKyY4uSpexAC2N9NTFoQ3t3WR4=;
-        b=p5R3m9dbW6+ziY/qp0Im2go17Va++M8F+0RG46+VfEgvwg2A1WD1iwwuZPSvFfTcSg
-         8A+n736/TEPzA7gx9M19D+9M/7n/CD+XYcQatiNx2iASlxh1PCWoZjpFucjazPfIx7pf
-         YqNjCbnICmG+nADvAzCrmC0NzEzM/yyRRrqX/54wUOAaxvT+3Twn6ad2PXdi4SP6XpbL
-         X4aGm+mzNJ6/QeEd+bZtQVRBaqipKG4Y1h3462dpiz8JhNoqNrR3KbQIW+xCZO1XfR2H
-         sBvpQqcAOqroEEpJIIH2XPZwJzo8KFg7QPfySRt9C4rNpWu3V45ZTdMXop7KYpfpy45h
-         EhvQ==
-X-Gm-Message-State: AOJu0Yx6lAtCK9TLAv2RJfKFEi/tx+GrN6k77SLAwGRPRKk38KtmlhMu
-	xEDFZ693nF6eRZ6NgqJ0ocpkdbmNJUQri6GGRrI9U12UEWV11uI2GMbXmaY3WA==
-X-Gm-Gg: AY/fxX7vjW7wWD+nH/OVkkwllGnbZsTyzD36+OWpGr4wroIHAhpL0GmRRiDdMBhGlW+
-	szKfM1t356BZT/BEIP8qQXUCuym8Eo0z3ZXj2seeHqWDEP16pwBrPpo+dlKyvMsFePHQ7acdR4M
-	xbMBfXriCQWxjbiiZV5E2lozjAcWrpByC9bSS0IM9pE+dDIWbQXfACkEzI3D9SToLRrDoevFFNs
-	vS2u1ugyzJkG83DYHQ1k/LXwwdZOVbo6yCzx3XIt3laUw/RTM99m6mXhV0WAHjMahynTZNhRnTn
-	eurJTN/bxjqZRJqcxU2UR2UyUZ3mUSjC3d2LYTIrKJqu7JtRiYcpAJSL6b62ptWKXirtbtsJi2y
-	GjmlMntXERUkU/aIp6eNEyRfgayhVVK9ZF2fCsGRcpecROfT9/l6jEqi0KGYLVo1JkChDtAzatI
-	w7IL0msL5ISGnan3jil4yprt2zzGTTLLDp+/K/T9jBaRL+OgcbdMvw1u+j0602wO+T
-X-Google-Smtp-Source: AGHT+IE81x3pYna7z4Vip28bwKjnxVY/959UucUeA5jfq4EBc7AyL9b8gxE+Q/Kui85tzIMkCkUGDw==
-X-Received: by 2002:a17:907:7b8a:b0:b73:5c12:3f8a with SMTP id a640c23a62f3a-b7d23698224mr1458698866b.18.1765878416418;
-        Tue, 16 Dec 2025 01:46:56 -0800 (PST)
-Received: from control-center.fritz.box (150-12-20-31.ftth.glasoperator.nl. [31.20.12.150])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b7ff7e5e79esm99872866b.46.2025.12.16.01.46.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Dec 2025 01:46:56 -0800 (PST)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH] python3-async-timeout: add BBCLASSEXTEND for native and nativesdk
-Date: Tue, 16 Dec 2025 10:46:53 +0100
-Message-ID: <20251216094653.2704060-1-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=8Y1YF48t9ZgrMngi94mr8pm1TeRyxSCU+RH/MH9MgK8=;
+        b=zrrO+sJYdj+PXgDkRA3AHGVBtKp4BrRdXavkPDYBnjWZM1+om5Lij6tfPIl1YMBT+h
+         nqjtFTBaJYwEjbPxHkz2NskytR5vO0jWEzk6mpVVx9GOZfjTYJAewcAna0BCF30OmAcL
+         zCQ06czqkVWxlEKZw+L38O54LUXPcpw5bf6xQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1765878884; x=1766483684;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=8Y1YF48t9ZgrMngi94mr8pm1TeRyxSCU+RH/MH9MgK8=;
+        b=uyuovfwpufqbnFaiuU/5HHnVLgk0ek3a3JfKw1UAuttpd1D8T/etjfQ+UhjRlLcFEm
+         F2vo1cqzPjX39oQofIoCZfmDZB4ArRwRfDNtT/Pnku5eRNpsCLiLqNdgr2CiC4uKZwAg
+         nhPjcURDNRp1Z0c1u5mWEBNwMQatL7r9uUcfyJYZ/lTUm7dMk36Wd6upmQbrJMT19b2G
+         8t7f1CTTr167SdbNGI28RDNK6FE1xz1RCbhjKfgfWH/oFKcfTjCaOMc/7t2y2Mnct/DO
+         4eCSftThvc22KXOBdW5k6NTrlft3XYs62KPcU5VKqUsXBF0kIXV3Ul+X+mW2DAyjlsuF
+         j6SA==
+X-Gm-Message-State: AOJu0Yz67mcdvcTj1XHdmtrh7zq/YUNhCMwZ+B3e+ZFCXiZDVnM2agRy
+	Qj7tE0+OjSDUFw0358FvPbNWHZKNyhrFqea48BNguC9wu5IiApDk0Kes76AmsFSNtL6koKkXPbi
+	w/o9ewhEci6k0nOWLus2qCDyqRSZKv4REdoi6ZKfKqg==
+X-Gm-Gg: AY/fxX65G2WqnPCr5Ma+0K6UiwoDDccorvmtIJIoapxh1/XBF+sf6Mf6EttxYB9x/jR
+	iphXlz5qnVf3jzlgzAIanYRFPwFje4hnMlQ5/rOVSa79oNCL+J/ZElZcQVW9fY/z/I2Ag6EsNh3
+	hhD6O9+WNHQn18SMFvHTJfH1+3p+hmOPJ2e0tlxFHcV2lt0J1M4c2EuBlaV4Riczd+lVmCzH86R
+	3o2iA+/xfvP2whHYT2xYv5CG3Fb8M/V0HKmblSwQt76ZoTEOUKTMr0o0EvR8B5074LGrt4+Zg==
+X-Google-Smtp-Source: AGHT+IHaoa4OIGCGznHQ85bKy1rT+/GjCIkvpxa1/m5ueCg+3yFlSC1Mez/LQGFruBtkNBk94a1CT/C1bX6+RW6+Khg=
+X-Received: by 2002:a05:6000:4026:b0:42f:8816:9504 with SMTP id
+ ffacd0b85a97d-42fb490d2a0mr13707855f8f.60.1765878883590; Tue, 16 Dec 2025
+ 01:54:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251216094653.2704060-1-t.f.g.geelen@gmail.com>
+In-Reply-To: <20251216094653.2704060-1-t.f.g.geelen@gmail.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Date: Tue, 16 Dec 2025 10:54:16 +0100
+X-Gm-Features: AQt7F2rg5k5A8lGBRAPqMErggIZYaW3odjRV-fFmClSMw0sfF3C8IkLC8WG0K1o
+Message-ID: <CAMSfU+5rn65PL+SuogmX_MxnLfiZBT3syQfn=KdG3y5t+659ZA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-async-timeout: add
+ BBCLASSEXTEND for native and nativesdk
+To: t.f.g.geelen@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 09:47:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122691
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 09:54:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122692
 
-Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
----
- .../recipes-devtools/python/python3-async-timeout_4.0.3.bb      | 2 ++
- 1 file changed, 2 insertions(+)
+Le mar. 16 d=C3=A9c. 2025 =C3=A0 10:47, Tom Geelen via lists.openembedded.o=
+rg
+<t.f.g.geelen=3Dgmail.com@lists.openembedded.org> a =C3=A9crit :
+>
+> Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
+> ---
+>  .../recipes-devtools/python/python3-async-timeout_4.0.3.bb      | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-async-timeout_4.=
+0.3.bb b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
+> index 3d35780b65..480d4cb02e 100644
+> --- a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
+> @@ -16,3 +16,5 @@ inherit pypi python_setuptools_build_meta
+>  RDEPENDS:${PN} =3D "\
+>      python3-asyncio \
+>  "
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
 
-diff --git a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-index 3d35780b65..480d4cb02e 100644
---- a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb
-@@ -16,3 +16,5 @@ inherit pypi python_setuptools_build_meta
- RDEPENDS:${PN} = "\
-     python3-asyncio \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.43.0
+Thank you, that does fix my problem with "[meta-python][PATCH 2/5]
+python3-aiohttp: add BBCLASSEXTEND: native and nativesdk to the
+recipe"
 
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122691): https://lists.openembedded.org/g/openembedde=
+d-devel/message/122691
+> Mute This Topic: https://lists.openembedded.org/mt/116807309/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [y=
+oann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+
+
+--=20
+Yoann Congal
+Smile ECS
 
