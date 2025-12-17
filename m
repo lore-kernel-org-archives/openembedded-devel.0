@@ -1,132 +1,156 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F4F5D65C7E
-	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 17:31:08 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18440.1765988339312353111
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB18D66B81
+	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 18:06:18 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21530.1765994775443774169
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Dec 2025 08:18:59 -0800
+ Wed, 17 Dec 2025 10:06:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lk24Cw+a;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: rbarrau33@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b735e278fa1so1086239066b.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 08:18:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xfc1NXa1;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47774d3536dso9233745e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 10:06:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765988337; x=1766593137; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0mQsJgEqQ/0uo5t2ZTmsVGm/g3KOwqjBSrVpJGU/0O8=;
-        b=lk24Cw+agvGH+ZauSl3dpG/HTDWpkKR166ue9kWe7Kei8UDwqykLKAkk3l+DT9pX/F
-         +UHy0wilvQJlwhFFh4cfSYDUi3Ob0cG1h55HNH98x8C9oFV9h/gnummydUsTUep/0OP9
-         nbnAWuvq0sRoLcAannzt33u7DkvW8UyW5sOol9l4JtD64KUom4NPae29Bq3zkma26Lhd
-         RwG8jhrzsg4RDGvca8L0vGAG2oDeRS9Ob4u1q0t2lItlCpb/Tn2OmRsiQeDktz1lJDGC
-         bZiu+SbrXvby6v5D+b0kIjBwn97xgVVRatHdcUTJCzzfsfLZ1C2mXsvkTHgUkZ0ZhblA
-         7vCw==
+        d=gmail.com; s=20230601; t=1765994774; x=1766599574; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ZUlvp6AEK5UhhWNldMTEjwEmCh1sN+ECvPBqScmlUQY=;
+        b=Xfc1NXa15+D+LUjVx7AnPso/51CDEXLwkJtvmaGgq0ysyfKzxVdg3CoX66zgT5W5f5
+         0A5uL+z4r25uOsDDNxcYNyf6+O2pzPr3bWxBGBJ3iCf6r2mFUmCsoJl3JRhkoqTSH9zX
+         EgwyDe4APd+J6I4xpG7bEa4rWYw0iKBTIEPpgSN2E3cGPdbpJTuEMX9+BLIt/wgMAiVZ
+         C1COCC1rx7hm9lsMIKoRqGGqxjMsPF4OUqD9RiztifeXs54czhHLUf5HEr2iUe2TzH5o
+         ZdMPKo1dOhgsdRIuGyQA2iedSNX/tdJly7T9xdtcBlUv5ERrGwy9OwGZdrolZljasXMh
+         UwLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765988337; x=1766593137;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0mQsJgEqQ/0uo5t2ZTmsVGm/g3KOwqjBSrVpJGU/0O8=;
-        b=oY4nOOaoVkRt9NPSMaxkasq1yC0HZwlwi0Mlrl0wwQZaYbo3zYxbNWdruRqEcyOZ7Q
-         i6vXGr1DsY0hR5IJb0sng6KmAVZUQ5czomnvNGWghRBwEw3ZOlAS8Ltbnwff+hkscM/0
-         k0wS1qjWRwOGbzdAD5p2DP9gKEfHYUAMBeWcZX/9Ax60M7TTQL99CDQQ4ZY0bKlEdgm0
-         NU7KTWcclOftAxpS3x+6/F2GnGv/FZxU6FB54EZWIZHB6HC1bv9hBWYZ+Z9/Rv9+6hQe
-         d6QCcOcuuOa83055aJsYzJ1hMmpsS9seP6fwVjJniWUuUpdEKJd+8uzDTy+j+E2fD+Xi
-         5V7A==
-X-Gm-Message-State: AOJu0YzPNGMI/D5sDvD1UiX5+RxjWRt4Wo2tKh8ZYLJi2lhy8TC2mJVK
-	qOlxfh/zQw+Zx1ZHfUgBOnFrzxyqYBS1ipg0Mlnpct6KIFcBspp5XQ+9hv/IGw==
-X-Gm-Gg: AY/fxX7dgFTs4O6nKTVbUX0G6DwuypzwrrATUchWt2BVKpYrxKl1Bykgr13Bbe++lpX
-	bzbgl+erHJYo2nD6zvzVwPWUH5/7Hv1lRdiZ2KPjqklQ5I0X3DytANTFD2+T5xF/0b0CAdMZb91
-	wRhAWgwGLk0jWF5FqZc1a5tTjQv0mitMIOYponWR4P4F9pL+MCVlLT8QAOlY+NNZm/noNU3rHh7
-	FtATb4pZw+yE4oMWcHlL/GVqyBye9ESlRqoRFagjx2zOzy+Fn5XOvWelNk2YdCvkLF8b4MRsPPJ
-	TX7gGI9PTAa1eGvTmhAa5ZO8fUF8ooO/LRbF8PkPu2nUFkYbsjp0wFSK087dIMZ6XCNP7KDozgi
-	xhvC6mCiEOXIRBIZ1Foh0V5vRePQ0sYAGfLS4dGjFBuWA6+4BdIMFhxfs1pFcjkY2ytO07edzyb
-	VSu036LwLT9ivmGYbN/ZzWic5ESLV2e+1kLWCQV0HJ2ApUe4SHyI4H0Kieol7HFEKw3gyKTBhqJ
-	QjZrX1OQsrtWFAH5kvOUH08bGD07OgOEa/Zonce/ttYX7L/mC1o+EiAh8z8BOhjqb3t
-X-Google-Smtp-Source: AGHT+IEqp8wtqfOp9zE8KOy922wDqJpEux1OvC3sNuq3tsr8kpGKF24k2Io9dHA8kgGEHQj2IXE+QQ==
-X-Received: by 2002:a05:600c:4f86:b0:45d:d97c:236c with SMTP id 5b1f17b1804b1-47a8f9071c6mr196194195e9.21.1765987883820;
-        Wed, 17 Dec 2025 08:11:23 -0800 (PST)
-Received: from LSTA-2404.. (2a01cb01403af46ce64bc8ed90517e24.ipv6.abo.wanadoo.fr. [2a01:cb01:403a:f46c:e64b:c8ed:9051:7e24])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4310ada8426sm5482869f8f.5.2025.12.17.08.11.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Dec 2025 08:11:23 -0800 (PST)
-From: Renaud Barrau <rbarrau33@gmail.com>
-X-Google-Original-From: Renaud Barrau <renaud.barrau@madic.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Renaud Barrau <rbarrau33@gmail.com>
-Subject: [meta-oe][PATCH 1/2] libtoml: add new recipe
-Date: Wed, 17 Dec 2025 17:11:13 +0100
-Message-ID: <20251217161114.403899-1-renaud.barrau@madic.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1765994774; x=1766599574;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZUlvp6AEK5UhhWNldMTEjwEmCh1sN+ECvPBqScmlUQY=;
+        b=XpI4T8ZJxhhuPKS0jCCruNtYPNDkjWC1OY2UblDYGKU/mURf6bSXudYvoAw40IQRwi
+         BtzsAHCwhDffWXe1CBCkT3qLjigtI9lbRd+jQ1QE0o3ZgcchOTTf5+DQhUXgECRQYetA
+         0dXeJfJFNXG2GJGlSW6qMq8nORUoUAeduekkm0uCE61/elPapnDmEV0drizH2wSf8oEF
+         M89EGKwRSQ2HWFONqiyGHQ/Zdx0NXnIT5IdVIMx/2bVExL3As0CXJfNP6QOnzPxPYrkK
+         C2YXFIyMQPYCCMHwYQ70oH3OUnreI63mXWjKIm8l9KFYdKMSUiiQ3RpG/uPDlESlLSTq
+         wgiA==
+X-Forwarded-Encrypted: i=1; AJvYcCV9XvE1g4gZ94ncP64CM7wOnZ9ndmZ8Pw8HgXQCEGrQS+NwLyUueYiiDBUA3pHS9RS75/upooMBxPz69fk/wMhRbNA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxIxb+ehL4WlXOcDmVO87pnnXABAUyJLuslwcZHFXMc50zxOAg3
+	kyozLnLY/5peYVYdT/AnbkC50H1yDxHcAXC9URstgIVT2h+cTqGaDqmF
+X-Gm-Gg: AY/fxX6pxpeGFdN8eICu4i0gW2F17n6q3SBzXRZdhGVqAMK9SixCDGQNjNfVOpHmXuC
+	IiKCA0ArSzvW0A+c25GUiw3obw/5xyXJrPhi7f7Lzi5IGPiKnBJLLxdF4Re4UpZT6tnRy1AkVmm
+	MNETubdn/Q/moUIb1FNaKzglQVSMXC3uxBOtQ7nGlx2F29h3OPzGioedicBjNUhUawXkEpPY05d
+	1213BFAQQFVeBPJht3rMJMorKSYiH02DtDYQ7zQIwIrS6OvKN+T7/LJsr1U4vpqSYrsI0DOEsGQ
+	Dhb4eOuKUymKCHA2Qkvycv9xJoiquWQkbz8BI9Ktp048W6fwqLVaKrxrI50PxGSQ7e7g3AeUZJq
+	WZk5y+2EhJ3sfa2upYzZJtoggMLt3wTarPUJPltHfnASQ6VmH0PsDD0Pnz3KWrCHhm6PAbQkh4e
+	w+LC+6UO9qQ2m4+gGTuKY=
+X-Google-Smtp-Source: AGHT+IE1cvIqFwof0ql1R8fJwzF/8lS3QA3+w880ruJwLS4Cuh21mLKQ04gTG9f/OAVcXfUDfpc39A==
+X-Received: by 2002:a05:600c:1d20:b0:477:9890:9ab8 with SMTP id 5b1f17b1804b1-47be29a52bfmr3207725e9.3.1765994773436;
+        Wed, 17 Dec 2025 10:06:13 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be2723d19sm5392475e9.2.2025.12.17.10.06.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 17 Dec 2025 10:06:12 -0800 (PST)
+Message-ID: <241db2c0-d701-4172-a3d6-7b000c2f5ab6@gmail.com>
+Date: Wed, 17 Dec 2025 19:06:12 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 1/2] libtoml: add new recipe
+To: rbarrau33@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20251217161114.403899-1-renaud.barrau@madic.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20251217161114.403899-1-renaud.barrau@madic.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 17:31:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122725
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 18:06:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122727
 
-From: Renaud Barrau <rbarrau33@gmail.com>
+On 12/17/25 17:11, Renaud Barrau via lists.openembedded.org wrote:
+> From: Renaud Barrau <rbarrau33@gmail.com>
+>
+> Create a recipe for the tomlc99 project https://github.com/cktan/tomlc99
+>
+> Signed-off-by: Renaud Barrau <rbarrau33@gmail.com>
+> ---
+>  .../recipes-support/libtoml/libtoml_git.bb    | 41 +++++++++++++++++++
+>  1 file changed, 41 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libtoml/libtoml_git.bb
+>
+> diff --git a/meta-oe/recipes-support/libtoml/libtoml_git.bb b/meta-oe/recipes-support/libtoml/libtoml_git.bb
+> new file mode 100644
+> index 0000000000..befd413d3c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libtoml/libtoml_git.bb
+> @@ -0,0 +1,41 @@
+> +SUMMARY = "TOML parser in C"
+> +HOMEPAGE = "https://github.com/cktan/tomlc99"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=95bbe2f9180443b5dcef3fb959804a65"
+> +
+> +SRC_URI = "git://github.com/cktan/tomlc99;protocol=https;branch=master"
 
-Create a recipe for the tomlc99 project https://github.com/cktan/tomlc99
+It looks that this project isn't developed anymore (based on its
+readme), and has been superseded by tomlc17 from the same developer.
+Wouldn't it be better to use that? (This is a question from me - the
+project claims to be compatible with this library, but don't know if
+it's really true)
 
-Signed-off-by: Renaud Barrau <rbarrau33@gmail.com>
----
- .../recipes-support/libtoml/libtoml_git.bb    | 41 +++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtoml/libtoml_git.bb
+> +
+> +SRCREV = "26b9c1ea770dab2378e5041b695d24ccebe58a7a"
+> +
+> +S = "${WORKDIR}/git"
 
-diff --git a/meta-oe/recipes-support/libtoml/libtoml_git.bb b/meta-oe/recipes-support/libtoml/libtoml_git.bb
-new file mode 100644
-index 0000000000..befd413d3c
---- /dev/null
-+++ b/meta-oe/recipes-support/libtoml/libtoml_git.bb
-@@ -0,0 +1,41 @@
-+SUMMARY = "TOML parser in C"
-+HOMEPAGE = "https://github.com/cktan/tomlc99"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=95bbe2f9180443b5dcef3fb959804a65"
-+
-+SRC_URI = "git://github.com/cktan/tomlc99;protocol=https;branch=master"
-+
-+SRCREV = "26b9c1ea770dab2378e5041b695d24ccebe58a7a"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig
-+
-+do_compile() {
-+    oe_runmake CC="${CC}"
-+}
-+
-+do_install() {
-+    install -d ${D}${includedir}
-+    install -m 0644 toml.h ${D}${includedir}/
-+
-+    install -d ${D}${libdir}
-+    install -m 0644 libtoml.a ${D}${libdir}/
-+}
-+
-+do_install:append() {
-+    install -d ${D}${libdir}/pkgconfig
-+
-+    cat << EOF > ${D}${libdir}/pkgconfig/libtoml.pc
-+prefix=${prefix}
-+exec_prefix=${exec_prefix}
-+includedir=${includedir}
-+libdir=${libdir}
-+
-+Name: libtoml
-+Description: TOML parser in C (tomlc99)
-+Version: 1.0
-+Libs: -L\${libdir} -ltoml
-+Cflags: -I\${includedir}
-+EOF
-+}
--- 
-2.43.0
+Specifying S using WORKDIR is a fatal error in Whinlatter and master
+branch - when using the git fetcher, S doesn't need to be specified
+anymore 99% of the cases, the default should work.
+
+> +
+> +inherit pkgconfig
+> +
+> +do_compile() {
+> +    oe_runmake CC="${CC}"
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}${includedir}
+> +    install -m 0644 toml.h ${D}${includedir}/
+> +
+> +    install -d ${D}${libdir}
+> +    install -m 0644 libtoml.a ${D}${libdir}/
+> +}
+> +
+> +do_install:append() {
+> +    install -d ${D}${libdir}/pkgconfig
+> +
+> +    cat << EOF > ${D}${libdir}/pkgconfig/libtoml.pc
+> +prefix=${prefix}
+> +exec_prefix=${exec_prefix}
+> +includedir=${includedir}
+> +libdir=${libdir}
+> +
+> +Name: libtoml
+> +Description: TOML parser in C (tomlc99)
+> +Version: 1.0
+> +Libs: -L\${libdir} -ltoml
+> +Cflags: -I\${includedir}
+> +EOF
+> +}
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122725): https://lists.openembedded.org/g/openembedded-devel/message/122725
+> Mute This Topic: https://lists.openembedded.org/mt/116829679/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
