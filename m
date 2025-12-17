@@ -2,113 +2,131 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1A82D66B86
-	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 18:48:48 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.22521.1765997326383916495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8962D66B8E
+	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 18:54:58 +0000 (UTC)
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22186.1765997689801553036
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Dec 2025 10:48:46 -0800
+ Wed, 17 Dec 2025 10:54:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FiGxG43/;
- spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-4557f0e5e60so3886797b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 10:48:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QFi9212S;
+ spf=pass (domain: gmail.com, ip: 209.85.167.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-4537407477aso3720568b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 10:54:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765997325; x=1766602125; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765997689; x=1766602489; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Q8O+3xpPNk5a3JUgbATiuzyn90rKoi3YBGiI7Jsei6I=;
-        b=FiGxG43/enV2LnhOJZ4VzzJNdibPkoHu4pk8W2AcEk4oY1OwexpN8N9vdCUeC76uPh
-         0KvADIhJqkFcJUu0tcAva6b3YDzkkkVplx64qwxPuD14ph7PuCsJAeKE/hK19UnuxMZ4
-         8/WWKu0B3teyIoTuQH8p+rA2sV9EwAkvad1ZPoNoBTXj7+8O41N+nm/krNiVoJCdZ2L+
-         GnBw0jH5wHX9JHBoigCeyqsww+AIAATMRz1iOsLf+ZRcNpe/nxQ5EwNCh82Y/37lqT09
-         QdfUYxbV+rxnGyl8pIz0lV0dlon3iHpbVjygUByFbBdPUEPirCaX0e5BBreKViw5ORC4
-         s3qw==
+        bh=TGlH1Qk+tK8zEyWDyo9PJ9C6egqdoPje0Nux2pj5t6Y=;
+        b=QFi9212S0/H5lPPOtOmLnYq7nwmD//ynmjOm/ts+6RVha26faqhyd1eyb+1tg+TVpF
+         00PiZ5qfLlhZ94seF00peA7gySYkgzsEv/rHQaejzT8AfI70kOzYa0l0byx9PWpcGNxL
+         kgwS809lb2X0klE0p7agHb7ctG5XwSq1qFhVV1oI6yaAGT2WbteOgYV9CO6wzH9G8BSW
+         NlFgEOgpS2LxBNT7OCqbNBSrXa12WlfRfBzBfzXziV8RiAyiIsKZMwn3yKuqffpShBt9
+         NPgVa+UFXurvRD6xrHyqWiO2+EibyP0Mc3gVe0vfpG/S4Poqh/INa82w+IWyhSK6MlCY
+         Cp9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765997325; x=1766602125;
+        d=1e100.net; s=20230601; t=1765997689; x=1766602489;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Q8O+3xpPNk5a3JUgbATiuzyn90rKoi3YBGiI7Jsei6I=;
-        b=j57Y01MRyRZU/GWFqbJZCWrsrX7nQTOs6CrbrU78TpTHa/4qNvPLglII/nsC4Fpmjw
-         QbKDmI1h0JBTnA6g2aEv/s+jQbvVFsO0TQ5vkx8r52EK7akxkUS/OS0fQUWkPs/3TD6+
-         MUhyF6x7qGeLmQlz/xgX8mSotqHrN1MHiAYyQhD81++9R8rFBH0N6hlz8MVzUUHPvonL
-         dcKK2p7J//q9DHtkQNPesfjg6Ovdyyc6x4ewTlEWQFMR6F5+26Wraadd4GwbWLah6htI
-         +8LfueMswp0CBYkazor+k1EFYrgZ2WmWbnNFSD65lANxm0pzA2AYxsAjVl29zaR1jJ6r
-         W2QA==
-X-Gm-Message-State: AOJu0YwvcqDJE9t9N2Cre1XQQ/tKx10JhTOExz7XfwzLs+iLGADRTB2S
-	vUXUt/D4/VEaV9iyk/2WsKHr3DA0KjkwqL3MlKGd/tDeEnBf3SY5q0dBTQsGzq5+VsEs9WOmmD+
-	DX1qYcaKHvYM4IVJSzLf0EydOqMn0TXo=
-X-Gm-Gg: AY/fxX5hOqYxmqAkpWbRtD/+JcOA0poVw9WVW9dNLlk/gz2J7QZvUturNPHXubtM0Dt
-	k6HcSs9cFtOLf+lZdYPlcs5+l2RZdhoHyqwMCC6R/jWj9CYUXwHiLOEwG6V5b26yqrdUKhG67Yf
-	8gAyeckqVbW6jfh644nzDZsA9BeROL5SrNHzFwlZKPSICD1ZbIHrLGPzeI3TB/JVAebLWzya/RR
-	k7q0Dn3z28yuswP1FgtQFaE5bQcTVdBbfx3lJ5m///oCBKi5ijrzq+j6VgfDr5TpiSRQ4PUSA==
-X-Google-Smtp-Source: AGHT+IEt+ARrmE3R9B/AkywV1/mnmd+nu5z5+uYB8akUV5vZVhdihkJfsXgS7Iw7u2VUyzJAgWu/oep9JQuM/3TX8/w=
-X-Received: by 2002:a05:6808:14cd:b0:450:f3e4:eb05 with SMTP id
- 5614622812f47-455aca1175fmr8944770b6e.64.1765997325607; Wed, 17 Dec 2025
- 10:48:45 -0800 (PST)
+        bh=TGlH1Qk+tK8zEyWDyo9PJ9C6egqdoPje0Nux2pj5t6Y=;
+        b=DY+Y/zp66Ag2xPpbak3KzAN8HunOH1om+0PipcO0jBgcb/CfnRho9xgyLNvkGZhTo+
+         lMsLaFAUvJzZY0m9jI3L/X+pwvq6PNb1+VMfXOoE61+hA146FYe2Ciyhv9FAjuZXdSZr
+         3W6BtsZRe1qQ8jgrssgrv8enHnK4QPS8aQihYGbnKYMUe5+b0edLo5B29Pr9EhwN9Uuq
+         X0Hytx1ZX6WcoOeEiMLlx4AYxIcWHWz5hY2AT1qua+L1vURSz+qhr2EsE6cJZOYRkI7J
+         mHjQvyxYLvRaI9hNF2tsF5Bt7CWRr9kRjhOaV1YjjGd2rzkvuUfzZceWdUuTMUz5k+cB
+         NxHA==
+X-Gm-Message-State: AOJu0YwmXQnkLAxiKXvICQmFjBufHazj/XfnjFoFB18EKKq6t57Tv7PJ
+	6bu8j9FibzwjmE3hHD5PWQRPcGCRI7q2aS0qJra+5YQ9zajPH/MSiLI/IJeGIwFUTjg4A4bRPO6
+	w4zAKo4sYML2jByvF8qgbCBsyfPSaKFF0QaH9
+X-Gm-Gg: AY/fxX6n+9roa065Yzc/B0l9gVuwmBKcdjA+jYb+3lBcMSYJfEPy3ceiy0Hm2KELZgy
+	8t08axIa/HqdHFpewj2mzVhYKCvr4SZ1pdGVBsJYyCBgBVZgRm4ZnXJ5k2Lftyuu41Evu222ni6
+	wD24+iEA/tkkYrBlwomwDsGRXaakRaZDHmWbRKsRZSk0amUcdFzjx3ccjx9rl96NLHZvsZfxE0P
+	mrKlkXS2M54NMBDwfD5ZILWcp6gbvKJh+xEZN7cGF6uqOkTGwYkR6ZvrXVXrUjVGPaLr3Y8hw==
+X-Google-Smtp-Source: AGHT+IGACXq9BgOk1Xv/KtrIMNoLdRgMFz7ya9UiLJ9Bt6dF3HfwWg8vNVKbPZYZxM3k2KUz2oSGZx9ou5abosqrT78=
+X-Received: by 2002:a05:6808:220f:b0:44f:e61d:18ae with SMTP id
+ 5614622812f47-455ac59f7f6mr9134428b6e.0.1765997688977; Wed, 17 Dec 2025
+ 10:54:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20251217153757.43289-1-frederikbraendstrup@gmail.com>
-In-Reply-To: <20251217153757.43289-1-frederikbraendstrup@gmail.com>
+References: <20251217093235.3469955-1-m.schwan@phytec.de>
+In-Reply-To: <20251217093235.3469955-1-m.schwan@phytec.de>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 18 Dec 2025 00:18:33 +0530
-X-Gm-Features: AQt7F2qmMzm965WwuPzGtPjDguMFQE0ADVpnSRzu_yvNd8BCeEMf0-M0HHc6A9g
-Message-ID: <CADySD0HpaQvwErZrPLqBt57SqWV1hr4EB_qqCLGZ9ihprb95Tw@mail.gmail.com>
-Subject: Re: [oe] [PATCH] dbus-cxx: upgrade 2.5.2 -> 2.6.0
-To: frederikbraendstrup@gmail.com
+Date: Thu, 18 Dec 2025 00:24:38 +0530
+X-Gm-Features: AQt7F2qoabLKU5plS2CaZfTZWmiwwRA7vvdjC9AB_x3vH_DX7srhdjAskFvAdBo
+Message-ID: <CADySD0Hk82EA+vMqGz31jibMbTbcnKr92Uhf_N2x5WH4tqvZ6Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] thingsboard-gateway: upgrade 3.7.4 -> 3.8.0
+To: m.schwan@phytec.de
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 18:48:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122730
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 18:54:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122731
 
-On Wed, Dec 17, 2025 at 9:07=E2=80=AFPM Frederik Br=C3=A6ndstrup via
-lists.openembedded.org
-<frederikbraendstrup=3Dgmail.com@lists.openembedded.org> wrote:
+On Wed, Dec 17, 2025 at 3:02=E2=80=AFPM Martin Schwan via
+lists.openembedded.org <m.schwan=3Dphytec.de@lists.openembedded.org>
+wrote:
 >
-> From: Frede Hoey Braendstrup <frede@vokalo.io>
+> With thingsboard-gateway 3.8.0, the source URI must be set to the
+> project Git repository, as source releases are no longer provided via
+> PyPi for this project.
 >
+> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
 > ---
->  .../dbus-cxx/{dbus-cxx_2.5.2.bb =3D> dbus-cxx_2.6.0.bb}           | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-core/dbus-cxx/{dbus-cxx_2.5.2.bb =3D> dbus-cxx_2.=
-6.0.bb} (96%)
+>  ...sboard-gateway_3.7.4.bb =3D> thingsboard-gateway_3.8.0.bb} | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboa=
+rd-gateway/{thingsboard-gateway_3.7.4.bb =3D> thingsboard-gateway_3.8.0.bb}=
+ (95%)
 >
-> diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb b/meta-oe/re=
-cipes-core/dbus-cxx/dbus-cxx_2.6.0.bb
-> similarity index 96%
-> rename from meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb
-> rename to meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.0.bb
-> index 0908409e1e..79cf9449de 100644
-> --- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.2.bb
-> +++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.0.bb
-> @@ -6,7 +6,7 @@ LICENSE =3D "LGPL-3.0-or-later | BSD-3-Clause"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D24594f493407a4cd401ce9794e0b9=
-308"
+> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thin=
+gsboard-gateway/thingsboard-gateway_3.7.4.bb b/meta-oe/dynamic-layers/meta-=
+python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.8.0.b=
+b
+> similarity index 95%
+> rename from meta-oe/dynamic-layers/meta-python/recipes-connectivity/thing=
+sboard-gateway/thingsboard-gateway_3.7.4.bb
+> rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsb=
+oard-gateway/thingsboard-gateway_3.8.0.bb
+> index 7a82414937..5ca57aba44 100644
+> --- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard=
+-gateway/thingsboard-gateway_3.7.4.bb
+> +++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard=
+-gateway/thingsboard-gateway_3.8.0.bb
+> @@ -7,12 +7,12 @@ HOMEPAGE =3D "https://thingsboard.io/"
+>  LICENSE =3D "Apache-2.0"
+>  LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=3D89ae=
+a4e17d99a7cacdbeed46a0096b10"
 >
->  SRC_URI =3D "git://github.com/dbus-cxx/dbus-cxx.git;branch=3Dmaster;prot=
-ocol=3Dhttps"
+> -SRC_URI[sha256sum] =3D "5811a3c5a2334e41776f249df20c1d6a0def62a6e11e77bf=
+2abeaa02f2725260"
+> +SRCREV =3D "4215a302c649f8fe3739814e365b0d6af722b66b"
+> +PYPI_SRC_URI =3D "git://github.com/thingsboard/${BPN};protocol=3Dhttps;b=
+ranch=3Dmaster"
 
-will be good to include ";tag=3D${PV}" in the SRC_URI
+will be good to include ";tag=3D${PV}" in the PYPI_SRC_URI
 
-> -SRCREV =3D "f2637e726207ecfbdaaf02744e1b36e54f929c9d"
-> +SRCREV =3D "b705ad73bef724de0ed33f60462c70b380b6b300"
+> +PYPI_PACKAGE =3D "thingsboard-gateway"
 >
->  DEPENDS =3D "libsigc++-3"
+>  inherit pypi setuptools3
 >
+> -PYPI_PACKAGE =3D "thingsboard-gateway"
+> -
+>  RDEPENDS:${PN} +=3D " python3-jsonpath-rw \
+>                      python3-regex \
+>                      python3-paho-mqtt \
 > --
-> 2.51.2
+> 2.43.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#122724): https://lists.openembedded.org/g/openembedde=
-d-devel/message/122724
-> Mute This Topic: https://lists.openembedded.org/mt/116827776/3619737
+> View/Reply Online (#122723): https://lists.openembedded.org/g/openembedde=
+d-devel/message/122723
+> Mute This Topic: https://lists.openembedded.org/mt/116824086/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nkur.tyagi85@gmail.com]
