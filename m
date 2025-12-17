@@ -2,155 +2,124 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB18D66B81
-	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 18:06:18 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21530.1765994775443774169
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB0B5D66B83
+	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 18:14:48 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21269.1765995284953148231
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Dec 2025 10:06:15 -0800
+ Wed, 17 Dec 2025 10:14:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xfc1NXa1;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47774d3536dso9233745e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 10:06:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X1BgupXM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-477b1cc8fb4so36755895e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 10:14:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765994774; x=1766599574; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1765995283; x=1766600083; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ZUlvp6AEK5UhhWNldMTEjwEmCh1sN+ECvPBqScmlUQY=;
-        b=Xfc1NXa15+D+LUjVx7AnPso/51CDEXLwkJtvmaGgq0ysyfKzxVdg3CoX66zgT5W5f5
-         0A5uL+z4r25uOsDDNxcYNyf6+O2pzPr3bWxBGBJ3iCf6r2mFUmCsoJl3JRhkoqTSH9zX
-         EgwyDe4APd+J6I4xpG7bEa4rWYw0iKBTIEPpgSN2E3cGPdbpJTuEMX9+BLIt/wgMAiVZ
-         C1COCC1rx7hm9lsMIKoRqGGqxjMsPF4OUqD9RiztifeXs54czhHLUf5HEr2iUe2TzH5o
-         ZdMPKo1dOhgsdRIuGyQA2iedSNX/tdJly7T9xdtcBlUv5ERrGwy9OwGZdrolZljasXMh
-         UwLQ==
+        bh=uMUa/f17IT4ngTuDahxY2MRkvxT4ajsOL8oX/ZSPyQ8=;
+        b=X1BgupXMWnvavqPL7ImIcdjhOvlMTXZX41siN1CYADG1Es1ilQwmUXSgPl/g57njsB
+         dZEcRJ8WFzwEsF5NRPrp/2xaEsvmPCkLKijo+yV5p29RZ3Ts1W4JWnKZ8a80fcxe03cL
+         Cbldt+grCPBYVpz3njjnqKp6Hi76WDZa4FU+XZVynl0y51zet9td6vsYdeXkpUzZSdRU
+         Hlm62/pYXlSyFjWLT9EUcihJmDXXSQyy9ng+YHKkRyKCek68Br1cnTIU78rNE1LlXVT4
+         ut5kzTQVAVRDzAvPalchXZzynW9v8fiMTxNZck17pIzb8EXhStD2PdfK2X5gh7xnN206
+         d8tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765994774; x=1766599574;
+        d=1e100.net; s=20230601; t=1765995283; x=1766600083;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZUlvp6AEK5UhhWNldMTEjwEmCh1sN+ECvPBqScmlUQY=;
-        b=XpI4T8ZJxhhuPKS0jCCruNtYPNDkjWC1OY2UblDYGKU/mURf6bSXudYvoAw40IQRwi
-         BtzsAHCwhDffWXe1CBCkT3qLjigtI9lbRd+jQ1QE0o3ZgcchOTTf5+DQhUXgECRQYetA
-         0dXeJfJFNXG2GJGlSW6qMq8nORUoUAeduekkm0uCE61/elPapnDmEV0drizH2wSf8oEF
-         M89EGKwRSQ2HWFONqiyGHQ/Zdx0NXnIT5IdVIMx/2bVExL3As0CXJfNP6QOnzPxPYrkK
-         C2YXFIyMQPYCCMHwYQ70oH3OUnreI63mXWjKIm8l9KFYdKMSUiiQ3RpG/uPDlESlLSTq
-         wgiA==
-X-Forwarded-Encrypted: i=1; AJvYcCV9XvE1g4gZ94ncP64CM7wOnZ9ndmZ8Pw8HgXQCEGrQS+NwLyUueYiiDBUA3pHS9RS75/upooMBxPz69fk/wMhRbNA=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxIxb+ehL4WlXOcDmVO87pnnXABAUyJLuslwcZHFXMc50zxOAg3
-	kyozLnLY/5peYVYdT/AnbkC50H1yDxHcAXC9URstgIVT2h+cTqGaDqmF
-X-Gm-Gg: AY/fxX6pxpeGFdN8eICu4i0gW2F17n6q3SBzXRZdhGVqAMK9SixCDGQNjNfVOpHmXuC
-	IiKCA0ArSzvW0A+c25GUiw3obw/5xyXJrPhi7f7Lzi5IGPiKnBJLLxdF4Re4UpZT6tnRy1AkVmm
-	MNETubdn/Q/moUIb1FNaKzglQVSMXC3uxBOtQ7nGlx2F29h3OPzGioedicBjNUhUawXkEpPY05d
-	1213BFAQQFVeBPJht3rMJMorKSYiH02DtDYQ7zQIwIrS6OvKN+T7/LJsr1U4vpqSYrsI0DOEsGQ
-	Dhb4eOuKUymKCHA2Qkvycv9xJoiquWQkbz8BI9Ktp048W6fwqLVaKrxrI50PxGSQ7e7g3AeUZJq
-	WZk5y+2EhJ3sfa2upYzZJtoggMLt3wTarPUJPltHfnASQ6VmH0PsDD0Pnz3KWrCHhm6PAbQkh4e
-	w+LC+6UO9qQ2m4+gGTuKY=
-X-Google-Smtp-Source: AGHT+IE1cvIqFwof0ql1R8fJwzF/8lS3QA3+w880ruJwLS4Cuh21mLKQ04gTG9f/OAVcXfUDfpc39A==
-X-Received: by 2002:a05:600c:1d20:b0:477:9890:9ab8 with SMTP id 5b1f17b1804b1-47be29a52bfmr3207725e9.3.1765994773436;
-        Wed, 17 Dec 2025 10:06:13 -0800 (PST)
+        bh=uMUa/f17IT4ngTuDahxY2MRkvxT4ajsOL8oX/ZSPyQ8=;
+        b=DAbCf0Vl0uzpY1XLa25NIxSszFO/TkmpIc96oEqBPNhQ9dwmaV6afMeVy6cMG0EjzK
+         4S0bbPH5KtftX1hltIs8mEtc3jzP7LFo0YjsFCz3Xu9+B1N+IfOIwjcz/VUSHYYMBgSn
+         QJUk//LKTbJ0i5uGrgOAjcFCYL/zsmYj9eTLHZDkRt5KK3g/z1lhT6Iv52yGSJ2J4Vsx
+         dAMG+bGigOX1deDf2uah1nHY6wzQErMkMBOA/ORuhd94h/Gn4gUo1mkWA0bCKjX0Tzci
+         v/1H49ixoSXfF+U+F9p47/dHqkhEz/ocUcNanrCyb5b0Jne2JlBqjLQ8Zq5DxjZ+NGWS
+         A8xA==
+X-Forwarded-Encrypted: i=1; AJvYcCVQmpSmhJX6utR5up5eUVG5b9vZ3JIcr7huuJMmefZCaDS3WSUr0XwDoIJF4hof6QWXF7ZyMfYGUNCRqqjqRJpC0AQ=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yy9EdzKXV3KcWrtO/VS5W7RFd43xDqfOyUV6yNPDFWUVvkn/1WW
+	2oNsqo6yjbWjH/5alODBP1nfskY3NCvLyulEAp/uWniynC2RB/ul/B/psMWOMg==
+X-Gm-Gg: AY/fxX5tH1F7gneLelTa2nlj2KvJwVRUE3jRQMh95W7NsNsLaU2zjzk1RGm8xC9sK6f
+	nmhjECjLWjNPVx+7/d6JhzHd4cGKDJsDJcuCk67vor5KSPIzmWDqca+M4aKDIi9pNgZF16DYHq0
+	Ddblb0T6UzcRLxzxckkWWyuAJeFOS3QxGqahtvMltSc299lIlV7SZTlcge8qaden/8HmSyO0WwC
+	gWbEf0AYJoXwGDIzu6nWh+PODPX0+ukBPbS1ahI1Bk6v/MMMc8XDGctfTcj4WCqTykspr3qamf9
+	cCNfpcQZTo56J8By/5PHaH9UuoTw7H44vc9ks+/PQ3nI7WF8eh2xMQW/KWJHSJM42c4ne4DINCS
+	prVoZuHHRfMsXQYUnoTGCb9dpaLlBGND07WCy2/wxwAbHinA+9ZWY+jTMlO3GT7TO6hb8wBh3LO
+	oBucU3+MnYazbbvF4VjvU=
+X-Google-Smtp-Source: AGHT+IEB4BgIXqQz443zutXrygN9G6/8kXfVHzSi1bHYNGIkfmMQ1tcVxunYL0SHO7OLvA78tPwY/Q==
+X-Received: by 2002:a05:600c:1c88:b0:477:8a29:582c with SMTP id 5b1f17b1804b1-47a8f917533mr211662645e9.34.1765995282963;
+        Wed, 17 Dec 2025 10:14:42 -0800 (PST)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be2723d19sm5392475e9.2.2025.12.17.10.06.12
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be279d6d8sm4454125e9.10.2025.12.17.10.14.42
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 17 Dec 2025 10:06:12 -0800 (PST)
-Message-ID: <241db2c0-d701-4172-a3d6-7b000c2f5ab6@gmail.com>
-Date: Wed, 17 Dec 2025 19:06:12 +0100
+        Wed, 17 Dec 2025 10:14:42 -0800 (PST)
+Message-ID: <ac14ae52-176f-4705-8759-e68a1649d9d7@gmail.com>
+Date: Wed, 17 Dec 2025 19:14:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 1/2] libtoml: add new recipe
+Subject: Re: [oe] [meta-oe][PATCH 2/2] drm-lease-manager: add new recipe
 To: rbarrau33@gmail.com, openembedded-devel@lists.openembedded.org
 References: <20251217161114.403899-1-renaud.barrau@madic.com>
+ <20251217161114.403899-2-renaud.barrau@madic.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20251217161114.403899-1-renaud.barrau@madic.com>
+In-Reply-To: <20251217161114.403899-2-renaud.barrau@madic.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 18:06:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122727
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 18:14:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122728
 
 On 12/17/25 17:11, Renaud Barrau via lists.openembedded.org wrote:
 > From: Renaud Barrau <rbarrau33@gmail.com>
 >
-> Create a recipe for the tomlc99 project https://github.com/cktan/tomlc99
+> Create a recipe for the drm-lease-manager project  https://github.com/AGLExport/drm-lease-manager
 >
 > Signed-off-by: Renaud Barrau <rbarrau33@gmail.com>
 > ---
->  .../recipes-support/libtoml/libtoml_git.bb    | 41 +++++++++++++++++++
->  1 file changed, 41 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libtoml/libtoml_git.bb
+>  .../drm-lease-manager_git.bb                  | 20 +++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/drm-lease-manager/drm-lease-manager_git.bb
 >
-> diff --git a/meta-oe/recipes-support/libtoml/libtoml_git.bb b/meta-oe/recipes-support/libtoml/libtoml_git.bb
+> diff --git a/meta-oe/recipes-graphics/drm-lease-manager/drm-lease-manager_git.bb b/meta-oe/recipes-graphics/drm-lease-manager/drm-lease-manager_git.bb
 > new file mode 100644
-> index 0000000000..befd413d3c
+> index 0000000000..621a08f324
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libtoml/libtoml_git.bb
-> @@ -0,0 +1,41 @@
-> +SUMMARY = "TOML parser in C"
-> +HOMEPAGE = "https://github.com/cktan/tomlc99"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=95bbe2f9180443b5dcef3fb959804a65"
+> +++ b/meta-oe/recipes-graphics/drm-lease-manager/drm-lease-manager_git.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY = "Recipe for drm-lease-manager"
+> +HOMEPAGE = "https://github.com/AGLExport/drm-lease-manager"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 > +
-> +SRC_URI = "git://github.com/cktan/tomlc99;protocol=https;branch=master"
+> +SRC_URI = "git://github.com/AGLExport/drm-lease-manager;protocol=https;branch=master"
 
-It looks that this project isn't developed anymore (based on its
-readme), and has been superseded by tomlc17 from the same developer.
-Wouldn't it be better to use that? (This is a question from me - the
-project claims to be compatible with this library, but don't know if
-it's really true)
+This seems to be a development fork, not the upstream repo:
+https://git.automotivelinux.org/src/drm-lease-manager/ - I think this
+(or a mirror of it) would be a better source.
 
 > +
-> +SRCREV = "26b9c1ea770dab2378e5041b695d24ccebe58a7a"
+> +SRCREV = "e6c3bf4ff76ae5eeefdb149e4b4167195dfcfb61"
 > +
 > +S = "${WORKDIR}/git"
 
-Specifying S using WORKDIR is a fatal error in Whinlatter and master
-branch - when using the git fetcher, S doesn't need to be specified
-anymore 99% of the cases, the default should work.
+[Same comment about S as in the libtoml recipe]
 
 > +
-> +inherit pkgconfig
+> +inherit meson pkgconfig
 > +
-> +do_compile() {
-> +    oe_runmake CC="${CC}"
-> +}
+> +DEPENDS += "libdrm pkgconfig-native libtoml"
 > +
-> +do_install() {
-> +    install -d ${D}${includedir}
-> +    install -m 0644 toml.h ${D}${includedir}/
+> +# Change default path /var/run/drm-lease-manager.
+> +# For exemple if you wish to move the runtime dir of drm-lease-manager to /etc :
+> +# EXTRA_OEMESON += "-Druntime_subdir=/etc/drm-lease-manager"
 > +
-> +    install -d ${D}${libdir}
-> +    install -m 0644 libtoml.a ${D}${libdir}/
-> +}
-> +
-> +do_install:append() {
-> +    install -d ${D}${libdir}/pkgconfig
-> +
-> +    cat << EOF > ${D}${libdir}/pkgconfig/libtoml.pc
-> +prefix=${prefix}
-> +exec_prefix=${exec_prefix}
-> +includedir=${includedir}
-> +libdir=${libdir}
-> +
-> +Name: libtoml
-> +Description: TOML parser in C (tomlc99)
-> +Version: 1.0
-> +Libs: -L\${libdir} -ltoml
-> +Cflags: -I\${includedir}
-> +EOF
-> +}
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122725): https://lists.openembedded.org/g/openembedded-devel/message/122725
-> Mute This Topic: https://lists.openembedded.org/mt/116829679/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+> +FILES:${PN} += "${bindir}/drm-lease-manager"
 
+Is this needed to specify? I would expect that ${PN} package grabs the
+content of ${bindir} by default.
 
