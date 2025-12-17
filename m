@@ -1,430 +1,369 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7494D637A4
-	for <webhook@archiver.kernel.org>; Tue, 16 Dec 2025 19:40:19 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2581.1765914010569269891
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9B84D5C0C9
+	for <webhook@archiver.kernel.org>; Wed, 17 Dec 2025 03:48:33 +0000 (UTC)
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6103.1765943309437882723
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Dec 2025 11:40:10 -0800
+ Tue, 16 Dec 2025 19:48:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KF2X4NZD;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-477b198f4bcso40227125e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 11:40:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QDTU31k1;
+ spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-6420c08f886so6344146d50.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 19:48:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1765914009; x=1766518809; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=mOx+UA8iaItb7pYNQpm4DHE44GRp0yVgGW2vR/u0Dnk=;
-        b=KF2X4NZDchKsvJXaEJ2KUVaH0ixuYB1hgQIfLuMGF3O6snHtdXVLizvryIE6DCkTaP
-         HJID51/OnntMg/yc2l6ZlMqB8obRrAWIlHCwlQSfVsSKGG0El9/sTflIRtzSy0LA4EpT
-         p4+DntmPCy+9fPi/L52EtfdIaGAKaXuf4CN8Zdfg8iu/QDn6JLKvDh9HzVO95NzOQXxx
-         /gQ/yqPyELJ1p0u0LymsAgDxU9+IUFDgvuXNUZ++tTqUPr7MfgIXcMGYYGhSNGsIxk0U
-         h7tNIIekTEGWAAqkfvTriD+FXkU7OP4GkKh/luOWAhPueGvgCuQG8lzQNepeqRIA+K1G
-         ssAQ==
+        d=gmail.com; s=20230601; t=1765943308; x=1766548108; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=XUzt8/XKplZRYvp9I2b69vgnJ/RDlAX3PpZaMyKvyI0=;
+        b=QDTU31k1Q1BbGSgtAIYPhnpXYbd9pSWJvEcdgAdiePOf56MPmPugeXCLPaHR9h1dho
+         MV+dD2BivhbcRSCghCaQq9S+bvofHtuzhZvdJPzLZn0xT9RlTJ2AylVFRcwXNBpKhwM0
+         MFr9XszLTOP5JG9y6ynpds0uHQ9G/hzVZPVaNvuktTTGl3l4D0GDds2Ym7j86TPtSX7a
+         BR/GaMMLW90YGQJY9vPrIR9t9+qggAy+dHmHrODDTzex7EJZK9wbG+vh5yfHnl3wh4wT
+         FO79E7fcN9kjEMvEDpbsR/2c+Lu8qBkMWc5Fw9cfsNIo1jhFXFF1YBVyLmj2//UUAlUd
+         uiig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1765914009; x=1766518809;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=mOx+UA8iaItb7pYNQpm4DHE44GRp0yVgGW2vR/u0Dnk=;
-        b=GiJXDbsScWFTIn5Zo6oZ2VEh1VeXDvRP346UF5IFj3exVrahM5MwcbNj1xmy1C1QpZ
-         zdApjVHaHSTew7mt5mpyiP3Atq6hRpiX60/UYUTg4petCrJY+NvpWD8uJNSECL38W9fv
-         mCyGKKKdr3OUNqHGXqSyaahhVDa3WaHa0rLPV1P8PZY8ovyACRZP9iv8xmydeKU7H5+X
-         ctLkAu+2xsv6pIxSgDdhsqCh2YmO59b/xfDzVmlEI4erq234FoO1025+LI93g/mDc8/2
-         NvxPh1c5ev6BpqhII122qPxWisXA3fEKfQ8hIm7Rbb5G+pb+gebaxpGYOBM6ZOs6Ye0s
-         aZZg==
-X-Gm-Message-State: AOJu0Yx3OdYaTW215nRfbfiDglj06jKzWVxd5NjIWu4fgAEUaeIFTV1J
-	G1EodT4bmVNlznIUCYTbmZQhYKohJMz17KpzQFCdQ870YC9c0uZs03VHCf4nlA==
-X-Gm-Gg: AY/fxX5Cfjuu6xjsGNYRLKNc4pFOPAp7Zh51ZBmDh2kXrnnRuPgLT1+GyZi7yZAgWuh
-	N/LY5V9zkfW+OWyrzzUxNX9IHOAy513oHhnhiAO5UapVWSa03liHYbyBHLAU1XnFOZvTxpCZ0WC
-	IHimbrN+N/zk+S861/Ba/IEXbvy0jMPXJBBsQq74w1DPf82mXqDkuoNKs6gVaT1IFbF8tcQBHJq
-	JTlhwHYweXHYLccR6/DcHoDuyHn2TdnzdkbRzvi/gmsEtf66VNXz6LgOoNELPVSLopPVJCoSv2Z
-	JW4mLAd6qKTj+X+s7TVQlvtKvz+Q5/c1e2NZ0B1wwEkWVINRuqlnfdFA1TNlXTPnDf/K9ROYXCK
-	aiEakqldmudQzPsO+yq2OnxEtKA+p++WWQW6A/0A73bX47dRa6FwBUBTHrVPJc5+gcC14Cbxooh
-	SO8bbyRrLX
-X-Google-Smtp-Source: AGHT+IHiqLx5lLL/JN98KGfjEJQROcGHRswP9jPE/cm2M8aAMaq4172W2guGI+Tc6Ag9qhqQoudzIw==
-X-Received: by 2002:a05:600d:6405:20b0:47a:935f:618e with SMTP id 5b1f17b1804b1-47a935f64d7mr126136845e9.15.1765914008756;
-        Tue, 16 Dec 2025 11:40:08 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47bdc1defb4sm4741395e9.9.2025.12.16.11.40.08
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Dec 2025 11:40:08 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 4/4] proftpd: patch CVE-2024-48651
-Date: Tue, 16 Dec 2025 20:40:05 +0100
-Message-ID: <20251216194005.3006575-4-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251216194005.3006575-1-skandigraun@gmail.com>
-References: <20251216194005.3006575-1-skandigraun@gmail.com>
+        d=1e100.net; s=20230601; t=1765943308; x=1766548108;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XUzt8/XKplZRYvp9I2b69vgnJ/RDlAX3PpZaMyKvyI0=;
+        b=P5xZCzAfmnE/tuxo6W+7BI6SOn8226S6vnJQMcGnoZ3rS+CQJydeYYNn9pSYH4h8+A
+         C56DCJmS8jeKAqwCo8m5Ui3RoRDUVlWaNRVXtUfBMrGmV3TjtMTFRuOR4IwpBr43PAjZ
+         xuOTV/9OcUSIz/oN6LtTyFE1341IxJmm64C2/ggQW28aA4O+b+6eKnMZq5sPdmZNkVmy
+         4OJhOvqX8PFGUpffsJXTW83SuQ6BqwMs4VqEcPk/L0j22W7svKQZvtXpGsURcECBLx+v
+         Dk8ttwUeBAQE/nrtBqL2KS/nEhcRoteaAZgJoRkyHLxnmHzXg43FrLyuqwxfQEcBmdRM
+         /O8Q==
+X-Gm-Message-State: AOJu0YzXFSEgcJJwxGqf7rU4daIRXV+QfiBJbHh98i/RqhJn7o8A/XtW
+	SX4FduV1gDcWtFpHCZFd1DG1lmiywwVCsfOPYXM2BzcBHAqXKfxtkLk+EabvxbIl0Ol3S9Q6r8/
+	N8ykyTuaFk0y4MJr7vLuixFDhVu9oShKoGE/zGzg=
+X-Gm-Gg: AY/fxX5D7E7fKItG3O7383+w3/eVmPsM5tc2wBIphD9i5ZZdy3mSkAGcvTBD0INzZRs
+	YslIZjdFM6lMdvocfaksCokiMAtGrZCGTXucm+guMSzMS/ohIC04K6QuelRD6dhoBHEtxY5KnBW
+	lH2oVVhgI0pfntFygUJRaSJypUqkofa2RUCR7/7MQ19gLNQzBeAld7mvUEHUGEF9fSLQkasHmpv
+	RdAzsMHbQPIHpWvtbg45HsL5LSyg3YL8SxrSDzzry0XfARMrSLHcSvXxRPvHnwO1xNGIuqo1xty
+	7QAGCtfiAwU7+1yT1pXoVL9tA/ksrJ9OUH15qI1QejD1ki09AVH2AamHacoUlPvbaIRc7wjPFAw
+	qgwg0om8gUnMy
+X-Google-Smtp-Source: AGHT+IFbscP+VA7wxrVapShcC8Zy62yDiqZQj46AMDuLYxwhuvRyyoHJz0qmkU9EV61aO1QxzLjez8ItWC2ZR+c1Azw=
+X-Received: by 2002:a05:690e:4088:b0:645:5b1f:4cbf with SMTP id
+ 956f58d0204a3-6455b1f548emr12379790d50.82.1765943308377; Tue, 16 Dec 2025
+ 19:48:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <18802E459FACF88F.1129279@lists.openembedded.org> <CA+s=J=w4qe+BRS_J91jehOZCWCNNhsCEVCRQPn0S1v0R9UhNhw@mail.gmail.com>
+In-Reply-To: <CA+s=J=w4qe+BRS_J91jehOZCWCNNhsCEVCRQPn0S1v0R9UhNhw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 16 Dec 2025 23:48:02 -0400
+X-Gm-Features: AQt7F2rSYh4t8oNFm_JWAa9XX5ebDl00mngiiDLq34QIhNM05sNOeB-d8rwWPBs
+Message-ID: <CAMKF1so4eC_BSW1_ZzOVQJDMx+Pga-hXJrCzQ_V3K7vd-kBfHg@mail.gmail.com>
+Subject: Re: [oe] [PATCH 00/10] Scarthgap pull request
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000096e11f06461db722"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Dec 2025 19:40:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122710
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Dec 2025 03:48:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122711
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-48651
+--00000000000096e11f06461db722
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Backport the patch mentioned in the NVD report.
+Thanks Anuj, Looks good.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../proftpd/files/CVE-2024-48651.patch        | 321 ++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |   3 +-
- 2 files changed, 323 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2024-48651.patch
+On Mon, Dec 15, 2025 at 9:55=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qualco=
+mm.com>
+wrote:
 
-diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2024-48651.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-48651.patch
-new file mode 100644
-index 0000000000..db525c5418
---- /dev/null
-+++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2024-48651.patch
-@@ -0,0 +1,321 @@
-+From 1df9a7b29aaedfc563ba908b52ca2414caddf25f Mon Sep 17 00:00:00 2001
-+From: TJ Saunders <tj@castaglia.org>
-+Date: Wed, 13 Nov 2024 06:33:35 -0800
-+Subject: [PATCH] Issue #1830: When no supplemental groups are provided by the
-+ underlying authentication providers, fall back to using the primary
-+ group/GID. (#1835)
-+
-+This prevents surprise due to inheritance of the parent processes' supplemental group membership, which might inadvertently provided undesired access.
-+
-+CVE: CVE-2024-48651
-+Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/cec01cc0a2523453e5da5a486bc6d977c3768db1]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ contrib/mod_sftp/auth.c                       |  14 +-
-+ modules/mod_auth.c                            |  19 +-
-+ src/auth.c                                    |  14 +-
-+ .../ProFTPD/Tests/Modules/mod_sql_sqlite.pm   | 175 ++++++++++++++++++
-+ 4 files changed, 210 insertions(+), 12 deletions(-)
-+
-+diff --git a/contrib/mod_sftp/auth.c b/contrib/mod_sftp/auth.c
-+index ede821daa..2854a03cd 100644
-+--- a/contrib/mod_sftp/auth.c
-++++ b/contrib/mod_sftp/auth.c
-+@@ -382,8 +382,20 @@ static int setup_env(pool *p, const char *user) {
-+       session.groups == NULL) {
-+     res = pr_auth_getgroups(p, pw->pw_name, &session.gids, &session.groups);
-+     if (res < 1) {
-++      /* If no supplemental groups are provided, default to using the process
-++       * primary GID as the supplemental group.  This prevents access
-++       * regressions as seen in Issue #1830.
-++       */
-+       (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
-+-        "no supplemental groups found for user '%s'", pw->pw_name);
-++        "no supplemental groups found for user '%s', "
-++        "using primary group %s (GID %lu)", pw->pw_name, session.group,
-++        (unsigned long) session.login_gid);
-++
-++      session.gids = make_array(p, 2, sizeof(gid_t));
-++      session.groups = make_array(p, 2, sizeof(char *));
-++
-++      *((gid_t *) push_array(session.gids)) = session.login_gid;
-++      *((char **) push_array(session.groups)) = pstrdup(p, session.group);
-+     }
-+   }
-+ 
-+diff --git a/modules/mod_auth.c b/modules/mod_auth.c
-+index e47ed148d..a1b71c0f7 100644
-+--- a/modules/mod_auth.c
-++++ b/modules/mod_auth.c
-+@@ -1111,8 +1111,8 @@ static int setup_env(pool *p, cmd_rec *cmd, const char *user, char *pass) {
-+     session.groups = NULL;
-+   }
-+ 
-+-  if (!session.gids &&
-+-      !session.groups) {
-++  if (session.gids == NULL &&
-++      session.groups == NULL) {
-+     /* Get the supplemental groups.  Note that we only look up the
-+      * supplemental group credentials if we have not cached the group
-+      * credentials before, in session.gids and session.groups.  
-+@@ -1122,8 +1122,19 @@ static int setup_env(pool *p, cmd_rec *cmd, const char *user, char *pass) {
-+      */
-+      res = pr_auth_getgroups(p, pw->pw_name, &session.gids, &session.groups);
-+      if (res < 1) {
-+-       pr_log_debug(DEBUG5, "no supplemental groups found for user '%s'",
-+-         pw->pw_name);
-++       /* If no supplemental groups are provided, default to using the process
-++        * primary GID as the supplemental group.  This prevents access
-++        * regressions as seen in Issue #1830.
-++        */
-++       pr_log_debug(DEBUG5, "no supplemental groups found for user '%s', "
-++         "using primary group %s (GID %lu)", pw->pw_name, session.group,
-++         (unsigned long) session.login_gid);
-++
-++       session.gids = make_array(p, 2, sizeof(gid_t));
-++       session.groups = make_array(p, 2, sizeof(char *));
-++
-++       *((gid_t *) push_array(session.gids)) = session.login_gid;
-++       *((char **) push_array(session.groups)) = pstrdup(p, session.group);
-+      }
-+   }
-+ 
-+diff --git a/src/auth.c b/src/auth.c
-+index 494a479c0..a6fe9f1c2 100644
-+--- a/src/auth.c
-++++ b/src/auth.c
-+@@ -1512,12 +1512,12 @@ int pr_auth_getgroups(pool *p, const char *name, array_header **group_ids,
-+   }
-+ 
-+   /* Allocate memory for the array_headers of GIDs and group names. */
-+-  if (group_ids) {
-+-    *group_ids = make_array(permanent_pool, 2, sizeof(gid_t));
-++  if (group_ids != NULL) {
-++    *group_ids = make_array(p, 2, sizeof(gid_t));
-+   }
-+ 
-+-  if (group_names) {
-+-    *group_names = make_array(permanent_pool, 2, sizeof(char *));
-++  if (group_names != NULL) {
-++    *group_names = make_array(p, 2, sizeof(char *));
-+   }
-+ 
-+   cmd = make_cmd(p, 3, name, group_ids ? *group_ids : NULL,
-+@@ -1536,7 +1536,7 @@ int pr_auth_getgroups(pool *p, const char *name, array_header **group_ids,
-+      * for the benefit of auth_getgroup() implementors.
-+      */
-+ 
-+-    if (group_ids) {
-++    if (group_ids != NULL) {
-+       register unsigned int i;
-+       char *strgids = "";
-+       gid_t *gids = (*group_ids)->elts;
-+@@ -1552,7 +1552,7 @@ int pr_auth_getgroups(pool *p, const char *name, array_header **group_ids,
-+         *strgids ? strgids : "(None; corrupted group file?)");
-+     }
-+ 
-+-    if (group_names) {
-++    if (group_names != NULL) {
-+       register unsigned int i;
-+       char *strgroups = ""; 
-+       char **groups = (*group_names)->elts;
-+@@ -1568,7 +1568,7 @@ int pr_auth_getgroups(pool *p, const char *name, array_header **group_ids,
-+     }
-+   }
-+ 
-+-  if (cmd->tmp_pool) {
-++  if (cmd->tmp_pool != NULL) {
-+     destroy_pool(cmd->tmp_pool);
-+     cmd->tmp_pool = NULL;
-+   }
-+diff --git a/tests/t/lib/ProFTPD/Tests/Modules/mod_sql_sqlite.pm b/tests/t/lib/ProFTPD/Tests/Modules/mod_sql_sqlite.pm
-+index 4abb6eb59..f1ffeef34 100644
-+--- a/tests/t/lib/ProFTPD/Tests/Modules/mod_sql_sqlite.pm
-++++ b/tests/t/lib/ProFTPD/Tests/Modules/mod_sql_sqlite.pm
-+@@ -467,6 +467,11 @@ my $TESTS = {
-+     order => ++$order,
-+     test_class => [qw(forking bug mod_tls)],
-+   },
-++
-++  sql_user_info_no_suppl_groups_issue1830 => {
-++    order => ++$order,
-++    test_class => [qw(forking bug rootprivs)],
-++  },
-+ };
-+ 
-+ sub new {
-+@@ -15732,4 +15737,174 @@ EOC
-+   test_cleanup($setup->{log_file}, $ex);
-+ }
-+ 
-++sub sql_user_info_no_suppl_groups_issue1830 {
-++  my $self = shift;
-++  my $tmpdir = $self->{tmpdir};
-++  my $setup = test_setup($tmpdir, 'sqlite');
-++    
-++  my $db_file = File::Spec->rel2abs("$tmpdir/proftpd.db");
-++
-++  # Build up sqlite3 command to create users, groups tables and populate them
-++  my $db_script = File::Spec->rel2abs("$tmpdir/proftpd.sql");
-++  
-++  if (open(my $fh, "> $db_script")) {
-++    print $fh <<EOS;
-++CREATE TABLE users (
-++  userid TEXT,
-++  passwd TEXT,
-++  uid INTEGER,
-++  gid INTEGER,
-++  homedir TEXT,
-++  shell TEXT
-++);
-++INSERT INTO users (userid, passwd, uid, gid, homedir, shell) VALUES ('$setup->{user}', '$setup->{passwd}', $setup->{uid}, $setup->{gid}, '$setup->{home_dir}', '/bin/bash');
-++
-++CREATE TABLE groups (
-++  groupname TEXT,
-++  gid INTEGER,
-++  members TEXT
-++);
-++INSERT INTO groups (groupname, gid, members) VALUES ('$setup->{group}', $setup->{gid}, '$setup->{user}');
-++EOS
-++
-++    unless (close($fh)) {
-++      die("Can't write $db_script: $!");
-++    }
-++
-++  } else {
-++    die("Can't open $db_script: $!");
-++  }
-++  
-++  my $cmd = "sqlite3 $db_file < $db_script";
-++  build_db($cmd, $db_script);
-++
-++  # Make sure that, if we're running as root, the database file has
-++  # the permissions/privs set for use by proftpd
-++  if ($< == 0) {
-++    unless (chmod(0666, $db_file)) {
-++      die("Can't set perms on $db_file to 0666: $!");
-++    }
-++  }
-++
-++  my $config = {
-++    PidFile => $setup->{pid_file},
-++    ScoreboardFile => $setup->{scoreboard_file},
-++    SystemLog => $setup->{log_file},
-++    TraceLog => $setup->{log_file},
-++    Trace => 'auth:20 sql:20',
-++
-++    # Required for logging the expected message
-++    DebugLevel => 5,
-++
-++    IfModules => {
-++      'mod_delay.c' => {
-++        DelayEngine => 'off',
-++      },
-++  
-++      'mod_sql.c' => {
-++        AuthOrder => 'mod_sql.c',
-++  
-++        SQLAuthenticate => 'users',
-++        SQLAuthTypes => 'plaintext',
-++        SQLBackend => 'sqlite3',
-++        SQLConnectInfo => $db_file,
-++        SQLLogFile => $setup->{log_file},
-++    
-++        # Set these, so that our lower UID/GID will be used
-++        SQLMinUserUID => 100,
-++        SQLMinUserGID => 100,
-++      },
-++    },
-++  };
-++  
-++  my ($port, $config_user, $config_group) = config_write($setup->{config_file},
-++    $config);
-++
-++  # Open pipes, for use between the parent and child processes.  Specifically,
-++  # the child will indicate when it's done with its test by writing a message
-++  # to the parent.
-++  my ($rfh, $wfh);
-++  unless (pipe($rfh, $wfh)) {
-++    die("Can't open pipe: $!");
-++  }
-++
-++  my $ex;
-++      
-++  # Fork child
-++  $self->handle_sigchld();
-++  defined(my $pid = fork()) or die("Can't fork: $!");
-++  if ($pid) {
-++    eval {
-++      sleep(2);
-++  
-++      my $client = ProFTPD::TestSuite::FTP->new('127.0.0.1', $port);
-++      $client->login($setup->{user}, $setup->{passwd});
-++  
-++      my $resp_msgs = $client->response_msgs();
-++      my $nmsgs = scalar(@$resp_msgs);
-++    
-++      my $expected = 1;
-++      $self->assert($expected == $nmsgs,
-++        test_msg("Expected $expected, got $nmsgs"));
-++
-++      $expected = "User $setup->{user} logged in";
-++      $self->assert($expected eq $resp_msgs->[0],
-++        test_msg("Expected response '$expected', got '$resp_msgs->[0]'"));
-++    
-++      $client->quit();
-++    };
-++    if ($@) {
-++      $ex = $@;
-++    }
-++
-++    $wfh->print("done\n");
-++    $wfh->flush();
-++        
-++  } else {
-++    eval { server_wait($setup->{config_file}, $rfh) };
-++    if ($@) {
-++      warn($@);
-++      exit 1;
-++    }
-++        
-++    exit 0;
-++  }
-++        
-++  # Stop server
-++  server_stop($setup->{pid_file});
-++  $self->assert_child_ok($pid);
-++        
-++  eval {
-++    if (open(my $fh, "< $setup->{log_file}")) {
-++      my $ok = 0;
-++  
-++      while (my $line = <$fh>) {
-++        chomp($line);
-++
-++        if ($ENV{TEST_VERBOSE}) {
-++          print STDERR "# $line\n";
-++        }
-++  
-++        if ($line =~ /no supplemental groups found for user '$setup->{user}', using primary group/) {
-++          $ok = 1;
-++          last;
-++        }
-++      }
-++      
-++      close($fh);
-++  
-++      $self->assert($ok, test_msg("Did not see expected log message"));
-++  
-++    } else {
-++      die("Can't read $setup->{log_file}: $!");
-++    }
-++  };
-++  if ($@) {
-++    $ex = $@ unless $ex;
-++  }
-++      
-++  test_cleanup($setup->{log_file}, $ex);
-++}
-++      
-++
-+ 1;
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-index c8097a14b0..345c714a52 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
-@@ -12,12 +12,13 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
-            file://proftpd-basic.init \
-            file://default \
-            file://close-RequireValidShell-check.patch \
--           file://contrib.patch  \
-+           file://contrib.patch \
-            file://build_fixup.patch \
-            file://proftpd.service \
-            file://CVE-2023-51713.patch \
-            file://CVE-2024-57392.patch \
-            file://CVE-2023-48795.patch \
-+           file://CVE-2024-48651.patch \
-            "
- 
- S = "${WORKDIR}/git"
+> Hi Khem
+>
+> Can you merge these please if there are no objections?
+>
+> On Thu, Dec 11, 2025 at 10:05=E2=80=AFPM Anuj Mittal via
+> lists.openembedded.org
+> <anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
+> >
+> > Please merge these changes in scarthgap.
+> >
+> > https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1172
+> >
+> > The following changes since commit
+> 7ed4330bcf1ecd4aa34bfbe1fd7079381b62b1e7:
+> >
+> >   net-snmp: Update Upstream-status in the
+> net-snmp-5.9.4-kernel-6.7.patch (2025-12-05 17:46:29 +0530)
+> >
+> > are available in the Git repository at:
+> >
+> >   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthga=
+p
+> >
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
+rthgap
+> >
+> > Ankur Tyagi (3):
+> >   python3-django: upgrade 5.0.11 -> 5.0.14
+> >   smarty: update CVE_PRODUCT
+> >   libavif: patch CVE-2025-48174
+> >
+> > Hitendra Prajapati (1):
+> >   wireshark: fix CVE-2025-13499
+> >
+> > Peter Marko (1):
+> >   nftables: remove python dependency from main package
+> >
+> > Sudhir Dumbhare (1):
+> >   hdf5 1.14.4-3: fix CVE-2025-2912
+> >
+> > Valeria Petrov (1):
+> >   apache2: upgrade 2.4.65 -> 2.4.66
+> >
+> > Vijay Anusuri (1):
+> >   proftpd: Fix CVE-2023-48795
+> >
+> > Viswanath Kraleti (1):
+> >   gflags: switch Git branch from master to main
+> >
+> > Wang Mingyu (1):
+> >   corosync: upgrade 3.1.9 -> 3.1.10
+> >
+> >  .../libavif/libavif/CVE-2025-48174_1.patch    |  27 +
+> >  .../libavif/libavif/CVE-2025-48174_2.patch    |  31 +
+> >  .../libavif/libavif/CVE-2025-48174_3.patch    |  27 +
+> >  .../libavif/libavif/CVE-2025-48174_4.patch    |  72 ++
+> >  .../libavif/libavif_1.0.1.bb                  |   7 +-
+> >  .../proftpd/files/CVE-2023-48795.patch        | 785 ++++++++++++++++++
+> >  .../recipes-daemons/proftpd/proftpd_1.3.7f.bb |   1 +
+> >  .../corosync/corosync/CVE-2025-30472.patch    |  69 --
+> >  .../{corosync_3.1.9.bb =3D> corosync_3.1.10.bb} |   5 +-
+> >  .../recipes-filter/nftables/nftables_1.0.9.bb |   2 +
+> >  .../wireshark/files/CVE-2025-13499.patch      |  45 +
+> >  .../wireshark/wireshark_4.2.14.bb             |   1 +
+> >  .../recipes-support/gflags/gflags_2.2.2.bb    |   2 +-
+> >  ...atch =3D> CVE-2025-2913-CVE-2025-2912.patch} |   3 +-
+> >  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   2 +-
+> >  .../recipes-support/smarty/smarty_4.4.1.bb    |   2 +
+> >  .../python3-django/CVE-2025-26699.patch       | 100 ---
+> >  ...ngo_5.0.11.bb =3D> python3-django_5.0.14.bb} |   4 +-
+> >  .../{apache2_2.4.65.bb =3D> apache2_2.4.66.bb}  |   2 +-
+> >  19 files changed, 1007 insertions(+), 180 deletions(-)
+> >  create mode 100644
+> meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_1.patch
+> >  create mode 100644
+> meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_2.patch
+> >  create mode 100644
+> meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_3.patch
+> >  create mode 100644
+> meta-multimedia/recipes-multimedia/libavif/libavif/CVE-2025-48174_4.patch
+> >  create mode 100644
+> meta-networking/recipes-daemons/proftpd/files/CVE-2023-48795.patch
+> >  delete mode 100644
+> meta-networking/recipes-extended/corosync/corosync/CVE-2025-30472.patch
+> >  rename meta-networking/recipes-extended/corosync/{corosync_3.1.9.bb =
+=3D>
+> corosync_3.1.10.bb} (94%)
+> >  create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2025-13499.patch
+> >  rename meta-oe/recipes-support/hdf5/files/{CVE-2025-2913.patch =3D>
+> CVE-2025-2913-CVE-2025-2912.patch} (94%)
+> >  delete mode 100644
+> meta-python/recipes-devtools/python/python3-django/CVE-2025-26699.patch
+> >  rename meta-python/recipes-devtools/python/{python3-django_5.0.11.bb
+> =3D> python3-django_5.0.14.bb} (65%)
+> >  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.65.bb =3D>
+> apache2_2.4.66.bb} (99%)
+> >
+> > --
+> > 2.52.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#122586):
+> https://lists.openembedded.org/g/openembedded-devel/message/122586
+> > Mute This Topic: https://lists.openembedded.org/mt/116729072/3616702
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[
+> anuj.mittal@oss.qualcomm.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+
+--00000000000096e11f06461db722
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks Anuj, Looks good.</div><br><div class=3D"gmail_quot=
+e gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Dec =
+15, 2025 at 9:55=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@o=
+ss.qualcomm.com">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">Hi Khem<br>
+<br>
+Can you merge these please if there are no objections?<br>
+<br>
+On Thu, Dec 11, 2025 at 10:05=E2=80=AFPM Anuj Mittal via<br>
+<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
+nk">lists.openembedded.org</a><br>
+&lt;anuj.mittal=3D<a href=3D"mailto:oss.qualcomm.com@lists.openembedded.org=
+" target=3D"_blank">oss.qualcomm.com@lists.openembedded.org</a>&gt; wrote:<=
+br>
+&gt;<br>
+&gt; Please merge these changes in scarthgap.<br>
+&gt;<br>
+&gt; <a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81=
+/builds/1172" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoct=
+oproject.org/valkyrie/#/builders/81/builds/1172</a><br>
+&gt;<br>
+&gt; The following changes since commit 7ed4330bcf1ecd4aa34bfbe1fd7079381b6=
+2b1e7:<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0net-snmp: Update Upstream-status in the net-snmp-5.9.4-ker=
+nel-6.7.patch (2025-12-05 17:46:29 +0530)<br>
+&gt;<br>
+&gt; are available in the Git repository at:<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0<a href=3D"https://git.openembedded.org/meta-openembedded-=
+contrib" rel=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/=
+meta-openembedded-contrib</a> anujm/scarthgap<br>
+&gt;=C2=A0 =C2=A0<a href=3D"https://git.openembedded.org/meta-openembedded-=
+contrib/log/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">http=
+s://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap=
+</a><br>
+&gt;<br>
+&gt; Ankur Tyagi (3):<br>
+&gt;=C2=A0 =C2=A0python3-django: upgrade 5.0.11 -&gt; 5.0.14<br>
+&gt;=C2=A0 =C2=A0smarty: update CVE_PRODUCT<br>
+&gt;=C2=A0 =C2=A0libavif: patch CVE-2025-48174<br>
+&gt;<br>
+&gt; Hitendra Prajapati (1):<br>
+&gt;=C2=A0 =C2=A0wireshark: fix CVE-2025-13499<br>
+&gt;<br>
+&gt; Peter Marko (1):<br>
+&gt;=C2=A0 =C2=A0nftables: remove python dependency from main package<br>
+&gt;<br>
+&gt; Sudhir Dumbhare (1):<br>
+&gt;=C2=A0 =C2=A0hdf5 1.14.4-3: fix CVE-2025-2912<br>
+&gt;<br>
+&gt; Valeria Petrov (1):<br>
+&gt;=C2=A0 =C2=A0apache2: upgrade 2.4.65 -&gt; 2.4.66<br>
+&gt;<br>
+&gt; Vijay Anusuri (1):<br>
+&gt;=C2=A0 =C2=A0proftpd: Fix CVE-2023-48795<br>
+&gt;<br>
+&gt; Viswanath Kraleti (1):<br>
+&gt;=C2=A0 =C2=A0gflags: switch Git branch from master to main<br>
+&gt;<br>
+&gt; Wang Mingyu (1):<br>
+&gt;=C2=A0 =C2=A0corosync: upgrade 3.1.9 -&gt; 3.1.10<br>
+&gt;<br>
+&gt;=C2=A0 .../libavif/libavif/CVE-2025-48174_1.patch=C2=A0 =C2=A0 |=C2=A0 =
+27 +<br>
+&gt;=C2=A0 .../libavif/libavif/CVE-2025-48174_2.patch=C2=A0 =C2=A0 |=C2=A0 =
+31 +<br>
+&gt;=C2=A0 .../libavif/libavif/CVE-2025-48174_3.patch=C2=A0 =C2=A0 |=C2=A0 =
+27 +<br>
+&gt;=C2=A0 .../libavif/libavif/CVE-2025-48174_4.patch=C2=A0 =C2=A0 |=C2=A0 =
+72 ++<br>
+&gt;=C2=A0 .../libavif/<a href=3D"http://libavif_1.0.1.bb" rel=3D"noreferre=
+r" target=3D"_blank">libavif_1.0.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A07 +-<br>
+&gt;=C2=A0 .../proftpd/files/CVE-2023-48795.patch=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 785 ++++++++++++++++++<br>
+&gt;=C2=A0 .../recipes-daemons/proftpd/<a href=3D"http://proftpd_1.3.7f.bb"=
+ rel=3D"noreferrer" target=3D"_blank">proftpd_1.3.7f.bb</a> |=C2=A0 =C2=A01=
+ +<br>
+&gt;=C2=A0 .../corosync/corosync/CVE-2025-30472.patch=C2=A0 =C2=A0 |=C2=A0 =
+69 --<br>
+&gt;=C2=A0 .../{<a href=3D"http://corosync_3.1.9.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">corosync_3.1.9.bb</a> =3D&gt; <a href=3D"http://corosync_3.1=
+.10.bb" rel=3D"noreferrer" target=3D"_blank">corosync_3.1.10.bb</a>} |=C2=
+=A0 =C2=A05 +-<br>
+&gt;=C2=A0 .../recipes-filter/nftables/<a href=3D"http://nftables_1.0.9.bb"=
+ rel=3D"noreferrer" target=3D"_blank">nftables_1.0.9.bb</a> |=C2=A0 =C2=A02=
+ +<br>
+&gt;=C2=A0 .../wireshark/files/CVE-2025-13499.patch=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 45 +<br>
+&gt;=C2=A0 .../wireshark/<a href=3D"http://wireshark_4.2.14.bb" rel=3D"nore=
+ferrer" target=3D"_blank">wireshark_4.2.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+&gt;=C2=A0 .../recipes-support/gflags/<a href=3D"http://gflags_2.2.2.bb" re=
+l=3D"noreferrer" target=3D"_blank">gflags_2.2.2.bb</a>=C2=A0 =C2=A0 |=C2=A0=
+ =C2=A02 +-<br>
+&gt;=C2=A0 ...atch =3D&gt; CVE-2025-2913-CVE-2025-2912.patch} |=C2=A0 =C2=
+=A03 +-<br>
+&gt;=C2=A0 meta-oe/recipes-support/hdf5/<a href=3D"http://hdf5_1.14.4-3.bb"=
+ rel=3D"noreferrer" target=3D"_blank">hdf5_1.14.4-3.bb</a> |=C2=A0 =C2=A02 =
++-<br>
+&gt;=C2=A0 .../recipes-support/smarty/<a href=3D"http://smarty_4.4.1.bb" re=
+l=3D"noreferrer" target=3D"_blank">smarty_4.4.1.bb</a>=C2=A0 =C2=A0 |=C2=A0=
+ =C2=A02 +<br>
+&gt;=C2=A0 .../python3-django/CVE-2025-26699.patch=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0| 100 ---<br>
+&gt;=C2=A0 ...<a href=3D"http://ngo_5.0.11.bb" rel=3D"noreferrer" target=3D=
+"_blank">ngo_5.0.11.bb</a> =3D&gt; <a href=3D"http://python3-django_5.0.14.=
+bb" rel=3D"noreferrer" target=3D"_blank">python3-django_5.0.14.bb</a>} |=C2=
+=A0 =C2=A04 +-<br>
+&gt;=C2=A0 .../{<a href=3D"http://apache2_2.4.65.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">apache2_2.4.65.bb</a> =3D&gt; <a href=3D"http://apache2_2.4.=
+66.bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.66.bb</a>}=C2=A0 |=
+=C2=A0 =C2=A02 +-<br>
+&gt;=C2=A0 19 files changed, 1007 insertions(+), 180 deletions(-)<br>
+&gt;=C2=A0 create mode 100644 meta-multimedia/recipes-multimedia/libavif/li=
+bavif/CVE-2025-48174_1.patch<br>
+&gt;=C2=A0 create mode 100644 meta-multimedia/recipes-multimedia/libavif/li=
+bavif/CVE-2025-48174_2.patch<br>
+&gt;=C2=A0 create mode 100644 meta-multimedia/recipes-multimedia/libavif/li=
+bavif/CVE-2025-48174_3.patch<br>
+&gt;=C2=A0 create mode 100644 meta-multimedia/recipes-multimedia/libavif/li=
+bavif/CVE-2025-48174_4.patch<br>
+&gt;=C2=A0 create mode 100644 meta-networking/recipes-daemons/proftpd/files=
+/CVE-2023-48795.patch<br>
+&gt;=C2=A0 delete mode 100644 meta-networking/recipes-extended/corosync/cor=
+osync/CVE-2025-30472.patch<br>
+&gt;=C2=A0 rename meta-networking/recipes-extended/corosync/{<a href=3D"htt=
+p://corosync_3.1.9.bb" rel=3D"noreferrer" target=3D"_blank">corosync_3.1.9.=
+bb</a> =3D&gt; <a href=3D"http://corosync_3.1.10.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">corosync_3.1.10.bb</a>} (94%)<br>
+&gt;=C2=A0 create mode 100644 meta-networking/recipes-support/wireshark/fil=
+es/CVE-2025-13499.patch<br>
+&gt;=C2=A0 rename meta-oe/recipes-support/hdf5/files/{CVE-2025-2913.patch =
+=3D&gt; CVE-2025-2913-CVE-2025-2912.patch} (94%)<br>
+&gt;=C2=A0 delete mode 100644 meta-python/recipes-devtools/python/python3-d=
+jango/CVE-2025-26699.patch<br>
+&gt;=C2=A0 rename meta-python/recipes-devtools/python/{<a href=3D"http://py=
+thon3-django_5.0.11.bb" rel=3D"noreferrer" target=3D"_blank">python3-django=
+_5.0.11.bb</a> =3D&gt; <a href=3D"http://python3-django_5.0.14.bb" rel=3D"n=
+oreferrer" target=3D"_blank">python3-django_5.0.14.bb</a>} (65%)<br>
+&gt;=C2=A0 rename meta-webserver/recipes-httpd/apache2/{<a href=3D"http://a=
+pache2_2.4.65.bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.65.bb</a=
+> =3D&gt; <a href=3D"http://apache2_2.4.66.bb" rel=3D"noreferrer" target=3D=
+"_blank">apache2_2.4.66.bb</a>} (99%)<br>
+&gt;<br>
+&gt; --<br>
+&gt; 2.52.0<br>
+&gt;<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#122586): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/122586" rel=3D"noreferrer" target=3D"_blank">=
+https://lists.openembedded.org/g/openembedded-devel/message/122586</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11672907=
+2/3616702" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
+org/mt/116729072/3616702</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:anuj.mittal@oss.qua=
+lcomm.com" target=3D"_blank">anuj.mittal@oss.qualcomm.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+</blockquote></div>
+
+--00000000000096e11f06461db722--
 
