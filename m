@@ -2,107 +2,116 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A150BD6ACFB
-	for <webhook@archiver.kernel.org>; Thu, 18 Dec 2025 12:34:54 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.40894.1766061289301021125
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BAB9D6D225
+	for <webhook@archiver.kernel.org>; Thu, 18 Dec 2025 13:47:05 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.42287.1766065624261277013
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Dec 2025 04:34:49 -0800
+ Thu, 18 Dec 2025 05:47:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=emJF9uvB;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4775ae5684fso2453575e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Dec 2025 04:34:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WB+mitUd;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42fbbc3df8fso299416f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Dec 2025 05:47:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766061288; x=1766666088; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yg0OfO1kh+fLFxq7P0Jro74hLEiPwCOkjTL7swAg3Zs=;
-        b=emJF9uvBfu4yGLmPKAiMvwq7MjQIlaBmWnilmtNWxjGPedyXxXl3vUfng2Yta6Wefe
-         KZSZmPDsUryR9oV/LdBOV9eH/DKZAC9n5q6kvR0R0xfxCAYXU1kZ3J3uhnw8mB5FyUd/
-         rvYyo5oEboFVE77UNyhxKIaLZmFUEOfPD6k+Ji/fytH+A775hs9TkW3Q3+k3oF9SgXqC
-         zPuti+bJMFhgXwQILQyMVkrzU4HRWr0NqnH2kJ4WYhV1e0UexuYcLBZJBVlUtPn7zq2m
-         l39bvViSqqwh/Wr26nhHjYJZSSuFXzYS9GKb0mnTuxpFMMPsZD/MkVBGY+T455+c3GjC
-         oaoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766061288; x=1766666088;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1766065623; x=1766670423; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yg0OfO1kh+fLFxq7P0Jro74hLEiPwCOkjTL7swAg3Zs=;
-        b=Y/3hvv2hTGxnBdswbUaNdbwXK0einnq6qvEWG5XI9RIsXrktsd7pB94RxBvbNGHR6X
-         0d2j7UvZpO2mYws+N8jqO5V1hsfYof/XKBCEp2cFHieTazZ1i9p52FhB7odmaPH+Q0dl
-         5PmnEdC28ltDWbUUt15UrwZeQ9SCg2znYvd4zLD/zz3FvpXStbG1VFCrJnjXemVHyUTi
-         leKGWdT5eZcm1CQ5PpYbSLPGJ8d8bjEHMulTx8YRRY04ldiHdz67Ut3k2X2KoiDVsg83
-         BLFF2Lrgy9ysSDjysVrNCaTQqiwxTtswlBQIfdSwzy0blFRPZlCHKj3ITpSZEXVNXI8M
-         CDbQ==
-X-Gm-Message-State: AOJu0YwwK1uTJK+FxB+w10n4EOYgYPan6zXXUpA/L3OyU2D96ZrSs0PU
-	HJ+KEZYaYOfvpWuCtZWtbYjWAI4CAa7DnCmTgQ9ziMultVF9IlNL7/faBWc/pQ==
-X-Gm-Gg: AY/fxX66o/zW1MiXmMt1vgifZDcvDpc0YjPjozf0T9oDZkHsDXI1BQ5H2kHNfAPvOYB
-	X9aUKhH1aNfHkwxbuHFVg1+5dTNwDsdiUeOKRO1EX6sdL4fMGxwEGCOco/XFLZkNns7Fc7Z68/7
-	cMmp+ckNTcqM6QayDWIFKWXKV8pidC2w1fn1cj9rAwozQatoSKfwwnJWGfQ7WBAsWweQqvb0k+q
-	NCJKtQAifEyi7je/il4Zu7EPWYQVSemPGk8AbfMfB9pN+BwXnQyqHlkKfPTKBlJR1QZeKdNkMGx
-	+kuWgN5HilyzM9XIf1PMIgYhmCepZDIZNT5aAoVWv+d5yji9xNLPRiwVq7GRvFqvdMzXogpgj+D
-	Wzhhppvmm3Z44vBk0J8n6hJ4I0qFhSKUVis5Ox9ai+PQ47qVGs8j7k5YMPmqs33dPhEmaL1fpmd
-	vqqMgP6uHi
-X-Google-Smtp-Source: AGHT+IHLTe1w9rGcViM0gFY7U49+8QYoHas3TtycIkv9vHIh+f77ACfgZGoPFFB04ZGzOJ41TNxKUw==
-X-Received: by 2002:a05:600c:6290:b0:477:63db:c718 with SMTP id 5b1f17b1804b1-47a8f8ce390mr270761455e9.16.1766061287480;
-        Thu, 18 Dec 2025 04:34:47 -0800 (PST)
+        bh=sFz3H8rawJrANqDbGi8NBscNDtr2AWnI+JYNzOInpoY=;
+        b=WB+mitUdD0O9+rXhExIlYOsMLeTJZg6WPcLf+gb1O1/ZZ9dFEY8poJCusx+hUw6rv4
+         gG0SZA+MCS4+S9BUbYwrwkmxpLTwcHxPEFsiDvm2y+J7tq11fuqnhNTRXwTcFdp4yBzN
+         Zma7AoGIaa6dRiDTHo2Cyl6mjZ7joQ4w9adYXCnqQpHp0utx+VIx6UgdsAiDIKInCBy2
+         mLXXKSDXrSMVJWzvRKnTemDLx4ZxjXni0vYJHLD0BhhUEE3GAznMzeCTzQiYD0nm/Q12
+         wXADVWeeBofQ9oT1NY08/KsUDmF3z+rJLAPFpTZL6sT/UYUXuopx+qbCGz1EuXUn9qoO
+         2D9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766065623; x=1766670423;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=sFz3H8rawJrANqDbGi8NBscNDtr2AWnI+JYNzOInpoY=;
+        b=a6KmkAURhmU1q7efpNSRBSwghbF0iPaETS/h+NmPYjOn97oiJJqRZZdHS835zOy5bS
+         IAJ93kkUZDmSCxvjrSJ5EEXV0I0pvfAAU59YFNKZAC7v1oL1jjaqVQwdRUaspdgGkrDw
+         oQ7wjgNq6yAZaK7InN1CmBbzfDrOjjFan7+BN2V0tUWckyT27Pz6v0jyNlSJNKM9d8OJ
+         1yC3rfNlKSMnBEwPHhaPtYgD2Me4V5vXfUVH2fpYCxWWJoMMsErMxFYLNDBSbDYE43wj
+         gCkBE2jupd895J1d92PT/sOGP4bvjYagnDE6mxAiRzlMs5p+V3GTHCbbJLFapDLsndeh
+         /7ng==
+X-Gm-Message-State: AOJu0YzCNH2i58+IqG278n4bDgAI/VBI0GzwzormpoGXgbST38+3+W9k
+	olo1qKX+9LlVGQu+X3YdZ2J3WnfzeQ1/wDrh7cFr5P4IEacqUShpKCDQIRti8Q==
+X-Gm-Gg: AY/fxX56zxiN6+CeGuuS4hsCqLZDvdZieFa6Q/iaCx0q4AMvdAf5yyb3o+DhbYa9Ok1
+	bY99cYBlPvJ0ic9DFHlIr/bqUro2XwfadT6k3yL3NEMftpCc7l4yPkmS4ospoNKzbI6XIHNzoOf
+	va4noAv/3ycz5TLBzgRau06EL0sNtLNfJMKkJknol2jZshn3IBjnPDdZrwliGihO3GKbczU1cNA
+	Fl2AkJmbtGNts69Huwshkn81M1ZJIY7ocaF0g/PpuKiQt3Tfy4ajDuDiLOJE2SS2EPCVHyPsXMp
+	tbnqOQcdPFsDOCBA0r+W3HxWW18rPJOltkcI6muiVJK9pEKfi1CCcGUyil2VdLpA3r1OH6SJ6LY
+	aTp3HrAwNqGcAcB4dpo7+ylm9srTWu/dtStCWjK5bNqG5SA2YHINM6Z7KjcmOapiTuOnnhAxzFk
+	K6l8EXB8Iw
+X-Google-Smtp-Source: AGHT+IFMeC6aD6hgyOqYiZlBHjEPSoBk/RF5P2aW6qJvuaQkYVIcRTHyy+723GrjcgjL/JJDtFUliA==
+X-Received: by 2002:a05:6000:2909:b0:401:5ad1:682 with SMTP id ffacd0b85a97d-42fb44b764dmr21366916f8f.14.1766065622483;
+        Thu, 18 Dec 2025 05:47:02 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be3a3ec73sm12679035e9.5.2025.12.18.04.34.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324493fda5sm5272239f8f.17.2025.12.18.05.47.01
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Dec 2025 04:34:46 -0800 (PST)
+        Thu, 18 Dec 2025 05:47:02 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][kirkstone][PATCH 1/4] xfdesktop: upgrade 4.16.0 -> 4.16.1
-Date: Thu, 18 Dec 2025 13:34:43 +0100
-Message-ID: <20251218123446.3489941-1-skandigraun@gmail.com>
+Subject: [meta-webserver][kirkstone][PATCH 3/4] phpmyadmin: upgrade 5.1.3 -> 5.1.4
+Date: Thu, 18 Dec 2025 14:46:59 +0100
+Message-ID: <20251218134700.3509105-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251218134700.3509105-1-skandigraun@gmail.com>
+References: <20251218134700.3509105-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Dec 2025 12:34:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122760
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Dec 2025 13:47:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122766
+
+Last bugfix release of the 5.1.x series.
 
 Changelog:
-- Resolve deadlock on background change
-- Allocate memory after error processing
-- Remove unused function call
-- autoconf: Remove AC_HEADER_STDC
-- Do not delete property not set
-- Set a pixmap XID, not the XID of the root window
-- Fix next background
-- build: Fix intltool lock file problem during make distcheck
-- Increase opacity of xfce-verticals bg
-- Fix Applications Menu memory leak
-- Fix gettext extraction from settings/xfce-backdrop-settings.desktop.in.in
-- Translation Updates
-
-https://github.com/xfce-mirror/xfdesktop/releases/tag/xfdesktop-4.16.1
+- Fixed sorting the database list with "statistics" enabled on "Data" column creates a PHP type error
+- Fix for invalid cache when losing access to config storage after it being cached
+- Fix session cookie not respecting the CookieSameSite configuration directive in PHP 7.2
+- Fix create index form accepting too many columns
+- Disable editing to system schemas
+- Add better error handling when IndexedDB is not working
+- Fixed incorrect escaping of special MySQL characters on some pages
+- Fix GIS visualization with an edited query
+- Remove the use of the deprecated `strftime` function in OpenDocument exports
+- Enable tabindex recompute on preview button while insert new rows
+- Fix invalid SQL generated when PRIMARY/UNIQUE key contains a POINT column
+- Fix setup's CSS not loading when the URL doesn't have a trailing slash
+- Remove jQuery SVG JavaScript dependency
+- Fix column visibility dropdown when the column name is too long
+- Fix issue when exporting using Firefox or Safari on PHP 8.1.4
+- Update JavaScript dependencies
+- Fix case where errors were thrown when browsing a table
+- Fix UI issue when user accounts page has the initials navigation bar
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../xfdesktop/{xfdesktop_4.16.0.bb => xfdesktop_4.16.1.bb}      | 2 +-
+ .../phpmyadmin/{phpmyadmin_5.1.3.bb => phpmyadmin_5.1.4.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.16.0.bb => xfdesktop_4.16.1.bb} (82%)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_5.1.3.bb => phpmyadmin_5.1.4.bb} (94%)
 
-diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.1.bb
-similarity index 82%
-rename from meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb
-rename to meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.1.bb
-index 4a1ece8bef..72ce890473 100644
---- a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.16.1.bb
-@@ -8,7 +8,7 @@ inherit xfce features_check
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.4.bb
+similarity index 94%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.4.bb
+index 85a18dfd1e..0b855735cb 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.3.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_5.1.4.bb
+@@ -14,7 +14,7 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://CVE-2025-24530.patch \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[sha256sum] = "934ba5affecff21e62d9fac1dd50c50cd94b3a807fefa5f5bff59f3d6f155bae"
-+SRC_URI[sha256sum] = "e31dcb0008ae55e99e42128a4694002203305287434a8ee0f9937e7298a4bd11"
- 
- PACKAGECONFIG ??= "notify"
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+-SRC_URI[sha256sum] = "c562feddc0f8ff5e69629113f273a0d024a65fb928c48e89ce614744d478296f"
++SRC_URI[sha256sum] = "3230cf0e004b6284c70e0cb26064a8666b271749ef54236d035104a972822999"
+  
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
 
