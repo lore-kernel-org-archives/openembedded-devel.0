@@ -2,133 +2,171 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19869E67481
-	for <webhook@archiver.kernel.org>; Sat, 20 Dec 2025 19:38:19 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.45857.1766259498233397694
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B473E67483
+	for <webhook@archiver.kernel.org>; Sat, 20 Dec 2025 19:40:59 +0000 (UTC)
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.45908.1766259657766556049
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Dec 2025 11:38:18 -0800
+ Sat, 20 Dec 2025 11:40:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dyPrOryD;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6446704997cso2322512d50.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Dec 2025 11:38:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=D6FieaM2;
+ spf=pass (domain: gmail.com, ip: 74.125.224.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-64472c71fc0so2403941d50.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Dec 2025 11:40:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766259497; x=1766864297; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766259657; x=1766864457; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=/Vb4zE4fHrLx7+BL9qIusbwyK3VGI7tt8Z/ONHRGSHo=;
-        b=dyPrOryDM+G93p8f9Wt9gAQjkaPx5ILkMWvYWr8+003h9GRcSei2RfWozsoCyD+zzJ
-         Vdnth7B09qg15F+ZCAGxIiYNHRK4cxB2L5kZ1gFD4ylM/ArVmQvxsDhVRmtNx4go6pvB
-         munSq/sZ9MOXG0Mk6AbY/XaB7R5qPY8deRlcy+znqUXzAkqdAv+PMUPdTTgyyJTSK7Gn
-         c0eTBwRlb2PoZTQI7KCAz/yWdB3ztKk1yLy7h1ynNEKyXUGhtjIaGCJMM/etDlOcmdrC
-         n1Q1YZPRKlbV0yilfBDmkHuXY00T/DEPXf0OlXmtkTAZehjqNJhX6ytk8NHAugcSnDtA
-         43yg==
+        bh=ZoB3h0xC6xGTRA/MxL/0zFekuGJDKKh9Imw5ER5ocDg=;
+        b=D6FieaM2XCbcpBc9wuzMCYfloxFZPYFL4iuqhJ3fDBpiS0k2QAIZ5XjnxwmCdfXfMj
+         29XTyxKzZo3EYeC5T1wS2sWknO+6ptpLKaU18y8eoC1F/PFnAXZLGLkA5BGBdSi645GT
+         MQgKNQlFoT8tlBf6zbZEr4enO01Kr18Yd6LIVj8CWHrhGGtQsNUUBUL9WQvjivGztzgf
+         dzKU39oss3Nao2fNsckJiO2OoKiGTzZotDjKbyDMXhCev7pxagCoWOkTghq9qOje/pMZ
+         jHmycgcYtT21ZltlnLwVFxH9EvdJvNOsBst8Q1Q3kf3wOzz4RohhC+LBLWbouq6W9uVn
+         mrWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766259497; x=1766864297;
+        d=1e100.net; s=20230601; t=1766259657; x=1766864457;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/Vb4zE4fHrLx7+BL9qIusbwyK3VGI7tt8Z/ONHRGSHo=;
-        b=OqGFR7x3U5eLgCFaT1gq8tGjm2nht0J0N4oK5qvE00DvypAN352FGQIaAD/cATfe2o
-         bHYllNFveWjl0F5e9ToU7mm72ulNz5kQSjI2n0O40cRbrDONq3nMRe14zmVQ4Rv9u3F4
-         jPTkmUanGvoxlIPUbXZ8xu6/wxlMCLoof2mhyZTJnfwKIUo+xG3MdmstA/0dcT+8PJr0
-         9r6lMSsBxSM9NWhoNItywpm4Qt6Lg0y1AOgHx7M5cvbnoa7mjAxuL1rvMkF0o3cxRnyC
-         8i8IgDKIyJPOHl+WuRggm/CJzn4pkMcAuM+NKXHyvTZGGPNA05zg+IjcXnufR/FH83GH
-         Aqxw==
-X-Gm-Message-State: AOJu0YzPfQ+0KL3ZGaokmBxJv5e77Sgx+N9ieHFIV0rvTc2FV9LIXa4j
-	xMCDKYTxOgoRIundF5vilEn4fETZKJDtGMNJzU/CvG73g9wMqvgZw/WoxXn4h5hQhtRXgtgk87T
-	16LTn1CuRN9ih80Bjz9EN7BudZ8mG4P7dSXF5dog=
-X-Gm-Gg: AY/fxX7hHQYqoGVN1EO98mtfCStAHDu1Hcf6AzjTeEJ2Ts/cH9P8msiVAlWgHQgqDql
-	fqJIW5BK2NzT8HKD080h+g64ghimwIJmAwcuWY6DUTjm4bLHSsM8NFofubCrImC/lBmtGrYCXXa
-	WctafCTR089BpeshtYwK4anlKN/zgfSNZbCZUDic+LrxrqBlUsW8OLBx936fWsCKvEmbPCImo9T
-	BTCfdKzCWVFupdIA1F6XBmOFkAr6zoEMJbXl0jZUkYJ8YKvEQqjP2PjCqabudxhyiNiw6Ggzzza
-	wWAg3xBNIFQlbdfJRZeSMrd4uP8M3BiQhb+zj+jqevQ849lHWQHuxrb64sWY5DlTzjTY6oVvqKu
-	aA/n4SVaNJTAYHNkZe9aedWqyoYVE40Vuuf+tucCfJyc77A==
-X-Google-Smtp-Source: AGHT+IGJgLH/z+GbxwcJRTHkKMTvPJrkkhQuWEkK5azXhjoPOmogYyiIWIfYrf432g7FMxO50LTetQSAUsA+DFrGHgU=
-X-Received: by 2002:a05:690e:11c7:b0:63f:9448:e81 with SMTP id
- 956f58d0204a3-6466a85b83amr5239818d50.39.1766259497210; Sat, 20 Dec 2025
- 11:38:17 -0800 (PST)
+        bh=ZoB3h0xC6xGTRA/MxL/0zFekuGJDKKh9Imw5ER5ocDg=;
+        b=c3H4ILhUv5lT0aL+BGZhCNnVizPyYipeAxTk5lK7JxVkcyO2kW/+UtjaKV/3N3HaHL
+         blfjDSY1vdEjJ4AqJUo7P0CJt127zuscSFKsBzSLlpvTj1LAHX6vS9S9WEvxnoVycdX2
+         HaYfxgkJa1RD3ImaJqMpURXgWSIJHClAFY2BPjRHvinwPR6KZnYuC80QeOWFdlGa2fse
+         0nvQ3mh/UZHTBwxUyUSBK/60baSMD7QNvUCwr8khtCe8ZlKHk+sZnVouLofP2+iUCwmj
+         JarHTp8lfbeu6SoFwoflYgvxRw4WvLCX2Z1D0RDcw0QLv80g/wSlHtBsl3GsAYhNKwiP
+         EImQ==
+X-Gm-Message-State: AOJu0Yx7PA3iYWpsaqQJCqsHg9m1av1jyqzARHdq9dDocDiT/HYxRb9n
+	ClCJqieSW8Kw3BltCtFJJ8fsFakRRrqm3x5LblpSmgdU341ER1+fEnWHF18Zt5ASY1MCcjDfFY5
+	cGxu3n6HFSyQ6ENfO9epingXxjSWGJkw=
+X-Gm-Gg: AY/fxX6b1jd+APuLKQ4v1XepK08nNAxp+sHaTpEjXwLB7itMOADK1kBP88FFDKieJrF
+	Cz1F/dyhYJNOzAEb/AsMjElundADiQME2bgbEjiTOJ9Cyyscu5KYCPMdcTrFo1ASqa+NT17b7lE
+	Ce9eKz2xjNy1j+Z73DubiqZB29nJeDp8CBbeBjIZFJB5P2TgnaNw90NGpOxSr4p9mhnK7Or5Qm9
+	y9XkdQ3VGhX5SLd41M+MctrUJJVw6QY7IFzA5PprouQFiNQiLZ8/m1IL94VMJfcVbadqTefacxs
+	BRgrlIlEptIR+RVC3ex2slra5K2DwEIvGIqb+0KMMw6KmzZzQf6769N05hkuNw466errMPzyBox
+	qpGXD92VJyCwGNvX3e3B0mSexIoHH7nykdoyqOD/zOesleFDKdk43FgQo
+X-Google-Smtp-Source: AGHT+IG5utR7eXXq5v2SS3+qfxtwubMZUtXzgbzLZGnnDKbsY/w7GciK6Q0ZJKh2/Wh+xw9oVLXog7EaX69YaTQ9swM=
+X-Received: by 2002:a53:e313:0:b0:640:d255:2d6f with SMTP id
+ 956f58d0204a3-6466a84535amr4208321d50.34.1766259656694; Sat, 20 Dec 2025
+ 11:40:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20251218090346.735-1-wangmy@fujitsu.com> <20251218090346.735-2-wangmy@fujitsu.com>
-In-Reply-To: <20251218090346.735-2-wangmy@fujitsu.com>
+References: <20251216135054.2467586-1-skandigraun@gmail.com>
+In-Reply-To: <20251216135054.2467586-1-skandigraun@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 20 Dec 2025 11:37:51 -0800
-X-Gm-Features: AQt7F2rR7m9UJ3ZONbgAPystBIriI-QfoqcvKGcPghOBGTTxtgomk9jaDz5uZQU
-Message-ID: <CAMKF1srW4LjWMJB3dPzDBQ0+FDPXrbmCrLEiYU+jNa2ENw_4oA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 02/20] fluentbit: upgrade 4.2.0 -> 4.2.1
-To: wangmy@fujitsu.com
+Date: Sat, 20 Dec 2025 11:40:30 -0800
+X-Gm-Features: AQt7F2rYUp64b6M6UHy58zTDjikIsfTItCM6kxGpnOt8ANjV15QVlMUC2Vo9TJA
+Message-ID: <CAMKF1soaJ_AiY_OZ8tg8LVeXPEAgjgTiQgtjP6De8ngFSPLxkg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] dovecot: upgrade 2.4.1-4 -> 2.4.2
+To: skandigraun@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e9986006466755a8"
+Content-Type: multipart/alternative; boundary="0000000000006b20e00646675f3a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 20 Dec 2025 19:38:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122777
+ <openembedded-devel@lists.openembedded.org>; Sat, 20 Dec 2025 19:40:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122778
 
---000000000000e9986006466755a8
+--0000000000006b20e00646675f3a
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 18, 2025 at 1:04=E2=80=AFAM wangmy via lists.openembedded.org <=
-wangmy=3D
-fujitsu.com@lists.openembedded.org> wrote:
+fails to build with latest master branch of oe-core
 
-> From: Wang Mingyu <wangmy@fujitsu.com>
+https://termbin.com/z4a9
+
+
+
+On Tue, Dec 16, 2025 at 5:50=E2=80=AFAM Gyorgy Sarvari via lists.openembedd=
+ed.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+
+> Contains fix for CVE-2025-30189
 >
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> Changelog: https://github.com/dovecot/core/releases/tag/2.4.2
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 > ---
->  .../fluentbit/{fluentbit_4.2.0.bb =3D> fluentbit_4.2.1.bb}      | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-extended/fluentbit/{fluentbit_4.2.0.bb =3D>
-> fluentbit_4.2.1.bb} (98%)
+>  .../dovecot/fix-musl-compilation.patch        | 28 -------------------
+>  .../{dovecot_2.4.1-4.bb =3D> dovecot_2.4.2.bb}  |  3 +-
+>  2 files changed, 1 insertion(+), 30 deletions(-)
+>  delete mode 100644
+> meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.patc=
+h
+>  rename meta-networking/recipes-support/dovecot/{dovecot_2.4.1-4.bb =3D>
+> dovecot_2.4.2.bb} (96%)
 >
-> diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-> b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb
-> similarity index 98%
-> rename from meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-> rename to meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb
-> index 2c9b874e50..4308cb3d89 100644
-> --- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.0.bb
-> +++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb
-> @@ -17,9 +17,9 @@ DEPENDS =3D "\
->  "
->  DEPENDS:append:libc-musl =3D " fts"
+> diff --git
+> a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.pa=
+tch
+> b/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.pa=
+tch
+> deleted file mode 100644
+> index a09165e588..0000000000
+> ---
+> a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.pa=
+tch
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -From 951e371b6e44e2051de83c9fe73c778858fa73a1 Mon Sep 17 00:00:00 2001
+> -From: Fabian Groffen <grobian@gentoo.org>
+> -Date: Sat, 31 May 2025 10:49:28 +0200
+> -Subject: [PATCH] lib: cpu-count - fix compilation using musl
+> -
+> -The macros, types and symbols CPU_* and cpuset_t are not exposed in
+> -musl's sched.h unless _GNU_SOURCE is set.
+> -
+> -Upstream-Status: Backport [
+> https://github.com/dovecot/core/commit/951e371b6e44e2051de83c9fe73c778858=
+fa73a1
+> ]
+> -
+> -Signed-off-by: Fabian Groffen <grobian@gentoo.org>
+> ----
+> - src/lib/cpu-count.c | 2 ++
+> - 1 file changed, 2 insertions(+)
+> -
+> -diff --git a/src/lib/cpu-count.c b/src/lib/cpu-count.c
+> -index 3eb38fa47d8..a3e80e6c157 100644
+> ---- a/src/lib/cpu-count.c
+> -+++ b/src/lib/cpu-count.c
+> -@@ -3,6 +3,8 @@
+> -
+> - #ifdef HAVE_SCHED_H
+> - #  define __USE_GNU
+> -+/* _GNU_SOURCE: for musl's sched.h to expose cpuset/CPU_* */
+> -+#  define _GNU_SOURCE
+> - #  include <sched.h>
+> - #  ifdef HAVE_SYS_CPUSET_H
+> - #    include <sys/cpuset.h>
+> diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
+> b/meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+> similarity index 96%
+> rename from meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
+> rename to meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+> index 40cf991ae1..4632d9574f 100644
+> --- a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
+> +++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+> @@ -14,9 +14,8 @@ SRC_URI =3D "
+> http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
+>             file://dovecot.service \
+>             file://dovecot.socket \
 >
-> -SRCREV =3D "6bc014390c5485b96521c56b98369b44b9faa08b"
-> +SRCREV =3D "c06c12449f3d52a8688fb5ac8bac534c5fd1e6e0"
->  SRC_URI =3D "\
-> -    git://github.com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dht=
-tps \
-> +    git://
-> github.com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dhttps;tag=3Dv=
-${PV}
-> <http://github.com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dhttps=
-;tag=3Dv$%7BPV%7D>
-> \
+> file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
+> -           file://fix-musl-compilation.patch \
+>             "
+> -SRC_URI[sha256sum] =3D
+> "fb188603f419ed7aaa07794a8692098c3ec2660bb9c67d0efe24948cbb32ae00"
+> +SRC_URI[sha256sum] =3D
+> "2cd62e4d22b9fc1c80bd38649739950f0dbda34fbc3e62624fb6842264e93c6e"
 >
-
-Tag and SRCREV do not match v4.2.1 corresponds to
-https://github.com/fluent/fluent-bit/commit/909b1a917b4f46c40657a73821541fa=
-03581a823
-
-Please fix, test (bitbake -ccleanall <recipe> ) and resent.
-
-
->
->  file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
->
->  file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
->      file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
-> --
-> 2.43.0
->
+>  DEPENDS =3D "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
+>  CFLAGS +=3D "-I${STAGING_INCDIR}/tirpc"
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#122736):
-> https://lists.openembedded.org/g/openembedded-devel/message/122736
-> Mute This Topic: https://lists.openembedded.org/mt/116839774/1997914
+> View/Reply Online (#122696):
+> https://lists.openembedded.org/g/openembedded-devel/message/122696
+> Mute This Topic: https://lists.openembedded.org/mt/116809504/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -136,86 +174,126 @@ Please fix, test (bitbake -ccleanall <recipe> ) and resent.
 >
 >
 
---000000000000e9986006466755a8
+--0000000000006b20e00646675f3a
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Dec 18,=
- 2025 at 1:04=E2=80=AFAM wangmy via <a href=3D"http://lists.openembedded.or=
-g">lists.openembedded.org</a> &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@li=
-sts.openembedded.org">fujitsu.com@lists.openembedded.org</a>&gt; wrote:<br>=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
-order-left:1px solid rgb(204,204,204);padding-left:1ex">From: Wang Mingyu &=
-lt;<a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.c=
-om</a>&gt;<br>
+<div dir=3D"ltr"><div>fails to build with latest=C2=A0master branch of oe-c=
+ore</div><div><br></div><div><a href=3D"https://termbin.com/z4a9">https://t=
+ermbin.com/z4a9</a></div><div><br></div><div><br></div><br><div class=3D"gm=
+ail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On T=
+ue, Dec 16, 2025 at 5:50=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://li=
+sts.openembedded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=
+=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.o=
+rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">Contains fix for CVE-2025-30189<br>
 <br>
-Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
-=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+Changelog: <a href=3D"https://github.com/dovecot/core/releases/tag/2.4.2" r=
+el=3D"noreferrer" target=3D"_blank">https://github.com/dovecot/core/release=
+s/tag/2.4.2</a><br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
 ---<br>
-=C2=A0.../fluentbit/{<a href=3D"http://fluentbit_4.2.0.bb" rel=3D"noreferre=
-r" target=3D"_blank">fluentbit_4.2.0.bb</a> =3D&gt; <a href=3D"http://fluen=
-tbit_4.2.1.bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.1.bb</a>}=
-=C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
-=C2=A0rename meta-oe/recipes-extended/fluentbit/{<a href=3D"http://fluentbi=
-t_4.2.0.bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.0.bb</a> =3D=
-&gt; <a href=3D"http://fluentbit_4.2.1.bb" rel=3D"noreferrer" target=3D"_bl=
-ank">fluentbit_4.2.1.bb</a>} (98%)<br>
+=C2=A0.../dovecot/fix-musl-compilation.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2=
+8 -------------------<br>
+=C2=A0.../{<a href=3D"http://dovecot_2.4.1-4.bb" rel=3D"noreferrer" target=
+=3D"_blank">dovecot_2.4.1-4.bb</a> =3D&gt; <a href=3D"http://dovecot_2.4.2.=
+bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.2.bb</a>}=C2=A0 |=C2=
+=A0 3 +-<br>
+=C2=A02 files changed, 1 insertion(+), 30 deletions(-)<br>
+=C2=A0delete mode 100644 meta-networking/recipes-support/dovecot/dovecot/fi=
+x-musl-compilation.patch<br>
+=C2=A0rename meta-networking/recipes-support/dovecot/{<a href=3D"http://dov=
+ecot_2.4.1-4.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.1-4.bb</a=
+> =3D&gt; <a href=3D"http://dovecot_2.4.2.bb" rel=3D"noreferrer" target=3D"=
+_blank">dovecot_2.4.2.bb</a>} (96%)<br>
 <br>
-diff --git a/meta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit=
-_4.2.0.bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.0.bb</a> b/me=
-ta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit_4.2.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">fluentbit_4.2.1.bb</a><br>
-similarity index 98%<br>
-rename from meta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit_=
-4.2.0.bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.0.bb</a><br>
-rename to meta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit_4.=
-2.1.bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.1.bb</a><br>
-index 2c9b874e50..4308cb3d89 100644<br>
---- a/meta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit_4.2.0.=
-bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.0.bb</a><br>
-+++ b/meta-oe/recipes-extended/fluentbit/<a href=3D"http://fluentbit_4.2.1.=
-bb" rel=3D"noreferrer" target=3D"_blank">fluentbit_4.2.1.bb</a><br>
-@@ -17,9 +17,9 @@ DEPENDS =3D &quot;\<br>
-=C2=A0&quot;<br>
-=C2=A0DEPENDS:append:libc-musl =3D &quot; fts&quot;<br>
+diff --git a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compi=
+lation.patch b/meta-networking/recipes-support/dovecot/dovecot/fix-musl-com=
+pilation.patch<br>
+deleted file mode 100644<br>
+index a09165e588..0000000000<br>
+--- a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.=
+patch<br>
++++ /dev/null<br>
+@@ -1,28 +0,0 @@<br>
+-From 951e371b6e44e2051de83c9fe73c778858fa73a1 Mon Sep 17 00:00:00 2001<br>
+-From: Fabian Groffen &lt;<a href=3D"mailto:grobian@gentoo.org" target=3D"_=
+blank">grobian@gentoo.org</a>&gt;<br>
+-Date: Sat, 31 May 2025 10:49:28 +0200<br>
+-Subject: [PATCH] lib: cpu-count - fix compilation using musl<br>
+-<br>
+-The macros, types and symbols CPU_* and cpuset_t are not exposed in<br>
+-musl&#39;s sched.h unless _GNU_SOURCE is set.<br>
+-<br>
+-Upstream-Status: Backport [<a href=3D"https://github.com/dovecot/core/comm=
+it/951e371b6e44e2051de83c9fe73c778858fa73a1" rel=3D"noreferrer" target=3D"_=
+blank">https://github.com/dovecot/core/commit/951e371b6e44e2051de83c9fe73c7=
+78858fa73a1</a>]<br>
+-<br>
+-Signed-off-by: Fabian Groffen &lt;<a href=3D"mailto:grobian@gentoo.org" ta=
+rget=3D"_blank">grobian@gentoo.org</a>&gt;<br>
+----<br>
+- src/lib/cpu-count.c | 2 ++<br>
+- 1 file changed, 2 insertions(+)<br>
+-<br>
+-diff --git a/src/lib/cpu-count.c b/src/lib/cpu-count.c<br>
+-index 3eb38fa47d8..a3e80e6c157 100644<br>
+---- a/src/lib/cpu-count.c<br>
+-+++ b/src/lib/cpu-count.c<br>
+-@@ -3,6 +3,8 @@<br>
+- <br>
+- #ifdef HAVE_SCHED_H<br>
+- #=C2=A0 define __USE_GNU<br>
+-+/* _GNU_SOURCE: for musl&#39;s sched.h to expose cpuset/CPU_* */<br>
+-+#=C2=A0 define _GNU_SOURCE<br>
+- #=C2=A0 include &lt;sched.h&gt;<br>
+- #=C2=A0 ifdef HAVE_SYS_CPUSET_H<br>
+- #=C2=A0 =C2=A0 include &lt;sys/cpuset.h&gt;<br>
+diff --git a/meta-networking/recipes-support/dovecot/<a href=3D"http://dove=
+cot_2.4.1-4.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.1-4.bb</a>=
+ b/meta-networking/recipes-support/dovecot/<a href=3D"http://dovecot_2.4.2.=
+bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.2.bb</a><br>
+similarity index 96%<br>
+rename from meta-networking/recipes-support/dovecot/<a href=3D"http://dovec=
+ot_2.4.1-4.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.1-4.bb</a><=
+br>
+rename to meta-networking/recipes-support/dovecot/<a href=3D"http://dovecot=
+_2.4.2.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.2.bb</a><br>
+index 40cf991ae1..4632d9574f 100644<br>
+--- a/meta-networking/recipes-support/dovecot/<a href=3D"http://dovecot_2.4=
+.1-4.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.1-4.bb</a><br>
++++ b/meta-networking/recipes-support/dovecot/<a href=3D"http://dovecot_2.4=
+.2.bb" rel=3D"noreferrer" target=3D"_blank">dovecot_2.4.2.bb</a><br>
+@@ -14,9 +14,8 @@ SRC_URI =3D &quot;<a href=3D"http://dovecot.org/releases/=
+2.4/dovecot-$%7BPV%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">http://d=
+ovecot.org/releases/2.4/dovecot-${PV}.tar.gz</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://dovecot.service \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://dovecot.socket \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-m4-Check-for-libunwin=
+d-instead-of-libunwind-generic.patch \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://fix-musl-compilation.patch=
+ \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+-SRC_URI[sha256sum] =3D &quot;fb188603f419ed7aaa07794a8692098c3ec2660bb9c67=
+d0efe24948cbb32ae00&quot;<br>
++SRC_URI[sha256sum] =3D &quot;2cd62e4d22b9fc1c80bd38649739950f0dbda34fbc3e6=
+2624fb6842264e93c6e&quot;<br>
 <br>
--SRCREV =3D &quot;6bc014390c5485b96521c56b98369b44b9faa08b&quot;<br>
-+SRCREV =3D &quot;c06c12449f3d52a8688fb5ac8bac534c5fd1e6e0&quot;<br>
-=C2=A0SRC_URI =3D &quot;\<br>
--=C2=A0 =C2=A0 git://<a href=3D"http://github.com/fluent/fluent-bit.git;bra=
-nch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">github.=
-com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dhttps</a> \<br>
-+=C2=A0 =C2=A0 git://<a href=3D"http://github.com/fluent/fluent-bit.git;bra=
-nch=3Dmaster;protocol=3Dhttps;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=
-=3D"_blank">github.com/fluent/fluent-bit.git;branch=3Dmaster;protocol=3Dhtt=
-ps;tag=3Dv${PV}</a> \<br></blockquote><div><br></div><div>Tag and SRCREV do=
- not match v4.2.1 corresponds to</div><div><a href=3D"https://github.com/fl=
-uent/fluent-bit/commit/909b1a917b4f46c40657a73821541fa03581a823">https://gi=
-thub.com/fluent/fluent-bit/commit/909b1a917b4f46c40657a73821541fa03581a823<=
-/a></div><div><br></div><div>Please fix, test (bitbake -ccleanall=C2=A0&lt;=
-recipe&gt; ) and resent.</div><div>=C2=A0</div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,2=
-04);padding-left:1ex">
-=C2=A0 =C2=A0 =C2=A0file://0001-lib-Do-not-use-private-makefile-targets-in-=
-CMakelist.patch \<br>
-=C2=A0 =C2=A0 =C2=A0file://0002-flb_info.h.in-Do-not-hardcode-compilation-d=
-irectorie.patch \<br>
-=C2=A0 =C2=A0 =C2=A0file://0003-CMakeLists.txt-Revise-init-manager-deductio=
-n.patch \<br>
--- <br>
-2.43.0<br>
-<br>
+=C2=A0DEPENDS =3D &quot;openssl xz zlib bzip2 libcap icu libtirpc bison-nat=
+ive&quot;<br>
+=C2=A0CFLAGS +=3D &quot;-I${STAGING_INCDIR}/tirpc&quot;<br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#122736): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/122736" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/122736</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116839774/199=
+View/Reply Online (#122696): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122696" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122696</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116809504/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116839774/1997914</a><br>
+t/116809504/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -227,5 +305,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div></div>
 
---000000000000e9986006466755a8--
+--0000000000006b20e00646675f3a--
 
