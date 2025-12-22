@@ -1,155 +1,150 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2697BE677F6
-	for <webhook@archiver.kernel.org>; Mon, 22 Dec 2025 16:49:23 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.83903.1766422159587979471
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50202E67813
+	for <webhook@archiver.kernel.org>; Mon, 22 Dec 2025 18:54:44 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.86336.1766429682390966612
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Dec 2025 08:49:19 -0800
+ Mon, 22 Dec 2025 10:54:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FpXLgBFR;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so41990615e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 08:49:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GpNsca5P;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-477a2ab455fso42580095e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 10:54:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766422158; x=1767026958; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CSJw4M+zl8YFDhj+6tezgw4APfLJzAZiHBAQhqL7dO4=;
-        b=FpXLgBFRb7sSotpB0yCeKJJhGERaMgREh77BOVBaQaewTrqAAj0QxB2B3F1pfwxl7V
-         U/l0Z6FvdJkslCyBw7iM9CCjbBoy+z1tsj1ePMSfxAmlLwrcI+EaQg4jlr3hqH5JUAWh
-         5+IPBGmFMrLXuJ5jWZP3FAp75lvSzcMg0K8TfxmUPnEQ5hpRYDrUW4f6SPMM+tN/6K4T
-         Vt/sjOBCzwOw62NkY7HQBPgpAC16jbj7jozmLhz/wXAujZzyDyh4gyw6ZTQ5o0SlCr/9
-         bZ/NR2RlSfl+jYmvJzXJ7xM3k6/3PT+mpTtMthndM/NNHCaVGuOzqlwp1ywSac4f5ZiX
-         C2/A==
+        d=gmail.com; s=20230601; t=1766429680; x=1767034480; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nR2RslVNkcmrHq1h2Bm/ZS/D1gGW5BJDK9HGRQHdkT4=;
+        b=GpNsca5PpCM6Y/JNNemRbjo33FcOIe5Wky2WccglWLbQrzljZnfJ4rC4NGeUOnq6vV
+         0NLOfFPAMJbClgvYym8aEOofxGuWT1JmxqO24hzxXTmrdAS6DIuHoNYjypX6Y5nbMM5P
+         KtWH6XsR0f5SfmvzoHmxVCvtrY4ueysIaXnz+PH505i7NvS2RYqIZBtY3YVY92CkQDhs
+         0zOtPwXEjW78gT/7vlb0LtKtNVlrdus0mTa1cBxVNotsnLeBRDQ/9SKQtETIY1L9meGb
+         4TmPUF7HWX89CVNJkSDC/n36irnWTmRkR6EU/YoLDa0uZk9ACOYtEis+gJOqgJGRiRH3
+         35PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766422158; x=1767026958;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CSJw4M+zl8YFDhj+6tezgw4APfLJzAZiHBAQhqL7dO4=;
-        b=BIBFjd595ViLtBIoxSMPx/AbT18d4Sbe+DjpfTeWhxkzI96cFdZxXdudxpKdxYHpdB
-         PX6ZPysZGT9ve30dSnhGClqJhV2dPWt4o0z/CUpqfDk5MUzXQtUHdYvKz/dabxrjQghh
-         J3WHbm5FhxSBtII0MSo7zQGYd15mRBsSZa54GQavjNsg9mBSojBK7JbDBRxWr9PSrI7Q
-         g9jOqtIAwoQzEbbzDVswJ8eiPe28HGw659OCrq3VJ4Cyxt27hsVnaAYg7Ewe5ZRcCYTv
-         CEd3Fobfe4HoWhZfTyT2OdCHob2Fs4lfcYW4Th2pECEh9W2ss3eSKIIeNxVLX7vYr9m5
-         SSiA==
-X-Gm-Message-State: AOJu0YyficTWYe+vWikjIseG8/tQ3MEnfdx/t4/gwAbAlL83nR1TPLFf
-	SNRbb0mfk4shQPSCrWmZEOmS/qc7tAZOWfy56FID/MaVhl4XD1TdTqb8zGPr1Q==
-X-Gm-Gg: AY/fxX6eJiPkwSQX2gRejkvjus3I4FBn7e9XIiODTrGC8+ZHBr1hTC6VvYFLO3qpVl+
-	u7nc4ZJZA2/XXSlH8dWzwYue/gMYefswrMX3ImObQX8FbkWkEVGEUQRaywvrL5fzeCGC9EojdDz
-	tPGH9o+yyAyaPbOor8k3ue2irMilkJ90yIj+b9uNiUiCjkly3P2nHMFgSIyTI3TnB+JzlD1nYdW
-	5eVhI5zp4r4rpZSY2Et2y7ox1LQRZfdM4qd9MfGWfpyPPekccfHCqJ/H6AQzIdbu3KAM9tLUVC3
-	oqA818odfzgHf35K5hBAOzOPjkZRbgNopY62pNb0ygPiOnOhss01N4AT1CqSCZKSd88nwMB+B4J
-	QdEE504zeXhgKR7FqNIMFsZFyUcz/SSX0gRFjvfjc5Iq9YRIQdp/qEdF/XUvK80cBDG40gFEm9i
-	wZ2zGlp6U9
-X-Google-Smtp-Source: AGHT+IHemPBgsXUye3avjhNocwVg7f12BRlHfrE2cszVJdgOV4Q+dI2YpSospoRmOmOhtoRDmcwx0w==
-X-Received: by 2002:a05:600c:5246:b0:477:54cd:2030 with SMTP id 5b1f17b1804b1-47d1957f707mr131978225e9.21.1766422157878;
-        Mon, 22 Dec 2025 08:49:17 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be272eaf8sm250378625e9.5.2025.12.22.08.49.16
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1766429680; x=1767034480;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nR2RslVNkcmrHq1h2Bm/ZS/D1gGW5BJDK9HGRQHdkT4=;
+        b=RVbiLKDhKT2jn3nyW/BgRAQ2woqJ7j6KnWAlrhqvKYXXus6U4tcG4orjRI8nvk/8WZ
+         Mkx/Ew+rm41cF6fqAj3stE6BFf0zlstl4sZUXWIWlL7qly0rB4/8NGkRX+vb9NpLUnjC
+         cHf61TRxkXBMk2fRTSQi1Mo+9lzuQTCEmRQ5xbCTapcUL6Vo9gjgInHyvQ3odzHavhS0
+         aOk2J1+HQUhEIY6rwxSrS9UTbBcW+HNXIPkaJXyxvAgCUTHMVaGS3Fq6rCqDpz/yE62d
+         kpQtD98jhLs9IAQ18JXDJdvjs+xLv9EGL7Andrwvn9To2uyuq1Vbw1IQQPg0IST6ICQY
+         RKtQ==
+X-Gm-Message-State: AOJu0YwDbOcv3/sX65l4HSop8sbkOsgfOQMUH1nF8VyRC8iLJ7mtpfb7
+	drV4Cr2nhKUc6p6gsCZuXJLcQx33m2spyVWn7O4MAilxr0p1Z9UMIlr0ys1UBg==
+X-Gm-Gg: AY/fxX5AQOZL8/cyleFH4TiZSTwrl6Z614qhexiLAPUCeMhrmBlGQJQWCe6eXpb6Sia
+	kmCD8QxsOLbrMuguibErQ0q2kRz4mxdAc8iTakFREQOYQSzVyD97LUvi24aGzL4D2qMi542hJII
+	4TXGijkxAFvTM/AyVdx21hsu9l/PKQtNtp/OqtLmAtpkjK3GEW4UU4YoVZzaPqJWIqx6QRQnKbW
+	V9XS/NTrO5dwLluYu1mUCwYKvIXIu0i5cttRdy3CXB12u/2LtrCKkh/FKAc8+JICIEo03rBQcLy
+	UtID9OSEixqvw14em8Z2kiHZ6vB4EBt1p41stuj3YQgXWIKeCZ4S3odA2/i4gIeh1rcLMadyjQl
+	AO9ta3ZbbsV1NJ0CNd8SQNGmrnkWPJqKxhRHmd4n7uLYiAQM5XsCJNh5yIV1XFh3uN4pYii8khf
+	DU4SckKfHE06WqX8TGOshWn883jAcuyZxIBGurO6tXdQAWsSHImEf5iWJZTZtJWeycOOePcSEUg
+	IfMwi2JQPbtR9cWD+Hdw7+Yub4=
+X-Google-Smtp-Source: AGHT+IGeLu7ouD8C/CiXKLT8KaYruIC6sK91ge5DvM8yMN20kYUvLoCKSTBrTQG4lf0fQb8czm2EFw==
+X-Received: by 2002:a05:600c:8718:b0:45d:f83b:96aa with SMTP id 5b1f17b1804b1-47d1956eba9mr104337255e9.7.1766429680360;
+        Mon, 22 Dec 2025 10:54:40 -0800 (PST)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be27c2260sm250661765e9.15.2025.12.22.10.54.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Dec 2025 08:49:17 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 22 Dec 2025 10:54:39 -0800 (PST)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: CVE report - master - 2025-12-22
-Date: Mon, 22 Dec 2025 17:49:16 +0100
-Message-ID: <20251222164916.435849-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-oe][PATCH] freeglut: version 3.4.0 -> 3.8.0
+Date: Mon, 22 Dec 2025 19:52:20 +0100
+Message-ID: <20251222185220.1722980-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 16:49:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122796
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 18:54:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122797
 
-List of all open CVEs (56, out of which new this week: 2):
+    2025-11-16  John Tsiombikas <nuclear@mutantstargoat.com>
 
- - cifs-utils: CVE-2025-2312: https://nvd.nist.gov/vuln/detail/CVE-2025-2312
- - dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
- - dovecot: CVE-2025-30189: https://nvd.nist.gov/vuln/detail/CVE-2025-30189
- - ez-ipupdate: CVE-2003-0887: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
- - [NEW] freerdp: CVE-2025-68118: https://nvd.nist.gov/vuln/detail/CVE-2025-68118
- - frr: CVE-2025-61099: https://nvd.nist.gov/vuln/detail/CVE-2025-61099
- - frr: CVE-2025-61100: https://nvd.nist.gov/vuln/detail/CVE-2025-61100
- - frr: CVE-2025-61101: https://nvd.nist.gov/vuln/detail/CVE-2025-61101
- - frr: CVE-2025-61102: https://nvd.nist.gov/vuln/detail/CVE-2025-61102
- - frr: CVE-2025-61103: https://nvd.nist.gov/vuln/detail/CVE-2025-61103
- - frr: CVE-2025-61104: https://nvd.nist.gov/vuln/detail/CVE-2025-61104
- - frr: CVE-2025-61105: https://nvd.nist.gov/vuln/detail/CVE-2025-61105
- - frr: CVE-2025-61106: https://nvd.nist.gov/vuln/detail/CVE-2025-61106
- - frr: CVE-2025-61107: https://nvd.nist.gov/vuln/detail/CVE-2025-61107
- - giflib: CVE-2024-45993: https://nvd.nist.gov/vuln/detail/CVE-2024-45993
- - gnome-shell: CVE-2021-3982: https://nvd.nist.gov/vuln/detail/CVE-2021-3982
- - influxdb: CVE-2024-30896: https://nvd.nist.gov/vuln/detail/CVE-2024-30896
- - libde265: CVE-2024-38949: https://nvd.nist.gov/vuln/detail/CVE-2024-38949
- - libde265: CVE-2024-38950: https://nvd.nist.gov/vuln/detail/CVE-2024-38950
- - libuser: CVE-2012-5644: https://nvd.nist.gov/vuln/detail/CVE-2012-5644
- - live555: CVE-2025-65405: https://nvd.nist.gov/vuln/detail/CVE-2025-65405
- - live555: CVE-2025-65407: https://nvd.nist.gov/vuln/detail/CVE-2025-65407
- - live555: CVE-2025-65408: https://nvd.nist.gov/vuln/detail/CVE-2025-65408
- - minidlna: CVE-2024-51442: https://nvd.nist.gov/vuln/detail/CVE-2024-51442
- - ndpi: CVE-2025-25066: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
- - openflow: CVE-2018-1000155: https://nvd.nist.gov/vuln/detail/CVE-2018-1000155
- - openjpeg: CVE-2023-39327: https://nvd.nist.gov/vuln/detail/CVE-2023-39327
- - openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
- - openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
- - openvpn: CVE-2025-13751: https://nvd.nist.gov/vuln/detail/CVE-2025-13751
- - polkit: CVE-2016-2568: https://nvd.nist.gov/vuln/detail/CVE-2016-2568
- - postgresql: CVE-2025-12817: https://nvd.nist.gov/vuln/detail/CVE-2025-12817
- - redis: CVE-2025-46686: https://nvd.nist.gov/vuln/detail/CVE-2025-46686
- - samba: CVE-2025-10230: https://nvd.nist.gov/vuln/detail/CVE-2025-10230
- - samba: CVE-2025-9640: https://nvd.nist.gov/vuln/detail/CVE-2025-9640
- - sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
- - tigervnc: CVE-2023-6377: https://nvd.nist.gov/vuln/detail/CVE-2023-6377
- - tigervnc: CVE-2023-6478: https://nvd.nist.gov/vuln/detail/CVE-2023-6478
- - tigervnc: CVE-2025-26594: https://nvd.nist.gov/vuln/detail/CVE-2025-26594
- - tigervnc: CVE-2025-26595: https://nvd.nist.gov/vuln/detail/CVE-2025-26595
- - tigervnc: CVE-2025-26596: https://nvd.nist.gov/vuln/detail/CVE-2025-26596
- - tigervnc: CVE-2025-26597: https://nvd.nist.gov/vuln/detail/CVE-2025-26597
- - tigervnc: CVE-2025-26598: https://nvd.nist.gov/vuln/detail/CVE-2025-26598
- - tigervnc: CVE-2025-26599: https://nvd.nist.gov/vuln/detail/CVE-2025-26599
- - tigervnc: CVE-2025-26600: https://nvd.nist.gov/vuln/detail/CVE-2025-26600
- - tigervnc: CVE-2025-26601: https://nvd.nist.gov/vuln/detail/CVE-2025-26601
- - tinyproxy: CVE-2025-63938: https://nvd.nist.gov/vuln/detail/CVE-2025-63938
- - unbound: CVE-2025-5994: https://nvd.nist.gov/vuln/detail/CVE-2025-5994
- - [NEW] uriparser: CVE-2025-67899: https://nvd.nist.gov/vuln/detail/CVE-2025-67899
- - webkitgtk3: CVE-2025-13502: https://nvd.nist.gov/vuln/detail/CVE-2025-13502
- - webkitgtk3: CVE-2025-13947: https://nvd.nist.gov/vuln/detail/CVE-2025-13947
- - webkitgtk3: CVE-2025-43343: https://nvd.nist.gov/vuln/detail/CVE-2025-43343
- - webkitgtk3: CVE-2025-66287: https://nvd.nist.gov/vuln/detail/CVE-2025-66287
- - webmin: CVE-2025-67738: https://nvd.nist.gov/vuln/detail/CVE-2025-67738
- - wolfssl: CVE-2025-11931: https://nvd.nist.gov/vuln/detail/CVE-2025-11931
- - wolfssl: CVE-2025-12889: https://nvd.nist.gov/vuln/detail/CVE-2025-12889
+	freeglut 3.8 changes:
 
-====================
+	* New experimental Cocoa (native MacOS X) backend.
+	* Add glutSwapInterval, to control vsync (currently X11 and win32 only).
+	* glutExtensionSupported now also reports platform extensions (GLX/WGL).
+	* Fix build issues with new cmake versions while maintaining
+	  compatibility with old cmake.
+	* Fix handling of UTF8 window/icon titles.
+	* Fix issue with some X11 window managers not properly restoring
+	  iconified windows (send _NET_ACTIVE_WINDOW EWMH client message).
+	* Fix build issues with C23 compilers (empty argument list semantics).
+	* Fix compatibility with older versions of windows which don't have
+	  RAWHID support (before XP), by loading the entry points dynamically.
+	* Fix glutInitDisplayString parsing of "aux", and add =N parsing support
+	  to specify samples and auxbufs.
+	* Various fixes and improvements in the GameCube/Wii backend.
+	* Altbuild support for Solaris 2.6/SUN Workshop C.
+	* Started conversion of documentation from the website to markdown in
+	  the source tree: doc/api.md
+	* Added the original GLUT manpages, with permission from Mark Kilgard.
+	* New demos: accum, vsync, and windows.
+	* Cleanup of some old and no longer relevant, or redundant comments in
+	  the source code.
+	* Removed some out of date README files, and updated others.
 
-Removed this week (22): 
+    2024-06-08  John Tsiombikas <nuclear@member.fsf.org>
 
- - fetchmail: CVE-2025-61962: https://nvd.nist.gov/vuln/detail/CVE-2025-61962
- - fio: CVE-2025-10824: https://nvd.nist.gov/vuln/detail/CVE-2025-10824
- - imagemagick: CVE-2025-65955: https://nvd.nist.gov/vuln/detail/CVE-2025-65955
- - libcoap: CVE-2025-50518: https://nvd.nist.gov/vuln/detail/CVE-2025-50518
- - libwebsockets: CVE-2025-11677: https://nvd.nist.gov/vuln/detail/CVE-2025-11677
- - libwebsockets: CVE-2025-11678: https://nvd.nist.gov/vuln/detail/CVE-2025-11678
- - libwebsockets: CVE-2025-11680: https://nvd.nist.gov/vuln/detail/CVE-2025-11680
- - minio: CVE-2018-1000538: https://nvd.nist.gov/vuln/detail/CVE-2018-1000538
- - minio: CVE-2020-11012: https://nvd.nist.gov/vuln/detail/CVE-2020-11012
- - minio: CVE-2021-21287: https://nvd.nist.gov/vuln/detail/CVE-2021-21287
- - minio: CVE-2021-21362: https://nvd.nist.gov/vuln/detail/CVE-2021-21362
- - minio: CVE-2021-21390: https://nvd.nist.gov/vuln/detail/CVE-2021-21390
- - minio: CVE-2021-43858: https://nvd.nist.gov/vuln/detail/CVE-2021-43858
- - minio: CVE-2022-35919: https://nvd.nist.gov/vuln/detail/CVE-2022-35919
- - minio: CVE-2023-28433: https://nvd.nist.gov/vuln/detail/CVE-2023-28433
- - minio: CVE-2023-28434: https://nvd.nist.gov/vuln/detail/CVE-2023-28434
- - minio: CVE-2024-36107: https://nvd.nist.gov/vuln/detail/CVE-2024-36107
- - musl: CVE-2025-26519: https://nvd.nist.gov/vuln/detail/CVE-2025-26519
- - postgresql: CVE-2025-12818: https://nvd.nist.gov/vuln/detail/CVE-2025-12818
- - python3-django: CVE-2025-13372: https://nvd.nist.gov/vuln/detail/CVE-2025-13372
- - python3-django: CVE-2025-64460: https://nvd.nist.gov/vuln/detail/CVE-2025-64460
- - wolfssl: CVE-2025-7395: https://nvd.nist.gov/vuln/detail/CVE-2025-7395
+	freeglut 3.6 changes:
+
+	* New platforms: Nintendo Gamecube and Nintendo Wii.
+	* Minimum cmake version raised to 3.1.
+	* Make XInput an optional dependency.
+	* Fix incorrect modifier bit mapped to GLUT_ACTIVE_SUPER on X11.
+	* Add support for ARM64 MSVC targets.
+	* Fix for unicode builds on windows.
+	* Fix build on some versions of MinGW carrying an incorrect winuser.h.
+	* Fix menu-related memory leak when an error occurs.
+	* Various build improvements & fixes.
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ .../freeglut/{freeglut_3.4.0.bb => freeglut_3.8.0.bb}        | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/freeglut/{freeglut_3.4.0.bb => freeglut_3.8.0.bb} (90%)
+
+diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
+similarity index 90%
+rename from meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
+rename to meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
+index 13f3d111fe..25ba1e05bb 100644
+--- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
++++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
+@@ -5,12 +5,10 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
+ 
+ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
++SRC_URI[sha256sum] = "674dcaff25010e09e450aec458b8870d9e98c46f99538db457ab659b321d9989"
+ 
+ inherit cmake features_check pkgconfig
+ 
+-EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+-
+ # depends on virtual/libgl and libxi
+ REQUIRED_DISTRO_FEATURES = "opengl x11"
+ 
+@@ -19,6 +17,7 @@ PACKAGECONFIG[gles] = "-DFREEGLUT_GLES=ON,-DFREEGLUT_GLES=OFF,"
+ PACKAGECONFIG[wayland] = "-DFREEGLUT_WAYLAND=ON,-DFREEGLUT_WAYLAND=OFF,libxkbcommon"
+ PACKAGECONFIG[demos] = "-DFREEGLUT_BUILD_DEMOS=ON,-DFREEGLUT_BUILD_DEMOS=OFF,"
+ PACKAGECONFIG[x11] = ",,virtual/libx11 libice libxmu libglu libxrandr libxext"
++
+ # Add -Wno-implicit-function-declaration since it might be otherwise treated at
+ # error by clang16+ and this is not really a problem
+ CFLAGS += "-Wno-implicit-function-declaration"
+-- 
+2.47.3
+
 
