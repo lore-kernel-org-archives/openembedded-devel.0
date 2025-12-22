@@ -1,183 +1,173 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36FF1E67817
-	for <webhook@archiver.kernel.org>; Mon, 22 Dec 2025 18:58:44 +0000 (UTC)
-Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.86489.1766429918462462177
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7043BE67817
+	for <webhook@archiver.kernel.org>; Mon, 22 Dec 2025 19:18:14 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.86730.1766431087491975890
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Dec 2025 10:58:38 -0800
+ Mon, 22 Dec 2025 11:18:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DmtMey4G;
- spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-64306a32ed2so3642089d50.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 10:58:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FL/nvY9b;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-4308d81fdf6so2026637f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 11:18:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766429917; x=1767034717; darn=lists.openembedded.org;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Wm69yLw4fGWSfGphRUl7ts+3jltNYVvY78eyxmGnRms=;
-        b=DmtMey4GHFL0oTqvA5sH1RHKSx9jtvU+quya+2l0zVgIHZHPs4CerKRURYzlhTHE2F
-         ZXWwmAal44FBow1cWCY/SwKFON3Yzwn9qe6ASUo1KAqur0VCl3idB5WkBS0XHG5R8peQ
-         hwRFdUHmzljci3EfAhwcp83tlKST32LC3uR9vp3ob93iTWYoY8qIXvvicTRn6AK6oLmy
-         OHU+lGHB2O61bKjeiV20CHTsZODptLE9SC61b69tWwSW7b3Qk2eZNR4CPDALqX5wLFXY
-         VoPi/3NlwOoHPZMBcoiTjxbQADQF/bfW/+7aH72aKQl7ejUQ2tIT0GnbTC+URmQQy0B0
-         8Psg==
+        d=gmail.com; s=20230601; t=1766431086; x=1767035886; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ydI4/q+tZkF95bka68hrg5rMO5QpeIIj+si08l/wke8=;
+        b=FL/nvY9byd/wuDliStveOhrCvAtNH1DL7jqNQwYrwHBaZHj13KOaVFImNIKnG+K4lK
+         Vf9Mxcf7yjyFU2QA1SZ2k3EBqzPldBPmDobh6tcrIdhklgDQT0wsnp7qkKa0UII32XHK
+         XaVqVORWlbStbpJUtMFCXolOZ35JKHLkmDRu13ytKAuEuJrGV1+SFmZ4i8K3OOUyQiMP
+         vZI/V0L7VLi1OdkOFLFoMk+sFgHYge89GAb9mUf0MfwbsSb2q6YvQAdu9wtRyut/AlkJ
+         qBEvEkNGrubkjOPdHcqhXKCR8S0xaZKR+FJZkQC7YZSvfEhQdU4Mc217JPPUB8cBfcc8
+         4b9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766429917; x=1767034717;
-        h=content-transfer-encoding:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Wm69yLw4fGWSfGphRUl7ts+3jltNYVvY78eyxmGnRms=;
-        b=tT21Hl/cJsvCK1OL5b3F8jnMwQOX55hQL8D3nnlpMbIRj/6hcIJI9qXZkHEYSNLk/T
-         oOaeGsL0eRipvA31gkNY1RKylSJwiOH9gSE6o03vzYKrmpsRoNfMQr2PWKGiMrCR2y7v
-         G+H0oERv8dfuSf3VJocdmBtu31TTKaoX3MCQ5uch8/QJjOIa2lWdVXwe+KMODmkuZ/zi
-         snW33aJXjFos/+j8ts910sZBhDErdzzTO5789jH+vlnOuL5aKAhtk/YqybtuBBIuHmNY
-         1s8hC8bPLrc1YX/506zvrswp9cwwqvVh7qFdKhDnG4H+FSEzwwTPBja/GvZ5+IHaxf7m
-         WGHA==
-X-Gm-Message-State: AOJu0YwDWyOPRfT69U1hnQeaxGcYUT7Rnh9N4VCzZheuldsvyMQJOuCm
-	3+h2bIOQBPHfsxugUp5KCXafnrpzYtkHKk+H6xyG7MJ3K3g21kIS+3lKffZsX1Us6013rpYPite
-	RKS6Uh1xBD0ytoymD3HGVIAEd6WVrQjxiK06G
-X-Gm-Gg: AY/fxX7dfOxGk4ZTZ4H6gY0EWqK9tl2s+RSDG10F+fxNEbRztQAHfXaaBqcRRbbw1Aa
-	zQ+L09fjglyAMD5mrNtlTfV4Fi4lp3Jb7kL0d2X4mfEdXi2ayATZ7iRzS7X2OGs46gsgdHncsys
-	UbFgGMiuRcJRGtjsW7ftWxJuYlNRbj/ECUBVNZxQ8m6cH/GDBvfmcp/BiORWL3GMoY2ZGVXypqo
-	2RGO5CmLDeU4q3XPBwQibm9KT3hP/A3gWFhfFkzlpvtPMG/GtoAQU+2cgKFgUQwTBpBp2ANP8wo
-	rOYqB/IQRj7kwZDfsLJDj4ccrw==
-X-Google-Smtp-Source: AGHT+IFz+gG2jvi6jK0gn+Yt6CUcQN4JyWkJL+wFqCU+OhnKos22EVkTsVOZAljSOc30PwwuNJpUhNi6z8Alz4SpB/U=
-X-Received: by 2002:a53:ed4a:0:b0:641:eb21:d6ac with SMTP id
- 956f58d0204a3-6466a8afd6cmr8748387d50.44.1766429917341; Mon, 22 Dec 2025
- 10:58:37 -0800 (PST)
-MIME-Version: 1.0
-References: <20251222185220.1722980-1-jan.vermaete@gmail.com>
-In-Reply-To: <20251222185220.1722980-1-jan.vermaete@gmail.com>
-From: jan vermaete <jan.vermaete@gmail.com>
-Date: Mon, 22 Dec 2025 19:58:26 +0100
-X-Gm-Features: AQt7F2q8VXBnTsEL8H33fnGgBDOy6o6ZnDY0rChv9R-zcNszayjYmc5CHP8GIDI
-Message-ID: <CABF_=yhOCYZ2htospYbwxFfTyGV+B=ZQ74yVCrk28JhXnckfxA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] freeglut: version 3.4.0 -> 3.8.0
+        d=1e100.net; s=20230601; t=1766431086; x=1767035886;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ydI4/q+tZkF95bka68hrg5rMO5QpeIIj+si08l/wke8=;
+        b=hAzWZ31rFI5dIk2qx3251rwpdPgFrwNedau98OThVadUB5FugU8b1pwyPcr/ms6zBx
+         AOvVIiwPhntgBgzuKMYZNfnmCKKf/hFWDaH/Otsiw86CjheIKsI/uB/c0zjYp1nzdTTr
+         i97T5WvLVO3sOP5utIiC3KGGZeRpQYDarDGtWtYilfjljug1qRTI9jemkBdLjnaXkHFm
+         mq/JHDaVQSsuvGwJwg6jabzrM6gqn+YpvyUyw9WcI/fAr+DO4qVrK/jhReHbdfseO32l
+         VtNawnHZMIddMOlgEP6P8uqFQAhOYSzWSCL+6F4r6SH4T/2VAGYb3i781LDI1ISxCYi5
+         UQxw==
+X-Gm-Message-State: AOJu0Yy0yGJjZvOHck5/Ao8KloUch87yHwBDa25WlgL3m6AlZHIg5mgJ
+	71d0cZHX8yoZVsXQg0XhnEXwgkIN29gTrU5skttnmik4kffuvP+ugI5THGC5uA==
+X-Gm-Gg: AY/fxX6/7R8v7QxhRUSrBn0L0THpDXCd6BdC2VWITk9KEM0U/M6GiuWdl+X2x8zoatX
+	sjFx/vzlEXRwo3tgjQau8Pf1XglU82xnwhlxe3IoFGZKfZ0sIH5PN0UGB2OnZum07BxU2B1CkOb
+	irqNBaMVrls4i+ML/e5SEM1OORpjKn7/Okr5PcmZNtzwBzxw5kjRcS39RxWA6fbeLJvVPcKePZi
+	UNs+it+BjcZIShxp/R2CkyLlT7nTLSBDiBJomk57zn/d6ZEn/BuK6KKv75nP4hFZtgiKpKiUKIi
+	vZIXF5AGeoywtDRWTnXb60uvDRNegCMju7VsMASIHSdLaUm1jxZsVvS6x8nVgSyfio33+1FruPo
+	lwDcfnO7rJAiHIyQgon3Scs7Ra3EH5NlYywmW8dQaQgyDUBe6rim84Bf4SUNJcM30xyKbOSrMTs
+	wZO29Y7Tgo
+X-Google-Smtp-Source: AGHT+IEpv8/xU9rg3oqsHcRLsjXlqtx31fCnCpSkdlSVSfFgPlG2p6AFAUho/ydRvvQuTf4AV9xT7A==
+X-Received: by 2002:a05:6000:1866:b0:430:f3ab:569c with SMTP id ffacd0b85a97d-4324e50a6e3mr16251306f8f.53.1766431085366;
+        Mon, 22 Dec 2025 11:18:05 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa4749sm23802925f8f.37.2025.12.22.11.18.04
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 22 Dec 2025 11:18:04 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [meta-networking][PATCH v2] dovecot: upgrade 2.4.1-4 -> 2.4.2
+Date: Mon, 22 Dec 2025 20:18:04 +0100
+Message-ID: <20251222191804.1468315-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 18:58:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122798
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 19:18:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122799
 
-Note: I could not test these changes. The previous recipe did not
-compile on master in the meta-ros layer, and I=E2=80=99m not sure where it =
-is
-currently used within meta-ros.
+Contains fix for CVE-2025-30189
 
-On Mon, Dec 22, 2025 at 7:54=E2=80=AFPM Jan Vermaete <jan.vermaete@gmail.co=
-m> wrote:
->
->     2025-11-16  John Tsiombikas <nuclear@mutantstargoat.com>
->
->         freeglut 3.8 changes:
->
->         * New experimental Cocoa (native MacOS X) backend.
->         * Add glutSwapInterval, to control vsync (currently X11 and win32=
- only).
->         * glutExtensionSupported now also reports platform extensions (GL=
-X/WGL).
->         * Fix build issues with new cmake versions while maintaining
->           compatibility with old cmake.
->         * Fix handling of UTF8 window/icon titles.
->         * Fix issue with some X11 window managers not properly restoring
->           iconified windows (send _NET_ACTIVE_WINDOW EWMH client message)=
-.
->         * Fix build issues with C23 compilers (empty argument list semant=
-ics).
->         * Fix compatibility with older versions of windows which don't ha=
-ve
->           RAWHID support (before XP), by loading the entry points dynamic=
-ally.
->         * Fix glutInitDisplayString parsing of "aux", and add =3DN parsin=
-g support
->           to specify samples and auxbufs.
->         * Various fixes and improvements in the GameCube/Wii backend.
->         * Altbuild support for Solaris 2.6/SUN Workshop C.
->         * Started conversion of documentation from the website to markdow=
-n in
->           the source tree: doc/api.md
->         * Added the original GLUT manpages, with permission from Mark Kil=
-gard.
->         * New demos: accum, vsync, and windows.
->         * Cleanup of some old and no longer relevant, or redundant commen=
-ts in
->           the source code.
->         * Removed some out of date README files, and updated others.
->
->     2024-06-08  John Tsiombikas <nuclear@member.fsf.org>
->
->         freeglut 3.6 changes:
->
->         * New platforms: Nintendo Gamecube and Nintendo Wii.
->         * Minimum cmake version raised to 3.1.
->         * Make XInput an optional dependency.
->         * Fix incorrect modifier bit mapped to GLUT_ACTIVE_SUPER on X11.
->         * Add support for ARM64 MSVC targets.
->         * Fix for unicode builds on windows.
->         * Fix build on some versions of MinGW carrying an incorrect winus=
-er.h.
->         * Fix menu-related memory leak when an error occurs.
->         * Various build improvements & fixes.
->
-> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-> ---
->  .../freeglut/{freeglut_3.4.0.bb =3D> freeglut_3.8.0.bb}        | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-graphics/freeglut/{freeglut_3.4.0.bb =3D> freeglu=
-t_3.8.0.bb} (90%)
->
-> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-o=
-e/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> similarity index 90%
-> rename from meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-> rename to meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> index 13f3d111fe..25ba1e05bb 100644
-> --- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> @@ -5,12 +5,10 @@ LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D89c0b58a3e01ce3d8254c9f59e78a=
-dfb"
->
->  SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/$=
-{BPN}-${PV}.tar.gz"
-> -SRC_URI[sha256sum] =3D "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd=
-42bb0ea0c6f3eaec"
-> +SRC_URI[sha256sum] =3D "674dcaff25010e09e450aec458b8870d9e98c46f99538db4=
-57ab659b321d9989"
->
->  inherit cmake features_check pkgconfig
->
-> -EXTRA_OECMAKE =3D "-DCMAKE_POLICY_VERSION_MINIMUM=3D3.5"
-> -
->  # depends on virtual/libgl and libxi
->  REQUIRED_DISTRO_FEATURES =3D "opengl x11"
->
-> @@ -19,6 +17,7 @@ PACKAGECONFIG[gles] =3D "-DFREEGLUT_GLES=3DON,-DFREEGLU=
-T_GLES=3DOFF,"
->  PACKAGECONFIG[wayland] =3D "-DFREEGLUT_WAYLAND=3DON,-DFREEGLUT_WAYLAND=
-=3DOFF,libxkbcommon"
->  PACKAGECONFIG[demos] =3D "-DFREEGLUT_BUILD_DEMOS=3DON,-DFREEGLUT_BUILD_D=
-EMOS=3DOFF,"
->  PACKAGECONFIG[x11] =3D ",,virtual/libx11 libice libxmu libglu libxrandr =
-libxext"
-> +
->  # Add -Wno-implicit-function-declaration since it might be otherwise tre=
-ated at
->  # error by clang16+ and this is not really a problem
->  CFLAGS +=3D "-Wno-implicit-function-declaration"
-> --
-> 2.47.3
->
+Changelog: https://github.com/dovecot/core/releases/tag/2.4.2
 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
 
---=20
-Jan Vermaete
-=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
+v2: add backported patch that fixes compilation error about missing
+    libpcre2 libraries.
+
+ ...1-lib-regex-remove-LIBPCRE_LIBS-from.patch | 26 +++++++++++++++++
+ .../dovecot/fix-musl-compilation.patch        | 28 -------------------
+ .../{dovecot_2.4.1-4.bb => dovecot_2.4.2.bb}  |  4 +--
+ 3 files changed, 28 insertions(+), 30 deletions(-)
+ create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-lib-regex-remove-LIBPCRE_LIBS-from.patch
+ delete mode 100644 meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.patch
+ rename meta-networking/recipes-support/dovecot/{dovecot_2.4.1-4.bb => dovecot_2.4.2.bb} (95%)
+
+diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-lib-regex-remove-LIBPCRE_LIBS-from.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-lib-regex-remove-LIBPCRE_LIBS-from.patch
+new file mode 100644
+index 0000000000..b872587a88
+--- /dev/null
++++ b/meta-networking/recipes-support/dovecot/dovecot/0001-lib-regex-remove-LIBPCRE_LIBS-from.patch
+@@ -0,0 +1,26 @@
++From fd3d65c65c778cf0a2fba6487c8d0eb30b6780b7 Mon Sep 17 00:00:00 2001
++From: Aki Tuomi <aki.tuomi@open-xchange.com>
++Date: Fri, 31 Oct 2025 12:53:33 +0200
++Subject: [PATCH] lib-regex: Remove LIBPCRE_LIBS from test dependencies
++
++Was accidentically added in 49ae6e798310e5c4b96709db435a3714ea6468a8
++
++Upstream-Status: Backport [https://github.com/dovecot/core/commit/fd3d65c65c778cf0a2fba6487c8d0eb30b6780b7]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/lib-regex/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/lib-regex/Makefile.am b/src/lib-regex/Makefile.am
++index 60f43d9779..9d26d27fa1 100644
++--- a/src/lib-regex/Makefile.am
+++++ b/src/lib-regex/Makefile.am
++@@ -34,7 +34,7 @@ test_regex_LDADD = libdregex.la \
++ 		   ../lib-test/libtest.la \
++ 		   ../lib/liblib.la \
++ 		   $(LIBPCRE_LIBS)
++-test_regex_DEPENDENCIES = libdregex.la $(LIBPCRE_LIBS)
+++test_regex_DEPENDENCIES = libdregex.la
++ 
++ check-local:
++ 	for bin in $(test_programs); do \
+diff --git a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.patch b/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.patch
+deleted file mode 100644
+index a09165e588..0000000000
+--- a/meta-networking/recipes-support/dovecot/dovecot/fix-musl-compilation.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From 951e371b6e44e2051de83c9fe73c778858fa73a1 Mon Sep 17 00:00:00 2001
+-From: Fabian Groffen <grobian@gentoo.org>
+-Date: Sat, 31 May 2025 10:49:28 +0200
+-Subject: [PATCH] lib: cpu-count - fix compilation using musl
+-
+-The macros, types and symbols CPU_* and cpuset_t are not exposed in
+-musl's sched.h unless _GNU_SOURCE is set.
+-
+-Upstream-Status: Backport [https://github.com/dovecot/core/commit/951e371b6e44e2051de83c9fe73c778858fa73a1]
+-
+-Signed-off-by: Fabian Groffen <grobian@gentoo.org>
+----
+- src/lib/cpu-count.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/lib/cpu-count.c b/src/lib/cpu-count.c
+-index 3eb38fa47d8..a3e80e6c157 100644
+---- a/src/lib/cpu-count.c
+-+++ b/src/lib/cpu-count.c
+-@@ -3,6 +3,8 @@
+- 
+- #ifdef HAVE_SCHED_H
+- #  define __USE_GNU
+-+/* _GNU_SOURCE: for musl's sched.h to expose cpuset/CPU_* */
+-+#  define _GNU_SOURCE
+- #  include <sched.h>
+- #  ifdef HAVE_SYS_CPUSET_H
+- #    include <sys/cpuset.h>
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb b/meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+similarity index 95%
+rename from meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
+rename to meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+index 40cf991ae1..e94306dd32 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.2.bb
+@@ -14,9 +14,9 @@ SRC_URI = "http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
+            file://dovecot.service \
+            file://dovecot.socket \
+            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
+-           file://fix-musl-compilation.patch \
++           file://0001-lib-regex-remove-LIBPCRE_LIBS-from.patch \
+            "
+-SRC_URI[sha256sum] = "fb188603f419ed7aaa07794a8692098c3ec2660bb9c67d0efe24948cbb32ae00"
++SRC_URI[sha256sum] = "2cd62e4d22b9fc1c80bd38649739950f0dbda34fbc3e62624fb6842264e93c6e"
+ 
+ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 
