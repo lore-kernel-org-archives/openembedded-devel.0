@@ -1,457 +1,726 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B96F8E6B26E
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 02:20:30 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.93786.1766456425013771837
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78425E6B273
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 05:00:01 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.95251.1766465995939470538
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Dec 2025 18:20:25 -0800
+ Mon, 22 Dec 2025 20:59:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mZ7HTblP;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-78c66bdf675so37702057b3.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 18:20:24 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=PiYw9v7P;
+ spf=pass (domain: mvista.com, ip: 209.85.216.44, mailfrom: hprajapati@mvista.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-34c708702dfso4852367a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 20:59:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766456424; x=1767061224; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=vVboVEylOAll3cZ9zighuuxNbs2D6KeIbMR/4VONAvw=;
-        b=mZ7HTblPo086irSMuH9Oa4K1IohZfHrOqb4OSwLnK7Un6T177/sUBpthBso1Py9RKA
-         Itcle7o3SV65JcOvDdUnAu1HVRU29i77tBVRV17SK7J0QrOjMsUaltZMap3n65D19eZK
-         u6sQcUmzUzIqHgiMGzwr8QYgwEzqlWXf9egoNuSy3SU6VVV8Pfb7Wbffmzgty+xPsFeS
-         p4DUGFGyApAcG6YR5aypArfJfQFOJUzIo3+I4xBNwvO+YdrSuKWBA/+HPFwypKe3uCqp
-         K6E7rDC06VXooTkMGRnPcbwL2v8+nk5JajTSrZ1OUnzU0MKr2AMbsTpvDyODB/sWEKib
-         ZSIg==
+        d=mvista.com; s=google; t=1766465995; x=1767070795; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fSlSWR2jMZX3X8jtAQm7gTwVWmgnYe+lCCR+2ff6vDk=;
+        b=PiYw9v7PmZNMsUBMMxQYQZBgz2QxHF6aDIw37APKPtJUnER2m300gcn9RtNlb/qgfJ
+         fqsGi/88yxLhfYoEWntXjVw1a+AjTNvxmbg7opODvn9EOvDH3yt6llpFWeV3QGPQWrli
+         qCsBNy1STU/lboxAwCb6ckBvdZ2BDQ77nbBDk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766456424; x=1767061224;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1766465995; x=1767070795;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vVboVEylOAll3cZ9zighuuxNbs2D6KeIbMR/4VONAvw=;
-        b=ld0UJyrjf1HyZ0fsyBeLMiOfc4aq3DQtFA1Bhq5P8DmeRd+nlPva3hKm5wfbdE+Q8+
-         kjCHmXTIn9l/+N6DvZ3lwS59w+gmiVuI572KUbfN918QX0eiRZkpOX7UogjpDXcT60w4
-         Zcwoa5NMa4TwZyFPKRhHGmHQxMriNqv5gajn7cLIdjMGrqHaEHyVRnL5aUPQGtundw38
-         Ll9CS2R+d2Mh2HDXtxXmZVVzmYjvBYCkpzMebYoU/qvhEEphOhIR+JHOYyBa+Ted8OBw
-         4obXElLZlumjencJ7jvIKH2LnZSq0+yyADY7dTdb3ugtvNufkDeUun2ZBD3wIgr7b5+5
-         ZxfQ==
-X-Gm-Message-State: AOJu0YwUHZ8AC/RQ6eoVUqWwmoT+PdLjiRhE20HS8J6a24WBJJ/EvayW
-	sUOHiBfoeiueWLb2sDvOXF8mDDtCiEJd2xlEEc34jBeTBdJvVdeVJR4Gm5yxpwwxrDqUQy6nrZP
-	CYCgC/1Hwq5L01U/L3EF7CzLnAP98AACw+BkriRg=
-X-Gm-Gg: AY/fxX4z24gbD13c1SSMu44myN0SEreCVUWKQALFE1zk3kiJTZgXb7sheeQDOtqpdzj
-	m+3vMEVwmL/9GoTObHuQ/Zz25lqYZdukJ4MQfwkTAN9kGEjYgqc5LowRNsDkDk9GKHz+wBq9m60
-	klEeVDiF6sFygRUjmMzEFYFUwcnZrNRXum8se3zqKvaLQVDx9XdpejkR3okvCwPn3KE6o3NbTFV
-	oRoueLiHklnX5lhyv5urRanNjZa9xs+CHlYuLbGE2lsY4PEIZHJu1kLjGIbyGYJlfmU/aNuUx6X
-	A07kLmVD8kLszAMGaxpKYJ2EhhawW7ou7tUxrahXxSXY5Br+IDXLIE31a41YBg08bx5Y7Zw93ri
-	4NTcwgO3wS9IXTZA91EoP6eMt7AQ=
-X-Google-Smtp-Source: AGHT+IExJmJ1093s5AFjuIquYqi1VbTYaVPmSBZAmo5NPaaTRATuhyRNO1ckkPtnMvHOzoxncVleObogKBd/1crUOHU=
-X-Received: by 2002:a05:690c:9b0a:b0:787:eca1:50cf with SMTP id
- 00721157ae682-78fb4186acfmr117612437b3.50.1766456423974; Mon, 22 Dec 2025
- 18:20:23 -0800 (PST)
+        bh=fSlSWR2jMZX3X8jtAQm7gTwVWmgnYe+lCCR+2ff6vDk=;
+        b=ugPLHNa9VN8mPQ9BH6b44/8fg063EI4FG54j+FreKtbanFf7EGxHYG7XO6IFvIpADP
+         UCDqnMzTkmoNZwu2AlTZjT1aMv5iZqsf3G9jwgZPPJ27oQr2A1Uik9I7NuZC+plRMCyv
+         23UywSe+GVZxsJMZeqJwkm49ZOnvWTTcqSGJc8GaQozG3QcablZaSF9hkKtUz870S/j1
+         LE6khYDJRQ5YmVNPmR7MPY3DbJv6zdeLd1feYbfN0a00F1Tu8olDouEPOnJMRItlgVYM
+         upsoUvurFRwlBYm+d4ZEDIJ4eNlS801tedr2JqmJ5cwJKyoKSOFf0RuoEYKe5ttTSbgi
+         YWPQ==
+X-Gm-Message-State: AOJu0Yyd2SyeDLYnHXCsYRp+VgbvTu7Gx9nvCl97DnaQOGl6RWvKT2Ac
+	zWFhHuWAePGzcq1bzQBGFFM/1F8oN0bz+IGnk+8u7SHMLLiIOzCbU67X6Wc5CNulbycSNTTjnoS
+	8/2AxVqs=
+X-Gm-Gg: AY/fxX4CFA1GgUQOP9WUSowCY4SZYT1BFcBl2fStxfi8YviaLRmTp5rloFxkGdtKoxH
+	ZS+TE5EpslTYrucRRuVub58nThvmvFohZyqAhRYBQZLfzBSvjfvjvqkC2rn1T3lcQ+S0Sbdfqal
+	AswvYcgHR3/YVK97YCjhRA6jCioHMNN4v+CYmDbS9CsBA3oQC3H2VmlYJwgTmiuetb3JzOg/moH
+	KgU/SOGDnPpXzfFz/kQFQB5TwwY7jjcPcUcko5vcmQjUoGD07IgdtFbupwCH4iSLPzra4ebq4xZ
+	B1xG4022wqsNZiSnNoZ5R1gJhU3VFW2R/jzOUIIwP7FGHGxYmE3K2x/xD2CFUMoVQJgl5SxtWCW
+	tVs9yVYlHNLGoc4xjoqUyYdOBe5tuJAZGqpMR3aZQfjcnqULYSey2RWkmgaUGRDaz4v3qBcl67a
+	clAokDjTI+DOWMHRGlJX/sN5Oc
+X-Google-Smtp-Source: AGHT+IHRe3PRPwvaUFcphXbcrtdh6vjtf+o/Tfgg7JoG9+XSAI66U/X87jUbU7jtBfHBORT8PcUCdg==
+X-Received: by 2002:a17:90b:1f8c:b0:349:2936:7f4 with SMTP id 98e67ed59e1d1-34e921bc5c1mr9517552a91.32.1766465994821;
+        Mon, 22 Dec 2025 20:59:54 -0800 (PST)
+Received: from MVIN00013.mvista.com ([103.250.136.194])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34e770fd76asm5548615a91.5.2025.12.22.20.59.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 22 Dec 2025 20:59:54 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][kirkstone][PATCH] krb5: fix for CVE-2024-3596
+Date: Tue, 23 Dec 2025 10:29:32 +0530
+Message-ID: <20251223045932.69795-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20251222185220.1722980-1-jan.vermaete@gmail.com> <CABF_=yhOCYZ2htospYbwxFfTyGV+B=ZQ74yVCrk28JhXnckfxA@mail.gmail.com>
-In-Reply-To: <CABF_=yhOCYZ2htospYbwxFfTyGV+B=ZQ74yVCrk28JhXnckfxA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Dec 2025 18:19:57 -0800
-X-Gm-Features: AQt7F2qB1AeRpbIXe07Bd5rlh2ttHck2gcGtVWKpolSgdwTrA30uTtWrEZts6Vw
-Message-ID: <CAMKF1srSv9cU9kZ3t0CNN_tE3wcg7xfuv9AJWUDWFyxj8og5Uw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] freeglut: version 3.4.0 -> 3.8.0
-To: jan.vermaete@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000a990ad0646952f52"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 02:20:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122814
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 05:00:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122815
 
---000000000000a990ad0646952f52
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Upstream-Status: Backport from https://github.com/krb5/krb5/commit/871125fea8ce0370a972bf65f7d1de63f619b06c
 
-it fails to build on YP AB -
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/4644384/raw_inlin=
-e
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../krb5/krb5/CVE-2024-3596.patch             | 628 ++++++++++++++++++
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
+ 2 files changed, 629 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
 
- -- Found OpenGL:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-lin=
-ux/freeglut/3.8.0/recipe-sysroot/usr/lib/libGL.so
- found components: OpenGL
-| -- Found PkgConfig:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-lin=
-ux/freeglut/3.8.0/recipe-sysroot-native/usr/bin/pkg-config
-(found version "0.29.2")
-| CMake Error at
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-lin=
-ux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/FindPac=
-kageHandleStandardArgs.cmake:290
-(message):
-|   Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY)
-| Call Stack (most recent call first):
-|   /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky=
--linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/Fin=
-dPackageHandleStandardArgs.cmake:654
-(_FPHSA_FAILURE_MESSAGE)
-|   /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky=
--linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/Fin=
-dOpenGL.cmake:698
-(find_package_handle_standard_args)
-|   CMakeLists.txt:435 (FIND_PACKAGE)
-|
-|
-| -- Configuring incomplete, errors occurred!
-| WARNING: exit code 1 from a shell command.
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
+new file mode 100644
+index 0000000000..8e74b07aef
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
+@@ -0,0 +1,628 @@
++From 871125fea8ce0370a972bf65f7d1de63f619b06c Mon Sep 17 00:00:00 2001
++From: Julien Rische <jrische@redhat.com>
++Date: Thu, 22 Aug 2024 17:15:50 +0200
++Subject: [PATCH] Generate and verify message MACs in libkrad
++
++Implement some of the measures specified in
++draft-ietf-radext-deprecating-radius-03 for mitigating the BlastRADIUS
++attack (CVE-2024-3596):
++
++* Include a Message-Authenticator MAC as the first attribute when
++  generating a packet of type Access-Request, Access-Reject,
++  Access-Accept, or Access-Challenge (sections 5.2.1 and 5.2.4), if
++  the secret is non-empty.  (An empty secret indicates the use of Unix
++  domain socket transport.)
++
++* Validate the Message-Authenticator MAC in received packets, if
++  present.
++
++FreeRADIUS enforces Message-Authenticator as of versions 3.2.5 and
++3.0.27.  libkrad must generate Message-Authenticator attributes in
++order to remain compatible with these implementations.
++
++[ghudson@mit.edu: adjusted style and naming; simplified some
++functions; edited commit message]
++
++ticket: 9142 (new)
++tags: pullup
++target_version: 1.21-next
++
++CVE: CVE-2024-3596
++Upstream-Status: Backport [https://github.com/krb5/krb5/commit/871125fea8ce0370a972bf65f7d1de63f619b06c]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ src/include/k5-int.h                   |   5 +
++ src/lib/crypto/krb/checksum_hmac_md5.c |  28 ++++
++ src/lib/crypto/libk5crypto.exports     |   1 +
++ src/lib/krad/attr.c                    |  17 ++
++ src/lib/krad/attrset.c                 |  58 +++++--
++ src/lib/krad/internal.h                |   7 +-
++ src/lib/krad/packet.c                  | 205 +++++++++++++++++++++++--
++ src/lib/krad/t_attrset.c               |   2 +-
++ src/lib/krad/t_daemon.py               |   3 +-
++ src/lib/krad/t_packet.c                |  11 ++
++ src/tests/t_otp.py                     |   3 +
++ 11 files changed, 309 insertions(+), 31 deletions(-)
++
++diff --git a/src/include/k5-int.h b/src/include/k5-int.h
++index 5928c82..9b3aa13 100644
++--- a/src/include/k5-int.h
+++++ b/src/include/k5-int.h
++@@ -2394,4 +2394,9 @@ void k5_change_error_message_code(krb5_context ctx, krb5_error_code oldcode,
++ #define k5_prependmsg krb5_prepend_error_message
++ #define k5_wrapmsg krb5_wrap_error_message
++ 
+++/* Generate an HMAC-MD5 keyed checksum as specified by RFC 2104. */
+++krb5_error_code
+++k5_hmac_md5(const krb5_data *key, const krb5_crypto_iov *data, size_t num_data,
+++            krb5_data *output);
+++
++ #endif /* _KRB5_INT_H */
++diff --git a/src/lib/crypto/krb/checksum_hmac_md5.c b/src/lib/crypto/krb/checksum_hmac_md5.c
++index ec024f3..a809388 100644
++--- a/src/lib/crypto/krb/checksum_hmac_md5.c
+++++ b/src/lib/crypto/krb/checksum_hmac_md5.c
++@@ -92,3 +92,31 @@ cleanup:
++     free(hash_iov);
++     return ret;
++ }
+++
+++krb5_error_code
+++k5_hmac_md5(const krb5_data *key, const krb5_crypto_iov *data, size_t num_data,
+++            krb5_data *output)
+++{
+++    krb5_error_code ret;
+++    const struct krb5_hash_provider *hash = &krb5int_hash_md5;
+++    krb5_keyblock keyblock = { 0 };
+++    krb5_data hashed_key;
+++    uint8_t hkeybuf[16];
+++    krb5_crypto_iov iov;
+++
+++    /* Hash the key if it is longer than the block size. */
+++    if (key->length > hash->blocksize) {
+++        hashed_key = make_data(hkeybuf, sizeof(hkeybuf));
+++        iov.flags = KRB5_CRYPTO_TYPE_DATA;
+++        iov.data = *key;
+++        ret = hash->hash(&iov, 1, &hashed_key);
+++        if (ret)
+++            return ret;
+++        key = &hashed_key;
+++    }
+++
+++    keyblock.magic = KV5M_KEYBLOCK;
+++    keyblock.length = key->length;
+++    keyblock.contents = (uint8_t *)key->data;
+++    return krb5int_hmac_keyblock(hash, &keyblock, data, num_data, output);
+++}
++diff --git a/src/lib/crypto/libk5crypto.exports b/src/lib/crypto/libk5crypto.exports
++index 90afdf5..02efa3b 100644
++--- a/src/lib/crypto/libk5crypto.exports
+++++ b/src/lib/crypto/libk5crypto.exports
++@@ -110,3 +110,4 @@ krb5_c_prfplus
++ krb5_c_derive_prfplus
++ k5_enctype_to_ssf
++ krb5int_c_deprecated_enctype
+++k5_hmac_md5
++diff --git a/src/lib/krad/attr.c b/src/lib/krad/attr.c
++index 9c13d9d..4ad3212 100644
++--- a/src/lib/krad/attr.c
+++++ b/src/lib/krad/attr.c
++@@ -122,6 +122,23 @@ static const attribute_record attributes[UCHAR_MAX] = {
++     {"NAS-Port-Type", 4, 4, NULL, NULL},
++     {"Port-Limit", 4, 4, NULL, NULL},
++     {"Login-LAT-Port", 1, MAX_ATTRSIZE, NULL, NULL},
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for tunnelling */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for Apple Remote Access Protocol */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for Apple Remote Access Protocol */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for Apple Remote Access Protocol */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for Apple Remote Access Protocol */
+++    {NULL, 0, 0, NULL, NULL}, /* Reserved for Apple Remote Access Protocol */
+++    {NULL, 0, 0, NULL, NULL}, /* Password-Retry */
+++    {NULL, 0, 0, NULL, NULL}, /* Prompt */
+++    {NULL, 0, 0, NULL, NULL}, /* Connect-Info */
+++    {NULL, 0, 0, NULL, NULL}, /* Configuration-Token */
+++    {NULL, 0, 0, NULL, NULL}, /* EAP-Message */
+++    {"Message-Authenticator", MD5_DIGEST_SIZE, MD5_DIGEST_SIZE, NULL, NULL},
++ };
++ 
++ /* Encode User-Password attribute. */
++diff --git a/src/lib/krad/attrset.c b/src/lib/krad/attrset.c
++index 03c6137..f279949 100644
++--- a/src/lib/krad/attrset.c
+++++ b/src/lib/krad/attrset.c
++@@ -164,14 +164,42 @@ krad_attrset_copy(const krad_attrset *set, krad_attrset **copy)
++     return 0;
++ }
++ 
+++/* Place an encoded attributes into outbuf at position *i.  Increment *i by the
+++ * length of the encoding. */
+++static krb5_error_code
+++append_attr(krb5_context ctx, const char *secret,
+++            const uint8_t *auth, krad_attr type, const krb5_data *data,
+++            uint8_t outbuf[MAX_ATTRSETSIZE], size_t *i)
+++{
+++    uint8_t buffer[MAX_ATTRSIZE];
+++    size_t attrlen;
+++    krb5_error_code retval;
+++
+++    retval = kr_attr_encode(ctx, secret, auth, type, data, buffer, &attrlen);
+++    if (retval)
+++        return retval;
+++
+++    if (attrlen > MAX_ATTRSETSIZE - *i - 2)
+++        return EMSGSIZE;
+++
+++    outbuf[(*i)++] = type;
+++    outbuf[(*i)++] = attrlen + 2;
+++    memcpy(outbuf + *i, buffer, attrlen);
+++    *i += attrlen;
+++
+++    return 0;
+++}
+++
++ krb5_error_code
++ kr_attrset_encode(const krad_attrset *set, const char *secret,
++-                  const unsigned char *auth,
+++                  const uint8_t *auth, krb5_boolean add_msgauth,
++                   unsigned char outbuf[MAX_ATTRSETSIZE], size_t *outlen)
++ {
++-    unsigned char buffer[MAX_ATTRSIZE];
++     krb5_error_code retval;
++-    size_t i = 0, attrlen;
+++    krad_attr msgauth_type = krad_attr_name2num("Message-Authenticator");
+++    const uint8_t zeroes[MD5_DIGEST_SIZE] = { 0 };
+++    krb5_data zerodata;
+++    size_t i = 0;
++     attr *a;
++ 
++     if (set == NULL) {
++@@ -179,19 +207,21 @@ kr_attrset_encode(const krad_attrset *set, const char *secret,
++         return 0;
++     }
++ 
++-    K5_TAILQ_FOREACH(a, &set->list, list) {
++-        retval = kr_attr_encode(set->ctx, secret, auth, a->type, &a->attr,
++-                                buffer, &attrlen);
++-        if (retval != 0)
+++    if (add_msgauth) {
+++        /* Encode Message-Authenticator as the first attribute, per
+++         * draft-ietf-radext-deprecating-radius-03 section 5.2. */
+++        zerodata = make_data((uint8_t *)zeroes, MD5_DIGEST_SIZE);
+++        retval = append_attr(set->ctx, secret, auth, msgauth_type, &zerodata,
+++                             outbuf, &i);
+++        if (retval)
++             return retval;
+++    }
++ 
++-        if (i + attrlen + 2 > MAX_ATTRSETSIZE)
++-            return EMSGSIZE;
++-
++-        outbuf[i++] = a->type;
++-        outbuf[i++] = attrlen + 2;
++-        memcpy(&outbuf[i], buffer, attrlen);
++-        i += attrlen;
+++    K5_TAILQ_FOREACH(a, &set->list, list) {
+++        retval = append_attr(set->ctx, secret, auth, a->type, &a->attr,
+++                             outbuf, &i);
+++        if (retval)
+++            return retval;
++     }
++ 
++     *outlen = i;
++diff --git a/src/lib/krad/internal.h b/src/lib/krad/internal.h
++index 996a893..8194b00 100644
++--- a/src/lib/krad/internal.h
+++++ b/src/lib/krad/internal.h
++@@ -43,6 +43,8 @@
++ #define UCHAR_MAX 255
++ #endif
++ 
+++#define MD5_DIGEST_SIZE 16
+++
++ /* RFC 2865 */
++ #define MAX_ATTRSIZE (UCHAR_MAX - 2)
++ #define MAX_ATTRSETSIZE (KRAD_PACKET_SIZE_MAX - 20)
++@@ -65,10 +67,11 @@ kr_attr_decode(krb5_context ctx, const char *secret, const unsigned char *auth,
++                krad_attr type, const krb5_data *in,
++                unsigned char outbuf[MAX_ATTRSIZE], size_t *outlen);
++ 
++-/* Encode the attributes into the buffer. */
+++/* Encode set into outbuf.  If add_msgauth is true, include a zeroed
+++ * Message-Authenticator as the first attribute. */
++ krb5_error_code
++ kr_attrset_encode(const krad_attrset *set, const char *secret,
++-                  const unsigned char *auth,
+++                  const uint8_t *auth, krb5_boolean add_msgauth,
++                   unsigned char outbuf[MAX_ATTRSETSIZE], size_t *outlen);
++ 
++ /* Decode attributes from a buffer. */
++diff --git a/src/lib/krad/packet.c b/src/lib/krad/packet.c
++index c597174..539af5a 100644
++--- a/src/lib/krad/packet.c
+++++ b/src/lib/krad/packet.c
++@@ -36,6 +36,7 @@
++ typedef unsigned char uchar;
++ 
++ /* RFC 2865 */
+++#define MSGAUTH_SIZE (2 + MD5_DIGEST_SIZE)
++ #define OFFSET_CODE 0
++ #define OFFSET_ID 1
++ #define OFFSET_LENGTH 2
++@@ -222,6 +223,106 @@ packet_set_attrset(krb5_context ctx, const char *secret, krad_packet *pkt)
++     return kr_attrset_decode(ctx, &tmp, secret, pkt_auth(pkt), &pkt->attrset);
++ }
++ 
+++/* Determine if a packet requires a Message-Authenticator attribute. */
+++static inline krb5_boolean
+++requires_msgauth(const char *secret, krad_code code)
+++{
+++    /* If no secret is provided, assume that the transport is a UNIX socket.
+++     * Message-Authenticator is required only on UDP and TCP connections. */
+++    if (*secret == '\0')
+++        return FALSE;
+++
+++    /*
+++     * Per draft-ietf-radext-deprecating-radius-03 sections 5.2.1 and 5.2.4,
+++     * Message-Authenticator is required in Access-Request packets and all
+++     * potential responses when UDP or TCP transport is used.
+++     */
+++    return code == krad_code_name2num("Access-Request") ||
+++        code == krad_code_name2num("Access-Reject") ||
+++        code == krad_code_name2num("Access-Accept") ||
+++        code == krad_code_name2num("Access-Challenge");
+++}
+++
+++/* Check if the packet has a Message-Authenticator attribute. */
+++static inline krb5_boolean
+++has_pkt_msgauth(const krad_packet *pkt)
+++{
+++    krad_attr msgauth_type = krad_attr_name2num("Message-Authenticator");
+++
+++    return krad_attrset_get(pkt->attrset, msgauth_type, 0) != NULL;
+++}
+++
+++/* Return the beginning of the Message-Authenticator attribute in pkt, or NULL
+++ * if no such attribute is present. */
+++static const uint8_t *
+++lookup_msgauth_addr(const krad_packet *pkt)
+++{
+++    krad_attr msgauth_type = krad_attr_name2num("Message-Authenticator");
+++    size_t i;
+++    uint8_t *p;
+++
+++    i = OFFSET_ATTR;
+++    while (i + 2 < pkt->pkt.length) {
+++        p = (uint8_t *)offset(&pkt->pkt, i);
+++        if (msgauth_type == *p)
+++            return p;
+++        i += p[1];
+++    }
+++
+++    return NULL;
+++}
+++
+++/*
+++ * Calculate the message authenticator MAC for pkt as specified in RFC 2869
+++ * section 5.14, placing the result in mac_out.  Use the provided authenticator
+++ * auth, which may be from pkt or from a corresponding request.
+++ */
+++static krb5_error_code
+++calculate_mac(const char *secret, const krad_packet *pkt,
+++              const uint8_t auth[AUTH_FIELD_SIZE],
+++              uint8_t mac_out[MD5_DIGEST_SIZE])
+++{
+++    uint8_t zeroed_msgauth[MSGAUTH_SIZE];
+++    krad_attr msgauth_type = krad_attr_name2num("Message-Authenticator");
+++    const uint8_t *msgauth_attr, *msgauth_end, *pkt_end;
+++    krb5_crypto_iov input[5];
+++    krb5_data ksecr, mac;
+++
+++    msgauth_attr = lookup_msgauth_addr(pkt);
+++    if (msgauth_attr == NULL)
+++        return EINVAL;
+++    msgauth_end = msgauth_attr + MSGAUTH_SIZE;
+++    pkt_end = (const uint8_t *)pkt->pkt.data + pkt->pkt.length;
+++
+++    /* Read code, id, and length from the packet. */
+++    input[0].flags = KRB5_CRYPTO_TYPE_DATA;
+++    input[0].data = make_data(pkt->pkt.data, OFFSET_AUTH);
+++
+++    /* Read the provided authenticator. */
+++    input[1].flags = KRB5_CRYPTO_TYPE_DATA;
+++    input[1].data = make_data((uint8_t *)auth, AUTH_FIELD_SIZE);
+++
+++    /* Read any attributes before Message-Authenticator. */
+++    input[2].flags = KRB5_CRYPTO_TYPE_DATA;
+++    input[2].data = make_data(pkt_attr(pkt), msgauth_attr - pkt_attr(pkt));
+++
+++    /* Read Message-Authenticator with the data bytes all set to zero, per RFC
+++     * 2869 section 5.14. */
+++    zeroed_msgauth[0] = msgauth_type;
+++    zeroed_msgauth[1] = MSGAUTH_SIZE;
+++    memset(zeroed_msgauth + 2, 0, MD5_DIGEST_SIZE);
+++    input[3].flags = KRB5_CRYPTO_TYPE_DATA;
+++    input[3].data = make_data(zeroed_msgauth, MSGAUTH_SIZE);
+++
+++    /* Read any attributes after Message-Authenticator. */
+++    input[4].flags = KRB5_CRYPTO_TYPE_DATA;
+++    input[4].data = make_data((uint8_t *)msgauth_end, pkt_end - msgauth_end);
+++
+++    mac = make_data(mac_out, MD5_DIGEST_SIZE);
+++    ksecr = string2data((char *)secret);
+++    return k5_hmac_md5(&ksecr, input, 5, &mac);
+++}
+++
++ ssize_t
++ krad_packet_bytes_needed(const krb5_data *buffer)
++ {
++@@ -255,6 +356,7 @@ krad_packet_new_request(krb5_context ctx, const char *secret, krad_code code,
++     krad_packet *pkt;
++     uchar id;
++     size_t attrset_len;
+++    krb5_boolean msgauth_required;
++ 
++     pkt = packet_new();
++     if (pkt == NULL) {
++@@ -274,9 +376,13 @@ krad_packet_new_request(krb5_context ctx, const char *secret, krad_code code,
++     if (retval != 0)
++         goto error;
++ 
+++    /* Determine if Message-Authenticator is required. */
+++    msgauth_required = (*secret != '\0' &&
+++                        code == krad_code_name2num("Access-Request"));
+++
++     /* Encode the attributes. */
++-    retval = kr_attrset_encode(set, secret, pkt_auth(pkt), pkt_attr(pkt),
++-                               &attrset_len);
+++    retval = kr_attrset_encode(set, secret, pkt_auth(pkt), msgauth_required,
+++                               pkt_attr(pkt), &attrset_len);
++     if (retval != 0)
++         goto error;
++ 
++@@ -285,6 +391,13 @@ krad_packet_new_request(krb5_context ctx, const char *secret, krad_code code,
++     pkt_code_set(pkt, code);
++     pkt_len_set(pkt, pkt->pkt.length);
++ 
+++    if (msgauth_required) {
+++        /* Calculate and set the Message-Authenticator MAC. */
+++        retval = calculate_mac(secret, pkt, pkt_auth(pkt), pkt_attr(pkt) + 2);
+++        if (retval != 0)
+++            goto error;
+++    }
+++
++     /* Copy the attrset for future use. */
++     retval = packet_set_attrset(ctx, secret, pkt);
++     if (retval != 0)
++@@ -307,14 +420,18 @@ krad_packet_new_response(krb5_context ctx, const char *secret, krad_code code,
++     krb5_error_code retval;
++     krad_packet *pkt;
++     size_t attrset_len;
+++    krb5_boolean msgauth_required;
++ 
++     pkt = packet_new();
++     if (pkt == NULL)
++         return ENOMEM;
++ 
+++    /* Determine if Message-Authenticator is required. */
+++    msgauth_required = requires_msgauth(secret, code);
+++
++     /* Encode the attributes. */
++-    retval = kr_attrset_encode(set, secret, pkt_auth(request), pkt_attr(pkt),
++-                               &attrset_len);
+++    retval = kr_attrset_encode(set, secret, pkt_auth(request),
+++                               msgauth_required, pkt_attr(pkt), &attrset_len);
++     if (retval != 0)
++         goto error;
++ 
++@@ -330,6 +447,18 @@ krad_packet_new_response(krb5_context ctx, const char *secret, krad_code code,
++     if (retval != 0)
++         goto error;
++ 
+++    if (msgauth_required) {
+++        /*
+++         * Calculate and replace the Message-Authenticator MAC.  Per RFC 2869
+++         * section 5.14, use the authenticator from the request, not from the
+++         * response.
+++         */
+++        retval = calculate_mac(secret, pkt, pkt_auth(request),
+++                               pkt_attr(pkt) + 2);
+++        if (retval != 0)
+++            goto error;
+++    }
+++
++     /* Copy the attrset for future use. */
++     retval = packet_set_attrset(ctx, secret, pkt);
++     if (retval != 0)
++@@ -343,6 +472,34 @@ error:
++     return retval;
++ }
++ 
+++/* Verify the Message-Authenticator value in pkt, using the provided
+++ * authenticator (which may be from pkt or from a corresponding request). */
+++static krb5_error_code
+++verify_msgauth(const char *secret, const krad_packet *pkt,
+++               const uint8_t auth[AUTH_FIELD_SIZE])
+++{
+++    uint8_t mac[MD5_DIGEST_SIZE];
+++    krad_attr msgauth_type = krad_attr_name2num("Message-Authenticator");
+++    const krb5_data *msgauth;
+++    krb5_error_code retval;
+++
+++    msgauth = krad_packet_get_attr(pkt, msgauth_type, 0);
+++    if (msgauth == NULL)
+++        return ENODATA;
+++
+++    retval = calculate_mac(secret, pkt, auth, mac);
+++    if (retval)
+++        return retval;
+++
+++    if (msgauth->length != MD5_DIGEST_SIZE)
+++        return EMSGSIZE;
+++
+++    if (k5_bcmp(mac, msgauth->data, MD5_DIGEST_SIZE) != 0)
+++        return EBADMSG;
+++
+++    return 0;
+++}
+++
++ /* Decode a packet. */
++ static krb5_error_code
++ decode_packet(krb5_context ctx, const char *secret, const krb5_data *buffer,
++@@ -394,21 +551,35 @@ krad_packet_decode_request(krb5_context ctx, const char *secret,
++                            krad_packet **reqpkt)
++ {
++     const krad_packet *tmp = NULL;
+++    krad_packet *req;
++     krb5_error_code retval;
++ 
++-    retval = decode_packet(ctx, secret, buffer, reqpkt);
++-    if (cb != NULL && retval == 0) {
+++    retval = decode_packet(ctx, secret, buffer, &req);
+++    if (retval)
+++        return retval;
+++
+++    /* Verify Message-Authenticator if present. */
+++    if (has_pkt_msgauth(req)) {
+++        retval = verify_msgauth(secret, req, pkt_auth(req));
+++        if (retval) {
+++            krad_packet_free(req);
+++            return retval;
+++        }
+++    }
+++
+++    if (cb != NULL) {
++         for (tmp = (*cb)(data, FALSE); tmp != NULL; tmp = (*cb)(data, FALSE)) {
++             if (pkt_id_get(*reqpkt) == pkt_id_get(tmp))
++                 break;
++         }
++-    }
++ 
++-    if (cb != NULL && (retval != 0 || tmp != NULL))
++-        (*cb)(data, TRUE);
+++        if (tmp != NULL)
+++            (*cb)(data, TRUE);
+++    }
++ 
+++    *reqpkt = req;
++     *duppkt = tmp;
++-    return retval;
+++    return 0;
++ }
++ 
++ krb5_error_code
++@@ -435,9 +606,17 @@ krad_packet_decode_response(krb5_context ctx, const char *secret,
++                 break;
++             }
++ 
++-            /* If the authenticator matches, then the response is valid. */
++-            if (memcmp(pkt_auth(*rsppkt), auth, sizeof(auth)) == 0)
++-                break;
+++            /* Verify the response authenticator. */
+++            if (k5_bcmp(pkt_auth(*rsppkt), auth, sizeof(auth)) != 0)
+++                continue;
+++
+++            /* Verify Message-Authenticator if present. */
+++            if (has_pkt_msgauth(*rsppkt)) {
+++                if (verify_msgauth(secret, *rsppkt, pkt_auth(tmp)) != 0)
+++                    continue;
+++            }
+++
+++            break;
++         }
++     }
++ 
++diff --git a/src/lib/krad/t_attrset.c b/src/lib/krad/t_attrset.c
++index 7928335..fd11ee5 100644
++--- a/src/lib/krad/t_attrset.c
+++++ b/src/lib/krad/t_attrset.c
++@@ -62,7 +62,7 @@ main()
++     noerror(krad_attrset_add(set, krad_attr_name2num("User-Password"), &tmp));
++ 
++     /* Encode attrset. */
++-    noerror(kr_attrset_encode(set, "foo", auth, buffer, &encode_len));
+++    noerror(kr_attrset_encode(set, "foo", auth, FALSE, buffer, &encode_len));
++     krad_attrset_free(set);
++ 
++     /* Manually encode User-Name. */
++diff --git a/src/lib/krad/t_daemon.py b/src/lib/krad/t_daemon.py
++index 7668cd7..7fa0449 100755
++--- a/src/lib/krad/t_daemon.py
+++++ b/src/lib/krad/t_daemon.py
++@@ -40,6 +40,7 @@ DICTIONARY = """
++ ATTRIBUTE\tUser-Name\t1\tstring
++ ATTRIBUTE\tUser-Password\t2\toctets
++ ATTRIBUTE\tNAS-Identifier\t32\tstring
+++ATTRIBUTE\tMessage-Authenticator\t80\toctets
++ """
++ 
++ class TestServer(server.Server):
++@@ -52,7 +53,7 @@ class TestServer(server.Server):
++             if key == "User-Password":
++                 passwd = map(pkt.PwDecrypt, pkt[key])
++ 
++-        reply = self.CreateReplyPacket(pkt)
+++        reply = self.CreateReplyPacket(pkt, message_authenticator=True)
++         if passwd == ['accept']:
++             reply.code = packet.AccessAccept
++         else:
++diff --git a/src/lib/krad/t_packet.c b/src/lib/krad/t_packet.c
++index 0a92e9c..745fb21 100644
++--- a/src/lib/krad/t_packet.c
+++++ b/src/lib/krad/t_packet.c
++@@ -159,6 +159,9 @@ main(int argc, const char **argv)
++     krb5_data username, password;
++     krb5_boolean auth = FALSE;
++     krb5_context ctx;
+++    const krad_packet *dupreq;
+++    const krb5_data *encpkt;
+++    krad_packet *decreq;
++ 
++     username = string2data("testUser");
++ 
++@@ -171,9 +174,17 @@ main(int argc, const char **argv)
++ 
++     password = string2data("accept");
++     noerror(make_packet(ctx, &username, &password, &packets[ACCEPT_PACKET]));
+++    encpkt = krad_packet_encode(packets[ACCEPT_PACKET]);
+++    noerror(krad_packet_decode_request(ctx, "foo", encpkt, NULL, NULL,
+++                                       &dupreq, &decreq));
+++    krad_packet_free(decreq);
++ 
++     password = string2data("reject");
++     noerror(make_packet(ctx, &username, &password, &packets[REJECT_PACKET]));
+++    encpkt = krad_packet_encode(packets[REJECT_PACKET]);
+++    noerror(krad_packet_decode_request(ctx, "foo", encpkt, NULL, NULL,
+++                                       &dupreq, &decreq));
+++    krad_packet_free(decreq);
++ 
++     memset(&hints, 0, sizeof(hints));
++     hints.ai_family = AF_INET;
++diff --git a/src/tests/t_otp.py b/src/tests/t_otp.py
++index cba871a..1ec9165 100755
++--- a/src/tests/t_otp.py
+++++ b/src/tests/t_otp.py
++@@ -49,6 +49,7 @@ ATTRIBUTE    User-Name    1    string
++ ATTRIBUTE    User-Password   2    octets
++ ATTRIBUTE    Service-Type    6    integer
++ ATTRIBUTE    NAS-Identifier  32    string
+++ATTRIBUTE    Message-Authenticator 80 octets
++ '''
++ 
++ class RadiusDaemon(Process):
++@@ -97,6 +98,8 @@ class RadiusDaemon(Process):
++             reply.code = packet.AccessReject
++             replyq['reply'] = False
++ 
+++        reply.add_message_authenticator()
+++
++         outq.put(replyq)
++         if addr is None:
++             sock.send(reply.ReplyPacket())
++-- 
++2.50.1
++
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+index d889855649..ed17b57b19 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+@@ -41,6 +41,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://CVE-2025-3576-01.patch;striplevel=2 \
+            file://CVE-2025-3576-02.patch;striplevel=2 \
+            file://CVE-2025-24528.patch;striplevel=2 \
++           file://CVE-2024-3596.patch;striplevel=2 \
+ "
+ SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
+ SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
+-- 
+2.50.1
 
-
-On Mon, Dec 22, 2025 at 10:58=E2=80=AFAM Jan Vermaete via lists.openembedde=
-d.org
-<jan.vermaete=3Dgmail.com@lists.openembedded.org> wrote:
-
-> Note: I could not test these changes. The previous recipe did not
-> compile on master in the meta-ros layer, and I=E2=80=99m not sure where i=
-t is
-> currently used within meta-ros.
->
-> On Mon, Dec 22, 2025 at 7:54=E2=80=AFPM Jan Vermaete <jan.vermaete@gmail.=
-com>
-> wrote:
-> >
-> >     2025-11-16  John Tsiombikas <nuclear@mutantstargoat.com>
-> >
-> >         freeglut 3.8 changes:
-> >
-> >         * New experimental Cocoa (native MacOS X) backend.
-> >         * Add glutSwapInterval, to control vsync (currently X11 and
-> win32 only).
-> >         * glutExtensionSupported now also reports platform extensions
-> (GLX/WGL).
-> >         * Fix build issues with new cmake versions while maintaining
-> >           compatibility with old cmake.
-> >         * Fix handling of UTF8 window/icon titles.
-> >         * Fix issue with some X11 window managers not properly restorin=
-g
-> >           iconified windows (send _NET_ACTIVE_WINDOW EWMH client
-> message).
-> >         * Fix build issues with C23 compilers (empty argument list
-> semantics).
-> >         * Fix compatibility with older versions of windows which don't
-> have
-> >           RAWHID support (before XP), by loading the entry points
-> dynamically.
-> >         * Fix glutInitDisplayString parsing of "aux", and add =3DN pars=
-ing
-> support
-> >           to specify samples and auxbufs.
-> >         * Various fixes and improvements in the GameCube/Wii backend.
-> >         * Altbuild support for Solaris 2.6/SUN Workshop C.
-> >         * Started conversion of documentation from the website to
-> markdown in
-> >           the source tree: doc/api.md
-> >         * Added the original GLUT manpages, with permission from Mark
-> Kilgard.
-> >         * New demos: accum, vsync, and windows.
-> >         * Cleanup of some old and no longer relevant, or redundant
-> comments in
-> >           the source code.
-> >         * Removed some out of date README files, and updated others.
-> >
-> >     2024-06-08  John Tsiombikas <nuclear@member.fsf.org>
-> >
-> >         freeglut 3.6 changes:
-> >
-> >         * New platforms: Nintendo Gamecube and Nintendo Wii.
-> >         * Minimum cmake version raised to 3.1.
-> >         * Make XInput an optional dependency.
-> >         * Fix incorrect modifier bit mapped to GLUT_ACTIVE_SUPER on X11=
-.
-> >         * Add support for ARM64 MSVC targets.
-> >         * Fix for unicode builds on windows.
-> >         * Fix build on some versions of MinGW carrying an incorrect
-> winuser.h.
-> >         * Fix menu-related memory leak when an error occurs.
-> >         * Various build improvements & fixes.
-> >
-> > Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-> > ---
-> >  .../freeglut/{freeglut_3.4.0.bb =3D> freeglut_3.8.0.bb}        | 5 ++-=
---
-> >  1 file changed, 2 insertions(+), 3 deletions(-)
-> >  rename meta-oe/recipes-graphics/freeglut/{freeglut_3.4.0.bb =3D>
-> freeglut_3.8.0.bb} (90%)
-> >
-> > diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-> b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> > similarity index 90%
-> > rename from meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-> > rename to meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> > index 13f3d111fe..25ba1e05bb 100644
-> > --- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-> > +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-> > @@ -5,12 +5,10 @@ LICENSE =3D "MIT"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D89c0b58a3e01ce3d8254c9f59e7=
-8adfb"
-> >
-> >  SRC_URI =3D "
-> https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.ta=
-r.gz
-> "
-> > -SRC_URI[sha256sum] =3D
-> "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
-> > +SRC_URI[sha256sum] =3D
-> "674dcaff25010e09e450aec458b8870d9e98c46f99538db457ab659b321d9989"
-> >
-> >  inherit cmake features_check pkgconfig
-> >
-> > -EXTRA_OECMAKE =3D "-DCMAKE_POLICY_VERSION_MINIMUM=3D3.5"
-> > -
-> >  # depends on virtual/libgl and libxi
-> >  REQUIRED_DISTRO_FEATURES =3D "opengl x11"
-> >
-> > @@ -19,6 +17,7 @@ PACKAGECONFIG[gles] =3D
-> "-DFREEGLUT_GLES=3DON,-DFREEGLUT_GLES=3DOFF,"
-> >  PACKAGECONFIG[wayland] =3D
-> "-DFREEGLUT_WAYLAND=3DON,-DFREEGLUT_WAYLAND=3DOFF,libxkbcommon"
-> >  PACKAGECONFIG[demos] =3D
-> "-DFREEGLUT_BUILD_DEMOS=3DON,-DFREEGLUT_BUILD_DEMOS=3DOFF,"
-> >  PACKAGECONFIG[x11] =3D ",,virtual/libx11 libice libxmu libglu libxrand=
-r
-> libxext"
-> > +
-> >  # Add -Wno-implicit-function-declaration since it might be otherwise
-> treated at
-> >  # error by clang16+ and this is not really a problem
-> >  CFLAGS +=3D "-Wno-implicit-function-declaration"
-> > --
-> > 2.47.3
-> >
->
->
-> --
-> Jan Vermaete
-> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#122798):
-> https://lists.openembedded.org/g/openembedded-devel/message/122798
-> Mute This Topic: https://lists.openembedded.org/mt/116905850/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000a990ad0646952f52
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">it fails to build on YP AB -=C2=A0<a href=3D"https://autob=
-uilder.yoctoproject.org/valkyrie/api/v2/logs/4644384/raw_inline">https://au=
-tobuilder.yoctoproject.org/valkyrie/api/v2/logs/4644384/raw_inline</a><div>=
-<br></div><div><pre style=3D"color:rgb(255,255,255)"> -- Found OpenGL: /srv=
-/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/f=
-reeglut/3.8.0/recipe-sysroot/usr/lib/libGL.so  found components: OpenGL
-| -- Found PkgConfig: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/w=
-ork/x86-64-v3-poky-linux/freeglut/3.8.0/recipe-sysroot-native/usr/bin/pkg-c=
-onfig (found version &quot;0.29.2&quot;)
-| CMake Error at /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x=
-86-64-v3-poky-linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.=
-2/Modules/FindPackageHandleStandardArgs.cmake:290 (message):
-|   Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY)
-| Call Stack (most recent call first):
-|   /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky=
--linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/Fin=
-dPackageHandleStandardArgs.cmake:654 (_FPHSA_FAILURE_MESSAGE)
-|   /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky=
--linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/Fin=
-dOpenGL.cmake:698 (find_package_handle_standard_args)
-|   CMakeLists.txt:435 (FIND_PACKAGE)
-|=20
-|=20
-| -- Configuring incomplete, errors occurred!
-| WARNING: exit code 1 from a shell command.</pre></div></div><br><div clas=
-s=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_att=
-r">On Mon, Dec 22, 2025 at 10:58=E2=80=AFAM Jan Vermaete via <a href=3D"htt=
-p://lists.openembedded.org">lists.openembedded.org</a> &lt;jan.vermaete=3D<=
-a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembe=
-dded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">Note: I could not test these changes. The previous recipe did not<b=
-r>
-compile on master in the meta-ros layer, and I=E2=80=99m not sure where it =
-is<br>
-currently used within meta-ros.<br>
-<br>
-On Mon, Dec 22, 2025 at 7:54=E2=80=AFPM Jan Vermaete &lt;<a href=3D"mailto:=
-jan.vermaete@gmail.com" target=3D"_blank">jan.vermaete@gmail.com</a>&gt; wr=
-ote:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A02025-11-16=C2=A0 John Tsiombikas &lt;<a href=3D"mai=
-lto:nuclear@mutantstargoat.com" target=3D"_blank">nuclear@mutantstargoat.co=
-m</a>&gt;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0freeglut 3.8 changes:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* New experimental Cocoa (native MacO=
-S X) backend.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Add glutSwapInterval, to control vs=
-ync (currently X11 and win32 only).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* glutExtensionSupported now also rep=
-orts platform extensions (GLX/WGL).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix build issues with new cmake ver=
-sions while maintaining<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0compatibility with old cmake.<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix handling of UTF8 window/icon ti=
-tles.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix issue with some X11 window mana=
-gers not properly restoring<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0iconified windows (send _NET_A=
-CTIVE_WINDOW EWMH client message).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix build issues with C23 compilers=
- (empty argument list semantics).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix compatibility with older versio=
-ns of windows which don&#39;t have<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0RAWHID support (before XP), by=
- loading the entry points dynamically.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix glutInitDisplayString parsing o=
-f &quot;aux&quot;, and add =3DN parsing support<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0to specify samples and auxbufs=
-.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Various fixes and improvements in t=
-he GameCube/Wii backend.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Altbuild support for Solaris 2.6/SU=
-N Workshop C.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Started conversion of documentation=
- from the website to markdown in<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0the source tree: doc/api.md<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Added the original GLUT manpages, w=
-ith permission from Mark Kilgard.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* New demos: accum, vsync, and window=
-s.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Cleanup of some old and no longer r=
-elevant, or redundant comments in<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0the source code.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Removed some out of date README fil=
-es, and updated others.<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A02024-06-08=C2=A0 John Tsiombikas &lt;<a href=3D"mai=
-lto:nuclear@member.fsf.org" target=3D"_blank">nuclear@member.fsf.org</a>&gt=
-;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0freeglut 3.6 changes:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* New platforms: Nintendo Gamecube an=
-d Nintendo Wii.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Minimum cmake version raised to 3.1=
-.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Make XInput an optional dependency.=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix incorrect modifier bit mapped t=
-o GLUT_ACTIVE_SUPER on X11.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Add support for ARM64 MSVC targets.=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix for unicode builds on windows.<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix build on some versions of MinGW=
- carrying an incorrect winuser.h.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Fix menu-related memory leak when a=
-n error occurs.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Various build improvements &amp; fi=
-xes.<br>
-&gt;<br>
-&gt; Signed-off-by: Jan Vermaete &lt;<a href=3D"mailto:jan.vermaete@gmail.c=
-om" target=3D"_blank">jan.vermaete@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../freeglut/{<a href=3D"http://freeglut_3.4.0.bb" rel=3D"norefe=
-rrer" target=3D"_blank">freeglut_3.4.0.bb</a> =3D&gt; <a href=3D"http://fre=
-eglut_3.8.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.8.0.bb</a>}=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 5 ++---<br>
-&gt;=C2=A0 1 file changed, 2 insertions(+), 3 deletions(-)<br>
-&gt;=C2=A0 rename meta-oe/recipes-graphics/freeglut/{<a href=3D"http://free=
-glut_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.4.0.bb</a> =
-=3D&gt; <a href=3D"http://freeglut_3.8.0.bb" rel=3D"noreferrer" target=3D"_=
-blank">freeglut_3.8.0.bb</a>} (90%)<br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeg=
-lut_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.4.0.bb</a> b/=
-meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeglut_3.8.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">freeglut_3.8.0.bb</a><br>
-&gt; similarity index 90%<br>
-&gt; rename from meta-oe/recipes-graphics/freeglut/<a href=3D"http://freegl=
-ut_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.4.0.bb</a><br>
-&gt; rename to meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeglut=
-_3.8.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.8.0.bb</a><br>
-&gt; index 13f3d111fe..25ba1e05bb 100644<br>
-&gt; --- a/meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeglut_3.4=
-.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.4.0.bb</a><br>
-&gt; +++ b/meta-oe/recipes-graphics/freeglut/<a href=3D"http://freeglut_3.8=
-.0.bb" rel=3D"noreferrer" target=3D"_blank">freeglut_3.8.0.bb</a><br>
-&gt; @@ -5,12 +5,10 @@ LICENSE =3D &quot;MIT&quot;<br>
-&gt;=C2=A0 LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D89c0b58a3e01ce3d=
-8254c9f59e78adfb&quot;<br>
-&gt;<br>
-&gt;=C2=A0 SRC_URI =3D &quot;<a href=3D"https://github.com/$%7BBPN%7D/$%7BB=
-PN%7D/releases/download/v$%7BPV%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz" rel=3D"nore=
-ferrer" target=3D"_blank">https://github.com/${BPN}/${BPN}/releases/downloa=
-d/v${PV}/${BPN}-${PV}.tar.gz</a>&quot;<br>
-&gt; -SRC_URI[sha256sum] =3D &quot;3c0bcb915d9b180a97edaebd011b7a1de54583a8=
-38644dcd42bb0ea0c6f3eaec&quot;<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;674dcaff25010e09e450aec458b8870d9e98c46f=
-99538db457ab659b321d9989&quot;<br>
-&gt;<br>
-&gt;=C2=A0 inherit cmake features_check pkgconfig<br>
-&gt;<br>
-&gt; -EXTRA_OECMAKE =3D &quot;-DCMAKE_POLICY_VERSION_MINIMUM=3D3.5&quot;<br=
->
-&gt; -<br>
-&gt;=C2=A0 # depends on virtual/libgl and libxi<br>
-&gt;=C2=A0 REQUIRED_DISTRO_FEATURES =3D &quot;opengl x11&quot;<br>
-&gt;<br>
-&gt; @@ -19,6 +17,7 @@ PACKAGECONFIG[gles] =3D &quot;-DFREEGLUT_GLES=3DON,-=
-DFREEGLUT_GLES=3DOFF,&quot;<br>
-&gt;=C2=A0 PACKAGECONFIG[wayland] =3D &quot;-DFREEGLUT_WAYLAND=3DON,-DFREEG=
-LUT_WAYLAND=3DOFF,libxkbcommon&quot;<br>
-&gt;=C2=A0 PACKAGECONFIG[demos] =3D &quot;-DFREEGLUT_BUILD_DEMOS=3DON,-DFRE=
-EGLUT_BUILD_DEMOS=3DOFF,&quot;<br>
-&gt;=C2=A0 PACKAGECONFIG[x11] =3D &quot;,,virtual/libx11 libice libxmu libg=
-lu libxrandr libxext&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 # Add -Wno-implicit-function-declaration since it might be other=
-wise treated at<br>
-&gt;=C2=A0 # error by clang16+ and this is not really a problem<br>
-&gt;=C2=A0 CFLAGS +=3D &quot;-Wno-implicit-function-declaration&quot;<br>
-&gt; --<br>
-&gt; 2.47.3<br>
-&gt;<br>
-<br>
-<br>
--- <br>
-Jan Vermaete<br>
-=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel<br=
->
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#122798): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/122798" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/122798</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116905850/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/116905850/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000a990ad0646952f52--
 
