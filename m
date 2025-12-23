@@ -2,114 +2,121 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10E39E6FE26
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1205EE6FE27
 	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 16:40:15 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.104436.1766508011105578340
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.104088.1766508010517593462
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 08:40:11 -0800
+ Tue, 23 Dec 2025 08:40:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ipTZNR6B;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47775fb6c56so37861815e9.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=V41DVtXI;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-430f5ecaa08so2328833f8f.3
         for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 08:40:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1766508009; x=1767112809; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jlBxYBbQ59HTdGDwFolJBGVjej6mOff3mbuGsGr1Y3U=;
-        b=ipTZNR6B6F5afhK8aIy61mqYl+NTOwB1IMOqt/RCxRNov0S//nfiM4foSoumkkTM4Y
-         SDcW2xkXxVMqUh6FWQ01jgxl8wEBm+UiI2dHKg4KZQVxS+eO6l/ZQZ5zP7TQbniSzrxI
-         75eBO+2xk3cIR3IJJnIauyU0Qcobd2NDji0rJiENWKmxUdPZMY7V0x1mlVP/+0DR3dVu
-         gHkp1svEDrF7ZiFSLjvAlEkG94JzlyF/qHRId7TAzkI29yrxHIXy65Nf3Hr/+6PBqXol
-         teiYa9guw7TomZ5n2tXsVdyUPAK83Wxjv84YTV49tpFT/tOmMVthqFnfCW4mFquukUnP
-         kITQ==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+x4jOTcT8/Fwro7MP3dBRP9upWev7kS7rUklfvqzEmk=;
+        b=V41DVtXIraPC2AAtAuzJwvEDPw276dt/xPT3oNLzs+khTY2zhNuEYvA1+KBs6cJ70L
+         7+cBvV4DUV9TY7TsYo0N6YcXzrHtf56BoPeyQ1g+WDZ1PeHS99GiOlPnI2/jlSCU/gve
+         tYKUiiKah+RFQw3YkRzGzxFTvVWjnT5b3CDJBMENnVVWy3TSJwagqedualGtoYzb0Icr
+         aLHPVIm7RbdUOcaP7Gl7BSBAqqCvWUJnXeby5MND3c+fxyonKZAMoNQ5I5DsUZO+HgFS
+         5XGGGoXK7e3uzbrEfpIa672bL50Ie9XlwUnlUXZtySaC92YGjy9nOUWj970yr990Ouio
+         z/UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1766508009; x=1767112809;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=jlBxYBbQ59HTdGDwFolJBGVjej6mOff3mbuGsGr1Y3U=;
-        b=uP4AZhhMfUuFrmspONllj5LLTjJriQMaighXMYsCLoIcnd9+zOx6Ttj7xYzyh8cwLg
-         C63RXawS+DdPImE3trSLpxezpfjiM/gKVo2zd6EzvJ0ibP3wGRNMNRpA9rL0loXtOF+t
-         WrHzpm7cdepP3PsgUz7RbVZYQrgNpdqePvPCSU2Y7gKkiitVmjxdQomCR//Lo9szEK/h
-         k6d2/4hWV/HIONHmdgvWkbER3z55Z/1NncfwZJMgf6dHct/Ho1Q3PxKlens4RcIjsgoK
-         2y2+UZnlwZn56pyj2oV9DDMDNZ5zylwJ8j7wzNyAeYJIeY2Ncs4TJ77X20sJmQbfClBc
-         m5Eg==
-X-Gm-Message-State: AOJu0YxphqW7c8s+86c50J1cok+KyoQVOKFFv579hGZUZEMooLOFBjRo
-	ddUAY9cch6Rw98slAyVH41AE9pONDExC5/iJOPeUrr20lwEc7DgufxIip+CJyA==
-X-Gm-Gg: AY/fxX6DJhhh220lN4VRdNYimOCqEfLpn5lNl3rVnatwa23ZA7sRJKqB5P6UbEbeVUh
-	n4lI9rdBBhBWX/lpjRhz04jhKSrcEyMQbPoAhynpmOSHxBx39notGFfZKbf47ienuBUkv1iYI/a
-	jKGWXZf9bcuCAVx1B2hX+UuBGddDyJ/yxIq1fjTqc5dCT4LQxpkjkW0/gDFUglQgUY5afyrwNUg
-	MqbNyN8zgzslmA1MZQVufoByE1na6LEx/0eQrblpVTUWx9ELj3qKOIW+2HRTFQTlevmcbJncUJH
-	yCONCPGKkunXz9ADuLgiVae7IdESFJk62Pc4tGJBkRtPoHVJX36VqTCTe+zj+8hklg8KYHGNQzf
-	ccQp/3/PerVwHvtMzXM/NXcg83juhmRAhCfU1dZs0euXuEyL6kJrs0yecxjVsJv476a3jNxCL38
-	g8CSXxdCBH
-X-Google-Smtp-Source: AGHT+IHp/kFxNgz0AKA2MbsdebQe/r/EsWTwzypdl0RJgzMxmlurG7zktvDI6MVxRUJHS7Z8L0/6jQ==
-X-Received: by 2002:a05:600c:8484:b0:479:3a87:2090 with SMTP id 5b1f17b1804b1-47d195aa3a3mr128976675e9.37.1766508009331;
-        Tue, 23 Dec 2025 08:40:09 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+x4jOTcT8/Fwro7MP3dBRP9upWev7kS7rUklfvqzEmk=;
+        b=Koyfti2pgpWu5NeYRnQ11xS/8Zn5oWn314aRFbp1qWyKNns3uPK4t7y3fFaTsvfCa+
+         HBd3EZMjCREemHbY223cId43KOuaXtg8/ykllESoOKFe56h7fWPibTc4NxHUw2vn7ML+
+         93cE56K20avY/Mi2KOQXvuqoSFcWlyzuIWwewB0U6Y68UspUylYxafGbECPlt740dX60
+         WhsBquguUxRIsHOFksg10jibYLncsOCx5XBVH51B0SzZc/vXKSFk+rxs2UUDyWLVIyHg
+         Yc+pcRz1yJwgT9CaugpXFC1/2ARQAy1FtOU1IDbTPgtZV974qpJ2uvTqkP9ZvtM18RA8
+         lANQ==
+X-Gm-Message-State: AOJu0Ywdr0q7Tgf+mN6M3kCRRnIZT5CVMeRadDNylycqX70epyTlm8DW
+	Y1RPg0+BqGDWJW/oBWYJntTVyNMWxWWCxhp+ZdTPpdEcX/fRjeTYvCRv8kaPWg==
+X-Gm-Gg: AY/fxX5rrNVKjAX5b2CvZgDTjM9q9rW9CNYqCHXpT8viwBVGDI98fFnknF9BiQVsOJW
+	dxmr8FE/8xfpl1NOZlaULNixEoXogCp5wjaMLoA3QAH31vq4qu8RT5FqHQTNmB5Y6CRIRiK+xnk
+	R9n1AuvG5Jxd9+rrEPsLNEOGvuXDRGm1yS8gs84MejM9WcocTANVYsYwp5BvBUah5/wXB/og5Ne
+	jXuC8WqAqyYIJx4pxBTqNFmOboMaiMvHjdsmlBIlHwfJSUHwVeajMBOtV+WooYTe1v7uzLVxOX8
+	R5I2dYtSfKtTMyjmpMtLl6Brj5YwBUqyit3VjSwsWs4z/cXMhNfYQKxkG1/svGSz2GebLPJF1W6
+	QcgeUrry2obQssMKJuJ4DuFCiVyk6nbliGlLDr2yWHuKk8ID5EXYfwCY6KDDfrCKopdjOJTRm5P
+	ZilxJM9k2VTlCvmv7Q5Gk=
+X-Google-Smtp-Source: AGHT+IEHbV2HYirs6EenEpQvkrscxUxM/isEP9uLZaqMWjvQOk3CN0T5JEurQB/fZYh4BEhi/HFkrw==
+X-Received: by 2002:a05:6000:178a:b0:430:f2ee:b219 with SMTP id ffacd0b85a97d-4324e4cbee3mr18047706f8f.25.1766508008592;
+        Tue, 23 Dec 2025 08:40:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa08d9sm29457470f8f.30.2025.12.23.08.40.08
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa08d9sm29457470f8f.30.2025.12.23.08.40.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 23 Dec 2025 08:40:08 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] gensio: upgrade 2.8.15 -> 3.0.1
-Date: Tue, 23 Dec 2025 17:40:07 +0100
-Message-ID: <20251223164007.745973-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/2] ace: upgrade 8.0.2 -> 8.0.5
+Date: Tue, 23 Dec 2025 17:40:06 +0100
+Message-ID: <20251223164007.745973-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251223164007.745973-1-skandigraun@gmail.com>
-References: <20251223164007.745973-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 16:40:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122839
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122838
 
-Release notes:
-3.0.1:
-Fix: Problems with IPv6 compatibility and running without a fully working network.
-Fix: The permissions of the PTY were not set correctly with gtlsshd.
-Fix: Some issues building under MSYS2 were fixed.
-Enhancement: A "chardelay" gensio is added. This is basically the same as the Nagle
-  algorithm in TCP, but it works on other things, like UDP and relpkt, to make
-  transfer more efficient on those.
-Enhancement: You can use "gsh" instead of "gtlssh" for a shorter name.
-  Lots of little documentation updates.
+Changelog:
+8.0.5:
+Fixed building ACE for Android with uses_wchar=1
+Add support for parallel make using Embarcadero bcc64x compiler
+Fixed compile errors when C++23 is enabled
+Updated thread name support to work with older Windows versions
 
-3.0.0:
-The only major thing is all the deprecated sergensio code has been removed.
-There are also some minor bug fixes, some documentation improvements, some minor
-  improvements, and a bug fix around ax25 where it was reporting the close of the
-  last channel too soon.
+8.0.4:
+Fixed compile errors in the ACE core when compiled without thread
+support (only core of ACE compiled and not tested)
+
+8.0.3:
+Deprecated ACE_Copy_Disabled in favor of deleted copy/assignment
+Replaced usage of ACE_MIN and ACE_MAX with std::min/std::max
+Add support for abstract paths to ACE_UNIX_ADDR
+Improve support for 64bit file sizes
+Minor fixes to ACE logging classes
+Use C++11 default for more classes
+GCC versions less than 9 and Clang versions less than 12 are no longer tested in GitHub Actions CI
+Dropped support for Embarcadero C++ Builder bcc32c and bcc64 compilers
+Updated support for Green Hills INTEGRITY and INTEGRITY-178 tuMP RTOS. Tested on INTEGRITY 11.4.6 and INTEGRITY-178 5.0.0.
+Thread names given to ACE_OS::thr_create are now passed down to the OS on Windows and on INTEGRITY.
+
+https://github.com/DOCGroup/ACE_TAO/releases
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gensio/{gensio_2.8.15.bb => gensio_3.0.1.bb}              | 4 ++--
+ .../recipes-connectivity/ace/{ace_8.0.2.bb => ace_8.0.5.bb}   | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/gensio/{gensio_2.8.15.bb => gensio_3.0.1.bb} (90%)
+ rename meta-oe/recipes-connectivity/ace/{ace_8.0.2.bb => ace_8.0.5.bb} (91%)
 
-diff --git a/meta-oe/recipes-connectivity/gensio/gensio_2.8.15.bb b/meta-oe/recipes-connectivity/gensio/gensio_3.0.1.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/gensio/gensio_2.8.15.bb
-rename to meta-oe/recipes-connectivity/gensio/gensio_3.0.1.bb
-index 71a05560fc..3427ef3a30 100644
---- a/meta-oe/recipes-connectivity/gensio/gensio_2.8.15.bb
-+++ b/meta-oe/recipes-connectivity/gensio/gensio_3.0.1.bb
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
-                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     "
+diff --git a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb b/meta-oe/recipes-connectivity/ace/ace_8.0.5.bb
+similarity index 91%
+rename from meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
+rename to meta-oe/recipes-connectivity/ace/ace_8.0.5.bb
+index 35252c3efc..bd935999ca 100644
+--- a/meta-oe/recipes-connectivity/ace/ace_8.0.2.bb
++++ b/meta-oe/recipes-connectivity/ace/ace_8.0.5.bb
+@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d2c090e9c730fd91677782d8e2091d77"
  
--SRCREV = "5ffe39f4a247ff001661a4c283305a3abe823fe3"
-+SRCREV = "f15f54da21697c3656a6fb3ad65a8bec1687c772"
+ DEPENDS += "openssl gperf-native"
  
--SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=2.8.x;tag=v${PV}"
-+SRC_URI = "git://github.com/cminyard/gensio;protocol=https;branch=ipv6-fix;tag=v${PV}"
+-SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-8_0_2/ACE-${PV}.tar.bz2 \
++SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-8_0_5/ACE-${PV}.tar.bz2 \
+            file://ace_config.patch \
+            file://no_sysctl.patch \
+           "
+-SRC_URI[sha256sum] = "dba38a905858ec4a44c04b4bbaef42b891adf061e8c0bbdaa1dce2c04fcccb7f"
++SRC_URI[sha256sum] = "2c40ecdbbd04c79fd5a815666e14654e71ab82d4335cdb3aa8669def250c3444"
  
- 
- inherit autotools
+ UPSTREAM_CHECK_URI = "https://github.com/DOCGroup/ACE_TAO/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
