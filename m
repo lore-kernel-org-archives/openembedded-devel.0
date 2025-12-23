@@ -2,141 +2,98 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58A8FE6F086
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 17:49:35 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.105723.1766512169633263223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C32A8E6FE29
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 19:34:45 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.107190.1766518485196535744
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 09:49:29 -0800
+ Tue, 23 Dec 2025 11:34:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CIHb4AeO;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-477b198f4bcso34576675e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 09:49:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bw89eL7e;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-477a1c28778so60916835e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 11:34:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766512168; x=1767116968; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766518483; x=1767123283; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=H0at+y+aZKFwtRJiuHHs3QcQQ/4CvyGBSY4QNCpyLQM=;
-        b=CIHb4AeONC5TKFJ8aSKjsaqM55mXDq/3SIgWX9Vh6x2iL3IHoLPdoVUNMde7vaE5Pc
-         mcYrExvlOHVZCR6HtWC47h9ld54bgAtTW/98CPP3NB14PevqoxGOJ7ttQdXbKIuBesmm
-         QdaBEDCWwaJcpwFP4QavU7ZN+of7JVlsfxnHRT7qhQS0LpOByEQqPLvcuI1xFRdc3fGL
-         OU42Je30QLXaoWEukHu6dRpvPZtgM8QnnXU+htfwwF6Rw+aF+PJabkQyhJwQ39gvJKTN
-         3gxw+OxZs29PFIhR1C/XAZJCLqLUrV3UqlHO6ryr1a6jeTJs8RUmto330H7Zd85LvvP/
-         ylVA==
+        bh=sBxOsG4D+gid82ONvDGWxhCiU3lXo9rQg1e7ZhlZ5PA=;
+        b=bw89eL7eM1uTIa2V+QR8QitNYFiK37rgncyAc5Ef7gsL1IXXb6D+uMnMtYcoWm1kjq
+         LpUiB8sJCOz7eUL1rWUE7P9AhoDUa4UhHTXddBYi6K1W7KXJ8zjfqMQHo9JFjSuYEPs7
+         EUFbfB9KOLsBsZ2aTk2HECc13q3k2+xZzyXPj9c/IasQ8cjE/CjIyg5Hs94ywRCRvv5a
+         Ev5ZhrtMUiGJvn2oH2G4kLpkpr0s9POFJ8Fk/OYNm/X9/+qB+vUBYCApgL3WW9JaAVjp
+         O7A2mrXJrGvTKWS18TkVx31cflRE+nKKqKXE5q9Qnbzmp5VcVvOQbj2DERIz+kzm5OcY
+         5/fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766512168; x=1767116968;
+        d=1e100.net; s=20230601; t=1766518483; x=1767123283;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=H0at+y+aZKFwtRJiuHHs3QcQQ/4CvyGBSY4QNCpyLQM=;
-        b=eECe5Ro2vpf0yEFuJKixTHGHKref8FeVUdlXf5HiYYYMqreJlTiF3s6GVpUkfFr4RH
-         aNgp433IEPs8thmoEC7Pp+Dl/YRKDBGzXHcVVWUefegPbFKvaM7RjVGhz1udhxRi8Zxa
-         NQR78p5i99OcLuq562fd/2zMxeFv99u7OvjMams0qQmlz1BU9F6f3ABn4/JbyCy5tQi+
-         t6GkIfrT5Q0vvM1vuwKATDN5CAA1pJlEO15aZDGolvUflOb143+DOfdT1eHGxE+seTgR
-         Lgt8AnHaiRm90gDTHb1rfJ9Wo88ScAEmiFPahjyzDS8ABn2qL/181CacNxJPLE8r3DZb
-         g/vg==
-X-Gm-Message-State: AOJu0Yxdq9pBRfpAtUVrGnA91Jz1FWJUsCCGV7BmFLPWv7KP3ZVXIFJ5
-	hxO6fq5TaPYgKZeIWygSML/nOEE+WfjGymmAmJn4fZ9g7XldUYTWezwFshplzw==
-X-Gm-Gg: AY/fxX4urz8+a9ZTTqkpmgxqYXABHUCpYaBQfs2dD7loQxFmwkr9yoNm/VEhYvLNu6y
-	/e6naPEgAOGml+TYAawQChqLOROpEKf5PtPaNdq9qSCAJauSEAXS9K65/VlPRQeSNASi/Z/zHrR
-	BS82iavKjufQyC0W2yDguYrr17F/LJ1e4VdZl3pddgQ0yRg8X2WbB7lZwyCxJwLREkXRuKV5eoS
-	aSGdfq0ytY9MwSjb5dGWwlO23aY2EHLAC7nwtGTQLPjTfPXxzae4BNjpm9+gl8+EG/kIx9mC3Q6
-	LecRypabPN0Pn46lY76Kq7TKASsINqfvswtv5Zf1FjTdOK7eFvRWYd/nEjwCj9yFC9z8k2PJFtM
-	r7AGid0ygwfh6yJ5BcigWZ0Ea//3/y9dwXyjRqRX4k89hqoDf3zWbqtlkNIrUtBc7Vx35wR5ROY
-	FmHsHQoZzW
-X-Google-Smtp-Source: AGHT+IG6dZMJ57k0yT0WWU3ZklycSRry/Q6NZcfwFdUvSqVXRptxt7zOlRhyhieyjlFW3CPog5rjoA==
-X-Received: by 2002:a5d:5f54:0:b0:431:907:f307 with SMTP id ffacd0b85a97d-4324e506ab1mr15325373f8f.48.1766512167713;
-        Tue, 23 Dec 2025 09:49:27 -0800 (PST)
+        bh=sBxOsG4D+gid82ONvDGWxhCiU3lXo9rQg1e7ZhlZ5PA=;
+        b=LoXkdcwQ9GjlLXvlpUFbB31MbWQKmtkoc9EmQFN2n6l8wn5vvt6y5P+HVqQmr1EqHv
+         VV74u9sGM8MBDCRbLMjxt5WCRXgWs1gC6eMcojLq1A5ndVfQBqEgY6Sfl/gVe+U/rZa/
+         +hYH+n3wM9smwkqK8JLVLTL+MjYS4+i80cwDNGmNDBQ/JTmX3LzzKdxFC40zb8685HpD
+         kmOKY4zhZ6zlpPiOWpeG+CMbIuksuzo/trc5TQTXDvSrHZpCNPkYi87yiwx/OjEHE3U0
+         ozBo3AnC1MsfNBQss4yATDeYxowrSzhWe+KJhIqH5mO1RPb0MQ3jYrD2pnsa32fh6Dhd
+         lqDA==
+X-Gm-Message-State: AOJu0Yy3zTJEAxiQmKtdJnExytAzkFtcFJc8agJBwAiUbgmEgpCni5Y3
+	flEKRvxip6VjCorV3AvVlL2Vu/PjJgl7PIjB27heT2N8CfkECByIlLZOx9BjcQ==
+X-Gm-Gg: AY/fxX7bWo27yRfAvBQDaugHey8EODDp09gQpBpSAlo1j0xI4uW8f9rFQ/gZtJmhKMM
+	02PwUW+bQjateIdtGHyt3JB/xF5BSgJ1WYEFIWGSTcVpbqQnQRGIz6U9xdvwuc6/bYldntFTeTW
+	Ijm/5KNtqne8VlRMjCNdcxk7cFAbEgkkb7W+dfutwG3MzKwbfcxIEOmPQvA62rLaCCKDwz3yve3
+	crseReIUJIQhE8HU+aHnjolu5jLvCuzODgkWXxx0ANMNHKhNMfBb/GPJ7Jx3EOq9vNZWR4SYRR1
+	xVSqhSQ67Tsmc0nwF6YWts1oMRy+zUqQmknlZp8u/TsKKeXyTnyPc1Livx2ZIalSZ94jXsk60qx
+	Td+xLHlSVBEDvLgv0ayplFW1K+zf61plX61LK1EY3QC7Nzsf0mgMdeox1r3QUxwT+11o+EpIbHq
+	VtaQrXQO/8
+X-Google-Smtp-Source: AGHT+IF9TrGZdDQOCWwwFUVfseJ/TjQcrvbvxWQYJZIDvMaDrrfVz+y9PIsUJpsTOTVSiAauJ4cxEw==
+X-Received: by 2002:a05:6000:430b:b0:431:8bf:f081 with SMTP id ffacd0b85a97d-4324e4cbc58mr18002348f8f.23.1766518483346;
+        Tue, 23 Dec 2025 11:34:43 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830f3sm28436823f8f.22.2025.12.23.09.49.27
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4325dacae0esm18802690f8f.12.2025.12.23.11.34.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 09:49:27 -0800 (PST)
+        Tue, 23 Dec 2025 11:34:42 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/2] tinyproxy: patch CVE-2025-63938
-Date: Tue, 23 Dec 2025 18:49:25 +0100
-Message-ID: <20251223174926.897953-1-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH] wolfssl: ignore CVE-2025-11931 and CVE-2025-12889
+Date: Tue, 23 Dec 2025 20:34:41 +0100
+Message-ID: <20251223193441.1133870-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 17:49:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122840
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 19:34:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122842
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-63938
+NVD claims that WolfSSL 5.8.4 is affected by both of these vulnerabilities,
+however actually both have been fixed in that version.
 
-Pick the patch referenced by the nvd report.
+CVE-2025-11931: NVD[1] references [2] PR as a patch, which was merged in [3].
+CVE-2025-12889: NVD[4] referenced [5] PR as a patch, which was merged in [6].
+
+[1]: https://nvd.nist.gov/vuln/detail/CVE-2025-11931
+[2]: https://github.com/wolfSSL/wolfssl/pull/9223
+[3]: https://github.com/wolfSSL/wolfssl/commit/e497d28ae1b364e0136849996b893f55d8a8fd4a
+[4]: https://nvd.nist.gov/vuln/detail/CVE-2025-12889
+[5]: https://github.com/wolfSSL/wolfssl/pull/9395
+[6]: https://github.com/wolfSSL/wolfssl/commit/2db1c7a522ba258d841fbce95ab84156669a5a3e
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../tinyproxy/tinyproxy/CVE-2025-63938.patch  | 43 +++++++++++++++++++
- .../tinyproxy/tinyproxy_1.11.2.bb             |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
+ meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
-new file mode 100644
-index 0000000000..e06e0d3eae
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
-@@ -0,0 +1,43 @@
-+From cee659d2ac1e4e9d1ce388338f46df6c4bae8278 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Fri, 17 Oct 2025 22:57:39 +0000
-+Subject: [PATCH] reqs: fix integer overflow in port number processing
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
+index 8512269912..f16c8c1e68 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
+@@ -46,3 +46,6 @@ do_install_ptest() {
+     cp -rf ${S}/certs  ${D}${PTEST_PATH}
+     cp -rf ${S}/tests  ${D}${PTEST_PATH}
+ }
 +
-+From: rofl0r <rofl0r@users.noreply.github.com>
-+
-+closes #586
-+
-+CVE: CVE-2025-63938
-+Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/3c0fde94981b025271ffa1788ae425257841bf5a]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/reqs.c | 9 ++++++---
-+ 1 file changed, 6 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/reqs.c b/src/reqs.c
-+index a65ed54..1e5895c 100644
-+--- a/src/reqs.c
-++++ b/src/reqs.c
-+@@ -174,7 +174,7 @@ static int strip_return_port (char *host)
-+ {
-+         char *ptr1;
-+         char *ptr2;
-+-        int port;
-++        unsigned port;
-+ 
-+         ptr1 = strrchr (host, ':');
-+         if (ptr1 == NULL)
-+@@ -186,8 +186,11 @@ static int strip_return_port (char *host)
-+                 return 0;
-+ 
-+         *ptr1++ = '\0';
-+-        if (sscanf (ptr1, "%d", &port) != 1)    /* one conversion required */
-+-                return 0;
-++
-++        port = atoi(ptr1);
-++        /* check that port string is in the valid range 1-0xffff) */
-++        if(strlen(ptr1) > 5 || (port & 0xffff0000)) return 0;
-++
-+         return port;
-+ }
-+ 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-index 5b8e9dcd7a..e386d39cdc 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-@@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
-            file://disable-documentation.patch \
-            file://tinyproxy.service \
-            file://tinyproxy.conf \
-+           file://CVE-2025-63938.patch \
-            "
- 
- SRC_URI[sha256sum] = "2c8fe5496f2c642bfd189020504ab98d74b9edbafcdb94d9f108e157b5bdf96d"
++CVE_STATUS[CVE-2025-11931] = "fixed-version: The currently used version (5.8.4) contains the fix already."
++CVE_STATUS[CVE-2025-12889] = "fixed-version: The currently used version (5.8.4) contains the fix already."
 
