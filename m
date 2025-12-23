@@ -1,117 +1,155 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78E16E6B274
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 05:03:11 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.95332.1766466184484194052
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A759CE6B277
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 06:11:01 +0000 (UTC)
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.96102.1766470256837462039
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Dec 2025 21:03:04 -0800
+ Mon, 22 Dec 2025 22:10:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=aSc4BtaH;
- spf=pass (domain: mvista.com, ip: 209.85.210.174, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-7aab7623f42so5323650b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Dec 2025 21:03:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1766466183; x=1767070983; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zwvo936MA/9EQBoQ7MIpHrkC8YVqG+z6pCYVwqbUWZI=;
-        b=aSc4BtaH3Ut3uVBXpWJRUJeka0pcR3uqongMybhbjiOvMdNiFtY+dviHZTnsEIo3nk
-         Jy0kbW5Bij2oZXoPOpAq1KSnm0Kq5D5cfIkFQ+7q4BJhdpKRdqBzn+INx0zDppnlGATv
-         LTx0IAfypzhh7WJerA0RKvW5u8/OKo7XFFohY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766466183; x=1767070983;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zwvo936MA/9EQBoQ7MIpHrkC8YVqG+z6pCYVwqbUWZI=;
-        b=hahrkiqif2KIw2RdGiYh7xTeWNM4QtKSW3sUxAGikfRdDBfsvUEHo4gXlVQyy8zufs
-         tJX2keIVU0IZ0ox6HbjKlG2ugFOygSiDVgaJSYABuRJQ2BJ3pXPYXTj+n7ZjCMqWhyqV
-         hMq46rBzqGeVY6L+7dxxNe8Xcib4tP9tbSBBGMx6nkE29yy9sOx6fs/Z7KS6pDmfISji
-         LgW2wes66qvUZoN28qg4pjATHBrAbfeFzvRb6lgd/k39sb1JH7PvvkNXienmcHr2b4CG
-         NLLboPdi0PlgowftTksUTHKVveDaAVZVb/jfSUWqo6hRm251rGiQ/qyvpa48U95nGrFV
-         9TcA==
-X-Gm-Message-State: AOJu0YzmlUAWbONEE6NgT1GwGu23JWpLJS1sCgt5GmeWoJe/VACFXLAn
-	ExI2I9sKuXDu/bjiPi4Za9NnZt960QsY3RJMY2VQq/FDgfmJJfFeBxu9NR14tKlIeH2CDqC0DxG
-	9p3U3PXg=
-X-Gm-Gg: AY/fxX7evrC5pCL+UKAU+No+joKo+TIXZ7D31EAwIR+WXyKVSw0nDDexUEcdgxSoMQg
-	MHAB2eAvxQEjB8oTPKLObB3C5vdpTSkvdMoEGTP8PSdpOaPve7vsoIAY4VALcUURDezxMqI4Z3S
-	jMqnXIaM/Yk/PSrA2/qXAl/GruxNqacOHo4ZKTOKlJrhS4h/hx6ZwYQewJI5jioZyIq6d2VCvYn
-	ZPdLWnt3JbC3f3TyrlXS4FbghGvOaT66Oyjh/LQ5LlqnCEoDpeSyDZDeJBbwCuWV30mHHazLGnM
-	psmk7IAnZpCy4DZqvzhgH6igZVlRjvBLN0Ay51T1rmw1LOmgbSBgkiiZzvTCm7y763+VEZ9z8nh
-	zCjXCtq0Rgx0lOsUN2B/iDOdhBmQIBsS03WUXtBbnr4Q0IRcB1a5PHTnLtPvXkwyVcJVamWxUIA
-	kkpDfScK9XE/Dh+ua3vgZavPnR
-X-Google-Smtp-Source: AGHT+IH6EkZWo7PhMCjnTMw5AtMDBMarEAuk6bMrxQg723VZNlSL8MZgVpucrO/0MFDrXoaNPruP8g==
-X-Received: by 2002:a05:6a00:a11:b0:7ff:a989:2e8e with SMTP id d2e1a72fcca58-7ffa9892fe4mr11750315b3a.25.1766466183421;
-        Mon, 22 Dec 2025 21:03:03 -0800 (PST)
-Received: from localhost.localdomain ([2406:7400:54:bb59:d26b:1e5d:2e4a:9386])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7ff7e0a2e3esm11984370b3a.37.2025.12.22.21.03.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Dec 2025 21:03:01 -0800 (PST)
-From: vanusuri@mvista.com
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TmUwo6hF;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1766470257; x=1798006257;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=v0J7feQk428stf46enPA0oeSkFS3ysH6Zmc728FXtUI=;
+  b=TmUwo6hFki84UYWixWjX2sDgV71s//rOHMlfnCvjtumz/nxnAUnU67g1
+   IlAbXDQSxFhEgeYuOPliXECdCWSwGSCQ09WuS7Vu0KuIIUw0Dmxhf7xjA
+   He10UAc3J9zCn9VGCxXIbrJlcok0fJHZbAf3Ci7YVT0vflvq7TsS+Zwy4
+   qXmOA3aEkT0/+lUMJUJv2cnNJ1hYr4GLfrd4zj2ZLH8SoqQfVVScFeh25
+   052JdQVtntI4VpZk5PwRqRuTCjzGsXuzCDgigrrhAEnPFUA2B8WiNv3Gn
+   D0KYZkfGS3Y+gnmaX3w7gUeILvHKQtk2sCtt/IJE8zQN+MwwfyzEq3hIc
+   g==;
+X-CSE-ConnectionGUID: VKxr5SbMRfiQDI5VLFNchw==
+X-CSE-MsgGUID: ox8VDDsJQ++revqvhyCrXw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11650"; a="227536474"
+X-IronPort-AV: E=Sophos;i="6.21,170,1763391600"; 
+   d="scan'208";a="227536474"
+Received: from unknown (HELO az2uksmgr3.o.css.fujitsu.com) ([52.151.125.128])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Dec 2025 15:10:55 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 231791002B97
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:10:55 +0000 (UTC)
+Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id D0251C0245C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:10:54 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id B02F510005AB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:10:52 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH] postgresql: upgrade 14.19 -> 14.20
-Date: Tue, 23 Dec 2025 10:32:52 +0530
-Message-Id: <20251223050252.182801-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [oe][meta-oe][PATCH 1/7] flatpak: upgrade 1.17.0 -> 1.17.2
+Date: Tue, 23 Dec 2025 14:10:36 +0800
+Message-ID: <20251223061043.659-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 05:03:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122816
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122817
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+1. Changelog:
+    https://github.com/flatpak/flatpak/releases/tag/1.17.2
 
-Includes fix for CVE-2025-12817, CVE-2025-12818
+2. Update 0001-flatpak-pc-add-pc_sysrootdir.patch for 1.17.2
 
-Changelog:
-https://www.postgresql.org/docs/release/14.20/
+3. Remove http_backend related options as they were removed in 1.17.2
 
-0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-refreshed for 14.20
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 2 +-
- .../postgresql/{postgresql_14.19.bb => postgresql_14.20.bb}     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_14.19.bb => postgresql_14.20.bb} (84%)
+ .../flatpak/0001-flatpak-pc-add-pc_sysrootdir.patch   | 11 +++++++----
+ .../flatpak/{flatpak_1.17.0.bb => flatpak_1.17.2.bb}  |  7 ++-----
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-extended/flatpak/{flatpak_1.17.0.bb => flatpak_1.17.2.bb} (90%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-index 2eb1deec07..76363cd26d 100644
---- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-+++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-@@ -18,7 +18,7 @@ index bbbb204..0919d2b 100644
- +++ b/configure.ac
- @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+diff --git a/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sysrootdir.patch b/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sysrootdir.patch
+index 08d5625fa7..6207ae617b 100644
+--- a/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sysrootdir.patch
++++ b/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sysrootdir.patch
+@@ -7,22 +7,25 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
+ ---
+ Upstream-Status: Inappropriate [oe-specific]
+ 
++Update for 1.17.2.
++Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
++---
+  meson.build | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/meson.build b/meson.build
+-index 4a0b865e..5f69b1d9 100644
++index e97b8cef..5c8de55f 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -509,7 +509,7 @@ pkgconfig_variables += 'exec_prefix=${prefix}'
++@@ -515,7 +515,7 @@ pkgconfig_variables += 'exec_prefix=${prefix}'
+  pkgconfig_variables += 'datadir=' + ('${prefix}' / get_option('datadir'))
   
-- AC_INIT([PostgreSQL], [14.19], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-+ AC_INIT([PostgreSQL], [14.20], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  pkgconfig_variables += 'datarootdir=' + ('${prefix}' / get_option('datadir'))
+ -pkgconfig_variables += 'interfaces_dir=${datadir}/dbus-1/interfaces/'
+ +pkgconfig_variables += 'interfaces_dir=${pc_sysrootdir}${datadir}/dbus-1/interfaces/'
+- pkgconfig_variables += 'httpbackend=' + get_option('http_backend')
   
- -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
- -Untested combinations of 'autoconf' and PostgreSQL versions are not
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
-similarity index 84%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
-index 1d8ab90c25..04d8723f15 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.19.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
-@@ -11,7 +11,7 @@ SRC_URI += "\
-    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
+  pkgconfig.generate(
++   libflatpak,
+ -- 
+-2.34.1
++2.43.0
+ 
+diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.17.0.bb b/meta-oe/recipes-extended/flatpak/flatpak_1.17.2.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/flatpak/flatpak_1.17.0.bb
+rename to meta-oe/recipes-extended/flatpak/flatpak_1.17.2.bb
+index a51937ea72..b5803e00a4 100644
+--- a/meta-oe/recipes-extended/flatpak/flatpak_1.17.0.bb
++++ b/meta-oe/recipes-extended/flatpak/flatpak_1.17.2.bb
+@@ -4,11 +4,11 @@ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ SRC_URI = " \
+-    git://github.com/flatpak/flatpak;protocol=https;branch=main \
++    git://github.com/flatpak/flatpak;protocol=https;branch=main;tag=${PV} \
+     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
  "
  
--SRC_URI[sha256sum] = "727e9e334bc1a31940df808259f69fe47a59f6d42174b22ae62d67fe7a01ad80"
-+SRC_URI[sha256sum] = "7527f10f1640761bc280ad97d105d286d0cf72e54d36d78cf68e5e5f752b646b"
+-SRCREV = "0835c0272f3a0389f97b02cad4b208f80fec99ed"
++SRCREV = "20599618d623630f7aa38d61a2bb81d86fb25f09"
  
- CVE_CHECK_IGNORE += "\
-    CVE-2017-8806 \
+ 
+ inherit meson pkgconfig gettext systemd gtk-doc gobject-introspection python3native mime features_check useradd
+@@ -49,11 +49,9 @@ GTKDOC_MESON_OPTION = 'gtkdoc'
+ GTKDOC_MESON_ENABLE_FLAG = 'enabled'
+ GTKDOC_MESON_DISABLE_FLAG = 'disabled'
+ 
+-PACKAGECONFIG[curl] = "-Dhttp_backend=curl,,curl"
+ PACKAGECONFIG[dconf] = "-Ddconf=enabled,-Ddconf=disabled,dconf"
+ PACKAGECONFIG[docbook_docs] = "-Ddocbook_docs=enabled,-Ddocbook_docs=disabled,xmlto-native"
+ PACKAGECONFIG[man] = "-Dman=enabled,-Dman=disabled,libxslt-native"
+-PACKAGECONFIG[soup] = "-Dhttp_backend=soup,,libsoup-2.4"
+ PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,xauth socat-native"
+ PACKAGECONFIG[xauth] = "-Dxauth=enabled,-Dxauth=disabled,xauth"
+ PACKAGECONFIG[seccomp] = "-Dseccomp=enabled,-Dseccomp=disabled,libseccomp"
+@@ -62,7 +60,6 @@ PACKAGECONFIG[selinux] = "-Dselinux_module=enabled,-Dselinux_module=disabled,lib
+ PACKAGECONFIG[wayland-security-context] = "-Dwayland_security_context=enabled,-Dwayland_security_context=disabled,wayland wayland-native wayland-protocols"
+ 
+ PACKAGECONFIG ?= " \
+-    curl \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xauth', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'seccomp', 'seccomp', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-security-context', '', d)} \
 -- 
-2.25.1
+2.43.0
 
 
