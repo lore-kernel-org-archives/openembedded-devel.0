@@ -2,73 +2,70 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97445E6F084
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 11:44:03 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.99600.1766490234878604426
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E43A0E6F088
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 12:17:43 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.99722.1766492260796341095
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 03:43:55 -0800
+ Tue, 23 Dec 2025 04:17:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kOiDum7s;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47bdbc90dcaso32458295e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 03:43:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iYrmVKpC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47d1d8a49f5so22124015e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 04:17:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766490233; x=1767095033; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=h3W7P0s1yI2gy6rCxLnyuEB56HBystuGGOe6MeNmX2Y=;
-        b=kOiDum7sxsjY2atdHFAng0cQEMLKlwClcK3Tq47oOrCocSK2z8SHni9vN0rsRbFlyB
-         x/CjPqMmsfX1OVGih6Rqlxt7Eh36ByJm+XXMl7fXC1ALf/YBUgDjfNT1y++J0u+uOAAm
-         wDUn7bohq0eaqJzAKcyr0KsvpAjUMdOvD/eR/OzsWpRmSyYnTPsKrrUi7Lpnt2hzZOgL
-         ZyWY/supnAINjDQnlXn02XgNKQJdOJwDotJwntuTYlEV97B/xXpTwbIAUdqku0OKHISb
-         XtKFtCSX2ogluFGcl53IqiO0Fyp4WG3YzZ8WX7oD+E5VRxEDUt3rwios957AQuxHMbM1
-         XQeQ==
+        d=gmail.com; s=20230601; t=1766492259; x=1767097059; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YJB6IC9CIWsFI27+L0xDAh2edGzuyhGMfBR7BscAtnI=;
+        b=iYrmVKpCM2I82DBv9naZ1uZ1NYWu5VOmWCDrk+DjKyXgAA9L5a1usXnRZeWM+KjTMf
+         wBnq0gM/6WhofGorl3P3ArAKmz3JFNdwHF5QxIIanBx73TRuMBi8yn9vhffXn0V9EvtB
+         oUEzyw9QNbEC75H2ur4/fc0XXRo1FwCE60lfx7C13fgHqpM1pD9U3KtBw/lZ4sPAS72a
+         tY0qiGr9P4JfqVkrbAYSoM5AqSqNwWX7GxdXwgKHIbIPOfI4bmNS1TpPufeEwikF364A
+         BxEJxnpk3hb5N0Zff2kbkt44+HZjWMoSs9R1wWyGklgIq5BYx0NfS0zpvcnr3dNs65bY
+         9Jug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766490233; x=1767095033;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=h3W7P0s1yI2gy6rCxLnyuEB56HBystuGGOe6MeNmX2Y=;
-        b=K2ghkTStwR1318KTmjgbB7rsd/ys4jaShxB6WwPGXi/Y4RvKH3qxwM4x4DDdBne8/N
-         pfl88eNMJZfitYIgME4UC4xyJS1c5PNdsf+7s5cPeEIoiAamtx10+39uKlUH/jOX9HWd
-         H+c0ETLjV0VpPyYS+HT3uVB52U3j47eud5nMECmtC9ILh3JJ798OnOgiqRcWrjVLMAf0
-         eeIsyFHIUmRFZF8sgflJBJ1VI9Yaj/kGfZ0ANeojvgF5B3GW36+XX+I//ABwhro608gd
-         OU7L8swwhDUfFmAV0O30wLOXWQfRVmFO0bhJ0A5I9o6rOBxzd/3qbEfNnASCkaQBySIx
-         3QPA==
-X-Gm-Message-State: AOJu0YyiEmyyF167LroW6bUfQu/uuvjIrXoMF+hVyRw8eByHcxxIOSzz
-	r6Fx0fCLqaKttwejku2AyHfNNvUDHnysEz6cQ8aY+C7JK2O+W3HK/HwMLwXT1w==
-X-Gm-Gg: AY/fxX6Rm0vFGW7GKI4Mwn0r4xResFlNgy55io5QuHQnO5BR6YuXvb4g14zs4XIwgmf
-	Awr1NHzAuPmyIabxPfFe+uJd8b+3jQ0mepyFh/oUqJiUBPrw0YuFjG50b7ZPb075QEizYXYFucO
-	G1rKZuxC3iHzDHHYpPW1XckqW5O/M4keMbMckgDcYlm/nsIy2gHdIpAtsIXgpg3TYRvXV40K3tD
-	BuX95fwGpZSVvu+AXLizNQN905ZjXyigYaE0soDPmgtitMV+Uyc+yvf5Ux9s3+RSV6YXw9X8kuG
-	GmoqMLcrvntJeFWkr8k1CrYz7EPY+zyz2HPihUtSlKXNmo/lKt763xDtgNoZ2fbEz408bqPvIgJ
-	kDoks4VIZ7zHc6nPx1au0oUEbmL7XIZKA4szdH+5Kh6v3PNQvxjnDtYi7GIo5pQU/QIyGlao3fd
-	h3KlLCojmr
-X-Google-Smtp-Source: AGHT+IHDr0vPNQCGE5yLlViFCPNEepeG/lKaKKieW+H7MckhaL+YXStgLKIkcKj69FqpMJN4pVa7Cg==
-X-Received: by 2002:a05:600c:4e01:b0:477:3e0b:c0e3 with SMTP id 5b1f17b1804b1-47d19582bcbmr147485975e9.32.1766490233166;
-        Tue, 23 Dec 2025 03:43:53 -0800 (PST)
+        d=1e100.net; s=20230601; t=1766492259; x=1767097059;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YJB6IC9CIWsFI27+L0xDAh2edGzuyhGMfBR7BscAtnI=;
+        b=P8BT5MGB/F+pQgHMd4MYxWAChqom7bR0lDpJkZYtHVL3lVySP3YlS+xXDHoYfrs0aU
+         jQBuLBGyG59GqSHVio/JOPrt+i94IU5FKD4GZ+UMGf35fwNOEygRH6LJY5+cDeq2mSgm
+         YHGAUyOiYKeoithhjR0n0I5bGrFA/t9nIk+hZOHL4EKMajpmdgMUFvXRfAMuAxx0ATHP
+         ftn0HAlh4ghModnmvPoeGS1b6MhT37hgOGmxUJx2+D2Vbag4h763GeUHYSP4LzA9LwvI
+         DB4Jlk+GxydF3WQE1ZJx4/eRnjObG1ShIwJcGQXdDOFfo3ALikacCI6Nr29MazRiw0HQ
+         H5Zw==
+X-Gm-Message-State: AOJu0Ywkd4Fbk/ugMTXap71zF1itaapp9aEHqM0vY2MNwtGFZkWVPiB2
+	wjpfCc6urlmml7e9OURp6TU5m5vVhghrq2WnnWE/SucVW9165Gi24yKBzOklww==
+X-Gm-Gg: AY/fxX78WcZ+WXTKMyI6lUx/OWOZtYl57LnX4ZNTP+oHxQuaFRY4/KYLvbSXFfTg99B
+	1KQafd4/n8uvap2oCb4tezGK7aI0YPGmQabF03XgCiOxep04AQwK7zo/LLIjnF9VjYcJqOJfn8y
+	tJHa1Ihl5N1x5eDfhJ93tErzpZlxVFBh30SGpoAUm2y737gUgYOU33o4h+tq6VQksihG9a5bcX8
+	3p123Bjek7JVqOGY5G+Aw6wycugl3JF7mpMftvpJOSuQMo/jkRfIiXU8uizet3hToxDme3QNfFP
+	IYmNkygeV7KVBLxChVBuO2b1aepmk7jfEgG9ItJxZknhTa4UfSlaf0wKnEoIUysy4YZhuprfgIO
+	b+zfTvMNhb+B7lE1Juogq39tIgGV1b/d9/buFt2Zgh4RfCjCBCefQd2xnLioedfzSxyjLVdSVcc
+	C8gQaDil6k
+X-Google-Smtp-Source: AGHT+IG4CzAnPQjX3g2LTDPCspESlHn0Jer6EumSO/+Obpv/gdjlltiROvHB/2Uh3A+aRcZjEYi1tA==
+X-Received: by 2002:a05:600c:8b13:b0:477:73e9:dc17 with SMTP id 5b1f17b1804b1-47d2d2a68f3mr67298875e9.35.1766492258851;
+        Tue, 23 Dec 2025 04:17:38 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be26a81b6sm295778045e9.0.2025.12.23.03.43.49
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be3aa9971sm113509395e9.13.2025.12.23.04.17.38
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 03:43:50 -0800 (PST)
+        Tue, 23 Dec 2025 04:17:38 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] freerdp3: add ptest support
-Date: Tue, 23 Dec 2025 12:43:45 +0100
-Message-ID: <20251223114345.591895-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v2] freerdb3: add ptest support
+Date: Tue, 23 Dec 2025 13:17:37 +0100
+Message-ID: <20251223121737.619747-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251223114345.591895-1-skandigraun@gmail.com>
-References: <20251223114345.591895-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 11:44:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122835
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 12:17:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122836
 
 The execution takes under 10s.
 
@@ -93,10 +90,15 @@ TOTAL: 1 FAIL: 0
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+
+v2: when I finished v1, I reordered the test data copying part, to make it nice.
+    But this reordering made destination of testdata copying to be non-existent.
+    v2 created the test folder explicitly in do_install_ptest
+
  .../include/ptest-packagelists-meta-oe.inc    |  1 +
  .../freerdp/freerdp3/run-ptest                |  2 +
- .../freerdp/freerdp3_3.20.0.bb                | 52 ++++++++++++++++++-
- 3 files changed, 53 insertions(+), 2 deletions(-)
+ .../freerdp/freerdp3_3.20.0.bb                | 53 ++++++++++++++++++-
+ 3 files changed, 54 insertions(+), 2 deletions(-)
  create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/run-ptest
 
 diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
@@ -120,7 +122,7 @@ index 0000000000..1a9b69c27e
 +#!/bin/sh
 +ctest | sed 's/\*\*\*/   /g' | awk '/Test +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-index 07e6db69b7..daf3256912 100644
+index 07e6db69b7..08bea845f0 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
 @@ -4,11 +4,13 @@ LICENSE = "Apache-2.0"
@@ -147,7 +149,7 @@ index 07e6db69b7..daf3256912 100644
  "
  
  EXTRA_OECMAKE = " \
-@@ -54,12 +57,57 @@ PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,virtual/libopencl1"
+@@ -54,12 +57,58 @@ PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,virtual/libopencl1"
  PACKAGECONFIG[lame] = "-DWITH_LAME=ON,-DWITH_LAME=OFF,lame"
  PACKAGECONFIG[faad] = "-DWITH_FAAD=ON,-DWITH_FAAD=OFF,faad2"
  PACKAGECONFIG[faac] = "-DWITH_FAAC=ON,-DWITH_FAAC=OFF,faac"
@@ -169,6 +171,7 @@ index 07e6db69b7..daf3256912 100644
  }
  
 +do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/test
 +    # main CTestTestfile.cmake file
 +    cp ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
 +    # the actual test executables
@@ -176,7 +179,7 @@ index 07e6db69b7..daf3256912 100644
 +    # test data
 +    cp ${S}/winpr/libwinpr/utils/test/*bmp ${D}${PTEST_PATH}/test/
 +    cp ${S}/libfreerdp/codec/test/*bmp ${D}${PTEST_PATH}/test/
-+    cp -r ${S}/client/common/test ${D}${PTEST_PATH}
++    cp -r ${S}/client/common/test/* ${D}${PTEST_PATH}/test/
 +    cp -r ${S}/resources ${D}${PTEST_PATH}
 +    cp -r ${S}/libfreerdp/codec/test/planar ${D}${PTEST_PATH}/test/
 +    cp -r ${S}/libfreerdp/codec/test/interleaved ${D}${PTEST_PATH}/test/
