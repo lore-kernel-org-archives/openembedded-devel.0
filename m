@@ -2,189 +2,141 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57CE7E6FE24
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58A8FE6F086
 	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 17:49:35 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.105360.1766512170378373176
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.105723.1766512169633263223
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 09:49:30 -0800
+ Tue, 23 Dec 2025 09:49:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=atPhGOKo;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-42e2e628f8aso2249857f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 09:49:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CIHb4AeO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-477b198f4bcso34576675e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 09:49:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1766512168; x=1767116968; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qNkidus++LAg1kvUJlTxgC6TBNzSvDQAtuiTUVCbwJw=;
-        b=atPhGOKogHvOl4s9HjmQlotUx5rX/S4qPhSN/RYfPLsG+IvyyDQMrx1/R1Of5XNJc2
-         Zf+7iAEVz/w1V3mZ0ltchqR7w0wq+3xDlVbtgyboVOYsUc9SmviTGTHy8DUSNYO5CAYN
-         EKV+bKaCg6w3uR7Y7lhINAip/472odsIWmeVScHEm95pGK4tPydolEQL05GV+rkTEBU0
-         Dc49b+GJTPQsd8HdlmLNgMl2jIIsDWPDQyliO72hP6/ajL32iIT+0oKkgd5RG5ptDybn
-         CnoC0D6fyTiIIy89OaafRdykIOR74TMleHj/nzbxKPmXdVOZi78y4TFBLcAOKvXqv5ww
-         4Kog==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=H0at+y+aZKFwtRJiuHHs3QcQQ/4CvyGBSY4QNCpyLQM=;
+        b=CIHb4AeONC5TKFJ8aSKjsaqM55mXDq/3SIgWX9Vh6x2iL3IHoLPdoVUNMde7vaE5Pc
+         mcYrExvlOHVZCR6HtWC47h9ld54bgAtTW/98CPP3NB14PevqoxGOJ7ttQdXbKIuBesmm
+         QdaBEDCWwaJcpwFP4QavU7ZN+of7JVlsfxnHRT7qhQS0LpOByEQqPLvcuI1xFRdc3fGL
+         OU42Je30QLXaoWEukHu6dRpvPZtgM8QnnXU+htfwwF6Rw+aF+PJabkQyhJwQ39gvJKTN
+         3gxw+OxZs29PFIhR1C/XAZJCLqLUrV3UqlHO6ryr1a6jeTJs8RUmto330H7Zd85LvvP/
+         ylVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1766512168; x=1767116968;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=qNkidus++LAg1kvUJlTxgC6TBNzSvDQAtuiTUVCbwJw=;
-        b=ORSWzAstaGXBJX8NeFKOF6i9A8JjE2Fhukn9vGZU5TZBb8icXBF1n08Tr90NUxD+e+
-         qotBQu+qQRikH6ThtdKuFKoOvq53kyK/WKglA3Cmc4G+6bG86AHnq9wyIHkzEWRT6AG0
-         FJjXyQKRxMX952JdU+XioQxj2uLMxOuxd8GCO9n+kK4NoOS/6rm9ToBmYtLGrLvZ//Bx
-         /cwJS2V0gxv0vzK4kXQLuu3R3dtDqJWH7serutL6g2YUCnXWzYSezRto2rCVC1fEv9aY
-         TZX8aZYWI7R8lJu8RxxCNJ54wlI6PvzoV1rj9G7eBTGRFla9Kq/K3ZMIBcP9ctcgsnYP
-         9lVg==
-X-Gm-Message-State: AOJu0YzuxqD/vYd/Jxa9jfn15E7yZjk/WhWZloPNM8+B2lLa3Lsmrfy4
-	UNc5S1LDWX2/BJxMX+dMvYw4DxRy1PXqG9W3jG+CfxaSYgkH+Gp37fAmy/uBRg==
-X-Gm-Gg: AY/fxX6KYcGGeoljTYfKG2wYkVRBFJhlvbD28JhZEow4NSD5e8XZ3ZMYzNOspgc4nAK
-	OKy5PnqMQ4VVBkvlSqHgz+IFOszUVPUcFIq2CUDW+V9BqDn0XMXmI54bfI1XaAv80zg+7hIiy6b
-	cNroO6dBMjQZaX+/oIfB8DiF9vZRep/AIjrnrHETv19GlMUi03aosqHp9tZgfqGX78gXb+YiLF8
-	wzidFTnPxYgT2fErWVmOPskb2vdVt1+tkHuTMBUb1gneGsBrswCj16yff1xdzSkbTHKpu1zOJrW
-	XHfGauZA2m49VeikFfqqmwZZfliy7ByRrH+vu4CzxH4w5JMgcevIbGvaWCHHd3v/ampPSG75Pum
-	tcGPpwXgxWPO8QluFdJHS/+BtAp/1NQCSbvN8Wnt4/pIbv8jsXlAuPDbtvP//mQuRq6TraWTQZ7
-	K094GSqJ9DUa7Fe11oh5I=
-X-Google-Smtp-Source: AGHT+IElE1omQgA7CXpVyDpYZ2fJ4veT+Uw5YfdsutXeNzKbv+5VwGOahGSc5Gq+X/lF3aIHiarU7g==
-X-Received: by 2002:a05:6000:4202:b0:430:f5ab:dc83 with SMTP id ffacd0b85a97d-4324e4c70cfmr18715729f8f.11.1766512168373;
-        Tue, 23 Dec 2025 09:49:28 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=H0at+y+aZKFwtRJiuHHs3QcQQ/4CvyGBSY4QNCpyLQM=;
+        b=eECe5Ro2vpf0yEFuJKixTHGHKref8FeVUdlXf5HiYYYMqreJlTiF3s6GVpUkfFr4RH
+         aNgp433IEPs8thmoEC7Pp+Dl/YRKDBGzXHcVVWUefegPbFKvaM7RjVGhz1udhxRi8Zxa
+         NQR78p5i99OcLuq562fd/2zMxeFv99u7OvjMams0qQmlz1BU9F6f3ABn4/JbyCy5tQi+
+         t6GkIfrT5Q0vvM1vuwKATDN5CAA1pJlEO15aZDGolvUflOb143+DOfdT1eHGxE+seTgR
+         Lgt8AnHaiRm90gDTHb1rfJ9Wo88ScAEmiFPahjyzDS8ABn2qL/181CacNxJPLE8r3DZb
+         g/vg==
+X-Gm-Message-State: AOJu0Yxdq9pBRfpAtUVrGnA91Jz1FWJUsCCGV7BmFLPWv7KP3ZVXIFJ5
+	hxO6fq5TaPYgKZeIWygSML/nOEE+WfjGymmAmJn4fZ9g7XldUYTWezwFshplzw==
+X-Gm-Gg: AY/fxX4urz8+a9ZTTqkpmgxqYXABHUCpYaBQfs2dD7loQxFmwkr9yoNm/VEhYvLNu6y
+	/e6naPEgAOGml+TYAawQChqLOROpEKf5PtPaNdq9qSCAJauSEAXS9K65/VlPRQeSNASi/Z/zHrR
+	BS82iavKjufQyC0W2yDguYrr17F/LJ1e4VdZl3pddgQ0yRg8X2WbB7lZwyCxJwLREkXRuKV5eoS
+	aSGdfq0ytY9MwSjb5dGWwlO23aY2EHLAC7nwtGTQLPjTfPXxzae4BNjpm9+gl8+EG/kIx9mC3Q6
+	LecRypabPN0Pn46lY76Kq7TKASsINqfvswtv5Zf1FjTdOK7eFvRWYd/nEjwCj9yFC9z8k2PJFtM
+	r7AGid0ygwfh6yJ5BcigWZ0Ea//3/y9dwXyjRqRX4k89hqoDf3zWbqtlkNIrUtBc7Vx35wR5ROY
+	FmHsHQoZzW
+X-Google-Smtp-Source: AGHT+IG6dZMJ57k0yT0WWU3ZklycSRry/Q6NZcfwFdUvSqVXRptxt7zOlRhyhieyjlFW3CPog5rjoA==
+X-Received: by 2002:a5d:5f54:0:b0:431:907:f307 with SMTP id ffacd0b85a97d-4324e506ab1mr15325373f8f.48.1766512167713;
+        Tue, 23 Dec 2025 09:49:27 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830f3sm28436823f8f.22.2025.12.23.09.49.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 09:49:28 -0800 (PST)
+        Tue, 23 Dec 2025 09:49:27 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] tinyproxy: add ptest support
-Date: Tue, 23 Dec 2025 18:49:26 +0100
-Message-ID: <20251223174926.897953-2-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH 1/2] tinyproxy: patch CVE-2025-63938
+Date: Tue, 23 Dec 2025 18:49:25 +0100
+Message-ID: <20251223174926.897953-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251223174926.897953-1-skandigraun@gmail.com>
-References: <20251223174926.897953-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 17:49:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122841
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122840
 
-It takes <10s to execute.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-63938
 
-Sample output:
-
-root@qemux86-64:~# ptest-runner
-START: ptest-runner
-2025-12-23T17:45
-BEGIN: /usr/lib/tinyproxy/ptest
-starting web server... done (listening on 127.0.0.3:32123)
-starting tinyproxy... done (listening on 127.0.0.2:12321)
-waiting for 1 seconds.. done
-checking direct connection to web server... ok
-testing connection through tinyproxy... ok
-requesting statspage via stathost url... ok
-signaling tinyproxy to reload config...ok
-checking direct connection to web server... ok
-testing connection through tinyproxy... ok
-requesting statspage via stathost url... ok
-checking bogus request... ok, got expected error code 400
-testing connection to filtered domain... ok, got expected error code 403
-requesting connect method to denied port... ok, got expected error code 403
-testing unavailable backend... ok, got expected error code 502
-0 errors
-killing tinyproxy... ok
-killing webserver... ok
-done
-PASS: run_tests.sh
-DURATION: 1
-END: /usr/lib/tinyproxy/ptest
-2025-12-23T17:45
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+Pick the patch referenced by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../ptest-packagelists-meta-networking.inc    |  1 +
- .../tinyproxy/tinyproxy/run-ptest             | 10 +++++++
- .../tinyproxy/tinyproxy_1.11.2.bb             | 26 ++++++++++++++++++-
- 3 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/run-ptest
+ .../tinyproxy/tinyproxy/CVE-2025-63938.patch  | 43 +++++++++++++++++++
+ .../tinyproxy/tinyproxy_1.11.2.bb             |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
 
-diff --git a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-index 838aee94d3..0897024e3c 100644
---- a/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-+++ b/meta-networking/conf/include/ptest-packagelists-meta-networking.inc
-@@ -23,6 +23,7 @@ PTESTS_FAST_META_NETWORKING = "\
-     python3-scapy \
-     squid \
-     tcpdump \
-+    tinyproxy \
-     wolfssl \
- "
- PTESTS_FAST_META_NETWORKING:remove:libc-musl = "\
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/run-ptest b/meta-networking/recipes-support/tinyproxy/tinyproxy/run-ptest
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
 new file mode 100644
-index 0000000000..267a975c24
+index 0000000000..e06e0d3eae
 --- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/run-ptest
-@@ -0,0 +1,10 @@
-+#!/bin/sh
-+RET=0
-+cd tests/scripts
-+if ./run_tests.sh; then
-+    echo PASS: run_tests.sh
-+else
-+    echo FAIL: run_tests.sh
-+    RET=1
-+fi
-+exit $RET
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
+@@ -0,0 +1,43 @@
++From cee659d2ac1e4e9d1ce388338f46df6c4bae8278 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Fri, 17 Oct 2025 22:57:39 +0000
++Subject: [PATCH] reqs: fix integer overflow in port number processing
++
++From: rofl0r <rofl0r@users.noreply.github.com>
++
++closes #586
++
++CVE: CVE-2025-63938
++Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/3c0fde94981b025271ffa1788ae425257841bf5a]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/reqs.c | 9 ++++++---
++ 1 file changed, 6 insertions(+), 3 deletions(-)
++
++diff --git a/src/reqs.c b/src/reqs.c
++index a65ed54..1e5895c 100644
++--- a/src/reqs.c
+++++ b/src/reqs.c
++@@ -174,7 +174,7 @@ static int strip_return_port (char *host)
++ {
++         char *ptr1;
++         char *ptr2;
++-        int port;
+++        unsigned port;
++ 
++         ptr1 = strrchr (host, ':');
++         if (ptr1 == NULL)
++@@ -186,8 +186,11 @@ static int strip_return_port (char *host)
++                 return 0;
++ 
++         *ptr1++ = '\0';
++-        if (sscanf (ptr1, "%d", &port) != 1)    /* one conversion required */
++-                return 0;
+++
+++        port = atoi(ptr1);
+++        /* check that port string is in the valid range 1-0xffff) */
+++        if(strlen(ptr1) > 5 || (port & 0xffff0000)) return 0;
+++
++         return port;
++ }
++ 
 diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
-index e386d39cdc..222cc8d7c6 100644
+index 5b8e9dcd7a..e386d39cdc 100644
 --- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
 +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.2.bb
 @@ -7,6 +7,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
             file://disable-documentation.patch \
             file://tinyproxy.service \
             file://tinyproxy.conf \
-+           file://run-ptest \
-            file://CVE-2025-63938.patch \
++           file://CVE-2025-63938.patch \
             "
  
-@@ -22,7 +23,7 @@ EXTRA_OECONF += " \
- 	--enable-xtinyproxy \
- 	"
- 
--inherit autotools systemd useradd
-+inherit autotools systemd useradd ptest
- 
- #User specific
- USERADD_PACKAGES = "${PN}"
-@@ -40,3 +41,26 @@ do_install:append() {
- 	fi
- 	install -m 0644 ${UNPACKDIR}/tinyproxy.conf ${D}${sysconfdir}/tinyproxy.conf
- }
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests/scripts
-+	install -d ${D}${PTEST_PATH}/data/templates
-+	install ${S}/tests/scripts/*.sh ${D}${PTEST_PATH}/tests/scripts
-+	install ${S}/tests/scripts/*.pl ${D}${PTEST_PATH}/tests/scripts
-+	install -m 0644 ${S}/data/templates/*.html ${D}${PTEST_PATH}/data/templates/
-+	# test the installed binary, not the one that was just compiled in the src folder
-+	sed -i 's,TINYPROXY_BIN=.*,TINYPROXY_BIN=tinyproxy,' ${D}${PTEST_PATH}/tests/scripts/run_tests.sh
-+}
-+
-+RDEPENDS:${PN}-ptest += "\
-+    perl \
-+    perl-module-cwd \
-+    perl-module-encode-encoding \
-+    perl-module-file-spec \
-+    perl-module-getopt-long \
-+    perl-module-io-socket \
-+    perl-module-io-socket-inet \
-+    perl-module-pod-text \
-+    perl-module-posix \
-+    procps \
-+"
+ SRC_URI[sha256sum] = "2c8fe5496f2c642bfd189020504ab98d74b9edbafcdb94d9f108e157b5bdf96d"
 
