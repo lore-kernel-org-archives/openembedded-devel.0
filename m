@@ -2,81 +2,81 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA084E6F074
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 08:54:12 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.97590.1766480044068205528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9559DE6F077
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 08:55:12 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.97400.1766480109619328082
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 00:54:04 -0800
+ Tue, 23 Dec 2025 00:55:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=glKNah9E;
- spf=pass (domain: mvista.com, ip: 209.85.210.173, mailfrom: hprajapati@mvista.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-7aa9be9f03aso3991213b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 00:54:04 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=ZnpFXFkX;
+ spf=pass (domain: mvista.com, ip: 209.85.214.177, mailfrom: hprajapati@mvista.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2a0a95200e8so44279325ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 00:55:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1766480043; x=1767084843; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1766480109; x=1767084909; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6Hb4UD+j/Q7R5g5ZCdQb9xJxorTryJ2BPxUark9pYE0=;
-        b=glKNah9EtdSphgaqTDklgg0pvwdSKRdosyPj/k42/cxl01ihi8yvakARS0Mgm8L+wZ
-         /57zvGutAZ5IXZhf9qomZz2g/+/+6PmWz6uA9YTvy9j4VW2BT/8fBJ0nbXSDYgHoGjTe
-         RDUWs3ZnxSR8jwoxOatp/E/Yo4X4WYX8Ia1XE=
+        bh=fSlSWR2jMZX3X8jtAQm7gTwVWmgnYe+lCCR+2ff6vDk=;
+        b=ZnpFXFkXmZs2WLVosVxpg2j+1fL4JQXl+sr0v1WeS7aV6+IbDoeqe2AwxYBmMmJwk8
+         ySZaR/HFEo3KJsQUMyEstS5nh+SCAjqq5mXejYkFKYnFW4z3PiWcxYgm2AfJSkZghqBh
+         nZuj5rluB+E4fqGmm4QYlIpv3oGhcNob3Ej44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766480043; x=1767084843;
+        d=1e100.net; s=20230601; t=1766480109; x=1767084909;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6Hb4UD+j/Q7R5g5ZCdQb9xJxorTryJ2BPxUark9pYE0=;
-        b=OZU1u9eD+n01yJoH7ofh+8+9z9gcXo5tXh0VL8063h4lX6Bgre9duMlnSAK4YhYHNW
-         yyD5DDwToR4oI8To3tbEdSy/sDqt7Om/xojPP4ICR0nWBIurCrY0s6YWyVxHI5SekuWN
-         0QO4JZLYqmD5fTze+NGTS5qvFO9ncwvLkz8I7NI6sOmlNu3cGhFjvgCGbMHR4RB15aov
-         U3MTDHE2yHR2+ByH/FmiEubUieU2AcSOL5yXXUQ3s6h07PH3r8Dr3EjjEqUup0g5BA/6
-         J/enh2NzoPNenmKG4mOQl/Nq4t0ncYRXj98hbEqCrc8L1NQY3GRUVnQ9yOoqqc8BgqPI
-         wEEg==
-X-Gm-Message-State: AOJu0YzTJiFWyVRMsDAIswOk1rleDlQ2oy1OVvKkxb+a3JuiBqjyM7VQ
-	ZoUe/0d30t9ah0F3WGq1Emh+U4jtk40Rv6m+wx+85Y/I3Ick4XpJL7U+fXaWYGwp+yVLaMH0003
-	MhAdNM1M=
-X-Gm-Gg: AY/fxX71667tdMfObnLgjYLa1MH/p1mVnA6nLC79IZ0jaPdixHswzDzeOSRISUJFZJ1
-	xjgElxNNdOxDiV8vNvsPr4c5gTSZv6/hUVEw073RdCTexpj6lYtEz/wK35/PSxhQ44000co7Poo
-	9pQ0wlwNMH4MzJB5E9zIJFHY0G0LpPF5+Oq4+/fbYtCB458BlEmA4X2lhvG0cG7htNnI5e0Vz5d
-	VY6cBraUzw8lLmGs+5eOBj8v2bd/SABEn73/I1O/5qGo0LTinzPMg46cYBkTmmQjSiPaN2YWcPr
-	RpuIym2TwZbFJma6IyOQd6SaALlp5UeuXwpKGb4y5d5RtkIfkZUe27+Yksz5d2Uf3Q1phda1uc1
-	kja3N1TieCe/ByxAZRjun4F0Abd+Eyd3jNPnHKmWKqyn3XNFB2kdV9kYHYFcTMGPH8WIs78F+fc
-	DN2QHFfD1L5idfD+6agJrBHDf6
-X-Google-Smtp-Source: AGHT+IF6cy8kvfvXdvgn04/bkbpit+TubI5A2D0rD/86CSx3WGvie80mLy4pzpG/88zQrb6aPeFQiA==
-X-Received: by 2002:a05:6a00:3407:b0:7e8:4471:8e1 with SMTP id d2e1a72fcca58-7ff66f56e5dmr10928972b3a.66.1766480042743;
-        Tue, 23 Dec 2025 00:54:02 -0800 (PST)
+        bh=fSlSWR2jMZX3X8jtAQm7gTwVWmgnYe+lCCR+2ff6vDk=;
+        b=E4pIzsUiljE2r9ZG5y5hA0mK/jrkDGIWX0NUJ0hop67G+uvDj72FGkrjNl7C1rKTkv
+         qaq5v2GFH0ULvte8ioMDOPMfg7QBHMpT1ASIR410Ssj45rKzr7D4LQ6lGAFjh3rsbPWC
+         apiGIY7v1Ps5JAZfK52RtEueg2g9U1JvUpWX5Tv2DVarJ8epfZRmPKZp8zmNnUF8Z/Gt
+         3uD+TOe24X2x505DcwtSCncvqOzljhB7diqFuY4ml2LoocoP4i60re9xiA9yFD+dHYgC
+         oHFkZyP1Ky327K+XPQmxbj55Z/xLhYbijZ1GLYgth9/8X/k7XauHO5bfd+q3mTUNcbOU
+         Pncg==
+X-Gm-Message-State: AOJu0Ywql5q5jJ3vhmGijUlmonKrBd10jdRDXWQeLtCatt2rA/O2Swlg
+	wxBlsFissXSPkqe+SmwwK75eGOgb/qnm2L55hlRR4XuiWR/ARokzwgfxdQHgKnBIRoM/wGHTGUl
+	XLYOYLpw=
+X-Gm-Gg: AY/fxX7n9gtT11h46EJFelch5vuEjb1aydRVjsp+4bSpKuysZnzVbkb77MDHJkdmNm8
+	fPBpFK3hxWwqrGYt7tZoGPZFR2LATObNbr5Nt/czzDTQr0GAhnti8X38iPwAQJnk+gR1Eh1Gb0z
+	1OXeW0EuZgbeD3ltLx0PZsfEnWMXDsbLXqXsm9UbzCByfWh0PGrDzYx2jfn29UHvTiYqq5vXub8
+	hKyixwBXqbuULdaEX+aGzw7KYoVtLz4P0Qs55RLt01+SouKxrnzjnA64TjoqdyDe6YNdYB4P/0n
+	3frjcSAXu72oJApYqbmZhEKr6LXMBbIdXXayu67xYz7iBu0GpX1RGTH+Ceeh0EPbIXpdG9YMnJp
+	M+BIB8sQ20v2oNBejlNT9uagiusKFHwzgTNlCfGNpGzaDNatqqknfH5rKVo65Otq5bsxUe6K7bB
+	hAg+vgw9Hs/0NjBwVrIE5vupPw
+X-Google-Smtp-Source: AGHT+IES3UdTvI0m3F+IEQxsG3WEzb2tQqjac5l2PmMW92jjI2QwAeP0jABilyrp4BWcD3t0R7i9yQ==
+X-Received: by 2002:a17:903:90b:b0:2a1:e19:ff0 with SMTP id d9443c01a7336-2a2f2732bf2mr117543975ad.39.1766480108519;
+        Tue, 23 Dec 2025 00:55:08 -0800 (PST)
 Received: from MVIN00013.mvista.com ([103.250.136.190])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-7ff7dfac28fsm12949362b3a.32.2025.12.23.00.54.00
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d4cb9csm119277285ad.47.2025.12.23.00.55.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 00:54:02 -0800 (PST)
+        Tue, 23 Dec 2025 00:55:08 -0800 (PST)
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][scarthgap][PATCH] krb5: fix for CVE-2024-3596
-Date: Tue, 23 Dec 2025 14:23:54 +0530
-Message-ID: <20251223085354.104158-1-hprajapati@mvista.com>
+Subject: [meta-oe][kirkstone][PATCHv1] krb5: fix for CVE-2024-3596
+Date: Tue, 23 Dec 2025 14:25:01 +0530
+Message-ID: <20251223085501.104323-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 08:54:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122829
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 08:55:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122830
 
 Upstream-Status: Backport from https://github.com/krb5/krb5/commit/871125fea8ce0370a972bf65f7d1de63f619b06c
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
  .../krb5/krb5/CVE-2024-3596.patch             | 628 ++++++++++++++++++
- .../recipes-connectivity/krb5/krb5_1.21.3.bb  |   1 +
+ .../recipes-connectivity/krb5/krb5_1.17.2.bb  |   1 +
  2 files changed, 629 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
 
 diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
 new file mode 100644
-index 0000000000..d6b33e6d50
+index 0000000000..8e74b07aef
 --- /dev/null
 +++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2024-3596.patch
 @@ -0,0 +1,628 @@
@@ -127,12 +127,12 @@ index 0000000000..d6b33e6d50
 + 11 files changed, 309 insertions(+), 31 deletions(-)
 +
 +diff --git a/src/include/k5-int.h b/src/include/k5-int.h
-+index 2f7791b..55706b7 100644
++index 5928c82..9b3aa13 100644
 +--- a/src/include/k5-int.h
 ++++ b/src/include/k5-int.h
-+@@ -2404,4 +2404,9 @@ krb5_boolean
-+ k5_sname_compare(krb5_context context, krb5_const_principal sname,
-+                  krb5_const_principal princ);
++@@ -2394,4 +2394,9 @@ void k5_change_error_message_code(krb5_context ctx, krb5_error_code oldcode,
++ #define k5_prependmsg krb5_prepend_error_message
++ #define k5_wrapmsg krb5_wrap_error_message
 + 
 ++/* Generate an HMAC-MD5 keyed checksum as specified by RFC 2104. */
 ++krb5_error_code
@@ -177,10 +177,10 @@ index 0000000000..d6b33e6d50
 ++    return krb5int_hmac_keyblock(hash, &keyblock, data, num_data, output);
 ++}
 +diff --git a/src/lib/crypto/libk5crypto.exports b/src/lib/crypto/libk5crypto.exports
-+index 052f4d4..2b27028 100644
++index 90afdf5..02efa3b 100644
 +--- a/src/lib/crypto/libk5crypto.exports
 ++++ b/src/lib/crypto/libk5crypto.exports
-+@@ -103,3 +103,4 @@ krb5_c_prfplus
++@@ -110,3 +110,4 @@ krb5_c_prfplus
 + krb5_c_derive_prfplus
 + k5_enctype_to_ssf
 + krb5int_c_deprecated_enctype
@@ -214,7 +214,7 @@ index 0000000000..d6b33e6d50
 + 
 + /* Encode User-Password attribute. */
 +diff --git a/src/lib/krad/attrset.c b/src/lib/krad/attrset.c
-+index f309f15..488bfce 100644
++index 03c6137..f279949 100644
 +--- a/src/lib/krad/attrset.c
 ++++ b/src/lib/krad/attrset.c
 +@@ -164,14 +164,42 @@ krad_attrset_copy(const krad_attrset *set, krad_attrset **copy)
@@ -297,7 +297,7 @@ index 0000000000..d6b33e6d50
 + 
 +     *outlen = i;
 +diff --git a/src/lib/krad/internal.h b/src/lib/krad/internal.h
-+index 7619563..e2a16c7 100644
++index 996a893..8194b00 100644
 +--- a/src/lib/krad/internal.h
 ++++ b/src/lib/krad/internal.h
 +@@ -43,6 +43,8 @@
@@ -632,7 +632,7 @@ index 0000000000..d6b33e6d50
 + 
 +     /* Manually encode User-Name. */
 +diff --git a/src/lib/krad/t_daemon.py b/src/lib/krad/t_daemon.py
-+index 4a3de07..647d489 100755
++index 7668cd7..7fa0449 100755
 +--- a/src/lib/krad/t_daemon.py
 ++++ b/src/lib/krad/t_daemon.py
 +@@ -40,6 +40,7 @@ DICTIONARY = """
@@ -645,7 +645,7 @@ index 0000000000..d6b33e6d50
 + class TestServer(server.Server):
 +@@ -52,7 +53,7 @@ class TestServer(server.Server):
 +             if key == "User-Password":
-+                 passwd = [pkt.PwDecrypt(x) for x in pkt[key]]
++                 passwd = map(pkt.PwDecrypt, pkt[key])
 + 
 +-        reply = self.CreateReplyPacket(pkt)
 ++        reply = self.CreateReplyPacket(pkt, message_authenticator=True)
@@ -653,10 +653,10 @@ index 0000000000..d6b33e6d50
 +             reply.code = packet.AccessAccept
 +         else:
 +diff --git a/src/lib/krad/t_packet.c b/src/lib/krad/t_packet.c
-+index c224891..104b650 100644
++index 0a92e9c..745fb21 100644
 +--- a/src/lib/krad/t_packet.c
 ++++ b/src/lib/krad/t_packet.c
-+@@ -172,6 +172,9 @@ main(int argc, const char **argv)
++@@ -159,6 +159,9 @@ main(int argc, const char **argv)
 +     krb5_data username, password;
 +     krb5_boolean auth = FALSE;
 +     krb5_context ctx;
@@ -666,7 +666,7 @@ index 0000000000..d6b33e6d50
 + 
 +     username = string2data("testUser");
 + 
-+@@ -184,9 +187,17 @@ main(int argc, const char **argv)
++@@ -171,9 +174,17 @@ main(int argc, const char **argv)
 + 
 +     password = string2data("accept");
 +     noerror(make_packet(ctx, &username, &password, &packets[ACCEPT_PACKET]));
@@ -685,7 +685,7 @@ index 0000000000..d6b33e6d50
 +     memset(&hints, 0, sizeof(hints));
 +     hints.ai_family = AF_INET;
 +diff --git a/src/tests/t_otp.py b/src/tests/t_otp.py
-+index c3b820a..dd5cdc5 100755
++index cba871a..1ec9165 100755
 +--- a/src/tests/t_otp.py
 ++++ b/src/tests/t_otp.py
 +@@ -49,6 +49,7 @@ ATTRIBUTE    User-Name    1    string
@@ -708,18 +708,18 @@ index 0000000000..d6b33e6d50
 +-- 
 +2.50.1
 +
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
-index 4742fe47b2..b38a0768e1 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.21.3.bb
-@@ -30,6 +30,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-            file://krb5-admin-server.service \
-            file://CVE-2024-26458_CVE-2024-26461.patch;striplevel=2 \
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+index d889855649..ed17b57b19 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.2.bb
+@@ -41,6 +41,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://CVE-2025-3576-01.patch;striplevel=2 \
+            file://CVE-2025-3576-02.patch;striplevel=2 \
             file://CVE-2025-24528.patch;striplevel=2 \
 +           file://CVE-2024-3596.patch;striplevel=2 \
  "
- 
- SRC_URI[sha256sum] = "b7a4cd5ead67fb08b980b21abd150ff7217e85ea320c9ed0c6dadd304840ad35"
+ SRC_URI[md5sum] = "aa4337fffa3b61f22dbd0167f708818f"
+ SRC_URI[sha256sum] = "1a4bba94df92f6d39a197a10687653e8bfbc9a2076e129f6eb92766974f86134"
 -- 
 2.50.1
 
