@@ -2,55 +2,55 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A216DE6B27D
-	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 06:11:51 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.95979.1766470310297896212
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6915E6B27F
+	for <webhook@archiver.kernel.org>; Tue, 23 Dec 2025 06:12:01 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.95981.1766470312197547361
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Dec 2025 22:11:50 -0800
+ Mon, 22 Dec 2025 22:11:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=NHdM/uC3;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ho79yNJT;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1766470311; x=1798006311;
+  t=1766470312; x=1798006312;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=IVZfuKMZfQnX0HSzvcpaLICroDAds9V5Q4YS/NskKjI=;
-  b=NHdM/uC3gHY+XJt9wkYMLp3WC+0tdppAa2WCpFT/EAABsdLKH3luXYxM
-   sc5evfLI3l6PoP4PGthOMFqUPYkiDJx1FHjcBMizw2IwwzJ+6McuCoezp
-   COkDL0zWBGH+BKis3bHx1sBlx2I9nMm3vzaTLVXWu0glv39GxVbbLVokb
-   gvQorOP0+FcKKnKnZDAkQ6d3Y8ApLHz3v2zQr5PxgkfFM3/rcJUYWtHGF
-   B10yIPX8SfyYFqBtTyOhoOFghRkH4g3OJZi+0LPZ041zGuNiTmvBP5EAX
-   o7dWgJUf/pM5kuE4jMakmy2OS3qjm7TiagxSuqonQTldmmFmqglLFbO+D
-   A==;
-X-CSE-ConnectionGUID: I101VzPrQySX4NeFZSxU8g==
-X-CSE-MsgGUID: m6almD0uQSWmsDQ2l8alVQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11650"; a="223561281"
+  bh=FfM/pLB7/oMZpNLbU5QQH/75sqy3Q3EqA9/JRzbvCVU=;
+  b=ho79yNJTanhQXyCwplFusf6kkxKWOKF3BYpuMdYMcBe97mnweEH0ctWg
+   hqfnPjEiwQtjA5+pkL0cIlfvnmQ60XNWfQctwrrfJXbJSuyBfLCBGiZmD
+   MNxj7EW/zXUTh/frlq6fPNXcNWqyVpLZGssh/3Yoxl796R/G0vFngNJnI
+   atlsoCt6vY1FDHLCoWiZ7FvtSb4oWMzRLKztW2KoCIeyHSpcDOMNMpvW1
+   Huff93KhXp8shmMHYZhOo+5/0KWoOU/Pg5ZkDy9pg9e45t8T1w9Tlus87
+   mApqgXDZJm8/4iPVX7qq6mnfFcGFIz5im2iAew/b5Ty+gcIvC8LRl0eIK
+   g==;
+X-CSE-ConnectionGUID: eARkwS4iTJuzxJ8JtRth1w==
+X-CSE-MsgGUID: DoLHLzrGQ/ONZnjKdTej2w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11650"; a="202559022"
 X-IronPort-AV: E=Sophos;i="6.21,170,1763391600"; 
-   d="scan'208";a="223561281"
+   d="scan'208";a="202559022"
 Received: from unknown (HELO az2uksmgr1.o.css.fujitsu.com) ([52.151.125.19])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Dec 2025 15:11:49 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Dec 2025 15:11:50 +0900
+Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 8EF4A1C1C717
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:48 +0000 (UTC)
+	by az2uksmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 7FEE81C1C718
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:50 +0000 (UTC)
 Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 4C0A8140037F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:48 +0000 (UTC)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 37C8918000F0
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:50 +0000 (UTC)
 Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 2915110005BD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:45 +0000 (UTC)
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 0C2C210005BC
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:47 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH 6/7] rwmem: upgrade 1.2 -> 2.0 
-Date: Tue, 23 Dec 2025 14:10:41 +0800
-Message-ID: <20251223061043.659-6-liuyd.fnst@fujitsu.com>
+Subject: [oe][meta-python][PATCH 7/7] python3-uvicorn: upgrade 0.38.0 -> 0.40.0
+Date: Tue, 23 Dec 2025 14:10:42 +0800
+Message-ID: <20251223061043.659-7-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251223061043.659-1-liuyd.fnst@fujitsu.com>
 References: <20251223061043.659-1-liuyd.fnst@fujitsu.com>
@@ -59,90 +59,31 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:11:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122822
-
-2. Pyrwmem and static-libc build option has been removed in 2.0.
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 06:12:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122823
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../rwmem/0001-include-missing-cstdint.patch  | 32 -------------------
- .../rwmem/{rwmem_1.2.bb => rwmem_2.0.bb}      | 16 ++--------
- 2 files changed, 3 insertions(+), 45 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-include-missing-cstdint.patch
- rename meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/{rwmem_1.2.bb => rwmem_2.0.bb} (64%)
+ .../{python3-uvicorn_0.38.0.bb => python3-uvicorn_0.40.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-uvicorn_0.38.0.bb => python3-uvicorn_0.40.0.bb} (88%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-include-missing-cstdint.patch b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-include-missing-cstdint.patch
-deleted file mode 100644
-index 0560daa4c2..0000000000
---- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-include-missing-cstdint.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 84e884f99e581515b49d8973538bb17e1e6c0dc0 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 26 Jan 2023 20:45:57 -0800
--Subject: [PATCH] include missing <cstdint>
--
--gcc 13 moved some includes around and as a result <cstdint> is no
--longer transitively included [1]. Explicitly include it for
--uint{32,64}_t.
--
--[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
--
--Upstream-Status: Submitted [https://github.com/tomba/rwmem/pull/7]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- librwmem/helpers.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/librwmem/helpers.h b/librwmem/helpers.h
--index a0a738b..8d02c9c 100644
----- a/librwmem/helpers.h
--+++ b/librwmem/helpers.h
--@@ -1,6 +1,7 @@
-- #pragma once
-- 
-- #include <cerrno>
--+#include <cstdint>
-- #include <string>
-- #include <vector>
-- #include <string.h>
---- 
--2.39.1
--
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-similarity index 64%
-rename from meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
-rename to meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-index 078be849a3..aea81ee23f 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-@@ -14,22 +14,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb
+rename to meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
+index b0ce49be97..56d58ded0a 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb
++++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5c778842f66a649636561c423c0eec2e"
+ RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
  
- DEPENDS += "fmt libinih"
+-SRC_URI[sha256sum] = "fd97093bdd120a2609fc0d3afe931d4d4ad688b6e75f0f929fde1bc36fe0e91d"
++SRC_URI[sha256sum] = "839676675e87e73694518b5574fd0f24c9d97b46bea16df7b8c05ea1a51071ea"
  
--PV .= "+git"
-+SRCREV = "d8dda76a0d8bc3356120d087f783d237602e0278"
+ SRC_URI += "file://0001-ptest-disable-failing-tests.patch"
  
--SRCREV = "8416326777b2aada0706539b8f9f6acefa476b16"
-+SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV}"
- 
--SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master \
--           file://0001-include-missing-cstdint.patch"
--
--
--inherit meson pkgconfig python3native
--
--PACKAGECONFIG ?= "python static"
--PACKAGECONFIG[python] = "-Dpyrwmem=enabled,-Dpyrwmem=disabled,cmake-native python3 python3-pybind11"
--PACKAGECONFIG[static] = "-Dstatic-libc=true,-Dstatic-libc=false,"
-+inherit meson pkgconfig
- 
- do_install:append() {
- 	install -D -m 0644 ${B}/librwmem/librwmem.a ${D}${libdir}/librwmem.a
- }
--
--FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}/pyrwmem"
 -- 
 2.43.0
 
