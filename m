@@ -2,52 +2,53 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7781CE78499
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 22:23:56 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.129118.1766615035457439011
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 583F5E7849C
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 22:24:06 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.129119.1766615036067265444
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 14:23:55 -0800
+ Wed, 24 Dec 2025 14:23:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BaRsBBf+;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47798ded6fcso33139685e9.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lDh28WOn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47d3ffa6720so5565405e9.0
         for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 14:23:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1766615034; x=1767219834; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=884uKVM4RQif42/Qs8JdnJDKAZ/E/WZZuF9i10cLlzU=;
-        b=BaRsBBf+tQ+x6sOn/1Oz3npYkNAAE9aUj/z8AotqyLDP9zqKT8m3gfycwUbGwopEDG
-         Bdtupo9Q9qobKnVMhKDcS9ZMXXCN0p9WkorqjX0bGk809t+Z+BP+ncWD+8qDOW6Y7NiF
-         KP4g+zoNM7TriJ3qRE/FpvxTWORhboFRUlvVZc+2qchis/U+GQUj2XQOtButtpBMfxPN
-         ubK8Scfd7Ks1IPOF6GP1Cr1c+E1ps7zTdcYmM/b0VIDeqTjVvo+6LGCo22+BQxbKiRu3
-         BGpFeQcn3UA6xGjBu0Xjgu2f2HGCnLrrOkeCvY8F/yoVd/kvfl57YgOAFOpUsy+5SflV
-         +1SQ==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+f5letVSuPediXl7g3IMKmAS9HrG4wk1hLFxF9XifBM=;
+        b=lDh28WOnwwyDOSJmf7E58z5mUaBIOeg+X7FnO5LJplfkeMx244O8GyamzCTNuSlMDd
+         AKT9baqcI3kp9BHQLTrdxQRDhilfwa0/MHlhFduw0IwDJGMaxrMscyadZeNc5FgCRs91
+         zDJ/FY0EdZrmOdwkjB1rPIe1CLJO07FE9mKwLG28IqwILH06I3RPCbINWiNMF9MsYLhc
+         nRECzPTOwAQCGc5LRkDMMyC7CbRfUEvLCtNuaQC2vpETOaWjWecCNBpxyfOoUS7+/FFJ
+         VUArchDw4S6lcTZx1yu6YPcJPeu49EJyk/MrlATRj/g2TlY5Aqxl8+338AqT1LRrKwOD
+         1OTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1766615034; x=1767219834;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=884uKVM4RQif42/Qs8JdnJDKAZ/E/WZZuF9i10cLlzU=;
-        b=ONHRKr2GYlhEF5kUcCMNkkRNfmb7FRSFcurEzxg/jgfgUuoHItkFpneSpD5hDxSOzH
-         Z79xTI5MHI43X98sCEHxqD/iCsRSRhed2MXu5nFjZLE0ApreqNZa2esU/ELjxSYBcK/T
-         2t1u3gerAv22NSPJsY0gmg9a15j/PiyDhW0CtwSSs39FrLT97436IsVpoGMZCapVGAGI
-         DC6Ldb1zMUCDfnCt/gTLI1NZo3rPuaTgy/8Bz4shDtuey1L4uKyQJbsprWnxB1nax7WQ
-         mA1+U8FWw7Ep2F4+A80ET3phZB6ejPfxedTqhrH+phQKHAha90/DEsEvC4sP5TRW98sO
-         UzuQ==
-X-Gm-Message-State: AOJu0YyrvBCxQuG0Sik4pp1Ry9D+tgtVRUKzYniatXwvzuLXH7vvWa22
-	bMiN0Xc9edAMBIobf3WNpBHC1gLUsBmm/JS9m8cdU4rCf0acu1y9enO0a4LYUw==
-X-Gm-Gg: AY/fxX4qrtGBWtCpeoILqJXyLVSlEntMKFScc4IXDwLuksunsXm2Xe96kWiCDS1kPFl
-	3IZlqnXE1BSNbsKoz7hlAIUrFpFsxzb0ANEvwxERltXYN7MVv1aUSXVTdotasqwDLx5EsYpnc21
-	ZfD1IlfHspJx3UWZtlnrgClwyGu7tLstXJSQgc8DgPv7RhBmQTD3toUVCdGPXq/mPseFBfWHNq2
-	Ks/aGS1+SZ3sPQlSJmi89SBpWCagAP3WQQ8t+MWiQUx4PkS5XjPXX6W8ZHh0vVy4lwl8iiuMHjv
-	N8zFlEOcW0oD/DYGmzzsCUa1S5ZBsoYcrbxS4yiqwBrnJnQV+pZsdvKPcSAq0NLhMxn6O80jFpH
-	//C7cJURqqe60PkIhiQNsBedXs8EBblNpQBw144RsnrcH1wBx91t2k0OM1OpF8H1XUTz6lLZ529
-	NjgpDCESKL
-X-Google-Smtp-Source: AGHT+IHMAaz5sy1fyb+0R0hO3UiTKYi2Eozw0mogNA22U0FUQ46p3SX9NcAiyJmqcZTZtx31BF2jQA==
-X-Received: by 2002:a05:600c:35c4:b0:475:dd9a:f791 with SMTP id 5b1f17b1804b1-47d195869e7mr225495155e9.28.1766615033712;
-        Wed, 24 Dec 2025 14:23:53 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=+f5letVSuPediXl7g3IMKmAS9HrG4wk1hLFxF9XifBM=;
+        b=sorl8GPniarUgzXFLQgdSz5+eW/zU8ijMak+aOrM4EjJa7+QolIP1yQmfnnUcUqy6d
+         RNW2T7nXpZjm6gR6ptzSRaOB6wbyS//TAtq78MyYjCtsG2YlaQ7p3s8cuNZ8h7qwI+fb
+         y3sce2rkVet/tGyZgh8pNXUhtXOVF9UJDtZpWtZ9UTrNTj/GP6WaW7L+6D3/jy8xnSrl
+         8ZS83UQriIiXaPnrWusrLFvm+w2vkeoNCul7gfagYbZlQU3YATHrjYTwHHXPxWzj+tN+
+         RQFF0UEkkyg/KUMQkvh5QYVLzRM9ts5F/RvJcLfd9Wg8NgTT7ZfOvw6obDFa3dlToK6T
+         Qf6A==
+X-Gm-Message-State: AOJu0YyYcayQ2CJu6CgCF/gmxeMRec5anHnW18hyM/9au+EoaP2wYcg2
+	27ImwQnX76D9DR9H3QqbLhKzk4tGb+6Mk8AJJH+Hgwf0gvGIRYaQh4oNsHF4FA==
+X-Gm-Gg: AY/fxX4qUmxSR934+PZIPHyKJ5UG7EC1SM17k+Pxnbt+H1ESVkQ7XmL0Nd/JfU/ik2+
+	KAWe85cYD2KIAbjS00UGO4Gh2f0jj5I2VD5glCphKQj+o8f9Uukjjw48pbR6JZYuoYoHWtYIODC
+	YLhXd6KY9ohzJMGt53eW3TshmmXn3O7tjXQudyg8Kb0nthQ7nAJ+xknOVtCjNG/YeErJmslFHDK
+	ZB/Bnsc4tSWtnbImZb3MA2IZaI+9+eAUomB++tfnWgtgviz5b7otRRa7gJ6qDRVzI5eJQ4sDoH9
+	7TSJd4iXewY7m7A5BAmKNmqPCCStDOHr84KH1dNyWSR6OxxgoL3lbwyhwFaF8cpBSTIFvocZssd
+	j7vl4/8uCZq8K/UnnJpLB3oP5s4HcNmhsEko6gXsTt+2G1pDu+mIB/7nSluDnwS8L9Q2SNhOoWD
+	ARvTYIXMW1B0V9/dJmwmOb0xLs1I2/0w==
+X-Google-Smtp-Source: AGHT+IEu+oZePADgsHIEA/83J/AkHHqX/pkGp07kXzaikRguczjac8pA61mJ2bjzJzzfmnaT1d/npg==
+X-Received: by 2002:a05:600c:19c6:b0:471:14f5:126f with SMTP id 5b1f17b1804b1-47d195c201bmr207318915e9.33.1766615034295;
+        Wed, 24 Dec 2025 14:23:54 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d19346d33sm323775965e9.3.2025.12.24.14.23.53
         for <openembedded-devel@lists.openembedded.org>
@@ -55,228 +56,64 @@ Received: from desktop ([51.154.145.205])
         Wed, 24 Dec 2025 14:23:53 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][kirkstone][PATCH 1/2] vorbis-tools: upgrade 1.4.2 -> 1.4.3
-Date: Wed, 24 Dec 2025 23:23:51 +0100
-Message-ID: <20251224222352.2993909-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][kirkstone][PATCH 2/2] vlc: upgrade 3.0.17-1 -> 3.0.17.4
+Date: Wed, 24 Dec 2025 23:23:52 +0100
+Message-ID: <20251224222352.2993909-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251224222352.2993909-1-skandigraun@gmail.com>
+References: <20251224222352.2993909-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 22:23:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122908
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 22:24:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122909
 
-From: Vijay Anusuri <vanusuri@mvista.com>
-
-Refreshed gettext.patch
-Dropped 0001-ogginfo-Include-utf8.h-for-missing-utf8_decode.patch & CVE-2023-43361.patch
-Dropped patches fixed in newer version
-Dropped md5sum
+This update contains minor bugfixes.
 
 Changelog:
-https://gitlab.xiph.org/xiph/vorbis-tools/-/blob/release-1.4.3/CHANGES
+3.0.17.4:
+Service Discovery: Fix UPnP regression on Windows
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 37a17c25cc38e8207db96b106c0de88dd3977df7)
+3.0.17.3:
+Demux: Fix a regression causing a lack of audio in adaptive streaming
 
-Adapted to Kirkstone.
+3.0.17.2:
+Interface: Qt: Fix right click support on video
+Misc: Update YouTube script
+
+This commit has been detached from all branches. The version format
+change does not cause version-going-backwards issues.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...g-include-utf8.h-to-codec_skeleton.c.patch | 28 ---------
- .../vorbis-tools/CVE-2023-43361.patch         | 57 -------------------
- .../vorbis-tools/vorbis-tools/gettext.patch   | 44 ++++++++------
- ...s-tools_1.4.2.bb => vorbis-tools_1.4.3.bb} |  4 +-
- 4 files changed, 29 insertions(+), 104 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
- rename meta-multimedia/recipes-multimedia/vorbis-tools/{vorbis-tools_1.4.2.bb => vorbis-tools_1.4.3.bb} (79%)
+ .../vlc/{vlc_3.0.17-1.bb => vlc_3.0.17.4.bb}                  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.17-1.bb => vlc_3.0.17.4.bb} (97%)
 
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
-deleted file mode 100644
-index db7d142543..0000000000
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 68c5a33685f5b86e7f18f239ceb8861484fee552 Mon Sep 17 00:00:00 2001
--From: Petter Reinholdtsen <pere@debian.org>
--Date: Sun, 6 Apr 2025 07:53:53 +0200
--Subject: [PATCH] Added missing include "utf8.h" to codec_skeleton.c.
--
--Patch from Sebastian Ramacher <sramacher@debian.org> and Debian.
--
--Upstream-Status: Backport [https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/68c5a33685f5b86e7f18f239ceb8861484fee552]
--Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-----
-- ogginfo/codec_skeleton.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/ogginfo/codec_skeleton.c b/ogginfo/codec_skeleton.c
--index a27f8da..0709860 100644
----- a/ogginfo/codec_skeleton.c
--+++ b/ogginfo/codec_skeleton.c
--@@ -25,6 +25,7 @@
-- #include <ogg/ogg.h>
-- 
-- #include "i18n.h"
--+#include "utf8.h"
-- 
-- #include "private.h"
-- 
---- 
--GitLab
--
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
-deleted file mode 100644
-index 69286907fa..0000000000
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/CVE-2023-43361.patch
-+++ /dev/null
-@@ -1,57 +0,0 @@
--From 5bb47f58582c15c2413564b741d1d95e7b566aa8 Mon Sep 17 00:00:00 2001
--From: Ralph Giles <giles@thaumas.net>
--Date: Sun, 17 Sep 2023 11:49:12 -0700
--Subject: [PATCH] oggenc: Don't assume the output path ends in a file name.
--
--oggenc attempts to create any specified directories in the output
--file path if they don't exist. The parser was assuming there was
--a final filename after the last directory separator, and so would
--try to read off the end of the argument if it was a bare directory
--such as `./` or `outdir/`. It also did not handle more than one
--consecutive separator. This corrects both issues.
--
--Thanks to Frank-Z7 (Zeng Yunxiang) at Huazhong University of Science
--and Technology (cse.hust.edu.cn) for the report.
--
--Fixes CVE-2023-43361.
--
--Upstream-Status: Backport [https://gitlab.xiph.org/xiph/vorbis-tools/-/commit/5bb47f58582c15c2413564b741d1d95e7b566aa8]
--CVE: CVE-2023-43361
--Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-----
-- oggenc/platform.c | 10 +++++++---
-- 1 file changed, 7 insertions(+), 3 deletions(-)
--
--diff --git a/oggenc/platform.c b/oggenc/platform.c
--index 6d9f4ef..d50ad99 100644
----- a/oggenc/platform.c
--+++ b/oggenc/platform.c
--@@ -136,18 +136,22 @@ int create_directories(char *fn, int isutf8)
-- {
--     char *end, *start;
--     struct stat statbuf;
---    char *segment = malloc(strlen(fn)+1);
--+    const size_t fn_len = strlen(fn);
--+    char *segment = malloc(fn_len+1);
-- #ifdef _WIN32
--     wchar_t seg[MAX_PATH+1];
-- #endif
-- 
--     start = fn;
-- #ifdef _WIN32
---    if(strlen(fn) >= 3 && isalpha(fn[0]) && fn[1]==':')
--+    // Strip drive prefix
--+    if(fn_len >= 3 && isalpha(fn[0]) && fn[1]==':') {
--         start = start+2;
--+    }
-- #endif
-- 
---    while((end = strpbrk(start+1, PATH_SEPS)) != NULL)
--+    // Loop through path segments, creating directories if necessary
--+    while((end = strpbrk(start + strspn(start, PATH_SEPS), PATH_SEPS)) != NULL)
--     {
--         int rv;
--         memcpy(segment, fn, end-fn);
---- 
--GitLab
--
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-index dd03fa9524..5044427a95 100644
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-@@ -3,18 +3,40 @@ Fix build with gettext 0.20.x
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
-+---
-+ Makefile.am  | 4 ++--
-+ configure.ac | 3 +--
-+ 2 files changed, 3 insertions(+), 4 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 62c36d7..201c69c 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -2,8 +2,8 @@
-+ 
-+ AUTOMAKE_OPTIONS = foreign dist-zip
-+ 
-+-SUBDIRS = po intl include share win32 @OPT_SUBDIRS@ tests
-+-DIST_SUBDIRS = po intl include share win32 ogg123 oggenc oggdec ogginfo \
-++SUBDIRS = po include share win32 @OPT_SUBDIRS@ tests
-++DIST_SUBDIRS = po include share win32 ogg123 oggenc oggdec ogginfo \
-+ 	vcut vorbiscomment m4 tests
-+ 
-+ EXTRA_DIST = config.rpath README AUTHORS COPYING CHANGES
-+diff --git a/configure.ac b/configure.ac
-+index 6751ec8..67746ce 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -34,7 +34,7 @@
-+@@ -34,7 +34,7 @@ CFLAGS="$cflags_save"
-  AC_PROG_LIBTOOL
-  
-- ALL_LINGUAS="be cs da en_GB eo es fr hr hu nl pl ro ru sk sv uk vi"
-+ ALL_LINGUAS="be cs da de en_GB eo es fr hr hu id ka nb nl pl ro ru sk sl sr sv uk vi "
- -AM_GNU_GETTEXT
- +AM_GNU_GETTEXT([external])
-  
-  dnl --------------------------------------------------
-  dnl System checks
--@@ -397,7 +397,6 @@
-+@@ -413,7 +413,6 @@ AC_CONFIG_FILES([
-  Makefile
-  m4/Makefile
-  po/Makefile.in
-@@ -22,16 +44,6 @@ Signed-off-by: Michael Opdenacker <michael.opdenacker@bootlin.com>
-  include/Makefile
-  share/Makefile
-  win32/Makefile
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -2,8 +2,8 @@
-- 
-- AUTOMAKE_OPTIONS = foreign dist-zip
-- 
---SUBDIRS = po intl include share win32 @OPT_SUBDIRS@
---DIST_SUBDIRS = po intl include share win32 ogg123 oggenc oggdec ogginfo \
--+SUBDIRS = po include share win32 @OPT_SUBDIRS@
--+DIST_SUBDIRS = po include share win32 ogg123 oggenc oggdec ogginfo \
-- 	vcut vorbiscomment m4
-- 
-- EXTRA_DIST = config.rpath README AUTHORS COPYING CHANGES
-+-- 
-+2.43.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.3.bb
-similarity index 79%
-rename from meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb
-rename to meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.3.bb
-index 33a212de8e..778b848534 100644
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.3.bb
-@@ -12,11 +12,9 @@ DEPENDS = "libogg libvorbis"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
+similarity index 97%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
+index 9b85cb5374..dfc838066b 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17-1.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
+@@ -16,14 +16,14 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native bison-nat
+ LDFLAGS:append:riscv64 = " -latomic"
+ LDFLAGS:append:riscv32 = " -latomic"
  
- SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-            file://gettext.patch \
--           file://0001-Added-missing-include-utf8.h-to-codec_skeleton.c.patch \
--           file://CVE-2023-43361.patch \
-           "
+-SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;branch=3.0.x \
++SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;nobranch=1 \
+            file://0001-make-opencv-configurable.patch \
+            file://0002-use-vorbisidec.patch \
+            file://0003-fix-luaL-checkint.patch \
+            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+            file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
+ "
+-SRCREV = "aa76328c572d93f1d99c867a94ecad1dc3259733"
++SRCREV = "c650ce1a4e352cc04192229a8878b8b6c312527d"
+ S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "db7774ec2bf2c939b139452183669be84fda5774d6400fc57fde37f77624f0b0"
-+SRC_URI[sha256sum] = "a1fe3ddc6777bdcebf6b797e7edfe0437954b24756ffcc8c6b816b63e0460dde"
- 
- inherit autotools pkgconfig gettext
- 
+ inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
 
