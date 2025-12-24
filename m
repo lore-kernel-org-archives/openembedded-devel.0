@@ -1,222 +1,264 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89A07E7544B
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 12:11:31 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.119497.1766578289270142489
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8278E75453
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 12:53:31 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.119971.1766580809495538135
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 04:11:29 -0800
+ Wed, 24 Dec 2025 04:53:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EROuyAH3;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47796a837c7so39885755e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 04:11:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZSSnAf9L;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-477a2ab455fso58070965e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 04:53:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766578287; x=1767183087; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=e5znPyawQJMKY0ag3h5sTbpW2jMUYFDTsTMUWh5Fl+w=;
-        b=EROuyAH3szhuur8vSTQN+WsOwTUvcJRZGFoprm42NjJ2/F3jnECTHod1cRiCIh33cu
-         nq2tUy72gPgNtfoVjdk5UUKim1iWax28OL0binjxlf4wOK4hxEbQq+MeK8D7PWN552fD
-         2sLRAQKmaGa5cuvEZ57JIQtcEiktgI/+RwL2OxkwRdkd4JlUeQj4zORHKjHe70B7P80J
-         T9fgCTjc2rTzsqDS5qU0+niwcCagiTre7t+qfjFQnwTgr2Osjfw35gHqS1MyNjq90fU1
-         jsLHg09fDc6aXjywVlTYxlg2N49II4SI56YhxVVuPXqeUP8dig+YuP1G56FFYMTVUR8U
-         0SCA==
+        d=gmail.com; s=20230601; t=1766580808; x=1767185608; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=w3mG0LAeH9OWetdjWgk6Qv4JTxM+j5+eJUe6Fr4pvoY=;
+        b=ZSSnAf9Levn/XCOeqt2WToqk+IC+4GP8YJgaNt2xCMkYaU6Na4q7L2PzUNTCGzF0NW
+         0m0zIfnLaRPMCyFUamhhWFERwMuf46GtwmybfUky1PkKjK3SpR92ZZs1S9Xn7zdcXG67
+         qMByjTD+b7iGmU1GtlCKyzLf7qNksfuGfLuqNU9bS/6b90UtRZobl2PHhJb4NOiIGA0t
+         M97N5VvA4X60iJbtlTQC8i8bBIn8zFJLHTTOrniwB4a0P8hZEjL2f7sO2/PhwmV6AJ7Z
+         9COyC/SO67ZX1/yeRyo6TMioPDgeU0zansa+LmczbgImsXGVtcqEyXAIZSSDHGL5XP0A
+         dXeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766578287; x=1767183087;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=e5znPyawQJMKY0ag3h5sTbpW2jMUYFDTsTMUWh5Fl+w=;
-        b=A8OqA16J0hiYGFkxi4aS2n+w/ZKWZfqgifq5JPA1Ps/ER/7kmyoBV6jhStp/TxN7Ve
-         unKkqjUhO9lQUcvKkipVNk6XEbxWwKxiqj5ivmdW+6xH7g9Qiqa8UKZII7BssiAX9yBW
-         WPXB1Kam3TUf6ulPY0OGMKHA2VhCVZe0djA5MCGUMeKDXafeNOyUgIOHMPxYtccwWFm9
-         Ix14EVTnsYBgiytkWWxe7Vi3Uf4LUCMZzXUHLzpVIyYLRM5KEIfyutzERPj54cEJxPwQ
-         cYajspOX1sIyMSsc1bfN9EogwldD+Vb4gnTVpDc9i0QFokuQR0QA0GdXtcQ4fvGDzfBo
-         wmGw==
-X-Gm-Message-State: AOJu0YxkkRL2LNJzpPu8CGPSX78tbTPw9S7nQyokyyHlXuDP+RNZXpWP
-	ououEINtc6PQDi7R/aQ7mKPihkrFaehRQSELt+HKtPbdnvv/mbWqd3zYLaY9rg==
-X-Gm-Gg: AY/fxX4Vq343oklmOTEP8y30RyBWF9RWDinulxX7KX0B9YvnZSUfq+Z45eaKkkuJWFj
-	H6NFDlD/TXczO9Qa+FcG27b1mi4d1ToKJ9Ws34WH14ZeoeIQaGyYGkSCOBR0A0cZuIrV39W0OWV
-	5rbESMvOBOlys5UvCudCQ3kEfL7kYgK2CLR8y/GqgGL3hgCmLCJkvTnX6ZTBqqGpwfmTWYtf3eA
-	6Ti9q5JMsV6rd6xCEDgGTilA4NySaYCvWKcu45QD1LfajBZbxGpzlpLXT0WybS8vBxM88yqQAoR
-	y01LSe+JA9jte+pUUdhS7Rw9k9gYHWs09Q4871oPsQnaZZPIWPDlsi0qjDYJhaGXpzj47JU0wpe
-	k8j3ezbtNEqiijksFyTS3NghJe0v0Pp/5CYmGSW2uujVqy9wTuSzebJa2N8pfRQbmVjhsY6F06z
-	MQJVyZYu3ilNdvKkKXWEH1o9bMaUoArMCGuePyHJ7owZ1syv/AMcUNHrmvqoLbz8oLMr2WFXhuz
-	icw9PiZRWysZAny0PoKY1o015OrTv+0LIDZrELqnextm1pvtO+CB5D7yh4W5w==
-X-Google-Smtp-Source: AGHT+IGInnjlm6oZqT1IA+wfEWtj9uwtAbVl79PHHdgyApL+OIB5ge4ysQdBmeBw1rUm3rVtvZ+fag==
-X-Received: by 2002:a05:600c:a31c:b0:47d:264e:b435 with SMTP id 5b1f17b1804b1-47d264eb68dmr102553125e9.22.1766578286988;
-        Wed, 24 Dec 2025 04:11:26 -0800 (PST)
-Received: from localhost.localdomain (2a02-1812-512-2c00-5cba-763c-2ed2-f98a.ip6.access.telenet.be. [2a02:1812:512:2c00:5cba:763c:2ed2:f98a])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be27b28a7sm347951525e9.12.2025.12.24.04.11.26
+        d=1e100.net; s=20230601; t=1766580808; x=1767185608;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=w3mG0LAeH9OWetdjWgk6Qv4JTxM+j5+eJUe6Fr4pvoY=;
+        b=eL1UPoeGh02/YdtO0MuFAXSBjUVVSSmq/V2vkuGdsD8pWJ0hzcxzO2Qt9Q1EvDKi8y
+         aK9Xd4y0v0UccHJDho7le6xDNZZw+NzKlBL8jAMX0tYdLhvnIF73xDSKfyAmIn89+g/y
+         Ol+nv2gAPsfcEEhUMNkPltQixH8xjCVKaC4+uhvvrxj9gM28kwHtD/GE8WDE1PKFophn
+         MaQJ3mpJtx0rUWH86+RFlJKrL63jNR0p5unABjdZlfUGqqt65qAqkP0Qmc3GM//6TukI
+         V8CqJuxHiye3NvzOuMhGTwQJFKuMVBDZRnxuPPXSUscF7w/OU562iomXdq9ENhayaCw8
+         cxFg==
+X-Gm-Message-State: AOJu0YzKXV7MZ+P1J4GX871N79FUz+uKCbmCnuQjdOOboBfgDFdJkLEF
+	7DOVRc7D1a8oeVzkt1Yv5dxR0apeIySESfrvUQsFYWZAv/c02I2oXeIKh0WzWg==
+X-Gm-Gg: AY/fxX7SflA49yJclIkfNu7M5ghTe2ActeNtvEZAjpt+UXqxrN31LJ0t6nNKGLdd4w0
+	o1qWu1KMLYU1402dAHdFL2lCcJQgiD56HeFja4hBDEsveESEeNntnuVHzCZcqwyVEJrA3wL3sc5
+	GN++ObDo+zNANY16GfkPyRo4wfsBAO9lrI7JSO1mUI/AC9Lv3y4bhy5o+j3DJS07Q+cVcKz/+La
+	y58CvGx3wqwjC1QSe0efFOuePfai0lBxEFdDbalmJBe/L5e9mNGkCF6iOgDs3M/D83+d0hCf5wt
+	NrGbQgG5ZghsEkfALG4pU84xvcFDZ3EtymasNAZUX5qlRGHGvWeD5t1DhS/NSfxN2fcN7lO8chv
+	DlmDdWBCsPvlCekTvuylwyumN1QwQ3dmCjfZIV0OAQpMqr3L1jgahm734KVQ2vnlN0FS0hkoyjY
+	PnX8S/3uxc6tgs+XHjFY0=
+X-Google-Smtp-Source: AGHT+IFP9iK6nd47zJorvUrLS/GfpNrCzaGdypR2KaSLGQtoaCbpY0rxb4WjmzvnS0+Uyffe+cPccw==
+X-Received: by 2002:a05:600c:4e42:b0:47b:de05:aa28 with SMTP id 5b1f17b1804b1-47d1956eb65mr140660155e9.2.1766580807558;
+        Wed, 24 Dec 2025 04:53:27 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d193cbc0bsm298569455e9.11.2025.12.24.04.53.26
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Dec 2025 04:11:26 -0800 (PST)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Wed, 24 Dec 2025 04:53:27 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Rob.Woolley@windriver.com,
-	Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-oe][PATCH v2] freeglut: version 3.4.0 -> 3.8.0
-Date: Wed, 24 Dec 2025 13:10:55 +0100
-Message-ID: <20251224121055.1826975-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.47.3
+Subject: [meta-networking][scarthgap][PATCH] wolfssl: patch CVE-2025-7395
+Date: Wed, 24 Dec 2025 13:53:26 +0100
+Message-ID: <20251224125326.1951044-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 12:11:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122882
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 12:53:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122883
 
-patch to add support for legacy OpenGL (Thanks Rob Woolley)
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-7395
 
-| -- Found OpenGL: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/freeglut/3.8.0/recipe-sysroot/usr/lib/libGL.so  found components: OpenGL
-| -- Found PkgConfig: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/freeglut/3.8.0/recipe-sysroot-native/usr/bin/pkg-config (found version "0.29.2")
-| CMake Error at /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/freeglut/3.8.0/recipe-sysroot-native/usr/share/cmake-4.2/Modules/FindPackageHandleStandardArgs.cmake:290 (message):
-|   Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY)
+Backport the patches from the PR[1] that is referenced by the project's
+changelog[2] to fix this issue.
 
-Changlog:
+[1]: https://github.com/wolfSSL/wolfssl/pull/8833
+[2]: https://github.com/wolfSSL/wolfssl/blob/master/ChangeLog.md
 
-2025-11-16  John Tsiombikas <nuclear@mutantstargoat.com>
-
-	freeglut 3.8 changes:
-
-	* New experimental Cocoa (native MacOS X) backend.
-	* Add glutSwapInterval, to control vsync (currently X11 and win32 only).
-	* glutExtensionSupported now also reports platform extensions (GLX/WGL).
-	* Fix build issues with new cmake versions while maintaining
-	  compatibility with old cmake.
-	* Fix handling of UTF8 window/icon titles.
-	* Fix issue with some X11 window managers not properly restoring
-	  iconified windows (send _NET_ACTIVE_WINDOW EWMH client message).
-	* Fix build issues with C23 compilers (empty argument list semantics).
-	* Fix compatibility with older versions of windows which don't have
-	  RAWHID support (before XP), by loading the entry points dynamically.
-	* Fix glutInitDisplayString parsing of "aux", and add =N parsing support
-	  to specify samples and auxbufs.
-	* Various fixes and improvements in the GameCube/Wii backend.
-	* Altbuild support for Solaris 2.6/SUN Workshop C.
-	* Started conversion of documentation from the website to markdown in
-	  the source tree: doc/api.md
-	* Added the original GLUT manpages, with permission from Mark Kilgard.
-	* New demos: accum, vsync, and windows.
-	* Cleanup of some old and no longer relevant, or redundant comments in
-	  the source code.
-	* Removed some out of date README files, and updated others.
-
-2024-06-08  John Tsiombikas <nuclear@member.fsf.org>
-
-	freeglut 3.6 changes:
-
-	* New platforms: Nintendo Gamecube and Nintendo Wii.
-	* Minimum cmake version raised to 3.1.
-	* Make XInput an optional dependency.
-	* Fix incorrect modifier bit mapped to GLUT_ACTIVE_SUPER on X11.
-	* Add support for ARM64 MSVC targets.
-	* Fix for unicode builds on windows.
-	* Fix build on some versions of MinGW carrying an incorrect winuser.h.
-	* Fix menu-related memory leak when an error occurs.
-	* Various build improvements & fixes.
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../0001-Add-support-for-legacy-OpenGL.patch  | 45 +++++++++++++++++++
- .../{freeglut_3.4.0.bb => freeglut_3.8.0.bb}  | 14 +++---
- 2 files changed, 54 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/freeglut/freeglut/0001-Add-support-for-legacy-OpenGL.patch
- rename meta-oe/recipes-graphics/freeglut/{freeglut_3.4.0.bb => freeglut_3.8.0.bb} (73%)
+ .../wolfssl/files/CVE-2025-7395-1.patch       | 84 +++++++++++++++++++
+ .../wolfssl/files/CVE-2025-7395-2.patch       | 27 ++++++
+ .../wolfssl/files/CVE-2025-7395-3.patch       | 25 ++++++
+ .../wolfssl/wolfssl_5.7.2.bb                  | 10 ++-
+ 4 files changed, 142 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
 
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut/0001-Add-support-for-legacy-OpenGL.patch b/meta-oe/recipes-graphics/freeglut/freeglut/0001-Add-support-for-legacy-OpenGL.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
 new file mode 100644
-index 0000000000..b7dc2a58aa
+index 0000000000..9c661d6b57
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut/0001-Add-support-for-legacy-OpenGL.patch
-@@ -0,0 +1,45 @@
-+From a4c51ae7897f1ad82d10e593344511b3d7b81dbc Mon Sep 17 00:00:00 2001
-+From: Jan Vermaete <jan.vermaete@gmail.com>
-+Date: Wed, 24 Dec 2025 12:58:36 +0100
-+Subject: [PATCH 1/1] Add support for legacy OpenGL
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-1.patch
+@@ -0,0 +1,84 @@
++From e6c0d1ac7b480c0b5e36f660dd3c0f2b45e4c3ab Mon Sep 17 00:00:00 2001
++From: Ruby Martin <ruby@wolfssl.com>
++Date: Mon, 2 Jun 2025 16:38:32 -0600
++Subject: [PATCH] create policy for WOLFSSL_APPLE_NATIVE_CERT_VALIDATION,
++ domain name checking
 +
-+Upstream-Status: Pending
-+
-+Signed-off-by: Rob Woolley <rob.woolley@windriver.com>
-+Commited-by: Jan Vermaete <jan.vermaete@gmail.com>
++CVE: CVE-2025-7395
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/9864959e41bd9259f258c09171ae2ec1c43fbc7f]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ CMakeLists.txt | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ src/internal.c | 25 ++++++++++++++++++++-----
++ 1 file changed, 20 insertions(+), 5 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 23741bf..31b3ac8 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -378,13 +378,13 @@ IF(FREEGLUT_GLES)
-+       FIND_PACKAGE(OpenGL REQUIRED COMPONENTS EGL GLES2 OpenGL)
-+       CMAKE_PATH(GET OPENGL_gles2_LIBRARY PARENT_PATH _OPENGL_LIBDIR)
-+       FIND_LIBRARY(GLES1_LIBRARY GLESv1_CM HINTS ${_OPENGL_LIBDIR} REQUIRED)
-+-      LIST(APPEND LIBS ${GLES1_LIBRARY} OpenGL::EGL OpenGL::GLES2 OpenGL::OpenGL)
-++      LIST(APPEND LIBS ${GLES1_LIBRARY} OpenGL::EGL OpenGL::GLES2 OpenGL::GL)
-+     elseif(NOT CMAKE_VERSION VERSION_LESS "3.10")
-+       FIND_PACKAGE(OpenGL REQUIRED COMPONENTS EGL OpenGL)
-+       GET_FILENAME_COMPONENT(_OPENGL_LIBDIR ${OPENGL_egl_LIBRARY} DIRECTORY)
-+       FIND_LIBRARY(GLES1_LIBRARY GLESv1_CM HINTS ${_OPENGL_LIBDIR})
-+       FIND_LIBRARY(GLES2_LIBRARY GLESv2 HINTS ${_OPENGL_LIBDIR})
-+-      LIST(APPEND LIBS ${GLES1_LIBRARY} ${GLES2_LIBRARY} OpenGL::EGL OpenGL::OpenGL)
-++      LIST(APPEND LIBS ${GLES1_LIBRARY} ${GLES2_LIBRARY} OpenGL::EGL OpenGL::GL)
-+     else()
-+       FIND_PACKAGE(OpenGL REQUIRED)
-+       LIST(GET ${OPENGL_LIBRARIES} 0 _OPENGL_LIB)
-+@@ -433,7 +433,7 @@ IF(FREEGLUT_WAYLAND)
-+   INCLUDE(FindPkgConfig)
-+   if(NOT CMAKE_VERSION VERSION_LESS "3.10")
-+     FIND_PACKAGE(OpenGL REQUIRED COMPONENTS EGL OpenGL)
-+-    LIST(APPEND LIBS OpenGL::EGL OpenGL::OpenGL)
-++    LIST(APPEND LIBS OpenGL::EGL OpenGL::GL)
-+   else()
-+     FIND_PACKAGE(OpenGL REQUIRED)
-+     LIST(GET ${OPENGL_LIBRARIES} 0 _OPENGL_LIB)
-+-- 
-+2.47.3
++diff --git a/src/internal.c b/src/internal.c
++index 6bbd38fa8..2b090382f 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -221,7 +221,7 @@ WOLFSSL_CALLBACKS needs LARGE_STATIC_BUFFERS, please add LARGE_STATIC_BUFFERS
++ #include <Security/SecCertificate.h>
++ #include <Security/SecTrust.h>
++ #include <Security/SecPolicy.h>
++-static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
+++static int DoAppleNativeCertValidation(WOLFSSL* ssl, const WOLFSSL_BUFFER_INFO* certs,
++                                             int totalCerts);
++ #endif /* #if defined(__APPLE__) && defined(WOLFSSL_SYS_CA_CERTS) */
++ 
++@@ -15992,7 +15992,7 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
++              * into wolfSSL, try to validate against the system certificates
++              * using Apple's native trust APIs */
++             if ((ret != 0) && (ssl->ctx->doAppleNativeCertValidationFlag)) {
++-                if (DoAppleNativeCertValidation(args->certs,
+++                if (DoAppleNativeCertValidation(ssl, args->certs,
++                                                      args->totalCerts)) {
++                     WOLFSSL_MSG("Apple native cert chain validation SUCCESS");
++                     ret = 0;
++@@ -41246,7 +41246,8 @@ cleanup:
++  * wolfSSL's built-in certificate validation mechanisms anymore. We instead
++  * must call into the Security Framework APIs to authenticate peer certificates
++  */
++-static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
+++static int DoAppleNativeCertValidation(WOLFSSL* ssl,
+++                                            const WOLFSSL_BUFFER_INFO* certs,
++                                             int totalCerts)
++ {
++     int i;
++@@ -41255,7 +41256,8 @@ static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
++     CFMutableArrayRef certArray = NULL;
++     SecCertificateRef secCert   = NULL;
++     SecTrustRef       trust     = NULL;
++-    SecPolicyRef      policy    = NULL ;
+++    SecPolicyRef      policy    = NULL;
+++    CFStringRef       hostname  = NULL;
++ 
++     WOLFSSL_ENTER("DoAppleNativeCertValidation");
++ 
++@@ -41283,7 +41285,17 @@ static int DoAppleNativeCertValidation(const WOLFSSL_BUFFER_INFO* certs,
++     }
++ 
++     /* Create trust object for SecCertifiate Ref */
++-    policy = SecPolicyCreateSSL(true, NULL);
+++    if (ssl->buffers.domainName.buffer &&
+++            ssl->buffers.domainName.length > 0) {
+++        /* Create policy with specified value to require host name match */
+++        hostname = CFStringCreateWithCString(kCFAllocatorDefault,
+++        (const char*)ssl->buffers.domainName.buffer, kCFStringEncodingUTF8);
+++    }
+++    if (hostname != NULL) {
+++        policy = SecPolicyCreateSSL(true, hostname);
+++    } else {
+++        policy = SecPolicyCreateSSL(true, NULL);
+++    }
++     status = SecTrustCreateWithCertificates(certArray, policy, &trust);
++     if (status != errSecSuccess) {
++         WOLFSSL_MSG_EX("Error creating trust object, "
++@@ -41314,6 +41326,9 @@ cleanup:
++     if (policy) {
++         CFRelease(policy);
++     }
+++    if (hostname) {
+++        CFRelease(hostname);
+++    }
++ 
++     WOLFSSL_LEAVE("DoAppleNativeCertValidation", ret);
++ 
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
+new file mode 100644
+index 0000000000..857f6bb367
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-2.patch
+@@ -0,0 +1,27 @@
++From aad4e7c38f3784942923f4871d61a7e41d3de842 Mon Sep 17 00:00:00 2001
++From: Brett <bigbrett@users.noreply.github.com>
++Date: Wed, 4 Jun 2025 15:48:15 -0600
++Subject: [PATCH] prevent apple native cert validation from overriding error
++ codes other than ASN_NO_SIGNER_E
 +
-diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-similarity index 73%
-rename from meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-rename to meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-index 13f3d111fe..5c6ab1a1d7 100644
---- a/meta-oe/recipes-graphics/freeglut/freeglut_3.4.0.bb
-+++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.8.0.bb
-@@ -4,21 +4,25 @@ HOMEPAGE = "https://freeglut.sourceforge.net"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
- 
--SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
--SRC_URI[sha256sum] = "3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec"
-+SRC_URI = "\
-+    https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
-+    file://0001-Add-support-for-legacy-OpenGL.patch \
-+    "
-+SRC_URI[sha256sum] = "674dcaff25010e09e450aec458b8870d9e98c46f99538db457ab659b321d9989"
- 
- inherit cmake features_check pkgconfig
- 
--EXTRA_OECMAKE = "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
--
- # depends on virtual/libgl and libxi
- REQUIRED_DISTRO_FEATURES = "opengl x11"
- 
--PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11 glvnd', d)} \
-+                  ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles', '', d)}"
-+PACKAGECONFIG[glvnd] = "-DOpenGL_GL_PREFERENCE=GLVND,-DOpenGL_GL_PREFERENCE=LEGACY, libglvnd"
- PACKAGECONFIG[gles] = "-DFREEGLUT_GLES=ON,-DFREEGLUT_GLES=OFF,"
- PACKAGECONFIG[wayland] = "-DFREEGLUT_WAYLAND=ON,-DFREEGLUT_WAYLAND=OFF,libxkbcommon"
- PACKAGECONFIG[demos] = "-DFREEGLUT_BUILD_DEMOS=ON,-DFREEGLUT_BUILD_DEMOS=OFF,"
- PACKAGECONFIG[x11] = ",,virtual/libx11 libice libxmu libglu libxrandr libxext"
++CVE: CVE-2025-7395
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/bc8eeea703253bd65d472a9541b54fef326e8050]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/internal.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
- # Add -Wno-implicit-function-declaration since it might be otherwise treated at
- # error by clang16+ and this is not really a problem
- CFLAGS += "-Wno-implicit-function-declaration"
--- 
-2.47.3
-
++diff --git a/src/internal.c b/src/internal.c
++index 2b090382f..79f584a0a 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -15991,7 +15991,8 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
++             /* If we can't validate the peer cert chain against the CAs loaded
++              * into wolfSSL, try to validate against the system certificates
++              * using Apple's native trust APIs */
++-            if ((ret != 0) && (ssl->ctx->doAppleNativeCertValidationFlag)) {
+++            if ((ret == ASN_NO_SIGNER_E) &&
+++                (ssl->ctx->doAppleNativeCertValidationFlag)) {
++                 if (DoAppleNativeCertValidation(ssl, args->certs,
++                                                      args->totalCerts)) {
++                     WOLFSSL_MSG("Apple native cert chain validation SUCCESS");
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
+new file mode 100644
+index 0000000000..a7e1c336f3
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-7395-3.patch
+@@ -0,0 +1,25 @@
++From f2a85e37e552d8dfafa2cbf32507b2fa545ee593 Mon Sep 17 00:00:00 2001
++From: Brett <bigbrett@users.noreply.github.com>
++Date: Wed, 4 Jun 2025 16:56:16 -0600
++Subject: [PATCH] add missing error trace macro
++
++CVE: CVE-2025-7395
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/0e2a3fd0b64bc6ba633aa9227e92ecacb42b5b1b]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/internal.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/internal.c b/src/internal.c
++index 79f584a0a..5557b5698 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -15991,7 +15991,7 @@ int ProcessPeerCerts(WOLFSSL* ssl, byte* input, word32* inOutIdx,
++             /* If we can't validate the peer cert chain against the CAs loaded
++              * into wolfSSL, try to validate against the system certificates
++              * using Apple's native trust APIs */
++-            if ((ret == ASN_NO_SIGNER_E) &&
+++            if ((ret == WC_NO_ERR_TRACE(ASN_NO_SIGNER_E)) &&
++                 (ssl->ctx->doAppleNativeCertValidationFlag)) {
++                 if (DoAppleNativeCertValidation(ssl, args->certs,
++                                                      args->totalCerts)) {
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
+index 8f484d6098..5e66c8b186 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.7.2.bb
+@@ -12,10 +12,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ PROVIDES += "cyassl"
+ RPROVIDES:${PN} = "cyassl"
+ 
+-SRC_URI = " \
+-    git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
+-    file://run-ptest \
+-"
++SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
++           file://run-ptest \
++           file://CVE-2025-7395-1.patch \
++           file://CVE-2025-7395-2.patch \
++           file://CVE-2025-7395-3.patch \
++           "
+ SRCREV = "00e42151ca061463ba6a95adb2290f678cbca472"
+ 
+ S = "${WORKDIR}/git"
 
