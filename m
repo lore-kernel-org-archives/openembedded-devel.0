@@ -2,179 +2,158 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 668BAE7491B
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 06:01:59 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.115561.1766556118853573202
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43DC3E7491C
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 06:02:09 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.115564.1766556120781980620
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Dec 2025 22:01:58 -0800
+ Tue, 23 Dec 2025 22:02:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UjAUMK4p;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2a099233e8dso47964425ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 22:01:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ext8OF4Z;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-29f30233d8aso69380325ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Dec 2025 22:02:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766556118; x=1767160918; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dbWllTW8ijACxghjapSSxgSzvaUv9ZxOkMMxj88Ofsg=;
-        b=UjAUMK4pesDD+woY9SOlpinOdLNvDbw2vWjP1+4St+iQJjeyDt91gQM3s8uJiBHg6T
-         F52ikUmon/Eo4zhehr1QyAg87l+P9HCDIjhdymm1WLCjuGMUMvbC5GCI7Wy84FTWU+Mu
-         jHSJbN6zr5YjZGDDVby4syg3uQnGq/iXbsM/bAqHDrfNk3KYbWRWd+0SCT4CLCfKFomY
-         ZKPClIv6Vr2HxfTMGyNBtKE+1NRM5zc8kA/+vHxzjdhLFthjuDxHXpkKbZHj1DUbOzpp
-         vktbuKqdk4eLYCA5JACEFjfeYdio5YY0Fw89T0KrX58UWygW2HVToimYorgiKGZuv97x
-         VKfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766556118; x=1767160918;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1766556120; x=1767160920; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dbWllTW8ijACxghjapSSxgSzvaUv9ZxOkMMxj88Ofsg=;
-        b=YNOgakvD9kZbcKfdeNufwKruD5qS7a3UIteVImcmAwlAZHpHmaoFBanNsIK5UsxjP4
-         5GXBQ2uhlFcVBgpPxEYUugWww2DgwBI0vTrvn7upwC7wTpx153LP0x2+5my606AR8A9Z
-         2FhTQ+0Zp26AuBSPFL2B7As956kKrKMZcrnDZStVOx/pjv8BZkQWIl7qPajVI1NqWfcr
-         T86oMxqK2z6orQg9YmNT2MBneYYMtY81lBkohEa7Q9wfuHPD790WjWzPx2ZUBuQmgJGB
-         xPWX57VR2zm5YwYcMamrIMVc6kMXWQPFXWJFhRE8LUN3J4GGwWkK1OByaqTekRwdupWF
-         4gdA==
-X-Gm-Message-State: AOJu0Ywei9LVG06R17K+0asP3W3ibK92jdQyCgUIGJH7hCxhtCucYgos
-	ApLkhxMBhSXzZ/wNlSjqkoiIm/DQSFs5Tfd3nQxUgNOtcsy+0OrwuiEPe1upMg==
-X-Gm-Gg: AY/fxX7JeJMUFuoTyR9DLwPfY8M7Tx5/aofJBOEEWiicbEfLgjmaD0Gy1pYddF/2Wdc
-	QRqqT0e9kXiPPtkoQGCXqIj66b71R7q1LKdwNuuJY/+WeYgJ9CkrAucUvciuo4Jn72oJKWjiHII
-	A9dEKtfLN9Q9lLk8RzkSnmbU3Ay0zoFsBNYAPfkNf++rprzg2lTN6WTbyAGLvXGz4kurksDNjsU
-	iuQ3xu5dNOGZt7vJD+qRkJcmJTNLVAqSZT/XNVVH8NHDRhX378KEG/T4ZrZY56u+iy4guEDjepI
-	ex3zKMN6Vtl8wzjkVE5Y5u/ljopwM0+ml83ndRqmYYcyX3S26Qqjf8RHCE5V8RbJS/QyA1kkW9o
-	/X59/2dFRDr2/Z4pn5q7GrTn+vOsR27t8gwjHRoIR8S2DG+Hg4ldca1Os+S+PviBdaW7C+B1wh/
-	GTi9idKBC0S6u3hp0DR2xQZ3X8
-X-Google-Smtp-Source: AGHT+IFMcsga/giubGv/1XilkVNWFMys6L3bIb5JNkv7IT1n9LOxeqOpZrig1Z9K5N1wXOwq+XtP9Q==
-X-Received: by 2002:a17:903:19e8:b0:29e:93be:fe50 with SMTP id d9443c01a7336-2a2f283d881mr175401965ad.42.1766556117851;
-        Tue, 23 Dec 2025 22:01:57 -0800 (PST)
+        bh=OOOgPvQCwCLGsyLUUVIR6lgfFFMhtib5zbfCF6NBw/0=;
+        b=ext8OF4Zhhaw5OD7OhtJ2oN7t/7Iwi66uNYyJDYVFysdX4fXQKC9QVToBRSCD/+Jrq
+         hqzoT1fat6FKwiu6lDvN33g1eGu0Rjb4F9yaqim1eGittDBEzB9qlUyT4iMEapv1LRjC
+         GIemsr4yn/WOfJu6ZNESU02q/h5UW6A+LObizEUL00PQTjP3aLQUlWz6rFixjmBc64D+
+         evP36PPBjMtSARb3Q5YzENYdLVanD8KM+PFYnpxYvZodoE7WCynKkyxFR6XwvGHiPWZ0
+         UjBbKrxvYOYaT9xWIeBuWX7HxN01kEZ9dW+I+16Rp12AYGNdsfs41lnQq/Gn6iaXvyLj
+         +Fuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766556120; x=1767160920;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=OOOgPvQCwCLGsyLUUVIR6lgfFFMhtib5zbfCF6NBw/0=;
+        b=i11iHjHRVy0rZiRp/NYOrAzW+iZrphZsCK53h+yIAiQR+1mS8SO/YGfCJLprRIMNJw
+         tHHnqZcwKe6qxdet89lJ7LrU9GUh+pyYpNelLXDpk50wNxVZGLW55qjSiM0A/wz3evN0
+         2psKXLmUsfxx9lTXchhuQt0XDuQHpgKQN5NhVwdQeij4B2u2OcLbua5IP+uFUpc206Ar
+         8IMUPWI9rCvGyrDCzZHpLb6nrX3LUXNpBGf8v/Z5WiK91P8Nk0p8X+lwIKPO3FUvrQXE
+         HAPOzQ1I0Lk14Q+V3dOI8Lsa0/LGmC6/uMJGfoRYoUbsHcRiyNHG866OCtuku5U2Po8C
+         ghXA==
+X-Gm-Message-State: AOJu0YyYXGByzir0xV4PYi6fbDI7LAiAyitHu7/y+faPGAoCxL8lKHJJ
+	07yFXxxGa8nYBPYqMr6/P9AmjhEtH25mITPGofleQR5yD3QsovrgZ1SFu3EvLw==
+X-Gm-Gg: AY/fxX5Wk1twgjncma9wkN3pGdA2PNtmGMqq0jLTTNRcRUgeufYup75jzJYP+3rS5gD
+	7osv9Y/9phy1pEmsdRi0My8xbbaF7oOi95/idzvzCLOrhlq/UWK+4cowt4G+1k+ZAuEEz/ZT2kj
+	Rk7qkjku1dNE9/RC437OFEWvB8rfDXghqAh3rNa2jTYgELRasgkCN7RgtwpaTNZsvvpqaiOhzi5
+	jTD5yGbs46W260PT799H1STNgwV0/QTu7dOmMB2UwJZiIqRzJYWTGczTlz9smAVB8HbXOjTO18+
+	1v/MeIMutv9hl+sYgQ9g+xDetRau5XAL1vnB88tgxggXaincjtkiWzRlQ2YILvIkhXwbqbvh4WS
+	dJ+tFijXEjEPMHha04sG5GWIgU5dnXOgL6dYfriy+S/aIFsOVRmYf1ihrsHUj4i4Atyg0NXxs6A
+	2EULnDV9jP0cjE3NWYJ8+gUimn
+X-Google-Smtp-Source: AGHT+IEsn7jl2qkTwjgCIJD/WoA446HraYf4YITa7wrrRR+5ZDjOuxuPqxv0TLYsobh5yvPXFp0UEg==
+X-Received: by 2002:a17:902:d4cd:b0:2a0:8ca7:69de with SMTP id d9443c01a7336-2a2f2830566mr162979615ad.41.1766556119781;
+        Tue, 23 Dec 2025 22:01:59 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([165.225.124.235])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d4cb9csm142554555ad.47.2025.12.23.22.01.55
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d4cb9csm142554555ad.47.2025.12.23.22.01.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Dec 2025 22:01:57 -0800 (PST)
+        Tue, 23 Dec 2025 22:01:59 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/2] cups-filters: patch CVE-2025-64524
-Date: Wed, 24 Dec 2025 11:31:49 +0530
-Message-ID: <20251224060150.1294484-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 2/2] freerdp3: patch CVE-2025-68118
+Date: Wed, 24 Dec 2025 11:31:50 +0530
+Message-ID: <20251224060150.1294484-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251224060150.1294484-1-ankur.tyagi85@gmail.com>
+References: <20251224060150.1294484-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 06:01:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122843
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 06:02:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122844
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details https://nvd.nist.gov/vuln/detail/CVE-2025-64524
+Details https://nvd.nist.gov/vuln/detail/CVE-2025-68118
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cups/cups-filters/CVE-2025-64524.patch    | 81 +++++++++++++++++++
- .../cups/cups-filters_2.0.0.bb                |  1 +
- 2 files changed, 82 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64524.patch
+ .../freerdp/freerdp3/CVE-2025-68118.patch     | 57 +++++++++++++++++++
+ .../recipes-support/freerdp/freerdp3_3.4.0.bb |  1 +
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-68118.patch
 
-diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64524.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64524.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-68118.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-68118.patch
 new file mode 100644
-index 0000000000..80671ee484
+index 0000000000..8077d61292
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64524.patch
-@@ -0,0 +1,81 @@
-+From a6cc1c750006a8ac4e5d692f3a7d9ade479519ec Mon Sep 17 00:00:00 2001
-+From: Zdenek Dohnal <zdohnal@redhat.com>
-+Date: Wed, 12 Nov 2025 15:47:24 +0100
-+Subject: [PATCH] rastertopclx.c: Fix infinite loop caused by crafted file
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2025-68118.patch
+@@ -0,0 +1,57 @@
++From 054ff633bb1eac3d165a501d5eb691af1faf0538 Mon Sep 17 00:00:00 2001
++From: akallabeth <akallabeth@posteo.net>
++Date: Sat, 13 Dec 2025 17:28:43 +0100
++Subject: [PATCH] [crypto,certificate_data] add some hostname sanitation
 +
-+Infinite loop happened because of crafted input raster file, which led
-+into heap buffer overflow of `CompressBuf` array.
-+
-+Based on comments there should be always some `count` when compressing
-+the data, and processing of crafted file ended with offset and count
-+being 0.
-+
-+Fixes CVE-2025-64524
-+
-+CVE: CVE-2025-64524
-+Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/0fe46c511e81062575b05936f804eb18c9f0a011]
-+(cherry picked from commit 0fe46c511e81062575b05936f804eb18c9f0a011)
++CVE: CVE-2025-68118
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/83d96a81f320cb8a047fd4ef059a6fe4016dbeec]
++(cherry picked from commit 83d96a81f320cb8a047fd4ef059a6fe4016dbeec)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ filter/rastertopclx.c | 25 +++++++++++++++++++++++--
-+ 1 file changed, 23 insertions(+), 2 deletions(-)
++ libfreerdp/crypto/certificate_data.c | 14 +++++++++++---
++ 1 file changed, 11 insertions(+), 3 deletions(-)
 +
-+diff --git a/filter/rastertopclx.c b/filter/rastertopclx.c
-+index ded86f114..39cb378bf 100644
-+--- a/filter/rastertopclx.c
-++++ b/filter/rastertopclx.c
-+@@ -825,10 +825,10 @@ StartPage(cf_filter_data_t      *data,	// I - filter data
-+   }
++diff --git a/libfreerdp/crypto/certificate_data.c b/libfreerdp/crypto/certificate_data.c
++index a48beb448..6408d5d3c 100644
++--- a/libfreerdp/crypto/certificate_data.c
+++++ b/libfreerdp/crypto/certificate_data.c
++@@ -33,6 +33,8 @@
++ #include <freerdp/crypto/certificate_data.h>
 + 
-+   if (header->cupsCompression)
-+-    CompBuffer = malloc(DotBufferSize * 4);
-++    CompBuffer = calloc(DotBufferSize * 4, sizeof(unsigned char));
++ #include "certificate.h"
+++#include <freerdp/log.h>
+++#define TAG FREERDP_TAG("crypto.certificate_data")
 + 
-+   if (header->cupsCompression >= 3)
-+-    SeedBuffer = malloc(DotBufferSize);
-++    SeedBuffer = calloc(DotBufferSize, sizeof(unsigned char));
++ #include <freerdp/log.h>
++ #define TAG FREERDP_TAG("crypto")
++@@ -64,8 +66,9 @@ static BOOL freerdp_certificate_data_load_cache(rdpCertificateData* data)
++ 	WINPR_ASSERT(data);
 + 
-+   SeedInvalid = 1;
++ 	freerdp_certificate_data_hash_(data->hostname, data->port, data->cached_hash,
++-	                               sizeof(data->cached_hash));
++-	if (strnlen(data->cached_hash, sizeof(data->cached_hash)) == 0)
+++	                               sizeof(data->cached_hash) - 1);
+++	const size_t len = strnlen(data->cached_hash, sizeof(data->cached_hash));
+++	if ((len == 0) || (len >= sizeof(data->cached_hash)))
++ 		goto fail;
 + 
-+@@ -1159,6 +1159,13 @@ CompressData(unsigned char *line,	// I - Data to compress
-+               seed ++;
-+               count ++;
-+             }
-++
-++	    //
-++	    // Bail out if we don't have count to compress
-++	    //
-++
-++	    if (count == 0)
-++	      break;
-+ 	  }
++ 	data->cached_subject = freerdp_certificate_get_subject(data->cert);
++@@ -97,6 +100,11 @@ static rdpCertificateData* freerdp_certificate_data_new_nocopy(const char* hostn
 + 
-+ 	  //
-+@@ -1252,6 +1259,13 @@ CompressData(unsigned char *line,	// I - Data to compress
++ 	if (!hostname || !xcert)
++ 		goto fail;
+++	if (strnlen(hostname, MAX_PATH) >= MAX_PATH)
+++	{
+++		WLog_ERR(TAG, "hostname exceeds length limits");
+++		goto fail;
+++	}
 + 
-+             count = line_ptr - start;
++ 	certdata = (rdpCertificateData*)calloc(1, sizeof(rdpCertificateData));
 + 
-++	    //
-++	    // Bail out if we don't have count to compress
-++	    //
-++
-++	    if (count == 0)
-++	      break;
-++
-+ #if 0
-+             fprintf(stderr,
-+ 		    "DEBUG: offset=%d, count=%d, comp_ptr=%p(%d of %d)...\n",
-+@@ -1424,6 +1438,13 @@ CompressData(unsigned char *line,	// I - Data to compress
-+ 
-+             count = (line_ptr - start) / 3;
-+ 
-++	    //
-++	    // Bail out if we don't have count to compress
-++	    //
-++
-++	    if (count == 0)
-++	      break;
-++
-+ 	    //
-+ 	    // Place mode 10 compression data in the buffer; each sequence
-+ 	    // starts with a command byte that looks like:
-diff --git a/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb b/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
-index efcd1aab8a..f9242379c1 100644
---- a/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
-+++ b/meta-oe/recipes-printing/cups/cups-filters_2.0.0.bb
-@@ -8,6 +8,7 @@ DEPENDS = "libcupsfilters libppd glib-2.0 poppler"
- SRC_URI = " \
- 	https://github.com/OpenPrinting/${BPN}/releases/download/${PV}/${BP}.tar.xz \
- 	file://fix-make-race.patch \
-+	file://CVE-2025-64524.patch \
- "
- SRC_URI[sha256sum] = "b5152e3dd148ed73835827ac2f219df7cf5808dbf9dbaec2aa0127b44de800d8"
++@@ -251,5 +259,5 @@ char* freerdp_certificate_data_hash(const char* hostname, UINT16 port)
++ {
++ 	char name[MAX_PATH + 10] = { 0 };
++ 	freerdp_certificate_data_hash_(hostname, port, name, sizeof(name));
++-	return _strdup(name);
+++	return strndup(name, sizeof(name));
++ }
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
+index 3558697d42..b9ec75236b 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
+@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
+            file://CVE-2024-32661.patch \
+            file://CVE-2024-32662.patch \
+            file://CVE-2025-4478.patch \
++           file://CVE-2025-68118.patch \
+            "
  
+ S = "${WORKDIR}/git"
 
