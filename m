@@ -1,105 +1,174 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AB78E78498
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 21:34:36 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.128400.1766612070997432055
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75474E78499
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 22:18:56 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.129022.1766614734366086628
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 13:34:31 -0800
+ Wed, 24 Dec 2025 14:18:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aDFMQ8M9;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2a0c20ee83dso78932145ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 13:34:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HtxkmcDg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4779adb38d3so41308885e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 14:18:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766612070; x=1767216870; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=84QCCz98qGL+if/SEw2wOd3XUZF+hHVfC5Z9oBzvZxg=;
-        b=aDFMQ8M9ww208S9xYGJzqxfpnUbP7CbN4KHpdig4+FTQ9CGps+TIUEHJcCbApwJwGn
-         XSf6GKhDuDLq8yQRwQL1JV99hHe004KktJ9IT3VbJKr0akVytybs+yWAnFB9wDnFZJX8
-         Cj/cMQ7I+avEqK15d6a4/1IwlX+EisdaoBPDPIh8KAIC6T8J8boFOwX6/Ts27mPHDCdk
-         qz2IGXMCHLc+N6pQEfxUUerW+uZMM7OHB1cF0A/IvE4mEgG6AlA3dS6NzZP49h34wGHX
-         65I/ApXQ/7czYfA9ZSysLL8CpKUX46pPOB8OiUZ51ZtFpSARRXhBXRgfGK0FIH2iXTtc
-         P3mA==
+        d=gmail.com; s=20230601; t=1766614733; x=1767219533; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=647Wfdn+R2UkMphhrf8AoHSfr8CmUV9h2UEVNgs6qwU=;
+        b=HtxkmcDg0e7jcaxI2W+njs72MSyQOOl5Y8rlQ49slM7w3jDLpOjqy9+oz4/BN4LSbQ
+         MPfqxBhDpYjA7Nrrs5dElELKtueeKVjYV4eHo+7R0Gw/EiJc9uiKD0AXmWCOOoQL1spM
+         uDN7OeEbxXUsVOM9Ohdsal2u5k2NkOgv8U3LphuwbzhcgF7zlI58tuEmCXpx+2w1Rqw/
+         BURJDGZLr2dNZPhdUvRe222lQmuhuNcCurnPp8k0VEMFkpQsnBs4sFrpw+2LlU+FAT5o
+         RB5/8BXeaX9LdTbhKtwdQgsT80Ix/Q0AIbHv/0xQJTkEs8CA1VLcgtat9+QyT1WJi+GZ
+         vKVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766612070; x=1767216870;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=84QCCz98qGL+if/SEw2wOd3XUZF+hHVfC5Z9oBzvZxg=;
-        b=fjyW9Pj/aoPSohqGH0IAugZjPa9fqQOQGnKYAs0Rwuvzws5ApjVwxXbnON3Owfa5Xt
-         NFl4AxqvYnqQiElgbJpaU3jSTMY0MEfMCHQcMmRp09sCZEpKHcTYodkcKmerXw7Rbias
-         5NnYZ+VNYGWZZTfZ+nr1Y+CpQK4atFQL3mSUAgi8KqZZQeKSHXjui8UM8nmOAdp/CiwK
-         9rWvD15/XlAaye3p+xx5Yy1BhSS4mJ/y4Ttvrsft7X1B+ZhCrMDx/xRT0bxZvxSDvlHv
-         Oy1yLapTgzreRj49IHVtEIgpQxjOjc6xfSVbMTJnsJzFdf6hMwJ/s/9+1UvnoRLBJXtM
-         g99A==
-X-Gm-Message-State: AOJu0Yx3WEb3Fjl6PHo+RSfKwprws+5KMUcZ6hj3PC1YCQ8wu/uhbTnU
-	9bnAk0j//Ud122n5W0EIiFrsQwZUT9bUbbvgfM1kYTb+kIiJjsbnO2+v5iF1jjFW
-X-Gm-Gg: AY/fxX4GOE8wArD7IOJDsRQQd87EBrxfY3twyGtwfS/6/gzfcxB8eeB3V9n7SM9arqI
-	+lUQtFVBHSHd7ovm2Ski5ZrzLWkASC1JN0bT8vhZ/qWTy9978wMa4qgDHeaOe8qQslw855ExNEu
-	DJ/MKBZXsplDys7wUvSUXoPEU4kCYHENl/dZF1WnehZaSxfrjC3nlBjTjdYS4LePm+od6U70esU
-	LBcJe/HXgCm7C5a8SDPBlT7pAjV434UFHyBpZMEESYcUIvRX91wDZkndLDq/A5EbwjtUnRxRubb
-	8VfgrscFstsav3DTmB33hbOd75vgREcTL5TWQz0mvtDYlFgybXvpGOQkDAYuPV4K+Vh5/lFgnc6
-	WRKlUjcRmEZ8BnoYjPpLvk/WsdBbV54YmPdQwc6p4FACT6dLaWw47c5KwJWpBQLcziJDFdTXndW
-	JDhkcciXmoE5C2gwPJ48jfdqEGOVb7r3PkVjNFSb2dGD9gOipg9DHy+KBq+6ZVPdAlpMSj79d/n
-	OXOt0hWo3+gwR+Df3hNemmSZZJf9z7T
-X-Google-Smtp-Source: AGHT+IF6UqnG4TcnpIWbRGt08tIFWdYAcArjxl5zgDwVkzttpoEEOGc+vAo7vBMGu4Z/3Ql+dXzA1A==
-X-Received: by 2002:a05:7022:523:b0:119:e56c:18b1 with SMTP id a92af1059eb24-121722e7cfdmr22682085c88.25.1766612069679;
-        Wed, 24 Dec 2025 13:34:29 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::8429])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121724de25dsm51628291c88.7.2025.12.24.13.34.28
+        d=1e100.net; s=20230601; t=1766614733; x=1767219533;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=647Wfdn+R2UkMphhrf8AoHSfr8CmUV9h2UEVNgs6qwU=;
+        b=Ay4WVIr+JVh4Ch2DRrqDCDrMpALSdkRqOXsSQ2ClPjOIEpVU58UOEqVb96K9aw+r1i
+         EjjZPXb1HkmCtTDniKQjD34BuWa3V5UnubAgXmqv2itjIGE8yQU18A358a04qGZTiTqa
+         WEXFodT2brtRiIcX6TL6hvP+qB1oPRvGZ1PnY3D/DXnWZiz6ktbDlsLxIvZ+CpfNQyB1
+         6402J+Wxekglb5oUCeLKFkZ0hv4FP30SR7H0s+Sp5EXMm6ak7LJ7LECGth+XAX7CX4RJ
+         FK5X8d2b2jobqiKnpk+wyighQ/wDtXoU+1GdBfmpfrQ3mcc4MFn+FyAXHriD+/VnU3Fp
+         5UrQ==
+X-Gm-Message-State: AOJu0Yx1TlARejLqHiofzGDgCpMkuEWga70ISkpJ3//DYQiJhwM+sUDN
+	Ly0TOMeZGacYhsBgKnhY7lao7Jm58968SfSBKpSqgDLDlGtytdCxCOyvdBkZFw==
+X-Gm-Gg: AY/fxX7An9qy/c7XRVYb0Td8N4csq6ukjmdA7Y7aa8RgAReS2hQayrIC3nvvYECTV/9
+	A6hYotlvYe8I+fMTpmAuaPfEmdwvFv9gRXzQRuHEz3Ec7dfpjLhhn3q5en6YafCXL8ER3wfLGf0
+	loxcsSkscP2QAZCjv24pp0IQam4oKYeOtBCARcQhECZivScQHNNo+mS2SEAsEWFBsKTAA5w7TP0
+	de6BeFmtDdVtxKtyTsPGf9/wlIzj8+dsVpwnbfX3/8SKCkJ7CyJbqaPbKZorWWlp3PjXOahcW3i
+	/Xw9asRO2Gr7gVb3IMkWdRNoQHnHuMQyEU9aa/mXv/D/0dNTZkYPzqFQuj6q83EGOePxrNmKgSL
+	7Ch9JwO7lXzGgVTAVRIB4RY86qhnjJoxGTIAIy+cTdha4+xOpWQze1kBJQlr09+TOLX1i6LV04j
+	AfiLOOV5yV
+X-Google-Smtp-Source: AGHT+IFBRPcbbPHuWgZaCDwjuL5+HKMxr+yvrLUok0SOw7Hyt/ywA2dCADsn+L38+R9V58H4zfoHtQ==
+X-Received: by 2002:a05:600c:3b2a:b0:477:b734:8c22 with SMTP id 5b1f17b1804b1-47d1953bd29mr183064975e9.8.1766614732419;
+        Wed, 24 Dec 2025 14:18:52 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d193d5372sm332859315e9.14.2025.12.24.14.18.51
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Dec 2025 13:34:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Wed, 24 Dec 2025 14:18:52 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Bruce Ashfield <bruce.ashfield@gmail.com>
-Subject: [meta-oe][PATCH] vboxguestdrivers: Upgrade to 7.2.4
-Date: Wed, 24 Dec 2025 13:34:26 -0800
-Message-ID: <20251224213426.2245853-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH] libmpdclient: upgrade 2.22 -> 2.24
+Date: Wed, 24 Dec 2025 23:18:51 +0100
+Message-ID: <20251224221851.2993458-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 21:34:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122906
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 22:18:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122907
 
-This is a maintenance release. The following items were fixed or added:
+Though the original recipe claiumed to be v2.22, actually it was
+2.20.
 
-GUI: Fixed VirtualBox VM Manager crash when host was resuming from sleep (​github:gh-121, ​github:gh-170)
-GUI: Updated native language support for Traditional Chinese, Greek, Swedish, Hungarian and Indonesian translations
-NAT: Fixed issue when multiple port forwarding rules affected NAT functionality (​github:gh-232)
-Linux host and guest: Introduced initial support for kernel 6.18
-Linux Guest Additions: Introduced additional fixes for RHEL 9.6 and 9.7 kernels (​github:GH-12)
-Windows Guest Additions: Introduced additional fixes for issue when installation was failing in Windows XP SP2 guest (​github:GH-142)
+The vala bindings have been dropped, so no need to delete them anymore.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
+License-Update: The license itself hasn't changed between versions, but
+there are a couple of things to note:
+- Half of the source files are covered by 2-Clause-BSD, and other half by
+  3-Clause-BSD. This has been the case always, but until recently this
+  was only specified in the source file headers, and there was a single
+  license file with 3-Clause-BSD text. Now there is explicitly a 2-Clause-
+  BSD file also.
+- The 3-Clase-BSD text was reformatted, and added placeholders for year
+  and author. That is causing the hash change for this particular license.
+
+Changelog:
+2.24:
+* fix missing "mpd_send_list_tag_types_available" in libmpdclient.ld
+* support MPD protocol 0.25
+  - stringnormalization
+
+2.23:
+* support MPD protocol 0.24.0
+  - allow window for listplaylist and listplaylistinfo
+  - command "playlistlength", "protocol", "stickertypes", "stickernamestypes", "searchplaylist"
+  - tag "ShowMovement"
+  - new sticker find api
+  - new subcommands for "tagtypes": "available", "reset"
+* Support open end for mpd_search_add_window
+* format floating-point numbers with the POSIX localew
+
+2.22:
+* drop the unmaintained Vala bindings
+* fix "version.h" conflicts when used as a Meson subproject
+* support MPD protocol 0.24.0
+  - command "save [create|replace|append]"
+
+2.21:
+* meson.build: allow using as a Meson subproject
+* add mpd_recv_replay_gain_status()
+* support MPD protocol 0.24.0
+  - tag "Mood", "TitleSort"
+  - "oneshot" consume state
+  - allow range in "playlistmove"
+  - commands "searchcount", "stickernames"
+  - added attribute for songs
+  - search: support constraint "added-since"
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb} (97%)
+ .../musicpd/libmpdclient_2.22.bb              | 21 -------------------
+ .../musicpd/libmpdclient_2.24.bb              | 15 +++++++++++++
+ 2 files changed, 15 insertions(+), 21 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.24.bb
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
-similarity index 97%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
-index 34b5e9ed04..eb9b81f154 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
-@@ -15,7 +15,7 @@ VBOX_NAME = "VirtualBox-${PV}"
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
- "
--SRC_URI[sha256sum] = "b0e63bfb855327aecf1122cda33390c33734e5ffed72f123f5edf786a8ce1393"
-+SRC_URI[sha256sum] = "d281ec981b5f580211a0cedd1b75a1adcb0fbfcbb768d8c2bf4429f4763e8bbd"
-
- S ?= "${UNPACKDIR}/vbox_module"
- S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
+deleted file mode 100644
+index a9dae6073a..0000000000
+--- a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.22.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "C client library for the Music Player Daemon"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=06b9dfd2f197dc514d8ef06549684b77"
+-HOMEPAGE = "https://www.musicpd.org/libs/libmpdclient/"
+-
+-inherit meson
+-
+-SRC_URI = " \
+-    git://github.com/MusicPlayerDaemon/libmpdclient;branch=master;protocol=https \
+-"
+-SRCREV = "7124a0ad4841a44db084bb785a6e7120bc8f0139"
+-
+-PACKAGECONFIG ??= "tcp"
+-PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"
+-
+-do_install:append() {
+-    # libmpdclient's Vala bindings are outdated and unmaintained; it
+-    # is likely that nobody will ever use them, so let's not install
+-    # them
+-    rm -rf ${D}${datadir}/vala
+-}
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.24.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.24.bb
+new file mode 100644
+index 0000000000..3b12efa2e3
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/libmpdclient_2.24.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "C client library for the Music Player Daemon"
++LICENSE = "BSD-2-Clause & BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
++                    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0"
++HOMEPAGE = "https://www.musicpd.org/libs/libmpdclient/"
++
++inherit meson
++
++SRC_URI = " \
++    git://github.com/MusicPlayerDaemon/libmpdclient;branch=master;protocol=https;tag=v${PV} \
++"
++SRCREV = "5073329989bf52676d8c446176a1d29ed3ffccca"
++
++PACKAGECONFIG ??= "tcp"
++PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"
 
