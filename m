@@ -2,147 +2,104 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24A61E78496
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 21:15:36 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.128085.1766610928732249634
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AB78E78498
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 21:34:36 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.128400.1766612070997432055
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 13:15:28 -0800
+ Wed, 24 Dec 2025 13:34:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZmWjaZej;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2a137692691so71846385ad.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 13:15:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aDFMQ8M9;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2a0c20ee83dso78932145ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 13:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766610928; x=1767215728; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766612070; x=1767216870; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7ezXcdbUcJds6c3xvhN1z+po73csY5PAgpkQn4N/PCw=;
-        b=ZmWjaZejQUW8qzbrRJaXLdrEbwU40kS7wKB7xNp0+qu5+RVh4MByk37D4as1UUAsbU
-         6zS8JaZW7GHoM3snn37R5v0qh5y6zT2/qH18SAOLpXSP9CoKHcG8fWhZmqDVIGOKHvqg
-         VYAs02TXLa61IqOfljtvMdEjz8N9QeC4J17MayhzuCCxcPRIOdM+I6rqJNwiT6Dxl2ue
-         Uj5oKXpeXuPcvSPpFN5KVyknmLLUG5UEeRfNXtzw2+wBmGqH5+dPzAO55b7EHkNOEQji
-         GUCqTzzVLd7qOzigRXBbxO3Y4LSBAFD/q1pO4wf42+aKAOkspwNaYSI/6EXT+11ZuuCy
-         x57A==
+        bh=84QCCz98qGL+if/SEw2wOd3XUZF+hHVfC5Z9oBzvZxg=;
+        b=aDFMQ8M9ww208S9xYGJzqxfpnUbP7CbN4KHpdig4+FTQ9CGps+TIUEHJcCbApwJwGn
+         XSf6GKhDuDLq8yQRwQL1JV99hHe004KktJ9IT3VbJKr0akVytybs+yWAnFB9wDnFZJX8
+         Cj/cMQ7I+avEqK15d6a4/1IwlX+EisdaoBPDPIh8KAIC6T8J8boFOwX6/Ts27mPHDCdk
+         qz2IGXMCHLc+N6pQEfxUUerW+uZMM7OHB1cF0A/IvE4mEgG6AlA3dS6NzZP49h34wGHX
+         65I/ApXQ/7czYfA9ZSysLL8CpKUX46pPOB8OiUZ51ZtFpSARRXhBXRgfGK0FIH2iXTtc
+         P3mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766610928; x=1767215728;
+        d=1e100.net; s=20230601; t=1766612070; x=1767216870;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=7ezXcdbUcJds6c3xvhN1z+po73csY5PAgpkQn4N/PCw=;
-        b=H47Fr4FmyRp1SDI+g+i+QpZl7Em3B/mvEXBkeMksXjo6FNg1NTeNcAxNTdql79iSTP
-         U1AO2lDVm5LTnQCDLt8T8az505wfVS1+x82WKooqkr7mNBVWdBlKO0ggh+H2waabJFas
-         QxwZdJktxwCh/NUh+hpks2NhHsoQlYGxR/c5wfigpKT2unQwxXHta69fpC4gmwaJ7kvJ
-         DuyVqCLzo4C84hqw39LLhkXwoYc6u8SqbFP0Ye3lH47j25n4EsHZq6RrRviduWbuMPGC
-         FPv8vVdvL4kRbsG2mS26Y5B+85fTy2Nk2ePXXwDr0ix2UkZaeh6x1LOe2yvqZtG2+uEg
-         BvGw==
-X-Gm-Message-State: AOJu0YzmRxvxqk8fJUEGQI4J3pnBCOgt7hjxo6Em4v9u70dPdzkoGHM/
-	66JWLff2r/OWKRaZAoVAYqoV1hyzqb8U8tfVWu1lFhXXpm2ci/KM+M0VJwMoQDFE
-X-Gm-Gg: AY/fxX7DTrBTeA20CGmhyF5Quj9O63OfJErGNQLKPQh2Uqsh42vE/aR9vliEgVq3k9u
-	0fliDlc/+MQEAoQnTfegh+T2Gex3W63PjgWUXjbfSQh9IkL4RaIbLOpUsXWCbii+lf29cRaUg1/
-	+WYbhb+a8QrpZmsJ+RBQiM04LXaXmMXzXKfGkjeMd66GAITFLeiMm7lAXjLr/dXY7GV9HiOkqa9
-	rSg+6b+rGcmcWvHe9bfbvw8FWReak6uOZbcNL7WW/Hl30vWqXdXk4PP30pJy3h/1wGOHQpHDHth
-	+SckCZndweivZAu3eEG64WT9iUNgg3j6BqmTel41DgDktIHd/cAOFHOMzA+Mc6a3KTq8zgYJT3Z
-	NfFe0UrQqWIacLVgnenDM0tI1eJvkM6c7FF1yAVQ3s4m/LQrIPMwEUK++QcNETwQLzte8M2xjJC
-	rHL3HIQ5x1PEnm/1UDvnKqku/w8Njt97/P4qPqGNPuwugNp2OOQOBl5yy4z3IPxxK4lJ1YKQtz6
-	j3VA8+jiTa6fIqiIcGgKZpmVVcvz9cLWKqd7VhN3hI=
-X-Google-Smtp-Source: AGHT+IEX3KNfetuxRdAZJ1Fb5kguqyMa67qSJ68GF/lxLH7fwefo8ZKD3JbIxvApFeiawEciRV+gmg==
-X-Received: by 2002:a05:7022:799:b0:119:e56b:957e with SMTP id a92af1059eb24-121722ac244mr25367049c88.3.1766610927540;
-        Wed, 24 Dec 2025 13:15:27 -0800 (PST)
+        bh=84QCCz98qGL+if/SEw2wOd3XUZF+hHVfC5Z9oBzvZxg=;
+        b=fjyW9Pj/aoPSohqGH0IAugZjPa9fqQOQGnKYAs0Rwuvzws5ApjVwxXbnON3Owfa5Xt
+         NFl4AxqvYnqQiElgbJpaU3jSTMY0MEfMCHQcMmRp09sCZEpKHcTYodkcKmerXw7Rbias
+         5NnYZ+VNYGWZZTfZ+nr1Y+CpQK4atFQL3mSUAgi8KqZZQeKSHXjui8UM8nmOAdp/CiwK
+         9rWvD15/XlAaye3p+xx5Yy1BhSS4mJ/y4Ttvrsft7X1B+ZhCrMDx/xRT0bxZvxSDvlHv
+         Oy1yLapTgzreRj49IHVtEIgpQxjOjc6xfSVbMTJnsJzFdf6hMwJ/s/9+1UvnoRLBJXtM
+         g99A==
+X-Gm-Message-State: AOJu0Yx3WEb3Fjl6PHo+RSfKwprws+5KMUcZ6hj3PC1YCQ8wu/uhbTnU
+	9bnAk0j//Ud122n5W0EIiFrsQwZUT9bUbbvgfM1kYTb+kIiJjsbnO2+v5iF1jjFW
+X-Gm-Gg: AY/fxX4GOE8wArD7IOJDsRQQd87EBrxfY3twyGtwfS/6/gzfcxB8eeB3V9n7SM9arqI
+	+lUQtFVBHSHd7ovm2Ski5ZrzLWkASC1JN0bT8vhZ/qWTy9978wMa4qgDHeaOe8qQslw855ExNEu
+	DJ/MKBZXsplDys7wUvSUXoPEU4kCYHENl/dZF1WnehZaSxfrjC3nlBjTjdYS4LePm+od6U70esU
+	LBcJe/HXgCm7C5a8SDPBlT7pAjV434UFHyBpZMEESYcUIvRX91wDZkndLDq/A5EbwjtUnRxRubb
+	8VfgrscFstsav3DTmB33hbOd75vgREcTL5TWQz0mvtDYlFgybXvpGOQkDAYuPV4K+Vh5/lFgnc6
+	WRKlUjcRmEZ8BnoYjPpLvk/WsdBbV54YmPdQwc6p4FACT6dLaWw47c5KwJWpBQLcziJDFdTXndW
+	JDhkcciXmoE5C2gwPJ48jfdqEGOVb7r3PkVjNFSb2dGD9gOipg9DHy+KBq+6ZVPdAlpMSj79d/n
+	OXOt0hWo3+gwR+Df3hNemmSZZJf9z7T
+X-Google-Smtp-Source: AGHT+IF6UqnG4TcnpIWbRGt08tIFWdYAcArjxl5zgDwVkzttpoEEOGc+vAo7vBMGu4Z/3Ql+dXzA1A==
+X-Received: by 2002:a05:7022:523:b0:119:e56c:18b1 with SMTP id a92af1059eb24-121722e7cfdmr22682085c88.25.1766612069679;
+        Wed, 24 Dec 2025 13:34:29 -0800 (PST)
 Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::8429])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121725548b5sm72446579c88.17.2025.12.24.13.15.26
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121724de25dsm51628291c88.7.2025.12.24.13.34.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Dec 2025 13:15:27 -0800 (PST)
+        Wed, 24 Dec 2025 13:34:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] rwmem: Fix tests to build with musl
-Date: Wed, 24 Dec 2025 13:15:24 -0800
-Message-ID: <20251224211524.1996247-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>
+Subject: [meta-oe][PATCH] vboxguestdrivers: Upgrade to 7.2.4
+Date: Wed, 24 Dec 2025 13:34:26 -0800
+Message-ID: <20251224213426.2245853-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 21:15:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122905
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 21:34:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122906
+
+This is a maintenance release. The following items were fixed or added:
+
+GUI: Fixed VirtualBox VM Manager crash when host was resuming from sleep (​github:gh-121, ​github:gh-170)
+GUI: Updated native language support for Traditional Chinese, Greek, Swedish, Hungarian and Indonesian translations
+NAT: Fixed issue when multiple port forwarding rules affected NAT functionality (​github:gh-232)
+Linux host and guest: Introduced initial support for kernel 6.18
+Linux Guest Additions: Introduced additional fixes for RHEL 9.6 and 9.7 kernels (​github:GH-12)
+Windows Guest Additions: Introduced additional fixes for issue when installation was failing in Windows XP SP2 guest (​github:GH-142)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
 ---
- ...rator-Use-own-generic-htobe-template.patch | 49 +++++++++++++++++++
- .../recipes-bsp/rwmem/rwmem_2.0.bb            |  4 +-
- 2 files changed, 52 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-test_data_generator-Use-own-generic-htobe-template.patch
+ .../{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb} (97%)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-test_data_generator-Use-own-generic-htobe-template.patch b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-test_data_generator-Use-own-generic-htobe-template.patch
-new file mode 100644
-index 0000000000..2a8f826b47
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem/0001-test_data_generator-Use-own-generic-htobe-template.patch
-@@ -0,0 +1,49 @@
-+From fd59aeedac8ab75d044026b8ff32adf9aa485dea Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 24 Dec 2025 12:56:14 -0800
-+Subject: [PATCH] test_data_generator: Use own generic htobe() template
-+
-+musl based builds expose this build failure where htobe32/htobe64 macros
-+are in endian.h and it needs to be included. However, there is a local
-+template in librwmem/endianness.h that can be used for
-+better portability across platforms which
-+might use different C library implementations
-+
-+
-+Remove this patch when upgrading to 0.3 since the v2 tests are removed [1]
-+
-+[1] https://github.com/tomba/rwmem/commit/f9e0bffacd7520ee8975c4a36a9d47292d145ae9
-+
-+Upstream-Status: Inappropriate [Use of these macros are removed in master]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ tests/test_data_generator.cpp | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/tests/test_data_generator.cpp b/tests/test_data_generator.cpp
-+index 39e1322..94e732d 100644
-+--- a/tests/test_data_generator.cpp
-++++ b/tests/test_data_generator.cpp
-+@@ -101,12 +101,12 @@ std::vector<uint8_t> TestRegisterFileBuilder::build() {
-+
-+     // Write header (RegisterFileData)
-+     auto write_be32 = [&](uint32_t val) {
-+-        uint32_t be_val = htobe32(val);
-++        uint32_t be_val = htobe(val);
-+         data.insert(data.end(), (uint8_t*)&be_val, (uint8_t*)&be_val + 4);
-+     };
-+
-+     auto write_be64 = [&](uint64_t val) {
-+-        uint64_t be_val = htobe64(val);
-++        uint64_t be_val = htobe(val);
-+         data.insert(data.end(), (uint8_t*)&be_val, (uint8_t*)&be_val + 8);
-+     };
-+
-+@@ -169,4 +169,4 @@ std::vector<uint8_t> TestRegisterFileBuilder::build() {
-+     }
-+
-+     return data;
-+-}
-+\ No newline at end of file
-++}
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-index aea81ee23f..b89da34736 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_2.0.bb
-@@ -16,7 +16,9 @@ DEPENDS += "fmt libinih"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+index 34b5e9ed04..eb9b81f154 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+@@ -15,7 +15,7 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[sha256sum] = "b0e63bfb855327aecf1122cda33390c33734e5ffed72f123f5edf786a8ce1393"
++SRC_URI[sha256sum] = "d281ec981b5f580211a0cedd1b75a1adcb0fbfcbb768d8c2bf4429f4763e8bbd"
 
- SRCREV = "d8dda76a0d8bc3356120d087f783d237602e0278"
-
--SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV}"
-+SRC_URI = "git://github.com/tomba/rwmem.git;protocol=https;name=rwmem;branch=master;tag=${PV} \
-+           file://0001-test_data_generator-Use-own-generic-htobe-template.patch \
-+		  "
-
- inherit meson pkgconfig
-
+ S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
 
