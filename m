@@ -2,181 +2,126 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53DA7E7848A
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 19:25:35 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.126346.1766604325935985803
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76A5CE7848B
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 19:34:45 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.127035.1766604880704019727
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 11:25:26 -0800
+ Wed, 24 Dec 2025 11:34:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CIH5sX9y;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fbad1fa90so5290938f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 11:25:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l2RtwO8U;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-430f2ee2f00so2995015f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 11:34:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766604324; x=1767209124; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766604879; x=1767209679; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Hc9Tda1S+AN78R/+/DcoS6ADOdfcrKocwxqdXAgki18=;
-        b=CIH5sX9yZMUfPVErxWZVvdhIDZaJMk+Yb1bO2gBgGlcN+ynvr06aiHdR+IT2cQRAkS
-         qzq6mqDzrmk8cV/BVXKCz7zE2Dg7jAxugQ7z2sG9x/x8tSSWK9h8nHB/PGktBlegc8jo
-         pgGfT0sf74VpWgvVxfXwDfHnN84OBuKNXItbUEbFPwceE4dMSTaS3KDsasXpnFkeSeky
-         ON1G1ipv/+hvY8nIOgyfVXfP2cMHbmspyM1QVJWryzKFzCY7sfiAUOftrlxlRY8pFOIO
-         QNidd2To5iQ+pW4YbxG64OhEaoQ7S9YfAWdYlknQysJw+7tuBMhe56ocX0lp0sPFwapk
-         s02g==
+        bh=ThPOP1OQafPH5tRzKfkj50KTvYCW3y0+dALhCUOSv5M=;
+        b=l2RtwO8U4FY73Qc4aiaK5/CvjDvZBevL3T5zo9X7zmq1jqSAlgPgSzoxpLD9PxJeJZ
+         KzVM0Tx88s988MNiYvnywbOx9uLzy7wApfbYZZsOLyG/OsMECOE5UthfsQqYTaLSPLC3
+         K/U9qPq9IzthCuuaz5y9JIVFCcbqF5C7JvbOT01OCzxlVbFGJx4f0CUcID7L9hPnzyXk
+         8064WsoFnTFefa5wOJd+sM/Ggl0+tE71wr9UJD0fegOssQYu4TSjQ5Hm354BY09hNeSl
+         sRt8DXGYQyGKcNDWtMGaly6gGhL6MUU/wOlrFfTKRq4ctKtXB4mV4XZNNCzHa7KZh2oF
+         +Dxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766604324; x=1767209124;
+        d=1e100.net; s=20230601; t=1766604879; x=1767209679;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Hc9Tda1S+AN78R/+/DcoS6ADOdfcrKocwxqdXAgki18=;
-        b=O86Y8A+usHDUEXbwrhWrP/QJpw07ZHV5mF262oFJd92ql9z7vdNCuXSPE+7n9AlB4U
-         hQ7T3IEM/tO26DbTSAU5VHyYcI3CnfONeylRAKM7bNPWKOziX7dpScNlY2uagix/FNtS
-         vnw99MVG9FdS6Hgm2K28wY5O5KIXvVhi3z3gxnmAyuEHv8s49S/umFt7hot9ODaqwTlO
-         Uo0n4chU5NjgLpsh38AtO94iBAYiE31mbrFk/wGHDLWQnFCy9S0g2PLjpHAaKInBQYci
-         rF653gdD1Zp0cfuXEmHRQWia1iP054yusxXfD1+/Fq8d++KmmFskTCxvtYnrwtdRIeZ5
-         KObg==
-X-Gm-Message-State: AOJu0YxREUbnliKzV5+/F4rld7OCRyqYg2bl5afaz1OhQDItebUJBdhf
-	0A08pf3GmSLI98ptliMyoGV3FxhuCUJjbqTNhSDnQ/kqQtDLyTVQPfrV8eZEWQ==
-X-Gm-Gg: AY/fxX51qWcSIXzaWjUOCqa613cawRGIEx+5yPjRdzaBmQJpbjJ6BnGyhOL1T40mp+A
-	gojua1nNRgU082JU/W/3rtwLa8YiSByE6r1jizsY2a/xGa6I+Ki5N7fXa+uWwPyG5h2vq7Cs8AF
-	Cw1prAKJ0N7w0cmcZPFVG8SiqqmUfSh515glvdzrT6vgXEMMHd2inGbtopiRV4GSVZWmJ0e6xeP
-	gVDeHvg2+Kmo8UP3pvxYswyczgUX93zpzbdRKEuOOgEuulGeAUIktbhqqyJXk6qe8Ftry0IQADY
-	Ete/REyBpKaZBNRZ0Ui2fv+2f0Z6o32UwE0le2UeNyDFweRt8jk/PxEcKuwtwxiGT99AaKJhr05
-	Qnvdqt+Ojr187YAJrcdJvrFVNpHJ6H3EX8nAILDogBJyoyMPpJTVLsLp8aaRKBeUx5eXsRqZbJB
-	moEzRFW7Zr/aNklObtLjs=
-X-Google-Smtp-Source: AGHT+IE6OFrfv4B4G8vUITmoJLqrwWcAXezx0KSvq7M1Q7Z5QOBM0K3Z/39zBBniLpt5CO6RnwL1LQ==
-X-Received: by 2002:a05:6000:2c03:b0:42f:bbc6:edc1 with SMTP id ffacd0b85a97d-4324e4c1230mr19609309f8f.1.1766604324216;
-        Wed, 24 Dec 2025 11:25:24 -0800 (PST)
+        bh=ThPOP1OQafPH5tRzKfkj50KTvYCW3y0+dALhCUOSv5M=;
+        b=mi3fLcQzjnws6Sh83hEWhmx6BdwDG1Zopac6WVZhYGGvoPpRjvevbijahjMpe/5tnb
+         wJyajjHM7IhF3uEkyeV0pU3qJV7Y5PWDKo5GDDSkpTT3a6vno1Qvl/QUPWaKJo0mMGB3
+         EpLep7yAG0IZc/B1+H2UJH6E1BtENCzi+yXtxxeJ95mwHX/ncUjGnIyQpzF8e0cE9OvL
+         OpNL5i9nNv0WpFQTTGCjMexZ+mRnXR+DdGs/Nnv+lPAZVan6AaCc9MhPcPi8eL5swZpl
+         hxRvjhrk2b4AC+sGqoDmOSIUB3KxAJBfAuhpAwAXROf2Lx8oLvcK0PePPmUhf58pDnSI
+         zxCA==
+X-Gm-Message-State: AOJu0Yxk6TNyDZR8/FAB5rt+HUMd06XTn1JcMZGX5NwUNuNSY3Q5VMzz
+	O0OiGpJ1GQ77xYQxwTF98YKllBv5m6Ne87KMMVgCxgU1gz43vq3TT56GLFNH9A==
+X-Gm-Gg: AY/fxX4sVa07ePO5uLl1c0uLF9d2ctAiJHuXhoyCe9q3SOvwrASkHLGusgMIibw9hiE
+	Eduf+zmzftVDj5VKFPtVEZv5xLfDZx4isK3LDSUepL+GQSodqxT/xfk4UXd4eTK4yCyE6yh0DSq
+	fdUUBasYREHqKg4lZxx7XY5OpWB36+QPixao3ZhT/Xr2vQxm6/ZJSn7le2d3SHw6jVFaNJ5CgLU
+	DD2FSJXde6ED/XWdmlAWTX27QaVe93HM7Ig6wJT28M7w4hRgu3E6rZU/u9pltTWEK1hD1HLivZO
+	c36ksq/cFsarrxiYkoF0mJrsbmici9W/Qbnv7qgPk1y9z88Hzuxb3dyp/Mh4ZDCbyhe0YGSqB3G
+	HqvbDxGOSBCu/CuknJLV/YWlsLWKdDYeYyCxqKlZhMmPjVT2L0WnEb9u+vlL5hHN8eyTtvIUpgk
+	ZPXB8sVI56
+X-Google-Smtp-Source: AGHT+IGwIRZHfuVpDz9HDEpfKBUfpQUIvXA215BjLg99w7ErHxjxCkO5C/JkB+tplT+SlrI3zZualQ==
+X-Received: by 2002:a05:6000:4202:b0:430:f5ab:dc83 with SMTP id ffacd0b85a97d-4324e4c70cfmr22994071f8f.11.1766604878966;
+        Wed, 24 Dec 2025 11:34:38 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea227e0sm36782038f8f.17.2025.12.24.11.25.23
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1af20sm33750665f8f.2.2025.12.24.11.34.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Dec 2025 11:25:23 -0800 (PST)
+        Wed, 24 Dec 2025 11:34:37 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 5/6] wireplumber: upgrade 0.5.11 -> 0.5.13
-Date: Wed, 24 Dec 2025 20:25:18 +0100
-Message-ID: <20251224192519.2630037-5-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 2/5] imagemagick: patch CVE-2025-65955
+Date: Wed, 24 Dec 2025 20:34:31 +0100
+Message-ID: <20251224193434.2631122-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251224192519.2630037-1-skandigraun@gmail.com>
-References: <20251224192519.2630037-1-skandigraun@gmail.com>
+In-Reply-To: <20251224193434.2631122-1-skandigraun@gmail.com>
+References: <20251224193434.2631122-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 19:25:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122890
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 19:34:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122893
 
-Changelog:
-0.5.13:
-Additions & Enhancements:
-- Added internal filter graph support for audio nodes, allowing users to
-  create audio preprocessing and postprocessing chains without exposing
-  filters to applications, useful for software DSP
-- Added new Lua Properties API that significantly improves performance by
-  avoiding constant serialization between WpProperties and Lua tables,
-  resulting in approximately 40% faster node linking
-- Added WpIterator Lua API for more efficient parameter enumeration
-- Added bash completions for wpctl command
-- Added script to find suitable volume control when using role-based policy,
-  allowing volume sliders to automatically adjust the volume of the currently
-  active role (e.g., ringing, call, media)
-- Added experimental HDMI channel detection setting to use HDMI ELD
-  information for channel configuration
-- Enhanced role-based policy to allow setting preferred target sinks for
-  media role loopbacks via policy.role-based.preferred-target
-- Enhanced Bluetooth profile autoswitch logic to be more robust and handle
-  saved profiles correctly, including support for loopback sink nodes
-- Enhanced ALSA monitor to include alsa.* device properties on nodes for
-  rule matching
-- Optimized stream node linking for common cases to reduce latency when new
-  audio/video streams are added
-- Improved event dispatcher performance by using hash table registration for
-  event hooks, eliminating performance degradation as more hooks are
-  registered
-- Increased audio headroom for VMware and VirtualBox virtual machines
-- Added setting to prevent restoring "Off" profiles via
-  session.dont-restore-off-profile property
-- Added support for 128 audio channels when compiled with a recent version of
-  PipeWire
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-65955
 
-Fixes:
-- Fixed memory leaks and issues in the modem manager module
-- Fixed MPRIS module incorrectly treating GHashTable as GObject
-- Fixed warning messages when process files in /proc/<pid>/* don't exist,
-  particularly when processes are removed quickly
-- Fixed MONO audio configuration to only apply to device sink nodes, allowing
-  multi-channel mixing in the graph
-- Fixed event dispatcher hook registration and removal to avoid spurious
-  errors
-- Improved logging for standard-link activation failures
-- Simplified event-hook interest matching for better performance
-
-0.5.12:
-Additions & Enhancements:
-- Added mono audio configuration support via node.features.audio.mono
-  setting that can be changed at runtime with wpctl
-- Added automatic muting of ALSA devices when a running node is removed,
-  helping prevent loud audio on speakers when headsets are unplugged
-- Added notifications API module for sending system notifications
-- Added comprehensive wpctl man page and documentation
-- Enhanced object interest handling for PipeWire properties on session items
-
-Fixes:
-- Fixed race condition during shutdown in the permissions portal module that
-  could cause crashes in GDBus signal handling
-- Added device validity check in state-routes handling to prevent issues
-  when devices are removed during async operations
-- Fixed Log.critical undefined function error in device-info-cache
-- Improved device hook documentation and configuration
+Pick the patch referenced by the NVD report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{wireplumber_0.5.11.bb => wireplumber_0.5.13.bb}       | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.11.bb => wireplumber_0.5.13.bb} (95%)
+ .../imagemagick/files/CVE-2025-65955.patch    | 25 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.0.10.bb         |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2025-65955.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.11.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.bb
-similarity index 95%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.11.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.bb
-index 665efd95af..334861b6db 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.11.bb
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.bb
-@@ -10,9 +10,9 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "python3-native python3-lxml-native doxygen-native", "", d)} \
+diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2025-65955.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2025-65955.patch
+new file mode 100644
+index 0000000000..57fb1c1bf7
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/files/CVE-2025-65955.patch
+@@ -0,0 +1,25 @@
++From f4e53579d8906c939e4169b9e14c5fe867e2b6b8 Mon Sep 17 00:00:00 2001
++From: Dirk Lemstra <dirk@lemstra.org>
++Date: Sun, 23 Nov 2025 09:17:29 +0100
++Subject: [PATCH] Correct incorrect free (GHSA-q3hc-j9x5-mp9m)
++
++CVE: CVE-2025-65955
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/6f81eb15f822ad86e8255be75efad6f9762c32f8]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ Magick++/lib/Options.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Magick++/lib/Options.cpp b/Magick++/lib/Options.cpp
++index 9d2a5904b..14b06a724 100644
++--- a/Magick++/lib/Options.cpp
+++++ b/Magick++/lib/Options.cpp
++@@ -308,7 +308,7 @@ void Magick::Options::fontFamily(const std::string &family_)
++ {
++   if (family_.length() == 0)
++     {
++-      _drawInfo->family=(char *) RelinquishMagickMemory(_drawInfo->font);
+++      _drawInfo->family=(char *) RelinquishMagickMemory(_drawInfo->family);
++       DestroyString(RemoveImageOption(imageInfo(),"family"));
++     }
++   else
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 350b504400..83e9ff2fd0 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -46,6 +46,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+     file://0011-ImageMagick-Add-support-patch-3-to-fix-CVE-2023-3415.patch \
+     file://0011-ImageMagick-Fix-CVE-2023-34151.patch \
+     file://CVE-2022-1115.patch \
++    file://CVE-2025-65955.patch \
  "
  
--SRCREV = "3a785e502642ddb1e91d953e587c7b06444e0b51"
-+SRCREV = "84429b47943d789389fbde17c06b82efb197d04e"
- SRC_URI = " \
--    git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
-+    git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https;tag=${PV} \
-     file://90-OE-disable-session-dbus-dependent-features.lua \
- "
- 
-@@ -114,6 +114,7 @@ python set_dynamic_metapkg_rdepends () {
- 
- PACKAGES =+ "\
-     libwireplumber \
-+    ${PN}-bash-completion \
-     ${PN}-default-config \
-     ${PN}-scripts \
-     ${PN}-modules \
-@@ -132,6 +133,7 @@ CONFFILES:${PN} += " \
- RRECOMMENDS:${PN} += "pipewire ${PN}-scripts ${PN}-modules-meta"
- 
- FILES:${PN} += "${systemd_user_unitdir} ${systemd_system_unitdir} ${datadir}/zsh"
-+FILES:${PN}-bash-completion += "${datadir}/bash-completion/completions/wpctl"
- 
- FILES:libwireplumber = " \
-     ${libdir}/libwireplumber-*.so.* \
-@@ -142,3 +144,4 @@ FILES:${PN}-scripts += "${datadir}/wireplumber/scripts/*"
- # Dynamic packages (see set_dynamic_metapkg_rdepends).
- FILES:${PN}-modules = ""
- RRECOMMENDS:${PN}-modules += "${PN}-modules-meta"
-+RDEPENDS:${PN}-bash-completion = "bash bash-completion"
+ SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
 
