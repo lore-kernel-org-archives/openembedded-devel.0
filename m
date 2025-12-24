@@ -2,669 +2,433 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D95FEE78490
-	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 20:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E13F5E78491
+	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 20:25:15 +0000 (UTC)
 Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.127155.1766607173990673784
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.127326.1766607910726177592
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 12:12:54 -0800
+ Wed, 24 Dec 2025 12:25:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VwNxo3jA;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hAleDxoT;
  spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-787df0d729dso52679757b3.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 12:12:53 -0800 (PST)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-78fb6c7874cso52222797b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 12:25:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766607173; x=1767211973; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766607910; x=1767212710; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=lgFafpjeEqJV+/mTJcWXWpoWkHEOhDTb1xOF8vZWnrs=;
-        b=VwNxo3jAD7QJP94cb4D4Tv898IE35lMTomZBWEwev4nk0Yl8J+huivTfsZukW9e5QG
-         kQYZzN6GkuQmc5BTOB4iQ3xfFlC1440iQm7AoHsUXSBNnwax6IBLn4AYcyRmmnDuJOOl
-         eFx/6+ycRRO6tbx54DMejQDYxOR7KPCcVk601s2Ehkv2uo4DVvyakwh/lnA6SsyftLY9
-         /5EiNRD77GCede5inCHMbmLSovPwdgocINJ9+q43kc3b3mFWC5mlpNbcAoyKV4NIpQZA
-         fXZBQyQdD6iLRg51U6hk29bmuNIVThs+WO459r9ZwgnF9w4mCAqGzSe1BkvpfygiNC0r
-         C/6g==
+        bh=14I7hgBnieWJBsjJ/rUSBlD+4s+pImBrO0gpJsFpWW4=;
+        b=hAleDxoT8Q3K2lcIs3wlWlLYecAXgleW02h2MedmfzTAHlt2N4Vt/3oCW/Bmmr/J2Z
+         4+TGXu6Nox44TmM2iR239lrxAlOwZs9L8NrgoneiWmnTOf6erYcHDqrPtVLdT2xdHENW
+         /FWNIVP+wO8IgviJe0/UU7PmW0Q2b1Rt3usJsi7C0ulmFDVh7tHM/gMVGaSrRjBuNrBb
+         uwbtzMLy3PPygAO3hZzssmW52RvZkJcMpTNMSv/SpH7EdJEckfHWrwTDmu8LfgHbnr6v
+         nNtDp+JfT+mUJ2My+KiDiqokAGEFMy6K5zUSetvZEzl9/DsMzWGQXGe/0xyWxjOhG6Ox
+         KtWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766607173; x=1767211973;
+        d=1e100.net; s=20230601; t=1766607910; x=1767212710;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lgFafpjeEqJV+/mTJcWXWpoWkHEOhDTb1xOF8vZWnrs=;
-        b=PrC7FVYqAU0EjH+kbP5boNfL65IIgQ53l0rJcJ2BwqE1p8BPoAxR8ATyuwoEP01ME2
-         5I2nsiJ1UJvfVOUQ9gNAwGcN/7TnJtO/aENmIOZFcfYHaLNTSBmtNlLVk1AJwVcgiW3K
-         /B9t9fOc+D5YeuUtozCasIud6RoZkq33trnXhKUmDxNm0MKyL+1MweyTtzC2TGTrw+ED
-         IT5fMd391YLAy4sSDhB4y/pUEBXj0GLjKGowKPHCGRFQmT28Dcb+OSh8XNnA7tNiYzFI
-         aS9fFuNsMcCmr+DPkBSzgd7f23AfPJV0rJKqH5jl0KwZM9qI+Nv2IXBlb9xGWPTEsFFW
-         1DXQ==
-X-Gm-Message-State: AOJu0YxDLf6Z/Xy4YFCDR9CiBBYLIrO3kM3wMrJOexsIPKfr4C+9pMyI
-	oiDvf+myXyYwmLd1Hg+H0fgn9Dct4nKNd2j2I1fC2ETsULmlfwoBV6zTL7KDoISh2ymORJo863G
-	5fU1KB4eQWmCWw1FZYHORbptzOvMAxFI=
-X-Gm-Gg: AY/fxX4ZTdYTuEjiCyYDz3DhCOGgsV18DZjmQJ65A1AZXdQXVAkJNVhK9wY32bFqEQ4
-	w9qceXWR5hPTTJEt19pUge5/nIFK+QLfjdrh9nyIwEpCsC2F7TCMFrMXHh+H/lSyNBrK4p5rkBp
-	LsvoltcvrMXTot2I1EIe3aVMs3zO4gRpJYvVjXfFKxlcyO/PAmVgan0EolyIKvLDuxXJNNCYEuO
-	AwejSrUk0ADXFzkf+0bKw2XpKYjf0VAcyCuGrIr1hJHK4wgfDaptw4bexmdsoDtGfK/lePSjj/4
-	odVpXGJSUrMTPrnysYI44TukyjeiYn5T+/LMHFx1MrGmLfFQCjOG/qGYyUvv5nz/k7cLy/LnvOh
-	NRh39t8yzZfE=
-X-Google-Smtp-Source: AGHT+IEdQAZT0YW9tCifi/Z/kKssVihThSss+l6u6LTCQ5Bm/YO8bcJd0jSgAreDsTKLn/SYYSCJ6lW8s2zqHaYWxSA=
-X-Received: by 2002:a05:690c:4442:b0:788:1cde:cad0 with SMTP id
- 00721157ae682-78fb400fa8cmr152143987b3.2.1766607172949; Wed, 24 Dec 2025
- 12:12:52 -0800 (PST)
+        bh=14I7hgBnieWJBsjJ/rUSBlD+4s+pImBrO0gpJsFpWW4=;
+        b=D4pXLpHAESQ/79stOs68oSIm0O9mZnNPC4FSIt8GoqxCzSDikIn3P8T7MD+zENkSdz
+         fMzs+Jdcui2hpFYGuzHtEyVL4RspFFF2cljyLbUa4Jvl8wZPNJTmc8l3fvW6M5xqiMC4
+         dcwlv1RfOLQQ6kjjVU71GqjDbj/FEfAaLB1cv+7gkthqDePxIk/YqdOLfNN0P/1PrZcS
+         pI/StP8BRgb+Y7EIgbuD2qwykuzz5zVjQA3GdAQLR2RnSxXQRTN5YgR02gz2oKsM3Oxf
+         yV6/8WlwvjpDkeJ0eO4dMf17DtEAhUlDOQ95GIxp0Gup47pILA8z8zPpU1zB49O7JpAW
+         5nIw==
+X-Gm-Message-State: AOJu0Ywb58QKrAlsD28Te/RlfAZNgw5+3lWXjtLwBNMBU+Kv8GmKvwoq
+	R+DE+jxUi/QPvI43HRBonXF/5eRDGHAtgTYS8dV52mFGIESEwhTBKhQOjmALnU8+MYftgfbOooD
+	Sli3Arx2Jdz8R9FtsWD7R5qcxlluGugo=
+X-Gm-Gg: AY/fxX5UWjR5xw+lPr8K5hJEMOr0tXjjQINWzc41HMWC+dbxl5a6+anWZgIgXbGvfuq
+	yCdcb83aqF8HmUsIsYudeXkb2J3s8lgoPRFfCGXTK5u+fHWyCP3a4WjfzBreZxltaRYrAt0G17y
+	UP5TMClRwS368G/VB22KMLD33zPc1LlekrgXPQfR5j6g8L/rA/BsAbuemiLnFI2AbZyPMtGqi7U
+	hyC9+UA9ZQNevzaKhXVS5yKMF1ETLO/7cRHz45u1/dUKtOMU3BtHkYlMbw5l+wkN42XDNdqtz1+
+	Cv+Kw+Ba9owKWU7cqOJtmUwDEvAxbkm9+zxuB+ISZgxaWlTm6s22ciCwlg1MjqYZjayqbGnviVs
+	sjov/63YythR7
+X-Google-Smtp-Source: AGHT+IF3GBiUdQJFjmxWoTuhamYklhSdXGvt0tW7teW6tKJJZxC5A6YkkfccbHJfpRaUFu5HaXv6gtgU8tmQzpV+JKc=
+X-Received: by 2002:a05:690c:c83:b0:78f:a5c4:7923 with SMTP id
+ 00721157ae682-78fb4067f9amr167382187b3.56.1766607909704; Wed, 24 Dec 2025
+ 12:25:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20251223121737.619747-1-skandigraun@gmail.com>
- <CAMKF1sq3yq_akmeoUUQOTQuo63ipwhHQJ3WVW8-LJ1eeLaqpMw@mail.gmail.com> <f352b063-6e82-4896-b404-9400b3e48bdf@gmail.com>
-In-Reply-To: <f352b063-6e82-4896-b404-9400b3e48bdf@gmail.com>
+References: <20251224192519.2630037-1-skandigraun@gmail.com> <20251224192519.2630037-5-skandigraun@gmail.com>
+In-Reply-To: <20251224192519.2630037-5-skandigraun@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Dec 2025 12:12:26 -0800
-X-Gm-Features: AQt7F2paby2EHuDbz_IZILbk6JNOo-o_1sIha2YtejiJJwGHJ2Zx597MFDK9_AE
-Message-ID: <CAMKF1spLKt1UxZtDkddk-1TNzRfLbm1D6USg4c7yELEEbE860A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] freerdb3: add ptest support
-To: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Wed, 24 Dec 2025 12:24:43 -0800
+X-Gm-Features: AQt7F2q04kfVrcw5jEHdeyGCLVHGxf2jnHjw1L-HunkQzhGrzdzJTnGPC2P8CSY
+Message-ID: <CAMKF1soJ7Cgy1V4DbkiDSQ+ADEnzyfpcTxYUFGHp=iXT74pLgg@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 5/6] wireplumber: upgrade 0.5.11 -> 0.5.13
+To: skandigraun@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000005bf40646b84938"
+Content-Type: multipart/alternative; boundary="000000000000ea596e0646b874d6"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 20:12:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122899
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 20:25:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122900
 
---000000000000005bf40646b84938
+--000000000000ea596e0646b874d6
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 24, 2025 at 12:10=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.=
-com>
-wrote:
+On Wed, Dec 24, 2025 at 11:25=E2=80=AFAM Gyorgy Sarvari via lists.openembed=
+ded.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-> On 12/24/25 21:05, Khem Raj wrote:
-> >
-> >
-> > On Tue, Dec 23, 2025 at 4:17=E2=80=AFAM Gyorgy Sarvari via
-> > lists.openembedded.org <http://lists.openembedded.org>
-> > <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> >     The execution takes under 10s.
-> >
-> >     Sample output:
-> >
-> >     root@qemux86-64:~# ptest-runner
-> >     START: ptest-runner
-> >     2025-12-23T11:36
-> >     BEGIN: /usr/lib/freerdp3/ptest
-> >     PASS: TestSynchInit
-> >     PASS: TestSynchEvent
-> >     PASS: TestSynchMutex
-> >     [...many lines...]
-> >     PASS: TestClientRdpFile
-> >     PASS: TestClientChannels
-> >     PASS: TestClientCmdLine
-> >     DURATION: 7
-> >     END: /usr/lib/freerdp3/ptest
-> >     2025-12-23T11:37
-> >     STOP: ptest-runner
-> >     TOTAL: 1 FAIL: 0
-> >
-> >     Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> >     ---
-> >
-> >     v2: when I finished v1, I reordered the test data copying part, to
-> >     make it nice.
-> >         But this reordering made destination of testdata copying to be
-> >     non-existent.
-> >         v2 created the test folder explicitly in do_install_ptest
-> >
-> >      .../include/ptest-packagelists-meta-oe.inc    |  1 +
-> >      .../freerdp/freerdp3/run-ptest                |  2 +
-> >      .../freerdp/freerdp3_3.20.0.bb <http://freerdp3_3.20.0.bb>
-> >             | 53 ++++++++++++++++++-
-> >      3 files changed, 54 insertions(+), 2 deletions(-)
-> >      create mode 100644
-> meta-oe/recipes-support/freerdp/freerdp3/run-ptest
-> >
-> >     diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> >     b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> >     index 1f21db7ae1..556fa8a148 100644
-> >     --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> >     +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> >     @@ -16,6 +16,7 @@ PTESTS_FAST_META_OE =3D "\
-> >          ${@bb.utils.contains('DISTRO_FEATURES', 'systemd',
-> >     'dbus-broker', '', d)} \
-> >          duktape \
-> >          exiv2 \
-> >     +    freerdp3 \
-> >          fuse3 \
-> >          function2 \
-> >          fwupd \
-> >     diff --git a/meta-oe/recipes-support/freerdp/freerdp3/run-ptest
-> >     b/meta-oe/recipes-support/freerdp/freerdp3/run-ptest
-> >     new file mode 100644
-> >     index 0000000000..1a9b69c27e
-> >     --- /dev/null
-> >     +++ b/meta-oe/recipes-support/freerdp/freerdp3/run-ptest
-> >     @@ -0,0 +1,2 @@
-> >     +#!/bin/sh
-> >     +ctest | sed 's/\*\*\*/   /g' | awk '/Test
-> >     +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL");
-> >     gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
-> >     diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-> >     <http://freerdp3_3.20.0.bb>
-> >     b/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-> >     <http://freerdp3_3.20.0.bb>
-> >     index 07e6db69b7..08bea845f0 100644
-> >     --- a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-> >     <http://freerdp3_3.20.0.bb>
-> >     +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-> >     <http://freerdp3_3.20.0.bb>
-> >     @@ -4,11 +4,13 @@ LICENSE =3D "Apache-2.0"
-> >      LIC_FILES_CHKSUM =3D
-> >     "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57"
-> >
-> >      DEPENDS =3D "openssl libusb1 uriparser cairo icu pkcs11-helper zli=
+> Changelog:
+> 0.5.13:
+> Additions & Enhancements:
+> - Added internal filter graph support for audio nodes, allowing users to
+>   create audio preprocessing and postprocessing chains without exposing
+>   filters to applications, useful for software DSP
+> - Added new Lua Properties API that significantly improves performance by
+>   avoiding constant serialization between WpProperties and Lua tables,
+>   resulting in approximately 40% faster node linking
+> - Added WpIterator Lua API for more efficient parameter enumeration
+> - Added bash completions for wpctl command
+> - Added script to find suitable volume control when using role-based
+> policy,
+>   allowing volume sliders to automatically adjust the volume of the
+> currently
+>   active role (e.g., ringing, call, media)
+> - Added experimental HDMI channel detection setting to use HDMI ELD
+>   information for channel configuration
+> - Enhanced role-based policy to allow setting preferred target sinks for
+>   media role loopbacks via policy.role-based.preferred-target
+> - Enhanced Bluetooth profile autoswitch logic to be more robust and handl=
+e
+>   saved profiles correctly, including support for loopback sink nodes
+> - Enhanced ALSA monitor to include alsa.* device properties on nodes for
+>   rule matching
+> - Optimized stream node linking for common cases to reduce latency when n=
+ew
+>   audio/video streams are added
+> - Improved event dispatcher performance by using hash table registration
+> for
+>   event hooks, eliminating performance degradation as more hooks are
+>   registered
+> - Increased audio headroom for VMware and VirtualBox virtual machines
+> - Added setting to prevent restoring "Off" profiles via
+>   session.dont-restore-off-profile property
+> - Added support for 128 audio channels when compiled with a recent versio=
+n
+> of
+>   PipeWire
+>
+> Fixes:
+> - Fixed memory leaks and issues in the modem manager module
+> - Fixed MPRIS module incorrectly treating GHashTable as GObject
+> - Fixed warning messages when process files in /proc/<pid>/* don't exist,
+>   particularly when processes are removed quickly
+> - Fixed MONO audio configuration to only apply to device sink nodes,
+> allowing
+>   multi-channel mixing in the graph
+> - Fixed event dispatcher hook registration and removal to avoid spurious
+>   errors
+> - Improved logging for standard-link activation failures
+> - Simplified event-hook interest matching for better performance
+>
+> 0.5.12:
+> Additions & Enhancements:
+> - Added mono audio configuration support via node.features.audio.mono
+>   setting that can be changed at runtime with wpctl
+> - Added automatic muting of ALSA devices when a running node is removed,
+>   helping prevent loud audio on speakers when headsets are unplugged
+> - Added notifications API module for sending system notifications
+> - Added comprehensive wpctl man page and documentation
+> - Enhanced object interest handling for PipeWire properties on session
+> items
+>
+> Fixes:
+> - Fixed race condition during shutdown in the permissions portal module
+> that
+>   could cause crashes in GDBus signal handling
+> - Added device validity check in state-routes handling to prevent issues
+>   when devices are removed during async operations
+> - Fixed Log.critical undefined function error in device-info-cache
+> - Improved device hook documentation and configuration
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  .../{wireplumber_0.5.11.bb =3D> wireplumber_0.5.13.bb}       | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>  rename meta-multimedia/recipes-multimedia/wireplumber/{
+> wireplumber_0.5.11.bb =3D> wireplumber_0.5.13.bb} (95%)
+>
+> diff --git a/meta-multimedia/recipes-multimedia/wireplumber/
+> wireplumber_0.5.11.bb b/meta-multimedia/recipes-multimedia/wireplumber/
+> wireplumber_0.5.13.bb
+> similarity index 95%
+> rename from meta-multimedia/recipes-multimedia/wireplumber/
+> wireplumber_0.5.11.bb
+> rename to meta-multimedia/recipes-multimedia/wireplumber/
+> wireplumber_0.5.13.bb
+> index 665efd95af..334861b6db 100644
+> --- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.11.b=
 b
-> >     jpeg json-c"
-> >     +RDEPENDS:${PN}-ptest +=3D "cmake coreutils"
-> >
-> >     -inherit pkgconfig cmake
-> >     +inherit pkgconfig cmake ptest
-> >
-> >      SRCREV =3D "b8e790a02ede8dd64ff7177fb9027d1844e66bb6"
-> >     -SRC_URI =3D
-> >     "git://
-> github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;tag=3D${P=
-V}
-> <http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;t=
-ag=3D$%7BPV%7D>
-> >     <
-> http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;ta=
-g=3D$%7BPV%7D
-> >"
-> >     +SRC_URI =3D
-> >     "git://
-> github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;tag=3D${P=
-V}
-> <http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;t=
-ag=3D$%7BPV%7D>
-> >     <
-> http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;ta=
-g=3D$%7BPV%7D
-> >
-> >     \
-> >     +           file://run-ptest"
-> >
-> >
-> >      CVE_PRODUCT =3D "freerdp"
-> >     @@ -17,6 +19,7 @@ PACKAGECONFIG ??=3D " \
-> >          ${@bb.utils.filter('DISTRO_FEATURES', 'pam pulseaudio wayland
-> >     x11', d)} \
-> >          ${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial',
-> >     'ffmpeg', '', d)} \
-> >          gstreamer cups pcsc \
-> >     +    ${@bb.utils.contains('PTEST_ENABLED', '1', 'test openh264',
-> >     '', d)} \
-> >
-> >
-> > openh264 is neither in core nor in meta-oe, its in meta-multimedia and
-> > meta-oe does not depend upon it rather its other way around
-> > I think this needs to added via a dynamic-layer
+> +++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.b=
+b
+> @@ -10,9 +10,9 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
+>      ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
+,
+> "python3-native python3-lxml-native doxygen-native", "", d)} \
+>  "
 >
-> If I remember well, it's only one testcase that requires it. Maybe it
-> would be cleaner if I would just to bin that?
+> -SRCREV =3D "3a785e502642ddb1e91d953e587c7b06444e0b51"
+> +SRCREV =3D "84429b47943d789389fbde17c06b82efb197d04e"
+>  SRC_URI =3D " \
+> -    git://
+> gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaster;protocol=
+=3Dhttps
+> \
+> +    git://
+> gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaster;protocol=
+=3Dhttps;tag=3D${PV}
+> <http://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaster;p=
+rotocol=3Dhttps;tag=3D$%7BPV%7D>
+> \
+>      file://90-OE-disable-session-dbus-dependent-features.lua \
+>  "
+>
+> @@ -114,6 +114,7 @@ python set_dynamic_metapkg_rdepends () {
+>
+>  PACKAGES =3D+ "\
+>      libwireplumber \
+> +    ${PN}-bash-completion \
+>      ${PN}-default-config \
+>      ${PN}-scripts \
+>      ${PN}-modules \
+> @@ -132,6 +133,7 @@ CONFFILES:${PN} +=3D " \
+>  RRECOMMENDS:${PN} +=3D "pipewire ${PN}-scripts ${PN}-modules-meta"
+>
+>  FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir}
+> ${datadir}/zsh"
+> +FILES:${PN}-bash-completion +=3D
+> "${datadir}/bash-completion/completions/wpctl"
+>
+>  FILES:libwireplumber =3D " \
+>      ${libdir}/libwireplumber-*.so.* \
+> @@ -142,3 +144,4 @@ FILES:${PN}-scripts +=3D
+> "${datadir}/wireplumber/scripts/*"
+>  # Dynamic packages (see set_dynamic_metapkg_rdepends).
+>  FILES:${PN}-modules =3D ""
+>  RRECOMMENDS:${PN}-modules +=3D "${PN}-modules-meta"
+> +RDEPENDS:${PN}-bash-completion =3D "bash bash-completion"
 >
 
-That is a good compromise. Add a comment in the recipe so we remember the
-context in future.
+Perhaps it needs to inherit bash-completion class instead.
 
 
 >
->
-> >
-> >
-> >      "
-> >
-> >      EXTRA_OECMAKE =3D " \
-> >     @@ -54,12 +57,58 @@ PACKAGECONFIG[opencl] =3D
-> >     "-DWITH_OPENCL=3DON,-DWITH_OPENCL=3DOFF,virtual/libopencl1"
-> >      PACKAGECONFIG[lame] =3D "-DWITH_LAME=3DON,-DWITH_LAME=3DOFF,lame"
-> >      PACKAGECONFIG[faad] =3D "-DWITH_FAAD=3DON,-DWITH_FAAD=3DOFF,faad2"
-> >      PACKAGECONFIG[faac] =3D "-DWITH_FAAC=3DON,-DWITH_FAAC=3DOFF,faac"
-> >     +PACKAGECONFIG[test] =3D "-DBUILD_TESTING=3DON,-DBUILD_TESTING=3DOF=
-F"
-> >     +
-> >     +do_configure:prepend() {
-> >     +    sed -i
-> >
->  's|TEST_SOURCE_DIR=3D"\${CMAKE_CURRENT_SOURCE_DIR}"|TEST_SOURCE_DIR=3D"$=
-{PTEST_PATH}/test"|'
-> >     ${S}/client/common/test/CMakeLists.txt
-> >     +    sed -i 's|\${CMAKE_SOURCE_DIR}|${PTEST_PATH}|'
-> >     ${S}/winpr/libwinpr/clipboard/test/CMakeLists.txt
-> >     +    sed -i
-> >     's|=3D"\${CMAKE_CURRENT_SOURCE_DIR}|=3D"${PTEST_PATH}/test|'
-> >     ${S}/winpr/libwinpr/utils/test/CMakeLists.txt
-> >     +    sed -i
-> >     's|=3D"\${CMAKE_CURRENT_BINARY_DIR}|=3D"${PTEST_PATH}/test|'
-> >     ${S}/winpr/libwinpr/utils/test/CMakeLists.txt
-> >     +    sed -i
-> >     's|=3D"\${CMAKE_CURRENT_SOURCE_DIR}|=3D"${PTEST_PATH}/test|'
-> >     ${S}/libfreerdp/codec/test/CMakeLists.txt
-> >     +    sed -i
-> >     's|=3D"\${CMAKE_CURRENT_BINARY_DIR}|=3D"${PTEST_PATH}/test|'
-> >     ${S}/libfreerdp/codec/test/CMakeLists.txt
-> >     +
-> >     +}
-> >
-> >      do_configure:append() {
-> >          sed -i -e 's|${WORKDIR}||g' ${B}/include/freerdp/buildflags.h
-> >          sed -i -e 's|${WORKDIR}||g'
-> ${B}/winpr/include/winpr/buildflags.h
-> >      }
-> >
-> >     +do_install_ptest() {
-> >     +    install -d ${D}${PTEST_PATH}/test
-> >     +    # main CTestTestfile.cmake file
-> >     +    cp ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
-> >     +    # the actual test executables
-> >     +    cp -r ${B}/Testing ${D}${PTEST_PATH}
-> >     +    # test data
-> >     +    cp ${S}/winpr/libwinpr/utils/test/*bmp ${D}${PTEST_PATH}/test/
-> >     +    cp ${S}/libfreerdp/codec/test/*bmp ${D}${PTEST_PATH}/test/
-> >     +    cp -r ${S}/client/common/test/* ${D}${PTEST_PATH}/test/
-> >     +    cp -r ${S}/resources ${D}${PTEST_PATH}
-> >     +    cp -r ${S}/libfreerdp/codec/test/planar ${D}${PTEST_PATH}/test=
-/
-> >     +    cp -r ${S}/libfreerdp/codec/test/interleaved
-> >     ${D}${PTEST_PATH}/test/
-> >     +
-> >     +    cd ${B}
-> >     +    # the test definitions, how to execute the tests
-> >     +    find . -name CTestTestfile.cmake -exec install -Dm 0644 {}
-> >     ${D}${PTEST_PATH}/{} \;
-> >     +
-> >     +    for testfile in $(find ${D}${PTEST_PATH} -name
-> >     CTestTestfile.cmake); do
-> >     +        # these are comments only, containing ${S} and ${B}, at
-> >     the top of each file
-> >     +        sed -i "s,Source directory: ${S},<source_dir>," $testfile
-> >     +        sed -i "s,Build directory: ${B},<build_dir>," $testfile
-> >     +
-> >     +        # change the ${B} to ${PTEST_PATH}, so the files will be
-> >     searches at the correct place
-> >     +        sed -i "s,${B}/Testing,${PTEST_PATH}/Testing,g" $testfile
-> >     +
-> >     +        # These add some extra traceability info to the tests, to
-> >     pair them with CMakeLists.txt files,
-> >     +        # containing ${B}.
-> >     +        # They are not needed for test execution, just remove the
-> >     whole line.
-> >     +        sed -i "s,set_tests_properties.*_BACKTRACE_TRIPLES.*,,"
-> >     $testfile
-> >     +    done
-> >     +
-> >     +    rm ${D}${PTEST_PATH}/resources/conv_to_ewm_prop.py
-> >     +}
-> >     +
-> >      PACKAGES =3D+ "${PN}-proxy-plugins"
-> >
-> >      FILES:${PN}-proxy-plugins +=3D "${libdir}/${BPN}/proxy/*.so*"
-> >
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >     Links: You receive all messages sent to this group.
-> >     View/Reply Online (#122836):
-> >     https://lists.openembedded.org/g/openembedded-devel/message/122836
-> >     Mute This Topic: https://lists.openembedded.org/mt/116914811/199791=
-4
-> >     Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
-> >     Unsubscribe:
-> >     https://lists.openembedded.org/g/openembedded-devel/unsub
-> >     [raj.khem@gmail.com]
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#122890):
+> https://lists.openembedded.org/g/openembedded-devel/message/122890
+> Mute This Topic: https://lists.openembedded.org/mt/116933400/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---000000000000005bf40646b84938
+--000000000000ea596e0646b874d6
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
 mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Dec 24,=
- 2025 at 12:10=E2=80=AFPM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@=
-gmail.com">skandigraun@gmail.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">On 12/24/25 21:05, Khem Raj wrote:<br>
-&gt;<br>
-&gt;<br>
-&gt; On Tue, Dec 23, 2025 at 4:17=E2=80=AFAM Gyorgy Sarvari via<br>
-&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a> &lt;<a href=3D"http://lists.openembedde=
-d.org" rel=3D"noreferrer" target=3D"_blank">http://lists.openembedded.org</=
-a>&gt;<br>
-&gt; &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" =
-target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0The execution takes under 10s.<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Sample output:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0root@qemux86-64:~# ptest-runner<br>
-&gt;=C2=A0 =C2=A0 =C2=A0START: ptest-runner<br>
-&gt;=C2=A0 =C2=A0 =C2=A02025-12-23T11:36<br>
-&gt;=C2=A0 =C2=A0 =C2=A0BEGIN: /usr/lib/freerdp3/ptest<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestSynchInit<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestSynchEvent<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestSynchMutex<br>
-&gt;=C2=A0 =C2=A0 =C2=A0[...many lines...]<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestClientRdpFile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestClientChannels<br>
-&gt;=C2=A0 =C2=A0 =C2=A0PASS: TestClientCmdLine<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DURATION: 7<br>
-&gt;=C2=A0 =C2=A0 =C2=A0END: /usr/lib/freerdp3/ptest<br>
-&gt;=C2=A0 =C2=A0 =C2=A02025-12-23T11:37<br>
-&gt;=C2=A0 =C2=A0 =C2=A0STOP: ptest-runner<br>
-&gt;=C2=A0 =C2=A0 =C2=A0TOTAL: 1 FAIL: 0<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto=
-:skandigraun@gmail.com" target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0---<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0v2: when I finished v1, I reordered the test data c=
-opying part, to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0make it nice.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 But this reordering made destination =
-of testdata copying to be<br>
-&gt;=C2=A0 =C2=A0 =C2=A0non-existent.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 v2 created the test folder explicitly=
- in do_install_ptest<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0.../include/ptest-packagelists-meta-oe.inc=C2=
-=A0 =C2=A0 |=C2=A0 1 +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0.../freerdp/freerdp3/run-ptest=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0.../freerdp/<a href=3D"http://freerdp3_3.20.0=
-.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.0.bb</a> &lt;<a hre=
-f=3D"http://freerdp3_3.20.0.bb" rel=3D"noreferrer" target=3D"_blank">http:/=
-/freerdp3_3.20.0.bb</a>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 53 ++++++++++++++++++=
--<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A03 files changed, 54 insertions(+), 2 deletion=
-s(-)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0create mode 100644 meta-oe/recipes-support/fr=
-eerdp/freerdp3/run-ptest<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-oe/conf/include/ptest-packagelist=
-s-meta-oe.inc<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-oe/conf/include/ptest-packagelists-meta-oe.i=
-nc<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 1f21db7ae1..556fa8a148 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/meta-oe/conf/include/ptest-packagelists-meta-=
-oe.inc<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/meta-oe/conf/include/ptest-packagelists-meta-=
-oe.inc<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -16,6 +16,7 @@ PTESTS_FAST_META_OE =3D &quot;\<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&#39;DISTR=
-O_FEATURES&#39;, &#39;systemd&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;dbus-broker&#39;, &#39;&#39;, d)} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0duktape \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0exiv2 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 freerdp3 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0fuse3 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0function2 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0fwupd \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-oe/recipes-support/freerdp/freerd=
-p3/run-ptest<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-oe/recipes-support/freerdp/freerdp3/run-ptes=
-t<br>
-&gt;=C2=A0 =C2=A0 =C2=A0new file mode 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 0000000000..1a9b69c27e<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- /dev/null<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/meta-oe/recipes-support/freerdp/freerdp3/run-=
-ptest<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -0,0 +1,2 @@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#!/bin/sh<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+ctest | sed &#39;s/\*\*\*/=C2=A0 =C2=A0/g&#39; | a=
-wk &#39;/Test<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+#/{gsub(/Passed/,&quot;PASS&quot;); gsub(/Failed/,=
-&quot;FAIL&quot;);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0gsub(/Skipped/,&quot;SKIP&quot;); print $6&quot;: &=
-quot;$4; fflush();}&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-oe/recipes-support/freerdp/<a hre=
-f=3D"http://freerdp3_3.20.0.bb" rel=3D"noreferrer" target=3D"_blank">freerd=
-p3_3.20.0.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://freerdp3_3.20.0.bb" rel=3D"no=
-referrer" target=3D"_blank">http://freerdp3_3.20.0.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0b/meta-oe/recipes-support/freerdp/<a href=3D"http:/=
-/freerdp3_3.20.0.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.0.b=
-b</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://freerdp3_3.20.0.bb" rel=3D"no=
-referrer" target=3D"_blank">http://freerdp3_3.20.0.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 07e6db69b7..08bea845f0 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/meta-oe/recipes-support/freerdp/<a href=3D"ht=
-tp://freerdp3_3.20.0.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20=
-.0.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://freerdp3_3.20.0.bb" rel=3D"no=
-referrer" target=3D"_blank">http://freerdp3_3.20.0.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/meta-oe/recipes-support/freerdp/<a href=3D"ht=
-tp://freerdp3_3.20.0.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20=
-.0.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://freerdp3_3.20.0.bb" rel=3D"no=
-referrer" target=3D"_blank">http://freerdp3_3.20.0.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -4,11 +4,13 @@ LICENSE =3D &quot;Apache-2.0&quot=
-;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0LIC_FILES_CHKSUM =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;file://LICENSE;md5=3D3b83ef96387f14655fc854dd=
-c3c6bd57&quot;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0DEPENDS =3D &quot;openssl libusb1 uriparser c=
-airo icu pkcs11-helper zlib<br>
-&gt;=C2=A0 =C2=A0 =C2=A0jpeg json-c&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+RDEPENDS:${PN}-ptest +=3D &quot;cmake coreutils&qu=
-ot;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-inherit pkgconfig cmake<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+inherit pkgconfig cmake ptest<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0SRCREV =3D &quot;b8e790a02ede8dd64ff7177fb902=
-7d1844e66bb6&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SRC_URI =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;git://<a href=3D"http://github.com/FreeRDP/Fr=
-eeRDP.git;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferr=
-er" target=3D"_blank">github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoc=
-ol=3Dhttps;tag=3D${PV}</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://github.com/FreeRDP/FreeRDP.gi=
-t;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferrer" targ=
-et=3D"_blank">http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoco=
-l=3Dhttps;tag=3D$%7BPV%7D</a>&gt;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+SRC_URI =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;git://<a href=3D"http://github.com/FreeRDP/Fr=
-eeRDP.git;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferr=
-er" target=3D"_blank">github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoc=
-ol=3Dhttps;tag=3D${PV}</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://github.com/FreeRDP/FreeRDP.gi=
-t;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferrer" targ=
-et=3D"_blank">http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoco=
-l=3Dhttps;tag=3D$%7BPV%7D</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://ru=
-n-ptest&quot;<br>
-&gt;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0CVE_PRODUCT =3D &quot;freerdp&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -17,6 +19,7 @@ PACKAGECONFIG ??=3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0${@bb.utils.filter(&#39;DISTRO_=
-FEATURES&#39;, &#39;pam pulseaudio wayland<br>
-&gt;=C2=A0 =C2=A0 =C2=A0x11&#39;, d)} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&#39;LICEN=
-SE_FLAGS_ACCEPTED&#39;, &#39;commercial&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;ffmpeg&#39;, &#39;&#39;, d)} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0gstreamer cups pcsc \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 ${@bb.utils.contains(&#39;PTEST_ENAB=
-LED&#39;, &#39;1&#39;, &#39;test openh264&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;&#39;, d)} \<br>
-&gt;<br>
-&gt;<br>
-&gt; openh264 is neither in core nor in meta-oe, its in meta-multimedia and=
-<br>
-&gt; meta-oe does not depend upon it rather its other way around<br>
-&gt; I think this needs to added via a dynamic-layer=C2=A0<br>
-<br>
-If I remember well, it&#39;s only one testcase that requires it. Maybe it<b=
-r>
-would be cleaner if I would just to bin that?<br></blockquote><div><br></di=
-v><div>That is a good compromise. Add a comment in the recipe so we remembe=
-r the</div><div>context in future.</div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">
-<br>
-<br>
-&gt; =C2=A0<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0&quot;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0EXTRA_OECMAKE =3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -54,12 +57,58 @@ PACKAGECONFIG[opencl] =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;-DWITH_OPENCL=3DON,-DWITH_OPENCL=3DOFF,virtua=
-l/libopencl1&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGECONFIG[lame] =3D &quot;-DWITH_LAME=3DO=
-N,-DWITH_LAME=3DOFF,lame&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGECONFIG[faad] =3D &quot;-DWITH_FAAD=3DO=
-N,-DWITH_FAAD=3DOFF,faad2&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGECONFIG[faac] =3D &quot;-DWITH_FAAC=3DO=
-N,-DWITH_FAAC=3DOFF,faac&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+PACKAGECONFIG[test] =3D &quot;-DBUILD_TESTING=3DON=
-,-DBUILD_TESTING=3DOFF&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+do_configure:prepend() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s|TEST_SOURCE_DIR=3D&quot;\${CMAKE_CURRENT_SOU=
-RCE_DIR}&quot;|TEST_SOURCE_DIR=3D&quot;${PTEST_PATH}/test&quot;|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/client/common/test/CMakeLists.txt<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i &#39;s|\${CMAKE_SOURCE_DIR}|$=
-{PTEST_PATH}|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/winpr/libwinpr/clipboard/test/CMakeLists.txt<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s|=3D&quot;\${CMAKE_CURRENT_SOURCE_DIR}|=3D&qu=
-ot;${PTEST_PATH}/test|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/winpr/libwinpr/utils/test/CMakeLists.txt<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s|=3D&quot;\${CMAKE_CURRENT_BINARY_DIR}|=3D&qu=
-ot;${PTEST_PATH}/test|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/winpr/libwinpr/utils/test/CMakeLists.txt<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s|=3D&quot;\${CMAKE_CURRENT_SOURCE_DIR}|=3D&qu=
-ot;${PTEST_PATH}/test|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/libfreerdp/codec/test/CMakeLists.txt<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 sed -i<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;s|=3D&quot;\${CMAKE_CURRENT_BINARY_DIR}|=3D&qu=
-ot;${PTEST_PATH}/test|&#39;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${S}/libfreerdp/codec/test/CMakeLists.txt<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0do_configure:append() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0sed -i -e &#39;s|${WORKDIR}||g&=
-#39; ${B}/include/freerdp/buildflags.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0sed -i -e &#39;s|${WORKDIR}||g&=
-#39; ${B}/winpr/include/winpr/buildflags.h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0}<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+do_install_ptest() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}/test<br=
+ 2025 at 11:25=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://lists.openem=
+bedded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:=
+gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; =
+wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Changelog=
+:<br>
+0.5.13:<br>
+Additions &amp; Enhancements:<br>
+- Added internal filter graph support for audio nodes, allowing users to<br=
 >
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 # main CTestTestfile.cmake file<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp ${B}/CTestTestfile.cmake ${D}${PT=
-EST_PATH}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 # the actual test executables<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp -r ${B}/Testing ${D}${PTEST_PATH}=
+=C2=A0 create audio preprocessing and postprocessing chains without exposin=
+g<br>
+=C2=A0 filters to applications, useful for software DSP<br>
+- Added new Lua Properties API that significantly improves performance by<b=
+r>
+=C2=A0 avoiding constant serialization between WpProperties and Lua tables,=
 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 # test data<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp ${S}/winpr/libwinpr/utils/test/*b=
-mp ${D}${PTEST_PATH}/test/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp ${S}/libfreerdp/codec/test/*bmp $=
-{D}${PTEST_PATH}/test/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp -r ${S}/client/common/test/* ${D}=
-${PTEST_PATH}/test/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp -r ${S}/resources ${D}${PTEST_PAT=
-H}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp -r ${S}/libfreerdp/codec/test/pla=
-nar ${D}${PTEST_PATH}/test/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cp -r ${S}/libfreerdp/codec/test/int=
-erleaved<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${D}${PTEST_PATH}/test/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 cd ${B}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 # the test definitions, how to execu=
-te the tests<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 find . -name CTestTestfile.cmake -ex=
-ec install -Dm 0644 {}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${D}${PTEST_PATH}/{} \;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 for testfile in $(find ${D}${PTEST_P=
-ATH} -name<br>
-&gt;=C2=A0 =C2=A0 =C2=A0CTestTestfile.cmake); do<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # these are comments o=
-nly, containing ${S} and ${B}, at<br>
-&gt;=C2=A0 =C2=A0 =C2=A0the top of each file<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &quot;s,Source =
-directory: ${S},&lt;source_dir&gt;,&quot; $testfile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &quot;s,Build d=
-irectory: ${B},&lt;build_dir&gt;,&quot; $testfile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # change the ${B} to $=
-{PTEST_PATH}, so the files will be<br>
-&gt;=C2=A0 =C2=A0 =C2=A0searches at the correct place<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &quot;s,${B}/Te=
-sting,${PTEST_PATH}/Testing,g&quot; $testfile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # These add some extra=
- traceability info to the tests, to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0pair them with CMakeLists.txt files,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # containing ${B}.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # They are not needed =
-for test execution, just remove the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0whole line.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -i &quot;s,set_tes=
-ts_properties.*_BACKTRACE_TRIPLES.*,,&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0$testfile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 done<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 rm ${D}${PTEST_PATH}/resources/conv_=
-to_ewm_prop.py<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGES =3D+ &quot;${PN}-proxy-plugins&quot;=
+=C2=A0 resulting in approximately 40% faster node linking<br>
+- Added WpIterator Lua API for more efficient parameter enumeration<br>
+- Added bash completions for wpctl command<br>
+- Added script to find suitable volume control when using role-based policy=
+,<br>
+=C2=A0 allowing volume sliders to automatically adjust the volume of the cu=
+rrently<br>
+=C2=A0 active role (e.g., ringing, call, media)<br>
+- Added experimental HDMI channel detection setting to use HDMI ELD<br>
+=C2=A0 information for channel configuration<br>
+- Enhanced role-based policy to allow setting preferred target sinks for<br=
+>
+=C2=A0 media role loopbacks via policy.role-based.preferred-target<br>
+- Enhanced Bluetooth profile autoswitch logic to be more robust and handle<=
+br>
+=C2=A0 saved profiles correctly, including support for loopback sink nodes<=
+br>
+- Enhanced ALSA monitor to include alsa.* device properties on nodes for<br=
+>
+=C2=A0 rule matching<br>
+- Optimized stream node linking for common cases to reduce latency when new=
 <br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0FILES:${PN}-proxy-plugins +=3D &quot;${libdir=
-}/${BPN}/proxy/*.so*&quot;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Links: You receive all messages sent to this group.=
+=C2=A0 audio/video streams are added<br>
+- Improved event dispatcher performance by using hash table registration fo=
+r<br>
+=C2=A0 event hooks, eliminating performance degradation as more hooks are<b=
+r>
+=C2=A0 registered<br>
+- Increased audio headroom for VMware and VirtualBox virtual machines<br>
+- Added setting to prevent restoring &quot;Off&quot; profiles via<br>
+=C2=A0 session.dont-restore-off-profile property<br>
+- Added support for 128 audio channels when compiled with a recent version =
+of<br>
+=C2=A0 PipeWire<br>
 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0View/Reply Online (#122836):<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://lists.openembedded.org/g/openemb=
-edded-devel/message/122836" rel=3D"noreferrer" target=3D"_blank">https://li=
-sts.openembedded.org/g/openembedded-devel/message/122836</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Mute This Topic: <a href=3D"https://lists.openembed=
-ded.org/mt/116914811/1997914" rel=3D"noreferrer" target=3D"_blank">https://=
-lists.openembedded.org/mt/116914811/1997914</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Group Owner: <a href=3D"mailto:openembedded-devel%2=
-Bowner@lists.openembedded.org" target=3D"_blank">openembedded-devel+owner@l=
-ists.openembedded.org</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:openembedded-devel%252=
-Bowner@lists.openembedded.org" target=3D"_blank">openembedded-devel%2Bowner=
-@lists.openembedded.org</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Unsubscribe:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://lists.openembedded.org/g/openemb=
-edded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.opene=
-mbedded.org/g/openembedded-devel/unsub</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0[<a href=3D"mailto:raj.khem@gmail.com" target=3D"_b=
-lank">raj.khem@gmail.com</a>]<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
+Fixes:<br>
+- Fixed memory leaks and issues in the modem manager module<br>
+- Fixed MPRIS module incorrectly treating GHashTable as GObject<br>
+- Fixed warning messages when process files in /proc/&lt;pid&gt;/* don&#39;=
+t exist,<br>
+=C2=A0 particularly when processes are removed quickly<br>
+- Fixed MONO audio configuration to only apply to device sink nodes, allowi=
+ng<br>
+=C2=A0 multi-channel mixing in the graph<br>
+- Fixed event dispatcher hook registration and removal to avoid spurious<br=
+>
+=C2=A0 errors<br>
+- Improved logging for standard-link activation failures<br>
+- Simplified event-hook interest matching for better performance<br>
+<br>
+0.5.12:<br>
+Additions &amp; Enhancements:<br>
+- Added mono audio configuration support via node.features.audio.mono<br>
+=C2=A0 setting that can be changed at runtime with wpctl<br>
+- Added automatic muting of ALSA devices when a running node is removed,<br=
+>
+=C2=A0 helping prevent loud audio on speakers when headsets are unplugged<b=
+r>
+- Added notifications API module for sending system notifications<br>
+- Added comprehensive wpctl man page and documentation<br>
+- Enhanced object interest handling for PipeWire properties on session item=
+s<br>
+<br>
+Fixes:<br>
+- Fixed race condition during shutdown in the permissions portal module tha=
+t<br>
+=C2=A0 could cause crashes in GDBus signal handling<br>
+- Added device validity check in state-routes handling to prevent issues<br=
+>
+=C2=A0 when devices are removed during async operations<br>
+- Fixed Log.critical undefined function error in device-info-cache<br>
+- Improved device hook documentation and configuration<br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://wireplumber_0.5.11.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">wireplumber_0.5.11.bb</a> =3D&gt; <a href=3D"http://wireplumb=
+er_0.5.13.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_0.5.13.bb</a=
+>}=C2=A0 =C2=A0 =C2=A0 =C2=A0| 7 +++++--<br>
+=C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-multimedia/recipes-multimedia/wireplumber/{<a href=3D"htt=
+p://wireplumber_0.5.11.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber=
+_0.5.11.bb</a> =3D&gt; <a href=3D"http://wireplumber_0.5.13.bb" rel=3D"nore=
+ferrer" target=3D"_blank">wireplumber_0.5.13.bb</a>} (95%)<br>
+<br>
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"http=
+://wireplumber_0.5.11.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_=
+0.5.11.bb</a> b/meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"h=
+ttp://wireplumber_0.5.13.bb" rel=3D"noreferrer" target=3D"_blank">wireplumb=
+er_0.5.13.bb</a><br>
+similarity index 95%<br>
+rename from meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"http:=
+//wireplumber_0.5.11.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_0=
+.5.11.bb</a><br>
+rename to meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"http://=
+wireplumber_0.5.13.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_0.5=
+.13.bb</a><br>
+index 665efd95af..334861b6db 100644<br>
+--- a/meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"http://wire=
+plumber_0.5.11.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_0.5.11.=
+bb</a><br>
++++ b/meta-multimedia/recipes-multimedia/wireplumber/<a href=3D"http://wire=
+plumber_0.5.13.bb" rel=3D"noreferrer" target=3D"_blank">wireplumber_0.5.13.=
+bb</a><br>
+@@ -10,9 +10,9 @@ DEPENDS =3D &quot;glib-2.0 glib-2.0-native lua pipewire \=
+<br>
+=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&quot;DISTRO_FEATURES&quot;, &quot=
+;gobject-introspection-data&quot;, &quot;python3-native python3-lxml-native=
+ doxygen-native&quot;, &quot;&quot;, d)} \<br>
+=C2=A0&quot;<br>
+<br>
+-SRCREV =3D &quot;3a785e502642ddb1e91d953e587c7b06444e0b51&quot;<br>
++SRCREV =3D &quot;84429b47943d789389fbde17c06b82efb197d04e&quot;<br>
+=C2=A0SRC_URI =3D &quot; \<br>
+-=C2=A0 =C2=A0 git://<a href=3D"http://gitlab.freedesktop.org/pipewire/wire=
+plumber.git;branch=3Dmaster;protocol=3Dhttps" rel=3D"noreferrer" target=3D"=
+_blank">gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaster;pro=
+tocol=3Dhttps</a> \<br>
++=C2=A0 =C2=A0 git://<a href=3D"http://gitlab.freedesktop.org/pipewire/wire=
+plumber.git;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"norefe=
+rrer" target=3D"_blank">gitlab.freedesktop.org/pipewire/wireplumber.git;bra=
+nch=3Dmaster;protocol=3Dhttps;tag=3D${PV}</a> \<br>
+=C2=A0 =C2=A0 =C2=A0file://90-OE-disable-session-dbus-dependent-features.lu=
+a \<br>
+=C2=A0&quot;<br>
+<br>
+@@ -114,6 +114,7 @@ python set_dynamic_metapkg_rdepends () {<br>
+<br>
+=C2=A0PACKAGES =3D+ &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0libwireplumber \<br>
++=C2=A0 =C2=A0 ${PN}-bash-completion \<br>
+=C2=A0 =C2=A0 =C2=A0${PN}-default-config \<br>
+=C2=A0 =C2=A0 =C2=A0${PN}-scripts \<br>
+=C2=A0 =C2=A0 =C2=A0${PN}-modules \<br>
+@@ -132,6 +133,7 @@ CONFFILES:${PN} +=3D &quot; \<br>
+=C2=A0RRECOMMENDS:${PN} +=3D &quot;pipewire ${PN}-scripts ${PN}-modules-met=
+a&quot;<br>
+<br>
+=C2=A0FILES:${PN} +=3D &quot;${systemd_user_unitdir} ${systemd_system_unitd=
+ir} ${datadir}/zsh&quot;<br>
++FILES:${PN}-bash-completion +=3D &quot;${datadir}/bash-completion/completi=
+ons/wpctl&quot;<br>
+<br>
+=C2=A0FILES:libwireplumber =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0${libdir}/libwireplumber-*.so.* \<br>
+@@ -142,3 +144,4 @@ FILES:${PN}-scripts +=3D &quot;${datadir}/wireplumber/s=
+cripts/*&quot;<br>
+=C2=A0# Dynamic packages (see set_dynamic_metapkg_rdepends).<br>
+=C2=A0FILES:${PN}-modules =3D &quot;&quot;<br>
+=C2=A0RRECOMMENDS:${PN}-modules +=3D &quot;${PN}-modules-meta&quot;<br>
++RDEPENDS:${PN}-bash-completion =3D &quot;bash bash-completion&quot;<br></b=
+lockquote><div><br></div><div>Perhaps it needs to inherit bash-completion c=
+lass instead.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#122890): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/122890" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/122890</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/116933400/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/116933400/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div></div>
 
---000000000000005bf40646b84938--
+--000000000000ea596e0646b874d6--
 
