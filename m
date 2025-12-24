@@ -2,111 +2,173 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B1B3E78486
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E7EFE776F8
 	for <webhook@archiver.kernel.org>; Wed, 24 Dec 2025 19:25:25 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.126343.1766604322557712473
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.126878.1766604324655326103
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Dec 2025 11:25:22 -0800
+ Wed, 24 Dec 2025 11:25:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kROO5IYS;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4775e891b5eso25576185e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 11:25:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GueFn2Uv;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4327778df7fso183985f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 11:25:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766604321; x=1767209121; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oI4fUnLmH3SN+RpGMxXJZbYp17MX9wePWDAt9+TpLGs=;
-        b=kROO5IYS0Y62Xy/6tSd2DWvb4UGwvlFh0rEkkniQHzotj6bT4VjfP7k/FAlfAnlKHt
-         JxVa3+a+UZqmq5WTL9D82oejryNf4VBMQSjG5e2HFnYAQLr9QiEDWdnkvbnSjBkM8/5m
-         djQ/u10lLT+uKL4pPmOeKF2oVkR8w6/aMfd3wIwt7ZbxLJHsPWkRLvybZMrm+PYZwKky
-         36MlJ6kCvAOQewz8t1y22xXNhzpspCrfVHaNBG5LcXPlxawsH9NNb+Ymd9ckMU9zkMR/
-         Y6ou6EMAnvF/B1dAuQ75SibzO1TcO0rBtoeZestfL+3CcQy/OPV24Kh9jfC+EFruDLW+
-         8hVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766604321; x=1767209121;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1766604323; x=1767209123; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oI4fUnLmH3SN+RpGMxXJZbYp17MX9wePWDAt9+TpLGs=;
-        b=nKyizMN9WmSVi5JZVkhDYp2Wy9FIhwJk/wEluqaC0QUsjWyOx++Yx0fEkj+iEnE7xF
-         e9ma+6OCma4LPLbpx64UvEFOcIU1lLHQqaf6f0hEEz47V4yRHkc1unOpmzHzU7ymF3Wh
-         DmwrgbfUhwmzXB93ZDzSmy5nGnGLYayysroiKiYgvepqONS4B91t10XOssnSZurLCaON
-         P4hvs/XhnC8cLOApmAhO0DXfPIYMeWQ3RQQ/HmQGSdAdQyd4StwtxIG82QrBx7x7FUO3
-         M66yrs4ZNC/j31wm+qiaxIsSrIud5P/hzq8Z3NES7XB96c1nJmwVJO4M9K2eCkb4PFXy
-         GfTg==
-X-Gm-Message-State: AOJu0YyjQwyVDP1Iwt36UfEXhM8/n5XEYDbg88hBWGUamQAVIMZqnfux
-	taVzUS5VzvCoIWsvxDyiOBU3XgnW9Dc30nOLMmwXEwZSCpF1jy2Hvn9MZ1VOWQ==
-X-Gm-Gg: AY/fxX5IAFYVXpCgTUfaItzI1nKXoXJq2fzqc23nSwrYXbR5xE6VnT511olB193XILx
-	OeKHcaKwwxVs8Z3xyVmTD0fmo6fkFk7/6+zSiV7UJGt44LlqZXFLHxK1CV38rDkYINeGEWydhjk
-	D+f48cx2ODMaR+bJdsrH6HwuABA5XErPjDpAKCt63jHiWxZgZEWge+gemWYrp78+Sx6WKUjLIyl
-	CBoP6F2EtMkbMnybIImvO58cfQV8foyFa+bzf/PtIJX6EgZPucP0eZ6eUep5E21VQn0ChoYVRmI
-	NdYFqZKaA8fPk2eyBe0fCeRjDWngwYAmMxswch5nIwD1F3kzYLU2ABFHUcfz72QjgsuAAuJNP/m
-	V6OEx/owplyVdD02e055ptPExqcen7cRaGcrYMOYooNYncAoDTwxsru3bf3n5SPRy/kpS2yPC/X
-	a5gdn/BFHv
-X-Google-Smtp-Source: AGHT+IEwzyNLzBIg1oUSfkm5sDcUdEJZpv+n0je9YU+5dA5ocRyDik9CcIkrUa1OG/+16eEMcI6zrQ==
-X-Received: by 2002:a05:600c:4e8e:b0:477:9f34:17b8 with SMTP id 5b1f17b1804b1-47d195330dcmr184715345e9.1.1766604320712;
-        Wed, 24 Dec 2025 11:25:20 -0800 (PST)
+        bh=2c4g9Whv35WtYY0XC3x60od3hdr7yyoohrOSy6qjch4=;
+        b=GueFn2UvbNq7J9eOVWZgZTHD3exSAot6H7GtEc3fxAN3OYSnAFn+enRq4LNncC3vGx
+         sToWH/EPD61w5wIbHHxmbDuuPnIMDdUqiWC6KvioTxr/K86gFB4eCSmTMf9iyKsCj4M/
+         zpFnCLLBffLSJGvt4gOJ/yyvoOwFA9eCegk65qyRrm+H6e7xv9XV5vGFmDjDbiQU6rvd
+         mDLhVpbopXdGNKTiXzB4sDYWNd7bh7JFiwaYXnCvMgdYN1084zQxbuwZ2QU8GSuqC5kz
+         BwzB7Xiitz7a//f5Quhj/1lHO7HmzFUB6JmBrwuhDaGUr3wjDCsHQIMP29yxMhVSY4Fn
+         HP5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766604323; x=1767209123;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=2c4g9Whv35WtYY0XC3x60od3hdr7yyoohrOSy6qjch4=;
+        b=G7BGVfySd/XBHmDvMBE8Noly6voRIXJsZ2K+QKi9l+Wgb/kZP6iLvqmPJTOOTBrmvU
+         MxYFs1y6Ewr+b4ApfzxRws3afmWQFhzlpeU1Jr7eBtKSEH9fo9BV6Rq93udRR3Rr9TLt
+         u+VMQwMH9XiT+EQiSOkeuRHafAXBtMQaxfZhNxubOhy2b+ZLkoGFtYFw2rxFzFjt3d02
+         gAeTUfMbHtA6iclQ4FfVCC3rqMHRaYlZw/zfAU8lEfVtGChGgE6UUUHcfj3P31Q6wWNm
+         F/MosywtbSeNJxT7XkiNNWEN6jhh6hwxtkX8M//28Kby3qHuDpLnxXCV2ztIqVWJc5Jh
+         d8jg==
+X-Gm-Message-State: AOJu0Yw6u+8zscJsO+QL+qDXFddeNvUFuJSg5cC+k0/FLAnfFjKlTDL0
+	MTn462Jxksv+K1dm61q9iDTa2lv4dc4AqLbd//JpyG8/ejaLAYy9I0fy1w4Prw==
+X-Gm-Gg: AY/fxX6pIuvVM3FlQC++r4jK+s37PJ8nqU9oD21wdqY33L7bRUqKp3pDknR4/JenDmM
+	EmVYyA7setG+u+s01CLcFNFHLp9Fz0pz+8b4QRMpt06qKmkfp3CxDa2S1JFGp5d1Y4Eitx73F1L
+	0w1oSCtgnkaW6fsS5OWzfSNlLaLje0B1heYxtCLmQaP9Cq56qGeLMY6GlPJPawzzn1xlk6J5kbj
+	SD5KU7m8V0JB8PwugdLbweeofUsKd61jcolqKb12r+EK0ip1SurCoMD5aQO/syllH5VH1JNkUCT
+	IIAH7SSdvgeMEPEXVr74RirI4NsMHUKnpIcCrhZC5PNxZzPpEIhnqNPMz+o1dNahFgdcfoA9lxP
+	LbFX82K+NkKfscrqp7xHMG7w/bH7Jb+PGkRU8lAs1xq0vcqxcScy3+rqgz1m9yH54XraJsNJcpZ
+	roldncxy0g
+X-Google-Smtp-Source: AGHT+IGO9SDsBDuhliHfKZs6QRytojIPwvhNb3E5evrWIZf81IoBR5KCQMQZ2ffVzGCJghauexlY1Q==
+X-Received: by 2002:a05:6000:200f:b0:42b:3ee9:4776 with SMTP id ffacd0b85a97d-4324e4c180fmr22447919f8f.5.1766604322899;
+        Wed, 24 Dec 2025 11:25:22 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea227e0sm36782038f8f.17.2025.12.24.11.25.20
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea227e0sm36782038f8f.17.2025.12.24.11.25.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Dec 2025 11:25:20 -0800 (PST)
+        Wed, 24 Dec 2025 11:25:22 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 1/6] libsrtp: upgrade 2.5.0 -> 2.7.0
-Date: Wed, 24 Dec 2025 20:25:14 +0100
-Message-ID: <20251224192519.2630037-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][PATCH 3/6] libmediaart-2.0: add ptest support
+Date: Wed, 24 Dec 2025 20:25:16 +0100
+Message-ID: <20251224192519.2630037-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251224192519.2630037-1-skandigraun@gmail.com>
+References: <20251224192519.2630037-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 24 Dec 2025 19:25:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122886
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122888
 
-Changelog:
-2.7.0:
-- Fix function signature mismatch for srtp_remove_stream
-- Fix srtp_unprotect_rtcp_mki when RTP auth != RTCP
+Test execution takes about a second.
 
-2.6.0:
-- remove use of pointers to 32bit values
-- Cleaning up cmake and enabled more warnings.
-- start using const on internal arguments
-- Some srtp_driver fixes
-- remove travis reference from README.md
-- meson.build: implement mbedtls support
-- iv length is constant so set only once
-- Add x86 SIMD optimizations to crypto datatypes
-- Add a missing typedef for stream list ctx
-- cmake: Rename TEST_APPS as LIBSRTP_TEST_APPS option
-- cmake: Support configuring as subproject
+Sample output:
+
+root@qemux86-64:~# ptest-runner
+START: ptest-runner
+2025-12-24T15:50
+BEGIN: /usr/lib/libmediaart-2.0/ptest
+TAP version 14
+1..31
+ok 1 /mediaart/stripping_failures
+ok 2 /mediaart/location_null
+ok 3 /mediaart/location_path
+ok 4 /mediaart/stripping/nothing-to-strip
+ok 5 /mediaart/stripping/case-strip
+ok 6 /mediaart/stripping/single-char
+ok 7 /mediaart/stripping/single-char-case
+ok 8 /mediaart/stripping/remove-parenthesis-round
+ok 9 /mediaart/stripping/remove-parenthesis-square
+ok 10 /mediaart/stripping/remove-parenthesis-squirly
+ok 11 /mediaart/stripping/remove-parenthesis-gt-lt
+ok 12 /mediaart/stripping/whitespace
+ok 13 /mediaart/stripping/whitespace-with-content
+ok 14 /mediaart/stripping/messy-title
+ok 15 /mediaart/stripping/unbalanced-brackets-square-start
+ok 16 /mediaart/stripping/unbalanced-brackets-round-start
+ok 17 /mediaart/stripping/unbalanced-brackets-gt-lt-start
+ok 18 /mediaart/stripping/unbalanced-brackets-round-end
+[...many lines...]
+ok 31 /mediaart/process/failures
+PASS: mediaart-test
+DURATION: 0
+END: /usr/lib/libmediaart-2.0/ptest
+2025-12-24T15:50
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libsrtp/{libsrtp_2.5.0.bb => libsrtp_2.7.0.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-support/libsrtp/{libsrtp_2.5.0.bb => libsrtp_2.7.0.bb} (84%)
+ .../include/ptest-packagelists-meta-multimedia.inc   |  1 +
+ .../libmediaart/libmediaart-2.0/run-ptest            | 10 ++++++++++
+ .../libmediaart/libmediaart-2.0_1.9.7.bb             | 12 +++++++++---
+ 3 files changed, 20 insertions(+), 3 deletions(-)
+ create mode 100644 meta-multimedia/recipes-support/libmediaart/libmediaart-2.0/run-ptest
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.7.0.bb
-similarity index 84%
-rename from meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb
-rename to meta-multimedia/recipes-support/libsrtp/libsrtp_2.7.0.bb
-index 9130b290b9..3e992c403b 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_2.5.0.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_2.7.0.bb
-@@ -8,8 +8,8 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2909fcf6f09ffff8430463d91c08c4e1"
+diff --git a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
+index eb8d4ffe89..0c40d967d9 100644
+--- a/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
++++ b/meta-multimedia/conf/include/ptest-packagelists-meta-multimedia.inc
+@@ -10,6 +10,7 @@ PTESTS_FAST_META_MULTIMEDIA = "\
+     gssdp \
+     gupnp-av \
+     gupnp-igd \
++    libmediaart-2.0 \
+     libopenmpt\
+ "
  
--SRC_URI = "git://github.com/cisco/libsrtp.git;branch=main;protocol=https"
--SRCREV = "a566a9cfcd619e8327784aa7cff4a1276dc1e895"
-+SRC_URI = "git://github.com/cisco/libsrtp.git;branch=2_x_dev;protocol=https;tag=v${PV}"
-+SRCREV = "ee1a77c9f9dc02c42bda9901038c500c5efe4cfa"
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0/run-ptest b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0/run-ptest
+new file mode 100644
+index 0000000000..9a3780da65
+--- /dev/null
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0/run-ptest
+@@ -0,0 +1,10 @@
++#!/bin/sh
++RET=0
++cd tests
++if ./mediaart-test; then
++  echo PASS: mediaart-test
++else
++  echo FAIL: mediaart-test
++  RET=1
++fi
++exit $RET
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
+index e52ee61b74..4b588292f4 100644
+--- a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
+@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c \
  
+ DEPENDS = "glib-2.0 gdk-pixbuf"
  
- PACKAGECONFIG ?= ""
++inherit gnomebase gobject-introspection vala features_check ptest
+ 
+-inherit gnomebase gobject-introspection vala features_check
+-
+-SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
++SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz \
++           file://run-ptest"
+ SRC_URI[sha256sum] = "2b43dd9f54f0d8d0b89e2addb83341ab06d7b98cb1b2e704383584af9c560f6b"
+ 
+ S = "${UNPACKDIR}/libmediaart-${PV}"
+@@ -20,3 +20,9 @@ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ GIR_MESON_OPTION = ""
+ 
+ EXTRA_OEMESON = "-Dimage_library=gdk-pixbuf"
++
++do_install_ptest(){
++    install -D ${B}/tests/mediaart-test ${D}${PTEST_PATH}/tests/mediaart-test
++    install -m 644 ${S}/tests/*.mp3 ${D}${PTEST_PATH}/tests
++    install -m 644 ${S}/tests/*.png ${D}${PTEST_PATH}/tests
++}
 
