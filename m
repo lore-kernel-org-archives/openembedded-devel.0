@@ -2,129 +2,94 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF815E7AD62
-	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 15:57:11 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.139902.1766678230747200822
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EAD7E7AD44
+	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 16:35:22 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.140417.1766680515957521614
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Dec 2025 07:57:11 -0800
+ Thu, 25 Dec 2025 08:35:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KuEHorXF;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47d493a9b96so176425e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 07:57:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VtpCEmTZ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so68456875e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 08:35:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766678229; x=1767283029; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766680514; x=1767285314; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jgLYwjC1+lk25iGbkH+qSFmhn2qZF1KgEBXBPPLdwEE=;
-        b=KuEHorXFBYH1jsPAYv58Kw7GBWf7THebP15BCWMrvLQDZjHfhT5htPbMThvOKmGxRV
-         ez0mHn3PF7nmbc9QGlBCvPFxuzETNyfqAJ2CAnbucOJmZgIbgtHCu1608G17344t7dra
-         r3Wvx31CJ7HIMIDRgXgcNxy5glVqkdoBCVAItOnAPQj/lp+5KJ3x2Pz5gEh2Ef7vUZZ2
-         BVxm2JpwtHIfqvkkLSsbtdvsHDrBEK9V4pL3xvm/wz/UsBXY4M1hmCV9pOjS2P3WQ9Cx
-         avpcBExBxywYUtVAqqbJbLh3VScAAGebuRsVy6sTLPHOhG8MLFe+Zz1wCOkNfSV4KkZr
-         ARrw==
+        bh=s7eKHwBqEMyMrJBj55k2KA4EnqIS5CRxmqKosV1CBt0=;
+        b=VtpCEmTZ68sOQfIcSZwqi/17PA8UUq0Iq98sVMNeJnFcNzvZxna+e1dwhYaUH/OCup
+         5RNmWu5JsrdACFtIV7WBilIP3XSDlVoYug62mb86/ZDej/g9fxreb1FNPnpLg2MVq5vq
+         N8T7+ZVv6olOE4yVMp3oSCJo9+Xo97rilRtiNtPMnRsGEQmwXpvqgqzbTlb8PL41fvdE
+         2EtTjb6Wy941QeAz6mxrFtUn1MsJKTUGVvyqqaS7YiMjJXlsqBiIlCpxKyzYbhAUqZZd
+         KIki24iQUJH1g2fdq7wJz2ruuVqmhpZOc6pcMnNyVY2HJVbVsEZlYOCuYd/u7Lnmv6rL
+         ujFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766678229; x=1767283029;
+        d=1e100.net; s=20230601; t=1766680514; x=1767285314;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jgLYwjC1+lk25iGbkH+qSFmhn2qZF1KgEBXBPPLdwEE=;
-        b=AuO/weZHOl5a9/VSpqJH9X+RjSR4yxA7njBwgUIlG0ajdF11Jdo4hrjgr2nSxtztMI
-         CH2K77mOilzZp9lT8Tr0NLn07eIa/hmxr0Fu/PXtZvRqWzz4ctk6Rya0fdqhloE31Oi7
-         szEnAfn6d+GtGccpNRJTmOHdbJL5lQAPbZrkEPjblWUmjvrZ2GKkzxtvZ8BNrzJJI7Y5
-         9MdyT0qwLQbGVlQFnuNV7OwlDTK2mYfFY3ROg4LUwWXdiPv+HvsWVKXpzhHy22LL0Lde
-         HYiR+XIiwmddP5Pt1yplAhOM6rIunlNPY3ESDPUZ8lq3p3NpXvm+RX6flVVK7PH5GI5L
-         o1EQ==
-X-Gm-Message-State: AOJu0YwcVK4f2iIrhVYe/HZDG0ZFoSA7KuMLjNDqY0QNCpuZe/D0KSXw
-	STV9n2XGQ60Fu/g22y1NSSbf8uc8sfKb8Xic2Ziwqv9k2ibhIGvMl9xEZApcnA==
-X-Gm-Gg: AY/fxX4AeDiahfARG7Hc6jdcGAZPO7t2q9g9ATgNxL5fG4/5bMKItKl2ZkKM7TUbiC4
-	/0vLcSp+dzs3+n9jSXPDqvNM8wiBnw+8MUH9h4BpBf1RIttHBOidSbPp4x97vmhXPyVHFOFDXKr
-	CU3A6FO2brnhA32gaksm5Jcnd5xhV78ytJMxjl7O8VP4vrBrxw+/+ONZpWjagoCaRQrvZxI3Cny
-	t3Feh4Lga11qLvzQs46H4AjXKn8Ih49M7st73rq7MX0CORMZ7H0gHXiVK0RMU9SdWnLr16bi/IJ
-	zg8BK3JaOMG5TnLJI7utByXUUuL51O2VhzP4FokfngOQWiBszRCKULb0aSOeVBNVFsYNXMwLzMj
-	6bHhGRJ4gFkKh+4e1X9AnOcse4xzu9gnrxwyIxwcsTCV7lXBGMLYc5/z0A73PHB5VyU9G/4Qc9f
-	2wDJPK9HTe
-X-Google-Smtp-Source: AGHT+IEW1GzDEpAZO8RbU5Us5u+PUBFuRfXmaO0L08kxJLfdrh0erIc3v71QRrBRVCkb3AKJlyiGoA==
-X-Received: by 2002:a05:600c:818f:b0:477:7b16:5f77 with SMTP id 5b1f17b1804b1-47d19538725mr221276365e9.3.1766678228977;
-        Thu, 25 Dec 2025 07:57:08 -0800 (PST)
+        bh=s7eKHwBqEMyMrJBj55k2KA4EnqIS5CRxmqKosV1CBt0=;
+        b=kUBnqZlnBGi+EcKrFI/F+E40kzyDyhpF0qfzL4HFbDReV3Sng2iUlgYmddG/I+5V/r
+         /jIarepCK1SIQyqm7RIeoBzSEMRj71KwYW/UIEcB040P84ezSBaZyRX62whRjggjqdQn
+         aZU8oM6xVkUJdhmdseLzJm/CwSuME2CNZQOteJoOtoSwA2y5xHcFX+e3DdQ8j2XhevhS
+         mdXUkg+aj4xYVwKL+66KzcvVmquVvWmfwDqf1ZIvTDA2eFN+03UFvZq32+0yKHdL+QIQ
+         7hhy9lAA6lpvt/zvU5NSDR6zxqH6lIc06dYheHivUCvUv+eRHtvJhqn6UWHnnYdon1tV
+         YMhw==
+X-Gm-Message-State: AOJu0Yy5kDtYIa4KmI9vU6qP1t3gxX3qrZlZzbaNWcfAntaAz9gBMXEv
+	7OpEyLlyzACYK7bJSpjQSvzgIYL/t9weTPjL4opjVQ3GkRdtxgErGRJlKWOyKA==
+X-Gm-Gg: AY/fxX7rGRxPYbqsQIRsjt3RSbHcwbzpvp7mdyNBZ9yZTUZq91/kwDtjqikWnAooF3W
+	SVjj0b3U0B2TxLvnH4shiFtKTZwjopKehhZFuerJtkclIzgwpUqyHVrSEcom2Zs4Vj6MAjaxljs
+	SVM0de+nhF+vrnf+hphKeXwPx87z0gCcef0vY0LBc25yctIHlANYuTRyx/tTiO1hRgWbt+bQRc2
+	Nwjn3ZQToZfzj1/U6ZtIN9HjPwANUqoQjfXcf/HkbBzsyczfC4kgShYIl7HHCs9z5aWHUj8P3Y2
+	QZQQrtdWHNK5A39Le71I3RgIYhoNVsW+QT4uter3+GxSeDfU62bgMcboQdSuvIv1/JufxvCjc2G
+	7M4gmFNX/tZEprglVtg5XRZyBaJ33YodiKknavskSvkyBMPWyHcGtfterySLJa8gHzkbgiTT/VK
+	flrbmZu5zl
+X-Google-Smtp-Source: AGHT+IFy+R63IbWt42Q6JOsvbdkOBXOhtqIXa9oUrg83ayDDRZUA3oGIKYym2+nQ1L8Dw8EeV1iZgA==
+X-Received: by 2002:a05:600c:c0d5:b0:47b:da85:b9ee with SMTP id 5b1f17b1804b1-47d1c038cf9mr193827625e9.31.1766680513973;
+        Thu, 25 Dec 2025 08:35:13 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be279d6d8sm401251745e9.10.2025.12.25.07.57.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be27c2260sm393937625e9.15.2025.12.25.08.35.12
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Dec 2025 07:57:08 -0800 (PST)
+        Thu, 25 Dec 2025 08:35:12 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] hunspell: patch CVE-2019-16707
-Date: Thu, 25 Dec 2025 16:57:07 +0100
-Message-ID: <20251225155707.3027357-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/4] tigervnc: sync xserver code with oe-core
+Date: Thu, 25 Dec 2025 17:35:08 +0100
+Message-ID: <20251225163511.3087783-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 15:57:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122926
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 16:35:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122927
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2019-16707
-
-Pick the patch that resolves the Github issue[1] that tracked
-this vulnerability.
-
-[1]: https://github.com/hunspell/hunspell/issues/624
+TigerVNC compiles its own xserver. Synchronize the xserver version
+with oe-core.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../hunspell/hunspell/CVE-2019-16707.patch    | 25 +++++++++++++++++++
- .../hunspell/hunspell_1.7.0.bb                |  4 ++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/hunspell/hunspell/CVE-2019-16707.patch
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell/CVE-2019-16707.patch b/meta-oe/recipes-support/hunspell/hunspell/CVE-2019-16707.patch
-new file mode 100644
-index 0000000000..d3a95dadf2
---- /dev/null
-+++ b/meta-oe/recipes-support/hunspell/hunspell/CVE-2019-16707.patch
-@@ -0,0 +1,25 @@
-+From ded6e233588c1082db9d84dc57a9d200cd306b26 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
-+Date: Tue, 12 Nov 2019 20:03:15 +0000
-+Subject: [PATCH] invalid read memory access #624
-+
-+CVE: CVE-2019-16707
-+Upstream-Status: Backport [https://github.com/hunspell/hunspell/commit/ac938e2ecb48ab4dd21298126c7921689d60571b]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/hunspell/suggestmgr.cxx | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/hunspell/suggestmgr.cxx b/src/hunspell/suggestmgr.cxx
-+index dba084e..c23f165 100644
-+--- a/src/hunspell/suggestmgr.cxx
-++++ b/src/hunspell/suggestmgr.cxx
-+@@ -2040,7 +2040,7 @@ int SuggestMgr::leftcommonsubstring(
-+   int l2 = su2.size();
-+   // decapitalize dictionary word
-+   if (complexprefixes) {
-+-    if (su1[l1 - 1] == su2[l2 - 1])
-++    if (l1 && l2 && su1[l1 - 1] == su2[l2 - 1])
-+       return 1;
-+   } else {
-+     unsigned short idx = su2.empty() ? 0 : (su2[0].h << 8) + su2[0].l;
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-index 8d4dd5254e..c1a1585d99 100644
---- a/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.7.0.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = " \
- "
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+index 53832939e1..0adaf70b98 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+@@ -26,10 +26,10 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.15-branch;protocol=ht
  
- SRCREV = "4ddd8ed5ca6484b930b111aec50c2750a6119a0f"
--SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
-+           file://CVE-2019-16707.patch \
-+           "
+ # Keep sync with xorg-server in oe-core
+ XORG_PN ?= "xorg-server"
+-XORG_PV ?= "21.1.16"
++XORG_PV ?= "21.1.18"
+ SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
+ XORG_S = "${UNPACKDIR}/${XORG_PN}-${XORG_PV}"
+-SRC_URI[xorg.sha256sum] = "b14a116d2d805debc5b5b2aac505a279e69b217dae2fae2dfcb62400471a9970"
++SRC_URI[xorg.sha256sum] = "c878d1930d87725d4a5bf498c24f4be8130d5b2646a9fd0f2994deff90116352"
  
- S = "${WORKDIR}/git"
- 
+ # It is the directory containing the Xorg source for the
+ # machine on which you are building TigerVNC.
 
