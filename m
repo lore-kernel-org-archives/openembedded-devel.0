@@ -2,139 +2,231 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89E90E7AD4F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A51FFE7AD59
 	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 12:51:50 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.137503.1766667102450283543
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.138121.1766667104869656600
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Dec 2025 04:51:42 -0800
+ Thu, 25 Dec 2025 04:51:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KJyj3lIS;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-43277900fb4so327290f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d3JOYwkS;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-430f3ef2d37so5035728f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766667101; x=1767271901; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jB2AmCifNuBl1CK0MtE0ka3eRd2DEYEAV7y8Nk/Z660=;
-        b=KJyj3lISFL6+EJbb1xUlZsbZJeiVvhDdlFfW9LFgOwvmfzAoXq4+iSy2xB3L12SeNs
-         2ynpHNhQs84l33MvWp6+JG8WO4497clps0unIoRaGrhOyM/+S3Pr3Jbu7UFEukKNQzfk
-         5Yjj1B1GbsRJABJoSF2+3V0tQbamBNsNtX/JKfKtzR6jDS2vPcafS4PfYNseRNNRxxdh
-         xL0Rcph8lztFjevQPmUTNCTRb5HQwRYh11USJzgEmOYVIhQXgkyBecjglA+YNMgqHENk
-         ie5BS0sUOWHGZfp8jlJd5fziDy+33EQO4sGqmAnvfBgFKTG4npUeg2L7/1oH5pvPlbz4
-         LUmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766667101; x=1767271901;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1766667103; x=1767271903; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jB2AmCifNuBl1CK0MtE0ka3eRd2DEYEAV7y8Nk/Z660=;
-        b=tCb1Cf9OH3nlpRX+TFjge8reQrsIpOqjpV8RPEZjG1/drq9RedQVV7Nanp37CgiybJ
-         7fEiB43ko8ynZE3N2hF8SvRBnPGN6+OE3y9yehkxC1GzhVLI0tmZL9R56xDY110gbQM2
-         JufLAUovJXs2jMEKDCukS1hyplfyx1wphcoBedi9c2dVueolxdqcckfFtsSONEa5/WTH
-         wK21gXShzjFj+T1ivazncTv1hWqM+w98YEJ6zP2r8SLoSKfLoCW/LL0U9wwr5UG3J/T7
-         0aIZL/4e6fmsrNBohZmhbhZ0KfCEGdpaRMs2JM2pix377f5juciBjlXB2oE1SUXAJT9s
-         vYjg==
-X-Gm-Message-State: AOJu0YzEOCDcVjwPocSWte/z/BUaN+VBsOfsoydEruP1qwugr8bEPW5g
-	wJeTpnqp8iLU7s2S4Edw8LpM3njs4r+C2bQyNGbN7UYoUF+WqQg507DvCpN8DA==
-X-Gm-Gg: AY/fxX55o8I5XHzT/foRhZEdV8y5AXuVN3JDOHKxCt7S0dswviCCaUcT0N5DnRJJGg+
-	wAJlyXI8wt4F8OFLlZ7gRP07Sc9bYOJmtXNZRGtBurRxV7ChLNA2bNDcwZlMTxMM2RLVj8F7aKk
-	IJwuHMWY3zM4rTTxFDGhc9P4+GcwLIfq1tU9uhAvlFzBjNkpwAmI52ur/ZMHuXZC+VaWqsEbd0V
-	jZLvQIMjYPRBnKzpzip8XDPDdcZrEJEbuDE5IggUheG4XObhwuQd87SjGMFxcMqgsirBsgKvNw1
-	49/qRvLT/155QewnR2Yd7fnzHmIK/MyC0yX1l7ABm5n9zklu/o9X55Aa5x67p5XKANzq00gd/9V
-	ECJ83mWk+P0U4nRMsqJmsLSQPQB3G0ej2PobJJSMr/ub2qRAn/Ckg0Y9jEgONJAyO8hr5LoMRw3
-	JH6XDgVN5vloX6kxVUk34=
-X-Google-Smtp-Source: AGHT+IH96YoeUhYVDiKMhkaUq0zCdH0hhCvcZ7UxwvYb9RaKH7WZt8JZx/jHUO5Iglm4qqBZRJTceg==
-X-Received: by 2002:a05:6000:430b:b0:430:f736:7cc with SMTP id ffacd0b85a97d-4324e3ebf79mr22088487f8f.1.1766667100584;
-        Thu, 25 Dec 2025 04:51:40 -0800 (PST)
+        bh=en3e8exwUbtZWLkDoecJvYHqleiNWkuWPyEAhPXOF0Q=;
+        b=d3JOYwkSmOPS98aJCHJa/Wc5ZDjGrPjUO8HPd3GFNSryHQNxFoGSzOMWhNEBEWPUPQ
+         JtdTZSAd59BG1grNcNDTq67+hhqx72gt4R4kgczCKuj/MmfGaNbrQ4MB1qVZb63b9DRx
+         3XVT2Fb8ua7S+aRovYXg0rseQGJnTaap2hKit1uAxNf/AQqIlRd1N5RCl0iwyTmK1o3e
+         HAh7UOnwFV2LKH6ZDv6bf1anS32q5S+OvvhJESkDA0y01uZek1OQEE1G/ia9OlUoFBZR
+         P58vnSS5CtLZqG99CRtc6tOG18v0tcqBrbK6V5K3VSDbNNviexLHvmM3hVefeyJRqr6Y
+         sHew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766667103; x=1767271903;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=en3e8exwUbtZWLkDoecJvYHqleiNWkuWPyEAhPXOF0Q=;
+        b=ew7GT7VoEZgs6UxqEbiC1xHEUj+Uwf5G9xghNPNXevog2V7l7/BPlhZp7ESVBTuc8y
+         r59dM1oQ5+YLipTPU24GqHn0nosLBo4iCuvrqANP6fWAfAPBVvBNC85KD22wmdejEJ/5
+         Lb1pK0crLIXgR+I1kMid6FsytQpj2qVsELiyKb/OOgd9MfWUt2YAH6qpxhnJ7B9pEIxa
+         Rfi4AoBWj77i9iljPH7xY/9+l2fMI+c0KpIqHkAnkoJ0G16IY3Yc9AWKWqOc4CDhGt6H
+         aV4Ih+GsP369TIUdjzJHJY3s1R1dkjQ5C2C93QbfHacEdrbaPflaImuspNXdBBlMqNHS
+         iefg==
+X-Gm-Message-State: AOJu0YyvygZBqFhwr3WWr8C/W31vLys+YhXNhCjI+SE6VFlUvj12IAIQ
+	CFCBXuuIxpL9M0jc9giEV2KjPKKv5zUx3kb1dTKbw32DdfSa5Uylu2YOgaGyuw==
+X-Gm-Gg: AY/fxX6Bq94Lc4G98cfXJTFKERvT15I6n6NgIVeQnUKnl8Qa2AXQrKGYj7n/HVz+zPk
+	fnaRKvO9n0/tsFrmGwCHT+HlJC2RQ6jS2bufOTDkwQMBL1SGkFqkf2CZqkCWsuPo4f8vp32Y190
+	3X7CGqAN1yrRDsgyZ2O2pdMLiT3h1GrWINtyG3Nd3FVQDVhZmQoz1UdkJayLynj1lneu9UgguZY
+	EAkLAOUHdl0FRKpMxwg/l8OKUZEHiek6pE3ZwmHTxyiutcXH8K+Uh1PyrxvZHVtOMQZ49sObWBE
+	vguV3gjzVf4i0Yw5+3jGCoxgwN+BkFHkVUVsBcQ7Xu3U3jEJ7OAIupnIhn0vsc5a6sr0jO+06Fz
+	Nd8B5gUmoss9IHbs8gQVOW6pypUIcPEPZl0ikLGkgF8C5F5s9/Lg76QtLY2i/4zO5v9rZ5pjUD0
+	mMRVUZ3CQCPQ4jk6JJdpc=
+X-Google-Smtp-Source: AGHT+IH0cwbfjCxfbWHmqQHefg17azz772Em+rEFyWd9vsRcEYsGxym24IkIRzl3r93fd6gQrGSywQ==
+X-Received: by 2002:a05:6000:7:b0:431:3a5:d9c1 with SMTP id ffacd0b85a97d-4324e4fd96emr17609502f8f.30.1766667103136;
+        Thu, 25 Dec 2025 04:51:43 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.40
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Dec 2025 04:51:40 -0800 (PST)
+        Thu, 25 Dec 2025 04:51:42 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 1/8] mtr: patch CVE-2025-49809
-Date: Thu, 25 Dec 2025 13:51:32 +0100
-Message-ID: <20251225125139.2436941-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 5/8] cups-filters: patch CVE-2025-57812
+Date: Thu, 25 Dec 2025 13:51:36 +0100
+Message-ID: <20251225125139.2436941-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251225125139.2436941-1-skandigraun@gmail.com>
+References: <20251225125139.2436941-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 12:51:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122913
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122917
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-49809
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-57812
 
-Pick the patch mentioned in the NVD report.
+Backport the patch that is referenced by te nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../mtr/mtr/CVE-2025-49809.patch              | 38 +++++++++++++++++++
- .../recipes-support/mtr/mtr_0.95.bb           |  4 +-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/mtr/mtr/CVE-2025-49809.patch
+ .../recipes-printing/cups/cups-filters.inc    |   4 +-
+ .../cups/cups-filters/CVE-2025-57812.patch    | 127 ++++++++++++++++++
+ 2 files changed, 130 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
 
-diff --git a/meta-networking/recipes-support/mtr/mtr/CVE-2025-49809.patch b/meta-networking/recipes-support/mtr/mtr/CVE-2025-49809.patch
-new file mode 100644
-index 0000000000..1f8ac4aeb9
---- /dev/null
-+++ b/meta-networking/recipes-support/mtr/mtr/CVE-2025-49809.patch
-@@ -0,0 +1,38 @@
-+From 5eefb172ef1ab9e46d79c6bae60dbe7983c9f704 Mon Sep 17 00:00:00 2001
-+From: "R.E. Wolff" <R.E.Wolff@BitWizard.nl>
-+Date: Sun, 29 Jun 2025 14:06:00 +0200
-+Subject: [PATCH] Added protection against use of MTR_PACKET under special
-+ circumstances
-+
-+CVE: CVE-2025-49809
-+Upstream-Status: Backport [https://github.com/traviscross/mtr/commit/5226f105f087c29d3cfad9f28000e7536af91ac6]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ ui/cmdpipe.c | 13 ++++++++++---
-+ 1 file changed, 10 insertions(+), 3 deletions(-)
-+
-+diff --git a/ui/cmdpipe.c b/ui/cmdpipe.c
-+index d22b236..1a66293 100644
-+--- a/ui/cmdpipe.c
-++++ b/ui/cmdpipe.c
-+@@ -220,10 +220,17 @@ void execute_packet_child(
-+        the path to the mtr-packet executable.  This is necessary
-+        for debugging changes for mtr-packet.
-+      */
-+-    char *mtr_packet_path = getenv("MTR_PACKET");
-+-    if (mtr_packet_path == NULL) {
-++    char * mtr_packet_path = NULL; 
-++
-++    // In the rare case that mtr-packet is not setuid-root, 
-++    // and a select group of users has sudo privileges to run 
-++    // mtr and not much else, THEN create /etc/mtr.is.run.under.sudo
-++    // to prevent a privilege escalation when one of those accounts
-++    // is compromised.  CVE-2025-49809
-++    if (access ("/etc/mtr.is.run.under.sudo", F_OK) != 0)
-++        mtr_packet_path = getenv("MTR_PACKET");
-++    if (mtr_packet_path == NULL)
-+         mtr_packet_path = "mtr-packet";
-+-    }
-+ 
-+     /*
-+        First, try to execute mtr-packet from PATH
-diff --git a/meta-networking/recipes-support/mtr/mtr_0.95.bb b/meta-networking/recipes-support/mtr/mtr_0.95.bb
-index 92f9c4bfc0..8c385ae46a 100644
---- a/meta-networking/recipes-support/mtr/mtr_0.95.bb
-+++ b/meta-networking/recipes-support/mtr/mtr_0.95.bb
-@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://ui/mtr.c;beginline=5;endline=16;md5=00a894a39d53726a27386534d1c4e468"
+diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
+index 5952b5a2a6..26a7c5037a 100644
+--- a/meta-oe/recipes-printing/cups/cups-filters.inc
++++ b/meta-oe/recipes-printing/cups/cups-filters.inc
+@@ -9,7 +9,9 @@ SECTION = "console/utils"
+ DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
+ DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
  
- SRCREV = "852e5617fbf331cf292723702161f0ac9afe257c"
--SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https"
-+SRC_URI = "git://github.com/traviscross/mtr;branch=master;protocol=https \
-+           file://CVE-2025-49809.patch \
+-SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
++SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
++           file://CVE-2025-57812.patch \
 +           "
  
- S = "${WORKDIR}/git"
+ inherit autotools-brokensep gettext pkgconfig
  
+diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
+new file mode 100644
+index 0000000000..1af27c10c1
+--- /dev/null
++++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
+@@ -0,0 +1,127 @@
++From c21664d57ebecb2c6ed05b38b1c39995ab14e916 Mon Sep 17 00:00:00 2001
++From: zdohnal <zdohnal@redhat.com>
++Date: Mon, 10 Nov 2025 18:58:31 +0100
++Subject: [PATCH] Merge commit from fork
++
++* Fix heap-buffer overflow write in cfImageLut
++
++1. fix for CVE-2025-57812
++
++* Reject color images with 1 bit per sample
++
++2. fix for CVE-2025-57812
++
++* Reject images where the number of samples does not correspond with the color space
++
++3. fix for CVE-2025-57812
++
++* Reject images with planar color configuration
++
++4. fix for CVE-2025-57812
++
++* Reject images with vertical scanlines
++
++5.  fix for CVE-2025-57812
++
++---------
++
++Co-authored-by: Till Kamppeter <till.kamppeter@gmail.com>
++CVE: CVE-2025-57812
++Upstream-Status: Backport [https://github.com/OpenPrinting/libcupsfilters/commit/b69dfacec7f176281782e2f7ac44f04bf9633cfa]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ cupsfilters/image-tiff.c | 46 +++++++++++++++++++++++++++++++++++++++-
++ 1 file changed, 45 insertions(+), 1 deletion(-)
++
++diff --git a/cupsfilters/image-tiff.c b/cupsfilters/image-tiff.c
++index 4fd8756..b34c1ef 100644
++--- a/cupsfilters/image-tiff.c
+++++ b/cupsfilters/image-tiff.c
++@@ -43,6 +43,7 @@ _cupsImageReadTIFF(
++   TIFF		*tif;			/* TIFF file */
++   uint32	width, height;		/* Size of image */
++   uint16	photometric,		/* Colorspace */
+++		planar,			/* Color components in separate planes */
++ 		compression,		/* Type of compression */
++ 		orientation,		/* Orientation */
++ 		resunit,		/* Units for resolution */
++@@ -115,6 +116,15 @@ _cupsImageReadTIFF(
++     return (-1);
++   }
++ 
+++  if (TIFFGetField(tif, TIFFTAG_PLANARCONFIG, &planar) &&
+++      planar == PLANARCONFIG_SEPARATE)
+++  {
+++    fputs("DEBUG: Images with planar color configuration are not supported!\n", stderr);
+++    TIFFClose(tif);
+++    fclose(fp);
+++    return (1);
+++  }
+++
++   if (!TIFFGetField(tif, TIFFTAG_COMPRESSION, &compression))
++   {
++     fputs("DEBUG: No compression tag in the file!\n", stderr);
++@@ -129,6 +139,15 @@ _cupsImageReadTIFF(
++   if (!TIFFGetField(tif, TIFFTAG_BITSPERSAMPLE, &bits))
++     bits = 1;
++ 
+++  if (bits == 1 && samples > 1)
+++  {
+++    fprintf(stderr, "ERROR: Color images with 1 bit per sample not supported! "
+++                    "Samples per pixel: %d; Bits per sample: %d\n", samples, bits);
+++    TIFFClose(tif);
+++    fclose(fp);
+++    return (1);
+++  }
+++
++  /*
++   * Get the image orientation...
++   */
++@@ -181,6 +200,23 @@ _cupsImageReadTIFF(
++   else
++     alpha = 0;
++ 
+++  //
+++  // Check whether number of samples per pixel corresponds with color space
+++  //
+++
+++  if ((photometric == PHOTOMETRIC_RGB && (samples < 3 || samples > 4)) ||
+++      (photometric == PHOTOMETRIC_SEPARATED && samples != 4))
+++  {
+++    fprintf(stderr, "DEBUG: Number of samples per pixel does not correspond to color space! "
+++                    "Color space: %s; Samples per pixel: %d\n",
+++                    (photometric == PHOTOMETRIC_RGB ? "RGB" :
+++                     (photometric == PHOTOMETRIC_SEPARATED ? "CMYK" : "Unknown")),
+++                    samples);
+++    TIFFClose(tif);
+++    fclose(fp);
+++    return (1);
+++  }
+++
++  /*
++   * Check the size of the image...
++   */
++@@ -253,6 +289,14 @@ _cupsImageReadTIFF(
++         break;
++   }
++ 
+++  if (orientation >= ORIENTATION_LEFTTOP)
+++  {
+++    fputs("ERROR: TIFF files with vertical scanlines are not supported!\n", stderr);
+++    TIFFClose(tif);
+++    fclose(fp);
+++    return (-1);
+++  }
+++
++   switch (orientation)
++   {
++     case ORIENTATION_TOPRIGHT :
++@@ -1455,7 +1499,7 @@ _cupsImageReadTIFF(
++ 	      }
++ 
++ 	      if (lut)
++-	        cupsImageLut(out, img->xsize * 3, lut);
+++	        cupsImageLut(out, img->xsize * bpp, lut);
++ 
++               _cupsImagePutRow(img, 0, y, img->xsize, out);
++             }
 
