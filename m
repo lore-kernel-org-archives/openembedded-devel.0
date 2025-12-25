@@ -2,115 +2,182 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85231E7AD49
-	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 12:47:30 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.138089.1766666843734510625
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88905E7AD44
+	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 12:51:50 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.138123.1766667108005721870
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Dec 2025 04:47:24 -0800
+ Thu, 25 Dec 2025 04:51:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jAm4TYmF;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4779ce2a624so49244335e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:47:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z+hdq0LA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-477b198f4bcso42238345e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766666842; x=1767271642; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KrQk3v4kGqbChl8lwVU29NDp7/hImkTh4jeh8p8eYSI=;
-        b=jAm4TYmFUaHxfxldrY3AfpVmvFj17ZEQhKL7ZsGtiSP0Vr6KkIIU9PNFTtroFTyttx
-         +K1oM7Zk0jIo/rJ5frAN+zmfANRB8EzrE3ewZrm5zkp0JNtyJK5IJvtouWHwtjEVWDcW
-         sbLBKBcwJ/CoGVhKgGLZP6bWWc/Kino/VH76cK6nhhe2XpPddD0e4qV7QcFunXAFikOH
-         1owqaptGgUSdPFKIQUjZ/WjWZrtfbKTLhxyihbHzcQXNharK6wa9FSLW04beHb9hHqMs
-         q1tiHvbYOruHwFoXQTJWZMEMZbPU+um1iXiQ7fRFmZKXetLN+cxpwdagiTCR+0QtIM6e
-         oEPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766666842; x=1767271642;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1766667106; x=1767271906; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KrQk3v4kGqbChl8lwVU29NDp7/hImkTh4jeh8p8eYSI=;
-        b=ie8KaiD8iOxA1UIJZ34ffbLQqIJKrWSGB/0/u0/9/TXOcpSSLwI+VoW/yCsTg3yQDW
-         MViw6utZ8Hsdj1N+SCdHxMljfliRLIeOGLCqZqB0dG1rm5SC3dsx1xXlXNZrLdtH6mW7
-         oDR7h9nsWEFmL+PLAGnrGfHqt0WEH4jPogqnp7zjsA2vhgnCj7aZfiAMQW8PSreoYf6e
-         GMjsyRw5DOaI1KREBLzslTWSEeLr9Cytv+0UVJBblqK3LvCjDqsdf/KEPOCCsvcdBWVu
-         tTBF+3Q7jnTebonpxG8gwfHoa1z7s0YY6jIFm4hUPeCW1xs4EUh3M8+KGI8OglSUf/Tj
-         /viw==
-X-Gm-Message-State: AOJu0YyYnT7G8KH6eCEw3Z8EEF7Qk+JVlYqLPimwm75gddLm4+N9BXVY
-	6DSONBALfIkjJ5+F/NHAzUhjb/e5SJvyuWT7BpsOwtAa8B25uqStYg6UvEN6tg==
-X-Gm-Gg: AY/fxX4vBJ1+6DnWzpbTADSH5MH8U2YMMCjJLeQY+dD7n56ePDYyvnigFVYSDK+xslq
-	WbgjBYWFip5qC/7pN9bNpgapk7mD02xkmpIqR+xIHsnTuaSoML4ZRSBaiIWdL5o5DYXf4da2BCm
-	45vM3G6xOT+ntQzVNTEHzUQdowpziyhm4sExHP4YWlJxViiRrCvqOEYksJHeFmyP0o8/yhhFCfn
-	Jl5Ant8H6K+poWgwstjTVp/cGWrY0B7cYtKlgTW90ncamxq+fuY4huNrDpfWwEGMZumNiavLYXt
-	xGZxcIS7sjK5A7+zS3eYqfajnAfPCUUGyQakDu3aHLgrSo9FzazWUY6lic9qoWhWHuUoZVAwdn9
-	sgj/cWOHWItoT0czWTSUpRrFnCfW7DrT8bGp1ayVZbvCXmYGA3ccNnf6Z2S7fK8ZXC+nCNOVVjv
-	62+yc3wb7z
-X-Google-Smtp-Source: AGHT+IEY0PbmWBW4l0PX320R9gBI4KJlpDRKSY+bYM1hQJt6dRsDUt8YSDetUirgZV6PfvOHJxEa8Q==
-X-Received: by 2002:a05:600c:3b0d:b0:477:569c:34e9 with SMTP id 5b1f17b1804b1-47d20021316mr206157765e9.23.1766666841670;
-        Thu, 25 Dec 2025 04:47:21 -0800 (PST)
+        bh=+0Rc/GGRPh8YzlnRHxWu2uk3mjZScLBnNtyPkI+ViIY=;
+        b=Z+hdq0LAnezQ6gHgTiexji6xeUkaznLmnaru/o3EpuZXvvIlWII2b51AGehnUT6AvV
+         4zq6k3+aqf4OpR9Ojasmk4S4STWffJSf0PG/3QVwe4r5dVZqy4EGTKAsXVj6fRLgZ4e6
+         bKsysVjOV8KxG+UK9F8UFkKW1D5nXYS93ADDyqDcWnfYZ+5k4R+KY5+hmc70QssbGwPt
+         iEoxF90DZiqTr8OwXecgwtYFRwj6RcQH/hQR2x/dYpoed9LsphnQ/0RTRIMU0uGoG541
+         wKaStcWOqlKoGrFuChB054kX8RsWR5LxXaphMcrqMP7pAk8oSgJSorxMZ7MCCXTGRJ5z
+         dyFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1766667106; x=1767271906;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=+0Rc/GGRPh8YzlnRHxWu2uk3mjZScLBnNtyPkI+ViIY=;
+        b=d4/rfsU1bI3OpnGcPsPGJlzQuMEpErCLVj4dx3bleHUrZqgakuEzdIzqjl49njAMJZ
+         etjm3i2wke4ph4upJgPlUqscAYj3J80UkCC3OuZ/t8jXLxXfbo/4E7oZavVLxKM+1HUR
+         fDnx2WbMdnEdfoI4Tvc/fFwVcNlNExzlc+hzpu+kdYC6Es01y1ma9cSP1YKC02lvAMbU
+         LrrGf/15/8hP4++m435IZ4t6Exoa+OGOGDj/I96UNDngwDUN5g4ehI+Vq/Qrn9ViHJzL
+         Y387fGgybX016GzYdNTWrm98kMuvgHt6KBiJ+5+eghKKOHllwZ3c6byGvetIcnSi8klE
+         Gk1A==
+X-Gm-Message-State: AOJu0YwpcU+C/cQDC4CPsGb/0n3YvS/NEZMDWYY+BS08B7OinfUOtVLb
+	fSCzF8AMoYlvVTWtnu1FlwwSTclA8GmvF62lGljyv/FWQlr2V5+g2N8S2grj2w==
+X-Gm-Gg: AY/fxX4ncS7W1gF2bT0zReesayDiCXF+ylpoiu7MMebou9586t3ozCgQr8wrtOgIddg
+	kbRSGLTrtUwP93XcCfyDS14BUcyjiQmj3+ow0avZVKcaETzIsS+wMXt/cPUNCMNdr+SJEWH/cAm
+	8hjRSB0Di2EHHuTNhxbmkNblkGzjuTNi8e+zT3M+XVbhurtuM0FkjpePrRBXJRSuQAr9wQY/Eg6
+	xvga17YrDp7H/RJIKOYS9+1eOUgW5x9ObHz8oy2PlxRwgejid3gWGYSF68ZNCkCkV79GhzDN/5U
+	leDLSgwRwBJVeudMa31LVu/Lh7TT814L7h2Hf6hr92ybxTuWqxtDIWlBiezNNkjco4lCexWjQMx
+	UE4xJ5kNbVus1qupP3dpDRGJ9Q9t6QadHNtP/WR87yW0pxSJkEzRFaOJTMGplO2irjqetYgjoIH
+	F9VIeto5Hv
+X-Google-Smtp-Source: AGHT+IGu/ME26weNARG5CRTDES0tEyzehHFaHqwckOz/xLEWQGvtL+Ejca0CoLxLcEn0PfF40gbFXg==
+X-Received: by 2002:a05:600c:3b1f:b0:477:bb0:751b with SMTP id 5b1f17b1804b1-47d20423ca4mr189928325e9.27.1766667106201;
+        Thu, 25 Dec 2025 04:51:46 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be2724fe8sm465524215e9.1.2025.12.25.04.47.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Dec 2025 04:47:21 -0800 (PST)
+        Thu, 25 Dec 2025 04:51:45 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 1/2] libopenmpt: upgrade 0.7.10 -> 0.8.4
-Date: Thu, 25 Dec 2025 13:47:19 +0100
-Message-ID: <20251225124720.2074689-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 8/8] dbus-broker: patch CVE-2022-31212
+Date: Thu, 25 Dec 2025 13:51:39 +0100
+Message-ID: <20251225125139.2436941-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251225125139.2436941-1-skandigraun@gmail.com>
+References: <20251225125139.2436941-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 12:47:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122911
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 12:51:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122920
 
-Changelog: https://lib.openmpt.org/doc/changelog.html
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-31212
 
-License-Update: copyright year bump
+A detailed writeup[1] is referenced by the nvd report, which
+describes that the vulnerability itself is not in the application,
+rather in a dependency of it, in c-shutil, which is pulled in as
+a submodule.
 
-Ptest passed:
-root@qemux86-64:/usr/lib/libopenmpt/ptest# ptest-runner
-START: ptest-runner
-2025-12-25T09:29
-BEGIN: /usr/lib/libopenmpt/ptest
-PASS: libopenmpttest
-DURATION: 1
-END: /usr/lib/libopenmpt/ptest
-2025-12-25T09:29
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+Pick the patch from this submodule that fixes a stack overflow, and
+adds a test explictly verifying the described vulnerability.
+
+[1]: https://sec-consult.com/vulnerability-lab/advisory/memory-corruption-vulnerabilities-dbus-broker/
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libopenmpt/{libopenmpt_0.7.10.bb => libopenmpt_0.8.4.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/libopenmpt/{libopenmpt_0.7.10.bb => libopenmpt_0.8.4.bb} (95%)
+ .../dbus/dbus-broker/CVE-2022-31212.patch     | 70 +++++++++++++++++++
+ meta-oe/recipes-core/dbus/dbus-broker_29.bb   |  4 +-
+ 2 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/CVE-2022-31212.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.8.4.bb
-similarity index 95%
-rename from meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
-rename to meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.8.4.bb
-index dececf7488..37264423c4 100644
---- a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.10.bb
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.8.4.bb
-@@ -7,14 +7,14 @@ HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker/CVE-2022-31212.patch b/meta-oe/recipes-core/dbus/dbus-broker/CVE-2022-31212.patch
+new file mode 100644
+index 0000000000..a173e88d34
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/dbus-broker/CVE-2022-31212.patch
+@@ -0,0 +1,70 @@
++From 2dfb73805571bd48e92b2d09962bc99f3bc4f86b Mon Sep 17 00:00:00 2001
++From: David Rheinsberg <david.rheinsberg@gmail.com>
++Date: Tue, 19 Apr 2022 13:11:02 +0200
++Subject: [PATCH] strnspn: fix buffer overflow
++
++Fix the strnspn and strncspn functions to use a properly sized buffer.
++It used to be 1 byte too short. Checking for `0xff` in a string will
++thus write `0xff` once byte beyond the stack space of the local buffer.
++
++Note that the public API does not allow to pass `0xff` to those
++functions. Therefore, this is a read-only buffer overrun, possibly
++causing bogus reports from the parser, but still well-defined.
++
++Reported-by: Steffen Robertz
++Signed-off-by: David Rheinsberg <david.rheinsberg@gmail.com>
++
++CVE: CVE-2022-31212
++Upstream-Status: Backport [https://github.com/c-util/c-shquote/commit/7fd15f8e272136955f7ffc37df29fbca9ddceca1]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ subprojects/c-shquote/src/c-shquote.c    | 4 ++--
++ subprojects/c-shquote/src/test-private.c | 6 ++++++
++ 2 files changed, 8 insertions(+), 2 deletions(-)
++
++diff --git a/subprojects/c-shquote/src/c-shquote.c b/subprojects/c-shquote/src/c-shquote.c
++index b268906..abb55d6 100644
++--- a/subprojects/c-shquote/src/c-shquote.c
+++++ b/subprojects/c-shquote/src/c-shquote.c
++@@ -85,7 +85,7 @@ int c_shquote_consume_char(char **outp,
++ size_t c_shquote_strnspn(const char *string,
++                         size_t n_string,
++                         const char *accept) {
++-        bool buffer[UCHAR_MAX] = {};
+++        bool buffer[UCHAR_MAX + 1] = {};
++ 
++         for ( ; *accept; ++accept)
++                 buffer[(unsigned char)*accept] = true;
++@@ -100,7 +100,7 @@ size_t c_shquote_strnspn(const char *string,
++ size_t c_shquote_strncspn(const char *string,
++                           size_t n_string,
++                           const char *reject) {
++-        bool buffer[UCHAR_MAX] = {};
+++        bool buffer[UCHAR_MAX + 1] = {};
++ 
++         if (strlen(reject) == 1) {
++                 const char *p;
++diff --git a/subprojects/c-shquote/src/test-private.c b/subprojects/c-shquote/src/test-private.c
++index 57a7250..c6afe40 100644
++--- a/subprojects/c-shquote/src/test-private.c
+++++ b/subprojects/c-shquote/src/test-private.c
++@@ -148,6 +148,9 @@ static void test_strnspn(void) {
++ 
++         len = c_shquote_strnspn("ab", 2, "bc");
++         c_assert(len == 0);
+++
+++        len = c_shquote_strnspn("ab", 2, "\xff");
+++        c_assert(len == 0);
++ }
++ 
++ static void test_strncspn(void) {
++@@ -167,6 +170,9 @@ static void test_strncspn(void) {
++ 
++         len = c_shquote_strncspn("ab", 2, "cd");
++         c_assert(len == 2);
+++
+++        len = c_shquote_strncspn("ab", 2, "\xff");
+++        c_assert(len == 2);
++ }
++ 
++ static void test_discard_comment(void) {
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_29.bb b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
+index 525db345b0..aafeda206e 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_29.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_29.bb
+@@ -6,7 +6,9 @@ SECTION = "base"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=829270a66f67187a1d08640df673249a"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=979c86485a65d11403e9bf083b9a0812"
+-SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
++SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz \
++           file://CVE-2022-31212.patch \
++           "
+ SRC_URI[sha256sum] = "4eca425db52b7ab1027153e93fea9b3f11759db9e93ffbf88759b73ddfb8026a"
  
- DEPENDS = "virtual/libiconv"
- 
- SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[sha256sum] = "093713c1c1024f4f10c4779a66ceb2af51fb7c908a9e99feb892d04019220ba1"
-+SRC_URI[sha256sum] = "627f9bf11aacae615a1f2c982c7e88cb21f11b2d6f0267946f7c82c5eae4943b"
- 
- S = "${UNPACKDIR}/libopenmpt-${PV}+release.autotools"
- 
+ UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
 
