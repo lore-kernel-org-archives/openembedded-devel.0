@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D49E7AD55
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8360E7AD62
 	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 12:51:50 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.137508.1766667106223731531
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.137505.1766667103686259309
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Dec 2025 04:51:46 -0800
+ Thu, 25 Dec 2025 04:51:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=k+RnRzka;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so67436915e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BfMLi7Q1;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-4327790c4e9so424445f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766667104; x=1767271904; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766667102; x=1767271902; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9msYJH7qhc3a6mSMK6ia0zQ1pXFpJlB7cLOPnlxTDag=;
-        b=k+RnRzkanGVsiM2HQlMc9dydSQSX+bHJ5Cn5U/ez5pFT+C4YK1thecuVobSGKa5n/H
-         VYlY2sMeMuATXhWEWj+KOKv5VyR1tPbOd7UZizZ18cLgYe89d41YafnLcuOj1eweHmMm
-         MQbQkQySTaAA3FTxgbq8hOU2Vc2M52QaJdbJfgtFNE/fhvJsIjE7pSnFJ1uTdIGfs+aa
-         OkbXehB7sqEm7Ar58iifl31BU+Ot40LWNcVN+79h8xXMGLc59COPPl5mNnIWtuKeunYa
-         h5q/qa1pmkT4YdAzSXar0K6bDSOQ4OB258MWFfwpNl6CX6r56E7RIgk92ru6A3DUzE05
-         wuDA==
+        bh=sWIUpaEXTqTeiagGCQoH5twOI2RQ54urHNDt9mtZ2PQ=;
+        b=BfMLi7Q1ta6R55McJs9L+ySrf1wDyyPZWxVZFXxK8iTDkJwvB6k0Zc6sStPQqanX+j
+         Lu5HmtTGpv+cZa6656DEyrozw5iGbqaNFqLaY/kvZZLRv8Ul2m7l0tgRq4zYytxB9tij
+         2oho92nwCiFbczK1oQSPZc2Y7kvWgf2acKa8TCUcOohxcJEhg3PkrhbfKqvgTn5xNAv0
+         0fhz7PFByltzIgZeJCcthbENwnT042e2xlAqH8nB0ZGnDxrYO6GTsCELHSGJO0DfCvnd
+         NuO+GuqTFTCVWKJWOmKoLRiyPQMemPaZzyQWJv/h1JICTh1XO9tBIffbV0LUL4rG3/4h
+         DIRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766667104; x=1767271904;
+        d=1e100.net; s=20230601; t=1766667102; x=1767271902;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=9msYJH7qhc3a6mSMK6ia0zQ1pXFpJlB7cLOPnlxTDag=;
-        b=PT8bPKgOTRfR+F4Q8+bjY4krpq9atw4TQuk0Mrs9A+fcL74THFuvPo6kSv75077L6L
-         mfuHexFRkeyRFw2UyhaFdDmAlzG+LAacDy19VDAOwiHOSC30TvqUjsylVUxXxz8T2es3
-         UYasE+MrnUxyXjUZewEdX2tctHWCHbDUcgTh6SE71Lx2mHyEIfVB6ZF3k4PmAXptHKBr
-         hSwAhmud3dR8CE6sqjlOT7DtyTwcaJuPcxy3F8NNsupeJcCvAt+32bUT0jvLZVJLmIVx
-         Kw8lTc6yjS2EkKbQhUjUIK1ohHkRVIjrK+X1Rrme9IOmPvBDvSW3FPwIuCFXkWbieQZr
-         ZdWw==
-X-Gm-Message-State: AOJu0YxzQWnrRL4JyK1x7gksWvHO5eFf5v8KzzkGzmV2C2nwPaJEmsZb
-	t6a3Mf+sdqieUlK+TKLDVbZ9oBrk7Y5T5ExWrrE4u/AwY6b5m+KdtNnwoDA54A==
-X-Gm-Gg: AY/fxX5XOMkBl3p01IgHwTldKzc7umUTJIT13EGP6AFNihTHyDuUeaHz5KvrRaN4JbQ
-	gH7/QbxAulyFWhOJB6JlZVRNJ7vDP/g/kowU4oSKDTeaNbDLDMbP4KctPy2TmsIwaZ7WXT+GsFj
-	gxizHb2CYMmIYAyg4FhHCCxQyzIkITzHbJ6ti3FWjXTT+FDKPEAA6ANkxt7Ic0HVhFwwH64EtNU
-	Arg9sA0SrIkZhq/nV7XQSFCO1oK4UFur3oCiexT/iaVWEnB7Qkc5FvGaBnH4lRBiX4ijTARjYW3
-	7tm4yG+xzpA2fcStJ2s27myvgH2jihVybuvEW3ZxlCnzSaAWu/xnCEBc771fY4zTAO/DvxBlUMN
-	EbccN1yeoUyo68MCzvKsfxTI0zD8BWRjku8ycIa+DbFrUjWZ8V3dCJLplJEvSTp0yQf9HTCuq/J
-	gP9aMKukB1
-X-Google-Smtp-Source: AGHT+IE/X8XWyXGHgjN5fXGWCwXEtNOa2VFWOxjdQS6LMFKx2n2zlArEJo8IehYBfDV4RaPcvwu1CQ==
-X-Received: by 2002:a05:6000:2305:b0:431:808:2d49 with SMTP id ffacd0b85a97d-4324e4c6fbfmr20969374f8f.8.1766667104473;
-        Thu, 25 Dec 2025 04:51:44 -0800 (PST)
+        bh=sWIUpaEXTqTeiagGCQoH5twOI2RQ54urHNDt9mtZ2PQ=;
+        b=c1szZ+YD3mOdHn4/Tk/W1FibXvW+MfW8ft8YOR/QoA3cn1/g/O/Wb5+sLORyA53ZAn
+         zSG0wBxK+xQjfQ7YM8g4zL363PDTU13WzuMXIxLFyy4Caq50533tOWSCXfg82LxVxi/o
+         gHwqqKVZP2ijxvWjFe1tMgN+LHZ8jQwGQms+vvnLRAmeEy7OhFPXGbMcdZI4YcCrjDh8
+         MHT02N+ag4KwblO54qGgybcht8Ut40ieRFSGcctSw3wcdSafdi/eAIGw2MEg+CiM+riw
+         imjwMyF4+MXzFLYkt4QFDuluozbA1lwAWh0S7XJpyDSvAW3R2NShrtUxOFYF5Nm3yEmt
+         qJaA==
+X-Gm-Message-State: AOJu0YxIeJ+8fPw/yIOV7PYuhcCLy/Wn6Epj/lggst2V3YVhz6DJ1R2c
+	sbUK+6ECAXHX6a7XnJjZisYALiIGHReCbvI8nbHWgQS3HxjSHk87Rco2PhVIqw==
+X-Gm-Gg: AY/fxX5oi0mVtNh/XREfTBm2Pm1v+bCdnP9HUm32R30/YVib9IErB1TB/9wX+FrLY2k
+	hygHgyxmYlZyfgS6PAxoIeZsQySlw906HAdvBX9Iqr6V9WItmXyi4RW1GjFQ2w+eJqX/hTbGY/I
+	NlrfxhF6Yvd9a7N2GpBw2BX4OFoQkI9AZWpADfn5wvaIwD4EjQ/aA/0XVZsQVwI8xXDrKY0M9xa
+	kyd/26TscQXMM8C9oNGIZi0IutoFkQfqh5u+bqtLMlmsFZGyVvIJw6KTLVpzqTysd9XSzsWc2aD
+	i4sVlFDmEBepZuCxnm5Z/WuXt+75q3g03PeDplorQxUNImVavrVVgsjJCBijz+qp8g7l46ycPVC
+	AtVpwf5FkYLYVH5ckgIxnaG4zGpMDl3rVtAF4In0Ovdl9sNkbVAQ7PTBjTPeWL05UGNTQ/wlaeP
+	liPxgEg+Ma
+X-Google-Smtp-Source: AGHT+IHC/B1XmqGn2OfCibg86MqMAD5ARIXhq0eIb+QXq8EolZnbpMT/KTV6G1DjuLAjgnno059+pg==
+X-Received: by 2002:a05:6000:220c:b0:431:752:671e with SMTP id ffacd0b85a97d-4324e4c906cmr25547396f8f.15.1766667101856;
+        Thu, 25 Dec 2025 04:51:41 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.43
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.41
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Dec 2025 04:51:44 -0800 (PST)
+        Thu, 25 Dec 2025 04:51:41 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 7/8] cups-filters: patch CVE-2023-24805
-Date: Thu, 25 Dec 2025 13:51:38 +0100
-Message-ID: <20251225125139.2436941-7-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/8] nanopb: patch CVE-2024-53984
+Date: Thu, 25 Dec 2025 13:51:34 +0100
+Message-ID: <20251225125139.2436941-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251225125139.2436941-1-skandigraun@gmail.com>
 References: <20251225125139.2436941-1-skandigraun@gmail.com>
@@ -68,248 +68,74 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 12:51:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122919
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122914
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-24805
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-53984
 
 Pick the patch referenced by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-printing/cups/cups-filters.inc    |   1 +
- .../cups/cups-filters/CVE-2023-24805.patch    | 213 ++++++++++++++++++
- 2 files changed, 214 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
+ .../nanopb/nanopb/CVE-2024-53984.patch        | 36 +++++++++++++++++++
+ .../recipes-devtools/nanopb/nanopb_0.4.5.bb   |  4 ++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/CVE-2024-53984.patch
 
-diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
-index fe87ac98ae..ddd6451ccc 100644
---- a/meta-oe/recipes-printing/cups/cups-filters.inc
-+++ b/meta-oe/recipes-printing/cups/cups-filters.inc
-@@ -12,6 +12,7 @@ DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-nat
- SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
-            file://CVE-2025-57812.patch \
-            file://CVE-2025-64524.patch \
-+           file://CVE-2023-24805.patch \
-            "
- 
- inherit autotools-brokensep gettext pkgconfig
-diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/CVE-2024-53984.patch b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/CVE-2024-53984.patch
 new file mode 100644
-index 0000000000..fd8ef7b806
+index 0000000000..c7a0c3f007
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
-@@ -0,0 +1,213 @@
-+From c90dcbd2887c1221a1c298c7a194b1d93ed0e501 Mon Sep 17 00:00:00 2001
-+From: Till Kamppeter <till.kamppeter@gmail.com>
-+Date: Wed, 17 May 2023 11:12:37 +0200
-+Subject: [PATCH] Merge pull request from GHSA-gpxc-v2m8-fr3x
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb/CVE-2024-53984.patch
+@@ -0,0 +1,36 @@
++From 84e8fb3da74d3b83179700284ce47c98a8804ab1 Mon Sep 17 00:00:00 2001
++From: Petteri Aimonen <jpa@git.mail.kapsi.fi>
++Date: Sun, 1 Dec 2024 11:40:38 +0200
++Subject: [PATCH] Fix memory not released on error return (GHSA-xwqq-qxmw-hj5r)
 +
-+* beh backend: Use execv() instead of system() - CVE-2023-24805
++When all of the following conditions apply:
 +
-+With execv() command line arguments are passed as separate strings and
-+not the full command line in a single string. This prevents arbitrary
-+command execution by escaping the quoting of the arguments in a job
-+with forged job title.
++* Compile time option PB_ENABLE_MALLOC is enabled.
++* Message contains at least one field with FT_POINTER field type.
++* Custom stream callback is used with unknown stream length (stream.bytes_left = SIZE_MAX)
++* pb_decode_ex() function is used with flag PB_DECODE_DELIMITED.
++* The input message is corrupted (accidentally or maliciously) in the length prefix.
 +
-+* beh backend: Extra checks against odd/forged input - CVE-2023-24805
++Then the pb_decode_ex() function does not automatically call pb_release(), like is done for other failure cases.
++This could lead to memory leak and potential denial-of-service.
 +
-+- Do not allow '/' in the scheme of the URI (= backend executable
-+  name), to assure that only backends inside /usr/lib/cups/backend/
-+  are used.
-+
-+- Pre-define scheme buffer to empty string, to be defined for case of
-+  uri being NULL.
-+
-+- URI must have ':', to split off scheme, otherwise error.
-+
-+- Check return value of snprintf() to create call path for backend, to
-+  error out on truncation of a too long scheme or on complete failure
-+  due to a completely odd scheme.
-+
-+* beh backend: Further improvements - CVE-2023-24805
-+
-+- Use strncat() instead of strncpy() for getting scheme from URI, the latter
-+  does not require setting terminating zero byte in case of truncation.
-+
-+- Also exclude "." or ".." as scheme, as directories are not valid CUPS
-+  backends.
-+
-+- Do not use fprintf() in sigterm_handler(), to not interfere with a
-+  fprintf() which could be running in the main process when
-+  sigterm_handler() is triggered.
-+
-+- Use "static volatile int" for global variable job_canceled.
-+
-+CVE: CVE-2023-24805
-+Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/8f274035756c04efeb77eb654e9d4c4447287d65]
++CVE: CVE-2024-53984
++Upstream-Status: Backport [https://github.com/nanopb/nanopb/commit/2b86c255aa52250438d5aba124d0e86db495b378]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ backend/beh.c | 107 +++++++++++++++++++++++++++++++++++++++-----------
-+ 1 file changed, 83 insertions(+), 24 deletions(-)
++ pb_decode.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/backend/beh.c b/backend/beh.c
-+index 225fd27..e864c22 100644
-+--- a/backend/beh.c
-++++ b/backend/beh.c
-+@@ -22,12 +22,13 @@
-+ #include "backend-private.h"
-+ #include <cups/array.h>
-+ #include <ctype.h>
-++#include <sys/wait.h>
++diff --git a/pb_decode.c b/pb_decode.c
++index b194825..2a22607 100644
++--- a/pb_decode.c
+++++ b/pb_decode.c
++@@ -1156,7 +1156,7 @@ bool checkreturn pb_decode_ex(pb_istream_t *stream, const pb_msgdesc_t *fields,
++       status = pb_decode_inner(&substream, fields, dest_struct, flags);
 + 
-+ /*
-+  * Local globals...
-+  */
-+ 
-+-static int		job_canceled = 0; /* Set to 1 on SIGTERM */
-++static volatile int	job_canceled = 0; /* Set to 1 on SIGTERM */
-+ 
-+ /*
-+  * Local functions...
-+@@ -213,20 +214,43 @@ call_backend(char *uri,                 /* I - URI of final destination */
-+ 	     char **argv,		/* I - Command-line arguments */
-+ 	     char *filename) {          /* I - File name of input data */
-+   const char	*cups_serverbin;	/* Location of programs */
-++  char		*backend_argv[8];	/* Arguments for called CUPS backend */
-+   char		scheme[1024],           /* Scheme from URI */
-+                 *ptr,			/* Pointer into scheme */
-+-		cmdline[65536];		/* Backend command line */
-+-  int           retval;
-++		backend_path[2048];	/* Backend path */
-++  int		pid,
-++		wait_pid,
-++		wait_status,
-++		retval = 0;
-++  int		bytes;
-+ 
-+  /*
-+   * Build the backend command line...
-+   */
-+ 
-+-  strncpy(scheme, uri, sizeof(scheme) - 1);
-+-  if (strlen(uri) > 1023)
-+-    scheme[1023] = '\0';
-++  scheme[0] = '\0';
-++  strncat(scheme, uri, sizeof(scheme) - 1);
-+   if ((ptr = strchr(scheme, ':')) != NULL)
-+     *ptr = '\0';
-++  else
-++  {
-++    fprintf(stderr,
-++           "ERROR: beh: Invalid URI, no colon (':') to mark end of scheme part.\n");
-++    exit (CUPS_BACKEND_FAILED);
-++  }
-++  if (strchr(scheme, '/'))
-++  {
-++    fprintf(stderr,
-++           "ERROR: beh: Invalid URI, scheme contains a slash ('/').\n");
-++    exit (CUPS_BACKEND_FAILED);
-++  }
-++  if (!strcmp(scheme, ".") || !strcmp(scheme, ".."))
-++  {
-++    fprintf(stderr,
-++           "ERROR: beh: Invalid URI, scheme (\"%s\") is a directory.\n",
-++           scheme);
-++    exit (CUPS_BACKEND_FAILED);
-++  }
-+ 
-+   if ((cups_serverbin = getenv("CUPS_SERVERBIN")) == NULL)
-+     cups_serverbin = CUPS_SERVERBIN;
-+@@ -235,16 +259,26 @@ call_backend(char *uri,                 /* I - URI of final destination */
-+     fprintf(stderr,
-+ 	    "ERROR: beh: Direct output into a file not supported.\n");
-+     exit (CUPS_BACKEND_FAILED);
-+-  } else
-+-    snprintf(cmdline, sizeof(cmdline),
-+-	     "%s/backend/%s '%s' '%s' '%s' '%s' '%s' %s",
-+-	     cups_serverbin, scheme, argv[1], argv[2], argv[3],
-+-	     /* Apply number of copies only if beh was called with a
-+-		file name and not with the print data in stdin, as
-+-	        backends should handle copies only if they are called
-+-	        with a file name */
-+-	     (argc == 6 ? "1" : argv[4]),
-+-	     argv[5], filename);
-++  } 
-++
-++  backend_argv[0] = uri;
-++  backend_argv[1] = argv[1];
-++  backend_argv[2] = argv[2];
-++  backend_argv[3] = argv[3];
-++  backend_argv[4] = (argc == 6 ? "1" : argv[4]);
-++  backend_argv[5] = argv[5];
-++  backend_argv[6] = filename;
-++  backend_argv[7] = NULL;
-++
-++  bytes = snprintf(backend_path, sizeof(backend_path),
-++                  "%s/backend/%s", cups_serverbin, scheme);
-++  if (bytes < 0 || bytes >= sizeof(backend_path))
-++  {
-++    fprintf(stderr,
-++           "ERROR: beh: Invalid scheme (\"%s\"), could not determing backend path.\n",
-++           scheme);
-++    exit (CUPS_BACKEND_FAILED);
-++  }
-+ 
-+  /*
-+   * Overwrite the device URI and run the actual backend...
-+@@ -253,17 +287,40 @@ call_backend(char *uri,                 /* I - URI of final destination */
-+   setenv("DEVICE_URI", uri, 1);
-+ 
-+   fprintf(stderr,
-+-	  "DEBUG: beh: Executing backend command line \"%s\"...\n",
-+-	  cmdline);
-++         "DEBUG: beh: Executing backend command line \"%s '%s' '%s' '%s' '%s' '%s'%s%s\"...\n",
-++         backend_path, backend_argv[1], backend_argv[2], backend_argv[3],
-++         backend_argv[4], backend_argv[5],
-++         (backend_argv[6] && backend_argv[6][0] ? " " : ""),
-++         (backend_argv[6] && backend_argv[6][0] ? backend_argv[6] : ""));
-+   fprintf(stderr,
-+ 	  "DEBUG: beh: Using device URI: %s\n",
-+ 	  uri);
-+ 
-+-  retval = system(cmdline) >> 8;
-++  if ((pid = fork()) == 0)
-++  {
-++    retval = execv(backend_path, backend_argv);
-++    if (retval == -1)
-++      fprintf(stderr, "ERROR: Unable to execute backend: %s\n",
-++             strerror(errno));
-++    exit (CUPS_BACKEND_FAILED);
-++  }
-++  else if (pid < 0)
-++  {
-++    fprintf(stderr, "ERROR: Unable to fork for backend\n");
-++    return (CUPS_BACKEND_FAILED);
-++  }
-++
-++  while ((wait_pid = wait(&wait_status)) < 0 && errno == EINTR);
-+ 
-+-  if (retval == -1)
-+-    fprintf(stderr, "ERROR: Unable to execute backend command line: %s\n",
-+-	    strerror(errno));
-++  if (wait_pid >= 0 && wait_status)
-++  {
-++    if (WIFEXITED(wait_status))
-++      retval = WEXITSTATUS(wait_status);
-++    else if (WTERMSIG(wait_status) != SIGTERM)
-++      retval = WTERMSIG(wait_status);
-++    else
-++      retval = 0;
-++  }
-+ 
-+   return (retval);
-+ }
-+@@ -277,8 +334,10 @@ static void
-+ sigterm_handler(int sig) {		/* I - Signal number (unused) */
-+   (void)sig;
-+ 
-+-  fprintf(stderr,
-+-	  "DEBUG: beh: Job canceled.\n");
-++  const char * const msg = "DEBUG: beh: Job canceled.\n";
-++  // The if() is to eliminate the return value and silence the warning
-++  // about an unused return value.
-++  if (write(2, msg, strlen(msg)));
-+ 
-+   if (job_canceled)
-+     _exit(CUPS_BACKEND_OK);
++       if (!pb_close_string_substream(stream, &substream))
++-        return false;
+++        status = false;
++     }
++     
++ #ifdef PB_ENABLE_MALLOC
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.5.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.5.bb
+index 4b1853cc80..6edb2f11ce 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.5.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb_0.4.5.bb
+@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
+ 
+ DEPENDS = "protobuf-native"
+ 
+-SRC_URI = "git://github.com/nanopb/nanopb.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/nanopb/nanopb.git;branch=master;protocol=https \
++           file://CVE-2024-53984.patch \
++           "
+ SRCREV = "c9124132a604047d0ef97a09c0e99cd9bed2c818"
+ 
+ S = "${WORKDIR}/git"
 
