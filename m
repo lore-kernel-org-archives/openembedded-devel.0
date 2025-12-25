@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A51FFE7AD59
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D49E7AD55
 	for <webhook@archiver.kernel.org>; Thu, 25 Dec 2025 12:51:50 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.138121.1766667104869656600
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.137508.1766667106223731531
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Dec 2025 04:51:45 -0800
+ Thu, 25 Dec 2025 04:51:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=d3JOYwkS;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-430f3ef2d37so5035728f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=k+RnRzka;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so67436915e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 04:51:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766667103; x=1767271903; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766667104; x=1767271904; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=en3e8exwUbtZWLkDoecJvYHqleiNWkuWPyEAhPXOF0Q=;
-        b=d3JOYwkSmOPS98aJCHJa/Wc5ZDjGrPjUO8HPd3GFNSryHQNxFoGSzOMWhNEBEWPUPQ
-         JtdTZSAd59BG1grNcNDTq67+hhqx72gt4R4kgczCKuj/MmfGaNbrQ4MB1qVZb63b9DRx
-         3XVT2Fb8ua7S+aRovYXg0rseQGJnTaap2hKit1uAxNf/AQqIlRd1N5RCl0iwyTmK1o3e
-         HAh7UOnwFV2LKH6ZDv6bf1anS32q5S+OvvhJESkDA0y01uZek1OQEE1G/ia9OlUoFBZR
-         P58vnSS5CtLZqG99CRtc6tOG18v0tcqBrbK6V5K3VSDbNNviexLHvmM3hVefeyJRqr6Y
-         sHew==
+        bh=9msYJH7qhc3a6mSMK6ia0zQ1pXFpJlB7cLOPnlxTDag=;
+        b=k+RnRzkanGVsiM2HQlMc9dydSQSX+bHJ5Cn5U/ez5pFT+C4YK1thecuVobSGKa5n/H
+         VYlY2sMeMuATXhWEWj+KOKv5VyR1tPbOd7UZizZ18cLgYe89d41YafnLcuOj1eweHmMm
+         MQbQkQySTaAA3FTxgbq8hOU2Vc2M52QaJdbJfgtFNE/fhvJsIjE7pSnFJ1uTdIGfs+aa
+         OkbXehB7sqEm7Ar58iifl31BU+Ot40LWNcVN+79h8xXMGLc59COPPl5mNnIWtuKeunYa
+         h5q/qa1pmkT4YdAzSXar0K6bDSOQ4OB258MWFfwpNl6CX6r56E7RIgk92ru6A3DUzE05
+         wuDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766667103; x=1767271903;
+        d=1e100.net; s=20230601; t=1766667104; x=1767271904;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=en3e8exwUbtZWLkDoecJvYHqleiNWkuWPyEAhPXOF0Q=;
-        b=ew7GT7VoEZgs6UxqEbiC1xHEUj+Uwf5G9xghNPNXevog2V7l7/BPlhZp7ESVBTuc8y
-         r59dM1oQ5+YLipTPU24GqHn0nosLBo4iCuvrqANP6fWAfAPBVvBNC85KD22wmdejEJ/5
-         Lb1pK0crLIXgR+I1kMid6FsytQpj2qVsELiyKb/OOgd9MfWUt2YAH6qpxhnJ7B9pEIxa
-         Rfi4AoBWj77i9iljPH7xY/9+l2fMI+c0KpIqHkAnkoJ0G16IY3Yc9AWKWqOc4CDhGt6H
-         aV4Ih+GsP369TIUdjzJHJY3s1R1dkjQ5C2C93QbfHacEdrbaPflaImuspNXdBBlMqNHS
-         iefg==
-X-Gm-Message-State: AOJu0YyvygZBqFhwr3WWr8C/W31vLys+YhXNhCjI+SE6VFlUvj12IAIQ
-	CFCBXuuIxpL9M0jc9giEV2KjPKKv5zUx3kb1dTKbw32DdfSa5Uylu2YOgaGyuw==
-X-Gm-Gg: AY/fxX6Bq94Lc4G98cfXJTFKERvT15I6n6NgIVeQnUKnl8Qa2AXQrKGYj7n/HVz+zPk
-	fnaRKvO9n0/tsFrmGwCHT+HlJC2RQ6jS2bufOTDkwQMBL1SGkFqkf2CZqkCWsuPo4f8vp32Y190
-	3X7CGqAN1yrRDsgyZ2O2pdMLiT3h1GrWINtyG3Nd3FVQDVhZmQoz1UdkJayLynj1lneu9UgguZY
-	EAkLAOUHdl0FRKpMxwg/l8OKUZEHiek6pE3ZwmHTxyiutcXH8K+Uh1PyrxvZHVtOMQZ49sObWBE
-	vguV3gjzVf4i0Yw5+3jGCoxgwN+BkFHkVUVsBcQ7Xu3U3jEJ7OAIupnIhn0vsc5a6sr0jO+06Fz
-	Nd8B5gUmoss9IHbs8gQVOW6pypUIcPEPZl0ikLGkgF8C5F5s9/Lg76QtLY2i/4zO5v9rZ5pjUD0
-	mMRVUZ3CQCPQ4jk6JJdpc=
-X-Google-Smtp-Source: AGHT+IH0cwbfjCxfbWHmqQHefg17azz772Em+rEFyWd9vsRcEYsGxym24IkIRzl3r93fd6gQrGSywQ==
-X-Received: by 2002:a05:6000:7:b0:431:3a5:d9c1 with SMTP id ffacd0b85a97d-4324e4fd96emr17609502f8f.30.1766667103136;
-        Thu, 25 Dec 2025 04:51:43 -0800 (PST)
+        bh=9msYJH7qhc3a6mSMK6ia0zQ1pXFpJlB7cLOPnlxTDag=;
+        b=PT8bPKgOTRfR+F4Q8+bjY4krpq9atw4TQuk0Mrs9A+fcL74THFuvPo6kSv75077L6L
+         mfuHexFRkeyRFw2UyhaFdDmAlzG+LAacDy19VDAOwiHOSC30TvqUjsylVUxXxz8T2es3
+         UYasE+MrnUxyXjUZewEdX2tctHWCHbDUcgTh6SE71Lx2mHyEIfVB6ZF3k4PmAXptHKBr
+         hSwAhmud3dR8CE6sqjlOT7DtyTwcaJuPcxy3F8NNsupeJcCvAt+32bUT0jvLZVJLmIVx
+         Kw8lTc6yjS2EkKbQhUjUIK1ohHkRVIjrK+X1Rrme9IOmPvBDvSW3FPwIuCFXkWbieQZr
+         ZdWw==
+X-Gm-Message-State: AOJu0YxzQWnrRL4JyK1x7gksWvHO5eFf5v8KzzkGzmV2C2nwPaJEmsZb
+	t6a3Mf+sdqieUlK+TKLDVbZ9oBrk7Y5T5ExWrrE4u/AwY6b5m+KdtNnwoDA54A==
+X-Gm-Gg: AY/fxX5XOMkBl3p01IgHwTldKzc7umUTJIT13EGP6AFNihTHyDuUeaHz5KvrRaN4JbQ
+	gH7/QbxAulyFWhOJB6JlZVRNJ7vDP/g/kowU4oSKDTeaNbDLDMbP4KctPy2TmsIwaZ7WXT+GsFj
+	gxizHb2CYMmIYAyg4FhHCCxQyzIkITzHbJ6ti3FWjXTT+FDKPEAA6ANkxt7Ic0HVhFwwH64EtNU
+	Arg9sA0SrIkZhq/nV7XQSFCO1oK4UFur3oCiexT/iaVWEnB7Qkc5FvGaBnH4lRBiX4ijTARjYW3
+	7tm4yG+xzpA2fcStJ2s27myvgH2jihVybuvEW3ZxlCnzSaAWu/xnCEBc771fY4zTAO/DvxBlUMN
+	EbccN1yeoUyo68MCzvKsfxTI0zD8BWRjku8ycIa+DbFrUjWZ8V3dCJLplJEvSTp0yQf9HTCuq/J
+	gP9aMKukB1
+X-Google-Smtp-Source: AGHT+IE/X8XWyXGHgjN5fXGWCwXEtNOa2VFWOxjdQS6LMFKx2n2zlArEJo8IehYBfDV4RaPcvwu1CQ==
+X-Received: by 2002:a05:6000:2305:b0:431:808:2d49 with SMTP id ffacd0b85a97d-4324e4c6fbfmr20969374f8f.8.1766667104473;
+        Thu, 25 Dec 2025 04:51:44 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.42
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea830fesm40219073f8f.20.2025.12.25.04.51.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Dec 2025 04:51:42 -0800 (PST)
+        Thu, 25 Dec 2025 04:51:44 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 5/8] cups-filters: patch CVE-2025-57812
-Date: Thu, 25 Dec 2025 13:51:36 +0100
-Message-ID: <20251225125139.2436941-5-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 7/8] cups-filters: patch CVE-2023-24805
+Date: Thu, 25 Dec 2025 13:51:38 +0100
+Message-ID: <20251225125139.2436941-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251225125139.2436941-1-skandigraun@gmail.com>
 References: <20251225125139.2436941-1-skandigraun@gmail.com>
@@ -68,165 +68,248 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 25 Dec 2025 12:51:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122917
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122919
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-57812
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-24805
 
-Backport the patch that is referenced by te nvd report.
+Pick the patch referenced by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-printing/cups/cups-filters.inc    |   4 +-
- .../cups/cups-filters/CVE-2025-57812.patch    | 127 ++++++++++++++++++
- 2 files changed, 130 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
+ .../recipes-printing/cups/cups-filters.inc    |   1 +
+ .../cups/cups-filters/CVE-2023-24805.patch    | 213 ++++++++++++++++++
+ 2 files changed, 214 insertions(+)
+ create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
 
 diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
-index 5952b5a2a6..26a7c5037a 100644
+index fe87ac98ae..ddd6451ccc 100644
 --- a/meta-oe/recipes-printing/cups/cups-filters.inc
 +++ b/meta-oe/recipes-printing/cups/cups-filters.inc
-@@ -9,7 +9,9 @@ SECTION = "console/utils"
- DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
- DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
- 
--SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
-+SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
-+           file://CVE-2025-57812.patch \
-+           "
+@@ -12,6 +12,7 @@ DEPENDS:class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-nat
+ SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz \
+            file://CVE-2025-57812.patch \
+            file://CVE-2025-64524.patch \
++           file://CVE-2023-24805.patch \
+            "
  
  inherit autotools-brokensep gettext pkgconfig
- 
-diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
+diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
 new file mode 100644
-index 0000000000..1af27c10c1
+index 0000000000..fd8ef7b806
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-57812.patch
-@@ -0,0 +1,127 @@
-+From c21664d57ebecb2c6ed05b38b1c39995ab14e916 Mon Sep 17 00:00:00 2001
-+From: zdohnal <zdohnal@redhat.com>
-+Date: Mon, 10 Nov 2025 18:58:31 +0100
-+Subject: [PATCH] Merge commit from fork
++++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2023-24805.patch
+@@ -0,0 +1,213 @@
++From c90dcbd2887c1221a1c298c7a194b1d93ed0e501 Mon Sep 17 00:00:00 2001
++From: Till Kamppeter <till.kamppeter@gmail.com>
++Date: Wed, 17 May 2023 11:12:37 +0200
++Subject: [PATCH] Merge pull request from GHSA-gpxc-v2m8-fr3x
 +
-+* Fix heap-buffer overflow write in cfImageLut
++* beh backend: Use execv() instead of system() - CVE-2023-24805
 +
-+1. fix for CVE-2025-57812
++With execv() command line arguments are passed as separate strings and
++not the full command line in a single string. This prevents arbitrary
++command execution by escaping the quoting of the arguments in a job
++with forged job title.
 +
-+* Reject color images with 1 bit per sample
++* beh backend: Extra checks against odd/forged input - CVE-2023-24805
 +
-+2. fix for CVE-2025-57812
++- Do not allow '/' in the scheme of the URI (= backend executable
++  name), to assure that only backends inside /usr/lib/cups/backend/
++  are used.
 +
-+* Reject images where the number of samples does not correspond with the color space
++- Pre-define scheme buffer to empty string, to be defined for case of
++  uri being NULL.
 +
-+3. fix for CVE-2025-57812
++- URI must have ':', to split off scheme, otherwise error.
 +
-+* Reject images with planar color configuration
++- Check return value of snprintf() to create call path for backend, to
++  error out on truncation of a too long scheme or on complete failure
++  due to a completely odd scheme.
 +
-+4. fix for CVE-2025-57812
++* beh backend: Further improvements - CVE-2023-24805
 +
-+* Reject images with vertical scanlines
++- Use strncat() instead of strncpy() for getting scheme from URI, the latter
++  does not require setting terminating zero byte in case of truncation.
 +
-+5.  fix for CVE-2025-57812
++- Also exclude "." or ".." as scheme, as directories are not valid CUPS
++  backends.
 +
-+---------
++- Do not use fprintf() in sigterm_handler(), to not interfere with a
++  fprintf() which could be running in the main process when
++  sigterm_handler() is triggered.
 +
-+Co-authored-by: Till Kamppeter <till.kamppeter@gmail.com>
-+CVE: CVE-2025-57812
-+Upstream-Status: Backport [https://github.com/OpenPrinting/libcupsfilters/commit/b69dfacec7f176281782e2f7ac44f04bf9633cfa]
++- Use "static volatile int" for global variable job_canceled.
++
++CVE: CVE-2023-24805
++Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/8f274035756c04efeb77eb654e9d4c4447287d65]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ cupsfilters/image-tiff.c | 46 +++++++++++++++++++++++++++++++++++++++-
-+ 1 file changed, 45 insertions(+), 1 deletion(-)
++ backend/beh.c | 107 +++++++++++++++++++++++++++++++++++++++-----------
++ 1 file changed, 83 insertions(+), 24 deletions(-)
 +
-+diff --git a/cupsfilters/image-tiff.c b/cupsfilters/image-tiff.c
-+index 4fd8756..b34c1ef 100644
-+--- a/cupsfilters/image-tiff.c
-++++ b/cupsfilters/image-tiff.c
-+@@ -43,6 +43,7 @@ _cupsImageReadTIFF(
-+   TIFF		*tif;			/* TIFF file */
-+   uint32	width, height;		/* Size of image */
-+   uint16	photometric,		/* Colorspace */
-++		planar,			/* Color components in separate planes */
-+ 		compression,		/* Type of compression */
-+ 		orientation,		/* Orientation */
-+ 		resunit,		/* Units for resolution */
-+@@ -115,6 +116,15 @@ _cupsImageReadTIFF(
-+     return (-1);
-+   }
++diff --git a/backend/beh.c b/backend/beh.c
++index 225fd27..e864c22 100644
++--- a/backend/beh.c
+++++ b/backend/beh.c
++@@ -22,12 +22,13 @@
++ #include "backend-private.h"
++ #include <cups/array.h>
++ #include <ctype.h>
+++#include <sys/wait.h>
 + 
-++  if (TIFFGetField(tif, TIFFTAG_PLANARCONFIG, &planar) &&
-++      planar == PLANARCONFIG_SEPARATE)
-++  {
-++    fputs("DEBUG: Images with planar color configuration are not supported!\n", stderr);
-++    TIFFClose(tif);
-++    fclose(fp);
-++    return (1);
-++  }
-++
-+   if (!TIFFGetField(tif, TIFFTAG_COMPRESSION, &compression))
-+   {
-+     fputs("DEBUG: No compression tag in the file!\n", stderr);
-+@@ -129,6 +139,15 @@ _cupsImageReadTIFF(
-+   if (!TIFFGetField(tif, TIFFTAG_BITSPERSAMPLE, &bits))
-+     bits = 1;
++ /*
++  * Local globals...
++  */
 + 
-++  if (bits == 1 && samples > 1)
-++  {
-++    fprintf(stderr, "ERROR: Color images with 1 bit per sample not supported! "
-++                    "Samples per pixel: %d; Bits per sample: %d\n", samples, bits);
-++    TIFFClose(tif);
-++    fclose(fp);
-++    return (1);
-++  }
-++
++-static int		job_canceled = 0; /* Set to 1 on SIGTERM */
+++static volatile int	job_canceled = 0; /* Set to 1 on SIGTERM */
++ 
++ /*
++  * Local functions...
++@@ -213,20 +214,43 @@ call_backend(char *uri,                 /* I - URI of final destination */
++ 	     char **argv,		/* I - Command-line arguments */
++ 	     char *filename) {          /* I - File name of input data */
++   const char	*cups_serverbin;	/* Location of programs */
+++  char		*backend_argv[8];	/* Arguments for called CUPS backend */
++   char		scheme[1024],           /* Scheme from URI */
++                 *ptr,			/* Pointer into scheme */
++-		cmdline[65536];		/* Backend command line */
++-  int           retval;
+++		backend_path[2048];	/* Backend path */
+++  int		pid,
+++		wait_pid,
+++		wait_status,
+++		retval = 0;
+++  int		bytes;
++ 
 +  /*
-+   * Get the image orientation...
++   * Build the backend command line...
 +   */
-+@@ -181,6 +200,23 @@ _cupsImageReadTIFF(
-+   else
-+     alpha = 0;
 + 
-++  //
-++  // Check whether number of samples per pixel corresponds with color space
-++  //
-++
-++  if ((photometric == PHOTOMETRIC_RGB && (samples < 3 || samples > 4)) ||
-++      (photometric == PHOTOMETRIC_SEPARATED && samples != 4))
++-  strncpy(scheme, uri, sizeof(scheme) - 1);
++-  if (strlen(uri) > 1023)
++-    scheme[1023] = '\0';
+++  scheme[0] = '\0';
+++  strncat(scheme, uri, sizeof(scheme) - 1);
++   if ((ptr = strchr(scheme, ':')) != NULL)
++     *ptr = '\0';
+++  else
 ++  {
-++    fprintf(stderr, "DEBUG: Number of samples per pixel does not correspond to color space! "
-++                    "Color space: %s; Samples per pixel: %d\n",
-++                    (photometric == PHOTOMETRIC_RGB ? "RGB" :
-++                     (photometric == PHOTOMETRIC_SEPARATED ? "CMYK" : "Unknown")),
-++                    samples);
-++    TIFFClose(tif);
-++    fclose(fp);
-++    return (1);
+++    fprintf(stderr,
+++           "ERROR: beh: Invalid URI, no colon (':') to mark end of scheme part.\n");
+++    exit (CUPS_BACKEND_FAILED);
 ++  }
+++  if (strchr(scheme, '/'))
+++  {
+++    fprintf(stderr,
+++           "ERROR: beh: Invalid URI, scheme contains a slash ('/').\n");
+++    exit (CUPS_BACKEND_FAILED);
+++  }
+++  if (!strcmp(scheme, ".") || !strcmp(scheme, ".."))
+++  {
+++    fprintf(stderr,
+++           "ERROR: beh: Invalid URI, scheme (\"%s\") is a directory.\n",
+++           scheme);
+++    exit (CUPS_BACKEND_FAILED);
+++  }
++ 
++   if ((cups_serverbin = getenv("CUPS_SERVERBIN")) == NULL)
++     cups_serverbin = CUPS_SERVERBIN;
++@@ -235,16 +259,26 @@ call_backend(char *uri,                 /* I - URI of final destination */
++     fprintf(stderr,
++ 	    "ERROR: beh: Direct output into a file not supported.\n");
++     exit (CUPS_BACKEND_FAILED);
++-  } else
++-    snprintf(cmdline, sizeof(cmdline),
++-	     "%s/backend/%s '%s' '%s' '%s' '%s' '%s' %s",
++-	     cups_serverbin, scheme, argv[1], argv[2], argv[3],
++-	     /* Apply number of copies only if beh was called with a
++-		file name and not with the print data in stdin, as
++-	        backends should handle copies only if they are called
++-	        with a file name */
++-	     (argc == 6 ? "1" : argv[4]),
++-	     argv[5], filename);
+++  } 
 ++
+++  backend_argv[0] = uri;
+++  backend_argv[1] = argv[1];
+++  backend_argv[2] = argv[2];
+++  backend_argv[3] = argv[3];
+++  backend_argv[4] = (argc == 6 ? "1" : argv[4]);
+++  backend_argv[5] = argv[5];
+++  backend_argv[6] = filename;
+++  backend_argv[7] = NULL;
+++
+++  bytes = snprintf(backend_path, sizeof(backend_path),
+++                  "%s/backend/%s", cups_serverbin, scheme);
+++  if (bytes < 0 || bytes >= sizeof(backend_path))
+++  {
+++    fprintf(stderr,
+++           "ERROR: beh: Invalid scheme (\"%s\"), could not determing backend path.\n",
+++           scheme);
+++    exit (CUPS_BACKEND_FAILED);
+++  }
++ 
 +  /*
-+   * Check the size of the image...
-+   */
-+@@ -253,6 +289,14 @@ _cupsImageReadTIFF(
-+         break;
-+   }
++   * Overwrite the device URI and run the actual backend...
++@@ -253,17 +287,40 @@ call_backend(char *uri,                 /* I - URI of final destination */
++   setenv("DEVICE_URI", uri, 1);
 + 
-++  if (orientation >= ORIENTATION_LEFTTOP)
++   fprintf(stderr,
++-	  "DEBUG: beh: Executing backend command line \"%s\"...\n",
++-	  cmdline);
+++         "DEBUG: beh: Executing backend command line \"%s '%s' '%s' '%s' '%s' '%s'%s%s\"...\n",
+++         backend_path, backend_argv[1], backend_argv[2], backend_argv[3],
+++         backend_argv[4], backend_argv[5],
+++         (backend_argv[6] && backend_argv[6][0] ? " " : ""),
+++         (backend_argv[6] && backend_argv[6][0] ? backend_argv[6] : ""));
++   fprintf(stderr,
++ 	  "DEBUG: beh: Using device URI: %s\n",
++ 	  uri);
++ 
++-  retval = system(cmdline) >> 8;
+++  if ((pid = fork()) == 0)
 ++  {
-++    fputs("ERROR: TIFF files with vertical scanlines are not supported!\n", stderr);
-++    TIFFClose(tif);
-++    fclose(fp);
-++    return (-1);
+++    retval = execv(backend_path, backend_argv);
+++    if (retval == -1)
+++      fprintf(stderr, "ERROR: Unable to execute backend: %s\n",
+++             strerror(errno));
+++    exit (CUPS_BACKEND_FAILED);
+++  }
+++  else if (pid < 0)
+++  {
+++    fprintf(stderr, "ERROR: Unable to fork for backend\n");
+++    return (CUPS_BACKEND_FAILED);
 ++  }
 ++
-+   switch (orientation)
-+   {
-+     case ORIENTATION_TOPRIGHT :
-+@@ -1455,7 +1499,7 @@ _cupsImageReadTIFF(
-+ 	      }
+++  while ((wait_pid = wait(&wait_status)) < 0 && errno == EINTR);
 + 
-+ 	      if (lut)
-+-	        cupsImageLut(out, img->xsize * 3, lut);
-++	        cupsImageLut(out, img->xsize * bpp, lut);
++-  if (retval == -1)
++-    fprintf(stderr, "ERROR: Unable to execute backend command line: %s\n",
++-	    strerror(errno));
+++  if (wait_pid >= 0 && wait_status)
+++  {
+++    if (WIFEXITED(wait_status))
+++      retval = WEXITSTATUS(wait_status);
+++    else if (WTERMSIG(wait_status) != SIGTERM)
+++      retval = WTERMSIG(wait_status);
+++    else
+++      retval = 0;
+++  }
 + 
-+               _cupsImagePutRow(img, 0, y, img->xsize, out);
-+             }
++   return (retval);
++ }
++@@ -277,8 +334,10 @@ static void
++ sigterm_handler(int sig) {		/* I - Signal number (unused) */
++   (void)sig;
++ 
++-  fprintf(stderr,
++-	  "DEBUG: beh: Job canceled.\n");
+++  const char * const msg = "DEBUG: beh: Job canceled.\n";
+++  // The if() is to eliminate the return value and silence the warning
+++  // about an unused return value.
+++  if (write(2, msg, strlen(msg)));
++ 
++   if (job_canceled)
++     _exit(CUPS_BACKEND_OK);
 
