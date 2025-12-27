@@ -1,758 +1,250 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E759AE92710
-	for <webhook@archiver.kernel.org>; Sat, 27 Dec 2025 11:38:17 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6481.1766835493936321238
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E268EE9271F
+	for <webhook@archiver.kernel.org>; Sat, 27 Dec 2025 21:47:40 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14924.1766872051136558267
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 Dec 2025 03:38:14 -0800
+ Sat, 27 Dec 2025 13:47:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bSLoZBf2;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47bdbc90dcaso49380055e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 03:38:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766835492; x=1767440292; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=jWGCO++B2WLAJJJOnLaeS/+djIvjVGmQQAyHRhnp19o=;
-        b=bSLoZBf2PiG7fj+JYaQlVb5yZ92oVxg04o9lrk1MQ7lOnINmSagcqk1nYj5ck7IBSn
-         vJ+Kicn1ZBL7MBXRuS/TwLVN/mDjA7satsjmK2HhWPr+OVJnvLYWnfrjXf+QYYGcRmT3
-         q45IS+/7EFSHi2Zn7OPipMP0TVBU5PqPuLqRrDByUp3qYOlbKsAAvdTN2uhtGIKHMcG3
-         YXszU9MYnV3dYNM8vlS7o5lUOxOSS6sOq7KRQFTShF/ao/9jcBpPzkEGxEM06YrGTg3p
-         yuIogZwddPugo84O9W55IC0Kl4N4xW5/OWsikJXOaTH3BJ2PdVm1EA2aVta6QyaRhMiJ
-         S2fA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766835492; x=1767440292;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=jWGCO++B2WLAJJJOnLaeS/+djIvjVGmQQAyHRhnp19o=;
-        b=NE+YkdhssUZ++KqpIV9Ox6eppLmtr2XoIOSMrejRm977Pe6pwYGaR9Z+TLuOUSFVEz
-         7B+gM60phoGCXekFLh5lmCzPitBquDe7/GGYQhIAx4YYeTYQP5xtEtvC5P1znvW6zJS5
-         4kmu0zIafbzWOgJOnH4qo/+bJDCS8/4ZY+JU3DGWOo0gKPB8bTXe+nWjsxJUDsinEboG
-         IWUzWmSwxS8iNP7KAchabq0ehcpPOJzb7LLRmbg17LFy4xUcSgUenTzvIF9UgpAxxILd
-         NBD93Z/ZEc1SeACuIiTZZfFoZE5bESqj1JNTVUeGAXEoal8MH0Xk7TcRjdr4kdIMQpNi
-         8YRw==
-X-Gm-Message-State: AOJu0Yxud7aR71qFjxo/q48tPTDxUPdCSEAqU9a0ybVeD4LlXfUYPiPp
-	+noVTk9PFMRJ7nUz01tvOuDnNRCZco+w2NB82r7MUl3XE1s2CLVDnyMUo2RfDQ==
-X-Gm-Gg: AY/fxX4UtRH6Xf7/5vaWmqEHXu7Q1kyuaiRFvQ+qyorzvG/jLZYpRtbFPihNlugo6LH
-	riycwj8x2aFl0+ytdc3BPVPKouD/Z5bZXcbFxkuthY0x+EuM6hmXq9GtRsXmE3wyK3slRLTtIRP
-	cBM94/WwQsg1piu0LVNc/y2KDWMjyGS7T/YmOF3YjtvR2MV6KlfPCnLmZsK3aFaQzExb+13ob56
-	0STbOKCErUpOxQQqwTgkddeI2ArFHKf1x9VM2I8skJm/nq8pRJSZlo8jey9osmqQv9t0u/9V1T4
-	LycDlE8iSSSajXjNghSduvAb4acQ3FJ9TI1MtDbiJS6MhxXdPDETl5YwIDNBiKFcxektxT/1/YT
-	XZQSuLbsmjb2C3Y7TrUXw8+qk7czDyF8BKWKEkhVqdLXJTfhko+Em9ZeQhvm8wiGcLctqDtGRs7
-	wtWE+kvVGZ
-X-Google-Smtp-Source: AGHT+IFdDWtqsulwqmBDH+LZJZN3Cv6sQB4TtotTBHpWUZrwYF8QWLg/iQPXsAjB6EAvos36sCCIMA==
-X-Received: by 2002:a5d:588e:0:b0:42f:bc61:d1be with SMTP id ffacd0b85a97d-4324e4f6832mr30293161f8f.32.1766835492141;
-        Sat, 27 Dec 2025 03:38:12 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43277b82a58sm17023023f8f.6.2025.12.27.03.38.11
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 27 Dec 2025 03:38:11 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout06.t-online.de (Postfix) with SMTP id 575BC55C
+	for <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 22:47:29 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.162.170]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vZc86-3KqcwT0; Sat, 27 Dec 2025 22:47:18 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 4/4] bubblewrap: upgrade 0.10.0 -> 0.11.0
-Date: Sat, 27 Dec 2025 12:38:08 +0100
-Message-ID: <20251227113808.3304770-4-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] mpv: update 0.40.0 -> 0.41.0
+Date: Sat, 27 Dec 2025 22:47:11 +0100
+Message-ID: <20251227214712.206501-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251227113808.3304770-1-skandigraun@gmail.com>
-References: <20251227113808.3304770-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1766872038-6F7D10FB-C12C64BC/0/0 CLEAN NORMAL
+X-TOI-MSGID: 082b9607-1b23-4484-94af-5fd4cc8ff1c8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 11:38:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122953
+ <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 21:47:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122954
 
-One big change that comes with this update is the build system change:
-the project removed autotools and now uses meson.
+Release 0.41.0
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Dropped 0001-Use-stdbool.h-for-booleans.patch because it is included
-in this release.
+We are excited to announce the release of mpv 0.41.0.
 
-Changelog: https://github.com/containers/bubblewrap/releases/tag/v0.11.0
+Key highlights:
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+* The libplacebo based `gpu-next` is now the default, over `gpu`
+* Vulkan hardware decoding is preferred over other APIs
+* New context_menu.lua script for right-click context menus
+* AAudio backend for modern, HNI-free audio output on Android
+* Improved default color management for gpu-next, and handling on Wayland
+* Color representation protocol support for Wayland
+* Tablet input support for Wayland
+* Clipboard writing support for Wayland and a clipboard backend for X11
+* Ambient light support on Linux (using sysfs ALS)
+* Built-in helpers to register mpv as a media app on Windows
+
+This release requires FFmpeg 6.1 or newer and libplacebo 6.338.2 or newer=
+.
+
+- clipboard-wayland: support clipboard writing
+- wayland: add support for wp-color-representation-v1
+- wayland: tablet input support
+- vo_gpu_next: add support for blend-subtitles=3Dvideo
+- meson: add mpv-register and mpv-unregister helpers on Windows
+- context_menu.lua: add this script
+- select.lua: add edit-config-file and edit-input-conf
+- osc.lua: add indicator for buffering/loading
+- osdep/linux-als: support 'ambient-light' property on Linux
+- clipboard-x11: add x11 clipboard backend
+- ao/aaudio: implement native AAudio backend for Android
+
+- vd_lavc: prefer Vulkan hwdec when available
+- vd_lavc: prefer non-copy hwdec before falling back to -copy variant
+- vo: move vo_mediacodec_embed to not be the default on Android
+- sub/osd_libass: don't rerender OSD if not changed
+- vo: prefer vo_gpu_next over vo_gpu by default
+- vo_gpu_next: respect ICC profile color space over any metadata
+- vo_gpu_next: linearize sRGB as a pure 2.2 power function
+- meson: warn if building with SDL2 due to known problems
+- osxbundle: make bundle category configurable and default to video
+- ao_pipewire: avoid setting any media.role by default
+
+- sub: add control for libass caching options (glyph-limit, bitmap-max-si=
+ze)
+- vo: add options to control background tile appearance (transparency)
+- command: add default and forced flags to the track add commands
+- vo_gpu_next: add options to control subtitle peak for HDR output
+- video/out/d3d11: add d3d11 composition mode support
+- vd_lavc: add --hwdec-threads
+- stream_bluray: add --bluray-angle
+- vo_gpu_next: add options to control output colorspace metadata more pre=
+cisely
+- sub: make --sub-fix-timing configurable
+- vo_gpu_next: add --hdr-reference-white
+- audio/out: add --audio-set-media-role
+
+- options: revert --prefetch-playlist default back to 'no'
+- vo_gpu_next: change --target-colorspace-hint to 'auto' by default
+- options: handle runtime --wid change
+- options: reduce swapchain-depth to 2 by default
+- screenshot: add osd and scaled flags to screenshot commands
+
+- vo_kitty: add auto-multiplexer-passthrough option
+- vd_lavc: enable FFv1 hwaccel by default
+- clipboard-wayland: prevent reading from hung up fd
+- demux_mkv: fix compilation after deprecated definitions removal
+- filters: handle flipping video if displaymatrix indicates so
+- player/scripting: fix race condition when destroying clients
+- {osd,msg}: use PU codepoints for escape codes instead of invalid UTF-8
+- vo_dmabuf_wayland: only load needed hardware decoding drivers
+- video/image_writer: tag accurate bit depth
+- demux_lavf: fix unconstrained cache size with wrapped AVFrame packets
+- libarchive: fix reading name of certain UTF-8 files
+- sub/sd_lavc: fix decoding with libaribb24
+- ao_avfoundation: fix memory leak
+- osc.lua: fix volume icon not updating while paused
+- context_wayland: implement target_csp for wayland
+- vo_gpu: fix target colorspace for redrawn frames
+- vo_dmabuf_wayland: don't set HDR metadata on SDR transfers
+- vo_gpu_next: don't do partial updates on hint luminance
+- sub/ass_mp: add missing padding for ass packer
+- stream_dvb: allow to enforce DVB-S/T for old zap format channels.conf
+- demux_libarchive: fix reading archives with '%' in stream URL path
+- vo_gpu_next: allow UINT upload if no other format is supported
+- ytdl_hook.lua: fix incorrect default format used with yt-dlp
+- vo_gpu_next: allow unsetting LUTs
+- stream_bluray: use bd_get_main_title() to get main title
+- vo_gpu_next: when tone-mapping, set better maxCLL value
+- stream_libarchive: seek source stream to 0 before probing
+- path-unix: support ~~desktop path expansion
+- ytdl_hook.lua: don't crash if playlist entries don't have an usable URL
+- mac/vulkan: fix frame not displayed when paused
+- mac/common: render first frame on init if possible
+- video/out/w32_common: support --wid=3D0
+- demux_mkv: map and expose hearing/visual impaired flags
+- player/misc: show percentage progress for --stream-dump
+- command: fix null dereference for invalid command in input-commands
+- cplugin: fix missing init of pfn_mpv_get_time_ns
+- vo_dmabuf_wayland: actually reuse OSD buffers
+- mp_image: add support for AVAlphaMode
+- vo_gpu_next: add --border-background=3Dblur and --background-blur-radiu=
+s
+- demux/cue: fix crash when there are no tracks
+- vf_format: add some basic HDR10 metadata
+- vo/context_android: fix surface tearing on resize
+- meson: remove redundant 'sdl2' option
+- mac/common: fix window position on multi monitor setups
+- vo_gpu_next: limit min_luma to 1000:1 contrast ratio in SDR mode
+- ao_pipewire: fix some incorrect channel mappings
+- wayland: correct geometry handling for rotated outputs
+- demux: clear packet pool when upper memory limit is lowered
+- mp_image: add ycgco-{re,ro} support
+- wayland: convert luminance values to libplacebo space
+- vo: trigger manual redraws at most at slightly over display fps
+- osxbundle: add new macOS 26 compatible App icon
+- wayland: support color-management-v1 version 2
+
+This listing is not complete. Check DOCS/client-api-changes.rst for a his=
+tory
+of changes to the client API, and DOCS/interface-changes.rst for a histor=
+y
+of changes to other user-visible interfaces.
+
+A complete changelog can be seen by running `git log v0.40.0..v0.41.0`
+in the git repository or by visiting
+<https://github.com/mpv-player/mpv/compare/v0.40.0...v0.41.0>.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-Use-stdbool.h-for-booleans.patch     | 633 ------------------
- ...blewrap_0.10.0.bb => bubblewrap_0.11.0.bb} |  10 +-
- 2 files changed, 4 insertions(+), 639 deletions(-)
- delete mode 100644 meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
- rename meta-oe/recipes-security/bubblewrap/{bubblewrap_0.10.0.bb => bubblewrap_0.11.0.bb} (55%)
+ .../0001-mpv-fix-build-with-ffmpeg-8.0.patch  | 41 -------------------
+ .../mplayer/{mpv_0.40.0.bb =3D> mpv_0.41.0.bb}  |  3 +-
+ 2 files changed, 1 insertion(+), 43 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/0001-mpv-fix-b=
+uild-with-ffmpeg-8.0.patch
+ rename meta-oe/recipes-multimedia/mplayer/{mpv_0.40.0.bb =3D> mpv_0.41.0=
+.bb} (97%)
 
-diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch b/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/0001-mpv-fix-build-wi=
+th-ffmpeg-8.0.patch b/meta-oe/recipes-multimedia/mplayer/mpv/0001-mpv-fix=
+-build-with-ffmpeg-8.0.patch
 deleted file mode 100644
-index 2566314ce3..0000000000
---- a/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+index ea705a4c73..0000000000
+--- a/meta-oe/recipes-multimedia/mplayer/mpv/0001-mpv-fix-build-with-ffmp=
+eg-8.0.patch
 +++ /dev/null
-@@ -1,633 +0,0 @@
--From 4572dd9378c876349e02403cf7f6031c45281f85 Mon Sep 17 00:00:00 2001
--From: "Simon McVittie" <smcv@collabora.com>
--Date: Tue, 8 Apr 2025 16:29:18 +0900
--Subject: [PATCH] Use stdbool.h for booleans
+@@ -1,41 +0,0 @@
+-From dd80e5841894f854e2d994601016151531521d9a Mon Sep 17 00:00:00 2001
+-From: Markus Volk <f_l_k@t-online.de>
+-Date: Tue, 16 Sep 2025 09:37:48 +0200
+-Subject: [PATCH] mpv: fix build with ffmpeg 8.0
 -
--* backport fix from:
--  https://github.com/containers/bubblewrap/pull/660
--  But patch rework for this version.
--  In gcc 15, bool became a reserved keyword in C23, causing conflicts with our custom bool definition.
+-quick fix, only compile tested
 -
--  See also, https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+-Signed-off-by: Markus Volk <f_l_k@t-online.de>
 -
--* to fix:
--  http://errors.yoctoproject.org/Errors/Details/851183/
--  ../bubblewrap-0.10.0/utils.h:46:13: error: 'bool' cannot be defined via 'typedef'
--   46 | typedef int bool;
--      |             ^~~~
--
--Upstream-Status: Backport [https://github.com/containers/bubblewrap/pull/660]
--Signed-off-by: mark.yang <mark.yang@lge.com>
+-Upstream-Status: Pending
 ----
-- bind-mount.c |  20 ++++----
-- bubblewrap.c | 134 +++++++++++++++++++++++++--------------------------
-- utils.c      |  16 +++---
-- utils.h      |   5 +-
-- 4 files changed, 86 insertions(+), 89 deletions(-)
+- demux/demux_mkv.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
 -
--diff --git a/bind-mount.c b/bind-mount.c
--index 2757cae..bf7f68d 100644
----- a/bind-mount.c
--+++ b/bind-mount.c
--@@ -76,7 +76,7 @@ match_token (const char *token, const char *token_end, const char *str)
--   if (token == token_end)
--     return *str == 0;
-- 
---  return FALSE;
--+  return false;
-- }
-- 
-- static unsigned long
--@@ -281,12 +281,12 @@ parse_mountinfo (int  proc_fd,
--         die ("Can't parse mountinfo line");
--       rest = line + consumed;
-- 
---      rest = skip_token (rest, TRUE); /* mountroot */
--+      rest = skip_token (rest, true); /* mountroot */
--       mountpoint = rest;
---      rest = skip_token (rest, FALSE); /* mountpoint */
--+      rest = skip_token (rest, false); /* mountpoint */
--       mountpoint_end = rest++;
--       options = rest;
---      rest = skip_token (rest, FALSE); /* vfs options */
--+      rest = skip_token (rest, false); /* vfs options */
--       options_end = rest;
-- 
--       *mountpoint_end = 0;
--@@ -324,7 +324,7 @@ parse_mountinfo (int  proc_fd,
--       MountInfoLine *parent = by_id[this->parent_id];
--       MountInfoLine **to_sibling;
--       MountInfoLine *sibling;
---      bool covered = FALSE;
--+      bool covered = false;
-- 
--       if (!has_path_prefix (this->mountpoint, root_mount))
--         continue;
--@@ -333,7 +333,7 @@ parse_mountinfo (int  proc_fd,
--         continue;
-- 
--       if (strcmp (parent->mountpoint, this->mountpoint) == 0)
---        parent->covered = TRUE;
--+        parent->covered = true;
-- 
--       to_sibling = &parent->first_child;
--       sibling = parent->first_child;
--@@ -344,7 +344,7 @@ parse_mountinfo (int  proc_fd,
--            * covered by the sibling, and we drop it. */
--           if (has_path_prefix (this->mountpoint, sibling->mountpoint))
--             {
---              covered = TRUE;
--+              covered = true;
--               break;
--             }
-- 
--@@ -499,7 +499,7 @@ bind_mount_result_to_string (bind_mount_result res,
--                              bool *want_errno_p)
-- {
--   char *string = NULL;
---  bool want_errno = TRUE;
--+  bool want_errno = true;
-- 
--   switch (res)
--     {
--@@ -521,7 +521,7 @@ bind_mount_result_to_string (bind_mount_result res,
-- 
--       case BIND_MOUNT_ERROR_FIND_DEST_MOUNT:
--         string = xasprintf ("Unable to find \"%s\" in mount table", failing_path);
---        want_errno = FALSE;
--+        want_errno = false;
--         break;
-- 
--       case BIND_MOUNT_ERROR_REMOUNT_DEST:
--@@ -557,7 +557,7 @@ die_with_bind_result (bind_mount_result res,
--                       ...)
-- {
--   va_list args;
---  bool want_errno = TRUE;
--+  bool want_errno = true;
--   char *message;
-- 
--   fprintf (stderr, "bwrap: ");
--diff --git a/bubblewrap.c b/bubblewrap.c
--index bc75da4..1504449 100644
----- a/bubblewrap.c
--+++ b/bubblewrap.c
--@@ -74,19 +74,19 @@ static bool opt_as_pid_1;
-- 
-- static const char *opt_argv0 = NULL;
-- static const char *opt_chdir_path = NULL;
---static bool opt_assert_userns_disabled = FALSE;
---static bool opt_disable_userns = FALSE;
---static bool opt_unshare_user = FALSE;
---static bool opt_unshare_user_try = FALSE;
---static bool opt_unshare_pid = FALSE;
---static bool opt_unshare_ipc = FALSE;
---static bool opt_unshare_net = FALSE;
---static bool opt_unshare_uts = FALSE;
---static bool opt_unshare_cgroup = FALSE;
---static bool opt_unshare_cgroup_try = FALSE;
---static bool opt_needs_devpts = FALSE;
---static bool opt_new_session = FALSE;
---static bool opt_die_with_parent = FALSE;
--+static bool opt_assert_userns_disabled = false;
--+static bool opt_disable_userns = false;
--+static bool opt_unshare_user = false;
--+static bool opt_unshare_user_try = false;
--+static bool opt_unshare_pid = false;
--+static bool opt_unshare_ipc = false;
--+static bool opt_unshare_net = false;
--+static bool opt_unshare_uts = false;
--+static bool opt_unshare_cgroup = false;
--+static bool opt_unshare_cgroup_try = false;
--+static bool opt_needs_devpts = false;
--+static bool opt_new_session = false;
--+static bool opt_die_with_parent = false;
-- static uid_t opt_sandbox_uid = -1;
-- static gid_t opt_sandbox_gid = -1;
-- static int opt_sync_fd = -1;
--@@ -476,7 +476,7 @@ report_child_exit_status (int exitc, int setup_finished_fd)
--     return;
-- 
--   output = xasprintf ("{ \"exit-code\": %i }\n", exitc);
---  dump_info (opt_json_status_fd, output, FALSE);
--+  dump_info (opt_json_status_fd, output, false);
--   close (opt_json_status_fd);
--   opt_json_status_fd = -1;
--   close (setup_finished_fd);
--@@ -621,7 +621,7 @@ do_init (int event_fd, pid_t initial_pid)
-- 
--   seccomp_programs_apply ();
-- 
---  while (TRUE)
--+  while (true)
--     {
--       pid_t child;
--       int status;
--@@ -765,16 +765,16 @@ prctl_caps (uint32_t *caps, bool do_cap_bounding, bool do_set_ambient)
--    */
--   for (cap = 0; cap <= CAP_LAST_CAP; cap++)
--     {
---      bool keep = FALSE;
--+      bool keep = false;
--       if (cap < 32)
--         {
--           if (CAP_TO_MASK_0 (cap) & caps[0])
---            keep = TRUE;
--+            keep = true;
+-diff --git a/demux/demux_mkv.c b/demux/demux_mkv.c
+-index 135edcc23d..cc7ce3e98f 100644
+---- a/demux/demux_mkv.c
+-+++ b/demux/demux_mkv.c
+-@@ -2200,16 +2200,16 @@ static int demux_mkv_open_sub(demuxer_t *demuxer=
+, mkv_track_t *track)
+-             // [0x30..0x37] are component tags utilized for
+-             // non-mobile captioning service ("profile A").
+-             if (component_tag >=3D 0x30 && component_tag <=3D 0x37)
+--                lav->profile =3D FF_PROFILE_ARIB_PROFILE_A;
+-+                lav->profile =3D AV_PROFILE_ARIB_PROFILE_A;
+-             break;
+-         case 0x0012:
+-             // component tag 0x87 signifies a mobile/partial reception
+-             // (1seg) captioning service ("profile C").
+-             if (component_tag =3D=3D 0x87)
+--                lav->profile =3D FF_PROFILE_ARIB_PROFILE_C;
+-+                lav->profile =3D AV_PROFILE_ARIB_PROFILE_C;
+-             break;
 -         }
--       else
--         {
--           if (CAP_TO_MASK_1 (cap) & caps[1])
---            keep = TRUE;
--+            keep = true;
--         }
-- 
--       if (keep && do_set_ambient)
--@@ -803,11 +803,11 @@ static void
-- drop_cap_bounding_set (bool drop_all)
-- {
--   if (!drop_all)
---    prctl_caps (requested_caps, TRUE, FALSE);
--+    prctl_caps (requested_caps, true, false);
--   else
--     {
--       uint32_t no_caps[2] = {0, 0};
---      prctl_caps (no_caps, TRUE, FALSE);
--+      prctl_caps (no_caps, true, false);
+--        if (lav->profile =3D=3D FF_PROFILE_UNKNOWN)
+-+        if (lav->profile =3D=3D AV_PROFILE_UNKNOWN)
+-             MP_WARN(demuxer, "ARIB caption profile %02x / %04x not supp=
+orted.\n",
+-                     component_tag, data_component_id);
 -     }
-- }
-- 
--@@ -816,7 +816,7 @@ set_ambient_capabilities (void)
-- {
--   if (is_privileged)
--     return;
---  prctl_caps (requested_caps, FALSE, TRUE);
--+  prctl_caps (requested_caps, false, true);
-- }
-- 
-- /* This acquires the privileges that the bwrap will need it to work.
--@@ -846,7 +846,7 @@ acquire_privs (void)
--       if (euid != 0)
--         die ("Unexpected setuid user %d, should be 0", euid);
-- 
---      is_privileged = TRUE;
--+      is_privileged = true;
--       /* We want to keep running as euid=0 until at the clone()
--        * operation because doing so will make the user namespace be
--        * owned by root, which makes it not ptrace:able by the user as
--@@ -867,7 +867,7 @@ acquire_privs (void)
--         die ("Unable to set fsuid (was %d)", (int)new_fsuid);
-- 
--       /* We never need capabilities after execve(), so lets drop everything from the bounding set */
---      drop_cap_bounding_set (TRUE);
--+      drop_cap_bounding_set (true);
-- 
--       /* Keep only the required capabilities for setup */
--       set_required_caps ();
--@@ -904,7 +904,7 @@ switch_to_user_with_privs (void)
-- {
--   /* If we're in a new user namespace, we got back the bounding set, clear it again */
--   if (opt_unshare_user || opt_userns_fd != -1)
---    drop_cap_bounding_set (FALSE);
--+    drop_cap_bounding_set (false);
-- 
--   /* If we switched to a new user namespace it may allow other uids/gids, so switch to the target one */
--   if (opt_userns_fd != -1)
--@@ -1211,7 +1211,7 @@ setup_newroot (bool unshare_pid,
--             parent_mode &= ~0005U;
-- 
--           dest = get_newroot_path (op->dest);
---          if (mkdir_with_parents (dest, parent_mode, FALSE) != 0)
--+          if (mkdir_with_parents (dest, parent_mode, false) != 0)
--             die_with_error ("Can't mkdir parents for %s", op->dest);
--         }
-- 
--@@ -1761,7 +1761,7 @@ parse_args_recurse (int          *argcp,
--             }
-- 
--           data_argv_copy = data_argv; /* Don't change data_argv, we need to free it */
---          parse_args_recurse (&data_argc, &data_argv_copy, TRUE, total_parsed_argc_p);
--+          parse_args_recurse (&data_argc, &data_argv_copy, true, total_parsed_argc_p);
-- 
--           argv += 1;
--           argc -= 1;
--@@ -1786,45 +1786,45 @@ parse_args_recurse (int          *argcp,
--            */
--           opt_unshare_user_try = opt_unshare_ipc = opt_unshare_pid =
--             opt_unshare_uts = opt_unshare_cgroup_try =
---            opt_unshare_net = TRUE;
--+            opt_unshare_net = true;
--         }
--       /* Begin here the older individual --unshare variants */
--       else if (strcmp (arg, "--unshare-user") == 0)
--         {
---          opt_unshare_user = TRUE;
--+          opt_unshare_user = true;
--         }
--       else if (strcmp (arg, "--unshare-user-try") == 0)
--         {
---          opt_unshare_user_try = TRUE;
--+          opt_unshare_user_try = true;
--         }
--       else if (strcmp (arg, "--unshare-ipc") == 0)
--         {
---          opt_unshare_ipc = TRUE;
--+          opt_unshare_ipc = true;
--         }
--       else if (strcmp (arg, "--unshare-pid") == 0)
--         {
---          opt_unshare_pid = TRUE;
--+          opt_unshare_pid = true;
--         }
--       else if (strcmp (arg, "--unshare-net") == 0)
--         {
---          opt_unshare_net = TRUE;
--+          opt_unshare_net = true;
--         }
--       else if (strcmp (arg, "--unshare-uts") == 0)
--         {
---          opt_unshare_uts = TRUE;
--+          opt_unshare_uts = true;
--         }
--       else if (strcmp (arg, "--unshare-cgroup") == 0)
--         {
---          opt_unshare_cgroup = TRUE;
--+          opt_unshare_cgroup = true;
--         }
--       else if (strcmp (arg, "--unshare-cgroup-try") == 0)
--         {
---          opt_unshare_cgroup_try = TRUE;
--+          opt_unshare_cgroup_try = true;
--         }
--       /* Begin here the newer --share variants */
--       else if (strcmp (arg, "--share-net") == 0)
--         {
---          opt_unshare_net = FALSE;
--+          opt_unshare_net = false;
--         }
--       /* End --share variants, other arguments begin */
--       else if (strcmp (arg, "--chdir") == 0)
--@@ -1841,11 +1841,11 @@ parse_args_recurse (int          *argcp,
--         }
--       else if (strcmp (arg, "--disable-userns") == 0)
--         {
---          opt_disable_userns = TRUE;
--+          opt_disable_userns = true;
--         }
--       else if (strcmp (arg, "--assert-userns-disabled") == 0)
--         {
---          opt_assert_userns_disabled = TRUE;
--+          opt_assert_userns_disabled = true;
--         }
--       else if (strcmp (arg, "--remount-ro") == 0)
--         {
--@@ -1975,7 +1975,7 @@ parse_args_recurse (int          *argcp,
-- 
--           op = setup_op_new (SETUP_MOUNT_DEV);
--           op->dest = argv[1];
---          opt_needs_devpts = TRUE;
--+          opt_needs_devpts = true;
-- 
--           argv += 1;
--           argc -= 1;
--@@ -2425,15 +2425,15 @@ parse_args_recurse (int          *argcp,
--         }
--       else if (strcmp (arg, "--new-session") == 0)
--         {
---          opt_new_session = TRUE;
--+          opt_new_session = true;
--         }
--       else if (strcmp (arg, "--die-with-parent") == 0)
--         {
---          opt_die_with_parent = TRUE;
--+          opt_die_with_parent = true;
--         }
--       else if (strcmp (arg, "--as-pid-1") == 0)
--         {
---          opt_as_pid_1 = TRUE;
--+          opt_as_pid_1 = true;
--         }
--       else if (strcmp (arg, "--cap-add") == 0)
--         {
--@@ -2441,7 +2441,7 @@ parse_args_recurse (int          *argcp,
--           if (argc < 2)
--             die ("--cap-add takes an argument");
-- 
---          opt_cap_add_or_drop_used = TRUE;
--+          opt_cap_add_or_drop_used = true;
-- 
--           if (strcasecmp (argv[1], "ALL") == 0)
--             {
--@@ -2467,7 +2467,7 @@ parse_args_recurse (int          *argcp,
--           if (argc < 2)
--             die ("--cap-drop takes an argument");
-- 
---          opt_cap_add_or_drop_used = TRUE;
--+          opt_cap_add_or_drop_used = true;
-- 
--           if (strcasecmp (argv[1], "ALL") == 0)
--             {
--@@ -2610,7 +2610,7 @@ parse_args (int          *argcp,
-- {
--   int total_parsed_argc = *argcp;
-- 
---  parse_args_recurse (argcp, argvp, FALSE, &total_parsed_argc);
--+  parse_args_recurse (argcp, argvp, false, &total_parsed_argc);
-- }
-- 
-- static void
--@@ -2656,7 +2656,7 @@ namespace_ids_read (pid_t  pid)
--       int r;
-- 
--       /* if we don't unshare this ns, ignore it */
---      if (do_unshare && *do_unshare == FALSE)
--+      if (do_unshare && *do_unshare == false)
--         continue;
-- 
--       r = fstatat (ns_fd, info->name, &st, 0);
--@@ -2691,7 +2691,7 @@ namespace_ids_write (int    fd,
--       output = xasprintf (",%s\"%s-namespace\": %ju",
--                           indent, info->name, nsid);
-- 
---      dump_info (fd, output, TRUE);
--+      dump_info (fd, output, true);
--     }
-- }
-- 
--@@ -2799,18 +2799,18 @@ main (int    argc,
--   /* We have to do this if we weren't installed setuid (and we're not
--    * root), so let's just DWIM */
--   if (!is_privileged && getuid () != 0 && opt_userns_fd == -1)
---    opt_unshare_user = TRUE;
--+    opt_unshare_user = true;
-- 
-- #ifdef ENABLE_REQUIRE_USERNS
--   /* In this build option, we require userns. */
--   if (is_privileged && getuid () != 0 && opt_userns_fd == -1)
---    opt_unshare_user = TRUE;
--+    opt_unshare_user = true;
-- #endif
-- 
--   if (opt_unshare_user_try &&
--       stat ("/proc/self/ns/user", &sbuf) == 0)
--     {
---      bool disabled = FALSE;
--+      bool disabled = false;
-- 
--       /* RHEL7 has a kernel module parameter that lets you enable user namespaces */
--       if (stat ("/sys/module/user_namespace/parameters/enable", &sbuf) == 0)
--@@ -2818,7 +2818,7 @@ main (int    argc,
--           cleanup_free char *enable = NULL;
--           enable = load_file_at (AT_FDCWD, "/sys/module/user_namespace/parameters/enable");
--           if (enable != NULL && enable[0] == 'N')
---            disabled = TRUE;
--+            disabled = true;
--         }
-- 
--       /* Check for max_user_namespaces */
--@@ -2827,7 +2827,7 @@ main (int    argc,
--           cleanup_free char *max_user_ns = NULL;
--           max_user_ns = load_file_at (AT_FDCWD, "/proc/sys/user/max_user_namespaces");
--           if (max_user_ns != NULL && strcmp(max_user_ns, "0\n") == 0)
---            disabled = TRUE;
--+            disabled = true;
--         }
-- 
--       /* Debian lets you disable *unprivileged* user namespaces. However this is not
--@@ -2835,7 +2835,7 @@ main (int    argc,
--          already, and there is not much we can do, its just a non-working setup. */
-- 
--       if (!disabled)
---        opt_unshare_user = TRUE;
--+        opt_unshare_user = true;
--     }
-- 
--   if (argc <= 0)
--@@ -2993,7 +2993,7 @@ main (int    argc,
--            */
--           write_uid_gid_map (ns_uid, real_uid,
--                              ns_gid, real_gid,
---                             pid, TRUE, opt_needs_devpts);
--+                             pid, true, opt_needs_devpts);
--         }
-- 
--       /* Initial launched process, wait for pid 1 or exec:ed command to exit */
--@@ -3002,7 +3002,7 @@ main (int    argc,
--         die_with_error ("Setting userns2 failed");
-- 
--       /* We don't need any privileges in the launcher, drop them immediately. */
---      drop_privs (FALSE, FALSE);
--+      drop_privs (false, false);
-- 
--       /* Optionally bind our lifecycle to that of the parent */
--       handle_die_with_parent ();
--@@ -3010,17 +3010,17 @@ main (int    argc,
--       if (opt_info_fd != -1)
--         {
--           cleanup_free char *output = xasprintf ("{\n    \"child-pid\": %i", pid);
---          dump_info (opt_info_fd, output, TRUE);
---          namespace_ids_write (opt_info_fd, FALSE);
---          dump_info (opt_info_fd, "\n}\n", TRUE);
--+          dump_info (opt_info_fd, output, true);
--+          namespace_ids_write (opt_info_fd, false);
--+          dump_info (opt_info_fd, "\n}\n", true);
--           close (opt_info_fd);
--         }
--       if (opt_json_status_fd != -1)
--         {
--           cleanup_free char *output = xasprintf ("{ \"child-pid\": %i", pid);
---          dump_info (opt_json_status_fd, output, TRUE);
---          namespace_ids_write (opt_json_status_fd, TRUE);
---          dump_info (opt_json_status_fd, " }\n", TRUE);
--+          dump_info (opt_json_status_fd, output, true);
--+          namespace_ids_write (opt_json_status_fd, true);
--+          dump_info (opt_json_status_fd, " }\n", true);
--         }
-- 
--       if (opt_userns_block_fd != -1)
--@@ -3116,7 +3116,7 @@ main (int    argc,
-- 
--       write_uid_gid_map (ns_uid, real_uid,
--                          ns_gid, real_gid,
---                         -1, TRUE, FALSE);
--+                         -1, true, false);
--     }
-- 
--   old_umask = umask (0);
--@@ -3177,7 +3177,7 @@ main (int    argc,
--       if (child == 0)
--         {
--           /* Unprivileged setup process */
---          drop_privs (FALSE, TRUE);
--+          drop_privs (false, true);
--           close (privsep_sockets[0]);
--           setup_newroot (opt_unshare_pid, privsep_sockets[1]);
--           exit (0);
--@@ -3289,11 +3289,11 @@ main (int    argc,
--         die_with_error ("unshare user ns");
-- 
--       /* We're in a new user namespace, we got back the bounding set, clear it again */
---      drop_cap_bounding_set (FALSE);
--+      drop_cap_bounding_set (false);
-- 
--       write_uid_gid_map (opt_sandbox_uid, ns_uid,
--                          opt_sandbox_gid, ns_gid,
---                         -1, FALSE, FALSE);
--+                         -1, false, false);
--     }
-- 
--   if (opt_disable_userns || opt_assert_userns_disabled)
--@@ -3306,7 +3306,7 @@ main (int    argc,
--     }
-- 
--   /* All privileged ops are done now, so drop caps we don't need */
---  drop_privs (!is_privileged, TRUE);
--+  drop_privs (!is_privileged, true);
-- 
--   if (opt_block_fd != -1)
--     {
--@@ -3370,7 +3370,7 @@ main (int    argc,
-- 
--       if (pid != 0)
--         {
---          drop_all_caps (FALSE);
--+          drop_all_caps (false);
-- 
--           /* Close fds in pid 1, except stdio and optionally event_fd
--              (for syncing pid 2 lifetime with monitor_child) and
--diff --git a/utils.c b/utils.c
--index 43c8d79..7c562b1 100644
----- a/utils.c
--+++ b/utils.c
--@@ -206,7 +206,7 @@ bool
-- has_path_prefix (const char *str,
--                  const char *prefix)
-- {
---  while (TRUE)
--+  while (true)
--     {
--       /* Skip consecutive slashes to reach next path
--          element */
--@@ -217,13 +217,13 @@ has_path_prefix (const char *str,
-- 
--       /* No more prefix path elements? Done! */
--       if (*prefix == 0)
---        return TRUE;
--+        return true;
-- 
--       /* Compare path element */
--       while (*prefix != 0 && *prefix != '/')
--         {
--           if (*str != *prefix)
---            return FALSE;
--+            return false;
--           str++;
--           prefix++;
--         }
--@@ -231,7 +231,7 @@ has_path_prefix (const char *str,
--       /* Matched prefix path element,
--          must be entire str path element */
--       if (*str != '/' && *str != 0)
---        return FALSE;
--+        return false;
--     }
-- }
-- 
--@@ -239,7 +239,7 @@ bool
-- path_equal (const char *path1,
--             const char *path2)
-- {
---  while (TRUE)
--+  while (true)
--     {
--       /* Skip consecutive slashes to reach next path
--          element */
--@@ -256,14 +256,14 @@ path_equal (const char *path1,
--       while (*path1 != 0 && *path1 != '/')
--         {
--           if (*path1 != *path2)
---            return FALSE;
--+            return false;
--           path1++;
--           path2++;
--         }
-- 
--       /* Matched path1 path element, must be entire path element */
--       if (*path2 != '/' && *path2 != 0)
---        return FALSE;
--+        return false;
--     }
-- }
-- 
--@@ -526,7 +526,7 @@ copy_file_data (int sfd,
--   char buffer[BUFSIZE];
--   ssize_t bytes_read;
-- 
---  while (TRUE)
--+  while (true)
--     {
--       bytes_read = read (sfd, buffer, BUFSIZE);
--       if (bytes_read == -1)
--diff --git a/utils.h b/utils.h
--index 9f17297..2c37ccb 100644
----- a/utils.h
--+++ b/utils.h
--@@ -24,6 +24,7 @@
-- #include <errno.h>
-- #include <fcntl.h>
-- #include <stdarg.h>
--+#include <stdbool.h>
-- #include <stdio.h>
-- #include <stdlib.h>
-- #include <string.h>
--@@ -41,10 +42,6 @@
-- 
-- #define N_ELEMENTS(arr) (sizeof (arr) / sizeof ((arr)[0]))
-- 
---#define TRUE 1
---#define FALSE 0
---typedef int bool;
---
-- #define PIPE_READ_END 0
-- #define PIPE_WRITE_END 1
-- 
-diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
-similarity index 55%
-rename from meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
-rename to meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
-index 41ab0cfc32..e059d1593b 100644
---- a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
-+++ b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
-@@ -7,18 +7,16 @@ DEPENDS = "libcap"
- 
- SRC_URI = " \
-     https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz \
--    file://0001-Use-stdbool.h-for-booleans.patch \
- "
--SRC_URI[sha256sum] = "65d92cf44a63a51e1b7771f70c05013dce5bd6b0b2841c4b4be54b0c45565471"
-+SRC_URI[sha256sum] = "988fd6b232dafa04b8b8198723efeaccdb3c6aa9c1c7936219d5791a8b7a8646"
- 
--inherit autotools bash-completion github-releases manpages pkgconfig
-+inherit meson bash-completion github-releases manpages pkgconfig
- 
- GITHUB_BASE_URI = "https://github.com/containers/${BPN}/releases/"
- 
- PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
--PACKAGECONFIG[manpages] = "--enable-man,--disable-man,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
--PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
--PACKAGECONFIG[setuid] = "--with-priv-mode=setuid,--with-priv-mode=none"
-+PACKAGECONFIG[manpages] = "-Dman=enabled,-Dman=disabled,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
-+PACKAGECONFIG[selinux] = "-Dselinux=enabled,-Dselinux=disabled,libselinux"
- 
- PACKAGES += "${PN}-zsh-completion"
- 
+---=20
+-2.50.1
+-
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb b/meta-oe/r=
+ecipes-multimedia/mplayer/mpv_0.41.0.bb
+similarity index 97%
+rename from meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb
+rename to meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+index 117395b371..dede59f099 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.40.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
+@@ -16,9 +16,8 @@ DEPENDS =3D " \
+ LICENSE =3D "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3D570a9b3749dd0463a1778803b=
+12a6dce"
+=20
+-SRCREV =3D "e48ac7ce08462f5e33af6ef9deeac6fa87eef01e"
++SRCREV =3D "41f6a645068483470267271e1d09966ca3b9f413"
+ SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
+/${@oe.utils.trim_version('${PV}', 2)};protocol=3Dhttps"
+-SRC_URI +=3D "file://0001-mpv-fix-build-with-ffmpeg-8.0.patch"
+=20
+ inherit meson pkgconfig mime-xdg
+=20
+--=20
+2.52.0
+
 
