@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEC1BE92704
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E759AE92710
 	for <webhook@archiver.kernel.org>; Sat, 27 Dec 2025 11:38:17 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6480.1766835493252833445
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6481.1766835493936321238
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 Dec 2025 03:38:13 -0800
+ Sat, 27 Dec 2025 03:38:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XZiGl8wK;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-42fb4eeb482so3893320f8f.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bSLoZBf2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47bdbc90dcaso49380055e9.1
         for <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 03:38:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1766835492; x=1767440292; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=962kKWf0haKTMOavrUA/BJpv5S/0MvAlE7POT79ul7M=;
-        b=XZiGl8wKj5jjK2CzcUDkgtwUy+Bp14BmckSdKTJn4rPDIQ+kjBS5WLzTwBzMAFMyoh
-         kTKggE9ZJMplpE+DiJvsgCGdprT5o2C9ipL9anNxsfjOCV6hmJU6wj5wiFg7sufPDWGo
-         qE741iH4Ui1Fj0jaGgBVVY2Zio3+DWs1RrNnjCODM3TFK8NZasi1etjzyGcZQz6wqTPq
-         lGwhhu3xTwiW2ib/ATq9UX6X1oyRsFCbe2BrG47tYck4c1FifDQ47amuM0JFrLstSINf
-         H4f/WHMtiED15qOdi+vHCmuoUKHeJSAQzuEPc5kd0heHtpkwWIuV/m2Y9vR4f2ZaNACy
-         S43Q==
+        bh=jWGCO++B2WLAJJJOnLaeS/+djIvjVGmQQAyHRhnp19o=;
+        b=bSLoZBf2PiG7fj+JYaQlVb5yZ92oVxg04o9lrk1MQ7lOnINmSagcqk1nYj5ck7IBSn
+         vJ+Kicn1ZBL7MBXRuS/TwLVN/mDjA7satsjmK2HhWPr+OVJnvLYWnfrjXf+QYYGcRmT3
+         q45IS+/7EFSHi2Zn7OPipMP0TVBU5PqPuLqRrDByUp3qYOlbKsAAvdTN2uhtGIKHMcG3
+         YXszU9MYnV3dYNM8vlS7o5lUOxOSS6sOq7KRQFTShF/ao/9jcBpPzkEGxEM06YrGTg3p
+         yuIogZwddPugo84O9W55IC0Kl4N4xW5/OWsikJXOaTH3BJ2PdVm1EA2aVta6QyaRhMiJ
+         S2fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1766835492; x=1767440292;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=962kKWf0haKTMOavrUA/BJpv5S/0MvAlE7POT79ul7M=;
-        b=NjO1XNiru+hooQ1e8eBPF92me/nBe9uiU8zvaoHpvPAaH34Z5tXTMrLdoNECJ5PjAt
-         /fsqaALhsV4GrJB6EBkmej98tdpvpq0WudOH+8D266s7I/NuK4l7u5y64nqD0MIGOJVS
-         F8FRzIMGfQSjgmsiCa7Nog2+FHuD0QXhTQnOf91j09sYrNGd1ie3a31mCM4XKkfnYQRH
-         SlUtaZYCywSIWESR5gFgKuL6RSUvnp0u9wJ0TK72YMlUOYU4ZqEpz2MPguGCXUPy18xb
-         6xNfe5FP6zziZDjMOzs0UGY9+FtAqXWiil/uceeuzwPV+FTl8bpV3b5ocDQbd1xOwX6a
-         fz9A==
-X-Gm-Message-State: AOJu0YwO2aivJfRFnmg6FckcVvLs1QbPTSNEb5MEHgcRPAEBY/3KQdFX
-	3Yw0KM9RoWbGqJeTOdPIYF3YVmpb4kuKlr0qKNHOUcM5kON1NP+PNzT1sBKKjA==
-X-Gm-Gg: AY/fxX6uqB/PcABkfW51i0rB2Ac+zdrgk+2XX8GlsoOrnizu15tOwQopi8DreggFa5D
-	8hOs1nsmBoQZsW3wO+mT6zDldZLII/hzsCOffbcEe/YekyovliUM8RlukWi7pjX2ddsAhLzDWZ9
-	jjFjnbJ4UYwtm7HecAphBsQJ9ZEE2aw1f2Kxe0TAYdnmedpbLz5GYHotxP3ysAjXnwBdqGZdVS0
-	UpkCY/CM8z74PoOMHrkh40ddo10WBB7CYAZCJeK3Iik/gBnZawI4gSOvkDaOiP+mx9VKelQtpUE
-	pLifz2O+mzu7zJK0LK11Gh656zJk3jNFlDC4bUQ9r5w2QORWqN+1WQPVSgrVP/FwZoAjvQa508q
-	yUxawvVGRKTwUBkg6kx55QZkYumjBR8S6ymLAFISaXRn+WioToC+sJ1GTz1ZifIjpwVymQRC4Au
-	WHSXaRUOBT
-X-Google-Smtp-Source: AGHT+IGeU5kSm4hnHZr61PMkGFiPvPZ20Qla2tlwqv6VE1UAYojfMu/DIQuRscweybxZm2J+TipEJg==
-X-Received: by 2002:a05:6000:186e:b0:432:4c01:db00 with SMTP id ffacd0b85a97d-4324e4cff0dmr32754071f8f.27.1766835491400;
-        Sat, 27 Dec 2025 03:38:11 -0800 (PST)
+        bh=jWGCO++B2WLAJJJOnLaeS/+djIvjVGmQQAyHRhnp19o=;
+        b=NE+YkdhssUZ++KqpIV9Ox6eppLmtr2XoIOSMrejRm977Pe6pwYGaR9Z+TLuOUSFVEz
+         7B+gM60phoGCXekFLh5lmCzPitBquDe7/GGYQhIAx4YYeTYQP5xtEtvC5P1znvW6zJS5
+         4kmu0zIafbzWOgJOnH4qo/+bJDCS8/4ZY+JU3DGWOo0gKPB8bTXe+nWjsxJUDsinEboG
+         IWUzWmSwxS8iNP7KAchabq0ehcpPOJzb7LLRmbg17LFy4xUcSgUenTzvIF9UgpAxxILd
+         NBD93Z/ZEc1SeACuIiTZZfFoZE5bESqj1JNTVUeGAXEoal8MH0Xk7TcRjdr4kdIMQpNi
+         8YRw==
+X-Gm-Message-State: AOJu0Yxud7aR71qFjxo/q48tPTDxUPdCSEAqU9a0ybVeD4LlXfUYPiPp
+	+noVTk9PFMRJ7nUz01tvOuDnNRCZco+w2NB82r7MUl3XE1s2CLVDnyMUo2RfDQ==
+X-Gm-Gg: AY/fxX4UtRH6Xf7/5vaWmqEHXu7Q1kyuaiRFvQ+qyorzvG/jLZYpRtbFPihNlugo6LH
+	riycwj8x2aFl0+ytdc3BPVPKouD/Z5bZXcbFxkuthY0x+EuM6hmXq9GtRsXmE3wyK3slRLTtIRP
+	cBM94/WwQsg1piu0LVNc/y2KDWMjyGS7T/YmOF3YjtvR2MV6KlfPCnLmZsK3aFaQzExb+13ob56
+	0STbOKCErUpOxQQqwTgkddeI2ArFHKf1x9VM2I8skJm/nq8pRJSZlo8jey9osmqQv9t0u/9V1T4
+	LycDlE8iSSSajXjNghSduvAb4acQ3FJ9TI1MtDbiJS6MhxXdPDETl5YwIDNBiKFcxektxT/1/YT
+	XZQSuLbsmjb2C3Y7TrUXw8+qk7czDyF8BKWKEkhVqdLXJTfhko+Em9ZeQhvm8wiGcLctqDtGRs7
+	wtWE+kvVGZ
+X-Google-Smtp-Source: AGHT+IFdDWtqsulwqmBDH+LZJZN3Cv6sQB4TtotTBHpWUZrwYF8QWLg/iQPXsAjB6EAvos36sCCIMA==
+X-Received: by 2002:a5d:588e:0:b0:42f:bc61:d1be with SMTP id ffacd0b85a97d-4324e4f6832mr30293161f8f.32.1766835492141;
+        Sat, 27 Dec 2025 03:38:12 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43277b82a58sm17023023f8f.6.2025.12.27.03.38.10
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43277b82a58sm17023023f8f.6.2025.12.27.03.38.11
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 27 Dec 2025 03:38:11 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/4] logwatch: upgrade 7.11 -> 7.13
-Date: Sat, 27 Dec 2025 12:38:07 +0100
-Message-ID: <20251227113808.3304770-3-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 4/4] bubblewrap: upgrade 0.10.0 -> 0.11.0
+Date: Sat, 27 Dec 2025 12:38:08 +0100
+Message-ID: <20251227113808.3304770-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251227113808.3304770-1-skandigraun@gmail.com>
 References: <20251227113808.3304770-1-skandigraun@gmail.com>
@@ -68,131 +68,691 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 27 Dec 2025 11:38:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122952
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122953
 
-Update SRC_URI because the previous one became inaccessible.
+One big change that comes with this update is the build system change:
+the project removed autotools and now uses meson.
 
-Slightly update do_install - now it is in line with the installation
-script from the project's own RPM file (previous some files were not
-installed)
+Dropped 0001-Use-stdbool.h-for-booleans.patch because it is included
+in this release.
 
-Shortlog:
-[logwatch] Preparation for Release 7.13
-[rsyslogd] De-duplicate lines with time calculations
-[sendmail] Removed invalid commented-out code.
-[logstash] Remove script - needs update to Logwatph.pm
-[sendmail] Improved detection of "Command unrecognized" strings.
-[rsyslogd] Ignore "GnuTLS error: Error in the push function" - paired with other errors
-[omsa] Handle peak power and new Unexpected sense messages
-[systemd] Add ignore_messages option to ignore messages matching a regex
-[kernel] Fix EDAC regex
-[rsyslogd] Ignore additional rate-limiting message paired with other messages
-[rsyslogd] Ignore additional omfwd messages paired with other messages
-[nut] Ignore upsnotify message about tech that we already know about
-[pam_unix] Add nx to services; Allow for username in session opened by messages for cron
-[pam_unix] Add kde to dektop services; Hande "User info message"
-[systemd] Update for newer systemd
-[logstash] Initial version
-[systemd] Ignore "Unnecessary job was removed for .*" - appears informational
-[systemd] Ignore State timed out messages - followed by a failed message
-[named] No need for unconfineds variable, not used
-[clam-update] Added comments about syslog format.
-[logwatch.8] Clarified use of debug.
-Fix Dir glob issue Iridos2 bug report.
-[postfix] Added support for postfix version 3.10
-[zypp] Added support for patch statements; reported by leithh.
-[dovecot] Added better detail granularity, and support logformat 2.3
-[systemd] Relax LSM BPF program attached regex
-[dirsrv] Relax ACL target does not exist regex; Ignore schema-compat-plugin info messages that are at ERR level
-[dovecot] Script and configuration file updated with granular detail options and improved report grouping
-[clam-update] Fixed typo.
-[clam-update] Check for empty LogFile strings and adjust error messages
-[onlyservice,removeheaders] Allow RFC 3164 Log Format with named facility.severity
-[http] Setting default http_rc code for when not specified in LogFormat
-[logwatch.pl,syslog-ng] Removed HTML Entity encoding for xml, as all strings are now UTF-8
-(tag: 7.12) [logwatch] Updating release version
-[http] Replace hyphen with "Unidentified agent,"
-[named] Handle "zone not loaded due to errors; Handle "journal file is out of date; removed" separately;  Ignore "New key observered for zone"
-[named] handle "TCP client quota reached" messages; Expand limit regex
-Remove trailing whitespace
-[nut] Handle battery needs to be replaced message
-[nut] Update for 2.8.2
-[postfix] Support for aliased mailboxes
-[zz-zfs] Added 'Cap' column header
-[sudo] Add sudo_detail
-[omsa] Ignored Administrator stopped message
-[omsa] Update Patrol Read regex
-[sssd] Ignore "exec_child_ex command" messages
-[secure] relax regex around "gkr-pam: no password is available for user"
-[secure] Ignore sshd-session messages
-[sendmail] Added filter for new pre-greeting message.
-[postfix] Added DNSBL rank display
-[sshd] Added 'drop connection' counter.
-[rsyslogd] Handle stdout/stderr sent to journal which ends up with an extra prefix
-[named] Add option to ignore denied zone trasfter; Move limit reporting to detail >= 1
-[systemd] Handle new Watchdog and Reexecuting requested messages
-[dnf-automatic] New script contributed by Clive Lin.
-[mdadm] Check if hash of 'good devices' is undefined or empty.
-[sshd,secure] Added support for OpenSSH 9.8 (sshd-session, port number), per tomop.
+Changelog: https://github.com/containers/bubblewrap/releases/tag/v0.11.0
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{logwatch_7.11.bb => logwatch_7.13.bb}    | 21 ++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-extended/logwatch/{logwatch_7.11.bb => logwatch_7.13.bb} (79%)
+ .../0001-Use-stdbool.h-for-booleans.patch     | 633 ------------------
+ ...blewrap_0.10.0.bb => bubblewrap_0.11.0.bb} |  10 +-
+ 2 files changed, 4 insertions(+), 639 deletions(-)
+ delete mode 100644 meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+ rename meta-oe/recipes-security/bubblewrap/{bubblewrap_0.10.0.bb => bubblewrap_0.11.0.bb} (55%)
 
-diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.11.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.13.bb
-similarity index 79%
-rename from meta-oe/recipes-extended/logwatch/logwatch_7.11.bb
-rename to meta-oe/recipes-extended/logwatch/logwatch_7.13.bb
-index 89012f8852..13897590be 100644
---- a/meta-oe/recipes-extended/logwatch/logwatch_7.11.bb
-+++ b/meta-oe/recipes-extended/logwatch/logwatch_7.13.bb
-@@ -11,17 +11,17 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
- RDEPENDS:${PN} = "perl"
+diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch b/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
+deleted file mode 100644
+index 2566314ce3..0000000000
+--- a/meta-oe/recipes-security/bubblewrap/bubblewrap/0001-Use-stdbool.h-for-booleans.patch
++++ /dev/null
+@@ -1,633 +0,0 @@
+-From 4572dd9378c876349e02403cf7f6031c45281f85 Mon Sep 17 00:00:00 2001
+-From: "Simon McVittie" <smcv@collabora.com>
+-Date: Tue, 8 Apr 2025 16:29:18 +0900
+-Subject: [PATCH] Use stdbool.h for booleans
+-
+-* backport fix from:
+-  https://github.com/containers/bubblewrap/pull/660
+-  But patch rework for this version.
+-  In gcc 15, bool became a reserved keyword in C23, causing conflicts with our custom bool definition.
+-
+-  See also, https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=55e3bd376b2214e200fa76d12b67ff259b06c212
+-
+-* to fix:
+-  http://errors.yoctoproject.org/Errors/Details/851183/
+-  ../bubblewrap-0.10.0/utils.h:46:13: error: 'bool' cannot be defined via 'typedef'
+-   46 | typedef int bool;
+-      |             ^~~~
+-
+-Upstream-Status: Backport [https://github.com/containers/bubblewrap/pull/660]
+-Signed-off-by: mark.yang <mark.yang@lge.com>
+----
+- bind-mount.c |  20 ++++----
+- bubblewrap.c | 134 +++++++++++++++++++++++++--------------------------
+- utils.c      |  16 +++---
+- utils.h      |   5 +-
+- 4 files changed, 86 insertions(+), 89 deletions(-)
+-
+-diff --git a/bind-mount.c b/bind-mount.c
+-index 2757cae..bf7f68d 100644
+---- a/bind-mount.c
+-+++ b/bind-mount.c
+-@@ -76,7 +76,7 @@ match_token (const char *token, const char *token_end, const char *str)
+-   if (token == token_end)
+-     return *str == 0;
+- 
+--  return FALSE;
+-+  return false;
+- }
+- 
+- static unsigned long
+-@@ -281,12 +281,12 @@ parse_mountinfo (int  proc_fd,
+-         die ("Can't parse mountinfo line");
+-       rest = line + consumed;
+- 
+--      rest = skip_token (rest, TRUE); /* mountroot */
+-+      rest = skip_token (rest, true); /* mountroot */
+-       mountpoint = rest;
+--      rest = skip_token (rest, FALSE); /* mountpoint */
+-+      rest = skip_token (rest, false); /* mountpoint */
+-       mountpoint_end = rest++;
+-       options = rest;
+--      rest = skip_token (rest, FALSE); /* vfs options */
+-+      rest = skip_token (rest, false); /* vfs options */
+-       options_end = rest;
+- 
+-       *mountpoint_end = 0;
+-@@ -324,7 +324,7 @@ parse_mountinfo (int  proc_fd,
+-       MountInfoLine *parent = by_id[this->parent_id];
+-       MountInfoLine **to_sibling;
+-       MountInfoLine *sibling;
+--      bool covered = FALSE;
+-+      bool covered = false;
+- 
+-       if (!has_path_prefix (this->mountpoint, root_mount))
+-         continue;
+-@@ -333,7 +333,7 @@ parse_mountinfo (int  proc_fd,
+-         continue;
+- 
+-       if (strcmp (parent->mountpoint, this->mountpoint) == 0)
+--        parent->covered = TRUE;
+-+        parent->covered = true;
+- 
+-       to_sibling = &parent->first_child;
+-       sibling = parent->first_child;
+-@@ -344,7 +344,7 @@ parse_mountinfo (int  proc_fd,
+-            * covered by the sibling, and we drop it. */
+-           if (has_path_prefix (this->mountpoint, sibling->mountpoint))
+-             {
+--              covered = TRUE;
+-+              covered = true;
+-               break;
+-             }
+- 
+-@@ -499,7 +499,7 @@ bind_mount_result_to_string (bind_mount_result res,
+-                              bool *want_errno_p)
+- {
+-   char *string = NULL;
+--  bool want_errno = TRUE;
+-+  bool want_errno = true;
+- 
+-   switch (res)
+-     {
+-@@ -521,7 +521,7 @@ bind_mount_result_to_string (bind_mount_result res,
+- 
+-       case BIND_MOUNT_ERROR_FIND_DEST_MOUNT:
+-         string = xasprintf ("Unable to find \"%s\" in mount table", failing_path);
+--        want_errno = FALSE;
+-+        want_errno = false;
+-         break;
+- 
+-       case BIND_MOUNT_ERROR_REMOUNT_DEST:
+-@@ -557,7 +557,7 @@ die_with_bind_result (bind_mount_result res,
+-                       ...)
+- {
+-   va_list args;
+--  bool want_errno = TRUE;
+-+  bool want_errno = true;
+-   char *message;
+- 
+-   fprintf (stderr, "bwrap: ");
+-diff --git a/bubblewrap.c b/bubblewrap.c
+-index bc75da4..1504449 100644
+---- a/bubblewrap.c
+-+++ b/bubblewrap.c
+-@@ -74,19 +74,19 @@ static bool opt_as_pid_1;
+- 
+- static const char *opt_argv0 = NULL;
+- static const char *opt_chdir_path = NULL;
+--static bool opt_assert_userns_disabled = FALSE;
+--static bool opt_disable_userns = FALSE;
+--static bool opt_unshare_user = FALSE;
+--static bool opt_unshare_user_try = FALSE;
+--static bool opt_unshare_pid = FALSE;
+--static bool opt_unshare_ipc = FALSE;
+--static bool opt_unshare_net = FALSE;
+--static bool opt_unshare_uts = FALSE;
+--static bool opt_unshare_cgroup = FALSE;
+--static bool opt_unshare_cgroup_try = FALSE;
+--static bool opt_needs_devpts = FALSE;
+--static bool opt_new_session = FALSE;
+--static bool opt_die_with_parent = FALSE;
+-+static bool opt_assert_userns_disabled = false;
+-+static bool opt_disable_userns = false;
+-+static bool opt_unshare_user = false;
+-+static bool opt_unshare_user_try = false;
+-+static bool opt_unshare_pid = false;
+-+static bool opt_unshare_ipc = false;
+-+static bool opt_unshare_net = false;
+-+static bool opt_unshare_uts = false;
+-+static bool opt_unshare_cgroup = false;
+-+static bool opt_unshare_cgroup_try = false;
+-+static bool opt_needs_devpts = false;
+-+static bool opt_new_session = false;
+-+static bool opt_die_with_parent = false;
+- static uid_t opt_sandbox_uid = -1;
+- static gid_t opt_sandbox_gid = -1;
+- static int opt_sync_fd = -1;
+-@@ -476,7 +476,7 @@ report_child_exit_status (int exitc, int setup_finished_fd)
+-     return;
+- 
+-   output = xasprintf ("{ \"exit-code\": %i }\n", exitc);
+--  dump_info (opt_json_status_fd, output, FALSE);
+-+  dump_info (opt_json_status_fd, output, false);
+-   close (opt_json_status_fd);
+-   opt_json_status_fd = -1;
+-   close (setup_finished_fd);
+-@@ -621,7 +621,7 @@ do_init (int event_fd, pid_t initial_pid)
+- 
+-   seccomp_programs_apply ();
+- 
+--  while (TRUE)
+-+  while (true)
+-     {
+-       pid_t child;
+-       int status;
+-@@ -765,16 +765,16 @@ prctl_caps (uint32_t *caps, bool do_cap_bounding, bool do_set_ambient)
+-    */
+-   for (cap = 0; cap <= CAP_LAST_CAP; cap++)
+-     {
+--      bool keep = FALSE;
+-+      bool keep = false;
+-       if (cap < 32)
+-         {
+-           if (CAP_TO_MASK_0 (cap) & caps[0])
+--            keep = TRUE;
+-+            keep = true;
+-         }
+-       else
+-         {
+-           if (CAP_TO_MASK_1 (cap) & caps[1])
+--            keep = TRUE;
+-+            keep = true;
+-         }
+- 
+-       if (keep && do_set_ambient)
+-@@ -803,11 +803,11 @@ static void
+- drop_cap_bounding_set (bool drop_all)
+- {
+-   if (!drop_all)
+--    prctl_caps (requested_caps, TRUE, FALSE);
+-+    prctl_caps (requested_caps, true, false);
+-   else
+-     {
+-       uint32_t no_caps[2] = {0, 0};
+--      prctl_caps (no_caps, TRUE, FALSE);
+-+      prctl_caps (no_caps, true, false);
+-     }
+- }
+- 
+-@@ -816,7 +816,7 @@ set_ambient_capabilities (void)
+- {
+-   if (is_privileged)
+-     return;
+--  prctl_caps (requested_caps, FALSE, TRUE);
+-+  prctl_caps (requested_caps, false, true);
+- }
+- 
+- /* This acquires the privileges that the bwrap will need it to work.
+-@@ -846,7 +846,7 @@ acquire_privs (void)
+-       if (euid != 0)
+-         die ("Unexpected setuid user %d, should be 0", euid);
+- 
+--      is_privileged = TRUE;
+-+      is_privileged = true;
+-       /* We want to keep running as euid=0 until at the clone()
+-        * operation because doing so will make the user namespace be
+-        * owned by root, which makes it not ptrace:able by the user as
+-@@ -867,7 +867,7 @@ acquire_privs (void)
+-         die ("Unable to set fsuid (was %d)", (int)new_fsuid);
+- 
+-       /* We never need capabilities after execve(), so lets drop everything from the bounding set */
+--      drop_cap_bounding_set (TRUE);
+-+      drop_cap_bounding_set (true);
+- 
+-       /* Keep only the required capabilities for setup */
+-       set_required_caps ();
+-@@ -904,7 +904,7 @@ switch_to_user_with_privs (void)
+- {
+-   /* If we're in a new user namespace, we got back the bounding set, clear it again */
+-   if (opt_unshare_user || opt_userns_fd != -1)
+--    drop_cap_bounding_set (FALSE);
+-+    drop_cap_bounding_set (false);
+- 
+-   /* If we switched to a new user namespace it may allow other uids/gids, so switch to the target one */
+-   if (opt_userns_fd != -1)
+-@@ -1211,7 +1211,7 @@ setup_newroot (bool unshare_pid,
+-             parent_mode &= ~0005U;
+- 
+-           dest = get_newroot_path (op->dest);
+--          if (mkdir_with_parents (dest, parent_mode, FALSE) != 0)
+-+          if (mkdir_with_parents (dest, parent_mode, false) != 0)
+-             die_with_error ("Can't mkdir parents for %s", op->dest);
+-         }
+- 
+-@@ -1761,7 +1761,7 @@ parse_args_recurse (int          *argcp,
+-             }
+- 
+-           data_argv_copy = data_argv; /* Don't change data_argv, we need to free it */
+--          parse_args_recurse (&data_argc, &data_argv_copy, TRUE, total_parsed_argc_p);
+-+          parse_args_recurse (&data_argc, &data_argv_copy, true, total_parsed_argc_p);
+- 
+-           argv += 1;
+-           argc -= 1;
+-@@ -1786,45 +1786,45 @@ parse_args_recurse (int          *argcp,
+-            */
+-           opt_unshare_user_try = opt_unshare_ipc = opt_unshare_pid =
+-             opt_unshare_uts = opt_unshare_cgroup_try =
+--            opt_unshare_net = TRUE;
+-+            opt_unshare_net = true;
+-         }
+-       /* Begin here the older individual --unshare variants */
+-       else if (strcmp (arg, "--unshare-user") == 0)
+-         {
+--          opt_unshare_user = TRUE;
+-+          opt_unshare_user = true;
+-         }
+-       else if (strcmp (arg, "--unshare-user-try") == 0)
+-         {
+--          opt_unshare_user_try = TRUE;
+-+          opt_unshare_user_try = true;
+-         }
+-       else if (strcmp (arg, "--unshare-ipc") == 0)
+-         {
+--          opt_unshare_ipc = TRUE;
+-+          opt_unshare_ipc = true;
+-         }
+-       else if (strcmp (arg, "--unshare-pid") == 0)
+-         {
+--          opt_unshare_pid = TRUE;
+-+          opt_unshare_pid = true;
+-         }
+-       else if (strcmp (arg, "--unshare-net") == 0)
+-         {
+--          opt_unshare_net = TRUE;
+-+          opt_unshare_net = true;
+-         }
+-       else if (strcmp (arg, "--unshare-uts") == 0)
+-         {
+--          opt_unshare_uts = TRUE;
+-+          opt_unshare_uts = true;
+-         }
+-       else if (strcmp (arg, "--unshare-cgroup") == 0)
+-         {
+--          opt_unshare_cgroup = TRUE;
+-+          opt_unshare_cgroup = true;
+-         }
+-       else if (strcmp (arg, "--unshare-cgroup-try") == 0)
+-         {
+--          opt_unshare_cgroup_try = TRUE;
+-+          opt_unshare_cgroup_try = true;
+-         }
+-       /* Begin here the newer --share variants */
+-       else if (strcmp (arg, "--share-net") == 0)
+-         {
+--          opt_unshare_net = FALSE;
+-+          opt_unshare_net = false;
+-         }
+-       /* End --share variants, other arguments begin */
+-       else if (strcmp (arg, "--chdir") == 0)
+-@@ -1841,11 +1841,11 @@ parse_args_recurse (int          *argcp,
+-         }
+-       else if (strcmp (arg, "--disable-userns") == 0)
+-         {
+--          opt_disable_userns = TRUE;
+-+          opt_disable_userns = true;
+-         }
+-       else if (strcmp (arg, "--assert-userns-disabled") == 0)
+-         {
+--          opt_assert_userns_disabled = TRUE;
+-+          opt_assert_userns_disabled = true;
+-         }
+-       else if (strcmp (arg, "--remount-ro") == 0)
+-         {
+-@@ -1975,7 +1975,7 @@ parse_args_recurse (int          *argcp,
+- 
+-           op = setup_op_new (SETUP_MOUNT_DEV);
+-           op->dest = argv[1];
+--          opt_needs_devpts = TRUE;
+-+          opt_needs_devpts = true;
+- 
+-           argv += 1;
+-           argc -= 1;
+-@@ -2425,15 +2425,15 @@ parse_args_recurse (int          *argcp,
+-         }
+-       else if (strcmp (arg, "--new-session") == 0)
+-         {
+--          opt_new_session = TRUE;
+-+          opt_new_session = true;
+-         }
+-       else if (strcmp (arg, "--die-with-parent") == 0)
+-         {
+--          opt_die_with_parent = TRUE;
+-+          opt_die_with_parent = true;
+-         }
+-       else if (strcmp (arg, "--as-pid-1") == 0)
+-         {
+--          opt_as_pid_1 = TRUE;
+-+          opt_as_pid_1 = true;
+-         }
+-       else if (strcmp (arg, "--cap-add") == 0)
+-         {
+-@@ -2441,7 +2441,7 @@ parse_args_recurse (int          *argcp,
+-           if (argc < 2)
+-             die ("--cap-add takes an argument");
+- 
+--          opt_cap_add_or_drop_used = TRUE;
+-+          opt_cap_add_or_drop_used = true;
+- 
+-           if (strcasecmp (argv[1], "ALL") == 0)
+-             {
+-@@ -2467,7 +2467,7 @@ parse_args_recurse (int          *argcp,
+-           if (argc < 2)
+-             die ("--cap-drop takes an argument");
+- 
+--          opt_cap_add_or_drop_used = TRUE;
+-+          opt_cap_add_or_drop_used = true;
+- 
+-           if (strcasecmp (argv[1], "ALL") == 0)
+-             {
+-@@ -2610,7 +2610,7 @@ parse_args (int          *argcp,
+- {
+-   int total_parsed_argc = *argcp;
+- 
+--  parse_args_recurse (argcp, argvp, FALSE, &total_parsed_argc);
+-+  parse_args_recurse (argcp, argvp, false, &total_parsed_argc);
+- }
+- 
+- static void
+-@@ -2656,7 +2656,7 @@ namespace_ids_read (pid_t  pid)
+-       int r;
+- 
+-       /* if we don't unshare this ns, ignore it */
+--      if (do_unshare && *do_unshare == FALSE)
+-+      if (do_unshare && *do_unshare == false)
+-         continue;
+- 
+-       r = fstatat (ns_fd, info->name, &st, 0);
+-@@ -2691,7 +2691,7 @@ namespace_ids_write (int    fd,
+-       output = xasprintf (",%s\"%s-namespace\": %ju",
+-                           indent, info->name, nsid);
+- 
+--      dump_info (fd, output, TRUE);
+-+      dump_info (fd, output, true);
+-     }
+- }
+- 
+-@@ -2799,18 +2799,18 @@ main (int    argc,
+-   /* We have to do this if we weren't installed setuid (and we're not
+-    * root), so let's just DWIM */
+-   if (!is_privileged && getuid () != 0 && opt_userns_fd == -1)
+--    opt_unshare_user = TRUE;
+-+    opt_unshare_user = true;
+- 
+- #ifdef ENABLE_REQUIRE_USERNS
+-   /* In this build option, we require userns. */
+-   if (is_privileged && getuid () != 0 && opt_userns_fd == -1)
+--    opt_unshare_user = TRUE;
+-+    opt_unshare_user = true;
+- #endif
+- 
+-   if (opt_unshare_user_try &&
+-       stat ("/proc/self/ns/user", &sbuf) == 0)
+-     {
+--      bool disabled = FALSE;
+-+      bool disabled = false;
+- 
+-       /* RHEL7 has a kernel module parameter that lets you enable user namespaces */
+-       if (stat ("/sys/module/user_namespace/parameters/enable", &sbuf) == 0)
+-@@ -2818,7 +2818,7 @@ main (int    argc,
+-           cleanup_free char *enable = NULL;
+-           enable = load_file_at (AT_FDCWD, "/sys/module/user_namespace/parameters/enable");
+-           if (enable != NULL && enable[0] == 'N')
+--            disabled = TRUE;
+-+            disabled = true;
+-         }
+- 
+-       /* Check for max_user_namespaces */
+-@@ -2827,7 +2827,7 @@ main (int    argc,
+-           cleanup_free char *max_user_ns = NULL;
+-           max_user_ns = load_file_at (AT_FDCWD, "/proc/sys/user/max_user_namespaces");
+-           if (max_user_ns != NULL && strcmp(max_user_ns, "0\n") == 0)
+--            disabled = TRUE;
+-+            disabled = true;
+-         }
+- 
+-       /* Debian lets you disable *unprivileged* user namespaces. However this is not
+-@@ -2835,7 +2835,7 @@ main (int    argc,
+-          already, and there is not much we can do, its just a non-working setup. */
+- 
+-       if (!disabled)
+--        opt_unshare_user = TRUE;
+-+        opt_unshare_user = true;
+-     }
+- 
+-   if (argc <= 0)
+-@@ -2993,7 +2993,7 @@ main (int    argc,
+-            */
+-           write_uid_gid_map (ns_uid, real_uid,
+-                              ns_gid, real_gid,
+--                             pid, TRUE, opt_needs_devpts);
+-+                             pid, true, opt_needs_devpts);
+-         }
+- 
+-       /* Initial launched process, wait for pid 1 or exec:ed command to exit */
+-@@ -3002,7 +3002,7 @@ main (int    argc,
+-         die_with_error ("Setting userns2 failed");
+- 
+-       /* We don't need any privileges in the launcher, drop them immediately. */
+--      drop_privs (FALSE, FALSE);
+-+      drop_privs (false, false);
+- 
+-       /* Optionally bind our lifecycle to that of the parent */
+-       handle_die_with_parent ();
+-@@ -3010,17 +3010,17 @@ main (int    argc,
+-       if (opt_info_fd != -1)
+-         {
+-           cleanup_free char *output = xasprintf ("{\n    \"child-pid\": %i", pid);
+--          dump_info (opt_info_fd, output, TRUE);
+--          namespace_ids_write (opt_info_fd, FALSE);
+--          dump_info (opt_info_fd, "\n}\n", TRUE);
+-+          dump_info (opt_info_fd, output, true);
+-+          namespace_ids_write (opt_info_fd, false);
+-+          dump_info (opt_info_fd, "\n}\n", true);
+-           close (opt_info_fd);
+-         }
+-       if (opt_json_status_fd != -1)
+-         {
+-           cleanup_free char *output = xasprintf ("{ \"child-pid\": %i", pid);
+--          dump_info (opt_json_status_fd, output, TRUE);
+--          namespace_ids_write (opt_json_status_fd, TRUE);
+--          dump_info (opt_json_status_fd, " }\n", TRUE);
+-+          dump_info (opt_json_status_fd, output, true);
+-+          namespace_ids_write (opt_json_status_fd, true);
+-+          dump_info (opt_json_status_fd, " }\n", true);
+-         }
+- 
+-       if (opt_userns_block_fd != -1)
+-@@ -3116,7 +3116,7 @@ main (int    argc,
+- 
+-       write_uid_gid_map (ns_uid, real_uid,
+-                          ns_gid, real_gid,
+--                         -1, TRUE, FALSE);
+-+                         -1, true, false);
+-     }
+- 
+-   old_umask = umask (0);
+-@@ -3177,7 +3177,7 @@ main (int    argc,
+-       if (child == 0)
+-         {
+-           /* Unprivileged setup process */
+--          drop_privs (FALSE, TRUE);
+-+          drop_privs (false, true);
+-           close (privsep_sockets[0]);
+-           setup_newroot (opt_unshare_pid, privsep_sockets[1]);
+-           exit (0);
+-@@ -3289,11 +3289,11 @@ main (int    argc,
+-         die_with_error ("unshare user ns");
+- 
+-       /* We're in a new user namespace, we got back the bounding set, clear it again */
+--      drop_cap_bounding_set (FALSE);
+-+      drop_cap_bounding_set (false);
+- 
+-       write_uid_gid_map (opt_sandbox_uid, ns_uid,
+-                          opt_sandbox_gid, ns_gid,
+--                         -1, FALSE, FALSE);
+-+                         -1, false, false);
+-     }
+- 
+-   if (opt_disable_userns || opt_assert_userns_disabled)
+-@@ -3306,7 +3306,7 @@ main (int    argc,
+-     }
+- 
+-   /* All privileged ops are done now, so drop caps we don't need */
+--  drop_privs (!is_privileged, TRUE);
+-+  drop_privs (!is_privileged, true);
+- 
+-   if (opt_block_fd != -1)
+-     {
+-@@ -3370,7 +3370,7 @@ main (int    argc,
+- 
+-       if (pid != 0)
+-         {
+--          drop_all_caps (FALSE);
+-+          drop_all_caps (false);
+- 
+-           /* Close fds in pid 1, except stdio and optionally event_fd
+-              (for syncing pid 2 lifetime with monitor_child) and
+-diff --git a/utils.c b/utils.c
+-index 43c8d79..7c562b1 100644
+---- a/utils.c
+-+++ b/utils.c
+-@@ -206,7 +206,7 @@ bool
+- has_path_prefix (const char *str,
+-                  const char *prefix)
+- {
+--  while (TRUE)
+-+  while (true)
+-     {
+-       /* Skip consecutive slashes to reach next path
+-          element */
+-@@ -217,13 +217,13 @@ has_path_prefix (const char *str,
+- 
+-       /* No more prefix path elements? Done! */
+-       if (*prefix == 0)
+--        return TRUE;
+-+        return true;
+- 
+-       /* Compare path element */
+-       while (*prefix != 0 && *prefix != '/')
+-         {
+-           if (*str != *prefix)
+--            return FALSE;
+-+            return false;
+-           str++;
+-           prefix++;
+-         }
+-@@ -231,7 +231,7 @@ has_path_prefix (const char *str,
+-       /* Matched prefix path element,
+-          must be entire str path element */
+-       if (*str != '/' && *str != 0)
+--        return FALSE;
+-+        return false;
+-     }
+- }
+- 
+-@@ -239,7 +239,7 @@ bool
+- path_equal (const char *path1,
+-             const char *path2)
+- {
+--  while (TRUE)
+-+  while (true)
+-     {
+-       /* Skip consecutive slashes to reach next path
+-          element */
+-@@ -256,14 +256,14 @@ path_equal (const char *path1,
+-       while (*path1 != 0 && *path1 != '/')
+-         {
+-           if (*path1 != *path2)
+--            return FALSE;
+-+            return false;
+-           path1++;
+-           path2++;
+-         }
+- 
+-       /* Matched path1 path element, must be entire path element */
+-       if (*path2 != '/' && *path2 != 0)
+--        return FALSE;
+-+        return false;
+-     }
+- }
+- 
+-@@ -526,7 +526,7 @@ copy_file_data (int sfd,
+-   char buffer[BUFSIZE];
+-   ssize_t bytes_read;
+- 
+--  while (TRUE)
+-+  while (true)
+-     {
+-       bytes_read = read (sfd, buffer, BUFSIZE);
+-       if (bytes_read == -1)
+-diff --git a/utils.h b/utils.h
+-index 9f17297..2c37ccb 100644
+---- a/utils.h
+-+++ b/utils.h
+-@@ -24,6 +24,7 @@
+- #include <errno.h>
+- #include <fcntl.h>
+- #include <stdarg.h>
+-+#include <stdbool.h>
+- #include <stdio.h>
+- #include <stdlib.h>
+- #include <string.h>
+-@@ -41,10 +42,6 @@
+- 
+- #define N_ELEMENTS(arr) (sizeof (arr) / sizeof ((arr)[0]))
+- 
+--#define TRUE 1
+--#define FALSE 0
+--typedef int bool;
+--
+- #define PIPE_READ_END 0
+- #define PIPE_WRITE_END 1
+- 
+diff --git a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
+similarity index 55%
+rename from meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
+rename to meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
+index 41ab0cfc32..e059d1593b 100644
+--- a/meta-oe/recipes-security/bubblewrap/bubblewrap_0.10.0.bb
++++ b/meta-oe/recipes-security/bubblewrap/bubblewrap_0.11.0.bb
+@@ -7,18 +7,16 @@ DEPENDS = "libcap"
  
--SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
--SRC_URI[sha256sum] = "5eb42d983a9667003368b572149fce788c0d7e13daaf1f28ad1bf3a140b865cf"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-+SRC_URI[sha256sum] = "0c9a10c2d8e5bc0cb10e16dc86c83be60d71d8a52b97bca785c64a30ed642839"
+ SRC_URI = " \
+     https://github.com/containers/${BPN}/releases/download/v${PV}/${BP}.tar.xz \
+-    file://0001-Use-stdbool.h-for-booleans.patch \
+ "
+-SRC_URI[sha256sum] = "65d92cf44a63a51e1b7771f70c05013dce5bd6b0b2841c4b4be54b0c45565471"
++SRC_URI[sha256sum] = "988fd6b232dafa04b8b8198723efeaccdb3c6aa9c1c7936219d5791a8b7a8646"
  
- do_install() {
--    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
-+    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts/services
-     install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/logfiles
-     install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/services
-     install -m 0755 -d ${D}${localstatedir}/cache/logwatch
--    cp -r -f conf/ ${D}${datadir}/logwatch/default.conf
--    cp -r -f scripts/ ${D}${datadir}/logwatch/scripts
--    cp -r -f lib ${D}${datadir}/logwatch/lib
-+    cp -r conf/ ${D}${datadir}/logwatch/default.conf
-+    cp -r scripts/ ${D}${datadir}/logwatch/scripts
-+    cp -r lib ${D}${datadir}/logwatch/lib
-     chown -R root:root ${D}${datadir}/logwatch
+-inherit autotools bash-completion github-releases manpages pkgconfig
++inherit meson bash-completion github-releases manpages pkgconfig
  
-     install -m 0755 -d ${D}${mandir}/man1
-@@ -36,7 +36,7 @@ do_install() {
+ GITHUB_BASE_URI = "https://github.com/containers/${BPN}/releases/"
  
-     install -m 0755 -d ${D}${sysconfdir}/cron.daily
-     install -m 0755 -d ${D}${sbindir}
--    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
-+    ln -sr  ${D}${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
-     cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
-     DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
-     if [ "\$DailyReport" != "No" ] && [ "\$DailyReport" != "no" ]
-@@ -46,6 +46,13 @@ do_install() {
- EOF
-     chmod 755 ${D}${sysconfdir}/cron.daily/0logwatch
+ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
+-PACKAGECONFIG[manpages] = "--enable-man,--disable-man,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
+-PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
+-PACKAGECONFIG[setuid] = "--with-priv-mode=setuid,--with-priv-mode=none"
++PACKAGECONFIG[manpages] = "-Dman=enabled,-Dman=disabled,libxslt-native docbook-xsl-stylesheets-native xmlto-native"
++PACKAGECONFIG[selinux] = "-Dselinux=enabled,-Dselinux=disabled,libselinux"
  
-+    for i in scripts/logfiles/*; do
-+        if [ $(ls $i | wc -l) -ne 0 ]; then
-+            install -d ${D}${datadir}/logwatch/$i
-+            install -m 0644 $i/* ${D}${datadir}/logwatch/$i
-+        fi
-+    done
-+
-     install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/logfiles
-     install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/services
-     touch ${D}${sysconfdir}/logwatch/conf/logwatch.conf
+ PACKAGES += "${PN}-zsh-completion"
+ 
 
