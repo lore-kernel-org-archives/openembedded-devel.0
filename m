@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCA07E92724
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB695E784BE
 	for <webhook@archiver.kernel.org>; Sun, 28 Dec 2025 12:11:24 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.23594.1766923880195210783
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23530.1766923876497839938
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Dec 2025 04:11:20 -0800
+ Sun, 28 Dec 2025 04:11:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nC55T5Cq;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47774d3536dso65973245e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 04:11:19 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cwMKrikM;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47a80d4a065so41510825e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 04:11:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766923878; x=1767528678; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1766923875; x=1767528675; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=43VgsrPCdW21XMoAXzHIlXKEj8ceflUBfQHbI51cAoM=;
-        b=nC55T5Cq71tOle7mepo/j0JbhZPkombnYf9yQW4w9/ay+tRfoEzC83Tf+senkZyUb1
-         gIXqU76Crj2jAibNhGcvNbM0U42aHcuytHzZ+mMI8lOHVKwhrjUwCAvoEXfMJdnhf5ML
-         OOVaXcdADajdsU2euXJnRQ/jaz9wPXFEhczqCFDoR7U5CFtWcaMKezkz/t1eWF5elVQo
-         VMTHlYE1whyIi8zXTrbHXgOco4CSqdDUMgsIJuPGTv63Bpupa93YNpkdMSzx8ScQuH53
-         Ofp2eJama1r8dtnaEAJqqZ0rAX411U3hRdrO8n6nilRTx81CyS5tG6xFcKGK5P/Bbh0H
-         NLnA==
+        bh=chZ4ssJFP8p2D8E65U39dNKSwOexDBnFYyhhESsF6vs=;
+        b=cwMKrikMpYcmKQ64T9guVUc0VzBNlgryTBrNg93Js4QJMxZJB26ZykXXYjEDlYXa6A
+         teaWTqRQeFXaInHcUE1maHkBLMZ0RgZ4A7uCQ23Z7ayxJHj01q6Y3tkR8GSRuiDAeCm/
+         u6w7CiznqJRT28bMHgMSGhxTzz9cnbg3GWWAF249/7mbieKUmhUlFPmZAJIMqHDlqyEB
+         CQlKxmedklKRvX91IDD0bo08sK15+jYTY0Q9kDW7yuICNGPOlP92zabDWl4wa/9s2hPa
+         +ghnPkemdnONBf5OPs/tTOfFHHFf8P/K8IJLzuTEIr3ZTKyHJiB/q6VUiYIYgf+ANz2C
+         Vv4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766923878; x=1767528678;
+        d=1e100.net; s=20230601; t=1766923875; x=1767528675;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=43VgsrPCdW21XMoAXzHIlXKEj8ceflUBfQHbI51cAoM=;
-        b=FGB3681W/R0opgNk5HOygS5zi4vpSmn6CFHAZq87kbI3f1llhmoucge1nA9DtZljxi
-         ZZCzjLV8YuJu8CHdfT59Pq9oMQb36WyGmyFji6YoiVZamZOtPFaka/4a1FkA76MrJAkk
-         TeZ8/TsXXMJywDRoTNT9lTWyQpsXgyjGRsxey1wWe3tLfX4OwZ3D66z9Xpav4DsYN48m
-         Fe+i4Gjn3B7fTdghFLzkRNvIb1KlsGCcxXL0O4idLhp+LHtEn1wAAHdE4sXrwZdQkCBn
-         AueZTeRK+RlwF3im2WUr/BYy0IzH2H8cihKoR4MBDyAVZaRyOktJyEkiM332tM2ygiQA
-         53Aw==
-X-Gm-Message-State: AOJu0Yw1ya7o8Ww1336f3bZBBuEw43ZOAzfEY9ZeFlC/MWKm9il22Zyd
-	mCjsI8obgDRhCl/Z8VUkg3ZOb41SrIOGwunWSMe77u8jdMjaHVYQmURqv1heyg==
-X-Gm-Gg: AY/fxX5UWJD7lhzpe+tMw/ASLrM+h8SxSOoOA+b0bJ5jkDXJb1mVAn4ul1SInJHCj0W
-	Ec1VLpSNsKaJjjZZL+a/cw2GHRDbVKX8V3AgCCCBCXJZZlnI+4Q9bvD+5i/SDI5mtG2WtQ7KB/w
-	h1rMNpzIcSH71MVREIpIDYotZIXD6e1wKxQpL8IWfnLOkoH/v5SF04l4xuZqSMHCeFjjcHU+Bt7
-	L+yLm7nRUIsnNUpl1q2Cfcj7uRiDexQ5FzIHOht40YVdCo1I5TnQ3CNxRw5q5H9KeXDT8KxaCvN
-	V5VqwclmEd2dBMw7tPzaCteIC7sBK3g+TINgnrxssbgdA5o1wci98HVlhGb9Dd6JjrWdKSDVgO3
-	Uaj8WNDKJSOi/AfQiFAx765yVzfv/RrJIYqH6AaEnWk7wR9lsSMgE/3cET4wfgDtfBUKNSV329u
-	5/h8A/0Tk0
-X-Google-Smtp-Source: AGHT+IGhyL0fnHfZbRPJDZdu3FK37AZSeni+UXoLCwwE2hewr2plHQfTwI0m99GZ0tnDB8CxSUbUsA==
-X-Received: by 2002:a05:600c:8718:b0:477:9d88:2da6 with SMTP id 5b1f17b1804b1-47d18b0ad6fmr302024725e9.0.1766923878473;
-        Sun, 28 Dec 2025 04:11:18 -0800 (PST)
+        bh=chZ4ssJFP8p2D8E65U39dNKSwOexDBnFYyhhESsF6vs=;
+        b=j+Jw8YLDV2SRwsorZHTLBJGDXEcyT3UfvviSE4uaCEixiqv4yGnf0ufHPmUFzkczco
+         DapWY0EBsE/WpvLbHiqiFqVIh2pz4R8tvoWd/vJQ+CrfV7v8Lz7ZruA9SvTE5r3hu59L
+         gXTGRgCGu/ikFgBAkiHfuLL5+rl0s7KMCqEEAQMc/zHRNJwbD9PiWOwQAiBWczpWe3dA
+         EiRQYRa/4HE9e/R+R/9eYySFbGth7Hy3NLQx8L7ihDZ+jTHbHjBHGujI20HZo5hSlgzk
+         ZiX5yEw+yuzVQaQueqVEAcnITOQZza6FMipXPM/kF7aOffrCHlQE50tZ8C1xHGTcmhgU
+         UkKQ==
+X-Gm-Message-State: AOJu0YxqjKrOq2ic2UnfLzP/YyEXNkX6DzRXkWLJfCz5ot4gksG3E0fL
+	inEwrHk0NHFqkz8bAnkHnV5utXALAMciP1eyQigABKCNd266kig6zbB7sW9gPg==
+X-Gm-Gg: AY/fxX7Dqy0LUzLr9xufyrnAze/XSg5UUjQdMph+SPkI6O4OaYUBLX8Boub+CTWLvhZ
+	RRjayOfQU+hVBA478Be5WmMZWQbVFiDDAgtRL1wxaCXjhBmtzk+0ZwfGYPHVK0ot8WUs5hEhNp4
+	xn+xx36eddvoKaCRE486WuT/VdQE5z537/VDap3epR/PWIwDJNAlBOAvY+WQaEbu4dHTTDliQYA
+	WHVziOxUDSMFehbIAeTp25ZauqtSfHaRXAyaAQFHfWo2xDHLAxHSCDHPs5v7T0DVc622RuhXqkT
+	ox0FL9TtEPheyAFViWs51pIROE+gXu27xxV1YxSwH03mVjj90sBm/vlB6sgRHTqySGw1rQUQHAg
+	4l+QuOBLD3cMVi24YJwvG1iI+XExGZsog38HRGPhwF4+tUN7dL7uC5ijWdcI6PnazW7ljFlbYBt
+	MEvaqin96d
+X-Google-Smtp-Source: AGHT+IElsnB/4afdKNxtomKQcIjeWjUgLHvFsJLt5cRE40yyrP3oSu1YfcNRYZXQEhQ7Wkvj7XVRMw==
+X-Received: by 2002:a05:600c:470a:b0:477:7b16:5f9f with SMTP id 5b1f17b1804b1-47d1958a61fmr309065215e9.31.1766923874768;
+        Sun, 28 Dec 2025 04:11:14 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be273e4d5sm546859805e9.6.2025.12.28.04.11.14
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be273e4d5sm546859805e9.6.2025.12.28.04.11.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Dec 2025 04:11:15 -0800 (PST)
+        Sun, 28 Dec 2025 04:11:11 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 6/6] xmlsec1: update SRC_URI
-Date: Sun, 28 Dec 2025 13:10:59 +0100
-Message-ID: <20251228121059.1810946-6-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 5/6] softhsm: correct SRC_URI branch
+Date: Sun, 28 Dec 2025 13:10:58 +0100
+Message-ID: <20251228121059.1810946-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251228121059.1810946-1-skandigraun@gmail.com>
 References: <20251228121059.1810946-1-skandigraun@gmail.com>
@@ -68,26 +68,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 12:11:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122961
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122960
 
-The tarball was moved to a subfolder. Adapt the SRC_URI.
+The develop branch doesn't exist anymore. The fetched commit is on the main branch.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb | 2 +-
+ meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-index 0cca2fe774..4408f79f78 100644
---- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-+++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.33.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=352791d62092ea8104f085042de7f4d0"
+diff --git a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+index b601a7444d..4816fe2a70 100644
+--- a/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
++++ b/meta-oe/recipes-security/softhsm/softhsm_2.6.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
  
- SECTION = "libs"
+ DEPENDS = "sqlite3"
  
--SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
-+SRC_URI = "http://www.aleksey.com/xmlsec/download/older-releases/${BP}.tar.gz \
-     file://fix-ltmain.sh.patch \
-     file://change-finding-path-of-nss.patch \
-     file://makefile-ptest.patch \
+-SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=develop"
++SRC_URI = "git://github.com/softhsm/SoftHSMv2.git;protocol=https;branch=main"
+ SRCREV = "7f99bedae002f0dd04ceeb8d86d59fc4a68a69a0"
+ S = "${WORKDIR}/git"
+ 
 
