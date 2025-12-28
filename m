@@ -2,171 +2,186 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50D85E784BE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5181CE92725
 	for <webhook@archiver.kernel.org>; Sun, 28 Dec 2025 13:39:35 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24496.1766929173417615526
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24416.1766929172404024370
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Dec 2025 05:39:33 -0800
+ Sun, 28 Dec 2025 05:39:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Hqz5MyWo;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47aa03d3326so53030895e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 05:39:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lAO8NKKZ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-42fbc3056afso4460860f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 05:39:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766929172; x=1767533972; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vLlcHkGfIB1MeAb3kf9zT9eHXwdSnDRSnWgDXdYk3cM=;
-        b=Hqz5MyWoHItENJo8V1c2DHZXg1k9h9Pl5BGPTOlBCHkBFHqJcHR1+CgSBt8ZWswlwp
-         Y0tb3ugd3Ae9o7Vu/6ctR8wuQcIcOhgf4Bx+4Y/5qimSYvW8rPaTGRrfZaC6V7Mb4VxD
-         g/ro6LYhMMNOcae8e19ONRKf1h66+u4Crdm1Lm6RFvgIZtcB6K09c6O8/qszmLTaGJtR
-         aKDre0/TY9KOmCh11AMXnO3g/7cZ70UDNF2q/AObZIBDEMKnIhNMPpIJ1P5DhkrJUAYu
-         Pz+7yV9b3GcYXwLXgduyXwXMtDe+H2qYlOsUgjcFSMC+q28cE3C6N2G8NnWB2XQPlc/0
-         elMw==
+        d=gmail.com; s=20230601; t=1766929171; x=1767533971; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iotRxNyGbj1lWzUd0gcsX39eEK+9zz8LetfWd2ecV9M=;
+        b=lAO8NKKZRdF+aYfoyDqnwI04k1DZRDBsDe0r64zBGaOuYL36gzEkZuVJDkhYAPvXQy
+         pkFkPEWmC7lBQm+848NJz4mPs6R8tXsQgc1eC+6S7fk/B3UazFNkcmsaAcwV7JM0JNw2
+         XxSn/sQi4m/adltcxur2nwsVaOziyav6n3cSgxQoOwl1XMfZxc0hsxAoDRw6BPkIMIQb
+         0rGf8VCk++0OOJkRiJiVU9mrObVjrxEkGwsKbcpdGcedIuCkIyTFNV3N8jQGpZX01yO6
+         iqEf7+XeeRHm3u/4DAz/JyMMvnx/8+30NJL0FVE954zNpp82i2BJA50oAaAD9UGBsG9K
+         ptBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766929172; x=1767533972;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vLlcHkGfIB1MeAb3kf9zT9eHXwdSnDRSnWgDXdYk3cM=;
-        b=YcqeObRu63ua02K0RINAkCGm5kcuRf5avNOiE6fiCxmHlDorufc6CFfvyDqJF5Se1K
-         2W7c3TUYIQ2oYM0tNnf1VFUdYaEyNBIXTtCdcRaOsHb9sTlN0jMGAsvMW+kkczJSx6Y3
-         puvYzVgcRV9jeTABx3xLG3GbqtuSDk5MnomqyeLGcYujj1NT+AanpvJJA33nyqdu9Pwv
-         QN13pL+DESTzj4yO6aD6ZBvpjDz4ud0Th7G4WlBKA0RYwdXzp6WQK/AjbEHOLBJ3Z7dL
-         7StxclyOsMUe3H+Ze7s/MaROrvTtE7VM/umoCR3FW7ubQv6AL8P3IUZ/+E1fs0O3JcGU
-         lcAQ==
-X-Gm-Message-State: AOJu0YzFwhaKqV842uJXQvnx9eQFWwwYlH5EhcIjU7HbT6VHL2PEiVeD
-	DwBRkusRC1uSz+lBGk3BXVA7Ha/wdxU4TaNk5O+ZcaX0u4fvYQYk1Vu6l9bdRg==
-X-Gm-Gg: AY/fxX6Kld+VsoQ8C96HSY3B4szMYACTKvJDI+3NOffOmvaKhDmrswvqnZvxPQQpbNQ
-	g1uocWQHjdzZXtt/evcKDEzk7Fz+mr8VgQ/8XTpe+3MUCUtqS0C1iimDzyDqwWNfQ3gO4LYRQl9
-	PKgF1COWfODb0aHvrHJMm+1vxHhW4KhPHIlcbN1klRWw0IvcJ2wUq+k9VfdEKEF/i8z2JKsRAeE
-	7TfAdi3fjXLd/qqbsuBQPeUKgRzpbLvYHWSVKHygLiA8trQI5jNCOyMlRI0HvOtUKBzy6YGla4E
-	0tCNd2t+GzP8YI1J//UgKtOpMakxhrnDt/hhh7K4Y30TeUnT9mrWQW5el9qVMBrav/lSgzw+d8M
-	Xnb256dlys0eBV0zfDiXtt3yjDZWuPh6sAJokwT4e/LX/K8gb/dxaxq7+IX6LoiIw+kV5rFdWK1
-	q3PW+le6/h
-X-Google-Smtp-Source: AGHT+IHDUfPrnaKiilbm9zEO4RdB9DDUpGf/nBnqD7SBvxYA1Wko/7PHpovfGcaMVTuLg5UACwEdAg==
-X-Received: by 2002:a05:600c:470a:b0:477:7b16:5f9f with SMTP id 5b1f17b1804b1-47d1958a61fmr311325535e9.31.1766929171035;
-        Sun, 28 Dec 2025 05:39:31 -0800 (PST)
+        d=1e100.net; s=20230601; t=1766929171; x=1767533971;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iotRxNyGbj1lWzUd0gcsX39eEK+9zz8LetfWd2ecV9M=;
+        b=Xcd0qLG0kewZ/CCE0Kusw9bdyagtT6TKuff18i8vfbU0F5ub8+uI4a3on/Ok0Ael2J
+         E9aBPsW8DV2WniFwUjnb77yRVtcuP1c8ZdOTGj92duTJxdPaHX5/nzoZp7Z0n04UmEOr
+         gHZIC7c471oUd0hq7w0dj9K35lmE5D6X4hnJKbVmfKkKE2dwsLngWM98q/ssg9RRHwT1
+         WZf+JhSY7Zg3Cm6edRGHS00p7RpyRIY2iCKDzRXG0EcI8dg1GFpSySHquOs+YQX7xBQC
+         IZ5+wODbTe46Pk90mrQ88hJLuCIOS0Ch//sB6PJcvuANh4YR/9qG4Fsk7uw3VR5MRFRo
+         l80g==
+X-Gm-Message-State: AOJu0Yw00M2PqNDjE1MhjvkjiGqyh7bwavAv4chZHczF3Iz49qRN8bH3
+	YUonybdkHbmhbilUQw6K+/R/rXf0FcRvYABgnv64tCex9fh3YxtVLfcY/aLYyA==
+X-Gm-Gg: AY/fxX6Grd/PkqRWmlzCWYue9ucyLy3kTbLn2YYE3oAQZatauJLrgwLWJ3VkTBEFtxk
+	I5E7PicCkT1lCS1tsCnqjYleABKww/9V2yt2MtymSqjHyGFSh6GWhpgJY34QADm4qEnEzAbmHsT
+	vwnjiq3ZBE+wJquB88Q515xREtpYfVACVX0R0uwB9r1tRSxo/+Dy3g3fSZAJWcjCX1GQWasOH4S
+	sgW1PsBLnHe37PeBqvevfEm1HITeiBfQNTZDNKqKBvb5n5fmVMomo4OBC3x3P0raYf+KfgyEd2k
+	cKOIXY21uHIw8Mr8WX35ab/pR6lenTbQP/WbdxvDsybiG+uNFhG0EjWVJHCKrfj/GoE9Y18PYr7
+	LmBBiXJDYzfE6BsocePbVsyxLxFOTvvQL9ScyDX47Mx1KVz/3ICNxTqLMapVoMQaMSJQT2lhOow
+	ubegbncnsO
+X-Google-Smtp-Source: AGHT+IF3i0E8OO9DVWYZfsNYo2vKJTATNZegf6IYfysheW+uKQFG7YUzNDuuLyiWLz0o6XhEzNiRPg==
+X-Received: by 2002:a5d:5f47:0:b0:432:86e7:dd79 with SMTP id ffacd0b85a97d-43286e7ddabmr6130277f8f.3.1766929170342;
+        Sun, 28 Dec 2025 05:39:30 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa4749sm57457874f8f.37.2025.12.28.05.39.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa4749sm57457874f8f.37.2025.12.28.05.39.29
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Dec 2025 05:39:30 -0800 (PST)
+        Sun, 28 Dec 2025 05:39:29 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 2/3] nbdkit: patch CVE-2025-47712
-Date: Sun, 28 Dec 2025 14:39:28 +0100
-Message-ID: <20251228133929.2662904-2-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 1/3] nbdkit: patch CVE-2025-47711
+Date: Sun, 28 Dec 2025 14:39:27 +0100
+Message-ID: <20251228133929.2662904-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251228133929.2662904-1-skandigraun@gmail.com>
-References: <20251228133929.2662904-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 13:39:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122963
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122962
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-47712
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-47711
 
-Pick the patch from the project's repository which explicitly
-mentions this vulnerability ID.
+Pick the patch from the repository which explicitly mentions
+this CVE ID.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../nbdkit/nbdkit/CVE-2025-47712.patch        | 162 ++++++++++++++++++
- .../recipes-support/nbdkit/nbdkit_1.30.2.bb   |   1 +
- 2 files changed, 163 insertions(+)
- create mode 100644 meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47712.patch
+ .../nbdkit/nbdkit/CVE-2025-47711.patch        | 168 ++++++++++++++++++
+ .../recipes-support/nbdkit/nbdkit_1.30.2.bb   |   3 +-
+ 2 files changed, 170 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47711.patch
 
-diff --git a/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47712.patch b/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47712.patch
+diff --git a/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47711.patch b/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47711.patch
 new file mode 100644
-index 0000000000..84b0ad89f2
+index 0000000000..edc1b7243c
 --- /dev/null
-+++ b/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47712.patch
-@@ -0,0 +1,162 @@
-+From 4290f04d6fd9321fffcf09c0507a4f394e19f087 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/nbdkit/nbdkit/CVE-2025-47711.patch
+@@ -0,0 +1,168 @@
++From 53b7e408f2a5fc449183ff4c82e1cad8387ca331 Mon Sep 17 00:00:00 2001
 +From: Eric Blake <eblake@redhat.com>
-+Date: Tue, 22 Apr 2025 19:53:39 -0500
-+Subject: [PATCH] blocksize: Fix 32-bit overflow in .extents [CVE-2025-47712]
++Date: Tue, 22 Apr 2025 17:01:12 -0500
++Subject: [PATCH] server: Fix off-by-one for maximum block_status length
++ [CVE-2025-47711]
 +
-+If the original request is larger than 2**32 - minblock, then we were
-+calling nbdkit_extents_aligned() with a count that rounded up then
-+overflowed to 0 instead of the intended 4G because of overflowing a
-+32-bit type, which in turn causes an assertion failure:
++There has been an off-by-one bug in the code for .extents since the
++introduction of that callback.  Remember, internally the code allows
++plugins to report on extents with 64-bit lengths, but the protocol
++only supports 32-bit block status calls (nbdkit will need to create
++plugin version 3 before it can support NBD's newer 64-bit block
++status).  As such, the server loop intentionally truncates a plugin's
++large extent to 2**32-1 bytes.  But in the process of checking whether
++the loop should exit early, or if any additional extents should be
++reported to the client, the server used 'pos > offset+count' instead
++of >=, which is one byte too far.  If the client has requested exactly
++2**32-1 bytes, and the plugin's first extent has that same length, the
++code erroneously proceeds on to the plugin's second extent.  Worse, if
++the plugin's first extent has 2**32 bytes or more, it was truncated to
++2**31-1 bytes, but not completely handled, and the failure to exit the
++loop early means that the server then fails the assertion:
 +
-+nbdkit: ../../server/backend.c:814: backend_extents: Assertion `backend_valid_range (c, offset, count)' failed.
++nbdkit: ../../server/protocol.c:505: extents_to_block_descriptors:
++Assertion `e.length <= length' failed.
 +
-+The fix is to force the rounding to be in a 64-bit type from the
-+get-go.
++The single-byte fix addresses both symptoms, while the added test
++demonstrates both when run on older nbdkit (the protocol violation
++when the plugin returns 2**32-1 bytes in the first extent, and the
++assertion failure when the plugin returns 2**32 or more bytes in the
++first extent).
 +
-+The ability for a well-behaved client to cause the server to die from
-+an assertion failure can be used as a denial of service attack against
-+other clients.  Mitigations: if you requrire the use of TLS, then you
-+can ensure that you only have trusted clients that won't trigger a
-+block status call that large.  Also, the problem only occurs when
-+using the blocksize filter, although setting the filter's maxlen
-+parameter to a smaller value than its default of 2**32-1 does not
-+help.
++The problem can only be triggered by a client request for 2**32-1
++bytes; anything smaller is immune.  The problem also does not occur
++for plugins that do not return extents information beyond the client's
++request, or if the first extent is smaller than the client's request.
 +
-+Fixes: 2680be00 ('blocksize: Fix .extents when plugin changes type within minblock', v1.21.16)
++The ability to cause the server to die from an assertion failure can
++be used as a denial of service attack against other clients.
++Mitigations: if you require the use of TLS, then you can ensure that
++you only have trusted clients that won't trigger a block status call
++of length 2**32-1 bytes.  Also, you can use "--filter=blocksize-policy
++blocksize-minimum=512" to reject block status attempts from clients
++that are not sector-aligned.
++
++Fixes: 26455d45 ('server: protocol: Implement Block Status "base:allocation".', v1.11.10)
++Reported-by: Nikolay Ivanets <stenavin@gmail.com>
 +Signed-off-by: Eric Blake <eblake@redhat.com>
-+Message-ID: <20250423210917.1784789-3-eblake@redhat.com>
++Message-ID: <20250423211953.GR1450@redhat.com>
 +Reviewed-by: Richard W.M. Jones <rjones@redhat.com>
 +
-+CVE: CVE-2025-47712
-+Upstream-Status: Backport [https://gitlab.com/nbdkit/nbdkit/-/commit/a486f88d1eea653ea88b0bf8804c4825dab25ec7]
++CVE: CVE-2025-47711
++Upstream-Status: Backport [https://gitlab.com/nbdkit/nbdkit/-/commit/e6f96bd1b77c0cc927ce6aeff650b52238304f39]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ filters/blocksize/blocksize.c            |  5 +-
-+ tests/Makefile.am                        |  2 +
-+ tests/test-blocksize-extents-overflow.sh | 83 ++++++++++++++++++++++++
-+ 3 files changed, 88 insertions(+), 2 deletions(-)
-+ create mode 100755 tests/test-blocksize-extents-overflow.sh
++ server/protocol.c          |  2 +-
++ tests/Makefile.am          |  2 ++
++ tests/test-eval-extents.sh | 71 ++++++++++++++++++++++++++++++++++++++
++ 3 files changed, 74 insertions(+), 1 deletion(-)
++ create mode 100755 tests/test-eval-extents.sh
 +
-+diff --git a/filters/blocksize/blocksize.c b/filters/blocksize/blocksize.c
-+index 03da4971..b06f78b3 100644
-+--- a/filters/blocksize/blocksize.c
-++++ b/filters/blocksize/blocksize.c
-+@@ -474,8 +474,9 @@ blocksize_extents (nbdkit_next *next,
-+     return -1;
-+   }
++diff --git a/server/protocol.c b/server/protocol.c
++index 2ac77055..015235ce 100644
++--- a/server/protocol.c
+++++ b/server/protocol.c
++@@ -495,7 +495,7 @@ extents_to_block_descriptors (struct nbdkit_extents *extents,
++       (*nr_blocks)++;
 + 
-+-  if (nbdkit_extents_aligned (next, MIN (ROUND_UP (count, h->minblock),
-+-                                         h->maxlen),
-++  if (nbdkit_extents_aligned (next,
-++                              MIN (ROUND_UP ((uint64_t) count, h->minblock),
-++                                   h->maxlen),
-+                               ROUND_DOWN (offset, h->minblock), flags,
-+                               h->minblock, extents2, err) == -1)
-+     return -1;
++       pos += length;
++-      if (pos > offset + count) /* this must be the last block */
+++      if (pos >= offset + count) /* this must be the last block */
++         break;
++ 
++       /* If we reach here then we must have consumed this whole
 +diff --git a/tests/Makefile.am b/tests/Makefile.am
-+index 8ddf73d1..a38a37bc 100644
++index 9b995e53..8ddf73d1 100644
 +--- a/tests/Makefile.am
 ++++ b/tests/Makefile.am
-+@@ -1415,11 +1415,13 @@ test_layers_filter3_la_LIBADD = $(IMPORT_LIBRARY_ON_WINDOWS)
-+ TESTS += \
-+ 	test-blocksize.sh \
-+ 	test-blocksize-extents.sh \
-++	test-blocksize-extents-overflow.sh \
-+ 	test-blocksize-default.sh \
++@@ -705,11 +705,13 @@ TESTS += \
++ 	test-eval.sh \
++ 	test-eval-file.sh \
++ 	test-eval-exports.sh \
+++	test-eval-extents.sh \
 + 	$(NULL)
 + EXTRA_DIST += \
-+ 	test-blocksize.sh \
-+ 	test-blocksize-extents.sh \
-++	test-blocksize-extents-overflow.sh \
-+ 	test-blocksize-default.sh \
++ 	test-eval.sh \
++ 	test-eval-file.sh \
++ 	test-eval-exports.sh \
+++	test-eval-extents.sh \
 + 	$(NULL)
 + 
-+diff --git a/tests/test-blocksize-extents-overflow.sh b/tests/test-blocksize-extents-overflow.sh
++ # file plugin test.
++diff --git a/tests/test-eval-extents.sh b/tests/test-eval-extents.sh
 +new file mode 100755
-+index 00000000..844c3999
++index 00000000..92b503e6
 +--- /dev/null
-++++ b/tests/test-blocksize-extents-overflow.sh
-+@@ -0,0 +1,83 @@
+++++ b/tests/test-eval-extents.sh
++@@ -0,0 +1,71 @@
 ++#!/usr/bin/env bash
 ++# nbdkit
 ++# Copyright Red Hat
@@ -199,8 +214,6 @@ index 0000000000..84b0ad89f2
 ++# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 ++# SUCH DAMAGE.
 ++
-++# Demonstrate a fix for a bug where blocksize overflowed 32 bits
-++
 ++source ./functions.sh
 ++set -e
 ++set -x
@@ -210,56 +223,48 @@ index 0000000000..84b0ad89f2
 ++requires_nbdsh_uri
 ++requires nbdsh --base-allocation --version
 ++
-++# Script a sparse server that requires 512-byte aligned requests.
-++exts='
-++if test $(( ($3|$4) & 511 )) != 0; then
-++  echo "EINVAL request unaligned" 2>&1
-++  exit 1
-++fi
-++echo 0 5G 0
-++'
+++files="eval-extents.out"
+++rm -f $files
+++cleanup_fn rm -f $files
 ++
-++# We also need an nbdsh script to parse all extents, coalescing adjacent
-++# types for simplicity.
-++# FIXME: Once nbdkit plugin version 3 allows 64-bit block extents, run
-++# this test twice, once for each bit size (32-bit needs 2 extents, 64-bit
-++# will get the same result with only 1 extent).
+++# Trigger an off-by-one bug introduced in v1.11.10 and fixed in v1.43.7
 ++export script='
-++size = h.get_size()
-++offs = 0
-++entries = []
-++def f(metacontext, offset, e, err):
-++    global entries
-++    global offs
-++    assert offs == offset
-++    for length, flags in zip(*[iter(e)] * 2):
-++        if entries and flags == entries[-1][1]:
-++            entries[-1] = (entries[-1][0] + length, flags)
-++        else:
-++            entries.append((length, flags))
-++        offs = offs + length
+++def f(context, offset, extents, status):
+++  print(extents)
 ++
-++# Test a loop over the entire device
-++while offs < size:
-++    len = min(size - offs, 2**32-1)
-++    h.block_status(len, offs, f)
-++assert entries == [(5 * 2**30, 0)]
+++# First, probe where the server should return 2 extents.
+++h.block_status(2**32-1, 2, f)
+++
+++# Next, probe where the server has exactly 2**32-1 bytes in its first extent.
+++h.block_status(2**32-1, 1, f)
+++
+++# Now, probe where the first extent has to be truncated.
+++h.block_status(2**32-1, 0, f)
 ++'
-++
-++# Now run everything
-++nbdkit --filter=blocksize eval minblock=512 \
-++       get_size='echo 5G' pread='exit 1' extents="$exts" \
-++       --run 'nbdsh --base-allocation -u "$uri" -c "$script"'
+++nbdkit eval \
+++       get_size='echo 5G' \
+++       pread='dd if=/dev/zero count=$3 iflag=count_bytes' \
+++       extents='echo 0 4G 1; echo 4G 1G 2' \
+++       --run 'nbdsh --base-allocation --uri "$uri" -c "$script"' \
+++       > eval-extents.out
+++cat eval-extents.out
+++diff -u - eval-extents.out <<EOF
+++[4294967294, 1, 1073741824, 2]
+++[4294967295, 1]
+++[4294967295, 1]
+++EOF
 diff --git a/meta-networking/recipes-support/nbdkit/nbdkit_1.30.2.bb b/meta-networking/recipes-support/nbdkit/nbdkit_1.30.2.bb
-index d5b51f0e8d..7996c43752 100644
+index da24b1efd6..d5b51f0e8d 100644
 --- a/meta-networking/recipes-support/nbdkit/nbdkit_1.30.2.bb
 +++ b/meta-networking/recipes-support/nbdkit/nbdkit_1.30.2.bb
-@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
+@@ -10,7 +10,8 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
  
  SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
-            file://CVE-2025-47711.patch \
-+           file://CVE-2025-47712.patch \
-            "
+-"
++           file://CVE-2025-47711.patch \
++           "
  
  SRCREV = "b59380e061fdf0f114c13c226ea2a508f2c067d0"
+ 
 
