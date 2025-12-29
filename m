@@ -1,124 +1,103 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EF61D3B7E5
-	for <webhook@archiver.kernel.org>; Sun, 28 Dec 2025 13:39:35 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24497.1766929174337523130
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 324E3D3B7E5
+	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 09:29:51 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.40568.1767000588015981355
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Dec 2025 05:39:34 -0800
+ Mon, 29 Dec 2025 01:29:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ag6tqN0Y;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42fbad1fa90so7469617f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 05:39:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1766929173; x=1767533973; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=62Z6KiK/nKNwuh2eY9B4PBjmPZ+lTR/ckSGYe9d2C08=;
-        b=ag6tqN0YkWu8UbEM+teHQPoZFrivdyesvRfh9jfRzvhsb6r2BmLSuCoWdhfAbqxxa5
-         tXbYJRtTATGuLxk9Qa1nm92Mo4xFDCOLKbY2NUMUFb5za/3DAt6q8WIN5u/oua9L0vji
-         AqGRQSMaTBKLW8I1O2d6eQrEmvRRhznvGaRMKYDSCBDWfFKQHlnRDjabMBbP9yM81A2A
-         AXFQxXXOM6xSPsimZ9uhzS21rYQFmy9LWblneYipMvDh5rOMiI0R+8c+vOvHLpCCysET
-         ebDjQP94+YqN4CXFw46Lh/a7OFY1BAj9KlAwlb2P0dCS0xge4PC9pKYXjXp13FM5YF2J
-         r28Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1766929173; x=1767533973;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=62Z6KiK/nKNwuh2eY9B4PBjmPZ+lTR/ckSGYe9d2C08=;
-        b=cvYYHchaGdX9GBiBe9fzREd1uNABJjxNt+FyDXICu6eVQGk7gVBlAVi6kK6/SrWXbb
-         1ylqWTGD/i8ul5+c4oYmjovqlge+KBDGk2wOSi4dKBt+tsSGpUljGTWCmfR/R6S3FFH2
-         ePtp1m5RCKm+Kse4F4kM5QdjUbf+GoyxfSh6bKYw/8G4bxDXTNyLrzH7juNFLWnn3UUq
-         8PnI1koRQAT43xfpksnFzRgQm9s8aNktpHYKAi3omkME3CVYDNWmdQfKbzn9cYvuDNhL
-         wzhf2fcAew5/JWSoGN2lk4srWMIlBwWsR0+B82g1nJ4whSx3UZfbYpuAqXiSWtGN4MQu
-         Kw/w==
-X-Gm-Message-State: AOJu0YzZh9458IDB4/tqVLSfJLvE7WVMFxEHfcS6Rgdz3AQnRlaOQ6qm
-	h1JcH6T4QMUWJMjLR9OFLRfqEtD/p++y3r5W7YjiO5pZqQ9b4V81RcstxHYkIQ==
-X-Gm-Gg: AY/fxX6H5qArZ3fRPs2U+ol5R6jJWfipxsPaRIhLJzP8ev61tNAVhhUoorszHlzEAW2
-	E98olI3Ka+o1qybuRtDqjEXYNmXr2Upbq8KpIL0ktSPUkQxwd1mwp8ZMWJr0lhks8bCtUC/1FAL
-	hlYW/NkVy4rRQ0KgeCcW8fj1LpkZKxwZm+CI0gukt7TG5PEChz0ww81nzibCNRDuRWfG2K9LHxq
-	uZRDT3sJHkAhSfg0sEF2MOThqisobX0yVSnHOqfhOCdVV/HuPY9HknOc3SH6wNCkokx4dJqsh0g
-	wUYzIlseUehh/0mgjV7GIsmNf4aU0/+6BOUXur6MKGgofT/mtZEvXN+PRZkQTQgRB5dvhznbvLM
-	INKex0gpGelLSPE+xSq2iGnXvtSWRRYW690xLv6mgzdPBqiUao2TxD+bR5ZuuAvPxzifwlqso+j
-	b276MPBviM
-X-Google-Smtp-Source: AGHT+IFHizzxp6JY27sedb6VU4xjdrOAal1B2JKrfrFq27BVaIj0nkcLnSTTgvW18Nbfp2YCD1jE/g==
-X-Received: by 2002:a05:6000:2504:b0:430:f437:5a6d with SMTP id ffacd0b85a97d-4324e4c9e74mr35451587f8f.22.1766929172590;
-        Sun, 28 Dec 2025 05:39:32 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa4749sm57457874f8f.37.2025.12.28.05.39.31
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Dec 2025 05:39:32 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=IFOg6k0w;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1767000588; x=1798536588;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=TngFd90xbPY2RyWOnSH961n8kgwTrrMkH/rVwuuX7t0=;
+  b=IFOg6k0wAltKXEqravSWEoAU+wY0nAhezQWWk6krcy4dBzk8lVm/8hRl
+   9lEQLZRax/86XMSqqUqBCRuQ2Ny0kpuYsj02pagwCFXnOXFvYT2QNGOTA
+   kPz/K69K97opwxzBuBJXIhtLqUm0fGEDJiSayUpXDquU4CnMRvLP/jzQY
+   +9CmQtN842641SDhpN4Dvj1PAnA31GS6lPObCJKPViPyC9lG5W/J9FbOD
+   h1VD9LPXKGPQCNt5dDTRMeFEKm9s3XH35Fi1JaJ4hvGZPvUxUhfGwoaWp
+   OIzgI943VfRyQFlbFbL+2ohaFUTtPOmeVhAL9n+QAcjVmfwDhFmW2jPfJ
+   w==;
+X-CSE-ConnectionGUID: gRlzeJN9To6qOcJeAajsEw==
+X-CSE-MsgGUID: Rk8xubIrThSBSZQiY8FRMg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11655"; a="224264995"
+X-IronPort-AV: E=Sophos;i="6.21,185,1763391600"; 
+   d="scan'208";a="224264995"
+Received: from unknown (HELO az2nlsmgr4.o.css.fujitsu.com) ([20.61.8.234])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Dec 2025 18:29:46 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 4067E42A311
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 09:29:46 +0000 (UTC)
+Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id DEDA218009E8
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 09:29:45 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.34])
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 5F13E100036E;
+	Mon, 29 Dec 2025 09:29:43 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 3/3] nbdkit: remove unused patch
-Date: Sun, 28 Dec 2025 14:39:29 +0100
-Message-ID: <20251228133929.2662904-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251228133929.2662904-1-skandigraun@gmail.com>
-References: <20251228133929.2662904-1-skandigraun@gmail.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/10] fluentbit: upgrade 4.2.1 -> 4.2.2
+Date: Mon, 29 Dec 2025 17:29:28 +0800
+Message-ID: <20251229092936.1483-2-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <20251229092936.1483-1-wangmy@fujitsu.com>
+References: <20251229092936.1483-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 28 Dec 2025 13:39:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122964
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 09:29:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122966
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+==========
+- packaging: script: Use rockylinux prefix on package testing script
+- security: Update supporting timeline
+- out_cloudwatch_logs: increase MAX_EVENT_LEN to 1MB with tests
+- aws: Implement simple_aggregation operation
+- out_kinesis_firehose: enable HTTP debugging for AWS client requests
+- http_client: add ipv6 bracket if missing from host address
+- lib: updates 20251223
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ver-Fix-build-when-printf-is-a-macro.patch | 39 -------------------
- 1 file changed, 39 deletions(-)
- delete mode 100644 meta-networking/recipes-support/nbdkit/nbdkit/0001-server-Fix-build-when-printf-is-a-macro.patch
+ .../fluentbit/{fluentbit_4.2.1.bb => fluentbit_4.2.2.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/fluentbit/{fluentbit_4.2.1.bb => fluentbit_4.2.2.bb} (99%)
 
-diff --git a/meta-networking/recipes-support/nbdkit/nbdkit/0001-server-Fix-build-when-printf-is-a-macro.patch b/meta-networking/recipes-support/nbdkit/nbdkit/0001-server-Fix-build-when-printf-is-a-macro.patch
-deleted file mode 100644
-index c7ec41eb9a..0000000000
---- a/meta-networking/recipes-support/nbdkit/nbdkit/0001-server-Fix-build-when-printf-is-a-macro.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 28f07715ab4d670ce81e12776bbece043305bd83 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 11 Apr 2020 15:08:39 -0700
--Subject: [PATCH] server: Fix build when printf is a macro
--
--clang complains on x86 when building
--
--main.c:116:2: error: embedding a #include directive within macro arguments is not supported
-- ^
--
--convert nesting include into a string assignment, to same effect but
--making it compatible with clang as well
--
--Upstream-Status: Submitted [https://github.com/libguestfs/nbdkit/pull/3]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- server/main.c | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/server/main.c b/server/main.c
--index 748122f..c0ac874 100644
----- a/server/main.c
--+++ b/server/main.c
--@@ -112,9 +112,10 @@ static void
-- usage (void)
-- {
--   /* --{short,long}-options remain undocumented */
---  printf (
--+  char const *opt_list =
-- #include "synopsis.c"
---  );
--+	  ;
--+  printf ("%s\n", opt_list);
--   printf ("\n"
--           "Please read the nbdkit(1) manual page for full usage.\n");
-- }
---- 
--2.26.0
--
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.2.bb
+similarity index 99%
+rename from meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb
+rename to meta-oe/recipes-extended/fluentbit/fluentbit_4.2.2.bb
+index 4ca8c5ed77..d042293e3d 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.1.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.2.bb
+@@ -17,7 +17,7 @@ DEPENDS = "\
+ "
+ DEPENDS:append:libc-musl = " fts"
+ 
+-SRCREV = "909b1a917b4f46c40657a73821541fa03581a823"
++SRCREV = "ddfef360d7f3ac5268942c47ccc9b01864424a05"
+ SRC_URI = "\
+     git://github.com/fluent/fluent-bit.git;branch=master;protocol=https;tag=v${PV} \
+     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
+-- 
+2.43.0
+
 
