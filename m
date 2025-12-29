@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B1D7E9273A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48485D3B7E5
 	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 14:53:03 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.44464.1767019980989491178
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.44451.1767019981641126189
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 29 Dec 2025 06:53:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kDF2qNWm;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47774d3536dso72919365e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:53:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PvdpruYf;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-477a2ab455fso87665435e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:53:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767019979; x=1767624779; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767019980; x=1767624780; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yDuqar3YEfq3JCW1eRHnPMFowfgqs1E5JH1NlmjbqvQ=;
-        b=kDF2qNWmrDc5bOh9Kbp72L6VosX5DwADCBHfD+vl201VFH1eK4VNWhMzMhHHx3e//s
-         +5x6D1q+8Z8EsHfo/Y4WolR5Ajprycccuykr7fXbv7UYDfuxoUC04c0G8unpVUMh/LHo
-         DSjCjRjBN5aF9l6YM2MQ7OZ6kT74K8qwAvm51OCBYJGj5JlRhEWozxXg5bjfJgr04QbK
-         umOWDgl3DkV2mrsVnJYHUN/7Tmo8Gw9GHe8K7wOecCNkVpJzU+e1tpsVRe8WL9AUFb7r
-         Xwr5IiPPB2bstZ1j79BRlw50eeCi15z3sdAoM+m5yQI/LGWi3XAersBbH6261S9f83PJ
-         RtZA==
+        bh=oiu6wI+AzLjkPFSV3R3T7/ZFu0n5D7c8TkbgplQePR0=;
+        b=PvdpruYf0HA4anD5KlioHAp6fWMEC+Za/vaHEDXWSPz/V/0OBjxiNx9oHI1BJXFk5B
+         WSRRPg/CUK21WmlHz/J+tgz3+KX7EeOjW4CyfHtt+BM4n25JLE8NHrG6VQYyDDjv0Ye4
+         xSef4Tjn5eZgY9ahhGyFquT5omQOatGUcZD7ZXIyfmS9IhdQQu2+dxKNp6nU+Ow4WBao
+         ianYphm90CuFUfR+znMQK4yILAaiZIKfBoUx5KHYaKuOrIomanroCur422cAqL/trVb3
+         iu25pF/uD2+eqQyFPfRTxCtWnqy6JxEJWP+PEejexU4aja8gNMPgAO1VNQ3YjZsS6jS1
+         adCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767019979; x=1767624779;
+        d=1e100.net; s=20230601; t=1767019980; x=1767624780;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=yDuqar3YEfq3JCW1eRHnPMFowfgqs1E5JH1NlmjbqvQ=;
-        b=svfVmK1Ymlvs1ioa/Q+uaFTwORdP3eWUx6skNrWo7C+R2pq89EdfEBhPWZOQIvFNr6
-         Crrsk3XIFjjVqnqYV6dfTVuxsMd5jzuta+qDXpXGUq7fqv2uHgkouBh2VaMkVOSMS/AH
-         FRZNmr7nRBDK/ax92YFcvnBjsHh4feexd8IUhST15UN5WJ1tEmEVxV9Gkh2+k7m26I7P
-         2QUqzKsMmjveDvDDFtxlHWriPHClDwbbiuxURiUlB/WfXWTiwWSX9PLViK0H2nplXZe8
-         5MdKEMiERKfLC/ooaxtBhPUqovWO8gYwrA58VW0HG4cPZVGY98pYGQ70BTuud6NXpNeF
-         4hDQ==
-X-Gm-Message-State: AOJu0YxG9tClUk0s/JUGiRhebXmKW42+PcEMyLeT3rq5+658kE4t0C1X
-	sLkcLZwW6M6MIKlHH+TB2vFBKl0tNpIq/WYEFnyOMgnkXoV4EnL0EwCrDf/SsQ==
-X-Gm-Gg: AY/fxX6OYA2rCFUol/NGTEkE7vpG3Wcvrckbl/2uMlQoUgNDuAvp6uuC+lBKXxO06tD
-	qHJ3hQwPoWhAcOyrHhwZYcJcD+UVC0w60WwS0fTw890Uzm6Lhk8pg8+5Io44kidHc7SpZWBmZV7
-	o4C7wbvUm/fHVswCwL39mEPdFq9hgDqt98ySO4XfATgchRuNGoQKT3/8dybTlR7FgCiTGoHpdXG
-	ABuMSW/pR1VMej6mTwAoBzXBtFPjnqt/FWMzfSSG6nUBY5G+/G56hnV4HsPo/d14T6nqXzQZ3bh
-	xEmR6a2uEOy2WpMhW3jIhuGZ92NMC3F3MQhcFAwL2wMkvzBx3D9poSMOFxcjWXE/fdoqVp+t8vK
-	S/F1H8Cetzqv/a8ipjtPEDMn3N5lZcEYtfJiFEpSbNVQOsgGyyhhUeSQII/silMZQXZt6YA8LGf
-	eZUebXLQVC
-X-Google-Smtp-Source: AGHT+IGXOxLw2Iy57FUrpdvMkMvQpgMs0rDn7+BQtYUdSphsD24K3iCRr9bqMfPtjhrmSB2VwBWtqQ==
-X-Received: by 2002:a05:600c:6749:b0:471:665:e688 with SMTP id 5b1f17b1804b1-47d18be89d5mr442216715e9.17.1767019979223;
+        bh=oiu6wI+AzLjkPFSV3R3T7/ZFu0n5D7c8TkbgplQePR0=;
+        b=kiTqVtUk5hF+g09dxSTUW3vIzeilJxYlHMZBzHTZZsyxDp/Wu5fn3nPIAgDjcZRTJu
+         bkIMZvwx6sNJYSphhI/lE4cnREP4o6Xk4mj9n3dhq3lH37AGV2MKVDeYfx1+SFdXTiQs
+         8jt5NwjipYOQRqSYgsv+4RDnEauyQUkabRN1X6s0gnq+Ih99lw5n1TDHIjYXHP05YBww
+         iQw9J4fXqEqxbKS7zvOS+2TxnolmnCOQ06bZHGgvP1Mfacm71opTq+rYFwpQAET3zpc8
+         yVtNlLOEe2uJ0JdxqALlm39vO2i/YdEzeaeaUALjev7FTqgIvzrusZaIHS4ytjBZlGES
+         WFZg==
+X-Gm-Message-State: AOJu0Ywffkhd2n+NFRP/7mK7CVRMUEGToFIJS0U6orP1nb0dhO7+dBym
+	gsMjJJxqYFQ5w5nk0dCjGs9BfqSSS6BJ4DD2dI4OAjETn4cSiYPLVIbt8sKNEw==
+X-Gm-Gg: AY/fxX6Uj7M8ZTpqiMTSoIT88C012kNbztrH27tPA3EBLv82DzBAqlLf074BEvgv+Pa
+	9PkUGCCTDds/vbOrvq+cez0k/YhGj5ioL3zQb/DHEnQ6Ctx8JB5bQhu3N3OrLdOa9pzF/enGFVZ
+	GGwR0+9PzT4hQW/jzHKT8n8ayKDV4lZXS+3+GGS9ClfUbITFVGacKgXbU0tXIo3/eyqRfEPYwY8
+	TSr9anB1DUlSDDxzFzNSHdiWVH0R/yCh1Q48eLz1Dxw2vsYAc1Ek1tXiDzoljzNMAhHZ9ah7EZ3
+	0xTFQk5pfAkmLAx0mVsCiSrmPtG4lz3eFo18DpgD8W/ZbcKXnrybpTyup5Wx3waPBBCwvkdJZ/o
+	rNI+4OAW+pcaYbgTcibev2gC8V+AM/m31uINwAFJynind4KdsIjaJ+mwrOOPw3Mso+5YRpcQFyK
+	AaS5Zr+jZI
+X-Google-Smtp-Source: AGHT+IHRrr7/RqcOMx0tSzTeVB8dqkvYA9hYsf1iTW+6o1tHTOj2grXIBfDC4DeVQ9iylTc4DNrNoQ==
+X-Received: by 2002:a05:600c:8b56:b0:479:3a86:dc1a with SMTP id 5b1f17b1804b1-47d5b21d77emr21667215e9.36.1767019979909;
         Mon, 29 Dec 2025 06:52:59 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be273e4d5sm601067785e9.6.2025.12.29.06.52.58
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be273e4d5sm601067785e9.6.2025.12.29.06.52.59
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Dec 2025 06:52:58 -0800 (PST)
+        Mon, 29 Dec 2025 06:52:59 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 3/4] gimp: patch CVE-2025-14424
-Date: Mon, 29 Dec 2025 15:52:55 +0100
-Message-ID: <20251229145256.489179-3-skandigraun@gmail.com>
+Subject: [meta-gnome][PATCH 4/4] gimp: patch CVE-2025-14425
+Date: Mon, 29 Dec 2025 15:52:56 +0100
+Message-ID: <20251229145256.489179-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251229145256.489179-1-skandigraun@gmail.com>
 References: <20251229145256.489179-1-skandigraun@gmail.com>
@@ -68,68 +68,113 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 14:53:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122993
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122994
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-14424
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-14425
 
-Pick the patch referenced by the NVD report.
+Backport the patch referenced by the nvd report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gimp/gimp/CVE-2025-14424.patch            | 34 +++++++++++++++++++
+ .../gimp/gimp/CVE-2025-14425.patch            | 79 +++++++++++++++++++
  meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb    |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
 new file mode 100644
-index 0000000000..e7821d3109
+index 0000000000..44e9587570
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
-@@ -0,0 +1,34 @@
-+From d30875b606085316b1cb7ac1da0d26e5bac0cf2c Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
+@@ -0,0 +1,79 @@
++From 042e27792026460badbe49664c02fe181e95cb2b Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Thu, 13 Nov 2025 18:26:51 -0500
-+Subject: [PATCH] app: fix #15288 crash when loading malformed xcf
++Date: Wed, 12 Nov 2025 13:25:44 +0000
++Subject: [PATCH] plug-ins: Mitigate ZDI-CAN-28248 for JP2 images
 +
-+From: Jacob Boerema <jgboerema@gmail.com>
++From: Alx Sa <cmyk.student@gmail.com>
 +
-+ZDI-CAN-28376 vulnerability
++Resolves #15285
++Per the report, it's possible to exceed the size of the pixel buffer
++with a high precision_scaled value, as we size it to the width * bpp.
++This patch includes precision_scaled in the allocation calculation.
++It also adds a g_size_checked_mul () check to ensure there's no
++overflow, and moves the pixel and buffer memory freeing to occur
++in the out section so that it always runs even on failure.
 +
-+Add extra tests to not crash on a NULL g_class.
-+
-+CVE: CVE-2025-14424
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/5cc55d078b7fba995cef77d195fac325ee288ddd]
++CVE: CVE-2025-14425
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/cd1c88a0364ad1444c06536731972a99bd8643fd]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ app/core/gimpitemlist.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
++ plug-ins/common/file-jp2-load.c | 23 ++++++++++++++++-------
++ 1 file changed, 16 insertions(+), 7 deletions(-)
 +
-+diff --git a/app/core/gimpitemlist.c b/app/core/gimpitemlist.c
-+index 6473938..a431519 100644
-+--- a/app/core/gimpitemlist.c
-++++ b/app/core/gimpitemlist.c
-+@@ -345,7 +345,10 @@ gimp_item_list_named_new (GimpImage   *image,
-+   g_return_val_if_fail (GIMP_IS_IMAGE (image), NULL);
++diff --git a/plug-ins/common/file-jp2-load.c b/plug-ins/common/file-jp2-load.c
++index 064b616..604313a 100644
++--- a/plug-ins/common/file-jp2-load.c
+++++ b/plug-ins/common/file-jp2-load.c
++@@ -1045,14 +1045,15 @@ load_image (GimpProcedure     *procedure,
++   GimpColorProfile    *profile    = NULL;
++   GimpImage           *gimp_image = NULL;
++   GimpLayer           *layer;
+++  GeglBuffer          *buffer     = NULL;
+++  guchar              *pixels     = NULL;
+++  gsize                pixels_size;
++   GimpImageType        image_type;
++   GimpImageBaseType    base_type;
++   gint                 width;
++   gint                 height;
++   gint                 num_components;
++-  GeglBuffer          *buffer;
++   gint                 i, j, k, it;
++-  guchar              *pixels;
++   const Babl          *file_format;
++   gint                 bpp;
++   GimpPrecision        image_precision;
++@@ -1318,7 +1319,15 @@ load_image (GimpProcedure     *procedure,
++   bpp = babl_format_get_bytes_per_pixel (file_format);
 + 
-+   for (iter = items; iter; iter = iter->next)
-+-    g_return_val_if_fail (g_type_is_a (G_OBJECT_TYPE (iter->data), item_type), NULL);
++   buffer = gimp_drawable_get_buffer (GIMP_DRAWABLE (layer));
++-  pixels = g_new0 (guchar, width * bpp);
+++
+++  if (! g_size_checked_mul (&pixels_size, width, (bpp * (precision_scaled / 8))))
 ++    {
-++      g_return_val_if_fail (iter->data && ((GTypeInstance*) (iter->data))->g_class, NULL);
-++      g_return_val_if_fail (g_type_is_a (G_OBJECT_TYPE (iter->data), item_type), NULL);
+++      g_set_error (error, GIMP_PLUG_IN_ERROR, 0,
+++                   _("Defined row size is too large in JP2 image '%s'."),
+++                   gimp_file_get_utf8_name (file));
+++      goto out;
 ++    }
+++  pixels = g_new0 (guchar, pixels_size);
 + 
-+   if (! items)
++   for (i = 0; i < height; i++)
 +     {
++@@ -1344,13 +1353,13 @@ load_image (GimpProcedure     *procedure,
++         gegl_buffer_set (buffer, GEGL_RECTANGLE (0, i, width, 1), 0,
++                          file_format, pixels, GEGL_AUTO_ROWSTRIDE);
++     }
++-
++-  g_free (pixels);
++-
++-  g_object_unref (buffer);
++   gimp_progress_update (1.0);
++ 
++  out:
+++  if (pixels)
+++    g_free (pixels);
+++  if (buffer)
+++    g_object_unref (buffer);
++   if (profile)
++     g_object_unref (profile);
++   if (image)
 diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
-index 24281e5dfd..bc55aed06f 100644
+index bc55aed06f..fa192555bc 100644
 --- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
 +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
-@@ -63,6 +63,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
-            file://0001-meson.build-require-iso-codes-native.patch \
+@@ -64,6 +64,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
             file://CVE-2025-14422.patch \
             file://CVE-2025-14423.patch \
-+           file://CVE-2025-14424.patch \
+            file://CVE-2025-14424.patch \
++           file://CVE-2025-14425.patch \
             "
  SRC_URI[sha256sum] = "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94ce466a62862e296b"
  
