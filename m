@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33D1BE92737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DEC2E9273A
 	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 14:52:03 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.44424.1767019917847543638
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.44423.1767019916336999335
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Dec 2025 06:51:58 -0800
+ Mon, 29 Dec 2025 06:51:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e+8vcaE/;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47d182a8c6cso40574805e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:51:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H0IDvfDD;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-42e2e77f519so5556592f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:51:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767019916; x=1767624716; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767019915; x=1767624715; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mNqkLWwaQVF2sWtDCDHdH47N+OZoPQ2XuEL74CY2Zzg=;
-        b=e+8vcaE/T+HUUyXzm0aU6/R6xjQVkF5ju6kMxE6odQ0ilnRT1IuPmttIZEMciDOa5E
-         J+RfTkIbCWwSMQ3VC/WM/y4cZwKAxLoxjKOpMFnU+GlrkvN02yP7SPlQrXg1kiERTO60
-         CdofNPquJ027psj5KfMkN2tEWc1gkF8/5IuDTR2Rr//BCADTeS9NFs3wJfTUGw3gMwve
-         b0QRET6dmBzXnXo5knq7N8YgMGmUMvveyG3zGWhnRMZar2FRrRPnbbcHlTtXSNlswdki
-         4lJdEOacYr+JanGfbMpVU7YcAucN9TYHooet4zo4ab89HIj9flBF/9Nv8dG7Lds/4MxN
-         1ONA==
+        bh=Sm8nFOiMVUiqxmDNKObMDwVhI9c+LAamK3CErtl7zYc=;
+        b=H0IDvfDDxqoDCVplUTjIULeY2nUBo27rfMcQR4s8qqKull+eb7PtDdtajzIGft/HPH
+         7/ttvRV7fdRkjTADeS2GXR9Of9D77NfCfYUUjRXyy5Jt4/XdL0Zpic/vwil7a8nLjXLT
+         P+rqUcXst2YjqwgEvhvJW5J7rCqyUqE07xGpeMddfEdwuElxGAwxSWlecakInbT7QmeW
+         yHInYOe6xNuyNpv9LU3b/cUO1O4fwb1dAPW0zHYRUVV5BXSb4ChASd/AXwYsgaMSnE7i
+         9V9OxHmfhpBaPBob+ppgHrZcc25p0A4QDYCm8F8DxOs+xB4hbz/9v/bkqmHl6xQdtWQz
+         018A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767019916; x=1767624716;
+        d=1e100.net; s=20230601; t=1767019915; x=1767624715;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=mNqkLWwaQVF2sWtDCDHdH47N+OZoPQ2XuEL74CY2Zzg=;
-        b=CRxekAOqb99ilGPGKRGvxvhCLmy+c+8qeobqfj9oL8X7srGkQkMgZSzEJQf3tmUbvF
-         SEb4CVBdXV1jRVL5Mh9H/T8Td1nj+M7vwqWzzJwXXNXlzbNKAKu2v1Yz8cHBJN4jVoVN
-         GTsK2dOZWzusg45/ND/WAUqTAdzncjFN34Ioyp0DBB3rmwa4cTNT9hqYZkBWN2lvmeBF
-         Qady9G9dHL2PkTT9GbNrAe9fAc+rVFZMC624beSfVGR/ZfgSgxUKK/TH6J3GoZdWwuPv
-         zK2u+iGFXDeuzqKPOgg6KpMihPBOo2ncxBtjVmQL7CRBNADiXflfHqTvQfV6Y0QGOGdl
-         HbCA==
-X-Gm-Message-State: AOJu0YzDOBq3cUyK+K5OkKHd0SC/dXmJmcR4PGfEyNSmP8hu3vkMcNga
-	3RoCdiXoCS303PmjVOgvMJLFKcF8tzsAcxLUiZLDRNPCGKJkRaM54/iXPXaYxQ==
-X-Gm-Gg: AY/fxX7p4oiucZzqv0MerE/p12cqVYoI2IihZMDK9Gddnj+2wGVbGhyENsQLPcoSiVk
-	mKBmT2Wbc989tD6FeGZF+K+JLyP9GsketVyL8C9hYHsmrtpjbzLvYZsD9bppP7GZTZb7Nr8hzkn
-	JF9zbLmOA5xwtSEZ1eiBaQHUSXUysOa1B03J1JFoF45EDxnSHWhekWNfdejZmy4JJoCcUZiQlVh
-	XOMg9Z21Fp1DBSDcbRZMl9XCQ7hltuiYQjAFPSigjl6pyjFdiSOhz9TuFyLtHBuwyKraeyuwiw2
-	6eCE/bGy6hgSVDqnwcBmClydH+vEJx3IfU7sJGGiv39abxG7gnAGMWLRbPuqm6xWJ9TEYIz4Ms7
-	ieHuVWoOFiqiXh2F1ggnmpqLm20IzMehMM/JjvVXTYBlqdkisi0e4dgOZvA2tTsdnSDr6rQKRr0
-	Yklr+GC/wv
-X-Google-Smtp-Source: AGHT+IGokBNYKqECivUGF9BbaMSJDqgqHsoFp+yzVqzy4IdQxzKLfWk2uEpalgqSId8AlESHCN9+jQ==
-X-Received: by 2002:a05:600c:b99:b0:479:3a86:dc1c with SMTP id 5b1f17b1804b1-47d195a6369mr338854215e9.36.1767019915949;
-        Mon, 29 Dec 2025 06:51:55 -0800 (PST)
+        bh=Sm8nFOiMVUiqxmDNKObMDwVhI9c+LAamK3CErtl7zYc=;
+        b=RicEDG626aM2a07VEctuO8o+MSc5qbmt9VUyQLaOmrThNBu6/2A2Gb+QHWAOmDBKc2
+         wk8wKudQCxL04737NF9IeTrVrPXBpvmDwd+mDh4PYO+Mm5zjajUzrIuF5nnrIarYRamp
+         CL2RG3ks3HD6OpwlvVOqT+SHVNqKCMDlOj6IjG5Qv7rqlzcQc3bnqX69eA+AE/eo4FLN
+         Q4YdihmIBTc9mBKtVnGYj4l5IdezXiJ3pkTqEQ10ag7AhygaZkVDd1nNoQJ4UcyBeIIN
+         GAnPPMYL4QX5/UtAvhllzMZJIImn1Tq8ChWAGXs69wRXb4RtUPdZp3lQVLz/7L66l2Nl
+         +3sQ==
+X-Gm-Message-State: AOJu0YwicCpS3RSLN75coC2FwWXXjo2ZOXm5jR+KRPYyf1/D+6tUmFP5
+	Ei0CIeQE4qoWoviHZJY+MEb9J/FugcRDy3NqbxhOQlmwlU65fOwC6Q5MdNNzew==
+X-Gm-Gg: AY/fxX5Z8/lx7rR0V31CTAu7STdheSVeuvuOV/L8400443/WjP99AEfHxkWl63FDUm7
+	cFPMU6xv3+riYXDPE7L+UCW38BD6DhFadUz3GWHP0Vaxhx1Eicz9RYdtD0/fZ/xRPIiWNNKOjEv
+	5ZHboXHVLuVmEmbupljwA6AI+yvB/gM0bMIQcWf9agWxywZpRE4obhwapiZo6Byal6vpdBhGrFr
+	O/7nknvRAp/noOMjMnl4sHaS37Vf/ae70W/H4cjC7yBYIME0LdV48Chy6oqcjEcnxgxMUclFxr2
+	1LvCo0E9Aa2X+fcd/P9W1pkHKXXrdmIqI3bds30LVOjy99MVDURWerBxtVc2Sw+T00Ryv0NxwXN
+	eEAgQy2oBzBV2I7rV/VmaqTg8VdMA7gC3OpaOhQLiteF5785c/Bw8wdkMmoa2ztbM6lZk08LkCV
+	OFkK3TTrfS
+X-Google-Smtp-Source: AGHT+IG2WCPY6Gzy222EmeNCzZy7JRKnxuRL/Hh4ruIZHfehBIXYENu0UT5d31zFxdByGwORcumHsA==
+X-Received: by 2002:a05:6000:2c02:b0:42b:4267:83e9 with SMTP id ffacd0b85a97d-4324e4c73f3mr33912881f8f.2.1767019914601;
+        Mon, 29 Dec 2025 06:51:54 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1af20sm59449884f8f.2.2025.12.29.06.51.55
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1af20sm59449884f8f.2.2025.12.29.06.51.54
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Dec 2025 06:51:55 -0800 (PST)
+        Mon, 29 Dec 2025 06:51:54 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][whinlatter][PATCH 05/11] dovecot: patch CVE-2025-30189
-Date: Mon, 29 Dec 2025 15:51:46 +0100
-Message-ID: <20251229145152.489068-5-skandigraun@gmail.com>
+Subject: [meta-networking][whinlatter][PATCH 03/11] cifs-utils: patch CVE-2025-2312
+Date: Mon, 29 Dec 2025 15:51:44 +0100
+Message-ID: <20251229145152.489068-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251229145152.489068-1-skandigraun@gmail.com>
 References: <20251229145152.489068-1-skandigraun@gmail.com>
@@ -68,573 +68,173 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 14:52:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122984
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122982
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-30189
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2312
 
-Pick the patches referenced by the advisory[1] from the Full Disclosure list.
-
-[1]: https://seclists.org/fulldisclosure/2025/Oct/29
+Pick the patch that is referenced by the NVD report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../dovecot/dovecot/CVE-2025-30189-1.patch    | 128 ++++++++++++++++++
- .../dovecot/dovecot/CVE-2025-30189-2.patch    |  51 +++++++
- .../dovecot/dovecot/CVE-2025-30189-3.patch    |  36 +++++
- .../dovecot/dovecot/CVE-2025-30189-4.patch    |  72 ++++++++++
- .../dovecot/dovecot/CVE-2025-30189-5.patch    |  31 +++++
- .../dovecot/dovecot/CVE-2025-30189-6.patch    |  88 ++++++++++++
- .../dovecot/dovecot/CVE-2025-30189-7.patch    |  76 +++++++++++
- .../dovecot/dovecot_2.4.1-4.bb                |   7 +
- 8 files changed, 489 insertions(+)
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-1.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-2.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-3.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-4.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-5.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-6.patch
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-7.patch
+ .../cifs/cifs-utils/CVE-2025-2312.patch       | 135 ++++++++++++++++++
+ .../recipes-support/cifs/cifs-utils_7.0.bb    |   4 +-
+ 2 files changed, 138 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-1.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-1.patch
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
 new file mode 100644
-index 0000000000..ee0d181b1e
+index 0000000000..162e4cc4be
 --- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-1.patch
-@@ -0,0 +1,128 @@
-+From 2bd173264093021372506a89793456dcc42f4248 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 08:16:52 +0300
-+Subject: [PATCH] auth: Use AUTH_CACHE_KEY_USER instead of per-database
-+ constants
++++ b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
+@@ -0,0 +1,135 @@
++From 44312bbc9aaae39a88541abe7ab7700314d34047 Mon Sep 17 00:00:00 2001
++From: Ritvik Budhiraja <rbudhiraja@microsoft.com>
++Date: Tue, 19 Nov 2024 06:07:58 +0000
++Subject: [PATCH] CIFS.upcall to accomodate new namespace mount opt
 +
-+Fixes cache key issue where users would end up overwriting
-+each other in cache due to cache key being essentially static
-+string because we no longer support %u.
++NOTE: This patch is dependent on one of the previously sent patches:
++[PATCH] CIFS: New mount option for cifs.upcall namespace resolution
++which introduces a new mount option called upcall_target, to
++customise the upcall behaviour.
 +
-+Forgotten in 2e298e7ee98b6df61cf85117f000290d60a473b8
++Building upon the above patch, the following patch adds functionality
++to handle upcall_target as a mount option in cifs.upcall. It can have 2 values -
++mount, app.
++Having this new mount option allows the mount command to specify where the
++upcall should happen: 'mount' for resolving the upcall to the host
++namespace, and 'app' for resolving the upcall to the ns of the calling
++thread. This will enable both the scenarios where the Kerberos credentials
++can be found on the application namespace or the host namespace to which
++just the mount operation is "delegated".
++This aids use cases like Kubernetes where the mount
++happens on behalf of the application in another container altogether.
 +
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/a70ce7d3e2f983979e971414c5892c4e30197231]
++Signed-off-by: Ritvik Budhiraja <rbudhiraja@microsoft.com>
++Signed-off-by: Steve French <stfrench@microsoft.com>
++
++CVE: CVE-2025-2312
++Upstream-Status: Backport [https://git.samba.org/?p=cifs-utils.git;a=commit;h=89b679228cc1be9739d54203d28289b03352c174]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/auth/auth-settings.h  | 2 ++
-+ src/auth/passdb-bsdauth.c | 4 +---
-+ src/auth/passdb-oauth2.c  | 2 +-
-+ src/auth/passdb-pam.c     | 3 ++-
-+ src/auth/passdb-passwd.c  | 3 +--
-+ src/auth/userdb-passwd.c  | 3 +--
-+ 6 files changed, 8 insertions(+), 9 deletions(-)
++ cifs.upcall.c | 55 +++++++++++++++++++++++++++++++++++++++++++--------
++ 1 file changed, 47 insertions(+), 8 deletions(-)
 +
-+diff --git a/src/auth/auth-settings.h b/src/auth/auth-settings.h
-+index 1d420ec..90aba17 100644
-+--- a/src/auth/auth-settings.h
-++++ b/src/auth/auth-settings.h
-+@@ -1,6 +1,8 @@
-+ #ifndef AUTH_SETTINGS_H
-+ #define AUTH_SETTINGS_H
++diff --git a/cifs.upcall.c b/cifs.upcall.c
++index 52c0328..0883afa 100644
++--- a/cifs.upcall.c
+++++ b/cifs.upcall.c
++@@ -953,6 +953,13 @@ struct decoded_args {
++ #define MAX_USERNAME_SIZE 256
++ 	char username[MAX_USERNAME_SIZE + 1];
 + 
-++#define AUTH_CACHE_KEY_USER "%{user}"
+++#define MAX_UPCALL_STRING_LEN 6 /* "mount\0" */
+++	enum upcall_target_enum {
+++		UPTARGET_UNSPECIFIED, /* not specified, defaults to app */
+++		UPTARGET_MOUNT, /* upcall to the mount namespace */
+++		UPTARGET_APP, /* upcall to the application namespace which did the mount */
+++	} upcall_target;
 ++
-+ struct master_service;
-+ struct master_service_settings_output;
-+ 
-+diff --git a/src/auth/passdb-bsdauth.c b/src/auth/passdb-bsdauth.c
-+index 6829267..1b86da4 100644
-+--- a/src/auth/passdb-bsdauth.c
-++++ b/src/auth/passdb-bsdauth.c
-+@@ -14,8 +14,6 @@
-+ #include <login_cap.h>
-+ #include <bsd_auth.h>
-+ 
-+-#define BSDAUTH_CACHE_KEY "%u"
-+-
-+ struct passdb_bsdauth_settings {
-+ 	pool_t pool;
++ 	uid_t uid;
++ 	uid_t creduid;
++ 	pid_t pid;
++@@ -969,6 +976,7 @@ struct decoded_args {
++ #define DKD_HAVE_PID		0x20
++ #define DKD_HAVE_CREDUID	0x40
++ #define DKD_HAVE_USERNAME	0x80
+++#define DKD_HAVE_UPCALL_TARGET	0x100
++ #define DKD_MUSTHAVE_SET (DKD_HAVE_HOSTNAME|DKD_HAVE_VERSION|DKD_HAVE_SEC)
++ 	int have;
 + };
-+@@ -104,7 +102,7 @@ bsdauth_preinit(pool_t pool, struct event *event,
-+ 			 &post_set, error_r) < 0)
-+ 		return -1;
-+ 	module->default_cache_key = auth_cache_parse_key_and_fields(
-+-		pool, BSDAUTH_CACHE_KEY, &post_set->fields, "bsdauth");
-++		pool, AUTH_CACHE_KEY_USER, &post_set->fields, "bsdauth");
++@@ -979,6 +987,7 @@ __decode_key_description(const char *desc, struct decoded_args *arg)
++ 	size_t len;
++ 	char *pos;
++ 	const char *tkn = desc;
+++	arg->upcall_target = UPTARGET_UNSPECIFIED;
 + 
-+ 	settings_free(post_set);
-+ 	*module_r = module;
-+diff --git a/src/auth/passdb-oauth2.c b/src/auth/passdb-oauth2.c
-+index 96d902d..91fed06 100644
-+--- a/src/auth/passdb-oauth2.c
-++++ b/src/auth/passdb-oauth2.c
-+@@ -53,7 +53,7 @@ oauth2_preinit(pool_t pool, struct event *event, struct passdb_module **module_r
-+ 	if (db_oauth2_init(event, TRUE, &module->db, error_r) < 0)
-+ 		return -1;
-+ 	module->module.default_pass_scheme = "PLAIN";
-+-	module->module.default_cache_key = "%u";
-++	module->module.default_cache_key = AUTH_CACHE_KEY_USER;
-+ 	*module_r = &module->module;
-+ 	return 0;
-+ }
-+diff --git a/src/auth/passdb-pam.c b/src/auth/passdb-pam.c
-+index 2acbceb..fdf0f57 100644
-+--- a/src/auth/passdb-pam.c
-++++ b/src/auth/passdb-pam.c
-+@@ -415,7 +415,8 @@ static int pam_preinit(pool_t pool, struct event *event,
-+ 	module = p_new(pool, struct pam_passdb_module, 1);
-+ 	module->module.default_cache_key =
-+ 		auth_cache_parse_key_and_fields(pool,
-+-						t_strdup_printf("%%u/%s", set->service_name),
-++						t_strdup_printf("%"AUTH_CACHE_KEY_USER"\t%s",
-++								set->service_name),
-+ 						&post_set->fields, "pam");
-+ 	module->requests_left = set->max_requests;
-+ 	module->pam_setcred = set->setcred;
-+diff --git a/src/auth/passdb-passwd.c b/src/auth/passdb-passwd.c
-+index 1300315..22e2eae 100644
-+--- a/src/auth/passdb-passwd.c
-++++ b/src/auth/passdb-passwd.c
-+@@ -10,7 +10,6 @@
-+ #include "safe-memset.h"
-+ #include "ipwd.h"
-+ 
-+-#define PASSWD_CACHE_KEY "%u"
-+ #define PASSWD_PASS_SCHEME "CRYPT"
-+ 
-+ #undef DEF
-+@@ -142,7 +141,7 @@ static int passwd_preinit(pool_t pool, struct event *event,
-+ 			 &post_set, error_r) < 0)
-+ 		return -1;
-+ 	module->default_cache_key = auth_cache_parse_key_and_fields(pool,
-+-								    PASSWD_CACHE_KEY,
-++								    AUTH_CACHE_KEY_USER,
-+ 								    &post_set->fields,
-+ 								    "passwd");
-+ 	settings_free(post_set);
-+diff --git a/src/auth/userdb-passwd.c b/src/auth/userdb-passwd.c
-+index 5241129..14cf90a 100644
-+--- a/src/auth/userdb-passwd.c
-++++ b/src/auth/userdb-passwd.c
-+@@ -9,7 +9,6 @@
-+ #include "ipwd.h"
-+ #include "time-util.h"
-+ 
-+-#define USER_CACHE_KEY "%u"
-+ #define PASSWD_SLOW_WARN_MSECS (10*1000)
-+ #define PASSWD_SLOW_MASTER_WARN_MSECS 50
-+ #define PASSDB_SLOW_MASTER_WARN_COUNT_INTERVAL 100
-+@@ -225,7 +224,7 @@ static int passwd_preinit(pool_t pool, struct event *event ATTR_UNUSED,
-+ 	struct passwd_userdb_module *module =
-+ 		p_new(pool, struct passwd_userdb_module, 1);
-+ 
-+-	module->module.default_cache_key = USER_CACHE_KEY;
-++	module->module.default_cache_key = AUTH_CACHE_KEY_USER;
-+ 	*module_r = &module->module;
-+ 	return 0;
-+ }
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-2.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-2.patch
-new file mode 100644
-index 0000000000..fa1f6fc756
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-2.patch
-@@ -0,0 +1,51 @@
-+From ca932f18061b643c19bae839ba3990bb16e51837 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Wed, 30 Jul 2025 09:42:20 +0300
-+Subject: [PATCH] auth: auth-cache - Refactor auth_cache_parse_key_and_fields()
-+
-+Call auth_cache_parse_key_exclude() at the function end,
-+simplifies next commit.
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/c45ce2c073c9439a9d6366016cb4d41059d737f0]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c | 24 +++++++++++-------------
-+ 1 file changed, 11 insertions(+), 13 deletions(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index 360ad8b..3ccd45f 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -129,20 +129,18 @@ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
-+ 				      const ARRAY_TYPE(const_string) *fields,
-+ 				      const char *exclude_driver)
-+ {
-+-	if (array_is_empty(fields))
-+-		return auth_cache_parse_key_exclude(pool, query, exclude_driver);
-+-
-+-	string_t *full_query = t_str_new(128);
-+-	str_append(full_query, query);
-+-
-+-	unsigned int i, count;
-+-	const char *const *str = array_get(fields, &count);
-+-	for (i = 0; i < count; i += 2) {
-+-		str_append_c(full_query, '\t');
-+-		str_append(full_query, str[i + 1]);
-++	if (!array_is_empty(fields)) {
-++		unsigned int i, count;
-++		const char *const *str = array_get(fields, &count);
-++		string_t *full_query = t_str_new(128);
-++		str_append(full_query, query);
-++		for (i = 0; i < count; i += 2) {
-++			str_append_c(full_query, '\t');
-++			str_append(full_query, str[i + 1]);
-++		}
-++		query = str_c(full_query);
-+ 	}
-+-	return auth_cache_parse_key_exclude(pool, str_c(full_query),
-+-					    exclude_driver);
-++	return auth_cache_parse_key_exclude(pool, query, exclude_driver);
-+ }
-+ 
-+ static void
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-3.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-3.patch
-new file mode 100644
-index 0000000000..069a4e724f
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-3.patch
-@@ -0,0 +1,36 @@
-+From 74c526047ffcecc40485df784294b27cedf66136 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 11:48:43 +0300
-+Subject: [PATCH] auth: auth-cache - Deduplicate auth_cache_parse_key() to use
-+ auth_cache_parse_key_and_fields()
-+
-+Simplifies following commit
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/759ee1af848480987d012de2f7135160156724b6]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index 3ccd45f..ad8cbe5 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -122,14 +122,14 @@ static char *auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+ 
-+ char *auth_cache_parse_key(pool_t pool, const char *query)
-+ {
-+-	return auth_cache_parse_key_exclude(pool, query, NULL);
-++	return auth_cache_parse_key_and_fields(pool, query, NULL, NULL);
-+ }
-+ 
-+ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
-+ 				      const ARRAY_TYPE(const_string) *fields,
-+ 				      const char *exclude_driver)
-+ {
-+-	if (!array_is_empty(fields)) {
-++	if (fields != NULL && !array_is_empty(fields)) {
-+ 		unsigned int i, count;
-+ 		const char *const *str = array_get(fields, &count);
-+ 		string_t *full_query = t_str_new(128);
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-4.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-4.patch
-new file mode 100644
-index 0000000000..367debca52
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-4.patch
-@@ -0,0 +1,72 @@
-+From e0a7cb4b1e0ccdc95a717567818d924ce2888ca3 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 11:51:16 +0300
-+Subject: [PATCH] auth: auth-cache - Change auth_cache_parse_key_exclude() to
-+ return error
-+
-+Simplifies following commit
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/d12bb78b5a235f31c9d5a655bd223c28d44bcadb]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c | 25 ++++++++++++++++++-------
-+ 1 file changed, 18 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index ad8cbe5..407e5d4 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -64,8 +64,10 @@ static void auth_cache_key_add_tab_idx(string_t *str, unsigned int i)
-+ 	str_append_c(str, '}');
-+ }
-+ 
-+-static char *auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+-					  const char *exclude_driver)
-++static int auth_cache_parse_key_exclude(pool_t pool, const char *query,
-++					const char *exclude_driver,
-++					char **cache_key_r,
-++					const char **error_r)
-+ {
-+ 	string_t *str;
-+ 	bool key_seen[AUTH_REQUEST_VAR_TAB_COUNT];
-+@@ -76,9 +78,9 @@ static char *auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+ 
-+ 	struct var_expand_program *prog;
-+ 	if (var_expand_program_create(query, &prog, &error) < 0) {
-+-		e_debug(auth_event, "auth-cache: var_expand_program_create('%s') failed: %s",
-+-			query, error);
-+-		return p_strdup(pool, "");
-++		*error_r = t_strdup_printf("var_expand_program_create(%s) failed: %s",
-++					   query, error);
-++		return -1;
-+ 	}
-+ 
-+ 	const char *const *vars = var_expand_program_variables(prog);
-+@@ -117,7 +119,8 @@ static char *auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+ 
-+ 	var_expand_program_free(&prog);
-+ 
-+-	return p_strdup(pool, str_c(str));
-++	*cache_key_r = p_strdup(pool, str_c(str));
-++	return 0;
-+ }
-+ 
-+ char *auth_cache_parse_key(pool_t pool, const char *query)
-+@@ -140,7 +143,15 @@ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
++ 	do {
++ 		pos = index(tkn, ';');
++@@ -1077,6 +1086,31 @@ __decode_key_description(const char *desc, struct decoded_args *arg)
++ 			}
++ 			arg->have |= DKD_HAVE_VERSION;
++ 			syslog(LOG_DEBUG, "ver=%d", arg->ver);
+++		} else if (strncmp(tkn, "upcall_target=", 14) == 0) {
+++			if (pos == NULL)
+++				len = strlen(tkn);
+++			else
+++				len = pos - tkn;
+++
+++			len -= 14;
+++			if (len > MAX_UPCALL_STRING_LEN) {
+++				syslog(LOG_ERR, "upcall_target= value too long for buffer");
+++				return 1;
+++			}
+++			if (strncmp(tkn + 14, "mount", 5) == 0) {
+++				arg->upcall_target = UPTARGET_MOUNT;
+++				syslog(LOG_DEBUG, "upcall_target=mount");
+++			} else if (strncmp(tkn + 14, "app", 3) == 0) {
+++				arg->upcall_target = UPTARGET_APP;
+++				syslog(LOG_DEBUG, "upcall_target=app");
+++			} else {
+++				// Should never happen
+++				syslog(LOG_ERR, "Invalid upcall_target value: %s, defaulting to app",
+++				       tkn + 14);
+++				arg->upcall_target = UPTARGET_APP;
+++				syslog(LOG_DEBUG, "upcall_target=app");
+++			}
+++			arg->have |= DKD_HAVE_UPCALL_TARGET;
 + 		}
-+ 		query = str_c(full_query);
-+ 	}
-+-	return auth_cache_parse_key_exclude(pool, query, exclude_driver);
-++
-++	char *cache_key;
-++	const char *error;
-++	if (auth_cache_parse_key_exclude(pool, query, exclude_driver,
-++					 &cache_key, &error) < 0) {
-++		e_debug(auth_event, "auth-cache: %s", error);
-++		cache_key = p_strdup(pool, "");
-++	}
-++	return cache_key;
-+ }
-+ 
-+ static void
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-5.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-5.patch
-new file mode 100644
-index 0000000000..8a7692efe2
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-5.patch
-@@ -0,0 +1,31 @@
-+From b2d817db6c2a7229c9e3c4ccf8565acdd6f9a4c0 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 11:52:36 +0300
-+Subject: [PATCH] auth: auth-cache - Treat cache key parsing errors as fatals
-+
-+Avoids accidentically turning off caching
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/20d15baa071747f91176eb3115235aa8c78a3d11]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c | 6 ++----
-+ 1 file changed, 2 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index 407e5d4..be56934 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -147,10 +147,8 @@ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
-+ 	char *cache_key;
-+ 	const char *error;
-+ 	if (auth_cache_parse_key_exclude(pool, query, exclude_driver,
-+-					 &cache_key, &error) < 0) {
-+-		e_debug(auth_event, "auth-cache: %s", error);
-+-		cache_key = p_strdup(pool, "");
-+-	}
-++					 &cache_key, &error) < 0)
-++		i_fatal("auth-cache: %s", error);
-+ 	return cache_key;
-+ }
-+ 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-6.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-6.patch
-new file mode 100644
-index 0000000000..58537ed768
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-6.patch
-@@ -0,0 +1,88 @@
-+From 73bf352efaf3ab5f685bc3b34c6780dca79b9318 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 11:41:03 +0300
-+Subject: [PATCH] auth: auth-cache - Require cache key to contain at least one
-+ variable
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/0172f8e8c55aff42c688633b2891cf157641366b]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c      |  7 +++++++
-+ src/auth/test-auth-cache.c | 37 ++++++++++++++++++++++++++++++++++++-
-+ 2 files changed, 43 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index be56934..32959f5 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -86,6 +86,13 @@ static int auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+ 	const char *const *vars = var_expand_program_variables(prog);
-+ 	str = t_str_new(32);
-+ 
-++	if (*vars == NULL && *query != '\0') {
-++		var_expand_program_free(&prog);
-++		*error_r = t_strdup_printf("%s: Cache key must contain at least one variable",
-++					   query);
-++		return -1;
-++	}
-++
-+ 	for (; *vars != NULL; vars++) {
-+ 		/* ignore any providers */
-+ 		if (strchr(*vars, ':') != NULL &&
-+diff --git a/src/auth/test-auth-cache.c b/src/auth/test-auth-cache.c
-+index 46836de..b36d83e 100644
-+--- a/src/auth/test-auth-cache.c
-++++ b/src/auth/test-auth-cache.c
-+@@ -97,7 +97,35 @@ static void test_auth_cache_parse_key(void)
-+ 						 tests[i].in);
-+ 		test_assert_strcmp_idx(cache_key, tests[i].out, i);
-+ 	}
-++
-++	test_end();
-++}
-++
-++static enum fatal_test_state test_cache_key_missing_variable(unsigned int i)
-++{
-++	if (i == 0)
-++		test_begin("auth cache missing variable");
-++
-++	/* ensure that we do not accept static string */
-++	static const struct {
-++		const char *in, *out;
-++	} tests_bad[] = {
-++		{ "%u", "auth-cache: %u: Cache key must contain at least one variable" },
-++		{ "foobar", "auth-cache: foobar: Cache key must contain at least one variable" },
-++		{ "%{test", "auth-cache: var_expand_program_create(%{test) " \
-++			    "failed: syntax error, unexpected end of file, " \
-++			    "expecting CCBRACE or PIPE" },
-++	};
-++
-++	if (i < N_ELEMENTS(tests_bad)) {
-++		test_expect_fatal_string(tests_bad[i].out);
-++		(void)auth_cache_parse_key(pool_datastack_create(),
-++					   tests_bad[i].in);
-++		return FATAL_TEST_FAILURE;
-++	}
-++
-+ 	test_end();
-++	return FATAL_TEST_FINISHED;
-+ }
-+ 
-+ int main(void)
-+@@ -108,7 +136,14 @@ int main(void)
-+ 		test_auth_cache_parse_key,
-+ 		NULL
-+ 	};
-+-	int ret = test_run(test_functions);
-++
-++	static test_fatal_func_t *const fatal_functions[] = {
-++		test_cache_key_missing_variable,
-++		NULL,
-++	};
-++
-++	int ret = test_run_with_fatals(test_functions, fatal_functions);
-++
-+ 	event_unref(&auth_event);
-+ 	return ret;
-+ }
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-7.patch b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-7.patch
-new file mode 100644
-index 0000000000..2e00c79e91
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/CVE-2025-30189-7.patch
-@@ -0,0 +1,76 @@
-+From f9f3daf58d2fb43e3bb68bead0309ed41a6b6c40 Mon Sep 17 00:00:00 2001
-+From: Aki Tuomi <aki.tuomi@open-xchange.com>
-+Date: Fri, 25 Jul 2025 12:00:57 +0300
-+Subject: [PATCH] auth: auth-cache - Drop auth_cache_parse_key()
-+
-+It's only used by tests and can now just call
-+auth_cache_parse_key_and_fields().
-+
-+CVE: CVE-2025-30189
-+Upstream-Status: Backport [https://github.com/dovecot/core/commit/34caed79b76a7b82a2a9c94cf35371bec6c2b826]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/auth/auth-cache.c      | 5 -----
-+ src/auth/auth-cache.h      | 6 ++----
-+ src/auth/test-auth-cache.c | 8 ++++----
-+ 3 files changed, 6 insertions(+), 13 deletions(-)
-+
-+diff --git a/src/auth/auth-cache.c b/src/auth/auth-cache.c
-+index 32959f5..82cc0d5 100644
-+--- a/src/auth/auth-cache.c
-++++ b/src/auth/auth-cache.c
-+@@ -130,11 +130,6 @@ static int auth_cache_parse_key_exclude(pool_t pool, const char *query,
-+ 	return 0;
-+ }
-+ 
-+-char *auth_cache_parse_key(pool_t pool, const char *query)
-+-{
-+-	return auth_cache_parse_key_and_fields(pool, query, NULL, NULL);
-+-}
-+-
-+ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
-+ 				      const ARRAY_TYPE(const_string) *fields,
-+ 				      const char *exclude_driver)
-+diff --git a/src/auth/auth-cache.h b/src/auth/auth-cache.h
-+index 9bdb918..d63621b 100644
-+--- a/src/auth/auth-cache.h
-++++ b/src/auth/auth-cache.h
-+@@ -16,10 +16,8 @@ struct auth_cache_node {
-+ struct auth_cache;
-+ struct auth_request;
-+ 
-+-/* Parses all %x variables from query and compresses them into tab-separated
-+-   list, so it can be used as a cache key. */
-+-char *auth_cache_parse_key(pool_t pool, const char *query);
-+-/* Same as auth_cache_parse_key(), but add also variables from "fields",
-++/* Parses all %variables from query and compresses them into tab-separated
-++   list, so it can be used as a cache key. Adds also variables from "fields",
-+    except variables prefixed with <exclude_driver>":" */
-+ char *auth_cache_parse_key_and_fields(pool_t pool, const char *query,
-+ 				      const ARRAY_TYPE(const_string) *fields,
-+diff --git a/src/auth/test-auth-cache.c b/src/auth/test-auth-cache.c
-+index b36d83e..f58c21f 100644
-+--- a/src/auth/test-auth-cache.c
-++++ b/src/auth/test-auth-cache.c
-+@@ -93,8 +93,8 @@ static void test_auth_cache_parse_key(void)
-+ 	test_begin("auth cache parse key");
-+ 
-+ 	for (i = 0; i < N_ELEMENTS(tests); i++) {
-+-		cache_key = auth_cache_parse_key(pool_datastack_create(),
-+-						 tests[i].in);
-++		cache_key = auth_cache_parse_key_and_fields(pool_datastack_create(),
-++							    tests[i].in, NULL, NULL);
-+ 		test_assert_strcmp_idx(cache_key, tests[i].out, i);
++ 		if (pos == NULL)
++ 			break;
++@@ -1440,15 +1474,20 @@ int main(const int argc, char *const argv[])
++ 	 * acceptably in containers, because we'll be looking at the correct
++ 	 * filesystem and have the correct network configuration.
++ 	 */
++-	rc = switch_to_process_ns(arg->pid);
++-	if (rc == -1) {
++-		syslog(LOG_ERR, "unable to switch to process namespace: %s", strerror(errno));
++-		rc = 1;
++-		goto out;
+++	if (arg->upcall_target == UPTARGET_APP || arg->upcall_target == UPTARGET_UNSPECIFIED) {
+++		syslog(LOG_INFO, "upcall_target=app, switching namespaces to application thread");
+++		rc = switch_to_process_ns(arg->pid);
+++		if (rc == -1) {
+++			syslog(LOG_ERR, "unable to switch to process namespace: %s", strerror(errno));
+++			rc = 1;
+++			goto out;
+++		}
+++		if (trim_capabilities(env_probe))
+++			goto out;
+++	} else {
+++		syslog(LOG_INFO, "upcall_target=mount, not switching namespaces to application thread");
 + 	}
 + 
-+@@ -119,8 +119,8 @@ static enum fatal_test_state test_cache_key_missing_variable(unsigned int i)
++-	if (trim_capabilities(env_probe))
++-		goto out;
 + 
-+ 	if (i < N_ELEMENTS(tests_bad)) {
-+ 		test_expect_fatal_string(tests_bad[i].out);
-+-		(void)auth_cache_parse_key(pool_datastack_create(),
-+-					   tests_bad[i].in);
-++		(void)auth_cache_parse_key_and_fields(pool_datastack_create(),
-++						      tests_bad[i].in, NULL, NULL);
-+ 		return FATAL_TEST_FAILURE;
-+ 	}
++ 	/*
++ 	 * The kernel doesn't pass down the gid, so we resort here to scraping
++@@ -1495,7 +1534,7 @@ int main(const int argc, char *const argv[])
++ 	 * look at the environ file.
++ 	 */
++ 	env_cachename =
++-		get_cachename_from_process_env(env_probe ? arg->pid : 0);
+++		get_cachename_from_process_env((env_probe && (arg->upcall_target == UPTARGET_APP)) ? arg->pid : 0);
 + 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb b/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-index 40cf991ae1..09583f1694 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.4.1-4.bb
-@@ -15,6 +15,13 @@ SRC_URI = "http://dovecot.org/releases/2.4/dovecot-${PV}.tar.gz \
-            file://dovecot.socket \
-            file://0001-m4-Check-for-libunwind-instead-of-libunwind-generic.patch \
-            file://fix-musl-compilation.patch \
-+           file://CVE-2025-30189-1.patch \
-+           file://CVE-2025-30189-2.patch \
-+           file://CVE-2025-30189-3.patch \
-+           file://CVE-2025-30189-4.patch \
-+           file://CVE-2025-30189-5.patch \
-+           file://CVE-2025-30189-6.patch \
-+           file://CVE-2025-30189-7.patch \
-            "
- SRC_URI[sha256sum] = "fb188603f419ed7aaa07794a8692098c3ec2660bb9c67d0efe24948cbb32ae00"
++ 	rc = setuid(uid);
++ 	if (rc == -1) {
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+index e2918503be..f86e7bd22b 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+@@ -5,7 +5,9 @@ LICENSE = "GPL-3.0-only & LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRCREV = "316522036133d44ed02cd39ed2748e2b59c85b30"
+-SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master"
++SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master \
++           file://CVE-2025-2312.patch \
++           "
+ 
+ DEPENDS += "libtalloc"
  
 
