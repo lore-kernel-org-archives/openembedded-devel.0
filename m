@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 476FBE9273C
-	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 14:52:03 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.44422.1767019915674836575
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45E3AE9272C
+	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 14:52:13 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44450.1767019925770741083
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Dec 2025 06:51:55 -0800
+ Mon, 29 Dec 2025 06:52:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P5lo1+a6;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-432755545fcso1724593f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:51:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PN7VlROu;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47a95efd2ceso83304365e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 06:52:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767019914; x=1767624714; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767019924; x=1767624724; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Xa1rqYHIOxBg4laOne1ItmzSsFH3TJt95+5UW/NsE7g=;
-        b=P5lo1+a6cK7PpbkW1qgWueFc7pof4Ha8MwykWSM1UmS4I7fnwXMwswaWkkPOfn0Z3I
-         c2oz5z2TrmQ82N3RK3JDGruVRZ5uENIRf8jEadHR1r4WqU4V+yTlazD2D+Ru7qVsvTtR
-         RgY+J/QRv87pN1Hp7jfpAVzoNwAG+Jif/fCQ8tgwGPF7X2/enBXLRhosUybs8bUmfBJX
-         dVnbSnY01kDaCr75UOMnws7M17mwIBBzr4Nislk57rAQpG5GoCFfm7POhIIQlNpjpxMX
-         hFB8nioKnMi4K+7xZfXK9fIB1/RJ+9+AA+BXhLJHt4ajP2EG6Z0qxKToZrS/QramlkWR
-         okDw==
+        bh=vGbGuyRnv+N9vvVvX734ikIdFxrUDGszpQCnMIr8oZI=;
+        b=PN7VlROu6z5y/98AI1C5CqfcF5uwxc6VetavcSsNDnItVk/XV5FqseVRMDm4ubz2vs
+         alChydQweqqH06Kneiy67sP42x3uv+vBc98mIwQWtOlXMT5UKY1a7n/C7GawyfP3zbOl
+         pAqld7+ZrTGekqj5MAJHD2FnS3SAzaCDXIkOocB2l63SUHv6Loz8jCUMQoSMLgQicLjk
+         N1V0x7Ij8aNlQMwAOybsipzfZ56vTtEGWIUtBqv58RqmBYOP/x0hmkRNIhYMY4COYwnI
+         aswEF8+Cx45RrRAO4PDb17lcXa+DFnI1FvUo1mq8GdzXt9WkAUpEykY7PdAABNRky+lk
+         HMRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767019914; x=1767624714;
+        d=1e100.net; s=20230601; t=1767019924; x=1767624724;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Xa1rqYHIOxBg4laOne1ItmzSsFH3TJt95+5UW/NsE7g=;
-        b=oDT2WH+5yTmafZ12Wll6wQ0LGuaGvDEMsw3hRyvK5G9V87MSnd3A00U/andjMti7tR
-         8x0TpSS+3w/qKB0f7ObBQKLJ6DwxqRtSeNPjLFeJ/Ah4apXNDVy+Tj0TDgrDMkLv5wD1
-         xVtniIj4DxAFuukcA4hgbrsiFt+BxVa13G2rNySbV/iVXdz24ZctroiCw/QMHsCYICZT
-         isjD89ueoyzTJfTBJHHHg2hGtrLR9IBEctRCDZJolz46zTnqnyu+zk++gF9g3hI1r0wP
-         X3JH1XianULorK2EXEGGC5zTY0ltxHmQDqufuDAarPksuwDVmHU1B39VE1hAfXHZhHvZ
-         KuLg==
-X-Gm-Message-State: AOJu0YyURAo2aTka9xViqVP7p4qXLzpSTOOfznVenxIBPBOIJ/V0k9ty
-	v9sPBhsFW2Q2D+dNtMkVikMAHnkEbGiWNBPHy3s4ZBpsnKjrssV3wES3lIXs+g==
-X-Gm-Gg: AY/fxX6RE9Qh9Jo4iSx6Ws/+XLpy/DK/QsAW1vtSUb+5BFlOkPI7p2JFTE4J+CkXSZa
-	VkLSEPLMfMHFaZbAhIqoRnHftezYcN642epirDJJBrXHc53KPl+QxLJrsF6HY04sm9mLEGmsE9y
-	9sqXq/NpUHe8L1cL6kM/0PFdHuE/pFTidaVYPUbpZANeIozFBgYsQiNiQb/qJmg5refkIu364L8
-	Gavn56ZOLHKX6WFUdkdTPc8MIiq6D1UIvd34bdb3+lpYfWWmyckgI3Hjr3XGeYRxbPd41KSR9A6
-	xtMT5Vs6yUZOWpBBaHd9BCrRrNHpbh1BSGxRBilMjnnrEj9lbABkpXYN9BOQAX12Z2yiP76AhPr
-	Vwvqqf35be4zIBT6UrEY+8UwykaAaPCwQDN0D2fgBP43MONCjiOqc6GLl++MlEX83bHHlGUfnY6
-	VMOJhYx+YF
-X-Google-Smtp-Source: AGHT+IFpbkRYmy3w9lRG8D5KuyTb3q2Dsms+5HEeyd1UyPK8HWgp605JSsDRYCSG3DUYYFw6c0VN8g==
-X-Received: by 2002:a05:6000:2583:b0:431:53:1f49 with SMTP id ffacd0b85a97d-4324e4f69d4mr29982433f8f.41.1767019913901;
-        Mon, 29 Dec 2025 06:51:53 -0800 (PST)
+        bh=vGbGuyRnv+N9vvVvX734ikIdFxrUDGszpQCnMIr8oZI=;
+        b=RnFHfVcnrKWBjwuAiM9zuzM4UGIMO7Iz4z7zw8AXedB7qjGjq+pIBWbHMubgT8slAk
+         3k/LZE7DNSMpiO2h02Km1Lq9vO3K1dzNRJOyl32k7Tn8Z5isJg7MBoCnLJzTiB8pznwg
+         nF2+gaSuC1dlZGiQllAj+8SIAt4VN955jq8QhpENJlopvRHEo9oeaO7tT5FwqUGSTW0m
+         HEeFyLxNeWYAvT+Q6jfVR3pMcxI03SmE4pb9kKK+jNhSYndaq+d1X/9fgDmHOpude8DG
+         AdrrNu1LfDav2E7f4PFiEJOoEN8KWi+3KaSXE390zmFu79Wa2m3Cye3/PjaXRCb4cr45
+         /s9A==
+X-Gm-Message-State: AOJu0Yyh4zlnocPJJHRcK+HIJvApro0HuhnRfSvnIEIerYcks0ateoyq
+	Rw22sm2kb/d/5kVy9VyxhSAhCwfQbi3lFix1p14uIofS80u1r5awXki72thZ+A==
+X-Gm-Gg: AY/fxX67m4bDhPI6ZY0xczfaERBz4aR9wiSYvWIJTjY/N+Ur98os9kR841d7FCvZ2SV
+	nV/tHhL9uOqwT8z++lwLU9sDdTw5uAmyPYE9KPGfzhtP6zI8qXY9CbzofI0lJFvB9QssUhISlcI
+	LIBfHJIs6s73GQTaqIWUW0V0C0Jk7FiNn81oHeuomVnY8qdr0GElnyXZdNY7bYE6plVlFVsijPz
+	9SrmePhqkXL7QnwlIP4uHlalOKDIdY/Z0wyWzHewZg4kE8GxKR3L4jKKfZUTJzzZRKV1s/8GMtD
+	o3cojV35gqYbnv/xG5CMZQb7b4hqAhdnA6SRDR6pEaqrfV6Ox8Ou4Wpr/pFUFqgVILOiehw4ysL
+	+LEKsyQrWWW2vcFPe6XmuzSg/d/BhPEXMJ4RJ76TZLhlfqfdkcy0ttLNyOJWgoZ5Y+7AcglIT+q
+	u4Zn2vSOO4
+X-Google-Smtp-Source: AGHT+IGy/b1o6ybWiMfPbywgAEg5n14Vov+H/Jx1VAdhEtcbSjwXAQgKgfWCk324PkuGXdk5musixQ==
+X-Received: by 2002:a05:600c:4fc6:b0:477:755b:5587 with SMTP id 5b1f17b1804b1-47d1955b35fmr308231025e9.8.1767019919169;
+        Mon, 29 Dec 2025 06:51:59 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1af20sm59449884f8f.2.2025.12.29.06.51.53
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1af20sm59449884f8f.2.2025.12.29.06.51.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Dec 2025 06:51:53 -0800 (PST)
+        Mon, 29 Dec 2025 06:51:58 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 02/11] c-ares: upgrade 1.34.5 -> 1.34.6
-Date: Mon, 29 Dec 2025 15:51:43 +0100
-Message-ID: <20251229145152.489068-2-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 10/11] tigervnc: ignore CVE-2023-6478
+Date: Mon, 29 Dec 2025 15:51:51 +0100
+Message-ID: <20251229145152.489068-10-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251229145152.489068-1-skandigraun@gmail.com>
 References: <20251229145152.489068-1-skandigraun@gmail.com>
@@ -67,71 +67,36 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 14:52:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122981
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 14:52:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122990
 
-From: Jason Schonberg <schonm@gmail.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-6478
 
-Drop memory leak patch which has already been included in this new version.
+TigerVNC compiles its own xserver, this is why this CVE is associated
+with it - despite the vulnerability being in xserver.
 
-The new version also includes a fix for CVE 2025-62408.
+The vulnerability was fixed by [1] (from the nvd report), which has been
+backported[2] to the xserver version used by the recipe - so ignore the
+CVE, since it's patched already.
 
-Changelog: https://github.com/c-ares/c-ares/releases/tag/v1.34.6
+[1]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/14f480010a93ff962fef66a16412fafff81ad632
+[2]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/58e83c683950ac9e253ab05dd7a13a8368b70a3c
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 996768e0800a008e06d6c8d305f443198d4df847)
+(cherry picked from commit 62a78f8ba7c8bd229cc82cf81bcc6a6d8116ebca)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../c-ares/0001-ares_uri-memory-leak.patch    | 21 -------------------
- .../{c-ares_1.34.5.bb => c-ares_1.34.6.bb}    |  3 +--
- 2 files changed, 1 insertion(+), 23 deletions(-)
- delete mode 100644 meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
- rename meta-oe/recipes-support/c-ares/{c-ares_1.34.5.bb => c-ares_1.34.6.bb} (87%)
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch b/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
-deleted file mode 100644
-index 4d08651be1..0000000000
---- a/meta-oe/recipes-support/c-ares/c-ares/0001-ares_uri-memory-leak.patch
-+++ /dev/null
-@@ -1,21 +0,0 @@
--fix memory leak in ares_uri (#1012)
--Dynamic memory, referenced by 'outpath', is allocated at ares_uri.c:527
--by calling function 'ares_buf_create' and lost at ares_uri.c:536.
--
--Signed-off-by: Felix The Cat (@F3lixTheCat)
--
----
--
--Upstream-Status: Backport [https://github.com/c-ares/c-ares/commit/ee2a1c3eff3c8164b09123005f4b49c571788b59]
--
----- a/src/lib/util/ares_uri.c	2025-08-10 15:59:17.501710307 -0400
--+++ b/src/lib/util/ares_uri.c	2025-08-10 16:00:35.867494819 -0400
--@@ -533,7 +533,7 @@
--   status = ares_buf_split_str_array(inpath, (const unsigned char *)"/", 1,
--                                     ARES_BUF_SPLIT_TRIM, 0, &arr);
--   if (status != ARES_SUCCESS) {
---    return NULL;
--+    goto done;
--   }
-- 
--   for (i = 0; i < (ares_ssize_t)ares_array_len(arr); i++) {
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb b/meta-oe/recipes-support/c-ares/c-ares_1.34.6.bb
-similarity index 87%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.34.6.bb
-index b434886311..c9c54a9fa0 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.34.5.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.34.6.bb
-@@ -6,9 +6,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=d3e72a10e08191f2ca1be3f3228d78f3"
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+index 4455050631..89704f421d 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+@@ -88,3 +88,4 @@ SYSTEMD_SERVICE:${PN} = "vncserver@.service"
  
- SRC_URI = "https://github.com/c-ares/c-ares/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
--           file://0001-ares_uri-memory-leak.patch \
-            file://run-ptest"
--SRC_URI[sha256sum] = "7d935790e9af081c25c495fd13c2cfcda4792983418e96358ef6e7320ee06346"
-+SRC_URI[sha256sum] = "912dd7cc3b3e8a79c52fd7fb9c0f4ecf0aaa73e45efda880266a2d6e26b84ef5"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[manpages] = ""
+ CVE_STATUS[CVE-2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.15.0)"
+ CVE_STATUS[CVE-2023-6377] = "fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)"
++CVE_STATUS[CVE-2023-6478] = "fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)"
 
