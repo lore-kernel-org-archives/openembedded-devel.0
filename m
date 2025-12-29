@@ -1,103 +1,95 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6180E9273A
-	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 15:26:43 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.45057.1767021994984640228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 643CAE92FCE
+	for <webhook@archiver.kernel.org>; Mon, 29 Dec 2025 18:18:54 +0000 (UTC)
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com [209.85.215.193])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48614.1767032332787070425
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Dec 2025 07:26:35 -0800
+ Mon, 29 Dec 2025 10:18:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PM7R3oF5;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so96932075e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 07:26:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DXWbq0sD;
+ spf=pass (domain: gmail.com, ip: 209.85.215.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f193.google.com with SMTP id 41be03b00d2f7-bd1b0e2c1eeso6992248a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 10:18:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767021993; x=1767626793; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FMCXF7aEtf0BUqfKS1N4Xj/nLRc2psi7L15c8UY/9gw=;
-        b=PM7R3oF5vmJ7qLCvjnb8gKE4coYZB8jn+wBD4AUKWIISh5zym1ur6KamQvK/3yU+aH
-         MayZiU7cQo48ZI3DMh3erhdYHtDgK/i98Y5e+iMVhCdgK9/dHZR+kyAkUPtBgAPAvt/2
-         1+3wNS51UqeNJ4NmaV+uWhioXZrwTa/EtVU1kmiwIjdu+gGJ0tTWd5WblpyprI66tLJV
-         ACbNnSbAAtB/xpgLUNZ1J4QHpvPT0YNgd84T3jgz0vCgjVkaA78wppzaZVuAScz/S3bR
-         YCJEBThhSO+XZMpOcXF9Um8JAQmRxLxCozN/DjlmM2DdLqcGWgPjIlhR8nw+NLq+Mqvj
-         ZO4g==
+        d=gmail.com; s=20230601; t=1767032332; x=1767637132; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FxTJLBdOSPEL8DWuaUTy9lK15F564tEINEU3SMoFusk=;
+        b=DXWbq0sDnQlckTrYDTLOHfsszNbkwN54lyyVLPt0LtQ8dr+BS+N5gk9l7nLgI4Tu2f
+         iWvj04vDbGVFIBtvFJA6fGJ1+mh5vRkxwui/zQhxrfyd3cuB2ljKisizUH4dPDVNJdYO
+         xvYZwZbov7k49sXV0tv9Jkolixnbs132LIlozJhOTH7dsE4IEZ5vjTRJn19tok+5JnfK
+         iIKz8IruRpNpTGkYiXANwzuwEkK5BnJTcDofka+MAPEbELdvU0fdLEJmgcF+ChcRa1AW
+         htuETuY2QBSFnkE+Wx5x4bN1gG1dSMmAu+iresY+nRl8ZgkSVYS5z/7V9RvaXdbJRJPu
+         0kWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767021993; x=1767626793;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FMCXF7aEtf0BUqfKS1N4Xj/nLRc2psi7L15c8UY/9gw=;
-        b=q4pt8kZk0d52MKNL2dprYMe620QPIlIwZW3TFbWMrNLfYwZgKiY3WznGymK8qI4q1k
-         10NyWe2rdCmb8AXEcUC4tG5FWYlC1My52yZjZQM38qAduXK32ybPd3Mju4SFFaZjvDRg
-         U14tGxf39i8lZOejlu5SD+YcZjNxiPkcVBDPdtQ4p4RumIZPGyA7cETtzH7cBV7zsx0A
-         Md/XpMvHBcaFuwRzaoLIVARU71C5HHopahnqHV7rD3vOz8LpPiTjdm0DusoUfcibQNQt
-         NKNXM8ZURethh509v2F4KWWbGz+JSFgPmjAW0sjaOWRr1hIfG8YVhdJlWQslkNhN4iAG
-         QNKw==
-X-Gm-Message-State: AOJu0YyW0WT6gqSaNqU21e4b4m2sMuuR3G9S1drWS1jmBdKYvSMv3oiu
-	2tVdue1dYBwn/bdxh5xdRW8CgXuYsaeBxJvsZ28TIClODe7cg5GmfDoKczFWkw==
-X-Gm-Gg: AY/fxX44Fsbn9q5ynSDjTfVnWrMfkt65j411RiZvfCalCJN5qRezIl4Vi+Kh0yjyuwK
-	1hxXnx4529Bi3Yr9CMA1nROP0baYA/R+Uv1nC4UG+e/JCvEd7CAShigJMylRM+o4kkvfJhqc7S6
-	0lfgtoBaokWvJnp0uBt/lyYfJChXtLetnmClwELbN44I2cxaJ/Uexfi+E0pmFKehd7mPhyiR7ED
-	gaVoZofxuleiZT/fN0LPyhrj2YB4mZiH++/GofzuKYLRHcFR+3fBFS6F4x0M3pYJt1hc7n1m6wj
-	os/6YE0+ui3DwN5df8iCMgNAQqXUyAqezBDafwdOLbwOh9uOHxv10cZ9Z5cEepIOnx+kEnFtIk0
-	hQzn6KNvMUxZdBB5BDvHajApLRaKT1JcUCOd0/yMFEmzgzga06/nIzapvwDxMTQsw9B+xBt1cSd
-	dgYDX/SM/A
-X-Google-Smtp-Source: AGHT+IEnt0K61wvcTTQwGwj3q9ECHmmKTF2aTKw4pPDM8nwtkXkoZzCTHdVYu7GPBnlYcYhVu9qEBQ==
-X-Received: by 2002:a05:6000:2285:b0:430:f5ed:83d3 with SMTP id ffacd0b85a97d-4324e4c70damr42066005f8f.5.1767021992982;
-        Mon, 29 Dec 2025 07:26:32 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea2278dsm63786389f8f.18.2025.12.29.07.26.32
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1767032332; x=1767637132;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=FxTJLBdOSPEL8DWuaUTy9lK15F564tEINEU3SMoFusk=;
+        b=PYeXPM4rGTl3kS14GpN9DEDwNSqSII9Llw3E/QLsMSgUS01M4vA6pFBROVoy1C0fsX
+         aIn5cq8Mc1JObmEtNeDYv6vVrQ/3c/dFKF7MgJZvvICEgY2G07y6PVXKgeTe+l+8vzFy
+         IUKt/Ky2DNRTZZ/FEiFfRDrjazob6ayG2VhPRZ/Ye6dQhaX00u1+EIaMHshY6BVHMpDT
+         o+b8sIv9G9TZu4LVZyAIR12qSlS6JoMMGyGwOd9MukLTQLj9fSehOe9Eyqu+n2KgqWuW
+         vCf/t0OlAUImWdHANp9VfuT4CqfPHUnvJiWpwuK2jmA3jF4Q/P9SHecLgRV77q+XfngE
+         UdeQ==
+X-Gm-Message-State: AOJu0Yx2N3wEqcCmmvKE5TVC7I/iNUiAs/amX2I+rD4nfPplJg/yxqXR
+	Pg0QrjSIX4b3VLOBGpORvEUnVTVQop8WK55BIhvDK6Cyl9ob1XIJ7cDgZ+P4ckmkIzI=
+X-Gm-Gg: AY/fxX7Y9DUrokrUlK0XEgpmy/u+SMeOHQNK+lJc7bOOd84LpVLOqFaD2xLMlIn8qhf
+	1ZP1k92+3z5kHL3pRytgWs7GqRfhjbf9Nf0oGdLrEow1G7zHazzGqUBH9Xu2o6Y72iciptwYQHh
+	Hfdjc91e3pu9+2sCq1LutCPfPkRxScSPoCH+zcfEPi2bib2zwdLX2Usb/3hsJEg6jP9rLemW5eS
+	CFodXAESisIjrPJdhyZlb5bZLKpfz5Tbt0LzSw1OVseU+uO3ZQZDlTV+U9GrLaG8FYmSLOTRAcw
+	pgRKkq/hBqVDyPtG+OUMf9lh/fv9lckFTZaLMCOepqIsoh1S4ekEfYvEY9KhiPuX4aBgtQbdVrI
+	1bOw5L0bI1dH9Xh6MUaZrLdzeHipWIQ3LtTs2OkolwMw2jxikHhofKdxZC0GEplAc9/ZZMlHt8S
+	NB9T4c/PHkWmYc4vbV5FwTpOaUWYt2zOw8S4aJvfbVo0a4MfkyYOH0JKevSqEGK9WYKP91nPwsm
+	w1GmaaJ78wTBmWh+JdQURTtiM+fwB4=
+X-Google-Smtp-Source: AGHT+IHLsBZQtMuPZlZzLADyLLhMqp702D0oMkW546qsYo/NgbMTQ03PANYv5zsfaetwUE5J10SKfQ==
+X-Received: by 2002:a05:693c:60c3:b0:2a9:97bd:a844 with SMTP id 5a478bee46e88-2b05ec344c4mr38158697eec.21.1767032331845;
+        Mon, 29 Dec 2025 10:18:51 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::28b])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b05fe99410sm82981428eec.2.2025.12.29.10.18.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Dec 2025 07:26:32 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 29 Dec 2025 10:18:51 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH] php: upgrade 8.1.33 -> 8.1.34
-Date: Mon, 29 Dec 2025 16:26:31 +0100
-Message-ID: <20251229152631.597803-1-skandigraun@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] botan: Remove ptests execution on rv32
+Date: Mon, 29 Dec 2025 10:18:48 -0800
+Message-ID: <20251229181848.1160714-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20251229181848.1160714-1-raj.khem@gmail.com>
+References: <20251229181848.1160714-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 15:26:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122995
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 18:18:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/122997
 
-Comes with fixes for CVE-2025-14177, CVE-2025-14178 and CVE-2025-14180
+It needs go compiler and runtime which is missing on rv32
 
-Changelog:
-- Curl: Fix curl build and test failures with version 8.16.
-- Opcache: Reset global pointers to prevent use-after-free in zend_jit_status().
-- PDO: Fixed: PDO quoting result null deref. (CVE-2025-14180)
-- Standard:
-  *  Fixed: Null byte termination in dns_get_record().
-  *  Fixed: Heap buffer overflow in array_merge(). (CVE-2025-14178)
-  *  Fixed: Information Leak of Memory in getimagesize. (CVE-2025-14177)
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.1.33.bb => php_8.1.34.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.33.bb => php_8.1.34.bb} (99%)
+ meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.33.bb b/meta-oe/recipes-devtools/php/php_8.1.34.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.1.33.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.34.bb
-index f4928bc3a1..a734c2458a 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.33.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.34.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "b6553451841c1a569865d7fdc83024621ee4434cd8fbfeb0a31588ac9c70685f"
-+SRC_URI[sha256sum] = "98e0a08a0fae37d08dfcca2f5ff6664863097dde4b1d360af2acc8c3542f2a0f"
- 
- CVE_CHECK_IGNORE += "\
-     CVE-2007-2728 \
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index 2505997ee7..f8d9ee6f9b 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -67,7 +67,8 @@ PTESTS_FAST_META_OE:append:x86-64 = " mcelog"
+
+ PTESTS_FAST_META_OE:remove:libc-musl = "jemalloc minicoredumper oprofile"
+ PTESTS_FAST_META_OE:remove:riscv64 = "nodejs oprofile"
+-PTESTS_FAST_META_OE:remove:riscv32 = "nodejs oprofile"
++# botan needs go
++PTESTS_FAST_META_OE:remove:riscv32 = "botan nodejs oprofile"
+
+ PTESTS_SLOW_META_OE = "\
+     c-ares \
 
