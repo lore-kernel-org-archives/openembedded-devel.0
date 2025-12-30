@@ -2,100 +2,94 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51645E95A81
-	for <webhook@archiver.kernel.org>; Tue, 30 Dec 2025 12:25:11 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.63173.1767097502129724678
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9675EEE0203
+	for <webhook@archiver.kernel.org>; Tue, 30 Dec 2025 14:29:12 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.65110.1767104945365589144
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Dec 2025 04:25:02 -0800
+ Tue, 30 Dec 2025 06:29:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ICo4MtDh;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-477bf34f5f5so72301035e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 04:25:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lk96wlxj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47d182a8c6cso44884655e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 06:29:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767097500; x=1767702300; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=PNxyiVRj1gZgzDnZqm0XmnzjHGniDUj0sCqz4ObYrvU=;
-        b=ICo4MtDhpfYt4wEbq/PtPNGliqa/INcaP9IrHwiRx2LkJLyulEmr8FimAf15VKXWEd
-         SI8E3ACWHovmLk3/D0pyNgi4dxGCE+2XF0EdillFyrue/747kohcekg6ypbQV9hDo1c7
-         wQGS5yA4fBTjSiMd0oWBx4iywXIp1P14c+fmbQbddkg9SKW8pdGTh8nDkp/z8A4Rluac
-         KpT9wLjE2DuKSKRzPyGTwiQqHWdcvc8zD0ags0mg7jacc7aOA6JZpSsjjQbs6zLy3lU1
-         ychr7LUN6WRMjSUxO4zaOZkoIFxOTKfqzDrDRdEVyJ24gd30ZEvXRCHZwgsw35qnRUOb
-         Nfpw==
+        d=gmail.com; s=20230601; t=1767104944; x=1767709744; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RGsRoV+2hCn7uwEwK8mvjItBGu1iBKwpxvT52TS34Cs=;
+        b=lk96wlxj+Y9deYGmmxPRpZsItxzlXrF3G83CJU9t+RXIhHpxVUu7B0ZntAremX6V+F
+         TY/m2b5mwJx9vWraeaaAYNCO9vc7+F0PR8QFzYUya07TTrBwHZuoiasN6HPOgVNRpkf9
+         /uUkaChdoKAl3JyQXJAJHCONlQjb7aMWb/jEdPJshId/7OXsZEXG/HAVjhZTVywAh13e
+         L7YQkM4w483HlcLFGrABBcYjmbGHQu7sAbhAXuBVutoGyzqr6Q76JStuUiGhg5izEiB9
+         MS/BM4L2jwBvMIQJUKqD/eRJqr9ESb7+npl+ZcFkVlbqO+1PPlEo1mrMxrEQhTL/cnbG
+         PkJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767097500; x=1767702300;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=PNxyiVRj1gZgzDnZqm0XmnzjHGniDUj0sCqz4ObYrvU=;
-        b=S1ShAybOMBXSIG10yycN+J3e1iYtKFu3kAWDDr0XDEC3uLPXPU9+BFBUUIQPa9uilR
-         ZweLWZ0PrVb8GaPKnLcEgOmfeC1i/eE0Vsl2wYDhI/jCAR8abiERoYzaWqTiVAZHQgIR
-         re6p8Pk3CywOE5yXJD+YIkk03X4dDl6SvpplirPi8Lr14tFdBuIc9Au22MDafrYrISw0
-         T/usVi1Bs6MAiVAd+Stqi6pJkI2fkNeVcDGE4e4uOWEK84kKQ6OIxtcbl6aJOLXZf8jr
-         iWx4KeuIxI3C383QjnN1G3cnrlZWGYGxPwSaqzxKC5qMhYRQ8+wY8xXJnzjOQIMQnoF6
-         IGmg==
-X-Gm-Message-State: AOJu0Yw4Uvn1gL4ihqB/y/PlC47hsz0Jx0xmmCSmRoQaHHQjjDHGYT99
-	4uOn8IS8sAUetC8RdlCeCkYtBtQpPmnmUhulTweduhG73XVQ7QMIc0tTPtSjmw==
-X-Gm-Gg: AY/fxX6YV0ws1ABw7FensLvRfH0CM1KZeMgR7xTN9a7EgHBoaXYNW4HGG8O5vCBrOUd
-	P+C34i+hb2n5x9P7if+XkwC/w0w+ytGM/y7ui3n6/tDIcjT0sMFLd0s4dPYJiI0sgwRfJ+HTPzM
-	lHoMlhqCmHygnOam7C+bzc5Pv6sHrTS6jYC4LjvLJ1raI+WfhJcjRTpVhbsSwc4Db5NmYW0Y7nR
-	+bXRXUGTO4JW7I6EjVqOZJFvNB9/NNihAxiueEPdel0eE/mKGliqgV8eBmBjFV5XwddJTnHjNz4
-	fc7jS9RcZne0aEwCMLyVOGvmijTIoTJArqcZHR1MhjdJwDTHR3/XXXg7ARfXDGkc4Acl8MgHLOc
-	R3vwTbipvRlldmw/4Y/UNOuyUT6Ryby38Euu1svGgzpv0U6O+skNXHI5itxvP7DSrGmDz5cjrvd
-	sygvtjTbSh
-X-Google-Smtp-Source: AGHT+IH102TK+23DPUTehxbIp66PxP0EWOih+/zYSYKxhwbM5gdkM8WZsn89BGYcAs3bvdV1XBy2EQ==
-X-Received: by 2002:a05:600c:4ed2:b0:475:e067:f23d with SMTP id 5b1f17b1804b1-47d1959eaaemr410022145e9.25.1767097500325;
-        Tue, 30 Dec 2025 04:25:00 -0800 (PST)
+        d=1e100.net; s=20230601; t=1767104944; x=1767709744;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RGsRoV+2hCn7uwEwK8mvjItBGu1iBKwpxvT52TS34Cs=;
+        b=K4r1is9ocgkOswEv0BXR1ga55bhhvFmD6HoDqEnCmcSu3IlpDJK1A9nKjwRq1p890Z
+         EYcraMr1WSUZIjg9t32NwrzsbADQ+chCjHvyvU2KxIQoXR3ox6+nhsDlUP+mhYqOBcDn
+         XouKvn583PH3auCnDESB9lJmw96/YKxy1erAtuW7t+ysUWzWfKjgSmNd62AppV0pbzlI
+         DKkixJXHznZqzkJNT58TgdIMkrp/rxXxShQa3v2Snhpp1m3GGH5lxv53fHvM0EuqEReJ
+         bJiTjsAvgt7TbqNvBLXyVgkEl4sJQI5EC1WNzMKiviwFRenKFPnpDwe09NQYFYNpcj2s
+         hqRw==
+X-Gm-Message-State: AOJu0Yynoqsm5vunRikInXqyS8sJQ4V7HDddy027l+Z1OS8ZirLLlQGD
+	5/AdNUCAjVgE63xVhNR5bnwELe/NuztWhsduZGVkoZP5bMZQXKYQVBkotNuznQ==
+X-Gm-Gg: AY/fxX7p7RMCUX0JlgWVGczX/B4Cxmm/CD4LyOORQ5aohhByNQBHs3H8OIkVEfazWwq
+	pgtn1+N/k3RugzE1uAg3VlIsr6sFap2zoL3Rz9OWwR157gF6Bfrul6jTME3avCYw7VPkIhQ+goG
+	gDv3weqJrXDJ5T3dMB3FLNxVwPSJbv8Aj5M1Y2TmP2SPq0KISm2OkZ+aad59ZZaIgliouFCua4h
+	0amAVOf4KE5HsND8Elgnx264glf0QN0tYVXwvgzhoO6esmyKxrS4tbjYaH4tTtJHBlDtdFFFbhi
+	VTgb8WchCPN5sTqERdl9citGq3sdDzowEExOuFBxf9s3i0nkFW8ymKk8A9kKZqXw4MDlMCayT+z
+	zHxv8Dv9yIfSBF3D4X/xg0GH8q6ZvL8wktMJRJDMqQ2ma9eV3rJ8wMueaZ7UVVeOG53w0UDgX5R
+	3V5ybNv37wO7eLaCMG4Uw=
+X-Google-Smtp-Source: AGHT+IF6DrdAE8C4NheBr5v+JPSaRILcW5Id8BWH4nQnFBZsimGi03QpnT4l9+ADrmVz5eOk4uTEjg==
+X-Received: by 2002:a05:600c:548d:b0:477:79f8:da9d with SMTP id 5b1f17b1804b1-47d19584bf6mr444268315e9.24.1767104943441;
+        Tue, 30 Dec 2025 06:29:03 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa477bsm68395060f8f.36.2025.12.30.04.24.59
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47be273e4d5sm653345045e9.6.2025.12.30.06.29.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Dec 2025 04:24:59 -0800 (PST)
+        Tue, 30 Dec 2025 06:29:03 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 08/10] python3-httplib2: set CVE_PRODUCT
-Date: Tue, 30 Dec 2025 13:24:52 +0100
-Message-ID: <20251230122454.721515-8-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 01/10] python3-simplejson: set CVE_PRODUCT
+Date: Tue, 30 Dec 2025 15:28:53 +0100
+Message-ID: <20251230142902.730667-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20251230122454.721515-1-skandigraun@gmail.com>
-References: <20251230122454.721515-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 12:25:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123014
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 14:29:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123017
 
-There are no CVEs tracked with python:httplib2 CPE, but there
-are multiple ones tracked under httplib2_project:hgttplib2 CPE
-(and they are related to this recipe).
+There is one relevant CVE tracked using the simplejson_prject:simplejson
+CPE, and no entries tracked with python:simplejson.
 
 See CVE db query:
-sqlite> select * from products where PRODUCT = 'httplib2';
-CVE-2013-2037|httplib2_project|httplib2|||0.7.2|<=
-CVE-2013-2037|httplib2_project|httplib2|0.8|=||
-CVE-2020-11078|httplib2_project|httplib2|||0.18.0|<
-CVE-2021-21240|httplib2_project|httplib2|||0.19.0|<
+sqlite> select * from products where PRODUCT like '%simplejson%';
+CVE-2014-4616|simplejson_project|simplejson|||2.6.1|<
 
-Set the CVE_PRODUCT accordingly.
+Set the CVE_PRODUCT accordingly
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python3-simplejson_3.20.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
-index 9cde7acd3a..39f3459320 100644
---- a/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
-@@ -13,3 +13,5 @@ RDEPENDS:${PN} += "\
-     python3-netclient \
-     python3-pyparsing \
+diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.20.2.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.20.2.bb
+index bc93da225a..f1a8d55132 100644
+--- a/meta-python/recipes-devtools/python/python3-simplejson_3.20.2.bb
++++ b/meta-python/recipes-devtools/python/python3-simplejson_3.20.2.bb
+@@ -20,5 +20,6 @@ FILES:${PN}-tests += " \
+     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
+     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
  "
-+
-+CVE_PRODUCT = "httplib2"
++CVE_PRODUCT = "simplejson"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 
