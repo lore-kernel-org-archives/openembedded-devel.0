@@ -2,53 +2,53 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51690E95A86
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51645E95A81
 	for <webhook@archiver.kernel.org>; Tue, 30 Dec 2025 12:25:11 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.63150.1767097501349799338
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.63173.1767097502129724678
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Dec 2025 04:25:01 -0800
+ Tue, 30 Dec 2025 04:25:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lK7hjNev;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42b3d7c1321so5844187f8f.3
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ICo4MtDh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-477bf34f5f5so72301035e9.0
         for <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 04:25:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1767097500; x=1767702300; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3nHulfxIaFp0eLnWLsc4jYd5JbBPSzuVnUMOmRQp42o=;
-        b=lK7hjNevJZ7MvNUVpjmmKITqdURrBC/ZT9mXhjA/NkzZjrnYDydaGULGepEVwY9MLV
-         o+QWlo5iIpz7FyWZ/wsP2ZIpXdgM7VytUGxORgRBWK08SoJZp0HCdXazxlK5QJoNunN4
-         /yKe+MaoR/N/CvKJJsx9JY28nj26M9UAto91b0ds3j22xW1TqQsXkKrhKvg0iiCxlMKP
-         4l/+/UiStGyS0TwcH1SnSpFQGLYXJvaOIoNakLOGkPmwdaHoj1pOlZBubt2BaWDnvNK9
-         w0diLA0P0CRjjxcv9sHP4qgtPsQ3fBHRv5jiQ0Z0lTVVPYO7J6UQk6432eM8AkoJFYCs
-         fiCA==
+        bh=PNxyiVRj1gZgzDnZqm0XmnzjHGniDUj0sCqz4ObYrvU=;
+        b=ICo4MtDhpfYt4wEbq/PtPNGliqa/INcaP9IrHwiRx2LkJLyulEmr8FimAf15VKXWEd
+         SI8E3ACWHovmLk3/D0pyNgi4dxGCE+2XF0EdillFyrue/747kohcekg6ypbQV9hDo1c7
+         wQGS5yA4fBTjSiMd0oWBx4iywXIp1P14c+fmbQbddkg9SKW8pdGTh8nDkp/z8A4Rluac
+         KpT9wLjE2DuKSKRzPyGTwiQqHWdcvc8zD0ags0mg7jacc7aOA6JZpSsjjQbs6zLy3lU1
+         ychr7LUN6WRMjSUxO4zaOZkoIFxOTKfqzDrDRdEVyJ24gd30ZEvXRCHZwgsw35qnRUOb
+         Nfpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1767097500; x=1767702300;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=3nHulfxIaFp0eLnWLsc4jYd5JbBPSzuVnUMOmRQp42o=;
-        b=H4WJcpLXJh1Or2XIIn72B/0TlaChAN8EdOyAtaIH6IR7qEIy8cZRYpqjeiNpeo+NCM
-         b9Q/qN1x3enmvQXnsjEm/54AE13JSj6QToWaNjEe+0NXrp7ZhXnz/Emdue6KTUODNXXt
-         M4Xt55MipoXTK0VJ0g7VyomoPIzfjmLyjmHQVP/3ImnDwj0fGsjv1nQclayAPThd/Y5c
-         o8gAFghopC+IPsta+/Q+woUH1VRMvucFqMcBzGxfMdm2GgtiLgv+XHOBsj3iEQ/5Sd5Z
-         ahfTHtEfscvUBulhw/MPlWh6lpUSR/2a6g7rZxVDrhCNC47gsD4HRKsYfdWGyolS+nxw
-         7atg==
-X-Gm-Message-State: AOJu0YzzNHp8GMKNLKNYG7N5XJ7F/F8HU5Guav0jNZ9icQqWcKTRnD3n
-	Mo15laGRTwdpizbyBhllBuQWSxoCtU6Hvhykoc2ei3T3YMEp/Gd3w0PSVwmycA==
-X-Gm-Gg: AY/fxX6WIaMOSFqnL77bVrewxV4EIMI/xOpyf/fFTeb2jdX8nvGj7zZnC5OdR7G6Ttd
-	JzMmNVsKYC1kXTs3sBtknIcnWA0qwH21Ew25Fazi9mD9ty+fShTDuhaP7EL5r/w7YqTnXTj0BcK
-	bCQH66faYcCZf5sWXPtiF6tApfH9lzTYxBQds3GoLbPKzKI9O6szs/X+fskmQgPzkrdvn+0zTof
-	Fq79Cewplkv/GLlr2uWb/w17hABMH5Xh3574Wdtb/PSys4SwvFa0bbRcALkcMni22RMwZEOFhAQ
-	OTHpm9XmFADXM5PtkHAjce953cPB/gK35P+9jOVWgLwd6paWVaTZZHpHttCv8PH8NkUkezM0KT8
-	McstiPn5d4SbORd0hhfjpK80b3E7t6dH7ARTRAPmwJ2l/Fn/C3JeNyFexm+57+XBPofl5xUTxLq
-	160btlKXKy
-X-Google-Smtp-Source: AGHT+IH0wdg1ozZnWiuizvMDrybZJQxcrgvTHEDAZ+GbTI3DjwM9rrV9n2JTgoICMqX+NYA5P4XwwQ==
-X-Received: by 2002:a05:6000:25c1:b0:431:a50:6e98 with SMTP id ffacd0b85a97d-4324e5061e4mr37086920f8f.30.1767097499692;
-        Tue, 30 Dec 2025 04:24:59 -0800 (PST)
+        bh=PNxyiVRj1gZgzDnZqm0XmnzjHGniDUj0sCqz4ObYrvU=;
+        b=S1ShAybOMBXSIG10yycN+J3e1iYtKFu3kAWDDr0XDEC3uLPXPU9+BFBUUIQPa9uilR
+         ZweLWZ0PrVb8GaPKnLcEgOmfeC1i/eE0Vsl2wYDhI/jCAR8abiERoYzaWqTiVAZHQgIR
+         re6p8Pk3CywOE5yXJD+YIkk03X4dDl6SvpplirPi8Lr14tFdBuIc9Au22MDafrYrISw0
+         T/usVi1Bs6MAiVAd+Stqi6pJkI2fkNeVcDGE4e4uOWEK84kKQ6OIxtcbl6aJOLXZf8jr
+         iWx4KeuIxI3C383QjnN1G3cnrlZWGYGxPwSaqzxKC5qMhYRQ8+wY8xXJnzjOQIMQnoF6
+         IGmg==
+X-Gm-Message-State: AOJu0Yw4Uvn1gL4ihqB/y/PlC47hsz0Jx0xmmCSmRoQaHHQjjDHGYT99
+	4uOn8IS8sAUetC8RdlCeCkYtBtQpPmnmUhulTweduhG73XVQ7QMIc0tTPtSjmw==
+X-Gm-Gg: AY/fxX6YV0ws1ABw7FensLvRfH0CM1KZeMgR7xTN9a7EgHBoaXYNW4HGG8O5vCBrOUd
+	P+C34i+hb2n5x9P7if+XkwC/w0w+ytGM/y7ui3n6/tDIcjT0sMFLd0s4dPYJiI0sgwRfJ+HTPzM
+	lHoMlhqCmHygnOam7C+bzc5Pv6sHrTS6jYC4LjvLJ1raI+WfhJcjRTpVhbsSwc4Db5NmYW0Y7nR
+	+bXRXUGTO4JW7I6EjVqOZJFvNB9/NNihAxiueEPdel0eE/mKGliqgV8eBmBjFV5XwddJTnHjNz4
+	fc7jS9RcZne0aEwCMLyVOGvmijTIoTJArqcZHR1MhjdJwDTHR3/XXXg7ARfXDGkc4Acl8MgHLOc
+	R3vwTbipvRlldmw/4Y/UNOuyUT6Ryby38Euu1svGgzpv0U6O+skNXHI5itxvP7DSrGmDz5cjrvd
+	sygvtjTbSh
+X-Google-Smtp-Source: AGHT+IH102TK+23DPUTehxbIp66PxP0EWOih+/zYSYKxhwbM5gdkM8WZsn89BGYcAs3bvdV1XBy2EQ==
+X-Received: by 2002:a05:600c:4ed2:b0:475:e067:f23d with SMTP id 5b1f17b1804b1-47d1959eaaemr410022145e9.25.1767097500325;
+        Tue, 30 Dec 2025 04:25:00 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eaa477bsm68395060f8f.36.2025.12.30.04.24.59
         for <openembedded-devel@lists.openembedded.org>
@@ -56,9 +56,9 @@ Received: from desktop ([51.154.145.205])
         Tue, 30 Dec 2025 04:24:59 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 07/10] python3-matplotlib: set CVE_PRODUCT
-Date: Tue, 30 Dec 2025 13:24:51 +0100
-Message-ID: <20251230122454.721515-7-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 08/10] python3-httplib2: set CVE_PRODUCT
+Date: Tue, 30 Dec 2025 13:24:52 +0100
+Message-ID: <20251230122454.721515-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20251230122454.721515-1-skandigraun@gmail.com>
 References: <20251230122454.721515-1-skandigraun@gmail.com>
@@ -68,31 +68,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 12:25:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123013
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123014
 
-At least one CVE is tracked by debian:matplotlib CPE (and no CVEs are
-tracked by the defaul python:matplotlib CPE).
+There are no CVEs tracked with python:httplib2 CPE, but there
+are multiple ones tracked under httplib2_project:hgttplib2 CPE
+(and they are related to this recipe).
 
 See CVE db query:
-sqlite> select * from products where PRODUCT = 'matplotlib';
-CVE-2013-1424|debian|matplotlib|0.99.3-1|>=|1.4.2-3.1|<
+sqlite> select * from products where PRODUCT = 'httplib2';
+CVE-2013-2037|httplib2_project|httplib2|||0.7.2|<=
+CVE-2013-2037|httplib2_project|httplib2|0.8|=||
+CVE-2020-11078|httplib2_project|httplib2|||0.18.0|<
+CVE-2021-21240|httplib2_project|httplib2|||0.19.0|<
 
 Set the CVE_PRODUCT accordingly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-devtools/python/python3-matplotlib_3.10.8.bb        | 2 ++
+ meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-index c92af94732..ce8c7a276a 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-@@ -47,4 +47,6 @@ RDEPENDS:${PN} = "\
-     python3-packaging \
+diff --git a/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb b/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
+index 9cde7acd3a..39f3459320 100644
+--- a/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
++++ b/meta-python/recipes-devtools/python/python3-httplib2_0.31.0.bb
+@@ -13,3 +13,5 @@ RDEPENDS:${PN} += "\
+     python3-netclient \
+     python3-pyparsing \
  "
- 
-+CVE_PRODUCT = "matplotlib"
 +
- BBCLASSEXTEND = "native"
++CVE_PRODUCT = "httplib2"
 
