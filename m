@@ -1,97 +1,190 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC886E9411C
-	for <webhook@archiver.kernel.org>; Tue, 30 Dec 2025 06:52:08 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.59967.1767077521661895973
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 140D6E94120
+	for <webhook@archiver.kernel.org>; Tue, 30 Dec 2025 07:42:39 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.60373.1767080554101058294
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Dec 2025 22:52:01 -0800
+ Mon, 29 Dec 2025 23:42:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UVBbh5+e;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2a0d6f647e2so157079195ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 22:52:01 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=F6JZETe/;
+ spf=pass (domain: mvista.com, ip: 209.85.214.177, mailfrom: vanusuri@mvista.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2a0d52768ccso121397485ad.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Dec 2025 23:42:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767077521; x=1767682321; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1767080553; x=1767685353; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=R7yt+GwxQZVVsCGM57xIqxQsVNa3romJHQ97N3fVhm4=;
-        b=UVBbh5+enYCfrLZAmvBLXp+30IbD1ugH4+pGKF/pnU2+AtyHNnp5PtoD4MKXd2H51A
-         yNjTvMey1sYY/+mWLZqc6Ky5Em0pL0oQLE1q2wQdJzOO6GouHCkSlZgr4ADUROqme72B
-         6iH8eX05RpJkG26ddjq2lJHhmud8eqCxtVnWo1sLT0oVPaH7mUkgNABoBaEAl+Ekxb1F
-         /yh0/2znhZdLC3O7s7CF4u+gdDidn8dNQWmmipM1McYAl3KIhjyxIFp6t6incO6TdMUi
-         qjs6JYfDzCQe4OxoIhv/OiKMxeRYgmFqQ0MjPfOBKEAlnoF0mYnhPMfuVd8NE6yZSIM6
-         u2ww==
+        bh=dFiBGUW+ti26MdLa9qerXY3Mjk+7LXWP+4oAk4Ka/eA=;
+        b=F6JZETe/2EFCmYz6UWxn3CaeuzhaxwlMTZnXD0Yg/Y8PerB/FOUD9d/a8LGy/JW7MX
+         qvTNlf1Y81O0Ih93vGTArA16HbJeSLveehD4SKX9rPqcREv9tdbRvLGBGLMIeM+C6PpY
+         I/rgT2M/ibs3yZp4L9H0ryDo+ecqmTo/B2alY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767077521; x=1767682321;
+        d=1e100.net; s=20230601; t=1767080553; x=1767685353;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=R7yt+GwxQZVVsCGM57xIqxQsVNa3romJHQ97N3fVhm4=;
-        b=U/87hEG9E6ZORtfa9jbtOf528KsH7x5aYN177alJcdVt/VLLyHi2FXwaprGZu7ENkr
-         ABy7Wbyn3qENfVB4y3SnQIzxlOwh3dgkq8TJuHwZD4ZCAWq82RGjYpVPtF7s2Wj/dxlr
-         77XpOGK5+rcV4wx4c2nO5C/8g/ur2wHHMqNq4CTPG9Y53NGiWs5IojPBtq601/VG+Gym
-         EK+Q7piIPBcM1JTnUvvXoAFZ9jQ2I7T3y9BJae37KNZdJ2VODignqpAYq9La1zhqPaTp
-         R8gRx9EulfmqnninwnhzeHmfa4Yg0GOkqSOThe/Dv0f+vdHnX/TAw7hB90O9LDFSKpD0
-         sUIg==
-X-Gm-Message-State: AOJu0Yxb5t05Ur5HvS98d2x466ULJAHUHk64FlhoiVK60yNr0Lo/Z4Xq
-	RCcxc0oA3594y3/D9gJMbJC98wARN1FeOCzJjfTEkjlkRUvGVDpHRtkXSmVPgpMg
-X-Gm-Gg: AY/fxX5UX4dDmNb6MgZEdoXqlDnftNEsJhY6VycJKW+WLGMsh+9FVdsXtI/iAlUMp9/
-	A9ljDdle5X/Slxebb56PSf0m/pjSk8sO0KUUIrUCcPaxjI2+Jlh1gpik3fKJOuUM29CXr11BOKT
-	iukQ6g7JiYBmyXCggBWXzds9HoT9ybLLy5avvSLcRB1ASLbz/04wHgpeR9vBw/VSONEyMQGiPSQ
-	fNKIcn/rYH8g/P/3NP9VLwQaun62lWFS1u4krchY2KKhKvzCKMl9+/GdlFTdOG2f4j8yfF9b/qt
-	SeUzL3uAsE2tdFCLSSxXpsr3Vut5CoRGdgf1kU0P1Jpy44gbcVbJE14vONl76byFMIQTSC7Vc+t
-	jQwgDR4Gb+2PvUHJkvx4tM4b1KXJaDIL+isRg/1SiQlTdA3uJZ9l+f4o4f0lzbo2hNJwlNo3xI3
-	dnWtwg/TMS0flP8RXtEMOeAHhH0IPthKD5jexdoc/lFU8Wm3YI08gCcUCgCMO+FZ5K97O3B/LV8
-	0lVzkz4SeY5qo6jXa3jJxJyZrVe7xs=
-X-Google-Smtp-Source: AGHT+IG3rjqQndcDyJCXa0cm9qaSVK9/bRcDiEPyavIDseqQ8bZCncnA/0+bOSWlHNvonA7NjsoJyw==
-X-Received: by 2002:a05:7022:f902:20b0:11c:b3ad:1fe1 with SMTP id a92af1059eb24-121722b1a7bmr29157169c88.11.1767077520674;
-        Mon, 29 Dec 2025 22:52:00 -0800 (PST)
-Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::28b])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-121725548b5sm126240207c88.17.2025.12.29.22.51.59
+        bh=dFiBGUW+ti26MdLa9qerXY3Mjk+7LXWP+4oAk4Ka/eA=;
+        b=Ye6YSXTCFtG91mezwHhL8pfS/e/NUO7GHutnRUzTPxxAD5ha1DKKFDarlVFDZZQsMY
+         jXHJd7Tt22TJFtwtbKpU3nOAZ8txeoECfEZQVoZmZtpdNR1vjnW8ZaLmt0RPLZv17+Yc
+         RLgCoPnvC5RprNOUbCuzFSZsI3mkvKEz+wjKHaDkb03+5+xMN8lXuFSoZeV8rj3yF0oj
+         qGqkzFMTQMlhMx9AHLwYDj1viwh6s83mjajBg0/4GZ9JbZMFI/K9W6mLDgnpgD+F0M8s
+         5Fuwtbq4M59bYQQobh47/8BysElHrtVof5O8cq8PpqH1dqlUDv4O+VC+mdvxhESAlavv
+         7+7w==
+X-Gm-Message-State: AOJu0YwU9vmPY7I0xOHW8/XlQuLCaHBXWFxD2l83mEsuhF/PlSFZB2Vk
+	qi5xuUBtyEPAMXq+ZZa16qn8UWGkbmpEzW9cbw5UsM9nzt8vlqSYyMeN8Imv9vmILU47NY9HLhr
+	eZZS7RXo=
+X-Gm-Gg: AY/fxX4hJ6zYafupbu1MIZcxAxcQWm7ERwckG6bJyturHK5yrHdWEy/NO0MACPzdRIw
+	AXtqrCHKQ6S5KBsqZjGJGu6BrzCyITJ7pygd1l+zds5DcZWd8x/dwjRz89LG2y5hEaDrq9DbYlx
+	x4FBDVUb0Dt8cxnrFCYGuKIeaCyibkW2lsWhRSu4j3PzsfbbjAL0j/Ja8kZI7YNa+jwne8e2OIv
+	I4Kc+/GuTugeHUVYbdUK45twSKoF39sEqvERWGzOhiBMyVNFQXsCYFVL20D9Yxt8aSA6+gov12o
+	lMVjGgszms7HaHkL3lOcSXxDLNBm8XooHk0HL8ztVv3A9C0Pe/4kFV/ow7d1LrtUfcieKEBd7Jp
+	F6ni6+pDybs38dAXkCgcm4l4yikYaGVprp+AiqTYHttmTfCU9sfNEiWxmZbaIgTYTu1dOG6RRkp
+	S7WrJqwRhEjdRDtho4FEtuv1VTCYlFEBpz5w==
+X-Google-Smtp-Source: AGHT+IEz20BpzmaJWHB0uBUMX5IkmviM0yzlNRVkBshVopIwnN1KIV0LfVJyPlWKqWTDPB/yUNtADA==
+X-Received: by 2002:a17:902:cece:b0:2a0:8df5:2f6f with SMTP id d9443c01a7336-2a2f222359cmr302037965ad.15.1767080552926;
+        Mon, 29 Dec 2025 23:42:32 -0800 (PST)
+Received: from MVIN00352.mvista.com ([2406:7400:54:6779:2ced:6112:4ab3:9567])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a2f3d77566sm294704065ad.97.2025.12.29.23.42.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Dec 2025 22:51:59 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Mon, 29 Dec 2025 23:42:32 -0800 (PST)
+From: Vijay Anusuri <vanusuri@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-backports-zstd: Upgrade to 1.3.0
-Date: Mon, 29 Dec 2025 22:51:58 -0800
-Message-ID: <20251230065158.2261955-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.52.0
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-python][scarthgap][patch] python3-cbor2: Fix CVE-2025-64076
+Date: Tue, 30 Dec 2025 13:12:20 +0530
+Message-ID: <20251230074221.43690-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 06:52:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123004
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Dec 2025 07:42:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123005
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upstream-Status: Backport from https://github.com/agronholm/cbor2/commit/2349197bea8ebd1bf57a68f4a6549d8fd7585e66
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- ...ackports-zstd_1.2.0.bb => python3-backports-zstd_1.3.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-backports-zstd_1.2.0.bb => python3-backports-zstd_1.3.0.bb} (87%)
+ .../python/python3-cbor2/CVE-2025-64076.patch | 91 +++++++++++++++++++
+ .../python/python3-cbor2_5.6.3.bb             |  1 +
+ 2 files changed, 92 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-64076.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-backports-zstd_1.2.0.bb b/meta-python/recipes-devtools/python/python3-backports-zstd_1.3.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-backports-zstd_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-backports-zstd_1.3.0.bb
-index 2a07c36c40..fb8c4fb6c6 100644
---- a/meta-python/recipes-devtools/python/python3-backports-zstd_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-backports-zstd_1.3.0.bb
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=224f30639105a6ab845e068c2d0903ff \
-                     file://src/c/pythoncapi-compat/COPYING;md5=f74f54822fab8814a50330e4e4578b88 \
-                     file://src/c/zstd/LICENSE;md5=0822a32f7acdbe013606746641746ee8"
-
--SRC_URI[sha256sum] = "6c3fc19342db750b52fde793e4440a93575761b1493bb4a1d3b26033d2bd3452"
--
- inherit pypi python_setuptools_build_meta ptest-python-pytest
-
-+SRC_URI[sha256sum] = "e8b2d68e2812f5c9970cabc5e21da8b409b5ed04e79b4585dbffa33e9b45ebe2"
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-64076.patch b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-64076.patch
+new file mode 100644
+index 0000000000..4a2e331ed7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-64076.patch
+@@ -0,0 +1,91 @@
++From 2349197bea8ebd1bf57a68f4a6549d8fd7585e66 Mon Sep 17 00:00:00 2001
++From: Chenhao <24435007+tylzh97@users.noreply.github.com>
++Date: Wed, 22 Oct 2025 20:39:31 +0800
++Subject: [PATCH] Fix: bug in `decode_definite_long_string()` that causes
++ incorrect chunk length calculation (#265)
 +
- PYPI_PACKAGE = "backports_zstd"
++Upstream-Status: Backport [https://github.com/agronholm/cbor2/commit/2349197bea8ebd1bf57a68f4a6549d8fd7585e66]
++CVE: CVE-2025-64076
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ docs/versionhistory.rst |  2 ++
++ source/decoder.c        |  8 +++++++-
++ tests/test_decoder.py   | 22 ++++++++++++++++++++++
++ 3 files changed, 31 insertions(+), 1 deletion(-)
++
++diff --git a/docs/versionhistory.rst b/docs/versionhistory.rst
++index c8566ca..21960ff 100644
++--- a/docs/versionhistory.rst
+++++ b/docs/versionhistory.rst
++@@ -8,6 +8,8 @@ This library adheres to `Semantic Versioning <http://semver.org/>`_.
++ **5.6.3** (2024-04-11)
++ 
++ - Fixed decoding of epoch-based dates being affected by the local time zone in the C extension
+++- Fixed a read(-1) vulnerability caused by boundary handling error
+++  (#264 <https://github.com/agronholm/cbor2/issues/264>_; PR by @tylzh97)
++ 
++ **5.6.2** (2024-02-19)
++ 
++diff --git a/source/decoder.c b/source/decoder.c
++index 6fd74ce..bea7736 100644
++--- a/source/decoder.c
+++++ b/source/decoder.c
++@@ -757,7 +757,7 @@ decode_definite_long_string(CBORDecoderObject *self, Py_ssize_t length)
++     char *buffer = NULL;
++     while (left) {
++         // Read up to 65536 bytes of data from the stream
++-        Py_ssize_t chunk_length = 65536 - buffer_size;
+++        Py_ssize_t chunk_length = 65536 - buffer_length;
++         if (left < chunk_length)
++             chunk_length = left;
++ 
++@@ -827,7 +827,13 @@ decode_definite_long_string(CBORDecoderObject *self, Py_ssize_t length)
++                 memcpy(buffer, bytes_buffer + consumed, unconsumed);
++             }
++             buffer_length = unconsumed;
+++        } else {
+++            // All bytes consumed, reset buffer_length
+++            buffer_length = 0;
++         }
+++
+++        Py_DECREF(chunk);
+++        chunk = NULL;
++     }
++ 
++     if (ret && string_namespace_add(self, ret, length) == -1)
++diff --git a/tests/test_decoder.py b/tests/test_decoder.py
++index 485c604..47e6ac9 100644
++--- a/tests/test_decoder.py
+++++ b/tests/test_decoder.py
++@@ -260,6 +260,28 @@ def test_string_oversized(impl) -> None:
++         (impl.loads(unhexlify("aeaeaeaeaeaeaeaeae0108c29843d90100d8249f0000aeaeffc26ca799")),)
++ 
++ 
+++def test_string_issue_264_multiple_chunks_utf8_boundary(impl) -> None:
+++    """Test for Issue #264: UTF-8 characters split across multiple 65536-byte chunk boundaries."""
+++    import struct
+++
+++    # Construct: 65535 'a' + '€' (3 bytes) + 65533 'b' + '€' (3 bytes) + 100 'd'
+++    # Total: 131174 bytes, which spans 3 chunks (65536 + 65536 + 102)
+++    total_bytes = 65535 + 3 + 65533 + 3 + 100
+++
+++    payload = b"\x7a" + struct.pack(">I", total_bytes)  # major type 3, 4-byte length
+++    payload += b"a" * 65535
+++    payload += "€".encode()  # U+20AC: E2 82 AC
+++    payload += b"b" * 65533
+++    payload += "€".encode()
+++    payload += b"d" * 100
+++
+++    expected = "a" * 65535 + "€" + "b" * 65533 + "€" + "d" * 100
+++
+++    result = impl.loads(payload)
+++    assert result == expected
+++    assert len(result) == 131170  # 65535 + 1 + 65533 + 1 + 100 characters
+++
+++
++ @pytest.mark.parametrize(
++     "payload, expected",
++     [
++-- 
++2.43.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb
+index 69573064bc..ced8ccb992 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_5.6.3.bb
+@@ -12,6 +12,7 @@ DEPENDS += "python3-setuptools-scm-native"
+ 
+ SRC_URI += " \
+         file://run-ptest \
++        file://CVE-2025-64076.patch \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
+-- 
+2.43.0
 
- RDEPENDS:${PN}-ptest += "bash python3-compile python3-codecs python3-mypy"
 
