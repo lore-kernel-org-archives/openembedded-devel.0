@@ -1,161 +1,98 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 518A5FA3734
-	for <webhook@archiver.kernel.org>; Fri,  2 Jan 2026 11:29:08 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3572.1767353345947408038
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB754FA3738
+	for <webhook@archiver.kernel.org>; Fri,  2 Jan 2026 12:19:58 +0000 (UTC)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3806.1767354723825531846
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 02 Jan 2026 03:29:06 -0800
+ Fri, 02 Jan 2026 03:52:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KZ7B59TZ;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47a95efd2ceso107848795e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Jan 2026 03:29:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lbf9DBIf;
+ spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: sanjayembeddedse@gmail.com)
+Received: by mail-qt1-f176.google.com with SMTP id d75a77b69052e-4f4a88e75a5so107695481cf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 02 Jan 2026 03:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767353344; x=1767958144; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=B170RpxkF+sZMal/PDUqsXKmlUa8eapl6/r6LUpLW4Q=;
-        b=KZ7B59TZp6d76HEBm9iWVNpVWQFr3YbDlW/EpGGwhhcdGMWzmQLBzWPJzPPPThUXI7
-         G9TNeFipy9mex6Qqna5XWAYtvAqyVH80Yqak4GnJ5yPhw/RLtGa1xwTDuZnVf8NO84Yu
-         LVLjTMLi4wCPdnlwJSTnyh2DZqDwkePgbyQBmiIPEiybLhBp24pWvkosjV5aBIS7kqsZ
-         K+InJhoDM7gmx4WpFhxKVgYonR+4o6BHXiUB0VDJxtQJCiiUjQreH12UvLdKOx4E/wOT
-         7L+szpOT6NFRkTdPLLWTmaZU2aLns56TJjy1wFHJ5rJsqJ2qTed3kZugHS589lMetDD1
-         NEbg==
+        d=gmail.com; s=20230601; t=1767354722; x=1767959522; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WEHk3gVchn5kUlNn1ias/s2okgxXpSxMuwCTM8zhDXU=;
+        b=Lbf9DBIfmOjAZZnYU7fYTAncoJOL3xSbSpL2IrwGvcCbaUJqsU8XMz7pEakiwoxbVq
+         03CL/4RdTOvB+9EKK4LYBz7L99pQPGAdPndW+Bd66E2scY4xBYHznF2svGszB5fqsF5n
+         jH3Pgs/p/kOThgcKh3Vl/afTW9hke+iK6jUqi30RL1xp7ffJY0NDbuIhhP5D8VOdkONq
+         uzPc2ShKEV+uqVdrnamYQ293CKsEHmU5mTVujKmZfeBYtfdZxYj5C+qlMzvUXQPoqfgY
+         8q9QpPnhH9iTfVbl5qB3C0M4FYt6eT3sh/06No3ukEXuGt+P2K+fTz39WCT8oZ+etm0g
+         oirA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767353344; x=1767958144;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=B170RpxkF+sZMal/PDUqsXKmlUa8eapl6/r6LUpLW4Q=;
-        b=GcueZ6AkVcU8VSdiENaSh72xlsHPDWVglLFtbwiBy8Xupkjyq6qRkOYgXcZXaajtrL
-         +zzkHZ/8xYP2DJ+pC6uVH4Yd5sBVhmJLS3ixhas1Zxu1fuy4GvdiG3+Iuhlq671npsR/
-         +rKILZuSeAsJpvIhmAqd4YBUPZ2nasWyWnH7Cz9KFkuUdQoSvykNeGwWvJ8kz4Ogi76J
-         UTE2ePyyMOSyZiFtoHDhQopPuqGABz9arbPPH4vU9HmjUd/pDy3iZkAm5ivFcQ43jxu6
-         cbzmrrErOrtiyThP0wfiuFjSYEXWnfcHhvdQ6rTXdJ5KIqsRqezIMwpjhTa9ZCIehVvS
-         05SQ==
-X-Gm-Message-State: AOJu0YwVD8gqW8nugZ5mpOHfIl8j0lrQT/tDd+SpuIXQGaikf4g7oZRy
-	iooTGLC3aTGIRHECXugcNAgNDRDhZLB/J0+fym0eScqHCe8BiyLeeR0oDnDsbQ==
-X-Gm-Gg: AY/fxX6wAcwrjzteYU2xsKB6EplGz87v4B13zGEYjso/L49I1/Ar04ncgFC0H+KjvsW
-	fKBJi+F446IdiFLHfYhZdmYqUkBBJhTFGWaikKRv0LcjWbiLBR6seUwSxE01cJE4kSfrmWFyFBy
-	MOyeLGbzc8vsnIILpKFsEKXolFFFcEMxH4HUDfI9xVWiKgSDNub9ReueLIBBIcw2YSmb7glHKR8
-	SBxN2ppDoaOVyljKA/4c6jo2e/ShuG76W91bNye01QMyY9/qyvn+5zK7ETe0iSb7f8fgeszMuDJ
-	GTXU0y00J1/ZqKMDteo1fblyR9kf1lmr/q0Q8SHnJPrzjKGPGDtP26ohdTXlGfkWeod+PuLbKpm
-	60ivjpWB7m92SS6meHCBJI7ZW3HD9luxbu+nW0L0SK5hH/8wTpCallhVExwAKxv+tpk7CSoyWy2
-	Xtn+ln4VTB
-X-Google-Smtp-Source: AGHT+IGwVNcWvdKye1rPaPMVfkx7nPtwEHi0rSwuTGDFC6JR0o1TjWE4pCHSvpFvDFVdqhk1gc/t4g==
-X-Received: by 2002:a05:600c:3487:b0:475:da1a:5418 with SMTP id 5b1f17b1804b1-47d1955b739mr565243645e9.1.1767353344167;
-        Fri, 02 Jan 2026 03:29:04 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea22674sm85562757f8f.10.2026.01.02.03.29.03
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1767354722; x=1767959522;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WEHk3gVchn5kUlNn1ias/s2okgxXpSxMuwCTM8zhDXU=;
+        b=KhfiBBKkECwFUvk9V4shersktcalz1BbwkRy+p18W10jPwlxUDmXDvKQsgAAcGRm4G
+         5DVf2HrmB9I3MuUpeUjX9V+SU2SQ31XyytU5IASIgPJCuJFh2qvUBceaf5kgzblt4pyR
+         dfMbiYExVjNf6chYK+dQzE7xFSge09mZjXryzmA9g/ma5eOsj6JNXE88HTT/axJ4JFfz
+         9wTh+llSjUK3RP6UZWGwviUo/bAUehy1VFJ6yGrgx1aSDmXUW8lhEmf1JZ32aVgzRBQz
+         7av3rOkC8/UKb0G7mnEbkYB2zYAvgVuKgJpWFFS9NSMaEpWGFfSI8e0ZR/+1GAIbuWq8
+         QxWw==
+X-Gm-Message-State: AOJu0YziSyluCyrpXHenQHJzXSXp8VlheYXF/Vsv1Sqk1Ot8h9IFZd01
+	6ivPEP36pP1SN89Pq9U/sfb0rbV3Hgj6lVc1sbXEnXgXylhh0QvXqwqCnh3W/g==
+X-Gm-Gg: AY/fxX4qel4JXAgUGN4BpR2Q0M205YXD/w+OpmLoTPRp2CkeQ3tf7hts/HUo82SFhZ8
+	8imb8wIRXz5mR1agOuU6n8wHX/aE+Qk3e5Yh9L46EtvFtyuvDIuXltEnXQmi1jisG/1Icy+EzyT
+	4MXldVQ9WCDsImnKkZVQW1g7dOtYqD+j5gfzc4Obx6/vguOU9sZe2nWDpZVXi0CkRx5exXXrs3i
+	Icz3Bq/1ClhK0dN0a2NI4WVnC/YxfSo/XFHp5l0SJ/tLUOlFW4wWbrxrqfB0LoArPPXOOGEsDUw
+	Y0ertX0nppT30iApDZNVrF97t3yJw+GGomqP7Z09tSI3oFkC8u+l6HFPqyRl2Yr79lXRQZoB7Zf
+	IZ/quhA27razfMrRb3M8MFWOVkA7JioPO7tKJUkPkZEuirB7g0INmlhvATaYIsMArGnExQLSY3c
+	e+Iunan+gV6J3gau4C7QECg10JpahQlWtsVagk
+X-Google-Smtp-Source: AGHT+IFcFFlzc9aHae9joa9ey2KguKjnJcCvloagE0i9dVzK0YfnZz2nI5bqcOmMca0zrqkbSTet4g==
+X-Received: by 2002:a05:6a21:3086:b0:364:31e:2cac with SMTP id adf61e73a8af0-376aa6f8ee9mr36025472637.46.1767354335970;
+        Fri, 02 Jan 2026 03:45:35 -0800 (PST)
+Received: from hu-ckantibh-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c1e79e05712sm35190723a12.14.2026.01.02.03.45.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Jan 2026 03:29:03 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Fri, 02 Jan 2026 03:45:35 -0800 (PST)
+From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
+X-Google-Original-From: Sanjay Chitroda <sanjayembedded@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 3/5] nodejs: patch CVE-2023-39333
-Date: Fri,  2 Jan 2026 12:28:57 +0100
-Message-ID: <20260102112900.1800006-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260102112900.1800006-1-skandigraun@gmail.com>
-References: <20260102112900.1800006-1-skandigraun@gmail.com>
+Cc: sanjayembeddedse@gmail.com
+Subject: [PATCH] recipes-core/toybox: Switch SRC_URI to HTTPS for reliable fetch
+Date: Fri,  2 Jan 2026 17:15:32 +0530
+Message-Id: <27202d444b49cf83c11bcc9425f145c8cc0b3cc7.1767354024.git.sanjayembeddedse@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Jan 2026 11:29:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123092
+ <openembedded-devel@lists.openembedded.org>; Fri, 02 Jan 2026 12:19:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123095
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-39333
+From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
 
-Backport the patch that mentions this CVE ID explicitly in its
-commit message. 
+The upstream site (landley.net) serves inconsistent content when using HTTP,
+causing checksum mismatches during do_fetch. Using HTTPS ensures stable
+downloads and resolves checksum failures.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Sanjay Chitroda <sanjayembeddedse@gmail.com>
 ---
- .../nodejs/nodejs/CVE-2023-39333.patch        | 57 +++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_16.20.2.bb |  1 +
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-39333.patch
+ meta-oe/recipes-core/toybox/toybox_0.8.13.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-39333.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-39333.patch
-new file mode 100644
-index 0000000000..3cea4e1c23
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-39333.patch
-@@ -0,0 +1,57 @@
-+From 217a3dba7b2bfc94534c19e48a35bb9282367be2 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sun, 6 Aug 2023 10:41:33 +0000
-+Subject: [PATCH] module: fix code injection through export names
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+From: Tobias Nießen <tniessen@tnie.de>
-+
-+createDynamicModule() properly escapes import names, but not export
-+names. In WebAssembly, any string is a valid export name. Importing a
-+WebAssembly module that uses a non-identifier export name leads to
-+either a syntax error in createDynamicModule() or to code injection,
-+that is, to the evaluation of almost arbitrary JavaScript code outside
-+of the WebAssembly module.
-+
-+To address this issue, adopt the same mechanism in createExport() that
-+createImport() already uses. Add tests for both exports and imports.
-+
-+PR-URL: https://github.com/nodejs-private/node-private/pull/461
-+Backport-PR-URL: https://github.com/nodejs-private/node-private/pull/489
-+Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
-+CVE-ID: CVE-2023-39333
-+
-+CVE: CVE-2023-39333
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/f5c90b2951ca8ce8e47136ef073a1778edcad15d]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ lib/internal/modules/esm/create_dynamic_module.js | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/lib/internal/modules/esm/create_dynamic_module.js b/lib/internal/modules/esm/create_dynamic_module.js
-+index f7c2008..c99da19 100644
-+--- a/lib/internal/modules/esm/create_dynamic_module.js
-++++ b/lib/internal/modules/esm/create_dynamic_module.js
-+@@ -18,13 +18,13 @@ function createImport(impt, index) {
-+ import.meta.imports[${imptPath}] = $import_${index};`;
-+ }
-+ 
-+-function createExport(expt) {
-+-  const name = `${expt}`;
-+-  return `let $${name};
-+-export { $${name} as ${name} };
-+-import.meta.exports.${name} = {
-+-  get: () => $${name},
-+-  set: (v) => $${name} = v,
-++function createExport(expt, index) {
-++  const nameStringLit = JSONStringify(expt);
-++  return `let $export_${index};
-++export { $export_${index} as ${nameStringLit} };
-++import.meta.exports[${nameStringLit}] = {
-++  get: () => $export_${index},
-++  set: (v) => $export_${index} = v,
-+ };`;
-+ }
-+ 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-index b2872bfd98..2feec12f21 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-@@ -30,6 +30,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://CVE-2024-22019.patch \
-            file://CVE-2024-22025.patch \
-            file://CVE-2023-46809.patch \
-+           file://CVE-2023-39333.patch \
-            "
- SRC_URI:append:class-target = " \
-            file://0001-Using-native-binaries.patch \
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.13.bb b/meta-oe/recipes-core/toybox/toybox_0.8.13.bb
+index 919743135b..6a5a155ba5 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.8.13.bb
++++ b/meta-oe/recipes-core/toybox/toybox_0.8.13.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
+ 
+ inherit cml1 update-alternatives
+ 
+-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
++SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
+ SRC_URI[sha256sum] = "9d4c124d7d731a2db399f6278baa2b42c2e3511f610c6ad30cc3f1a52581334b"
+ 
+ SECTION = "base"
+-- 
+2.34.1
+
 
