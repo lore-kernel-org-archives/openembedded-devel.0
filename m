@@ -1,97 +1,102 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1650FC6177
-	for <webhook@archiver.kernel.org>; Sat,  3 Jan 2026 08:48:54 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21713.1767430120001089156
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C940FC618A
+	for <webhook@archiver.kernel.org>; Sat,  3 Jan 2026 19:02:08 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29704.1767466519520185106
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Jan 2026 00:48:40 -0800
+ Sat, 03 Jan 2026 10:55:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RL7v6ik3;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-47bdbc90dcaso79927345e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 00:48:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=k9Zrc6zN;
+ spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: sanjayembeddedse@gmail.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-8035e31d834so10488260b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 10:55:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767430118; x=1768034918; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767466519; x=1768071319; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uRs83gwsmxyzRTSD/PtTiZOkNl4uAL/lhZeb6y7dI3k=;
-        b=RL7v6ik3rrYP24UPNl2uBj6d3reeQcckZNNT6EI9C9inx8sY18Xlt/hKIHZQAr+lGl
-         Sngh06ltRau5OcZWo64LlCdYxmsatTnhlPqw0Rp8lXe8xXlPGvSuMndtlNW5jWX4Esyw
-         Yfne6wcrG4NLLT7TbnQbAWlkXVynl3SzpW8fTx62JAMMKIjjQTPa7IJnpTX67CLGQdDR
-         l8SoNeECGOImqkQcxCWBFDaxvWgqeou3AX1r54WmiUzi9clXmUy0IDFJrf4jiOqeVpyC
-         oTFJBKIyMvfuwDiJ5zsIKUISG90608xf7/snEq4pKcLwI4I+c4tP8TfyMGmSGGEq9oTM
-         5GDw==
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=k0sb8OvYuZJKMyTcnN3VIReU2WhY7FC3CfYfaoX84tk=;
+        b=k9Zrc6zNeNHRCZ6gSYoF4u3mGtUu2exPwpkpR3WLPd18rO1/HKK73nMa4Lm5SOkeGL
+         w9XerXMBg9b+KbXF4ptch8iGEOUDHno+ZYAAxD8wNw5MntWEh8pXLQdmBaoJWBQXStfT
+         jbjYYXA3bw2Qa/uMPXZrbZa2cT7VKwcO0fhpcRylVKDEq9iA7PSEYAZmV8tao/Ka3jMt
+         +Ml1bZIPJLGA9P6NRTX7zPzQdcVS6WxPa0mTKaHv19OASmSqXRnDTF1dUBYTmb6j7hAf
+         htPOeTtf0Ant9KZAlgVaQ+fKZarj5xmFhDtQ9Tm/JiBwXlIH/lOyPQDCFYYPQ7FTmxOw
+         46+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767430118; x=1768034918;
+        d=1e100.net; s=20230601; t=1767466519; x=1768071319;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uRs83gwsmxyzRTSD/PtTiZOkNl4uAL/lhZeb6y7dI3k=;
-        b=vwq3P7OpPcFG8vp/YFrSYwUYCGhXF1F0KX0Nu1vSaOdIxunOrEfJdKS2RhZCTkdBVi
-         SwQFQcuPrR3bWP5n2fqU5MDJhPRURwQXpxqtH5oDGWzRocUCdhxm+6MXeahdZg42wxrX
-         rjUInAeI1WhH2ASfj5DqG9Nsm3w5ZlB66/1HrUiqDKyoFomYaKIWGrdnZOjfC2TYyg1S
-         1wdOch30xvFMutVdYAdzZuDEb7w+k9jVuXdbEJ7ymQwbpTJBI/6YA1DRWrDzK0k5BB+x
-         8YgOncuIQMTu6sAouosV4vaAMMajgzZoYvg3h9bwh6a5Ub1/yzOk75E9AzJUuYKRjr+u
-         DNEA==
-X-Gm-Message-State: AOJu0Yw4VHoYO83PFCZbh93zbDBVkFyFkl2Ndo8gX+yC8aH/pD4Y6lAc
-	AeIGDsBPs8RnrK9DK2zzyVe0o10ZAoD/RjD1eQLabLx+JNgNpERjgoz/HPgxsQ==
-X-Gm-Gg: AY/fxX6HCpU6wufMN0eK8vIZL7mXPqDJFr/OBg8iUEOZaQF0W+qELzD6yTuR91qU5S4
-	mH+hyxZBJVA6cR+c/owv8+OOhXqLZS/smTE/NJJmc4OAefB8YiL7Oo/cDLWqzm/H/9ruBD2u6Bl
-	BUcR6uMzDRu7erCM9fvu1P1W7En+jukWBin0Et5a/CfYLaBNAPVt6l4C042Ev0lmQJWM79cu6bb
-	BoH0uT7+r8e+M+2XIeey1Nr74i9bM+e/5hA0M4S933ZO8cDt44QdIacM3QxDKaquxptLZjuyrk4
-	IrHdB0/zW1VbIuQkpibOdvLcTx0wVerbdFoRgJhxD8UiOndynh53zsxLJ8tHkycc16uH+UZkUJ6
-	x2diifJR90/u7C8xrZuXizRBPMT57UH/useqzRyzAAStsU0PuMpwrHBxBQsTCdUOCVWHiLG70qP
-	RWgHeTVkN1LMjMgZneonM=
-X-Google-Smtp-Source: AGHT+IGmhesPC0S46fMev31pVwfxeD+d683YMjyKVJlxKG4wVi3P0Eesj/T3IqrZd1WS7+SdxGGzYg==
-X-Received: by 2002:a05:600c:3ba7:b0:477:7af8:c88b with SMTP id 5b1f17b1804b1-47d1953d798mr542300955e9.11.1767430118314;
-        Sat, 03 Jan 2026 00:48:38 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d6d13ed34sm26491645e9.2.2026.01.03.00.48.37
-        for <openembedded-devel@lists.openembedded.org>
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=k0sb8OvYuZJKMyTcnN3VIReU2WhY7FC3CfYfaoX84tk=;
+        b=wG5NeERhIJGKOwSoPcxqj7D9NMEe6lMVIeRq9tRwo+OywdZ2R6VQ7nssJwutHyau78
+         0noMOp9CNGUf4Rb+kjHnJxh6vFbnkatnUyTF9iv3/+I3uR6fU8gZoL7MaZxP53iTZL1u
+         t4v3OF+f4Iae76471vZxwBczoXDZYdNlRmey4ZrsYBeLr4dp3EDKIrN/cbMTz8XK3UMH
+         AKSgNWzoGFLsErO/Y8AYybRtl9iL0VmQXXd59dY3zHFui+pQm6vBZ6+gfh0rMZkll0pd
+         obAOV/Sh1YL9pexJfzxzbKB7iTazwmpsIZQ9XBiOc7xmUtqf5crb1cTQQyHAQwY6Nc67
+         T19w==
+X-Gm-Message-State: AOJu0Yx8pSyneeMsrJirKz8G1UrvPFXo/wCxuA+HQ0Ba9tIE0jXlnhcW
+	vGaQ1mGqWEpmSHm/XzMwQLQ3cdA2OMew36hQMHwQCBL+3/zSKTZIlpfWFxqrpA==
+X-Gm-Gg: AY/fxX4nMgIgJ09dk2IZ++lOrjxd1kRKhMricrVAVrrf8DSlseu11aScGQgm9KxWNym
+	sU4UmM++/Nncaf79Ox6BQvuYBbjqCiNoGQULVWOqDZBGFX4sbrDPrlAr3j8AiKx8ItW8iZTKHrk
+	2DBwhTsrNAB36s0tUeEe7SKj9qdurEw3o6fnC2HerGkpllgWPyfOS9S3ZIGSE4scQdU6vLbVLm1
+	KY58rN3IJJWAueh8UaC6fF2o3N7qQML1EGokY4Zy0cpbRnUM+9rQ0IyfkqEpXCe4JHAtExigPQf
+	AVozoXQSm9K4HTxPEKR1qxeYtZi6rv33KS8jjGp7hMkCj9Tq8glN3wNsNYJamF6owp5y2RXKeQK
+	He9gdxMqWppUUBoC3zFexN5d/zcMU4rt7qPw0DVCTCxdfm1jVws1dq0Uz+xPpRxdGJE9wsMLqNs
+	sy18ypx6Fqjlv0R1ionf8YKCC7z3eA2ffNYw4t
+X-Google-Smtp-Source: AGHT+IHFlRlrxp0ZHz8DIBUR8iutp01VajBNvf7PGHd3j/EbyCE4YA3Ic4kgCXByZ+TlzhDP2cxvOA==
+X-Received: by 2002:a05:6a00:e17:b0:7a2:84f3:cefc with SMTP id d2e1a72fcca58-7ff61b8e615mr40931240b3a.0.1767466518926;
+        Sat, 03 Jan 2026 10:55:18 -0800 (PST)
+Received: from hu-ckantibh-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c1e7bd602desm40169135a12.21.2026.01.03.10.55.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Jan 2026 00:48:37 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 3/5] nodejs: ignore CVE-2024-3566 and CVE-2024-36138
-Date: Sat,  3 Jan 2026 09:48:33 +0100
-Message-ID: <20260103084835.2022951-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260103084835.2022951-1-skandigraun@gmail.com>
-References: <20260103084835.2022951-1-skandigraun@gmail.com>
+        Sat, 03 Jan 2026 10:55:18 -0800 (PST)
+From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
+X-Google-Original-From: Sanjay Chitroda <sanjayembedded@gmail.com>
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org,
+	sanjayembeddedse@gmail.com
+Subject: [meta-oe][kirkstone][PATCH v2] recipes-core/toybox: Switch SRC_URI to HTTPS for reliable fetch
+Date: Sun,  4 Jan 2026 00:25:13 +0530
+Message-Id: <edb5e5e2949f7876e0c21ffc8ad8006058a0a60d.1767466424.git.sanjayembeddedse@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <af8bd9f6-02b7-4ebc-8f93-4d1425cf6fed@gmail.com>
+References: <af8bd9f6-02b7-4ebc-8f93-4d1425cf6fed@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 08:48:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123101
+ <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 19:02:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123106
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-3566
-https://nvd.nist.gov/vuln/detail/CVE-2024-36138
+From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
 
-This vulnerabilities affect Windows only.
+The upstream site (landley.net) serves inconsistent content when using HTTP,
+causing checksum mismatches during do_fetch. Using HTTPS ensures stable
+downloads and resolves checksum failures.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Sanjay Chitroda <sanjayembeddedse@gmail.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-core/toybox/toybox_0.8.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-index 9326b26421..11e9717c6a 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-@@ -54,6 +54,9 @@ CVE_CHECK_IGNORE = "CVE-2023-30583 CVE-2023-30584 CVE-2023-30587"
- # the vulnerability was introduced later (with libuv 1.45)
- CVE_CHECK_IGNORE += "CVE-2024-22017"
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.6.bb b/meta-oe/recipes-core/toybox/toybox_0.8.6.bb
+index 50ce50d1c2..b1d25fa83f 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.8.6.bb
++++ b/meta-oe/recipes-core/toybox/toybox_0.8.6.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
  
-+# this vulnerabilities affect only Windows
-+CVE_CHECK_IGNORE += "CVE-2024-3566 CVE-2024-36138"
-+
- # v8 errors out if you have set CCACHE
- CCACHE = ""
+ inherit cml1 update-alternatives
  
+-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
++SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+            "
+ SRC_URI[sha256sum] = "4298c90a2b238348e4fdc9f89eb4988356c80da3f0cf78c279d2e82b9119034b"
+ 
+-- 
+2.34.1
+
 
