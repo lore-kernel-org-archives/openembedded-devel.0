@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF5CAC2A074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C89C1C2A076
 	for <webhook@archiver.kernel.org>; Sun,  4 Jan 2026 10:38:52 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.40902.1767523129086411093
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.40901.1767523128534177340
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 04 Jan 2026 02:38:49 -0800
+ Sun, 04 Jan 2026 02:38:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FMCfyFPT;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47795f6f5c0so71146135e9.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=E54krWw+;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-42fb0fc5aa9so5354839f8f.1
         for <openembedded-devel@lists.openembedded.org>; Sun, 04 Jan 2026 02:38:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1767523127; x=1768127927; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=2uE3yb2gRVL1nL8D1/cMZC6WKt1+xRenF5w68IZA0Oo=;
-        b=FMCfyFPT6FXToDLyy32e1nFznKff4jPDW0mXzgB5KjfYrAsy0gHLNr6IQJzjm2HZkw
-         13ItnioSoXmSkoQXtQX4s48hVbv5QG84r17TmmNdgJ5m3rZvlIG94E6e++CE9oOvRRCE
-         LUUUuBgnbTiH/qWz4x3/yCKlQgz9wnvRdnwVZVscT2Wy3jYbCzUM/8WDUkSFRf1H+uP6
-         CiM4+zFZZWIUJcZYNM2KE34ejtFdDVKLASURDy4LY/SbR9ESUWBCCZNMeiVM4UbjMmWV
-         xwmOcoB2YbOqTKxQVdKjVpihwjMWXcArgwNztFSKzuLcyQ/kCt0a1JbywzKX3BY0RjLu
-         7M7A==
+        bh=JwsiU1j7CgaclQ917JzFDIFVqDEMQxszaVfa1+c/VVA=;
+        b=E54krWw+1HVD6mNZb/PFqdFTv845MjYVO5ARRTjbMvKZJpPycwa6vItGq6v31vHr6F
+         rYI2j+5yl5xsRaDGdgMf7C01Ji/s8K3kjZOc0FVGJ0COGaI4jL3oaxhipdDg+dR12+sG
+         JQ+cRVtcwNA6eQqWP3JpQj3+MF5bSN2kruP8Jc7gENYhlrXfF61fETGUTnIx5uBNDHnz
+         7JMV6v6dO015C1VqEmjcMe+dfovd2gPurZUU9K99Zdf6KVNZsCnFDVdlTj44yuu1Bw4W
+         Qli2RgpWfaLWH+mc0x/NgCuNcZhGwv0f0UuC+2imyg/U6eHqaO/DUTH4jZlfdk9m8lnX
+         CUBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1767523127; x=1768127927;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=2uE3yb2gRVL1nL8D1/cMZC6WKt1+xRenF5w68IZA0Oo=;
-        b=fhFphosUfvbQy+/Wkg2UcQNhcXVd4ohxlEW41/9ArBNdbtdcVqDl8U7gl5th1SMYmN
-         FnSgcRW76IR8YJ4XDMVWJbowhiyDsm+0nHil8q9+GZnF2carIU5bLgWQNv5LxRoD0Wka
-         Vu3KyMpqxYtVWu0afUlquTR4fN3XrbnrL/2KualsNkoEVbEv2wV9diWuzLAR4oeNdxdV
-         +m+ljkM2KDFUD0ZO4sG5Aa4tlboCxktmiaE4BE0KbLjGXHjurHlfqgn8YpXSsPK/aNOI
-         IzaATUtc6LGmJ6oI2uJgc4bN8inH+h5Mq3kdqhuqZ8dHEfWA8vJLUcLNF6e84jMSbM1G
-         ej5g==
-X-Gm-Message-State: AOJu0YxHZ8pu7xnchN57vwLs/3/RuwapUz8vgUn1AeOoSDU79EgMZs9y
-	1AfqJ5TPXLLMivA8e6vmz36NB8Ma3aUnRutxANBCauz12x6m+EPQyB1KDd9BAQ==
-X-Gm-Gg: AY/fxX5dbsZ7Q5C8GkFuFMyAlJgeNaxGGnOnip6f7D+6AF6X5fcSwrIJkZrvSHhrk14
-	HDMhopE5x5wU0Pd2LM2+bjdejER2gpNj4a4SJkQE4nXt1MU0thAeO1OUl7aWGgLDp8dYHAuKfXb
-	aqrBtE/O8c/s0pvTB6sSmXr5TcINb+uk+/Ih0XfsIPIDMTEb+/128UMC9XOiTlVfByRMjmijQrg
-	Fv15DzpeWeflWVdYf12CKl8qTa6z+06IUb2QHi6PXcVOi3SFiOzv8/9s1NsMhhWPAp8kgflRhNc
-	++E9MFrdZqZ09QNtU+r4mAhB0cqsie0/mw4iWa8y1YngRuohR0RB2MPnDTZza4u5t+DdJtnAyq6
-	Aa0RRyDoG4Qf2JmKLEJk6B8EkzsguarGaaCTbzChlhxJIwqI+qrNfpgfZs8fkJmEFFu+ahkZA7W
-	d+/QeA7v+m
-X-Google-Smtp-Source: AGHT+IHMRM7igRnG/PMst9LgLp032XCeycNX/CSCsaKE7wb63dg7tDl/qxsJyO3CuuXMT9M6Dg1STQ==
-X-Received: by 2002:a05:600c:3b87:b0:477:aed0:f3fd with SMTP id 5b1f17b1804b1-47d1953b7b0mr630329255e9.8.1767523127420;
-        Sun, 04 Jan 2026 02:38:47 -0800 (PST)
+        bh=JwsiU1j7CgaclQ917JzFDIFVqDEMQxszaVfa1+c/VVA=;
+        b=FobQYG8ALMRFEByN5uf/le9q4NoQoHZhdmwiLjQG6NDfhYZMcV/y1qyGwlgb9e1Gu3
+         vn+frAR7IcTwLuN51caSyVDhgwbp+ZGWQudRT1ZNscj5eJTwrxxJ8CpZJaSGK+dewsEN
+         bQDxOrLsRnulvl0XLxV6OViAgc0QKoKk1GdosKAxwveQFDu6cbHEmJAQeKvNeZa+rmR6
+         CuylmhkhGoxJdEUZNfvw9rmrivP4OTdBdGb+euI43pXtBQKKMebfAW/7QgcPoumuFCWi
+         sJ+bPVCsY6hiuDtNenXyRbHCJjr38wjekD0B5abacfOqhH30JKzlbbFYdsSwClMcY2xT
+         Gahw==
+X-Gm-Message-State: AOJu0YyxdbVLKYgLTRZkWT34wVBse9LgN3vQXx0xZ3uOjORlrqfIM5/i
+	V5UoHVOnn5Kynxr21rLL+IRAksNoVl76m6OYsA2iHTd2hUSCMpqw3Cb99/hPjQ==
+X-Gm-Gg: AY/fxX4nyFsgCMrm3srQjuuPBxdidL8h6XOAwHHoMwZ1KVLtZqReCfPqYXaqtjikQAk
+	6L6uPpZX+he2cOtefcsMx5JWVntgjKhsyYKFs1P6i1ax3d1yFC0nx2HzR2j8ieHWytAw3arKBpc
+	tSxD9ofyADkSmVB/+6XVXeDxC5Xx0CDd0snKy7/qMwMZ1SCQvoGZkrNDEycM1wgTnvyr0/SkPqV
+	1N0StLbsmyNFe2kPCsDgwrtH9LsB3ftSKBVgy4pm0QD2ATwOF5s28zksLLtEOKazd2wx+xP49we
+	Dr2iaYAubNZLod58WUUnmqODjbI8JhQ4150w9whtxaK6qkIReoVHlbTqZ2H4oIepzw5psSFIqn9
+	AXIhMub84TuawF+aYZkkWVXrYjn4DeVeJGWzQTyGCePaAXrMZihi0nfxfB42GTmnYcNQ3nR+MPF
+	3QRKP4BmHU
+X-Google-Smtp-Source: AGHT+IHkI7dQpWQQqPgsQtB2tYzWjfR8biBffKFnPtM1X5ZB43CtTv7EK4u30R8MrAQURSRRn0O0qQ==
+X-Received: by 2002:a05:6000:2301:b0:431:266:d134 with SMTP id ffacd0b85a97d-4324e50c2ccmr59009180f8f.53.1767523126835;
+        Sun, 04 Jan 2026 02:38:46 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324ea1aee5sm95885178f8f.4.2026.01.04.02.38.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 04 Jan 2026 02:38:47 -0800 (PST)
+        Sun, 04 Jan 2026 02:38:46 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 4/5] spitools: upgrade 1.0.1 -> 1.0.2
-Date: Sun,  4 Jan 2026 11:38:42 +0100
-Message-ID: <20260104103843.3450950-4-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/5] tree: upgrade 2.0.2 -> 2.0.4
+Date: Sun,  4 Jan 2026 11:38:41 +0100
+Message-ID: <20260104103843.3450950-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260104103843.3450950-1-skandigraun@gmail.com>
 References: <20260104103843.3450950-1-skandigraun@gmail.com>
@@ -68,32 +68,56 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 04 Jan 2026 10:38:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123117
-
-This is a bugfix release, with some ioctl handling fixes.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123116
 
 Changelog:
-- Adjust the handling of SPI_IOC_RD_LSB_FIRST ioctl call
-- Parameter for SPI_IOC_WR_LSB_FIRST ioctl is {0, 1}.
+2.0.4:
+- Fix missing comma in JSON output.
+
+2.0.3:
+- Fix segfault when filelimit is used and tree encounters a directory it
+  cannot enter.
+- Use += when assigning CFLAGS and LDFLAGS in the Makefile allowing
+  them to be modified by environment variables during make. (Ben Brown)
+  Possibly assumes GNU make.
+- Fixed broken -x option (stops recursing.)
+- Fix use after free (causing segfault) for dir/subdir in list.c
+- Fixes for .gitignore functionality
+  - Fixed * handing in patmatch. Worked almost like ** before, now properly
+    stops at /'s.  These issues were the result of forgetting that patmatch()
+    was just to match filenames to patterns, not paths.
+  - Patterns starting with / are actually relative to the .gitignore file,
+    not the root of the filesystem, go figure.
+  - Patterns without /'s in .gitignore apply to any file in any directory
+    under the .gitignore, not just the .gitignore directory
+- Remove "All rights reserved" from copyright statements.  A left-over from
+  trees original artistic license.
+- Add in --du and --prune to --help output
+- Fixed segfault when an unknown directory is given with -X
+- Fixed output up for -X and -J options.
+- Remove one reference to strnlen which isn't necessary since it may not
+  be available on some OS's.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/spitools/spitools_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/tree/{tree_2.0.2.bb => tree_2.0.4.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/tree/{tree_2.0.2.bb => tree_2.0.4.bb} (87%)
 
-diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
-index e1b9302a98..9dfb23cc7c 100644
---- a/meta-oe/recipes-support/spitools/spitools_git.bb
-+++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-@@ -5,8 +5,8 @@ LICENSE="GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
+diff --git a/meta-oe/recipes-support/tree/tree_2.0.2.bb b/meta-oe/recipes-support/tree/tree_2.0.4.bb
+similarity index 87%
+rename from meta-oe/recipes-support/tree/tree_2.0.2.bb
+rename to meta-oe/recipes-support/tree/tree_2.0.4.bb
+index 08d234acdd..4bb49a377f 100644
+--- a/meta-oe/recipes-support/tree/tree_2.0.2.bb
++++ b/meta-oe/recipes-support/tree/tree_2.0.4.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
  
- BPV = "1.0.0"
--PV = "1.0.1"
--SRCREV = "87da3bfc03f3088e2e880b6b48195bb225fafeac"
-+PV = "1.0.2"
-+SRCREV = "1748e092425a4a0ff693aa347062a57fc1ffdd00"
+ SRC_URI = "https://oldmanprogrammer.net/tar/tree/${BP}.tgz"
+-SRC_URI[sha256sum] = "7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf"
++SRC_URI[sha256sum] = "b0ea92197849579a3f09a50dbefc3d4708caf555d304a830e16e20b73b4ffa74"
  
- S = "${WORKDIR}/git"
- 
+ # tree's default CFLAGS for Linux
+ CFLAGS += "-Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
 
