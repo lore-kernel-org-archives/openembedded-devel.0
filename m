@@ -1,101 +1,99 @@
-Return-Path: <philip@balister.org>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E2A0FC6182
-	for <webhook@archiver.kernel.org>; Sat,  3 Jan 2026 19:02:08 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29895.1767466410785870088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70496C2A06E
+	for <webhook@archiver.kernel.org>; Sun,  4 Jan 2026 02:43:50 +0000 (UTC)
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36827.1767494621402658493
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 03 Jan 2026 10:53:30 -0800
+ Sat, 03 Jan 2026 18:43:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kd6wMqJ/;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: sanjayembeddedse@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-7b89c1ce9easo14372307b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 10:53:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767466410; x=1768071210; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zgECHiFmo53DNnATb+5RyOEDL8zHS2YAVnlE2Gyzy4M=;
-        b=Kd6wMqJ/6KqZUers8y3M4glW1M3iSWuWzNo0aU+FT8mVQAEGqPRXNfXM1w9aRf9j0Z
-         PSsEl3ssgKiB41SAf7styttzvN7rPCUNKsyj9gzOq1xkg0gqlHs7leUzR7PIRzvqzuvG
-         nuv+AQFq5wSu9RgxdubPy42Uisn27Hk0OdwSi8TSQM3ebHpVlP1K9Po7dvA17GHsPyU1
-         maHpe4dFNW3Plg7iKp7/LywGnwQRXHZ+5RdeDoIdYCpvmpgJrT7H+vSJr+++04gpaycD
-         OGeywVBRT2vMsLombtKF8w4AxY9/R3QQ+GaUOiGFziwwBE4XNJFdqdp9HuYE5q0UGvyS
-         qH1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767466410; x=1768071210;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zgECHiFmo53DNnATb+5RyOEDL8zHS2YAVnlE2Gyzy4M=;
-        b=eukCgW74EZaL5ICde4haZooqxmXgmeby0VAZ194KVR4Ya3CeAdgdojV9oYvIQXT749
-         yjuoWbIklfMfMW96extCdHMKZjBMfm7MfL48yOUKD6FJsIWtpfMP+VrjlV5jR8qUTVOI
-         1/qY5iR3c74qRGM6919NaxSskp85efRoIjca/aBN5Xc1s5/gtC3vs3hNUfg35qz33nqh
-         UnC3JIwsMoH/rsM3vC9T6KyVa/RxvEYTvF8IqLhis0HB/9s6NG3qokB4R4CVXbFnAnbE
-         nlrHaacA7Rfv0fw8gMTzQhAcIa82726gY7W1Z1e3BzG1+et37G5D6t2o8xOEhPqYszn+
-         Jdfg==
-X-Gm-Message-State: AOJu0YyHpoJ+zUoufZW+ypgoiU+wU8hRXL/wEtP+jkNS3GpP8NIUL0qt
-	axjEP2NhJXCNvW0WcjJv2SzIokrHqgoDcoFCAAtNe+H62fYssjDKEziHQdNE6w==
-X-Gm-Gg: AY/fxX4UQ6oRInc4sVUe0d8XBHJ1KNV1pp1TvBPUk00VCXhP8EGUeh6Fx+Gb+aCiLLh
-	WJySnEb5eoLSiQhwxMYdhId79re5f/M06kEE65lZzhgtkur7rKd92ofYJwFtuZaDeiAcgLbo8DX
-	sQVJnjTO5xfFYH4MhoRVBnPCw7EBwjNCXdFG4Aq5Yh4QTTwQas8PQQiib+2Z9w42+2SlmfypvEz
-	lsqztmZ4zZOwfCQUn8up2k2ZEuLJFJmaVv0FTB7yXr8oYHz+hrdLtyC4y/hCk7Ny0Xr3pCbdO67
-	O8EgET02WrXyTCojdYG0ZdHRPDA3X/BBVwXEaQPZGX4kOLPjm7650MDjrjBsyCd/Oc3alrDcJiq
-	EdLy+vaaWIEIzv3Sp1rw+kdNeymDyxzIpyJQiR4MSy8M1R0B2YGlKgAjvXMR45tTB1cxaiayYd0
-	sssD6AwFyQmtqZKL7zDDvmUbSF53f6znYTu7t7
-X-Google-Smtp-Source: AGHT+IE+SGX6g+kCemgABIzyFt4Wh18hqxtzzTZqszrbIPOJQsrPIU0fRkgW+/egPRt+0V0IgK5rNw==
-X-Received: by 2002:a05:6a20:9189:b0:366:14ac:8c6d with SMTP id adf61e73a8af0-376ab2e904cmr39356633637.67.1767466410185;
-        Sat, 03 Jan 2026 10:53:30 -0800 (PST)
-Received: from hu-ckantibh-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34f4505a6eesm1486854a91.2.2026.01.03.10.53.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 03 Jan 2026 10:53:29 -0800 (PST)
-From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
-X-Google-Original-From: Sanjay Chitroda <sanjayembedded@gmail.com>
-To: sanjayembeddedse@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH v2] recipes-core/toybox: Switch SRC_URI to HTTPS for reliable fetch
-Date: Sun,  4 Jan 2026 00:23:25 +0530
-Message-Id: <053a302c2c820686b6454ec77e3931f0b339b2ab.1767466259.git.sanjayembeddedse@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <053a302c2c820686b6454ec77e3931f0b339b2ab.1767354166.git.sanjayembeddedse@gmail.com>
-References: <053a302c2c820686b6454ec77e3931f0b339b2ab.1767354166.git.sanjayembeddedse@gmail.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=SfyZfZp7;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1767494620; x=1799030620;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=5hKHOl2668wkTeXGYcwwlFe2ZJ4sVZNdCWIx48q4Upc=;
+  b=SfyZfZp7k+5gKaof/cvlNxiIMDByLMD4IPTPsglkbcvGlK5mz1duoEfT
+   gS8iAjAQcF4PcCNyk4J1mYq5W/E9lHrqmqXjXZuAedWatfV6gLkrebJS8
+   rCH31EBRPlpfsRn+1f9AWhG5ug2Oma6k930xqb9UJQNSodGp7Hv52J5ym
+   4qMZ0rKvkiqqocMCQ+exgw1odp29GTLctPzyqW1aPI+RN8ixKKRsLu52w
+   CNZLMrfuRn6GjMbpSq/XtCdsfSowqVBmAXRmR303LFTlUXXCXzQPCZxVy
+   M8IODywEpkmRo17xAE8OZe569tBZNEBV/SsKTu3lpkjySyRqOilFw4qJ2
+   w==;
+X-CSE-ConnectionGUID: lFlMIo3iRRSFhmxTvaUqRg==
+X-CSE-MsgGUID: BRyJKmyzS8aLdYxLq2SZQg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11659"; a="212586462"
+X-IronPort-AV: E=Sophos;i="6.21,200,1763391600"; 
+   d="scan'208";a="212586462"
+Received: from unknown (HELO az2nlsmgr1.o.css.fujitsu.com) ([20.61.8.234])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jan 2026 11:43:37 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgr1.o.css.fujitsu.com (Postfix) with ESMTPS id 6D40E1C0008A
+	for <openembedded-devel@lists.openembedded.org>; Sun,  4 Jan 2026 02:43:39 +0000 (UTC)
+Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 1AA821C002AE
+	for <openembedded-devel@lists.openembedded.org>; Sun,  4 Jan 2026 02:43:39 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id CC3D010003BB
+	for <openembedded-devel@lists.openembedded.org>; Sun,  4 Jan 2026 02:43:36 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-python][PATCH 1/2] python3-py7zr: upgrade 1.0.0 -> 1.1.0
+Date: Sun,  4 Jan 2026 10:43:29 +0800
+Message-ID: <20260104024330.686-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 03 Jan 2026 19:02:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123105
+ <openembedded-devel@lists.openembedded.org>; Sun, 04 Jan 2026 02:43:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123107
 
-From: Sanjay Chitroda <sanjayembeddedse@gmail.com>
+Changelog:
+https://py7zr.readthedocs.io/en/latest/Changelog.html
 
-The upstream site (landley.net) serves inconsistent content when using HTTP,
-causing checksum mismatches during do_fetch. Using HTTPS ensures stable
-downloads and resolves checksum failures.
-
-Signed-off-by: Sanjay Chitroda <sanjayembeddedse@gmail.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- meta-oe/recipes-core/toybox/toybox_0.8.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python/{python3-py7zr_1.0.0.bb => python3-py7zr_1.1.0.bb}  | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-py7zr_1.0.0.bb => python3-py7zr_1.1.0.bb} (84%)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.8.11.bb b/meta-oe/recipes-core/toybox/toybox_0.8.11.bb
-index db071a1995..a1a4a3d57d 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.8.11.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.8.11.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
+diff --git a/meta-python/recipes-devtools/python/python3-py7zr_1.0.0.bb b/meta-python/recipes-devtools/python/python3-py7zr_1.1.0.bb
+similarity index 84%
+rename from meta-python/recipes-devtools/python/python3-py7zr_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-py7zr_1.1.0.bb
+index 83482a9466..7a7a7f45ee 100644
+--- a/meta-python/recipes-devtools/python/python3-py7zr_1.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-py7zr_1.1.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-or-later"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
  
- inherit cml1 update-alternatives
+-SRC_URI[sha256sum] = "f6bfee81637c9032f6a9f0eb045a4bfc7a7ff4138becfc42d7cb89b54ffbfef1"
++SRC_URI[sha256sum] = "087b1a94861ad9eb4d21604f6aaa0a8986a7e00580abd79fedd6f82fecf0592c"
  
--SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
- SRC_URI[sha256sum] = "15aa3f832f4ec1874db761b9950617f99e1e38144c22da39a71311093bfe67dc"
+ CVE_PRODUCT = "py7zr"
  
- SECTION = "base"
+@@ -14,6 +14,7 @@ DEPENDS += " \
+     python3-setuptools-scm-native \
+     python3-toml-native \
+     python3-wheel-native \
++    python3-coherent-licensed-native \
+ "
+ 
+ RDEPENDS:${PN} += "\
 -- 
-2.34.1
+2.43.0
 
 
