@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C10E4C79F80
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9A27FC619D
 	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 11:54:00 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.62427.1767614032304477823
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.62426.1767614031702839442
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 05 Jan 2026 03:53:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=I5v+f+i8;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-43246af170aso994658f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 03:53:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SI5GutMm;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-4327555464cso4543821f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 03:53:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767614031; x=1768218831; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767614030; x=1768218830; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1o91z1X7u85tC5UPMBVEvHT1MbZxxdJSLSndCsCErY0=;
-        b=I5v+f+i8GHLK7Ltfi+s6uBiyfSKXh6GUPwoDardYYvkM0UtTUpKWpdIDxfg1WNkfkT
-         Ru5fX2ZBI6r7B/gUY3zuKsQIDAq4URZAWbjtDGMXIjHbLO888WhFg0YrlYWmARMLx7dq
-         4XvTl9rC2eufLLFFEpJQeiypMYqTlZIkwiykuaSVtG7CVSNUWXqyAnpdj78jt7ZbHlNw
-         erFUOMYTg7Yb/kcsaEQkEXZctSvnLGh75UkiaXz6xENOVWtoLVwLLH8Dk+ibJVbnrJOD
-         q5YJVC5pKU6kQhkPCaaz/CfXTnEDDLnXxKbmhGilHEcaxyy99oxlqum/i+QV6IfosgPm
-         6Pfg==
+        bh=dv+ScL8Mxru2l0hjZ8uy3o18ST/+MMramJYnjv5u3Jg=;
+        b=SI5GutMm65V5adqYnnZjCQD6xQMfZyZzupBjWFCZUGlmLHx3TI0eOsvZ0dDkeYjd7Q
+         t6CgksLcinGQxVxidt+QqFs/tjE6qqf9zn9liyZbKS1olV+fig3UUg5wxHgqRu7CtCDk
+         Lr6d3aYPjZFE11AsFla+dp/YTwqK2HwkiACMqaBDT28R3NIIES6uiIw1yDbeVixyY5YC
+         A3vD+bebm1Ay3VUQlOHcYm8H9XA0NLMBTOT5P5jEhwuQ0WRoKQ+Kczjqoa/e5jhpX95Q
+         mnkVh4Y9k9gXpEVDdvk6BtcxxkX3MrY5G5R/3kol2EI+lLhwcB1myUXfycVLcvGC4zTC
+         3QZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767614031; x=1768218831;
+        d=1e100.net; s=20230601; t=1767614030; x=1768218830;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=1o91z1X7u85tC5UPMBVEvHT1MbZxxdJSLSndCsCErY0=;
-        b=RYkAG3LtbLViUV/1ZYIgY5+1dhBqdBp46/LU7c5UAlkaLtOVzaSw8DzWUklEF4QY3T
-         lBViGXvb1hQuNJaEJrAfbXwKZ6rIdYWlNXo7NL1Xfq18TgalPM+fH+kTq88Qqm1bvuKI
-         JzJyzXpkYLjryLWF5D0AyWcBaGu+9JdRulFg5u9+AXU0qz82HQoCDrPvlBbQH9aOyUXI
-         aJNg2xTZcT/lKmz7ICLVCrFwM0/yOIwpg11WVAlycGRnVE2ZwKHszS5f9DFpZZIrrK9d
-         xmBRCzy6raf79YW+Ubas+QgBcZiSHYP8JYuAOEvHNVsBPMm568h4Fqf4jfNEqi1mK78r
-         8rKg==
-X-Gm-Message-State: AOJu0Ywy6tnzOykKlBki0tl51CxzKpPht4Ddh/3b2PGZIeri9NTJpXyo
-	a/a20Bx1zG/d5pW5pWyoexqVnv/c3lLLwBrJFGK1SyORMVsu1b4T9JyOqY6G1Q==
-X-Gm-Gg: AY/fxX4YmDzM0Iu/hXLC4Dx+XVmjvviJtUpD8jUWuhNr8OQ3Ccj0koOeXiG8SjsjbLC
-	4e/BFb3r+iioGZmIgpRIFSuJdLBrcKaPhJ8eWgxFWH9mZAenH12aV5F3O9aHDk4jeifP+hNTrfZ
-	HXXbM5t3rOFOk3S4Sue2r29eYPwKl4LjmGecXSAmqjlo5baRtWhF3W9EXtw+Xp0g8nE1jybZdEO
-	gzJhytOjP2rktKoww+bhag8Sze/Xt7emllWRWGjl7G5JIAvaOdBhdPPAOxA9OpPRTuCGSeVNIZG
-	LvIKbuTHvvQVZs0GVWMjlbIDpd2TZGpoiICCacWoq0N2MTzBORUd6UW23u1N89JgtEb9sJY7tu+
-	qr7B6SOdY+M4wERw1bs8eBOqmpKbg7p4uyMM2AWTuOR3x34WXltQcuh29eaQZoDdY/y/V3Mo73G
-	8UbnJ9OunX
-X-Google-Smtp-Source: AGHT+IEZEGpyE7XAgiqqTx3pjrHW49NkWH4S2Jc8/y4BSdIeeLDd+GKuZmBgQSmqRWayba1FHkZjnQ==
-X-Received: by 2002:a5d:58da:0:b0:430:fcbc:dc52 with SMTP id ffacd0b85a97d-432aa409640mr8623580f8f.30.1767614030572;
-        Mon, 05 Jan 2026 03:53:50 -0800 (PST)
+        bh=dv+ScL8Mxru2l0hjZ8uy3o18ST/+MMramJYnjv5u3Jg=;
+        b=S0iuz1K9A3Dd7IGRz9eqNBx+9+EUMC7qFxybKgYwUHqzTe6k00vBlVMEgLmhBoAbtH
+         Yl9TvK6ut8ziFim/kr5P8cqvp7Ae9HEAvnQG3oK7SeMcMqpkYb4ERKNsM6+f9HPLSVOi
+         YvOIDOhxWkI8V9j3tnJGi3bu0rqa2plNYuECjUWRmHf1LgJnJPK5miW3b9ZNd36RCVMO
+         bqIPKzKWbf7AiLRDNT+Wrfi0IWZJTwCL3u7hfITTwZhbF+SjCwUgvGtNovM9NbX032lz
+         sihiJYKk4NWwHLDvomoWsah26mOPaFdIYf+lgkfIeXYxsZwD3goa7jLI6+MMY/rsfQB1
+         /nqA==
+X-Gm-Message-State: AOJu0Ywyfm7eSvNf/raZ649TyuFFeo4huOylzhFkFe05Pfb2gnRq9sGn
+	r+MyzTH3lOA/nasUkyEJot1gPyjvJRQXWIryn+KZgneFnFObYQt/NG+E9BZuHg==
+X-Gm-Gg: AY/fxX5COKZWJ4LueCS96oW3RO7ev5eHnF7hPpyRWhflBYEBEWdSVcmuw1QVxVFpRZz
+	ctXQBL5ZuJF26PB4EDw4H4BDE0GuWGUMRJ7eV9oNXAA+d5uApWFMhlMZ8xdGxZtntvowdQHCh6p
+	NrBYroiBUJSbAaD1ADMrJfbgub/CH42Jxxq88jREdiN9O42j2/ELHEFPK9Dd/wGuByNEwr9zONj
+	BhD7TPachoNfk5MoE9+VbHFVRxBVYt0Dx09Zz6snrZPxLDlXjE+8vOJluvI6EFrhcPpyUdC+As5
+	MWugNz8yQUH/6qRc6C2GoB2hgi0oXkhOUxcnwGhzII4qNamJtNCo8K3SpzRvAVM0OHyy1n7mX+m
+	XFVMrrj+I45KpusfJYCrk8gzKhrFQGvv2F4NE2qWFi57ykurvtV+rdScubz194FxG+2BRGvrab7
+	HCtcY8JhOC
+X-Google-Smtp-Source: AGHT+IFU88vhmUZfSuTOIurxUb2MSIup3Dj0zXeMdZdwXwrZv2CJyv1FV/SBZvTmzPr8msYg2hBwlg==
+X-Received: by 2002:a05:6000:2909:b0:42b:55a1:214c with SMTP id ffacd0b85a97d-4324e709a9dmr53083168f8f.55.1767614029923;
+        Mon, 05 Jan 2026 03:53:49 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eab2ebfsm99300617f8f.40.2026.01.05.03.53.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jan 2026 03:53:50 -0800 (PST)
+        Mon, 05 Jan 2026 03:53:49 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 5/5] python3-ldap: upgrade 3.4.4 -> 3.4.5
-Date: Mon,  5 Jan 2026 12:53:46 +0100
-Message-ID: <20260105115346.3385811-5-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 4/5] python3-flask-cors: upgrade 4.0.0 -> 5.0.0
+Date: Mon,  5 Jan 2026 12:53:45 +0100
+Message-ID: <20260105115346.3385811-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260105115346.3385811-1-skandigraun@gmail.com>
 References: <20260105115346.3385811-1-skandigraun@gmail.com>
@@ -68,66 +68,156 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 11:54:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123156
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123155
 
-Contains fixes for CVE-2025-61911 and CVE-2025-61912
-
-Changelog:
-Security fixes:
-- CVE-2025-61911 (GHSA-r7r6-cc7p-4v5m): Enforce str input in
-  ldap.filter.escape_filter_chars with escape_mode=1; ensure proper
-  escaping.
-- CVE-2025-61912 (GHSA-p34h-wq7j-h5v6): Correct NUL escaping in
-  ldap.dn.escape_dn_chars to \00 per RFC 4514.
-
-Fixes:
-- ReconnectLDAPObject now properly reconnects on UNAVAILABLE, CONNECT_ERROR
-  and TIMEOUT exceptions (previously only SERVER_DOWN), fixing reconnection
-  issues especially during server restarts
-- Fixed syncrepl.py to use named constants instead of raw decimal values
-  for result types
-- Fixed error handling in SearchNoOpMixIn to prevent a undefined variable error
-
-Tests:
-- Added comprehensive reconnection test cases including concurrent operation
-  handling and server restart scenarios
-
-Doc:
-- Updated installation docs and fixed various documentation typos
-- Added ReadTheDocs configuration file
-
-Infrastructure:
-- Add testing and document support for Python 3.13
+Contains fix for CVE-2024-6221 and CVE-2024-1681
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-ldap_3.4.4.bb => python3-ldap_3.4.5.bb}      | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-python/recipes-networking/python/{python3-ldap_3.4.4.bb => python3-ldap_3.4.5.bb} (76%)
+ .../python3-flask-cors/CVE-2024-6221.patch    | 110 ------------------
+ ...s_4.0.0.bb => python3-flask-cors_5.0.0.bb} |   8 +-
+ 2 files changed, 2 insertions(+), 116 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
+ rename meta-python/recipes-devtools/python/{python3-flask-cors_4.0.0.bb => python3-flask-cors_5.0.0.bb} (73%)
 
-diff --git a/meta-python/recipes-networking/python/python3-ldap_3.4.4.bb b/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-similarity index 76%
-rename from meta-python/recipes-networking/python/python3-ldap_3.4.4.bb
-rename to meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-index aecffa9d7e..2ec49b58ec 100644
---- a/meta-python/recipes-networking/python/python3-ldap_3.4.4.bb
-+++ b/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-@@ -7,13 +7,13 @@ HOMEPAGE = "https://www.python-ldap.org/"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch b/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
+deleted file mode 100644
+index 9049b2ffe6..0000000000
+--- a/meta-python/recipes-devtools/python/python3-flask-cors/CVE-2024-6221.patch
++++ /dev/null
+@@ -1,110 +0,0 @@
+-From 7ae310c56ac30e0b94fb42129aa377bf633256ec Mon Sep 17 00:00:00 2001
+-From: Adriano Sela Aviles <adriano.selaviles@gmail.com>
+-Date: Fri, 30 Aug 2024 12:14:31 -0400
+-Subject: [PATCH] Backwards Compatible Fix for CVE-2024-6221 (#363)
+-
+-CVE: CVE-2024-6221
+-
+-Upstream-Status: Backport [https://github.com/corydolphin/flask-cors/commit/7ae310c56ac30e0b94fb42129aa377bf633256ec]
+-
+-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+----
+- docs/configuration.rst  | 14 ++++++++++++++
+- flask_cors/core.py      |  8 +++++---
+- flask_cors/extension.py | 16 ++++++++++++++++
+- 3 files changed, 35 insertions(+), 3 deletions(-)
+-
+-diff --git a/docs/configuration.rst b/docs/configuration.rst
+-index 91282d3..c750cf4 100644
+---- a/docs/configuration.rst
+-+++ b/docs/configuration.rst
+-@@ -23,6 +23,19 @@ CORS_ALLOW_HEADERS (:py:class:`~typing.List` or :py:class:`str`)
+-    Headers to accept from the client.
+-    Headers in the :http:header:`Access-Control-Request-Headers` request header (usually part of the preflight OPTIONS request) matching headers in this list will be included in the :http:header:`Access-Control-Allow-Headers` response header.
+-
+-+CORS_ALLOW_PRIVATE_NETWORK (:py:class:`bool`)
+-+   If True, the response header :http:header:`Access-Control-Allow-Private-Network`
+-+   will be set with the value 'true' whenever the request header
+-+   :http:header:`Access-Control-Request-Private-Network` has a value 'true'.
+-+
+-+   If False, the reponse header :http:header:`Access-Control-Allow-Private-Network`
+-+   will be set with the value 'false' whenever the request header
+-+   :http:header:`Access-Control-Request-Private-Network` has a value of 'true'.
+-+
+-+   If the request header :http:header:`Access-Control-Request-Private-Network` is
+-+   not present or has a value other than 'true', the response header
+-+   :http:header:`Access-Control-Allow-Private-Network` will not be set.
+-+
+- CORS_ALWAYS_SEND (:py:class:`bool`)
+-    Usually, if a request doesn't include an :http:header:`Origin` header, the client did not request CORS.
+-    This means we can ignore this request.
+-@@ -83,6 +96,7 @@ Default values
+- ~~~~~~~~~~~~~~
+-
+- * CORS_ALLOW_HEADERS: "*"
+-+* CORS_ALLOW_PRIVATE_NETWORK: True
+- * CORS_ALWAYS_SEND: True
+- * CORS_AUTOMATIC_OPTIONS: True
+- * CORS_EXPOSE_HEADERS: None
+-diff --git a/flask_cors/core.py b/flask_cors/core.py
+-index 5358036..bd011f4 100644
+---- a/flask_cors/core.py
+-+++ b/flask_cors/core.py
+-@@ -36,7 +36,7 @@ CONFIG_OPTIONS = ['CORS_ORIGINS', 'CORS_METHODS', 'CORS_ALLOW_HEADERS',
+-                   'CORS_MAX_AGE', 'CORS_SEND_WILDCARD',
+-                   'CORS_AUTOMATIC_OPTIONS', 'CORS_VARY_HEADER',
+-                   'CORS_RESOURCES', 'CORS_INTERCEPT_EXCEPTIONS',
+--                  'CORS_ALWAYS_SEND']
+-+                  'CORS_ALWAYS_SEND', 'CORS_ALLOW_PRIVATE_NETWORK']
+- # Attribute added to request object by decorator to indicate that CORS
+- # was evaluated, in case the decorator and extension are both applied
+- # to a view.
+-@@ -56,7 +56,8 @@ DEFAULT_OPTIONS = dict(origins='*',
+-                        vary_header=True,
+-                        resources=r'/*',
+-                        intercept_exceptions=True,
+--                       always_send=True)
+-+                       always_send=True,
+-+                       allow_private_network=True)
+-
+-
+- def parse_resources(resources):
+-@@ -186,7 +187,8 @@ def get_cors_headers(options, request_headers, request_method):
+-
+-     if ACL_REQUEST_HEADER_PRIVATE_NETWORK in request_headers \
+-             and request_headers.get(ACL_REQUEST_HEADER_PRIVATE_NETWORK) == 'true':
+--        headers[ACL_RESPONSE_PRIVATE_NETWORK] = 'true'
+-+        allow_private_network = 'true' if options.get('allow_private_network') else 'false'
+-+        headers[ACL_RESPONSE_PRIVATE_NETWORK] = allow_private_network
+-
+-     # This is a preflight request
+-     # http://www.w3.org/TR/cors/#resource-preflight-requests
+-diff --git a/flask_cors/extension.py b/flask_cors/extension.py
+-index c00cbff..694953f 100644
+---- a/flask_cors/extension.py
+-+++ b/flask_cors/extension.py
+-@@ -136,6 +136,22 @@ class CORS(object):
+-
+-         Default : True
+-     :type vary_header: bool
+-+
+-+    :param allow_private_network:
+-+        If True, the response header `Access-Control-Allow-Private-Network`
+-+        will be set with the value 'true' whenever the request header
+-+        `Access-Control-Request-Private-Network` has a value 'true'.
+-+
+-+        If False, the reponse header `Access-Control-Allow-Private-Network`
+-+        will be set with the value 'false' whenever the request header
+-+        `Access-Control-Request-Private-Network` has a value of 'true'.
+-+
+-+        If the request header `Access-Control-Request-Private-Network` is
+-+        not present or has a value other than 'true', the response header
+-+        `Access-Control-Allow-Private-Network` will not be set.
+-+
+-+        Default : True
+-+    :type allow_private_network: bool
+-     """
+-
+-     def __init__(self, app=None, **kwargs):
+---
+-2.40.0
+diff --git a/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb b/meta-python/recipes-devtools/python/python3-flask-cors_5.0.0.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-flask-cors_5.0.0.bb
+index 6606b3037a..96e8f42393 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-cors_5.0.0.bb
+@@ -7,14 +7,10 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=118fecaa576ab51c1520f95e98db61ce"
  
--DEPENDS = "python3 openldap cyrus-sasl"
-+DEPENDS = "python3 openldap cyrus-sasl python3-setuptools-scm-native"
+-PYPI_PACKAGE = "Flask-Cors"
++PYPI_PACKAGE = "flask_cors"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
  
--PYPI_PACKAGE = "python-ldap"
-+PYPI_PACKAGE = "python_ldap"
+-SRC_URI += " \
+-        file://CVE-2024-6221.patch \
+-"
+-
+-SRC_URI[sha256sum] = "f268522fcb2f73e2ecdde1ef45e2fd5c71cc48fe03cffb4b441c6d1b40684eb0"
++SRC_URI[sha256sum] = "5aadb4b950c4e93745034594d9f3ea6591f734bb3662e16e255ffbf5e89c88ef"
  
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
+ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "7edb0accec4e037797705f3a05cbf36a9fde50d08c8f67f2aef99a2628fab828"
-+SRC_URI[sha256sum] = "b2f6ef1c37fe2c6a5a85212efe71311ee21847766a7d45fcb711f3b270a5f79a"
- 
- do_configure:prepend() {
-     sed -i -e 's:^library_dirs =.*::' \
 
