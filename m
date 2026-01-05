@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB6CBC2A077
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECEA2C2A07A
 	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 08:32:08 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.60168.1767601927283877976
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.60169.1767601927953039033
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jan 2026 00:32:07 -0800
+ Mon, 05 Jan 2026 00:32:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KaLa8bDW;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47d3ffa6720so76448105e9.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FMIxpB1W;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4775e891b5eso55708275e9.2
         for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 00:32:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1767601926; x=1768206726; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=90CsBO+tzAPsbXOAJkd9YCnof5Z+13VGDVZmBuMO1DY=;
-        b=KaLa8bDWVvUROfr6yI/IyUCaUKKvilR6bTPHFzeQnM234cvF37qov02G0wgMkk33tg
-         cuCHaeBpaLZM5x2Dbg8owq9HZ9R22pTB3Q52XfpWUbMf1Qo5jo043qGsExMzaaFi54HN
-         opi28iHRI/mssfq0svJztcLaKi8klEV25FFijPuY7TPxirh5C6eM0VUqvxgxyPgU4XbU
-         r9ek73bIby5FpYkIUzfs6ge891tvlJaK+G3cyDwZlU//pk1+Kxh50maFFj3xCwZ4Gm3j
-         JI/PksoLmu8P7S1tALs1lPmwrd6tuP8H4fT9MM+AIay7cw8GnUWfInza+nDLOeXXlwfk
-         qqAg==
+        bh=l2OUmkxZVu2JOar92QkRCoJQF+UiP+4jFcAeD51UxQ4=;
+        b=FMIxpB1WlWUvmi4eUF0w3m//Pl09sd6y46xP011IK1i68QQGVdFG0hiniJ2HVx1IUs
+         ihO27wFxmtq0ZccvWvrQ/PNHVbulO54rrdhgbJpWXqwcPKPmeK6jQXYDB52Gjczz3DN2
+         76LAiiwMd3GgxOg7P8IYRtcRo+X6f6U6tZQ1eZmINj3J4ea128/UW+Rtecmg49ouWJNQ
+         uPyT6dpRWsJ1hMrwjnrbvylpc4t+xVjaECnblH6oSFxg62I1XE2vM3Kl00ermfc8k8CL
+         Tfx7oXDRs+x3LEpqocX48mBjxyfNvTf0+NZ4tYgF4tf0OuB+JR8wXq3zZ5HeyCMFeX6q
+         tgiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1767601926; x=1768206726;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=90CsBO+tzAPsbXOAJkd9YCnof5Z+13VGDVZmBuMO1DY=;
-        b=QSdMY2yLYnVOfklwZzvbZFYcwFU7cDAXBhK0T7Cx4cDBfKdYlVrUPzOeDA5WfTIIRE
-         LZgdXlJLBbeUQj30ttP5YDbQBFJpEGpLCmOFigVB4ZaGbJ30/qh5gMmSLZ+NGZ5eeIaa
-         xU8KztdKCzwTkorRQfImY9KTlP08ZhPTfAak+UOH65OkyD19NCguhaqPZx2+myCIosBY
-         +3tCdl7qAMf7SetLpEnDm8gbEVYWNnuxW9SinxkwFH0vr6H5+8KGoXnj6t3oX3+eM+yw
-         h1BBFRYFsvFGYmF9z8fHO2bfGoHUbRWDGBGzoIUDwCvZuSyJ8vQf0MvbPtCGedbo4+9K
-         MnIg==
-X-Gm-Message-State: AOJu0YyII52k7OdxM6sJKJelSO7nG7Et3wvWQsxDOvXDCKHezWmDZOEN
-	7asBnSh12xPEX7SB/EPI4jqSjO45Rk8QOMolMmbyiZhyj/FtDjjUkDKroMQTjw==
-X-Gm-Gg: AY/fxX4SYuZwqcb5Jo3/yzoAxGbn3InsAhFjaUHa1X1/5R1iRpNxSnWDQkCeFkjeL4a
-	49p7xgXsI4Mqqi3UE+A6Kh3JqxJDgUSyMQnkl2sFAQp0uJr7D9pMiadlzQSe4VEEWy/1tkfV4xT
-	PoHkIcm/Rb/sxDdL9KLX4z/la36AEAOYUKuWLMnsPE1HmJKagd9wnGwc7YnmCANCCQmeSLjn6xk
-	+sGpEGCvemKUek9YCC3cpAoei9+OY+utc45KhSMTjjzZDfrm3nwThKpTQEp8vt8hDIoEtgnG2/9
-	Z7VEvF3rUBRMOCRDoSXDzmhCApJhkzoerwfLAcFFZetJfuIFaRzmwVNCivFLyEt9I6FVfQpQDE2
-	omcgykXsbh3Tv/YYIT9oQZDwfckZAye+Kc7a0H/bmEBfnJImxL0ka6Gq8wmQZfPzsjX49JE2vsi
-	KRI667UTt8
-X-Google-Smtp-Source: AGHT+IHA6nsjjGqjhel60Zk1NFfoqH//P8ejGVxSFDzvVE7ij+dxlzc+2bPU+XXNT6GnscwepLXkGQ==
-X-Received: by 2002:a05:600c:c08a:b0:46e:1abc:1811 with SMTP id 5b1f17b1804b1-47d197f67edmr453260885e9.27.1767601925456;
-        Mon, 05 Jan 2026 00:32:05 -0800 (PST)
+        bh=l2OUmkxZVu2JOar92QkRCoJQF+UiP+4jFcAeD51UxQ4=;
+        b=Fz/oT9L/SYjUO/i0sMn1rv6+7np9vJnVfB+ShRZupUhOp0iGHPRNJD/vcImGVr7nLo
+         hrt+DSGYc5/GZJMoIy6fJSdrHu7r0mk2bBT1K6P2OOYUFlDWLQORGyUc+zNA0gLYxv+j
+         Vkqzl3QIPwevTDJAbee+/V0eyaIIj6ZWv6nzK8mRvJpgnhFxXAaQQAL65pi6+lGpTtIF
+         beiN0XHxKJnhMWe5GbmFzK55dlzK5H0MhRN0nn3mLmDECcwe8FlS5puvByViw4uVj/Ca
+         wAvtojbueSin484qEQYWQzpcqEAwnk3clQJgxzupdOVDM3rvUiyM7SwGLqzM5SqcClXj
+         4naw==
+X-Gm-Message-State: AOJu0YywhEittOKzCc6Qx75KgYmoyFn1q9IblIuptvxWskc8n4e8hJua
+	dqnCc63icKx/lQ/HuE7sPeCghPa/18BO/g3Ol+Se10KJ7yLWPKa25PmEqO8gkg==
+X-Gm-Gg: AY/fxX5VER4wAzNWFOq/RXJKN9pPIc36rQzz1mhQs9Uec3zSZZCnw3Rw2ioyezWTZlR
+	TyHAxK2V+zSuKzwf2g6rs1NI4drFZJRQ6M3lKgQ2Lax9B3iGLiD+VN6RxhohHskfQe7sHVEQDF+
+	Q3HrIXaxRMRg0kIK4QI0yY88lFwQzvEW7SiaGT2GfXsrR+FecxiHjqDDMUAHNYZZAttyVsjJYop
+	RCnv17ewdggZEWFjI037s5DEPcNl6ExSfGiOtuuKSg+FVnCoOhoMZHg31OAD3dD3fbHpDU4tOHo
+	0tiSMzSx3EJa+tUinFbaa0SyRKKyKbI1mzuFvkXCuYo6Lsz1G+weA0Nmg3vQb5UiWGOmaUgIy2+
+	Ake1BNyAU9NJhd+QwfwZzOLS7eQNi9x7wXfp2fQUYvCUujHuJ1/lh6WqRHgp3NbwpiHZziJ3CR1
+	AwmC9uMwq/
+X-Google-Smtp-Source: AGHT+IF3KTk9tvxBjNdT94vJrZ08NHpJiOWFEjGjWr+rQfxIvG8fkNU4fL6s0iJyQCxZYMxQ8vaUrA==
+X-Received: by 2002:a05:600c:1f84:b0:477:7c7d:d9b7 with SMTP id 5b1f17b1804b1-47d3884cfdemr492272585e9.33.1767601926157;
+        Mon, 05 Jan 2026 00:32:06 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d6be53a0csm54867635e9.3.2026.01.05.00.32.04
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d6be53a0csm54867635e9.3.2026.01.05.00.32.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 05 Jan 2026 00:32:05 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 4/5] python3-configobj: patch CVE-2023-26112
-Date: Mon,  5 Jan 2026 09:32:00 +0100
-Message-ID: <20260105083201.1225143-4-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 5/5] python3-flask: patch CVE-2023-30861
+Date: Mon,  5 Jan 2026 09:32:01 +0100
+Message-ID: <20260105083201.1225143-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260105083201.1225143-1-skandigraun@gmail.com>
 References: <20260105083201.1225143-1-skandigraun@gmail.com>
@@ -68,61 +68,129 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 08:32:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123130
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123131
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-26112
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-30861
 
-Pick the patch that resolves the issue referenced in the NVD report.
+Pick the patch referenced by the NVD report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python3-configobj/CVE-2023-26112.patch    | 25 +++++++++++++++++++
- .../python/python3-configobj_5.0.6.bb         |  3 ++-
- 2 files changed, 27 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-configobj/CVE-2023-26112.patch
+ .../python/python3-flask/CVE-2023-30861.patch | 94 +++++++++++++++++++
+ .../python/python3-flask_2.1.1.bb             |  1 +
+ 2 files changed, 95 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask/CVE-2023-30861.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-configobj/CVE-2023-26112.patch b/meta-python/recipes-devtools/python/python3-configobj/CVE-2023-26112.patch
+diff --git a/meta-python/recipes-devtools/python/python3-flask/CVE-2023-30861.patch b/meta-python/recipes-devtools/python/python3-flask/CVE-2023-30861.patch
 new file mode 100644
-index 0000000000..35d8ea77cf
+index 0000000000..370f17bb7f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-configobj/CVE-2023-26112.patch
-@@ -0,0 +1,25 @@
-+From 76dd27ec0dbde6c852f412390ac4e2cfefa8af76 Mon Sep 17 00:00:00 2001
-+From: cdcadman <mythirty@gmail.com>
-+Date: Wed, 17 May 2023 03:57:08 -0700
-+Subject: [PATCH] Address CVE-2023-26112 ReDoS
++++ b/meta-python/recipes-devtools/python/python3-flask/CVE-2023-30861.patch
+@@ -0,0 +1,94 @@
++From 32cc429640d7307caa2075d15b0634fd886c6381 Mon Sep 17 00:00:00 2001
++From: David Lord <davidism@gmail.com>
++Date: Mon, 1 May 2023 08:01:32 -0700
++Subject: [PATCH] set `Vary: Cookie` header consistently for session
 +
-+CVE: CVE-2023-26112
-+Upstream-Status: Backport [https://github.com/DiffSK/configobj/commit/7c618b0bbaff6ecaca51a6f05b29795d1377a4a5]
++CVE: CVE-2023-30861
++Upstream-Status: Backport [https://github.com/pallets/flask/commit/afd63b16170b7c047f5758eb910c416511e9c965]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ validate.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/flask/sessions.py | 10 ++++++----
++ tests/test_basic.py   | 23 +++++++++++++++++++++++
++ 2 files changed, 29 insertions(+), 4 deletions(-)
 +
-+diff --git a/validate.py b/validate.py
-+index b7a964c..af76898 100644
-+--- a/validate.py
-++++ b/validate.py
-+@@ -542,7 +542,7 @@ class Validator(object):
-+     """
++diff --git a/src/flask/sessions.py b/src/flask/sessions.py
++index 4e19270..039e30c 100644
++--- a/src/flask/sessions.py
+++++ b/src/flask/sessions.py
++@@ -385,6 +385,10 @@ class SecureCookieSessionInterface(SessionInterface):
++         samesite = self.get_cookie_samesite(app)
++         httponly = self.get_cookie_httponly(app)
 + 
-+     # this regex does the initial parsing of the checks
-+-    _func_re = re.compile(r'(.+?)\((.*)\)', re.DOTALL)
-++    _func_re = re.compile(r'([^\(\)]+?)\((.*)\)', re.DOTALL)
+++        # Add a "Vary: Cookie" header if the session was accessed at all.
+++        if session.accessed:
+++            response.vary.add("Cookie")
+++
++         # If the session is modified to be empty, remove the cookie.
++         # If the session is empty, return without setting the cookie.
++         if not session:
++@@ -397,13 +401,10 @@ class SecureCookieSessionInterface(SessionInterface):
++                     samesite=samesite,
++                     httponly=httponly,
++                 )
+++                response.vary.add("Cookie")
 + 
-+     # this regex takes apart keyword arguments
-+     _key_arg = re.compile(r'^([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.*)$',  re.DOTALL)
-diff --git a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb b/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
-index 1125a6389d..589ad6f1d9 100644
---- a/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-configobj_5.0.6.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://configobj.py;md5=a7c3968dd866dfd23e91e125b669ab21"
- PYPI_PACKAGE = "configobj"
- SRC_URI[sha256sum] = "a2f5650770e1c87fb335af19a9b7eb73fc05ccf22144eb68db7d00cd2bcb0902"
++             return
++ 
++-        # Add a "Vary: Cookie" header if the session was accessed at all.
++-        if session.accessed:
++-            response.vary.add("Cookie")
++-
++         if not self.should_set_cookie(app, session):
++             return
++ 
++@@ -419,3 +420,4 @@ class SecureCookieSessionInterface(SessionInterface):
++             secure=secure,
++             samesite=samesite,
++         )
+++        response.vary.add("Cookie")
++diff --git a/tests/test_basic.py b/tests/test_basic.py
++index 2a177e9..2da7699 100644
++--- a/tests/test_basic.py
+++++ b/tests/test_basic.py
++@@ -558,6 +558,11 @@ def test_session_vary_cookie(app, client):
++     def setdefault():
++         return flask.session.setdefault("test", "default")
++ 
+++    @app.route("/clear")
+++    def clear():
+++        flask.session.clear()
+++        return ""
+++
++     @app.route("/vary-cookie-header-set")
++     def vary_cookie_header_set():
++         response = flask.Response()
++@@ -590,11 +595,29 @@ def test_session_vary_cookie(app, client):
++     expect("/get")
++     expect("/getitem")
++     expect("/setdefault")
+++    expect("/clear")
++     expect("/vary-cookie-header-set")
++     expect("/vary-header-set", "Accept-Encoding, Accept-Language, Cookie")
++     expect("/no-vary-header", None)
++ 
++ 
+++def test_session_refresh_vary(app, client):
+++    @app.get("/login")
+++    def login():
+++        flask.session["user_id"] = 1
+++        flask.session.permanent = True
+++        return ""
+++
+++    @app.get("/ignored")
+++    def ignored():
+++        return ""
+++
+++    rv = client.get("/login")
+++    assert rv.headers["Vary"] == "Cookie"
+++    rv = client.get("/ignored")
+++    assert rv.headers["Vary"] == "Cookie"
+++
+++
++ def test_flashes(app, req_ctx):
++     assert not flask.session.modified
++     flask.flash("Zap")
+diff --git a/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb b/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb
+index 24a7047703..edf9f628d2 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_2.1.1.bb
+@@ -6,6 +6,7 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
--SRC_URI += "file://0001-Switch-from-using-distutils-to-setuptools.patch"
-+SRC_URI += "file://0001-Switch-from-using-distutils-to-setuptools.patch \
-+            file://CVE-2023-26112.patch"
++SRC_URI += "file://CVE-2023-30861.patch"
+ SRC_URI[sha256sum] = "a8c9bd3e558ec99646d177a9739c41df1ded0629480b4c8d2975412f3c9519c8"
  
- inherit pypi setuptools3
+ PYPI_PACKAGE = "Flask"
 
