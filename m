@@ -1,101 +1,95 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B6D3C2A097
-	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 10:47:40 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.61629.1767610051028798451
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3C75FC617D
+	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 11:53:50 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.62354.1767614029952806253
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jan 2026 02:47:31 -0800
+ Mon, 05 Jan 2026 03:53:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=eNamvRnU;
- spf=pass (domain: konsulko.com, ip: 209.85.208.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-64baaa754c6so15632878a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 02:47:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DAgnGZ/p;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-4308d81fdf6so6663443f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 03:53:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1767610049; x=1768214849; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Mu2LhFslQtgTt9yCPdp2hTynP3aTnZfMDhDO9W3yucQ=;
-        b=eNamvRnUuzhw7W+kBrX+eTOdW19TNx2Dk4I3/gMnx7CM84kWc7BeTUPW+qLdtWf1Yv
-         OYWVphEG/tsZYc4jZ24dE6v+mceKNTwvaLVSS42szTxJi5f1ZSP9dbwwRAWDzBBv2Q0Q
-         dI9M8ZhBI8xBE7OutTPE2bdlKfMCs5jgnSQS4=
+        d=gmail.com; s=20230601; t=1767614028; x=1768218828; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vO7mfVWRiDel890QlnvJD0sNzI/CJ6MWK/TJXoo9k0Q=;
+        b=DAgnGZ/pfR43sF0dii5Qo3L5Q9ghQcfGd7Egbu2ifLq5Fz+TYlu/U7e2yRKLoXhhdZ
+         MBBuLYepLPdx6g1NUr+C2IYvuYeu5ibbO+FORuog/2LYmjdNZiOgg2k6Y9vANM3osevl
+         cu/U0jQrGqE9lqAqEULOXyagS3ZGlwaNFWntmaPlRMFKoj60t2UHO62Aytzm6JX/O36K
+         aanlpxaZJqI9ZonATA/Stzev2EFY7vPYPgeR8WAAJBbBNJKNivrkEL9/Bettg6EOCchc
+         Izh3SNgy1q7Mhdq+4/F9asU+0QqNEjQFCr1m2CRZbAuKYHttufnm4QPi1Q1S66X5hZAT
+         7/gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767610049; x=1768214849;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Mu2LhFslQtgTt9yCPdp2hTynP3aTnZfMDhDO9W3yucQ=;
-        b=L6DeXofmAHDc4g4ktweWAgkMpNbjcqGFa+PESfs6OckZlDUqxVgK//SjfeYjkeIcUs
-         O3XTHxXrvnoqhSbL/RbwkR0Ge5a9kvpGPuWH82ABuC++GeiH1n4AImPu8sUeZoz+64sm
-         tWOQUDPhyazSBScNuIeu+m7c0IOWMIvTSjttLQ5kxPn8rcJUiJJkpOlgI434et0cT7a4
-         lweu9TLXMFXnGoXzeiyoSrjjum1oLCQtr0BE8i9W4CuKcCBi9sV0AbUMOvq2JYV7C+3Z
-         2BJHxXDME83t4CCmyepqsnlYlH+wBgjAb/FG2cFLMpghmjIlIFxVyMjj2D1WZ9hivWz3
-         +wew==
-X-Gm-Message-State: AOJu0YzHgxOeUtq3wAgzaH3dBsrlMvWSfPeI6Q4lEPtPBUNajcM28mV4
-	qXop+uAC8L7CHLIDGAnXxbEESjjFqeqFopXVhEsH8KDK3+kdUM3tSE4oOEu7W+OAwuq5UAE5RHV
-	HnNe3
-X-Gm-Gg: AY/fxX6WNAkksBOyTWsqFX5xrVHhjzKxct4/G9js7GKMgDcCrInnw9AiHucBEuxzYRg
-	zb/QZtVs0jtsahQuqprpPjiRoTIk1eT8Xcr/VZFya1uAQoxEMvJhxDKljmz0qwmqKrYZF9sBf1t
-	MsvV66HgcAxQzxeI6nwa5/2jDIQpFyK7I/PfYLSBApODMyup3VhomnjXQuGPP5srWezO7OAwr3p
-	YubszHvRskcVFJnVtEusRlsh5qi1TvRzIH12Wpk3fk1ZM099b126sgaIK5z+PHowFe4RGsdtFAh
-	+zNisVud03RTSKXbXxXC173Omr96QAZ376B6KNJAZYzlUhkw/uT+Iwu5D5mDewge2ghesyMHygj
-	4vRTz1mc35cC6xciN3kwiUtKr660nu2w2/7JrP6FOh/0O4532KeW5g5P7jeK2f2B6ssFwEsm/go
-	NaKnffITdjZMpc84/zqMss5RsA+8ONTaVFpI0=
-X-Google-Smtp-Source: AGHT+IE/xyTFKC6JaF34lWUdRjFZeEvBVeNACKom2g73JshFygze4zz1Y1zQkxYV27Vvm0Wp3QwX/g==
-X-Received: by 2002:a17:907:3c87:b0:b76:3476:a83c with SMTP id a640c23a62f3a-b80371d7dcbmr5151338966b.40.1767610049065;
-        Mon, 05 Jan 2026 02:47:29 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8037de1421sm5591905666b.41.2026.01.05.02.47.28
+        d=1e100.net; s=20230601; t=1767614028; x=1768218828;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vO7mfVWRiDel890QlnvJD0sNzI/CJ6MWK/TJXoo9k0Q=;
+        b=c3kn0rA31+ikm8UJb8wVpTtgiN9DHSSii1VewbW/P6/fsZrssYRWc9+L+MA0oQ54Ay
+         qLqs5DkkNnMoeoGDsDqX8DSccaJ3cYcFwu0WBo8zLFDdbQhF+iHFTmGJoSN4BOeQtZHL
+         2QuUfLwckAX9IjoFLLqCoGRAkSTMqMgAUSosJiS/TpHKbn0Ckpz2yVatKgDjOLSc5MCd
+         ii6ap9W7dinM6BB00RSWd/9LbaoXW/blw41YIKCUhDPOL1Cmanrn9wr4+cgD6G4Rv4zu
+         +fmUW4DNU96ypPqT9z1Hgxg1l4RZWFBlj+cR+audyIRJGMboXz1Yoomv7kQ3Y4aUdPZb
+         oPTA==
+X-Gm-Message-State: AOJu0Ywik2UmKyj7j1vDBgAMBz9Ewe0Fgtg27NH+JySAPtS7QO97GQt1
+	Dt2dpAT6vaMI4v6hADQ9wjB5gQ/chB+K9bXdoxQQBwQXjGX+P5VO1cRLh38t/Q==
+X-Gm-Gg: AY/fxX4nceGaQR5y38F4MFDVanITJrYENS1agKsJKO7UIzGhPHYPeFAzIQ5/1rfRwZ/
+	PO7m1Bsq4k4KhB/xoIKQb54Wy+uAc7iDPme0m8EC2fE1V39pVx08TZL0H/wiU04AWi5OorHnxOo
+	KI95v2e/TkNEya/lSMaT4gRSVDwlj9w5WaFAIl4R45f+FH8S8omecNOZeD9rZC++dal8yXHzwPy
+	LIs4NdBXmdjLAAx95opoUDLYRP/4hrOkEQbmDUd6YKh3vFoILFxf9fDScoKIDd2wf7A3bXvNhOW
+	8ByGkThugpPBfnD4KXzNH3wH4inRaumzemrSVtyqiYhw2OaKD4qGCvaD5ivLBAOqpxQ7FgHSp15
+	Wz4VlZcp5gp8eMCw2pgUKuuJb3YKZyS84fj/Z67bLdqdU9LaJnb0aq4F0fK83j/OgTwq9yXbdF+
+	3MZNF4Vzg+
+X-Google-Smtp-Source: AGHT+IFlUroO0xOiY0K63VL6C9P1p8a0lBDxTzzkXUP8WOyxPPCtEmQp7XLrvMniKo8icQfPBgC+ww==
+X-Received: by 2002:a05:6000:24c4:b0:430:fc3a:fbce with SMTP id ffacd0b85a97d-4324e4c9d45mr75144520f8f.15.1767614027910;
+        Mon, 05 Jan 2026 03:53:47 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4324eab2ebfsm99300617f8f.40.2026.01.05.03.53.47
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jan 2026 02:47:28 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 05 Jan 2026 03:53:47 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-filelock: Upgrade 3.20.1 -> 3.20.2
-Date: Mon,  5 Jan 2026 12:47:24 +0200
-Message-ID: <20260105104725.3914225-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260105104725.3914225-1-leon.anavi@konsulko.com>
-References: <20260105104725.3914225-1-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH 1/5] imagemagick: upgrade 7.1.2-11 -> 7.1.2-12
+Date: Mon,  5 Jan 2026 12:53:42 +0100
+Message-ID: <20260105115346.3385811-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 10:47:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123150
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 11:53:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123152
 
-Upgrade to release 3.20.2:
+Contains fix for CVE-2025-69204
 
-- Support Unix systems without O_NOFOLLOW
-- [pre-commit.ci] pre-commit autoupdate
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-filelock_3.20.1.bb => python3-filelock_3.20.2.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-filelock_3.20.1.bb => python3-filelock_3.20.2.bb} (87%)
+ .../{imagemagick_7.1.2-11.bb => imagemagick_7.1.2-12.bb}       | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-11.bb => imagemagick_7.1.2-12.bb} (99%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-filelock_3.20.1.bb b/meta-python/recipes-devtools/python/python3-filelock_3.20.2.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-filelock_3.20.1.bb
-rename to meta-python/recipes-devtools/python/python3-filelock_3.20.2.bb
-index a499b79c07..75eb16635c 100644
---- a/meta-python/recipes-devtools/python/python3-filelock_3.20.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-filelock_3.20.2.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://py-filelock.readthedocs.io/"
- LICENSE = "Unlicense"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=911690f51af322440237a253d695d19f"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-11.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb
+similarity index 99%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-11.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb
+index ce474c96de..26c19bf986 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-11.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb
+@@ -17,8 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://imagemagick-ptest.sh \
+ "
  
--SRC_URI[sha256sum] = "b8360948b351b80f420878d8516519a2204b07aefcdcfd24912a5d33127f188c"
-+SRC_URI[sha256sum] = "a2241ff4ddde2a7cebddf78e39832509cb045d18ec1a09d7248d6bfc6bfbbe64"
+-SRCREV = "578d60d1bf77be54b16ef2673d507932885570dd"
+-
++SRCREV = "bdd4fa561d7bf4c6afd40ee9c89e9f9e82b6e88b"
  
- BBCLASSEXTEND = "native nativesdk"
- 
--- 
-2.47.3
-
+ inherit autotools pkgconfig update-alternatives ptest
+ export ac_cv_sys_file_offset_bits = "64"
 
