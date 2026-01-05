@@ -1,102 +1,109 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFFB6C2A092
-	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 10:02:59 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.61074.1767607371368538564
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A09BC2A096
+	for <webhook@archiver.kernel.org>; Mon,  5 Jan 2026 10:47:40 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.61627.1767610050136186763
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jan 2026 02:02:51 -0800
+ Mon, 05 Jan 2026 02:47:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Aw//Ambd;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47d3ffa5f33so35962455e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 02:02:51 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=kk6PK8l7;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b802d5e9f06so1772357166b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 02:47:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767607370; x=1768212170; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uVxq/NKI3H8PSMmsqzVsSz0BiKPDX9X9s3CM9iM5I0M=;
-        b=Aw//AmbdiuGOX3bWRsfAc59o8fTfBoHSr0Ohv8DXVvPppPlN0hjcsdcCRiHoYAJTV0
-         Qic0w1T7TZPGZwNv0oxCk5+cLADh5bXkLxyrkW9Y3aJqAz/IgEJT0cxl7Wf/kNPYFrJs
-         b0dIw3KQ8cM/WJB9qYzzcBk5h+SkZN+UsMyHGbEHNgdmbYyNUzdGLFWTsUN4yw2L6iZl
-         LpSXx9hoheZxfoi2Tx9bKmPnAbmjR13NFzqLzU/p5t+tMxaB2vS4m+LjBtTxx5JqkSYB
-         uPx4XsoB9zBlk/OBXERnR9pH4RIlpckoeCOen/mPxK+GKplRlz+tFgLZ1OjkVd8SAuJ5
-         /CgA==
+        d=konsulko.com; s=google; t=1767610048; x=1768214848; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ntuIULsh3mI39Mi+oUE2OUk0T4q7isrV4ZoTd+mesEo=;
+        b=kk6PK8l70U5fqqJMFArTA/UyoUXLAcBCsIJjVHcsiF5Q4iqbpJDtl3EHlxbt87BTjm
+         e/VC9Xu0BkYxXIpiUe19TQHGvJ/SwK1ALa6yGAdoROlHfrpRCL7ov/Iv6u9v64JrDy/Y
+         4uNREo5h9d0ezewNh0gla2cQ0tiCS6o2Hj4+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767607370; x=1768212170;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uVxq/NKI3H8PSMmsqzVsSz0BiKPDX9X9s3CM9iM5I0M=;
-        b=Q9j3CKnMT/yBYs5PuCIzYH7s7a95G4fFV3aYTq2yUs0teLZiKUx5MRb5gD0espaqQd
-         /IprmeuTB7mr/HQxeEOrRonJE3Kvz7wBRjwGJlFEj37PCs7b/+JFzYQIiTutsJaIAH4z
-         uSPK7/OvxCqF9/LZ8mT7XjhZhzw7DLwlwu1Mzal49twsGKO4e65B2izriLO4VQWH1lJD
-         pdYV8kaZUxOskXB4ZsHQsahcxGwta8AXumq1iqa4VxdSTx67pt7WOXSdd/wJBKJd8eNN
-         Peu2LJRj0yj/dtCXBzQuQwQbA/TAQqBZHS1iStbAur+ngyouTWtVf8GDAPWUoqEvCz2D
-         H8LA==
-X-Gm-Message-State: AOJu0YxQ/ilIObhvuIV/VCU9KIarqEWpji0njeZAXY/dCuxW1uG0F7sE
-	pwLlRp83+N1YfeLspauQzwA2EN+EoDwAPavamedrUXfZ8/lCrvif/aOsCCkTPA==
-X-Gm-Gg: AY/fxX6msuBWoaYjkiItBGavp8gMxqCny1Pvz+G4bdeXI4mxFwz+o+kwjSH6+D4Cckv
-	mI6s2YnFU1JJhv2e+JELQmB2VoH4ciw8fUWklFVmTCBpTY1ZvJ+kQ8jtQLVtYbKrgxYR+Y2KZIf
-	iXwjjC/8V3i2BzNObYhhbL73v0VyjbbqDEC3MvdQSiAjPJUPmC8K4IhsP5g1SKMIoEC7bMdO1j1
-	ST1Ion15ku4GzyZNbFaurj92w3vApR/2M7LQifcBjlAecya3DmxcEtgssNWWJ1BByfKegyAeiK/
-	ODaOZFWn6sa59ZAjdW6A4E9AjXj9J5+hmiaCZKpeqiD7zZayAyAOQDq/NgppF6wBqgKT0gREG33
-	D6NPSazoMvcE6lROSX5oAjaznQ2kqMnZl5w06jgKvPPbp6NuZTwRj7146fNDLV3/bz9iUOiiXtu
-	oQ10+nYT6o
-X-Google-Smtp-Source: AGHT+IFh/JSRlsHqiUPZ6f/1Ys5IaibGd6/9xTz8pMWndcJDm+rJvkBDGdWDKeV7NLjTWHEpp7HX7w==
-X-Received: by 2002:a05:600c:6299:b0:477:73e9:dbe7 with SMTP id 5b1f17b1804b1-47d1959ae49mr681527625e9.35.1767607369660;
-        Mon, 05 Jan 2026 02:02:49 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d6d452be4sm144604435e9.10.2026.01.05.02.02.49
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1767610048; x=1768214848;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ntuIULsh3mI39Mi+oUE2OUk0T4q7isrV4ZoTd+mesEo=;
+        b=CTM9hRw4eT+Qfz/DGSiT1c3MeS0hl7/cv2/8ZlYntuDZYqlVQ/rU9aTWX3juepKjbP
+         CUHnXL249+pXKc+to78EnB02LX8hoq5aqrkNtrXXv+MQRwl5WcfVyrsZWU2tqszi6ae7
+         /wmfHB7ALpko3OoWyw+0A1+Ok6J1cVmPss/kMAT6qKH0VsbluUHaePPuhqDm3iaDb3be
+         NQvnHOfy3Z0oFDgJW6gH2UBqZUvBUpBiS1m/qkRxaJ7D4Rdh3Q23XSyXVnn6oMiDp+5Y
+         zpQ/XNgTJm8c20Q2mS1ZMRkcybyZYHfdKjXba1q7l4zLCMrd+TEalpuk2+1aH9OUV7hk
+         w4uQ==
+X-Gm-Message-State: AOJu0YzL0BHMtVY/kjZIBybw6NZ+Kj5x0KgDeqpa9C3Eljj9wiHhcE46
+	z7xoTQ8x4W0qu7wCFt+JQrNUPeFeZkmXOOmo4yh6NpAuayDdaMoFsDAf2Ams3wnUILKku6FD2L7
+	W5bXx
+X-Gm-Gg: AY/fxX6lN4SRqsrPHyoxzLVqZL3RzGJhYmhtQ5wZDpMgdqCmOd1o2074dqbtxdjJEnv
+	7Cvtdk1jBWNZ+th6PjniNpd+oVuqG7qGYOm0FeUciIyzLeEY3oeMYJA8fh95vwxSeuUDSxwoPK9
+	8WOAEP4b2Zya5HZH6QtejjXbLrriuj+EFVubdDtXa8/1jTgIo/cToCuw/1pnXAL+CnLsEhkDaRS
+	aR1Ixtta10U1zsw+cLtCHUzh4xwjt+mFIybW/8QExAS/rNiRtmEJa1+k/AgrOkNkJ5toigPH/qv
+	59nwQ2WZypJjU3rkULavl14maUxtxsaT3KU5WzS0Nmzg96j+Wbt8A6OgpxalcBAqBS2hOaFhyZh
+	1IQUBMrQBR6mgk+CxqMxrk/8FRhigNjomMZt1TWQJYJvatdbcUTm08q+eSRST/f3O4xax+utT1J
+	0qqsbB6NszdkSTOqhh9rYuI3MI
+X-Google-Smtp-Source: AGHT+IEQXpnDcQrEDXpROc7WNSBmz4/41MVSJy0LPw6NwwUypuWxZ1mLHn00p6Ev3+tHS6Rho/aawQ==
+X-Received: by 2002:a17:907:1b0f:b0:b73:42df:29a with SMTP id a640c23a62f3a-b8037253c2emr4618513566b.59.1767610048161;
+        Mon, 05 Jan 2026 02:47:28 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8037de1421sm5591905666b.41.2026.01.05.02.47.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jan 2026 02:02:49 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 05 Jan 2026 02:47:27 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 16/17] python3-django: upgrade 4.2.26 -> 4.2.27
-Date: Mon,  5 Jan 2026 11:02:36 +0100
-Message-ID: <20260105100237.3081345-16-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260105100237.3081345-1-skandigraun@gmail.com>
-References: <20260105100237.3081345-1-skandigraun@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-send2trash: Upgrade 1.8.3 -> 2.0.0
+Date: Mon,  5 Jan 2026 12:47:23 +0200
+Message-ID: <20260105104725.3914225-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 10:02:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123147
+ <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 10:47:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123149
 
-Contains fix for CVE-2025-13372 and CVE-2025-64460
+Upgrade to release 2.0.0:
 
-Changelog: https://github.com/django/django/blob/4.2.27/docs/releases/4.2.27.txt
+- Drop suport for Python 2
+- Fix test_trash_topdir failing on macOS
+- Update source installation instructions
+- Update gio implementation, don't use deprecated GObject.GError
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit fae6fe9b4156fae7696a7978700c823f414da8f7)
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+License-Update: The license remains the same
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-django_4.2.26.bb => python3-django_4.2.27.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.26.bb => python3-django_4.2.27.bb} (79%)
+ ...hon3-send2trash_1.8.3.bb => python3-send2trash_2.0.0.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-extended/send2trash/{python3-send2trash_1.8.3.bb => python3-send2trash_2.0.0.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.26.bb b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.26.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.27.bb
-index ea790e4b7f..86425ca724 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.26.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
-@@ -1,7 +1,7 @@
- require python3-django.inc
- inherit python_setuptools_build_meta
+diff --git a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.3.bb b/meta-python/recipes-extended/send2trash/python3-send2trash_2.0.0.bb
+similarity index 57%
+rename from meta-python/recipes-extended/send2trash/python3-send2trash_1.8.3.bb
+rename to meta-python/recipes-extended/send2trash/python3-send2trash_2.0.0.bb
+index 89943095de..0bd89f887a 100644
+--- a/meta-python/recipes-extended/send2trash/python3-send2trash_1.8.3.bb
++++ b/meta-python/recipes-extended/send2trash/python3-send2trash_2.0.0.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Send file to trash natively under Mac OS X, Windows and Linux"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=05faa35ba1ca10b723f19d286c9d5237"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a02659c2d5f4cc626e4dcf6504b865eb"
  
--SRC_URI[sha256sum] = "9398e487bcb55e3f142cb56d19fbd9a83e15bb03a97edc31f408361ee76d9d7a"
-+SRC_URI[sha256sum] = "b865fbe0f4a3d1ee36594c5efa42b20db3c8bbb10dff0736face1c6e4bda5b92"
+ inherit pypi python_setuptools_build_meta
+ 
+-SRC_URI[sha256sum] = "b18e7a3966d99871aefeb00cfbcfdced55ce4871194810fc71f4aa484b953abf"
++SRC_URI[sha256sum] = "1761421da3f9930bfe51ed7c45343948573383ad4c27e3acebc91be324e7770d"
+ 
+-PYPI_PACKAGE = "Send2Trash"
++PYPI_PACKAGE = "send2trash"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
  
  RDEPENDS:${PN} += "\
-     python3-sqlparse \
+-- 
+2.47.3
+
 
