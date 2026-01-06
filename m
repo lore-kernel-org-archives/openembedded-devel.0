@@ -1,192 +1,230 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6A40CE9D45
-	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 15:22:50 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.92208.1767712962923868674
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52E16CE9D6C
+	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 15:51:11 +0000 (UTC)
+Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.92871.1767714667223179666
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jan 2026 07:22:43 -0800
+ Tue, 06 Jan 2026 07:51:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jRAfQJ39;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-78c66bdf675so11425637b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 07:22:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LHN9tyE1;
+ spf=pass (domain: gmail.com, ip: 74.125.224.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-63fc6d9fde5so1101361d50.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 07:51:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767712962; x=1768317762; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fnsqv+dtTn2R3pNSyNJzI+ch+4iEa8yPjDrx8FnuiSI=;
-        b=jRAfQJ39KezeZusb/2xphJcTR5cl6fnudLd0E4XxUTN1TarP7XibxpRSM2Rne79/Us
-         OpwYWnd3bQds6HK1HD9Vul7Kl/lf5P6XW4UxDuO2hh8wdDFZxJPM2fLKfcSqQkh5pd5z
-         0tWCL6Tbg01N5+XQkqeeGI0+aQoX4oerDTHOM+g6KT6Fhxp3EkSeleIJJ3q1NDPE5ZRy
-         G3G8WFZA4U6u/mkmIM1aD/w3UhY1iuMcHI72jIdPonLobNxXRdDJ3/O8WvX+9Y2IUX2Z
-         I4e4LOJ/HEIFGmJcnwP6gLushIOdmIuOvwUchw6043h8qQ4x7ggyxuxl1JqkzuJrCIHu
-         v9Rw==
+        d=gmail.com; s=20230601; t=1767714666; x=1768319466; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=PKirDh6zkSZSLyXDi/HETBpJOghoSjWOaYqBVEPVGns=;
+        b=LHN9tyE1B4OfHE5gQv6mWldODw4GfM/Q0jP6uX7rQ2ZUN3y8Uly+DcjxHkTkQeX1GC
+         g89oMmQVIk6XChRyZBjKSRoXMaIwp4HpeQFuhafRxf2E8N1VDaoKQVPBaLtP0C12Fo19
+         0EylBMhiUleLzxMnbqhk0LXV3BZutegt93AKnEU3W9fzmm+V1TGNWlb4L/Fv5J6spjmx
+         RvJh5SofuR06xntKmjplgQkTtkZ+BIzZD+S39n6Z5DEv80gF7JE764uSYSR0kDfXyfZ/
+         A1RiGoPVafhde942UaQN/Tx0JzP8q4rITI/pbf5Ilm83Q+VXbmMan4SATNSdQjDkAuUE
+         uLQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767712962; x=1768317762;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1767714666; x=1768319466;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=fnsqv+dtTn2R3pNSyNJzI+ch+4iEa8yPjDrx8FnuiSI=;
-        b=uIvaynxuCUTsz442CUD/JM0e13Lx3OQSllXVgwuUl3oI3H1ByHeDJKqBcMfJqhwE7d
-         PbIveIoe5Cbg6LU+N+C1/qylkrWkL2Ej7AeJ9zSUCJCL8LSYThx2KcPGHZqAo5XsX/CB
-         xsiv5DyNRT9MEdILtV67p0F2umJqQNRXPpqAGxmFX77v0xMyNOHXTIM1jRECYxDfTvKE
-         a8LEjaOsGMXUi72hAy/weWbu67y2z5tf4mWw0SFyIMxpo7S2mAitm+orfxoDvq+gpETn
-         i9LYrFqPUvaNz0GWK907F6e8lWTSqgkLwyTcTNe+UwyvJ4Wxeyb3j5Iajq0iILoDX1oU
-         mVSw==
-X-Gm-Message-State: AOJu0Yxcf8tKRBLbgvLdTfE7jaNBHK5Em4giga2fIxa1/zHcsWnuRaEc
-	kvpJRY3CBlpnaBrx/wyldJzPVX/BHeD8K78wFFviQM7h9PzrTHESQCjJQW/T+Eop
-X-Gm-Gg: AY/fxX5NF/13QkT1SToW47ITk4WCGPIYiSDqPmL2zzCheTj0Dl1j3dYvkv8koYupe+8
-	2WmQgVx5Dqn6OpoBQXXyDIiFg4zLXW2RaBJUZkUpTXHp6hYi9dIWEM/rAylf58h870rhhOQqjzJ
-	zQn3hVWE74fyFpmgjnMk6fMXlUm/q6sP5vtFUCefAnxHNUOsghhS+ottNvvyiNT6EId1ZxNPIQE
-	JJTpRhMSxZb6C6h/oTzoYXqiORfwDppczHTQCE4WkRARJHPzTHxBtN8qc8OQ65P6ZVogJMI4m28
-	RleZFqh2iJgNQ48yHl8I466+pKNJs/deWKLAdL942/UTZG5EM3+xR9I/UlDt1oiLtT59AvGZu+j
-	B/HVdvPvTM+hp0JThehCC7kgx/NM1ERc2wDRKUqZyKD1rCj6l6N4CU0xwEqNoTNQL8cxD7Fx2/F
-	wIsv9KBQ799TGmhvRPMN/MrG9nXiH5CQjqkPirHHtPMNTvDTct5VzbKKeac9uFyUuohlK8eay0D
-	/zDzi8j+y38oyOPEYBeS4hHqF0/M0y+CF+JXD+yStZ5zLwPa9UkkRBPxlwJq4y9nQ==
-X-Google-Smtp-Source: AGHT+IEHRI+0QCISaMj+VAKhvnX7F8D/cKrU87sLqzQtNTNmy8p2xmSs8PdLMnszE6qW9YKbpkGyZA==
-X-Received: by 2002:a05:690c:e09:b0:78d:e514:8d55 with SMTP id 00721157ae682-790a8b64becmr27530677b3.61.1767712961334;
-        Tue, 06 Jan 2026 07:22:41 -0800 (PST)
-Received: from localhost.localdomain (71-208-41-41.ftmy.qwest.net. [71.208.41.41])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-790aa6d93d1sm8278587b3.49.2026.01.06.07.22.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Jan 2026 07:22:40 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-xfce][kirkstone][PATCH] Add missing HOMEPAGEs to xfce recipes
-Date: Tue,  6 Jan 2026 10:22:26 -0500
-Message-ID: <20260106152226.17589-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=PKirDh6zkSZSLyXDi/HETBpJOghoSjWOaYqBVEPVGns=;
+        b=fHIxx4BQ0Jrovc0sM9lcUWQ/LlmfE1DFmYzx6+FsU2pT5aCiISRT7TD+v1gocvZMfr
+         86CyEGaVlo1imrBM1wCdZYM1Rz4b0KgQocnhWyQROAKtirGniLREtKjVrBKXGvYs8RHO
+         DWZZmeoYtcoszgMtoG1NbWzUZlLt+eVpRSqY2907h3RjdgZFhrZjtszzYoRMxAu48XF1
+         MvVjkMS+e1O8N+C2v38YPxK7Ts6JJzOT1gCfWk1VoGLV4ZaBUFnmJT1P0/PdT+7xOwn0
+         bRWnaVDxB+tP6+hYYHKBpRsI4b5ghSNTUA+U45QjGF/nXbC1+QMc+Ei4BZU/7u9eyiwM
+         xHSQ==
+X-Gm-Message-State: AOJu0Yw1mtz9XorGesAzrW21PFqWhZZguPBNCSirZI7QIi0kHSojNKI8
+	kUkMQVPFpVLOzyraJA5j09WQsGpuTRhpOLpBuQuExGi8wx2G5vpYNEpjkcBEGPy4bDKP/3D4f/e
+	W5vGK08gRJ/1/Fcdxb6oN6nsl9tM7ETyyZA==
+X-Gm-Gg: AY/fxX7oR0uNs7nsFpTW/fE7b/Eh0C3x05T6PZwdY2icqUmP1vg3ALQrmsctCGaBXPR
+	ljw0YbPl7sW4VVpXerrH8fOxGl/UUXWe5Lt4uJ2qYLniWNJjosWNKABynKApcq/F6kSJODmefJz
+	WbkpAepZ3WXOShPB0NhYbTEnxxN6XQkLhOcqNz4lbe0UxvkiMSpaukLMo0HZAzVHfDdKf5qdKgc
+	DPDWvGEBk8wi55JzCTgK6Jn8EkDxG0A57WynVavT17yT6Czs3IT8R7mk/qkKVQZaZNt6Oh0/Q2s
+	FmqMpjFoSzWI1Mg5E/kIFiBSI4mfaLhtccakTGy7Ja4XOZC5+ocrKL0h6CMhkvtQWH6F5d2TRK8
+	FpDCdnC3wpbYXeelh4jnw/eLuN24=
+X-Google-Smtp-Source: AGHT+IFzHGoMQdhblluQwLgfxpAYGK9TFfCixCjc04jY+cbbubE08tSg5vJ/RABLdROY2aC3mYh9L5FrJP1d+SeA2SY=
+X-Received: by 2002:a05:690e:140b:b0:63f:a87b:2066 with SMTP id
+ 956f58d0204a3-6470c83c370mr2508859d50.16.1767714666206; Tue, 06 Jan 2026
+ 07:51:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260106104151.2027936-1-viswanath.kraleti@oss.qualcomm.com> <20260106104151.2027936-2-viswanath.kraleti@oss.qualcomm.com>
+In-Reply-To: <20260106104151.2027936-2-viswanath.kraleti@oss.qualcomm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 6 Jan 2026 07:50:39 -0800
+X-Gm-Features: AQt7F2qvRF6wvqhQNFp8mNxqXWdbgJ-VPjUGpbIvuFS14rDjisVZF0PXyH0S_Ms
+Message-ID: <CAMKF1soUWA1-xvP2F97=no85hNpmKp4diDg4uCQ3phhk78eeDQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 2/2] modemmanager: upgrade 1.22.0 -> 1.24.2
+To: viswanath.kraleti@oss.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000be5c750647ba2494"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 15:22:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123180
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 15:51:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123181
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 4d964d4d79388c8c2db8d8a3fec029a656f9f937)
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-xfce/recipes-xfce/exo/exo_4.16.4.bb                         | 1 +
- meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb                   | 1 +
- meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb     | 1 +
- meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb                 | 1 +
- meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.16.1.bb | 1 +
- meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb         | 1 +
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb     | 1 +
- meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb   | 1 +
- meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb                   | 1 +
- meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.1.bb                     | 1 +
- 10 files changed, 10 insertions(+)
+--000000000000be5c750647ba2494
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo_4.16.4.bb b/meta-xfce/recipes-xfce/exo/exo_4.16.4.bb
-index b97d9943f4..2cce8907a3 100644
---- a/meta-xfce/recipes-xfce/exo/exo_4.16.4.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_4.16.4.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "Application library for the Xfce desktop environment"
-+HOMEPAGE = "https://docs.xfce.org/xfce/exo/start"
- SECTION = "x11"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb b/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-index a6c56edf3b..c472402a6a 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_4.16.1.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "Xfce Menu Library"
-+HOMEPAGE = "https://docs.xfce.org/xfce/garcon/start"
- SECTION = "x11/libs"
- LICENSE = "LGPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
-diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
-index 4b72d3a790..4b2ece0c54 100644
---- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_4.16.0.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "Automatic management of removable drives and media for thunar"
-+HOMEPAGE = "https://docs.xfce.org/xfce/thunar/thunar-volman"
- SECTION = "x11"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-index 6a583ade73..c1d61298a9 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_4.16.0.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "Thumbnail service implementing the thumbnail management D-Bus specification"
-+HOMEPAGE = "https://docs.xfce.org/xfce/tumbler/start"
- SECTION = "x11/libs"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-diff --git a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.16.1.bb b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.16.1.bb
-index 18d9fedfce..e457a4a5b9 100644
---- a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.16.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.16.1.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "Xfce4 Application Finder"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-appfinder/start"
- SECTION = "x11"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb
-index b9201bc655..40f52107a0 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.16.3.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "Xfce4 Panel"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-panel/start"
- SECTION = "x11"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-index e6613b8ee9..60b8943210 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.16.0.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-session/start"
- SECTION = "x11"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
-diff --git a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-index 4a4e9f1883..2dc1def57e 100644
---- a/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.16.5.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "Xfce4 settings"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfce4-settings/start"
- SECTION = "x11/wm"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-index be742192b1..703537011e 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.16.0.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "Xfce configuration daemon and utilities"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfconf/start"
- SECTION = "x11/wm"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.1.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.1.bb
-index a32bad47ed..a001343dd1 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.1.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.16.1.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "Xfce4 Window Manager"
-+HOMEPAGE = "https://docs.xfce.org/xfce/xfwm4/start"
- SECTION = "x11/wm"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
--- 
-2.43.0
+On Tue, Jan 6, 2026 at 2:42=E2=80=AFAM Viswanath Kraleti via lists.openembe=
+dded.org
+<viswanath.kraleti=3Doss.qualcomm.com@lists.openembedded.org> wrote:
 
+> Changelog:
+>
+> https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/blob/mm-1-=
+24/NEWS
+>
+> Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+> ---
+>  .../{modemmanager_1.22.0.bb =3D> modemmanager_1.24.2.bb}        | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.22.0.bb
+> =3D> modemmanager_1.24.2.bb} (95%)
+>
+> diff --git a/meta-oe/recipes-connectivity/modemmanager/
+> modemmanager_1.22.0.bb b/meta-oe/recipes-connectivity/modemmanager/
+> modemmanager_1.24.2.bb
+> similarity index 95%
+> rename from meta-oe/recipes-connectivity/modemmanager/
+> modemmanager_1.22.0.bb
+> rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.b=
+b
+> index 82cc1167e2..95adfa9a0a 100644
+> --- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
+> +++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.bb
+> @@ -11,8 +11,8 @@ inherit gnomebase gettext systemd gobject-introspection
+> bash-completion
+>
+>  DEPENDS =3D "glib-2.0 libgudev libxslt-native dbus"
+>
+> -SRCREV =3D "03f786ce66360d67c669f4f122f8aa458e6f01ea"
+> -SRC_URI =3D "git://
+> gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=3Dhttps=
+;branch=3Dmm-1-22
+> "
+> +SRCREV =3D "f2b9ab1ad78d322f32134a444b5b54c6e8160e19"
+> +SRC_URI =3D "git://
+> gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=3Dhttps=
+;branch=3Dmm-1-24
+> "
+>
+
+See if you can also add tag=3D${PV} to the SRC_URI as well. It seems the ta=
+gs
+do exist for releases.
+
+
+>
+>
+>  # strict, permissive
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#123177):
+> https://lists.openembedded.org/g/openembedded-devel/message/123177
+> Mute This Topic: https://lists.openembedded.org/mt/117103076/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000be5c750647ba2494
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 6, =
+2026 at 2:42=E2=80=AFAM Viswanath Kraleti via <a href=3D"http://lists.opene=
+mbedded.org">lists.openembedded.org</a> &lt;viswanath.kraleti=3D<a href=3D"=
+mailto:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.open=
+embedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">Changelog:<br>
+<a href=3D"https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/b=
+lob/mm-1-24/NEWS" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freed=
+esktop.org/mobile-broadband/ModemManager/-/blob/mm-1-24/NEWS</a><br>
+<br>
+Signed-off-by: Viswanath Kraleti &lt;<a href=3D"mailto:viswanath.kraleti@os=
+s.qualcomm.com" target=3D"_blank">viswanath.kraleti@oss.qualcomm.com</a>&gt=
+;<br>
+---<br>
+=C2=A0.../{<a href=3D"http://modemmanager_1.22.0.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">modemmanager_1.22.0.bb</a> =3D&gt; <a href=3D"http://modemma=
+nager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2.b=
+b</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-connectivity/modemmanager/{<a href=3D"http://m=
+odemmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.=
+22.0.bb</a> =3D&gt; <a href=3D"http://modemmanager_1.24.2.bb" rel=3D"norefe=
+rrer" target=3D"_blank">modemmanager_1.24.2.bb</a>} (95%)<br>
+<br>
+diff --git a/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mo=
+demmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.2=
+2.0.bb</a> b/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mo=
+demmanager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.2=
+4.2.bb</a><br>
+similarity index 95%<br>
+rename from meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mod=
+emmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.22=
+.0.bb</a><br>
+rename to meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modem=
+manager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2=
+.bb</a><br>
+index 82cc1167e2..95adfa9a0a 100644<br>
+--- a/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modemmana=
+ger_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.22.0.bb<=
+/a><br>
++++ b/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modemmana=
+ger_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2.bb<=
+/a><br>
+@@ -11,8 +11,8 @@ inherit gnomebase gettext systemd gobject-introspection b=
+ash-completion<br>
+<br>
+=C2=A0DEPENDS =3D &quot;glib-2.0 libgudev libxslt-native dbus&quot;<br>
+<br>
+-SRCREV =3D &quot;03f786ce66360d67c669f4f122f8aa458e6f01ea&quot;<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://gitlab.freedesktop.org/mobile-br=
+oadband/ModemManager.git;protocol=3Dhttps;branch=3Dmm-1-22" rel=3D"noreferr=
+er" target=3D"_blank">gitlab.freedesktop.org/mobile-broadband/ModemManager.=
+git;protocol=3Dhttps;branch=3Dmm-1-22</a>&quot;<br>
++SRCREV =3D &quot;f2b9ab1ad78d322f32134a444b5b54c6e8160e19&quot;<br>
++SRC_URI =3D &quot;git://<a href=3D"http://gitlab.freedesktop.org/mobile-br=
+oadband/ModemManager.git;protocol=3Dhttps;branch=3Dmm-1-24" rel=3D"noreferr=
+er" target=3D"_blank">gitlab.freedesktop.org/mobile-broadband/ModemManager.=
+git;protocol=3Dhttps;branch=3Dmm-1-24</a>&quot;<br></blockquote><div><br></=
+div><div>See if you can also add tag=3D${PV} to the SRC_URI as well. It see=
+ms the tags do exist for releases.</div><div>=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+<br>
+<br>
+=C2=A0# strict, permissive<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#123177): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123177" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123177</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117103076/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117103076/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000be5c750647ba2494--
 
