@@ -2,397 +2,281 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7CEFC47BC2
-	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 07:33:46 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.85415.1767684819742062763
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 587CDC47BCB
+	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 08:58:57 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.86143.1767689930533043863
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Jan 2026 23:33:40 -0800
+ Tue, 06 Jan 2026 00:58:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UIFu9IiI;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-42fb5810d39so355580f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 05 Jan 2026 23:33:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iIybW4xL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-42e2e77f519so427191f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 00:58:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767684818; x=1768289618; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9R3LCE+al7V2RxdBjZ5ZKfabEAklgA+pTYHqbANOX5w=;
-        b=UIFu9IiIFR0CgzaIz4Oi9s4VHWfQc37VY1CiIn5Hr98jFA/VWAbJUd+0HpnoBxX5Uo
-         IyKHJVTVKb1dwrtK8nUdf/meQ7MaeoebMSFSOWC8jccuifqS+MG/F8m+NZaIJ/FW0UVr
-         2bU7ujoXXI0RvQ4lDbXBnQZMD+HotmIMsf9BRRVgYADlwJMJPUX7wWF21kU/up/DGiso
-         7q0krPgCaa05HTOudjBcYe8hU023T+V+yrWT5BlGtAxmzg2lkzxQS62ophlOkXfKXOv8
-         h3JqZN8tSgSzV4h02e6AAbbQzEawS01Oli/lCG5D6k1nj20fKPMtiaeGEZoeILpemHRG
-         Q5dQ==
+        d=gmail.com; s=20230601; t=1767689929; x=1768294729; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=j4AtNnbsAxwjKNjn4WpalREcBp10tSxZ4vuJ4QZWGT8=;
+        b=iIybW4xLqIOGyksJ6VLhq9PcLEYJAod+tttkF1B4MxWCtckLYBTEgrPryXHCETh6wr
+         cVKu4sPMHrBLuMExQQFRjB0jADZ/CqrJUIcKBZxHp72iJjIOeXXvLy3IgQYjJ3y2Va+r
+         FrJ4wIcMNpJpV4JmbMSP2FCaITzjrfrpD6tYJE1akIa7bIsWYlHoqHgrEmbOkJVPZPSt
+         4FOIjQDZG/oE5wydhVuRMEOBzR1QtCfwVFDoRh/W39ix/KDys+EhA//kPd+14g9XNMG7
+         wad2Yg+oQ6iImt9EPcIPQ1DON5LV243fLnO2ueQ/XSUc9Kn3jPDC+07OpjP318nE3tgO
+         Kq9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767684818; x=1768289618;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=9R3LCE+al7V2RxdBjZ5ZKfabEAklgA+pTYHqbANOX5w=;
-        b=GGOx9Y0FgZD9oJ8Ng83m0zaJCnLqiB820Xykaz/X+jFrzzNsTrc8c6uSkIUykpbeBe
-         CrEzue6uBs+Dql63Qie21sv3r9sHBa3kuoo8RApsXIMqwURbjQntoiArgzBfhgbl43J1
-         RtcZtEVZg5KGwnhNuUwjqzicMZoQr72z+sbHWN1igziT4gC8RhLBkx8i4NpRKgWI4/a2
-         tCXrScVpyxFaADJMvkHTBCBR5mavoHj1PBQQBHyz+DJ8O3+1jty0cn1CuLrIAfXXAYR6
-         Dg5HFOqNKfaFyNxJgccWQc9gv0sKpqw8WNPpPaEPIqRXOXEeu4O8sEuCtZTKbobwg/M9
-         dhWw==
-X-Gm-Message-State: AOJu0Yy3LS74kUwnKLU1oVNv6NBoHLHRxyA+D1W4P3l6HBqJ4uv+C7+N
-	pA6h37+tI/PzKuoS7zkQgDz+XHRu+xsl+Rlx9ILCRBd8bFVf3vdbUkT1WaymkA==
-X-Gm-Gg: AY/fxX7fEGKXa27NNa1BjIZ3hVrcvJdKqhuj2leCHO3QTmQfNc0qXugmyrMMJhFz7PI
-	9ukkK6V5ijX71OcQ+0SheeGkkRhQ9pC2NaUKGNWpWL5OI5WucKpQdtQ+S53s2P9JDBps8hCshUg
-	yviQNEk1tT7XBO/iDdTNGiTI1fG4TBu6E9ueAy/iyMUE+62+I5UFAKwjKh1I7wPvGYKjtrN1I/U
-	5lfD6SyETFNkJ2jheHkO3ULKs0iE5/HE5QOOx41yt28ex9mIdGAsNcvDr018Jh3FhEeJ4w+nU8a
-	+2/QNflFV3lNkgxOTvZ644DsY4RNaJBIOGeMGwV4XbY9K6+rqN2qmAYRr1SnUtp8qWsvWovm9z0
-	NVcrMpbhi3iAKQiWi0hAy17P0HaY/lxVaiU5tCY60F7Ky+vAiM6u/xAQfhzImmho78lagpXJOsA
-	amt++HqIWr
-X-Google-Smtp-Source: AGHT+IEYQd4DCULc+Ed5wq/rCGycg885IhupfUIdkVE05hOzg544yqCz8GfKslu3blrNcDhGoELXkw==
-X-Received: by 2002:a05:6000:3111:b0:430:fced:909 with SMTP id ffacd0b85a97d-432bca3a273mr2633005f8f.24.1767684817834;
-        Mon, 05 Jan 2026 23:33:37 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e16f4sm2811251f8f.11.2026.01.05.23.33.37
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Jan 2026 23:33:37 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 4/5] python3-pyjwt: patch CVE-2022-29217
-Date: Tue,  6 Jan 2026 08:33:28 +0100
-Message-ID: <20260106073334.3462222-4-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260106073334.3462222-1-skandigraun@gmail.com>
-References: <20260106073334.3462222-1-skandigraun@gmail.com>
+        d=1e100.net; s=20230601; t=1767689929; x=1768294729;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=j4AtNnbsAxwjKNjn4WpalREcBp10tSxZ4vuJ4QZWGT8=;
+        b=aOOj//knbeSOFKHkgLtqE45a7Wgw3YDmiIf0TuAEIvH+XTbC9kZV6KS0Pq+iYdiDeL
+         jGu9/nq2V722ZrAKdgIRkL+C/EiuL3euPc1y9UfdwNQ8JVghmdGXdDSs7FNSmr5cE35Z
+         haQ+3iBsdaleKbqes4g4Nlcuv6VCENWLt1sBnZgSDC/suzNq9j60VCf+Oo8pMzZap6Eg
+         2xzoBLwYtYL+04xvD2xPJwMhe+wifw8pipznBsCdTGpj8MpMaawfEcW7ygN1ic3jpbFG
+         iYWNNODLyQipL8npbg+Z+t90DQx9sL0dTaoOvvCymodyznG88nx8ms8ihFz2XlDX0qJu
+         ADwQ==
+X-Gm-Message-State: AOJu0YxxSD/qYRJXvDOfhinlyx1+9vYQ6iXWWNSA49+kqEDi+yhRu3Zg
+	m1xl1306LspOkjIJ+LqvP8wGkEDD/MVfp82c7yXIDz7VLKdBdDJXxUje
+X-Gm-Gg: AY/fxX7EPvfF+Nf6VSG7b6qLpCo4C+QARdXDWUcFSj2/7vIgsuBxxjKbdKFWkD19eVF
+	Y9HcU8vaw9eqzryC3q/oRutVdObE7FYSGYc7IomH6JrbEuArnMu0r9cdDm4KbTpHzu3JBWeuMag
+	KeB/pn6jD+dwozQ6lg3UfAhd7VEogVG+ul0GiPPEEwc5BHFmdJDQYMdCY5/1mDAn254nZaITbUC
+	IpwxpoKM5VlIQp6T1MK62x1WCRcDc9KOwoJRiwJYjWSf53WRxtSuNdN09Rb14KslJKhbwsiduf4
+	jScz099AD61P8z+fzPjlehiz0QQ4xkqEeW2nrdT6Pjaxk6STDQe7VxWC8UxzdykinEsJvhW5aNm
+	XGH5lEVuYwjRBO6nc0LfCKh9CmDex0ap32ZHl3fqbaQJscfDU0hb7ffJiml3i6Yys8gDpcuNhsz
+	bf2hmYXVskPU+ZkR0Sn6A=
+X-Google-Smtp-Source: AGHT+IE8XcmN3Hs5ZG3XYup8ZOO6LnGwNJqILQJY6ZxlFp3CSy0HbfpfEocr6GYoE9sJbctuzesdBw==
+X-Received: by 2002:a05:6000:2884:b0:431:808:2d49 with SMTP id ffacd0b85a97d-432bc9cc8dbmr2425188f8f.8.1767689928377;
+        Tue, 06 Jan 2026 00:58:48 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e16ffsm3242147f8f.12.2026.01.06.00.58.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 06 Jan 2026 00:58:47 -0800 (PST)
+Message-ID: <1d9c77dd-c059-4624-b978-b0fc6e68aa85@gmail.com>
+Date: Tue, 6 Jan 2026 09:58:47 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-gnome][whinlatter][PATCH 04/17] gimp: patch
+ CVE-2025-14422
+To: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260105100237.3081345-1-skandigraun@gmail.com>
+ <20260105100237.3081345-4-skandigraun@gmail.com>
+ <CADySD0Gv8qkYZuYtuuu+5FCdM1gcvNcjmTjskMdNG6rAusemcg@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CADySD0Gv8qkYZuYtuuu+5FCdM1gcvNcjmTjskMdNG6rAusemcg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 07:33:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123166
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 08:58:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123168
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-29217
+I don't really see the relation between these and the gimp patches...
 
-Pick the patch referenced by the NVD advsory.
+For mozjs you could take a look at this[1] patch - I believe it solves
+the same problem.
+For libjxl, Khem has commited a line some time ago[2] that touches
+CFLAGS. Try to do the same, but for CXXFLAGS.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../python/python3-pyjwt/CVE-2022-29217.patch | 295 ++++++++++++++++++
- .../python/python3-pyjwt_2.3.0.bb             |   1 +
- 2 files changed, 296 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt/CVE-2022-29217.patch
+[1]:
+https://github.com/OSSystems/meta-browser/blob/master/meta-firefox/recipes-browser/firefox/firefox/0001-add-musl-support.patch
+[2]:
+https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb#n47
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2022-29217.patch b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2022-29217.patch
-new file mode 100644
-index 0000000000..8bb80f39a4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2022-29217.patch
-@@ -0,0 +1,295 @@
-+From 0ab93eb55a182f190dea55cc048dcb50bf97724c Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Jos=C3=A9=20Padilla?= <jpadilla@webapplicate.com>
-+Date: Thu, 12 May 2022 14:31:00 -0400
-+Subject: [PATCH] Merge pull request from GHSA-ffqj-6fqr-9h24
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Co-authored-by: José Padilla <jpadilla@users.noreply.github.com>
-+
-+CVE: CVE-2022-29217
-+Upstream-Status: Backport [https://github.com/jpadilla/pyjwt/commit/9c528670c455b8d948aff95ed50e22940d1ad3fc]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ jwt/algorithms.py        |  39 +++++++-------
-+ jwt/utils.py             |  61 ++++++++++++++++++++++
-+ tests/test_advisory.py   | 109 +++++++++++++++++++++++++++++++++++++++
-+ tests/test_algorithms.py |   2 +-
-+ 4 files changed, 189 insertions(+), 22 deletions(-)
-+ create mode 100644 tests/test_advisory.py
-+
-+diff --git a/jwt/algorithms.py b/jwt/algorithms.py
-+index 1f8865a..1aa30ed 100644
-+--- a/jwt/algorithms.py
-++++ b/jwt/algorithms.py
-+@@ -9,6 +9,8 @@ from .utils import (
-+     der_to_raw_signature,
-+     force_bytes,
-+     from_base64url_uint,
-++    is_pem_format,
-++    is_ssh_key,
-+     raw_to_der_signature,
-+     to_base64url_uint,
-+ )
-+@@ -183,14 +185,7 @@ class HMACAlgorithm(Algorithm):
-+     def prepare_key(self, key):
-+         key = force_bytes(key)
-+ 
-+-        invalid_strings = [
-+-            b"-----BEGIN PUBLIC KEY-----",
-+-            b"-----BEGIN CERTIFICATE-----",
-+-            b"-----BEGIN RSA PUBLIC KEY-----",
-+-            b"ssh-rsa",
-+-        ]
-+-
-+-        if any(string_value in key for string_value in invalid_strings):
-++        if is_pem_format(key) or is_ssh_key(key):
-+             raise InvalidKeyError(
-+                 "The specified key is an asymmetric key or x509 certificate and"
-+                 " should not be used as an HMAC secret."
-+@@ -545,26 +540,28 @@ if has_crypto:
-+             pass
-+ 
-+         def prepare_key(self, key):
-+-
-+-            if isinstance(
-+-                key,
-+-                (Ed25519PrivateKey, Ed25519PublicKey, Ed448PrivateKey, Ed448PublicKey),
-+-            ):
-+-                return key
-+-
-+             if isinstance(key, (bytes, str)):
-+                 if isinstance(key, str):
-+                     key = key.encode("utf-8")
-+                 str_key = key.decode("utf-8")
-+ 
-+                 if "-----BEGIN PUBLIC" in str_key:
-+-                    return load_pem_public_key(key)
-+-                if "-----BEGIN PRIVATE" in str_key:
-+-                    return load_pem_private_key(key, password=None)
-+-                if str_key[0:4] == "ssh-":
-+-                    return load_ssh_public_key(key)
-++                    key = load_pem_public_key(key)
-++                elif "-----BEGIN PRIVATE" in str_key:
-++                    key = load_pem_private_key(key, password=None)
-++                elif str_key[0:4] == "ssh-":
-++                    key = load_ssh_public_key(key)
-++
-++            # Explicit check the key to prevent confusing errors from cryptography
-++            if not isinstance(
-++                key,
-++                (Ed25519PrivateKey, Ed25519PublicKey, Ed448PrivateKey, Ed448PublicKey),
-++            ):
-++                raise InvalidKeyError(
-++                    "Expecting a EllipticCurvePrivateKey/EllipticCurvePublicKey. Wrong key provided for EdDSA algorithms"
-++                )
-+ 
-+-            raise TypeError("Expecting a PEM-formatted or OpenSSH key.")
-++            return key
-+ 
-+         def sign(self, msg, key):
-+             """
-+diff --git a/jwt/utils.py b/jwt/utils.py
-+index 9dde10c..8ab73b4 100644
-+--- a/jwt/utils.py
-++++ b/jwt/utils.py
-+@@ -1,5 +1,6 @@
-+ import base64
-+ import binascii
-++import re
-+ from typing import Any, Union
-+ 
-+ try:
-+@@ -97,3 +98,63 @@ def raw_to_der_signature(raw_sig: bytes, curve: EllipticCurve) -> bytes:
-+     s = bytes_to_number(raw_sig[num_bytes:])
-+ 
-+     return encode_dss_signature(r, s)
-++
-++
-++# Based on https://github.com/hynek/pem/blob/7ad94db26b0bc21d10953f5dbad3acfdfacf57aa/src/pem/_core.py#L224-L252
-++_PEMS = {
-++    b"CERTIFICATE",
-++    b"TRUSTED CERTIFICATE",
-++    b"PRIVATE KEY",
-++    b"PUBLIC KEY",
-++    b"ENCRYPTED PRIVATE KEY",
-++    b"OPENSSH PRIVATE KEY",
-++    b"DSA PRIVATE KEY",
-++    b"RSA PRIVATE KEY",
-++    b"RSA PUBLIC KEY",
-++    b"EC PRIVATE KEY",
-++    b"DH PARAMETERS",
-++    b"NEW CERTIFICATE REQUEST",
-++    b"CERTIFICATE REQUEST",
-++    b"SSH2 PUBLIC KEY",
-++    b"SSH2 ENCRYPTED PRIVATE KEY",
-++    b"X509 CRL",
-++}
-++
-++_PEM_RE = re.compile(
-++    b"----[- ]BEGIN ("
-++    + b"|".join(_PEMS)
-++    + b""")[- ]----\r?
-++.+?\r?
-++----[- ]END \\1[- ]----\r?\n?""",
-++    re.DOTALL,
-++)
-++
-++
-++def is_pem_format(key: bytes) -> bool:
-++    return bool(_PEM_RE.search(key))
-++
-++
-++# Based on https://github.com/pyca/cryptography/blob/bcb70852d577b3f490f015378c75cba74986297b/src/cryptography/hazmat/primitives/serialization/ssh.py#L40-L46
-++_CERT_SUFFIX = b"-cert-v01@openssh.com"
-++_SSH_PUBKEY_RC = re.compile(br"\A(\S+)[ \t]+(\S+)")
-++_SSH_KEY_FORMATS = [
-++    b"ssh-ed25519",
-++    b"ssh-rsa",
-++    b"ssh-dss",
-++    b"ecdsa-sha2-nistp256",
-++    b"ecdsa-sha2-nistp384",
-++    b"ecdsa-sha2-nistp521",
-++]
-++
-++
-++def is_ssh_key(key: bytes) -> bool:
-++    if any(string_value in key for string_value in _SSH_KEY_FORMATS):
-++        return True
-++
-++    ssh_pubkey_match = _SSH_PUBKEY_RC.match(key)
-++    if ssh_pubkey_match:
-++        key_type = ssh_pubkey_match.group(1)
-++        if _CERT_SUFFIX == key_type[-len(_CERT_SUFFIX) :]:
-++            return True
-++
-++    return False
-+diff --git a/tests/test_advisory.py b/tests/test_advisory.py
-+new file mode 100644
-+index 0000000..f70f54b
-+--- /dev/null
-++++ b/tests/test_advisory.py
-+@@ -0,0 +1,109 @@
-++import jwt
-++import pytest
-++from jwt.exceptions import InvalidKeyError
-++
-++priv_key_bytes = b'''-----BEGIN PRIVATE KEY-----
-++MC4CAQAwBQYDK2VwBCIEIIbBhdo2ah7X32i50GOzrCr4acZTe6BezUdRIixjTAdL
-++-----END PRIVATE KEY-----'''
-++
-++pub_key_bytes = b'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPL1I9oiq+B8crkmuV4YViiUnhdLjCp3hvy1bNGuGfNL'
-++
-++ssh_priv_key_bytes = b"""-----BEGIN EC PRIVATE KEY-----
-++MHcCAQEEIOWc7RbaNswMtNtc+n6WZDlUblMr2FBPo79fcGXsJlGQoAoGCCqGSM49
-++AwEHoUQDQgAElcy2RSSSgn2RA/xCGko79N+7FwoLZr3Z0ij/ENjow2XpUDwwKEKk
-++Ak3TDXC9U8nipMlGcY7sDpXp2XyhHEM+Rw==
-++-----END EC PRIVATE KEY-----"""
-++
-++ssh_key_bytes = b"""ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJXMtkUkkoJ9kQP8QhpKO/TfuxcKC2a92dIo/xDY6MNl6VA8MChCpAJN0w1wvVPJ4qTJRnGO7A6V6dl8oRxDPkc="""
-++
-++
-++class TestAdvisory:
-++    def test_ghsa_ffqj_6fqr_9h24(self):
-++        # Generate ed25519 private key
-++        # private_key = ed25519.Ed25519PrivateKey.generate()
-++
-++        # Get private key bytes as they would be stored in a file
-++        # priv_key_bytes = private_key.private_bytes(
-++        #     encoding=serialization.Encoding.PEM,
-++        #     format=serialization.PrivateFormat.PKCS8,
-++        #     encryption_algorithm=serialization.NoEncryption(),
-++        # )
-++
-++        # Get public key bytes as they would be stored in a file
-++        # pub_key_bytes = private_key.public_key().public_bytes(
-++        #     encoding=serialization.Encoding.OpenSSH,
-++        #     format=serialization.PublicFormat.OpenSSH,
-++        # )
-++
-++        # Making a good jwt token that should work by signing it
-++        # with the private key
-++        # encoded_good = jwt.encode({"test": 1234}, priv_key_bytes, algorithm="EdDSA")
-++        encoded_good = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJ0ZXN0IjoxMjM0fQ.M5y1EEavZkHSlj9i8yi9nXKKyPBSAUhDRTOYZi3zZY11tZItDaR3qwAye8pc74_lZY3Ogt9KPNFbVOSGnUBHDg'
-++
-++        # Using HMAC with the public key to trick the receiver to think that the
-++        # public key is a HMAC secret
-++        encoded_bad = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0ZXN0IjoxMjM0fQ.6ulDpqSlbHmQ8bZXhZRLFko9SwcHrghCwh8d-exJEE4'
-++
-++        # Both of the jwt tokens are validated as valid
-++        jwt.decode(
-++            encoded_good,
-++            pub_key_bytes,
-++            algorithms=jwt.algorithms.get_default_algorithms(),
-++        )
-++
-++        with pytest.raises(InvalidKeyError):
-++            jwt.decode(
-++                encoded_bad,
-++                pub_key_bytes,
-++                algorithms=jwt.algorithms.get_default_algorithms(),
-++            )
-++
-++        # Of course the receiver should specify ed25519 algorithm to be used if
-++        # they specify ed25519 public key. However, if other algorithms are used,
-++        # the POC does not work
-++        # HMAC specifies illegal strings for the HMAC secret in jwt/algorithms.py
-++        #
-++        #        invalid_str ings = [
-++        #            b"-----BEGIN PUBLIC KEY-----",
-++        #            b"-----BEGIN CERTIFICATE-----",
-++        #            b"-----BEGIN RSA PUBLIC KEY-----",
-++        #            b"ssh-rsa",
-++        #        ]
-++        #
-++        # However, OKPAlgorithm (ed25519) accepts the following in  jwt/algorithms.py:
-++        #
-++        #                if "-----BEGIN PUBLIC" in str_key:
-++        #                    return load_pem_public_key(key)
-++        #                if "-----BEGIN PRIVATE" in str_key:
-++        #                    return load_pem_private_key(key, password=None)
-++        #                if str_key[0:4] == "ssh-":
-++        #                    return load_ssh_public_key(key)
-++        #
-++        # These should most likely made to match each other to prevent this behavior
-++
-++        # POC for the ecdsa-sha2-nistp256 format.
-++        # openssl ecparam -genkey -name prime256v1 -noout -out ec256-key-priv.pem
-++        # openssl ec -in ec256-key-priv.pem -pubout > ec256-key-pub.pem
-++        # ssh-keygen -y -f ec256-key-priv.pem > ec256-key-ssh.pub
-++
-++        # Making a good jwt token that should work by signing it with the private key
-++        # encoded_good = jwt.encode({"test": 1234}, ssh_priv_key_bytes, algorithm="ES256")
-++        encoded_good = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXN0IjoxMjM0fQ.NX42mS8cNqYoL3FOW9ZcKw8Nfq2mb6GqJVADeMA1-kyHAclilYo_edhdM_5eav9tBRQTlL0XMeu_WFE_mz3OXg"
-++
-++        # Using HMAC with the ssh public key to trick the receiver to think that the public key is a HMAC secret
-++        # encoded_bad = jwt.encode({"test": 1234}, ssh_key_bytes, algorithm="HS256")
-++        encoded_bad = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXN0IjoxMjM0fQ.5eYfbrbeGYmWfypQ6rMWXNZ8bdHcqKng5GPr9MJZITU"
-++
-++        # Both of the jwt tokens are validated as valid
-++        jwt.decode(
-++            encoded_good,
-++            ssh_key_bytes,
-++            algorithms=jwt.algorithms.get_default_algorithms()
-++        )
-++
-++        with pytest.raises(InvalidKeyError):
-++            jwt.decode(
-++                encoded_bad,
-++                ssh_key_bytes,
-++                algorithms=jwt.algorithms.get_default_algorithms()
-++            )
-+diff --git a/tests/test_algorithms.py b/tests/test_algorithms.py
-+index b6a73fc..777c108 100644
-+--- a/tests/test_algorithms.py
-++++ b/tests/test_algorithms.py
-+@@ -669,7 +669,7 @@ class TestOKPAlgorithms:
-+     def test_okp_ed25519_should_reject_non_string_key(self):
-+         algo = OKPAlgorithm()
-+ 
-+-        with pytest.raises(TypeError):
-++        with pytest.raises(InvalidKeyError):
-+             algo.prepare_key(None)
-+ 
-+         with open(key_path("testkey_ed25519")) as keyfile:
-diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.3.0.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.3.0.bb
-index 19ba30780e..ad84e59d57 100644
---- a/meta-python/recipes-devtools/python/python3-pyjwt_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.3.0.bb
-@@ -5,6 +5,7 @@ HOMEPAGE = "http://github.com/jpadilla/pyjwt"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
- 
-+SRC_URI += "file://CVE-2022-29217.patch"
- SRC_URI[sha256sum] = "b888b4d56f06f6dcd777210c334e69c737be74755d3e5e9ee3fe67dc18a0ee41"
- 
- PYPI_PACKAGE = "PyJWT"
+On 1/6/26 05:42, Ankur Tyagi wrote:
+> Hi Gyorgy,
+>
+> This is causing following build failures on qemuarm with musl and clang
+>
+> mozjs:
+> | /usr/src/debug/mozjs-128/128.5.2/mozglue/misc/StackWalk.cpp:810:(.text._ZL15unwind_callbackP15_Unwind_ContextPv+0x4):
+> undefined reference to `_Unwind_GetIP'
+> | arm-poky-linux-musleabi-clang++: error: linker command failed with
+> exit code 1 (use -v to see invocation)
+>
+> libjxl:
+> FAILED: [code=1] lib/CMakeFiles/jxl_dec-obj.dir/jxl/convolve_separable5.cc.o
+> /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/recipe-sysroot-native/usr/bin/arm-poky-linux-musleabi/arm-poky-linux-musleabi-clang++
+> --sysroot=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/recipe-sysroot
+> -DFJXL_ENABLE_AVX512=0 -DJXL_INTERNAL_LIBRARY_BUILD
+> -D__DATE__=\"redacted\" -D__TIMESTAMP__=\"redacted\"
+> -D__TIME__=\"redacted\"
+> -I/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/sources/libjxl-0.11.1
+> -isystem /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/build/lib/include
+> -mthumb -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a15
+> --dyld-prefix=/usr -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2
+> -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64
+> -D_FILE_OFFSET_BITS=64
+> --sysroot=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/recipe-sysroot
+>  -O2 -g   -ffile-prefix-map=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/sources/libjxl-0.11.1=/usr/src/debug/libjxl/0.11.1
+>  -ffile-prefix-map=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/build=/usr/src/debug/libjxl/0.11.1
+>  -ffile-prefix-map=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/recipe-sysroot=
+>  -ffile-prefix-map=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/recipe-sysroot-native=
+>  -pipe -fvisibility-inlines-hidden -fno-rtti -DNDEBUG -std=c++17 -fPIC
+> -fvisibility=hidden -fvisibility-inlines-hidden
+> -fmacro-prefix-map=/yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/sources/libjxl-0.11.1=.
+> "-DHWY_DISABLED_TARGETS=(HWY_SSSE3|HWY_AVX3|HWY_AVX3_SPR|HWY_AVX3_ZEN4)"
+> -funwind-tables -Xclang -mrelax-all -fno-omit-frame-pointer
+> -Wno-builtin-macro-redefined -Wall -fmerge-all-constants
+> -fno-builtin-fwrite -fno-builtin-fread -Wextra -Wc++11-compat
+> -Warray-bounds -Wformat-security -Wimplicit-fallthrough -Wno-register
+> -Wno-unused-function -Wno-unused-parameter -Wnon-virtual-dtor
+> -Woverloaded-virtual -Wvla -Wdeprecated-increment-bool
+> -Wfloat-overflow-conversion -Wfloat-zero-conversion
+> -Wfor-loop-analysis -Wgnu-redeclared-enum -Winfinite-recursion
+> -Wliteral-conversion -Wno-c++98-compat
+> -Wno-unused-command-line-argument -Wprivate-header -Wself-assign
+> -Wstring-conversion -Wtautological-overlap-compare
+> -Wthread-safety-analysis -Wundefined-func-template -Wunreachable-code
+> -Wunused-comparison -fsized-deallocation -fno-exceptions -fmath-errno
+> -fnew-alignment=8 -fno-cxx-exceptions -fno-slp-vectorize
+> -fno-vectorize -disable-free -disable-llvm-verifier
+> -DJPEGXL_ENABLE_SKCMS=1 -DJPEGXL_ENABLE_TRANSCODE_JPEG=1
+> -DJPEGXL_ENABLE_BOXES=1 -MD -MT
+> lib/CMakeFiles/jxl_dec-obj.dir/jxl/convolve_separable5.cc.o -MF
+> lib/CMakeFiles/jxl_dec-obj.dir/jxl/convolve_separable5.cc.o.d -o
+> lib/CMakeFiles/jxl_dec-obj.dir/jxl/convolve_separable5.cc.o -c
+> /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/sources/libjxl-0.11.1/lib/jxl/convolve_separable5.cc
+> error: out of range pc-relative fixup value
+> 1 error generated.
+> ninja: build stopped: subcommand failed.
+>
+> It builds on qemux86 with musl and clang though.
+>
+> Having said that, I don't think the problem is due to your patch as
+> gimp fails to build on qemuarm with musl and clang even without your
+> patches.
+>
+> So this needs to be investigated separately.
+>
+> cheers
+> Ankur
+>
+> On Mon, Jan 5, 2026 at 11:02 PM Gyorgy Sarvari via
+> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+> wrote:
+>> Details: https://nvd.nist.gov/vuln/detail/CVE-2025-14422
+>>
+>> Pick the patch referenced by the NVD report.
+>>
+>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> (cherry picked from commit a0b41204afe57f9b2b3f2e8ff496be72d04e0eb7)
+>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> ---
+>>  .../gimp/gimp/CVE-2025-14422.patch            | 66 +++++++++++++++++++
+>>  meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb    | 12 ++--
+>>  2 files changed, 73 insertions(+), 5 deletions(-)
+>>  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
+>>
+>> diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
+>> new file mode 100644
+>> index 0000000000..420e013916
+>> --- /dev/null
+>> +++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
+>> @@ -0,0 +1,66 @@
+>> +From 0a941cab81396d65a8ab547847f8c542039e214f Mon Sep 17 00:00:00 2001
+>> +From: Gyorgy Sarvari <skandigraun@gmail.com>
+>> +Date: Sun, 23 Nov 2025 16:43:51 +0000
+>> +Subject: [PATCH] plug-ins: Fix ZDI-CAN-28273
+>> +
+>> +From: Alx Sa <cmyk.student@gmail.com>
+>> +
+>> +Resolves #15286
+>> +Adds a check to the memory allocation
+>> +in pnm_load_raw () with g_size_checked_mul ()
+>> +to see if the size would go out of bounds.
+>> +If so, we don't try to allocate and load the
+>> +image.
+>> +
+>> +CVE: CVE-2025-14422
+>> +Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/4ff2d773d58064e6130495de498e440f4a6d5edb]
+>> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>> +---
+>> + plug-ins/common/file-pnm.c | 13 +++++++++++--
+>> + 1 file changed, 11 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/plug-ins/common/file-pnm.c b/plug-ins/common/file-pnm.c
+>> +index 32a33a4..9d349e9 100644
+>> +--- a/plug-ins/common/file-pnm.c
+>> ++++ b/plug-ins/common/file-pnm.c
+>> +@@ -674,7 +674,7 @@ load_image (GFile   *file,
+>> +             GError **error)
+>> + {
+>> +   GInputStream    *input;
+>> +-  GeglBuffer      *buffer;
+>> ++  GeglBuffer      *buffer    = NULL;
+>> +   GimpImage * volatile image = NULL;
+>> +   GimpLayer       *layer;
+>> +   char             buf[BUFLEN + 4];  /* buffer for random things like scanning */
+>> +@@ -708,6 +708,9 @@ load_image (GFile   *file,
+>> +       g_object_unref (input);
+>> +       g_free (pnminfo);
+>> +
+>> ++      if (buffer)
+>> ++        g_object_unref (buffer);
+>> ++
+>> +       if (image)
+>> +         gimp_image_delete (image);
+>> +
+>> +@@ -1060,6 +1063,7 @@ pnm_load_raw (PNMScanner *scan,
+>> +   const Babl   *format = NULL;
+>> +   gint          bpc;
+>> +   guchar       *data, *d;
+>> ++  gsize         data_size;
+>> +   gushort      *s;
+>> +   gint          x, y, i;
+>> +   gint          start, end, scanlines;
+>> +@@ -1070,7 +1074,12 @@ pnm_load_raw (PNMScanner *scan,
+>> +     bpc = 1;
+>> +
+>> +   /* No overflow as long as gimp_tile_height() < 1365 = 2^(31 - 18) / 6 */
+>> +-  data = g_new (guchar, gimp_tile_height () * info->xres * info->np * bpc);
+>> ++  if (! g_size_checked_mul (&data_size, gimp_tile_height (), info->xres) ||
+>> ++      ! g_size_checked_mul (&data_size, data_size, info->np)             ||
+>> ++      ! g_size_checked_mul (&data_size, data_size, bpc))
+>> ++    CHECK_FOR_ERROR (FALSE, info->jmpbuf, _("Unsupported maximum value."));
+>> ++
+>> ++  data = g_new (guchar, data_size);
+>> +
+>> +   input = pnmscanner_input (scan);
+>> +
+>> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
+>> index 9f38cdcd03..f529930dff 100644
+>> --- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
+>> +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
+>> @@ -56,11 +56,13 @@ GIDOCGEN_MESON_OPTION = "gi-docgen"
+>>  GIDOCGEN_MESON_ENABLE_FLAG = "enabled"
+>>  GIDOCGEN_MESON_DISABLE_FLAG = "disabled"
+>>
+>> -SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz"
+>> -SRC_URI += "file://0001-gimp-cross-compile-fix-for-bz2.patch"
+>> -SRC_URI += "file://0002-meson.build-reproducibility-fix.patch"
+>> -SRC_URI += "file://0001-meson.build-dont-check-for-lgi.patch"
+>> -SRC_URI += "file://0001-meson.build-require-iso-codes-native.patch"
+>> +SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
+>> +           file://0001-gimp-cross-compile-fix-for-bz2.patch \
+>> +           file://0002-meson.build-reproducibility-fix.patch \
+>> +           file://0001-meson.build-dont-check-for-lgi.patch \
+>> +           file://0001-meson.build-require-iso-codes-native.patch \
+>> +           file://CVE-2025-14422.patch \
+>> +           "
+>>  SRC_URI[sha256sum] = "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94ce466a62862e296b"
+>>
+>>  PACKAGECONFIG[aa] = "-Daa=enabled,-Daa=disabled,aalib"
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#123135): https://lists.openembedded.org/g/openembedded-devel/message/123135
+>> Mute This Topic: https://lists.openembedded.org/mt/117084023/3619737
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ankur.tyagi85@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
