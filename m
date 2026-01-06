@@ -1,230 +1,164 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52E16CE9D6C
-	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 15:51:11 +0000 (UTC)
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.92871.1767714667223179666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96F50CE9D7F
+	for <webhook@archiver.kernel.org>; Tue,  6 Jan 2026 16:56:31 +0000 (UTC)
+Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.18])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.94546.1767718582088315733
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Jan 2026 07:51:07 -0800
+ Tue, 06 Jan 2026 08:56:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LHN9tyE1;
- spf=pass (domain: gmail.com, ip: 74.125.224.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-63fc6d9fde5so1101361d50.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 07:51:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767714666; x=1768319466; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=PKirDh6zkSZSLyXDi/HETBpJOghoSjWOaYqBVEPVGns=;
-        b=LHN9tyE1B4OfHE5gQv6mWldODw4GfM/Q0jP6uX7rQ2ZUN3y8Uly+DcjxHkTkQeX1GC
-         g89oMmQVIk6XChRyZBjKSRoXMaIwp4HpeQFuhafRxf2E8N1VDaoKQVPBaLtP0C12Fo19
-         0EylBMhiUleLzxMnbqhk0LXV3BZutegt93AKnEU3W9fzmm+V1TGNWlb4L/Fv5J6spjmx
-         RvJh5SofuR06xntKmjplgQkTtkZ+BIzZD+S39n6Z5DEv80gF7JE764uSYSR0kDfXyfZ/
-         A1RiGoPVafhde942UaQN/Tx0JzP8q4rITI/pbf5Ilm83Q+VXbmMan4SATNSdQjDkAuUE
-         uLQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767714666; x=1768319466;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PKirDh6zkSZSLyXDi/HETBpJOghoSjWOaYqBVEPVGns=;
-        b=fHIxx4BQ0Jrovc0sM9lcUWQ/LlmfE1DFmYzx6+FsU2pT5aCiISRT7TD+v1gocvZMfr
-         86CyEGaVlo1imrBM1wCdZYM1Rz4b0KgQocnhWyQROAKtirGniLREtKjVrBKXGvYs8RHO
-         DWZZmeoYtcoszgMtoG1NbWzUZlLt+eVpRSqY2907h3RjdgZFhrZjtszzYoRMxAu48XF1
-         MvVjkMS+e1O8N+C2v38YPxK7Ts6JJzOT1gCfWk1VoGLV4ZaBUFnmJT1P0/PdT+7xOwn0
-         bRWnaVDxB+tP6+hYYHKBpRsI4b5ghSNTUA+U45QjGF/nXbC1+QMc+Ei4BZU/7u9eyiwM
-         xHSQ==
-X-Gm-Message-State: AOJu0Yw1mtz9XorGesAzrW21PFqWhZZguPBNCSirZI7QIi0kHSojNKI8
-	kUkMQVPFpVLOzyraJA5j09WQsGpuTRhpOLpBuQuExGi8wx2G5vpYNEpjkcBEGPy4bDKP/3D4f/e
-	W5vGK08gRJ/1/Fcdxb6oN6nsl9tM7ETyyZA==
-X-Gm-Gg: AY/fxX7oR0uNs7nsFpTW/fE7b/Eh0C3x05T6PZwdY2icqUmP1vg3ALQrmsctCGaBXPR
-	ljw0YbPl7sW4VVpXerrH8fOxGl/UUXWe5Lt4uJ2qYLniWNJjosWNKABynKApcq/F6kSJODmefJz
-	WbkpAepZ3WXOShPB0NhYbTEnxxN6XQkLhOcqNz4lbe0UxvkiMSpaukLMo0HZAzVHfDdKf5qdKgc
-	DPDWvGEBk8wi55JzCTgK6Jn8EkDxG0A57WynVavT17yT6Czs3IT8R7mk/qkKVQZaZNt6Oh0/Q2s
-	FmqMpjFoSzWI1Mg5E/kIFiBSI4mfaLhtccakTGy7Ja4XOZC5+ocrKL0h6CMhkvtQWH6F5d2TRK8
-	FpDCdnC3wpbYXeelh4jnw/eLuN24=
-X-Google-Smtp-Source: AGHT+IFzHGoMQdhblluQwLgfxpAYGK9TFfCixCjc04jY+cbbubE08tSg5vJ/RABLdROY2aC3mYh9L5FrJP1d+SeA2SY=
-X-Received: by 2002:a05:690e:140b:b0:63f:a87b:2066 with SMTP id
- 956f58d0204a3-6470c83c370mr2508859d50.16.1767714666206; Tue, 06 Jan 2026
- 07:51:06 -0800 (PST)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=RLLFjWg2;
+ spf=pass (domain: axis.com, ip: 40.107.162.18, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DqGgs8i8KRFIygXiAaXil4zb1QajmL1dege957TsV4/1wVK3gvDS6Hj27iS6Dr6sk7glfG8eoazZD27DkMMr2YkgcqoqAmXC5MMT4yqxLkDgMgs5Cm9CEkWWhQtHX3Ev52PVPBaRcBeK37PIgLGrSwclHP1+F9EMTKRFVGb7X6J8iwLSaU8YI0nYyw9sjrMzlcJMYBF14nPLpA0dWHvNiYXOXfhnJo/V2DsMFgCTSYu+gWgpkT+XVw+ISuKBdQZgxZ33NiEgI7Q1bUMGayind4wrnz1B1pVrybzpYdqUbGXiyeus8yrnQ3Lvos5GtuW0YGedpClesn1J4qF+FahgjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v+7/qr3nMQIMvNs6pflplYEqrgrtnaoqvqGi1My8ytQ=;
+ b=U4uqo8JTK2ONrf7JNqqi7W/2qV+KK+4owegpUB0q1WV+h9aLNuKRtUTxy9Me98C/obvVCfqfEr8Byw1f7PxFxQkQiJuswunoRPd6h9c8Mr2tePNAt3xNqZvlAWYVcqZgLbyO5zLu0tTGyVUGfSCvo/2V3hk15fClYvfCZ2TJooa8Rg30A6DabHXC9NI2DYAuOiCwMzwSb+XikI2d8sIIM02Q6Ju1kECVWx+nmIaUhj2ZZ0st7VLI9A2RT1WeE6VzZg0SThjiHgGObK5ADC9/enbCjfFUtQ/j0gdPDbM6EcyxLRWLZ/zJvu81o72FjdbXAwPodYgBT5+qZx4Q+n1oKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=v+7/qr3nMQIMvNs6pflplYEqrgrtnaoqvqGi1My8ytQ=;
+ b=RLLFjWg2tcFncxEZ+VT4/k4VOVS+5qoQQpIuXCkQMsdWWGm7AbnDWXaBts7NPjchO9u6BHqIfV/a0fLfxQ9wl74K7GaaTJkK4wYnk0UmlBuJkDNTBlFI1wHEsOwW1kuxOrV5GHdDaXu3bJCo5R57py9T9zjIdJW84KImSxhmXTo=
+Received: from PA7P264CA0532.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3db::6)
+ by DU0PR02MB8500.eurprd02.prod.outlook.com (2603:10a6:10:3e3::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9478.4; Tue, 6 Jan
+ 2026 16:56:16 +0000
+Received: from AM4PEPF00025F9B.EURPRD83.prod.outlook.com
+ (2603:10a6:102:3db:cafe::2c) by PA7P264CA0532.outlook.office365.com
+ (2603:10a6:102:3db::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9499.2 via Frontend Transport; Tue, 6
+ Jan 2026 16:56:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ AM4PEPF00025F9B.mail.protection.outlook.com (10.167.16.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9520.0 via Frontend Transport; Tue, 6 Jan 2026 16:56:15 +0000
+Received: from se-mail02w.axis.com (10.20.40.8) by se-mail11w.axis.com
+ (10.20.40.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.1748.39; Tue, 6 Jan
+ 2026 17:56:15 +0100
+Received: from se-mail02w.axis.com (10.20.40.8) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.61; Tue, 6 Jan
+ 2026 17:56:15 +0100
+Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server id 15.1.2507.61 via Frontend
+ Transport; Tue, 6 Jan 2026 17:56:15 +0100
+Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 53DFE193C
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Jan 2026 17:56:15 +0100 (CET)
+Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
+	id 4E5D1129963; Tue,  6 Jan 2026 17:56:15 +0100 (CET)
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-networking][PATCH] net-snmp: Update to 5.9.5.2
+Date: Tue, 6 Jan 2026 17:56:12 +0100
+Message-ID: <20260106165612.255674-1-pkj@axis.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260106104151.2027936-1-viswanath.kraleti@oss.qualcomm.com> <20260106104151.2027936-2-viswanath.kraleti@oss.qualcomm.com>
-In-Reply-To: <20260106104151.2027936-2-viswanath.kraleti@oss.qualcomm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 6 Jan 2026 07:50:39 -0800
-X-Gm-Features: AQt7F2qvRF6wvqhQNFp8mNxqXWdbgJ-VPjUGpbIvuFS14rDjisVZF0PXyH0S_Ms
-Message-ID: <CAMKF1soUWA1-xvP2F97=no85hNpmKp4diDg4uCQ3phhk78eeDQ@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 2/2] modemmanager: upgrade 1.22.0 -> 1.24.2
-To: viswanath.kraleti@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000be5c750647ba2494"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9B:EE_|DU0PR02MB8500:EE_
+X-MS-Office365-Filtering-Correlation-Id: e6f3f79b-a88e-48ff-af59-08de4d44816f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|36860700013|82310400026|1800799024;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?dqyKAmk9WXAhySMjC+avKKi49c5gnvQ44rvnVVFfqg0Hm//JMxO4tYsCnLkL?=
+ =?us-ascii?Q?AeO6YiOFR8kyIiAIAw7NrVzqB5cQmKznnT1LauN8huUF3oytLmbfGP1W9PH8?=
+ =?us-ascii?Q?jHTTl0eLkHc/yxjazqH0PG7Ija4KCz0oNZqEDB5nMvBvdJPxrZso1HxFv6dv?=
+ =?us-ascii?Q?yAIrEwbMyQhnVMh0dEz23WT9wmTTCffI8R7AvWq+qhJZRN4mjuxLKYcJJri3?=
+ =?us-ascii?Q?nS09tGPL/lAZql+Wv+jvpZKMhxKcxHW9AZa/algiwmJu5gl4kAZ0uj7yM+Ab?=
+ =?us-ascii?Q?GRTBK4w2KYYEjC/7AWN2AQVhTyJrWwAPpmYGzwWGQOzPTEVgDeQL8GQdDgtT?=
+ =?us-ascii?Q?i0SJe71PVm5aU1KGm+ddWah5PvrRf0P5JeKL74wM3V3+2Aw2U+DyolaevG+6?=
+ =?us-ascii?Q?7KKtWpgmNg95tFfAdGriDB4D1sYaeW1EVEvicdwtwIzU+RMdLpDCMhbA+SEN?=
+ =?us-ascii?Q?PV5VmCvmNZKGZ6a3XQ59JpGR3h4ddkr5lmK/McWAXrK5IRwAW4UiceGcUZuC?=
+ =?us-ascii?Q?7bVFOKAkyIdy7sARwNMfQnq7HbVwCWfuFDd60AOnf/B+rYTEcM5z4MKTXdoS?=
+ =?us-ascii?Q?CuHQnthXkoVhOJUvgN88q+WtuwLSNYU5m04fVgk/4oZ1vMgatWZWc5B7d3yH?=
+ =?us-ascii?Q?yIwmhW5TeW8i7bn1iwpkDgbjFvBrWukvq8pRlox1r6wjqZlVEQtUZN9NbdzL?=
+ =?us-ascii?Q?iVDvXHLmd3DP2mS8EDN2gnCkoCzojP9NFQdizj0kzoB6eA8+ZPIkodcld8TX?=
+ =?us-ascii?Q?sKMdutAPruU15YrTQ5WHSlL3XlVQPEOy3F8QIqPk0G8rVreFI6lX5cltJGA0?=
+ =?us-ascii?Q?Eh9RqYlK36UgGhUdXOpn9nyTuSmL9jgBQjc11YVDLdyQ/hP3kXNkTR4sHOiK?=
+ =?us-ascii?Q?frWWeSbu62bhaJ9ESV+sGK6AnK6CUd4cghp1Cu4WuF/KZt9rxfFRriXlnQJB?=
+ =?us-ascii?Q?xt008bfv8G+AbQ041thypUjQRbc+XaBPyA5J4TJsJ2/wwVhpyQoVD+cCH8Rm?=
+ =?us-ascii?Q?IrOEDE2zTIB/8QfJV/+wYkl823XtCSRO3zGHDYciZ7QHpi5nmHsgLQWw3npn?=
+ =?us-ascii?Q?ff6T/kbHFNPWl7AeR2wduuzjgaDF26Q/0nWUUzpjdLZSslttxIzqYEMDqTPL?=
+ =?us-ascii?Q?bw8AHhs+aNZfengCV0CRlLaDn7WTGqoUOYj5khzrvdZABDAEuJvA3Wzg72ma?=
+ =?us-ascii?Q?UbCE08DZ3jA9133X4F/+DCghY82xQ7iafB/BPw2Ybk8HiKJOm4x3RHfklgNR?=
+ =?us-ascii?Q?4cqMWtx5mGESeK5RcFIFbJwC/7dgOb1dmnEK++uNxRA3cv8rtt7X6qKbi2lZ?=
+ =?us-ascii?Q?w6f64idg7OiOpEeVuckyh3uj4yv9oKyQkxv+sZHt6J6u54GJRPoX4hAVVPy7?=
+ =?us-ascii?Q?R1fDmkCP5wPZj9rMEz+ycuAYX2mtLNHmSRZ9+EaxwU5pmNhFSRsSYnXZ+7/R?=
+ =?us-ascii?Q?nZDPlxh0MC9Uc6TMjSI/Ot6Ygfm4Vrd0DVItU1QGd64qrJyo0WoF7wI6KiyQ?=
+ =?us-ascii?Q?+DThOehXb6CK/OsJ7adROrnsO6HMm99vENyO3KnnA6MKmmEjFpTsA4rZzy2a?=
+ =?us-ascii?Q?M41/RhGGy335iAHL4J4=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2026 16:56:15.7662
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6f3f79b-a88e-48ff-af59-08de4d44816f
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM4PEPF00025F9B.EURPRD83.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR02MB8500
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 15:51:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123181
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Jan 2026 16:56:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123182
 
---000000000000be5c750647ba2494
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+5.9.5.1:
+* Only a version numbering fix.
 
-On Tue, Jan 6, 2026 at 2:42=E2=80=AFAM Viswanath Kraleti via lists.openembe=
-dded.org
-<viswanath.kraleti=3Doss.qualcomm.com@lists.openembedded.org> wrote:
+5.9.5.2:
+* Fix an issue with needing limits.h included.
 
-> Changelog:
->
-> https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/blob/mm-1-=
-24/NEWS
->
-> Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-> ---
->  .../{modemmanager_1.22.0.bb =3D> modemmanager_1.24.2.bb}        | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.22.0.bb
-> =3D> modemmanager_1.24.2.bb} (95%)
->
-> diff --git a/meta-oe/recipes-connectivity/modemmanager/
-> modemmanager_1.22.0.bb b/meta-oe/recipes-connectivity/modemmanager/
-> modemmanager_1.24.2.bb
-> similarity index 95%
-> rename from meta-oe/recipes-connectivity/modemmanager/
-> modemmanager_1.22.0.bb
-> rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.b=
-b
-> index 82cc1167e2..95adfa9a0a 100644
-> --- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
-> +++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.bb
-> @@ -11,8 +11,8 @@ inherit gnomebase gettext systemd gobject-introspection
-> bash-completion
->
->  DEPENDS =3D "glib-2.0 libgudev libxslt-native dbus"
->
-> -SRCREV =3D "03f786ce66360d67c669f4f122f8aa458e6f01ea"
-> -SRC_URI =3D "git://
-> gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=3Dhttps=
-;branch=3Dmm-1-22
-> "
-> +SRCREV =3D "f2b9ab1ad78d322f32134a444b5b54c6e8160e19"
-> +SRC_URI =3D "git://
-> gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=3Dhttps=
-;branch=3Dmm-1-24
-> "
->
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ .../net-snmp/{net-snmp_5.9.5.bb =3D> net-snmp_5.9.5.2.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-protocols/net-snmp/{net-snmp_5.9.5.bb =3D> =
+net-snmp_5.9.5.2.bb} (99%)
 
-See if you can also add tag=3D${PV} to the SRC_URI as well. It seems the ta=
-gs
-do exist for releases.
-
-
->
->
->  # strict, permissive
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123177):
-> https://lists.openembedded.org/g/openembedded-devel/message/123177
-> Mute This Topic: https://lists.openembedded.org/mt/117103076/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000be5c750647ba2494
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 6, =
-2026 at 2:42=E2=80=AFAM Viswanath Kraleti via <a href=3D"http://lists.opene=
-mbedded.org">lists.openembedded.org</a> &lt;viswanath.kraleti=3D<a href=3D"=
-mailto:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.open=
-embedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">Changelog:<br>
-<a href=3D"https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/b=
-lob/mm-1-24/NEWS" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freed=
-esktop.org/mobile-broadband/ModemManager/-/blob/mm-1-24/NEWS</a><br>
-<br>
-Signed-off-by: Viswanath Kraleti &lt;<a href=3D"mailto:viswanath.kraleti@os=
-s.qualcomm.com" target=3D"_blank">viswanath.kraleti@oss.qualcomm.com</a>&gt=
-;<br>
----<br>
-=C2=A0.../{<a href=3D"http://modemmanager_1.22.0.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">modemmanager_1.22.0.bb</a> =3D&gt; <a href=3D"http://modemma=
-nager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2.b=
-b</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
-=C2=A0rename meta-oe/recipes-connectivity/modemmanager/{<a href=3D"http://m=
-odemmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.=
-22.0.bb</a> =3D&gt; <a href=3D"http://modemmanager_1.24.2.bb" rel=3D"norefe=
-rrer" target=3D"_blank">modemmanager_1.24.2.bb</a>} (95%)<br>
-<br>
-diff --git a/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mo=
-demmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.2=
-2.0.bb</a> b/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mo=
-demmanager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.2=
-4.2.bb</a><br>
-similarity index 95%<br>
-rename from meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://mod=
-emmanager_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.22=
-.0.bb</a><br>
-rename to meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modem=
-manager_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2=
-.bb</a><br>
-index 82cc1167e2..95adfa9a0a 100644<br>
---- a/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modemmana=
-ger_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.22.0.bb<=
-/a><br>
-+++ b/meta-oe/recipes-connectivity/modemmanager/<a href=3D"http://modemmana=
-ger_1.24.2.bb" rel=3D"noreferrer" target=3D"_blank">modemmanager_1.24.2.bb<=
-/a><br>
-@@ -11,8 +11,8 @@ inherit gnomebase gettext systemd gobject-introspection b=
-ash-completion<br>
-<br>
-=C2=A0DEPENDS =3D &quot;glib-2.0 libgudev libxslt-native dbus&quot;<br>
-<br>
--SRCREV =3D &quot;03f786ce66360d67c669f4f122f8aa458e6f01ea&quot;<br>
--SRC_URI =3D &quot;git://<a href=3D"http://gitlab.freedesktop.org/mobile-br=
-oadband/ModemManager.git;protocol=3Dhttps;branch=3Dmm-1-22" rel=3D"noreferr=
-er" target=3D"_blank">gitlab.freedesktop.org/mobile-broadband/ModemManager.=
-git;protocol=3Dhttps;branch=3Dmm-1-22</a>&quot;<br>
-+SRCREV =3D &quot;f2b9ab1ad78d322f32134a444b5b54c6e8160e19&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://gitlab.freedesktop.org/mobile-br=
-oadband/ModemManager.git;protocol=3Dhttps;branch=3Dmm-1-24" rel=3D"noreferr=
-er" target=3D"_blank">gitlab.freedesktop.org/mobile-broadband/ModemManager.=
-git;protocol=3Dhttps;branch=3Dmm-1-24</a>&quot;<br></blockquote><div><br></=
-div><div>See if you can also add tag=3D${PV} to the SRC_URI as well. It see=
-ms the tags do exist for releases.</div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">
-<br>
-<br>
-=C2=A0# strict, permissive<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123177): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123177" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123177</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117103076/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117103076/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000be5c750647ba2494--
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.bb b=
+/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
+similarity index 99%
+rename from meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.bb
+rename to meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
+index f4108d9715..b7c9607b3b 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.5.2.bb
+@@ -26,7 +26,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV=
+}.tar.gz \
+            file://0011-ac_add_search_path.m4-keep-consistent-between-32bit=
+-.patch \
+            file://netsnmp-swinst-crash.patch \
+            "
+-SRC_URI[sha256sum] =3D "07f94f06a8d681485e43eeec4f190d9bea43e1b335146d0de4=
+66b6de3f3f4c5a"
++SRC_URI[sha256sum] =3D "16707719f833184a4b72835dac359ae188123b06b5e42817c0=
+0790d7dc1384bf"
+=20
+ UPSTREAM_CHECK_URI =3D "https://sourceforge.net/projects/net-snmp/files/ne=
+t-snmp/"
+ UPSTREAM_CHECK_REGEX =3D "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
 
