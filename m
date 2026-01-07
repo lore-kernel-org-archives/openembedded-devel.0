@@ -1,143 +1,171 @@
-Return-Path: <viswanath.kraleti@oss.qualcomm.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8AE0CD5828
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 10:00:33 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2730.1767780032109859120
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1F92CD5829
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 10:01:53 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2754.1767780104019433692
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 02:00:32 -0800
+ Wed, 07 Jan 2026 02:01:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=DH0y7EFx;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=RCPR/Qvw;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: viswanath.kraleti@oss.qualcomm.com)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6076tN4L2379157
-	for <openembedded-devel@lists.openembedded.org>; Wed, 7 Jan 2026 10:00:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=tN+cEqlTYik
-	V+vfCa7eSdupwpjrCktSE3Q6j8s3C6/U=; b=DH0y7EFxEgvVvrPKEPZc7LqiASR
-	Hgzsg212wdybblIhUA+23U/QvfRyCuQtugRTZ2qRW7mBQm1aS3seU0aYiNqx5iCp
-	NJgQZoXlXyGoPYBDyiJtM+rfW1T4eOIiR/yH7HNHc771F/QtF2og/FbXvqnXARhC
-	SIVuLHtvs0CAG95CmjFL/3GgOZ2UPtYuqXJatJTqMWycsrDDB9SSzFVrE0VfcTAQ
-	Ef2NQiU9au3ayIucxdOhfkMQBGbDVB+/RAAsx3KfZWG04/0HkTrhdBElT8CbOZYx
-	6WKnxy4UDh1MgnGgIZA9sNkNfFEwNIrsRfHcQHHss2KxN5yYKfy5MeiAJzw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhjn4rkqe-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:00:31 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-804c73088daso557099b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 02:00:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XSe68PYy;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47a95efd2ceso16426195e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 02:01:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1767780031; x=1768384831; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tN+cEqlTYikV+vfCa7eSdupwpjrCktSE3Q6j8s3C6/U=;
-        b=RCPR/QvwifisgipXPJOqT6Ow7CYxfFhPHt94otZsG9WVQp+flsWyLLPy4fBv8PzQ5U
-         xd2yrCfHwWq0u9R1bWPZAHDur9OIDEbtEY6zMOLuHLQ9HK93LtAOK9DsKtp2rlNsJByE
-         Ws/uq01R7eZJNv7ri9Wjzq0WhXyXOG2TLMMfMsTExoGAIv1LIqxi+G1bKPx9e4hfd7Nm
-         NS/6fYs0suwX9C+IE8nP2YFp2cDg4g1fOdR9XfxqnKt87QuOjpxa8vkcL2MUFzi33NnD
-         DGLm8v2tHF2meHXaG6fqmAoo3m/mXiYSjASCOwLN80IMqJO5crt3B3tfRw7zXnqkfzDh
-         eoMA==
+        d=gmail.com; s=20230601; t=1767780102; x=1768384902; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=R5grBZRZj4pgdyNv260VdUQHE6ritANSo6T5NR8i7fM=;
+        b=XSe68PYy96giNVzAay/tD86bPFncD7/34S/uhSmcXqEWzsnihoZ5CXt/yUxmVcWYJw
+         ORMScQ9qzpOzvX6fz8RIE9zCjO2wSWNBfGA0a48bgmQSTEMG1uzUYiI6AGCMlF9lnVm9
+         aDQfjnHyBQ/YvUouf3Nr75guJCzQ+loPAvMpfaQ/uvOFM37mglS7luIJFZK0Jjpj2vtw
+         CG/3T3rlMeY5yOPmkpXk7ZFcl75GjGdu+CgQxx0+ciYnq2Ns+i/DVMrL/m4k4DDZnJBl
+         siEOuxt1RpO1b0dLpiaot42IHhAe2ZHdYGInMwI6r+WU5zcElWD2RlqERokYfu2EkPuz
+         8axQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767780031; x=1768384831;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=tN+cEqlTYikV+vfCa7eSdupwpjrCktSE3Q6j8s3C6/U=;
-        b=CnOo4PeQa1Hxqu6vueLZLa37DCnyLiFeowywPialmXwgYFRd9nSSG27nCrHFqA81Wi
-         fMbtH/bzHDEtbn0+srLzP0RpPQeU1apNgSQkMDqtHvlGubTcv4vRZTUmdIo80ExKV0NY
-         elGIwqt3IZ5XzWrqfYP3MENZke+Enc6/MJcId0+HLYFE2bLZlKk4OAXbgHODJ8MRkXRk
-         AeGF1m4MGnRBhKnoY4UWYPAPwDcrXwV/5BIusyjasM0PIh1FTZcT6sNJie0FY4hQPQhk
-         jc4jGR8UGJ3vALttbnpkxyyEaLZI9g/z32nMvXRdO/vRSRHTXK+icKencqKuELpzpc1i
-         kD+w==
-X-Gm-Message-State: AOJu0YzxZOZhF3GSpeDpdKGnkxp6xBNd9ww6hOfYgRR97DpiUCbkpqi8
-	lc4MVvV4kFsCEMH5M64rr49cAUBpxyyNsb/SeoJk5HmBm1zqBFm/G+9iMDp6+5/G5m8901k55Zg
-	GXExg+YJCCgPkZ09ispKwFk30zQd6CXYzFzTdasOxbm/a2b+cSCHfEySmkmtAWBCC1Z9EA6upct
-	qE7dyo0eACoMiSMDLF
-X-Gm-Gg: AY/fxX5oxnB5XRbmkGlgptLusu/zy8tpI5/E+YEnFFMtH+psEE/4LHOkH+8xyoC0xBl
-	BJmLBtxX89s5tyQ8DCiL3/vYc846+f3lPixyqZG1sQWH4XQfNkZjE8l+MxhPo3/MgRiyECRbJC9
-	z5oWF+ausJWbBG/eMm9e/j2XSBh2EbWjlhM/y80kjNIJcxsYB0mlWnjT8basVoCF0+6Jb+1gMFf
-	fgdWKg7PMDMgC7EbKK8kPXtz4gOOobLuqh4Q2429QEv7h00VTiYUQGfQJ79NuU3UvaiHNAJqdna
-	7tr02PN++5F7r7w+k6GrOKjEnZnQkZbGPIkzMOEidg9nsjt+U3mwJ+ts6lke9ZMx23jZr4wMvGu
-	2LCFSv3uIWvejlNoH37/bJpYjYICpBu+NSQENhDOW7MHVUPa3
-X-Received: by 2002:a05:6a00:a91:b0:7e8:3fcb:9b00 with SMTP id d2e1a72fcca58-8194dc38c15mr4860929b3a.22.1767780030696;
-        Wed, 07 Jan 2026 02:00:30 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGcKo0iSF7ebgKH0Q9qknQzLVHAivxQChh6t14DYIWCShPuMhoRaBym7I5u/+UPiOByflQI7w==
-X-Received: by 2002:a05:6a00:a91:b0:7e8:3fcb:9b00 with SMTP id d2e1a72fcca58-8194dc38c15mr4860886b3a.22.1767780030093;
-        Wed, 07 Jan 2026 02:00:30 -0800 (PST)
-Received: from hu-vkraleti-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-819bb0de1a2sm4504161b3a.23.2026.01.07.02.00.28
+        d=1e100.net; s=20230601; t=1767780102; x=1768384902;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=R5grBZRZj4pgdyNv260VdUQHE6ritANSo6T5NR8i7fM=;
+        b=CFwF1X5glTT2Qt7/1yde15Ksee+tAaB0VjAR9/q+r1+354Fr9RK3243oU+RexacFOH
+         oFoknZOdKLCyIV38InTMV4sJGqFLvDJcU+gvhsIfONmzT8/YBA3SWrfeihWzLtPRDjzV
+         FxiH0FmZa8Z7V80IjCmuVKR46BWbUqCExigkw9pqChMUWRApEzCW+EPlAK9tL/qqekIz
+         1piDHj7x/yR8U/odtqMWFu87e0aNWeHUpCedpQgynliuofZihsposzylM7us2+enHL5K
+         0EoLfDqfapKD38aUujepSsQAmcKILgh1bW+Ge5E9PL5UGd3f14lBnQ0sw5XYh9T1EQ0/
+         eiWA==
+X-Gm-Message-State: AOJu0YzmSZOkWAd8uttFESOdYpKGmMCu41agtDbCMvMggO2Bgsz5+Oiu
+	OTzBsL3PHSCKi4QL/37pYANcl3LtelAh0YU8C0qZ47XbgjDyDIvYcqlsJSciDA==
+X-Gm-Gg: AY/fxX5I45opYnmdM91wMNDNhXFvsbsy3B7SGydaeX0e+xH1oaKMx7ElRSZKVf1V3Np
+	z5fNawjMewoRnZyA9WlUNJwd/uXA3xyejzCMvTBOD49pfAnGPc9BuPUTtZDAQSH/hBI4jaWG3qr
+	WTNz4UNfj8uiI4uZIBNVgDxqgvHsnZSFgq6vhc3iieWwl1hjk58r7/jzEv03JDlBgggX4GFbDFW
+	LGGL9Mc6ZxOXi4lw+KrR+1loikD8pQiyp8hVhbp/rbodR/xyFWPMLGVRPOPRpKxizJ7NkOl/epi
+	BnSN23UUttmyjwWBjtnzF4QwC2yTpAvFrU5gdtTyN37q3mtZaI/scJu9zgR/TFGJaSAtmaAW3QO
+	lQg1t/Hmts5cs/HSrQovh+9D4KSG/dM28l3i2SImE8N62spLQOjlNuzrrTZYcbJC2Z2wcMbm1Jx
+	7capU4uiuh
+X-Google-Smtp-Source: AGHT+IFRILn0FzAMC9+nHKZMrlR7ILRfpXrEsLZE2PqwK3TOnL+9hLpN/UYr5T8dXgsrWnHGjZYAQQ==
+X-Received: by 2002:a05:600c:8706:b0:47d:4047:f377 with SMTP id 5b1f17b1804b1-47d84b407e4mr21164035e9.36.1767780102173;
+        Wed, 07 Jan 2026 02:01:42 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f69e802sm90054595e9.8.2026.01.07.02.01.41
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 02:00:29 -0800 (PST)
-From: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+        Wed, 07 Jan 2026 02:01:41 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-Subject: [oe][meta-oe][PATCH v2 2/2] modemmanager: upgrade 1.22.0 -> 1.24.2
-Date: Wed,  7 Jan 2026 15:30:22 +0530
-Message-Id: <20260107100022.2646251-2-viswanath.kraleti@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260107100022.2646251-1-viswanath.kraleti@oss.qualcomm.com>
-References: <20260107100022.2646251-1-viswanath.kraleti@oss.qualcomm.com>
+Subject: [meta-python][PATCH] python3-waitress: add ptest support
+Date: Wed,  7 Jan 2026 11:01:40 +0100
+Message-ID: <20260107100140.2128659-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=LJhrgZW9 c=1 sm=1 tr=0 ts=695e2ebf cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=e5mUnYsNAAAA:8 a=EUspDBNiAAAA:8 a=RASuxCJZQsJVp6H_dTYA:9
- a=2VI0MkxyNR6bbpdq8BZq:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA3MDA4MSBTYWx0ZWRfX6wyJmXuGozez
- FkFyZ75qRkgJSF6Zxwv36mLVkEwAK11yXABmLnur2jKWby9BrGIiwTfhJs4Xx222aW7Xg7dCNC0
- E4IbM3vlAPd95Fzng7wEaNkxj450yTt98qAd1RdZbFSNrvKE8J0y7fcCdkke2dUMDg+OH4atWWZ
- yuS+FlLL4W+FV+ckqRSwIrerdr4WM1tmslQPohgk0Nqy5tFSvR+Ps5dqNxVzW5/XokfCeb3LBEn
- SkgMoAOYHjqQM2L/ggOffSt8bjahW8CF6EpvdtlTj0RwkjI9utBbjgwQQuLttBtmIWdqCW8LNU4
- RRvYLBiePXm7g0uP/0H776j9e1Q0SOCCKtvrRiRezIPWzNp8WJ4PpK1XEUkpy96bAxms2Ao6Hub
- NiKPedsUsLsZO3NOtevG2oW8rJKxSVAErXeV3qZ5Pe3rP5nTpTxdfvPpgvI+Vgdp44G71/CyUEu
- Bch6p6mXif8tq8kRDNw==
-X-Proofpoint-GUID: EmLkra8MjV-rIfibUjc6taLTRF8kAuMo
-X-Proofpoint-ORIG-GUID: EmLkra8MjV-rIfibUjc6taLTRF8kAuMo
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-06_03,2026-01-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 adultscore=0 impostorscore=0 suspectscore=0
- clxscore=1015 spamscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601070081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:00:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123197
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:01:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123198
 
-Changelog:
-https://gitlab.freedesktop.org/mobile-broadband/ModemManager/-/blob/mm-1-24/NEWS
+It takes <10s to execute.
 
-Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+Some (54) tests are not compatible with musl[1] - due to this the tests are on the problem-list.
+
+Sample output snippet:
+
+root@qemux86-64:~# ptest-runner
+START: ptest-runner
+2026-01-07T09:57
+BEGIN: /usr/lib/python3-waitress/ptest
+PASS: tests.test_adjustments.TestAdjustments.test_bad_port
+PASS: tests.test_adjustments.TestAdjustments.test_badvar
+PASS: tests.test_adjustments.TestAdjustments.test_default_listen
+[...many lines...]
+PASS: tests.test_wasyncore.Test_readwrite.test_socketerror_in_disconnected
+PASS: tests.test_wasyncore.Test_readwrite.test_socketerror_not_in_disconnected
+PASS: tests.test_wasyncore.Test_write.test_gardenpath
+PASS: tests.test_wasyncore.Test_write.test_non_reraised
+PASS: tests.test_wasyncore.Test_write.test_reraised
+
+============================================================================
+Testsuite summary
+\# TOTAL: 783
+\# PASS: 775
+\# SKIP: 8
+\# XFAIL: 0
+\# FAIL: 0
+\# XPASS: 0
+\# ERROR: 0
+DURATION: 7
+END: /usr/lib/python3-waitress/ptest
+2026-01-07T09:57
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{modemmanager_1.22.0.bb => modemmanager_1.24.2.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.22.0.bb => modemmanager_1.24.2.bb} (95%)
+ .../include/ptest-packagelists-meta-python.inc   |  8 ++++++++
+ .../python/python3-waitress/run-ptest            |  3 +++
+ .../python/python3-waitress_3.0.2.bb             | 16 +++++++++++++++-
+ 3 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-waitress/run-ptest
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.bb
-index 82cc1167e2..db42c00a92 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.22.0.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.24.2.bb
-@@ -11,8 +11,8 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index cdec25f876..be548f62b6 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -115,6 +115,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-unidiff \
+     python3-uritemplate \
+     python3-validators \
++    python3-waitress \
+     python3-wrapt \
+     python3-wsproto \
+     python3-xlrd \
+@@ -144,3 +145,10 @@ PTESTS_SLOW_META_PYTHON = "\
  
- DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
+ PTESTS_PROBLEMS_META_PYTHON = "\
+ "
++
++PTESTS_FAST_META_PYTHON:remove:libc-musl = "\
++    python3-waitress \
++"
++PTESTS_PROBLEMS_META_PYTHON:append:libc-musl = "\
++    python3-waitress \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-waitress/run-ptest b/meta-python/recipes-devtools/python/python3-waitress/run-ptest
+new file mode 100644
+index 0000000000..2e0e96d0b1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-waitress/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++python3 -mputao.unittest
+diff --git a/meta-python/recipes-devtools/python/python3-waitress_3.0.2.bb b/meta-python/recipes-devtools/python/python3-waitress_3.0.2.bb
+index b8e90807cf..d6d78ea3c1 100644
+--- a/meta-python/recipes-devtools/python/python3-waitress_3.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-waitress_3.0.2.bb
+@@ -10,6 +10,20 @@ RDEPENDS:${PN} += " \
+         python3-logging \
+ "
  
--SRCREV = "03f786ce66360d67c669f4f122f8aa458e6f01ea"
--SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-22"
-+SRCREV = "f2b9ab1ad78d322f32134a444b5b54c6e8160e19"
-+SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-24;tag=${PV}"
++RDEPENDS:${PN}-ptest += "\
++    python3-doctest \
++    python3-json \
++    python3-multiprocessing \
++    python3-pytest \
++    python3-unittest \
++    python3-unittest-automake-output \
++"
++
++SRC_URI += "file://run-ptest"
+ SRC_URI[sha256sum] = "682aaaf2af0c44ada4abfb70ded36393f0e307f4ab9456a215ce0020baefc31f"
  
- 
- # strict, permissive
+-inherit python_setuptools_build_meta pypi
++inherit python_setuptools_build_meta pypi ptest
++
++do_install_ptest(){
++    cp -r ${S}/tests ${D}${PTEST_PATH}
++}
 
