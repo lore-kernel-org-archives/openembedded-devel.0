@@ -1,152 +1,99 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DAA2D0D16A
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 18:42:48 +0000 (UTC)
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13539.1767811359867241349
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FB1BD0D16D
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 19:17:28 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14433.1767813443382071574
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 10:42:39 -0800
+ Wed, 07 Jan 2026 11:17:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vi1lAAn/;
- spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-450be85b7d9so1538628b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:42:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IPfk6EQ7;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47775fb6c56so22144625e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 11:17:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767811359; x=1768416159; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zLs6zcRPrNSyyDuaRvxTz1E5eOuqu2klQJkpNABhecw=;
-        b=Vi1lAAn/rQsvxK1vrbUCphTIsWVnXoWGPFWmwg08CnoeYGM3v/fkLtDPWqGgdG+XnK
-         XA3D1E2erlLkgisSMmjfGELFG1iLTpJx1VlAHHFao0xeEVbqxS+EF5oeJnZX/wEbgFj5
-         zBwp9fF1JPaeQLGbV3p0v7WnNIJ37Iy0lvdRZno2wpR4k/os60GCu2vuvDwMBh1mkZkW
-         /YWnbmoF6iMmPtyvoI+fGj7xZcAc7QfYUTbMXxNST3fEjXxI/KCWqk64qflUHMofq42F
-         ei6c1d1BN9EZxrScE4d/fjx4/Vf3ZIzwyTscC/0WUSrlMRZkO1WZycBK4vgsZtKjd4Ev
-         64RA==
+        d=gmail.com; s=20230601; t=1767813442; x=1768418242; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=EprJiE1qrZ81EGBCm6lSEU64iad9Ooh2f09tApbRmzg=;
+        b=IPfk6EQ7yNOj3V2dGTxEjIpdqFLVje7ZoLRDQ8FrbidyOTj/njpnNZV5XnUDE1RIqC
+         mRwL4F+3Y8RHOrq54+H6mD6HmrAtrZBXZamfu6khM35VVvTZHKISa4x1LvyyELuRTMWH
+         LuHTh5Wb3q6iI7Mo9XAjvMVJxYSZL/cheAywIuvRvGlvLNkwRti66nTsZkI6dN7rSp9k
+         U0lQVxlJMNuc6ZMdyPvxRP8r6Tl1YIzF9mqra57CpLCJ/cdb2zYQ5TbTyNmI3aXdspWh
+         K6xPHZqi3bwa0EvS1Zlft8H7UN1XWGQ87FKuZM2LPs/YGipWY4Qwm69fEHTB06rXGtjd
+         g7bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767811359; x=1768416159;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zLs6zcRPrNSyyDuaRvxTz1E5eOuqu2klQJkpNABhecw=;
-        b=kxdqujjI7s/aQkHgaejRcGMKtHBfcArIxgNkeEKpm+hZQcIXSO2LcjgW1+IqfbGi3g
-         xBU4cdjZ3Q7USAtzBlJvDxFCx3erg7WnuReaZ8FexsZIDMpGXv5GIwFeA/TXUA5TS8HW
-         XbILFp8bAesp7uoOYkqwQrBJqgzCNHIorsPTviYSqgAxUk/bhxXU9xluGswnKW/+4XUn
-         Av/jko/wFl61o5spii8I1S7FrNreTICjaEDRvA+c/qLM0MXyD9Ax1WeWfvfuVY4tTaMr
-         gQp+cnj7JFTRU9qVufQuQh5JnNFXGt4ytoBkqq11A73+n1MSxMHPcHo+emncnAPmt+GI
-         YVEA==
-X-Forwarded-Encrypted: i=1; AJvYcCV4VVzF6FjNga9GXqsCHOQ1/nk4C6A5noYeJS326qKgjIxDTzJ6zcdhqoCPD6azt1YpOsGZeZwv60A1PyWuowGI95M=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy+tQvb7ndDD6pMpiknKXrZl2fsQ31qMrtcVtvcyJlpNkc/lANy
-	vczYfFZKd5z958VHJKQ/Ga9HW9SnAbN//cAK1tZdojz+YtgLRVl+KqEyNrVd1DwVwBA3ulnEY3N
-	l5ly0Z4e4YU3zeyjS3oS2w1ziAR0/KTy/7g==
-X-Gm-Gg: AY/fxX7/K3s0D+ybgrWku7bBWCp/dwPKtSGNbpymCM6YaKYTAnhrmWvYA9pls7ko94u
-	A5SeLj17P+LSl/15yX5vERQCgRTPHiYfpFKiLATfBZnJlnRdF98eE921Ov6qnwqYxNP4hQPgI+S
-	5uphsPz/slSywtwHKLN9ViaPDl35lITimK6JKeX8hWw3feXvNBEu7s99UrvWhawiVv173AHK/Fl
-	1/f3cA2hz7nlZolvlpYu9Pqp/uit67wN9n6LVtVnTanPo4n78GIbKnRXTwyIJDM6iA6CEWo
-X-Google-Smtp-Source: AGHT+IGlkD6WV0EOIDrjXMKNVtNhFn32u33ldZ9Ju+5lXsrQrdFUWO8yoQY2RcqaK6QHR5r94NUlEuxGUvwXqB6NUc8=
-X-Received: by 2002:a05:6808:2443:b0:459:9961:5114 with SMTP id
- 5614622812f47-45a6bd6828fmr1364634b6e.16.1767811358931; Wed, 07 Jan 2026
- 10:42:38 -0800 (PST)
+        d=1e100.net; s=20230601; t=1767813442; x=1768418242;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EprJiE1qrZ81EGBCm6lSEU64iad9Ooh2f09tApbRmzg=;
+        b=dBDCByGoiUTZGTl7dLX0sxvqsiUnrh0R4vI4GInBKlpniPDkJr1rtSVvKlgs+AcwTR
+         HC2enVxj4ELQ//QKzBM0I23/KvPaYSAMnvJlkRxIUzdaZ8RvWwM3T+XpwtQ9ppBdu4BR
+         h+Uc4PcxuNfA880ijOXKnKN0UoDwsubbUvTqcdPhHBHMHCDKrppgzOG3SbA6h9S1FxFZ
+         wF4CqJBf6Vr0aGwb0PgVPQ/XWMmbWhtX9zyOKP34JFXnn3/tIh8+heq/Mi/lZxN737uR
+         fGBxaWf+y0J4MLZkXRwl/FmNexmv/JyC/9ZGPTDGLEDLLbMc57kHttZCq+TQtKJtdT4I
+         K6bQ==
+X-Gm-Message-State: AOJu0YxsQW6Bvn1AMCzbrgGAHxSQKdiFBX6Cj4ana+pSgb6HOAjncUdl
+	7VGbWF6IN8pO7eI69o0jL/NEy2g3Id6sYPYJC5jp1tSpRcpaNyLFCvthhJWdXQ==
+X-Gm-Gg: AY/fxX6pXXIQpBPERXj8vBMLBxxJdQQGuT8n5Ham71a3WNR1PG0E4nDLzACyMFUYmKO
+	HZB+64ExanLzECxeXa98fyRhT8oyIK+vS9mIxaoDUYktVIvhLhr9cKojs6SU0B2pqF/IDGAAtMK
+	mBDKZjBbz62XBPf4hUgZenHeAvYzKvj0knixNRu8YoPvw7fs4HpZX0In0P3WwOmBggAS47ciSUW
+	AwtJz9K/AJfMG+0f1n+5u5vjM0OlYOCy/421TAp3KZtD8BYP6bdZKbr08/PdEBdBKzHQzCosQqt
+	J6+N4r2NyzWCuaRwCDuKdNHZzFPFt8bsYu4tSQMkjVMKAMSw8x9v5719y3Ypqloo+52UJlZHdaN
+	YnTapePJaV8IY593ZL1peVOX34cqqeb9PyEi1a8X5hoofwN45pVPG8+HuFhwF8bimFwgrFWD9ps
+	b1//ltH2ko
+X-Google-Smtp-Source: AGHT+IFQ9VTTkJWjZrj8bk9XFiJ76v50FFiNjf3TkA+yrLOX/Cz2kEV2kkHlwvcxzt+OQbuMjs0YMQ==
+X-Received: by 2002:a05:600c:699a:b0:47a:9560:ec28 with SMTP id 5b1f17b1804b1-47d84b1fcd5mr39766975e9.13.1767813441391;
+        Wed, 07 Jan 2026 11:17:21 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f7035f2sm107717895e9.12.2026.01.07.11.17.20
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Jan 2026 11:17:20 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-h2: remove ptest execution deadline
+Date: Wed,  7 Jan 2026 20:17:20 +0100
+Message-ID: <20260107191720.2452141-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20260107102855.228-1-wangmy@fujitsu.com> <20260107102855.228-5-wangmy@fujitsu.com>
- <CAMKF1spSkeMXW8RkvxvjO8bjFVappLtyD_8TFY3zEpasMFLdpQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spSkeMXW8RkvxvjO8bjFVappLtyD_8TFY3zEpasMFLdpQ@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 8 Jan 2026 07:42:27 +1300
-X-Gm-Features: AQt7F2pr0bnWAD45gHwLlhK3QD3WdRctnCBl-P88WmgUZu2kdRwwUkJSh4AeJOM
-Message-ID: <CADySD0G-Rfv_Yg3vHeAgQ1CqsMyvpGh1XODRXurLHu62vQVH5Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 05/24] imlib2: upgrade 1.12.5 -> 1.12.6
-To: raj.khem@gmail.com
-Cc: wangmy@fujitsu.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 18:42:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123237
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 19:17:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123238
 
-On Thu, Jan 8, 2026 at 6:40=E2=80=AFAM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
->
->
-> On Wed, Jan 7, 2026 at 2:29=E2=80=AFAM wangmy via lists.openembedded.org =
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->>
->> From: Wang Mingyu <wangmy@fujitsu.com>
->>
->> Changelog:
->> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> - Y4M loader: add support for 10-bit 4:4:4
->> - Y4M loader: add support for 10-bit 4:2:2
->> - Y4M loader: add example for 8-bit mono
->> - Y4M loader: add support for 10-bit mono
->> - Y4M loader: fix support for full-range mono
->> - Y4M loader: fix support for odd dimensions
->> - Y4M loader: add support for 12/14/16-bit mono
->> - test/images: Remove intermediate generated file
->> - imlib2_view: Set title
->> - imlib2_view: Scale image when resizing window
->> - imlib2_view: A couple of fixes to previous commit
->> - test_load_2: Add new y4m test images
->> - test_load_2: Add more new y4m test images
->> - test_load_2: Add more new y4m test images
->> - autofoo: Use AM_LIBTOOLFLAGS, not LIBTOOLFLAGS
->> - gradients: Fix rendering of gradients in larger images
->> - imlib2_conv: Fix constness warning
->> - gradients: Better gradients with angles
->> - Compile cleanly with -Wdouble-promotion
->> - XPM loader: Add missing progress callback on incomplete image data
->>
->> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
->> ---
->>  meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb b/meta-oe/rec=
-ipes-graphics/imlib2/imlib2_git.bb
->> index 66e9f8a0c4..c02e497a86 100644
->> --- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
->> +++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
->> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D344895f253c32=
-f38e182dcaf30fe8a35"
->>
->>  DEPENDS =3D "freetype "
->>  PROVIDES =3D "virtual/imlib2"
->> -PV =3D "1.12.5"
->> -SRCREV =3D "df73df52ddf0e1ea40507f5ee8c6b794b328b3bc"
->> +PV =3D "1.12.6"
->> +SRCREV =3D "8c6a7640c91d7815a6318d3641554869c62cc926"
->>
->
-> If we are bumping SRCREV from release to release then rename the recipe t=
-o represent version in it might be
-> better.
->
+Hypothesis Python module applies a 200ms default timeout value on
+the tests, that can be violated too easily in qemu without kvm support.
 
-Agree, and please also include tag=3Dv{PV} in the SRC_URI.
+Hypothesis however also has a feature, that in case it is running in a CI
+environment, it expects that the host has more load, and it removes this
+deadline.
 
->>
->>  inherit autotools pkgconfig lib_package
->>
->> --
->> 2.43.0
->>
->>
->>
->>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123227): https://lists.openembedded.org/g/openembedde=
-d-devel/message/123227
-> Mute This Topic: https://lists.openembedded.org/mt/117131892/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+To switch to the CI profile and relax the execution timeouts, this patch
+defines the "CI" environment variable in the run-ptest script.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../recipes-connectivity/python-h2/python3-h2_4.3.0.bb      | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_4.3.0.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_4.3.0.bb
+index db181dc0b4..4034ffe7c1 100644
+--- a/meta-python/recipes-connectivity/python-h2/python3-h2_4.3.0.bb
++++ b/meta-python/recipes-connectivity/python-h2/python3-h2_4.3.0.bb
+@@ -10,3 +10,9 @@ inherit ptest-python-pytest pypi python_setuptools_build_meta
+ 
+ RDEPENDS:${PN} += "python3-hpack python3-hyperframe"
+ RDEPENDS:${PN}-ptest += "python3-hypothesis"
++
++do_install_ptest:append(){
++    # by defining CI envvar, hypothesis will use the CI-profile by default,
++    # and will not use tight execution deadlines (which times out easily on qemu without kvm)
++    sed -i 's/pytest/CI=1 pytest/' ${D}${PTEST_PATH}/run-ptest
++}
 
