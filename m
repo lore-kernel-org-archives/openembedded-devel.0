@@ -2,93 +2,361 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 490B2D0D159
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 18:11:58 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12760.1767809513328848635
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 473FAD0D15A
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 18:14:28 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.12807.1767809659798342895
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 10:11:53 -0800
+ Wed, 07 Jan 2026 10:14:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TYKMbepK;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2a0bb2f093aso19066965ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:11:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=V84LRHWB;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-34c708702dfso1711445a91.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:14:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767809512; x=1768414312; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767809659; x=1768414459; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xb3vO7Rz7ntmEq4NYlXPjbPmDmVBHO4vExZymP9VTFI=;
-        b=TYKMbepKiw6hynsCa0trcZwTKqvVrXCWnafla2h2CAr873ooS1HU0L7Y1y/BBfZaeW
-         66bMSm8qpV7uSpLGbIfxzBWKnTL80KMmrnQOuDzeksofmRMmqb9AHPiuCIY+EldIcX58
-         XftanWIkjp5vaLygjPARfRN0atwEs/8wWqYw/31xFOwfQjCd3Cy7Oc4uK2M2+QAKDZSg
-         9TQarxiUnhIDj6jvE5bOu/dZAif9zAukiXWIL7vbFxLPyN7FTjVy8SGIZ1KBz+tCzVsW
-         aX+0nPEuIEyB/7bNgBibQt6BvHPhbJBAV3hYx44HsNzPVgLXCTKz1qkMw0iCYnhXhB/B
-         iZDg==
+        bh=VWEycU4xHKaCwaY30lG7KxZtwUKMH8Ru5lK6lT0jjg8=;
+        b=V84LRHWBaSqp49b/ulk/fJ7JNOMQHN+61rzyclLV97pQWvv97XIfvFLwjJak0wxEW9
+         yGHTlCXyF6coAbHcqsjSPYcMxIaXIl4B+V3KtZNJUIQ2ko6Y/BhYK8zdb3yZI3u59nJr
+         ce9Tyx2OfjvxgSOHv2JJsGICkyfpvzr5FMLGFvF09sW7EHvHj/wMNhJJVX/fFs7n+DH2
+         LgWIG0VXYutsWz7Kq4eUVH4AdX3vrxROrfxVOsn/iLwcbfC/QBkbDX/Fxd/4yuwPgJCi
+         3tMx69f6KtgTNZQJYkM6XwnmLX+2M0WvPR4dUJ4DvXtwSi9ABWg5LaTN7jvV/pmsyeJo
+         N9zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767809512; x=1768414312;
+        d=1e100.net; s=20230601; t=1767809659; x=1768414459;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xb3vO7Rz7ntmEq4NYlXPjbPmDmVBHO4vExZymP9VTFI=;
-        b=Is/jcP7tDM1VedmKHW7U968dW9bIseYrul0dBMsap6t1nHlnlx+eGCD4vUYUlYm7B4
-         4WJWrS2vii1pGcNItSWTkXlQhD4XJX80S3H8b2Hlt37GJ/iyUtBsBlFzE3X3T/w8mUSy
-         Y1WAv3Argqu9sNWGJvRhdtIBVh0aeRuzEEzeE1vvJDHADRI8ROjtR/yTuz9sMdyF5kWN
-         GDiOeYBFE4h23CvYTKB3McXaVs2xBXwOSZ2+iNh0oUXylV5DE9ivw21IvL/ThD122r2s
-         gEpEEKqYS3hh93dsz6eSXaiV8kZD/xxceAw3xVsKJU37UwSiWZfizEqgVxfTsGvDG/C1
-         aV5A==
-X-Gm-Message-State: AOJu0YyPldBy5SSF+NDRWWZjSg4t2ZuQIDGhPFS0543vVoG2O2j89HCF
-	+Sui3fFTbBGV6nAa61agDj6Opvqi7E//It+9DcyB/bQ7B/XDvlMTfgcfJE8ihw==
-X-Gm-Gg: AY/fxX4PpQv8PadMzJ6KBDsk+NkX/9xgfUN9uWaav0rNdIdlJfvBD2CUhb3L+FriuoV
-	kP81M6iBSzbN40a71SBMDcMpuEffA96lgrhxKaWjUejHuxqLPYute/yCU0dHoUCUMkXhEKYi0Ih
-	C/QKwadTf3aEjmooajJJ6LFDK8U+8P1JmZQ2AhfX2IiTLp52O5J/GrY4busgSBFUiwd3L/IgIVV
-	X3JpuKYZ7Ze6x+ii4WF6R0W+zv3LTDLSBHOUCdHrySJH35cEpfStgRnFHVFV9W4G+D4Rc3gST4a
-	utDdlI3g+q+ZA1hr9acHqFeVFJ37JrIW41Gm2ujN7z2YldVm9QKGYFybUELkyy3/ZJpAunXuGMN
-	ZEyjN0tCtqghC5C3t2HFrk+x4ZEAl6AtHSLBqzrupWofSCU7nb6X62Rzvx9X6HUsgx2OEWZrqNf
-	4SejukopqTDQAJOOAb9YoFR4U=
-X-Google-Smtp-Source: AGHT+IFxvVag9AKYiLJTTaB/NhNyjFqh1SAiwigs7LFkD9ZvC+2HR+nAaQAf8YG8DDjTv8uWS6qyFQ==
-X-Received: by 2002:a17:903:b84:b0:295:86a1:5008 with SMTP id d9443c01a7336-2a3ee4b3022mr27959745ad.38.1767809512410;
-        Wed, 07 Jan 2026 10:11:52 -0800 (PST)
+        bh=VWEycU4xHKaCwaY30lG7KxZtwUKMH8Ru5lK6lT0jjg8=;
+        b=FKzzfluGm5TKzQ2POoZp/S1AyBDPGwahtvRysat6h6N6MF+6DCePjdecq2WGh+d/u7
+         uDnnu59Kqvht62O4JUqH6U1NStLT/QcO2x4YnDfGh9+hHMDlocc6bLoJ5Aw0+wBbTZXb
+         /cdlR74UhiexTSCNIqtGNSwnBUuKn6zW6yBwqSE1XTDrVyiHcQppa2jJjamyFS5CIwsB
+         55OI9R8o3aEWj+VDqXBlG2ZwOHDWzWWLNUu+Hr71yiVuQyRVVVPx3/uZ/rWh+isjxPN7
+         5aMIrtJLgfMYsQmeX8loGWXnrzQM/eCnzo0BwZhvU6XdE3VRLMOGXs+iEiDoHFFZw25V
+         cCdQ==
+X-Gm-Message-State: AOJu0Yyg7eD9nHKqpgbFU0/iSm1MFCWEaU8fvWzxKlOCY4xnlP7lJkAe
+	JYokVidbVbTaOaB5+X303aLks7gmzyS0q7ivdwc1zbIhNjtx13BhpxNLDDPjag==
+X-Gm-Gg: AY/fxX4dWjp/sQQ87k4Q0cNU6MFKy748EcD8TWn5GH34jI6+O6rqqM4oYfA5x2fxeOk
+	BgbzdvvYVwzByshpZaucab//CP2Rd2d51P9LfSd8T8mjw3vSdK6zGc1SJqMQ1KQ77iejL8oIvmb
+	HqZDZX+Lgc7W6t8stjvAVGUFdpcsnFVv15tpLrFKhkJF8h3Enr3XfO5e2Z9KoYlTbERKec5teri
+	BOWT2rqwQBVzbry5joy6t8XmDkpwCyY6egAEcpfz7LIAAzcQnUdWyHKe9xApPMpYwwUMIgHfSTx
+	qW34RdgGf/EZLxVm2PKsfSmvHiGulh3ucMsxqE+v6p52q6KTgvqU7h/70Jk7/hOMwoKaC3PRV6l
+	62S3kFcHXNtfz9IaCGHpwxpPOz8egxDTFxslHaKgCl9imWvp66TQxt2dcjdIZF2OjMuXRA09RXO
+	Q0N5P9TQ9+kXkbJV3faK4bY6U=
+X-Google-Smtp-Source: AGHT+IFKZq9gX1cdh4CkusMIY8tmSAUbCnVyXix0ZkZC6Cb0ambgKMUL3fTHTFr6xbe9sDFuTtdr6w==
+X-Received: by 2002:a17:90a:da88:b0:34d:1d54:8bc2 with SMTP id 98e67ed59e1d1-34f68ccbdc9mr3006046a91.33.1767809658789;
+        Wed, 07 Jan 2026 10:14:18 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c48c20sm57040455ad.32.2026.01.07.10.11.50
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-34f5f7c2666sm5570629a91.5.2026.01.07.10.14.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 10:11:52 -0800 (PST)
+        Wed, 07 Jan 2026 10:14:16 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH] libjxl: Fix build error with arm and musl
-Date: Thu,  8 Jan 2026 07:11:38 +1300
-Message-ID: <20260107181140.1026336-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH] mozjs-128: Fix build error with arm and musl
+Date: Thu,  8 Jan 2026 07:13:57 +1300
+Message-ID: <20260107181357.1028131-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 18:11:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123229
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 18:14:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123230
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Build fails for qemuarm with musl with following error:
-/build/tmp/work/cortexa15t2hf-neon-poky-linux-musleabi/libjxl/0.11.1/sources/libjxl-0.11.1/lib/jxl/convolve_separable5.cc
-| error: out of range pc-relative fixup value
+mozglue/misc/StackWalk.o: in function `unwind_callback(_Unwind_Context*, void*)':
+| /usr/src/debug/mozjs-128/128.5.2/mozglue/misc/StackWalk.cpp:810:(.text._ZL15unwind_callbackP15_Unwind_ContextPv+0x4): undefined reference to `_Unwind_GetIP'
+
+Referenced commit[1] for the fix, also refreshed patches.
+
+[1] https://github.com/OSSystems/meta-browser/commit/bb8662912354dae13634c0ec35c3803c344b1e72
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...001-Cargo.toml-do-not-abort-on-panic.patch |  2 +-
+ ...nfigure-do-not-look-for-llvm-objdump.patch |  2 +-
+ ...o-not-try-to-find-a-suitable-upstrea.patch |  2 +-
+ .../mozjs-128/0004-use-asm-sgidefs.h.patch    |  2 +-
+ ...2.patch => 0005-Add-RISCV32-support.patch} |  2 +-
+ ...x-one-occasionally-reproduced-confi.patch} |  2 +-
+ ...ewrite-cargo-host-linker-in-python3.patch} |  2 +-
+ ...e-stack-unwinder-like-glibc-therefo.patch} |  2 +-
+ ...om-firefox-bugzilla-to-fix-compile-.patch} |  2 +-
+ ...on-isn-t-available-in-ARMv5-or-v6-s.patch} |  2 +-
+ ...ith-icu-uc-to-fix-build-with-ICU-76.patch} |  2 +-
+ ...gc-and-riscv32gc-as-valid-architect.patch} | 38 ++++++++++++-------
+ .../0013-Fix-build-error-with-musl.patch      | 30 +++++++++++++++
+ .../mozjs/mozjs-128_128.5.2.bb                | 17 +++++----
+ 14 files changed, 75 insertions(+), 32 deletions(-)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv32.patch => 0005-Add-RISCV32-support.patch} (97%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-util.configure-fix-one-occasionally-reproduced-confi.patch => 0006-util.configure-fix-one-occasionally-reproduced-confi.patch} (96%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-rewrite-cargo-host-linker-in-python3.patch => 0007-Rewrite-cargo-host-linker-in-python3.patch} (97%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{musl-disable-stackwalk.patch => 0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch} (94%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-add-arm-to-list-of-mozinline.patch => 0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch} (95%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{armv5.patch => 0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch} (93%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch => 0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch} (92%)
+ rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv.patch => 0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch} (60%)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-build-error-with-musl.patch
 
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb
-index 7b0a6db9fb..ad5b5d169b 100644
---- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb
-+++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb
-@@ -46,5 +46,8 @@ PACKAGECONFIG[sizeless-vectors] = "-DJPEGXL_ENABLE_SIZELESS_VECTORS=ON,-DJPEGXL_
- # lcms/src/cmsps2.c
- # error: out of range pc-relative fixup value
- CFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
-+# lib/jxl/convolve_separable5.cc
-+# error: out of range pc-relative fixup value
-+CXXFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch
+index 97a4439628..5c81126f0b 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Cargo.toml-do-not-abort-on-panic.patch
+@@ -1,4 +1,4 @@
+-From ddd23f8547f3a56aa542924aa400d3535f734bff Mon Sep 17 00:00:00 2001
++From ffb7b90712189c9fa8634e4dc915c3afb4448d87 Mon Sep 17 00:00:00 2001
+ From: Alexander Kanavin <alex@linutronix.de>
+ Date: Fri, 1 Oct 2021 13:00:24 +0200
+ Subject: [PATCH] Cargo.toml: do not abort on panic
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
+index 9a82acf77b..0616aa3ee7 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0002-moz.configure-do-not-look-for-llvm-objdump.patch
+@@ -1,4 +1,4 @@
+-From 1a5331f1997788e9a25bbc2b10eb14e2ee418be9 Mon Sep 17 00:00:00 2001
++From 0f885ae37ef7cd94fd0712cefb5d3314fbcfdf44 Mon Sep 17 00:00:00 2001
+ From: Alexander Kanavin <alex@linutronix.de>
+ Date: Fri, 1 Oct 2021 13:01:10 +0200
+ Subject: [PATCH] moz.configure: do not look for llvm-objdump
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
+index 40025fbc68..8367a62a39 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch
+@@ -1,4 +1,4 @@
+-From 2d7f06cdf631e4d4d94e9d8e33a953dc57672750 Mon Sep 17 00:00:00 2001
++From ca6cf215462de8f82fd27ad75eb20ac24fc0c512 Mon Sep 17 00:00:00 2001
+ From: Alexander Kanavin <alex@linutronix.de>
+ Date: Fri, 1 Oct 2021 13:02:17 +0200
+ Subject: [PATCH] rust.configure: do not try to find a suitable upstream target
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch
+index eb3ff452b3..5832f36975 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0004-use-asm-sgidefs.h.patch
+@@ -1,4 +1,4 @@
+-From 1691939a22ec12245f008993e0b9a1b1dfb91e9c Mon Sep 17 00:00:00 2001
++From af704b888a91fc3a0f88b0ef2f36de1faaf7d6e2 Mon Sep 17 00:00:00 2001
+ From: Andre McCurdy <amccurdy@gmail.com>
+ Date: Sat, 30 Apr 2016 15:29:06 -0700
+ Subject: [PATCH] use <asm/sgidefs.h>
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0005-Add-RISCV32-support.patch
+similarity index 97%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0005-Add-RISCV32-support.patch
+index 67e23c5fcc..2359373999 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv32.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0005-Add-RISCV32-support.patch
+@@ -1,4 +1,4 @@
+-From 0cc41bc953974d4852b263708bf8d12f823ca8ad Mon Sep 17 00:00:00 2001
++From 8b7f96cc479c99a286591ac6dcd0be19bcf83b15 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sun, 24 Oct 2021 22:32:50 -0700
+ Subject: [PATCH] Add RISCV32 support
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0006-util.configure-fix-one-occasionally-reproduced-confi.patch
+similarity index 96%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0006-util.configure-fix-one-occasionally-reproduced-confi.patch
+index d53cc2bd41..9cc7831876 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-util.configure-fix-one-occasionally-reproduced-confi.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0006-util.configure-fix-one-occasionally-reproduced-confi.patch
+@@ -1,4 +1,4 @@
+-From 683cd23dd269509a1d913adb2b049b84771e0a94 Mon Sep 17 00:00:00 2001
++From 13b544e4ed51f41138bf200eb84552e169df87b0 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Thu, 11 Nov 2021 16:05:54 +0800
+ Subject: [PATCH] util.configure: fix one occasionally reproduced configure
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0007-Rewrite-cargo-host-linker-in-python3.patch
+similarity index 97%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0007-Rewrite-cargo-host-linker-in-python3.patch
+index 94e1651b33..9d6a89214b 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-rewrite-cargo-host-linker-in-python3.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0007-Rewrite-cargo-host-linker-in-python3.patch
+@@ -1,4 +1,4 @@
+-From 6f6b78628a8edc834aa147c87ebce3eb8e670e7a Mon Sep 17 00:00:00 2001
++From 31d56eba10e7cf856a2a118e0523633195fe9ea2 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Thu, 18 Nov 2021 07:16:39 +0000
+ Subject: [PATCH] Rewrite cargo-host-linker in python3
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch
+similarity index 94%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch
+index 3d5452ce4d..91614291c7 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/musl-disable-stackwalk.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch
+@@ -1,4 +1,4 @@
+-From d96e9a40e9da9163e0a4b3475178fe30c26deb19 Mon Sep 17 00:00:00 2001
++From fae21326f717f1c0031f3ad0ff4c3112ffb3a936 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 22 Sep 2023 22:59:56 +0000
+ Subject: [PATCH] Musl does not have stack unwinder like glibc therefore we can
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch
+similarity index 95%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch
+index 960b4593c2..a2e3c08edf 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-add-arm-to-list-of-mozinline.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch
+@@ -1,4 +1,4 @@
+-From 2d1fb35bd81acadc12cc077de86361ac59cee2f1 Mon Sep 17 00:00:00 2001
++From 7dc235e1558b087c69024ed40c6066bd8126f2a3 Mon Sep 17 00:00:00 2001
+ From: Kai Kang <kai.kang@windriver.com>
+ Date: Fri, 22 Sep 2023 22:59:59 +0000
+ Subject: [PATCH] Backport patch from firefox bugzilla to fix compile error for
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch
+similarity index 93%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch
+index 564f423fb4..e2e935eb03 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/armv5.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch
+@@ -1,4 +1,4 @@
+-From 0dd6fdbf6a821898617f1bd8e57123be048c07f5 Mon Sep 17 00:00:00 2001
++From e94edc3eba7ea158806283d92ecd71ab87351838 Mon Sep 17 00:00:00 2001
+ From: Ross Burton <ross.burton@arm.com>
+ Date: Mon, 16 Dec 2024 05:49:57 +0000
+ Subject: [PATCH] The ISB instruction isn't available in ARMv5 or v6, so guard
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
+similarity index 92%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
+index 4fb7a28eeb..2d85e29005 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch
+@@ -1,4 +1,4 @@
+-From cbb5cc1022cc27edefc8eabbe21458cac9bda6fb Mon Sep 17 00:00:00 2001
++From 8290fd619582651334fbfdfe7be887d539ce0f2c Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 23 Nov 2024 13:28:33 -0800
+ Subject: [PATCH] Link with icu-uc to fix build with ICU-76
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch
+similarity index 60%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
+rename to meta-oe/recipes-extended/mozjs/mozjs-128/0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch
+index cb2dc66525..9cdb9fe913 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128/riscv.patch
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch
+@@ -1,12 +1,35 @@
+-Recognise riscv64gc and riscv32gc as valid architectures
++From 93d586d712bf34c243c6174425c78d3ab274c6a0 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 7 Jan 2025 15:17:16 -0800
++Subject: [PATCH] Recognise riscv64gc and riscv32gc as valid architectures
  
- FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
+ Rust uses above for architecture in tuples
+ 
+ Upstream-Status: Pending
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ build/autoconf/config.sub                                     | 2 +-
++ .../mozbuild/test/configure/test_toolchain_configure.py       | 4 ++++
++ 2 files changed, 5 insertions(+), 1 deletion(-)
++
++diff --git a/build/autoconf/config.sub b/build/autoconf/config.sub
++index 2c6a07ab3c..f7ee82380c 100755
++--- a/build/autoconf/config.sub
+++++ b/build/autoconf/config.sub
++@@ -1236,7 +1236,7 @@ case $cpu-$vendor in
++ 			| powerpc | powerpc64 | powerpc64le | powerpcle | powerpcspe \
++ 			| pru \
++ 			| pyramid \
++-			| riscv | riscv32 | riscv32be | riscv64 | riscv64be \
+++			| riscv | riscv32 | riscv32be | riscv32gc | riscv64 | riscv64be | riscv64gc \
++ 			| rl78 | romp | rs6000 | rx \
++ 			| s390 | s390x \
++ 			| score \
++diff --git a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
++index 1be0d02e54..a476d787b2 100644
+ --- a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
+ +++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure.py
+-@@ -1327,6 +1327,10 @@ class LinuxCrossCompileToolchainTest(Bas
++@@ -1327,6 +1327,10 @@ class LinuxCrossCompileToolchainTest(BaseToolchainTest):
+          "mips-unknown-linux-gnu": big_endian + {"__mips__": 1},
+          "riscv32-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 32},
+          "riscv64-unknown-linux-gnu": little_endian + {"__riscv": 1, "__riscv_xlen": 64},
+@@ -17,14 +40,3 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+          "sh4-unknown-linux-gnu": little_endian + {"__sh__": 1},
+      }
+  
+---- a/build/autoconf/config.sub
+-+++ b/build/autoconf/config.sub
+-@@ -1236,7 +1236,7 @@ case $cpu-$vendor in
+- 			| powerpc | powerpc64 | powerpc64le | powerpcle | powerpcspe \
+- 			| pru \
+- 			| pyramid \
+--			| riscv | riscv32 | riscv32be | riscv64 | riscv64be \
+-+			| riscv | riscv32 | riscv32be | riscv32gc | riscv64 | riscv64be | riscv64gc \
+- 			| rl78 | romp | rs6000 | rx \
+- 			| s390 | s390x \
+- 			| score \
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-build-error-with-musl.patch b/meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-build-error-with-musl.patch
+new file mode 100644
+index 0000000000..1900c17f74
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-build-error-with-musl.patch
+@@ -0,0 +1,30 @@
++From 0f903fa0be39e39083599306018fa7bd724dba9d Mon Sep 17 00:00:00 2001
++From: Ankur Tyagi <ankur.tyagi85@gmail.com>
++Date: Wed, 7 Jan 2026 20:26:53 +1300
++Subject: [PATCH] Fix build error with musl
++
++_Unwind_GetIP symbol is not implemented by musl, so use it only with libc.
++
++mozglue/misc/StackWalk.o: in function `unwind_callback(_Unwind_Context*, void*)':
++| /usr/src/debug/mozjs-128/128.5.2/mozglue/misc/StackWalk.cpp:810:(.text._ZL15unwind_callbackP15_Unwind_ContextPv+0x4): undefined reference to `_Unwind_GetIP'
++
++Reference: https://github.com/OSSystems/meta-browser/commit/bb8662912354dae13634c0ec35c3803c344b1e72
++Upstream-Status: Inappropriate [musl-specific]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ mozglue/misc/StackWalk.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/mozglue/misc/StackWalk.cpp b/mozglue/misc/StackWalk.cpp
++index d3d9208fdb..9f7155a4f7 100644
++--- a/mozglue/misc/StackWalk.cpp
+++++ b/mozglue/misc/StackWalk.cpp
++@@ -696,7 +696,7 @@ MFBT_API bool MozDescribeCodeAddress(void* aPC,
++ //
++ // Changes to to OS/Architecture support here should be reflected in
++ // build/moz.configure/memory.configure
++-#elif HAVE_DLADDR &&                                           \
+++#elif defined(__GLIBC__) && HAVE_DLADDR &&                     \
++     (HAVE__UNWIND_BACKTRACE || MOZ_STACKWALK_SUPPORTS_LINUX || \
++      MOZ_STACKWALK_SUPPORTS_MACOSX)
++ 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+index ceb81d07e5..fbbe3749ba 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+@@ -8,14 +8,15 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
+            file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
+            file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch \
+            file://0004-use-asm-sgidefs.h.patch \
+-           file://riscv32.patch \
+-           file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
+-           file://0001-rewrite-cargo-host-linker-in-python3.patch  \
+-           file://musl-disable-stackwalk.patch \
+-           file://0001-add-arm-to-list-of-mozinline.patch \
+-           file://armv5.patch \
+-           file://0001-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
+-           file://riscv.patch \
++           file://0005-Add-RISCV32-support.patch \
++           file://0006-util.configure-fix-one-occasionally-reproduced-confi.patch \
++           file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
++           file://0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch \
++           file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch \
++           file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch \
++           file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
++           file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch \
++           file://0013-Fix-build-error-with-musl.patch \
+            "
+ SRC_URI[sha256sum] = "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef495d4997154d68358f"
+ 
 
