@@ -2,238 +2,188 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0D33D0D14E
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 17:40:27 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11915.1767807617945908065
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 09:40:18 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5633D0D151
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 17:49:27 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12160.1767808162164629517
+ for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 07 Jan 2026 09:49:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fDc7D+H6;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64472ea7d18so1687903d50.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:40:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y/Hqk68e;
+ spf=pass (domain: gmail.com, ip: 209.85.128.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-78fb9a67b06so25784597b3.1
+        for <Openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:49:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767807617; x=1768412417; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+V5+7oWe1SFw0eBRowb38a2D+ghVqQPijm9ouxi2kwA=;
-        b=fDc7D+H6ZcRHvjIn/UlNzLk2lKCohv93o92wTBfxh5jrfl0bYvooEMHG+kkudjzWlb
-         EMetyHyp0tB3Xkgcp4scFcmn4phf5Dmbg57JVzD5LB1lfNDPL1qMD8mRWwBnsQoznjqk
-         0s56KNc+cTLdjdM2PFaWZEKeIQGHcf58bJSgg8rcL3y1392+vHD/c8l59CqoFhQegGcB
-         Zk1SIX8Ss36obibFCNAzTAxluqXQhhnH/Q+Ska0ineECJEd2UHZHjFDwmp0bwuMCAVUG
-         dhIwdjVKbmPxTB8g/J+5ZRNXuEx0zjFKnJpvsG42cgsegaDCZttNO9gZ7hXAiGdPGoxC
-         Eqkg==
+        d=gmail.com; s=20230601; t=1767808161; x=1768412961; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=zidCOjrSVCfQ5nFqJ3kq9+RFE9raDS648labYXNZfA4=;
+        b=Y/Hqk68eitSoN4cynkFLKhaOF/u9R8ezLLr98KLC+eAfocG2sMM2bEtsgIS+xFaSM+
+         DNlzsDnWQ/FUCCTvblcyTvibByn0+8b3TDqBlOkscnaUoF6m3t334j0vv7rRMucxN9Je
+         /WYyUOsmFeX4klcM8JVyjW7BlcUU5aqE2k/4junW+GyMt+c7Buk/PzwJ6RPC7ABBscTZ
+         +FljJemQCS16G9VC8w32Robc3S2DENKIZDIuKuRsL8XEQLKggnYHlCu3FhmMlNfLHulN
+         KO3k+ys5FgARWAome8Q80xfQwgWWG2gT8SPIazc9p0XS3Y9V6y9K9lAa5wKO6Uz/BMhM
+         7uaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767807617; x=1768412417;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+V5+7oWe1SFw0eBRowb38a2D+ghVqQPijm9ouxi2kwA=;
-        b=sEjoYsa9zwudpjOBLG8eLzIRDx2RNFfhZx8xB0YMBraryb73PoUo3vmGrtg7oKAOtA
-         vcaoUx7w/JJ7IFs55BQBeoF0q7Nb/xj/6EuG+TBpGem68qDtFUWiryH11KUZCmwMhEhf
-         VHmPbeoKV1v9AbrDPoKco8Ni/nnW6gZ9r0YxA4eyA1S5aGwNHSQ3SczFAOA5fFIVZyIZ
-         BPB61OlqfXrY0ssJ0oTgn4uLOSsWhNulkpfZfa+1kd0GCdzQVtzTSiHJrYtP/U/3mg+q
-         k3w/KMm2pZOvYVOXH77O2SLKQOP/1JyL3yZy2z3aqFRh0cJ9Ag9DjKkuO0mm93prXEun
-         GfZw==
-X-Gm-Message-State: AOJu0YwOU0aAJnDEXnEbOLw6/9ehhY8rRCIZYCm2gYEBxuEHQXiHUmYu
-	UVNYkFwjoP2I2S6YhU//bA6OrVrhG9xXz5xjUScQrhr/VRCzF/OdrTrduQTlH8dmdb+GFgEgpJo
-	GBLTVebxOb2WFPvIAUOxPltvbMd3dclQ=
-X-Gm-Gg: AY/fxX6b3MyFdEq2LR8Gypc2rp1zmfwBS5H3MhbDUXP0g3CiHksLiei0mjaBKq1L3Ch
-	gbZkpcUZQ78IrOWRC5fDE/2bWlnqCSMutWfTjizi1WYg+35PYEk4hkZQ98f8olR+LPuscdjZZJ/
-	I/lMKppbTyIM5dLoj95C6+Yjhggvgx+ggKNiId3J/uAntkh9NJhgegKPnMQdoIVoKUmPCPuiWf2
-	lelCKrWUnsdjpaDwtSUIAE7IvdaPo9ZyxxIuxTCuNZstw0Yn8jlWLIb5dgUXTBKPXCiKlrCTMFD
-	QQ8mh6zpDm6nreW5c/s1FwqgxFNtudf33aedZwHonA0p07N/64+4PdLb7H9P04aSIw9wUJU7mXF
-	kxhwumxMWhMdMvi0rz0+FyON+ZYbBNZ62ROsShKd+Kvl4vA==
-X-Google-Smtp-Source: AGHT+IEb2xh3ASx1cgnOKjlrlhm9nVCQjnqjebcwANWQwYnhBMCJEVBk6tTYipYtpvJseGp37RzyFzucGjUb1qne8go=
-X-Received: by 2002:a53:d590:0:b0:640:e021:ff6c with SMTP id
- 956f58d0204a3-64716b78c18mr1895353d50.38.1767807616917; Wed, 07 Jan 2026
- 09:40:16 -0800 (PST)
+        d=1e100.net; s=20230601; t=1767808161; x=1768412961;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=zidCOjrSVCfQ5nFqJ3kq9+RFE9raDS648labYXNZfA4=;
+        b=vfU6V9TOChUpqTuL+l1RhZklDZRhTLG2B83ig4SS+7wHh+Nbi429LjWGXa5S292PMJ
+         1wlI9b+LPNLApAenuXjW15A8H6sDtf/fzYgGjqZWwMkgRhLQ3hXfOctwhZq7JK6qHzHR
+         w7+X0YIsyg3MoL+PmCaInVmfXkdDj28bmelpFmti7Cjdr04ExGzLHGvbSr28PPiJkE65
+         0fFhuNL+ypvFegOSwJ8M2RKWihQ1xE/ZatTBbM0SA3flBhjEvlMueVSKJ7yPastFxRpJ
+         0lW+U0XkdUhBi+cNQC5QaSqK3TKK14LW50ewUwb2GVE2S7wica9xwTV5XPw2/qsXJmvN
+         z7vQ==
+X-Forwarded-Encrypted: i=1; AJvYcCUjpSAhgp01pBwedjsJ5bwijnBq4pavXKpxClk7r/ceN26tdL23ZAzVXnxWCpj6lvCpgewMYG4HwRjo+iBDJiGXgG4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxUEXa4FA6l3K9nKQs5kMDZ7FrFRjmyNWOwxGMhdyGqDF+Y4Hu/
+	x2w6KWXQt8Sa8Jn4vbJvoNudh629wEcoHZvxJbM+aXHG4cvXjm7wTXX0EgRSiNS+jak+OTXG5Ul
+	CKix6hFgmSZWXyQ9l73H9mnhm14hXyQE=
+X-Gm-Gg: AY/fxX5nBhai+HoIKpUQHKIpWLH8s9zAjwxqx+0SInLHgC/aoInscgKhtriKmu8aeCV
+	bZjqMyiJbEBQ4WhD+f9dtViCZOF3KT6E+1oygFABUn4Nb1tdg5Jp1XucuTz6aloAFR910y7enEL
+	KL4h1QSR+wH1gYiFZWcubj9YdYFpSzeymZkQujDj8VHR1Nfa/Cey56PC92vMWNZOgueyYDbdQD6
+	amt+z33TelEswnV17aoYc7bBTWuvnJTf4PwkLZ6Gi6UiMXOFZ3YuY1cD9MbWcBzW8c+juwN7YuO
+	NzKWmzqHDQTmu02kpob4+0Zwfihmmly5at/Yol++CQVXVchrXJr62Rdsam5IF7B+VYeoFP5ZcqG
+	S518Pmfi1L/X7LsbuX7L4pmiy6pbcRBO1qsDBWhnq04wV2g==
+X-Google-Smtp-Source: AGHT+IHKfoUvFYpMDKq5lwyIGEZH+FCwWn7Hn5eCFLjcxHtoNrLoE1aAXVLxKSz/uiQDfJVKt9PcQhFxOwiVD/kNsPE=
+X-Received: by 2002:a05:690e:1243:b0:63f:9979:2f9e with SMTP id
+ 956f58d0204a3-64716b35d5dmr3086149d50.17.1767808161116; Wed, 07 Jan 2026
+ 09:49:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20260107102855.228-1-wangmy@fujitsu.com> <20260107102855.228-5-wangmy@fujitsu.com>
-In-Reply-To: <20260107102855.228-5-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 7 Jan 2026 09:39:50 -0800
-X-Gm-Features: AQt7F2qu1IpH9P5tXM-OnGMx0sX9sBol_B80jD5RBP9ORJVzea5-D5LUXmuG4pM
-Message-ID: <CAMKF1spSkeMXW8RkvxvjO8bjFVappLtyD_8TFY3zEpasMFLdpQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 05/24] imlib2: upgrade 1.12.5 -> 1.12.6
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000009a7450647cfc922"
+Date: Wed, 7 Jan 2026 09:48:54 -0800
+X-Gm-Features: AQt7F2pi1LOrjLLnJeemQhbck1omqlKeC4E5k5PrhI3aUulZsiynoX3Z4qImyyA
+Message-ID: <CAMKF1srHzaW_tz3+JshMYrEve6KbxVk9N3PBC05vx3hcqx+TFA@mail.gmail.com>
+Subject: python3-h2 ptest timeouts
+To: Gyorgy Sarvari <skandigraun@gmail.com>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000007973cc0647cfe9cf"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 17:40:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123227
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 17:49:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123228
 
---00000000000009a7450647cfc922
+--0000000000007973cc0647cfe9cf
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 7, 2026 at 2:29=E2=80=AFAM wangmy via lists.openembedded.org <w=
-angmy=3D
-fujitsu.com@lists.openembedded.org> wrote:
+Hi Gyorgy
 
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> - Y4M loader: add support for 10-bit 4:4:4
-> - Y4M loader: add support for 10-bit 4:2:2
-> - Y4M loader: add example for 8-bit mono
-> - Y4M loader: add support for 10-bit mono
-> - Y4M loader: fix support for full-range mono
-> - Y4M loader: fix support for odd dimensions
-> - Y4M loader: add support for 12/14/16-bit mono
-> - test/images: Remove intermediate generated file
-> - imlib2_view: Set title
-> - imlib2_view: Scale image when resizing window
-> - imlib2_view: A couple of fixes to previous commit
-> - test_load_2: Add new y4m test images
-> - test_load_2: Add more new y4m test images
-> - test_load_2: Add more new y4m test images
-> - autofoo: Use AM_LIBTOOLFLAGS, not LIBTOOLFLAGS
-> - gradients: Fix rendering of gradients in larger images
-> - imlib2_conv: Fix constness warning
-> - gradients: Better gradients with angles
-> - Compile cleanly with -Wdouble-promotion
-> - XPM loader: Add missing progress callback on incomplete image data
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> index 66e9f8a0c4..c02e497a86 100644
-> --- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> +++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D344895f253c32f38e182dcaf30fe8a35"
->
->  DEPENDS =3D "freetype "
->  PROVIDES =3D "virtual/imlib2"
-> -PV =3D "1.12.5"
-> -SRCREV =3D "df73df52ddf0e1ea40507f5ee8c6b794b328b3bc"
-> +PV =3D "1.12.6"
-> +SRCREV =3D "8c6a7640c91d7815a6318d3641554869c62cc926"
->
->
-If we are bumping SRCREV from release to release then rename the recipe to
-represent version in it might be
-better.
+When running on slower emalations ( without kvm ) e.g. qemuriscv64 one test
+fails like below, I think the timeout should be laxed a bit to ensure that
+these
+are considered.
 
++ Exception Group Traceback (most recent call last):
+  |   File "/usr/lib/python3-h2/ptest/tests/test_basic_logic.py", line 824,
+in test_changing_max_frame_size
+  |
+@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+  |                ^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+2234, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | hypothesis.errors.FlakyFailure: Hypothesis
+test_changing_max_frame_size(self=<tests.test_basic_logic.TestBasicClient
+object at 0x3f9769e580>, frame_factory=<tests.helpers.FrameFactory object
+at 0x3f9696e7b0>, frame_size=3623515) produces unreliable results:
+Falsified on the first call but did not on a subsequent one (1
+sub-exception)
+  | Falsifying example: test_changing_max_frame_size(
+  |     self=<tests.test_basic_logic.TestBasicClient object at
+0x3f9769e580>,
+  |     frame_factory=<tests.helpers.FrameFactory object at 0x3f9696e7b0>,
+  |     frame_size=3623515,
+  | )
+  | Unreliable test timings! On an initial run, this test took 638.89ms,
+which exceeded the deadline of 200.00ms, but on a subsequent run it took
+153.78 ms, which did not. If you expect this sort of variability in your
+test timings, consider turning deadlines off for this test by setting
+deadline=None.
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+1200, in _execute_once_for_engine
+    |     result = self.execute_once(data)
+    |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+1140, in execute_once
+    |     result = self.test_runner(data, run)
+    |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+824, in default_executor
+    |     return function(data)
+    |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+1097, in run
+    |     return test(*args, **kwargs)
+    |   File "/usr/lib/python3-h2/ptest/tests/test_basic_logic.py", line
+824, in test_changing_max_frame_size
+    |
+@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/usr/lib/python3.13/site-packages/hypothesis/core.py", line
+1031, in test
+    |     raise DeadlineExceeded(
+    |         datetime.timedelta(seconds=runtime), self.settings.deadline
+    |     )
+    | hypothesis.errors.DeadlineExceeded: Test took 638.89ms, which exceeds
+the deadline of 200.00ms. If you expect test cases to take this long, you
+can use @settings(deadline=...) to either set a higher deadline, or to
+disable it with deadline=None.
+    +------------------------------------
 
->  inherit autotools pkgconfig lib_package
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123203):
-> https://lists.openembedded.org/g/openembedded-devel/message/123203
-> Mute This Topic: https://lists.openembedded.org/mt/117131892/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000009a7450647cfc922
+--0000000000007973cc0647cfe9cf
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jan 7, =
-2026 at 2:29=E2=80=AFAM wangmy via <a href=3D"http://lists.openembedded.org=
-">lists.openembedded.org</a> &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@lis=
-ts.openembedded.org">fujitsu.com@lists.openembedded.org</a>&gt; wrote:<br><=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex">From: Wang Mingyu &l=
-t;<a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.co=
-m</a>&gt;<br>
-<br>
-Changelog:<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-- Y4M loader: add support for 10-bit 4:4:4<br>
-- Y4M loader: add support for 10-bit 4:2:2<br>
-- Y4M loader: add example for 8-bit mono<br>
-- Y4M loader: add support for 10-bit mono<br>
-- Y4M loader: fix support for full-range mono<br>
-- Y4M loader: fix support for odd dimensions<br>
-- Y4M loader: add support for 12/14/16-bit mono<br>
-- test/images: Remove intermediate generated file<br>
-- imlib2_view: Set title<br>
-- imlib2_view: Scale image when resizing window<br>
-- imlib2_view: A couple of fixes to previous commit<br>
-- test_load_2: Add new y4m test images<br>
-- test_load_2: Add more new y4m test images<br>
-- test_load_2: Add more new y4m test images<br>
-- autofoo: Use AM_LIBTOOLFLAGS, not LIBTOOLFLAGS<br>
-- gradients: Fix rendering of gradients in larger images<br>
-- imlib2_conv: Fix constness warning<br>
-- gradients: Better gradients with angles<br>
-- Compile cleanly with -Wdouble-promotion<br>
-- XPM loader: Add missing progress callback on incomplete image data<br>
-<br>
-Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
-=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
-=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a> | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.b=
-b" rel=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a> b/meta-oe/recipes=
--graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=3D"noreferrer" target=
-=3D"_blank">imlib2_git.bb</a><br>
-index 66e9f8a0c4..c02e497a86 100644<br>
---- a/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
-=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a><br>
-+++ b/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
-=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a><br>
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D344895f253c=
-32f38e182dcaf30fe8a35&quot;<br>
-<br>
-=C2=A0DEPENDS =3D &quot;freetype &quot;<br>
-=C2=A0PROVIDES =3D &quot;virtual/imlib2&quot;<br>
--PV =3D &quot;1.12.5&quot;<br>
--SRCREV =3D &quot;df73df52ddf0e1ea40507f5ee8c6b794b328b3bc&quot;<br>
-+PV =3D &quot;1.12.6&quot;<br>
-+SRCREV =3D &quot;8c6a7640c91d7815a6318d3641554869c62cc926&quot;<br>
-<br></blockquote><div><br></div><div>If we are bumping SRCREV from release =
-to release then rename the recipe to represent version in it might be</div>=
-<div>better.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
-=C2=A0inherit autotools pkgconfig lib_package<br>
-<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123203): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123203" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123203</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117131892/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117131892/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+<div dir=3D"ltr">Hi Gyorgy<div><br></div><div>When running on slower emalat=
+ions ( without kvm ) e.g. qemuriscv64 one test</div><div>fails like below, =
+I think the timeout should be laxed a bit to ensure that these</div><div>ar=
+e considered.</div><div><br></div><div>+ Exception Group Traceback (most re=
+cent call last):<br>=C2=A0 | =C2=A0 File &quot;/usr/lib/python3-h2/ptest/te=
+sts/test_basic_logic.py&quot;, line 824, in test_changing_max_frame_size<br=
+>=C2=A0 | =C2=A0 =C2=A0 @settings(suppress_health_check=3D[HealthCheck.func=
+tion_scoped_fixture])<br>=C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0^^^^^^^^^^^^^^^^^^^^^^<br>=C2=A0 | =C2=A0 File &quot;/usr/lib=
+/python3.13/site-packages/hypothesis/core.py&quot;, line 2234, in wrapped_t=
+est<br>=C2=A0 | =C2=A0 =C2=A0 raise the_error_hypothesis_found<br>=C2=A0 | =
+hypothesis.errors.FlakyFailure: Hypothesis test_changing_max_frame_size(sel=
+f=3D&lt;tests.test_basic_logic.TestBasicClient object at 0x3f9769e580&gt;, =
+frame_factory=3D&lt;tests.helpers.FrameFactory object at 0x3f9696e7b0&gt;, =
+frame_size=3D3623515) produces unreliable results: Falsified on the first c=
+all but did not on a subsequent one (1 sub-exception)<br>=C2=A0 | Falsifyin=
+g example: test_changing_max_frame_size(<br>=C2=A0 | =C2=A0 =C2=A0 self=3D&=
+lt;tests.test_basic_logic.TestBasicClient object at 0x3f9769e580&gt;,<br>=
+=C2=A0 | =C2=A0 =C2=A0 frame_factory=3D&lt;tests.helpers.FrameFactory objec=
+t at 0x3f9696e7b0&gt;,<br>=C2=A0 | =C2=A0 =C2=A0 frame_size=3D3623515,<br>=
+=C2=A0 | )<br>=C2=A0 | Unreliable test timings! On an initial run, this tes=
+t took 638.89ms, which exceeded the deadline of 200.00ms, but on a subseque=
+nt run it took 153.78 ms, which did not. If you expect this sort of variabi=
+lity in your test timings, consider turning deadlines off for this test by =
+setting deadline=3DNone.<br>=C2=A0 +-+---------------- 1 ----------------<b=
+r>=C2=A0 =C2=A0 | Traceback (most recent call last):<br>=C2=A0 =C2=A0 | =C2=
+=A0 File &quot;/usr/lib/python3.13/site-packages/hypothesis/core.py&quot;, =
+line 1200, in _execute_once_for_engine<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 res=
+ult =3D self.execute_once(data)<br>=C2=A0 =C2=A0 | =C2=A0 File &quot;/usr/l=
+ib/python3.13/site-packages/hypothesis/core.py&quot;, line 1140, in execute=
+_once<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 result =3D self.test_runner(data, ru=
+n)<br>=C2=A0 =C2=A0 | =C2=A0 File &quot;/usr/lib/python3.13/site-packages/h=
+ypothesis/core.py&quot;, line 824, in default_executor<br>=C2=A0 =C2=A0 | =
+=C2=A0 =C2=A0 return function(data)<br>=C2=A0 =C2=A0 | =C2=A0 File &quot;/u=
+sr/lib/python3.13/site-packages/hypothesis/core.py&quot;, line 1097, in run=
+<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 return test(*args, **kwargs)<br>=C2=A0 =
+=C2=A0 | =C2=A0 File &quot;/usr/lib/python3-h2/ptest/tests/test_basic_logic=
+.py&quot;, line 824, in test_changing_max_frame_size<br>=C2=A0 =C2=A0 | =C2=
+=A0 =C2=A0 @settings(suppress_health_check=3D[HealthCheck.function_scoped_f=
+ixture])<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>=C2=A0 =C2=A0 | =C2=A0 File=
+ &quot;/usr/lib/python3.13/site-packages/hypothesis/core.py&quot;, line 103=
+1, in test<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 raise DeadlineExceeded(<br>=C2=
+=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 datetime.timedelta(seconds=3Drunti=
+me), self.settings.deadline<br>=C2=A0 =C2=A0 | =C2=A0 =C2=A0 )<br>=C2=A0 =
+=C2=A0 | hypothesis.errors.DeadlineExceeded: Test took 638.89ms, which exce=
+eds the deadline of 200.00ms. If you expect test cases to take this long, y=
+ou can use @settings(deadline=3D...) to either set a higher deadline, or to=
+ disable it with deadline=3DNone.<br>=C2=A0 =C2=A0 +-----------------------=
+-------------</div></div>
 
---00000000000009a7450647cfc922--
+--0000000000007973cc0647cfe9cf--
 
