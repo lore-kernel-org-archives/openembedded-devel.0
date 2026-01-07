@@ -1,239 +1,141 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <viswanath.kraleti@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1C70CD5824
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 09:58:33 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2680.1767779903540699155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D986ECD5829
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 10:00:33 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2704.1767780030958065764
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 01:58:24 -0800
+ Wed, 07 Jan 2026 02:00:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=UATkEY1x;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1767779904; x=1799315904;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=gF82mnYH8oncorXT8+oXREUs0cWlLsHeTIUi2rCr5aM=;
-  b=UATkEY1xTjA8xYxxY+rplD7lRnpcukcLZUezTzpUcHSgqhusIlUWv6d3
-   vvEX9cVMCsk/Xye+T9drSvnXYSSMBY5BfjVSPrhOjDfXiEMOmBjYxRGH+
-   uSl3NDJxxfGBMEYUrkayDn1oEpMVbpJ/olp0rWp8g1SyO7pcGFZ7vVoxV
-   98ROm/cGPe+7pHlw792nGvLEckfgaQTVsdgcfMNq0gDerGOuiGabASbrQ
-   DMWUKCV/mU1rkYqBX/sIS+Y2IxbepdpoUU0/0ZlH3dVMKlYLdPJbv8NjD
-   AEyHs1zMM5Zuhohflx5FAgDWp2Ikgt/ViVP813ek1fBDNKD8MtMlPFW87
-   g==;
-X-CSE-ConnectionGUID: vvc+krPvQVCfStMDf3YmDA==
-X-CSE-MsgGUID: 7DIMnBGMSlaPIDvzFEFHRw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11663"; a="224465585"
-X-IronPort-AV: E=Sophos;i="6.21,207,1763391600"; 
-   d="scan'208";a="224465585"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jan 2026 18:58:22 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id B8338C000AF
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Jan 2026 09:58:21 +0000 (UTC)
-Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 6E4BEC06BE3
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Jan 2026 09:58:21 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 2233A8214C7
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Jan 2026 09:58:18 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=BgZTiK0S;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jI6Gq4JQ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: viswanath.kraleti@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6079dvEv2593341
+	for <openembedded-devel@lists.openembedded.org>; Wed, 7 Jan 2026 10:00:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=YibOxan4VHmIH6iEcd1uQ9fX7L36Luc9zZ/
+	ynvEiUWs=; b=BgZTiK0SPaEJMUWeWIv9vO4pbXycoK/YBk/TCuqCZySmpaO6asy
+	5lz5RGYSQ4jjKbJucBrWrSlneoJaBUdQ9jJfP8bz2sqYFPCzga3OL0IP4HfSdgha
+	FG7xYHzvSggimIQ/V3x2jXQFhmhrQpzbn8rvTuLwT2L9oBQGEXEUOPlmVajJA/rq
+	88hHUIQT9y3QTnexcmeGK3B3ykPprL5xMUUUyYue3OqN3qxDoZH5AzQUq2fKa7F7
+	TfAIhzyyeqRflLF3Fkrb1GlgnwpFLDwUYZhA9DsudQmBAk3r0HzQJipdxYAfXmG1
+	ei9oqz55hXr5mzpqHjXQBdQ8gwWtbGJaFAg==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bhn2902cw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:00:30 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-7d24bbb9278so3731991b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 02:00:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1767780030; x=1768384830; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YibOxan4VHmIH6iEcd1uQ9fX7L36Luc9zZ/ynvEiUWs=;
+        b=jI6Gq4JQD4gAlgl/sNh4iMLieGRPOVFqeR5VZMk7EAyggDk0cSoujaVOXj5sHWsaCv
+         iUMoSeMk3v0NsOkN5Tzumms8rjjHqYTxWyBlYdx3pSbTLKmVPE/Q/wESKp0iVhod+GjY
+         KdHtHfMti/cqtK7f1Vf1/n9z6SgxxeOmQ32KRNsgtp/VJbD929KtDQAONgAwPXVAjs7q
+         awOCxjMfgFeHTHE5vugTMiKJFUFDC4FItWeUM5Lf6fjEVYR6VxC9dHL3KfKo+sjYwv1q
+         ARiUIG073Kb/QC6ts/C5r0NkG1xwoHj6MdZH1ubOMk8KPXuaXG4+1+1/BYA8j3adgYuQ
+         tNJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767780030; x=1768384830;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YibOxan4VHmIH6iEcd1uQ9fX7L36Luc9zZ/ynvEiUWs=;
+        b=XPVJP1YnipzVxwL7N+oRRy+BmNA0uu1nerrzdB6ZZM+MzufhNWlxuN0Yovl1x9NaHW
+         OYOV5VbKu6tKFyaD9htzt12Hccxp8ptr8Ohsl8fzg7VXiLK605P+IpUwesutkXWU0y9Q
+         Qw7UpUCxBnKzWNSAjc0TTEo92I8p9dxgn12vJ+iS3zOYJIk5i9IanFSpxvOHxqZZ/OWo
+         HXZsW8luPsyJAsX1BFk/+ErhQjBM6AINM33BIKw1M8JYaM3957Pf5dVhxedYAUAF7moR
+         TZUfb8J0QnuRNEn4LDqA4Fq+VpmqGB3Wkn8YEMaQtRDBFAjnqJwp0gwYNDsFMDPRIDG+
+         ysdg==
+X-Gm-Message-State: AOJu0YwjxBa6hRscH1Ml27QBd/apBAbclJCM+rwWxsZ9Mq3IIra/GOlw
+	F2HMlO4JScjsBLIYokLIAa70kLTy+eLfbyJxp/Fk/rBa+w0qhJ9f/oiD3vK6oMs+iejloeBB893
+	yDHYtH3O/QCrslOaI9Odjp2nVOkZSiUZl+7xBxXXBIYILsr8UJXwqehkShfRmMyPVi8UzpAhT2+
+	WTWZu/Zx4FV4sLiTao
+X-Gm-Gg: AY/fxX5VyyrJsCwWcprElOKh+arCAD/SNd83lvFAKfCM8E8p00Q6fEcCJt4KXJV5gT1
+	+uxEzfQlo41lV5FCMngCTVbEMjgc3daGCO0bIKGsT08Mpq5xqZNeCu4IsJ3qQqcfN7T2ge+ZAAz
+	3S/S+7vAFKLJx5yGED4zt9FDpnXyXaHQKLMvS2GU1rq/jXYYGcAmgfp/5pIKTa2pvrcA2tGkvV4
+	QKUYmt9PIPSCiG9Qp26ooY+UhbAZ/sUi92akhHHLWd/cVQCxV0n6jfGCsZYBILJYtwviHVVO+fA
+	Yy1Ba2Ajf8jg9BVGaggHXjS2EuXPnqmWxPaiDc22hkpktkwndHnWKP9/vuV6pVUQ2ZN0nSoFGGG
+	p6A0ZV1H0xsPED3ztkkqmij7RPWzmvniSO2J68WpmztByp3pX
+X-Received: by 2002:a05:6a00:4216:b0:7ef:1af8:8f2d with SMTP id d2e1a72fcca58-81b7f3f24ecmr2015350b3a.42.1767780029542;
+        Wed, 07 Jan 2026 02:00:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHkCcwAzcpsLkooK6oftaQeqsquEGnoly8tqQ7pkstcD27iw9THu67urVQ2g4PKXYIXwfs3wA==
+X-Received: by 2002:a05:6a00:4216:b0:7ef:1af8:8f2d with SMTP id d2e1a72fcca58-81b7f3f24ecmr2015198b3a.42.1767780027604;
+        Wed, 07 Jan 2026 02:00:27 -0800 (PST)
+Received: from hu-vkraleti-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-819bb0de1a2sm4504161b3a.23.2026.01.07.02.00.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Jan 2026 02:00:27 -0800 (PST)
+From: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] opencv: upgrade 4.12.0 -> 4.13.0
-Date: Wed,  7 Jan 2026 17:58:01 +0800
-Message-ID: <20260107095801.912-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
+Subject: [oe][meta-oe][PATCH v2 1/2] libqmi: upgrade 1.34.0 -> 1.38.0
+Date: Wed,  7 Jan 2026 15:30:21 +0530
+Message-Id: <20260107100022.2646251-1-viswanath.kraleti@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: s8Sgt8rlloKyKQoL6aQHq_OFAsAj21qg
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA3MDA4MSBTYWx0ZWRfXynuTe9Xc990O
+ 5w3LLP8SM0BOmCk5L8RR3S4SCWF/GWtNUIWuuxzRXXfC6AMb48NV0RwCm2c4a4BP2Ns4tBTm6CI
+ 3oDtm/qP6gs4yuNv1a6ucehMgjPH0wqRw6/NwFdL95sY0HtqfVjWVw46cxxIwJfy5KC4Xk48mpd
+ Yi+qtldlFgxzSAH8MGkEQfDgSfrtFh6DDaUPn7MAMZNradDZQlwPUL3x11SFGfjbtdJRhSb+iy/
+ Ds51D+EUG0MHKTAnpXzhXfalr235do8Ad4Z7tOLr8xyAFJ9CIiBF7iDAL1rsyQjLXnH8fb51BDN
+ dy/8PuyXVeYf8lJb54X+LChNKg/cRyBXKhpL2o6QySo6TROY2VSUHBYLmo/GEYBs2kwEEc6wjMy
+ Fek9Ae4S0E5mL8uC0wrHovzZUCerl0op577gz+LusKAjNhb2sxN4w5bpdJ20erriS2p/NxJYopG
+ tIMtAgw/pgvAbA8KTyA==
+X-Authority-Analysis: v=2.4 cv=P7k3RyAu c=1 sm=1 tr=0 ts=695e2ebe cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=e5mUnYsNAAAA:8 a=EUspDBNiAAAA:8 a=QFtB4FFVfBaHzDooPqsA:9
+ a=IoOABgeZipijB_acs4fv:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-GUID: s8Sgt8rlloKyKQoL6aQHq_OFAsAj21qg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-06_03,2026-01-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 phishscore=0 clxscore=1015 malwarescore=0
+ lowpriorityscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
+ definitions=main-2601070081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:58:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123195
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 10:00:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123196
 
-1.Change Logs
-  https://github.com/opencv/opencv/wiki/OpenCV-Change-Logs#version4130
+Changelog:
+https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/blob/qmi-1-38/NEWS
 
-2.Remove following patches as they have been merged in upstream.
-  27691.patch
-  0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
 ---
- ...d-BlocksCompensator-feed-method-to-e.patch | 55 -------------------
- .../recipes-support/opencv/opencv/27691.patch | 44 ---------------
- .../{opencv_4.12.0.bb => opencv_4.13.0.bb}    | 14 ++---
- 3 files changed, 6 insertions(+), 107 deletions(-)
- delete mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch
- delete mode 100644 meta-oe/recipes-support/opencv/opencv/27691.patch
- rename meta-oe/recipes-support/opencv/{opencv_4.12.0.bb => opencv_4.13.0.bb} (96%)
+ .../libqmi/{libqmi_1.34.0.bb => libqmi_1.38.0.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.34.0.bb => libqmi_1.38.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch b/meta-oe/recipes-support/opencv/opencv/0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch
-deleted file mode 100644
-index ec2bb2d100..0000000000
---- a/meta-oe/recipes-support/opencv/opencv/0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch
-+++ /dev/null
-@@ -1,55 +0,0 @@
--From b28d9bef1d96d10e9a47d55a63d9f1443e6e3d2b Mon Sep 17 00:00:00 2001
--From: Alexander Smorkalov <alexander.smorkalov@xperience.ai>
--Date: Mon, 8 Sep 2025 14:52:58 +0300
--Subject: [PATCH] Renamed templated BlocksCompensator::feed method to exclude
-- claches with base class pure virtual method.
--
--Upstream-Status: Backport [https://github.com/opencv/opencv/commit/b28d9bef1d96d10e9a47d55a63d9f1443e6e3d2b]
--Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-----
-- .../opencv2/stitching/detail/exposure_compensate.hpp        | 2 +-
-- modules/stitching/src/exposure_compensate.cpp               | 6 +++---
-- 2 files changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp b/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp
--index dea76c957b..2954f32ca3 100644
----- a/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp
--+++ b/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp
--@@ -187,7 +187,7 @@ public:
-- 
-- protected:
--     template<class Compensator>
---    void feed(const std::vector<Point> &corners, const std::vector<UMat> &images,
--+    void feedWithStrategy(const std::vector<Point> &corners, const std::vector<UMat> &images,
--               const std::vector<std::pair<UMat,uchar> > &masks);
-- 
-- private:
--diff --git a/modules/stitching/src/exposure_compensate.cpp b/modules/stitching/src/exposure_compensate.cpp
--index 59542d95ba..f7c33fa4ef 100644
----- a/modules/stitching/src/exposure_compensate.cpp
--+++ b/modules/stitching/src/exposure_compensate.cpp
--@@ -460,7 +460,7 @@ void ChannelsCompensator::setMatGains(std::vector<Mat>& umv)
-- 
-- 
-- template<class Compensator>
---void BlocksCompensator::feed(const std::vector<Point> &corners, const std::vector<UMat> &images,
--+void BlocksCompensator::feedWithStrategy(const std::vector<Point> &corners, const std::vector<UMat> &images,
--                              const std::vector<std::pair<UMat,uchar> > &masks)
-- {
--     CV_Assert(corners.size() == images.size() && images.size() == masks.size());
--@@ -605,13 +605,13 @@ void BlocksCompensator::setMatGains(std::vector<Mat>& umv)
-- void BlocksGainCompensator::feed(const std::vector<Point> &corners, const std::vector<UMat> &images,
--                                  const std::vector<std::pair<UMat,uchar> > &masks)
-- {
---    BlocksCompensator::feed<GainCompensator>(corners, images, masks);
--+    BlocksCompensator::feedWithStrategy<GainCompensator>(corners, images, masks);
-- }
-- 
-- void BlocksChannelsCompensator::feed(const std::vector<Point> &corners, const std::vector<UMat> &images,
--                                      const std::vector<std::pair<UMat,uchar> > &masks)
-- {
---    BlocksCompensator::feed<ChannelsCompensator>(corners, images, masks);
--+    BlocksCompensator::feedWithStrategy<ChannelsCompensator>(corners, images, masks);
-- }
-- 
-- 
-diff --git a/meta-oe/recipes-support/opencv/opencv/27691.patch b/meta-oe/recipes-support/opencv/opencv/27691.patch
-deleted file mode 100644
-index c8c23c93aa..0000000000
---- a/meta-oe/recipes-support/opencv/opencv/27691.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 90c444abd387ffa70b2e72a34922903a2f0f4f5a Mon Sep 17 00:00:00 2001
--From: Alexander Smorkalov <alexander.smorkalov@opencv.ai>
--Date: Wed, 20 Aug 2025 10:53:51 +0300
--Subject: [PATCH] FFmpeg 8.0 support.
--
--Upstream-Status: Backport [https://github.com/opencv/opencv/commit/86df53155411b3ade57d0213bf8dd63006bf248f]
-----
-- modules/videoio/src/cap_ffmpeg_impl.hpp | 14 ++++++++++++++
-- 1 file changed, 14 insertions(+)
--
--diff --git a/modules/videoio/src/cap_ffmpeg_impl.hpp b/modules/videoio/src/cap_ffmpeg_impl.hpp
--index 489dbe565d3d..5780b4c11361 100644
----- a/modules/videoio/src/cap_ffmpeg_impl.hpp
--+++ b/modules/videoio/src/cap_ffmpeg_impl.hpp
--@@ -685,7 +685,10 @@ void CvCapture_FFMPEG::close()
--     if( video_st )
--     {
-- #ifdef CV_FFMPEG_CODECPAR
--+// avcodec_close removed in FFmpeg release 8.0
--+# if (LIBAVCODEC_BUILD < CALC_FFMPEG_VERSION(62, 11, 100))
--         avcodec_close( context );
--+# endif
-- #endif
--         video_st = NULL;
--     }
--@@ -2005,7 +2008,18 @@ void CvCapture_FFMPEG::get_rotation_angle()
--     rotation_angle = 0;
-- #if LIBAVFORMAT_BUILD >= CALC_FFMPEG_VERSION(57, 68, 100)
--     const uint8_t *data = 0;
--+    // av_stream_get_side_data removed in FFmpeg release 8.0
--+# if (LIBAVCODEC_BUILD < CALC_FFMPEG_VERSION(62, 11, 100))
--     data = av_stream_get_side_data(video_st, AV_PKT_DATA_DISPLAYMATRIX, NULL);
--+# else
--+    AVPacketSideData* sd = video_st->codecpar->coded_side_data;
--+    int nb_sd = video_st->codecpar->nb_coded_side_data;
--+    if (sd && nb_sd > 0)
--+    {
--+        const AVPacketSideData* mtx = av_packet_side_data_get(sd,  nb_sd, AV_PKT_DATA_DISPLAYMATRIX);
--+        data = mtx->data;
--+    }
--+# endif
--     if (data)
--     {
--         rotation_angle = -cvRound(av_display_rotation_get((const int32_t*)data));
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb b/meta-oe/recipes-support/opencv/opencv_4.13.0.bb
-similarity index 96%
-rename from meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-rename to meta-oe/recipes-support/opencv/opencv_4.13.0.bb
-index b8e83cd6be..315ee571c5 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.12.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.13.0.bb
-@@ -10,31 +10,29 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.38.0.bb
+similarity index 90%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.38.0.bb
+index 8dc7ec3773..bf8c65ec97 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.34.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.38.0.bb
+@@ -12,8 +12,8 @@ DEPENDS = "glib-2.0 glib-2.0-native"
  
- DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+ inherit meson pkgconfig bash-completion gobject-introspection upstream-version-is-even
  
--SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
--SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
-+SRCREV_opencv = "fe38fc608f6acb8b68953438a62305d8318f4fcd"
-+SRCREV_contrib = "d99ad2a188210cc35067c2e60076eed7c2442bc3"
- SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
- SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
- SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
- SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
--SRCREV_fastcv = "2265e79b3b9a8512a9c615b8c4d0244e88f45a9d"
-+SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
+-SRCREV = "3f07d6e5b4677558543b3b4484ea88ad92257e92"
+-SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-34"
++SRCREV = "e3d79ed3f7fdc6a7fa8b374860b1c23a8f172812"
++SRC_URI = "git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-38;tag=${PV}"
  
  
- SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
--SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
--           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https \
-+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
-+           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV} \
-            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/boostdesc;name=boostdesc;protocol=https \
-            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
-            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
-            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
--           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250606;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
-+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250715;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
-            file://0003-To-fix-errors-as-following.patch \
-            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-            file://0001-Dont-use-isystem.patch \
-            file://download.patch \
-            file://0001-Make-ts-module-external.patch \
-            file://0008-Do-not-embed-build-directory-in-binaries.patch \
--           file://27691.patch \
--	   file://0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch \
-            "
- SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
- 
--- 
-2.43.0
-
+ PACKAGECONFIG ??= "udev mbim"
 
