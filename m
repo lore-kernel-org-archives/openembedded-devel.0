@@ -2,61 +2,61 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93016CE9D7A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94256CEFCE3
 	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 09:53:03 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2623.1767779576939810350
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2665.1767779580890131748
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 01:52:57 -0800
+ Wed, 07 Jan 2026 01:53:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=H1+dkFoK;
- spf=pass (domain: konsulko.com, ip: 209.85.218.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b832c65124cso301663466b.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 01:52:56 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ubxOowTE;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-b728a43e410so319015066b.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 01:53:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1767779575; x=1768384375; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1767779579; x=1768384379; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=lt3U+ADIt/8GFfmB1OsNyFfA+EbD8tY60spl62p4n/k=;
-        b=H1+dkFoKURJzBnz0J1MVJkXt3YwO2rjH4++LKxxTUx3Q7l0DD24IxQxlYAWwCGtQ2S
-         lZQgjKck3wFzoSq3ExTmgvci4kYxEP84mISiBWghkdDZwE9DkNVJ/6nThoNSx+UswunX
-         oviilP76/uqi+fQeHVzkkOtJK2529nLKJbsn0=
+        bh=IpYhvHfgCVZBv4/e+6ARPsqfRs7H7gOwJ0CFhWyH2nY=;
+        b=ubxOowTEysDCZDLOYh/wGttBfs3ePS0aaNSogVAibxOu8ukYm0WLFw98RKhQL+wpCm
+         IMo/HJB4V9h9D8pIl7J0QtbO5oQp+8ighys2QXnFihR/fXfE6L3pipD/ha7M+CWhitTS
+         1UxDjEnhZbsaUCnrRhR4c3hu/b55aq/09rDzc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767779575; x=1768384375;
+        d=1e100.net; s=20230601; t=1767779579; x=1768384379;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=lt3U+ADIt/8GFfmB1OsNyFfA+EbD8tY60spl62p4n/k=;
-        b=mJJWgi3aYUF1I7cGNO1esLGOMjTAE4A5ALvHN/NqyD24Mp1XZ1CYVvJfKcvgUzfDe9
-         qidTsISw7T6qzSLAZLO9DJHgRTo4bA+qRtj0/rnh7hp+m8EMnXfh5vTADdn67H5FTT9z
-         FsWdhljgx/1KpUIxNIFgPp37mHdx9eTfvn9IYI/MfERTfPlM3CZtg6OyjKL3NhL2mIXk
-         BBIyDo2D20e0j5EHBNRWcNxG2SmtP+i7wFki6hvlJVlIhMoZp171N3o5JnKK7zE4xg/j
-         SC2n6WvhSuQ8kQ7kATSLBAXtJEDdeVUkscMOCGjImGcnBweAYl3owZQAIWlZM6NddoED
-         t+gw==
-X-Gm-Message-State: AOJu0YzTRzGEjwep4QYktP2VeanUBAE2YXPxYLU8AItX+fRFYIEgF3Ja
-	VsrNvOkVBIx176rKszBGpRp90meTH/IielpMe3skwVGT2DdQwHSFI2tIv24gVpicKjRra01c2sP
-	0Udo9
-X-Gm-Gg: AY/fxX7HV0UeISnJYzh5t0OvDKU1PnfuqrTLPSnUongVmhIwpWrpz0bmI3Wm1A+KO3L
-	NX9c1uNrmA4b6AzugjQxoGDe0+95x4mw4Cnfk5DTTMD+9Njp/RyYPyG8VZRi+wkb3inUc+O5TJE
-	M5lL/AsgW/HRmz7SqEJ6T2z4jNby988In5NiwrLg+cmgqjgRncb5dml2OD/NWcWrE8Ixok88sgN
-	0QeCVaH4XSml20bjpsB6oFxvyYSkBBUIMA9IyYyE4vMd8klSEOP8qTAr3OOGI7pGK0noerHnM4a
-	w2NoOaoPU/W1kId8Gd6+AhWVdbi1gPR5fSPw0Y+X78BfSFZY+J/N2waIAL9Jd6zluSm/fPv44t9
-	WctN9cO8Th5AVKU/90w/+Qow+iTbbjMNiV2sa65htuDtgEdReJqBp0G60twHKL9v/tdCLrpUZA2
-	43KoIfSh/bhp+TIQAo8hsHWSls
-X-Google-Smtp-Source: AGHT+IFu8m0wmGw/pAtFE+7h6vmTnXaSNqttHvnXVrSZSq62UYeuGaPImpiMcWvFaUkeu3STzvKJ+A==
-X-Received: by 2002:a17:907:3da6:b0:b7d:11ae:4006 with SMTP id a640c23a62f3a-b8444fd6743mr203128266b.52.1767779575128;
-        Wed, 07 Jan 2026 01:52:55 -0800 (PST)
+        bh=IpYhvHfgCVZBv4/e+6ARPsqfRs7H7gOwJ0CFhWyH2nY=;
+        b=lHI3rbMF9Wfr7jwVCMlcrucrIJBqV15Ge5XImGImmMZYMrflLv6pJ1GT50AzDtXtPZ
+         naIKJGNzus1H0zhpqbb3xsi08N6Jk7+45GaIo0xPdQHpEMTGcxBWHrOm5QF/A3Y7SnhK
+         oiynNbOSTQ+xx7tuNNQGNlxjcSAyoIgnMFXSrfefl8D9FdkVcipRO6kwDEajR/nEuT4d
+         qVWdBfvgkSEQpAWECAewMYV+/sCtN62gPFJUpcZ++8/D+5imbqZIsgda2u9Zzzue2R4u
+         MnkyZZt19a5Z//qeOV3TwLwHVfLeEB7NIDKOV2dqKvgDu91v4KKZKboi7T+aBZeqbLq/
+         vtyQ==
+X-Gm-Message-State: AOJu0YwJrqmNMNbDCKVjIqKiUwwoFF2T83LUdpy4ri/MYD/7pKACA5Fp
+	C3onuxXxbWGieF6TRZr39zBa/WpiuM0mKiOg72X5on91+ENGc0PYh2e0Hq5eWvzH76eZH+0zXE0
+	D7qnK
+X-Gm-Gg: AY/fxX4izbvFRY8cAyt7KwOUgZ6MOmFm55uKVdSVxUcXICuckJBbUaebt3xqA7B3eem
+	+AQRmQAWT5Dn0DtypIDwkKgRIKAJbWTQ0n97i8I5SJTQ3GykDTbSaRLwkbMTE4WOIgbi6Ly5zUP
+	ALJV/IMiQm94zCcVOfx5F8y8PEkDUoxbFYsP6aPaI1FIEUxP80Y9v7kFbVo6EfMGoIojOnTETvY
+	K5ac34vdWhIG8jnXU23ul+RJ6fL2GWDaZc9iubCr5j6pRBX6WqkJ0M1vqiEd9Q8+0d9+ohxul+8
+	+Xr6Vszk/Y4KXeFR+Gq53fbHwVlmy+sgRsbSHfGVEppFOAykeC7vVTN+k0FketUWptbtqHZ7P09
+	Zhi1ZG1f2XYcxpNi5jdhSz+Q/5xBzRxEp2Ehup0+LyQUBSIapuNt1JipAH1Jc8v7thHvdHF6mII
+	db2U1cgLCLIb/DD+7g4FhQDLQu
+X-Google-Smtp-Source: AGHT+IE7K8JVbkOZAVuhmaSYj1Qtqw/GaDqElXRIgL11AWFSy2Ho3dfUJsC3UqV+8Y6RP5/dDzrhmg==
+X-Received: by 2002:a17:906:478d:b0:b76:74b6:da75 with SMTP id a640c23a62f3a-b84453383a1mr186368566b.38.1767779578531;
+        Wed, 07 Jan 2026 01:52:58 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b844e46ee63sm72327666b.15.2026.01.07.01.52.54
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b844e46ee63sm72327666b.15.2026.01.07.01.52.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 01:52:54 -0800 (PST)
+        Wed, 07 Jan 2026 01:52:58 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/6] python3-anyio: Upgrade 4.12.0 -> 4.12.1
-Date: Wed,  7 Jan 2026 11:52:47 +0200
-Message-ID: <20260107095252.1351613-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 6/6] python3-termcolor: Upgrade 3.2.0 -> 3.3.0
+Date: Wed,  7 Jan 2026 11:52:51 +0200
+Message-ID: <20260107095252.1351613-6-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260107095252.1351613-1-leon.anavi@konsulko.com>
 References: <20260107095252.1351613-1-leon.anavi@konsulko.com>
@@ -66,37 +66,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:53:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123189
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123194
 
-Upgrade to release 4.12.1:
+Upgrade to release 3.3.0:
 
-- Changed all functions currently raising the private
-  NoCurrentAsyncBackend exception (since v4.12.0) to instead raise
-  the public NoEventLoopError exception
-- Fixed anyio.functools.lru_cache not working with instance methods
+- Add support for italic
+- can_colorize: Expect fileno() to raise OSError, as documented
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-anyio_4.12.0.bb => python3-anyio_4.12.1.bb} | 2 +-
+ .../{python3-termcolor_3.2.0.bb => python3-termcolor_3.3.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-anyio_4.12.0.bb => python3-anyio_4.12.1.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-termcolor_3.2.0.bb => python3-termcolor_3.3.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb b/meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
-index 500c1bd3dc..40312c761a 100644
---- a/meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0a769411d2af7894099e8ff75058c9f"
+diff --git a/meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb b/meta-python/recipes-devtools/python/python3-termcolor_3.3.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-termcolor_3.3.0.bb
+index 100292858f..2d0f4bf630 100644
+--- a/meta-python/recipes-devtools/python/python3-termcolor_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-termcolor_3.3.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=e5f5f7c9b280511f124dba5dda3d180e"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi python_hatchling
  
--SRC_URI[sha256sum] = "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
-+SRC_URI[sha256sum] = "41cfcc3a4c85d3f05c932da7c26d0201ac36f72abd4435ba90d0464a3ffed703"
+-SRC_URI[sha256sum] = "610e6456feec42c4bcd28934a8c87a06c3fa28b01561d46aa09a9881b8622c58"
++SRC_URI[sha256sum] = "348871ca648ec6a9a983a13ab626c0acce02f515b9e1983332b17af7979521c5"
  
  DEPENDS += " \
- 	python3-setuptools-scm-native \
+ 	python3-toml-native \
 -- 
 2.47.3
 
