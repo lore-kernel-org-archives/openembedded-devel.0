@@ -1,100 +1,103 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CFBBCD0433
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 09:28:03 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2340.1767778075501092710
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93016CE9D7A
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 09:53:03 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2623.1767779576939810350
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 01:27:55 -0800
+ Wed, 07 Jan 2026 01:52:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=c/FyrST+;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47aa03d3326so15299225e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 01:27:55 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=H1+dkFoK;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b832c65124cso301663466b.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 01:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767778074; x=1768382874; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1767779575; x=1768384375; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+eOLMB/e/9/Hs3qYtIeWorrV8ckikxO2hI3aU64HS84=;
-        b=c/FyrST+ISuVAc7OBrTybMCe2P9cqiKY2J3S1b88D8/qLdiwgnF2f0s3CzdoqALNt2
-         hurrgAwV3CH8Og2I9pmdoofMIXixrmH7M345Taz7nsXzeobHMVha/FAfyedHmA/JSS+F
-         Y0/R8G3gs1uf//kFIqBhqMnpEkiHYcrz5imEdAzJ2nWoSRiXcJWPdbxlCAvDpciS+8T5
-         GJF9U3SPkn37Mvoh1WFNHYeOtA+Bub46S5w59QfZKFWEwX+qvOy0Y6eNAkjI5wCTt190
-         6rBMwkuApvZXWKYDOXoWk3aRLJTw9yuitp8Nxt1Dtf+4RcNGwu81MjzCiO1sb0Rq+k/0
-         +QZQ==
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lt3U+ADIt/8GFfmB1OsNyFfA+EbD8tY60spl62p4n/k=;
+        b=H1+dkFoKURJzBnz0J1MVJkXt3YwO2rjH4++LKxxTUx3Q7l0DD24IxQxlYAWwCGtQ2S
+         lZQgjKck3wFzoSq3ExTmgvci4kYxEP84mISiBWghkdDZwE9DkNVJ/6nThoNSx+UswunX
+         oviilP76/uqi+fQeHVzkkOtJK2529nLKJbsn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767778074; x=1768382874;
+        d=1e100.net; s=20230601; t=1767779575; x=1768384375;
         h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=+eOLMB/e/9/Hs3qYtIeWorrV8ckikxO2hI3aU64HS84=;
-        b=ttPZgw4bmk3shYin6aSY8GoHWGi5YRkT1yOYFsOp257kscsAasDJTD1BnV2qK5iIWE
-         8uzSdLXkpjkwfebqBTgJyUQdBpsw9NnaJ+bt3eVBcJgVwy4plnZr4ZC7i5DBMZvPBVjs
-         K9EF+HO6NqUBchywrD6B75R/L/7yl1Q67tERxUXYvkjzpH9cMkLzk5z+Kjsw7yuXjBeo
-         pKuAii23AIDNJFjjPFtBoKMCiGSf/I3SY5sDuSvPeMhf9Q5SDTyOmtcJnzMyVaNLKU1M
-         urpQBYeoAY1phv+YbyL/h2rziu8i6/NFnhXZnO9vpBwa3MP69apuPM2CHJb90lmi1Vvo
-         dTcQ==
-X-Gm-Message-State: AOJu0YwhHKaBkEk9zxJN6dmYBLY/TAVAXNBKB7aGDwZ+BM0udc7bWqcB
-	+E0mhp/EtO9wZKALUVeAkqgSK/Gp8g7zBDyj0HH8fPRH8BwIVWfcC1f53cR/Jg==
-X-Gm-Gg: AY/fxX5T2cfPnNFzeNjsLuvgpwxcbOSE9GL0w4N5Kfi9oME4dU1h4cnknWqfekPOvYn
-	VmPY886+sn6Hzx8cu/KiVbbBaeDqz9YEADbDJGEizW+xjpBUvfJ0SoLRSBRdVUSq0z/ree1WJ/5
-	8PEWk1a3sh6mLK4aaYSAwOS6SS45OTE8Bs0u/XlKMSd8Wily7C1w4np9L+PTBv8aTxV3d/rYtiH
-	DEcreiPbzH8OY8khQiq5If2vKYAgnShRshwTA8mA9IdGDLajpeyyuU0SqUXwpWa26a1uXiRQSZ0
-	cylLMBsa8Cy2YXUAMsLF/z0Z+I2N7/eSZHGH92snBjxR0z8zwSvU4gJBSAdkFenDby0+2A0UCvy
-	UqBXN7bJrm5SE9ykCvEjGTA+ZPgBrX3GtwfKcEtHE7NpFzKxgCwrOwxi0jT0EKcAgR0tLvWwGtH
-	2Jg0J82zU1
-X-Google-Smtp-Source: AGHT+IHJESSrxfJ3ly07IWZ53TYp9CbwrFVBBkFlLHtLrVoarAJveUyPem11AYjyEZjCEOyISqyqNA==
-X-Received: by 2002:a05:600c:c8a:b0:479:3a88:de5e with SMTP id 5b1f17b1804b1-47d84b4a079mr15348415e9.37.1767778073792;
-        Wed, 07 Jan 2026 01:27:53 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d8719d057sm7236255e9.16.2026.01.07.01.27.53
-        for <openembedded-devel@lists.openembedded.org>
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=lt3U+ADIt/8GFfmB1OsNyFfA+EbD8tY60spl62p4n/k=;
+        b=mJJWgi3aYUF1I7cGNO1esLGOMjTAE4A5ALvHN/NqyD24Mp1XZ1CYVvJfKcvgUzfDe9
+         qidTsISw7T6qzSLAZLO9DJHgRTo4bA+qRtj0/rnh7hp+m8EMnXfh5vTADdn67H5FTT9z
+         FsWdhljgx/1KpUIxNIFgPp37mHdx9eTfvn9IYI/MfERTfPlM3CZtg6OyjKL3NhL2mIXk
+         BBIyDo2D20e0j5EHBNRWcNxG2SmtP+i7wFki6hvlJVlIhMoZp171N3o5JnKK7zE4xg/j
+         SC2n6WvhSuQ8kQ7kATSLBAXtJEDdeVUkscMOCGjImGcnBweAYl3owZQAIWlZM6NddoED
+         t+gw==
+X-Gm-Message-State: AOJu0YzTRzGEjwep4QYktP2VeanUBAE2YXPxYLU8AItX+fRFYIEgF3Ja
+	VsrNvOkVBIx176rKszBGpRp90meTH/IielpMe3skwVGT2DdQwHSFI2tIv24gVpicKjRra01c2sP
+	0Udo9
+X-Gm-Gg: AY/fxX7HV0UeISnJYzh5t0OvDKU1PnfuqrTLPSnUongVmhIwpWrpz0bmI3Wm1A+KO3L
+	NX9c1uNrmA4b6AzugjQxoGDe0+95x4mw4Cnfk5DTTMD+9Njp/RyYPyG8VZRi+wkb3inUc+O5TJE
+	M5lL/AsgW/HRmz7SqEJ6T2z4jNby988In5NiwrLg+cmgqjgRncb5dml2OD/NWcWrE8Ixok88sgN
+	0QeCVaH4XSml20bjpsB6oFxvyYSkBBUIMA9IyYyE4vMd8klSEOP8qTAr3OOGI7pGK0noerHnM4a
+	w2NoOaoPU/W1kId8Gd6+AhWVdbi1gPR5fSPw0Y+X78BfSFZY+J/N2waIAL9Jd6zluSm/fPv44t9
+	WctN9cO8Th5AVKU/90w/+Qow+iTbbjMNiV2sa65htuDtgEdReJqBp0G60twHKL9v/tdCLrpUZA2
+	43KoIfSh/bhp+TIQAo8hsHWSls
+X-Google-Smtp-Source: AGHT+IFu8m0wmGw/pAtFE+7h6vmTnXaSNqttHvnXVrSZSq62UYeuGaPImpiMcWvFaUkeu3STzvKJ+A==
+X-Received: by 2002:a17:907:3da6:b0:b7d:11ae:4006 with SMTP id a640c23a62f3a-b8444fd6743mr203128266b.52.1767779575128;
+        Wed, 07 Jan 2026 01:52:55 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b844e46ee63sm72327666b.15.2026.01.07.01.52.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 01:27:53 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Wed, 07 Jan 2026 01:52:54 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 5/5] python3-m2crypto: ignore CVE-2009-0127
-Date: Wed,  7 Jan 2026 10:27:48 +0100
-Message-ID: <20260107092748.1930960-5-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260107092748.1930960-1-skandigraun@gmail.com>
-References: <20260107092748.1930960-1-skandigraun@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/6] python3-anyio: Upgrade 4.12.0 -> 4.12.1
+Date: Wed,  7 Jan 2026 11:52:47 +0200
+Message-ID: <20260107095252.1351613-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260107095252.1351613-1-leon.anavi@konsulko.com>
+References: <20260107095252.1351613-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:28:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123188
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:53:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123189
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2009-0127
+Upgrade to release 4.12.1:
 
-The vulnerability is disputed[1] by upstream:
-"There is no vulnerability in M2Crypto. Nowhere in the functions
-are the return values of OpenSSL functions interpreted incorrectly.
-The functions provide an interface to their users that may be
-considered confusing, but is not incorrect, nor it is a vulnerability."
+- Changed all functions currently raising the private
+  NoCurrentAsyncBackend exception (since v4.12.0) to instead raise
+  the public NoEventLoopError exception
+- Fixed anyio.functools.lru_cache not working with instance methods
 
-[1]: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2009-0127
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../python/{python3-anyio_4.12.0.bb => python3-anyio_4.12.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-anyio_4.12.0.bb => python3-anyio_4.12.1.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
-index 155a9066ca..8fc9c9ce4f 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.38.0.bb
-@@ -45,4 +45,7 @@ export SWIG_FEATURES
+diff --git a/meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb b/meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb
+rename to meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
+index 500c1bd3dc..40312c761a 100644
+--- a/meta-python/recipes-devtools/python/python3-anyio_4.12.0.bb
++++ b/meta-python/recipes-devtools/python/python3-anyio_4.12.1.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0a769411d2af7894099e8ff75058c9f"
  
- export STAGING_DIR
+ inherit pypi python_setuptools_build_meta
  
-+# disputed, upstream claims there is no bug
-+CVE_CHECK_IGNORE = "CVE-2009-0127"
-+
- BBCLASSEXTEND = "native"
+-SRC_URI[sha256sum] = "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
++SRC_URI[sha256sum] = "41cfcc3a4c85d3f05c932da7c26d0201ac36f72abd4435ba90d0464a3ffed703"
+ 
+ DEPENDS += " \
+ 	python3-setuptools-scm-native \
+-- 
+2.47.3
+
 
