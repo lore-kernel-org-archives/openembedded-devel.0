@@ -1,262 +1,239 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA642D0D14C
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 17:31:27 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11707.1767807078140065994
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0D33D0D14E
+	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 17:40:27 +0000 (UTC)
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11915.1767807617945908065
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 09:31:18 -0800
+ Wed, 07 Jan 2026 09:40:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout05.t-online.de (Postfix) with SMTP id 0FD01A22
-	for <openembedded-devel@lists.openembedded.org>; Wed,  7 Jan 2026 18:31:16 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.225.85]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vdXNG-3EXKLZ0; Wed, 7 Jan 2026 18:31:10 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] pavucontrol: update 5.0 -> 6.2
-Date: Wed,  7 Jan 2026 18:31:04 +0100
-Message-ID: <20260107173104.211861-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.52.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fDc7D+H6;
+ spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64472ea7d18so1687903d50.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 09:40:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767807617; x=1768412417; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=+V5+7oWe1SFw0eBRowb38a2D+ghVqQPijm9ouxi2kwA=;
+        b=fDc7D+H6ZcRHvjIn/UlNzLk2lKCohv93o92wTBfxh5jrfl0bYvooEMHG+kkudjzWlb
+         EMetyHyp0tB3Xkgcp4scFcmn4phf5Dmbg57JVzD5LB1lfNDPL1qMD8mRWwBnsQoznjqk
+         0s56KNc+cTLdjdM2PFaWZEKeIQGHcf58bJSgg8rcL3y1392+vHD/c8l59CqoFhQegGcB
+         Zk1SIX8Ss36obibFCNAzTAxluqXQhhnH/Q+Ska0ineECJEd2UHZHjFDwmp0bwuMCAVUG
+         dhIwdjVKbmPxTB8g/J+5ZRNXuEx0zjFKnJpvsG42cgsegaDCZttNO9gZ7hXAiGdPGoxC
+         Eqkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767807617; x=1768412417;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+V5+7oWe1SFw0eBRowb38a2D+ghVqQPijm9ouxi2kwA=;
+        b=sEjoYsa9zwudpjOBLG8eLzIRDx2RNFfhZx8xB0YMBraryb73PoUo3vmGrtg7oKAOtA
+         vcaoUx7w/JJ7IFs55BQBeoF0q7Nb/xj/6EuG+TBpGem68qDtFUWiryH11KUZCmwMhEhf
+         VHmPbeoKV1v9AbrDPoKco8Ni/nnW6gZ9r0YxA4eyA1S5aGwNHSQ3SczFAOA5fFIVZyIZ
+         BPB61OlqfXrY0ssJ0oTgn4uLOSsWhNulkpfZfa+1kd0GCdzQVtzTSiHJrYtP/U/3mg+q
+         k3w/KMm2pZOvYVOXH77O2SLKQOP/1JyL3yZy2z3aqFRh0cJ9Ag9DjKkuO0mm93prXEun
+         GfZw==
+X-Gm-Message-State: AOJu0YwOU0aAJnDEXnEbOLw6/9ehhY8rRCIZYCm2gYEBxuEHQXiHUmYu
+	UVNYkFwjoP2I2S6YhU//bA6OrVrhG9xXz5xjUScQrhr/VRCzF/OdrTrduQTlH8dmdb+GFgEgpJo
+	GBLTVebxOb2WFPvIAUOxPltvbMd3dclQ=
+X-Gm-Gg: AY/fxX6b3MyFdEq2LR8Gypc2rp1zmfwBS5H3MhbDUXP0g3CiHksLiei0mjaBKq1L3Ch
+	gbZkpcUZQ78IrOWRC5fDE/2bWlnqCSMutWfTjizi1WYg+35PYEk4hkZQ98f8olR+LPuscdjZZJ/
+	I/lMKppbTyIM5dLoj95C6+Yjhggvgx+ggKNiId3J/uAntkh9NJhgegKPnMQdoIVoKUmPCPuiWf2
+	lelCKrWUnsdjpaDwtSUIAE7IvdaPo9ZyxxIuxTCuNZstw0Yn8jlWLIb5dgUXTBKPXCiKlrCTMFD
+	QQ8mh6zpDm6nreW5c/s1FwqgxFNtudf33aedZwHonA0p07N/64+4PdLb7H9P04aSIw9wUJU7mXF
+	kxhwumxMWhMdMvi0rz0+FyON+ZYbBNZ62ROsShKd+Kvl4vA==
+X-Google-Smtp-Source: AGHT+IEb2xh3ASx1cgnOKjlrlhm9nVCQjnqjebcwANWQwYnhBMCJEVBk6tTYipYtpvJseGp37RzyFzucGjUb1qne8go=
+X-Received: by 2002:a53:d590:0:b0:640:e021:ff6c with SMTP id
+ 956f58d0204a3-64716b78c18mr1895353d50.38.1767807616917; Wed, 07 Jan 2026
+ 09:40:16 -0800 (PST)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1767807070-6DFF885C-BF7D88A6/0/0 CLEAN NORMAL
-X-TOI-MSGID: f2187361-bb8b-4096-a205-853adef74040
-Content-Transfer-Encoding: quoted-printable
+References: <20260107102855.228-1-wangmy@fujitsu.com> <20260107102855.228-5-wangmy@fujitsu.com>
+In-Reply-To: <20260107102855.228-5-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 7 Jan 2026 09:39:50 -0800
+X-Gm-Features: AQt7F2qu1IpH9P5tXM-OnGMx0sX9sBol_B80jD5RBP9ORJVzea5-D5LUXmuG4pM
+Message-ID: <CAMKF1spSkeMXW8RkvxvjO8bjFVappLtyD_8TFY3zEpasMFLdpQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH 05/24] imlib2: upgrade 1.12.5 -> 1.12.6
+To: wangmy@fujitsu.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000009a7450647cfc922"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 17:31:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123226
+ <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 17:40:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123227
 
-- switch to meson buildsystem
-- pavucontrol now requires gtk4 and thus requires gpu acceleration
-- remove patch. Meanwhile libcanberra is optional and build doesn't
-  fail without anymore
-- pavucontrol was migrated from intltool to gettext
-- add packageconfigs for libcanberra and lynx to have both disabled
-  by default
+--00000000000009a7450647cfc922
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...ucontrol-remove-canberra-gtk-support.patch | 112 ------------------
- .../pulseaudio/pavucontrol_5.0.bb             |  27 -----
- .../pulseaudio/pavucontrol_6.2.bb             |  22 ++++
- 3 files changed, 22 insertions(+), 139 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol/000=
-1-pavucontrol-remove-canberra-gtk-support.patch
- delete mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0=
-.bb
- create mode 100644 meta-oe/recipes-multimedia/pulseaudio/pavucontrol_6.2=
-.bb
+On Wed, Jan 7, 2026 at 2:29=E2=80=AFAM wangmy via lists.openembedded.org <w=
+angmy=3D
+fujitsu.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-pavuc=
-ontrol-remove-canberra-gtk-support.patch b/meta-oe/recipes-multimedia/pul=
-seaudio/pavucontrol/0001-pavucontrol-remove-canberra-gtk-support.patch
-deleted file mode 100644
-index 44169240c5..0000000000
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol/0001-pavucontrol-=
-remove-canberra-gtk-support.patch
-+++ /dev/null
-@@ -1,112 +0,0 @@
--From 87992a57e5f517d5ceb5dfabaea662ac64983720 Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Fri, 27 May 2022 18:37:53 +0200
--Subject: [PATCH] pavucontrol: remove canberra-gtk support
--
--libcanberra-gtk3 module isn't buildable for wayland.
--Remove its dpendency.
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
--
--Upstream-Status: Inappropriate
-----
-- configure.ac           |  2 +-
-- src/pavuapplication.cc |  2 --
-- src/pavucontrol.cc     |  4 ----
-- src/sinkwidget.cc      | 17 -----------------
-- 4 files changed, 1 insertion(+), 24 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 056ba5e..e857563 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -41,7 +41,7 @@ AC_TYPE_SIGNAL
-- AC_HEADER_STDC
-- AX_CXX_COMPILE_STDCXX_11
--=20
---PKG_CHECK_MODULES(GUILIBS, [ gtkmm-3.0 >=3D 3.22 sigc++-2.0 libcanberra=
--gtk3 >=3D 0.16 json-glib-1.0 ])
--+PKG_CHECK_MODULES(GUILIBS, [ gtkmm-3.0 >=3D 3.22 sigc++-2.0 json-glib-1=
-.0 ])
-- AC_SUBST(GUILIBS_CFLAGS)
-- AC_SUBST(GUILIBS_LIBS)
--=20
--diff --git a/src/pavuapplication.cc b/src/pavuapplication.cc
--index 6773b53..60c016c 100644
----- a/src/pavuapplication.cc
--+++ b/src/pavuapplication.cc
--@@ -24,8 +24,6 @@
--=20
-- #include "i18n.h"
--=20
---#include <canberra-gtk.h>
---
-- #include "pavuapplication.h"
-- #include "pavucontrol.h"
-- #include "mainwindow.h"
--diff --git a/src/pavucontrol.cc b/src/pavucontrol.cc
--index 18d5400..10ab646 100644
----- a/src/pavucontrol.cc
--+++ b/src/pavucontrol.cc
--@@ -29,8 +29,6 @@
-- #include <json-glib/json-glib.h>
-- #endif
--=20
---#include <canberra-gtk.h>
---
-- #include "pavucontrol.h"
-- #include "i18n.h"
-- #include "minimalstreamwidget.h"
--@@ -916,8 +914,6 @@ MainWindow* pavucontrol_get_window(pa_glib_mainloop =
-*m, bool maximize, bool _ret
--     tab_number =3D _tab_number;
--     retry =3D _retry;
--=20
---    ca_context_set_driver(ca_gtk_context_get(), "pulse");
---
--     mainWindow =3D MainWindow::create(maximize);
--=20
--     api =3D pa_glib_mainloop_get_api(m);
--diff --git a/src/sinkwidget.cc b/src/sinkwidget.cc
--index f30bd37..482fd1f 100644
----- a/src/sinkwidget.cc
--+++ b/src/sinkwidget.cc
--@@ -24,7 +24,6 @@
--=20
-- #include "sinkwidget.h"
--=20
---#include <canberra-gtk.h>
-- #if HAVE_EXT_DEVICE_RESTORE_API
-- #  include <pulse/format.h>
-- #  include <pulse/ext-device-restore.h>
--@@ -111,7 +110,6 @@ SinkWidget* SinkWidget::create(MainWindow* mainWindo=
-w) {
-- void SinkWidget::executeVolumeUpdate() {
--     pa_operation* o;
--     char dev[64];
---    int playing =3D 0;
--=20
--     if (!(o =3D pa_context_set_sink_volume_by_index(get_context(), inde=
-x, &volume, NULL, NULL))) {
--         show_error(_("pa_context_set_sink_volume_by_index() failed"));
--@@ -120,22 +118,7 @@ void SinkWidget::executeVolumeUpdate() {
--=20
--     pa_operation_unref(o);
--=20
---    ca_context_playing(ca_gtk_context_get(), 2, &playing);
---    if (playing)
---        return;
---
--     snprintf(dev, sizeof(dev), "%lu", (unsigned long) index);
---    ca_context_change_device(ca_gtk_context_get(), dev);
---
---    ca_gtk_play_for_widget(GTK_WIDGET(gobj()),
---                           2,
---                           CA_PROP_EVENT_DESCRIPTION, _("Volume Control=
- Feedback Sound"),
---                           CA_PROP_EVENT_ID, "audio-volume-change",
---                           CA_PROP_CANBERRA_CACHE_CONTROL, "permanent",
---                           CA_PROP_CANBERRA_ENABLE, "1",
---                           NULL);
---
---    ca_context_change_device(ca_gtk_context_get(), NULL);
-- }
--=20
-- void SinkWidget::onMuteToggleButton() {
----=20
--2.25.1
--
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb b/m=
-eta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb
-deleted file mode 100644
-index 29500bdb94..0000000000
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_5.0.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--DESCRIPTION =3D "PulseAudio Volume Control (pavucontrol) is a simple GTK=
- based volume control tool ("mixer") for the PulseAudio sound server."
--HOMEPAGE =3D "https://freedesktop.org/software/pulseaudio/pavucontrol/"
--SECTION =3D "x11/multimedia"
--LICENSE =3D "GPL-2.0-or-later"
--LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa882=
-bbe"
--
--# glib-2.0-native is required for glib-gettextize, which is used by the
--# AM_GLIB_GNU_GETTEXT macro in configure.ac. That macro is deprecated, s=
-o the
--# glib-2.0-native dependency may go away at some point (something to kee=
-p in
--# mind when doing version upgrades).
--DEPENDS =3D "libxml-parser-perl-native intltool-native glib-2.0-native g=
-tkmm3 pulseaudio json-glib"
--
--inherit autotools features_check perlnative pkgconfig
--
--ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
--
--SRC_URI =3D "http://www.freedesktop.org/software/pulseaudio/${BPN}/${BP}=
-.tar.xz"
--SRC_URI:append =3D " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', =
-'file://0001-pavucontrol-remove-canberra-gtk-support.patch', '', d)}"
--
--SRC_URI[sha256sum] =3D "ce2b72c3b5f1a70ad0df19dd81750f9455bd20870d1d3a36=
-d20536af2e8f4e7a"
--
--PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
--PACKAGECONFIG[x11] =3D ",,libcanberra"
--
--EXTRA_OECONF =3D "--disable-lynx "
--
--RDEPENDS:${PN} +=3D "pulseaudio-server"
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_6.2.bb b/m=
-eta-oe/recipes-multimedia/pulseaudio/pavucontrol_6.2.bb
-new file mode 100644
-index 0000000000..b6b9a068a9
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_6.2.bb
-@@ -0,0 +1,22 @@
-+SUMMARY =3D "PulseAudio Volume Control is a simple GTK based volume cont=
-rol tool for the PulseAudio sound server"
-+HOMEPAGE =3D "https://freedesktop.org/software/pulseaudio/pavucontrol/"
-+SECTION =3D "multimedia"
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-+
-+DEPENDS =3D "gtkmm4 pulseaudio json-glib"
-+
-+inherit meson features_check pkgconfig gettext
-+
-+ANY_OF_DISTRO_FEATURES =3D "opengl vulkan"
-+
-+SRC_URI =3D "http://www.freedesktop.org/software/pulseaudio/${BPN}/${BP}=
-.tar.xz"
-+SRC_URI[sha256sum] =3D "e93a7836c7307dcbc989e95fc7ec0878322514c475fabd90=
-e89ed52fd4f15d32"
-+
-+PACKAGECONFIG ?=3D ""
-+PACKAGECONFIG[audio-feedback] =3D "-Daudio-feedback=3Denabled,-Daudio-fe=
-edback=3Ddisabled,libcanberra"
-+PACKAGECONFIG[lynx] =3D "-Dlynx=3Denabled,-Dlynx=3Ddisabled,lynx"
-+
-+FILES:${PN} +=3D "${datadir}"
-+
-+RDEPENDS:${PN} +=3D "pulseaudio-server"
---=20
-2.52.0
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> - Y4M loader: add support for 10-bit 4:4:4
+> - Y4M loader: add support for 10-bit 4:2:2
+> - Y4M loader: add example for 8-bit mono
+> - Y4M loader: add support for 10-bit mono
+> - Y4M loader: fix support for full-range mono
+> - Y4M loader: fix support for odd dimensions
+> - Y4M loader: add support for 12/14/16-bit mono
+> - test/images: Remove intermediate generated file
+> - imlib2_view: Set title
+> - imlib2_view: Scale image when resizing window
+> - imlib2_view: A couple of fixes to previous commit
+> - test_load_2: Add new y4m test images
+> - test_load_2: Add more new y4m test images
+> - test_load_2: Add more new y4m test images
+> - autofoo: Use AM_LIBTOOLFLAGS, not LIBTOOLFLAGS
+> - gradients: Fix rendering of gradients in larger images
+> - imlib2_conv: Fix constness warning
+> - gradients: Better gradients with angles
+> - Compile cleanly with -Wdouble-promotion
+> - XPM loader: Add missing progress callback on incomplete image data
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+> b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+> index 66e9f8a0c4..c02e497a86 100644
+> --- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+> +++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
+> @@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3D344895f253c32f38e182dcaf30fe8a35"
+>
+>  DEPENDS =3D "freetype "
+>  PROVIDES =3D "virtual/imlib2"
+> -PV =3D "1.12.5"
+> -SRCREV =3D "df73df52ddf0e1ea40507f5ee8c6b794b328b3bc"
+> +PV =3D "1.12.6"
+> +SRCREV =3D "8c6a7640c91d7815a6318d3641554869c62cc926"
+>
+>
+If we are bumping SRCREV from release to release then rename the recipe to
+represent version in it might be
+better.
 
+
+>  inherit autotools pkgconfig lib_package
+>
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#123203):
+> https://lists.openembedded.org/g/openembedded-devel/message/123203
+> Mute This Topic: https://lists.openembedded.org/mt/117131892/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000009a7450647cfc922
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jan 7, =
+2026 at 2:29=E2=80=AFAM wangmy via <a href=3D"http://lists.openembedded.org=
+">lists.openembedded.org</a> &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@lis=
+ts.openembedded.org">fujitsu.com@lists.openembedded.org</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left:1px solid rgb(204,204,204);padding-left:1ex">From: Wang Mingyu &l=
+t;<a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.co=
+m</a>&gt;<br>
+<br>
+Changelog:<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+- Y4M loader: add support for 10-bit 4:4:4<br>
+- Y4M loader: add support for 10-bit 4:2:2<br>
+- Y4M loader: add example for 8-bit mono<br>
+- Y4M loader: add support for 10-bit mono<br>
+- Y4M loader: fix support for full-range mono<br>
+- Y4M loader: fix support for odd dimensions<br>
+- Y4M loader: add support for 12/14/16-bit mono<br>
+- test/images: Remove intermediate generated file<br>
+- imlib2_view: Set title<br>
+- imlib2_view: Scale image when resizing window<br>
+- imlib2_view: A couple of fixes to previous commit<br>
+- test_load_2: Add new y4m test images<br>
+- test_load_2: Add more new y4m test images<br>
+- test_load_2: Add more new y4m test images<br>
+- autofoo: Use AM_LIBTOOLFLAGS, not LIBTOOLFLAGS<br>
+- gradients: Fix rendering of gradients in larger images<br>
+- imlib2_conv: Fix constness warning<br>
+- gradients: Better gradients with angles<br>
+- Compile cleanly with -Wdouble-promotion<br>
+- XPM loader: Add missing progress callback on incomplete image data<br>
+<br>
+Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
+=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+---<br>
+=C2=A0meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a> | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.b=
+b" rel=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a> b/meta-oe/recipes=
+-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=3D"noreferrer" target=
+=3D"_blank">imlib2_git.bb</a><br>
+index 66e9f8a0c4..c02e497a86 100644<br>
+--- a/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a><br>
++++ b/meta-oe/recipes-graphics/imlib2/<a href=3D"http://imlib2_git.bb" rel=
+=3D"noreferrer" target=3D"_blank">imlib2_git.bb</a><br>
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D344895f253c=
+32f38e182dcaf30fe8a35&quot;<br>
+<br>
+=C2=A0DEPENDS =3D &quot;freetype &quot;<br>
+=C2=A0PROVIDES =3D &quot;virtual/imlib2&quot;<br>
+-PV =3D &quot;1.12.5&quot;<br>
+-SRCREV =3D &quot;df73df52ddf0e1ea40507f5ee8c6b794b328b3bc&quot;<br>
++PV =3D &quot;1.12.6&quot;<br>
++SRCREV =3D &quot;8c6a7640c91d7815a6318d3641554869c62cc926&quot;<br>
+<br></blockquote><div><br></div><div>If we are bumping SRCREV from release =
+to release then rename the recipe to represent version in it might be</div>=
+<div>better.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+=C2=A0inherit autotools pkgconfig lib_package<br>
+<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#123203): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123203" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123203</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117131892/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117131892/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000009a7450647cfc922--
 
