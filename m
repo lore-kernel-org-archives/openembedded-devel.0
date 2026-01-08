@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 340DAD185CB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 340A5D185CA
 	for <webhook@archiver.kernel.org>; Thu,  8 Jan 2026 10:53:41 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3997.1767869615672413675
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4000.1767869620303668282
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Jan 2026 02:53:35 -0800
+ Thu, 08 Jan 2026 02:53:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YVz+8fBz;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-47796a837c7so22583145e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 02:53:35 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lk7Ivjiy;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-47d3ffa6720so31103275e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 02:53:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767869614; x=1768474414; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767869619; x=1768474419; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7xip1kEeWciGe5mcJKLrn2Rz/alQldRjYaMMqO8Sc2o=;
-        b=YVz+8fBz/wINYxF0TtF8gT+71Rw64AlJDa+4KgSLBjsf68KIWHpc1Hd6KufqhZJtyp
-         FdBaf8F9RhkwoTg5CKW570oY5ctgd4MumMKBZvgkLXyn+sh2RH61DydrdymV0p1MVRWj
-         yRPqd1j2cGx8eX13871HsSHwAjDqnCPc/vYWED3+J0lVmv4eGCD3Ag+Ap2w/eR3Xsy04
-         qPtw0oxbID5vtIh3OqH4Cy/XnEnyXCXs4rQkAWIC7pWSGeGIxYaOeprkDiypqsHG43Mu
-         i8VFMF2m9BZyKCNwbk0plwl1Wwz0BxvMNyINeMwknC7Yxfk1EeA1n/Gr763zdMtNskce
-         ZZ6A==
+        bh=CCnOXqx78Uq8IAjzFBZYu0m9/DRjl2CMBXpEz/hSNRY=;
+        b=lk7Ivjiy05EX2PHBIBT+wnivyS10SKs9dLbcwkmFDITOA7Vbq8RYKiAsfL4h71J7oa
+         VyYEHdJOPpGCHeK8uC/yb7siK9rioeusK/BU3qpPbLVo542yz6fzseWCHJrg6eNPpotu
+         fcCyI9l4i0QoytpF9uoUqFkJcfq9FEStNvlNOmubAZumLYkWwLM9JE3p9cCLL+o5THMQ
+         wPZSW5VIjb71d1KMWOzIuCU8dt7YQGT2oPnwTLpiHazwwzhndrKYAdN272s/27SJiK23
+         5wpxDiQQN6U7qQRy0OTGUIsMCQcb39RXoMJcdBDVY/trmGDaCOnWXpf2tb8xPa1yCmfM
+         TC4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767869614; x=1768474414;
+        d=1e100.net; s=20230601; t=1767869619; x=1768474419;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=7xip1kEeWciGe5mcJKLrn2Rz/alQldRjYaMMqO8Sc2o=;
-        b=Em3lUWE6feJMMi8Dc9GVL+9rS9mmiW1fum4mv5uPOq06oB0JL3P6CUY1ooXGb00bmg
-         499KLb762u2OlxXavVUGpE8uimwstx930NEZUJX390zy2JsRYTplZ0vOaDtM/Sha7L5f
-         Ak/CKOTZhRDD5oRjFHIl+qXwfsfg45XLx7Aed0P2LI2VktVFovCo49GSc1GsqidzdThU
-         7BR+8//RLrr3kFM8nqSUv/Az+C2HHsbV81xMDvMoWFXxw658VpoCnivoB56kpQWsGmIE
-         3Md++hHarbeLFNEPt9PXg/xldTs4OnM6Fv8BiCgFHGs5V+vIJAbNVanJyYaoshmN02Pz
-         MVgw==
-X-Gm-Message-State: AOJu0YwCsfkkCrpuIbK2O9h3053bK3DAWMoFZPVqvFGC/gLpyCQnh7qP
-	X6BF5OdrrnatlNW546CDolto+5qliECIUos04uEK2Q/A2qFKp8uq72vsQFLYBA==
-X-Gm-Gg: AY/fxX4oZGBEENqMZ7bDUgFQxFSgL8IsMLiatRHPSLMoiH4e0ALv01VcVJnm4opM7dB
-	XuX8oqxtuons0O4zhm2SQa/Prmdw6VNcCusHa2d69soR0DqVfz21IpxgFZBE0iqZVQ/nHN8c3yY
-	uovYDbJfkJxpy+59dCNKU9n2Yc/09WnoIYcVEALAaZ2Bk4KP0SUJ7FDFiyB3g6Jrvq/eLWDKEHJ
-	GJUw/ATzCk4Q72sUtYYm+kjruevnFvuLuRq1k9ycz0G0vsoORNJ0LNua9XaES9XhRCXPxNruWcL
-	nt+240Y5FQcoZ4dopr3KwjMxx+fLNe7s29t3uF5sjJa/+osvNgKKB2Pm8YvMhrJjR0zdOrEKUeA
-	NV8Uf64fCg8u1JLkyoucyL3YfFdM/wR/o2O4T61S57oOO5eFXjidt3DcQ2I8a7UVd+g1oQtUc52
-	Sa1z9rHgoM
-X-Google-Smtp-Source: AGHT+IHZK0SA9dzjXnR54SkbVERl/Pw3urGPPMzdz+wvecovI8s/DbRUcot9KaYNmv+znHLU95FgtA==
-X-Received: by 2002:a05:600c:8217:b0:477:55ce:f3c3 with SMTP id 5b1f17b1804b1-47d84b26cfdmr67194795e9.5.1767869613971;
-        Thu, 08 Jan 2026 02:53:33 -0800 (PST)
+        bh=CCnOXqx78Uq8IAjzFBZYu0m9/DRjl2CMBXpEz/hSNRY=;
+        b=Z6K433A5sHaUGcrXnVkPeSJN0D6cnHYE9CvMEq8WkEpl35EIk0tSJou1Mtx9f5G/qZ
+         bAifwWxJ3liiG8ksTK8vBqF4rRXgB5TehMsW7dzB2KISnTRMoiUyd5ugQcK1Tu8f2ShD
+         MlL+2AbW3SYo1WJpcJHyl3wuC5rI295H2uskNaHXrn0e70a9tKt03rX/BqvwYIVAI3Bg
+         BMG4WWS25ueQXVfAFpkOaZglvXQKUQoa2BsP6R+uB06VGCd8qg4KeX0deJ+HNnQMrgaQ
+         qx8+VqAmqGviWwpyTxgpBQMY/bM2I0nkayWu6wy9hHVgOeK7tZwqXqVWX68ZSLEznLvP
+         EDyg==
+X-Gm-Message-State: AOJu0YzQyyZQ0rOD9ZAAc0iBMz4VHuAbIfRj5Cd+lxqJ149M+hrG7FqM
+	aCw4SNwD07aVH9mLrUdx3xGGzSN0+SO77Rke9kpxb6cV+pnGY5tld1bDbw8Kdw==
+X-Gm-Gg: AY/fxX51LdKNcOlzrGd3lFDAqG5jP0TbSHMuaelh9NVfkrBrsR46uTmC6phhZQAhcN0
+	FLJ7oArKKAhTzpuBfJD/qrx4wGv6/hjU5HlAyvmjcLUDCU9HmWPCLioXagX3QixEfxKAX0yyV4d
+	pipghTJx4wkVj6ewePKRkS8cizfMnkPdaOXShsqfOk2K4oP0N0TVZz8nToavKF29UvaMtEGrEXb
+	Oc57r+AqyjVBGZYFsS8QN6nm1xv3Z5k1ohl/jT+F5Gn6u+/FtxuVWoKhDBwl0J5tkmQaLsuqh31
+	4HTBeq0A0kY3JWjPGd261TcHdclLSkf34eMsfwn+T4VjeuA8TxikBFyIV6mkk9WxXWk2kK1DVzu
+	/TmFlN7l/hvbO7PCTuOCNTZF18PKeUgoNb9tFHvfcbs43sGfCKAM1hagWCXg4KtCxPmwf8m9osJ
+	daDb4yOE3wKZAGHyZXMxU=
+X-Google-Smtp-Source: AGHT+IHHnk94Lxd1L7dhpw7QZBHOaxvyj2iPCMLdtmZ4ORpkVkODOM4DXF94kGjNgrGUlG9LH1h10g==
+X-Received: by 2002:a05:600c:4ed4:b0:471:14f5:126f with SMTP id 5b1f17b1804b1-47d84b41181mr75394695e9.33.1767869618563;
+        Thu, 08 Jan 2026 02:53:38 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f68f69dsm148656615e9.1.2026.01.08.02.53.26
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f68f69dsm148656615e9.1.2026.01.08.02.53.34
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Jan 2026 02:53:28 -0800 (PST)
+        Thu, 08 Jan 2026 02:53:35 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 02/15] imagemagick: mark CVE-2023-5341 as patched
-Date: Thu,  8 Jan 2026 11:53:04 +0100
-Message-ID: <20260108105317.460246-2-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 03/15] imagemagick: patch CVE-2025-53014
+Date: Thu,  8 Jan 2026 11:53:05 +0100
+Message-ID: <20260108105317.460246-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260108105317.460246-1-skandigraun@gmail.com>
 References: <20260108105317.460246-1-skandigraun@gmail.com>
@@ -68,27 +68,66 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 10:53:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123256
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123257
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-5341
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-53014
 
-The fix[1] mentioned in the NVD report has been part of the recipe since
-7.1.1-19.
+Pick the commit that is mentioned as a solution at the bottom of
+the relevant Github advisory[1].
 
-[1]: https://github.com/ImageMagick/ImageMagick/commit/aa673b2e4defc7cad5bec16c4fc8324f71e531f1
+[1]: https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-hm4x-r5hc-794f
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../imagemagick/CVE-2025-53014.patch          | 25 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.1.1.bb          |  4 ++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-53014.patch
 
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-53014.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-53014.patch
+new file mode 100644
+index 0000000000..b20d78e1bb
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-53014.patch
+@@ -0,0 +1,25 @@
++From ebf0f36974e2c9b47d9bb5bf31d19a19c0ce4e8e Mon Sep 17 00:00:00 2001
++From: Dirk Lemstra <dirk@lemstra.org>
++Date: Thu, 26 Jun 2025 23:01:07 +0200
++Subject: [PATCH] Correct out of bounds read of a single byte.
++
++CVE: CVE-2025-53014
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/29d82726c7ec20c07c49ba263bdcea16c2618e03]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ MagickCore/image.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/MagickCore/image.c b/MagickCore/image.c
++index 261d75003..1b242f828 100644
++--- a/MagickCore/image.c
+++++ b/MagickCore/image.c
++@@ -1678,7 +1678,7 @@ MagickExport size_t InterpretImageFilename(const ImageInfo *image_info,
++     q=(char *) p+1;
++     if (*q == '%')
++       {
++-        p=q+1;
+++        p++;
++         continue;
++       }
++     field_width=0;
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index a8029426da..f947b8e9c6 100644
+index f947b8e9c6..cc77468731 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -180,3 +180,4 @@ CVE_STATUS[CVE-2017-5506] = "cpe-incorrect: The current version (7.1.1) is not a
- CVE_STATUS[CVE-2017-5509] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.4-4"
- CVE_STATUS[CVE-2017-5510] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.4-4"
- CVE_STATUS[CVE-2017-5511] = "cpe-incorrect: The current version (7.1.1) is not affected by the CVE which affects versions at least earlier than 7.0.4-3"
-+CVE_STATUS[CVE-2023-5341] = "fixed-version: Fix is included since 7.1.1-19"
+@@ -11,7 +11,9 @@ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+ 
+ BASE_PV := "${PV}"
+ PV .= "-47"
+-SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https"
++SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https \
++           file://CVE-2025-53014.patch \
++           "
+ SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
+ 
+ S = "${WORKDIR}/git"
 
