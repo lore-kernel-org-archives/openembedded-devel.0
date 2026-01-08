@@ -1,133 +1,166 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E7ABD148BD
-	for <webhook@archiver.kernel.org>; Thu,  8 Jan 2026 07:45:29 +0000 (UTC)
-Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1634.1767858324711252194
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BD3DD148BE
+	for <webhook@archiver.kernel.org>; Thu,  8 Jan 2026 07:46:29 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1640.1767858384274054361
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 23:45:24 -0800
+ Wed, 07 Jan 2026 23:46:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=ShUkzcGh;
- spf=pass (domain: mvista.com, ip: 74.125.82.181, mailfrom: vanusuri@mvista.com)
-Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-2af41f558f5so2412089eec.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 23:45:24 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kzZnVW0W;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-43284ed32a0so1406136f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 23:46:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1767858323; x=1768463123; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=y8MzTj2AQpCZsmnMsEmnuJi1KdW+tnWPiYOw6+if42I=;
-        b=ShUkzcGhqed9a6vc8kf9PvPkiRpTpl47IGAX326Up6l0TCImk2OmbL5UcsqUFn5MiY
-         4PRQoz1rZa+iAOeHI7bf9eGcYR3QAq/jB31cFgGkkFLwhBx+kHvn1W+knhxGxEo9mJH4
-         OGEGprnr4UXsWe5LTD1UHuOhidYCnVO66uCpM=
+        d=gmail.com; s=20230601; t=1767858383; x=1768463183; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/z7WNFFvSjPyJgLNPUu99rJXsDMg9AiFUZuMDJnSJZ4=;
+        b=kzZnVW0Wt5jMJEwjHqGyV0QqlIJbupLE1C0PZIwJcGmcfV1BMEolS7gOInVCQuVISc
+         7wM6QjghCPSMjvQH18+goC562LSeUGoIKWisauxS0vzC5golF4t8TaKb6Iq5cU7SQI2M
+         kvFyZoDtgBU8bg75gH+GXR3d9Jt9lHg1XzHdy/EMJo8I5pFWEqYGvj8sB2Z2QFi8BQ7s
+         Cc9bP6TvI4VQAsVYm6WOybcSga2t4tNZnc6knK/t5On1VMnfz6WOW76HpDELaUXsujCw
+         rjzAvRalKdX9gDCRh9F+pg+FNgnc5K9pzQ+zcVKBFcqhM0u7ZF0u3UOjC73KLrct5N1x
+         c6XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767858323; x=1768463123;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=y8MzTj2AQpCZsmnMsEmnuJi1KdW+tnWPiYOw6+if42I=;
-        b=fxXi6ouSACOW6AoCzJERR/dPDjvMauy0PRb7I5MI4wyd0ZKfjQxqCNT4JZPlLCbFfr
-         3KLSilLSJh32i0MGMnJy4Hk4kOPy+bqAIbz4xrHAq+yaPCyDjG3N1ykUChlM4tXrGBo2
-         Edo3ADFrXkdkt8VJErQmOH6gpelhZ8/F6bESHGIfz7x9RmlU2fbQ5mPLQWCGYBe8Cft8
-         SXFWM1KUZIp0j5CN3H8VGZFh0wXNn/mj7X1IUnq7AjP6ZdaC1rOBkAbv8fevOu0SVOZ5
-         UOROD1YTuMmGnEI0MUH7uuhBgpf+B/g1wK4rc+9+p2/sgdyk0LQr0SjuteeErgNIRhYE
-         4RUA==
-X-Gm-Message-State: AOJu0YxTLh0l+t8/8ngl5dRVjBoWXVJ4sIOR+NXUAaBaGLxTxPju1g4U
-	c68Y9REsYNChnOEiPNjnGGcBdvkTVZgqJA9F0K9+pGLY4sp23wOW3f3/yyYCjva7D6lg8DO4aUW
-	YpHGGsUg=
-X-Gm-Gg: AY/fxX7bHo1KquPINOFa8ONTatMxRWo/jn2HHw7wM1mEUUKI8vXThvT8wizemvtYpJg
-	Y62kAivIJ5T9yAjLlw7RH0QAyP0RidM4pQB1uQ0opdadrxj+ebvmKHQkXou5qIi0lh9oAb00GDg
-	3F5oeYnWpPvSNfH/Cb28bvfEJeA6oDwalJPZN3eGheftG6mLgIish6qDdxpcTwnNURazzj39xud
-	HEEBhuExBjnMLvqzZZeEpfRlVj4iMB94uE4+C52P/2e1BG0/kUmWnIBxKXp2OvO/ZXc8kP29e4n
-	GjDFmIg06pynWCiLlqKZtLIJ7D6jzZlJuFiPOlI/kPWf4exqSHmT8AUZB+LXcxLOsS/ZbdfLyKd
-	VYA0fMBL+vZpyIJm8Jom1D4OpkQ2MDt9goF8r/8oVScixuLhOQ8IvmDYmGasLbyWKdTln2+HaoP
-	9EvS8of1S1WfuqGAtT9T9K1Ug=
-X-Google-Smtp-Source: AGHT+IEwA40Pp6c2k1L2b6rhl5OZfd87TIXPaJgXYLuXAXxpAmg74EgWIsGZYBALSByS+xC0HP6N9g==
-X-Received: by 2002:a05:7300:1802:b0:2a4:3593:466c with SMTP id 5a478bee46e88-2b17d224efdmr4221732eec.8.1767858323352;
-        Wed, 07 Jan 2026 23:45:23 -0800 (PST)
-Received: from MVIN00352.mvista.com ([2406:7400:54:f9ef:e755:9b93:5870:a9a8])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b1706a6386sm8572191eec.14.2026.01.07.23.45.21
+        d=1e100.net; s=20230601; t=1767858383; x=1768463183;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=/z7WNFFvSjPyJgLNPUu99rJXsDMg9AiFUZuMDJnSJZ4=;
+        b=GrvURr8P1g5vsjMZ1xzKmIRDqLrthUbnOmzKn9eEGlGOOT8SPpd95+9Fpveh/yEzQt
+         PGbnIv8FOieVoCLgNrR2Ir7JXhNnjnmR5yNf/wSazN0igKZqm12HdIeaoZEIo23HQJvG
+         MsHN5imZka87+rh/5pkbgZEHGP/lw+e8d4iO1h/36rtB10ljls7hPVtvEWPArfmGayE8
+         DzHTAsksbiLKL0RAQs3mxoFJwzqX+fLlzXhk/Z+BPivYfyI1NNqbYZ7zCazD2/sVqXuP
+         IHzRL1qugOrbMwNp+o8yoQNULoGrH3WeXwL5OHjQH1qp5UDUXOhnF/RY9oDOVimAoFkq
+         bh9g==
+X-Gm-Message-State: AOJu0Yxz7RKoT4afxsof2y6jn/mBzQmXHid5KFquWxYLPqhtSyOdz3gv
+	zFYT4Ns5Wgfo/M02OrKqmsw15ELcAHrnGNdlRRwVoUFDAeChiXDDPp0F0PwTvQ==
+X-Gm-Gg: AY/fxX46e0d+JpKyvSXuA7mSWDxPpdo50GuU1GvNxxfwEaGHJLwt+9PerkyGfGG9wf2
+	/o33mZV3bJNe0/ERBdUxzsO5GaEx46U1kWIZp/sUsJCS7G55V7DoLo/Li4nGLuar9LnREG9odxs
+	6Ei/vu4VNzFUWLCxwmo3vzdw+csfO4hJJvc/rrQ5PAMJbcP/kExWtvhP55ePtCYLQatB/PmF+9+
+	Eze0dlRjvkWk9lVSsOLic2PICg24YgRoih++JUpsNVMPySEPydFrSwIgok2TG7+n5DUMO4pGClx
+	a4GlkkCCz2VDdCKGHqx4fWG5BCmX6kYHYPrbRiPJlwI4TNzAhszbIwn4I61647btT1vCvdyWwG+
+	keqDo7hI1Ix1Ca1u+DrrX2jbt5cquexChMnzzGvA+3qmsUY28+BHfoul9CjZTQbFVQBGU48K5Xe
+	upWIhOGffo
+X-Google-Smtp-Source: AGHT+IFA0yXCObkFU9f59e/ftVCE3JJQ5pU+DYkq1tygqrsJv3vQTae4rmpSbYBPEs6qzbV4jqFqFg==
+X-Received: by 2002:a05:6000:258a:b0:431:1ae:a3be with SMTP id ffacd0b85a97d-432c36280damr6166209f8f.3.1767858382570;
+        Wed, 07 Jan 2026 23:46:22 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0e16f4sm15200292f8f.11.2026.01.07.23.46.21
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Jan 2026 23:45:22 -0800 (PST)
-From: Vijay Anusuri <vanusuri@mvista.com>
+        Wed, 07 Jan 2026 23:46:22 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][scarthgap][patch] net-snmp: Fix CVE-2025-68615
-Date: Thu,  8 Jan 2026 13:15:11 +0530
-Message-ID: <20260108074511.83725-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-python][kirkstone][PATCH 5/5] python3-tqdm: patch CVE-2024-34062
+Date: Thu,  8 Jan 2026 08:46:17 +0100
+Message-ID: <20260108074618.2782232-5-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260108074618.2782232-1-skandigraun@gmail.com>
+References: <20260108074618.2782232-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 07:45:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123247
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 07:46:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123252
 
-Upstream-Status: Backport from https://github.com/net-snmp/net-snmp/commit/b4e6f826d9ddcc2d72eac432746807e1234266db
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-34062
 
-Reference: https://github.com/net-snmp/net-snmp/security/advisories/GHSA-4389-rwqf-q9gq
+Pick the patch mentioned by the NVD advisory.
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../net-snmp/net-snmp/CVE-2025-68615.patch    | 33 +++++++++++++++++++
- .../net-snmp/net-snmp_5.9.4.bb                |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
+ .../python/python3-tqdm/CVE-2024-34062.patch  | 64 +++++++++++++++++++
+ .../python/python3-tqdm_4.64.0.bb             |  1 +
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-tqdm/CVE-2024-34062.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm/CVE-2024-34062.patch b/meta-python/recipes-devtools/python/python3-tqdm/CVE-2024-34062.patch
 new file mode 100644
-index 0000000000..1e6c65f0e5
+index 0000000000..a4aaf6248b
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
-@@ -0,0 +1,33 @@
-+From b4e6f826d9ddcc2d72eac432746807e1234266db Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Sun, 2 Nov 2025 14:48:55 -0800
-+Subject: [PATCH] snmptrapd: Fix out-of-bounds trapOid[] accesses
++++ b/meta-python/recipes-devtools/python/python3-tqdm/CVE-2024-34062.patch
+@@ -0,0 +1,64 @@
++From 35f8daf26d28950aa44a763f19a13c6ee133ff6c Mon Sep 17 00:00:00 2001
++From: Casper da Costa-Luis <tqdm@cdcl.ml>
++Date: Wed, 1 May 2024 14:56:01 +0100
++Subject: [PATCH] cli: eval safety
 +
-+Fixes: https://issues.oss-fuzz.com/issues/457106694
-+Fixes: https://issues.oss-fuzz.com/issues/458668421
-+Fixes: https://issues.oss-fuzz.com/issues/458876071
++- fixes GHSA-g7vv-2v7x-gj9p
 +
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/b4e6f826d9ddcc2d72eac432746807e1234266db]
-+CVE: CVE-2025-68615
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++CVE: CVE-2024-34062
++Upstream-Status: Backport [https://github.com/tqdm/tqdm/commit/4e613f84ed2ae029559f539464df83fa91feb316]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ apps/snmptrapd_handlers.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ tqdm/cli.py | 33 ++++++++++++++++++++++-----------
++ 1 file changed, 22 insertions(+), 11 deletions(-)
 +
-+diff --git a/apps/snmptrapd_handlers.c b/apps/snmptrapd_handlers.c
-+index 6cd126f266..afd93ed0fb 100644
-+--- a/apps/snmptrapd_handlers.c
-++++ b/apps/snmptrapd_handlers.c
-+@@ -1112,6 +1112,12 @@ snmp_input(int op, netsnmp_session *session,
-+ 	     */
-+             if (pdu->trap_type == SNMP_TRAP_ENTERPRISESPECIFIC) {
-+                 trapOidLen = pdu->enterprise_length;
-++                /*
-++                 * Drop packets that would trigger an out-of-bounds trapOid[]
-++                 * access.
-++                 */
-++                if (trapOidLen < 1 || trapOidLen > OID_LENGTH(trapOid) - 2)
-++                    return 1;
-+                 memcpy(trapOid, pdu->enterprise, sizeof(oid) * trapOidLen);
-+                 if (trapOid[trapOidLen - 1] != 0) {
-+                     trapOid[trapOidLen++] = 0;
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-index 95e900b88e..d45cee86f5 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-@@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://0001-Android-Fix-the-build.patch \
-            file://netsnmp-swinst-crash.patch \
-            file://net-snmp-5.9.4-kernel-6.7.patch \
-+           file://CVE-2025-68615.patch \
-           "
- SRC_URI[sha256sum] = "8b4de01391e74e3c7014beb43961a2d6d6fa03acc34280b9585f4930745b0544"
++diff --git a/tqdm/cli.py b/tqdm/cli.py
++index 3ed25fb..e4f587b 100644
++--- a/tqdm/cli.py
+++++ b/tqdm/cli.py
++@@ -21,23 +21,34 @@ def cast(val, typ):
++                 return cast(val, t)
++             except TqdmTypeError:
++                 pass
++-        raise TqdmTypeError(val + ' : ' + typ)
+++        raise TqdmTypeError(f"{val} : {typ}")
++ 
++     # sys.stderr.write('\ndebug | `val:type`: `' + val + ':' + typ + '`.\n')
++     if typ == 'bool':
++         if (val == 'True') or (val == ''):
++             return True
++-        elif val == 'False':
+++        if val == 'False':
++             return False
++-        else:
++-            raise TqdmTypeError(val + ' : ' + typ)
++-    try:
++-        return eval(typ + '("' + val + '")')
++-    except Exception:
++-        if typ == 'chr':
++-            return chr(ord(eval('"' + val + '"'))).encode()
++-        else:
++-            raise TqdmTypeError(val + ' : ' + typ)
+++        raise TqdmTypeError(val + ' : ' + typ)
+++    if typ == 'chr':
+++        if len(val) == 1:
+++            return val.encode()
+++        if re.match(r"^\\\w+$", val):
+++            return eval(f'"{val}"').encode()
+++        raise TqdmTypeError(f"{val} : {typ}")
+++    if typ == 'str':
+++        return val
+++    if typ == 'int':
+++        try:
+++            return int(val)
+++        except ValueError as exc:
+++            raise TqdmTypeError(f"{val} : {typ}") from exc
+++    if typ == 'float':
+++        try:
+++            return float(val)
+++        except ValueError as exc:
+++            raise TqdmTypeError(f"{val} : {typ}") from exc
+++    raise TqdmTypeError(f"{val} : {typ}")
++ 
++ 
++ def posix_pipe(fin, fout, delim=b'\\n', buf_size=256,
+diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.64.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.64.0.bb
+index 3cb45f1a6e..5533b34d25 100644
+--- a/meta-python/recipes-devtools/python/python3-tqdm_4.64.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tqdm_4.64.0.bb
+@@ -5,6 +5,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT & MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=1672e2674934fd93a31c09cf17f34100"
  
--- 
-2.43.0
-
++SRC_URI += "file://CVE-2024-34062.patch"
+ SRC_URI[sha256sum] = "40be55d30e200777a307a7585aee69e4eabb46b4ec6a4b4a5f2d9f11e7d5408d"
+ 
+ inherit pypi python_setuptools_build_meta
 
