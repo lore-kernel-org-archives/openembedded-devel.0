@@ -1,106 +1,132 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CC7AD0D179
-	for <webhook@archiver.kernel.org>; Wed,  7 Jan 2026 22:14:19 +0000 (UTC)
-Received: from mta-65-226.siemens.flowmailer.net (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18464.1767824050969326971
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 255CED14884
+	for <webhook@archiver.kernel.org>; Thu,  8 Jan 2026 01:05:00 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21893.1767834295667105819
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 07 Jan 2026 14:14:11 -0800
+ Wed, 07 Jan 2026 17:04:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=cW/p4xQM;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.226, mailfrom: fm-256628-202601072214082bb661804a000207ea-wbxc6s@rts-flowmailer.siemens.com)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id 202601072214082bb661804a000207ea
-        for <openembedded-devel@lists.openembedded.org>;
-        Wed, 07 Jan 2026 23:14:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=bysgsfA7smYIoHpERJ/Z+E0610J1IFYm86fj4edtXY8=;
- b=cW/p4xQMx36nvNBTRSwx3fyHB8c1HUF0oB7ErsTKkhxlxfmNr3de5GCun2rqUGUTi09NTj
- dI+GQ0BcGCrJelyUQnQhRMo/CKg50FEdghFmiJ1ubdCdFv9vPYyhN1inmC+uqroSzgsntzwt
- dUBkWYvECIvLaqkBWIJOEOhTHUbHQ5eD1y6IUuF4ZMfIHRNqG/J8zDlMwUZQVrl2sO92f9ML
- KuBcV/PHLNFrwCC5fyRBbDgAKsEuP9qHB9eM8X7pVKRiN60e1OiBWf/6HdcJcEKLWoLsLEeV
- x0uGPSpVvSDSYvjM00StCXuzpP2wvmoB+gGdRnyJY2sv4S1iJ8okcnQg==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Pd/V3Z1k;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-78fdb90b670so25804807b3.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 17:04:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767834295; x=1768439095; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=C0W2yuutqnyt6iR0TRnR5Twuatj/UQlH3vscK5qcoHA=;
+        b=Pd/V3Z1kDg95Ic2Pbwha3n9ZBOyuuwoIP/0Rjq1BFjmnlaKSfN8lLbPWTzQ39HZFZY
+         Flxbp59KHHIo+CwGE8sTG05WEJW3U030nFNZ8kW25QyULwCuZZ0a8t6r8jFLtzJtuaU8
+         Ctu0MRy9N6hvl0Holq0QfcemAybFKuFuzTnehSTKPG39qtnQuYMOkpy3Ks1aD/i1C+Pm
+         ZCcs6e7uS6Hdoo/iFB2lJSB7IzHvjJOMF1DuZ+TjxQZDUxWU75CfFmeqUYKuPJoW27aq
+         MiQV7vksz+rBFhLtcBPumHa/FmWWXuTYeY0YuwBTEBfq3pvK/7Uc1SGZuBxvVQbtNgbn
+         cTbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767834295; x=1768439095;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=C0W2yuutqnyt6iR0TRnR5Twuatj/UQlH3vscK5qcoHA=;
+        b=hTvQ3D+HhgIpfgfTGUGkVKXio9t3NDntdXQeiH6DyOCqy/vboQYtLvBK8L+9iz4H+h
+         mWybSoNKVZveO3VtmohTJzvFac6NqgKE8awGKOL6fcF8gOl45dLfA9NvbIN0XkGDcgnP
+         GQkUk1mp4aEO5F4Ajr7Tal3l0Kvnbq+bZ2zKWa1xBRNMcbDmhDIf4aVBv6OU5j0N0O18
+         77AeDzCWEyqaum7mqzFC1oPb67klywoLWI+rIALkxxA0OjZIBjZTdiLizLehTQTASYGP
+         74ZVqkSQPNQnXPS2zngbeR0Qlvw2igeYdNs/0exp+f8+nCIxrnjv3p66E0ZzNTyh4k7X
+         sDug==
+X-Gm-Message-State: AOJu0YxWvA2+hHdUiBZCmvxT+2L1rnKTffKYbTcyKDPadGFQyBCjw3L1
+	dwCrjOfiSqB5rEf5lIug/Z3hdVapmhQFC4qMaIYqkaLmYEZLSzldA0/ZTeNagaVH
+X-Gm-Gg: AY/fxX5BgGczaoincRI2ST38vWA9OG5gsfkNv+KYL38mtNIc9fHz1rEzwzcdHGAxUcP
+	Gc8Rqf3ELA2oTaA9jPolIziQZrmGi6c8f2d6EGzIPC5cS2TY5ogYOKRUkWacugbkMEcTo22d6FF
+	r3PpPcGBlQcRtqwQCyXwkecJxulif2eUairxEwbXSwkTM5EjvaciILkl7Hroyi5JOB+uc6/xynk
+	Ygv66V4Ut1xxkl3FTw9G4MD/Rv2b1nwOfBwj4QPyY+UAFZkzR1nJrhu5MjrV5K1Ylfx7UyR1vCB
+	qzOJ99PRT8uJHfhdDLou5sWX61Q/SzUbHxlvy7fyvV0QXO0OhdhoZMUKXeX/h1wSEUkfQ34RvvL
+	ydcTdpMzvOW+faTMp2NHIU8ow1W9hxWaynxWkxEwtsk9OWNFwtDNrQDSAgK0H2YMaKNamBnWE1x
+	0L6EQ+nWNEZkYrFy1PzUBucov8KJE903gPx8mCKAl/yle3XJZxwWaDnild9Y9wuozbausv3dRes
+	Bcpbq/PylihEbZZsGKoHr7a9e17b/bj/J0G4rLNJDkVLUPc1ovQvHgiLsokEwtb2Q==
+X-Google-Smtp-Source: AGHT+IHiHZnGS7QzIF57gEOmAuAsNvAxb2Znct86suKi8LYnNtiSEOdKkCr96QddYcd89zO43ibMrA==
+X-Received: by 2002:a05:690c:31a:b0:78e:1aa5:e994 with SMTP id 00721157ae682-790b573232amr44303847b3.14.1767834294227;
+        Wed, 07 Jan 2026 17:04:54 -0800 (PST)
+Received: from localhost.localdomain (71-208-41-41.ftmy.qwest.net. [71.208.41.41])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-790aa6dc249sm24482767b3.51.2026.01.07.17.04.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Jan 2026 17:04:53 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][scarthgap][PATCH] net-snmp: patch CVE-2025-68615
-Date: Wed,  7 Jan 2026 23:11:17 +0100
-Message-Id: <20260107221118.3556865-1-peter.marko@siemens.com>
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-xfce][PATCH] xfce4-session: upgrade 4.20.0 -> 4.20.3
+Date: Wed,  7 Jan 2026 20:04:46 -0500
+Message-ID: <20260108010446.31184-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 07 Jan 2026 22:14:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123240
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Jan 2026 01:05:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123241
 
-From: Peter Marko <peter.marko@siemens.com>
+| checking for glib-compile-resources... configure: error: could not find glib-compile-resources.
 
-Pick patch per [1].
+Fix configure failure by adding to EXTRA_OECONF parameters.
 
-[1] https://security-tracker.debian.org/tracker/CVE-2025-68615
+ERROR: xfce4-session-4.20.2-r0 do_package: QA Issue: xfce4-session: Files/directories were installed but not shipped in any package:
+  /usr/share/xfce4
+  /usr/share/xfce4/labwc
+  /usr/share/xfce4/labwc/labwc-environment
+  /usr/share/xfce4/labwc/labwc-rc.xml
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Update FILES to fix QA error.
+
+Changelog: https://gitlab.xfce.org/xfce/xfce4-session/-/tags/xfce4-session-4.20.3
+Changelog: https://gitlab.xfce.org/xfce/xfce4-session/-/tags/xfce4-session-4.20.2
+Changelog: https://gitlab.xfce.org/xfce/xfce4-session/-/tags/xfce4-session-4.20.1
+
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../net-snmp/net-snmp/CVE-2025-68615.patch    | 33 +++++++++++++++++++
- .../net-snmp/net-snmp_5.9.4.bb                |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
+ .../{xfce4-session_4.20.0.bb => xfce4-session_4.20.3.bb} | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.20.0.bb => xfce4-session_4.20.3.bb} (78%)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
-new file mode 100644
-index 0000000000..865a6187c7
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
-@@ -0,0 +1,33 @@
-+From b4e6f826d9ddcc2d72eac432746807e1234266db Mon Sep 17 00:00:00 2001
-+From: Bart Van Assche <bvanassche@acm.org>
-+Date: Sun, 2 Nov 2025 14:48:55 -0800
-+Subject: [PATCH] snmptrapd: Fix out-of-bounds trapOid[] accesses
-+
-+Fixes: https://issues.oss-fuzz.com/issues/457106694
-+Fixes: https://issues.oss-fuzz.com/issues/458668421
-+Fixes: https://issues.oss-fuzz.com/issues/458876071
-+
-+CVE: CVE-2025-68615
-+Upstream-Status: Backport [https://github.com/net-snmp/net-snmp/commit/b4e6f826d9ddcc2d72eac432746807e1234266db]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ apps/snmptrapd_handlers.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/apps/snmptrapd_handlers.c b/apps/snmptrapd_handlers.c
-+index 6cd126f26..afd93ed0f 100644
-+--- a/apps/snmptrapd_handlers.c
-++++ b/apps/snmptrapd_handlers.c
-+@@ -1112,6 +1112,12 @@ snmp_input(int op, netsnmp_session *session,
-+ 	     */
-+             if (pdu->trap_type == SNMP_TRAP_ENTERPRISESPECIFIC) {
-+                 trapOidLen = pdu->enterprise_length;
-++                /*
-++                 * Drop packets that would trigger an out-of-bounds trapOid[]
-++                 * access.
-++                 */
-++                if (trapOidLen < 1 || trapOidLen > OID_LENGTH(trapOid) - 2)
-++                    return 1;
-+                 memcpy(trapOid, pdu->enterprise, sizeof(oid) * trapOidLen);
-+                 if (trapOid[trapOidLen - 1] != 0) {
-+                     trapOid[trapOidLen++] = 0;
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-index 95e900b88e..d45cee86f5 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.9.4.bb
-@@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-            file://0001-Android-Fix-the-build.patch \
-            file://netsnmp-swinst-crash.patch \
-            file://net-snmp-5.9.4-kernel-6.7.patch \
-+           file://CVE-2025-68615.patch \
-           "
- SRC_URI[sha256sum] = "8b4de01391e74e3c7014beb43961a2d6d6fa03acc34280b9585f4930745b0544"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.3.bb
+similarity index 78%
+rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb
+rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.3.bb
+index acff2d42b3..af7ab98ae5 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.20.3.bb
+@@ -9,14 +9,15 @@ DEPENDS = "libwnck3 libsm libxfce4ui libxfce4windowing virtual/libx11"
+ inherit xfce update-alternatives features_check
  
+ SRC_URI += "file://0001-configure.in-hard-code-path-to-iceauth.patch"
+-SRC_URI[sha256sum] = "5229233fe6ee692361cc28724886c5b08e0216d89f09c42d273191d38fd64f85"
++SRC_URI[sha256sum] = "dbf00672c5316a30b7001fe852e6a5ba9f889afeab8a247545a160d4302f1fa2"
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
+ PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
+ 
+-EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen"
++EXTRA_OECONF = "GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
++                GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources"
+ 
+ ALTERNATIVE:${PN} = "x-session-manager"
+ ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
+@@ -30,6 +31,10 @@ FILES:${PN} += " \
+     ${datadir}/themes/Default/balou/* \
+     ${datadir}/polkit-1 \
+     ${datadir}/xdg-desktop-portal/xfce-portals.conf \
++    ${datadir}/xfce4 \
++    ${datadir}/xfce4/labwc \
++    ${datadir}/xfce4/labwc/labwc-environment \
++    ${datadir}/xfce4/labwc/labwc-rc.xml \
+ "
+ 
+ RDEPENDS:${PN} = " \
+-- 
+2.43.0
+
 
