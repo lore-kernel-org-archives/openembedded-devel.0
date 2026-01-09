@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42828D277C9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 418D1D277C8
 	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 23:44:16 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1256.1768002246677372179
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1257.1768002248931325857
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 15:44:06 -0800
+ Fri, 09 Jan 2026 15:44:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RofJbs4Y;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2a0d52768ccso33382555ad.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:44:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JIp116Og;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2a137692691so33394845ad.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:44:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768002246; x=1768607046; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768002248; x=1768607048; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZHnEarxl44aXmkh9c1xGh6gfgGR97URgcZKD3lIpKxE=;
-        b=RofJbs4YL5kf7z6+VzyxKkwjYw0RMxdiSXZrmEJgAa/hCDK6irJVXjpQ8LUagF40uG
-         GeO56ht8xZGbUVD6RFU6LKWjrY6Cti6bnSF0B3UGif6EXalPKwDhuABiMoWDps8NuXDz
-         Xi37wo4vFp2F44IlkQo7KifkQhaduMidy4zYgUKBBrCUSX/PVGPu0/Ph/7KEXGMR3Xrv
-         NTEooPdDen75LeP64K/NMRewh4B+PryIgSghVi5ryeN1SNoGM8g5K4NLJolP4CkVGSvh
-         xN4ywNLFkcaRot9Eiy04CghTUvuKgc/NV4Z6fDYzcJXNFM0eSXEvNf+jtY/8RQqalAO4
-         IdYw==
+        bh=wSfls2iGaeXnM5UtJjdwmuCS/7fjA+ra+/zGk8x6Uo0=;
+        b=JIp116OglX3APV86MS/4yZC86b9PSBe46EXR9L2kU7vmsoWHJTIuAHskeZ1W6CRNJa
+         2WbE7NQbfeKs9B90mtt96a3vsYoYHQNBp+9iLwOw3xUu5+nKQazJIce9SNiYvVQshmiT
+         FPuolyuXOrUPyNoyfKTLceE89K4cHhAeWaqSZXxE3hPfg/LviovcCrGZpvL3v6+g26QP
+         VNCXgNuhSTShUQZWXv9AvLiax/Acike3Fh9/p9xbqHz4ZgwEYnrIJTdAW9vt57i73ZRM
+         LNxPAMaei3oUwcpTwlK1y6kyolNVjBNKYqpjMdzIgQo/r2U0+n3StaoYGmD/Fbh5hJ2h
+         mAgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768002246; x=1768607046;
+        d=1e100.net; s=20230601; t=1768002248; x=1768607048;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ZHnEarxl44aXmkh9c1xGh6gfgGR97URgcZKD3lIpKxE=;
-        b=u0AIlrFuUDdJMqMsPCAQL3cussWr1wG9sihyWbUhShXnqgqKY0ZBYDMY32FgYOYrIS
-         FQYI9eUfsX2Rs28aTUqhUb6DzZCtf/CvFX8RptoA+6xV09CYDi1WdfZbWLIWoGwtHDrb
-         dzjb2PzdLsJJff5j0hKdyc2OqxQPeDrKthaYb9syluLCLz3ueNZ6hvxHQ//TIv1+If2j
-         3+ruBw4AZqlfru5WbTBEbxQFlfiLn2m64WCnHT7DD1NUX5MNZl/ZmXLfasGcLdeTVOGy
-         w2V+zHCBnib4Kh371hBGFcGL97S+obNX820Tc78Xn40MlHLHCan5t1fkpx1IJG7rMLHv
-         r/nw==
-X-Gm-Message-State: AOJu0YzLhuzBrRpkgStfRYOQXc8P0AUPtmJCpLj2QaxWx2mhvI2ppt3U
-	UfM8jUk1ORvxn/LDGn1CXuKIVJkhKxN5VBXqJh3UesqdoJHvpgoITQZoqII/Mw==
-X-Gm-Gg: AY/fxX5KJLZQ/RFHBRT+0XEWF/AfBsCorIt5i2VPyUi5shce4ufqOO8HTaZEPWS2GJO
-	9fS/3fn6mV9Yy5LyDuRQvVCgwE3Xwku29Of/2LSeypQJVqfx9MVleRAKnFFnz8TBoHamtXXTbBE
-	1BaUNQYv1bG94i2w0PqmxEcDw4bFTWtlEHZsibb30xpwIuuFM6V+0RmFy9zc78IhgrYMoeL/IV3
-	wWKZ/tgVE2UVS21G2sLKAAlIqM3icLImIo+IjhLB3ljdAR6f12F5VphqGgWHdX027KwVTL+O5GW
-	XvWNOdiYm8Jm7KIqCEOHrQMMVuUdhWyVy4MQypN1q7XgqmkklMeXiwsYLYfOyB7wrrwmwz13s/q
-	GV9TBvaU7ZHQ5+rsm3cjc2yD6LiM/FAzuS6LzYwas6QaUzVFCiNHJQTfBVAW2PFef5CWnbfwqLn
-	KG8elS5V+QhLTV7iTypw0qyYk=
-X-Google-Smtp-Source: AGHT+IHGXPQuUSp0jxyRCURIS2qd8N+tZgVY0WotcX+zEZMS1/jaisgfekw8cXHmwl39M91tnAfG2g==
-X-Received: by 2002:a17:902:ef46:b0:27e:ec72:f67 with SMTP id d9443c01a7336-2a3ee468629mr113975825ad.6.1768002245807;
-        Fri, 09 Jan 2026 15:44:05 -0800 (PST)
+        bh=wSfls2iGaeXnM5UtJjdwmuCS/7fjA+ra+/zGk8x6Uo0=;
+        b=dXmNedjTCto/5PtWiwHSKfEJRa2Kw+5s6vRCxco3SM/TFwckrb206oKYB0T2HdZX6a
+         7Z6jBDdJAupgE+w8JfHhpHV4r07NATpLpc+s1Cz3L3herYlwaIx1xQqZ01xXnsaI43Lu
+         j6QOWBmp4b2U8jJfMGv0v4AsiQBRedkBcBK65dzt29RHpeS0DB0s293/72h6Br7yspqX
+         cwjTDeUMd+y8KKA5EtPaaM9b3vA/Qb6RJN4xtdmHJ+3IFBYipcIr0B1eUaNFicibjAZu
+         8hIGj0bVBAGRzb5d1x/fJDJAIMABDyiMHdqPQ6zqWfb89SfDzYdTKxwWLkF25VGvcUj2
+         eb8Q==
+X-Gm-Message-State: AOJu0Yzjv20FgPH92qm0NlqC2lGQooS6zj4zU5yHZdsMG6aqhQOR7Q6f
+	KhW9zdfHWvfwp9ahvMNbxqxLHO1z+exSzgPWmOJG4Xbaw8ySX0ksCuQfN1xR7A==
+X-Gm-Gg: AY/fxX40lV7Pt+CvDmwUV2bvd0pUR5o25X6s0dV1MTND1kYXwi2GBddl66iCfJIUp4E
+	DcbHi0jZDc7LqOzusfZku5ZhfEt0ChGm4c3KNhmdgDq1DzNksQY8znG1x/j9BzGP+ovDGvPxkdS
+	UM2cx+3XHStZ+X4P1aUgZrtrvXiqtxtHXsbICKTBgkeg9ZPAH87oJ4qS3D2I94mNIY0oZRFtzNV
+	CEkg7zwyVlQInat6n/jyyf0+cnBve+Gha1h7R+gXFY+Eb5QB3pknsF0rmYphEPy5vLaYMN7pT61
+	1Mm0G5XC12PEpFU4/KRpgeY3G35cvbgK8rcAn78VwTEFQcFTSnwPC9GyoZIWbCyPpQPYoRi3LKN
+	c05UgvNWKMcZyBQb5bQ89Te0QI24vFqKhakIGlHH8/IE9XqDSBBEwOI48KD6cYNY7rcckwlU1Ib
+	kvrFuw7l8m5q4qdnDaKTdkc2w=
+X-Google-Smtp-Source: AGHT+IFGiji6NyPlpUG4W9ppqUY7Qm048b5MAILJPPPsVVUH+e2b9/Aah4UlQ9+9Ek9Cgq2YSV7L0Q==
+X-Received: by 2002:a17:903:2b03:b0:2a1:325b:2cba with SMTP id d9443c01a7336-2a3ee51215fmr107600725ad.53.1768002248101;
+        Fri, 09 Jan 2026 15:44:08 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c3a31dsm113934675ad.9.2026.01.09.15.44.04
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c3a31dsm113934675ad.9.2026.01.09.15.44.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Jan 2026 15:44:05 -0800 (PST)
+        Fri, 09 Jan 2026 15:44:07 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][scarthgap][PATCH 4/5] vlc: patch CVE-2024-46461
-Date: Sat, 10 Jan 2026 12:43:45 +1300
-Message-ID: <20260109234346.3098858-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][scarthgap][PATCH 5/5] opusfile: patch CVE-2022-47021
+Date: Sat, 10 Jan 2026 12:43:46 +1300
+Message-ID: <20260109234346.3098858-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260109234346.3098858-1-ankur.tyagi85@gmail.com>
 References: <20260109234346.3098858-1-ankur.tyagi85@gmail.com>
@@ -68,83 +68,83 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 23:44:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123316
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123317
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-46461
-
-Backport the patch mentioned in the news[1] that fixes this vulnerabililty.
-
-https://code.videolan.org/videolan/vlc/-/blob/3.0.21/NEWS?ref_type=tags#L44
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-47021
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../vlc/vlc/CVE-2024-46461.patch              | 44 +++++++++++++++++++
- .../recipes-multimedia/vlc/vlc_3.0.20.bb      |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
+ .../opusfile/opusfile/CVE-2022-47021.patch    | 45 +++++++++++++++++++
+ .../opusfile/opusfile_0.12.bb                 |  4 +-
+ 2 files changed, 48 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/opusfile/opusfile/CVE-2022-47021.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
+diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile/CVE-2022-47021.patch b/meta-multimedia/recipes-multimedia/opusfile/opusfile/CVE-2022-47021.patch
 new file mode 100644
-index 0000000000..868eb89cac
+index 0000000000..f1bf957949
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
-@@ -0,0 +1,44 @@
-+From aafb226321a525169fd68bf4708e7c6f15e4307a Mon Sep 17 00:00:00 2001
-+From: Thomas Guillem <thomas@gllm.fr>
-+Date: Tue, 9 Jan 2024 06:58:39 +0100
-+Subject: [PATCH] mms: fix potential integer overflow
++++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile/CVE-2022-47021.patch
+@@ -0,0 +1,45 @@
++From 84392e8ce385707de855865dd16d586f9331f2e5 Mon Sep 17 00:00:00 2001
++From: Ralph Giles <giles@thaumas.net>
++Date: Tue, 6 Sep 2022 19:04:31 -0700
++Subject: [PATCH] Propagate allocation failure from ogg_sync_buffer.
 +
-+That could lead to a heap buffer overflow.
++Instead of segfault, report OP_EFAULT if ogg_sync_buffer returns
++a null pointer. This allows more graceful recovery by the caller
++in the unlikely event of a fallible ogg_malloc call.
 +
-+Thanks Andreas Fobian for the security report.
++We do check the return value elsewhere in the code, so the new
++checks make the code more consistent.
 +
-+(cherry picked from commit 467b24dd0f9b0b3d8ba11dd813b393892f7f1ed2)
-+Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
++Thanks to https://github.com/xiph/opusfile/issues/36 for reporting.
 +
-+CVE: CVE-2024-46461
-+Upstream-Status: Backport [https://code.videolan.org/videolan/vlc/-/commit/e7f98f3632d793c3921bfe72595721af191e670e]
-+(cherry picked from commit e7f98f3632d793c3921bfe72595721af191e670e)
++Signed-off-by: Timothy B. Terriberry <tterribe@xiph.org>
++Signed-off-by: Mark Harris <mark.hsj@gmail.com>
++
++CVE: CVE-2022-47021
++Upstream-Status: Backport [https://github.com/xiph/opusfile/commit/0a4cd796df5b030cb866f3f4a5e41a4b92caddf5]
++(cherry picked from commit 0a4cd796df5b030cb866f3f4a5e41a4b92caddf5)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ modules/access/mms/mmstu.c | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
++ src/opusfile.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/modules/access/mms/mmstu.c b/modules/access/mms/mmstu.c
-+index f795b0bd43..f10e38cd43 100644
-+--- a/modules/access/mms/mmstu.c
-++++ b/modules/access/mms/mmstu.c
-+@@ -1316,14 +1316,16 @@ static int  mms_ParsePacket( stream_t *p_access,
-+ 
-+     if( i_packet_id == p_sys->i_header_packet_id_type )
-+     {
-+-        uint8_t *p_reaced = realloc( p_sys->p_header,
-+-                                     p_sys->i_header + i_packet_length - 8 );
-++        size_t new_header_size;
-++        if( add_overflow( p_sys->i_header, i_packet_length, &new_header_size ) )
-++            return -1;
-++        uint8_t *p_reaced = realloc( p_sys->p_header, new_header_size );
-+         if( !p_reaced )
-+             return VLC_ENOMEM;
-+ 
-+         memcpy( &p_reaced[p_sys->i_header], p_data + 8, i_packet_length - 8 );
-+         p_sys->p_header = p_reaced;
-+-        p_sys->i_header += i_packet_length - 8;
-++        p_sys->i_header = new_header_size;
-+ 
-+ /*        msg_Dbg( p_access,
-+                  "receive header packet (%d bytes)",
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
-index 21bc408f6d..bf34146e0a 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
-@@ -25,6 +25,7 @@ SRC_URI = "https://get.videolan.org/${BPN}/${PV}/${BP}.tar.xz \
-            file://0006-configure-Disable-incompatible-function-pointer-type.patch \
-            file://taglib-2.patch \
-            file://0001-taglib-Fix-build-on-x86-32-bit.patch \
-+           file://CVE-2024-46461.patch \
- "
- SRC_URI[sha256sum] = "adc7285b4d2721cddf40eb5270cada2aaa10a334cb546fd55a06353447ba29b5"
++diff --git a/src/opusfile.c b/src/opusfile.c
++index 642c784..edda2d3 100644
++--- a/src/opusfile.c
+++++ b/src/opusfile.c
++@@ -148,6 +148,7 @@ static int op_get_data(OggOpusFile *_of,int _nbytes){
++   int            nbytes;
++   OP_ASSERT(_nbytes>0);
++   buffer=(unsigned char *)ogg_sync_buffer(&_of->oy,_nbytes);
+++  if(OP_UNLIKELY(buffer==NULL))return OP_EFAULT;
++   nbytes=(int)(*_of->callbacks.read)(_of->stream,buffer,_nbytes);
++   OP_ASSERT(nbytes<=_nbytes);
++   if(OP_LIKELY(nbytes>0))ogg_sync_wrote(&_of->oy,nbytes);
++@@ -1527,6 +1528,7 @@ static int op_open1(OggOpusFile *_of,
++   if(_initial_bytes>0){
++     char *buffer;
++     buffer=ogg_sync_buffer(&_of->oy,(long)_initial_bytes);
+++    if(OP_UNLIKELY(buffer==NULL))return OP_EFAULT;
++     memcpy(buffer,_initial_data,_initial_bytes*sizeof(*buffer));
++     ogg_sync_wrote(&_of->oy,(long)_initial_bytes);
++   }
+diff --git a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
+index c775cef5a1..51afce9217 100644
+--- a/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
++++ b/meta-multimedia/recipes-multimedia/opusfile/opusfile_0.12.bb
+@@ -7,7 +7,9 @@ DEPENDS = "libogg openssl libopus"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ac22b992dde6a891f8949c3e2da8576"
+ 
+-SRC_URI = "https://downloads.xiph.org/releases/opus/${BP}.tar.gz"
++SRC_URI = "https://downloads.xiph.org/releases/opus/${BP}.tar.gz \
++           file://CVE-2022-47021.patch \
++"
+ SRC_URI[md5sum] = "45e8c62f6cd413395223c82f06bfa8ec"
+ SRC_URI[sha256sum] = "118d8601c12dd6a44f52423e68ca9083cc9f2bfe72da7a8c1acb22a80ae3550b"
  
 
