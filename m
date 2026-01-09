@@ -1,100 +1,97 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B45ED1A638
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 14:17:49 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10913.1767968260659257231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AB2B9D26D6C
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 15:59:40 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13174.1767974371818996877
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 06:17:40 -0800
+ Fri, 09 Jan 2026 07:59:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ll/IwgoE;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4327555464cso2515527f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 06:17:40 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=T+S5ULIS;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-64b9cb94ff5so6360800a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 07:59:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767968259; x=1768573059; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=JiltHJvymQh2bHZAWJfiP0hpU9J5yUQ8/4BxrU+7NuA=;
-        b=Ll/IwgoEnb9j9pNCASbOVQX/HQ3VvPOlSIuB4rYPOH4KYc8Rg4PYnMSSDS7z0XvY68
-         ykE0oRJ5TVQtuOFkdnUNpd/vOBXAOsir3bP4gJZosP+F6ksSobwQ17rxE2vpNuJdp1f3
-         Ft99OnZ78RhSnl1InQrqUZswdqE1qTsPN+gwEuSCZG84ShdGoaoNyooXPFY1cTZc/hle
-         zAzsH0WVxDRDep5uA3QC2bq/t5v/m9lf/MP3FZrdbaXeX+OZOvvh1vcvkPKo9DOLErko
-         ribOiM9yZOWdrTev0eJXZTpVRVEwJJRRHPrZJP9okOTVbPji8aT5NFSzsStNfzzgleim
-         DfBw==
+        d=konsulko.com; s=google; t=1767974370; x=1768579170; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Nkf2A/1zcg7QHIRYIN0Sr5a8FZTCOJy8OK7gbPiP858=;
+        b=T+S5ULISvXZN2kovxb0FemFkKFBhcGSBFuD85EYcNyuDK/IG7rok1oSNwWE6Mka/Ur
+         pSAipMhCbMEvn3Rbhs035j8iypT5rpEXmfbxlEXGd+NJzQH8kcQOtS9cPdej4xfaBM5U
+         OeHosIUFsI7o1TQUxpH7rudrQ6+anVnKmMa2o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767968259; x=1768573059;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=JiltHJvymQh2bHZAWJfiP0hpU9J5yUQ8/4BxrU+7NuA=;
-        b=JUSDTbqSnDL4Cc9ISBI3ud5Iy58RjxgrZJ5vShpqbAG/M8N5FEsFgVH4jKga2gNSim
-         w+Z1mU/lihugwGEGaR0Wr3bMr1kXM0mYMEAXKEdA6q/I7RPmxLf4Y+/Eehdzrz3wvjwe
-         wOkTg3FuMNBuRuevkI0714AtK6o8mVxsMSHLLO7kUVW+L2YOhA9sh8N1WWtWIohMJAHQ
-         EP2W3U/1E8T4ttE8tlVHw/UuIcfQcGTWehg530bPdeY/ugy6vTFsXodYwS5HyplT8gyV
-         +Xwuz6EOuzOJDQi98CeYMTVWJp4NMie1HWcX6p+VymRqIwl3I86S+XVUzSrhV1l/O8Bp
-         BhZw==
-X-Gm-Message-State: AOJu0Yz9xiTAqt7aOy7YV9tg/SW2DN5nzqsgREvg70Zt4K1NiXILPX8W
-	GxLQlmQiSkS2EaMtg5j9HB+yvzPk/Cc4iibwaDLffkluydpvqVOAmjXWyIHajg==
-X-Gm-Gg: AY/fxX50j3sPl2QOsRN2trFFiDHX67K8tglDCBn3hISw70ODerqOLse9sey35Z5Kivb
-	fkiSco2MlxOoL/15WLPXraOOKSqGH3R0JtAvrerBcU9UK5tLc+3vCXrvxL1JN4S0lkemHZdEVYY
-	n+C22hL0bcOI1T3U+HjA3Vm3BOjR1szyvM1Y1NQVq790Z9+t/qquAMnicCgSi8Hst2A/RmQkHmN
-	8vNdULYcxbQ+JiD5kxFBntG19xGO6g1i6yharoLk/RYSrzFVXDzLLKZwprhXzUzY9jUmX9MsaAW
-	XfQ2plUNc2ECB/Sa6Cyzgcv15hr9oiNgY6dIV7Nh3wTJpZEjKwoAEciRSJtzlIEVVw+3CD3L7Er
-	6aRGk0b+PkJms1m+FOZVs0AzQSHNQOEU8tmy+J5hLJ717FmlgrEHNH0irrj6vm+7wUaMPm3b2sm
-	28p93RSUWu
-X-Google-Smtp-Source: AGHT+IEAm2xIEmABD5/1i8DFirdObvAHYXyiSMhCjQJKdZdBLBqER8D9T1MG0kAIhubNwP/OVAYcIg==
-X-Received: by 2002:a5d:5f53:0:b0:42f:b649:6dc9 with SMTP id ffacd0b85a97d-432c37c3338mr12107559f8f.58.1767968259010;
-        Fri, 09 Jan 2026 06:17:39 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5ee5e3sm22686384f8f.35.2026.01.09.06.17.36
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1767974370; x=1768579170;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Nkf2A/1zcg7QHIRYIN0Sr5a8FZTCOJy8OK7gbPiP858=;
+        b=uyssLbntFXPGhaVaqws+jBlo3kOoBjsaJLVIWe2ft4Eeg8pb5lRYqWysfyZ1ty2R5y
+         CKq31YuybC0qip//8UDqV5ypvvl4wH3Vf9mzYGVtDumDF5VfhFoNr0BpqE8NgdvKaf8l
+         ZDnqoPGsMd4U1T9OnuPq+rAv2sTBnxIqXn0qDYUttWoemopTGXHdg90O/8FXla9oma+M
+         48bw4Vj1PxMfpFIJBbcrJkE1lvsdDacD0LOvpGBLyRwAyw91xXQAhQ4EFg0PouXxxlgG
+         xOBd6YZqx+YAZlpQZT4F6nSFqg3l/pZuZRuxmxQdZBObpGPU7r8pNz4S+qSw4ktMZNo0
+         8ZnA==
+X-Gm-Message-State: AOJu0Yx2tpsARV8QrsAoXtgdKHDBgJSPVRSOgKFczEn7LrKj1vN2l1Kh
+	gyX5GAhxYpLaYULVOpL2y0blcuwX9hJCCXYZZVtlJ/mUjuknroK1dRccpW6/Q6CCxkWT+pGLyaU
+	2pJlP
+X-Gm-Gg: AY/fxX6iil2qdwL6nPudkPtEKlnZnsbyIWLGVfeIh8+6eC4T8taeZPmaL6gz3S/CIJZ
+	oO3WMXa642XSOULImfTJ7+lG9xjl3pHyKxXFV1W7DL6K4twaQauyyTlthP92nrH7T9mxE+LtvvN
+	ku5+O0DrQ2AW27Gck6CaxaSwnDBfXPm2wmhWL6BgZ5MSBiFPS4nipN847jjjV/8sGkzGo7LBpCA
+	xXUjFRj4QepoGnV/7riuSHptqL2eyD5FLfZVRC8aQ9IvTA/nWUTMuKYodl+HXRKC6V0lMwZCG4X
+	SaZIMXIIZcv+x8D2NyawKq0JFbz6IchpTrzPw/7FBCXX0eC3tbR8GPT7f+f6hR964frJy2fFkNt
+	/z7zmawu8BydFj2MEb9Nr3ZorpRHaRIQJp4kpM+fBr4epLOLyFzy2hgp1VIsnoLF+csgoizOSBj
+	ZwPv7tG3LHyI8gomqEtj6+X5AT
+X-Google-Smtp-Source: AGHT+IH/W0AKUN6oyoCgcwraUlZ0IqOTAWl0aHAhUphi2Lr3rxCUJjt13NYHffIa3T2t8wDvhgSXPw==
+X-Received: by 2002:a05:6402:13ce:b0:64d:1a0f:694b with SMTP id 4fb4d7f45d1cf-65097de79a8mr8949789a12.10.1767974369842;
+        Fri, 09 Jan 2026 07:59:29 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6507bf6d4acsm10781444a12.30.2026.01.09.07.59.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Jan 2026 06:17:37 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Fri, 09 Jan 2026 07:59:29 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/3] python3-uvicorn: mark CVE-2020-7694 patched
-Date: Fri,  9 Jan 2026 15:17:33 +0100
-Message-ID: <20260109141734.1596725-2-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260109141734.1596725-1-skandigraun@gmail.com>
-References: <20260109141734.1596725-1-skandigraun@gmail.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-typer: Upgrade 0.21.0 -> 0.21.1
+Date: Fri,  9 Jan 2026 17:59:24 +0200
+Message-ID: <20260109155927.3850975-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 14:17:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123304
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:59:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123306
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2020-7694
+Upgrade to release 0.21.1:
 
-The vulnerability was reported to the project[1], and the commit[2] that
-resolved the issue has been part of the project since version 0.11.7.
+- Fix escaping in help text when rich is installed but not used.
 
-Mark the CVE as patched due to this.
-
-[1]: https://github.com/Kludex/uvicorn/issues/723
-[2]: https://github.com/Kludex/uvicorn/commit/895807f94ea9a8e588605c12076b7d7517cda503
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../python/{python3-typer_0.21.0.bb => python3-typer_0.21.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-typer_0.21.0.bb => python3-typer_0.21.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
-index 3013ff50d0..227202b8cc 100644
---- a/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.40.0.bb
-@@ -12,6 +12,7 @@ inherit pypi python_hatchling ptest-python-pytest
+diff --git a/meta-python/recipes-devtools/python/python3-typer_0.21.0.bb b/meta-python/recipes-devtools/python/python3-typer_0.21.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-typer_0.21.0.bb
+rename to meta-python/recipes-devtools/python/python3-typer_0.21.1.bb
+index cbd0df4b64..0bf2c0ec4f 100644
+--- a/meta-python/recipes-devtools/python/python3-typer_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-typer_0.21.1.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/fastapi/typer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
  
- PYPI_PACKAGE = "uvicorn"
- CVE_PRODUCT = "encode:uvicorn"
-+CVE_STATUS[CVE-2020-7694] = "fixed-version: The vulnerability has been fixed since 0.11.7"
+-SRC_URI[sha256sum] = "c87c0d2b6eee3b49c5c64649ec92425492c14488096dfbc8a0c2799b2f6f9c53"
++SRC_URI[sha256sum] = "ea835607cd752343b6b2b7ce676893e5a0324082268b48f27aa058bdb7d2145d"
  
- RDEPENDS:${PN} = "\
-     python3-click \
+ inherit pypi python_pdm ptest
+ 
+-- 
+2.47.3
+
 
