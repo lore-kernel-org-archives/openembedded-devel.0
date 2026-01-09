@@ -2,63 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEB52D1D48A
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 09:29:06 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6696.1767950943786100637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B36D9D167E2
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 09:29:16 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6761.1767950948707800738
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 01:29:03 -0800
+ Fri, 09 Jan 2026 01:29:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=a7LHJoyy;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2a0d67f1877so33947205ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 01:29:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N98xE5zH;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2a0d0788adaso28613625ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 01:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767950943; x=1768555743; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1767950948; x=1768555748; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tqfqw5OiQYH8z/Gcn/71tBo09CdJ2zUfQQPQAlo6DBQ=;
-        b=a7LHJoyyKeyHBiNZNnzME3HQx5PRB0sEnNw+M8IJwGA1by817iUm5Kbx0/xWvX2KmH
-         sZ999qaDVcxKBH2z+i1iSdSLYr7zmvBQ7TeJfrhZ+bVU/FSbC4fssRuaSQilxu7AqRGw
-         Dh4adc2J7QOSyloJV26Pkcc+zyAEeUUcttp1PNjCT1FB8nnj8gmudmbq/hFEf7+AuhSI
-         VNm6TqMmy7FNIj/hs6vA8CawuUFmxiNxa9e4vaSAdZh7+NoMnqQvTKkhVM04zFwrFLWz
-         /4KWkjNlBhBpgdWuKztrrxQyPkN5nbj80Qs4AZBj4uzF8AJv53Ibp6oPHs/iicFuonbN
-         R4Kg==
+        bh=U2pZHRAiVfSh6E6LajNFH2m98oCuhj9G2bi0Xr/CEbo=;
+        b=N98xE5zHCpyCxJuI8MVwJdQx57wUiuH7zgqbUNxrqXZVmTrSG0rQ1hsPUVTBAkjHMz
+         96ipJ6DDqKBFGWDMR93sDGaz0Vbk+RcjgeAczTkca/BIMlZuN2Svt4DkMYs6/rqQ2uxn
+         f/ocmzuWZIpnv0pVGlTy1/kRr5vKUpT4RATzOo/vDUT4EzDFaweW+tlOmxRdX/A5pLkv
+         yXxaq+WYlRqetVff5olKc5unRG1TB9EBNV2HeeFrwRh54lCz4p/AcFu0AjgMg/oaj+fX
+         6nQYIedZ+6ZCris76w6uYfte6C9/4Nz7eBwiaq4+GNi+G7Pua+zmB/vJf7YL5ujfNtSl
+         Do2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767950943; x=1768555743;
+        d=1e100.net; s=20230601; t=1767950948; x=1768555748;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=tqfqw5OiQYH8z/Gcn/71tBo09CdJ2zUfQQPQAlo6DBQ=;
-        b=ibv6Z/R1IqiFDd8Sjg+wI05w/qzexU+IWbM1irwyBtVByhjERn0NRM1tj9yZjj0nJz
-         N/KcNYQ2TzVQCjWJwqrUeB7MrcGJC3jrkXtuuQc3dbHgcQMvvU0CHmgtAud4AswNFPNb
-         5hxwUCKQWOjJ3J6oKlfjBuqIMNbNXKFbiEUAugIY5OpsSAlHZTX51a1zGXpi2l+PXSAz
-         qaEnEkhOXltQRMDO4Jhov9Gxjqcyst+j4ns5ZyJI+/l5Bda0vM7x1F4dfYxmLUatwsqj
-         XjI3KNtoyF4YB5obh4b1QgZ6P+tfuyXQt5EZ6YsUojKK8kVgH93Arx6KedR7Nw/+j+7h
-         8Jkw==
-X-Gm-Message-State: AOJu0YwPA1g99aLOExF8pxiDKPId81oGLeQZniF/X7NE6lmKb0iXI0mN
-	RFzwVE9Lv1uZsmHgFbDrVy4ceFgDm7zxIMiUF/tUuUTYwZdWuPHX/KqR6gdokg==
-X-Gm-Gg: AY/fxX6VdOxUoiZaMCBE0VXqFlcyhPtlfBDljBKmU9APXDWbb9aILE5LcqXA1Hx6Ji9
-	t1BcbYJdzLjoJeTyM/33Xxxcz7Cz8GpXcwT3nKlN1YgyGfpZLHPzoziIULJHKmb1GkUxSR3m2OH
-	LkCeFNRVDuTmhIY00xc30GzRD0VOqQ3CQJStI+p9o7fLAR4IGor8uHWfrCmL412Qx8Y6OOGEGPB
-	c4SVLHj4z2W+VHJM4RrpCoM5oZiYAfUaljAHhIbRn8QHaEMJKi25TIBOWuW8JkRSNCQhI/G+/iM
-	h8ODepJB3uqRaqLpGOGHyX91QEBpXp7cBlauSvGTsUXKMULdgEck5NorXet8ivNfUsTp1e6sONM
-	1ZldkH/0MMlP6K5odSrBmsIk4+o3I4U1GM/Lt6cpp1ot4ytoczW+J+9F5fkUrzETfAJonLsss1D
-	5IZCEm7Cxj5YvIKXUUsKAs/Yo=
-X-Google-Smtp-Source: AGHT+IHDMqt8OgaLyQb9qPu3QC+/GFtvCyhh0KyY9bV/RCRjF62bumUkxPGlmNAwABUqOugcVhKMFA==
-X-Received: by 2002:a17:902:e888:b0:2a0:e223:f6e6 with SMTP id d9443c01a7336-2a3ee4cb047mr92850965ad.46.1767950942942;
-        Fri, 09 Jan 2026 01:29:02 -0800 (PST)
+        bh=U2pZHRAiVfSh6E6LajNFH2m98oCuhj9G2bi0Xr/CEbo=;
+        b=bO/gvOmttV0Wyl1pedUAN50C4N8cVviLVMKtfIAN62Prt5bBHe3UTKzFXDTQudzbN5
+         TE5IrzlBDzuwvSrbsEGRN2xWhi/mA8lliicYUVmxV0J05VyC+KH9x3ZXCVM6QMaHsgvl
+         FfD7Y1P5zwrgbuolRuHCC2SRxovO8S5N9Uh9X6RpzfhZLMgfFKKpLiYG3uDtH4FTFaUe
+         xyuOVkRbJ+ihaPnXXKP6qVkzNq4CHJz//MnM9uTryMNIMKV8rlvI/qgbCmg+irHwd9UU
+         Th/RlNIEDe5BxVYEYpYInmr0AmYcWhRWyb7njiyLSaAJcFLBepvRo8Cg0IvK2gbqbbse
+         pBPQ==
+X-Gm-Message-State: AOJu0YwSRtoHRZ5IqBr7WNmFPcMnum/38Uso17m2cdGWg7pI8ujEc7VP
+	0+dYAdlE65FoFAaSVrmqwvc/gWbpJtbuAWrnjfvYyFekKEHjh8nAbFXmFnL82A==
+X-Gm-Gg: AY/fxX5t8Q/OYe6eYWe4vKLuZ328Q4tNgg3cJ8Y5JrxH4x2DCQ3Xp0S1eoVhK1jBXr7
+	M9rp2CX+9bUcEsvevP55FvEjUbWohvZC1eA8kSFRePMsqsdk2x0Ttbn9T22wfkwXqD2WNLRIuy+
+	8GRprPnODUDF3/hhiBtCFrrdo2+XNnzZlUsflqLJOHmiRWKyCCpKYBO9QwOBIJRn+Z0QuPAOHge
+	tt0/vpEdP3gGewfSC1OJcc3KKtiqOhIseLkq56xHfZK8OVjBeqjoPazUg6+Klqj1aoSsyBS3tlh
+	dl2RbCmboSNQS/Ne2w/6FAu2ZAZs+Jxp4ZzMKzgWaVsr/JXEx45pf2nmf0sL7szVDesQ2ktKLYL
+	rcrd4MUj7z6NIIg5snyDofdbT2EXz2yOhZULnZCRA99d1EnrmLgr+ycc3N0iOIm8Py4fn9o89xs
+	xJb6MWSM9U8KEWgwBZmNFDfQxIr7AZgcvamA==
+X-Google-Smtp-Source: AGHT+IHqJ+Zo++u383fjjZwDBB4NLNKoM7Il6iFqkh9BvfJH3SddoqySMUmsk13B2n05u0xoGW1reA==
+X-Received: by 2002:a17:902:f682:b0:2a0:a33f:3049 with SMTP id d9443c01a7336-2a3ee40e4a6mr81965295ad.4.1767950947834;
+        Fri, 09 Jan 2026 01:29:07 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3cc88e3sm99529295ad.75.2026.01.09.01.29.00
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3cc88e3sm99529295ad.75.2026.01.09.01.29.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Jan 2026 01:29:02 -0800 (PST)
+        Fri, 09 Jan 2026 01:29:07 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][scarthgap][PATCH 05/12] libcoap: patch CVE-2025-34468
-Date: Fri,  9 Jan 2026 22:28:35 +1300
-Message-ID: <20260109092843.1924568-5-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 07/12] open62541: patch CVE-2024-53429
+Date: Fri,  9 Jan 2026 22:28:37 +1300
+Message-ID: <20260109092843.1924568-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260109092843.1924568-1-ankur.tyagi85@gmail.com>
 References: <20260109092843.1924568-1-ankur.tyagi85@gmail.com>
@@ -67,163 +67,84 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 09:29:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123283
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 09:29:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123285
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-34468
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-53429
+
+Backport the patch mentioned in the comment[1] which fixed this CVE.
+
+[1] https://github.com/open62541/open62541/issues/6825#issuecomment-2460650733
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libcoap/libcoap/CVE-2025-34468.patch      | 127 ++++++++++++++++++
- .../recipes-devtools/libcoap/libcoap_4.3.4.bb |   1 +
- 2 files changed, 128 insertions(+)
- create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/CVE-2025-34468.patch
+ .../opcua/open62541/CVE-2024-53429.patch      | 44 +++++++++++++++++++
+ .../opcua/open62541_1.3.8.bb                  |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/opcua/open62541/CVE-2024-53429.patch
 
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2025-34468.patch b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2025-34468.patch
+diff --git a/meta-networking/recipes-protocols/opcua/open62541/CVE-2024-53429.patch b/meta-networking/recipes-protocols/opcua/open62541/CVE-2024-53429.patch
 new file mode 100644
-index 0000000000..9aee64c3c2
+index 0000000000..7afd7eb752
 --- /dev/null
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2025-34468.patch
-@@ -0,0 +1,127 @@
-+From f191ae30013c205a350cd897fe24d56dde2e593a Mon Sep 17 00:00:00 2001
-+From: Jon Shallow <supjps-libcoap@jpshallow.com>
-+Date: Fri, 12 Sep 2025 10:07:41 +0100
-+Subject: [PATCH] coap_address.c: Validate length of provided host name
++++ b/meta-networking/recipes-protocols/opcua/open62541/CVE-2024-53429.patch
+@@ -0,0 +1,44 @@
++From c69c42bb55f66e1721367dc9c98d0b4a63b14c25 Mon Sep 17 00:00:00 2001
++From: Julius Pfrommer <julius.pfrommer@web.de>
++Date: Tue, 22 Oct 2024 21:47:15 +0200
++Subject: [PATCH] refactor(core): Validate Variant ArrayLength against its
++ ArrayDimensions during binary decode
 +
-+Host names larger than 255 bytes will cause an internal buffer overflow.
++This lead to the fuzzer complaing since we hade the check for _encode
++but not for _decode. This is not a direct memory issue per se. But the
++consistency check allows early discovery of problematic values and
++can potentially remove bugs where the user relies on the array
++dimensions and the array length to match.
 +
-+Hostnames provided to coap_resolve_address_info() now have their length validated.
-+
-+Discovered by SecMate (https://secmate.dev).
-+
-+Sanity check host lengths when parsing a CoAP URI when using the coap_split_uri()
-+function.
-+
-+CVE: CVE-2025-34468
-+Upstream-Status: Backport [https://github.com/obgm/libcoap/commit/30db3ea]
++CVE: CVE-2024-53429
++Upstream-Status: Backport [https://github.com/open62541/open62541/commit/b9473527623125b5ca264dae4551f8cc414b3bc3]
++(cherry picked from commit b9473527623125b5ca264dae4551f8cc414b3bc3)
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ examples/coap-client.c | 11 ++++++-----
-+ src/coap_address.c     |  9 +++++++--
-+ src/coap_uri.c         | 20 +++++++++++++++++++-
-+ 3 files changed, 32 insertions(+), 8 deletions(-)
++ src/ua_types_encoding_binary.c | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
 +
-+diff --git a/examples/coap-client.c b/examples/coap-client.c
-+index 18b6777f..8512fbbd 100644
-+--- a/examples/coap-client.c
-++++ b/examples/coap-client.c
-+@@ -822,6 +822,12 @@ cmdline_oscore(char *arg) {
-+ static int
-+ cmdline_uri(char *arg) {
-+ 
-++  /* Sanity check the provided (Proxy)Uri */
-++  if (coap_split_uri((unsigned char *)arg, strlen(arg), &uri) < 0) {
-++    coap_log_err("invalid CoAP URI '%s'\n", arg);
-++    return -1;
-++  }
-++
-+   if (!proxy_scheme_option && proxy.host.length) {
-+     /* create Proxy-Uri from argument */
-+     size_t len = strlen(arg);
-+@@ -836,11 +842,6 @@ cmdline_uri(char *arg) {
-+                                          (unsigned char *)arg));
-+ 
-+   } else {      /* split arg into Uri-* options */
-+-    if (coap_split_uri((unsigned char *)arg, strlen(arg), &uri) < 0) {
-+-      coap_log_err("invalid CoAP URI\n");
-+-      return -1;
-+-    }
-+-
-+     /* Need to special case use of reliable */
-+     if (uri.scheme == COAP_URI_SCHEME_COAPS && reliable) {
-+       if (!coap_tls_is_supported()) {
-+diff --git a/src/coap_address.c b/src/coap_address.c
-+index 2dabb366..6cd55ba5 100644
-+--- a/src/coap_address.c
-++++ b/src/coap_address.c
-+@@ -469,10 +469,15 @@ coap_resolve_address_info(const coap_str_const_t *address,
-+ #endif /* COAP_AF_UNIX_SUPPORT */
-+ 
-+   memset(addrstr, 0, sizeof(addrstr));
-+-  if (address && address->length)
-++  if (address && address->length) {
-++    if (address->length >= sizeof(addrstr)) {
-++      coap_log_warn("Host name too long (%zu > 255)\n", address->length);
-++      return NULL;
-++    }
-+     memcpy(addrstr, address->s, address->length);
-+-  else
-++  } else {
-+     memcpy(addrstr, "localhost", 9);
-++  }
-+ 
-+   memset((char *)&hints, 0, sizeof(hints));
-+   hints.ai_socktype = 0;
-+diff --git a/src/coap_uri.c b/src/coap_uri.c
-+index 6f658730..f2360ceb 100644
-+--- a/src/coap_uri.c
-++++ b/src/coap_uri.c
-+@@ -59,6 +59,15 @@ coap_uri_info_t coap_uri_scheme[COAP_URI_SCHEME_LAST] = {
-+   { "coaps+ws",    443,               0, COAP_URI_SCHEME_COAPS_WS }
-+ };
-+ 
-++/*
-++ * Returns  0 All OK
-++ *         -1 Insufficient / Invalid parameters
-++ *         -2 No '://'
-++ *         -3 Ipv6 definition error or no host defined after scheme://
-++ *         -4 Invalid port value
-++ *         -5 Port defined for Unix domain
-++ *         -6 Hostname > 255 chars
-++ */
-+ static int
-+ coap_split_uri_sub(const uint8_t *str_var,
-+                    size_t len,
-+@@ -165,8 +174,10 @@ coap_split_uri_sub(const uint8_t *str_var,
-+   if (len && *p == '[') {
-+     /* IPv6 address reference */
-+     ++p;
-++    ++q;
-++    --len;
-+ 
-+-    while (len && *q != ']') {
-++    while (len && *q != ']' && (isxdigit(*q) || *q == ':')) {
-+       ++q;
-+       --len;
-+     }
-+@@ -197,6 +208,12 @@ coap_split_uri_sub(const uint8_t *str_var,
-+       goto error;
++diff --git a/src/ua_types_encoding_binary.c b/src/ua_types_encoding_binary.c
++index 7b3a4f6b8..0272ba399 100644
++--- a/src/ua_types_encoding_binary.c
+++++ b/src/ua_types_encoding_binary.c
++@@ -1093,9 +1093,18 @@ DECODE_BINARY(Variant) {
 +     }
 + 
-++    if ((int)(q - p) > 255) {
-++      coap_log_warn("Host name length too long (%d > 255)\n", (int)(q - p));
-++      res = -6;
-++      goto error;
++     /* Decode array dimensions */
++-    if(isArray && (encodingByte & (u8)UA_VARIANT_ENCODINGMASKTYPE_DIMENSIONS) > 0)
+++    if(isArray && (encodingByte & (u8)UA_VARIANT_ENCODINGMASKTYPE_DIMENSIONS) > 0) {
++         ret |= Array_decodeBinary((void**)&dst->arrayDimensions, &dst->arrayDimensionsSize,
++                                   &UA_TYPES[UA_TYPES_INT32], ctx);
+++        /* Validate array length against array dimensions */
+++        size_t totalSize = 1;
+++        for(size_t i = 0; i < dst->arrayDimensionsSize; ++i) {
+++            if(dst->arrayDimensions[i] == 0)
+++                return UA_STATUSCODE_BADDECODINGERROR;
+++            totalSize *= dst->arrayDimensions[i];
+++        }
+++        UA_CHECK(totalSize == dst->arrayLength, ret = UA_STATUSCODE_BADDECODINGERROR);
 ++    }
-++
-+     COAP_SET_STR(&uri->host, q - p, p);
-+   }
 + 
-+@@ -222,6 +239,7 @@ coap_split_uri_sub(const uint8_t *str_var,
-+ 
-+       /* check if port number is in allowed range */
-+       if (uri_port > UINT16_MAX) {
-++        coap_log_warn("Port number too big (%ld > 65535)\n", uri_port);
-+         res = -4;
-+         goto error;
-+       }
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-index da0cf50f92..efea6d24f8 100644
---- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
-            file://CVE-2024-0962.patch \
-            file://CVE-2024-31031.patch \
-            file://CVE-2025-59391.patch \
-+           file://CVE-2025-34468.patch \
-            "
- SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
++     ctx->depth--;
++     return ret;
+diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb b/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
+index 19a50aee3a..ed859c9c92 100644
+--- a/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
++++ b/meta-networking/recipes-protocols/opcua/open62541_1.3.8.bb
+@@ -19,6 +19,7 @@ SRC_URI = " \
+     git://github.com/OPCFoundation/UA-Nodeset;name=ua-nodeset;protocol=https;branch=v1.04;destsuffix=git/deps/ua-nodeset \
+     git://github.com/LiamBindle/MQTT-C.git;name=mqtt-c;protocol=https;branch=master;destsuffix=git/deps/mqtt-c \
+     file://0001-fix-build-do-not-install-git-files.patch \
++    file://CVE-2024-53429.patch \
+ "
  
+ S = "${WORKDIR}/git"
 
