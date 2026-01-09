@@ -1,486 +1,128 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80614D1681C
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 11:51:27 +0000 (UTC)
-Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8403.1767959485001017234
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3ED3D1A60F
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 12:22:27 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8883.1767961337844658072
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 03:51:25 -0800
+ Fri, 09 Jan 2026 04:22:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout12.t-online.de (Postfix) with SMTP id AD460F3E1
-	for <openembedded-devel@lists.openembedded.org>; Fri,  9 Jan 2026 12:50:55 +0100 (CET)
-Received: from [192.168.178.36] ([79.219.239.35]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1veB10-24lpya0; Fri, 9 Jan 2026 12:50:50 +0100
-Date: Fri, 09 Jan 2026 12:50:45 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv2] gnome-disk-utility: remove outdated
- patch
-To: openembedded-devel@lists.openembedded.org
-Message-Id: <L8IL8T.A7U5A69AD7IK@t-online.de>
-In-Reply-To: <18890DAA9A5AA01F.2339348@lists.openembedded.org>
-References: <18890DAA9A5AA01F.2339348@lists.openembedded.org>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=V7cR4G7e;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=ivbn8bMM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60961lNW3142583
+	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jan 2026 12:22:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	sg+crTIVzuX7pw0uh1oBeM41fozWbeEGMkiV/1ZzrZ0=; b=V7cR4G7eIoT6zVli
+	aK0QnWxyieTmyFyGzREeO7fXONuabO4r/uOX/7SGK7h7I7iKskfjFg6qO+12sRvi
+	fcBlLt0G5iZ3aFnUC2a35x+UQnavgvK/tMVM1kGRruq6kEIWERzt4XPGygh6EjF4
+	hmuReVlbkQi/19LSTr5g8fxbyW9PfV9Yor1lfojU4PJpRhSkrFBsJO2D/CnRjai/
+	xrwvnlBbt14dvJevuWoNBPefR98M9Q6PWZIyTUNMkmhfuE7ayzfbkd+Fml1NYJgq
+	zbAKKDS0uyhq4+tIxem801KvNeZz9rmgTpcUZ3sqr0cTbYmiQORMSxtEjr/kqf6K
+	H6cIvQ==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bjj8j2kyc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 12:22:16 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-8823f4666abso103028436d6.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 04:22:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1767961336; x=1768566136; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sg+crTIVzuX7pw0uh1oBeM41fozWbeEGMkiV/1ZzrZ0=;
+        b=ivbn8bMMjEYbEnrBrSPBId2u8bcIG5wNGRc8r6FTKnP4SMU8DdhqydRNVVSRsV9MfS
+         lOn+q8qaAE4IbYGwt/jNxQreAWjglgyWfXLiBiu354T5LU3VXS/MM0VBjZYAr3nJfUmj
+         a9AhaeLnCfChgucDL8GBYjDRDwBE5I7FydtmsKIb18KjubyA5qwI7nfEQowu2DMB3/5t
+         yuS1zQo5puqKFZrrE19eY5QVjvKzcNJu9eLG6RmQXNAly/0GyiYq3e/bmbfdZOTt1B+E
+         lTLhNJ1cLF5lNfvpkeLNCf8bV3DmsEOap3DeZ2h8mgHQpxYN2ymFauT2VtcYMItKLAwX
+         E8cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767961336; x=1768566136;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=sg+crTIVzuX7pw0uh1oBeM41fozWbeEGMkiV/1ZzrZ0=;
+        b=KNwnAIAlQerEKDos+C0yHlsXVO8qCVL+eVT38SdXhyD7oz0e/sPWsd6XFONiWazzaL
+         D30gRq7ytqrJW4QApGewxzlSzyW7Hhmwd/dIJvac7mUeBNTJwBu8LaPDT6ZrsKDma9uz
+         6rEiuRi/i8EbX5BiiEydSh6dRwn2wGK6REOkuDwSusa4XpwfNX8vmVJ2YCcbBjnBNTxc
+         1o+8dE86BCTR3OErmW74vunV/aQjdjfJZS0Lc6530zQEpB8Ix3mzP0Fn6qFsh86BYY0V
+         4a/yxaeSoSm0SyWmKSjBqam2AW3U0fh+oNAAAiZNQ35Ts1BX4yhCSwTWjbYLf9uow09W
+         /q0g==
+X-Forwarded-Encrypted: i=1; AJvYcCXvFtVtg9BxZp3TH/99UnuVvWPzYEPM8hMqkCshhJAdqqLwOtxLw1kR7RnJpPR1URykfJeO441QmNbbJTAmFfKlheA=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YypT6tXEl0YKyHCnnuy8LZQIizc5fqHnykfwMSnd9Eub4F+w8dD
+	VQdEWfmJ+KvCz/RlJJ1jDIPlmhJgkUya+vUHyc2cgY/akZTFmDe9frcRPMwSx2gsnGxRRQvyjIA
+	ryF/rOfpdp/MRbpkMQTSZoNdlwcNt71fskqNO0vMrB6T1cutUzUCzb/id+RO8fkm3hwNJRo/VMV
+	3AX8+50H3gYN4QmJXlqNS1XLWaX4VzFhp1+pafqMN0nLv76yFZvlXPgaOMdD8=
+X-Gm-Gg: AY/fxX50u4MOX3+lDIlLIW6LEEZ6mWQG4uPvpkbTD+bS4Pxn6I8duRWe4FQA3ExS2c5
+	wMO/XiBiArBwpEGpJ7MQ7OmAHiMIVq9svNHouc53l+fXB2kHjMwYnUhydzjwJs1SteSEF3efUEz
+	dOk1SHgkOhzcErpevoN8apckLKbml5CFpm1UF7mq1TQf8wmQLVm9a025iOtK349EF8
+X-Received: by 2002:a05:6214:23cd:b0:880:477a:9950 with SMTP id 6a1803df08f44-890843160e9mr138306926d6.61.1767961335749;
+        Fri, 09 Jan 2026 04:22:15 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEKXzp7ncNB9pTBQgSdzQht+E2Dca+52ozgCP06i/xMv1BjAAgCNuDTRbM6R6Dae05jpx02Qi8il6OsBFCKYxE=
+X-Received: by 2002:a05:6214:23cd:b0:880:477a:9950 with SMTP id
+ 6a1803df08f44-890843160e9mr138306566d6.61.1767961335366; Fri, 09 Jan 2026
+ 04:22:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-oPGoPeBKmCeClBYbMmDT"
-X-TOI-EXPURGATEID: 150726::1767959450-8FFFC85C-74650917/0/0 CLEAN NORMAL
-X-TOI-MSGID: 4df49d74-bc88-4acc-b16d-5ba9861055c3
+References: <20260109092843.1924568-1-ankur.tyagi85@gmail.com>
+ <20260109092843.1924568-12-ankur.tyagi85@gmail.com> <7fa88f7a-3414-460a-a351-25c951ffddb3@gmail.com>
+In-Reply-To: <7fa88f7a-3414-460a-a351-25c951ffddb3@gmail.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Fri, 9 Jan 2026 20:22:03 +0800
+X-Gm-Features: AZwV_QgHFiZGALxe6WVYGIp3PBsQjaPDjjs72Ps1LFUeW9bRlw2-_h5KBMb7kOQ
+Message-ID: <CA+s=J=xEEB4g4EPjVEqwRqMf3w1EfTwJcHvUhzzwtnLXTvAe1g@mail.gmail.com>
+Subject: Re: [oe][meta-networking][scarthgap][PATCH 12/12] unbound: patch CVE-2025-5994
+To: skandigraun@gmail.com
+Cc: ankur.tyagi85@gmail.com, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDA5MSBTYWx0ZWRfXyx1GQFI/PiHG
+ iqbNSJkHWi8dg2rsOFNxgz9ev8tpcIS7rCwlcSbkH0skVn3IKunpqF2m5cmWGRHhjQE+5azXKeF
+ WbEYYuTzdB1eZv/NHhFIt7zXTPy0k5WUYEqYcbxFNM025iUxEzRSlkGfTh8/ZATfBynBfPUfM5E
+ nCbGkHF8q9qWLHFInRhhhYG8jWqz4ZoRAca/YS6cBQrIYe4Akig1NAKwMVXi6GQkkDDIp6tmtEl
+ ksfvY6VjPIXRcmNlwDD9QY56Y2elG341a9ZKmjTgApsbZfJVPqJN5ilIfeHSF/8oz7DAOkmCfrs
+ 8c3sEmaV89q+ItOHHN8Kjr/QV5twmQIfp/Z0PvHoBqeiM8XoZK4kww3XyxIZsPQvH4U3dUyiDVJ
+ Rt3f3iGZffOHQbc98JkpOUgO/XUrq96lDler51pDGi4zgrT19ZhvcHFyXEpCEU6MWcv8lZ2PS8d
+ wao3alwvfXtSNUwz+Zw==
+X-Authority-Analysis: v=2.4 cv=JIs2csKb c=1 sm=1 tr=0 ts=6960f2f8 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8
+ a=LfyobFfSOxCvlWM3D3UA:9 a=QEXdDO2ut3YA:10 a=UzISIztuOb4A:10
+ a=OIgjcC2v60KrkQgK7BGD:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-GUID: lECFL45QcTJe4JdnG2bzeQEzF-jtS9ZD
+X-Proofpoint-ORIG-GUID: lECFL45QcTJe4JdnG2bzeQEzF-jtS9ZD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-09_03,2026-01-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 priorityscore=1501 lowpriorityscore=0
+ impostorscore=0 bulkscore=0 adultscore=0 spamscore=0 clxscore=1015
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2512120000
+ definitions=main-2601090091
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 11:51:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123297
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 12:22:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123298
 
---=-oPGoPeBKmCeClBYbMmDT
-Content-Type: text/plain; charset=us-ascii; format=flowed
+On Fri, Jan 9, 2026 at 7:42=E2=80=AFPM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Looking at this, it has been submitted by another contributor some time
+> ago[1], but it seems it wasn't applied. Was this missed accidentally, or
+> are there some issues with it?
 
-v2: also remove the x11 packageconfig
+It was missed. I will check and include it in next testing.
 
-On Fri, Jan 9 2026 at 12:48:21 +01:00:00, Markus Volk via 
-lists.openembedded.org <f_l_k=t-online.de@lists.openembedded.org> wrote:
-> Dont remove libcanberra dependency. Meanwhile it can be built without
-> pulling in gtk2
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...tility-remove-libcanberra-dependency.patch | 135 
-> ------------------
->  .../gnome-disk-utility_46.1.bb                |   7 +-
->  2 files changed, 3 insertions(+), 139 deletions(-)
->  delete mode 100644 
-> meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-> 
-> diff --git 
-> a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch 
-> b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-> deleted file mode 100644
-> index 675f4635ba..0000000000
-> --- 
-> a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-> +++ /dev/null
-> @@ -1,135 +0,0 @@
-> -From 36cbdd82f21e4ef37da9f05c1c5e770b6cd66df2 Mon Sep 17 00:00:00 
-> 2001
-> -From: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
-> -Date: Sun, 29 May 2022 06:35:26 +0200
-> -Subject: [PATCH] gnome-disk-utility: remove libcanberra dependency
-> -
-> -libcanberra-gtk3 module isn't buildable for wayland.
-> -Remove its dpendency.
-> -
-> -Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> -
-> -Upstream-Status: Inappropriate
-> ----
-> - meson.build                           |  1 -
-> - src/disks/gducreatediskimagedialog.c  | 27 
-> ++-------------------------
-> - src/disks/gdurestorediskimagedialog.c | 20 +-------------------
-> - src/disks/meson.build                 |  1 -
-> - 4 files changed, 3 insertions(+), 46 deletions(-)
-> -
-> -diff --git a/meson.build b/meson.build
-> -index 0daf7f82..cba6c74b 100644
-> ---- a/meson.build
-> -+++ b/meson.build
-> -@@ -72,7 +72,6 @@ dvdread_dep = dependency('dvdread', version: '>= 
-> 4.2.0')
-> - gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.31.0')
-> - gmodule_dep = dependency('gmodule-2.0')
-> - gtk_dep = dependency('gtk+-3.0', version: '>= 3.16.0')
-> --libcanberra_dep = dependency('libcanberra-gtk3', version: '>= 0.1')
-> - # Keep the version here synchronised with subprojects/libhandy.wrap
-> - libhandy_dep = dependency('libhandy-1', version: '>= 1.5.0', 
-> fallback: ['libhandy', 'libhandy_dep'])
-> - liblzma_dep = dependency('liblzma', version: '>= 5.0.5')
-> -diff --git a/src/disks/gducreatediskimagedialog.c 
-> b/src/disks/gducreatediskimagedialog.c
-> -index 181b2892..a22004cf 100644
-> ---- a/src/disks/gducreatediskimagedialog.c
-> -+++ b/src/disks/gducreatediskimagedialog.c
-> -@@ -21,8 +21,6 @@
-> - #include <sys/ioctl.h>
-> - #include <linux/fs.h>
-> -
-> --#include <canberra-gtk.h>
-> --
-> - #include "gduapplication.h"
-> - #include "gduwindow.h"
-> - #include "gducreatediskimagedialog.h"
-> -@@ -297,19 +295,7 @@ create_disk_image_populate (DialogData *data)
-> -
-> - static void
-> - play_read_error_sound (DialogData *data)
-> --{
-> --  const gchar *sound_message;
-> --
-> --  /* Translators: A descriptive string for the sound played when
-> --   * there's a read error that's being ignored, see
-> --   * CA_PROP_EVENT_DESCRIPTION
-> --   */
-> --  sound_message = _("Disk image read error");
-> --  ca_gtk_play_for_widget (GTK_WIDGET (data->window), 0,
-> --                          CA_PROP_EVENT_ID, "dialog-warning",
-> --                          CA_PROP_EVENT_DESCRIPTION, sound_message,
-> --                          NULL);
-> --}
-> -+{}
-> -
-> - /* 
-> ---------------------------------------------------------------------------------------------------- 
-> */
-> -
-> -@@ -403,16 +389,7 @@ update_job (DialogData *data,
-> -
-> - static void
-> - play_complete_sound (DialogData *data)
-> --{
-> --  const gchar *sound_message;
-> --
-> --  /* Translators: A descriptive string for the 'complete' sound, 
-> see CA_PROP_EVENT_DESCRIPTION */
-> --  sound_message = _("Disk image copying complete");
-> --  ca_gtk_play_for_widget (GTK_WIDGET (data->window), 0,
-> --                          CA_PROP_EVENT_ID, "complete",
-> --                          CA_PROP_EVENT_DESCRIPTION, sound_message,
-> --                          NULL);
-> --}
-> -+{}
-> -
-> - /* 
-> ---------------------------------------------------------------------------------------------------- 
-> */
-> -
-> -diff --git a/src/disks/gdurestorediskimagedialog.c 
-> b/src/disks/gdurestorediskimagedialog.c
-> -index bccf97e9..e7ec81cb 100644
-> ---- a/src/disks/gdurestorediskimagedialog.c
-> -+++ b/src/disks/gdurestorediskimagedialog.c
-> -@@ -17,8 +17,6 @@
-> - #include <sys/ioctl.h>
-> - #include <linux/fs.h>
-> -
-> --#include <canberra-gtk.h>
-> --
-> - #include "gduapplication.h"
-> - #include "gduwindow.h"
-> - #include "gdurestorediskimagedialog.h"
-> -@@ -606,23 +604,7 @@ update_job (DialogData *data,
-> -
-> - static void
-> - play_complete_sound (DialogData *data)
-> --{
-> --  const gchar *sound_message;
-> --
-> --  /* Translators: A descriptive string for the 'complete' sound, 
-> see CA_PROP_EVENT_DESCRIPTION */
-> --  sound_message = _("Disk image copying complete");
-> --  ca_gtk_play_for_widget (GTK_WIDGET (data->dialog), 0,
-> --                          CA_PROP_EVENT_ID, "complete",
-> --                          CA_PROP_EVENT_DESCRIPTION, sound_message,
-> --                          NULL);
-> --
-> --  if (data->inhibit_cookie > 0)
-> --    {
-> --      gtk_application_uninhibit (GTK_APPLICATION 
-> (gdu_window_get_application (data->window)),
-> --                                 data->inhibit_cookie);
-> --      data->inhibit_cookie = 0;
-> --    }
-> --}
-> -+{}
-> -
-> - /* 
-> ---------------------------------------------------------------------------------------------------- 
-> */
-> -
-> -diff --git a/src/disks/meson.build b/src/disks/meson.build
-> -index 35b2f103..6fc367b4 100644
-> ---- a/src/disks/meson.build
-> -+++ b/src/disks/meson.build
-> -@@ -85,7 +85,6 @@ deps = [
-> -   dvdread_dep,
-> -   gio_unix_dep,
-> -   gmodule_dep,
-> --  libcanberra_dep,
-> -   libgdu_dep,
-> -   libhandy_dep,
-> -   liblzma_dep,
-> ---
-> -2.25.1
-> -
-> diff --git 
-> a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb 
-> b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-> index 6f910c4c13..08854befa8 100644
-> --- 
-> a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-> +++ 
-> b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-> @@ -2,11 +2,12 @@ SUMMARY = "GNOME disk utility"
->  LICENSE = "GPL-2.0-only"
->  LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" 
-> <file://copying;md5=b234ee4d69f5fce4486a80fdaf4a4263/>
-> 
-> -SECTION = "x11/gnome"
-> +SECTION = "gnome"
-> 
->  DEPENDS = " \
->      desktop-file-utils-native \
->      gtk+3 \
-> +    libcanberra \
->      libdvdread \
->      libnotify \
->      libsecret \
-> @@ -22,13 +23,11 @@ inherit gnomebase gsettings gtk-icon-cache 
-> gettext features_check mime-xdg
->  ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
->  REQUIRED_DISTRO_FEATURES = "polkit"
-> 
-> -PACKAGECONFIG ??= "${@bb.utils.filter 
-> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'systemd x11', d)}"
-> +PACKAGECONFIG ??= "${@bb.utils.filter 
-> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'systemd', d)}"
-> 
->  # As soon as elogind is of interest this needs rework: meson option 
-> is combo
->  PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
-> -PACKAGECONFIG[x11] = ",,libcanberra"
-> 
-> -SRC_URI:append = " ${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'wayland', 
-> 'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', 
-> <file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch',/> 
-> '', d)}"
->  SRC_URI[archive.sha256sum] = 
-> "c24e9439a04d70bcfae349ca134c7005435fe2b6f452114df878bff0b89bbffe"
-> 
->  EXTRA_OEMESON = "-Dman=false"
-> --
-> 2.52.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123296): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/123296>
-> Mute This Topic: <https://lists.openembedded.org/mt/117173371/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+Thanks,
 
-
---=-oPGoPeBKmCeClBYbMmDT
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>v2: also remove the x11 packageconfig</div></div><div id="geary-quote" dir="auto"><br>On Fri, Jan 9 2026 at 12:48:21 +01:00:00, Markus Volk via lists.openembedded.org &lt;f_l_k=t-online.de@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Dont remove libcanberra dependency. Meanwhile it can be built without
-pulling in gtk2
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
----
- ...tility-remove-libcanberra-dependency.patch | 135 ------------------
- .../gnome-disk-utility_46.1.bb                |   7 +-
- 2 files changed, 3 insertions(+), 139 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-deleted file mode 100644
-index 675f4635ba..0000000000
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility/0001-gnome-disk-utility-remove-libcanberra-dependency.patch
-+++ /dev/null
-@@ -1,135 +0,0 @@
--From 36cbdd82f21e4ef37da9f05c1c5e770b6cd66df2 Mon Sep 17 00:00:00 2001
--From: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
--Date: Sun, 29 May 2022 06:35:26 +0200
--Subject: [PATCH] gnome-disk-utility: remove libcanberra dependency
--
--libcanberra-gtk3 module isn't buildable for wayland.
--Remove its dpendency.
--
--Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
--
--Upstream-Status: Inappropriate
-----
-- meson.build                           |  1 -
-- src/disks/gducreatediskimagedialog.c  | 27 ++-------------------------
-- src/disks/gdurestorediskimagedialog.c | 20 +-------------------
-- src/disks/meson.build                 |  1 -
-- 4 files changed, 3 insertions(+), 46 deletions(-)
--
--diff --git a/meson.build b/meson.build
--index 0daf7f82..cba6c74b 100644
----- a/meson.build
--+++ b/meson.build
--@@ -72,7 +72,6 @@ dvdread_dep = dependency('dvdread', version: '&gt;= 4.2.0')
-- gio_unix_dep = dependency('gio-unix-2.0', version: '&gt;= 2.31.0')
-- gmodule_dep = dependency('gmodule-2.0')
-- gtk_dep = dependency('gtk+-3.0', version: '&gt;= 3.16.0')
---libcanberra_dep = dependency('libcanberra-gtk3', version: '&gt;= 0.1')
-- # Keep the version here synchronised with subprojects/libhandy.wrap
-- libhandy_dep = dependency('libhandy-1', version: '&gt;= 1.5.0', fallback: ['libhandy', 'libhandy_dep'])
-- liblzma_dep = dependency('liblzma', version: '&gt;= 5.0.5')
--diff --git a/src/disks/gducreatediskimagedialog.c b/src/disks/gducreatediskimagedialog.c
--index 181b2892..a22004cf 100644
----- a/src/disks/gducreatediskimagedialog.c
--+++ b/src/disks/gducreatediskimagedialog.c
--@@ -21,8 +21,6 @@
-- #include &lt;sys/ioctl.h&gt;
-- #include &lt;linux/fs.h&gt;
-- 
---#include &lt;canberra-gtk.h&gt;
---
-- #include "gduapplication.h"
-- #include "gduwindow.h"
-- #include "gducreatediskimagedialog.h"
--@@ -297,19 +295,7 @@ create_disk_image_populate (DialogData *data)
-- 
-- static void
-- play_read_error_sound (DialogData *data)
---{
---  const gchar *sound_message;
---
---  /* Translators: A descriptive string for the sound played when
---   * there's a read error that's being ignored, see
---   * CA_PROP_EVENT_DESCRIPTION
---   */
---  sound_message = _("Disk image read error");
---  ca_gtk_play_for_widget (GTK_WIDGET (data-&gt;window), 0,
---                          CA_PROP_EVENT_ID, "dialog-warning",
---                          CA_PROP_EVENT_DESCRIPTION, sound_message,
---                          NULL);
---}
--+{}
-- 
-- /* ---------------------------------------------------------------------------------------------------- */
-- 
--@@ -403,16 +389,7 @@ update_job (DialogData *data,
-- 
-- static void
-- play_complete_sound (DialogData *data)
---{
---  const gchar *sound_message;
---
---  /* Translators: A descriptive string for the 'complete' sound, see CA_PROP_EVENT_DESCRIPTION */
---  sound_message = _("Disk image copying complete");
---  ca_gtk_play_for_widget (GTK_WIDGET (data-&gt;window), 0,
---                          CA_PROP_EVENT_ID, "complete",
---                          CA_PROP_EVENT_DESCRIPTION, sound_message,
---                          NULL);
---}
--+{}
-- 
-- /* ---------------------------------------------------------------------------------------------------- */
-- 
--diff --git a/src/disks/gdurestorediskimagedialog.c b/src/disks/gdurestorediskimagedialog.c
--index bccf97e9..e7ec81cb 100644
----- a/src/disks/gdurestorediskimagedialog.c
--+++ b/src/disks/gdurestorediskimagedialog.c
--@@ -17,8 +17,6 @@
-- #include &lt;sys/ioctl.h&gt;
-- #include &lt;linux/fs.h&gt;
-- 
---#include &lt;canberra-gtk.h&gt;
---
-- #include "gduapplication.h"
-- #include "gduwindow.h"
-- #include "gdurestorediskimagedialog.h"
--@@ -606,23 +604,7 @@ update_job (DialogData *data,
-- 
-- static void
-- play_complete_sound (DialogData *data)
---{
---  const gchar *sound_message;
---
---  /* Translators: A descriptive string for the 'complete' sound, see CA_PROP_EVENT_DESCRIPTION */
---  sound_message = _("Disk image copying complete");
---  ca_gtk_play_for_widget (GTK_WIDGET (data-&gt;dialog), 0,
---                          CA_PROP_EVENT_ID, "complete",
---                          CA_PROP_EVENT_DESCRIPTION, sound_message,
---                          NULL);
---
---  if (data-&gt;inhibit_cookie &gt; 0)
---    {
---      gtk_application_uninhibit (GTK_APPLICATION (gdu_window_get_application (data-&gt;window)),
---                                 data-&gt;inhibit_cookie);
---      data-&gt;inhibit_cookie = 0;
---    }
---}
--+{}
-- 
-- /* ---------------------------------------------------------------------------------------------------- */
-- 
--diff --git a/src/disks/meson.build b/src/disks/meson.build
--index 35b2f103..6fc367b4 100644
----- a/src/disks/meson.build
--+++ b/src/disks/meson.build
--@@ -85,7 +85,6 @@ deps = [
--   dvdread_dep,
--   gio_unix_dep,
--   gmodule_dep,
---  libcanberra_dep,
--   libgdu_dep,
--   libhandy_dep,
--   liblzma_dep,
---- 
--2.25.1
--
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-index 6f910c4c13..08854befa8 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
-@@ -2,11 +2,12 @@ SUMMARY = "GNOME disk utility"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" "="">file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"</a>
- 
--SECTION = "x11/gnome"
-+SECTION = "gnome"
- 
- DEPENDS = " \
-     desktop-file-utils-native \
-     gtk+3 \
-+    libcanberra \
-     libdvdread \
-     libnotify \
-     libsecret \
-@@ -22,13 +23,11 @@ inherit gnomebase gsettings gtk-icon-cache gettext features_check mime-xdg
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
--PACKAGECONFIG ??= "<a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'systemd x11', d)}"
-+PACKAGECONFIG ??= "<a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'systemd', d)}"
- 
- # As soon as elogind is of interest this needs rework: meson option is combo
- PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
--PACKAGECONFIG[x11] = ",,libcanberra"
- 
--SRC_URI:append = " <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'wayland', '<a href="file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch',">file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch',</a> '', d)}"
- SRC_URI[archive.sha256sum] = "c24e9439a04d70bcfae349ca134c7005435fe2b6f452114df878bff0b89bbffe"
- 
- EXTRA_OEMESON = "-Dman=false"
-<div>-- 
-</div>2.52.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#123296): <a href="https://lists.openembedded.org/g/openembedded-devel/message/123296">https://lists.openembedded.org/g/openembedded-devel/message/123296</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/117173371/3618223">https://lists.openembedded.org/mt/117173371/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-oPGoPeBKmCeClBYbMmDT--
-
+Anuj
 
