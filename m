@@ -2,302 +2,140 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63EEFD26D9F
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 21:38:02 +0000 (UTC)
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21016.1767994682104098581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6132FD277C6
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 23:44:06 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1248.1768002239254724393
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 13:38:02 -0800
+ Fri, 09 Jan 2026 15:43:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CSnBeedL;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-7c75fc222c3so2432784a34.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 13:38:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OWogsWA8;
+ spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2a3e89aa5d0so35133595ad.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1767994681; x=1768599481; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xeSiLart9ek8Z/Fx/GLeXX4HBVQMneHdCvdeKExhXdA=;
-        b=CSnBeedLiB0qx28fCvjbN2fPYGU3sX7+ceqk808TubH1E5LNiS5U/PVftGpPFem80I
-         wyqC9fWhEg89je/DKNosoh8jd5i9PoyhOJ1ck3b1jIZqxCRajZS55WVFfA+CT+Pq0uO5
-         lulNnQlD6vzmq4M9Xg1pkwWq4xvLL8uWF4dnoYpuB/vrJ7kZ3hSX9YfNWjlQtvwHycDx
-         fjF4mmIFmXCGlKohJm1oB52LSnyJPRY/t6zaxyT33JOy59C7UiAfQP7XQeb1PqwEWnec
-         x4veBHK0tKQ74zUg64euhAA7qfDe6aj0x5F9i8LCWJx52XtpG3JaD/PMyxD9eFG8zN+i
-         VxyQ==
+        d=gmail.com; s=20230601; t=1768002238; x=1768607038; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=gOH+43RQ6BYrc7UFsX9kR8YvVGUjGlQ1/Ejm8au3NwE=;
+        b=OWogsWA8oyqMwOPTdSgSLBS35O4/IyflD2qEiaK1RQ7w9nsdnpolCt5U96ZxXQlkjP
+         8bUxWTf6bxb1bBfLaHpCprNcCIX1B+Zb8XdawjJdwL3krCMtgsk23P1Eg2i+RcpHc/u6
+         NhSCW22MZjtKAodK165tg8ppgmBRi5z850y34hGaY3APiFc8US/9op8wPK8oTlyjiQZe
+         3eumDhhfaSa6dTPGgWmUr4m1WpmnmzBOm1R8ZHVzNg7XrH93DaUzZ5ixx9dpA17fIcFP
+         ZFJQcTuzNVFzyuYaruJkae708xqnRg4HHzX04if+5V7xLC3H6kGPmA6MpJGGMyhSwEW+
+         Hibw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1767994681; x=1768599481;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=xeSiLart9ek8Z/Fx/GLeXX4HBVQMneHdCvdeKExhXdA=;
-        b=hoKGKiXR0vYSIujEfWKi37KhXP1mITNkA1N/YUcnO6VY/gGWlUMKAquv/DVHgqkLNc
-         n5Ojfeh0RzDd+ZDE6cY/x4BxeW0M9Hu7cAnqQe5KNr4jHngJ9y4ydo68evi8riUWV4IO
-         r2jS2qm4kRpCiYKO8pzjSbIlRYOOwCVGdFNB3GTWYPq1sXEspoTWSGPtJilcABMkj04b
-         p+XeZ/t4uM0xGzEXm8iwqP56a6okizsj1teBlwOOXtIv7jSwEJraJDiVUWASvHw+0/kj
-         hK0ie7mH/GcofU9MlGpwjSczfxkogntDKcJxNPmxsN22zZ5AG8stMez7K0EBa5tLb8yB
-         n0Xw==
-X-Gm-Message-State: AOJu0Yz+PxMmD0GoVSlo+gDg6hm+NSq5yGZnR4sarGPy0jgaS/0plBat
-	v7X2eW3bChHHpyL/lK99YoBn8wZNpNB2KXoyyIOJTvTHRPx6vNRfbtkOorrw9KAPH8+xhuRQO5A
-	n3aizvBqRzupqq3lD3rxvGbaF7NpVcYw=
-X-Gm-Gg: AY/fxX4cz1vnugSDc1nZGnjKcZf1TskSLyd8L3lfyYLe3fB8gMV/Verjg/8gFhe/4aw
-	PD0vnPVaZIaaYxPCHqSzgxR7Uk1JZIoi8lsZuvCRkGLf0uHHJZa9fW+I1py/+8HMxVVn6z1867u
-	uNkfSZwrpljo52bcv3fYHBKM5Iy2VmIVXMThbZgCg3Dxzrq9C77zLUc0q1kb+97xlsNxI24shN+
-	XC3PgBzVzOMSUXqLCN0QAkFWsseXJRg8pCXA9gRMkEz8FLd5urzM20XEp/NzFSfeiBNyBwZ
-X-Google-Smtp-Source: AGHT+IFW7WTJo/vqaQthKwZzq8y/ZB27id5RbyultuVtaFg/qXUwK66Ho4Lp8QEl/g28jLzVGncQNnb5A4wOgHyz3XE=
-X-Received: by 2002:a05:6808:17a1:b0:443:4144:ca09 with SMTP id
- 5614622812f47-45a6bd0eca1mr4832932b6e.16.1767994681220; Fri, 09 Jan 2026
- 13:38:01 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768002238; x=1768607038;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gOH+43RQ6BYrc7UFsX9kR8YvVGUjGlQ1/Ejm8au3NwE=;
+        b=vejoekLWHRmL85LNmVCuzHccvoUpGybv3ELfjdSI0mp2htqPa72QcL+CKUJ2Y2eBGc
+         4HcU1bn5F+UgQnn0T+4Gv19b4srqH7McnLLW9PNjkJFeDAo7Stuz72rVu5BTW4JZb+UM
+         TX4Q2OCRkJWuirWItInFe5KKgHC7kQFO4G5ag5wyOeVjf+VPzxVhgpOK43GtPp8A+BVV
+         3wM8Lq3oVUPCCznSxehpvKySOLMnK7iAWGO1iofbuMjZgRU9TV2UE/tJFoQUufLy2oUF
+         lWU9wj8KUgObgIWBQnErpPRE2n+0c+icZR7/N1y+2aw5ysK4mB6sr9qG4khSxl4NyNeL
+         lL7g==
+X-Gm-Message-State: AOJu0Yx1nEq5jPQ3bBjsU901RB7NRitISlzmu1lENMBj3YTYgeNvBq8b
+	2Whw/94q+YmyqVD8bJcDgpl1GlqIxMHUhmHj5TFY0tqDfVCvY1bgn1bYrxrPIw==
+X-Gm-Gg: AY/fxX6/WOzROnnRnHHqyXzurCIpjxYVbqeGmWo+eNc9G7WscaAdXEMoAC6R3nOTe7G
+	EUyfnb6dAcxU5LKKQvBzGj42L2l0ShI3mG50AHaia3jQnaOx2Maq5BVoIwxqpygay+hRIMnO+XW
+	1TqwLXJ46AiD7oTvJ0NHiW1hNmKy97NzDqTt2mmlpaHJSmV9Wgdl59JyIGBl26vIwDT2xP/H1MZ
+	2/fqw6Wb2DZ0mMxxniSo56JN3i6VnMx/2gSlnKRCXH/7tkbqChNlV2ck2da2BaJVWEcsOngTy8+
+	2qFhiJJ1viCSVvf+GPThViO/pKawRHxMyr5/0jcgtMja+PI9uZ0RJlByhKVPMi8rWdNO++Ceo8H
+	51riTiACuHu3wM6R1x3MymrHRZTg1+jFSEt/vhCyU7A5118V+BBZjpWIJYPTOAfcOAAtzVhx8d7
+	SEkzw3qSmcH1GMTgSysWZGlAg=
+X-Google-Smtp-Source: AGHT+IH2ZX7IS5YhHjtJi/GaTrH18TKJd4gNQUd+M796KNCPDWr85381/xp9B3QIXAwQaJUKsHq75g==
+X-Received: by 2002:a17:902:ef0c:b0:2a0:9e9d:e8cf with SMTP id d9443c01a7336-2a3ee4bb973mr115506185ad.57.1768002238366;
+        Fri, 09 Jan 2026 15:43:58 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c3a31dsm113934675ad.9.2026.01.09.15.43.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Jan 2026 15:43:57 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][scarthgap][PATCH 1/5] libde265: patch CVE-2023-43887
+Date: Sat, 10 Jan 2026 12:43:42 +1300
+Message-ID: <20260109234346.3098858-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260109092843.1924568-1-ankur.tyagi85@gmail.com> <b6bebb8b-4db8-49cc-a9a4-50a853e4a478@gmail.com>
-In-Reply-To: <b6bebb8b-4db8-49cc-a9a4-50a853e4a478@gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Sat, 10 Jan 2026 10:37:49 +1300
-X-Gm-Features: AQt7F2rO2rqFevyNgjsHDMbA-G9GhwSCentO6hE6vJOVPrfIg67-wJ2vICMDsXk
-Message-ID: <CADySD0FYdXCcgicvzebshofOKM=BFrn3W+Jg2EEKUtovV=vYeg@mail.gmail.com>
-Subject: Re: [oe][meta-networking][scarthgap][PATCH 01/12] cifs-utils: patch CVE-2025-2312
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 21:38:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123312
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 23:44:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123313
 
-On Fri, Jan 9, 2026 at 11:47=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.c=
-om> wrote:
->
-> This patch needs a bit of caution, because it requires kernel 6.13 at
-> least, without it it has not effect. The required kernel change[1] was
-> not backported to older stable versions (both Scarthgap and Kirkstone
-> are out of luck with the default kernel).
->
-> Not saying the patch should be dropped, rather that CVE tag in the patch
-> will mark is patched, but it's only half of the fix. Not sure what (if
-> anything at all) should be done about this.
->
-> [1]:
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co=
-mmit/fs/smb?id=3Ddb363b0a1d9e6b9dc556296f1b1007aeb496a8cf
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Thanks Gyorgy, I overlooked that aspect.
-It will be misleading to mark CVE tag as patched when vulnerability
-still exists.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-43887
 
-I am in favor of dropping this patch.
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ .../libde265/libde265/CVE-2023-43887.patch    | 39 +++++++++++++++++++
+ .../libde265/libde265_1.0.12.bb               |  4 +-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2023-43887.patch
 
->
-> On 1/9/26 10:28, Ankur Tyagi via lists.openembedded.org wrote:
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >
-> > Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2312
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  .../cifs/cifs-utils/CVE-2025-2312.patch       | 136 ++++++++++++++++++
-> >  .../recipes-support/cifs/cifs-utils_7.0.bb    |   4 +-
-> >  2 files changed, 139 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-networking/recipes-support/cifs/cifs-utils/CVE=
--2025-2312.patch
-> >
-> > diff --git a/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2=
-312.patch b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.p=
-atch
-> > new file mode 100644
-> > index 0000000000..3e62b0f1c3
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.pat=
-ch
-> > @@ -0,0 +1,136 @@
-> > +From faf6ce0abd6fbca95721eb88754add9c0c700a5c Mon Sep 17 00:00:00 2001
-> > +From: Ritvik Budhiraja <rbudhiraja@microsoft.com>
-> > +Date: Tue, 19 Nov 2024 06:07:58 +0000
-> > +Subject: [PATCH] CIFS.upcall to accomodate new namespace mount opt
-> > +
-> > +NOTE: This patch is dependent on one of the previously sent patches:
-> > +[PATCH] CIFS: New mount option for cifs.upcall namespace resolution
-> > +which introduces a new mount option called upcall_target, to
-> > +customise the upcall behaviour.
-> > +
-> > +Building upon the above patch, the following patch adds functionality
-> > +to handle upcall_target as a mount option in cifs.upcall. It can have =
-2 values -
-> > +mount, app.
-> > +Having this new mount option allows the mount command to specify where=
- the
-> > +upcall should happen: 'mount' for resolving the upcall to the host
-> > +namespace, and 'app' for resolving the upcall to the ns of the calling
-> > +thread. This will enable both the scenarios where the Kerberos credent=
-ials
-> > +can be found on the application namespace or the host namespace to whi=
-ch
-> > +just the mount operation is "delegated".
-> > +This aids use cases like Kubernetes where the mount
-> > +happens on behalf of the application in another container altogether.
-> > +
-> > +Signed-off-by: Ritvik Budhiraja <rbudhiraja@microsoft.com>
-> > +Signed-off-by: Steve French <stfrench@microsoft.com>
-> > +
-> > +CVE: CVE-2025-2312
-> > +Upstream-Status: Backport [https://git.samba.org/?p=3Dcifs-utils.git;a=
-=3Dcommit;h=3D89b679228cc1be9739d54203d28289b03352c174]
-> > +(cherry picked from commit 89b679228cc1be9739d54203d28289b03352c174)
-> > +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > +---
-> > + cifs.upcall.c | 55 +++++++++++++++++++++++++++++++++++++++++++-------=
--
-> > + 1 file changed, 47 insertions(+), 8 deletions(-)
-> > +
-> > +diff --git a/cifs.upcall.c b/cifs.upcall.c
-> > +index 52c0328..0883afa 100644
-> > +--- a/cifs.upcall.c
-> > ++++ b/cifs.upcall.c
-> > +@@ -953,6 +953,13 @@ struct decoded_args {
-> > + #define MAX_USERNAME_SIZE 256
-> > +     char username[MAX_USERNAME_SIZE + 1];
-> > +
-> > ++#define MAX_UPCALL_STRING_LEN 6 /* "mount\0" */
-> > ++    enum upcall_target_enum {
-> > ++            UPTARGET_UNSPECIFIED, /* not specified, defaults to app *=
-/
-> > ++            UPTARGET_MOUNT, /* upcall to the mount namespace */
-> > ++            UPTARGET_APP, /* upcall to the application namespace whic=
-h did the mount */
-> > ++    } upcall_target;
-> > ++
-> > +     uid_t uid;
-> > +     uid_t creduid;
-> > +     pid_t pid;
-> > +@@ -969,6 +976,7 @@ struct decoded_args {
-> > + #define DKD_HAVE_PID                0x20
-> > + #define DKD_HAVE_CREDUID    0x40
-> > + #define DKD_HAVE_USERNAME   0x80
-> > ++#define DKD_HAVE_UPCALL_TARGET      0x100
-> > + #define DKD_MUSTHAVE_SET (DKD_HAVE_HOSTNAME|DKD_HAVE_VERSION|DKD_HAVE=
-_SEC)
-> > +     int have;
-> > + };
-> > +@@ -979,6 +987,7 @@ __decode_key_description(const char *desc, struct =
-decoded_args *arg)
-> > +     size_t len;
-> > +     char *pos;
-> > +     const char *tkn =3D desc;
-> > ++    arg->upcall_target =3D UPTARGET_UNSPECIFIED;
-> > +
-> > +     do {
-> > +             pos =3D index(tkn, ';');
-> > +@@ -1077,6 +1086,31 @@ __decode_key_description(const char *desc, stru=
-ct decoded_args *arg)
-> > +                     }
-> > +                     arg->have |=3D DKD_HAVE_VERSION;
-> > +                     syslog(LOG_DEBUG, "ver=3D%d", arg->ver);
-> > ++            } else if (strncmp(tkn, "upcall_target=3D", 14) =3D=3D 0)=
- {
-> > ++                    if (pos =3D=3D NULL)
-> > ++                            len =3D strlen(tkn);
-> > ++                    else
-> > ++                            len =3D pos - tkn;
-> > ++
-> > ++                    len -=3D 14;
-> > ++                    if (len > MAX_UPCALL_STRING_LEN) {
-> > ++                            syslog(LOG_ERR, "upcall_target=3D value t=
-oo long for buffer");
-> > ++                            return 1;
-> > ++                    }
-> > ++                    if (strncmp(tkn + 14, "mount", 5) =3D=3D 0) {
-> > ++                            arg->upcall_target =3D UPTARGET_MOUNT;
-> > ++                            syslog(LOG_DEBUG, "upcall_target=3Dmount"=
-);
-> > ++                    } else if (strncmp(tkn + 14, "app", 3) =3D=3D 0) =
-{
-> > ++                            arg->upcall_target =3D UPTARGET_APP;
-> > ++                            syslog(LOG_DEBUG, "upcall_target=3Dapp");
-> > ++                    } else {
-> > ++                            // Should never happen
-> > ++                            syslog(LOG_ERR, "Invalid upcall_target va=
-lue: %s, defaulting to app",
-> > ++                                   tkn + 14);
-> > ++                            arg->upcall_target =3D UPTARGET_APP;
-> > ++                            syslog(LOG_DEBUG, "upcall_target=3Dapp");
-> > ++                    }
-> > ++                    arg->have |=3D DKD_HAVE_UPCALL_TARGET;
-> > +             }
-> > +             if (pos =3D=3D NULL)
-> > +                     break;
-> > +@@ -1440,15 +1474,20 @@ int main(const int argc, char *const argv[])
-> > +      * acceptably in containers, because we'll be looking at the corr=
-ect
-> > +      * filesystem and have the correct network configuration.
-> > +      */
-> > +-    rc =3D switch_to_process_ns(arg->pid);
-> > +-    if (rc =3D=3D -1) {
-> > +-            syslog(LOG_ERR, "unable to switch to process namespace: %=
-s", strerror(errno));
-> > +-            rc =3D 1;
-> > +-            goto out;
-> > ++    if (arg->upcall_target =3D=3D UPTARGET_APP || arg->upcall_target =
-=3D=3D UPTARGET_UNSPECIFIED) {
-> > ++            syslog(LOG_INFO, "upcall_target=3Dapp, switching namespac=
-es to application thread");
-> > ++            rc =3D switch_to_process_ns(arg->pid);
-> > ++            if (rc =3D=3D -1) {
-> > ++                    syslog(LOG_ERR, "unable to switch to process name=
-space: %s", strerror(errno));
-> > ++                    rc =3D 1;
-> > ++                    goto out;
-> > ++            }
-> > ++            if (trim_capabilities(env_probe))
-> > ++                    goto out;
-> > ++    } else {
-> > ++            syslog(LOG_INFO, "upcall_target=3Dmount, not switching na=
-mespaces to application thread");
-> > +     }
-> > +
-> > +-    if (trim_capabilities(env_probe))
-> > +-            goto out;
-> > +
-> > +     /*
-> > +      * The kernel doesn't pass down the gid, so we resort here to scr=
-aping
-> > +@@ -1495,7 +1534,7 @@ int main(const int argc, char *const argv[])
-> > +      * look at the environ file.
-> > +      */
-> > +     env_cachename =3D
-> > +-            get_cachename_from_process_env(env_probe ? arg->pid : 0);
-> > ++            get_cachename_from_process_env((env_probe && (arg->upcall=
-_target =3D=3D UPTARGET_APP)) ? arg->pid : 0);
-> > +
-> > +     rc =3D setuid(uid);
-> > +     if (rc =3D=3D -1) {
-> > diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb b/m=
-eta-networking/recipes-support/cifs/cifs-utils_7.0.bb
-> > index c78bbae7b8..4e27491bba 100644
-> > --- a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
-> > +++ b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
-> > @@ -5,7 +5,9 @@ LICENSE =3D "GPL-3.0-only & LGPL-3.0-only"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47f=
-ae504"
-> >
-> >  SRCREV =3D "316522036133d44ed02cd39ed2748e2b59c85b30"
-> > -SRC_URI =3D "git://git.samba.org/cifs-utils.git;branch=3Dmaster"
-> > +SRC_URI =3D "git://git.samba.org/cifs-utils.git;branch=3Dmaster \
-> > +           file://CVE-2025-2312.patch \
-> > +"
-> >
-> >  S =3D "${WORKDIR}/git"
-> >  DEPENDS +=3D "libtalloc"
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#123279): https://lists.openembedded.org/g/openembed=
-ded-devel/message/123279
-> > Mute This Topic: https://lists.openembedded.org/mt/117172363/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2023-43887.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2023-43887.patch
+new file mode 100644
+index 0000000000..f8ab0e1e40
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2023-43887.patch
+@@ -0,0 +1,39 @@
++From e31a5389f2a4967b9ca298a3435d1af2f9a04cda Mon Sep 17 00:00:00 2001
++From: Dirk Farin <dirk.farin@gmail.com>
++Date: Fri, 1 Sep 2023 21:18:48 +0200
++Subject: [PATCH] fix #418
++
++CVE: CVE-2023-43887
++Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/63b596c915977f038eafd7647d1db25488a8c133]
++(cherry picked from commit 63b596c915977f038eafd7647d1db25488a8c133)
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ libde265/decctx.cc | 9 +++++----
++ 1 file changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/libde265/decctx.cc b/libde265/decctx.cc
++index 223a6aaf..350f7e7a 100644
++--- a/libde265/decctx.cc
+++++ b/libde265/decctx.cc
++@@ -582,16 +582,17 @@ de265_error decoder_context::read_pps_NAL(bitreader& reader)
++   std::shared_ptr<pic_parameter_set> new_pps = std::make_shared<pic_parameter_set>();
++ 
++   bool success = new_pps->read(&reader,this);
+++  if (!success) {
+++    return DE265_WARNING_PPS_HEADER_INVALID;
+++  }
++ 
++   if (param_pps_headers_fd>=0) {
++     new_pps->dump(param_pps_headers_fd);
++   }
++ 
++-  if (success) {
++-    pps[ (int)new_pps->pic_parameter_set_id ] = new_pps;
++-  }
+++  pps[ (int)new_pps->pic_parameter_set_id ] = new_pps;
++ 
++-  return success ? DE265_OK : DE265_WARNING_PPS_HEADER_INVALID;
+++  return DE265_OK;
++ }
++ 
++ de265_error decoder_context::read_sei_NAL(bitreader& reader, bool suffix)
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
+index 3c9f899491..3466d37317 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
+@@ -8,7 +8,9 @@ LICENSE = "LGPL-3.0-only & MIT"
+ LICENSE_FLAGS = "commercial"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+ 
+-SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https \
++           file://CVE-2023-43887.patch \
++"
+ SRCREV = "a267c84707ab264928fa9b86de2ee749c48c318c"
+ 
+ S = "${WORKDIR}/git"
 
