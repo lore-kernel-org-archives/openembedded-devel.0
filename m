@@ -1,104 +1,238 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A7A3D232ED
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 08:08:46 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5985.1767946122897440601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AC37D14899
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 09:28:56 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6692.1767950933394655837
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 00:08:43 -0800
+ Fri, 09 Jan 2026 01:28:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Lv67dwhL;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5469f735bb=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6096j3kV1146946
-	for <openembedded-devel@lists.openembedded.org>; Fri, 9 Jan 2026 08:08:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=gyAxus78f3tPrmKmLEUj
-	lml1CRCw0bXVOSvAkLBzaog=; b=Lv67dwhLtvDdA0dZ1jU83u7Tm/PKT3OLLci/
-	/LpH4AEqQG7KFBNrV+EGmIGNZopJ0EphfoReRvuX9LkQ++4XHR0KqYxfXULsHSW3
-	0RrRaA2b6IIzUyiOd60OsW16grAplzCN+kRuaa7bxn61OfZ37ZNj9kUAGXX4ky0j
-	hy3IkOIxNgovVGajDCSAKxyGVYqTDGKyGsmqSchAfY3yybqfHyZYdkPYvt+Xs2sM
-	owWtp8ANlMH0b/hSdIgT/t2awT52K/OpL7y7cuUGXT8kK/a3vavxc/fyuNe+Ue1y
-	irBmElatCTf/bJ69Q+c8ktnTzZq4HMKMLr4YX4qi4nnzTfcTyA==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4beravepbn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 08:08:41 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Fri, 9 Jan 2026 00:08:40 -0800
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Fri, 9 Jan 2026 00:08:40 -0800
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-aiohttp: upgrade 3.13.2 -> 3.13.3
-Date: Fri, 9 Jan 2026 16:08:39 +0800
-Message-ID: <20260109080839.2227339-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YTUInd/g;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2a0a33d0585so28113475ad.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 01:28:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1767950932; x=1768555732; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UsZlpe7v4C1fB5n4jMTJlKw7vJT8QhlmXqh+U0ADh94=;
+        b=YTUInd/gPuvgIXllPjP/AWtaPt1EerK8fDXtb1lUGijY3jS+WBSOmWavUMzSMhqdaA
+         r/3/nUqbTWXpY0JUW364EAIN9P3YGgRlG5V5sqk72VnFFq5PBwpTCCLZW5Idyut13o4M
+         33IAHhAsyosxxiidrlFTMvIMO63vbQ60jmoiFqBKKHCLVS5G6D/y1mq05qwLeufZley7
+         qrtZh49g3mfNXFXdWq0bm5uDbhu0yYZAx/OKtjrzJOQeYcFrBd4YCnUWaTrxPXwpJwS9
+         LqYARPmmfPhTBxZuT2K2T2U5kxfLA8LIOvuXsI0bV4HU2LDptCb3YGCRMQfZywNDvkV/
+         qUXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767950932; x=1768555732;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UsZlpe7v4C1fB5n4jMTJlKw7vJT8QhlmXqh+U0ADh94=;
+        b=Rfx37lwrhNna9XJcyOyaQjnpAsxdlLVfWEyV5POdi0MeyA29RNikuTE/yrSK9AyBYr
+         A3qVYiYKifVZYVO96yE1G1FLTO0gj+z7dhobdTyjZg2WjogGCJvMjIFX0sjA2Tax6XG8
+         +wcaYpnCbghdPvMchbGLUM/SMrd61pW04RwlFmwpjI5PhWQ1sgOHn6JCrWDZlktSymoO
+         pHEUESCCIMJ8J4xrD+kFgDpfZXwXen1AssXK6aS4W1c4XGAmAertb9gJ3rnNI/Itso0g
+         RZKuu+Kj0jEn3pvYUoPzdBNFWN/7SEWzXw9cxlVcma8tHaaX20HO16Kng5a4Z4FDsOml
+         5OjA==
+X-Gm-Message-State: AOJu0Ywqw6ibKQggGyr43GsIYsu0Qx3dEQc3qsmzoATp7s2kxm7ImkNX
+	vNqrObMov3WEUVzwzNHiTxH8rBoC4wtxbKTLn/okANPxLbT+gwjXJ4okwHXVaw==
+X-Gm-Gg: AY/fxX4Vp4dzrN4HZSUbxLlZe0jO7Z6QQgqOH75T0mrHB8p4/rWk6pTmEbj8tE5bety
+	DicospBCFDJ3cD9WoJ4wYCN/CD0N5ZwoNhJI9/BgEGxs2jpmtyyqgr7KhKYMBj9OdwKgPDo8Koy
+	fyPLu9wheHEPcc2xpMiTdDOq9UgCEKWohnnLaQd2Vy6+5VXhoDfaYW93o1Ior5UWmyRu3PcfRUI
+	6clFZnnEJ20y9SSSQNEikv/vL9uSSi1ugnqcU2apUS9prz9pukrfRnd3ea7VEpAo1lKsOBTqYV3
+	oayPDDWAZZyecJOD0VEQypNKnHV6dmKYty0NYkRmvzavOt3YWNXk6vyfYAs4kwEEE/uD16qDjOO
+	WFp+/j88NMUmuJD+V5n+1GWEg+Esn+oV4TyGEkZmj4jgWjk3hz0MYB/MNQ6cUJ1h1qoulEzqAOH
+	01FhTlQZpUwyK/jFya3EDVjgg=
+X-Google-Smtp-Source: AGHT+IEWz5K9kPe/ay02PTo757U14LkxtQayWFkYH1Z7HksyZERO+N2jARC9QmsObtzyam9tDzHLOQ==
+X-Received: by 2002:a17:902:cf05:b0:2a0:97d2:a264 with SMTP id d9443c01a7336-2a3ee49015dmr81787325ad.37.1767950932427;
+        Fri, 09 Jan 2026 01:28:52 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3cc88e3sm99529295ad.75.2026.01.09.01.28.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Jan 2026 01:28:51 -0800 (PST)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 01/12] cifs-utils: patch CVE-2025-2312
+Date: Fri,  9 Jan 2026 22:28:31 +1300
+Message-ID: <20260109092843.1924568-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTA5MDA1NiBTYWx0ZWRfX/XezaM4d6jYA
- OZBYVvsV3hvXQMw1BzGRpLyGT+/TFgYyY0GcSIbf8hdR+5GcThHEXxKrkT1OR/VfDtSMysHPOgo
- Sy/MjUZMUqUxk19H0KuWQW1xUVsjnK+R0pdHJDQ0S8cX6HVuu8eU1EoGIXCgdJVO1MJYi5DRuC6
- Nf2RUcaRiZ5YTmgYQ1CVyTvqUJdHe0NM8C+cSrNiNu5Q4ZBMpFo0A+YFJuwIH7gPIZiiC8D2Kef
- Vhysit5z4KY7mMzBS5BQUSrT+kbfW3mxUGdvGePFjwifDSvHcigNodeQbYS+H2VbZYKq9Pc9zSg
- pPICzuq9RgQg0ldfWCOEwSxCEKYmvnXekUsmkMXaDgvmq0sjr1XpTWImXSZkLWd0CYDHkE+pBH3
- isZbsScwo47zqPioUXDW5JhEEmFKPsN1anzdl/6mxUKrKRbydcaB9veTWiu3+8nof3mZWcFsngH
- fSclfcYVbamQct3eQUA==
-X-Proofpoint-GUID: xuwVl44QZPoj0qn2w8CnqEE5LIb-11SL
-X-Proofpoint-ORIG-GUID: xuwVl44QZPoj0qn2w8CnqEE5LIb-11SL
-X-Authority-Analysis: v=2.4 cv=PZjyRyhd c=1 sm=1 tr=0 ts=6960b789 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22 a=V1LfHgqHAAAA:8 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=C6Ak7O3ccKA5C-KzILkA:9 a=J8ZlggKA02cA:10
- a=CJpS4NIzfxg6RkAR5Huo:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
- definitions=2026-01-09_02,2026-01-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 spamscore=0 malwarescore=0 priorityscore=1501
- clxscore=1015 suspectscore=0 phishscore=0 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601090056
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 08:08:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123278
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 09:28:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123279
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelog:https://docs.aiohttp.org/en/stable/changes.html
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-2312
 
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{python3-aiohttp_3.13.2.bb => python3-aiohttp_3.13.3.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.13.2.bb => python3-aiohttp_3.13.3.bb} (90%)
+ .../cifs/cifs-utils/CVE-2025-2312.patch       | 136 ++++++++++++++++++
+ .../recipes-support/cifs/cifs-utils_7.0.bb    |   4 +-
+ 2 files changed, 139 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.2.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.3.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.13.2.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.13.3.bb
-index df5d674a3d..00758a7546 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.3.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
+new file mode 100644
+index 0000000000..3e62b0f1c3
+--- /dev/null
++++ b/meta-networking/recipes-support/cifs/cifs-utils/CVE-2025-2312.patch
+@@ -0,0 +1,136 @@
++From faf6ce0abd6fbca95721eb88754add9c0c700a5c Mon Sep 17 00:00:00 2001
++From: Ritvik Budhiraja <rbudhiraja@microsoft.com>
++Date: Tue, 19 Nov 2024 06:07:58 +0000
++Subject: [PATCH] CIFS.upcall to accomodate new namespace mount opt
++
++NOTE: This patch is dependent on one of the previously sent patches:
++[PATCH] CIFS: New mount option for cifs.upcall namespace resolution
++which introduces a new mount option called upcall_target, to
++customise the upcall behaviour.
++
++Building upon the above patch, the following patch adds functionality
++to handle upcall_target as a mount option in cifs.upcall. It can have 2 values -
++mount, app.
++Having this new mount option allows the mount command to specify where the
++upcall should happen: 'mount' for resolving the upcall to the host
++namespace, and 'app' for resolving the upcall to the ns of the calling
++thread. This will enable both the scenarios where the Kerberos credentials
++can be found on the application namespace or the host namespace to which
++just the mount operation is "delegated".
++This aids use cases like Kubernetes where the mount
++happens on behalf of the application in another container altogether.
++
++Signed-off-by: Ritvik Budhiraja <rbudhiraja@microsoft.com>
++Signed-off-by: Steve French <stfrench@microsoft.com>
++
++CVE: CVE-2025-2312
++Upstream-Status: Backport [https://git.samba.org/?p=cifs-utils.git;a=commit;h=89b679228cc1be9739d54203d28289b03352c174]
++(cherry picked from commit 89b679228cc1be9739d54203d28289b03352c174)
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ cifs.upcall.c | 55 +++++++++++++++++++++++++++++++++++++++++++--------
++ 1 file changed, 47 insertions(+), 8 deletions(-)
++
++diff --git a/cifs.upcall.c b/cifs.upcall.c
++index 52c0328..0883afa 100644
++--- a/cifs.upcall.c
+++++ b/cifs.upcall.c
++@@ -953,6 +953,13 @@ struct decoded_args {
++ #define MAX_USERNAME_SIZE 256
++ 	char username[MAX_USERNAME_SIZE + 1];
++ 
+++#define MAX_UPCALL_STRING_LEN 6 /* "mount\0" */
+++	enum upcall_target_enum {
+++		UPTARGET_UNSPECIFIED, /* not specified, defaults to app */
+++		UPTARGET_MOUNT, /* upcall to the mount namespace */
+++		UPTARGET_APP, /* upcall to the application namespace which did the mount */
+++	} upcall_target;
+++
++ 	uid_t uid;
++ 	uid_t creduid;
++ 	pid_t pid;
++@@ -969,6 +976,7 @@ struct decoded_args {
++ #define DKD_HAVE_PID		0x20
++ #define DKD_HAVE_CREDUID	0x40
++ #define DKD_HAVE_USERNAME	0x80
+++#define DKD_HAVE_UPCALL_TARGET	0x100
++ #define DKD_MUSTHAVE_SET (DKD_HAVE_HOSTNAME|DKD_HAVE_VERSION|DKD_HAVE_SEC)
++ 	int have;
++ };
++@@ -979,6 +987,7 @@ __decode_key_description(const char *desc, struct decoded_args *arg)
++ 	size_t len;
++ 	char *pos;
++ 	const char *tkn = desc;
+++	arg->upcall_target = UPTARGET_UNSPECIFIED;
++ 
++ 	do {
++ 		pos = index(tkn, ';');
++@@ -1077,6 +1086,31 @@ __decode_key_description(const char *desc, struct decoded_args *arg)
++ 			}
++ 			arg->have |= DKD_HAVE_VERSION;
++ 			syslog(LOG_DEBUG, "ver=%d", arg->ver);
+++		} else if (strncmp(tkn, "upcall_target=", 14) == 0) {
+++			if (pos == NULL)
+++				len = strlen(tkn);
+++			else
+++				len = pos - tkn;
+++
+++			len -= 14;
+++			if (len > MAX_UPCALL_STRING_LEN) {
+++				syslog(LOG_ERR, "upcall_target= value too long for buffer");
+++				return 1;
+++			}
+++			if (strncmp(tkn + 14, "mount", 5) == 0) {
+++				arg->upcall_target = UPTARGET_MOUNT;
+++				syslog(LOG_DEBUG, "upcall_target=mount");
+++			} else if (strncmp(tkn + 14, "app", 3) == 0) {
+++				arg->upcall_target = UPTARGET_APP;
+++				syslog(LOG_DEBUG, "upcall_target=app");
+++			} else {
+++				// Should never happen
+++				syslog(LOG_ERR, "Invalid upcall_target value: %s, defaulting to app",
+++				       tkn + 14);
+++				arg->upcall_target = UPTARGET_APP;
+++				syslog(LOG_DEBUG, "upcall_target=app");
+++			}
+++			arg->have |= DKD_HAVE_UPCALL_TARGET;
++ 		}
++ 		if (pos == NULL)
++ 			break;
++@@ -1440,15 +1474,20 @@ int main(const int argc, char *const argv[])
++ 	 * acceptably in containers, because we'll be looking at the correct
++ 	 * filesystem and have the correct network configuration.
++ 	 */
++-	rc = switch_to_process_ns(arg->pid);
++-	if (rc == -1) {
++-		syslog(LOG_ERR, "unable to switch to process namespace: %s", strerror(errno));
++-		rc = 1;
++-		goto out;
+++	if (arg->upcall_target == UPTARGET_APP || arg->upcall_target == UPTARGET_UNSPECIFIED) {
+++		syslog(LOG_INFO, "upcall_target=app, switching namespaces to application thread");
+++		rc = switch_to_process_ns(arg->pid);
+++		if (rc == -1) {
+++			syslog(LOG_ERR, "unable to switch to process namespace: %s", strerror(errno));
+++			rc = 1;
+++			goto out;
+++		}
+++		if (trim_capabilities(env_probe))
+++			goto out;
+++	} else {
+++		syslog(LOG_INFO, "upcall_target=mount, not switching namespaces to application thread");
++ 	}
++ 
++-	if (trim_capabilities(env_probe))
++-		goto out;
++ 
++ 	/*
++ 	 * The kernel doesn't pass down the gid, so we resort here to scraping
++@@ -1495,7 +1534,7 @@ int main(const int argc, char *const argv[])
++ 	 * look at the environ file.
++ 	 */
++ 	env_cachename =
++-		get_cachename_from_process_env(env_probe ? arg->pid : 0);
+++		get_cachename_from_process_env((env_probe && (arg->upcall_target == UPTARGET_APP)) ? arg->pid : 0);
++ 
++ 	rc = setuid(uid);
++ 	if (rc == -1) {
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+index c78bbae7b8..4e27491bba 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_7.0.bb
+@@ -5,7 +5,9 @@ LICENSE = "GPL-3.0-only & LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
--SRC_URI[sha256sum] = "40176a52c186aefef6eb3cad2cdd30cd06e3afbe88fe8ab2af9c0b90f228daca"
-+SRC_URI[sha256sum] = "a949eee43d3782f2daae4f4a2819b2cb9b0c5d3b7f7a927067cc84dafdbb9f88"
+ SRCREV = "316522036133d44ed02cd39ed2748e2b59c85b30"
+-SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master"
++SRC_URI = "git://git.samba.org/cifs-utils.git;branch=master \
++           file://CVE-2025-2312.patch \
++"
  
- CVE_PRODUCT = "aiohttp"
- 
--- 
-2.34.1
-
+ S = "${WORKDIR}/git"
+ DEPENDS += "libtalloc"
 
