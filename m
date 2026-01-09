@@ -2,65 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E376D277C8
-	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 23:44:06 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1254.1768002244434192245
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42828D277C9
+	for <webhook@archiver.kernel.org>; Fri,  9 Jan 2026 23:44:16 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1256.1768002246677372179
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Jan 2026 15:44:04 -0800
+ Fri, 09 Jan 2026 15:44:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FBmOZtfx;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2a09757004cso44819525ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:44:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RofJbs4Y;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2a0d52768ccso33382555ad.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 15:44:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768002244; x=1768607044; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768002246; x=1768607046; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/flga7FA9Zzr+VijDHRTA3xuhioIwF32T2sUAKwzCbY=;
-        b=FBmOZtfxIwQZ5/SJ9x1oLcecqSyELtL/DvOTj9zwwJZBSTBD2P8THp++4sKEgWrkZC
-         po6/N5NY+VFDOlrsb0VdRoRAlKnIOqgyTqtM6Ye2gPQcmcdetWJ+TO6Ubd25tu4VoJce
-         WMtUzuhDUe3OS6vg3OVdAGIu87r639r/6L2wFgbu/iEwGmvTldWviapXMLRNKEVaj2PW
-         2qTea1cqv9xwmYV+/RPhDGPsP+toSR4mShtrm7DADURJS46/bvXvM/YtmS1CwObZ4L4R
-         h0HH4i96brSmL1gSJns23VpZ4sjjjPIyH6BqMnTIGoMhv6VOy/hFfVaGEZCV0karZz7K
-         s3+Q==
+        bh=ZHnEarxl44aXmkh9c1xGh6gfgGR97URgcZKD3lIpKxE=;
+        b=RofJbs4YL5kf7z6+VzyxKkwjYw0RMxdiSXZrmEJgAa/hCDK6irJVXjpQ8LUagF40uG
+         GeO56ht8xZGbUVD6RFU6LKWjrY6Cti6bnSF0B3UGif6EXalPKwDhuABiMoWDps8NuXDz
+         Xi37wo4vFp2F44IlkQo7KifkQhaduMidy4zYgUKBBrCUSX/PVGPu0/Ph/7KEXGMR3Xrv
+         NTEooPdDen75LeP64K/NMRewh4B+PryIgSghVi5ryeN1SNoGM8g5K4NLJolP4CkVGSvh
+         xN4ywNLFkcaRot9Eiy04CghTUvuKgc/NV4Z6fDYzcJXNFM0eSXEvNf+jtY/8RQqalAO4
+         IdYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768002244; x=1768607044;
+        d=1e100.net; s=20230601; t=1768002246; x=1768607046;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=/flga7FA9Zzr+VijDHRTA3xuhioIwF32T2sUAKwzCbY=;
-        b=DqSseghSF3MrC7ZuBCY7iD3GC9T5LQdFt2PLcK5kBAhtfR3LJYyPhD+E4SzLwLcylV
-         sXj8Ly9b5fY5cL4L58laDl5RrlSkIQlbYYAHu7ILvrHsUmD5+Y26vuGgqPXH8JVHy1Y6
-         zNALqI/b0YqpLVoHwCqRI9d8XK5OxDblvBAG0b5KiFo+pdNvegm/t4Dni/e4kx6sQshk
-         Kcn/6qO61aA0QvIn3bmx/PsPmczfJ5EoMwrbapVp8K2Dh2uF0/ahwOxZQVz9xHh72p/Y
-         NyI7UMN5lN9NA/wgbaL+iGsfveAi0R4m6rii2eRsRqrmkx6gGPxkxxFCEpDZDBBAbYUL
-         zv/A==
-X-Gm-Message-State: AOJu0Ywz516Qno4LuLCXA6BQ52Jmt5BOI4w4Czj593PbepqMORnxe4Rp
-	GIeOpPNdHxVq4HuoHb7EblP2pvafukZnCBolKM8rciW1XvZFR7fHWKW4r/YEZg==
-X-Gm-Gg: AY/fxX4RU72zv3XLOWm4bD9G48XKleSZxp9uNJ2yKsLkrz2xlnq/8Jlk0/bygJ9kNbY
-	+mfSwaluwXLqx8jr710qP+YFhhNJPfO1hJhDSw2tPoXuTIswMShBoCutEMFo3e32brtEtEmhx9i
-	IIXj+4nKxqP0mwQ0NeGFaLMfjMwYYYertGQRHvMTZBEdcXWXLJ18QzUNn+PMKWVbbYji6Mny1A3
-	h01VZeo28ullJIAxEnBJKul9z2kIKzcNyRi3XU9HgDiMASuWFLEjmvlFZhON/TX8bocmCFsnjJh
-	yJbnniMlnxO1Q21iQOipypJagG/hYfaT/sAfX0LZs9s8DWob1msACXR1geIVkcClrLAYFxN6rLZ
-	fTTaNN22g9u32SNAJ2PxV3HUKFWVOiLMyqBr+X7nwMCBG1D6qovPNYIuEwBHyh4NxxBtmMtEn6w
-	k1f5jcqil0siCBDkPqGCyGU9xsg3ELmJgCAg==
-X-Google-Smtp-Source: AGHT+IG9CZOv1s/FQbCNe3kGtAnTlSvmr2WkvLXf1ZqsXQC7Jiwtk9YkRyY08Sk4Tel8aZwKMQEoEg==
-X-Received: by 2002:a17:902:d50d:b0:2a0:bea0:8207 with SMTP id d9443c01a7336-2a3ee49e052mr112541145ad.49.1768002243543;
-        Fri, 09 Jan 2026 15:44:03 -0800 (PST)
+        bh=ZHnEarxl44aXmkh9c1xGh6gfgGR97URgcZKD3lIpKxE=;
+        b=u0AIlrFuUDdJMqMsPCAQL3cussWr1wG9sihyWbUhShXnqgqKY0ZBYDMY32FgYOYrIS
+         FQYI9eUfsX2Rs28aTUqhUb6DzZCtf/CvFX8RptoA+6xV09CYDi1WdfZbWLIWoGwtHDrb
+         dzjb2PzdLsJJff5j0hKdyc2OqxQPeDrKthaYb9syluLCLz3ueNZ6hvxHQ//TIv1+If2j
+         3+ruBw4AZqlfru5WbTBEbxQFlfiLn2m64WCnHT7DD1NUX5MNZl/ZmXLfasGcLdeTVOGy
+         w2V+zHCBnib4Kh371hBGFcGL97S+obNX820Tc78Xn40MlHLHCan5t1fkpx1IJG7rMLHv
+         r/nw==
+X-Gm-Message-State: AOJu0YzLhuzBrRpkgStfRYOQXc8P0AUPtmJCpLj2QaxWx2mhvI2ppt3U
+	UfM8jUk1ORvxn/LDGn1CXuKIVJkhKxN5VBXqJh3UesqdoJHvpgoITQZoqII/Mw==
+X-Gm-Gg: AY/fxX5KJLZQ/RFHBRT+0XEWF/AfBsCorIt5i2VPyUi5shce4ufqOO8HTaZEPWS2GJO
+	9fS/3fn6mV9Yy5LyDuRQvVCgwE3Xwku29Of/2LSeypQJVqfx9MVleRAKnFFnz8TBoHamtXXTbBE
+	1BaUNQYv1bG94i2w0PqmxEcDw4bFTWtlEHZsibb30xpwIuuFM6V+0RmFy9zc78IhgrYMoeL/IV3
+	wWKZ/tgVE2UVS21G2sLKAAlIqM3icLImIo+IjhLB3ljdAR6f12F5VphqGgWHdX027KwVTL+O5GW
+	XvWNOdiYm8Jm7KIqCEOHrQMMVuUdhWyVy4MQypN1q7XgqmkklMeXiwsYLYfOyB7wrrwmwz13s/q
+	GV9TBvaU7ZHQ5+rsm3cjc2yD6LiM/FAzuS6LzYwas6QaUzVFCiNHJQTfBVAW2PFef5CWnbfwqLn
+	KG8elS5V+QhLTV7iTypw0qyYk=
+X-Google-Smtp-Source: AGHT+IHGXPQuUSp0jxyRCURIS2qd8N+tZgVY0WotcX+zEZMS1/jaisgfekw8cXHmwl39M91tnAfG2g==
+X-Received: by 2002:a17:902:ef46:b0:27e:ec72:f67 with SMTP id d9443c01a7336-2a3ee468629mr113975825ad.6.1768002245807;
+        Fri, 09 Jan 2026 15:44:05 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c3a31dsm113934675ad.9.2026.01.09.15.44.01
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a3e3c3a31dsm113934675ad.9.2026.01.09.15.44.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Jan 2026 15:44:03 -0800 (PST)
+        Fri, 09 Jan 2026 15:44:05 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][scarthgap][PATCH 3/5] sox: extend CVE_PRODUCT
-Date: Sat, 10 Jan 2026 12:43:44 +1300
-Message-ID: <20260109234346.3098858-3-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-multimedia][scarthgap][PATCH 4/5] vlc: patch CVE-2024-46461
+Date: Sat, 10 Jan 2026 12:43:45 +1300
+Message-ID: <20260109234346.3098858-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260109234346.3098858-1-ankur.tyagi85@gmail.com>
 References: <20260109234346.3098858-1-ankur.tyagi85@gmail.com>
@@ -69,40 +67,84 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 23:44:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123315
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Jan 2026 23:44:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123316
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Add all relevant items from queries:
-$ sqlite3 nvdcve_2-2.db
-sqlite> select vendor, product, count(*) from products where product like '%sox%' group by vendor, product;
-commugen|sox_365|1
-libsox_project|libsox|1
-sox|sox|3
-sox_project|sox|10
-sqlite> select vendor, product, count(*) from products where product like '%sound_exchange%' group by vendor, product;
-sound_exchange_project|sound_exchange|16
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-46461
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a68c3df41cd7049f5b156955d70cb4f76b6d9f76)
+Backport the patch mentioned in the news[1] that fixes this vulnerabililty.
+
+https://code.videolan.org/videolan/vlc/-/blob/3.0.21/NEWS?ref_type=tags#L44
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../vlc/vlc/CVE-2024-46461.patch              | 44 +++++++++++++++++++
+ .../recipes-multimedia/vlc/vlc_3.0.20.bb      |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-index 011cbc2a9d..a79fb15d39 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-@@ -34,6 +34,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
- SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
- SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
- 
-+CVE_PRODUCT:append = " libsox_project:libsox sound_exchange_project:sound_exchange"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
+new file mode 100644
+index 0000000000..868eb89cac
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc/CVE-2024-46461.patch
+@@ -0,0 +1,44 @@
++From aafb226321a525169fd68bf4708e7c6f15e4307a Mon Sep 17 00:00:00 2001
++From: Thomas Guillem <thomas@gllm.fr>
++Date: Tue, 9 Jan 2024 06:58:39 +0100
++Subject: [PATCH] mms: fix potential integer overflow
 +
- inherit autotools pkgconfig
++That could lead to a heap buffer overflow.
++
++Thanks Andreas Fobian for the security report.
++
++(cherry picked from commit 467b24dd0f9b0b3d8ba11dd813b393892f7f1ed2)
++Signed-off-by: Jean-Baptiste Kempf <jb@videolan.org>
++
++CVE: CVE-2024-46461
++Upstream-Status: Backport [https://code.videolan.org/videolan/vlc/-/commit/e7f98f3632d793c3921bfe72595721af191e670e]
++(cherry picked from commit e7f98f3632d793c3921bfe72595721af191e670e)
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ modules/access/mms/mmstu.c | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
++
++diff --git a/modules/access/mms/mmstu.c b/modules/access/mms/mmstu.c
++index f795b0bd43..f10e38cd43 100644
++--- a/modules/access/mms/mmstu.c
+++++ b/modules/access/mms/mmstu.c
++@@ -1316,14 +1316,16 @@ static int  mms_ParsePacket( stream_t *p_access,
++ 
++     if( i_packet_id == p_sys->i_header_packet_id_type )
++     {
++-        uint8_t *p_reaced = realloc( p_sys->p_header,
++-                                     p_sys->i_header + i_packet_length - 8 );
+++        size_t new_header_size;
+++        if( add_overflow( p_sys->i_header, i_packet_length, &new_header_size ) )
+++            return -1;
+++        uint8_t *p_reaced = realloc( p_sys->p_header, new_header_size );
++         if( !p_reaced )
++             return VLC_ENOMEM;
++ 
++         memcpy( &p_reaced[p_sys->i_header], p_data + 8, i_packet_length - 8 );
++         p_sys->p_header = p_reaced;
++-        p_sys->i_header += i_packet_length - 8;
+++        p_sys->i_header = new_header_size;
++ 
++ /*        msg_Dbg( p_access,
++                  "receive header packet (%d bytes)",
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
+index 21bc408f6d..bf34146e0a 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
+@@ -25,6 +25,7 @@ SRC_URI = "https://get.videolan.org/${BPN}/${PV}/${BP}.tar.xz \
+            file://0006-configure-Disable-incompatible-function-pointer-type.patch \
+            file://taglib-2.patch \
+            file://0001-taglib-Fix-build-on-x86-32-bit.patch \
++           file://CVE-2024-46461.patch \
+ "
+ SRC_URI[sha256sum] = "adc7285b4d2721cddf40eb5270cada2aaa10a334cb546fd55a06353447ba29b5"
  
- # Enable largefile support
 
