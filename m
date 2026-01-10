@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F417D26D97
-	for <webhook@archiver.kernel.org>; Sat, 10 Jan 2026 19:59:46 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15477.1768075183271784205
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38848D26D97
+	for <webhook@archiver.kernel.org>; Sat, 10 Jan 2026 19:59:56 +0000 (UTC)
+Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15478.1768075190837620979
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Jan 2026 11:59:45 -0800
+ Sat, 10 Jan 2026 11:59:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=TqmwrPd0;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20260110195944105cc3516500020717-2nkaxb@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260110195944105cc3516500020717
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=D8zoCwrB;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20260110195948fcc48ca783000207ea-kuyurf@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20260110195948fcc48ca783000207ea
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 10 Jan 2026 20:59:44 +0100
+        Sat, 10 Jan 2026 20:59:48 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=D+AamxEmusNbESHxF6WM++GLbkGZKvjpB1wPOD78nj8=;
- b=TqmwrPd004+TZ9MfqzHs1SUn7JyChgxfIw/coWtuAEIlmsECPHCzuZEIlNbzYo+q8FUlJ0
- 8oCGHsLqbTzXdA25cl6fJvNphhfZMSIZYUzycb8RXPHTJchW3QUffymwKwhqfUvGxCiUGrfQ
- NdKFi+CGpZTTcppSE7UmnuZl+Y47HUuTQt5OMJZqtYX0S9W/He1h72GrNvkGofvg0C5WgQbt
- vg1Esq2S8Ec5Fg/Psa3dFm/p49PgpLS8v0aQBfQ08YVzfCo4KVmS0Ha9ruLow/Rgq7uCqYq8
- fGmcYFQz5013pZV4oYrxGgTWyqbTZKFEQ20lCf3tIq6Dr6n1s+ZQmd5A==;
+ bh=doDFF07M4Pv7PtbCWVRCL+0/fpFaLLVyJ6RmDL8TvwE=;
+ b=D8zoCwrBW036NXBFcEmMu7COc5n6Jl3fy1c3LFSNugOsf/MyQrEfSDr+V5jNTMGUsnbtxF
+ Tf8pWIW+EQxtASpDZLpKZJrGvGx776r7SZAnppFF4LC1lDXnoXE5WJHxOEDarAujrpBy6giT
+ Wi8sulPzEsWqUs/2FaoVMmpvvtPM6iTKJo5kc6pex8JTtsqTwFelAzxfVc+10eik0jmRGvHv
+ bCWss9TXDJnl2khjpX9u0D0q7lXr+WsLYAUgcXJGOat2jr8+C0E1+JVlYZ62ETIKPwBTyaBX
+ Uecl5aCxEyZMW39vqJX8EPKhljRO/cDz3RwsQrg+t1WOvsmh9UbdoUAA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][whinlatter][PATCH] libsodium: patch CVE-2025-69277
-Date: Sat, 10 Jan 2026 20:58:58 +0100
-Message-Id: <20260110195858.3946446-1-peter.marko@siemens.com>
+Subject: [OE-core][scarthgap][PATCH] libsodium: patch CVE-2025-69277
+Date: Sat, 10 Jan 2026 20:59:25 +0100
+Message-Id: <20260110195925.3946482-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Jan 2026 19:59:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123333
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Jan 2026 19:59:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123334
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -48,13 +48,13 @@ Pick patch per [1].
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  .../libsodium/libsodium/CVE-2025-69277.patch  | 61 +++++++++++++++++++
- .../libsodium/libsodium_1.0.20.bb             |  2 +
- 2 files changed, 63 insertions(+)
+ .../libsodium/libsodium_1.0.19.bb             |  4 +-
+ 2 files changed, 64 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
 
 diff --git a/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch b/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
 new file mode 100644
-index 0000000000..a2ced62760
+index 0000000000..55fada2a89
 --- /dev/null
 +++ b/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
 @@ -0,0 +1,61 @@
@@ -75,7 +75,7 @@ index 0000000000..a2ced62760
 +index d3020132..4b824f6d 100644
 +--- a/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
 ++++ b/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
-+@@ -1141,10 +1141,13 @@ int
++@@ -1029,10 +1029,13 @@ int
 + ge25519_is_on_main_subgroup(const ge25519_p3 *p)
 + {
 +     ge25519_p3 pl;
@@ -105,7 +105,7 @@ index 0000000000..a2ced62760
 + static const unsigned char L_p1[32] = {
 +     0xee, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58, 0xd6, 0x9c, 0xf7, 0xa2, 0xde, 0xf9, 0xde, 0x14,
 +     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10
-+@@ -133,11 +137,12 @@ main(void)
++@@ -142,11 +146,12 @@ main(void)
 +     assert(crypto_core_ed25519_is_valid_point(p) == 0);
 + 
 +     p[0] = 9;
@@ -119,17 +119,19 @@ index 0000000000..a2ced62760
 + 
 +     memcpy(p2, p, crypto_core_ed25519_BYTES);
 +     add_P(p2);
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-index 63d21576b4..972b8b8694 100644
---- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-+++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c59be7bb29f8e431b5f2d690b6734185"
- SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
- SRC_URI[sha256sum] = "ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19"
+diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
+index 2e678f3f0f..9b60dcc62c 100644
+--- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
++++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
+@@ -5,7 +5,9 @@ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=49ce3b426e6a002e23a1387248e6dbe9"
  
-+SRC_URI += "file://CVE-2025-69277.patch"
-+
+ SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz \
+-           file://0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch"
++           file://0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch \
++           file://CVE-2025-69277.patch \
++"
+ SRC_URI[sha256sum] = "018d79fe0a045cca07331d37bd0cb57b2e838c51bc48fd837a1472e50068bbea"
+ 
  inherit autotools
- 
- BBCLASSEXTEND = "native nativesdk"
 
