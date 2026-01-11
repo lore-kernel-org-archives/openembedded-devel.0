@@ -2,156 +2,157 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B521ED25030
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B60E7D25037
 	for <webhook@archiver.kernel.org>; Sun, 11 Jan 2026 07:36:24 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6658.1768116980258333242
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6657.1768116977485149025
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Jan 2026 23:36:20 -0800
+ Sat, 10 Jan 2026 23:36:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lHqBY1m+;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-81e98a1f55eso855522b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jan 2026 23:36:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BMVtej4j;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-81f46b5e2ccso253470b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Jan 2026 23:36:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768116979; x=1768721779; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lHw58w5cTfOtN1zbrc2cIWlvO2aKZUVuesPDNMzpU0A=;
-        b=lHqBY1m+0678YvV28yNV5r/BXKoJO84kT4mJ3Wf8Pdtno47O3n1CVBssl7JjVU5qOa
-         5ixnNKFWMVxHecnaAlT5T4DZ3Q1z7jkYF+zMsFVT8smbYM7bXmwS8cOeJNQR7d5QAbap
-         A7p/tpDC9ZFRPAINM5CJHxSv+zuX4zgDcZDb1JOpoGxi6HOPyvXDENu/hpq1l9OVSV65
-         rz4Jib9BvmkSshi4ydLNBTsqgoiXIgctfuW+j/s7xDMkU46MXimHbDvp3CIShrrQE8i0
-         9bW5RmN4ustbPsnAgRZHgtkn2YvLMLUNMBJUo1FSqti4BTD+qL/27TQW1Vk9j5hbhyvo
-         6EJA==
+        d=gmail.com; s=20230601; t=1768116977; x=1768721777; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=cLYfeNotp53lQKA4InTPKExI5XfJ7FlW98+BJcghUv8=;
+        b=BMVtej4jtevqobQkrF1s20s3o8kCF3HY1u23wef/cmVmhWWdILPKWdzk9fSWJcyJI/
+         GoQ6XCisNPb0O1ZxOGc+sV19toqJjuQjRv5IoMPmSixmZrVHBSKSZIJiXHinbUrOcwRe
+         NiI+gCdtn/0A3bl74ztZgnToH1HtB6LzmNAXtNLNo0PinA1PBVv5V3bWvx4mOWNUnZHN
+         Po7jY6gtq9LNi5JnCgEa7Qbz7p+DeD2k1u9uBvAW3r8LwJlyfWE6ZNmaYsWbPwoGzSoD
+         qieggEOgXqyizcbqJrgu5ZnFrfUQgLBTqi6/cHn4bkoQsd5g1Rxkwjh6RyrMXl3WHlgx
+         QOpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768116979; x=1768721779;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=lHw58w5cTfOtN1zbrc2cIWlvO2aKZUVuesPDNMzpU0A=;
-        b=eSZNsYkAgkd50HF1N9sQriMydJyar/OSelrIP5M4VGKCN+yc/CYCZ/MiSO4QkVwATj
-         RPB42adbNosX49SRvQIcvkmY93KJcri8ufEnC0Y3krtOVKvWrEnr4H3gsasMeqwfcKQJ
-         DLov9eB/GCJxhfrmJMCa0MqmYOf9sA1hqtwj4bbre45LIMWPE5coKWMY3VDZhvrSYf5b
-         JZ7c3I3y53l1G8iFqu4JsCuEPRJsg5vZxwQgmdPl99FQWh17+c1+Uj7MQrwBWs5/ks5m
-         vPwpJUy7vn6IzMjU+Wv4991CuAOFkYM1aFZlZccbe+6a30U1F0qKymY3RpbhjzxXGbiV
-         mEMg==
-X-Gm-Message-State: AOJu0Yx2T5FHX53eQyEMKIvUVELRzjWaIgjbEBnifDTVlblp/FEmc6PX
-	sBXumfBchgm6j5TgpdxRar4pPzuhDralgkDLFi+5eAQn9dKluopVdZB5NnDjEA==
-X-Gm-Gg: AY/fxX5WH2gOAngtOrRcMtqLmvlAv9WaOIlqn7dEhJe39rtVGMxvVfSfAMxWFciKmP7
-	km/dTgQhzBYE6X0tRg2qr1pCZd004onYEnWS29PiaH9DK6FWkdX+w8FJ45n5SIJ6Ak0stX+hjYk
-	smCTN2gHO3nAw8mStuMZtxmFXjackeFzeMOikNAHANgdqsu+uZtE7zi4dw/eiQJizbG7Wj1+dxn
-	MWud/zFR4Ab9Q0YWBXIVlj7KXIM7m5QvKEbMU3B5sJ8wUo4gIyeEt6RK+ppVVdzwniHuX7O9LUe
-	VLk4rLoCTWk4pv+bnpyVXKe6+2Wbj5UTECxagrAHvRTOfFqve2xBjzw8KC4T60d/OecnSfml60v
-	h6uF2KAjcEb75CUa7caU637jdjiGVpR3ED9ham8iOm5yuHw7e2qiJqdY2W+MHMgYTPNe6zvtcfl
-	mK4KpTplLx8zcmXvjbT82XEd8=
-X-Google-Smtp-Source: AGHT+IGpxH4gOCW9QBzW/hHvPUXvF8UQIzxU/P7WNBgCFnc/NWPSrlJjC9Dnf7R51viNgV/VZ71hkw==
-X-Received: by 2002:a05:6a20:3d86:b0:366:1a31:a70a with SMTP id adf61e73a8af0-3898f888af4mr13493436637.10.1768116979379;
-        Sat, 10 Jan 2026 23:36:19 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768116977; x=1768721777;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cLYfeNotp53lQKA4InTPKExI5XfJ7FlW98+BJcghUv8=;
+        b=KZl/rD0WpZfbf9cFOIrwuOw0lzu77LWGjCHho/aQLEPmG6n4IUMYpZDB0X6p73p4wi
+         XaHv92DjtHdy+o6j2/Xm0aBop3M5MowX/TmWOfKTGIp1CW5GJ8YIJu+NZqk8WS1KLXC1
+         lnMjIB8vnnednVr0wMsI02QVROorrbu4gyeZE2xv8jEyeBfcCpsLUEZkz1ADskJHPXbN
+         /M9cvghiyMr7P9uxw6wxcDARrKYbVHGGjVZ3SsHoGt1v9Sp2oHNjhN+hA4Xr7B8iSaWs
+         PHd3qikGIuS1qY1l/0oSeLc+hDzZNr/Fb+QeOmkohF25FvGB3AUq7ajon1rAXP/CBqbz
+         96+g==
+X-Gm-Message-State: AOJu0YzvFBLlDaYo2QHfU6JSqJK1ADg0skcth+fPJMHcwUeNU5bH3XQE
+	56miMaoq8XtCkt3h7HqIkJwdfDWvQAAvZRrl6iR0DmfkVKH3FXLa3+wFh7oE7g==
+X-Gm-Gg: AY/fxX7PYCn+qz2tXRdTRUYtKHmeLhDiJNFvo1TDPA75hMgmB40Vm66NujFxmVEz4Zi
+	MVEgdePaiayilG+ROEWD+ATjglPra9GMCH2aBYBHMEOFRz/84yyrFAzw0KC1gl/7XgXAzpI4uN4
+	QpgK958JG03EyrkrNvLg0dyTPiCH2tjY2nOkB+pXqpB7GizKOFzCu4L4oTMmUdYvCZ2EcEmut3G
+	TRQf8vg2zVeaQ87wEXiMeGFOKFOnzN7dJQ7j4gXjS+u5M/nG6kiOJY/ZSwvSUggtCNzE0QFRkz2
+	OrX+1RwSguAXGJBEZmM8Osk2vBxRlqTV9bcDS04TSf64j6z8Pbt27N/ZWvWsBHvMcTBJXa651KZ
+	vJ+qH3Ys8OrlbIXt3sS7EWP+CaIgu2FiAkCFU2nd55y8epzrpt4AqJT0rXlGrzEQNIM2xlrHlhO
+	eQp6rWmnX+wUFPU2meOZzFcgY=
+X-Google-Smtp-Source: AGHT+IHAH1n3QIbTE712KmEeha8nfzpGDTlqBRVD+4tl4PG1woH3hETMQ8khTKv6OA05JilHiU7ufw==
+X-Received: by 2002:aa7:8084:0:b0:81c:717b:9d29 with SMTP id d2e1a72fcca58-81c717ba491mr9135471b3a.51.1768116976497;
+        Sat, 10 Jan 2026 23:36:16 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.10])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c4cbfd27953sm14259545a12.11.2026.01.10.23.36.16
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c4cbfd27953sm14259545a12.11.2026.01.10.23.36.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Jan 2026 23:36:19 -0800 (PST)
+        Sat, 10 Jan 2026 23:36:16 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
+Cc: Peter Marko <peter.marko@siemens.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 2/3] libvpx: upgrade 1.14.0 -> 1.14.1
-Date: Sun, 11 Jan 2026 20:36:06 +1300
-Message-ID: <20260111073607.524248-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/3] synergy: patch CVE-2020-15117
+Date: Sun, 11 Jan 2026 20:36:05 +1300
+Message-ID: <20260111073607.524248-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260111073607.524248-1-ankur.tyagi85@gmail.com>
-References: <20260111073607.524248-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 11 Jan 2026 07:36:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123341
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123340
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-libvpx-configure-support-blank-prefix.patch
-refreshed for 1.14.1
+Pick commit based on [1].
 
-Changelog:
-============
-- Improved the detection of compiler support for AArch64 extensions,
-  particularly SVE.
-- Added vpx_codec_get_global_headers() support for VP9.
-- Added buffer bounds checks to vpx_writer and vpx_write_bit_buffer.
-- Fix to GetSegmentationData() crash in aq_mode=0 for RTC rate control.
-- Fix to alloc for row_base_thresh_freq_fac.
-- Free row mt memory before freeing cpi->tile_data.
-- Fix to buffer alloc for vp9_bitstream_worker_data.
-- Fix to VP8 race issue for multi-thread with pnsr_calc.
-- Fix to uv width/height in vp9_scale_and_extend_frame_ssse3.
-- Fix to integer division by zero and overflow in calc_pframe_target_size().
-- Fix to integer overflow in vpx_img_alloc() & vpx_img_wrap()(CVE-2024-5197).
-- Fix to UBSan error in vp9_rc_update_framerate().
-- Fix to UBSan errors in vp8_new_framerate().
-- Fix to integer overflow in vp8 encodeframe.c.
-- Handle EINTR from sem_wait().
+Note that the pick is node from deskflow, which is open-source successor
+of synergy.
+If anyone uses thie recipe, it should be switched.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+[1] https://github.com/deskflow/deskflow/security/advisories/GHSA-chfm-333q-gfpp
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 911023b521bebcd7e4ee4bcb2eb97745c2349752)
+(cherry picked from commit db283053d096cf77df8e4444ce91e5d882f8850c)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libvpx/libvpx-configure-support-blank-prefix.patch    | 8 ++++----
- .../webm/{libvpx_1.14.0.bb => libvpx_1.14.1.bb}           | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-multimedia/webm/{libvpx_1.14.0.bb => libvpx_1.14.1.bb} (96%)
+ .../synergy/synergy/CVE-2020-15117.patch      | 48 +++++++++++++++++++
+ .../recipes-support/synergy/synergy_git.bb    |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch b/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
-index 463651aa4a..bd3d697885 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
-+++ b/meta-oe/recipes-multimedia/webm/libvpx/libvpx-configure-support-blank-prefix.patch
-@@ -1,4 +1,4 @@
--From 2829e6998b7595dd2108c1497fdd02485ef99e2c Mon Sep 17 00:00:00 2001
-+From 1bbbf27a23c91dcc271b773a97153063461b986d Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen@dominion.thruhere.net>
- Date: Tue, 16 Aug 2011 16:04:35 +0200
- Subject: [PATCH] Upstream: not yet
-@@ -11,10 +11,10 @@ Upstream-Status: Pending
-  1 file changed, 16 insertions(+), 4 deletions(-)
+diff --git a/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+new file mode 100644
+index 0000000000..4ad2a45275
+--- /dev/null
++++ b/meta-oe/recipes-support/synergy/synergy/CVE-2020-15117.patch
+@@ -0,0 +1,48 @@
++From 79efdb7c617b809e1a2daf17441d7a30f7046aa5 Mon Sep 17 00:00:00 2001
++From: Jnewbon <48688400+Jnewbon@users.noreply.github.com>
++Date: Tue, 14 Jul 2020 13:14:40 +0100
++Subject: [PATCH] Merge pull request from GHSA-chfm-333q-gfpp
++
++Attempts to fis DoS to servers with less then 4GB memory
++
++CVE: CVE-2020-15117
++Upstream-Status: Backport [https://github.com/deskflow/deskflow/commit/0a97c2be0da2d0df25cb86dfd642429e7a8bea39]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ src/lib/synergy/ProtocolUtil.cpp | 13 ++++++++++++-
++ 1 file changed, 12 insertions(+), 1 deletion(-)
++
++diff --git a/src/lib/synergy/ProtocolUtil.cpp b/src/lib/synergy/ProtocolUtil.cpp
++index d9f5dc324..7d2c37ff8 100644
++--- a/src/lib/synergy/ProtocolUtil.cpp
+++++ b/src/lib/synergy/ProtocolUtil.cpp
++@@ -61,6 +61,9 @@ ProtocolUtil::readf(synergy::IStream* stream, const char* fmt, ...)
++     catch (XIO&) {
++         result = false;
++     }
+++    catch (std::bad_alloc & exception) {
+++        result = false;
+++    }
++     va_end(args);
++     return result;
++ }
++@@ -216,7 +219,15 @@ ProtocolUtil::vreadf(synergy::IStream* stream, const char* fmt, va_list args)
++                 // allocate a buffer to read the data
++                 UInt8* sBuffer = buffer;
++                 if (!useFixed) {
++-                    sBuffer = new UInt8[len];
+++                    try{
+++                        sBuffer = new UInt8[len];
+++                    }
+++                    catch (std::bad_alloc & exception) {
+++                        // Added try catch due to GHSA-chfm-333q-gfpp
+++                        LOG((CLOG_ERR "ALLOC: Unable to allocate memory %d bytes", len));
+++                        LOG((CLOG_DEBUG "bad_alloc detected: Do you have enough free memory?"));
+++                        throw exception;
+++                    }
++                 }
++ 
++                 // read the data
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index fb767942fe..2717320886 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -10,6 +10,7 @@ DEPENDS = "virtual/libx11 libxtst libxinerama curl openssl"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- diff --git a/build/make/configure.sh b/build/make/configure.sh
--index b645a666f..0b99a8b38 100644
-+index 93643f3de..e84198200 100644
- --- a/build/make/configure.sh
- +++ b/build/make/configure.sh
--@@ -658,6 +658,8 @@ process_common_cmdline() {
-+@@ -692,6 +692,8 @@ process_common_cmdline() {
-          ;;
-        --prefix=*)
-          prefix="${optval}"
-@@ -23,7 +23,7 @@ index b645a666f..0b99a8b38 100644
-          ;;
-        --libdir=*)
-          libdir="${optval}"
--@@ -687,13 +689,23 @@ process_cmdline() {
-+@@ -721,13 +723,23 @@ process_cmdline() {
-  }
-  
-  post_process_common_cmdline() {
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.14.1.bb
-similarity index 96%
-rename from meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb
-rename to meta-oe/recipes-multimedia/webm/libvpx_1.14.1.bb
-index b4d49842ea..f32c7842c3 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.14.0.bb
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.14.1.bb
-@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
+ SRC_URI = "git://github.com/symless/synergy-core;protocol=https;nobranch=1"
++SRC_URI += "file://CVE-2020-15117.patch"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
- 
--SRCREV = "602e2e8979d111b02c959470da5322797dd96a19"
-+SRCREV = "12f3a2ac603e8f10742105519e0cd03c3b8f71dd"
- SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=main \
-            file://libvpx-configure-support-blank-prefix.patch \
-            "
+ # Version 1.10.1-stable
+ SRCREV ?= "1b4c076127687aceac931d269e898beaac1cad9f"
 
