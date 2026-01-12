@@ -1,155 +1,108 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C953CD2504D
-	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 08:21:21 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28868.1768206072265862137
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6B55D2504F
+	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 08:24:51 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29152.1768206282430182668
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 00:21:12 -0800
+ Mon, 12 Jan 2026 00:24:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BjclqKWz;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4779a4fc95aso25483055e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 00:21:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768206071; x=1768810871; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=X4UXiJBwrU85ftwP/gcX514853Zo9d8OKNH1ElgLPAc=;
-        b=BjclqKWzVkv6e/+VTrt4d2JrE1TnLMlZI9YabQlU/UOr74KVpilGCA5Juini77kuj0
-         yg/a/9tP0c74FC+Yk/YiLrIjyfPgvSO9PABRpsh9AuJLwyhnrDgUr+BgF2GBG7wepku/
-         GhHOrp51mcQ7Or1SwLDa+hKgPR25MDoYiaQFwZwbn08ZUqUfuv1PUNeQH2SwxGiYQ0DO
-         so913vD0wZELjjeU7PHfBlEfImkIG0MgLGjX8LgGzGKFeO+9EcQeozRskTomeCW5VNPO
-         n7EDFr81yosiAXvH+6bBcttfMQKxd29261e5EnnvSnnxtsVObio7Nr7zad4Jf52lIsGJ
-         gRuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768206071; x=1768810871;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=X4UXiJBwrU85ftwP/gcX514853Zo9d8OKNH1ElgLPAc=;
-        b=G7jsSYNwviyddloxqujlkDu+Me2aL9wy0zenKn4QM7/4itBiXf5UQnHVL61GUHBdXP
-         RkhfQBUFBJrzS1xpJ5IcYe9c1ezARP7l2gUnt4gjFlrmNN8AH8YlW34f94oFVXM9mVlk
-         kzmp8RzetNDndOKdG/atbwgPJs9DchilCiWEKogqjpH1tfQdH2q5Gk/LN+SqpSQxa4lc
-         6iz1K09Pi7LFnNYvMYmYHXAN4vAIgimfkjEvbbmUdG1wT5S5bshlcSh6Pe1FYEg/Wfft
-         T9L1R4d+nQs5/ut8J9aQUHDWF+A86vR70mm3WmIt3aileEtkRWfKC+EgNCVmKIwoWsJk
-         9qWg==
-X-Gm-Message-State: AOJu0YzxdMeYdP2/H98wiL6k6l9+LdrdZZmzKPX+oXGeQ8pUpBDypmWR
-	t/gIskGPuUX+X8X1oa3OhjClbbXaaK8oSFs/Yfk0AdOsdHvXpVR8bzz7RPdAZQ==
-X-Gm-Gg: AY/fxX6jQx70jnc5i6NMMX9HviiaQeVEq3apQDO1TnX7ATwoOYy0sqzctuwGMJwVqbk
-	ybu2XV/qGc/7X1BGU0NBOXuJ+7zosCQFMpY3VJg2NPiDVGBhXRQVXqunhK3hQbzO9z7g7sgBa+K
-	whf9SSugQjZtDrZgVNlmfp+aYJOGKFwm+WgkIgd0kdt2Whk2Jhkpw6SEaGTGkI/wDiaigMO+8TL
-	9HDbhc+qQz288uacrrkRRqUmR6nfhm1nZli/xbLsELKdAhlUkPL6oGurdnnTFuXb/c9bG2kcepl
-	0k+fW7nW3wDG2ZvahgG06Etb3IY537NB38RD8r+9pWU4aYcDCg34Xklp4dktCXbjSnW/JMeI9Gi
-	I13gaFfJ7y8l3XnZO3Jt1NYl3MjLCuKeOepMHyaWEjfDUG9eiJcxKqm/5emXFpI8HW0RpiLRuZm
-	k2IVyQAOFc
-X-Google-Smtp-Source: AGHT+IEp6WUcNVMYv2JK6dI0VAu7bpJjGH6O0CwGW/GM9AcHS6sBOw/Rfy2ZEF6gDNhakx6ydEULOA==
-X-Received: by 2002:a05:600c:6c95:b0:47a:8383:f2b2 with SMTP id 5b1f17b1804b1-47d7f63722dmr198566285e9.17.1768206070596;
-        Mon, 12 Jan 2026 00:21:10 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d8636c610sm123295795e9.0.2026.01.12.00.21.09
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jan 2026 00:21:10 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: CVE report - master - 2026-01-12
-Date: Mon, 12 Jan 2026 09:21:09 +0100
-Message-ID: <20260112082109.165876-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=qlsacECm;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=54725d1a56=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60C76OuO4114104
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 08:24:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=NdEP9Wa1pzLfeeedWRk4
+	7+HB2XVgC1U2F17IwT07Lak=; b=qlsacECmRXst/IEa+Lt5jHL1somrUnue4SR8
+	Lv/OYju4QkbfFFMbsCjstJ0cK+oqmdq6gtGU2TH7kZOGuntoM8eTJrYxFQSQce97
+	KjblVlFDzY1k/+9WFKxfoxn37cETuNKWuq9w8N7K6VTba3ZFCThXJiMNqAdoHFXy
+	LB5drDJ2wEOK1Ry1KPeieFoBpj3KtzxLX0lxXYBjlPVeMRSF+8Ox3p2HcP/uXVrT
+	9drO95/tch1tiCS/y7zpeF3sIan24bbufv7BxpnLEFt/d92llRdp9MLT3prCZ01U
+	C9DyfmYOX0jRRBmFgSAmukPNaL3ncZbWRxopoEQizcxlrcalGA==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4bkbythjtx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 08:24:41 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Mon, 12 Jan 2026 00:24:40 -0800
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Mon, 12 Jan 2026 00:24:39 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] nodejs: Make libuv related patch conditionally
+Date: Mon, 12 Jan 2026 16:24:38 +0800
+Message-ID: <20260112082438.1529670-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 8XjnZ4UGjAXayH13ZLJPO684xuiBwYbx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTEyMDA2NCBTYWx0ZWRfX9w/cLDh5csDh
+ cyvg9PFKSmm5CuWGYdBUEbrgIsSSRIU3/L6lRPHN9hZ3jb+c7RMNR8aiI1yX1WIKKrBnUhPMgnw
+ l3IUZrVE7QQx9TP6x/6Ybd37eq2qtnM9l9xZsIoKtXqVwSY45VqeODbNGm2RFfmaF6KC1KzyYIP
+ yefknHEfWXg9F+pQG0TvJgoTVgEeJuAM2meZKgWChXvQ1acUvmAkB8VHOzz+TTAbWn1vI2a/cGl
+ Fl5RHq0R6kn56xqnpWu12MvYgbDh0vrR9SuRa94zxzwquD4zBZZHxvl7z4Czj0lbYRwQPxVtnOW
+ VEGFjjR8Qfv8FO0XGkn0iVXJkqE3TUUl9eBdMsUGAizohP0wbeqJEf/ImQsLEKSW/mse9dLpZya
+ BuIOjyoroEryVK6n1r4xBFxiBO9IfPZ9AtLMD2COusw+SyQonjnFSoCRPGei9lGZP7sRHskFpPi
+ gXTeRMRobkFStmb0Ytw==
+X-Authority-Analysis: v=2.4 cv=b66/I9Gx c=1 sm=1 tr=0 ts=6964afc9 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22 a=-LCu6K_DAAAA:8 a=t7CeM3EgAAAA:8
+ a=3k9ziyYjAcfRlEKEkpUA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 8XjnZ4UGjAXayH13ZLJPO684xuiBwYbx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-12_02,2026-01-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1015 adultscore=0
+ lowpriorityscore=0 spamscore=0 impostorscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601120064
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 08:21:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123363
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 08:24:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123364
 
-List of all open CVEs (70, out of which new this week: 13):
+From: Mingli Yu <mingli.yu@windriver.com>
 
- - dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
- - ez-ipupdate: CVE-2003-0887: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
- - fontforge: CVE-2025-15269: https://nvd.nist.gov/vuln/detail/CVE-2025-15269
- - fontforge: CVE-2025-15270: https://nvd.nist.gov/vuln/detail/CVE-2025-15270
- - fontforge: CVE-2025-15271: https://nvd.nist.gov/vuln/detail/CVE-2025-15271
- - fontforge: CVE-2025-15272: https://nvd.nist.gov/vuln/detail/CVE-2025-15272
- - fontforge: CVE-2025-15273: https://nvd.nist.gov/vuln/detail/CVE-2025-15273
- - fontforge: CVE-2025-15274: https://nvd.nist.gov/vuln/detail/CVE-2025-15274
- - fontforge: CVE-2025-15275: https://nvd.nist.gov/vuln/detail/CVE-2025-15275
- - fontforge: CVE-2025-15276: https://nvd.nist.gov/vuln/detail/CVE-2025-15276
- - fontforge: CVE-2025-15277: https://nvd.nist.gov/vuln/detail/CVE-2025-15277
- - fontforge: CVE-2025-15278: https://nvd.nist.gov/vuln/detail/CVE-2025-15278
- - fontforge: CVE-2025-15279: https://nvd.nist.gov/vuln/detail/CVE-2025-15279
- - fontforge: CVE-2025-15280: https://nvd.nist.gov/vuln/detail/CVE-2025-15280
- - frr: CVE-2025-61099: https://nvd.nist.gov/vuln/detail/CVE-2025-61099
- - frr: CVE-2025-61100: https://nvd.nist.gov/vuln/detail/CVE-2025-61100
- - frr: CVE-2025-61101: https://nvd.nist.gov/vuln/detail/CVE-2025-61101
- - frr: CVE-2025-61102: https://nvd.nist.gov/vuln/detail/CVE-2025-61102
- - frr: CVE-2025-61103: https://nvd.nist.gov/vuln/detail/CVE-2025-61103
- - frr: CVE-2025-61104: https://nvd.nist.gov/vuln/detail/CVE-2025-61104
- - frr: CVE-2025-61105: https://nvd.nist.gov/vuln/detail/CVE-2025-61105
- - frr: CVE-2025-61106: https://nvd.nist.gov/vuln/detail/CVE-2025-61106
- - frr: CVE-2025-61107: https://nvd.nist.gov/vuln/detail/CVE-2025-61107
- - giflib: CVE-2024-45993: https://nvd.nist.gov/vuln/detail/CVE-2024-45993
- - gnome-shell: CVE-2021-3982: https://nvd.nist.gov/vuln/detail/CVE-2021-3982
- - influxdb: CVE-2024-30896: https://nvd.nist.gov/vuln/detail/CVE-2024-30896
- - libde265: CVE-2024-38949: https://nvd.nist.gov/vuln/detail/CVE-2024-38949
- - libde265: CVE-2024-38950: https://nvd.nist.gov/vuln/detail/CVE-2024-38950
- - [NEW] libsodium: CVE-2025-69277: https://nvd.nist.gov/vuln/detail/CVE-2025-69277
- - libuser: CVE-2012-5644: https://nvd.nist.gov/vuln/detail/CVE-2012-5644
- - live555: CVE-2025-65405: https://nvd.nist.gov/vuln/detail/CVE-2025-65405
- - live555: CVE-2025-65407: https://nvd.nist.gov/vuln/detail/CVE-2025-65407
- - live555: CVE-2025-65408: https://nvd.nist.gov/vuln/detail/CVE-2025-65408
- - [NEW] lmdb: CVE-2026-22185: https://nvd.nist.gov/vuln/detail/CVE-2026-22185
- - minidlna: CVE-2024-51442: https://nvd.nist.gov/vuln/detail/CVE-2024-51442
- - ndpi: CVE-2025-25066: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
- - [NEW] nginx: CVE-2025-53859: https://nvd.nist.gov/vuln/detail/CVE-2025-53859
- - openflow: CVE-2018-1000155: https://nvd.nist.gov/vuln/detail/CVE-2018-1000155
- - openjpeg: CVE-2023-39327: https://nvd.nist.gov/vuln/detail/CVE-2023-39327
- - openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
- - openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
- - polkit: CVE-2016-2568: https://nvd.nist.gov/vuln/detail/CVE-2016-2568
- - [NEW] python3-aiohttp: CVE-2025-69223: https://nvd.nist.gov/vuln/detail/CVE-2025-69223
- - [NEW] python3-aiohttp: CVE-2025-69224: https://nvd.nist.gov/vuln/detail/CVE-2025-69224
- - [NEW] python3-aiohttp: CVE-2025-69225: https://nvd.nist.gov/vuln/detail/CVE-2025-69225
- - [NEW] python3-aiohttp: CVE-2025-69226: https://nvd.nist.gov/vuln/detail/CVE-2025-69226
- - [NEW] python3-aiohttp: CVE-2025-69227: https://nvd.nist.gov/vuln/detail/CVE-2025-69227
- - [NEW] python3-aiohttp: CVE-2025-69228: https://nvd.nist.gov/vuln/detail/CVE-2025-69228
- - [NEW] python3-aiohttp: CVE-2025-69229: https://nvd.nist.gov/vuln/detail/CVE-2025-69229
- - [NEW] python3-aiohttp: CVE-2025-69230: https://nvd.nist.gov/vuln/detail/CVE-2025-69230
- - python3-flask-user: CVE-2021-23401: https://nvd.nist.gov/vuln/detail/CVE-2021-23401
- - [NEW] python3-lief: CVE-2025-15504: https://nvd.nist.gov/vuln/detail/CVE-2025-15504
- - python3-m2crypto: CVE-2009-0127: https://nvd.nist.gov/vuln/detail/CVE-2009-0127
- - python3-m2crypto: CVE-2020-25657: https://nvd.nist.gov/vuln/detail/CVE-2020-25657
- - python3-m2crypto: CVE-2023-50781: https://nvd.nist.gov/vuln/detail/CVE-2023-50781
- - python3-py: CVE-2022-42969: https://nvd.nist.gov/vuln/detail/CVE-2022-42969
- - python3-pyjwt: CVE-2025-45768: https://nvd.nist.gov/vuln/detail/CVE-2025-45768
- - python3-reportlab: CVE-2020-28463: https://nvd.nist.gov/vuln/detail/CVE-2020-28463
- - python3-twitter: CVE-2012-5825: https://nvd.nist.gov/vuln/detail/CVE-2012-5825
- - python3-uvicorn: CVE-2020-7694: https://nvd.nist.gov/vuln/detail/CVE-2020-7694
- - [NEW] python3-virtualenv: CVE-2026-22702: https://nvd.nist.gov/vuln/detail/CVE-2026-22702
- - python3-werkzeug: CVE-2026-21860: https://nvd.nist.gov/vuln/detail/CVE-2026-21860
- - samba: CVE-2025-10230: https://nvd.nist.gov/vuln/detail/CVE-2025-10230
- - samba: CVE-2025-9640: https://nvd.nist.gov/vuln/detail/CVE-2025-9640
- - sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
- - webkitgtk3: CVE-2025-13502: https://nvd.nist.gov/vuln/detail/CVE-2025-13502
- - webkitgtk3: CVE-2025-13947: https://nvd.nist.gov/vuln/detail/CVE-2025-13947
- - webkitgtk3: CVE-2025-43343: https://nvd.nist.gov/vuln/detail/CVE-2025-43343
- - webkitgtk3: CVE-2025-66287: https://nvd.nist.gov/vuln/detail/CVE-2025-66287
- - webmin: CVE-2025-67738: https://nvd.nist.gov/vuln/detail/CVE-2025-67738
+Fixes:
+  ERROR: nodejs-22.21.1-r0 do_patch: Applying patch '0001-deps-disable-io_uring-support-in-libuv.patch' on target directory '/build/tmp/work/core2-32-poky-linux/nodejs/22.21.1/sources/node-v22.21.1'
+  CmdError('quilt --quiltrc /build/tmp/work/core2-32-poky-linux/nodejs/22.21.1/recipe-sysroot-native/etc/quiltrc push', 0, "stdout: Applying patch 0001-deps-disable-io_uring-support-in-libuv.patch
+  can't find file to patch at input line 27
 
-====================
+The sources which related to libuv as deps/uv/ are removed when depends on
+libuv.
 
-Removed this week (8): 
+So make the 0001-deps-disable-io_uring-support-in-libuv.patch conditionally
+to fix the gap.
 
- - imagemagick: CVE-2025-69204: https://nvd.nist.gov/vuln/detail/CVE-2025-69204
- - python3-cbor2: CVE-2025-68131: https://nvd.nist.gov/vuln/detail/CVE-2025-68131
- - python3-configobj: CVE-2023-26112: https://nvd.nist.gov/vuln/detail/CVE-2023-26112
- - python3-flask-cors: CVE-2024-1681: https://nvd.nist.gov/vuln/detail/CVE-2024-1681
- - python3-ldap: CVE-2025-61911: https://nvd.nist.gov/vuln/detail/CVE-2025-61911
- - python3-ldap: CVE-2025-61912: https://nvd.nist.gov/vuln/detail/CVE-2025-61912
- - sox: CVE-2022-50798: https://nvd.nist.gov/vuln/detail/CVE-2022-50798
- - unbound: CVE-2025-5994: https://nvd.nist.gov/vuln/detail/CVE-2025-5994
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
+index ccaf9f7bb2..489fcbde45 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
+@@ -27,7 +27,7 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://system-c-ares.patch \
+            file://0001-liftoff-Correct-function-signatures.patch \
+            file://libatomic.patch \
+-           file://0001-deps-disable-io_uring-support-in-libuv.patch \
++           ${@bb.utils.contains('PACKAGECONFIG', 'libuv', '', 'file://0001-deps-disable-io_uring-support-in-libuv.patch', d)} \
+            file://0001-positional-args.patch \
+            file://0001-custom-env.patch \
+            file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
+-- 
+2.34.1
+
 
