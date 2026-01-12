@@ -2,155 +2,147 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 01CB0C9EC75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01C7BC9EC74
 	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 11:20:23 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30997.1768216820518105786
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.30999.1768216822049402806
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 03:20:20 -0800
+ Mon, 12 Jan 2026 03:20:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vpd6K9UE;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-477a2ab455fso57335345e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 03:20:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J1xuJoNg;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-430f3ef2d37so5391460f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 03:20:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768216819; x=1768821619; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ErlCjQqFbdqS5hf+O8fGTQ7OI7V68OKpRAJVghi7KOc=;
-        b=Vpd6K9UEZ98i6qRjuIC8+7sNvi2wAqVUOj7yssreTsmjriU4L5uM8/J1/0FJN63KAs
-         qR+UzxQXXXsfLedy18bb8e2XTgk4iHFc0fFeBQql60eigKsvT/6m2k+YXT+T6K6bhY5Y
-         C/NiALVR/u0bzwYp5FG23xecwAkKNYFs8jDTkzLvCZ1+++pFirz/613eMCHpiOSaFWfX
-         AtC+isnFbNoNP8to8IwSo2SMAJuMgL+NO/xFMzU1S20T9JAJqi/lL2PtxceUvOZzllsv
-         R1Mz7CoRXSfoYlnl5gNYreRM5358bXdOXwTMM/8EWg8QkwBv3WQjcYIBpLn728+f7Yma
-         ZmPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768216819; x=1768821619;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1768216820; x=1768821620; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ErlCjQqFbdqS5hf+O8fGTQ7OI7V68OKpRAJVghi7KOc=;
-        b=RdHEQKW3faSpftmnKAJD7fenkA8aOAq0jrxQTeBpIXQf0yu1vAvlQ3hAdvl6Ors3n5
-         s+forE5PR9mARANnZXWImZQGRcH3fMrgOIj0fb1B2YGnAp7oDHbTfwrwFc1euJeAfxuD
-         /9tTqRN2BtKbwG11TANfnDlJjKkvhYyp4wIE+DrmJBLylnfotB6CB/jvkhvsx8T1IvGE
-         FGqlt/QQ95dIthZIGR+ZtCEuQ7UkD9MP/bCwcxDExPDYqaH+GchaiplFREDLWE+yfUTN
-         6FVt3Eb7OvZUgvCSM6LjoBzmISkg5EKJuTk1Q83X1oWorexTeUkfDuYIrYEENZU1YIfM
-         US8A==
-X-Gm-Message-State: AOJu0Yw0ZW+vI4Yrgkql5OuXcR0MYQOLioXRkadzBlJnLTJvk2m4P6B0
-	jXG/tqv7Jm6oxHVHg50RqmTWq8UGNrR6viwCKr4oENgHpNZ7ZtAbDDh6ILj/Jw==
-X-Gm-Gg: AY/fxX4BJ2wWMLgZN6Zf0K1sPXYo7YsLdfrmDS9/fPksAExaSY0RvCJbM1cGr3Dqrvm
-	gZloT0RJJpG7Mof/vHHUH03Gys/WZMxTWjElVVD+ijyTp8tgH+cHB/Ji5E7SxxJmVK+ZfKJffX9
-	OZkvg8poXYmY2XcKsg0+0c90xhZX5a1oPY42fNPQuGlZ9RoVTUWvM0fXE8KfMo0OzSuOLuMW3T1
-	KUFAdHNR0wVrfQ3CiHKOYWk8gAPDOJg1TjChG1JdpyoslAeV6esDhbDns+gWC3oShOwFSz+grGX
-	cUWZ1BMk0Xt1dk+aZA4SEXpFOGOUl1nGJEbQTFqvNLCmsJ/FDCy2cZlS85XUimuTiMXlZ90qTbH
-	8Vuijc3vfTZl6gazjL/1YlpX3TX+tXM3n7Vvgq0HVCPFMxy8qe8vdhIPbrETyqgCTKqrvhP1qo6
-	QJqLbGVktRXD2G5q+bCOQ=
-X-Google-Smtp-Source: AGHT+IFBW7tm+JTMFPdwCj3jCLTYA5caLLdqYL9r58hx2SY/piXBzOquiIklPgOcso66pCb4YLsJQg==
-X-Received: by 2002:a05:600c:a08:b0:477:63b5:6f39 with SMTP id 5b1f17b1804b1-47d84b3477amr176611465e9.19.1768216818650;
-        Mon, 12 Jan 2026 03:20:18 -0800 (PST)
+        bh=LjNu46rEm3PlXXgQWcRtGqPnCqtPlblxbE/FJmBleiQ=;
+        b=J1xuJoNgM9er4MaSl2VKJfqFTXMnVDaTRmvZeSGfeDaAxsun8ecF+y4kNXOY+vbqo4
+         Vi+TIzsmnpRVy53JhQXEZOPI+6hPFLEhEwWow0J4r6XHPq8Cs7/saRXiSXiPaZpgE5Zn
+         wjyI6ND36HfHWP8YkkogE4AycBxFIxSnCVX0qo9MNdWrMqoKQsewEe8ChcpHjbPyQdNy
+         CmHuwxxYS1AOZuDoZHshfK5yXoZmmRlRaopnYbofAIC62qgkHSuirDc+xYUJz6gd6Lam
+         lrG7X1jW2DG+NUxt617u1rysLruCmZE8rPivYOPypxudGzMYvETwdfN/jUDxIpLIJ5g3
+         31zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768216820; x=1768821620;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=LjNu46rEm3PlXXgQWcRtGqPnCqtPlblxbE/FJmBleiQ=;
+        b=CjSIYHD6YRFV30QSo+LiqXnSYmN/CveDYf03wTXrUICygIygHBAS/RbRqC4UNyQP4e
+         AiJFVL+y5c7H6tJamD8ct7pyShToqPDiy6UIJizTtRLz5yOLBiv59N1Mv4pTjXQ5n99x
+         OWUXPTlFFK4naPIJ0E9FzP7S+4BZRnonUVTZ9DmX/SjH4LMCNIj9blHpfTIh83PFE6Xn
+         TFhUEsw5w05glGzksJOLzdlxlwa7xQK8Ah0X4B8Pjt9wCsE64kd87+VQmuKFHJwqLLim
+         +brZM7DLOEprBDVJZqX2x+eZh8xLKVf+yw/k+oK8nWybx6x8/OaiJ6UTqTSMjZNLdJ1a
+         NHmQ==
+X-Gm-Message-State: AOJu0Yzcko36TpA9nm8EvSbbqjar5t6n0zrlWoZA9qqNFoCSZsT5aEN2
+	ueeyB3liuXyUBGNJPPZ/iqh9NeXXQmB9oq1nvcnc9NFDaHHek0hGnNChFDn9SA==
+X-Gm-Gg: AY/fxX5//Mgzx5k9nCpxFYoZgfaPJkatDyeYfviVHOjBAJGF9MKLLiaK6YYv4autFbA
+	QqQXAFDZNqZsEVs5CkK78aIkBRuea2NmmV32eDCq5zcEsAWGqLlgaYi8vcMStySIQjhAAR4bf+k
+	xOE8KUnio2wqG08Q+yS0RaxhaQJoF9+hilybb1HOsX0tvleFNrw+8C490R/YdcdXude7o9MOpaR
+	4Ju6qBiJgN1wS+4Tuq+ZuuYMvT9XW8yBslPJLhn7ahVyvf6SAwbgC5VA3G1rLi0j7Ya/8GnQMX+
+	elK1WdRvadFObNb2ldneQo4stu96WdZdtDsUwpaWlGJivb4jrV7B95uh3ivcvCGiAW1fQqERI7l
+	LqfEKpgrZdmjFsqa9CD9Ie7waHC56/vYA3I0SGLPfrwfHIO4R690fY8TKi03nUbHfGvS5xRUIRl
+	z7lYdaQTx4
+X-Google-Smtp-Source: AGHT+IFUzlaJqjALJP0m6evJrifAz34jCocm8JA/BFBuEGQzGot7vaEBsWY5sBI+vuaS3grQUq67lQ==
+X-Received: by 2002:a05:600c:1393:b0:477:55ce:f3bc with SMTP id 5b1f17b1804b1-47d84b3bad4mr193129765e9.19.1768216820163;
+        Mon, 12 Jan 2026 03:20:20 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f695225sm351382935e9.4.2026.01.12.03.20.17
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47d7f695225sm351382935e9.4.2026.01.12.03.20.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jan 2026 03:20:17 -0800 (PST)
+        Mon, 12 Jan 2026 03:20:19 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 1/5] raptor2: patch CVE-2017-18926
-Date: Mon, 12 Jan 2026 12:20:12 +0100
-Message-ID: <20260112112016.515266-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 3/5] raptor2: patch CVE-2024-57822
+Date: Mon, 12 Jan 2026 12:20:14 +0100
+Message-ID: <20260112112016.515266-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260112112016.515266-1-skandigraun@gmail.com>
+References: <20260112112016.515266-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 11:20:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123377
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123379
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2017-18926
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-57822
 
-NVD advisory mentions the original announcement on oss-security
-mailing list[1]. This mentions a bug link[2] related to this
-vulnerability. The bug mentions the revision of the fix - pick
-that patch from the project's git repository.
+Pick the patch mentioned in the related github issue[1].
+The issue contains fixes for 2 issues, but only the first
+patch is related to this vulnerability.
 
-[1]: https://www.openwall.com/lists/oss-security/2017/06/07/1
-[2]: https://bugs.librdf.org/mantis/view.php?id=617
+[1]: https://github.com/dajobe/raptor/issues/70
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../raptor2/files/CVE-2017-18926.patch        | 44 +++++++++++++++++++
- .../recipes-support/raptor2/raptor2_2.0.15.bb |  8 ++--
- 2 files changed, 48 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/raptor2/files/CVE-2017-18926.patch
+ .../raptor2/files/CVE-2024-57822.patch        | 42 +++++++++++++++++++
+ .../recipes-support/raptor2/raptor2_2.0.15.bb |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-support/raptor2/files/CVE-2024-57822.patch
 
-diff --git a/meta-oe/recipes-support/raptor2/files/CVE-2017-18926.patch b/meta-oe/recipes-support/raptor2/files/CVE-2017-18926.patch
+diff --git a/meta-oe/recipes-support/raptor2/files/CVE-2024-57822.patch b/meta-oe/recipes-support/raptor2/files/CVE-2024-57822.patch
 new file mode 100644
-index 0000000000..f3211c899b
+index 0000000000..ee31474cf9
 --- /dev/null
-+++ b/meta-oe/recipes-support/raptor2/files/CVE-2017-18926.patch
-@@ -0,0 +1,44 @@
-+From 686fc0608480f4b2d2f8c60717141ad8e3c5a849 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/raptor2/files/CVE-2024-57822.patch
+@@ -0,0 +1,42 @@
++From 9dc72f9534df6e2b94ce22ceb3d90224c1153184 Mon Sep 17 00:00:00 2001
 +From: Dave Beckett <dave@dajobe.org>
-+Date: Sun, 16 Apr 2017 23:15:12 +0100
-+Subject: [PATCH] Calcualte max nspace declarations correctly for XML writer
++Date: Thu, 6 Feb 2025 21:12:37 -0800
++Subject: [PATCH] Fix Github issue 70 A) Integer Underflow in
++ raptor_uri_normalize_path()
 +
-+(raptor_xml_writer_start_element_common): Calculate max including for
-+each attribute a potential name and value.
++(raptor_uri_normalize_path): Return empty buffer if path gets to 0
++length
 +
-+Fixes Issues #0000617 http://bugs.librdf.org/mantis/view.php?id=617
-+and #0000618 http://bugs.librdf.org/mantis/view.php?id=618
-+
-+CVE: CVE-2017-18926
-+Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/590681e546cd9aa18d57dc2ea1858cb734a3863f]
++CVE: CVE-2024-57822
++Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/da7a79976bd0314c23cce55d22495e7d29301c44]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/raptor_xml_writer.c | 7 ++++---
-+ 1 file changed, 4 insertions(+), 3 deletions(-)
++ src/raptor_rfc2396.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
 +
-+diff --git a/src/raptor_xml_writer.c b/src/raptor_xml_writer.c
-+index 693b946..0d3a36a 100644
-+--- a/src/raptor_xml_writer.c
-++++ b/src/raptor_xml_writer.c
-+@@ -181,9 +181,10 @@ raptor_xml_writer_start_element_common(raptor_xml_writer* xml_writer,
-+   size_t nspace_declarations_count = 0;  
-+   unsigned int i;
++diff --git a/src/raptor_rfc2396.c b/src/raptor_rfc2396.c
++index 89183d9..2f0195f 100644
++--- a/src/raptor_rfc2396.c
+++++ b/src/raptor_rfc2396.c
++@@ -351,6 +351,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++           *dest++ = *s++;
++         *dest = '\0';
++         path_len -= len;
+++        if(path_len <= 0) {
+++          *path_buffer = '\0';
+++          return 0;
+++        }
 + 
-+-  /* max is 1 per element and 1 for each attribute + size of declared */
-+   if(nstack) {
-+-    int nspace_max_count = element->attribute_count+1;
-++    int nspace_max_count = element->attribute_count * 2; /* attr and value */
-++    if(element->name->nspace)
-++      nspace_max_count++;
-+     if(element->declared_nspaces)
-+       nspace_max_count += raptor_sequence_size(element->declared_nspaces);
-+     if(element->xml_language)
-+@@ -237,7 +238,7 @@ raptor_xml_writer_start_element_common(raptor_xml_writer* xml_writer,
-+         }
-+       }
++         if(p && p < prev) {
++           /* We know the previous prev path component and we didn't do
++@@ -390,6 +394,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++     /* Remove <component>/.. at the end of the path */
++     *prev = '\0';
++     path_len -= (s-prev);
+++    if(path_len <= 0) {
+++      *path_buffer = '\0';
+++      return 0;
+++    }
++   }
 + 
-+-      /* Add the attribute + value */
-++      /* Add the attribute's value */
-+       nspace_declarations[nspace_declarations_count].declaration=
-+         raptor_qname_format_as_xml(element->attributes[i],
-+                                    &nspace_declarations[nspace_declarations_count].length);
++ 
 diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-index 577c6ee00a..193cf13b21 100644
+index 7ee097b6ce..d110b8475f 100644
 --- a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
 +++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS = "libxml2 libxslt curl yajl"
- 
--SRC_URI = " \
--    http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
--    file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
--"
-+SRC_URI = "http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
-+           file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
-+           file://CVE-2017-18926.patch \
-+           "
+@@ -13,6 +13,7 @@ SRC_URI = "http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
+            file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
+            file://CVE-2017-18926.patch \
+            file://CVE-2020-25713.patch \
++           file://CVE-2024-57822.patch \
+            "
  SRC_URI[md5sum] = "a39f6c07ddb20d7dd2ff1f95fa21e2cd"
  SRC_URI[sha256sum] = "ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed"
- 
 
