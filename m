@@ -2,93 +2,99 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C74D277EB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5D94D277D6
 	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 10:21:22 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30291.1768213273015117079
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.30043.1768213275177782695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 02:21:13 -0800
+ Mon, 12 Jan 2026 02:21:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eZa0+8DF;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fb03c3cf2so3263169f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 02:21:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QIyXAw9L;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-432d256c2e6so2934546f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 02:21:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768213271; x=1768818071; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uWHLQ45gqES+LZE1hLw+RqPKZ7RVPI16BAQ5b33vZoo=;
-        b=eZa0+8DFBbfk4UCS3Hhx7/ezywDluuxSj6Jn8JPTaH1usPRDG1MMNVeeJXfATcroYB
-         3B7giYftg2hsu9+LisRffOD+3k8pxarF4aAjJ2MXYV02ieZITz7fRPxFt36guc3P21rB
-         5iI1hKRVLj02lsHF+OJXQAbB0AvV4BbfW8eTYRq4j9/xlE9UzyiRqE9AJsgeBkDJNbZ/
-         F+ivqxINbAj+i94LAnqhHR4bslVJOw0KjHy7wuR/KbQywvwwV/aszfRAfVHnyXCXjPIx
-         pDjdRVuCkA8O3BQtES5YI0t4QL/t9UwupJ8baBMYyQilh/k/lufxVmlW9w1XhrKRb1zT
-         m8JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768213271; x=1768818071;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1768213273; x=1768818073; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=uWHLQ45gqES+LZE1hLw+RqPKZ7RVPI16BAQ5b33vZoo=;
-        b=QZB/NovXndFPjZiDUPQAqy4O9oPLixTww2PntgbTCyEwao3+KjCx9bBigpFAzhI/DW
-         Hg/aEY/AHLUrpQAn5Hp1yT5sE5zserB7UTvCJXYWFtf4sTx8fmUOuqfCcstwavC8XaBE
-         KaEYU19twaI6k9myw324gs4d0u2OByT0IZk6FBvF11pgtCJ7fAMhOZ70wUDMQf3MI69x
-         /7pZzKT05HQ+bxpX/MFeTl7n5IH6gPyzJigdjvDkuQdLIo4Y9slVXDGfN3N4ZWjTY8QK
-         P5/I/npLytPPn5NqVoS9QcU/AwN3TSoWLG9giOWinbLkmrfahXx6AeKIyJjr2kxkU6Kd
-         GQRg==
-X-Gm-Message-State: AOJu0Yy+VJvQ92Ch7LZk5wFIX2cDJu9KMoORjacRxJGsTk87VKv8CDZ7
-	iifr3ClkMtAB76eHOPmKvn6YTwlGc4cETd1CuNnHLRK7g13EiKILh/a3kQJg1w==
-X-Gm-Gg: AY/fxX5fYOx0KNMLzUvzQSBE0xLGNe2hd3WSAD77vb8Mf2grlc6Fl5SwG3ZJ2yFDpKN
-	IeYS9ZidkvRMiY5Y+C0lMF884ih/nhXUnragdVvoSRwZxJiNcDCOLhsDpcdTh9PJu/j2wxR1Gkc
-	gFPI3UKh5vnZlwULWQvARtSO1yv0Sj+oViW5WWRbl6TZC0Iu7feg4YmltYOAKRYXArBKVDo/J9T
-	LlW4p9UVdM6v5ggk82AnT4kq/CbsLfs6AZqGigDe9m64fAhKPQRPOGhcT58z8b3FYd8AHVpMqGk
-	jqq+1Igmn2UZK4X6X7Z2/tuLLT3npdhmI8enxetBIOIxNhiGQzm2vXMYlCRIOXI7b3TEmLCUyrm
-	qev2pNMJXDPzuFytvF5EzzoCaChQlmE9jE8zw3ysTBlE6gJ3qMQYJVzXtCECs1HWSGdtkvcb4nZ
-	dsFrOTxvjX
-X-Google-Smtp-Source: AGHT+IGwsbqhCZSg6AhwQJFO0Lvp1YDZi1jWdth9zLZNU8ERG3PSRsDIvAYzL3h3LPhG62uTDW2D+A==
-X-Received: by 2002:a05:6000:2584:b0:42f:ba09:aa7c with SMTP id ffacd0b85a97d-432c3765636mr24060795f8f.54.1768213271045;
-        Mon, 12 Jan 2026 02:21:11 -0800 (PST)
+        bh=CbZc6Yh6wzZOQuwxytRasO05QDLDTasgIwdgvPJaghw=;
+        b=QIyXAw9LCkaFUUMi6dKfflNAwqkozu/S24xV+WeEviF7nrMA4OR+TTEqceOV//QEJd
+         V94L7uPE1eKgMNWNjUWD6bYlD5Fhah8KFjzG1S8YzXzzFdHB59K2Ye2j80tj2uWQ8eoz
+         ok5j8gl/16lgdVKtoTdEVq3W2T0dFH1bvNeZ97XvZh6hgTDl8GSoTMp6nE9whk9nBRyp
+         zcsrHg3MGQQ0J5Pn0d7iAaRd5zkrCGSsBaAa0ksp9Wep9GriStsW7d2qUgl83+5azj2C
+         yL40zQ7QB3vznJmDnM7jEhr/N9jF/Gk9tM1+1jk7vTKzB8NyeSyiozgoP3qHmHDJ8kaC
+         1A6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768213273; x=1768818073;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=CbZc6Yh6wzZOQuwxytRasO05QDLDTasgIwdgvPJaghw=;
+        b=s1skaZwXFGYa92YY8dNbzck0CDSHA/+4pB8rSNYQH6vu3L/5DLT1BrKmkGxiyZA+QX
+         WLVsMWZ3WrSBIah8nOIufsGc5BN9akVDGhI4rXOOqm8vEOv7V7/ncTrZDWuKf+eHu5tt
+         v5ylieceUNiOUOXJtxOkiPHo99o48B7pgU53NR0He2CM0VTMpvBdKmqjSnqTCHNt2UXo
+         IquWz8m6cKcV+iugV8PRjkhBXC+b/n9Hs5uDwBppy4M6LBbebzwWTSZ/qe3xPfWNNgju
+         2ZA4D9qS1vX5AN8sphsuh3iY4gOGbov1+Sd2tLMlYbwoVCfwbWuCjUmpDMh9WCqmuFjn
+         y23g==
+X-Gm-Message-State: AOJu0YzGRTN9FYSWY7556ZYYlCnu4CGbc1rEM+663rbTu3nKpIYC02JV
+	T+Mm/oPqdB6wiTQMgZtmfXfqxcxXyc2hnbYNIAyHsp70AaNX6Wg5tDv18l9adQ==
+X-Gm-Gg: AY/fxX4qLqEjDcF9ev7sldg1562WNOy+3jXGEWp3mX87zUhXGUBeM/SqhCQQVv5gvKR
+	qZlTufWcCEFlTBa+CCfeShfEZZ6gwCyFy6b9vqozqurlALSP8GD64K4FPmYBkR1TsKGXzWMB3JA
+	uV7shbvuvuCuMpHrxi83eRheeFIqGfI0ahUgoDvtP6FCaBGGiyAFxVsyO9dGehD4rplKfn7Kcwj
+	4IQ6QuFg7/VA8tYRC9vmfscHMiFrdPELFU3IIT+mVzj+ktoV3ASQFuDQ2xHW0Gwpe0cmb6ivoN7
+	aIVyUCzglXb+xfRTnyES9Zkwp6Bl7+1z3pNvCIzKgk6Y+F8RhcrOK4gPPwICsgTRq4+a+cnAT2X
+	iwbcEInoXEJ+/rIwYR6/LGBhTSE9PzDdY7ncpBwwbeaOymGKgVQe6k6gf6QwY/Y9Xu11OygrtYv
+	8jByWqe1ep
+X-Google-Smtp-Source: AGHT+IEoaHoLVsQ/yxHqnybhVItW2iyNX0I9JBQp2T0RLJN4oz0553T99i44vIjIeGaVJHaPXf6WNA==
+X-Received: by 2002:a05:6000:2891:b0:430:f1d3:fa2 with SMTP id ffacd0b85a97d-432c3760ec5mr17649492f8f.7.1768213273414;
+        Mon, 12 Jan 2026 02:21:13 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5ee870sm38112342f8f.36.2026.01.12.02.21.06
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5ee870sm38112342f8f.36.2026.01.12.02.21.11
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Jan 2026 02:21:07 -0800 (PST)
+        Mon, 12 Jan 2026 02:21:12 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/3] influxdb: ignore CVE-2024-30896
-Date: Mon, 12 Jan 2026 11:21:04 +0100
-Message-ID: <20260112102106.453902-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 2/3] boinc-client: mark CVE-2013-2018 patched
+Date: Mon, 12 Jan 2026 11:21:05 +0100
+Message-ID: <20260112102106.453902-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260112102106.453902-1-skandigraun@gmail.com>
+References: <20260112102106.453902-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 10:21:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123374
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123375
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2013-2018
 
-As mentioned in the comment[1], vulnerability is in
-/api/v2/authorizations API which only exists in 2.x, 1.x is not affected.
+According to oss-security email[1], version 7.0.45 included
+the fixes[2][3][4]
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-30896
+[1]: https://www.openwall.com/lists/oss-security/2013/04/29/11
+[2]: https://github.com/BOINC/boinc/commit/6e205de096da83b12ffb2f0183b43e51261eb0c4
+[3]: https://github.com/BOINC/boinc/commit/e8d6c33fe158129a5616e18eb84a7a9d44aca15f
+[4]: https://github.com/BOINC/boinc/commit/ce3110489bc139b8218252ba1cb0862d69f72ae3
 
-[1] https://github.com/influxdata/influxdb/issues/24797#issuecomment-2514690740
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 1 +
+ meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index 5dd5644c4c..d8279492ac 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -70,3 +70,4 @@ RDEPENDS:${PN} = "bash"
- RDEPENDS:${PN}-dev = "bash"
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
+index aed6fe6edd..4cc0ed2da2 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
+@@ -31,6 +31,7 @@ DEPENDS = "curl \
+ "
  
- CVE_STATUS[CVE-2019-10329] = "cpe-incorrect: Version does not match and only the Jenkins plugin is affected."
-+CVE_STATUS[CVE-2024-30896] = "not-applicable-config: vulnerability only exists in version 2.x"
+ CVE_PRODUCT = "boinc_client"
++CVE_STATUS[CVE-2013-2018] = "fixed-version: fixed in version 7.0.45 and later"
+ 
+ SRCREV = "4774e1cbe0ad13cb9a6f7fffbb626a417316f61d"
+ BRANCH = "client_release/7/7.20"
 
