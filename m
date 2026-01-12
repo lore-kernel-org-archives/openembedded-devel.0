@@ -1,168 +1,115 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter@berginkonsult.se>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E314FCF45CC
-	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 20:00:46 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.42167.1768248039649837297
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBEE2CF45CD
+	for <webhook@archiver.kernel.org>; Mon, 12 Jan 2026 20:01:06 +0000 (UTC)
+Received: from mailrelay-egress8.pub.mailoutpod2-cph3.one.com (mailrelay-egress8.pub.mailoutpod2-cph3.one.com [46.30.211.183])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.42544.1768248063931280090
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 12:00:39 -0800
+ Mon, 12 Jan 2026 12:01:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BOKD6JyV;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-78f99901ed5so63144047b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 12:00:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768248039; x=1768852839; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Dm49e6TeVZS4OmNkPSv+8TaD7/xJxG3sM55Foz9/m08=;
-        b=BOKD6JyVt0f2h/4Y5qAjOi8zuRdmvEyAzHaPCDdjB1ADScbl9+Xpx76BnWRLBKpgsk
-         t4W5ftXfBi/92V0fepErpQtznfy5UCQcWY70CFxOZoOHngLxJ9P3aA7juJsfXvCRjvfu
-         E4Yz3RHgUmBAfSpTaBFJs0Qh8HjgyQ5BJTUwjLlNNoddwBGhBMOBbKcGWOjHkjmQZOIG
-         bftnFn60umDNdnD3BXFDG5H8CwhUPazGWtMnOTeWiaKkBhptjcgDWXN2FFqvoplQrAna
-         9SetFXmRg827gYZf7Azcqb/RPrWDkATdS7qdSbhtxiV306DgAzRmVlEhuuDn9qlD3uGM
-         1Afw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768248039; x=1768852839;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Dm49e6TeVZS4OmNkPSv+8TaD7/xJxG3sM55Foz9/m08=;
-        b=TI2adhR2pOAlaHVqpBYguRi1z3O2E6YWCNiWq5QiypanMXp9rqa3F1axfao1wZ3lWI
-         wmVXCQCuN0g4Re/J9LQpiv4oryT/mu9qG/hCoGZRySAg0f6ZYdtBmoJSO+xt9YKVzVuA
-         dcPg6Yhyevaw4mRN+1xIwrxC72CT2kt9yHCKXcU33tJ4HMHpIG3eNfh/kRukiJL7dqKj
-         DFQ86qfeYwNzaknhRDLkENblTN9pi2hOWDPTkB+Cv09YTrjojXI5hqLK35lRzZL2ubVO
-         t8sqQmYGWiWFKa+B/re6ZJqhDV/Tb1c0aSoHxQ0v+YfMmIFVvZCqsW3jJ4jiBJDDHPKv
-         k/YQ==
-X-Gm-Message-State: AOJu0YztyZ2foQBpV30rxSPKutmlNCGa337Dyc0Ib7u8G7mrl3n4O4yg
-	5Nwa2P8grstASrAxTpZSWsROR5HhUFaLtrB+F8kvrtoU7ljogiwY0Ed51qxExF3PGBJ84ouUF9c
-	As5htAgYae3tt2xMkNferqQbxCIU4Ti0=
-X-Gm-Gg: AY/fxX4igk6spbMfJEquW7TQwKUq/Fibfsqq/a0svf/7SRbodR9UOqVwjhPHJB7OJdg
-	I8Fi2rTwCBKsXP7NYwx6/eSX9s3m72YpgwFJqvfWdfpsbvnBe1bjzCKkaZ+2lzHeR9YMJQ7IpXn
-	DfVlWB4I+fxNsxCk6bkiT7ny459Ksa5w64e9yclhctO16CHWiw7XIhux+YXV0rI0DxoZtQb386w
-	UrsV6dMe+YuP4y51GokDtRQzwhiCQxEo0kLDUVB7iv0Y9xI796ClB/PNZO9eD/89CBKK07kIEG7
-	CpZXdoBJ0f837ZeBC6v49P71UW/PeDb/tuEwH93vl/3sjn3bRk8VWtzDTEjwti7GlvxajJgtQnH
-	PyN1PjxkjU8sikbqo9eYPDchwIUYOT4JiFVesEgSbAg==
-X-Google-Smtp-Source: AGHT+IHrXkC2nVePEW93sRtkJMZ461ZDoHEE3tdaAfXO7ev5lToUv0KgTNyHdb50CCfuyWeKwG+STa42ctPvF6mHVIQ=
-X-Received: by 2002:a05:690e:4007:b0:644:51a4:4f16 with SMTP id
- 956f58d0204a3-64716c37decmr14351562d50.45.1768248038696; Mon, 12 Jan 2026
- 12:00:38 -0800 (PST)
+ dkim=pass header.i=@berginkonsult.se header.s=rsa2 header.b=NBtigL00;
+ dkim=pass header.i=@berginkonsult.se header.s=ed2 header.b=/eaWOdNd;
+ spf=none, err=SPF record not found (domain: berginkonsult.se, ip: 46.30.211.183, mailfrom: peter@berginkonsult.se)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1768248061; x=1768852861;
+	d=berginkonsult.se; s=rsa2;
+	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
+	 from;
+	bh=1Z6E/bKj7NrFWHAxc9+OQSQXnXfeSRWtu8wtpejiXCE=;
+	b=NBtigL00y8pOherg2QexXNinv8EIiN2y09aEwnQ2uwgiL8ZQbF2eBW28RXQCEYnbj389PEDk1PtpZ
+	 rEbZD/wmDE/kRzSkj6E4WlC+ERgA8P+Oyle8CVipemRVtw6KUVc7x606zALUFAPRGazQ7c3v5MFvPp
+	 RnDJ6+xKqG9gif6BIyNgrQ/h9zyVPGvjOm19CxVzuPuU9z/dlbGMmtEg9ELiAGBEbZrI/mZKKpbKTh
+	 W8LTTW7VsIVrD6p+0fTBZ1Cnd1R/QWZHPWIvZpcCFF6sxNOQUXY6eMpmnEKZXVfuM15HEeRzFXFcR6
+	 o0UGIdpAiBj2faCUco7739mziVdAccQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1768248061; x=1768852861;
+	d=berginkonsult.se; s=ed2;
+	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
+	 from;
+	bh=1Z6E/bKj7NrFWHAxc9+OQSQXnXfeSRWtu8wtpejiXCE=;
+	b=/eaWOdNdtZcFCxYQUKq1dpF2mTeqkWIic82k/AWEOie0aYywxyvkwXVCgy00BTM3yQWtqnUOqdSMv
+	 ww1vTSqAw==
+X-HalOne-ID: 6780155e-eff1-11f0-9e03-f78b1f841584
+Received: from pbkserver2.. (c83-191-168-223.bredband.tele2.se [83.191.168.223])
+	by mailrelay1.pub.mailoutpod2-cph3.one.com (Halon) with ESMTPSA
+	id 6780155e-eff1-11f0-9e03-f78b1f841584;
+	Mon, 12 Jan 2026 20:01:00 +0000 (UTC)
+From: Peter Bergin <peter@berginkonsult.se>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Bergin <peter@berginkonsult.se>
+Subject: [meta-gnome][PATCH] gtksourceview*: fix build issue related to S
+Date: Mon, 12 Jan 2026 21:00:51 +0100
+Message-ID: <20260112200051.3240567-1-peter@berginkonsult.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260110115148.9069-1-f_l_k@t-online.de> <CAMKF1soYoKRdX8bpQ5GK62DmXxyjEw7c3Acgob=xys6okTWOjg@mail.gmail.com>
- <K4MR8T.7KIKIKY4AX1B@t-online.de>
-In-Reply-To: <K4MR8T.7KIKIKY4AX1B@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Jan 2026 12:00:12 -0800
-X-Gm-Features: AZwV_QgYkmQUTk6hud73RZAT0r_S04453AYhe6HIBq-Z_m3tiFQPGG73iWOrC68
-Message-ID: <CAMKF1sqS+Ov8+s_9YSj1nks0KiJaeoMbsfZivk=Mk_1VNP7QOg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] btop: update 1.4.5 -> 1.4.6
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000038a8ea064836542f"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 20:00:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123390
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 20:01:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123391
 
---00000000000038a8ea064836542f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Source code for gtksourceview will be unpacked to a directory called
+'gtksourceview-${PV}'. But as the recipes have added part of PV to the
+name of the recipe the default setting of variable S will be wrong.
+This is fixed by explicitly setting it.
 
-On Mon, Jan 12, 2026 at 11:00=E2=80=AFAM Markus Volk via lists.openembedded=
-.org
-<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
+Fixing issues like:
 
-> On Mon, Jan 12 2026 at 10:23:19 -08:00:00, Khem Raj via
-> lists.openembedded.org <raj.khem=3Dgmail.com@lists.openembedded.org> wrot=
-e:
->
-> adding native gtest dep is causing build problems with clang/lld as it no=
-w
-> finds the native version instead of target version.
->
->
-> My mistake. I thought it would require native googletest for testing but
-> it actually wants to link for target.
->
-> Did some testing and either
->
-> DEPENDS =3D "googletest"
-> or
-> EXTRA_OECMAKE +=3D "-DBUILD_TESTING=3DOFF"
->
+  WARNING: gtksourceview3-3.24.11-r0 do_unpack: gtksourceview3: the directory ${UNPACKDIR}/${BP} (<snip>/gtksourceview3/3.24.11/sources/gtksourceview3-3.24.11) pointed to by the S variable doesn't exist - please set S within the recipe to point to where the source has been unpacked to
+  WARNING: gtksourceview3-3.24.11-r0 do_populate_lic: Could not copy license file <snip>/gtksourceview3/3.24.11/sources/gtksourceview3-3.24.11/COPYING to <snip>/gtksourceview3/3.24.11/license-destdir/corei7-64/gtksourceview3/COPYING: [Errno 2] No such file or directory: '<snip>/gtksourceview3/3.24.11/sources/gtksourceview3-3.24.11/COPYING'
+  ERROR: gtksourceview3-3.24.11-r0 do_populate_lic: QA Issue: gtksourceview3: LIC_FILES_CHKSUM points to an invalid file: <snip>/gtksourceview3/3.24.11/sources/gtksourceview3-3.24.11/COPYING [license-checksum]
+  ERROR: gtksourceview3-3.24.11-r0 do_populate_lic: Fatal QA errors were found, failing task.
 
-yeah maybe turn it off for now.
+  WARNING: gtksourceview4-4.8.4-r0 do_unpack: gtksourceview4: the directory ${UNPACKDIR}/${BP} (<snip>/gtksourceview4/sources/gtksourceview4-4.8.4) pointed to by the S variable doesn't exist - please set S within the recipe to point to where the source has been unpacked to
+  ERROR: gtksourceview4-4.8.4-r0 do_patch: Applying patch '0001-remove-pointless-check.patch' on target directory '<snip>/gtksourceview4/4.8.4/sources/gtksourceview4-4.8.4'
 
+  WARNING: gtksourceview5-5.18.0-r0 do_unpack: gtksourceview5: the directory ${UNPACKDIR}/${BP} (<snip>/gtksourceview5/5.18.0/sources/gtksourceview5-5.18.0) pointed to by the S variable doesn't exist - please set S within the recipe to point to where the source has been unpacked to
+  WARNING: gtksourceview5-5.18.0-r0 do_populate_lic: Could not copy license file <snip>/gtksourceview5/5.18.0/sources/gtksourceview5-5.18.0/COPYING to <snip>/gtksourceview5/5.18.0/license-destdir/corei7-64/gtksourceview5/COPYING: [Errno 2] No such file or directory: '<snip>/gtksourceview5/5.18.0/sources/gtksourceview5-5.18.0/COPYING'
+  ERROR: gtksourceview5-5.18.0-r0 do_populate_lic: QA Issue: gtksourceview5: LIC_FILES_CHKSUM points to an invalid file: <snip>/gtksourceview5/5.18.0/sources/gtksourceview5-5.18.0/COPYING [license-checksum]
+  ERROR: gtksourceview5-5.18.0-r0 do_populate_lic: Fatal QA errors were found, failing task.
 
->
-> would fix the issue as well.
->
-> Maybe the latter would be the better fix since tests are not being
-> installed and run on target?
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123389):
-> https://lists.openembedded.org/g/openembedded-devel/message/123389
-> Mute This Topic: https://lists.openembedded.org/mt/117189895/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+---
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb | 1 +
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb   | 1 +
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.18.0.bb  | 1 +
+ 3 files changed, 3 insertions(+)
 
---00000000000038a8ea064836542f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan 12,=
- 2026 at 11:00=E2=80=AFAM Markus Volk via <a href=3D"http://lists.openembed=
-ded.org">lists.openembedded.org</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.=
-de@lists.openembedded.org">t-online.de@lists.openembedded.org</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div id=3D"m_8=
-950435320587672249geary-body" dir=3D"auto">On Mon, Jan 12 2026 at 10:23:19 =
--08:00:00, Khem Raj via <a href=3D"http://lists.openembedded.org" target=3D=
-"_blank">lists.openembedded.org</a> &lt;raj.khem=3D<a href=3D"mailto:gmail.=
-com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedded.=
-org</a>&gt; wrote:<br><blockquote type=3D"cite">adding native gtest dep is =
-causing build problems with clang/lld as it now finds the native version in=
-stead of target version.</blockquote><div><br></div><div><div>My mistake. I=
- thought it would require native googletest for testing but it actually wan=
-ts to link for target.</div><div><br></div><div>Did some testing and either=
-=C2=A0</div><div><br></div><div>DEPENDS =3D &quot;googletest&quot;</div><di=
-v>or</div><div>EXTRA_OECMAKE +=3D &quot;-DBUILD_TESTING=3DOFF&quot;</div></=
-div></div></blockquote><div><br></div><div>yeah maybe turn it off for=C2=A0=
-now.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><div id=3D"m_8950435320587672249geary-body" dir=3D"auto"><div><div><br></=
-div><div>would fix the issue as well.</div><div><br></div><div>Maybe the la=
-tter would be the better fix since tests are not being installed and run on=
- target?</div></div></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123389): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123389" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123389</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117189895/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117189895/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---00000000000038a8ea064836542f--
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+index 48c54a7483..878949f9b7 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview3_3.24.11.bb
+@@ -11,6 +11,7 @@ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspecti
+ 
+ GNOMEBN = "gtksourceview"
+ SRC_URI[archive.sha256sum] = "691b074a37b2a307f7f48edc5b8c7afa7301709be56378ccf9cc9735909077fd"
++S = "${UNPACKDIR}/gtksourceview-${PV}"
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+index 439332bcea..a045fbd1a7 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
+@@ -15,6 +15,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ SRC_URI += "file://0001-remove-pointless-check.patch"
+ 
+ SRC_URI[archive.sha256sum] = "7ec9d18fb283d1f84a3a3eff3b7a72b09a10c9c006597b3fbabbb5958420a87d"
++S = "${UNPACKDIR}/gtksourceview-${PV}"
+ 
+ GIR_MESON_OPTION = 'gir'
+ GTKDOC_MESON_OPTION = "gtk_doc"
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.18.0.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.18.0.bb
+index fa6d559543..75010a67b8 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.18.0.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview5_5.18.0.bb
+@@ -21,6 +21,7 @@ REQUIRED_DISTRO_FEATURES = "opengl"
+ GNOMEBN = "gtksourceview"
+ 
+ SRC_URI[archive.sha256sum] = "051a78fe38f793328047e5bcd6d855c6425c0b480c20d9432179e356742c6ac0"
++S = "${UNPACKDIR}/gtksourceview-${PV}"
+ 
+ GIR_MESON_ENABLE_FLAG = 'enabled'
+ GIR_MESON_DISABLE_FLAG = 'disabled'
 
