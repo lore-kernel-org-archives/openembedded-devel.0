@@ -2,64 +2,68 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAFDED29DF0
-	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 09:17:50 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.55107.1768295866826748626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACCFAD29DEC
+	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 09:20:10 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.55416.1768296009245554721
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 01:17:47 -0800
+ Tue, 13 Jan 2026 01:20:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=q5ARnwR4;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=H6P6kxY+;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1768295866; x=1799831866;
+  t=1768296010; x=1799832010;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=VaNekutnINPL6DGdWOSeP1xbd7zSfMjMn0n5DAdffac=;
-  b=q5ARnwR4mCEaMC4jf8YZIIfYpZWKJmOcRnPfqCzWUWGMz5PyzDgrD32H
-   DaYQ7O/2wfHOvMoBXNIBUROeiwo/dOBibdY0lTApoyRdKRV+i2LoXSqVD
-   fFNmemsn7PUUBsFTQJ0+08QV4aef0fnS5MIzgj/E9WBk3J7O7/Dxt3Tso
-   4qNRRzUhZyeRX/TTxVy9ExMFUkinaOHNIRy+FozMPccxyoE75UYnFlA6A
-   HOfCIe++T+59FtMInT03fsOAVvhwrXB28l9rkByOv+m5dSt2HOncJc7nN
-   qk9njA0MceALXLhdilMvqelnakzeuQiVyeux+waefsngpOR2dHKKYPc9i
-   g==;
-X-CSE-ConnectionGUID: hwpN8VJPQ9iUdcxmAn9RxQ==
-X-CSE-MsgGUID: giviJKWxSZGzJfuYbtIXlw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="226259921"
+  bh=y6YtH5lXlBqcF3T20QnNPte2e8geLM8Mhag9lI0rohU=;
+  b=H6P6kxY+9fPfV5iQvWZIb6xMxFSkd15m5m1CHQVtss6U3vrwUpu0OmTl
+   +WjymvJ1FpVMnbkjfLt5gITl8A9BH+XbeNfK/gVKETzPEIvYW/KtJ5ula
+   dEO2DS8MDDr6nK6ftzV4DUIVxN2U9Q0LFYeS1rRYx93KlQjibEYnQ8UFc
+   dNdl5O7p9qzxl1jWA5s063Q2rTWQBS+L1gvuMKyR1rerHdaxAkPBvxAwY
+   7ss0lurbBjfsGgDY1KHMCSvNU0n4YykAAOAzgwfCf82HW2BKfIPmbIdvx
+   vwF1PgvU1Uc3hPQEHGKUBckztWRwdH9JQtk2GgMs+G30yIYjYdtw0hvrS
+   A==;
+X-CSE-ConnectionGUID: MBOC5V9aQJ6v8RaOBsHrsA==
+X-CSE-MsgGUID: XQm7LtqPSieBS+yNvwePGw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="225589469"
 X-IronPort-AV: E=Sophos;i="6.21,222,1763391600"; 
-   d="scan'208";a="226259921"
-Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([20.61.8.234])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 18:17:45 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+   d="scan'208";a="225589469"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 18:20:08 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 2C59B2B87
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:17:45 +0000 (UTC)
-Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 5C90DC0034D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:20:07 +0000 (UTC)
+Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id E229E1802AEC
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:17:44 +0000 (UTC)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 180698D29C6
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:20:07 +0000 (UTC)
 Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 8DCD8826FFB
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:17:42 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id F05BA1801576
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:20:04 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: [oe][meta-oe][PATCH v2] xdg-user-dirs: upgrade 0.18 -> 0.19
-Date: Tue, 13 Jan 2026 17:17:38 +0800
-Message-ID: <20260113091738.8594-1-liuyd.fnst@fujitsu.com>
+Date: Tue, 13 Jan 2026 17:20:01 +0800
+Message-ID: <20260113092001.8632-1-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Features: * Add a systemd service to run xdg-user-dirs-update * Add initial Meson buildsystem support
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:17:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123403
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 09:20:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123404
+
+1. Changelog 
+Features:
+ * Add a systemd service to run xdg-user-dirs-update
+ * Add initial Meson buildsystem support
 
 Bugfixes:
  * Fix autopoint invocation
