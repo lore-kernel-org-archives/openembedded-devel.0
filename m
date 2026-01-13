@@ -2,63 +2,63 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6E34D29DD7
-	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 06:35:49 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.53747.1768286149169454444
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9E94D29DD8
+	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 06:35:59 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.53378.1768286149933901393
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 22:35:49 -0800
+ Mon, 12 Jan 2026 22:35:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cXrvb0OJ;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-432755545fcso4190014f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 22:35:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YsTfFDfq;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-432d256c2a9so3586328f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 22:35:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768286147; x=1768890947; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768286148; x=1768890948; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=DMSI60NZYnpVdFSQs1/81t5KEzgOhF4sWe/TgvpNTk8=;
-        b=cXrvb0OJObq6uVqiaZYVTKxGBxa8yniE88TSuLSLy4s1GdTGjmuzLXdKUJEwr+p9T3
-         j1ibBfc4VsRMkiz0A6eQVUVoi0UEQzjfVjZlc6I13q2eRrAAO1lfncm9gIyAFv2A41gA
-         K/Zoa3iFV8s9t8UnL6UK8BxcS1KqrGMTwXvjWsWqj9YNcUl5YrkQHAJPKSVIRoVxu2Vt
-         mSa1mZBX6OsnfB52QkCvXKImI8q14pFtdAEiX80bOgVew8EVrfUA7CUsjBPvG9nuNWSP
-         ugjcHvRz7QtO4xdklWhBbxBxV6UTy/wD7QHvAIKWff7Mi++D9o/ROSQjlLcatPIa9fK1
-         f/Aw==
+        bh=oQLsxpVSgzIjzaVJ4xSb/5h5HjbmI6AZlAT8CZEUWwg=;
+        b=YsTfFDfqRR0Sbz7A9C1Lwnt1WQ8DM2i+TMMGiIQe1gIjR8SyKyScf318eHGsEra8B4
+         cEfSSfiNRuH9GUoRvy9jvspIfdAjsidsInqqQ0hEZQwJ4kfkmlG8a3Iro6Hgeow1kRQf
+         OjBlICArU91E45rdTiJPt5nP7uyKQVKyjEGw4wyFxj8foB9hqeH9dV4yZiJzkwkjFh1F
+         j+WOdN9r9YYpyzwPiMzZvv2jAuGBduJl6uX7aK2rPweAPUxJNfsJZ48R3d1Ho0ijWzq7
+         dl9Rdz4IItcv0ipFjc4XEBq9l7XRNTvnUU3c8ozskS5Z9qE9xH7Gw0qU5o0zQg4nEzLW
+         7/VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768286147; x=1768890947;
+        d=1e100.net; s=20230601; t=1768286148; x=1768890948;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=DMSI60NZYnpVdFSQs1/81t5KEzgOhF4sWe/TgvpNTk8=;
-        b=r4IUrH1jc6QFbo7O3C3AnHSrpHQqYiBpVyokBuZsoqz7UjceJLxsVBYYAvjGrLSwOm
-         Ab4R99+0BMiD3QBhdNqDfSnlQdoGB7EmnVuyBbHK4YOR1Wa4FGrjVeyWoC51UtDcn6NX
-         IC3giMcntRht00NPqGDFLPggHwIZDRwKK3q/cGL75QuOkz8L9swg5zj09Il7P0+rOSd+
-         ithwSKzadPMHMHyqiWVdC4pn+OGpuLDWx8FOQcE9Gx7SLgaBERNp2nqi0SBfMccs4SCp
-         +Ljkecql+zkNyAbiEk1yYgXxsG56P0hxXDLItHeiELmBk1bOdhxemQlHhO3sC5MjoPtx
-         w27A==
-X-Gm-Message-State: AOJu0YyZWu70Kryy42KgVSwzIr8+GK+/QwkZnKZeE+SDWto0KOonLE/E
-	KsPrknssXU3jyn7vHMoRyqXA1iG/KuF1is0s4W5O74uvOx8XbSqYhYV47qrvKQ==
-X-Gm-Gg: AY/fxX43VAY8XOIeRvXN7r2JpZt1uSwcGqN9m179yZNHwk4a6DCQ1rtvC9vj+QlaPdl
-	bzW3myhotS4CrMZNsnssvvkfgWGQqo72g8Mk3lr/4nLmQ96MGiOTT4Ytd5YgOCLrt7RbkBgbqMx
-	5U04sevC362abXewXml5se2d6h48/qj8Z2SbiwbZDX918n22IrfbHrcy3jMznerShaGoGt0Yrtc
-	bm4mi+7ZKxXr+2SH79s27oiO6jeFUL4JwUyZXowIai8toO09YGdV1LHMSH/qmCHJcy5vXU4ut9A
-	ju+CySixiey25eA/pqviBtjWm1SpnLMOod3EvurZU9RfT4rmejDySylNZr0r4u4U7traMU+lIqs
-	ER4pZVkvt3JtCAN8ViogSxLV9i1DKa6my8XOSd691uGW4TkEfYi+XVF8jRJGaI5rjyHdkLM/g08
-	MO6OOvy+MU
-X-Google-Smtp-Source: AGHT+IHZq5kibQuHThvQs/rBaqVeoaJhou4roLrFJahr2o+UhSCAToVVpu/0rO6Cyyw5D/5b6QwXTg==
-X-Received: by 2002:a05:6000:2404:b0:432:dfea:1fb8 with SMTP id ffacd0b85a97d-432dfea2242mr13457645f8f.27.1768286147488;
-        Mon, 12 Jan 2026 22:35:47 -0800 (PST)
+        bh=oQLsxpVSgzIjzaVJ4xSb/5h5HjbmI6AZlAT8CZEUWwg=;
+        b=o/Pe6c+S+s/gyAICvUY9ntObDhjnDYRe/sJh85Xcd2FSVcJpta+CQuUD/peEFj1ZlZ
+         IfcNcBSX+Do9o8Wwono+DugK/ebGDAGCHZJL/R/nhEgdFUA1IAa/WAW/qth1wDA0b27Y
+         6/FdebSJrlEL2//ZbdyrRFOkyUpWvMIm7BesJ9/+VcdT0l+4/zda8lG4yhfPsGmAD8UN
+         0OvnQcnylGWKKEvDUndYt8lgYyBESbuW56asX0mvK6TJdk+Fz/517ZRJH4ALb6bZ0x+h
+         4v13xGdPXmS3boZyA7H+7Qtn7IpMOlms63TOf6RWPN9YjeyFwxFWJ4kcBQg7Zd4ZdhQx
+         dvxA==
+X-Gm-Message-State: AOJu0Yzt05a73QThc+H2iiMand0yAtx8fXLN+RobNoTHmum24TY4Wsq9
+	O/UvEKVrrTpHpz9SVTqOyPY4xEO72I94+Suoi9KOnhAqYaMMOttRYLgtKa60hQ==
+X-Gm-Gg: AY/fxX6vuAtNU+2pwzezIwpxyApW+V0NH0c7DlOMHuE6N3r3Ax4tAVQBUUWU1/vUFw5
+	6/nOGZahO1wNxKIb3miwsmQEjYG6hC9ZWurwYsm8yEQ7ECDUC79h8s6cIkGUlhBY3Urgy/gD3KZ
+	oHEgrpkK22jN4+tD9CdhwUfHZVGm/ol+l0q2WTeJo+I/3Z5tN6AFmYJI9jp0q6bKbmsF9RQyTDa
+	U9xneYgpjTJVzlKX56qLiQ5na5iMOzlSMRWUaMeaVfi1M474HDBjfZi/BSErkAmnOF9rYhmySEc
+	pVCkS5iUWe2492N1LUVJbKj9bzpZAPHoceE3mOaYUv1WIc+o2FWsVxDghoz5tBN34XbpP8pWivv
+	gpSkdF3UMqvHbWslRyT4d5MmpXoMQzQcgiV/jS/PTB1GwHzH9veM7rQDV93LLrUeYSBRzs522c8
+	1nsAfEZ54F
+X-Google-Smtp-Source: AGHT+IH9RsXlW05ViRwcUt4frfx0jGIFAUSxDsqPZCC6u3l3giqlJFFyjJYGNUxJpiecY1F9CWObjQ==
+X-Received: by 2002:a05:6000:26c2:b0:430:fdfc:7dd0 with SMTP id ffacd0b85a97d-432c37a36e7mr24641120f8f.63.1768286148175;
+        Mon, 12 Jan 2026 22:35:48 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edb7esm42273385f8f.30.2026.01.12.22.35.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edb7esm42273385f8f.30.2026.01.12.22.35.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 12 Jan 2026 22:35:47 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 2/5] python3-eventlet: patch CVE-2025-58068
-Date: Tue, 13 Jan 2026 07:35:43 +0100
-Message-ID: <20260113063546.1497839-2-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 3/5] python3-ldap: patch CVE-2025-61911
+Date: Tue, 13 Jan 2026 07:35:44 +0100
+Message-ID: <20260113063546.1497839-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260113063546.1497839-1-skandigraun@gmail.com>
 References: <20260113063546.1497839-1-skandigraun@gmail.com>
@@ -67,77 +67,77 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:35:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123397
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:35:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123398
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-58068
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-61911
 
-Pick the patch mentioned in the NVD advisory.
+Pick the patch referenced by the NVD advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python3-eventlet/CVE-2025-58068.patch     | 41 +++++++++++++++++++
- .../python/python3-eventlet_0.33.3.bb         |  1 +
+ .../python/python3-ldap/CVE-2025-61911.patch  | 41 +++++++++++++++++++
+ .../python/python3-ldap_3.4.0.bb              |  1 +
  2 files changed, 42 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-eventlet/CVE-2025-58068.patch
+ create mode 100644 meta-networking/recipes-devtools/python/python3-ldap/CVE-2025-61911.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-eventlet/CVE-2025-58068.patch b/meta-python/recipes-devtools/python/python3-eventlet/CVE-2025-58068.patch
+diff --git a/meta-networking/recipes-devtools/python/python3-ldap/CVE-2025-61911.patch b/meta-networking/recipes-devtools/python/python3-ldap/CVE-2025-61911.patch
 new file mode 100644
-index 0000000000..3fc7cb1b54
+index 0000000000..39426268ac
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-eventlet/CVE-2025-58068.patch
++++ b/meta-networking/recipes-devtools/python/python3-ldap/CVE-2025-61911.patch
 @@ -0,0 +1,41 @@
-+From 4e151d13a160e4d2a98dc77d32e5c3fe2c42f2b9 Mon Sep 17 00:00:00 2001
-+From: sebsrt <s@sebsrt.xyz>
-+Date: Mon, 11 Aug 2025 11:46:28 +0200
-+Subject: [PATCH] Fix request smuggling vulnerability by discarding trailers
-+ (#1062)
++From ecbd037205723884036b4a467c19d7904b8b6cee Mon Sep 17 00:00:00 2001
++From: lukas-eu <62448426+lukas-eu@users.noreply.github.com>
++Date: Fri, 10 Oct 2025 19:47:46 +0200
++Subject: [PATCH] Merge commit from fork
 +
-+The WSGI parser is vulnerable to a request smuggling vulnerability due to not parsing trailer sections of an HTTP request. This patch fix that by discarding trailers.
-+
-+CVE: CVE-2025-58068
-+Upstream-Status: Backport [https://github.com/eventlet/eventlet/commit/0bfebd1117d392559e25b4bfbfcc941754de88fb]
++CVE: CVE-2025-61911
++Upstream-Status: Backport [https://github.com/python-ldap/python-ldap/commit/3957526fb1852e84b90f423d9fef34c7af25b85a]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ eventlet/wsgi.py | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
++ Lib/ldap/filter.py     | 2 ++
++ Tests/t_ldap_filter.py | 4 ++++
++ 2 files changed, 6 insertions(+)
 +
-+diff --git a/eventlet/wsgi.py b/eventlet/wsgi.py
-+index 7ef0254..fb0d805 100644
-+--- a/eventlet/wsgi.py
-++++ b/eventlet/wsgi.py
-+@@ -154,6 +154,12 @@ class Input(object):
-+             read = b''
-+         self.position += len(read)
-+         return read
-++    
-++    def _discard_trailers(self, rfile):
-++        while True:
-++            line = rfile.readline()
-++            if not line or line in (b'\r\n', b'\n', b''):
-++                break
++diff --git a/Lib/ldap/filter.py b/Lib/ldap/filter.py
++index 782737a..5bd41b2 100644
++--- a/Lib/ldap/filter.py
+++++ b/Lib/ldap/filter.py
++@@ -24,6 +24,8 @@ def escape_filter_chars(assertion_value,escape_mode=0):
++       If 1 all NON-ASCII chars are escaped.
++       If 2 all chars are escaped.
++   """
+++  if not isinstance(assertion_value, str):
+++    raise TypeError("assertion_value must be of type str.")
++   if escape_mode:
++     r = []
++     if escape_mode==1:
++diff --git a/Tests/t_ldap_filter.py b/Tests/t_ldap_filter.py
++index 313b373..5431205 100644
++--- a/Tests/t_ldap_filter.py
+++++ b/Tests/t_ldap_filter.py
++@@ -49,6 +49,10 @@ class TestDN(unittest.TestCase):
++             ),
++             r'\c3\a4\c3\b6\c3\bc\c3\84\c3\96\c3\9c\c3\9f'
++         )
+++        with self.assertRaises(TypeError):
+++            escape_filter_chars(["abc@*()/xyz"], escape_mode=1)
+++        with self.assertRaises(TypeError):
+++            escape_filter_chars({"abc@*()/xyz": 1}, escape_mode=1)
 + 
-+     def _chunked_read(self, rfile, length=None, use_readline=False):
-+         if self.should_send_hundred_continue:
-+@@ -204,7 +210,7 @@ class Input(object):
-+                         raise ChunkReadError(err)
-+                     self.position = 0
-+                     if self.chunk_length == 0:
-+-                        rfile.readline()
-++                        self._discard_trailers(rfile)
-+         except greenio.SSL.ZeroReturnError:
-+             pass
-+         return b''.join(response)
-diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
-index c1256661b4..12ee39aee9 100644
---- a/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
-@@ -4,6 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
- 
-+SRC_URI += "file://CVE-2025-58068.patch"
- SRC_URI[sha256sum] = "722803e7eadff295347539da363d68ae155b8b26ae6a634474d0a920be73cfda"
++     def test_escape_filter_chars_mode2(self):
++         """
+diff --git a/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb b/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
+index 4299058315..59ced40021 100644
+--- a/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-ldap_3.4.0.bb
+@@ -13,6 +13,7 @@ PYPI_PACKAGE = "python-ldap"
  
  inherit pypi setuptools3
+ 
++SRC_URI += "file://CVE-2025-61911.patch"
+ SRC_URI[sha256sum] = "60464c8fc25e71e0fd40449a24eae482dcd0fb7fcf823e7de627a6525b3e0d12"
+ 
+ do_configure:prepend() {
 
