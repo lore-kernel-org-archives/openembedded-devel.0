@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1796D25031
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAADFD0C820
 	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 10:24:30 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.55837.1768299868716396502
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.55835.1768299864732423817
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 02:24:29 -0800
+ Tue, 13 Jan 2026 02:24:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QLga0IJP;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iZIaVN3f;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1768299868; x=1799835868;
+  t=1768299863; x=1799835863;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bjsF1gOsN2U8pF2TeLp2YpLlx/lADXxgxeRcBkU6POg=;
-  b=QLga0IJPE1dods/bQC+e1SERjsZpse2NOh8TlrZuUFCaizWtdhXtF+Bx
-   ylIS+Dfjkf+WT2jRZ9TmtEQr/zJeIjdYc2dw4y4kh50TQ46rRcjmEulZx
-   KRNs39MHQhiEwCFH3mSdZZj6dcgvbBcu5HhJkP6mqIeTdn4NHwrPu6/T8
-   p41UWzpza87/k5faFXPdOI6WJzcVFD5Iw4rDHSLS1TY30jU2B6XuE1SFF
-   ndvF9X6kxK1+gcsliYmYiEXMmAJ5iHweO3VosIV+NRnRnZ4RNo1xDtU7k
-   NkH+Q1TFF7C4G//uAx/f4lOcz17byltBsEaYxjx6zUB1RRrPYii5N4rvQ
-   A==;
-X-CSE-ConnectionGUID: 4TVPYL3FTTScaukbS/XMhw==
-X-CSE-MsgGUID: b3DqhBBnQr+oK1UWo5XsEA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="213580562"
+  bh=B/WvBKO51pdJYPoLzICP6l6lN1oeE7gjtoxSzQVOpU4=;
+  b=iZIaVN3fSf/JDAE3z8kvNfD8b7QR+FYckaspU6m4y4jN21xiqSQUbVcA
+   jVODobLvBLaPhqUOsHgDohRtqQ9VfetwhMQHQisCPaSzCzlGAfvHvjYvg
+   Z9eiJKI6fJZyygDOClKcuUVt8Ho6gfGo2a2cS11UpeB6R1ktTJGbIfhZP
+   uV3dOP9lgUtrz75R4le3avJ5+j+soKE+JYY5az+V/vkco2jZHnxz4Cg1g
+   GlP8dWo1S2SJ+PjXvIbL8EBayB45rZ77GZiaJ/6sdefyI0QgOLJFdHoTL
+   5Rh+WOklPmBhU8Q4irl+sEaLi5Rsz4HWdB6gMOSxJ/lkjqGIYXA2OO6eN
+   g==;
+X-CSE-ConnectionGUID: RZz69AO7QGGc7OQ+4m0/SA==
+X-CSE-MsgGUID: 9xI3nSfXRdaL/KhYhmMtcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="214223663"
 X-IronPort-AV: E=Sophos;i="6.21,222,1763391600"; 
-   d="scan'208";a="213580562"
-Received: from unknown (HELO az2nlsmgr3.o.css.fujitsu.com) ([20.61.8.234])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 19:24:27 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+   d="scan'208";a="214223663"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 19:24:21 +0900
+Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr3.o.css.fujitsu.com (Postfix) with ESMTPS id 1DE9D1000349
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:24:27 +0000 (UTC)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 1DE73C00203
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:24:23 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id C552C100135E
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:24:26 +0000 (UTC)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id C269D140035B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:24:22 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.191])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 197041019048;
-	Tue, 13 Jan 2026 10:24:23 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id F03591019049;
+	Tue, 13 Jan 2026 10:24:19 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 09/22] python3-alembic: upgrade 1.17.2 -> 1.18.0
-Date: Tue, 13 Jan 2026 18:23:21 +0800
-Message-ID: <20260113102334.605-9-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 07/22] nautilus: upgrade 49.2 -> 49.3
+Date: Tue, 13 Jan 2026 18:23:19 +0800
+Message-ID: <20260113102334.605-7-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260113102334.605-1-wangmy@fujitsu.com>
 References: <20260113102334.605-1-wangmy@fujitsu.com>
@@ -61,38 +61,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:24:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123415
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123413
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-License-Update: copyright year updated to 2026
+Changelog:
+=========
+- Don't waste resources on images with extreme dimensions
+- Consider thumbnailing finished at correct time
+- Redraw view when screen scale factor changes
+- Fix potential outdated view item usage
+- Correctly close mime type program chooser dialog
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-alembic_1.17.2.bb => python3-alembic_1.18.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-alembic_1.17.2.bb => python3-alembic_1.18.0.bb} (63%)
+ .../nautilus/{nautilus_49.2.bb => nautilus_49.3.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/nautilus/{nautilus_49.2.bb => nautilus_49.3.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.17.2.bb b/meta-python/recipes-devtools/python/python3-alembic_1.18.0.bb
-similarity index 63%
-rename from meta-python/recipes-devtools/python/python3-alembic_1.17.2.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.18.0.bb
-index 81bfdc64be..39038958f4 100644
---- a/meta-python/recipes-devtools/python/python3-alembic_1.17.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-alembic_1.18.0.bb
-@@ -1,10 +1,10 @@
- DESCRIPTION = "A database migration tool for SQLAlchemy"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d2ee18d90dcc02d96b76e9e953629936"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ff111c41e8748bbfa45e8ba92347b681"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_49.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_49.3.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/nautilus/nautilus_49.2.bb
+rename to meta-gnome/recipes-gnome/nautilus/nautilus_49.3.bb
+index 1229fa4a80..b6c13dedb0 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_49.2.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_49.3.bb
+@@ -24,7 +24,7 @@ DEPENDS = " \
  
- inherit pypi python_setuptools_build_meta
+ inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
  
--SRC_URI[sha256sum] = "bbe9751705c5e0f14877f02d46c53d10885e377e3d90eda810a016f9baa19e8e"
-+SRC_URI[sha256sum] = "0c4c03c927dc54d4c56821bdcc988652f4f63bf7b9017fd9d78d63f09fd22b48"
+-SRC_URI[archive.sha256sum] = "2576b34bed2781a89f09051ec9fcae3ae17eb7172cd7be678f592aa14e4c26b1"
++SRC_URI[archive.sha256sum] = "aa6bf376f08992362805eae01890b1bf5ad148f356aa7ccfe1f664eda88d413e"
  
- RDEPENDS:${PN} += "\
-     python3-dateutil \
+ REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
+ 
 -- 
 2.43.0
 
