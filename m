@@ -1,139 +1,106 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4FB5D29DD5
-	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 06:29:59 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.53693.1768285789982801637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C80A6D29DCC
+	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 06:35:49 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.53746.1768286148560156275
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Jan 2026 22:29:50 -0800
+ Mon, 12 Jan 2026 22:35:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mZzNZCex;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1768285790; x=1799821790;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Imgl7P/FxnzThDQIEXgfcrBQOCiKPI6UYDFWo9F0an4=;
-  b=mZzNZCexEWcBFQM7izY6jiQ/rjk7vW4wIWEsMdXrk8mFYKoL8hORbWEs
-   QrVjy22dL8Xhk7SkVlnntGqR5Vyu44YWa/+/fK5ViCmoNNvH7cxVOhO+0
-   i2DnXB5uw/glmtlsC6crDzcPcAmXZoy1pseD0w/deELAb+XzvH8fRtDqI
-   idFDzhd/Y9v4TQmBFEM1HK0WRS/ZFRR0ZRtvodSMYQdEyGa/TInrvwCc3
-   BafhGDYw5W7iarztA5XcpSFlekUN5oK/gYuOgDXDtUvIVd9i0uEu+tdOn
-   dA118rQ2HzMRKGxhIc9rgfKRIKlFir/3TuXwvhESXrdmi2JmfTVqPKxdC
-   A==;
-X-CSE-ConnectionGUID: rsklI8SqQxqJEoiq81bMPQ==
-X-CSE-MsgGUID: wt2ckPEESPGXJ2SscPUODQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11669"; a="213031927"
-X-IronPort-AV: E=Sophos;i="6.21,222,1763391600"; 
-   d="scan'208";a="213031927"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jan 2026 15:29:48 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 3B57EC0182C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:29:48 +0000 (UTC)
-Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id EA6D58D72FC
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:29:47 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id B75A4100058E
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:29:45 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FPytcs67;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-432d28870ddso2665502f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Jan 2026 22:35:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768286147; x=1768890947; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=I75k2+S0AqK7+khywr98UO0v9rjtj12ruP0i9aFZa3s=;
+        b=FPytcs67pm0sd0ogmydNFbetl9Pk/8naKXfqdpsRp51Rgg27ebiUyUJNXAcjYhHSdP
+         sqilGKmGH4WkagxYuVHvO2B/RUOAjb6uQK/JMyfoBRqx+Bk2VTCG1U9hYMEWGMX+uHPj
+         g9XGGAgmGMNgJ4Z9hZBlHiXyx5bhcW4x9BWV+6VwlhLdkn2o6zWlQp87+NnbwlbSs7lz
+         QLxoYZFthIW7UwpUq1ciZTmLm/n6ZOT+LGNlu4U44EbQZn7PDspbq4v4EZyxj/5u+jYG
+         YtAEn7Klz5W7qji1sordkyBVP8tlXYsnjp232tTcgt8CEqhY2ZgyAwMIzygUib25Zp+H
+         8yhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768286147; x=1768890947;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=I75k2+S0AqK7+khywr98UO0v9rjtj12ruP0i9aFZa3s=;
+        b=M67Ij4ABnO2HHUrH3uPKL9lpYOPCUUxmCjZj9cRzDWkf1oMegwFpSIkUPlA0CFe1XV
+         zjZYQgEY2cv0CfOgcnNxhkL52TR5+jFcfw8bi9KLFmEmVPZv2ERaYyPnNnXASiWsnzcK
+         AVK/jl95VJr9aEnRZT9Qnna1FQ885ZFscCg32SWrNEjXWHwrTObQZwkKNk8Avs/r6iH2
+         J1QWHQ9O1dpOtJlqk/llCx0TdZeipF3ZY4CeWrX54pu6+8Ew4f4rJfBYc5XlzOT2+KDE
+         rFIOcxQaXS9wSXBsbLTXegDN/TSRlKuDjKhcl121ByuiGOfUVXsijnZUPbBstjXO0KAf
+         gkMA==
+X-Gm-Message-State: AOJu0YzpOEVUvlA4/E+VYUNpggxBh4UxqQettHfLNuwh+YgEqIqoC13U
+	gUvm9TYsTf+ylIhRVgwb0qQxqRjFZjGaBx2Rek5wQStmfUs/ECX+9Ivx+GU9Rg==
+X-Gm-Gg: AY/fxX6qIo5+HyZ8LpjjAVpBFTQmAcNyyaUWca4Tir6FEAVgs+j6LlgovV7RPHD9X18
+	p+UwziCVTlnDGVSTGW1u7l2hryt2+84O9m0QuKIlzEhGbvLE234vSjgWAcmZQeWDLBXcKsicUFi
+	9h6vXWTGvFOhti45TtJTlU7xZxkoN51pFTINs8HE6GVilH6/xuFZcj2pqBsXqI72Cc84Xm4dStA
+	h+GIgqbgtB0hF/yuL65HQSfVsbiZUrrxN7m0Z9oe7nNxxOOAHsDjp2YO8+4FqrXBu3gN8E+gx+e
+	2eLQmWTmPkICsdlvlosYY/W6cd7BBwNAIMVYaKChPku4oVWF8/lAVOzYL9B6OQniqrstU99Z8RK
+	WJ6pMdb3mB28GrnQf/ldRvYdUdj4GaV7LlCRchWZcY6cf+j4SYp44tOamFm3dULuZ/XW4dZqzq3
+	92KU05gJuA
+X-Google-Smtp-Source: AGHT+IEV46T8EhQN4iCCGofZVVsNLReL4ezi6mftPiKbbqh7KnSYfoo0mu2hFcNp/L7z2FPENbUkdw==
+X-Received: by 2002:a05:6000:2282:b0:431:a0:7de0 with SMTP id ffacd0b85a97d-432c374fd9amr24071257f8f.35.1768286146805;
+        Mon, 12 Jan 2026 22:35:46 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5edb7esm42273385f8f.30.2026.01.12.22.35.46
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Jan 2026 22:35:46 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][PATCH] python3-google-auth: upgrade 2.45.0 -> 2.47.0
-Date: Tue, 13 Jan 2026 14:29:37 +0800
-Message-ID: <20260113062937.7987-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-python][kirkstone][PATCH 1/5] python3-eventlet: upgrade 0.33.0 -> 0.33.3
+Date: Tue, 13 Jan 2026 07:35:42 +0100
+Message-ID: <20260113063546.1497839-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:29:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123395
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 06:35:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123396
 
-1. Changelog
-https://github.com/googleapis/google-auth-library-python/blob/main/CHANGELOG.md
+Bugfix releases.
 
-2. Drop 0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch as it was merged upstream.
+Changelog:
+0.33.3:
+* dnspython 2.3.0 raised AttributeError: module 'dns.rdtypes' has no
+  attribute 'ANY' https://github.com/eventlet/eventlet/issues/781
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+0.33.2:
+* greenio: GreenPipe/fdopen() with 'a' in mode raised io.UnsupportedOperation:
+  File or stream is not writable https://github.com/eventlet/eventlet/pull/758
+
+0.33.1:
+* Prevent deadlock on logging._lock https://github.com/eventlet/eventlet/issues/742
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...ts-skip-when-pyopenssl-isn-t-availab.patch | 34 -------------------
- ....45.0.bb => python3-google-auth_2.47.0.bb} |  3 +-
- 2 files changed, 1 insertion(+), 36 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-google-auth/0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch
- rename meta-python/recipes-devtools/python/{python3-google-auth_2.45.0.bb => python3-google-auth_2.47.0.bb} (87%)
+ .../{python3-eventlet_0.33.0.bb => python3-eventlet_0.33.3.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-eventlet_0.33.0.bb => python3-eventlet_0.33.3.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth/0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch b/meta-python/recipes-devtools/python/python3-google-auth/0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch
-deleted file mode 100644
-index 5ee13f3d63..0000000000
---- a/meta-python/recipes-devtools/python/python3-google-auth/0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 35eea881e1aeb27fc12cfb301e497e72e59e720f Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 18 Nov 2025 17:23:09 -0800
--Subject: [PATCH] make the TLS tests skip when pyopenssl isn't available
--
--In some distributions e.g. yocto
--pyOpenSSL is a packageconfig and disabled by default,
--and it means pyopenssl.py module is not installed as a result.
--
--This test fails plainly when it can not find urllib3.contrib.pyopenssl
--instead skip the test if it does not find the module.
--
--Upstream-Status: Submitted [https://github.com/googleapis/google-auth-library-python/pull/1873]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- tests/transport/test__custom_tls_signer.py | 5 ++++-
-- 1 file changed, 4 insertions(+), 1 deletion(-)
--
--diff --git a/tests/transport/test__custom_tls_signer.py b/tests/transport/test__custom_tls_signer.py
--index 3a33c2c..6f88ddf 100644
----- a/tests/transport/test__custom_tls_signer.py
--+++ b/tests/transport/test__custom_tls_signer.py
--@@ -18,7 +18,10 @@ import os
-- import mock
-- import pytest  # type: ignore
-- from requests.packages.urllib3.util.ssl_ import create_urllib3_context  # type: ignore
---import urllib3.contrib.pyopenssl  # type: ignore
--+urllib3_pyopenssl = pytest.importorskip(
--+    "urllib3.contrib.pyopenssl",
--+    reason="urllib3.contrib.pyopenssl not available in this environment",
--+)
-- 
-- from google.auth import exceptions
-- from google.auth.transport import _custom_tls_signer
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.45.0.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.47.0.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-google-auth_2.45.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-auth_2.47.0.bb
-index 17a9d7051e..3b141006a5 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth_2.45.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth_2.47.0.bb
-@@ -6,11 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- inherit pypi setuptools3 ptest
+diff --git a/meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb
+rename to meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+index 6a4449cf55..c1256661b4 100644
+--- a/meta-python/recipes-devtools/python/python3-eventlet_0.33.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eventlet_0.33.3.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
  
- SRC_URI += " \
--        file://0001-make-the-TLS-tests-skip-when-pyopenssl-isn-t-availab.patch \
-         file://0001-python3-google-auth-Skip-mTLS-tests-in-ptest-environ.patch \
-         file://run-ptest \
- "
--SRC_URI[sha256sum] = "90d3f41b6b72ea72dd9811e765699ee491ab24139f34ebf1ca2b9cc0c38708f3"
-+SRC_URI[sha256sum] = "833229070a9dfee1a353ae9877dcd2dec069a8281a4e72e72f77d4a70ff945da"
+-SRC_URI[sha256sum] = "80144f489c1bb273a51b6f96ff9785a382d2866b9bab1f5bd748385019f4141f"
++SRC_URI[sha256sum] = "722803e7eadff295347539da363d68ae155b8b26ae6a634474d0a920be73cfda"
  
- PYPI_PACKAGE = "google_auth"
- UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
--- 
-2.43.0
-
+ inherit pypi setuptools3
+ 
 
