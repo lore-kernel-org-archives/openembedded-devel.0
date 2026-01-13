@@ -1,98 +1,102 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D4DD0C83F
-	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 10:27:01 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.56105.1768300019791637045
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A19BFD0C846
+	for <webhook@archiver.kernel.org>; Tue, 13 Jan 2026 10:34:31 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.55987.1768300469029965964
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 02:26:59 -0800
+ Tue, 13 Jan 2026 02:34:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GygmgRtc;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6420c08f886so10299834d50.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 02:26:59 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=uNRDlCjY;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47795f6f5c0so45820115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 02:34:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768300019; x=1768904819; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dDIpkV37ayQoA1L6S0kUbH+rXPMbuPiLQw4yiUik9V8=;
-        b=GygmgRtcCPm+gaaNwzdyCDRVBrSWxpzyxKADi2eP5CpHVvrpBBirg8//iMlIAF6ZEe
-         3YULQKcIupTAK808G3eLTl/sJOiF3XrVnvhNTM+Rz09/+mceJ+zEDOcpfycOJS/dEukB
-         vrHcvqak10snHSA7sK/8yxvy3eBYLgZpja+3b5aPQ6SdDka46AcnF7s8faMF8MlUVEhO
-         HU1gJZSgpCxpl2yrJ6kzG5GS4OeQRkqcT7dMemQ2QJZ7a7MhJ7YgJzawu4Clj+fN5Rcy
-         QIfOKRSE6Y5nnaYalMeXnldS6A8BuhlEsu7mybKLxpy2ASy+E9Odp1vfSuiUWq1LYdqj
-         ol0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768300019; x=1768904819;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1768300465; x=1768905265; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dDIpkV37ayQoA1L6S0kUbH+rXPMbuPiLQw4yiUik9V8=;
-        b=Ezbi/Cg+KC4zNTK+auuXAZ/Q80WFJhJlWYuNszn2oIaD6gedHaVPx2YAopp8KqwTaP
-         krdN21rHzr8B02xNuDsOIEg0hTshUJE7S8vDJl2KGBNTWAczIGvaUmv+9KmsAowv/ROG
-         rhxQhgQEP8MrMJIEgmXvsqqAL5el40+Kozt02qTJvNYlLovvoIKTf9CwtKtzJGGZo27H
-         +iUwbxV/FSYGF1nNp0BXseQhLRn3JnvAnw57F6gUnX0wh25LqqKr46yPKDWYTkUrOLNE
-         n+ODxXW0yR6bwZqvfTaZ6YWaEcSrAnwxd4LaskEj/xFIbLfTsg/JT/oekPVpLNjUjVKW
-         Cp1A==
-X-Gm-Message-State: AOJu0Yw8ADvv8Dmkl8jLUleJLK8FlzcKC9pcNszdn8tox7qEr0mH6yIP
-	TR/QT95bMLrOWJn76s2YsY+rlngnnqRxD8UWPhpJze5Z0OFLd3nqGPl4ENDijPMW
-X-Gm-Gg: AY/fxX6Af8McuVbKGoWnjjqyemxN3TV0phjZW2fHwclAOozW+zWdT2wywQhPPU+bJWg
-	9GlYO1GQgeDC2LIXMpV7QpnyDwR8lqEoTxgUCdMRGue2V34zqAOWwF+fInoyzWYws88E03JhvBc
-	pCiN+ZaqTwAu8ixG8+oOFNgMxmvgLFK4gX/KDoAnDtje37Z7thW8TZveQNzQnZfpc1U4AFmk7rU
-	m/PhrKY5AE0sA7CSzFHrKcGhkPzPqC3q9aYqwH9jqv0qMNrVTl5TCl5gBlTbPZwdsUiCARDe8aR
-	3hQk7FZCYZeXc4WbvAq5dVOZ48SOzJN4ZE5wyr5j0yFPKD92GFSDPtu/73hiNM62OGjJdzdpOSq
-	QSRC7avbXfhIgZ0N3bCqL+QCZ2gw0RlFrJ2B3ktp5s9C+n8OVYhTKqqhEemLhEeRAoHtjgR6FNN
-	R3AAknNgVtC2XDA4FXU20isd2db2/NPtvvcMLbY8As5TWmZpOygN/xm0+I8tnsjJf95SdMb20ib
-	4aLohj0psSMv+sY0KzGjJELqxZBzhcbtOPxu2Gqjh6BLd0nPMOIAdLIymSMF8D5rA==
-X-Google-Smtp-Source: AGHT+IGUVzo/kfQZdH6ZmO5aJuXh5yFmL7Zct/7YsAzxL+2H7hEUjgqYGS4BARSBfLH4EwkX4arvtQ==
-X-Received: by 2002:a05:690e:138b:b0:644:60d9:7533 with SMTP id 956f58d0204a3-64716cb7b47mr16471171d50.89.1768300018531;
-        Tue, 13 Jan 2026 02:26:58 -0800 (PST)
-Received: from localhost.localdomain (71-208-41-41.ftmy.qwest.net. [71.208.41.41])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-790aa592cdcsm78318877b3.25.2026.01.13.02.26.57
+        bh=4gbKcWsgR9n0Bb4nvX90nohJzmPpEQWKmPAOmSzpzhw=;
+        b=uNRDlCjYmRmltzeRNugK/DP6512QWBCzzWt3NF7bXht9G081GqjNLOckxlR8V6oqAr
+         ROZ8deUFW4hicqS6UoPqctpoQykNNv/qQCKX5NPEDbJWRXc2y8tJRJ8K6HLiZZX68I9/
+         IP7lflPrfLkzwM4FGot9pn8/lCoh1nTuG63rg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768300465; x=1768905265;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=4gbKcWsgR9n0Bb4nvX90nohJzmPpEQWKmPAOmSzpzhw=;
+        b=FSJaZfXqES8nwfbqB1fxsgDqm9LrtiF1UUDAIovvfu8DOc8tE7xdmWpCEj/r0MhD09
+         aFqGEIHcIl5+LTa1oDIvuECwNRVzyGNZpnY1bx1ZDEVcuwNTSy6ihRcSp7NZViWIIrFH
+         jZP+7AjJwd6n83m1KtqMHEBF3D/R9ObFeXW10j0vMywaBKAPxZo3QsjeVrIuy4+BzrAL
+         mZMA9TkFJEeGmnrqaIplN2k89JNbqRVwrU+EWBrJa/3ZQ6pSRS0yjDOAW5iShgkM6883
+         4diSxrtzTZyAaxu8VrlR0DGV9FiUSPZQcOhOr2YERyBcYGfImlowQL8IhCD7uHRVWXqJ
+         85Cw==
+X-Gm-Message-State: AOJu0YzUu953W0UaR5OfcMEnC1C4vw2Jg9o+ZBM/epSm4EmUVYtRNKFk
+	rkn8wtpdVPVZBXTUTcNHJ5RBFurOFkMCtDL17bqnVfSekEMItOh/6elxLGWtdj0ub9rZ9rBMTDj
+	MBr0S
+X-Gm-Gg: AY/fxX4xvdgPI5lfGNSFxycdBmklDIydKarsD4DO6IQ58oR+qsptD8cZ1D+PZcyZdEQ
+	WoQOQXqC4nUU2rSMQPZAz+CFm/OWb7cAuO01ySecuuhB2zgieZiSopEx2YoLQkuyPQQMkwcijpu
+	hdIKWOkT31dSJdX9s/MpMNjHRnjVpOtu7CP/YBdmGE0aStyqm1O5JcV9W6YaTf6ia5irDPJPKHx
+	3OSBI4gFAwQugcgd8AW3UrV/LalPHQQ5eESXMv0rC8Ybb/Hpfj3/x1S3vtJuZGXBOg1mdnMGS4G
+	5KaeX6jWwsZK9dPrYukthvRHfvvgesy/NpQixrqE2xyA959xLGodVv9GEy1INQ7F4MvJ0YcUvBJ
+	3oR9nzZQKBAeYaOLPH1f5l1o1TRLzSR6qQTZncTxV+AFlHGS4YMX9UahjO90ty6iQ8CPikd/OSy
+	Lfco+k8OJL/XgvJ21+cF3xTP7Z
+X-Google-Smtp-Source: AGHT+IFEpNfRKJJm5SD0kCTR5RUMEb1yEF0RByslGTO5BP6PH4AqmsczRq7X7BRCm82hEQt2QGCp4w==
+X-Received: by 2002:a05:600c:45c7:b0:477:994b:dbb8 with SMTP id 5b1f17b1804b1-47d84b2cf22mr245759835e9.11.1768300465004;
+        Tue, 13 Jan 2026 02:34:25 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd0daa84sm43341971f8f.2.2026.01.13.02.34.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Jan 2026 02:26:58 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Tue, 13 Jan 2026 02:34:24 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] tumbler: upgrade 4.20.0 -> 4.20.1
-Date: Tue, 13 Jan 2026 05:26:53 -0500
-Message-ID: <20260113102654.5076-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-aenum: Upgrade 3.1.15 -> 3.1.16
+Date: Tue, 13 Jan 2026 12:34:18 +0200
+Message-ID: <20260113103421.3568307-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260113103421.3568307-1-leon.anavi@konsulko.com>
+References: <20260113103421.3568307-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:27:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123429
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 10:34:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123433
 
-Changelog: https://gitlab.xfce.org/xfce/tumbler/-/tags/tumbler-4.20.1
+Upgrade to release 3.1.16:
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+- standardized handling of negative numbers in flags
+- support dictionary-like key access to NamedTuple
+- remove newer setup.py option include_package_data
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../tumbler/{tumbler_4.20.0.bb => tumbler_4.20.1.bb}            | 2 +-
+ .../python/{python3-aenum_3.1.15.bb => python3-aenum_3.1.16.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/tumbler/{tumbler_4.20.0.bb => tumbler_4.20.1.bb} (93%)
+ rename meta-python/recipes-devtools/python/{python3-aenum_3.1.15.bb => python3-aenum_3.1.16.bb} (77%)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_4.20.0.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_4.20.1.bb
-similarity index 93%
-rename from meta-xfce/recipes-xfce/tumbler/tumbler_4.20.0.bb
-rename to meta-xfce/recipes-xfce/tumbler/tumbler_4.20.1.bb
-index 6894e5ad67..c18d719c36 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_4.20.1.bb
-@@ -7,7 +7,7 @@ DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgs
+diff --git a/meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb b/meta-python/recipes-devtools/python/python3-aenum_3.1.16.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb
+rename to meta-python/recipes-devtools/python/python3-aenum_3.1.16.bb
+index 3769be0d5d..feeee18e34 100644
+--- a/meta-python/recipes-devtools/python/python3-aenum_3.1.15.bb
++++ b/meta-python/recipes-devtools/python/python3-aenum_3.1.16.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/aenum/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://aenum/LICENSE;md5=c6a85477543f8b8591b9c1f82abebbe9"
  
- inherit xfce gtk-doc systemd
+-SRC_URI[sha256sum] = "8cbd76cd18c4f870ff39b24284d3ea028fbe8731a58df3aa581e434c575b9559"
++SRC_URI[sha256sum] = "bfaf9589bdb418ee3a986d85750c7318d9d2839c1b1a1d6fe8fc53ec201cf140"
  
--SRC_URI[sha256sum] = "74b1647d55926547e98bfac70838ff63c5a84299a5e10c81c38d1fab90e25880"
-+SRC_URI[sha256sum] = "87b90df8f30144a292d70889e710c8619d8b8803f0e1db3280a4293367a42eae"
- 
- INSANE_SKIP:${PN} = "dev-so"
+ inherit pypi setuptools3
  
 -- 
-2.43.0
+2.47.3
 
 
