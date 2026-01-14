@@ -1,143 +1,118 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F636D38FEB
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 16:42:36 +0000 (UTC)
-Received: from mail-yx1-f50.google.com (mail-yx1-f50.google.com [74.125.224.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14675.1768408955802523928
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 255B8D39005
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 18:16:47 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15802.1768411557386822797
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 08:42:35 -0800
+ Wed, 14 Jan 2026 09:25:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZzYN/zKo;
- spf=pass (domain: gmail.com, ip: 74.125.224.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f50.google.com with SMTP id 956f58d0204a3-6467ac59e16so6486244d50.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 08:42:35 -0800 (PST)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=UTyF4aB8;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.51, mailfrom: adam.duskett@amarulasolutions.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b8715908e58so1355366b.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 09:25:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768408955; x=1769013755; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=dEF6oz4D/IvuBSrVoNVWZ2DBroizlcNrEZTZpJtads4=;
-        b=ZzYN/zKo7aCeaJzFh5zaiQYwlq5dqJ7ujKmFyizBEw6EuqZRqCFcSGushla0JrkHCJ
-         uHBKcxiA0JTN+4wcDoX8D8ZFhAR9AWTTT5POMVUiR5mnKKoNKclB3dpoyG9wyWdjs79Y
-         wG8L3Pj42+mYiDB9ksexYHPD01b7b18X3S1aIRUsbWG+Dgapad2B55Zzk999ZtVpK8DA
-         XqAynztA3lacGflNA53H2PSBK7TkG6T5CYtKPd8jBGXGMMoYDqowVs/tgrwkfdip4GHZ
-         qxZM1nDb+kEvqDP8U7470cVBGAPt6QNO2SE3jwzG4wXBvoFAOVm78K/PJPYtZDzw23HO
-         jwEw==
+        d=amarulasolutions.com; s=google; t=1768411556; x=1769016356; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xAZHA9ECno+QqCbLWtlT/8NXeWkkhk2WG88ZaDl0rZ4=;
+        b=UTyF4aB8PYwpNA+XcCbkbgAHpXyO+EbDqmgd97BzIhpOPA3XqolOMiGInpxSEC+mLv
+         X0aZ2cBnv2sed4qoY7xECawNTUuiorDa/3kZxswXO0hb4sc7TP0vK08gI8jfAMJnVeVz
+         VZFjA2K+yacsc0zGVeYi83NUUZxkV/vhCXl7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768408955; x=1769013755;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1768411556; x=1769016356;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=dEF6oz4D/IvuBSrVoNVWZ2DBroizlcNrEZTZpJtads4=;
-        b=O/NtkolCsbOTgViznesTCT0q46wMxo2+GbXxoWtQqgyXzUUxxEWWbmtGeDfR5JnU/W
-         uwCCRSXxu/38HCepDEwtweA5oqbFCZDSe6dvGAIwMuL+egGl1wusoJ2JcFhZblS3/gZV
-         BuPgtTnqOpMKlOF08WjQUf4kpwXThXokgzED3vfIRMqCd3AUb3HRuYGXGdkBH7VrfzNQ
-         FzF3Dpk7+lIrkygZI+/HisVZfb2/1lRc/uyhsUFiLSOEVplzGJlL1AUjWIawUdX1yde0
-         VlVK3cA+Wh1t5Dl0L01aSdOn0/8koFB5RgqZM/wh+KVNZ5Y1cJeZeZm/kNUVKOolYgtd
-         e99g==
-X-Forwarded-Encrypted: i=1; AJvYcCVCXVURkv08j336BVwk7i6AcbNfwmQeb2hIDJr+6nwnZ9gVrhuZvqSqoN1mWGmTjcR/16fg5QFYc9D/0MHh561YG7g=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzlvIOCBiNkwu6LMLD8kf228O43qibZopPGesgPG9g53WvvFUGD
-	uWrly3J6V99mGRUseopF7o90xvwhPAqtSqIEXRHR5y+Y11O5W9IyYDYDiUb2Cn9BNpo/bt8kzYU
-	j+YH95iLiI2EZOUiyuj+CZ8XsJ0xu9oU=
-X-Gm-Gg: AY/fxX7DdvpCen2yhn8SXIGZViP2Crs6VFwSDgtU6qO3Yff9eqRKRonW96ImfGEDoJV
-	/ilWZmRmG0fxbV2okVkhAxwrmJquVU9GqiKYX0pLbK0jrvkJiNR70yxuOv54jqVVP6YgBuAe/tU
-	2Uq1LQ/VO6AxV+4R7WMd3U1fqEcLMmKLWgXmLYHiwvCM0NSoGWrYK4mDxt5nWKvc4oPTnzMEhi5
-	5KxZ5fstXjASxtu7d58TB1qfs3gKavkItqRFQ+Ir4ADtfAZYLd/MQjmU2RYMEUEY0cbHQ6aPjWm
-	0lZ+spYJHVj3fyQYUPzYaSLSfqAF7xraRiK6TX19OJ6Lk9i3K5YI0fmKzIBfSFEyrtICW5qN3K5
-	C2/eJzxxP4V1rPK7FDaTYWoKleod4jAjbNP909RvU2ic=
-X-Received: by 2002:a05:690e:1699:b0:648:f591:f94e with SMTP id
- 956f58d0204a3-64901aae92amr2663580d50.29.1768408954838; Wed, 14 Jan 2026
- 08:42:34 -0800 (PST)
+        bh=xAZHA9ECno+QqCbLWtlT/8NXeWkkhk2WG88ZaDl0rZ4=;
+        b=TxvOt8Zj4S7SrFgsO1qLeiW+GxQ3c7PjQFvzbbYOUv2I1VxWkl0OKTxKc+OEEsx1po
+         beIw+/yY2ZfvpjIDo8mQbHtzlJI+bRgiwH2Ws67ZUo1+mptZ7UXCaAWw5u9taOdeQyzE
+         TTD7N/7x80JoOrKDuI8fp2PrPFWXe2w4vorv5lJwx2WbpzvJnPGrqeoDIVBDkTaqRqxU
+         8htrxgboNFnebqGMIPU4R71gOnWaYdKAogmqrXkogSEAT64MfmKQccInoLtWtZk9I5Pb
+         8zPWjce9iEY2JLj+bFUfhavEnRKNfHRqbg9yuVr7xU3hSxgLc3W6cSy/91OJfuZJgMEz
+         ulEg==
+X-Gm-Message-State: AOJu0Yw70zS3H1gRdORhraaB9YBHrjHeI/yOY6A/7D5GwIc7g1WGgLDa
+	chBvrnBlU4inwRfbKXMnTbvfkGklG3K5DhfZLPQTp/wjfPrXPvfLtJuz1tJ1cJA4NyiVSVxClZg
+	sgvze
+X-Gm-Gg: AY/fxX69dqXK0UhcphfZIvnjtwAx5d3icz2Un3VgQ+aFHJnAXYVub/LfVD0m+aEXHVu
+	lNVyP2N6xRbZs9ga3WyjVwZL/l7i91H8d7+RrssGOEskEZ8xFoA9Nb8LYy3aPjvEudtVEdkJFzj
+	6TIXYapKkS6UW7hQbrDNwx2oBaIsYNGIiUsq+AntjMzPkkoPwEOQSicin5ryo7U+WudE3jeMDgx
+	XvShhdxnIeQxjXgtD7xhxGyeeML+ymRhcB8fUqGY/4+rYwvTbqNuhle1Bs+pRvGz4Wy7BhK1YdH
+	PSVL9Y6Ni4Nu1T5BBLuRVI0PgMdYvOY521aLbEWsck5CJt5A+wXmeNbkRs3yHb1B2cjCz9jSfd9
+	nlao3vcSPkHmdQzIfQ9fe9rODhjnPNCbVAq1R+vLbctmpqNZjCTXKLUFgn/xjg/XH7xStYQ6Xng
+	iyLkFto5iPRUrxOXS06F/egFnnCX8ChfWsgmLHz523mybG7/FTWkm2tBW8gTRgj6jVoKq1i+bYu
+	MY9qSSb66ka0I1uttPCXdgYmBEkzlv/uXpymU47RiTsJTtDoSj0U3aezYoNpco=
+X-Received: by 2002:a17:906:f58a:b0:b87:17d1:a98f with SMTP id a640c23a62f3a-b876128d071mr156901466b.3.1768411555665;
+        Wed, 14 Jan 2026 09:25:55 -0800 (PST)
+Received: from adam.arnhem.chello.nl (2001-1c00-8101-1200-3ddc-5bb8-0efa-16f1.cable.dynamic.v6.ziggo.nl. [2001:1c00:8101:1200:3ddc:5bb8:efa:16f1])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b871f50cdc4sm860854266b.20.2026.01.14.09.25.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Jan 2026 09:25:55 -0800 (PST)
+From: "Adam Duskett" <adam.duskett@amarulasolutions.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
+Subject: [PATCH 1/2] [meta-oe] libtsm: add recipe for kmscon dependency
+Date: Wed, 14 Jan 2026 18:25:52 +0100
+Message-ID: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20250307093255.1110778-1-awais.belal@gmail.com>
- <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
- <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
- <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
- <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com>
- <CAMKF1srDnbOc3LGOJ0YBVNGbxJ8-7bzSZMowWZ=WuONeFbvuiQ@mail.gmail.com>
- <CA+chaQdj4iXwG1bP_ZYJVXJXU1Oq4buzc5hx=YU7DBkXk9uQ0A@mail.gmail.com>
- <CAM=5Ambb1=5rTBYoQQ1y+OwpFRUn2eVmadPYRCsj3NBS1+ucqA@mail.gmail.com>
- <297305bc-193f-4fe5-a306-bd05f33933b4@gmail.com> <CAM=5AmaYsT5ULEKPjPTvXusu+c6jo3xmC13nCTHp5_KJg4Sppg@mail.gmail.com>
-In-Reply-To: <CAM=5AmaYsT5ULEKPjPTvXusu+c6jo3xmC13nCTHp5_KJg4Sppg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 14 Jan 2026 08:42:08 -0800
-X-Gm-Features: AZwV_QiJGF8H88P16Gt78oi2MtThb5bSroKsdOifoXFIeonQs5CeEP4O8vUe6F0
-Message-ID: <CAMKF1sreMxZM6pQQnab1Uyw5rDaX8CzXp0OzGSSfj2rrHkXj+Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
-To: Awais Belal <awais.belal@gmail.com>
-Cc: Martin Jansa <martin.jansa@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000009222af06485bcb3c"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 16:42:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123481
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 18:16:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123482
 
---0000000000009222af06485bcb3c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+---
+ .../recipes-graphics/libtsm/libtsm_4.3.0.bb   | 35 +++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
 
-On Wed, Jan 14, 2026 at 6:48=E2=80=AFAM Awais Belal <awais.belal@gmail.com>=
- wrote:
+diff --git a/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb b/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
+new file mode 100644
+index 0000000000..a6c12b71d9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Terminal Emulator State Machine"
++DESCRIPTION = "\
++    TSM is a state machine for DEC VT100-VT520 compatible terminal emulators. \
++    It tries to support all common standards while keeping compatibility to \
++    existing emulators like xterm, gnome-terminal, konsole, etc. \
++    TSM itself does not provide any rendering nor window management. It is a \
++    simple plain state machine without any external dependencies. It can be \
++    used to implement terminal emulators, but also to implement other \
++    applications that need to interpret terminal escape sequences. \
++"
++HOMEPAGE = "https://github.com/kmscon/libtsm"
++BUGTRACKER = "https://github.com/kmscon/libtsm/issues"
++CVE_PRODUCT = "libtsm"
++SECTION = "libs"
++
++LICENSE = "MIT & LGPL-2.1-or-later"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=69e8256cdc4e949f86fedf94b1b320b4 \
++    file://LICENSE_htable;md5=2d5025d4aa3495befef8f17206a5b0a1 \
++"
++
++DEPENDS = "xkeyboard-config"
++
++SRC_URI = "git://github.com/kmscon/libtsm;branch=main;protocol=https"
++SRCREV = "9d2817b727f61c09e19994b2431af716652f330b"
++
++inherit meson pkgconfig
++
++EXTRA_OEMESON:append = " \
++    -Dextra_debug=false \
++    -Dtests=false \
++    -Dgtktsm=false \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.52.0
 
-> Hi Khem,
->
-> I did not ignore you, :) I just did not have time to help out. There are
->> some patterns of TMPDIR embedding into target packages, but it needs to
->> be root caused. If you look through repo, you might find some help on
->> what different use cases have been found and how they were handled.
->>
->
-> Sorry for being so so late with this but I now have a patch for mongodb
-> src which coupled with the earlier changes I submitted will allow us to
-> build mongodb 4.4.29 on OE cleanly. The additional patch is to fix the la=
-st
-> outstanding TMPDIR issue that we saw around last time. What would be the
-> best way for submission here? i.e. should I just send over the patch or
-> redo the whole series for master?
->
-
-I think do the changes on top of latest meta-oe master and submit again
-
-
->
-> --
-> Regards,
-> Awais Belal
->
-
---0000000000009222af06485bcb3c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Jan 14,=
- 2026 at 6:48=E2=80=AFAM Awais Belal &lt;<a href=3D"mailto:awais.belal@gmai=
-l.com">awais.belal@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">Hi Khem,</div=
-><br><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">I did not ignore you, :) I just did not have time to help out. There=
- are<br>
-some patterns of TMPDIR embedding into target packages, but it needs to <br=
->
-be root caused. If you look through repo, you might find some help on <br>
-what different use cases have been found and how they were handled.<br></bl=
-ockquote></div><div><br></div><div>Sorry for being so so late with this but=
- I now have a patch for mongodb src which coupled with the earlier changes =
-I submitted will allow us to build mongodb 4.4.29 on OE cleanly. The additi=
-onal patch is to fix the last outstanding TMPDIR issue that we saw around l=
-ast time. What would be the best way for submission here? i.e. should I jus=
-t send over=C2=A0the patch or redo the whole series for master?</div></div>=
-</blockquote><div><br></div><div>I think do the changes on top of latest me=
-ta-oe master and submit=C2=A0again=C2=A0</div><div>=C2=A0</div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div><br></div><span=
- class=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"g=
-mail_signature">Regards,<br>Awais Belal</div></div>
-</blockquote></div></div>
-
---0000000000009222af06485bcb3c--
 
