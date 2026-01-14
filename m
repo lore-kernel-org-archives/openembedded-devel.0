@@ -1,785 +1,328 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 806E0D31A1F
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 07:34:52 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5342.1768376084413117386
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B73D31A2F
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 09:22:03 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6481.1768382513161366541
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 23:34:44 -0800
+ Wed, 14 Jan 2026 01:21:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NKX/qzyb;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-47d5e021a53so62273885e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 23:34:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768376083; x=1768980883; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pdzQy0UHTh+pNktZG60U2OtcL5/l9nkR3EWWyzKHs5w=;
-        b=NKX/qzybE/svjl8ryRhhxqyu2Du2SNQo0hXUVw0U4BICWJaLGXMJ2OFrqHw1+pU7HA
-         8Va6T9V2FeUkjhHVPkU3+0kccpG6Zv+pAlM07EMg/dKSJgHyC5aly8wnyQoYt49OEmv6
-         dR1sG4NuptmNAPcsGqlFgNhJP5cssm+9310COaR4SyA9n1J7QZp68PJ2dgp+V3/EMrYV
-         jKOhGdOrXcCceqxDKwdsC4I7c8b/3GloJvWe4L4aHf4GYNo3UsCbRO5C1yuPaH6vJCDF
-         rlNXUYVecL37l3/If0NfK6K6dj4ZLQyXQekoNwWQOi8/pGxdYV2W/prCKslD7G9t8Mfd
-         Rf/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768376083; x=1768980883;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pdzQy0UHTh+pNktZG60U2OtcL5/l9nkR3EWWyzKHs5w=;
-        b=rfFU2lR9HszAJ9C7FvkTixZXryrOXeK9hPw2RZ9lp+6YD+L5Bol7XayRYQBwuA3Q97
-         oagrmAEXE3Zl31zUfVf51z8TUVrdhKPPB4txx1FMwo+SZ5dPfZUyaIYa03lCWSu/smVd
-         sqN3EcRdG3Yr5Us85yhQuKei7SivvGIjfn8R5N09VqlFnA/DMkYLmF0Uc5v6gB0TKDsy
-         hz4300C/wU0Qe9kdj9ssYpu6mtRqXUfGDf9voydso62JmMNlbgqLNTvT8aq+t0KF1fn4
-         AX45H8PYCIsWHYx4OuNefVr4CxrTm00d46UOmmhKmtCjPP32QMD5Q2tRXbqAEwMgdN7f
-         L1Eg==
-X-Gm-Message-State: AOJu0YwcUANLtmjBplrS93f7Fd60XR7DAChE6WfvKaRh0o1PN5DFED/u
-	m+TqsOuCGzQjbmD9iuJQ25iq5Bf578qhszG01INub0XkjGC2XqYUZiuQS/xFyw==
-X-Gm-Gg: AY/fxX6v6G+eoyFVryHxEU8Dj2eUc/LMvKq/DTa6tGGPPu39ZL/lAaVGa9orE/NmkL5
-	MrgiuGdifxRGOafQVcVn5kfzBEK14+wICy7M+NM7OqwA3OTSbmIw8ioyvX4YIk9PHsdhTfbpV8m
-	oQJUJlC4KC9KQmlpnN2zgz0W1iA9KvVUjhf/OShYhfeSLhQc/ADTCTBCptugYQRivGRpJ9LWNue
-	WhC9aGWx+DXn/ojtiukrt2HUSF4QA6HZx/L+C/ZRNy1ElT2BzFXl9s58JJsifIlpd/pUXJxBXrH
-	txL4QvZnf8RZmNBvpLfUksbuwllNZD+MsyUBBb6QsFzF0pLiB4lQgWrNlaUbmFNrzHdKhAUcnJj
-	kRtPmj7/ndghKxdy6qV9RC3EmPUYPlDRtiRpJPQazJ57xDUyzkPWcwxZkeQ+a3RccJ0TL/UuEPo
-	o0ICVQpxtW
-X-Received: by 2002:a05:600c:444a:b0:47b:e0ff:60f9 with SMTP id 5b1f17b1804b1-47ee4819dafmr10208085e9.20.1768376082233;
-        Tue, 13 Jan 2026 23:34:42 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5df96asm47598289f8f.28.2026.01.13.23.34.41
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Jan 2026 23:34:41 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 1/5] python3-twisted: patch CVE-2022-24801
-Date: Wed, 14 Jan 2026 08:34:35 +0100
-Message-ID: <20260114073440.210915-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=lnX7BISy;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=547401f5f5=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60E4crfW2676164
+	for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 09:21:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=Hkgxd07Cc9y5B9yj0vt+6rgXRAOdUEx5SijSglMrxn8=; b=
+	lnX7BISyQft8cGk9leC3jq+mmmRtKqDpB+qg7jHFX3x2DToQBSOtVwLSNWa/vJ76
+	01Cwe0DmnzN0cVDmFowSVZHl7fHUG5PSFKDytPIHswVOyWVceb7sw9v88tndcvZS
+	UidPCfpi4JoSxpPATxlHEW22coN4Ddtwl2oSThnTzMs9Z07lUQF9HNl2MdK2WJRP
+	dtT1t6taLO5kw87DtPkCzVTaH4lr+3zLu3UjRRBN7wwJ7ONP9JtmpI+Q+oxO2yb4
+	ojGckptSbEzZPj50RmMMYvSmthx+irGFAS5hJOS4Jcas3zP0qpQmVnV0Hl2P/6Bl
+	z/myHe64vYetMHYbV7jQnA==
+Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011015.outbound.protection.outlook.com [40.93.194.15])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4bkdr2m8hw-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 14 Jan 2026 09:21:51 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mUtkQf8gKevqQ4PSnaLdYW/8lq1eeCyFoghhccikpFV+RqdSZ8py4z4QPkX0jmRqLWELTgOoqWwqL07UvP2NZJvujaflPUYt0xdOg4Ok6J+J3dEVdigGoQn+O+Rq33tKLGAD2K5UZoF3XBjGAXdNmQS0t+mfLBO8jvuWQ/vYNVaewVCk1uAlhm+SQ+ho1ae0KCTuvhWZ5HAjvBiY8cu6uU+K9MomPSnKwb9bYcYbHKaQvIUZZN0UIbsqup6BBoEMZ7nSWk8LytYb03aRiNyYrl3ljxc8XKV1QCnlL6HjaCeS8MyaBOtJZ7AlSKLanXuFrg4+u5AvnJYQvKzEMtGJVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Hkgxd07Cc9y5B9yj0vt+6rgXRAOdUEx5SijSglMrxn8=;
+ b=GWL25ub3uc27DMWkq/wvXiJKDQEzcgiXi6zMFcXrl/3BC3/qOpSA2ZQPwJI6nnEkDB8GKjTaCyQgRZo0TvJ58LxWp71Eoe+fDqw6JgBDMWisH6VucPMhoLzwLksG2QDADFvdiVsiIkNC0O/7e/t09fYwDRLzK5EQ+JsqTGG55S6TmSPV3tRHf8iqvEFR3XOui3hWAtO28fu4iHk+McJNqSWhquL1AjLDZrh9VzIU0n/eterl+h1qlj4znOn1FDfBBdi/2+gSUoxRW64BcO31O1kLYbj/DlG4+g4ZFBIIj25//oXPpG/ioix0Ch1NgNeR8HCGuM1wz8wDJn3/UZVOsw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CY5PR11MB6440.namprd11.prod.outlook.com (2603:10b6:930:33::9)
+ by SJ5PPF5B09F0799.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::82c) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9499.7; Wed, 14 Jan
+ 2026 09:21:49 +0000
+Received: from CY5PR11MB6440.namprd11.prod.outlook.com
+ ([fe80::90ea:c216:8cc7:3757]) by CY5PR11MB6440.namprd11.prod.outlook.com
+ ([fe80::90ea:c216:8cc7:3757%5]) with mapi id 15.20.9499.005; Wed, 14 Jan 2026
+ 09:21:49 +0000
+Message-ID: <87d4894f-8db4-46b6-8c47-df82e3cdced7@windriver.com>
+Date: Wed, 14 Jan 2026 17:21:42 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] nodejs: Make libuv related patch
+ conditionally
+To: Khem Raj <raj.khem@gmail.com>, mingli.yu@eng.windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260112082438.1529670-1-mingli.yu@windriver.com>
+ <CAMKF1sq+LMsEcU8Vfi_nf_Xui4jDvpsrPaee-=0OU05h_nTgBA@mail.gmail.com>
+Content-Language: en-US
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+In-Reply-To: <CAMKF1sq+LMsEcU8Vfi_nf_Xui4jDvpsrPaee-=0OU05h_nTgBA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: KU2P306CA0014.MYSP306.PROD.OUTLOOK.COM
+ (2603:1096:d10:14::8) To CY5PR11MB6440.namprd11.prod.outlook.com
+ (2603:10b6:930:33::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY5PR11MB6440:EE_|SJ5PPF5B09F0799:EE_
+X-MS-Office365-Filtering-Correlation-Id: 953f7ec8-3a58-4a58-50fe-08de534e585b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|4022899009|376014|1800799024|366016|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?UkVWUFhnYTI3aVpYRzg3ZlN4aFkzQi9IeWo0bzJPTHFLRTZlWnRUZ1BhMXpz?=
+ =?utf-8?B?aWcvRFlJU0d5c2tVUHZtZWtTTysrcGIwSnVtS28vOUQxMUh2bEcza0U0V2Qy?=
+ =?utf-8?B?VmFYd1BrNU1VTXlWZE51am83QWprb3lzODdWMEZuR0gyeTRGWDdYendQUkpK?=
+ =?utf-8?B?dWIrNk13ZFo0VFFMNFBJVmVBbGl6ZkJzc3k0VXkxb2V6S0hGd3dUWDFUZThu?=
+ =?utf-8?B?UWhldnRhL0ZWZ2JIZEsrcmpnaXFLWWxka1BmbWZpTXpKcXJoQW5pZGkrVVZl?=
+ =?utf-8?B?bytaSkU3SllLN0cvV205Vk1iOGtKaGg3TVpPcUxFakU0RjkyK1ZoTitaUkhN?=
+ =?utf-8?B?eCt4Y0xkRWpEV2lKQVlpbVBYYVcvTW0wNTdkd0V3dDNHNGlSQUVQUzhWRE13?=
+ =?utf-8?B?dkxrMFZxNEJ1Y2haNkcwRjNQM2NHNEhBOVluenBxUmZWUURKaFl3dE5Da052?=
+ =?utf-8?B?WXp4YjNPTDQ1WTFBaGVtOVRhdDB2dTJFMVk1WDRhVTNFblY2cWZXMVpPOWNO?=
+ =?utf-8?B?eXZmMnhzREZEenZmbE5nalB4WVo5eVR6WW10MnRLanhnR05sK0xwbHhReWZD?=
+ =?utf-8?B?aG1PeUtieGVrZFU3T3paNEEvcFRpMERzcU9kTU1vWCswelFRaVI4WUNYQW1t?=
+ =?utf-8?B?Q1VsTzJHNDgyclFYQTJMZHB3VkMrNnpQbFZ3bVEwb0JWNFBsdkpKNEhiTis1?=
+ =?utf-8?B?b1Z3SjNjb2lramdieUIwSUNzckd5cGUxU25tWk5ZWVl5MkluMGlXVmJjYWYr?=
+ =?utf-8?B?OFVTTE50OWc2emVnMzlMTXpiRThwNGUzQ2l2M0owbDFTTTIrT01GbCtneXlh?=
+ =?utf-8?B?akZpUWYxS1k5TlhQc1JtRFYrTWZMYlp2cElBV3Avc2xIUW9TRXd4UUdTeWg0?=
+ =?utf-8?B?YVZMNXJ6T0I2WmxzTTBTS3EwY3hadTlsVFd5Y0kyWjZXZkpFV1ozNndiTlV4?=
+ =?utf-8?B?RzRmUFB3ZUwzeS9lWkgvcUhOOC9ibzJCREpDb3ZGY2FOZG9ubjJHTllNdmpN?=
+ =?utf-8?B?cWgvOXU3QWtkZW4rRWozK3JpNHVkN1pjd09IWUoxc0dKdGpVY0ppWVpadGRE?=
+ =?utf-8?B?T0VuU3dFZ3NZVzZVYzAzZXNyMEpNRHU4dEROM3piUWV5TjZqdUVaOE1Rdm5P?=
+ =?utf-8?B?MFErT1k5MmVmeUNRQjhuWWJOWjA3QVZjdmEzeTBYSUR1d0p4SFo4TVBoOGR3?=
+ =?utf-8?B?MVhtZlhTS0FMWlZmZmtwNmVuUkhyWWY1UG1KZGs2NEFLR0FYMzNGWkdyMXJh?=
+ =?utf-8?B?R2kvVlNNUzBpVVQ3MU00OHlKR2NHNlpTUHZHdXJMN1RLbXRMVXdwMDNicFdK?=
+ =?utf-8?B?WFloRFlwMkxNU2tzWHV1TklNaTZJL3NURGVrVkJUMlVsRjU0cFl0VTRiVjlV?=
+ =?utf-8?B?ZW9DK1VYb1hPUXBOSUluWEdCNE51SitxNHRUU05GQ0k1QWdKUEJHVithc2da?=
+ =?utf-8?B?cG13K2ZSTDF5RktKUWhVTUM3NmZTOERjbXBrZWZxcy9vMHJuR0NlTzFlNG5k?=
+ =?utf-8?B?cEQ0QTBWZ05TTTVOTW5mL0RPZ3hnVDFjaHBlSm9aWmpsVWJqdXZZZFFBR2gx?=
+ =?utf-8?B?Qk5KSHJodFRERWxSbG9EdSswSm9SZlN5OVhtcUlwS3ZqUGlNV01WVzNGdERr?=
+ =?utf-8?B?bWFGSWJoc0hvTStCQXF5cGVBUHEwVW4wNlBVOEkxb3NmT3oxQkQvMzZJcnlt?=
+ =?utf-8?B?eStheENJL2creHoxTGRVOG9CUWxSVC9BS290MEp6RGF5S2ZlR05hL0tRZ1hN?=
+ =?utf-8?B?eFhBYkdBTm9jWFNYNHVkTzEza2JMKzVxT1dMMElXUi91cXpJOHJuUHBBRjBH?=
+ =?utf-8?B?anFZTjNCSkgzdENmT1VPeUpzWVdKaCtNZlVHUzFwV2lwMEFKWGIyWlowanFw?=
+ =?utf-8?B?a09MditiL0lCY3dJNmJtbDBucEtzeWtQTXlNcUIxK2FVeGc9PQ==?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CY5PR11MB6440.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(376014)(1800799024)(366016)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?azNpV2E5TisvRGhhT2hSN0N5TVUvcUJBblNQRmFOTWh1L1UrV0RjZS83THJy?=
+ =?utf-8?B?bjFOWmxaL3h2YWp0TStLRnd5eFNjSFpkYkhNd09GUHBYYkozVHZLZUV0cjFO?=
+ =?utf-8?B?bFhRQTV1TTJZeE9ZcUdEdmFPUk1zQkhNbUl3aWdqYUpKTzRweUxMU1dSdkJa?=
+ =?utf-8?B?akpFUWQydmQxVkRwMVkzeWRPWFY5L3JKSGc2L1JVNzBxbDlqbTdvM0JXUU5X?=
+ =?utf-8?B?NjBETjRhcElDdW1EeGVMZjZZSVlOSmR5QnFrdHlRQll4Y3lTWnZOQUVRMlZq?=
+ =?utf-8?B?SDg1bCtGbEpLQ1hrcitVZzZnaUdVME96WVFTVmQ3YU1YRTJpUXpLSkxnMWhD?=
+ =?utf-8?B?NlJmVGtRa0x3NFMzU1hpRzZocy9GMWE0Unp3M1BlNzB6RjU2V1lqeHlER004?=
+ =?utf-8?B?QlNuc1pocCtwN3M2QWs4Zm16MUREZThrRExkTEtRWmtMajZWUzY1aDNnczVv?=
+ =?utf-8?B?NFc5dUF3bHRuZE5iRERoalRaYTh5cmpMR1FDd2hQZUdCMjNOODBpUGNJa1M0?=
+ =?utf-8?B?emZmUnhkQWN3bVpEUlFKUzJGNENRaWNkMGhFVXhDM2VmUjdWYUd6K0VZQkdI?=
+ =?utf-8?B?ak5GRTVTeklEaVVOYjZ1UkJEYXExZXJvY1dLWUZUOWRBQjNLeHB2YWpFaGp0?=
+ =?utf-8?B?MTk1U0JZV0Y3enJLVGpPWjNhVmRqQ1l5ZVNUUGtqUHVjQTBIMmJ0M1ZuM0ZH?=
+ =?utf-8?B?R3JiTWtDTkp3VDdPVXZnRmFPRTgwU2VXRTM0eTlNQU9UNzBHUXhrUlJSdWcz?=
+ =?utf-8?B?NHZJTE1jTlJ0Y3BycVl6dG1FNmJJa1JQd3lpVTdORHFFVkl6VXpoK083ZzlQ?=
+ =?utf-8?B?a2MyNUpRSGYraEkxK2ljdS96SUhnSWN6bGI5eXZ6cElKczc5WEM3M2dIV1p4?=
+ =?utf-8?B?R0tQRUlwTVBTWks2RmVHN2lzeFovb2FPdmpBZkhQRk00SGZwWkZTZDVyb3dx?=
+ =?utf-8?B?bUlqK3JPaTFucVRTR0NXWjdBWXVtb3pNSUVhb28yT1NXbjhxMXdEOVhuTzFI?=
+ =?utf-8?B?bGN0WUVwWTRGa3hGZ08ydHdGZ1h2QnhycGN4QVIrTDd3ZGVwRWFKd3dKRFNy?=
+ =?utf-8?B?Z3l3cWhYMVljNXRrRXN0cE95ZzhPbUdObHVZUWtja3JQQnVFK3Jic2VkZ0JB?=
+ =?utf-8?B?MW9JdVN6eC8yekV4ei9IallqVytDWnlqblZ3TjBQQU1YenlFbWE2MU1hRFMv?=
+ =?utf-8?B?MVhST21kQ2FCd2x4V3RlM2k4bnZkSFdKUnMxMEk4bmRJSzRqSUQxdk1EZktB?=
+ =?utf-8?B?anRIODJDWE01c0RJN1FLRERxbDZQWDltVThjdzNXREJxcXN1YVc3TTNPZThx?=
+ =?utf-8?B?dUp6RWlSZHpBekcyQlFGMk53MUh1a3Rnc1VsME9TMXk1YWdweHpyOU0xcFRJ?=
+ =?utf-8?B?SUNKY013SUEyY3B1bDFvREYwUDkwa2F3cTBURDdmenRVUm9sTno5TmczbUcx?=
+ =?utf-8?B?VWg3VGhscm5nR2dsWFo0OFQrTXYwOG5YSVBmTkNDbmRqcTFrSXJuSmNNT3hY?=
+ =?utf-8?B?ckFmMXA2Q2p0NzFBWHNLOW5uT0NSeHF2Mkt1WU9neHBDYTVCdlZ0bUNPSXhN?=
+ =?utf-8?B?dUFMeDZjc2tOZWFLUndWeTM1a3B2UU5ERkJaSmF0ODhUOWE4U2xCU01kRGk2?=
+ =?utf-8?B?VHhOYUFmeWV0clgwRWh5RXBieDVmVUxqVVQvZDloSzcxQkdMR0RhRzBiaVQ3?=
+ =?utf-8?B?WXhkRXVQajlhRlExdm5FRDZYdVJCblNVRFBza0dJZ0Q4ZlVxamNnRDd6OHFW?=
+ =?utf-8?B?VFI1UlVBN3dHZGxZclJjdmRDVzFTS3lXSDUwZkdMTWx0VHVkY3hHTS9PWXJM?=
+ =?utf-8?B?bm8rK25xa3lsbjJINzQ5WHkxcHpkczA4NkhtRE9YVGZjOHl6bG1qVGJ3SXRW?=
+ =?utf-8?B?ZTM1NWlabEZyQTU2dFlseU81RDIvcUpSR0x5aDJ5SXFqckhjMTJQRUhocjVz?=
+ =?utf-8?B?SmltbVJjdFV3Ym5ET2xXVm5mME1tOWoyR1Y4Y1k3R1RKdXQ1UmlFWFlXTUtK?=
+ =?utf-8?B?angrd0VzQ0ZZMlFuRFpudmJPKzYybW5oNGdmRDFwdFVtOTJ6SXpXK3hjQzZ5?=
+ =?utf-8?B?RkZkUWFwamhnNWlJL2hnWjBZQ01uNnJLYnZzejdjb1MrMTNuazJGZEFXNzcz?=
+ =?utf-8?B?emk0ZmJValV2TURvd2N0eDJ3VzBVbmhwYjVtMTBGeFNzbTZmMCtKZ2VKRmFW?=
+ =?utf-8?B?WEN6dnRhQlBpbTRWL3N0UGowRmRlUzRJb1phU1lpTlo5S09rLzdUL1JqRlE1?=
+ =?utf-8?B?Vi82MjQ3THhOTTd3R1B0bHl3RW5ZZi9FUTZuTUJKdkV4NmJHRXVEcmJ1RkpE?=
+ =?utf-8?B?WlVqdnhsb2JUQTIyckhuSU0yN3huY3p2N1l3azhGRWptMkluL05SZz09?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 953f7ec8-3a58-4a58-50fe-08de534e585b
+X-MS-Exchange-CrossTenant-AuthSource: CY5PR11MB6440.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 09:21:49.0638
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: b3JWqs96lv7uep/MjcfkoabXHJztu9RCVysWIyXMVr1pi8TYdsw0ghJvCvfWDUiD3In6yPtlrMCid1k6eCjN1g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF5B09F0799
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-ORIG-GUID: J29O5QeTYj5PpMxhZ2o_X9_2RyrxLB1X
+X-Authority-Analysis: v=2.4 cv=fLo0HJae c=1 sm=1 tr=0 ts=6967602f cx=c_pps
+ a=awRqKgK+okXhs1gjjWqUCg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=uherdBYGAAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8
+ a=-LCu6K_DAAAA:8 a=pGLkceISAAAA:8 a=XV6bz1v7eVk2KoeafvUA:9 a=lqcHg5cX4UMA:10
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=z2U-W3hJrleVIN9YIjzO:22
+ a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: r7m6f7vmGjtIU1H0Ay2ENOlGpil8KIRV
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE0MDA3NSBTYWx0ZWRfXxRa8s+ADFvpp
+ xQKzfEQA0077j1Iz1uCWnpsEdd8ahdQ2nCVWpX0gDBovbRkhMNNltDO7P155UotZvfVY0nOqWTk
+ 85dqQh7FhvELAJW2YWKptakEnJQPuqmH8CLlEJChMLIgx4l46cIjT3pfIxvuBHeOo5TVCzz/Rc+
+ 2MPPHhvV+wIGAytdueEWzv1DibcaOBGCoHHE1/pe5hcD8b2SkxAl/nteFnA0/w0rScCSLbsd37O
+ kIEDJg8fc99CEy8armGvzPBLHKCnV3HXvQfQCdYmyVcBFiX+iaJNiL4ceGuZfYrpM3Q6RIvErS+
+ 3m1ECJgyxLywSLu6t5SRqydLl46e+fjBpCslSCqUztN4YpdEJa89BsGhh3xMivutlWUIUxaNHJA
+ 9CBvgFr3Lk0f6Ug/EJG8IE7Iw9XSwEWg4VA5ZwV3sDNJp34/f9OgjczXCvCMXAO6YQ1Ms9WSDxp
+ 1UgI2bX5Pt7MhnAI7uQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
+ definitions=2026-01-14_02,2026-01-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ phishscore=0 bulkscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2512120000 definitions=main-2601140075
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 60E4crfW2676164
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 07:34:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123446
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 09:22:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123451
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-24801
 
-Pick the commits from the pull request that is referenced by the NVD report.
 
-(The full set is consisting of 13 patches, but the ones that only updated
-news/readme/typo fixes in comments were not backported)
+On 1/13/26 00:55, Khem Raj wrote:
+> **
+> *CAUTION: This email comes from a non Wind River email account!*
+> Do not click links or open attachments unless you recognize the sender=20
+> and know the content is safe.
+> I wonder if its better to change
+>=20
+> do_unpack[postfuncs] +=3D "prune_sources"
+>=20
+> to
+>=20
+> do_patch[postfuncs] +=3D "prune_sources"
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../python3-twisted/CVE-2022-24801-1.patch    | 132 ++++++++++++++++++
- .../python3-twisted/CVE-2022-24801-2.patch    |  63 +++++++++
- .../python3-twisted/CVE-2022-24801-3.patch    |  25 ++++
- .../python3-twisted/CVE-2022-24801-4.patch    |  25 ++++
- .../python3-twisted/CVE-2022-24801-5.patch    |  71 ++++++++++
- .../python3-twisted/CVE-2022-24801-6.patch    | 129 +++++++++++++++++
- .../python3-twisted/CVE-2022-24801-7.patch    |  27 ++++
- .../python3-twisted/CVE-2022-24801-8.patch    | 108 ++++++++++++++
- .../python3-twisted/CVE-2022-24801-9.patch    |  25 ++++
- .../python/python3-twisted_22.2.0.bb          |  16 ++-
- 10 files changed, 618 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-3.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-4.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-5.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-6.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-7.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-8.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-9.patch
+Thanks! v2 is sent.
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-1.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-1.patch
-new file mode 100644
-index 0000000000..f7b6824612
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-1.patch
-@@ -0,0 +1,132 @@
-+From 832a878c9c324ad23dde6cf16520b7768c1a8c5c Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Sat, 5 Mar 2022 23:26:55 -0800
-+Subject: [PATCH] Some tests for GHSA-c2jg-hw38-jrqq
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/22b067793cbcd0fb5dee04cfd9115fa85a7ca110]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/test/test_http.py | 102 ++++++++++++++++++++++++++++++
-+ 1 file changed, 102 insertions(+)
-+
-+diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
-+index 86c85d2..0549ed0 100644
-+--- a/src/twisted/web/test/test_http.py
-++++ b/src/twisted/web/test/test_http.py
-+@@ -1843,6 +1843,56 @@ class ParsingTests(unittest.TestCase):
-+             [b"t \ta \tb"],
-+         )
-+ 
-++    def test_headerStripWhitespace(self):
-++        """
-++        Leading and trailing space and tab characters are stripped from
-++        headers. Other forms of whitespace are preserved.
-++
-++        See RFC 7230 section 3.2.3 and 3.2.4.
-++        """
-++        processed = []
-++
-++        class MyRequest(http.Request):
-++            def process(self):
-++                processed.append(self)
-++                self.finish()
-++
-++        requestLines = [
-++            b"GET / HTTP/1.0",
-++            b"spaces:   spaces were stripped   ",
-++            b"tabs: \t\ttabs were stripped\t\t",
-++            b"spaces-and-tabs: \t \t spaces and tabs were stripped\t \t",
-++            b"line-tab:   \v vertical tab was preserved\v\t",
-++            b"form-feed: \f form feed was preserved \f  ",
-++            b"",
-++            b"",
-++        ]
-++
-++        self.runRequest(b"\n".join(requestLines), MyRequest, 0)
-++        [request] = processed
-++        # All leading and trailing whitespace is stripped from the
-++        # header-value.
-++        self.assertEqual(
-++            request.requestHeaders.getRawHeaders(b"spaces"),
-++            [b"spaces were stripped"],
-++        )
-++        self.assertEqual(
-++            request.requestHeaders.getRawHeaders(b"tabs"),
-++            [b"tabs were stripped"],
-++        )
-++        self.assertEqual(
-++            request.requestHeaders.getRawHeaders(b"spaces-and-tabs"),
-++            [b"spaces and tabs were stripped"],
-++        )
-++        self.assertEqual(
-++            request.requestHeaders.getRawHeaders(b"line-tab"),
-++            [b"\v vertical tab was preserved\v"],
-++        )
-++        self.assertEqual(
-++            request.requestHeaders.getRawHeaders(b"form-feed"),
-++            [b"\f form feed was preserved \f"],
-++        )
-++
-+     def test_tooManyHeaders(self):
-+         """
-+         C{HTTPChannel} enforces a limit of C{HTTPChannel.maxHeaders} on the
-+@@ -2407,6 +2457,58 @@ Hello,
-+             ]
-+         )
-+ 
-++    def test_contentLengthMalformed(self):
-++        """
-++        A request with a non-integer C{Content-Length} header fails with a 400
-++        response without calling L{Request.process}.
-++        """
-++        self.assertRequestRejected(
-++            [
-++                b"GET /a HTTP/1.1",
-++                b"Content-Length: MORE THAN NINE THOUSAND!",
-++                b"Host: host.invalid",
-++                b"",
-++                b"",
-++                b"x" * 9001,
-++            ]
-++        )
-++
-++    def test_contentLengthTooPositive(self):
-++        """
-++        A request with a C{Content-Length} header that begins with a L{+} fails
-++        with a 400 response without calling L{Request.process}.
-++
-++        This is a potential request smuggling vector: see GHSA-c2jg-hw38-jrqq.
-++        """
-++        self.assertRequestRejected(
-++            [
-++                b"GET /a HTTP/1.1",
-++                b"Content-Length: +100",
-++                b"Host: host.invalid",
-++                b"",
-++                b"",
-++                b"x" * 100,
-++            ]
-++        )
-++
-++    def test_contentLengthNegative(self):
-++        """
-++        A request with a C{Content-Length} header that is negative fails with
-++        a 400 response without calling L{Request.process}.
-++
-++        This is a potential request smuggling vector: see GHSA-c2jg-hw38-jrqq.
-++        """
-++        self.assertRequestRejected(
-++            [
-++                b"GET /a HTTP/1.1",
-++                b"Content-Length: -100",
-++                b"Host: host.invalid",
-++                b"",
-++                b"",
-++                b"x" * 200,
-++            ]
-++        )
-++
-+     def test_duplicateContentLengthsWithPipelinedRequests(self):
-+         """
-+         Two pipelined requests, the first of which includes multiple
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-2.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-2.patch
-new file mode 100644
-index 0000000000..c9164b54f0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-2.patch
-@@ -0,0 +1,63 @@
-+From 232c32ca0ecc3f9d263e2184253a839ce99b4f31 Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Mon, 7 Mar 2022 00:02:55 -0800
-+Subject: [PATCH] Replace obs-fold with a single space
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/79ee8c564ca0d4c2910c8859e0a6014d2dc40005]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py           |  2 +-
-+ src/twisted/web/test/test_http.py | 13 +++++++++----
-+ 2 files changed, 10 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index b99480f..5491953 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -2246,7 +2246,7 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
-+                 self.setRawMode()
-+         elif line[0] in b" \t":
-+             # Continuation of a multi line header.
-+-            self.__header = self.__header + b"\n" + line
-++            self.__header += b" " + line.lstrip(b" \t")
-+         # Regular header line.
-+         # Processing of header line is delayed to allow accumulating multi
-+         # line headers.
-+diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
-+index 0549ed0..8a7adc0 100644
-+--- a/src/twisted/web/test/test_http.py
-++++ b/src/twisted/web/test/test_http.py
-+@@ -1795,7 +1795,12 @@ class ParsingTests(unittest.TestCase):
-+         Line folded headers are handled by L{HTTPChannel} by replacing each
-+         fold with a single space by the time they are made available to the
-+         L{Request}. Any leading whitespace in the folded lines of the header
-+-        value is preserved.
-++        value is replaced with a single space, per:
-++
-++            A server that receives an obs-fold in a request message ... MUST
-++            ... replace each received obs-fold with one or more SP octets prior
-++            to interpreting the field value or forwarding the message
-++            downstream.
-+ 
-+         See RFC 7230 section 3.2.4.
-+         """
-+@@ -1832,15 +1837,15 @@ class ParsingTests(unittest.TestCase):
-+         )
-+         self.assertEqual(
-+             request.requestHeaders.getRawHeaders(b"space"),
-+-            [b"space  space"],
-++            [b"space space"],
-+         )
-+         self.assertEqual(
-+             request.requestHeaders.getRawHeaders(b"spaces"),
-+-            [b"spaces   spaces    spaces"],
-++            [b"spaces spaces spaces"],
-+         )
-+         self.assertEqual(
-+             request.requestHeaders.getRawHeaders(b"tab"),
-+-            [b"t \ta \tb"],
-++            [b"t a b"],
-+         )
-+ 
-+     def test_headerStripWhitespace(self):
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-3.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-3.patch
-new file mode 100644
-index 0000000000..5a9a287986
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-3.patch
-@@ -0,0 +1,25 @@
-+From 5897923d523b357f93eb844e386bcc52c5490cdc Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Mon, 7 Mar 2022 00:03:50 -0800
-+Subject: [PATCH] Strip only spaces and tabs from header values
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/c3a4e1d015740c1d87a3ec7d57570257e75b0062]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index 5491953..262da0b 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -2327,7 +2327,7 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
-+             return False
-+ 
-+         header = header.lower()
-+-        data = data.strip()
-++        data = data.strip(b" \t")
-+ 
-+         if not self._maybeChooseTransferDecoder(header, data):
-+             return False
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-4.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-4.patch
-new file mode 100644
-index 0000000000..94c4b9c550
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-4.patch
-@@ -0,0 +1,25 @@
-+From c6838374d0e323b78877ae546e1471c400e4652d Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Mon, 7 Mar 2022 00:32:14 -0800
-+Subject: [PATCH] Reject non-digit Content-Length
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/8ebfa8f6577431226e109ff98ba48f5152a2c416]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index 262da0b..5316d81 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -2274,6 +2274,8 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
-+ 
-+         # Can this header determine the length?
-+         if header == b"content-length":
-++            if not data.isdigit():
-++                return fail()
-+             try:
-+                 length = int(data)
-+             except ValueError:
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-5.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-5.patch
-new file mode 100644
-index 0000000000..4c014bf669
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-5.patch
-@@ -0,0 +1,71 @@
-+From 8859df3b77eabf99a9b40c5e595bccaae4539ae0 Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Sun, 13 Mar 2022 23:19:39 -0700
-+Subject: [PATCH] Test for malformed chunk size and extensions
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/f22d0d9c889822adb7eaf84b42a20ff5f7c4d421]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/test/test_http.py | 34 +++++++++++++++++++++++++++++++
-+ 1 file changed, 34 insertions(+)
-+
-+diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
-+index 8a7adc0..e686aeb 100644
-+--- a/src/twisted/web/test/test_http.py
-++++ b/src/twisted/web/test/test_http.py
-+@@ -1371,6 +1371,22 @@ class ChunkedTransferEncodingTests(unittest.TestCase):
-+         p.dataReceived(b"3; x-foo=bar\r\nabc\r\n")
-+         self.assertEqual(L, [b"abc"])
-+ 
-++    def test_extensionsMalformed(self):
-++        """
-++        L{_ChunkedTransferDecoder.dataReceived} raises
-++        L{_MalformedChunkedDataError} when the chunk extension fields contain
-++        invalid characters.
-++
-++        This is a potential request smuggling vector: see GHSA-c2jg-hw38-jrqq.
-++        """
-++        for b in [*range(0, 0x09), *range(0x10, 0x21), *range(0x74, 0x80)]:
-++            data = b"3; " + bytes((b,)) + b"\r\nabc\r\n"
-++            p = http._ChunkedTransferDecoder(
-++                lambda b: None,  # pragma: nocov
-++                lambda b: None,  # pragma: nocov
-++            )
-++            self.assertRaises(http._MalformedChunkedDataError, p.dataReceived, data)
-++
-+     def test_oversizedChunkSizeLine(self):
-+         """
-+         L{_ChunkedTransferDecoder.dataReceived} raises
-+@@ -1426,6 +1442,22 @@ class ChunkedTransferEncodingTests(unittest.TestCase):
-+             http._MalformedChunkedDataError, p.dataReceived, b"-3\r\nabc\r\n"
-+         )
-+ 
-++    def test_malformedChunkSizeHex(self):
-++        """
-++        L{_ChunkedTransferDecoder.dataReceived} raises
-++        L{_MalformedChunkedDataError} when the chunk size is prefixed with
-++        "0x", as if it were a Python integer literal.
-++
-++        This is a potential request smuggling vector: see GHSA-c2jg-hw38-jrqq.
-++        """
-++        p = http._ChunkedTransferDecoder(
-++            lambda b: None,  # pragma: nocov
-++            lambda b: None,  # pragma: nocov
-++        )
-++        self.assertRaises(
-++            http._MalformedChunkedDataError, p.dataReceived, b"0x3\r\nabc\r\n"
-++        )
-++
-+     def test_malformedChunkEnd(self):
-+         r"""
-+         L{_ChunkedTransferDecoder.dataReceived} raises
-+@@ -1538,6 +1570,8 @@ class ChunkingTests(unittest.TestCase, ResponseTestMixin):
-+             chunked = b"".join(http.toChunk(s))
-+             self.assertEqual((s, b""), http.fromChunk(chunked))
-+         self.assertRaises(ValueError, http.fromChunk, b"-5\r\nmalformed!\r\n")
-++        self.assertRaises(ValueError, http.fromChunk, b"0xa\r\nmalformed!\r\n")
-++        self.assertRaises(ValueError, http.fromChunk, b"0XA\r\nmalformed!\r\n")
-+ 
-+     def testConcatenatedChunks(self):
-+         chunked = b"".join([b"".join(http.toChunk(t)) for t in self.strings])
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-6.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-6.patch
-new file mode 100644
-index 0000000000..26007d9e04
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-6.patch
-@@ -0,0 +1,129 @@
-+From e33f7fc231845487f969a9c0fbf7956226ac8dfa Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Sun, 13 Mar 2022 23:51:52 -0700
-+Subject: [PATCH] Reject malformed chunk sizes
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/0275152f147506c82868ff1dabd9bf655ab67946]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py           | 35 +++++++++++++++++++++++----
-+ src/twisted/web/test/test_http.py | 40 +++++++++++++++++++++++++++++++
-+ 2 files changed, 71 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index 5316d81..940ff9f 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -108,7 +108,7 @@ import tempfile
-+ import time
-+ import warnings
-+ from io import BytesIO
-+-from typing import AnyStr, Callable, Optional
-++from typing import AnyStr, Callable, Optional, Tuple
-+ from urllib.parse import (
-+     ParseResultBytes,
-+     unquote_to_bytes as unquote,
-+@@ -410,7 +410,33 @@ def toChunk(data):
-+     return (networkString(f"{len(data):x}"), b"\r\n", data, b"\r\n")
-+ 
-+ 
-+-def fromChunk(data):
-++def _ishexdigits(b: bytes) -> bool:
-++    """
-++    Is the string case-insensitively hexidecimal?
-++
-++    It must be composed of one or more characters in the ranges a-f, A-F
-++    and 0-9.
-++    """
-++    for c in b:
-++        if c not in b'0123456789abcdefABCDEF':
-++            return False
-++    return bool(b)
-++
-++
-++def _hexint(b: bytes) -> int:
-++    """
-++    Decode a hexadecimal integer.
-++
-++    Unlike L{int(b, 16)}, this raises L{ValueError} when the integer has
-++    a prefix like C{b'0x'}, C{b'+'}, or C{b'-'}, which is desirable when
-++    parsing network protocols.
-++    """
-++    if not _ishexdigits(b):
-++        raise ValueError(b)
-++    return int(b, 16)
-++
-++
-++def fromChunk(data: bytes) -> Tuple[bytes, bytes]:
-+     """
-+     Convert chunk to string.
-+ 
-+@@ -422,7 +448,7 @@ def fromChunk(data):
-+         byte string.
-+     """
-+     prefix, rest = data.split(b"\r\n", 1)
-+-    length = int(prefix, 16)
-++    length = _hexint(prefix)
-+     if length < 0:
-+         raise ValueError("Chunk length must be >= 0, not %d" % (length,))
-+     if rest[length : length + 2] != b"\r\n":
-+@@ -1883,8 +1909,9 @@ class _ChunkedTransferDecoder:
-+         endOfLengthIndex = self._buffer.find(b";", 0, eolIndex)
-+         if endOfLengthIndex == -1:
-+             endOfLengthIndex = eolIndex
-++        rawLength = self._buffer[0:endOfLengthIndex]
-+         try:
-+-            length = int(self._buffer[0:endOfLengthIndex], 16)
-++            length = _hexint(rawLength)
-+         except ValueError:
-+             raise _MalformedChunkedDataError("Chunk-size must be an integer.")
-+ 
-+diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
-+index e686aeb..201991f 100644
-+--- a/src/twisted/web/test/test_http.py
-++++ b/src/twisted/web/test/test_http.py
-+@@ -4472,3 +4472,43 @@ class HTTPClientSanitizationTests(unittest.SynchronousTestCase):
-+                 transport.value().splitlines(),
-+                 [b": ".join([sanitizedBytes, sanitizedBytes])],
-+             )
-++
-++
-++class HexHelperTests(unittest.SynchronousTestCase):
-++    """
-++    Test the L{http._hexint} and L{http._ishexdigits} helper functions.
-++    """
-++
-++    badStrings = (b"", b"0x1234", b"feds", b"-123" b"+123")
-++
-++    def test_isHex(self):
-++        """
-++        L{_ishexdigits()} returns L{True} for nonempy bytestrings containing
-++        hexadecimal digits.
-++        """
-++        for s in (b"10", b"abcdef", b"AB1234", b"fed", b"123467890"):
-++            self.assertIs(True, http._ishexdigits(s))
-++
-++    def test_decodes(self):
-++        """
-++        L{_hexint()} returns the integer equivalent of the input.
-++        """
-++        self.assertEqual(10, http._hexint(b"a"))
-++        self.assertEqual(0x10, http._hexint(b"10"))
-++        self.assertEqual(0xABCD123, http._hexint(b"abCD123"))
-++
-++    def test_isNotHex(self):
-++        """
-++        L{_ishexdigits()} returns L{False} for bytestrings that don't contain
-++        hexadecimal digits, including the empty string.
-++        """
-++        for s in self.badStrings:
-++            self.assertIs(False, http._ishexdigits(s))
-++
-++    def test_decodeNotHex(self):
-++        """
-++        L{_hexint()} raises L{ValueError} for bytestrings that can't
-++        be decoded.
-++        """
-++        for s in self.badStrings:
-++            self.assertRaises(ValueError, http._hexint, s)
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-7.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-7.patch
-new file mode 100644
-index 0000000000..3fb4f432b4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-7.patch
-@@ -0,0 +1,27 @@
-+From a2fd35cf03bd3a847fd47a6f1a812e359c2dafda Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Sun, 13 Mar 2022 23:57:23 -0700
-+Subject: [PATCH] Remove unreachable branch
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/696bfeaf5a1fa7ff952f860c89e2bdcfacef7d7a]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py | 4 +---
-+ 1 file changed, 1 insertion(+), 3 deletions(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index 940ff9f..ea77f57 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -1915,9 +1915,7 @@ class _ChunkedTransferDecoder:
-+         except ValueError:
-+             raise _MalformedChunkedDataError("Chunk-size must be an integer.")
-+ 
-+-        if length < 0:
-+-            raise _MalformedChunkedDataError("Chunk-size must not be negative.")
-+-        elif length == 0:
-++        if length == 0:
-+             self.state = "TRAILER"
-+         else:
-+             self.state = "BODY"
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-8.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-8.patch
-new file mode 100644
-index 0000000000..e426d4d8f2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-8.patch
-@@ -0,0 +1,108 @@
-+From 29b4c6ab9a917200a37d6fca1243a7f57caba922 Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Sun, 27 Mar 2022 22:17:30 -0700
-+Subject: [PATCH] Correct chunk extension byte validation
-+
-+Go back to the RFC to figure out the correct allowed ranges.
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/fa9caa54d63399b4ccdfbf0429ba1b504ccc7c89]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py           | 49 ++++++++++++++++++++++++++++++-
-+ src/twisted/web/test/test_http.py |  8 ++++-
-+ 2 files changed, 55 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index ea77f57..81df437 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -418,7 +418,7 @@ def _ishexdigits(b: bytes) -> bool:
-+     and 0-9.
-+     """
-+     for c in b:
-+-        if c not in b'0123456789abcdefABCDEF':
-++        if c not in b"0123456789abcdefABCDEF":
-+             return False
-+     return bool(b)
-+ 
-+@@ -1816,6 +1816,47 @@ class _IdentityTransferDecoder:
-+ maxChunkSizeLineLength = 1024
-+ 
-+ 
-++_chunkExtChars = (
-++    b"\t !\"#$%&'()*+,-./0123456789:;<=>?@"
-++    b"ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`"
-++    b"abcdefghijklmnopqrstuvwxyz{|}~"
-++    b"\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f"
-++    b"\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f"
-++    b"\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf"
-++    b"\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf"
-++    b"\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf"
-++    b"\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf"
-++    b"\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef"
-++    b"\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff"
-++)
-++"""
-++Characters that are valid in a chunk extension.
-++
-++See RFC 7230 section 4.1.1:
-++
-++     chunk-ext      = *( ";" chunk-ext-name [ "=" chunk-ext-val ] )
-++
-++     chunk-ext-name = token
-++     chunk-ext-val  = token / quoted-string
-++
-++Section 3.2.6:
-++
-++     token          = 1*tchar
-++
-++     tchar          = "!" / "#" / "$" / "%" / "&" / "'" / "*"
-++                    / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
-++                    / DIGIT / ALPHA
-++                    ; any VCHAR, except delimiters
-++
-++     quoted-string  = DQUOTE *( qdtext / quoted-pair ) DQUOTE
-++     qdtext         = HTAB / SP /%x21 / %x23-5B / %x5D-7E / obs-text
-++     obs-text       = %x80-FF
-++
-++We don't check if chunk extensions are well-formed beyond validating that they
-++don't contain characters outside this range.
-++"""
-++
-++
-+ class _ChunkedTransferDecoder:
-+     """
-+     Protocol for decoding I{chunked} Transfer-Encoding, as defined by RFC 7230,
-+@@ -1915,6 +1956,12 @@ class _ChunkedTransferDecoder:
-+         except ValueError:
-+             raise _MalformedChunkedDataError("Chunk-size must be an integer.")
-+ 
-++        ext = self._buffer[endOfLengthIndex + 1 : eolIndex]
-++        if ext and ext.translate(None, _chunkExtChars) != b"":
-++            raise _MalformedChunkedDataError(
-++                f"Invalid characters in chunk extensions: {ext!r}."
-++            )
-++
-+         if length == 0:
-+             self.state = "TRAILER"
-+         else:
-+diff --git a/src/twisted/web/test/test_http.py b/src/twisted/web/test/test_http.py
-+index 201991f..eccb9b0 100644
-+--- a/src/twisted/web/test/test_http.py
-++++ b/src/twisted/web/test/test_http.py
-+@@ -1379,7 +1379,13 @@ class ChunkedTransferEncodingTests(unittest.TestCase):
-+ 
-+         This is a potential request smuggling vector: see GHSA-c2jg-hw38-jrqq.
-+         """
-+-        for b in [*range(0, 0x09), *range(0x10, 0x21), *range(0x74, 0x80)]:
-++        invalidControl = (
-++            b"\x00\x01\x02\x03\x04\x05\x06\x07\x08\n\x0b\x0c\r\x0e\x0f"
-++            b"\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
-++        )
-++        invalidDelimiter = b"\\"
-++        invalidDel = b"\x7f"
-++        for b in invalidControl + invalidDelimiter + invalidDel:
-+             data = b"3; " + bytes((b,)) + b"\r\nabc\r\n"
-+             p = http._ChunkedTransferDecoder(
-+                 lambda b: None,  # pragma: nocov
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-9.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-9.patch
-new file mode 100644
-index 0000000000..e49afde74b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2022-24801-9.patch
-@@ -0,0 +1,25 @@
-+From 349771026e1eb80cab7a19ceb8b80aa6d1bb3184 Mon Sep 17 00:00:00 2001
-+From: Tom Most <twm@freecog.net>
-+Date: Fri, 1 Apr 2022 20:47:59 -0700
-+Subject: [PATCH] Address review feedback
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/2bbd6c89110f0d44d2bb109c14d787f65bca9df8]
-+CVE: CVE-2022-24801
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/twisted/web/http.py | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/twisted/web/http.py b/src/twisted/web/http.py
-+index 81df437..4a2ce1d 100644
-+--- a/src/twisted/web/http.py
-++++ b/src/twisted/web/http.py
-+@@ -420,7 +420,7 @@ def _ishexdigits(b: bytes) -> bool:
-+     for c in b:
-+         if c not in b"0123456789abcdefABCDEF":
-+             return False
-+-    return bool(b)
-++    return b != b""
-+ 
-+ 
-+ def _hexint(b: bytes) -> int:
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-index 5b23ceeb91..8e140f387e 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-@@ -12,9 +12,19 @@ SRC_URI[sha256sum] = "57f32b1f6838facb8c004c89467840367ad38e9e535f8252091345dba5
- PYPI_PACKAGE = "Twisted"
- 
- SRC_URI += "file://CVE-2024-41671-0001.patch \
--            file://CVE-2024-41671-0002.patch \
--            file://CVE-2024-41810.patch \
--            file://CVE-2023-46137.patch"
-+           file://CVE-2024-41671-0002.patch \
-+           file://CVE-2024-41810.patch \
-+           file://CVE-2023-46137.patch \
-+           file://CVE-2022-24801-1.patch \
-+           file://CVE-2022-24801-2.patch \
-+           file://CVE-2022-24801-3.patch \
-+           file://CVE-2022-24801-4.patch \
-+           file://CVE-2022-24801-5.patch \
-+           file://CVE-2022-24801-6.patch \
-+           file://CVE-2022-24801-7.patch \
-+           file://CVE-2022-24801-8.patch \
-+           file://CVE-2022-24801-9.patch \
-+           "
- 
- inherit pypi python_setuptools_build_meta
- 
+Thanks,
+
+>=20
+> conditional patching is error prone=C2=A0on upgrades etc.
+>=20
+> On Mon, Jan 12, 2026 at 12:24=E2=80=AFAM Yu, Mingli via lists.openembed=
+ded.org=20
+> <https://urldefense.com/v3/__http://lists.openembedded.org__;!!=20
+> AjveYdw8EvQ!=20
+> atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-=20
+> urjGmwlhvcB67Rl-LRUMebt9s$>=20
+> <mingli.yu=3Deng.windriver.com@lists.openembedded.org=20
+> <mailto:eng.windriver.com@lists.openembedded.org>> wrote:
+>=20
+>     From: Mingli Yu <mingli.yu@windriver.com
+>     <mailto:mingli.yu@windriver.com>>
+>=20
+>     Fixes:
+>      =C2=A0 ERROR: nodejs-22.21.1-r0 do_patch: Applying patch '0001-dep=
+s-
+>     disable-io_uring-support-in-libuv.patch' on target directory '/
+>     build/tmp/work/core2-32-poky-linux/nodejs/22.21.1/sources/node-v22.=
+21.1'
+>      =C2=A0 CmdError('quilt --quiltrc /build/tmp/work/core2-32-poky-lin=
+ux/
+>     nodejs/22.21.1/recipe-sysroot-native/etc/quiltrc push', 0, "stdout:
+>     Applying patch 0001-deps-disable-io_uring-support-in-libuv.patch
+>      =C2=A0 can't find file to patch at input line 27
+>=20
+>     The sources which related to libuv as deps/uv/ are removed when
+>     depends on
+>     libuv.
+>=20
+>     So make the 0001-deps-disable-io_uring-support-in-libuv.patch
+>     conditionally
+>     to fix the gap.
+>=20
+>     Signed-off-by: Mingli Yu <mingli.yu@windriver.com
+>     <mailto:mingli.yu@windriver.com>>
+>     ---
+>      =C2=A0meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb <https://
+>     urldefense.com/v3/__http://nodejs_22.21.1.bb__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRCOHDgpo$> | 2 +-
+>      =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+>     diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
+>     <https://urldefense.com/v3/__http://nodejs_22.21.1.bb__;!!
+>     AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRCOHDgpo$> b/meta-oe/recipes-devtools/nodejs/
+>     nodejs_22.21.1.bb <https://urldefense.com/v3/__http://
+>     nodejs_22.21.1.bb__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRCOHDgpo$>
+>     index ccaf9f7bb2..489fcbde45 100644
+>     --- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb <https://
+>     urldefense.com/v3/__http://nodejs_22.21.1.bb__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRCOHDgpo$>
+>     +++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb <https://
+>     urldefense.com/v3/__http://nodejs_22.21.1.bb__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRCOHDgpo$>
+>     @@ -27,7 +27,7 @@ SRC_URI =3D "https://nodejs.org/dist/v${PV}/node-
+>     v${PV}.tar.xz <https://urldefense.com/v3/__https://nodejs.org/dist/
+>     v$*7BPV*7D/node-v$*7BPV*7D.tar.xz__;JSUlJQ!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRlmfLbcQ$> \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://system-c-ares.pat=
+ch \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-liftoff-Corr=
+ect-function-signatures.patch \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://libatomic.patch \
+>     -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-deps-disable-=
+io_uring-support-in-libuv.patch \
+>     +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${@bb.utils.contains('PAC=
+KAGECONFIG', 'libuv', '',
+>     'file://0001-deps-disable-io_uring-support-in-libuv.patch', d)} \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-positional-a=
+rgs.patch \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-custom-env.p=
+atch \
+>      =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-build-remove=
+-redundant-mXX-flags-for-V8.patch \
+>     --=20
+>     2.34.1
+>=20
+>=20
+>     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>     Links: You receive all messages sent to this group.
+>     View/Reply Online (#123364): https://lists.openembedded.org/g/
+>     openembedded-devel/message/123364 <https://urldefense.com/v3/
+>     __https://lists.openembedded.org/g/openembedded-devel/
+>     message/123364__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRjFU997g$>
+>     Mute This Topic: https://lists.openembedded.org/mt/117220566/199791=
+4
+>     <https://urldefense.com/v3/__https://lists.openembedded.org/
+>     mt/117220566/1997914__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRbKNBBT4$>
+>     Group Owner: openembedded-devel+owner@lists.openembedded.org
+>     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
+>     Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/
+>     unsub <https://urldefense.com/v3/__https://lists.openembedded.org/g=
+/
+>     openembedded-devel/unsub__;!!AjveYdw8EvQ!
+>     atf9U9V_2svgNttYDO8_sNqJD6NpEHqRjsj18Xphq2sHlO6OmcEKalaZ5gfxD-
+>     urjGmwlhvcB67Rl-LRhQb1BOc$> [raj.khem@gmail.com
+>     <mailto:raj.khem@gmail.com>]
+>     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>=20
+
 
