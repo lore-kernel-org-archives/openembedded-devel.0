@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C7E0D31A3F
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 13:01:45 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9363.1768395698599429962
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D04FD37E25
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 13:01:55 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9449.1768395705815590101
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 05:01:38 -0800
+ Wed, 14 Jan 2026 05:01:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eMXTyTsb;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-81ecbdfdcebso2717252b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 05:01:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J0vtW+O1;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-81f42a49437so1792236b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 05:01:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768395698; x=1769000498; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768395705; x=1769000505; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=unpG5niYztAhWwQVm3iaMuhgg4HmbL1WiJHujDsFmYk=;
-        b=eMXTyTsbrEJTGidUhGMGrxyNIEtJF3XEfMLh9/avO7t8eUgiKt/5FHctaEvBhan3q7
-         9yaLpLyyjxyb8pKrGZfq5OONr09UGRaL/+5guKXoLpPJb2uiYp+vckFx/bwwlHxZ49sf
-         S6Wg+J7r4OuJ/f9/mvLZri30ewR6Yp7fmQ6xCS83MgMu8vAWgedbrrloiTPYzKCzO0/J
-         WUknIG6/H/o2YuFUkwpuky3kY7z5DTt8DM21sn5vvLtvi8iIGX12auasMjYyEf9oHiOf
-         lVZ+RsjJtQYVZGqfzmuLTyrfVWnH1G64hi7DKCts+DlzRRrN3ns3mPnT54fgPgkGMhrf
-         IDJA==
+        bh=uL/MC06w3J0sPU79R3CtNr0PuxijUcGE8O/UN8tdIT0=;
+        b=J0vtW+O1p8z11coM7dM5rM2h85+6jAy4WbMRuPq3STNlvm/uZoff032lFzKMPBDVky
+         ZImN65Xn1pJq9iAItTq0yxDxjnIaCMzBEsH4Gw7nMQdQ34N9B856QyfgZLOuLuWa4qFl
+         I4mMRNcjot5ZE33zaT8ppdOD7UriQRVJ51yVRmLhvmaccFePQvT+5YhDMgRCfCG+SqpP
+         dJbWJdMnozoTlC8jZCB15qmD+/JIAftGhr3gJ6W2TDfQheXQD4jekT8BD193lte9k32i
+         Yo9TMF5dXMTHvY1q2XyUKjJ3eLbIJYTyWm+CAmRB+7FDXZiHF2nJStxBr3Q6QaXD0oBB
+         dBRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768395698; x=1769000498;
+        d=1e100.net; s=20230601; t=1768395705; x=1769000505;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=unpG5niYztAhWwQVm3iaMuhgg4HmbL1WiJHujDsFmYk=;
-        b=XoIuUZ7gf4mt/5nvEX5KqzftQFDWUb0qb+1Kjr07B38RHIBzqvI7gdlE2tCUz/N+sC
-         s2Xd5Ow8/AtCaPVJj6x9kSlImnS+OE9l6+TtxkkLUOkDQS+JKkhPuT58pbcB2l/soTEJ
-         BRY05y+felJysDQ5rS3bldJgw+yCdXySns+f1R7EY6d54TyM6ChG8tU1Djl4urX05v1O
-         oMsvXlP75MI2iVqbzeKQR+BQkkLMKyCp8qJh54HBq0dLQmo/XIMZ2lMWiSIb+321sWFB
-         TBPuRyuSB9/rOQC/0zrmK6cwBFJk4jP8EOUeeNVnba8ZrX6HvCtrILXbYL71gX2LY+o8
-         EMfw==
-X-Gm-Message-State: AOJu0Yzl1LJV5XYBbQ6SUepLig/iz6g8oVhzvmLbryKWYNDtDiiVl68l
-	OExWhpcJGfyuPaj/v2IBCpVLJG04GBBsTH4XIyDzpsPVorD6S3K39DiQD+TqwQ==
-X-Gm-Gg: AY/fxX7gv46mHhEfuvUQGrJtFEtUoKeWXUX7OY43ezy45Ah9E3BL7+YFgFyx6u3XJF5
-	ZFyg8IunkA3QuhpvJu+Oj1kz5yPXBOzNVEaTedSoSGXDTsVufeXhhUDoDQKyf/ounV8OXdv3Btu
-	vwt8SQ6KbVVHUXCbLZM8gjYSa0XMuVYyq9BAeWM5Vsa7naMtmfl5a/jHMMQ4BWci2thwN3tcwoj
-	gKvkepjdK7bfwXnA16KAnkJ2S7xPdyaEw0LSQv1/02EM0MPK/vz4o6HLiAAfPmjNfQRaRmITXg+
-	vhyT7ta2AxOurwpYD44QR559KmNaLKdOB5mbvE4M6K4dqJeBssOxW/2Y9LAmu0MeeNM627yGW/+
-	y3wTvgr60LfmBQpGnrmnM9Yqd4h9fkuHjnsiKN2iSwe4oTQoeKLIUEZvNwoCdxjPTS688S3Zc/2
-	DfWXFXWvHb6ZkuksqD8LdDUvw=
-X-Received: by 2002:a05:6a00:8017:b0:81f:4e2b:4943 with SMTP id d2e1a72fcca58-81f81d48123mr2242586b3a.27.1768395695996;
-        Wed, 14 Jan 2026 05:01:35 -0800 (PST)
+        bh=uL/MC06w3J0sPU79R3CtNr0PuxijUcGE8O/UN8tdIT0=;
+        b=FkhJm8MOBoP03stFcQLEeYa++vTgNmizLIctsMtzs7/irrYZbJk9QFaMRrIWfHqfb8
+         WZJMwWMnAe3Lx6mXX81JTbM0K6alSKudz+EjKDXGx2GCqA9d8sMs7RGsu5kce0GRcxMV
+         ZH1oY+OzAZ4yjtchy0j+ladg7Xf94DsjlESlObYrCLh9fWd0pdweo+Sq/4DzQYwz6mO4
+         Rr+wQOTz3MN1BC4aNcQ8HfrJkwsDqNi3ctB0MYZVAUHw9PhU0EXxWPgj7i7zap9DWEZ1
+         qHWBbFz9yUyWg58ZQGx1kERg4fsxGfvLYnR4m5mTc6Mz2iHBCoE2CN38d0qeWFpydou5
+         Huug==
+X-Gm-Message-State: AOJu0YyRrfI9NrbYb1B77BFVpgA+M3ATc2iUc2ei29tucPkZtNJo5bHq
+	Ru+dUdFtHlKFyQEs0OpGaJn4XGca0J4Clm60jKQV4tC2UxNpvD9n5uHFdNFifw==
+X-Gm-Gg: AY/fxX7ggIempmWyNoP48YOa2vNRjrlX1k7wJF0ljVsHu1WEPkcY2n/iHW7U+Nfq45x
+	CGfLgPBXMyWHO+aximZts2Homqj2EWs4ITsr/64jAv/0DA08JuzWcg2//Ss23Lng/Up1iQ7PrSh
+	mMIawFe5Ju20yRTpZ9qMfkQ/jNheaDuUn/fsmOCnrJmbui0ZjeglQOQ01aLWuzgQHxCnXxXoa0z
+	RiohSxRIysl4yW62oP4uvtQMQEjRMb3iduJlgdwZig4yKOxjwqhbePhrmq/X5seN6KRoS00AmNf
+	z91KvUt7GgZG5Anq8Hq775x06ufT61v23MY50o+lXkLLcL8fBguUQCGVS2BxgTXPlTWp7E3sQXH
+	qy6leOPlSxiABQN6ZVYV43kKLAys3WlfU6bRNlWU9Vf8hI+r2jbVdwWJwlyYej0IEE9CK5o/rkL
+	yMtEfR+J2tp12YCF2uHH68REfbXQoqHmpb+QLQ1ojPmCXY
+X-Received: by 2002:a05:6a00:8c10:b0:81e:3e27:df25 with SMTP id d2e1a72fcca58-81f81d0feedmr1892063b3a.5.1768395704594;
+        Wed, 14 Jan 2026 05:01:44 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.27])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-819ab137711sm23340853b3a.0.2026.01.14.05.01.34
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-819ab137711sm23340853b3a.0.2026.01.14.05.01.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 05:01:35 -0800 (PST)
+        Wed, 14 Jan 2026 05:01:44 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][scarthgap][PATCH 13/20] python3-tornado: patch CVE-2025-67724
-Date: Thu, 15 Jan 2026 02:00:50 +1300
-Message-ID: <20260114130100.1016416-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH 17/20] python3-virtualenv: upgrade 20.25.3 -> 20.25.3
+Date: Thu, 15 Jan 2026 02:00:54 +1300
+Message-ID: <20260114130100.1016416-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260114130100.1016416-1-ankur.tyagi85@gmail.com>
 References: <20260114130100.1016416-1-ankur.tyagi85@gmail.com>
@@ -66,157 +66,35 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 13:01:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123466
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 13:01:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123470
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-67724
+https://virtualenv.pypa.io/en/latest/changelog.html#v20-25-3-2024-04-17
+https://virtualenv.pypa.io/en/latest/changelog.html#v20-25-2-2024-04-16
+https://virtualenv.pypa.io/en/latest/changelog.html#v20-25-1-2024-02-21
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../python3-tornado/CVE-2025-67724.patch      | 118 ++++++++++++++++++
- .../python/python3-tornado_6.4.2.bb           |   4 +-
- 2 files changed, 121 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67724.patch
+ ...hon3-virtualenv_20.25.0.bb => python3-virtualenv_20.25.3.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-virtualenv_20.25.0.bb => python3-virtualenv_20.25.3.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67724.patch b/meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67724.patch
-new file mode 100644
-index 0000000000..78cdae9666
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67724.patch
-@@ -0,0 +1,118 @@
-+From 990054627cef3966a626162138164a77580d33ad Mon Sep 17 00:00:00 2001
-+From: Ben Darnell <ben@bendarnell.com>
-+Date: Wed, 10 Dec 2025 15:15:25 -0500
-+Subject: [PATCH] web: Harden against invalid HTTP reason phrases
-+
-+We allow applications to set custom reason phrases for the HTTP status
-+line (to support custom status codes), but if this were exposed to
-+untrusted data it could be exploited in various ways. This commit
-+guards against invalid reason phrases in both HTTP headers and in
-+error pages.
-+
-+CVE: CVE-2025-67724
-+Upstream-Status: Backport [https://github.com/tornadoweb/tornado/commit/9c163aebeaad9e6e7d28bac1f33580eb00b0e421]
-+(cherry picked from commit 9c163aebeaad9e6e7d28bac1f33580eb00b0e421)
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ tornado/test/web_test.py | 15 ++++++++++++++-
-+ tornado/web.py           | 25 +++++++++++++++++++------
-+ 2 files changed, 33 insertions(+), 7 deletions(-)
-+
-+diff --git a/tornado/test/web_test.py b/tornado/test/web_test.py
-+index fec66f39..801a80ed 100644
-+--- a/tornado/test/web_test.py
-++++ b/tornado/test/web_test.py
-+@@ -1712,7 +1712,7 @@ class StatusReasonTest(SimpleHandlerTestCase):
-+     class Handler(RequestHandler):
-+         def get(self):
-+             reason = self.request.arguments.get("reason", [])
-+-            self.set_status(
-++            raise HTTPError(
-+                 int(self.get_argument("code")),
-+                 reason=to_unicode(reason[0]) if reason else None,
-+             )
-+@@ -1735,6 +1735,19 @@ class StatusReasonTest(SimpleHandlerTestCase):
-+         self.assertEqual(response.code, 682)
-+         self.assertEqual(response.reason, "Unknown")
-+ 
-++    def test_header_injection(self):
-++        response = self.fetch("/?code=200&reason=OK%0D%0AX-Injection:injected")
-++        self.assertEqual(response.code, 200)
-++        self.assertEqual(response.reason, "Unknown")
-++        self.assertNotIn("X-Injection", response.headers)
-++
-++    def test_reason_xss(self):
-++        response = self.fetch("/?code=400&reason=<script>alert(1)</script>")
-++        self.assertEqual(response.code, 400)
-++        self.assertEqual(response.reason, "Unknown")
-++        self.assertNotIn(b"script", response.body)
-++        self.assertIn(b"Unknown", response.body)
-++
-+ 
-+ class DateHeaderTest(SimpleHandlerTestCase):
-+     class Handler(RequestHandler):
-+diff --git a/tornado/web.py b/tornado/web.py
-+index 8ec5601b..8a740504 100644
-+--- a/tornado/web.py
-++++ b/tornado/web.py
-+@@ -350,8 +350,10 @@ class RequestHandler(object):
-+ 
-+         :arg int status_code: Response status code.
-+         :arg str reason: Human-readable reason phrase describing the status
-+-            code. If ``None``, it will be filled in from
-+-            `http.client.responses` or "Unknown".
-++            code (for example, the "Not Found" in ``HTTP/1.1 404 Not Found``).
-++            Normally determined automatically from `http.client.responses`; this
-++            argument should only be used if you need to use a non-standard
-++            status code.
-+ 
-+         .. versionchanged:: 5.0
-+ 
-+@@ -360,6 +362,14 @@ class RequestHandler(object):
-+         """
-+         self._status_code = status_code
-+         if reason is not None:
-++            if "<" in reason or not httputil._ABNF.reason_phrase.fullmatch(reason):
-++                # Logically this would be better as an exception, but this method
-++                # is called on error-handling paths that would need some refactoring
-++                # to tolerate internal errors cleanly.
-++                #
-++                # The check for "<" is a defense-in-depth against XSS attacks (we also
-++                # escape the reason when rendering error pages).
-++                reason = "Unknown"
-+             self._reason = escape.native_str(reason)
-+         else:
-+             self._reason = httputil.responses.get(status_code, "Unknown")
-+@@ -1295,7 +1305,8 @@ class RequestHandler(object):
-+                 reason = exception.reason
-+         self.set_status(status_code, reason=reason)
-+         try:
-+-            self.write_error(status_code, **kwargs)
-++            if status_code != 304:
-++                self.write_error(status_code, **kwargs)
-+         except Exception:
-+             app_log.error("Uncaught exception in write_error", exc_info=True)
-+         if not self._finished:
-+@@ -1323,7 +1334,7 @@ class RequestHandler(object):
-+             self.finish(
-+                 "<html><title>%(code)d: %(message)s</title>"
-+                 "<body>%(code)d: %(message)s</body></html>"
-+-                % {"code": status_code, "message": self._reason}
-++                % {"code": status_code, "message": escape.xhtml_escape(self._reason)}
-+             )
-+ 
-+     @property
-+@@ -2469,9 +2480,11 @@ class HTTPError(Exception):
-+         mode).  May contain ``%s``-style placeholders, which will be filled
-+         in with remaining positional parameters.
-+     :arg str reason: Keyword-only argument.  The HTTP "reason" phrase
-+-        to pass in the status line along with ``status_code``.  Normally
-++        to pass in the status line along with ``status_code`` (for example,
-++        the "Not Found" in ``HTTP/1.1 404 Not Found``).  Normally
-+         determined automatically from ``status_code``, but can be used
-+-        to use a non-standard numeric code.
-++        to use a non-standard numeric code. This is not a general-purpose
-++        error message.
-+     """
-+ 
-+     def __init__(
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb b/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
-index e24354b54a..ce53ef75ad 100644
---- a/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
-@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb
+rename to meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
+index 1858fee25a..fee5250c4d 100644
+--- a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb
++++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
  
- SRC_URI[sha256sum] = "92bad5b4746e9879fd7bf1eb21dce4e3fc5128d71601f80005afa39237ad620b"
+-SRC_URI[sha256sum] = "bf51c0d9c7dd63ea8e44086fa1e4fb1093a31e963b86959257378aef020e1f1b"
++SRC_URI[sha256sum] = "7bb554bbdfeaacc3349fa614ea5bff6ac300fc7c335e9facf3a3bcfc703f45be"
  
--SRC_URI += "file://CVE-2025-47287.patch"
-+SRC_URI += "file://CVE-2025-47287.patch \
-+            file://CVE-2025-67724.patch \
-+"
- 
- inherit pypi python_setuptools_build_meta
- 
+ BBCLASSEXTEND = "native nativesdk"
+ inherit pypi python_hatchling
 
