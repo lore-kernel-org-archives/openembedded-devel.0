@@ -1,197 +1,166 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2B27D3901A
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 20:42:27 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20555.1768423338394147940
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 429E6D3CC83
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 21:57:08 +0000 (UTC)
+Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22334.1768427820504342666
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 12:42:18 -0800
+ Wed, 14 Jan 2026 13:57:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YwZP4+up;
- spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-450be85b7d9so143916b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 12:42:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YyVKb7aU;
+ spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1233702afd3so337630c88.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 13:57:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768423337; x=1769028137; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=w15dRbGvAaEWlp7N+lGFdLT+sRPYXyJ2iK8x5oZTXSY=;
-        b=YwZP4+upwrzEINckt0teKD1kDXpBzSL9sdYv/RX7FVgEBRpGC+aZcTanFBoGpnbv/R
-         3vd63iG0OX3fAU0L4HopmphUcD9Xpo3HWdhG3Pi37VZSCFmypEngZaqIHV8E7lf3e3Ve
-         s4pQsOpMj/1JX1aJgXplMEV3JAixL4932Mr0L8h7WZ9ZOR41ejRlEerNcqGdYc6kyIDw
-         SRjrnStdXEs2Fm1tMwLo3ISVPymf7vzJ5HhERi/jB0swYoCOHyz8tRNHj8Kq9Po5hJvD
-         HdJNuydQKFBfY5ewntw+I8o2jBu3ozjiIP9r585Ow5w/i8Cfhybi4Og6lhuMg4fAAEgB
-         DtdA==
+        d=gmail.com; s=20230601; t=1768427819; x=1769032619; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nx0yRPac9len3lucxg2la5uBJFgz3fBBsp9eI4F0h0g=;
+        b=YyVKb7aUHasC1mvZrmCLWzGQrfCeSmYsoot2sr0L6CJtG3nmRhKUzNBX3GfE80TnIH
+         rup6dYLfFVAadaKCPMnp+npgSdISG0WzJ1KMqJIeWBMkLCy0vMVPovx4xV5ePuTaDmgy
+         I8gI7o/IGWtemqX/nxIEPC0JhQL+PR4p61ufmcAAQM86iefX8b4wPBhRjhHsGjyICMOX
+         mA8IXi/BiBqm5XvRSNzrkXWbJjYlQXnTKKHIreE63xaby0X6x8XXzaMidTzqArmzqATM
+         BqAAQMwh7jEm6z/t2+vwXZmUAoLSN+4mf90Z79ae83JdXR0KCpWOURUdPYl/nnPJSI0b
+         xAdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768423337; x=1769028137;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=w15dRbGvAaEWlp7N+lGFdLT+sRPYXyJ2iK8x5oZTXSY=;
-        b=RRfxZYzYvjoySw6dYnLvRrZoJ8ibgqiEFFY7sa5K3/sfsduS+Augn9jqlj+2yma/1j
-         6hi7fFgSj+H4yJ/rSZ1o4p9f3xw7ksgSeRaQsx5lv8doZSxVd7GRWkKpehZZfBj+Oeue
-         aqGE6bgZxqZ8nQnL7oTRhmTZRZ2bj0eOYLDlQkRWc7ta2RQe7VwVN2fsu6dFtsAUoCtL
-         7Om2t5FNQwIHc4taYUetKqjpe/MZM8ndnvHHyO2/g7fb2+SXsf1DR/y+ggxSlH2Aue9k
-         jBCR/lyOFB00ePOYxmbiP1+0XP+yVs9OaBMnIMY3hIFIeOfMCAjDKBz+gH80pZ2voaDz
-         AWbw==
-X-Gm-Message-State: AOJu0YyRsSTmkLMrRdqxD7kEEH2v64uItKEkkxfY6r9STOLo1DU/OLVN
-	FYJlTW6yixqBBPFjlJXzwIR+7rdrvNIaGCzZM3WOiJRUhHFtSYs+r4FDKNFVuht7Lf3mQ9ICNfT
-	PWr4o5Ge6R+QE45MOtGA0ZBWsUccLXer42rLr
-X-Gm-Gg: AY/fxX7iNPkYE6UI2mNokIT2MUMwgX5yImGGT65Ma42F18jkFAe/LclD+3GCHXANk7W
-	BhwybKiPK0JA6Ex+/EJbrKeeo4NCzb/BK0UvPUW/91deEhrzyiglNEc56YDH7ckQi2rQ/exfJrF
-	ssnYlD1lqDMBS+wRJl3V35BNHQbGEObVLNYDtOH3WHCRc4hC5nKGsax9sM/g0bvQDhrfOUliNVu
-	1LfT2xJLw/G396hspAA1xHa43flNXIufwF90cKNSX0i2fInfmr5wZfZs80K9lDnbkpcc5qN
-X-Received: by 2002:a05:6808:13d2:b0:45a:6f18:8c74 with SMTP id
- 5614622812f47-45c71521684mr2640380b6e.45.1768423337476; Wed, 14 Jan 2026
- 12:42:17 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768427819; x=1769032619;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=nx0yRPac9len3lucxg2la5uBJFgz3fBBsp9eI4F0h0g=;
+        b=hadJ6X+u1KF2rsw7hDc1b69hHqV/pqwAgSwGHqNqk/gRCn+a+/3HsBrJo3VYp0nIXp
+         mbkau7GSv3Nd6wjNh70pZ8lruB9Yc80bCqz8Gaf6ul1soD+Oc+FPr5tV3exiT94ns+WG
+         3ZlcacXsCDjHq+T9j+mCH1xZfY4PbKP538+G53xe5qNQkJtbBUVYmYy0S11Ch11rlotp
+         LCoQc/GY69k+vgqaIQpXVdSG+j34i2t2tBxu9Xwybcv7AX6IBh4t43jad8PfR/GWQTt6
+         o5H3apjMvpbVhmbLrp+HeEjaJgXSUMiORpXnmJmNuBvJkGnAqxWbSmLIx+AwSbjc+a/j
+         rWBg==
+X-Gm-Message-State: AOJu0Yy3c44X7Ww+DC26Hu7sA/dfxv/1quIVGNP5PMYLseCqTN3/U3N3
+	I6huy/fvf7yASWhpK3CAeIjNoZqxRwMOJgFeqzrURZMFWtSIHW8y17AyPFxbTA==
+X-Gm-Gg: AY/fxX681hVMjNM68gWGXBIca98mR72feGVTntq4ISJAr2mCfvAC950x0w94JN2O7Jv
+	hINcuuuZBYrtnlmHkHQ23FPKiZLUxv25VqZns5bajKxkYSMozaTRBXMgqAAi8S53jih223IAxtR
+	ZuMUBhJPEfe1ihyEUl+a2JTCggtNrs+JXc2myOuz+dQyofampDEm/8s8l3AYM4k9VX26Y+PKefI
+	a47ohhSQT286O2W+nkQrhoBaHve+izer8DCYFpufAt+373/q7OP/2k65vpVGSHTktxorbt1jv1G
+	vOfVo2C7in0SoFn9OGp8rQ7VzO6J+gJM6FVFNd1Fco+wfYIwnddvgc4BpVKwQWBmvz+RXUYfbnz
+	/9aqt5BA6quOTS6mBdPe00mZkZqYrm7JxShF57Drnh7PR6rNeG5AlyotjlC1C4g9JN4Ry1qnAFT
+	ILmiR692V9cnp810wx8/k2DBmSTs7GckPQO33wIkkmd6IwZGORcLTfDhwEmUokEv7ununq9uj/2
+	0ODSlW+Tkt/zPe6Gqpq6AlM3Pjh7l4=
+X-Received: by 2002:a05:693c:3105:b0:2ac:1506:c781 with SMTP id 5a478bee46e88-2b486c8d4ecmr3757416eec.10.1768427819254;
+        Wed, 14 Jan 2026 13:56:59 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::28b])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2b1707d57aasm19440277eec.30.2026.01.14.13.56.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Jan 2026 13:56:58 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] grpc: Upgrade to 1.76.0
+Date: Wed, 14 Jan 2026 13:56:56 -0800
+Message-ID: <20260114215656.1235700-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com> <20260114172553.1241309-2-adam.duskett@amarulasolutions.com>
-In-Reply-To: <20260114172553.1241309-2-adam.duskett@amarulasolutions.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 15 Jan 2026 09:42:06 +1300
-X-Gm-Features: AZwV_Qgs_oAouQ0nUjxURSt7lq99rPIplYgqXolPQo9IvBtRv190s3oKifpMQNQ
-Message-ID: <CADySD0FT4tcpT0FKL=JmBvu=71GcBHHZKoMAMLhWxmtU2UYk4Q@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] [meta-oe] kmscon: Add recipe
-To: adam.duskett@amarulasolutions.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 20:42:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123486
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 21:57:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123487
 
-On Thu, Jan 15, 2026 at 7:16=E2=80=AFAM Adam Duskett via
-lists.openembedded.org
-<adam.duskett=3Damarulasolutions.com@lists.openembedded.org> wrote:
->
-> Provide sane defaults that do not have dependencies, such as
-> a dummy and terminal session support and basic fbdev support.
->
-> kmsconvt@.service must be added separatly or else
-> do_rootfs fails with the following error:
->
-> ```
-> do_rootfs: Postinstall scriptlets of ['kmscon'] have failed. If the inten=
-tion
-> is to defer them to first boot, then please place them into
-> pkg_postinst_ontarget:${PN} (). Deferring to first boot via 'exit 1' is n=
-o
-> longer supported.
-> ```
->
-> Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
-> ---
->  .../recipes-graphics/kmscon/kmscon_9.2.1.bb   | 63 +++++++++++++++++++
->  1 file changed, 63 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
->
-> diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb b/meta-oe/re=
-cipes-graphics/kmscon/kmscon_9.2.1.bb
-> new file mode 100644
-> index 0000000000..9f19bd18e6
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-> @@ -0,0 +1,63 @@
-> +SUMMARY =3D "Simple terminal emulator based on linux kernel mode setting=
- (KMS)."
-> +DESCRIPTION =3D "\
-> +    Kmscon is a simple terminal emulator based on linux kernel mode sett=
-ing \
-> +    (KMS). It is an attempt to replace the in-kernel VT implementation w=
-ith \
-> +    a userspace console. \
-> +"
-> +HOMEPAGE =3D "https://github.com/kmscon/kmscon"
-> +BUGTRACKER =3D "https://github.com/kmscon/kmscon/issues"
-> +CVE_PRODUCT =3D "kmscon"
-> +
-> +SECTION =3D "graphics"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6d4602d249f8a3401040238e98367=
-d9e"
-> +
-> +DEPENDS =3D "\
-> +    libtsm \
-> +    libxkbcommon \
-> +    udev \
-> +"
-> +
-> +SRC_URI =3D "git://github.com/kmscon/kmscon;branch=3Dmain;protocol=3Dhtt=
-ps"
+Backport a fix to build with latest gcc and clang
 
-please include tag=3Dv{PV} in the SRC_URI
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...001-build-add-missing-includes-41351.patch | 58 +++++++++++++++++++
+ .../grpc/{grpc_1.71.0.bb => grpc_1.76.0.bb}   |  7 ++-
+ 2 files changed, 62 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/grpc/grpc/0001-build-add-missing-includes-41351.patch
+ rename meta-oe/recipes-devtools/grpc/{grpc_1.71.0.bb => grpc_1.76.0.bb} (94%)
 
-> +SRCREV =3D "7d46650dbb0826f9b89de42f879be879391c14fd"
-> +
-> +inherit meson pkgconfig systemd
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}=
-"
-> +
-> +PACKAGECONFIG[backspace_sends_delete] =3D "-Dbackspace_sends_delete=3Dtr=
-ue, -Dbackspace_sends_delete=3Dfalse"
-> +PACKAGECONFIG[font_pango] =3D "-Dfont_pango=3Denabled, -Dfont_pango=3Ddi=
-sabled, pango"
-> +PACKAGECONFIG[multi_seat] =3D "-Dmulti_seat=3Denabled, -Dmulti_seat=3Ddi=
-sabled, systemd"
-> +PACKAGECONFIG[opengl] =3D "-Drenderer_gltex=3Denabled -Dvideo_drm3d=3Den=
-abled, -Drenderer_gltex=3Ddisabled -Dvideo_drm3d=3Ddisabled, libdrm virtual=
-/egl virtual/libgles2 virtual/libgbm"
-> +PACKAGECONFIG[video_drm2d] =3D "-Dvideo_drm2d=3Denabled, -Dvideo_drm2d=
-=3Ddisabled, libdrm"
-> +
-> +EXTRA_OEMESON =3D "\
-> +    -Delogind=3Ddisabled \
-> +    -Dextra_debug=3Dfalse \
-> +    -Dfont_unifont=3Denabled \
-> +    -Dsession_dummy=3Denabled \
-> +    -Dsession_terminal=3Denabled \
-> +    -Dtests=3Dfalse \
-> +    -Dvideo_fbdev=3Denabled \
-> +"
-> +
-> +SYSTEMD_SERVICE:${PN} =3D "kmscon.service"
+diff --git a/meta-oe/recipes-devtools/grpc/grpc/0001-build-add-missing-includes-41351.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-build-add-missing-includes-41351.patch
+new file mode 100644
+index 0000000000..bf1f22b906
+--- /dev/null
++++ b/meta-oe/recipes-devtools/grpc/grpc/0001-build-add-missing-includes-41351.patch
+@@ -0,0 +1,58 @@
++From a976f66ac7d1b9f43a3071e22b5014fcfeab04b3 Mon Sep 17 00:00:00 2001
++From: "Mark D. Roth" <roth@google.com>
++Date: Tue, 6 Jan 2026 10:09:45 -0800
++Subject: [PATCH] [build] add missing includes (#41351)
++
++Fixes #41305.
++
++Closes #41351
++
++COPYBARA_INTEGRATE_REVIEW=https://github.com/grpc/grpc/pull/41351 from markdroth:add_missing_includes 223be6932adb00d085149c53167c1b0318745f6c
++PiperOrigin-RevId: 852829597
++
++Upstream-Status: Backport [https://github.com/grpc/grpc/commit/d54219b508423f0a2ff6a0b98c16fb6dafd44b84]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ include/grpc/event_engine/memory_request.h | 2 ++
++ src/core/channelz/v2tov1/property_list.cc  | 1 +
++ src/core/util/glob.cc                      | 2 ++
++ 3 files changed, 5 insertions(+)
++
++diff --git a/include/grpc/event_engine/memory_request.h b/include/grpc/event_engine/memory_request.h
++index 76bcbb2036..ad8cab842e 100644
++--- a/include/grpc/event_engine/memory_request.h
+++++ b/include/grpc/event_engine/memory_request.h
++@@ -17,6 +17,8 @@
++ #include <grpc/support/port_platform.h>
++ #include <stddef.h>
++
+++#include <string>
+++
++ #include "absl/strings/string_view.h"
++
++ namespace grpc_event_engine {
++diff --git a/src/core/channelz/v2tov1/property_list.cc b/src/core/channelz/v2tov1/property_list.cc
++index 64bbb6307c..03367cce7c 100644
++--- a/src/core/channelz/v2tov1/property_list.cc
+++++ b/src/core/channelz/v2tov1/property_list.cc
++@@ -15,6 +15,7 @@
++ #include "src/core/channelz/v2tov1/property_list.h"
++
++ #include <cstdint>
+++#include <limits>
++ #include <optional>
++ #include <string>
++
++diff --git a/src/core/util/glob.cc b/src/core/util/glob.cc
++index 1b1c16e23d..22e54259f0 100644
++--- a/src/core/util/glob.cc
+++++ b/src/core/util/glob.cc
++@@ -12,6 +12,8 @@
++ // See the License for the specific language governing permissions and
++ // limitations under the License.
++
+++#include <algorithm>
+++
++ #include "absl/strings/string_view.h"
++
++ namespace grpc_core {
+diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb b/meta-oe/recipes-devtools/grpc/grpc_1.76.0.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
+rename to meta-oe/recipes-devtools/grpc/grpc_1.76.0.bb
+index 53867b8fe6..f05b2d9e83 100644
+--- a/meta-oe/recipes-devtools/grpc/grpc_1.71.0.bb
++++ b/meta-oe/recipes-devtools/grpc/grpc_1.76.0.bb
+@@ -23,10 +23,11 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
+ # Both dependencies are mutually exclusive
+ # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
-can use {BPN}.service
+-SRCREV_grpc = "4e9357bca1408596663a218c0c608a4c0560a867"
+-BRANCH = "v1.71.x"
+-SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
++SRCREV_grpc = "f5ffb68d8a2fd603dff16287e90a4ac571e1fec6"
++BRANCH = "v1.76.x"
++SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH};tag=v${PV} \
+            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
++           file://0001-build-add-missing-includes-41351.patch \
+            "
 
-> +FILES:${PN} +=3D "${systemd_system_unitdir}/kmsconvt@.service"
-> +
-> +do_install:append() {
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false=
-', d)}; then
-> +        install -d ${D}${sysconfdir}/systemd/system
-> +        ln -sf ${systemd_system_unitdir}/kmsconvt@.service \
-> +            ${D}${sysconfdir}/systemd/system/autovt@.service
-> +    fi
-> +
-> +    if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', =
-d)}; then
-> +        sed -e "s@#drm@drm@g" \
-> +            -e "s@#hwaccel@hwaccel@g" \
-> +            -e "s@#render-engine=3Dgltex@render-engine=3Dgltex@g" \
-> +            -i ${D}${sysconfdir}/kmscon/kmscon.conf
-> +    fi
-> +}
-> +
-> +RDEPENDS:${PN} =3D "xkeyboard-config"
-> --
-> 2.52.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123483): https://lists.openembedded.org/g/openembedde=
-d-devel/message/123483
-> Mute This Topic: https://lists.openembedded.org/mt/117265881/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+ inherit cmake pkgconfig
 
