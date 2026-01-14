@@ -2,38 +2,39 @@ Return-Path: <Haixiao.Yan.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C9E8D31A06
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DB4CD31A09
 	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 02:43:41 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2170.1768358612267636388
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2044.1768358612852767308
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 18:43:32 -0800
+ Tue, 13 Jan 2026 18:43:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=SauARN5n;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=LhwKhI49;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5474b6bc00=haixiao.yan.cn@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60DMpSgI518362
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 18:43:31 -0800
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60DMpSgJ518362
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 18:43:32 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=L/b39xbsekpoJi8B1con
-	0vhVKisybWJXCtJfjCPZV+A=; b=SauARN5nhGaqcVLBz4j4hqsP6jYZPuwqhTMa
-	hJom5wsmtwGS+FSL3nFD5vrOBomPEBY07j9YgJ0gRh57hYqre9bZOB28bkJ0jZzO
-	ZoXpfWE+WpQIDrnRI1dCpxBr1bROCB6duvszdOdnSkbH/jSy7TnDNfnybdxLlJmW
-	hAdP04H/+OTKam+TDa1go3oSxV+a25kCCcuikjaskA+Z04r1YlJ/p2lGuyjU7CQU
-	hhDhgxmxa9F6fRpLdbKw1vbHdztaxFjFUE0G7iNKsqyIBFcg2QNfQoNVSmINoyMl
-	JXdunOOt0GyPKm45j1t2vrqkhBGubRt8WnUaOEy84chVBw7ELw==
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=P7g+o9k2aZ77dP3UlGX26arKt3uoQRxLgMEkWhBeX1Q=; b=LhwKhI49iZbI
+	7eZKzrSk4U6vfyJm1E7FQzbiAs1S2XoOgXqBB4qmqHY/bWz1BNuaB2ysG0IAeGSh
+	bIN0X/hjZL2jxhnTTckhUQm/SCrLHwyMoIhHDomaNOtEn8R4Tvhrtrkpo7kuEwlz
+	B7iN/2ymFWRtTUO/JF5+vkn+YEFfCysmu+gPagXwoUCH1W4tZ3xG6bAZvhJN9Nng
+	+ltcaSONAMAa4Lqmf2QSdJ+QHNPTsGO2vj5KTXZ71lvgKiEn83odtWUomwCM6M6g
+	KD7C4IpC9+K+pgrx/me63Te9mw+8Jixp0FKx19ZQ12sjJUGDpJ1NDgy5wetOqOqq
+	EKwM4iywFQ==
 Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012044.outbound.protection.outlook.com [52.101.53.44])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4bkq5funt0-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4bkq5funt0-2
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 18:43:31 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 18:43:32 -0800 (PST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dpePZ/qlXpHcSPkR1ePjtDwTQ/MRIuKisAhRwlDs+ILuYtn8xU9jenZT2GwK/ldpnLg3Dpumrp0u4GRqoutp9qRLnHoq+YZu1bxMnhEqquJg+brIm7rqc8wtn3vMiO63s3DwpIOZ7FvQFWOkeraxE5lb4nN4nE28uU52tHSMTnKtTqnuxpsfb/VwTKQEj2qbY6up4Q33T3a0xaYD9KYQJgzeK54WDS8JrPcTW1TFlbgTtmp9UbFConOLxl4zDET/DkzTEwgDinBd1m30OgfLLUH+MDB8DQcClYGyshuRfyJDlriP7dzl2QSKPBut3vqA+enqupdtZrsjPan/uHDi8w==
+ b=X3evzIK4UCuPVCkv30AIhtZgBItFfEVH6VBmzRP2vFTIbquaMnvcd4NYCltPvjR0IsqD1JqFXpz5heu0863tMGZL+dU7NovOqtV9vanUwqj+rjlhjlP3+q/rsva9nKXUvNS067Wc9kLS5ZzrH6cQB9x9ywm119I/JsHr6Yc5RN3ieD0SJzxRrSxaNWIynx4n9a2ucsnDVg5A97Io8iw0LQbChicoSoKI3hiIwBZQJ2e3QEHd18q9x0jhtwX+S6u4EHswIEgosODLYRC/bwXUVkkFPO/7OBUNGlSWaqHt9zx0wnpibbnU2xl0HNQ5XPQ9ucSF+fSus7jK3bH2n5Zx8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L/b39xbsekpoJi8B1con0vhVKisybWJXCtJfjCPZV+A=;
- b=SiLBgy+7Q7MW6rr9eHrf5iTDS+NptwTGVFmvXg3TQqRWfnCTW1iy8qa32NXW/Wom7fyxDLsvem/5xaQi6pVDUPbruh5oWmYfTgwRs2Ftv2klqgMxQuLXH3FUg3Ds7ha1yu7ZGmxx+GmrcXN2svSbJD9T8oPsbVPKIBFqG+g57erNzo6P62NfCSqPAVFl2nVIAm670c1p0McdqaYrA/6ll0nXmcQOGwqE1sRLJ71idMVgYDO52fPhxJdKlpQNbetVCgcpbSphK6qxI8d/MSo0Z6Fl/L78RIvN9sZunOw0SYzWUfO62Vfw42xeaRORG8SVVFQCRnBDN9zFepx/uXgnVg==
+ bh=P7g+o9k2aZ77dP3UlGX26arKt3uoQRxLgMEkWhBeX1Q=;
+ b=bEecSKdkSSWl9yLJE6+ZjUPTgzL03/pQlnQqCaVuaLyEcv6mEjdhtWmpbCAJetbQJTUZ593S8SOZJAdhLTR7mw1D5vHnh5FiBJnnG0zxJDb9q3IIPsWbGsNHZ5q6z4j42/vd0SNIpF0k8MYFxgREacbPWQfeiKRAaSHWZkWrGzYa9kVD1T5hNZKSKdQkgNowPstzs9wKAqi5DHkZoPYGNZOu/hLJWdPU/ob/1BeCIxsmBdizmqsTeJ8s3AJBnmxHtqXwf/byO4hmOMqjTWDRbN+ng9MeDR22E3K2BQIyvIYd1cjOvJgelPbGSy5Zn9yR2v7K5I2ICFsZmSBVMxs2qA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -41,17 +42,19 @@ Received: from CH0PR11MB8189.namprd11.prod.outlook.com (2603:10b6:610:18d::13)
  by LV3PR11MB8742.namprd11.prod.outlook.com (2603:10b6:408:212::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Wed, 14 Jan
- 2026 02:43:28 +0000
+ 2026 02:43:30 +0000
 Received: from CH0PR11MB8189.namprd11.prod.outlook.com
  ([fe80::7b99:70e4:edb2:30c2]) by CH0PR11MB8189.namprd11.prod.outlook.com
  ([fe80::7b99:70e4:edb2:30c2%6]) with mapi id 15.20.9499.005; Wed, 14 Jan 2026
- 02:43:28 +0000
+ 02:43:30 +0000
 From: haixiao.yan.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][krikstone][PATCH 1/2 v2] python3-django: Fix undefined _lazy_re_compile
-Date: Wed, 14 Jan 2026 10:43:11 +0800
-Message-Id: <20260114024312.1180159-1-haixiao.yan.cn@windriver.com>
+Subject: [meta-python][krikstone][PATCH 2/2 v2] python3-django: Fix missing JSONField in django.db.models
+Date: Wed, 14 Jan 2026 10:43:12 +0800
+Message-Id: <20260114024312.1180159-2-haixiao.yan.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260114024312.1180159-1-haixiao.yan.cn@windriver.com>
+References: <20260114024312.1180159-1-haixiao.yan.cn@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SG2P153CA0041.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::10)
@@ -59,98 +62,98 @@ X-ClientProxiedBy: SG2P153CA0041.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH0PR11MB8189:EE_|LV3PR11MB8742:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a0d86d1-25d7-47f0-4811-08de5316b2a6
+X-MS-Office365-Filtering-Correlation-Id: 9100f69e-0a7e-4fd6-1c3d-08de5316b38c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?HyIJO1JxwA0R8WnkftWd+utSBYdQvGNhxZ5uqtbynj4fxhhsCC2kDH9NcMLi?=
- =?us-ascii?Q?VsUHLGjD1THnvwIzTAk8KMr+sxXrrOeBKoWyWh7dPZhNqlf1oCAOyWQpLJ9X?=
- =?us-ascii?Q?TT5U+gxuCjkcN+CwuMp35qB6R2nztCiNwW6whvs1ERuf067D8iWO8mmZBzlY?=
- =?us-ascii?Q?CVWj7prJL8BAx28dAu7fpxGz4/Pk9XufPgWVShoHBAcQbDzo8K92EM2Wktay?=
- =?us-ascii?Q?B680HhGZhAda4ndGfwMoSjK9eJcivlWezLchb771YE8tAIxz4tWjMwaIFxfY?=
- =?us-ascii?Q?tmgigfEQiFcpVtfObPzxBFOhAb7Eblf5fu6HZitRzTnNUI6HN88C42aW/2Cp?=
- =?us-ascii?Q?WM0o8+eR35bbKGmCIdCcI++pv5UUA8QXcQUBk+W0b2gdWHGfbg92OEyyj8gF?=
- =?us-ascii?Q?WDeaCSs1g8PUYGbeWCAmNIdpfSNM4kcNhrq3qb0/RGPpgufjbojINwWujh93?=
- =?us-ascii?Q?v76N/Wo5CYt8zpR6NO66iYQ8XHZL8GKltCiBBG+SUJrnXzTy6RFYALxc4LHJ?=
- =?us-ascii?Q?O6NEGwCjSsyquy1Fj/TZ0P2iqeTtLgFJSMADX81VpQQYzJ9tgRea5/qfxG0b?=
- =?us-ascii?Q?rOiMTZZS9CnpeSJQlPQ3we+CsvK5MnipiuDz+7Qcy1ZM0Fhfno0mPESDvV3u?=
- =?us-ascii?Q?LmQ0oVuCITVW/aj1nNijazuwFVBPcX4CBziv2c3noI5w5cNcup5MJ7E7+dWW?=
- =?us-ascii?Q?EgdSwR3HbqXGz/nR7okRLsfKVfWCDDe+kBHK3I2q2f5u8AR9Aj8YJro+28KP?=
- =?us-ascii?Q?/iuh20P4BIICFTT5vcVWqWwqEDGmFGlB5Kiq4JUxXi4j4kgaY2wvH9zHm3YY?=
- =?us-ascii?Q?V0TjV0HYrEdIX1MeMEMIxZyL9Fflk1owxnnI9Qr0s3QDYjQVQ2RRHGN3QsxZ?=
- =?us-ascii?Q?EPlgRwEMMZDXAKMWf/Ks8VMa/rTr+cmMEFnDrc2Id9pmlUClp3P+TomseS2A?=
- =?us-ascii?Q?ddc5abs+konnEeqHvVU3BzzkmBPqNW2ymRmA2/fB1Rjurcv9oUadEUc4lfk6?=
- =?us-ascii?Q?nYdd/s9MJzVmXFVgBEYWLB7/0OGsC30mkVDIqeFNuyfaKyiDiUP75BPHY52g?=
- =?us-ascii?Q?wrhD8wUG0cQicqUBI2vG5ebFrSwcP3EdjjkCy9X6FFuZUTgorL1f04lrMRzt?=
- =?us-ascii?Q?r4C0diWFuJWxru843U0rKtIQxE5omPUc+eib1V8cm6XcUm+N5pFeF6H/QCNx?=
- =?us-ascii?Q?hX86Av8IOyaa3r7EeSZXbO10BjL4bIqCiliw32nsb0UhnqWn0eEtDdM6k7yl?=
- =?us-ascii?Q?VlA/bFiWslH1G8YPdXgh/dnupjgHp6FLPJIZhh1a/WqBsyiOPvW6GtvOCH45?=
- =?us-ascii?Q?FRX3J9tzuKiTbajffzoDgcSBGHLPsW4sDBvCkmam4y8yP0xwA8ZagClYj46n?=
- =?us-ascii?Q?uXTcceFoV1wg3o0J1m2tEPT7bTuqCTiK2GCQqTewfVI3LqJ47nWZmNNJsUzC?=
- =?us-ascii?Q?oN16BwQopahMqcU/C8HHlmgw7oUYUegeN7FEuRPMboA34mrIlOICimwWizMq?=
- =?us-ascii?Q?OY+FEnWksL1t365I0co2gzEKZ7YUjdrtzTTd?=
+	=?us-ascii?Q?4WEI4B+wOhYkuysmLAAAM7eC3HdikEsJe1oCWPMFdBmTM4vqwl7oZ4z3kQjO?=
+ =?us-ascii?Q?5OcPz122d4bixs+KY0MyCruijNc1LhIQtLyXYdWRaibaKR6fTu1LJKEyP7yb?=
+ =?us-ascii?Q?kJ1aXHPB+n93rfK0bx82b5UlrklOcAA18r/qlxfK7fHEEjnjGpgPT7T3DJ8P?=
+ =?us-ascii?Q?uisOpqzBvZRWEOHk7gQLESuhIgQveMsZoHcbhnSmU9KOszv6zp5kj42JqHtq?=
+ =?us-ascii?Q?TTpcXcRhNKdrgtCv2zU3QA2fZnfT7Sy+Xlmm38U55e1VuCILmJ14+Aw2Gl/U?=
+ =?us-ascii?Q?pzdQy1/h7cP0eNQGvEtzHuxRczpIlyIV/LQRp6Nnn5FBYllKXZhYMBy294+T?=
+ =?us-ascii?Q?A3bTftsn1NFkZftth+XFNzFmZTFs0R2VulhZFixg3QQtmS8vWY4b97VQx2hE?=
+ =?us-ascii?Q?TjmLglO/qeiycPBa4lyV1XVcck6dcvip+Jju6Fbc7YFSz7CagqnM2eXB0wcu?=
+ =?us-ascii?Q?JAGObaZzV2Qye+Ml/6skzLo/VLeiYum/+oUL0YIe/aPW6Npg6yrPnzn0TCnG?=
+ =?us-ascii?Q?YXGM/GYUXZX6HhFr3pWhu71xdDFd7o2kZw0nGbwq8xHaqwzifh8JLL5hujo8?=
+ =?us-ascii?Q?RI6sdDGAiLtYY8TpC6MFHiDfaEAQUEMIwSgXtrBdENCX5TVit7IVXsxpceCb?=
+ =?us-ascii?Q?VdoVm1aunZfFKhMuNqDoWvASCAXmeGlw+KHdT4JV21R0yswKga/Wb1QJkzRy?=
+ =?us-ascii?Q?OyRAy1ssqhQdukT7LQDMREKQmVWNhxTQVuI/nT5Y5QJLyDKhlxa5tfcaz4TZ?=
+ =?us-ascii?Q?q4d3d3FNztnCHgEoAHjcKg7f1eMQMuS1AVKDrfuMFpPphIBLH8ZMnuZEFED6?=
+ =?us-ascii?Q?rAiTQbtEa9wfo0kr2G0MffWMYj6C0IOe3TMnQT37KGHE7UNBhSGX0rNrw8IJ?=
+ =?us-ascii?Q?E00eE6Og43WmUGKddY/6wirzoEElk2U0Tkxh47LJhYoQ/Uc9dK8KKvzSeOry?=
+ =?us-ascii?Q?SM7Hoj1HQTXjGxTk6oK0+8k9m64NmLK6tOUb/loNaeUYeWZ3EGm+MJzLMiwj?=
+ =?us-ascii?Q?rX+8uP+TQB8UPc+XLIrFyErqQEElCJj7k3XXxkUvN5sQddC/3H1EMnGOCLhr?=
+ =?us-ascii?Q?a5Y2VrW1MlgooOsUUdo1Xq39VjOe/3vL1SrS18hFMr2oOhyu330q0AfdqnhL?=
+ =?us-ascii?Q?bJa0S6eq1cMjL7e/oFn92ex+BMW6Kcosxo0vbzYIPK+2HRwtQlTPI1EE+8kT?=
+ =?us-ascii?Q?0buEmeJepJsa//yWAQibqzUTVBtuIfJd+9yzqUL6oTdscBDci5c5deWArJ6q?=
+ =?us-ascii?Q?wOwA9+V/AxyTjaQh9BD9w2Wvz32SARWcmuIZMYUi+SeLmZcLNU2xFRr23JLm?=
+ =?us-ascii?Q?vK+DyphyuJ1VFoM/zv07A9GpVTvnP02idYf/dBDry76bbvaCA58MBsPxOdyQ?=
+ =?us-ascii?Q?TlB0i37ocd1DQdk6eRDaDZ+x0OsGeMGjFVpmrT3Vku9Te5vFwi+7Hq+sJbSD?=
+ =?us-ascii?Q?agbHkc2DHmlbx5IcQTNMEz5M/dtJNcwppVLJK+3FOMTQ34XF+RmiYzenVL7C?=
+ =?us-ascii?Q?fR9FeoemGvGlN4OfRG1HjUBiVQwr+rur8GC+?=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR11MB8189.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?M0NhNlvGbIeKmbFp6k6x50ONB/taTK7JkMcOORVFGLvyt0XRiVkHb1gt7RoK?=
- =?us-ascii?Q?lYu+Q3NrWrxc6XsxNPWFDzJCxMjrme/7LBOhIHWHogXmeF8Fw50kNxC83phL?=
- =?us-ascii?Q?sw63AattN+Br+Y4sseSZ3TCGnB02ENc2CryB0DFkvFo08tp1GTBfk3HcwTDA?=
- =?us-ascii?Q?35TN12ocB3sYf5AakPgbrR0JX1+xsOXTxgZ7fhV/pPeOiaGtx8n210fhCDyb?=
- =?us-ascii?Q?/XGh7Z937wUYeMPeq1xEljsZ2zGJUaz4NnGxQOSKhRUWvoA+IcV/C5D46opJ?=
- =?us-ascii?Q?0x5cPJKOAPMKLfZD9m8accLdzjetXCh/O0Ny4EZoDN6PLZLvSiW5OwRjQ2bU?=
- =?us-ascii?Q?hK44No2PggTky01F6TuM7oZNjDfu57l+ljshLpwomITaRiCzsWk0hJxZh6He?=
- =?us-ascii?Q?CSc/2I1LaGlBYPrqXxZ2RuPVXPWDT1nXWybSarbIB54+vbW8KCtUND18AyZv?=
- =?us-ascii?Q?fS/xZPq7fnNfPFyFjKTtmOg3KewrvwFqWokYJTeRdaH9gqmC2VJzBbuHBa1G?=
- =?us-ascii?Q?XNW4JE9Zsj/UAMuqiYvaWVvi/ZX8ax4NnXYr6ZXuBJRG5ZvjA1xVPYdBcddX?=
- =?us-ascii?Q?CINR5Sfsaz301Mq7VS60TsXNZYW6xBJ0Fv3LRE8stDriUchNyheJVjoQ72Al?=
- =?us-ascii?Q?Ab+fddmPqfr07BIiYdPdUA5DlDmUBwISVp2tJVRoGkeOpW/ZLd4EePVmy0ju?=
- =?us-ascii?Q?Kh6Klk7mXZjEa5WE69gHYTjcFz1N6GueDkvh+17OrSEFOUaUrWE1p3aTW7Gd?=
- =?us-ascii?Q?9dNsE1sVqYf6XzQLC8Rct8Xt9n8EBYNNk3ioaphX19dIZiWvo6E5MszASAGr?=
- =?us-ascii?Q?fJoY0MIDoUzTvRhJ1jFzy1lgRp2LWhur3BebAWOGOQzAf2xh+DmtZYQ/GkWQ?=
- =?us-ascii?Q?kYx82OpJk/2EVhCedfcSI4f16W51DerZlpJ74E2ZDTCIAuqYWTlDLddFKzLb?=
- =?us-ascii?Q?B0atvzMkwPGHGwZarVAOD6zpmwj813+Qq36xM4e3tgCQNCbmBvvSSNU8L97o?=
- =?us-ascii?Q?QniMZaQgczjxUKDuDP1uyIHpKszRx6hRR8ClKOHN7AvHzgXN2FBNhs4fYZKD?=
- =?us-ascii?Q?i+QP6WznbiqovHfQuYMctCNu3hsq61rsAyyE8rxN3eh1IkvqQQWaDXVJkXXp?=
- =?us-ascii?Q?5pMJ8ivsszsucxL+1dxtOKL0we0YR9HtypwfJOUHjDeB2ELD+G/RLa8HrXhW?=
- =?us-ascii?Q?ETR5EavhfRtCrmh91d3Ugzb9305jK+jhFhG/RZ3+lgZWrJc2HBHDjmnY9QT5?=
- =?us-ascii?Q?Udyhvc3Ch09oMAszbQhyPM0vj/AzULE+uFabHqY+415VcwxNVcQQj+vhfJYX?=
- =?us-ascii?Q?6GNDiLwFxX+fvjKmmN4psL4R1nnxsqN+J4FPmePd4THVKwkNq6Oavr28HPq4?=
- =?us-ascii?Q?hHWgFyUYSfw/HTiGeWv1UF6n8IWq8BGpoEGg18y3lccO4Mw6qfr5zS/d7l4P?=
- =?us-ascii?Q?tr2WBVO6/ozyEjE9mAl82MZkQtFwiiVLNvAB32J2T7IzNm3EgfQRp0z8KKuj?=
- =?us-ascii?Q?PcBWF3fzVrucoLrrpXM44zeEnEhTX5DO97ZJHWOEE9VkSxDGZyp0jc/UidvE?=
- =?us-ascii?Q?K8t9gn5gSVNTL9amwmT7bzovZVuA6JquyDIJ1emF3BXuivmMHyIVzyx+GQg4?=
- =?us-ascii?Q?z09RQSt9henxGZqpTLgj+hm0QeBBbxYGwychHZ/Rx81atmy44bB/iIB8HMZX?=
- =?us-ascii?Q?1kCyMR18wxHj7sth4EzDRngWox8w9AMJ8KQ9Vqy1NR3xD+YvCDXNUVw/LwIs?=
- =?us-ascii?Q?FHIIryofUAKofRt4tz5VWgknn1yYUqo=3D?=
+	=?us-ascii?Q?huRs4amZVzCU/+jx/twedAXmhHU/nrxQ0UOFXgp1kF2Ci8lO8bnXMDJsJfRR?=
+ =?us-ascii?Q?eQEMw8uZ6cw+nKTQGHXOIC1VROveek9kNJTHykvlWX7VvSNJa7D/CKyq2PGZ?=
+ =?us-ascii?Q?5HxHm6WxN7T7DyiMBmcgR+MPXA1E7aaWdWDpsvm/mG4tJ13BEq9axVYToH+Z?=
+ =?us-ascii?Q?f6dBIqm4IfB7CJ/hNzbrGTUkqWtM9QtDgVHzSxYx6YRDAfDNG2ONNY+7htCe?=
+ =?us-ascii?Q?u9CmomUbBOBXlDNfrDfA19+2lHVbYVJzkqQrGrvlPtKqH9dMz3LPL2KhtMoc?=
+ =?us-ascii?Q?OM/4HwtWnKhT7obr4EWkoHyubIJhJs9q8iOLABxqmrJYCZZTZ5oWlhUm6nU4?=
+ =?us-ascii?Q?p6ZeFHQiAXn1k/qWYFFD+9NrYKOamHgoVNVDRUAGtOGqc9Ic+iEb55aaMJR/?=
+ =?us-ascii?Q?qq9N22+v6kpRjmHUJjuTqefLNU324kjLiZk6qmC99NVaXZqv4qdSGUzxlfsw?=
+ =?us-ascii?Q?859yE6ED0+g1zy+5+yQpk74pTXVKh/jrZorNam/yiS+AIBoMLfdXO0Ya09oq?=
+ =?us-ascii?Q?CaOa+wMZ+9Gxu5489pV1xzPsyDbvg3BY50t/PwCa/KhGrkBNyO8/c9RO2B9U?=
+ =?us-ascii?Q?Fr2HZseK720UXEf8nOeOvHWcPFtt/E8PFLdF7oa8+Bgo2xG1/X5oC5OAMjnU?=
+ =?us-ascii?Q?MkiU3SorkfoctfS0/WXAjNg0gwuofoi6hB4EBs7md8UJKKN2vWty4EJ4dTYj?=
+ =?us-ascii?Q?HZ+A3DUA+ihduP8B9oxeXUiNWL4uvWzfmMO5jIOHLyzrHXhcrSr8M4nOpGKi?=
+ =?us-ascii?Q?i+RIymfoetoqp6SEV/nJd7Q0avklwo26nnax5ULOcxqGvtQS1gsa146pe8IO?=
+ =?us-ascii?Q?EOsWNfkMzCWZ7GZw4VU3Lh0z4gcYYV5gAv09MGERAt4svgrx4TGBQO8oRf8A?=
+ =?us-ascii?Q?oUMACoEYsvzlSmWusJSrBYcmNP40QmEQMmCuQwuXHdVUVt2+PrFLxupmbNIg?=
+ =?us-ascii?Q?45XkUfmQwTmux1kl+8rKzI2gQJOsaSfCo9kVLxlJOXuNMs1PfqU658XRyILy?=
+ =?us-ascii?Q?03JRqc3P1TqpXXgi4IRI8hT1PnmMBarCb454o2K2a570JO9Pubbh3hwz/oqg?=
+ =?us-ascii?Q?nfiQBtjc3iO4Na5ekbj9F4kddWNXBKKavC+nfSsi55bjnDUQYq4KPqjKnuLo?=
+ =?us-ascii?Q?sU11ZMevW97mXpw9TQCj8EhfI14EQx+mgThc1NSgUTuEbSujtK4egmymzQS6?=
+ =?us-ascii?Q?THMVZ6k83On+mNK2uSGH1F3Qpplm785DKSE9fuYgdi0UzT6vlWh52sP8Zh4v?=
+ =?us-ascii?Q?CwVpJmjuoiPhXD/h6WlQmrTr7fW/2OqQIlvf1nPZezy3pc1vMFaeE0SrPAVg?=
+ =?us-ascii?Q?7amedlOqvyaFPT2iz1qdtICcqM05tFJe+sSRj05GqElX86lCx/uaR2KpTzZj?=
+ =?us-ascii?Q?dbMAW8WrJGsLsNehxIGnwaSxAambG0Pq2KpqCAKdQlilWkkg5+DL3l30Ex/W?=
+ =?us-ascii?Q?Wrij7jEQAg4Yz1Fh5wg1VnZ09FjgQdb+UmgXe67hNE7en4Vx3m4a9eYnnuXI?=
+ =?us-ascii?Q?xSZgOit0A5Yz34JmyDorpEsy0QkGvWnoE5GlbJDOkn9YJnXHuRCy7MxJKwIz?=
+ =?us-ascii?Q?WTtkeL7A0bNl9vQ3z3WhmkcPY20rSjn2Ok1HX+fILY3xsD77/notTl1EkFvA?=
+ =?us-ascii?Q?NHOoD+wum55nURWlTyICa2i0qQcu8ZLoduL3xhUC8oqoOo6XOEvnlKly4HFP?=
+ =?us-ascii?Q?/QBMzhDVbxOIIx4h8k1oYfkw/aZ09U6cE55rgZiuNkvU0gQe6HmadgP9Zeu5?=
+ =?us-ascii?Q?daJOi3D68vQNzMJE2bBVMGjwIMeO/WE=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a0d86d1-25d7-47f0-4811-08de5316b2a6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9100f69e-0a7e-4fd6-1c3d-08de5316b38c
 X-MS-Exchange-CrossTenant-AuthSource: CH0PR11MB8189.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 02:43:28.7073
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2026 02:43:30.2437
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: glTrKeDzq/Lwbgo4Adv0Gx/kdt+7Yg5/2KJj2jDIRdGSF7ZyFMQHSnsjzVFztDfm8DnKB+/vQ0mgFHfPPBo9lQx1VpREyGll+GZQH8SWowc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6yrg/Hh+6UUJazaIuA5WXR6x8hhFLjeGHna9VfqhQxnxLiDr5jtet/1x2xUQKI/AzxnbYOlLbWFoYKgBRwcaSQcJcsNLVceF0ERYCbkBeYU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR11MB8742
-X-Authority-Analysis: v=2.4 cv=d/z4CBjE c=1 sm=1 tr=0 ts=696702d3 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=d/z4CBjE c=1 sm=1 tr=0 ts=696702d4 cx=c_pps
  a=j0PM1b0aAxJgDjDzr34Dzg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=t7CeM3EgAAAA:8 a=8uAe-gtA59Rue9El2esA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE0MDAxOSBTYWx0ZWRfXx9v1x060IuTY
- +IsZfCYjGhAW5xqvA8xZF/lFm0E6BzN9n8U3y6dJU0vJxSY+H5odJauolsUjkliJtrIOuZucNaQ
- UqlUwy7L1Q9yxr2VR11XISrnHvJ+IHfL3IHdsxKsiT0jFO+ppf0ZVA8ryJ/yZQhu7VSBMwo1rUF
- gK0+kEPumC/tDiPneOjwQKgFv0arnF1JAV8xfX5ceys7sqMaZnbMnRPeFKkXYlNCFH/HNAYiXF3
- +cRXfV4vPYWCgmjd9M09XCfCvAMmaajeTobptV+xxdGbBx+t0VgKSL6Vn+LI5Pt9+LJiXsRZp+W
- 9LIRgP2P5QcyJZD4G+ry4agK9nkjjETWIkWpW9KE+EdIzUuOeb6Z/RDNYNklYQjupMuVMcP1jmC
- GEWwVfVuKd33gdrxajRxPc3bfXxPJhBUYySNePIRWa409cW2KE43c5k6vyIuNoN/efcU+PyCXFi
- aqBE0d5jDHcibx6DxwQ==
-X-Proofpoint-ORIG-GUID: 4DdZNImR2qBJDMI2bhD5qQ__zjp3YDUU
-X-Proofpoint-GUID: 4DdZNImR2qBJDMI2bhD5qQ__zjp3YDUU
+ a=t7CeM3EgAAAA:8 a=vh6ZLsrIWgAaeWovB90A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTE0MDAxOSBTYWx0ZWRfXz9GtFhKa244I
+ kMdDTSbzco3MUUucUHeV2/BOEk7ZygUKSzmhgzcvF6msqq+hq06K1BY/zGb73mGS9H5atpGIgQf
+ G6XTB/HUBIMr8sdsS7d7q2r0N4O8484xWFVePnK+v+TYS6GfKqo/vc2sHSgzpAhEQg8kYf+SUnP
+ R2ecGgdEUmy/+ESU4NKAH/mptNAtVR0/bdmC7+AF0KFbI5Q4nLRFZz/fdrNqOtgNBEldwZBFvcu
+ QBMLfsCicmjYnMXAfVISCLUSjfWJ9r+YioE79LhkYXMz5qGho/U31GOTn6YIlxwcebJnCXX18lp
+ jY4LO1rNjjiUJYKZTdDmrhQvCUe6MeDSPifk+E1vjdlWkDG1ghB3Y09cvFoPreC10QNVWvviiHx
+ ydf1/s20ySRq5iuad+zvXlqNvfKdKoduQk3fSfHz0PKZ7On+WaqFxbozQgkcQpevNUQMGwZ+/IR
+ m/vaxrTQdqkU63UkAaQ==
+X-Proofpoint-ORIG-GUID: DbJ50Sstgs5_szzZYwgN9CaXeifgZvoe
+X-Proofpoint-GUID: DbJ50Sstgs5_szzZYwgN9CaXeifgZvoe
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.100.49
  definitions=2026-01-14_01,2026-01-09_02,2025-10-01_01
@@ -163,88 +166,122 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 02:43:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123443
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123444
 
 From: Haixiao Yan <haixiao.yan.cn@windriver.com>
 
-Fix the following error introduced by CVE-2024-27351.patch and
-CVE-2025-32873.patch:
+Fix the following error introduced by CVE-2024-42005.patch:
 
-NameError: name '_lazy_re_compile' is not defined
+AttributeError: module 'django.db.models' has no attribute 'JSONField'
+
+The patch assumes JSONField is available from django.db.models, which
+is not the case for this Django version.
+
+Revert the changes in the following files to restore compatibility:
+tests/expressions/models.py
+tests/expressions/test_queryset_values.py
 
 Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 ---
-v2: update patch Upstream-Status 
+v2: update patch Upstream-Status
 
- .../Fix-undefined-_lazy_re_compile.patch      | 49 +++++++++++++++++++
+ ...ix-missing-JSONField-in-django.db.mo.patch | 77 +++++++++++++++++++
  .../python/python3-django_2.2.28.bb           |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django/Fix-undefined-_lazy_re_compile.patch
+ 2 files changed, 78 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django/Fix-missing-JSONField-in-django.db.mo.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/Fix-undefined-_lazy_re_compile.patch b/meta-python/recipes-devtools/python/python3-django/Fix-undefined-_lazy_re_compile.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django/Fix-missing-JSONField-in-django.db.mo.patch b/meta-python/recipes-devtools/python/python3-django/Fix-missing-JSONField-in-django.db.mo.patch
 new file mode 100644
-index 000000000000..226aaea07a84
+index 000000000000..95a31305a40b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/Fix-undefined-_lazy_re_compile.patch
-@@ -0,0 +1,49 @@
-+From f89fec5d58bc1684478fe23c29a34f17ca529b1a Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-django/Fix-missing-JSONField-in-django.db.mo.patch
+@@ -0,0 +1,77 @@
++From c019f2cb6fbe266e09c71cd890a22cbce3769b05 Mon Sep 17 00:00:00 2001
 +From: Haixiao Yan <haixiao.yan.cn@windriver.com>
-+Date: Tue, 13 Jan 2026 14:14:02 +0800
-+Subject: [PATCH] python3-django: Fix undefined _lazy_re_compile
++Date: Tue, 13 Jan 2026 14:44:32 +0800
++Subject: [PATCH] python3-django: Fix missing JSONField in django.db.models
 +
-+Fix the following error introduced by CVE-2024-27351.patch and
-+CVE-2025-32873.patch:
++Fix the following error introduced by CVE-2024-42005.patch:
 +
-+NameError: name '_lazy_re_compile' is not defined
++AttributeError: module 'django.db.models' has no attribute 'JSONField'
 +
-+Upstream-Status: Inappropriate [Fix the regression in the previous fix for CVE-2024-27351 and CVE-2025-32873]
++The patch assumes JSONField is available from django.db.models, which
++is not the case for this Django version.
++
++Revert the changes in the following files to restore compatibility:
++tests/expressions/models.py
++tests/expressions/test_queryset_values.py
++
++Upstream-Status: Inappropriate [Fix the regression in the previous fix for CVE-2024-42005]
 +
 +Signed-off-by: Haixiao Yan <haixiao.yan.cn@windriver.com>
 +---
-+ django/utils/html.py | 2 +-
-+ django/utils/text.py | 4 ++--
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
++ tests/expressions/models.py               |  7 -------
++ tests/expressions/test_queryset_values.py | 17 ++---------------
++ 2 files changed, 2 insertions(+), 22 deletions(-)
 +
-+diff --git a/django/utils/html.py b/django/utils/html.py
-+index 858a517d92f8..6eb8bc3dbf38 100644
-+--- a/django/utils/html.py
-++++ b/django/utils/html.py
-+@@ -38,7 +38,7 @@ _html_escapes = {
-+ }
++diff --git a/tests/expressions/models.py b/tests/expressions/models.py
++index fb8093849cba..33f7850ac16e 100644
++--- a/tests/expressions/models.py
+++++ b/tests/expressions/models.py
++@@ -97,10 +97,3 @@ class UUID(models.Model):
 + 
-+ # HTML tag that opens but has no closing ">" after 1k+ chars.
-+-long_open_tag_without_closing_re = _lazy_re_compile(r"<[a-zA-Z][^>]{1000,}")
-++long_open_tag_without_closing_re = re.compile(r"<[a-zA-Z][^>]{1000,}")
++     def __str__(self):
++         return "%s" % self.uuid
++-
++-
++-class JSONFieldModel(models.Model):
++-    data = models.JSONField(null=True)
++-
++-    class Meta:
++-        required_db_features = {"supports_json_field"}
++diff --git a/tests/expressions/test_queryset_values.py b/tests/expressions/test_queryset_values.py
++index bd52b8efc194..0804531869d9 100644
++--- a/tests/expressions/test_queryset_values.py
+++++ b/tests/expressions/test_queryset_values.py
++@@ -1,8 +1,8 @@
++ from django.db.models.aggregates import Sum
++ from django.db.models.expressions import F
++-from django.test import TestCase, skipUnlessDBFeature
+++from django.test import TestCase
++ 
++-from .models import Company, Employee, JSONFieldModel
+++from .models import Company, Employee
 + 
 + 
-+ @keep_lazy(str, SafeText)
-+diff --git a/django/utils/text.py b/django/utils/text.py
-+index c474d5681eeb..e104b60c4f6c 100644
-+--- a/django/utils/text.py
-++++ b/django/utils/text.py
-+@@ -27,8 +27,8 @@ def capfirst(x):
-+ # text with only open brackets "<<<...". The class below provides the services
-+ # and correct answers for the use cases, but in these edge cases does it much
-+ # faster.
-+-re_notag = _lazy_re_compile(r"([^<>\s]+)", re.S)
-+-re_prt = _lazy_re_compile(r"<|([^<>\s]+)", re.S)
-++re_notag = re.compile(r"([^<>\s]+)", re.S)
-++re_prt = re.compile(r"<|([^<>\s]+)", re.S)
++ class ValuesExpressionsTests(TestCase):
++@@ -36,19 +36,6 @@ class ValuesExpressionsTests(TestCase):
++         with self.assertRaisesMessage(ValueError, msg):
++             Company.objects.values(**{crafted_alias: F("ceo__salary")})
 + 
-+ 
-+ class WordsRegex:
++-    @skipUnlessDBFeature("supports_json_field")
++-    def test_values_expression_alias_sql_injection_json_field(self):
++-        crafted_alias = """injected_name" from "expressions_company"; --"""
++-        msg = (
++-            "Column aliases cannot contain whitespace characters, quotation marks, "
++-            "semicolons, or SQL comments."
++-        )
++-        with self.assertRaisesMessage(ValueError, msg):
++-            JSONFieldModel.objects.values(f"data__{crafted_alias}")
++-
++-        with self.assertRaisesMessage(ValueError, msg):
++-            JSONFieldModel.objects.values_list(f"data__{crafted_alias}")
++-
++     def test_values_expression_group_by(self):
++         # values() applies annotate() first, so values selected are grouped by
++         # id, not firstname.
 +-- 
 +2.34.1
 +
 diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index 24b86a3e262b..f2bb1de4f247 100644
+index f2bb1de4f247..8e826b9b619b 100644
 --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -32,6 +32,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2024-39330.patch \
+@@ -33,6 +33,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
              file://CVE-2025-32873.patch \
              file://CVE-2025-64459.patch \
-+            file://Fix-undefined-_lazy_re_compile.patch \
+             file://Fix-undefined-_lazy_re_compile.patch \
++            file://Fix-missing-JSONField-in-django.db.mo.patch \
             "
  
  SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
