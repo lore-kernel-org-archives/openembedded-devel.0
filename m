@@ -2,60 +2,59 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8326D39015
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 20:27:07 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20165.1768422426892060717
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2B27D3901A
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 20:42:27 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20555.1768423338394147940
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 12:27:06 -0800
+ Wed, 14 Jan 2026 12:42:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VGorj0WX;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7c95936e43cso98029a34.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 12:27:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YwZP4+up;
+ spf=pass (domain: gmail.com, ip: 209.85.167.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-450be85b7d9so143916b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 12:42:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768422426; x=1769027226; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768423337; x=1769028137; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZLzM88W/pqnMNtw+J6mV5iJUdWeyaPDkiGDhDXcLU60=;
-        b=VGorj0WXBdW7cdUCfP0Te/a8c8Txs57GHJoPhschlGm4VEcxwm9IoH+5minzsSe6sV
-         A9oBp4As0MsfW4QctYE8TZF9LEvKREOUNNZJ44Q5ifNLwW3iy9pRO/KSJUm9otZs1ORF
-         zNzkVwtdH9UQUK5caYxZbtEIbeufll0+0bT8NFP14O9QMucI7G5xQUf7nf/G/jZuvDHv
-         OwauDQ4trdEhhnjlvCBIAdJPcOsnr+qXIyk+660gHevscm/PX6Gly0wXrbRrIciD+Sc4
-         bCSNLhvAvFewIqYo/LTCBCLMJd/2LaGHPeG7SXTfQ1PFKtn6NQbdVx5rtsLoLYanNqV+
-         axbQ==
+        bh=w15dRbGvAaEWlp7N+lGFdLT+sRPYXyJ2iK8x5oZTXSY=;
+        b=YwZP4+upwrzEINckt0teKD1kDXpBzSL9sdYv/RX7FVgEBRpGC+aZcTanFBoGpnbv/R
+         3vd63iG0OX3fAU0L4HopmphUcD9Xpo3HWdhG3Pi37VZSCFmypEngZaqIHV8E7lf3e3Ve
+         s4pQsOpMj/1JX1aJgXplMEV3JAixL4932Mr0L8h7WZ9ZOR41ejRlEerNcqGdYc6kyIDw
+         SRjrnStdXEs2Fm1tMwLo3ISVPymf7vzJ5HhERi/jB0swYoCOHyz8tRNHj8Kq9Po5hJvD
+         HdJNuydQKFBfY5ewntw+I8o2jBu3ozjiIP9r585Ow5w/i8Cfhybi4Og6lhuMg4fAAEgB
+         DtdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768422426; x=1769027226;
+        d=1e100.net; s=20230601; t=1768423337; x=1769028137;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ZLzM88W/pqnMNtw+J6mV5iJUdWeyaPDkiGDhDXcLU60=;
-        b=D28VKZMdU4TLXvnDpdVJPRx+DsYgNzvsWBzydNURdpwD8zPATwlFsRoBchxKLDjofg
-         fJUBTBwTSoHjqdHRJd4zL/YA1Ipvbgw4YqMoXLLQ0mkFbul/IPJVe5dKD0sYKLzAqwbs
-         ZsP+AASnb4YiNLupYhONpDoUIxna+ivG7R+bEuNCV7XS9O1HPAODSrstiJFTnZKct3LD
-         X9ATdY1ypa4lAmqb+ARdufW+UCMy56a9xM6IvOrnMDMwAecVmcIdhyYLy0ekg65tbSaR
-         0CYBJw2UyBu167QISYCjUb8tSqbQMM1FTpRGIVbr2yFEXtE8XU+WapkKrUjO6+JtpEK2
-         aRBQ==
-X-Gm-Message-State: AOJu0YxzKGfym7Ch5Egz4/1Pz3xMoqlSmoAeP5Al2JtiFLmrqlhnjwJZ
-	dA0X0QC0aYgLTXaN0slPaJKECbx7hTKZKzzm6La/9Z3NQjT9ScxLmTwW8Y/S4y7TiPyHUp5fupp
-	YZ0wsKEdH1I5a2HH2rszGftM22I8xUiyt1g==
-X-Gm-Gg: AY/fxX5IxPQFoSm2d0KCi9Gyl7EVonjC2Yx66A4DehaqZuFy+RK4RFgztXQ3/q+86O2
-	ix6xIUb1qdM3b3kv1eIq0hDBaa1HP0CBmO52qqOIAx/9TKvVfrCIQb9D5tpdjjZGY0IMGi5ME0+
-	+6TKpkNYGa7bMyiAgRtV5vx4S4ynsRLBGhO01lMMkooEG9vF/Y5RtmwimL7WDGk01TbZ9HDh75f
-	moD1CVcolghGyMTc1L7e964r/TCENyHcHcKRPf1JmAfE91EwadnUn8BS4VxTCnNXZR0RqPWfbXq
-	CVVlVbs=
-X-Received: by 2002:a05:6808:8482:b0:45c:7306:505e with SMTP id
- 5614622812f47-45c730658fbmr1658150b6e.63.1768422425958; Wed, 14 Jan 2026
- 12:27:05 -0800 (PST)
+        bh=w15dRbGvAaEWlp7N+lGFdLT+sRPYXyJ2iK8x5oZTXSY=;
+        b=RRfxZYzYvjoySw6dYnLvRrZoJ8ibgqiEFFY7sa5K3/sfsduS+Augn9jqlj+2yma/1j
+         6hi7fFgSj+H4yJ/rSZ1o4p9f3xw7ksgSeRaQsx5lv8doZSxVd7GRWkKpehZZfBj+Oeue
+         aqGE6bgZxqZ8nQnL7oTRhmTZRZ2bj0eOYLDlQkRWc7ta2RQe7VwVN2fsu6dFtsAUoCtL
+         7Om2t5FNQwIHc4taYUetKqjpe/MZM8ndnvHHyO2/g7fb2+SXsf1DR/y+ggxSlH2Aue9k
+         jBCR/lyOFB00ePOYxmbiP1+0XP+yVs9OaBMnIMY3hIFIeOfMCAjDKBz+gH80pZ2voaDz
+         AWbw==
+X-Gm-Message-State: AOJu0YyRsSTmkLMrRdqxD7kEEH2v64uItKEkkxfY6r9STOLo1DU/OLVN
+	FYJlTW6yixqBBPFjlJXzwIR+7rdrvNIaGCzZM3WOiJRUhHFtSYs+r4FDKNFVuht7Lf3mQ9ICNfT
+	PWr4o5Ge6R+QE45MOtGA0ZBWsUccLXer42rLr
+X-Gm-Gg: AY/fxX7iNPkYE6UI2mNokIT2MUMwgX5yImGGT65Ma42F18jkFAe/LclD+3GCHXANk7W
+	BhwybKiPK0JA6Ex+/EJbrKeeo4NCzb/BK0UvPUW/91deEhrzyiglNEc56YDH7ckQi2rQ/exfJrF
+	ssnYlD1lqDMBS+wRJl3V35BNHQbGEObVLNYDtOH3WHCRc4hC5nKGsax9sM/g0bvQDhrfOUliNVu
+	1LfT2xJLw/G396hspAA1xHa43flNXIufwF90cKNSX0i2fInfmr5wZfZs80K9lDnbkpcc5qN
+X-Received: by 2002:a05:6808:13d2:b0:45a:6f18:8c74 with SMTP id
+ 5614622812f47-45c71521684mr2640380b6e.45.1768423337476; Wed, 14 Jan 2026
+ 12:42:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com>
-In-Reply-To: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com>
+References: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com> <20260114172553.1241309-2-adam.duskett@amarulasolutions.com>
+In-Reply-To: <20260114172553.1241309-2-adam.duskett@amarulasolutions.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 15 Jan 2026 09:26:54 +1300
-X-Gm-Features: AZwV_QinoHNtBKYO08uZwMprJb2QdCXppUOaakhjro4lCiXrsVw8RP6fFd6OJzM
-Message-ID: <CADySD0Eh9Zcp=OQDSwbVWDswDhmJs=OmfqozY9KLiF3fZV2bRw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/2] [meta-oe] libtsm: add recipe for kmscon dependency
+Date: Thu, 15 Jan 2026 09:42:06 +1300
+X-Gm-Features: AZwV_Qgs_oAouQ0nUjxURSt7lq99rPIplYgqXolPQo9IvBtRv190s3oKifpMQNQ
+Message-ID: <CADySD0FT4tcpT0FKL=JmBvu=71GcBHHZKoMAMLhWxmtU2UYk4Q@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/2] [meta-oe] kmscon: Add recipe
 To: adam.duskett@amarulasolutions.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -63,78 +62,133 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 20:27:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123485
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 20:42:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123486
 
 On Thu, Jan 15, 2026 at 7:16=E2=80=AFAM Adam Duskett via
 lists.openembedded.org
 <adam.duskett=3Damarulasolutions.com@lists.openembedded.org> wrote:
 >
+> Provide sane defaults that do not have dependencies, such as
+> a dummy and terminal session support and basic fbdev support.
+>
+> kmsconvt@.service must be added separatly or else
+> do_rootfs fails with the following error:
+>
+> ```
+> do_rootfs: Postinstall scriptlets of ['kmscon'] have failed. If the inten=
+tion
+> is to defer them to first boot, then please place them into
+> pkg_postinst_ontarget:${PN} (). Deferring to first boot via 'exit 1' is n=
+o
+> longer supported.
+> ```
+>
 > Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
 > ---
->  .../recipes-graphics/libtsm/libtsm_4.3.0.bb   | 35 +++++++++++++++++++
->  1 file changed, 35 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
+>  .../recipes-graphics/kmscon/kmscon_9.2.1.bb   | 63 +++++++++++++++++++
+>  1 file changed, 63 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
 >
-> diff --git a/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb b/meta-oe/re=
-cipes-graphics/libtsm/libtsm_4.3.0.bb
+> diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb b/meta-oe/re=
+cipes-graphics/kmscon/kmscon_9.2.1.bb
 > new file mode 100644
-> index 0000000000..a6c12b71d9
+> index 0000000000..9f19bd18e6
 > --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
-> @@ -0,0 +1,35 @@
-> +SUMMARY =3D "Terminal Emulator State Machine"
+> +++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+> @@ -0,0 +1,63 @@
+> +SUMMARY =3D "Simple terminal emulator based on linux kernel mode setting=
+ (KMS)."
 > +DESCRIPTION =3D "\
-> +    TSM is a state machine for DEC VT100-VT520 compatible terminal emula=
-tors. \
-> +    It tries to support all common standards while keeping compatibility=
- to \
-> +    existing emulators like xterm, gnome-terminal, konsole, etc. \
-> +    TSM itself does not provide any rendering nor window management. It =
-is a \
-> +    simple plain state machine without any external dependencies. It can=
- be \
-> +    used to implement terminal emulators, but also to implement other \
-> +    applications that need to interpret terminal escape sequences. \
+> +    Kmscon is a simple terminal emulator based on linux kernel mode sett=
+ing \
+> +    (KMS). It is an attempt to replace the in-kernel VT implementation w=
+ith \
+> +    a userspace console. \
 > +"
-> +HOMEPAGE =3D "https://github.com/kmscon/libtsm"
-> +BUGTRACKER =3D "https://github.com/kmscon/libtsm/issues"
-> +CVE_PRODUCT =3D "libtsm"
-> +SECTION =3D "libs"
+> +HOMEPAGE =3D "https://github.com/kmscon/kmscon"
+> +BUGTRACKER =3D "https://github.com/kmscon/kmscon/issues"
+> +CVE_PRODUCT =3D "kmscon"
 > +
-> +LICENSE =3D "MIT & LGPL-2.1-or-later"
-> +LIC_FILES_CHKSUM =3D "\
-> +    file://COPYING;md5=3D69e8256cdc4e949f86fedf94b1b320b4 \
-> +    file://LICENSE_htable;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
+> +SECTION =3D "graphics"
+> +
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6d4602d249f8a3401040238e98367=
+d9e"
+> +
+> +DEPENDS =3D "\
+> +    libtsm \
+> +    libxkbcommon \
+> +    udev \
 > +"
 > +
-> +DEPENDS =3D "xkeyboard-config"
-> +
-> +SRC_URI =3D "git://github.com/kmscon/libtsm;branch=3Dmain;protocol=3Dhtt=
+> +SRC_URI =3D "git://github.com/kmscon/kmscon;branch=3Dmain;protocol=3Dhtt=
 ps"
 
-please also include tag=3Dv{PV} in the SRC_URI
+please include tag=3Dv{PV} in the SRC_URI
 
-> +SRCREV =3D "9d2817b727f61c09e19994b2431af716652f330b"
+> +SRCREV =3D "7d46650dbb0826f9b89de42f879be879391c14fd"
 > +
-> +inherit meson pkgconfig
+> +inherit meson pkgconfig systemd
 > +
-> +EXTRA_OEMESON:append =3D " \
+> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}=
+"
+> +
+> +PACKAGECONFIG[backspace_sends_delete] =3D "-Dbackspace_sends_delete=3Dtr=
+ue, -Dbackspace_sends_delete=3Dfalse"
+> +PACKAGECONFIG[font_pango] =3D "-Dfont_pango=3Denabled, -Dfont_pango=3Ddi=
+sabled, pango"
+> +PACKAGECONFIG[multi_seat] =3D "-Dmulti_seat=3Denabled, -Dmulti_seat=3Ddi=
+sabled, systemd"
+> +PACKAGECONFIG[opengl] =3D "-Drenderer_gltex=3Denabled -Dvideo_drm3d=3Den=
+abled, -Drenderer_gltex=3Ddisabled -Dvideo_drm3d=3Ddisabled, libdrm virtual=
+/egl virtual/libgles2 virtual/libgbm"
+> +PACKAGECONFIG[video_drm2d] =3D "-Dvideo_drm2d=3Denabled, -Dvideo_drm2d=
+=3Ddisabled, libdrm"
+> +
+> +EXTRA_OEMESON =3D "\
+> +    -Delogind=3Ddisabled \
 > +    -Dextra_debug=3Dfalse \
+> +    -Dfont_unifont=3Denabled \
+> +    -Dsession_dummy=3Denabled \
+> +    -Dsession_terminal=3Denabled \
 > +    -Dtests=3Dfalse \
-> +    -Dgtktsm=3Dfalse \
+> +    -Dvideo_fbdev=3Denabled \
 > +"
 > +
-> +BBCLASSEXTEND =3D "native nativesdk"
+> +SYSTEMD_SERVICE:${PN} =3D "kmscon.service"
+
+can use {BPN}.service
+
+> +FILES:${PN} +=3D "${systemd_system_unitdir}/kmsconvt@.service"
+> +
+> +do_install:append() {
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false=
+', d)}; then
+> +        install -d ${D}${sysconfdir}/systemd/system
+> +        ln -sf ${systemd_system_unitdir}/kmsconvt@.service \
+> +            ${D}${sysconfdir}/systemd/system/autovt@.service
+> +    fi
+> +
+> +    if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', =
+d)}; then
+> +        sed -e "s@#drm@drm@g" \
+> +            -e "s@#hwaccel@hwaccel@g" \
+> +            -e "s@#render-engine=3Dgltex@render-engine=3Dgltex@g" \
+> +            -i ${D}${sysconfdir}/kmscon/kmscon.conf
+> +    fi
+> +}
+> +
+> +RDEPENDS:${PN} =3D "xkeyboard-config"
 > --
 > 2.52.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#123482): https://lists.openembedded.org/g/openembedde=
-d-devel/message/123482
-> Mute This Topic: https://lists.openembedded.org/mt/117265880/3619737
+> View/Reply Online (#123483): https://lists.openembedded.org/g/openembedde=
+d-devel/message/123483
+> Mute This Topic: https://lists.openembedded.org/mt/117265881/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nkur.tyagi85@gmail.com]
