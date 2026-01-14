@@ -2,111 +2,112 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 818A1D31A15
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F1C0D31A1E
 	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 07:34:52 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5343.1768376084869099734
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5446.1768376085697964122
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 23:34:45 -0800
+ Tue, 13 Jan 2026 23:34:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cwKxnT15;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47a95efd2ceso70521965e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 23:34:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KlKhTZe6;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-42fbc544b09so6611374f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 23:34:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768376083; x=1768980883; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768376084; x=1768980884; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=n1DlyL9Dz1KaMs3hdobXrA801EK6OwDvgNly8LXiQqs=;
-        b=cwKxnT150c7hr4B2n/fKkCH6OQucRC1H+YG+A2oSrbOpcqXjA33B7Dsin03tzaJ1wf
-         PBJPENheoGQYaU9BI0/HI3tAB7XPPBjUJxUmQ0DhKDdOKXqz4OcTVIe9ylkXoTeRxEdq
-         VkUwuZc0qf6YfUq69Mfdko44PXzGvJXiSzu7VKJdEeq9A76KLdDJBMukByjPmtaK5Wba
-         DcteNfwDWPD5q1aN+J+oxfKZYGl7lU754wR0YrYRHF8u5cPjo4EsPfVBGSe6AxpIGT+d
-         kgzRxdMzw/TlfYtpcQJY7D9VZsBu7ZSbCoLE/u6jBngvKsx1W8vWS3wJiOAP0PGPNhO1
-         0SEw==
+        bh=XyzDmwvOVn/fGHblWMbDJERbE7y/n4Vj+nM+UU3E02w=;
+        b=KlKhTZe6gG3O8ruyf75WuTKJbhU2sB/r2AcKNRadxpgyj9Qt5vCHRqzbB564YlDFuM
+         YRSulG+l1EcvRfLbsHn+lkU3ohmQhec5DQJSOM9yGM9uK9pVwr01Or3xia+FnJ5ooBoV
+         6Jz1Zr9QeiymxGP6RsjYZFbZrUzdh7Y/1hmFlvNIhYIXSgx0M4l6yn9KY93y4roQAePr
+         YmcaE+g5GopvxOySr5UhDydd0r4sgx1D6brrtrtQcBNKVhgPXdYW0ApvO/XS9IPod7AN
+         dtBZLWRdHfwsWR2Sst4uw5B2NMFRtsajHKUcGq8HEXpgKY1YGToVzyOiai0XE15/e1h9
+         s/Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768376083; x=1768980883;
+        d=1e100.net; s=20230601; t=1768376084; x=1768980884;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=n1DlyL9Dz1KaMs3hdobXrA801EK6OwDvgNly8LXiQqs=;
-        b=tdeja5RSzjzjWQBjSSbmfFRFw82+DP1/lkt45/rLyIsnCxGWB8aDB1Qu8siBO4VS5Y
-         uI+QDVcevyqkaLH0YcsUvQ8Z9j95md1P5s4VSVcMgr1RTa+5DrLd9D7atUOgYf7iiI9h
-         ROTWZ9oJEjU4yUYhFJCHA6slbKaUp+9+3ewqk7b9iSA0aO7QF9sR78aPrqBtqFLPC2Eb
-         xbKZpCarQhoXWU2LrJpE9zHarmbg1mqpoI+/EN9OdMEuDJEMb/QFwtKE71ZHiDZpG8sZ
-         4jCcPCsl6N8RGEOlpTUgZgtbRCvP4BeWwfhQ91KkiFcuAwhsjZBeBkaqiI7UfIra08pn
-         QgBA==
-X-Gm-Message-State: AOJu0Yzxs6lCEBikIzDRCXMln7+54lSNMV6mt8YZOGc6BPEcNsKgq2qv
-	JimQJIgGy1eaupuuMdU/ocT/ipF6ZBi8JdvnunROyB7xj9uA2axtX/pt2a/zNA==
-X-Gm-Gg: AY/fxX7yPLwPGHtqD7+2jFHcqJMbvsxjapq2dfYVEv+L+bdE3AQahzL09diIlS44ySw
-	uBcBG2U1UJTrWg71Vi8JIRoBMus7JCaSRREEdDiR+zvR2xE92n1KdEO2eIj5insTaeqYWXrBdVJ
-	CxDJGS95MUKEFhO0FOo7f5WItioo2qPCmig7XjrhW3CM2qe/W3O2X6vaDKCx75pLlysa4qyurXR
-	xRpWffHCrNtSNIsmgGWlus5LaOc3Byc3ig55Vv9yGMqQRPs+h3ySpvmzs7hsSG+yWeqk4lqWhYX
-	uVToDHTyaZIQLDSPGHFWyxp8DW3ctSja1bQFfWOAnJzRzeJmjDcKr0jaO7Kn/tBuZPT708VzJBF
-	oIV6iqRkxA4+V3j1FBhDT5Gb5NqBZOo1NQXv8kBfTrgln+nQb8yqAw8T/PIJrvphAhYneF6PKHH
-	AsT+i9d6d5
-X-Received: by 2002:a5d:5f43:0:b0:431:1ae:a3ca with SMTP id ffacd0b85a97d-4342d389557mr1227688f8f.11.1768376082983;
-        Tue, 13 Jan 2026 23:34:42 -0800 (PST)
+        bh=XyzDmwvOVn/fGHblWMbDJERbE7y/n4Vj+nM+UU3E02w=;
+        b=dcISGOux/b1GWR4+E89tXNRtk3lcuyIN091fyki91YomprHRQUSXpTiXf2pqRymrJH
+         J13YzqXXFK7lF4KYjseq6c5Nb5kOEtu5oVjzrtvMirBErs02qw5nvqZi1HczNQSgooDu
+         xq6B7b8zbFC89yoYuH6+MIUcOV0as6LYhcwSAIIURsl36mXynXfnKENQg1AZ80bKFaN0
+         nqIanFcH44mEyNYakwv/ymlyzLruT65w/4bTTNgR7ncd7gRvRv8iHfQ6+Z8hYi/YCI72
+         FHs+gRy/r2uLgPXsdaj4aYm+auCuMaJTqxMBPHyTkZJfPYqpDznnorrSrJV+WUTQgKtz
+         h1Qw==
+X-Gm-Message-State: AOJu0Yx/buqEpaMpzsSvozzxZslS0z/UU2YGV/a1+Mj990KIYGvPU2DI
+	8XmmCsVD/Tf2lrD8EFGgqQZjc9DJ3nuJKwYC2sCpfcWlBp23lor5QXVLwto/DQ==
+X-Gm-Gg: AY/fxX5d7nTGo02dZNbcNCGIdVB07TVrwojHD1Z2xh9O9LOMAp3YHWXvFV/nCScD/cv
+	gYPOLzROPyDFr2n8yVgcyP2o4dqnH6TzdBRD/rr6eT+DKIx0bsXFxixnpDeI6nZTKM47VNYtvx3
+	PFYFxGAdp6f4YWT9fqGslUqg585EKy0WSfDE2OmD+Wtqq3HI5HaJBenz322Rw6AM8lqNx2uoass
+	FezeoATWTFp07euVc/RwVz7SP3qkK0ZPJXiBtzau3F9q+Jxn2HJBnwzbtSe6GkU8vSpM8o6fuPq
+	tQfB/OWcIZtacCPOCEC/pC6QyYiN7M4vBlhdLh1NMxw0Q9zAnLSDjXUcJ1FVJ88zUPzlG0Dkln7
+	uVmlyh0WdZIGcbPELXegcj0KVOAQu4djhooHW6NuL6Jf0juKnblv0aSi9JP3nw0VZx+9JPIxC14
+	/eWu/1XArf
+X-Received: by 2002:a5d:584e:0:b0:430:f6bc:2f8a with SMTP id ffacd0b85a97d-4342c553620mr1749223f8f.47.1768376084001;
+        Tue, 13 Jan 2026 23:34:44 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5df96asm47598289f8f.28.2026.01.13.23.34.42
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5df96asm47598289f8f.28.2026.01.13.23.34.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Jan 2026 23:34:42 -0800 (PST)
+        Tue, 13 Jan 2026 23:34:43 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 2/5] python3-django: fix intendation error in CVE patch
-Date: Wed, 14 Jan 2026 08:34:36 +0100
-Message-ID: <20260114073440.210915-2-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 3/5] python3-django: fix CVE-2023-36053 patch
+Date: Wed, 14 Jan 2026 08:34:37 +0100
+Message-ID: <20260114073440.210915-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260114073440.210915-1-skandigraun@gmail.com>
 References: <20260114073440.210915-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 07:34:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123447
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123448
 
 This change is for python3-django_2.2.28.
 
-This patch contains an incorrect intendation, making the tests fail.
-This change fixes that.
+The patch was accidentally backported incorrectly. The patch in general
+introduces a field-length restrictrion on the email input fields, however
+the patch was backported in a way that the restriction was applied on
+file input fields instead of email fields.
+
+This change amends the patch in a way to restrict the email field.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python/python3-django/CVE-2024-41991.patch | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ .../python/python3-django/CVE-2023-36053.patch       | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2024-41991.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2024-41991.patch
-index c050a4ad38..057d89ec18 100644
---- a/meta-python/recipes-devtools/python/python3-django/CVE-2024-41991.patch
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2024-41991.patch
-@@ -95,15 +95,15 @@ index 5abab8d..1956655 100644
-              ),
-              ('foo@example.com', '<a href="mailto:foo@example.com">foo@example.com</a>'),
-          )
--+            (
--+                "test@" + "한.글." * 15 + "aaa",
--+                '<a href="mailto:test@'
--+                + "xn--6q8b.xn--bj0b." * 15
--+                + 'aaa">'
--+                + "test@"
--+                + "한.글." * 15
--+                + "aaa</a>",
--+            ),
-++        (
-++            "test@" + "한.글." * 15 + "aaa",
-++            '<a href="mailto:test@'
-++            + "xn--6q8b.xn--bj0b." * 15
-++            + 'aaa">'
-++            + "test@"
-++            + "한.글." * 15
-++            + "aaa</a>",
-++        ),
-          for value, output in tests:
-              with self.subTest(value=value):
-                  self.assertEqual(urlize(value), output)
+diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2023-36053.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2023-36053.patch
+index 2ad38d8e95..c4a6bb0ef2 100644
+--- a/meta-python/recipes-devtools/python/python3-django/CVE-2023-36053.patch
++++ b/meta-python/recipes-devtools/python/python3-django/CVE-2023-36053.patch
+@@ -61,16 +61,16 @@ diff --git a/django/forms/fields.py b/django/forms/fields.py
+ index a977256..f939338 100644
+ --- a/django/forms/fields.py
+ +++ b/django/forms/fields.py
+-@@ -542,6 +542,9 @@ class FileField(Field):
+-     def __init__(self, *, max_length=None, allow_empty_file=False, **kwargs):
+-         self.max_length = max_length
+-         self.allow_empty_file = allow_empty_file
++@@ -523,6 +523,9 @@ class EmailField(CharField):
++     default_validators = [validators.validate_email]
++
++     def __init__(self, **kwargs):
+ +        # The default maximum length of an email is 320 characters per RFC 3696
+ +        # section 3.
+ +        kwargs.setdefault("max_length", 320)
+-         super().__init__(**kwargs)
++         super().__init__(strip=True, **kwargs)
++
+ 
+-     def to_python(self, data):
+ diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
+ index 6f76d0d..3a888ef 100644
+ --- a/docs/ref/forms/fields.txt
 
