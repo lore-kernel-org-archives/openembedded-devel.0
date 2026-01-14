@@ -1,97 +1,143 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF59CD39014
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 19:50:07 +0000 (UTC)
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19296.1768420197456839800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8326D39015
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 20:27:07 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20165.1768422426892060717
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 11:49:57 -0800
+ Wed, 14 Jan 2026 12:27:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jdheDtDN;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-78e7ba9fc29so1240767b3.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 11:49:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VGorj0WX;
+ spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7c95936e43cso98029a34.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 12:27:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768420196; x=1769024996; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zKvr0m/7C/IMijq4X/lRmByro4IFS5H976ucXVqRFqw=;
-        b=jdheDtDN5phPyO2nH7NbuDAcBgZynjEM80vrteJmxXcFny8mkfEirEJjub1222wvY+
-         VU9BCK4W6RASxVMhbXdWvZFDmM8lEF5U7utxdmmIOoGd/LOthK2DRdkveJz74Sh0HB84
-         wkJzTzHuT1f9xh617P6r5g8DpQdM+VSg70OdPw0RGa7IERH3P6lBkmyZZnSUJt52EMo9
-         Ddw9ivLE590jTr6zhkfbq67KmUz7ttjpkvnYNUG9VUeDUwtNO5WjXcSCrjFj2ucuS9UR
-         STc7HluGz6O6b9xW9mli5VHxPVbGiv4xHc7X8fRNpObLGEBM0Y/DsSjWx34zgv93FoPR
-         WUKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768420196; x=1769024996;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1768422426; x=1769027226; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zKvr0m/7C/IMijq4X/lRmByro4IFS5H976ucXVqRFqw=;
-        b=aOQPyfm0Io8b8TL6jXVufQeGyY3F/e6QuDpvc5XngStcrV2gUu2+15JkM7K3bi9bY5
-         QMwo6chFIHswU9OoV7h7pNyZw2WGluxfTT9QvHvebiiC+2Ax/QxKZi2ujwm5mcvguBlb
-         wwHHlrwXwvPjONkWTPK9Dq8yl0pEH0agkolk39Jtb4uFa2a6AbRge6hyuP4Fn8ZotN96
-         ev79zOqqj55PytTJL4AXPS3CzPjWWpgMXaxN219i6/h7evhXE6De/ZXuNi26hlK78vYa
-         0jCx9nUSGR/NIMXL4iO+1D+6zjYHG0MuaIjYwYEwJtH2WjB53UOgRwPWuRkqM2XEfakG
-         3OpA==
-X-Gm-Message-State: AOJu0Yzr6/OWA4HxjNc0HbKow4l8L3ocbmqq0UYI8k0sNKhFPs3jTrOL
-	KBtYLCqAm3vnCEXgsAHrdEyolVWnhYPmo9jVYQfuCv1NRCvJEjutKwtUw2D+a+Qt
-X-Gm-Gg: AY/fxX6iyGmae4LOAMeUpy4rlmuqQA5e9FhQBTyjouvM2nawhWH8L463WR4I5fyroWb
-	XS/OpJh6nua2qzUQYV70bPrrjcRtYz0kSU1ebo8mFt0CNR5khPyc0pyZuTyMqHmHSX/AV7IMaIF
-	F3fsHQCv3HfFrrIYxhT1k6q5lSp9w3wYldxbpq/cm8+uSYjZHyyCEfDzaF8i3Du9HD8tfJJM5R0
-	+kJXOj8jMNTBMHvsIwuSKzrmGvctQg1b3Q0/aC7PlRw3j2zDPn66ddt11lb6ao8j5IurpW3+wtc
-	AP6fWc6BZWH/+WlkZD9tEsv6aa/a0biEftfAKDRyNpGsAvQ0mRuifOPZAS9umEpTCL8eIYLar8t
-	zFV4LRrir0ZvBg0UzPF+tHhyrm5c7xSpc/G7IHYBJmXDLEM9dH+8t3oMGonBFLtRRq4oDxn8OcI
-	snjUR1uLSqhACmUAdZy5iloufWedRJvetSzOS0oQ6BOECuixyochk/Kf0wvWkJd1adVCVRhibfR
-	zdoP0VWZD0F9asWWbwel1F9gNRQGW8Fp12mCOCqiphE/p99aFw4A6IyErv5Vzln6w==
-X-Received: by 2002:a05:690c:4b13:b0:786:5c6f:d242 with SMTP id 00721157ae682-793a1ed63efmr31570207b3.69.1768420196119;
-        Wed, 14 Jan 2026 11:49:56 -0800 (PST)
-Received: from localhost.localdomain (71-208-41-41.ftmy.qwest.net. [71.208.41.41])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-790aa6a3afbsm93427257b3.39.2026.01.14.11.49.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 11:49:55 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] libxfce4windowing: upgrade 4.20.4 -> 4.20.5
-Date: Wed, 14 Jan 2026 14:49:34 -0500
-Message-ID: <20260114194934.195359-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=ZLzM88W/pqnMNtw+J6mV5iJUdWeyaPDkiGDhDXcLU60=;
+        b=VGorj0WXBdW7cdUCfP0Te/a8c8Txs57GHJoPhschlGm4VEcxwm9IoH+5minzsSe6sV
+         A9oBp4As0MsfW4QctYE8TZF9LEvKREOUNNZJ44Q5ifNLwW3iy9pRO/KSJUm9otZs1ORF
+         zNzkVwtdH9UQUK5caYxZbtEIbeufll0+0bT8NFP14O9QMucI7G5xQUf7nf/G/jZuvDHv
+         OwauDQ4trdEhhnjlvCBIAdJPcOsnr+qXIyk+660gHevscm/PX6Gly0wXrbRrIciD+Sc4
+         bCSNLhvAvFewIqYo/LTCBCLMJd/2LaGHPeG7SXTfQ1PFKtn6NQbdVx5rtsLoLYanNqV+
+         axbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768422426; x=1769027226;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ZLzM88W/pqnMNtw+J6mV5iJUdWeyaPDkiGDhDXcLU60=;
+        b=D28VKZMdU4TLXvnDpdVJPRx+DsYgNzvsWBzydNURdpwD8zPATwlFsRoBchxKLDjofg
+         fJUBTBwTSoHjqdHRJd4zL/YA1Ipvbgw4YqMoXLLQ0mkFbul/IPJVe5dKD0sYKLzAqwbs
+         ZsP+AASnb4YiNLupYhONpDoUIxna+ivG7R+bEuNCV7XS9O1HPAODSrstiJFTnZKct3LD
+         X9ATdY1ypa4lAmqb+ARdufW+UCMy56a9xM6IvOrnMDMwAecVmcIdhyYLy0ekg65tbSaR
+         0CYBJw2UyBu167QISYCjUb8tSqbQMM1FTpRGIVbr2yFEXtE8XU+WapkKrUjO6+JtpEK2
+         aRBQ==
+X-Gm-Message-State: AOJu0YxzKGfym7Ch5Egz4/1Pz3xMoqlSmoAeP5Al2JtiFLmrqlhnjwJZ
+	dA0X0QC0aYgLTXaN0slPaJKECbx7hTKZKzzm6La/9Z3NQjT9ScxLmTwW8Y/S4y7TiPyHUp5fupp
+	YZ0wsKEdH1I5a2HH2rszGftM22I8xUiyt1g==
+X-Gm-Gg: AY/fxX5IxPQFoSm2d0KCi9Gyl7EVonjC2Yx66A4DehaqZuFy+RK4RFgztXQ3/q+86O2
+	ix6xIUb1qdM3b3kv1eIq0hDBaa1HP0CBmO52qqOIAx/9TKvVfrCIQb9D5tpdjjZGY0IMGi5ME0+
+	+6TKpkNYGa7bMyiAgRtV5vx4S4ynsRLBGhO01lMMkooEG9vF/Y5RtmwimL7WDGk01TbZ9HDh75f
+	moD1CVcolghGyMTc1L7e964r/TCENyHcHcKRPf1JmAfE91EwadnUn8BS4VxTCnNXZR0RqPWfbXq
+	CVVlVbs=
+X-Received: by 2002:a05:6808:8482:b0:45c:7306:505e with SMTP id
+ 5614622812f47-45c730658fbmr1658150b6e.63.1768422425958; Wed, 14 Jan 2026
+ 12:27:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com>
+In-Reply-To: <20260114172553.1241309-1-adam.duskett@amarulasolutions.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Thu, 15 Jan 2026 09:26:54 +1300
+X-Gm-Features: AZwV_QinoHNtBKYO08uZwMprJb2QdCXppUOaakhjro4lCiXrsVw8RP6fFd6OJzM
+Message-ID: <CADySD0Eh9Zcp=OQDSwbVWDswDhmJs=OmfqozY9KLiF3fZV2bRw@mail.gmail.com>
+Subject: Re: [oe] [PATCH 1/2] [meta-oe] libtsm: add recipe for kmscon dependency
+To: adam.duskett@amarulasolutions.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 19:50:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123484
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 20:27:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123485
 
-Changelog: https://gitlab.xfce.org/xfce/libxfce4windowing/-/tags/libxfce4windowing-4.20.5
+On Thu, Jan 15, 2026 at 7:16=E2=80=AFAM Adam Duskett via
+lists.openembedded.org
+<adam.duskett=3Damarulasolutions.com@lists.openembedded.org> wrote:
+>
+> Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+> ---
+>  .../recipes-graphics/libtsm/libtsm_4.3.0.bb   | 35 +++++++++++++++++++
+>  1 file changed, 35 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
+>
+> diff --git a/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb b/meta-oe/re=
+cipes-graphics/libtsm/libtsm_4.3.0.bb
+> new file mode 100644
+> index 0000000000..a6c12b71d9
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libtsm/libtsm_4.3.0.bb
+> @@ -0,0 +1,35 @@
+> +SUMMARY =3D "Terminal Emulator State Machine"
+> +DESCRIPTION =3D "\
+> +    TSM is a state machine for DEC VT100-VT520 compatible terminal emula=
+tors. \
+> +    It tries to support all common standards while keeping compatibility=
+ to \
+> +    existing emulators like xterm, gnome-terminal, konsole, etc. \
+> +    TSM itself does not provide any rendering nor window management. It =
+is a \
+> +    simple plain state machine without any external dependencies. It can=
+ be \
+> +    used to implement terminal emulators, but also to implement other \
+> +    applications that need to interpret terminal escape sequences. \
+> +"
+> +HOMEPAGE =3D "https://github.com/kmscon/libtsm"
+> +BUGTRACKER =3D "https://github.com/kmscon/libtsm/issues"
+> +CVE_PRODUCT =3D "libtsm"
+> +SECTION =3D "libs"
+> +
+> +LICENSE =3D "MIT & LGPL-2.1-or-later"
+> +LIC_FILES_CHKSUM =3D "\
+> +    file://COPYING;md5=3D69e8256cdc4e949f86fedf94b1b320b4 \
+> +    file://LICENSE_htable;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
+> +"
+> +
+> +DEPENDS =3D "xkeyboard-config"
+> +
+> +SRC_URI =3D "git://github.com/kmscon/libtsm;branch=3Dmain;protocol=3Dhtt=
+ps"
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- ...{libxfce4windowing_4.20.4.bb => libxfce4windowing_4.20.5.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/libxfce4windowing/{libxfce4windowing_4.20.4.bb => libxfce4windowing_4.20.5.bb} (90%)
+please also include tag=3Dv{PV} in the SRC_URI
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.4.bb b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb
-similarity index 90%
-rename from meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.4.bb
-rename to meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb
-index 5791d48895..764254eb10 100644
---- a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.4.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
- 
- DEPENDS = "xfce4-dev-tools-native libdisplay-info libwnck3"
- 
--SRC_URI[sha256sum] = "db467f9ac4bac8f1c4e82667902841fc0957af835c29603d6659a57440b6f8cb"
-+SRC_URI[sha256sum] = "6b4e19a66db650c9c8a88f00bbf266e9ced0070b7dbc0aaeea05be0fc6a2eb4d"
- 
- inherit features_check gobject-introspection gtk-doc xfce
- 
--- 
-2.43.0
-
+> +SRCREV =3D "9d2817b727f61c09e19994b2431af716652f330b"
+> +
+> +inherit meson pkgconfig
+> +
+> +EXTRA_OEMESON:append =3D " \
+> +    -Dextra_debug=3Dfalse \
+> +    -Dtests=3Dfalse \
+> +    -Dgtktsm=3Dfalse \
+> +"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --
+> 2.52.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#123482): https://lists.openembedded.org/g/openembedde=
+d-devel/message/123482
+> Mute This Topic: https://lists.openembedded.org/mt/117265880/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
