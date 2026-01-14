@@ -1,164 +1,119 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <awais.belal@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35FA0D37E2A
-	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 13:08:25 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9535.1768396100811782735
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6DEAD37E3D
+	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 14:48:45 +0000 (UTC)
+Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11890.1768402118629873156
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Jan 2026 05:08:20 -0800
+ Wed, 14 Jan 2026 06:48:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aInDRuk9;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-c551edc745eso2279579a12.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 05:08:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZhC5jyc1;
+ spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: awais.belal@gmail.com)
+Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-66106a2f8c0so122032eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 06:48:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768396100; x=1769000900; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=RF4pJj9H8fGJANRyKKXrFxFZqV32WGED+Q7X91pd2G0=;
-        b=aInDRuk9RL2eYT7UOliO3Qy9Fxd22xfv9+YYRymhaD+w2d2bmyzpQdLUHuFsIosYka
-         C/dUEYPaX9jSh+KJ/RWCZ278qtjRWZXCmjjM9k0+0IYMWUrRLxoN+ELVi7cxYIiVkffK
-         gOerpKEtAoXYFNwOQj2k79QtgsOXFErhXZlwhE7G8Fg9rrWyTp/I6jI/S/Se8jsFqqyx
-         OY9zqu2KgWp32weo9GMfJCeneZy1gpa92R8H751XRKz4cGoUt3AwWsAcUGCW668H+L0j
-         XV8u/PDJbgx+AcD8f4261NOeh2nBIqsQF5b6i19aD2lAAiC1241yCtQzNXKN1N5TUP8o
-         X87g==
+        d=gmail.com; s=20230601; t=1768402118; x=1769006918; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=jeAcbW1KJbzxdzdD2oh9q5W6dXAwFCBLhgvd/ZKWutg=;
+        b=ZhC5jyc1KABhfTEUEr/c4WsR93x52FqZxCRdXLmgwmxJlNttYvA9s+pgz5JNHzachS
+         iev6vHEX2DhAoXk4JqXy3PsLp8s5dxiLC+4LaZTIYaZ/WjeZOut6M8w+EaCpH6D1JCJ5
+         DB4WN+0PcoBZ0dOnm3ytsslD4ak3J95JuJZsEFcy5qHPgU0gffpI86NAZPjXvdKExDGU
+         mzJCwwmvf6Dsc80IPZsC/dnTb/t0ulxA8ofZaashms6Mur52nbSf3K2zSu9KaZ8BUpte
+         dQ8EUC6Q3pxjH1+NoeIDTVuvhPDk3mZ+fNblTy9I7u5XhCH59xtJXokBPN/S3JB20q00
+         j1ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768396100; x=1769000900;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=RF4pJj9H8fGJANRyKKXrFxFZqV32WGED+Q7X91pd2G0=;
-        b=LconVDjZAfdFducfR6U/KZe0yQQxaUehLvUWrR+ORXUkenEjxYNdoMI27rU+NhUoe+
-         eOTgX+aUC8N19scjEme6lurZo86yjvHhErjmf24y+cJBOdQZglkqYQGD8yxLeWOdoQSs
-         qX02hpI9YC8NObYT1Uu9qnaOedyg6G2UcffqP+54hZYqkvS8Ki7qEi64cymtoTPiFANW
-         h5G1iWrRyzNJ737GlCMRSFzzSB24QuvsjKcjhYsjER1XlSENYj386dqFgLi9A1j28WaK
-         1jbN3aQrF7GUdKBLTw/pyaX7WxMTl55UEPyWQIOkkAOW5YFtHerx/WvLO1NHU3xvPCLd
-         qXJw==
-X-Gm-Message-State: AOJu0Yx509x/0/ULkZXQcr2Q7WTPHbzPn0sSjqsbb/+uxj8Mfc0nCUK+
-	XcsqV1uVDkRDdI34P8AFpPp9c4f2OtWonufbL4uM2Ocsjx0EZmOxDXzy8iY6KQ==
-X-Gm-Gg: AY/fxX75+G/n5w1H3gUIsPC/1VOA/DWiSRywa3nrPzY8LNiiJ6AG5SGG1rjLHeBKmZC
-	s7yctRqLfVxwLyUOIP+CXmCbdg+9HAJ/xtcCix2xHdJzt/2LDcDk25XmG+yI8WabvYYP9X2TPj1
-	OC/ZJfwRrOv+EV0KCigM790gPuPEBsvylGVlRGXcxwZafmDo46hCU+OJJy9wNeYb8Nh059r3n16
-	62ZnosnTKrE2eZ0+sriCr3uWPV3ToP86/97J9DaLxfLjacEq3sbUOArCTdULe5G2B1DJsj4pi0N
-	T6KCopaWZJNEi8NDzi4M5IKiIpByuJR9dOv//L/nE4DVxkpTPncovGcg0K2WPtYHfmcwA0PnKmW
-	T167zkw8U+AzD/d0X5T+1i5jEW0PAKN/WVZOkaqIUfj2Be0s6M/2Yx4mP42wYOTc58zct9PW8T9
-	/daocVx4L8oMQlfbngw6nvkd0=
-X-Received: by 2002:a17:90b:5870:b0:34c:c866:81f2 with SMTP id 98e67ed59e1d1-351090a09f6mr2286039a91.4.1768396099927;
-        Wed, 14 Jan 2026 05:08:19 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.27])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35106914b1esm1296398a91.1.2026.01.14.05.08.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Jan 2026 05:08:19 -0800 (PST)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][scarthgap][PATCH v2 3/3] python3-virtualenv: patch CVE-2026-22702
-Date: Thu, 15 Jan 2026 02:08:00 +1300
-Message-ID: <20260114130800.1021123-6-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260114130800.1021123-1-ankur.tyagi85@gmail.com>
-References: <20260114130800.1021123-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20230601; t=1768402118; x=1769006918;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jeAcbW1KJbzxdzdD2oh9q5W6dXAwFCBLhgvd/ZKWutg=;
+        b=cGDKxPHFDgoevxTK7Utgo2BDf9w9eCS0h9bGMcAqNe6bRocIGc1DM/NBj1scW9fXxW
+         CrmorSM+A9A1nJlXmykVrEpXqWgnOw2lZAgo7mP54SqYHUHLKRO7pojawlCGS22ZmLcy
+         0p5lZ6RMADW4L3cX+tephWz45c0leHfB4Qp2kgOZJdt8bNOubX8IlTXG5Ga56hQyGJxK
+         7STePjbMASjptnKymuCUlmBjooJjOgWvTQoqcbZTwjAiUph1pVjv68euhZBc4EogHZo2
+         GaOT/gGflXXZfjkOE1dDTjCpqQ1fN6WUmj4O2ozaU+Bm0g3e2ZCM3gupMmVpvS8D9aWi
+         g8hw==
+X-Forwarded-Encrypted: i=1; AJvYcCV7hXqVjjq/L6O8FpS3GO7KgdEatxiR/adn8QkVLyuSkuRS41TrQ9aQ6bsz/KjbUdGlmFg+zgz+y5Tc7Usql5HOYF8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Ywl7YhE9TCa4h6/yCCvbonLf+yFeEC1+rdbGNGcd7qRidKPWwzh
+	6SrEk73el+o9JfNkm4rIm9G+pCOlp85lFS0kUOjj5L4jdiJ1kxokJ7FMZ1+HlmmP8zRvD7qJ8Uh
+	4dYTDKR2XQVtFqERGwKwYsUomW/laLOQ=
+X-Gm-Gg: AY/fxX7RhOOfG3Cp/hV2paIU01KNfbCRAWLwQO7C67uL45VEi7yHhY4TInXATm3bTxe
+	OeqZih0u8bmvZDLrT0dLpJu8ZDxWciuTo4BLHlPy0MLgoiBjCSys2eHjswmE1Pnv+gloGkJupvQ
+	CcnXOpVGRBKY7tVDA2QGgTsOCBCaqRlXNddAyNom2Aqh/xYc3hDg5dFldM2N9Tik1LwjleKlE0C
+	extDcU+H+kcKh58/duUrsix+rALhzlEiOFi2H6jIQsJS3kRA0zoQcBY0Oz6IpNAnIHSLnXo
+X-Received: by 2002:a05:6820:221d:b0:659:9a49:8e05 with SMTP id
+ 006d021491bc7-66100718205mr1911125eaf.71.1768402117818; Wed, 14 Jan 2026
+ 06:48:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250307093255.1110778-1-awais.belal@gmail.com>
+ <20250307093255.1110778-2-awais.belal@gmail.com> <CAMKF1spsyTBdgD_we=X2Q9vpGFhBi-0E59ArdGyKr3KB-8g3Gg@mail.gmail.com>
+ <CAM=5Amb6u5-8pmud11do97X4UAwLToizR9SiGjPD=4+Zqet6Rw@mail.gmail.com>
+ <CAMKF1sroz=jLxp9PfMkZoQwtRjyvDZhK15kGLS32q5vu7dxcHA@mail.gmail.com>
+ <CAM=5AmYtt81oiNVQqYMbu--Z0vTfGpQ5eHUpdJeV2KqoUdT4Ww@mail.gmail.com>
+ <CAMKF1srDnbOc3LGOJ0YBVNGbxJ8-7bzSZMowWZ=WuONeFbvuiQ@mail.gmail.com>
+ <CA+chaQdj4iXwG1bP_ZYJVXJXU1Oq4buzc5hx=YU7DBkXk9uQ0A@mail.gmail.com>
+ <CAM=5Ambb1=5rTBYoQQ1y+OwpFRUn2eVmadPYRCsj3NBS1+ucqA@mail.gmail.com> <297305bc-193f-4fe5-a306-bd05f33933b4@gmail.com>
+In-Reply-To: <297305bc-193f-4fe5-a306-bd05f33933b4@gmail.com>
+From: Awais Belal <awais.belal@gmail.com>
+Date: Wed, 14 Jan 2026 19:48:25 +0500
+X-Gm-Features: AZwV_QgTJlLJFakpAhEbZSeqNFCBw9PoE-OD5HhSZOLNYo8QwQbNRWhrE23QvEo
+Message-ID: <CAM=5AmaYsT5ULEKPjPTvXusu+c6jo3xmC13nCTHp5_KJg4Sppg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 2/2] mongodb: update to 4.4.29
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000000d7d1906485a3426"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 13:08:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123479
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 14:48:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123480
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+--0000000000000d7d1906485a3426
+Content-Type: text/plain; charset="UTF-8"
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-22702
+Hi Khem,
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../python3-virtualenv/CVE-2026-22702.patch   | 60 +++++++++++++++++++
- .../python/python3-virtualenv_20.25.3.bb      |  4 +-
- 2 files changed, 63 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-22702.patch
+I did not ignore you, :) I just did not have time to help out. There are
+> some patterns of TMPDIR embedding into target packages, but it needs to
+> be root caused. If you look through repo, you might find some help on
+> what different use cases have been found and how they were handled.
+>
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-22702.patch b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-22702.patch
-new file mode 100644
-index 0000000000..30f177b4d7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv/CVE-2026-22702.patch
-@@ -0,0 +1,60 @@
-+From c57ef93ee6f63129d20b24e71a6ddab1c75752b7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Bern=C3=A1t=20G=C3=A1bor?= <gaborjbernat@gmail.com>
-+Date: Fri, 9 Jan 2026 10:19:39 -0800
-+Subject: [PATCH] Merge pull request #3013 from gaborbernat/fix-sec
-+
-+CVE: CVE-2026-22702
-+Upstream-Status: Backport [https://github.com/pypa/virtualenv/commit/dec4cec5d16edaf83a00a658f32d1e032661cebc]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/virtualenv/app_data/__init__.py | 11 +++++------
-+ src/virtualenv/util/lock.py         |  7 +++----
-+ 2 files changed, 8 insertions(+), 10 deletions(-)
-+
-+diff --git a/src/virtualenv/app_data/__init__.py b/src/virtualenv/app_data/__init__.py
-+index 148c9418..301a00f7 100644
-+--- a/src/virtualenv/app_data/__init__.py
-++++ b/src/virtualenv/app_data/__init__.py
-+@@ -34,12 +34,11 @@ def make_app_data(folder, **kwargs):
-+     if is_read_only:
-+         return ReadOnlyAppData(folder)
-+ 
-+-    if not os.path.isdir(folder):
-+-        try:
-+-            os.makedirs(folder)
-+-            logging.debug("created app data folder %s", folder)
-+-        except OSError as exception:
-+-            logging.info("could not create app data folder %s due to %r", folder, exception)
-++    try:
-++        os.makedirs(folder, exist_ok=True)
-++        logging.debug("created app data folder %s", folder)
-++    except OSError as exception:
-++        logging.info("could not create app data folder %s due to %r", folder, exception)
-+ 
-+     if os.access(folder, os.W_OK):
-+         return AppDataDiskFolder(folder)
-+diff --git a/src/virtualenv/util/lock.py b/src/virtualenv/util/lock.py
-+index b4dc66a3..a28b32f8 100644
-+--- a/src/virtualenv/util/lock.py
-++++ b/src/virtualenv/util/lock.py
-+@@ -15,9 +15,8 @@ from filelock import FileLock, Timeout
-+ class _CountedFileLock(FileLock):
-+     def __init__(self, lock_file) -> None:
-+         parent = os.path.dirname(lock_file)
-+-        if not os.path.isdir(parent):
-+-            with suppress(OSError):
-+-                os.makedirs(parent)
-++        with suppress(OSError):
-++            os.makedirs(parent, exist_ok=True)
-+ 
-+         super().__init__(lock_file)
-+         self.count = 0
-+@@ -109,7 +108,7 @@ class ReentrantFileLock(PathLockBase):
-+         # a lock, but that lock might then become expensive, and it's not clear where that lock should live.
-+         # Instead here we just ignore if we fail to create the directory.
-+         with suppress(OSError):
-+-            os.makedirs(str(self.path))
-++            os.makedirs(str(self.path), exist_ok=True)
-+ 
-+         try:
-+             lock.acquire(0.0001)
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-index a980727dd6..b7dd5729ef 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.25.3.bb
-@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
- 
- SRC_URI[sha256sum] = "7bb554bbdfeaacc3349fa614ea5bff6ac300fc7c335e9facf3a3bcfc703f45be"
- 
--SRC_URI += "file://CVE-2024-53899.patch"
-+SRC_URI += "file://CVE-2024-53899.patch \
-+            file://CVE-2026-22702.patch \
-+"
- 
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+Sorry for being so so late with this but I now have a patch for mongodb src
+which coupled with the earlier changes I submitted will allow us to build
+mongodb 4.4.29 on OE cleanly. The additional patch is to fix the last
+outstanding TMPDIR issue that we saw around last time. What would be the
+best way for submission here? i.e. should I just send over the patch or
+redo the whole series for master?
+
+-- 
+Regards,
+Awais Belal
+
+--0000000000000d7d1906485a3426
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hi Khem,</div><br><div class=3D"gmail_quo=
+te gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+>I did not ignore you, :) I just did not have time to help out. There are<b=
+r>
+some patterns of TMPDIR embedding into target packages, but it needs to <br=
+>
+be root caused. If you look through repo, you might find some help on <br>
+what different use cases have been found and how they were handled.<br></bl=
+ockquote></div><div><br></div><div>Sorry for being so so late with this but=
+ I now have a patch for mongodb src which coupled with the earlier changes =
+I submitted will allow us to build mongodb 4.4.29 on OE cleanly. The additi=
+onal patch is to fix the last outstanding TMPDIR issue that we saw around l=
+ast time. What would be the best way for submission here? i.e. should I jus=
+t send over=C2=A0the patch or redo the whole series for master?</div><div><=
+br></div><span class=3D"gmail_signature_prefix">-- </span><br><div dir=3D"l=
+tr" class=3D"gmail_signature">Regards,<br>Awais Belal</div></div>
+
+--0000000000000d7d1906485a3426--
 
