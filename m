@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CF93D31A22
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96107D31A24
 	for <webhook@archiver.kernel.org>; Wed, 14 Jan 2026 07:34:52 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5447.1768376086657652209
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5448.1768376087404247952
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Jan 2026 23:34:46 -0800
+ Tue, 13 Jan 2026 23:34:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CPbL4ceE;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-432d2c7dd52so4454847f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 23:34:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ELtNSkZw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-477ba2c1ca2so91539795e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Jan 2026 23:34:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768376085; x=1768980885; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768376086; x=1768980886; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XBCJ/pc3hamz5qg8VoRjlGp5I48DDmuv1vtDuVCflVQ=;
-        b=CPbL4ceEi6kicy/1WQE6Cnt87m8a8KHtgLlUnNGIeCb39qnKvNbBB4mWX001C4ifxc
-         vqN/eDC8jE7H3uIrOKpO1lSWUiFyiBmTJPnzp6/ePBEwblF7udRlon/aVNW4fZPUCQXg
-         nwytKvoLgbWfabWQvnbQbNsCZ3oz89QISe7zBRJHSCMdQzrz6PMWsD65fESRb3proFs7
-         L5kkAhUDSFtUNekzHJpixs3kRk/HPI11/eSpftLtzsaExYemSlqEXjG5hI7hvZSXeA/4
-         nuiipmNkNE9x9Z+Irol9Ccpts5jB5Fb6bA7Nnm+HjrHUv2aF6EnxjMw9Ed/UOX+/NLK3
-         vnww==
+        bh=cjH8abOsXrURua9xjmUu7b+bXRb29TbKeUuP6Du4eMY=;
+        b=ELtNSkZwoxkcA1e+VqwxGNJTETlZUC+v2Gjn0mupJvTk/DuBVOnLtV6e8Vevdo1Qnl
+         T3eDhO0aW/Vy2flINxGD6hiU5v5aL+lwXLBj8ABs1vFJ6IWllftQ9H49IS/G5N167LlL
+         0THHwLUvNC43cxRHzG1nIbMBmjt5fHjhuRBYXoT+zw59WLdtNuuAAuJW9ZCfVlc5Mk6E
+         7LnDyOuYlZ1sdkz+KJl+p2710SZCvw6ck8Av6GxY/kixso123W7c5kq52YRnzGfAcWx+
+         LysSGL5V5kPztiZxsWZu2Bz/zR+b9Nd8Y2muctuIi3Bdgw2Pi+76DTsemAgz1flyiVx+
+         fdOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768376085; x=1768980885;
+        d=1e100.net; s=20230601; t=1768376086; x=1768980886;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=XBCJ/pc3hamz5qg8VoRjlGp5I48DDmuv1vtDuVCflVQ=;
-        b=gTAojVMCDxeAJ4Y03QH+g8y0T2HaXFM95QDw+lBa73CM3wED6wqlyJtX8lQpYLFhiI
-         V1QrXAOrVudYaJ7Ih3MT7MGw0nOUDECPnQo483sw+Q2Gn8FsA2hlFFskmXCtwJkGM2jW
-         N2RBbriV8H6YoWUhmwMixkcxX/V0lNW3LGh1oTtv71v9n9vb1rrHENb3kbeW4u5EdLxJ
-         fkDvn5wLFyH92DCJkerXM0FEsVwrg3/htC2JH23xg0W7ifUHteN1w43q8siRqyRHqMB0
-         R9Q1UsarWQ72qV546VNGT1Zf2uvACDc9bg3FMEXYg/MOattiWyPVZZ2sirmW1GvxGUPK
-         qm6A==
-X-Gm-Message-State: AOJu0YwDBKlfIQUquAiSZrjof+YAYUmKwjm6JaC8oC5J+OEI1OTKq69p
-	Odv0iw4ugxkLQFpJkhxwfc+jMEKUahmVUxK+qq//QhqeFwBo0lL4025GHVwNCw==
-X-Gm-Gg: AY/fxX4egcZVJ15vtE7b5ZiX15fdpmmaC4Ncvlnr6CSoWUHZYwSOIPgTcYdNQBXfUoQ
-	SiQyT4gN6P6OJN1g1tb0SjizhTQYNFXGxzBSE67aESkzql/ifHT58mzEz5XE6X0ob7lTCrdyMwc
-	1AKcDoxKWLfgvAlptxoLA93cm3D/Hz7ymbhlYIdyrykye+6qg37+gYQwupXNRqyA1Di+P6XQnWX
-	GH13f9Lv+9y0i61mR81bGhst3s1WV6KOgI+ufIae8A07k4lcimBSn3EnTwqn3rnEV3nZ+7AIong
-	+zQfFqT1Lb24DtiK68nY0zDRZcncA/l+Qyd4mvkcT5Uw+pxM91MjgSGxk3Y4MmfuzK7pEyeZRWO
-	OmxGJOcX+V/fPloT9OSyH9yTy3ZtLNH0B9G1KsbnfZUX9jlv5/8pesQA/KnOgkv2XHqfrPkHfWS
-	H3ar22clcKJMxvePRBfpI=
-X-Received: by 2002:a5d:5889:0:b0:430:f5ed:83d3 with SMTP id ffacd0b85a97d-4342c4f4d35mr1712117f8f.5.1768376084919;
-        Tue, 13 Jan 2026 23:34:44 -0800 (PST)
+        bh=cjH8abOsXrURua9xjmUu7b+bXRb29TbKeUuP6Du4eMY=;
+        b=RSq1wyB2lfIu6IMmzW3KvFB3qlQ10PjXprf3X83mYHaIy47xPITYtBF5Ppnlaxf74v
+         UgzuAneEeRPMqPnNY/s743ANxVuwJ30PYxK02SerIuHBpKjnlBaa0Gr5ExmNm+ESQeA6
+         ynDg4FFWndwD7cq1AL2FwnvLSUFgUbJlcZYfGRLvQDMK0bgIF/iV4PJ2A4mTEdTN9h7u
+         Vo+CE9wWc43gXQjN9PLuiiEkBWldSEEoTvEZ3RCA8l1vbyfu+bep000jqGw8fsJaoIyG
+         frGESMKrIBhTzbxxV8G29QAyOil1YYgd55fq5oW+gPtRaftasrMegq0VVXR3wEpKGd4Y
+         30zg==
+X-Gm-Message-State: AOJu0YwMOMF1ZiLUy4CoroUiU6c1tFiJcRm0W4xbb4He7LJM5Naz4Oxr
+	ZsPzHoYp8SqSOD1zQ9xHKy6HA7ehkxFCD9yvED7MUwsFg3uKWOMl759Af5phSQ==
+X-Gm-Gg: AY/fxX6ggxK0GaIBhNH7ibjKwlYa4OqJGV5ITL89IHRTvZBYibOa+bN/1o4yFN8/h7D
+	UtOhr8wDQu9BPOYjDxO148fpJNZabkja5VDlWMPh8PGO1qtHdINOD/mb0Zjv2RtVbZEh51NVlXg
+	7EKMHZpQm3o3dfFQyn4ac5JRiScVRtAqdciVAwdMhceUoN9BGoTbL5yrKGIRn7Ycpn0t7vx+vRw
+	I7DugZV/NRb0csnt7Re5llcFCXQxO6NVlg6+OrKpx+iQVhlM3FEiA8r0S8xDsbQPnAM3F3rOES/
+	DYOMNk2xQFEIF+tEpwmp4/NoMokQYhj3nJMjIbO9FCgqo5Kso3u7llS41uPvK0TGr9eVfUhvg8n
+	LGW/Mroesgt3m/t873By4E1OcW12SjLu+7ChhgpBiMJyIr9rkPd/Tg5CIXjnMe22P3ODoqory9g
+	6h6FVOamssFnp5+lQEjR0=
+X-Received: by 2002:a05:6000:18a7:b0:431:104:6daf with SMTP id ffacd0b85a97d-4342c56cffcmr1651732f8f.54.1768376085700;
+        Tue, 13 Jan 2026 23:34:45 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-432bd5df96asm47598289f8f.28.2026.01.13.23.34.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Jan 2026 23:34:44 -0800 (PST)
+        Tue, 13 Jan 2026 23:34:45 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 4/5] python3-django: fix regression from CVE-2024-24680 patch
-Date: Wed, 14 Jan 2026 08:34:38 +0100
-Message-ID: <20260114073440.210915-4-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 5/5] python3-django: implement group method for FakeMatch
+Date: Wed, 14 Jan 2026 08:34:39 +0100
+Message-ID: <20260114073440.210915-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260114073440.210915-1-skandigraun@gmail.com>
 References: <20260114073440.210915-1-skandigraun@gmail.com>
@@ -67,67 +67,82 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 14 Jan 2026 07:34:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123449
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123450
 
 This change is for python3-django_2.2.28.
 
-The patch that mitigated CVE-2024-246680 accidentally also brought
-a regression, some numbers were converted to (human-friendly) string incorrectly.
+This patch is an extension for CVE-2024-27351.patch. The class that patch
+introduced wasn't completely suitable for this version of the recipe, because
+it was accessing a function of it that was not implemented (the upstream
+version that introduced this class did not use that function, it is specific
+to this old version).
 
-This backported patch mitigates this problem.
+This patch adds the missing implementation to avoid errors.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...172-Fixed-intcomma-for-string-floats.patch | 30 +++++++++++++++++++
+ ...implement-group-method-for-FakeMatch.patch | 42 +++++++++++++++++++
  .../python/python3-django_2.2.28.bb           |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django/0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django/0001-implement-group-method-for-FakeMatch.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch b/meta-python/recipes-devtools/python/python3-django/0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django/0001-implement-group-method-for-FakeMatch.patch b/meta-python/recipes-devtools/python/python3-django/0001-implement-group-method-for-FakeMatch.patch
 new file mode 100644
-index 0000000000..75b816ab55
+index 0000000000..450788b0fc
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch
-@@ -0,0 +1,30 @@
-+From 820af24fcaae817ab7c0733035673afc3b37eeac Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-django/0001-implement-group-method-for-FakeMatch.patch
+@@ -0,0 +1,42 @@
++From c78be5dd9f1772a22f3094d8c2cfe56bfb45b122 Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Thu, 8 Feb 2024 10:58:54 +0100
-+Subject: [PATCH] Fixed #35172 -- Fixed intcomma for string floats.
++Date: Wed, 14 Jan 2026 00:24:12 +0100
++Subject: [PATCH] implement group method for FakeMatch
 +
-+From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
++FakeMatch class was introduced in a backported CVE patch for this
++recipe (CVE-2024-27351). These objects are later accessed in
++django/utils/text.py module, in Truncator._truncate_html() method.
++It is treated as a regex.search() object.
 +
-+Thanks Warwick Brown for the report.
++This function, at the time when the upstream project introduced this
++CVE patch was using array-style access, with brackets, so it
++worked, because the FakeMatch class implements the __getitem__()
++method. However in version 2.x, it was using group() access to
++access the matches - which is not implemented for this class, making
++these accesses fail:
 +
-+Regression in 55519d6cf8998fe4c8f5c8abffc2b10a7c3d14e9.
++AttributeError: 'FakeMatch' object has no attribute 'group'
 +
-+Upstream-Status: Backport [https://github.com/django/django/commit/2f14c2cedc9c92373471c1f98a80c81ba299584a]
++To avoid this issue, this patch implements this method for this class.
++
++Upstream-Status: Inappropriate [Backport-specific]
++
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ django/contrib/humanize/templatetags/humanize.py | 2 ++
-+ 1 file changed, 2 insertions(+)
++ django/utils/text.py | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/django/contrib/humanize/templatetags/humanize.py b/django/contrib/humanize/templatetags/humanize.py
-+index ee22a45..8490b5e 100644
-+--- a/django/contrib/humanize/templatetags/humanize.py
-++++ b/django/contrib/humanize/templatetags/humanize.py
-+@@ -77,6 +77,8 @@ def intcomma(value, use_l10n=True):
-+     if match:
-+         prefix = match[0]
-+         prefix_with_commas = re.sub(r"\d{3}", r"\g<0>,", prefix[::-1])[::-1]
-++        # Remove a leading comma, if needed.
-++        prefix_with_commas = re.sub(r"^(-?),", r"\1", prefix_with_commas)
-+         result = prefix_with_commas + result[len(prefix) :]
-+     return result
++diff --git a/django/utils/text.py b/django/utils/text.py
++index e104b60..5033937 100644
++--- a/django/utils/text.py
+++++ b/django/utils/text.py
++@@ -66,6 +66,9 @@ class FakeMatch:
++     def __init__(self, text, end):
++         self._text, self._end = text, end
++ 
+++    def group(self, n):
+++        return self[n]
+++
++ 
++ # ----- End security-related performance workaround -----
 + 
 diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index 8e826b9b61..72485295a7 100644
+index 72485295a7..3b5491cd5e 100644
 --- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
 +++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -34,6 +34,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2025-64459.patch \
+@@ -35,6 +35,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
              file://Fix-undefined-_lazy_re_compile.patch \
              file://Fix-missing-JSONField-in-django.db.mo.patch \
-+            file://0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch \
+             file://0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch \
++            file://0001-implement-group-method-for-FakeMatch.patch \
             "
  
  SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
