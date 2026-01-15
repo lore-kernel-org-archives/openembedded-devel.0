@@ -2,241 +2,161 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF1FD33A08
-	for <webhook@archiver.kernel.org>; Thu, 15 Jan 2026 08:29:21 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31222.1768465759118358319
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C746D33A07
+	for <webhook@archiver.kernel.org>; Thu, 15 Jan 2026 08:29:31 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.31198.1768465761073337537
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jan 2026 00:29:19 -0800
+ Thu, 15 Jan 2026 00:29:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eyJlyQ0d;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-42fbc305914so374016f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 00:29:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=T1LOBDyP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47ee4539adfso5641855e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 00:29:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768465757; x=1769070557; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xZDUDvXPvhB1DnqY6it35KhtY48RsEmXT0/cs3MxuXU=;
-        b=eyJlyQ0dBD0TD7LMjNx96IXnVF1tUgMAjQLLSe9PqG84a7BttFvO5D3+p5PlK+F6/X
-         GPgFXtmmrqG91JiUDeo4SUwF6yhSNfFKyVDR6NPLt3suujtP7U4Q+lSg/L3qu8LkdZ3f
-         sg8kIiWX7H2HyaRV+wfrgYsHh4xYo2ity1IpTjWvQ/qGzDRavg/oNZlAjzN9veqZtJzC
-         Lik3R0Ah5HHfXPG1RMHb53/vxkbZJVFni/fsigDBabR+/law/vrDBOkYIFCFW8aihVMM
-         Ts/Z1zNwin6El5itoywUp1pSOHQsKcLbQo9ujuSMdUD1zHjD/9Wqd5wmvGd4BmPb874V
-         TpnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768465757; x=1769070557;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1768465759; x=1769070559; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=xZDUDvXPvhB1DnqY6it35KhtY48RsEmXT0/cs3MxuXU=;
-        b=EuH92mOVUwr/XXlZNStIi8z+/duLyV4zYFZAI+9SlyXiwx4yUkfp9IEiF4SFd4Ss3f
-         Lzacbjd9ldB7lszpJ7lEnGN99+yuXlAXVX2kfCzChxqKx+QDgTYYFIvZDGsu+f3XCU51
-         b2ofUGLBSl5mt+5zyFjtrOSCGuvo6VWpaxUmU08zLmU4XVhYSXx/HXeZrxaV+Zd2/7Fw
-         r3zDbK1Q6MvYQrd+CEnq+Fw9wXDuxoOJisOgodb6MpxWol/H9LCtGwaOxX/a/Onj9x8Q
-         f3ahZIlfE5T4m+UW1yoP8nGO2q1KmS2RrkMelRmE7EI2JEj+SNtdn7s48iZuix10cd+t
-         MbMg==
-X-Gm-Message-State: AOJu0YxUeXyEW+tXXXYFS8FV8ZXwKxmE2nOQ5/r+8lxV5YtrMH1mLKvs
-	3kLpAglQBqYS1WD4OoNDrN4r51VRk0wdgpOp4jBFHekyjJuqfBgkH8rVipckCQ==
-X-Gm-Gg: AY/fxX6aF6GSB/CWlko2Wj5BD1L6Esx414GjX90gWWFhGnaUbP0RzSsm69gA/ok9wbn
-	nuKRSwi9NMVogRpXpe3dfYCN8ze2w/5KWSToPezA2P1t3zJgjY60+9yk2aDESnYO7PswE2nar4v
-	HG+P9BgHdAGBQod89mw/8n9H7TiE4s9+0PgChpDplAs9iB7FujORV4DFzDtMyE7W8ocmCzF4wkA
-	2B+/ZAxZ0l94w88yg0JEWJQOxgJARrL7sqfRCX2ObBXj4MMbtjlC7yvpTpvnlOdnTp7Hlf2MYIW
-	9J2Kd5ao4k0313aJzmLm6lBHejiWP1jIQaYNOCX4tdfp7HkbbcGEqWjuM5d1M+AsIUM6GsfGwlu
-	JWvLcJOwuLtymQXF4YgsRiaW62De3//HPSIp03w3NhRugJLrOBiRQoAY0aM2DIXVq9c/B3GlapR
-	jvyx1wT3nY
-X-Received: by 2002:a05:6000:2389:b0:430:f463:b6ac with SMTP id ffacd0b85a97d-4342c56caadmr6160842f8f.44.1768465757190;
-        Thu, 15 Jan 2026 00:29:17 -0800 (PST)
+        bh=iqnoN430bXi8WmvGm0hV9jz1+BGAL5ffoIO/ycLu+lo=;
+        b=T1LOBDyPGclJXzMU0K7XQCgjBKpnAilpBSqHj1MNByZ676pA7ySAdbBZFEpvo5J+wT
+         n5NzaH/AJ6UZxke5DlzWVmvrCyB7sCfYlO2FNexAaZxu9URS4gTYZzQO3jkDK1zn9os4
+         WWUWMGlmfyQHNebP/z9zPpNLYWFA7t5Gp7DUBw1MXxAqz1VWo0krRtsF7Ds7ku8O1nTm
+         B6d6nw3VunlJsgeLZriuu5Z07nNIRk61hzhCZnHUMoiak7fgiXyLJgjO0meoUC2t0Mg5
+         w/7AaQa8K92A3RA9lc06VQe0QB+7h8jwLJJtMz8MMw2q+BfnnlGx2bg5LXXb6ECyBnkU
+         Z69w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768465759; x=1769070559;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=iqnoN430bXi8WmvGm0hV9jz1+BGAL5ffoIO/ycLu+lo=;
+        b=k7nH5IC3s9rJS545U7ZmgxsTCaceSbkSmpTeKm+M0zJgI/tajQcbATeDOWVDWJTVKO
+         pGglf/DX2mTRrSScgkaV7dyy9IMWHG5onUa1P1ouER5Xh6sX38qZHKMeKUz1Gsg2jRku
+         MySZCizeDARi5X64vqRtGFeeqgEdFjORsRHzeQ4II4fVv3z7bJKau7DdZ08f3SuGuL9Q
+         /HEIpzKUM96b/wy6A+m1eJy9Zujaj0FBjcmwWRIHbNgtJNZNhdao1TQuXTW2F+qHn5nU
+         VoLxLyG7/G+B4zrwbCTyRglzroe5XlgTBslsN9AGzwiZb42CFdRR+iSUZNmECS2Q/xFa
+         3umg==
+X-Gm-Message-State: AOJu0YxsiBvkIJFvt7nZXAjt5egA56dhhahQY1EUZvNaThxRrpXIUP80
+	y8eH+WixBNbr7V51N7tgLDYssiD/dqd77RLDZphCI9XbS44mmrt1rRn6sWjDlQ==
+X-Gm-Gg: AY/fxX6Nj2wCmOtgP2x41Yp4kl1tvmh6sQ2wjnNnXJ+GzEWDZ/JpoUDjShv5igxW4+E
+	vBCv5CI8oh/e48Hkv+5ULk3p2Nr53MbgU5vzQWRo4vc0Jf3A42TDECmbYo+yS0yp6HogtXqqCIP
+	KIJLBFwlrjHm4o1EXdlhRIlfTP71NkGAL3/FWqOCMsuUtjyGT4Vg+UuAQYrKsp6Gt+qUtWlbSnR
+	Hd27sgfj+QS6xpFS1zebnzkQyulHv6Fbk5J/jvm47PeDJh6R4emcCTaOuaC4RXjKdhveHua+mJY
+	SDne4Jit/+XZyIHuMZ99+dji9s7yjeQLoOy6kxtLOZdmya16Ed6sUtznDZNd2Yls5daTrLByxXf
+	/0LOZMnrWwCi04XH5AZ+KwCaJvEY0Pr12o+OVzPgn3fK98NYhiVtndYpa6Dz6WYli8IqFBAOyrz
+	U7TYNYt0Tv
+X-Received: by 2002:adf:8b83:0:b0:431:855:c79a with SMTP id ffacd0b85a97d-4342c503310mr5109291f8f.27.1768465759354;
+        Thu, 15 Jan 2026 00:29:19 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-434af6d90aasm4310083f8f.29.2026.01.15.00.29.16
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-434af6d90aasm4310083f8f.29.2026.01.15.00.29.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jan 2026 00:29:16 -0800 (PST)
+        Thu, 15 Jan 2026 00:29:18 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 1/5] exiv2: add ptest support
-Date: Thu, 15 Jan 2026 09:29:09 +0100
-Message-ID: <20260115082915.2357544-1-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 4/5] python3-django: fix ipv6 validation
+Date: Thu, 15 Jan 2026 09:29:12 +0100
+Message-ID: <20260115082915.2357544-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260115082915.2357544-1-skandigraun@gmail.com>
+References: <20260115082915.2357544-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 08:29:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123493
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 08:29:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123496
 
-The project has extensive runtime- and unittest suite - make use of it.
+This patch is only for python3-django_2.2.28.
 
-It takes around 10 seconds to run both suites.
+The URL validator didn't detect invalid IPv6 addresses, treating them
+as correct ones, making a testcase fail. (Also, according to the comment,
+it could also crash in some cases, though I haven't encountered that)
 
-Added two patches:
-One is needed to convert python unittest output into automake output.
-
-The other is required to be able to configure test data folder at
-compile time - otherwise the tests are looking for the test-data
-with absolute paths from the build machine.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 35bc4860f18cd56a80ee29d492540acfcb620b59)
-
-Adapted to Kirkstone. (It also required an extra patch to be able to
-compile with the current googletest library)
+This backported patch mitigates this behavior.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...1-Allow-test-data-path-configuration.patch | 30 ++++++++++++++++
- .../0001-Fix-build-with-gtest-1.11.patch      | 35 +++++++++++++++++++
- meta-oe/recipes-support/exiv2/exiv2/run-ptest |  6 ++++
- meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb | 33 +++++++++++++++--
- 4 files changed, 102 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Allow-test-data-path-configuration.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/0001-Fix-build-with-gtest-1.11.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/run-ptest
+ ...d-URLValidator-crash-in-some-edge-ca.patch | 57 +++++++++++++++++++
+ .../python/python3-django_2.2.28.bb           |  1 +
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-Allow-test-data-path-configuration.patch b/meta-oe/recipes-support/exiv2/exiv2/0001-Allow-test-data-path-configuration.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch b/meta-python/recipes-devtools/python/python3-django/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch
 new file mode 100644
-index 0000000000..9d6072a799
+index 0000000000..549e761ec3
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/0001-Allow-test-data-path-configuration.patch
-@@ -0,0 +1,30 @@
-+From 2483e51df6e02ad0ad5ae636767279fa230da44f Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-django/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch
+@@ -0,0 +1,57 @@
++From 065b10e2757af671f3e64f0c8714e6f2e4eca727 Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sun, 23 Nov 2025 11:52:24 +0100
-+Subject: [PATCH] Allow test data path configuration
++Date: Wed, 15 Dec 2021 11:55:19 -0300
++Subject: [PATCH] Fixed #33367 -- Fixed URLValidator crash in some edge cases.
 +
-+The unittests expect to the executed in the source folder before/after build,
-+and they expect the test data to be in the source folder. However for ptests
-+these folders are not available.
++From: mendespedro <windowsxpedro@gmail.com>
 +
-+This patch allows the test data folders to be configuration during build time.
-+
-+Upstream-Status: Inappropriate [ptest-specific]
++Upstream-Status: Backport [https://github.com/django/django/commit/e8b4feddc34ffe5759ec21da8fa027e86e653f1c]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ unitTests/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ django/core/validators.py | 14 ++++++++------
++ 1 file changed, 8 insertions(+), 6 deletions(-)
 +
-+diff --git a/unitTests/CMakeLists.txt b/unitTests/CMakeLists.txt
-+index 51040c0e2..e2604d4a7 100644
-+--- a/unitTests/CMakeLists.txt
-++++ b/unitTests/CMakeLists.txt
-+@@ -40,7 +40,7 @@ add_executable(unit_tests
-+ target_compile_definitions(unit_tests
-+   PRIVATE
-+     exiv2lib_STATIC
-+-    TESTDATA_PATH="${PROJECT_SOURCE_DIR}/test/data"
-++    TESTDATA_PATH="${TEST_FOLDER}/test/data"
-+ )
++diff --git a/django/core/validators.py b/django/core/validators.py
++index 94cc3bf..03cd9b8 100644
++--- a/django/core/validators.py
+++++ b/django/core/validators.py
++@@ -120,15 +120,17 @@ class URLValidator(RegexValidator):
++             raise ValidationError(self.message, code=self.code)
 + 
-+ if (exiv2lib_COMPILE_DEFINITIONS)
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/0001-Fix-build-with-gtest-1.11.patch b/meta-oe/recipes-support/exiv2/exiv2/0001-Fix-build-with-gtest-1.11.patch
-new file mode 100644
-index 0000000000..fd4c88f062
---- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/0001-Fix-build-with-gtest-1.11.patch
-@@ -0,0 +1,35 @@
-+From 14d482f9e2353e195149fff196e65cb3a6b46e25 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Fri, 18 Jun 2021 18:53:46 +0200
-+Subject: [PATCH] Fix build with gtest 1.11
-+
-+From: Antonio Rojas <arojas@archlinux.org>
-+
-+INSTANTIATE_TYPED_TEST_CASE_P requires a non-empty prefix now
-+
-+Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/c069e36605f05e8e58bf964e5ecbde04efb90a20]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ unitTests/test_slice.cpp | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/unitTests/test_slice.cpp b/unitTests/test_slice.cpp
-+index bbc6785..ab51cda 100644
-+--- a/unitTests/test_slice.cpp
-++++ b/unitTests/test_slice.cpp
-+@@ -422,12 +422,12 @@ REGISTER_TYPED_TEST_CASE_P(slice, atAccess, iteratorAccess, constructionFailsFro
-+                            constMethodsPreserveConst);
++         # Then check full URL
+++        
+++        try:
+++            splitted_url = urlsplit(value)
+++        except ValueError:
+++            raise ValidationError(self.message, code=self.code, params={'value': value})
++         try:
++             super().__call__(value)
++         except ValidationError as e:
++             # Trivial case failed. Try for possible IDN domain
++             if value:
++-                try:
++-                    scheme, netloc, path, query, fragment = urlsplit(value)
++-                except ValueError:  # for example, "Invalid IPv6 URL"
++-                    raise ValidationError(self.message, code=self.code)
+++                scheme, netloc, path, query, fragment = splitted_url
++                 try:
++                     netloc = netloc.encode('idna').decode('ascii')  # IDN -> ACE
++                 except UnicodeError:  # invalid domain part
++@@ -139,7 +141,7 @@ class URLValidator(RegexValidator):
++                 raise
++         else:
++             # Now verify IPv6 in the netloc part
++-            host_match = re.search(r'^\[(.+)\](?::\d{2,5})?$', urlsplit(value).netloc)
+++            host_match = re.search(r'^\[(.+)\](?::\d{2,5})?$', splitted_url.netloc)
++             if host_match:
++                 potential_ip = host_match.groups()[0]
++                 try:
++@@ -151,7 +153,7 @@ class URLValidator(RegexValidator):
++         # section 3.1. It's defined to be 255 bytes or less, but this includes
++         # one byte for the length of the name and one byte for the trailing dot
++         # that's used to indicate absolute names in DNS.
++-        if len(urlsplit(value).hostname) > 253:
+++        if splitted_url.hostname is None or len(splitted_url.hostname) > 253:
++             raise ValidationError(self.message, code=self.code)
 + 
-+ typedef ::testing::Types<const std::vector<int>, std::vector<int>, int*, const int*> test_types_t;
-+-INSTANTIATE_TYPED_TEST_CASE_P(, slice, test_types_t);
-++INSTANTIATE_TYPED_TEST_CASE_P(slice, slice, test_types_t);
 + 
-+ REGISTER_TYPED_TEST_CASE_P(mutableSlice, iterators, at);
-+ typedef ::testing::Types<std::vector<int>, int*> mut_test_types_t;
-+-INSTANTIATE_TYPED_TEST_CASE_P(, mutableSlice, mut_test_types_t);
-++INSTANTIATE_TYPED_TEST_CASE_P(slice, mutableSlice, mut_test_types_t);
-+ 
-+ REGISTER_TYPED_TEST_CASE_P(dataBufSlice, successfulConstruction, failedConstruction);
-+ typedef ::testing::Types<DataBuf&, const DataBuf&> data_buf_types_t;
-+-INSTANTIATE_TYPED_TEST_CASE_P(, dataBufSlice, data_buf_types_t);
-++INSTANTIATE_TYPED_TEST_CASE_P(slice, dataBufSlice, data_buf_types_t);
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/run-ptest b/meta-oe/recipes-support/exiv2/exiv2/run-ptest
-new file mode 100644
-index 0000000000..d7ed07d7c9
---- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/run-ptest
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+cd tests
-+python3 ./runner.py -v 2>&1 | sed -e '/\.\.\. ok/ s/^/PASS: /g' -e '/\.\.\. [ERROR|FAIL]/ s/^/FAIL: /g' -e '/\.\.\. skipped/ s/^/SKIP: /g' -e 's/ \.\.\. ok//g' -e 's/ \.\.\. ERROR//g' -e 's/ \.\.\. FAIL//g' -e 's/ \.\.\. skipped//g'
-+
-+cd ..
-+./build/bin/unit_tests --gtest_print_time=0 | sed -E  '/^\[ RUN/d ; s/\[       OK \]/PASS: / ; s/\[ DISABLED \]/SKIP: / ; s/\[ FAILED \]/FAIL: /'
-diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-index 1c1c05dfaa..0b70c3b235 100644
---- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-+++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
-@@ -2,10 +2,13 @@ SUMMARY = "Exif, Iptc and XMP metadata manipulation library and tools"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
+diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+index bf7e182aba..0f6f8fc4d0 100644
+--- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
++++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
+@@ -38,6 +38,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
+             file://0001-implement-group-method-for-FakeMatch.patch \
+             file://0001-fix-ipv6-test.patch \
+             file://0001-Fixed-32298-Fixed-URLValidator-hostname-length-valid.patch \
++            file://0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch \
+             "
  
--DEPENDS = "zlib expat"
-+DEPENDS = "zlib expat ${@bb.utils.contains('PTEST_ENABLED', '1', 'googletest', '', d)}"
- 
- SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source.tar.gz \
-+           file://run-ptest \
-+           file://0001-Allow-test-data-path-configuration.patch \
-            file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.patch \
-+           file://0001-Fix-build-with-gtest-1.11.patch \
-            file://CVE-2021-29457.patch \
-            file://CVE-2021-29458.patch \
-            file://CVE-2021-29463.patch \
-@@ -26,8 +29,34 @@ SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source
- SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
- 
- # Once patch is obsolete (project should be aware due to PRs), dos2unix can be removed either
--inherit dos2unix
-+inherit dos2unix ptest
- 
- S = "${WORKDIR}/${BPN}-${PV}-Source"
- 
- inherit cmake gettext
-+
-+RDEPENDS:${PN}-ptest += " \
-+    python3-html \
-+    python3-lxml \
-+    python3-multiprocessing \
-+    python3-shell \
-+    python3-unittest"
-+
-+EXTRA_OECMAKE = "\
-+    ${@bb.utils.contains('PTEST_ENABLED', \
-+    '1', \
-+    '-DEXIV2_BUILD_SAMPLES=ON -DEXIV2_ENABLE_WEBREADY=ON -DEXIV2_BUILD_UNIT_TESTS=ON -DTEST_FOLDER=${PTEST_PATH}', \
-+    '', \
-+    d)} \
-+"
-+
-+do_install_ptest(){
-+    cp -r ${S}/tests ${D}${PTEST_PATH}/
-+    cp -r ${S}/test ${D}${PTEST_PATH}/
-+
-+    install -d ${D}${PTEST_PATH}/build/bin
-+    install ${B}/bin/* ${D}${PTEST_PATH}/build/bin
-+
-+    install -d ${D}${PTEST_PATH}/src
-+    install ${S}/src/canonmn_int.cpp ${D}${PTEST_PATH}/src
-+}
+ SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
 
