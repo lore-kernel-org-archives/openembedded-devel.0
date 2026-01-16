@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 596FDD4A609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BC15D4A60E
 	for <webhook@archiver.kernel.org>; Fri, 16 Jan 2026 07:38:24 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1359.1768549096817247465
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1361.1768549099064186561
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Jan 2026 23:38:17 -0800
+ Thu, 15 Jan 2026 23:38:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KrAtzS+N;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-47ee0291921so11996095e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 23:38:16 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AeFyC6Cv;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-43284ed32a0so927925f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Jan 2026 23:38:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768549095; x=1769153895; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768549097; x=1769153897; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=U7eZxYgrJcsQrgoCZfDug0v2vk6HK4DvB1m/hKMD7j0=;
-        b=KrAtzS+NXHgMltp/pxCzdigxRUmevtAghD82viwYIwgfA63UnEQ94jiv4zh1iQU8G5
-         UHEjbdxPSysOsPPP7ylZEG36gFEoxMVioHTVclICiTnQ84rZOG/MvAgQd2UUO6Qnwyru
-         65NGhSPnTeR4Ay44QRe7kiFrE/1ZMiY2WUgfxc71++YHD7wzuZmLQ3h7X29u6cJlYr3Z
-         1uRbiNzev2JdnlZsGh456kkkrcugmgCAapQ4BJnI2XjsilHALo4QW9KnTIiIGuxjJoVZ
-         1b6Jkne8HFdc40NyYTPJiJW6XCvT8uLCMd8lC0fnStELtjTIV8hCZWRaDatHTSKU0vJN
-         BPgw==
+        bh=+3q7Nd4NhY/AGiegspDw48j+YNFf/LTpHjPl1hxxowE=;
+        b=AeFyC6CvFixBNJidrV0jkx96LqNTKhaIRMxzV8mBagGJjxN/t0FhIImVl8yXJCpFHK
+         qNmR1KxzZCZSZtZwWJa5W8Jx4iEU8YGu9IKg+PVNBzGkv/OhYWJidLTn4M6yYJBqE/Ki
+         l1kt7LxlaOcn7O1fMKSSmAEhdjDeWAqUZoWy2q85fi4jppxBQ18cSiPGq5+7jiyiD7V8
+         CpU8whafPzXFqBuW9zfy80AAAECiOYB3wGPuqGC8PV1nHnE67Ibixsru+MoF73P0Blq/
+         xQmAp4zQofZRfyDNBGYACerOk5OoFhg/clVW5BeoCx2i1Wju5xxuhWvKW+lGmq+T9VMC
+         9ifw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768549095; x=1769153895;
+        d=1e100.net; s=20230601; t=1768549097; x=1769153897;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=U7eZxYgrJcsQrgoCZfDug0v2vk6HK4DvB1m/hKMD7j0=;
-        b=tKMAbNfNwftY8MU/fML6AiZpMiN4Ti+5QDJrSSpAbzgT9Acafpg0vT0n47fe7xqEPB
-         WkEErCssa4CQGM0YErjWfT8oG29nOyytHmap7OQGighBS7JurBtUxX8YA5MUsFgeDt/o
-         uppzKV1J+NgLO6C0VWWpx7YcU63inlKJm4UJB1/fPZ8mDUlZSBAKEZV6gsWULp2JHtRS
-         +q05hYHEJuuNnveZewk8Gh3pntus9CCIH+C+b7/0YU+suYE+xVf3uZiqTKXw0jymDHj/
-         DwQ2uZRIYEIuFF+Utu1cLmDnCWhoCtmAQGrAwmBn22nA//RqQPMBwopXVc2jZbsmFYqS
-         hmlA==
-X-Gm-Message-State: AOJu0Yx8LqP64UO8Py6SuYMhLPJ0V3rtH4VkHYrcCVb5XIw+wPxaqosZ
-	YnWe1Kj2dM4/CCccUpqDwDUWp996rrcadA/tD29m7yLwsYNPn4thFTKXG1tegA==
-X-Gm-Gg: AY/fxX5uABSe4O0Amfmew1qs/0sLzrl3+io5qE+vVnZIarxFbPyCG4gftAiqB45F2m5
-	9ZXQHPZF3QWY1hwERwegh0obsJyUs+4OgSBYrUzY1NeMN8LAjkDK379nD16upyqJyv+OAzfQ2Jl
-	gDCY3mM5U9Np5QIhg7AJX7FHSz1b2LGt7DCDqwmIjBk+rpdxm3aUnvUWYPzlGMmAWiIfjz2VT7M
-	MiVIy9iZeEuP4s+BE8O9x5j6J+G+PmPKaAVkAzZ7pRNzLkMD7R0ucWKsNOYEYZU3r+wjBy7pd0k
-	UFfiSC3EE68uUCkUFRuSl8ePAhjcHZ9ULA1RxiENopp+Wt+iciBhahPtb8DpZlUPfH6pLmRyUsr
-	Jo+mYQnbCt36DR0OFfsHmytCV8IzyI5ZhoKHkuxwVqKEtijBbPbECeK3NJieQg4tnS5NnlxLcmX
-	qv7k75O0/D
-X-Received: by 2002:a05:600c:3b8e:b0:47e:de23:dd6f with SMTP id 5b1f17b1804b1-4801eac0a1dmr17606755e9.12.1768549095145;
-        Thu, 15 Jan 2026 23:38:15 -0800 (PST)
+        bh=+3q7Nd4NhY/AGiegspDw48j+YNFf/LTpHjPl1hxxowE=;
+        b=orw/iF9LRuo9NdJWXO5VWsXfwd1f514MinPfUNFs7KQ3OC4xcsc/uFuZkCeCzB4L72
+         h+qozM3ONwgTOMhWurUDRM/NjbZzXB1aMU6JzXZWxYH79xfK1uRarsTki9lCWfS3mUME
+         w8ZGfeM7WLWT10G/tSwph5a8pZo8ngi1dcAfeS2GFKc6RZuJm14hCzzHy3r8uSnoe4fW
+         VLtBtU+LnSkoA8msq97VCb4ILINQGoh7v3rizY6VMgeOlV+mkf1nTbpewoRj1dTEiFRf
+         sgUXAyJUr0S9aIgL03L3mni6V0tSvuTlWRcXOMRBp2WSTf73/z8AxG2+FcFX71MhOs/m
+         JcOA==
+X-Gm-Message-State: AOJu0YygFiyXrBbyVWVIyYpY1BYrvSOllFluKOCShmNCVcaMfjE27Lhy
+	8173WjqDifPTblqajCbpPt1AS7z/KuLwSwMeLK9b5h5sAomlHwQpeIcgyqFHkQ==
+X-Gm-Gg: AY/fxX6az+QhEOEEXN8qGIyklnoWoJ6dLYyWal/TqJrBtZGWA2fD9vK5kTwG/u7WKgb
+	uuuoz689UzFXItePQiY4WWdM+tpq31ZmIWRhpKoqQNXGDXLzggvi4MDcciJrxeA4z3EzsV0feKH
+	li73hbjtLbyXaxljO2I3u3HQ/R9sfWguzlBgTK1UT35sGHGz8XDI0AA7EUgyVhqzGlJIwMXYzC/
+	NXkxoPDwl7lFrcpm0bAB5k+bfpxjAzrvQlPo2+j0TpfjEstlWAsajW5fNjW1qBQCkIUtPy2RHxt
+	eYQVaHZi1rZJYJ/TYzc+rfCu27F3So1n5bmsbrW4RlaYdlQ5UjJzwjiY1SMJwoIxJRSZAVSyWP6
+	EP7gfwvfujdLbmeoL3faDwpMcxNjW79gTC+5WelDHxoNB64e12geNs1J0OkMcD8KQQUlUa5PbN3
+	fum2kzjEiy
+X-Received: by 2002:a05:600c:1387:b0:47a:935f:618e with SMTP id 5b1f17b1804b1-4801e30ba55mr27335925e9.15.1768549097340;
+        Thu, 15 Jan 2026 23:38:17 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47f4b26764fsm84992495e9.12.2026.01.15.23.38.14
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-47f4b26764fsm84992495e9.12.2026.01.15.23.38.16
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Jan 2026 23:38:14 -0800 (PST)
+        Thu, 15 Jan 2026 23:38:17 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 3/6] python3-bidict: upgrade 0.22.0 -> 0.22.1
-Date: Fri, 16 Jan 2026 08:38:07 +0100
-Message-ID: <20260116073810.3290097-3-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 5/6] python3-smpplib: upgrade 2.2.1 -> 2.2.2
+Date: Fri, 16 Jan 2026 08:38:09 +0100
+Message-ID: <20260116073810.3290097-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260116073810.3290097-1-skandigraun@gmail.com>
 References: <20260116073810.3290097-1-skandigraun@gmail.com>
@@ -67,39 +67,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 07:38:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123523
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123525
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ==========
--Only include the source code in the source distribution. This reduces the
- size of the source distribution from 200kB to 30kB.
--Fix the return type hint of bidict.inverted() to return an Iterator, rather
- than an Iterable.
+ Added python 3.10 tests to CircleCI
+ fix socket recv error being silently ignored
+ Refactored Client.read_pdu()
+ Refactored Client.send_pdu()
+ increment sequence of commands as spec (fixes #214)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 50bbe6ab5f49cc525fb85a985dd5981e1c86815e)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-bidict_0.22.0.bb => python3-bidict_0.22.1.bb}      | 2 +-
+ .../{python3-smpplib_2.2.1.bb => python3-smpplib_2.2.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bidict_0.22.0.bb => python3-bidict_0.22.1.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-smpplib_2.2.1.bb => python3-smpplib_2.2.2.bb} (87%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb b/meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb
-rename to meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
-index 088931d148..1ed0af81a1 100644
---- a/meta-python/recipes-devtools/python/python3-bidict_0.22.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-bidict_0.22.1.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://bidict.readthedocs.io/"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=858e74278ef3830d46481172ae03c819"
+diff --git a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb b/meta-python/recipes-devtools/python/python3-smpplib_2.2.2.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-smpplib_2.2.2.bb
+index be0bafd33f..5c635d6fb0 100644
+--- a/meta-python/recipes-devtools/python/python3-smpplib_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-smpplib_2.2.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://README.md;md5=8b4e2ac8cf248f7b991784f88b630852"
  
--SRC_URI[sha256sum] = "5c826b3e15e97cc6e615de295756847c282a79b79c5430d3bfc909b1ac9f5bd8"
-+SRC_URI[sha256sum] = "1e0f7f74e4860e6d0943a05d4134c63a2fad86f3d4732fb265bd79e4e856d81d"
+ PYPI_PACKAGE = "smpplib"
+-SRC_URI[sha256sum] = "c0b01947b47e404f42ccb59e906b6e4eb507963c971d59b44350db0f29c76166"
++SRC_URI[sha256sum] = "f2191e73b24dba94f2889bf2ea1a60aeef6bd43afd3ddbbc632d7e41d9f30e47"
  
- inherit pypi python_setuptools_build_meta
+ inherit pypi setuptools3 ptest
  
 
