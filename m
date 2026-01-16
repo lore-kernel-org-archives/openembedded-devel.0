@@ -1,330 +1,421 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <adam.duskett@amarulasolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5E18D4A60E
-	for <webhook@archiver.kernel.org>; Fri, 16 Jan 2026 08:06:54 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1661.1768550813536709594
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA874D4A613
+	for <webhook@archiver.kernel.org>; Fri, 16 Jan 2026 08:43:54 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1941.1768553028340205505
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Jan 2026 00:06:54 -0800
+ Fri, 16 Jan 2026 00:43:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout06.t-online.de (Postfix) with SMTP id AC91288F;
-	Fri, 16 Jan 2026 09:06:51 +0100 (CET)
-Received: from [192.168.178.36] ([84.163.33.158]) by fwd89.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vger2-2NVMYq0; Fri, 16 Jan 2026 09:06:48 +0100
-Date: Fri, 16 Jan 2026 09:06:43 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-multimedia][PATCH] xdg-desktop-portal-wlr: update
- 0.7.0 -> 0.8.1
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=UDCF9wJ0;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.208.42, mailfrom: adam.duskett@amarulasolutions.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-655b5094119so38941a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 00:43:48 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768553027; cv=none;
+        d=google.com; s=arc-20240605;
+        b=LvLxoEFAsu1ZU/FqIrQMSYYnB5Tqz04WcM/4v0pYjK0IXwKL29K9TyYiddid+MaXE/
+         MwtaTsg1vv9zQ4VgRxxm9+Id1g2HYhvbvcKurZsxUXyJdpzozKPMk7SRIOpUXnVpn4sI
+         lpMgHbx+iQXoDxa13QkFpyRUxhbdxCdkn3ROPem+TNElQo3cRjZJCo6dGayfySh6g1Bk
+         6nJDRdM00ChvrouZmJKUFAw0NmrG9CZULSEA+MvRZTuyH137vnYKnVveNJA0SniAmkqg
+         983xOv55ML4Lci2Zrv04f5m4pPGxv9NiWPc0+kyHT1BCSmOinLJ81sVfOd9U/QR1wIaE
+         iIkw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=m+tdXxOzXHGxNm5uXRpVMJ3pBpbaq9vl5ZQA6ZSjG40=;
+        fh=kqtH9RvdTS8z4R7bH+N1q4tJTvX5kZFkdgAseXKYH84=;
+        b=LefadmpHqoIDc8hDOxt0MKI6KJohrO9aJFoYukOfjtHRCDYng6JesqdLjPpGNQkod/
+         3tdVo39VfxQ9sELq9vgNFJ6JSM8140Gh5yGSw84dcF1PL8x0Vu3Aic2keU+tRHt2AEOv
+         8Z6Ximij33UGIQ1bQQrWIlWwngpAgmVlfYUuZttOUwtkNzRo7/p6+bun0Omtn0D0awXm
+         yqBx5n39mZhPRWWrZMiYsPAcs75k0UfQMHs9Pi15Rcd9NSClRyA6i99tpoaICStb10Tq
+         zs7TBdv2uQbjmq+l6VNsUsqVI5DTaGv9Mi0OH5R66hrxq+n3Ionm6FWrAJqkTk5TWc4T
+         QVmA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=amarulasolutions.com; s=google; t=1768553027; x=1769157827; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=m+tdXxOzXHGxNm5uXRpVMJ3pBpbaq9vl5ZQA6ZSjG40=;
+        b=UDCF9wJ0VpE3Lcvuxss3vYupQNpiWb3YuoEeOCFPob+NE4PHZCI3aRji1/PHwC3j1q
+         Q1QsVSDJ3mu5YLF2acH9MYTYEFKOw1BX7YPMbtaJsIc0DbAKzrzxxfUt5pfHlQTpbQ6K
+         zkI5bGQcV7QvjmMfqQkNV5w2aSwTMgnn6Vb14=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768553027; x=1769157827;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=m+tdXxOzXHGxNm5uXRpVMJ3pBpbaq9vl5ZQA6ZSjG40=;
+        b=ZnV7NGFts0oiyEy3ScroIlVzPyGFofLD0nD8KEPlGAZSO/oHIMMH8EJ3cQ/NThnZlu
+         RM7epW+JDIJ6GHbqQS3H1UOTV10ubtfdsTWUSNbpH8eOFRax+lRDzg4jjpLSb2Y/ZIah
+         VfhcIv+0/MMfNzUaKbM4Umio1PI4CZI0eS3euqfjtqs6VI52dfv2zmxVom0JWqA+Bn1g
+         ijGkxFnkmI2t+dvlQUiqyiG/LUciflLHstgaiIEZIh8XDsyaaShn8Ac/vXQBV+uOE8q0
+         kttnCIiyt2hRNvrT8P3FcrYUEG/naI52MaT1WOVVo3em8HpBnfVQDr3GqXAZn4PHpJcC
+         S0MQ==
+X-Gm-Message-State: AOJu0YzR4Bqm9WvrBTJVXG96IuIY895U7X0LqfDx9445qzotan6yQ/z3
+	LQCiBzyBN+6OCj2yybDWoTgu60zuQK+TTf+/Wp2T1f/c/uelpQO/HA3p2FnOlUYEZOwDe7CaBOC
+	mXVu2uc8STo+REWKBqagGxjswYV0yd9YgTt82tlgDWg==
+X-Gm-Gg: AY/fxX6zkRPPHjS2zj4iOfUtUoLh8Tn9GyCJYv15h6DvuEZ5IpcUhqLq086hnMMjj26
+	tQeNFP0T/cTXSs44Y2K3KkAQN8SfP+m42V2XDp//RjOw0d0JNmgvn6cfzwOg7FkNQaxNGDBX00T
+	Wk1ZmtGV37IXl+TDkANDXuxBOKsM5TS8P6LaaZBavw8mYgxdT7IVZHeYN6xQ0zTI8gPtIYMbnu2
+	llIWda7zuhYQEadLclvCFb9SKYA3RvYxGrDDzHIIHkFRs6CUTp68JsxwusQN1zLXMVopo2ZkaBB
+	4WOiwumDsI4hivo/TSqZ6iDnj4kZ
+X-Received: by 2002:a05:6402:2551:b0:649:9fef:5b14 with SMTP id
+ 4fb4d7f45d1cf-654516f66bemr964926a12.0.1768553026678; Fri, 16 Jan 2026
+ 00:43:46 -0800 (PST)
+MIME-Version: 1.0
+References: <20260115103503.200126-1-adam.duskett@amarulasolutions.com>
+ <20260115103503.200126-2-adam.duskett@amarulasolutions.com> <CAMKF1sqEevw=WBZQr4pqu4_a3u_skRbP-JN9+N7QzDp8ZABQrQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqEevw=WBZQr4pqu4_a3u_skRbP-JN9+N7QzDp8ZABQrQ@mail.gmail.com>
+From: Adam Duskett <adam.duskett@amarulasolutions.com>
+Date: Fri, 16 Jan 2026 09:43:35 +0100
+X-Gm-Features: AZwV_QiIfMF0q98lyBUdoDBFyksPn9OEUgc8xz2dUoJaemS_C5LBpIYtQsmmCYE
+Message-ID: <CAHDQB6MXMr21pnrYhDUe-RRFT+27DvVU_H0rvt0aNneXxt4KdA@mail.gmail.com>
+Subject: Re: [oe] [PATCH v2 2/2] kmscon: Add recipe
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <7J6Y8T.P7ZZEYH9FWC83@t-online.de>
-In-Reply-To: <188B273A6CFFB755.2721127@lists.openembedded.org>
-References: <188B273A6CFFB755.2721127@lists.openembedded.org>
-X-Mailer: geary/46.0
-MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-sLmglCq8j/qyxl6WzSUa"
-X-TOI-EXPURGATEID: 150726::1768550808-25C419B6-803CDA41/0/0 CLEAN NORMAL
-X-TOI-MSGID: 832d818b-fe2c-4441-bee9-9a05f7f9530c
+Content-Type: multipart/alternative; boundary="000000000000ec013706487d5676"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 08:06:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123528
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 08:43:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123529
 
---=-sLmglCq8j/qyxl6WzSUa
-Content-Type: text/plain; charset=us-ascii; format=flowed
+--000000000000ec013706487d5676
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The update uses the current master branch, which is two commits ahead 
-of the actual release.
-The changes are non-invasive and enable the use of fuzzel as a chooser, 
-a feature I am personally
-interested in.
+Hi Khem!
 
-<https://github.com/emersion/xdg-desktop-portal-wlr/commits/master/>
+Thanks for the test! I didn't know about TOOLCHAIN =3D "clang" and will get
+it fixed!
 
+Thanks again!
 
-On Fri, Jan 16 2026 at 08:59:59 +01:00:00, Markus Volk via 
-lists.openembedded.org <f_l_k=t-online.de@lists.openembedded.org> wrote:
-> Remove patch that downgraded gbm_bo_create_with_modifiers.
-> Meanwhile gbm_bo_create_with_modifiers2 should be save to use?
-> 
-> Fix to work with manpages class
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...screencast-Fix-build-with-older-mesa.patch | 53 
-> -------------------
->  ...7.0.bb => xdg-desktop-portal-wlr_0.8.1.bb} |  9 ++--
->  2 files changed, 4 insertions(+), 58 deletions(-)
->  delete mode 100644 
-> meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
->  rename 
-> meta-multimedia/recipes-support/xdg-desktop-portal-wlr/{xdg-desktop-portal-wlr_0.7.0.bb 
-> => xdg-desktop-portal-wlr_0.8.1.bb} (74%)
-> 
-> diff --git 
-> a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch 
-> b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
-> deleted file mode 100644
-> index ff4fcc292a..0000000000
-> --- 
-> a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
-> +++ /dev/null
-> @@ -1,53 +0,0 @@
-> -From ef60a76e2a21b7649632dcf71d125039604a56b5 Mon Sep 17 00:00:00 
-> 2001
-> -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
-> -Date: Sun, 18 Jun 2023 10:42:19 -0700
-> -Subject: [PATCH] screencast: Fix build with older mesa
-> -
-> -gbm_bo_create_with_modifiers2() is quite new and there are still 
-> distros
-> -that ship 21.2 and older. e.g. powerVR mesa implementation
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>>
-> ----
-> - src/screencast/pipewire_screencast.c | 8 ++++++--
-> - src/screencast/screencast_common.c   | 4 ++--
-> - 2 files changed, 8 insertions(+), 4 deletions(-)
-> -
-> -diff --git a/src/screencast/pipewire_screencast.c 
-> b/src/screencast/pipewire_screencast.c
-> -index 0611fd5..7d66810 100644
-> ---- a/src/screencast/pipewire_screencast.c
-> -+++ b/src/screencast/pipewire_screencast.c
-> -@@ -234,9 +234,13 @@ static void 
-> pwr_handle_stream_param_changed(void *data, uint32_t id,
-> - 			uint32_t n_params;
-> - 			struct spa_pod_builder *builder[2] = {&b[0].b, &b[1].b};
-> -
-> --			struct gbm_bo *bo = gbm_bo_create_with_modifiers2(cast->ctx->gbm,
-> -+			struct gbm_bo *bo = gbm_bo_create_with_modifiers(cast->ctx->gbm,
-> - 				cast->screencopy_frame_info[cast->buffer_type].width, 
-> cast->screencopy_frame_info[cast->buffer_type].height,
-> --				cast->screencopy_frame_info[cast->buffer_type].format, 
-> modifiers, n_modifiers, flags);
-> -+				cast->screencopy_frame_info[cast->buffer_type].format, 
-> modifiers, n_modifiers);
-> -+			if(!bo)
-> -+				bo = gbm_bo_create(cast->ctx->gbm,
-> -+				cast->screencopy_frame_info[cast->buffer_type].width, 
-> cast->screencopy_frame_info[cast->buffer_type].height,
-> -+				cast->screencopy_frame_info[cast->buffer_type].format, 
-> GBM_BO_USE_RENDERING);
-> - 			if (bo) {
-> - 				modifier = gbm_bo_get_modifier(bo);
-> - 				gbm_bo_destroy(bo);
-> -diff --git a/src/screencast/screencast_common.c 
-> b/src/screencast/screencast_common.c
-> -index d6d13db..2e4fc18 100644
-> ---- a/src/screencast/screencast_common.c
-> -+++ b/src/screencast/screencast_common.c
-> -@@ -143,8 +143,8 @@ struct xdpw_buffer *xdpw_buffer_create(struct 
-> xdpw_screencast_instance *cast,
-> - 		uint32_t flags = GBM_BO_USE_RENDERING;
-> - 		if (cast->pwr_format.modifier != DRM_FORMAT_MOD_INVALID) {
-> - 			uint64_t *modifiers = (uint64_t*)&cast->pwr_format.modifier;
-> --			buffer->bo = gbm_bo_create_with_modifiers2(cast->ctx->gbm, 
-> frame_info->width, frame_info->height,
-> --				frame_info->format, modifiers, 1, flags);
-> -+			buffer->bo = gbm_bo_create_with_modifiers(cast->ctx->gbm, 
-> frame_info->width, frame_info->height,
-> -+				frame_info->format, modifiers, 1);
-> - 		} else {
-> - 			if (cast->ctx->state->config->screencast_conf.force_mod_linear) {
-> - 				flags |= GBM_BO_USE_LINEAR;
-> ---
-> -2.41.0
-> -
-> diff --git 
-> a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb 
-> b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-> similarity index 74%
-> rename from 
-> meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
-> rename to 
-> meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-> index c3056c9e86..3deeb1078d 100644
-> --- 
-> a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
-> +++ 
-> b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-> @@ -13,18 +13,17 @@ DEPENDS = " \
->      virtual/libgbm \
->  "
-> 
-> -inherit meson pkgconfig features_check
-> +inherit meson pkgconfig features_check manpages
->  REQUIRED_DISTRO_FEATURES = "opengl wayland"
-> 
-> -SRC_URI = 
-> "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master 
-> \
-> -           file://0001-screencast-Fix-build-with-older-mesa.patch" 
-> <file://0001-screencast-fix-build-with-older-mesa.patch/>
-> +SRC_URI = 
-> "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master"
-> 
->  PV .= "+git"
-> -SRCREV = "d9ada849aeca6137915de2df69beaef4e272cc1d"
-> +SRCREV = "256eb4a9f6ecffd64289d6501d036c2094b47db6"
-> 
->  PACKAGECONFIG ?= "${@bb.utils.contains 
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'systemd', 
-> 'systemd', 'basu', d)}"
-> 
-> -PACKAGECONFIG[man-pages] = 
-> "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
-> +PACKAGECONFIG[manpages] = 
-> "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
->  PACKAGECONFIG[systemd] = "-Dsystemd=enabled 
-> -Dsd-bus-provider=libsystemd,-Dsystemd=disabled"
->  PACKAGECONFIG[basu] = "-Dsd-bus-provider=basu,,basu"
-> 
-> --
-> 2.52.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123527): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/123527>
-> Mute This Topic: <https://lists.openembedded.org/mt/117294478/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+Adam Duskett
 
 
---=-sLmglCq8j/qyxl6WzSUa
-Content-Type: text/html; charset=us-ascii
+On Thu, Jan 15, 2026 at 5:08=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
 
-<div id="geary-body" dir="auto"><div><div>The update uses the current master branch, which is two commits ahead of the actual release.</div><div>The changes are non-invasive and enable the use of fuzzel as a chooser, a feature I am personally</div><div>interested in.</div><div><br></div><div><a href="https://github.com/emersion/xdg-desktop-portal-wlr/commits/master/">https://github.com/emersion/xdg-desktop-portal-wlr/commits/master/</a></div></div><div><br></div></div><div id="geary-quote" dir="auto"><br>On Fri, Jan 16 2026 at 08:59:59 +01:00:00, Markus Volk via lists.openembedded.org &lt;f_l_k=t-online.de@lists.openembedded.org&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Remove patch that downgraded gbm_bo_create_with_modifiers.
-Meanwhile gbm_bo_create_with_modifiers2 should be save to use?
+> Thanks for your submission. This fails to build with TOOLCHAIN =3D "clang=
+"
+>
+> https://errors.yoctoproject.org/Errors/Details/896251/
+>
+> On Thu, Jan 15, 2026 at 2:40=E2=80=AFAM Adam Duskett via lists.openembedd=
+ed.org
+> <adam.duskett=3Damarulasolutions.com@lists.openembedded.org> wrote:
+>
+>> Provide sane defaults that do not have dependencies, such as
+>> a dummy and terminal session support and basic fbdev support.
+>>
+>> kmsconvt@.service must be added separatly or else
+>> do_rootfs fails with the following error:
+>>
+>> ```
+>> do_rootfs: Postinstall scriptlets of ['kmscon'] have failed. If the
+>> intention
+>> is to defer them to first boot, then please place them into
+>> pkg_postinst_ontarget:${PN} (). Deferring to first boot via 'exit 1' is =
+no
+>> longer supported.
+>> ```
+>>
+>> Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+>> ---
+>> v1 -> v2: add tag=3Dv${PV} to the SRC_URI
+>>
+>>  .../recipes-graphics/kmscon/kmscon_9.2.1.bb   | 63 +++++++++++++++++++
+>>  1 file changed, 63 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+>>
+>> diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+>> b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+>> new file mode 100644
+>> index 0000000000..6c4060763b
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+>> @@ -0,0 +1,63 @@
+>> +SUMMARY =3D "Simple terminal emulator based on linux kernel mode settin=
+g
+>> (KMS)."
+>> +DESCRIPTION =3D "\
+>> +    Kmscon is a simple terminal emulator based on linux kernel mode
+>> setting \
+>> +    (KMS). It is an attempt to replace the in-kernel VT implementation
+>> with \
+>> +    a userspace console. \
+>> +"
+>> +HOMEPAGE =3D "https://github.com/kmscon/kmscon"
+>> +BUGTRACKER =3D "https://github.com/kmscon/kmscon/issues"
+>> +CVE_PRODUCT =3D "kmscon"
+>> +
+>> +SECTION =3D "graphics"
+>> +
+>> +LICENSE =3D "MIT"
+>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6d4602d249f8a3401040238e9836=
+7d9e"
+>> +
+>> +DEPENDS =3D "\
+>> +    libtsm \
+>> +    libxkbcommon \
+>> +    udev \
+>> +"
+>> +
+>> +SRC_URI =3D "git://
+>> github.com/kmscon/kmscon;protocol=3Dhttps;branch=3Dmain;tag=3Dv${PV}
+>> <http://github.com/kmscon/kmscon;protocol=3Dhttps;branch=3Dmain;tag=3Dv$=
+%7BPV%7D>
+>> "
+>> +SRCREV =3D "7d46650dbb0826f9b89de42f879be879391c14fd"
+>> +
+>> +inherit meson pkgconfig systemd
+>> +
+>> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)=
+}"
+>> +
+>> +PACKAGECONFIG[backspace_sends_delete] =3D "-Dbackspace_sends_delete=3Dt=
+rue,
+>> -Dbackspace_sends_delete=3Dfalse"
+>> +PACKAGECONFIG[font_pango] =3D "-Dfont_pango=3Denabled,
+>> -Dfont_pango=3Ddisabled, pango"
+>> +PACKAGECONFIG[multi_seat] =3D "-Dmulti_seat=3Denabled,
+>> -Dmulti_seat=3Ddisabled, systemd"
+>> +PACKAGECONFIG[opengl] =3D "-Drenderer_gltex=3Denabled -Dvideo_drm3d=3De=
+nabled,
+>> -Drenderer_gltex=3Ddisabled -Dvideo_drm3d=3Ddisabled, libdrm virtual/egl
+>> virtual/libgles2 virtual/libgbm"
+>> +PACKAGECONFIG[video_drm2d] =3D "-Dvideo_drm2d=3Denabled,
+>> -Dvideo_drm2d=3Ddisabled, libdrm"
+>> +
+>> +EXTRA_OEMESON =3D "\
+>> +    -Delogind=3Ddisabled \
+>> +    -Dextra_debug=3Dfalse \
+>> +    -Dfont_unifont=3Denabled \
+>> +    -Dsession_dummy=3Denabled \
+>> +    -Dsession_terminal=3Denabled \
+>> +    -Dtests=3Dfalse \
+>> +    -Dvideo_fbdev=3Denabled \
+>> +"
+>> +
+>> +SYSTEMD_SERVICE:${PN} =3D "kmscon.service"
+>> +FILES:${PN} +=3D "${systemd_system_unitdir}/kmsconvt@.service"
+>> +
+>> +do_install:append() {
+>> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
+>> 'false', d)}; then
+>> +        install -d ${D}${sysconfdir}/systemd/system
+>> +        ln -sf ${systemd_system_unitdir}/kmsconvt@.service \
+>> +            ${D}${sysconfdir}/systemd/system/autovt@.service
+>> +    fi
+>> +
+>> +    if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false',
+>> d)}; then
+>> +        sed -e "s@#drm@drm@g" \
+>> +            -e "s@#hwaccel@hwaccel@g" \
+>> +            -e "s@#render-engine=3Dgltex@render-engine=3Dgltex@g" \
+>> +            -i ${D}${sysconfdir}/kmscon/kmscon.conf
+>> +    fi
+>> +}
+>> +
+>> +RDEPENDS:${PN} =3D "xkeyboard-config"
+>> --
+>> 2.52.0
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#123502):
+>> https://lists.openembedded.org/g/openembedded-devel/message/123502
+>> Mute This Topic: https://lists.openembedded.org/mt/117277014/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>>
 
-Fix to work with manpages class
+--000000000000ec013706487d5676
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
----
- ...screencast-Fix-build-with-older-mesa.patch | 53 -------------------
- ...7.0.bb =&gt; xdg-desktop-portal-wlr_0.8.1.bb} |  9 ++--
- 2 files changed, 4 insertions(+), 58 deletions(-)
- delete mode 100644 meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
- rename meta-multimedia/recipes-support/xdg-desktop-portal-wlr/{xdg-desktop-portal-wlr_0.7.0.bb =&gt; xdg-desktop-portal-wlr_0.8.1.bb} (74%)
+<div dir=3D"ltr"><div>Hi Khem!</div><div><br></div><div>Thanks for the test=
+! I didn&#39;t know about TOOLCHAIN =3D &quot;clang&quot; and will get it f=
+ixed!</div><div><br></div><div>Thanks again!</div><div><br></div><div><div =
+dir=3D"ltr" class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><d=
+iv dir=3D"ltr"><span><p dir=3D"ltr" style=3D"line-height:1.7999999999999998=
+;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;font-famil=
+y:Ubuntu,sans-serif;color:rgb(0,0,0);background-color:transparent;vertical-=
+align:baseline;white-space:pre-wrap">Adam Duskett</span></p></span><br></di=
+v></div></div></div><br><div class=3D"gmail_quote gmail_quote_container"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 15, 2026 at 5:08=E2=80=AFPM=
+ Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div =
+dir=3D"ltr">Thanks for your submission. This fails=C2=A0to build with TOOLC=
+HAIN =3D &quot;clang&quot;<div><br></div><div><a href=3D"https://errors.yoc=
+toproject.org/Errors/Details/896251/" target=3D"_blank">https://errors.yoct=
+oproject.org/Errors/Details/896251/</a></div></div><br><div class=3D"gmail_=
+quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 15, 2026 at 2:40=
+=E2=80=AFAM Adam Duskett via <a href=3D"http://lists.openembedded.org" targ=
+et=3D"_blank">lists.openembedded.org</a> &lt;adam.duskett=3D<a href=3D"mail=
+to:amarulasolutions.com@lists.openembedded.org" target=3D"_blank">amarulaso=
+lutions.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex">Provide sane defaults that do not have de=
+pendencies, such as<br>
+a dummy and terminal session support and basic fbdev support.<br>
+<br>
+kmsconvt@.service must be added separatly or else<br>
+do_rootfs fails with the following error:<br>
+<br>
+```<br>
+do_rootfs: Postinstall scriptlets of [&#39;kmscon&#39;] have failed. If the=
+ intention<br>
+is to defer them to first boot, then please place them into<br>
+pkg_postinst_ontarget:${PN} (). Deferring to first boot via &#39;exit 1&#39=
+; is no<br>
+longer supported.<br>
+```<br>
+<br>
+Signed-off-by: Adam Duskett &lt;<a href=3D"mailto:adam.duskett@amarulasolut=
+ions.com" target=3D"_blank">adam.duskett@amarulasolutions.com</a>&gt;<br>
+---<br>
+v1 -&gt; v2: add tag=3Dv${PV} to the SRC_URI<br>
+<br>
+=C2=A0.../recipes-graphics/kmscon/<a href=3D"http://kmscon_9.2.1.bb" rel=3D=
+"noreferrer" target=3D"_blank">kmscon_9.2.1.bb</a>=C2=A0 =C2=A0| 63 +++++++=
+++++++++++++<br>
+=C2=A01 file changed, 63 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-graphics/kmscon/<a href=3D"http://=
+kmscon_9.2.1.bb" rel=3D"noreferrer" target=3D"_blank">kmscon_9.2.1.bb</a><b=
+r>
+<br>
+diff --git a/meta-oe/recipes-graphics/kmscon/<a href=3D"http://kmscon_9.2.1=
+.bb" rel=3D"noreferrer" target=3D"_blank">kmscon_9.2.1.bb</a> b/meta-oe/rec=
+ipes-graphics/kmscon/<a href=3D"http://kmscon_9.2.1.bb" rel=3D"noreferrer" =
+target=3D"_blank">kmscon_9.2.1.bb</a><br>
+new file mode 100644<br>
+index 0000000000..6c4060763b<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-graphics/kmscon/<a href=3D"http://kmscon_9.2.1.bb" re=
+l=3D"noreferrer" target=3D"_blank">kmscon_9.2.1.bb</a><br>
+@@ -0,0 +1,63 @@<br>
++SUMMARY =3D &quot;Simple terminal emulator based on linux kernel mode sett=
+ing (KMS).&quot;<br>
++DESCRIPTION =3D &quot;\<br>
++=C2=A0 =C2=A0 Kmscon is a simple terminal emulator based on linux kernel m=
+ode setting \<br>
++=C2=A0 =C2=A0 (KMS). It is an attempt to replace the in-kernel VT implemen=
+tation with \<br>
++=C2=A0 =C2=A0 a userspace console. \<br>
++&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/kmscon/kmscon" rel=3D"nor=
+eferrer" target=3D"_blank">https://github.com/kmscon/kmscon</a>&quot;<br>
++BUGTRACKER =3D &quot;<a href=3D"https://github.com/kmscon/kmscon/issues" r=
+el=3D"noreferrer" target=3D"_blank">https://github.com/kmscon/kmscon/issues=
+</a>&quot;<br>
++CVE_PRODUCT =3D &quot;kmscon&quot;<br>
++<br>
++SECTION =3D &quot;graphics&quot;<br>
++<br>
++LICENSE =3D &quot;MIT&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D6d4602d249f8a3401040238e98=
+367d9e&quot;<br>
++<br>
++DEPENDS =3D &quot;\<br>
++=C2=A0 =C2=A0 libtsm \<br>
++=C2=A0 =C2=A0 libxkbcommon \<br>
++=C2=A0 =C2=A0 udev \<br>
++&quot;<br>
++<br>
++SRC_URI =3D &quot;git://<a href=3D"http://github.com/kmscon/kmscon;protoco=
+l=3Dhttps;branch=3Dmain;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=3D"_bla=
+nk">github.com/kmscon/kmscon;protocol=3Dhttps;branch=3Dmain;tag=3Dv${PV}</a=
+>&quot;<br>
++SRCREV =3D &quot;7d46650dbb0826f9b89de42f879be879391c14fd&quot;<br>
++<br>
++inherit meson pkgconfig systemd<br>
++<br>
++PACKAGECONFIG ??=3D &quot;${@bb.utils.filter(&#39;DISTRO_FEATURES&#39;, &#=
+39;opengl&#39;, d)}&quot;<br>
++<br>
++PACKAGECONFIG[backspace_sends_delete] =3D &quot;-Dbackspace_sends_delete=
+=3Dtrue, -Dbackspace_sends_delete=3Dfalse&quot;<br>
++PACKAGECONFIG[font_pango] =3D &quot;-Dfont_pango=3Denabled, -Dfont_pango=
+=3Ddisabled, pango&quot;<br>
++PACKAGECONFIG[multi_seat] =3D &quot;-Dmulti_seat=3Denabled, -Dmulti_seat=
+=3Ddisabled, systemd&quot;<br>
++PACKAGECONFIG[opengl] =3D &quot;-Drenderer_gltex=3Denabled -Dvideo_drm3d=
+=3Denabled, -Drenderer_gltex=3Ddisabled -Dvideo_drm3d=3Ddisabled, libdrm vi=
+rtual/egl virtual/libgles2 virtual/libgbm&quot;<br>
++PACKAGECONFIG[video_drm2d] =3D &quot;-Dvideo_drm2d=3Denabled, -Dvideo_drm2=
+d=3Ddisabled, libdrm&quot;<br>
++<br>
++EXTRA_OEMESON =3D &quot;\<br>
++=C2=A0 =C2=A0 -Delogind=3Ddisabled \<br>
++=C2=A0 =C2=A0 -Dextra_debug=3Dfalse \<br>
++=C2=A0 =C2=A0 -Dfont_unifont=3Denabled \<br>
++=C2=A0 =C2=A0 -Dsession_dummy=3Denabled \<br>
++=C2=A0 =C2=A0 -Dsession_terminal=3Denabled \<br>
++=C2=A0 =C2=A0 -Dtests=3Dfalse \<br>
++=C2=A0 =C2=A0 -Dvideo_fbdev=3Denabled \<br>
++&quot;<br>
++<br>
++SYSTEMD_SERVICE:${PN} =3D &quot;kmscon.service&quot;<br>
++FILES:${PN} +=3D &quot;${systemd_system_unitdir}/kmsconvt@.service&quot;<b=
+r>
++<br>
++do_install:append() {<br>
++=C2=A0 =C2=A0 if ${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#39;syst=
+emd&#39;, &#39;true&#39;, &#39;false&#39;, d)}; then<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 install -d ${D}${sysconfdir}/systemd/system<br=
+>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf ${systemd_system_unitdir}/kmsconvt@.ser=
+vice \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${D}${sysconfdir}/systemd/system=
+/autovt@.service<br>
++=C2=A0 =C2=A0 fi<br>
++<br>
++=C2=A0 =C2=A0 if ${@bb.utils.contains(&#39;PACKAGECONFIG&#39;, &#39;opengl=
+&#39;, &#39;true&#39;, &#39;false&#39;, d)}; then<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -e &quot;s@#drm@drm@g&quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s@#hwaccel@hwaccel@g&qu=
+ot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -e &quot;s@#render-engine=3Dglte=
+x@render-engine=3Dgltex@g&quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -i ${D}${sysconfdir}/kmscon/kmsc=
+on.conf<br>
++=C2=A0 =C2=A0 fi<br>
++}<br>
++<br>
++RDEPENDS:${PN} =3D &quot;xkeyboard-config&quot;<br>
+-- <br>
+2.52.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#123502): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123502" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123502</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117277014/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117277014/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+</blockquote></div>
 
-diff --git a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
-deleted file mode 100644
-index ff4fcc292a..0000000000
---- a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr/0001-screencast-Fix-build-with-older-mesa.patch
-+++ /dev/null
-@@ -1,53 +0,0 @@
--From ef60a76e2a21b7649632dcf71d125039604a56b5 Mon Sep 17 00:00:00 2001
--From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
--Date: Sun, 18 Jun 2023 10:42:19 -0700
--Subject: [PATCH] screencast: Fix build with older mesa
--
--gbm_bo_create_with_modifiers2() is quite new and there are still distros
--that ship 21.2 and older. e.g. powerVR mesa implementation
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
-----
-- src/screencast/pipewire_screencast.c | 8 ++++++--
-- src/screencast/screencast_common.c   | 4 ++--
-- 2 files changed, 8 insertions(+), 4 deletions(-)
--
--diff --git a/src/screencast/pipewire_screencast.c b/src/screencast/pipewire_screencast.c
--index 0611fd5..7d66810 100644
----- a/src/screencast/pipewire_screencast.c
--+++ b/src/screencast/pipewire_screencast.c
--@@ -234,9 +234,13 @@ static void pwr_handle_stream_param_changed(void *data, uint32_t id,
-- 			uint32_t n_params;
-- 			struct spa_pod_builder *builder[2] = {&amp;b[0].b, &amp;b[1].b};
-- 
---			struct gbm_bo *bo = gbm_bo_create_with_modifiers2(cast-&gt;ctx-&gt;gbm,
--+			struct gbm_bo *bo = gbm_bo_create_with_modifiers(cast-&gt;ctx-&gt;gbm,
-- 				cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].width, cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].height,
---				cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].format, modifiers, n_modifiers, flags);
--+				cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].format, modifiers, n_modifiers);
--+			if(!bo)
--+				bo = gbm_bo_create(cast-&gt;ctx-&gt;gbm,
--+				cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].width, cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].height,
--+				cast-&gt;screencopy_frame_info[cast-&gt;buffer_type].format, GBM_BO_USE_RENDERING);
-- 			if (bo) {
-- 				modifier = gbm_bo_get_modifier(bo);
-- 				gbm_bo_destroy(bo);
--diff --git a/src/screencast/screencast_common.c b/src/screencast/screencast_common.c
--index d6d13db..2e4fc18 100644
----- a/src/screencast/screencast_common.c
--+++ b/src/screencast/screencast_common.c
--@@ -143,8 +143,8 @@ struct xdpw_buffer *xdpw_buffer_create(struct xdpw_screencast_instance *cast,
-- 		uint32_t flags = GBM_BO_USE_RENDERING;
-- 		if (cast-&gt;pwr_format.modifier != DRM_FORMAT_MOD_INVALID) {
-- 			uint64_t *modifiers = (uint64_t*)&amp;cast-&gt;pwr_format.modifier;
---			buffer-&gt;bo = gbm_bo_create_with_modifiers2(cast-&gt;ctx-&gt;gbm, frame_info-&gt;width, frame_info-&gt;height,
---				frame_info-&gt;format, modifiers, 1, flags);
--+			buffer-&gt;bo = gbm_bo_create_with_modifiers(cast-&gt;ctx-&gt;gbm, frame_info-&gt;width, frame_info-&gt;height,
--+				frame_info-&gt;format, modifiers, 1);
-- 		} else {
-- 			if (cast-&gt;ctx-&gt;state-&gt;config-&gt;screencast_conf.force_mod_linear) {
-- 				flags |= GBM_BO_USE_LINEAR;
---- 
--2.41.0
--
-diff --git a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-similarity index 74%
-rename from meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
-rename to meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-index c3056c9e86..3deeb1078d 100644
---- a/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.7.0.bb
-+++ b/meta-multimedia/recipes-support/xdg-desktop-portal-wlr/xdg-desktop-portal-wlr_0.8.1.bb
-@@ -13,18 +13,17 @@ DEPENDS = " \
-     virtual/libgbm \
- "
- 
--inherit meson pkgconfig features_check
-+inherit meson pkgconfig features_check manpages
- REQUIRED_DISTRO_FEATURES = "opengl wayland"
- 
--SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master \
--           <a href="file://0001-screencast-Fix-build-with-older-mesa.patch" "="">file://0001-screencast-Fix-build-with-older-mesa.patch"</a>
-+SRC_URI = "git://github.com/emersion/xdg-desktop-portal-wlr.git;protocol=https;branch=master"
- 
- PV .= "+git"
--SRCREV = "d9ada849aeca6137915de2df69beaef4e272cc1d"
-+SRCREV = "256eb4a9f6ecffd64289d6501d036c2094b47db6"
- 
- PACKAGECONFIG ?= "<a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'systemd', 'systemd', 'basu', d)}"
- 
--PACKAGECONFIG[man-pages] = "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
-+PACKAGECONFIG[manpages] = "-Dman-pages=enabled,-Dman-pages=disabled,scdoc-native"
- PACKAGECONFIG[systemd] = "-Dsystemd=enabled -Dsd-bus-provider=libsystemd,-Dsystemd=disabled"
- PACKAGECONFIG[basu] = "-Dsd-bus-provider=basu,,basu"
- 
-<div>-- 
-</div>2.52.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#123527): <a href="https://lists.openembedded.org/g/openembedded-devel/message/123527">https://lists.openembedded.org/g/openembedded-devel/message/123527</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/117294478/3618223">https://lists.openembedded.org/mt/117294478/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-sLmglCq8j/qyxl6WzSUa--
-
+--000000000000ec013706487d5676--
 
