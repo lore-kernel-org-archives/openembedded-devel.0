@@ -2,142 +2,106 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6715AC982CF
-	for <webhook@archiver.kernel.org>; Fri, 16 Jan 2026 15:33:17 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.8679.1768577594792450705
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67C74C982D0
+	for <webhook@archiver.kernel.org>; Fri, 16 Jan 2026 15:33:27 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8684.1768577597332931948
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Jan 2026 07:33:15 -0800
+ Fri, 16 Jan 2026 07:33:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DHaAf0G6;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee937ecf2so16968375e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 07:33:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z7BjpH1I;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47eddddcdcfso11636495e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 07:33:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768577593; x=1769182393; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RTdhscGz/iC5ItNGxfFbd03I1lBx5qSUHWiB+dkaTlo=;
-        b=DHaAf0G6Sevzqlw0vz4LMlTmG9Nu0rQtxqqwC8bRPqcGZGCsI87ffu7I7LhzKf1C4t
-         CuAxt04IvCw6TCrRpnFmq+Q2zHHUeEr6I+E/s+jgdY/RTWUnaKP0Sc9ljvKlITYIQQww
-         uTJ1/ABPB2B116LawFLkercwedP73ujpUF8uOz0fZqTLIYaP0Rd3WzaS3LxmgDb+GoAo
-         hYak/t8RZXLbZhvGnBKtpbnhVV93fZDjKOaOCNpB46tEWFGeaDwtcOiHoXdLFath7IzR
-         5/gVvW5tTsNB7TDhSxIHGVs+kjV5shvn/+Z6Zr7qNAMoCyOWONYirfqWq5UEr42GB1ac
-         bRVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768577593; x=1769182393;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1768577596; x=1769182396; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=RTdhscGz/iC5ItNGxfFbd03I1lBx5qSUHWiB+dkaTlo=;
-        b=ZipwDxW3auXElYSf0e5aNQtGQMC10PX0rxU4G0RrNzgRmqDRXTNqJufu/5/EDqrstJ
-         H1pn0sB0PRjATE8A1c5FgGn3SrUAGkcWCYMM5TOLcAHqW1clapzbJhbNY7CvocnHmlmI
-         0qXyilP3p5TD/LPjAsRSIIDHmqXTdjUAxUyYTMtx6H0e28h/dF/GgDzHI+NyjBfz1hFG
-         Q4jAcfEXzc6OeKHt3WmV7mb53VCSUll2rZ8fsIFCjGN/v1Eg37axJHcAsFRSyDCJRVw1
-         ko4OkGqY314llH1M9o/IhNU2/cTJWoX3kYQW5By/iB4DDY/5J8Ev/YgquGWIb0/qPBUI
-         5aVQ==
-X-Gm-Message-State: AOJu0Yw+deZ2FjG0xOnks3vRDiBzyhuGPW78sgNUdCzT3f23YUcN/4tP
-	EQ0Lr/CCNUVj6a1SS9x+KZ9ZU70+QhM6FlYn9ufQiSBv0UQ/j5Uu4G0OaS63Iw==
-X-Gm-Gg: AY/fxX6PJpJIcgQE0ZWQR2tfmjerTK5ivNcjSyiXGQ13mN2nJrsPvO3xzlg68MPhqlW
-	qTY2sL8Tf44uZyA1TkJkw7+WJuGF1OQQpFMxL35gfSQ9Z4LsW+2XTSAYYVUJ4r1x5vsnqXlJT8B
-	8bhj6rG7NtSWXbvkcQcPJS8lrOdIBxskyE2xgxTr4AGjIWfwoWygROsa1RCPxTU7anP/dghYxxc
-	AcL6YsImZwEDdh19xhIKu29eWfn5oegAJwkHOlxLHh6CPWXGnNSeuCdHgry/J5qIdsX63GIh5KM
-	Ab19G9KBSV/vABWB9JSNd1s1lOuoJFdsBATCm11WhOo+L932CXsHUxnfgygZOROcSFkrf9cZMGk
-	g2vDSR7gf+qKPonYi8VFDPK1Cwt55ieYWCH5fhRnGZkFrbHwKETSyk/EciVDCjfXFTV38g6TjS0
-	58V4k94AC9
-X-Received: by 2002:a05:600c:6048:b0:47d:87ac:73ef with SMTP id 5b1f17b1804b1-4801d7d2524mr38181195e9.13.1768577593024;
-        Fri, 16 Jan 2026 07:33:13 -0800 (PST)
+        bh=c7cz69sbLiVI+MZ5Z8Mpq0XoybGTGx8poaJS4kcJsNc=;
+        b=Z7BjpH1IT6GfY8uWK82BWtcU0ZjhVMhmnjJSVAPKC8HoQH5lLAMIns5bPy1QASGTDg
+         I3iJXlwSiE/6rlP/eSjMSUpEVBXPsGw/6d4qhpacQjB9qEz4TgvHfpJMjdzgkmmOAZCe
+         JuWwOWtxtXSG2vLxN/WfoOQwCWc1dcGRXQQlw8gzWIeOnVedBQJ2+lYF0LkmsiGmbxeU
+         B1BTYFgOBCh39xkuL9wgCQpJuBDrrCez6Qszd9e9gob1U5cymhzdTGrFXHtSXrtet3zs
+         SB3zT/0Zm6JktDedFQsJCcfBZRbCZ2xyh1VTkdQvkBZQbFkZRhugdAW+XHXBO0if3oFL
+         rHwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768577596; x=1769182396;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=c7cz69sbLiVI+MZ5Z8Mpq0XoybGTGx8poaJS4kcJsNc=;
+        b=r1hYKxVNdv2dGJZkrJIHTAMeoRAPeYaPXuZfudjFwcHNLiMMq6Z197EtGmlEIItNcY
+         6waK6MXlhX6iEjjCnQ9xlTbzFTgnbiAFp53hwd/tZ8/QFhXoi2dE8MNJaI9tb1f6Dp4F
+         DuiCuN1mTXjGIIVQqoSczRvs+pyvk4aAyW5HTAiijg0uT9bSju+/6Ok3WXswYSdKqF3S
+         WMlOjiZ6+QBO1T53O3v7LsjshqEt4FUv5KCcQj9dkx38duPPifGeKhydekFxA3gTdWYe
+         VhzoSfrlQAAhSJu02yu+u2q1XzR4nbwnYk/LxAJs4dvw3JjyqfcIcOqQs06R8TIhxn3P
+         m3tQ==
+X-Gm-Message-State: AOJu0YxTNZfMgFOXSI5bv9IPR/MDFJXYRELQkYazTYc/QnfaJf/CUo9M
+	fsEjKg0sXRoVcIpTM7nBNzHfxp3wyz7YvmqfWUFdUiNPf6VzwHo2qYgUlhVWzA==
+X-Gm-Gg: AY/fxX6DiSoUCXRsyM0W9YOeNJsRby9lunf/38hrNS34vOoL5c+5qyDDd3V7D7Ikqk1
+	/K02aIFQASRbS/HXdn7fucyB2aFtlvqLjRw5IQJHHbJdoQLkgphTXHRGubC4Y9r1oFdSnzZEKkH
+	77JK6u3+TEtzn8ssi9BMJqCeP8dyLT68pOPMORksXG68DvqqocuhgienFiq4ExULgodQU9S1lqb
+	Q3+fYfjoXldeddlGejr5GLAdDUsRQEiPY5nObwGZfHx0vveKKEcMxZ/lNUCQfGRzer/LrD2rGJo
+	00S9d8eKpTiC3a4AyClWH3om7/iUdc3YpZLAvzeLCpHuomRtkIkb4byhhMa7vCLNdssCP0XMJKS
+	kmOIarYkMTmy7XN1sJXo/pEaAfxe0T6+JOOwhnpRAvhk0ocwxCv2KrrNVUyaNqCI6n9gjgOKk7w
+	ODOiABCDQ6
+X-Received: by 2002:a05:600c:1552:b0:47e:e946:3a72 with SMTP id 5b1f17b1804b1-4801eb0e021mr35882185e9.27.1768577595567;
+        Fri, 16 Jan 2026 07:33:15 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801ea19f94sm21010985e9.3.2026.01.16.07.33.12
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801ea19f94sm21010985e9.3.2026.01.16.07.33.15
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Jan 2026 07:33:12 -0800 (PST)
+        Fri, 16 Jan 2026 07:33:15 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 1/5] python3-tblib: add recipe
-Date: Fri, 16 Jan 2026 16:33:07 +0100
-Message-ID: <20260116153311.3444648-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 5/5] python3-django: add recipe for version 6.0.1
+Date: Fri, 16 Jan 2026 16:33:11 +0100
+Message-ID: <20260116153311.3444648-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260116153311.3444648-1-skandigraun@gmail.com>
+References: <20260116153311.3444648-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 15:33:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123532
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Jan 2026 15:33:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123536
 
-Serialization library for Exceptions and Tracebacks.
+New, non-LTS version.
 
-It is a runtime dependency for python3-django ptests.
+Release notes: https://github.com/django/django/blob/main/docs/releases/6.0.txt
 
-The ptests for this recipe run under a second.
+New features in a nutshell:
+- Content Security Policy support
+- Template Partials
+- Background Tasks
+- Adoption of Python's modern email API
 
-Sample output:
-
-root@qemux86-64:~# ptest-runner
-START: ptest-runner
-2026-01-15T19:37
-BEGIN: /usr/lib/python3-tblib/ptest
-PASS: tests/test_issue30.py:test_30
-PASS: tests/test_issue65.py:test_65
-PASS: tests/test_perf.py:test_perf
-[...many passing lines...]
-PASS: tests/test_tblib.py:test_parse_traceback
-PASS: tests/test_tblib.py:test_large_line_number
-PASS: tests/test_tblib.py:test_pytest_integration
-============================================================================
-Testsuite summary
-DURATION: 1
-END: /usr/lib/python3-tblib/ptest
-2026-01-15T19:37
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
+Ptest summary:
+Ran 18643 tests in 164.287s
+OK (skipped=1404, expected failures=5)
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-tblib_3.2.2.bb             | 22 +++++++++++++++++++
- 2 files changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-tblib_3.2.2.bb
+ .../recipes-devtools/python/python3-django_6.0.1.bb      | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_6.0.1.bb
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index d83ac85f1b..3b21c7cfa2 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -104,6 +104,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-soupsieve \
-     python3-sqlparse \
-     python3-starlette \
-+    python3-tblib \
-     python3-tenacity \
-     python3-tomli-w \
-     python3-tomlkit \
-diff --git a/meta-python/recipes-devtools/python/python3-tblib_3.2.2.bb b/meta-python/recipes-devtools/python/python3-tblib_3.2.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-django_6.0.1.bb b/meta-python/recipes-devtools/python/python3-django_6.0.1.bb
 new file mode 100644
-index 0000000000..ae3ba730c5
+index 0000000000..9642a3c581
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tblib_3.2.2.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Serialization library for Exceptions and Tracebacks."
-+HOMEPAGE = "https://github.com/ionelmc/python-tblib"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=810c4c43873f8d9331fb067a6473a960"
++++ b/meta-python/recipes-devtools/python/python3-django_6.0.1.bb
+@@ -0,0 +1,9 @@
++require python3-django.inc
++inherit python_setuptools_build_meta
 +
-+inherit pypi python_setuptools_build_meta ptest-python-pytest
++SRC_URI[sha256sum] = "ed76a7af4da21551573b3d9dfc1f53e20dd2e6c7d70a3adc93eedb6338130a5f"
 +
-+SRC_URI[sha256sum] = "e9a652692d91bf4f743d4a15bc174c0b76afc750fe8c7b6d195cc1c1d6d2ccec"
-+
-+do_install_ptest:append(){
-+    install -m 0644 ${S}/pytest.ini ${D}${PTEST_PATH}
-+    # The tests are comparing exception outputs with expected ones, and it doesn't
-+    # expect carets in the exception.
-+    sed -i 's/pytest/PYTHONNODEBUGRANGES=1 pytest/' ${D}${PTEST_PATH}/run-ptest
-+}
-+
-+RDEPENDS:${PN}-ptest += " \
-+    python3-misc \
-+    python3-pytest-benchmark \
-+    python3-statistics \
-+    python3-twisted \
-+"
++# Set DEFAULT_PREFERENCE so that the LTS version of django is built by
++# default. To build the 6.x branch,
++# PREFERRED_VERSION_python3-django = "6.0.%" can be added to local.conf
++DEFAULT_PREFERENCE = "-1"
 
