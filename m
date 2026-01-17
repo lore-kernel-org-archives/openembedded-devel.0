@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E32E1C98310
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0CFCC98320
 	for <webhook@archiver.kernel.org>; Sat, 17 Jan 2026 09:46:18 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5740.1768643174763626787
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5752.1768643177615201251
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Jan 2026 01:46:14 -0800
+ Sat, 17 Jan 2026 01:46:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NKd1cEUc;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2a0bb2f093aso17528915ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 01:46:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RHvG3KXA;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-bc29d64b39dso977116a12.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 01:46:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768643174; x=1769247974; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768643177; x=1769247977; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=gU27x2o+Itl+R3q+t07Teswhia59sLByIdvOP0L8Hp0=;
-        b=NKd1cEUc/qeW1IZeXIXVyqYIboRYYI29cqaH3m8fHUa5COJ0A91DzbsiZVplAcgG2e
-         Wvlp7k5KMhRC7BR0bbjvzww2MDaem992D0qxs/Ba0lBJ9TVQZ0gCQ2vF2gvZilT7GMGx
-         SzOKa0qLIas2BPoUIS0s/WpBife7qXW/RCSitODiyYeEex7ZuqjrZVPKTSMXRobFhOuo
-         SzavXDgSXTFF3e0IjCaYHN86ww0QaHVBbYpjOdHQAxxKF1zPGDwX2S6IOYEQxQosJlip
-         rdGzFYB0UxvJN0fI8qvCTPoxo6D+MqaL9qS6SjynMW8TDrUKegDLiNkvSusYEzeN4Qjf
-         0P+w==
+        bh=19ZlMrjgjJ2dzMqrOHnTNThms21przPO/K8lMKw2Avk=;
+        b=RHvG3KXAXlx+q8CdzC7SIRzEJzLJpBGjBSBAbTpbIZBWpBQX7oCwxGxw4GOztXypq0
+         5HplQW1a+1vR41/59tKfkjDqHiiMdljuvRJeea1JYgIxRKdj1PhzBwT92dvkWbVOCY7l
+         /DMQuIR4VYFOO94u9RrEvn4az8fN9CjF6LhbD/gpmFjmgKkUXIowWQN46iEAFisCqR/q
+         66UQqB2UHIi5e7UnWAiOmTR0nO5ntp9dXy6gvjFeB1vyTQR8cCoGniHtgUS8PIXRyvng
+         3S0jyqz9nZkAj2YFes7zN6q0hTQ8XrGaWpCUOhbxgGkg6srqs2beiHXLz1riE/sWnWwD
+         u0oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768643174; x=1769247974;
+        d=1e100.net; s=20230601; t=1768643177; x=1769247977;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=gU27x2o+Itl+R3q+t07Teswhia59sLByIdvOP0L8Hp0=;
-        b=rYEgDpSnRcUefgiadeMOUIF/HFDou8jsRk/ul6XN3YAo6oKcVleQNg3HDXz3721qNw
-         OAB4yAoJ+GW5Y6y0Qd6XmARct4998PDKfuCK6OddjL9w6CpD+bb6pC+ITfRpKO/19zRU
-         IG4Xe402ZOAM84/1WCziKXPnzy+UxLfIe6aC6TJcswCe25NDkaBmwKAWZkSzkst08je2
-         /q2AiWCkcAzHdsZw3YrvJ58IPQebrnGPoPvp4WDKfsaLYtMJqmgyOxXERkOU3+3o9phY
-         Uqpr7yZQhVyIF9NLhJhJPpzfGeAwAYiqbJcAH+RpTYpXtipk5X2Ry90nOBGhp1Ftnln2
-         nKPA==
-X-Gm-Message-State: AOJu0YxXCqDA/79cjlzCKH6Y7d4lV2ec2KvqW4YPjegFhENMoeVTPXdv
-	W0ot5U3O17CDoO4SYMCNCa2Jxzhz4Sk5ljrIrvaWfpfUpbsLsqJjgws8cn4g5Zhe
-X-Gm-Gg: AY/fxX5Knj4o6v7isQM4punTu+cNpA7734QSaWN7e+gJoR3jNj/hY0JFqaoFYicudln
-	/gryCI0aQfnSafHn04EK1bFH+ByjRYib/dg9tHDBAep9UHblHDidyXPu2mN40LfWA2ZaOEoFIBS
-	7IrtXzvZ21ZeIetyUyWMurvKKG/EUyjEWrnR/QF+rw/mXFVaxXukenXZ84etv0zkS+7m9scGc0A
-	Nl9GAYjdWPTst4FL8Y4N8iqwCLGXAZlKu2URy4LEPgQ1cGequo9zS6sw5KBCIalilKWD7R2ayCj
-	q5jzR7Ug81ga4Z7LtuT3pDQhozMq/DOrQ2klDg12sml0S5BzlwR1K5XFlwCYfe2dYEwVupgbK7k
-	gyeT806KzjaosNwhwnWt1OvbQeNIMHUGY1ErtTxzb3HaeUiJxzsg9o5r0N4x0XYx9gFj1SylhKU
-	xNQ1o8kstKwfFTj6Rq6ASAJqs=
-X-Received: by 2002:a17:903:2ed0:b0:2a3:ee53:d201 with SMTP id d9443c01a7336-2a7174f8e23mr51810835ad.12.1768643173965;
-        Sat, 17 Jan 2026 01:46:13 -0800 (PST)
+        bh=19ZlMrjgjJ2dzMqrOHnTNThms21przPO/K8lMKw2Avk=;
+        b=LpRdsNB5GUcpT0eJSN3u2dTGihPCcAPHdYBb9dAI1aRp1g0w1BB7s83XMDFsGZvm9O
+         BRtc19p1jE95iNaDzx1nn/v5Wa0reJY26PWPKq7g9teWyNwB+xbj4gYxI2DjXPSCyiYw
+         ZQwO3Tfj9x9hh+iBIdWpUpIcvqIQShL4B6Xw953FJpFnRNbxov+M2B1NP3R4GZtDXpke
+         pHEw2ShV6X22ktVw4pmSbrCdA61gD/ppsySodh1oDH7NMWEaU92zUQ4yAssvt5llkLAU
+         RrMM3A8aySIxbH4jlUImW/ADiyYW16l6VPcKtGv4aeJJ46zeWxDEJMRPBVDTkDizWNOT
+         CqZQ==
+X-Gm-Message-State: AOJu0YxpOEffxf63zU8Sz77ZYK/mDrzr6KUWS+2TOd8PwPvn/rSuXDLO
+	1woYQplMIKBS8ei47txDbYqFJLclRwjh1+8WWv7AXgeu5J+QAt4DxkY2TMGnl03h
+X-Gm-Gg: AY/fxX5adWOayy7AfuuF1uhvPsynYRYlcbGODIqXgJhMDZJW4duqI1MuRCmDX8uf3jc
+	pn/WYqOqvPk8mjs3zeXRMevLPqseW32+zmhqlQ9vq/bg1hsSX34hIStYcyyJVSKa7QzlhRdXPoc
+	gfULcKlk0os/r7c/KPCSxlZTzv3itYKuHvZnT5v/qH5Um7a1Lv1GTzOlOdlJ5jquHh5vNNEvDBT
+	8fLACdx7lyf9ed14F+YD3Y5byF5vNrdw/Pv1OWxFX9EXZPj1eOIVRNtPZoHhe0Gpg3RE4XqKDQo
+	mBRDryjizpoHc1bgsCMJuUIkYP3fIJj/XJ9eADWehdkZ6uw+MrXJ4TEf95mbsuXv+vYJ0nxaNPA
+	E1+0QGpwFhO45k4Ywy7/DiLCHkT8RAac2r+zBKRmQQ9y3IkmdHCkUZFENjWsKgZol3u8wNhW7YF
+	YL6IhEAXBoi31CFthxGjHzzes=
+X-Received: by 2002:a17:903:18c:b0:2a0:dabc:1383 with SMTP id d9443c01a7336-2a718883888mr47183065ad.14.1768643176809;
+        Sat, 17 Jan 2026 01:46:16 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.17])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7190c9ee9sm42289845ad.22.2026.01.17.01.46.11
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7190c9ee9sm42289845ad.22.2026.01.17.01.46.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Jan 2026 01:46:13 -0800 (PST)
+        Sat, 17 Jan 2026 01:46:16 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 4/6] boinc-client: set CVE_PRODUCT
-Date: Sat, 17 Jan 2026 22:45:33 +1300
-Message-ID: <20260117094535.4191231-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 5/6] boinc-client: mark CVE-2013-2018 patched
+Date: Sat, 17 Jan 2026 22:45:34 +1300
+Message-ID: <20260117094535.4191231-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260117094535.4191231-1-ankur.tyagi85@gmail.com>
 References: <20260117094535.4191231-1-ankur.tyagi85@gmail.com>
@@ -69,41 +69,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 09:46:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123550
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123551
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-The relevant CVEs are tracked with underscore in their name.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2013-2018
 
-See CVE db query:
-sqlite> select vendor, product, count(*) from PRODUCTs where product like '%boinc%' group by 1, 2;
-berkeley|boinc_client|2
-berkeley|boinc_forum|1
-universityofcalifornia|boinc_client|165
-universityofcalifornia|boinc_server|5
+According to oss-security email[1], version 7.0.45 included
+the fixes[2][3][4]
 
-Set the CVE_PRODUCT accordingly.
+[1]: https://www.openwall.com/lists/oss-security/2013/04/29/11
+[2]: https://github.com/BOINC/boinc/commit/6e205de096da83b12ffb2f0183b43e51261eb0c4
+[3]: https://github.com/BOINC/boinc/commit/e8d6c33fe158129a5616e18eb84a7a9d44aca15f
+[4]: https://github.com/BOINC/boinc/commit/ce3110489bc139b8218252ba1cb0862d69f72ae3
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 31de060b48c57194ea2e6c6844d746eb59a0d056)
+(cherry picked from commit 2a78ad8813845677132ad0f1552fcaa4961c3e15)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
-index 624be655a5..f995fa443f 100644
+index f995fa443f..0b17b71137 100644
 --- a/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
 +++ b/meta-oe/recipes-extended/boinc/boinc-client_7.20.5.bb
-@@ -29,6 +29,9 @@ DEPENDS = "curl \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+3 wxwidgets libnotify xcb-util libxscrnsaver', '', d)} \
-            nettle \
+@@ -31,6 +31,7 @@ DEPENDS = "curl \
  "
-+
-+CVE_PRODUCT = "boinc_client"
-+
+ 
+ CVE_PRODUCT = "boinc_client"
++CVE_STATUS[CVE-2013-2018] = "fixed-version: fixed in version 7.0.45 and later"
+ 
  SRCREV = "4774e1cbe0ad13cb9a6f7fffbb626a417316f61d"
  BRANCH = "client_release/7/7.20"
- SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
 
