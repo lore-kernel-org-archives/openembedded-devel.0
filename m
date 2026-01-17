@@ -1,162 +1,189 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 976D1C9832B
-	for <webhook@archiver.kernel.org>; Sat, 17 Jan 2026 21:50:59 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4478.1768686654482528033
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9773DCA5FE6
+	for <webhook@archiver.kernel.org>; Sat, 17 Jan 2026 21:54:09 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4533.1768686843673348982
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Jan 2026 13:50:54 -0800
+ Sat, 17 Jan 2026 13:54:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZO3wk+cq;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64472c71fc0so2765616d50.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 13:50:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SHHSaOBA;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-7926b269f03so26960247b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 13:54:03 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768686843; cv=none;
+        d=google.com; s=arc-20240605;
+        b=VgHW0ptKTtg4Pd0MWd0r96Zt+SZZw8tBcDDszUwrdQ7DNXcXsi4bBwncRxrty07VcV
+         InK7qeoZIgL4vPKpG7UUJwVzCPjbDK9WOodqqHrVXAw/rqulji7Ku8XmWDFpBlDYUY2J
+         Tc1e4kY1hstMIA3wL7oapvSJx58S+1Ig0rFPpspuHGAaVp8qbNfLkfm/+anVf2j9/QgS
+         BzgyXnwqSZfuMfbmH3EWy9icJR5XutK4zmcd5AdVLuySmG1F6jjtG05CZF++4+PJUnBc
+         qnbbHSkaX3Ve0aWE7bhhN3eTaB5m/JyVH6I4XybPaMFkaSHpUwVwaBn97hxe42B0V5Ah
+         Jw+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=16CF7c/jtL5GwI/NiSnCR7h1KerUiCSAFXOowRZiijc=;
+        fh=cNEV3+nz374qoAuOmK0NcPMcZv2wshaXLDAnI1O70yw=;
+        b=KMyu9dfYBhoKz3D6dYzXWrofDI3/oBZNfhgpB5Tg9sd+g/Ho0AvPIQmKGGUqv4/IRC
+         Aw7GlnLTenf72SkHvpuGwyDW9Yt2Kr6RCOxpfVuK9nlXO/+1SWsxdsfqSQejPVM5hHuu
+         RACcSV4IhK0jvtlZm7ygVwg1J6C5tpWM074a9gAmgw6vfNFlBbRpLRCy7GHH8BP+HYsl
+         Kk2xqTr6wltuW8CW2XT5pEle5umxGDgrBuBfPNwzj8NiG7QhmCvBzBO14mGGaxdlNWCn
+         /5D5+K4/hIgf71gsy+YT4PQYC12YMzCFB40NVobFYyrlFGjhWY5yQNLX00J+z0+P/LtC
+         n/Ng==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768686653; x=1769291453; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CUiidEj4Q9CbrQsHxZdLBcEh03cChhAWyGlT05G7b1A=;
-        b=ZO3wk+cqiw4FFEMvymJEpY8eMyF64QIbEv2RHJVnM3GTPOr5n/ReUKKNxodqKfZqP4
-         H3mLRyMmfNSN7HSTIZErrwXw5nawIPE6dRBTkbHI58T1hBMUMMkLdUuMs2/4TPUdNMah
-         xc0f8N95PWJ3C+fN0LA9e+Z+vaEfsNQDKkAQj1u8VPozYv3KG3ERNeqaZNJG9rQsn1rd
-         8E5+GLylxSmE2EkzBgpaoUqjOE8j6sKJ5l7/GJFYnoMZ3UaWh5AR5dhlstPq2KEl42Zb
-         OOlIum7FoIfeNXlKto9JJYFY4zv1hTqv+3Ij5kbT2GDNt3+xLv8OLrc2DF0kIYU5vLpO
-         rN0g==
+        d=gmail.com; s=20230601; t=1768686843; x=1769291643; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=16CF7c/jtL5GwI/NiSnCR7h1KerUiCSAFXOowRZiijc=;
+        b=SHHSaOBAKDDITnE+n5yjnQ0wBcfhISKvIK8h1cG/jGye31U2PvNYdpIQTVk1V9actr
+         5qOtjgOpSAG4q0TKmseNc4JnM4x6vSqd0qHtKbSUGQr+DUcYG4n3AeTplqPou2LntVS9
+         7SqDQQ7gGvF5FS6J82nCoIP5NNXwzWBgxTknX9+CnSVmxOGCZ+V6j3jJD3qr0p0r+2ui
+         1MQuNIdqVx/SKhdCn2tlRrt68VkUEKu6VtAM8cHboyRHSVTTXhyU20wn4G8sRXQrCSuy
+         0MMVmAQ/qsw2ifMX8TFXnSCXm5fKzCkcsJMcqacqP47WMv7MYFBDPPQW5p/E5W2uY54+
+         1IFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768686653; x=1769291453;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1768686843; x=1769291643;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=CUiidEj4Q9CbrQsHxZdLBcEh03cChhAWyGlT05G7b1A=;
-        b=dBgGlS+t7H+iLlbx+Bc4+Vcuk0BqCqqHjQjLoj+gNBabSP+g1TIZ9FcixbevYv8iem
-         aDrii2zL51hkHHpudH4R/HNk7p6ztAeYgNUQsHTigK6PzE85miOP/qEH6MmtzNlTOOzl
-         ZBRgy2emIg7/bN4cYNH6esCM7/OjlhmDBCo1SwNPIVhA1P2zjWgx7+CrD4X4RLlDlAFs
-         xXEd2CMGM3pN/JiefLjCI9g7sLYy05WSWa1U6UDsrBO8tYxDfBmqs5r4atYbo+TMgGQy
-         koCB5goJFdLJTw9gsXuNjM7Pt8XWC4sKXNreXYj+hFB2lz/W1MwN++i/T/ccj0dS1Hpx
-         kCiQ==
-X-Gm-Message-State: AOJu0YwOu/Q+mLnPFvKEY9AXe/Dn8RyqUDjUnRHws8oNE1geJMy29mca
-	QdExJvHeYNYwVViXrF/MFymRWwCF3r/mXWd9rsRw2NSxyOK5h+nqWxWSmOH5pg17
-X-Gm-Gg: AY/fxX7yFSLGEOEDO13kbAm9iQa4TDzBC8TSLswUFpq7wCX19ZhxDOCVHMNCTaazG3G
-	fod4WT1OaJPsq/wgdFb5pDYyoDAVM5wVRSkzIUjQuF5RtISI2Bq4yc5HEg0I1BXHCMa7ZNMu4z2
-	9/UEFXO7UATg38ofGAld4G74HNiYXtPFknY2WcVf1HFq0utfC4oQCDZwxTjIPiPqbTdRLxY+puY
-	9sBcOVjf5os4/4aIymbvs0u1gVKLquf2ifHxOdxY+lOUClk/3W/Nhk7jcxKHOUUhpHEMoC3J/NO
-	x4FwE+6/MXXsQG61mHFfwQ+aA3c0uKhr3XEKHbqUq87LZje3GfIM54enQY7snodnuS4mpuOwLr9
-	EQdZI//GFIGEha6/5xhjfbkCyfRm/bOZ9YwjCUDi2vbIU9eaG/OLs+dzucbbEVjPKmiQrDEq3vS
-	jE4DeploktFRbVMV80JQJy0S9aXDNtUcw9+eJGYT1dJjl3KJDO5fETsxwoGlM9e230m9A9QKyXo
-	EhzJe4x+qGzFGagTRzdajQSDVpGByH+oHZUpw==
-X-Received: by 2002:a05:690e:6d0:b0:641:f5bc:6943 with SMTP id 956f58d0204a3-6491771e34amr3777166d50.71.1768686653219;
-        Sat, 17 Jan 2026 13:50:53 -0800 (PST)
-Received: from localhost.localdomain ([67.233.59.72])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-793c66c72d5sm24325037b3.9.2026.01.17.13.50.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Jan 2026 13:50:52 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] xfce4-notifyd: upgrade 0.8.2 -> 0.9.4
-Date: Sat, 17 Jan 2026 16:50:46 -0500
-Message-ID: <20260117215046.50934-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=16CF7c/jtL5GwI/NiSnCR7h1KerUiCSAFXOowRZiijc=;
+        b=VpDI/ypMC1dJVB5dsdlnvqPj24scif9Oi2f0oGa0AtPf7yw6EWHxroK7kaSXhkuUsc
+         n3DDQIaIn4wYYtyr+83R4cAcL+xeHZ+8G/HjTA0S12EQskbZNW/nHwU3zNp4x6HM9KDS
+         MuZCP2iX5QkTiwpCmXnHhDeoiKh4Mecw/w20hM9xBRRQrl3Unxom10m35kpCXxJR5iwa
+         6MbLTCiJrnFTCnfSm8bTefb+v3uGdKGVqUViZKL3qy4rSTz1uWfCOW+Lm/xdW5T8R9bc
+         9msbV24Qp1d+Y4EDDcNQdoTarauEDdQRBCu4XcXgAmtPQGf57LQDGte5S9eqhR2cs0xp
+         fbEw==
+X-Forwarded-Encrypted: i=1; AJvYcCWg6pfkPHnO2q1fNZNVkXRqG0PEu1h1LdrC2heu738XKM/4RNJcxfNByGlpupJHomm3lpfbwfp4nEO9AfNGYuZhG5g=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyU3Gdw4to6I7Ez5jXVmsTYwFPKD1lqytOiQBRpsKSjGZeEtpHd
+	2AKm9Pk9XoFgM9vBjx0l4vWt21eKx0XTxY1de3bRtXNSifgabZUcbup7PEKNLC1zUoJGPv3mNMa
+	4QjJVvnreC2MAt4gAGEf62xISCslVYkkJuw==
+X-Gm-Gg: AY/fxX5FVs44QYTAYwu7FoLU0O6E5EjyaD/fqAILqDjmvJnzxeYG2NA1QwF+VZeDGAS
+	Vh5ndLkiHQbyxi7YHK85ryLT4NjGMrwxTTWsGAPHJ7BULQKDYMLdCx4+UtvAO/U0jHvYKjeH8x7
+	7YECtDSLxDxJGGeZluvf0FYZvFFEPvYn0XaAH5D47ur4Krt5VST2rmdAl+WQJ1XJ9AtZh6ARSw5
+	oDxZUMNDSdlWZj+z+wLSwn0cHroFPF8aHyrnKl247/WeC/efMDIBr+cbLkMMEtyzcoV27voppyD
+	LkdfC8Fe5GIWNY3KWEtNBKwQ1lg50gIieIhhFr7m+Z7cvV7vgz8phigRyaMlgP9qW07aatv8W3w
+	5S50nsUFhLFwyIYUCfY0Yo6jF74cbOR+kOSFODNFPokR729dfJFSG2g6D
+X-Received: by 2002:a05:690c:c512:b0:789:61ca:88f6 with SMTP id
+ 00721157ae682-793c523ce57mr126275387b3.4.1768686842712; Sat, 17 Jan 2026
+ 13:54:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260116075959.111147-1-f_l_k@t-online.de> <CADySD0FQ1TaSHvtcs+7ksBe5NJTmd0VepTnYOYie44T112G9tw@mail.gmail.com>
+ <OF309T.INVXHWIQ3QWN2@t-online.de> <CADySD0Gy3QXFVT=V3zf3fEPJLcuxKXUXX+K=x6Hz_gpst4jm6Q@mail.gmail.com>
+In-Reply-To: <CADySD0Gy3QXFVT=V3zf3fEPJLcuxKXUXX+K=x6Hz_gpst4jm6Q@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 17 Jan 2026 13:53:51 -0800
+X-Gm-Features: AZwV_QicXhG71vessHU_omP_TGhgeohd8MCT3xXixG_JIt-PBppf9oszxckjawg
+Message-ID: <CAMKF1sq0nLeHQ6qZpN+Rp5VeH8t888u7XNp-bpkaz5OXAaVpvw@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH] xdg-desktop-portal-wlr: update
+ 0.7.0 -> 0.8.1
+To: ankur.tyagi85@gmail.com
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000fa977006489c7eb1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 21:50:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123559
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 21:54:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123560
 
-Changelog: https://gitlab.xfce.org/apps/xfce4-notifyd/-/tags/xfce4-notifyd-0.9.4
-Changelog: https://gitlab.xfce.org/apps/xfce4-notifyd/-/tags/xfce4-notifyd-0.9.3
-Changelog: https://gitlab.xfce.org/apps/xfce4-notifyd/-/tags/xfce4-notifyd-0.9.2
-Changelog: https://gitlab.xfce.org/apps/xfce4-notifyd/-/tags/xfce4-notifyd-0.9.1
-Changelog: https://gitlab.xfce.org/apps/xfce4-notifyd/-/tags/xfce4-notifyd-0.9.0
+--000000000000fa977006489c7eb1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- .../xfce4-notifyd-get-var-abs-path.patch      | 41 -------------------
- ...otifyd_0.8.2.bb => xfce4-notifyd_0.9.4.bb} | 11 +++--
- 2 files changed, 7 insertions(+), 45 deletions(-)
- delete mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/files/xfce4-notifyd-get-var-abs-path.patch
- rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.8.2.bb => xfce4-notifyd_0.9.4.bb} (62%)
+If we add PV .=3D =E2=80=9C+git=E2=80=9D that will do it for now
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/files/xfce4-notifyd-get-var-abs-path.patch b/meta-xfce/recipes-apps/xfce4-notifyd/files/xfce4-notifyd-get-var-abs-path.patch
-deleted file mode 100644
-index 719267fd16..0000000000
---- a/meta-xfce/recipes-apps/xfce4-notifyd/files/xfce4-notifyd-get-var-abs-path.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--Native pkg_config only return basename of the variable queried. Invoke `which`
--to get the absolute path.
--
--Upstream-Status: Inappropriate [oe specific]
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
-- configure.ac | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 0f49e2b..a589147 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -116,7 +116,7 @@ AC_MSG_CHECKING([for gdbus-codegen])
-- if test x"$GDBUS_CODEGEN" = x""; then
--     GDBUS_CODEGEN=`$PKG_CONFIG --variable=gdbus_codegen gio-2.0`
-- fi
---if test -x "$GDBUS_CODEGEN"; then
--+if test -x "$(which $GDBUS_CODEGEN)"; then
--     AC_MSG_RESULT([$GDBUS_CODEGEN])
-- else
--     AC_MSG_ERROR([could not find gdbus-codegen in \$PATH. You can run
--@@ -129,7 +129,7 @@ AC_MSG_CHECKING([for glib-compile-resources])
-- if test x"$GLIB_COMPILE_RESOURCES" = x""; then
--     GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable=glib_compile_resources gio-2.0`
-- fi
---if test -x "$GLIB_COMPILE_RESOURCES"; then
--+if test -x "$(which $GLIB_COMPILE_RESOURCES)"; then
--     AC_MSG_RESULT([$GLIB_COMPILE_RESOURCES])
-- else
--     AC_MSG_ERROR([could not find glib-compile-resources in \$PATH. You can run
--@@ -142,7 +142,7 @@ AC_MSG_CHECKING([for glib-genmarshal])
-- if test x"$GLIB_GENMARSHAL" = x""; then
--     GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
-- fi
---if test -x "$GLIB_GENMARSHAL"; then
--+if test -x "$(which $GLIB_GENMARSHAL)"; then
--     AC_MSG_RESULT([$GLIB_GENMARSHAL])
-- else
--     AC_MSG_ERROR([could not find glib-genmarshal in \$PATH. You can run
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.9.4.bb
-similarity index 62%
-rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
-rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.9.4.bb
-index 96cfd32f7b..987735e763 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.9.4.bb
-@@ -16,13 +16,16 @@ DEPENDS = " \
- inherit xfce-app
- inherit python3native
- 
--SRC_URI:append = " file://xfce4-notifyd-get-var-abs-path.patch"
--
--SRC_URI[sha256sum] = "e3a28adb08daa1411135142a0d421e4d6050c4035a4e513a673a59460ff2ae84"
-+SRC_URI[sha256sum] = "ae6c128c055c44bd07202f73ae69ad833c5e4754f3530696965136e4d9ea7818"
- 
- # Avoid trouble with other desktops e.g KDE which also ships dbus service named
- # org.freedesktop.Notifications
--EXTRA_OECONF = "--disable-dbus-start-daemon"
-+EXTRA_OECONF = "--disable-dbus-start-daemon \
-+                GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
-+                GLIB_COMPILE_RESOURCES=${STAGING_BINDIR_NATIVE}/glib-compile-resources \
-+                GLIB_GENMARSHAL=${STAGING_BINDIR_NATIVE}/glib-genmarshal \
-+                GLIB_MKENUMS=${STAGING_BINDIR_NATIVE}/glib-mkenums \
-+               " 
- 
- do_compile:prepend() {
-     mkdir -p xfce4-notifyd xfce4-notifyd-config
--- 
-2.43.0
+On Sat, Jan 17, 2026 at 1:29=E2=80=AFAM Ankur Tyagi via lists.openembedded.=
+org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 
+> On Sat, Jan 17, 2026 at 9:55=E2=80=AFPM Markus Volk <f_l_k@t-online.de> w=
+rote:
+> >
+> > On Sat, Jan 17 2026 at 21:49:25 +13:00:00, Ankur Tyagi via
+> lists.openembedded.org <ankur.tyagi85=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > can please also include tag=3Dv${PV} in the SRC_URI
+> >
+> >
+> > I guess that will not work since as said the SRCREV is set two commits
+> ahead of the release. If this is really needed, I'll probably need to
+> > backport these two?
+>
+> Gotcha but I think setting SRCREV not matching the PV is slightly
+> misleading.
+>
+> I would rather prefer backports but let's wait to hear from others as wel=
+l.
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#123546):
+> https://lists.openembedded.org/g/openembedded-devel/message/123546
+> Mute This Topic: https://lists.openembedded.org/mt/117294478/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000fa977006489c7eb1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">If we add PV .=3D =E2=80=9C+git=E2=80=9D that will do it =
+for now=C2=A0</div><div><br><div class=3D"gmail_quote gmail_quote_container=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Jan 17, 2026 at 1:29=E2=80=
+=AFAM Ankur Tyagi via <a href=3D"http://lists.openembedded.org">lists.opene=
+mbedded.org</a> &lt;ankur.tyagi85=3D<a href=3D"mailto:gmail.com@lists.opene=
+mbedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #cc=
+c solid;padding-left:1ex">On Sat, Jan 17, 2026 at 9:55=E2=80=AFPM Markus Vo=
+lk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=3D"_blank">f_l_k@t-onlin=
+e.de</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Sat, Jan 17 2026 at 21:49:25 +13:00:00, Ankur Tyagi via <a href=3D"=
+http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.o=
+penembedded.org</a> &lt;ankur.tyagi85=3D<a href=3D"mailto:gmail.com@lists.o=
+penembedded.org" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt;=
+ wrote:<br>
+&gt;<br>
+&gt; can please also include tag=3Dv${PV} in the SRC_URI<br>
+&gt;<br>
+&gt;<br>
+&gt; I guess that will not work since as said the SRCREV is set two commits=
+ ahead of the release. If this is really needed, I&#39;ll probably need to<=
+br>
+&gt; backport these two?<br>
+<br>
+Gotcha but I think setting SRCREV not matching the PV is slightly misleadin=
+g.<br>
+<br>
+I would rather prefer backports but let&#39;s wait to hear from others as w=
+ell.<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#123546): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123546" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123546</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117294478/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117294478/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000fa977006489c7eb1--
 
