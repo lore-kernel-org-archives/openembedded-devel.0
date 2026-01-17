@@ -1,141 +1,100 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 068CFC9831C
-	for <webhook@archiver.kernel.org>; Sat, 17 Jan 2026 09:46:29 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5753.1768643180599492718
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC409C98323
+	for <webhook@archiver.kernel.org>; Sat, 17 Jan 2026 11:48:19 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6902.1768650498773263369
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Jan 2026 01:46:20 -0800
+ Sat, 17 Jan 2026 03:48:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MW3oqyE0;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2a102494058so18975365ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 01:46:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ws01KOwu;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee4539adfso24214285e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 03:48:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768643180; x=1769247980; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JtwTz01RfF4ZMsJckDzCz+VTj2iNfnwKwo6W4EHDpjQ=;
-        b=MW3oqyE0bJpe4C+aFwJV/+Aydobg4xURPkbxnn3wxPdrMyiOXExnNGM4zmlncGJQXq
-         knZPwTtAgo2rs9So64GLEm8UeCh9PfGqzPbpQusaSht6AQXe59pzwlmoYWqBqdpErwmA
-         uI/K30sumRmvC+0pTe4bk9zrYY3ICVJwQSB0rORwtnP1VMhWH6JeCkR/1tZGwtPftS2O
-         eUIQewgRb8ctdpf5WC39fnJYNQOVvfAzKEJYfBPPAU6f3EwL10RP6gRTedUAeB8SeG06
-         lWglca31Xaxx6UZs+pBzk9DAajcQCi3VNeOUVnaX5yQxh57W02ZFv3qsg6KuS+5/IxIU
-         Luug==
+        d=gmail.com; s=20230601; t=1768650497; x=1769255297; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=tMsQhneWKLC1ip57UAFao6iLyrNHoXRHpvIklrFtxhk=;
+        b=Ws01KOwu/NnR59yDeeRsFG3lkPHI5FN0Pca1iXSW0DfwHdI3Q+ZzZpzqAHMJfCAlXq
+         ZNpwOgT+PV1waM3Hz7bmuqvRmrSXpqH6FwfkdIWijckwU8CdSxiUMiG8QMV7CNzBXS50
+         Ts01/+hooHpj65NSiyCrCfPUHIuB/2NOLlhfWO8uKLKjRcaoHyYy7/7KOihq9n2NBCgr
+         tVbKT/JzY68an09BvuWDOrCUq6y/zhZEFwZaX3sxL/iL+zBJC/R0WE0n6ok8zIvkm8js
+         nAn5w+sEs+YWy/Rj2FhuLGtsLBT29fjrGVOae/CRtrGGslE59rA6mPwv4rPxJALt8dmr
+         ndSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768643180; x=1769247980;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=JtwTz01RfF4ZMsJckDzCz+VTj2iNfnwKwo6W4EHDpjQ=;
-        b=KtdBQITOjWeVsX6LR95bp3FPYyejEE8drCCpDaywdxe8GwPiUJMzmGCR7tBYqS+tmj
-         RzIT/p+jswrbauu8Mjkq4zpeh+egrdmJF35If9PY/RLLBwtH2WSSlMNc90DH7WtWl1re
-         rTjOilQQnzQgrPbvuuxzgKmGeWLhAh+FNizD2g1wzBIdL4vMGT5feFZIfnHAWi8SazF9
-         iZjGbl+RDC648kLb+qHOuaVDgZ93qd1T7LcA0E84VF2eV6LNwlVhjpT2HIBFZSejkuN0
-         te+YdBspc80g2Lkl7IZQ9jVTVNKXcgLhK8wpMepBIitfduUPyG+6CZuRUEF5vwuglC1z
-         X4VA==
-X-Gm-Message-State: AOJu0Yxba28CiYCTOK23FVMQp0GnifpwMiyL31EKcEFY/DxG5ETsffXL
-	wPhHlIzE6Cggr0knNchK2mW/GnshLv660bdS4FYSVQARBMMgLYCYSseSg7A1M0nN
-X-Gm-Gg: AY/fxX5e6SNNFr4i5v1EZveYC3A3H5sSBbFMfYrHXYRvpa1W3WA0v8kfbu3YMtMBzkk
-	olEAYLXSg6IQwcC4Y+hBvRSfLYczZlK/mXJ6W6cE6EekTgy6eFzcwTHHZUIq1deDa7jmj3GI25A
-	QTS2u0Iasq6ODb1TAiVeJ+OVDE1PLSoh6JrerR3dE15aIBd1CgG2OscjXahWdb8qO9fuO5x7eEf
-	+aVK7YV0I249XKtlOagYacQxlf/8ByxjxZE9ZyaDZOI5Nzo5LiVBuLlhBjGGaMRxjiA17OclOLd
-	Rsn6LlJZjWZbqCe3N04EB87hYD6ptxjloaue+ogkLNK/Eb0UatP15caMav4lfc/D61cmrUorTgp
-	Xmqb7VEQW/0YqTiZljheH9KOA4h75ANqKO24FL0bMlSeJfuaA+RC55wWCSlEYeY3BNcSxeBXbRv
-	JODU2oPDaMfHr4PiIlDAp0V/8=
-X-Received: by 2002:a17:902:f686:b0:2a0:e5c3:d149 with SMTP id d9443c01a7336-2a71780a3e3mr48743265ad.23.1768643179810;
-        Sat, 17 Jan 2026 01:46:19 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.17])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7190c9ee9sm42289845ad.22.2026.01.17.01.46.17
+        d=1e100.net; s=20230601; t=1768650497; x=1769255297;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=tMsQhneWKLC1ip57UAFao6iLyrNHoXRHpvIklrFtxhk=;
+        b=mpuZxlHnH35Keqt4Lpl9HoVQtpUzxod76UwdhV208kodse8b9e8lBU9/aK2gIs7hyf
+         nyd3iayODXoz3vJ0+KdltTiIByfp/nEBQIFQd9cF1Y0zBEiX0VCiaAB93jcKB2da6CFb
+         7MuuXji9ca/9j/J1B4Td1sk6vhsaX7dD8dVbrBqyTGS9xQmifel+19f3SVSiIWNavxB9
+         1WrHssSHGloCwbULGUHrU5DhW8aIMj2RPAez7nrTm1l/uaOwQgdQsByO1bjzuVo7388K
+         IjkiWSjcHQEhNfkW4UgI+61t0lcaz1frZiJgPlPmaxEXihZ0X2yDSIZBDyewTfFpnrfW
+         pDHQ==
+X-Gm-Message-State: AOJu0Ywgu66MY2z6DG5RPcwenct+qdrly2Ab7Wya+xE5tPOOmVNmzs9k
+	b7mDxg4fsQU3QVEYMZ2A8YsO92e8RmKlJ1miqJRPDmt4cUyXypCqRprMCFbCRw==
+X-Gm-Gg: AY/fxX5h3sx435OH5G2cOj/cZXabVbR4Mo9WyR18c3FuFImMuyuGlSmzS/goEtECPtz
+	W7B4+sHRNkZElja21l5pdfvozcJEtgtoYCtX8kZkDIK4iIEAZ8GTYWxw/wigiPL0pCytKc1EIlY
+	JJlNeMzZ/STovqQcks8cVr6j7DttYF7gIu1Ei+aGhsiHY6RDu6Dw2flwtQLbpmgvzwwmAA0sUGQ
+	tgoaKfoWcvrIYm256HVCuDdNn3tfypsVy3RfyfYW1pfotc6s+SG+pGR/y/aeF3KSptn6pCsP6wa
+	nEAHuFCQeL2a1Fp39J1gi+nZ0OPUGhuCQ51ivvpAie8NMNgvYRGNObaYKTo622Sals013XX7dES
+	H+7WRNEZbdyKRlAR3UKn9bmlw1liqWjyEGOjMvFT9gY+L5KU3j95cZGLQ9oEpN1lkMGkXj93kxo
+	EZZg5xhSgPdz2llTVuWEA=
+X-Received: by 2002:a05:600c:1f12:b0:477:a36f:1a57 with SMTP id 5b1f17b1804b1-4801e2f9110mr63112775e9.3.1768650496838;
+        Sat, 17 Jan 2026 03:48:16 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801e886829sm89717245e9.8.2026.01.17.03.48.16
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Jan 2026 01:46:19 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+        Sat, 17 Jan 2026 03:48:16 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 6/6] lmdb: patch CVE-2026-22185
-Date: Sat, 17 Jan 2026 22:45:35 +1300
-Message-ID: <20260117094535.4191231-6-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260117094535.4191231-1-ankur.tyagi85@gmail.com>
-References: <20260117094535.4191231-1-ankur.tyagi85@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 1/4] python3-croniter: upgrade 1.3.4 -> 1.3.5
+Date: Sat, 17 Jan 2026 12:48:12 +0100
+Message-ID: <20260117114815.782230-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 09:46:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123552
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Jan 2026 11:48:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123553
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Xu Huan <xuhuan.fnst@fujitsu.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-22185
+Signed-off-by: Xu Huan <xuhuan.fnst@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 94f564fc96e8754d11fe9932dd4c44076592ed1c)
 
-Pick the patch that is mentioned as a solution in the related upstream bug[1].
-
-[1]: https://bugs.openldap.org/show_bug.cgi?id=10421
+Changelog:
+Add Python 3.10 support.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e0f86a4a7f8e413c682fbd4a9c01b12b0234cd71)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../lmdb/files/CVE-2026-22185.patch           | 31 +++++++++++++++++++
- meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb       |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch
+ .../{python3-croniter_1.3.4.bb => python3-croniter_1.3.5.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-croniter_1.3.4.bb => python3-croniter_1.3.5.bb} (78%)
 
-diff --git a/meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch b/meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch
-new file mode 100644
-index 0000000000..6c85b2b8ed
---- /dev/null
-+++ b/meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch
-@@ -0,0 +1,31 @@
-+From 94ca20e5aed5d8730e045bb945fa3485b28a7981 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Tue, 6 Jan 2026 20:52:25 +0000
-+Subject: [PATCH] ITS#10421 mdb_load: check for malicious input
-+
-+From: Howard Chu <hyc@openldap.org>
-+
-+CVE: CVE-2026-22185
-+Upstream-Status: Backport [https://github.com/LMDB/lmdb/commit/8e1fda85532a3c74276df38a42d234dcdfa1e40d]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ libraries/liblmdb/mdb_load.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/libraries/liblmdb/mdb_load.c b/libraries/liblmdb/mdb_load.c
-+index d2a3cec..7eccf40 100644
-+--- a/libraries/liblmdb/mdb_load.c
-++++ b/libraries/liblmdb/mdb_load.c
-+@@ -208,6 +208,12 @@ badend:
-+ 
-+ 	c1 = buf->mv_data;
-+ 	len = strlen((char *)c1);
-++	if (!len) {
-++		/* This can only happen with an intentionally invalid input
-++		 * with a NUL byte after the leading SPACE
-++		 */
-++		goto badend;
-++	}
-+ 	l2 = len;
-+ 
-+ 	/* Is buffer too short? */
-diff --git a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
-index b2f1920f6b..0d06c74602 100644
---- a/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
-+++ b/meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/LMDB/lmdb.git;nobranch=1;protocol=https \
-            file://run-ptest \
-            file://0001-Makefile-use-libprefix-instead-of-libdir.patch \
-            file://0001-make-set-soname-on-liblmdb.patch;patchdir=../.. \
-+           file://CVE-2026-22185.patch;striplevel=3 \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-croniter_1.3.4.bb b/meta-python/recipes-devtools/python/python3-croniter_1.3.5.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-croniter_1.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-croniter_1.3.5.bb
+index 4158dbe7c4..92962c0f45 100644
+--- a/meta-python/recipes-devtools/python/python3-croniter_1.3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-croniter_1.3.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
  
- SRCREV = "ce201088de95d26fc0da36ba805bf2ddc2ba74ff"
+ PYPI_PACKAGE = "croniter"
+ 
+-SRC_URI[sha256sum] = "3169365916834be654c2cac57ea14d710e742f8eb8a5fce804f6ce548da80bf2"
++SRC_URI[sha256sum] = "7592fc0e8a00d82af98dfa2768b75983b6fb4c2adc8f6d0d7c931a715b7cefee"
+ 
+ inherit pypi setuptools3
+ 
 
