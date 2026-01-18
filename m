@@ -1,262 +1,96 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A574D4A5F4
-	for <webhook@archiver.kernel.org>; Sun, 18 Jan 2026 13:41:34 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14401.1768743689702948192
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68F67D4A5F4
+	for <webhook@archiver.kernel.org>; Sun, 18 Jan 2026 15:02:14 +0000 (UTC)
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15671.1768748529818954198
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Jan 2026 05:41:30 -0800
+ Sun, 18 Jan 2026 07:02:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
-	by mailout03.t-online.de (Postfix) with SMTP id 869FAE16E;
-	Sun, 18 Jan 2026 14:41:27 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.236.29]) by fwd83.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vhT1y-1mXey10; Sun, 18 Jan 2026 14:41:26 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HNSgzifi;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-2ae255ac8bdso6688527eec.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Jan 2026 07:02:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768748529; x=1769353329; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8WoMZGwV5u3bIufdnNzMEiRSOKJzuT8Kz4wIVjee2S0=;
+        b=HNSgzifiTixwanF2r6GOCJdWC802+W2xN92RJPh1+huueUYW28r0r/jZPT2MlGYW9N
+         OqNSKvVJwQt600JEP/8o0CmdZwMP4fW8mNy/k4pbssUfaRW0wRCkc2M1Yq/CAzHXgpYV
+         R4uRGYY+SgAVvR1QsSZGa4n1c0gBkyzrzQgo4IG5BPriHmzwYs02z7uOhG+x/QR49dhc
+         DzwWxWPg3MpR0FhBC4tHwNMkdoGgB/iz5pYeYorjtT+UHeEf2Bnn1nU7aE2oovb+4lcQ
+         v5+spr7DbdmE1KE8v3/LBD/9i4ShBDhIX2Fx2Q28jZ7b/gBKbbaB6NU6WPyUVnQ766Ck
+         66wA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768748529; x=1769353329;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8WoMZGwV5u3bIufdnNzMEiRSOKJzuT8Kz4wIVjee2S0=;
+        b=oTzbLh0GJ4jYWpjZpGkjNGvw33N3EiFOXCkWqjB/Mq+R6ccpYjJaVl1GIjofWAl5ru
+         4oG2BvwdHFJR0UvFHyoKo7E1836tAMAb0PP7HmE/g2qAuksm6ulmGH8Wcq1pBKPLlSSt
+         9PW9blz8/3lpKsxs+LMaCg8cWs1Z35faQM/NrErlk0TjUk3sZLHr/Cg7OidSRQ2MrkA2
+         1FnipigFbjROS75MDoM55g2XCak7F8F9yD3owK/ikTlP03tCMNYeTs75F0oYduELI/sK
+         nQ+ANg3wq+KKG9j3Li4pwxtIb1c67/LrdcMhTZiwHcTVwptxEUjboA0lW/Q6GaN58WQ0
+         9SFw==
+X-Gm-Message-State: AOJu0Yybb83uEkPTVZPbSbMgTBLhOq2Sc7wYPnlkhB3oejg1+hA3pzW2
+	FW3Qn/YJUrWmVyoNrbd3N2nVtZYr0ThuRMFwndFzLgZurRlPDdxu+G+xbKJf9A==
+X-Gm-Gg: AY/fxX7p3/Ac8H9W+AJ76v6hRjgHAARktgMyOdvUwpS7c1BlNOigg7HA0Dp8fwsAuVS
+	1JGDy5tvBufZHscsxiXr8yGXAB3eCCKnhRruckPbIsrKm0i2yWW9WzengudO/3oR1RBtcNvfy+r
+	TXznC6r/2zl/wyZF0MP/fVlcyS9MJA5sgJiZaW0e0+rSUVSUP75yk67hWxhq8W3XbJ94NnQfsyT
+	b8BhN644dZXwg/AtmsmMey+lYvJH0bURlztgQ756g1gv6gl9DJ7rhqA5J/NOJ0HyP6alu9RwCtw
+	lNlNx3gnz6RaGuwh1LaNcYId3uyrvmIKKuPaJ036tycI9HX0ZYl774avZ7p9mXgAUUxHfRNujtK
+	McpFH1LNP/EHCZwNxajL/NDdj0aMH8GW8wJzq1Y+epK5ZMRc5DLcr7Iggaw3jdA9CTW4UixWMQz
+	EdoRo92qNHoPgktRPbfRiMj5PgnThKI+HGgSICUVHTgJC4f/ROWNCod5xnHYwnDiWqMT7SDzU79
+	E6xKib02Pcqg6pNVm6z2AlKSwxJWGyEY14/C7iSeg==
+X-Received: by 2002:a05:7300:df4c:b0:2ac:1e9f:a0ed with SMTP id 5a478bee46e88-2b6b40d9828mr8625885eec.25.1768748527302;
+        Sun, 18 Jan 2026 07:02:07 -0800 (PST)
+Received: from apollo.tail3ccdd3.ts.net ([2601:646:8201:fd20::28b])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1244ac58140sm10152385c88.4.2026.01.18.07.02.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 18 Jan 2026 07:02:06 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-gnome][PATCHv4] gnome-session: update 47.0.1 -> 49.2
-Date: Sun, 18 Jan 2026 14:41:20 +0100
-Message-ID: <20260118134120.116239-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] xdg-user-dirs: Fix packaing location of systemd unit file
+Date: Sun, 18 Jan 2026 07:02:03 -0800
+Message-ID: <20260118150203.2037812-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1768743686-C1FD2C6F-B363A678/0/0 CLEAN NORMAL
-X-TOI-MSGID: dd8a74d3-5ced-4b31-abf8-9f940f8604ae
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 18 Jan 2026 13:41:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123570
+ <openembedded-devel@lists.openembedded.org>; Sun, 18 Jan 2026 15:02:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123571
 
-- update dependencies
-- inherit manpages mime
-- build x11 depending on DISTRO_FEATURES
-- rename packageconfig man->manpages to work with manpages class
+systemd_user_unitdir is the right variable to use
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 49.0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Fixes
+ERROR: xdg-user-dirs-0.19-r0 do_package: QA Issue: xdg-user-dirs: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/systemd
+  /usr/lib/systemd/user
+  /usr/lib/systemd/user/xdg-user-dirs.service
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+xdg-user-dirs: 4 installed and not shipped files. [installed-vs-shipped]
 
-- Translation updates
-- Fixed build with musl libc
-- Fixed some memory corruption bugs that led to gnome-session-init-worker
-  crashing on logout
-- Fixed a memory leak in gnome-session-init-worker
-- Allowed Qt apps to use the Wayland text-input protocol, instead of forc=
-ing
-  them to use the direct ibus integration plugin
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 49.rc
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-- Disabled the org.freedesktop.ScreenSaver proxy service on the login scr=
-een
-- Separated out the systemd-specific code from the gnome-session leader p=
-rocess
-  into a dedicated executable. This makes it easier to integrate distribu=
-tions
-  that use alternative init systems with gnome-session (though note that =
-this
-  is still a usecase we don't officially support upstream)
-- Translation updates
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 49.beta
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-- gnome-session is no longer started via a shell script, and instead all =
-of
-  the necessary setup is done in C.
-- gnome-session's builtin service manager has been completely removed. Se=
-rvice
-  management will now be handled entirely by the operating system's nativ=
-e
-  service manager (i.e. systemd). See the following blog post for more in=
-formation:
-  https://blogs.gnome.org/adrianvovk/2025/06/10/gnome-systemd-dependencie=
-s
-- The "fail whale" dialog has been removed
-- Various unused APIs and interfaces were removed, including:
-	- The org.gnome.SessionManager.Client and o.g.SM.App D-Bus interfaces
-	- Various D-Bus APIs related to the service manager
-	- Various .desktop and .session file keys that were used only by the
-	  builtin service manager
-	- Fallback sessions, since there's no way to fall back anymore
-- The code was significantly refactored
-- gnome-session now provides a gnome-session-basic-services.target, that =
-sessions
-  like the GDM greeter and gnome-initial-setup can use to avoid listing a=
-ll of
-  the basic GNOME session services (like all the gnome-settings-daemon pl=
-ugins)
-- The --autostart command line option was removed, and instead kiosk sess=
-ions
-  should set Kiosk=3Dtrue in their session definition file.
-- Updated GNOME's mimetype defaults to drop Evince (which was replaced wi=
-th Papers)
-- Translation updates
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 49.alpha.1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-	Fix POTFILES to stop listing deleted files
-	Stop requiring the gnome-settings-daemon Wacom plugin, which doesn't exi=
-st anymore
-	Ensure that we start localsearch when starting a GNOME session via syste=
-md
-	Translation updates
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 49.alpha.0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-	Removed XSMP
-	Removed session restore functionality
-	X11 sessions are disabled by default
-	Added a default mimeapps list for GNOME's core apps
-	gsd-xsettings now starts on demand in Wayland
-	Dropped gnome-dummy session
-	Allow Inhibit() with no app ID
-	Unset all LC_* variables that are bound to REGION
-	Ported fail whale to gtk4
-	Dropped session selector GUI
-	Dropped the hardware acceleration check
-	gnome-session-inhibit: Propagate parent death
-	gnome-session-inhibit: Fixup terminal handling
-
-Contributors:
-  Benjamin Berg, Alessandro Bono, Matthias Clasen, gnome-build-meta-bot,
-  Neal Gompa, Sophie Herold, Javier Jard=C3=B3n, Chris Mayo, Simon McVitt=
-ie,
-  Jordan Petridis, Ray Strode, Joan Torres, Adrian Vovk, Chris Williams
-
-Translators:
-  =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
-], Aefgh Threenine [th], A S Alam [pa], Baxrom Raxmatov [uz],
-  Ekaterine Papava [ka], Martin [sl], Quentin PAG=C3=88S [oc], Vasil Pupk=
-in [be]
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Version 48.0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-	The gnome-session script no longer re-runs itself as a subprocess
-	GNOME OS CI was ported to use a CI template
-	Integrated new CI-based release process
-	Fix bugs caused by systemd v257's inhibitor behavior changes
-	Make `gnome-session --version` print to stdout rather than syslog
-	Translation updates
-	README updates
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gnome-session/gnome-session_47.0.1.bb     | 35 -------------------
- .../gnome-session/gnome-session_49.2.bb       | 30 ++++++++++++++++
- 2 files changed, 30 insertions(+), 35 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-session/gnome-session_=
-47.0.1.bb
- create mode 100644 meta-gnome/recipes-gnome/gnome-session/gnome-session_=
-49.2.bb
+ meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.19.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_47.0.1.=
-bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_47.0.1.bb
-deleted file mode 100644
-index 3bb1cb1651..0000000000
---- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_47.0.1.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--SUMMARY =3D "GNOME session"
--LICENSE =3D "GPL-2.0-only"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
--
--DEPENDS =3D " \
--    glib-2.0-native \
--    xtrans \
--    libice \
--    libsm \
--    virtual/libx11 \
--    gtk+3 \
--    gnome-desktop \
--    json-glib \
--    systemd \
--"
--
--
--inherit gnomebase gettext gsettings upstream-version-is-even features_ch=
-eck
--
--REQUIRED_DISTRO_FEATURES =3D "polkit systemd pam gobject-introspection-d=
-ata"
--
--SRC_URI =3D "https://download.gnome.org/sources/gnome-session/${@oe.util=
-s.trim_version('${PV}', 1)}/gnome-session-${PV}.tar.xz"
--SRC_URI[sha256sum] =3D "56ae9c68e49995793eb2096bcdc4533b111669e1e54c8b6e=
-0b1d952f6a5e8a70"
--
--PACKAGECONFIG ??=3D ""
--
--PACKAGECONFIG[docbook] =3D "-Ddocbook=3Dtrue, -Ddocbook=3Dfalse"
--PACKAGECONFIG[man] =3D "-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native libxslt=
--native"
--
--FILES:${PN} +=3D " \
--   ${datadir}/xdg-desktop-portal \
--    ${datadir}/xsessions \
--    ${datadir}/wayland-sessions \
--    ${systemd_user_unitdir} \
--"
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb=
- b/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb
-new file mode 100644
-index 0000000000..119e2ff951
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb
-@@ -0,0 +1,30 @@
-+SUMMARY =3D "GNOME session"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-+
-+DEPENDS =3D " \
-+    glib-2.0 \
-+    gtk4 \
-+    gnome-desktop \
-+    json-glib \
-+    systemd \
-+"
-+
-+inherit gnomebase gettext gsettings upstream-version-is-even mime mime-x=
-dg manpages features_check
-+
-+REQUIRED_DISTRO_FEATURES =3D "systemd"
-+
-+SRC_URI[archive.sha256sum] =3D "fcdb4f45d6a60d84e9ecae1e3740bab6e55bab0c=
-b49e0fb38280e9b38f3a8485"
-+
-+PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-+
-+PACKAGECONFIG[docbook] =3D "-Ddocbook=3Dtrue, -Ddocbook=3Dfalse"
-+PACKAGECONFIG[x11] =3D "-Dx11=3Dtrue, -Dx11=3Dfalse,virtual/libx11"
-+PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native li=
-bxslt-native"
-+
-+FILES:${PN} +=3D " \
-+   ${datadir}/xdg-desktop-portal \
-+    ${datadir}/xsessions \
-+    ${datadir}/wayland-sessions \
-+    ${systemd_user_unitdir} \
-+"
---=20
-2.52.0
+diff --git a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.19.bb b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.19.bb
+index 6b24076d79..2550d4cd59 100644
+--- a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.19.bb
++++ b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.19.bb
+@@ -14,4 +14,4 @@ CONFFILES:${PN} += " \
+     ${sysconfdir}/xdg/user-dirs.defaults \
+ "
 
+-FILES:${PN} += "${systemd_unitdir}/user/xdg-user-dirs.service"
++FILES:${PN} += "${systemd_user_unitdir}/xdg-user-dirs.service"
 
