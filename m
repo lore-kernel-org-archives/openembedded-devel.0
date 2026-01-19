@@ -1,88 +1,96 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EA0FCCF2C9
-	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 08:46:09 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31740.1768812360028768669
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04002CCF2D5
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 10:05:30 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.32272.1768817125763663076
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 00:46:00 -0800
+ Mon, 19 Jan 2026 02:05:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=jjzEqW5i;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1768812360; x=1800348360;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Ljb4nGuHd8NilSC8EvfzqRK8vqectPppZTCxzAg+g0k=;
-  b=jjzEqW5igklbBulYaLH8mPpUV9lRpNeaPrJada97XmAY92gu06kQP8Mw
-   YpyX2xtvuOYkDW6G/85zdFlRU+AmjNZC7DM+zp1nx+wEI0FZhG4pmPXhP
-   rp7a+wRFAwZquUv497cQI1EBbn2nJTPyJYvOVWbu5RSVETXmMnb4MR7ts
-   YVX89ML5uat+/+Rhdvhsoybb7vB468VtLscqb9Ab51+HBz8shhIAcKr7P
-   /COoLpDqz5yaoWpwv3vf8RR/wNke5e2L536U5+emu1KmeAQL176OH3E+Y
-   +nihYJKYgzSvColzVDS/GRYIll2r0tFGd9xSMHXQoJ3fL1ysr5iLHog8f
-   w==;
-X-CSE-ConnectionGUID: bn4jY/DGRlWo2IK9R42USQ==
-X-CSE-MsgGUID: BKJA+nrHREKuky3w5TvsBw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11675"; a="205242182"
-X-IronPort-AV: E=Sophos;i="6.21,237,1763391600"; 
-   d="scan'208";a="205242182"
-Received: from unknown (HELO az2nlsmgr4.o.css.fujitsu.com) ([20.61.8.234])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2026 17:45:58 +0900
-Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 661FC42A31E
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:45:58 +0000 (UTC)
-Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 19A05C00D51
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:45:58 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id B06E5200020B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:45:55 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O3eLF2Dn;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2a12ed4d205so24613075ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 02:05:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768817125; x=1769421925; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mcC4FyUAWE6UBXGmA0135pcggwdknC//i6sr0cPQ/TM=;
+        b=O3eLF2DnvPgvOchuPPm+BN+H5Y3f0GCkPCYv/T/kuEB6XYv9YMDkRNyjIA2T3bEoJl
+         txn5/5JRUdSOeFK3VaB/cLpH8srNjr+/D70PBfkQRDQ97ih3u2k71Nk1iiiTLsYMvhlJ
+         IoLdkXW1mRsynXIvcxLlLM6CVpI4pWWDNXaBiV/msSCNl31fNL9FXI72YKhZk472dgXc
+         LdneaXMa+MUkkVzb7T88duL0bHNZXiaODnGb/1ClyCf7QoEAHwqQRfDYpcHQvG1Wh7YV
+         afg8bB66v3purNgtYYmkETwWm8Ya18RkAJ52wXAHT2B3mOwt5dPtoJ0Pqdwv33RDPRh6
+         n2xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768817125; x=1769421925;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mcC4FyUAWE6UBXGmA0135pcggwdknC//i6sr0cPQ/TM=;
+        b=Xd39pBnuz9OAK8MmaZh1m5GhgMb9T5eF3o1qfuhQXgV7hFtIv1XhR+Il4CZQjyWsKX
+         5/jNXf3qUikCNr+EXv5Kg2dpt4SkUQWbAH7PaOREIjHdeBXMkZnT81XN/ZQcMVZ1Q+2m
+         FOzeI4qntPAGVKcCXA8i+8FcaeGUeNBfmm+CZZURzLuhYtD1qDutOwXw44OKbIVDVWee
+         ZFL3f9dFjnH4KWa6pGkicuj5FGzso6VA3fRl83BKbDncgfLpTLc7mh53QFYTtIDAFN+R
+         GYG4P9LrcMsNmeuqF2kygnAjfapp/osG23xWIsmHTwfHVmgYThsNLaQt28zt8l/niMcF
+         Px0w==
+X-Gm-Message-State: AOJu0Yz0hy0d8hXRjFSMoGFPR++zJ+5o8tA1MTGbdUEP5o9fKrZ1eOMT
+	vowyC5enqhn+T8kp//HnL7qYxMA1mM2ywbY4PR3SQTcRMlfgGwzjgM/jzrCPLg==
+X-Gm-Gg: AZuq6aJrJOenAqUvPZA2gjJTpaJrGfTDRfayg0YiM9uRXmNKNwBY5f6CII47WHMvAOU
+	9iqXFWilMhQbSQ7o5VhSsZEDOuJCeSRjCv8a1/zICr87EPsYTrjAjpJcSdtqu9sCy3SZUt653DF
+	9E+Oeh1r1PKr4WRveqTNKbl23cdSHdUuISxosm3vieC/E4eSGlXcpkLmgukxUHdi33eydRWRCnd
+	XIlVXS21B8f3KpQY1NTO6Uug5eXaTgPyvgfQW/kYSH44whSdNGX5hoNC+ilRt/CdFdG7hdRWtQf
+	v2Um9tyrtLzXYOPCguxxDp4/xADGB+tOoygwtQE+VYrjGKvkCXSK+NIDJZ9hjCu7hBbSyfwfI9N
+	oAiw37qO8aqvGZkMwYyLibEBslzHSEShvzAj4uAf5IVU3lTjSpIUlCtJK7m9EuIzSGKHaYwa8r+
+	8hGnK8aAo/Tsv4t6lLEUMwhYk=
+X-Received: by 2002:a17:903:22d0:b0:2a1:243:94a9 with SMTP id d9443c01a7336-2a7189463e0mr101980495ad.53.1768817124840;
+        Mon, 19 Jan 2026 02:05:24 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.217.27])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a718f79f40sm90109935ad.0.2026.01.19.02.05.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Jan 2026 02:05:24 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-gnome][PATCH] blueprint-compiler: upgrade 0.18.0 -> 0.19.0
-Date: Mon, 19 Jan 2026 16:44:28 +0800
-Message-ID: <20260119084428.16190-1-liuyd.fnst@fujitsu.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 1/5] frr: upgrade 10.4.1 -> 10.4.2
+Date: Mon, 19 Jan 2026 23:05:11 +1300
+Message-ID: <20260119100515.95275-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:46:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123624
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 10:05:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123625
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+
+Release Notes:
+https://github.com/FRRouting/frr/releases/tag/frr-10.4.2
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...lueprint-compiler_0.18.0.bb => blueprint-compiler_0.19.0.bb} | 2 +-
+ .../recipes-protocols/frr/{frr_10.4.1.bb => frr_10.4.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/blueprint-compiler/{blueprint-compiler_0.18.0.bb => blueprint-compiler_0.19.0.bb} (90%)
+ rename meta-networking/recipes-protocols/frr/{frr_10.4.1.bb => frr_10.4.2.bb} (99%)
 
-diff --git a/meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.18.0.bb b/meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.19.0.bb
-similarity index 90%
-rename from meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.18.0.bb
-rename to meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.19.0.bb
-index 8980d7199c..71f9c2b52d 100644
---- a/meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.18.0.bb
-+++ b/meta-gnome/recipes-gnome/blueprint-compiler/blueprint-compiler_0.19.0.bb
-@@ -4,7 +4,7 @@ LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.4.1.bb b/meta-networking/recipes-protocols/frr/frr_10.4.2.bb
+similarity index 99%
+rename from meta-networking/recipes-protocols/frr/frr_10.4.1.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.4.2.bb
+index ce455ab8bf..a0a42859f7 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.4.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.4.2.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;
+            file://frr.pam \
+            "
  
- SRC_URI = "git://gitlab.gnome.org/GNOME/blueprint-compiler;protocol=https;branch=main"
--SRCREV = "07c9c9df9cd1b6b4454ecba21ee58211e9144a4b"
-+SRCREV = "de8e15f7791bd6243279cef1efc27edf4cb93674"
+-SRCREV = "88f5c06cbc1cc4d62e1cba3e7791f5cea4179ba5"
++SRCREV = "642f65b9e5853c7207982a9cf8275732737d4e44"
  
- inherit meson pkgconfig
+ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
  
--- 
-2.43.0
-
 
