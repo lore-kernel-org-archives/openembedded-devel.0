@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4295CCA6012
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4299FCA6013
 	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 08:28:39 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.31576.1768811309314205720
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.31272.1768811312134830603
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 00:28:29 -0800
+ Mon, 19 Jan 2026 00:28:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RMUBKI88;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2a0c09bb78cso30852055ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 00:28:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Uss7lvaR;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-81f47610542so2077506b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 00:28:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768811308; x=1769416108; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768811311; x=1769416111; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BgoB7Hlbc3NcbjZ1XY/YSsvgRmFS7HpUFdtchQcCPn8=;
-        b=RMUBKI885spQ+Ubf5HykNWO/HE7I1RUfOIj2OdpbbXdjf5y/WmsbrgqAedi8ccrfe5
-         Ee33iMdivdA63rvI1ql7UdgBgEJORk+27GXD6MHQNqAVgbpY7mMM6FRUNVbcMa9PA5mS
-         MMf46Rz28ANwxedFpZZc49PhiKf5D/y3p/GVPuYjMPnCKrOcJeHVzTFtUbTLM5QbBLL5
-         SQT+/IKsxnp5F+0bnoojjcr9h2CJxQqsXGfk2cpQlgPq5/Pst4/hUsA0tYshLenE4pjt
-         rCL+6p1dpDmPDg5+TMEYrL5iLqOEruOnAmtz7ANTUqwte+BblXuKCOybbYZdENWuqTbR
-         q+nA==
+        bh=TWflm4ubsP43W6TYvmkyNR1F5668hoR0KfVuBlPd05A=;
+        b=Uss7lvaRRGBcnFU5pAw1t8dKrCeao3y/frmvkKB/AAcjjjlUGvp3PQO8ZqVTtquw9J
+         Hd7dyqCOgE9CUU+yP6WksyKa0+JGEtrkzj2Ilp1RHUkKcCZopkh5uEyn8a67SHnOTeMK
+         a8W9Qs4w0Fp+g4/XJVykcY1aAn3FMelWwY2kj7JMauX/kc06BwYrd9sVblWgr47N4lRe
+         o9Sw2Z/FRw84fjRjQzpHmDAG264PSUU8/TzlxrTtuapWrmVZ0oFCwzT7r5wl6W5hIFTR
+         nkBSgPymykiplcn5muFVyS9Ym4Y8N95R/VZ1oOFzREmDLZsmIp9VZd6o8hldzftrqQ/a
+         S/rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768811308; x=1769416108;
+        d=1e100.net; s=20230601; t=1768811311; x=1769416111;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=BgoB7Hlbc3NcbjZ1XY/YSsvgRmFS7HpUFdtchQcCPn8=;
-        b=aDM8z62JOrohKP3qCi7tElTeAgRcDk8RT2tMKDS5MR4DmLpmLBHDH+dGQrPVkYTjP0
-         oF0HWys9zv0H9WkllC0ADX2hcrKvloEFGHEV65IVrmy7klTR6zmTWY4lUrUZrUBaMQta
-         DaxGEsKip2E2rC9Ak8lsPSFBVPEak0IOC2sMGv900JtTnoB/7EGaBeYDxmH9UiiFKl+k
-         oWhv1pUfWb1NwEnElaeYTYhxmN+je+hz9xOlInkLPDimzTWeB5bp+E9wtlkWWnSjn0xi
-         Jk6Ceg9et+d4hSbluA7nHlfJ89RwE7HV5shIZmyShWjahHFURBLHNFTUuQ3iJdyZcPFW
-         SuTQ==
-X-Gm-Message-State: AOJu0Yx/xHHTRVQpum7Cca9ZUFHgzutfjOxpoeCldF1Y5IyeePUchl7f
-	FgFrnmaKU06u52ZXIJv/JiuLJCUXnNRvYrQsM5n2SyPNG9XoszMOnnCuVHwkxg==
-X-Gm-Gg: AZuq6aKEOoYPGI0MkyJ9vR9ZPqviZuaHE8jlbcaLVnDRGqVbfNIsE6grDZT3htywjRE
-	aEz6tikTNQwfNPxCW8406jS+/FG6euXD/iQajhY7QG38XMKTeSeWXYB+HbUTDNWm54RwW0qWtij
-	Lmz4oKs7tScSApzrzLK3lefa9cJhTtMACZ9yztvdo0DaM0IeHfYRkH7N35iFVBdzj1UaC8qPdqv
-	9KzVkvSme8p47njf3McBz3gQmNMn3RW30GAHm+L7ggIKuAVyheiycQju4iki6Q98UP7bOkMJ3/m
-	PLhvyeGxjV6ZlfA7nygaOdifkWwr0N/6kJ9F6XlwvJeV9BvQ6b4xTnSpNtaN1Jzt/eDaoKgmmY2
-	DtpmT2TB4UzSvaJWo2ly2O4vVXJwYQxhvbWcg0Bjr+2m0fvp6IVNeGqbxikn3D2/ab2eZZeAMLw
-	9R8p95WUFvx4jFhCklCJrLW7ziCo+EJZHeEw==
-X-Received: by 2002:a17:903:2310:b0:296:547a:4bf2 with SMTP id d9443c01a7336-2a7178267b1mr99534565ad.27.1768811308507;
-        Mon, 19 Jan 2026 00:28:28 -0800 (PST)
+        bh=TWflm4ubsP43W6TYvmkyNR1F5668hoR0KfVuBlPd05A=;
+        b=SFss3t6/0k6bIJnad277fj8QGp8zfboSLplTUnybbZjT2k30zMi6r1u9MUreDQTR21
+         FokPEOi42vZx0Z8q5Zy415UvCAynWJ6hiMXPbdkGQZisWOIdyzqsjKlb9wKSNcMHgSKZ
+         Cjd+fNMj9d0JM+YGSUxWyBJ1hAb+IxXHJWof2dHzJkGsYODuzlmptnZugBGgmVO92dg/
+         3xFU0RXJ8EkXmCLiQinecA/uA8j419iaKrIC+aPpyTUM7323eUkN8x2+hrmDwPKhESgb
+         MatnIOBBn+aAXFimxKpyCnBWZgbptuqJAwuYpWgNnFlOlDxsu1dFK7RF5VfgWewEH/Gc
+         pJFw==
+X-Gm-Message-State: AOJu0YzkMx2gPrQmwgT349I2kkoBE0EkK62PHF7pCymWkPPqM7F7GNb4
+	vE8POglzbMyY3ny8RCAN2aYtGs5yMGrUr0V7SKcufTQxLFmnfopCi8r0h1pXHw==
+X-Gm-Gg: AY/fxX6ibqUX0yigCQL3FGFJ9JiXVFEw+L6By046lGJKCMdsqLHhlu8Y0uETgCqdlI5
+	nQO2yJYq1g+S02JKGLRm3RXEjVErYe1H5Hv7DoGLVkV7cyYyDSQ4/xYgOB8NbKamDylDc8SQGD7
+	xp+mn9nvwIdDdyk/KbKexoSLaenVyzHE5Q+rCPj3LWkp/L1BrvK2AsT9iqCWzxePSOynohh1Jnd
+	sIhbE0Lc3Vyxpqs6SNasrN0Qn/RiJ1njE2dGDVtxomvRim+oETZ2RNuNetvVI8YzaU4dPz4Dw2n
+	rwsd/zbTPR0AXC59fw9v9g/mkFWiShSRCvAWcDJGrV/9lmiCp00vpZULcfewA4c5HV/wL04W7KE
+	duJC4vlw5h1L0V0LK9+km+8IsAiPim3t1Pr0888fB3OvnntMG6FF0xY3zIKelv2NmY7XZpiQPIY
+	fyL898X2RZcmZbwuveEceuzifVWDWwN2kWyQ==
+X-Received: by 2002:a05:6a20:914c:b0:366:14ac:e20d with SMTP id adf61e73a8af0-38dfe80124amr8968538637.75.1768811311287;
+        Mon, 19 Jan 2026 00:28:31 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.27])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7193fab6esm88002455ad.68.2026.01.19.00.28.26
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7193fab6esm88002455ad.68.2026.01.19.00.28.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 00:28:28 -0800 (PST)
+        Mon, 19 Jan 2026 00:28:31 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 11/28] nodejs: remove extra CVE_PRODUCT
-Date: Mon, 19 Jan 2026 21:27:33 +1300
-Message-ID: <20260119082752.4120991-11-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 12/28] cryptsetup: upgrade 2.8.1 -> 2.8.3
+Date: Mon, 19 Jan 2026 21:27:34 +1300
+Message-ID: <20260119082752.4120991-12-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260119082752.4120991-1-ankur.tyagi85@gmail.com>
 References: <20260119082752.4120991-1-ankur.tyagi85@gmail.com>
@@ -69,34 +69,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:28:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123605
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123606
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-CVE_PRODUCT is specified twice - the second instance only duplicates one
-value from the first instance.
-
-Remove this extra CVE_PRODUCT.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6ff92524842233efb68eb92d4bf7637ef378900d)
+(cherry picked from commit 6f41c5872d9166aa1197ce1b51f8670561548353)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb | 2 --
- 1 file changed, 2 deletions(-)
+ .../cryptsetup/{cryptsetup_2.8.1.bb => cryptsetup_2.8.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.8.1.bb => cryptsetup_2.8.3.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-index ca4001a04c..ccaf9f7bb2 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-@@ -43,8 +43,6 @@ SRC_URI[sha256sum] = "487d73fd4db00dc2420d659a8221b181a7937fbc5bc73f31c30b1680ad
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
+similarity index 98%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
+index a77d488f44..44bf66c1ed 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
+@@ -24,7 +24,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
+ LDFLAGS:append:libc-musl = " -largp"
  
- S = "${UNPACKDIR}/node-v${PV}"
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "2c3379eb76597dcab50911449b013e2697c4bffcc716dbbf0d9b0e8fbbb46fb4"
++SRC_URI[sha256sum] = "4a8a23b8b9d1a3250452e40acead4421a03e45a38954ad0595634f4266aa800f"
  
--CVE_PRODUCT += "node.js"
--
- # v8 errors out if you have set CCACHE
- CCACHE = ""
+ inherit autotools gettext pkgconfig
  
 
