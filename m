@@ -2,185 +2,543 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2AFAD29C39
-	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 15:37:21 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37684.1768837031530278595
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CA69D29C49
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 16:27:32 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.38555.1768840041187313892
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 07:37:11 -0800
+ Mon, 19 Jan 2026 08:27:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mM+vn5uB;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47ee3a63300so41333625e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 07:37:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XK3lu2o5;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-431048c4068so2674715f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:27:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768837030; x=1769441830; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768840039; x=1769444839; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YAJ5rrsIQO3zdo46d1c0nSslEijZZCK9wagFew85T0g=;
-        b=mM+vn5uBUxuS7TS/EpzAnSK6u+kd5llw7kIBjeyAGjLLcNJTWJ9IM1x+VEzG1g+EhZ
-         kwoRZWO1jxkKFvyLMMTp7a1P4MKRpxqJOtNxKJT7nOgKARttNYFwjFML6A78comptxnx
-         k5+lOFixR+FYsNUDsqChPMX3IL8X01bk+lwBpHwB+H0P3gkMeQDHi2gOGsx0AKZ6qs3n
-         IK0U41jJ4FSarBubgZCR3JbVLVqnhIj6U6HR2sO4lIVfl8Twcef2MM2NRGrntU+XzUyR
-         gNs1NKwrskMMjlcSrJC+gvcpiRxOMiiDxTw3dfVB3ZknwBUHrY06RpoGTOX7kH1p0qWB
-         Jx9A==
+        bh=mk5WOQrOBeT726Lw3w9+IB3WHJNkCV3j/XAAMOdXz0o=;
+        b=XK3lu2o5PsP3K1H4nZPc7jng0t5Eywt57GyaulQuuAKDjSoWKXSZ4DVQuhem7M89M4
+         I5NvhriZ/0hnd04xVge1Gw+KvkXJS9mJxGvrS2KwxQNGiy1gBEXCRsIrguIfPfgLG6rt
+         4rEce/AlQBk4wbNQjOTqlw1lYz+InJwMt+Om+V3q1IHKlR0wSfW2LuTprARlxlW85LAC
+         cHmsboSRv4Ilx1I4ZyPWgCLjksgcS4kP5qT+PhhKR65ZSvl+NC8VO3bonYiyunLsCWK0
+         cvJ515FmvgFHU11/cg0Vf/2dsZrk6F5DoOChMByhru18Jo41Sw1U1HYl6H1WhOFR+vjy
+         329w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768837030; x=1769441830;
+        d=1e100.net; s=20230601; t=1768840039; x=1769444839;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=YAJ5rrsIQO3zdo46d1c0nSslEijZZCK9wagFew85T0g=;
-        b=KaOlCKETTTqfxiEjdgrGpnq0pl7JsLnfBEJXDmFjbyXJNo+qyO0JVgAmb2RQaroSra
-         Eg+A8w0Ud3v/joynNyALNWLVpuZgxkZfpFoWpwdwqy3sSUq0iVjIEfCeQHhPzRX0c6lW
-         awSG98ER7EZ+WyYe9XVZT3YL/yrry0RhQVxr40OjX7wiJBjI3YdOey36Iso8pMkeGqI7
-         WB7CvlCQpQtqyMaFWyFKYntSBx54TLkGNX6Lh9N1EqQBsyWNGKcSCeLUXZyaoqOUhIrt
-         JcFxvQQR/+z4L/Rr2wUoeHbTkZ0duL3l6R6praPC0+G1A2dhMoGL54J1+4t3fvHP9mlH
-         Dt6A==
-X-Gm-Message-State: AOJu0YzdUaCoM5FzApwhBOH1Wijv7BpLxpwXDwtEMx7mNUOOWjuy+rbk
-	QxxqTyp3gaH96IuHPlHuqSuayYFVII9P8vyP+wFMbSsw0xNlrmOk1ArgtGhSCw==
-X-Gm-Gg: AY/fxX5IpnyLWSRDz5S+fwaenfIYIho0HfJMT/iWlsVnBoDn6C+SdvmY8Y+2dvuZrFq
-	IDXJkMr0HV/EAy0zIIOjUo0Ay9CkEBJNgPzs5TuwC+9Rzz5P/UF6wd4V4QnVeEIABSwJNhzQ8j1
-	7Cvby9HTGqVFOEGmQVjv3S/fg4wZRaub4usjFlLNsSCao78XG2kjXHpW6fLj3kOBDAt198GXgAK
-	bAS6MuHQ/CNhZpBLxSZArf4bifXczvzxjthdTzWm3ubutG3AgHxqp0k0OLm9Xs9Pw4PcktHGKDa
-	+X8SwRYXf7nuUDpni0wWwGn8N3yEXs42Dnlf0qRqjiBeNcITuj8pccw6oUedljtmnNxKkLHehNF
-	nZQFW3fT5B/xOjkXNEAfWZVMqABsrw3gY6UVW/FGdHQlwbAVr+h1WSgjLyqpAWwVIl2ZMCda/vh
-	tcZEQFCYho
-X-Received: by 2002:a05:600c:1d16:b0:47d:2093:649f with SMTP id 5b1f17b1804b1-4801e2f912amr177869575e9.8.1768837029359;
-        Mon, 19 Jan 2026 07:37:09 -0800 (PST)
+        bh=mk5WOQrOBeT726Lw3w9+IB3WHJNkCV3j/XAAMOdXz0o=;
+        b=oNzeR+e2nuvAFfs6IAgHMzZc0E6cm3GcjfxnlmHEfz2lUQyOkeR5PqMYjpbQVrghP0
+         6x0N45Frf7QThueQpW2TcEApnw0gA3/V4jjvEMDkaUYsBEKk6R6zcM0hkbmkOJwkCvYF
+         jfhOjJsBeUGYnvzIMCvoNtIZ1Gv6O9776o1EbLOD09bBwiDBAexSM4kN0chW6wfGscs3
+         40WWhvjkD2y+89Q9S8hQsNPKg1LuuBGb8FguUhcwKfCJdsjcDM+/GbI7ntE9wELOm4mr
+         0IPSz0SDfF0qUqHzFt/Ahm8thX0/OkzqpRbkUt/4D9F/nTkG7HgN4MH0JyrbrvQZ5Hpk
+         Cj6g==
+X-Gm-Message-State: AOJu0YzoiodGAnh2VWReNYx3YwdQMTLVL5k4vbLDNoX9e4VAO/j8gztc
+	ypy35ap58ZRlDnrnhSZZG2BfWJFjg+FNO8MpaQ49VeoK8Q1dq1jtXcMDXvKIXQ==
+X-Gm-Gg: AZuq6aJ+Dmfbhyvn0KH+aWxJgxMic/HsXNu7VxkP90kf7xIyZZ0nbps5IhnNRuuakti
+	6AMXBY7tWhNrNmudyqjrjHWvKiezK9M1S9lU9ROQKqbIHdoRQJtvuRn2tbtGMzL1UoFK0/M/tL/
+	McctnmgJg0a6+4F/B3LBlJ1qpepw4JiWF23ZkwDfdthYHjhfjwv9cTOIbGoOg+uyr3MQ26FbYCv
+	B1ugiY+o24l9eIE9/9QU+L9IQynD8uC3gSmbGpbPWfPZWFa3LAfjrWXEijAWkupxnp6Kh5NDbs2
+	QYaVO6/l2xAsHJiG6+twmf+mRmLdgxJiJjTS0BI7AjhTpQBKsXm4+3BskBllxYR594F+donnodu
+	2SZlsApA1ybc9sgbFlRi8sB2DHDEL0ep7PomCRF+/BSvEEH85aNUjO5hGC+NZ13fNdcL60ib5iE
+	sEtF6AWdBR
+X-Received: by 2002:a05:6000:288c:b0:432:c03e:a78e with SMTP id ffacd0b85a97d-434df116480mr20388072f8f.27.1768840039307;
+        Mon, 19 Jan 2026 08:27:19 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43569921dedsm23662989f8f.9.2026.01.19.07.37.08
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43569927007sm23945347f8f.16.2026.01.19.08.27.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 07:37:08 -0800 (PST)
+        Mon, 19 Jan 2026 08:27:18 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/2] raptor2: patch CVE-2024-57822 and CVE-2024-57823
-Date: Mon, 19 Jan 2026 16:37:07 +0100
-Message-ID: <20260119153708.580011-1-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH] frr: patch CVE-2025-61099..61107
+Date: Mon, 19 Jan 2026 17:27:18 +0100
+Message-ID: <20260119162718.735743-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 15:37:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123641
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 16:27:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123643
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2024-57822
-https://nvd.nist.gov/vuln/detail/CVE-2024-57823
+Details:
+https://nvd.nist.gov/vuln/detail/CVE-2025-61099
+https://nvd.nist.gov/vuln/detail/CVE-2025-61100
+https://nvd.nist.gov/vuln/detail/CVE-2025-61101
+https://nvd.nist.gov/vuln/detail/CVE-2025-61102
+https://nvd.nist.gov/vuln/detail/CVE-2025-61103
+https://nvd.nist.gov/vuln/detail/CVE-2025-61104
+https://nvd.nist.gov/vuln/detail/CVE-2025-61105
+https://nvd.nist.gov/vuln/detail/CVE-2025-61106
+https://nvd.nist.gov/vuln/detail/CVE-2025-61107
 
-Pick the patches mentioned in the github issue[1] mentioned
-in the NVD advisories (both of them are covered by the same issue)
+The NVD advisory refernces a PR[1] that contains only an unfinished, and
+ultimately unmerged attempt at the fixes. The actual solution comes from
+a different PR[2]. These patches are 3 commits from that PR. The last
+commit wasn't backported, because it is just code formatting.
 
-[1]: https://github.com/dajobe/raptor/issues/70
+[1]: https://github.com/FRRouting/frr/pull/19480
+[2]: https://github.com/FRRouting/frr/pull/19983
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../raptor2/raptor2/CVE-2024-57822.patch      | 44 +++++++++++++++++++
- .../raptor2/raptor2/CVE-2024-57823.patch      | 31 +++++++++++++
- .../recipes-support/raptor2/raptor2_2.0.16.bb |  2 +
- 3 files changed, 77 insertions(+)
- create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
- create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+ .../frr/frr/CVE-2025-61099-61107-1.patch      |  40 +++
+ .../frr/frr/CVE-2025-61099-61107-2.patch      |  80 +++++
+ .../frr/frr/CVE-2025-61099-61107-3.patch      | 293 ++++++++++++++++++
+ .../recipes-protocols/frr/frr_10.5.1.bb       |   3 +
+ 4 files changed, 416 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
 
-diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
 new file mode 100644
-index 0000000000..cb98f4250c
+index 0000000000..a1e1246cce
 --- /dev/null
-+++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
-@@ -0,0 +1,44 @@
-+From 3b0ded4ae8110b6291d030af927ecd08197e668f Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
+@@ -0,0 +1,40 @@
++From e21276d430663fd8312940bb3b0ce081957e3d85 Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Thu, 6 Feb 2025 21:12:37 -0800
-+Subject: [PATCH] Fix Github issue 70 A) Integer Underflow in
-+ raptor_uri_normalize_path()
++Date: Sun, 24 Aug 2025 21:17:55 +0800
++Subject: [PATCH] ospfd: Add null check for vty_out in check_tlv_size
 +
-+From: Dave Beckett <dave@dajobe.org>
++From: s1awwhy <seawwhy@163.com>
 +
-+(raptor_uri_normalize_path): Return empty buffer if path gets to 0
-+length
++Add security check for vty_out. Specifically,  Check NULL for vty. If vty is not available, dump info via zlog.
 +
-+CVE: CVE-2024-57822
-+Upstream-Status: Backport [github.com/dajobe/raptor/commit/da7a79976bd0314c23cce55d22495e7d29301c44]
++Signed-off-by: s1awwhy <seawwhy@163.com>
++
++CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b7d9b7aa47627b31e4b50795284408ab6de98660]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/raptor_rfc2396.c | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
++ ospfd/ospf_ext.c | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+diff --git a/src/raptor_rfc2396.c b/src/raptor_rfc2396.c
-+index 89183d9..2f0195f 100644
-+--- a/src/raptor_rfc2396.c
-++++ b/src/raptor_rfc2396.c
-+@@ -351,6 +351,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
-+           *dest++ = *s++;
-+         *dest = '\0';
-+         path_len -= len;
-++        if(path_len <= 0) {
-++          *path_buffer = '\0';
-++          return 0;
-++        }
++diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
++index df0b3b9081..8ca0df3200 100644
++--- a/ospfd/ospf_ext.c
+++++ b/ospfd/ospf_ext.c
++@@ -1705,11 +1705,15 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
++  * ------------------------------------
++  */
 + 
-+         if(p && p < prev) {
-+           /* We know the previous prev path component and we didn't do
-+@@ -390,6 +394,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
-+     /* Remove <component>/.. at the end of the path */
-+     *prev = '\0';
-+     path_len -= (s-prev);
-++    if(path_len <= 0) {
-++      *path_buffer = '\0';
-++      return 0;
-++    }
-+   }
-+ 
-+ 
-diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+++/* Check NULL for vty. If vty is not available, dump info via zlog */
++ #define check_tlv_size(size, msg)                                              \
++ 	do {                                                                   \
++ 		if (ntohs(tlvh->length) != size) {                             \
++-			vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
++-				msg, ntohs(tlvh->length), size);               \
+++			if (vty != NULL)                         \
+++				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
+++					msg, ntohs(tlvh->length), size);               \
+++			else                                              \
+++				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
++ 			return size + TLV_HDR_SIZE;                            \
++ 		}                                                              \
++ 	} while (0)
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
 new file mode 100644
-index 0000000000..79833a55cb
+index 0000000000..eacada0ec4
 --- /dev/null
-+++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
-@@ -0,0 +1,31 @@
-+From 0b028dd16eb504d3d4dcfa9c72ceb29a9e1f3915 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
+@@ -0,0 +1,80 @@
++From d9ed123b814dad7cf4b069de5601c9f279596191 Mon Sep 17 00:00:00 2001
 +From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Fri, 7 Feb 2025 11:38:34 -0800
-+Subject: [PATCH] Fix Github issue 70 B) Heap read buffer overflow in ntriples
-+ bnode
++Date: Tue, 6 Jan 2026 15:32:32 +0100
++Subject: [PATCH] ospfd: skip subsequent tlvs after invalid length
 +
-+From: Dave Beckett <dave@dajobe.org>
++From: Louis Scalbert <louis.scalbert@6wind.com>
 +
-+(raptor_ntriples_parse_term_internal): Only allow looking at the last
-+character of a bnode ID only if bnode length >0
++Do not attempt to read subsequent TLVs after an TLV invalid length is
++detected.
 +
-+CVE: CVE-2024-57823
-+Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/ece2c79df43091686a538b8231cf387d84bfa60e]
++Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
++
++CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/33dfc7e7be1ac8b66abbf47c30a709215fbc1926]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/raptor_ntriples.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ ospfd/ospf_ext.c | 6 +++---
++ ospfd/ospf_ri.c  | 6 +++---
++ ospfd/ospf_te.c  | 6 +++---
++ 3 files changed, 9 insertions(+), 9 deletions(-)
 +
-+diff --git a/src/raptor_ntriples.c b/src/raptor_ntriples.c
-+index 3276e79..ecc4247 100644
-+--- a/src/raptor_ntriples.c
-++++ b/src/raptor_ntriples.c
-+@@ -212,7 +212,7 @@ raptor_ntriples_parse_term_internal(raptor_world* world,
-+             locator->column--;
-+             locator->byte--;
-+           }
-+-          if(term_class == RAPTOR_TERM_CLASS_BNODEID && dest[-1] == '.') {
-++          if(term_class == RAPTOR_TERM_CLASS_BNODEID && position > 0 && dest[-1] == '.') {
-+             /* If bnode id ended on '.' move back one */
-+             dest--;
++diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
++index 8ca0df3200..62b0020148 100644
++--- a/ospfd/ospf_ext.c
+++++ b/ospfd/ospf_ext.c
++@@ -1710,11 +1710,11 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
++ 	do {                                                                   \
++ 		if (ntohs(tlvh->length) != size) {                             \
++ 			if (vty != NULL)                         \
++-				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
+++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
++ 					msg, ntohs(tlvh->length), size);               \
++ 			else                                              \
++-				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
++-			return size + TLV_HDR_SIZE;                            \
+++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!", msg, ntohs(tlvh->length), size);    \
+++			return OSPF_MAX_LSA_SIZE + 1;                            \
++ 		}                                                              \
++ 	} while (0)
 + 
-diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-index 03e57ce86f..1b77103a8d 100644
---- a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-+++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
-@@ -13,6 +13,8 @@ SRC_URI = " \
-     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
-     file://0001-Remove-the-access-to-entities-checked-private-symbol.patch \
-     file://raptor-2.0.16-dont_use_curl-config.patch \
-+    file://CVE-2024-57822.patch \
-+    file://CVE-2024-57823.patch \
- "
- SRC_URI[sha256sum] = "089db78d7ac982354bdbf39d973baf09581e6904ac4c92a98c5caadb3de44680"
++diff --git a/ospfd/ospf_ri.c b/ospfd/ospf_ri.c
++index 76e6efeb83..7934b25451 100644
++--- a/ospfd/ospf_ri.c
+++++ b/ospfd/ospf_ri.c
++@@ -1208,12 +1208,12 @@ static int ospf_router_info_lsa_update(struct ospf_lsa *lsa)
++ 	do {                                                                   \
++ 		if (ntohs(tlvh->length) > size) {                              \
++ 			if (vty != NULL)                                       \
++-				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
+++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
++ 					msg, ntohs(tlvh->length), size);       \
++ 			else                                                   \
++-				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
+++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
++ 					   msg, ntohs(tlvh->length), size);    \
++-			return size + TLV_HDR_SIZE;                            \
+++			return OSPF_MAX_LSA_SIZE + 1;                            \
++ 		}                                                              \
++ 	} while (0)
++ 
++diff --git a/ospfd/ospf_te.c b/ospfd/ospf_te.c
++index d187485b9f..850a7039f1 100644
++--- a/ospfd/ospf_te.c
+++++ b/ospfd/ospf_te.c
++@@ -3161,12 +3161,12 @@ static void ospf_te_init_ted(struct ls_ted *ted, struct ospf *ospf)
++ 	do {                                                                   \
++ 		if (ntohs(tlvh->length) > size) {                              \
++ 			if (vty != NULL)                                       \
++-				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
+++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
++ 					msg, ntohs(tlvh->length), size);       \
++ 			else                                                   \
++-				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
+++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
++ 					   msg, ntohs(tlvh->length), size);    \
++-			return size + TLV_HDR_SIZE;                            \
+++			return OSPF_MAX_LSA_SIZE + 1;                            \
++ 		}                                                              \
++ 	} while (0)
++ 
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+new file mode 100644
+index 0000000000..7b983198f5
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+@@ -0,0 +1,293 @@
++From 2d02bca97251ee53fb10b4c34c8cda0e20ae8b8e Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Sun, 24 Aug 2025 21:21:23 +0800
++Subject: [PATCH] ospfd: Fix NULL Pointer Deference when dumping link info
++
++From: s1awwhy <seawwhy@163.com>
++
++When the command debug ospf packet all send/recv detail is enabled in the OSPF
++configuration,  ospfd will dump detailed information of any received or sent
++OSPF packets, either via VTY or through the zlog. However, the original Opaque
++LSA handling code failed to check whether the VTY context and show_opaque_info
++were available, resulting in NULL pointer dereference and crashes in ospfd.
++The patch fixes the Null Pointer Deference Vulnerability in
++show_vty_ext_link_rmt_itf_addr, show_vty_ext_link_adj_sid,
++show_vty_ext_link_lan_adj_sid, show_vty_unknown_tlv,
++show_vty_link_info, show_vty_ext_pref_pref_sid, show_vtY_pref_info.
++Specifically, add NULL check for vty. If vty is not available, dump details
++via zlog.
++
++Signed-off-by: s1awwhy <seawwhy@163.com>
++Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
++
++CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/034e6fe67078810b952630055614ee5710d1196e]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ ospfd/ospf_ext.c | 200 ++++++++++++++++++++++++++++++++---------------
++ 1 file changed, 138 insertions(+), 62 deletions(-)
++
++diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
++index 62b0020148..c1fcd632e0 100644
++--- a/ospfd/ospf_ext.c
+++++ b/ospfd/ospf_ext.c
++@@ -1729,9 +1729,15 @@ static uint16_t show_vty_ext_link_rmt_itf_addr(struct vty *vty,
++ 	check_tlv_size(EXT_SUBTLV_RMT_ITF_ADDR_SIZE, "Remote Itf. Address");
++ 
++ 	if (!json)
++-		vty_out(vty,
++-			"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
++-			ntohs(top->header.length), &top->value);
+++		if (vty != NULL) {
+++			vty_out(vty,
+++				"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
+++				ntohs(top->header.length), &top->value);
+++		} else {
+++			zlog_debug("  Remote Interface Address Sub-TLV: Length %u",
+++				   ntohs(top->header.length));
+++			zlog_debug("  Address: %pI4", &top->value);
+++		}
++ 	else
++ 		json_object_string_addf(json, "remoteInterfaceAddress", "%pI4",
++ 					&top->value);
++@@ -1752,18 +1758,30 @@ static uint16_t show_vty_ext_link_adj_sid(struct vty *vty,
++ 			      : SID_INDEX_SIZE(EXT_SUBTLV_ADJ_SID_SIZE);
++ 	check_tlv_size(tlv_size, "Adjacency SID");
++ 
++-	if (!json)
++-		vty_out(vty,
++-			"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
++-			ntohs(top->header.length), top->flags, top->mtid,
++-			top->weight,
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
++-				? "Label"
++-				: "Index",
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
++-				? GET_LABEL(ntohl(top->value))
++-				: ntohl(top->value));
++-	else {
+++	if (!json) {
+++		/* Add security check for vty_out. If vty is not available, dump info via zlog.*/
+++		if (vty != NULL)
+++			vty_out(vty,
+++				"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
+++				ntohs(top->header.length), top->flags, top->mtid, top->weight,
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+++										     : "Index",
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+++					? GET_LABEL(ntohl(top->value))
+++					: ntohl(top->value));
+++		else {
+++			zlog_debug("  Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
+++			zlog_debug("    Flags: 0x%x", top->flags);
+++			zlog_debug("    MT-ID:0x%x", top->mtid);
+++			zlog_debug("    Weight: 0x%x", top->weight);
+++			zlog_debug("    %s: %u",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+++											: "Index",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+++					   ? GET_LABEL(ntohl(top->value))
+++					   : ntohl(top->value));
+++		}
+++	} else {
++ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
++ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
++ 		json_object_string_addf(json, "weight", "0x%x", top->weight);
++@@ -1791,18 +1809,32 @@ static uint16_t show_vty_ext_link_lan_adj_sid(struct vty *vty,
++ 			      : SID_INDEX_SIZE(EXT_SUBTLV_LAN_ADJ_SID_SIZE);
++ 	check_tlv_size(tlv_size, "LAN-Adjacency SID");
++ 
++-	if (!json)
++-		vty_out(vty,
++-			"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
++-			ntohs(top->header.length), top->flags, top->mtid,
++-			top->weight, &top->neighbor_id,
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
++-				? "Label"
++-				: "Index",
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
++-				? GET_LABEL(ntohl(top->value))
++-				: ntohl(top->value));
++-	else {
+++	if (!json) {
+++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+++		if (vty != NULL) {
+++			vty_out(vty,
+++				"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
+++				ntohs(top->header.length), top->flags, top->mtid, top->weight,
+++				&top->neighbor_id,
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+++										     : "Index",
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+++					? GET_LABEL(ntohl(top->value))
+++					: ntohl(top->value));
+++		} else {
+++			zlog_debug("  LAN-Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
+++			zlog_debug("    Flags: 0x%x", top->flags);
+++			zlog_debug("    MT-ID:0x%x", top->mtid);
+++			zlog_debug("    Weight: 0x%x", top->weight);
+++			zlog_debug("    Neighbor ID: %pI4", &top->neighbor_id);
+++			zlog_debug("    %s: %u",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+++											: "Index",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+++					   ? GET_LABEL(ntohl(top->value))
+++					   : ntohl(top->value));
+++		}
+++	} else {
++ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
++ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
++ 		json_object_string_addf(json, "weight", "0x%x", top->weight);
++@@ -1823,14 +1855,23 @@ static uint16_t show_vty_unknown_tlv(struct vty *vty, struct tlv_header *tlvh,
++ {
++ 	json_object *obj;
++ 
+++	/* Add security check for vty_out. If vty is not available, dump info via zlog. */
++ 	if (TLV_SIZE(tlvh) > buf_size) {
++-		vty_out(vty, "    TLV size %d exceeds buffer size. Abort!",
++-			TLV_SIZE(tlvh));
+++		if (vty != NULL)
+++			vty_out(vty, "    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
+++		else
+++			zlog_debug("    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
+++
++ 		return buf_size;
++ 	}
++ 	if (!json)
++-		vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
++-			ntohs(tlvh->type), ntohs(tlvh->length));
+++		if (vty != NULL) {
+++			vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
+++				ntohs(tlvh->type), ntohs(tlvh->length));
+++		} else {
+++			zlog_debug("    Unknown TLV: [type(0x%x), length(0x%x)]",
+++				   ntohs(tlvh->type), ntohs(tlvh->length));
+++		}
++ 	else {
++ 		obj = json_object_new_object();
++ 		json_object_string_addf(obj, "type", "0x%x",
++@@ -1855,19 +1896,31 @@ static uint16_t show_vty_link_info(struct vty *vty, struct tlv_header *ext,
++ 
++ 	/* Verify that TLV length is valid against remaining buffer size */
++ 	if (length > buf_size) {
++-		vty_out(vty,
++-			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
++-			length);
+++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+++		if (vty != NULL) {
+++			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+++				length);
+++		} else {
+++			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
+++				   length);
+++		}
++ 		return buf_size;
++ 	}
++ 
++ 	if (!json) {
++-		vty_out(vty,
++-			"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
++-			"	Link ID: %pI4\n",
++-			ntohs(top->header.length), top->link_type,
++-			&top->link_id);
++-		vty_out(vty, "	Link data: %pI4\n", &top->link_data);
+++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+++		if (vty != NULL) {
+++			vty_out(vty,
+++				"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
+++				"	Link ID: %pI4\n",
+++				ntohs(top->header.length), top->link_type, &top->link_id);
+++			vty_out(vty, "	Link data: %pI4\n", &top->link_data);
+++		} else {
+++			zlog_debug("  Extended Link TLV: Length %u", ntohs(top->header.length));
+++			zlog_debug("    Link Type: 0x%x", top->link_type);
+++			zlog_debug("    Link ID: %pI4", &top->link_id);
+++			zlog_debug("    Link data: %pI4", &top->link_data);
+++		}
++ 	} else {
++ 		json_object_string_addf(json, "linkType", "0x%x",
++ 					top->link_type);
++@@ -1959,18 +2012,29 @@ static uint16_t show_vty_ext_pref_pref_sid(struct vty *vty,
++ 			      : SID_INDEX_SIZE(EXT_SUBTLV_PREFIX_SID_SIZE);
++ 	check_tlv_size(tlv_size, "Prefix SID");
++ 
++-	if (!json)
++-		vty_out(vty,
++-			"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
++-			ntohs(top->header.length), top->algorithm, top->flags,
++-			top->mtid,
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
++-				? "Label"
++-				: "Index",
++-			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
++-				? GET_LABEL(ntohl(top->value))
++-				: ntohl(top->value));
++-	else {
+++	if (!json) {
+++		if (vty != NULL) {
+++			vty_out(vty,
+++				"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
+++				ntohs(top->header.length), top->algorithm, top->flags, top->mtid,
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
+++										   : "Index",
+++				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+++					? GET_LABEL(ntohl(top->value))
+++					: ntohl(top->value));
+++		} else {
+++			zlog_debug("  Prefix SID Sub-TLV: Length %u", ntohs(top->header.length));
+++			zlog_debug("    Algorithm: %u", top->algorithm);
+++			zlog_debug("    Flags: 0x%x", top->flags);
+++			zlog_debug("    MT-ID:0x%x", top->mtid);
+++			zlog_debug("    %s: %u",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
+++										      : "Index",
+++				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+++					   ? GET_LABEL(ntohl(top->value))
+++					   : ntohl(top->value));
+++		}
+++	} else {
++ 		json_object_int_add(json, "algorithm", top->algorithm);
++ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
++ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
++@@ -1995,19 +2059,31 @@ static uint16_t show_vty_pref_info(struct vty *vty, struct tlv_header *ext,
++ 
++ 	/* Verify that TLV length is valid against remaining buffer size */
++ 	if (length > buf_size) {
++-		vty_out(vty,
++-			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
++-			length);
+++		if (vty != NULL) {
+++			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+++				length);
+++		} else {
+++			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
+++				   length);
+++		}
++ 		return buf_size;
++ 	}
++ 
++-	if (!json)
++-		vty_out(vty,
++-			"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
++-			"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
++-			ntohs(top->header.length), top->route_type, top->af,
++-			top->flags, &top->address, top->pref_length);
++-	else {
+++	if (!json) {
+++		if (vty != NULL) {
+++			vty_out(vty,
+++				"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
+++				"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
+++				ntohs(top->header.length), top->route_type, top->af, top->flags,
+++				&top->address, top->pref_length);
+++		} else {
+++			zlog_debug("  Extended Prefix TLV: Length %u", ntohs(top->header.length));
+++			zlog_debug("    Route Type: %u", top->route_type);
+++			zlog_debug("    Address Family: 0x%x", top->af);
+++			zlog_debug("    Flags: 0x%x", top->flags);
+++			zlog_debug("    Address: %pI4/%u", &top->address, top->pref_length);
+++		}
+++	} else {
++ 		json_object_int_add(json, "routeType", top->route_type);
++ 		json_object_string_addf(json, "addressFamily", "0x%x", top->af);
++ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.5.1.bb b/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
+index a309330dc1..c125709bf4 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
+@@ -12,6 +12,9 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+ 
+ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.5;tag=frr-${PV} \
+            file://frr.pam \
++           file://CVE-2025-61099-61107-1.patch \
++           file://CVE-2025-61099-61107-2.patch \
++           file://CVE-2025-61099-61107-3.patch \
+            "
+ SRCREV = "d17791ee7ee76a0407d3fdbebf81bd242840741b"
  
 
