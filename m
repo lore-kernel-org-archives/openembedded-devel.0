@@ -1,174 +1,98 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <frederikbraendstrup@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E5D7CCF2F0
-	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 11:41:50 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.33614.1768822901734824860
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85040CCF2F6
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 12:30:20 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.34216.1768825818255051146
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 03:41:42 -0800
+ Mon, 19 Jan 2026 04:30:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=cC+IjRCo;
- spf=pass (domain: konsulko.com, ip: 209.85.218.53, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b874c00a39fso743999966b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 03:41:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=k0BYvMzE;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: frederikbraendstrup@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b870cbd1e52so621411166b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 04:30:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1768822900; x=1769427700; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768825817; x=1769430617; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=y3oitD4NqKli1q3u6gr1/0QkHiduE9THeK6Pz2nrDIM=;
-        b=cC+IjRCoikIf7+QiqktBmCJaoaH8mHHHKg/kup0jDF2LXDNG12u+bcA32EuaIgFSOY
-         LndfqTODLVguhGuY8s1FSSzArbb4+C4dES0NRVTSzWj2DTDIfRL1IPcU1QEX0c/LJ83P
-         nhg8Vm4YXbDZZxx7Q4/e6NexfKpzRPqQPZtPs=
+        bh=PuQgCjypCM5iapq0H7HNp68svd/zuCyOqM/c2YZNc6M=;
+        b=k0BYvMzENVqJKcblDTPMs9+nfTeq160IQ4Q9g3XmyDs6AUutmb6iGhIljaBQRrqWe+
+         8ezp0lQMbVP6gbdrke3eBy/zMFKMu0NGBHS3s5324hHHJr4YjAQZBW2WKxESbCJr/+82
+         fiGRzRWXAiy9WJ2yuaADOEx0jqiZ1pQ0FERUsmNDfmkr3yZdY+ousWXBbjwhiw62Szl6
+         F6lfxgVgCB/OL1voMbTvHPAvfIZWXjCOY8jc5wfKbN4LCNklBiuZsSXlyYE+916Je/Yb
+         Y0iFylxNMR0dJ1Q1cQpstwI3uZ2Dv6Ms8mavv28wzxNA+ISuigGz1ovAVMf4ftL8xUE6
+         3Peg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768822900; x=1769427700;
+        d=1e100.net; s=20230601; t=1768825817; x=1769430617;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=y3oitD4NqKli1q3u6gr1/0QkHiduE9THeK6Pz2nrDIM=;
-        b=mQ5IVGHIF5TOiqxKN1eey4+s0uZPdAKu5dfN8CCr7MhXRDlxO669aafr+3kG6uY0oP
-         bh0FzwBVZzhcCv1zut9+SvzYQRBTCpSMq2HyvcdDVKMf9pj3z3kRsUftbN4T5iyF8QXB
-         GrkbSuVnW/k1xTr6VEnDO9q5y3hl37aaKja6r9w1tPO8NP79g81ak2Nv6hu8OE2ybHbz
-         1r5tSojhYDudaHq0xxjE45FTNhOFuWvp2iuvCet19LiXykZN9ekUCdmobBq+SrT66RvG
-         Wj8fP43LPvigrn9G7aJKHUfPPLjLWOERzJfVp7nnLCyrx7EltMsSlf7cPURSXJiZxouD
-         vwxw==
-X-Gm-Message-State: AOJu0YzrbW4gJUnHqnjRxjZ7jfexgObRCV0VlonWVntdV2dSvb3d2Lyk
-	Tgmw576ikzwYeP6FZx4uaOY5Kcy7Sa/WRrOpi6b/0Nvb78nGwbtD8nRB1YvRH1TI7rTk1r76b6s
-	M8YKR
-X-Gm-Gg: AY/fxX5UCOyQhPUT9sGHpkMLDWfZ4sWo/QHRM3baDQAFMTWVFLafZWEuWQUCUbUzDdc
-	Eg3yLNv8UjADZJuckuL8qyociDuhR94g7T9nuGk1HV+tHzGpa4NhhQGFHPz4T88oxiylNuGxliM
-	6geQOQoJ9HyU3XOMd/KwAGh3SYAl2bB9bs4mafE93MlxpMbALwkXTb6tdobe7AtkMwWeYfuO94A
-	c0b7ahOsLkWaCpn2FIvXjdDwiuNBf+iwhX4lAJ6a023CaCFsvba3gZlEgl8kBFyjpHY+gesJ/31
-	Wd3XuYZcxOiGaOztwc2swA65T2VaxkrSLpJ0zxTU1Xbxq9TbfqX7llkTberepxL9gBWN9SZUbr8
-	juDUOL/rRSXm3JAUZfZ/sE910nWO6nby0Qq+/QAqNPNeg/BEjKXhqpJIokv5BBUzdnWmt9CXAsM
-	hVWsiwZ4YO2YStBqGJhG39hyPW
-X-Received: by 2002:a17:907:80d:b0:b87:703c:139d with SMTP id a640c23a62f3a-b8793857c5amr900934166b.3.1768822899586;
-        Mon, 19 Jan 2026 03:41:39 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8795168c6dsm1087773766b.19.2026.01.19.03.41.38
+        bh=PuQgCjypCM5iapq0H7HNp68svd/zuCyOqM/c2YZNc6M=;
+        b=tX1IF05UnJxSlWipVrcxrATB6vhtZ3Fm3ziUBZWB/lVZw8DgmpKuWW/cZ4NT66Wvwm
+         HBEYR/uXc/YNtfvFjxefVqR8z5nxNby7mLP3VjhRGFkAeBni/jBC8H90a1gS8S8XmgwS
+         +NgSwFLtfPEHaQfYY3mzCWEG0FRtBHMtbuo8qFPcSCmqjBgCMflDTdSua9vRlt8WeQOq
+         xfsHsB04qimKnWZd3AFYIlfvpIDcq2EjUP0xaQTf4XZ9ynNDrylqdxqD7jWgdRTCAWcW
+         WhdSa62/l5fnBZKarlpU6rBQs7Ey2+XhsoGFbpnuDX4OyVUhQZEl65BBy07tx13cO3ln
+         ICJQ==
+X-Gm-Message-State: AOJu0Yz3xEkhSPtGClI3g/gofsWJtVBmNAIEaGHNXDIN17dVvBke9I91
+	42m6m2ZipH1FZ9dxKQE24qmw+Vmn+nXnO4kaabA/6guok6bjQwEC9orWB6gGsf14
+X-Gm-Gg: AY/fxX6CKAzU4XrY78RK7ogN46gTIzAaKqyJlv5lDy36tBMV6U24+qy6EVJfQzEkS7j
+	kGsAjRVW0g+Fae0oYbtxv+08T+U2HdbKoC3PXCfSnKoTXa7nkprSgzl/mPYrOE5N4D8v1fb+wlb
+	W9KtYhHrwSJn0KOQzHjsXlwBUXymD8AqD3ItsI+8P5B2UKYomP4DRK4QKLFYtNxfeR+fFOEd8E4
+	eosAWdLik6W6wOfzplfVYGBsNLOHCeoxMKniNZQIVfxKvVC4oU0uQ2hBqnMHAkqLKmVufZc6Inf
+	LIGQ2kT1XMDvuTTysmV13vxXJahAU8ahDPZWTt71vPaFFg7pKd1Nx+k6lCdsls4KrXEhB9hqIth
+	qbUJUM5PpJEaqkZCaaNqibfXC80jHSjNgK/qGAM/8xgNc67HiPizNyK7Dn0GD1hkD7t70ibZYBJ
+	IWIstYNzLHsjjG9m+g6ZUPppud7EMqki5tb1V+7hqVdrcHYLBH7zAtaIbMYxv/I5AIJm5i4w==
+X-Received: by 2002:a17:906:730c:b0:b87:72f0:3baf with SMTP id a640c23a62f3a-b8792e18ec7mr1010459266b.22.1768825816384;
+        Mon, 19 Jan 2026 04:30:16 -0800 (PST)
+Received: from ws.taila4487.ts.net (77.241.128.65.mobile.3.dk. [77.241.128.65])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b87959c9bc9sm1072502566b.33.2026.01.19.04.30.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 03:41:39 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 19 Jan 2026 04:30:16 -0800 (PST)
+From: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-black: Upgrade 25.12.0 -> 26.1.0
-Date: Mon, 19 Jan 2026 13:41:36 +0200
-Message-ID: <20260119114136.1592429-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260119114136.1592429-1-leon.anavi@konsulko.com>
-References: <20260119114136.1592429-1-leon.anavi@konsulko.com>
+Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+Subject: [PATCH v3] glaze: add recipe
+Date: Mon, 19 Jan 2026 13:29:45 +0100
+Message-ID: <20260119122944.1111081-2-frederikbraendstrup@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260119113844.289290-5-frederikbraendstrup@gmail.com>
+References: <20260119113844.289290-5-frederikbraendstrup@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 11:41:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123637
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 12:30:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123638
 
-Upgrade to release 26.1.0:
-
-Introduces the 2026 stable style, stabilizing the following changes:
-
-- always_one_newline_after_import: Always force one blank line after
-  import statements, except when the line after the import is a
-  comment or an import statement
-- fix_fmt_skip_in_one_liners: Fix # fmt: skip behavior on one-liner
-  declarations, such as def foo(): return "mock" # fmt: skip, where
-  previously the declaration would have been incorrectly collapsed
-- fix_module_docstring_detection: Fix module docstrings being
-  treated as normal strings if preceded by comments
-- fix_type_expansion_split: Fix type expansions split in generic
-  functions
-- multiline_string_handling: Make expressions involving multiline
-  strings more compact
-- normalize_cr_newlines: Add \r style newlines to the potential
-  newlines to normalize file newlines both from and to
-- remove_parens_around_except_types: Remove parentheses around
-  multiple exception types in except and except* without as
-- remove_parens_from_assignment_lhs: Remove unnecessary parentheses
-  from the left-hand side of assignments while preserving magic
-  trailing commas and intentional multiline formatting
-- standardize_type_comments: Format type comments which have zero
-  or more spaces between # and type: or between type: and value to
-  # type: (value)
-
-The following change was not in any previous stable release:
-
-- Regenerated the _width_table.py and added tests for the Khmer
-  language
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-black_25.12.0.bb           | 23 ----------------
- .../python/python3-black_26.1.0.bb            | 26 +++++++++++++++++++
- 2 files changed, 26 insertions(+), 23 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-black_25.12.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-black_26.1.0.bb
+ meta-oe/recipes-support/glaze/glaze_7.0.1.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-support/glaze/glaze_7.0.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-black_25.12.0.bb b/meta-python/recipes-devtools/python/python3-black_25.12.0.bb
-deleted file mode 100644
-index 9bdf8df3e4..0000000000
---- a/meta-python/recipes-devtools/python/python3-black_25.12.0.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "The uncompromising code formatter."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d3465a2a183908c9cb95bf490bd1e7ab \
--                    file://docs/license.md;md5=d826b3c5269f21a8a0272af3f00d15c0 \
--                    file://src/blib2to3/LICENSE;md5=bbbad7490e921f9a73c0e891305cb4b3"
--
--DEPENDS = "python3-hatch-vcs-native python3-hatchling-native"
--SRC_URI[sha256sum] = "8d3dd9cea14bff7ddc0eb243c811cdb1a011ebb4800a5f0335a01a68654796a7"
--
--inherit pypi python_hatchling
--
--DEPENDS += "python3-hatch-fancy-pypi-readme-native"
--
--PYPI_PACKAGE = "black"
--
--RDEPENDS:${PN} = "python3-click \
--				  python3-mypy-extensions \
--				  python3-packaging \
--				  python3-pathspec \
--				  python3-platformdirs \
--				  python3-tomli \
--				  python3-typing-extensions \
--				  "
-diff --git a/meta-python/recipes-devtools/python/python3-black_26.1.0.bb b/meta-python/recipes-devtools/python/python3-black_26.1.0.bb
+diff --git a/meta-oe/recipes-support/glaze/glaze_7.0.1.bb b/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
 new file mode 100644
-index 0000000000..bcb0f0f408
+index 0000000000..6526b1d8a3
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-black_26.1.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "The uncompromising code formatter."
++++ b/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "Extremely fast, in memory, JSON and reflection library for modern C++. BEVE, CBOR, CSV, MessagePack, TOML, EETF "
++HOMEPAGE = "https://stephenberry.github.io/glaze/"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d3465a2a183908c9cb95bf490bd1e7ab \
-+                    file://docs/license.md;md5=d826b3c5269f21a8a0272af3f00d15c0 \
-+                    file://src/blib2to3/LICENSE;md5=bbbad7490e921f9a73c0e891305cb4b3"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4d29875d83fbbf50485c846dbbbed8"
 +
-+SRC_URI[sha256sum] = "d294ac3340eef9c9eb5d29288e96dc719ff269a88e27b396340459dd85da4c58"
++SRC_URI = "git://github.com/stephenberry/glaze;protocol=https;branch=main;tag=v${PV}"
 +
-+inherit pypi python_hatchling
++SRCREV = "a4af950700b8af2659f0d4a37a18a1b9c5300593"
 +
-+DEPENDS += " \
-+    python3-hatch-vcs-native \
-+    python3-hatchling-native \
-+    python3-hatch-fancy-pypi-readme-native \
-+"
++inherit cmake
 +
-+RDEPENDS:${PN} = " \
-+    python3-click \
-+    python3-mypy-extensions \
-+    python3-packaging \
-+    python3-pathspec \
-+    python3-platformdirs \
-+    python3-tomli \
-+    python3-typing-extensions \
-+    python3-pytokens \
-+"
++EXTRA_OECMAKE = "-Dglaze_BUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF -Dglaze_ENABLE_FUZZING=OFF"
++
 -- 
-2.47.3
 
 
