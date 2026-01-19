@@ -1,188 +1,295 @@
-Return-Path: <niko.mauno@vaisala.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A252D29C24
-	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 12:58:21 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.98])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34222.1768827498002976616
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F03FD29C2E
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 14:24:01 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36076.1768832634691291957
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 04:58:19 -0800
+ Mon, 19 Jan 2026 06:23:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=af+yuVqm;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: vaisala.com, ip: 52.101.83.98, mailfrom: niko.mauno@vaisala.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P9BHaoztGl8d4gOxZTL5rcKqqouq2jHLZeUoiTtKBqKpmOOjlpCzHcp356gWPnoHaMD4YGCWQWxCjKDaSLEAo9cqXMlAsAt38Y6+Uf5KTc3yq+VikPbVSB8IxQL1TrV8lUgcDlhmZ6t+RDPNzfVI8weQx0XJ8mi3RJVM6Z+tU3NzKEGifjjTiMK4E0hp38dY0B2SChVjj+v4CgCk2PAolikH2cu7gevWcJS7xcLuP5HBDUjIhCpJc4k0AmNH1HlxbO8E3ky/TDoFl/m7kEAvOKx3Bi85gqTPwjz34WWfkZI4CQ9tvtG+LBm245zVDO6Q7ibcm1y9X7W1F8MoU3Y2pw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o2uL/oWSBlWvfm/R0mIPgTSZKVrdglRGp6BMj8a4LOY=;
- b=gVNDtC9zVQiJsm13pSvyLkxZ0umFXtCCI20Y6ibwnoV+aTm/JnyEdogq4oHU5ProXB6+jQiKVL/V5WfdWWaXEa8lLVfnNnHTBaCh2kSJqhtMwunsBi1/LS7xbgmOHYGHygajTRjRSpjl/FU7vTpEv8Iqe5OXxf4F9z8DPHViqeAPcd0jUSn4Jq9s4qRKVh8wHfo12T1YsF/6lH9vbxStPEc6/3NwsoX4D4V1IIqm+LzhOTgrAQPqgKKrUB0VKZ+TsbDXcpdoevr0pi4/ejj1J22zPkSCE+NcOBDuzmQ3eQIIXChxtcGNGzFI7olkPUI04UGUajSO6gbKnX6JzZaH4A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o2uL/oWSBlWvfm/R0mIPgTSZKVrdglRGp6BMj8a4LOY=;
- b=af+yuVqmLC4NVXG8TTpVxVNxbtVI1iiWSp+jBDMcWyv55sVDv216NdiQlOuYaqeoZ0xU3jmXwGfm/+0YJxn30jJysRSU2R/rTSVubbtdLoTgdmlkjvqNNkRsoieZW3YPzdfpcnPaupU49CYuDCXtmgqTCy/uePzr5ztP1pThbtFWQh2D+mz9JbUZHQpCoJ9ZMWcyOcRlGUI/2gYXiHxQcDGAdKp4jHaphm29hQggbfPoSO69c5KdQlTxtIKz2PsQ9xbeljWVhxV0Chx72crwmXmPvlAOlg3CwRzRqoSEXhRcgNp6u3djbj707mnIJwqY5erG2p90YETkB3emGVmv1Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
- by DU2PR06MB8335.eurprd06.prod.outlook.com (2603:10a6:10:2e6::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.11; Mon, 19 Jan
- 2026 12:58:06 +0000
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::af93:b150:b886:b2bc]) by AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::af93:b150:b886:b2bc%5]) with mapi id 15.20.9520.010; Mon, 19 Jan 2026
- 12:58:06 +0000
-From: Niko Mauno <niko.mauno@vaisala.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jqqkZq/f;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4801bc32725so20650285e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 06:23:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1768832633; x=1769437433; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=miSLW5IxehFCGaMOvQ5/jH3ghkeEvcRZAKfOSfx9g8o=;
+        b=jqqkZq/f/RfeEM6YPAinPW8LrJtvNRZIqT8xITjXTU5FgcaIjSTfPT6smDpuK0+Oh1
+         43EGecp+ruNapwYpEFP69DIXZkEPWpvy9q7li7t7ABLR/kC/00WaTuhvqWUn52IaLJjj
+         YI24EEJsBL+ThjtPzxdFNISMWlkpS2Vo8Yl8hICOrAry1nABOIB1tdsv5e9kIkAO4p95
+         7dkFXEa2fgI4jQ9uNLn1wG4btMCuoY/1PB64LXla8M3IRhJcdiBiYwCS8NnmGmqiXHYn
+         ZvmKsoVcK/luHfg0pW40mK/CxhIt4+/k9dcBPiaQCcMC4Qt+OEI3uSdSSGR2a1g1ZDYK
+         V+kQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768832633; x=1769437433;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=miSLW5IxehFCGaMOvQ5/jH3ghkeEvcRZAKfOSfx9g8o=;
+        b=kGSN29ozXdSC6WDeqEKgy69/sBvydDeaWCvlrYnQnruxg+sRRIMtoNLzB9JknvaQK0
+         +3zVlvYhnsK79MMi3EhC6IX16DHOiLWGDt2pF8RvtAdbHXrcC2wN6cZw6ipijRkKAgKG
+         VcLncF61h8H5LZUO7fKhtE+g5AvmfbOmh684YrWa6omA3X0EnK2O+FkYVszX8Pz+GHvj
+         m5nX2O6Yav3YFknBcz4CPE8C6TEfr+tfZCtC7hkLtYFqhNEldxlzApffwgrVYDAdvQfM
+         lD6MwW05wq/T45ETuQOwvdWep9Z4CTRmiWxvp76H0fjfcoA3NgA0fxXvO5B0ohUz9Q7f
+         7NFw==
+X-Gm-Message-State: AOJu0Yxodc8vzZZuCOPupBhWfa60lmOMAqDiMK7Jog1IzGGKcHwfQOeW
+	TJLZsW62u6x+6xqO2f/osoLyMDo0DBfpMwqK5wmWtEuy6xKg8EGH++b2JsQ4pA==
+X-Gm-Gg: AY/fxX7LKJ2QE2raHqvX3lgFqy3U/98PgD6H72onzJvP6WfMHzhKpTtAZ2iWydKK1Kv
+	U7sls8hxXXHnifgg7EGe+blX5v4JMFPgvcQ4tgWgoXEKmmoiPkPkj55QIrASCHHyxL4c30jHM3E
+	fZl1vj6IUGfTtIksi94DutX1sbh9T4ebsymTaSvWfXc81GSzaQgOSv1+xzDDdHoc1J2hedqL+Ny
+	2sYywvKSwgt3tERfo7qqKuBX2/be08Pymr8+fRDqJX2Ndm9X8nsGjtFbP2M2bBuQ0veRf5c3pQT
+	80HF7jRv8XFMmXinjd3msY1UfTNfHgKxMyyvtJszxKdcqnVnzzOYGIzpc9fIh3Os9XlqUmHQ7Wx
+	i79s/SKrMZ+HnktfT0qw4BY5/K8URroKIPcZUKBMpN48O1Zi9/vs0zqzJHVtbBwM3+t7fmWR/j7
+	xcgkY2B62P
+X-Received: by 2002:a05:600c:1c28:b0:45d:f81d:eae7 with SMTP id 5b1f17b1804b1-4801eb109e0mr136667345e9.28.1768832632628;
+        Mon, 19 Jan 2026 06:23:52 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4356992c6f2sm23102532f8f.19.2026.01.19.06.23.51
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Jan 2026 06:23:51 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-CC: tero.kinnunen@vaisala.com
-Subject: [meta-python][PATCH] python3-watchdog: Remove obsolete dependencies
-Date: Mon, 19 Jan 2026 12:57:48 +0000
-Message-ID: <20260119125748.1199952-1-niko.mauno@vaisala.com>
-X-Mailer: git-send-email 2.47.3
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: GV3PEPF00002E54.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:401::2c) To AS4PR06MB8447.eurprd06.prod.outlook.com
- (2603:10a6:20b:4e2::11)
+Subject: [meta-python][kirkstone][PATCH] python3-django: (4.2.27) add back setuptools3 support
+Date: Mon, 19 Jan 2026 15:23:51 +0100
+Message-ID: <20260119142351.61244-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DU2PR06MB8335:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2bfa8017-7b62-4e3c-976f-08de575a63af
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|52116014|366016|376014|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	=?us-ascii?Q?nIfiPdk50QuSRVwC9P4uQzsqm/s12AzC0PLvAH+oG8FPwLp/j2gnbHqEREVb?=
- =?us-ascii?Q?+pR1wjhOkJnUXxM7/ij0fZq5SAJjfO1rJHMM9ytNeUZbx+ePmQRe0Gq6njct?=
- =?us-ascii?Q?V/NmFwpFnL4nFlNnUPN0FSpKedgW5KcJjs26qHFE7kYir6dK6p6DNvfKIGhF?=
- =?us-ascii?Q?V6YSN6NRKDotdIIhrZG1a17hHRQT44kEMrVgp7m3baMV2vJOslzLAT4Yravn?=
- =?us-ascii?Q?Dd6stQBOQg+E+abF+s425l3+k8LILaNeJUfjPb3wswCkfoUyu9UM33xOkvsk?=
- =?us-ascii?Q?p+sSWvGBz+ozoxYeMBIAfKF2lLP2r7UY9dBrF261bQ3El+OfNnwHWz7AfMCr?=
- =?us-ascii?Q?GkLb68HSt4aCYyqJUp1ZWiz+a8AK16BrWeN2YEMasNb1pLb+HHFJ7NkYNQiU?=
- =?us-ascii?Q?QvXta6vbCQKPZTo98z/CEUIK8digSccQ+7CbkTJ17QvOn/rToZZw3Cr6oYrW?=
- =?us-ascii?Q?y3SpWzvl0O93tlcP/Ch6rN+W0xLYZHghVZqsGv7eqkP0wW1YoWmB6prf4/Le?=
- =?us-ascii?Q?VOcmZOWxAjn7BCdnUKTTi2iPknyBnkE6X5nZxYvk6yahYG1Jc+E0t2IwrQVj?=
- =?us-ascii?Q?+smu0pNPn8xXzWYTvgnO8LwXuuY8J+UcnIgl/z80Yx2e2Gih1XjAWKB4976g?=
- =?us-ascii?Q?jpHNYT0NM5+YPl5P4F3fLiy1SJkjBzScIX10IcaMEheJBBGxtbNJQ6bPXHiJ?=
- =?us-ascii?Q?cN9HSz0SYnkvnzywVHwCNilievKrolWVv9A1u6l/O3oLmN06wK9J4Ff4GY6T?=
- =?us-ascii?Q?cK1LV147yCONqEHV5HJxcyosfr9etyXyy1HQNt7xyxAoErHNTqywPXI/+Cj6?=
- =?us-ascii?Q?mLjGZnS3jSFZ18X98XSJ0wAkPLzdeyWxs9sO3lYwR/12e6FglXdDgEzNVpul?=
- =?us-ascii?Q?a8fXt/zFbmkH9NO/5XU39joF5CzMZOyGE1F0ClG0W0FbV7xIffSC9dpIVN3R?=
- =?us-ascii?Q?QrAqIJzEZnA/WJ5ZXHwShfjab10pV3tawVHGqtzP7k2ZvFHsnbJKXlh/pBIv?=
- =?us-ascii?Q?bBQH5Qdf4jBBJhAnRuSuD7Qoa+icCHZmt/Col8FkBqI5deqYWXh3lojIfHGn?=
- =?us-ascii?Q?m5ZoHdIpIzapBsUeiozzyoic3rLPFQteV40YKX0WDu8k4Gn6qAS03hJJF9zg?=
- =?us-ascii?Q?P2PNWbIYjw0VlGqtXd1eClXYO9WTtq4yspaEV5oFPoDfotuXaexBsO9ZHalF?=
- =?us-ascii?Q?HhSOF8zkea7o7jdd1YoiUVTp65pDTkM4VaDplWTCvL/gHIBN1Ha6+dgsKoIl?=
- =?us-ascii?Q?PPnvv1LeKjSOJQMeKYTDxidB+zRL7LQ470G9lwUNqUfMSEsksqSpO9X/Q2Ch?=
- =?us-ascii?Q?lKn0mXZXPTeW564p6vttsI/XY8KsilgMT1zgjrps8IpjYBqIBo1fQ12ffAPZ?=
- =?us-ascii?Q?DH1XpHW3KsxloUlW+q/bYAokKf+a/cG9vJG5jewBrKlKYtpKamwsh0NOgBlZ?=
- =?us-ascii?Q?vdYan08feeWpR+2eSN0Px43gvfcWg2mb062DpeqXrL9VKME85ODFvZCBbs/p?=
- =?us-ascii?Q?Cz4jXJWn4EAmQXKId1fUhLgbBSO3W/OX6oyBZgz71sE3tdxbCe+xhy7IKXpz?=
- =?us-ascii?Q?Su2g+tBS3CA7FXfZQsCUZeIBqXu0x8yaq3tnHCbhQ9WglLUhsnbXizLWR2WG?=
- =?us-ascii?Q?PtKuWcjya9Ow3VJus7bfdig=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?nVpm2gasMvwOiCrns4nI7IYlXSgFKMPJihOAoElpHzpLNBuZDf66bGKjV7eB?=
- =?us-ascii?Q?XC2p3p2yrppfcHZgjMMRw0IlcxN7wR5nXkpPmwSPqb+tvdaKAwPcq2yD1X4+?=
- =?us-ascii?Q?21L7DuGqwotO5pGozK+rDJGBczVIuic4mTbOxo3B5GnfNcyl5bSxI17MrI8c?=
- =?us-ascii?Q?/4t4gubiV+lz2lzynu8je56JIpqN51D38KFd2A0kT/YdSM394k6iRG60BuWq?=
- =?us-ascii?Q?0OMeymgJUPGSVCSkGDogU3fk2jyeUgMaYmSVUql6yWdnOmYN8MwXllwdSu/s?=
- =?us-ascii?Q?KJ32MWv601FKZj/QKbqNeFm/4xC0V3pHkHWFsy7M0zglAkrQDmR0IBsC+gy6?=
- =?us-ascii?Q?i/t1OFE76ZgJG+mfKXOyy8AOsM2DdGEvas/q+b+PL64RUHzTIu4UGi9G2q1l?=
- =?us-ascii?Q?1e8SxlccFJxrlMQmcNtLKJFqTVfjuXnOw6R1k29kVPl96xLJC+MTBcTMQdl4?=
- =?us-ascii?Q?JzaPErzbWo2UZeRfLQmkEPvFeNqKDIh9ZpQZCIv2jQ04c3RyZRiP4rC+rf23?=
- =?us-ascii?Q?XJgh2kObiuRo1j3t5NIvdoisNcmTTe+C4sH9ymDEW6b1AbTxZKyzSqGzpMBz?=
- =?us-ascii?Q?ClG8OGMMaVFpeivdwf0QPDrUXdMzab4XR+9q4dJzFTdo+toP1+hP1IWn/512?=
- =?us-ascii?Q?y1LFSoGVK7KzimzM4KP/44LQjkH5lhBWpBQxaNk09Ay4g1oUY5gRRe3Gzcma?=
- =?us-ascii?Q?jcSMzrrLooR95CCjLygQceRp1U0tg6ZM8Qxz4WeelAGi9yAEqbpSIBb1ZzNa?=
- =?us-ascii?Q?kwhYCqwg8bjhcffBsdyj61zLLp5n6dtRgoL2XrR6QeiOUc/PkE+KJF8Hc4zQ?=
- =?us-ascii?Q?BL2C0LhOUGAnabMrM3kfATpxlWPt1DDuVkFMkv8a+oAOnzxhV5JSa1rYSg/n?=
- =?us-ascii?Q?+JQm9B5suSby4mubtinGqphYXA1KMPNZByZwec4WgR09W+MgXTb4VDlliGGW?=
- =?us-ascii?Q?IvX/u10E2P3CnfkFrrbpIYpDUcVdaowx9xdmhhpp24R5qbCs5anIRND/2kS0?=
- =?us-ascii?Q?M+K7qzw3S0M+7tbVDA6rNMiZSjoQVvrQB1IjBEgD53AWG1hQYVL5Lp+iJR0h?=
- =?us-ascii?Q?pck+OQVugPXnd/vn7Ue7m1hlNECBpbWAPU/ZiN30M1gTe2G5nYqd763nIyUu?=
- =?us-ascii?Q?gWEvXZeddMkM9K9VVh3XRGdwNd6Dm0uHY0mQ4sPxyYDnRurLrAxCXve1pHOq?=
- =?us-ascii?Q?pqh7/q4pNRokF6j+nnsNyL810TSK5d/wh4I1en09V5lmUEpjg5L9iXsAiuQ7?=
- =?us-ascii?Q?gnQiZAkRP+XYnL7TTVRzPfIotpX/lf5PALOiLyj42BB4gzwQewQcCzGN+0kZ?=
- =?us-ascii?Q?3jsCmPTnhe9TpjCBPat3qqwRWjna9yjvvqWT/qEuS9Guc8drPItoMLFX/19E?=
- =?us-ascii?Q?Fbf7Uucr5UziIHbN+umpOQDi47NrbCf9Km0JBVhCup/rh90Wo2z5Y87PAxnu?=
- =?us-ascii?Q?qTgrtFIn6KF+7CB3LpefFN/LXmXR1npmh0eJRL/q1Z+dc3K2TKzPo3GFReU7?=
- =?us-ascii?Q?yYWj2nDabRimx1DyusNZUPyFwzS48Wmf1d2/iYKESYZpn2NwRTgn2ElWFH9k?=
- =?us-ascii?Q?L8HxJhXJc+LIvUGoyCk+Tcv759+YbEcMvuDWfFWsu0N86hdXuirtZTvT7TW7?=
- =?us-ascii?Q?Ez7EWp41ehuVJD1nKU/sLdhBhr8WrUK89ZJx4ypQflhPhCfhli+SLwDkc4Bb?=
- =?us-ascii?Q?e+/LmgbXYwDWXLIO0hV/SEk/hKbPPuZadnc6lCekGTiucVPzw4IBZsg1R3ZN?=
- =?us-ascii?Q?mXZyRxTeXIIk6esotgH3b4kqvqy4htQ=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2bfa8017-7b62-4e3c-976f-08de575a63af
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2026 12:58:06.5284
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Lvm1JRcCQUn/q3Gk2KAq+lMwkg1BC7C1r4FQ21IZVH/caDrfK/zEFBD5ewU4Cxg/VPT3rP7qO+qKM583xformA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR06MB8335
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 12:58:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123639
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 14:24:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123640
 
-From: Tero Kinnunen <tero.kinnunen@vaisala.com>
+The upstream project has switched to build_meta build backend with
+version 4.2.21, and when the recipe was update to 4.2.26, the build
+backend was changed in the layer also.
 
-Python watchdog has removed all dependencies except optional `pyyaml`
-dependency for `watchmedo` utility, like follows [1]:
+Even though the recipe compilation didn't fail, it didn't install the required
+files (it pretty much produced empty folders), because the build backend
+required a much newer setuptools version than the one provided by oe-core,
+it errored out silently. This problem may be hidden by other layers that
+ship a newer version of setuptools, like the kirkstone-rust branch in
+meta-lts-mixins layer.
 
-* pathtools dependency was removed in 1.0.0
-* python-argh dependency removed in 2.1.6
-* requests was never a dependency
-* pyyaml only needed for extras (`watchmedo`) and may not be strictly neces=
-sary
+To be able to install the recipe (without adding extra layers), this patch
+partially reverts the build backend change from upstream, and adds back
+setuptools build support.
 
-[1] https://github.com/gorakhargosh/watchdog/blob/master/changelog.rst
+Ptest summary after this patch:
+Ran 16377 tests in 353.124s
+OK (skipped=1287, expected failures=5)
 
-Signed-off-by: Tero Kinnunen <tero.kinnunen@vaisala.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-devtools/python/python3-watchdog_6.0.0.bb    | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ .../0001-add-back-setuptools-support.patch    | 179 ++++++++++++++++++
+ .../python/python3-django_4.2.27.bb           |   5 +-
+ 2 files changed, 182 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.27/0001-add-back-setuptools-support.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb =
-b/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-index 4f56e81049..40abfbfa38 100644
---- a/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-watchdog_6.0.0.bb
-@@ -1,5 +1,4 @@
- SUMMARY =3D "Filesystem events monitoring"
--DEPENDS =3D "python3-argh"
-=20
- LICENSE =3D "Apache-2.0"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd5=
-7"
-@@ -8,11 +7,7 @@ SRC_URI[sha256sum] =3D "9ddf7c82fda3ae8e24decda1338ede66e1=
-c99883db93711d8fb941eaa2
-=20
- inherit pypi setuptools3
-=20
--RDEPENDS:${PN} =3D " \
--    python3-argh \
--    python3-pathtools3 \
--    python3-pyyaml \
--    python3-requests \
--"
-+PACKAGECONFIG ??=3D "watchmedo"
-+PACKAGECONFIG[watchmedo] =3D ",,,python3-pyyaml"
-=20
- BBCLASSEXTEND =3D "native nativesdk"
---=20
-2.47.3
-
+diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-add-back-setuptools-support.patch b/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-add-back-setuptools-support.patch
+new file mode 100644
+index 0000000000..907f705e11
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-add-back-setuptools-support.patch
+@@ -0,0 +1,179 @@
++From 737b87cc374dc0e66fb7dd218848e1a3a0359a6a Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Mon, 19 Jan 2026 14:58:27 +0100
++Subject: [PATCH] add back setuptools support
++
++Starting 4.2.21 the project started to use setuptools build_mets
++build backend, however it requires a much newer setuptools3 package than
++the one provided by oe-core in the Kirkstone branch, and it fails to
++install any files.
++
++This patch reverts partially the commit [1] that added support for
++build_meta backend, and adds back the setuptools support.
++
++[1]: https://github.com/django/django/commit/afe52d89c4f42870622a4bb161ab5f4d4913aac5
++Upstream-Status: Inappropriate [OE-specific, too old Setuptools recipe]
++
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ extras/Makefile |  9 +++++++
++ setup.cfg       | 71 +++++++++++++++++++++++++++++++++++++++++++++++--
++ setup.py        | 54 +++++++++++++++++++++++++++++++++++++
++ 3 files changed, 132 insertions(+), 2 deletions(-)
++ create mode 100644 extras/Makefile
++ create mode 100644 setup.py
++
++diff --git a/extras/Makefile b/extras/Makefile
++new file mode 100644
++index 0000000..66efd0d
++--- /dev/null
+++++ b/extras/Makefile
++@@ -0,0 +1,9 @@
+++all: sdist bdist_wheel
+++
+++sdist:
+++	python setup.py sdist
+++
+++bdist_wheel:
+++	python setup.py bdist_wheel
+++
+++.PHONY : sdist bdist_wheel
++diff --git a/setup.cfg b/setup.cfg
++index 8bfd5a1..8b0d399 100644
++--- a/setup.cfg
+++++ b/setup.cfg
++@@ -1,4 +1,71 @@
++-[egg_info]
+++[metadata]
+++name = Django
+++version = attr: django.__version__
+++url = https://www.djangoproject.com/
+++author = Django Software Foundation
+++author_email = foundation@djangoproject.com
+++description = A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+++long_description = file: README.rst
+++license = BSD-3-Clause
+++classifiers =
+++    Development Status :: 5 - Production/Stable
+++    Environment :: Web Environment
+++    Framework :: Django
+++    Intended Audience :: Developers
+++    License :: OSI Approved :: BSD License
+++    Operating System :: OS Independent
+++    Programming Language :: Python
+++    Programming Language :: Python :: 3
+++    Programming Language :: Python :: 3 :: Only
+++    Programming Language :: Python :: 3.8
+++    Programming Language :: Python :: 3.9
+++    Programming Language :: Python :: 3.10
+++    Programming Language :: Python :: 3.11
+++    Programming Language :: Python :: 3.12
+++    Topic :: Internet :: WWW/HTTP
+++    Topic :: Internet :: WWW/HTTP :: Dynamic Content
+++    Topic :: Internet :: WWW/HTTP :: WSGI
+++    Topic :: Software Development :: Libraries :: Application Frameworks
+++    Topic :: Software Development :: Libraries :: Python Modules
+++project_urls =
+++    Documentation = https://docs.djangoproject.com/
+++    Release notes = https://docs.djangoproject.com/en/stable/releases/
+++    Funding = https://www.djangoproject.com/fundraising/
+++    Source = https://github.com/django/django
+++    Tracker = https://code.djangoproject.com/
+++
+++[options]
+++python_requires = >=3.8
+++packages = find:
+++include_package_data = true
+++zip_safe = false
+++install_requires =
+++    asgiref >= 3.6.0, < 4
+++    backports.zoneinfo; python_version<"3.9"
+++    sqlparse >= 0.3.1
+++    tzdata; sys_platform == 'win32'
+++
+++[options.entry_points]
+++console_scripts =
+++    django-admin = django.core.management:execute_from_command_line
+++
+++[options.extras_require]
+++argon2 = argon2-cffi >= 19.1.0
+++bcrypt = bcrypt
+++
+++[flake8]
+++exclude = build,.git,.tox,./tests/.env
+++extend-ignore = E203
+++max-line-length = 88
+++per-file-ignores =
+++    django/core/cache/backends/filebased.py:W601
+++    django/core/cache/backends/base.py:W601
+++    django/core/cache/backends/redis.py:W601
+++    tests/cache/tests.py:W601
+++
+++[isort]
+++profile = black
+++default_section = THIRDPARTY
+++known_first_party = django[egg_info]
++ tag_build = 
++ tag_date = 0
++-
++diff --git a/setup.py b/setup.py
++new file mode 100644
++index 0000000..f0e82b7
++--- /dev/null
+++++ b/setup.py
++@@ -0,0 +1,55 @@
+++import os
+++import site
+++import sys
+++from distutils.sysconfig import get_python_lib
+++
+++from setuptools import setup
+++
+++# Allow editable install into user site directory.
+++# See https://github.com/pypa/pip/issues/7953.
+++site.ENABLE_USER_SITE = "--user" in sys.argv[1:]
+++
+++# Warn if we are installing over top of an existing installation. This can
+++# cause issues where files that were deleted from a more recent Django are
+++# still present in site-packages. See #18115.
+++overlay_warning = False
+++if "install" in sys.argv:
+++    lib_paths = [get_python_lib()]
+++    if lib_paths[0].startswith("/usr/lib/"):
+++        # We have to try also with an explicit prefix of /usr/local in order to
+++        # catch Debian's custom user site-packages directory.
+++        lib_paths.append(get_python_lib(prefix="/usr/local"))
+++    for lib_path in lib_paths:
+++        existing_path = os.path.abspath(os.path.join(lib_path, "django"))
+++        if os.path.exists(existing_path):
+++            # We note the need for the warning here, but present it after the
+++            # command is run, so it's more likely to be seen.
+++            overlay_warning = True
+++            break
+++
+++
+++setup()
+++
+++
+++if overlay_warning:
+++    sys.stderr.write(
+++        """
+++
+++========
+++WARNING!
+++========
+++
+++You have just installed Django over top of an existing
+++installation, without removing it first. Because of this,
+++your install may now include extraneous files from a
+++previous version that have since been removed from
+++Django. This is known to cause a variety of problems. You
+++should manually remove the
+++
+++%(existing_path)s
+++
+++directory and re-install Django.
+++
+++"""
+++        % {"existing_path": existing_path}
+++    )
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.27.bb b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
+index 32fd235937..fba21cd75f 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
+@@ -1,7 +1,8 @@
+ require python-django.inc
+-#From 4.2.22 onwards setuptools configuration migrated to pyproject.toml
+-inherit pypi python_setuptools_build_meta
+ 
++inherit pypi setuptools3
++
++SRC_URI += "file://0001-add-back-setuptools-support.patch"
+ SRC_URI[sha256sum] = "b865fbe0f4a3d1ee36594c5efa42b20db3c8bbb10dff0736face1c6e4bda5b92"
+ 
+ RDEPENDS:${PN} += "\
 
