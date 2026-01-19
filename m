@@ -2,100 +2,110 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4299FCA6013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F9B6CA6017
 	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 08:28:39 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31272.1768811312134830603
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.31274.1768811317936141646
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 00:28:32 -0800
+ Mon, 19 Jan 2026 00:28:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Uss7lvaR;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-81f47610542so2077506b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 00:28:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XoooUkpF;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-7b75e366866so1120180b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 00:28:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768811311; x=1769416111; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768811317; x=1769416117; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TWflm4ubsP43W6TYvmkyNR1F5668hoR0KfVuBlPd05A=;
-        b=Uss7lvaRRGBcnFU5pAw1t8dKrCeao3y/frmvkKB/AAcjjjlUGvp3PQO8ZqVTtquw9J
-         Hd7dyqCOgE9CUU+yP6WksyKa0+JGEtrkzj2Ilp1RHUkKcCZopkh5uEyn8a67SHnOTeMK
-         a8W9Qs4w0Fp+g4/XJVykcY1aAn3FMelWwY2kj7JMauX/kc06BwYrd9sVblWgr47N4lRe
-         o9Sw2Z/FRw84fjRjQzpHmDAG264PSUU8/TzlxrTtuapWrmVZ0oFCwzT7r5wl6W5hIFTR
-         nkBSgPymykiplcn5muFVyS9Ym4Y8N95R/VZ1oOFzREmDLZsmIp9VZd6o8hldzftrqQ/a
-         S/rg==
+        bh=+9kGBsSn2VEdXVOx/Cuy2ZCUAmgWR6dtD1ZdKF2xitg=;
+        b=XoooUkpFb32BkapHay8inDQU+3uzC3M++Whk1UmOa89czdsUXTrH8sUvPBvl7q6M49
+         SYNqcLPo0UE25buB/lUy1VPtz0wFCOhyF18YL2gwfYoFFHAO47Hsrq95wG/8mcigi5Vk
+         det6zt76S1gP8cl4+iPxI910OqXOXjKHhvS5m5h3/vG7xlMYzbJqUi8X1M8LLcu7ZJOS
+         gfu2pkssM/SqklQY8pmq6zL9FuSk4hdeEnZon+afilkfqFgIJ1MmB//I65J/5+EC0Cyg
+         OPB9lMti/TLbmNzbu4Ga7WQTq5ltDn9W0VYWfTDGDgCkJJRcUbW2JWBR8Zd605qa11g3
+         uaXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768811311; x=1769416111;
+        d=1e100.net; s=20230601; t=1768811317; x=1769416117;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=TWflm4ubsP43W6TYvmkyNR1F5668hoR0KfVuBlPd05A=;
-        b=SFss3t6/0k6bIJnad277fj8QGp8zfboSLplTUnybbZjT2k30zMi6r1u9MUreDQTR21
-         FokPEOi42vZx0Z8q5Zy415UvCAynWJ6hiMXPbdkGQZisWOIdyzqsjKlb9wKSNcMHgSKZ
-         Cjd+fNMj9d0JM+YGSUxWyBJ1hAb+IxXHJWof2dHzJkGsYODuzlmptnZugBGgmVO92dg/
-         3xFU0RXJ8EkXmCLiQinecA/uA8j419iaKrIC+aPpyTUM7323eUkN8x2+hrmDwPKhESgb
-         MatnIOBBn+aAXFimxKpyCnBWZgbptuqJAwuYpWgNnFlOlDxsu1dFK7RF5VfgWewEH/Gc
-         pJFw==
-X-Gm-Message-State: AOJu0YzkMx2gPrQmwgT349I2kkoBE0EkK62PHF7pCymWkPPqM7F7GNb4
-	vE8POglzbMyY3ny8RCAN2aYtGs5yMGrUr0V7SKcufTQxLFmnfopCi8r0h1pXHw==
-X-Gm-Gg: AY/fxX6ibqUX0yigCQL3FGFJ9JiXVFEw+L6By046lGJKCMdsqLHhlu8Y0uETgCqdlI5
-	nQO2yJYq1g+S02JKGLRm3RXEjVErYe1H5Hv7DoGLVkV7cyYyDSQ4/xYgOB8NbKamDylDc8SQGD7
-	xp+mn9nvwIdDdyk/KbKexoSLaenVyzHE5Q+rCPj3LWkp/L1BrvK2AsT9iqCWzxePSOynohh1Jnd
-	sIhbE0Lc3Vyxpqs6SNasrN0Qn/RiJ1njE2dGDVtxomvRim+oETZ2RNuNetvVI8YzaU4dPz4Dw2n
-	rwsd/zbTPR0AXC59fw9v9g/mkFWiShSRCvAWcDJGrV/9lmiCp00vpZULcfewA4c5HV/wL04W7KE
-	duJC4vlw5h1L0V0LK9+km+8IsAiPim3t1Pr0888fB3OvnntMG6FF0xY3zIKelv2NmY7XZpiQPIY
-	fyL898X2RZcmZbwuveEceuzifVWDWwN2kWyQ==
-X-Received: by 2002:a05:6a20:914c:b0:366:14ac:e20d with SMTP id adf61e73a8af0-38dfe80124amr8968538637.75.1768811311287;
-        Mon, 19 Jan 2026 00:28:31 -0800 (PST)
+        bh=+9kGBsSn2VEdXVOx/Cuy2ZCUAmgWR6dtD1ZdKF2xitg=;
+        b=jaHQnRjR8Rgwo+I6DV9tPH0gP13pLbjdrIHfkckeKX97Tz9XyrxYTRMSZrQDlpNHoD
+         Ey+TzCY3nx4hrJN9XpBYjb7C3yIrJb6fgaa07Ip5LhO6k2LamFVHHIfOhDsGcqK5QJG6
+         U1xu5jaVKQSCfL/qvBA/mmIv8RZTY/LtqKbm3HtdSaEPDrOtM7wfccyiGueoLXGr7y3Q
+         JY3+qlPQ8EFoSXMRs8r0rDE+UcwqWqdeIGi1FHUARk3TmtUiO9TIsFwiaZqzTztXCPwE
+         9oHQKION/JuZE1ywels4subMkMH6AJ9onD8gNJKzZ+AcCb8Wm8YDDAxpqsKZEdNoSEP4
+         SkbA==
+X-Gm-Message-State: AOJu0YwVI9GU3JbIficSEv4Qg+qcwrrfe14AOy4xwYIET+umN2oLryuU
+	zsylkcsEs1DG7olmk08TtbyCmRCR2QFZp6JmXEkMLNgaYM0Fy9sc309dDdWckQ==
+X-Gm-Gg: AY/fxX7mqTQ/3hac/Wrqkpglhd63o24TPnx3VyvEX+8thmWrch2FOgDqtXTduSbMR7H
+	nWguvA3EcUExBWNqrXE96GBCvXpZRKY8/0fLb/QLQLAV43mtgb2PA3RcKCHMt0cWP7gR71x2F4J
+	DjL0Bs6TWVhD+8MTDolVzXdgo9J/5gmfP0hswer5M8yAP6WaCrpdQKjVNawffA3adBSaTwcAMGF
+	UYLeCb0bc+6FDr3ME7ME+MpxCeD8WZKio8AlOy/QFNxPL3Yz0PFaPu/QwdHkS3eHrXLMvaU5Lp7
+	/aITAZyhnGOs2KSOVPaCO18T6R6nPkLEe0rTUyBs+r2n1SRlisQ1FCJLjPT8gpgo8IRasCAOdw9
+	fWL6Jf365Llbr2E5eroyLMCRH7f6sJ8A8zzBqgsCVD6klIQR81ifZEKckjRZNHE1o4Tc/UOEfOA
+	vciCyKPC4BRDIWkj73aI27HzY=
+X-Received: by 2002:a05:6a20:3c90:b0:35f:5fc4:d886 with SMTP id adf61e73a8af0-38dfe6f8676mr10172299637.43.1768811317098;
+        Mon, 19 Jan 2026 00:28:37 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.27])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7193fab6esm88002455ad.68.2026.01.19.00.28.28
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a7193fab6esm88002455ad.68.2026.01.19.00.28.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 00:28:31 -0800 (PST)
+        Mon, 19 Jan 2026 00:28:36 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>,
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 12/28] cryptsetup: upgrade 2.8.1 -> 2.8.3
-Date: Mon, 19 Jan 2026 21:27:34 +1300
-Message-ID: <20260119082752.4120991-12-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 14/28] vboxguestdrivers: Upgrade to 7.2.4
+Date: Mon, 19 Jan 2026 21:27:36 +1300
+Message-ID: <20260119082752.4120991-14-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260119082752.4120991-1-ankur.tyagi85@gmail.com>
 References: <20260119082752.4120991-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:28:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123606
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123608
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+This is a maintenance release. The following items were fixed or added:
+
+GUI: Fixed VirtualBox VM Manager crash when host was resuming from sleep (​github:gh-121, ​github:gh-170)
+GUI: Updated native language support for Traditional Chinese, Greek, Swedish, Hungarian and Indonesian translations
+NAT: Fixed issue when multiple port forwarding rules affected NAT functionality (​github:gh-232)
+Linux host and guest: Introduced initial support for kernel 6.18
+Linux Guest Additions: Introduced additional fixes for RHEL 9.6 and 9.7 kernels (​github:GH-12)
+Windows Guest Additions: Introduced additional fixes for issue when installation was failing in Windows XP SP2 guest (​github:GH-142)
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 6f41c5872d9166aa1197ce1b51f8670561548353)
+Cc: Bruce Ashfield <bruce.ashfield@gmail.com>
+(cherry picked from commit 0ecf2814b207cc25962a3949c8265d856a355ea0)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../cryptsetup/{cryptsetup_2.8.1.bb => cryptsetup_2.8.3.bb}     | 2 +-
+ .../{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.8.1.bb => cryptsetup_2.8.3.bb} (98%)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.2.bb => vboxguestdrivers_7.2.4.bb} (97%)
 
-diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
-similarity index 98%
-rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
-rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
-index a77d488f44..44bf66c1ed 100644
---- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.1.bb
-+++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
-@@ -24,7 +24,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
- LDFLAGS:append:libc-musl = " -largp"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+index 9b01964334..117cdc967e 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.2.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
+@@ -14,7 +14,7 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[sha256sum] = "b0e63bfb855327aecf1122cda33390c33734e5ffed72f123f5edf786a8ce1393"
++SRC_URI[sha256sum] = "d281ec981b5f580211a0cedd1b75a1adcb0fbfcbb768d8c2bf4429f4763e8bbd"
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
--SRC_URI[sha256sum] = "2c3379eb76597dcab50911449b013e2697c4bffcc716dbbf0d9b0e8fbbb46fb4"
-+SRC_URI[sha256sum] = "4a8a23b8b9d1a3250452e40acead4421a03e45a38954ad0595634f4266aa800f"
- 
- inherit autotools gettext pkgconfig
- 
+ S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
 
