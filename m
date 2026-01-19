@@ -2,543 +2,93 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CA69D29C49
-	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 16:27:32 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.38555.1768840041187313892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CF7FD29C4F
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 17:55:12 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.40590.1768845310479249932
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 08:27:21 -0800
+ Mon, 19 Jan 2026 09:55:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XK3lu2o5;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-431048c4068so2674715f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 08:27:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sx7xuDs2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4801c1ad878so34155925e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 09:55:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768840039; x=1769444839; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=mk5WOQrOBeT726Lw3w9+IB3WHJNkCV3j/XAAMOdXz0o=;
-        b=XK3lu2o5PsP3K1H4nZPc7jng0t5Eywt57GyaulQuuAKDjSoWKXSZ4DVQuhem7M89M4
-         I5NvhriZ/0hnd04xVge1Gw+KvkXJS9mJxGvrS2KwxQNGiy1gBEXCRsIrguIfPfgLG6rt
-         4rEce/AlQBk4wbNQjOTqlw1lYz+InJwMt+Om+V3q1IHKlR0wSfW2LuTprARlxlW85LAC
-         cHmsboSRv4Ilx1I4ZyPWgCLjksgcS4kP5qT+PhhKR65ZSvl+NC8VO3bonYiyunLsCWK0
-         cvJ515FmvgFHU11/cg0Vf/2dsZrk6F5DoOChMByhru18Jo41Sw1U1HYl6H1WhOFR+vjy
-         329w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768840039; x=1769444839;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1768845309; x=1769450109; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mk5WOQrOBeT726Lw3w9+IB3WHJNkCV3j/XAAMOdXz0o=;
-        b=oNzeR+e2nuvAFfs6IAgHMzZc0E6cm3GcjfxnlmHEfz2lUQyOkeR5PqMYjpbQVrghP0
-         6x0N45Frf7QThueQpW2TcEApnw0gA3/V4jjvEMDkaUYsBEKk6R6zcM0hkbmkOJwkCvYF
-         jfhOjJsBeUGYnvzIMCvoNtIZ1Gv6O9776o1EbLOD09bBwiDBAexSM4kN0chW6wfGscs3
-         40WWhvjkD2y+89Q9S8hQsNPKg1LuuBGb8FguUhcwKfCJdsjcDM+/GbI7ntE9wELOm4mr
-         0IPSz0SDfF0qUqHzFt/Ahm8thX0/OkzqpRbkUt/4D9F/nTkG7HgN4MH0JyrbrvQZ5Hpk
-         Cj6g==
-X-Gm-Message-State: AOJu0YzoiodGAnh2VWReNYx3YwdQMTLVL5k4vbLDNoX9e4VAO/j8gztc
-	ypy35ap58ZRlDnrnhSZZG2BfWJFjg+FNO8MpaQ49VeoK8Q1dq1jtXcMDXvKIXQ==
-X-Gm-Gg: AZuq6aJ+Dmfbhyvn0KH+aWxJgxMic/HsXNu7VxkP90kf7xIyZZ0nbps5IhnNRuuakti
-	6AMXBY7tWhNrNmudyqjrjHWvKiezK9M1S9lU9ROQKqbIHdoRQJtvuRn2tbtGMzL1UoFK0/M/tL/
-	McctnmgJg0a6+4F/B3LBlJ1qpepw4JiWF23ZkwDfdthYHjhfjwv9cTOIbGoOg+uyr3MQ26FbYCv
-	B1ugiY+o24l9eIE9/9QU+L9IQynD8uC3gSmbGpbPWfPZWFa3LAfjrWXEijAWkupxnp6Kh5NDbs2
-	QYaVO6/l2xAsHJiG6+twmf+mRmLdgxJiJjTS0BI7AjhTpQBKsXm4+3BskBllxYR594F+donnodu
-	2SZlsApA1ybc9sgbFlRi8sB2DHDEL0ep7PomCRF+/BSvEEH85aNUjO5hGC+NZ13fNdcL60ib5iE
-	sEtF6AWdBR
-X-Received: by 2002:a05:6000:288c:b0:432:c03e:a78e with SMTP id ffacd0b85a97d-434df116480mr20388072f8f.27.1768840039307;
-        Mon, 19 Jan 2026 08:27:19 -0800 (PST)
+        bh=w7RXd8SF0HVuESCTqVhhoE6ZmOq08/RgaQLuLVfcZPg=;
+        b=Sx7xuDs2YRLoGiTzE64Ofiel9GD2XXR8BB33fPU/qYdxJ8mavFe/Re/yPDdP7EPEXb
+         FEL/zRzpbrz02rbTlPzplhgoszaglmTob85svR70/Muw66ty0yi8UmABtu8G6H0qDKYY
+         kFqpyZ3fQ0y35e86Ab+LqEnZV/N38WMPigk0i1bAlctis8SOqeN0zuHAOmIcnwfTU64W
+         h9bqh9AzHHLA6fOmwYvEZ12W3UrK/f9pTOvjrWjAy1+qsiNzvvAvH925xG6VSuJAxjsv
+         7zIZfm68iKAHACEo4yUM0cuQE2ba+Cx/turBQt6P+veF6RZQ3HxH6BRSK15OjrMMebP9
+         cYgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1768845309; x=1769450109;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=w7RXd8SF0HVuESCTqVhhoE6ZmOq08/RgaQLuLVfcZPg=;
+        b=N/j9SwvwTYBnyynjWHNVU/ioWlRJz/wX8+/CBGL4k4ov2bp/OIRbgFulX7HnC+YEfn
+         Zur5UsealGfv0xmJa72DU7DW8ZJwQ0wfzsrDbfW+LTknLnyLr93Pc1KVAGyTTmC6WJJU
+         mGCz064RSSePBRwZ4FKKQa+ZVvaYIAj1mh4ntU7ilc1VYpprf9uB4pV80PvDzLi/Bfnj
+         HWtWZ/x1n3VEIqCpow6MvY5ezt6rdQ3S1zPhCnyrEcsy+28htWWylDDzuzgXQqWyxaLo
+         HvC6C8PCrFIg33CpzfvoPtnC8uatnCSdDsFqYxXJt8Kls2Fcbm1SS7EGM49sYn2HRnEz
+         OR3A==
+X-Gm-Message-State: AOJu0YzYEwa3wbtUexTMI/4cyLYDVsU2C6k4bRcGgVjVU9XMevi8TGec
+	vFImxlSgIElYzALWZqAlt4NCOeqNg27bWAWOJ2EEg76NHPJw5mm/nQF3cWCnbQ==
+X-Gm-Gg: AY/fxX5HnRiecvQfMlGbxI7rF7BDK7IR5FelP7W/pIUUV1dtUr+XAdBgurDCXXuKJ9n
+	GP84IpMz6rm3fMzzq50x1s0YPL8HztMvGb9xFKdzS1sjrXENWtpvr6o3eWggdcj+YRRRkBXvN/q
+	6ivFfvNI22iqWpOgr3fQLMt9A/JdglEZqIWBEdQ8ggj9SjEGYB36iAx9Ej7xg5SYaUbOfKtQEfP
+	fwXv7nrZ4cqTfhJFR18p8pU0QcX2kv4zVLVO3yaotgfOb4drtFusiTVkvqGZ0dYTPP0p0WGL8QA
+	5Nlh9E4mCZ02KOoD34GtKETG31PxgSmtLUIiMJMpAQeWb3JgL5VSk1URGtjuXxJAFSCTaNlQv9A
+	ZWnixaCQQQ7DMEStJ9Ajt5wJ1fHhX3PGOxNA/qC3q2M0Cg88pqbq2WYxkl+iAwwc7/P1bmclyCn
+	QjSYyUiwo1
+X-Received: by 2002:a05:600c:6215:b0:477:a246:8398 with SMTP id 5b1f17b1804b1-4801e2fe16amr133897885e9.2.1768845308801;
+        Mon, 19 Jan 2026 09:55:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43569927007sm23945347f8f.16.2026.01.19.08.27.18
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801e8795f1sm204201785e9.6.2026.01.19.09.55.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 08:27:18 -0800 (PST)
+        Mon, 19 Jan 2026 09:55:08 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] frr: patch CVE-2025-61099..61107
-Date: Mon, 19 Jan 2026 17:27:18 +0100
-Message-ID: <20260119162718.735743-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 4/4] python3-lief: mark CVE-2025-15504 patched
+Date: Mon, 19 Jan 2026 18:55:05 +0100
+Message-ID: <20260119175505.777598-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260119175505.777598-1-skandigraun@gmail.com>
+References: <20260119175505.777598-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 16:27:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123643
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 17:55:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123647
 
-Details:
-https://nvd.nist.gov/vuln/detail/CVE-2025-61099
-https://nvd.nist.gov/vuln/detail/CVE-2025-61100
-https://nvd.nist.gov/vuln/detail/CVE-2025-61101
-https://nvd.nist.gov/vuln/detail/CVE-2025-61102
-https://nvd.nist.gov/vuln/detail/CVE-2025-61103
-https://nvd.nist.gov/vuln/detail/CVE-2025-61104
-https://nvd.nist.gov/vuln/detail/CVE-2025-61105
-https://nvd.nist.gov/vuln/detail/CVE-2025-61106
-https://nvd.nist.gov/vuln/detail/CVE-2025-61107
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15504
 
-The NVD advisory refernces a PR[1] that contains only an unfinished, and
-ultimately unmerged attempt at the fixes. The actual solution comes from
-a different PR[2]. These patches are 3 commits from that PR. The last
-commit wasn't backported, because it is just code formatting.
-
-[1]: https://github.com/FRRouting/frr/pull/19480
-[2]: https://github.com/FRRouting/frr/pull/19983
+The vulnerability is patched in v0.17.2, however NVD is currently tracking
+the CVE without any version info (or more like with out any CPE info)
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../frr/frr/CVE-2025-61099-61107-1.patch      |  40 +++
- .../frr/frr/CVE-2025-61099-61107-2.patch      |  80 +++++
- .../frr/frr/CVE-2025-61099-61107-3.patch      | 293 ++++++++++++++++++
- .../recipes-protocols/frr/frr_10.5.1.bb       |   3 +
- 4 files changed, 416 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+ meta-python/recipes-devtools/python/python3-lief_0.17.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
-new file mode 100644
-index 0000000000..a1e1246cce
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
-@@ -0,0 +1,40 @@
-+From e21276d430663fd8312940bb3b0ce081957e3d85 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sun, 24 Aug 2025 21:17:55 +0800
-+Subject: [PATCH] ospfd: Add null check for vty_out in check_tlv_size
-+
-+From: s1awwhy <seawwhy@163.com>
-+
-+Add security check for vty_out. Specifically,  Check NULL for vty. If vty is not available, dump info via zlog.
-+
-+Signed-off-by: s1awwhy <seawwhy@163.com>
-+
-+CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b7d9b7aa47627b31e4b50795284408ab6de98660]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ ospfd/ospf_ext.c | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
-+index df0b3b9081..8ca0df3200 100644
-+--- a/ospfd/ospf_ext.c
-++++ b/ospfd/ospf_ext.c
-+@@ -1705,11 +1705,15 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
-+  * ------------------------------------
-+  */
-+ 
-++/* Check NULL for vty. If vty is not available, dump info via zlog */
-+ #define check_tlv_size(size, msg)                                              \
-+ 	do {                                                                   \
-+ 		if (ntohs(tlvh->length) != size) {                             \
-+-			vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
-+-				msg, ntohs(tlvh->length), size);               \
-++			if (vty != NULL)                         \
-++				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
-++					msg, ntohs(tlvh->length), size);               \
-++			else                                              \
-++				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
-+ 			return size + TLV_HDR_SIZE;                            \
-+ 		}                                                              \
-+ 	} while (0)
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
-new file mode 100644
-index 0000000000..eacada0ec4
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
-@@ -0,0 +1,80 @@
-+From d9ed123b814dad7cf4b069de5601c9f279596191 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Tue, 6 Jan 2026 15:32:32 +0100
-+Subject: [PATCH] ospfd: skip subsequent tlvs after invalid length
-+
-+From: Louis Scalbert <louis.scalbert@6wind.com>
-+
-+Do not attempt to read subsequent TLVs after an TLV invalid length is
-+detected.
-+
-+Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
-+
-+CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/33dfc7e7be1ac8b66abbf47c30a709215fbc1926]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ ospfd/ospf_ext.c | 6 +++---
-+ ospfd/ospf_ri.c  | 6 +++---
-+ ospfd/ospf_te.c  | 6 +++---
-+ 3 files changed, 9 insertions(+), 9 deletions(-)
-+
-+diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
-+index 8ca0df3200..62b0020148 100644
-+--- a/ospfd/ospf_ext.c
-++++ b/ospfd/ospf_ext.c
-+@@ -1710,11 +1710,11 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
-+ 	do {                                                                   \
-+ 		if (ntohs(tlvh->length) != size) {                             \
-+ 			if (vty != NULL)                         \
-+-				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
-++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
-+ 					msg, ntohs(tlvh->length), size);               \
-+ 			else                                              \
-+-				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
-+-			return size + TLV_HDR_SIZE;                            \
-++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!", msg, ntohs(tlvh->length), size);    \
-++			return OSPF_MAX_LSA_SIZE + 1;                            \
-+ 		}                                                              \
-+ 	} while (0)
-+ 
-+diff --git a/ospfd/ospf_ri.c b/ospfd/ospf_ri.c
-+index 76e6efeb83..7934b25451 100644
-+--- a/ospfd/ospf_ri.c
-++++ b/ospfd/ospf_ri.c
-+@@ -1208,12 +1208,12 @@ static int ospf_router_info_lsa_update(struct ospf_lsa *lsa)
-+ 	do {                                                                   \
-+ 		if (ntohs(tlvh->length) > size) {                              \
-+ 			if (vty != NULL)                                       \
-+-				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
-++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
-+ 					msg, ntohs(tlvh->length), size);       \
-+ 			else                                                   \
-+-				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
-++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
-+ 					   msg, ntohs(tlvh->length), size);    \
-+-			return size + TLV_HDR_SIZE;                            \
-++			return OSPF_MAX_LSA_SIZE + 1;                            \
-+ 		}                                                              \
-+ 	} while (0)
-+ 
-+diff --git a/ospfd/ospf_te.c b/ospfd/ospf_te.c
-+index d187485b9f..850a7039f1 100644
-+--- a/ospfd/ospf_te.c
-++++ b/ospfd/ospf_te.c
-+@@ -3161,12 +3161,12 @@ static void ospf_te_init_ted(struct ls_ted *ted, struct ospf *ospf)
-+ 	do {                                                                   \
-+ 		if (ntohs(tlvh->length) > size) {                              \
-+ 			if (vty != NULL)                                       \
-+-				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
-++				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
-+ 					msg, ntohs(tlvh->length), size);       \
-+ 			else                                                   \
-+-				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
-++				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
-+ 					   msg, ntohs(tlvh->length), size);    \
-+-			return size + TLV_HDR_SIZE;                            \
-++			return OSPF_MAX_LSA_SIZE + 1;                            \
-+ 		}                                                              \
-+ 	} while (0)
-+ 
-diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
-new file mode 100644
-index 0000000000..7b983198f5
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
-@@ -0,0 +1,293 @@
-+From 2d02bca97251ee53fb10b4c34c8cda0e20ae8b8e Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sun, 24 Aug 2025 21:21:23 +0800
-+Subject: [PATCH] ospfd: Fix NULL Pointer Deference when dumping link info
-+
-+From: s1awwhy <seawwhy@163.com>
-+
-+When the command debug ospf packet all send/recv detail is enabled in the OSPF
-+configuration,  ospfd will dump detailed information of any received or sent
-+OSPF packets, either via VTY or through the zlog. However, the original Opaque
-+LSA handling code failed to check whether the VTY context and show_opaque_info
-+were available, resulting in NULL pointer dereference and crashes in ospfd.
-+The patch fixes the Null Pointer Deference Vulnerability in
-+show_vty_ext_link_rmt_itf_addr, show_vty_ext_link_adj_sid,
-+show_vty_ext_link_lan_adj_sid, show_vty_unknown_tlv,
-+show_vty_link_info, show_vty_ext_pref_pref_sid, show_vtY_pref_info.
-+Specifically, add NULL check for vty. If vty is not available, dump details
-+via zlog.
-+
-+Signed-off-by: s1awwhy <seawwhy@163.com>
-+Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
-+
-+CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/034e6fe67078810b952630055614ee5710d1196e]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ ospfd/ospf_ext.c | 200 ++++++++++++++++++++++++++++++++---------------
-+ 1 file changed, 138 insertions(+), 62 deletions(-)
-+
-+diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
-+index 62b0020148..c1fcd632e0 100644
-+--- a/ospfd/ospf_ext.c
-++++ b/ospfd/ospf_ext.c
-+@@ -1729,9 +1729,15 @@ static uint16_t show_vty_ext_link_rmt_itf_addr(struct vty *vty,
-+ 	check_tlv_size(EXT_SUBTLV_RMT_ITF_ADDR_SIZE, "Remote Itf. Address");
-+ 
-+ 	if (!json)
-+-		vty_out(vty,
-+-			"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
-+-			ntohs(top->header.length), &top->value);
-++		if (vty != NULL) {
-++			vty_out(vty,
-++				"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
-++				ntohs(top->header.length), &top->value);
-++		} else {
-++			zlog_debug("  Remote Interface Address Sub-TLV: Length %u",
-++				   ntohs(top->header.length));
-++			zlog_debug("  Address: %pI4", &top->value);
-++		}
-+ 	else
-+ 		json_object_string_addf(json, "remoteInterfaceAddress", "%pI4",
-+ 					&top->value);
-+@@ -1752,18 +1758,30 @@ static uint16_t show_vty_ext_link_adj_sid(struct vty *vty,
-+ 			      : SID_INDEX_SIZE(EXT_SUBTLV_ADJ_SID_SIZE);
-+ 	check_tlv_size(tlv_size, "Adjacency SID");
-+ 
-+-	if (!json)
-+-		vty_out(vty,
-+-			"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
-+-			ntohs(top->header.length), top->flags, top->mtid,
-+-			top->weight,
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-+-				? "Label"
-+-				: "Index",
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-+-				? GET_LABEL(ntohl(top->value))
-+-				: ntohl(top->value));
-+-	else {
-++	if (!json) {
-++		/* Add security check for vty_out. If vty is not available, dump info via zlog.*/
-++		if (vty != NULL)
-++			vty_out(vty,
-++				"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
-++				ntohs(top->header.length), top->flags, top->mtid, top->weight,
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
-++										     : "Index",
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-++					? GET_LABEL(ntohl(top->value))
-++					: ntohl(top->value));
-++		else {
-++			zlog_debug("  Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
-++			zlog_debug("    Flags: 0x%x", top->flags);
-++			zlog_debug("    MT-ID:0x%x", top->mtid);
-++			zlog_debug("    Weight: 0x%x", top->weight);
-++			zlog_debug("    %s: %u",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
-++											: "Index",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-++					   ? GET_LABEL(ntohl(top->value))
-++					   : ntohl(top->value));
-++		}
-++	} else {
-+ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
-+ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
-+ 		json_object_string_addf(json, "weight", "0x%x", top->weight);
-+@@ -1791,18 +1809,32 @@ static uint16_t show_vty_ext_link_lan_adj_sid(struct vty *vty,
-+ 			      : SID_INDEX_SIZE(EXT_SUBTLV_LAN_ADJ_SID_SIZE);
-+ 	check_tlv_size(tlv_size, "LAN-Adjacency SID");
-+ 
-+-	if (!json)
-+-		vty_out(vty,
-+-			"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
-+-			ntohs(top->header.length), top->flags, top->mtid,
-+-			top->weight, &top->neighbor_id,
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-+-				? "Label"
-+-				: "Index",
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-+-				? GET_LABEL(ntohl(top->value))
-+-				: ntohl(top->value));
-+-	else {
-++	if (!json) {
-++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
-++		if (vty != NULL) {
-++			vty_out(vty,
-++				"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
-++				ntohs(top->header.length), top->flags, top->mtid, top->weight,
-++				&top->neighbor_id,
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
-++										     : "Index",
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-++					? GET_LABEL(ntohl(top->value))
-++					: ntohl(top->value));
-++		} else {
-++			zlog_debug("  LAN-Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
-++			zlog_debug("    Flags: 0x%x", top->flags);
-++			zlog_debug("    MT-ID:0x%x", top->mtid);
-++			zlog_debug("    Weight: 0x%x", top->weight);
-++			zlog_debug("    Neighbor ID: %pI4", &top->neighbor_id);
-++			zlog_debug("    %s: %u",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
-++											: "Index",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
-++					   ? GET_LABEL(ntohl(top->value))
-++					   : ntohl(top->value));
-++		}
-++	} else {
-+ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
-+ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
-+ 		json_object_string_addf(json, "weight", "0x%x", top->weight);
-+@@ -1823,14 +1855,23 @@ static uint16_t show_vty_unknown_tlv(struct vty *vty, struct tlv_header *tlvh,
-+ {
-+ 	json_object *obj;
-+ 
-++	/* Add security check for vty_out. If vty is not available, dump info via zlog. */
-+ 	if (TLV_SIZE(tlvh) > buf_size) {
-+-		vty_out(vty, "    TLV size %d exceeds buffer size. Abort!",
-+-			TLV_SIZE(tlvh));
-++		if (vty != NULL)
-++			vty_out(vty, "    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
-++		else
-++			zlog_debug("    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
-++
-+ 		return buf_size;
-+ 	}
-+ 	if (!json)
-+-		vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
-+-			ntohs(tlvh->type), ntohs(tlvh->length));
-++		if (vty != NULL) {
-++			vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
-++				ntohs(tlvh->type), ntohs(tlvh->length));
-++		} else {
-++			zlog_debug("    Unknown TLV: [type(0x%x), length(0x%x)]",
-++				   ntohs(tlvh->type), ntohs(tlvh->length));
-++		}
-+ 	else {
-+ 		obj = json_object_new_object();
-+ 		json_object_string_addf(obj, "type", "0x%x",
-+@@ -1855,19 +1896,31 @@ static uint16_t show_vty_link_info(struct vty *vty, struct tlv_header *ext,
-+ 
-+ 	/* Verify that TLV length is valid against remaining buffer size */
-+ 	if (length > buf_size) {
-+-		vty_out(vty,
-+-			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
-+-			length);
-++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
-++		if (vty != NULL) {
-++			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
-++				length);
-++		} else {
-++			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
-++				   length);
-++		}
-+ 		return buf_size;
-+ 	}
-+ 
-+ 	if (!json) {
-+-		vty_out(vty,
-+-			"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
-+-			"	Link ID: %pI4\n",
-+-			ntohs(top->header.length), top->link_type,
-+-			&top->link_id);
-+-		vty_out(vty, "	Link data: %pI4\n", &top->link_data);
-++		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
-++		if (vty != NULL) {
-++			vty_out(vty,
-++				"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
-++				"	Link ID: %pI4\n",
-++				ntohs(top->header.length), top->link_type, &top->link_id);
-++			vty_out(vty, "	Link data: %pI4\n", &top->link_data);
-++		} else {
-++			zlog_debug("  Extended Link TLV: Length %u", ntohs(top->header.length));
-++			zlog_debug("    Link Type: 0x%x", top->link_type);
-++			zlog_debug("    Link ID: %pI4", &top->link_id);
-++			zlog_debug("    Link data: %pI4", &top->link_data);
-++		}
-+ 	} else {
-+ 		json_object_string_addf(json, "linkType", "0x%x",
-+ 					top->link_type);
-+@@ -1959,18 +2012,29 @@ static uint16_t show_vty_ext_pref_pref_sid(struct vty *vty,
-+ 			      : SID_INDEX_SIZE(EXT_SUBTLV_PREFIX_SID_SIZE);
-+ 	check_tlv_size(tlv_size, "Prefix SID");
-+ 
-+-	if (!json)
-+-		vty_out(vty,
-+-			"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
-+-			ntohs(top->header.length), top->algorithm, top->flags,
-+-			top->mtid,
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
-+-				? "Label"
-+-				: "Index",
-+-			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
-+-				? GET_LABEL(ntohl(top->value))
-+-				: ntohl(top->value));
-+-	else {
-++	if (!json) {
-++		if (vty != NULL) {
-++			vty_out(vty,
-++				"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
-++				ntohs(top->header.length), top->algorithm, top->flags, top->mtid,
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
-++										   : "Index",
-++				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
-++					? GET_LABEL(ntohl(top->value))
-++					: ntohl(top->value));
-++		} else {
-++			zlog_debug("  Prefix SID Sub-TLV: Length %u", ntohs(top->header.length));
-++			zlog_debug("    Algorithm: %u", top->algorithm);
-++			zlog_debug("    Flags: 0x%x", top->flags);
-++			zlog_debug("    MT-ID:0x%x", top->mtid);
-++			zlog_debug("    %s: %u",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
-++										      : "Index",
-++				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
-++					   ? GET_LABEL(ntohl(top->value))
-++					   : ntohl(top->value));
-++		}
-++	} else {
-+ 		json_object_int_add(json, "algorithm", top->algorithm);
-+ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
-+ 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
-+@@ -1995,19 +2059,31 @@ static uint16_t show_vty_pref_info(struct vty *vty, struct tlv_header *ext,
-+ 
-+ 	/* Verify that TLV length is valid against remaining buffer size */
-+ 	if (length > buf_size) {
-+-		vty_out(vty,
-+-			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
-+-			length);
-++		if (vty != NULL) {
-++			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
-++				length);
-++		} else {
-++			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
-++				   length);
-++		}
-+ 		return buf_size;
-+ 	}
-+ 
-+-	if (!json)
-+-		vty_out(vty,
-+-			"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
-+-			"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
-+-			ntohs(top->header.length), top->route_type, top->af,
-+-			top->flags, &top->address, top->pref_length);
-+-	else {
-++	if (!json) {
-++		if (vty != NULL) {
-++			vty_out(vty,
-++				"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
-++				"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
-++				ntohs(top->header.length), top->route_type, top->af, top->flags,
-++				&top->address, top->pref_length);
-++		} else {
-++			zlog_debug("  Extended Prefix TLV: Length %u", ntohs(top->header.length));
-++			zlog_debug("    Route Type: %u", top->route_type);
-++			zlog_debug("    Address Family: 0x%x", top->af);
-++			zlog_debug("    Flags: 0x%x", top->flags);
-++			zlog_debug("    Address: %pI4/%u", &top->address, top->pref_length);
-++		}
-++	} else {
-+ 		json_object_int_add(json, "routeType", top->route_type);
-+ 		json_object_string_addf(json, "addressFamily", "0x%x", top->af);
-+ 		json_object_string_addf(json, "flags", "0x%x", top->flags);
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.5.1.bb b/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
-index a309330dc1..c125709bf4 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
-+++ b/meta-networking/recipes-protocols/frr/frr_10.5.1.bb
-@@ -12,6 +12,9 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+diff --git a/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb b/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
+index e7de6b6d3b..44b4976ab1 100644
+--- a/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
++++ b/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
+@@ -13,6 +13,7 @@ SRC_URI = " \
+ "
  
- SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.5;tag=frr-${PV} \
-            file://frr.pam \
-+           file://CVE-2025-61099-61107-1.patch \
-+           file://CVE-2025-61099-61107-2.patch \
-+           file://CVE-2025-61099-61107-3.patch \
-            "
- SRCREV = "d17791ee7ee76a0407d3fdbebf81bd242840741b"
+ CVE_PRODUCT = "lief"
++CVE_STATUS[CVE-2025-15504] = "fixed-version: the vulnerability is fixed since v0.17.2"
+ 
+ PEP517_SOURCE_PATH = "${S}/api/python"
  
 
