@@ -2,102 +2,185 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C39CFD29C3C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2AFAD29C39
 	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 15:37:21 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37685.1768837032018533582
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37684.1768837031530278595
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Jan 2026 07:37:12 -0800
+ Mon, 19 Jan 2026 07:37:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mLB4vVmZ;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-42fbad1fa90so3932519f8f.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mM+vn5uB;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47ee3a63300so41333625e9.2
         for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 07:37:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1768837030; x=1769441830; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=RR0EQdrHzqNMWncq/jeLY2Isz1ynOyNsnEP5EvAKYQs=;
-        b=mLB4vVmZiLPh1a4OPpDxF9PvAxR+3CpFO227pUzsjbE+AfiUcBkEBTjaAg92owK6hr
-         L5Wg2sFViVRuzPAyHGqQd2DUrD4luG1rlqbmOD9rCRqZKO3FzhBmU17K9t+jx1wAikmE
-         l1Gj5Sq8tYy7fPvbwHFfzwMhpTwBt80geDD81Pcx5dSJll3CCwrgJBnaymD2pD44G6y5
-         584ZeDdnjH4oOumQ0/I6nUdfI45n9orW1KbG+5gZwF3/qS6vVeM2ZH6Ci0xktp6DBNUs
-         x0jGXmD0imVkPtFyK2oduQt48KPw8XHPMo4rWIpyB8VCYzau9IRfPTFdiBosppZFUNak
-         t4dg==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YAJ5rrsIQO3zdo46d1c0nSslEijZZCK9wagFew85T0g=;
+        b=mM+vn5uBUxuS7TS/EpzAnSK6u+kd5llw7kIBjeyAGjLLcNJTWJ9IM1x+VEzG1g+EhZ
+         kwoRZWO1jxkKFvyLMMTp7a1P4MKRpxqJOtNxKJT7nOgKARttNYFwjFML6A78comptxnx
+         k5+lOFixR+FYsNUDsqChPMX3IL8X01bk+lwBpHwB+H0P3gkMeQDHi2gOGsx0AKZ6qs3n
+         IK0U41jJ4FSarBubgZCR3JbVLVqnhIj6U6HR2sO4lIVfl8Twcef2MM2NRGrntU+XzUyR
+         gNs1NKwrskMMjlcSrJC+gvcpiRxOMiiDxTw3dfVB3ZknwBUHrY06RpoGTOX7kH1p0qWB
+         Jx9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1768837030; x=1769441830;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=RR0EQdrHzqNMWncq/jeLY2Isz1ynOyNsnEP5EvAKYQs=;
-        b=nUnGYTa6rdNmu2g/1+y+l+BsUgfqTCd5xzuVCI4L9r/MyY7fr/VFTcs+QCj54KtP93
-         cXwfxsSGnS9gZLpUZK5LYWXf9sbj5Tt06NAuISCbOCHdN66nOPSBKqAqU+zm5csIZ6g1
-         gYIDpqcCZ/9vruylr3Q0VhJcyjtx9mhUtbKtKdH049d0I3oGMG/7OLu57ewxM2i/EsOy
-         tXwBtoz+5eJEqKtZpAun16CZ7O3c/eIrrGFSrZhXzZG6UJLwAqyqi852m8bpfdyXBK6Y
-         PWoLDUul578ZZY+csfYkyO0cixOTBHwF7c6FAx5H8YOvZYDdMF44dHx7k+G+uucrOjVM
-         eE+A==
-X-Gm-Message-State: AOJu0Ywg3IlktN3tzTeJBBK9WZqcC9wS1OL10BhjEHX/jKwlDq7bINlT
-	fAhdcSr51VzO5p0P+9X6BCwW8tkwb1M6kLgH2yxCp5sfoAPtaiiq5xtcB3bfbQ==
-X-Gm-Gg: AZuq6aI/shr0hQSZB7DQ2bPYX/RKYyRyA2En2MIySoYCxI8Bnw9wjdVMbAhzSpAmipP
-	WKB4xy/pNJLZtlxK/kcc5UPGkLN4jw9oxm3i9eqk/jWSRlD2IKckqHmUvj5H2NJb3wEgalvRI1q
-	cu+lSx+cQm0PWt7+onvX/cBaeRas53eDP589He5lady1ZgeC2f03HcnW1y/p78PY2Gwub0N0u/u
-	ypBqYadQfLoCc8SWvZaEJemVtFsbFIYKVSHWfjD/l0t9KNkZqcyrzElQ/DBr0Qr2ZEPvVv4lXKT
-	rPjqMYOAR3zZVOiG1/DTtvfO9g8C+tig6e3CxedZZP7WTvzTFoi4fblEfQqaHxD/9ddxcQr60L8
-	v89TC/XN9pICFGbVwvk6M9vauomkvI3daTAYDeXxP/a9f+qU1jNQ7z0Nb3kpja3HmAFYO1Qsayh
-	bF5Y/t+m9X
-X-Received: by 2002:a05:6000:186c:b0:431:9b7:653 with SMTP id ffacd0b85a97d-435699a74a3mr15325874f8f.27.1768837030055;
-        Mon, 19 Jan 2026 07:37:10 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YAJ5rrsIQO3zdo46d1c0nSslEijZZCK9wagFew85T0g=;
+        b=KaOlCKETTTqfxiEjdgrGpnq0pl7JsLnfBEJXDmFjbyXJNo+qyO0JVgAmb2RQaroSra
+         Eg+A8w0Ud3v/joynNyALNWLVpuZgxkZfpFoWpwdwqy3sSUq0iVjIEfCeQHhPzRX0c6lW
+         awSG98ER7EZ+WyYe9XVZT3YL/yrry0RhQVxr40OjX7wiJBjI3YdOey36Iso8pMkeGqI7
+         WB7CvlCQpQtqyMaFWyFKYntSBx54TLkGNX6Lh9N1EqQBsyWNGKcSCeLUXZyaoqOUhIrt
+         JcFxvQQR/+z4L/Rr2wUoeHbTkZ0duL3l6R6praPC0+G1A2dhMoGL54J1+4t3fvHP9mlH
+         Dt6A==
+X-Gm-Message-State: AOJu0YzdUaCoM5FzApwhBOH1Wijv7BpLxpwXDwtEMx7mNUOOWjuy+rbk
+	QxxqTyp3gaH96IuHPlHuqSuayYFVII9P8vyP+wFMbSsw0xNlrmOk1ArgtGhSCw==
+X-Gm-Gg: AY/fxX5IpnyLWSRDz5S+fwaenfIYIho0HfJMT/iWlsVnBoDn6C+SdvmY8Y+2dvuZrFq
+	IDXJkMr0HV/EAy0zIIOjUo0Ay9CkEBJNgPzs5TuwC+9Rzz5P/UF6wd4V4QnVeEIABSwJNhzQ8j1
+	7Cvby9HTGqVFOEGmQVjv3S/fg4wZRaub4usjFlLNsSCao78XG2kjXHpW6fLj3kOBDAt198GXgAK
+	bAS6MuHQ/CNhZpBLxSZArf4bifXczvzxjthdTzWm3ubutG3AgHxqp0k0OLm9Xs9Pw4PcktHGKDa
+	+X8SwRYXf7nuUDpni0wWwGn8N3yEXs42Dnlf0qRqjiBeNcITuj8pccw6oUedljtmnNxKkLHehNF
+	nZQFW3fT5B/xOjkXNEAfWZVMqABsrw3gY6UVW/FGdHQlwbAVr+h1WSgjLyqpAWwVIl2ZMCda/vh
+	tcZEQFCYho
+X-Received: by 2002:a05:600c:1d16:b0:47d:2093:649f with SMTP id 5b1f17b1804b1-4801e2f912amr177869575e9.8.1768837029359;
+        Mon, 19 Jan 2026 07:37:09 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43569921dedsm23662989f8f.9.2026.01.19.07.37.09
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43569921dedsm23662989f8f.9.2026.01.19.07.37.08
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Jan 2026 07:37:09 -0800 (PST)
+        Mon, 19 Jan 2026 07:37:08 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] freerdp3: upgrade 3.20.0 -> 3.20.2
-Date: Mon, 19 Jan 2026 16:37:08 +0100
-Message-ID: <20260119153708.580011-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/2] raptor2: patch CVE-2024-57822 and CVE-2024-57823
+Date: Mon, 19 Jan 2026 16:37:07 +0100
+Message-ID: <20260119153708.580011-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260119153708.580011-1-skandigraun@gmail.com>
-References: <20260119153708.580011-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 15:37:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123642
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123641
 
-Contains fixes for the following vulnerabilities:
-CVE-2026-22851, CVE-2026-22852, CVE-2026-22853, CVE-2026-22854,
-CVE-2026-22855, CVE-2026-22856, CVE-2026-22857, CVE-2026-22858,
-CVE-2026-22859
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-57822
+https://nvd.nist.gov/vuln/detail/CVE-2024-57823
 
-Changelogs:
-https://www.freerdp.com/2026/01/14/3_20_1-release
-https://www.freerdp.com/2026/01/14/3_20_2-release
+Pick the patches mentioned in the github issue[1] mentioned
+in the NVD advisories (both of them are covered by the same issue)
+
+[1]: https://github.com/dajobe/raptor/issues/70
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../freerdp/{freerdp3_3.20.0.bb => freerdp3_3.20.2.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.20.0.bb => freerdp3_3.20.2.bb} (99%)
+ .../raptor2/raptor2/CVE-2024-57822.patch      | 44 +++++++++++++++++++
+ .../raptor2/raptor2/CVE-2024-57823.patch      | 31 +++++++++++++
+ .../recipes-support/raptor2/raptor2_2.0.16.bb |  2 +
+ 3 files changed, 77 insertions(+)
+ create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+ create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
-similarity index 99%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
-index ee3fd8d843..81f160a848 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.20.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
-@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
- 
- inherit pkgconfig cmake ptest
- 
--SRCREV = "b8e790a02ede8dd64ff7177fb9027d1844e66bb6"
-+SRCREV = "ef106b0c5adf739085ff4e8f45ef384e5a1c7bb3"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag=${PV} \
-            file://run-ptest"
+diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+new file mode 100644
+index 0000000000..cb98f4250c
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+@@ -0,0 +1,44 @@
++From 3b0ded4ae8110b6291d030af927ecd08197e668f Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 6 Feb 2025 21:12:37 -0800
++Subject: [PATCH] Fix Github issue 70 A) Integer Underflow in
++ raptor_uri_normalize_path()
++
++From: Dave Beckett <dave@dajobe.org>
++
++(raptor_uri_normalize_path): Return empty buffer if path gets to 0
++length
++
++CVE: CVE-2024-57822
++Upstream-Status: Backport [github.com/dajobe/raptor/commit/da7a79976bd0314c23cce55d22495e7d29301c44]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/raptor_rfc2396.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/src/raptor_rfc2396.c b/src/raptor_rfc2396.c
++index 89183d9..2f0195f 100644
++--- a/src/raptor_rfc2396.c
+++++ b/src/raptor_rfc2396.c
++@@ -351,6 +351,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++           *dest++ = *s++;
++         *dest = '\0';
++         path_len -= len;
+++        if(path_len <= 0) {
+++          *path_buffer = '\0';
+++          return 0;
+++        }
++ 
++         if(p && p < prev) {
++           /* We know the previous prev path component and we didn't do
++@@ -390,6 +394,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++     /* Remove <component>/.. at the end of the path */
++     *prev = '\0';
++     path_len -= (s-prev);
+++    if(path_len <= 0) {
+++      *path_buffer = '\0';
+++      return 0;
+++    }
++   }
++ 
++ 
+diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+new file mode 100644
+index 0000000000..79833a55cb
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+@@ -0,0 +1,31 @@
++From 0b028dd16eb504d3d4dcfa9c72ceb29a9e1f3915 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Fri, 7 Feb 2025 11:38:34 -0800
++Subject: [PATCH] Fix Github issue 70 B) Heap read buffer overflow in ntriples
++ bnode
++
++From: Dave Beckett <dave@dajobe.org>
++
++(raptor_ntriples_parse_term_internal): Only allow looking at the last
++character of a bnode ID only if bnode length >0
++
++CVE: CVE-2024-57823
++Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/ece2c79df43091686a538b8231cf387d84bfa60e]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/raptor_ntriples.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/raptor_ntriples.c b/src/raptor_ntriples.c
++index 3276e79..ecc4247 100644
++--- a/src/raptor_ntriples.c
+++++ b/src/raptor_ntriples.c
++@@ -212,7 +212,7 @@ raptor_ntriples_parse_term_internal(raptor_world* world,
++             locator->column--;
++             locator->byte--;
++           }
++-          if(term_class == RAPTOR_TERM_CLASS_BNODEID && dest[-1] == '.') {
+++          if(term_class == RAPTOR_TERM_CLASS_BNODEID && position > 0 && dest[-1] == '.') {
++             /* If bnode id ended on '.' move back one */
++             dest--;
++ 
+diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
+index 03e57ce86f..1b77103a8d 100644
+--- a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
++++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
+@@ -13,6 +13,8 @@ SRC_URI = " \
+     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
+     file://0001-Remove-the-access-to-entities-checked-private-symbol.patch \
+     file://raptor-2.0.16-dont_use_curl-config.patch \
++    file://CVE-2024-57822.patch \
++    file://CVE-2024-57823.patch \
+ "
+ SRC_URI[sha256sum] = "089db78d7ac982354bdbf39d973baf09581e6904ac4c92a98c5caadb3de44680"
  
 
