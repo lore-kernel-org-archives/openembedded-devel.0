@@ -1,601 +1,180 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7ECC8C98315
-	for <webhook@archiver.kernel.org>; Sun, 18 Jan 2026 22:24:46 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.23930.1768775080613163665
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 525D7C98315
+	for <webhook@archiver.kernel.org>; Mon, 19 Jan 2026 01:27:47 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.26843.1768786062861896399
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Jan 2026 14:24:40 -0800
+ Sun, 18 Jan 2026 17:27:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mWoHu5MS;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-78fb5764382so37101407b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 18 Jan 2026 14:24:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768775080; x=1769379880; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=9m9snX5QcoN959JmlkNCW0b+4Qw0imfwd16C+68tFYQ=;
-        b=mWoHu5MSeftNSrxVhf2epJ2TqOmhE+lYuVfZrktbq/SsLqlDUfBJbmveCLMEzw8T67
-         yiq4XOq3quJAPBBseVVKVFFuih7vvyJO1jA0HLlLCOSf2BwIj0ArJr0MNDJwdNEtAu3C
-         Jzmyl2bb+49nwBkvH7qC1D651UsCNGTogbVSx/uaUfHz7nraa70WPdg4stronsNH4Tha
-         eWbLVHJQ8fDe4sEgh2x0wmXRrcmK27tptHX5j64bezQKP0KzLbSCl/7m10VLmqBAd8dY
-         ghG94MrUwtVA0ggAgXg915B7iwu1diJA+ZMXbOvrYzgAQNQjF17dyk435hd8OjbmdhMS
-         lxzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768775080; x=1769379880;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9m9snX5QcoN959JmlkNCW0b+4Qw0imfwd16C+68tFYQ=;
-        b=aui7neaOWlFSD5TkwX8Ua0vvt7rHsz+6HVtup7kVdNUnMXqgtVfkaKqPzXP2Jh7Iqt
-         Cl1U7R0i6aJJZyxexlGaluIw5XSkTEMKdA2HvcnE0Tv4PYCuL+qha6dMfpacDbPgAxvi
-         pM1hvIQqjMP4Y+QC6uQYnOLKqupJP07ng1OJLnxJKEYZp0JkcWgz9z/vlDdFaCoLRYJH
-         m9Iu5/qjc5pZRgjjC9KsjWBamB8c/R+gI/WG4JhzxJweUe2NMTP0PDpRIIwJpJ9Z6MJo
-         LPCUNEQ8bVEHmEvs+X9uhAnN4oAZrdq8m9cmp5Rj8RMfWNirzoptk1ijew3McGXnjcAD
-         08Dg==
-X-Gm-Message-State: AOJu0YzYUBKrqpUHBXOSTfOhEu/VAjH8aS3Yw5SF+yFdt0pcMcqJL4nS
-	Bp9g3maZCAbxSEA8zxOlnL7RaKX1OCRBv11UVsrXlKMJelewOZQwGGLBGJU8WbBG3isdILplTPy
-	CphqZ2i+idbVQMfzPSnrWCMIoyRN46v4=
-X-Gm-Gg: AZuq6aLmTL/K0TQ0FUDF9RLb7wJmZQvt0svOkv2lOEd6h0hBAo6y1aquaF+gh2HgNs5
-	TenZ2YQhlsDD2UelK9gVfesV4TZbVWB8lMpoSUcLegtpVQbt7NYpjdDm4C+9IrC9nl6Z1PrnB6Y
-	rh/P4xRhobMkwPcQqXfr1eVSi+DSvPtoR+64s0/JY4vKGYDetMZM26CFYNtJSUR4oXL6Ra550Gy
-	+JdrW9j8jAknbBYyaRcJbDtTX4G4EXO9MEcxSn8zOGZiOwHtd7+9FZfBufF7CchgcNKVl3n4wo4
-	mLHXqhiRT5ROe3dL1b66z06SxMsfApXv3exN1fZeJGsnS6NDOe/hxXgAvfBK4yqOBazmU6aqoVl
-	2GVXvHGc0iQ6Eq4CNZ6D/H4O/ZTqBSA0jkQ54DvpmXpCVrA==
-X-Received: by 2002:a05:690c:f83:b0:78f:be14:4308 with SMTP id
- 00721157ae682-793c5406f26mr77568677b3.63.1768775079648; Sun, 18 Jan 2026
- 14:24:39 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=uCEAHyf7;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1768786063; x=1800322063;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=JQCXnJTj8pki14R7dW+uSBENj6M+AMm9FnnedHCCzo4=;
+  b=uCEAHyf73FQUNsJF0sue9vT+EtM3D9mG1iQwlBXrSeCzMN3IKUr8lvMR
+   opvnAXZGU4fa7gPHuck94cujBHVLWIBEQkIbjjhmq34QbywgE6leAwuns
+   1hcrC99X/r+d7XlHv12VFxcHraELTIbBnEJAvGSvjdcjBg/+/df5rdiHm
+   FBATLgbqOijOttaAr84+Eeo4yQrdXXnrRC8HVFnhFn41fYAh2pW+GEQiZ
+   ZHC0o7eaXEQ2Dn4kj0An8i1tKivB0a0IOvzxr1n/JEY49Sa7ybO8T9cbU
+   s8B+bp8OoIQabbLAsmPTAnhbTFiUWji5I/I3sLURIRMsFPvwKCtIwxTRn
+   w==;
+X-CSE-ConnectionGUID: WK8ukzAKQvyG30aMYmQn5A==
+X-CSE-MsgGUID: VPSUrE8WTSmu9USt8XgSgg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11675"; a="205025362"
+X-IronPort-AV: E=Sophos;i="6.21,237,1763391600"; 
+   d="scan'208";a="205025362"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.128])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2026 10:27:41 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id D9F15C01B11
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 01:27:40 +0000 (UTC)
+Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 8EAF0C01196
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 01:27:40 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id 4687520000E1
+	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 01:27:38 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-networking][PATCH] adcli: upgrade 0.9.2 -> 0.9.3.1
+Date: Mon, 19 Jan 2026 09:27:07 +0800
+Message-ID: <20260119012707.15616-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260118134120.116239-1-f_l_k@t-online.de>
-In-Reply-To: <20260118134120.116239-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 Jan 2026 14:24:14 -0800
-X-Gm-Features: AZwV_QjL17diaFARKUJ8VOA5N7S2KQgE9PaIB-fIpD3KKeSMO2ETGws0BzdIPkY
-Message-ID: <CAMKF1sqckdq7nBh6k4Q00W76=9O49oLdKZTc_b=ASj-0DXa17g@mail.gmail.com>
-Subject: Re: [meta-gnome][PATCHv4] gnome-session: update 47.0.1 -> 49.2
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000004f60e00648b10a44"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 18 Jan 2026 22:24:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123578
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Jan 2026 01:27:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123579
 
---0000000000004f60e00648b10a44
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+1. Add pkgconfig to solve following configure error:
+ ../sources/adcli-0.9.3.1/configure: line 15340: syntax error near unexpected token `LIBSELINUX,'
+ ../sources/adcli-0.9.3.1/configure: line 15340: `PKG_CHECK_MODULES(LIBSELINUX, libselinux, found_libselinux=yes, found_libselinux=no)'
+ 
+2. Add PACKAGECONFIG[selinux] for new selinux support in 0.9.3.1.
 
-I think we need to reconcile a few things here. gnome 49+ is not shying
-from hard depending on systemd. e.g. gnome-session and gdm packages now
-require systemd as hard dependency. Which is fine, However, please address
-the trickle down effect of this change as well, since there are other
-recipes depending on gnome-session or gdm, they should also check for
-systemd distro feature since they wont work without systemd anymore as well=
-.
+3. Add 0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch to fix SELINUX_MAKEFILE file check in 0.9.3.1.
 
-On Sun, Jan 18, 2026 at 5:41=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
-te:
+4. Add --disable-offline-join-support to solve following configure error
 
-> - update dependencies
-> - inherit manpages mime
-> - build x11 depending on DISTRO_FEATURES
-> - rename packageconfig man->manpages to work with manpages class
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 49.0
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> - Translation updates
-> - Fixed build with musl libc
-> - Fixed some memory corruption bugs that led to gnome-session-init-worker
->   crashing on logout
-> - Fixed a memory leak in gnome-session-init-worker
-> - Allowed Qt apps to use the Wayland text-input protocol, instead of
-> forcing
->   them to use the direct ibus integration plugin
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 49.rc
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> - Disabled the org.freedesktop.ScreenSaver proxy service on the login
-> screen
-> - Separated out the systemd-specific code from the gnome-session leader
-> process
->   into a dedicated executable. This makes it easier to integrate
-> distributions
->   that use alternative init systems with gnome-session (though note that
-> this
->   is still a usecase we don't officially support upstream)
-> - Translation updates
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 49.beta
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> - gnome-session is no longer started via a shell script, and instead all =
-of
->   the necessary setup is done in C.
-> - gnome-session's builtin service manager has been completely removed.
-> Service
->   management will now be handled entirely by the operating system's nativ=
-e
->   service manager (i.e. systemd). See the following blog post for more
-> information:
->   https://blogs.gnome.org/adrianvovk/2025/06/10/gnome-systemd-dependencie=
-s
-> - The "fail whale" dialog has been removed
-> - Various unused APIs and interfaces were removed, including:
->         - The org.gnome.SessionManager.Client and o.g.SM.App D-Bus
-> interfaces
->         - Various D-Bus APIs related to the service manager
->         - Various .desktop and .session file keys that were used only by
-> the
->           builtin service manager
->         - Fallback sessions, since there's no way to fall back anymore
-> - The code was significantly refactored
-> - gnome-session now provides a gnome-session-basic-services.target, that
-> sessions
->   like the GDM greeter and gnome-initial-setup can use to avoid listing
-> all of
->   the basic GNOME session services (like all the gnome-settings-daemon
-> plugins)
-> - The --autostart command line option was removed, and instead kiosk
-> sessions
->   should set Kiosk=3Dtrue in their session definition file.
-> - Updated GNOME's mimetype defaults to drop Evince (which was replaced
-> with Papers)
-> - Translation updates
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 49.alpha.1
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
->         Fix POTFILES to stop listing deleted files
->         Stop requiring the gnome-settings-daemon Wacom plugin, which
-> doesn't exist anymore
->         Ensure that we start localsearch when starting a GNOME session vi=
-a
-> systemd
->         Translation updates
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 49.alpha.0
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
->         Removed XSMP
->         Removed session restore functionality
->         X11 sessions are disabled by default
->         Added a default mimeapps list for GNOME's core apps
->         gsd-xsettings now starts on demand in Wayland
->         Dropped gnome-dummy session
->         Allow Inhibit() with no app ID
->         Unset all LC_* variables that are bound to REGION
->         Ported fail whale to gtk4
->         Dropped session selector GUI
->         Dropped the hardware acceleration check
->         gnome-session-inhibit: Propagate parent death
->         gnome-session-inhibit: Fixup terminal handling
->
-> Contributors:
->   Benjamin Berg, Alessandro Bono, Matthias Clasen, gnome-build-meta-bot,
->   Neal Gompa, Sophie Herold, Javier Jard=C3=B3n, Chris Mayo, Simon McVitt=
-ie,
->   Jordan Petridis, Ray Strode, Joan Torres, Adrian Vovk, Chris Williams
->
-> Translators:
->   =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
-], Aefgh Threenine [th], A S Alam [pa], Baxrom Raxmatov
-> [uz],
->   Ekaterine Papava [ka], Martin [sl], Quentin PAG=C3=88S [oc], Vasil Pupk=
-in [be]
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Version 48.0
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
->         The gnome-session script no longer re-runs itself as a subprocess
->         GNOME OS CI was ported to use a CI template
->         Integrated new CI-based release process
->         Fix bugs caused by systemd v257's inhibitor behavior changes
->         Make `gnome-session --version` print to stdout rather than syslog
->         Translation updates
->         README updates
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../gnome-session/gnome-session_47.0.1.bb     | 35 -------------------
->  .../gnome-session/gnome-session_49.2.bb       | 30 ++++++++++++++++
->  2 files changed, 30 insertions(+), 35 deletions(-)
->  delete mode 100644 meta-gnome/recipes-gnome/gnome-session/
-> gnome-session_47.0.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-session/
-> gnome-session_49.2.bb
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-session/
-> gnome-session_47.0.1.bb b/meta-gnome/recipes-gnome/gnome-session/
-> gnome-session_47.0.1.bb
-> deleted file mode 100644
-> index 3bb1cb1651..0000000000
-> --- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_47.0.1.bb
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -SUMMARY =3D "GNOME session"
-> -LICENSE =3D "GPL-2.0-only"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> -
-> -DEPENDS =3D " \
-> -    glib-2.0-native \
-> -    xtrans \
-> -    libice \
-> -    libsm \
-> -    virtual/libx11 \
-> -    gtk+3 \
-> -    gnome-desktop \
-> -    json-glib \
-> -    systemd \
-> -"
-> -
-> -
-> -inherit gnomebase gettext gsettings upstream-version-is-even
-> features_check
-> -
-> -REQUIRED_DISTRO_FEATURES =3D "polkit systemd pam gobject-introspection-d=
-ata"
-> -
-> -SRC_URI =3D "
-> https://download.gnome.org/sources/gnome-session/${@oe.utils.trim_version=
-('${PV}',
-> 1)}/gnome-session-${PV}.tar.xz"
-> -SRC_URI[sha256sum] =3D
-> "56ae9c68e49995793eb2096bcdc4533b111669e1e54c8b6e0b1d952f6a5e8a70"
-> -
-> -PACKAGECONFIG ??=3D ""
-> -
-> -PACKAGECONFIG[docbook] =3D "-Ddocbook=3Dtrue, -Ddocbook=3Dfalse"
-> -PACKAGECONFIG[man] =3D "-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native libxslt=
--native"
-> -
-> -FILES:${PN} +=3D " \
-> -   ${datadir}/xdg-desktop-portal \
-> -    ${datadir}/xsessions \
-> -    ${datadir}/wayland-sessions \
-> -    ${systemd_user_unitdir} \
-> -"
-> diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb
-> b/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb
-> new file mode 100644
-> index 0000000000..119e2ff951
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_49.2.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY =3D "GNOME session"
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +
-> +DEPENDS =3D " \
-> +    glib-2.0 \
-> +    gtk4 \
-> +    gnome-desktop \
-> +    json-glib \
-> +    systemd \
-> +"
-> +
-> +inherit gnomebase gettext gsettings upstream-version-is-even mime
-> mime-xdg manpages features_check
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "systemd"
-> +
-> +SRC_URI[archive.sha256sum] =3D
-> "fcdb4f45d6a60d84e9ecae1e3740bab6e55bab0cb49e0fb38280e9b38f3a8485"
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-> +
-> +PACKAGECONFIG[docbook] =3D "-Ddocbook=3Dtrue, -Ddocbook=3Dfalse"
-> +PACKAGECONFIG[x11] =3D "-Dx11=3Dtrue, -Dx11=3Dfalse,virtual/libx11"
-> +PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native
-> libxslt-native"
-> +
-> +FILES:${PN} +=3D " \
-> +   ${datadir}/xdg-desktop-portal \
-> +    ${datadir}/xsessions \
-> +    ${datadir}/wayland-sessions \
-> +    ${systemd_user_unitdir} \
-> +"
-> --
-> 2.52.0
->
->
+ configure: error: Couldn't build offline join support, Samba version too old or libnatapi devel package is missing
 
---0000000000004f60e00648b10a44
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+---
+ ...ix-selinux-error-for-cross_compiling.patch | 49 +++++++++++++++++++
+ .../{adcli_0.9.2.bb => adcli_0.9.3.1.bb}      | 15 ++++--
+ 2 files changed, 60 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/adcli/adcli/0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch
+ rename meta-networking/recipes-connectivity/adcli/{adcli_0.9.2.bb => adcli_0.9.3.1.bb} (58%)
 
-<div dir=3D"ltr">I think we need to reconcile a few things here. gnome 49+ =
-is not shying from hard depending on systemd. e.g. gnome-session and gdm pa=
-ckages now require systemd as hard dependency. Which is fine, However, plea=
-se address the trickle down effect of this change as well, since there are =
-other recipes depending on gnome-session or gdm, they should also check for=
- systemd distro feature since they wont work without systemd anymore as wel=
-l.</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"lt=
-r" class=3D"gmail_attr">On Sun, Jan 18, 2026 at 5:41=E2=80=AFAM Markus Volk=
- &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">- update depende=
-ncies<br>
-- inherit manpages mime<br>
-- build x11 depending on DISTRO_FEATURES<br>
-- rename packageconfig man-&gt;manpages to work with manpages class<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 49.0<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-- Translation updates<br>
-- Fixed build with musl libc<br>
-- Fixed some memory corruption bugs that led to gnome-session-init-worker<b=
-r>
-=C2=A0 crashing on logout<br>
-- Fixed a memory leak in gnome-session-init-worker<br>
-- Allowed Qt apps to use the Wayland text-input protocol, instead of forcin=
-g<br>
-=C2=A0 them to use the direct ibus integration plugin<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 49.rc<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-- Disabled the org.freedesktop.ScreenSaver proxy service on the login scree=
-n<br>
-- Separated out the systemd-specific code from the gnome-session leader pro=
-cess<br>
-=C2=A0 into a dedicated executable. This makes it easier to integrate distr=
-ibutions<br>
-=C2=A0 that use alternative init systems with gnome-session (though note th=
-at this<br>
-=C2=A0 is still a usecase we don&#39;t officially support upstream)<br>
-- Translation updates<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 49.beta<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-- gnome-session is no longer started via a shell script, and instead all of=
-<br>
-=C2=A0 the necessary setup is done in C.<br>
-- gnome-session&#39;s builtin service manager has been completely removed. =
-Service<br>
-=C2=A0 management will now be handled entirely by the operating system&#39;=
-s native<br>
-=C2=A0 service manager (i.e. systemd). See the following blog post for more=
- information:<br>
-=C2=A0 <a href=3D"https://blogs.gnome.org/adrianvovk/2025/06/10/gnome-syste=
-md-dependencies" rel=3D"noreferrer" target=3D"_blank">https://blogs.gnome.o=
-rg/adrianvovk/2025/06/10/gnome-systemd-dependencies</a><br>
-- The &quot;fail whale&quot; dialog has been removed<br>
-- Various unused APIs and interfaces were removed, including:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - The org.gnome.SessionManager.Client and <a hr=
-ef=3D"http://o.g.SM.App" rel=3D"noreferrer" target=3D"_blank">o.g.SM.App</a=
-> D-Bus interfaces<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - Various D-Bus APIs related to the service man=
-ager<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - Various .desktop and .session file keys that =
-were used only by the<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 builtin service manager<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 - Fallback sessions, since there&#39;s no way t=
-o fall back anymore<br>
-- The code was significantly refactored<br>
-- gnome-session now provides a gnome-session-basic-services.target, that se=
-ssions<br>
-=C2=A0 like the GDM greeter and gnome-initial-setup can use to avoid listin=
-g all of<br>
-=C2=A0 the basic GNOME session services (like all the gnome-settings-daemon=
- plugins)<br>
-- The --autostart command line option was removed, and instead kiosk sessio=
-ns<br>
-=C2=A0 should set Kiosk=3Dtrue in their session definition file.<br>
-- Updated GNOME&#39;s mimetype defaults to drop Evince (which was replaced =
-with Papers)<br>
-- Translation updates<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 49.alpha.1<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Fix POTFILES to stop listing deleted files<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Stop requiring the gnome-settings-daemon Wacom =
-plugin, which doesn&#39;t exist anymore<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Ensure that we start localsearch when starting =
-a GNOME session via systemd<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Translation updates<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 49.alpha.0<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Removed XSMP<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Removed session restore functionality<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 X11 sessions are disabled by default<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Added a default mimeapps list for GNOME&#39;s c=
-ore apps<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 gsd-xsettings now starts on demand in Wayland<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Dropped gnome-dummy session<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Allow Inhibit() with no app ID<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Unset all LC_* variables that are bound to REGI=
-ON<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Ported fail whale to gtk4<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Dropped session selector GUI<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Dropped the hardware acceleration check<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 gnome-session-inhibit: Propagate parent death<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 gnome-session-inhibit: Fixup terminal handling<=
-br>
-<br>
-Contributors:<br>
-=C2=A0 Benjamin Berg, Alessandro Bono, Matthias Clasen, gnome-build-meta-bo=
-t,<br>
-=C2=A0 Neal Gompa, Sophie Herold, Javier Jard=C3=B3n, Chris Mayo, Simon McV=
-ittie,<br>
-=C2=A0 Jordan Petridis, Ray Strode, Joan Torres, Adrian Vovk, Chris William=
-s<br>
-<br>
-Translators:<br>
-=C2=A0 =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B =
-[sr], Aefgh Threenine [th], A S Alam [pa], Baxrom Raxmatov [uz],<br>
-=C2=A0 Ekaterine Papava [ka], Martin [sl], Quentin PAG=C3=88S [oc], Vasil P=
-upkin [be]<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-Version 48.0<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 The gnome-session script no longer re-runs itse=
-lf as a subprocess<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 GNOME OS CI was ported to use a CI template<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Integrated new CI-based release process<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Fix bugs caused by systemd v257&#39;s inhibitor=
- behavior changes<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Make `gnome-session --version` print to stdout =
-rather than syslog<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 Translation updates<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 README updates<br>
-<br>
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
-=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
-"_blank">raj.khem@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../gnome-session/<a href=3D"http://gnome-session_47.0.1.bb" rel=3D"n=
-oreferrer" target=3D"_blank">gnome-session_47.0.1.bb</a>=C2=A0 =C2=A0 =C2=
-=A0| 35 -------------------<br>
-=C2=A0.../gnome-session/<a href=3D"http://gnome-session_49.2.bb" rel=3D"nor=
-eferrer" target=3D"_blank">gnome-session_49.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 30 ++++++++++++++++<br>
-=C2=A02 files changed, 30 insertions(+), 35 deletions(-)<br>
-=C2=A0delete mode 100644 meta-gnome/recipes-gnome/gnome-session/<a href=3D"=
-http://gnome-session_47.0.1.bb" rel=3D"noreferrer" target=3D"_blank">gnome-=
-session_47.0.1.bb</a><br>
-=C2=A0create mode 100644 meta-gnome/recipes-gnome/gnome-session/<a href=3D"=
-http://gnome-session_49.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-se=
-ssion_49.2.bb</a><br>
-<br>
-diff --git a/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome=
--session_47.0.1.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_47.0=
-.1.bb</a> b/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome-=
-session_47.0.1.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_47.0.=
-1.bb</a><br>
-deleted file mode 100644<br>
-index 3bb1cb1651..0000000000<br>
---- a/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome-sessio=
-n_47.0.1.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_47.0.1.bb</=
-a><br>
-+++ /dev/null<br>
-@@ -1,35 +0,0 @@<br>
--SUMMARY =3D &quot;GNOME session&quot;<br>
--LICENSE =3D &quot;GPL-2.0-only&quot;<br>
--LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf=
-4a4263&quot;<br>
--<br>
--DEPENDS =3D &quot; \<br>
--=C2=A0 =C2=A0 glib-2.0-native \<br>
--=C2=A0 =C2=A0 xtrans \<br>
--=C2=A0 =C2=A0 libice \<br>
--=C2=A0 =C2=A0 libsm \<br>
--=C2=A0 =C2=A0 virtual/libx11 \<br>
--=C2=A0 =C2=A0 gtk+3 \<br>
--=C2=A0 =C2=A0 gnome-desktop \<br>
--=C2=A0 =C2=A0 json-glib \<br>
--=C2=A0 =C2=A0 systemd \<br>
--&quot;<br>
--<br>
--<br>
--inherit gnomebase gettext gsettings upstream-version-is-even features_chec=
-k<br>
--<br>
--REQUIRED_DISTRO_FEATURES =3D &quot;polkit systemd pam gobject-introspectio=
-n-data&quot;<br>
--<br>
--SRC_URI =3D &quot;<a href=3D"https://download.gnome.org/sources/gnome-sess=
-ion/$%7B@oe.utils.trim_version(&#39;$%7BPV%7D" rel=3D"noreferrer" target=3D=
-"_blank">https://download.gnome.org/sources/gnome-session/${@oe.utils.trim_=
-version(&#39;${PV}</a>&#39;, 1)}/gnome-session-${PV}.tar.xz&quot;<br>
--SRC_URI[sha256sum] =3D &quot;56ae9c68e49995793eb2096bcdc4533b111669e1e54c8=
-b6e0b1d952f6a5e8a70&quot;<br>
--<br>
--PACKAGECONFIG ??=3D &quot;&quot;<br>
--<br>
--PACKAGECONFIG[docbook] =3D &quot;-Ddocbook=3Dtrue, -Ddocbook=3Dfalse&quot;=
-<br>
--PACKAGECONFIG[man] =3D &quot;-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native libx=
-slt-native&quot;<br>
--<br>
--FILES:${PN} +=3D &quot; \<br>
--=C2=A0 =C2=A0${datadir}/xdg-desktop-portal \<br>
--=C2=A0 =C2=A0 ${datadir}/xsessions \<br>
--=C2=A0 =C2=A0 ${datadir}/wayland-sessions \<br>
--=C2=A0 =C2=A0 ${systemd_user_unitdir} \<br>
--&quot;<br>
-diff --git a/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome=
--session_49.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_49.2.b=
-b</a> b/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome-sess=
-ion_49.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_49.2.bb</a>=
-<br>
-new file mode 100644<br>
-index 0000000000..119e2ff951<br>
---- /dev/null<br>
-+++ b/meta-gnome/recipes-gnome/gnome-session/<a href=3D"http://gnome-sessio=
-n_49.2.bb" rel=3D"noreferrer" target=3D"_blank">gnome-session_49.2.bb</a><b=
-r>
-@@ -0,0 +1,30 @@<br>
-+SUMMARY =3D &quot;GNOME session&quot;<br>
-+LICENSE =3D &quot;GPL-2.0-only&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf=
-4a4263&quot;<br>
-+<br>
-+DEPENDS =3D &quot; \<br>
-+=C2=A0 =C2=A0 glib-2.0 \<br>
-+=C2=A0 =C2=A0 gtk4 \<br>
-+=C2=A0 =C2=A0 gnome-desktop \<br>
-+=C2=A0 =C2=A0 json-glib \<br>
-+=C2=A0 =C2=A0 systemd \<br>
-+&quot;<br>
-+<br>
-+inherit gnomebase gettext gsettings upstream-version-is-even mime mime-xdg=
- manpages features_check<br>
-+<br>
-+REQUIRED_DISTRO_FEATURES =3D &quot;systemd&quot;<br>
-+<br>
-+SRC_URI[archive.sha256sum] =3D &quot;fcdb4f45d6a60d84e9ecae1e3740bab6e55ba=
-b0cb49e0fb38280e9b38f3a8485&quot;<br>
-+<br>
-+PACKAGECONFIG ??=3D &quot;${@bb.utils.filter(&#39;DISTRO_FEATURES&#39;, &#=
-39;x11&#39;, d)}&quot;<br>
-+<br>
-+PACKAGECONFIG[docbook] =3D &quot;-Ddocbook=3Dtrue, -Ddocbook=3Dfalse&quot;=
-<br>
-+PACKAGECONFIG[x11] =3D &quot;-Dx11=3Dtrue, -Dx11=3Dfalse,virtual/libx11&qu=
-ot;<br>
-+PACKAGECONFIG[manpages] =3D &quot;-Dman=3Dtrue, -Dman=3Dfalse,xmlto-native=
- libxslt-native&quot;<br>
-+<br>
-+FILES:${PN} +=3D &quot; \<br>
-+=C2=A0 =C2=A0${datadir}/xdg-desktop-portal \<br>
-+=C2=A0 =C2=A0 ${datadir}/xsessions \<br>
-+=C2=A0 =C2=A0 ${datadir}/wayland-sessions \<br>
-+=C2=A0 =C2=A0 ${systemd_user_unitdir} \<br>
-+&quot;<br>
--- <br>
-2.52.0<br>
-<br>
-</blockquote></div>
+diff --git a/meta-networking/recipes-connectivity/adcli/adcli/0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch b/meta-networking/recipes-connectivity/adcli/adcli/0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch
+new file mode 100644
+index 0000000000..b3b7702644
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/adcli/adcli/0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch
+@@ -0,0 +1,49 @@
++Subject: [PATCH] configure.ac: Fix selinux error for
++ cross_compiling
++
++Before this patch:
++configure file will check SELINUX_MAKEFILE /usr/share/selinux/devel/Makefile which is defined for target.
++But in cross_compiling environment, the SELINUX_MAKEFILE should defined for host
++
++So following error occurs
++| checking for libselinux... no
++| checking for /usr/share/selinux/devel/Makefile... configure: error: cannot check for file existence when cross compiling
++| NOTE: The following config.log files may provide further information.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
++---
++ configure.ac | 16 +++++++++++++---
++ 1 file changed, 13 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index b0be041..b5c3baf 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -171,9 +171,19 @@ fi
++ SELINUX_MAKEFILE=/usr/share/selinux/devel/Makefile
++ AC_SUBST([SELINUX_MAKEFILE])
++ 
++-AC_CHECK_FILE([$SELINUX_MAKEFILE],
++-              [build_selinux=yes],
++-              [build_selinux=no])
+++AS_IF([test "x$cross_compiling" = "xyes"],
+++    [
+++        AS_IF([test -f "${SYSROOT_DIR}/usr/share/selinux/devel/Makefile"],
+++            [build_selinux=yes],
+++            [build_selinux=no])
+++        SELINUX_MAKEFILE="${SYSROOT_DIR}/usr/share/selinux/devel/Makefile"
+++    ],
+++    [
+++        SELINUX_MAKEFILE=/usr/share/selinux/devel/Makefile
+++        AC_CHECK_FILE([$SELINUX_MAKEFILE],
+++            [build_selinux=yes],
+++            [build_selinux=no])
+++    ])
++ 
++ if test x$build_selinux_support = xyes && test x$build_selinux = xno; then
++     AC_MSG_ERROR([Couldn't build SELinux support, SELinux policy devel packages missing])
++-- 
++2.43.0
++
+diff --git a/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb b/meta-networking/recipes-connectivity/adcli/adcli_0.9.3.1.bb
+similarity index 58%
+rename from meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb
+rename to meta-networking/recipes-connectivity/adcli/adcli_0.9.3.1.bb
+index 7bd07491fe..a15afbe2ec 100644
+--- a/meta-networking/recipes-connectivity/adcli/adcli_0.9.2.bb
++++ b/meta-networking/recipes-connectivity/adcli/adcli_0.9.3.1.bb
+@@ -4,20 +4,27 @@ DESCRIPTION = "A helper library and tools for Active Directory client operations
+ HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
+ SECTION = "net"
+ 
+-SRCREV = "8e88e3590a19006362ea8b8dfdc18bb88b3cb3b5"
+-
+-SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;protocol=https;branch=master"
++SRCREV = "f3b69c2497c1a66359047abc3042c11cab2199e1"
+ 
++SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;protocol=https;branch=master;tag=${PV} \
++           file://0001-configure.ac-Fix-selinux-error-for-cross_compiling.patch \
++          "
+ 
+ LICENSE = "LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
+ 
+-inherit autotools xmlcatalog
++inherit autotools xmlcatalog pkgconfig
+ 
+ DEPENDS += "virtual/crypt krb5 openldap gettext libxslt xmlto libxml2-native \
+             cyrus-sasl libxslt-native xmlto-native coreutils-native\
+            "
+ 
++PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
++PACKAGECONFIG[selinux] = ",--disable-selinux-support,libselinux,libselinux"
++
+ EXTRA_OECONF += "--disable-silent-rules \
+                  --disable-doc \
++                 --disable-offline-join-support \
+                 "
++
++FILES:${PN} += "${datadir}"
+-- 
+2.43.0
 
---0000000000004f60e00648b10a44--
 
