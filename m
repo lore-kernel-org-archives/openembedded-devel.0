@@ -2,489 +2,534 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3943CA5FAA
-	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 16:32:27 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10523.1768926744622810981
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C162CCA5FAB
+	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 16:33:17 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10537.1768926790959437698
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jan 2026 08:32:24 -0800
+ Tue, 20 Jan 2026 08:33:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FiCZ8scZ;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-792768a0cd3so49810497b3.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 08:32:24 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768926744; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eL5bjDhj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-78fc3572431so58400207b3.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 08:33:10 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1768926790; cv=none;
         d=google.com; s=arc-20240605;
-        b=H9+Wl0onkDCW82/yU68sJ7FkZp0bicqeaKoweVZ6JyKcW6boimyUHPJyGgDcrbNzud
-         drTjk0zRCYWox2HrHfuaMzoJ7Syhn5pJmSwwenfCpcYSr2qKRJKtOvW9SNYjYUJIZFhj
-         htEyGiJsvgE0Yn9r2Mtc51RrWa3eGonyjxOSMf+fcn1/F1orwiCV6fWJGIvPi+eHdRMp
-         S7R4VzpBdgpd0PDI5m/qQIfZwgS24446ClKhYfFB4bQx7d6ugyaCqMaQDCjWSpzwN4Fx
-         dxqfS50BUQahzGVaU6YX87YbflJY5q5xsguPsImN9IfvDg4CUBOJPF93otK0h3d4JCCS
-         dRWA==
+        b=a7JvRBMSpDUageojyp1YiSWijB3kJB/lBw6hiRI15ol9BzVtF3vSmB5K5Dc4o6VELw
+         MYBGv129N2ba3r+sGZ+KlKluF3i4Ty17Nh6dzFjGmjr6ZeImtaazOMzu9UreWHmCQTPZ
+         xYTYsktCClLIoMtDGbj6x45dtzPy9Sc9kqYh8kn3pAd+zbVLNY25McivXpi/Vhgjncci
+         h3bS/PMyYuladIaWt/GUZM660RUO2hU9i6k76sZpmcJpOj8rWs1dhz7DdTPDMwE0X+/g
+         fdA+ClqrL2/ej1yjzsm4Hd6mSLZ5BQcZym9urJwPzqBWwZlcNJTR0IWcRuMEY+7ILaOl
+         Hpeg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=mXGTcl5mwW+5/Qa4dBt0KvW9sNYbOXAVKcTMg68Re9g=;
-        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
-        b=hShzNpQbtOqYf6k7JpV30/SZ9E5taKY6GEUu95vPiFTDCpKzQnHxycVldyRGMuYnaV
-         drXn8qh4zMmPutGu+dRLjxX7sZqoBGJ8kTTC4ZOAcn8ClYxGjFAhF0W++QLzrR7kmixa
-         TCV023Pk+YDu6bkk96+AVUKvXKuBOU9CmH6RUQS+MK+h8D+PsVXMMckgFZoB2BV7TEVe
-         2kDd6PoYWTcBzupcbtptaqjzg3JwQIdDD+MiqsBx0kt41t3ULSKB6UkpGu0krhM9XAXh
-         gtA1NoQWN4KBqdDRKx90yshnDskeAD0HRi7qxV2V041UehYzuufmcjaSTvEvEJTw23ad
-         8Y3A==;
+        bh=WyE3tcZfHNIZA6FfIO4xIcHtsr3M8UPCuR8WEWvL50A=;
+        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
+        b=PXQCVF0cp9Ej2ozFxrilB0pBSCwC6snGZoj78IKnk0UpEqg5zElBCqb8hvpni6Ovae
+         31cR/5lwE51OIR3hyX9wHzlVyweWz+kLAFA5C6ZBBEetIUiKL8Qs4r2vM+oCAYKCwfvo
+         47zArBNATl71hLMPqyx/E/8ha3j1p9699IB2xB2jMzSv2mQappiB16PL/x1K8xbZIcLC
+         Pt2BzvSvsxiIM68Oc+ntw6yz9PciSRt7rZvz6MGiQQ4Y1CAtBEPiyp7ss8wexhhXbm51
+         mNkwBxRaR1vFJX/+CFQTt+oGw+SzHBxGMqpZuG4BfIQfRgEfSFYnVIbA+fRvliKPlWvz
+         541A==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768926744; x=1769531544; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1768926790; x=1769531590; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=mXGTcl5mwW+5/Qa4dBt0KvW9sNYbOXAVKcTMg68Re9g=;
-        b=FiCZ8scZgGDh8if7iHCSIAzFAyR/HI83+Rv2tEUIm7isFv42ux+Byby+jppwtFchYm
-         6tITrZZL50KR6bJmZQ1xRmVZXAddc3tC8sQRt0cO6FN2tXIgbCJgLluTqQEi+K2bR4G1
-         D9VdWIaTTxUllU/wevTICjs5oc/9S9lzzbdQz6fFQx9fuKkVpfqKjWzbADXNRfwr9dY3
-         tBISmZpzJl4ELgQ+XS0eqReJiziC3b4ln+Bcny7m9vOaV2NxiNN5AN6b8C2eCEcg3Jtf
-         QSvNXqzfCPKqeDh09hHIFMl8zXQxTiMSQWktOZfwdbihanGoiK7lUPKsLb6Vg3iiYsCn
-         zheg==
+        bh=WyE3tcZfHNIZA6FfIO4xIcHtsr3M8UPCuR8WEWvL50A=;
+        b=eL5bjDhj+3c302AumWzxfnYV5ORqinKj+4pxRQShun7njuw3BJxh3sBYOD/dflxn4W
+         VYdOpU/TClhxsiEbfg+UDncDYeHTChBjnaEuEgwutxdsOPeMwKPTK3S4+BTLW+IFV4C7
+         S8DV4eJq2Qa7IMVyF52Mk63Ua482EFx9fVKUINzzqy3Yxe5cIv41fqWdLCM5n7OzvYYw
+         JLGym5Ss3n3KjddssGDkqXBrL0nLmcSuS1ozlDMhEmuuTFSjK45qTQPT0AyBw4Nshz4p
+         /61D3DA+T1ztQResvb5XZUnBTYwUIdz1oN13Y/hysel7TWsR40xwg1n+EVg0cJHw/LEl
+         /TCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768926744; x=1769531544;
+        d=1e100.net; s=20230601; t=1768926790; x=1769531590;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=mXGTcl5mwW+5/Qa4dBt0KvW9sNYbOXAVKcTMg68Re9g=;
-        b=s7B4j7u1g73DdbIMqQ2cTYv4YWZa6spGMtMOf0kk+TnmyoJHNK/ow4V0wrz3QlhnSE
-         J7b1KSaiaUXmE2PqUHdlEO7xzTlQ1Hg+5I9NvnMxs+EJ2EItwyaGgJJW9HY4WQUZ0OnL
-         WaOV/+6lQPyKF/8GSoM4TfwHYrWHICaaKk1CiOEXwazI7Ay2a5lPLO3hijjDHuWoRQks
-         ikufLThtqppQkGs1jvWLXMbfawjCg2BSXLs/d8aBuoGmNd/7YIEw3y9kPb9aMOkMmx24
-         r6+PcYhnN2qmin+3aKv1OXig4IcoRMhB2wqZc7CBW4RDhuXSUA3cJGNwM0e4Zj1GwiNd
-         HXUQ==
-X-Gm-Message-State: AOJu0YyEbvsj4bb/2SmyvMzV/CrSayQSKRQnmb6r8B6/npJNMsKo2BpY
-	KJZFRD9b1MbU/CqdmjlHDHoDeacH7PCrDX7GcJQad/+K6EZCP4Q2WnvW7gAnKNWGZ9J/oS8ZDUa
-	rMKDuP5/J037kUp+sAn7TZBPfd4U4doc=
-X-Gm-Gg: AZuq6aI2bSvjOTLkL49yPFq7yoH3ANcVVjf1Taxk83LZhjR2sGLDN2wya/sv37yH4uX
-	Y8ifmPUuOHE4b5bE6l+zF6iXHPJgAPU5oudUFDvdOyCKZo1uX34Zze/9ymzdliSih2s7C06hIyA
-	l2z5KuJ0VgCYUSm+98eAbe6e3ssxA7AHQ7Fd/c0dy5Nlqse+XyZpoyhx1vBYuKl/aMmO8lPdZgj
-	JZl09qgSCktESGgoc2bgpo3msScTvluvIkdgEied0jEGRsaWh4dleABFPMncDL+FE2oP9UoFF1/
-	0FayvnCNDuyfSsqDbNtVPydAn5EKKkFRJyl6CbXkwg4RxRC0cRG9aPS/cTIiKPamfBzKk3RS1HS
-	D77poB8OIyCmcH++bmHxo3rfiy7fveulC3foXhvFlzZrJQEUWb9cafYaG
-X-Received: by 2002:a05:690c:60c2:b0:78e:3dcf:7aca with SMTP id
- 00721157ae682-793c66c7f27mr128435677b3.8.1768926743493; Tue, 20 Jan 2026
- 08:32:23 -0800 (PST)
+        bh=WyE3tcZfHNIZA6FfIO4xIcHtsr3M8UPCuR8WEWvL50A=;
+        b=HJEqUi5IXaeodspGjMmt0eYiOaTYcYb4v/pzZ967qQYJOzvB8hvQewf793UgKikOh2
+         x4+OAC/asmDfgrvv8hEuXDmLznqSsS42vZ2znX1NX9o702d8dQ7yzheN3aKQrYUtrzKL
+         6DA2XBfQ14u6OQNaMOk+twTpLIMJoZmRjmlUt0C1SIGvLJXJp3qAx6hHYJvXqUEG5kBl
+         fpYTv2oO5vihenLJ5tONPO8Mdo4UBA73UuXOdGuEG+Sz3JzRWGlBBkXJnswIEqtk37qG
+         ESj/l8ZdwE0mSi7UtjvZXIdEhAZCDQm4q4PXB72OBBu/vVvcr1qj+D/1OdU2qwh1IVRK
+         dwDg==
+X-Gm-Message-State: AOJu0YxbZPxfzd4rq/dfWzQqtZDGJwDF3OzDtZLfR2LqBzEmC1l5cD51
+	XSXeiiH0nZJ2ZnmjqH/P0Wfg5MzZWy50uyIfMk4VPzZvriNcksl8Rjvc3MF/N0FfrYXhtRxcaN0
+	WM/jwioKATfEJc4smWtBDA5rqyazS5tf3ymUT
+X-Gm-Gg: AZuq6aLzyNc6xqtLhrD+j0JIyKWxJ+9Km3hXl+CK4UPo2Ge1isy0iDZyIUmG/OkAmuj
+	dif5OBtAU0Eivh5mIvl9jUMuIZfOAHTAkE37NLbYFmODFt/Yj8xfmMVnlIqURb/uz5Yld8ux8tP
+	9Uo1KrAyYo8dogjYB9ZIQ19N2kl/KvPAGjRYxz9UnxNPgUiMsbPxvbbPyl2bn5z0WYly/jeMGUf
+	up4alOotscgIK8HCA5UU1xsZ/S7TkSNQIXyGDBAefNudNrWyeAkuls3hjf1Wd2Qh/sokFw7EKJt
+	XJpYl6BXTKSDLyOhJmIETiNa1ra+fjR6CyFd/3aQ/eZXI9qs7vmnnx/TRhbf5nm80k0bnMSwPdN
+	np463nfu0PauXklPE/Tu4IfqbwhXdN1aqx4mCFpWQfn6+rA==
+X-Received: by 2002:a05:690c:c508:b0:785:fe77:ccce with SMTP id
+ 00721157ae682-7940a24511dmr19435557b3.44.1768926789407; Tue, 20 Jan 2026
+ 08:33:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20260120070331.5050-1-skandigraun@gmail.com>
-In-Reply-To: <20260120070331.5050-1-skandigraun@gmail.com>
+References: <cover.1768880370.git.anuj.mittal@oss.qualcomm.com>
+In-Reply-To: <cover.1768880370.git.anuj.mittal@oss.qualcomm.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Jan 2026 08:31:57 -0800
-X-Gm-Features: AZwV_QjxFRsWkTu_09a1gM6-nYxmKGdCF4yhtwiLfYYcO1wj7K5Yg0iOZo6r0rg
-Message-ID: <CAMKF1sq=n3X1L-dUZFt0jX3QWHwbPPZH5tmERgF-SSXFcm71-Q@mail.gmail.com>
-Subject: Re: [oe] Kirkstone Pull Request Jan 20th
-To: skandigraun@gmail.com
+Date: Tue, 20 Jan 2026 08:32:42 -0800
+X-Gm-Features: AZwV_QjkRgUCCjVBXM7w-BKYbA6mIoHKz5ug6bASlim4QpIwUf5UlRqyfW2QAAs
+Message-ID: <CAMKF1spzD8sGDrKKT_kXm3yByZJ8RcDfsfaBUaxpYhQfVo+rXA@mail.gmail.com>
+Subject: Re: [PATCH 00/32] Scarthgap pull request
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000002e062a0648d45ad0"
+Content-Type: multipart/alternative; boundary="000000000000ea99650648d45c12"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 16:32:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123675
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 16:33:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123676
 
---0000000000002e062a0648d45ad0
+--000000000000ea99650648d45c12
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-This looks ok to me and is installed for kirkstone now.
+merged now, thanks Anuj
 
-On Mon, Jan 19, 2026 at 11:03=E2=80=AFPM Gyorgy Sarvari via lists.openembed=
-ded.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+On Mon, Jan 19, 2026 at 8:05=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qualco=
+mm.com>
+wrote:
 
-> This PR intentionally concentrates exclusively on the python3-django
-> recipes.
+> Please merge these changes in scarthgap. Tested on AB and locally.
 >
-> There are some (non-django) patches on the ML for Kirkstone since the las=
-t
-> PR
-> that are not included here. Those patches are not forgotten, but this
-> particular
-> PR's goal is to fix these specific recipes that regressed in this branch
-> over time.
->
-> Beside the regular ptest-enabled recipes, the below ptest artifacts
-> include test
-> results from all 3 python3-django recipes, without Selenium tests. The
-> recipes
-> themselves in the meta-oe layer are however not enabled for ptest, becaus=
-e
-> the tests have
-> dependencies which are not available in meta-oe. The used bbappends are
-> available
-> in the meta-oe-test layer (along with the dependencies), if anyone would
-> like to
-> replicate the results.
->
-> As previously mentioned in the ML, there is one failing test for
-> python3-django_2.2.28 recipe.
-> This particular recipe is executed in a custom testimage that is expected
-> to fail,
-> all other ptests are running in images which are expected to succeed.
->
-> World build arm:
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/210995990=
-67
-> World build aarch64:
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/210997221=
-70
-> World build x86:
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/211012939=
-18
-> World build x86-64:
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/211082693=
-03
-> Yocto Project Compability Check:
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/211126867=
-33
-> Ptest results (logs attached to Github actions run):
-> https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/211436533=
-80
->
-> Please let me know if you have any questions or comments.
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1257
 >
 > The following changes since commit
-> 7d4507f226bd2af939d4482fb14a809867ece939:
+> 2df869df1c3fa74103098bba65c06e55d0d3664a:
 >
->   libsodium: patch CVE-2025-69277 (2026-01-12 13:48:02 +0100)
+>   freerdp3: drop CVE-2025-68118 patch (2026-01-13 06:53:10 +0530)
 >
 > are available in the Git repository at:
 >
->   git://git.openembedded.org/meta-openembedded-contrib
-> stable/kirkstone-nut
+>   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
 >
-> for you to fetch changes up to 8f5f5cf4b335a09313c48394c62bfb614868fc1e:
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
+rthgap
 >
->   python3-django: (4.2.27) add back setuptools3 support (2026-01-19
-> 15:24:39 +0100)
+> Anil Dongare (1):
+>   php 8.2.29: CVE-2025-14177
 >
-> ----------------------------------------------------------------
-> Gyorgy Sarvari (12):
->       python3-django: fix intendation error in CVE patch
->       python3-django: fix regression from CVE-2024-24680 patch
->       python3-django: implement group method for FakeMatch
->       python3-django: handle non-existing import from CVE patch
->       python3-django: fix hostname length validation in URLvalidator
->       python3-django: (v2.2.28) fix ipv6 validation
->       python3-django: (v2.2.28) fix tests
->       python3-django: (v3.2.25) fix ipv6 validation
->       python3-django: (v3.2.25) fix tests
->       python3-django: fix CVE-2023-36053 patch
->       python3-django: upgrade 4.2.26 -> 4.2.27
->       python3-django: (4.2.27) add back setuptools3 support
+> Ankur Tyagi (22):
+>   gimp: upgrade 2.10.36 -> 2.10.38
+>   gimp: patch CVE-2025-14422
+>   gimp: patch CVE-2025-14425
+>   gimp: ignore CVE-2025-48796
+>   gimp: patch CVE-2025-5473
+>   python3-aiohttp: upgrade 3.9.4 -> 3.9.5
+>   python3-aiohttp: patch CVE-2024-52304
+>   python3-cob2: upgrade 5.6.3 -> 5.6.4
+>   python3-configobj: patch CVE-2023-26112
+>   python3-eventlet: patch CVE-2025-58068
+>   python3-marshmallow: upgrade 3.21.1 -> 3.21.3
+>   python3-pymongo: upgrade 4.6.1 -> 4.6.3
+>   python3-tornado: patch CVE-2025-47287
+>   python3-tornado: patch CVE-2025-67724
+>   python3-tornado: patch CVE-2025-67726
+>   python3-tqdm: upgrade 4.66.2 -> 4.66.3
+>   python3-werkzeug: ignore CVE-2025-66221 and CVE-2026-21860
+>   python3-virtualenv: upgrade 20.25.0 -> 20.25.3
+>   gpsd: patch CVE-2025-67268
+>   gpsd: patch CVE-2025-67269
+>   frr: patch multiple CVEs
+>   fluidsynth: patch CVE-2025-56225
 >
-> Haixiao Yan (2):
->       python3-django: Fix undefined _lazy_re_compile
->       python3-django: Fix missing JSONField in django.db.models
+> Gyorgy Sarvari (5):
+>   python3-ldap: set CVE_PRODUCT
+>   python3-ldap: upgrade 3.4.4 -> 3.4.5
+>   boinc-client: set CVE_PRODUCT
+>   boinc-client: mark CVE-2013-2018 patched
+>   lmdb: patch CVE-2026-22185
 >
->  .../0001-Fix-tag_strip-tests.patch                 |  37 +++++
->  ...-Fixed-URLValidator-crash-in-some-edge-ca.patch |  56 +++++++
->  ...utils.tests.HTMLEqualTests.test_parsing_e.patch |  32 ++++
->  .../0001-add-back-setuptools-support.patch         | 179
-> +++++++++++++++++++++
->  .../0001-Fix-patch-for-CVE-2023-36053.patch        |  43 +++++
->  .../python3-django/0001-Fix-tag_strip-tests.patch  |  37 +++++
->  ...-Fixed-URLValidator-hostname-length-valid.patch |  30 ++++
->  ...-Fixed-URLValidator-crash-in-some-edge-ca.patch |  57 +++++++
->  ...ed-35172-Fixed-intcomma-for-string-floats.patch |  30 ++++
->  ...ctdb.tests.InspectDBTestCase.test_custom_.patch |  45 ++++++
->  ...utils.tests.HTMLEqualTests.test_parsing_e.patch |  32 ++++
->  ...TestResultTest.test_pickle_errors_detecti.patch |  59 +++++++
->  .../python/python3-django/0001-fix-ipv6-test.patch |  34 ++++
->  ...-fix-quote-type-in-expected-error-message.patch |  31 ++++
->  ...0001-implement-group-method-for-FakeMatch.patch |  42 +++++
->  .../python/python3-django/CVE-2024-41991.patch     |  18 +--
->  .../Fix-missing-JSONField-in-django.db.mo.patch    |  77 +++++++++
->  .../Fix-undefined-_lazy_re_compile.patch           |  49 ++++++
->  .../python/python3-django_2.2.28.bb                |  15 +-
->  .../python/python3-django_3.2.25.bb                |   3 +
->  ...3-django_4.2.26.bb =3D> python3-django_4.2.27.bb} |   9 +-
->  21 files changed, 901 insertions(+), 14 deletions(-)
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django-3.2.25/0001-Fix-tag_st=
-rip-tests.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django-3.2.25/0001-Fixed-3336=
-7-Fixed-URLValidator-crash-in-some-edge-ca.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django-3.2.25/0001-Fixed-test=
-_utils.tests.HTMLEqualTests.test_parsing_e.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django-4.2.27/0001-add-back-s=
-etuptools-support.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fix-patch-for-CVE=
--2023-36053.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fix-tag_strip-tes=
-ts.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fixed-32298-Fixed=
--URLValidator-hostname-length-valid.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fixed-33367-Fixed=
--URLValidator-crash-in-some-edge-ca.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fixed-35172-Fixed=
--intcomma-for-string-floats.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fixed-inspectdb.t=
-ests.InspectDBTestCase.test_custom_.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Fixed-test_utils.=
-tests.HTMLEqualTests.test_parsing_e.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-Made-RemoteTestRe=
-sultTest.test_pickle_errors_detecti.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-fix-ipv6-test.pat=
-ch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-fix-quote-type-in=
--expected-error-message.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/0001-implement-group-m=
-ethod-for-FakeMatch.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/Fix-missing-JSONField-=
-in-django.db.mo.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-django/Fix-undefined-_lazy_re=
-_compile.patch
->  rename meta-python/recipes-devtools/python/{python3-django_4.2.26.bb =3D=
+> Jackson (1):
+>   tcpreplay 4.4.4: Fix CVE-2025-9384
 >
-> python3-django_4.2.27.bb} (52%)
+> Peter Marko (1):
+>   gimp: ignore CVE-2007-3741
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123660):
-> https://lists.openembedded.org/g/openembedded-devel/message/123660
-> Mute This Topic: https://lists.openembedded.org/mt/117359921/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Wang Mingyu (1):
+>   openfortivpn: upgrade 1.22.0 -> 1.22.1
+>
+> Yoann Congal (1):
+>   boinc-client: fix hostname reproducibility
+>
+>  .../gimp/gimp/CVE-2025-14422.patch            |  64 ++++
+>  .../gimp/gimp/CVE-2025-14425.patch            |  70 +++++
+>  .../gimp/gimp/CVE-2025-5473.patch             |  38 +++
+>  .../gimp/{gimp_2.10.36.bb =3D> gimp_2.10.38.bb} |  11 +-
+>  .../fluidsynth/CVE-2025-56225.patch           |  25 ++
+>  .../fluidsynth/fluidsynth_2.3.4.bb            |   1 +
+>  ...tivpn_1.22.0.bb =3D> openfortivpn_1.22.1.bb} |   2 +-
+>  ...1102-61103-61104-61105-61106-61107_1.patch |  37 +++
+>  ...1102-61103-61104-61105-61106-61107_2.patch | 273 ++++++++++++++++++
+>  ...1102-61103-61104-61105-61106-61107_3.patch |  78 +++++
+>  ...1102-61103-61104-61105-61106-61107_4.patch | 119 ++++++++
+>  .../recipes-protocols/frr/frr_9.1.3.bb        |   4 +
+>  .../tcpreplay/tcpreplay/CVE-2025-9384.patch   |  38 +++
+>  .../tcpreplay/tcpreplay_4.4.4.bb              |   1 +
+>  .../lmdb/files/CVE-2026-22185.patch           |  31 ++
+>  meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb       |   1 +
+>  .../php/php/CVE-2025-14177.patch              |  84 ++++++
+>  meta-oe/recipes-devtools/php/php_8.2.29.bb    |   1 +
+>  .../boinc/boinc-client_7.20.5.bb              |   9 +-
+>  .../gpsd/gpsd/CVE-2025-67268.patch            | 214 ++++++++++++++
+>  .../gpsd/gpsd/CVE-2025-67269.patch            | 150 ++++++++++
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.24.bb  |   2 +
+>  .../python3-aiohttp/CVE-2024-52304.patch      | 124 ++++++++
+>  ...http_3.9.4.bb =3D> python3-aiohttp_3.9.5.bb} |   4 +-
+>  ...-cbor2_5.6.3.bb =3D> python3-cbor2_5.6.4.bb} |   2 +-
+>  .../python3-configobj/CVE-2023-26112.patch    |  25 ++
+>  .../python/python3-configobj_5.0.8.bb         |   2 +
+>  .../python3-eventlet/CVE-2025-58068.patch     |  42 +++
+>  .../python/python3-eventlet_0.36.1.bb         |   2 +
+>  ....21.1.bb =3D> python3-marshmallow_3.21.3.bb} |   2 +-
+>  ...ongo_4.6.1.bb =3D> python3-pymongo_4.6.3.bb} |   2 +-
+>  .../python3-tornado/CVE-2025-47287.patch      | 232 +++++++++++++++
+>  .../python3-tornado/CVE-2025-67724.patch      | 118 ++++++++
+>  .../python3-tornado/CVE-2025-67726.patch      |  99 +++++++
+>  .../python/python3-tornado_6.4.2.bb           |   5 +
+>  ...-tqdm_4.66.2.bb =3D> python3-tqdm_4.66.3.bb} |   2 +-
+>  ....25.0.bb =3D> python3-virtualenv_20.25.3.bb} |   2 +-
+>  .../python/python3-werkzeug_3.0.6.bb          |   3 +
+>  ...n3-ldap_3.4.4.bb =3D> python3-ldap_3.4.5.bb} |  10 +-
+>  39 files changed, 1915 insertions(+), 14 deletions(-)
+>  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patc=
+h
+>  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patc=
+h
+>  create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-5473.patch
+>  rename meta-gnome/recipes-gimp/gimp/{gimp_2.10.36.bb =3D> gimp_2.10.38.b=
+b}
+> (82%)
+>  create mode 100644
+> meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth/CVE-2025-56225.p=
+atch
+>  rename meta-networking/recipes-connectivity/openfortivpn/{
+> openfortivpn_1.22.0.bb =3D> openfortivpn_1.22.1.bb} (93%)
+>  create mode 100644
+> meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61100-61101-6110=
+2-61103-61104-61105-61106-61107_1.patch
+>  create mode 100644
+> meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61100-61101-6110=
+2-61103-61104-61105-61106-61107_2.patch
+>  create mode 100644
+> meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61100-61101-6110=
+2-61103-61104-61105-61106-61107_3.patch
+>  create mode 100644
+> meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61100-61101-6110=
+2-61103-61104-61105-61106-61107_4.patch
+>  create mode 100644
+> meta-networking/recipes-support/tcpreplay/tcpreplay/CVE-2025-9384.patch
+>  create mode 100644 meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch
+>  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2025-14177.patch
+>  create mode 100644
+> meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
+>  create mode 100644
+> meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67269.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-aiohttp/CVE-2024-52304.patch
+>  rename meta-python/recipes-devtools/python/{python3-aiohttp_3.9.4.bb =3D=
+>
+> python3-aiohttp_3.9.5.bb} (81%)
+>  rename meta-python/recipes-devtools/python/{python3-cbor2_5.6.3.bb =3D>
+> python3-cbor2_5.6.4.bb} (89%)
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-configobj/CVE-2023-26112.patc=
+h
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-eventlet/CVE-2025-58068.patch
+>  rename meta-python/recipes-devtools/python/{python3-marshmallow_3.21.1.b=
+b
+> =3D> python3-marshmallow_3.21.3.bb} (92%)
+>  rename meta-python/recipes-devtools/python/{python3-pymongo_4.6.1.bb =3D=
+>
+> python3-pymongo_4.6.3.bb} (90%)
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-tornado/CVE-2025-47287.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67724.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-tornado/CVE-2025-67726.patch
+>  rename meta-python/recipes-devtools/python/{python3-tqdm_4.66.2.bb =3D>
+> python3-tqdm_4.66.3.bb} (81%)
+>  rename meta-python/recipes-devtools/python/{python3-virtualenv_20.25.0.b=
+b
+> =3D> python3-virtualenv_20.25.3.bb} (85%)
+>  rename meta-python/recipes-networking/python/{python3-ldap_3.4.4.bb =3D>
+> python3-ldap_3.4.5.bb} (74%)
+>
+> --
+> 2.52.0
 >
 >
 
---0000000000002e062a0648d45ad0
+--000000000000ea99650648d45c12
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This looks ok to me and is installed for kirkstone now.</d=
-iv><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
-ass=3D"gmail_attr">On Mon, Jan 19, 2026 at 11:03=E2=80=AFPM Gyorgy Sarvari =
-via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &l=
-t;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.c=
-om@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">This PR intentionally concentrates exclusively on =
-the python3-django recipes.<br>
+<div dir=3D"ltr">merged now, thanks Anuj</div><br><div class=3D"gmail_quote=
+ gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan 1=
+9, 2026 at 8:05=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@os=
+s.qualcomm.com">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">Please merge these changes in s=
+carthgap. Tested on AB and locally.<br>
 <br>
-There are some (non-django) patches on the ML for Kirkstone since the last =
-PR<br>
-that are not included here. Those patches are not forgotten, but this parti=
-cular<br>
-PR&#39;s goal is to fix these specific recipes that regressed in this branc=
-h over time.<br>
+<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
+ds/1257" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
+ect.org/valkyrie/#/builders/81/builds/1257</a><br>
 <br>
-Beside the regular ptest-enabled recipes, the below ptest artifacts include=
- test<br>
-results from all 3 python3-django recipes, without Selenium tests. The reci=
-pes<br>
-themselves in the meta-oe layer are however not enabled for ptest, because =
-the tests have<br>
-dependencies which are not available in meta-oe. The used bbappends are ava=
-ilable<br>
-in the meta-oe-test layer (along with the dependencies), if anyone would li=
-ke to<br>
-replicate the results.<br>
-<br>
-As previously mentioned in the ML, there is one failing test for python3-dj=
-ango_2.2.28 recipe.<br>
-This particular recipe is executed in a custom testimage that is expected t=
-o fail, <br>
-all other ptests are running in images which are expected to succeed.<br>
-<br>
-World build arm: <a href=3D"https://github.com/OldManYellsAtCloud/meta-oe-t=
-est/actions/runs/21099599067" rel=3D"noreferrer" target=3D"_blank">https://=
-github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/21099599067</a><br>
-World build aarch64: <a href=3D"https://github.com/OldManYellsAtCloud/meta-=
-oe-test/actions/runs/21099722170" rel=3D"noreferrer" target=3D"_blank">http=
-s://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/21099722170</a>=
-<br>
-World build x86: <a href=3D"https://github.com/OldManYellsAtCloud/meta-oe-t=
-est/actions/runs/21101293918" rel=3D"noreferrer" target=3D"_blank">https://=
-github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/21101293918</a><br>
-World build x86-64: <a href=3D"https://github.com/OldManYellsAtCloud/meta-o=
-e-test/actions/runs/21108269303" rel=3D"noreferrer" target=3D"_blank">https=
-://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/21108269303</a><=
-br>
-Yocto Project Compability Check: <a href=3D"https://github.com/OldManYellsA=
-tCloud/meta-oe-test/actions/runs/21112686733" rel=3D"noreferrer" target=3D"=
-_blank">https://github.com/OldManYellsAtCloud/meta-oe-test/actions/runs/211=
-12686733</a><br>
-Ptest results (logs attached to Github actions run): <a href=3D"https://git=
-hub.com/OldManYellsAtCloud/meta-oe-test/actions/runs/21143653380" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/OldManYellsAtCloud/meta-oe-t=
-est/actions/runs/21143653380</a><br>
-<br>
-Please let me know if you have any questions or comments.<br>
-<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-<br>
-The following changes since commit 7d4507f226bd2af939d4482fb14a809867ece939=
+The following changes since commit 2df869df1c3fa74103098bba65c06e55d0d3664a=
 :<br>
 <br>
-=C2=A0 libsodium: patch CVE-2025-69277 (2026-01-12 13:48:02 +0100)<br>
+=C2=A0 freerdp3: drop CVE-2025-68118 patch (2026-01-13 06:53:10 +0530)<br>
 <br>
 are available in the Git repository at:<br>
 <br>
-=C2=A0 git://<a href=3D"http://git.openembedded.org/meta-openembedded-contr=
-ib" rel=3D"noreferrer" target=3D"_blank">git.openembedded.org/meta-openembe=
-dded-contrib</a> stable/kirkstone-nut<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
+el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
+mbedded-contrib</a> anujm/scarthgap<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
+g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
+enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
 <br>
-for you to fetch changes up to 8f5f5cf4b335a09313c48394c62bfb614868fc1e:<br=
+Anil Dongare (1):<br>
+=C2=A0 php 8.2.29: CVE-2025-14177<br>
+<br>
+Ankur Tyagi (22):<br>
+=C2=A0 gimp: upgrade 2.10.36 -&gt; 2.10.38<br>
+=C2=A0 gimp: patch CVE-2025-14422<br>
+=C2=A0 gimp: patch CVE-2025-14425<br>
+=C2=A0 gimp: ignore CVE-2025-48796<br>
+=C2=A0 gimp: patch CVE-2025-5473<br>
+=C2=A0 python3-aiohttp: upgrade 3.9.4 -&gt; 3.9.5<br>
+=C2=A0 python3-aiohttp: patch CVE-2024-52304<br>
+=C2=A0 python3-cob2: upgrade 5.6.3 -&gt; 5.6.4<br>
+=C2=A0 python3-configobj: patch CVE-2023-26112<br>
+=C2=A0 python3-eventlet: patch CVE-2025-58068<br>
+=C2=A0 python3-marshmallow: upgrade 3.21.1 -&gt; 3.21.3<br>
+=C2=A0 python3-pymongo: upgrade 4.6.1 -&gt; 4.6.3<br>
+=C2=A0 python3-tornado: patch CVE-2025-47287<br>
+=C2=A0 python3-tornado: patch CVE-2025-67724<br>
+=C2=A0 python3-tornado: patch CVE-2025-67726<br>
+=C2=A0 python3-tqdm: upgrade 4.66.2 -&gt; 4.66.3<br>
+=C2=A0 python3-werkzeug: ignore CVE-2025-66221 and CVE-2026-21860<br>
+=C2=A0 python3-virtualenv: upgrade 20.25.0 -&gt; 20.25.3<br>
+=C2=A0 gpsd: patch CVE-2025-67268<br>
+=C2=A0 gpsd: patch CVE-2025-67269<br>
+=C2=A0 frr: patch multiple CVEs<br>
+=C2=A0 fluidsynth: patch CVE-2025-56225<br>
+<br>
+Gyorgy Sarvari (5):<br>
+=C2=A0 python3-ldap: set CVE_PRODUCT<br>
+=C2=A0 python3-ldap: upgrade 3.4.4 -&gt; 3.4.5<br>
+=C2=A0 boinc-client: set CVE_PRODUCT<br>
+=C2=A0 boinc-client: mark CVE-2013-2018 patched<br>
+=C2=A0 lmdb: patch CVE-2026-22185<br>
+<br>
+Jackson (1):<br>
+=C2=A0 tcpreplay 4.4.4: Fix CVE-2025-9384<br>
+<br>
+Peter Marko (1):<br>
+=C2=A0 gimp: ignore CVE-2007-3741<br>
+<br>
+Wang Mingyu (1):<br>
+=C2=A0 openfortivpn: upgrade 1.22.0 -&gt; 1.22.1<br>
+<br>
+Yoann Congal (1):<br>
+=C2=A0 boinc-client: fix hostname reproducibility<br>
+<br>
+=C2=A0.../gimp/gimp/CVE-2025-14422.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 64 ++++<br>
+=C2=A0.../gimp/gimp/CVE-2025-14425.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 70 +++++<br>
+=C2=A0.../gimp/gimp/CVE-2025-5473.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 38 +++<br>
+=C2=A0.../gimp/{<a href=3D"http://gimp_2.10.36.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">gimp_2.10.36.bb</a> =3D&gt; <a href=3D"http://gimp_2.10.38.bb"=
+ rel=3D"noreferrer" target=3D"_blank">gimp_2.10.38.bb</a>} |=C2=A0 11 +-<br=
 >
+=C2=A0.../fluidsynth/CVE-2025-56225.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0|=C2=A0 25 ++<br>
+=C2=A0.../fluidsynth/<a href=3D"http://fluidsynth_2.3.4.bb" rel=3D"noreferr=
+er" target=3D"_blank">fluidsynth_2.3.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+=C2=A0...<a href=3D"http://tivpn_1.22.0.bb" rel=3D"noreferrer" target=3D"_b=
+lank">tivpn_1.22.0.bb</a> =3D&gt; <a href=3D"http://openfortivpn_1.22.1.bb"=
+ rel=3D"noreferrer" target=3D"_blank">openfortivpn_1.22.1.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...1102-61103-61104-61105-61106-61107_1.patch |=C2=A0 37 +++<br>
+=C2=A0...1102-61103-61104-61105-61106-61107_2.patch | 273 +++++++++++++++++=
++<br>
+=C2=A0...1102-61103-61104-61105-61106-61107_3.patch |=C2=A0 78 +++++<br>
+=C2=A0...1102-61103-61104-61105-61106-61107_4.patch | 119 ++++++++<br>
+=C2=A0.../recipes-protocols/frr/<a href=3D"http://frr_9.1.3.bb" rel=3D"nore=
+ferrer" target=3D"_blank">frr_9.1.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 =C2=A04 +<br>
+=C2=A0.../tcpreplay/tcpreplay/CVE-2025-9384.patch=C2=A0 =C2=A0|=C2=A0 38 ++=
++<br>
+=C2=A0.../tcpreplay/<a href=3D"http://tcpreplay_4.4.4.bb" rel=3D"noreferrer=
+" target=3D"_blank">tcpreplay_4.4.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+=C2=A0.../lmdb/files/CVE-2026-22185.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0|=C2=A0 31 ++<br>
+=C2=A0meta-oe/recipes-dbs/lmdb/<a href=3D"http://lmdb_0.9.31.bb" rel=3D"nor=
+eferrer" target=3D"_blank">lmdb_0.9.31.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A01 +<br>
+=C2=A0.../php/php/CVE-2025-14177.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 84 ++++++<br>
+=C2=A0meta-oe/recipes-devtools/php/<a href=3D"http://php_8.2.29.bb" rel=3D"=
+noreferrer" target=3D"_blank">php_8.2.29.bb</a>=C2=A0 =C2=A0 |=C2=A0 =C2=A0=
+1 +<br>
+=C2=A0.../boinc/<a href=3D"http://boinc-client_7.20.5.bb" rel=3D"noreferrer=
+" target=3D"_blank">boinc-client_7.20.5.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A09 +-<br>
+=C2=A0.../gpsd/gpsd/CVE-2025-67268.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 | 214 ++++++++++++++<br>
+=C2=A0.../gpsd/gpsd/CVE-2025-67269.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 | 150 ++++++++++<br>
+=C2=A0meta-oe/recipes-navigation/gpsd/<a href=3D"http://gpsd_3.24.bb" rel=
+=3D"noreferrer" target=3D"_blank">gpsd_3.24.bb</a>=C2=A0 |=C2=A0 =C2=A02 +<=
+br>
+=C2=A0.../python3-aiohttp/CVE-2024-52304.patch=C2=A0 =C2=A0 =C2=A0 | 124 ++=
+++++++<br>
+=C2=A0...<a href=3D"http://http_3.9.4.bb" rel=3D"noreferrer" target=3D"_bla=
+nk">http_3.9.4.bb</a> =3D&gt; <a href=3D"http://python3-aiohttp_3.9.5.bb" r=
+el=3D"noreferrer" target=3D"_blank">python3-aiohttp_3.9.5.bb</a>} |=C2=A0 =
+=C2=A04 +-<br>
+=C2=A0...-<a href=3D"http://cbor2_5.6.3.bb" rel=3D"noreferrer" target=3D"_b=
+lank">cbor2_5.6.3.bb</a> =3D&gt; <a href=3D"http://python3-cbor2_5.6.4.bb" =
+rel=3D"noreferrer" target=3D"_blank">python3-cbor2_5.6.4.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../python3-configobj/CVE-2023-26112.patch=C2=A0 =C2=A0 |=C2=A0 25 ++=
 <br>
-=C2=A0 python3-django: (4.2.27) add back setuptools3 support (2026-01-19 15=
-:24:39 +0100)<br>
-<br>
-----------------------------------------------------------------<br>
-Gyorgy Sarvari (12):<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: fix intendation error in CVE patch<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: fix regression from CVE-2024-24680 pat=
-ch<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: implement group method for FakeMatch<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 python3-django: handle non-existing import from CVE pa=
+=C2=A0.../python/<a href=3D"http://python3-configobj_5.0.8.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-configobj_5.0.8.bb</a>=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../python3-eventlet/CVE-2025-58068.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+42 +++<br>
+=C2=A0.../python/<a href=3D"http://python3-eventlet_0.36.1.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-eventlet_0.36.1.bb</a>=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0....<a href=3D"http://21.1.bb" rel=3D"noreferrer" target=3D"_blank">2=
+1.1.bb</a> =3D&gt; <a href=3D"http://python3-marshmallow_3.21.3.bb" rel=3D"=
+noreferrer" target=3D"_blank">python3-marshmallow_3.21.3.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...<a href=3D"http://ongo_4.6.1.bb" rel=3D"noreferrer" target=3D"_bla=
+nk">ongo_4.6.1.bb</a> =3D&gt; <a href=3D"http://python3-pymongo_4.6.3.bb" r=
+el=3D"noreferrer" target=3D"_blank">python3-pymongo_4.6.3.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../python3-tornado/CVE-2025-47287.patch=C2=A0 =C2=A0 =C2=A0 | 232 ++=
++++++++++++++<br>
+=C2=A0.../python3-tornado/CVE-2025-67724.patch=C2=A0 =C2=A0 =C2=A0 | 118 ++=
+++++++<br>
+=C2=A0.../python3-tornado/CVE-2025-67726.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+99 +++++++<br>
+=C2=A0.../python/<a href=3D"http://python3-tornado_6.4.2.bb" rel=3D"norefer=
+rer" target=3D"_blank">python3-tornado_6.4.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A05 +<br>
+=C2=A0...-<a href=3D"http://tqdm_4.66.2.bb" rel=3D"noreferrer" target=3D"_b=
+lank">tqdm_4.66.2.bb</a> =3D&gt; <a href=3D"http://python3-tqdm_4.66.3.bb" =
+rel=3D"noreferrer" target=3D"_blank">python3-tqdm_4.66.3.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0....<a href=3D"http://25.0.bb" rel=3D"noreferrer" target=3D"_blank">2=
+5.0.bb</a> =3D&gt; <a href=3D"http://python3-virtualenv_20.25.3.bb" rel=3D"=
+noreferrer" target=3D"_blank">python3-virtualenv_20.25.3.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../python/<a href=3D"http://python3-werkzeug_3.0.6.bb" rel=3D"norefe=
+rrer" target=3D"_blank">python3-werkzeug_3.0.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
+=C2=A0...<a href=3D"http://n3-ldap_3.4.4.bb" rel=3D"noreferrer" target=3D"_=
+blank">n3-ldap_3.4.4.bb</a> =3D&gt; <a href=3D"http://python3-ldap_3.4.5.bb=
+" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.5.bb</a>} |=C2=A0 1=
+0 +-<br>
+=C2=A039 files changed, 1915 insertions(+), 14 deletions(-)<br>
+=C2=A0create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.p=
+atch<br>
+=C2=A0create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.p=
+atch<br>
+=C2=A0create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-5473.pa=
 tch<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: fix hostname length validation in URLv=
-alidator<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: (v2.2.28) fix ipv6 validation<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: (v2.2.28) fix tests<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: (v3.2.25) fix ipv6 validation<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: (v3.2.25) fix tests<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: fix CVE-2023-36053 patch<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: upgrade 4.2.26 -&gt; 4.2.27<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: (4.2.27) add back setuptools3 support<=
-br>
-<br>
-Haixiao Yan (2):<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: Fix undefined _lazy_re_compile<br>
-=C2=A0 =C2=A0 =C2=A0 python3-django: Fix missing JSONField in django.db.mod=
-els<br>
-<br>
-=C2=A0.../0001-Fix-tag_strip-tests.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 37 +++++<br>
-=C2=A0...-Fixed-URLValidator-crash-in-some-edge-ca.patch |=C2=A0 56 +++++++=
-<br>
-=C2=A0...utils.tests.HTMLEqualTests.test_parsing_e.patch |=C2=A0 32 ++++<br=
->
-=C2=A0.../0001-add-back-setuptools-support.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0| 179 +++++++++++++++++++++<br>
-=C2=A0.../0001-Fix-patch-for-CVE-2023-36053.patch=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 |=C2=A0 43 +++++<br>
-=C2=A0.../python3-django/0001-Fix-tag_strip-tests.patch=C2=A0 |=C2=A0 37 ++=
-+++<br>
-=C2=A0...-Fixed-URLValidator-hostname-length-valid.patch |=C2=A0 30 ++++<br=
->
-=C2=A0...-Fixed-URLValidator-crash-in-some-edge-ca.patch |=C2=A0 57 +++++++=
-<br>
-=C2=A0...ed-35172-Fixed-intcomma-for-string-floats.patch |=C2=A0 30 ++++<br=
->
-=C2=A0...ctdb.tests.InspectDBTestCase.test_custom_.patch |=C2=A0 45 ++++++<=
-br>
-=C2=A0...utils.tests.HTMLEqualTests.test_parsing_e.patch |=C2=A0 32 ++++<br=
->
-=C2=A0...TestResultTest.test_pickle_errors_detecti.patch |=C2=A0 59 +++++++=
-<br>
-=C2=A0.../python/python3-django/0001-fix-ipv6-test.patch |=C2=A0 34 ++++<br=
->
-=C2=A0...-fix-quote-type-in-expected-error-message.patch |=C2=A0 31 ++++<br=
->
-=C2=A0...0001-implement-group-method-for-FakeMatch.patch |=C2=A0 42 +++++<b=
-r>
-=C2=A0.../python/python3-django/CVE-2024-41991.patch=C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 18 +--<br>
-=C2=A0.../Fix-missing-JSONField-in-django.db.mo.patch=C2=A0 =C2=A0 |=C2=A0 =
-77 +++++++++<br>
-=C2=A0.../Fix-undefined-_lazy_re_compile.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 49 ++++++<br>
-=C2=A0.../python/<a href=3D"http://python3-django_2.2.28.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-django_2.2.28.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 15 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-django_3.2.25.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-django_3.2.25.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
-=C2=A0...<a href=3D"http://3-django_4.2.26.bb" rel=3D"noreferrer" target=3D=
-"_blank">3-django_4.2.26.bb</a> =3D&gt; <a href=3D"http://python3-django_4.=
-2.27.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_4.2.27.bb</a>}=
- |=C2=A0 =C2=A09 +-<br>
-=C2=A021 files changed, 901 insertions(+), 14 deletions(-)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
--3.2.25/0001-Fix-tag_strip-tests.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
--3.2.25/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
--3.2.25/0001-Fixed-test_utils.tests.HTMLEqualTests.test_parsing_e.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
--4.2.27/0001-add-back-setuptools-support.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fix-patch-for-CVE-2023-36053.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fix-tag_strip-tests.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fixed-32298-Fixed-URLValidator-hostname-length-valid.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fixed-33367-Fixed-URLValidator-crash-in-some-edge-ca.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fixed-35172-Fixed-intcomma-for-string-floats.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fixed-inspectdb.tests.InspectDBTestCase.test_custom_.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Fixed-test_utils.tests.HTMLEqualTests.test_parsing_e.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-Made-RemoteTestResultTest.test_pickle_errors_detecti.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-fix-ipv6-test.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-fix-quote-type-in-expected-error-message.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/0001-implement-group-method-for-FakeMatch.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/Fix-missing-JSONField-in-django.db.mo.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-django=
-/Fix-undefined-_lazy_re_compile.patch<br>
+=C2=A0rename meta-gnome/recipes-gimp/gimp/{<a href=3D"http://gimp_2.10.36.b=
+b" rel=3D"noreferrer" target=3D"_blank">gimp_2.10.36.bb</a> =3D&gt; <a href=
+=3D"http://gimp_2.10.38.bb" rel=3D"noreferrer" target=3D"_blank">gimp_2.10.=
+38.bb</a>} (82%)<br>
+=C2=A0create mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/flui=
+dsynth/CVE-2025-56225.patch<br>
+=C2=A0rename meta-networking/recipes-connectivity/openfortivpn/{<a href=3D"=
+http://openfortivpn_1.22.0.bb" rel=3D"noreferrer" target=3D"_blank">openfor=
+tivpn_1.22.0.bb</a> =3D&gt; <a href=3D"http://openfortivpn_1.22.1.bb" rel=
+=3D"noreferrer" target=3D"_blank">openfortivpn_1.22.1.bb</a>} (93%)<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025=
+-61099-61100-61101-61102-61103-61104-61105-61106-61107_1.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025=
+-61099-61100-61101-61102-61103-61104-61105-61106-61107_2.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025=
+-61099-61100-61101-61102-61103-61104-61105-61106-61107_3.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025=
+-61099-61100-61101-61102-61103-61104-61105-61106-61107_4.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/tcpreplay/tcprepla=
+y/CVE-2025-9384.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patc=
+h<br>
+=C2=A0create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2025-14177.pa=
+tch<br>
+=C2=A0create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-6726=
+8.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-6726=
+9.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-aiohtt=
+p/CVE-2024-52304.patch<br>
 =C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--django_4.2.26.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_4.2.=
-26.bb</a> =3D&gt; <a href=3D"http://python3-django_4.2.27.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-django_4.2.27.bb</a>} (52%)<br>
+-aiohttp_3.9.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-aiohttp_3.9=
+.4.bb</a> =3D&gt; <a href=3D"http://python3-aiohttp_3.9.5.bb" rel=3D"norefe=
+rrer" target=3D"_blank">python3-aiohttp_3.9.5.bb</a>} (81%)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-cbor2_5.6.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-cbor2_5.6.3.b=
+b</a> =3D&gt; <a href=3D"http://python3-cbor2_5.6.4.bb" rel=3D"noreferrer" =
+target=3D"_blank">python3-cbor2_5.6.4.bb</a>} (89%)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-config=
+obj/CVE-2023-26112.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-eventl=
+et/CVE-2025-58068.patch<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-marshmallow_3.21.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-marshm=
+allow_3.21.1.bb</a> =3D&gt; <a href=3D"http://python3-marshmallow_3.21.3.bb=
+" rel=3D"noreferrer" target=3D"_blank">python3-marshmallow_3.21.3.bb</a>} (=
+92%)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-pymongo_4.6.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pymongo_4.6=
+.1.bb</a> =3D&gt; <a href=3D"http://python3-pymongo_4.6.3.bb" rel=3D"norefe=
+rrer" target=3D"_blank">python3-pymongo_4.6.3.bb</a>} (90%)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-tornad=
+o/CVE-2025-47287.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-tornad=
+o/CVE-2025-67724.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-tornad=
+o/CVE-2025-67726.patch<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-tqdm_4.66.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-tqdm_4.66.2.b=
+b</a> =3D&gt; <a href=3D"http://python3-tqdm_4.66.3.bb" rel=3D"noreferrer" =
+target=3D"_blank">python3-tqdm_4.66.3.bb</a>} (81%)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-virtualenv_20.25.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-virtua=
+lenv_20.25.0.bb</a> =3D&gt; <a href=3D"http://python3-virtualenv_20.25.3.bb=
+" rel=3D"noreferrer" target=3D"_blank">python3-virtualenv_20.25.3.bb</a>} (=
+85%)<br>
+=C2=A0rename meta-python/recipes-networking/python/{<a href=3D"http://pytho=
+n3-ldap_3.4.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.4.b=
+b</a> =3D&gt; <a href=3D"http://python3-ldap_3.4.5.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">python3-ldap_3.4.5.bb</a>} (74%)<br>
 <br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123660): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123660" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123660</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117359921/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117359921/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+-- <br>
+2.52.0<br>
 <br>
 </blockquote></div>
 
---0000000000002e062a0648d45ad0--
+--000000000000ea99650648d45c12--
 
