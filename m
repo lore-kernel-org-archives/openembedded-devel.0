@@ -1,229 +1,155 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78EECD2ED0F
-	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 12:15:25 +0000 (UTC)
-Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5118.1768911322196422121
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A89F8D2ECE9
+	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 12:32:35 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5394.1768912347050436042
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jan 2026 04:15:22 -0800
+ Tue, 20 Jan 2026 04:32:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JjqnFNnT;
- spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-2b4520f6b32so7128807eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 04:15:22 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768911321; cv=none;
-        d=google.com; s=arc-20240605;
-        b=MEzc1QFkvGrYJSQVPSa9F4kCRHOZJmdwrdsi04Sifn0bvtX1MlzJG3CJ7dgfSGOxvv
-         cH+8KC4qSJ/xfqatSHgrsFQLYTNQqVwtmgcUuOkPxv1ABjfBbB4gXTefrUZ6It1hM//v
-         VDkpK2+zEJvWmSdv1zu+ptSQhvANktcK78PO7ewAtBUSpER4RP2FMhzBMYGcffutjfjV
-         MAW9Qx+ntDU8ENHeX7jPQyGgmzIHFCipx209DUIlPAGsMVcJlzH1eCzkJSfZq8iWLwfB
-         CuZ8RfBiAzfUeQMRpBCiGjC7ZAVd6pfAMlfxOKFBxzDy/eb6tnLjiiqxV8/Gpz/6zRFz
-         0Qcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=8UG5I//qhfAXVkYvAGOVU25HLrOs2wFLOVAa0Jjqqkg=;
-        fh=BwBMBeEhAt1p6hM5GusaqqLaQ1OVjTC3OuGEHAhdtOU=;
-        b=IBZ0is4/rIRN1ydApAY1Q43E46boza3wJIO7KUMvRNdjF+uDGBCu2na9iuRq5xioM9
-         KOX9+gkI5NTrAU2oY4Lhn6RaKWeyGnj+KUCyy6vjT6WZUsaWgA2lTieJdgxY26rg4bxA
-         ECccLTXn5hrQ3sqP5LkEM04g3zf4Gh7l0JKSLsbXhjHoeNzOh9ugu+j8J9MNJ7RJzK3r
-         MsxMAWykktYqz9Nh4yJyXVN7umlTW7osSiMBXniRS/JWXirAVjoDMpmr8Uw6MY9csSQF
-         e9gJy3E9ZRL+OX5qfaGQ6vLP1bIrzx6MGGZQaYuT26x0dnpzuZpFRFkwVVslrq2itO1H
-         RzyQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G52pn5Wg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-47ee9817a35so29980765e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 04:32:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768911321; x=1769516121; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=8UG5I//qhfAXVkYvAGOVU25HLrOs2wFLOVAa0Jjqqkg=;
-        b=JjqnFNnTWbc6tp6G+9Unf5LFXvdQCn/t4sYRddUymBgkhvfj0Brhk/f8/mmR2g0U1K
-         vMKs+0aKa51lVtSEILy9VkiTkjcfnjVe83hgw72/CCTCXQhF5gQCE3Jr+mzRddRq5txw
-         V5Dg9XnB1MzBM+YpowcFBzUQrTolxIbiwLlnZVChDHgFhC50C7RAqlVoWP0Ncey/QFEp
-         xbP0YnWpZgEdNXcvSTE/jDrfnEea80TYONfAvNnqGYz1Pt6UbaNtegLBkxB6AjCv/GWu
-         EVWSmyUW1wfguabOqlknNJuTB6uECRBofBY65NxYsNllgFgyOGEAaYjTpbhxgHGssYaU
-         lMvg==
+        d=gmail.com; s=20230601; t=1768912345; x=1769517145; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xAUee/YzVat6TpwlZaam9VTJedRdgbZhapZ5oKv2ap4=;
+        b=G52pn5WgG6g1yrJxaZ30nu/YALwd4qn/P22ad5jipHj0rQJIyPg2qpVTMuxZoWdjPe
+         bpD6pUTNR5E3zHy2ToxAq3u88pwpRYrdWis24OlJ2E4hj0B3Kf2K5rBm191w0AxwktpY
+         ccIySD63IkjkFtkfNI+oYWD++R4lBxQB9ojN8FnL7Omu4vEsEz4mv+hwFZKvYxEXIni4
+         hUQieZbMCidqkQnf+EuEeVpdi0Emy0izgdrtpo5AjSVvPEFOlRZtAqQVfImQwsyr8eK/
+         47rth08anem7Pf4feL9DIBEZjAKTY5NmaWLpGNtGUWxE0CklYlmNX7BGAZgtjoMhmINK
+         PNYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768911321; x=1769516121;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=8UG5I//qhfAXVkYvAGOVU25HLrOs2wFLOVAa0Jjqqkg=;
-        b=sH+256cD5/t5YYPc8QdMMLI36odkXt6dhUJvZHSXregkL3VXeaRC20DfbjSU92B7PZ
-         IyHWJjfM7bkSqnQ49raVOtFGODr6AJxW2v5YLTeUqsLQEX2jJBN4bEwINycIWEFL6UNs
-         2g04VxpaD/uMIESxM7JCItLCbJfZTJdrtmLQ1RYG7mutmrG9orVGF20Q+JQ4QdDmtXrA
-         RMOpW5rMDGddDTpKl3BAq6ESPyMgLs/uec95PU5vw2EWC3NCChuG+zkG51Afc7X3N41F
-         VaMhdkSv4ilattSwtl8CTC2JN2Ph5rPLvt8BHFpg3vEO7A1ATcy0sp1JFfBlUurT673g
-         gLYA==
-X-Gm-Message-State: AOJu0Yw9pmuq1+i4bY5rTZqsGDepqvyd4geJPLk2yQexj4aWO+2JiLSX
-	WZdOK277YR5xneVkrkJQyYqHoIbUs4nsqiM3SEUngOWmKPPzIqIely3j1V/9Y1PEtb3XTNRWUrN
-	asx9kYSSwO7qcU9WO71SGSRF/NkGPSM0QL19m
-X-Gm-Gg: AZuq6aKOy6cRHJmbKz0atX48HT/EevUTuIEuJxdzWQ2wiaYVun/3b3e9Tkrb3xWgVEF
-	u576vh6uWb34IrcswvCkpIL9FZGrQhDmMawWuRJ08VmxAqymmReutDyX4VuNsXg0bzrB8+p0EtE
-	FhgUo4GeKS9kGFjRGQBEkvzttrTjekmyVoRS53xHOAdEk1ePwjhKujn4aoHrTn39QqYGWzWmsBG
-	lM/jQO7E4BZND4xoxF9mhk5IBpz2XXZYMLyuEVpWDNvFv/vUZ4lOQWwsWDi8cvDCLRu1ZUCw1Zk
-	tfuSsxR90t7WcSML5Nn7SChGcFq7d2PhsgDwzG4X6LQ7xz9zegt5Fo0dTxKWnN677licSNxlrjK
-	YQZ2DBmzZxAq8tsg=
-X-Received: by 2002:a05:693c:3002:b0:2ae:4fcc:7e98 with SMTP id
- 5a478bee46e88-2b6fd61757amr1043516eec.17.1768911319745; Tue, 20 Jan 2026
- 04:15:19 -0800 (PST)
+        d=1e100.net; s=20230601; t=1768912345; x=1769517145;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xAUee/YzVat6TpwlZaam9VTJedRdgbZhapZ5oKv2ap4=;
+        b=fW6uAG+CKvb84cVYfAjB4ORdD55glxX4FKgmlLgn1JKBUYSL2CWNl+q6wOhc+gdfcD
+         T9XJsQIjKo65uiFtu3iMz/kVFGzDhtjRhSNTTYB9l2U5at6xPtuA001GA3p/uzfycBpn
+         79WCxFjmseZYeb0dN2vdLM2MsrY/tM1I0HYhUMItpf6RsdGisw3KUIioISHgE2eHOBsM
+         66XCJvUhZckcgHNAAJIb6VczQX2zYUIhh1knqazRWhI1XWET/BhZDYFpKbCP9uPSXIZa
+         +3cZYm/6bZARknZAJHWvE9GdCXTZOQgugQU/R0KXPkk8YkiCQTm+YjBVdUZt0g2n9JEI
+         Lwcw==
+X-Gm-Message-State: AOJu0YwvyVPGZLBygQYkzxdXCGTHhSgwrh2SNn0TZJ8NLRaRgXs4pipK
+	5IjwzM7ya9BjOwfK319K1OaBjFiUa8Yg/f+eVV7JnkgyVnzwLeG9hOT1lQJ3dg==
+X-Gm-Gg: AY/fxX6VvvKc65OKn0ZEz6wKfUcfhb1XJKCeiAlZs4lLExi3NyIotksQyVyR9g8CTCR
+	2xK/NRc0wKw9ETLS1rkhzxx2CpEXbTY63RutaluIe0JGkaog452V4qIJ0EHwB3a9KaI2TIjk0Rv
+	JZ4zeGfTTL+BUKdJ9deHWT8njJ8UN5aZR2Q1jLEoGFI4ZYPjWELkKg4EtMuBDDXQAqJNAaC9U3s
+	sipQC+d90mNQ8f/muNbAjq+5W4PzJKrWDKNL8cACZiEKmCg3qh8lWAiPUKKusUsUniHlb9yp4OA
+	Jkgy9c6A2p7vfxj+NrFB5DdH1MvMJwcIj7PbU5NdpH9vZIzssONK0eD6tHEsLBaUJAtbwPB3r7L
+	0D2GL4sCsa5IzqOrrkqK/ND0kUviWzqD2GTd73n01wee5nBs0lwzyhf34qMavmxkWcoQVOF+PqX
+	UvFlxkxpic0L74w8r5fdE=
+X-Received: by 2002:a05:600c:5299:b0:477:a9e:859a with SMTP id 5b1f17b1804b1-4803e7e859dmr24990605e9.22.1768912344829;
+        Tue, 20 Jan 2026 04:32:24 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4801fe44b37sm101154145e9.12.2026.01.20.04.32.24
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 20 Jan 2026 04:32:24 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][kirkstone][PATCH v2] freerdp: patch CVE-2023-39350
+Date: Tue, 20 Jan 2026 13:32:23 +0100
+Message-ID: <20260120123223.1003063-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Tue, 20 Jan 2026 05:15:09 -0700
-X-Gm-Features: AZwV_Qi3OE4xGpeO114u4vbudh2ucZSEaLvONf8V22b5fzrkH1sm28l2Xy9V4Vo
-Message-ID: <CAK5yBb-AdZC=peLmnQu04+JO2XCZA0d0Qo_K1hAT2xnFkhw70w@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000da45d20648d0c20a"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 12:15:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123668
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 12:32:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123669
 
---000000000000da45d20648d0c20a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Gyorgy Sarvari via lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
 
-All,
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-39350
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Pick the patch that was identified[1] by Debian as the solution.
+Note that the NVD report also references a commit as a patch - however
+that seems to be incorrect. Although the NVD patch also solves a
+vulnerability, it solves a different CVE (CVE-2023-39353), not this.
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+[1]: https://security-tracker.debian.org/tracker/CVE-2023-39350
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 472
-unassigned or newcomer bugs.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+v1: https://lists.openembedded.org/g/openembedded-devel/message/123658
+v2: In v1, the patch was included that was identified by NVD as the solution.
+    Looking at it closer, it doesn't look correct, it solves a different
+    vulnerability. This patch picks the commit that was identified by
+    Debian as the solution, which fits the vulnerability description
+    also better.
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
+ .../freerdp/freerdp/CVE-2023-39350.patch      | 42 +++++++++++++++++++
+ .../recipes-support/freerdp/freerdp_2.6.1.bb  |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2023-39350.patch
 
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000da45d20648d0c20a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 472 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
-=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000da45d20648d0c20a--
+diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2023-39350.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2023-39350.patch
+new file mode 100644
+index 0000000000..9f4590d90e
+--- /dev/null
++++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2023-39350.patch
+@@ -0,0 +1,42 @@
++From 31ede2c7f721cb32a4a4c7ec843e9ddafb69ba53 Mon Sep 17 00:00:00 2001
++From: akallabeth <akallabeth@posteo.net>
++Date: Fri, 4 Aug 2023 13:55:40 +0200
++Subject: [PATCH] fix possible out of bound read
++
++Allows malicious servers to crash FreeRDP based clients
++reported by pwn2carr
++
++(cherry picked from commit a51952882f2eb3bbce6b69a7a4f9a54bf1dbb672)
++
++CVE: CVE-2023-39350
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/7ece410ce5b5660b9191e1ccb6835158afa11822]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ libfreerdp/codec/rfx.c | 14 ++++++++++++--
++ 1 file changed, 12 insertions(+), 2 deletions(-)
++
++diff --git a/libfreerdp/codec/rfx.c b/libfreerdp/codec/rfx.c
++index 38eb1b9a4..bbd7aafa3 100644
++--- a/libfreerdp/codec/rfx.c
+++++ b/libfreerdp/codec/rfx.c
++@@ -1129,8 +1129,18 @@ BOOL rfx_process_message(RFX_CONTEXT* context, const BYTE* data, UINT32 length,
++ 			}
++ 		}
++ 
++-		Stream_StaticInit(&subStream, Stream_Pointer(s), blockLen - (6 + extraBlockLen));
++-		Stream_Seek(s, blockLen - (6 + extraBlockLen));
+++		const size_t blockLenNoHeader = blockLen - 6;
+++		if (blockLenNoHeader < extraBlockLen)
+++		{
+++			WLog_Print(context->priv->log, WLOG_ERROR,
+++			           "blockLen too small(%" PRIu32 "), must be >= 6 + %" PRIu16, blockLen,
+++			           extraBlockLen);
+++			return FALSE;
+++		}
+++
+++		const size_t subStreamLen = blockLenNoHeader - extraBlockLen;
+++		Stream_StaticInit(&subStream, Stream_Pointer(s), subStreamLen);
+++		Stream_Seek(s, subStreamLen);
++ 
++ 		switch (blockType)
++ 		{
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
+index 7cadae3d45..a104f33e52 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
+@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
+            file://CVE-2022-24883.patch \
+            file://CVE-2022-39282.patch \
+            file://CVE-2022-39320.patch \
++           file://CVE-2023-39350.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 
