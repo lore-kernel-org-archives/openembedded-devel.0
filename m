@@ -1,225 +1,162 @@
-Return-Path: <adam.duskett@amarulasolutions.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E8996D2ED12
-	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 11:09:23 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3960.1768907361528344892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D33CFD2ED12
+	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 12:03:44 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4935.1768910617482892547
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jan 2026 03:09:21 -0800
+ Tue, 20 Jan 2026 04:03:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=PF89bEBW;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.218.43, mailfrom: adam.duskett@amarulasolutions.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b87174fbacdso68410466b.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 03:09:21 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=W0PbQkPv;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-64d1ef53cf3so7254860a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 04:03:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1768907360; x=1769512160; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Q94CRbY1bv+ACVkMy/mZTPfoPjTNOqKFwxTpT+kgKIA=;
-        b=PF89bEBWerq1P9u7VEyjVpB03nJq/4jwCd8mSIxi/j1mOqar+mub2MG9WDt9mHKlWd
-         T7K0UyRMY5B01v+4I1Ml3CDutBnJsRx3/0Fq0+Wk06C4i+P3IYa29SYSMtNRkX71NK0k
-         S6qih0WiH5DBMq+p2O9HN/tBAj9ayAmUep6AU=
+        d=konsulko.com; s=google; t=1768910615; x=1769515415; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Eoky4EVa5iX6v2oi6Ry4ChG550t+hq7F86f6ZhrNP8w=;
+        b=W0PbQkPvEdqhQl8CfZXqBnLhHIH7wKAMTySoXMLSSKFJq/9ppml4bzcVRp3CUX3uFF
+         bh5eKN0soJ5x8/eTHBKzmbQTc/Y4CWrD7WsOOcBbtyd5I5kLQrq9aG0AQBYDQHnAd16j
+         CU58ctzBPSpQY7B0w//1tgCymqrKjdwbBVguA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768907360; x=1769512160;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Q94CRbY1bv+ACVkMy/mZTPfoPjTNOqKFwxTpT+kgKIA=;
-        b=aMeQ4vc3ME+Rlf+HqRil3UbkDigS7b251gKvAIjELkKi+oJTjnq4n4+c8/8WsizocG
-         5o/TqRh+f4KLMP54zhs9S7/T6fYTpkt3MRSHuAJAo7s9eJ3MvaTgzGMOY0ambt5oe+aN
-         Sr/k33vuognkhOPGPezZe3/dQeOBnkx06/Uj6GmPChpGT9RLlvucNDwsoMd3HnHcYu12
-         RR5eB+j9LhgPeCtz7x6dvepbPZmbepm1cDWPX6F01JGxKo17lCSfBUq1hLZTTO1AN0lC
-         4AD7xVi53bXD53IrKA/jlWXl3KBrPq1F5HhkZ4uS13qjcbMmolvc84icigYCDk9mfARP
-         XFVw==
-X-Gm-Message-State: AOJu0Yx6hdtLtk0uDzmBGcTnYpPYMfFpZYkZVfXmfqE0ScNeqg0oVp2x
-	7C6uWvJDvbxFne0LAxBe9QrVIg192O4hzI936g9LW3ntsHlcwwkOQ5WJKXbm3SVA9gjHg6iR+zK
-	iipli
-X-Gm-Gg: AZuq6aJXXo1uk29R8+TR+GG8r7d8CHXtsg5wTyP02fe8NYvMRijRKNjpBsqhudXbuS+
-	P7DnxrZtUebXcbs0YPl1AAzvgiK0Oau+1SAkuOBKfavHpMI6h+sNA5hdTkoktO2pbbuIbT2XhJg
-	GY82bViVMaqD1+GY65s7q8LBtOVXuS8+q4EU1z5+x9X1jxzEqf8K5twfhKmhKxqe/QymXBAwIpr
-	GW4V9Au1/O93f6KE6Qe3LND8XUdUMYZq3G//+SX1m8/MkhR3GVI+dSrp/EWWpb7OYrk2T2eadR9
-	4U6ehqli7m3m5vK9YHDCM4drC0sBAxYCjyx8+/0GA+C1c06vgwL6wi3qP6ukDkR22GIYCSyaeYJ
-	eLQI7Us3wViR3X5glJ2wVfIwOzkMvrAdRGyeePCdeUUT5o3UJvUYQkbwzYXLNETD3/TSQhM0wyn
-	p5wAq9oCO8POO9NFFDQ9tQ2KFCPzGSBTxWBwvV9FhybVIFqssl3LI7/bv4GDy3NtYcFMHgb+jJ1
-	XFSQdiBwJ52WCt3WNcNp2SC3fn9qlkQJAoZ8BfK5MNrN+5UUHt9
-X-Received: by 2002:a17:907:9307:b0:b87:3c3a:cb7e with SMTP id a640c23a62f3a-b8793250e70mr688697166b.6.1768907359781;
-        Tue, 20 Jan 2026 03:09:19 -0800 (PST)
-Received: from adam.arnhem.chello.nl (2001-1c00-8101-1200-3ddc-5bb8-0efa-16f1.cable.dynamic.v6.ziggo.nl. [2001:1c00:8101:1200:3ddc:5bb8:efa:16f1])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b87ed991b75sm399299266b.1.2026.01.20.03.09.19
+        d=1e100.net; s=20230601; t=1768910615; x=1769515415;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Eoky4EVa5iX6v2oi6Ry4ChG550t+hq7F86f6ZhrNP8w=;
+        b=tSJfyfbP5vwFKWaa1yYYGv4NfRdq3/FC4UYIqjendxf1BC2QgkLessMxFajaFJweyB
+         5V7c2Ba8lFcbBKIysQSZ8Y9QRinG27teZLD8gQlQl6Q3jRC0Ti4Jleek9lF09C2rmts3
+         dHhc5xnbLsN1RtN6pAkW64aYT5300O/98po/CSipnd9K36QNjA8wdvmVV6Dtz4Wzvmq0
+         MkLsJaEUTZd2AQpvlHh6lUbz+PKeVinC6PAnM83uIoDIRgwS4ST5Mrv1Zrh019GH2sWv
+         PN+DlCMRTnhsgJlwzdTfqhGswcbp56ycAVuuK4U6Tw7owIA7D0HY2MLB/kxUHLUyJd9W
+         oduA==
+X-Gm-Message-State: AOJu0YwCbuEyHRJq0gU5Q9rw9WzS4ILRlKzaHNSYh/MkS+vKeYbyM3Fd
+	2VtJX7rMX61R6BL/Hsq77Cnc3d6zxDtNyclRdejPlEVXaypMLpecW4X1mDBdTT8dvU2GWbTOJb1
+	lm+ql
+X-Gm-Gg: AZuq6aI+bphU7MBS4vNI8Ch0ezS4bcszV2VR9vM3JPfoDPRRDGq7SWsUe5z3bKhg9el
+	zrj7k8Ug/HJeiRymDrXW0OiJKAPWjGGkX4izf4z+y4k3a9cgzhGMDnDXPTEA+ITO3+Wh+0Vcz64
+	zXakzpJLK4wzU5d1YSwwpUwuOLoGgosYsSpNJFA8OVuifCWG7zgHa4oVGOqRiKDItEVIE/TkEGD
+	DBJK7Rpo5TrxvKK3XjJ0V6zTrQqe9ONP845dxZmw1gWG3XDFKbEVJRzGmJipgjzcfQMSJcvOJnv
+	YtfuKoqcEOAskW3qb0YvSomy5XGm10wpmI/AQshG08FagxwMCZ8bDJeJL9klINvo2WhGiOZOdCN
+	4oeNyzTYSXDVtatouvYFEhecZCQGflGH4gHrUuMAYCgAVVcmxuCjk7O/KTr8VEapeCQ4fzuaxli
+	8jnOc6WMZhmlHItBDmE/AlU0D8
+X-Received: by 2002:a17:907:da6:b0:b83:975:f8a6 with SMTP id a640c23a62f3a-b8793033340mr1327638766b.43.1768910615089;
+        Tue, 20 Jan 2026 04:03:35 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b879513e6d3sm1378721966b.4.2026.01.20.04.03.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Jan 2026 03:09:19 -0800 (PST)
-From: Adam Duskett <adam.duskett@amarulasolutions.com>
+        Tue, 20 Jan 2026 04:03:34 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
-Subject: [PATCH v4 2/2] [meta-oe] kmscon: Add recipe
-Date: Tue, 20 Jan 2026 12:09:16 +0100
-Message-ID: <20260120110917.1390032-2-adam.duskett@amarulasolutions.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260120110917.1390032-1-adam.duskett@amarulasolutions.com>
-References: <20260120110917.1390032-1-adam.duskett@amarulasolutions.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python3-pynacl: Upgrade 1.5.0 -> 1.6.2
+Date: Tue, 20 Jan 2026 14:03:29 +0200
+Message-ID: <20260120120331.2092596-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 11:09:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123664
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 12:03:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123665
 
-Provide sane defaults that do not have dependencies, such as
-a dummy and terminal session support and basic fbdev support.
+Upgrade to release 1.6.2:
 
-kmsconvt@.service must be added separatly or else
-do_rootfs fails with the following error:
+- Updated libsodium to 1.0.20-stable (2025-12-31 build) to resolve
+  CVE-2025-69277.
 
-```
-do_rootfs: Postinstall scriptlets of ['kmscon'] have failed. If the intention
-is to defer them to first boot, then please place them into
-pkg_postinst_ontarget:${PN} (). Deferring to first boot via 'exit 1' is no
-longer supported.
-```
+From 1.6.1:
 
-Add a small patch to fix a compiling error when using LLVM as the
-preferred toolchain.
+- The MAKE environment variable can now be used to specify the make
+  binary that should be used in the build process.
 
-Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+From 1.6.0:
+
+- BACKWARDS INCOMPATIBLE: Removed support for Python 3.6 and 3.7.
+- Added support for the low level AEAD AES bindings.
+- Added support for crypto_core_ed25519_from_uniform.
+- Update libsodium to 1.0.20-stable (2025-08-27 build).
+- Added support for free-threaded Python 3.14.
+- Added support for Windows on ARM wheels.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
-v1 -> v2: add tag=v${PV} to the SRC_URI
-v2 -> v3: Add a small patch to fix LLVM compiling errors
-v3 -> v4: Fix packaging errors when systemd and usrmerge are not in DISTRO_FEATURES
+ .../0001-Build-bindings-reproducibly.patch    | 39 -------------------
+ ...ynacl_1.5.0.bb => python3-pynacl_1.6.2.bb} |  5 +--
+ 2 files changed, 2 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
+ rename meta-python/recipes-devtools/python/{python3-pynacl_1.5.0.bb => python3-pynacl_1.6.2.bb} (82%)
 
- ..._conf.c-Fix-llvm-compilation-failure.patch | 40 +++++++++++
- .../recipes-graphics/kmscon/kmscon_9.2.1.bb   | 71 +++++++++++++++++++
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/kmscon/files/0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch
- create mode 100644 meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-
-diff --git a/meta-oe/recipes-graphics/kmscon/files/0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch b/meta-oe/recipes-graphics/kmscon/files/0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch
-new file mode 100644
-index 0000000000..0806f9bb04
---- /dev/null
-+++ b/meta-oe/recipes-graphics/kmscon/files/0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch
-@@ -0,0 +1,40 @@
-+From 03a330d486132e3798a125d26d4f10252ffd8e2d Mon Sep 17 00:00:00 2001
-+From: Adam Duskett <adam.duskett@amarulasolutions.com>
-+Date: Fri, 16 Jan 2026 11:35:39 +0100
-+Subject: [PATCH] kmscon_conf.c: Fix llvm compilation failure
-+
-+When building with an LLVM toolchain, the follow error occurs:
-+
-+```
-+kmscon_conf.c:757:72:
-+error: expression which evaluates to zero treated as a null pointer constant
-+of type 'void *' [-Werror,-Wnon-literal-null-conversion]
-+CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, KMSCON_GPU_ALL),
-+                                                                     ^~~~~~~~~~~~~~
-+1 error generated.
-+```
-+
-+Fix the error by adding a cast to (void *).
-+
-+Upstream-Status: Submitted [https://github.com/kmscon/kmscon/pull/225]
-+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
-+---
-+ src/kmscon_conf.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/kmscon_conf.c b/src/kmscon_conf.c
-+index df2e51d..9e9a839 100644
-+--- a/src/kmscon_conf.c
-++++ b/src/kmscon_conf.c
-+@@ -754,7 +754,7 @@ int kmscon_conf_new(struct conf_ctx **out)
-+ 		/* Video Options */
-+ 		CONF_OPTION_BOOL_FULL(0, "drm", aftercheck_drm, NULL, NULL, &conf->drm, true),
-+ 		CONF_OPTION_BOOL(0, "hwaccel", &conf->hwaccel, false),
-+-		CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, KMSCON_GPU_ALL),
-++		CONF_OPTION(0, 0, "gpus", &conf_gpus, NULL, NULL, NULL, &conf->gpus, (void *)KMSCON_GPU_ALL),
-+ 		CONF_OPTION_STRING(0, "render-engine", &conf->render_engine, NULL),
-+ 		CONF_OPTION_BOOL(0, "use-original-mode", &conf->use_original_mode, true),
-+ 		CONF_OPTION_STRING(0, "mode", &conf->mode, NULL),
-+-- 
-+2.52.0
-+
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-new file mode 100644
-index 0000000000..508f24c58e
---- /dev/null
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-@@ -0,0 +1,71 @@
-+SUMMARY = "Simple terminal emulator based on linux kernel mode setting (KMS)."
-+DESCRIPTION = "\
-+    Kmscon is a simple terminal emulator based on linux kernel mode setting \
-+    (KMS). It is an attempt to replace the in-kernel VT implementation with \
-+    a userspace console. \
-+"
-+HOMEPAGE = "https://github.com/kmscon/kmscon"
-+BUGTRACKER = "https://github.com/kmscon/kmscon/issues"
-+CVE_PRODUCT = "kmscon"
-+
-+SECTION = "graphics"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=6d4602d249f8a3401040238e98367d9e"
-+
-+DEPENDS = "\
-+    libtsm \
-+    libxkbcommon \
-+    udev \
-+"
-+
-+SRC_URI = "\
-+    git://github.com/kmscon/kmscon;branch=main;protocol=https \
-+    file://0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch \
-+"
-+SRCREV = "7d46650dbb0826f9b89de42f879be879391c14fd"
-+
-+inherit meson pkgconfig systemd
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
-+
-+PACKAGECONFIG[backspace_sends_delete] = "-Dbackspace_sends_delete=true, -Dbackspace_sends_delete=false"
-+PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
-+PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
-+PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
-+PACKAGECONFIG[video_drm2d] = "-Dvideo_drm2d=enabled, -Dvideo_drm2d=disabled, libdrm"
-+
-+EXTRA_OEMESON = "\
-+    -Delogind=disabled \
-+    -Dextra_debug=false \
-+    -Dfont_unifont=enabled \
-+    -Dsession_dummy=enabled \
-+    -Dsession_terminal=enabled \
-+    -Dtests=false \
-+    -Dvideo_fbdev=enabled \
-+"
-+
-+SYSTEMD_SERVICE:${PN} = "kmscon.service"
-+FILES:${PN} += "${systemd_system_unitdir}/kmsconvt@.service"
-+
-+do_install:append() {
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/systemd/system
-+        ln -sf ${systemd_system_unitdir}/kmsconvt@.service \
-+            ${D}${sysconfdir}/systemd/system/autovt@.service
-+    else
-+        # kmscon always installs service files.
-+        # If systemd and usrmerge are not in DISTRO_FEATURES, packaging errors
-+        # occur because service files are installed to /usr/lib/systemd/system/kmscon.service.
-+        rm -rf ${D}${libdir}/systemd
-+    fi
-+
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', d)}; then
-+        sed -e "s@#drm@drm@g" \
-+            -e "s@#hwaccel@hwaccel@g" \
-+            -e "s@#render-engine=gltex@render-engine=gltex@g" \
-+            -i ${D}${sysconfdir}/kmscon/kmscon.conf
-+    fi
-+}
-+
-+RDEPENDS:${PN} = "xkeyboard-config"
+diff --git a/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch b/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
+deleted file mode 100644
+index 3e7480b485..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pynacl/0001-Build-bindings-reproducibly.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From eccc9ea5eef13ee353de610af36fb7759b70e2e4 Mon Sep 17 00:00:00 2001
+-From: Colin Watson <cjwatson@debian.org>
+-Date: Mon, 26 Aug 2024 18:14:33 +0100
+-Subject: [PATCH] Build bindings reproducibly
+-
+-`glob` output isn't guaranteed to be in any particular order, so
+-`_sodium.*.so` wasn't always reproducible.
+-
+-Upstream-Status: Backport [https://github.com/pyca/pynacl/pull/836]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/bindings/build.py | 12 ++++++++----
+- 1 file changed, 8 insertions(+), 4 deletions(-)
+-
+-diff --git a/src/bindings/build.py b/src/bindings/build.py
+-index 9634237..777237b 100644
+---- a/src/bindings/build.py
+-+++ b/src/bindings/build.py
+-@@ -22,12 +22,16 @@ from cffi import FFI
+- __all__ = ["ffi"]
+- 
+- 
+--HEADERS = glob.glob(
+--    os.path.join(os.path.abspath(os.path.dirname(__file__)), "*.h")
+-+HEADERS = sorted(
+-+    glob.glob(os.path.join(os.path.abspath(os.path.dirname(__file__)), "*.h"))
+- )
+- 
+--MINIMAL_HEADERS = glob.glob(
+--    os.path.join(os.path.abspath(os.path.dirname(__file__)), "minimal", "*.h")
+-+MINIMAL_HEADERS = sorted(
+-+    glob.glob(
+-+        os.path.join(
+-+            os.path.abspath(os.path.dirname(__file__)), "minimal", "*.h"
+-+        )
+-+    )
+- )
+- 
+- 
+diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.6.2.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-pynacl_1.6.2.bb
+index 393066de9d..d72d2be2f1 100644
+--- a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pynacl_1.6.2.bb
+@@ -4,10 +4,9 @@ HOMEPAGE = "https://github.com/pyca/pynacl"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8cc789b082b3d97e1ccc5261f8594d3f"
+ 
+-SRC_URI += "file://0001-Build-bindings-reproducibly.patch"
+-SRC_URI[sha256sum] = "8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba"
++SRC_URI[sha256sum] = "018494d6d696ae03c7e656e5e74cdfd8ea1326962cc401bcf018f1ed8436811c"
+ 
+-PYPI_PACKAGE = "PyNaCl"
++PYPI_PACKAGE = "pynacl"
+ UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+ 
+ inherit pypi python_setuptools_build_meta
 -- 
-2.52.0
+2.47.3
 
 
