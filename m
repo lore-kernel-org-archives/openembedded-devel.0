@@ -1,273 +1,231 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <liwei.song@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E82CDD262AB
-	for <webhook@archiver.kernel.org>; Tue, 20 Jan 2026 22:36:02 +0000 (UTC)
-Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19007.1768948553747535933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC4BBD262B2
+	for <webhook@archiver.kernel.org>; Wed, 21 Jan 2026 05:18:58 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5739.1768972729074917794
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Jan 2026 14:35:53 -0800
+ Tue, 20 Jan 2026 21:18:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JjtrQiC8;
- spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-793fdbb8d3aso18408787b3.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 14:35:53 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1768948553; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ii5sZrn6qljI2917xvutFyg+p0EoscTiPRVBa+UgG1zVneRG3ctWzW5TF7nSVSeIk7
-         dAz1L+REzklRqNiWntkbs9nzvXBisRV1oc58NYdLQjAXl02PZt+j8uZ5Hj0bBuNQSqP8
-         HgX1DNB86Xnpmnd7cpsBHw77pXo0tktUSwgDTp+sm61Ta8jTXSqfsEa70lV7flyyDVwe
-         lT87vTOKMrKYNn9U4TWCrnsvEDSEGgdbHsxa+kSVofuvetlCHL6RfS1/maQ6bbx7bvU8
-         Qx7q9lcNyZonyAXfFh72AyfrWv242Je3bRfNysB3LPX21GVjcygGWLVmI84nA3NaXcdD
-         8Mkw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=I/0LK6x5gSM3gVC5RluTn4K5P6yAyhLe1icuyUXf6g0=;
-        fh=RnZMXDUlwXY8UgMJsCy3860tY0uphmLPDqFPKV9t5MY=;
-        b=Cq8xKioF8ZDPR+EXfkMR7XLzGHheMlpbyW90j+pv+5lJkbhPoa4OlUokiPV+uCe4B2
-         5QzIviQii+G8igiHSLP/t0PMQ2sgih77wZzZoQTQuAVb8+elqPLUTvd4OGZzd5cRpeC0
-         k/9dz6Cz8t3ctUpfPdsooEFTemFF837LVxzT/LMciyqkLxtX6VigamesoWabXwyVt9g6
-         rQgHSFKYzHH7xAwjIJRmCBa6z/fGiHQ9eh6m3eRASB89qbmCwk7UJpeZwrURQU4EPLk8
-         /w4Emfe9z6XaTMEYYA3nsTGt83sHnrr3/HFj00Z3xjENgXktkseAuSEv2gL1a44Dkr/p
-         PhiA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1768948553; x=1769553353; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=I/0LK6x5gSM3gVC5RluTn4K5P6yAyhLe1icuyUXf6g0=;
-        b=JjtrQiC89biUO9CVfyXkwTXkE8lFIVgXhB84n/AdEO1yYl5DLa2Y/dKS5+6hocvn35
-         X1h6wD9BdZq6X/jCLjI2S+JSgkFhyUPlPwUg77DKvf0nvLgmPBpXsQevLccIVzRASXRu
-         EpHMNyjN5xWdA6bKUub5oXp8ltA6n8Bs+yPC7X4Y38CGSyunJRuySLuizAGHyqSgIFuR
-         USzOPsB+XLbWL6UD2a7oIBT1kFkjjrq4IotWPe61w9i2qguoTLpsNkCCRXyESL41C5Z0
-         tCc34DBBOhydrqkclC4neZN7tu4lIJn/8x2CYAciq2iBC+UgfJNmVVrfgkGH3fPW4GNo
-         VOIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1768948553; x=1769553353;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=I/0LK6x5gSM3gVC5RluTn4K5P6yAyhLe1icuyUXf6g0=;
-        b=HH9e9umkxNjyM1rzuhcyGAQk2xAIHEvBNxcjZ4E1gH1JGPxFmQaePLkJq/z4yLUbHQ
-         xjHfaTyCINvbpIVOTEGmGSm8Z0nJ/+nLqIOYvGEssza6KkKzdSZANaIZcoUmK6USC5cD
-         9mE8H0R6WAIk4O2SbB78wceq1PYXHabzUFDVsnsv4RJo3+0B5SwhsS+1sIkgq76P8AFZ
-         sAi88InCgYhHKnROlM0PiKDkKnVk5spNKR7ZNbPOl5l1Bmb2fCXwtUZXyVGYaRMLGBxC
-         HqCqGiWNHEWOTX/vz9khsMbQobRzN1dbmUezqWMEeZxScs4qCWX4jgsUHdhgmvcLw5Dl
-         Gokg==
-X-Gm-Message-State: AOJu0YwNMKsY65J+zW0JLee1IPxZ56+x6/EFZaEdf/n3i+wDudOc4FZt
-	WcwfQkfSFEb8rvucrNVMKamG74Bxlf8h1RC1vVfFVf8tLcqB3pt9bbvK3fNkrLRSj7RIndfQ2ra
-	23HtpN7VdsGlEdXOgOy15EldvLHay4Zg=
-X-Gm-Gg: AZuq6aJDqz/DGEwqjIV8SqnwlagYpBpeRGw3RB4GHHDczuYWb95vP9R7FTN4icVRjwV
-	2K0UzlSrRcb33K60cpyJBbOR+OxU+L6WTngpN2IuX+KGjDWWESxiqHDxfQxQ+7T4i3Lx/Ku22YQ
-	H5HQhYJwc/KqDJJyjl6D+81y4atQbMm/tjUdx+GAwRSUs1wwGrNbC33efpffY1KOW0dbO2vejHB
-	Ee3PulEY0n6srbTRDYpI+UJNakYu3KEtX4yZNHh566uGxOm1jJLYe0V7aSMf4+thhRCEYOuCkRQ
-	vQoOZ+77iNjMsxazfPditrfmhDrmb2CbERQBkutrgCvaYjD7ktY8bhAvPv8S/F2vYFSY+sv6nyo
-	arLtwMVub9Os2pwo08ALlvRHm6V5RdQApP6rFnZxM0VMCMFFOrQ==
-X-Received: by 2002:a05:690c:7408:b0:792:6b2b:44dd with SMTP id
- 00721157ae682-793c53c6767mr137643087b3.53.1768948552787; Tue, 20 Jan 2026
- 14:35:52 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=F8B1huMs;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5481349422=liwei.song@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60L4X4C71868480
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 21:18:48 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=PPS06212021; bh=Kf0xTpP7m
+	Z8GO7K9aB9r8FFGSb/itj9cLULwnHHwln0=; b=F8B1huMs2r/nnFfXOy0x87Ohw
+	VgPmWHjlXnTaFMUUfJ8V+fUv9rP9VlW1h3j4ANwiHAxh6F9jGGwpOnGIREEh9JAh
+	qxtA/hwBaNSL8QkqclB2qcKpGxDhEtLvp9NWP5El6BAbDCaYPvHlLYMHlfDQTGQC
+	A4NMDZrxxzEY3T98fwNapd9NjB1Rm3isqe+rt9ZnHpSEBAkL39bhVGKa43niiLU4
+	m7ou4pSZ69hkDSGsrfsuDp9hHJxqCJS7VB47DVWFHL4NVr4e6Y1wjQdmNdDgXWx/
+	v8hMops+Bui2P6dPmR/2tj853AXC2M0NaNTjIzIng97KkXagEUbRFatT7rSBQ==
+Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11011035.outbound.protection.outlook.com [52.101.52.35])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4btnd704qg-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 21:18:48 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SrfR727tO0U3vp2XHMvDYqzn4CyihdTKMzNEsLR665uXMGSqTi0PIN1GB6ZZv2QbxLnEOlmy+w17F8QtQcO/qpPDOGkw05rqCviG5QxZEvpwN51CC4W+EAL4ttFp/OHEG6Ez41DhldlJDD5EJQLKPHdLWl6hrrXZWuNJqdFzS7miX78h3yWN2wgJImyfQV6QwK4uMmU6XAZ7jeG17v6f1D5n8MWCobgjYThHzPuEK7EjQdporgtMwB9nQSKyNWyZrqBxpPRDFW9JsTKko5+1xBWpOy80MxpiRO1jGAYR/+Fz2BqGccvOSUXl/wBftEIF/5s5loqfFPx1zVAgA3xJNw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Kf0xTpP7mZ8GO7K9aB9r8FFGSb/itj9cLULwnHHwln0=;
+ b=ODzJ3ysUM19Nt/j7eMdlj+uq5p5O7Dh8Ri0INIg2btP/ta07fMdyYdh2OeYaX1WNkaKjYBjEroL393RLyfhhgDY9ytxSFP40qaRqIipAkR5ai9d16jliR75jneVTYexmct0G1QXY1918LHzADpMmTCe+wbj98dSfuBHtt/56OIZe5IvgTm3ku12DosG6P9mrCkJnl3ax6li+RGmv0zpPbVM+nHDvcdVUm/OZ6PiUF9Wc+JMHZDTCiEz/YAd7TfoVnX+P2mT2L4aNUQyN6nHSsKu+123FkanqwKtGwkU+ndTGgaezUCT6mFdFcmedvScivCfIXxtMBxmBHunWu/y9Gg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SN7PR11MB6971.namprd11.prod.outlook.com (2603:10b6:806:2ab::21)
+ by LV8PR11MB8488.namprd11.prod.outlook.com (2603:10b6:408:1e7::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9520.4; Wed, 21 Jan
+ 2026 05:18:45 +0000
+Received: from SN7PR11MB6971.namprd11.prod.outlook.com
+ ([fe80::ead3:517f:5eae:ecf1]) by SN7PR11MB6971.namprd11.prod.outlook.com
+ ([fe80::ead3:517f:5eae:ecf1%4]) with mapi id 15.20.9520.011; Wed, 21 Jan 2026
+ 05:18:45 +0000
+From: Liwei Song <liwei.song@windriver.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: liwei.song@windriver.com
+Subject: [oe][meta-oe][PATCH 1/1] tmon: add a new recipe to generate tmon
+Date: Wed, 21 Jan 2026 13:18:29 +0800
+Message-Id: <20260121051829.619440-1-liwei.song@windriver.com>
+X-Mailer: git-send-email 2.40.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR02CA0048.apcprd02.prod.outlook.com
+ (2603:1096:3:18::36) To SN7PR11MB6971.namprd11.prod.outlook.com
+ (2603:10b6:806:2ab::21)
 MIME-Version: 1.0
-References: <20260120200835.160520-2-frederikbraendstrup@gmail.com>
-In-Reply-To: <20260120200835.160520-2-frederikbraendstrup@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Jan 2026 14:35:26 -0800
-X-Gm-Features: AZwV_Qj8drz6lk7bwgJmRRhBxXvSBHicK-HfayV7NfRCzaE-eX2p4dHh_5PkXZA
-Message-ID: <CAMKF1sq+LTUxQ_G8nh0ykLNy09_i-XyB-EKVVfR0G3Wt8K8HqQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH] glaze: improve recipe
-To: frederikbraendstrup@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000001d6c210648d96ec1"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN7PR11MB6971:EE_|LV8PR11MB8488:EE_
+X-MS-Office365-Filtering-Correlation-Id: d1907098-fd50-491a-57c8-08de58ac8cf1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|1800799024|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?pY+pAH+t08eFoGgme57g2EY54rh/WuIyIkhk/VWfS8ljShoO97WBQT85gDJ4?=
+ =?us-ascii?Q?+zJzjJJyiaR11uejp/DzrySKCzBr61LfiReLjPWDDHIAlksaf9qJMaWtF1j1?=
+ =?us-ascii?Q?loLIeX0e4PeoC3POQVPfqRnq0gtJiTxhm+ARGjMjdz7W8n8XuzAvQAonQEgY?=
+ =?us-ascii?Q?lSfENTpFWdbtXKe7OdqRzIkYLWbe8SjURIbxFRznQdHTUUuFDZntQ2qSJmlj?=
+ =?us-ascii?Q?4o8F/doKAImdeO9YFn60qs+5p91IwZrYWNvg9e+TLe74brFOtOAuUr5g3pPr?=
+ =?us-ascii?Q?qAJDYAklzkHLjtqLwhPXMPx2kSq1rBSwcSGVDMdf2f2LTF92v7pKNs2PiUsR?=
+ =?us-ascii?Q?EPpraQmqS9CG75Nz07HYj1hDbBr1k6QgugL0rLJHXrQw8q38RGbpTQJV+fGN?=
+ =?us-ascii?Q?DLkPlhlqawBJjlRQ/ohsOOF3Xl7OV2UJNW/u4bIuW3pwlSTni8GcElf+lMOI?=
+ =?us-ascii?Q?OeaXDnUKzouvM/iHzQ8L8aza4DjAuNDsxQQM6mAleUPe9shmJdoxH0BXqURs?=
+ =?us-ascii?Q?2TwYVO5eBmm0BSpl3bX6UmNP2M8RXoWjvrTTibV3SICGM589dTbM6M8dCGUd?=
+ =?us-ascii?Q?n2gn/W/yjNC+QnpXCp/1I0OJ/GARwDj3TTeYlK6KRxfNqdsZbeAMV5VbNoGc?=
+ =?us-ascii?Q?OmBXwI8WJln3+/d7Pisc9Xo7Wp/3t/ynMNrahS3rw7IRLZqOVq08Q0GhXn3s?=
+ =?us-ascii?Q?DjbQNul73W4ZTJBmtVGJziPR1MBDrtwsxo/iJlssWQmsZdaC3JjEYDYKxOxE?=
+ =?us-ascii?Q?7lx8T7hzqM4HzuXRGP1iqKCWzTT8lZiOgqKhL5QFYUGtVRWmisB3f83N2HrZ?=
+ =?us-ascii?Q?LLMKb17k5xpM1XFQa8j3STwdsSoqICvhTCsLNcE70NB9vxFiD7jk8zkSxlJE?=
+ =?us-ascii?Q?eHPxnG0piGDoFwph+rY2vJb8zzmWo4oYrIXRO24TqaTZvTlxwywTygDPPE0H?=
+ =?us-ascii?Q?wccnGmiO3jUtgy1iRISK25znFRkHVAy59KZ6C4l9/qRnjH4n8wzYeyyJnC34?=
+ =?us-ascii?Q?x2LXxiYIAV3ZZzzbrg148d6AXjnBIw7N23yZjOqvmfwV0qb/vV9spp26nQbz?=
+ =?us-ascii?Q?1EjEbvEJ2KIC/qjl81okfxJJMahE0LMK7wQbLwg/DgJ9YAYPSuV4UplhK+m5?=
+ =?us-ascii?Q?FbL5DkhJecjapRCVhI88X+taCqjOPdWBmZFRz1wGoaPeruKt5h6qiusydpSy?=
+ =?us-ascii?Q?HF3a/jgbYEICbMIyc9D/grCkutBPi28XTrYnSbnlilmTJ/oGKnfOAT/B73xl?=
+ =?us-ascii?Q?PjpiKOQnaiJMzP6R1ds9KGy942glGdSafTgnv4DR1DK6OrwCPGK2Avnnf9ch?=
+ =?us-ascii?Q?gcvRWHQJlrxvycyTPWp1kNBheVohDxZWzCiSg9B8gKNura3BMxJKwGQNQjzK?=
+ =?us-ascii?Q?cUrObhVcJnN/RjlS5sR6L132SFbpg3KMaZtfurBLRsrHybs2cim7++fycPuy?=
+ =?us-ascii?Q?ASfHheQKPrrFbE3fKqaDi62ENBkuy8h7AI6530YdA8KPY4kIUDYUsPi5kFdJ?=
+ =?us-ascii?Q?x04Sh9R/M2Lpi0QQi2vyeSzbg0OpyGqdFm70lzzAlPqAkS2zkTOXb2eO8il9?=
+ =?us-ascii?Q?NSdZvTQ1l8ZhHjdI4cCDvdmIHF0jQOkaCAERIWIAtcBfzOjjio8Vj84SNx89?=
+ =?us-ascii?Q?B/oHEJRyOHGnkpCzAdB3ruY=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR11MB6971.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(52116014)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?q4CxO3xAWzKz2dfajW1lhqkomfNdwJRVnqPHnvQHubFg7UqqbeWIzF7ULfeY?=
+ =?us-ascii?Q?DLrxJAuSiqTJmCOGsaCBcxI1aVqxUVuaO+KhYD5VEvGhuPM8ppZwZ9hmeyEG?=
+ =?us-ascii?Q?i2yN/R2ISXmXwUIjozm5xqpWzZOwk2Pjj+uENCkgqlhAYXldxjSjjQiSOFkc?=
+ =?us-ascii?Q?bJm9UrTRB/3Tx0ax6pzb7VBe7xls5sdJZbIqQj1lmdCnd1n/7RsG9UEoATOv?=
+ =?us-ascii?Q?P3gb1XLTvreK3+oQXv5cwL67BJQ07aBwA7vXDsZUzLvWkpaYJFgsd3NymZe1?=
+ =?us-ascii?Q?WD5W7iYqJqFq3SgKY/yZLGwI7sp+YJkHyo2IgmwdBFHE3sbQSn52svhU30ou?=
+ =?us-ascii?Q?KYHtKH6u0wCCXw2VjrtDUg53fpWg/emOKODLuWGGGhBMYpv5Pb7CPLfpi7Qr?=
+ =?us-ascii?Q?bk4nBDFRnX/4OH7LxWPKAkdoRac4O2sFg8JME9gDNLY0varPKlHXpfP6najS?=
+ =?us-ascii?Q?wgUbXakWw18B2/7bQ2HZXr0G2Hk+VBpoaD/nem6ieBkK7S+5pQZP/zFGxl2J?=
+ =?us-ascii?Q?j3l3qcBg6krMSPSdUeokSAs/0HoGx+fYN9I/rCE12trB0XMR+/Ix3S8Ea0YW?=
+ =?us-ascii?Q?HLmy2DRn5BFD1k/IJ5iZFg1Jtxq1zQvxwN8eQ90d/WGCRT0WViDEeN6FcXge?=
+ =?us-ascii?Q?6yky6BtraW7eiyEIWzxT8P0JK5/6xcKSZblRXV9BycTFFUVsTp5KsPEZkVRI?=
+ =?us-ascii?Q?cngOoT+J7zx/vd0cOJ3JJHWuwh6USbR3Idkf7SyCYzsL8sQ6cL49I2LHmdg0?=
+ =?us-ascii?Q?n+7Q6o6crNot1icnxbKkG50IhuZCQTqCNxKhgUJtRu4ygd0yBD6WFmjVs1xz?=
+ =?us-ascii?Q?r+ZuhRczTfUintZibLDhRHaZvN4ywMG1+gWkRyKjuno9lwZe2eltqVnMzQ2A?=
+ =?us-ascii?Q?xtqEqslv9xeKbVBIOtONrvNfeZZ5b+Kw62kf2X4A0IZOgLWUcY4sWQwqL8aq?=
+ =?us-ascii?Q?ntsyh2o4bY9QCCTpRKHfFaSiJaByRxLbwIQ3eAqqniV7RVIO4jiU+sGGOiQ6?=
+ =?us-ascii?Q?PcN32JcVrXzTXgJaWFEnDnkACeFfPhm9CJoGnYZRf+WjOI+6K2T9Ie54bmko?=
+ =?us-ascii?Q?yYWE6QVUHu6hO5aFf2r3tF3QKw8heNSaW04FeZA4sq5eii9CDCEKm/SNq94N?=
+ =?us-ascii?Q?evotr4X+Zlg56SkrbU0GSXTHfNUf2jA87tfVumWatuXZhkbPzNYU4MXC1fW5?=
+ =?us-ascii?Q?ymv7wuMYwDmNf+tOZqbsnO1u+Pdt3Xz+bsc10O08LQ+IYWLVrxAqYfXlAMxT?=
+ =?us-ascii?Q?1eyMh9TL9rmJlQQbHyqOjwKl1+ZVxX5OpDoMsscI1sqeOeL04HCd1vX1O4Oc?=
+ =?us-ascii?Q?LVSf/hnakOAQS8BXGfIhtljK8aB/CRcS1OPc8/SxQoTwrgKCsqTGpeMJ9Nmj?=
+ =?us-ascii?Q?aVi+CN2rKSuxb6pQtDYMBUVnCNbrXbnP1nFpgc3oAB9/aPr7WtPzVlYbh1JA?=
+ =?us-ascii?Q?GyImH3sAwBta/ZEs0w2K9GZDAJMXwSRSntpcsz30NFwb+6LM4ZZf7rtMI5Bm?=
+ =?us-ascii?Q?NugsfGyH0vU95c1I5kddyM7AzdEZJFKAiSy7gRySHJ86dT4RIDicyoFHFIUT?=
+ =?us-ascii?Q?1kIVplopyYo85RzYXhkPI6D3bd6Vza97pcQjhzkCoHXg4ONl65NYGvDc7HZG?=
+ =?us-ascii?Q?rIrhJIlCefw3xQufnJTl42Gn3vlQXdwo33J4cWSUSzr1j80RXC5t/3aZnRCo?=
+ =?us-ascii?Q?jGjYF83Ml7i+iLqhFNQlggvdMvglDP4cG/tDFbsrfJ5jVKrfh90PFXy6kxjO?=
+ =?us-ascii?Q?bhEZlCjWiQ=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1907098-fd50-491a-57c8-08de58ac8cf1
+X-MS-Exchange-CrossTenant-AuthSource: SN7PR11MB6971.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2026 05:18:45.8209
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bZmIR/l/S7wP3urX/KHCNqi2c7QbJvbk4zPcjj7xWahmvYE+unmYXJMB6gDHy89ej8Qflw6YYPkR2TZVVi+WneQdKJyiHAy7N0Qpn2sdESE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR11MB8488
+X-Proofpoint-ORIG-GUID: bKF_Ti3IZ8dTMvifU3PkgBJNMsUO3S37
+X-Proofpoint-GUID: bKF_Ti3IZ8dTMvifU3PkgBJNMsUO3S37
+X-Authority-Analysis: v=2.4 cv=U++fzOru c=1 sm=1 tr=0 ts=697061b8 cx=c_pps
+ a=2EogD3SZGC0twO92opjmhQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=20ktE8LvIXl5Kcjd:21 a=xqWC_Br6kY4A:10 a=vUbySO9Y5rIA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=t7CeM3EgAAAA:8 a=21zWm_rR9sWP73mh9m4A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTIxMDA0MSBTYWx0ZWRfX5cS2MjGyb5uD
+ VG8X0A5XLD5IntLS6v5w2o1N1tnmWID7W7hZTA1QoO7xttafhFmrpQ0hV+Fxb5/YtrehRgcSQcj
+ PZFRgHhksznAkWvklxQ6u912V1kd5jmvz94ypjZIjsNrGqg4DY6HwK1ZF/1BYrlpQQJT0an5krk
+ HbekKOXvV0z+Y7xSnxen9+jySmJABg1HsOgafDqVoMhdgbHO34BUmxkc+AU5EyTSLVDhKrgPvlG
+ NMXTm6AiAwLiB0qwZDJOCfgSul0YK9STOpSkZKEYw2MWqJ0TDCBizo72ua5yXahIIw0PhWlC1Sc
+ 5BO8ajACFrK2fwYuVWNsx+mapmvJ7BgVK9PaM8C+m2O7z65SQ10frXz3IrsyyKiibKZjVWCy5p/
+ iESAQtrcnp9tw7/H4vp3+GFKL2CmU9SSwGCee8bwtkhtasQ9TDPGy2vWpjPAkVj4+vCp7EkmiCB
+ VZ/21jA+y21ro8ImzAg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
+ definitions=2026-01-21_01,2026-01-20_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 priorityscore=1501 spamscore=0 bulkscore=0 adultscore=0
+ phishscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1011 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601210041
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Jan 2026 22:36:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123681
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Jan 2026 05:18:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123682
 
---0000000000001d6c210648d96ec1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+tmon is a monitoring and testing tool for Linux kernel thermal
+subsystem, it help visualize, tune, and test this complex system.
 
-Please merge/squash the changes into a single commit and send it as v2,
-with description of what changed.
+Signed-off-by: Liwei Song <liwei.song@windriver.com>
+---
+ meta-oe/recipes-kernel/tmon/tmon.bb | 40 +++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/tmon/tmon.bb
 
-On Tue, Jan 20, 2026 at 12:09=E2=80=AFPM Frederik Br=C3=A6ndstrup via
-lists.openembedded.org <frederikbraendstrup=3Dgmail.com@lists.openembedded.=
-org>
-wrote:
+diff --git a/meta-oe/recipes-kernel/tmon/tmon.bb b/meta-oe/recipes-kernel/tmon/tmon.bb
+new file mode 100644
+index 000000000000..4911f445c559
+--- /dev/null
++++ b/meta-oe/recipes-kernel/tmon/tmon.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "A Monitoring and Testing Tool for Linux kernel thermal subsystem"
++DESCRIPTION = "TMON is conceived as a tool to help visualize, tune, and \
++test the complex thermal subsystem"
++
++LICENSE = "GPL-2.0-only"
++
++DEPENDS = "virtual/kernel ncurses"
++
++do_configure[depends] += "virtual/kernel:do_shared_workdir"
++
++# This looks in S, so we better make sure there's
++# something in the directory.
++#
++do_populate_lic[depends] += "${PN}:do_configure"
++
++
++EXTRA_OEMAKE = '\
++		CC="${CC}" \
++		-I${STAGING_KERNEL_DIR}/tools/thermal/tmon \
++'
++
++# If we build under STAGING_KERNEL_DIR, source will not be put
++# into the dbg rpm.  STAGING_KERNEL_DIR will exist by the time
++# do_configure() is invoked so we can safely copy from it.
++#
++do_configure:prepend() {
++	mkdir -p ${S}
++	cp -r ${STAGING_KERNEL_DIR}/tools/thermal/tmon/* ${S}
++	# Fix compile error when pkg-config is on the dependency chain:
++	# tmon.h:42:17: error: field 'tv' has incomplete type
++	sed -i '/PKG_CONFIG.*--cflags.*ncurses/d' ${S}/Makefile
++}
++
++do_compile() {
++	oe_runmake STAGING_KERNEL_DIR=${STAGING_KERNEL_DIR}
++}
++
++do_install() {
++	oe_runmake INSTALL_ROOT="${D}" install
++}
+-- 
+2.40.0
 
-> The initial revision was lacking in some aspects. This is a followup to
-> that
->
-> Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-> ---
->  meta-oe/recipes-support/glaze/glaze_7.0.1.bb | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
-> b/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
-> index f92777a25f..b11176cb52 100644
-> --- a/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
-> +++ b/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
-> @@ -1,13 +1,23 @@
-> -DESCRIPTION =3D "Extremely fast, in memory, JSON and reflection library =
-for
-> modern C++. BEVE, CBOR, CSV, MessagePack, TOML, EETF "
-> -HOMEPAGE =3D "https://stephenberry.github.io/glaze/"
-> +SUMMARY =3D "Extremely fast, in memory, JSON and reflection library for
-> modern C++. BEVE, CBOR, CSV, MessagePack, TOML, EETF "
-> +HOMEPAGE =3D "https://github.com/stephenberry/glaze/"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dea4d29875d83fbbf50485c846dbbb=
-ed8"
->
-> -SRC_URI =3D "git://
-> github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=3D${PV}
-> <http://github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=
-=3D$%7BPV%7D>
-> "
-> +SRC_URI =3D "git://
-> github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=3Dv${PV}
-> <http://github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=
-=3Dv$%7BPV%7D>
-> "
->
->  SRCREV =3D "a4af950700b8af2659f0d4a37a18a1b9c5300593"
->
->  inherit cmake
->
-> -EXTRA_OECMAKE =3D "-Dglaze_BUILD_EXAMPLES=3DOFF -DBUILD_TESTING=3DOFF
-> -Dglaze_ENABLE_FUZZING=3DOFF"
-> +EXTRA_OECMAKE =3D "-Dglaze_BUILD_EXAMPLES=3DOFF -DBUILD_TESTING=3DOFF
-> -Dglaze_ENABLE_FUZZING=3DOFF -Dglaze_DEVELOPER_MODE=3DOFF"
->
-> +do_install:append() {
-> +    install -d ${D}${datadir}/cmake/${BPN}
-> +    mv -f ${D}${datadir}/${BPN}/*.cmake ${D}${datadir}/cmake/${BPN}
-> +    rmdir -p --ignore-fail-on-non-empty ${D}${datadir}/${BPN}
-> +}
-> +
-> +# Glaze is a header-only C++ library, so the main package will be empty.
-> +ALLOW_EMPTY:${PN} =3D "1"
-> +
-> +BBCLASSEXTEND =3D "native"
-> --
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123679):
-> https://lists.openembedded.org/g/openembedded-devel/message/123679
-> Mute This Topic: https://lists.openembedded.org/mt/117369931/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---0000000000001d6c210648d96ec1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Please merge/squash the changes into a single commit and s=
-end it as v2, with description=C2=A0of what changed.</div><br><div class=3D=
-"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
-n Tue, Jan 20, 2026 at 12:09=E2=80=AFPM Frederik Br=C3=A6ndstrup via <a hre=
-f=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;frederik=
-braendstrup=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com=
-@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">The initial revision was lacking in some aspects. Th=
-is is a followup to<br>
-that<br>
-<br>
-Signed-off-by: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frederikbraends=
-trup@gmail.com" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-support/glaze/<a href=3D"http://glaze_7.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">glaze_7.0.1.bb</a> | 18 ++++++++++++++---=
--<br>
-=C2=A01 file changed, 14 insertions(+), 4 deletions(-)<br>
-<br>
-diff --git a/meta-oe/recipes-support/glaze/<a href=3D"http://glaze_7.0.1.bb=
-" rel=3D"noreferrer" target=3D"_blank">glaze_7.0.1.bb</a> b/meta-oe/recipes=
--support/glaze/<a href=3D"http://glaze_7.0.1.bb" rel=3D"noreferrer" target=
-=3D"_blank">glaze_7.0.1.bb</a><br>
-index f92777a25f..b11176cb52 100644<br>
---- a/meta-oe/recipes-support/glaze/<a href=3D"http://glaze_7.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">glaze_7.0.1.bb</a><br>
-+++ b/meta-oe/recipes-support/glaze/<a href=3D"http://glaze_7.0.1.bb" rel=
-=3D"noreferrer" target=3D"_blank">glaze_7.0.1.bb</a><br>
-@@ -1,13 +1,23 @@<br>
--DESCRIPTION =3D &quot;Extremely fast, in memory, JSON and reflection libra=
-ry for modern C++. BEVE, CBOR, CSV, MessagePack, TOML, EETF &quot;<br>
--HOMEPAGE =3D &quot;<a href=3D"https://stephenberry.github.io/glaze/" rel=
-=3D"noreferrer" target=3D"_blank">https://stephenberry.github.io/glaze/</a>=
-&quot;<br>
-+SUMMARY =3D &quot;Extremely fast, in memory, JSON and reflection library f=
-or modern C++. BEVE, CBOR, CSV, MessagePack, TOML, EETF &quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/stephenberry/glaze/" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/stephenberry/glaze/</a=
->&quot;<br>
-=C2=A0LICENSE =3D &quot;MIT&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dea4d29875d83fbbf50485=
-c846dbbbed8&quot;<br>
-<br>
--SRC_URI =3D &quot;git://<a href=3D"http://github.com/stephenberry/glaze;pr=
-otocol=3Dhttps;branch=3Dmain;tag=3D$%7BPV%7D" rel=3D"noreferrer" target=3D"=
-_blank">github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=3D=
-${PV}</a>&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/stephenberry/glaze;pr=
-otocol=3Dhttps;branch=3Dmain;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=3D=
-"_blank">github.com/stephenberry/glaze;protocol=3Dhttps;branch=3Dmain;tag=
-=3Dv${PV}</a>&quot;<br>
-<br>
-=C2=A0SRCREV =3D &quot;a4af950700b8af2659f0d4a37a18a1b9c5300593&quot;<br>
-<br>
-=C2=A0inherit cmake<br>
-<br>
--EXTRA_OECMAKE =3D &quot;-Dglaze_BUILD_EXAMPLES=3DOFF -DBUILD_TESTING=3DOFF=
- -Dglaze_ENABLE_FUZZING=3DOFF&quot;<br>
-+EXTRA_OECMAKE =3D &quot;-Dglaze_BUILD_EXAMPLES=3DOFF -DBUILD_TESTING=3DOFF=
- -Dglaze_ENABLE_FUZZING=3DOFF -Dglaze_DEVELOPER_MODE=3DOFF&quot;<br>
-<br>
-+do_install:append() {<br>
-+=C2=A0 =C2=A0 install -d ${D}${datadir}/cmake/${BPN}<br>
-+=C2=A0 =C2=A0 mv -f ${D}${datadir}/${BPN}/*.cmake ${D}${datadir}/cmake/${B=
-PN}<br>
-+=C2=A0 =C2=A0 rmdir -p --ignore-fail-on-non-empty ${D}${datadir}/${BPN}<br=
->
-+}<br>
-+<br>
-+# Glaze is a header-only C++ library, so the main package will be empty.<b=
-r>
-+ALLOW_EMPTY:${PN} =3D &quot;1&quot;<br>
-+<br>
-+BBCLASSEXTEND =3D &quot;native&quot;<br>
--- <br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123679): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123679" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123679</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117369931/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117369931/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000001d6c210648d96ec1--
 
