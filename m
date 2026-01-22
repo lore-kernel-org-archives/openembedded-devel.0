@@ -2,246 +2,205 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4961D3EE86
-	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 15:45:20 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.40534.1769096715950072155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DCA5DD3EE89
+	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 15:50:30 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.40341.1769097020818083448
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jan 2026 07:45:16 -0800
+ Thu, 22 Jan 2026 07:50:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout01.t-online.de (Postfix) with SMTP id AF22E1CE9C;
-	Thu, 22 Jan 2026 16:45:13 +0100 (CET)
-Received: from [192.168.178.36] ([84.154.161.253]) by fwd72.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout06.t-online.de (Postfix) with SMTP id 72B9D11E6;
+	Thu, 22 Jan 2026 16:50:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.161.253]) by fwd78.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1viwrw-11dAfo0; Thu, 22 Jan 2026 16:45:12 +0100
-Date: Thu, 22 Jan 2026 16:45:06 +0100
+	esmtp id 1viwwe-0VGLkP0; Thu, 22 Jan 2026 16:50:04 +0100
 From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCH 01/11] mutter: update 48.5 -> 48.7
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <6RV99T.MF41X3453EXX2@t-online.de>
-In-Reply-To: <188D1804EEE34AC4.2979268@lists.openembedded.org>
-References: <188D1804EEE34AC4.2979268@lists.openembedded.org>
-X-Mailer: geary/46.0
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCHv2] mozjs-128: update 128.5.2 -> 128.14.0
+Date: Thu, 22 Jan 2026 16:49:56 +0100
+Message-ID: <20260122154956.1874321-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-ctYhhYgKTd+Uw3X3iZrv"
-X-TOI-EXPURGATEID: 150726::1769096712-FF7FD939-539E65FC/0/0 CLEAN NORMAL
-X-TOI-MSGID: f41757c1-5481-4688-8170-e00b4a7972ff
+X-TOI-EXPURGATEID: 150726::1769097004-9F7FD9BB-5B7CDCA8/0/0 CLEAN NORMAL
+X-TOI-MSGID: 52c826ff-650b-4903-aa7e-13ab02bde57c
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 15:45:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123751
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 15:50:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123752
 
---=-ctYhhYgKTd+Uw3X3iZrv
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+- add a patch to fix build with python 3.14
 
-This patchset allows me to build gnome-shell without x11
-
-On Thu, Jan 22 2026 at 16:43:24 +01:00:00, Markus Volk via=20
-lists.openembedded.org <f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
-> 48.7
-> =3D=3D=3D=3D
-> * Still constrain fullscreen wayland windows with size limits [Jonas=20
-> =C5.;
->   !4587]
->   * Fixed crashes [Jonas, Marco; !4643, !4705]
->=20
->   Contributors:
->     Marco Trevisan, Jonas =C5dahl
->=20
-> 48.6
->     =3D=3D=3D=3D
-> * Fix DND actions not working reliably in some X11 clients [Jonas;
->   #4288]
->   * Fix presentation timings with commit-timing-v1 [Mario; !4645]
->   * Fixed crashes [Sebastian, Milan; !4682, !4592]
->   * Misc. bug fixes and cleanups [Carlos, Raihan; !4697, !4688]
->=20
->   Contributors:
->     Raihan Ahamed, Milan Crha, Carlos Garnacho, Sebastian Keller,
->     Mario Kleiner, Jonas =C5dahl
->=20
-> Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
-> ---
->  .../recipes-gnome/mutter/{mutter_48.5.bb =3D> mutter_48.7.bb}  | 5=20
-> +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->  rename meta-gnome/recipes-gnome/mutter/{mutter_48.5.bb =3D>=20
-> mutter_48.7.bb} (95%)
->=20
-> diff --git a/meta-gnome/recipes-gnome/mutter/mutter_48.5.bb=20
-> b/meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-> similarity index 95%
-> rename from meta-gnome/recipes-gnome/mutter/mutter_48.5.bb
-> rename to meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-> index ce7f44947e..0dbdb4b31a 100644
-> --- a/meta-gnome/recipes-gnome/mutter/mutter_48.5.bb
-> +++ b/meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-> @@ -27,9 +27,8 @@ DEPENDS =3D " \
->=20
->  inherit gnomebase gsettings gobject-introspection gettext=20
-> features_check
->=20
-> -SRC_URI[archive.sha256sum] =3D=20
-> "02ed0ab4194fc537540f9ee92acbf5af8209971a404df319c1cb7763294ae58b"
-> -
->  SRC_URI +=3D "file://0001-Dont-use-system-sysprof-dbus-folder.patch"=20
-> <file://0001-dont-use-system-sysprof-dbus-folder.patch/>
-> +SRC_URI[archive.sha256sum] =3D=20
-> "ec102aa3cbb0e39001206627aca3055314555f70609de5e6c2b7efcd1fa90f20"
->=20
->  # x11 is still manadatory - see meson.build
->  REQUIRED_DISTRO_FEATURES =3D "wayland x11 polkit"
-> @@ -43,7 +42,6 @@ REQUIRED_DISTRO_FEATURES +=3D "systemd"
->  PACKAGECONFIG ??=3D " \
->      native-backend \
->      ${@bb.utils.contains=20
-> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'opengl x11',=20
-> 'opengl glx', '', d)} \
-> -    sm \
->      startup-notification \
->      gnome-desktop \
->  "
-> @@ -61,7 +59,6 @@ PACKAGECONFIG[libwacom] =3D "-Dlibwacom=3Dtrue,=20
-> -Dlibwacom=3Dfalse, libwacom"
->  # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
->  PACKAGECONFIG[remote-desktop] =3D "-Dremote_desktop=3Dtrue,=20
-> -Dremote_desktop=3Dfalse, pipewire"
->  PACKAGECONFIG[gnome-desktop] =3D "-Dlibgnome_desktop=3Dtrue,=20
-> -Dlibgnome_desktop=3Dfalse, gnome-desktop gnome-settings-daemon"
-> -PACKAGECONFIG[sm] =3D "-Dsm=3Dtrue, -Dsm=3Dfalse, libsm"
->  PACKAGECONFIG[sound-player] =3D "-Dsound_player=3Dtrue,=20
-> -Dsound_player=3Dfalse, libcanberra"
->  PACKAGECONFIG[profiler] =3D "-Dprofiler=3Dtrue,-Dprofiler=3Dfalse,syspro=
-f"
->  PACKAGECONFIG[startup-notification] =3D "-Dstartup_notification=3Dtrue,=20
-> -Dstartup_notification=3Dfalse, startup-notification,=20
-> startup-notification"
-> --
-> 2.52.0
->=20
->=20
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123747):=20
-> <https://lists.openembedded.org/g/openembedded-devel/message/123747>
-> Mute This Topic: <https://lists.openembedded.org/mt/117401787/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org=20
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe:=20
-> <https://lists.openembedded.org/g/openembedded-devel/unsub>=20
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
-
---=-ctYhhYgKTd+Uw3X3iZrv
-Content-Type: text/html; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>This patchset allows me to build g=
-nome-shell without x11</div></div><div id=3D"geary-quote" dir=3D"auto"><br>=
-On Thu, Jan 22 2026 at 16:43:24 +01:00:00, Markus Volk via lists.openembedd=
-ed.org &lt;f_l_k=3Dt-online.de@lists.openembedded.org&gt; wrote:<br><blockq=
-uote type=3D"cite"><div class=3D"plaintext" style=3D"white-space: break-spa=
-ces;">48.7
-=3D=3D=3D=3D
-* Still constrain fullscreen wayland windows with size limits [Jonas =C5.;
-  !4587]
-  * Fixed crashes [Jonas, Marco; !4643, !4705]
-
-  Contributors:
-    Marco Trevisan, Jonas =C5dahl
-
-48.6
-    =3D=3D=3D=3D
-* Fix DND actions not working reliably in some X11 clients [Jonas;
-  #4288]
-  * Fix presentation timings with commit-timing-v1 [Mario; !4645]
-  * Fixed crashes [Sebastian, Milan; !4682, !4592]
-  * Misc. bug fixes and cleanups [Carlos, Raihan; !4697, !4688]
-
-  Contributors:
-    Raihan Ahamed, Milan Crha, Carlos Garnacho, Sebastian Keller,
-    Mario Kleiner, Jonas =C5dahl
-
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t=
--online.de</a>&gt;
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-gnome/mutter/{mutter_48.5.bb =3D&gt; mutter_48.7.bb}  | 5 +---=
--
- 1 file changed, 1 insertion(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/mutter/{mutter_48.5.bb =3D&gt; mutter_48.7=
-.bb} (95%)
+ .../mozjs/mozjs-128/D261512.1755672843.patch  | 68 +++++++++++++++++++
+ ...s-128_128.5.2.bb =3D> mozjs-128_128.14.0.bb} | 34 +++++-----
+ 2 files changed, 86 insertions(+), 16 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755=
+672843.patch
+ rename meta-oe/recipes-extended/mozjs/{mozjs-128_128.5.2.bb =3D> mozjs-1=
+28_128.14.0.bb} (69%)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_48.5.bb b/meta-gnome/re=
-cipes-gnome/mutter/mutter_48.7.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/mutter/mutter_48.5.bb
-rename to meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-index ce7f44947e..0dbdb4b31a 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_48.5.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_48.7.bb
-@@ -27,9 +27,8 @@ DEPENDS =3D " \
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.=
+patch b/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.patch
+new file mode 100644
+index 0000000000..1b35d2c094
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.patch
+@@ -0,0 +1,68 @@
++This patch fixes configure with python 3.14
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Backport [https://github.com/mozilla-firefox/firefox/co=
+mmit/d497aa4f770ca02f6083e93b94996a8fe32c2ff4]
++
++diff --git a/python/mozbuild/mozbuild/frontend/reader.py b/python/mozbui=
+ld/mozbuild/frontend/reader.py
++index 5cb627b..c2dcafe 100644
++--- a/python/mozbuild/mozbuild/frontend/reader.py
+++++ b/python/mozbuild/mozbuild/frontend/reader.py
++@@ -470,7 +470,7 @@ class TemplateFunction(object):
++             return c(
++                 ast.Subscript(
++                     value=3Dc(ast.Name(id=3Dself._global_name, ctx=3Das=
+t.Load())),
++-                    slice=3Dc(ast.Index(value=3Dc(ast.Str(s=3Dnode.id))=
+)),
+++                    slice=3Dc(ast.Index(value=3Dc(ast.Constant(value=3D=
+node.id)))),
++                     ctx=3Dnode.ctx,
++                 )
++             )
++@@ -1035,8 +1035,8 @@ class BuildReader(object):
++                 else:
++                     # Others
++                     assert isinstance(target.slice, ast.Index)
++-                    assert isinstance(target.slice.value, ast.Str)
++-                    key =3D target.slice.value.s
+++                    assert isinstance(target.slice.value, ast.Constant)
+++                    key =3D target.slice.value.value
++=20
++             return name, key
++=20
++@@ -1044,11 +1044,11 @@ class BuildReader(object):
++             value =3D node.value
++             if isinstance(value, ast.List):
++                 for v in value.elts:
++-                    assert isinstance(v, ast.Str)
++-                    yield v.s
+++                    assert isinstance(v, ast.Constant)
+++                    yield v.value
++             else:
++-                assert isinstance(value, ast.Str)
++-                yield value.s
+++                assert isinstance(value, ast.Constant)
+++                yield value.value
++=20
++         assignments =3D []
++=20
++diff --git a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py b/pytho=
+n/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
++index 1590267..151d27c 100644
++--- a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
+++++ b/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
++@@ -327,15 +327,13 @@ def assignment_node_to_source_filename_list(code, =
+node):
++     """
++     if isinstance(node.value, ast.List) and "elts" in node.value._field=
+s:
++         for f in node.value.elts:
++-            if not isinstance(f, ast.Constant) and not isinstance(f, as=
+t.Str):
+++            if not isinstance(f, ast.Constant):
++                 log(
++                     "Found non-constant source file name in list: ",
++                     ast_get_source_segment(code, f),
++                 )
++                 return []
++-        return [
++-            f.value if isinstance(f, ast.Constant) else f.s for f in no=
+de.value.elts
++-        ]
+++        return [f.value for f in node.value.elts]
++     elif isinstance(node.value, ast.ListComp):
++         # SOURCES +=3D [f for f in foo if blah]
++         log("Could not find the files for " + ast_get_source_segment(co=
+de, node.value))
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-o=
+e/recipes-extended/mozjs/mozjs-128_128.14.0.bb
+similarity index 69%
+rename from meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
+rename to meta-oe/recipes-extended/mozjs/mozjs-128_128.14.0.bb
+index fbbe3749ba..635cad96cf 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.14.0.bb
+@@ -3,22 +3,24 @@ HOMEPAGE =3D "https://developer.mozilla.org/en-US/docs/=
+Mozilla/Projects/SpiderMonk
+ LICENSE =3D "MPL-2.0"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddc9b6ecd19a14a54a628edaaf2373=
+3bf"
 =20
- inherit gnomebase gsettings gobject-introspection gettext features_check
+-SRC_URI =3D "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/s=
+ource/firefox-${PV}esr.source.tar.xz \
+-           file://0001-Cargo.toml-do-not-abort-on-panic.patch \
+-           file://0002-moz.configure-do-not-look-for-llvm-objdump.patch =
+\
+-           file://0003-rust.configure-do-not-try-to-find-a-suitable-upst=
+rea.patch \
+-           file://0004-use-asm-sgidefs.h.patch \
+-           file://0005-Add-RISCV32-support.patch \
+-           file://0006-util.configure-fix-one-occasionally-reproduced-co=
+nfi.patch \
+-           file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
+-           file://0008-Musl-does-not-have-stack-unwinder-like-glibc-ther=
+efo.patch \
+-           file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compi=
+le-.patch \
+-           file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v=
+6-s.patch \
+-           file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
+-           file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-archit=
+ect.patch \
+-           file://0013-Fix-build-error-with-musl.patch \
+-           "
+-SRC_URI[sha256sum] =3D "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef49=
+5d4997154d68358f"
++SRC_URI =3D " \
++    https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fir=
+efox-${PV}esr.source.tar.xz \
++    file://0001-Cargo.toml-do-not-abort-on-panic.patch \
++    file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
++    file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.pat=
+ch \
++    file://0004-use-asm-sgidefs.h.patch \
++    file://0005-Add-RISCV32-support.patch \
++    file://0006-util.configure-fix-one-occasionally-reproduced-confi.pat=
+ch \
++    file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
++    file://0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.pat=
+ch \
++    file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.pat=
+ch \
++    file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.pat=
+ch \
++    file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
++    file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.pat=
+ch \
++    file://0013-Fix-build-error-with-musl.patch \
++    file://D261512.1755672843.patch \
++"
++SRC_URI[sha256sum] =3D "93b9ef6229f41cb22ff109b95bbf61a78395a0fe4b870192=
+eeca22947cb09a53"
 =20
--SRC_URI[archive.sha256sum] =3D "02ed0ab4194fc537540f9ee92acbf5af8209971a40=
-4df319c1cb7763294ae58b"
--
- SRC_URI +=3D "<a href=3D"file://0001-Dont-use-system-sysprof-dbus-folder.p=
-atch" "=3D"">file://0001-Dont-use-system-sysprof-dbus-folder.patch"</a>
-+SRC_URI[archive.sha256sum] =3D "ec102aa3cbb0e39001206627aca3055314555f7060=
-9de5e6c2b7efcd1fa90f20"
-=20
- # x11 is still manadatory - see meson.build
- REQUIRED_DISTRO_FEATURES =3D "wayland x11 polkit"
-@@ -43,7 +42,6 @@ REQUIRED_DISTRO_FEATURES +=3D "systemd"
- PACKAGECONFIG ??=3D " \
-     native-backend \
-     <a href=3D"mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DIST=
-RO_FEATURES', 'opengl x11', 'opengl glx', '', d)} \
--    sm \
-     startup-notification \
-     gnome-desktop \
- "
-@@ -61,7 +59,6 @@ PACKAGECONFIG[libwacom] =3D "-Dlibwacom=3Dtrue, -Dlibwaco=
-m=3Dfalse, libwacom"
- # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
- PACKAGECONFIG[remote-desktop] =3D "-Dremote_desktop=3Dtrue, -Dremote_deskt=
-op=3Dfalse, pipewire"
- PACKAGECONFIG[gnome-desktop] =3D "-Dlibgnome_desktop=3Dtrue, -Dlibgnome_de=
-sktop=3Dfalse, gnome-desktop gnome-settings-daemon"
--PACKAGECONFIG[sm] =3D "-Dsm=3Dtrue, -Dsm=3Dfalse, libsm"
- PACKAGECONFIG[sound-player] =3D "-Dsound_player=3Dtrue, -Dsound_player=3Df=
-alse, libcanberra"
- PACKAGECONFIG[profiler] =3D "-Dprofiler=3Dtrue,-Dprofiler=3Dfalse,sysprof"
- PACKAGECONFIG[startup-notification] =3D "-Dstartup_notification=3Dtrue, -D=
-startup_notification=3Dfalse, startup-notification, startup-notification"
-<div>--=20
-</div>2.52.0
-
-</div><div class=3D"plaintext" style=3D"white-space: break-spaces;">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#123747): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123747">https://lists.openembedded.org/g/openembed=
-ded-devel/message/123747</a>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117401787/361=
-8223">https://lists.openembedded.org/mt/117401787/3618223</a>
-Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
-org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
-ref=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</div></blockquote></div>
---=-ctYhhYgKTd+Uw3X3iZrv--
+ UPSTREAM_CHECK_URI =3D "https://tracker.debian.org/pkg/mozjs128"
+ UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
+--=20
+2.52.0
 
 
