@@ -2,93 +2,113 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7710D3EE66
-	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 14:50:09 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.38787.1769093403531720601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 676DBD3EE86
+	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 15:44:00 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.40180.1769096637744800938
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jan 2026 06:50:03 -0800
+ Thu, 22 Jan 2026 07:43:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout08.t-online.de (Postfix) with SMTP id C1963EEC4;
-	Thu, 22 Jan 2026 15:50:00 +0100 (CET)
-Received: from [192.168.178.36] ([84.154.161.253]) by fwd86.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout02.t-online.de (Postfix) with SMTP id C3E1EF34B
+	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 16:43:54 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.161.253]) by fwd76.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1viw0R-1yK0rg0; Thu, 22 Jan 2026 15:49:55 +0100
-Date: Thu, 22 Jan 2026 15:49:49 +0100
+	esmtp id 1viwqc-1auNgZ0; Thu, 22 Jan 2026 16:43:50 +0100
 From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCH] mozjs-128: update 128.5.2 -> 128-14-0
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-Id: <17T99T.6AI6A8X0AFQE1@t-online.de>
-In-Reply-To: <-1849835318615145802@unknownmsgid>
-References: <20260121200056.2789828-1-f_l_k@t-online.de>
-	<4b7d1b9c-d243-4710-bdb1-e09b3df2e96e@gmail.com>
-	<-1849835318615145802@unknownmsgid>
-X-Mailer: geary/46.0
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH 11/11] gnome-shell: fix build without x11 in DISTRO_FEATURES
+Date: Thu, 22 Jan 2026 16:43:34 +0100
+Message-ID: <20260122154334.1872038-11-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260122154334.1872038-1-f_l_k@t-online.de>
+References: <20260122154334.1872038-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-HY3/u48L2aKOUugDGwvO"
-X-TOI-EXPURGATEID: 150726::1769093395-957F9995-E9BF675D/0/0 CLEAN NORMAL
-X-TOI-MSGID: c257a58f-710f-483f-a45c-e57650640e4f
+X-TOI-EXPURGATEID: 150726::1769096630-417F9925-C1E8FD9A/0/0 CLEAN NORMAL
+X-TOI-MSGID: fc3d7e74-a58c-40e0-a304-44e345b0728a
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 14:50:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123739
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 15:44:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123749
 
---=-HY3/u48L2aKOUugDGwvO
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...c-only-include-x11-headers-if-HAVE_X.patch | 30 +++++++++++++++++++
+ .../gnome-shell/gnome-shell_48.3.bb           |  3 +-
+ 2 files changed, 32 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001=
+-shell-app-usage.c-only-include-x11-headers-if-HAVE_X.patch
 
-The new version at least isn't needed yet. It's required for the 
-mutter-49/gnome-shell-49/gjs-1.86.0 update,
-which is currently blocked by the missing glycin2 recipe (required by 
-mutter).
-
-Not quite sure whether mutter-48/gnome-shell-48 would run error-free 
-with mozjs-140, so I wanted to play it safe.
-
-I hadn't found the patch in the Mozilla sources yet. It wasn't even 
-included in the current mozjs-140 release
-from a few days ago. Thanks for the info, I'll send a v2.
-
-On Thu, Jan 22 2026 at 15:44:16 +01:00:00, Markus Volk 
-<mrksvolk@googlemail.com> wrote:
-> The new version at least isn't needed yet. It's required for the 
-> mutter-49/gnome-shell-49/gjs-1.86.0 update,
-> which is currently blocked by the missing glycin2 recipe (required by 
-> mutter).
-> 
-> I'm not sure whether mutter-48/gnome-shell-48 would run error-free 
-> with mozjs-140, so I wanted to play it safe.
-> 
-> I hadn't found the patch in the Mozilla sources yet. It wasn't even 
-> included in the current mozjs-140 release from a few days ago.
-
-
---=-HY3/u48L2aKOUugDGwvO
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div><div>The new version at least isn'=
-t needed yet. It's required for the mutter-49/gnome-shell-49/gjs-1.86.0 upd=
-ate,</div><div>which is currently blocked by the missing glycin2 recipe (re=
-quired by mutter).</div><div><br></div><div>Not quite sure whether mutter-4=
-8/gnome-shell-48 would run error-free with mozjs-140, so I wanted to play i=
-t safe.</div><div><br></div><div>I hadn't found the patch in the Mozilla so=
-urces yet. It wasn't even included in the current mozjs-140 release</div><d=
-iv>from a few days ago. Thanks for the info, I'll send a v2.</div></div></d=
-iv><div id=3D"geary-quote" dir=3D"auto"><br>On Thu, Jan 22 2026 at 15:44:16=
- +01:00:00, Markus Volk &lt;mrksvolk@googlemail.com&gt; wrote:<br><blockquo=
-te type=3D"cite"><div id=3D"geary-body" dir=3D"auto"><div>The new version a=
-t least isn't needed yet. It's required for the mutter-49/gnome-shell-49/gj=
-s-1.86.0 update,</div><div>which is currently blocked by the missing glycin=
-2 recipe (required by mutter).</div><div><br></div><div>I'm not sure whethe=
-r mutter-48/gnome-shell-48 would run error-free with mozjs-140, so I wanted=
- to play it safe.</div><div><br></div><div>I hadn't found the patch in the =
-Mozilla sources yet. It wasn't even included in the current mozjs-140 relea=
-se from a few days ago.</div></div><div id=3D"geary-signature" dir=3D"auto"=
-></div></blockquote></div>
---=-HY3/u48L2aKOUugDGwvO--
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-shell-=
+app-usage.c-only-include-x11-headers-if-HAVE_X.patch b/meta-gnome/recipes=
+-gnome/gnome-shell/gnome-shell/0001-shell-app-usage.c-only-include-x11-he=
+aders-if-HAVE_X.patch
+new file mode 100644
+index 0000000000..e9cee8e91a
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0001-shell-app-usa=
+ge.c-only-include-x11-headers-if-HAVE_X.patch
+@@ -0,0 +1,30 @@
++From 2ae299419ec7b15a59e2b2b8a5b266b9f29df5a4 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Thu, 22 Jan 2026 12:52:34 +0100
++Subject: [PATCH] shell-app-usage.c: only include x11 headers if HAVE_X11
++
++Signed-off-by: Markus Volk <f_l_k@t-online.de>
++
++Upstream-Status: Pending
++---
++ src/shell-app-usage.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/shell-app-usage.c b/src/shell-app-usage.c
++index 9e57a91b2..77adcf6a2 100644
++--- a/src/shell-app-usage.c
+++++ b/src/shell-app-usage.c
++@@ -5,8 +5,10 @@
++ #include <string.h>
++ #include <stdlib.h>
++=20
+++#ifdef HAVE_X11
++ #include <X11/Xlib.h>
++ #include <X11/Xatom.h>
+++#endif
++ #include <glib.h>
++ #include <gio/gio.h>
++ #include <meta/display.h>
++--=20
++2.52.0
++
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb
+index 33ba5eaa39..c8a5e20899 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb
+@@ -24,7 +24,7 @@ DEPENDS =3D " \
+=20
+ inherit gnomebase gsettings gettext gobject-introspection gtk-icon-cache=
+ features_check bash-completion
+=20
+-REQUIRED_DISTRO_FEATURES =3D "x11 polkit systemd pam"
++REQUIRED_DISTRO_FEATURES =3D "polkit systemd pam"
+=20
+ GTKIC_VERSION =3D "4"
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
+@@ -33,6 +33,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
+=20
++SRC_URI +=3D "file://0001-shell-app-usage.c-only-include-x11-headers-if-=
+HAVE_X.patch"
+ SRC_URI[archive.sha256sum] =3D "fb0203fc748593f14e51732618e1f042525fd719=
+764a0fdb0ee3f6fe413a9b2b"
+=20
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
+--=20
+2.52.0
 
 
