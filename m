@@ -1,205 +1,134 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22473C44506
-	for <webhook@archiver.kernel.org>; Wed, 21 Jan 2026 20:01:44 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21119.1769025695276666109
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3D7CD625EB
+	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 05:44:06 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31040.1769060644505359088
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Jan 2026 12:01:35 -0800
+ Wed, 21 Jan 2026 21:44:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout03.t-online.de (Postfix) with SMTP id C18A1EE9D
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Jan 2026 21:01:04 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.40.12]) by fwd76.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vieO0-3BXRHl0; Wed, 21 Jan 2026 21:01:04 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AMvS+XJX;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47ee0291921so4611525e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Jan 2026 21:44:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1769060643; x=1769665443; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WyaRnZ37tQn4BW3UnQmS4wmnC8BhvsmaFtiQHkfFlfE=;
+        b=AMvS+XJXm3H4tXAWjr7xPkXwqesHb9hOwiSGm+1HloZm2md2d05iel7ydU93FYS8zx
+         MCnYbUqY5aN297cceNuICRZY7czRnzALn3VERyBUuy75vlLX0x+o+54jBC1HF+2QLNST
+         /P1t+bO6O0gJc5cd++Qlr1sZIVGuP/Pt3w0rl1e0EJ2j1d6ZSqVlC8iIMltiX0eSusNw
+         ekoSrMI4pi+07YwOnr33wpbSlGlA+L+/BcdYQOePPdFlrplX21PiDf7OfAVyEBdaHisS
+         SEOnSSz6BD0nYqucXhLBo3b00CE8zZWJeDeoaSEzioo5Y3f004HJGbkbm2xLRSGFIBhR
+         yEfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769060643; x=1769665443;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=WyaRnZ37tQn4BW3UnQmS4wmnC8BhvsmaFtiQHkfFlfE=;
+        b=tMRIFQB1XtD8CAnZ4Os9OlpRKNcOv9GeiTgDwLidzJ9ksSUTingk0kC847PwEpD7Yy
+         hjPNuJnZsbM3V1HCQsjmrGGUHL5T1Gu09Ny9ByFwuewxcDf/jszVR1+y6wGzV37BRiT5
+         ZlGWu9ngekK06Ragr3M8tlOUEDprsa5qntRqW1pWXxmurmvCfhB6uMJstjTAL4zfvLZR
+         DHLwCL0MbC9ZkTsLSklmLkg7Se0RfVvkfVs3kHsQ53agg9rvAtrA8859R35x3NwDamSU
+         ayVllVKe5dczohG98UzDd0DnO6Lc32ceNGavwVTOtKviaP3FFTLlBUg5Vq6PH68hJjxB
+         yl0A==
+X-Gm-Message-State: AOJu0Yz4eG15aSFIIK8d2z14YswrgltmzN7406/KVeTrzYcTd5W/vnPE
+	myO/yonNlzPdOH4dajjjBs9d5oglIjM8Pp01c7CE78a3mA0CxoRJIJorwdvQcg==
+X-Gm-Gg: AZuq6aJiKk0xCH9la6I1ETeF6Ajus4thcMFV6Ayhdkk12RaaLILIQUCVe1TJ+HemQ/5
+	Is/zJhEUW+6fNSlUxypTLHlDyOov4DnCjAnIgFQyJ/9ggHg7MrWFDT02q7sCZGH8rXT1Poa5/tE
+	AqjIc6AW55eFjMlfd2x0ZzoIwxvTLaaGygUB7QDK8/+YfO2l4jYm4jsS6tk05MujJ6ARiCFEu82
+	Q0ICYXIr1ZnUnVpVKy9vq18bEHeU3KmordWwEk+qtfBETxqzDkB00fpVifK85Tum6ZSxlvTj/I0
+	NINFAMTPpHJQuKA0UUoHb1evdWUBDfiQED0LiO/yCQmqwKIY0hKXMNooxIkmiexgHy4iDH4c/TS
+	tWyIvbN3TC60567ZzP1YpB5Jtw9XBim0KVLtm86BB8ikGH2i70EmMzHpCR4KjsP+RmzOVDRfRM2
+	mt11MfXZyH
+X-Received: by 2002:a05:600c:45d1:b0:477:7ae0:cd6e with SMTP id 5b1f17b1804b1-4801eab5602mr273750755e9.5.1769060642771;
+        Wed, 21 Jan 2026 21:44:02 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-480424aa344sm43912035e9.3.2026.01.21.21.44.02
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Jan 2026 21:44:02 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mozjs-128: update  128.5.2 -> 128-14-0
-Date: Wed, 21 Jan 2026 21:00:56 +0100
-Message-ID: <20260121200056.2789828-1-f_l_k@t-online.de>
+Subject: [meta-oe][kirkstone][PATCH 5/5] freerdp: patch CVE-2024-32040
+Date: Thu, 22 Jan 2026 06:43:56 +0100
+Message-ID: <20260122054356.3570391-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260122054356.3570391-1-skandigraun@gmail.com>
+References: <20260122054356.3570391-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1769025664-E7FFC925-F0D6D8D6/0/0 CLEAN NORMAL
-X-TOI-MSGID: 7ca8ca3a-7b84-4b90-8b14-5764ff9e0115
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Jan 2026 20:01:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123724
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 05:44:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123729
 
-- add a patch to fix build with python 3.14, taken from fedora
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32040
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Pick the patch that is marked to resolve this vulnerability, from
+the related Github advisory[1].
+
+[1]: https://github.com/FreeRDP/FreeRDP/security/advisories/GHSA-23c5-cp23-h2h5
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../mozjs/mozjs-128/D261512.1755672843.patch  | 69 +++++++++++++++++++
- ...s-128_128.5.2.bb =3D> mozjs-128_128.14.0.bb} | 34 ++++-----
- 2 files changed, 87 insertions(+), 16 deletions(-)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755=
-672843.patch
- rename meta-oe/recipes-extended/mozjs/{mozjs-128_128.5.2.bb =3D> mozjs-1=
-28_128.14.0.bb} (69%)
+ .../freerdp/freerdp/CVE-2024-32040.patch      | 30 +++++++++++++++++++
+ .../recipes-support/freerdp/freerdp_2.6.1.bb  |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2024-32040.patch
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.=
-patch b/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2024-32040.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2024-32040.patch
 new file mode 100644
-index 0000000000..ddc481bcec
+index 0000000000..670cad23f0
 --- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-128/D261512.1755672843.patch
-@@ -0,0 +1,69 @@
-+This patch fixes configure with python 3.14 and was taken from fedora
++++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2024-32040.patch
+@@ -0,0 +1,30 @@
++From a7e801f42a3a71332cca22aedccfcda378b8dfcc Mon Sep 17 00:00:00 2001
++From: akallabeth <akallabeth@posteo.net>
++Date: Tue, 16 Apr 2024 08:26:37 +0200
++Subject: [PATCH] fix missing check
 +
-+Upstream-Status: Pending [https://src.fedoraproject.org/fork/churchyard/=
-rpms/mozjs128/c/c9a3e719a87ba3313915195802ca6efcb9966fa3]
++in nsc_rle_decode abort if there are more bytes to be read then there
++are left.
 +
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
++(cherry picked from commit fb4f2d6e4db563077afcae4d270ba78ff905f6cf)
 +
++CVE: CVE-2024-32040
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/5893b5f277db38b0040c572b078de838b84cfc07]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ libfreerdp/codec/nsc.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/python/mozbuild/mozbuild/frontend/reader.py b/python/mozbui=
-ld/mozbuild/frontend/reader.py
-+index 5cb627b..c2dcafe 100644
-+--- a/python/mozbuild/mozbuild/frontend/reader.py
-++++ b/python/mozbuild/mozbuild/frontend/reader.py
-+@@ -470,7 +470,7 @@ class TemplateFunction(object):
-+             return c(
-+                 ast.Subscript(
-+                     value=3Dc(ast.Name(id=3Dself._global_name, ctx=3Das=
-t.Load())),
-+-                    slice=3Dc(ast.Index(value=3Dc(ast.Str(s=3Dnode.id))=
-)),
-++                    slice=3Dc(ast.Index(value=3Dc(ast.Constant(value=3D=
-node.id)))),
-+                     ctx=3Dnode.ctx,
-+                 )
-+             )
-+@@ -1035,8 +1035,8 @@ class BuildReader(object):
-+                 else:
-+                     # Others
-+                     assert isinstance(target.slice, ast.Index)
-+-                    assert isinstance(target.slice.value, ast.Str)
-+-                    key =3D target.slice.value.s
-++                    assert isinstance(target.slice.value, ast.Constant)
-++                    key =3D target.slice.value.value
-+=20
-+             return name, key
-+=20
-+@@ -1044,11 +1044,11 @@ class BuildReader(object):
-+             value =3D node.value
-+             if isinstance(value, ast.List):
-+                 for v in value.elts:
-+-                    assert isinstance(v, ast.Str)
-+-                    yield v.s
-++                    assert isinstance(v, ast.Constant)
-++                    yield v.value
-+             else:
-+-                assert isinstance(value, ast.Str)
-+-                yield value.s
-++                assert isinstance(value, ast.Constant)
-++                yield value.value
-+=20
-+         assignments =3D []
-+=20
-+diff --git a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py b/pytho=
-n/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
-+index 1590267..151d27c 100644
-+--- a/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
-++++ b/python/mozbuild/mozbuild/vendor/rewrite_mozbuild.py
-+@@ -327,15 +327,13 @@ def assignment_node_to_source_filename_list(code, =
-node):
-+     """
-+     if isinstance(node.value, ast.List) and "elts" in node.value._field=
-s:
-+         for f in node.value.elts:
-+-            if not isinstance(f, ast.Constant) and not isinstance(f, as=
-t.Str):
-++            if not isinstance(f, ast.Constant):
-+                 log(
-+                     "Found non-constant source file name in list: ",
-+                     ast_get_source_segment(code, f),
-+                 )
-+                 return []
-+-        return [
-+-            f.value if isinstance(f, ast.Constant) else f.s for f in no=
-de.value.elts
-+-        ]
-++        return [f.value for f in node.value.elts]
-+     elif isinstance(node.value, ast.ListComp):
-+         # SOURCES +=3D [f for f in foo if blah]
-+         log("Could not find the files for " + ast_get_source_segment(co=
-de, node.value))
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb b/meta-o=
-e/recipes-extended/mozjs/mozjs-128_128.14.0.bb
-similarity index 69%
-rename from meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-rename to meta-oe/recipes-extended/mozjs/mozjs-128_128.14.0.bb
-index fbbe3749ba..635cad96cf 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-128_128.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-128_128.14.0.bb
-@@ -3,22 +3,24 @@ HOMEPAGE =3D "https://developer.mozilla.org/en-US/docs/=
-Mozilla/Projects/SpiderMonk
- LICENSE =3D "MPL-2.0"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddc9b6ecd19a14a54a628edaaf2373=
-3bf"
-=20
--SRC_URI =3D "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/s=
-ource/firefox-${PV}esr.source.tar.xz \
--           file://0001-Cargo.toml-do-not-abort-on-panic.patch \
--           file://0002-moz.configure-do-not-look-for-llvm-objdump.patch =
-\
--           file://0003-rust.configure-do-not-try-to-find-a-suitable-upst=
-rea.patch \
--           file://0004-use-asm-sgidefs.h.patch \
--           file://0005-Add-RISCV32-support.patch \
--           file://0006-util.configure-fix-one-occasionally-reproduced-co=
-nfi.patch \
--           file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
--           file://0008-Musl-does-not-have-stack-unwinder-like-glibc-ther=
-efo.patch \
--           file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compi=
-le-.patch \
--           file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v=
-6-s.patch \
--           file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
--           file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-archit=
-ect.patch \
--           file://0013-Fix-build-error-with-musl.patch \
--           "
--SRC_URI[sha256sum] =3D "25d633eb81499cbda44b8c64fa1c1a5879d55024b864ef49=
-5d4997154d68358f"
-+SRC_URI =3D " \
-+    https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fir=
-efox-${PV}esr.source.tar.xz \
-+    file://0001-Cargo.toml-do-not-abort-on-panic.patch \
-+    file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
-+    file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.pat=
-ch \
-+    file://0004-use-asm-sgidefs.h.patch \
-+    file://0005-Add-RISCV32-support.patch \
-+    file://0006-util.configure-fix-one-occasionally-reproduced-confi.pat=
-ch \
-+    file://0007-Rewrite-cargo-host-linker-in-python3.patch  \
-+    file://0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.pat=
-ch \
-+    file://0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.pat=
-ch \
-+    file://0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.pat=
-ch \
-+    file://0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch \
-+    file://0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.pat=
-ch \
-+    file://0013-Fix-build-error-with-musl.patch \
-+    file://D261512.1755672843.patch \
-+"
-+SRC_URI[sha256sum] =3D "93b9ef6229f41cb22ff109b95bbf61a78395a0fe4b870192=
-eeca22947cb09a53"
-=20
- UPSTREAM_CHECK_URI =3D "https://tracker.debian.org/pkg/mozjs128"
- UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
---=20
-2.52.0
-
++diff --git a/libfreerdp/codec/nsc.c b/libfreerdp/codec/nsc.c
++index dc3a978ed..007364ee7 100644
++--- a/libfreerdp/codec/nsc.c
+++++ b/libfreerdp/codec/nsc.c
++@@ -147,7 +147,7 @@ static BOOL nsc_rle_decode(BYTE* in, BYTE* out, UINT32 outSize, UINT32 originalS
++ 				len |= ((UINT32)(*in++)) << 24U;
++ 			}
++ 
++-			if (outSize < len)
+++			if ((outSize < len) || (left < len))
++ 				return FALSE;
++ 
++ 			outSize -= len;
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
+index c616a55958..06aac0325f 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.6.1.bb
+@@ -33,6 +33,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
+            file://CVE-2023-40589.patch \
+            file://CVE-2024-22211.patch \
+            file://CVE-2024-32039.patch \
++           file://CVE-2024-32040.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 
