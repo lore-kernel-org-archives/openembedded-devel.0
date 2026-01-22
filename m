@@ -1,218 +1,268 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C459C44500
-	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 09:56:08 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.33974.1769075760614032047
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33044D3EE64
+	for <webhook@archiver.kernel.org>; Thu, 22 Jan 2026 13:12:29 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36759.1769087548565262174
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Jan 2026 01:56:00 -0800
+ Thu, 22 Jan 2026 05:12:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LHHej9g4;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2a7a9b8ed69so7355745ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 01:56:00 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769075760; cv=none;
-        d=google.com; s=arc-20240605;
-        b=I7g2XgZBVi46jjclPyvlpC8sfaJZWmDrAmzQ/ZrizLnCYml3TcSbtZxMC530EbzIDN
-         AhAylFB0YMe3VqayadMJDX650XNaP+8SmwKrRsHfKlAHbyaEyBlAAp3i+ThzrEnYSB2F
-         l0lhX35oLp98Nzmqgr03uOP2HVo8Ue4D67K7yJXlB1PEf8XWi0JzH24xXGpUGl/36DfR
-         mVoXoX0713TQrQ2KQmP1r4UnhoglMQo5S0VtBl1ue8QTenF7rgH5MXz33GX2rwj5LdQi
-         66kYwPLdUjWCzwKulJdY5n/T45dliGNkO3REp/IjmxntSP3wJ8lcXWMxi0GAeRnm3C/z
-         J+zQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=F+r6g6BW6f+tplN0XJEQWVEQOLd49o+rvZYN9dAUqN8=;
-        fh=xc7Pw1C2r64/D3IAczFTr6Vs+3vKL6I7LfJKgO2Lfwc=;
-        b=NHLI/XhYJ1d4CMOuuLYWmBRzc04Q4vM6fQu4DcgiyVm2h0/pEUH1QyrPni5tHKR5wL
-         a1skGqpoULCfUtuQlpRNN/0dPl5L/yGMux1s5FCKOp7R7b+kmUd1+cpYxORHaTtlOvyM
-         4tM92QWODHWKP4Tj9fPQrGhWAPAL0AZ2lKJzoFL/Na6cm6cuqwsGlcl+GbIMD5X6Rtwi
-         5+pWc8pBzBoDayWWb3LajdbdfrpXAiQHNlme2fp7UmvVZhxDBe4eAHGypEKk6BAUeg8c
-         v8wJvqST6xL9jVJF8Lrw2FAPgrhIHJv0juIuhIV+oRsr07hfYxRwIp6ozNdqlSmZyB8m
-         s3vA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OpNI6iWw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4801d7c72a5so7303865e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 05:12:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769075760; x=1769680560; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=F+r6g6BW6f+tplN0XJEQWVEQOLd49o+rvZYN9dAUqN8=;
-        b=LHHej9g4h0BjHnaJLvLJLkERFMm+/71lxkcWeSRnmAv/3qj5tUktVHwgS92SSk6e9X
-         gu3fp0rnuALV8cJRHIP58r2xibj4DHX2F7/FWj0qT69jPXd8ZH5ZH9wd6HJuZJpTFgf+
-         bq07V4CWcZTk3jelA2IrkE1TGlt2eAsMl2dGwskqdDQn8yNDI5tZq8vpNVh4AD/wOnGK
-         5pnNsp1Rf8LPG3qjHxLdB0/7WnbCwyjDkzb6aRAFbkgfUcV0Yd/6T3S9Kgh3Kl2VaHrU
-         2hW+XIXVDZ1c+mj3K0rzpDIOFV9ir+c8G7Chz+zHlWhXseSTU75AZ2m3A2qUH/vCE9np
-         qUyw==
+        d=gmail.com; s=20230601; t=1769087547; x=1769692347; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ugz76H0Y8CJTR4s/Z11KV9bKKzb1uz2H/9gN+P20/2g=;
+        b=OpNI6iWwBhbUABt4WuhiO1FfdUNJLytBez5TloXG2SHYicqEVkGT/w5YPrFwmn0C5V
+         TinkEDSwQhZD0EoKKKOEPjJhqOTEILlC57lpQwAkrhadqBpD89Te8bBNzxtRz2Ky0lpd
+         XYYAIqR1ooUvUVzh1QdPsp3MeskZU92/DhlYCCYFSQLSRk06F7mSfPdYYj9v0JYVWN7U
+         dByCAHc+rQrvV3V58MhMv5r2JJDvqpa8twR82sosh6l4DxQ4+SZsUK1uB0Y441ZFy3d9
+         YKWdyq3d6nkrrQdB5wXmlGHrbJKy7iXws2efjI4cUMV7mTH48HEy7AJlQHa6EkfWwDEy
+         v82g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769075760; x=1769680560;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=F+r6g6BW6f+tplN0XJEQWVEQOLd49o+rvZYN9dAUqN8=;
-        b=X+aN1jKKCbtkcCN1bojbewmVyMYJlxBky/FYGzMoI9RQQaGZF34Vw8LG/4Rc73Iorv
-         Rq8R33PasgtaU7vT+EfXcDF9usBko9UVI/PDv5XYsxmpo5HlCntiWVlxFLopG+39VhI3
-         bXvelpxqdBa9lb0+kYm5cIf70ccmFO4j1j/ePXSN3/IPS6y+hzC8CS3YgqRAQ3fPA6/c
-         m8tmRpOROqPTssPksU8H28RkTdIm9blroS9SBtQ7roqZXjbI9hVmSuCbhQsj3T1Ze76I
-         xebskCKO3yC/8iJzrl3WOhxPWeSEw71ISzkRxBtnL0bElCiJhylHPrCLO/Z3XXFz+8e4
-         vNKw==
-X-Gm-Message-State: AOJu0Yyfp6A30zIQyOP3ZJ/qqbJF3x8SMf55/9YT9lDlaUh7b9zIUvVY
-	fkzmox6l6aZBbVjUR1rloogKF+P02UivnoXZyoEATMB9jAA2IRr1IdBg+y1IR9b8TzH2heXizVR
-	r7aYMho4JsFnwmr9zt+uSB2L4ilxs7rg=
-X-Gm-Gg: AZuq6aLxi18CFI9aOk4BNLhehnYXKKnj4BU2ZniFYsR5Zw6p6OZaBNS40/TlwFzfeFj
-	I1kYtwtvs2wUWMI57h0FcguT3p+TZ4wZ5Wh3Z/NmLCYvmoorKKXHH6N+W//NslPlcE2Dov5Hs9y
-	iOZFAGyNIFPdtQRP3BCwIvITyib9qrCl7tmr/O2PyQAhjtGcT1kQnTk0M4Wt0ugFprWFr2emT35
-	Hb2FCWjwuU0/BVHzFFPImrXJDYvpurJmCgM830GgFPB9FjFJI68R8RZCwAIUoVLHL04SDiJHA==
-X-Received: by 2002:a17:902:cf41:b0:2a2:b293:27d2 with SMTP id
- d9443c01a7336-2a76b1695f7mr77855355ad.53.1769075759959; Thu, 22 Jan 2026
- 01:55:59 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769087547; x=1769692347;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ugz76H0Y8CJTR4s/Z11KV9bKKzb1uz2H/9gN+P20/2g=;
+        b=nNebnpXW9TWtZzEjvACyVakysyJ7itubE9RBrgtQZDjL4uuNb8cRRUE25XXy3y/aey
+         FjYA/eXcMqqTiBUadL6mHXCSB+wVA+K6W7R8tqBGhFGR1Gij77S1F9NwG/ehUksdRlCn
+         JLkPRYy60mbgFetNexodolAE2GDwL4GvxSorDvLFknKhZRRdemx63uoHtpEYQ/a5k48w
+         cNWu9Fbwar1i6AQKTH+JVRuRtZQwNAo8LqsYxU0yWVtbpu3BN2QdnJSdEz+6/9Pewrnt
+         mtNjmLsSyvtL2yYD7lFUN/qo2pjwxXOb4NWxqzQR3Nt6m1df1vPjRZ2HuhD0BorPYMl9
+         AD4Q==
+X-Gm-Message-State: AOJu0YyN36mdSFce8gLLLgp+PCFYBcZLm646aCh/tTfid1iQHnmn/z6R
+	lfYcBwiuYH2R7KDcsOOv3pW4+vxluY+sHdxgYHbynN729xgal+MWmsxGeQbs6Q==
+X-Gm-Gg: AZuq6aJw5W8p+CYbhKUhximqJfUKO6ComDMkZzkHGLm3sin7VqpvJtQlHQcjWXJqy1Q
+	5oID9Sv1kVxltN5pjw/BN7Mr3OssUpvoT41O/wq3I0VTHKY77uhj3kU3OXKybKBuByP4P5BPQGv
+	wqukcBhZ9fs6tEOQxW9dixnP/Bar0BUCLH+mH63D6vZWpPjF30+bDqcwN21rIYNwBu2ZTFOOitS
+	vkDlW4iSR5XNNCWjWGig2GD1unrnXfIQwzZ2TUAeZVrDgB7dlKtsoHtyMIlRSotaLmm08xypgZo
+	UMEsIvCbXA57M4KYIyFoNrhlAyWdcHLchLK+9Ct6ahwHxoGzs9EVRINSAwTbwyCXG5CY1qatdG3
+	AWgIoWyj7gFhbwTjcGXl9uFI8B1ArZwvP1cRaJyQmlQ2vbThfj9FmGLd6Qb8IUz8CIW8swSHvwB
+	zWN+m2aG06E28deUiLLnw=
+X-Received: by 2002:a05:600c:138c:b0:47e:e949:37e8 with SMTP id 5b1f17b1804b1-48039d19076mr175221755e9.30.1769087546577;
+        Thu, 22 Jan 2026 05:12:26 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-480470cf1acsm65517035e9.14.2026.01.22.05.12.25
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 22 Jan 2026 05:12:25 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] freerdp: add ptest support
+Date: Thu, 22 Jan 2026 14:12:25 +0100
+Message-ID: <20260122131225.3827576-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20260121112921.857-1-wangmy@fujitsu.com> <20260121112921.857-4-wangmy@fujitsu.com>
-In-Reply-To: <20260121112921.857-4-wangmy@fujitsu.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 22 Jan 2026 22:55:47 +1300
-X-Gm-Features: AZwV_QjpsMJpco45soTxuu9bgciZP-hShow6eqhqDVssWH9VhoD_t_HzDczN9AY
-Message-ID: <CADySD0G3r1RB+YF_RzwrwrZF2KG8=BmKMFzGfTCWwLadE3oqEQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 04/30] pahole: upgrade 1.29 -> 1.31
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 09:56:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123735
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Jan 2026 13:12:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123736
 
-On Thu, Jan 22, 2026 at 12:29=E2=80=AFAM wangmy via lists.openembedded.org
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> 0001-btf_encoder-Fix-elf_functions-cleanup-on-error.patch
-> revemoed since it's included in 1.31
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...r-Fix-elf_functions-cleanup-on-error.patch | 54 -------------------
->  .../pahole/{pahole_1.29.bb =3D> pahole_1.31.bb} |  4 +-
->  2 files changed, 2 insertions(+), 56 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/pahole/files/0001-btf_encode=
-r-Fix-elf_functions-cleanup-on-error.patch
->  rename meta-oe/recipes-devtools/pahole/{pahole_1.29.bb =3D> pahole_1.31.=
-bb} (88%)
->
-> diff --git a/meta-oe/recipes-devtools/pahole/files/0001-btf_encoder-Fix-e=
-lf_functions-cleanup-on-error.patch b/meta-oe/recipes-devtools/pahole/files=
-/0001-btf_encoder-Fix-elf_functions-cleanup-on-error.patch
-> deleted file mode 100644
-> index dad5a9646a..0000000000
-> --- a/meta-oe/recipes-devtools/pahole/files/0001-btf_encoder-Fix-elf_func=
-tions-cleanup-on-error.patch
-> +++ /dev/null
-> @@ -1,54 +0,0 @@
-> -From 6fa2b7de3e647e64c5d693aea7f3bacbfa964f53 Mon Sep 17 00:00:00 2001
-> -From: Ihor Solodari <ihor.solodrai@linux.dev>
-> -Date: Wed, 20 Aug 2025 09:00:03 +0100
-> -Subject: [PATCH] btf_encoder: Fix elf_functions cleanup on error
-> -
-> -When elf_functions__new() errors out and jumps to
-> -elf_functions__delete(), pahole segfaults on attempt to list_del() the
-> -elf_functions instance from a list, to which it was never added.
-> -
-> -Fix this by moving list_del() call out of elf_functions__delete().
-> -Remove from the list only on normal cleanup in
-> -elf_functions_list__clear().
-> -
-> -v1:
-> -https://lore.kernel.org/dwarves/979a1ac4-21d3-4384-8ce4-d10f41887088@lin=
-ux.dev/
-> -
-> -Closes:
-> -https://lore.kernel.org/dwarves/24bcc853-533c-42ab-bc37-0c13e0baa217@win=
-driver.com/
-> -Reported-by: Changqing Li <changqing.li@windriver.com>
-> -Signed-off-by: Ihor Solodrai <ihor.solodrai@linux.dev>
-> -Reviewed-by: Arnaldo Carvalho de Melo <acme@redhat.com>
-> -Link: https://lore.kernel.org/dwarves/acef4a0e-7d3b-4e05-b3ca-1007580f27=
-54@linux.dev/
-> -Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
-> -
-> -Upstream-Status: Backport [https://git.kernel.org/pub/scm/devel/pahole/p=
-ahole.git/commit/?h=3Dnext&id=3Dfe6738f4b46b63dcdc5b15b252a014b3eaba16a4]
-> -
-> -Signed-off-by: Changqing Li <changqing.li@windriver.com>
-> ----
-> - btf_encoder.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/btf_encoder.c b/btf_encoder.c
-> -index 511c1ea..2f8c6bb 100644
-> ---- a/btf_encoder.c
-> -+++ b/btf_encoder.c
-> -@@ -162,7 +162,6 @@ static inline void elf_functions__delete(struct elf_=
-functions *funcs)
-> -               free(funcs->entries[i].alias);
-> -       free(funcs->entries);
-> -       elf_symtab__delete(funcs->symtab);
-> --      list_del(&funcs->node);
-> -       free(funcs);
-> - }
-> -
-> -@@ -204,6 +203,7 @@ static inline void elf_functions_list__clear(struct =
-list_head *elf_functions_lis
-> -
-> -       list_for_each_safe(pos, tmp, elf_functions_list) {
-> -               funcs =3D list_entry(pos, struct elf_functions, node);
-> -+              list_del(&funcs->node);
-> -               elf_functions__delete(funcs);
-> -       }
-> - }
-> ---
-> -2.34.1
-> -
-> diff --git a/meta-oe/recipes-devtools/pahole/pahole_1.29.bb b/meta-oe/rec=
-ipes-devtools/pahole/pahole_1.31.bb
-> similarity index 88%
-> rename from meta-oe/recipes-devtools/pahole/pahole_1.29.bb
-> rename to meta-oe/recipes-devtools/pahole/pahole_1.31.bb
-> index 4f2737767b..ea4237c4aa 100644
-> --- a/meta-oe/recipes-devtools/pahole/pahole_1.29.bb
-> +++ b/meta-oe/recipes-devtools/pahole/pahole_1.31.bb
-> @@ -9,10 +9,10 @@ DEPENDS =3D "elfutils zlib libbpf"
->  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->  COMPATIBLE_HOST =3D "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|=
-mips64).*-linux"
->
-> -SRCREV =3D "b9cc7963051b2099795129450f9b70c81950d02f"
-> +SRCREV =3D "1f2805b6eef104df3125143c949b391f6122e5b9"
->  SRC_URI =3D "git://git.kernel.org/pub/scm/devel/pahole/pahole.git;branch=
-=3Dmaster \
->             file://0001-Use-usr-bin-env-python3-instead-of-just-usr-bin-p=
-yth.patch \
-> -           file://0001-btf_encoder-Fix-elf_functions-cleanup-on-error.pa=
-tch"
-> +           "
+The test suite takes about 50s to execute.
 
-can please also include tag=3Dv${PV} in the SRC_URI
+Sample output:
 
->
->
->  inherit cmake pkgconfig
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123695): https://lists.openembedded.org/g/openembedde=
-d-devel/message/123695
-> Mute This Topic: https://lists.openembedded.org/mt/117379498/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+root@qemux86-64:~# ptest-runner
+START: ptest-runner
+2026-01-22T12:58
+BEGIN: /usr/lib/freerdp/ptest
+PASS: TestClient TestClientRdpFile
+PASS: TestClient TestClientChannels
+PASS: TestClient TestClientCmdLine
+[...many lines...]
+PASS: TestWtsApi TestWtsApiSessionNotification
+PASS: TestWtsApi TestWtsApiShutdownSystem
+PASS: TestWtsApi TestWtsApiWaitSystemEvent
+DURATION: 48
+END: /usr/lib/freerdp/ptest
+2026-01-22T12:59
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../include/ptest-packagelists-meta-oe.inc    |  1 +
+ .../recipes-support/freerdp/freerdp/run-ptest | 85 +++++++++++++++++++
+ .../recipes-support/freerdp/freerdp_2.11.7.bb | 22 ++++-
+ 3 files changed, 107 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp/run-ptest
+
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index f8d9ee6f9b..4de602ac1c 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -72,6 +72,7 @@ PTESTS_FAST_META_OE:remove:riscv32 = "botan nodejs oprofile"
+ 
+ PTESTS_SLOW_META_OE = "\
+     c-ares \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'freerdp', '', d)} \
+     fftw \
+     libusb-compat \
+     mariadb \
+diff --git a/meta-oe/recipes-support/freerdp/freerdp/run-ptest b/meta-oe/recipes-support/freerdp/freerdp/run-ptest
+new file mode 100644
+index 0000000000..423a780eb1
+--- /dev/null
++++ b/meta-oe/recipes-support/freerdp/freerdp/run-ptest
+@@ -0,0 +1,85 @@
++#!/bin/sh
++
++#The key is the test binary name, and the value is the list of arguments to
++#use with the given binary. Each argument is a testcase to execute.
++
++#These test cases were determined by running the actual test binary
++#which lists all available test cases. Couldn't find a way to just simply
++#run all. Also, BusyBox seems to have no associative array support, so
++#plain variables are used with eval.
++
++TestAsn="TestAsn1Module TestAsn1Encoder TestAsn1Decoder TestAsn1Encode TestAsn1Decode TestAsn1String \
++    TestAsn1Integer TestAsn1Compare TestAsn1BerEnc TestAsn1BerDec TestAsn1DerEnc TestAsn1DerDec"
++TestClient="TestClientRdpFile TestClientChannels TestClientCmdLine"
++TestClipboard="TestClipboardFormats"
++TestCommon="TestCommonAssistance"
++TestCore="TestVersion TestSettings"
++TestCredUI="TestCredUIParseUserName TestCredUIConfirmCredentials TestCredUIPromptForCredentials TestCredUICmdLinePromptForCredentials"
++TestCrt="TestTypes TestFormatSpecifiers TestAlignment TestString TestUnicodeConversion"
++TestCrypto="TestCryptoHash TestCryptoRand TestCryptoCipher TestCryptoProtectData TestCryptoProtectMemory TestCryptoCertEnumCertificatesInStore"
++TestDsParse="TestDsMakeSpn TestDsCrackNames"
++TestEnvironment="TestEnvironmentGetEnvironmentStrings TestEnvironmentSetEnvironmentVariable TestEnvironmentMergeEnvironmentStrings TestEnvironmentGetSetEB"
++TestError="TestErrorSetLastError"
++TestFile="TestFileCreateFile TestFileDeleteFile TestFileReadFile TestSetFileAttributes TestFileWriteFile \
++    TestFilePatternMatch TestFileFindFirstFile TestFileFindFirstFileEx TestFileFindNextFile TestFileGetStdHandle"
++TestFreeRDPCodec="TestFreeRDPRegion TestFreeRDPCodecMppc TestFreeRDPCodecNCrush TestFreeRDPCodecXCrush \
++    TestFreeRDPCodecZGfx TestFreeRDPCodecPlanar TestFreeRDPCodecClear TestFreeRDPCodecInterleaved \
++    TestFreeRDPCodecProgressive TestFreeRDPCodecRemoteFX"
++TestFreeRDPCrypto="TestKnownHosts TestBase64 Test_x509_cert_info"
++TestFreeRDPUtils="TestRingBuffer"
++TestGdi="TestGdiRop3 TestGdiLine TestGdiRegion TestGdiRect TestGdiBitBlt TestGdiCreate TestGdiEllipse TestGdiClip"
++TestInterlocked="TestInterlockedAccess TestInterlockedSList TestInterlockedDList"
++TestIo="TestIoDevice TestIoGetOverlappedResult"
++TestLibrary="TestLibraryLoadLibrary TestLibraryGetProcAddress TestLibraryGetModuleFileName"
++TestLocale="TestLocaleFormatMessage"
++TestMemory="TestMemoryCreateFileMapping"
++TestNt="TestNtCreateFile TestNtCurrentTeb"
++TestPath="TestPathCchAddBackslash TestPathCchRemoveBackslash TestPathCchAddBackslashEx TestPathCchRemoveBackslashEx \
++    TestPathCchAddExtension TestPathCchAppend TestPathCchAppendEx TestPathCchCanonicalize TestPathCchCanonicalizeEx \
++    TestPathAllocCanonicalize TestPathCchCombine TestPathCchCombineEx TestPathAllocCombine TestPathCchFindExtension \
++    TestPathCchRenameExtension TestPathCchRemoveExtension TestPathCchIsRoot TestPathIsUNCEx TestPathCchSkipRoot \
++    TestPathCchStripToRoot TestPathCchStripPrefix TestPathCchRemoveFileSpec TestPathShell TestPathMakePath"
++TestPipe="TestPipeCreatePipe TestPipeCreateNamedPipe TestPipeCreateNamedPipeOverlapped"
++TestPool="TestPoolIO TestPoolSynch TestPoolThread TestPoolTimer TestPoolWork"
++TestPrimitives="TestPrimitivesAdd TestPrimitivesAlphaComp TestPrimitivesAndOr TestPrimitivesColors TestPrimitivesCopy \
++    TestPrimitivesSet TestPrimitivesShift TestPrimitivesSign TestPrimitivesYUV TestPrimitivesYCbCr TestPrimitivesYCoCg"
++TestRdTk="TestRdTkNinePatch"
++TestSecurity="TestSecurityToken"
++TestSmartCard="TestSmartCardListReaders"
++TestSspi="TestQuerySecurityPackageInfo TestEnumerateSecurityPackages TestInitializeSecurityContext TestAcquireCredentialsHandle TestCredSSP TestNTLM"
++TestSynch="TestSynchInit TestSynchEvent TestSynchMutex TestSynchBarrier TestSynchCritical TestSynchSemaphore \
++    TestSynchThread TestSynchMultipleThreads TestSynchTimerQueue TestSynchWaitableTimer TestSynchWaitableTimerAPC TestSynchAPC"
++TestSysInfo="TestGetNativeSystemInfo TestCPUFeatures TestGetComputerName TestSystemTime TestLocalTime"
++TestThread="TestThreadCommandLineToArgv TestThreadCreateProcess TestThreadExitThread"
++TestWinPR="TestIntrinsics TestTypes"
++TestWinPRUtils="TestIni TestVersion TestImage TestBipBuffer TestBacktrace TestQueue TestPrint TestPubSub TestStream \
++    TestBitStream TestArrayList TestLinkedList TestListDictionary TestCmdLine TestWLog TestWLogCallback TestHashTable \
++    TestBufferPool TestStreamPool TestMessageQueue TestMessagePipe"
++TestWnd="TestWndCreateWindowEx TestWndWmCopyData"
++TestWtsApi="TestWtsApiEnumerateProcesses TestWtsApiEnumerateSessions TestWtsApiQuerySessionInformation \
++    TestWtsApiSessionNotification TestWtsApiShutdownSystem TestWtsApiWaitSystemEvent"
++
++run_test(){
++  binary=$1
++  tcs=$(eval "echo \$${binary}")
++  if [ -z "$tcs" -o "$tcs" = ".so" ]; then
++     return
++  fi
++  
++  EXTRA_ARG=""
++  if [ "$binary" = "TestFile" ]; then
++    # This testcase needs an extra argument. TestFileArea is a folder
++    # where some test files are used by this test.
++    EXTRA_ARG="TestFileArea"
++  fi
++  
++  for tc in $tcs; do
++    ./$binary $tc $EXTRA_ARG > ../${binary}_${tc}.out 2>&1 && echo PASS: $binary $tc || echo FAIL: $binary $tc
++  done
++}
++
++cd Testing
++
++for testbin in *; do
++  run_test $testbin
++done
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+index 9b07c94169..225f49a94b 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
+@@ -8,13 +8,16 @@ SECTION = "net"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-inherit pkgconfig cmake gitpkgv
++inherit pkgconfig cmake gitpkgv ptest
++
++RDEPENDS:${PN}-ptest += "coreutils pcsc-lite-lib"
+ 
+ PE = "1"
+ PKGV = "${GITPKGVTAG}"
+ 
+ SRCREV = "efa899d3deb8595a29fabb2a2251722f9d7e0d7f"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
++           file://run-ptest \
+            file://winpr-makecert-Build-with-install-RPATH.patch \
+            file://0001-Fixed-compilation-warnings.patch \
+            file://0001-Fix-const-qualifier-error.patch \
+@@ -37,6 +40,7 @@ EXTRA_OECMAKE += " \
+ 
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'directfb pam pulseaudio wayland x11', d)}\
++    ${@bb.utils.contains('PTEST_ENABLED', '1', 'test', '', d)} \
+     alsa gstreamer cups pcsc server \
+ "
+ 
+@@ -51,6 +55,7 @@ PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gst
+ PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
+ PACKAGECONFIG[server] = "-DWITH_SERVER=ON,-DWITH_SERVER=OFF"
+ PACKAGECONFIG[alsa] = "-DWITH_ALSA=ON,-DWITH_ALSA=OFF,alsa-lib"
++PACKAGECONFIG[test] = "-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF"
+ 
+ PACKAGES =+ "libfreerdp"
+ 
+@@ -59,6 +64,12 @@ FILES:libfreerdp = "${libdir}/lib*${SOLIBS}"
+ 
+ PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
+ 
++do_configure:prepend() {
++    sed -i 's,CMAKE_CURRENT_SOURCE_DIR,"${PTEST_PATH}/test_data",' ${S}/libfreerdp/codec/test/TestFreeRDPCodecProgressive.c
++    sed -i 's,\${CMAKE_CURRENT_SOURCE_DIR},"${PTEST_PATH}/test_data",' ${S}/libfreerdp/crypto/test/CMakeLists.txt
++    sed -i 's,\${CMAKE_CURRENT_SOURCE_DIR},${PTEST_PATH}/test_data,' ${S}/winpr/libwinpr/utils/test/CMakeLists.txt
++}
++
+ do_configure:append() {
+     sed -i -e 's|${WORKDIR}||g' ${B}/buildflags.h
+ }
+@@ -70,6 +81,15 @@ do_install:append () {
+     rm -rf ${D}${libdir}/freerdp
+ }
+ 
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/test_data
++    cp -r ${B}/Testing ${D}${PTEST_PATH}
++    install -m 0644 ${S}/libfreerdp/codec/test/progressive.bmp ${D}${PTEST_PATH}/test_data/
++    install -m 0644 ${S}/libfreerdp/crypto/test/Test_x509_cert_info.pem ${D}${PTEST_PATH}/test_data/
++    install -m 0644 ${S}/winpr/libwinpr/utils/test/lodepng_32bit.png ${D}${PTEST_PATH}/test_data/
++    install -m 0644 ${S}/winpr/libwinpr/utils/test/lodepng_32bit.bmp ${D}${PTEST_PATH}/test_data/
++}
++
+ python populate_packages:prepend () {
+     freerdp_root = d.expand('${libdir}/freerdp')
+ 
 
