@@ -2,192 +2,102 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F125FD77882
-	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 17:02:28 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.112.1769187745335345715
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19DEED7788E
+	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 17:02:39 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.116.1769187750758132811
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jan 2026 09:02:25 -0800
+ Fri, 23 Jan 2026 09:02:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mKUwMp+d;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47ee2715254so13407125e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:02:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LwPJ5zJ/;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee4338e01so14056375e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:02:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769187744; x=1769792544; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ih0qeP3nWwWELOmLvDivXER/zwh685mzFaFXfUr2mr4=;
-        b=mKUwMp+dm3iAgKZfs+QisWyQc/fF7nXWayRNeLQBG5s1aU3PE5C56Of7OspOKp5YTE
-         GmO+qBAYkIKrb8kOz+JJo4QxJG9XjWKx9GzkjdVF/tSiI63QypKsjIUGJndHSxZ0HINA
-         h7JsrqECJulRlE+G5FXZKisraPhN/tRjBqCObc56lCW+7WVtlMc/hWqtvGX0qU2HUXN/
-         DkHavGyhW6MBBImn77H8HKUHaHxYOtgi2ytaDWZHZBNcL50Z5F0yinfJN/Y0tt5GYLB2
-         sbFPUQpTerNAnJrSEjJKThnAn0r0TajnxlQepdBetiJ5kkz1BzGfIuNFO9hRye7ZnpGp
-         DbLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769187744; x=1769792544;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1769187749; x=1769792549; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ih0qeP3nWwWELOmLvDivXER/zwh685mzFaFXfUr2mr4=;
-        b=vSg/P+hDtIEDTG7AbtWcYRB5ok5mkxMg0+oUQTMyCnQ8OkBd8nFDg43i16YuuaLf4L
-         Nfk8r7eJQ9ZDgJ+hswdCkXAHRj9BJGFKI/ITPqqVm4nETRTOtTag+uiaLqjZSk/FXFv9
-         WvJ3LSRWUfmi42u1z1wf5Cfq3dDTcBIgwhyxNnufb4Ss0YtkjPDvxTrraituJtkL8Z5C
-         yxEFxk56tZ8LnNIedAnDaSa+/ZTdkadyVRpmZhrSqPJmXU6MjYZ+asLUtuE9/IrQdfVN
-         QV4SUE51QuQ+RbbtX+ke+aKHCXzECcuewXYFNRz0Gh3TNrl925m6ncS7BTtsr81m61Ke
-         QeNg==
-X-Gm-Message-State: AOJu0YyGWtGsey/RvCzTti18DIM9cs5KPsktXoj+pcQqT6u1EYqN3lB4
-	VOSupyhMiEc0npMc6B5/l4CiE9B0mXVFRZ5YZt2rPuwrNDXrQoZarlLc/CK+Dw==
-X-Gm-Gg: AZuq6aI03i3kd77ZTGA93tw0Idyozu2MN7g5IZnka2mxgZoJoobKdF5TP8E09VIY+gQ
-	ggH8KIoQ/IrKhN0uqAMG1yHv256ldH9YCzYsD28PNPxfhJS9XofKKNfTq6olqxJ/XVkveybJyeY
-	rgRVGyYc1wcij0t/URoDNnZiNAr5EyzEUzMFJMYZ8mzLCPlDOJrbtaoUOg5PzPWIJMDvtaIB9dW
-	9MHTLwYD37IMJb4D20g22cECSNTEk3KNkOn+8+lhG9nTHEDum6lIOMkVf3d5HeVHhy45kOL7Hji
-	ylzbb+5P3b6wYlIh7jNBY/iPr2879BT8vuBOvy3PVRh1+tUWX8RtxMvHYiirN4CQuOxKnf63Cny
-	eptnfKeaqcGrr/382/RRg/SSAenCdlZNH7h4aHTfPyPbXDT74cpNc9e3vannRxaSaEJXAQmHLMH
-	3rQnnhFFMs
-X-Received: by 2002:a05:600c:4e4e:b0:47d:4fbe:e6cc with SMTP id 5b1f17b1804b1-4804c9596aamr58919705e9.13.1769187743295;
-        Fri, 23 Jan 2026 09:02:23 -0800 (PST)
+        bh=+Di9+mQIqHJ1YJTK1OxHgyqkC5huXiZnL0+/JHQ1T0Y=;
+        b=LwPJ5zJ/jHKHGw/abQ8Z1BzQ/gfJIgZI/8zGYwQjz9PAy1fr2kx1sr13s3+PM3R1/M
+         +gmWIDmbZSvkVIyaQh00oMM7ImW/nuCHXNXERep56VwkbGYPQC98lH7F0E+eZPqbgnRI
+         cQSRUL/DrrRx3PuWvDg/lmLhH2Plr43Z8nulZwENWyNBo7tTZeAHeJz4UGLsGXix+5XS
+         j1GdWlQlkKwTLHmP8gEBfCwkAKKiJ069H0JRD+oFteGAvUvLkIOJFMvpTghdxLVeZACu
+         U2xdAzGMYtP4lIAh1zKL2MPswyqNWzEUZYcdnZJv6mNDWvfWcb6gC6TpX9IsMnyw7Lou
+         2pfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769187749; x=1769792549;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=+Di9+mQIqHJ1YJTK1OxHgyqkC5huXiZnL0+/JHQ1T0Y=;
+        b=J6o2gbRDXwrElM32XxbTOdWUDRVjphzwg6Pr4jsFwiGLUmt1TuI/lg6r5Mc19+rZ9L
+         h7yCRYErBblW+BBR9Ovw2ZtiDU7HdqCu/fhIMn3cGPrj71ooHsspBNULOooJ3u/0lxq3
+         OqHnMzQ0lslx3ELRWzj09beFycOzLXTnrmozjkqea9/WEj2l8AveKLFCfirHb41VXv/n
+         /11JhBjcM27A1mhrM8X4Pny44lAjN9LL1H5+juZ2K7gQ0jMr5C+s1kN0RZbVZnvoTMdK
+         YYdvbYb+qqXEUb5GZNuN2Yhq5mZIf6alnUrX8Htsj5LzwFTqBUuYexox2mF2MXNYosZL
+         w8Jw==
+X-Gm-Message-State: AOJu0Yy7Yr1XjTMVZXdMqOeEBPP9bxEJ3PBnoi+6q1fr3vM6IfAf+OW1
+	rv6KGL61w697FV3GUY4RvhHLsDtZYFwyxtzIKGPMQprN2TMI/zfcNaURlaiKzw==
+X-Gm-Gg: AZuq6aKkcAqzOYGrPfImdiytUHJu/xTHuBqmfBKKFbGBavDH9T4L0ELnfW75d45rUoe
+	kDnw/z+jMWxr4xsUcIxSef96Jw/gk2xVDV2VTbKPXhmXOqeXedgs7c0TYWY3+5ktUwazBAU2FYy
+	9CLz7lNqt7l2ZiKReuKkJUYHM2v7xTuNA8D7O2y1m9UphPHFZhuGuvGbDpD3qTWgNRTbpKpLHee
+	THXXf36rh08y9cteNH5Miod177D0fttnu3K73DGiQx/mApaatSHlbpehRWjFrtuShMgWZ55gNQo
+	g+l+pm9NRjHP2EgKF9z7kN53AYLKWF8Pa/2HTZth28BYuFaE7GTHsByQEv7CXOkM0K0P059/fDc
+	j32afeATddpquK2HVvPVX0PFmrU+E2ROIaCa7W07pT/K++E5nl/DsZeCGLIC8/dvyhik+pN+qQI
+	kmlWj9rWAs
+X-Received: by 2002:a05:600c:3b0d:b0:459:db7b:988e with SMTP id 5b1f17b1804b1-4804c959a1fmr53627855e9.13.1769187748881;
+        Fri, 23 Jan 2026 09:02:28 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm25455165e9.17.2026.01.23.09.02.21
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm25455165e9.17.2026.01.23.09.02.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Jan 2026 09:02:22 -0800 (PST)
+        Fri, 23 Jan 2026 09:02:28 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][scarthgap][PATCH 01/10] python3-django: upgrade 4.2.20 -> 4.2.27
-Date: Fri, 23 Jan 2026 18:02:12 +0100
-Message-ID: <20260123170221.671471-1-skandigraun@gmail.com>
+Subject: [meta-python][scarthgap][PATCH 07/10] python3-m2crypto: ignore CVE-2009-0127
+Date: Fri, 23 Jan 2026 18:02:18 +0100
+Message-ID: <20260123170221.671471-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260123170221.671471-1-skandigraun@gmail.com>
+References: <20260123170221.671471-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 17:02:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123786
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 17:02:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123792
 
-Upstream has switched from setuptools3 build backend to setuptools_build_meta,
-however their setuptools requirements are higher than what's available in oe-core.
-As a workaround, add a patch that lowers the requirements. This change has been
-tested by successfully executing the django test suite in qemu (without Selenium tests).
+Details: https://nvd.nist.gov/vuln/detail/CVE-2009-0127
 
-Changes:
-4.2.27: https://docs.djangoproject.com/en/6.0/releases/4.2.27/
-- Fix CVE-2025-13372
-- Fix CVE-2025-64460
-- Fixed a regression in Django 4.2.26 where DisallowedRedirect was raised by
-  HttpResponseRedirect and HttpResponsePermanentRedirect for URLs longer than 2048 characters.
-  The limit is now 16384 characters
+The vulnerability is disputed[1] by upstream:
+"There is no vulnerability in M2Crypto. Nowhere in the functions
+are the return values of OpenSSL functions interpreted incorrectly.
+The functions provide an interface to their users that may be
+considered confusing, but is not incorrect, nor it is a vulnerability."
 
-4.2.26: https://docs.djangoproject.com/en/6.0/releases/4.2.26/
-- Fix CVE-2025-64458
-- Fix CVE-2025-64459
-
-4.2.25: https://docs.djangoproject.com/en/6.0/releases/4.2.25/
-- Fix CVE-2025-59681
-- Fix CVE-2025-59682
-
-4.2.24: https://docs.djangoproject.com/en/6.0/releases/4.2.24/
-- Fix CVE-2025-57833
-
-4.2.23: https://docs.djangoproject.com/en/6.0/releases/4.2.23/
-- Fix CVE-2025-48432
-
-4.2.22: https://docs.djangoproject.com/en/6.0/releases/4.2.22/
-- Fix CVE-2025-48432
-
-4.2.21: https://docs.djangoproject.com/en/6.0/releases/4.2.21/
-- Change build backend
-- Fix CVE-2025-32873
-- Fixed a data corruption possibility in file_move_safe() when
-  allow_overwrite=True, where leftover content from a previously larger file could
-  remain after overwriting with a smaller one due to lack of truncation
-- Fixed a regression in Django 4.2.20, introduced when fixing CVE 2025-26699,
-  where the wordwrap template filter did not preserve empty lines between paragraphs
-  after wrapping text
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2009-0127
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit b46a5452a1c1a417f2971e494e151fa1f4022e36)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../0001-lower-setuptools-requirements.patch  | 25 +++++++++++++++++++
- .../python/python3-django_4.2.20.bb           | 14 -----------
- .../python/python3-django_4.2.27.bb           | 17 +++++++++++++
- 3 files changed, 42 insertions(+), 14 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-django-4.2.27/0001-lower-setuptools-requirements.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-django_4.2.20.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-django_4.2.27.bb
+ meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-lower-setuptools-requirements.patch b/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-lower-setuptools-requirements.patch
-new file mode 100644
-index 0000000000..5f6707467b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django-4.2.27/0001-lower-setuptools-requirements.patch
-@@ -0,0 +1,25 @@
-+From 10ddc1ee660ed5ee4d9aa21f751eb07a1b260b6c Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Fri, 23 Jan 2026 13:49:53 +0100
-+Subject: [PATCH] lower setuptools requirements
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
+index 1d8c22d196..95c57d5d48 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
+@@ -16,6 +16,8 @@ SRC_URI[sha256sum] = "bbfd113ec55708c05816252a4f09e4237df4f3bbfc8171cbbc33057d25
+ PYPI_PACKAGE = "M2Crypto"
+ inherit pypi siteinfo setuptools3
+ 
++CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
 +
-+Scarthgap ships with version 69.1.1 - adjust the requirements for that.
-+
-+Upstream-Status: Inappropriate [specific to OE LTS versions]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ pyproject.toml | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/pyproject.toml b/pyproject.toml
-+index 4635d0e..319b261 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -1,6 +1,6 @@
-+ [build-system]
-+ requires = [
-+-    "setuptools>=75.8.1; python_version >= '3.9'",
-++    "setuptools>=69.0.0; python_version >= '3.9'",
-+     "setuptools<75.4.0; python_version < '3.9'",
-+ ]
-+ build-backend = "setuptools.build_meta"
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb b/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-deleted file mode 100644
-index 3fb8b03224..0000000000
---- a/meta-python/recipes-devtools/python/python3-django_4.2.20.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--require python-django.inc
--inherit setuptools3
--
--SRC_URI[sha256sum] = "92bac5b4432a64532abb73b2ac27203f485e40225d2640a7fbef2b62b876e789"
--
--RDEPENDS:${PN} += "\
--    python3-sqlparse \
--    python3-asgiref \
--"
--
--# Set DEFAULT_PREFERENCE so that the LTS version of django is built by
--# default. To build the 4.x branch, 
--# PREFERRED_VERSION_python3-django = "4.2.20" can be added to local.conf
--DEFAULT_PREFERENCE = "-1"
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.27.bb b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
-new file mode 100644
-index 0000000000..038b0220fa
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.27.bb
-@@ -0,0 +1,17 @@
-+require python-django.inc
-+inherit python_setuptools_build_meta
-+
-+SRC_URI += "file://0001-lower-setuptools-requirements.patch"
-+SRC_URI[sha256sum] = "b865fbe0f4a3d1ee36594c5efa42b20db3c8bbb10dff0736face1c6e4bda5b92"
-+
-+RDEPENDS:${PN} += "\
-+    python3-sqlparse \
-+    python3-asgiref \
-+"
-+
-+PYPI_PACKAGE = "django"
-+
-+# Set DEFAULT_PREFERENCE so that the LTS version of django is built by
-+# default. To build the 4.x branch, 
-+# PREFERRED_VERSION_python3-django = "4.2.%" can be added to local.conf
-+DEFAULT_PREFERENCE = "-1"
+ DEPENDS += "openssl swig-native"
+ RDEPENDS:${PN} += "\
+   python3-datetime \
 
