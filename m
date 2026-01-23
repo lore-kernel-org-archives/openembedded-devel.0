@@ -2,98 +2,113 @@ Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82231D77899
-	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 17:44:29 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1137.1769190259163458458
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6248DD7789D
+	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 17:45:09 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1143.1769190306307878354
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jan 2026 09:44:19 -0800
+ Fri, 23 Jan 2026 09:45:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eUqUmw2u;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-b8710c9cddbso325146866b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:44:18 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769190257; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TIHHvAUX;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b884ad1026cso331927866b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:45:06 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769190305; cv=none;
         d=google.com; s=arc-20240605;
-        b=lLYaLIAtJITn3WH0ClsJbNI4MigVQhE5theImj1FAIhysGereRSocHJ2MJ6GnlPTlN
-         AqIDH4NhZo6IWCE+tDDt8TLN+57WFLmmSNdE7dUnybiOTRkLJzFn5dR6EN0gWn6K7Qa4
-         u1yqa0YGu9oyW8LD/40CvEMILDIn5WsjCgSUlqzxihJGQKNdbJjOjFbIzx+mMXrhGrCf
-         PEXEmyxw/dssAkEXsUhugfSEfkN0hHvwTqMQh6mwgRx9x389hzMzuLi+lsGqVdey3vQe
-         AG5GjdxwUn9omyfsE0WOLVEq1WhZ3/rK5kFUYrY7+X1EoSMo73ZJizrISzwmvN3R+1Ag
-         IEtg==
+        b=Cxjp6KHIRyaSyNeRSA8io5fHxtO58F6b2/YYelVEdqQSLMmaLsp6MVFoaoBoIOJ4kp
+         rNUt8BQNsFM7dPpjWuKv+da14Ssf2WNF4Va5QcDxffH/Xwy+E5/eu++h6psfRWN1MMgQ
+         O7nbE2U/jbMEqNjDV+kwLG8aSFinG4Mg/nSSr9xfDcvIdiaKtPhdegzb/m7ktj8yOVkL
+         z51iz8fTEhcV2Jvn8T2CoHLdaTZcUEdlouZRK50jd+sGCaPsL8pXVS4UihvtRfILDXQR
+         2wLc1CQkQ0bvgVVZ29yQPzMsWE+tb3riT3m4gTAIVGRv+yArtA7d11OZVQn3hW/GidOU
+         deLQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=5Zm8pUMJ6J+M++vyeIkfu1K/VRh1xo231j7XsJahnsA=;
+        bh=7KYUeYcB5ZmpvFqU+fUscuiqmV3ooFX5R266Pjv5XGg=;
         fh=d6HXzyjkjrcU2+NDJi5oQlKQTPTBXzBFsZTP45+YwpQ=;
-        b=J1J9emvcr9RqJysbRXrjE1cIdxlW3kNSIKZBBnVuypAHQSHcDoWh5X568+tmh9DvNI
-         ueP1Cbm8Uk05LTDIQN47oyN8TXmyhRh9l8/ZFxLzmc6LZUEBvqziIE07HSAtwcMYBN08
-         VyohLcFkh7Y1jOybkt/wlMhsg5fi4MZnUuL9aueEicL9nfpgiQhiJT1ILnqaDx22XfrA
-         K1u7ADAEPnbVL6BFp9QE+LsmrX7rjObuZt0DNclu4+0IqfvcDhW2+5Mv4c1gQT37tK+d
-         o6Vq2hC5QLQxI1eavF+bEBHfS7HbhmrUd7UvnaV9XliHIXpcK0jaweGZHxiqpl5hZFlj
-         2QXw==;
+        b=JvN49UkDvV0mFJAkAiMAdbj/OpvQBLbNMSkHumh50kowq+vv8fwccfYLYYcetyMRD4
+         dZZjkuFVlrT5byLQn3h9zFa65wBNCLcAAiSWCJ2Vq0As3CN6xFnWKr3dDTGC52UuqOPp
+         RT4PS+0RWJiU3PPWgOzt2njFAHTNAZYX6HAIAp8FPmdRgP2HhSEDEeXNA07YhrNcVZrY
+         8vb1DjsV5oYqrEdtEBa1uD9mTxTPi4VsRGSSeIwG8EXAZdDBWm7Ht6+tH6bvaAPQBnvJ
+         eVf6mTgdouaxDHJsCFDHuyP1OW0tMVm1q2TM3EdLcFDnV2+LKnYbY1hKHy1bqrTFPbzh
+         gaKQ==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769190257; x=1769795057; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769190305; x=1769795105; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=5Zm8pUMJ6J+M++vyeIkfu1K/VRh1xo231j7XsJahnsA=;
-        b=eUqUmw2uLnMoQv9tggEkoGdO58QXXcuSDn/V3gGXTf5K+8T0Np27/jxsZM+qZgXPSR
-         W8VNHM6Z2Qda283ucd+SS+0T6W8toOgHfPAUjgF+YBlmiv+cGvlZOw556RHDFKUim7Jb
-         meLrsmgWibdF5jSvscggOl/mNLmhr2KGEHemPx74ZTBRNKkE2TK9cSR/1hNDcw14RpGn
-         wW7Oa2jRFUZLjxJfqEhD+Z1Wg76ooY8nVjtDV6hRq+vEQnDdPH4MTNxkrwh9GEfed8Pu
-         dHn4JmBU7iZer0yObLr65sAlrcVR+qLM91XjF/0A0djAcUf03e8O/19bB1trNOmTWzPp
-         XZrA==
+        bh=7KYUeYcB5ZmpvFqU+fUscuiqmV3ooFX5R266Pjv5XGg=;
+        b=TIHHvAUXx/oM6WfsYLC6TUUA50reBAsUEloDcjTamItbvxdfk4/d/OlyNUF8lFU5td
+         XpyoGXD+Yy5oR5c2OAceWYDdqQkIaKrv4Pb0iHl/WSTF7Ujg6KK7yxQ+PwPXIbEuhRiO
+         lhftO/AyLKiUa013BOkOPNVab3eQjZpxPV0Z9p8WhCBZ/y1MrDZUGreUuI1NVJb0zJTN
+         WazEmTmabgmLp++bldktwfQnzr3zqNv3H+lpvKXm4nbX8rciZ9XSBB4JkJOhgiuMbstL
+         ACG+u+gqYsjPL/5C3ZJIDmaywG2okhHEq5UeoI3TmRp3bBsJ/mL2ujy05GslLstXqspT
+         DF6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769190257; x=1769795057;
+        d=1e100.net; s=20230601; t=1769190305; x=1769795105;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5Zm8pUMJ6J+M++vyeIkfu1K/VRh1xo231j7XsJahnsA=;
-        b=NP5j+qUZIyciQsXmPulM8AZdZmNqElZzL3m2H3sFX4/6gnSH1Dna4LVM0otFd2I3P8
-         W5qDSyIH0+g/vqP6dedop2hz4/FLjKroMD9E4urGbceLH02gpMVbNTNGIMUiBQqbtL/y
-         Q/gW/2uG0dNs/rFqFcU+MWQFJG/w7YC2XSx0gQNOzgc47XokPFYIu9hNeFBw/7+Cu0BT
-         BeBMFSn/TJffvZZdjzg84bxOp7+o5/vaUfmzSjQ7RKF7qdHXUOP2WZefXp8/JT8baE3z
-         IwIiOfRg6bpdWpE4j0oyFFT9fkbHh/NyIrGCzYO8RsVA9VMFY41LhmxBFwu3IpzyliyH
-         kd/g==
-X-Gm-Message-State: AOJu0Yz7xqJOFPoU6vnwtivtwj4GZ7LlaM/Yu9D6nZWTL3gBDE3LDdrl
-	7ucxc2jLGn9fCtLn+HMmQ7RkOuf4MYtl/1XL39MLJkvm+p8+YQwVy0bQwO04GyhjtreovQ7uLg7
-	7BoFclSYmGETDsKx8Y1xchO58SsSLL10=
-X-Gm-Gg: AZuq6aJBYyC1TKILOxUg+nVLgbnPjnu9UoNGZ+cYgMX+u5OwRwmxi4+9W+V91LlPbk2
-	cU/BDen2mH9KS1pGd8wOd8AedWSWgriiTXD4pl49DP5j89c9xDnzdnzNt+KMu0WqJCv9O8OMW1y
-	iUX2qCNTdHvGawDz3Py6ltg/BHz7/56r3mqHJVn/Xb3QmqAa/eibA1CFSFIGt9JkxB18m+2l1xf
-	+W3cUV2mfk6kc/o1ZMYK/di1SLdBOkPQAoyO3trpJTIevp/pv7XRA34skXz/ifhJcLo0vTlEA==
-X-Received: by 2002:a17:907:6d13:b0:b87:9e78:401a with SMTP id
- a640c23a62f3a-b885ae98deemr222864466b.65.1769190257190; Fri, 23 Jan 2026
- 09:44:17 -0800 (PST)
+        bh=7KYUeYcB5ZmpvFqU+fUscuiqmV3ooFX5R266Pjv5XGg=;
+        b=N3Bar6EwQ0/2gnThIrRDdg9YJhtxwfRoI/yLuAFxOVFLOdVfqjv516wGFRnfluLORM
+         HvyUaGBq4FR/4VJjRA+35Y06Oh16Z7FApMS2iJYR13sqJOjeRFYollCy4ByO5xkx8K1c
+         7kAv/e5U+bXbk69CFu3oldugUvgmPj1y3YEEp2u7St4/n7H0CzLHrY4doxf5b0IwrTTM
+         VqiNvgQRsETDF1Dn35RvLbhDXS445/iFDxEdN76h5Opx3gDJXcaCguMVvYTB+rNVmxvI
+         v27cPzYIwvC6IH1ck4ayz/eQRUkwCewLsSsTjWRUDKeAugpQayDVxN+h4pzZeAyosqHI
+         vHXg==
+X-Gm-Message-State: AOJu0YzGAFutFd07iJ0R6FOqwSrLPg6U9SyECY/qf1E/etVYZv2P2YyC
+	dlB2VY2Fav5JDMyCdWftrgWB5urD1hFdm3N8wVaZ89HHbhztNDuUMbynKpW13kVNEkInps56DUj
+	+xzMj5cu7TmIHzK1y0bjETRPRTRBkWmI=
+X-Gm-Gg: AZuq6aL8k03iVytbTuv2PcedabP7FVrzaaN4MmVjx0TOqyWqM0DkLxE4Ru1xjR8a6qO
+	zUHl2arVyZWRy76t1a08XDwST1M2fg2sp8hL6tJIlOITumGBeL+c7N4uhtKLyFn3d2HrS3f/BZE
+	6/ZaesYxTo635LAmvvUKFgUkKBFIXbu98jplrZv2vnJwYCP88XtYg0/p5VvotyEbI3fOF6DKE4F
+	Va8xNZkgbPt6yx7kxhGCCYhKn0EzPmJPVJuOU7JuO56ZPw0uSAxnB7EZMBahobZvC7L4D31bA==
+X-Received: by 2002:a17:907:a4e:b0:b84:2b70:98ec with SMTP id
+ a640c23a62f3a-b885ae2f845mr240092766b.42.1769190304449; Fri, 23 Jan 2026
+ 09:45:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20260123094119.2665-1-shoudil@qti.qualcomm.com> <qawdkmgqz6wn7henpqymeijenllasbytf2w25s5jvzxxpoadt7@v2cvxnaiokul>
-In-Reply-To: <qawdkmgqz6wn7henpqymeijenllasbytf2w25s5jvzxxpoadt7@v2cvxnaiokul>
+References: <20260123094603.2835-2-shoudil@qti.qualcomm.com> <gboqr7bbhrgi5tjagywg7l4xxqtkegpxaolem2r73fhbaxmwpg@7t3melnto3tk>
+In-Reply-To: <gboqr7bbhrgi5tjagywg7l4xxqtkegpxaolem2r73fhbaxmwpg@7t3melnto3tk>
 From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Fri, 23 Jan 2026 17:44:06 +0000
-X-Gm-Features: AZwV_QhyIdfC9ZK470bVFl0--ry-9hqmLpgvWnR7mNzyNaux79JzeVHFj2f4Bh8
-Message-ID: <CANPvuR=fvHbHrCFpOBdE7OHPPQRu4yiX6mphj8sNx-1U6JKxiQ@mail.gmail.com>
+Date: Fri, 23 Jan 2026 17:44:53 +0000
+X-Gm-Features: AZwV_QgYp4AEGE7C_beTgEy7AXwtwPvfO-Oi1DIzAyZpH3GTxHCEh-U22dKCU3I
+Message-ID: <CANPvuR=HS44P0tPKkipP_7v60y+OvMx=3JY7BxbwCicP05oz9A@mail.gmail.com>
 Subject: Re: [oe][meta-oe][PATCH] android-tools-conf-configfs: handle multiple
  UDC controllers
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: openembedded-devel@lists.openembedded.org, 
 	Jose Quaresma <jose.quaresma@oss.qualcomm.com>, Shoudi Li <shoudil@qti.qualcomm.com>
-Content-Type: multipart/alternative; boundary="000000000000d1ea29064911b495"
+Content-Type: multipart/alternative; boundary="000000000000a308ff064911b7dc"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 17:44:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123798
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 17:45:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123799
 
---000000000000d1ea29064911b495
+--000000000000a308ff064911b7dc
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com> escreveu (sexta,
-23/01/2026 =C3=A0(s) 17:34):
+23/01/2026 =C3=A0(s) 17:24):
 
-> On Fri, Jan 23, 2026 at 09:41:19AM +0000, Shoudi Li wrote:
+> Hi,
+>
+>
+> On Fri, Jan 23, 2026 at 09:46:04AM +0000, Shoudi Li wrote:
+> In the headers: `From: Shoudi Li <quaresma.jose@gmail.com> `
+>
+> What is going on?
+
+
+The same issue as before. I will send a v2
+
+
+>
+>
+> > From: Shoudi Li <shoudil@qti.qualcomm.com>
+> >
 > > For the boards with multiple UDC ports, adb funtion will be impacted du=
 e
 > > to below error.
@@ -102,17 +117,8 @@ e
 > > ls: write error: Device or resource busy
 > >
 > > Signed-off-by: Shoudi Li <shoudil@qti.qualcomm.com>
-> > ---
-> >  .../android-tools-conf-configfs/android-gadget-start        | 6 ++++--
-> >  1 file changed, 4 insertions(+), 2 deletions(-)
 >
-> Same issues, forged From and missing SoB.
->
-
-Yep in this one I forgot the --from on git send-email but I didn't notice
-that the author was also wrong.
-
-
+> Missing SoB or 'quaresma.jose@gmail.com'.
 >
 >
 > --
@@ -126,17 +132,30 @@ Best regards,
 
 Jos=C3=A9 Quaresma
 
---000000000000d1ea29064911b495
+--000000000000a308ff064911b7dc
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
 mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">Dmitry Baryshko=
 v &lt;<a href=3D"mailto:dmitry.baryshkov@oss.qualcomm.com">dmitry.baryshkov=
-@oss.qualcomm.com</a>&gt; escreveu (sexta, 23/01/2026 =C3=A0(s) 17:34):<br>=
+@oss.qualcomm.com</a>&gt; escreveu (sexta, 23/01/2026 =C3=A0(s) 17:24):<br>=
 </div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
-order-left:1px solid rgb(204,204,204);padding-left:1ex">On Fri, Jan 23, 202=
-6 at 09:41:19AM +0000, Shoudi Li wrote:<br>
+order-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<br>
+<br>
+<br>
+On Fri, Jan 23, 2026 at 09:46:04AM +0000, Shoudi Li wrote:<br>
+In the headers: `From: Shoudi Li &lt;<a href=3D"mailto:quaresma.jose@gmail.=
+com" target=3D"_blank">quaresma.jose@gmail.com</a>&gt; `<br>
+<br>
+What is going on?</blockquote><div><br></div><div>The same issue as before.=
+ I will send a v2</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" s=
+tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
+ding-left:1ex"><br>
+<br>
+&gt; From: Shoudi Li &lt;<a href=3D"mailto:shoudil@qti.qualcomm.com" target=
+=3D"_blank">shoudil@qti.qualcomm.com</a>&gt;<br>
+&gt; <br>
 &gt; For the boards with multiple UDC ports, adb funtion will be impacted d=
 ue<br>
 &gt; to below error.<br>
@@ -146,16 +165,9 @@ ue<br>
 &gt; <br>
 &gt; Signed-off-by: Shoudi Li &lt;<a href=3D"mailto:shoudil@qti.qualcomm.co=
 m" target=3D"_blank">shoudil@qti.qualcomm.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../android-tools-conf-configfs/android-gadget-start=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 6 ++++--<br>
-&gt;=C2=A0 1 file changed, 4 insertions(+), 2 deletions(-)<br>
 <br>
-Same issues, forged From and missing SoB.<br></blockquote><div><br></div><d=
-iv>Yep in this one I forgot the --from on git send-email but I didn&#39;t n=
-otice that the author was also wrong.</div><div>=C2=A0</div><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
-rgb(204,204,204);padding-left:1ex">
+Missing SoB or &#39;<a href=3D"mailto:quaresma.jose@gmail.com" target=3D"_b=
+lank">quaresma.jose@gmail.com</a>&#39;.<br>
 <br>
 <br>
 -- <br>
@@ -166,5 +178,5 @@ Dmitry<br>
 ignature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></=
 div></div></div>
 
---000000000000d1ea29064911b495--
+--000000000000a308ff064911b7dc--
 
