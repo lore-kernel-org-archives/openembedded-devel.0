@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 261D3D7788F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DA25D7788C
 	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 17:02:39 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.120.1769187753723563858
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.117.1769187751381531048
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jan 2026 09:02:34 -0800
+ Fri, 23 Jan 2026 09:02:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m5VBNxlc;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4801d7c72a5so18003175e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:02:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CH5AuKho;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-47ee4539adfso26381265e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 09:02:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769187752; x=1769792552; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769187750; x=1769792550; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7tYZ6ixuJutWhTjTK0iZt2xwVMzy5mZqBOpgxeJU/VM=;
-        b=m5VBNxlcfQrFjnJBgV4Oh9dLcBaTu/hNFWnQHkMojPQMVBRLEXpRHSoV14U8J3KLHD
-         iv6a4artnrfQ0IUz1VJ/oZVWaYHndWMpf0m4DUSWmWZIOCoeso4RCwTklwKzhZ/aJ3Nv
-         j060fAh3ejrW2ILcb6yRi7ZjEOdx0trPQNk0arMy/ZF9poD6WaU+moTk5JZIxcvx6EHn
-         rAQvTs0lhxY5F4Dr2XnD+ypBWW6mB0TOMZpYEnbrxy5AzPZah13QaXi5idp9wVQe+Tj+
-         /WA0g2IIpV1ofmXMf+2fSJQFB7Dvhx2znUi6h4o95db6rQzjnbhpikZ3UPqObRVHfRCI
-         Z+zg==
+        bh=K1NMCFHW+cpRclBn3AxC8comnPFaU5ZvS3aph2AzpD0=;
+        b=CH5AuKhobkPaZwXkhncdXds1523eAdiR+ONIkjNfNw69fJR4y0frm2uR7iJX+jVxH9
+         lwTQ8KDvdHDULwm7eoXGXk1sygWyFlU8+WAOqs0JGnIgBCm/tpHI7Hrf/4CCQ5snMWhK
+         kQZjXon74S+aHwwE0zhaZkh4HPpkhMnR9Ld6ABOcAZCSIoc1VRvm9cjyMCOaXFWzAtHA
+         uIGYCeBr66eYitVCrAiUSQmS0va7tzhHXm/M+Go47bWejWzo0hNAzK96AUWnlSvyX7wX
+         KXgijkjk0yf6a1V7VIf3j7KLExC5hVKDoOzmOVDH3EKJTzgSKIgKw8SHCF11MSOmq8Wz
+         XmHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769187752; x=1769792552;
+        d=1e100.net; s=20230601; t=1769187750; x=1769792550;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=7tYZ6ixuJutWhTjTK0iZt2xwVMzy5mZqBOpgxeJU/VM=;
-        b=aVrh8iP3YJ8jXFqJ72eraFLBSVn/n4l8RBBNboyfolTihyMB37x0IbCrcuVJLKayTi
-         XAiU98HHSfgqtyNFKM8qgE+QRUYFDAut/a/+iYhXfWCC6FyXd4mNY503kxKD796lQU5j
-         PxH0sM9MoXvzEhqVK1IbQcZEjhFEKQG2jv4EZjCjblPfgJYKw8fiEyHefD9a/7lOb2Gn
-         +uEWlC6zfN42BzrImEKYhguZBGXowtVb7JD/eDax04qMQFBVqCPzkuL678+Rmt/Yx+u0
-         onavHOY0ECiHzpj6rD3VigpuSQignLOpUmEHFo+Ey2Uu3WNcxoVffA3NpKIAFIYN/Y9m
-         5YLg==
-X-Gm-Message-State: AOJu0YzEugeMKjtvOYsZUV6Wt+eJH97jO/BPly6S0xFS6m/eER632uMR
-	VPzdCFkiR+FnWxN6x6FQxbT4wTe247Sup3rz8+d8kSA3GM2mR0a+xZfxo18n/g==
-X-Gm-Gg: AZuq6aKpXPsDcdbI7/UyCV+RStKR0ErGgEBZZCTga9BrBbqNn35xkSnqkLqWivuzDT+
-	LjgeMuwV9WfeKevbFE0TkUdsUTXOVmJY1saDGQJiOXqRQJu1QSr3Czt2c8fHQ93qMCHQpHf0dxP
-	89iXhPJzAceQrKoUPTUISgs75dk5jvy4nFszViMp9KD++UA1skqUS2xQF/BJ+ni6Mf2xCiPqb9w
-	bue39k+pzPVx7/HkTl54OuQmx8cB9kmNqMypqI8g+j5l+gO78FgznZH0natOIb0VkwYom+v6z9R
-	zJbLN28OfylHNXhD8vbIAVB1h3Hv7q+hDws+8iFxGiZPDXZK4nQL8wcLWxYknBm3fNWMN3ePk5h
-	ZAt8lE2IEsCWDhjER/9ohRWaBwFGHN7c6uiiXKP4OheDj9pySU/ieb6QgFjXhH1J/qXMNolhJhu
-	iOm79rSScD
-X-Received: by 2002:a05:600c:64c6:b0:47e:de23:dd6f with SMTP id 5b1f17b1804b1-48050d6aebfmr39479435e9.12.1769187750346;
-        Fri, 23 Jan 2026 09:02:30 -0800 (PST)
+        bh=K1NMCFHW+cpRclBn3AxC8comnPFaU5ZvS3aph2AzpD0=;
+        b=IS/zYccYxX1xh9ifZ9xDbX4R4/K7R/2yxq+FgN64tpU95tB0rexvP53gLKnVYJsJhe
+         hqSZzDJFnfq0bSGjFljsuh60gWxPLf5YTOdZ/M5cj4LsRiR9GRk/yCVKe6wA3a0FO/KH
+         Gdvuwff9cPkW+qzuu498Bte5olqO7yw60+t1IdRtjqafrfyQhfgsQnkpU4oTCDe8Mf4v
+         n3tKxgTh7++J14fCJ12jJ5eJrnK/lk994gqpVwCJfKmJgsokFFv0+TECS43C4hulQfDO
+         tSpDTNulk2JIVuAVDtclXARjLaVZzIYYoOotC0j4nsylBYtsWdTZx3bS5eVz70vPhDx+
+         L4pA==
+X-Gm-Message-State: AOJu0YwCL2BjtDG8p0BIqiWdzaqsfY/1YuXadzQuAZ3zO/igxoDLxfFC
+	V/uDGPeY/PV24awWSmCyuCCOuRdqcragIXYvL9rlLg4Sv+CYzUqu19/Yf5NOJA==
+X-Gm-Gg: AZuq6aJFqteaJqzLpCDs+Vorl9CqUuzQMrA5v3DZ+g4L1HmpzeMeHljU4PJaZfJUSyM
+	Uljiip4NOcQdiXDLqj8m+YgngvzFSzveuZjfAKlNxNnCWfc0Pt1usiBsFXOYnzyRN5thZ+kPTg2
+	H5o5uP1Gm6QAR6p5cTCb39foHBu2HVbsVnUwfNedphyi+0djkc+22ab2A+s2r8N/eKpaacJSA5/
+	/qLaa8/4iRcVI0r7RLjitUUIqn2SK4faOiP+QxjZfceXL4FM8cykVUm8vm3D9ockbKQU6HgCkmE
+	pacwkS3yLO/MFC+SCKbrA//wHiuX/JBngEJ4Pipy5lW8Y/auxg76qJADNQPrwupUj880i182oQs
+	Z3qfRCVT60kTeQwd3mHeIoprJLVDqeLrrfMiEtkwXCXzp1xJ+dnh1cH/gCmwzDNPuulQqSXiVJ1
+	KaN25i3ZR0
+X-Received: by 2002:a05:600c:3b0c:b0:475:e067:f23d with SMTP id 5b1f17b1804b1-4804c9c09bfmr59497395e9.25.1769187749579;
+        Fri, 23 Jan 2026 09:02:29 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm25455165e9.17.2026.01.23.09.02.29
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm25455165e9.17.2026.01.23.09.02.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 23 Jan 2026 09:02:29 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 09/10] openvpn: ignore CVE-2025-13751
-Date: Fri, 23 Jan 2026 18:02:20 +0100
-Message-ID: <20260123170221.671471-9-skandigraun@gmail.com>
+Subject: [meta-python][scarthgap][PATCH 08/10] python3-m2crypto: mark CVE-2020-25657 as patched
+Date: Fri, 23 Jan 2026 18:02:19 +0100
+Message-ID: <20260123170221.671471-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260123170221.671471-1-skandigraun@gmail.com>
 References: <20260123170221.671471-1-skandigraun@gmail.com>
@@ -67,27 +67,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 17:02:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123794
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123793
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-13751
+Details: https://nvd.nist.gov/vuln/detail/CVE-2020-25657
 
-The vulnerability is Windows specific, can be ignored.
+The commit[1] that fixes the vulnerability has been part of the
+package since version 0.39.0
+
+[1]: https://git.sr.ht/~mcepl/m2crypto/commit/84c53958def0f510e92119fca14d74f94215827a
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit ba6468f7a09bf8e268ea5ac7939925c362ead876)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb | 1 +
+ meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-index 305a69bec4..d9c3a4e719 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.6.14.bb
-@@ -18,6 +18,7 @@ UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
- SRC_URI[sha256sum] = "9eb6a6618352f9e7b771a9d38ae1631b5edfeed6d40233e243e602ddf2195e7a"
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
+index 95c57d5d48..736399c9d2 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
+@@ -17,6 +17,7 @@ PYPI_PACKAGE = "M2Crypto"
+ inherit pypi siteinfo setuptools3
  
- CVE_STATUS[CVE-2020-27569] = "not-applicable-config: Applies only Aviatrix OpenVPN client, not openvpn"
-+CVE_STATUS[CVE-2025-13751] = "not-applicable-platform: The vulnerability is Windows specific"
+ CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
++CVE_STATUS[CVE-2020-25657] = "fixed-version: the used version (0.40.1) contains the fix already"
  
- INITSCRIPT_PACKAGES = "${PN}"
- INITSCRIPT_NAME:${PN} = "openvpn"
+ DEPENDS += "openssl swig-native"
+ RDEPENDS:${PN} += "\
 
