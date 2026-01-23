@@ -1,97 +1,97 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <adam.duskett@amarulasolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CB9FD74EE3
-	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 15:16:59 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.383.1769181415547681958
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A440FD74EEC
+	for <webhook@archiver.kernel.org>; Fri, 23 Jan 2026 15:37:49 +0000 (UTC)
+Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com [209.85.218.68])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.865.1769182668704164767
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jan 2026 07:16:55 -0800
+ Fri, 23 Jan 2026 07:37:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nf54VLKl;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-649523df010so2019103d50.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 07:16:55 -0800 (PST)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=eqPMO9q/;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.68, mailfrom: adam.duskett@amarulasolutions.com)
+Received: by mail-ej1-f68.google.com with SMTP id a640c23a62f3a-b8845a47e39so32084266b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 07:37:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769181414; x=1769786214; darn=lists.openembedded.org;
+        d=amarulasolutions.com; s=google; t=1769182667; x=1769787467; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ABmyUXq/wITk7DWZ7Tevxocazh0uEXdDyrof9nv9nbg=;
-        b=nf54VLKlL0VdHJag3eikIOnCaZsRXAkV+eCUpNIQLhuWUJ3Km095pcZD9Bq8cSRK67
-         WOemWJ3PFkvjFeZl+KT9/rutwCZFY8u36OwhIz9fF8gwV2IURw17rDIMqu6uQ4QzejyS
-         ERBSSOmTlRbRhUHzYPrk61kuo4DBN4ZtzQPTEZNRkDYIpeNmQaMfFAPUfrBH5rx04yBr
-         lVP+0z0/6L7zlW6eyiBGTwKXvfvSZk7qGNiR8M+sSnyVwEBsq+9n4kdvooPti3ibKnDx
-         izewft6p8cPKWdNke6O/b3SAFcGzedKVpoR5X0XISbk4Rgy9/lYLfdTpNjDt3YdTHzKS
-         /qQw==
+        bh=tX9T1toYseu1HNSl9G9wuR1euraox7RN35+tdIfc9Ks=;
+        b=eqPMO9q/zyuVWn1eLRpwkW3hauBnOP30Qn6iPfcp0FPf5UEg38PF85Hczqg76i6IHu
+         ZQNNaNB16Ws30Mu4Z9Yux3xJIWpo9OuV9bFSEaJxDFIOozAx+9b2OpzvKlbm7AZrzuu+
+         ve828KcFNQ3NdVgIwTUPMk/+iikI+etNso79k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769181414; x=1769786214;
+        d=1e100.net; s=20230601; t=1769182667; x=1769787467;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ABmyUXq/wITk7DWZ7Tevxocazh0uEXdDyrof9nv9nbg=;
-        b=xEgjV9zI+cN7npc/arRAhH+LzinhoxaWZzbaYffCQC/HJSHHo0qqSzvcIrIY0f32Pi
-         DIg6CI/Sl2FxfVSPCbgt0EOCvVhYX03U4xY9cG9Tpk+0TtMorv0Zi2A36Ok18mNFfmIK
-         pefdmAHyjX4Qou7N17zP2wESgPYaz3xKN4soNOnlI0EHYOPwNqZJzSRrvHtbK93rV1Z7
-         iKVVQVJUZ6KUsY4xIc/tXp8XJIUS6EnmWhC+11ZnYYM3dh/g/WLnFUNbfWik5W3qQwdb
-         Kwl/WOvy1ggyEylgRmOP4Nictl0Ti4FbfsuetrfTzujYKdDB+x23d28Gqcwd2jCMwHW2
-         3rCQ==
-X-Gm-Message-State: AOJu0YyezWv29WMdT3nzPrmhDRQ4Svm9ZFEvxW6vi1Ej+2vIGj1i8brZ
-	IFdJSSeTGKBDTlOH2jffX58ZAtAfr/m4BuwIWy8geZK7JddLvQvfo8RXckeY7Lta
-X-Gm-Gg: AZuq6aIxLp/qmfeix9H0NOUWJ/Bt4SVUyMs0ePGCquOJ9BCue0fpp+1qnham0GDMsYT
-	VdbGzTudjb/kXGVg1tnuSWEvKlOzFXPoCx03Ev7Q2IgQyMCXNyXZ5I3kXvA2yRfiRAUzvRznUCJ
-	4CtFCCshHXi/+j8cnbdPk97b8orUhI4EINhVHUAsFisDmtIX1+suGvH18YBx/MuGsiB/ZyHqnom
-	G0hmCjhdHC0oz6dzZNnFpxscbOnxaZoY4rRspxvih9Mya+CXAYZ0T+NcavwOijrIG8fRskAVFzX
-	hwMnOJ8CjInHCQV31DWFm26i9mATQU2gtIOPCRImA1owFi1e0Iu/rzaSj5f4FfxEDNCaEbnwtKm
-	eO9LLEroKCHQVQDAdFm4bBWmZ+pJ/+Hd1guCZbOlMYmJUheHK/2WSbu6jVwEN0v7JR3V7v+bs8H
-	1Hekq8vTIaxxmuPita2mZ+dReFtjqx7XMjaj611A1UBW4kJ3B2os0edgW4uITS+p1MwMO90Fhbr
-	y/jj5L4mAhpMpf2rK2/gC4XvcpBf8cZp3tgf0ZUV0np1fpz
-X-Received: by 2002:a53:c486:0:b0:649:4888:fb1e with SMTP id 956f58d0204a3-6495c043bbcmr1745556d50.84.1769181414131;
-        Fri, 23 Jan 2026 07:16:54 -0800 (PST)
-Received: from localhost.localdomain ([67.233.59.72])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7943b2a2b0bsm11663537b3.31.2026.01.23.07.16.53
+        bh=tX9T1toYseu1HNSl9G9wuR1euraox7RN35+tdIfc9Ks=;
+        b=tcsqY56kD8akhYTtVjBEIBkne8faWkad7dWg/9TMIRceCzn7YC8d4AvRLtnYohnk9Z
+         PgxnDrH1i0R9L2zE5NRi6IcoGCt3WdWRifCNXGCV+9jV1b0bA1GpMrOPuAzFMpddPBk4
+         TSuFgmN2tdOc12dmlXy/GOEZHDSo2DSjjsR4E1kUa8vC/RvorQmjEjTYlDKAiNDSuG0U
+         22OrAg1gVEQ6ZXgzcxJl5TilvBqkclmUgg+13QRRZ8K7chrBAqx1uQi3DpdB7gRbQkui
+         75enSmPKhlS/oSSuNPtI05rEjYkq+qAGXuv8uffnttOSIcG/oI7Qa3qVs0RPsE5fFhZd
+         e+Sg==
+X-Gm-Message-State: AOJu0Yxb8xRN05D/RloIZB1JpnQb5i9WVdqAlpx8IYeEJ6XXw1OTXHb5
+	UZe7BgLcek8jMbQos4i1lFClpEzpaBzx6rN1nf0b1561U9GmiiceuS2uQfnYP8/Qnt/UqIQJ5w6
+	Rm3jKYtc=
+X-Gm-Gg: AZuq6aL/ZvPvAc73nxoEHZQ1dhF4hU9AVPlAzDc4p6/j3Gi93AG5KDY4k5meXUqrEDF
+	SBrH2JIhZdmYCqSub+C4rITsQuUSMAVnZIfQWlCcz1N952RyyFXpql2iF8e+xyDuSdEmQweRH1V
+	lzLpoaEztM2Am4mfOZoad+2tmFSCiG080MLDIUOfAo8KpAgFCEZ/x6vcS1EhrvWVjZmvm5FnGrH
+	D0LbAERn8Uy1sLmtY6+HC1y6twtYI1nnpbIETYDRIX0Z3HRkE/Qb8BHFTSWSoNDeFfmyu9feFcw
+	OrviHbs8CzU84Sx0MKPcZjTHsuYFenmUQlPjDuMX80Rqk73bmgrtLjitvsHLK3SoZqn/e3qEFGl
+	wsdEdqSKzdrRu/Hwjkb+iaq+qn+YPfqRmed5mmNopAvZ6eiQSq9MubIH0C6e2Nx7EfIEK34zzio
+	lb1zEPJLmuD9KbFJ3t6s62xTeNYYPB/+LBgtL75o0yy14c65L1SPZzhynI0T3T97UM4g0a7oqpA
+	o/4RGQ3nu5OfleAojg+cqaFSuF6DebXEyGVIIvWGY8I9qrMcx/Q
+X-Received: by 2002:a17:907:940d:b0:b88:4ff8:12fb with SMTP id a640c23a62f3a-b885a82e0bamr154606466b.0.1769182666911;
+        Fri, 23 Jan 2026 07:37:46 -0800 (PST)
+Received: from adam.arnhem.chello.nl (2001-1c00-8101-1200-3ddc-5bb8-0efa-16f1.cable.dynamic.v6.ziggo.nl. [2001:1c00:8101:1200:3ddc:5bb8:efa:16f1])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b885b75dbe6sm120291066b.50.2026.01.23.07.37.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 23 Jan 2026 07:16:53 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Fri, 23 Jan 2026 07:37:46 -0800 (PST)
+From: Adam Duskett <adam.duskett@amarulasolutions.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] usbids: upgrade 2025.09.15 -> 2025.12.13
-Date: Fri, 23 Jan 2026 10:16:45 -0500
-Message-ID: <20260123151645.7059-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
+Subject: [PATCH 1/1] libtsm: drop BBCLASSEXTEND = "native nativesdk"
+Date: Fri, 23 Jan 2026 16:37:44 +0100
+Message-ID: <20260123153744.1223968-1-adam.duskett@amarulasolutions.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 15:16:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123781
+ <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 15:37:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123782
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+BBCLASSEXTEND = "native nativesdk" isn't needed and is producing
+the following warning:
+
+```
+WARNING: Nothing PROVIDES 'nativesdk-xkeyboard-config'
+(but libtsm_4.4.0.bb DEPENDS on or otherwise requires it). Close matches:
+  nativesdk-gnu-config
+  nativesdk-pkgconfig
+  xkeyboard-config
+```
+
+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
 ---
- .../usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb} (83%)
+ meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-similarity index 83%
-rename from meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
-rename to meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-index 925a8ddda9..ebaa1d1f99 100644
---- a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
-+++ b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
- 
- SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
- 
--# September 15, 2025
--SRCREV = "18b3055a9819a341ac2ff957f0b92f564d0d5d6e"
-+# December 13, 2025
-+SRCREV = "5de1427442504bc8e28d35cca5397d64ea177456"
- 
- 
- do_install() {
+diff --git a/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb b/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb
+index 1764ba628a..074302bed7 100644
+--- a/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb
++++ b/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb
+@@ -31,5 +31,3 @@ EXTRA_OEMESON:append = " \
+     -Dtests=false \
+     -Dgtktsm=false \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
-2.43.0
+2.52.0
 
 
