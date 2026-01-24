@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 712EBD715D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E379D715D5
 	for <webhook@archiver.kernel.org>; Sat, 24 Jan 2026 06:30:13 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14205.1769236212049280040
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14297.1769236212703847877
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Jan 2026 22:30:12 -0800
+ Fri, 23 Jan 2026 22:30:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iiCvrN1h;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47f3b7ef761so20740895e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 22:30:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EJLa/3Jz;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee937ecf2so24607805e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 23 Jan 2026 22:30:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769236210; x=1769841010; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769236211; x=1769841011; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=bWbX+zrOA+bu7yOLZ4H/aXfF4jz6fjR6P2jrTzyOTSY=;
-        b=iiCvrN1hv2wif8ARWT0ozsGtLbYnydXORueROdjbgMRR896DiD2QZuzY0c7DUzJZL3
-         V+DFfNNW4Izl9KZQoqnQFLkvtOeflxS3LjHjgFMkgJ+7jXB9b5Mi1/JNabAhSD6KeUO/
-         g5UcluAB1VtYJm35e+3p6quF4OuWd6nh7DGxrH72jQ5+FnfbsdaPIsCADHE2GioNqa4Y
-         SqwUOMhi+AAgk0pFFvydWv2fBWnMoBKBFDQn+QHTugweobRkA5ypozNidowXdzvLrpBL
-         wp3F0HvIcymaxjrX/9QI80YlBjo4dR6uvSy4rJyqE4nnjqsUDqqTCZfQYpqDa04oLNqU
-         0mnw==
+        bh=OMMa1wYrR3lumjYbx2XLYwON4fpB3VOGc8Q3lZxtudA=;
+        b=EJLa/3Jz1lnQBCTnHbTEctqDK5L2ApxrhY3ZMbJP8pckDYerN815PdbAFoysnlLwTa
+         eHFcwUo4kFPnuB+e6QVMTcQ8Lq5EYicniKYQRmiwW30h/wqS7iSZQOFJ7QGmzXJd5yKJ
+         dyg+AdDdDEvszQkUF8Y7TTT8neepM6ClvESG1niZSL2TNxGFodEVzK8HJlW68Xg23bHl
+         LDwba+Gm+aqYsA8PR8xmKiSA0NCLhiPigAM2W8M7vjR8uzo/85opFIIsgvudZ/o1/uw0
+         kZqSf+3ax7Lcx1+FfcKlKKoYVO4U9plmFXdz/jyLu5qFYwZur31N1vqbYOY2GdGyclY0
+         9ZYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769236210; x=1769841010;
+        d=1e100.net; s=20230601; t=1769236211; x=1769841011;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=bWbX+zrOA+bu7yOLZ4H/aXfF4jz6fjR6P2jrTzyOTSY=;
-        b=o1qKEXfuT1z9w/PqYv+JQjZ9kOZaivg4z4HZ1I5upxiOUFhW/mxXHImGAYfmwtXwKj
-         p4K0cQ74xC/NPkZiEuxyePJJfYQlpttkQ7sHpzTV7t4ejh4t2t+uEEBH04EbMHjD8fQ6
-         Va0+5HCUZyEgctjc6U9zMXcWqlzItRWDz3VjU8C6A0RsDUiplbTvxVcftX2R2kGtwsaT
-         NeOXrUHWmPuKx+nX75S8InEsFz40nERKatbkoJWNaQdMChDvD0DiQO3BCr46x33VqfUX
-         J8TDqVyB/FN0g55H/nYGP0qh9p3FNqfEMSYqLURiCjYhE5foLS5TeTPRfLzPQwPvgzsF
-         xYgA==
-X-Gm-Message-State: AOJu0YzqysfqXkSmfsquVE9ucxxWhDhKnACmlYsfknRvz2Jjw7IiPa3L
-	HN0T6W8c3khr9LHVVv7raoL0kV2U/XX8+pXt9S+ugDZvxrsQy7ZhwQoBL34waA==
-X-Gm-Gg: AZuq6aKJRBX8nOjlgeo3PZ0X4F2JDe8wdhNvmilaq/2JXqQK4p+XLAdSOIBl15Pp4JP
-	Sq7s2XIyPOdaCj3n5kXJKLADOjkFXKzXvXCBMb0XCbo0vCbUQQ1yDm2ygxOeZELHMTRNioT4tSw
-	+o2Wus/Q1iQZ+UBRbEES3TsA03v7P7cl1o3F8/+or828AkM5P9Qj+ij+R4RRRsJJMWs+x+T9n/W
-	XrUyjx0q1if8thWMIfIrle4nn0W/6rmFCEWjbAimV+8WoZ6EpDw4EwtJgmd5vjx95gixUW5KiyL
-	u8Ka+HZueMDG24kIvs14qmtydXD3QCYyf43S3SLwJ9ukD5BdHaQ/F8F7T0VOOfhbtZggCcgzmTG
-	3OtrvdLefeNyom0Dgf9n11IOwL23cLsPErqBfeeXMlWCmOqL7QdVFZOhFhWlHl0WapdXPR1gEu/
-	gUfv8hrqEb
-X-Received: by 2002:a05:600c:3b0d:b0:47b:deb9:f8a with SMTP id 5b1f17b1804b1-4804c9b736dmr74444175e9.30.1769236210388;
-        Fri, 23 Jan 2026 22:30:10 -0800 (PST)
+        bh=OMMa1wYrR3lumjYbx2XLYwON4fpB3VOGc8Q3lZxtudA=;
+        b=QPG5qnYEr44FxCRCZJ55vN4/ayN8p3PoBWaIXfqIdt1G0ZFopJgvKT+VH1NMAZDs5n
+         zL19+CN9zEcC/e3soiiCKnEqFXQEzRclA3/DF5ohwP0Pl4esUl9DbZ9RjjU9GUJ1qAdi
+         uufpPAAQRRNLNNeZQuj2mVQo1iD5J1rUXEdwuUrcTpTSHvdLWz3jpBN2hGcnK3FJmDBq
+         yhfgF40UhSuHU4Ocme37AtBAFeBOvIRZsa5oLlEKA/bZYtRs2J3FaHsHO+bX3/3k61aJ
+         +SZWbtojctjY1o73pD8YIRmsPPKwx/o3pJmHYWLE3wEx6uPp5h/Isrn53Fj3JnFfRbWc
+         VTUQ==
+X-Gm-Message-State: AOJu0YxBB9fJP7liXysEVboaktvjo3eHAngtbeIuhyZ0wPFLMC2klBmg
+	net7kClCHY8Rg45Ch55fdhXaaBHQltfstSQ+drWtIxev89Czq+/rWW90aJuANQ==
+X-Gm-Gg: AZuq6aIHMKwqim2v8DDBYmAr9K/qKj5NkC73T60msc6zYCIgbge0CGQME2iAnCWwvI0
+	PePaEtVvSOFIJR1vBh/iRiOFkLLOGWYNDx8NTANhi70POw1nPXHVrTBL6+c4/3Y+81+JiI+HZJq
+	IyB54Qy9QNU7jelW4kmVinH67WiR2lpDwH0OCwGmIwd/mXx1naMk4927g5tLtIEzj38EZOlm3ZV
+	JN+nDykLG88hr4Ig/QQDkdiuBdIo0zCb8zpFxv2Rtnvi9CPKgJLs0I0M28dF8hpTg9A2/YPXrXV
+	SLN17D89pSZv8PBpaNkbzT8JNmcc0kuaI19bHXUbX5utR+iBuV1EwUK8YVKKIuct4pCVUw1mQFx
+	KMSKdF7OMRHak2dJ/7UBPnAgnOa1cGKKcdKZWEjc0QgTKS33gkZtxJm1nBpsZhVIQTQks6FBsgK
+	QbNa52mg2XZJYHfXUJ0fc=
+X-Received: by 2002:a05:600c:3e0e:b0:46f:a2ba:581f with SMTP id 5b1f17b1804b1-4804d307b0cmr88565025e9.16.1769236211032;
+        Fri, 23 Jan 2026 22:30:11 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48047028928sm265354385e9.2.2026.01.23.22.30.09
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48047028928sm265354385e9.2.2026.01.23.22.30.10
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 23 Jan 2026 22:30:10 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 04/13] xrdp: patch CVE-2022-23478
-Date: Sat, 24 Jan 2026 07:29:58 +0100
-Message-ID: <20260124063007.28313-4-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 05/13] xrdp: patch CVE-2022-23479
+Date: Sat, 24 Jan 2026 07:29:59 +0100
+Message-ID: <20260124063007.28313-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260124063007.28313-1-skandigraun@gmail.com>
 References: <20260124063007.28313-1-skandigraun@gmail.com>
@@ -67,122 +67,120 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 24 Jan 2026 06:30:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123810
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123811
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23478
+Details: https://nvd.nist.gov/vuln/detail/CVE-2022-23479
 
 Pick the patch that mentions this vulnerability explicitly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 63b5fff9755a5849a0bbfba5447e117130efcf54)
+(cherry picked from commit 19e076e66b3e3230b1fa05580e64de45a832ab13)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../xrdp/xrdp/CVE-2022-23478.patch            | 85 +++++++++++++++++++
+ .../xrdp/xrdp/CVE-2022-23479.patch            | 83 +++++++++++++++++++
  meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  1 +
- 2 files changed, 86 insertions(+)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch
+ 2 files changed, 84 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch
 new file mode 100644
-index 0000000000..de4f773332
+index 0000000000..6940ce8f17
 --- /dev/null
-+++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch
-@@ -0,0 +1,85 @@
-+From 6cb54a1c26b53617e1c79a0abc96d03c4add1eb8 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch
+@@ -0,0 +1,83 @@
++From 60864014b733c10881c078048560858067fe5d0f Mon Sep 17 00:00:00 2001
 +From: matt335672 <30179339+matt335672@users.noreply.github.com>
-+Date: Wed, 7 Dec 2022 11:12:42 +0000
-+Subject: [PATCH] CVE-2022-23478
++Date: Wed, 7 Dec 2022 09:44:56 +0000
++Subject: [PATCH] CVE-2022-23479
 +
-+Fix potential OOB write if invalid chansrv channel opened
++Detect attempts to overflow input buffer
 +
-+Also removed an unnecessary dynamic memory allocation
++If application code hasn't properly sanitised the header_size
++for a transport, it is possible for read requests to be issued
++which overflow the input buffer. This change detects this
++at a low level and bounces the read request.
 +
-+CVE: CVE-2022-23478
-+Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/6cb54a1c26b53617e1c79a0abc96d03c4add1eb8]
++CVE: CVE-2022-23479
++Upstream-Status: Backport [https://github.com/neutrinolabs/xrdp/commit/60864014b733c10881c078048560858067fe5d0f]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ xrdp/xrdp_mm.c | 21 +++++++++------------
-+ 1 file changed, 9 insertions(+), 12 deletions(-)
++ common/trans.c | 19 +++++++++++++++----
++ common/trans.h |  2 +-
++ 2 files changed, 16 insertions(+), 5 deletions(-)
 +
-+diff --git a/xrdp/xrdp_mm.c b/xrdp/xrdp_mm.c
-+index 74b0516afa..c91e03ab56 100644
-+--- a/xrdp/xrdp_mm.c
-++++ b/xrdp/xrdp_mm.c
-+@@ -1360,7 +1360,7 @@ xrdp_mm_trans_process_drdynvc_channel_open(struct xrdp_mm *self,
-+     int error;
-+     int chan_id;
-+     int chansrv_chan_id;
-+-    char *name;
-++    char name[1024 + 1];
-+     struct xrdp_drdynvc_procs procs;
++diff --git a/common/trans.c b/common/trans.c
++index 55d2a63812..1d2d3e68ae 100644
++--- a/common/trans.c
+++++ b/common/trans.c
++@@ -297,8 +297,8 @@ trans_check_wait_objs(struct trans *self)
++     tbus in_sck = (tbus) 0;
++     struct trans *in_trans = (struct trans *) NULL;
++     int read_bytes = 0;
++-    int to_read = 0;
++-    int read_so_far = 0;
+++    unsigned int to_read = 0;
+++    unsigned int read_so_far = 0;
++     int rv = 0;
++     enum xrdp_source cur_source;
 + 
-+     if (!s_check_rem(s, 2))
-+@@ -1368,33 +1368,32 @@ xrdp_mm_trans_process_drdynvc_channel_open(struct xrdp_mm *self,
-+         return 1;
-+     }
-+     in_uint32_le(s, name_bytes);
-+-    if ((name_bytes < 1) || (name_bytes > 1024))
-+-    {
-+-        return 1;
-+-    }
-+-    name = g_new(char, name_bytes + 1);
-+-    if (name == NULL)
-++    if ((name_bytes < 1) || (name_bytes > (int)(sizeof(name) - 1)))
-+     {
-+         return 1;
-+     }
-+     if (!s_check_rem(s, name_bytes))
-+     {
-+-        g_free(name);
-+         return 1;
-+     }
-+     in_uint8a(s, name, name_bytes);
-+     name[name_bytes] = 0;
-+     if (!s_check_rem(s, 8))
-+     {
-+-        g_free(name);
-+         return 1;
-+     }
-+     in_uint32_le(s, flags);
-+     in_uint32_le(s, chansrv_chan_id);
-++    if (chansrv_chan_id < 0 || chansrv_chan_id > 255)
-++    {
-++        LOG(LOG_LEVEL_ERROR, "Attempting to open invalid chansrv channel %d",
-++            chansrv_chan_id);
-++        return 1;
-++    }
-++
-+     if (flags == 0)
-+     {
-+         /* open static channel, not supported */
-+-        g_free(name);
-+         return 1;
-+     }
-+     else
-+@@ -1410,13 +1409,11 @@ xrdp_mm_trans_process_drdynvc_channel_open(struct xrdp_mm *self,
-+                                      &chan_id);
-+         if (error != 0)
-+         {
-+-            g_free(name);
-+             return 1;
++@@ -369,13 +369,24 @@ trans_check_wait_objs(struct trans *self)
 +         }
-+         self->xr2cr_cid_map[chan_id] = chansrv_chan_id;
-+         self->cs2xr_cid_map[chansrv_chan_id] = chan_id;
-+     }
-+-    g_free(name);
-+     return 0;
-+ }
++         else if (self->trans_can_recv(self, self->sck, 0))
++         {
+++            /* CVE-2022-23479 - check a malicious caller hasn't managed
+++             * to set the header_size to an unreasonable value */
+++            if (self->header_size > (unsigned int)self->in_s->size)
+++            {
+++                LOG(LOG_LEVEL_ERROR,
+++                    "trans_check_wait_objs: Reading %u bytes beyond buffer",
+++                    self->header_size - (unsigned int)self->in_s->size);
+++                self->status = TRANS_STATUS_DOWN;
+++                return 1;
+++            }
+++
++             cur_source = XRDP_SOURCE_NONE;
++             if (self->si != 0)
++             {
++                 cur_source = self->si->cur_source;
++                 self->si->cur_source = self->my_source;
++             }
++-            read_so_far = (int) (self->in_s->end - self->in_s->data);
+++            read_so_far = self->in_s->end - self->in_s->data;
++             to_read = self->header_size - read_so_far;
 + 
++             if (to_read > 0)
++@@ -415,7 +426,7 @@ trans_check_wait_objs(struct trans *self)
++                 }
++             }
++ 
++-            read_so_far = (int) (self->in_s->end - self->in_s->data);
+++            read_so_far = self->in_s->end - self->in_s->data;
++ 
++             if (read_so_far == self->header_size)
++             {
++diff --git a/common/trans.h b/common/trans.h
++index 1cd89fdac2..313c543b60 100644
++--- a/common/trans.h
+++++ b/common/trans.h
++@@ -98,7 +98,7 @@ struct trans
++     ttrans_data_in trans_data_in;
++     ttrans_conn_in trans_conn_in;
++     void *callback_data;
++-    int header_size;
+++    unsigned int header_size;
++     struct stream *in_s;
++     struct stream *out_s;
++     char *listen_filename;
 diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-index a953342910..bffed4c265 100644
+index bffed4c265..ea895f169e 100644
 --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
 +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb
-@@ -18,6 +18,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
-            file://0001-mark-count-with-unused-attribute.patch \
+@@ -19,6 +19,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
             file://CVE-2022-23468.patch \
             file://CVE-2022-23477.patch \
-+           file://CVE-2022-23478.patch \
+            file://CVE-2022-23478.patch \
++           file://CVE-2022-23479.patch \
             "
  
  SRC_URI[sha256sum] = "db693401da95b71b4d4e4c99aeb569a546dbdbde343f6d3302b0c47653277abb"
