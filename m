@@ -1,252 +1,121 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79036E63C82
-	for <webhook@archiver.kernel.org>; Sun, 25 Jan 2026 01:57:39 +0000 (UTC)
-Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.32023.1769306257654704933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18EA5E63C92
+	for <webhook@archiver.kernel.org>; Sun, 25 Jan 2026 07:40:11 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.35214.1769326809586947149
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Jan 2026 17:57:37 -0800
+ Sat, 24 Jan 2026 23:40:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XldQqEuR;
- spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-7942b9663f8so30345617b3.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jan 2026 17:57:37 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769306257; cv=none;
-        d=google.com; s=arc-20240605;
-        b=f9WstQLbaMlrsqS8/HQdvTCbXQGUEWzukiA5fl3kgY4D6A2pPQ/YHoYqIA7PwXtMru
-         hHpz87NvhOQyI1Em9mjdQHDhBRVVyIdlBRx86jk/F8chk82Jnn1Ck1VsHPOjymBxa+u4
-         QWUoOx1Vr5CgzRpWWJBjsQKif5ZsLVSOr/o/PA1AmK9aS+oimQ1o3wm+D+5IPVNY+JD1
-         EMGshenU0frH0Fs5WbV3f7oWuEsM/6r3gHOO+eA/ysvLxlETXQxjxYwPrJ98j5DBqp8t
-         Mnv4U/ZbmsDNW1xeDkH9oRM0mMMxOCPGkasDHIauSnK7GqZ6lPZJjqM61osMhKoCZ+Ca
-         GwUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=c1mouIgEf37kYgiP8Uizger9rTy1yLDDxFYuDQ49VBQ=;
-        fh=RnZMXDUlwXY8UgMJsCy3860tY0uphmLPDqFPKV9t5MY=;
-        b=LlaeDgq893TPlwLJLWo8tUdf8DID5Y+9272yGzVP/YkOrOAh444actcO01IX5x6k0V
-         xyxNr1mfSmCjGg9ofgEhIcD+UFRrhi5y4iKCSmTweK9qU/NRJpEE8IfJCTnUTvjakSLT
-         m+koLNT+gIj9noghYHkuAB2FEtv0ce1PHGeK/IsasNWeGa3H5ig61Sq47+Ll6MiBFJUJ
-         4WphWhvY30XTco4B+IB+C3vzuYuc16+hm7l22SyMvShkG0/Do7ylcPwiF2UqnOpx0G+3
-         weURsL4pBILpbGr/8Ns3WydUBoC836CFJKvm62iA5almMVI+zcmVmP3LL9R7WFJTQnp8
-         ds/w==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hbjkNtOq;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-42fb0fc5aa9so2001059f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jan 2026 23:40:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769306257; x=1769911057; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=c1mouIgEf37kYgiP8Uizger9rTy1yLDDxFYuDQ49VBQ=;
-        b=XldQqEuRqrEg91KkZJitZxcISxTlJ8t/P7as372kyf8YS1Z/LwAtfqatKo7kVQHIIW
-         z8JrSRsIo8K0hF7nnWPEC4wkHRTEZ+cNcoJr1ww/uW1b1tvpM2AFt4RVE/O4XYV498WM
-         hidHigBF03dy9qCSCAte40D4dGbg2k11Qw2XGoXzgbaol8WD3yeeBkEzLiEHUnEpH4Qn
-         BcEG03NlTLXYCZinH0HNBJbQdTqWutsuyFnRWMsNpMMoHicpyPrhqSSfaI/dp4Bu3McM
-         Cc3UBQSRfNCmxiBU0LeJOCusE4un3THN1FTSYKhmUZ543oodHN60G+M3vSD0Oyd1isfx
-         gJcw==
+        d=gmail.com; s=20230601; t=1769326808; x=1769931608; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wJJBsiRlSEmF6AdkNP7RoIF695TQQaqYvlNLSxNTXXw=;
+        b=hbjkNtOqEzI/Uv0AqJNcQrNJ8nyKjWQZl4LMIWgbxU4kygfRpN2NngNo2hCvBUmXF2
+         gQFi0vsOcuMjad3N4MgZEECO1LYqTHsjrhL3TvDWOwUk3bG/ToHLNtWygTwppragiHWy
+         zxF7IV0yVH8OBAXMOVoHTg9pbUuKdve8QDhWfulfrxMS7UNPizVqvZJmE5OeiU8MNB3B
+         8Hq9t0grLMCJC5vQ83RQMIRM+2/qAL+AxNmryZRIbt2O3EOkts+TO7Z1VEFwgdQiibKJ
+         nJAkbfnMgb2IM16XLoYoRhOCcVCQsBa4Lh1PGVyJL2T8G6R2i5zWH7itPl8vCH0au6aa
+         tTRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769306257; x=1769911057;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=c1mouIgEf37kYgiP8Uizger9rTy1yLDDxFYuDQ49VBQ=;
-        b=ENxMNzjCWYxpxIww+z5/btEaiitKqdu69vzi26YohJX6uWxDmBXYf8+C4eecnmyJTP
-         eY5q6rmUEqcRCFl5j5P9dhjNud6ZjrNuJR/JO0ffMV4sIK2ZTe1ujw6/Xgke+x+L++jy
-         hC3GzgvxPo5PBlU2bIIuwvrKYAjUCoy/BwXZHfuLxwKalOes+lysrstO/qoKFMIINQb5
-         D3uAcUH5soz41j2ILWA6JZXNWYzVbblqrvf2qIVtHVTKS+xZ79m22ZHxJaubOyVnZrx4
-         pz1Zf7JyN9E7oF5E+46PKJv1CmCO//3hSW0k/y9mYQBLSiJ2aHJiaBfFAhWZKvxkISk5
-         npZw==
-X-Gm-Message-State: AOJu0Yxpqv8CWW8el09YLD7zFAAoExo07vGFcUCAJU0KBamUBCBEsSmc
-	kSqxCCrcqGbQh1vPHgwIm+J/0ks3ZU8pwfLxwF3REfKEdpOHvF9t8W/U/mNuEdNLibfWpRp4IUC
-	+3etHBEw2eCkPQpPuaXlgelk8jSzsgryvh18Y
-X-Gm-Gg: AZuq6aJ8DA5TGJoLoq1m6YLBMrsdpmJM+Ad7L1dw6yRarimQAVtBeEuBsnhHSjsF4qp
-	ljEE1oTCzBXgvTK3j9TzY2vXQw/jyxYFM+3QPi0ijjk8ptipepT5NDFvuGW/Tl/MS2Xw9VgkD93
-	4VVdmjgAoqLJ+AxVVEpw6I3qalb+m29YpNKVJAeeL70JudV/Sz09j2Rt0UGRTKpSM8cqA6zKSau
-	+mIS0Hsl5cz/upi23V7r44yhTMOcKznwCRKNt985wJ9OFMLvlU7YlzGFICbUNSwPg2TCUX9vvBS
-	0XfpK7erELLLeiyWWuxFKTVW28bylzIV7adhXX1zy8qC6c00YFoL7hZKIrPLAEmQExL4u/205MQ
-	ZzGA1nNTQueBnttmppDpW+T/FxdJTSu/D7Whvsi/aWTs=
-X-Received: by 2002:a05:690c:c513:b0:786:9817:edac with SMTP id
- 00721157ae682-7945a9689b1mr3210717b3.43.1769306256687; Sat, 24 Jan 2026
- 17:57:36 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769326808; x=1769931608;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=wJJBsiRlSEmF6AdkNP7RoIF695TQQaqYvlNLSxNTXXw=;
+        b=UwareIY7buUgRoMyZDzWKbQAqgAsphGvjQkmhU/muT67iPJqPTpsGf6TaG911El05o
+         uHF4EnHyH4f/6rLdQlyzb6TEWe3fy7wZJMKQVuHf1f9UbCCzKUP8AMx/sdEDff34aCPw
+         zOc9w9tRdYUE637uCIJTF4avApn+XF/Gp3tROjFhREWh6+HW/n5WDapjAbO8jsYjAhmq
+         2aiqLofCLlopEPhs4FQ6MIP0xeHGIMg4goejkXkhrWVnJL/sECv4nje2Fdb4xQwcmN0Q
+         nUgShfJg4mTulKvKdsKghROry/K19cXhrVb1gz/swRJb7KYQqWwK2acn+c7CQMy9H16Q
+         5Nhg==
+X-Gm-Message-State: AOJu0Yzx4YQT2iZCQOl/37vNesLX6yZhENwOD1RipuaZV1ghyXeTtwsq
+	mJyckLcUDfkiWs6US6jJteKzftmd80AY/lxABeBNmnr5bLjlA+MLEUzl6MCAAQ==
+X-Gm-Gg: AZuq6aKINj02IxX7+AszSWDoEcZSrrrKSNbYtskGGwlclLJpBxkaHNsVNBEmL+Tudqn
+	3zNr51Y0iJlLfiwDYW+NXcFkT5bgx5ANFbrE2K4YmqXZ+M7x45sxytNxB+qmavDc90nyAlDxIjg
+	iTilQLxPv495yvJDxmZrlecinKAEuboVPb+hXSm0l2wNMBkVqvFuMqwwqjxfBxAEVyk/50LLAMZ
+	+0xdWVK3DPZ10JSY84X/JD1A+hf157Y4r/tObBXF7MSEA5RXiFqWBYye0MOFZdc6gHl4JLQ3w0+
+	Kr27Xs59jRMyb0L32d+dfwMKVQ+tOssom32Z65rx3t+zeSumHP0FteMUyqQx81cTHfEVhJEu+JA
+	442USTd23GA0caMuoUBgbDMx32UZ9aW6zPmmnRr0cT3uNtJ20F7dY1ctq9Ai0mjvZ/bDeg4Ks5R
+	sJ5WAxi93O
+X-Received: by 2002:a05:6000:2c03:b0:435:af8a:2a6d with SMTP id ffacd0b85a97d-435ca0d11bcmr1218438f8f.11.1769326807902;
+        Sat, 24 Jan 2026 23:40:07 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1e7156dsm20265542f8f.20.2026.01.24.23.40.07
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 24 Jan 2026 23:40:07 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][kirkstone][PATCH 3/5] gnome-bluetooth: upgrade 42.3 -> 42.8
+Date: Sun, 25 Jan 2026 08:40:04 +0100
+Message-ID: <20260125074006.244692-3-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260125074006.244692-1-skandigraun@gmail.com>
+References: <20260125074006.244692-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-References: <20260123154842.1635662-2-frederikbraendstrup@gmail.com> <20260123154842.1635662-4-frederikbraendstrup@gmail.com>
-In-Reply-To: <20260123154842.1635662-4-frederikbraendstrup@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 24 Jan 2026 17:57:10 -0800
-X-Gm-Features: AZwV_QgXegWVp0fYV2dqcZQsnoQMEllTqLBsMFuq72rwp3p6kfG2qX5BAWArAaU
-Message-ID: <CAMKF1sreHZhOxEsOwpy3+7Ljajy_jg=tGzZyZtGjxNgjfp-xtQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH v1 2/2] liboauth2: Add recipe at 2.2.0
-To: frederikbraendstrup@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000edc5d306492cb63c"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 25 Jan 2026 01:57:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123831
+ <openembedded-devel@lists.openembedded.org>; Sun, 25 Jan 2026 07:40:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123834
 
---000000000000edc5d306492cb63c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Changelog:
+ver 42.8:
+This update fixes problems with some devices not disappearing from the list
+of quick settings in GNOME Shell.
 
-On Fri, Jan 23, 2026 at 7:49=E2=80=AFAM Frederik Br=C3=A6ndstrup via
-lists.openembedded.org <frederikbraendstrup=3Dgmail.com@lists.openembedded.=
-org>
-wrote:
+ver 42.7:
+This version fixes bugs that stopped the Obex Push server from automatically
+accepting files from paired devices and caused the device's Connection switch to
+appear out of sync with the connection state. This version also contains build
+fixes and updated translations.
 
-> ---
->  .../liboauth2/liboauth2_2.2.0.bb              | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
->
-> diff --git a/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> new file mode 100644
-> index 0000000000..3067f7ea63
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY =3D "OAuth 2.x and OpenID Connect C library"
-> +HOMEPAGE =3D "https://github.com/OpenIDC/liboauth2"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
-a93"
-> +
-> +SRC_URI =3D "git://
-> github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=3Dv${PV=
-}
-> <http://github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=
-=3Dv$%7BPV%7D>
-> "
-> +
-> +PV =3D "2.2.0"
-> +SRCREV =3D "12571b6d6568c2db7d5f080f60ecb55795c0db19"
-> +
-> +DEPENDS =3D "libpcre2 jansson libcheck curl openssl cjose apache2"
->
+ver 42.6:
+This version fixes problems with icons for mice and tablets, updates status labels
+to be dimmed by default, and contains updated translations.
 
-apache2 is part of meta-webserver layer and meta-oe does not depend on
-meta-webserver but its other way around
-maybe turn apache2 support into a packageconfig and keep it disabled by
-default, if its a hard dependency then
-move the recipe to meta-webserver layer.
+ver 42.5:
+This version fixes the pairing dialogue misbehaving for some Bluetooth Classic
+keyboards, with the passkey disappearing after the first digit is typed.
 
+ver 42.4:
+This version switches the power state API added in version 42.3 to be backed
+by the experimental PowerState property in bluetoothd. The API will not show
+transitional states if the version of bluetoothd is too old.
 
-> +
-> +inherit pkgconfig autotools-brokensep
-> +
-> +PACKAGECONFIG ??=3D ""
-> +PACKAGECONFIG[memcache] =3D
-> "--with-memcache,--without-memcache,libmemcached"
-> +PACKAGECONFIG[redis] =3D "--with-redis,--without-redis,hiredis"
-> +PACKAGECONFIG[jq] =3D "--with-jq,--without-jq,jq"
-> +PACKAGECONFIG[apache] =3D "--with-apache,--without-apache,apache2"
-> +
-> --
-> 2.52.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123785):
-> https://lists.openembedded.org/g/openembedded-devel/message/123785
-> Mute This Topic: https://lists.openembedded.org/mt/117419834/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+The battery API now exports the battery information for all Bluetooth devices
+listed in UPower, not just the ones re-exported from bluetoothd.
 
---000000000000edc5d306492cb63c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../{gnome-bluetooth_42.3.bb => gnome-bluetooth_42.8.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_42.3.bb => gnome-bluetooth_42.8.bb} (91%)
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Jan 23,=
- 2026 at 7:49=E2=80=AFAM Frederik Br=C3=A6ndstrup via <a href=3D"http://lis=
-ts.openembedded.org">lists.openembedded.org</a> &lt;frederikbraendstrup=3D<=
-a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembe=
-dded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">---<br>
-=C2=A0.../liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D"noreferrer=
-" target=3D"_blank">liboauth2_2.2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 20 +++++++++++++++++++<br>
-=C2=A01 file changed, 20 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/liboauth2/<a href=3D"http:=
-//liboauth2_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.=
-bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_=
-2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a> b/met=
-a-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
-new file mode 100644<br>
-index 0000000000..3067f7ea63<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
-@@ -0,0 +1,20 @@<br>
-+SUMMARY =3D &quot;OAuth 2.x and OpenID Connect C library&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/OpenIDC/liboauth2" rel=3D=
-"noreferrer" target=3D"_blank">https://github.com/OpenIDC/liboauth2</a>&quo=
-t;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2ee41112a44fe7014dce33e264=
-68ba93&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/OpenIDC/liboauth2;pro=
-tocol=3Dhttps;branch=3Dmaster;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=
-=3D"_blank">github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;t=
-ag=3Dv${PV}</a>&quot;<br>
-+<br>
-+PV =3D &quot;2.2.0&quot;<br>
-+SRCREV =3D &quot;12571b6d6568c2db7d5f080f60ecb55795c0db19&quot;<br>
-+<br>
-+DEPENDS =3D &quot;libpcre2 jansson libcheck curl openssl cjose apache2&quo=
-t;<br></blockquote><div><br></div><div>apache2 is part of meta-webserver la=
-yer and meta-oe does not depend on meta-webserver but its other way around<=
-/div><div>maybe turn apache2 support into a packageconfig and keep it disab=
-led by default, if its a hard dependency then</div><div>move the recipe to =
-meta-webserver layer.</div><div>=C2=A0</div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">
-+<br>
-+inherit pkgconfig autotools-brokensep<br>
-+<br>
-+PACKAGECONFIG ??=3D &quot;&quot;<br>
-+PACKAGECONFIG[memcache] =3D &quot;--with-memcache,--without-memcache,libme=
-mcached&quot;<br>
-+PACKAGECONFIG[redis] =3D &quot;--with-redis,--without-redis,hiredis&quot;<=
-br>
-+PACKAGECONFIG[jq] =3D &quot;--with-jq,--without-jq,jq&quot;<br>
-+PACKAGECONFIG[apache] =3D &quot;--with-apache,--without-apache,apache2&quo=
-t;<br>
-+<br>
--- <br>
-2.52.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123785): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123785" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123785</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117419834/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117419834/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000edc5d306492cb63c--
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.3.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.8.bb
+similarity index 91%
+rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.3.bb
+rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.8.bb
+index 7bb8500206..ed9be6e3d2 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.3.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_42.8.bb
+@@ -26,7 +26,7 @@ inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection
+ 
+ REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ 
+-SRC_URI[archive.sha256sum] = "c37a2a07f77d4816b261e6c2086a056ed9767c3881dfabc826f4f82f6e1aa302"
++SRC_URI[archive.sha256sum] = "76c241e8ca2c9b1035364535ca26084f89fc5c0e1829510f8909583115fcc2db"
+ 
+ BT_PULSE_PACKS = " \
+     pulseaudio-lib-bluez5-util \
 
