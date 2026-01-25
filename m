@@ -2,627 +2,145 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2EE5D7237B
-	for <webhook@archiver.kernel.org>; Sun, 25 Jan 2026 00:36:48 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30906.1769301401096189210
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51257D7237B
+	for <webhook@archiver.kernel.org>; Sun, 25 Jan 2026 01:24:19 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31597.1769304255952034999
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Jan 2026 16:36:41 -0800
+ Sat, 24 Jan 2026 17:24:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cGha90wk;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-29f30233d8aso22503965ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jan 2026 16:36:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DRkVC7ch;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-34e730f5fefso2371010a91.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Jan 2026 17:24:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769301400; x=1769906200; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Y3aoC6VhWoz8p3/5gfowrkwGx4XpdbDK7WH0YhgJaKk=;
-        b=cGha90wktRfJ4bPY9PFXyXsqIuJ5Hr8vpHsOXW8Rf7hI1QNMWFINZWX+WLV4/wPKWH
-         pwoaHk40xX026CD9YLBqbteMT3xDu4XrhrGoftG/A5coxNK4wDv+AzFRzeLjNqP+vkca
-         PdbXpLpTym37BKxVPf4d580M8ei7rkXD+kGu3jWfdG79fGf4MntNZDdZV6HpMzVYGYwv
-         E/onBN2hzBcAq8PaEHVv7M60qyqbhK32VPQI5ZLrzDxYWgO8+TU+A95MuNeqYw+ljtsK
-         /gxjipYk5pdQe0vWFw7KliQDwXzWfFfVaBVx/ZWTmowc9PTdMOVzImtf+XUfm5LGlJcn
-         mwdw==
+        d=gmail.com; s=20230601; t=1769304255; x=1769909055; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HnibnAXyJHYJUwIv3hakYJIFeIb/FvtSaDUnJlr2PUU=;
+        b=DRkVC7chFNLTCU7AztmD7JaMUUuDffpm0fULm1KnWScsax22O/A00W2HD9tNWAuC55
+         LDgKEtY4IfAVgk9362qoPtPLldwvrUeTJ8xOuqpPEkNrqBfS1llkVRjk461jIOu1YGh0
+         UOj2TcMBVoEDIxC8DHa34lH0RTTxHKLtunG1tsDx9FY9QKwuepdauYJSB/I9S18pbhie
+         eP/YLOMXu3UKcWXjrJdsW2EtRsd3m97o/WQNDhoSU1HXnLpv5lBNq9dDXYjXha9E6DMj
+         ZntJmdjumgJD4mfvNxpN10YBSf5VH/glMED70p6OjO/8B14xUqXeOcL7t3HNm6XlxcT6
+         QDLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769301400; x=1769906200;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Y3aoC6VhWoz8p3/5gfowrkwGx4XpdbDK7WH0YhgJaKk=;
-        b=e1w+msQqZau2gmHx4hIbMy46T5QeyMVQnQ8BuAUcfcf0oV0yPt//0IRwjUa66z+Zjt
-         k3bpysmHMv20vC15ug3JtWHMgQMUPCWV/KZt2KlcxET9x7W6xy5Xk8mFnUSVS2HtBGob
-         uUdu5/Pg4Xh1VXrQFjcB2NkaFdV+WRXzaj4nGuA9G++oAfpfGhph9rFdKmrxuh5tGCyI
-         E0rFOQnPl5tjb/5w+jnd1zQvdKjYEACRftf+VuIrybC1Ql4kazjMHduRh4jO2/0iHhAZ
-         Myx4ydFFuzQIGCk3jfS4c92okVMLlBDsWtts+o+9F+xf1mZzmoHJSQdgkidt733dLl6N
-         tv8Q==
-X-Gm-Message-State: AOJu0YwP0O5v+xFdEA+KvK0AlDlJbGkyWJtVH8lSSIWbXN6GJSildZeS
-	qc2E3ZGTN42X+UDy390fYoK299jwyUpYLezWv2IrZVnpMtuhjNAKqp6PI9jtZRBf
-X-Gm-Gg: AZuq6aKpAyXMpJSyqV2Cm2uB1Z+htaNOFI7n+pmj5BuT7rxKNHKKLz76UFsIP5gk8s8
-	ovbGawtQZmOznPEnPFmz0e0GPTbzIYy8kvMJkq7f+SxV3v5fWk4mGKgsAnb//V+ztNf3bfzKPqg
-	r47uPN/UBxq6wLVjXE6hQVwpYgtgNKTxpwv8oMbbraJQDa6k5K3d4p0p/vyhgYcaz+oF+ukSyqQ
-	JbuUknidxS2pSOLlO/oxem5hQqHWjBMQP6bCU9tAz2Q6Othqdrhw75U2PmrUrwGTKwTn1YENxcp
-	UB0u5HsakZVrwHDcDf3sc/ThpEy/RWcIyxcGIAhgTgqvlC83KmuMm+QqsY6ciUztaK/R9a/qDob
-	hJGlQ85J/6ENjQd1osxn9GcZGe03A5SNCz/2j2JU+D0McrQxhWcO6mpZi1M9hnvsS14WqoXsOBD
-	V+6AOvconw56EM/RgRguVAmgk1
-X-Received: by 2002:a17:903:17c5:b0:2a7:7872:8f52 with SMTP id d9443c01a7336-2a8452468c9mr3483475ad.26.1769301400115;
-        Sat, 24 Jan 2026 16:36:40 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769304255; x=1769909055;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HnibnAXyJHYJUwIv3hakYJIFeIb/FvtSaDUnJlr2PUU=;
+        b=wuqAxwdT6m+bLWUoxw4Ym4D6Hk1QO2EcfVh4ODVOkiUKMAVRGsDJudCqIE0SCcfMtk
+         R4hZTAde+KylkPDDfX9dJNneLjV1i/7ZEsZhvn/5d5YrBYVtQwW/l2WvL9Hg2ReSHXbi
+         kgr+122q3JzEraPQeR7ELFNPPKXfJLve/9xRc26Nk8YzzTYF/ruNTkPoDB9iYJlvHpkB
+         +TeHrntgqAobm4ths4xYq1VhJXWC7uufkBV8eXS3b1uiuCrmoUU2m0ID7hCGcstY+FCW
+         24pNwbxRY3RuqIaqG2MhpVBTPRjUhZj/79hIlKYSmX9Z2VhtwnGhYfFjEndzdzsEuuj/
+         c8ZQ==
+X-Gm-Message-State: AOJu0Yw4tF57FD4Y3wC05GBW9QgPh8Cj5ZxGa70QwFdCOm7hS2P4DRzJ
+	IDFa4X0R1DdILc57MoyUs8oiX2louHbSwB+O/t/PWH5R7JbdtlhHjkO+hUlfUR8I
+X-Gm-Gg: AZuq6aI/ZzXCymqlqhG0OgDjpxG5t5U9MB+A1VrWGEftrBiVdLGUz5OI7MUeebNYAAk
+	mJWaql0YZrrLjLYmsqur8XWpNqt+t7mWsff2lB6J3c5VqTyKpLSD39POWFGNDCn8NbeXCyfhWq3
+	FIE8nqBguSGhhFc+p4n8YSRm9suN8rJmfezfb7zl8R9fmDytvJXjlJE6qEPI7jP+sNGvrFpKcmg
+	XMEpFJ8vXiQXtasxXtGrug5v2Ovw1Knt1cNVazbm5ZaPfKyrQbIRpMU52IRj9E6rl2iAmtJPjVZ
+	q39azDT7VJrmN5ks8PU9oivClU3dZIV4K/r7bHppxocvRmG01kLsbDeLWa3FPXr6BMMA/xAXZLf
+	5cl/5LyLMBaEAfVzXp4b6zxpCZsQnRgFHdsauLQjqrOzjxaqdwyiOzEDZU3sJlPXyFl+LCKSDzj
+	gTUyFBxlVZXgnfS49OnFZgpf01
+X-Received: by 2002:a17:90b:38c7:b0:34c:2db6:57d5 with SMTP id 98e67ed59e1d1-353c3fe38d1mr362252a91.0.1769304255116;
+        Sat, 24 Jan 2026 17:24:15 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.216.246])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a802dcdb8csm54949635ad.31.2026.01.24.16.36.37
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3536f3192d7sm2111265a91.7.2026.01.24.17.24.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 24 Jan 2026 16:36:39 -0800 (PST)
+        Sat, 24 Jan 2026 17:24:14 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][scarthgap][PATCH v2 2/2] python3-cbor2: patch CVE-2025-68131
-Date: Sun, 25 Jan 2026 13:36:23 +1300
-Message-ID: <20260125003623.394883-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH v2] python3-twisted: patch CVE-2024-41810
+Date: Sun, 25 Jan 2026 14:24:02 +1300
+Message-ID: <20260125012402.489953-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260125003623.394883-1-ankur.tyagi85@gmail.com>
-References: <20260125003623.394883-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 25 Jan 2026 00:36:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123828
+ <openembedded-devel@lists.openembedded.org>; Sun, 25 Jan 2026 01:24:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123829
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport the patch[1] which fixes this vulnerability as mentioned in the
-comment[2].
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68131
+Though nvd[1] mentions commit[2] as part of the fix for CVE-2024-41671, but
+it is actually a fix[3] for CVE-2024-41810.
 
-[1] https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0
-[2] https://github.com/agronholm/cbor2/pull/268#issuecomment-3719179000
+Rename patch files accordingly.
 
-Dropped changes to the changelog from the original commit.
+[1] https://nvd.nist.gov/vuln/detail/CVE-2024-41671
+[2] https://github.com/twisted/twisted/commit/046a164f89a0f08d3239ecebd750360f8914df33
+[3] https://nvd.nist.gov/vuln/detail/CVE-2024-41810
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
-changes in v2:
-- Include the changes done to the original commit.
----
- .../python/python3-cbor2/CVE-2025-68131.patch | 517 ++++++++++++++++++
- .../python/python3-cbor2_5.6.4.bb             |   1 +
- 2 files changed, 518 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
+ .../{CVE-2024-41671-0002.patch => CVE-2024-41671.patch}     | 4 ++++
+ .../{CVE-2024-41671-0001.patch => CVE-2024-41810.patch}     | 6 +++++-
+ .../recipes-devtools/python/python3-twisted_24.3.0.bb       | 4 ++--
+ 3 files changed, 11 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/python3-twisted/{CVE-2024-41671-0002.patch => CVE-2024-41671.patch} (98%)
+ rename meta-python/recipes-devtools/python/python3-twisted/{CVE-2024-41671-0001.patch => CVE-2024-41810.patch} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
-new file mode 100644
-index 0000000000..4a35694d34
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
-@@ -0,0 +1,517 @@
-+From 7be0ee8272a541e291f13ed67d69b951ae42a9da Mon Sep 17 00:00:00 2001
-+From: Andreas Eriksen <andreer@vespa.ai>
-+Date: Thu, 18 Dec 2025 16:48:26 +0100
-+Subject: [PATCH] Merge commit from fork
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0002.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671.patch
+similarity index 98%
+rename from meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0002.patch
+rename to meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671.patch
+index 147c21d73d..5c0d7b6a77 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0002.patch
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671.patch
+@@ -10,6 +10,10 @@ CVE: CVE-2024-41671
+ Upstream-Status: Backport [https://github.com/twisted/twisted/commit/4a930de12fb67e88fefcb8822104152f42b27abc]
+ 
+ Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 +
-+* track depth of recursive encode/decode, clear shared refs on start
-+
-+* test that shared refs are cleared on start
-+
-+* add fix-shared-state-reset to version history
-+
-+* clear shared state _after_ encode/decode
-+
-+* use PY_SSIZE_T_MAX to clear shareables list
-+
-+* use context manager for python decoder depth tracking
-+
-+* use context manager for python encoder depth tracking
-+
-+CVE: CVE-2025-68131
-+Upstream-Status: Backport [https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0]
-+
-+Dropped changes to the changelog from the original commit.
++Dropped newsfragements change from  the original commit.
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ cbor2/_decoder.py     | 38 ++++++++++++++++++-----
-+ cbor2/_encoder.py     | 44 ++++++++++++++++++++++-----
-+ source/decoder.c      | 28 ++++++++++++++++-
-+ source/decoder.h      |  1 +
-+ source/encoder.c      | 23 ++++++++++++--
-+ source/encoder.h      |  1 +
-+ tests/test_decoder.py | 61 +++++++++++++++++++++++++++++++++++++
-+ tests/test_encoder.py | 70 +++++++++++++++++++++++++++++++++++++++++++
-+ 8 files changed, 249 insertions(+), 17 deletions(-)
+ ---
+  src/twisted/web/http.py           |  21 +++--
+  src/twisted/web/test/test_http.py | 122 ++++++++++++++++++++++++++----
+diff --git a/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0001.patch b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+similarity index 95%
+rename from meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0001.patch
+rename to meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+index 1f6bf6bbfc..e41d9667f0 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41671-0001.patch
++++ b/meta-python/recipes-devtools/python/python3-twisted/CVE-2024-41810.patch
+@@ -5,11 +5,15 @@ Subject: [PATCH] Merge commit from fork
+ 
+ Added HTML output encoding the "URL" parameter of the "redirectTo" function
+ 
+-CVE: CVE-2024-41671
++CVE: CVE-2024-41810
+ 
+ Upstream-Status: Backport [https://github.com/twisted/twisted/commit/046a164f89a0f08d3239ecebd750360f8914df33]
+ 
+ Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 +
-+diff --git a/cbor2/_decoder.py b/cbor2/_decoder.py
-+index c8f1a8f..4aeadcf 100644
-+--- a/cbor2/_decoder.py
-++++ b/cbor2/_decoder.py
-+@@ -5,6 +5,7 @@ import struct
-+ import sys
-+ from codecs import getincrementaldecoder
-+ from collections.abc import Callable, Mapping, Sequence
-++from contextlib import contextmanager
-+ from datetime import date, datetime, timedelta, timezone
-+ from io import BytesIO
-+ from typing import IO, TYPE_CHECKING, Any, TypeVar, cast, overload
-+@@ -59,6 +60,7 @@ class CBORDecoder:
-+         "_immutable",
-+         "_str_errors",
-+         "_stringref_namespace",
-++        "_decode_depth",
-+     )
-+ 
-+     _fp: IO[bytes]
-+@@ -100,6 +102,7 @@ class CBORDecoder:
-+         self._shareables: list[object] = []
-+         self._stringref_namespace: list[str | bytes] | None = None
-+         self._immutable = False
-++        self._decode_depth = 0
-+ 
-+     @property
-+     def immutable(self) -> bool:
-+@@ -225,13 +228,33 @@ class CBORDecoder:
-+             if unshared:
-+                 self._share_index = old_index
-+ 
-++    @contextmanager
-++    def _decoding_context(self):
-++        """
-++        Context manager for tracking decode depth and clearing shared state.
-++
-++        Shared state is cleared at the end of each top-level decode to prevent
-++        shared references from leaking between independent decode operations.
-++        Nested calls (from hooks) must preserve the state.
-++        """
-++        self._decode_depth += 1
-++        try:
-++            yield
-++        finally:
-++            self._decode_depth -= 1
-++            assert self._decode_depth >= 0
-++            if self._decode_depth == 0:
-++                self._shareables.clear()
-++                self._share_index = None
-++
-+     def decode(self) -> object:
-+         """
-+         Decode the next value from the stream.
-+ 
-+         :raises CBORDecodeError: if there is any problem decoding the stream
-+         """
-+-        return self._decode()
-++        with self._decoding_context():
-++            return self._decode()
-+ 
-+     def decode_from_bytes(self, buf: bytes) -> object:
-+         """
-+@@ -242,12 +265,13 @@ class CBORDecoder:
-+         object needs to be decoded separately from the rest but while still
-+         taking advantage of the shared value registry.
-+         """
-+-        with BytesIO(buf) as fp:
-+-            old_fp = self.fp
-+-            self.fp = fp
-+-            retval = self._decode()
-+-            self.fp = old_fp
-+-            return retval
-++        with self._decoding_context():
-++            with BytesIO(buf) as fp:
-++                old_fp = self.fp
-++                self.fp = fp
-++                retval = self._decode()
-++                self.fp = old_fp
-++                return retval
-+ 
-+     @overload
-+     def _decode_length(self, subtype: int) -> int: ...
-+diff --git a/cbor2/_encoder.py b/cbor2/_encoder.py
-+index 699c656..a653026 100644
-+--- a/cbor2/_encoder.py
-++++ b/cbor2/_encoder.py
-+@@ -123,6 +123,7 @@ class CBOREncoder:
-+         "string_referencing",
-+         "string_namespacing",
-+         "_string_references",
-++        "_encode_depth",
-+     )
-+ 
-+     _fp: IO[bytes]
-+@@ -183,6 +184,7 @@ class CBOREncoder:
-+             int, tuple[object, int | None]
-+         ] = {}  # indexes used for value sharing
-+         self._string_references: dict[str | bytes, int] = {}  # indexes used for string references
-++        self._encode_depth = 0
-+         self._encoders = default_encoders.copy()
-+         if canonical:
-+             self._encoders.update(canonical_encoders)
-+@@ -298,6 +300,24 @@ class CBOREncoder:
-+         """
-+         self._fp_write(data)
-+ 
-++    @contextmanager
-++    def _encoding_context(self):
-++        """
-++        Context manager for tracking encode depth and clearing shared state.
-++
-++        Shared state is cleared at the end of each top-level encode to prevent
-++        shared references from leaking between independent encode operations.
-++        Nested calls (from hooks) must preserve the state.
-++        """
-++        self._encode_depth += 1
-++        try:
-++            yield
-++        finally:
-++            self._encode_depth -= 1
-++            if self._encode_depth == 0:
-++                self._shared_containers.clear()
-++                self._string_references.clear()
-++
-+     def encode(self, obj: Any) -> None:
-+         """
-+         Encode the given object using CBOR.
-+@@ -305,6 +325,16 @@ class CBOREncoder:
-+         :param obj:
-+             the object to encode
-+         """
-++        with self._encoding_context():
-++            self._encode_value(obj)
-++
-++    def _encode_value(self, obj: Any) -> None:
-++        """
-++        Internal fast path for encoding - used by built-in encoders.
-++
-++        External code should use encode() instead, which properly manages
-++        shared state between independent encode operations.
-++        """
-+         obj_type = obj.__class__
-+         encoder = self._encoders.get(obj_type) or self._find_encoder(obj_type) or self._default
-+         if not encoder:
-+@@ -448,14 +478,14 @@ class CBOREncoder:
-+     def encode_array(self, value: Sequence[Any]) -> None:
-+         self.encode_length(4, len(value))
-+         for item in value:
-+-            self.encode(item)
-++            self._encode_value(item)
-+ 
-+     @container_encoder
-+     def encode_map(self, value: Mapping[Any, Any]) -> None:
-+         self.encode_length(5, len(value))
-+         for key, val in value.items():
-+-            self.encode(key)
-+-            self.encode(val)
-++            self._encode_value(key)
-++            self._encode_value(val)
-+ 
-+     def encode_sortable_key(self, value: Any) -> tuple[int, bytes]:
-+         """
-+@@ -477,10 +507,10 @@ class CBOREncoder:
-+                 # String referencing requires that the order encoded is
-+                 # the same as the order emitted so string references are
-+                 # generated after an order is determined
-+-                self.encode(realkey)
-++                self._encode_value(realkey)
-+             else:
-+                 self._fp_write(sortkey[1])
-+-            self.encode(value)
-++            self._encode_value(value)
-+ 
-+     def encode_semantic(self, value: CBORTag) -> None:
-+         # Nested string reference domains are distinct
-+@@ -491,7 +521,7 @@ class CBOREncoder:
-+             self._string_references = {}
-+ 
-+         self.encode_length(6, value.tag)
-+-        self.encode(value.value)
-++        self._encode_value(value.value)
-+ 
-+         self.string_referencing = old_string_referencing
-+         self._string_references = old_string_references
-+@@ -554,7 +584,7 @@ class CBOREncoder:
-+     def encode_stringref(self, value: str | bytes) -> None:
-+         # Semantic tag 25
-+         if not self._stringref(value):
-+-            self.encode(value)
-++            self._encode_value(value)
-+ 
-+     def encode_rational(self, value: Fraction) -> None:
-+         # Semantic tag 30
-+diff --git a/source/decoder.c b/source/decoder.c
-+index fd4d70c..033b73f 100644
-+--- a/source/decoder.c
-++++ b/source/decoder.c
-+@@ -142,6 +142,7 @@ CBORDecoder_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
-+         self->str_errors = PyBytes_FromString("strict");
-+         self->immutable = false;
-+         self->shared_index = -1;
-++        self->decode_depth = 0;
-+     }
-+     return (PyObject *) self;
-+ error:
-+@@ -2052,11 +2053,30 @@ decode(CBORDecoderObject *self, DecodeOptions options)
-+ }
-+ 
-+ 
-++// Reset shared state at the end of each top-level decode to prevent
-++// shared references from leaking between independent decode operations.
-++// Nested calls (from hooks) must preserve the state.
-++static inline void
-++clear_shareable_state(CBORDecoderObject *self)
-++{
-++    PyList_SetSlice(self->shareables, 0, PY_SSIZE_T_MAX, NULL);
-++    self->shared_index = -1;
-++}
-++
-++
-+ // CBORDecoder.decode(self) -> obj
-+ PyObject *
-+ CBORDecoder_decode(CBORDecoderObject *self)
-+ {
-+-    return decode(self, DECODE_NORMAL);
-++    PyObject *ret;
-++    self->decode_depth++;
-++    ret = decode(self, DECODE_NORMAL);
-++    self->decode_depth--;
-++    assert(self->decode_depth >= 0);
-++    if (self->decode_depth == 0) {
-++        clear_shareable_state(self);
-++    }
-++    return ret;
-+ }
-+ 
-+ 
-+@@ -2069,6 +2089,7 @@ CBORDecoder_decode_from_bytes(CBORDecoderObject *self, PyObject *data)
-+     if (!_CBOR2_BytesIO && _CBOR2_init_BytesIO() == -1)
-+         return NULL;
-+ 
-++    self->decode_depth++;
-+     save_read = self->read;
-+     buf = PyObject_CallFunctionObjArgs(_CBOR2_BytesIO, data, NULL);
-+     if (buf) {
-+@@ -2080,6 +2101,11 @@ CBORDecoder_decode_from_bytes(CBORDecoderObject *self, PyObject *data)
-+         Py_DECREF(buf);
-+     }
-+     self->read = save_read;
-++    self->decode_depth--;
-++    assert(self->decode_depth >= 0);
-++    if (self->decode_depth == 0) {
-++        clear_shareable_state(self);
-++    }
-+     return ret;
-+ }
-+ 
-+diff --git a/source/decoder.h b/source/decoder.h
-+index 6bb6d52..a2f1bcb 100644
-+--- a/source/decoder.h
-++++ b/source/decoder.h
-+@@ -13,6 +13,7 @@ typedef struct {
-+     PyObject *str_errors;
-+     bool immutable;
-+     Py_ssize_t shared_index;
-++    Py_ssize_t decode_depth;
-+ } CBORDecoderObject;
-+ 
-+ extern PyTypeObject CBORDecoderType;
-+diff --git a/source/encoder.c b/source/encoder.c
-+index a0670aa..a7738a0 100644
-+--- a/source/encoder.c
-++++ b/source/encoder.c
-+@@ -113,6 +113,7 @@ CBOREncoder_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
-+         self->shared_handler = NULL;
-+         self->string_referencing = false;
-+         self->string_namespacing = false;
-++        self->encode_depth = 0;
-+     }
-+     return (PyObject *) self;
-+ }
-+@@ -2027,17 +2028,35 @@ encode(CBOREncoderObject *self, PyObject *value)
-+ }
-+ 
-+ 
-++// Reset shared state at the end of each top-level encode to prevent
-++// shared references from leaking between independent encode operations.
-++// Nested calls (from hooks or recursive encoding) must preserve the state.
-++static inline void
-++clear_shared_state(CBOREncoderObject *self)
-++{
-++    PyDict_Clear(self->shared);
-++    PyDict_Clear(self->string_references);
-++}
-++
-++
-+ // CBOREncoder.encode(self, value)
-+ PyObject *
-+ CBOREncoder_encode(CBOREncoderObject *self, PyObject *value)
-+ {
-+     PyObject *ret;
-+ 
-+-    // TODO reset shared dict?
-+-    if (Py_EnterRecursiveCall(" in CBOREncoder.encode"))
-++    self->encode_depth++;
-++    if (Py_EnterRecursiveCall(" in CBOREncoder.encode")) {
-++        self->encode_depth--;
-+         return NULL;
-++    }
-+     ret = encode(self, value);
-+     Py_LeaveRecursiveCall();
-++    self->encode_depth--;
-++    assert(self->encode_depth >= 0);
-++    if (self->encode_depth == 0) {
-++        clear_shared_state(self);
-++    }
-+     return ret;
-+ }
-+ 
-+diff --git a/source/encoder.h b/source/encoder.h
-+index 8b2d696..0dcc46d 100644
-+--- a/source/encoder.h
-++++ b/source/encoder.h
-+@@ -24,6 +24,7 @@ typedef struct {
-+     bool value_sharing;
-+     bool string_referencing;
-+     bool string_namespacing;
-++    Py_ssize_t encode_depth;
-+ } CBOREncoderObject;
-+ 
-+ extern PyTypeObject CBOREncoderType;
-+diff --git a/tests/test_decoder.py b/tests/test_decoder.py
-+index 485c604..253d079 100644
-+--- a/tests/test_decoder.py
-++++ b/tests/test_decoder.py
-+@@ -961,3 +961,64 @@ def test_oversized_read(impl, payload: bytes, tmp_path: Path) -> None:
-+         dummy_path.write_bytes(payload)
-+         with dummy_path.open("rb") as f:
-+             impl.load(f)
-++
-++class TestDecoderReuse:
-++    """
-++    Tests for correct behavior when reusing CBORDecoder instances.
-++    """
-++
-++    def test_decoder_reuse_resets_shared_refs(self, impl):
-++        """
-++        Shared references should be scoped to a single decode operation,
-++        not persist across multiple decodes on the same decoder instance.
-++        """
-++        # Message with shareable tag (28)
-++        msg1 = impl.dumps(impl.CBORTag(28, "first_value"))
-++
-++        # Message with sharedref tag (29) referencing index 0
-++        msg2 = impl.dumps(impl.CBORTag(29, 0))
-++
-++        # Reuse decoder across messages
-++        decoder = impl.CBORDecoder(BytesIO(msg1))
-++        result1 = decoder.decode()
-++        assert result1 == "first_value"
-++
-++        # Second decode should fail - sharedref(0) doesn't exist in this context
-++        decoder.fp = BytesIO(msg2)
-++        with pytest.raises(impl.CBORDecodeValueError, match="shared reference"):
-++            decoder.decode()
-++
-++    def test_decode_from_bytes_resets_shared_refs(self, impl):
-++        """
-++        decode_from_bytes should also reset shared references between calls.
-++        """
-++        msg1 = impl.dumps(impl.CBORTag(28, "value"))
-++        msg2 = impl.dumps(impl.CBORTag(29, 0))
-++
-++        decoder = impl.CBORDecoder(BytesIO(b""))
-++        decoder.decode_from_bytes(msg1)
-++
-++        with pytest.raises(impl.CBORDecodeValueError, match="shared reference"):
-++            decoder.decode_from_bytes(msg2)
-++
-++    def test_shared_refs_within_single_decode(self, impl):
-++        """
-++        Shared references must work correctly within a single decode operation.
-++
-++        Note: This tests non-cyclic sibling references [shareable(x), sharedref(0)],
-++        which is a different pattern from test_cyclic_array/test_cyclic_map that
-++        test self-referencing structures like shareable([sharedref(0)]).
-++        """
-++        # [shareable("hello"), sharedref(0)] -> ["hello", "hello"]
-++        data = unhexlify(
-++            "82"  # array(2)
-++            "d81c"  # tag(28) shareable
-++            "65"  # text(5)
-++            "68656c6c6f"  # "hello"
-++            "d81d"  # tag(29) sharedref
-++            "00"  # unsigned(0)
-++        )
-++
-++        result = impl.loads(data)
-++        assert result == ["hello", "hello"]
-++        assert result[0] is result[1]  # Same object reference
-+\ No newline at end of file
-+diff --git a/tests/test_encoder.py b/tests/test_encoder.py
-+index f2ef248..3ca6a95 100644
-+--- a/tests/test_encoder.py
-++++ b/tests/test_encoder.py
-+@@ -654,3 +654,73 @@ def test_invariant_encode_decode(impl, val):
-+     undergoing an encode and decode)
-+     """
-+     assert impl.loads(impl.dumps(val)) == val
-++
-++
-++class TestEncoderReuse:
-++    """
-++    Tests for correct behavior when reusing CBOREncoder instances.
-++    """
-++
-++    def test_encoder_reuse_resets_shared_containers(self, impl):
-++        """
-++        Shared container tracking should be scoped to a single encode operation,
-++        not persist across multiple encodes on the same encoder instance.
-++        """
-++        fp = BytesIO()
-++        encoder = impl.CBOREncoder(fp, value_sharing=True)
-++        shared_obj = ["hello"]
-++
-++        # First encode: object is tracked in shared containers
-++        encoder.encode([shared_obj, shared_obj])
-++
-++        # Second encode on new fp: should produce valid standalone CBOR
-++        # (not a sharedref pointing to stale first-encode data)
-++        encoder.fp = BytesIO()
-++        encoder.encode(shared_obj)
-++        second_output = encoder.fp.getvalue()
-++
-++        # The second output must be decodable on its own
-++        result = impl.loads(second_output)
-++        assert result == ["hello"]
-++
-++    def test_encode_to_bytes_resets_shared_containers(self, impl):
-++        """
-++        encode_to_bytes should also reset shared container tracking between calls.
-++        """
-++        fp = BytesIO()
-++        encoder = impl.CBOREncoder(fp, value_sharing=True)
-++        shared_obj = ["hello"]
-++
-++        # First encode
-++        encoder.encode_to_bytes([shared_obj, shared_obj])
-++
-++        # Second encode should produce valid standalone CBOR
-++        result_bytes = encoder.encode_to_bytes(shared_obj)
-++        result = impl.loads(result_bytes)
-++        assert result == ["hello"]
-++
-++    def test_encoder_hook_does_not_reset_state(self, impl):
-++        """
-++        When a custom encoder hook calls encode(), the shared container
-++        tracking should be preserved (not reset mid-operation).
-++        """
-++
-++        class Custom:
-++            def __init__(self, value):
-++                self.value = value
-++
-++        def custom_encoder(encoder, obj):
-++            # Hook encodes the wrapped value
-++            encoder.encode(obj.value)
-++
-++        # Encode a Custom wrapping a list
-++        data = impl.dumps(Custom(["a", "b"]), default=custom_encoder)
-++
-++        # Verify the output decodes correctly
-++        result = impl.loads(data)
-++        assert result == ["a", "b"]
-++
-++        # Test nested Custom objects - hook should work recursively
-++        data2 = impl.dumps(Custom(Custom(["x"])), default=custom_encoder)
-++        result2 = impl.loads(data2)
-++        assert result2 == ["x"]
-+\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-index a5c4154e49..69e5daba2a 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_5.6.4.bb
-@@ -13,6 +13,7 @@ DEPENDS += "python3-setuptools-scm-native"
++Dropped newsfragements change from  the original commit.
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+ ---
+  src/twisted/web/_template_util.py |  2 +-
+  src/twisted/web/test/test_util.py | 39 ++++++++++++++++++++++++++++++-
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
+index 272aecb8b0..691b80ac68 100644
+--- a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
+@@ -7,8 +7,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1c5d2c2493b848f83864bdedd67bbf5"
+ 
  SRC_URI += " \
-         file://run-ptest \
-         file://CVE-2025-64076.patch \
-+        file://CVE-2025-68131.patch \
+-    file://CVE-2024-41671-0001.patch \
+-    file://CVE-2024-41671-0002.patch \
++    file://CVE-2024-41671.patch \
++    file://CVE-2024-41810.patch \
  "
  
- RDEPENDS:${PN}-ptest += " \
+ SRC_URI[sha256sum] = "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b4fd4ae"
 
