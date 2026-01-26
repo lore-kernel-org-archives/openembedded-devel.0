@@ -2,190 +2,710 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97376CF65E9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DA28CF65E7
 	for <webhook@archiver.kernel.org>; Mon, 26 Jan 2026 11:45:16 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18225.1769427910859171727
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18224.1769427910630978192
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 26 Jan 2026 03:45:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OkSE3BLX;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee807a4c5so46338195e9.2
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EdURqdE9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47f5c2283b6so33465205e9.1
         for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 03:45:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1769427909; x=1770032709; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ujKaAZKwh0mW2XgD0HbmokKiaH9HTTt6jG8dl66SHHY=;
-        b=OkSE3BLXy/Ual0j76m+4Cghd3dPJq3Bs7YfehHTllKSFSRGs3DVa37vTTMmi51dLO0
-         k8UXZuxvkVgJMDnF+vdgEoncoN1h6vxhGcDQlo8uMenspZYn6TXl5zPDfOc/Q9/BGMv9
-         ORZuvU9ZJ1faA1/Hynj+RWHkTWYUqu0WHo+BXmENWo8JmbzQFg4rpp5EPt1NeYCqwnPQ
-         4bbmpqejxmJMFh5dj8/lBLY6tFOU4CzdZK1utw1rHB5uKkGhLPbFkS9dopLheqyzbvuC
-         r/xHR5u8K/bByx/sgDHcrdZ5k6rNsZDef0jTi4Bbxqj+OMD/A/1o+xmNOtCT2w0y2nbA
-         hrqw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZJ9f8ZJW6KLIDyXCCzXsQBntjWWw+XigVfp8YwAI2tc=;
+        b=EdURqdE9qNdyNfvDA73ym9f5ZGVtgZCHB4iumjps5n710yj/680topBh4319AxGIIq
+         p9v8LpiK3gkTjjEnusZhguFy3Hwl6/4MP1aStb+LnoFWUvIBzSRTWCX5wBJhnblbiEjK
+         m2d0GRjnpjaGq9M1BZvftmNyZojsKWJ6f4J1xQBlbUbhP/mTYh34sQFoM0V+FN+bfNB6
+         o61L+pjryhsFxaXJFk6TqfVB3EDXR7jO/wzZCEFApPP9zZVOH7/e17ILxXM9MyZm+LRv
+         LYCsWTtYyT5Nx2qJuUTnBg3+zyQo0hX4VtRQRsUtM+aNr94yVPchkB1k7oZL5sFPBlUE
+         rIKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1769427909; x=1770032709;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ujKaAZKwh0mW2XgD0HbmokKiaH9HTTt6jG8dl66SHHY=;
-        b=nsz1+RB45i73IIGgtR25bZYEGffvtxLOu048fgCCB4iOw31u78cE8qmFoNn+RA1XF0
-         UIC7IaAmX87bIkELpJ78ZJbvLVNfvDHPt/V6a2bvaXOk5ilITa4MaU0Uk5u0V6zJIDzO
-         HyKt3znCUBvT9hL8sesNCYDPXCcECQO/W7sjJsh55tX2dlBIKmsPWv0CHI/nyV4vlDeD
-         Ubh45hWZqSht9GXNOWU3HLCMW4QMKvYAtHT+GEYpJNvyMz65zldC4YxO7CfFJMvxiNqM
-         yHb8wmneqJ00GaEzjLSae2RCHA56ygydV+jTS+CVv8Vgk04YfdWygNRNlZAOCpj/Yv1b
-         x05Q==
-X-Gm-Message-State: AOJu0YybFJm5jC4FC2PpcxcRtb7nKcnOWoLXjsyT9OYZxsvM1Q1wl5fj
-	zWmgPND9W2C8Po+EDhuhqH4t2ThyMcyA92lim/Qywm+VOB24D7F6iBtgrMo3Vw==
-X-Gm-Gg: AZuq6aLQy7GeIn47SRsieC7yc/BzygWp9+4IHsCyNheFShqRtV8RIUie+3QpW6UUBeO
-	4QPYFTNR8fhlsPNt6bEri3cOB1avAx6nOz2WpDE8yYCsEu5NAPJGnmmzyt9rqSX3n0gtVGmKPXD
-	ZVzbITx/v9ySqR/SHk+DmyfKY5bMRwtOfznJicuD95ZZ0UmX6DxlMv5WF6KNkVc8sjuAJUUu28M
-	wjvAJ69Xgv1I3PsKvg9/9KqPnDVJXvct27KR9nB+Nk/z/8vukRdUcvkWn/zW+hlV9gZQ7Scz9LE
-	n5isg0qSw/Zb0BI+iHTyKcm3QaInK5Tq21V6muyiMRuZVtwqWvaORBevBY3RFAQlrlBKok6HXve
-	ru0MqcZfBPs6bk8X8sYamO/G55NIuHTOl9X6MIjJe1ug1tSFep1w2E/YaYID260Erk9BqvV4sM9
-	SLJQFM34Yr
-X-Received: by 2002:a05:600c:3e18:b0:477:a219:cdb7 with SMTP id 5b1f17b1804b1-48060ad816fmr42103695e9.0.1769427908980;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZJ9f8ZJW6KLIDyXCCzXsQBntjWWw+XigVfp8YwAI2tc=;
+        b=lIT7FYPQuVrwjxku0NSAjlUpKfuAXyw6Fajlwf3CB6AS9lC37FuEHKRL/AezJoVmRu
+         Nh4zZOhFn9e7Wdc87OFOCfVK/+0ngVFGdStL7jZvfLyo+fXytuyZW5kjHIelr7sBWbej
+         gUTrwe0ffGMW9aqV8ozpNnLJkaWahHU+867La0GdiyvLBp1k6glMagy7fkS2bouAzBQg
+         d6bPmSjHzDtoJm6K8GrijwlAkUyMkcLKH7zRUOTnpxT4iRszXmMHPuZI5KB+pkXKmHWB
+         VxL92vFER9k2AwslAWtvaBNxT4WiXo5+ION6NYSeUFcIx3lZF7bELq+V+YItujgL+4bw
+         Uyew==
+X-Gm-Message-State: AOJu0YyiPDO6i+KwmpK873gdVLYku8SWKZMDvu4VdqhJQirbVKSKlzpk
+	q++JUPiXCSbRyLs7O6ekCzW+/IJUwho1QP2lEEf0zCt6gPDKOVBUkhtz/5faYQ==
+X-Gm-Gg: AZuq6aJGtngJfk9DUL5gwhoBwV6C+VcCx7gALq0LEWboiQjkpx0KTzNYM2SPYRWjVrg
+	OkwADdGIBs1ZA9l5WKS3JEfeio9NHuMkpjgzqqdERBJqmAEWPVSTDei15V3iXLWZNe9Ifpu347f
+	7TA0DoGEj/k4PhMn1AOsrqT6uDxAFC3t0TKS52ogwfvbboMyKiN6g+IoHfTeJif4Uhw+XZQC5z/
+	PdTmrv9B4Z6qOfzuQyV4e0WBtRzlWqAlcVkC+2HgfCSTxIzJddy9JjXMv55l5IktMVgrrYTg2JV
+	XXt9o3VKsDJrODYYWoJCC8/QeEmm8XbsKucRk+lXJVl5JyM1K1GwXN0NyMIzw1XMhn9+pGE8n7n
+	jHe5F63iF4gx6rekJBzSzDqXiH8hitSZw33DfHvnAjBlUcBp9PwXf1fksKyBGsbNYNJYWZAIqso
+	n4YBo7B8ec
+X-Received: by 2002:a05:600c:1e02:b0:477:76c2:49c9 with SMTP id 5b1f17b1804b1-4805ce3f7f0mr73889355e9.2.1769427908319;
         Mon, 26 Jan 2026 03:45:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm98454055e9.17.2026.01.26.03.45.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804dbd4630sm98454055e9.17.2026.01.26.03.45.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 03:45:08 -0800 (PST)
+        Mon, 26 Jan 2026 03:45:07 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/4] fontforge: patch CVE-2025-15279
-Date: Mon, 26 Jan 2026 12:45:03 +0100
-Message-ID: <20260126114506.3846753-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/4] fontforge: upgrade 20230101 -> 20251009
+Date: Mon, 26 Jan 2026 12:45:02 +0100
+Message-ID: <20260126114506.3846753-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260126114506.3846753-1-skandigraun@gmail.com>
-References: <20260126114506.3846753-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 11:45:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123871
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123870
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15279
+Drop patches that are inluded in this release.
 
-Pick the patch that mentions this vulnerability ID explicitly.
-Also, this patch has caused some regression - pick the patch also
-that fixed that regression.
+libxi has been removed as a dependency, because the project has dropped
+the x11 drawing backend, it implements everything in gtk.
+
+Changelog: https://github.com/fontforge/fontforge/releases/tag/20251009
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../fontforge/CVE-2025-15279-1.patch          | 42 +++++++++++++++++++
- .../fontforge/CVE-2025-15279-2.patch          | 35 ++++++++++++++++
- .../fontforge/fontforge_20251009.bb           |  4 +-
- 3 files changed, 80 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
+ ...ons-containing-invalid-directives-hs.patch | 385 ------------------
+ .../CVE-2024-25081_CVE-2024-25082.patch       | 181 --------
+ ...orge_20230101.bb => fontforge_20251009.bb} |  18 +-
+ 3 files changed, 4 insertions(+), 580 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/0001-Fix-Translations-containing-invalid-directives-hs.patch
+ delete mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
+ rename meta-oe/recipes-graphics/fontforge/{fontforge_20230101.bb => fontforge_20251009.bb} (72%)
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
-new file mode 100644
-index 0000000000..17f33f41ff
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
-@@ -0,0 +1,42 @@
-+From ce71f0cdce556f56c5207a33a1be3830a73cc04f Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Thu, 8 Jan 2026 15:47:43 +0100
-+Subject: [PATCH] Fix CVE-2025-15279: Heap buffer overflow in BMP RLE
-+ decompression (#5720)
-+
-+From: Ahmet Furkan Kavraz <55850855+ahmetfurkankavraz@users.noreply.github.com>
-+
-+CVSS: 7.8 (High)
-+ZDI-CAN-27517
-+Co-authored-by: Ahmet Furkan Kavraz <kavraz@amazon.com>
-+
-+CVE: CVE-2025-15279
-+Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/7d67700cf8888e0bb37b453ad54ed932c8587073]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ gutils/gimagereadbmp.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/gutils/gimagereadbmp.c b/gutils/gimagereadbmp.c
-+index 5a137e28a..133336787 100644
-+--- a/gutils/gimagereadbmp.c
-++++ b/gutils/gimagereadbmp.c
-+@@ -181,12 +181,18 @@ static int readpixels(FILE *file,struct bmpheader *head) {
-+ 	int ii = 0;
-+ 	while ( ii<head->height*head->width ) {
-+ 	    int cnt = getc(file);
-++	    if (cnt < 0 || ii + cnt > head->height * head->width) {
-++		return 0;
-++	    }
-+ 	    if ( cnt!=0 ) {
-+ 		int ch = getc(file);
-+ 		while ( --cnt>=0 )
-+ 		    head->byte_pixels[ii++] = ch;
-+ 	    } else {
-+ 		cnt = getc(file);
-++		if (cnt < 0 || ii + cnt > head->height * head->width) {
-++		    return 0;
-++		}
-+ 		if ( cnt>= 3 ) {
-+ 		    int odd = cnt&1;
-+ 		    while ( --cnt>=0 )
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
-new file mode 100644
-index 0000000000..840a37a8a9
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
-@@ -0,0 +1,35 @@
-+From 4cd078071e2487f052ec997ee13bb910d796587b Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Mon, 12 Jan 2026 22:45:16 +0100
-+Subject: [PATCH] Fix CVE-2025-15279: Move bounds check inside cnt >= 3 block
-+ (#5723)
-+
-+From: Ahmet Furkan Kavraz <55850855+ahmetfurkankavraz@users.noreply.github.com>
-+
-+Co-authored-by: Ahmet Furkan Kavraz <kavraz@amazon.com>
-+
-+CVE: CVE-2025-15279
-+Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/720ea95020c964202928afd2e93b0f5fac11027e]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ gutils/gimagereadbmp.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/gutils/gimagereadbmp.c b/gutils/gimagereadbmp.c
-+index 133336787..ad365158c 100644
-+--- a/gutils/gimagereadbmp.c
-++++ b/gutils/gimagereadbmp.c
-+@@ -190,10 +190,10 @@ static int readpixels(FILE *file,struct bmpheader *head) {
-+ 		    head->byte_pixels[ii++] = ch;
-+ 	    } else {
-+ 		cnt = getc(file);
-+-		if (cnt < 0 || ii + cnt > head->height * head->width) {
-+-		    return 0;
-+-		}
-+ 		if ( cnt>= 3 ) {
-++		    if (ii + cnt > head->height * head->width) {
-++			return 0;
-++		    }
-+ 		    int odd = cnt&1;
-+ 		    while ( --cnt>=0 )
-+ 			head->byte_pixels[ii++] = getc(file);
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
-index 2d08ee2e57..58f15ab396 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/0001-Fix-Translations-containing-invalid-directives-hs.patch b/meta-oe/recipes-graphics/fontforge/fontforge/0001-Fix-Translations-containing-invalid-directives-hs.patch
+deleted file mode 100644
+index 6d133254ed..0000000000
+--- a/meta-oe/recipes-graphics/fontforge/fontforge/0001-Fix-Translations-containing-invalid-directives-hs.patch
++++ /dev/null
+@@ -1,385 +0,0 @@
+-From e6ccc8a8cf1391010a8220836a732da9fab19c69 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 7 Sep 2023 12:35:12 -0700
+-Subject: [PATCH] Fix Translations containing invalid directives %hs
+-
+-Found with gettext 0.22
+-Older versions of msgfmt were more sloppy, thus allowing such mistakes to cause bugs at runtime.
+-
+-https://bugs.gentoo.org/908868
+-https://savannah.gnu.org/bugs/index.php?64333
+-https://github.com/fontforge/fontforge/issues/5251
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- fontforgeexe/searchview.c |  2 +-
+- po/ca.po                  |  4 ++--
+- po/de.po                  |  4 ++--
+- po/en_GB.po               |  4 ++--
+- po/fr.po                  | 40 +++++++++++++++++++--------------------
+- po/hr.po                  |  4 ++--
+- po/it.po                  |  8 ++++----
+- po/ja.po                  |  4 ++--
+- po/ko.po                  |  4 ++--
+- po/pl.po                  |  4 ++--
+- po/uk.po                  |  4 ++--
+- po/vi.po                  |  4 ++--
+- 12 files changed, 43 insertions(+), 43 deletions(-)
+-
+-diff --git a/fontforgeexe/searchview.c b/fontforgeexe/searchview.c
+-index 1cb39a221..7e1c109cb 100644
+---- a/fontforgeexe/searchview.c
+-+++ b/fontforgeexe/searchview.c
+-@@ -516,7 +516,7 @@ return( true );
+- 		    if ( ask_if_difficult==2 && !searcher->isvisible )
+- return( false );
+- 		    if ( gwwv_ask(_("Bad Reference"),(const char **) buttons,1,1,
+--			    _("The %1$s in the search dialog contains a reference to %2$.20hs which does not exist in the new font.\nShould I remove the reference?"),
+-+			    _("The %1$s in the search dialog contains a reference to %2$.20s which does not exist in the new font.\nShould I remove the reference?"),
+- 				i==0?_("Search Pattern"):_("Replace Pattern"),
+- 			        r->sc->name)==1 )
+- return( false );
+-diff --git a/po/ca.po b/po/ca.po
+-index e2349b6ef..6c920b7c0 100644
+---- a/po/ca.po
+-+++ b/po/ca.po
+-@@ -12347,11 +12347,11 @@ msgstr "Tai"
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"Al diàleg de cerca, %1$s conté una referència a %2$.20hs\n"
+-+"Al diàleg de cerca, %1$s conté una referència a %2$.20s\n"
+- "que no existeix en el nou tipus.\n"
+- "Voleu eliminar la referència?"
+- 
+-diff --git a/po/de.po b/po/de.po
+-index 41430ffae..8a31aeaa2 100644
+---- a/po/de.po
+-+++ b/po/de.po
+-@@ -15765,11 +15765,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"%1$s im Suchdialog enthält eine Referenz auf %2$.20hs, die in der neuen "
+-+"%1$s im Suchdialog enthält eine Referenz auf %2$.20s, die in der neuen "
+- "Schrift nicht existiert.\n"
+- "Soll der Referenz entfernt werden?"
+- 
+-diff --git a/po/en_GB.po b/po/en_GB.po
+-index 9bd2d62bb..fce64c97d 100644
+---- a/po/en_GB.po
+-+++ b/po/en_GB.po
+-@@ -728,11 +728,11 @@ msgstr "Template Colour"
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"The %1$s in the search dialogue contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialogue contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- 
+-diff --git a/po/fr.po b/po/fr.po
+-index 26e446b38..d130f89bc 100644
+---- a/po/fr.po
+-+++ b/po/fr.po
+-@@ -291,7 +291,7 @@ msgstr "chaîne %1$.30s pour %2$.30s"
+- #. GT: $4 is the changed flag ('*' for the changed items)
+- #, c-format
+- msgid "%1$.80s at %2$d from %3$.90s%4$s"
+--msgstr "%1$.80s à %2$d de %3$.90hs%4$s"
+-+msgstr "%1$.80s à %2$d de %3$.90s%4$s"
+- 
+- #. GT: This is the title for a window showing a bitmap character
+- #. GT: It will look something like:
+-@@ -302,7 +302,7 @@ msgstr "%1$.80s à %2$d de %3$.90hs%4$s"
+- #. GT: $4 is the font name
+- #, c-format
+- msgid "%1$.80s at %2$d size %3$d from %4$.80s"
+--msgstr "%1$.80s (%2$d) taille %3$d de %4$.80hs"
+-+msgstr "%1$.80s (%2$d) taille %3$d de %4$.80s"
+- 
+- #, c-format
+- msgid "%1$s from lookup subtable %2$.50s"
+-@@ -7433,7 +7433,7 @@ msgid ""
+- "Reverting the file will lose those changes.\n"
+- "Is that what you want?"
+- msgstr ""
+--"La fonte %1$.40s dans le fichier %2$.40hs a été modifiée.\n"
+-+"La fonte %1$.40s dans le fichier %2$.40s a été modifiée.\n"
+- "Revenir vous fera perdre toutes les modifications.\n"
+- "Voulez vous vraiment revenir ?"
+- 
+-@@ -19077,11 +19077,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"Dans %1$s du dialogue de recherche il y a une référence vers %2$.20hs qui "
+-+"Dans %1$s du dialogue de recherche il y a une référence vers %2$.20s qui "
+- "n'existe pas dans la nouvelle fonte.\n"
+- "Faut-il supprimer la référence ?"
+- 
+-@@ -19925,7 +19925,7 @@ msgid ""
+- "The fonts %1$.30s and %2$.30s have a different number of glyphs or different "
+- "encodings"
+- msgstr ""
+--"Les fontes %1$.30s et %2$.30hs n'ont pas le même nombre de glyphes ou des "
+-+"Les fontes %1$.30s et %2$.30s n'ont pas le même nombre de glyphes ou des "
+- "codages différents"
+- 
+- #, c-format
+-@@ -19933,7 +19933,7 @@ msgid ""
+- "The fonts %1$.30s and %2$.30s use different types of splines (one quadratic, "
+- "one cubic)"
+- msgstr ""
+--"Les fontes %1$.30s et %2$.30hs utilisent des courbes de Bézier d'ordres "
+-+"Les fontes %1$.30s et %2$.30s utilisent des courbes de Bézier d'ordres "
+- "différents (quadratique et cubique)"
+- 
+- msgid "The generated font won't work with ATM"
+-@@ -19968,8 +19968,8 @@ msgid ""
+- "The glyph %1$.30s in font %2$.30s has a different hint mask on its contours "
+- "than in %3$.30s"
+- msgstr ""
+--"Le glyphe %1$.30s dans la police %2$.30hs a un masque de hints différent que "
+--"dans %3$.30hs"
+-+"Le glyphe %1$.30s dans la police %2$.30s a un masque de hints différent que "
+-+"dans %3$.30s"
+- 
+- #, c-format
+- msgid ""
+-@@ -19984,8 +19984,8 @@ msgid ""
+- "The glyph %1$.30s in font %2$.30s has a different number of references than "
+- "in %3$.30s"
+- msgstr ""
+--"Le glyphe %1$.30s de la fonte %2$.30hs a un nombre de références différent "
+--"dans %3$.30hs"
+-+"Le glyphe %1$.30s de la fonte %2$.30s a un nombre de références différent "
+-+"dans %3$.30s"
+- 
+- #, c-format
+- msgid ""
+-@@ -20457,7 +20457,7 @@ msgstr ""
+- #, c-format
+- msgid "The outlines of glyph %2$.30s were not found in the font %1$.60s"
+- msgstr ""
+--"Le contours du glyphe %2$.30s n'ont pas été trouvés dans la police %1$.60hs"
+-+"Le contours du glyphe %2$.30s n'ont pas été trouvés dans la police %1$.60s"
+- 
+- msgid "The paths that make up this glyph intersect one another"
+- msgstr "Les chemins qui composent ce glyphe se coupent les uns les autres"
+-@@ -21042,7 +21042,7 @@ msgstr "Il y a déjà une sous-table avec ce nom, changez de nom SVP"
+- 
+- #, c-format
+- msgid "There is already an anchor point named %1$.40s in %2$.40s."
+--msgstr "Il y a déjà une ancre appelée %1$.40s dans %2$.40hs."
+-+msgstr "Il y a déjà une ancre appelée %1$.40s dans %2$.40s."
+- 
+- msgid "There is another glyph in the font with this name"
+- msgstr "Il y a un autre glyphe dans la fonte avec ce nom"
+-@@ -21441,8 +21441,8 @@ msgid ""
+- "been able to find is %1$.20s-%2$.20s-%4$d.\n"
+- "Shall I use that or let you search?"
+- msgstr ""
+--"Cette fonte est basée sur le jeu de caractères %1$.20s-%2$.20hs-%3$d, mais "
+--"ce que j'ai trouvé de mieux c'est %1$.20hs-%2$.20hs-%4$d.\n"
+-+"Cette fonte est basée sur le jeu de caractères %1$.20s-%2$.20s-%3$d, mais "
+-+"ce que j'ai trouvé de mieux c'est %1$.20s-%2$.20s-%4$d.\n"
+- "Devrais-je utiliser cette valeur ou préférez vous chercher ?"
+- 
+- msgid ""
+-@@ -21770,7 +21770,7 @@ msgid ""
+- "with a 0 offset for this combination. Would you like to alter this kerning "
+- "class entry (or create a kerning pair for just these two glyphs)?"
+- msgstr ""
+--"Cette paire de crénage (%.20s et %.20hs) est dans une classe de crénage\n"
+-+"Cette paire de crénage (%.20s et %.20s) est dans une classe de crénage\n"
+- "avec un déplacement de 0 pour cette combinaison. Voulez-vous modifier cette "
+- "partie\n"
+- "de la classe de crénage (ou créer une nouvelle paire rien que pour ces 2 "
+-@@ -24551,8 +24551,8 @@ msgid ""
+- "referred to.\n"
+- "It will not be copied."
+- msgstr ""
+--"Vous essayer de coller une référence vers %1$s dans %2$hs.\n"
+--"Mais %1$hs n'existe pas dans cette fonte, et FontForge ne trouve pas le "
+-+"Vous essayer de coller une référence vers %1$s dans %2$s.\n"
+-+"Mais %1$s n'existe pas dans cette fonte, et FontForge ne trouve pas le "
+- "glyphe auquel il se référait.\n"
+- "Le glyphe ne sera pas copié."
+- 
+-@@ -24562,8 +24562,8 @@ msgid ""
+- "But %1$s does not exist in this font.\n"
+- "Would you like to copy the original splines (or delete the reference)?"
+- msgstr ""
+--"Vous essayer de coller une référence vers %1$s dans %2$hs.\n"
+--"Mais %1$hs n'existe pas dans cette fonte.\n"
+-+"Vous essayer de coller une référence vers %1$s dans %2$s.\n"
+-+"Mais %1$s n'existe pas dans cette fonte.\n"
+- "Voulez vous copier le contour d'origine (ou supprimer la référence)?"
+- 
+- msgid ""
+-diff --git a/po/hr.po b/po/hr.po
+-index d261d4ca7..ac41b9250 100644
+---- a/po/hr.po
+-+++ b/po/hr.po
+-@@ -20156,11 +20156,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"%1$s u dijaloškom okviru traženja sadrži referencu na %2$.20hs koja ne "
+-+"%1$s u dijaloškom okviru traženja sadrži referencu na %2$.20s koja ne "
+- "postoji u fontu.\n"
+- "Želiš li dozvoliti uklanjanje reference?"
+- 
+-diff --git a/po/it.po b/po/it.po
+-index e13711485..d0c3ea987 100644
+---- a/po/it.po
+-+++ b/po/it.po
+-@@ -2303,7 +2303,7 @@ msgid ""
+- "Reverting the file will lose those changes.\n"
+- "Is that what you want?"
+- msgstr ""
+--"Il font %1$.40s nel file %2$.40hs è stato modificato.\n"
+-+"Il font %1$.40s nel file %2$.40s è stato modificato.\n"
+- "Ripristinando il file perderai tutte le modifiche.\n"
+- "È quello che vuoi fare?"
+- 
+-@@ -5835,7 +5835,7 @@ msgid ""
+- "The glyph %1$.30s has a different number of contours in font %2$.30s than in "
+- "%3$.30s"
+- msgstr ""
+--"Il glifo %1$.30s ha un diverso numero di contorni nel font %2$.30hs rispetto "
+-+"Il glifo %1$.30s ha un diverso numero di contorni nel font %2$.30s rispetto "
+- "a %3$.30s"
+- 
+- #, c-format
+-@@ -6235,8 +6235,8 @@ msgid ""
+- "been able to find is %1$.20s-%2$.20s-%4$d.\n"
+- "Shall I use that or let you search?"
+- msgstr ""
+--"Questo font è basato sulla codifica di caratteri %1$.20s-%2$.20hs-%3$d, ma "
+--"il migliore che io abbia trovato è %1$.20hs-%2$.20hs-%4$d.\n"
+-+"Questo font è basato sulla codifica di caratteri %1$.20s-%2$.20s-%3$d, ma "
+-+"il migliore che io abbia trovato è %1$.20s-%2$.20s-%4$d.\n"
+- "Devo usare questo valore o preferisci cercare tu stesso?"
+- 
+- msgid ""
+-diff --git a/po/ja.po b/po/ja.po
+-index ed9f5a645..206ae82d1 100644
+---- a/po/ja.po
+-+++ b/po/ja.po
+-@@ -11458,11 +11458,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"%1$s には, 新しいフォントには含まれないグリフ %2$.20hs への参照が含まれていま"
+-+"%1$s には, 新しいフォントには含まれないグリフ %2$.20s への参照が含まれていま"
+- "す.\n"
+- "参照を削除しますか?"
+- 
+-diff --git a/po/ko.po b/po/ko.po
+-index 971b4db03..4d5c8d40d 100644
+---- a/po/ko.po
+-+++ b/po/ko.po
+-@@ -20920,11 +20920,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"검색 대화 상자의 %1$s에는 새 글꼴에 없는 %2$.20hs에 대한 참조가 포함되어 있"
+-+"검색 대화 상자의 %1$s에는 새 글꼴에 없는 %2$.20s에 대한 참조가 포함되어 있"
+- "다.\n"
+- "참조를 제거해야 하는가?"
+- 
+-diff --git a/po/pl.po b/po/pl.po
+-index 2bbbf00be..c1fd5a454 100644
+---- a/po/pl.po
+-+++ b/po/pl.po
+-@@ -19552,11 +19552,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"%1$s w okienku wyszukiwania zawiera odwołanie do %2$.20hs, który nie "
+-+"%1$s w okienku wyszukiwania zawiera odwołanie do %2$.20s, który nie "
+- "istnieje w nowym foncie.\n"
+- "Czy usunąć to odwołanie?"
+- 
+-diff --git a/po/uk.po b/po/uk.po
+-index e3768acc3..3302a1005 100644
+---- a/po/uk.po
+-+++ b/po/uk.po
+-@@ -19860,11 +19860,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"%1$s у діалоговому вікні пошуку містить посилання на %2$.20hs, якого не "
+-+"%1$s у діалоговому вікні пошуку містить посилання на %2$.20s, якого не "
+- "існує у новому шрифті.\n"
+- "Вилучити це посилання?"
+- 
+-diff --git a/po/vi.po b/po/vi.po
+-index 6aee8bb3f..f5eb739e6 100644
+---- a/po/vi.po
+-+++ b/po/vi.po
+-@@ -17109,11 +17109,11 @@ msgstr ""
+- 
+- #, c-format
+- msgid ""
+--"The %1$s in the search dialog contains a reference to %2$.20hs which does "
+-+"The %1$s in the search dialog contains a reference to %2$.20s which does "
+- "not exist in the new font.\n"
+- "Should I remove the reference?"
+- msgstr ""
+--"Trong hộp thoại tìm kiếm, %1$s chứa một tham chiếu đến %2$.20hs mà không tồn "
+-+"Trong hộp thoại tìm kiếm, %1$s chứa một tham chiếu đến %2$.20s mà không tồn "
+- "tại trong phông mới.\n"
+- "Bạn có muốn gỡ bỏ tham chiếu này không?"
+- 
+--- 
+-2.42.0
+-
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
+deleted file mode 100644
+index 40f85e9f33..0000000000
+--- a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2024-25081_CVE-2024-25082.patch
++++ /dev/null
+@@ -1,181 +0,0 @@
+-From 216eb14b558df344b206bf82e2bdaf03a1f2f429 Mon Sep 17 00:00:00 2001
+-From: Peter Kydas <pk@canva.com>
+-Date: Tue, 6 Feb 2024 20:03:04 +1100
+-Subject: [PATCH] fix splinefont shell command injection (#5367)
+-
+-CVE: CVE-2024-25081
+-CVE: CVE-2024-25082
+-Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/216eb14b558df344b206bf82e2bdaf03a1f2f429]
+-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+----
+- fontforge/splinefont.c | 123 +++++++++++++++++++++++++++++------------
+- 1 file changed, 89 insertions(+), 34 deletions(-)
+-
+-diff --git a/fontforge/splinefont.c b/fontforge/splinefont.c
+-index 239fdc035..647daee10 100644
+---- a/fontforge/splinefont.c
+-+++ b/fontforge/splinefont.c
+-@@ -788,11 +788,14 @@ return( name );
+- 
+- char *Unarchive(char *name, char **_archivedir) {
+-     char *dir = getenv("TMPDIR");
+--    char *pt, *archivedir, *listfile, *listcommand, *unarchivecmd, *desiredfile;
+-+    char *pt, *archivedir, *listfile, *desiredfile;
+-     char *finalfile;
+-     int i;
+-     int doall=false;
+-     static int cnt=0;
+-+    gchar *command[5];
+-+    gchar *stdoutresponse = NULL;
+-+    gchar *stderrresponse = NULL;
+- 
+-     *_archivedir = NULL;
+- 
+-@@ -827,18 +830,30 @@ return( NULL );
+-     listfile = malloc(strlen(archivedir)+strlen("/" TOC_NAME)+1);
+-     sprintf( listfile, "%s/" TOC_NAME, archivedir );
+- 
+--    listcommand = malloc( strlen(archivers[i].unarchive) + 1 +
+--			strlen( archivers[i].listargs) + 1 +
+--			strlen( name ) + 3 +
+--			strlen( listfile ) +4 );
+--    sprintf( listcommand, "%s %s %s > %s", archivers[i].unarchive,
+--	    archivers[i].listargs, name, listfile );
+--    if ( system(listcommand)!=0 ) {
+--	free(listcommand); free(listfile);
+--	ArchiveCleanup(archivedir);
+--return( NULL );
+-+    command[0] = archivers[i].unarchive;
+-+    command[1] = archivers[i].listargs;
+-+    command[2] = name;
+-+    command[3] = NULL; // command args need to be NULL-terminated
+-+
+-+    if ( g_spawn_sync(
+-+                      NULL,
+-+                      command,
+-+                      NULL,
+-+                      G_SPAWN_SEARCH_PATH, 
+-+                      NULL, 
+-+                      NULL, 
+-+                      &stdoutresponse, 
+-+                      &stderrresponse, 
+-+                      NULL, 
+-+                      NULL
+-+                      ) == FALSE) { // did not successfully execute
+-+      ArchiveCleanup(archivedir);
+-+      return( NULL );
+-     }
+--    free(listcommand);
+-+    // Write out the listfile to be read in later
+-+    FILE *fp = fopen(listfile, "wb");
+-+    fwrite(stdoutresponse, strlen(stdoutresponse), 1, fp);
+-+    fclose(fp);
+- 
+-     desiredfile = ArchiveParseTOC(listfile, archivers[i].ars, &doall);
+-     free(listfile);
+-@@ -847,22 +862,28 @@ return( NULL );
+- return( NULL );
+-     }
+- 
+--    /* I tried sending everything to stdout, but that doesn't work if the */
+--    /*  output is a directory file (ufo, sfdir) */
+--    unarchivecmd = malloc( strlen(archivers[i].unarchive) + 1 +
+--			strlen( archivers[i].listargs) + 1 +
+--			strlen( name ) + 1 +
+--			strlen( desiredfile ) + 3 +
+--			strlen( archivedir ) + 30 );
+--    sprintf( unarchivecmd, "( cd %s ; %s %s %s %s ) > /dev/null", archivedir,
+--	    archivers[i].unarchive,
+--	    archivers[i].extractargs, name, doall ? "" : desiredfile );
+--    if ( system(unarchivecmd)!=0 ) {
+--	free(unarchivecmd); free(desiredfile);
+--	ArchiveCleanup(archivedir);
+--return( NULL );
+-+    command[0] = archivers[i].unarchive;
+-+    command[1] = archivers[i].extractargs;
+-+    command[2] = name;
+-+    command[3] = doall ? "" : desiredfile;
+-+    command[4] = NULL;
+-+
+-+    if ( g_spawn_sync(
+-+                      (gchar*)archivedir,
+-+                      command,
+-+                      NULL,
+-+                      G_SPAWN_SEARCH_PATH, 
+-+                      NULL, 
+-+                      NULL, 
+-+                      &stdoutresponse, 
+-+                      &stderrresponse, 
+-+                      NULL, 
+-+                      NULL
+-+                      ) == FALSE) { // did not successfully execute
+-+      free(desiredfile);
+-+      ArchiveCleanup(archivedir);
+-+      return( NULL );
+-     }
+--    free(unarchivecmd);
+- 
+-     finalfile = malloc( strlen(archivedir) + 1 + strlen(desiredfile) + 1);
+-     sprintf( finalfile, "%s/%s", archivedir, desiredfile );
+-@@ -885,20 +906,54 @@ struct compressors compressors[] = {
+- 
+- char *Decompress(char *name, int compression) {
+-     char *dir = getenv("TMPDIR");
+--    char buf[1500];
+-     char *tmpfn;
+--
+-+    gchar *command[4];
+-+    gint stdout_pipe;
+-+    gchar buffer[4096];
+-+    gssize bytes_read;
+-+    GByteArray *binary_data = g_byte_array_new();
+-+    
+-     if ( dir==NULL ) dir = P_tmpdir;
+-     tmpfn = malloc(strlen(dir)+strlen(GFileNameTail(name))+2);
+-     strcpy(tmpfn,dir);
+-     strcat(tmpfn,"/");
+-     strcat(tmpfn,GFileNameTail(name));
+-     *strrchr(tmpfn,'.') = '\0';
+--    snprintf( buf, sizeof(buf), "%s < %s > %s", compressors[compression].decomp, name, tmpfn );
+--    if ( system(buf)==0 )
+--return( tmpfn );
+--    free(tmpfn);
+--return( NULL );
+-+
+-+    command[0] = compressors[compression].decomp;
+-+    command[1] = "-c";
+-+    command[2] = name;
+-+    command[3] = NULL;
+-+
+-+    // Have to use async because g_spawn_sync doesn't handle nul-bytes in the output (which happens with binary data)
+-+    if (g_spawn_async_with_pipes(
+-+      NULL, 
+-+      command, 
+-+      NULL, 
+-+      G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH,
+-+      NULL, 
+-+      NULL,  
+-+      NULL,
+-+      NULL, 
+-+      &stdout_pipe, 
+-+      NULL, 
+-+      NULL) == FALSE) {
+-+      //command has failed
+-+      return( NULL );
+-+    }
+-+
+-+    // Read binary data from pipe and output to file
+-+    while ((bytes_read = read(stdout_pipe, buffer, sizeof(buffer))) > 0) {
+-+        g_byte_array_append(binary_data, (guint8 *)buffer, bytes_read);
+-+    }
+-+    close(stdout_pipe);
+-+
+-+    FILE *fp = fopen(tmpfn, "wb");
+-+    fwrite(binary_data->data, sizeof(gchar), binary_data->len, fp);
+-+    fclose(fp);
+-+    g_byte_array_free(binary_data, TRUE);
+-+
+-+		return(tmpfn);
+- }
+- 
+- static char *ForceFileToHaveName(FILE *file, char *exten) {
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
+similarity index 72%
+rename from meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
+rename to meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
+index af77ec913e..2d08ee2e57 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
 +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
-@@ -17,7 +17,9 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=$
+@@ -6,21 +6,17 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE;md5=d042f3d2a8fd7208b704a499168e3c89 \
+ "
+ 
+-DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro"
+-DEPENDS:append:class-target = " libxi"
++DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro gtkmm3"
+ 
+ inherit cmake pkgconfig python3native python3targetconfig features_check gettext gtk-icon-cache mime mime-xdg
+ 
+-REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
++ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ 
+-# tag 20220308
+-SRCREV = "a1dad3e81da03d5d5f3c4c1c1b9b5ca5ebcfcecf"
+-SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
++SRCREV = "c41bdb922285f35defd1e1385adfd13bde1ab32a"
++SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https;tag=${PV} \
             file://0001-include-sys-select-on-non-glibc-platforms.patch \
             file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
             file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
--"
-+           file://CVE-2025-15279-1.patch \
-+           file://CVE-2025-15279-2.patch \
-+           "
+-           file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
+-           file://CVE-2024-25081_CVE-2024-25082.patch \
+ "
  
  EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
- PACKAGECONFIG = "readline"
+@@ -31,12 +27,6 @@ CFLAGS += "-fno-strict-aliasing"
+ LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+ BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+ 
+-#do_configure:prepend() {
+-# uthash sources are expected in uthash/src
+-#    mkdir -p ${S}/uthash/src
+-#    cp ${STAGING_INCDIR}/ut*.h ${S}/uthash/src
+-#}
+-
+ PACKAGES =+ "${PN}-python"
+ 
+ FILES:${PN} += " \
 
