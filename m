@@ -2,135 +2,126 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F16DFD13C05
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F9ED13C00
 	for <webhook@archiver.kernel.org>; Mon, 26 Jan 2026 13:05:16 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18919.1769432715017247446
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18911.1769432709908208646
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 05:05:15 -0800
+ Mon, 26 Jan 2026 05:05:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WrSpkZWc;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-42fb6ce71c7so4200865f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 05:05:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IiUHSkLf;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47d59da3d81so34940665e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 05:05:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769432713; x=1770037513; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wZoKvAw3hakVmxRBdH64AtBbHTShWZdqdTLqfR0j1h4=;
-        b=WrSpkZWcvSGRcfF9Y/ZqMwC1U4rCi3gET2yLEeTfcjtvfbgHwNTATE8xUJsSdhJ9es
-         5jW6ZYVEFrBst+u/RqXRl8BZ6MLgb1OKpZiQMfEy3xIgsxl2qR52cshxe2rR5/kv9LXf
-         vLrvVJD8KllNv5dXP0etMcSq9R0Qm+4vpAXMD0oUHH/9bj5ywH/fJeh4dh95TZAx+msy
-         bcAjixAouM8WxN1TeapmqSIvUPO12erIO65tMV1k7LMulMMCOowO8k8EJYu/YNFxBMQs
-         +HhiSjF/3zAWWzTm3Ij9+Rr1VopAiJ0AFjQeOkTUcaL+lmU664QJrsK9+whl6WBz53Wr
-         nvFg==
+        d=gmail.com; s=20230601; t=1769432708; x=1770037508; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vaOyIqDsXT7R7wtFL0tTbMAE5+7+8tPGaRPejr4VBd0=;
+        b=IiUHSkLfoZLaHy5dKb7HNo7wmn2P9K+TrtVQTKTpiKL8aH7QCswtc2kPM6HDoeluLd
+         5dvFy2Nzo+BxgCBLKY/X5XFAt+ahc8v2MqXx/mBQG75IF5NtNlwbmF8i/Doszqbk3dKX
+         TW7l7vMDHfYXp//H9hl565iaFawgcvokckFdmiODVYDzl7So9aCZ4FwgQqRIcHxYfJzK
+         CdFQbFe+LFlJtqzddSFbSvYsnMg8nlkThwY/BO03qi255SXMaKdJDvXMpd127DyVumS4
+         dWgNzUG+PAB1kBbEpIK7urLTqALNbl4MgOijHLl6peKleqd0OweIesUkGwH/qR2qC3NX
+         Nfmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769432713; x=1770037513;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=wZoKvAw3hakVmxRBdH64AtBbHTShWZdqdTLqfR0j1h4=;
-        b=JscyBC59xwpOKMu4E1B+qbAqHOXutYnaG293XsIFa9R/ocfeEbg5b4KJ18ThSjIwW0
-         8QkGuYDthf/6Bv2PRiijSQlz267tmBgSrBLF5AouRJkvY4LcGyK4Qz3xcFpQFMJoF82E
-         CzeBsF8RbfMWUnPDT7YnuBz8SVTgDxDUaoRZzmTvTppYq1FaAnCm26IPQF9oxLTXSNRQ
-         EpVRpw/41ZmEavO1HZf+L3HF65yRSNWAHpbtPrbCfLoThKMThV7RIajiiDdozJNP6sep
-         m4t3wTsi0Wl9HOSpMOSe9+DBPH5DoP7Qcm2RuDUs3wAQQsvrXsAZrpfeYPC12xkX/xY2
-         VrqA==
-X-Gm-Message-State: AOJu0YzCTI8zSXRMHs1S5BZ4R0+UqR/ON4wM/Z6PYd84yyOqJ1xD4jww
-	bNzTl5z1eDqMATxsy3ecebGveoTz8HHpDfrIpZP/EeFNQ/u8YPqaRHfizm+MdA==
-X-Gm-Gg: AZuq6aLuALYngBYqtt05m+J9DfysEiJ25v3DMv2t6FaY+YuwXOMpWLBHlhDnQA1Jfg8
-	tF9jA1idPbmERoZ+b5H1nrhg9cQ9DrSGc8TXd6U5zMulx4+DYYYKqJHIZVq8Gzxl4qmnx9YC9lz
-	fxGsl1al95KUNO0r8jENLcVeMRlU0qs3QXHCZHwJNGPn0IBF9m20uG7E783RGY1vVD0jXgFHRoN
-	I1XjDuzw5wJXo99PtPIjqPByPvuK5jr/rTQwhwsPtvkCxVa3iW4WBbzThoK0tZ7rfVWThHu/ZK2
-	Qje9VSJOFKQRMcp6fDC6hTgOrjn5efEInw5i4UYIPOeEw4fN1fXcCF5zIpPsop1TUDBFBck27C3
-	9GS8aNhTjtiCH/SaMbqh6eCHdoQClccofZk6We47i/ZRs3s2J6mhbuUt2ooC1LoEfuPxxlIK8Wi
-	VxTafqWjRd
-X-Received: by 2002:a05:6000:1ace:b0:431:c73:48a8 with SMTP id ffacd0b85a97d-435ca193bc9mr7535370f8f.29.1769432713210;
-        Mon, 26 Jan 2026 05:05:13 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769432708; x=1770037508;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vaOyIqDsXT7R7wtFL0tTbMAE5+7+8tPGaRPejr4VBd0=;
+        b=rr3HEEX86XrQXemZwKkae5TjNR32NTSiu7LBXX6wevvuhhukH4ic+0tBQ2gkZmFjyg
+         9SkN0OA/lrvZGFiPBSkboKFzRI2tm/rh7ESpGKETAVTty+TSmcvZ7EZrvlwTNMf8BHNw
+         PioqP759g7gc76CYJzykajCC9D0C0VWEao9derZiwbcm5sB5I/3er00pTIYbkAcDG7Ht
+         IFYiAmbxdtSzpo3vH/Knf2igx7SrERfgderkaScGLbwaAq3Aa6ME4yHA0bRFfrfrB6Rb
+         Yf0xb1xO4uevwYXMQoAwRZAqJ/OpUladXP8V2WXEazrqZyOnDiz34t5ubK97TXg1x4qm
+         jnKA==
+X-Gm-Message-State: AOJu0Yx0b9q/pdwy3fgi/7Qo68H3bnPFXt52TXQxZSSkZXcI0Ed4dulB
+	udZ3ucez07P7iNnxHFOzBFdArx1ZuLvGoye4mWR+tJAaLaC8qPaqZ12Byz8vxg==
+X-Gm-Gg: AZuq6aKfBXbplY95DyCJCHNLgysNBzMC9bnRT7eRzvGQe3zBn6P2n1SAdLPBSXJUSh2
+	ehMpvRAmE7PpcmyeU1QYxItH4XVzbfpPAH7GTILCAcjYmLzqqGX08biQkMLgTn0KArMCvp1grDs
+	tjVP4/y1u0j1cPZT82CvaqPsUt26pY+7APFrAvDKg9+YMOECQ4RFhLOeEVOW4XuJcEjOoHXIUPG
+	msj+ys5xJm4u6WWyGmJMycOcA/dPO/yu8V9pfpMomHlLsboE9Ky+shyo4w1ACEwWLn1t+1Yg3Xb
+	XmGosnfAx7WJNP6dxGO7MLKnZWBK3pLl8HppoXJZDrBh06iyqnwAgV2LmcFTkNDdMXjylxPK7at
+	/U5fZNCsrez6V/jr72Qk1YFypQ8bCa5CKpQttTQYmCrTSN+MsH46S6kVtVJraVHQBo1sB7Akuc1
+	XaNd0xamnw
+X-Received: by 2002:a05:6000:400f:b0:431:2ff:128f with SMTP id ffacd0b85a97d-435c9a8eaafmr7709236f8f.6.1769432707881;
+        Mon, 26 Jan 2026 05:05:07 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1c24b54sm30897978f8f.15.2026.01.26.05.05.12
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1c24b54sm30897978f8f.15.2026.01.26.05.05.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 05:05:12 -0800 (PST)
+        Mon, 26 Jan 2026 05:05:07 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][scarthgap][PATCH 08/11] sox: patch CVE-2017-18189
-Date: Mon, 26 Jan 2026 14:05:02 +0100
-Message-ID: <20260126130506.82699-8-skandigraun@gmail.com>
+Subject: [meta-multimedia][scarthgap][PATCH 01/11] sox: patch CVE-2017-11332
+Date: Mon, 26 Jan 2026 14:04:55 +0100
+Message-ID: <20260126130506.82699-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260126130506.82699-1-skandigraun@gmail.com>
-References: <20260126130506.82699-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 13:05:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123885
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123878
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2017-18189
+Details: https://nvd.nist.gov/vuln/detail/CVE-2017-11332
 
 Pick the patch that was identified by Debian[1] as the solution.
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2017-18189
+[1]: https://security-tracker.debian.org/tracker/CVE-2017-11332
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../sox/sox/CVE-2017-18189.patch              | 34 +++++++++++++++++++
+ .../sox/sox/CVE-2017-11332.patch              | 28 +++++++++++++++++++
  .../recipes-multimedia/sox/sox_14.4.2.bb      |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-18189.patch
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-18189.patch b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-18189.patch
+diff --git a/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
 new file mode 100644
-index 0000000000..3ca829b230
+index 0000000000..383813e469
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-18189.patch
-@@ -0,0 +1,34 @@
-+From c9e266bc77952c873a28ae320dac2eae5cbc9934 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
+@@ -0,0 +1,28 @@
++From 80479b4978ddeb6fadb75007abc81f1ca2c50abb Mon Sep 17 00:00:00 2001
 +From: Mans Rullgard <mans@mansr.com>
-+Date: Thu, 9 Nov 2017 11:45:10 +0000
-+Subject: [PATCH] xa: validate channel count
++Date: Sun, 5 Nov 2017 16:29:28 +0000
++Subject: [PATCH] wav: fix crash if channel count is zero (CVE-2017-11332)
 +
-+A corrupt header specifying zero channels would send read_channels()
-+into an infinite loop.  Prevent this by sanity checking the channel
-+count in open_read().  Also add an upper bound to prevent overflow
-+in multiplication.
-+
-+CVE: CVE-2017-18189
-+Upstream-Status: Backport [https://github.com/mansr/sox/commit/7a8ceb86212b28243bbb6d0de636f0dfbe833e53]
++CVE: CVE-2017-11332
++Upstream-Status: Backport [https://github.com/mansr/sox/commit/7405bcaacb1ded8c595cb751d407cf738cb26571]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/xa.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ src/wav.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/src/xa.c b/src/xa.c
-+index 81a7677..9fc086e 100644
-+--- a/src/xa.c
-++++ b/src/xa.c
-+@@ -143,6 +143,12 @@ static int startread(sox_format_t * ft)
-+         lsx_report("User options overriding rate read in .xa header");
-+     }
++diff --git a/src/wav.c b/src/wav.c
++index 5202556..71fd52a 100644
++--- a/src/wav.c
+++++ b/src/wav.c
++@@ -712,6 +712,11 @@ static int startread(sox_format_t * ft)
++     else
++         lsx_report("User options overriding channels read in .wav header");
 + 
-++    if (ft->signal.channels == 0 || ft->signal.channels > UINT16_MAX) {
-++        lsx_fail_errno(ft, SOX_EFMT, "invalid channel count %d",
-++                       ft->signal.channels);
+++    if (ft->signal.channels == 0) {
+++        lsx_fail_errno(ft, SOX_EHDR, "Channel count is zero");
 ++        return SOX_EOF;
 ++    }
 ++
-+     /* Check for supported formats */
-+     if (ft->encoding.bits_per_sample != 16) {
-+         lsx_fail_errno(ft, SOX_EFMT, "%d-bit sample resolution not supported.",
++     if (ft->signal.rate == 0 || ft->signal.rate == dwSamplesPerSecond)
++         ft->signal.rate = dwSamplesPerSecond;
++     else
 diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-index d49ac822b4..8606eb6c0f 100644
+index a79fb15d39..38566735bc 100644
 --- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
 +++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-@@ -37,6 +37,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
-            file://CVE-2017-15371.patch \
-            file://CVE-2017-15372.patch \
-            file://CVE-2017-15642.patch \
-+           file://CVE-2017-18189.patch \
+@@ -30,6 +30,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
+            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
+            file://0001-Update-exported-symbol-list.patch \
++           file://CVE-2017-11332.patch \
             "
  SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
  SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
