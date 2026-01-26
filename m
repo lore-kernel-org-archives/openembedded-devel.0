@@ -1,127 +1,617 @@
-Return-Path: <frederikbraendstrup@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CEBEBCF65EC
-	for <webhook@archiver.kernel.org>; Mon, 26 Jan 2026 12:25:06 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18346.1769430301372854016
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03A1BC88E7C
+	for <webhook@archiver.kernel.org>; Mon, 26 Jan 2026 12:47:37 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18610.1769431653472289380
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 04:25:01 -0800
+ Mon, 26 Jan 2026 04:47:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OE89uVG3;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: frederikbraendstrup@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b883787268fso674691166b.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 04:25:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769430300; x=1770035100; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=elgVv8eNZ2rJYoPEHgIFDSkj3L4Gtq8eBCAARWvVpsk=;
-        b=OE89uVG3K+pVhGCys0UuEM399xKAV5QsRAmOAY0IiUVk2MP3av8eTdl7lGJaL2tkm8
-         j8bZWglOjTwBsUqdrTXoVvB+84DCHhnmrt0PTCr7EfS23D+GOY83749GUyk0Zq2QayYz
-         UfacuI2WzHO2RfOWp71DZePcjeo6UHmR7xWBNx1SMCVsk0I7v5mMmSruWtdTEj9WN4Qp
-         Ta5v/l/K5woEZYcqozhf33DgX45Tk4XVwp4XYEDtsCSTfRywluFvq2fu0qrYIguMqYDG
-         kmBhjPvUOp9a7p+wdDWwUREUkn4ASjiPII6MgamV18NYGg8CS8V1mDtGweZjmrFIfyYE
-         bECA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769430300; x=1770035100;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=elgVv8eNZ2rJYoPEHgIFDSkj3L4Gtq8eBCAARWvVpsk=;
-        b=orxkjS5lTYPbuWfMvvwQDB1Nj7GifnZ5ne2sQcFaGfTX5bhYkTBM7mD7dGYFOp+Q4T
-         T/ar9eayRUSFGa+OVXHo5Oy+w0GNj1CTpw4xWSWefCEzCsUlNMnGiqF4XPZ3U3mRaGrm
-         NLc3DXIG0DdzTpn2Y955gE4AhBANZpfsmNl3ozrYK/1wI9uHJXO+E1hQLDaVtTmQcr6/
-         FPwGywQvOsm/lEGcMMAFCl/BKY3e7NmjETeFgxfFRTm4g48SwwlvkfIBHMpV/Xj0ZhB2
-         PzQ3SZnsVs86hbGsfqMKrw3wcfbQVtQJnGk+JW1ZdgIJKS12pO6x01MPoi9Eo9eZVJiy
-         RzQA==
-X-Gm-Message-State: AOJu0YytHONIPqqa3/NgmuwgOLSI86d5lgeAcl7Bn3NRADlaxuycAWuX
-	uhEYmi4vcSHfdMcOHXpCKuM3OKBUAAp7H+Xl/pwEtqThaiF4BbuHzc6uy5oPvw7b
-X-Gm-Gg: AZuq6aLG6AV7ZGUg/esSu7T+NDFIledobWmt33Bq+8CURZrMekmfqeiKw5aiS7UV/c1
-	85fgG/EKPudoQWP93XvYzJFYO+e6tsXK2DePm24mVhjVWCAnZv79y7yAycnfkyNNeXXSy4BrLJE
-	U9bbEemvMxlWU5+jqraCG58emY2hY58S0yVcCb/O4h3VgYEimNIw0ySv46yNWh20BvTDz3VEKSW
-	Xowvbxa2m6G8qUYdHf046g47A/d4LJoQJSMQOMISv1yQToVJddzwGi40N4mb99OXE5PLa6gA/O6
-	vh6d6jFWYcMrk0WeiNq7phW2d/VJL1DHMjFF+x8orQuMUabG0xmtD1EJe+QEhdZ61gyjbsaKZJc
-	Qo5cpeI8JoZv5+3kVCDeyhDJXGm2R0+YOcPpWOem3tHU8QP639fdDCqabBVLwHEK8y/tBspSGWX
-	tyXjdJQ/nA+VhEQz50fGhvQdGLBFfqWOpqfHYcpzHRzSifVsTLmpMVf7TvaZMnsU1S
-X-Received: by 2002:a17:907:3c87:b0:b8a:f29e:307a with SMTP id a640c23a62f3a-b8d2e8a9a7bmr290933166b.57.1769430299463;
-        Mon, 26 Jan 2026 04:24:59 -0800 (PST)
-Received: from ws.taila4487.ts.net (77.241.136.110.bredband.3.dk. [77.241.136.110])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b885b75d65esm645403766b.49.2026.01.26.04.24.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 04:24:59 -0800 (PST)
-From: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
+	by mailout04.t-online.de (Postfix) with SMTP id 523AE10A5
+	for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 13:47:30 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.236.230]) by fwd77.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vkM09-1KGN8L0; Mon, 26 Jan 2026 13:47:29 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-Subject: [meta-python][PATCH v1] python-iam-rolesanywhere-session: Add recipe at 2.3.0
-Date: Mon, 26 Jan 2026 13:24:33 +0100
-Message-ID: <20260126122432.1312490-2-frederikbraendstrup@gmail.com>
+Subject: [meta-gnome][PATCH] gimp: update 3.0.6 -> 3.0.8
+Date: Mon, 26 Jan 2026 13:47:23 +0100
+Message-ID: <20260126124723.524009-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1769431649-FD7F9877-26CA53B4/0/0 CLEAN NORMAL
+X-TOI-MSGID: 77a60ab3-9251-475a-b342-487073bcccbb
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 12:25:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123876
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 12:47:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123877
 
-Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+- remove cve fixes which are included in this release
+- remove the fix for bzip2. meson.build was improved so this is not
+  required anymore
+- inherit bash-completion
+
+This releases contains a lot of bugfixes. The below list is not
+exhaustive.
+Core:
+  - Font handling improvements:
+    * Font loading on start massively sped up.
+    * As an exception, Skia font family (apparently quite common on macOS=
+)
+      is special-cased because it behaves weirdly and was not working wit=
+h
+      current font handling.
+    * Various other fixes related to font handling.
+    * We now wait for fonts to be fully loaded before loading any file.
+  - Command Line Interface:
+    * Option -i / --no-interface is not shown anymore on `gimp-console`
+      binary (it can still be used =E2=80=94 it does nothing there anyway=
+ =E2=80=94, which
+      allows to use the same sets of option with the GUI binary, and also
+      so that existing shell scripts don't break).
+    * Option --show-debug-menu is not hidden anymore for discoverability.
+    * The `gimp-3.0` executable can now run with --no-interface even when
+      no display is available (ex: virtual terminal with no window
+      manager/compositor, containers, etc.). This used to only work with
+      `gimp-console-3.0` executable.
+  - Windows:
+    * output CLI messages to the parent console like Linux and macOS.
+    * Ctrl+C signals are now correctly handled in the attached console.
+    * The attached console supports color too.
+    * Interpreters are run conditionally if running in console.
+  - macOS: default to "quartz" Input Method for emoji keyboard support.
+  - Wayland: wait before we get our first surface before listing input
+    devices to work around a Wayland limitation and GTK bug.
+  - Default "Search" feature in GTK3 is now disabled in the component
+    editor in the Channels dockable.
+  - Several fixes related to Quick Mask handling.
+  - Fixed some cases where config migration from GIMP 2 to GIMP 3 was
+    problematic.
+  - Several buggy undo cases were fixed.
+  - Several fixes related to pass-through group layers.
+  - Export will now be properly triggered even if no drawables are
+    selected (this is not a requirement anymore with GIMP 3 API).
+  - Path import and export respectively from and to SVG improved.
+  - Serialize colors in legacy GimpRGB format into a XCF when the XCF
+    version is older than GIMP 3 for backward compatibility.
+Tools:
+  - Symmetry: fix initial stroke symmetry when using pixmap brushes.
+  - Move tool: fixed weird position jumps in some cases.
+Graphical User Interface:
+  - Center buttons in overlay dialogs.
+  - Headerbar's (when titlebar and menubar are merged) button colors
+    now match our theme.
+  - Dialogs' header icon and view will now scale based on custom icon
+    size.
+  - Resize dialog: Canvas Size fill combo set to insensitive if layers
+    won't be resized.
+  - Navigation and Selection editor will now properly match the theme
+    (in particular, in dark mode, they won't show large bright area).
+
+  - Do not show outlines when hovering the absent "Fx" icon anymore,
+    which was confusing people into making it look like you could click
+    and interact with this empty area.
+Plug-ins:
+  - Fixes on: OpenRaster export, TIFF import, Map Object, PDF export,
+    Gradient Flare, ANI export, Script-Fu, DDS export, Fractal Explorer,
+    PSP import, ICO import, XWD import, PSD import, WebP export, ICNS
+    import, Gimpressionist, JPEG 2000 import, Busy Dialog.
+  - Scale entries have been replaced by spin scale widgets in a bunch of
+    plug-ins.
+  - Fixed vulnerabilities: ZDI-CAN-28376, ZDI-CAN-28311, ZDI-CAN-28273,
+    ZDI-CAN-28158, ZDI-CAN-28232, ZDI-CAN-28265, ZDI-CAN-28530,
+    ZDI-CAN-28248, PSP issue 15732.
+  - Script-Fu improved to not initialize UI code unnecessarily (and
+    therefore make it unusable on systems without a display).
+API:
+  - libgimp:
+    * Fixes where made in libgimp metadata object.
+    * Make GExiv2Metadata as parent of GimpMetadata visible to
+      Gobject-Introspection tools (bindings were missing this
+      information).
+    * Fixes made on: gimp_drawable_get_thumbnail(),
+      gimp_drawable_get_sub_thumbnail(), gimp_drawable_filter_new(),
+      gimp_proc_view_new(), gimp_procedure_set_sensitivity_mask(),
+      gimp_procedure_dialog_get_spin_scale().
+    * Remove thumbnail metadata before writing it on export, to make
+      sure we don't cary on metadata written by other software in
+      thumbnails.
+  - libgimpconfig:
+    * Improve error messaging on config deserialization.
+    * Fix gimp_config_serialize_value() when serializing file objects.
+    * New functions: gimp_config_get_xcf_version() and
+      gimp_config_set_xcf_version().
+  - libgimpcolor:
+    * gimp_color_is_perceptually_identical() docs clarified.
+  - libgimpbase:
+    * The host config directory is now shown in MSIX.
+    * The host config directory is now shown in flatpak.
+  - libgimpwidgets:
+    * Fixes made on: GimpLabelEntry, gimp_widget_free_native_handle().
+  - libgimpcolor:
+    * New function: gimp_cairo_surface_get_buffer()
+    * Deprecated function: gimp_cairo_surface_create_buffer() in favor
+      of gimp_cairo_surface_get_buffer().
+      The function implementation was also changed so that it does not
+      necessarily return a linear-memory backed buffer anymore (it
+      might, but developers should not have any expectation about this).
+Build:
+  - Third-party binary plug-in support in the Snap backported from the
+    original third-party snap.
+  - Snap package for release is now created and submitted on a release
+    pipeline.
+  - Release URLs added to AppStream metadata.
+  - We do not build GEGL with Matting Levin for Windows builds anymore
+    because of crashes.
+  - Flatpak nightly builds will now show a pseudo-release visible with
+    `flatpak list`, showing proper version information.
+  - Windows installer now has a dark mode.
+  - Update changelog on MS Store (MSIX) releases.
+  - AppImage now ships with full MIDI support.
+  - Make it clearer that GExiv2 0.15.0 and over are incompatible
+    (because of API breakage).
+  - Improve build to ensure that the language list (shown in
+    Preferences) is localized during compilation. This also means that a
+    build machine should be set up for localization at build time when
+
+    optional language selection is enabled.
+  - We now require the generic C++14 standard, and not the GNU variant
+    anymore.
+  - MSVC support added.
+  - Various tweaks which used to be required to make packages work as
+    relocatable builds were dropped since babl and GEGL now have a
+    relocatable option working also on Linux.
+  - The `man` page of GIMP binaries was updated.
+  - The `gimp-console` binary is now shipped in the Flatpak.
+  - macOS pipeline added in our Gitlab CI.
+  - Make sure that harfbuzz is built with libgraphite2 shaper on macOS.
+  - Generate file associations for macOS automatically.
+  - A Bash completion file was added for `gimp` and `gimp-console`
+    binaries.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-fix-remove-license-classifier.patch  | 23 +++++++++++++++++++
- ...python3-iam-rolesanywhere-session_2.3.0.bb | 12 ++++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
- create mode 100644 meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session_2.3.0.bb
+ .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 -----
+ .../gimp/gimp/CVE-2025-14422.patch            |  66 -----------
+ .../gimp/gimp/CVE-2025-14423.patch            | 106 ------------------
+ .../gimp/gimp/CVE-2025-14424.patch            |  34 ------
+ .../gimp/gimp/CVE-2025-14425.patch            |  79 -------------
+ .../gimp/{gimp_3.0.6.bb =3D> gimp_3.0.8.bb}     |   9 +-
+ 6 files changed, 2 insertions(+), 322 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-com=
+pile-fix-for-bz2.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patc=
+h
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patc=
+h
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patc=
+h
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patc=
+h
+ rename meta-gnome/recipes-gimp/gimp/{gimp_3.0.6.bb =3D> gimp_3.0.8.bb} (=
+92%)
 
-diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
-new file mode 100644
-index 0000000000..8c61650963
---- /dev/null
-+++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
-@@ -0,0 +1,23 @@
-+From bee363b93f0ddd305b71e1fa1d3dca6ea44c8f80 Mon Sep 17 00:00:00 2001
-+From: Frede Braendstrup <frederikbraendstrup@gmail.com>
-+Date: Fri, 17 Oct 2025 15:55:07 +0200
-+Subject: [PATCH] fix: remove license classifier
-+
-+Upstream-Status: Submitted https://github.com/awslabs/iam-roles-anywhere-session/pull/22
-+Signed-off-by: Frede Braendstrup <frederikbraendstrup@gmail.com>
-+---
-+ pyproject.toml                                     | 1 -
-+ 1 files changed, 0 insertions(+), 1 deletions(-)
-+
-+diff --git a/pyproject.toml b/pyproject.toml
-+index c001045..cd83a8f 100644
-+--- a/pyproject.toml
-++++ b/pyproject.toml
-+@@ -20,7 +20,6 @@ requires-python = ">=3.8"
-+ 
-+ classifiers = [
-+     "Development Status :: 4 - Beta",
-+-    "License :: OSI Approved :: Apache Software License",
-+     "Programming Language :: Python :: 3",
-+ ]
-+ 
-diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session_2.3.0.bb b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session_2.3.0.bb
-new file mode 100644
-index 0000000000..c27c9b4ec8
---- /dev/null
-+++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-iam-rolesanywhere-session_2.3.0.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "Boto3 session creator for IAM Roles Anywhere"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
-+
-+DEPENDS = "python3-setuptools-scm-native"
-+SRC_URI += "file://0001-fix-remove-license-classifier.patch"
-+SRC_URI[sha256sum] = "718a7cb43c191f2801467a53405b829ce878ac58b3cb8868caa5782ecc3f20e5"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+PYPI_PACKAGE = "iam_rolesanywhere_session"
-+RDEPENDS:${PN} = "python3-boto3 python3-botocore python3-cryptography"
--- 
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fi=
+x-for-bz2.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compi=
+le-fix-for-bz2.patch
+deleted file mode 100644
+index 380e425f25..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-b=
+z2.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From a7e40e19d17404cf5ec4135fc1becd5a90f5e1e1 Mon Sep 17 00:00:00 2001
+-From: Markus Volk <f_l_k@t-online.de>
+-Date: Wed, 25 Dec 2024 07:27:04 +0100
+-Subject: [PATCH] gimp: cross-compile fix for bz2
+-
+-autotools bzip2 build does not create pkgconfig files so looking for the=
+ dependency fails.
+-
+-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+-
+-Upstream-Status: Inappropriate [can probably be removed once bzip2 is bu=
+ilt with meson or cmake]
+----
+- meson.build | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/meson.build b/meson.build
+-index 4e48f8c64c..d5dce47015 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -777,7 +777,7 @@ zlib =3D dependency('zlib')
+- zlib =3D dependency('zlib')
+-=20
+- # Compiler-provided headers can't be found in crossroads environment
+--if not meson.is_cross_build()
+-+if true
+-   bz2 =3D cc.find_library('bz2')
+- else
+-   bz2 =3D dependency('bzip2')
+---=20
+-2.47.1
+-
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch b/met=
+a-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
+deleted file mode 100644
+index 420e013916..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
++++ /dev/null
+@@ -1,66 +0,0 @@
+-From 0a941cab81396d65a8ab547847f8c542039e214f Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Sun, 23 Nov 2025 16:43:51 +0000
+-Subject: [PATCH] plug-ins: Fix ZDI-CAN-28273
+-
+-From: Alx Sa <cmyk.student@gmail.com>
+-
+-Resolves #15286
+-Adds a check to the memory allocation
+-in pnm_load_raw () with g_size_checked_mul ()
+-to see if the size would go out of bounds.
+-If so, we don't try to allocate and load the
+-image.
+-
+-CVE: CVE-2025-14422
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+4ff2d773d58064e6130495de498e440f4a6d5edb]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- plug-ins/common/file-pnm.c | 13 +++++++++++--
+- 1 file changed, 11 insertions(+), 2 deletions(-)
+-
+-diff --git a/plug-ins/common/file-pnm.c b/plug-ins/common/file-pnm.c
+-index 32a33a4..9d349e9 100644
+---- a/plug-ins/common/file-pnm.c
+-+++ b/plug-ins/common/file-pnm.c
+-@@ -674,7 +674,7 @@ load_image (GFile   *file,
+-             GError **error)
+- {
+-   GInputStream    *input;
+--  GeglBuffer      *buffer;
+-+  GeglBuffer      *buffer    =3D NULL;
+-   GimpImage * volatile image =3D NULL;
+-   GimpLayer       *layer;
+-   char             buf[BUFLEN + 4];  /* buffer for random things like s=
+canning */
+-@@ -708,6 +708,9 @@ load_image (GFile   *file,
+-       g_object_unref (input);
+-       g_free (pnminfo);
+-=20
+-+      if (buffer)
+-+        g_object_unref (buffer);
+-+
+-       if (image)
+-         gimp_image_delete (image);
+-=20
+-@@ -1060,6 +1063,7 @@ pnm_load_raw (PNMScanner *scan,
+-   const Babl   *format =3D NULL;
+-   gint          bpc;
+-   guchar       *data, *d;
+-+  gsize         data_size;
+-   gushort      *s;
+-   gint          x, y, i;
+-   gint          start, end, scanlines;
+-@@ -1070,7 +1074,12 @@ pnm_load_raw (PNMScanner *scan,
+-     bpc =3D 1;
+-=20
+-   /* No overflow as long as gimp_tile_height() < 1365 =3D 2^(31 - 18) /=
+ 6 */
+--  data =3D g_new (guchar, gimp_tile_height () * info->xres * info->np *=
+ bpc);
+-+  if (! g_size_checked_mul (&data_size, gimp_tile_height (), info->xres=
+) ||
+-+      ! g_size_checked_mul (&data_size, data_size, info->np)           =
+  ||
+-+      ! g_size_checked_mul (&data_size, data_size, bpc))
+-+    CHECK_FOR_ERROR (FALSE, info->jmpbuf, _("Unsupported maximum value.=
+"));
+-+
+-+  data =3D g_new (guchar, data_size);
+-=20
+-   input =3D pnmscanner_input (scan);
+-=20
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patch b/met=
+a-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patch
+deleted file mode 100644
+index 50a0adfe89..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patch
++++ /dev/null
+@@ -1,106 +0,0 @@
+-From a83e8c4ad8ffbce40aa9f9a0f49880e802ef7da1 Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Sun, 23 Nov 2025 04:22:49 +0000
+-Subject: [PATCH] plug-ins: Fix ZDI-CAN-28311
+-
+-From: Alx Sa <cmyk.student@gmail.com>
+-
+-Resolves #15292
+-The IFF specification states that EHB format images
+-have exactly 32 colors in their palette. However, it
+-is possible for images in the wild to place an incorrect
+-palette size. This patch checks for this, and either limits
+-the palette size or breaks accordingly.
+-
+-CVE: CVE-2025-14423
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+481cdbbb97746be1145ec3a633c567a68633c521]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- plug-ins/common/file-iff.c | 32 ++++++++++++++++++++++----------
+- 1 file changed, 22 insertions(+), 10 deletions(-)
+-
+-diff --git a/plug-ins/common/file-iff.c b/plug-ins/common/file-iff.c
+-index d144a96..f087947 100644
+---- a/plug-ins/common/file-iff.c
+-+++ b/plug-ins/common/file-iff.c
+-@@ -337,7 +337,7 @@ load_image (GFile        *file,
+-       width      =3D bitMapHeader->w;
+-       height     =3D bitMapHeader->h;
+-       nPlanes    =3D bitMapHeader->nPlanes;
+--      row_length =3D (width + 15) / 16;
+-+      row_length =3D ((width + 15) / 16) * 2;
+-       pixel_size =3D nPlanes / 8;
+-       aspect_x   =3D bitMapHeader->xAspect;
+-       aspect_y   =3D bitMapHeader->yAspect;
+-@@ -375,6 +375,18 @@ load_image (GFile        *file,
+-             {
+-               /* EHB mode adds 32 more colors. Each are half the RGB va=
+lues
+-                * of the first 32 colors */
+-+              if (palette_size < 32)
+-+                {
+-+                  g_set_error (error, G_FILE_ERROR,
+-+                               g_file_error_from_errno (errno),
+-+                               _("Invalid ILBM colormap size"));
+-+                  return NULL;
+-+                }
+-+              else if (palette_size > 32)
+-+                {
+-+                  palette_size =3D 32;
+-+                }
+-+
+-               for (gint j =3D 0; j < palette_size * 2; j++)
+-                 {
+-                   gint offset_index =3D j + 32;
+-@@ -386,7 +398,7 @@ load_image (GFile        *file,
+-                   gimp_cmap[offset_index * 3 + 2] =3D
+-                     colorMap->colorRegister[j].blue / 2;
+-                 }
+--              /* EHB mode always has 64 colors */
+-+              /* EHB mode always has 64 colors in total */
+-               palette_size =3D 64;
+-             }
+-         }
+-@@ -447,7 +459,7 @@ load_image (GFile        *file,
+-         {
+-           guchar *pixel_row;
+-=20
+--          pixel_row =3D g_malloc (width * pixel_size * sizeof (guchar))=
+;
+-+          pixel_row =3D g_malloc0 (width * pixel_size);
+-=20
+-           /* PBM uses one byte per pixel index */
+-           if (ILBM_imageIsPBM (true_image))
+-@@ -459,7 +471,7 @@ load_image (GFile        *file,
+-           else
+-             deleave_rgb_row (bitplanes, pixel_row, width, nPlanes, pixe=
+l_size);
+-=20
+--          bitplanes +=3D (row_length * 2 * nPlanes);
+-+          bitplanes +=3D (row_length * nPlanes);
+-=20
+-           gegl_buffer_set (buffer, GEGL_RECTANGLE (0, y_height, width, =
+1), 0,
+-                            NULL, pixel_row, GEGL_AUTO_ROWSTRIDE);
+-@@ -528,7 +540,7 @@ deleave_ham_row (const guchar *gimp_cmap,
+-   /* Deleave rows */
+-   for (gint i =3D 0; i < row_length; i++)
+-     {
+--      for (gint j =3D 0; j < 8; j++)
+-+      for (gint j =3D 0; j < nPlanes; j++)
+-         {
+-           guint8 bitmask =3D (1 << (8 - j)) - (1 << (7 - j));
+-           guint8 control =3D 0;
+-@@ -590,11 +602,11 @@ deleave_ham_row (const guchar *gimp_cmap,
+- }
+-=20
+- static void
+--deleave_rgb_row (IFF_UByte  *bitplanes,
+--                     guchar *pixel_row,
+--                     gint    width,
+--                     gint    nPlanes,
+--                     gint    pixel_size)
+-+deleave_rgb_row (IFF_UByte *bitplanes,
+-+                 guchar    *pixel_row,
+-+                 gint       width,
+-+                 gint       nPlanes,
+-+                 gint       pixel_size)
+- {
+-   gint row_length    =3D ((width + 15) / 16) * 2;
+-   gint current_pixel =3D 0;
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch b/met=
+a-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
+deleted file mode 100644
+index e7821d3109..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From d30875b606085316b1cb7ac1da0d26e5bac0cf2c Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Thu, 13 Nov 2025 18:26:51 -0500
+-Subject: [PATCH] app: fix #15288 crash when loading malformed xcf
+-
+-From: Jacob Boerema <jgboerema@gmail.com>
+-
+-ZDI-CAN-28376 vulnerability
+-
+-Add extra tests to not crash on a NULL g_class.
+-
+-CVE: CVE-2025-14424
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+5cc55d078b7fba995cef77d195fac325ee288ddd]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- app/core/gimpitemlist.c | 5 ++++-
+- 1 file changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/app/core/gimpitemlist.c b/app/core/gimpitemlist.c
+-index 6473938..a431519 100644
+---- a/app/core/gimpitemlist.c
+-+++ b/app/core/gimpitemlist.c
+-@@ -345,7 +345,10 @@ gimp_item_list_named_new (GimpImage   *image,
+-   g_return_val_if_fail (GIMP_IS_IMAGE (image), NULL);
+-=20
+-   for (iter =3D items; iter; iter =3D iter->next)
+--    g_return_val_if_fail (g_type_is_a (G_OBJECT_TYPE (iter->data), item=
+_type), NULL);
+-+    {
+-+      g_return_val_if_fail (iter->data && ((GTypeInstance*) (iter->data=
+))->g_class, NULL);
+-+      g_return_val_if_fail (g_type_is_a (G_OBJECT_TYPE (iter->data), it=
+em_type), NULL);
+-+    }
+-=20
+-   if (! items)
+-     {
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch b/met=
+a-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
+deleted file mode 100644
+index 44e9587570..0000000000
+--- a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-From 042e27792026460badbe49664c02fe181e95cb2b Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Wed, 12 Nov 2025 13:25:44 +0000
+-Subject: [PATCH] plug-ins: Mitigate ZDI-CAN-28248 for JP2 images
+-
+-From: Alx Sa <cmyk.student@gmail.com>
+-
+-Resolves #15285
+-Per the report, it's possible to exceed the size of the pixel buffer
+-with a high precision_scaled value, as we size it to the width * bpp.
+-This patch includes precision_scaled in the allocation calculation.
+-It also adds a g_size_checked_mul () check to ensure there's no
+-overflow, and moves the pixel and buffer memory freeing to occur
+-in the out section so that it always runs even on failure.
+-
+-CVE: CVE-2025-14425
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
+cd1c88a0364ad1444c06536731972a99bd8643fd]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- plug-ins/common/file-jp2-load.c | 23 ++++++++++++++++-------
+- 1 file changed, 16 insertions(+), 7 deletions(-)
+-
+-diff --git a/plug-ins/common/file-jp2-load.c b/plug-ins/common/file-jp2-=
+load.c
+-index 064b616..604313a 100644
+---- a/plug-ins/common/file-jp2-load.c
+-+++ b/plug-ins/common/file-jp2-load.c
+-@@ -1045,14 +1045,15 @@ load_image (GimpProcedure     *procedure,
+-   GimpColorProfile    *profile    =3D NULL;
+-   GimpImage           *gimp_image =3D NULL;
+-   GimpLayer           *layer;
+-+  GeglBuffer          *buffer     =3D NULL;
+-+  guchar              *pixels     =3D NULL;
+-+  gsize                pixels_size;
+-   GimpImageType        image_type;
+-   GimpImageBaseType    base_type;
+-   gint                 width;
+-   gint                 height;
+-   gint                 num_components;
+--  GeglBuffer          *buffer;
+-   gint                 i, j, k, it;
+--  guchar              *pixels;
+-   const Babl          *file_format;
+-   gint                 bpp;
+-   GimpPrecision        image_precision;
+-@@ -1318,7 +1319,15 @@ load_image (GimpProcedure     *procedure,
+-   bpp =3D babl_format_get_bytes_per_pixel (file_format);
+-=20
+-   buffer =3D gimp_drawable_get_buffer (GIMP_DRAWABLE (layer));
+--  pixels =3D g_new0 (guchar, width * bpp);
+-+
+-+  if (! g_size_checked_mul (&pixels_size, width, (bpp * (precision_scal=
+ed / 8))))
+-+    {
+-+      g_set_error (error, GIMP_PLUG_IN_ERROR, 0,
+-+                   _("Defined row size is too large in JP2 image '%s'."=
+),
+-+                   gimp_file_get_utf8_name (file));
+-+      goto out;
+-+    }
+-+  pixels =3D g_new0 (guchar, pixels_size);
+-=20
+-   for (i =3D 0; i < height; i++)
+-     {
+-@@ -1344,13 +1353,13 @@ load_image (GimpProcedure     *procedure,
+-         gegl_buffer_set (buffer, GEGL_RECTANGLE (0, i, width, 1), 0,
+-                          file_format, pixels, GEGL_AUTO_ROWSTRIDE);
+-     }
+--
+--  g_free (pixels);
+--
+--  g_object_unref (buffer);
+-   gimp_progress_update (1.0);
+-=20
+-  out:
+-+  if (pixels)
+-+    g_free (pixels);
+-+  if (buffer)
+-+    g_object_unref (buffer);
+-   if (profile)
+-     g_object_unref (profile);
+-   if (image)
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb b/meta-gnome/reci=
+pes-gimp/gimp/gimp_3.0.8.bb
+similarity index 92%
+rename from meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
+rename to meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+index fa192555bc..a5e892c508 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.6.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+@@ -46,7 +46,7 @@ DEPENDS:append:libc-musl =3D " libexecinfo"
+=20
+ LDFLAGS:append:libc-musl =3D " -lexecinfo"
+=20
+-inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspe=
+ction vala
++inherit meson gtk-icon-cache mime-xdg pkgconfig gettext gobject-introspe=
+ction vala bash-completion
+=20
+ GIR_MESON_OPTION =3D 'can-crosscompile-gir'
+ VALA_MESON_OPTION =3D "vala"
+@@ -57,16 +57,11 @@ GIDOCGEN_MESON_ENABLE_FLAG =3D "enabled"
+ GIDOCGEN_MESON_DISABLE_FLAG =3D "disabled"
+=20
+ SRC_URI =3D "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
+-           file://0001-gimp-cross-compile-fix-for-bz2.patch \
+            file://0002-meson.build-reproducibility-fix.patch \
+            file://0001-meson.build-dont-check-for-lgi.patch \
+            file://0001-meson.build-require-iso-codes-native.patch \
+-           file://CVE-2025-14422.patch \
+-           file://CVE-2025-14423.patch \
+-           file://CVE-2025-14424.patch \
+-           file://CVE-2025-14425.patch \
+            "
+-SRC_URI[sha256sum] =3D "246c225383c72ef9f0dc7703b7d707084bbf177bd2900e94=
+ce466a62862e296b"
++SRC_URI[sha256sum] =3D "feb498acc01b26827cff1ff95aa8fb82cdd6a60d7abf773c=
+fcd19abeafca3386"
+=20
+ PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
+ PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
+--=20
 2.52.0
 
 
