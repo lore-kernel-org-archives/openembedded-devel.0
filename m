@@ -1,381 +1,248 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A32A7D25942
-	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:53:44 +0000 (UTC)
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3825.1769493224173045200
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ADBF9D25943
+	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:54:54 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3823.1769493218804342051
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 21:53:44 -0800
+ Mon, 26 Jan 2026 21:53:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bR+EnTSs;
- spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-79273a294edso50892097b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 21:53:44 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769493223; cv=none;
-        d=google.com; s=arc-20240605;
-        b=guKC/3NbLbqPyPq0ENlRuUA+cfmUIzcXwjU6QYWwq/7C+hhzWISQthXl/Adb9Wzyh0
-         Uhc3LcYyLa6ewRUXi8VKi67EK6hY1BouE7Hsv6Drp89h5cwUSgYUk5jV5yM4T+7TqvZ0
-         3CssfesohuwJ5yE50WtbP/CUhxHBbdKRwh5vt9wMk2K52oFPqQY7uZ7TabuTp/GzuPFH
-         NB9uou1WvDzpqrNwgA6/vFsQpPqAENYf+CWf509LghKR3V9ZJoXTZ70O+34czX8rNPAW
-         YMEgiGOgK+6LkLXPIPaC94CsR4UTv2wxfEinPdRa8GTUrrGUrJ/Knti4MWgY0SxeHSVn
-         eCYg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
-        fh=RnZMXDUlwXY8UgMJsCy3860tY0uphmLPDqFPKV9t5MY=;
-        b=TDDNh2uIVzbYKIvTKzlobMq3K+MUJf/6Cz8H3Ya/gJjFrR4EVhq456tFXYSwnCzjk3
-         DdsXK0g2Qfbh9sKDg6TyALQaZJciyWLIyaJ/RYoGZmlxKroYyq0JXxk8Ymw+Twv/HO/j
-         IEiLkv5axf30g1/JESAxvx33zkAhixbycwPnW7rGFTCmdu1jZ6Yo02OSgmsynOCdfcLl
-         RwehIWDsunphRLFudDUA8HPjYfW3xWX4erm9B8oYdL8H3fb7rn5B+0Ok84QLYNoEKuEN
-         LaAfMC1V+wgIkbphnlMqUG6Oq6qBG7piFA4rtiKa5Or5TWzyxiqIgW0Buzitluj7nhEg
-         93BQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769493223; x=1770098023; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
-        b=bR+EnTSs6B8HRSMCgutuaf8jDGvDR4ZRDk/doq0yqTRJkirKpCzEvpo1vfY+KwQpTh
-         oi5fNqqlI/TmWXrtcLwLS4inivErYdxz34dQCF0JOgAcejLIyMkgm2/nE7wz+zhpAMmE
-         A0cVH2BFEI/VJa6bEdDHXGt8wQETh0BAZcEZ0ndiuTgQe01sPqA1H4sgyaM/NdvveKuW
-         d18f2eTsf8F6odxmtjx8v2q2RhAbLk0esScB0UyFaSTFCPxzk2b7gOBYAN6sKqN0pLFf
-         wPNj2b7UpYp6lqmuHXQ+0wFxRxcFvbKTlVIJ5FB2PopuaueQdCTRfNYwmWy5pMbr2HC8
-         ftWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769493223; x=1770098023;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
-        b=iOIgEdvRkeIu/fCKaEN3/MNUsDY98kxzzCfEscfVQjE62JmC6mzKCEfoSYdtVIE0fh
-         U8bEkev1u+ANvEYKuS7reuhLpJG31MCiZE4YQh+/q+iTd8/QXzXe6ef1vZ/6NvnAbM+u
-         LqVIE55ljeJ4q16HI0sOv+dUD2LnlezRS5QIqGxevdI4/hUiXkmu4fs0Zm+yunVMTRGQ
-         0Vd1UKoeujMXcD+kE3O/RnzEe+7cgeymGtjUl3m3ZWqoQwx3p/rgqYgWLuiRf7L3IXlJ
-         mEpHeVk7lnUBJZP+ZtQFVuCF+xf1FA58RnU5hIfK6YRuVG+X8I2t12Ri1QDuB9bPFYVN
-         G0TQ==
-X-Gm-Message-State: AOJu0Yy1Wgq4s5Qkxm8+uf3pp8Dh60SEzP5ijuEAY20ZFOFLw3he+hK1
-	s40txksN4DXZchaONlZg70b1ildPznFMQ9HQulS0CsgpZVlHGVBmZgvnam3c6wATLIviYBLN1Ka
-	J6vDaq1mYnSjRDk49e8x7dT/J1qQuKhWb7tlk
-X-Gm-Gg: AZuq6aJ1FU7LYlAxCMd79ylEI66cgkRhwg8HEWmDOd12RkawULDxHy5YqsHoJv1bqoO
-	NA3uzE8rn0YOhVW+zwnvrv+hQOfOCjvtJCnBe6BMJTHu5PIqqkUG1IQLKj1rP7pC86kzDdVuc06
-	kERHa7Fk7DRLCBV70mqwwbIDKfu3g1ZTSoD/CFOZjKi77QgjnHv/5jx8oNN/wS4qkEIErMI0VRI
-	J4HAqO0+OahITqXCJ5xYhCmGMkc2FUHIuGG8GWVQyEdRLbaNYxnvi2GI+cYahfrZGedkHUosicE
-	GPZL4dSJ1qmPyvFLrSAiKUYGVsps0FX+cWTah0zyTohCaxJszPL0G9WNOGB23qPln/czdeVBWV8
-	/ggLdJs3ybZnFFmDIQhOqAlJCCog+ikXWQ0D2VXpMV8gA
-X-Received: by 2002:a05:690c:3347:b0:78c:69fe:eb1d with SMTP id
- 00721157ae682-7947ab157bamr3661207b3.17.1769493223104; Mon, 26 Jan 2026
- 21:53:43 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Tdl40C+4;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: shoudil@qualcomm.com)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60R4UeTF142320
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=oKOgYTXBp9+tspbNZOD5e1t4uWv22wRfH/v
+	J5kq/MQA=; b=Tdl40C+46ASCKpPVi7DGOOA5W1TVYvDJsjL2gett0L0x2+mEe/d
+	LmqHEVPJnWSrey0LW7eHA5CMmB7MCuwMPR1plQTECCk0qHMyIVZpfzuL2/6iH7U2
+	JR0wj62mcq29j8uVckowWCcbvdMHW2CV2NaY7cyvlKNtzLDYxQlUXm6N/odZCWBH
+	ZbRSPeBcxlEZF9EhVY7pZIJsi+R4tuiDt7sujpscULuaKn6B2O8abJBkNtD3OCWO
+	jjfMvOeAX4VMoOezCboWfX17bQM4z53cqgRqinJ6U0Vw8YzWcEYW9EIDNG1vDSu+
+	ALIApm8H6KaK/lbF/EkC7xcrgE7NuIUOusQ==
+Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4bxcb0hyte-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:37 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 60R5rYt0019245
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:34 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 4bvq5m2950-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:34 +0000
+Received: from APTAIPPMTA02.qualcomm.com (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 60R5rYwt019195
+	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:34 GMT
+Received: from shoudil2-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 60R5rWoK018820
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 27 Jan 2026 05:53:34 +0000
+Received: by shoudil2-gv.ap.qualcomm.com (Postfix, from userid 367460)
+	id BA56255F; Tue, 27 Jan 2026 13:53:31 +0800 (CST)
+From: "Shoudi Li" <shoudil@qti.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Shoudi Li <shoudil@qti.qualcomm.com>
+Subject: [meta-oe][PATCH v3] android-tools-conf-configfs: remove this recipe without selinux dependency
+Date: Tue, 27 Jan 2026 13:53:29 +0800
+Message-ID: <20260127055329.3727567-1-shoudil@qti.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <188E438EFF05B728.3837557@lists.openembedded.org> <20260126121236.1304966-2-frederikbraendstrup@gmail.com>
-In-Reply-To: <20260126121236.1304966-2-frederikbraendstrup@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Jan 2026 21:53:17 -0800
-X-Gm-Features: AZwV_QhCpYCkgF92polDjkw7IXnR0z2XUWnNHZB_tNudtTxPqSN9-useS_5ZYeQ
-Message-ID: <CAMKF1spENDOL3q_ftgBfO5+i_44D5m2gg7FLUgQp8CeRYY6Dkg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v4] liboauth2: Add recipe at 2.2.0
-To: frederikbraendstrup@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000fee98f0649583ea2"
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: hgM0VlFvsW8lt_bhlep0pltILm-XefbK
+X-Proofpoint-GUID: hgM0VlFvsW8lt_bhlep0pltILm-XefbK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI3MDA0NiBTYWx0ZWRfX4riGGM7CL+BQ
+ ORtGUTL0CqBcgpD9gkS7t9wAQkOhdQ6C3KhFl6zKbB7G9LjDl44CcNnkEpWeGhvVI9gWY+lN2fE
+ pXaiTlNFaVpIU9c/h7ROT6nlBMgnKnJCdL/T+8bosApMg0RNnAAMaWGqpJ35VZNSQOe30isGrzq
+ zZzerJ+I2fIWWXEkvocuBfAmq750L9AJu/GyObTl+vVICf7fiBa7+I2MZZE5rmLdCD0l4UzdAdx
+ oXOSGGIa5AA+0GjSmMq4D2BMDasGJlHZdeyuwqRe48DBa1FCoqFkjMABYV2n6SxgS0209yK7XNV
+ ZOqbQISKRDLqBMoA8qsgtePhyR+eAZydBYhX0zdFOIvGP1iRc1HN6gWAfK6qL1cyTZfriyi6clq
+ LOacRtBTR46pFjfK9PUJBCzua1Qev6dF0nHtc296TndF6lcphaJn+abtgiW0t40EI7QBSALU3fq
+ iSPlc9zFrllN3sFyJMg==
+X-Authority-Analysis: v=2.4 cv=IdyKmGqa c=1 sm=1 tr=0 ts=697852e1 cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8
+ a=1ni_ke5EW6YKA92IucEA:9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.20,FMLib:17.12.100.49
+ definitions=2026-01-27_01,2026-01-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 adultscore=0 malwarescore=0 clxscore=1015
+ bulkscore=0 priorityscore=1501 spamscore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601270046
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123898
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:54:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123899
 
---000000000000fee98f0649583ea2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+For the boards with multiple UDC ports, when compiling with meta-selinux
+layer adb funtion will be impacted due to below error. Remove the recipe
+under dynamic-layers/selinux/ to avoid it.
 
-On Mon, Jan 26, 2026 at 4:13=E2=80=AFAM Frederik Br=C3=A6ndstrup via
-lists.openembedded.org <frederikbraendstrup=3Dgmail.com@lists.openembedded.=
-org>
-wrote:
+ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
+ls: write error: Device or resource busy
 
-> V3: adds fixes for building with clang
->
-> V4: removes default PACKAGECONFIG used for testing builds
->
-> Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-> ---
->  ..._easy_setopt-takes-a-long-not-an-int.patch | 33 +++++++++++++++++++
->  .../liboauth2/liboauth2_2.2.0.bb              | 23 +++++++++++++
->  2 files changed, 56 insertions(+)
->  create mode 100644
-> meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_seto=
-pt-takes-a-long-not-an-int.patch
->  create mode 100644 meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
->
-> diff --git
-> a/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
-topt-takes-a-long-not-an-int.patch
-> b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
-topt-takes-a-long-not-an-int.patch
-> new file mode 100644
-> index 0000000000..bdb4a0f108
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
-topt-takes-a-long-not-an-int.patch
-> @@ -0,0 +1,33 @@
-> +From a9f28a44b9b387ef28904e24ca05d28562fdcc45 Mon Sep 17 00:00:00 2001
-> +From: Frede Hoey Braendstrup <frede@vokalo.io>
-> +Date: Mon, 26 Jan 2026 11:07:24 +0100
-> +Subject: [PATCH] fix(clang): curl_easy_setopt takes a long not an int
-> +
-> +Signed-off-by: Frede Hoey Braendstrup <frede@vokalo.io>
-> +Upstream-status: Backport https://github.com/OpenIDC/liboauth2/pull/69
+Signed-off-by: Shoudi Li <shoudil@qti.qualcomm.com>
+---
+ .../10-adbd-configfs.conf                     |  4 --
+ .../android-gadget-cleanup                    | 24 ------------
+ .../android-gadget-setup                      | 35 ------------------
+ .../android-gadget-start                      |  7 ----
+ .../android-tools-conf-configfs_1.0.bb        | 37 -------------------
+ 5 files changed, 107 deletions(-)
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
 
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+deleted file mode 100644
+index ddf155a907..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
++++ /dev/null
+@@ -1,4 +0,0 @@
+-[Service]
+-ExecStartPre=/usr/bin/android-gadget-setup
+-ExecStartPost=/usr/bin/android-gadget-start
+-ExecStopPost=/usr/bin/android-gadget-cleanup
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+deleted file mode 100644
+index 517227d4a6..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
++++ /dev/null
+@@ -1,24 +0,0 @@
+-#!/bin/sh
+-
+-[ -d /sys/kernel/config/usb_gadget ] || exit 0
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-cd adb
+-
+-echo "" > UDC || true
+-
+-killall adbd || true
+-
+-umount /dev/usb-ffs/adb
+-
+-rm configs/c.1/ffs.usb0
+-
+-rmdir configs/c.1/strings/0x409
+-rmdir configs/c.1
+-
+-rmdir functions/ffs.usb0
+-rmdir strings/0x409
+-
+-cd ..
+-rmdir adb
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
+deleted file mode 100644
+index e44d1bacbe..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
++++ /dev/null
+@@ -1,35 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-manufacturer=RPB
+-model="Android device"
+-serial=0123456789ABCDEF
+-
+-if [ -r /etc/android-gadget-setup.machine ] ; then
+-	. /etc/android-gadget-setup.machine
+-fi
+-
+-[ -d /sys/kernel/config/usb_gadget ] || modprobe libcomposite
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-[ -d adb ] && /usr/bin/android-gadget-cleanup || true
+-
+-mkdir adb
+-cd adb
+-
+-mkdir configs/c.1
+-mkdir functions/ffs.usb0
+-mkdir strings/0x409
+-mkdir configs/c.1/strings/0x409
+-echo 0x18d1 > idVendor
+-echo 0xd002 > idProduct
+-echo "$serial" > strings/0x409/serialnumber
+-echo "$manufacturer" > strings/0x409/manufacturer
+-echo "$model" > strings/0x409/product
+-echo "Conf 1" > configs/c.1/strings/0x409/configuration
+-ln -s functions/ffs.usb0 configs/c.1
+-
+-mkdir -p /dev/usb-ffs/adb
+-mount -t functionfs usb0 /dev/usb-ffs/adb
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
+deleted file mode 100644
+index ca6c3df275..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-sleep 3
+-
+-ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
+deleted file mode 100644
+index 4d30327372..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-DESCRIPTION = "Various utilities from Android - corresponding configuration files for using ConfigFS"
+-SECTION = "console/utils"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-
+-S = "${UNPACKDIR}"
+-
+-SRC_URI = " \
+-    file://android-gadget-setup \
+-    file://android-gadget-start \
+-    file://android-gadget-cleanup \
+-    file://10-adbd-configfs.conf \
+-"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-setup ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-start ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-cleanup ${D}${bindir}
+-
+-    if [ -r ${UNPACKDIR}/android-gadget-setup.machine ] ; then
+-	install -d ${D}${sysconfdir}
+-	install -m 0644 ${UNPACKDIR}/android-gadget-setup.machine ${D}${sysconfdir}
+-    fi
+-
+-    install -d ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-    install -m 0644 ${UNPACKDIR}/10-adbd-configfs.conf ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-}
+-
+-FILES:${PN} += " \
+-    ${systemd_unitdir}/system/ \
+-"
+-
+-PROVIDES += "android-tools-conf"
+-RPROVIDES:${PN} = "android-tools-conf"
+-- 
+2.43.0
 
-Upstream status has a certain format, please make it so.
-Upstream-Status: Backport [URL]
-
-
->
-> +---
-> + src/http.c | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/http.c b/src/http.c
-> +index ab7a25a..bc242ed 100644
-> +--- a/src/http.c
-> ++++ b/src/http.c
-> +@@ -1024,7 +1024,7 @@ bool oauth2_http_call(oauth2_log_t *log, const cha=
-r
-> *url, const char *data,
-> +       curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 5L);
-> +
-> +       if (ctx)
-> +-              curl_easy_setopt(curl, CURLOPT_TIMEOUT, ctx->timeout);
-> ++              curl_easy_setopt(curl, CURLOPT_TIMEOUT,
-> (long)ctx->timeout);
-> +
-> +       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION,
-> +                        oauth2_http_curl_buf_write);
-> +@@ -1092,7 +1092,7 @@ bool oauth2_http_call(oauth2_log_t *log, const cha=
-r
-> *url, const char *data,
-> +
-> +       if (data !=3D NULL) {
-> +               curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-> +-              curl_easy_setopt(curl, CURLOPT_POST, 1);
-> ++              curl_easy_setopt(curl, CURLOPT_POST, 1L);
-> +       }
-> +
-> +       if (ctx)
-> diff --git a/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> new file mode 100644
-> index 0000000000..31d7aec69d
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY =3D "OAuth 2.x and OpenID Connect C library"
-> +HOMEPAGE =3D "https://github.com/OpenIDC/liboauth2"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
-a93"
-> +
-> +SRC_URI =3D " \
-> +    git://
-> github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=3Dv${PV=
-}
-> <http://github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=
-=3Dv$%7BPV%7D>
-> \
-> +    file://0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-int.patch=
- \
-> +    "
-> +
-> +PV =3D "2.2.0"
-> +SRCREV =3D "12571b6d6568c2db7d5f080f60ecb55795c0db19"
-> +
-> +DEPENDS =3D "libpcre2 jansson curl openssl cjose"
-> +
-> +inherit pkgconfig autotools-brokensep
-> +
-> +PACKAGECONFIG ??=3D ""
-> +PACKAGECONFIG[memcache] =3D
-> "--with-memcache,--without-memcache,libmemcached"
-> +PACKAGECONFIG[redis] =3D "--with-redis,--without-redis,hiredis"
-> +PACKAGECONFIG[jq] =3D "--with-jq,--without-jq,jq"
-> +PACKAGECONFIG[apache] =3D "--with-apache,--without-apache,apache2"
-> +
-> --
-> 2.52.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123874):
-> https://lists.openembedded.org/g/openembedded-devel/message/123874
-> Mute This Topic: https://lists.openembedded.org/mt/117466911/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000fee98f0649583ea2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan 26,=
- 2026 at 4:13=E2=80=AFAM Frederik Br=C3=A6ndstrup via <a href=3D"http://lis=
-ts.openembedded.org">lists.openembedded.org</a> &lt;frederikbraendstrup=3D<=
-a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembe=
-dded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">V3: adds fixes for building with clang<br>
-<br>
-V4: removes default PACKAGECONFIG used for testing builds<br>
-<br>
-Signed-off-by: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frederikbraends=
-trup@gmail.com" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
----<br>
-=C2=A0..._easy_setopt-takes-a-long-not-an-int.patch | 33 ++++++++++++++++++=
-+<br>
-=C2=A0.../liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D"noreferrer=
-" target=3D"_blank">liboauth2_2.2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 23 +++++++++++++<br>
-=C2=A02 files changed, 56 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/liboauth2/liboauth2/0001-f=
-ix-clang-curl_easy_setopt-takes-a-long-not-an-int.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/liboauth2/<a href=3D"http:=
-//liboauth2_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.=
-bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-cur=
-l_easy_setopt-takes-a-long-not-an-int.patch b/meta-oe/recipes-support/liboa=
-uth2/liboauth2/0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-int.patc=
-h<br>
-new file mode 100644<br>
-index 0000000000..bdb4a0f108<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_=
-setopt-takes-a-long-not-an-int.patch<br>
-@@ -0,0 +1,33 @@<br>
-+From a9f28a44b9b387ef28904e24ca05d28562fdcc45 Mon Sep 17 00:00:00 2001<br>
-+From: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frede@vokalo.io" target=
-=3D"_blank">frede@vokalo.io</a>&gt;<br>
-+Date: Mon, 26 Jan 2026 11:07:24 +0100<br>
-+Subject: [PATCH] fix(clang): curl_easy_setopt takes a long not an int<br>
-+<br>
-+Signed-off-by: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frede@vokalo.i=
-o" target=3D"_blank">frede@vokalo.io</a>&gt;<br>
-+Upstream-status: Backport <a href=3D"https://github.com/OpenIDC/liboauth2/=
-pull/69" rel=3D"noreferrer" target=3D"_blank">https://github.com/OpenIDC/li=
-boauth2/pull/69</a></blockquote><div><br></div><div>Upstream status has a c=
-ertain format, please make it so.</div><div>Upstream-Status: Backport [URL]=
-</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><b=
-r>
-+---<br>
-+ src/http.c | 4 ++--<br>
-+ 1 file changed, 2 insertions(+), 2 deletions(-)<br>
-+<br>
-+diff --git a/src/http.c b/src/http.c<br>
-+index ab7a25a..bc242ed 100644<br>
-+--- a/src/http.c<br>
-++++ b/src/http.c<br>
-+@@ -1024,7 +1024,7 @@ bool oauth2_http_call(oauth2_log_t *log, const char =
-*url, const char *data,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 5L);<=
-br>
-+ <br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx)<br>
-+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
-URLOPT_TIMEOUT, ctx-&gt;timeout);<br>
-++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
-URLOPT_TIMEOUT, (long)ctx-&gt;timeout);<br>
-+ <br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION,<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 oauth2_http_curl_buf_write);<br>
-+@@ -1092,7 +1092,7 @@ bool oauth2_http_call(oauth2_log_t *log, const char =
-*url, const char *data,<br>
-+ <br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0if (data !=3D NULL) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(cu=
-rl, CURLOPT_POSTFIELDS, data);<br>
-+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
-URLOPT_POST, 1);<br>
-++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
-URLOPT_POST, 1L);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-+ <br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx)<br>
-diff --git a/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_=
-2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a> b/met=
-a-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D=
-"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
-new file mode 100644<br>
-index 0000000000..31d7aec69d<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.b=
-b" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
-@@ -0,0 +1,23 @@<br>
-+SUMMARY =3D &quot;OAuth 2.x and OpenID Connect C library&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/OpenIDC/liboauth2" rel=3D=
-"noreferrer" target=3D"_blank">https://github.com/OpenIDC/liboauth2</a>&quo=
-t;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2ee41112a44fe7014dce33e264=
-68ba93&quot;<br>
-+<br>
-+SRC_URI =3D &quot; \<br>
-+=C2=A0 =C2=A0 git://<a href=3D"http://github.com/OpenIDC/liboauth2;protoco=
-l=3Dhttps;branch=3Dmaster;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=3D"_b=
-lank">github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=3Dv=
-${PV}</a> \<br>
-+=C2=A0 =C2=A0 file://0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-i=
-nt.patch \<br>
-+=C2=A0 =C2=A0 &quot;<br>
-+<br>
-+PV =3D &quot;2.2.0&quot;<br>
-+SRCREV =3D &quot;12571b6d6568c2db7d5f080f60ecb55795c0db19&quot;<br>
-+<br>
-+DEPENDS =3D &quot;libpcre2 jansson curl openssl cjose&quot;<br>
-+<br>
-+inherit pkgconfig autotools-brokensep<br>
-+<br>
-+PACKAGECONFIG ??=3D &quot;&quot;<br>
-+PACKAGECONFIG[memcache] =3D &quot;--with-memcache,--without-memcache,libme=
-mcached&quot;<br>
-+PACKAGECONFIG[redis] =3D &quot;--with-redis,--without-redis,hiredis&quot;<=
-br>
-+PACKAGECONFIG[jq] =3D &quot;--with-jq,--without-jq,jq&quot;<br>
-+PACKAGECONFIG[apache] =3D &quot;--with-apache,--without-apache,apache2&quo=
-t;<br>
-+<br>
--- <br>
-2.52.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123874): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123874" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123874</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117466911/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117466911/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000fee98f0649583ea2--
 
