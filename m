@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86B5ED2F018
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97EA2D2F01C
 	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 13:01:29 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10484.1769518883595613947
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10164.1769518881086798465
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 05:01:23 -0800
+ Tue, 27 Jan 2026 05:01:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kUEHSc/k;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-42fed090e5fso3448608f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:01:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BqIfIyAm;
+ spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-430f2ee2f00so3338948f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:01:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769518882; x=1770123682; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769518879; x=1770123679; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZlutXmArAiXLrl8PvE4S6IakkhDmugnQhl4ml8IaP98=;
-        b=kUEHSc/kIqWAwzP41ApkuHxi+dPJFnwtzd9QkGnCZIxmOc2l4usqyefv6y2Ea31xd3
-         p66tSgW8l6GA8et37OTUlPSY5TImV9N3V4/so2D719wK/YivXGr4lCaAdwPkrkBEGz4t
-         mKpjXbgtATjElr/eLlxYdpcmvZoA5uSXHT9gsxeg3FKwnvGiqAcucuEYVNTTwxHgI2mZ
-         DPTAiQb2F2OHGP+6LTPh5k5AMPDvS8zIhEZxsTk5yKa3BC07+0SmwDKjyGAqsRTvewnM
-         8hoXZJg3liOJ9vzaPhkMuqb8uNrPj9Sky5t0J1V8XRjfiBvi0lxVnsGQ6bXhx5W2fh+I
-         tg8Q==
+        bh=fW0D/CYl2n2n2OSUFzf+4vxRHBbEONdmuWy6YfGnF2c=;
+        b=BqIfIyAmmb7o4RsmNt7JnLVkh5lGLIk+OQZkdwf8VmXUWENSNetdST8GMZ/xDbq5SU
+         v9/jh6UpNp7WZf3FNgcsGEu0cmuNA2Nm43Cu0MfaRP1Tp47LH5vfw1wjbS3NsB1TfEI+
+         eHiacsyzKKMQWLujE+/edWJZOmddJCB6KKWn11v7psmsIo+kLU/3Ks+KS19Es9S0dUXK
+         t868U7J9rGme5bm0//kCND+PFxatM4xe1uGYpfV5cCEgHzS5EpFb+WNnc091WIzrki0i
+         9J6vojNYUBOhod3BPF/ZVDZwsqS+YEU/NdpTPYeSbVjE5PyjT6dcp87AxnkDCdQS6hc0
+         JHfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769518882; x=1770123682;
+        d=1e100.net; s=20230601; t=1769518879; x=1770123679;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=ZlutXmArAiXLrl8PvE4S6IakkhDmugnQhl4ml8IaP98=;
-        b=aiuW4g/uuIUAYe2jN7c0pPi2buekPrD3yd1rmTpGctoh6CDJHauS/R+/HyCdfCJue/
-         BWmFSBEZID2qXkvbMlVNXSgpWri+Rl6uLu7NPiVx17S5GvEtc2+mc3UgZlpclXWLIRK1
-         YMSv4VcOycRldoaYqBKvC5WYFjerUFgN6f04wO1jlecHQ1gt0oHKUPHcpYY26UNkuXPQ
-         LZBwY+cKRST2+o+ilHTOJ9u18TWGB2dgBVPgpxI+0qoFvUJ1YanysJRI4zGRdtV8Mes7
-         QWKAxhWQEGmTCZUaP1BODKsyHJhZgB+cHttlHKGvklis+L302c0VPx2fRtRWbipzdZI4
-         vR3A==
-X-Gm-Message-State: AOJu0YxMfcfCWrd/mqcwU0pQZ1S0dkqBufzTN47YiYTDVjlYfLxW5fV0
-	KtXjgwhx5Z2PuuJhg4oSbz96+Ph+DeBnVRr+wDzyE+f1dSzSoWQB5SqJx1SSVg==
-X-Gm-Gg: AZuq6aL88tFupYCvJicoWgsokIXQxhc0bmUbRBk3VV0GONZoxRvyZuECI0BYcJndvSm
-	4sjW2xdbNYUrjqsH+j1hTEHXKOzaV0np3ADUFD4nySbKKoj1KUpRFIJk9FelZx5SZflOQonySgu
-	8RAEaBJBmjo1w3fnphbqyscqN0DhvqG8wNIP9SMZl4U6YpZxogLETpjYA6YXAh7e/XkVcsGTJS6
-	wZG2wdVFeJIsPP8poSFhrhuH1LByM1NS7qp4YLwUJZSv1ImpTVy+yGuRPjh9j+W42y69wdUPNyN
-	EgUuvIjWIBHlO9AC1gMEpJj1a86myBRCXFq9cg4LTF/at50dUGNDssHQAHj3i0qHhEXY5dPsDs4
-	gVa1ZrpXqPTxW2UDDGzzwnrvranlUs2aRoML4ylW/NmsTr3nfL6fb+Q9XTE+NWbJpEfTP2Qbem/
-	PFrSEi7D8p
-X-Received: by 2002:a05:6000:230c:b0:435:9770:9eb6 with SMTP id ffacd0b85a97d-435dd1b9764mr2653330f8f.53.1769518881783;
-        Tue, 27 Jan 2026 05:01:21 -0800 (PST)
+        bh=fW0D/CYl2n2n2OSUFzf+4vxRHBbEONdmuWy6YfGnF2c=;
+        b=FQwzYEHpROjuiftuhUuPMUG93GThWow6SFGV6K/PeRst4HpfOfH64zDK9f+r72rIXJ
+         RNUfruLaC2igroihSHSeEnPzfATtr5X7yo2woarqtNlN870Gg1E056Egn6gxpdmhMgst
+         GvhDInz5N/bmPFfzFqtDDEMKg83zjFJNB0jecekixMw0o+K21S9VPG377xmYA2rxTxX1
+         50PP2qBQ+q8zs0K5/22jJFE+ILQ0lE/1jPKsK+ozzNE4nVt+Cbj2xYMK95RNxW6AD0Jv
+         06DjMBxzJqxmTsocCV0iBHS0JN/LO117kHfBw3QdO8c5itewHFOtYZuOreVmcRUNDK47
+         mz8w==
+X-Gm-Message-State: AOJu0YyuWkD9fTZw0I9bxPBmdtlaFy21HcG2VWN8rOVQeip+6qiSUkL8
+	fKI1/RXYTfMl6UQjRu05JIjoGIUyvJekpltE2a/y/UfBldN/rt1qhKpz3VycbQ==
+X-Gm-Gg: AZuq6aIzJZk2aoc/ChEMMVtcU4z7iRiCjQI3G+4cLbreSlfSb/ToPWkNACxzbx1mo3m
+	kJlCgy/PRijqv+VQR5n7KlcIJjW+4h9gN16vqvDKgvCbgCPPIKXl1bbdy/DecXR1rdSy2DxYMbv
+	9IqP3FtZTQhgMccZg6BkEGIGh/QvjRcB0LAY2Tp4JVZ2SAB5QW5r7cjWLKK8Cx9RkkUTLeofGKf
+	DXiYEocm51WawDnTEm9Nq4v7kn+d4Zj+oyOP1a5R6yq3RXxuVTfs7RpCe4lVVBg9MNuZ8P9J8E9
+	s7xx6h4Vs/W8sInL4cVho6KIi2Tnn6I4t5Qm2y+RXGoQfK6Z0k0yAGHugEwr+qbmoTUtuBFliKu
+	AbpKJpszRUL0j9LLflgj6NyMvPhbjz14upZlrBoQU/xQ4dD64kPl8Ug8606JJbhkCXo3DanR4gG
+	Y2qxEDiNDq
+X-Received: by 2002:a05:6000:288e:b0:432:5c34:fb22 with SMTP id ffacd0b85a97d-435dd05beb0mr2282343f8f.22.1769518879289;
+        Tue, 27 Jan 2026 05:01:19 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1c24a8asm37671577f8f.12.2026.01.27.05.01.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435b1c24a8asm37671577f8f.12.2026.01.27.05.01.18
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Jan 2026 05:01:21 -0800 (PST)
+        Tue, 27 Jan 2026 05:01:18 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][RFC PATCH 04/14] tigervnc: patch CVE-2023-6478
-Date: Tue, 27 Jan 2026 14:01:04 +0100
-Message-ID: <20260127130116.1902238-5-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][RFC PATCH 01/14] tigervnc: upgrade xorg-server component
+Date: Tue, 27 Jan 2026 14:01:01 +0100
+Message-ID: <20260127130116.1902238-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260127130116.1902238-1-skandigraun@gmail.com>
 References: <20260127130116.1902238-1-skandigraun@gmail.com>
@@ -67,100 +67,33 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 13:01:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123944
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123941
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-6478
-
-Pick the backported version of the commit referenced by the NVD report.
+Update xserver to the latest dot version of the used series.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../tigervnc/files/CVE-2023-6478.patch        | 65 +++++++++++++++++++
- .../tigervnc/tigervnc_1.11.0.bb               |  1 +
- 2 files changed, 66 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tigervnc/files/CVE-2023-6478.patch
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/files/CVE-2023-6478.patch b/meta-oe/recipes-graphics/tigervnc/files/CVE-2023-6478.patch
-new file mode 100644
-index 0000000000..765e83e196
---- /dev/null
-+++ b/meta-oe/recipes-graphics/tigervnc/files/CVE-2023-6478.patch
-@@ -0,0 +1,65 @@
-+From a0952cc293c0fbda15e7519b1af9c1c2d3d9475f Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Mon, 27 Nov 2023 16:27:49 +1000
-+Subject: [PATCH] randr: avoid integer truncation in length check of
-+ ProcRRChange*Property
-+
-+From: Peter Hutterer <peter.hutterer@who-t.net>
-+
-+Affected are ProcRRChangeProviderProperty and ProcRRChangeOutputProperty.
-+See also xserver@8f454b79 where this same bug was fixed for the core
-+protocol and XI.
-+
-+This fixes an OOB read and the resulting information disclosure.
-+
-+Length calculation for the request was clipped to a 32-bit integer. With
-+the correct stuff->nUnits value the expected request size was
-+truncated, passing the REQUEST_FIXED_SIZE check.
-+
-+The server then proceeded with reading at least stuff->num_items bytes
-+(depending on stuff->format) from the request and stuffing whatever it
-+finds into the property. In the process it would also allocate at least
-+stuff->nUnits bytes, i.e. 4GB.
-+
-+CVE-2023-6478, ZDI-CAN-22561
-+
-+This vulnerability was discovered by:
-+Jan-Niklas Sohn working with Trend Micro Zero Day Initiative
-+
-+(cherry picked from commit 14f480010a93ff962fef66a16412fafff81ad632)
-+(cherry picked from commit 58e83c683950ac9e253ab05dd7a13a8368b70a3c)
-+
-+CVE: CVE-2023-6478
-+Upstream-Status: Backport [https://gitlab.freedesktop.org/xorg/xserver/-/commit/58e83c683950ac9e253ab05dd7a13a8368b70a3c]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ randr/rrproperty.c         | 2 +-
-+ randr/rrproviderproperty.c | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/randr/rrproperty.c b/randr/rrproperty.c
-+index c2fb9585c..1fb89e67e 100644
-+--- a/randr/rrproperty.c
-++++ b/randr/rrproperty.c
-+@@ -530,7 +530,7 @@ ProcRRChangeOutputProperty(ClientPtr client)
-+     char format, mode;
-+     unsigned long len;
-+     int sizeInBytes;
-+-    int totalSize;
-++    uint64_t totalSize;
-+     int err;
-+ 
-+     REQUEST_AT_LEAST_SIZE(xRRChangeOutputPropertyReq);
-+diff --git a/randr/rrproviderproperty.c b/randr/rrproviderproperty.c
-+index b79c17f9b..90c5a9a93 100644
-+--- a/randr/rrproviderproperty.c
-++++ b/randr/rrproviderproperty.c
-+@@ -498,7 +498,7 @@ ProcRRChangeProviderProperty(ClientPtr client)
-+     char format, mode;
-+     unsigned long len;
-+     int sizeInBytes;
-+-    int totalSize;
-++    uint64_t totalSize;
-+     int err;
-+ 
-+     REQUEST_AT_LEAST_SIZE(xRRChangeProviderPropertyReq);
 diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
-index 7af347d858..a8eb397ba8 100644
+index 5cde7c9fb4..e3e2b6ee16 100644
 --- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
 +++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch;protocol=ht
-            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
-            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
-            file://CVE-2023-6377.patch;patchdir=${XORG_S} \
-+           file://CVE-2023-6478.patch;patchdir=${XORG_S} \
- "
+@@ -25,11 +25,11 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch;protocol=ht
  
  # Keep sync with xorg-server in oe-core
+ XORG_PN ?= "xorg-server"
+-XORG_PV ?= "1.20.6"
+-SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.bz2;name=xorg"
++XORG_PV ?= "1.20.14"
++SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
+ XORG_S = "${WORKDIR}/${XORG_PN}-${XORG_PV}"
+-SRC_URI[xorg.md5sum] = "a98170084f2c8fed480d2ff601f8a14b"
+-SRC_URI[xorg.sha256sum] = "6316146304e6e8a36d5904987ae2917b5d5b195dc9fc63d67f7aca137e5a51d1"
++SRC_URI[xorg.md5sum] = "46f571adb51ebadb6981bc25d771f2b9"
++SRC_URI[xorg.sha256sum] = "5cc5b70b9be89443e2594b93656c60bd5e82cd7f01deb4ce4faf81dcf546a16b"
+ 
+ # It is the directory containing the Xorg source for the
+ # machine on which you are building TigerVNC.
 
