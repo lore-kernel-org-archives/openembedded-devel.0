@@ -2,190 +2,217 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FCCBD2593F
-	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:47:44 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3754.1769492857623702533
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A32A7D25942
+	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:53:44 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3825.1769493224173045200
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 21:47:37 -0800
+ Mon, 26 Jan 2026 21:53:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LWzB4D1x;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-7945838691aso23490727b3.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 21:47:37 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769492857; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bR+EnTSs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-79273a294edso50892097b3.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 21:53:44 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769493223; cv=none;
         d=google.com; s=arc-20240605;
-        b=K+6Gj86O4oS+RyLD1QCcUY72GQv0tfjZWVn95ZZOzgkzBTSYeT4scdtc0LVJE2etBk
-         h9+3Mg1Gn5n/ysTgWHlgfi6Utz3ydKS9nBgJk+W81NCXHEt49JjrJ7Zo38LwpapZn7BQ
-         WFpgloQxsh6AZPR4PMvqIKsiqXolpnnKVdJ20rF9dfEJxf1zeJEZ2Gn1mHQSjOsSIBho
-         k2R+rmgZL8WMBi+uLBbEEnkvWAWKH4wCLU9s0Ab7quJJlKUdnKBHb2tr5Oip+oAVQG5K
-         1JYf0ncVzXpKesg+tgZFxUlGs2C/QifyYd4trURdrrLNOQscmqZZxqk39A01judcXRoY
-         3Apg==
+        b=guKC/3NbLbqPyPq0ENlRuUA+cfmUIzcXwjU6QYWwq/7C+hhzWISQthXl/Adb9Wzyh0
+         Uhc3LcYyLa6ewRUXi8VKi67EK6hY1BouE7Hsv6Drp89h5cwUSgYUk5jV5yM4T+7TqvZ0
+         3CssfesohuwJ5yE50WtbP/CUhxHBbdKRwh5vt9wMk2K52oFPqQY7uZ7TabuTp/GzuPFH
+         NB9uou1WvDzpqrNwgA6/vFsQpPqAENYf+CWf509LghKR3V9ZJoXTZ70O+34czX8rNPAW
+         YMEgiGOgK+6LkLXPIPaC94CsR4UTv2wxfEinPdRa8GTUrrGUrJ/Knti4MWgY0SxeHSVn
+         eCYg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
+        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
         fh=RnZMXDUlwXY8UgMJsCy3860tY0uphmLPDqFPKV9t5MY=;
-        b=SrrX7ie03niFJsk41krNij3FxNWcQ+4KRR4HJzkcuy4cJz8mGUYf0QlJ8FGZWM5HJy
-         l91zGzY+hIDOi/FkfKs1+QndHPyEfMiuqKImsJFU5cosIbnti6Dw24alL5eYa21L5y6Z
-         1VUZ0pG6PSRVy4PuN9r5JwnBYs1X6aIQ/GGevH7Y/cE0slrAmRHusi2z9iDKX0w3RKOO
-         m6oUacLKROnXoAsrxcm/DH+XYOi1cEpiBzYIITpVNQxNKD+ROgJAQkJjSgomcsyYoDHP
-         kAaHifqvchDdOOF5SKtMB6Px5RKluNgmUhbQOasCk6aNeyxH3b48r9y0BFjp/VsHraUo
-         d4GA==;
+        b=TDDNh2uIVzbYKIvTKzlobMq3K+MUJf/6Cz8H3Ya/gJjFrR4EVhq456tFXYSwnCzjk3
+         DdsXK0g2Qfbh9sKDg6TyALQaZJciyWLIyaJ/RYoGZmlxKroYyq0JXxk8Ymw+Twv/HO/j
+         IEiLkv5axf30g1/JESAxvx33zkAhixbycwPnW7rGFTCmdu1jZ6Yo02OSgmsynOCdfcLl
+         RwehIWDsunphRLFudDUA8HPjYfW3xWX4erm9B8oYdL8H3fb7rn5B+0Ok84QLYNoEKuEN
+         LaAfMC1V+wgIkbphnlMqUG6Oq6qBG7piFA4rtiKa5Or5TWzyxiqIgW0Buzitluj7nhEg
+         93BQ==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769492857; x=1770097657; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769493223; x=1770098023; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
-        b=LWzB4D1xGDa8m1bgrarik6Cop50/vSUhfxC/aUgnViu2M/FzwBv+oBmCFvMr3dx9yW
-         nOCve3DOfCG5t7sdfJomXez6CD1v33WX/mTIduAgKPFrEzubXfRkOaOhemVt9eOW/j7V
-         yH6kIiKLwZQFDr/6YIez3fQ3+CMkjhcb3giF3Gpu86WFRgaAj9P3W53gA2h0iaDpM/sS
-         df+wFtdiFmDBb6i2aq6F2xdiecNL1D20H4L/JSxn0njPL5t6ucgA9DfIquf6x6Qitbqc
-         Wy1LsXhJ6tZh1unN3PmIiUV/9hyveh9SaNsxXEENRMVoGZYgsPB0HSQNg8fHmYtf697o
-         ktVQ==
+        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
+        b=bR+EnTSs6B8HRSMCgutuaf8jDGvDR4ZRDk/doq0yqTRJkirKpCzEvpo1vfY+KwQpTh
+         oi5fNqqlI/TmWXrtcLwLS4inivErYdxz34dQCF0JOgAcejLIyMkgm2/nE7wz+zhpAMmE
+         A0cVH2BFEI/VJa6bEdDHXGt8wQETh0BAZcEZ0ndiuTgQe01sPqA1H4sgyaM/NdvveKuW
+         d18f2eTsf8F6odxmtjx8v2q2RhAbLk0esScB0UyFaSTFCPxzk2b7gOBYAN6sKqN0pLFf
+         wPNj2b7UpYp6lqmuHXQ+0wFxRxcFvbKTlVIJ5FB2PopuaueQdCTRfNYwmWy5pMbr2HC8
+         ftWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769492857; x=1770097657;
+        d=1e100.net; s=20230601; t=1769493223; x=1770098023;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
-        b=JComQYhyIn/V0rMNC+1WnqB0KGkOAk4e7iiXEAKV8Jkv8lEWYacKxFw1ZFjPsdWchk
-         m3TOEHKwY7xe82CvZLThnu+6q5j9WsLuPr2qNxT+oCyQpRIrrJViWNaV3tnLHgH1Fptd
-         HaMSzy8kLGKJFhr8SGHzBXr4lQVcYylcaP/xfQeY2FzZJ3NtnDMaJKkMosBz+LwwPEza
-         TJI1KiIeFNwbI9abc2KwX5PSnbOLyXa+L7knkQHJOyI0Ta8TErr3CiWvE+KWmcr+PgTM
-         rKz6J+S8RaFe7J1ZxhKUkuh7Ygi1XHSBEKTgHCL6NkfZ/Glm6Ku0HX10WxbUdMxzc7Kl
-         ELMA==
-X-Gm-Message-State: AOJu0Yw+SX7yS71kD2Rq+KNycCp7sOLbcZZGJRHRFe1RAXHcnjLuI9iu
-	NNbHHTxdVRTzQ+1hFOU+xTTYaPaAoGTc+Ko1yNjpxqhicejmkBJ6YW4DUiUDGoIGgG5Ey6A686C
-	x2JcSNdnESa1g3ZtXe9levimBAd/SOwQ=
-X-Gm-Gg: AZuq6aIKgMTGdoWo1ZJYlEUWB1ZxAq2wNOvMphVqxz56XBkI9mBAJvVRiAiIicujIa/
-	M/qcz1IoVZN/EE2X82OrlP9/Xl/Ud9SucR+M2U08sp9X7AiTXwq5KNf9w/tYmo0/4a34+dMdxu3
-	XEPMGVesAX8YrFeAjDglp02dZtK+PaQWTttx2x14e8wLXZlkU9hBuhxPrvIRPXVYEeBi8Bv4GJG
-	ra1iPmyEafp+OPmT2gDnwcjKvZdViOXnKMVCzpKxHhX9TxTKjgLo0ruQWqcoeT8spGBkz1OehFA
-	GoOVawq0ih8Vxhk+8YSszT40xgzHtgZNm7iOYTnoaTFdDnY51IjWBy8GGGxaH1PAllAcIjRRwif
-	PQ6DAvAED/QzlDok7//5F3D+5601IGADBjjNMQHKGu3i6
-X-Received: by 2002:a05:690c:fc5:b0:793:ad45:8e8b with SMTP id
- 00721157ae682-7947acee3f8mr3591117b3.19.1769492856661; Mon, 26 Jan 2026
- 21:47:36 -0800 (PST)
+        bh=xny7cxNW7hFKEGx5TGeTxVJa0rE+0vArlgN8xEswK6k=;
+        b=iOIgEdvRkeIu/fCKaEN3/MNUsDY98kxzzCfEscfVQjE62JmC6mzKCEfoSYdtVIE0fh
+         U8bEkev1u+ANvEYKuS7reuhLpJG31MCiZE4YQh+/q+iTd8/QXzXe6ef1vZ/6NvnAbM+u
+         LqVIE55ljeJ4q16HI0sOv+dUD2LnlezRS5QIqGxevdI4/hUiXkmu4fs0Zm+yunVMTRGQ
+         0Vd1UKoeujMXcD+kE3O/RnzEe+7cgeymGtjUl3m3ZWqoQwx3p/rgqYgWLuiRf7L3IXlJ
+         mEpHeVk7lnUBJZP+ZtQFVuCF+xf1FA58RnU5hIfK6YRuVG+X8I2t12Ri1QDuB9bPFYVN
+         G0TQ==
+X-Gm-Message-State: AOJu0Yy1Wgq4s5Qkxm8+uf3pp8Dh60SEzP5ijuEAY20ZFOFLw3he+hK1
+	s40txksN4DXZchaONlZg70b1ildPznFMQ9HQulS0CsgpZVlHGVBmZgvnam3c6wATLIviYBLN1Ka
+	J6vDaq1mYnSjRDk49e8x7dT/J1qQuKhWb7tlk
+X-Gm-Gg: AZuq6aJ1FU7LYlAxCMd79ylEI66cgkRhwg8HEWmDOd12RkawULDxHy5YqsHoJv1bqoO
+	NA3uzE8rn0YOhVW+zwnvrv+hQOfOCjvtJCnBe6BMJTHu5PIqqkUG1IQLKj1rP7pC86kzDdVuc06
+	kERHa7Fk7DRLCBV70mqwwbIDKfu3g1ZTSoD/CFOZjKi77QgjnHv/5jx8oNN/wS4qkEIErMI0VRI
+	J4HAqO0+OahITqXCJ5xYhCmGMkc2FUHIuGG8GWVQyEdRLbaNYxnvi2GI+cYahfrZGedkHUosicE
+	GPZL4dSJ1qmPyvFLrSAiKUYGVsps0FX+cWTah0zyTohCaxJszPL0G9WNOGB23qPln/czdeVBWV8
+	/ggLdJs3ybZnFFmDIQhOqAlJCCog+ikXWQ0D2VXpMV8gA
+X-Received: by 2002:a05:690c:3347:b0:78c:69fe:eb1d with SMTP id
+ 00721157ae682-7947ab157bamr3661207b3.17.1769493223104; Mon, 26 Jan 2026
+ 21:53:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20260126122432.1312490-2-frederikbraendstrup@gmail.com>
-In-Reply-To: <20260126122432.1312490-2-frederikbraendstrup@gmail.com>
+References: <188E438EFF05B728.3837557@lists.openembedded.org> <20260126121236.1304966-2-frederikbraendstrup@gmail.com>
+In-Reply-To: <20260126121236.1304966-2-frederikbraendstrup@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Jan 2026 21:47:10 -0800
-X-Gm-Features: AZwV_QjvZjTlRby3faZgArCZ_tqOLqQDgdkKKUKaNc7FgoIMTC3YDA2Xy9iitug
-Message-ID: <CAMKF1sp+wtMeF_t2Mww3NNe4F9mSXDDjeHr1D+RRDhPTHTzatQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH v1] python-iam-rolesanywhere-session:
- Add recipe at 2.3.0
+Date: Mon, 26 Jan 2026 21:53:17 -0800
+X-Gm-Features: AZwV_QhCpYCkgF92polDjkw7IXnR0z2XUWnNHZB_tNudtTxPqSN9-useS_5ZYeQ
+Message-ID: <CAMKF1spENDOL3q_ftgBfO5+i_44D5m2gg7FLUgQp8CeRYY6Dkg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v4] liboauth2: Add recipe at 2.2.0
 To: frederikbraendstrup@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000276b7e0649582957"
+Content-Type: multipart/alternative; boundary="000000000000fee98f0649583ea2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:47:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123897
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:53:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123898
 
---000000000000276b7e0649582957
+--000000000000fee98f0649583ea2
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-This results in some dependencies which are not in the layer or its
-recommended dependent layers. see
-
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271
-
-On Mon, Jan 26, 2026 at 4:25=E2=80=AFAM Frederik Br=C3=A6ndstrup via
+On Mon, Jan 26, 2026 at 4:13=E2=80=AFAM Frederik Br=C3=A6ndstrup via
 lists.openembedded.org <frederikbraendstrup=3Dgmail.com@lists.openembedded.=
 org>
 wrote:
 
+> V3: adds fixes for building with clang
+>
+> V4: removes default PACKAGECONFIG used for testing builds
+>
 > Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
 > ---
->  .../0001-fix-remove-license-classifier.patch  | 23 +++++++++++++++++++
->  ...python3-iam-rolesanywhere-session_2.3.0.bb | 12 ++++++++++
->  2 files changed, 35 insertions(+)
+>  ..._easy_setopt-takes-a-long-not-an-int.patch | 33 +++++++++++++++++++
+>  .../liboauth2/liboauth2_2.2.0.bb              | 23 +++++++++++++
+>  2 files changed, 56 insertions(+)
 >  create mode 100644
-> meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-ia=
-m-rolesanywhere-session/0001-fix-remove-license-classifier.patch
->  create mode 100644
-> meta-python/recipes-extended/python3-iam-rolesanywhere-session/
-> python3-iam-rolesanywhere-session_2.3.0.bb
+> meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_seto=
+pt-takes-a-long-not-an-int.patch
+>  create mode 100644 meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
 >
 > diff --git
-> a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
-> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
+> a/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
+topt-takes-a-long-not-an-int.patch
+> b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
+topt-takes-a-long-not-an-int.patch
 > new file mode 100644
-> index 0000000000..8c61650963
+> index 0000000000..bdb4a0f108
 > --- /dev/null
 > +++
-> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
-> @@ -0,0 +1,23 @@
-> +From bee363b93f0ddd305b71e1fa1d3dca6ea44c8f80 Mon Sep 17 00:00:00 2001
-> +From: Frede Braendstrup <frederikbraendstrup@gmail.com>
-> +Date: Fri, 17 Oct 2025 15:55:07 +0200
-> +Subject: [PATCH] fix: remove license classifier
+> b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_se=
+topt-takes-a-long-not-an-int.patch
+> @@ -0,0 +1,33 @@
+> +From a9f28a44b9b387ef28904e24ca05d28562fdcc45 Mon Sep 17 00:00:00 2001
+> +From: Frede Hoey Braendstrup <frede@vokalo.io>
+> +Date: Mon, 26 Jan 2026 11:07:24 +0100
+> +Subject: [PATCH] fix(clang): curl_easy_setopt takes a long not an int
 > +
-> +Upstream-Status: Submitted
-> https://github.com/awslabs/iam-roles-anywhere-session/pull/22
-> +Signed-off-by
-> <https://github.com/awslabs/iam-roles-anywhere-session/pull/22+Signed-off=
--by>:
-> Frede Braendstrup <frederikbraendstrup@gmail.com>
+> +Signed-off-by: Frede Hoey Braendstrup <frede@vokalo.io>
+> +Upstream-status: Backport https://github.com/OpenIDC/liboauth2/pull/69
+
+
+Upstream status has a certain format, please make it so.
+Upstream-Status: Backport [URL]
+
+
+>
 > +---
-> + pyproject.toml                                     | 1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
+> + src/http.c | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
 > +
-> +diff --git a/pyproject.toml b/pyproject.toml
-> +index c001045..cd83a8f 100644
-> +--- a/pyproject.toml
-> ++++ b/pyproject.toml
-> +@@ -20,7 +20,6 @@ requires-python =3D ">=3D3.8"
+> +diff --git a/src/http.c b/src/http.c
+> +index ab7a25a..bc242ed 100644
+> +--- a/src/http.c
+> ++++ b/src/http.c
+> +@@ -1024,7 +1024,7 @@ bool oauth2_http_call(oauth2_log_t *log, const cha=
+r
+> *url, const char *data,
+> +       curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 5L);
 > +
-> + classifiers =3D [
-> +     "Development Status :: 4 - Beta",
-> +-    "License :: OSI Approved :: Apache Software License",
-> +     "Programming Language :: Python :: 3",
-> + ]
+> +       if (ctx)
+> +-              curl_easy_setopt(curl, CURLOPT_TIMEOUT, ctx->timeout);
+> ++              curl_easy_setopt(curl, CURLOPT_TIMEOUT,
+> (long)ctx->timeout);
 > +
-> diff --git
-> a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
-> python3-iam-rolesanywhere-session_2.3.0.bb
-> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
-> python3-iam-rolesanywhere-session_2.3.0.bb
+> +       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION,
+> +                        oauth2_http_curl_buf_write);
+> +@@ -1092,7 +1092,7 @@ bool oauth2_http_call(oauth2_log_t *log, const cha=
+r
+> *url, const char *data,
+> +
+> +       if (data !=3D NULL) {
+> +               curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+> +-              curl_easy_setopt(curl, CURLOPT_POST, 1);
+> ++              curl_easy_setopt(curl, CURLOPT_POST, 1L);
+> +       }
+> +
+> +       if (ctx)
+> diff --git a/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
+> b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
 > new file mode 100644
-> index 0000000000..c27c9b4ec8
+> index 0000000000..31d7aec69d
 > --- /dev/null
-> +++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
-> python3-iam-rolesanywhere-session_2.3.0.bb
-> @@ -0,0 +1,12 @@
-> +SUMMARY =3D "Boto3 session creator for IAM Roles Anywhere"
+> +++ b/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY =3D "OAuth 2.x and OpenID Connect C library"
+> +HOMEPAGE =3D "https://github.com/OpenIDC/liboauth2"
 > +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D34400b68072d710fecd0a2940a0d1=
-658"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2ee41112a44fe7014dce33e26468b=
+a93"
 > +
-> +DEPENDS =3D "python3-setuptools-scm-native"
-> +SRC_URI +=3D "file://0001-fix-remove-license-classifier.patch"
-> +SRC_URI[sha256sum] =3D
-> "718a7cb43c191f2801467a53405b829ce878ac58b3cb8868caa5782ecc3f20e5"
+> +SRC_URI =3D " \
+> +    git://
+> github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=3Dv${PV=
+}
+> <http://github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=
+=3Dv$%7BPV%7D>
+> \
+> +    file://0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-int.patch=
+ \
+> +    "
 > +
-> +inherit pypi python_setuptools_build_meta
+> +PV =3D "2.2.0"
+> +SRCREV =3D "12571b6d6568c2db7d5f080f60ecb55795c0db19"
 > +
-> +PYPI_PACKAGE =3D "iam_rolesanywhere_session"
-> +RDEPENDS:${PN} =3D "python3-boto3 python3-botocore python3-cryptography"
+> +DEPENDS =3D "libpcre2 jansson curl openssl cjose"
+> +
+> +inherit pkgconfig autotools-brokensep
+> +
+> +PACKAGECONFIG ??=3D ""
+> +PACKAGECONFIG[memcache] =3D
+> "--with-memcache,--without-memcache,libmemcached"
+> +PACKAGECONFIG[redis] =3D "--with-redis,--without-redis,hiredis"
+> +PACKAGECONFIG[jq] =3D "--with-jq,--without-jq,jq"
+> +PACKAGECONFIG[apache] =3D "--with-apache,--without-apache,apache2"
+> +
 > --
 > 2.52.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#123876):
-> https://lists.openembedded.org/g/openembedded-devel/message/123876
-> Mute This Topic: https://lists.openembedded.org/mt/117466999/1997914
+> View/Reply Online (#123874):
+> https://lists.openembedded.org/g/openembedded-devel/message/123874
+> Mute This Topic: https://lists.openembedded.org/mt/117466911/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -193,119 +220,152 @@ iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
 >
 >
 
---000000000000276b7e0649582957
+--000000000000fee98f0649583ea2
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This results in some dependencies which are not in the lay=
-er or its recommended dependent layers. see<div><br></div><div><a href=3D"h=
-ttps://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271">htt=
-ps://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271</a></d=
-iv></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"l=
-tr" class=3D"gmail_attr">On Mon, Jan 26, 2026 at 4:25=E2=80=AFAM Frederik B=
-r=C3=A6ndstrup via <a href=3D"http://lists.openembedded.org">lists.openembe=
-dded.org</a> &lt;frederikbraendstrup=3D<a href=3D"mailto:gmail.com@lists.op=
-enembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">Signed-off-by: Frede Hoey B=
-raendstrup &lt;<a href=3D"mailto:frederikbraendstrup@gmail.com" target=3D"_=
-blank">frederikbraendstrup@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../0001-fix-remove-license-classifier.patch=C2=A0 | 23 +++++++++++++=
-++++++<br>
-=C2=A0...<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=
-=3D"noreferrer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.b=
-b</a> | 12 ++++++++++<br>
-=C2=A02 files changed, 35 insertions(+)<br>
-=C2=A0create mode 100644 meta-python/recipes-extended/python3-iam-rolesanyw=
-here-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-clas=
-sifier.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-extended/python3-iam-rolesanyw=
-here-session/<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" =
-rel=3D"noreferrer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.=
-0.bb</a><br>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Jan 26,=
+ 2026 at 4:13=E2=80=AFAM Frederik Br=C3=A6ndstrup via <a href=3D"http://lis=
+ts.openembedded.org">lists.openembedded.org</a> &lt;frederikbraendstrup=3D<=
+a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembe=
+dded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D=
+"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
+ft:1ex">V3: adds fixes for building with clang<br>
 <br>
-diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session=
-/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch=
- b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-i=
-am-rolesanywhere-session/0001-fix-remove-license-classifier.patch<br>
-new file mode 100644<br>
-index 0000000000..8c61650963<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python=
-3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch<br>
-@@ -0,0 +1,23 @@<br>
-+From bee363b93f0ddd305b71e1fa1d3dca6ea44c8f80 Mon Sep 17 00:00:00 2001<br>
-+From: Frede Braendstrup &lt;<a href=3D"mailto:frederikbraendstrup@gmail.co=
-m" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
-+Date: Fri, 17 Oct 2025 15:55:07 +0200<br>
-+Subject: [PATCH] fix: remove license classifier<br>
-+<br>
-+Upstream-Status: Submitted <a href=3D"https://github.com/awslabs/iam-roles=
--anywhere-session/pull/22+Signed-off-by" rel=3D"noreferrer" target=3D"_blan=
-k">https://github.com/awslabs/iam-roles-anywhere-session/pull/22<br>
-+Signed-off-by</a>: Frede Braendstrup &lt;<a href=3D"mailto:frederikbraends=
+V4: removes default PACKAGECONFIG used for testing builds<br>
+<br>
+Signed-off-by: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frederikbraends=
 trup@gmail.com" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
-+---<br>
-+ pyproject.toml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =
-1 -<br>
-+ 1 files changed, 0 insertions(+), 1 deletions(-)<br>
+---<br>
+=C2=A0..._easy_setopt-takes-a-long-not-an-int.patch | 33 ++++++++++++++++++=
 +<br>
-+diff --git a/pyproject.toml b/pyproject.toml<br>
-+index c001045..cd83a8f 100644<br>
-+--- a/pyproject.toml<br>
-++++ b/pyproject.toml<br>
-+@@ -20,7 +20,6 @@ requires-python =3D &quot;&gt;=3D3.8&quot;<br>
-+ <br>
-+ classifiers =3D [<br>
-+=C2=A0 =C2=A0 =C2=A0&quot;Development Status :: 4 - Beta&quot;,<br>
-+-=C2=A0 =C2=A0 &quot;License :: OSI Approved :: Apache Software License&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0&quot;Programming Language :: Python :: 3&quot;,<br>
-+ ]<br>
-+ <br>
-diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session=
-/<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noref=
-errer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a> b/m=
-eta-python/recipes-extended/python3-iam-rolesanywhere-session/<a href=3D"ht=
-tp://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noreferrer" target=
-=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a><br>
+=C2=A0.../liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D"noreferrer=
+" target=3D"_blank">liboauth2_2.2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 | 23 +++++++++++++<br>
+=C2=A02 files changed, 56 insertions(+)<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/liboauth2/liboauth2/0001-f=
+ix-clang-curl_easy_setopt-takes-a-long-not-an-int.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/liboauth2/<a href=3D"http:=
+//liboauth2_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.=
+bb</a><br>
+<br>
+diff --git a/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-cur=
+l_easy_setopt-takes-a-long-not-an-int.patch b/meta-oe/recipes-support/liboa=
+uth2/liboauth2/0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-int.patc=
+h<br>
 new file mode 100644<br>
-index 0000000000..c27c9b4ec8<br>
+index 0000000000..bdb4a0f108<br>
 --- /dev/null<br>
-+++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/<a hre=
-f=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noreferrer" =
-target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a><br>
-@@ -0,0 +1,12 @@<br>
-+SUMMARY =3D &quot;Boto3 session creator for IAM Roles Anywhere&quot;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D34400b68072d710fecd0a2940a=
-0d1658&quot;<br>
++++ b/meta-oe/recipes-support/liboauth2/liboauth2/0001-fix-clang-curl_easy_=
+setopt-takes-a-long-not-an-int.patch<br>
+@@ -0,0 +1,33 @@<br>
++From a9f28a44b9b387ef28904e24ca05d28562fdcc45 Mon Sep 17 00:00:00 2001<br>
++From: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frede@vokalo.io" target=
+=3D"_blank">frede@vokalo.io</a>&gt;<br>
++Date: Mon, 26 Jan 2026 11:07:24 +0100<br>
++Subject: [PATCH] fix(clang): curl_easy_setopt takes a long not an int<br>
 +<br>
-+DEPENDS =3D &quot;python3-setuptools-scm-native&quot;<br>
-+SRC_URI +=3D &quot;file://0001-fix-remove-license-classifier.patch&quot;<b=
++Signed-off-by: Frede Hoey Braendstrup &lt;<a href=3D"mailto:frede@vokalo.i=
+o" target=3D"_blank">frede@vokalo.io</a>&gt;<br>
++Upstream-status: Backport <a href=3D"https://github.com/OpenIDC/liboauth2/=
+pull/69" rel=3D"noreferrer" target=3D"_blank">https://github.com/OpenIDC/li=
+boauth2/pull/69</a></blockquote><div><br></div><div>Upstream status has a c=
+ertain format, please make it so.</div><div>Upstream-Status: Backport [URL]=
+</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><b=
 r>
-+SRC_URI[sha256sum] =3D &quot;718a7cb43c191f2801467a53405b829ce878ac58b3cb8=
-868caa5782ecc3f20e5&quot;<br>
++---<br>
++ src/http.c | 4 ++--<br>
++ 1 file changed, 2 insertions(+), 2 deletions(-)<br>
 +<br>
-+inherit pypi python_setuptools_build_meta<br>
++diff --git a/src/http.c b/src/http.c<br>
++index ab7a25a..bc242ed 100644<br>
++--- a/src/http.c<br>
+++++ b/src/http.c<br>
++@@ -1024,7 +1024,7 @@ bool oauth2_http_call(oauth2_log_t *log, const char =
+*url, const char *data,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 5L);<=
+br>
++ <br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx)<br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
+URLOPT_TIMEOUT, ctx-&gt;timeout);<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
+URLOPT_TIMEOUT, (long)ctx-&gt;timeout);<br>
++ <br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION,<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 oauth2_http_curl_buf_write);<br>
++@@ -1092,7 +1092,7 @@ bool oauth2_http_call(oauth2_log_t *log, const char =
+*url, const char *data,<br>
++ <br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (data !=3D NULL) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0curl_easy_setopt(cu=
+rl, CURLOPT_POSTFIELDS, data);<br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
+URLOPT_POST, 1);<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 curl_easy_setopt(curl, C=
+URLOPT_POST, 1L);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++ <br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx)<br>
+diff --git a/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_=
+2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a> b/met=
+a-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.bb" rel=3D=
+"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
+new file mode 100644<br>
+index 0000000000..31d7aec69d<br>
+--- /dev/null<br>
++++ b/meta-oe/recipes-support/liboauth2/<a href=3D"http://liboauth2_2.2.0.b=
+b" rel=3D"noreferrer" target=3D"_blank">liboauth2_2.2.0.bb</a><br>
+@@ -0,0 +1,23 @@<br>
++SUMMARY =3D &quot;OAuth 2.x and OpenID Connect C library&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/OpenIDC/liboauth2" rel=3D=
+"noreferrer" target=3D"_blank">https://github.com/OpenIDC/liboauth2</a>&quo=
+t;<br>
++LICENSE =3D &quot;Apache-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2ee41112a44fe7014dce33e264=
+68ba93&quot;<br>
 +<br>
-+PYPI_PACKAGE =3D &quot;iam_rolesanywhere_session&quot;<br>
-+RDEPENDS:${PN} =3D &quot;python3-boto3 python3-botocore python3-cryptograp=
-hy&quot;<br>
++SRC_URI =3D &quot; \<br>
++=C2=A0 =C2=A0 git://<a href=3D"http://github.com/OpenIDC/liboauth2;protoco=
+l=3Dhttps;branch=3Dmaster;tag=3Dv$%7BPV%7D" rel=3D"noreferrer" target=3D"_b=
+lank">github.com/OpenIDC/liboauth2;protocol=3Dhttps;branch=3Dmaster;tag=3Dv=
+${PV}</a> \<br>
++=C2=A0 =C2=A0 file://0001-fix-clang-curl_easy_setopt-takes-a-long-not-an-i=
+nt.patch \<br>
++=C2=A0 =C2=A0 &quot;<br>
++<br>
++PV =3D &quot;2.2.0&quot;<br>
++SRCREV =3D &quot;12571b6d6568c2db7d5f080f60ecb55795c0db19&quot;<br>
++<br>
++DEPENDS =3D &quot;libpcre2 jansson curl openssl cjose&quot;<br>
++<br>
++inherit pkgconfig autotools-brokensep<br>
++<br>
++PACKAGECONFIG ??=3D &quot;&quot;<br>
++PACKAGECONFIG[memcache] =3D &quot;--with-memcache,--without-memcache,libme=
+mcached&quot;<br>
++PACKAGECONFIG[redis] =3D &quot;--with-redis,--without-redis,hiredis&quot;<=
+br>
++PACKAGECONFIG[jq] =3D &quot;--with-jq,--without-jq,jq&quot;<br>
++PACKAGECONFIG[apache] =3D &quot;--with-apache,--without-apache,apache2&quo=
+t;<br>
++<br>
 -- <br>
 2.52.0<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123876): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123876" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123876</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117466999/199=
+View/Reply Online (#123874): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123874" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123874</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117466911/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117466999/1997914</a><br>
+t/117466911/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -315,7 +375,7 @@ Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
 et=3D"_blank">raj.khem@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
-</blockquote></div>
+</blockquote></div></div>
 
---000000000000276b7e0649582957--
+--000000000000fee98f0649583ea2--
 
