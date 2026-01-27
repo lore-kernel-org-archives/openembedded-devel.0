@@ -1,162 +1,321 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7144ED25934
-	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:05:24 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2976.1769490321890722750
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FCCBD2593F
+	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 05:47:44 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3754.1769492857623702533
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 21:05:22 -0800
+ Mon, 26 Jan 2026 21:47:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=UHkMIP+j;
- spf=pass (domain: mvista.com, ip: 209.85.214.170, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2a79ded11a2so32133425ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 21:05:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LWzB4D1x;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-7945838691aso23490727b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 21:47:37 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769492857; cv=none;
+        d=google.com; s=arc-20240605;
+        b=K+6Gj86O4oS+RyLD1QCcUY72GQv0tfjZWVn95ZZOzgkzBTSYeT4scdtc0LVJE2etBk
+         h9+3Mg1Gn5n/ysTgWHlgfi6Utz3ydKS9nBgJk+W81NCXHEt49JjrJ7Zo38LwpapZn7BQ
+         WFpgloQxsh6AZPR4PMvqIKsiqXolpnnKVdJ20rF9dfEJxf1zeJEZ2Gn1mHQSjOsSIBho
+         k2R+rmgZL8WMBi+uLBbEEnkvWAWKH4wCLU9s0Ab7quJJlKUdnKBHb2tr5Oip+oAVQG5K
+         1JYf0ncVzXpKesg+tgZFxUlGs2C/QifyYd4trURdrrLNOQscmqZZxqk39A01judcXRoY
+         3Apg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
+        fh=RnZMXDUlwXY8UgMJsCy3860tY0uphmLPDqFPKV9t5MY=;
+        b=SrrX7ie03niFJsk41krNij3FxNWcQ+4KRR4HJzkcuy4cJz8mGUYf0QlJ8FGZWM5HJy
+         l91zGzY+hIDOi/FkfKs1+QndHPyEfMiuqKImsJFU5cosIbnti6Dw24alL5eYa21L5y6Z
+         1VUZ0pG6PSRVy4PuN9r5JwnBYs1X6aIQ/GGevH7Y/cE0slrAmRHusi2z9iDKX0w3RKOO
+         m6oUacLKROnXoAsrxcm/DH+XYOi1cEpiBzYIITpVNQxNKD+ROgJAQkJjSgomcsyYoDHP
+         kAaHifqvchDdOOF5SKtMB6Px5RKluNgmUhbQOasCk6aNeyxH3b48r9y0BFjp/VsHraUo
+         d4GA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1769490321; x=1770095121; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=2Phug26a5Q6Al8kztw03WcsHh2R0SBlCe4fbMITE31g=;
-        b=UHkMIP+juJcjiG5CHxZXGvQpRG4YbBZXoLoRhebxYNxKzI0NcBfJmRDsdE/k+rSzb1
-         c0jOoT9eC04R8KzCHkucsxcgWbQM6djCe6VMdmuuMn6upPdWTKy90TWmWwDvrxO8kMLa
-         x+6QWIKX6FvuICBbeCyNdqthfisJT1SpMI6Ps=
+        d=gmail.com; s=20230601; t=1769492857; x=1770097657; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
+        b=LWzB4D1xGDa8m1bgrarik6Cop50/vSUhfxC/aUgnViu2M/FzwBv+oBmCFvMr3dx9yW
+         nOCve3DOfCG5t7sdfJomXez6CD1v33WX/mTIduAgKPFrEzubXfRkOaOhemVt9eOW/j7V
+         yH6kIiKLwZQFDr/6YIez3fQ3+CMkjhcb3giF3Gpu86WFRgaAj9P3W53gA2h0iaDpM/sS
+         df+wFtdiFmDBb6i2aq6F2xdiecNL1D20H4L/JSxn0njPL5t6ucgA9DfIquf6x6Qitbqc
+         Wy1LsXhJ6tZh1unN3PmIiUV/9hyveh9SaNsxXEENRMVoGZYgsPB0HSQNg8fHmYtf697o
+         ktVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769490321; x=1770095121;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1769492857; x=1770097657;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=2Phug26a5Q6Al8kztw03WcsHh2R0SBlCe4fbMITE31g=;
-        b=meQ4eNsVi+S1ytLwUNOrkcyna+Hky0XTxgnKA7VRI9P62bJLtxu3FSSw/hG2YFIxt1
-         koEtHMahaAD/T8zw7i/0eXlIjnxJDKKiqi0CSDx7E4yHGdZGbR+uCTsootclC7Yk6g9z
-         ck0+kwBqmQuwoBs3jC6TXF2+NZwJ5RHBY5fu4U0NSb43/IIvsKjUrJE3B22j5aJmJzVK
-         khgXY87H6dtqyhCtiQcUL9rzalk4bhff2OosPZoXY8cmnPDJ9p8Lnb/hTCneDGmVwlka
-         lHEXppPlEyXPc2fRL7wQ/thbZvuAi1+kVyTS37kDSZyJRg56o9pXMkQBiKH6S7D6e+vp
-         QUWQ==
-X-Gm-Message-State: AOJu0YwlPnTeog1rK5sT6Cg9SCmwvWAnYRyOXT/b8Dgus3a08x8bK4wR
-	hUGdJiLzyJFDOX1UXsAQl8ngT1itr5h2T3eX5dMM96MWcgtDh/r0sc18y/vsmkAxL0MM2UQq2nc
-	NS9Yo
-X-Gm-Gg: AZuq6aK0K8SIcPGEtE1Au0B7yPRmtnHTnW9OMoNSMQknwP8CkXTM+0ZNw9810WmW7yh
-	NhTMY6KbW3CrUo7/U2VJNhcng6pQMfjbjZ+8t9k5ohOuIdJAK6KvxmNdViZ1apFCe8R4exsYjeG
-	k7UIwWLoRO2/k/PxwkYDFF/U4BVAjjMdF38+UojlMVwHpg8k0flVIzH/bPzq92WNhK5pRFVr2AS
-	lBZeG+b6d/MoJZc2YDCZ4vpuRVqJUWPeaRX+/fVEd/u0TC7RZvqMd1nPgl1jtD8DCVsHSAPWYNb
-	PladG9VvoC+tIXR5sjNAdwUqBT4mtUOqg2QZS1fRN34KhzT+rOWHx0DyTAauv7fxCAlZ7jl7wBj
-	8JqOF3zIefFMQJBonRfR/XaGFGNO2ermsQCwL6cCIomY9BPNnJ5TnZs1MxE2Wxn8GtC6XFP8wW9
-	Yns66f+PzZHin6wRUwlcWKfTFL
-X-Received: by 2002:a17:902:ce8c:b0:2a7:d5c0:c661 with SMTP id d9443c01a7336-2a870d4cc31mr6152605ad.15.1769490320976;
-        Mon, 26 Jan 2026 21:05:20 -0800 (PST)
-Received: from MVIN00013.mvista.com ([103.250.136.249])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a802fdd4e8sm104028055ad.99.2026.01.26.21.05.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 21:05:20 -0800 (PST)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][scarthgap][PATCH] wireshark: fix for CVE-2026-0959
-Date: Tue, 27 Jan 2026 10:34:53 +0530
-Message-ID: <20260127050453.84586-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+        bh=Ojg01BrEZNcYEsYLoxfGFs+NRrW/E7W97RQk/R8Xz7k=;
+        b=JComQYhyIn/V0rMNC+1WnqB0KGkOAk4e7iiXEAKV8Jkv8lEWYacKxFw1ZFjPsdWchk
+         m3TOEHKwY7xe82CvZLThnu+6q5j9WsLuPr2qNxT+oCyQpRIrrJViWNaV3tnLHgH1Fptd
+         HaMSzy8kLGKJFhr8SGHzBXr4lQVcYylcaP/xfQeY2FzZJ3NtnDMaJKkMosBz+LwwPEza
+         TJI1KiIeFNwbI9abc2KwX5PSnbOLyXa+L7knkQHJOyI0Ta8TErr3CiWvE+KWmcr+PgTM
+         rKz6J+S8RaFe7J1ZxhKUkuh7Ygi1XHSBEKTgHCL6NkfZ/Glm6Ku0HX10WxbUdMxzc7Kl
+         ELMA==
+X-Gm-Message-State: AOJu0Yw+SX7yS71kD2Rq+KNycCp7sOLbcZZGJRHRFe1RAXHcnjLuI9iu
+	NNbHHTxdVRTzQ+1hFOU+xTTYaPaAoGTc+Ko1yNjpxqhicejmkBJ6YW4DUiUDGoIGgG5Ey6A686C
+	x2JcSNdnESa1g3ZtXe9levimBAd/SOwQ=
+X-Gm-Gg: AZuq6aIKgMTGdoWo1ZJYlEUWB1ZxAq2wNOvMphVqxz56XBkI9mBAJvVRiAiIicujIa/
+	M/qcz1IoVZN/EE2X82OrlP9/Xl/Ud9SucR+M2U08sp9X7AiTXwq5KNf9w/tYmo0/4a34+dMdxu3
+	XEPMGVesAX8YrFeAjDglp02dZtK+PaQWTttx2x14e8wLXZlkU9hBuhxPrvIRPXVYEeBi8Bv4GJG
+	ra1iPmyEafp+OPmT2gDnwcjKvZdViOXnKMVCzpKxHhX9TxTKjgLo0ruQWqcoeT8spGBkz1OehFA
+	GoOVawq0ih8Vxhk+8YSszT40xgzHtgZNm7iOYTnoaTFdDnY51IjWBy8GGGxaH1PAllAcIjRRwif
+	PQ6DAvAED/QzlDok7//5F3D+5601IGADBjjNMQHKGu3i6
+X-Received: by 2002:a05:690c:fc5:b0:793:ad45:8e8b with SMTP id
+ 00721157ae682-7947acee3f8mr3591117b3.19.1769492856661; Mon, 26 Jan 2026
+ 21:47:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260126122432.1312490-2-frederikbraendstrup@gmail.com>
+In-Reply-To: <20260126122432.1312490-2-frederikbraendstrup@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Jan 2026 21:47:10 -0800
+X-Gm-Features: AZwV_QjvZjTlRby3faZgArCZ_tqOLqQDgdkKKUKaNc7FgoIMTC3YDA2Xy9iitug
+Message-ID: <CAMKF1sp+wtMeF_t2Mww3NNe4F9mSXDDjeHr1D+RRDhPTHTzatQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v1] python-iam-rolesanywhere-session:
+ Add recipe at 2.3.0
+To: frederikbraendstrup@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000276b7e0649582957"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:05:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123896
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 05:47:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123897
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/4b48ee36f1829d6d3d009bf9871af523ce8e3ace
+--000000000000276b7e0649582957
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../wireshark/files/CVE-2026-0959.patch       | 65 +++++++++++++++++++
- .../wireshark/wireshark_4.2.14.bb             |  1 +
- 2 files changed, 66 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2026-0959.patch
+This results in some dependencies which are not in the layer or its
+recommended dependent layers. see
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2026-0959.patch b/meta-networking/recipes-support/wireshark/files/CVE-2026-0959.patch
-new file mode 100644
-index 0000000000..a7aeb80610
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2026-0959.patch
-@@ -0,0 +1,65 @@
-+From 4b48ee36f1829d6d3d009bf9871af523ce8e3ace Mon Sep 17 00:00:00 2001
-+From: John Thacker <johnthacker@gmail.com>
-+Date: Sat, 10 Jan 2026 08:33:35 -0500
-+Subject: [PATCH] ieee80211: Avoid using a fixed array for multi-link per-STA
-+ subelements
-+
-+Since this processes to the end of the TVB, there might be more than 16.
-+Simplify the logic and only test for a set link_id in one place. This
-+also gets rid of a possible use of an uninitialized value on error.
-+
-+Fix #20939, OSS-Fuzz 474458885 
-+
-+CVE: CVE-2026-0959
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/4b48ee36f1829d6d3d009bf9871af523ce8e3ace]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ epan/dissectors/packet-ieee80211.c | 12 ++----------
-+ 1 file changed, 2 insertions(+), 10 deletions(-)
-+
-+diff --git a/epan/dissectors/packet-ieee80211.c b/epan/dissectors/packet-ieee80211.c
-+index 0371e21..15e89f7 100644
-+--- a/epan/dissectors/packet-ieee80211.c
-++++ b/epan/dissectors/packet-ieee80211.c
-+@@ -27911,7 +27911,7 @@ dissect_multi_link(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree,
-+   guint8 multi_link_type = multi_link_control & 0x0007;
-+   guint16 present = multi_link_control >> 4;
-+   int elt = 0, hf_index;
-+-  int local_link_ids[16];
-++  wmem_strbuf_t *link_id_list = wmem_strbuf_create(pinfo->pool);
-+ 
-+   control = proto_tree_add_item(tree, hf_ieee80211_eht_multi_link_control, tvb,
-+                                 offset, 2, ENC_LITTLE_ENDIAN);
-+@@ -28194,9 +28194,6 @@ dissect_multi_link(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree,
-+                                            multi_link_type, &link_id);
-+ 
-+       offset += overhead; /* Account for the overhead in the subelt */
-+-      if (link_id != -1) {
-+-        local_link_ids[elt] = link_id;
-+-      }
-+       break;
-+     case 221:
-+       /* Add an expert info saying there are none so far? */
-+@@ -28207,18 +28204,13 @@ dissect_multi_link(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree,
-+       break;
-+     }
-+     if (link_id != -1) {
-++      wmem_strbuf_append_printf(link_id_list, (elt == 0) ? "%d" : "_%d", link_id);
-+       elt++;
-+     }
-+   }
-+   proto_tree_add_uint(tree, hf_index, tvb, 0, 0, elt);
-+ 
-+   if (elt) {
-+-    wmem_strbuf_t *link_id_list = wmem_strbuf_new_sized(pinfo->pool, elt * 2);
-+-    for (int i = 0; i < elt; i++) {
-+-      if (local_link_ids[i] != -1) {
-+-        wmem_strbuf_append_printf(link_id_list, (i == 0) ? "%d" : "_%d", local_link_ids[i]);
-+-      }
-+-    }
-+     proto_tree_add_string(tree, hf_ieee80211_eht_multi_link_link_id_list, tvb,
-+                           0, 0, link_id_list->str);
-+   }
-+-- 
-+2.50.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-index c313075ea4..d03b86775e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
-            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
-            file://CVE-2025-9817.patch \
-            file://CVE-2025-13499.patch \
-+           file://CVE-2026-0959.patch \
-            "
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
--- 
-2.50.1
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271
 
+On Mon, Jan 26, 2026 at 4:25=E2=80=AFAM Frederik Br=C3=A6ndstrup via
+lists.openembedded.org <frederikbraendstrup=3Dgmail.com@lists.openembedded.=
+org>
+wrote:
+
+> Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+> ---
+>  .../0001-fix-remove-license-classifier.patch  | 23 +++++++++++++++++++
+>  ...python3-iam-rolesanywhere-session_2.3.0.bb | 12 ++++++++++
+>  2 files changed, 35 insertions(+)
+>  create mode 100644
+> meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-ia=
+m-rolesanywhere-session/0001-fix-remove-license-classifier.patch
+>  create mode 100644
+> meta-python/recipes-extended/python3-iam-rolesanywhere-session/
+> python3-iam-rolesanywhere-session_2.3.0.bb
+>
+> diff --git
+> a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
+iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
+> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
+iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
+> new file mode 100644
+> index 0000000000..8c61650963
+> --- /dev/null
+> +++
+> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-=
+iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch
+> @@ -0,0 +1,23 @@
+> +From bee363b93f0ddd305b71e1fa1d3dca6ea44c8f80 Mon Sep 17 00:00:00 2001
+> +From: Frede Braendstrup <frederikbraendstrup@gmail.com>
+> +Date: Fri, 17 Oct 2025 15:55:07 +0200
+> +Subject: [PATCH] fix: remove license classifier
+> +
+> +Upstream-Status: Submitted
+> https://github.com/awslabs/iam-roles-anywhere-session/pull/22
+> +Signed-off-by
+> <https://github.com/awslabs/iam-roles-anywhere-session/pull/22+Signed-off=
+-by>:
+> Frede Braendstrup <frederikbraendstrup@gmail.com>
+> +---
+> + pyproject.toml                                     | 1 -
+> + 1 files changed, 0 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/pyproject.toml b/pyproject.toml
+> +index c001045..cd83a8f 100644
+> +--- a/pyproject.toml
+> ++++ b/pyproject.toml
+> +@@ -20,7 +20,6 @@ requires-python =3D ">=3D3.8"
+> +
+> + classifiers =3D [
+> +     "Development Status :: 4 - Beta",
+> +-    "License :: OSI Approved :: Apache Software License",
+> +     "Programming Language :: Python :: 3",
+> + ]
+> +
+> diff --git
+> a/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
+> python3-iam-rolesanywhere-session_2.3.0.bb
+> b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
+> python3-iam-rolesanywhere-session_2.3.0.bb
+> new file mode 100644
+> index 0000000000..c27c9b4ec8
+> --- /dev/null
+> +++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/
+> python3-iam-rolesanywhere-session_2.3.0.bb
+> @@ -0,0 +1,12 @@
+> +SUMMARY =3D "Boto3 session creator for IAM Roles Anywhere"
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D34400b68072d710fecd0a2940a0d1=
+658"
+> +
+> +DEPENDS =3D "python3-setuptools-scm-native"
+> +SRC_URI +=3D "file://0001-fix-remove-license-classifier.patch"
+> +SRC_URI[sha256sum] =3D
+> "718a7cb43c191f2801467a53405b829ce878ac58b3cb8868caa5782ecc3f20e5"
+> +
+> +inherit pypi python_setuptools_build_meta
+> +
+> +PYPI_PACKAGE =3D "iam_rolesanywhere_session"
+> +RDEPENDS:${PN} =3D "python3-boto3 python3-botocore python3-cryptography"
+> --
+> 2.52.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#123876):
+> https://lists.openembedded.org/g/openembedded-devel/message/123876
+> Mute This Topic: https://lists.openembedded.org/mt/117466999/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000276b7e0649582957
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This results in some dependencies which are not in the lay=
+er or its recommended dependent layers. see<div><br></div><div><a href=3D"h=
+ttps://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271">htt=
+ps://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1271</a></d=
+iv></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"l=
+tr" class=3D"gmail_attr">On Mon, Jan 26, 2026 at 4:25=E2=80=AFAM Frederik B=
+r=C3=A6ndstrup via <a href=3D"http://lists.openembedded.org">lists.openembe=
+dded.org</a> &lt;frederikbraendstrup=3D<a href=3D"mailto:gmail.com@lists.op=
+enembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
+ft:1px solid rgb(204,204,204);padding-left:1ex">Signed-off-by: Frede Hoey B=
+raendstrup &lt;<a href=3D"mailto:frederikbraendstrup@gmail.com" target=3D"_=
+blank">frederikbraendstrup@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../0001-fix-remove-license-classifier.patch=C2=A0 | 23 +++++++++++++=
+++++++<br>
+=C2=A0...<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.b=
+b</a> | 12 ++++++++++<br>
+=C2=A02 files changed, 35 insertions(+)<br>
+=C2=A0create mode 100644 meta-python/recipes-extended/python3-iam-rolesanyw=
+here-session/python3-iam-rolesanywhere-session/0001-fix-remove-license-clas=
+sifier.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-extended/python3-iam-rolesanyw=
+here-session/<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" =
+rel=3D"noreferrer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.=
+0.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session=
+/python3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch=
+ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python3-i=
+am-rolesanywhere-session/0001-fix-remove-license-classifier.patch<br>
+new file mode 100644<br>
+index 0000000000..8c61650963<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/python=
+3-iam-rolesanywhere-session/0001-fix-remove-license-classifier.patch<br>
+@@ -0,0 +1,23 @@<br>
++From bee363b93f0ddd305b71e1fa1d3dca6ea44c8f80 Mon Sep 17 00:00:00 2001<br>
++From: Frede Braendstrup &lt;<a href=3D"mailto:frederikbraendstrup@gmail.co=
+m" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
++Date: Fri, 17 Oct 2025 15:55:07 +0200<br>
++Subject: [PATCH] fix: remove license classifier<br>
++<br>
++Upstream-Status: Submitted <a href=3D"https://github.com/awslabs/iam-roles=
+-anywhere-session/pull/22+Signed-off-by" rel=3D"noreferrer" target=3D"_blan=
+k">https://github.com/awslabs/iam-roles-anywhere-session/pull/22<br>
++Signed-off-by</a>: Frede Braendstrup &lt;<a href=3D"mailto:frederikbraends=
+trup@gmail.com" target=3D"_blank">frederikbraendstrup@gmail.com</a>&gt;<br>
++---<br>
++ pyproject.toml=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =
+1 -<br>
++ 1 files changed, 0 insertions(+), 1 deletions(-)<br>
++<br>
++diff --git a/pyproject.toml b/pyproject.toml<br>
++index c001045..cd83a8f 100644<br>
++--- a/pyproject.toml<br>
+++++ b/pyproject.toml<br>
++@@ -20,7 +20,6 @@ requires-python =3D &quot;&gt;=3D3.8&quot;<br>
++ <br>
++ classifiers =3D [<br>
++=C2=A0 =C2=A0 =C2=A0&quot;Development Status :: 4 - Beta&quot;,<br>
++-=C2=A0 =C2=A0 &quot;License :: OSI Approved :: Apache Software License&qu=
+ot;,<br>
++=C2=A0 =C2=A0 =C2=A0&quot;Programming Language :: Python :: 3&quot;,<br>
++ ]<br>
++ <br>
+diff --git a/meta-python/recipes-extended/python3-iam-rolesanywhere-session=
+/<a href=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noref=
+errer" target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a> b/m=
+eta-python/recipes-extended/python3-iam-rolesanywhere-session/<a href=3D"ht=
+tp://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noreferrer" target=
+=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a><br>
+new file mode 100644<br>
+index 0000000000..c27c9b4ec8<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-extended/python3-iam-rolesanywhere-session/<a hre=
+f=3D"http://python3-iam-rolesanywhere-session_2.3.0.bb" rel=3D"noreferrer" =
+target=3D"_blank">python3-iam-rolesanywhere-session_2.3.0.bb</a><br>
+@@ -0,0 +1,12 @@<br>
++SUMMARY =3D &quot;Boto3 session creator for IAM Roles Anywhere&quot;<br>
++LICENSE =3D &quot;Apache-2.0&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D34400b68072d710fecd0a2940a=
+0d1658&quot;<br>
++<br>
++DEPENDS =3D &quot;python3-setuptools-scm-native&quot;<br>
++SRC_URI +=3D &quot;file://0001-fix-remove-license-classifier.patch&quot;<b=
+r>
++SRC_URI[sha256sum] =3D &quot;718a7cb43c191f2801467a53405b829ce878ac58b3cb8=
+868caa5782ecc3f20e5&quot;<br>
++<br>
++inherit pypi python_setuptools_build_meta<br>
++<br>
++PYPI_PACKAGE =3D &quot;iam_rolesanywhere_session&quot;<br>
++RDEPENDS:${PN} =3D &quot;python3-boto3 python3-botocore python3-cryptograp=
+hy&quot;<br>
+-- <br>
+2.52.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#123876): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/123876" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/123876</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117466999/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117466999/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000276b7e0649582957--
 
