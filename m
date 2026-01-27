@@ -2,117 +2,223 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABDB0D25948
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE8B5D25946
 	for <webhook@archiver.kernel.org>; Tue, 27 Jan 2026 06:00:44 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3951.1769493641459237678
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3826.1769493642668288078
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Jan 2026 22:00:41 -0800
+ Mon, 26 Jan 2026 22:00:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DbCsxYcA;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47ee301a06aso59936345e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 22:00:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KZeEhCJ4;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4801d21c411so27402015e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Jan 2026 22:00:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769493640; x=1770098440; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/c3MRYQveNHsl6vvKoxeZpsGs1vLZmusotqH0ieWHNA=;
-        b=DbCsxYcAdOdyK/i/lEPp5c58E42ciB859cGn3W896BibC+kKsKKXo2dQTP88x+Gi8J
-         MJN78+ajBs+gVcvZtNgUudYvWn1px7uJHh5uKKlvIof9Owe8P8cadbnIqK8jyM+bgnvw
-         mWlaID+S0ft3M3DngTMYkRVw497GBSUm68xX0ROXBkTjhC6UzOFMv8bkxBNm7n6eAOip
-         UrjsU1DeI5OAjaHCBjVDSljpxOnd0KUAXq0aDeginxuLmu7POc7IRlcvZ0m07PKM5see
-         gg7EbVNVDMUB7D6nKgHnLOy1DF3PWiXXJd6tifqj/ZoiyeTeMenVSnVv9aoFFqrXK0Fx
-         CH3g==
+        d=gmail.com; s=20230601; t=1769493641; x=1770098441; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lsBJkI7Wrn161J4xXpgiK90YmzTFjRtZNll6BJ3UorI=;
+        b=KZeEhCJ46SdNQAK3sSKu2O2nIL2yazf3QC67cg3lfUzEeNGOWuLhCXTOW8PqxF6J1Z
+         WtMoTVecEV4+ZVCbF1CJjpQkFsazZqVxHA8CcbJX4i8iWCcw264hcfTIl5qwu/tAKukZ
+         WxZPZLCNcpWzuLtRvBH5t0oHhOmmx/Vmd77IkZiUNTL9dmHdWr9VDBfcVkMlDRkzEbYj
+         subxx56wRscxDvsI+sJQw/jKHwUmJdL1wrWRwakHU5AxSw/Tba/fR6O8xKkFqhWA099D
+         LI7yyIu48tzWa3G7NgoEtuqobx5K0HEKSIZAhmAxhs17+2D2YxL+wgLtCHtVVa+eF5NV
+         Yg9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769493640; x=1770098440;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=/c3MRYQveNHsl6vvKoxeZpsGs1vLZmusotqH0ieWHNA=;
-        b=w8pA7nE1GjMJpAJwdDDuBtn6WJh6IlAAYG0c01U4mBUxdUmB4PrObtuXjcj3dOfY0M
-         UbEt2HAuWTnXED3HkNw8ibNT+z9Cvfu6P7y9SeXbS9g7gZNvtEntb+/8qO4GnDcvD9OA
-         lthL7PPk3EceN/pExiFBiqwXdPOP7qf5bYPhNmMzFb5MrLuRfhDgrfamLAHogonk2yv/
-         5OXBvO82SIx/mtFuo4FM3rmD5Lmj9tn48iygGLDVSuKe0m5CD6k7mRZWviaA28NXpm9X
-         Rhu/skTPKKTRHf9ohhFVcYEAJlFe8FOVDn2EdEveOMN22W2etwvPtlQsNQNjwkzTXzmO
-         WyXw==
-X-Gm-Message-State: AOJu0YypMD3hG8tAuwfX+TfjBMVaWbui6goDvNTxDdlCkxLmb5VCc/Hd
-	teea2ppgkRM0unXbNY4uf9cncuuuD580eSJTY3olHu4H/r+RvwqXp+kMXyT7jQ==
-X-Gm-Gg: AZuq6aIGdJtoRu1xcUfPoTVIvJNzwt8h69JAz3OYuCpKGNOgDsH/93z4nPZfDVu/Jm2
-	IBHo9Il/zB90SoGSazmYl8IBTFY8L9zUHiU9aRaoKL88oi4nHEoWDRnEDDUG7njEUMkBkz1JKHX
-	dCKR3nua0tg4T5CkfHit6GmqX+D0nIikWkkF0Zi4E38rz1qmlBuJsOeW8WezDpI3pjMGPq+s9KV
-	LgoTeghFRDHNM/VtHnhrdUw6WzuEhHfH92ZmKUCCHoB0U+Pf9LefEvuqNTobwTUfB4/838k6ydn
-	BZSo+Z+Tly+/KS63KTom2udFu4kX9ZTgHY4pR5a5LINEB0VDQyp6biFGRGxAH6eQ50+HLZa+3QP
-	TEaq42U1cJjvo7OCIGzNG1M+ivP5C7saFz6pYSmKN3pwmktlpgSSEE+lLLVIIxJObbJAV710nuV
-	8owZ+3FmK1
-X-Received: by 2002:a05:600c:1c17:b0:480:462e:d640 with SMTP id 5b1f17b1804b1-48069c7f78cmr7121755e9.36.1769493639705;
-        Mon, 26 Jan 2026 22:00:39 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769493641; x=1770098441;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lsBJkI7Wrn161J4xXpgiK90YmzTFjRtZNll6BJ3UorI=;
+        b=uXJrkE/DXpy8MybN6/fBVCuO1+6Rwu9xsh1zpRM9lfYkIDHgRdCYU50NYBqSID4bRs
+         V4Z6BBfJAPcoQzk4KOvhrO7k5SLoRGQbfWJSmmFQjVqgjDGXFy9IpQIal+xqaShrDIcf
+         grIfQOLZITY62f/XitL8E8QesGYmJ01/b1ukyVRfXKGCuyRjy62ZaPLtQWH4FXYMtzoF
+         MgwTvRhcFTbh8uAPh+e5I7HpQDPaoOtwo/ZWv+RfGQbeBcsvca+S3w9+m/dAJjKKbjyy
+         eRswXmtVab5V7nvvAJfYshNoI+eDxX9TYXfcjb7DL1EHFhfWxocFiKTg273sXux9tLb3
+         j7OQ==
+X-Gm-Message-State: AOJu0YzGi06xY2QZPbnXt2G7OL1NxysUvc5cnWd/hmjIJOUPuIZjTeoD
+	K79uueJ5WSniSI35vnI3w77mFhQU1fvsQ59PDOdvkYUnQjFQHZJEOPaD4HzPWw==
+X-Gm-Gg: AZuq6aKDgxbTcXTR4EVX3K2a6N77GM9YSQQ92Yq2T2uwTFxFGhQPnXev7w5OMme7zK2
+	b+FhKDvk4aDsofp5yuOFq8AF7KQI8RfaaB1fHIKv5L8YfL1je2uR5wN+YFsxyT5ZyOFOoiNDolR
+	UYnVYIP2UWGUHzrnur0eXrS0xs+MyU5q12bF9LYqnQo2Tmqx4ZGZADI04hcA1Jecov+DyzTyG3l
+	KBA5P5MfUCVvzzxyTG3iO+NA5NomuMueJ51cDkHsV3tRFlLO3rP4hWOmcPVLHQUlj1G1Uw+VJ03
+	U+cE2+tGV/VnGhiSXxBXr2s2gzqAE3nqcbihVtxr08GQGxiSIQtP/KNHqsPhzvcPVOwHokvgoiO
+	pDyd8akobtCfkvMQx0lwlrjKUUXllwGP2kZN8drwz6oY2J6YfS6pGdxjiUyKNIYlennznyTvahE
+	2n9QdCO7cYBlHgiIp/0ys=
+X-Received: by 2002:a05:600c:a07:b0:479:3a86:dc1f with SMTP id 5b1f17b1804b1-48069c73f73mr6433085e9.37.1769493635699;
+        Mon, 26 Jan 2026 22:00:35 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804d3ae17esm126122825e9.0.2026.01.26.22.00.38
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4804d3ae17esm126122825e9.0.2026.01.26.22.00.33
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Jan 2026 22:00:38 -0800 (PST)
+        Mon, 26 Jan 2026 22:00:34 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 5/5] gvfs: upgrade 1.50.4 -> 1.50.7
-Date: Tue, 27 Jan 2026 07:00:34 +0100
-Message-ID: <20260127060034.1301860-5-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH 1/5] gtk4: upgrade 4.6.2 -> 4.6.9
+Date: Tue, 27 Jan 2026 07:00:30 +0100
+Message-ID: <20260127060034.1301860-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260127060034.1301860-1-skandigraun@gmail.com>
-References: <20260127060034.1301860-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 06:00:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123904
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123905
 
 Changelog:
 
-1.50.7:
-* client: Prevent returning invalid mount cache entries
-* dav: Fix authentication issues when DNS-SD URIs are used
-* nfs: Fix IPv6 URI handling
-* sftp/ftp: Ensure that is-symlink is always set to avoid warnings
+4.6.9:
+* GtkText:
+ - Prevent unexpected notify::direction emissions
+* Wayland:
+ - Fix button masks
+* X11:
+ - Fix some ordering problems with surface destruction
 * Translation updates
 
-1.50.6:
-* udisks2: Disconnect signal handlers to fix crashes when unmounting
-* fuse: Include missing locale.h header
+4.6.8:
+* Input:
+ - Fix problems with input method interactions that caused
+   dead keys not to work
+* GtkText:
+ - Respect the no-emoji input hint fully
+* GtkNotebook:
+ - Fix an infinite loop in accessibility code
+ - Event handling fixes
+* GtkFileChooser:
+ - Restore ~ and .functionality
+* GtkTreeView:
+ - Event handling fixes
+* GtkTreeListModel:
+ - Prevent possible crashes with collapsed nodes
+* GtkGridView:
+ - Fix issues with rubberband selection
+* GtkEmojiChooser:
+ - Fix navigation with arrow keys when filtered
+* GtkPopover:
+ - Fix problems with focus when dismissing popovers
+ - Fix problems with focusing editable labels in popovers
+* GtkStackSidebar:
+ - Improve accessible presentation
+* Wayland:
+ - Make gtk_launch_uri more robust
+ - Make monitor bounds handling more robust
+ - Prevent shrinking clients due to wrong toplevel bounds
+* Flatpak:
+ - Fix file DND with the FileTransfer portal
 * Translation updates
 
-1.50.5:
-* smbbrowse: Fix empty device listing after unrelated mount failure
-* udisks: Fix missing unmount notifications
-* trash: Fix nfs4 and cifs monitoring
-* smb: Allow renaming a file to the same name with a different case
-* mtp: Emit delete event on device disconnection
-* trash: Fix wrongly reported item-count
-* Some other fixes and improvements
+4.6.7:
+* Miscellaneous memory leak fixes
+* GtkTreeView:
+ - Fix a problem with DND
+ - Fix a problem with row selection
+* GtkTreePopover:
+ - Support scrolling
+* GtkGridView:
+ - Fix issues with rubberband selection
+* GtkSnapshot:
+ - Make GtkSnapshot work from bindings
+* X11:
+ - Fix preferred action for DND
+* Windows:
+ - Fix DND
+* Translation updates
+
+4.6.6:
+* Fix translations in GTKs own ui files
+* Wayland:
+ - Fix a problem with the activation protocol
+ - Don't force the HighContrast icontheme
+* Windows:
+ - Fix a problem with builtin icons if the
+   hicolor icontheme is not installed
+* Translation updates
+
+4.6.5:
+* GtkFileChooser:
+ - Fix pasting text into the name field
+* GtkText:
+ - Remove an assertion that is sometimes hit
+* Wayland:
+ - Ensure that our cursor surfaces don't violate
+   protocol constraints
+* Accessibility:
+ - Fix a problem in the accessibility tree
+* Translation updates
+
+4.6.4:
+* GtkFileChooser:
+ - Fix select button sensitivity in select_folder mode
+ - Fix some fallout from list model porting
+* GtkListView, GtkColumnView:
+ - Optimize scrolling
+* print-to-file:
+ - Handle nonexisting files better in the dialog
+* Avoid infinite loops in size allocation
+* CSS:
+ - Optimize a case of reparenting that is important in GtkListView
+* GSK:
+ - Check for half-float support before using it
+* Wayland:
+ - Ignore empty preedit updates This fixes a problem with
+   textview scrolling
+ - Freeze popups when hidden. This addresses a frame rate drop
+* Translation updates
+
+4.6.3:
+* GtkOverlay:
+ - Bring back positional style classes
+* GtkFileChooser:
+ - Prevent unwanted completion popups
+ - Fix small problems in save mode
+ - Fix buildable suport of GtkFileFilter
+* GtkPopover:
+ - Fix button positions in right-to-left locales
+* GtkLabel:
+ - Fix small issues with link handling
+* Tooltips:
+ - Don't restrict the minimum tooltip length
+* Theme:
+ - Don't use opacity for overlay scrollbars
+ - Fix selection text color in  vertical spin buttons
+* GSK:
+ - Accept textures that are generated by webkit
+ - Align offscreen rendering to the pixel grid
+* Accessibility
+ - Fix a crash in startup when orca is running
+* Input:
+ - Fix display changes in GtkIMMultiContext
+ - Fix activating on-screen keyboards
+ - Always propagate hold events in GtkEventControllerScroll
+* Windows:
+ - Fix a critical warning in clipboard handling
+ - Report serial numbers for events
+* MacOS:
+ - Prevent fullscreen transition reentrancy
 * Translation updates
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-gnome/gvfs/{gvfs_1.50.4.bb => gvfs_1.50.7.bb}       | 2 +-
+ meta-gnome/recipes-gnome/gtk4/{gtk4_4.6.2.bb => gtk4_4.6.9.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.50.4.bb => gvfs_1.50.7.bb} (97%)
+ rename meta-gnome/recipes-gnome/gtk4/{gtk4_4.6.2.bb => gtk4_4.6.9.bb} (98%)
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.4.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.7.bb
-similarity index 97%
-rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.50.4.bb
-rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.50.7.bb
-index a8510a3d59..d49d3dda56 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.4.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.50.7.bb
-@@ -20,7 +20,7 @@ RDEPENDS:${PN} += "gsettings-desktop-schemas"
+diff --git a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb b/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.9.bb
+similarity index 98%
+rename from meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb
+rename to meta-gnome/recipes-gnome/gtk4/gtk4_4.6.9.bb
+index fdfe3635cf..d0f2eb0d02 100644
+--- a/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.2.bb
++++ b/meta-gnome/recipes-gnome/gtk4/gtk4_4.6.9.bb
+@@ -33,7 +33,7 @@ MAJ_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ UPSTREAM_CHECK_REGEX = "gtk-(?P<pver>\d+\.(\d*[02468])+(\.\d+)+)\.tar.xz"
  
- SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+ SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtk/${MAJ_VER}/gtk-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "ff263af609a50eb76056653592d929459aef4819a444c436f6d52c6f63c1faec"
++SRC_URI[sha256sum] = "decad346d6a94141ab667c43483e7a4b97c7969c23d589dd63cd6a49498a43d0"
  
--SRC_URI[archive.sha256sum] = "ab9059a676a537edbea21388c2aafe1a7e2c8f1ac2dfdc6d64550233075457fd"
-+SRC_URI[archive.sha256sum] = "72add2c109454e3b43025f249b7caa4836ff6f77705e895f442063a273a7f231"
+ S = "${WORKDIR}/gtk-${PV}"
  
- # depends on gsettings-desktop-schemas->gcr->gtk+3-> x11
- REQUIRED_DISTRO_FEATURES = "x11"
 
