@@ -1,91 +1,100 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C2F0D46BF9
-	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 19:54:44 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3655.1769630068536072779
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88310D46C05
+	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 21:32:02 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.919.1769635914066291809
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jan 2026 11:54:28 -0800
+ Wed, 28 Jan 2026 13:31:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mdNVzHOx;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47fedb7c68dso2163275e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 11:54:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HKWQ/wip;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-649655f14d7so290136d50.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 13:31:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769630067; x=1770234867; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ix1gHIfcGYo6Yu+Vs/U2FGV6PHqDqH+nyOLn/zqCWRE=;
-        b=mdNVzHOxSc3w9/rPEbOvVZGD3jQaMAVS+QdvwmS/A8pZtakRy9RKx5NBY2hHkN/IlJ
-         garYBF89AoBtXrpvCSfhV7qo6btozies7B6OPqHabU/RoTP20nVBqaQwO/2KRJKXb/Qi
-         P0TbeGFAXQD7fQbkXto7SAVSy00Ag21DSE690GO66wkGMUUwsamlGrPGW/8MHwfH2mWa
-         utzaX4LK4pPIr4GHZRQ1LFUzChzll6Ho0t1uIliZdXh0PS8Q07s2g8NUQJAMPHn48AUx
-         EvLNTbMOFyDhyjYMMbI8SujTqrklfSHmL8aRsQsdCbmr0rqkuDh6zNP0yr0ECvnz8fH8
-         tNzw==
+        d=gmail.com; s=20230601; t=1769635913; x=1770240713; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=AiHokhcXNO5L+mgoCkm+SIPI67FE23Mvm2xRglUs0QE=;
+        b=HKWQ/wipWjWUwPXgOEqkdfEDMv5n+gqeCqIfUmAzs6eEQwVTLMc8nul3dW8xQG9FVW
+         7tXKSixFbBwi+1uRpHiveUtNuP0sSbqnJXJrbMTCz9h0OD5UlcoYEy2nbXWmNVxmfLA2
+         5ISbBOHT//J1PYmEB1WEenzfHbKbpEEyNAe5mBtYrpxb6jBELjYucvsIyDs4cW44F/rh
+         1Bn5f+qBhb7SyiklGU6UdYEBKUrltefACk56E8cAVjvTDFS8PUdvGLCo5qAkqyaRFCrn
+         K/vKzThTCltzrMykdJCGxAQpiAV5fiMuaqNI4QuC5HmkBUYnl+pnFfEgFfVadguHyPxI
+         8N1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769630067; x=1770234867;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Ix1gHIfcGYo6Yu+Vs/U2FGV6PHqDqH+nyOLn/zqCWRE=;
-        b=lzjlM/RFVj8Yh+1/knDMSfzu7kSd56jPyMtqjh8B3YUpj8uQ2z7XfoQRrup3DS7Zes
-         dNsNQyg2pT2cqv1pybqUy8z91Lg6SgzTA2ttW0s61LjyEnByxV+yp9Ibi8BeRPeCM67X
-         OV3Lk+rlm5lzQ8pDcnim7367f38+A7sRRSl234gnrGMYmLI2U01ZiuacLwxlaYwkxDH3
-         yR0SYAjDjrWtpvKPWP7vnhpRjTEE6wqQFMHwVKXoQEQ/PR1RWgcduTHPhMnEQhE/npAo
-         BnYr1/YSi6xdUiRlvTui04I4+bGCLlZnR7/Zn247HPJlSdG/NaxjfUrO+H0lEiWwkcMM
-         g5Eg==
-X-Gm-Message-State: AOJu0Yw3FY7fkWpdkUt1VrzNq6/WLXFOrcHMKN0sdf4OsSOUubkGq7f8
-	V4AqUtNWN5AMZkH3regur6O3KYL5TxIkoUOWsI/nsJOM1Yeym6/tefnneT6uAg==
-X-Gm-Gg: AZuq6aLNeYeBniAt35Mde9ZzZv5pOnaQxa2ShCNpbhNgVszZtN4lzSoNuvLaowx9141
-	6pCnl2xIcdPX0OrJqt+AAN9yrDEtzTyerUCY6bT9mzfVQiE916YpLsI1K2HlUXyP6kHJ9AtPimi
-	OsrxCehkIIR17F1bHvzvf9CbZxsVBt0niGqeXWxuL1oz2aCo6SaODon4k7SiJou9szdRuzrqtx/
-	/REIOMWpNuyL+XjBeWnKongUpza8K4BF96CBy7gCT25yNZtSvI88IduZ/ciA5C7Koz2EKBHurFY
-	1tEALkkCi46iCsD8R65aUT1A7q4dAKsOtjiJUa/vUir0ryAVfIlsW1svSN+NtJTQwTGhlKLTbA2
-	DjHS4orXit5jHieujBa8aMEKwG+7JBRlP4t3alOt+knPHNvps36gp/j1H5Qr9CBmTGoAe6Errru
-	bkTEVm51Fp8Vpr/ZwxRpQ=
-X-Received: by 2002:a05:600c:190c:b0:480:4a4f:c36f with SMTP id 5b1f17b1804b1-48069c4869bmr85303415e9.21.1769630066742;
-        Wed, 28 Jan 2026 11:54:26 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806cddffc0sm98996975e9.5.2026.01.28.11.54.26
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1769635913; x=1770240713;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AiHokhcXNO5L+mgoCkm+SIPI67FE23Mvm2xRglUs0QE=;
+        b=NQokAoJtAZzYrOhHC06eSR/slH4SzXA5u2DccOmIlXpUrLHFSAoPkqqg4Wv/R4Hgpe
+         PoVvhVrqlJtwuiudNBbf1505vi4AvXDxfeCtYrQ3r+WZuSwbYf/eYOvVCXK4FJzmDSqp
+         Z7FoZbGCRIhfSOaowkBTUbkb2J5u/WwYftLrHl5kAMh9eeCz/yDD9wFPj3jume+1/q+I
+         3dkq1s516WptNihJ73G/fXjRB4JlsuH2gNEvkAh9ClXSxlLHX8U2kkmQSjcwCxGWbuc7
+         3H7Jyq5hkWzPoL9oXtKX+G2ZanHkMvmBBYTyk3KBAraIBE2QCBiJw4j9bF0QBoDNlJWn
+         W0Ng==
+X-Gm-Message-State: AOJu0YwXe7zAElGEKUagS4TKuAkzDekHLF9KTGO4sJann5oJ+9126j1y
+	/5AdKuBNJsXh9NLavLqcN8UujsjHk6veZ1q5PE0ia9KVYf+RV098l2bB2LoOlmxa
+X-Gm-Gg: AZuq6aK0Co4eQwyWKWREB3+pW0mDwO6R8h+GdtoVvFUUwzCXYf0eyp9lE7DSTYZUW+d
+	68RRVU+B7yPjesviR/NoZSvHIrjwaZxbEaO/52H9sAI34LOH1qF51WnT+bxkdi78lGcQvOpgTlD
+	Nt+ysx0tyoHT9BEqKvCXkyVoXHKwynpuI126UB/cIoiOQPdmzxt1yRrUw4Ela32gyjL0AdzmFDU
+	scQzPdi8i4+qIJT1QK5s6N2w4uiWwRuCb8tqNicFyhmU2ZqoXKEZD5fYXmIcVUmyvzTSK4ljvwy
+	ma4LFdRGW8PD/yy0goo2gOoK1pD8kR8X5S1Aj9RNEbI7vAC8wI1E5Ur6dAsZH/PoIRsC/mdfFEx
+	kdec/1yRwLm25JhHgK1Qw2VPgRGC+01UIpPHg6r5jSOFEHMV5GEpcPRNI34ALBqim93RtH9EGOJ
+	24Bwslsi3iERoTAlilRsRscdptzHnKxrcNv38JWp1vdTv1qwgwVnA81RByt6koEWzaDujg1ddCC
+	aEXO+5YkqcK3xkl9pLgdy5HE/cee3Vv5+4qeg==
+X-Received: by 2002:a05:690e:1401:b0:640:dead:f78 with SMTP id 956f58d0204a3-6498fc59679mr4762871d50.68.1769635912613;
+        Wed, 28 Jan 2026 13:31:52 -0800 (PST)
+Received: from localhost.localdomain ([67.233.59.72])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-649960642c6sm1371402d50.3.2026.01.28.13.31.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Jan 2026 11:54:26 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Wed, 28 Jan 2026 13:31:52 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] freerdp: ignore CVE-2025-68118
-Date: Wed, 28 Jan 2026 20:54:25 +0100
-Message-ID: <20260128195425.207546-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-perl][scarthgap][PATCH] libmodule-build-tiny-perl: fix reference to TMPDIR
+Date: Wed, 28 Jan 2026 16:31:49 -0500
+Message-ID: <20260128213149.1209964-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 19:54:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123976
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 21:32:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123977
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68118
+This fix is found in the recipe on the master branch.
 
-The vulnerability is specific to the usage of Microsoft specific sprintf
-implementation. Because of this, ignore this vulnerability.
+The warning was seen in build https://autobuilder.yoctoproject.org/valkyrie/?#/builders/81/builds/1279
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../libmodule/libmodule-build-tiny-perl_0.047.bb           | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-index a78724b925..9b07c94169 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-@@ -95,6 +95,7 @@ python populate_packages:prepend () {
- }
+diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.047.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.047.bb
+index db765b88f1..2e7e742321 100644
+--- a/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.047.bb
++++ b/meta-perl/recipes-perl/libmodule/libmodule-build-tiny-perl_0.047.bb
+@@ -21,6 +21,13 @@ S = "${WORKDIR}/Module-Build-Tiny-${PV}"
  
- CVE_STATUS[CVE-2024-32662] = "fixed-version: 2.x is not affected, bug was introduced in 3.0.0"
-+CVE_STATUS[CVE-2025-68118] = "not-applicable-platform: Windows-only vulnerability"
+ inherit cpan_build ptest-perl
  
- # avoid http://errors.yoctoproject.org/Errors/Details/852862/
- # fixed in freerdp3 with https://github.com/FreeRDP/FreeRDP/pull/10553
++do_install:append() {
++  sed -i \
++    -e 's|${TMPDIR}||g' \
++    `find ${D}/usr/lib/perl5 -type f -name .packlist`
++}
++
++
+ RDEPENDS:${PN} += " \
+     libextutils-config-perl \
+     libextutils-helpers-perl \
+-- 
+2.43.0
+
 
