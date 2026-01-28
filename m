@@ -1,214 +1,153 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <ricardo.salveti@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0A9FD35664
-	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 01:01:58 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2962.1769562108969253078
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10E22D35665
+	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 02:08:59 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4147.1769566134923025591
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 17:01:49 -0800
+ Tue, 27 Jan 2026 18:08:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=V24/s5TN;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-78fdb90b670so57716657b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 17:01:48 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Ke8Nedyw;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jJe9qUQw;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60RJ0mIK2436568
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=; b=Ke8Nedywt3NSsc0S
+	mrHBp/d0tXLWvL3PeygSVJmN6cfi+xxoejoDIUa4nUQNlbbjZGjVVgeS0MlShHdW
+	XaKgZqVZelJQ3EUGp1hlbpBl4+74QK4TuleBDObKXT6t8rE6iIJ8w7WybqJ4BuL4
+	L9ZNjfK/g5XXwmMnUPfwk+RhgnX4M9mLRCvdikCMeQ9Iqc/wZnfU47nslHwuClpl
+	+P4TMDpJ3UBAsFaXCZBBwL19Kh0kHu5nYO8qBPVk5/qwvjBhpd+jnLD8QqN1fTV4
+	yK78GCbYtMI+mJG4G25RhNkbG3PfqZ1YMuaiYLRLP9BCHjiwyZ+gal7TpkmnUEDW
+	cyPEtg==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4by355s5wa-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:54 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2a7701b6353so63080675ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 18:08:54 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769566133; cv=none;
+        d=google.com; s=arc-20240605;
+        b=chBo1esiLefHWlXkpKsTRYQsnSe5TWmskZv5Jq+1M8n4fxtiNqxovEMfEGKh+DFtBt
+         lNrA0ltZ0/97GJLP/ALh3lLaEmdtQXspr1YMynTzmgTm/WvEbFb+Bg9afn8F7tUZRZzB
+         N539dS7L/+egftYaLnSey+gBe5cgROB3NtA1yrKXp/w/2LgSQmVOdlSa/WUzpfwsDMk+
+         Dd63E3JkXEiX8NtQeXsCha6Ysln+GJZ/N3Lfh88EL4XHR4olFevPbS4l46/CuTVHcwcz
+         j73/03WDZNHYRmVmLJcQVGOYBF1j/QasovnHpOkVRXeLsBhTatj7PHE9lMyc9ZpNsNC0
+         jOEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
+        fh=rvHI9e8tDpzaYAeEOnf6K2mlrvItleqhmuCiHJJLFLs=;
+        b=YHZcZ8kk7hONXy3NxYE7KA5O86//XmWaKwI5w92hUKoiJJ5W1u2JsT+485NV5IFbyx
+         DGyXrhuqYhRwxu9KRJpDREMiXfLfwtVx+nBpwxgtjwS3HX420UFRwDcR/UNtr9LOBG/9
+         x1nkDFnGvLRylo/RfObsvxICLBu0TkIR7cb4/31bpOJ/i/yAgx+wPv9YZQrz8WCPCwA1
+         SXnW5uQbRJdGvziGMEHlpOSEO0Z7L++s5dxbK8q6gkKw0l/QakHcSuXmj48aeoUxppsy
+         AS/rt6XyttoiUr2c8CAmWhlqhRPJT+IVVImPwc6LksXAguGStbPEPkSS/I3067MI+drq
+         WGFA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769562108; x=1770166908; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HpBjjvmjt4wDiy0zv6J0FUZ29aVlTEnWOkuIMEeurkA=;
-        b=V24/s5TNI0f9l4y8INk9Wo/nqyOmIAFWlE9aaioO3UftWIcz9JeSFqzHMo4XbDTleG
-         bEWa7zYU58/4nXNsdd0TeqwRYGmZSsxqLaKAoTfjT+RyUX07ZsxtldwTbW8CymE6UfT4
-         fmv4TmQun7aS8Q7m5cqzCGK++AuamRbSppAGa/0PulC1e7wffvH2rjf9TzQ+ByLSJrrc
-         pYvOb7BmP01F0gJaMFpuO21Jc3TOzwDWMS9P3c9ltj87CEUUbo7WT9da+D/y50izIsH5
-         zQX9tthPPziyCRGSwBBsTg8OeKgtyLhhrm/203xjHdkwywheWw62cAa8gRI3Hu5Mkjek
-         +bPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769562108; x=1770166908;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1769566133; x=1770170933; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HpBjjvmjt4wDiy0zv6J0FUZ29aVlTEnWOkuIMEeurkA=;
-        b=mDVMjvxDgPyYOSrjFKZ4OpJVt2U1OE91i5WulUwEgPlGyHepaliu1pligEQJ3XM6QN
-         ExsnbLPKzjQhHMhOt6gGWs6JGf5nTzX2lvcbKXrJ034a42uOTIR21CBnzSJqC4Ks3Bv5
-         KvBeSog/YORSz3osoK9SmquxADrxKo0+vtRLHinwv1ibNg5lgNsQH57mLBqLvozXlQGu
-         C6idvpmUuIt7xh5ERPGIUxFoOM9IeOahAqfmIvYVc5UkQYtythpcxrEkZpw91La4DsEo
-         QMwxSdDRVLIOTl6GGaNMc7x4k6XNl5T3LMKrAaBFmIehL+bJK5IZoWP+GMCAf3zeG/y+
-         XESA==
-X-Gm-Message-State: AOJu0Yw+8Kjam9B8O4zzlfLgMTCqT9GBHsv8ksLo/WLEcfYqCNg9/0ad
-	fxz0XOl7d2c3zNjRcTr7s0A1uv+Ze9KQzFQB+Nq1Uk8/sLN1LtUqA/pDuNUyII78
-X-Gm-Gg: AZuq6aLcj/X+fi9Mmfa/02WcvJdA1xruLMy327FTXPFj+74WmqNvc/aNgd3vYeei/Ea
-	55+OdWfr1Tx3Qy+VPVWy4lij05HUS+ezh9hwQWyXWnNCdqbuxo0FcDzp29qpCGcFRqxMjRmyArP
-	phcbUoiZgFlgTCgyL6Thedx/bVcE1cP0kCVqr9RKHkrJj+DLUMTyHCtmMvt3th0L6/oQK9Qb9zR
-	+BS+shPJkzf/Ued+XxsigGB9Re4z3RqSGHEs8YiWDbfan0DUOoeTtnpAry+R8WzO2EicFO3UYaB
-	vp/8rZ41chIwhGXiGJ2MtPaYZAkPYUva0P3glQkhkwhZNDQ2Zut0/ZicrC/a4tE2tUf5CDRFZNu
-	V/qjTQ4ERlII8GisqVI2UUAjmQ0y9JVkvI0yZFaYZKP+5HExVUYawz3n1BIXGU9hugy2PiC22yg
-	FqOH3vGhngpgLMsxdRxYdOOFQv6HvM+ndg5ZVApQ09jh+hU9NCsj1aqWr7L82Wz2Zi4+tzhvn8K
-	t8KGk2pRMrLU3EfJkRfSafELGMeMn3ytzlLKg==
-X-Received: by 2002:a05:690e:1510:b0:63f:a6c4:fed6 with SMTP id 956f58d0204a3-6498fc14056mr2541232d50.4.1769562107321;
-        Tue, 27 Jan 2026 17:01:47 -0800 (PST)
-Received: from localhost.localdomain ([67.233.59.72])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-64996063fd5sm201805d50.4.2026.01.27.17.01.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Jan 2026 17:01:46 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][PATCH] Use https when accessing archive.xfce.org
-Date: Tue, 27 Jan 2026 20:01:08 -0500
-Message-ID: <20260128010108.3564465-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
+        b=jJe9qUQwW/cakmt598Z7y7zsAODzb30cUU1Yi4kLVu3NS+HKOZo6Jb8nqtG2vp1Omy
+         nB8Z3FjUy2rnI0Twsr4tbq1KP1pwTJQK6jO9CCtE+K8zLkPO/x6kcCigLoNuf6mKFNLI
+         pmjuIh4TqFo+IByiENQTqtMQLrsNxTDZY6fV8ZQPWk6ILKMtMKK1zkMycV5f4nlqvjkU
+         szcPo9GGrVMs+Ax5YZsodsXYrKI9493a3vxN0o71o2zck1ft7VeGthwgmyY2ZFLYgY5w
+         2MgfXzi/DtXduJWjfEh1+lhDMpYSjwPF0N5h2XPITHQD6PYhx/KyMiwXjZdG+FiWgNAY
+         vDwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769566133; x=1770170933;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
+        b=G2CpKFbwr1LqrSrIe7Co2bSvDh7jcmUXtNd0XbvP7AeLh0akiBuCcTgUiR0ZL0iHnu
+         KvcUPu2kOPqCErbwy54VxpWsaq9+/5+ZWc/0z5jXHdiLIygVCqnAehNvyLNiRpnbvDqO
+         TyL75NYqK2sKbUcofDO/L45FjP+Y2lO3bpAeuPlbotp7ILC/bN2Wtg/aLLxQGy5FhuWO
+         +CS5FQUDD9DKvE/rh6bOkCITL2l/hx/1YQWcNz68pbNf+s4wRhqCaFlMEIiWmQkdKk+C
+         7/Y36J2N2+Sn/RXoYbRDzl+81ZADFenV41a+LTwhuBrkcgGs864l7YZ/kTMNpAkX5t/p
+         vuNw==
+X-Gm-Message-State: AOJu0YwRL9d8j1YdUQdmHnFtUlEfXKaDmbmJu0oz+1neprNNDhYecl/M
+	zfOSsoj/p7AbPnFyrzGcLYYsB9Ex68go5rdMM3jDP5WODoFIb6k/56ud8tRfENcpmKFt+8gE1Z9
+	pjiMd8mzux5FQmtxuPDbItZDPKNjobEbmoygZJnhbjEeC3h1Ap0n4zeXmqvTljReBBe/X/LM5x4
+	5Qc7Zni1BHkbDnAE7KyaFhbSl9MkBaGgRQ77zVxqhsOdeX2vCoCZ30Ug42RYI=
+X-Gm-Gg: AZuq6aK5X6AME5w95D5Azew3G1/QUIX/kYT+GIYQ7vIp5SRWQArsD02S1HgHsKnGOCX
+	cpozLOXxGiWaXAfkpWZr82ggBEcbrZqMo7YL5nSgtOQpBuJ2RrBzwJfV3UVqY6//KOfXIQSpq53
+	MrA3wNvucpJpuzeuCXrDrZz9FwnRBJdwtfhiuV53oa7y8ysj+HX34Hl/3SQz/wBxOSImv5
+X-Received: by 2002:a17:902:d2c6:b0:2a4:8cd:c3cf with SMTP id d9443c01a7336-2a870e77eedmr41393825ad.49.1769566133436;
+        Tue, 27 Jan 2026 18:08:53 -0800 (PST)
+X-Received: by 2002:a17:902:d2c6:b0:2a4:8cd:c3cf with SMTP id
+ d9443c01a7336-2a870e77eedmr41393475ad.49.1769566132759; Tue, 27 Jan 2026
+ 18:08:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260127055329.3727567-1-shoudil@qti.qualcomm.com>
+In-Reply-To: <20260127055329.3727567-1-shoudil@qti.qualcomm.com>
+From: "Ricardo de Araujo (Salveti)" <ricardo.salveti@oss.qualcomm.com>
+Date: Tue, 27 Jan 2026 23:08:16 -0300
+X-Gm-Features: AZwV_QgryjIJdn-xkHmtpAKw0flSIax3_N_SLG1qEPAWjhtx9KRUz4eQcfsIHHQ
+Message-ID: <CAA_5youHfEEeRo6yy88W4qzOQ03=+FRs_7swEb8NM-5GtnjT=w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3] android-tools-conf-configfs: remove this
+ recipe without selinux dependency
+To: shoudil@qti.qualcomm.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=YNWSCBGx c=1 sm=1 tr=0 ts=69796fb6 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8
+ a=Bx9Rq_O0B1RHcinQBQQA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
+ a=uG9DUKGECoFWVXl0Dc02:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-ORIG-GUID: QnVUWjDYoZHeCKTRXRq0YIdiXIq3TesW
+X-Proofpoint-GUID: QnVUWjDYoZHeCKTRXRq0YIdiXIq3TesW
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI4MDAxNCBTYWx0ZWRfXyQZyc4vCc/kB
+ COqo+UKIQNdnA57ZlsfhPX5l0XHvxRbTPn9kSqpEVv11DhuOmRbrCvech9bu+pUeEBaRg5swAOx
+ nLzh2XHXhMpKW/3mdznKyfBa7eK9Y1cAMz4FRE5ydwt3vd9HRh/fmjbDdTEY7i/pBDljjm8R/U0
+ gtLnmMFN839lyPqZRtUpn7S+ZziZEs2eUB19z1hGbWFrEjX3IB5936U9HqFiPP0zDXmDW7iKDDE
+ YfxAEOCy91XnnGaawDYD3IHJzt60OleugL669OZ1Y8cGwJQtg2OYhuii1wZI9rqDnLUjfLp5gNf
+ D5fw80qipCJ0xS4jXq2qglVWDJKwFrGmMMiq2OSm1Id2H0ObI5L7FdnKJzCW0GLB20afRr6OSYJ
+ K7KQZOJH6se3sSe21TYdSdEsFCHnkFGpRYux8DOlD0KtU9r4Aa/c25z9Xc5Pgv/lmmYJjm2OZpA
+ +kXZzu7EwQ/sFKf0GLg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-01-27_05,2026-01-27_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
+ priorityscore=1501 spamscore=0 impostorscore=0 malwarescore=0 clxscore=1011
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601280014
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 01:01:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123962
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123963
 
-While using devtool to check available versions, I noticed a 301 http error.
+On Tue, Jan 27, 2026 at 2:54=E2=80=AFAM Shoudi Li via lists.openembedded.or=
+g
+<shoudil=3Dqti.qualcomm.com@lists.openembedded.org> wrote:
+>
+> For the boards with multiple UDC ports, when compiling with meta-selinux
+> layer adb funtion will be impacted due to below error. Remove the recipe
+> under dynamic-layers/selinux/ to avoid it.
+>
+> ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
+> ls: write error: Device or resource busy
 
-Specifically :
+You are removing it because it is not really required anymore, so add
+that to your commit message.
 
-$ devtool latest-version libxfce4ui
+The consequence of the removal is that boards with multiple UDC ports
+will be functional with adb.
 
-Resolving archive.xfce.org (archive.xfce.org)... 217.70.191.87
-Connecting to archive.xfce.org (archive.xfce.org)|217.70.191.87|:80... connected
-.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://archive.xfce.org/src/xfce/libxfce4ui/4.20/ [following]
+Thanks,
 
-With this patch, we change to make the SRC_URI an https request.
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-xfce/classes/thunar-plugin.bbclass                       | 2 +-
- meta-xfce/classes/xfce-app.bbclass                            | 2 +-
- meta-xfce/classes/xfce-panel-plugin.bbclass                   | 2 +-
- meta-xfce/classes/xfce.bbclass                                | 4 ++--
- meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb     | 2 +-
- meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb          | 2 +-
- .../diskperf/xfce4-diskperf-plugin_2.8.0.bb                   | 2 +-
- .../netload/xfce4-netload-plugin_1.5.0.bb                     | 2 +-
- .../recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb    | 2 +-
- 9 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/meta-xfce/classes/thunar-plugin.bbclass b/meta-xfce/classes/thunar-plugin.bbclass
-index ad9e15296e..39b0304327 100644
---- a/meta-xfce/classes/thunar-plugin.bbclass
-+++ b/meta-xfce/classes/thunar-plugin.bbclass
-@@ -6,7 +6,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- 
- DEPENDS += "thunar"
- 
--SRC_URI = "http://archive.xfce.org/src/thunar-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.xz"
-+SRC_URI = "https://archive.xfce.org/src/thunar-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.xz"
- 
- FILES:${PN} += "${libdir}/thunarx-3/*.so"
- 
-diff --git a/meta-xfce/classes/xfce-app.bbclass b/meta-xfce/classes/xfce-app.bbclass
-index 957cfb3362..9469c66d24 100644
---- a/meta-xfce/classes/xfce-app.bbclass
-+++ b/meta-xfce/classes/xfce-app.bbclass
-@@ -2,5 +2,5 @@ inherit xfce features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
-+SRC_URI = "https://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
- 
-diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
-index b2d71a4141..1dc54f8d41 100644
---- a/meta-xfce/classes/xfce-panel-plugin.bbclass
-+++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
-@@ -4,7 +4,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS += "libxfce4ui libxfce4util xfce4-panel"
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
- 
- FILES:${PN} += "${datadir}/xfce4/panel-plugins/"
- FILES:${PN} += "${datadir}/xfce4/panel/plugins/"
-diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
-index 21136742c5..bc4b3561cf 100644
---- a/meta-xfce/classes/xfce.bbclass
-+++ b/meta-xfce/classes/xfce.bbclass
-@@ -3,9 +3,9 @@ def xfce_verdir(v):
-     m = re.match(r"^([0-9]+)\.([0-9]+)", v)
-     return "%s.%s" % (m.group(1), m.group(2))
- 
--HOMEPAGE = "http://www.xfce.org"
-+HOMEPAGE = "https://www.xfce.org"
- XFCE_COMPRESS_TYPE ?= "bz2"
--SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
-+SRC_URI = "https://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
- 
- inherit gettext gtk-icon-cache pkgconfig
- 
-diff --git a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-index d69abfedf2..cdec5f7792 100644
---- a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-+++ b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit xfce
- 
--SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
- SRC_URI[sha256sum] = "3214d5f00e9703b5e8c9e7c3287d606dedec7285ceb4d5db332e93ada66fd575"
- 
- # using xfwm4-theme as in xfwm4 might cause warnings of packages supplied by
-diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-index 6ee5391d2c..b9ccb6183e 100644
---- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-+++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-@@ -8,7 +8,7 @@ inherit xfce pkgconfig features_check
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI = " \
--    http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
-+    https://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
-     file://0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch \
- "
- SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
-index a6972727f2..a71eb0abde 100644
---- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.8.0.bb
-@@ -7,5 +7,5 @@ XFCE_COMPRESS_TYPE = "xz"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
- SRC_URI[sha256sum] = "3833920a3a4a81b3c676c4fab6dd178f4a222d66f316a0783a9149a0153b7fb6"
-diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
-index d54e3b1bd1..7b04a23ada 100644
---- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.5.0.bb
-@@ -7,5 +7,5 @@ XFCE_COMPRESS_TYPE = "xz"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.${XFCE_COMPRESS_TYPE}"
- SRC_URI[sha256sum] = "a868be8f73e8396c2d61903d46646993c5130d16ded71ddb5da9088abf7cb7ba"
-diff --git a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb
-index 3338126557..121140e2f6 100644
---- a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "glib-2.0 libxslt-native meson-native"
- DEPENDS:append:class-target = " ${BPN}-native"
- 
--SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2 \
-+SRC_URI = "https://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2 \
-            file://0001-m4macros-Check-for-a-function-provided-by-libX11-in-.patch \
-            "
- SRC_URI:append:class-target = " file://0001-Run-native-xdt-csource-on-tests.patch"
--- 
-2.43.0
-
+Ricardo
 
