@@ -1,111 +1,249 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1225AD3567C
-	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 05:51:30 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6993.1769579481694884469
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14038D3568E
+	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 08:06:31 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4380.1769566932381768223
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 21:51:22 -0800
+ Tue, 27 Jan 2026 18:22:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LtTdWFSf;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42fbc305882so3911390f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:51:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769579480; x=1770184280; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ISDolPB0NAUXlDcxh5cOluzjGFuI1A55tDNBfPWGYcI=;
-        b=LtTdWFSfxmBsMpbSYF8x2f5a2iATW2LB2mp2GH4RD5eza+tka0KtsVm6ehj9vrTQwV
-         7k7XuZQmPrQML3wuEJ+0wSEhP9VHQ2Wd648wlwFOtPyciWU1yZyi3vfotpCnIAWZ9bwN
-         lyVl5/+45nAjpkpb/Zu/ia+rzL6Lo/txlplv1Qt9tSh3ohcj5LJkQI48plvbYlPZSDGo
-         99cfuCAnAt37MtH+ywOcxskUiJwqxzgJoWIqQbkDTgFI/asZPZsYOGQw5AqNWtvPPAlx
-         lEcl4Otgc+00qz1kj1D01n8vK8BGHuHqi9stsGD9rc15XhuYn50rxwnf06fnAsHP6teb
-         NXeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769579480; x=1770184280;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ISDolPB0NAUXlDcxh5cOluzjGFuI1A55tDNBfPWGYcI=;
-        b=lmU33VMqes4YJobK0jFXlG1MawKcpAsaAL6MqbNHTbmkidFWEdoG1GbA89YK9FA5rF
-         oKRCMFL6SDVhQtaTLzCXn8l77/DsaCPwmt+kbAisyCH5qKXG0t+F3kCtV7xU2ejM8vk5
-         HSY6db+xBgThQeFNtogXxUezH4EpbYll5TwwChO2QaXtPRK7pTOgdr/sOaGzh2CcRfuZ
-         6Ng77oqcYd6iFGN00F6cvuLofTtfihQHf9C9ylxyhIXchiIv2ZCXY7AlBBtlqc4MEiba
-         mAqLALtYFz9cXZxKSfGZrYF5AyH+rRlqDkyFEl9hXtM/UTQtpsJ8Efo+61MD4dtfDrwr
-         8fuw==
-X-Gm-Message-State: AOJu0YxUvXCSy8NIZWgGVmWDliDZkODKBD3Z7L5K4oSfajdt7Sz5GxZv
-	M3JgpMO99lb8Ia9oI1+d1z3uARhpQrKRk9YmiRR6WX42/yHcVrh4/Iopyt1jtA==
-X-Gm-Gg: AZuq6aIVVZ2FRIsgt6bSwsEbZYtpHEKwT9Ki08kW7e1OHQ/oRSbnTYGoTcoyF+7dMsw
-	7yrclNYdIs8LLDjV4XOcQLwVzm6jh8B3P28IUmxoDRwBM9EqbPIlDc5kGJ6vW8B214HlYoZl5vl
-	pkqoGnLnh1OjalANs91VMoxYPDdWJLtJq8QK1iY6+z7f15YhZkcFmGfMTC9eUYyS06DJauQenVq
-	STkvOUj2fh7SaT8eCdbiE0Sp/3Vhs9mD/b4O2JB1mJ3uZBTC1a8GgGR0++LdBk9un3QvgaRfY9v
-	F5ZL5NlnIfBj0Ms2nJ3zEeMLKxy1NSsaOJKGdU7ih8hhUEHDEAEEEYuWTWe981kFXafuoPAOMlo
-	AgcsKcLe1I7AC4sMLcr9Qk9pMrYul7/pgdLZJvUW6HJzIno5RYzsDmlAeBPf1miRU+9jZyIcIh6
-	MlOM9mCG2P
-X-Received: by 2002:a05:6000:26c7:b0:435:b068:d3da with SMTP id ffacd0b85a97d-435dd02d68emr5246845f8f.4.1769579480023;
-        Tue, 27 Jan 2026 21:51:20 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10f82aesm4371777f8f.19.2026.01.27.21.51.19
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Jan 2026 21:51:19 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=EZVEkjJz;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.180.131, mailfrom: shoudil@qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60RKqiOg2953104
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:22:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=98wicP5+fwXQfwNTqzwLpRRfnUK/UhktTVz
+	OcxdFIxw=; b=EZVEkjJzrWtApAARuRLaS2TJGj9f1MfI5jdmBIGRZfeMOoK76M1
+	G31cts9pJReQzmVB3Wd1BX7EUvwVxDtSfZgf3mwweTiP+VuQp272o8HrO1wIv4Ro
+	XTMi7/Bk9QMDnXF5LKjjbF7Juj1fBR0zdg4giRWR5SOt711o/uBnlDx88qPnTUuh
+	tgTdcOB4c+YQrWf5kNFE1YlvwZI21F5nRtB2an4nUaUnuIiMC9Bhwox1jBvLVhSI
+	9CtYY+HaQ/AquG82OBFudfgpqwQKLmy3iffsvibeQJ1WQnV6BYkuj2NxhYYDd7ci
+	Eq1O7XN3HAUaJsZCowXbvRCKVZYZESuTeOQ==
+Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4by4sjru8q-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:22:10 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 60S2M8vH021510
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:22:08 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 4bvq5m9jcg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:22:08 +0000
+Received: from APTAIPPMTA01.qualcomm.com (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 60S2M7d0021505
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:22:08 GMT
+Received: from shoudil2-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 60S2M7oS021503
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Wed, 28 Jan 2026 02:22:07 +0000
+Received: by shoudil2-gv.ap.qualcomm.com (Postfix, from userid 367460)
+	id 843C9565; Wed, 28 Jan 2026 10:22:06 +0800 (CST)
+From: "Shoudi Li" <shoudil@qti.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 2/5] nautilus: upgrade 42.1.1 -> 42.6
-Date: Wed, 28 Jan 2026 06:51:15 +0100
-Message-ID: <20260128055118.2011068-2-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260128055118.2011068-1-skandigraun@gmail.com>
-References: <20260128055118.2011068-1-skandigraun@gmail.com>
+Cc: Shoudi Li <shoudil@qti.qualcomm.com>
+Subject: [meta-oe][PATCH v4] android-tools-conf-configfs: remove this recipe without selinux dependency
+Date: Wed, 28 Jan 2026 10:21:59 +0800
+Message-ID: <20260128022159.3958091-1-shoudil@qti.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI4MDAxNiBTYWx0ZWRfX082vwIrcqi/h
+ /14nfMqdLm3FrbSAF3z1eMV7OIUuchXIr7buld9IZFJ3PfF5d5ju073eof+tO+GOo9En7yN/Spr
+ lt+AhiZqzAPlIqv5EkzMZ4qJgZSD200MtvWxIeT30KvfUSpotk3EaBwomIHYev6Xo5yLCBUxu6R
+ dHXHFazSTpbJDB0bBS0gwtNxEanTJYGgpW8HU/DxH5YXJ/kW/ol1/FrPCFGRbyxVuVQpMIq2qZz
+ MnwcNFZPtY4SSNzZ9kYpBF4tMViUBDGWKtFCTVgld9FFtNzCym3oae9ee1NMGvs2Il/0zilyQ8w
+ x65JQqdPkbYErFSZMHb7d6bpaI5CorxtXoBiRLTxRf5lJlgJmHeRQQQv1GHRwPG4DfxSUwrYM6d
+ xmcPbd8ItHAkd1ujbdtp2WqEupe37sdmTNomXGBKspJuB2+PWQJsyyvBHSCq3zN3EHtfC6zRm2K
+ 5E6DWZ6Mbiwc+8KAQzA==
+X-Proofpoint-ORIG-GUID: up2papYR-NZHk1ric0C3ui-h9ZdAisZ5
+X-Authority-Analysis: v=2.4 cv=KezfcAYD c=1 sm=1 tr=0 ts=697972d3 cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=vUbySO9Y5rIA:10 a=VkNPw1HP01LnGYTKEx00:22 a=EUspDBNiAAAA:8
+ a=1ni_ke5EW6YKA92IucEA:9
+X-Proofpoint-GUID: up2papYR-NZHk1ric0C3ui-h9ZdAisZ5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-01-27_05,2026-01-27_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 impostorscore=0 suspectscore=0 malwarescore=0
+ clxscore=1015 spamscore=0 bulkscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601280016
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 05:51:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123965
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 08:06:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123969
 
-Bugfix releases. Note that there were no 42.3 and 42.4 releases.
+For the boards with multiple UDC ports, when compiling with meta-selinux
+layer adb funtion will be impacted due to below error. Remove the recipe
+under dynamic-layers/selinux/ as it's not required anymore, and ensure
+adb work normally on the boards with multiple UDC ports.
 
-42.6:
-* Fix crash when pasting invalid clipboard data. CVE-2022-37290
+ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
+ls: write error: Device or resource busy
 
-42.5:
-* Really fix the cropped compress format popover on X11
-* Fix behavior inconsistencies with new tabs
-* Fix memory leaks and missing signal disconnections
-* Translation updates
-
-42.2:
-* Close broken link message dialog on response
-* Fix crash when opening new window from pathbar
-* Fix remote filesystem check
-* Translation updates
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Shoudi Li <shoudil@qti.qualcomm.com>
 ---
- .../nautilus/{nautilus_42.1.1.bb => nautilus_42.6.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/nautilus/{nautilus_42.1.1.bb => nautilus_42.6.bb} (92%)
+ .../10-adbd-configfs.conf                     |  4 --
+ .../android-gadget-cleanup                    | 24 ------------
+ .../android-gadget-setup                      | 35 ------------------
+ .../android-gadget-start                      |  7 ----
+ .../android-tools-conf-configfs_1.0.bb        | 37 -------------------
+ 5 files changed, 107 deletions(-)
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
+ delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_42.6.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
-rename to meta-gnome/recipes-gnome/nautilus/nautilus_42.6.bb
-index a36ccec472..dcfcd77380 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_42.1.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_42.6.bb
-@@ -21,7 +21,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
- 
--SRC_URI[archive.sha256sum] = "8519d4565e842aa3d31d0fe39b21d48ac54edc0f0658fe1d8ea2da4e704c1b66"
-+SRC_URI[archive.sha256sum] = "9c771c09265538f24488d3034f7b69605f5c828104ebe0ad1963d1681bce69b6"
- 
- REQUIRED_DISTRO_FEATURES = "x11 opengl"
- 
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+deleted file mode 100644
+index ddf155a907..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
++++ /dev/null
+@@ -1,4 +0,0 @@
+-[Service]
+-ExecStartPre=/usr/bin/android-gadget-setup
+-ExecStartPost=/usr/bin/android-gadget-start
+-ExecStopPost=/usr/bin/android-gadget-cleanup
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+deleted file mode 100644
+index 517227d4a6..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-cleanup
++++ /dev/null
+@@ -1,24 +0,0 @@
+-#!/bin/sh
+-
+-[ -d /sys/kernel/config/usb_gadget ] || exit 0
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-cd adb
+-
+-echo "" > UDC || true
+-
+-killall adbd || true
+-
+-umount /dev/usb-ffs/adb
+-
+-rm configs/c.1/ffs.usb0
+-
+-rmdir configs/c.1/strings/0x409
+-rmdir configs/c.1
+-
+-rmdir functions/ffs.usb0
+-rmdir strings/0x409
+-
+-cd ..
+-rmdir adb
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
+deleted file mode 100644
+index e44d1bacbe..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-setup
++++ /dev/null
+@@ -1,35 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-manufacturer=RPB
+-model="Android device"
+-serial=0123456789ABCDEF
+-
+-if [ -r /etc/android-gadget-setup.machine ] ; then
+-	. /etc/android-gadget-setup.machine
+-fi
+-
+-[ -d /sys/kernel/config/usb_gadget ] || modprobe libcomposite
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-[ -d adb ] && /usr/bin/android-gadget-cleanup || true
+-
+-mkdir adb
+-cd adb
+-
+-mkdir configs/c.1
+-mkdir functions/ffs.usb0
+-mkdir strings/0x409
+-mkdir configs/c.1/strings/0x409
+-echo 0x18d1 > idVendor
+-echo 0xd002 > idProduct
+-echo "$serial" > strings/0x409/serialnumber
+-echo "$manufacturer" > strings/0x409/manufacturer
+-echo "$model" > strings/0x409/product
+-echo "Conf 1" > configs/c.1/strings/0x409/configuration
+-ln -s functions/ffs.usb0 configs/c.1
+-
+-mkdir -p /dev/usb-ffs/adb
+-mount -t functionfs usb0 /dev/usb-ffs/adb
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
+deleted file mode 100644
+index ca6c3df275..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs/android-gadget-start
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-sleep 3
+-
+-ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
+deleted file mode 100644
+index 4d30327372..0000000000
+--- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf-configfs_1.0.bb
++++ /dev/null
+@@ -1,37 +0,0 @@
+-DESCRIPTION = "Various utilities from Android - corresponding configuration files for using ConfigFS"
+-SECTION = "console/utils"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-
+-S = "${UNPACKDIR}"
+-
+-SRC_URI = " \
+-    file://android-gadget-setup \
+-    file://android-gadget-start \
+-    file://android-gadget-cleanup \
+-    file://10-adbd-configfs.conf \
+-"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-setup ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-start ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-cleanup ${D}${bindir}
+-
+-    if [ -r ${UNPACKDIR}/android-gadget-setup.machine ] ; then
+-	install -d ${D}${sysconfdir}
+-	install -m 0644 ${UNPACKDIR}/android-gadget-setup.machine ${D}${sysconfdir}
+-    fi
+-
+-    install -d ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-    install -m 0644 ${UNPACKDIR}/10-adbd-configfs.conf ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-}
+-
+-FILES:${PN} += " \
+-    ${systemd_unitdir}/system/ \
+-"
+-
+-PROVIDES += "android-tools-conf"
+-RPROVIDES:${PN} = "android-tools-conf"
+-- 
+2.43.0
+
 
