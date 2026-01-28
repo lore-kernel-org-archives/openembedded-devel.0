@@ -1,153 +1,184 @@
-Return-Path: <ricardo.salveti@oss.qualcomm.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10E22D35665
-	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 02:08:59 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4147.1769566134923025591
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1349FD35678
+	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 05:51:30 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6992.1769579481625221164
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 18:08:54 -0800
+ Tue, 27 Jan 2026 21:51:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Ke8Nedyw;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jJe9qUQw;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: ricardo.salveti@oss.qualcomm.com)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60RJ0mIK2436568
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=; b=Ke8Nedywt3NSsc0S
-	mrHBp/d0tXLWvL3PeygSVJmN6cfi+xxoejoDIUa4nUQNlbbjZGjVVgeS0MlShHdW
-	XaKgZqVZelJQ3EUGp1hlbpBl4+74QK4TuleBDObKXT6t8rE6iIJ8w7WybqJ4BuL4
-	L9ZNjfK/g5XXwmMnUPfwk+RhgnX4M9mLRCvdikCMeQ9Iqc/wZnfU47nslHwuClpl
-	+P4TMDpJ3UBAsFaXCZBBwL19Kh0kHu5nYO8qBPVk5/qwvjBhpd+jnLD8QqN1fTV4
-	yK78GCbYtMI+mJG4G25RhNkbG3PfqZ1YMuaiYLRLP9BCHjiwyZ+gal7TpkmnUEDW
-	cyPEtg==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4by355s5wa-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:54 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2a7701b6353so63080675ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 18:08:54 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769566133; cv=none;
-        d=google.com; s=arc-20240605;
-        b=chBo1esiLefHWlXkpKsTRYQsnSe5TWmskZv5Jq+1M8n4fxtiNqxovEMfEGKh+DFtBt
-         lNrA0ltZ0/97GJLP/ALh3lLaEmdtQXspr1YMynTzmgTm/WvEbFb+Bg9afn8F7tUZRZzB
-         N539dS7L/+egftYaLnSey+gBe5cgROB3NtA1yrKXp/w/2LgSQmVOdlSa/WUzpfwsDMk+
-         Dd63E3JkXEiX8NtQeXsCha6Ysln+GJZ/N3Lfh88EL4XHR4olFevPbS4l46/CuTVHcwcz
-         j73/03WDZNHYRmVmLJcQVGOYBF1j/QasovnHpOkVRXeLsBhTatj7PHE9lMyc9ZpNsNC0
-         jOEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
-        fh=rvHI9e8tDpzaYAeEOnf6K2mlrvItleqhmuCiHJJLFLs=;
-        b=YHZcZ8kk7hONXy3NxYE7KA5O86//XmWaKwI5w92hUKoiJJ5W1u2JsT+485NV5IFbyx
-         DGyXrhuqYhRwxu9KRJpDREMiXfLfwtVx+nBpwxgtjwS3HX420UFRwDcR/UNtr9LOBG/9
-         x1nkDFnGvLRylo/RfObsvxICLBu0TkIR7cb4/31bpOJ/i/yAgx+wPv9YZQrz8WCPCwA1
-         SXnW5uQbRJdGvziGMEHlpOSEO0Z7L++s5dxbK8q6gkKw0l/QakHcSuXmj48aeoUxppsy
-         AS/rt6XyttoiUr2c8CAmWhlqhRPJT+IVVImPwc6LksXAguGStbPEPkSS/I3067MI+drq
-         WGFA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oqc059UN;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4327555464cso4555992f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:51:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1769566133; x=1770170933; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
-        b=jJe9qUQwW/cakmt598Z7y7zsAODzb30cUU1Yi4kLVu3NS+HKOZo6Jb8nqtG2vp1Omy
-         nB8Z3FjUy2rnI0Twsr4tbq1KP1pwTJQK6jO9CCtE+K8zLkPO/x6kcCigLoNuf6mKFNLI
-         pmjuIh4TqFo+IByiENQTqtMQLrsNxTDZY6fV8ZQPWk6ILKMtMKK1zkMycV5f4nlqvjkU
-         szcPo9GGrVMs+Ax5YZsodsXYrKI9493a3vxN0o71o2zck1ft7VeGthwgmyY2ZFLYgY5w
-         2MgfXzi/DtXduJWjfEh1+lhDMpYSjwPF0N5h2XPITHQD6PYhx/KyMiwXjZdG+FiWgNAY
-         vDwA==
+        d=gmail.com; s=20230601; t=1769579480; x=1770184280; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9Kj+Zh5DpGqY20v89eSc8nRXZOBUZiMRq4ClGxUiOOk=;
+        b=Oqc059UNnRFqMOLkmMBw8mxnJ4Q1o5Rkucy3v21J8WXQDaR59+UVD9fHXCkorhc12D
+         ohND8cpcKdfOWbhNvsktUtd4++4YS/TEyvFgTCkS7PAgz9fM8GXKbqGpv7jidhe210C4
+         FL9jUxhZeSxgYQN11yHQuYop3HVDTdbBUY0gllraJ46s+VsTuWisPNla985WuHavQX8f
+         rI5Iqugb/l1qdmrMVS8oCEFtgogbKpGgcJeG+fmVLuZ1Uwuh9lPasyeFcEGyaTMg64Pv
+         FTqDtizNpp7XlfEuOwhcFIjKKgiCMmuqoHEisKttaNZ8emUejZLJnePevg/p7kflgA8e
+         pVKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769566133; x=1770170933;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ETtnBvb9rnnCL/2v9q1tjiwX8fJVwOd2VCguQmShCY8=;
-        b=G2CpKFbwr1LqrSrIe7Co2bSvDh7jcmUXtNd0XbvP7AeLh0akiBuCcTgUiR0ZL0iHnu
-         KvcUPu2kOPqCErbwy54VxpWsaq9+/5+ZWc/0z5jXHdiLIygVCqnAehNvyLNiRpnbvDqO
-         TyL75NYqK2sKbUcofDO/L45FjP+Y2lO3bpAeuPlbotp7ILC/bN2Wtg/aLLxQGy5FhuWO
-         +CS5FQUDD9DKvE/rh6bOkCITL2l/hx/1YQWcNz68pbNf+s4wRhqCaFlMEIiWmQkdKk+C
-         7/Y36J2N2+Sn/RXoYbRDzl+81ZADFenV41a+LTwhuBrkcgGs864l7YZ/kTMNpAkX5t/p
-         vuNw==
-X-Gm-Message-State: AOJu0YwRL9d8j1YdUQdmHnFtUlEfXKaDmbmJu0oz+1neprNNDhYecl/M
-	zfOSsoj/p7AbPnFyrzGcLYYsB9Ex68go5rdMM3jDP5WODoFIb6k/56ud8tRfENcpmKFt+8gE1Z9
-	pjiMd8mzux5FQmtxuPDbItZDPKNjobEbmoygZJnhbjEeC3h1Ap0n4zeXmqvTljReBBe/X/LM5x4
-	5Qc7Zni1BHkbDnAE7KyaFhbSl9MkBaGgRQ77zVxqhsOdeX2vCoCZ30Ug42RYI=
-X-Gm-Gg: AZuq6aK5X6AME5w95D5Azew3G1/QUIX/kYT+GIYQ7vIp5SRWQArsD02S1HgHsKnGOCX
-	cpozLOXxGiWaXAfkpWZr82ggBEcbrZqMo7YL5nSgtOQpBuJ2RrBzwJfV3UVqY6//KOfXIQSpq53
-	MrA3wNvucpJpuzeuCXrDrZz9FwnRBJdwtfhiuV53oa7y8ysj+HX34Hl/3SQz/wBxOSImv5
-X-Received: by 2002:a17:902:d2c6:b0:2a4:8cd:c3cf with SMTP id d9443c01a7336-2a870e77eedmr41393825ad.49.1769566133436;
-        Tue, 27 Jan 2026 18:08:53 -0800 (PST)
-X-Received: by 2002:a17:902:d2c6:b0:2a4:8cd:c3cf with SMTP id
- d9443c01a7336-2a870e77eedmr41393475ad.49.1769566132759; Tue, 27 Jan 2026
- 18:08:52 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769579480; x=1770184280;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9Kj+Zh5DpGqY20v89eSc8nRXZOBUZiMRq4ClGxUiOOk=;
+        b=j9taaeo4QK5NvSdEkv4G7FFtd7YUhW0UH8Q2AtX5hgHG6XYi+uA6LCkN93lboBdvQR
+         kpxTKU2zIiRXk646RblKTMZGI86RBi5e+XZbnCFRbwmDaxXgvFbFLGVIU0sB27eIMgPT
+         4VHQFRHOpHU19dxmay5CEUnOKvyLbhcTImZpGZ6YqeTlHKl53GXIzqifiuFAdG5VJkCc
+         O6jy2VZbdQXwwnEhnvEwm51TK1lygr41Ym6c3AdqFwdFlti+9b+2YAcX3fx2VYQM58E0
+         +ckQjAtRczh1NFZ1luSrChwPsa+UW3vMBPOvHucsBz8eTpv0Za5JzEkRml99JADUrZt1
+         w5wA==
+X-Gm-Message-State: AOJu0YyIM/F1m37WxmulEXb0Q8jMjZtkyYhY+9iFlbV5BcbwqozEOwJC
+	/5zcAByEpD8RJa2OgyyxjAGuZDZndQsY9duB38Hl4abJDujOVPrxOeFZAQ8Gqg==
+X-Gm-Gg: AZuq6aINsZJEogeteqTogPyE3gIXW3OX1jBMoh5GJMfUJjUHwV1R/2mlxc4Kv/ntmeD
+	A8heMEdc24YpqtMJ3Yju1PAglZ+hdJrGAznW5SrboQ4MHj6eotjPfZnqZIafFtHBfEiCSbgWgxK
+	uT3PIYZuy8mAgSQV99XVXGxKzsb0kl48goILrGYj5Cq0rdLHYorlKaItygaLx2gObZseY7eXiRd
+	3Vz+8nJII3QcRVPVHZLwP8KC04VB3Mz7l/+ZimsexIeY74yyH9d4asxFfThAxgAO4W8f9L1an0X
+	vKm79Tsx2Ey9phaSESJgBdgt/8vv4ONEpohAjlQpQHqRB/3ibCxk6g6ELq6MXQg1nC/jKyBCSjT
+	JPzKfWmKYaNp0JwR1vSyFcmOXfTUtoTWEkPv1aUvJ/iUFUjs9EzSa+KAKB8E81XkTPZqBicCWY8
+	fTYRJ2TdL5
+X-Received: by 2002:a05:6000:4282:b0:435:a48a:1239 with SMTP id ffacd0b85a97d-435dd05aabemr5315781f8f.14.1769579479439;
+        Tue, 27 Jan 2026 21:51:19 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10f82aesm4371777f8f.19.2026.01.27.21.51.18
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Jan 2026 21:51:19 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][kirkstone][PATCH 1/5] libadwaita: upgrade 1.1.1 -> 1.1.7
+Date: Wed, 28 Jan 2026 06:51:14 +0100
+Message-ID: <20260128055118.2011068-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <20260127055329.3727567-1-shoudil@qti.qualcomm.com>
-In-Reply-To: <20260127055329.3727567-1-shoudil@qti.qualcomm.com>
-From: "Ricardo de Araujo (Salveti)" <ricardo.salveti@oss.qualcomm.com>
-Date: Tue, 27 Jan 2026 23:08:16 -0300
-X-Gm-Features: AZwV_QgryjIJdn-xkHmtpAKw0flSIax3_N_SLG1qEPAWjhtx9KRUz4eQcfsIHHQ
-Message-ID: <CAA_5youHfEEeRo6yy88W4qzOQ03=+FRs_7swEb8NM-5GtnjT=w@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3] android-tools-conf-configfs: remove this
- recipe without selinux dependency
-To: shoudil@qti.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=YNWSCBGx c=1 sm=1 tr=0 ts=69796fb6 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8
- a=Bx9Rq_O0B1RHcinQBQQA:9 a=QEXdDO2ut3YA:10 a=zZCYzV9kfG8A:10
- a=uG9DUKGECoFWVXl0Dc02:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-ORIG-GUID: QnVUWjDYoZHeCKTRXRq0YIdiXIq3TesW
-X-Proofpoint-GUID: QnVUWjDYoZHeCKTRXRq0YIdiXIq3TesW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI4MDAxNCBTYWx0ZWRfXyQZyc4vCc/kB
- COqo+UKIQNdnA57ZlsfhPX5l0XHvxRbTPn9kSqpEVv11DhuOmRbrCvech9bu+pUeEBaRg5swAOx
- nLzh2XHXhMpKW/3mdznKyfBa7eK9Y1cAMz4FRE5ydwt3vd9HRh/fmjbDdTEY7i/pBDljjm8R/U0
- gtLnmMFN839lyPqZRtUpn7S+ZziZEs2eUB19z1hGbWFrEjX3IB5936U9HqFiPP0zDXmDW7iKDDE
- YfxAEOCy91XnnGaawDYD3IHJzt60OleugL669OZ1Y8cGwJQtg2OYhuii1wZI9rqDnLUjfLp5gNf
- D5fw80qipCJ0xS4jXq2qglVWDJKwFrGmMMiq2OSm1Id2H0ObI5L7FdnKJzCW0GLB20afRr6OSYJ
- K7KQZOJH6se3sSe21TYdSdEsFCHnkFGpRYux8DOlD0KtU9r4Aa/c25z9Xc5Pgv/lmmYJjm2OZpA
- +kXZzu7EwQ/sFKf0GLg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-01-27_05,2026-01-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
- priorityscore=1501 spamscore=0 impostorscore=0 malwarescore=0 clxscore=1011
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601280014
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 02:08:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123963
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 05:51:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123964
 
-On Tue, Jan 27, 2026 at 2:54=E2=80=AFAM Shoudi Li via lists.openembedded.or=
-g
-<shoudil=3Dqti.qualcomm.com@lists.openembedded.org> wrote:
->
-> For the boards with multiple UDC ports, when compiling with meta-selinux
-> layer adb funtion will be impacted due to below error. Remove the recipe
-> under dynamic-layers/selinux/ to avoid it.
->
-> ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/adb/UDC
-> ls: write error: Device or resource busy
+Bugfix releases.
 
-You are removing it because it is not really required anymore, so add
-that to your commit message.
+Changelog:
 
-The consequence of the removal is that boards with multiple UDC ports
-will be functional with adb.
+Version 1.1.7:
+- AdwCarousel
+  - Fix allocation
+- AdwFlap
+  - Add a missing setter annotation for :fold-policy
+  - Correctly measure separator
+  - Avoid notify emissions in dispose()
+- AdwLeaflet
+  - Fix can-unfold=false
+- AdwSpringAnimation
+  - Fix critical damping velocity
+- AdwSwipeable
+  - Fix get_swipe_area() fallback
+- AdwTabBar
+  - Fix clipped labels
+- AdwToastOverlay
+  - Don't focus buttons on click
+- Demo
+  - Open primary menu with F10
+  - Fix the switch on the avatar page
+- Stylesheet
+  - Fix GtkLevelBar fill colors
+- Fix dependency names in docs
+- Memory leak fixes
 
-Thanks,
+Version 1.1.6:
+- AdwAvatar
+  - Correctly redraw on custom image changes
+- AdwFlap
+  - Fix natural width with fold-policy=never
+- AdwSplitButton
+  - Don't make dropdown insensitive when the button is
+- AdwTabBar
+  - Fix focus handling
+  - Fix autoscroll for non-local drags
+- AdwToastOverlay
+  - Clarify documentation
+- Stylesheet
+  - Fix GtkSpinButton inside toolbars
 
-Ricardo
+Version 1.1.5:
+- AdwCarousel
+  - Fix a crash when removing a child while it's animating
+- AdwSqueezer
+  - Sizing fixes
+- AdwTabBar
+  - Fix long press handling
+  - Fix a crash when clicking empty space while a tab is animating
+- AdwTabView
+  - Fix set_menu_model() input check
+
+Version 1.1.4:
+- AdwAvatar
+  - Fix draw_to_texture() with rectangular avatars
+- AdwTabBar
+  - Fix squished or clipped text with gtk-hint-font-metrics=0
+- AdwShadowHelper
+  - Fix warnings when drawing vertical shadow
+- AdwSwipeTracker
+  - Fix swipe speed on GTK 4.7.x
+  - Fix criticals with GTK 4.7.x
+
+Version 1.1.3:
+- AdwLeaflet
+  - Fix a broken link in docs
+- AdwPreferencesGroup
+  - Fix accessibility labels
+- AdwToast
+  - Fix the example in docs
+- Stylesheet
+  - Add missing borders in high contrast version
+
+Version 1.1.2:
+- AdwLeaflet
+  - Fix child sizing with fold-threshold-policy=natural
+- AdwStyleManager
+  - Correctly handle removing a GdkDisplay
+- AdwSwipeTracker
+  - Fix a memory leak
+  - Fix high contrast setting name when using a portal
+- AdwTabBar
+  - Fix middle click when inside GtkWindowHandle
+- Stylesheet
+  - Fix action row title and subtitle inside GtkHeaderBar
+  - Fix progressbar.osd overriding text color
+  - Ensure active states consistently work with touchscreens
+  - Fix GtkDropDown visual glitch when pressed on touchscreen
+- Translation updates:
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../libadwaita/{libadwaita_1.1.1.bb => libadwaita_1.1.7.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libadwaita/{libadwaita_1.1.1.bb => libadwaita_1.1.7.bb} (86%)
+
+diff --git a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.7.bb
+similarity index 86%
+rename from meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb
+rename to meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.7.bb
+index 8ca3be352e..2150b86813 100644
+--- a/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.1.bb
++++ b/meta-gnome/recipes-gnome/libadwaita/libadwaita_1.1.7.bb
+@@ -11,7 +11,7 @@ DEPENDS = " \
+ 
+ inherit gnomebase gobject-introspection gtk-doc vala features_check
+ 
+-SRC_URI[archive.sha256sum] = "491169d4f6a11765328996bc088272d05c7235453bc0ee73c20dfd4bd67b401c"
++SRC_URI[archive.sha256sum] = "f54481638e921b1e42a7edd16c4fadd5eb859f8ef1425285618821c844b38d92"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ REQUIRED_DISTRO_FEATURES = "opengl"
 
