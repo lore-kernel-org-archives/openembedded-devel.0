@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10F3AD3567B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32084D35681
 	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 05:51:30 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6994.1769579482379760200
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6996.1769579483726733981
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 21:51:22 -0800
+ Tue, 27 Jan 2026 21:51:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Saks56j/;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-42fb2314f52so3854623f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:51:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VpyirICo;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-47ee2715254so33271215e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:51:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769579481; x=1770184281; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769579482; x=1770184282; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=W4oQzL3O7wDPSh0A8R55232JOThFkCN1Ymb2nhru2GM=;
-        b=Saks56j/Zp7j3RoAv8nJBo4lYMKkrxK4nWuJe9LLp38Xsfbs2oQ/MaKYkW0OAzP41i
-         6CkMHer6gfXD99VtebVavOK2YRVCNM2ZZ0e5T4WZNF6OPHCG+xxjjYoZfku2eeGMi3T0
-         JPSLj4J2p8wbRehJM977CvatyH7uTX1OulSCYiAYx0V/JIsPPheLVFAIdtkWvZJd0K/E
-         aH7UjMKy2cEmITxgHjO+JQn3NOlTzflPZz+myE1MNkUm5eQy7Rfi/vuFd6TNjm0i6wCd
-         T8BqAylvcc0uQdXsUHfTSS18LwT0rUjJbMDEOfhtcpqXpGzkbC6POX5Qb8bnJgqaX7Dq
-         j/vA==
+        bh=6LZFZlYIzx7b+1sSriGAHJ/TGyWtcOcdRoXnP0Ffv8U=;
+        b=VpyirICoFHZST7aFjDzwQyOc9389Dq6m9TdkkM9sophWs7JJyWQ8mFu6b78E628jAS
+         WRPxDQrTZK5tbUAtejjNgKmh68+zsnX8KzjCT65IPYAF5dt4j9B0fRR5yGaDcPVFIfFs
+         cbDKX1JaTsIwP+EjtVe1OZzCgDQYoYRhZs4QD6t/6hzkb7NQSfH2FJ5jXscSr0mW8tZZ
+         T4n4a7lvqN5apksmX5OryKmQtrc+2aQ2CF7GYbZVoy+Zi1SaP//HC27PTj1+Tfi/KmWq
+         s/oMbax6Xrb+fpkwzsVoqBrSfU0gLx660LfhNoUIs27aBJyQxA7mlka9eXM3XMCDYPBc
+         3kAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769579481; x=1770184281;
+        d=1e100.net; s=20230601; t=1769579482; x=1770184282;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=W4oQzL3O7wDPSh0A8R55232JOThFkCN1Ymb2nhru2GM=;
-        b=VZvJtKeCIsRLnyNgHHBM31utgWAPOUKf1dSwZkgL3cAySNvYx1T6nxzasUjga1hJrC
-         D7oIOF0hwvW5NOta5hon0jXLE6pjwUyekrH/PPpaiUk+9qXpFx5rueszga3LBV4j0Snp
-         gHMpIl0g3eKhmT5GYToAn7LaIG5+aFGfzTS7Bm+lAHpzJyyDi27ZGtC2jG2NhPtwpTmQ
-         e56nl9+x1YGhG4yexEgW986fMNV5dOTjkQV/CCicTFOrBzXmdUB0yu2dKgkeX5E/aca2
-         m7c37JB/TjiGCBeaJgVw5q2KyGdv3E7QUKkLlt6JtPByiG8NliXBbubs1JF9rsCLooUe
-         lcPw==
-X-Gm-Message-State: AOJu0YxvgCMwiisMMV8moNeTAUg/BnBYnEK/uld5oXrp+7VvCbXxENv7
-	qSfEp26uZbEq10QZQp6Z5el0TDj1cq7+ZjioR1+y4MvNkVJyiRwkKMKVrpm7CA==
-X-Gm-Gg: AZuq6aIEiLgY2kIJaJcqm75JiYUuXJVL9skiCQlxZTvbznjAjGWK2Q0q9aGY1hWX9iY
-	o6RvYLUx4qF/tCiR3FizIdiNljmiFp/qG/m/8s/mLT+iyhhvAq3oxKI2ZWokT8rLXh7Vjr2Bvg8
-	leOSrCpEQRIDXplA1xVP5GZEq3ar5vxBAa0Xt+vH/HvWuPcr0tc5avcFhHKDq+Z4sflVL0Dx0qz
-	F/hwSNbd4pNuG9rJa7GFCDACdTWaHg7q1wvRUQCmGAHNcFdyC002wq4eYmxQ+prH54plcKaGXzT
-	3c085lMdda3qwCMOTErUEtqtXR2hRqe6lZjKWzOaPMHkXruvaQF7VJe/nb4YWFz9QW1TNqM9/zp
-	GJXTti+8UEgkdCdgbUQtt7Nf2pbXh8VUaunfKS7ENVvcn01rQEg3KVdeLA/LzbaylxxTBWMlHPO
-	IchNiwhdUv
-X-Received: by 2002:a5d:5f49:0:b0:435:dba0:736c with SMTP id ffacd0b85a97d-435dd1ce09cmr5864706f8f.56.1769579480702;
-        Tue, 27 Jan 2026 21:51:20 -0800 (PST)
+        bh=6LZFZlYIzx7b+1sSriGAHJ/TGyWtcOcdRoXnP0Ffv8U=;
+        b=F83bVfT3os+4yNkXMhJDbIDmRoPUTewXDxQpM2ui3HbZe8rOtAWKGysbycr8IIguUV
+         su4tDvXfAHZUJFqvYk/ppzrZizyBpXP3QiBwqnrdvTcSV/tt5/kp/CiBEa8kV+8WDtOC
+         wh7xK+dRzvGiHAQcjR8kZY8i2Awgnv9JUcijx81PcFQjxXeEL+P30gbC1XQfHIrP5cAX
+         nEwEVQvIPniNiTNIfHVru7uSLCPFhtbaHPtFGziWZN7a7O75WLDjQkwMDUlglkURd/Mt
+         DTdvfckwq6FtyLfK3Br2xXOSEz9GvQQmHOeyOpZx3fuaeC0d82SGOVc+y5+cPCMeBFAu
+         sUKQ==
+X-Gm-Message-State: AOJu0YwLlgYH5Q4D90WC5E+0AIJOwQZkGDUNaRaaLL1Y5vigl2jE9H16
+	U5u3SRvwS2LXB7ZletAQnEhiR2Lg7sh99FzLwmlAzd1eudYct+n03RhpoLXNIg==
+X-Gm-Gg: AZuq6aKNWGdg7NxG+bVE+6sMcq9ZRX3pMVTyOpbyNCe2gIIc6x8+Ar4YS8fCuWhzK7j
+	OUmoV3FJVgpgIrULvTGGFo6Xu02Sktgp55VqEdYva2Y9Owgm1NdJ7zkw1AxiRJP62LhY2/LlbQZ
+	L5g3QtJ3M03/gOwuw9YLthVU4jgij6aer52NA7NvvsfJ1uW3AXAo8u9qT7WSYPIYG1nXm0YP7ML
+	K2W2z3EdfxEMHCtjy0peiXwULKHZ2Mn+X01gLT3y4obLL5jwlFoi6tGU5n0p6VInWeoZ5aDWlAS
+	o8m9szDpyRiWZkbSy11P/MoSuHk8QVHknqrFThrYT0qSvVDtx0NV4EeTL5rOfDV4VnrCIN5L8gn
+	jWCAe7QDGoKjoYpWzQRRcaH4d0vrC5+70zBuRMUVMeUx3/Bv2x8neFs5pWQ/N4bK5DHfJ7EJ6z1
+	QBjEl8uCoA
+X-Received: by 2002:a05:6000:609:b0:435:9bf5:b32c with SMTP id ffacd0b85a97d-435dd1c0c81mr5796604f8f.29.1769579481959;
+        Tue, 27 Jan 2026 21:51:21 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10f82aesm4371777f8f.19.2026.01.27.21.51.20
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10f82aesm4371777f8f.19.2026.01.27.21.51.21
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Jan 2026 21:51:20 -0800 (PST)
+        Tue, 27 Jan 2026 21:51:21 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][kirkstone][PATCH 3/5] catfish: upgrade 4.16.3 -> 4.16.4
-Date: Wed, 28 Jan 2026 06:51:16 +0100
-Message-ID: <20260128055118.2011068-3-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 5/5] proftpd: ignore CVE-2021-47865
+Date: Wed, 28 Jan 2026 06:51:18 +0100
+Message-ID: <20260128055118.2011068-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260128055118.2011068-1-skandigraun@gmail.com>
 References: <20260128055118.2011068-1-skandigraun@gmail.com>
@@ -67,47 +67,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 05:51:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123966
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123968
 
-Changelog:
-- Add "Open with" right click item and dialog
-- Add a command-line option for setting default sort method
-- Add Ctrl+A accelerator for the treeview
-- Add option to show file size in binary or decimal
-- Cosmetic changes for search entry and delete dialog
-- Fix Ctrl+H not always toggling hidden files
-- Fix DE detection when launched from Electron apps
-- Fix exo file manager lookup for non-existent keys
-- Fix file manager lookup outside of Xfce
-- Fix GNOME DE detection in Ubuntu
-- Improve application menu appearance
-- Improve default width for the sidebar
-- Prepend the project root directory to sys.path
-- Support running without Xfconf (no preference saving)
-- Switch to using the super() method
-- Use correct executable for elementary Files
-- Translation Updates
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-47865
+
+This CVE was opened based on a 5 years old Github issue[1], and has been made
+public recently. The CVE wasn't officially disputed (yet?), but based on
+the description and the given PoC the application is working as expected.
+
+The vulnerability description and the PoC basically configures proftpd to
+accept maximum x connections, and then when the user tries to open x + 1
+concurrent connections, it refuses new connections over the configured limit.
+
+See also discussion in the Github issue.
+
+I just put it on the ignore list.
+
+[1]: https://github.com/proftpd/proftpd/issues/1298
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../catfish/{catfish_4.16.3.bb => catfish_4.16.4.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/catfish/{catfish_4.16.3.bb => catfish_4.16.4.bb} (90%)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb b/meta-xfce/recipes-apps/catfish/catfish_4.16.4.bb
-similarity index 90%
-rename from meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-rename to meta-xfce/recipes-apps/catfish/catfish_4.16.4.bb
-index 8fe879b816..1893802090 100644
---- a/meta-xfce/recipes-apps/catfish/catfish_4.16.3.bb
-+++ b/meta-xfce/recipes-apps/catfish/catfish_4.16.4.bb
-@@ -7,7 +7,7 @@ inherit xfce-app python_setuptools_build_meta gtk-icon-cache mime-xdg
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index b8f2b50f79..7aee6d1281 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -28,6 +28,9 @@ inherit autotools-brokensep useradd update-rc.d systemd multilib_script
+ # fixed-version: version 1.2.0rc3 removed affected module
+ CVE_CHECK_IGNORE += "CVE-2001-0027"
  
- DEPENDS += "python3-distutils-extra-native"
- 
--SRC_URI[sha256sum] = "e9a99a62d10981391508dd43f3cbfa2d50a69bd6b7d1eeef7d30ba4c673dcfda"
-+SRC_URI[sha256sum] = "6e5c01c534de7a8ce911965c4cd298c5b5d2079e0bc29c91b1e310c9884bb5fc"
- 
- FILES:${PN} += "${datadir}/metainfo"
- 
++# the issue is not a vulnerability, works as expected
++CVE_CHECK_IGNORE += "CVE-2021-47865"
++
+ PACKAGECONFIG ??= "shadow \
+                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+                    static \
 
