@@ -1,185 +1,349 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99B8AD3F083
-	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 17:24:13 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1920.1769618562850950090
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 509B8D46BF9
+	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 19:47:04 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3617.1769629622044309419
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jan 2026 08:42:43 -0800
+ Wed, 28 Jan 2026 11:47:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=GMSAkmLF;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Itqss1cS;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: mohammad.rafi.shaik@oss.qualcomm.com)
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60SFZQRo811587
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 15:55:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=gpUpPHneR33L2jg6XeAEcSP3erzt9tHFWXL
-	wbVmYX08=; b=GMSAkmLFRcdexDgsPqTRHFiwU3y+0JqsV+mBmSOyVMOC381Ap54
-	vwqxzdkDJi+r4SY2P1c7943KLKW8EEgcEKwKI6eNJd4bLynvSMMXlFKussHfeZcS
-	S+7/o6Q4kP/Bie3T6oUtgrO9U0fnVJt/iFNlJA2TINHD4D+OOCJTlOUHhVShanFH
-	gH2Z6rfO6m5OxGKUgcc1v+KiCfWWbWFcYwT1Qq8XeNIVQzdXn7Xok2yOaud/9eMl
-	UXjZV8PkhC502j52FxeiYNmjNXftRptkGT83PkhoAdfjAxKbuNYuS/c6bAE3R1tf
-	ExBdlYZfrHu9g+vkiFTxVyIJSyG+dFcKAkw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4by6qbk9fs-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 15:55:00 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2a0bb1192cbso58455825ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 07:55:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KGSWw6ch;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-43590777e22so151838f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 11:47:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1769615699; x=1770220499; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=gpUpPHneR33L2jg6XeAEcSP3erzt9tHFWXLwbVmYX08=;
-        b=Itqss1cSDua+SgxhPmhoRYD1NjKxwL6Wlz+kGivILg21RvjU6ZH8yuJ5DyJoT4vBXK
-         vUYGZzR4lro0ge2fOVicRTo/J7x3IkzXqh/FBLTZWCbsgPQPozyDYnFw02l+xVLIoQbg
-         DLuqHKQ2T4hNK2jTN1lJN3V13W7iewD5CcnPU6U+t665VrQj/rOljYU30aP6DdA28JJd
-         yQq4dv/ygIVpfQl7Da25GGFnh1/xqkBTRGenNCqBvsOl1Kvz6XY/dOUvLeHwn0fwnOfE
-         XvchLDJgAlX+2O2rq6MxmiXy050iHpfdNthEjmX6OfvqNb7XvCloQ7MJFr5NMtXsekPq
-         CdKQ==
+        d=gmail.com; s=20230601; t=1769629620; x=1770234420; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pdT9sSx4FF/G10T+IDiN5SgVKVbP3tFnr05q409f0Bw=;
+        b=KGSWw6chJMOMa3At3BTitFW/7BW7MsGvply9sJA3CgUqx/M81wJOGuFxlkdk7fWI3D
+         mreir3hQQP60vWBXpt7bCj2/xASSOUn7+GQtKEP3SXy2dpL+Tq7qKYSmWZF9tlZ1aXfv
+         6R4ga/Zbepwe922LeUMft8/0vPenanPTR0yNCxmj3jWaIMGFu/RZTn9R3ApQ21SehPJ1
+         AzQAJYzW3ShYwSgv8lek3l+MNir0eqab4xp6eJ2dCDWr231ho0JiQhsk7rhmf4hLLw+i
+         F6PBUkaRp8R8JbUKngxolSos4WlHY5B7V97SQRX8lZODE+Y64PSNUwEV291SD3olQ6/6
+         xJgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769615699; x=1770220499;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=gpUpPHneR33L2jg6XeAEcSP3erzt9tHFWXLwbVmYX08=;
-        b=qcFYXlBsOo6nNwcFF9En9Ep6EwyOdNZp3KpBEg0eSbYIdozSJH0QrwMP44zcgNaq/A
-         2VvWakJr/q+mBb5sqBUkebOb2LdzYkdYYHvMJdkEyK4s7xL9rvmBG3ahuR4YPuCR5q8a
-         CyYzB3N1Lt/xPZ2F+yE3cOHyy8LYXSALRCobVKDEJNWJYaSO0Hym5m75jjsD4R1AVWPH
-         57MEmNLvojUfoFImSPP9959xtVWDN1rc5BIduMmACRGIgqWHLn1WJzW/kHthovTAXfKQ
-         XVh8ZzGF9e5HMrg8eOEKPrQe0G+3K/tZSHnsb/4B9cJxgGIq1BxEYGtAd4yEynnaoGKw
-         RZPQ==
-X-Gm-Message-State: AOJu0YxMl9kTKc1u3IbdKy46uJheCCmxjbHxebF9udsnfCvb5OHt/0Lg
-	wbRMDgCp9iwCGITS+WVk/lkTIIJadtPcn0NC72CUijpjSU0SvUAWEXdF2c1OLBL4fhM9lgz0MCX
-	EJ1qq/2dxis2acQpksXO98g4em7AmbrYzxY/w61ckEsfJKcrQIXbZmbvKGuDrqh5akJOqWDxfkH
-	BpYOp6BsIfNMk6ctPq
-X-Gm-Gg: AZuq6aI667JdOmVjQ7KS16GshQUdjlqcz4O2VvLlM7IhPyTxg1mNcvut+ANogjFc9Ec
-	GAfnLEpSEO3mMmLaV/nB1Qyhy4e3hBm5VlaCWeI4+LZ78cdbzCUctOo+7yF8iHXWsydIIB9SEUz
-	0XVSRtGuy5YPekYGqjJCgZnT5PSSyo4XHDKFAh3eo9pNPR7kPjGawbdlVLaUbo3Z75CoMDqHmvG
-	tByywCMpKOdztfQ4lPaMta0U9XMzeWIOSSl8QjCUFz2jxVzAMaovxJk5Z3cbBdA+1yW74MXFFE+
-	jNYcfeB8xjPwpH3IhPKz3NSZFzYcKvMwqGmz4lDj+58PsiGxkeZZiJ4cHDyQopFTveM3zdiVDY0
-	gFtDRCwmI0yAmgTMkkIkQ++E6us5aofcTI6aFr70soYLP7Q==
-X-Received: by 2002:a17:902:db09:b0:295:290d:4afa with SMTP id d9443c01a7336-2a870d6c56fmr58874695ad.23.1769615699130;
-        Wed, 28 Jan 2026 07:54:59 -0800 (PST)
-X-Received: by 2002:a17:902:db09:b0:295:290d:4afa with SMTP id d9443c01a7336-2a870d6c56fmr58874355ad.23.1769615698589;
-        Wed, 28 Jan 2026 07:54:58 -0800 (PST)
-Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2a88b5d985asm26391995ad.73.2026.01.28.07.54.57
+        d=1e100.net; s=20230601; t=1769629620; x=1770234420;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pdT9sSx4FF/G10T+IDiN5SgVKVbP3tFnr05q409f0Bw=;
+        b=LhpvfZIKoNYTggcua7o56bY4P7oc7Ho0hvJMIRkl5JrYR5/i9HvnyGWLvsr2At7c3T
+         MR2+spDIfYgP++KzB49FQV2EgGox0vkNbEK9NMxBqy8HnPkBQEKJhYoMnD2bUMlNHubo
+         xH1CmMnrgsd+xwv4GY73kJVrAB9oQox+QyhNQA0P0sBPck2Q1bYaGP9qrsY5vK2nfxtr
+         2hZRtudLFxKfxMMgDYlvmZ0cxcpxEFKoj7d/tNuaaoKrzD/y1N3+PWTPrfdG0nfh1lUJ
+         Vt7OJgyMNN5D9jhH0NrjeJ1ttnG/lwH6QM01CPka1DeBtBv0l8dWttZb7eSASuve0bQO
+         C6BA==
+X-Gm-Message-State: AOJu0YzkZv/e2anREGqaccf/5aGAaStXnAWut9YaMyEbxjDbBElka4Iq
+	urhclp8BqgtICMrzGTnOwuqXD+6RXSqeZDllFnmhvgShLmbwBix/vCzXayoo6g==
+X-Gm-Gg: AZuq6aKjju87cadNIWjWaF0DvCk9z/CmaCkPMU9rovJ2mT7BU1z/qYlK5/2DJ92G4nI
+	P8mchGHNn7+5ZfPDCdgDpm7hHq9sXPumCiIZ1ps18hPowqHAt0drprg5lBO0JC8Ab2sqq9p8dbh
+	Vxsjv5CJWrYZv2uY5nvXvxC2aoOcRdfXFauwMg5yWLdTBkOw3XqYh3/raisFKFd7y+5QC1cWPQi
+	vtnT2+0t1NBjQPFgTn5wz1+p7knNujwspnfzH2klO9ORFFM832gpuXc5n/ojd3XwuVANAbgNa+z
+	TxpPvgu2tKzTl7yGuh9vvYiYMAl6vWVAtizmKLDx/PZgzJ7jR2/b3MK1cYjoEKJNkfqmtoxMSjq
+	7nzXy8Zc7RNGeY1dK0Pg0Q6cYw+k00ODYzxS2+2kz7MnwHTij3FhMe4Mu3liQ3KLZ1zac35LMJ7
+	Xn6aCjflv7
+X-Received: by 2002:a05:6000:2012:b0:435:9612:2d3b with SMTP id ffacd0b85a97d-435dd1cc0abmr9881423f8f.44.1769629620065;
+        Wed, 28 Jan 2026 11:47:00 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10ed952sm9102173f8f.10.2026.01.28.11.46.59
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Jan 2026 07:54:58 -0800 (PST)
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+        Wed, 28 Jan 2026 11:46:59 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pratyush Meduri <mpratyus@qti.qualcomm.com>
-Subject: [meta-multimedia][PATCH] tinycompress: install compress_ops.h as public header
-Date: Wed, 28 Jan 2026 21:24:43 +0530
-Message-Id: <20260128155443.700164-1-mohammad.rafi.shaik@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-networking][PATCH] wireshark: upgrade 4.2.14 -> 4.6.3
+Date: Wed, 28 Jan 2026 20:46:58 +0100
+Message-ID: <20260128194658.205846-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-X-Proofpoint-GUID: AIL8N4_hKXcy6E6C1wjXLClHH3yfmT9E
-X-Authority-Analysis: v=2.4 cv=Z4Dh3XRA c=1 sm=1 tr=0 ts=697a3154 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=vUbySO9Y5rIA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=92eLw-ppF1KFcGgh8SkA:9
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: AIL8N4_hKXcy6E6C1wjXLClHH3yfmT9E
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI4MDEzMSBTYWx0ZWRfX2zi5KFyccD8m
- bsrI0ud12MZYEDyB9H/zC+o/16ZrCiuXrUjhgxHnBJ+1uGM2rEiRU3fxChagFxEs5eIZcZ+HcsH
- VUO40b6coxKLKAmkEHJ4wSbsI0GpKQBmXd1gomSaBW5v9p09cxM6Zo/gdcnpA6FMHnv7rjJ2cGe
- Yxppkkc5aKv9QkFmE1v9SA51RHdDDywvaa0uA26159NPSCmax20G5NssNRvNI6UlWUvuhqrEbkT
- S8fY4OmeWqCIPl9Dr8PFLRC3Rj8JPq6xys2r5F/27K2jiduCbyb9yJtx0CalvVYsO3aiVB7FWFE
- XOGXt6lSqy7kZC2Uv5vt7i7sIzAnDayIE456gFZnhKiW5YZ1fH1TCbLqRHRAYdfNvUd5eV3SLUF
- qn2HzXhqUY0QFldbq/Fj4X572OvrLT8afOkn11b86wHPRCgcYt6cOjnr90Wz1U2aEq58tQnvogn
- dGk1GY/q5qpoTBaI1kA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-01-28_03,2026-01-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 clxscore=1011
- impostorscore=0 adultscore=0 priorityscore=1501 spamscore=0 bulkscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
- definitions=main-2601280131
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 17:24:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123974
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 19:47:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123975
 
-From: Pratyush Meduri <mpratyus@qti.qualcomm.com>
+Contains fix for CVE-2025-0962.
 
-Add a patch to install compress_ops.h as a public header for
-tinycompress, and update the recipe to apply it.
+Removed CVE-2025-9817.patch because it is included in this release.
 
-This is required for users that need access to compress_ops from
-external components.
+Add a patch that allows it building for native: it is looking for iconv.h
+header as a new dependency for (optional) zlib-ng support, however it
+is not installed in the sysroot for native builds. Add a patch that removes
+this hard dependency for native builds.
 
-Upstream-Status: submitted
+Changelogs:
+https://www.wireshark.org/docs/relnotes/wireshark-4.6.3.html
+https://www.wireshark.org/docs/relnotes/wireshark-4.6.2.html
+https://www.wireshark.org/docs/relnotes/wireshark-4.6.1.html
+https://www.wireshark.org/docs/relnotes/wireshark-4.6.0.html
 
-Signed-off-by: Pratyush Meduri <mpratyus@qti.qualcomm.com>
-Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+Overall changelogs (including 4.4 also): https://www.wireshark.org/docs/relnotes/
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...tall-compress_ops.h-as-public-header.patch | 32 +++++++++++++++++++
- .../tinycompress/tinycompress_1.2.13.bb       |  3 +-
- 2 files changed, 34 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/tinycompress/tinycompress/0001-include-install-compress_ops.h-as-public-header.patch
+ .../recipes-support/wireshark/README          | 45 ------------------
+ ...-t-look-for-iconv.h-for-native-build.patch | 46 +++++++++++++++++++
+ .../0002-flex-Remove-line-directives.patch    |  6 +--
+ .../0004-lemon-Remove-line-directives.patch   |  6 +--
+ .../wireshark/files/CVE-2025-9817.patch       | 32 -------------
+ ...wireshark_4.2.14.bb => wireshark_4.6.3.bb} | 14 ++++--
+ 6 files changed, 61 insertions(+), 88 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/wireshark/README
+ create mode 100644 meta-networking/recipes-support/wireshark/files/0001-don-t-look-for-iconv.h-for-native-build.patch
+ delete mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2025-9817.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_4.2.14.bb => wireshark_4.6.3.bb} (87%)
 
-diff --git a/meta-multimedia/recipes-multimedia/tinycompress/tinycompress/0001-include-install-compress_ops.h-as-public-header.patch b/meta-multimedia/recipes-multimedia/tinycompress/tinycompress/0001-include-install-compress_ops.h-as-public-header.patch
+diff --git a/meta-networking/recipes-support/wireshark/README b/meta-networking/recipes-support/wireshark/README
+deleted file mode 100644
+index f5e4d04777..0000000000
+--- a/meta-networking/recipes-support/wireshark/README
++++ /dev/null
+@@ -1,45 +0,0 @@
+-#
+-Wireshark - Notes
+-
+-URL: http://www.wireshark.org/
+-User Guide: http://www.wireshark.org/docs/wsug_html_chunked/
+-Secruity advisories: http://www.wireshark.org/security/
+-
+-Wireshark is slowly moving away from gtk and towards QT as their graphical stack.
+-Currently gtk is supported with this release and I plan on integrating QT. 
+-
+-
+-
+-Adding the wireshark to your build
+-========================================
+-
+-via local.conf
+-IMAGE_INSTALL:append = " wireshark"
+-
+-Adding the wireshark to your graphical build
+-========================================
+-via local.conf
+-IMAGE_INSTALL:append = " wireshark"
+-
+-and one of:
+-
+-EXTRA_IMAGE_FEATURES += "x11-base"
+-
+-or use the "core-image-x11"
+-
+-
+-Maintenance
+------------
+-
+-Send patches, comments or questions to openembedded-devel@lists.openembedded.org
+-
+-When sending single patches, please use something like:
+-
+-   git send-email -1 -M \
+-       --to openembedded-devel@lists.openembedded.org \
+-       --cc akuster@mvista.com \
+-       --subject-prefix=meta-networking][PATCH
+-
+-Maintainer:    Armin Kuster <akuster@mvista.com>
+-
+-
+diff --git a/meta-networking/recipes-support/wireshark/files/0001-don-t-look-for-iconv.h-for-native-build.patch b/meta-networking/recipes-support/wireshark/files/0001-don-t-look-for-iconv.h-for-native-build.patch
 new file mode 100644
-index 0000000000..0bd70fa4d5
+index 0000000000..5cc16459ce
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/tinycompress/tinycompress/0001-include-install-compress_ops.h-as-public-header.patch
-@@ -0,0 +1,32 @@
-+From 2db4ee4ed5e12a48b1d195dab0f57b7106ff37c4 Mon Sep 17 00:00:00 2001
-+From: Pratyush Meduri <mpratyus@qti.qualcomm.com>
-+Date: Tue, 20 Jan 2026 14:47:27 +0530
-+Subject: [PATCH] include: install compress_ops.h as public header
++++ b/meta-networking/recipes-support/wireshark/files/0001-don-t-look-for-iconv.h-for-native-build.patch
+@@ -0,0 +1,46 @@
++From 9a9d99fb57caa38c4bc045f544429ec919ec6158 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Mon, 26 Jan 2026 21:26:49 +0100
++Subject: [PATCH] don't look for iconv.h for native build
 +
-+Move tinycompress/compress_ops.h from noinst_HEADERS to
-+nobase_include_HEADERS so it gets installed for users.
++iconv.h is not installed in the sysroot for native builds, and cmake
++only searches for it in the sysroot.
 +
-+Signed-off-by: Pratyush Meduri <mpratyus@qti.qualcomm.com>
-+Upstream-Status: Submitted [https://github.com/alsa-project/tinycompress/pull/30]
++It seems to be only required for zlib-ng support (based on the
++commit[1] that introduced this dependency), which is currently not
++enabled in the recipe.
++
++To avoid build failure due to not finding this header during configuration,
++remove this dependency from native builds
++
++Upstream-Status: Inappropriate [OE specific]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ include/Makefile.am | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ cmake/modules/FindLibXml2.cmake | 7 +------
++ 1 file changed, 1 insertion(+), 6 deletions(-)
 +
-+diff --git a/include/Makefile.am b/include/Makefile.am
-+index b12c2c5..15058a9 100644
-+--- a/include/Makefile.am
-++++ b/include/Makefile.am
-+@@ -1,8 +1,8 @@
-+-nobase_include_HEADERS = tinycompress/tinycompress.h
-++nobase_include_HEADERS = tinycompress/tinycompress.h \
-++                         tinycompress/compress_ops.h
++diff --git a/cmake/modules/FindLibXml2.cmake b/cmake/modules/FindLibXml2.cmake
++index d36b390..f3e4762 100644
++--- a/cmake/modules/FindLibXml2.cmake
+++++ b/cmake/modules/FindLibXml2.cmake
++@@ -66,11 +66,6 @@ find_path(LIBXML2_INCLUDE_DIR NAMES libxml/xpath.h
++    PATH_SUFFIXES libxml2
++    )
 + 
-+ noinst_HEADERS = sound/compress_offload.h \
-+ 		 sound/compress_params.h \
-+ 		 tinycompress/version.h \
-+-		 tinycompress/compress_ops.h \
-+ 		 tinycompress/tinymp3.h \
-+ 		 tinycompress/tinywave.h
-+-- 
-+2.34.1
++-find_path(ICONV_INCLUDE_DIR  NAMES iconv.h
++-   HINTS
++-   ${LIBXML2_HINTS}/include
++-   )
++-
++ # CMake 3.9 and below used 'LIBXML2_LIBRARIES' as the name of
++ # the cache entry storing the find_library result.  Use the
++ # value if it was set by the project or user.
++@@ -103,7 +98,7 @@ elseif(LIBXML2_INCLUDE_DIR AND EXISTS "${LIBXML2_INCLUDE_DIR}/libxml/xmlversion.
++     unset(libxml2_version_str)
++ endif()
++ 
++-set(LIBXML2_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIR} ${PC_LIBXML_INCLUDE_DIRS} ${ICONV_INCLUDE_DIR})
+++set(LIBXML2_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIR} ${PC_LIBXML_INCLUDE_DIRS})
++ set(LIBXML2_LIBRARIES ${LIBXML2_LIBRARY})
++ 
++ include(FindPackageHandleStandardArgs)
+diff --git a/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch b/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
+index 0e6249c939..c6f5909cc9 100644
+--- a/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
++++ b/meta-networking/recipes-support/wireshark/files/0002-flex-Remove-line-directives.patch
+@@ -23,19 +23,19 @@ index 20caa09..174f452 100644
+  
+ -      ADD_CUSTOM_COMMAND(
+ -        OUTPUT ${_outc} ${_outh}
+--        COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> -o${_outc} --header-file=${_outh} ${_in}
++-        COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> --outfile=${_outc} --header-file=${_outh} ${_in}
+ -        DEPENDS ${_in}
+ -      )
+ +      IF (DEFINED ENV{SOURCE_DATE_EPOCH})
+ +        ADD_CUSTOM_COMMAND(
+ +          OUTPUT ${_outc} ${_outh}
+-+          COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> --noline -o${_outc} --header-file=${_outh} ${_in}
+++          COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> --noline --outfile=${_outc} --header-file=${_outh} ${_in}
+ +          DEPENDS ${_in}
+ +        )
+ +      ELSE ()
+ +        ADD_CUSTOM_COMMAND(
+ +          OUTPUT ${_outc} ${_outh}
+-+          COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> -o${_outc} --header-file=${_outh} ${_in}
+++          COMMAND ${LEX_EXECUTABLE} $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:--debug> --ooutfile=${_outc} --header-file=${_outh} ${_in}
+ +          DEPENDS ${_in}
+ +        )
+ +      ENDIF ()
+diff --git a/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch b/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
+index 1a6fe8d39e..5b4d5aaa82 100644
+--- a/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
++++ b/meta-networking/recipes-support/wireshark/files/0004-lemon-Remove-line-directives.patch
+@@ -17,7 +17,7 @@ diff --git a/cmake/modules/UseLemon.cmake b/cmake/modules/UseLemon.cmake
+ index e419de1..fa4034e 100644
+ --- a/cmake/modules/UseLemon.cmake
+ +++ b/cmake/modules/UseLemon.cmake
+-@@ -12,6 +12,7 @@ if(LEMON_EXECUTABLE)
++@@ -17,6 +17,7 @@ if(LEMON_EXECUTABLE)
+  				${_out}.h
+  				${_out}.out
+  			COMMAND ${LEMON_EXECUTABLE}
+@@ -25,11 +25,11 @@ index e419de1..fa4034e 100644
+  				-T/usr/share/lemon/lempar.c
+  				-d.
+  				${_in}
+-@@ -30,6 +31,7 @@ else()
++@@ -35,6 +36,7 @@ else()
+  				${_out}.h
+  				${_out}.out
+  			COMMAND $<TARGET_FILE:lemon>
+ +				-l
+  				-T${CMAKE_SOURCE_DIR}/tools/lemon/lempar.c
+  				-d.
+- 				${_in}
++ 				--
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2025-9817.patch b/meta-networking/recipes-support/wireshark/files/CVE-2025-9817.patch
+deleted file mode 100644
+index 034c51778e..0000000000
+--- a/meta-networking/recipes-support/wireshark/files/CVE-2025-9817.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 39daba5e247ea495f88b0be82f0b7ebbdbf50fba Mon Sep 17 00:00:00 2001
+-From: John Thacker <johnthacker@gmail.com>
+-Date: Sat, 26 Jul 2025 07:10:28 -0400
+-Subject: [PATCH] ssh: Add a null check
+-
+-Fix #20642
+-
+-Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/39daba5e247ea495f88b0be82f0b7ebbdbf50fba]
+-CVE: CVE-2025-9817
+-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+----
+- epan/dissectors/packet-ssh.c | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/epan/dissectors/packet-ssh.c b/epan/dissectors/packet-ssh.c
+-index 4f2b0ff..9b3b904 100644
+---- a/epan/dissectors/packet-ssh.c
+-+++ b/epan/dissectors/packet-ssh.c
+-@@ -2359,6 +2359,10 @@ ssh_kex_shared_secret(gint kex_type, ssh_bignum *pub, ssh_bignum *priv, ssh_bign
+-     }
+- 
+-     if(kex_type==SSH_KEX_DH_GEX){
+-+	if (modulo == NULL) {
+-+	    ws_debug("Missing group modulo");
+-+	    return NULL;
+-+	}
+-         gcry_mpi_t b = NULL;
+-         gcry_mpi_scan(&b, GCRYMPI_FMT_USG, pub->data, pub->length, NULL);
+-         gcry_mpi_t d = NULL, e = NULL, m = NULL;
+--- 
+-2.43.0
+-
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
+similarity index 87%
+rename from meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
+index bd014055a9..2cf9693f5c 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
+@@ -4,7 +4,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=570a9b3749dd0463a1778803b12a6dce"
+ 
+-DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp"
++DEPENDS = "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares speexdsp virtual/libiconv"
+ 
+ DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
+ 
+@@ -13,12 +13,13 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://0002-flex-Remove-line-directives.patch \
+            file://0004-lemon-Remove-line-directives.patch \
+            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
+-           file://CVE-2025-9817.patch \
+            "
+ 
++SRC_URI:append:class-native = " file://0001-don-t-look-for-iconv.h-for-native-build.patch"
 +
-diff --git a/meta-multimedia/recipes-multimedia/tinycompress/tinycompress_1.2.13.bb b/meta-multimedia/recipes-multimedia/tinycompress/tinycompress_1.2.13.bb
-index 0dee6cba1f..ae34624ebf 100644
---- a/meta-multimedia/recipes-multimedia/tinycompress/tinycompress_1.2.13.bb
-+++ b/meta-multimedia/recipes-multimedia/tinycompress/tinycompress_1.2.13.bb
-@@ -6,6 +6,7 @@ LICENSE = "LGPL-2.1-only | BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cf9105c1a2d4405cbe04bbe3367373a0"
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
  
- SRCREV = "ea5c7245beb0b6aec1565cfae0454d6ba374dfdd"
--SRC_URI = "git://github.com/alsa-project/tinycompress.git;branch=master;protocol=https;tag=v${PV}"
-+SRC_URI = "git://github.com/alsa-project/tinycompress.git;branch=master;protocol=https;tag=v${PV} \
-+           file://0001-include-install-compress_ops.h-as-public-header.patch"
+-SRC_URI[sha256sum] = "098177f021951638f5bdca5b01f284c14fcc3f6c804f7aa2ca00fdcb99c7a166"
++SRC_URI[sha256sum] = "9fa6a745df8540899dc9d433e4634d6755371ff87bd722ce04c7d7b0132d9af3"
  
- inherit autotools pkgconfig
--- 
-2.34.1
-
+ PE = "1"
+ 
+@@ -59,16 +60,19 @@ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
+                   -DM_INCLUDE_DIR=${includedir} \
+                   -DM_LIBRARY=${libdir} \
+                  "
++
++# use lemon from ${PN}-native, instead of cross-compiled or host versions
++EXTRA_OECMAKE:append:class-target = " -DLEMON_EXECUTABLE=${STAGING_BINDIR_NATIVE}/lemon"
+ CFLAGS:append = " -lm"
+ 
+ do_compile:append:class-target() {
+     # Fix TMPDIR, these are in the comments section
+     sed -i -e "s:** source file.*::g"  ${B}/wiretap/ascend_parser.c
+-    sed -i -e "s:** source file.*::g"  ${B}/wiretap/candump_parser.c
+     sed -i -e "s:** source file.*::g"  ${B}/wiretap/busmaster_parser.c
+     sed -i -e "s:** source file.*::g"  ${B}/epan/protobuf_lang_parser.c
+-    sed -i -e "s:** source file.*::g"  ${B}/epan/dtd_grammar.c
+     sed -i -e "s:** source file.*::g"  ${B}/epan/dfilter/grammar.c
++    test -e ${B}/plugins/epan/mate/mate_grammar.c && \
++        sed -i -e "s:** source file.*::g"  ${B}/plugins/epan/mate/mate_grammar.c
+ }
+ 
+ do_install:append:class-native() {
 
