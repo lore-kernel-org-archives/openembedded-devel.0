@@ -2,466 +2,453 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 169F8D3568F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C069D3568D
 	for <webhook@archiver.kernel.org>; Wed, 28 Jan 2026 08:06:31 +0000 (UTC)
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com [209.85.160.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6930.1769579256484563090
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6913.1769579163941785833
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Jan 2026 21:47:36 -0800
+ Tue, 27 Jan 2026 21:46:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=V8cpQyD/;
- spf=pass (domain: gmail.com, ip: 209.85.160.178, mailfrom: nmjain23@gmail.com)
-Received: by mail-qt1-f178.google.com with SMTP id d75a77b69052e-5014db8e268so102871171cf.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:47:36 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769579255; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z1mn8N+o;
+ spf=pass (domain: gmail.com, ip: 209.85.160.176, mailfrom: nmjain23@gmail.com)
+Received: by mail-qt1-f176.google.com with SMTP id d75a77b69052e-501502318b1so64062801cf.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Jan 2026 21:46:03 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1769579163; cv=none;
         d=google.com; s=arc-20240605;
-        b=REjm/KVorxMddXFXfh5l1ecSpv0U8Enx6Ni3qPYXAwUPHRwt5RtlTbMrKscPfeJuIZ
-         bE6qaf5ucUPrkdEiRmUGmBHvYe5GKt2p7dOj3fHMZqrFHYw0a0izsP2ufFjV9lFSacdr
-         JydSnLEoWfjJE4hMfRGzlEn6LCMbm2CB2AQ8D9SnM6NRNTgD2/F7eqEHK2NeDbaUP8Op
-         ZiZCdSfro62qw9QrFBlnKkNvohbub2PkqyOa056EhPd3uKZJEfughAfvTrpoNBBmArQc
-         bkC7gDr0+xzaldUmxqJvx4qnPX8t9NfQ9PlHmlU9e8CpA8fwiP9hRGghseubNof222Ou
-         UiPA==
+        b=ESioQujyPZe83S44e52haICV2BBfLnYoFk95uU+b2ha1kUearoMfkwAnk3ONIRvxlq
+         8Gox7sHYjh0elBzE4zgpDbTR9vom26XgHBX+lR/uq1qVXy9Ih776ybywtHMq5Tr3E+Kp
+         CTVKb9ZsfXqej7tybfK5MIf3JKz1XwcCrgM/FUuSyVgXrwwHQCZ2/BUhf2OdVS0Q/2/o
+         NZwR29333cNd1zw6AbEI814fCqXYHkSoGGkrv6PN4H8sXMopS439sdUq0MMkjndIOsQq
+         xYp+y7el1d0UpgpmKVIEhce6iE1uG9/Duxp/MttoH+TJOG4zTrj/nw7mF4PLd9bw97SW
+         8yZA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=to:subject:message-id:date:from:in-reply-to:references:mime-version
          :dkim-signature;
-        bh=8V7EqE9gxC16uA6M2FLDsqniF856xSDaXfmCHy6HH1o=;
+        bh=McKadRGQDdzJhieTqMlIvREoaFeXsqpoo01mCBkD5RI=;
         fh=pgSuNtBd9WV+mTof3gYKFZAQkk03g+8G5+Acac4ed14=;
-        b=Rh6mTpESinVWsblDzf2A1CFWJ0D6IUO49siXKJlIBvA/VEG+2oa6YBxUG9Caovpvz3
-         FqzBSg+2IK8IxqzeXawPXqtpsdyj+wOQK6TMyTnyMP3lk0unX+pG+z6gaQW7WaY693pV
-         vNiechiOE9zWy/P7XLYbiqYauA0h7jWjizNS4k9udtRyQfPAgml9dy7fP1RP3g63yTia
-         1BAOL6JHkD17ahAGR+zbu0qonfR/zFKbhNUvCzhEaMI6SBwE/GyJoCXvVYEPG3KBaWzo
-         IsSpZMvKdbcqCfPi2DD3jRXvVy5wScPHTgTH7rmoaCsMqXHL+eaOvFwktYi3SlC7Cp59
-         5R0g==;
+        b=HOSKhuv6fpu9wVyjne5y65yDWNixO9MfxcsQnO3A+bGwoOG7Qm+a/6UuzN+WzRV9vw
+         0t6cjgbg4NUrEDI7itKpK/fJKMtIzEGO8sxbB0//nE9z2cA8edOm79mHEW0bTR0F+wFj
+         iS7fAtaePC40yXyEuZjV+eA314Jh1MvNHN/xs7wipVnEAnx05KCL0K7SDY3YfEyNCJM7
+         6nlupEx7R0LmjqSqtnV1VjtlZfTFA8CMEnC5hYUNvNrGy6NwDtig1oNNg8oDcURn0mPP
+         4lXrndhjABqeokpA3yzXOE+XhVBJ7R8BDPHEt3OGknKL547nUp0fM7uJ8csyFctPi+pu
+         N7Ug==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769579255; x=1770184055; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769579163; x=1770183963; darn=lists.openembedded.org;
         h=to:subject:message-id:date:from:in-reply-to:references:mime-version
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=8V7EqE9gxC16uA6M2FLDsqniF856xSDaXfmCHy6HH1o=;
-        b=V8cpQyD/7w7ULs304kGCEDrTLTl+N+wGOgnCxLIOkJK7F5EFzct8FJeLu/baIllSNz
-         WScK4uXXX/X8TDdy/+Hj408yzwrqqyMSedFTLdUAR1j6SWUMfDUsmVBCgtnW7e/buqRR
-         SYRL2Xw0UBevULJYms9q6KqNaWj9Q8SqD+N/F0EwTBotBYYGuXQtgBGqQ0CCruWZomMd
-         p+ALgw9holSptwciT7nNNiK+2FPlZ0VvNOCh63MUqouk2GoDgYTCYWHSoY08PWu/kTHR
-         ZGRJ3TGWIknQF6lbE+y265Ypgkro4bCvzZCmg4j8FiIV7xdTtP0g+avxZUvr5bu40xFf
-         E7GQ==
+        bh=McKadRGQDdzJhieTqMlIvREoaFeXsqpoo01mCBkD5RI=;
+        b=Z1mn8N+oGaKpfHKvj+zlt9caAroA6cwPkOhrteuouSU8iV1zLSO2P4ZmTBQvLX/6he
+         87r2/4m9/4asWwFZXyhPAyL3sQ1wjiZy8NbRsP3kXz635OTlzsCEVj7DqAcodejRXESS
+         LirXI2bCFxONUYJ99n4+tXpVB8rIuaFKmB/0G0x/mi5uhCuHXO/0yHVHFuN+eFN4RAnO
+         BztD9jC20xgIGCPBiNLNNYwTuOv/LwB5KqzVvoMgdExVSa8lb/f96Qac6NNXwka7+gcO
+         XKIW1Po6CO+d9Ql6xEiffrMpSvD2pSAbD2vhYK8t/8HoXuV7sRGLyQgSFi1lx0L8+dXT
+         nY1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769579255; x=1770184055;
+        d=1e100.net; s=20230601; t=1769579163; x=1770183963;
         h=to:subject:message-id:date:from:in-reply-to:references:mime-version
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=8V7EqE9gxC16uA6M2FLDsqniF856xSDaXfmCHy6HH1o=;
-        b=PRX6wzfIoB8GnYav3dY6DwEdDdBi4413SULC0YmdgJX0i+7X4a8xm7bFC1k9whZl9H
-         D2IZbIw8jKRU6odAD+u6W+Jo2Qsv7E+0g94pS9W9f/GMOMFxZ//EI49qEKukC6KCqNiO
-         b4EoTGA/eK052ecTButKoPdZkChurKn+OQcEZ7L0x3hz4aJb/lt0z30NMBOpBFRO0Hku
-         NNcvHusbpOunhpKM4KgmAJVEw787dhAecozp7pIwzvWc2cCeEcP8Lmd08NsYsMVaXOvn
-         qU4874Y08QXD6q78N/QUR7UItIUGWitkc+NWbyS3WS7+EaXwz6+YcUEjtSy0ShUF1o9e
-         MoAQ==
-X-Gm-Message-State: AOJu0YxmeYEU/a+EOJZpxAp6iaGtSNf9K6MUCGjQVGO06vLB0fblTaoB
-	sfqgsupJsWJNDgSYrJSdMfplqYC0qly9wmlS+KLXlDLpc4CV+flCI47Qocmx0LcrGYSiMqMU6ni
-	2yIMqJiNXdMdXZ3SYvLSEnQS7rUjSieqdrw==
-X-Gm-Gg: AZuq6aKC7udy5TpNyutylwfiL7E64JmGPh0o8n37bI2TSXe4poKGSYI1U/6b2cuDe+T
-	LqfQYXcB35Bj7n3SdxGMpc1GszqLzT6kUsZYRi9bM5XuHRwnlPPZFsMxfJIRcmkw02tZhUYJMDy
-	47pvAUxFoJBk6ttBHAz81g020qb3aO5PSpL7fy+Owq7KAP1Vo8DpOORZrUT0QcA7e+K4rA/CdXb
-	W30Af5hmYZTi0sPSZ/AfRF4iJJk8RIfjcNwNB/KXkK71vjmGEn4YM8QuiRodh7ZSlNxlRFnPlFy
-	T5G3nAF85jkO
-X-Received: by 2002:a05:622a:13cb:b0:4dd:7572:216f with SMTP id
- d75a77b69052e-5032f782259mr47168081cf.32.1769579255315; Tue, 27 Jan 2026
- 21:47:35 -0800 (PST)
+        bh=McKadRGQDdzJhieTqMlIvREoaFeXsqpoo01mCBkD5RI=;
+        b=L5dOS5Wz1+bwQwfdfmQ3Nb0dPyXDrLrSmdIpfJdEa4UwjMSLZ+mP+88aT9vuvmUuKm
+         EgIIDZsEf01NZRiJyBCz1L7S6Ah+5fV2DlUf0CwrvzqGpFKdGAJhMfjnP8EZ4B9NJu1j
+         7qzQeaMyi1TYjQgruKcHSwRqfNh3Mb8JZR12msGIEXC0tKpr/oflKzlY308co2gVg2uA
+         H8HpZeIMph2gxe8I4BdgqoWZ3sC1jU0s6/Fh+X9TnLREiLjXKDoTYmFQ2RwLBBa3ZFP6
+         d0TY3jbPGuSKvIviBf6dzzxtVf4NN0EtU/PWFBcdFSXo67J9qWdq71/E5qNLW4RKul1C
+         lpSg==
+X-Gm-Message-State: AOJu0YwfJptwgTbd3WCbVZBalO1gVtGq3e+JQGUib+n2eezTb7BSEJ4y
+	iE3GIlaxAulN2GGlkkwHq0Kfcie+S2XNB6ugomM9/rqizDicQjdTScBXGOZeczFb/zkGWq6VZDV
+	3/eVVUEGHOtliQlMou2a2wfei7rweVGh8Og==
+X-Gm-Gg: AZuq6aJzBxZERELCM835cHfvh4M8mU7cDITtbgvzgadZw0xxj9JSR237avocj2RaHJl
+	llLYveJGYaAsOMbUA2A2YlCzb4ECI/pRXO5chLdqyo2sTte2FjnXh/N24CZBvJbNz6pUD9JRuIp
+	Uhv2f5HXFQp15Nnn7MeQgshhorxPFWi1MAw4w2cKZ8tbZUYbysEhYRCLL2BXqS1ePNphF8tiiVm
+	VQiADdP7a73XAMz2bqgwTBYUsc7UKslX/HltBI67k/2yi58SDZacypXShuAQ1owdgb3zPB5LIsJ
+	xiyj5C5oxWFc
+X-Received: by 2002:a05:622a:241:b0:502:9ffa:1ae6 with SMTP id
+ d75a77b69052e-5032fe16f14mr52408511cf.82.1769579162527; Tue, 27 Jan 2026
+ 21:46:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20251104095256.3402683-1-namanj1@kpit.com>
-In-Reply-To: <20251104095256.3402683-1-namanj1@kpit.com>
+References: <20251104095004.3402081-1-namanj1@kpit.com>
+In-Reply-To: <20251104095004.3402081-1-namanj1@kpit.com>
 From: "Naman Jain" <nmjain23@gmail.com>
-Date: Wed, 28 Jan 2026 11:17:16 +0530
-X-Gm-Features: AZwV_QhbljR1sEREYfVvpQ48k1hsHXc_BuoLqAzBs5wWbw1C87ISau-paZRgYiE
-Message-ID: <CALCkg5YpKPHaxqmqxnKDnCWB-Duj3oRHHKtLEAB8Kva7cNkqoA@mail.gmail.com>
-Subject: Re: [meta-oe][scarthgap][PATCH] unbound: Fix CVE-2025-5994
+Date: Wed, 28 Jan 2026 11:15:49 +0530
+X-Gm-Features: AZwV_QgfiLBoklPo57giWUwAGPaM57QREYOab53HpZPy2cuos_6r_VfpCZWM5dg
+Message-ID: <CALCkg5aWd19q7G9kC5+4wKsMC2cOHeur-hQiUXOrpx--4tkBpg@mail.gmail.com>
+Subject: [meta][master][PATCH] unbound: Fix CVE-2025-5994
 To: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000ea424b06496c46d6"
+Content-Type: multipart/alternative; boundary="0000000000006270fb06496c41d1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 08:06:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123971
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123970
 
---000000000000ea424b06496c46d6
+--0000000000006270fb06496c41d1
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
-Can you please check this.
+---------- Forwarded message ---------
+From: Naman Jain <nmjain23@gmail.com>
+Date: Tue, 4 Nov, 2025, 3:20=E2=80=AFpm
+Subject: [meta][master][PATCH] unbound: Fix CVE-2025-5994
+To: <nmjain23@gmail.com>
 
-On Tue, 4 Nov, 2025, 3:23=E2=80=AFpm Naman Jain, <nmjain23@gmail.com> wrote=
-:
 
-> A multi-vendor cache poisoning vulnerability named 'Rebirthday Attack' ha=
-s
-> been
-> discovered in caching resolvers that support EDNS Client Subnet (ECS).
-> Unbound is
-> also vulnerable when compiled with ECS support, i.e., '--enable-subnet',
-> AND
-> configured to send ECS information along with queries to upstream name
-> servers
->
-> CVE: CVE-2025-5994
->
-> Signed-off-by: Naman Jain <namanj1@kpit.com>
-> ---
->  .../unbound/unbound/CVE-2025-5994.patch       | 275 ++++++++++++++++++
->  .../recipes-support/unbound/unbound_1.19.3.bb |   1 +
->  2 files changed, 276 insertions(+)
->  create mode 100644
-> meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
->
-> diff --git
-> a/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
-> b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
-> new file mode 100644
-> index 0000000000..b6c0e37e43
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
-> @@ -0,0 +1,275 @@
-> +Backport of:
-> +
-> +From 5bf82f246481098a6473f296b21fc1229d276c0f Mon Sep 17 00:00:00 2001
-> +From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
-> +Date: Wed, 16 Jul 2025 10:02:01 +0200
-> +Subject: [PATCH] - Fix RebirthDay Attack CVE-2025-5994, reported by Xian=
-g
-> Li
-> + from AOSP   Lab Nankai University.
-> +
-> +CVE: CVE-2025-5994
-> +Upstream-Status: Backport [
-> https://github.com/NLnetLabs/unbound/commit/5bf82f246481098a6473f296b21fc=
-1229d276c0f
-> ]
-> +Signed-off-by: Naman Jain <namanj1@kpit.com>
-> +
-> +---
-> + edns-subnet/subnetmod.c | 152 ++++++++++++++++++++++++++++++++++++----
-> + edns-subnet/subnetmod.h |   4 ++
-> + 2 files changed, 142 insertions(+), 14 deletions(-)
-> +
-> +--- a/edns-subnet/subnetmod.c
-> ++++ b/edns-subnet/subnetmod.c
-> +@@ -51,6 +51,7 @@
-> + #include "services/cache/dns.h"
-> + #include "util/module.h"
-> + #include "util/regional.h"
-> ++#include "util/fptr_wlist.h"
-> + #include "util/storage/slabhash.h"
-> + #include "util/config_file.h"
-> + #include "util/data/msgreply.h"
-> +@@ -152,7 +153,8 @@ int ecs_whitelist_check(struct query_inf
-> +
-> +       /* Cache by default, might be disabled after parsing EDNS option
-> +        * received from nameserver. */
-> +-      if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)) {
-> ++      if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)
-> ++              && sq->ecs_client_in.subnet_validdata) {
-> +               qstate->no_cache_store =3D 0;
-> +       }
-> +
-> +@@ -504,6 +506,69 @@ common_prefix(uint8_t *a, uint8_t *b, ui
-> +       return !memcmp(a, b, n) && ((net % 8) =3D=3D 0 || a[n] =3D=3D b[n=
-]);
-> + }
-> +
-> ++/**
-> ++ * Create sub request that looks up the query.
-> ++ * @param qstate: query state
-> ++ * @param sq: subnet qstate
-> ++ * @return false on failure.
-> ++ */
-> ++static int
-> ++generate_sub_request(struct module_qstate *qstate, struct subnet_qstate=
-*
-> sq)
-> ++{
-> ++      struct module_qstate* subq =3D NULL;
-> ++      uint16_t qflags =3D 0; /* OPCODE QUERY, no flags */
-> ++      int prime =3D 0;
-> ++      int valrec =3D 0;
-> ++      struct query_info qinf;
-> ++      qinf.qname =3D qstate->qinfo.qname;
-> ++      qinf.qname_len =3D qstate->qinfo.qname_len;
-> ++      qinf.qtype =3D qstate->qinfo.qtype;
-> ++      qinf.qclass =3D qstate->qinfo.qclass;
-> ++      qinf.local_alias =3D NULL;
-> ++
-> ++      qflags |=3D BIT_RD;
-> ++      if((qstate->query_flags & BIT_CD)!=3D0) {
-> ++              qflags |=3D BIT_CD;
-> ++              valrec =3D 1;
-> ++      }
-> ++
-> ++      fptr_ok(fptr_whitelist_modenv_attach_sub(qstate->env->attach_sub)=
-);
-> ++      if(!(*qstate->env->attach_sub)(qstate, &qinf, qflags, prime,
-> valrec,
-> ++              &subq)) {
-> ++              return 0;
-> ++      }
-> ++      if(subq) {
-> ++              /* It is possible to access the subquery module state. */
-> ++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
-> ++                      edns_opt_list_find(qstate->edns_opts_front_in,
-> ++                              qstate->env->cfg->client_subnet_opcode)) =
-{
-> ++                      subq->no_cache_store =3D 1;
-> ++              }
-> ++      }
-> ++      return 1;
-> ++}
-> ++
-> ++/**
-> ++ * Perform the query without subnet
-> ++ * @param qstate: query state
-> ++ * @param sq: subnet qstate
-> ++ * @return module state
-> ++ */
-> ++static enum module_ext_state
-> ++generate_lookup_without_subnet(struct module_qstate *qstate,
-> ++      struct subnet_qstate* sq)
-> ++{
-> ++      verbose(VERB_ALGO, "subnetcache: make subquery to look up without
-> subnet");
-> ++      if(!generate_sub_request(qstate, sq)) {
-> ++              verbose(VERB_ALGO, "Could not generate sub query");
-> ++              qstate->return_rcode =3D LDNS_RCODE_FORMERR;
-> ++              qstate->return_msg =3D NULL;
-> ++              return module_finished;
-> ++      }
-> ++      sq->wait_subquery =3D 1;
-> ++      return module_wait_subquery;
-> ++}
-> ++
-> + static enum module_ext_state
-> + eval_response(struct module_qstate *qstate, int id, struct subnet_qstat=
-e
-> *sq)
-> + {
-> +@@ -539,14 +604,7 @@ eval_response(struct module_qstate *qsta
-> +                * is still useful to put it in the edns subnet cache for
-> +                * when a client explicitly asks for subnet specific
-> answer. */
-> +               verbose(VERB_QUERY, "subnetcache: Authority indicates no
-> support");
-> +-              if(!sq->started_no_cache_store) {
-> +-                      lock_rw_wrlock(&sne->biglock);
-> +-                      update_cache(qstate, id);
-> +-                      lock_rw_unlock(&sne->biglock);
-> +-              }
-> +-              if (sq->subnet_downstream)
-> +-                      cp_edns_bad_response(c_out, c_in);
-> +-              return module_finished;
-> ++              return generate_lookup_without_subnet(qstate, sq);
-> +       }
-> +
-> +       /* Purposefully there was no sent subnet, and there is consequent=
-ly
-> +@@ -571,14 +629,14 @@ eval_response(struct module_qstate *qsta
-> +               !common_prefix(s_out->subnet_addr, s_in->subnet_addr,
-> +                       s_out->subnet_source_mask))
-> +       {
-> +-              /* we can not accept, restart query without option */
-> ++              /* we can not accept, perform query without option */
-> +               verbose(VERB_QUERY, "subnetcache: forged data");
-> +               s_out->subnet_validdata =3D 0;
-> +               (void)edns_opt_list_remove(&qstate->edns_opts_back_out,
-> +                       qstate->env->cfg->client_subnet_opcode);
-> +               sq->subnet_sent =3D 0;
-> +               sq->subnet_sent_no_subnet =3D 0;
-> +-              return module_restart_next;
-> ++              return generate_lookup_without_subnet(qstate, sq);
-> +       }
-> +
-> +       lock_rw_wrlock(&sne->biglock);
-> +@@ -763,6 +821,9 @@ ecs_edns_back_parsed(struct module_qstat
-> +       } else if(sq->subnet_sent_no_subnet) {
-> +               /* The answer can be stored as scope 0, not in global
-> cache. */
-> +               qstate->no_cache_store =3D 1;
-> ++      } else if(sq->subnet_sent) {
-> ++              /* Need another query to be able to store in global cache=
-.
-> */
-> ++              qstate->no_cache_store =3D 1;
-> +       }
-> +
-> +       return 1;
-> +@@ -780,6 +841,32 @@ subnetmod_operate(struct module_qstate *
-> +               strmodulevent(event));
-> +       log_query_info(VERB_QUERY, "subnetcache operate: query",
-> &qstate->qinfo);
-> +
-> ++      if(sq && sq->wait_subquery_done) {
-> ++              /* The subquery lookup returned. */
-> ++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
-> ++                      edns_opt_list_find(qstate->edns_opts_front_in,
-> ++                              qstate->env->cfg->client_subnet_opcode)) =
-{
-> ++                      if(!sq->started_no_cache_store &&
-> ++                              qstate->return_msg) {
-> ++                              lock_rw_wrlock(&sne->biglock);
-> ++                              update_cache(qstate, id);
-> ++                              lock_rw_unlock(&sne->biglock);
-> ++                      }
-> ++                      if (sq->subnet_downstream)
-> ++                              cp_edns_bad_response(&sq->ecs_client_out,
-> ++                                      &sq->ecs_client_in);
-> ++                      /* It is a scope zero lookup, append edns subnet
-> ++                       * option to the querier. */
-> ++                      subnet_ecs_opt_list_append(&sq->ecs_client_out,
-> ++                              &qstate->edns_opts_front_out, qstate,
-> ++                              qstate->region);
-> ++              }
-> ++              sq->wait_subquery_done =3D 0;
-> ++              qstate->ext_state[id] =3D module_finished;
-> ++              qstate->no_cache_store =3D sq->started_no_cache_store;
-> ++              qstate->no_cache_lookup =3D sq->started_no_cache_lookup;
-> ++              return;
-> ++      }
-> +       if((event =3D=3D module_event_new || event =3D=3D module_event_pa=
-ss) &&
-> +               sq =3D=3D NULL) {
-> +               struct edns_option* ecs_opt;
-> +@@ -790,6 +877,8 @@ subnetmod_operate(struct module_qstate *
-> +               }
-> +
-> +               sq =3D (struct subnet_qstate*)qstate->minfo[id];
-> ++              if(sq->wait_subquery)
-> ++                      return; /* Wait for that subquery to return */
-> +
-> +               if((ecs_opt =3D edns_opt_list_find(
-> +                       qstate->edns_opts_front_in,
-> +@@ -819,6 +908,14 @@ subnetmod_operate(struct module_qstate *
-> +                       /* No clients are interested in result or we coul=
-d
-> not
-> +                        * parse it, we don't do client subnet */
-> +                       sq->ecs_server_out.subnet_validdata =3D 0;
-> ++                      if(edns_opt_list_find(qstate->edns_opts_front_in,
-> ++                              qstate->env->cfg->client_subnet_opcode)) =
-{
-> ++                              /* aggregated this deaggregated state */
-> ++                              qstate->ext_state[id] =3D
-> ++                                      generate_lookup_without_subnet(
-> ++                                      qstate, sq);
-> ++                              return;
-> ++                      }
-> +                       verbose(VERB_ALGO, "subnetcache: pass to next
-> module");
-> +                       qstate->ext_state[id] =3D module_wait_module;
-> +                       return;
-> +@@ -859,6 +956,14 @@ subnetmod_operate(struct module_qstate *
-> +                       }
-> +                       lock_rw_unlock(&sne->biglock);
-> +               }
-> ++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
-> ++                      edns_opt_list_find(qstate->edns_opts_front_in,
-> ++                              qstate->env->cfg->client_subnet_opcode)) =
-{
-> ++                      /* client asked for resolution without edns subne=
-t
-> */
-> ++                      qstate->ext_state[id] =3D
-> generate_lookup_without_subnet(
-> ++                              qstate, sq);
-> ++                      return;
-> ++              }
-> +
-> +               sq->ecs_server_out.subnet_addr_fam =3D
-> +                       sq->ecs_client_in.subnet_addr_fam;
-> +@@ -895,6 +1000,8 @@ subnetmod_operate(struct module_qstate *
-> +               qstate->ext_state[id] =3D module_wait_module;
-> +               return;
-> +       }
-> ++      if(sq && sq->wait_subquery)
-> ++              return; /* Wait for that subquery to return */
-> +       /* Query handed back by next module, we have a 'final' answer */
-> +       if(sq && event =3D=3D module_event_moddone) {
-> +               qstate->ext_state[id] =3D eval_response(qstate, id, sq);
-> +@@ -943,10 +1050,27 @@ subnetmod_clear(struct module_qstate *AT
-> + }
-> +
-> + void
-> +-subnetmod_inform_super(struct module_qstate *ATTR_UNUSED(qstate),
-> +-      int ATTR_UNUSED(id), struct module_qstate *ATTR_UNUSED(super))
-> ++subnetmod_inform_super(struct module_qstate *qstate, int id,
-> ++      struct module_qstate *super)
-> + {
-> +-      /* Not used */
-> ++      struct subnet_qstate* super_sq =3D
-> ++              (struct subnet_qstate*)super->minfo[id];
-> ++      log_query_info(VERB_ALGO, "subnetcache inform_super: query",
-> ++              &super->qinfo);
-> ++      super_sq->wait_subquery =3D 0;
-> ++      super_sq->wait_subquery_done =3D 1;
-> ++      if(qstate->return_rcode !=3D LDNS_RCODE_NOERROR ||
-> ++              !qstate->return_msg) {
-> ++              super->return_msg =3D NULL;
-> ++              super->return_rcode =3D LDNS_RCODE_SERVFAIL;
-> ++              return;
-> ++      }
-> ++      super->return_rcode =3D LDNS_RCODE_NOERROR;
-> ++      super->return_msg =3D dns_copy_msg(qstate->return_msg,
-> super->region);
-> ++      if(!super->return_msg) {
-> ++              log_err("subnetcache: copy response, out of memory");
-> ++              super->return_rcode =3D LDNS_RCODE_SERVFAIL;
-> ++      }
-> + }
-> +
-> + size_t
-> +--- a/edns-subnet/subnetmod.h
-> ++++ b/edns-subnet/subnetmod.h
-> +@@ -102,6 +102,10 @@ struct subnet_qstate {
-> +       int started_no_cache_store;
-> +       /** has the subnet module been started with no_cache_lookup? */
-> +       int started_no_cache_lookup;
-> ++      /** Wait for subquery that has been started for nonsubnet lookup.
-> */
-> ++      int wait_subquery;
-> ++      /** The subquery waited for is done. */
-> ++      int wait_subquery_done;
-> + };
-> +
-> + void subnet_data_delete(void* d, void* ATTR_UNUSED(arg));
-> diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-> b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-> index 6f54038c6c..6c04ed5840 100644
-> --- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-> +++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-> @@ -11,6 +11,7 @@ LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D5308494bc0590c0cb036afd781d78f06"
->
->  SRC_URI =3D "git://
-> github.com/NLnetLabs/unbound.git;protocol=3Dhttps;branch=3Dbranch-1.19.3 =
-\
->             file://CVE-2024-8508.patch \
-> +           file://CVE-2025-5994.patch \
->             "
->  SRCREV =3D "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
->
-> --
-> 2.34.1
->
->
+A multi-vendor cache poisoning vulnerability named 'Rebirthday Attack' has
+been
+discovered in caching resolvers that support EDNS Client Subnet (ECS).
+Unbound is
+also vulnerable when compiled with ECS support, i.e., '--enable-subnet', AN=
+D
+configured to send ECS information along with queries to upstream name
+servers
 
---000000000000ea424b06496c46d6
+CVE: CVE-2025-5994
+
+Signed-off-by: Naman Jain <namanj1@kpit.com>
+---
+ .../unbound/unbound/CVE-2025-5994.patch       | 275 ++++++++++++++++++
+ .../recipes-support/unbound/unbound_1.19.3.bb |   1 +
+ 2 files changed, 276 insertions(+)
+ create mode 100644
+meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+
+diff --git
+a/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+new file mode 100644
+index 0000000000..b6c0e37e43
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound/CVE-2025-5994.patch
+@@ -0,0 +1,275 @@
++Backport of:
++
++From 5bf82f246481098a6473f296b21fc1229d276c0f Mon Sep 17 00:00:00 2001
++From: "W.C.A. Wijngaards" <wouter@nlnetlabs.nl>
++Date: Wed, 16 Jul 2025 10:02:01 +0200
++Subject: [PATCH] - Fix RebirthDay Attack CVE-2025-5994, reported by Xiang
+Li
++ from AOSP   Lab Nankai University.
++
++CVE: CVE-2025-5994
++Upstream-Status: Backport [
+https://github.com/NLnetLabs/unbound/commit/5bf82f246481098a6473f296b21fc12=
+29d276c0f
+]
++Signed-off-by: Naman Jain <namanj1@kpit.com>
++
++---
++ edns-subnet/subnetmod.c | 152 ++++++++++++++++++++++++++++++++++++----
++ edns-subnet/subnetmod.h |   4 ++
++ 2 files changed, 142 insertions(+), 14 deletions(-)
++
++--- a/edns-subnet/subnetmod.c
+++++ b/edns-subnet/subnetmod.c
++@@ -51,6 +51,7 @@
++ #include "services/cache/dns.h"
++ #include "util/module.h"
++ #include "util/regional.h"
+++#include "util/fptr_wlist.h"
++ #include "util/storage/slabhash.h"
++ #include "util/config_file.h"
++ #include "util/data/msgreply.h"
++@@ -152,7 +153,8 @@ int ecs_whitelist_check(struct query_inf
++
++       /* Cache by default, might be disabled after parsing EDNS option
++        * received from nameserver. */
++-      if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)) {
+++      if(!iter_stub_fwd_no_cache(qstate, &qstate->qinfo, NULL, NULL)
+++              && sq->ecs_client_in.subnet_validdata) {
++               qstate->no_cache_store =3D 0;
++       }
++
++@@ -504,6 +506,69 @@ common_prefix(uint8_t *a, uint8_t *b, ui
++       return !memcmp(a, b, n) && ((net % 8) =3D=3D 0 || a[n] =3D=3D b[n])=
+;
++ }
++
+++/**
+++ * Create sub request that looks up the query.
+++ * @param qstate: query state
+++ * @param sq: subnet qstate
+++ * @return false on failure.
+++ */
+++static int
+++generate_sub_request(struct module_qstate *qstate, struct subnet_qstate*
+sq)
+++{
+++      struct module_qstate* subq =3D NULL;
+++      uint16_t qflags =3D 0; /* OPCODE QUERY, no flags */
+++      int prime =3D 0;
+++      int valrec =3D 0;
+++      struct query_info qinf;
+++      qinf.qname =3D qstate->qinfo.qname;
+++      qinf.qname_len =3D qstate->qinfo.qname_len;
+++      qinf.qtype =3D qstate->qinfo.qtype;
+++      qinf.qclass =3D qstate->qinfo.qclass;
+++      qinf.local_alias =3D NULL;
+++
+++      qflags |=3D BIT_RD;
+++      if((qstate->query_flags & BIT_CD)!=3D0) {
+++              qflags |=3D BIT_CD;
+++              valrec =3D 1;
+++      }
+++
+++      fptr_ok(fptr_whitelist_modenv_attach_sub(qstate->env->attach_sub));
+++      if(!(*qstate->env->attach_sub)(qstate, &qinf, qflags, prime, valrec=
+,
+++              &subq)) {
+++              return 0;
+++      }
+++      if(subq) {
+++              /* It is possible to access the subquery module state. */
+++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
+++                      edns_opt_list_find(qstate->edns_opts_front_in,
+++                              qstate->env->cfg->client_subnet_opcode)) {
+++                      subq->no_cache_store =3D 1;
+++              }
+++      }
+++      return 1;
+++}
+++
+++/**
+++ * Perform the query without subnet
+++ * @param qstate: query state
+++ * @param sq: subnet qstate
+++ * @return module state
+++ */
+++static enum module_ext_state
+++generate_lookup_without_subnet(struct module_qstate *qstate,
+++      struct subnet_qstate* sq)
+++{
+++      verbose(VERB_ALGO, "subnetcache: make subquery to look up without
+subnet");
+++      if(!generate_sub_request(qstate, sq)) {
+++              verbose(VERB_ALGO, "Could not generate sub query");
+++              qstate->return_rcode =3D LDNS_RCODE_FORMERR;
+++              qstate->return_msg =3D NULL;
+++              return module_finished;
+++      }
+++      sq->wait_subquery =3D 1;
+++      return module_wait_subquery;
+++}
+++
++ static enum module_ext_state
++ eval_response(struct module_qstate *qstate, int id, struct subnet_qstate
+*sq)
++ {
++@@ -539,14 +604,7 @@ eval_response(struct module_qstate *qsta
++                * is still useful to put it in the edns subnet cache for
++                * when a client explicitly asks for subnet specific
+answer. */
++               verbose(VERB_QUERY, "subnetcache: Authority indicates no
+support");
++-              if(!sq->started_no_cache_store) {
++-                      lock_rw_wrlock(&sne->biglock);
++-                      update_cache(qstate, id);
++-                      lock_rw_unlock(&sne->biglock);
++-              }
++-              if (sq->subnet_downstream)
++-                      cp_edns_bad_response(c_out, c_in);
++-              return module_finished;
+++              return generate_lookup_without_subnet(qstate, sq);
++       }
++
++       /* Purposefully there was no sent subnet, and there is consequently
++@@ -571,14 +629,14 @@ eval_response(struct module_qstate *qsta
++               !common_prefix(s_out->subnet_addr, s_in->subnet_addr,
++                       s_out->subnet_source_mask))
++       {
++-              /* we can not accept, restart query without option */
+++              /* we can not accept, perform query without option */
++               verbose(VERB_QUERY, "subnetcache: forged data");
++               s_out->subnet_validdata =3D 0;
++               (void)edns_opt_list_remove(&qstate->edns_opts_back_out,
++                       qstate->env->cfg->client_subnet_opcode);
++               sq->subnet_sent =3D 0;
++               sq->subnet_sent_no_subnet =3D 0;
++-              return module_restart_next;
+++              return generate_lookup_without_subnet(qstate, sq);
++       }
++
++       lock_rw_wrlock(&sne->biglock);
++@@ -763,6 +821,9 @@ ecs_edns_back_parsed(struct module_qstat
++       } else if(sq->subnet_sent_no_subnet) {
++               /* The answer can be stored as scope 0, not in global
+cache. */
++               qstate->no_cache_store =3D 1;
+++      } else if(sq->subnet_sent) {
+++              /* Need another query to be able to store in global cache.
+*/
+++              qstate->no_cache_store =3D 1;
++       }
++
++       return 1;
++@@ -780,6 +841,32 @@ subnetmod_operate(struct module_qstate *
++               strmodulevent(event));
++       log_query_info(VERB_QUERY, "subnetcache operate: query",
+&qstate->qinfo);
++
+++      if(sq && sq->wait_subquery_done) {
+++              /* The subquery lookup returned. */
+++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
+++                      edns_opt_list_find(qstate->edns_opts_front_in,
+++                              qstate->env->cfg->client_subnet_opcode)) {
+++                      if(!sq->started_no_cache_store &&
+++                              qstate->return_msg) {
+++                              lock_rw_wrlock(&sne->biglock);
+++                              update_cache(qstate, id);
+++                              lock_rw_unlock(&sne->biglock);
+++                      }
+++                      if (sq->subnet_downstream)
+++                              cp_edns_bad_response(&sq->ecs_client_out,
+++                                      &sq->ecs_client_in);
+++                      /* It is a scope zero lookup, append edns subnet
+++                       * option to the querier. */
+++                      subnet_ecs_opt_list_append(&sq->ecs_client_out,
+++                              &qstate->edns_opts_front_out, qstate,
+++                              qstate->region);
+++              }
+++              sq->wait_subquery_done =3D 0;
+++              qstate->ext_state[id] =3D module_finished;
+++              qstate->no_cache_store =3D sq->started_no_cache_store;
+++              qstate->no_cache_lookup =3D sq->started_no_cache_lookup;
+++              return;
+++      }
++       if((event =3D=3D module_event_new || event =3D=3D module_event_pass=
+) &&
++               sq =3D=3D NULL) {
++               struct edns_option* ecs_opt;
++@@ -790,6 +877,8 @@ subnetmod_operate(struct module_qstate *
++               }
++
++               sq =3D (struct subnet_qstate*)qstate->minfo[id];
+++              if(sq->wait_subquery)
+++                      return; /* Wait for that subquery to return */
++
++               if((ecs_opt =3D edns_opt_list_find(
++                       qstate->edns_opts_front_in,
++@@ -819,6 +908,14 @@ subnetmod_operate(struct module_qstate *
++                       /* No clients are interested in result or we could
+not
++                        * parse it, we don't do client subnet */
++                       sq->ecs_server_out.subnet_validdata =3D 0;
+++                      if(edns_opt_list_find(qstate->edns_opts_front_in,
+++                              qstate->env->cfg->client_subnet_opcode)) {
+++                              /* aggregated this deaggregated state */
+++                              qstate->ext_state[id] =3D
+++                                      generate_lookup_without_subnet(
+++                                      qstate, sq);
+++                              return;
+++                      }
++                       verbose(VERB_ALGO, "subnetcache: pass to next
+module");
++                       qstate->ext_state[id] =3D module_wait_module;
++                       return;
++@@ -859,6 +956,14 @@ subnetmod_operate(struct module_qstate *
++                       }
++                       lock_rw_unlock(&sne->biglock);
++               }
+++              if(sq->ecs_client_in.subnet_source_mask =3D=3D 0 &&
+++                      edns_opt_list_find(qstate->edns_opts_front_in,
+++                              qstate->env->cfg->client_subnet_opcode)) {
+++                      /* client asked for resolution without edns subnet
+*/
+++                      qstate->ext_state[id] =3D
+generate_lookup_without_subnet(
+++                              qstate, sq);
+++                      return;
+++              }
++
++               sq->ecs_server_out.subnet_addr_fam =3D
++                       sq->ecs_client_in.subnet_addr_fam;
++@@ -895,6 +1000,8 @@ subnetmod_operate(struct module_qstate *
++               qstate->ext_state[id] =3D module_wait_module;
++               return;
++       }
+++      if(sq && sq->wait_subquery)
+++              return; /* Wait for that subquery to return */
++       /* Query handed back by next module, we have a 'final' answer */
++       if(sq && event =3D=3D module_event_moddone) {
++               qstate->ext_state[id] =3D eval_response(qstate, id, sq);
++@@ -943,10 +1050,27 @@ subnetmod_clear(struct module_qstate *AT
++ }
++
++ void
++-subnetmod_inform_super(struct module_qstate *ATTR_UNUSED(qstate),
++-      int ATTR_UNUSED(id), struct module_qstate *ATTR_UNUSED(super))
+++subnetmod_inform_super(struct module_qstate *qstate, int id,
+++      struct module_qstate *super)
++ {
++-      /* Not used */
+++      struct subnet_qstate* super_sq =3D
+++              (struct subnet_qstate*)super->minfo[id];
+++      log_query_info(VERB_ALGO, "subnetcache inform_super: query",
+++              &super->qinfo);
+++      super_sq->wait_subquery =3D 0;
+++      super_sq->wait_subquery_done =3D 1;
+++      if(qstate->return_rcode !=3D LDNS_RCODE_NOERROR ||
+++              !qstate->return_msg) {
+++              super->return_msg =3D NULL;
+++              super->return_rcode =3D LDNS_RCODE_SERVFAIL;
+++              return;
+++      }
+++      super->return_rcode =3D LDNS_RCODE_NOERROR;
+++      super->return_msg =3D dns_copy_msg(qstate->return_msg, super->regio=
+n);
+++      if(!super->return_msg) {
+++              log_err("subnetcache: copy response, out of memory");
+++              super->return_rcode =3D LDNS_RCODE_SERVFAIL;
+++      }
++ }
++
++ size_t
++--- a/edns-subnet/subnetmod.h
+++++ b/edns-subnet/subnetmod.h
++@@ -102,6 +102,10 @@ struct subnet_qstate {
++       int started_no_cache_store;
++       /** has the subnet module been started with no_cache_lookup? */
++       int started_no_cache_lookup;
+++      /** Wait for subquery that has been started for nonsubnet lookup. *=
+/
+++      int wait_subquery;
+++      /** The subquery waited for is done. */
+++      int wait_subquery_done;
++ };
++
++ void subnet_data_delete(void* d, void* ATTR_UNUSED(arg));
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+index 6f54038c6c..6c04ed5840 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM =3D
+"file://LICENSE;md5=3D5308494bc0590c0cb036afd781d78f06"
+
+ SRC_URI =3D "git://
+github.com/NLnetLabs/unbound.git;protocol=3Dhttps;branch=3Dbranch-1.19.3 \
+            file://CVE-2024-8508.patch \
++           file://CVE-2025-5994.patch \
+            "
+ SRCREV =3D "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
+
+--=20
+2.34.1
+
+--0000000000006270fb06496c41d1
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Hello,=C2=A0<div dir=3D"auto">Can you please check this.<=
-/div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D=
-"ltr" class=3D"gmail_attr">On Tue, 4 Nov, 2025, 3:23=E2=80=AFpm Naman Jain,=
- &lt;<a href=3D"mailto:nmjain23@gmail.com">nmjain23@gmail.com</a>&gt; wrote=
-:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bor=
-der-left:1px #ccc solid;padding-left:1ex">A multi-vendor cache poisoning vu=
-lnerability named &#39;Rebirthday Attack&#39; has been<br>
+<div dir=3D"auto"></div><br><div class=3D"gmail_quote gmail_quote_container=
+"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwarded message ------=
+---<br>From: <strong class=3D"gmail_sendername" dir=3D"auto">Naman Jain</st=
+rong> <span dir=3D"auto">&lt;<a href=3D"mailto:nmjain23@gmail.com">nmjain23=
+@gmail.com</a>&gt;</span><br>Date: Tue, 4 Nov, 2025, 3:20=E2=80=AFpm<br>Sub=
+ject: [meta][master][PATCH] unbound: Fix CVE-2025-5994<br>To:  &lt;<a href=
+=3D"mailto:nmjain23@gmail.com">nmjain23@gmail.com</a>&gt;<br></div><br><br>=
+A multi-vendor cache poisoning vulnerability named &#39;Rebirthday Attack&#=
+39; has been<br>
 discovered in caching resolvers that support EDNS Client Subnet (ECS). Unbo=
 und is<br>
 also vulnerable when compiled with ECS support, i.e., &#39;--enable-subnet&=
@@ -936,7 +923,7 @@ h=3Dbranch-1.19.3</a> \<br>
 -- <br>
 2.34.1<br>
 <br>
-</blockquote></div>
+</div>
 
---000000000000ea424b06496c46d6--
+--0000000000006270fb06496c41d1--
 
