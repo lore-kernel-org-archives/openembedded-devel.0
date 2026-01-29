@@ -2,149 +2,154 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EEA77D358E6
-	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 09:05:45 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11201.1769677540037546852
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D26ABD358E7
+	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 09:05:55 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11332.1769677550746876011
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Jan 2026 01:05:40 -0800
+ Thu, 29 Jan 2026 01:05:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=g5/VMysy;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Okf9bY6O;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1769677540; x=1801213540;
+  t=1769677549; x=1801213549;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=ppReyGTSFKTmFqLXwedjZ1wh4CCS/pHgGqkW8g1mmu4=;
-  b=g5/VMysyHhowpVCXu38boOeKS/z5V5rNnQpyi5RmiGK9FvQPFIBGSzj0
-   +MrX7QZyIQHHoMlknHkV5rgwBdGnZegXVFgt6KorDYKVg2w6iBlT+gTAJ
-   MHHiZ/RZrJ+43yNDtnDRaUP5s0jev5YkD2mI1wkG9TU5KgzfeFmCJNOe6
-   82PzDrSHcrmM8xhTlpOPLGv2Wqsod+Enm0ltVcqSEcxydPDKXFEeU8cj/
-   UDUq+U/8BV/YvwsJ4Ur+xSK0lBv+z7FLFUEzzBAtIZHUVHdUA8K6vvIP+
-   pcKjfmndcZjg5WX29w3NDkoHAU5eAcdqqVCWSakbAMQuh3CtpIYv+Ovxy
-   g==;
-X-CSE-ConnectionGUID: yVgr1et5Q/G6PEWg2X6Guw==
-X-CSE-MsgGUID: FYJb2qimQUmW/1mMIETjsw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11685"; a="228358706"
+  bh=JcCXZRpu0cyEziz/5xKdBnhHsWJG534aPmb191DPc24=;
+  b=Okf9bY6OY6AwsOHa2iLpn1f8cmBLmyOzSNbUH7cfCc0TyvO5Rc66TqcH
+   tWPtoxA5eQiGLPXsx18NIDyDLKQPifrF/JZEb8JXBT9gvy6yhWeg1OVZd
+   /1UB1BMPZmhZFvhK7qhwCClcJQpB4zHnL53AmkFQQ9OWMSl1t2wiq2Vf6
+   mx4b9urNlbrjNCWHOFpgDyiaD2Z9hNgeeHPr6kg8bjmwNHUa9gXRnPP1W
+   74Ub9TWZ3Rf/NQoWfCEudbuOwuT64bXqlKZlWKLWeNVpFw2erLfpBn203
+   dMy5B7qXwgFycyR/N59Vk+HRV4/L+ZjbPUUt6iuX8Ub+wI0pQ2U9ZiKXn
+   Q==;
+X-CSE-ConnectionGUID: g4cKoTAOQFiqvKG/6fQSFw==
+X-CSE-MsgGUID: ivtkBxKRRHqkYGP6CzHGXg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11685"; a="227121061"
 X-IronPort-AV: E=Sophos;i="6.21,260,1763391600"; 
-   d="scan'208";a="228358706"
-Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Jan 2026 18:05:38 +0900
-Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+   d="scan'208";a="227121061"
+Received: from unknown (HELO az2nlsmgr2.o.css.fujitsu.com) ([51.138.80.169])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Jan 2026 18:05:47 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 2577AC00554
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:38 +0000 (UTC)
-Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
+	by az2nlsmgr2.o.css.fujitsu.com (Postfix) with ESMTPS id 0A57881DA
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:49 +0000 (UTC)
+Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id CFDE1181AA60
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:37 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id B01B81809AFA
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:48 +0000 (UTC)
 Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 7857818076F5
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:35 +0000 (UTC)
+	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id 6D3D7404339
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:46 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] multipath-tools: upgrade 0.12.1 -> 0.12.2
-Date: Thu, 29 Jan 2026 17:05:25 +0800
-Message-ID: <20260129090525.9368-1-liuyd.fnst@fujitsu.com>
+Subject: [oe][meta-oe][PATCH] tigervnc: upgrade 1.15.0 -> 1.16.0
+Date: Thu, 29 Jan 2026 17:05:43 +0800
+Message-ID: <20260129090543.9383-1-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123984
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123985
 
-1. Changelog
-  https://github.com/opensvc/multipath-tools/releases/tag/0.12.2
+1.ChangeLog
+  https://github.com/TigerVNC/tigervnc/releases/tag/v1.16.0
 
-2. Update 0004-RH-use-rpm-optflags-if-present.patch for 0.12.2
+2.Update 0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch for 1.16.0
+
+3.Update xorg-server to 21.1.21
+
+4.Fix do_install error
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- .../0004-RH-use-rpm-optflags-if-present.patch | 21 +++++++++++--------
- ...ls_0.12.1.bb => multipath-tools_0.12.2.bb} |  2 +-
- 2 files changed, 13 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-support/multipath-tools/{multipath-tools_0.12.1.bb => multipath-tools_0.12.2.bb} (98%)
+ ...add-missing-dynamic-library-to-FLTK_LIBRARIES.patch |  9 ++++++---
+ .../{tigervnc_1.15.0.bb => tigervnc_1.16.0.bb}         | 10 +++++-----
+ 2 files changed, 11 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-graphics/tigervnc/{tigervnc_1.15.0.bb => tigervnc_1.16.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch b/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
-index 8fad8d5645..1e8b69abf7 100644
---- a/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
-+++ b/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
-@@ -1,6 +1,6 @@
--From c34eca043178e60ff04dc88953a71b36ce9dc1b0 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Mon, 26 Nov 2018 09:19:17 +0800
-+From 5544371deb70e091e86d07f2755396b8a49729d7 Mon Sep 17 00:00:00 2001
-+From: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Date: Wed, 28 Jan 2026 09:56:19 +0000
- Subject: [PATCH] RH: use rpm optflags if present
+diff --git a/meta-oe/recipes-graphics/tigervnc/files/0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch b/meta-oe/recipes-graphics/tigervnc/files/0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch
+index 101adaa82f..924b950c59 100644
+--- a/meta-oe/recipes-graphics/tigervnc/files/0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch
++++ b/meta-oe/recipes-graphics/tigervnc/files/0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch
+@@ -6,16 +6,19 @@ Subject: [PATCH] add missing dynamic library to FLTK_LIBRARIES
+ Upstream-Status: Pending
  
- Use the passed in optflags when compiling as an RPM, and keep the
-@@ -22,19 +22,22 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
- 
- Rebase to 0.12.1
- Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +
-+Rebase to 0.12.2
++Update for 1.16.0
 +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
  ---
-  Makefile.inc | 12 ++++++++++--
-  1 file changed, 10 insertions(+), 2 deletions(-)
+  CMakeLists.txt | 2 ++
+  1 file changed, 2 insertions(+)
  
- diff --git a/Makefile.inc b/Makefile.inc
--index d04a3175..eb339251 100644
-+index 7ca96e58..8e168dc8 100644
- --- a/Makefile.inc
- +++ b/Makefile.inc
--@@ -102,7 +102,15 @@ SYSTEMD_LIBDEPS := $(if $(SYSTEMD),$(if $(shell test $(SYSTEMD) -gt 209 && echo
-+@@ -108,7 +108,15 @@ SYSTEMD_LIBDEPS := $(if $(SYSTEMD),$(if $(shell test $(SYSTEMD) -gt 209 && echo
-  MODPROBE_UNIT := $(shell test "0$(SYSTEMD)" -lt 245 2>/dev/null || \
-  			echo "modprobe@dm_multipath.service")
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 80c2762c..eb581600 100644
++index a5981938..dd13d0df 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+ @@ -315,6 +315,8 @@ if(BUILD_VIEWER)
+-   set(CMAKE_REQUIRED_LIBRARIES)
++   endif()
+  endif()
   
---OPTFLAGS	:= -O2 -g $(STACKPROT) --param=ssp-buffer-size=4
-+-OPTFLAGS	:= $(OPT) -g $(STACKPROT) --param=ssp-buffer-size=4
- +ifndef RPM_OPT_FLAGS
- +       OPTFLAGS        := -O2 -g $(STACKPROT) --param=ssp-buffer-size=4
- +else
-@@ -47,13 +50,13 @@ index d04a3175..eb339251 100644
-  
-  # Set WARN_ONLY=1 to avoid compilation erroring out due to warnings. Useful during development.
-  WARN_ONLY       :=
--@@ -121,7 +129,7 @@ CPPFLAGS	:= $(FORTIFY_OPT) $(CPPFLAGS) $(D_URCU_VERSION) \
-+@@ -127,7 +135,7 @@ CPPFLAGS	:= $(FORTIFY_OPT) $(CPPFLAGS) $(D_URCU_VERSION) $(D_CMOCKA_VERSION) \
-  		   -DABSTRACT_SOCKET=\"$(abstract_socket)\" -DPATHNAME_SOCKET=\"$(pathname_socket)\" \
-  		   -DWSTRINGOP_TRUNCATION=$(if $(WSTRINGOP_TRUNCATION),1,0) \
-  		   -MMD -MP
- -CFLAGS		:= -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) $(WARNFLAGS) -pipe \
--+CFLAGS          := -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) -pipe \
-- 		   -fexceptions
-++CFLAGS         := -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) -pipe \
-+ 		   -fexceptions -fno-strict-aliasing $(if $(ASAN),-fsanitize=address)
-  BIN_CFLAGS	:= -fPIE -DPIE
-  LIB_CFLAGS	:= -fPIC
+ +set(FLTK_LIBRARIES ${FLTK_LIBRARIES} -lm -ldl -lpng -ljpeg)
+@@ -24,5 +27,5 @@ index 80c2762c..eb581600 100644
+  trioption(ENABLE_GNUTLS "Enable protocol encryption and advanced authentication")
+  if(ENABLE_GNUTLS)
  -- 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
-similarity index 98%
-rename from meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb
-rename to meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
-index 20d9b6a1b5..bfb75718f2 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
-@@ -49,7 +49,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
+-2.25.1
++2.43.0
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
+similarity index 93%
+rename from meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
+rename to meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
+index efc166dfa6..a5413a9108 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.15.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
+@@ -16,9 +16,9 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
+ # out-of-tree builds.
+ B = "${S}"
  
--SRCREV = "a1f7f3d5b4972c39e8950c722a04c21a9e030a31"
-+SRCREV = "5bd1163d187520b958d78b85c7b239561dc86192"
+-SRCREV = "8bdf8734ce12c8ed3c232496fc8a4ccdb04636b8"
++SRCREV = "dc50022844dfad0a0e195d54b8499fcf242fff0c"
  
+-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.15-branch;protocol=https \
++SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.16-branch;protocol=https \
+            file://0001-do-not-build-tests-sub-directory.patch \
+            file://0002-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
+            file://0003-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
+@@ -26,10 +26,10 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.15-branch;protocol=ht
  
- inherit systemd pkgconfig
+ # Keep sync with xorg-server in oe-core
+ XORG_PN ?= "xorg-server"
+-XORG_PV ?= "21.1.18"
++XORG_PV ?= "21.1.21"
+ SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.xz;name=xorg"
+ XORG_S = "${UNPACKDIR}/${XORG_PN}-${XORG_PV}"
+-SRC_URI[xorg.sha256sum] = "c878d1930d87725d4a5bf498c24f4be8130d5b2646a9fd0f2994deff90116352"
++SRC_URI[xorg.sha256sum] = "c0cbe5545b3f645bae6024b830d1d1154a956350683a4e52b2fff5b0fa1ab519"
+ 
+ # It is the directory containing the Xorg source for the
+ # machine on which you are building TigerVNC.
+@@ -85,7 +85,7 @@ do_compile:append () {
+ }
+ 
+ do_install:append() {
+-    oe_runmake -C ${B}/hw/vnc 'DESTDIR=${D}' install
++    oe_runmake 'TIGERVNC_BUILDDIR=${B}' -C ${B}/hw/vnc 'DESTDIR=${D}' install
+ }
+ 
+ FILES:${PN} += " \
 -- 
 2.43.0
 
