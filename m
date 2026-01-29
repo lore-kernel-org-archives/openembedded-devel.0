@@ -1,173 +1,151 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40EA2D358D1
-	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 07:09:45 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10134.1769670580795860955
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEA77D358E6
+	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 09:05:45 +0000 (UTC)
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11201.1769677540037546852
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jan 2026 23:09:40 -0800
+ Thu, 29 Jan 2026 01:05:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=d7I9LZ4n;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Nmf0RSWK;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 60T2ojCV1565030
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 07:09:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ttKkzYJ6lhFtVhMs36eXcbi7rSZXQtpYkfwE2ZdfSKM=; b=d7I9LZ4ntkMUpk5q
-	YpS3H8Xzr5AkmAl0VrR6Pkop6Ps0eA1mm99vHUudZu91vD1j3eOTIFkL260l258x
-	4J8EJ7UGM+o/9I0UTLhc6luyaSvoOuDoUaqOIXPNPvMOuHhCR1aroYmcodF07i+E
-	adg2kKkYsWQ/KZxXM/V7ymTsfPsd6eguvgaOC75l5nK/dnBAIHlTSOssK78eHNJM
-	nNF7eAQemr6HGggU0uxuQ2LRBtwXQ37i92Lz0rd7gHMmNERCvr+FvNOL/28D4A2r
-	Yp2uQ0W8XSfPBQNv5ejotcyC0OKOKi8kkAueuBadH3I0SnsWbqguja80Sa6MXsej
-	xAWbYg==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4byusfh8cw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 07:09:40 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-50146d98660so20080331cf.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 23:09:40 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769670579; cv=none;
-        d=google.com; s=arc-20240605;
-        b=aslzncSZMqMHt1MeIQMWXiYElBME1FExRdXT0wyxEQmDtAXW73zAG/oioSVWiq7J0+
-         kGKOOGIGim0hY63xiDA0BlllS8s8C/fSzSzWCB3VifgLFD2UhJkz6qaro6bVnz3BH6od
-         2HnuAJUyFzNEwBqmQ6u9tjvkmEwRyePiqNhHATTzUdVqS9LPlk7xnuFVICsPXPTMtrN8
-         fCCp+NTskOT4uQzvI79FYC/xDvuAr7Bpzl32S3SnNb2pytD2l1ppHE3xykWWwdzdYK9j
-         s9eXl9avQU8DyA1n5exyzBGjZBGg6zlzUbGkeacyPARnAUJLgL/3BXVnSYX40XxBLxm/
-         gO1Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=ttKkzYJ6lhFtVhMs36eXcbi7rSZXQtpYkfwE2ZdfSKM=;
-        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
-        b=LtZ0bYPRFSa4Stzf+0mN6IspiGg87zKlLSJg+vGst7urDWEQ1OqGkecDOqAByjL3Z4
-         RCgPpRKDNRGrDlmDqxb5F5yT6XsAhR+i6DmKVtgvfHvVy/AEupW3Ea5VW2jRLeIoOCay
-         J0pJGzQHIbpp89rSZIZ0qrbsjE8zhB2AmW84FmKseOwN5f+Zx4LNgY9NGG3HRE766u6H
-         zW3lIsvn4kEQ9Q0cLWrcAqHv2PUGp0kGdOpB/SyWeXsQkUWKudgCIYyvA4JC2VsSHNhJ
-         a/JfPe8wfmPry4wNblgPPMIRjc8HR1hn95nIuAX99KCLeP0nkLtG712zgC6gOB131U7v
-         5u0g==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1769670579; x=1770275379; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ttKkzYJ6lhFtVhMs36eXcbi7rSZXQtpYkfwE2ZdfSKM=;
-        b=Nmf0RSWKErKC7+yLl5wV89xbd3dEOfSljIrjtRKo51jdXOcoQF46PkgUAHCpCXrElh
-         JUJV/gjbBOvg9mBEuJ/AJT1IYMRnTJhMBLXmcBZQ3tms6BxGi1H7jmt+ga2jgpPnQQDw
-         RYv+sPtDxui9/nkViYRC4qsq/+w++NU+BU8Wvo0fcRoqr98W9rzJcW3Emg4LoTRqdmvD
-         vtWw4fzCivgPV5laDj34I01nheP8L748+gT1E3MQ6dUpbFC9v2l5hBCMimCmBL6qpMB9
-         tOquNbRaJbzqzprfU9Xl7y8ho/RdqyDRxwiAGwmx3jIVlBY3b04h2FyruKIzcNNBKZi4
-         nKMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769670579; x=1770275379;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ttKkzYJ6lhFtVhMs36eXcbi7rSZXQtpYkfwE2ZdfSKM=;
-        b=eWqOqyeYEWF1wBsmN52x8GEYN1Rmv1ye9IeJXWddCD7Vur2gCDc72/TcRlvKUxhT0N
-         07mbNvrTEYu4C/RFrC6ubgoY4+IDq12EYF8qxL2dBqodO9mBJJpeFIh78WBauf2zKwVX
-         Mj3Jy8R/nKb8jGCaBS0XveCunv2FA32K7KD2u6N+B+HZ1kXrqSDyP2KfKatQ4WMWEUaC
-         3lRSugTHnKgweCzXRsY7vXbah68EYtvG0WYJGPJqSmeTSKzkBbuyYnAFiTjljxaIvzwM
-         LE+AAszqWqONtQyFVmeyxlpWXG2hWhEl9VkcV5sQXhCAVLXJ4fh9UIO5dElXNQ8MnR4r
-         cf6A==
-X-Gm-Message-State: AOJu0YzvKc5UB/dOcB/xjhLL86pPL7umygslBbgWNHakKU/FUN4lusDu
-	abtfTl3vEXTt26W0bdk8s6FF/VACJClFfyjuHm1Mg5ohekgp5PIzQEa2GW+mY7qbjv2GYen9yfZ
-	4M7y7iU0aZ8sypqC0wy3N3uxcNpcTL1wp+BviUGoG+ae4sA4POX9AY4S5ClFqgOO0j9qpB0RX7h
-	Gf/OuBloX53JZKGHKlfO5fTtnrOtQfNSpV+XQAY/g5orkPCAFRLcLqKESQjqY=
-X-Gm-Gg: AZuq6aLipEWKx4np0VC8wF03Ac8oDYOVcfu9Yc+OGQk7dGvYAJUF1iylCsTTNW3+Wj4
-	aRYiUdTXElEt7moOqXAz2uHVCiSqF8sTDgEs7ytMTHvxSj6L8QK1hjpF4aPe1BZlgXwAuqzov4M
-	nclKcXIZnk9HQw1MNlri6QDA1DpkGtPVNuJH8weGVGD2E1XyZPXMlvAecse5eNy5J3
-X-Received: by 2002:a05:622a:c2:b0:4ee:1f22:3615 with SMTP id d75a77b69052e-5032f8fc2d9mr115087261cf.51.1769670579371;
-        Wed, 28 Jan 2026 23:09:39 -0800 (PST)
-X-Received: by 2002:a05:622a:c2:b0:4ee:1f22:3615 with SMTP id
- d75a77b69052e-5032f8fc2d9mr115087131cf.51.1769670578992; Wed, 28 Jan 2026
- 23:09:38 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=g5/VMysy;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1769677540; x=1801213540;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ppReyGTSFKTmFqLXwedjZ1wh4CCS/pHgGqkW8g1mmu4=;
+  b=g5/VMysyHhowpVCXu38boOeKS/z5V5rNnQpyi5RmiGK9FvQPFIBGSzj0
+   +MrX7QZyIQHHoMlknHkV5rgwBdGnZegXVFgt6KorDYKVg2w6iBlT+gTAJ
+   MHHiZ/RZrJ+43yNDtnDRaUP5s0jev5YkD2mI1wkG9TU5KgzfeFmCJNOe6
+   82PzDrSHcrmM8xhTlpOPLGv2Wqsod+Enm0ltVcqSEcxydPDKXFEeU8cj/
+   UDUq+U/8BV/YvwsJ4Ur+xSK0lBv+z7FLFUEzzBAtIZHUVHdUA8K6vvIP+
+   pcKjfmndcZjg5WX29w3NDkoHAU5eAcdqqVCWSakbAMQuh3CtpIYv+Ovxy
+   g==;
+X-CSE-ConnectionGUID: yVgr1et5Q/G6PEWg2X6Guw==
+X-CSE-MsgGUID: FYJb2qimQUmW/1mMIETjsw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11685"; a="228358706"
+X-IronPort-AV: E=Sophos;i="6.21,260,1763391600"; 
+   d="scan'208";a="228358706"
+Received: from unknown (HELO az2uksmgr4.o.css.fujitsu.com) ([52.151.125.19])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Jan 2026 18:05:38 +0900
+Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr4.o.css.fujitsu.com (Postfix) with ESMTPS id 2577AC00554
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:38 +0000 (UTC)
+Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id CFDE1181AA60
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:37 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 7857818076F5
+	for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:35 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-oe][PATCH] multipath-tools: upgrade 0.12.1 -> 0.12.2
+Date: Thu, 29 Jan 2026 17:05:25 +0800
+Message-ID: <20260129090525.9368-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260127130116.1902238-1-skandigraun@gmail.com>
-In-Reply-To: <20260127130116.1902238-1-skandigraun@gmail.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 29 Jan 2026 15:09:28 +0800
-X-Gm-Features: AZwV_Qgld6k0iuc13bDRa6boN0MlW8gxYImNJF0-icLD3Ja6rBacNmxdk9ikj74
-Message-ID: <CA+s=J=xG8khM8aYpGZJFqtXCDb81Bga5_77047Sr=bPf6B9S5Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][RFC PATCH 00/14] TigerVNC CVEs
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: xyd7TMKRExd3t8gl1LYeXu1-8EAOv2xz
-X-Proofpoint-GUID: xyd7TMKRExd3t8gl1LYeXu1-8EAOv2xz
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMTI5MDA0MSBTYWx0ZWRfX24vvpkYursiK
- 9Zhcu3X/4eUMkQqoo0cUgxfzk38vxnfRpHjbNDxlc/rlIk1jY+JGvh5dJQmk7fd5BO/LWw/Nu+j
- epXqSeoTdQo2WLhK0i7+WPfzwwIia6Vqmh5SqSsMZuG1HmhhTx8JVsmM27h4Vt7hPyhPi2Yqve+
- QfTQNYQNUPxryDEStC92xf9GFZvBMtR9kZhKdY+wJ30Rfhb6o+loLVfayWtfQ7jjyOa+xRU2YKl
- Grbypq9MZ0joZYA9le/7JeDaGmV1LiCMbxKRMPnxgT5vNQGwJwo0IuWreLE6bRi7ZptG0JRj/gv
- W5zqqo29rESYrT7Z4/4nPhYEKFIclfaafqei7Uf/qFiTirnkiHhbjOTQsBQWlBvAxQAs8DOXGHX
- T73Zjk9fdheVU5V9jqLajgsMTAaWl8+tDOxO/yOYPSGnNe/WzFRMg71ow6daggm4xr9cXloBdWk
- OFqVMrIGVO7+PL3AigA==
-X-Authority-Analysis: v=2.4 cv=YtIChoYX c=1 sm=1 tr=0 ts=697b07b4 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=IkcTkHD0fZMA:10 a=vUbySO9Y5rIA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8
- a=_c3yDEPCUGUH6OCyxIYA:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
- a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-01-29_01,2026-01-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 spamscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
- adultscore=0 phishscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2601290041
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 07:09:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123983
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 09:05:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123984
 
-On Tue, Jan 27, 2026 at 9:01=E2=80=AFPM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
->
->
-> This patch-series looks straightforward, but unfortunately this is not th=
-e case,
-> at least policy-wise.
->
-> Trying to be short. TigerVNC compiles its own Xserver, not the one from o=
-e-core.
->
-> This series:
-> -Update xserver to latest dot release of 1.20.x series
-> -Add patches to all outstanding CVEs that are associated with TigerVNC
-> -There are unpatched CVEs which are not associated with TigerVNC
-> -This xserver version is different from the one in oe-core
-> -Complies with stable-branch policy
->
-> Alternative:
-> -Cherry-Pick some patches from master[1]
-> -The xserver version jump would be a major one (1.20.x -> 21.x)
-> -It would get TigerVNC's xserver in sync with oe-core's xserver
-> -Have all known xserver fixes without carrying patches
-> -One might argue that this ship has sailed when Scarthgap was branched of=
-f
->
-> The same problem is present in Kirkstone also - whatever happens in Scart=
-hgap
-> will be cherry-picked in Kirkstone also.
->
-> Anyone has any input on this? I'm especially hoping that some TigerVNC us=
-ers
-> will see this, but I'm happy for all feedback.
+1. Changelog
+  https://github.com/opensvc/multipath-tools/releases/tag/0.12.2
 
-I think it should use the same version so it works. It should be
-considered as a bug in the recipe.
+2. Update 0004-RH-use-rpm-optflags-if-present.patch for 0.12.2
 
-Thanks,
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+---
+ .../0004-RH-use-rpm-optflags-if-present.patch | 21 +++++++++++--------
+ ...ls_0.12.1.bb => multipath-tools_0.12.2.bb} |  2 +-
+ 2 files changed, 13 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-support/multipath-tools/{multipath-tools_0.12.1.bb => multipath-tools_0.12.2.bb} (98%)
 
-Anuj
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch b/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
+index 8fad8d5645..1e8b69abf7 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0004-RH-use-rpm-optflags-if-present.patch
+@@ -1,6 +1,6 @@
+-From c34eca043178e60ff04dc88953a71b36ce9dc1b0 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Mon, 26 Nov 2018 09:19:17 +0800
++From 5544371deb70e091e86d07f2755396b8a49729d7 Mon Sep 17 00:00:00 2001
++From: Liu Yiding <liuyd.fnst@fujitsu.com>
++Date: Wed, 28 Jan 2026 09:56:19 +0000
+ Subject: [PATCH] RH: use rpm optflags if present
+ 
+ Use the passed in optflags when compiling as an RPM, and keep the
+@@ -22,19 +22,22 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+ 
+ Rebase to 0.12.1
+ Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
++
++Rebase to 0.12.2
++Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+ ---
+  Makefile.inc | 12 ++++++++++--
+  1 file changed, 10 insertions(+), 2 deletions(-)
+ 
+ diff --git a/Makefile.inc b/Makefile.inc
+-index d04a3175..eb339251 100644
++index 7ca96e58..8e168dc8 100644
+ --- a/Makefile.inc
+ +++ b/Makefile.inc
+-@@ -102,7 +102,15 @@ SYSTEMD_LIBDEPS := $(if $(SYSTEMD),$(if $(shell test $(SYSTEMD) -gt 209 && echo
++@@ -108,7 +108,15 @@ SYSTEMD_LIBDEPS := $(if $(SYSTEMD),$(if $(shell test $(SYSTEMD) -gt 209 && echo
+  MODPROBE_UNIT := $(shell test "0$(SYSTEMD)" -lt 245 2>/dev/null || \
+  			echo "modprobe@dm_multipath.service")
+  
+--OPTFLAGS	:= -O2 -g $(STACKPROT) --param=ssp-buffer-size=4
++-OPTFLAGS	:= $(OPT) -g $(STACKPROT) --param=ssp-buffer-size=4
+ +ifndef RPM_OPT_FLAGS
+ +       OPTFLAGS        := -O2 -g $(STACKPROT) --param=ssp-buffer-size=4
+ +else
+@@ -47,13 +50,13 @@ index d04a3175..eb339251 100644
+  
+  # Set WARN_ONLY=1 to avoid compilation erroring out due to warnings. Useful during development.
+  WARN_ONLY       :=
+-@@ -121,7 +129,7 @@ CPPFLAGS	:= $(FORTIFY_OPT) $(CPPFLAGS) $(D_URCU_VERSION) \
++@@ -127,7 +135,7 @@ CPPFLAGS	:= $(FORTIFY_OPT) $(CPPFLAGS) $(D_URCU_VERSION) $(D_CMOCKA_VERSION) \
+  		   -DABSTRACT_SOCKET=\"$(abstract_socket)\" -DPATHNAME_SOCKET=\"$(pathname_socket)\" \
+  		   -DWSTRINGOP_TRUNCATION=$(if $(WSTRINGOP_TRUNCATION),1,0) \
+  		   -MMD -MP
+ -CFLAGS		:= -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) $(WARNFLAGS) -pipe \
+-+CFLAGS          := -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) -pipe \
+- 		   -fexceptions
+++CFLAGS         := -std=$(C_STD) $(CFLAGS) $(OPTFLAGS) -pipe \
++ 		   -fexceptions -fno-strict-aliasing $(if $(ASAN),-fsanitize=address)
+  BIN_CFLAGS	:= -fPIE -DPIE
+  LIB_CFLAGS	:= -fPIC
+ -- 
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
+similarity index 98%
+rename from meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb
+rename to meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
+index 20d9b6a1b5..bfb75718f2 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.1.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.12.2.bb
+@@ -49,7 +49,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=st
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
+ 
+-SRCREV = "a1f7f3d5b4972c39e8950c722a04c21a9e030a31"
++SRCREV = "5bd1163d187520b958d78b85c7b239561dc86192"
+ 
+ 
+ inherit systemd pkgconfig
+-- 
+2.43.0
+
 
