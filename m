@@ -2,103 +2,134 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06C57D358C0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12438D358CE
 	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 06:31:35 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9716.1769668292733484204
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9718.1769668294424913246
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Jan 2026 22:31:33 -0800
+ Wed, 28 Jan 2026 22:31:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=awtFZhiL;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-48039fdc8aeso3179565e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 22:31:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F3bf6ssI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47ee3a63300so6015025e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Jan 2026 22:31:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769668291; x=1770273091; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JPb75yUWEo+TeuUUqlDh0LMpj+i7g5kp28UxzODGm/A=;
-        b=awtFZhiLA6zTmvj2bdTX8dlb4h2J8lwpyDZGil6zBMYV06er/O0KSD54kH4QTef42G
-         2cR7720C5mOJlgQDNWZeVpHMJ3L6MTOKMyEWqyHQwNNzgFoZDVzVGnpBKVx58DVgiSz/
-         0rsSZ8HbJWurnwA7XYnpSWXDYjklt6+1gxyB4cgn9vGqR0fAqD5uUcfuBCfP/fwti4Cd
-         WqoulhwBqwph5CJfuqgFRzaBmUX4nLdm1YfeSJTN5tqnRJ38mvfbEgaD63fYB4hw9/ij
-         NuzG3QK7H7uTCe9HikNkJNHyTh3D+FZhXfn0f6Ij/SK97tCHN8/FeLIi28RDDi1Z4I5J
-         iL1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769668291; x=1770273091;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1769668293; x=1770273093; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JPb75yUWEo+TeuUUqlDh0LMpj+i7g5kp28UxzODGm/A=;
-        b=EneoEdDjg1T4nZizIBGRkzROZflZojC2uOJ4Ut/BiByAmZ1ISkksu6CoKorXUJ45i3
-         gcSu3IiqnOD6s7DGMZuUv4KnGFzP20gDMakcwdqrAxskkT+BzdGjjsXIo4V8kPKkCXPO
-         C6W5N909liZ6W+VS/0fsEnPbyr6cw82oMaxETKiE9FnYUi8h35g8ItEKOi/KGG8WQ9jI
-         EdXzrEDm+wjxq2QYuMuJ+J79h0FtLhEqWsDFWal5GlwS3FLH5gvYgf9tCihxW4t2tfpE
-         EJGmwyTiXzSbXkHY5YFXF4ztDJi55KDzpXepEXlhfizokUyuBPo9eGMrcHdipWwmpaOz
-         gNyg==
-X-Gm-Message-State: AOJu0YzB9zMtEwskDHyuCkEgSzH2QrbJ7+TjhJx/helUzIA64dq71Vol
-	n8JcqxEw7DixGAWED7N4Ft5nvsNEgOyD7ByKUhwIGXcrOKUyO9dhkDa5BsQjAw==
-X-Gm-Gg: AZuq6aKtQ82qb/Sv4gm/Thq30vDGmkPObz3SbN6DH14E3igMoxPY8g6Azatqw223JZO
-	m/NGVb90N8UbOHOSROycd5uajeYABRjWbmnjNh6pqaUfgOa1WyjnHKjR1uEcZuqP70bCx0Ff0P6
-	9O6N9Z5pl2X13q5Q4l+EV/XsjeMuXTQyljQITdUfQcMAnrHsZZ80N2GvvGbx1FHhXzaCFLiaDuc
-	omxlUT9mh7TxBmE86oWvWbxLPjw9VUx2u8FwJ3hdSzzKTCAQUZ+8xWYHGFuI0qI8tGba50Xv6X1
-	0SXhUFjzv/juI3T7Ke+Mkv16RWiq7wXMkyMW96RtclquesqnyDuYQHG2tjvOZZL5q6+ccEO5Zon
-	CT8/rbF12Yge0xHNFiPchWQtf4IuTFpR3nXx82fbVALHA1ju/S1tekVVFbWSh8gQSIS0Sekk+c/
-	O8BBD7nNAqEK/tecIoJSI=
-X-Received: by 2002:a05:600c:1381:b0:480:1e9e:f9b with SMTP id 5b1f17b1804b1-48069c35120mr110598945e9.16.1769668290823;
-        Wed, 28 Jan 2026 22:31:30 -0800 (PST)
+        bh=g/6If6+il8ZFL9oh1Ewjp/CwzJqGaEN4xldkTs/im7Q=;
+        b=F3bf6ssIStrZ/UqZVqzYprBOhqo2ZlMinRzImLp1PbPc4B9SU22flWhZDrk3OwbIEM
+         l+h+yCY32fKCuB+sHync1Etv3VIEvy8niCa7Jy9ve1trrZ24P22D3NllPa1mi6zmoIsZ
+         9xmmF6axtiliidU3UTnV9bGQP4wfWhrUcvWhsAfVdbYlTosLLV0/C07VPJTdgalR180q
+         A2u8ax9EkCCwBCe7MmVQZSSSVqmjqUJEeB4pBO+UC3itfNgxYb9LvI2I/Br1XZacL0/s
+         WKVNfnjg2rYOl0gN5Ds2Usa5KQhWvkMNjIVmfqJBBMMRjmCdsjfHvSQNe8mHxmKoRfak
+         ijew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769668293; x=1770273093;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=g/6If6+il8ZFL9oh1Ewjp/CwzJqGaEN4xldkTs/im7Q=;
+        b=tT5iwZzUWWj9ihopMhUpebCbQmcTJ9xEisGwCMY27+Xg5iROEvboHT1v7185uy1q7+
+         rvlG2RRrZb3pjj85OeqkhkxDD0RpXwtynUb4NcFkQmxrkhyMRIjRc2WZ7fWMawPEiQg+
+         fqRwqGkSRLfMCofjgLNhdm4ogtDJxIzYarYQWKTPLNWCHLbuZa59U2XlNKrczFkBgzw4
+         lH5pBAyqHxbBiOLSfngwOapYcZh49tJXF32sDy0kTrChOeTMVCRfrtzpBH6Lis5ZuJnd
+         kVHYsUC3dRm3ReS4ycVlainG79BO/sNrvcL6FAe/bRyYyfCdoUzPhGXXIJfjgZm3tgNY
+         TW3A==
+X-Gm-Message-State: AOJu0YxpGYbZxa3YtAhVaNRDt0tC35EIQwpMEMAq0KKxhShxW6izGFpw
+	XJ0piTABd4P9IRU6dNnpWij9XvKpwPYAffkawMOhDlFx4FGPKKMU1CaL6E5/mw==
+X-Gm-Gg: AZuq6aK+D92O0IE7TvS+vIVzuqJ0B/mWZ9AoNsaHJppHgiC8xhhjftdoy3rt9UGIqNR
+	eH2R4xP2g3/PtyXngs1B9ClZRtTjKQGOc/BEQrskwPJiIt3iNSE225ze+UcCKwGoeXTj/q0igvA
+	IwzCtGegZ2qZrsyzUqFlcVoxPztGOCHB36+EA4vhDL5GZoeIUrzByf74pXlbbvezPPnZ6rCkcji
+	oWK7HmlkmXqRjVarahxDgZ/nu9Dwl2q0RuLMu0oyaA+zvWLG4QmAVsmsdhNbHFYxVcTGBAp6ELG
+	qfUhAUHXN85PboLCXmcTnYYw3c04t0T60jCMkk0IDmp6EqbBZuquAwNTp2e6ZtAzjQm/GUZTeGC
+	qIltnGtmdotVX17Wd8xEPODIgu/3alIvB3WCcnmOZmFP14OA460Ye3ygIpCTtXYX3a8lz1rJJ3S
+	l9U2pXw2veG6nRqIXcgIQ=
+X-Received: by 2002:a05:600c:a30c:b0:477:a36f:1a57 with SMTP id 5b1f17b1804b1-4806beeb827mr66990035e9.3.1769668292743;
+        Wed, 28 Jan 2026 22:31:32 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806ce4c3d1sm110750835e9.9.2026.01.28.22.31.30
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806ce4c3d1sm110750835e9.9.2026.01.28.22.31.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Jan 2026 22:31:30 -0800 (PST)
+        Wed, 28 Jan 2026 22:31:32 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH 1/5] python3-twitter: mark CVE-2012-5825 patched
-Date: Thu, 29 Jan 2026 07:31:25 +0100
-Message-ID: <20260129063129.223926-1-skandigraun@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH 4/5] frr: ignore CVE-2023-3748, CVE-2023-41359..61
+Date: Thu, 29 Jan 2026 07:31:28 +0100
+Message-ID: <20260129063129.223926-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260129063129.223926-1-skandigraun@gmail.com>
+References: <20260129063129.223926-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 06:31:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123978
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 06:31:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123981
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2012-5825
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-3748
+https://nvd.nist.gov/vuln/detail/CVE-2023-41359
+https://nvd.nist.gov/vuln/detail/CVE-2023-41360
+https://nvd.nist.gov/vuln/detail/CVE-2023-41361
 
-The Debian bugtracker[1] indicated that the issue is tracked by
-upstream in github[2] (with a difference CVE ID, but same issue),
-where the vulnerability was confirmed. Later in the same github issue
-the solution is confirmed: the project switched to use the requests
-library, which doesn't suffer from this vulnerability.
+Regarding CVE-2023-3748:
+Based on Debian's investigation, the vulnerability was solved by [1].
+However that vulnerable code that was fixed was introduced after the
+recipe version, only in version 8.4.0[2].
 
-Due to this mark the CVE as patched.
+Since the recipe version isn't affected by this CVE, ignore it.
 
-[1]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=692444
-[2]: https://github.com/tweepy/tweepy/issues/279
+Regarding CVE-2023-41359:
+The pull request[3] referenced by the NVD report references another pull
+request[4] which was opened to backport the fix. The conversion on this
+PR confirms that the vulnerable feature was introduced in 8.5.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3ee544e7591b36a49550a263a0ec4d64b5e490e8)
+Due to this, ignore this CVE.
 
-Adapted to Kirkstone (CVE_STATUS -> CVE_CHECK_IGNORE)
+Regarding CVE-2023-41360:
+The vulnerable code was introduced[5] in version 8.4.0, and the
+recipe version is not vulnerable.
+
+Due to this ignore this CVE.
+
+Regarding CVE-2023-41361:
+The vulnerable code was introduced[6] in version 9.0 and the recipe
+version is not vulnerable.
+
+Due to this ignore this CVE.
+
+[1]: https://github.com/FRRouting/frr/commit/0a95d121ca8e1f43d41d952d6c82d111ca850085
+[2]: https://github.com/FRRouting/frr/commit/54a3e60b3ebd3621c4dd90b0b49e8e36e4e100d8
+[3]: https://github.com/FRRouting/frr/pull/14232
+[4]: https://github.com/FRRouting/frr/pull/15927
+[5]: https://github.com/FRRouting/frr/commit/f1aa49293a4a8302b70989aaa9ceb715385c3a7e
+[6]: https://github.com/FRRouting/frr/commit/234f6fd4f4804bb17bd8cbb1dd91994a914f38d2
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-protocols/frr/frr_8.2.2.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb
-index 247b4e5840..0b174684a9 100644
---- a/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twitter_4.8.0.bb
-@@ -16,3 +16,6 @@ RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-requests \
-     ${PYTHON_PN}-six \
- "
+diff --git a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+index f8a3404e9b..a30c05b563 100644
+--- a/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_8.2.2.bb
+@@ -42,6 +42,15 @@ SRCREV = "79188bf710e92acf42fb5b9b0a2e9593a5ee9b05"
+ 
+ CVE_PRODUCT = "frrouting"
+ 
++# the vulnerability was introduced in v8.4.0
++CVE_CHECK_IGNORE += "CVE-2023-3748 CVE-2023-41360"
 +
-+# fixed-version: The vulnerability has been fixed since v3.1.0
-+CVE_CHECK_IGNORE += "CVE-2012-5825"
++# the vulnerability did not exist until 8.5
++CVE_CHECK_IGNORE += "CVE-2023-41359"
++
++# the vulnerability was introduced in 9.0
++CVE_CHECK_IGNORE += "CVE-2023-41361"
++
+ S = "${WORKDIR}/git"
+ 
+ # Due to libyang not supported on these arches:
 
