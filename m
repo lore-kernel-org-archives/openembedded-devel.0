@@ -1,103 +1,152 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8F0BD61001
-	for <webhook@archiver.kernel.org>; Thu, 29 Jan 2026 11:17:16 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12776.1769685431387583866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54483D73EAD
+	for <webhook@archiver.kernel.org>; Fri, 30 Jan 2026 01:07:56 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.509.1769735275532470842
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Jan 2026 03:17:11 -0800
+ Thu, 29 Jan 2026 17:07:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=l69qEyWu;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47ff94b46afso7464055e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 03:17:11 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=EjTopsyC;
+ spf=pass (domain: konsulko.com, ip: 209.85.210.174, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-81f39438187so835485b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 17:07:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769685430; x=1770290230; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1769735274; x=1770340074; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=U2l0zNuRSZYZMKizodmY26ecZbEhZleaEYZbB9JUw+0=;
-        b=l69qEyWuYSCb/4pCyliYW9Qlm3AWqdsS76rVyutoLFXojan6oxJ7J3lUHa/i+EN/+C
-         /7QAYMxpxiJ7grWcM53aKlQis5ZfAV8SZFvVa7pAsQ3FvmH8h2MggKBkDrsOQGJSZZrj
-         Fc+Oe+EbAkJl8JhATpQGYVBrI9HPVC31lWvtnywWeKtGK2JnBF6Cb+kiBTSQkD+FgrsC
-         MKdt1X/sIrStXrzJqpuFycp7wif2/aAtRocDG+yZxfDbI/PH8OUxXWbi+Ua/0OU3Qb6r
-         k2FQZdl1Mgs7TktPWdq9LH3/Xd9nCZrc8uZmcFcLgvnuqmhPypSvYsckRlXHhhyhaylo
-         gkOg==
+        bh=BfBH6U4kpARiA6ltoceJRt3dP4qnlDl3os5q0DD79R8=;
+        b=EjTopsyCaHkSjirmlK+HIilpEYoleRpgwos9PfwZMu+5Uu7ZrsnDUhK+TnZeITORQr
+         AWfTXc+bk+QBpn3QdeiY4HFL5rHIV9FmOaOIpQN/LztzSBCXIrKRT8lYYCqkJLywrxAb
+         gNdAihlt2G+wC043GoD+4UcFOO7i3TM7UeH2g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769685430; x=1770290230;
+        d=1e100.net; s=20230601; t=1769735274; x=1770340074;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=U2l0zNuRSZYZMKizodmY26ecZbEhZleaEYZbB9JUw+0=;
-        b=dK1O4jI43tx8Pyl8wn1RDRBv7b2FvPNv1MBDMOcJ5b9nhZO3u67nbK5/ep4Z492ps0
-         gGspkHkzKiDpZCFQuHZ5Jmjcy7ZbeMYFZOaM+3kDynl1IenCKaWaWwmVNxsGajBJruex
-         aTRQRIxfbmeDrxzJ0NwhEmxTHzYYRu6FrjOCNEeUk60ORYf5vpimaf+IBq6/QV5mHrrA
-         +u+/r4z5bwFXsUI3L6Kc5rjwp2qTuu29FQ0t6yTk7HApwyMC4JD0x7Af7MPOHpkrrPwy
-         uIXdWR84EEjnv0iyvCoSMcralx7hZ1S9VZ3CkLSKNtxeA3ee755L/7/ZlB5LdPwDRVsO
-         5RNQ==
-X-Gm-Message-State: AOJu0YzOkFU70PelT3ezoYvdgyObT7YjJcn90tX1MtHVN+CRoMc0eYda
-	Es3qIUeIo3FojGXl4CdwCwT48SMI3HbbdC1+0CeJn/u++5iLi8deLZIdIl5nRw==
-X-Gm-Gg: AZuq6aJ+B4xapSfNfcKZfW3lBlInd+rLtkd6+0paHBnkzZjT4029vrH8vbFGDdLIPpL
-	ndKCK4+Q8jp6us+CiAomw8nDaFPS9dwxah/TkW1kyDizcmk+YqC9R9yQlemoFglhGwBxCLy/7JC
-	jdRaT+xtFSw7yoH90VgUvNbrtpdLuWTnM3JIOGjcj74k5dK95s2NuEVJRA1pQcB+coJchqqcJJE
-	/mEs7K9dDwkh29N4rNVFvm8RMtviLrIajWIHkAfQq1+w3wNzlUfKS/0svwMGB572C0fssaoY6wY
-	ouJ1DumZZp6SQsYQW8QwKEfjM/Zq0VT0FndpU7myeLuWJzcSRxc/C/bnO8e9ZJNXy/QH5IS83Ct
-	tVIUQSnnjX9O7UVapww1p+LuWfDx30MzSMnTWzU7SSlOPEP2lkkUCf81VHALNsAc+v4i0tlOrY/
-	J62kv2NMSP
-X-Received: by 2002:a05:600c:2dc8:b0:47e:e452:ec12 with SMTP id 5b1f17b1804b1-4808493b38cmr21295255e9.15.1769685429630;
-        Thu, 29 Jan 2026 03:17:09 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e10e4824sm14718443f8f.1.2026.01.29.03.17.09
+        bh=BfBH6U4kpARiA6ltoceJRt3dP4qnlDl3os5q0DD79R8=;
+        b=iuBOso9byROKl6jSUwIuFzjT83ldUO1CPAuqtDteYXtV5uwzppLvvjA/5ydhtqzZ15
+         01nsrExiKWL2I1fxWklljgCRDMxgxb0Hb1WSoshwtKkOWtOURAB4rzllDevfvWPPx6l0
+         yNxuR8LHO8JZzRDnzQek9xpYOO5inNCYBbTH1gjj7vvvHe4554H4v9ICt3EOhcNOp19q
+         wiSwkKria2o1P3n3qyWUUzr5Szm3kxnae0PBsw+Cc6s615alIBftMk15RvI4R6v1+Vwp
+         FCGYZFKixaQuYqEu4lUCYLmZ8y0UOQivLCCEvQOf0BOmeQSdNCl1SL9PrlxmZqiaTNGW
+         uF1A==
+X-Gm-Message-State: AOJu0Yxc+/Cv8lLz0p+GZ8OEyM8RE+FM/0VYvDSpMjl46XaiZSKVxgAn
+	IACZO3RT1zPIFDvUKZPKufqfjiIXcAaMhs7DkBiwZFyiZcVzseNG8ozlLjL3Ykm6+pIsui0WzBZ
+	Ea7ue
+X-Gm-Gg: AZuq6aKBcRFNEBx9k/X31b+9xrBXeqo+ShVoh6hPXgOmFYC6ng/4qEXiQwNwxEdO2Yc
+	RxVPrB+0o5jcfYDtJBGBOethMZC0TC8j7lXtDdAxRbLipBmLetWEi92In7Mn2SPmOA0i/ZcugOO
+	aelhGYKiFfyAPJWM2aR0iZEdFxmy+OQtY8BWT7CEA/V33+kH7jbYqHI7Kp1+b4289wn1m/u4nt8
+	AoiT+DIpmxoDyT/JNiLOEqugjnKX/ayUv+OGpnsGHD2wQV3PkSMrLYUn3TNpUipQbpHvRiOymZ5
+	eOZ/qvgp7p4QdEgp/yrbU3wE9zS7zQmv7yfIWVWpeD85pNKbmHw3ePua/ZXIsjQq9VhM0Db0wau
+	cJ3QLH3RJJVIf1JtLjtBeJWbb3aKfKHtQZ1WDSSN3LV/KuzDXQocdBuqGtQCbjyBMTETRUtz2dE
+	mhpG1v8SMB9oE+5AbEfr+edC9szSiT4ggOf/KB1KDoiZ6IAekV0DM5i1H5tmJ9
+X-Received: by 2002:a05:6a20:a105:b0:366:581e:19f6 with SMTP id adf61e73a8af0-392e005bbe9mr1028637637.23.1769735274469;
+        Thu, 29 Jan 2026 17:07:54 -0800 (PST)
+Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3543d538b55sm212892a91.6.2026.01.29.17.07.53
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 03:17:09 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Thu, 29 Jan 2026 17:07:53 -0800 (PST)
+From: tim.orling@konsulko.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 5/6] nvme-cli: upgrade 2.12 -> 2.16
-Date: Thu, 29 Jan 2026 12:17:04 +0100
-Message-ID: <20260129111706.903623-5-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260129111706.903623-1-skandigraun@gmail.com>
-References: <20260129111706.903623-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 2/3] python3-faker: add v40.1.2
+Date: Thu, 29 Jan 2026 17:07:36 -0800
+Message-ID: <af4b928c2acc59078b5860be35f23ac18b000126.1769715106.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1769715106.git.tim.orling@konsulko.com>
+References: <cover.1769715106.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 11:17:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123991
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 01:07:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123995
 
-Changelogs:
-https://github.com/linux-nvme/nvme-cli/releases/tag/v2.16
-https://github.com/linux-nvme/nvme-cli/releases/tag/v2.15
-https://github.com/linux-nvme/nvme-cli/releases/tag/v2.14
-https://github.com/linux-nvme/nvme-cli/releases/tag/v2.13
+From: Tim Orling <tim.orling@konsulko.com>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Faker is a Python package that generates fake data for you. Whether you
+need to bootstrap your database, create good-looking XML documents,
+fill-in your persistence to stress test it, or anonymize data
+taken from a production service, Faker is for you.
+
+Dependency for pyton3-orjson ptest.
+
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../nvme-cli/{nvme-cli_2.12.bb => nvme-cli_2.16.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.12.bb => nvme-cli_2.16.bb} (94%)
+ .../ptest-packagelists-meta-python.inc        |  1 +
+ .../python/python3-faker_40.1.2.bb            | 45 +++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
 
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
-similarity index 94%
-rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
-rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
-index eae49b04ea..3fbe52020e 100644
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.12.bb
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.16.bb
-@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
-                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
-                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
- DEPENDS = "json-c libnvme"
--SRCREV = "71fa5d9310d6b41a69e844593423ac91b1453472"
-+SRCREV = "faf7326a2997dea91687fd3daa17fc405910a4c1"
- 
--SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
-+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https;tag=v${PV}"
- 
- inherit bash-completion meson pkgconfig systemd
- 
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 15172e7f22..a84718b704 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -130,6 +130,7 @@ PTESTS_SLOW_META_PYTHON = "\
+     python3-arrow \
+     python3-django \
+     python3-ecdsa \
++    python3-faker \
+     python3-fastapi \
+     python3-google-auth \
+     python3-lz4 \
+diff --git a/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb b/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
+new file mode 100644
+index 0000000000..61063fa10e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
+@@ -0,0 +1,45 @@
++SUMMARY = "Faker is a Python package that generates fake data for you."
++DESCRIPTION = "Faker is a Python package that generates fake data for you. \
++Whether you need to bootstrap your database, create good-looking XML documents, \
++fill-in your persistence to stress test it, or anonymize data taken from a \
++production service, Faker is for you."
++HOMEPAGE = "https://github.com/joke2k/faker"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
++
++SRC_URI[sha256sum] = "b76a68163aa5f171d260fc24827a8349bc1db672f6a665359e8d0095e8135d30"
++
++inherit pypi setuptools3 ptest-python-pytest
++
++PACKAGECONFIG ?= "tzdata"
++PACKAGECONFIG[tzdata] = ",,,python3-tzdata"
++
++RDEPENDS:${PN} += "\
++    python3-compression \
++    python3-core \
++    python3-crypt \
++    python3-datetime \
++    python3-image \
++    python3-json \
++    python3-logging \
++    python3-math \
++    python3-netclient \
++    python3-numbers \
++    python3-pickle \
++    python3-pytest \
++    python3-stringold \
++    python3-unittest \
++    python3-xml \
++    python3-zoneinfo \
++    "
++
++RDEPENDS:${PN}-ptest += "\
++    python3-freezegun \
++    python3-validators \
++"
++
++do_install_ptest:append() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
++
+-- 
+2.43.0
+
 
