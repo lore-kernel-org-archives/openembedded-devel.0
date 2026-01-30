@@ -1,282 +1,97 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 950AAE6BF1B
-	for <webhook@archiver.kernel.org>; Fri, 30 Jan 2026 14:57:40 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12322.1769785053246432048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC0C3E6BF2A
+	for <webhook@archiver.kernel.org>; Fri, 30 Jan 2026 16:25:20 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14462.1769790311634718626
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 30 Jan 2026 06:57:33 -0800
+ Fri, 30 Jan 2026 08:25:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VJEFD8vr;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: ticotimo@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-59deec3d8dcso2859309e87.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 06:57:32 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1769785051; cv=none;
-        d=google.com; s=arc-20240605;
-        b=amXQrmmTf0MV8x2DTO2iWjz+z7vUMBYYB+yLBU6Vy1sEeWrqHnHDWP70dvfpbcDKfG
-         tbqHR3S8fMM/rNCIp70mbwWntgXoXMC29+AdTZhPAE981X4PCGMKwYAHiYhzoj4nQ8jT
-         nmLMbfKArbaDZdwUIDIoOvBo2/1OrsMN1vqwNsF/A22Y1wJiXgng8e8SJsqVHFvoOT8p
-         Tnljds5Ff1jsZWvW9EL3PNSY9j4MP1mAV7uuusv2Hx+6yu98wM2RKXsroYv8TMz1wKqP
-         /+Cte3S7cMfYXgeQyyL8Qn1wWIhijYuom8046/r5Jdm4Mp5+anejZIJPF3YidwVsAJfu
-         Qt5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=8gjDnAGzFQJA7eTAgUBXqGYf5C1GzBGcU0ZtdT/fuQg=;
-        fh=iuPgE0vqCia+ULEOAROykHtInCWNdKWkXhHUfxtB2n4=;
-        b=epQC+O1aA3caK9VLcMf1Y0WsUY2Q6upVuHCHZaTA/55oydj6eeuZnx+yRFKLAXk1Kh
-         s0vucbPy3KRHkC7p1Y7VEk4IfuhjPVHGphgczsG3X1ZIIhu98geK1fOAC9RXGUg5r1Zx
-         4tQaE3h7hqVURznPqHJO7Q2DmaQplFgcY4Wi9KvbWLEFXp/GVxowxey6bSNZrRw40oIP
-         OBrx2MGJy4gQpkAtjpK0iEWfk7n1Bc8TO0lDSLrmG+DMF7sQ7Mq5qx0uT5mOqNk+9GIE
-         ww9CUQ0203mBb0sUNcNhc8AHSqLrdkIKDwnLsEiBBy74SHVXDuYrnBp8QdL/VzrwpADz
-         nS+Q==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d0Wn0e/9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-47ee3a63300so24204025e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 08:25:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769785051; x=1770389851; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=8gjDnAGzFQJA7eTAgUBXqGYf5C1GzBGcU0ZtdT/fuQg=;
-        b=VJEFD8vrJfh2mQgnCbX5JwLT2mna7yQqcaxcGNm0wMsFd9d/eyQ5toQn4qENOJEP6Q
-         Y9p5+C3LzDNUtaFGYilyKdDw/Rhs/PUCZn94s3jyLfCnTf/M6yUR+f0zWJECS1L8kFrC
-         UAAEE5v+duSWDlbRZ10D0PrAUP+Pgp8ZTiQAytRPexEx1YKR7HJn0EJw5/UP9dni4OKl
-         jNV+XR/qkCNpqu/ZmgCnx2tlz8AOVpbcks9hMUjtkWSYqlVmXJE/QuR/Mavr6HsZOssE
-         Hg/ABcQGG6q4ZIrC9QCQefD3px0cOnbIAQMBe2PRnzn1n7i+lwEXswaYolUxCec+fkLo
-         ebwA==
+        d=gmail.com; s=20230601; t=1769790310; x=1770395110; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lB5b0awNdesPxjdCi+iSuJiWNBsZ5f+/uzwvji8mnhc=;
+        b=d0Wn0e/9CKpqbQh4fPM5j9/5mOSO2dhNlM8UcL0JtrYZQPRAHx5cfRlxUQhzuqvBYI
+         XTuNzZKaG89JPy7gkbX1+SRzJ2ZjZaMppVXrSDSJah4mfyYCmrGY15MmaO3N/ZVw5agt
+         OU/OoMK0RoFXsF3FFXa8SQTj28i780RWytOsHGHrVc8dTPcdL4n0n3lvuF5DbdGnByxM
+         JRuzc9EqPMKDxkEsfzc1C/+yAkqpqZVBNV6GhwUFoIKwqmhuc/wZo3zUHxo09c+/TQwa
+         DzbCxlJFTrnDgf6UANrHv4rMD0YGRytuF1VyBUz6FFEzx1RBt6GsDeFfK84v5w7euqTg
+         87BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769785051; x=1770389851;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8gjDnAGzFQJA7eTAgUBXqGYf5C1GzBGcU0ZtdT/fuQg=;
-        b=IkZn8MCNDsLprE6WfQ5tEhXIT4cZQZXyEQA/Y2lbih6Pn0j3AK1YIgPCJvPTRdWUbs
-         1hCa011qtBX/V4k1zI7Ksffn/He7Pq5RIK3IhNrqz9Q3SGBkFTd7cRv6CU23Xn3rQZsN
-         XBOJ5vEFkM6s3nNypOXsKu2wc4HaFLvmS4ENGVc6ajP/AYcIcCx4t6ldx8IqEGtU49RY
-         qStYvjOySxb/ToX/68PTTySnSpfyo9Ie9dcV0LDx36bYavRWn5O2g1fEL5Fh3eYcaDRI
-         uA5kIWbTqFSwGfY3pY8FXtibpMh3AI1HjPwK47TgohegrYN7ILXxtDxji+OI9OG8NdKo
-         XKZA==
-X-Gm-Message-State: AOJu0YytYHcJdD2Boy4V/XARUu9EsiHt6vyxzSxdo/NWfhMG7Eklf8U4
-	EqweKxRd5VTOoN/ZqRhwU7yjM4a9p/M+I/n3gfCwIwTzLiixmr0/2uCPMDW3hMm77Je8YExndN/
-	r/wFNqveLwZGMDTIWSwBC9hSHnWN6lxc=
-X-Gm-Gg: AZuq6aJMQ4pJ97pICQRNLqFzAwmJ+qXRraj8msZvISiWv4i+fq5hkayH7Fhtjrm8PgY
-	YIUjJCSkqDzLR5yqFw02HlsFyYCI+alSv9zpvOeSjlv3R7sXFhuYBa0inbr4kB0R2+XYtVx1zy1
-	D2Em3IXnvTGmu1aOZ220h3s0CxS4K1SY8otH89D1hJ5LuovBk9Fs8xhuvGCmxAmCT0QiGys4Kxm
-	sSgYCpVYXIMj7XbhlJecG+vQCMp6qFl0pypR6CtHzby7MONQxPlvRVMGxj7gln8W9tCEG8=
-X-Received: by 2002:ac2:51cf:0:b0:59e:15a:d704 with SMTP id
- 2adb3069b0e04-59e163fd66fmr1169881e87.13.1769785050646; Fri, 30 Jan 2026
- 06:57:30 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769790310; x=1770395110;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lB5b0awNdesPxjdCi+iSuJiWNBsZ5f+/uzwvji8mnhc=;
+        b=g/PfTl7kOPgcSDiDLokTeplyd/+nr1Xd2GX/oM8lGdO8L9pSag3adwgeOtr2G63vIO
+         svq2wkHU32/3RWyCC9CK0PZ/iFANAStERHcuR/yOJSR/xv2Er0GCXSZWdS/3l72Sp8w9
+         u4Fd6OvtOFdhCgfTTxH5rdreHjjCbgQ0ITQw5+BSihRHjNEL8W9V03NRjyW6T/N1HLJ0
+         FlE7/9dD8U7SjBD+Ocp+9Fd+VqO0VQUoeP3/s1s8ljLgvQ0BxSHvuOBPCSrnknSB7ejT
+         e67qwJwD+uS9Uhp2Z6eng14d1SrL6UzbBtlp2RMa2i39SPa+62ilKs4KYHasQ3TaAKYS
+         THCw==
+X-Gm-Message-State: AOJu0YyEu8R4Pbiy8ctB3TGeUiwVDfSFv/JVBWvtaXP2kqvg+4OVz1vw
+	VhGaBxENY0XqU2NTLS/pcVEo04nnsXTTDpcDZqkfevnhfXKvCfTu1dx9lv0a5g==
+X-Gm-Gg: AZuq6aLmOsb8f0ZZz3ILNbFAccomW1Zco4AUGQFHlK3Zs5KrjiB/vY++MPfF7O6oHoX
+	H9WDC9Th9UM1fwi+Co0DyjFEZOkOlbH2qBMK4XJ0zFtGEBqqchMiz0W03AN4gVFISf1HKmEmaP+
+	Z28UaWweTIE8IcDS3yH2EkxLVYo1Xb4U+YJtoqlebJG7UQQytgZtqRixEn/pYlomlcGkYftdAlP
+	yUtQ2DWvOjEHnbhYtRVOdJ3GxinWmnpgR5cRirPf76MQTpbZKwKprFcXvdNQB6JlEkYGmrt9QVL
+	ftYOkQtghGCOe7I96/1cHl7cB1CRlJkJTMSymAt388I0HjD35cUyzMOVha+NDdrMxxMahp8qWRj
+	b3qMJbsfRy8xBjilUFSutvWZ7WQjIVzUXWNa5LL0K2o+HUBO68k2S3kpOhsjg8JLazkoAwXEYRm
+	kNcRRpgEFo
+X-Received: by 2002:a05:6000:2c12:b0:430:fdfc:7dd3 with SMTP id ffacd0b85a97d-435f3aac76dmr6032870f8f.50.1769790309435;
+        Fri, 30 Jan 2026 08:25:09 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e1354205sm23625810f8f.41.2026.01.30.08.25.08
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Jan 2026 08:25:08 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/4] libtorrent-rasterbar: upgrade 2.0.10 -> 2.0.11
+Date: Fri, 30 Jan 2026 17:25:05 +0100
+Message-ID: <20260130162508.664574-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-References: <cover.1769715106.git.tim.orling@konsulko.com>
-In-Reply-To: <cover.1769715106.git.tim.orling@konsulko.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 30 Jan 2026 06:57:18 -0800
-X-Gm-Features: AZwV_QjgLmLok3HKX6H6Tzx5zbnbhhAhexPJeMSITm9RkdQnU5PkYHqmN3ijUWo
-Message-ID: <CANx9H-DD_jB88w3FQjkzHK5iqHbDOHqy=nEh75ca9T1OAB_Fpg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 0/3] Upgrade python3-orjson and enable ptest
-To: tim.orling@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000045ca0206499c31a4"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 14:57:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124012
+ <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 16:25:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124013
 
---00000000000045ca0206499c31a4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Changelog: https://github.com/arvidn/libtorrent/releases/tag/v2.0.11
 
-Please hold off on this series, (1) I forgot to include the updates
-python3-orjson-crates.inc
-and (2) python3-pendulum had a new release which should allow us to build
-it with python 3.14
-and improve ptest passing.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ ...ent-rasterbar_2.0.10.bb => libtorrent-rasterbar_2.0.11.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libtorrent-rasterbar/{libtorrent-rasterbar_2.0.10.bb => libtorrent-rasterbar_2.0.11.bb} (93%)
 
-On Thu, Jan 29, 2026 at 5:07=E2=80=AFPM Tim Orling via lists.openembedded.o=
-rg
-<tim.orling=3Dkonsulko.com@lists.openembedded.org> wrote:
-
-> From: Tim Orling <tim.orling@konsulko.com>
->
-> This series upgrades python3-orjson to 3.11.6 and patches it to support
-> building on non-x86* architectures like riscv64 and arm64.
->
-> 7 of the ptests are skipped because of missing python3-pendulum, but it
-> does
-> not yet support python 3.14.x
->
-> Tested on qemux86-64, qemuriscv64 and qemuarm64.
->
-> The following changes since commit
-> 7bbe4a4e200452b1fd6c09c7fcf36c4b229146f6:
->
->   php: upgrade 8.5.1 -> 8.5.2 (2026-01-20 14:35:59 -0800)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded-contrib
-> timo/python3-orjson-3.11.6
->
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/pyth=
-on3-orjson-3.11.6
->
-> for you to fetch changes up to ecd3b46d0c63b03fc434ee3763292acab1463941:
->
->   python3-orjson: use git fetcher; enable ptest (2026-01-29 11:26:47 -080=
-0)
->
-> ----------------------------------------------------------------
->
-> Tim Orling (3):
->   python3-orjson: upgrade 3.10.17 -> 3.11.6
->   python3-faker: add v40.1.2
->   python3-orjson: use git fetcher; enable ptest
->
->  .../ptest-packagelists-meta-python.inc        |    2 +
->  .../python/python3-faker_40.1.2.bb            |   45 +
->  .../python/python3-orjson-crates.inc          | 2243 ++++++++++++++++-
->  ...rd-avx512-module-with-x86-target-cfg.patch |   37 +
->  ...e-detection-macro-in-pystrref-object.patch |   34 +
->  .../python/python3-orjson_3.10.17.bb          |   22 -
->  .../python/python3-orjson_3.11.6.bb           |   45 +
->  7 files changed, 2357 insertions(+), 71 deletions(-)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-faker_40.1.2.bb
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-orjson/0001-Guard-avx512-modu=
-le-with-x86-target-cfg.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-orjson/0002-Guard-x86-feature=
--detection-macro-in-pystrref-object.patch
->  delete mode 100644 meta-python/recipes-devtools/python/
-> python3-orjson_3.10.17.bb
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-orjson_3.11.6.bb
->
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#123993):
-> https://lists.openembedded.org/g/openembedded-devel/message/123993
-> Mute This Topic: https://lists.openembedded.org/mt/117537804/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000045ca0206499c31a4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Please hold off on this series, (1) I forgot to include th=
-e updates python3-orjson-crates.inc<div>and (2) python3-pendulum had a new =
-release which should allow us to build it with python 3.14</div><div>and im=
-prove=C2=A0ptest passing.</div></div><br><div class=3D"gmail_quote gmail_qu=
-ote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 29, 2026 a=
-t 5:07=E2=80=AFPM Tim Orling via <a href=3D"http://lists.openembedded.org">=
-lists.openembedded.org</a> &lt;tim.orling=3D<a href=3D"mailto:konsulko.com@=
-lists.openembedded.org">konsulko.com@lists.openembedded.org</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">From: Tim Orling=
- &lt;<a href=3D"mailto:tim.orling@konsulko.com" target=3D"_blank">tim.orlin=
-g@konsulko.com</a>&gt;<br>
-<br>
-This series upgrades python3-orjson to 3.11.6 and patches it to support<br>
-building on non-x86* architectures like riscv64 and arm64.<br>
-<br>
-7 of the ptests are skipped because of missing python3-pendulum, but it doe=
-s<br>
-not yet support python 3.14.x<br>
-<br>
-Tested on qemux86-64, qemuriscv64 and qemuarm64.<br>
-<br>
-The following changes since commit 7bbe4a4e200452b1fd6c09c7fcf36c4b229146f6=
-:<br>
-<br>
-=C2=A0 php: upgrade 8.5.1 -&gt; 8.5.2 (2026-01-20 14:35:59 -0800)<br>
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
-el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
-mbedded-contrib</a> timo/python3-orjson-3.11.6<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
-g/?h=3Dtimo/python3-orjson-3.11.6" rel=3D"noreferrer" target=3D"_blank">htt=
-ps://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dtimo/python3-o=
-rjson-3.11.6</a><br>
-<br>
-for you to fetch changes up to ecd3b46d0c63b03fc434ee3763292acab1463941:<br=
->
-<br>
-=C2=A0 python3-orjson: use git fetcher; enable ptest (2026-01-29 11:26:47 -=
-0800)<br>
-<br>
-----------------------------------------------------------------<br>
-<br>
-Tim Orling (3):<br>
-=C2=A0 python3-orjson: upgrade 3.10.17 -&gt; 3.11.6<br>
-=C2=A0 python3-faker: add v40.1.2<br>
-=C2=A0 python3-orjson: use git fetcher; enable ptest<br>
-<br>
-=C2=A0.../ptest-packagelists-meta-python.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A0 2 +<br>
-=C2=A0.../python/<a href=3D"http://python3-faker_40.1.2.bb" rel=3D"noreferr=
-er" target=3D"_blank">python3-faker_40.1.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A045 +<br>
-=C2=A0.../python/python3-orjson-crates.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 | 2243 ++++++++++++++++-<br>
-=C2=A0...rd-avx512-module-with-x86-target-cfg.patch |=C2=A0 =C2=A037 +<br>
-=C2=A0...e-detection-macro-in-pystrref-object.patch |=C2=A0 =C2=A034 +<br>
-=C2=A0.../python/<a href=3D"http://python3-orjson_3.10.17.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-orjson_3.10.17.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 =C2=A022 -<br>
-=C2=A0.../python/<a href=3D"http://python3-orjson_3.11.6.bb" rel=3D"norefer=
-rer" target=3D"_blank">python3-orjson_3.11.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A045 +<br>
-=C2=A07 files changed, 2357 insertions(+), 71 deletions(-)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-faker_40.1.2.bb" rel=3D"noreferrer" target=3D"_blank">python3-f=
-aker_40.1.2.bb</a><br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-orjson=
-/0001-Guard-avx512-module-with-x86-target-cfg.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-orjson=
-/0002-Guard-x86-feature-detection-macro-in-pystrref-object.patch<br>
-=C2=A0delete mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-orjson_3.10.17.bb" rel=3D"noreferrer" target=3D"_blank">python3=
--orjson_3.10.17.bb</a><br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-orjson_3.11.6.bb" rel=3D"noreferrer" target=3D"_blank">python3-=
-orjson_3.11.6.bb</a><br>
-<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#123993): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/123993" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/123993</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117537804/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/117537804/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000045ca0206499c31a4--
+diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.11.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
+rename to meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.11.bb
+index 6bfcbec25f..ca3fe2c8ee 100644
+--- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
++++ b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.11.bb
+@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8b6cb42d66e6b3c47a909c3ce678a7b"
+ 
+ DEPENDS = "boost openssl"
+ 
+-SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https \
++SRC_URI = "git://github.com/arvidn/libtorrent.git;branch=master;protocol=https;tag=v${PV} \
+ 	git://github.com/arvidn/try_signal.git;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/deps/try_signal;name=try_signal"
+ 
+-SRCREV = "74bc93a37a5e31c78f0aa02037a68fb9ac5deb41"
++SRCREV = "9d7443f467147d1784fb7516d2a882db1abb5a8b"
+ SRCREV_try_signal = "105cce59972f925a33aa6b1c3109e4cd3caf583d"
+ SRCREV_FORMAT .= "_try_signal"
+ 
 
