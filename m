@@ -2,150 +2,112 @@ Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54483D73EAD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53517D73E85
 	for <webhook@archiver.kernel.org>; Fri, 30 Jan 2026 01:07:56 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.509.1769735275532470842
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.506.1769735269087932539
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 29 Jan 2026 17:07:55 -0800
+ Thu, 29 Jan 2026 17:07:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=EjTopsyC;
- spf=pass (domain: konsulko.com, ip: 209.85.210.174, mailfrom: tim.orling@konsulko.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-81f39438187so835485b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 17:07:55 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=poUHqGrs;
+ spf=pass (domain: konsulko.com, ip: 209.85.210.177, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-81e821c3d4eso1383715b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 29 Jan 2026 17:07:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1769735274; x=1770340074; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BfBH6U4kpARiA6ltoceJRt3dP4qnlDl3os5q0DD79R8=;
-        b=EjTopsyCaHkSjirmlK+HIilpEYoleRpgwos9PfwZMu+5Uu7ZrsnDUhK+TnZeITORQr
-         AWfTXc+bk+QBpn3QdeiY4HFL5rHIV9FmOaOIpQN/LztzSBCXIrKRT8lYYCqkJLywrxAb
-         gNdAihlt2G+wC043GoD+4UcFOO7i3TM7UeH2g=
+        d=konsulko.com; s=google; t=1769735268; x=1770340068; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BZNyNweD804mUWBBZlhq7C5LZs7N5JxwE4wD1LFbJb8=;
+        b=poUHqGrsYEKXeXOZfSf6m8LhwEEGBvxlQGjOmmHQAzo/+60N46nxj4nXtKS5RmW0a8
+         JYvvjK1gwNBkLqHFkUpK/1vqLbRqwC1/JKP3CGbs2PmPH17FdtXu1TZvXkVh1RwXVbSU
+         ifb+RPoYhso66TcDQzfx6eqbFoie59RP0XojE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769735274; x=1770340074;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=BfBH6U4kpARiA6ltoceJRt3dP4qnlDl3os5q0DD79R8=;
-        b=iuBOso9byROKl6jSUwIuFzjT83ldUO1CPAuqtDteYXtV5uwzppLvvjA/5ydhtqzZ15
-         01nsrExiKWL2I1fxWklljgCRDMxgxb0Hb1WSoshwtKkOWtOURAB4rzllDevfvWPPx6l0
-         yNxuR8LHO8JZzRDnzQek9xpYOO5inNCYBbTH1gjj7vvvHe4554H4v9ICt3EOhcNOp19q
-         wiSwkKria2o1P3n3qyWUUzr5Szm3kxnae0PBsw+Cc6s615alIBftMk15RvI4R6v1+Vwp
-         FCGYZFKixaQuYqEu4lUCYLmZ8y0UOQivLCCEvQOf0BOmeQSdNCl1SL9PrlxmZqiaTNGW
-         uF1A==
-X-Gm-Message-State: AOJu0Yxc+/Cv8lLz0p+GZ8OEyM8RE+FM/0VYvDSpMjl46XaiZSKVxgAn
-	IACZO3RT1zPIFDvUKZPKufqfjiIXcAaMhs7DkBiwZFyiZcVzseNG8ozlLjL3Ykm6+pIsui0WzBZ
-	Ea7ue
-X-Gm-Gg: AZuq6aKBcRFNEBx9k/X31b+9xrBXeqo+ShVoh6hPXgOmFYC6ng/4qEXiQwNwxEdO2Yc
-	RxVPrB+0o5jcfYDtJBGBOethMZC0TC8j7lXtDdAxRbLipBmLetWEi92In7Mn2SPmOA0i/ZcugOO
-	aelhGYKiFfyAPJWM2aR0iZEdFxmy+OQtY8BWT7CEA/V33+kH7jbYqHI7Kp1+b4289wn1m/u4nt8
-	AoiT+DIpmxoDyT/JNiLOEqugjnKX/ayUv+OGpnsGHD2wQV3PkSMrLYUn3TNpUipQbpHvRiOymZ5
-	eOZ/qvgp7p4QdEgp/yrbU3wE9zS7zQmv7yfIWVWpeD85pNKbmHw3ePua/ZXIsjQq9VhM0Db0wau
-	cJ3QLH3RJJVIf1JtLjtBeJWbb3aKfKHtQZ1WDSSN3LV/KuzDXQocdBuqGtQCbjyBMTETRUtz2dE
-	mhpG1v8SMB9oE+5AbEfr+edC9szSiT4ggOf/KB1KDoiZ6IAekV0DM5i1H5tmJ9
-X-Received: by 2002:a05:6a20:a105:b0:366:581e:19f6 with SMTP id adf61e73a8af0-392e005bbe9mr1028637637.23.1769735274469;
-        Thu, 29 Jan 2026 17:07:54 -0800 (PST)
+        d=1e100.net; s=20230601; t=1769735268; x=1770340068;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BZNyNweD804mUWBBZlhq7C5LZs7N5JxwE4wD1LFbJb8=;
+        b=VBHJGocRDDgXhLMpiBJkFmVbG7HDfpJvMs+3kE3d7Jm1cUGEeKoll8o26FaUqyErsF
+         eEExSvuUgQqTfmOaCzM01nyaXUxDwhMvwbx56reuEes4dglRV3b30DtthfZhaR2N/XHF
+         fI+WpxEFCjzO+ObIKb2BlYldk8P94Xyc86RZNuQfYEzjS1Y/b2+FQ2A/ozSY41o4GsW9
+         eFsY+eVFfAoqtyM88KV96w74HQJvE9lvR3Pt4dWX/K+kkGHfATEaEwNXOeKL72VZ70+q
+         WnVRllBl8lw7DrKP3wYnFyNFkYwGJ9g601GeNw8acgAHnlceyrqiOe3MMnayoTM8OopE
+         KMzA==
+X-Gm-Message-State: AOJu0Yz5k6NWGPBB+cS292/pyhL0pugZdtobAsDfl/aeYSV3hJIxICIh
+	HP1zFmRd6wDxiiq9LUp+DHcU3figDw2gTp1mhcMaar3RigOScN912KXV8ZqkEu3aOQCKjIaTc4r
+	9RzrJ
+X-Gm-Gg: AZuq6aJNVuc65ag1kdF8sBKTyUxk7vpecgUoMl5sDMmsabxPW5BojMXdK7htwe1xpLu
+	y5GSnaySVfr2GxZKmIVjeF1VQoy42I1q+Lh0YtNZjXYqpTWgR/xWQjVFTKYfFuGnj5rsnBp15+e
+	DtTbxEjUh3MGUj7h6nxKV3cRy5WNBDtJgwyRUsCzRZtUmxIJJSkSZMcwaNFatAk/Zm61vf4bIgx
+	VY4xi659W4mAWpqh0vTPg1P9Hzb2srPUvA1Y7KIbJFR53IIc1xARMTQvUvBU6snoTv0nDFRh8zb
+	lswKWv/6uw8xLWjhNCxbSfD8mI6yGjKUNzrrwlZ5fE5F0BiGVue0xEoxLHk8jSbemjTIi+hqpdn
+	YVTcLE/tURSatyYQvuEnxN3UlVENjQmAkDULY1wt0Doe667YarrzaT8P0W6TqaUn2Xd9lodffrD
+	cwoMuyNZyGfDrd7DFeJIgge3qmz7/aPg8Pf1l499cbHCG21Kp4Uw==
+X-Received: by 2002:a05:6a21:398a:b0:38b:e944:3e94 with SMTP id adf61e73a8af0-392e0115348mr946904637.39.1769735267961;
+        Thu, 29 Jan 2026 17:07:47 -0800 (PST)
 Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3543d538b55sm212892a91.6.2026.01.29.17.07.53
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c642a336a1csm6268105a12.19.2026.01.29.17.07.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Jan 2026 17:07:53 -0800 (PST)
+        Thu, 29 Jan 2026 17:07:47 -0800 (PST)
 From: tim.orling@konsulko.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/3] python3-faker: add v40.1.2
-Date: Thu, 29 Jan 2026 17:07:36 -0800
-Message-ID: <af4b928c2acc59078b5860be35f23ac18b000126.1769715106.git.tim.orling@konsulko.com>
+Subject: [meta-python][PATCH 0/3] Upgrade python3-orjson and enable ptest
+Date: Thu, 29 Jan 2026 17:07:34 -0800
+Message-ID: <cover.1769715106.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1769715106.git.tim.orling@konsulko.com>
-References: <cover.1769715106.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 30 Jan 2026 01:07:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123995
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/123993
 
 From: Tim Orling <tim.orling@konsulko.com>
 
-Faker is a Python package that generates fake data for you. Whether you
-need to bootstrap your database, create good-looking XML documents,
-fill-in your persistence to stress test it, or anonymize data
-taken from a production service, Faker is for you.
+This series upgrades python3-orjson to 3.11.6 and patches it to support
+building on non-x86* architectures like riscv64 and arm64.
 
-Dependency for pyton3-orjson ptest.
+7 of the ptests are skipped because of missing python3-pendulum, but it does
+not yet support python 3.14.x
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
----
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-faker_40.1.2.bb            | 45 +++++++++++++++++++
- 2 files changed, 46 insertions(+)
+Tested on qemux86-64, qemuriscv64 and qemuarm64.
+
+The following changes since commit 7bbe4a4e200452b1fd6c09c7fcf36c4b229146f6:
+
+  php: upgrade 8.5.1 -> 8.5.2 (2026-01-20 14:35:59 -0800)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib timo/python3-orjson-3.11.6
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/python3-orjson-3.11.6
+
+for you to fetch changes up to ecd3b46d0c63b03fc434ee3763292acab1463941:
+
+  python3-orjson: use git fetcher; enable ptest (2026-01-29 11:26:47 -0800)
+
+----------------------------------------------------------------
+
+Tim Orling (3):
+  python3-orjson: upgrade 3.10.17 -> 3.11.6
+  python3-faker: add v40.1.2
+  python3-orjson: use git fetcher; enable ptest
+
+ .../ptest-packagelists-meta-python.inc        |    2 +
+ .../python/python3-faker_40.1.2.bb            |   45 +
+ .../python/python3-orjson-crates.inc          | 2243 ++++++++++++++++-
+ ...rd-avx512-module-with-x86-target-cfg.patch |   37 +
+ ...e-detection-macro-in-pystrref-object.patch |   34 +
+ .../python/python3-orjson_3.10.17.bb          |   22 -
+ .../python/python3-orjson_3.11.6.bb           |   45 +
+ 7 files changed, 2357 insertions(+), 71 deletions(-)
  create mode 100644 meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson/0001-Guard-avx512-module-with-x86-target-cfg.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson/0002-Guard-x86-feature-detection-macro-in-pystrref-object.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson_3.11.6.bb
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 15172e7f22..a84718b704 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -130,6 +130,7 @@ PTESTS_SLOW_META_PYTHON = "\
-     python3-arrow \
-     python3-django \
-     python3-ecdsa \
-+    python3-faker \
-     python3-fastapi \
-     python3-google-auth \
-     python3-lz4 \
-diff --git a/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb b/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
-new file mode 100644
-index 0000000000..61063fa10e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "Faker is a Python package that generates fake data for you."
-+DESCRIPTION = "Faker is a Python package that generates fake data for you. \
-+Whether you need to bootstrap your database, create good-looking XML documents, \
-+fill-in your persistence to stress test it, or anonymize data taken from a \
-+production service, Faker is for you."
-+HOMEPAGE = "https://github.com/joke2k/faker"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
-+
-+SRC_URI[sha256sum] = "b76a68163aa5f171d260fc24827a8349bc1db672f6a665359e8d0095e8135d30"
-+
-+inherit pypi setuptools3 ptest-python-pytest
-+
-+PACKAGECONFIG ?= "tzdata"
-+PACKAGECONFIG[tzdata] = ",,,python3-tzdata"
-+
-+RDEPENDS:${PN} += "\
-+    python3-compression \
-+    python3-core \
-+    python3-crypt \
-+    python3-datetime \
-+    python3-image \
-+    python3-json \
-+    python3-logging \
-+    python3-math \
-+    python3-netclient \
-+    python3-numbers \
-+    python3-pickle \
-+    python3-pytest \
-+    python3-stringold \
-+    python3-unittest \
-+    python3-xml \
-+    python3-zoneinfo \
-+    "
-+
-+RDEPENDS:${PN}-ptest += "\
-+    python3-freezegun \
-+    python3-validators \
-+"
-+
-+do_install_ptest:append() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
 -- 
 2.43.0
 
