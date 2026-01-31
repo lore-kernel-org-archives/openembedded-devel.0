@@ -2,52 +2,52 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B96FEE7C6F1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C82CBE7C6F3
 	for <webhook@archiver.kernel.org>; Sat, 31 Jan 2026 21:56:50 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18482.1769896601794808633
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18481.1769896601316386062
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Jan 2026 13:56:42 -0800
+ Sat, 31 Jan 2026 13:56:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FxFiF9kp;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-47ee76e8656so42891955e9.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JWcZjI7x;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-48068ed1eccso29306145e9.2
         for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 13:56:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769896600; x=1770501400; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1769896599; x=1770501399; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LsYmiSj4b+JXV5N6yh24y3v1tEMXuZndDvlu4Erqz8k=;
-        b=FxFiF9kpdcmPtkFULkxag0mMVhTghQhhfv7QuEi9B5dDVj03OMEmC6XxMFGL4JGtWF
-         sypku1c4SGt4MrFxbk6PLe+BBzDs0mO0URscVa5mr97SuxaYoO2P5qN4XzgrLcsFv74I
-         AL1fpEBEbaaYlAgLQJwnUYa2WxXU+UzVosvbDeV4xCGLXmtgpSbD3e9/hJsatcIBcSG8
-         xluVlyhSTeiaz5eoyrO4C/T6/6l1Rqct396HvIsXQrMWtQ+B21wv0eWGJBvhYtVoEZMc
-         WN0H66AeSups2v1cxAng1FZUuxdNoZPhaKbiAw19uMmHNN1XljpQwjb/mfWZtOYOUcTZ
-         2aLQ==
+        bh=YoyVKp75dyOB6djPt+9ypDdI8Loku68L4Y/6mDkwTTE=;
+        b=JWcZjI7x8HSJ6UU73FmR4FGCpnukTHSTtivGCD5Hci6DkMujcnzeKlpNL/Nba3XNp3
+         cpkuOMEi/z3z3YdGbgjAGdu9b+JknIV72HXky5vvqQCqVYGBiLB1X8sU4SZsaiz35wYZ
+         /ewk/fxyILGz3gHyMjUyXTt3ytP3Pskxbx3lfwg/wiGizbL/P6UcYKYxRtHUicicJwJ6
+         bnG3BKi+0dMveVGMRd2S/GNYSKB5awK1/5cB5uQR6MIesrW6Cmu4cnaUXf8/u4uUTFU7
+         Fzu1c/Dm+yc0vguYsJdrbAQgxgltI83MmScw1MsLdWZk4oo1Q6cMQRpBHq6kjMlZ7ph4
+         hR1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769896600; x=1770501400;
+        d=1e100.net; s=20230601; t=1769896599; x=1770501399;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=LsYmiSj4b+JXV5N6yh24y3v1tEMXuZndDvlu4Erqz8k=;
-        b=Mcz7a4PK579ibqHtoiPuQYiLs3hRTHZWbhbTJiDzS4n2frbeFIKfqimzMGw/up8UHT
-         3aI2c9rxEZrjaugiP/tx1DQaXobszfiyLadbeepfzHi7Z2xf4GMn8wpQy13jJMA1ZP7M
-         ml/qHsYNiAXwBUUO/djcl5X8aH68CWQxgd6tl8eJhLflHYqHK6GybMYWsJP05boOuyb1
-         c2RDCOr8PqJFWhKD2xZSbdLtBgmVS6IGnsOE2TWkLEyoTHeg3mWfZ7iSSC/sp85/+j6q
-         DcHkiKdai/TzokmU6H02lJ6K+KqP/KvFM9QuRO4V5mvO35lgeEaGf+xXwBsYq2OC4Klg
-         ZljA==
-X-Gm-Message-State: AOJu0YzxP9iZgHjPk3vIbrEyE2BpXiaDVdIRvsT2c3t8W/EPuLD+s8n8
-	9JpO692Ngr/m5DOHFhqbVC2tYpsaemzgy+HVGbk+OCwPNPgrHBe0s6hlXNEXJw==
-X-Gm-Gg: AZuq6aLwn+1EIeIaWFT5UipX4VpeDXpO4JaaaBtwFuB2q9XGjeop2rVZFnkRTeKsqBj
-	w5tIItirXyTTl1Y3UpX084AX1VQpcdH+ElTCddGoPD17dFG9eS36cYPZQ8ACsAwcEX/ct4cN7y4
-	ofpo5bb8xf/J0/PPtBcVZmTI2+yPZT4iHy1W7V8FxU9pJ8h4agcaqnmo4nYN3nS+TyKhAaMyT9u
-	FDn/i0ejMEs5Z28FfSkl9kNSmSlUyUmNQYXSfYjAKNDJOi08JECr2jHXOdpqAjiUaeeIWLkxxxU
-	TYAKor2rY2eJqL6vZgN6BULDJ36Q1KlmhbQjcVvSutZfLP2RlTW9fssEyFkOOF2wbb7cmkwKkR/
-	zBIJfQHBVRNuzjboMsiWhdtZQO/Nlhfoq4IOJubN8HI44AEdA0qfcqVMHBsjKKKN259xRrMnU2a
-	yXdM9dHi1d
-X-Received: by 2002:a05:600c:6814:b0:480:699c:abe9 with SMTP id 5b1f17b1804b1-482db4b21c6mr74166155e9.37.1769896600146;
-        Sat, 31 Jan 2026 13:56:40 -0800 (PST)
+        bh=YoyVKp75dyOB6djPt+9ypDdI8Loku68L4Y/6mDkwTTE=;
+        b=jPhdi4EBLdAKMpSNcUZ6SSql+MvMofqw7DeQXztkxhJk96p3ZNgzCi5M9D3DgSizkj
+         O1YsKtlM0gD5m5DAH8bB9pI+1lqxlEBx5ZYzX1Xxga/3YlhG/cjbAMMeHm+T/88U6kL3
+         VeaNe8mrue+t035iXbFeYcetypfJRZtVzUC2OtRWZhvQEqb1QjVtX9c4EoamdE5M4nEo
+         jaJghulKz1u7eY0FMM09pnSxJyxbBfEHN5D6v+MVaesxwo6X0ijk7gRw9LejC0f4VIvB
+         wwkNcaJeRh3uteqjNuGZFNZj8Zr/x/SGauL+HCsIK++ZT+k3oJ22/OtogCyWehit+Y1u
+         NbIQ==
+X-Gm-Message-State: AOJu0YwIaYOWeAjXmVHKBBf1gcHS7mes+IBhj0xtHpH/HhUsc30ebHRa
+	Cezdumkbbf3fQXzDf1mmpjtBlCAz8fDu6nrB2HiEMHi7GN+6KritWxxU8133Bg==
+X-Gm-Gg: AZuq6aLhxEFgKD1UbnUH11KUuUsC7l134Cq9lK0fdSiqdbyZo4XO9Xy+2eF4E+bk8VZ
+	mvIJdmpvG1v3hOnTK2gXh5dd6zybmyTl/U0AJ4t5+6DjhWwK4vj1Twd1IhI09oSMf9Qi9MsXEEq
+	rsClpiDY1HNo4xcdCRbWURNSuVf7t/TVb0TE6mfYYewDlhgrbMoKPRv3YH43pcS5uiuQEq1rDci
+	c3e6j2pltJEHNXMVBPJp2HH5jhj2nHA4aVK13nbILxhIy/4YiljMbRHnx5eo3SviCqv1BZHxWyd
+	RShdApEqGY2G7iJjYGoWv3YCa/NRA86l6+jKEZR/DYOUgPv/XO55mYYHQnFdC51c1Lk402o1CaD
+	E7jRO3R5LyYqov9NAd437uD6IzWdDiK7DP5eAz8eVFPfSPIrTLdZDaqD7rOeiuGtTr8pafwQGPT
+	b8pVhnrvmb
+X-Received: by 2002:a05:600c:c16d:b0:477:63b5:7148 with SMTP id 5b1f17b1804b1-482db44d22dmr95180025e9.6.1769896599553;
+        Sat, 31 Jan 2026 13:56:39 -0800 (PST)
 Received: from desktop ([51.154.145.205])
         by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806ce56490sm276840065e9.12.2026.01.31.13.56.39
         for <openembedded-devel@lists.openembedded.org>
@@ -55,9 +55,9 @@ Received: from desktop ([51.154.145.205])
         Sat, 31 Jan 2026 13:56:39 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/3] mailcap: add recipe
-Date: Sat, 31 Jan 2026 22:56:35 +0100
-Message-ID: <20260131215636.2633863-3-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/3] mime-support: drop recipe
+Date: Sat, 31 Jan 2026 22:56:34 +0100
+Message-ID: <20260131215636.2633863-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260131215636.2633863-1-skandigraun@gmail.com>
 References: <20260131215636.2633863-1-skandigraun@gmail.com>
@@ -67,76 +67,92 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 21:56:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124022
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124021
 
-This recipe is one of the successors of the mime-support, which
-provided mailcap and mime.types files. This recipe contains
-only the mailcap portion.
+Debian has split this package into two sepatare packages:
+media-types and mailcap. This package hasn't been updated
+since 2020 (but the other two packages are regularly updated).
+
+Beside this the SRC_URI has been inaccessible since a while also.
+
+Drop this recipe (and substitute it with the up to date packages
+in followup patches).
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../mime-support/mailcap_3.75.bb              | 54 +++++++++++++++++++
- 1 file changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-support/mime-support/mailcap_3.75.bb
+ .../mime-support/mime-support_3.62.bb         | 65 -------------------
+ 1 file changed, 65 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/mime-support/mime-support_3.62.bb
 
-diff --git a/meta-oe/recipes-support/mime-support/mailcap_3.75.bb b/meta-oe/recipes-support/mime-support/mailcap_3.75.bb
-new file mode 100644
-index 0000000000..6dc1fb3f8a
---- /dev/null
-+++ b/meta-oe/recipes-support/mime-support/mailcap_3.75.bb
-@@ -0,0 +1,54 @@
-+SECTION = "base"
-+SUMMARY = "MIME files 'mailcap', and support programs"
-+LICENSE = "PD & Bellcore"
-+LICENSE:${PN} = "PD"
-+# mailcap.man's license is Bellcore
-+LICENSE:${PN}-doc = "PD & Bellcore"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=881b8546ad4d18ee8d55d42c93cda0b6"
-+
-+DEPENDS = "file"
-+RDEPENDS:${PN} = "perl"
-+RRECOMMENDS:${PN} = "file"
-+
-+SRC_URI = "${DEBIAN_MIRROR}/main/m/${BPN}/${BPN}_${PV}.tar.xz"
-+SRC_URI[sha256sum] = "44876c7241693ab32de57e799052b19a575ae0e27e85380537225708f562738f"
-+S = "${UNPACKDIR}/work"
-+
-+FILES:${PN} += " ${libdir}/mime"
-+
-+docdir:append = "/${BPN}"
-+
-+do_install () {
-+    install -d ${D}${sysconfdir}
-+    install -d ${D}${libdir}/mime/packages
-+    install -d ${D}${docdir}
-+    install -d ${D}${sbindir}
-+    install -d ${D}${bindir}
-+    install -d ${D}${mandir}/man1
-+    install -d ${D}${mandir}/man5
-+    install -d ${D}${mandir}/man8
-+    install -m 644 mailcap            ${D}${libdir}/mime
-+    install -m 644 mailcap.order      ${D}${sysconfdir}/
-+    install -m 644 mailcap.man        ${D}${mandir}/man5/mailcap.5
-+    install -m 644 mailcap.order.man  ${D}${mandir}/man5/mailcap.order.5
-+    install -m 755 update-mime        ${D}${sbindir}/
-+    install -m 644 update-mime.man    ${D}${mandir}/man8/update-mime.8
-+    install -m 755 run-mailcap        ${D}${bindir}/
-+    install -m 644 run-mailcap.man    ${D}${mandir}/man1/run-mailcap.1
-+    install -m 644 debian/changelog   ${D}${docdir}
-+    install -m 644 debian/copyright   ${D}${docdir}
-+    install -m 755 debian-view        ${D}${libdir}/mime/
-+    install -m 644 mailcap.entries    ${D}${libdir}/mime/packages/mailcap
-+    cd ${D}${mandir}; gzip -9fv */*
-+    cd ${D}${docdir}; gzip -9v changelog
-+    cd ${D}${bindir}; ln -s run-mailcap see
-+    cd ${D}${bindir}; ln -s run-mailcap edit
-+    cd ${D}${bindir}; ln -s run-mailcap compose
-+    cd ${D}${bindir}; ln -s run-mailcap print
-+    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz see.1.gz
-+    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz edit.1.gz
-+    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz compose.1.gz
-+    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz print.1.gz
-+}
-+
-+INHIBIT_DEFAULT_DEPS = "1"
+diff --git a/meta-oe/recipes-support/mime-support/mime-support_3.62.bb b/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
+deleted file mode 100644
+index 1c0aec13e3..0000000000
+--- a/meta-oe/recipes-support/mime-support/mime-support_3.62.bb
++++ /dev/null
+@@ -1,65 +0,0 @@
+-SECTION = "base"
+-SUMMARY = "MIME files 'mime.types' & 'mailcap', and support programs"
+-LICENSE = "PD & Bellcore"
+-LICENSE:${PN} = "PD"
+-# mailcap.man's license is Bellcore
+-LICENSE:${PN}-doc = "PD & Bellcore"
+-LIC_FILES_CHKSUM = "file://debian/copyright;md5=53c851e31d27c3ea8a6217073a5ff01c"
+-
+-DEPENDS = "file"
+-RDEPENDS:${PN} = "perl"
+-RRECOMMENDS:${PN} = "file"
+-
+-SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}.tar.gz"
+-SRC_URI[sha256sum] = "54e0a03e0cd63c7c9fe68a18ead0a2143fd3c327604215f989d85484d0409f4a"
+-S = "${UNPACKDIR}/${BPN}"
+-
+-inherit update-alternatives
+-
+-FILES:${PN} += " ${libdir}/mime"
+-
+-docdir:append = "/${BPN}"
+-
+-do_install () {
+-    install -d ${D}${sysconfdir}
+-    install -d ${D}${libdir}/mime/packages
+-    install -d ${D}${docdir}
+-    install -d ${D}${sbindir}
+-    install -d ${D}${bindir}
+-    install -d ${D}${mandir}/man1
+-    install -d ${D}${mandir}/man5
+-    install -d ${D}${mandir}/man8
+-    install -m 644 mime.types         ${D}${sysconfdir}/
+-    install -m 644 mailcap            ${D}${libdir}/mime/
+-    install -m 644 mailcap.order      ${D}${sysconfdir}/
+-    install -m 644 mailcap.man        ${D}${mandir}/man5/mailcap.5
+-    install -m 644 mailcap.order.man  ${D}${mandir}/man5/mailcap.order.5
+-#    install -m 755 install-mime       ${D}${sbindir}/
+-#    install -m 644 install-mime.man   ${D}${mandir}/man8/install-mime.8
+-    install -m 755 update-mime        ${D}${sbindir}/
+-    install -m 644 update-mime.man    ${D}${mandir}/man8/update-mime.8
+-    install -m 755 run-mailcap        ${D}${bindir}/
+-    install -m 644 run-mailcap.man    ${D}${mandir}/man1/run-mailcap.1
+-#    install -m 644 rfcs/*             ${D}${docdir}/
+-    install -m 644 debian/changelog   ${D}${docdir}/changelog.Debian
+-    install -m 644 debian/copyright   ${D}${docdir}/copyright
+-    install -m 755 debian-view        ${D}${libdir}/mime/
+-    install -m 755 playaudio          ${D}${libdir}/mime/
+-    install -m 755 playdsp            ${D}${libdir}/mime/
+-    install -m 644 mailcap.entries    ${D}${libdir}/mime/packages/mime-support
+-    cd ${D}${mandir}; gzip -9fv */*
+-    cd ${D}${docdir}; gzip -9v *
+-    cd ${D}${docdir}; gunzip copyright.gz
+-    cd ${D}${bindir}; ln -s run-mailcap see
+-    cd ${D}${bindir}; ln -s run-mailcap edit
+-    cd ${D}${bindir}; ln -s run-mailcap compose
+-    cd ${D}${bindir}; ln -s run-mailcap print
+-    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz see.1.gz
+-    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz edit.1.gz
+-    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz compose.1.gz
+-    cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz print.1.gz
+-}
+-
+-ALTERNATIVE_PRIORITY = "90"
+-ALTERNATIVE:${PN} = "mime.types"
+-ALTERNATIVE_LINK_NAME[mime.types] = "${sysconfdir}/mime.types"
 
