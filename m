@@ -1,78 +1,97 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E550FD73EB9
-	for <webhook@archiver.kernel.org>; Sat, 31 Jan 2026 18:46:29 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15071.1769885179253820567
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BBFF3E7C6F2
+	for <webhook@archiver.kernel.org>; Sat, 31 Jan 2026 21:56:50 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18480.1769896600852532853
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Jan 2026 10:46:20 -0800
+ Sat, 31 Jan 2026 13:56:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=dug/EEl7;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-202601311846156603a7d70e000207b0-yvd82k@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 202601311846156603a7d70e000207b0
-        for <openembedded-devel@lists.openembedded.org>;
-        Sat, 31 Jan 2026 19:46:16 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=wQ8S3+ZI0n1iz2nQaBWnPdnj8r3YX2rQ2HiFeUEbpD8=;
- b=dug/EEl7pT9dffIM4+8MlChPV0ZdUVv8vyY6B1HkdQ9meuS8Xrf/B3atGE0l4X8kFQrXYq
- UaCL1UIwKgx8gZfwcjLdgLg56QIXJAUNL+W7Jscf5IHJbiAoB3w5QRTjcBf/uv8+POmQo4Yt
- U6lNvh3Vpz/aJfLaqT0rR0vQitmtBDVfey6H/qjW+ReunFrK8hLrBs5dzdvINbidy9aW7WJC
- By4BCzGhNqIDX4cWV7GjXevV1L8wh/NyadBAk+qkMugCH876/U/GVLoutOTgtE7Tr+h7nB5W
- y0OMkeLv5pYwPOwnf7flRyxn7SLhCu4+bkhOkjbfFYyMDYJI+ek+Sgdw==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=k2leIKJb;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47ee0291921so29705085e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 13:56:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1769896599; x=1770501399; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/Lsqz6Ss3TXq/42IkTsAzKXEJYPqGTBJJDTVyfdjwmg=;
+        b=k2leIKJbQATxlefJhoLWati3m//NsUdS85W2VXaRPBu3fv+Ulooh5H+7w0WtR80AZu
+         qTpWftWUblUrjAhHijvpdJRq1PyWxIw2BjHGpf5zHzfiQIHDEX6tAwO/mI/QAWCobWan
+         MkHgOmXjnd32vuO+3JxvVmUXqbP5RZ3gIRd/7tSrtcT19p6Lp9BZffvrSOnC8G1/dEti
+         AxSAT2n7y9A7MtJ56uUQNWeHumBpYyg3v5rloBPi+rzXi4YHTo+kdk4sAHwBar4y8FAY
+         3YkR1hoCMdyDUnItWmRMCbiszmm/uMsJin6UJ85+1LTP1m3cq2LnrvY6m8dF8Uy+cftI
+         YS3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769896599; x=1770501399;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/Lsqz6Ss3TXq/42IkTsAzKXEJYPqGTBJJDTVyfdjwmg=;
+        b=CtHp4/Z4LNTOayQktx2n21bRXbMTTaskl5wGIa56W4liHY44Riqd0aY/FpU512vYSv
+         33z0m9tQ5dzMqMJhegOiKDqCgfaH6Vcxplrb1Z5mrgnFaJSJaJdyZDCxcZ3QVpehPnW5
+         cb3UhKEdw1+lZCim1T1jEmyOCRfB/D4VAmvsv6LDqV6HjUkMlNsfdSmNG/WThphn4FYo
+         3lqxZ14BUijeBWBPZksPWkKWPfEheD3gX2ljgmgOrI6h9gQgLqmA8PlnYLm7rMVh8eJ9
+         XhMnIZ4kZPs06dMUkFZZ6WtxLNonPkRtk9hlmTXqyhEZOuaXDB5MEBq3c+XULlccniTr
+         J9RQ==
+X-Gm-Message-State: AOJu0YwVPNTKAj6Q1BVu2RuehCk7ZKMAr5mvqBoMA95Royye9pN4jS5m
+	Ev1ls8eN06kgxGHR/KzhqwPGIhcVhjML50AAXm8lFrwxrVW75+9koXm4NJaMcg==
+X-Gm-Gg: AZuq6aLozl+1xQB2ln1SqUsHzTyCgjyt6hvJNnf94gS2vQWz4YzIP8J0izTNRHoYEg1
+	aRyGsHlhVPTc3uCKTB/yYQ273k/Sw88/Qq3k/DkzjXSFC4+ngR9ji6kQeBdDYK45EnIITJyx44V
+	Ie9upq0GUa/OF2uBbWaxQugSpZt2OeWdB3BcNg/SEySYXT48cpDxI0yMZbNRNxc6MXAQU+SccD+
+	SisPIvtgsbFAJYxzGdP/uyM9HAlk4C04rlwTUF8cCucBNWEkJrlpCtYRT3+wm3zjpkYZldrJtCU
+	Llf/kCXypElgxyRWOIsX7Zm1ierSSbmtOJTqxuSvn34e11ftr9Tm7i2KldN854pQQeJFAJQM2o7
+	VHbXIWkQDEAHqHeiCOsKAA9OxTdkb68GRMhjiZsB3ALxQUQzBomHRcxIPdE+XhFc3D5LSyTMoeA
+	VxH3wIe17l
+X-Received: by 2002:a05:600d:6409:20b0:480:1c53:2085 with SMTP id 5b1f17b1804b1-482e6668178mr42858085e9.19.1769896598902;
+        Sat, 31 Jan 2026 13:56:38 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806ce56490sm276840065e9.12.2026.01.31.13.56.37
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 31 Jan 2026 13:56:37 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][scarthgap][PATCH] python3-m2crypto: workaround for swig issue with sys/types.h
-Date: Sat, 31 Jan 2026 19:46:09 +0100
-Message-Id: <20260131184609.112032-1-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 0/3] Update and split mime-support
+Date: Sat, 31 Jan 2026 22:56:33 +0100
+Message-ID: <20260131215636.2633863-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 18:46:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124019
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 21:56:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124020
 
-From: Peter Marko <peter.marko@siemens.com>
+The mime-support recipe is fairly outdated: it ships a 7 years old
+version of the package - Debian even stopped storing it on their server,
+and the SRC_URI was inaccesisble.
 
-Upgrade to openssl 3.4.0 added sys/types.h into include/openssl/e_os2.h
-Unfortunetelly swig has issue with this and the build broke.
-Add a workaroung to remove this include until swig is fixed.
-In our setup this include is not necessary.
+With version 3.65 (in Oct/2020)[1] Debian has split mime-support package into
+two subpackages: mailcap and media-types. With that they also stopped
+maintaining the mime-support package (baically it is now a package
+that just depends on the two new packages).
 
-Upstream issue: https://github.com/swiftlang/swift/issues/69311
+This small series removes the old mime-support recipe, and adds recipes
+for the two new packages. Made the media-types recipe to provide mime-support
+still, with the intention to avoid breaking recipes depending on it.
 
-(From meta-openembedded rev: f9158ce32fffa6f18eed4008c3295146c81d55ea)
+[1]: https://salsa.debian.org/debian/mime-support/-/blob/master/debian/changelog?ref_type=heads
 
-This backport is part of effort to upgrade openssl to LTS in scarthgap.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-m2crypto_0.40.1.bb       | 5 +++++
- 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
-index 736399c9d2..dce459477f 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.40.1.bb
-@@ -46,6 +46,11 @@ export SWIG_FEATURES
- 
- export STAGING_DIR
- 
-+do_configure:prepend() {
-+    # workaround for https://github.com/swiftlang/swift/issues/69311
-+    sed -i "/sys\/types.h/d" ${RECIPE_SYSROOT}${includedir}/openssl/e_os2.h
-+}
-+
- do_install:append() {
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/SSL/__pycache__/*.cpython-*.pyc
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/M2Crypto/__pycache__/*.cpython-*.pyc
+Gyorgy Sarvari (3):
+  mime-support: drop recipe
+  mailcap: add recipe
+  media-types: add recipe
+
+ .../{mime-support_3.62.bb => mailcap_3.75.bb} | 33 ++++++----------
+ .../mime-support/media-types_14.0.0.bb        | 39 +++++++++++++++++++
+ 2 files changed, 50 insertions(+), 22 deletions(-)
+ rename meta-oe/recipes-support/mime-support/{mime-support_3.62.bb => mailcap_3.75.bb} (58%)
+ create mode 100644 meta-oe/recipes-support/mime-support/media-types_14.0.0.bb
+
 
