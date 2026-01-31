@@ -2,35 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3AFFE7C6F6
-	for <webhook@archiver.kernel.org>; Sat, 31 Jan 2026 22:11:40 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18765.1769897497808001937
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECF49E7C6F7
+	for <webhook@archiver.kernel.org>; Sat, 31 Jan 2026 22:19:00 +0000 (UTC)
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18866.1769897934002243416
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 31 Jan 2026 14:11:39 -0800
+ Sat, 31 Jan 2026 14:18:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=VNLJshQC;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-20260131221135fc6e05fb8000020789-dczo4b@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20260131221135fc6e05fb8000020789
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=EQ+moZpv;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-202601312218510a4bc21bcb0002072e-asciw1@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 202601312218510a4bc21bcb0002072e
         for <openembedded-devel@lists.openembedded.org>;
-        Sat, 31 Jan 2026 23:11:35 +0100
+        Sat, 31 Jan 2026 23:18:51 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=dvcEklwcAcb1fRdHhzpZr0wxpec6aV3Fv0l8AF00xkE=;
- b=VNLJshQCZ1ZzQ8WeD3CtOFWQG7SjrTY/DnHeh5e9nR3sAnx0iOI4CPgtXHRBak8zTyQP4N
- H8ctWbmWo6r2v3fehU9t/g1xib/vkkEmN3d7FsXK4R7CmL7m/al1bZ+3SuBZL3wJL6xYGqV7
- MsaHcVQqynUsyDx0LIlz7eFxOpL+4bDebsRpI1/StKcpg0ENus3QBfVyQlHaMsJaM6hCLAb4
- CqQ+gjUlZWOsnH8DbG0YXS/fuGXFJxw1FOIp5wEkD30vuvJNCzMOqpd/CuW8Rx8Oj+1JsGT8
- 6PFPPrwmC2TfdRtBk+TL/Gu/6mZ8ioQOxnvJ1tmRtq4akMayGX5GFoeQ==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=2MPfY1b+GjH5Sf72rJTtFjO5z/xm8sr0Gq+7esZdPaE=;
+ b=EQ+moZpvFvC/buRem5xbnf0Qj6PJqA4qrC9WA34j6R0gEp30iOpNwzFsssS6KLQYHpwmpY
+ aEmjLzaPsaYc8mHsgXzjDKJRsjjWc0A4qSiu1ziCIZC1FhF39WEgBnIIQQEUymQOLdLImh0T
+ PrNd3H+l5Kc5gxDqHeCqCUzIy8Im/3e7rjKUaF8f6vYJZf6dNi0nUw2s6zTUBbA4ONgjxW14
+ MXEvRADKBU++wRPJEmE/VLHCJnsayneep/U/yGxWL5zSKeaClOtkXSjCF3FKNtoSW4IZSci7
+ bqq7dEFwG/58q4LAwncLppIBdsvdnySdE+islM6r7f/A8nzP5x4XczAA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 2/2] protobuf: upgrade 6.31.1 -> 6.33.5
-Date: Sat, 31 Jan 2026 23:11:24 +0100
-Message-Id: <20260131221124.306284-2-peter.marko@siemens.com>
-In-Reply-To: <20260131221124.306284-1-peter.marko@siemens.com>
-References: <20260131221124.306284-1-peter.marko@siemens.com>
+Cc: peter.marko@siemens.com
+Subject: [meta-python][whinlatter][PATCH 1/2] python3-protobuf: upgrade 6.33.1 -> 6.33.2
+Date: Sat, 31 Jan 2026 23:18:42 +0100
+Message-Id: <20260131221843.307007-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -38,122 +36,36 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 22:11:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124026
+ <openembedded-devel@lists.openembedded.org>; Sat, 31 Jan 2026 22:19:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124027
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 
-* rebase existing patches
-* drop mips clang patch as this was fixed upstream via [1] to build only
-  for platforms supporting it.
-* add PV to SRC_URI
-* add variables to automatically calculate branch and tag
-* fix includedir for utf8_range in ptest compilation
+Change log:
+https://github.com/protocolbuffers/protobuf/releases/tag/v33.2
 
-[1] https://github.com/protocolbuffers/protobuf/commit/719f3037032b2e952afe7fc49152cc4be38fa7a3
-
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../0001-Fix-build-on-mips-clang.patch        | 34 -------------------
- ...buf-native-build-failure-with-gcc-10.patch |  6 ++--
- ...{protobuf_6.31.1.bb => protobuf_6.33.5.bb} |  9 +++--
- 3 files changed, 9 insertions(+), 40 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-clang.patch
- rename meta-oe/recipes-devtools/protobuf/{protobuf_6.31.1.bb => protobuf_6.33.5.bb} (93%)
+ .../{python3-protobuf_6.33.1.bb => python3-protobuf_6.33.2.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-protobuf_6.33.1.bb => python3-protobuf_6.33.2.bb} (95%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-clang.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-clang.patch
-deleted file mode 100644
-index 1f5c9127de..0000000000
---- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-build-on-mips-clang.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From cd6c5f36c0dc38e4734b74b03923489b7bfb9aba Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 10 Mar 2025 19:59:19 -0700
--Subject: [PATCH] Fix build on mips/clang
--
--clang20 crashes on mips, until its fixed upstream disable tailcall on
--mips
--
--https://github.com/llvm/llvm-project/issues/51709
--
--Upstream-Status: Inappropriate [Clang workaround]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Rebase to v5.29.4
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- src/google/protobuf/port_def.inc | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/src/google/protobuf/port_def.inc b/src/google/protobuf/port_def.inc
--index 56f995e45..428d096b3 100644
----- a/src/google/protobuf/port_def.inc
--+++ b/src/google/protobuf/port_def.inc
--@@ -227,6 +227,7 @@ static_assert(PROTOBUF_ABSL_MIN(20230125, 3),
-- #error PROTOBUF_TAILCALL was previously defined
-- #endif
-- #if ABSL_HAVE_CPP_ATTRIBUTE(clang::musttail) && !defined(__arm__) &&  \
--+    !defined(__mips__) && \
--     !defined(_ARCH_PPC) && !defined(__wasm__) &&                      \
--     !(defined(_MSC_VER) && defined(_M_IX86)) && !defined(__i386__)
-- // Compilation fails on ARM32: b/195943306
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf-native-build-failure-with-gcc-10.patch b/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf-native-build-failure-with-gcc-10.patch
-index 2edba6b7eb..788db3e406 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf-native-build-failure-with-gcc-10.patch
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-fix-protobuf-native-build-failure-with-gcc-10.patch
-@@ -30,9 +30,9 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
- index e90cb8aa2..3ffac1307 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -14,6 +14,10 @@ endif()
-- # Project
-- project(protobuf C CXX)
-+@@ -18,6 +18,10 @@ if(CMAKE_CXX_STANDARD AND CMAKE_CXX_STANDARD LESS 17)
-+   message(FATAL_ERROR "The minimum supported C++ standard is C++ 17")
-+ endif()
-  
- +set(CMAKE_CXX_STANDARD 17)
- +set(CMAKE_CXX_STANDARD_REQUIRED ON)
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_6.33.5.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_6.33.5.bb
-index 37b26b610d..4f5f53d4e5 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_6.33.5.bb
-@@ -10,17 +10,19 @@ LIC_FILES_CHKSUM = " \
-     file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
+diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.1.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.33.2.bb
+similarity index 95%
+rename from meta-python/recipes-devtools/python/python3-protobuf_6.33.1.bb
+rename to meta-python/recipes-devtools/python/python3-protobuf_6.33.2.bb
+index fcf53cb9a0..d0ef7753b0 100644
+--- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.1.bb
++++ b/meta-python/recipes-devtools/python/python3-protobuf_6.33.2.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
  "
  
-+PROTOC_VERSION = "v${@d.getVar('PV').split('.', 1)[1]}"
-+PROTOC_BRANCH = "${@d.getVar('PV').split('.', 2)[1]}.x"
-+
- DEPENDS = "zlib abseil-cpp jsoncpp"
- DEPENDS:append:class-target = " protobuf-native"
+ inherit pypi setuptools3
+-SRC_URI[sha256sum] = "97f65757e8d09870de6fd973aeddb92f85435607235d20b2dfed93405d00c85b"
++SRC_URI[sha256sum] = "56dc370c91fbb8ac85bc13582c9e373569668a290aa2e66a590c2a0d35ddb9e4"
  
--SRCREV = "74211c0dfc2777318ab53c2cd2c317a2ef9012de"
-+SRCREV = "b6f9284da830b69be787732ffdaa35049d20a088"
+ CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
  
--SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=31.x;protocol=https \
-+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=${PROTOC_BRANCH};protocol=https;tag=${PROTOC_VERSION} \
-            file://run-ptest \
-            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
-            file://0001-fix-protobuf-native-build-failure-with-gcc-10.patch \
-            "
--SRC_URI:append:mipsarcho32:toolchain-clang = " file://0001-Fix-build-on-mips-clang.patch "
- 
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d\.\d+\.\d+)"
- 
-@@ -70,6 +72,7 @@ do_compile_ptest() {
- 	# Adapt uf8_range.pc
- 	cp "${B}/third_party/utf8_range/utf8_range.pc" "${B}/${TEST_SRC_DIR}/utf8_range.pc"
- 	sed -e 's|libdir=|libdir=${PKG_CONFIG_SYSROOT_DIR}|' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
-+	sed -e 's|includedir=.*|includedir=${S}/third_party/utf8_range|' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
- 	sed -e 's|Libs:|Libs= -L${B}/third_party/utf8_range |' -i "${B}/${TEST_SRC_DIR}/utf8_range.pc"
- 	# Until out-of-tree build of examples is supported, we have to use this approach
- 	sed -e 's|../src/google/protobuf/.libs/timestamp.pb.o|${B}/CMakeFiles/libprotobuf.dir/src/google/protobuf/timestamp.pb.cc.o|' -i "${B}/${TEST_SRC_DIR}/Makefile"
 
