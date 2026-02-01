@@ -2,100 +2,100 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD762E65266
-	for <webhook@archiver.kernel.org>; Sun,  1 Feb 2026 14:04:30 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29955.1769954664156006033
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05DB5E65281
+	for <webhook@archiver.kernel.org>; Sun,  1 Feb 2026 14:04:31 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29956.1769954665385910986
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Feb 2026 06:04:24 -0800
+ Sun, 01 Feb 2026 06:04:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kMYYZDR2;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4806cc07ce7so35873305e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Feb 2026 06:04:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FhoD5BgE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-47ee07570deso29929635e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 01 Feb 2026 06:04:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1769954662; x=1770559462; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3DG5vE3VkNkkiber2+vNrjPwXOoTt1/YxNVr9exI+RA=;
-        b=kMYYZDR2e2NYVHfMnuJHlNUuye4C5PK0kNQ/T3Qj4o+xB8JJOphW20LDwBAAvBH0A1
-         a2AFrPZCnc8Az8jvWj33Ona9ZnuGLXwVLMV2qcr1EunlP4C6n8sEhzAWOaJ5Rw1358vk
-         gaWCI/smbi6FYsuYIlbrwvr0Wta4pdXxYJlR/SvDX+3f7Y6nrLdAdGSmRwiizBZFHaNt
-         r5LVniScgXSi8+MCd24ZwgHeGpwm1PxyuuFjzcMobywuxgdqyFpaqYOSdgwIdqOdSqRs
-         ilK2XSZhQDxVR9cNK1k9TarIV3WUwIDFdaQLtVwOI6ll/tVELvjXNV95Ifu8Vl8g7AIT
-         VvLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1769954662; x=1770559462;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1769954664; x=1770559464; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=3DG5vE3VkNkkiber2+vNrjPwXOoTt1/YxNVr9exI+RA=;
-        b=qZgUuc5mTzMr/mMcC3MtrqYRGUCr829Unfi4bx+p3/l1c1A1ux5ccYrKwidGu/UXC7
-         NVDIX95bxAJIloxxAIsOavirA+TxFvBT2p6UQHd33TKK/T1jiizQ7AhlMGXP617Z3cSE
-         JFJKrEl45VOCZ7t5Dfbzl2IxtevE87D4XYg31RBlbmbUYPLLordf0SIv9IyUT8VUQHc6
-         BZ9uiU5I5Qe0xhfr0YWr8wjVDxCCr29mXCHU2iI95X+SNBXKBf29Qzk4WYmcPkitYqiK
-         FtVPUCqZeML1rnwha7+b61ferO6sEmTtogXz2Eompwdhf9w18hX19NCvuCHepz5rV78v
-         JLXw==
-X-Gm-Message-State: AOJu0YxkMrjZwkmsV2NXW3yO+VqpVWRxNJMqmIUUkfXNcUrlVv5ivRP0
-	rTGt6lO6uq2aPIO7TOk9prrIZ1RnSOTHzRzfAJjdGIFPG/PnESllwoX1Sc3BVg==
-X-Gm-Gg: AZuq6aJ/2iuZgFzhtngT33s5+ZHSy+foeb3wLOPBGshmM7itGZX/gPaCyoyBo454+5S
-	wtgupgKtURQUAmHb3Lf8TlZgHBpS+PnHixGJGSJRMZe88kkowfo4eB/MOwIfi9RaiFzKkykshmQ
-	dxXK5XCfP1eOSpwaq+34MVsCzlxOMnoimsS1XWEJt7hakR1quFe5Z666GfzexpXzgJn8iRiIZNw
-	oI9by6kIjBisaHZ5aUGNhc5Rz9O8I64vFFmUAnZtn7Sam6gJypzs4f/23T4qMEPDjxlHTpHtuzq
-	9qXW93cRRutKK/arjJAdcQSqDBjrwidD1PsaXc2leViIR+qmJRJf16rGdCj7UY/1fMPado5hOzu
-	YgJ31Nshj3PEZEJzONfVbhUDZ++slwHizURW9Gzkt0NxgjK0kXwoDsTNqx1x8TXfpdB3ilkmkPu
-	piXlxC8F5gjdiEQNbhixI=
-X-Received: by 2002:a05:600c:6092:b0:477:8985:4036 with SMTP id 5b1f17b1804b1-482db4592cdmr110105855e9.1.1769954662224;
-        Sun, 01 Feb 2026 06:04:22 -0800 (PST)
+        bh=/ctQW14w7YMAYpqlNRvRf66jery4qyOgWt6P0TZo7GA=;
+        b=FhoD5BgEvhEklrOjWgeEpuwlttJPUdWpzLBHGje49fEWuc9BMGU/A0WFQn05RQeh9+
+         UH1bedyaIi3ln8BFw5fsI2DVhmre73woW60/ZwL2pFbu5afGgLa9XmskPYEKUba/60WF
+         0t6K532KVXRjy5xnolR+GLgYupN70vHVFikIGhkm2cwZFizKBbolwyl+TixA+nm5+09Y
+         Y7vn7TmgApkTbN5KZnXWGFkwz7uN9AiXlb40d9y2IZIB9qrxisCSTUfsizvyU4sZQiyV
+         QilTm+g3HqJ+1ZNwYBkw23bqdVM481T9wDguvDe7e5K8ikIxilHpnhy3EoyCtzwFrc6n
+         j58A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1769954664; x=1770559464;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=/ctQW14w7YMAYpqlNRvRf66jery4qyOgWt6P0TZo7GA=;
+        b=Vbe4/0QDWXxUJpSkIQ+OE/M10p43USCWtyziOJbLL5LMPev8F1JIZWbLjqwh6Sw2y4
+         4sUUuR90oc9LfGOVHPRAQXQhgykBkHU/HQ1fFIZUhIIyb/PKYwUurRJUo1RTlI3tOGVN
+         XCE4AqAZ6d1ghxMzlBfihagHDbebdW622Im1Nk2noQL4+t1yQXQjCarA1zCU3WXfUtUp
+         eZ7Q5rM0mnZEhPT3BhGOLDOy7MHaFUVasW6pwRnnO/82hP3VnWGwKgGdi00D8Rl0kuNl
+         TaPAKjYviY0sds0jjsd3Bw1g+l9h4skElJoUeUd7I5UYqfxvka5qRAPbqzUjKId8xxyN
+         X1xA==
+X-Gm-Message-State: AOJu0YyfsbjNaKZFwyJ9DmALTcjw6W1tH2xrCGVEUz2iZV8e8I4Ptmly
+	ldgsa7WtqRPmRv0InxODzw9gSgrXQ3tOTo5Qgko6Ekb6EGpmwPAOzgIbLEThKw==
+X-Gm-Gg: AZuq6aLZmF+uT8Nu6oq4FWattt8NMiIA8GWee7k60Hde1mgZaUM+GC8kwLca58aR7cf
+	BdhAGEvsPrjgPL/jOhYqhOGif79W0Pw2WyjuhTDhfiD1sogHXMNXyalhbcTsBzzizdFIfZgv87X
+	DBoKCa+R8NUno2SYzBLapjhXRffXHPt14piAQROBlNG8ZP13qo/TYy379ja7JQHCOhURVOzT7em
+	941GIewgLt6AGykpQqx9eB8QPHscB3Nxq+UpioSytAZnvZcW0ZM0Q1YOMSe2W1PUkiQLIZ8JoZJ
+	Ia1SumAHNzF3dhnLGSBaxnoXY2lPyT8HqolqGMmNJFAI0su8VtquP6uNT5Do7M/PN7GmtW7xMBU
+	iNHzTZ/YBeWbu5he1a/JsldWgmn2ijiUpC3C5cb2RSBiSOV/gbu/83x4qt64iUtTUR7bAo9y0GO
+	V9tgWq5BE0
+X-Received: by 2002:a05:600c:4e87:b0:459:db7b:988e with SMTP id 5b1f17b1804b1-482db4655c1mr108735655e9.13.1769954663724;
+        Sun, 01 Feb 2026 06:04:23 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806cdeafffsm307984695e9.7.2026.02.01.06.04.21
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4806cdeafffsm307984695e9.7.2026.02.01.06.04.23
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Feb 2026 06:04:21 -0800 (PST)
+        Sun, 01 Feb 2026 06:04:23 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 0/5] TigerVNC CVEs - alternative version
-Date: Sun,  1 Feb 2026 15:04:16 +0100
-Message-ID: <20260201140421.768419-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 2/5] tigervnc: ignore CVE-2014-8241
+Date: Sun,  1 Feb 2026 15:04:18 +0100
+Message-ID: <20260201140421.768419-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260201140421.768419-1-skandigraun@gmail.com>
+References: <20260201140421.768419-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 01 Feb 2026 14:04:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124032
+ <openembedded-devel@lists.openembedded.org>; Sun, 01 Feb 2026 14:04:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124034
 
-This is an alernative fix for a previous series[1] fixing the outstanding CVEs
-for TigerVNC. This series brings the xserver component in sync with oe-core,
-now they use the same version.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2014-8241
 
-xserver 21 support however was only added to TigerVNC two versions later, in
-verison 1.13. The first commit contains patches to support this verison of
-xserver. I was able to compile and connect to a VNC session successfully
-from core-image-sato using these patches.
+The vulnerability is about a potential null-pointer dereference, because
+of a malloc result is not verified[1].
 
-The rest of the cherry-picks just ignore the CVEs that are fixed in this
-version of xserver.
+The vulnerable code has been refactored since completely[2], and the code isn't
+present anymore in the codebase.
 
-[1]: https://lists.openembedded.org/g/openembedded-devel/message/123940
+[1]: https://github.com/TigerVNC/tigervnc/issues/993#issuecomment-612874972 - attachment
+[2]: https://github.com/TigerVNC/tigervnc/commit/b8a24f055f1a29886d8b18bb3f0902144dc5bd14
 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit ed8a1038d227ee521cf2349d9f7f8e37eec6a64a)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Gyorgy Sarvari (5):
-  tigervnc: sync xserver component with oe-core
-  tigervnc: ignore CVE-2014-8241
-  tigervnc: ignore CVE-2023-6377
-  tigervnc: ignore CVE-2023-6478
-  tigervnc: ignore CVE-2025-26594...26601
-
- ...ncrease-supported-Xorg-version-to-1..patch | 29 ++++++
- ...server21.1.1.patch-Add-Xorg-21-patch.patch | 95 +++++++++++++++++++
- .../files/0001-xvnc-adapt-for-1.21.patch      | 46 +++++++++
- .../tigervnc/tigervnc_1.11.0.bb               | 45 +++++----
- 4 files changed, 192 insertions(+), 23 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0001-xorg-version.h-Increase-supported-Xorg-version-to-1..patch
- create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0001-xserver21.1.1.patch-Add-Xorg-21-patch.patch
- create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0001-xvnc-adapt-for-1.21.patch
-
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+index acaac7183e..6631995665 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+@@ -118,3 +118,5 @@ FILES:${PN} += " \
+ "
+ 
+ FILES:${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
++
++CVE_STATUS[CVE-2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.11.0)"
 
