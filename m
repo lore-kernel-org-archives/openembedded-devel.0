@@ -2,274 +2,160 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45EDFE73176
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C415E73179
 	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 13:50:58 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.52874.1770040248869141222
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.52504.1770040249940669512
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 05:50:49 -0800
+ Mon, 02 Feb 2026 05:50:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eYHJ0yej;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-435a517be33so2680694f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 05:50:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QovLYZKO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47ee76e8656so59624215e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 05:50:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770040247; x=1770645047; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wWGA/vbg2n+XthuX5ugb1JFOp3fP0URTqDcUQ7r2+wk=;
-        b=eYHJ0yejAld6nZy7hKkMblUbb857w16kXbjnu2V2Al/FWOW7Ud23MvW1L6kI5c6wRq
-         tbErW4PpSntbvJb+XRxF/Z3eBBcNCXxnqq3Pku4J7IWO7+Zgp5kuFjV0ip1Oi8t0oido
-         8VzkPfiGXfleRWb9cF8Xr4o8e6VtDZ2ZJAC0sGqKwTLLFLrhvo14lEoPu580ELpsvUc5
-         fvo07CiHikuMypXk9ntxf4U6BsQH28q954KFbQfRsjfExB1cIC6LtA8r69pKxBnXvvZ0
-         MN7dNxCIbmwVPR9NbiwAwKuRHq4qcL4BeOSULmhOjJuygBvdal7sXfLZe3o2iuD+vYsV
-         pJzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770040247; x=1770645047;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1770040248; x=1770645048; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wWGA/vbg2n+XthuX5ugb1JFOp3fP0URTqDcUQ7r2+wk=;
-        b=SiQYKYyAcWvYh0UyglMHoQQNwjbXtv6NOlDpLoBOUHGYlBQVV4qxuzG4MeiZSnGRpU
-         r/uGNii3uD9VnFPBdUa9o9vcCYFxVG46zc+HEm8wNWphlBbAHpv+v3cV9FpSZBmGr32X
-         hWlZZjRJIXINaU26j2VF7/0Bcvov5WWMWJUPbuT0S3haeQggSXLjLRfvvlOnXED65LbG
-         qfNoz89lBH44YNxlOx56+lV+ooGpE/VvLH2BjKiJVn6b/kTjqsn6EVs5J7WBESufGaNT
-         QiZ2DLwmQaGKTYYAZfYp2tN4g/KaR25Gd1jmZLh2fRGiZYgen7rTQgLh+CCYMdc7gw+8
-         NvFw==
-X-Gm-Message-State: AOJu0YxNs+/W4aAMDREqlQ6SF1+kgIY3LGBceUPtimklfIpCTl47WdlN
-	u4s6LOZZoLQOahPfbBImlA5nAkbnDAy485sjYmVG5N27Nk6YKiDd9ZGU5WBojw==
-X-Gm-Gg: AZuq6aJpZmdARx1d9NjWnMelpOvZMfVFESTqvWnk64RZA6cz0Cnyh/m8SF7WNtnvB40
-	ooPlrg4CU5McR7xVPTr8GHkRHokCsLSJj1AsUSDVRbcCthfhHxdeA5yhJIl3ZOpxj2EOdBQMZ8e
-	CXsty7zwIZjuTtnR6vD4Nw7AEZJ97C4NiIyDX4oYWUxgrZnfcnxnjjOEt765JQ5iF+jZDYtJil9
-	SmCLlE6dEI/VmnO4T1dT4fnDrHBJ5QNbp7T1gZLGjiAV7EkQg22k37Ij9v+Gigx53uGqIefVFuP
-	kzEXbksPdXsQjwpk3AlukN0fAOyzXRLVr/zCp3QPDpxQqc6aCZ/FLnEq012vrd9EhXE+R3Lz1+r
-	vSUii8xTvlD3zH3uRcZe6xNHUrawQj2fCiQvwdM/TYtXD1VWhlRzzKboTeOH4/UDPWubkMiEVR/
-	TS4pnVe/Wt
-X-Received: by 2002:a05:6000:1a8f:b0:435:ad52:31d9 with SMTP id ffacd0b85a97d-435f3a824d2mr16441235f8f.28.1770040246808;
-        Mon, 02 Feb 2026 05:50:46 -0800 (PST)
+        bh=CqVgpnWSdl9I8VuwW0HY8Z+Jsv37cLQMSbB6IMkxzh8=;
+        b=QovLYZKOlmiGOeOdAk9Mt2Ivv9FjZBiiHbRBiEvmpQiZ4054Z+nFGGFu9ZCXA0T5w5
+         7V8+it4m8sjRRfJBWYZiqkacUYdF+xKXf+Flz8PUrWvmbbQ/cmKGYPxesA3vcWaFoCog
+         zJ7nfgBNKSGGA/ZE4nBs1soiZMh69RbQkcpSYcdPLQoa5LZbbUGjGDJ7VGgTNPLjBIvD
+         M2QfES/sLq3d9MUAfzTpo4+yHq041uncpLKClgPh1ojspUT6YlLi/PGtGtPCLEFuM7RS
+         6zfHJteWgBz+DQyvSzMU0G2UhREvjeBjf5rPSg0CuFQYJteGEkv+R2sBTm9a2Y4KVgbN
+         LrKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770040248; x=1770645048;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=CqVgpnWSdl9I8VuwW0HY8Z+Jsv37cLQMSbB6IMkxzh8=;
+        b=ZZ2ECvw94FVkMGANeYhjYlI7sKwfjVAGSc1L7jdpXMAS8acqHx+oAXlsKF7U33yFYk
+         fOGGX+n7wMxmgEqr2wdNglkfBXmr5W7Mxv/CxGY8tTgQQM+uKXCRpW7WVMkrtA4ol0S+
+         emxhU9T3r9IGjElS3L7dz66nCWKJ6J0IN01wJP5oKS+SfWaWlF2D5WWbC5w+OsnLI/gF
+         jZBqyZDW93EugGCRr5+AThfseTvPxs4DylHw+/p6lCY6u8AnRNacC530FqYFHezQiEY3
+         PN9+wp7No9fS0i55BZOEn1VBUt1NTH5uVxCIo2h7b4xWqi9qAghlAlh+WvRa8fwmlqcZ
+         DvLA==
+X-Gm-Message-State: AOJu0Yx/a5iCER+Lgf7mWZrFzg+oHzPUtIA1wMMAxmvBTbwBVWkdx0Oq
+	6g5kXc/yKCLRmYDnHbPjpMbSQwBcsDkeiiyPvkzmzgYlIw4Se5gnH0TmSAo70Q==
+X-Gm-Gg: AZuq6aKGbx6KM1BRXs4M6s9sTEj0zM9e2B25i9Vu85BkAC3guxnWyW51KSPITjZBRhv
+	iPMtWkl4GOSe4rvbG6UHyDPYF9O2M+jzCWf4MbZtayJAlYLY3pKa2SqaAVIKPMeaUKmzx3SLSO/
+	BK8Rsv6xVyI3gXnunaWMxMhaxxbDYZOQlBqosB85Dy8XNSD2of5uW5SW69oT1kxk/VDO/o9uP9U
+	yYkgChw9pOjW8FddRePgRIF2gb8Av2MOR851xoLYV1h4yxTC0CWlebLTKs2T5mNuBWk2dJq+0Ih
+	hE3crpbYCa9CYQM/MmxHy7j5yWDJwHhQjuHYLm6gpsXGp7KtsGcpsZqzJfLlgUkVS16wAMC+TnT
+	bKglSdwbc+vzXRivAqS67j5OfzfH/V+pS5aemTZdXtVKa02yUtj/8YV8VJnVMYs2ku4dZvCg/dP
+	v7j95DZRcb
+X-Received: by 2002:a05:600c:350a:b0:480:6910:abd1 with SMTP id 5b1f17b1804b1-482db491f3emr130988705e9.18.1770040248209;
+        Mon, 02 Feb 2026 05:50:48 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4360ef9e804sm2843518f8f.41.2026.02.02.05.50.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4360ef9e804sm2843518f8f.41.2026.02.02.05.50.47
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Feb 2026 05:50:46 -0800 (PST)
+        Mon, 02 Feb 2026 05:50:47 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/3] ez-ipupdate: patch CVE-2003-0887
-Date: Mon,  2 Feb 2026 14:50:43 +0100
-Message-ID: <20260202135045.1476359-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 3/3] freerdp3: upgrade 3.20.2 -> 3.22.0
+Date: Mon,  2 Feb 2026 14:50:45 +0100
+Message-ID: <20260202135045.1476359-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260202135045.1476359-1-skandigraun@gmail.com>
+References: <20260202135045.1476359-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 13:50:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124059
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124061
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
+Ptests passed successfully.
 
-The vulnerability is about the default (example) configurations,
-which place cache files into the /tmp folder, that is world-writeable.
-The recommendation would be to place them to a more secure folder.
+Dropped manpages PACKAGECONFIG: when it is enabled, it requires an executable that
+is compiled from the project's source, but since it is cross-compiled, it is not
+usable. The cmakefile also started to explicitly disable generating this tool
+when cross-compiling is enabled.
+Since this recipe has no native counterpart, and the manpages can't be generated
+in this state, this option was removed.
 
-The recipe however does not install these example configurations,
-and as such it is not vulnerable either.
+Changes:
+3.22.0:
+- Complete overhaul of SDL client
+- Introduction of new WINPR_ATTR_NODISCARD macro wrapping compiler or C language
+  version specific [[nodiscard]] attributes
+- Addition of WINPR_ATTR_NODISCARD to (some) public API functions so usage errors
+  are producing warnings now
+- Add some more stringify functions for logging
+- CVE fixes: CVE-2026-23948, CVE-2026-24682, CVE-2026-24683, CVE-2026-24676,
+  CVE-2026-24677, CVE-2026-24678, CVE-2026-24684, CVE-2026-24679,
+  CVE-2026-24681, CVE-2026-24675, CVE-2026-24491, CVE-2026-24680
+- [core,info] fix missing NULL check
+- [gateway,tsg] fix TSG_PACKET_RESPONSE parsing
+- Allow querying auth identity with kerberos when running as a server
+- Sspi krb heimdal
+- Tsg fix idleTimeout parsing
+- [channels,smartcard] revert 649f7de
+- [crypto] deprecate er and der modules
+- [channels,rdpei] lock full update, not only parts
+- [winpr,platform] add WINPR_ATTR_NODISCARD macro
+- Wlog cleanup
+- new stringify functions & touch API defines
+- Add support for querying SECPKG_ATTR_PACKAGE_INFO to NTLM and Kerberos
+- [channels,video] measure times in ns
+- [utils] Nodiscard
+- Error handling fixes
+- [channels,drdynvc] check pointer before reset
+- Winpr api def
+- [winpr,platform] drop C23 [[nodiscard]]
+- [gdi] add additional checks for a valid rdpGdi
+- Sdl3 high dpiv2
+- peer: Disconnect if Logon() returned FALSE
+- [channels,rdpecam] fix PROPERTY_DESCRIPTION parsing
+- [channel,rdpsnd] only clean up thread before free
+- [channels,rdpei] add RDPINPUT_CONTACT_FLAG_UP
 
-Just to make sure, patch these folders to a non-tmp folder
-(and also install that folder, empty).
-
-Some more discussion about the vulnerability:
-https://bugzilla.suse.com/show_bug.cgi?id=48161
+3.21.0:
+- CVE fixes: CVE-2026-23530, CVE-2026-23531, CVE-2026-23532, CVE-2026-23533,
+  CVE-2026-23534, CVE-2026-23732, CVE-2026-23883, CVE-2026-23884
+- [client,sdl] fix monitor resolution
+- [codec,progressive] fix progressive_rfx_upgrade_block
+- Krb cache fix
+- Rdpdr improved checks
+- Codec advanced length checks
+- Glyph fix length checks
+- Wlog printf format string checks
+- [warnings,format] fix format string warnings
+- Double free fixes
+- [clang-tidy] clean up code warnings
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb       |   7 +
- .../ez-ipupdate/files/CVE-2003-0887.patch     | 158 ++++++++++++++++++
- 2 files changed, 165 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+ .../freerdp/{freerdp3_3.20.2.bb => freerdp3_3.22.0.bb}         | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-oe/recipes-support/freerdp/{freerdp3_3.20.2.bb => freerdp3_3.22.0.bb} (97%)
 
-diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-index 42ecf9bac4..7a392b2c23 100644
---- a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-+++ b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-@@ -10,8 +10,15 @@ SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}
-            file://conf_file.c.patch \
-            file://wformat.patch \
-            file://0001-ez-ipupdate-Include-time.h-for-time-API-prototype.patch \
-+           file://CVE-2003-0887.patch \
-            "
- SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
- SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+similarity index 97%
+rename from meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
+rename to meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+index 81f160a848..ce4af4227e 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
  
- inherit autotools pkgconfig
-+
-+do_install:append(){
-+    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
-+}
-+
-+FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
-diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
-new file mode 100644
-index 0000000000..813de6a4eb
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
-@@ -0,0 +1,158 @@
-+From cd8fa738b0ed3b5fb89ac00068fdc2e20c1b6169 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Mon, 2 Feb 2026 14:03:01 +0100
-+Subject: [PATCH] CVE-2003-0887
-+
-+The vulnerability is about exmaple config files placing cache files
-+into a world-writable directory (/tmp) instead of something more
-+secure.
-+
-+This patch changes this path to /var/lib/ez-ipupdate, which is
-+not world-writable by default.
-+
-+CVE: CVE-2003-0887
-+Upstream-Status: Inactive-Upstrean [lastcommit: 2002]]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ example-dhs.conf       | 2 +-
-+ example-dyndns.conf    | 2 +-
-+ example-dyns.conf      | 2 +-
-+ example-easydns.conf   | 2 +-
-+ example-gnudip.conf    | 2 +-
-+ example-heipv6tb.conf  | 2 +-
-+ example-justlinux.conf | 2 +-
-+ example-ods.conf       | 2 +-
-+ example-pgpow.conf     | 2 +-
-+ example-tzo.conf       | 2 +-
-+ 10 files changed, 10 insertions(+), 10 deletions(-)
-+
-+diff --git a/example-dhs.conf b/example-dhs.conf
-+index 3fe9a04..f976ae5 100755
-+--- a/example-dhs.conf
-++++ b/example-dhs.conf
-+@@ -11,7 +11,7 @@ host=mydomain.whatever.com
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-dyndns.conf b/example-dyndns.conf
-+index f539dec..84b4807 100755
-+--- a/example-dyndns.conf
-++++ b/example-dyndns.conf
-+@@ -19,7 +19,7 @@ max-interval=2073600
-+ #cache-file=/etc/ez-ipupdate.cache.eth1
-+ 
-+ # for the mean time we'll just use a cache file in the temp directory
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-dyns.conf b/example-dyns.conf
-+index 868768d..856a4d7 100644
-+--- a/example-dyns.conf
-++++ b/example-dyns.conf
-+@@ -11,7 +11,7 @@ host=myhost
-+ #interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-#cache-file=/tmp/ez-ipupdate.cache
-++#cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-easydns.conf b/example-easydns.conf
-+index 0ff20da..15d9b78 100755
-+--- a/example-easydns.conf
-++++ b/example-easydns.conf
-+@@ -11,7 +11,7 @@ host=mydomain.whatever.com
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-gnudip.conf b/example-gnudip.conf
-+index 3b2fb63..d09df1f 100755
-+--- a/example-gnudip.conf
-++++ b/example-gnudip.conf
-+@@ -15,7 +15,7 @@ max-interval=2073600
-+ #address=0.0.0.0
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-heipv6tb.conf b/example-heipv6tb.conf
-+index e31aa9c..3ebc822 100644
-+--- a/example-heipv6tb.conf
-++++ b/example-heipv6tb.conf
-+@@ -18,7 +18,7 @@ max-interval=2073600
-+ #cache-file=/etc/ez-ipupdate.cache.eth1
-+ 
-+ # for the mean time we'll just use a cache file in the temp directory
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-justlinux.conf b/example-justlinux.conf
-+index 0afeb2c..28b3327 100755
-+--- a/example-justlinux.conf
-++++ b/example-justlinux.conf
-+@@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-ods.conf b/example-ods.conf
-+index d0ff889..7b16f2c 100755
-+--- a/example-ods.conf
-++++ b/example-ods.conf
-+@@ -11,7 +11,7 @@ host=mydomain.ods.org
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-pgpow.conf b/example-pgpow.conf
-+index 29a92d6..81e351b 100755
-+--- a/example-pgpow.conf
-++++ b/example-pgpow.conf
-+@@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
-+diff --git a/example-tzo.conf b/example-tzo.conf
-+index 2a71db3..10b8dc4 100755
-+--- a/example-tzo.conf
-++++ b/example-tzo.conf
-+@@ -15,7 +15,7 @@ max-interval=2073600
-+ interface=eth1
-+ 
-+ # if you use run-as ensure the user has permission to write this file
-+-cache-file=/tmp/ez-ipupdate.cache
-++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
-+ 
-+ # uncomment this once you have everything working how you want and you are
-+ # ready to have ez-ipupdate running in the background all the time. to stop it
+ inherit pkgconfig cmake ptest
+ 
+-SRCREV = "ef106b0c5adf739085ff4e8f45ef384e5a1c7bb3"
++SRCREV = "e3ef4c71138f76516299cb3637d2d0c59b2a3737"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag=${PV} \
+            file://run-ptest"
+ 
+@@ -49,7 +49,6 @@ PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER_1_0=ON,-DWITH_GSTREAMER_1_0=OFF,gst
+ PACKAGECONFIG[cups] = "-DWITH_CUPS=ON,-DWITH_CUPS=OFF,cups"
+ PACKAGECONFIG[fuse] = "-DWITH_FUSE=ON,-DWITH_FUSE=OFF,fuse3,fuse3"
+ PACKAGECONFIG[pcsc] = "-DWITH_PCSC=ON,-DWITH_PCSC=OFF,pcsc-lite"
+-PACKAGECONFIG[manpages] = "-DWITH_MANPAGES=ON,-DWITH_MANPAGES=OFF, libxslt-native docbook-xsl-stylesheets-native"
+ PACKAGECONFIG[ffmpeg] = "-DWITH_DSP_FFMPEG=ON -DWITH_FFMPEG=ON -DWITH_SWSCALE=ON, -DWITH_DSP_FFMPEG=OFF -DWITH_FFMPEG=OFF -DWITH_SWSCALE=OFF,ffmpeg"
+ PACKAGECONFIG[krb5] = "-DWITH_KRB5=ON -DWITH_KRB5_NO_NTLM_FALLBACK=OFF,-DWITH_KRB5=OFF,krb5"
+ PACKAGECONFIG[openh264] = "-DWITH_OPENH264=ON,-DWITH_OPENH264=OFF,openh264"
 
