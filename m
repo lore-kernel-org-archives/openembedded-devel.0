@@ -2,33 +2,37 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87EA3E7FDE9
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:32:40 +0000 (UTC)
-Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2034.1770067955673956806
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BFF0E7FDD8
+	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:32:50 +0000 (UTC)
+Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2079.1770067961323986396
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 13:32:37 -0800
+ Mon, 02 Feb 2026 13:32:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=I9dAxLRo;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-2026020221323373a084253d0002077b-s1yq44@rts-flowmailer.siemens.com)
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 2026020221323373a084253d0002077b
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=HXzxV3C/;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202602022132398f291d0f0800020740-xlwvo7@rts-flowmailer.siemens.com)
+Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202602022132398f291d0f0800020740
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 02 Feb 2026 22:32:33 +0100
+        Mon, 02 Feb 2026 22:32:39 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=X5VXULoA0tjVqYTcUEEN2nP4lX86XBbyyytGTP4qqpQ=;
- b=I9dAxLRok2R/UGgM1C+qiSNUa2ESF+RMz94qjjt81Vko52xI9NNAwLChTD2n364WaU+mD3
- hLqzRvkQkcDwEGkIo1Jzr36a9e1k3OFqtEojl1F2twTdKH2MCreKv+GDOUuk138ysGKEcMUR
- IfSNorKVmGrfK+oP1nNgjpZ6QgU+rPx9yVpdJeS0Vp9KJh4qx0DcIG7s6fFDRxmEWoNgEKHy
- nqTeK0QeS+m42WmMbc/3hye4jkigLF82tukkWw8ktULBNoHLBhVXpqqzt5I6ZRyLBVmCVJ/F
- EMrcTXluYNejFvGlHx2XpslN9uxAfaqnFEf6/DuyUVV4cpCsP0KD7BHQ==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=zBD0/LHYz/UJCJvh8+Y/S6eIShkZc41PXtir0pooFbE=;
+ b=HXzxV3C/6SG7CA/vQd3mB5UWL1B2h9Zx8kjLBNv+lGHjLjJiKjMo5VVhD//2KzV/AB5x++
+ igPf84jIHlo7GkGG0q8a9tli+lXipcRQMQKZ8ay+FMHACuaeVQKxoxPQj7TAEglSkA1pMzt3
+ UrEYNqXpf36j8X3De6cyZsquf6vt3ApXZci37gr7eZ+wjsLHA/OKzVmvt9m7Dgge1LEIX3Vf
+ S5FJBrwXCagXrPIiP7B0GbcCQQeOL8ExiCisqvbJ0513L69RI7Tysr+TtvxPTfA/C/S+CfL1
+ y2iq2t2eSGqbY39zcWB7UQJIOJkKpXZeiXZUwXEfz39aQzTPkuOPC2QA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][scarthgap][PATCH 1/2] python3-protobuf: patch CVE-2026-0994
-Date: Mon,  2 Feb 2026 22:32:27 +0100
-Message-Id: <20260202213228.2116741-1-peter.marko@siemens.com>
+Cc: Jan Vermaete <jan.vermaete@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Peter Marko <peter.marko@siemens.com>
+Subject: [meta-python][scarthgap][PATCH 2/2] python3-protobuf: added python3-ctypes as RDEPENDS
+Date: Mon,  2 Feb 2026 22:32:28 +0100
+Message-Id: <20260202213228.2116741-2-peter.marko@siemens.com>
+In-Reply-To: <20260202213228.2116741-1-peter.marko@siemens.com>
+References: <20260202213228.2116741-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,87 +40,37 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:32:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124090
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:32:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124091
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Jan Vermaete <jan.vermaete@gmail.com>
 
-Pick patch from PR in NVD report.
-It is the only code change in 33.5 release.
-Skip the test file change as it's not shipped in python module sources.
-Resolve formatting-only conflict.
+  File "/usr/lib/python3.12/site-packages/google/protobuf/internal/type_checkers.py", line 25, in <module>
+    import ctypes
+ModuleNotFoundError: No module named 'ctypes'
+
+tested on qemu86-64
+
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+(From meta-openembedded rev: d1b8ebc2a5ff5993e118048f2ca31a893f13cd38)
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../python3-protobuf/CVE-2026-0994.patch      | 47 +++++++++++++++++++
- .../python/python3-protobuf_4.25.8.bb         |  2 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
+ meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch b/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
-new file mode 100644
-index 0000000000..494a57ad63
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
-@@ -0,0 +1,47 @@
-+From c4eda3e58680528147a4cc7e2b3c9044f795c9c9 Mon Sep 17 00:00:00 2001
-+From: zhangskz <sandyzhang@google.com>
-+Date: Thu, 29 Jan 2026 14:31:08 -0500
-+Subject: [PATCH] Fix Any recursion depth bypass in Python
-+ json_format.ParseDict (#25239) (#25586)
-+
-+This fixes a security vulnerability where nested google.protobuf.Any messages could bypass the max_recursion_depth limit, potentially leading to denial of service via stack overflow.
-+
-+The root cause was that _ConvertAnyMessage() was calling itself recursively via methodcaller() for nested well-known types, bypassing the recursion depth tracking in ConvertMessage().
-+
-+The fix routes well-known type parsing through ConvertMessage() to ensure proper recursion depth accounting for all message types including nested Any.
-+
-+Fixes #25070
-+
-+Closes #25239
-+
-+COPYBARA_INTEGRATE_REVIEW=https://github.com/protocolbuffers/protobuf/pull/25239 from aviralgarg05:fix-any-recursion-depth-bypass 3cbbcbea142593d3afd2ceba2db14b05660f62f4
-+PiperOrigin-RevId: 862740421
-+
-+Co-authored-by: Aviral Garg <gargaviral99@gmail.com>
-+
-+CVE: CVE-2026-0994
-+Upstream-Status: Backport [https://github.com/protocolbuffers/protobuf/commit/c4eda3e58680528147a4cc7e2b3c9044f795c9c9]
-+Signed-off-by: Peter Marko <peter.marko@siemens.com>
-+---
-+ google/protobuf/json_format.py | 8 +++++---
-+ 1 file changed, 5 insertions(+), 3 deletions(-)
-+
-+diff --git a/google/protobuf/json_format.py b/google/protobuf/json_format.py
-+index 1b6ce9d03..9acbaefb5 100644
-+--- a/google/protobuf/json_format.py
-++++ b/google/protobuf/json_format.py
-+@@ -644,9 +644,11 @@ class _Parser(object):
-+       self._ConvertWrapperMessage(value['value'], sub_message,
-+                                   '{0}.value'.format(path))
-+     elif full_name in _WKTJSONMETHODS:
-+-      methodcaller(_WKTJSONMETHODS[full_name][1], value['value'], sub_message,
-+-                   '{0}.value'.format(path))(
-+-                       self)
-++      # For well-known types (including nested Any), use ConvertMessage
-++      # to ensure recursion depth is properly tracked
-++      self.ConvertMessage(
-++          value['value'], sub_message, '{0}.value'.format(path)
-++      )
-+     else:
-+       del value['@type']
-+       self._ConvertFieldValuePair(value, sub_message, path)
 diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
-index aca30efdee..6ba24899f6 100644
+index 6ba24899f6..7c534fe656 100644
 --- a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
 +++ b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
-@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
- inherit pypi setuptools3
- SRC_URI[sha256sum] = "6135cf8affe1fc6f76cced2641e4ea8d3e59518d1f24ae41ba97bcad82d397cd"
+@@ -19,6 +19,7 @@ UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
+ DEPENDS += "protobuf"
  
-+SRC_URI += "file://CVE-2026-0994.patch"
-+
- # http://errors.yoctoproject.org/Errors/Details/184715/
- # Can't find required file: ../src/google/protobuf/descriptor.proto
- CLEANBROKEN = "1"
+ RDEPENDS:${PN} += " \
++    python3-ctypes \
+     python3-datetime \
+     python3-json \
+     python3-logging \
 
