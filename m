@@ -2,88 +2,90 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 75963E7314A
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 09:04:26 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48972.1770023058140486602
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67149E7314B
+	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 09:05:36 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.48687.1770023130768087030
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 01:04:18 -0800
+ Mon, 02 Feb 2026 01:05:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=k28QNz7m;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=S4qxaVb+;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1770023058; x=1801559058;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=/dumfUPagYsXnjMu6RCGEgzZd/YMNb4bT1DwY9eyvBE=;
-  b=k28QNz7mxbH7b5kKIeXTxoEX/yoGVwd77sZg6w5yfbOVIgcpEStd8C5i
-   PJhlWnUa/+tM8SwC7KQhSJDAHlFQ2T7n37sKDFHOjYJpdKhs7+mmwgGNr
-   JpfXzpRh+H3BGuJUt+vUino0eChPByBLdl1OxB2uFNfq/VNIzv6l/thtc
-   IbDmy4Zknk/3sIHeSDtsBqLTdn+wcvgfbVGBd4XyVLCy6k+FP3iaXTVgp
-   z3GMzgpxbnXMqUomKLOhjHQHuNjdYlWsVkvXG26uYcSZlIF40OeqAdHbq
-   rhqa4CXKcRu4zXVCIkgkhKKPHFcH8U2jppGkC/BqDUvRi9Yz+Ewi+i0Vb
+  t=1770023129; x=1801559129;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=zztP/AQQPHQjfX8k6bY1LXmeB5LdyYbkxDBnJMVPgII=;
+  b=S4qxaVb+U30U0oQF02c06xyVPP2SlAPpPBilk1BnUYAtRdPVOw59hOJA
+   HNdhyJkyyMD2Q2v3OufNHoURcB2A+h4dphnedEfRwBs3v0ebhObfRyYJ+
+   dh3Ls6nKZG0bEWDyphzAx9a9V9p7p18c8BDpgQf/x3HLzjuOO3tldIgoK
+   VZBM2Yyo/4PJK0Ta3+7tbbxkXx8xVfMHNddwRMvd9upaKGiSIOJrDHRlh
+   GSNzwNc5EQvgacvyUzlikazH9Pt2o8vMXwKtiPueGctNH0hr9y4fRLvPS
+   KCuP03ix/dd5A3rqX8lZnbpM9OWAqpVSXIzrkhvkoqH5HA/RFQiwsmC1W
    Q==;
-X-CSE-ConnectionGUID: RytaGtv8ScWDdZOyR1NV+A==
-X-CSE-MsgGUID: TEZAi/QBS7W+DJeapFaJ8A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11689"; a="216121465"
+X-CSE-ConnectionGUID: P7BUVP8ZRjG6PMmce70DOA==
+X-CSE-MsgGUID: SACeJDXTSLq+4/6IcZ07dQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11689"; a="228131756"
 X-IronPort-AV: E=Sophos;i="6.21,268,1763391600"; 
-   d="scan'208";a="216121465"
+   d="scan'208";a="228131756"
 Received: from unknown (HELO mail.fujitsu.com) ([51.138.80.169])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2026 18:04:16 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2026 18:05:27 +0900
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr2.fujitsu.com (Postfix) with ESMTPS id 4B2CE1462
-	for <openembedded-devel@lists.openembedded.org>; Mon,  2 Feb 2026 09:04:16 +0000 (UTC)
+	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id E54DC1C0009A
+	for <openembedded-devel@lists.openembedded.org>; Mon,  2 Feb 2026 09:05:28 +0000 (UTC)
 Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 018B91C002FC
-	for <openembedded-devel@lists.openembedded.org>; Mon,  2 Feb 2026 09:04:16 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 99CF81003BC4
+	for <openembedded-devel@lists.openembedded.org>; Mon,  2 Feb 2026 09:05:28 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.34])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 67C171401867;
-	Mon,  2 Feb 2026 09:04:13 +0000 (UTC)
+	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 0D0661401871;
+	Mon,  2 Feb 2026 09:05:25 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-gnome] [PATCH 1/3] babl: upgrade 0.1.120 -> 0.1.122
-Date: Mon,  2 Feb 2026 17:04:07 +0800
-Message-ID: <20260202090409.1251-1-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 2/3] cryptsetup: upgrade 2.8.3 -> 2.8.4
+Date: Mon,  2 Feb 2026 17:04:08 +0800
+Message-ID: <20260202090409.1251-2-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
+In-Reply-To: <20260202090409.1251-1-wangmy@fujitsu.com>
+References: <20260202090409.1251-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 09:04:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124055
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 09:05:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124056
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-gimp/babl/{babl_0.1.120.bb => babl_0.1.122.bb}      | 2 +-
+ .../cryptsetup/{cryptsetup_2.8.3.bb => cryptsetup_2.8.4.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gimp/babl/{babl_0.1.120.bb => babl_0.1.122.bb} (84%)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.8.3.bb => cryptsetup_2.8.4.bb} (98%)
 
-diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.120.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.122.bb
-similarity index 84%
-rename from meta-gnome/recipes-gimp/babl/babl_0.1.120.bb
-rename to meta-gnome/recipes-gimp/babl/babl_0.1.122.bb
-index 0c3b54cfd4..c623e0d4ac 100644
---- a/meta-gnome/recipes-gimp/babl/babl_0.1.120.bb
-+++ b/meta-gnome/recipes-gimp/babl/babl_0.1.122.bb
-@@ -10,7 +10,7 @@ inherit setuptools3 gnomebase gobject-introspection vala
- DEPENDS += "lcms"
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.4.bb
+similarity index 98%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.4.bb
+index 44bf66c1ed..34755fc3ad 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.3.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.8.4.bb
+@@ -24,7 +24,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
+ LDFLAGS:append:libc-musl = " -largp"
  
- SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
--SRC_URI[sha256sum] = "f476ad15201fb4ed0c90c174c524b1e4271ccd69a377242d6a69fcdf87ceacc2"
-+SRC_URI[sha256sum] = "6851f705cda38f2df08a4ba8618279ce30d0a46f957fe6aa325b7b7de297bed2"
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "4a8a23b8b9d1a3250452e40acead4421a03e45a38954ad0595634f4266aa800f"
++SRC_URI[sha256sum] = "443e46f8964c9acc780f455afbb8e23aa0e8ed7ec504cfc59e04f406fa1e8a83"
  
- FILES:${PN} += "${libdir}/${BPN}-${@gnome_verdir("${PV}")}"
+ inherit autotools gettext pkgconfig
  
 -- 
 2.43.0
