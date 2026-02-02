@@ -1,99 +1,278 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41806E73179
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 19:34:01 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.61985.1770060831423337574
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6561E7FDC0
+	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 20:22:39 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.378.1770063755478589382
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 11:33:51 -0800
+ Mon, 02 Feb 2026 12:22:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=J04vEXNb;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-482f454be5bso730105e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 11:33:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=EQY7YFUS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-47ee07570deso40625665e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 12:22:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770060829; x=1770665629; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CR97x3CYDcdPFEqkKLHc12Ubwgj14+W8c75ES/dSmZA=;
-        b=J04vEXNb3RZWNKo5mGjpdqkVKBY1G5a8GklwyH2V7oNgaslLGtEbrqukxG9x0ib4c7
-         ZQDcFZILvJFJxadH15BOhMBmEzoti+Ht9gY/SxZTx7CGteRvXUcixHO05PYjNtJpuFIn
-         /DL/+j1DiOch7tz6OssEPLQ8E9ui2BAZc+hpbIEcI6ifx9zVEiK+usdI+9qI0D5mqdvZ
-         NZ7cmHQMAy+/OxepDH+F7bl4xZeO0CMnrEne8v13fq3rkhbXZi9pu7awvk6Zg3sefJjR
-         1PeQeeeaskuLrkNM+DAKz2fRwoe8YJqU63/1Xvtpv2wtrnbNCxyAH1bCer/7z+ZlRpHV
-         Q8hQ==
+        d=gmail.com; s=20230601; t=1770063754; x=1770668554; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bggLiQOwh2dLrjJG1i+rTELDHCeEX4dBAttLLnU7FhI=;
+        b=EQY7YFUST2xPiuSNxLqQUIjgIo8OywVS6r/ZaScu17PxsGJqA3MB9pst35bPwry5gb
+         jP74D8bj1okJBNxr33UXK9EzyJ5pm9TWH34uSY1Ww/Zm27G2HoGZblkDZZXipOYV68/j
+         +4lhKhj6UdqYdNPtCelohJVBq7WdUAz5/4nzMgdU4FS5ALLpt13en7KcGhjGEmeF6/ak
+         qDCvMQOZj7myb9Fl93ohoOf4VuB18dahId3nix0+a/ogud/Iv/xYK+pGzh4OMAMIq2pE
+         vndGtmzESZq+1H6BJJTqWb+2n8GOMkulVgsXPcH4CmXviBc4vdS7hpaucHRBf0N7/Yvx
+         417Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770060829; x=1770665629;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CR97x3CYDcdPFEqkKLHc12Ubwgj14+W8c75ES/dSmZA=;
-        b=jHfCiEEi7qs/yxekxP8m4AJd91GiP349y5vfyMmwArUbmvQm6ZokaxrTSGZu/FZoQe
-         n6XEJNNlaqG32rPgHgteewxnHlKMNPLt2bCtWPhiUzwTinMMB5uNHTYyVpblmqKaAP+u
-         J28/L69eZf1bKClnE9jYICStpSseXga1TSlK/YPnYXxK8YY6vl5BBGKpM0a6T0tpVmnN
-         BJ0P239ek/VW5mQleumtcSFHlhIykhewklytRLJS07YA/uKmKAl+wJiXL4ECiyJ3ODpq
-         6B7yKo5wQa0R1duogvmD4VZCSuawLtdHNwUhs6ABPHdHylcZHf5Rk3ii4dX+24UVWfCv
-         T4Mg==
-X-Gm-Message-State: AOJu0YxTYAx0Fn1hyL1tcbGhs+f1fA166KosOqPXfAgCXYzG8mXJSiP4
-	gBsz+L/HXa1kUBQrXU81UrO/MMQ7TRTHj9Jy4O5uIbe2KDpNX+wr5O1zQAoflA==
-X-Gm-Gg: AZuq6aLZCO8GSA2qVZvE3OHVxsaLPNkZf4Lb69xylq+EoFCkKeMRcjbBBoDTP/elXH0
-	ENS7L3wB5jj2Bw/fWvVa7X3h0Oe5DfwtzzC0nogqTOFh7gLIgiGTKKtUXLON2941mX0oHPdmG8U
-	4zGXZizIFeUi47l3ks+MSElm9qzBWuHQ83VFeVMHI4oGfgn3lsSqg42/Ox7b/3TgLMNvT0yXK1Z
-	4wCK95u2tjn1TMAmbEN20bNsBHoiYyBUbsi2bJBiQX8/PVQJlmlKWP0Hwp8pG0D0vx+OuZu57sk
-	T4Q0Hgqr6qvPHDuAeTQjoQhgTzEKykRFzZZkydR0cjZOLJHuZzWbzMZ3U7TCp6V3NbGCnViN8OH
-	umGNAh1RYM9+Jp5PrW56azxPuCOxF48b1h6TBgc6Z/JX63ACwpIdbvFgMMHFxxcKHZp5kJDON5k
-	DXBl1TQTE1vjeoE50LjY0EB8CFCzDEw2ojwIk=
-X-Received: by 2002:a05:600c:8718:b0:477:9e0c:f59 with SMTP id 5b1f17b1804b1-48305133282mr8764385e9.2.1770060828960;
-        Mon, 02 Feb 2026 11:33:48 -0800 (PST)
-Received: from Unimatrix04-Noble.. ([2a02:b021:11:d73e:7562:e239:2849:a95f])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483002955dbsm21305355e9.5.2026.02.02.11.33.47
+        d=1e100.net; s=20230601; t=1770063754; x=1770668554;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bggLiQOwh2dLrjJG1i+rTELDHCeEX4dBAttLLnU7FhI=;
+        b=tuarpp+1uIpL8WduJnBVNZEc/rdW8sa+ezLY4H5QcoKPnjJw8gH3S6ikRkrMGGoSpq
+         Lqf2YH25PFNYDtNkpFkx+qBWEvgOn7UrTuUfy7PocJUUgY2guwrCIIAToQqXtr/fDfIu
+         Hgmq4leXnRrpeevNvV9inpaZFF+mwpGtb9a9TZfICN37OZJcmKjq0OSn3LwT3Glju6CI
+         Kss9+YOsfampG5CoezLTpHgJoLM67/9kWAT5LUKZUMjOZXVEC+Kcku3Ft5yYMKn7S2Rt
+         4A29KccmOu92ocZ2GvEefBZ9Dz4RNmTyUC5AdAJ6J4RX9+7RCZYu0UdUoOTt9WLSjajK
+         t9+Q==
+X-Gm-Message-State: AOJu0YxK0K0M/RWB5AFX+/JsuiJM1VEIz6CpySaQ9Jt1ny7vnl9B2Qg4
+	amW9j+Ux3sMuHbk5C5RdBjNTh/02jpVzscsY0GZhsb5G7c0ZMbMXLGhobIyGMA==
+X-Gm-Gg: AZuq6aKQhpW0bv3Cwm6K3vHGEKfJXE/rJnlu7wtF7gmFR8za0fkIjrEnHjtavanez9/
+	mtA6oHQbpe1jrnLk279rcVJ4+SXgQLwtOhZJQLoSo+Vhnx4p0gvFbzhpQZSmlxkbruAfaN1V31A
+	ApHxPd+UT3LYShadUakOLRapfP3OjyrfxEeOoSc+NhAeoq88igHjX2/yCfztvcatg/scfdvn1P7
+	PeM02KA3MtwFI5TRyaiB59s1j+8yB3RzuWPXCEo56p7oYrLZyW+IdrE+mzhyhWVU9o3c8mPSVMp
+	5S7319Z/WyHXQGXkLzGL42fAVjRnVr3rQ4Ef+ZNFLTCUffnPsvBZq0rE/rpdAevFkLKIW7Lt3QP
+	Ynx8Oo6ORZ0NLiAphErDEr/d8TTSitwNVA2FXZsVxut0BszRAHrkRJfYClnPVFfpYsC1nI1fD8D
+	Hudror2M6j
+X-Received: by 2002:a05:600c:6298:b0:477:2f7c:314f with SMTP id 5b1f17b1804b1-482db4bda82mr171311835e9.10.1770063753488;
+        Mon, 02 Feb 2026 12:22:33 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483051372cdsm17977995e9.13.2026.02.02.12.22.32
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Feb 2026 11:33:48 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Mon, 02 Feb 2026 12:22:33 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] vboxguestdrivers: Upgrade to 7.2.6
-Date: Mon,  2 Feb 2026 20:33:48 +0100
-Message-ID: <20260202193348.1576605-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH v2] ez-ipupdate: patch CVE-2003-0887
+Date: Mon,  2 Feb 2026 21:22:32 +0100
+Message-ID: <20260202202232.1168486-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 19:34:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124072
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 20:22:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124073
 
-From: Gianfranco Costamagna <locutusofborg@debian.org>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
 
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+The vulnerability is about the default (example) configurations,
+which place cache files into the /tmp folder, that is world-writeable.
+The recommendation would be to place them to a more secure folder.
+
+The recipe however does not install these example configurations,
+and as such it is not vulnerable either.
+
+Just to make sure, patch these folders to a non-tmp folder
+(and also install that folder, empty).
+
+Some more discussion about the vulnerability:
+https://bugzilla.suse.com/show_bug.cgi?id=48161
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{vboxguestdrivers_7.2.4.bb => vboxguestdrivers_7.2.6.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.4.bb => vboxguestdrivers_7.2.6.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb
-similarity index 97%
-rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
-rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb
-index eb9b81f154..ac941de811 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.4.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb
-@@ -15,7 +15,7 @@ VBOX_NAME = "VirtualBox-${PV}"
- SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-     file://Makefile.utils \
- "
--SRC_URI[sha256sum] = "d281ec981b5f580211a0cedd1b75a1adcb0fbfcbb768d8c2bf4429f4763e8bbd"
-+SRC_URI[sha256sum] = "c58443a0e6fcc7fc7e84c1011a10823b3540c6a2b8f2e27c4d8971272baf09f7"
+v2: fixed typo in Upstream-Status tag in the patch
+
+ .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb       |   7 +
+ .../ez-ipupdate/files/CVE-2003-0887.patch     | 158 ++++++++++++++++++
+ 2 files changed, 165 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
+index 42ecf9bac4..7a392b2c23 100644
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
+@@ -10,8 +10,15 @@ SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}
+            file://conf_file.c.patch \
+            file://wformat.patch \
+            file://0001-ez-ipupdate-Include-time.h-for-time-API-prototype.patch \
++           file://CVE-2003-0887.patch \
+            "
+ SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
+ SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
  
- S ?= "${UNPACKDIR}/vbox_module"
- S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
--- 
-2.43.0
-
+ inherit autotools pkgconfig
++
++do_install:append(){
++    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
++}
++
++FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+new file mode 100644
+index 0000000000..53aa355008
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+@@ -0,0 +1,158 @@
++From cd8fa738b0ed3b5fb89ac00068fdc2e20c1b6169 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Mon, 2 Feb 2026 14:03:01 +0100
++Subject: [PATCH] CVE-2003-0887
++
++The vulnerability is about exmaple config files placing cache files
++into a world-writable directory (/tmp) instead of something more
++secure.
++
++This patch changes this path to /var/lib/ez-ipupdate, which is
++not world-writable by default.
++
++CVE: CVE-2003-0887
++Upstream-Status: Inactive-Upstream [lastcommit: 2002]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ example-dhs.conf       | 2 +-
++ example-dyndns.conf    | 2 +-
++ example-dyns.conf      | 2 +-
++ example-easydns.conf   | 2 +-
++ example-gnudip.conf    | 2 +-
++ example-heipv6tb.conf  | 2 +-
++ example-justlinux.conf | 2 +-
++ example-ods.conf       | 2 +-
++ example-pgpow.conf     | 2 +-
++ example-tzo.conf       | 2 +-
++ 10 files changed, 10 insertions(+), 10 deletions(-)
++
++diff --git a/example-dhs.conf b/example-dhs.conf
++index 3fe9a04..f976ae5 100755
++--- a/example-dhs.conf
+++++ b/example-dhs.conf
++@@ -11,7 +11,7 @@ host=mydomain.whatever.com
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-dyndns.conf b/example-dyndns.conf
++index f539dec..84b4807 100755
++--- a/example-dyndns.conf
+++++ b/example-dyndns.conf
++@@ -19,7 +19,7 @@ max-interval=2073600
++ #cache-file=/etc/ez-ipupdate.cache.eth1
++ 
++ # for the mean time we'll just use a cache file in the temp directory
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-dyns.conf b/example-dyns.conf
++index 868768d..856a4d7 100644
++--- a/example-dyns.conf
+++++ b/example-dyns.conf
++@@ -11,7 +11,7 @@ host=myhost
++ #interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-#cache-file=/tmp/ez-ipupdate.cache
+++#cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-easydns.conf b/example-easydns.conf
++index 0ff20da..15d9b78 100755
++--- a/example-easydns.conf
+++++ b/example-easydns.conf
++@@ -11,7 +11,7 @@ host=mydomain.whatever.com
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-gnudip.conf b/example-gnudip.conf
++index 3b2fb63..d09df1f 100755
++--- a/example-gnudip.conf
+++++ b/example-gnudip.conf
++@@ -15,7 +15,7 @@ max-interval=2073600
++ #address=0.0.0.0
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-heipv6tb.conf b/example-heipv6tb.conf
++index e31aa9c..3ebc822 100644
++--- a/example-heipv6tb.conf
+++++ b/example-heipv6tb.conf
++@@ -18,7 +18,7 @@ max-interval=2073600
++ #cache-file=/etc/ez-ipupdate.cache.eth1
++ 
++ # for the mean time we'll just use a cache file in the temp directory
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-justlinux.conf b/example-justlinux.conf
++index 0afeb2c..28b3327 100755
++--- a/example-justlinux.conf
+++++ b/example-justlinux.conf
++@@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-ods.conf b/example-ods.conf
++index d0ff889..7b16f2c 100755
++--- a/example-ods.conf
+++++ b/example-ods.conf
++@@ -11,7 +11,7 @@ host=mydomain.ods.org
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-pgpow.conf b/example-pgpow.conf
++index 29a92d6..81e351b 100755
++--- a/example-pgpow.conf
+++++ b/example-pgpow.conf
++@@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
++diff --git a/example-tzo.conf b/example-tzo.conf
++index 2a71db3..10b8dc4 100755
++--- a/example-tzo.conf
+++++ b/example-tzo.conf
++@@ -15,7 +15,7 @@ max-interval=2073600
++ interface=eth1
++ 
++ # if you use run-as ensure the user has permission to write this file
++-cache-file=/tmp/ez-ipupdate.cache
+++cache-file=/var/lib/ez-ipupdate/ez-ipupdate.cache
++ 
++ # uncomment this once you have everything working how you want and you are
++ # ready to have ez-ipupdate running in the background all the time. to stop it
 
