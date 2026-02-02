@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09371E7FDD0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F980E7FDE4
 	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:14:10 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1566.1770066848821200716
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1565.1770066848138946437
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 13:14:09 -0800
+ Mon, 02 Feb 2026 13:14:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jpm55B9T;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-435a11957f6so3877831f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 13:14:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QoDcoPh9;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4359249bbacso101172f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 13:14:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770066847; x=1770671647; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770066846; x=1770671646; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=stzEBFp1fg99O8uaThGeNgmM4LNtbrI2U83i23v23fs=;
-        b=jpm55B9TypMccod12J4vYlKLzgtTQEFgGP3IiWdj9flqPBMqc6T3uDsYVFFwfPfGVP
-         bogs17WHhLtLVfCuf27tleN5FHXb0JJnK5mIa7SFNBhJtPdxVo19V/2d8d5WfRxE2LgD
-         dkZ6E/apl3ZStBFXNLBeVIVPYCvgwLv4OG+IHXsvNcK5LmbxcgFl7jMVJFBNYb+VGqg0
-         sjcY9K4/+DWjqRSjbLKXsKEJu67v7ytnG/i8wPveEBttQPZHcyBIC289Z741LjgueFOg
-         /hDTYNIIOUhs7IwoTL6NHK1Rr1K3XMp/RFyTv5+9zSY/416EdgZDnEMmtibX5Dx6DyV8
-         U2WQ==
+        bh=WkvszOsFlcL462+M/rvk0apByoITa+uutHQrkvCykS8=;
+        b=QoDcoPh9pW1zP83IFuWOmMT4Vwvvbjng0NFcgT4UhSkora4wyrXaTiuqttk5vKLhEc
+         APYvsENSzYG57/zLCN1mxDxc93av5wignTZdisUlZGXWP3pWxnMfKXgNznfFQii27TJP
+         5Gh3Dcz2tW1zDj1gJkcyMxuuJ3zxO0/WEFzWSXBqFNhGt5q6gZpda0VQ13EJ3DtD+qXl
+         ROa2C0xAC05EpJhYHvUTsI7jYSFLbxRJn9hrfWblc18TeE4yl25X0RuT50Knqc7sY5DE
+         rh1H9ccG6ynra3Q4zQJ1Tk4UOsC8sihZrwck4H0sW4vxF662+pneGQzXee46bj7mKNl2
+         BmAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770066847; x=1770671647;
+        d=1e100.net; s=20230601; t=1770066846; x=1770671646;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=stzEBFp1fg99O8uaThGeNgmM4LNtbrI2U83i23v23fs=;
-        b=O+oGuDStlCcvxOvjD1B3Bv0qV238lswXK++PC7r6xAJVYPXc6xm5a4PPKFRkAHebCD
-         TIweyyjv73o6EAmJvimrMkD73HPiQfKQDGtPrLrRZlFC0GrXOG6y5K6pngXhvLqwdL9K
-         ukKoUrkLDuAQmjlM5CVBuD5lokaLOl9vBEZ6BYUMorSsCvSfvDsgnGnSW98pfDt7JyEQ
-         EW7btfVibz+8DPmjxBf8fR9Ujr9QfwgzZUB1iTRnEw3Zwpum9LOJYBoYSVdpCjona9W0
-         h5qR4eVhMMcSZjbZZFts5Urov/Gs0kLQ8lN1Yupe4SPCcm7nmWC+dFguCiM7G5Er/QEC
-         1dLw==
-X-Gm-Message-State: AOJu0YzLDGA9fkbXE9mnOn1qXAJR8C2EwdTysOQYlipHMmg6CNYa1eLt
-	Lxkj33VJ13S/Lza6qAF6vJU4jVK2tKnawZb5nb40YrlXACVcPu5qQjqzvNfNsw==
-X-Gm-Gg: AZuq6aLbKjOlOe19EMJEC3AvuXs7SiFviHkDIFuHWtF88Oxc0/CJ4MIviUuaj9O+vSU
-	N172UhL/Y1srrr1tnMKnfWDhDyyUCkpEiP/bSwTwz9B0P86eFUxtoLu36CH1ZhcGqj5vWhl9ZUd
-	VEVJYBIBzmZS8FIa8/3y5lTpUV0o3AoQTlVEm7YDmY9UvVhAmqs32YCGY/H1LzSOSTZdV6rgGcK
-	0iWPo5/wBsP6adHxAGpfRGzN6Qvjh23zIhppjRc5RBwPYeKezZ8XFg7Sc3lpzST1bKMuJX+yUKz
-	Ul5CF9WVw1K98dIH8xqSWaolyTY4ALWs+QtH5zpaqpiCC0hiPlp/TgjhGhUsSPH+cuF8cUSVBnK
-	//r0j9KaVe9dIIx5nZ6AH7o+bhbKkPiucMrezbedIvxBQNclGZSU5D4i+bmlg6qTAq4UcTXA7/s
-	op2lYvd0KPt5AkokgdhAg=
-X-Received: by 2002:a05:6000:184f:b0:435:ad52:31e0 with SMTP id ffacd0b85a97d-435f3a7b7e6mr18905358f8f.16.1770066847041;
-        Mon, 02 Feb 2026 13:14:07 -0800 (PST)
+        bh=WkvszOsFlcL462+M/rvk0apByoITa+uutHQrkvCykS8=;
+        b=KXFuIQScxzPEruDTS8DmxysFfSJ4k9GnapysFEFkTHRA24wG32QTQzMh51fH/X8Uu4
+         T+ztFFxk+EKSVVGdU+Tda/i33gyZAyOOoUu/wvw190zLBYooLRRK4LTpXvc3ld34DaYY
+         CoQiVXAmDiS9MP5lFGfZcw1ZcAhbdbeVr0lpjUATrNpj4iMFsGJlMGdGJQEylAYcCgVG
+         I80eTukbNJk1v7qq8WrcE3XxrhT2LljHCgHCMN4SNJ1BxQpXYKcNcShuVfHlJtZJ4ltT
+         Q0VNhxLC3pjsVYhYRu4OB7yCPGmwGYHDEurVWWBrOoBiwz25V0vwrtT0u3NaM5Ij8qJ6
+         aAtw==
+X-Gm-Message-State: AOJu0YwdEefzQuxXEXF4HoKscIwnO13dEGCAUaYSig8u2jR8yvHHt4x0
+	UYxniJWLcz0tj9Upf9L9KdTupbX8V8sXpyq4ce5ZezGvyqco92z/uypZIpbcmA==
+X-Gm-Gg: AZuq6aKJ3bo1L1NrByfjohKrwNcXf1UEFOkuQ8LX2pwWUaOxA29E/wVBePKzT0rpAKg
+	ZDIKVRJ6aqucB/4AV0EN2BU2m5wSGb1cgRsVZwMpG5cyAgD3PM0zYGRMNviCM38X71/DZU15T6a
+	7HeKSRia4rpH0oRdpkAHGiVLHEy9f5n0pBQRxaLu3hdatUhLYVLn/JwOQPUancT2cBRhysQo4tq
+	iy3spxIObmmO8dKPb5jhmntju9CybEwVTKhe7B2AWvURp96pAV3ysKrOZfOFMOsCFPLKaJXAwCI
+	vOCgDzwI+tizi58Le3/iTdLNa856O6xEVeYNQjg//SvbOnf2k3Kv91HLdD8GmPieyE2qSygemxT
+	LCPEqwA5WDsIUN/VIELbcfW11Ye4ki1OAeoTuKHYLvB7LQe94kTTb6R2Tzu0es88CrwNhgB7xJR
+	5K3Nzf2TiC
+X-Received: by 2002:a05:6000:1886:b0:432:59d4:f54a with SMTP id ffacd0b85a97d-4361145433amr1321831f8f.30.1770066846406;
+        Mon, 02 Feb 2026 13:14:06 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e131ce64sm48756747f8f.26.2026.02.02.13.14.06
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e131ce64sm48756747f8f.26.2026.02.02.13.14.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Mon, 02 Feb 2026 13:14:06 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 07/15] gpsd: patch CVE-2025-67268
-Date: Mon,  2 Feb 2026 22:13:53 +0100
-Message-ID: <20260202211401.1287664-7-skandigraun@gmail.com>
+Subject: [meta-gnome][whinlatter][PATCH 06/15] gimp: mark CVE-2025-15059 patched
+Date: Mon,  2 Feb 2026 22:13:52 +0100
+Message-ID: <20260202211401.1287664-6-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260202211401.1287664-1-skandigraun@gmail.com>
 References: <20260202211401.1287664-1-skandigraun@gmail.com>
@@ -67,136 +67,27 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:14:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124080
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124079
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-67268
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15059
 
-Pick the patch that is referenced by the NVD advisory.
+The patch that is referenced by the NVD report has been backported[1]
+to the recipe version, and is included already.
 
-The original commit also contains a lot of commenting style
-changes (// vs /* */) and whitespace changes which were removed from
-the backport.
+[1]: https://gitlab.gnome.org/GNOME/gimp/-/commit/c9eb407485f6c085adf70c8a334f75ea31565c60
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gpsd/gpsd/CVE-2025-67268.patch            | 97 +++++++++++++++++++
- .../recipes-navigation/gpsd/gpsd_3.26.1.bb    |  1 +
- 2 files changed, 98 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
+ meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch b/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
-new file mode 100644
-index 0000000000..d32e5095e2
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
-@@ -0,0 +1,97 @@
-+From 6045f465f3ab253e1075b5b3666fd95ede4fb848 Mon Sep 17 00:00:00 2001
-+From: "Gary E. Miller" <gem@rellim.com>
-+Date: Tue, 2 Dec 2025 19:36:04 -0800
-+Subject: [PATCH] drivers/driver_nmea2000.c: Fix issue 356, skyview buffer
-+ overrun.
-+
-+CVE: CVE-2025-67268
-+Upstream-Status: Backport [https://github.com/ntpsec/gpsd/commit/dc966aa74c075d0a6535811d98628625cbfbe3f4]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ drivers/driver_nmea2000.c | 50 ++++++++++++++++++++++++++-------------
-+ 1 file changed, 33 insertions(+), 17 deletions(-)
-+
-+diff --git a/drivers/driver_nmea2000.c b/drivers/driver_nmea2000.c
-+index 71e04e1..6854b2d 100644
-+--- a/drivers/driver_nmea2000.c
-++++ b/drivers/driver_nmea2000.c
-+@@ -89,14 +89,14 @@ static int scale_int(int32_t var, const int64_t factor)
-+ static void print_data(struct gps_context_t *context,
-+                        unsigned char *buffer, int len, PGN *pgn)
-+ {
-+-    if ((libgps_debuglevel >= LOG_IO) != 0) {
-+-        int   l1, l2, ptr;
-++    if (LOG_IO <= libgps_debuglevel) {
-++        int   l1;
-+         char  bu[128];
-+ 
-+-        ptr = 0;
-+-        l2 = sprintf(&bu[ptr], "got data:%6u:%3d: ", pgn->pgn, len);
-++        int ptr = 0;
-++        int l2 = sprintf(&bu[ptr], "got data:%6u:%3d: ", pgn->pgn, len);
-+         ptr += l2;
-+-        for (l1=0;l1<len;l1++) {
-++        for (l1 = 0; l1 < len; l1++) {
-+             if (((l1 % 20) == 0) && (l1 != 0)) {
-+                 GPSD_LOG(LOG_IO, &context->errout, "%s\n", bu);
-+                 ptr = 0;
-+@@ -434,6 +434,7 @@ static gps_mask_t hnd_129540(unsigned char *bu, int len, PGN *pgn,
-+                              struct gps_device_t *session)
-+ {
-+     int         l1;
-++    int         expected_len;
-+ 
-+     print_data(session->context, bu, len, pgn);
-+     GPSD_LOG(LOG_DATA, &session->context->errout,
-+@@ -441,24 +442,39 @@ static gps_mask_t hnd_129540(unsigned char *bu, int len, PGN *pgn,
-+ 
-+     session->driver.nmea2000.sid[2]           = bu[0];
-+     session->gpsdata.satellites_visible       = (int)bu[2];
-++    if (MAXCHANNELS <= session->gpsdata.satellites_visible) {
-++        // Handle a CVE for overrunning skyview[]
-++        GPSD_LOG(LOG_WARN, &session->context->errout,
-++                 "pgn %6d(%3d): Too many sats %d\n",
-++                 pgn->pgn, session->driver.nmea2000.unit,
-++                 session->gpsdata.satellites_visible);
-++        session->gpsdata.satellites_visible = MAXCHANNELS;
-++    }
-++    expected_len = 3 + (12 * session->gpsdata.satellites_visible);
-++    if (len != expected_len) {
-++        GPSD_LOG(LOG_WARN, &session->context->errout,
-++                 "pgn %6d(%3d): wrong  length %d s/b %d\n",
-++                 pgn->pgn, session->driver.nmea2000.unit,
-++                 len, expected_len);
-++        return 0;
-++    }
-+ 
-+     memset(session->gpsdata.skyview, '\0', sizeof(session->gpsdata.skyview));
-+-    for (l1=0;l1<session->gpsdata.satellites_visible;l1++) {
-+-        int    svt;
-+-        double azi, elev, snr;
-+-
-+-        elev  = getles16(bu, 3+12*l1+1) * 1e-4 * RAD_2_DEG;
-+-        azi   = getleu16(bu, 3+12*l1+3) * 1e-4 * RAD_2_DEG;
-+-        snr   = getles16(bu, 3+12*l1+5) * 1e-2;
-++    for (l1 = 0; l1 < session->gpsdata.satellites_visible; l1++) {
-++        int offset = 3 + (12 * l1);
-++        double elev  = getles16(bu, offset + 1) * 1e-4 * RAD_2_DEG;
-++        double azi   = getleu16(bu, offset + 3) * 1e-4 * RAD_2_DEG;
-++        double snr   = getles16(bu, offset + 5) * 1e-2;
-+ 
-+-        svt   = (int)(bu[3+12*l1+11] & 0x0f);
-++        int svt   = (int)(bu[offset + 11] & 0x0f);
-+ 
-+-        session->gpsdata.skyview[l1].elevation  = (short) (round(elev));
-+-        session->gpsdata.skyview[l1].azimuth    = (short) (round(azi));
-++        session->gpsdata.skyview[l1].elevation  = elev;
-++        session->gpsdata.skyview[l1].azimuth    = azi;
-+         session->gpsdata.skyview[l1].ss         = snr;
-+-        session->gpsdata.skyview[l1].PRN        = (short)bu[3+12*l1+0];
-++        session->gpsdata.skyview[l1].PRN        = (int16_t)bu[offset];
-+         session->gpsdata.skyview[l1].used = false;
-+-        if ((svt == 2) || (svt == 5)) {
-++        if ((2 == svt) ||
-++            (5 == svt)) {
-+             session->gpsdata.skyview[l1].used = true;
-+         }
-+     }
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
-index e4a571daa6..6462d7b6f2 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.26.1.bb
-@@ -9,6 +9,7 @@ HOMEPAGE = "https://gpsd.io/"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+index a5e892c508..863d9a1667 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+@@ -134,3 +134,4 @@ RDEPENDS:${PN} = "mypaint-brushes-1.0 glib-networking python3-pygobject"
  
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://gpsd.init \
-+           file://CVE-2025-67268.patch \
-            "
- SRC_URI[sha256sum] = "dc7e465968c1540e61bc57c7586d6a57a0047212a014efdad348f907bc2e0990"
- 
+ CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mandriva Linux"
+ CVE_STATUS[CVE-2025-8672] = "not-applicable-config: the vulnerability only affects MacOS"
++CVE_STATUS[CVE-2025-15059] = "fixed-version: The issue is fixed since v3.0.8"
 
