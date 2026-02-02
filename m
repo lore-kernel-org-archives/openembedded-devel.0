@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57CB0E7FDEE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AA0DE7FDE4
 	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:14:20 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1619.1770066852861676112
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1615.1770066850121434227
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 13:14:13 -0800
+ Mon, 02 Feb 2026 13:14:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mOycs4/D;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-4359228b7c6so3455851f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 13:14:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DDl/5WAc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-432d28870ddso3035511f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 13:14:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770066851; x=1770671651; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770066848; x=1770671648; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=G88OSTPm5WMvySIoPjgzRmbOKraEJ1gB4yhNgN2ZDvo=;
-        b=mOycs4/D/6mn05TU5JZSBsWYML+FS1csdkx1S1Aa0+h9pLrIkFwS+LPN/hbR9mOWlP
-         OyC+63337mNB31mZsY2LxTerCKtxS4ggdA46N77a4Z1o3Oamtj4+BLihGoVdvsmlRP96
-         FAi6lP0T7dbQfkGbSllDapmbadqruqjUjy7ZitFjTRHdEeEFzhWGbM0HSw/GWxPdj3kB
-         olBglBVYrOUpV507NOot6AFHGnxsGRANrFwNTPZNit9DrQomzw6UXrTbjy++f+bSjibz
-         79m+5R70RKm3P19fuPg6UxHrHjqKBq6WAjVjjmY4m4vxybw7T83uQSimg8dZSt09QwbN
-         Ihsg==
+        bh=6eaX0jysp4qXfmloCWXZmDDV2ZWVTGNDnnnDlFydAGI=;
+        b=DDl/5WAc07Skz87NplcR2bPGe8bFja3ZItJMtTsxSvs8gqpRiHR87DgcSclG76TpTc
+         9edflOoQ+KxSt1PGic8YD2czeqx6d/L2/+fVaoOg/O7wTbjd3gtEGLjr5P0wKGX66J9f
+         eHKHId9AM0g2M7DQtPBavCbmICS2WaIQWbYJwqCs0joTc0ohLtbN/wudxwck94XuexvY
+         1phACS141sDnYCZLMwQlweGxSIwxo0gAXDC2q/jpHyTBgDFSIihO3q7mbO0yA8eIsPYs
+         juK5S7MNhGyqAfctWHUMEASnMS5sw3n7AL5W4MaNGK8chh5wtZWo3FFw8NHI+jhhcoBH
+         GaEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770066851; x=1770671651;
+        d=1e100.net; s=20230601; t=1770066848; x=1770671648;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=G88OSTPm5WMvySIoPjgzRmbOKraEJ1gB4yhNgN2ZDvo=;
-        b=IOWX3M9HfvXrhmneW6xM2wUyKVXVyA6MfRUdSoChmANX3q2pFNtP1wW6csTXuV/quu
-         nEtkeuzhcJYcB2tzEo65KLU6ghbZzscL6v1blK7HdMgAhDoQjsGW6sGRskNPCyXrSy2F
-         nRwlUy6ElKNkDyIyMqVQx1GCPuPDOvdwRTJy6QtwcRGusz7Bpgvh6KKr2zl06DSJNxZi
-         eyuVhl0RoYcKr3tx6RVQYlsZVvGLYVRFxfb1Gf6SxIDiTT2C9112ioTuWgx1Zpa5yqTJ
-         7mNIhqRAkG5ZZf+QhwPKmMlCaFosw9Wv9iRU81iwv+XKS2x44YmFk/fSN5llVLI8mxnR
-         M3BA==
-X-Gm-Message-State: AOJu0YzWKoRZ8YSq08kZRAtyP2UJLIMwDn9Ww6ADNWwCv/2ZZjyTeQUh
-	wGCS02Opn87Z6VSfIoci5jXZ/bR/UqyGRarcxvqUjwRHQA4euPdBuw0SMOrNrQ==
-X-Gm-Gg: AZuq6aLUSQvBOvzoPnzNPhv7Sx2TR3gXlrT7dtBX9ofqkEEOMMfZ9pM7DKkacNsyvYQ
-	rlQ8r1iiAxLqkLYco707iG2TLBx38i+7RSjFrYcWuPtXw6doXVp991pLIJy/jGqswOlnCICHpqi
-	Kr/sXAWChGjULMswVDBD9X7XV50VHiRFEjtNOAM2aSDS9wnnPqGMOeVwG3uaunWnLPchS28Cfsq
-	XikMbcMM8BK4QSZBdfydsy1uW1qH2I/Msrip7iOkZ7Ome1aR84P8F6n6u3eMUXtpANsDjxioIQo
-	lqteZcnjAFSyAStgxhZZVIvfQE7e+9XU4+mi4BTN4IqeJIwHEHlHnZa9vOU2QobBdAz3CAR7vH/
-	no6FMnsvv0he/FrktFZX4x+RtfmUVlzxQwf7tpuTL3dMFIKyOI8woa6fodcerfHNTI7r5P6LsY2
-	uCWTePOitkBIPakOf7gB8=
-X-Received: by 2002:a5d:5a44:0:b0:435:faa5:c154 with SMTP id ffacd0b85a97d-435faa5c1f3mr11126440f8f.37.1770066851071;
-        Mon, 02 Feb 2026 13:14:11 -0800 (PST)
+        bh=6eaX0jysp4qXfmloCWXZmDDV2ZWVTGNDnnnDlFydAGI=;
+        b=pPioarT9PoA+PmEZrvNkEXb/fUmnf2kfS8Uh0mWjB5kzGVx3kXtwPodMyWnLWdMOtm
+         +Wygz9ZKbniBSTgdGRxLFm/4yM5oWGKs5YeJ4I700Ugbr6f8J1QnL3G5finDDTdKZ78Q
+         vRYkGv14NfmdomAaw/1fU7eEs3LA0wXMsH6SctyxFRQCSb2XFG2/G5u0BczRcTp7anMs
+         YhL+ZNWlg/q6TkaTEx/qGORYOGJF1dNJotfUGJ55jn899vgY9KeFZ04Qm4nEo91W9jUE
+         Lcr2686uT3P3aHJVsEZuhSNT7fDC5sUOszjT9bLm+7I2FXnpcAvq9TMP6zN4OBYTqpPD
+         M6ZA==
+X-Gm-Message-State: AOJu0YzTgq9L171FvbMbxcYZxJl8OTvK53AsEjuII+BGc/Z5PGKLpU4r
+	aydXDN4Jjt/PGzs0hL5eEgrmHamqv1hoU97VVz8WHOhiZTyjQ6/SCnAg8u3heg==
+X-Gm-Gg: AZuq6aL78oP33kIRsGwWOpRr1tKEJTl2anfbEQjz4HvpfOQ8doW8K1+CVduERGTJ9q2
+	dTseiLFK0J1iyuBMKfHQRf9g/qqnH5j0eusTMhf1Ha4RLMQR+10oxQdHHxndgTfdr7XRFalZk7h
+	YY+Z9O8ue0srRbO0l//jbWfGyIk6v6QM/3YGK8WKc6KZMou3LpnR9JzgFrYTKcJsrVh3ukZL+aW
+	XYW78ZxnjFQSRHS5eRcJQJoxR63vuQcR3/uxNnge5lW8XBlEVE+lKR8Llgn3RUEyW7xGGAMYnT7
+	6W4F843DHwKjbglbqeCeLuhow0y4hjtORKoy45QMJ54wz7fyG/FHfVpW2LOHMQm/xYsXKYmOft2
+	i8QE9qTlXLBY5h6IdP4ixO8wWddS0KvNqsBL7DSa9cXP32Ja2JDyRDwjSMhMts1jbTeHkDc3UZE
+	DGlzcPzHG8
+X-Received: by 2002:a5d:64c7:0:b0:431:316:9212 with SMTP id ffacd0b85a97d-435f3a7c03cmr15232436f8f.6.1770066848352;
+        Mon, 02 Feb 2026 13:14:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e131ce64sm48756747f8f.26.2026.02.02.13.14.10
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-435e131ce64sm48756747f8f.26.2026.02.02.13.14.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Feb 2026 13:14:10 -0800 (PST)
+        Mon, 02 Feb 2026 13:14:07 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 13/15] nodejs: upgrade 22.21.1 -> 22.22.0
-Date: Mon,  2 Feb 2026 22:13:59 +0100
-Message-ID: <20260202211401.1287664-13-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 09/15] imagemagick: upgrade 7.1.2-12 -> 7.1.2-13
+Date: Mon,  2 Feb 2026 22:13:55 +0100
+Message-ID: <20260202211401.1287664-9-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260202211401.1287664-1-skandigraun@gmail.com>
 References: <20260202211401.1287664-1-skandigraun@gmail.com>
@@ -67,72 +67,50 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:14:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124086
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124082
 
-From: Jason Schonberg <schonm@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-This is the December 2025 security release that the nodejs team released
-January 13, 2026.
+License-Update: change license url to https://imagemagick.org/license/
 
-  3 high severity issues.
-  4 medium severity issues.
-  1 low severity issue.
-
-High priority fixes:
-  CVE-2025-55131
-  CVE-2025-55130
-  CVE-2025-59465
-
-Medium priority fixes:
-  CVE-2025-59466
-  CVE-2025-59464
-  CVE-2026-21636 *
-  CVE-2026-21637
-
-Low priority fixes:
-  CVE-2025-55132
-
-* note that this medium priority CVE only effects Nodejs v25.
-
-https://nodejs.org/en/blog/vulnerability/december-2025-security-releases
-
-Changelog: https://github.com/nodejs/node/releases/tag/v22.22.0
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0bb156371e433cf3e9fdc4291da2319d63a83575)
+(cherry picked from commit c2b4809fe8bb2eaa3ce99807dcafae7aaa880f4b)
+
+Contains fixes for CVE-2026-22770, CVE-2026-23874, CVE-2026-23876
+and CVE-2026-23952.
+
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../oe-npm-cache                                                | 0
- ...oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} | 0
- .../nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb}             | 2 +-
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.21 => nodejs-oe-cache-22.22}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb} (98%)
+ .../{imagemagick_7.1.2-12.bb => imagemagick_7.1.2-13.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-12.bb => imagemagick_7.1.2-13.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.22.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.21.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.22.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
 similarity index 98%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-index ccaf9f7bb2..443cdc430d 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-@@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "487d73fd4db00dc2420d659a8221b181a7937fbc5bc73f31c30b1680ad6ded6a"
-+SRC_URI[sha256sum] = "4c138012bb5352f49822a8f3e6d1db71e00639d0c36d5b6756f91e4c6f30b683"
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
+index b804c64cfb..e3f4a96d6f 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-12.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "https://www.imagemagick.org/"
+ DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
+ editing raster and vector image files. It can read and write over 200 image file formats."
+ LICENSE = "ImageMagick"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2f9de66264141265b203cde9902819ea \
+-                    file://NOTICE;md5=bcbf1f1897b40ec8df39700cb560e9ed"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1f56ade64cf079aff7232f7dbeaea992 \
++                    file://NOTICE;md5=3974428a57d34b981abb7acc416dde8f"
+ # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
  
- S = "${UNPACKDIR}/node-v${PV}"
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://imagemagick-ptest.sh \
+ "
  
+-SRCREV = "bdd4fa561d7bf4c6afd40ee9c89e9f9e82b6e88b"
++SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
+ 
+ 
+ inherit autotools pkgconfig update-alternatives ptest
 
