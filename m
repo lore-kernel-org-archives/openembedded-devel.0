@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FC7AE7FDE4
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:32:20 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2068.1770067936846494848
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87EA3E7FDE9
+	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:32:40 +0000 (UTC)
+Received: from mta-65-228.siemens.flowmailer.net (mta-65-228.siemens.flowmailer.net [185.136.65.228])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2034.1770067955673956806
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 13:32:18 -0800
+ Mon, 02 Feb 2026 13:32:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=JYaucuHF;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-256628-20260202213213fb57d791c000020766-d01oqp@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20260202213213fb57d791c000020766
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=I9dAxLRo;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.228, mailfrom: fm-256628-2026020221323373a084253d0002077b-s1yq44@rts-flowmailer.siemens.com)
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id 2026020221323373a084253d0002077b
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 02 Feb 2026 22:32:14 +0100
+        Mon, 02 Feb 2026 22:32:33 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=RS8eJ9aA1IVWByDxrznjsuJw5cqTNBGZLFwdujBE4+c=;
- b=JYaucuHFoqYNVZXXW+nC1b06Un0l9fHI72i1cvAkhP9O5Gwh3Ufv5bGMnNqqXWIQxJ45QD
- hlwe7XDnt6qmG/1oGsOB0XY+eOwwY9bjkh5cTI/O92rXzFyQiKJjMxxLqCr1NZn2A6Db2dvz
- zM5JrenFvqJXRXTsu0azjVxI6G+YG+YGvAaxe8oDUGZQ299vIUdzC86Hxee1fTYR2eD+fTz1
- Ksognn9fOfGvsrLH+mn4c9AeyVS+oP49vSIHaZbRzO0kgipcilta9DZQH+hz+3TH2vQqHrPC
- 4/3KyK65ArOYpbndFFzwULuyVPeqd9RK6hHy7oeaIawWyDv7Cio++ZYA==;
+ bh=X5VXULoA0tjVqYTcUEEN2nP4lX86XBbyyytGTP4qqpQ=;
+ b=I9dAxLRok2R/UGgM1C+qiSNUa2ESF+RMz94qjjt81Vko52xI9NNAwLChTD2n364WaU+mD3
+ hLqzRvkQkcDwEGkIo1Jzr36a9e1k3OFqtEojl1F2twTdKH2MCreKv+GDOUuk138ysGKEcMUR
+ IfSNorKVmGrfK+oP1nNgjpZ6QgU+rPx9yVpdJeS0Vp9KJh4qx0DcIG7s6fFDRxmEWoNgEKHy
+ nqTeK0QeS+m42WmMbc/3hye4jkigLF82tukkWw8ktULBNoHLBhVXpqqzt5I6ZRyLBVmCVJ/F
+ EMrcTXluYNejFvGlHx2XpslN9uxAfaqnFEf6/DuyUVV4cpCsP0KD7BHQ==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][kirkstone][PATCH] python3-protobuf: patch CVE-2026-0994
-Date: Mon,  2 Feb 2026 22:32:06 +0100
-Message-Id: <20260202213206.2116704-1-peter.marko@siemens.com>
+Subject: [meta-python][scarthgap][PATCH 1/2] python3-protobuf: patch CVE-2026-0994
+Date: Mon,  2 Feb 2026 22:32:27 +0100
+Message-Id: <20260202213228.2116741-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -36,8 +36,8 @@ Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:32:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124089
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:32:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124090
 
 From: Peter Marko <peter.marko@siemens.com>
 
@@ -49,13 +49,13 @@ Resolve formatting-only conflict.
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
  .../python3-protobuf/CVE-2026-0994.patch      | 47 +++++++++++++++++++
- .../python/python3-protobuf_3.20.3.bb         |  1 +
- 2 files changed, 48 insertions(+)
+ .../python/python3-protobuf_4.25.8.bb         |  2 +
+ 2 files changed, 49 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
 
 diff --git a/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch b/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
 new file mode 100644
-index 0000000000..156be3be29
+index 0000000000..494a57ad63
 --- /dev/null
 +++ b/meta-python/recipes-devtools/python/python3-protobuf/CVE-2026-0994.patch
 @@ -0,0 +1,47 @@
@@ -91,7 +91,7 @@ index 0000000000..156be3be29
 +index 1b6ce9d03..9acbaefb5 100644
 +--- a/google/protobuf/json_format.py
 ++++ b/google/protobuf/json_format.py
-+@@ -652,9 +652,11 @@ class _Parser(object):
++@@ -644,9 +644,11 @@ class _Parser(object):
 +       self._ConvertWrapperMessage(value['value'], sub_message,
 +                                   '{0}.value'.format(path))
 +     elif full_name in _WKTJSONMETHODS:
@@ -106,16 +106,17 @@ index 0000000000..156be3be29
 +     else:
 +       del value['@type']
 +       self._ConvertFieldValuePair(value, sub_message, path)
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.20.3.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.20.3.bb
-index b3846ddeb3..dbb30ad4df 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_3.20.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.20.3.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
+diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
+index aca30efdee..6ba24899f6 100644
+--- a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
++++ b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
+@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a
  inherit pypi setuptools3
+ SRC_URI[sha256sum] = "6135cf8affe1fc6f76cced2641e4ea8d3e59518d1f24ae41ba97bcad82d397cd"
  
- SRC_URI += "file://CVE-2025-4565.patch"
 +SRC_URI += "file://CVE-2026-0994.patch"
- 
- SRC_URI[sha256sum] = "2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2"
- 
++
+ # http://errors.yoctoproject.org/Errors/Details/184715/
+ # Can't find required file: ../src/google/protobuf/descriptor.proto
+ CLEANBROKEN = "1"
 
