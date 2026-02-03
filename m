@@ -1,76 +1,85 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <yogesh.tyagi@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BFF0E7FDD8
-	for <webhook@archiver.kernel.org>; Mon,  2 Feb 2026 21:32:50 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2079.1770067961323986396
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53C21E8304F
+	for <webhook@archiver.kernel.org>; Tue,  3 Feb 2026 04:13:12 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9666.1770091990797740076
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Feb 2026 13:32:41 -0800
+ Mon, 02 Feb 2026 20:13:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=HXzxV3C/;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-256628-202602022132398f291d0f0800020740-xlwvo7@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 202602022132398f291d0f0800020740
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 02 Feb 2026 22:32:39 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=zBD0/LHYz/UJCJvh8+Y/S6eIShkZc41PXtir0pooFbE=;
- b=HXzxV3C/6SG7CA/vQd3mB5UWL1B2h9Zx8kjLBNv+lGHjLjJiKjMo5VVhD//2KzV/AB5x++
- igPf84jIHlo7GkGG0q8a9tli+lXipcRQMQKZ8ay+FMHACuaeVQKxoxPQj7TAEglSkA1pMzt3
- UrEYNqXpf36j8X3De6cyZsquf6vt3ApXZci37gr7eZ+wjsLHA/OKzVmvt9m7Dgge1LEIX3Vf
- S5FJBrwXCagXrPIiP7B0GbcCQQeOL8ExiCisqvbJ0513L69RI7Tysr+TtvxPTfA/C/S+CfL1
- y2iq2t2eSGqbY39zcWB7UQJIOJkKpXZeiXZUwXEfz39aQzTPkuOPC2QA==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@intel.com header.s=Intel header.b=ELfPg/lf;
+ spf=pass (domain: intel.com, ip: 192.198.163.7, mailfrom: yogesh.tyagi@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1770091991; x=1801627991;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=O8BgV6mTFmFXR9645BIpn1tMUFymEhISyDdAS+kEqa8=;
+  b=ELfPg/lflEo8fr0t0Pn6aZI5NmR7rNs0/AaSmbxy5fblBpChQ4Br5S+R
+   0xt/diM5DxNznF5hQFomK/KxdIIqnt7GyNDvsmfaobRjdhWouqWjhIzOB
+   JMAspQFpF7rqCwTP0YCeNT3weMQH27PQowH9U0YFH2imDo2VfESQ7MZvr
+   HcwQGF3kG70sCh9BHO2MmwJwdE/YYnrRHhf/315Kr7gR2dYF/nI2JK7ao
+   w3z+UyKFhUnh+PxFmK7m3NGKlrTQDrBkPNA9N5FD0gWLmu685ur/OFX+W
+   xCUnptHAz+cpjUlJLBCNV1FsStbofFIL/XOJSeQCPVYCYmkZGf/zzTo/X
+   Q==;
+X-CSE-ConnectionGUID: O23BVrp7Qmyi34IHjlIpBw==
+X-CSE-MsgGUID: kY1MROgKQhubtjQKBQzHcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11690"; a="96712478"
+X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
+   d="scan'208";a="96712478"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2026 20:13:10 -0800
+X-CSE-ConnectionGUID: r+/g6cWfSIauWDsaYFbPAQ==
+X-CSE-MsgGUID: gb9/QRHuSTivVsbV8rHUYA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.21,270,1763452800"; 
+   d="scan'208";a="213832159"
+Received: from ytyagi-desk.iind.intel.com ([10.49.15.7])
+  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Feb 2026 20:13:09 -0800
+From: yogesh.tyagi@intel.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][scarthgap][PATCH 2/2] python3-protobuf: added python3-ctypes as RDEPENDS
-Date: Mon,  2 Feb 2026 22:32:28 +0100
-Message-Id: <20260202213228.2116741-2-peter.marko@siemens.com>
-In-Reply-To: <20260202213228.2116741-1-peter.marko@siemens.com>
-References: <20260202213228.2116741-1-peter.marko@siemens.com>
+Subject: [whinlatter][PATCH] abseil-cpp: Set CMAKE_CXX_STANDARD to 17
+Date: Tue,  3 Feb 2026 09:42:50 +0530
+Message-ID: <20260203041250.2332880-1-yogesh.tyagi@intel.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Feb 2026 21:32:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124091
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Feb 2026 04:13:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124092
 
-From: Jan Vermaete <jan.vermaete@gmail.com>
+From: Yogesh Tyagi <yogesh.tyagi@intel.com>
 
-  File "/usr/lib/python3.12/site-packages/google/protobuf/internal/type_checkers.py", line 25, in <module>
-    import ctypes
-ModuleNotFoundError: No module named 'ctypes'
+The compiler defaults to C++ < 17 which causes build failures.
+Abseil requires C++17 or higher, so explicitly set CMAKE_CXX_STANDARD=17
+to ensure the build uses the correct C++ standard.
 
-tested on qemu86-64
-
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-(From meta-openembedded rev: d1b8ebc2a5ff5993e118048f2ca31a893f13cd38)
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Error:
+CMake Error at CMake/AbseilDll.cmake:745 (message):
+  The compiler defaults to or is configured for C++ < 17.  C++ >= 17 is
+  required and Abseil and all libraries that use Abseil must use the same C++
+  language standard
 ---
- meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb | 1 +
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
-index 6ba24899f6..7c534fe656 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_4.25.8.bb
-@@ -19,6 +19,7 @@ UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
- DEPENDS += "protobuf"
- 
- RDEPENDS:${PN} += " \
-+    python3-ctypes \
-     python3-datetime \
-     python3-json \
-     python3-logging \
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
+index 0394f36cdb..3ab4fa1cde 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20250814.1.bb
+@@ -21,6 +21,7 @@ inherit cmake
+ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
+                  -DBUILD_TESTING=OFF    \
+                  -DABSL_ENABLE_INSTALL=ON \
++                 -DCMAKE_CXX_STANDARD=17 \
+                 "
+ #  riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_store_8
+ #  >>> referenced by <recipe-sysroot>/usr/lib/libabsl_flags_internal.so.2505.0.0 (disallowed by --no-allow-shlib-undefined)
+-- 
+2.43.0
+
 
