@@ -1,154 +1,133 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96839E87856
-	for <webhook@archiver.kernel.org>; Tue,  3 Feb 2026 18:53:30 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1145.1770144808026628669
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B89B6E8785E
+	for <webhook@archiver.kernel.org>; Tue,  3 Feb 2026 19:14:10 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1600.1770146045025367735
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Feb 2026 10:53:28 -0800
+ Tue, 03 Feb 2026 11:14:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iNPW9kVu;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-480706554beso64932475e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Feb 2026 10:53:27 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=I6lX6Lxw;
+ spf=pass (domain: konsulko.com, ip: 209.85.210.174, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-82310b74496so3480849b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Feb 2026 11:14:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770144806; x=1770749606; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ftqAA5R3cUbPgJQ9Y4iQEylfdowUKy5roHmSWLmHY/s=;
-        b=iNPW9kVueKe55I88rxy5oIY/CNmUN6UrdcpczJSkNeacskrlzmy2y+8DJ1zOTvmk2Y
-         A8JO0vJt5Ui5k4XXRAuZTYNi/s2RRvK/kqFHhnBYwonDuNenbUoavpAosM26jNu6QzT9
-         Pr5TfqvPCHacLoCf7tFXfT8aov1bYfyueEvEpIvHH60qjsSRHPzecT2IBjkTu4gmxy9L
-         T9dOcRkBYXCFa0g0UQ7tJLWVAj1SEYfkH319+p0PhW5vUSi8Z3J7aDB3DI8YdZa2rm16
-         FasVPD+9YOgmjlO0ffpNGI9sBLG5GBKgIXvW5bK3wutDGjFL4Hdg80AqqvC2kNMqZRvO
-         MIzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770144806; x=1770749606;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=konsulko.com; s=google; t=1770146044; x=1770750844; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ftqAA5R3cUbPgJQ9Y4iQEylfdowUKy5roHmSWLmHY/s=;
-        b=OdtyEZ0Qy7k4SSCRcLga1YlnUg3+xkzO33b8s3JOYVOo2nEKqrOD9lHMHTeIMppg9l
-         e+et+UKbQoaenIoT10tTWUmVvvkZ/XyzHbkqweKW8j2zr5/cgoZiN9M/A7r6N8a26OxM
-         Xgmizt0RmtIXMFvhPPPHG5/kMtg7JfieAlRq+dOySLWO/bSygXIGoSlObz26TTX4WgXJ
-         cI1982I7ohaJ2UazzvDH599a/S5g4Vxv5S3iDse+vS1bvlYOpx+Xgk7zh4n+pIjze7ma
-         hM0nkrZvkIJ6HzvFqbmu1FoUVRo1181Pdp6e4vAlv+qIOgzJl+lAKDu2a32VNEAoDgj3
-         7aYQ==
-X-Gm-Message-State: AOJu0Yw2mk4r8EliLDvvm8LU2yXM3kyo3f2lePJ0y6GpvU0Jz0/HPwtO
-	lmdh9bLEAje1PpsSD6Sa/fdf/o32Bc1Z0qOo5UecTjHSWTXKBGhb1YxHTL4ltw==
-X-Gm-Gg: AZuq6aLN0Z3bOrZ0JjSUleYbtMVbIMrCt7Yh+GHw/mw9Fdrsu21V8/q+1A1d/lF++cE
-	hbgAasPebYELTdDDoManwxUDbElIk8Msnb6HZzQGxhmTKyIAB5UIs+dUZr8NRraVjZUhYmvLL8M
-	Mf8rchJIHLqo5TLCO9fUWvZR9IrKWqKYOsTQFvQO4AXoVzyHb/Ua/MlQzsX9/OCWZEI1Oy17c4V
-	9q5BScdOGWdDnh7gcvqiSEgrvXNQ+JDUfcTkHyWkUVobxl1W9ByymNqo9cmv7dV3sy+BnFPytRA
-	9oe1jp03sprsF3+fXROyMn3f6PsFmOqfYEIBZUAib3BGMBAwksAvfKW0rLiczf0LUrutD2QNmjY
-	Ic7wtJy/lzCN4oVVaF1qwrAtlNmcUA61KqEbI+yKALjILKen0ezZntmg5qXU/HWHZtQFdA6pXaI
-	ijzICT4Mm8
-X-Received: by 2002:a05:600c:8718:b0:47d:403e:4eaf with SMTP id 5b1f17b1804b1-4830e9335c4mr8129835e9.10.1770144806099;
-        Tue, 03 Feb 2026 10:53:26 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830ec181aesm2727235e9.1.2026.02.03.10.53.25
+        bh=whcwR1c0o8DyG5AaqrARDraTGtZVGqQJrl0Vn8OymrU=;
+        b=I6lX6LxwQFxv37Y0VfVtrFRz7AbihHz4WtYzwT1uyxp7At+w9Aol3MvNjmBMLvFq/c
+         1zLGvL0YsXlWbx2RrO++Ivz78r1V0K7wWGyPIpWeXVQRAqAaTy0IZxGxH8rTFxM1vx1P
+         DLyXs+6PFSTjOjWkPc8FhFQR9Ig5AfI422w38=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770146044; x=1770750844;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=whcwR1c0o8DyG5AaqrARDraTGtZVGqQJrl0Vn8OymrU=;
+        b=CLZd5RQAnqH38ARP62K8VmMi8rgvMI3EbXmZO/1Aw5U8EMIY3IxcvuzZML4tpgnoA5
+         G16pEjSD+FhzCFpauMKq7d79sTw5G8hVMtMcZKQmv6KYCzD9wUvLKmJV5Nzlad98EHtx
+         uZDHuMa7swoL5X/aMcKDCHhCjrcqxMPRfNOD+RnCn1anKpiUraT+0lbalDtZoSYJdhsZ
+         gBmPCxWGlhQvYKFePT3vZtqWlmAZMMe13yVovtv9saCTNRSgitxRup4y2beN2XrCNj1a
+         5RskgXCCWFZf9DJCQMwj8JiifUMk5VA3bNFoepUuy/DbRyciIq2qbNAbpQVYOsYg4X3j
+         sd7A==
+X-Gm-Message-State: AOJu0YyjWKJEWln3PNiVVnjqq+/MQHB2LXMMPUtF/KVkB4lSMxEQHv+e
+	udP7PZdRTcf+UUVHw3QQF1ppbiVZEYfxJVTkReNTkiRep4k+dnlCJovQHUQo8pTSDkHsFC7hQFn
+	lh0qb
+X-Gm-Gg: AZuq6aJ9Za8g8x/8b67a1WoTpEpRDzb4211CijLR9DXrWCQoiMv+de2uM3CYmzkXX7o
+	c8QUtUMrvN46rmn/uiYVS9Fck+h3czMvHejDHnpJS9uL241moJYey0j8clGKgnaYcE5gYl4UBt0
+	rRva46NK1djEaiGSBlD1JRi7Fr6Pjwc/wbYGFs8JuU1HA9qDE3lvbLCYSZWfJYkMRVbT3kNQjnZ
+	F/MS+lBB14Q9x+yaotFxxbI9R2JvBq1Z1TFnp18VuP53jjvfgrSop9SgrudA9yjNaXO9yYLB703
+	//jhf4CbiWgGmoIZB7HqpNMgwVwUYFnSezLOxRWXDQXmV1R/rqwXK/1qHrdG/zczHxSwYSRAvDD
+	cfxoCCPQCtOm17QHAD6jRfb/T9HlCUUPxoLcaM8uY4UK/ctaMYtkRba3HErT8sVKvGM+I6U5tLW
+	RARMntW/gaW3kjlCKGctRorlDavQnRG70Cxdloyp2BZC1XLPjHUebfhZlS4tN+
+X-Received: by 2002:a05:6a00:1485:b0:7e8:4398:b369 with SMTP id d2e1a72fcca58-8241c68909dmr421012b3a.60.1770146043596;
+        Tue, 03 Feb 2026 11:14:03 -0800 (PST)
+Received: from localhost (c-98-232-159-17.hsd1.or.comcast.net. [98.232.159.17])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8241d163fb2sm137663b3a.14.2026.02.03.11.14.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Feb 2026 10:53:25 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Tue, 03 Feb 2026 11:14:02 -0800 (PST)
+From: tim.orling@konsulko.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gimp: patch libunwind detection
-Date: Tue,  3 Feb 2026 19:53:24 +0100
-Message-ID: <20260203185324.1001789-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Subject: [meta-python][PATCH v2 v2 0/6] Upgrade python3-orjson and enable ptest
+Date: Tue,  3 Feb 2026 11:13:49 -0800
+Message-ID: <cover.1770145884.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1769715106.git.tim.orling@konsulko.com>
+References: <cover.1769715106.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Feb 2026 18:53:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124104
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Feb 2026 19:14:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124105
 
-Gimp 3.0.8's meson file detects the presence of libunwind incorrectly,
-making it fail on some platforms (e.g. x86 + musl + clang), even when
-libunwind is explicitly disabled:
+From: Tim Orling <tim.orling@konsulko.com>
 
-| <snip>i686-oe-linux-musl-ld: app/core/libappcore.a.p/gimpbacktrace-linux.c.o: in function `gimp_backtrace_get_address_info':
-| /usr/src/debug/gimp/3.0.8/../sources/gimp-3.0.8/app/core/gimpbacktrace-linux.c:708:(.text+0xbd7): undefined reference to `_ULx86_init_local'
+This series upgrades python3-orjson to 3.11.6 and patches it to support
+building on non-x86* architectures like riscv64 and arm64.
 
-This backported patch fixes this.
+python3-faker has some test cases in tests/pytest that cause the
+'pytest --autmake' parser to fail to create a "Testsuite summary" so
+these have been skipped (there are still 2k+ test cases).
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- ...ind-header-detection-on-non-macOS-pl.patch | 51 +++++++++++++++++++
- meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb    |  1 +
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
+Tested on qemux86-64, qemuriscv64 and qemuarm64.
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
-new file mode 100644
-index 0000000000..879529b80e
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
-@@ -0,0 +1,51 @@
-+From 8862f36fcec74152afeee2a99c0e04b84b6cf5b3 Mon Sep 17 00:00:00 2001
-+From: Bruno Lopes <brunvonlope@outlook.com>
-+Date: Sun, 25 Jan 2026 11:11:48 -0300
-+Subject: [PATCH] meson: Fix libunwind header detection on non-macOS platforms
-+
-+Closes: #15750
-+
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/1aa51ca0637db88a4ea958d03fa6692e6ac0289b]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ meson.build | 17 ++++++++++-------
-+ 1 file changed, 10 insertions(+), 7 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 2192968..cfa1f71 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -731,11 +731,14 @@ conf.set('HAVE_LIBBACKTRACE', libbacktrace.found())
-+ ## Check for libunwind
-+ # In most platforms, unw_*() functions are in the libunwind library.
-+ # In macOS, it is on libSystem (there we only need the SDK header).
-+-libunwind = ( get_option('libunwind')
-+-  ? dependency('libunwind', version: '>=1.1.0', required: false)
-+-  : no_dep
-+-)
-+-have_unwind = libunwind.found() or cc.has_header('libunwind.h', required: false)
-++libunwind = no_dep
-++if get_option('libunwind')
-++  libunwind = dependency('libunwind', version: '>=1.1.0', required: false)
-++  libunwind_h = platform_osx ? cc.has_header('libunwind.h', required: false) : false
-++  have_unwind = libunwind.found() or libunwind_h
-++else
-++  have_unwind = false
-++endif
-+ conf.set('HAVE_LIBUNWIND', have_unwind ? 1 : false)
-+ 
-+ ## Check for backtrace() API
-+@@ -758,11 +761,11 @@ if platform_windows
-+ elif platform_linux
-+   if not have_execinfo_h
-+     dashboard_backtrace='no (missing: execinfo.h)'
-+-  elif not libbacktrace.found() and not libunwind.found()
-++  elif not libbacktrace.found() and not have_unwind
-+     dashboard_backtrace='rough (missing: libbacktrace and libunwind)'
-+   elif not libbacktrace.found()
-+     dashboard_backtrace='partially detailed (missing: libbacktrace)'
-+-  elif not libunwind.found()
-++  elif not have_unwind
-+     dashboard_backtrace='partially detailed (missing: libunwind)'
-+   else
-+     dashboard_backtrace='detailed'
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-index a5e892c508..403d0e3eeb 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-@@ -60,6 +60,7 @@ SRC_URI = "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
-            file://0002-meson.build-reproducibility-fix.patch \
-            file://0001-meson.build-dont-check-for-lgi.patch \
-            file://0001-meson.build-require-iso-codes-native.patch \
-+           file://0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch \
-            "
- SRC_URI[sha256sum] = "feb498acc01b26827cff1ff95aa8fb82cdd6a60d7abf773cfcd19abeafca3386"
- 
+The following changes since commit 7bbe4a4e200452b1fd6c09c7fcf36c4b229146f6:
+
+  php: upgrade 8.5.1 -> 8.5.2 (2026-01-20 14:35:59 -0800)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib timo/python3-orjson-ptest-v2
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/python3-orjson-ptest-v2
+
+for you to fetch changes up to 1ff42dd4deeaa45e3389a0e56ab91a5d679e32e9:
+
+  python3-orjson: use git fetcher; enable ptest (2026-02-03 10:55:33 -0800)
+
+----------------------------------------------------------------
+
+Tim Orling (6):
+  python3-orjson: upgrade 3.10.17 -> 3.11.6
+  python3-faker: add v40.1.2
+  python3-tokenize-rt: add at v6.2.0
+  python3-time-machine: add at v3.2.0
+  python3-pendulum: add at v3.2.0
+  python3-orjson: use git fetcher; enable ptest
+
+ .../ptest-packagelists-meta-python.inc        |   5 +
+ .../python/python3-faker/pytest.ini           |   3 +
+ .../python/python3-faker_40.1.2.bb            |  48 +++++++
+ .../python/python3-orjson-crates.inc          | 124 +++++++++---------
+ ...rd-avx512-module-with-x86-target-cfg.patch |  37 ++++++
+ ...e-detection-macro-in-pystrref-object.patch |  34 +++++
+ .../python/python3-orjson_3.10.17.bb          |  22 ----
+ .../python/python3-orjson_3.11.6.bb           |  46 +++++++
+ .../python/python3-pendulum-crates.inc        |  52 ++++++++
+ .../0001-rust-Cargo.toml-inhibit-strip.patch  |  31 +++++
+ .../python/python3-pendulum_3.2.0.bb          |  35 +++++
+ .../python/python3-time-machine_3.2.0.bb      |  28 ++++
+ .../python/python3-tokenize-rt_6.2.0.bb       |  21 +++
+ 13 files changed, 404 insertions(+), 82 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-faker/pytest.ini
+ create mode 100644 meta-python/recipes-devtools/python/python3-faker_40.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson/0001-Guard-avx512-module-with-x86-target-cfg.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson/0002-Guard-x86-feature-detection-macro-in-pystrref-object.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-orjson_3.10.17.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-orjson_3.11.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pendulum-crates.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pendulum/0001-rust-Cargo.toml-inhibit-strip.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pendulum_3.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-time-machine_3.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-tokenize-rt_6.2.0.bb
+
+-- 
+2.43.0
+
 
