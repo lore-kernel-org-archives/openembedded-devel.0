@@ -2,188 +2,194 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 879A8E9D40D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8441CE9D40C
 	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 16:29:38 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24772.1770222572508737797
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24634.1770222568447206671
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 08:29:32 -0800
+ Wed, 04 Feb 2026 08:29:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RP03BFYL;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-47ee07570deso60119135e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 08:29:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=P6toe3Uc;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-42fb0fc5aa9so36510f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 08:29:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770222571; x=1770827371; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uAVLIOe4T6ysRaNjtcm21azfsFJG6l2Sd25BlyIZhiM=;
-        b=RP03BFYLXiOGnA+ESxMwyTT76n9/eVDihxrG4r/a3xWhDNprlD/g9S4CHoZsmYiD3B
-         Z+g8VbgtYVuMKeDoWaB1vNctuF5fOCwM4Fja+z0KBiVpW0+8oz/702vN31PddLkqahRE
-         41GK9JdX/mabxNMI1Zu2qRYBrcDcXDamDgND81tygr8ei4WOYGB4osgc/5RGUEefFoCZ
-         sYkjsUFkd5OJ+++CBCRZFk14IomPD9cWkGsSv7JwGClPWJ7BIqvzhW0zyWadmP9BFu5o
-         JCxE86+Zzhb64c+/0dSwLA96kE+FcztMmkCyu44rZZoR4DDI1GAsg2WW1vKrgfaemG3/
-         36rA==
+        d=gmail.com; s=20230601; t=1770222566; x=1770827366; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Hh9s1hs0niS/SVsBhPWTtzxLQIoQFquPjdCrE8lK4sA=;
+        b=P6toe3Uca4XG5vlGBloU6Ab6phlh5/PDJxP/ItD8VSZu/+ZQDFZStHmoCt2CizsNKB
+         czuJrsjNBYJBGwldWUupeCL9CRuvjIkhIIjClGc0I8xwXaQZDZKIsmtOlSAxkddoIizF
+         GKp6LLYRsfItZjkcitJt+XZqWySqFRF+8+rU1R0Iu6IS+l3BI9USCijgEEbizrCdfNQn
+         +sgwPpUEpC/+2C1KgnQIg0pXL2YOMHqJyWEeDYgASIA0lr/YznWlQ4UvYDwHYO2m2KFe
+         gumoB6EnWon0Kd+imLWc+l7bNmv2t99mgPn6EIG6dk4ZQhjWLrnA3K0ZDMGMLVVYIkZO
+         4Qkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770222571; x=1770827371;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uAVLIOe4T6ysRaNjtcm21azfsFJG6l2Sd25BlyIZhiM=;
-        b=AuQLvGUgSKYBhFWQmp0+nxBkLhrLheMU2gtnGV9HLzgRd7JYZ0HFxeGfYEOp32dnKm
-         1Ze9nzVPYFKLn8OkXcghac7JO6G/hkjl3PfEjH3yExBfmjhGZJKP8KzlMcpyMoABHt+U
-         sEgi0415m62jKm2747HpMXlCQSO/ys21HXsHdDZZANVqu6hMNQJjk7cZT8qAwI5jq4mS
-         5uUAoF/9bjDkBhPPFzue3Yy2k4b36dAdjPHY0gAKVzUwxGcm7zvLwgZ+wIS4B1iZSeUH
-         bkTfp+1j9RBFfvHEDkKhcqKK/DpR3aIXVCcpMooYyRqSlDlvmGYUiA8BJFEHV6dPyEgf
-         3zVg==
-X-Gm-Message-State: AOJu0YwKI5G0nK+svuX9+NFc6kdCDQzimCaU0N/t/mury9fsrVMH5MU4
-	UtVEQNZcaR8UqcmVOcyBuCqtT9kH3aHPJnOvrQzh9XCBd5YPg1nnt/SCgUGwCw==
-X-Gm-Gg: AZuq6aJQA57y+2rsetfmBS3G7Hho9fc2PjTiocwHMRTR+mVGtQbvhUCFaPHS3t8msuX
-	w/crEQe86Ppwx7D6+JDzqPlzRTgrqakpXJ46A9gPeezCYHGW+X7b+iyharGkQsfbO6fTUnQldKX
-	z5+hfVp7P6f/EbWoIy7o+/dK+LPIAStjWcga6XGnUVp5MHoJnz11doycJuCKtIlBZdUkXtOIcsf
-	YYhE2ILt6L12CPzAMPUU09DOxvIKBUxNjRqbOXBQv8RgSOUjWBlzzDySCmkUDRIiAzCFpVq1owL
-	nqFn7a2LUvwlBn9aiLpetuaWqLfKWZyT6GGGaB0bKUP8Gm7GXClQz/+42LwKoUIhu3GgcobmeQG
-	me0/WZjwkkW79uUjU0rizGrLZrsloU3qhUeel4vk08rzC/iejZ6/gmIt2qD3gpea4ZS67aOF4yz
-	T96HuJEdGI
-X-Received: by 2002:a05:600c:4e4f:b0:482:ef72:5787 with SMTP id 5b1f17b1804b1-4830e93eb28mr50248705e9.1.1770222570682;
-        Wed, 04 Feb 2026 08:29:30 -0800 (PST)
+        d=1e100.net; s=20230601; t=1770222566; x=1770827366;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Hh9s1hs0niS/SVsBhPWTtzxLQIoQFquPjdCrE8lK4sA=;
+        b=OyCDOa2JvqSZ5Jd3TuzklKqugwcgasnWXg3ooS9SYdjYfYvS7uKdaRV56Jv2B4D5l0
+         EJtSsNlzHFmw7fXCUWRc/kS+6SZb8dv+CVt6soOxxvVuXFTURVKyw4ATyG1m+R7iGUPV
+         91nkcridIt/I6gP6Q5B+fgHR2GwfWQqVqX0adCLrlSc0w8ETgSS0Yjb2q4C+12Wjx84N
+         1KKSc+74fp0p90SX0zHPg2SPY/D18a1VvxiiozdV4/TmmThLSXSPAPEfDDIOI+TB3nAE
+         hn1T6lkq1gmHnaEHV5yjakU327Mlvuj1lJpLuFF5JicuMNbBEyV+ok6siI6za1JPjjjh
+         U1cg==
+X-Gm-Message-State: AOJu0Yy/bFEZf56j2EbD1BEJ22iM5I/JtQ3CSKA+WDrZa/NzAO1V+Dxp
+	54xKl7Syvekws/J02/HjMON59W+gfdXslCQRR2mfPFOEr2wrHcW7Ag3W9JZc6g==
+X-Gm-Gg: AZuq6aI96p2qnxY/swybU2kZrTMjEr8rFfU3oVcA7dvvNvRRXONSVxScIYmdwfgn2VF
+	tZ/mCpyyrf/ImDwXbHcuxMwv86IvBqTp5Rlc4z6KKETnWCtFWmviH4upW6efvE2hhhB6mtxSEQ2
+	xT5y6ihdtqu/5rHu70y0A2dnJunPmjLurmqMvVWoQwZxNuM7dtGJ6ZW+v4ZlYpO4vQ6+MyhvbnM
+	P/C27P9+Jqu90NVgbFfsh0V+1PXCpVBYvoP52IBepYMEi/2TM/qHs2Q3VaRk9FMZfulOOyByUdh
+	E5wPpEQGCoS9RDoGBRcctEwWa/YvQAWDVezsOk/Z9PypCuG769d3A+UegmvExGVpkiLS3gTcIlb
+	vri6u/zi7Ji4ZLr1pwxobCanb/tt37JInnCLDHpd9uIXuHQAcBV1vzMhQjhf0E2iJph8lgKhJXT
+	Ney7dUdgo9
+X-Received: by 2002:a05:600c:3acd:b0:46e:4a13:e6c6 with SMTP id 5b1f17b1804b1-4830e987c5cmr50309985e9.19.1770222565863;
+        Wed, 04 Feb 2026 08:29:25 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830ec6fc89sm23293325e9.6.2026.02.04.08.29.30
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830ec6fc89sm23293325e9.6.2026.02.04.08.29.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 08:29:30 -0800 (PST)
+        Wed, 04 Feb 2026 08:29:25 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 7/7] python3-aiohttp: patch CVE-2025-69230
-Date: Wed,  4 Feb 2026 17:29:22 +0100
-Message-ID: <20260204162924.3042284-7-skandigraun@gmail.com>
+Subject: [meta-python][whinlatter][PATCH 1/7] python3-aiohttp: patch CVE-2025-69224
+Date: Wed,  4 Feb 2026 17:29:16 +0100
+Message-ID: <20260204162924.3042284-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260204162924.3042284-1-skandigraun@gmail.com>
-References: <20260204162924.3042284-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 16:29:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124142
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124136
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-69230
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-69224
 
-Backport the patch referenced by the NVD advisory.
-
-The tests were only partially backported, as the original patch
-touched some tests that don't exist in this version.
+Backport the patch indicated by the NVD advisory.
+Only a part of the tests were backported, because some of the
+new tests require a compression method that is not supported
+yet by this version.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python3-aiohttp/CVE-2025-69230.patch      | 85 +++++++++++++++++++
+ .../python3-aiohttp/CVE-2025-69224.patch      | 93 +++++++++++++++++++
  .../python/python3-aiohttp_3.12.15.bb         |  1 +
- 2 files changed, 86 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
 new file mode 100644
-index 0000000000..46f91b70ab
+index 0000000000..7f36e699fd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch
-@@ -0,0 +1,85 @@
-+From 811f8df8521b0850f5c79931e2e8c17113dda421 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sat, 3 Jan 2026 02:53:03 +0000
-+Subject: [PATCH] Log once per cookie header (#11909)
++++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+@@ -0,0 +1,93 @@
++From 225412b13f66a76a7222d7719777e6162638faa3 Mon Sep 17 00:00:00 2001
++From: Sam Bull <git@sambull.org>
++Date: Sat, 3 Jan 2026 00:02:45 +0000
++Subject: [PATCH] Reject non-ascii characters in some headers (#11886) (#11902)
 +
-+From: patchback[bot] <45432694+patchback[bot]@users.noreply.github.com>
++(cherry picked from commit 5affd64f86d28a16a8f8e6fea2d217c99bf7831f)
 +
-+**This is a backport of PR #11890 as merged into master
-+(384a173022c9d057110c1418c5c4ff83a321900f).**
-+
-+Co-authored-by: Sam Bull <git@sambull.org>
-+
-+CVE: CVE-2025-69230
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/64629a0834f94e46d9881f4e99c41a137e1f3326]
++CVE: CVE-2025-69224
++Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/32677f2adfd907420c078dda6b79225c6f4ebce0]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ aiohttp/_cookie_helpers.py   |  8 +++++++-
-+ tests/test_cookie_helpers.py |  8 ++++++--
-+ tests/test_web_request.py    | 17 +++++++++++++++++
-+ 3 files changed, 30 insertions(+), 3 deletions(-)
++ aiohttp/_http_parser.pyx  |  6 +++---
++ aiohttp/http_parser.py    |  8 ++++++--
++ tests/test_http_parser.py | 16 +++++++++++++++-
++ 3 files changed, 24 insertions(+), 6 deletions(-)
 +
-+diff --git a/aiohttp/_cookie_helpers.py b/aiohttp/_cookie_helpers.py
-+index 4e9fc96..4edaa31 100644
-+--- a/aiohttp/_cookie_helpers.py
-++++ b/aiohttp/_cookie_helpers.py
-+@@ -181,6 +181,7 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
-+     i = 0
-+     n = len(header)
++diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
++index 16893f0..23f1dd1 100644
++--- a/aiohttp/_http_parser.pyx
+++++ b/aiohttp/_http_parser.pyx
++@@ -421,7 +421,8 @@ cdef class HttpParser:
++         headers = CIMultiDictProxy(CIMultiDict(self._headers))
 + 
-++    invalid_names = []
-+     while i < n:
-+         # Use the same pattern as parse_set_cookie_headers to find cookies
-+         match = _COOKIE_PATTERN.match(header, i)
-+@@ -193,7 +194,7 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
++         if self._cparser.type == cparser.HTTP_REQUEST:
++-            allowed = upgrade and headers.get("upgrade", "").lower() in ALLOWED_UPGRADES
+++            h_upg = headers.get("upgrade", "")
+++            allowed = upgrade and h_upg.isascii() and h_upg.lower() in ALLOWED_UPGRADES
++             if allowed or self._cparser.method == cparser.HTTP_CONNECT:
++                 self._upgraded = True
++         else:
++@@ -436,8 +437,7 @@ cdef class HttpParser:
++         enc = self._content_encoding
++         if enc is not None:
++             self._content_encoding = None
++-            enc = enc.lower()
++-            if enc in ('gzip', 'deflate', 'br'):
+++            if enc.isascii() and enc.lower() in {"gzip", "deflate", "br"}:
++                 encoding = enc
 + 
-+         # Validate the name
-+         if not key or not _COOKIE_NAME_RE.match(key):
-+-            internal_logger.warning("Can not load cookie: Illegal cookie name %r", key)
-++            invalid_names.append(key)
-+             continue
++         if self._cparser.type == cparser.HTTP_REQUEST:
++diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
++index 9f864b2..bc8f7da 100644
++--- a/aiohttp/http_parser.py
+++++ b/aiohttp/http_parser.py
++@@ -232,7 +232,9 @@ class HeadersParser:
 + 
-+         # Create new morsel
-+@@ -209,6 +210,11 @@ def parse_cookie_header(header: str) -> List[Tuple[str, Morsel[str]]]:
++ def _is_supported_upgrade(headers: CIMultiDictProxy[str]) -> bool:
++     """Check if the upgrade header is supported."""
++-    return headers.get(hdrs.UPGRADE, "").lower() in {"tcp", "websocket"}
+++    u = headers.get(hdrs.UPGRADE, "")
+++    # .lower() can transform non-ascii characters.
+++    return u.isascii() and u.lower() in {"tcp", "websocket"}
 + 
-+         cookies.append((key, morsel))
 + 
-++    if invalid_names:
-++        internal_logger.debug(
-++            "Cannot load cookie. Illegal cookie names: %r", invalid_names
-++        )
++ class HttpParser(abc.ABC, Generic[_MsgT]):
++@@ -664,7 +666,9 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
++         )
++ 
++     def _is_chunked_te(self, te: str) -> bool:
++-        if te.rsplit(",", maxsplit=1)[-1].strip(" \t").lower() == "chunked":
+++        te = te.rsplit(",", maxsplit=1)[-1].strip(" \t")
+++        # .lower() transforms some non-ascii chars, so must check first.
+++        if te.isascii() and te.lower() == "chunked":
++             return True
++         # https://www.rfc-editor.org/rfc/rfc9112#section-6.3-2.4.3
++         raise BadHttpMessage("Request has invalid `Transfer-Encoding`")
++diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
++index 385452c..d4c1768 100644
++--- a/tests/test_http_parser.py
+++++ b/tests/test_http_parser.py
++@@ -468,7 +468,21 @@ def test_request_chunked(parser) -> None:
++     assert isinstance(payload, streams.StreamReader)
++ 
++ 
++-def test_request_te_chunked_with_content_length(parser: Any) -> None:
+++def test_te_header_non_ascii(parser: HttpRequestParser) -> None:
+++    # K = Kelvin sign, not valid ascii.
+++    text = "GET /test HTTP/1.1\r\nTransfer-Encoding: chunKed\r\n\r\n"
+++    with pytest.raises(http_exceptions.BadHttpMessage):
+++        parser.feed_data(text.encode())
 ++
-+     return cookies
-+ 
-+ 
-+diff --git a/tests/test_cookie_helpers.py b/tests/test_cookie_helpers.py
-+index 6deef65..28addb2 100644
-+--- a/tests/test_cookie_helpers.py
-++++ b/tests/test_cookie_helpers.py
-+@@ -1,5 +1,7 @@
-+ """Tests for internal cookie helper functions."""
-+ 
-++import logging
 ++
-+ from http.cookies import (
-+     CookieError,
-+     Morsel,
-+@@ -1374,14 +1376,16 @@ def test_parse_cookie_header_illegal_names(caplog: pytest.LogCaptureFixture) ->
-+     """Test parse_cookie_header warns about illegal cookie names."""
-+     # Cookie name with comma (not allowed in _COOKIE_NAME_RE)
-+     header = "good=value; invalid,cookie=bad; another=test"
-+-    result = parse_cookie_header(header)
-++    with caplog.at_level(logging.DEBUG):
-++        result = parse_cookie_header(header)
-+     # Should skip the invalid cookie but continue parsing
-+     assert len(result) == 2
-+     assert result[0][0] == "good"
-+     assert result[0][1].value == "value"
-+     assert result[1][0] == "another"
-+     assert result[1][1].value == "test"
-+-    assert "Can not load cookie: Illegal cookie name 'invalid,cookie'" in caplog.text
-++    assert "Cannot load cookie. Illegal cookie name" in caplog.text
-++    assert "'invalid,cookie'" in caplog.text
-+ 
-+ 
-+ @pytest.mark.parametrize(
+++def test_upgrade_header_non_ascii(parser: HttpRequestParser) -> None:
+++    # K = Kelvin sign, not valid ascii.
+++    text = "GET /test HTTP/1.1\r\nUpgrade: websocKet\r\n\r\n"
+++    messages, upgrade, tail = parser.feed_data(text.encode())
+++    assert not upgrade
+++
+++
+++def test_request_te_chunked_with_content_length(parser: HttpRequestParser) -> None:
++     text = (
++         b"GET /test HTTP/1.1\r\n"
++         b"content-length: 1234\r\n"
 diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-index 84dd369753..6dc7acfbd5 100644
+index b6344d4c68..4341e128a5 100644
 --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
 +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-@@ -11,6 +11,7 @@ SRC_URI += "file://CVE-2025-69224.patch \
-             file://CVE-2025-69228.patch \
-             file://CVE-2025-69229-1.patch \
-             file://CVE-2025-69229-2.patch \
-+            file://CVE-2025-69230.patch \
- "
+@@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+ 
++SRC_URI += "file://CVE-2025-69224.patch"
  SRC_URI[sha256sum] = "4fc61385e9c98d72fcdf47e6dd81833f47b2f77c114c29cd64a361be57a763a2"
  
+ inherit python_setuptools_build_meta pypi
 
