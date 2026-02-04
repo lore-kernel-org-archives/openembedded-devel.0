@@ -1,108 +1,103 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B882CE8B388
-	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 18:14:34 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1608.1770228865222930692
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15FCEEA7944
+	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 19:35:15 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3567.1770233712794465059
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 10:14:25 -0800
+ Wed, 04 Feb 2026 11:35:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gPNbdvUl;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-81ecbdfdcebso71180b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 10:14:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MuyZc8AQ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-4359249bbacso838414f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 11:35:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770228864; x=1770833664; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=OFUNpsLN+F0+zEoW2MUrXVhpmN6TJz+b2Qs0oFQbkCQ=;
-        b=gPNbdvUl5UK8uwYjsCp41DVctaQp8iTgS/yVxtLIDQ/SKUdIj81jxXhNhMGQA0c6fF
-         NL2k1dQPqPzoWzNktgOB7dxHpjEGf2jrN5A36ADLr606olGlrY7A7esCq9XHnHQZZn/h
-         jGiJvVbHoD8+SwJYDoDVg+BiWqZbJnlVik1To+sBCFwcrBI+SxxLrS41HVRPeGwwjABd
-         SmAbpSn5wV/anj4i4s5p8HgYsnwSRCOR5Utb2/QhuSRT1yGwaVZ/OxXeog/hSuSzXYi8
-         vzQAZBKIzl5+6FOhSAosFpcvuAZeCJhk7bJvogrc9jPFOEHsLNGT9ZNSBPeWiuRhZK+M
-         4HzQ==
+        d=gmail.com; s=20230601; t=1770233710; x=1770838510; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bUKaRVifPO9cDBnbOGvD2pfX4K6kjAd4jbTl/qSDE8o=;
+        b=MuyZc8AQW/QT9Iq0oCP7lt/b+oyZxookQhQBoGMbSOqjjzSi7zR7r6hJX0/KmATQAe
+         ow5gUqSuq1o/NxNv0bj3A2w5iJzQX6bSRd03iSHN8RGz1rfRiMQGWW71F4GTGJHmGXXv
+         Y5oy4TkLP4X0ce0o9nT5uVhhEKY/ACVfyd1iQR2wbuWJLX0xi57zRfGE+5drLPMRnu61
+         pWR/nkPViyDyGGSnbS3cq1B/umgMgItdzTMSFROhpBBg7n42DB503il7KQbNawGInu7D
+         2K+t9bNmEWoYC43kKCCEmoeB/deSSb7JQiKMx6Ed4RnJJfnUHMzauU+u19920tn+Blm1
+         PEuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770228864; x=1770833664;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OFUNpsLN+F0+zEoW2MUrXVhpmN6TJz+b2Qs0oFQbkCQ=;
-        b=ZneFf0ODSXwOd9wf60YKkRwowCfe6cYHKVf341iPhyU9fq3r7vNnD9hsFnynp+Erbw
-         dvhutQ3jNqjbjV4rLuYpfTF9ghBYW9b0mwONQoPP9cX4DyLBCxBQvdZUUuM4sTAHItyZ
-         fNRJC/vtTvt3pygjGUPQC5xbPfOLQzK/9MXjnzA1TdiPSe8q/9ZtPgvgNRvT6W9JWzJv
-         2Zfw+AdIbRRjfXpwm1jzeNwON01N57a3fTlt4SqwTN9wUUuTDhNmslSi4D561oGvxW0T
-         DZQhuTvPVJxpV6iIr+d079Mp34XoBI1HLTLgeAzSsfBYJ7kk92tiwiieVlEU6K9wecbg
-         hQyA==
-X-Gm-Message-State: AOJu0Yze+a/PS3CPuVxWEfR7QOjY6pQ1gNpGhubX5L9shg0rt1QW+V7P
-	bOQIkCOvqQ6LN13JrMOFND+m+9HFX+009jYT6ki3VHQmdjKcrGkNgI4nBMw1XQ==
-X-Gm-Gg: AZuq6aKGkK0ZpnC7EJ1uqimMYY66rPay7AtBDIrdGlg3OAbnGDZ1IfkSfIo6IQKL7ZA
-	oM7XN7EW4E8n4rNcCVjdhbrMhDUGp//EslOg0lyGnEGN/edjD31jStqME6UCRlIJiTOWaWzWg26
-	/B1lpYf6eh3yTOeMIi26WQIPxWhP0OWaVZldW2JlT0DTpH1T+7atncDESbpsy4Nip1EXBFj86b4
-	9Wr49vwFHUtYbALVp8soWxFVAXNJxHgF/cTNG9vUcqJmNstXFGXjGrvd3jVjCeQYDEzsbmcnkdL
-	ouJzMIVvLMcvVjL+d2joSZl3ABVqnkcx1kwiuVFcxSooxAIxxH/IryB7blGxTxQGslT2S0vaHLG
-	+h1mQSKW/Fymv1aMjCNG5/uVTcTOA/pySF5tWV8JThdbY2A5mdUpxu+reZ1VFGnmSV+KtMCDNcX
-	jqHoshqNNna3WnUW828R38pp8=
-X-Received: by 2002:a05:6a21:114f:b0:38d:fa67:e87f with SMTP id adf61e73a8af0-39372090292mr4017748637.12.1770228864216;
-        Wed, 04 Feb 2026 10:14:24 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.33])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6c84c70b79sm3002988a12.18.2026.02.04.10.14.22
+        d=1e100.net; s=20230601; t=1770233710; x=1770838510;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bUKaRVifPO9cDBnbOGvD2pfX4K6kjAd4jbTl/qSDE8o=;
+        b=X+u44d9u8S/T75X9rsNlFQC6VduEA1uJTYmHOE8RY04ktwtCd++Q1VYDCDQX8Yqjty
+         2bIcxXLhfjPwkjxQ8pAf3wmRro6xTRauRSW8P8KnzipRr67W6ICsH/kr9NJroV52odW/
+         zoYIULIRYFoP5XtIEgnaTbNsNZk8aQYi4TzedXZNI0wXJRNEMtaP9tKJ12MeGUoJ6NUu
+         LVUDOOt/n43SbaD+c7Q4fmtuD82hkEkMssA/wNqLaJSyNEh7Jz0JRZt+9ED9G0DvMjwU
+         VVGcrnXmFl2VnO1FVfk76fO1Gu6L6ZAf4BnzHfIpDhH1ZmVJCd5kdKRGkHTEaQOYuMwG
+         93lQ==
+X-Gm-Message-State: AOJu0Yxmbdd4HAKoAT+4iGpP5y/tdXU+kXIWgOEcsq24DbLmT2XPgNbY
+	5DeSErssgUrx+HkBHnFyCRGNHzCR0lThiZO2GiPe/Lb377MFdl4FAok/1tzrvA==
+X-Gm-Gg: AZuq6aLxv1MbMKIPJq9WP6go0cbnBZpep4CdUbJ3EcaIUoF0x2uhl75CG89yrLl8S3/
+	ANSUk/q+ZGHrVM+UirPiDnC5BbrqOsiwc3uzBZL30kaKoRJCrJlhHTLWWnGK1maRsOWFp8E7kos
+	yhL0MUq8GjHtZjQmRDiDT/EplXlc6vnEkhn8+GiGLv6qxrWduzo2dEQrClKzCFvaMc83lDbVBrO
+	EyRLwT1ir1ui4+0AO1cbO7PlYMyDKBkIMewOTthNAV9P6mpEe/mMdYMlenJFADjMmKpRukbbR+P
+	Oowyi2s3gmCuUBBiBM+974uNrGHu+dnVsqN0/WrVBz70qUQx9Pn4sHEBZWyQ35fRmRl6HWfm2Os
+	8T70rNWH8HnisXXoxCUBUa04WE6jf8SXY3He2RwjwryuAYjwxHnrpjEw8qmtcxoD6PYdi4Pjvvn
+	x1g9MlkR/B
+X-Received: by 2002:a05:6000:2210:b0:435:96a1:ee4d with SMTP id ffacd0b85a97d-436213dfc3cmr565562f8f.14.1770233709713;
+        Wed, 04 Feb 2026 11:35:09 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-436180640f2sm7869129f8f.39.2026.02.04.11.35.09
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 10:14:23 -0800 (PST)
-From: ankur.tyagi85@gmail.com
+        Wed, 04 Feb 2026 11:35:09 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][PATCH] libcdio: upgrade 2.2.0 -> 2.3.0
-Date: Thu,  5 Feb 2026 07:14:15 +1300
-Message-ID: <20260204181415.199026-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH] live555: set CVE_PRODUCT
+Date: Wed,  4 Feb 2026 20:35:08 +0100
+Message-ID: <20260204193508.752787-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 18:14:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124144
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 19:35:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124145
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+live555 is an old project, it has multiple CPEs associated with.
 
-Upstream fixed LFS support on 32-bit systems, dropped CFLAGS recipe change.
+Set the ones in CVE_PRODUCT that are still active.
 
-Changelog:
-https://github.com/libcdio/libcdio/releases/tag/2.3.0
+See CVE db query:
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+sqlite> select vendor, product, count(*) from products where vendor like '%live555%' or product like '%live555%' group by 1, 2;
+live555|liblivemedia|1
+live555|live555|7
+live555|live555_media_server|2
+live555|media_server|1
+live555|streaming_media|160
+
+All of them are relevant to this recipe, although media_server hasn't been used since 2007,
+that one wasn't set.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libcdio/{libcdio_2.2.0.bb => libcdio_2.3.0.bb}           | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
- rename meta-oe/recipes-multimedia/libcdio/{libcdio_2.2.0.bb => libcdio_2.3.0.bb} (82%)
+ meta-oe/recipes-multimedia/live555/live555_20210824.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb b/meta-oe/recipes-multimedia/libcdio/libcdio_2.3.0.bb
-similarity index 82%
-rename from meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb
-rename to meta-oe/recipes-multimedia/libcdio/libcdio_2.3.0.bb
-index c443d9b891..f8fd37eb07 100644
---- a/meta-oe/recipes-multimedia/libcdio/libcdio_2.2.0.bb
-+++ b/meta-oe/recipes-multimedia/libcdio/libcdio_2.3.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-multimedia/live555/live555_20210824.bb b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+index 1622a97fe1..cd738f9575 100644
+--- a/meta-oe/recipes-multimedia/live555/live555_20210824.bb
++++ b/meta-oe/recipes-multimedia/live555/live555_20210824.bb
+@@ -13,6 +13,8 @@ URLV = "${@d.getVar('PV')[0:4]}.${@d.getVar('PV')[4:6]}.${@d.getVar('PV')[6:8]}"
+ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz \
+            file://config.linux-cross"
  
- SRC_URI = "${GITHUB_BASE_URI}/download/${PV}/${BP}.tar.bz2"
++CVE_PRODUCT = "live555 live555_media_server live555:streaming_media live555:liblivemedia"
++
+ # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
+ MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
  
--SRC_URI[sha256sum] = "6f8fbdf4d189cf63f2a7a1549c516cd720c7b222c7aaadbc924a26e745a48539"
-+SRC_URI[sha256sum] = "53e83d284667535a767fd2d31edad1a6701591960459df373a10f1f21e80a7ed"
- 
- inherit autotools pkgconfig github-releases
- 
-@@ -15,9 +15,6 @@ PACKAGECONFIG[cdda-player] = "--with-cdda-player,--without-cdda-player,ncurses"
- PACKAGECONFIG[cddb] = "--enable-cddb,--disable-cddb,libcddb"
- PACKAGECONFIG[vcd-info] = "--enable-vcd-info,--disable-vcd-info,vcdimager"
- 
--# add -D_LARGEFILE64_SOURCE for 32bit targets
--CFLAGS += "${@['-D_LARGEFILE64_SOURCE',''][d.getVar('SITEINFO_BITS') != '32']}"
--
- PACKAGES += "${PN}-utils"
- 
- FILES:${PN} = "${libdir}/${BPN}${SOLIB}"
 
