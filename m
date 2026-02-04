@@ -2,475 +2,242 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDFABE9D414
-	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 16:29:38 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24638.1770222572019427869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DAE75E9D410
+	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 16:32:18 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24870.1770222728900853743
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 08:29:32 -0800
+ Wed, 04 Feb 2026 08:32:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e3PLNqOU;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4806dffc64cso8430325e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 08:29:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G8T/fZGg;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-430f2ee2f00so28101f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 08:32:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770222570; x=1770827370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FEyvX+RX0DkJBR4yNvVoyJhxRTmtrCn9YFDsR694Elo=;
-        b=e3PLNqOU2WJvEyemYukdgA+QO/rIdVyjkNAmk8AV9Vj/tOAJn/b4AAx7PwpT/bnmPG
-         QFl5Cf3+DRmeVYifnolu0jmbEQ1qXRzVL5ARbc9X/2J2ZbuEgtFskEbbepcoEJxbT2HK
-         GvsSQIMtz9anXTxUzX+Yl9PYQaX3rdTptJw0r/+f1EUbbcjkV4ZKY4JLJbRlLzXC1LEx
-         hVnb5a3updszhq2qJ5FPJ/c2t5Aw9EvRf2+yOqCIcWRiAnsNO2qAhHyRqk8hVwE5XH3g
-         2BdU460P9smMfE4nz01/ucZLbQ11/noeS8EIKpiagJKeYBZzfydyyJolbDUpM1XW//G2
-         6mNw==
+        d=gmail.com; s=20230601; t=1770222727; x=1770827527; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=3JhaDU7wuTwBH785iUhcyechCL43+uSSuJmRKgd8fco=;
+        b=G8T/fZGgEkKxZF3UesGyxEPbabdHAaF+DTulghZ5RKnuReMgJJNL/zBEX9GrG8J9Hp
+         ule0ImUyiEhxt4B0QwXZRQ8qsyfFStxIbSRVdEawKGnfCqwsUy55VzALSyyH1zVH/pr7
+         HBYAGyTIyHawho6Wb9mAKqigzbdFD0/uFNR1a0vqAdc+Vm0UfypWPZ/lz28QcWawiA9G
+         c5R0X2Yxlq1f4fYx3T555Ygnf3GFt74s8v8G/S2R7Z3hK4LdXxlgB2cV+TKn+mdmzjcN
+         HpJpqyjKOS2sHdvOJtJEZbtcLFk+PbLdLJNIzur6pN0hVw2cn3VH+19MZywXMvJguFBP
+         OXNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770222570; x=1770827370;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=FEyvX+RX0DkJBR4yNvVoyJhxRTmtrCn9YFDsR694Elo=;
-        b=QMMoUHZUdNfd7Uq3W+IFbcG3/g7n/lgluUsvu/mqOWUbDwoIsCsTsO0K0pe0DTuoSR
-         L/UWq8GLbjC/I4WXb2SnEgUYTIAwGUzJKMK+thAKqACLh1UBue2UukoxCx2mvsiHVYox
-         eCa2Fhk0KmyZfXAR0ypc5tMyiF+eP62xCP8F5HgvGQrhCgrQCfIjwu7qKLspBNWIQ3Ku
-         TWClemXslK98Y7nuPlFfBdvz8GxFcIy1eiJnhOAf7qFd1QaKI1Y0Zkd6aKj55umlNYFx
-         35e4ngwOiMrVFo9UMvp9BRqq9BHl8LexBvEUoVM5wqFuNRkTdxBbvPyqu0YBJm/ftvu2
-         fNTQ==
-X-Gm-Message-State: AOJu0Yz7DM80b6HCysNfkMne+QLzSMyJFFRDuapU5RULYjaOzwoO6hn/
-	IG8fU1q61e0fQbY+UOm4tK6x16WB42LuIyrBdzSwhB3CxwNWzVS6Rk/zQl3emQ==
-X-Gm-Gg: AZuq6aJCsvvFCyERlVB+rT1zYSjW1bbiOPlbepzJYzHci8JvLb4SFoD2MruPnUSnN4M
-	lViLwt6Mp4SLCiMtvpILEBo7g7WqbCI17aUDJpNP6VO9iFC4GXYZ412VLFAGNsysKOGZtHM4mJ0
-	afvl7aornEvYTxqb2LH5rWRbXKvc5o7MVdTlOL5txnx3LCs87UUHOGI0jEPpBE3GGmxq5pF9TL2
-	OSXKoBVH4QoCV2uKwGxVaQIFk7P5oeqty9vxlDPbpTRZBbRJVlOY8l2MLbfUFV1GiALTauuRpEA
-	JUDsn6iaJC4H4CYB6MR864DegOVz3Zw5/eFV6cn+drFSDWgwYdOTPFu5eGgpbm7hS1VekomIOWn
-	xCWv3oqQkye2VJPs2HgibvLK5rklfKbfCzqyEoQ8/hotsQZ9uZ1R22+d+JxpprODyqJNT0yDF/t
-	W3Bpz26sh7
-X-Received: by 2002:a05:600c:5250:b0:46e:32dd:1b1a with SMTP id 5b1f17b1804b1-4830e925fdemr49092775e9.7.1770222569854;
-        Wed, 04 Feb 2026 08:29:29 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830ec6fc89sm23293325e9.6.2026.02.04.08.29.29
+        d=1e100.net; s=20230601; t=1770222727; x=1770827527;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3JhaDU7wuTwBH785iUhcyechCL43+uSSuJmRKgd8fco=;
+        b=ExqbLPLWUnuPTtmXe5ekFl5qpG3Y0SKOgYgUuyZ8bMbzCA5KG3uTbs0q+1SUQ2IVXr
+         my4EnyA/J3W9+2zbMUJzPf74VI8zp3ip6Wx+82VSSFA8wQWVmh0VK+JZccuMPTCTqah6
+         WFYkprDxoorgNp3GykqgPSZsikaz1PSSpBqJeRPg5gLhYGciYJk7Bnzd+7PlZETSpnLf
+         OrCe+ZCLawuJDiXgC7IH8Ac7uxsCr5/Hc0C630r9d0mwi3z3io2sXwLVtsG3uvpEereX
+         IfAIdx1ggpQ6MY1tj5vamw7Ac/hwSdY/wms6V1SDuJjGKPMGY2X36rqtoCLcZ2539Mmh
+         tSgg==
+X-Gm-Message-State: AOJu0YyDXAluGWNeRWFltarzi6zbKvzf78rPao+RnBwCY2Ud9hSGqECI
+	3cdJYdaOXO0uOwrd6FY8xW0oec8xOhRWYtpurXbvxKWzVJap569+l0kqxTgLxw==
+X-Gm-Gg: AZuq6aJqjuejYvYH+uCg4Al4eQ7HSfvtQ5p3CGT8RQR4uSS+J15xVYyEyAVD2WJrmOH
+	PNiKynGev9e2l76mAffV70LBqQMHgUZFPQIw9ufYQE2SJY8+TCzW7rnzUhwty/4ur9evVw2MCz3
+	LowCq4ALK5XbOc2WMG/dz9UeyIPtFx3IMPc2zW33UXEr0lZUu4Mj5i+WWytciG27r3AmHRk0Sn1
+	Mh9FK4jhJbv8KQ0gtYlFaQwSxnKu49pTj3gLr03G2+DsUxKtgHYrqvQSJP+U3YEAQsdMsMQ1DW/
+	g+rRGQcEFcF4txg1BYIvwF3odoSu1dCsWdMeYhs49Xpy+PMspbFnTfmREFlvPlV+lVLnFqfSudO
+	2B9BRku2tZjpNQI126lRzxGXhPLxhr11ej0Fdw4xNfgG5EqtF3ILp+wsCZw6MdqGjU9bBbsf2s7
+	3yTfZnAwsS7HD0+voHxGU=
+X-Received: by 2002:a05:6000:2303:b0:435:e486:af82 with SMTP id ffacd0b85a97d-4361805d41emr5029733f8f.45.1770222727057;
+        Wed, 04 Feb 2026 08:32:07 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43617e250b2sm8305314f8f.8.2026.02.04.08.32.06
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 08:29:29 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 6/7] python3-aiohttp: patch CVE-2025-69229
-Date: Wed,  4 Feb 2026 17:29:21 +0100
-Message-ID: <20260204162924.3042284-6-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260204162924.3042284-1-skandigraun@gmail.com>
-References: <20260204162924.3042284-1-skandigraun@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Feb 2026 08:32:06 -0800 (PST)
+Message-ID: <6bbe23f5-d6c4-4919-983a-00dacb2fea65@gmail.com>
+Date: Wed, 4 Feb 2026 17:32:05 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python][whinlatter][PATCH 1/7] python3-aiohttp: patch
+ CVE-2025-69224
+To: openembedded-devel@lists.openembedded.org
+References: <1891180C1B31F030.229416@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <1891180C1B31F030.229416@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 16:29:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124141
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 16:32:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124143
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-69229
+Would like to add some notes to these changes.
+Due to the number of patches, I have prepared and executed ptests before
+sending out this series.
 
-Backport the patches referenced by the NVD advisory.
+The tests show no regression(*):
+Before the patches:
+   2321 PASS
+     10 SKIP
+     26 XFAIL
+     
+After the patches:
+   2325 PASS (there are some new tests in the patches)
+     10 SKIP
+     26 XFAIL
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../python3-aiohttp/CVE-2025-69229-1.patch    | 111 ++++++++
- .../python3-aiohttp/CVE-2025-69229-2.patch    | 255 ++++++++++++++++++
- .../python/python3-aiohttp_3.12.15.bb         |   2 +
- 3 files changed, 368 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch
+The skips happened because the tests are either for developers/debuggers
+only, the tests are for old python, they are windows specific, or they
+require Docker to run.
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch
-new file mode 100644
-index 0000000000..70feb03258
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch
-@@ -0,0 +1,111 @@
-+From 9e03b5732805f3cf3c5c249761e2fb8ace2223d3 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sat, 3 Jan 2026 03:57:17 +0000
-+Subject: [PATCH 1/2] Use collections.deque for chunk splits (#11892) (#11912)
-+
-+From: Sam Bull <git@sambull.org>
-+
-+(cherry picked from commit 271532ea355c65480c8ecc14137dfbb72aec8f6f)
-+
-+---------
-+
-+Co-authored-by: Finder <nakamurajames123@gmail.com>
-+
-+CVE: CVE-2025-69229
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/dc3170b56904bdf814228fae70a5501a42a6c712]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ aiohttp/streams.py        |  8 ++++----
-+ tests/test_http_parser.py | 14 +++++++++-----
-+ 2 files changed, 13 insertions(+), 9 deletions(-)
-+
-+diff --git a/aiohttp/streams.py b/aiohttp/streams.py
-+index 7a3f64d..108257e 100644
-+--- a/aiohttp/streams.py
-++++ b/aiohttp/streams.py
-+@@ -148,7 +148,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+         self._loop = loop
-+         self._size = 0
-+         self._cursor = 0
-+-        self._http_chunk_splits: Optional[List[int]] = None
-++        self._http_chunk_splits: Optional[Deque[int]] = None
-+         self._buffer: Deque[bytes] = collections.deque()
-+         self._buffer_offset = 0
-+         self._eof = False
-+@@ -295,7 +295,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+                 raise RuntimeError(
-+                     "Called begin_http_chunk_receiving when some data was already fed"
-+                 )
-+-            self._http_chunk_splits = []
-++            self._http_chunk_splits = collections.deque()
-+ 
-+     def end_http_chunk_receiving(self) -> None:
-+         if self._http_chunk_splits is None:
-+@@ -454,7 +454,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+                 raise self._exception
-+ 
-+             while self._http_chunk_splits:
-+-                pos = self._http_chunk_splits.pop(0)
-++                pos = self._http_chunk_splits.popleft()
-+                 if pos == self._cursor:
-+                     return (b"", True)
-+                 if pos > self._cursor:
-+@@ -527,7 +527,7 @@ class StreamReader(AsyncStreamReaderMixin):
-+         chunk_splits = self._http_chunk_splits
-+         # Prevent memory leak: drop useless chunk splits
-+         while chunk_splits and chunk_splits[0] < self._cursor:
-+-            chunk_splits.pop(0)
-++            chunk_splits.popleft()
-+ 
-+         if self._size < self._low_water and self._protocol._reading_paused:
-+             self._protocol.resume_reading()
-+diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
-+index d4c1768..b9d917f 100644
-+--- a/tests/test_http_parser.py
-++++ b/tests/test_http_parser.py
-+@@ -1223,7 +1223,8 @@ def test_http_request_chunked_payload(parser) -> None:
-+     parser.feed_data(b"4\r\ndata\r\n4\r\nline\r\n0\r\n\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-+@@ -1238,7 +1239,8 @@ def test_http_request_chunked_payload_and_next_message(parser) -> None:
-+     )
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+     assert len(messages) == 1
-+@@ -1262,12 +1264,13 @@ def test_http_request_chunked_payload_chunks(parser) -> None:
-+     parser.feed_data(b"test: test\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert not payload.is_eof()
-+ 
-+     parser.feed_data(b"\r\n")
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-+@@ -1278,7 +1281,8 @@ def test_parse_chunked_payload_chunk_extension(parser) -> None:
-+     parser.feed_data(b"4;test\r\ndata\r\n4\r\nline\r\n0\r\ntest: test\r\n\r\n")
-+ 
-+     assert b"dataline" == b"".join(d for d in payload._buffer)
-+-    assert [4, 8] == payload._http_chunk_splits
-++    assert payload._http_chunk_splits is not None
-++    assert [4, 8] == list(payload._http_chunk_splits)
-+     assert payload.is_eof()
-+ 
-+ 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch
-new file mode 100644
-index 0000000000..e67832f09e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch
-@@ -0,0 +1,255 @@
-+From e124809ca5f17e608c09fc79423f9c357208a3c5 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Sat, 3 Jan 2026 15:23:14 +0000
-+Subject: [PATCH 2/2] Limit number of chunks before pausing reading (#11894)
-+ (#11916)
-+
-+From: Sam Bull <git@sambull.org>
-+
-+(cherry picked from commit 1e4120e87daec963c67f956111e6bca44d7c3dea)
-+
-+Co-authored-by: J. Nick Koston <nick@koston.org>
-+
-+CVE: CVE-2025-69229
-+Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/4ed97a4e46eaf61bd0f05063245f613469700229]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ aiohttp/streams.py    |  25 ++++++-
-+ tests/test_streams.py | 170 ++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 194 insertions(+), 1 deletion(-)
-+
-+diff --git a/aiohttp/streams.py b/aiohttp/streams.py
-+index 108257e..9329534 100644
-+--- a/aiohttp/streams.py
-++++ b/aiohttp/streams.py
-+@@ -116,6 +116,8 @@ class StreamReader(AsyncStreamReaderMixin):
-+         "_protocol",
-+         "_low_water",
-+         "_high_water",
-++        "_low_water_chunks",
-++        "_high_water_chunks",
-+         "_loop",
-+         "_size",
-+         "_cursor",
-+@@ -145,6 +147,11 @@ class StreamReader(AsyncStreamReaderMixin):
-+         self._high_water = limit * 2
-+         if loop is None:
-+             loop = asyncio.get_event_loop()
-++        # Ensure high_water_chunks >= 3 so it's always > low_water_chunks.
-++        self._high_water_chunks = max(3, limit // 4)
-++        # Use max(2, ...) because there's always at least 1 chunk split remaining
-++        # (the current position), so we need low_water >= 2 to allow resume.
-++        self._low_water_chunks = max(2, self._high_water_chunks // 2)
-+         self._loop = loop
-+         self._size = 0
-+         self._cursor = 0
-+@@ -321,6 +328,15 @@ class StreamReader(AsyncStreamReaderMixin):
-+ 
-+         self._http_chunk_splits.append(self.total_bytes)
-+ 
-++        # If we get too many small chunks before self._high_water is reached, then any
-++        # .read() call becomes computationally expensive, and could block the event loop
-++        # for too long, hence an additional self._high_water_chunks here.
-++        if (
-++            len(self._http_chunk_splits) > self._high_water_chunks
-++            and not self._protocol._reading_paused
-++        ):
-++            self._protocol.pause_reading()
-++
-+         # wake up readchunk when end of http chunk received
-+         waiter = self._waiter
-+         if waiter is not None:
-+@@ -529,7 +545,14 @@ class StreamReader(AsyncStreamReaderMixin):
-+         while chunk_splits and chunk_splits[0] < self._cursor:
-+             chunk_splits.popleft()
-+ 
-+-        if self._size < self._low_water and self._protocol._reading_paused:
-++        if (
-++            self._protocol._reading_paused
-++            and self._size < self._low_water
-++            and (
-++                self._http_chunk_splits is None
-++                or len(self._http_chunk_splits) < self._low_water_chunks
-++            )
-++        ):
-+             self._protocol.resume_reading()
-+         return data
-+ 
-+diff --git a/tests/test_streams.py b/tests/test_streams.py
-+index 1b65f77..c5bc671 100644
-+--- a/tests/test_streams.py
-++++ b/tests/test_streams.py
-+@@ -1552,3 +1552,173 @@ async def test_stream_reader_iter_chunks_chunked_encoding(protocol) -> None:
-+ 
-+ def test_isinstance_check() -> None:
-+     assert isinstance(streams.EMPTY_PAYLOAD, streams.StreamReader)
-++
-++
-++async def test_stream_reader_pause_on_high_water_chunks(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading is paused when chunk count exceeds high water mark."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    assert stream._high_water_chunks == 10
-++    assert stream._low_water_chunks == 5
-++
-++    # Feed chunks until we exceed high_water_chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")  # 1 byte per chunk
-++        stream.end_http_chunk_receiving()
-++
-++    # pause_reading should have been called when chunk count exceeded 10
-++    protocol.pause_reading.assert_called()
-++
-++
-++async def test_stream_reader_resume_on_low_water_chunks(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading resumes when chunk count drops below low water mark."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    assert stream._high_water_chunks == 10
-++    assert stream._low_water_chunks == 5
-++
-++    # Feed chunks until we exceed high_water_chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")  # 1 byte per chunk
-++        stream.end_http_chunk_receiving()
-++
-++    # Simulate that reading was paused
-++    protocol._reading_paused = True
-++    protocol.pause_reading.reset_mock()
-++
-++    # Read data to reduce both size and chunk count
-++    # Reading will consume chunks and reduce _http_chunk_splits
-++    data = await stream.read(10)
-++    assert data == b"xxxxxxxxxx"
-++
-++    # resume_reading should have been called when both size and chunk count
-++    # dropped below their respective low water marks
-++    protocol.resume_reading.assert_called()
-++
-++
-++async def test_stream_reader_no_resume_when_chunks_still_high(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that reading doesn't resume if chunk count is still above low water."""
-++    loop = asyncio.get_event_loop()
-++    # Use small limit so high_water_chunks is small: limit // 4 = 10
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    # Feed many chunks
-++    for i in range(12):
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(b"x")
-++        stream.end_http_chunk_receiving()
-++
-++    # Simulate that reading was paused
-++    protocol._reading_paused = True
-++
-++    # Read only a few bytes - chunk count will still be high
-++    data = await stream.read(2)
-++    assert data == b"xx"
-++
-++    # resume_reading should NOT be called because chunk count is still >= low_water_chunks
-++    protocol.resume_reading.assert_not_called()
-++
-++
-++async def test_stream_reader_read_non_chunked_response(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that non-chunked responses work correctly (no chunk tracking)."""
-++    loop = asyncio.get_event_loop()
-++    stream = streams.StreamReader(protocol, limit=40, loop=loop)
-++
-++    # Non-chunked: just feed data without begin/end_http_chunk_receiving
-++    stream.feed_data(b"Hello World")
-++
-++    # _http_chunk_splits should be None for non-chunked responses
-++    assert stream._http_chunk_splits is None
-++
-++    # Reading should work without issues
-++    data = await stream.read(5)
-++    assert data == b"Hello"
-++
-++    data = await stream.read(6)
-++    assert data == b" World"
-++
-++
-++async def test_stream_reader_resume_non_chunked_when_paused(
-++    protocol: mock.Mock,
-++) -> None:
-++    """Test that resume works for non-chunked responses when paused due to size."""
-++    loop = asyncio.get_event_loop()
-++    # Small limit so we can trigger pause via size
-++    stream = streams.StreamReader(protocol, limit=10, loop=loop)
-++
-++    # Feed data that exceeds high_water (limit * 2 = 20)
-++    stream.feed_data(b"x" * 25)
-++
-++    # Simulate that reading was paused due to size
-++    protocol._reading_paused = True
-++    protocol.pause_reading.assert_called()
-++
-++    # Read enough to drop below low_water (limit = 10)
-++    data = await stream.read(20)
-++    assert data == b"x" * 20
-++
-++    # resume_reading should be called (size is now 5 < low_water 10)
-++    protocol.resume_reading.assert_called()
-++
-++
-++@pytest.mark.parametrize("limit", [1, 2, 4])
-++async def test_stream_reader_small_limit_resumes_reading(
-++    protocol: mock.Mock,
-++    limit: int,
-++) -> None:
-++    """Test that small limits still allow resume_reading to be called.
-++
-++    Even with very small limits, high_water_chunks should be at least 3
-++    and low_water_chunks should be at least 2, with high > low to ensure
-++    proper flow control.
-++    """
-++    loop = asyncio.get_event_loop()
-++    stream = streams.StreamReader(protocol, limit=limit, loop=loop)
-++
-++    # Verify minimum thresholds are enforced and high > low
-++    assert stream._high_water_chunks >= 3
-++    assert stream._low_water_chunks >= 2
-++    assert stream._high_water_chunks > stream._low_water_chunks
-++
-++    # Set up pause/resume side effects
-++    def pause_reading() -> None:
-++        protocol._reading_paused = True
-++
-++    protocol.pause_reading.side_effect = pause_reading
-++
-++    def resume_reading() -> None:
-++        protocol._reading_paused = False
-++
-++    protocol.resume_reading.side_effect = resume_reading
-++
-++    # Feed 4 chunks (triggers pause at > high_water_chunks which is >= 3)
-++    for char in b"abcd":
-++        stream.begin_http_chunk_receiving()
-++        stream.feed_data(bytes([char]))
-++        stream.end_http_chunk_receiving()
-++
-++    # Reading should now be paused
-++    assert protocol._reading_paused is True
-++    assert protocol.pause_reading.called
-++
-++    # Read all data - should resume (chunk count drops below low_water_chunks)
-++    data = stream.read_nowait()
-++    assert data == b"abcd"
-++    assert stream._size == 0
-++
-++    protocol.resume_reading.assert_called()
-++    assert protocol._reading_paused is False
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-index 55ff57d05c..84dd369753 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
-@@ -9,6 +9,8 @@ SRC_URI += "file://CVE-2025-69224.patch \
-             file://CVE-2025-69226.patch \
-             file://CVE-2025-69227.patch \
-             file://CVE-2025-69228.patch \
-+            file://CVE-2025-69229-1.patch \
-+            file://CVE-2025-69229-2.patch \
- "
- SRC_URI[sha256sum] = "4fc61385e9c98d72fcdf47e6dd81833f47b2f77c114c29cd64a361be57a763a2"
- 
+(*): there is no known regression with these backports compared to the
+patchless version, but there is a possible regression between Walnascar
+and Whinlatter.
+python3-idna (a dependency of aiohttp) was updated in oe-core to 3.11,
+and it fails 1 test, regardless of the backports - the test is trying to
+verify that funky URLs are rejected (one with invalid unicode
+characters). Using python3-idna 3.10 this test passes. With 3.11 it
+fails. (I ran the final tests with downgraded python3-idna).
+
+I plan to report this to upstream soon.
+
+
+On 2/4/26 17:29, Gyorgy Sarvari via lists.openembedded.org wrote:
+> Details: https://nvd.nist.gov/vuln/detail/CVE-2025-69224
+>
+> Backport the patch indicated by the NVD advisory.
+> Only a part of the tests were backported, because some of the
+> new tests require a compression method that is not supported
+> yet by this version.
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>  .../python3-aiohttp/CVE-2025-69224.patch      | 93 +++++++++++++++++++
+>  .../python/python3-aiohttp_3.12.15.bb         |  1 +
+>  2 files changed, 94 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+> new file mode 100644
+> index 0000000000..7f36e699fd
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+> @@ -0,0 +1,93 @@
+> +From 225412b13f66a76a7222d7719777e6162638faa3 Mon Sep 17 00:00:00 2001
+> +From: Sam Bull <git@sambull.org>
+> +Date: Sat, 3 Jan 2026 00:02:45 +0000
+> +Subject: [PATCH] Reject non-ascii characters in some headers (#11886) (#11902)
+> +
+> +(cherry picked from commit 5affd64f86d28a16a8f8e6fea2d217c99bf7831f)
+> +
+> +CVE: CVE-2025-69224
+> +Upstream-Status: Backport [https://github.com/aio-libs/aiohttp/commit/32677f2adfd907420c078dda6b79225c6f4ebce0]
+> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> +---
+> + aiohttp/_http_parser.pyx  |  6 +++---
+> + aiohttp/http_parser.py    |  8 ++++++--
+> + tests/test_http_parser.py | 16 +++++++++++++++-
+> + 3 files changed, 24 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
+> +index 16893f0..23f1dd1 100644
+> +--- a/aiohttp/_http_parser.pyx
+> ++++ b/aiohttp/_http_parser.pyx
+> +@@ -421,7 +421,8 @@ cdef class HttpParser:
+> +         headers = CIMultiDictProxy(CIMultiDict(self._headers))
+> + 
+> +         if self._cparser.type == cparser.HTTP_REQUEST:
+> +-            allowed = upgrade and headers.get("upgrade", "").lower() in ALLOWED_UPGRADES
+> ++            h_upg = headers.get("upgrade", "")
+> ++            allowed = upgrade and h_upg.isascii() and h_upg.lower() in ALLOWED_UPGRADES
+> +             if allowed or self._cparser.method == cparser.HTTP_CONNECT:
+> +                 self._upgraded = True
+> +         else:
+> +@@ -436,8 +437,7 @@ cdef class HttpParser:
+> +         enc = self._content_encoding
+> +         if enc is not None:
+> +             self._content_encoding = None
+> +-            enc = enc.lower()
+> +-            if enc in ('gzip', 'deflate', 'br'):
+> ++            if enc.isascii() and enc.lower() in {"gzip", "deflate", "br"}:
+> +                 encoding = enc
+> + 
+> +         if self._cparser.type == cparser.HTTP_REQUEST:
+> +diff --git a/aiohttp/http_parser.py b/aiohttp/http_parser.py
+> +index 9f864b2..bc8f7da 100644
+> +--- a/aiohttp/http_parser.py
+> ++++ b/aiohttp/http_parser.py
+> +@@ -232,7 +232,9 @@ class HeadersParser:
+> + 
+> + def _is_supported_upgrade(headers: CIMultiDictProxy[str]) -> bool:
+> +     """Check if the upgrade header is supported."""
+> +-    return headers.get(hdrs.UPGRADE, "").lower() in {"tcp", "websocket"}
+> ++    u = headers.get(hdrs.UPGRADE, "")
+> ++    # .lower() can transform non-ascii characters.
+> ++    return u.isascii() and u.lower() in {"tcp", "websocket"}
+> + 
+> + 
+> + class HttpParser(abc.ABC, Generic[_MsgT]):
+> +@@ -664,7 +666,9 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
+> +         )
+> + 
+> +     def _is_chunked_te(self, te: str) -> bool:
+> +-        if te.rsplit(",", maxsplit=1)[-1].strip(" \t").lower() == "chunked":
+> ++        te = te.rsplit(",", maxsplit=1)[-1].strip(" \t")
+> ++        # .lower() transforms some non-ascii chars, so must check first.
+> ++        if te.isascii() and te.lower() == "chunked":
+> +             return True
+> +         # https://www.rfc-editor.org/rfc/rfc9112#section-6.3-2.4.3
+> +         raise BadHttpMessage("Request has invalid `Transfer-Encoding`")
+> +diff --git a/tests/test_http_parser.py b/tests/test_http_parser.py
+> +index 385452c..d4c1768 100644
+> +--- a/tests/test_http_parser.py
+> ++++ b/tests/test_http_parser.py
+> +@@ -468,7 +468,21 @@ def test_request_chunked(parser) -> None:
+> +     assert isinstance(payload, streams.StreamReader)
+> + 
+> + 
+> +-def test_request_te_chunked_with_content_length(parser: Any) -> None:
+> ++def test_te_header_non_ascii(parser: HttpRequestParser) -> None:
+> ++    # K = Kelvin sign, not valid ascii.
+> ++    text = "GET /test HTTP/1.1\r\nTransfer-Encoding: chunKed\r\n\r\n"
+> ++    with pytest.raises(http_exceptions.BadHttpMessage):
+> ++        parser.feed_data(text.encode())
+> ++
+> ++
+> ++def test_upgrade_header_non_ascii(parser: HttpRequestParser) -> None:
+> ++    # K = Kelvin sign, not valid ascii.
+> ++    text = "GET /test HTTP/1.1\r\nUpgrade: websocKet\r\n\r\n"
+> ++    messages, upgrade, tail = parser.feed_data(text.encode())
+> ++    assert not upgrade
+> ++
+> ++
+> ++def test_request_te_chunked_with_content_length(parser: HttpRequestParser) -> None:
+> +     text = (
+> +         b"GET /test HTTP/1.1\r\n"
+> +         b"content-length: 1234\r\n"
+> diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
+> index b6344d4c68..4341e128a5 100644
+> --- a/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
+> +++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.12.15.bb
+> @@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+>  LICENSE = "Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+>  
+> +SRC_URI += "file://CVE-2025-69224.patch"
+>  SRC_URI[sha256sum] = "4fc61385e9c98d72fcdf47e6dd81833f47b2f77c114c29cd64a361be57a763a2"
+>  
+>  inherit python_setuptools_build_meta pypi
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124136): https://lists.openembedded.org/g/openembedded-devel/message/124136
+> Mute This Topic: https://lists.openembedded.org/mt/117637134/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+
 
