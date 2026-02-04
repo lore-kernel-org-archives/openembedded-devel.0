@@ -1,133 +1,152 @@
-Return-Path: <adam.duskett@amarulasolutions.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D427BE9D3E7
-	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 14:28:47 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21545.1770215321141980053
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 209F8E9D3E8
+	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 14:36:18 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21710.1770215769115708473
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 06:28:41 -0800
+ Wed, 04 Feb 2026 06:36:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=GB85OdfG;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.208.47, mailfrom: adam.duskett@amarulasolutions.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-658b29889d6so725009a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 06:28:40 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=iZ3eoq+d;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-482f2599980so41690125e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 06:36:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1770215319; x=1770820119; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KVfT6xXA5aAozbBxKZZ5P0jt9x+bnigN0qbTo+v7RHE=;
-        b=GB85OdfGglKQWN5t7l6WaWpOuu8lM0ixGQLGDjxdh9KX41gjTbeCsgL1AUa3pjzt1g
-         UIJyKDN6FjTXL7t6RgrY7//JtVrWy30fv7BoWpbVfSAidfenNubpvtSqFaRCjH2wG9aN
-         Oht4x8cYdiMTK64wB3rZtdZdYVxV0SHAb7+ZM=
+        d=konsulko.com; s=google; t=1770215767; x=1770820567; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lgsVtM/KZ/JeBXaeCCwbOFFKe76TjJavBP5U8Z0ZYkk=;
+        b=iZ3eoq+dJX58vmJyFPb2diQjOtdY+NZx9mn/q7AU60DQCaTHdedBtYR0rnQvpnF2qG
+         TDasNsQkJ1We51+hyYOYIauuKghym6PQPSAI3t1Msa+BUrCDSgIS1z5++HmhiRUP/0mi
+         suLwrgX6VwZw15eCqDaaeFpIKWkZpErCANcz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770215319; x=1770820119;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=KVfT6xXA5aAozbBxKZZ5P0jt9x+bnigN0qbTo+v7RHE=;
-        b=gEWddFpBPlvH7FJDnGi5z3pUL4s2gJPv9LXfHD0yducADK0lS9qM0pg0ua0Wy4suce
-         2W/sHWWXeAuib5ibFJ1zSYBmGyuW5NOUFcQ8t5Ge92YePrdxxRQad60wW/rvpbOthgjY
-         V/JuIcG16QeIo2mbfloOrTGuoVar/uE+s2ueBdfHQq8I06ZR4jra5SZ8OTbdlyWZRchU
-         epeXSGmg0mJGDhyS+42bshfpLWkXlvNjqlfGzvNAUDsMHQ3EFMicPw8J1/EsDIWgN82t
-         lPP5ESoUtxxkzVG8sftyJ/RroAyo1KIJKF5ArIhRIhGrCCGsFxRR239Hal8NL1cc69pu
-         VlVg==
-X-Gm-Message-State: AOJu0YzJwtV/fJd1XDaLyvY4IWQzHeJMhDglNuLQCjkwYqAJ4FXiclk+
-	KIIt3C1YqsMWoF4nK7iTGeo5pg3tczfy1LlIvcy3uGo0WRrTiSvoufGCguLLJoIA+VsWwRVDLR6
-	8pK9T
-X-Gm-Gg: AZuq6aKFayxmvawqUtjfnP+jGiPjhQWRc9n9eCdgxYbkQTiXw+vhLA2EmXw9Ods3ojE
-	ji4kDNPX6n2SgZFgObyU73ECHLrmNXFi4fe882UQGRr6R/XwFtbP4RJgIBIXou8Z5cPsse7eJav
-	pwoRQCc/0oorTcziRAnZhf7FRC7nCU3j9Zqo/RYykUEI2fXOOCSGk0KtV+pNkm3yhVG2oYErcwT
-	SEjQop21CaY4GKCSzsmNanFuvuUBTYg/PSgX0/iXn5fse0VRZueHsf+BrnnEzRyDEOjhG5Ly2qG
-	pWJL7qz6JhbAyoO9pPVDp6Q1m4bbcnpTyKgJVfDkr3p5KKW+Ru1aF7297/i7+uYatloqeWbo1Ji
-	m8Ow/CjIrN2jfn6Mvq8iz4vf8Vu0RoUf7X248pujwmRnoZy7xLr3l2UnBaknKYiQiUYgktRuDtZ
-	4Lqbh1ScwLbsJQIWz5uoU1tumYXdSeHxMDphp4d7ByGUjuZq/kuNeAKA5aNlbWu7OsN49+qYb/A
-	L7+Cs/lWplhDgFpkCtH2V7lnN+oVIO2PSbdDIXCCESGkh1BSnn1
-X-Received: by 2002:a05:6402:13ce:b0:659:3f9d:757b with SMTP id 4fb4d7f45d1cf-659499b8e05mr1192323a12.2.1770215319383;
-        Wed, 04 Feb 2026 06:28:39 -0800 (PST)
-Received: from adam.arnhem.chello.nl (2001-1c00-8101-1200-3ddc-5bb8-0efa-16f1.cable.dynamic.v6.ziggo.nl. [2001:1c00:8101:1200:3ddc:5bb8:efa:16f1])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6594a23525fsm1232598a12.35.2026.02.04.06.28.38
+        d=1e100.net; s=20230601; t=1770215767; x=1770820567;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lgsVtM/KZ/JeBXaeCCwbOFFKe76TjJavBP5U8Z0ZYkk=;
+        b=OsfBfYEUUWj/BX5ik5tH95KpC5G45Pgrv6p9kDZFZJ0H4r/Gb7x11ALavoNBm1v/gZ
+         VQr+dMOiG7MNnmku0YZ5V2yZuuQ6bfW99pju8U7zsTKjYUcZz+UR0fekP6ERrBMnvLSK
+         +74RWQ3dKvrZPo0vVoWeroTbTsvgDuZgOceaKNUBmj8PhDBjb79Q0dXXvadVr7mEDLnu
+         /PB7OITTw3vjq1uccQKN7CAs9BsZ9bc3asFJkB0LRgvdvDw6fOpeM5iDxeQ604uM0Y1j
+         ySkkLiSe0XCekej6grlUZj4v7E9U+CsJMX1TlgMiZHBgFYoPTH1F6hj0DinxXpdwTiOY
+         uRTQ==
+X-Gm-Message-State: AOJu0YyOYU6LQZcUHPCP7wy2kFBKNnclIChiiwT2G5A3kYoQV1xK+yPN
+	AGH4wKidcDmIUqnBQ+0f0wZ5Bq/PiRRoFg2drtmU6JSCL6cVpxhFSLc6SLI2jlGgHKj0ezsG2p4
+	Fbg/Fhuc=
+X-Gm-Gg: AZuq6aK1tyix4I7+2Aya+OlpPuI5nkJ1QHe3Rtgd36RmxzI9mU18I7I+nhbnIUtJ94Y
+	OzAGxSe1waizw2GOotnrw3VMVTizgkaoe9N3rw/2JVpadI5IHK1hjv8pEF3C6+0iscTAeBl2bcc
+	ziysjr912CZTHvoUC8hgLqoH9kxplvCpMVRCzYdzmYgQkVnSy4abAF71X6jWL/WUfAojIy9ZqYm
+	d9iGPgQVNXBmfkTWDUTiba8wL68WBRetzjzb62ap18uqs3GDLDuilMOLxOji0dE82UM+yvHnWjw
+	59zovkVPjNPeo0J6xBv+wZxstdijjhl1AhD0QK5rzk67ax8Fx70sqnynUQbRsQmuAnIPyEGCjsO
+	naCIDM6zOF34w+Aub1xaKceZfneOcY5LGHWMaoUvvDBcXw3NEPzwrcBp040Si3vdrKtBcNY/soa
+	0f2NFBM9tJzWa1v939BQgL1cvl
+X-Received: by 2002:a05:600c:c04b:10b0:483:a21:774a with SMTP id 5b1f17b1804b1-4830e9926cbmr32916745e9.26.1770215766590;
+        Wed, 04 Feb 2026 06:36:06 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483108ec315sm43864095e9.8.2026.02.04.06.36.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 06:28:38 -0800 (PST)
-From: Adam Duskett <adam.duskett@amarulasolutions.com>
+        Wed, 04 Feb 2026 06:36:06 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
-Subject: [PATCH 2/2] kmscon: bump version to 9.3.1
-Date: Wed,  4 Feb 2026 15:28:35 +0100
-Message-ID: <20260204142835.2157554-2-adam.duskett@amarulasolutions.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260204142835.2157554-1-adam.duskett@amarulasolutions.com>
-References: <20260204142835.2157554-1-adam.duskett@amarulasolutions.com>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCH] valkey: Upgrade 9.0.1 -> 9.0.2
+Date: Wed,  4 Feb 2026 16:36:03 +0200
+Message-ID: <20260204143603.1103031-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 14:28:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124128
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 14:36:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124129
 
-  - The kmscon.conf file in the source is renamed to kms.conf.example
-    To keep the same behavior as the previous versions, kms.conf.example
-    is moved to ${sysconfdir}/kmscon/kmscon.conf before running sed.
+Upgrade to release 9.0.2:
 
-  - The render-engine config option has been removed as of commit
-    59eef2a154f78101195ad8ff08376e2418e773f0.
+- Avoid memory leak of new argv when HEXPIRE commands target only
+  non-exiting fields
+- Fix HINCRBY and HINCRBYFLOAT to update volatile key tracking
+- Avoid empty hash object when HSETEX added no fields
+- Fix case-sensitive check for the FNX and FXX arguments in HSETEX
+- Prevent assertion in active expiration job after a hash with
+  volatile fields is overwritten
+- Fix HRANDFIELD to return null response when no field could be
+  found
+- Fix HEXPIRE to not delete items when validation rules fail and
+  expiration is in the past
+- Fix how hash is handling overriding of expired fields overwrite
+- HSETEX - Always issue keyspace notifications after validation
+- Make zero a valid TTL for hash fields during import mode and data
+  loading
+- Trigger prepareCommand on argc change in module command filters
+- Restrict TTL from being negative and avoid crash in import-mode
+- Fix chained replica crash when doing dual channel replication
+- Skip slot cache optimization for AOF client to prevent key
+  duplication and data corruption
+- Fix used_memory_dataset underflow due to miscalculated
+  used_memory_overhead
+- Avoid duplicate calculations of network-bytes-out in slot stats
+  with copy-avoidance
+- Fix XREAD returning error on empty stream with + ID
+- Track reply bytes in I/O threads if commandlog-reply-larger-than
+  is -1
+- This makes it possible to mitigate a performance regression in
+  9.0.1 caused by the related bug fix
 
-Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+Fixes references to TMPDIR [buildpaths] and avoids [already-stripped].
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../kmscon/{kmscon_9.2.1.bb => kmscon_9.3.1.bb}   | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
- rename meta-oe/recipes-graphics/kmscon/{kmscon_9.2.1.bb => kmscon_9.3.1.bb} (75%)
+ .../valkey/{valkey_9.0.1.bb => valkey_9.0.2.bb}        | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/valkey/{valkey_9.0.1.bb => valkey_9.0.2.bb} (87%)
 
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
-similarity index 75%
-rename from meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-rename to meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
-index 508f24c58e..ea579d42b4 100644
---- a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
-@@ -19,17 +19,13 @@ DEPENDS = "\
-     udev \
- "
+diff --git a/meta-oe/recipes-extended/valkey/valkey_9.0.1.bb b/meta-oe/recipes-extended/valkey/valkey_9.0.2.bb
+similarity index 87%
+rename from meta-oe/recipes-extended/valkey/valkey_9.0.1.bb
+rename to meta-oe/recipes-extended/valkey/valkey_9.0.2.bb
+index 1f27224772..3334f57599 100644
+--- a/meta-oe/recipes-extended/valkey/valkey_9.0.1.bb
++++ b/meta-oe/recipes-extended/valkey/valkey_9.0.2.bb
+@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/valkey-io/valkey.git;branch=9.0;protocol=https;tag=$
+            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+            file://GNU_SOURCE-7.patch \
+            "
+-SRCREV = "ab3c953b80289d88991095f53c1235fc2f8b44d6"
++SRCREV = "1ac4cfe4c877a6cb8cb2e28fa7094055ac06f64b"
  
--SRC_URI = "\
--    git://github.com/kmscon/kmscon;branch=main;protocol=https \
--    file://0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch \
--"
--SRCREV = "7d46650dbb0826f9b89de42f879be879391c14fd"
-+SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
-+SRCREV = "e44ff728e51c5a38b56392abe9bc3e8306db86cc"
+ RPROVIDES:${PN} = "virtual-redis"
  
- inherit meson pkgconfig systemd
+@@ -44,6 +44,11 @@ do_compile() {
+ }
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
- 
--PACKAGECONFIG[backspace_sends_delete] = "-Dbackspace_sends_delete=true, -Dbackspace_sends_delete=false"
- PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
- PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
- PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
-@@ -53,17 +49,12 @@ do_install:append() {
-         install -d ${D}${sysconfdir}/systemd/system
-         ln -sf ${systemd_system_unitdir}/kmsconvt@.service \
-             ${D}${sysconfdir}/systemd/system/autovt@.service
--    else
--        # kmscon always installs service files.
--        # If systemd and usrmerge are not in DISTRO_FEATURES, packaging errors
--        # occur because service files are installed to /usr/lib/systemd/system/kmscon.service.
--        rm -rf ${D}${libdir}/systemd
-     fi
- 
-     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', d)}; then
-+        mv ${D}${sysconfdir}/kmscon/kmscon.conf.example ${D}${sysconfdir}/kmscon/kmscon.conf
-         sed -e "s@#drm@drm@g" \
-             -e "s@#hwaccel@hwaccel@g" \
--            -e "s@#render-engine=gltex@render-engine=gltex@g" \
-             -i ${D}${sysconfdir}/kmscon/kmscon.conf
+ do_install() {
++    # Remove debug paths to avoid TMPDIR [buildpaths] errors
++    sed -i -e 's#${TMPDIR}##g' ${UNPACKDIR}/${PN}-${PV}/src/valkey-benchmark
++    sed -i -e 's#${TMPDIR}##g' ${UNPACKDIR}/${PN}-${PV}/src/valkey-server
++    sed -i -e 's#${TMPDIR}##g' ${UNPACKDIR}/${PN}-${PV}/src/valkey-cli
++
+     export PREFIX=${D}/${prefix}
+     oe_runmake install
+     install -d ${D}/${sysconfdir}/valkey
+@@ -63,6 +68,7 @@ do_install() {
      fi
  }
+ 
++
+ CONFFILES:${PN} = "${sysconfdir}/valkey/valkey.conf"
+ 
+ INITSCRIPT_NAME = "valkey-server"
+@@ -71,3 +77,5 @@ INITSCRIPT_PARAMS = "defaults 87"
+ SYSTEMD_SERVICE:${PN} = "valkey.service"
+ 
+ CVE_STATUS[CVE-2022-3734] = "not-applicable-platform: CVE only applies for Windows."
++
++INSANE_SKIP:${PN} = "already-stripped"
 -- 
-2.52.0
+2.47.3
 
 
