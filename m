@@ -2,167 +2,205 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD19E83EF5
-	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 08:57:35 +0000 (UTC)
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16291.1770195453240311817
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E5AFE95367
+	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 09:34:26 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16733.1770197661024391118
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 00:57:33 -0800
+ Wed, 04 Feb 2026 01:34:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N+LnBIPD;
- spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f66.google.com with SMTP id 5b1f17b1804b1-4806f9e61f9so34109855e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 00:57:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SGYy9Gxq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-482f2599980so38143715e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 01:34:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770195451; x=1770800251; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hET9oczHyKb0xfCdXiP/3FsTd1soQ5rEIkncCIOWt0E=;
-        b=N+LnBIPDZGG1INtPlqXTJh3hrgQL3dCQZJZbQ3xSc7QahpjBDkTfClq+zR2fBmRlJz
-         A2SCyom+sSsdcgYPlXaOp7RwEZ6CKV3NRbvUDDD3kxAnbKv0ir1fHtW9CQQ0meOY4tEh
-         W7n7+/wxdZR0oJhSpVWO8F6Mp0SvJq89wJAkYkjMN5l9n2Bw8b67zG5PJQbymJjaHrMA
-         L8PlDT2T0kBlgbRjehD2kvfUh3Shp2ib5GoUwY1vz8Cinbhfw0sqqLkR2BOdXpVQAWY9
-         /yWka9tRiKg7jBwtx2JVJKk/TH9udoVZQaU9upt1US69bDKh4vitTvt6LZHU3o+1bxtR
-         MS3g==
+        d=gmail.com; s=20230601; t=1770197659; x=1770802459; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Y/BHfwJPuJoqzCHZImvDylVeDy56U4TXabbTvIllPqs=;
+        b=SGYy9GxqXu8xBh0BxjHl+EYI41Y9ts2h6OQqwW4/xAEjln5vuwtpfdFR4JMy4szDml
+         uoKRDQonnPCxjN/OCZQTFZbB2gX9+ypFlTVe9JtPK1saZbjjuuPHd3VDNMc0pvpxWn7+
+         /HDn/2kobHcX3BMZ6dl1snM/MuirlIzKHt0qe0iWgORlE8wydLxRpZZ8LffnM35F2DiO
+         7hRWSliPwgSfQ2dkkIh5MpwrcTqVWaw8TQCAJH/VUtDRX0Al4+T3pNZSFrYWF0qy071P
+         u39d16o1oLcts+4dGjzUx2wcj04/oaTd3tQubXJNhS0asCxCnbafNcUDp2Nu9BVA0jv/
+         zvgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770195451; x=1770800251;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hET9oczHyKb0xfCdXiP/3FsTd1soQ5rEIkncCIOWt0E=;
-        b=JBfj+2BaKSR1a9R3cznF0jkoAgAvHuUyyVgUQLob/m2Iem8loQfXEffsDvTpqFY92+
-         GNDNlzuv/amR/vy7OoZGeLvDWyQ8iLNyXFMo5HeSnez6jL/+U6eSn6xkx4aqrbUc1b6i
-         GocplBR7THhxbFHJd5jeuGDPch8UIhe5hMcylte+Cq7s34tTR7ZZxLnpGE2zzMf0MwIW
-         I4z+peTkdaRjHpMODvmefFcLTTPdmGlMmMTZ7U5y8esw2IVTlbQOme2/KeupE5MGQcG4
-         SMHZ+bae9aKyETQhv7msw0OMEniK/qzmkmrETDm1e3tGFJJZ8L16YKFtftXUhKl3p/2s
-         cfnA==
-X-Gm-Message-State: AOJu0YzQMkq1bmzuxLAF5Z9VtB9CpfnMSjrbX6yNgJPd/z5ifCxbYjir
-	vz+lBenTfHJcCTfIr+iEa7Y5i3TQYNheyXqGqwUfOI2lTq6raPrrVNQc1ebrreca
-X-Gm-Gg: AZuq6aIkGLWVkiBzwx6EJEtHIBAvFriUyglZbypVfiM3u6heY3pd6cGkkDkjYJDUUsm
-	iR0uuvgaIDoxFjPe0fpELf1bzpFzmV/gwXg7yuCFFdCeQ4+DVzYBs0BG0edLi9xGKy/l0BVhqt2
-	f1rhDtOgUnHbz0RVFimWmis6EB2P6hlmnJ1VP+i0D+8NQY09rxkIpjEcxXudapD3yieJCWAtf/N
-	HjdICbN4D+cuOiDiyAHogbqvE13efDaYyJiLALYMX2O+B78m5lsxLbn0haUXhRjIP+MJqm8Ehu8
-	cPGdrVCPxkqbXSysai2I43xI1Er78h/nu/sEBH6in27XNtdqgxmIQgL1AIElzvzx2CBy1Cj2Kfz
-	6SKAfAnhXXNzPPb2IXgdEsBvkWbSH0iNBgicDBrdYeAef4KSVQuYkgnybslz3AR1gO2KwmwF67g
-	iRSTSZFsva
-X-Received: by 2002:a05:600c:350e:b0:471:700:f281 with SMTP id 5b1f17b1804b1-4830e973685mr28384425e9.25.1770195451320;
-        Wed, 04 Feb 2026 00:57:31 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830ffc39b8sm15360525e9.17.2026.02.04.00.57.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 00:57:30 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: hongxu.jia@windriver.com
-Subject: [meta-oe][PATCH] nodejs: extend libatomic patch to x86
-Date: Wed,  4 Feb 2026 09:57:30 +0100
-Message-ID: <20260204085730.2441346-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20230601; t=1770197659; x=1770802459;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Y/BHfwJPuJoqzCHZImvDylVeDy56U4TXabbTvIllPqs=;
+        b=kp5zt5ttr7zYoDik9Tf34/h0CNPAaAuBWkYc1UI1HVCO1ic9VWcjB2I14QcYTUTwg/
+         GH/3hdq8F0hiOzGncLs2wqzncAkf3PVRgDEMIINjuq/MBPRHPQhiymyDHJYGUP3qVd1p
+         tMilVbisQwiIaCLEO34fGS/DsugHmlKnoZA/0H0rUiPdn9bUXu1qsolNUoJBdDskALoF
+         xeoGgJliQ89EonDzBf0Dgggj6TsF5LVtKXwWHsUr7u11ma+eiVYjR7NA6LS0nA5r5Xpp
+         QsL4OcUFL1k3zkMvx2564lI/uIGAz3bxpko1EAbpDMflaSXsWvmuM4GdV1nF+sxqcP5N
+         cwBA==
+X-Gm-Message-State: AOJu0YwY1Aav1/cDmKm2tD4amJIFZm9xCWxwKjppTBDk4/jvHMao2keA
+	MXfm8DAU/ZaLBfOwWShFTFM0kBLLnRi89JtH09zXYxl58Lb8yEv6VwPu
+X-Gm-Gg: AZuq6aIXuvIsKNSmhLW42yO7fnBDXqcbSqi6a4/+gjtQj5P7a4esjEGLvEsLj7wQt4c
+	nnqEAvo4bx6oCdGWJbpazR7HukbeyLKxhs3eZKe5U40qBplQT7410zqHsFJMr9q1ouH1iNpO08S
+	J31YZ6hwEzYnE0xuwzkIjZMberqKT4p34GhhhrsnQISxw/nfyWOJWNjl6kw3rVSl9hcpWuxfcB9
+	zJ9hsoKAOud+YKnmxs+CaJfOL+WO+0i6FrOAvehhTFjERbMRy9ZfkXcAqCkoTJ1IgQO9WdOzIpB
+	AT2Zur30fbfqOsJiEW5uq7m2mTkW8+3f8zzS7EvgBmfaYewZtjnjAFUZfc55oY/qGoBZf0PuK5W
+	aoMEyEjpGzwg1lkWwTcLyagL9Fkr3HEx/NWOvCGEDOyRZFQi9DhDRwH/A//VPaMRxai0+wWVTD0
+	IZQcdT9HKcejv0NxB1uj4=
+X-Received: by 2002:a05:600c:8b0f:b0:471:13dd:bae7 with SMTP id 5b1f17b1804b1-4830e99dd3emr33550805e9.30.1770197659194;
+        Wed, 04 Feb 2026 01:34:19 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm14041615e9.10.2026.02.04.01.34.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 04 Feb 2026 01:34:18 -0800 (PST)
+Message-ID: <54ec6b29-5d8b-4504-8aa5-0a359a3709de@gmail.com>
+Date: Wed, 4 Feb 2026 10:34:18 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][whinlatter][PATCH 13/15] nodejs: upgrade 22.21.1
+ -> 22.22.0
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260202211401.1287664-1-skandigraun@gmail.com>
+ <20260202211401.1287664-13-skandigraun@gmail.com>
+ <CADySD0EAw8EY+gHxRU23RLn+2=pKfda1YWWuis1z1DXeAF6-UQ@mail.gmail.com>
+ <20c9fdae-9dd0-4a1e-b709-c7d668bb03d5@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20c9fdae-9dd0-4a1e-b709-c7d668bb03d5@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 08:57:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124121
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 09:34:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124122
 
-This patch isn't intended to introduce new behavior, rather it
-changes the order of some existing LDFLAGS to fix a workaround that
-stopped working at some point in the past.
+On 2/3/26 22:50, Gyorgy Sarvari wrote:
+>
+> On 2/3/26 10:55, Ankur Tyagi wrote:
+>> Hi Gyorgy,
+>>
+>> Getting following error when building for qemux86 with musl and clang
+>>
+>> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky-linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-musl/i686-poky-linux-musl-ld:
+>> /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/bits/atomic_base.h:1090:(.text._ZN2v88internal12_GLOBAL__N_120ElementsAccessorBaseINS1_21TypedElementsAccessorILNS0_12ElementsKindE37EdEENS1_18ElementsKindTraitsILS4_37EEEE27CopyTypedArrayElementsSliceENS0_6TaggedINS0_12JSTypedArrayEEESB_jj+0xe05):
+>> undefined reference to `__atomic_store'
+>> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky-linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-musl/i686-poky-linux-musl-ld:
+>> /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky-linux-musl/nodejs/22.22.0/sources/node-v22.22.0/out/Release/obj.host/v8_base_without_compiler/deps/v8/src/objects/elements.o:
+>> in function `std::remove_volatile<double>::type
+>> std::__atomic_impl::load<double>(double const*, std::memory_order)':
+>> | /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/bits/atomic_base.h:1099:(.text._ZN2v88internal12_GLOBAL__N_121TypedElementsAccessorILNS0_12ElementsKindE37EdE15GetInternalImplEPNS0_7IsolateENS0_6HandleINS0_8JSObjectEEENS0_13InternalIndexE+0x7c):
+>> undefined reference to `__atomic_load'
+>> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky-linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-musl/i686-poky-linux-musl-ld:
+>> /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/bits/atomic_base.h:1099:(.text._ZN2v88internal12_GLOBAL__N_120ElementsAccessorBaseINS1_21TypedElementsAccessorILNS0_12ElementsKindE38EhEENS1_18ElementsKindTraitsILS4_38EEEE27CopyTypedArrayElementsSliceENS0_6TaggedINS0_12JSTypedArrayEEESB_jj+0x549):
+>> undefined reference to `__atomic_load'
+>>
+>> Can you please have a look into it?
+> I don't think that I can unfortunately. It seems to be something with
+> the -latomic LDFLAG. I *think* that the problem is the library order in
+> the linker invocation. libatomic appears very early in the command,
+> before any other resource, and I think it should appear at the end. But
+> I'm not familiar with gyp, and nodejs takes 30 minutes to show that my
+> try about reordering the flags was unsuccessful.
+>
+> As a sidenote, it is not a regression from this patch, it has the same
+> issue with the current version also - but if it's a stopper for
+> Whinlatter, feel free to drop this. I might take another shot at it in
+> the future.
+>
 
-LDFLAGS:x86 contains libatomic, because linking with this library
-is required for this platform.
+I had a sleep since, and it frequently helps with annoying problems.
 
-However when gyp links, it invokes the following (pseudo-)command:
-$LD $LDFLAGS $RESOURCES_TO_LINK $EXTRA_LIBS $EXTRA_LDFLAGS
+I have a potential fix[1], but first I want to run it thru master to see
+if anyone has a better idea. It can be cherry-picked if it makes its way
+to master successfully (which has the this problem also).
 
-The EXTRA* arguments are coming from the gyp config. Since
-LDFLAGS appears very early in the command, libatomic also
-appears early amongst the resources, and the linker couldn't
-find the relevant symbols when compiled for x86 platform (as
-it was processed the very last):
+Meanwhile feel free to test it if you want to, the patch should apply
+clean on Whinlatter.
 
-| [...] undefined reference to `__atomic_compare_exchange'
+[1]: https://lists.openembedded.org/g/openembedded-devel/message/124121
 
-Using this patch the library appears at the end, along with
-the other EXTRA_LIBS, after the list of linked resources,
-allowing linking to succeed.
+>> cheers
+>> Ankur
+>>
+>>
+>> On Tue, Feb 3, 2026 at 10:14 AM Gyorgy Sarvari via
+>> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+>> wrote:
+>>> From: Jason Schonberg <schonm@gmail.com>
+>>>
+>>> This is the December 2025 security release that the nodejs team released
+>>> January 13, 2026.
+>>>
+>>>   3 high severity issues.
+>>>   4 medium severity issues.
+>>>   1 low severity issue.
+>>>
+>>> High priority fixes:
+>>>   CVE-2025-55131
+>>>   CVE-2025-55130
+>>>   CVE-2025-59465
+>>>
+>>> Medium priority fixes:
+>>>   CVE-2025-59466
+>>>   CVE-2025-59464
+>>>   CVE-2026-21636 *
+>>>   CVE-2026-21637
+>>>
+>>> Low priority fixes:
+>>>   CVE-2025-55132
+>>>
+>>> * note that this medium priority CVE only effects Nodejs v25.
+>>>
+>>> https://nodejs.org/en/blog/vulnerability/december-2025-security-releases
+>>>
+>>> Changelog: https://github.com/nodejs/node/releases/tag/v22.22.0
+>>>
+>>> Signed-off-by: Jason Schonberg <schonm@gmail.com>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> (cherry picked from commit 0bb156371e433cf3e9fdc4291da2319d63a83575)
+>>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>>> ---
+>>>  .../oe-npm-cache                                                | 0
+>>>  ...oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} | 0
+>>>  .../nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb}             | 2 +-
+>>>  3 files changed, 1 insertion(+), 1 deletion(-)
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.21 => nodejs-oe-cache-22.22}/oe-npm-cache (100%)
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} (100%)
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb} (98%)
+>>>
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-npm-cache
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/oe-npm-cache
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-npm-cache
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.22.bb
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.21.bb
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.22.bb
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
+>>> similarity index 98%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
+>>> index ccaf9f7bb2..443cdc430d 100644
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
+>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
+>>> @@ -39,7 +39,7 @@ SRC_URI:append:class-target = " \
+>>>  SRC_URI:append:toolchain-clang:powerpc64le = " \
+>>>             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+>>>             "
+>>> -SRC_URI[sha256sum] = "487d73fd4db00dc2420d659a8221b181a7937fbc5bc73f31c30b1680ad6ded6a"
+>>> +SRC_URI[sha256sum] = "4c138012bb5352f49822a8f3e6d1db71e00639d0c36d5b6756f91e4c6f30b683"
+>>>
+>>>  S = "${UNPACKDIR}/node-v${PV}"
+>>>
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#124086): https://lists.openembedded.org/g/openembedded-devel/message/124086
+>>> Mute This Topic: https://lists.openembedded.org/mt/117604901/3619737
+>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [ankur.tyagi85@gmail.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../nodejs/nodejs/libatomic.patch             | 29 +++++++++++++++----
- .../recipes-devtools/nodejs/nodejs_22.22.0.bb |  2 --
- 2 files changed, 24 insertions(+), 7 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch b/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
-index d987ac50be..835c7018de 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/libatomic.patch
-@@ -17,6 +17,10 @@ Fix:
- Upstream-Status: Inappropriate [OE specific]
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
-+Added libatomic library explicitly to x86 targets.
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
- ---
-  node.gyp                 | 13 ++++++++++++-
-  tools/v8_gypfiles/v8.gyp | 15 ++++++++++++---
-@@ -26,7 +30,7 @@ diff --git a/node.gyp b/node.gyp
- index b425f443..f296f35c 100644
- --- a/node.gyp
- +++ b/node.gyp
--@@ -487,7 +487,18 @@
-+@@ -503,7 +503,18 @@
-          ],
-        }],
-        ['OS=="linux" and clang==1', {
-@@ -50,7 +54,7 @@ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
- index b23263cf..dcabf4ca 100644
- --- a/tools/v8_gypfiles/v8.gyp
- +++ b/tools/v8_gypfiles/v8.gyp
--@@ -1100,9 +1100,18 @@
-+@@ -1348,9 +1348,18 @@
-          # Platforms that don't have Compare-And-Swap (CAS) support need to link atomic library
-          # to implement atomic memory access
-          ['v8_current_cpu in ["mips64", "mips64el", "ppc", "arm", "riscv64", "loong64"]', {
-@@ -72,6 +76,21 @@ index b23263cf..dcabf4ca 100644
-          }],
-        ],
-      },  # v8_base_without_compiler
---- 
--2.35.5
--
-+diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-+index cb82d4f15bc..65cb123b7bf 100644
-+--- a/tools/v8_gypfiles/v8.gyp
-++++ b/tools/v8_gypfiles/v8.gyp
-+@@ -1820,6 +1820,13 @@
-+         ['enable_lto=="true"', {
-+           'ldflags': [ '-fno-lto' ],
-+         }],
-++        # For future patch-rebases: this hunk is in mksnapshot target.
-++        # ia32 includes x86 also
-++        ['v8_target_arch=="ia32"', {
-++          'link_settings': {
-++            'libraries': ['-latomic']
-++          }
-++        }],
-+       ],
-+     },  # mksnapshot
-+     {
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-index 1ef01cc3b2..b3a4fb4245 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-@@ -133,8 +133,6 @@ python do_create_v8_qemu_wrapper () {
- do_create_v8_qemu_wrapper[dirs] = "${B}"
- addtask create_v8_qemu_wrapper after do_configure before do_compile
- 
--LDFLAGS:append:x86 = " -latomic"
--
- export CC_host
- export CFLAGS_host
- export CXX_host
 
