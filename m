@@ -1,112 +1,130 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <adam.duskett@amarulasolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11D1CE9D3F1
-	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 14:56:18 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22216.1770216976462135948
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19691E9D3F7
+	for <webhook@archiver.kernel.org>; Wed,  4 Feb 2026 14:59:38 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22275.1770217176212858377
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 06:56:16 -0800
+ Wed, 04 Feb 2026 06:59:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nDaCLGBC;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-43615d9c5d0so937428f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 06:56:16 -0800 (PST)
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=Het3i82+;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.53, mailfrom: adam.duskett@amarulasolutions.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-b8715908e58so71542266b.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 06:59:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770216975; x=1770821775; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zWbkRxFBKpWDr4b1UzghdG5XekCQDe1FyhDuqxJDpzc=;
-        b=nDaCLGBCMrRK4sV1ALunSkYE6Ojx9e9fSSfWqTrsAG9UTp5fldJl2SfxaLm3Tix+ZL
-         9kgjtnRJ5wHMw2NLFXquAumMAwoD+qllfjODm/724A+WvE++H5TDkA0A+EBXUDTRzPBl
-         H0iypKus+wG3XAa1ATcuEBBg2vtgMIBHG5BN99yiEB9xyIJMPZ6J+C2BZkhRISe2XoLO
-         m07rQM2eWmG+yz0PmtJyAehL96uECKyTgS0ybRGse7NQDPTzQLrDi+aGcCtGm7CRKEjM
-         nfDk51B1uQBjY2wuLZoueJUpsr2i3+rWjgWbGNYQyxciqaFivd9PJCD2AFnZ7a+RWWVL
-         XMcw==
+        d=amarulasolutions.com; s=google; t=1770217174; x=1770821974; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TpNTcma4Nj91baafWv9FTB5wMVEaFE82Yq73cAVeh3E=;
+        b=Het3i82+94g0CD+f+eog8HKsoCyuS+HcmhutC+ZOU06YzdhLW+NZJBXiIK0v0R1rBv
+         Fy6fflRSTJoDrZ442TM9aXUPdM/JxaYMZ06vZjoi0Ep7PUbABXY4cA7XapZ0zw1xy4Ur
+         3BKx8LPVaMHS1osx3jk1bPt/ULRJv917ja5ug=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770216975; x=1770821775;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zWbkRxFBKpWDr4b1UzghdG5XekCQDe1FyhDuqxJDpzc=;
-        b=BarsQOtzFKuB33zqk6RSOPlDziyZOYvWIPJsdf/AhF0QEtsoZ6XWygCR1/3jNq5o9g
-         8d+AH9ICX6hz4QjTHykTgGIKdLHTAhsEbbHVVI/TIL+CcOzOHiu5r5c0Q2RsIyN+++TN
-         /QppLw5RGbEQS3QYskxZBhEAKKbk620okN+aWwl/yuoYHUq/x/gTx8hev893yYtJn0q8
-         2PGBpcoAJoswufxlorXfoCMuK9pv/Fvog0jGd8BetDY+K+Rp+m8B/rK7lH/dc56EWJAM
-         CWYDDU4U26V1aMM6wT5p0acBaK/wqg6W/2zUQHZc5Q/jpuowdWLM2BdYPTWIDzYZiAxS
-         WfFw==
-X-Forwarded-Encrypted: i=1; AJvYcCULA75gHkWDmiTUdGlqZfD3zeijp/TiZ51KbrDcaPiooFL2Dp5RsTIpX5Ggq1CsbcGTglZYMVboNc+yN0GZiZFrfMc=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxPO+lH+GCsP6jUpxWEnJobNkyL2lynBDMR2I1zFlB+1HN37aCt
-	9r/H5RyQ+GD+kmpYSzykaw1Y4UrEefx7Uo7xfi/bpcmGa7uR7bmAKt4R
-X-Gm-Gg: AZuq6aKDG/xMmXmP4mrzTb2eO3LYLdPS2aO/ycFQJwv66fB7OqJ2pFtxuv2pWO0RV19
-	CyH71G9em/7R4WsrurcCna3n59Zwzfbn+VccL9Hm/IcEYM4hronlbO7pMAkSvQac4u28hPLrRuG
-	rWKi6JWEXaI47U1qh0vKwujcIWXiIzz4+yldbWr92TDa63qje8APUxINSEvbvjyD8ZkACN5DwcL
-	o5kyESAUxx26vhQXHFKQQDRLpgx8G68Q5RUC/22SBIFocHyUZfl93qQywe/hCmrGvpRbZ6DmUww
-	XrBTb9NavLzxeknOUXxSOmwRoET06FkxLddaZeTkN8wzLR6uBR7XKmezSmDF1gREFv9IId5J5np
-	Gnf0s3jEOvWlINYIQHIwCM4dwWqfWLcvHE22beambTi0CT+rSoSIhhy0lZctQXUY7ZTUbLsU2y/
-	WjAQvRpdonCGb+86/Mk0I=
-X-Received: by 2002:a5d:5f85:0:b0:435:ad52:31d8 with SMTP id ffacd0b85a97d-43618059372mr4344889f8f.44.1770216974635;
-        Wed, 04 Feb 2026 06:56:14 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4361805f8c1sm5817727f8f.37.2026.02.04.06.56.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 04 Feb 2026 06:56:14 -0800 (PST)
-Message-ID: <18f4441a-a838-4897-94bf-510e0e305865@gmail.com>
-Date: Wed, 4 Feb 2026 15:56:13 +0100
+        d=1e100.net; s=20230601; t=1770217174; x=1770821974;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=TpNTcma4Nj91baafWv9FTB5wMVEaFE82Yq73cAVeh3E=;
+        b=pbtvw3xq7eJLzbSYEyR7MgHdxOerIYdtlr2SaAQBk4IMtvCjxuM+uFqy609WSXEwYf
+         Xg8VXw/ABqQd+Nj6RlPmc32lLctf3Ym1M2FIive4DBh/353tIprL493BHqEmgismYOPd
+         OC9n7uq4FyB8LCnvNa5xY5+f2ilCmMR6mWpvfqS9aZtVpmERBdAb22sTdWObXNsJZMJC
+         /n7F1S8XyyK3+lEtZUk6BBqUwOJRbOyqy0BGzidCucNDTtydLoMKcat4GGrROnLReyg/
+         4AdAecgY4QRkNzgSt44sqvp8VJXn6Rl+hdVz1cTD9bP9bL4fvq05yxV+csmWxEWkTPiH
+         uVkg==
+X-Gm-Message-State: AOJu0YzqWl2zdYCbrJrPio+137H7qLvhj8SZ27CaJ4mVHMDMkA06QwpO
+	+0/3QpnYxsGPnCsn6pIXlaWjP/y3eXy6oYhxlSjc9DmuRbXnFF1rXLMtLVoZcTgdQsE9AAKtQ+m
+	QFFkX
+X-Gm-Gg: AZuq6aLA8Y6MS6VSMXgXc0j4Xq5YDQN2l5Wbwr6diGJqmFdoSinARS8MLt8Giy06eo7
+	3yEZx59zK8y6CiV4C58O5nLxvxp4QLXdFN8NmdpTgcVyMvOwibdOMrs+ORDAGVj6zRMMzmlrE4A
+	OOz951WefTejNPPLbzoZtK1aZJcMNgPS1IPFa14PKMDZaFjLLpzvriAzxhpM/tMSKf2wt5M51z9
+	Y/b6RVKuE4MOCMw3pvUtpeRA3dWtg3q5pGkeeSc9+q0zhKjKsFIp9hfya5GwKI9InxSLypWyZco
+	U/C8iMp1fElHq9dc9UyNZwKdZZhd0cbE8vn+V5A7Qbpw7CHDrRdUVZE1ktAMGzp7XcBQZkZNduj
+	i96k6CxOTv0UFax8ZcDpZP8s431GypMVGnxwYg8SY65+F5VqVd75UUBmszxterEOWid7ZcIj8TF
+	OhHbSfFu2ZjQY4qcoilX5myr/2uwZHgt9JxlYIgD1prnTLpbX04f3/w53uA4U4NVkp5EBOWjuVI
+	i7CfqRO+CfOHj0YGqKttpWiK5ji2VJdKOaNWBHIY78Bzijoa9al
+X-Received: by 2002:a17:907:728f:b0:b87:73c9:36b5 with SMTP id a640c23a62f3a-b8e9f6bf9e1mr130656266b.7.1770217174346;
+        Wed, 04 Feb 2026 06:59:34 -0800 (PST)
+Received: from adam.arnhem.chello.nl (2001-1c00-8101-1200-3ddc-5bb8-0efa-16f1.cable.dynamic.v6.ziggo.nl. [2001:1c00:8101:1200:3ddc:5bb8:efa:16f1])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8e9fef0ef9sm132109866b.40.2026.02.04.06.59.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Feb 2026 06:59:34 -0800 (PST)
+From: Adam Duskett <adam.duskett@amarulasolutions.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
+Subject: [PATCH v3 2/2] kmscon: bump version to 9.3.1
+Date: Wed,  4 Feb 2026 15:59:30 +0100
+Message-ID: <20260204145930.2170462-2-adam.duskett@amarulasolutions.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <20260204145930.2170462-1-adam.duskett@amarulasolutions.com>
+References: <20260204145930.2170462-1-adam.duskett@amarulasolutions.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH v2 1/2] libtsm: upgrade 4.4.0 -> 4.4.2
-To: adam.duskett@amarulasolutions.com,
- openembedded-devel@lists.openembedded.org
-References: <20260204144942.2166411-1-adam.duskett@amarulasolutions.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260204144942.2166411-1-adam.duskett@amarulasolutions.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 14:56:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124133
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 14:59:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124135
 
+  - Remove upstreamed patch (commit ID: a1fc510a)
 
-On 2/4/26 15:49, Adam Duskett via lists.openembedded.org wrote:
-> Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
-> ---
->  .../libtsm/{libtsm_4.4.0.bb => libtsm_4.4.2.bb}               | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-graphics/libtsm/{libtsm_4.4.0.bb => libtsm_4.4.2.bb} (92%)
->
-> diff --git a/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb b/meta-oe/recipes-graphics/libtsm/libtsm_4.4.2.bb
-> similarity index 92%
-> rename from meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb
-> rename to meta-oe/recipes-graphics/libtsm/libtsm_4.4.2.bb
-> index 074302bed7..8249826ce2 100644
-> --- a/meta-oe/recipes-graphics/libtsm/libtsm_4.4.0.bb
-> +++ b/meta-oe/recipes-graphics/libtsm/libtsm_4.4.2.bb
-> @@ -22,7 +22,7 @@ LIC_FILES_CHKSUM = "\
->  DEPENDS = "xkeyboard-config"
->  
->  SRC_URI = "git://github.com/kmscon/libtsm;protocol=https;branch=main;tag=v${PV}"
-> -SRCREV = "0d33498a6de3619628f7802a0c76fc98c8773d5b"
-> +SRCREV = "b052e48cc776be1cdb940be2dcc1603457c01c96"
->  
->  inherit meson pkgconfig
->  
-> @@ -31,3 +31,5 @@ EXTRA_OEMESON:append = " \
->      -Dtests=false \
->      -Dgtktsm=false \
->  "
-> +
-> +BBCLASSEXTEND = "native nativesdk"
->
+  - backspace_sends_delete is now a runtime option as
+    of commit 0d6d85a8b865cac17529d049ae9a561db782ac59
 
-This BBCLASSEXTEND was dropped[1] not so long ago... did it sneak back
-in accidentally? Or is it working now?
+  - The kmscon.conf file in the source is renamed to kms.conf.example
+    To keep the same behavior as the previous versions, kms.conf.example
+    is moved to ${sysconfdir}/kmscon/kmscon.conf before running sed.
 
-[1]: https://lists.openembedded.org/g/openembedded-devel/message/123782
+  - The render-engine config option has been removed as of commit
+    59eef2a154f78101195ad8ff08376e2418e773f0.
+
+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+---
+ .../kmscon/{kmscon_9.2.1.bb => kmscon_9.3.1.bb}        | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-graphics/kmscon/{kmscon_9.2.1.bb => kmscon_9.3.1.bb} (85%)
+
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
+similarity index 85%
+rename from meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
+rename to meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
+index 508f24c58e..4e27ba218a 100644
+--- a/meta-oe/recipes-graphics/kmscon/kmscon_9.2.1.bb
++++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.1.bb
+@@ -19,17 +19,13 @@ DEPENDS = "\
+     udev \
+ "
+ 
+-SRC_URI = "\
+-    git://github.com/kmscon/kmscon;branch=main;protocol=https \
+-    file://0001-kmscon_conf.c-Fix-llvm-compilation-failure.patch \
+-"
+-SRCREV = "7d46650dbb0826f9b89de42f879be879391c14fd"
++SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
++SRCREV = "e44ff728e51c5a38b56392abe9bc3e8306db86cc"
+ 
+ inherit meson pkgconfig systemd
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
+ 
+-PACKAGECONFIG[backspace_sends_delete] = "-Dbackspace_sends_delete=true, -Dbackspace_sends_delete=false"
+ PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
+ PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
+ PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
+@@ -61,9 +57,9 @@ do_install:append() {
+     fi
+ 
+     if ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'true', 'false', d)}; then
++        mv ${D}${sysconfdir}/kmscon/kmscon.conf.example ${D}${sysconfdir}/kmscon/kmscon.conf
+         sed -e "s@#drm@drm@g" \
+             -e "s@#hwaccel@hwaccel@g" \
+-            -e "s@#render-engine=gltex@render-engine=gltex@g" \
+             -i ${D}${sysconfdir}/kmscon/kmscon.conf
+     fi
+ }
+-- 
+2.52.0
+
 
