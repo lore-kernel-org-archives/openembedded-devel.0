@@ -2,36 +2,36 @@ Return-Path: <jaeyoon.jung@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE780EC1EAB
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 12:17:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F22E4EC1EAB
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 12:19:20 +0000 (UTC)
 Received: from lgeamrelo12.lge.com (lgeamrelo12.lge.com [156.147.23.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19448.1770293825414366696
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19467.1770293953227496079
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 04:17:06 -0800
+ Thu, 05 Feb 2026 04:19:14 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.52, mailfrom: jaeyoon.jung@lge.com)
-Received: from unknown (HELO lgemrelse6q.lge.com) (156.147.1.121)
-	by 156.147.23.52 with ESMTP; 5 Feb 2026 21:17:02 +0900
-X-Original-SENDERIP: 156.147.1.121
+Received: from unknown (HELO lgeamrelo02.lge.com) (156.147.1.126)
+	by 156.147.23.52 with ESMTP; 5 Feb 2026 21:19:10 +0900
+X-Original-SENDERIP: 156.147.1.126
 X-Original-MAILFROM: jaeyoon.jung@lge.com
 Received: from unknown (HELO magneto.lge.net) (10.177.121.44)
-	by 156.147.1.121 with ESMTP; 5 Feb 2026 21:17:02 +0900
+	by 156.147.1.126 with ESMTP; 5 Feb 2026 21:19:10 +0900
 X-Original-SENDERIP: 10.177.121.44
 X-Original-MAILFROM: jaeyoon.jung@lge.com
 From: jaeyoon.jung@lge.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Jaeyoon Jung <jaeyoon.jung@lge.com>
-Subject: [meta-oe][PATCH] pipewire: fix runtime dependency when multilib is enabled
-Date: Thu,  5 Feb 2026 21:16:30 +0900
-Message-ID: <20260205121630.796733-1-jaeyoon.jung@lge.com>
+Subject: [meta-multimedia][PATCH] pipewire: fix runtime dependency when multilib is enabled
+Date: Thu,  5 Feb 2026 21:18:39 +0900
+Message-ID: <20260205121839.796776-1-jaeyoon.jung@lge.com>
 X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 12:17:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124212
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 12:19:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124213
 
 From: Jaeyoon Jung <jaeyoon.jung@lge.com>
 
