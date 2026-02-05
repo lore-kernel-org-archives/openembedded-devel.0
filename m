@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59015E9127F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D133E91277
 	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:19 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15266.1770274810140901738
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15269.1770274816094810811
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 23:00:10 -0800
+ Wed, 04 Feb 2026 23:00:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QeOZ+h5m;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47ee76e8656so8019665e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FQOoNdtn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4806dffc64cso4333455e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770274808; x=1770879608; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770274814; x=1770879614; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Sm3PBhbPMMtRbL5Lyrfz8MaQDj6hgYct+1lLARk/vVI=;
-        b=QeOZ+h5mdyvMQycW9KDc7eX5XrF1/g6kH7ZtgHKtH2ec5k2OK3k47dzIM+rRZb8+Cm
-         Db/ACRltwXWjnEVh1dqNYeJPQx69ZDKQyV5GFPQU5Cqvk5A6NfenJbcNre6MR7wr25rr
-         xJTJUO+osSspGwkhZiGm76AYdp88Ag5Q2SIHZIM9RKrxT5n5qdFy0fjqXEKs7Gk8YY9p
-         DtmrxKVoftVdvaf4r/iZ2WDl1rIz1QtjbmzwPJ1nUCKOeChgEqKo7Iw51zhgBPcr3mNI
-         C+3lGGId3TBF1ddub3IAsIzuLSTSHV4mV+DF29RTEjxuBZrLXsOdvqYHex3xb3cVuvyi
-         Uzkg==
+        bh=T5e3Q0nXyj3MmjTgNd1NzbFHDyqsQJZnm7lgZEM8Jx0=;
+        b=FQOoNdtn3I5V06iqDfXC+PNqiYAox00zOd7HbzsCbd5tSInOYY/9CYGgQcSKYGbCcv
+         KDs5S0rYklSbpOWYDEEw7S/TaAplDWy7X1GroJdGo495CjOR1jAdBu+Q0b9dGft4EgvP
+         LOht1JsoQJMzetgFArWAKyRVEgBWafJOd3Z+TjPPEW3diDMh8LjR6gG8nZSIOWbaxyZf
+         ucpasotgQ+4Mz58BQT2Wi8cirfXdB3vuypjO1izAiNMlBUZobZTwQCBH3FlIQZRyggok
+         ZpiVwsFWHX128JHBAsDQ03OWwzLAuLWXlCEdXY+04rOaT0WCFXZJ8LTdzMBSQp4973dN
+         jr+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770274808; x=1770879608;
+        d=1e100.net; s=20230601; t=1770274814; x=1770879614;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Sm3PBhbPMMtRbL5Lyrfz8MaQDj6hgYct+1lLARk/vVI=;
-        b=w9DSQkDQGpUJM4+QYSUPzN0rz/Zuyqo32bt/3GOMNr+7AiNOtUzO7AGiTS33jXmu/O
-         dK9207Eumn2hPlzO2TyQpi8V1dALKo90QcwnlTdxDuo6yBbgFzQ9PyKVuHg56OZfKcCm
-         0uEycZhOqum4rPda8ZO1psCD2hHGRf6JUxmBNm6nuPmssmVtTJMFSBAB6iQNpxzF5vXo
-         PRQ6NoLHgEsdKrbIeUbG+NatuvnCToECulB2Bv1ZBX56Mczr/PvWpgZbVApALwO9X/25
-         eUVphLX4aHePRUNx0Z9BwMMvBTKHtUwa3A19MIFuTVrPT5E09SXwemVFIGF8G5Fb5opR
-         9guQ==
-X-Gm-Message-State: AOJu0YymNbLy7DpSa14QLfudP90WrPjWKQCiSGlWfGd7Ooo0CKlPlPGk
-	DYVHr41i6FYOvDEQE9TLST10I6537SW6IBQK5qNfac9+fzi01DV+HXOLYFA7wA==
-X-Gm-Gg: AZuq6aLEx90icQeFyBK22+Y/ftYHFhx/Z9XqTqYtFi5OMMFFYTNojYS6cTOGIDGZU1z
-	OndiPczJWvYE099pm0av8c9jpn10bTWtIb0fSDfGk3iXl9K1LcFvPXd0Mk05iSWdZiV47d57CbO
-	0MVn7ar8xmQnVPfMhMVxHHvxeGNdxZPYS0z2/buPkWqmBTVVW0lv7R5DINnRso1MVn2PDwfp6xw
-	qGNFIal9eVtqqqP2gYAE+AmTj5CG8uWESNDHdDKA3PZRTxYbJA3nQGf6b2w4nem+drphOOackco
-	iC/jFem4iC7QG7+EAgitID1mw6kN77KSYl4qowL4Q2GOP4WeMHfUrTc10AcTth0HPP47CFwx0WQ
-	Sfm55TfdHCD7PRO8TdPfHRkkn3TofZf12D5nQVNWJW2i3ROI1qrccOuJx6EvWu1393UPRoCxZdd
-	9dttwEK5wg
-X-Received: by 2002:a05:600c:1e1d:b0:480:6910:abd1 with SMTP id 5b1f17b1804b1-4830e966cedmr76890495e9.18.1770274808369;
-        Wed, 04 Feb 2026 23:00:08 -0800 (PST)
+        bh=T5e3Q0nXyj3MmjTgNd1NzbFHDyqsQJZnm7lgZEM8Jx0=;
+        b=INdBW87MQBut7mi+Gi1mIpRnrDLMn05E07Zen7siqJQ0JiCgVwy5Qscn8CHeUgEi9r
+         LGHzMWMFX4iCf83Y8MZstSr+mdf76dD86VAHqjT6OWRXcqdceLdWWX+9yz0EXFXjN/eY
+         QezBcIaco9hr7A8DB7rvnd5EeVGkUnnTvqHFzv5aqRDSJ0Z5NwIhRUTnFSDHOf4jlrn5
+         zKLK+y9Bwg98oQ8UYVPVXT8gObzRse58vGvpQihKdGcv0vJ9Y2g3/5BC6Z5hxOnUkIzS
+         LmNnie3BPUrUKPShcXcUIaGukATPaYYNIg1N0U7x1/SbzCpI/GhJT8KzUlUQZfhzU3j0
+         Rmxw==
+X-Gm-Message-State: AOJu0YxyCCA2UiV8bryYPjfFAZGrZoZY6hLxt1XbMw0HicSkWGBZLDd4
+	gGn1S5OwarLaPzWblRkiCMkhkjiehfavU9nsn4WGJPafkSDC2C0j6Fa/6HHdZg==
+X-Gm-Gg: AZuq6aKRN16HyLL/43dI5SKvD5tyyVe2q4IA9i1wVU55lIcbxO3CUImRCkGTcb/vlKK
+	MO2T0yBmT/FSbY4WvjtCoqgxMxsUTpYw+5YpoCUFm/8vtKZP3vURcWe3vdarKOPaf7VPlEsaC/5
+	mm1AE5JV0X3EuYzthCmhVxRxWhHoIuL3zSir6MIOHdFsOkYB1Cfml9qI4lZuHJrStCTLUAsS9dp
+	HNhW2kpJG0VGtlLpKuGSVCI0FeeHYFL6H7V9c+XERMf+ZWb0IoR0pLpLRv/Bc5hnqVOt2BXbOQc
+	CDS9WJYOMnclDf8O/Ke0o0wcuESOANt4iqdvrizegs29+3raF7M8IRs+MBULD3oaBFO60DUoDfB
+	mspN6tMBYaowDBPMdCRNpCsJDIFy1LXHmsusvrd4Qs/dtVrtc/RCG+cAonx73y8q4Unc8giWyRs
+	XZKqw9mKv8
+X-Received: by 2002:a05:600c:8b5c:b0:480:1b1a:5526 with SMTP id 5b1f17b1804b1-4830e93c021mr73580425e9.16.1770274809740;
+        Wed, 04 Feb 2026 23:00:09 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.07
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 23:00:08 -0800 (PST)
+        Wed, 04 Feb 2026 23:00:09 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 17/20] python3-werkzeug: upgrade 3.1.3 -> 3.1.4
-Date: Thu,  5 Feb 2026 07:59:52 +0100
-Message-ID: <20260205065955.1267785-17-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 19/20] raptor2: patch CVE-2024-57822 and CVE-2024-57823
+Date: Thu,  5 Feb 2026 07:59:54 +0100
+Message-ID: <20260205065955.1267785-19-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260205065955.1267785-1-skandigraun@gmail.com>
 References: <20260205065955.1267785-1-skandigraun@gmail.com>
@@ -67,55 +67,126 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124193
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124196
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-57822
+https://nvd.nist.gov/vuln/detail/CVE-2024-57823
 
-Changelog:
-==============
-- safe_join on Windows does not allow special device names. This prevents
-  reading from these when using send_from_directory. secure_filename already
-  prevented writing to these.
-- The debugger pin fails after 10 attempts instead of 11.
-- The multipart form parser handles a \r\n sequence at a chunk boundary.
-- Improve CPU usage during Watchdog reloader.
-- Request.json annotation is more accurate.
-- Traceback rendering handles when the line number is beyond the available
-  source lines.
-- HTTPException.get_response annotation and doc better conveys the distinction
-  between WSGI and sans-IO responses.
+Pick the patches mentioned in the github issue[1] mentioned
+in the NVD advisories (both of them are covered by the same issue)
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 74aa2bdac6d658791af34881f291d91aa4dc57ba)
-
-Contains fix for CVE-2025-66221.
-
-From the release notes:
-This is the Werkzeug 3.1.4 fix release, which fixes bugs but does not otherwise
-change behavior and should not result in breaking changes compared to the latest
-feature release.
+[1]: https://github.com/dajobe/raptor/issues/70
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit dc2c6a514e7744da4165effefa61ad59c27cf507)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-werkzeug_3.1.3.bb => python3-werkzeug_3.1.4.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-werkzeug_3.1.3.bb => python3-werkzeug_3.1.4.bb} (90%)
+ .../raptor2/raptor2/CVE-2024-57822.patch      | 44 +++++++++++++++++++
+ .../raptor2/raptor2/CVE-2024-57823.patch      | 31 +++++++++++++
+ .../recipes-support/raptor2/raptor2_2.0.16.bb |  2 +
+ 3 files changed, 77 insertions(+)
+ create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+ create mode 100644 meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
-index 73029eccc7..2cfb5864b1 100644
---- a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
-@@ -10,7 +10,7 @@ HOMEPAGE = "https://werkzeug.palletsprojects.com"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
- 
--SRC_URI[sha256sum] = "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
-+SRC_URI[sha256sum] = "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
- 
- inherit pypi python_flit_core
+diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+new file mode 100644
+index 0000000000..cb98f4250c
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57822.patch
+@@ -0,0 +1,44 @@
++From 3b0ded4ae8110b6291d030af927ecd08197e668f Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 6 Feb 2025 21:12:37 -0800
++Subject: [PATCH] Fix Github issue 70 A) Integer Underflow in
++ raptor_uri_normalize_path()
++
++From: Dave Beckett <dave@dajobe.org>
++
++(raptor_uri_normalize_path): Return empty buffer if path gets to 0
++length
++
++CVE: CVE-2024-57822
++Upstream-Status: Backport [github.com/dajobe/raptor/commit/da7a79976bd0314c23cce55d22495e7d29301c44]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/raptor_rfc2396.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/src/raptor_rfc2396.c b/src/raptor_rfc2396.c
++index 89183d9..2f0195f 100644
++--- a/src/raptor_rfc2396.c
+++++ b/src/raptor_rfc2396.c
++@@ -351,6 +351,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++           *dest++ = *s++;
++         *dest = '\0';
++         path_len -= len;
+++        if(path_len <= 0) {
+++          *path_buffer = '\0';
+++          return 0;
+++        }
++ 
++         if(p && p < prev) {
++           /* We know the previous prev path component and we didn't do
++@@ -390,6 +394,10 @@ raptor_uri_normalize_path(unsigned char* path_buffer, size_t path_len)
++     /* Remove <component>/.. at the end of the path */
++     *prev = '\0';
++     path_len -= (s-prev);
+++    if(path_len <= 0) {
+++      *path_buffer = '\0';
+++      return 0;
+++    }
++   }
++ 
++ 
+diff --git a/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+new file mode 100644
+index 0000000000..79833a55cb
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/raptor2/CVE-2024-57823.patch
+@@ -0,0 +1,31 @@
++From 0b028dd16eb504d3d4dcfa9c72ceb29a9e1f3915 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Fri, 7 Feb 2025 11:38:34 -0800
++Subject: [PATCH] Fix Github issue 70 B) Heap read buffer overflow in ntriples
++ bnode
++
++From: Dave Beckett <dave@dajobe.org>
++
++(raptor_ntriples_parse_term_internal): Only allow looking at the last
++character of a bnode ID only if bnode length >0
++
++CVE: CVE-2024-57823
++Upstream-Status: Backport [https://github.com/dajobe/raptor/commit/ece2c79df43091686a538b8231cf387d84bfa60e]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/raptor_ntriples.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/raptor_ntriples.c b/src/raptor_ntriples.c
++index 3276e79..ecc4247 100644
++--- a/src/raptor_ntriples.c
+++++ b/src/raptor_ntriples.c
++@@ -212,7 +212,7 @@ raptor_ntriples_parse_term_internal(raptor_world* world,
++             locator->column--;
++             locator->byte--;
++           }
++-          if(term_class == RAPTOR_TERM_CLASS_BNODEID && dest[-1] == '.') {
+++          if(term_class == RAPTOR_TERM_CLASS_BNODEID && position > 0 && dest[-1] == '.') {
++             /* If bnode id ended on '.' move back one */
++             dest--;
++ 
+diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
+index 03e57ce86f..1b77103a8d 100644
+--- a/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
++++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.16.bb
+@@ -13,6 +13,8 @@ SRC_URI = " \
+     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
+     file://0001-Remove-the-access-to-entities-checked-private-symbol.patch \
+     file://raptor-2.0.16-dont_use_curl-config.patch \
++    file://CVE-2024-57822.patch \
++    file://CVE-2024-57823.patch \
+ "
+ SRC_URI[sha256sum] = "089db78d7ac982354bdbf39d973baf09581e6904ac4c92a98c5caadb3de44680"
  
 
