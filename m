@@ -1,285 +1,198 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39DB6EC1E83
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 09:31:50 +0000 (UTC)
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16922.1770283903126872318
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C0AEC1E91
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 10:05:10 +0000 (UTC)
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17397.1770285904015772329
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 01:31:43 -0800
+ Thu, 05 Feb 2026 02:05:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jXS57k6Z;
- spf=pass (domain: gmail.com, ip: 209.85.167.177, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-45efde72438so487672b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 01:31:43 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770283902; cv=none;
-        d=google.com; s=arc-20240605;
-        b=MicMGk2373vNmCgbQpW1NDRpTsewUP6DO5CrwBbbu8DqeipdbOXA4vQQYcfZWm1G5X
-         f/u22VHIQ8HozLu0+dFeuvsfYdFQ27OdbKWjZrQHnmeR9WuSFKHaDTsn7hknMF+R7/TC
-         jRnq3i/zMm6F7cpIw9MeNrrPIYsjLVFIs9GAOygxC3MR/PlY76v78499ASxxiQ9ReDFn
-         aszo9S2T1E2gqS7N/5tNncUGpXbjMzh60MJbzEWgPAMlUAMEoOZKmp4tJ/pvvSXHdx9O
-         3l7gTlsJUuMLOCecJlkU3Rlvyf++Veoqfi/ybJar3Nkentvo+XRX4eIV3kdSgUnUyEPf
-         fZzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=E+GCklPTvd1n5bAJK5kGJN32zoiPS+Ia9apc5zyKHa0=;
-        fh=/Zfoi4o9G9NEfOtGJ0LSUrfiVhZcuLLzOVZQmzCL8qM=;
-        b=RE8fUPc48XdUuVsCMVFCNhpFgAPcOVnNQfqUD93qb63nLvIqFIQj2yEfI8vBmNe6BG
-         FUfqVDqYpmaChggjv3U/oBDVVsvn5LY/Bh8BQ2YrLMFdlViWkkh1+rREXyjyZyjPcOkO
-         aNG/R7p9HzQALERXbqNvqlsbppiDBKCNm14cmqx9XWZ6gtNfy4bLjpnnWDCZZoDtZ/X0
-         WP4jvrrM/ftIADXi5wVsr3nfqgJb3V78cXIAxuK8NatfiQe6HnqBYKsFX75i55eXwee7
-         D/fSiX1MZ4zhFL+j7vvq1CRp4tc7+vSkhHJBg8DjjNLIDc17SnMX36VH0ON07rzTh94x
-         lIUA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770283902; x=1770888702; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=E+GCklPTvd1n5bAJK5kGJN32zoiPS+Ia9apc5zyKHa0=;
-        b=jXS57k6ZGlWw/l/zx3YrwTJ7+WQnRTPW986wLtLy/ZGUzVvCKLuWl6yPqQCWla4YHw
-         BEB8F5nMrA6xyxO3yv+qgEWhYvGORsvVeDTpGNu0LGw1VEs8Kc0plh3b8qDT/i1Yqbo+
-         t/OkAd4LzMJs1m0bGji5HNvs+MwQuZe4L48TVt7WULVKCOtEHXZXYYmS8bN3yJTL8noe
-         1zabKoIWYW4RgiNQF08T9jJlVbqwr5ExVrw9+u0eWlg6Owh9QGJe6eoVOAFmw/8Q+V40
-         2Dwec27H2iTI81RBAZuTSRGYXDqwimZZ1K0W5cStsvHuHePcMSo8rP8wRgy2GEWHuXep
-         2ZJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770283902; x=1770888702;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=E+GCklPTvd1n5bAJK5kGJN32zoiPS+Ia9apc5zyKHa0=;
-        b=P+qEMA0zMYkZvcDd32oqEIgPxfJ1/Y67lnTZaZc92uZ5Txo6+r3k2tcdSTbgNt7IOb
-         Oj55Lao4/Cf/hFrY6H9YRjYpvOlnbyKVPlbOdMED4/cQ6Y4tO6A5zhPYoceR4d+gjVRc
-         50LmcNFGJvpXHg/S2WmTVXsjItKYR5Y+2N9NeqqZ8VM/fKMoCHPDSeVScFRPSS3pHWrI
-         KpmvHlpwOneFndY+BfVUbJ+X+Zme0B0aMiTR8Zft1/9ut3ii4FxJ+3O+8PW2d6AKfcET
-         oauurUqElGWFVAU7zB6eIbGx3V2Jdevv8ucezHayqNWb7c4sV1Nc9sp3GjnheLxroq8x
-         yJyg==
-X-Gm-Message-State: AOJu0YyStZaIEhU03tIXelvagcvbuS/hu+fmuf8Sjt/uyR4gOjVtP2jc
-	sGXGvJSYf4wE301OZLclv1q9MKuzptkcPZwdo5GlphsxpDGn3N6zGVzMYBYtBWHxXN0uNg/jdIC
-	ukAik21KM69i/WtJoOHk/dGLaKf6c7Yo=
-X-Gm-Gg: AZuq6aKyGU0CUwiRu/MmZSrcTOBUWLP4P9kv8DddWdSlxMpWhVOvwrvdP/ff80yn0ux
-	dslwBxxVLi1ZZW6/JigzJKZz5FXtcNJdMp6B2RXH1ZwP+dDGnhnxYul+r43No0RO9aWoiXR6xOf
-	pcdv1lCvH7EPzWR7BHVN45mIFqemUrySZIi1abZq1ssA0MYDpt8arf+OeJ9T1Hhv3g7tLqJthrU
-	Xt/nMF3k/IfUIGKJpFegrsSDCPf4Le2cmh0Tn1VZJa7AHeZbW1w2Zd4l2CuTbHDMdREppzT
-X-Received: by 2002:a05:6808:384e:b0:45e:e52c:8dd0 with SMTP id
- 5614622812f47-462d5a76f41mr2733651b6e.48.1770283902243; Thu, 05 Feb 2026
- 01:31:42 -0800 (PST)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=G+aA4xSO;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1770285904; x=1801821904;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=F27NVSItHQ3yg4Zo6HE+Ei00Y8H4B2tahokO/8cG3A8=;
+  b=G+aA4xSOLiz1z8w363DgphOTJxV6AhEIJLpx904kUR/VK2Le3XFAeSAw
+   FK9H/RFw4L5NnDvKax6B/3k3kzG2GsBhCwSIDdIphHoJfcfPVPqSCANJN
+   iDEpqtOmzbVP0fYDg6aJrv1xrn7Pi6/i5ULgQqYOrkPiqURaf3/+aN2Hq
+   R1u5K4AcdZTqeDjYxgUcp6+9QyvifUaQiayLrT+Is4GEZfLvuhdHXnPzm
+   OW+YWJkY6SgyzGRDsSxef/i+pmH6+1FECi5pc4UZu6BM4OFmRHxg0QkVP
+   bGpbzZmKY747csq6/rvbJEyT75IMKvVSSyXl8+TDbZ9Otqi+KgOZ2HFWv
+   Q==;
+X-CSE-ConnectionGUID: NzDE1JaLQzyt7ELITmFpFw==
+X-CSE-MsgGUID: d9Prwtz0SYmVzEudNN5KLw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11691"; a="228047793"
+X-IronPort-AV: E=Sophos;i="6.21,274,1763391600"; 
+   d="scan'208";a="228047793"
+Received: from unknown (HELO mail.fujitsu.com) ([51.138.80.169])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Feb 2026 19:05:02 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id 3F5F71C0018C
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Feb 2026 10:05:02 +0000 (UTC)
+Received: from az2nlsmom1.o.css.fujitsu.com (az2nlsmom1.o.css.fujitsu.com [10.150.26.198])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id E570E1809AF5
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Feb 2026 10:05:01 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 9B224829EFE
+	for <openembedded-devel@lists.openembedded.org>; Thu,  5 Feb 2026 10:04:59 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe][meta-python][PATCH] python3-pyrad: upgrade 2.4-> 2.5.2
+Date: Thu,  5 Feb 2026 18:04:54 +0800
+Message-ID: <20260205100455.3625-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260202211401.1287664-1-skandigraun@gmail.com>
- <20260202211401.1287664-13-skandigraun@gmail.com> <CADySD0EAw8EY+gHxRU23RLn+2=pKfda1YWWuis1z1DXeAF6-UQ@mail.gmail.com>
- <20c9fdae-9dd0-4a1e-b709-c7d668bb03d5@gmail.com> <54ec6b29-5d8b-4504-8aa5-0a359a3709de@gmail.com>
- <CADySD0EOuQ4pLP9amP8X8Bnvenua_dod811W7SEKPHn9aUFURQ@mail.gmail.com>
-In-Reply-To: <CADySD0EOuQ4pLP9amP8X8Bnvenua_dod811W7SEKPHn9aUFURQ@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 5 Feb 2026 22:31:30 +1300
-X-Gm-Features: AZwV_QgcaQ8gpNVQGuIPTCwyiYK-tA0ydoKW9itTizd5s_zSE9EkV8pLyqivNeA
-Message-ID: <CADySD0GUWwPX1ZOTS4Pfjoeq-A7suEYEtjPfKBsN_KGx1AA0ZQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][whinlatter][PATCH 13/15] nodejs: upgrade 22.21.1
- -> 22.22.0
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 09:31:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124204
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 10:05:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124205
 
-On Wed, Feb 4, 2026 at 10:53=E2=80=AFPM Ankur Tyagi <ankur.tyagi85@gmail.co=
-m> wrote:
->
-> On Wed, Feb 4, 2026 at 10:34=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail=
-.com> wrote:
-> >
-> > On 2/3/26 22:50, Gyorgy Sarvari wrote:
-> > >
-> > > On 2/3/26 10:55, Ankur Tyagi wrote:
-> > >> Hi Gyorgy,
-> > >>
-> > >> Getting following error when building for qemux86 with musl and clan=
-g
-> > >>
-> > >> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky=
--linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-mu=
-sl/i686-poky-linux-musl-ld:
-> > >> /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/bit=
-s/atomic_base.h:1090:(.text._ZN2v88internal12_GLOBAL__N_120ElementsAccessor=
-BaseINS1_21TypedElementsAccessorILNS0_12ElementsKindE37EdEENS1_18ElementsKi=
-ndTraitsILS4_37EEEE27CopyTypedArrayElementsSliceENS0_6TaggedINS0_12JSTypedA=
-rrayEEESB_jj+0xe05):
-> > >> undefined reference to `__atomic_store'
-> > >> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky=
--linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-mu=
-sl/i686-poky-linux-musl-ld:
-> > >> /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky-l=
-inux-musl/nodejs/22.22.0/sources/node-v22.22.0/out/Release/obj.host/v8_base=
-_without_compiler/deps/v8/src/objects/elements.o:
-> > >> in function `std::remove_volatile<double>::type
-> > >> std::__atomic_impl::load<double>(double const*, std::memory_order)':
-> > >> | /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/b=
-its/atomic_base.h:1099:(.text._ZN2v88internal12_GLOBAL__N_121TypedElementsA=
-ccessorILNS0_12ElementsKindE37EdE15GetInternalImplEPNS0_7IsolateENS0_6Handl=
-eINS0_8JSObjectEEENS0_13InternalIndexE+0x7c):
-> > >> undefined reference to `__atomic_load'
-> > >> | /yocto/bitbake-builds/poky-whinlatter/build/tmp/work/core2-32-poky=
--linux-musl/nodejs/22.22.0/recipe-sysroot-native/usr/bin/i686-poky-linux-mu=
-sl/i686-poky-linux-musl-ld:
-> > >> /usr/lib/i686-poky-linux-musl/15.2.0/../../../include/c++/15.2.0/bit=
-s/atomic_base.h:1099:(.text._ZN2v88internal12_GLOBAL__N_120ElementsAccessor=
-BaseINS1_21TypedElementsAccessorILNS0_12ElementsKindE38EhEENS1_18ElementsKi=
-ndTraitsILS4_38EEEE27CopyTypedArrayElementsSliceENS0_6TaggedINS0_12JSTypedA=
-rrayEEESB_jj+0x549):
-> > >> undefined reference to `__atomic_load'
-> > >>
-> > >> Can you please have a look into it?
-> > > I don't think that I can unfortunately. It seems to be something with
-> > > the -latomic LDFLAG. I *think* that the problem is the library order =
-in
-> > > the linker invocation. libatomic appears very early in the command,
-> > > before any other resource, and I think it should appear at the end. B=
-ut
-> > > I'm not familiar with gyp, and nodejs takes 30 minutes to show that m=
-y
-> > > try about reordering the flags was unsuccessful.
-> > >
-> > > As a sidenote, it is not a regression from this patch, it has the sam=
-e
-> > > issue with the current version also - but if it's a stopper for
-> > > Whinlatter, feel free to drop this. I might take another shot at it i=
-n
-> > > the future.
-> > >
-> >
-> > I had a sleep since, and it frequently helps with annoying problems.
-> >
-> > I have a potential fix[1], but first I want to run it thru master to se=
-e
-> > if anyone has a better idea. It can be cherry-picked if it makes its wa=
-y
-> > to master successfully (which has the this problem also).
-> >
-> > Meanwhile feel free to test it if you want to, the patch should apply
-> > clean on Whinlatter.
-> >
-> > [1]: https://lists.openembedded.org/g/openembedded-devel/message/124121
-> >
->
-> That's great, thanks !
-> Will give it a try tomorrow.
->
+1.ChangeLog
+  Fix readthedocs
 
-It fixes the error, nice work !
+2.Remove following patches as they were merged upstream
+  use-poetry-core.patch
+  208.patch
 
-> > >> cheers
-> > >> Ankur
-> > >>
-> > >>
-> > >> On Tue, Feb 3, 2026 at 10:14=E2=80=AFAM Gyorgy Sarvari via
-> > >> lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.o=
-rg>
-> > >> wrote:
-> > >>> From: Jason Schonberg <schonm@gmail.com>
-> > >>>
-> > >>> This is the December 2025 security release that the nodejs team rel=
-eased
-> > >>> January 13, 2026.
-> > >>>
-> > >>>   3 high severity issues.
-> > >>>   4 medium severity issues.
-> > >>>   1 low severity issue.
-> > >>>
-> > >>> High priority fixes:
-> > >>>   CVE-2025-55131
-> > >>>   CVE-2025-55130
-> > >>>   CVE-2025-59465
-> > >>>
-> > >>> Medium priority fixes:
-> > >>>   CVE-2025-59466
-> > >>>   CVE-2025-59464
-> > >>>   CVE-2026-21636 *
-> > >>>   CVE-2026-21637
-> > >>>
-> > >>> Low priority fixes:
-> > >>>   CVE-2025-55132
-> > >>>
-> > >>> * note that this medium priority CVE only effects Nodejs v25.
-> > >>>
-> > >>> https://nodejs.org/en/blog/vulnerability/december-2025-security-rel=
-eases
-> > >>>
-> > >>> Changelog: https://github.com/nodejs/node/releases/tag/v22.22.0
-> > >>>
-> > >>> Signed-off-by: Jason Schonberg <schonm@gmail.com>
-> > >>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > >>> (cherry picked from commit 0bb156371e433cf3e9fdc4291da2319d63a83575=
-)
-> > >>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> > >>> ---
-> > >>>  .../oe-npm-cache                                                | =
-0
-> > >>>  ...oe-cache-native_22.21.bb =3D> nodejs-oe-cache-native_22.22.bb} =
-| 0
-> > >>>  .../nodejs/{nodejs_22.21.1.bb =3D> nodejs_22.22.0.bb}             =
-| 2 +-
-> > >>>  3 files changed, 1 insertion(+), 1 deletion(-)
-> > >>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.21 =3D>=
- nodejs-oe-cache-22.22}/oe-npm-cache (100%)
-> > >>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.=
-21.bb =3D> nodejs-oe-cache-native_22.22.bb} (100%)
-> > >>>  rename meta-oe/recipes-devtools/nodejs/{nodejs_22.21.1.bb =3D> nod=
-ejs_22.22.0.bb} (98%)
-> > >>>
-> > >>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/=
-oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-npm=
--cache
-> > >>> similarity index 100%
-> > >>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.21/o=
-e-npm-cache
-> > >>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-22.22/oe-=
-npm-cache
-> > >>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native=
-_22.21.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22.22.bb
-> > >>> similarity index 100%
-> > >>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_=
-22.21.bb
-> > >>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_22=
-.22.bb
-> > >>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb b/me=
-ta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-> > >>> similarity index 98%
-> > >>> rename from meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-> > >>> rename to meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-> > >>> index ccaf9f7bb2..443cdc430d 100644
-> > >>> --- a/meta-oe/recipes-devtools/nodejs/nodejs_22.21.1.bb
-> > >>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-> > >>> @@ -39,7 +39,7 @@ SRC_URI:append:class-target =3D " \
-> > >>>  SRC_URI:append:toolchain-clang:powerpc64le =3D " \
-> > >>>             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.pa=
-tch \
-> > >>>             "
-> > >>> -SRC_URI[sha256sum] =3D "487d73fd4db00dc2420d659a8221b181a7937fbc5b=
-c73f31c30b1680ad6ded6a"
-> > >>> +SRC_URI[sha256sum] =3D "4c138012bb5352f49822a8f3e6d1db71e00639d0c3=
-6d5b6756f91e4c6f30b683"
-> > >>>
-> > >>>  S =3D "${UNPACKDIR}/node-v${PV}"
-> > >>>
-> > >>>
-> > >>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >>> Links: You receive all messages sent to this group.
-> > >>> View/Reply Online (#124086): https://lists.openembedded.org/g/opene=
-mbedded-devel/message/124086
-> > >>> Mute This Topic: https://lists.openembedded.org/mt/117604901/361973=
-7
-> > >>> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > >>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/un=
-sub [ankur.tyagi85@gmail.com]
-> > >>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >>>
-> >
+3.Change license checksum as position of License Info has changed in PKG-INFO file.
+
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+---
+ .../python/python3-pyrad/208.patch            | 51 -------------------
+ .../python3-pyrad/use-poetry-core.patch       | 26 ----------
+ ...n3-pyrad_2.4.bb => python3-pyrad_2.5.2.bb} |  8 +--
+ 3 files changed, 2 insertions(+), 83 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyrad/208.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pyrad/use-poetry-core.patch
+ rename meta-python/recipes-devtools/python/{python3-pyrad_2.4.bb => python3-pyrad_2.5.2.bb} (50%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-pyrad/208.patch b/meta-python/recipes-devtools/python/python3-pyrad/208.patch
+deleted file mode 100644
+index b08f183583..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pyrad/208.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From d17438da2008f48aa13cc95a626c990bf645799a Mon Sep 17 00:00:00 2001
+-From: Luca Barbieri <lucabarb@gmail.com>
+-Date: Wed, 8 Jan 2025 10:35:22 +0100
+-Subject: [PATCH 1/2] Fix pyproject.toml format
+-
+-Fix pyproject format to correctly build with poetry-core 2.0.0
+-Upstream-Status: Submitted [https://github.com/pyradius/pyrad/pull/208]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- pyproject.toml | 28 ++++++++++++++--------------
+- 1 file changed, 14 insertions(+), 14 deletions(-)
+-
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -2,16 +2,16 @@
+- requires = ["poetry-core>=1.0.0"]
+- build-backend = "poetry.core.masonry.api"
+- 
+--[tool.poetry]
+-+[project]
+- name = "pyrad"
+- version= "2.4"
+- readme = "README.rst"
+- license = "BSD-3-Clause"
+- description="RADIUS tools"
+- authors = [
+--  "Istvan Ruzman <istvan@ruzman.eu>",
+--  "Christian Giese <developer@gicnet.de>",
+--]
+-+  { name = "Istvan Ruzman", email = "istvan@ruzman.eu" },
+-+  { name = "Christian Giese", email = "developer@gicnet.de" },
+-+ ]
+- keywords = ["AAA", "accounting", "authentication", "authorization", "RADIUS"]
+- classifiers = [
+-     "Development Status :: 6 - Mature",
+-@@ -28,7 +28,7 @@ include = [
+-   "example/*"
+- ]
+- 
+--[tool.poetry.urls]
+-+[project.urls]
+- repository = "https://github.com/pyradius/pyrad"
+- 
+- [tool.poetry.dependencies]
+-@@ -36,5 +36,5 @@ python = "^2.7 || ^3.6"
+- six = "^1.15.0"
+- netaddr = "^0.8"
+- 
+--[tool.poetry.dev-dependencies]
+-+[tool.poetry.group.dev.dependencies]
+- nose = "^0.10.0b1"
+diff --git a/meta-python/recipes-devtools/python/python3-pyrad/use-poetry-core.patch b/meta-python/recipes-devtools/python/python3-pyrad/use-poetry-core.patch
+deleted file mode 100644
+index 43a177da0a..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pyrad/use-poetry-core.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-Upstream-Status: Backport [https://github.com/pyradius/pyrad/commit/ffe182a44909e8f8278fb3e2ea052ddc097b48b9]
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+-From a4b70067dd6269e14a2f9530d820390a8a454231 Mon Sep 17 00:00:00 2001
+-From: Martin Weinelt <hexa@darmstadt.ccc.de>
+-Date: Thu, 14 Apr 2022 22:07:37 +0200
+-Subject: [PATCH] Use poetry-core for pyproject based builds
+-
+-https://github.com/python-poetry/poetry-core#why-is-this-required
+----
+- pyproject.toml | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/pyproject.toml b/pyproject.toml
+-index 87b1df3..711c52f 100755
+---- a/pyproject.toml
+-+++ b/pyproject.toml
+-@@ -1,6 +1,6 @@
+- [build-system]
+--requires = ["poetry>=1.0"]
+--build-backend = "poetry.masonry.api"
+-+requires = ["poetry-core>=1.0.0"]
+-+build-backend = "poetry.core.masonry.api"
+- 
+- [tool.poetry]
+- name = "pyrad"
+diff --git a/meta-python/recipes-devtools/python/python3-pyrad_2.4.bb b/meta-python/recipes-devtools/python/python3-pyrad_2.5.2.bb
+similarity index 50%
+rename from meta-python/recipes-devtools/python/python3-pyrad_2.4.bb
+rename to meta-python/recipes-devtools/python/python3-pyrad_2.5.2.bb
+index e8cfffc9cc..415a8a8212 100644
+--- a/meta-python/recipes-devtools/python/python3-pyrad_2.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pyrad_2.5.2.bb
+@@ -1,14 +1,10 @@
+ SUMMARY = "RADIUS tools"
+ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=53dbfa56f61b90215a9f8f0d527c043d"
+ 
+ PYPI_PACKAGE = "pyrad"
+-SRC_URI[sha256sum] = "057de4b7e89d8da57ba782c1bde45c63ebee720ae2c0b0a69beaff15c47e30d9"
+-
+-SRC_URI += "file://use-poetry-core.patch \
+-            file://208.patch \
+-            "
++SRC_URI[sha256sum] = "368e8d3cb7b9e2ca9e4357b343787238bf135edd3f3598cf26ccd65d32506ff9"
+ 
+ inherit pypi python_poetry_core
+ 
+-- 
+2.43.0
+
 
