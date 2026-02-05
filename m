@@ -1,225 +1,164 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96CB1ECD995
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 18:17:02 +0000 (UTC)
-Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.57])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.27746.1770315419616275250
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0BA8ECD997
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 19:06:12 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28701.1770318363475241950
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 10:17:00 -0800
+ Thu, 05 Feb 2026 11:06:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@axis.com header.s=selector1 header.b=r1gIan+o;
- spf=pass (domain: axis.com, ip: 52.101.65.57, mailfrom: peter.kjellerstedt@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GRSAoGgQRyc3ghHBXmyPPpq+4SXA+PcC1/6blxLhoprcIEh2SZmXSbpeBz6HtxEQu2dk86gaOJqd0Km5VFrHSROrbFar6v1EI3gBqVd4obdrf8qQix5nbxQh3a6fMpAUhXnj9zISwdLZdBD1XY0bMNFgbZGCC8RimrZ6XdhoNJCa2yzm0WQUR5daQLY+wWMIqYhdJXCHob1MUto+i1QNT4LPdwkiE1LM91jYqTYzCqUU+y6tqHaxk+0jiOUs5y1S61ae58+4mZC8MomxwqsRn6oInz+2hcpRTcxUk3qa4naObkQXj3QfH10ex1SYMQftsSDPPtSt1wC4+VfeoQnBMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9jaGwWk0/MBGCWgT5hBeJOrm2hGLwYtA1f7NTsNVzTQ=;
- b=b+5a2HX1GXRPv91LS6XQ//2bX6TNopTK4T38rm/p6GGQ3f+zULtle9eAqdojiw7zuUy0oEZyFh3jOcBX3dLjY5tK0mt400TIstvTyExdjrQg7rf9OMghFg1+n7qm615x7lclQ4oI28ghMyLTHWurCQ2L2HzC/Q1HSViWtmiReP+UhxS6IbkazwNZWkcJFe9I8gsp+HOXbMxPEw3Tm8QCFwNURcQqBd3u+zfNexQ0Thnf69e8lmH9lEZki1vpl6s8HpqP08Y90Gm1phKbE93HwRSEEaB+JLruiJZkd+OFiFXai7XY/DdAbqWu6aJ67tZXIp4qQbFNQP/lPQc1LgjwAA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
- dkim=pass header.d=axis.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9jaGwWk0/MBGCWgT5hBeJOrm2hGLwYtA1f7NTsNVzTQ=;
- b=r1gIan+orKwnmUqSCUxkYlwnZmFz76UL2AxQ6gie8S0oWh8dP80/usQPC0K6GqT3gFJ6EuCveSONbtnjWN9pgfVxjZHxvtnwzuofvMGSgxhifqryI07wFdRGqABZkCaPw1beDAtxKafyyy+nuSSrx0ooOpMnZ1SPt5MkPR848l8=
-Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
- by DB9PR02MB10370.eurprd02.prod.outlook.com (2603:10a6:10:3da::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.14; Thu, 5 Feb
- 2026 18:16:56 +0000
-Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
- ([fe80::e5b6:b9a8:2a5d:e0cd]) by DB5PR02MB10213.eurprd02.prod.outlook.com
- ([fe80::e5b6:b9a8:2a5d:e0cd%5]) with mapi id 15.20.9587.013; Thu, 5 Feb 2026
- 18:16:56 +0000
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Khem Raj <raj.khem@gmail.com>, "yogesh.tyagi@intel.com"
-	<yogesh.tyagi@intel.com>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH] abseil-cpp: Set CMAKE_CXX_STANDARD to 17
-Thread-Topic: [oe] [meta-oe][PATCH] abseil-cpp: Set CMAKE_CXX_STANDARD to 17
-Thread-Index: AQHclHh0kRDrOvA/UES4XqUkTnb3p7VwvkWggAOvVXA=
-Date: Thu, 5 Feb 2026 18:16:56 +0000
-Message-ID: 
- <DB5PR02MB102138D6D0E736A5BD27AF601EF99A@DB5PR02MB10213.eurprd02.prod.outlook.com>
-References: <20260202192055.1588477-1-yogesh.tyagi@intel.com>
- <1890B47D79B141EC.3664483@lists.openembedded.org>
-In-Reply-To: <1890B47D79B141EC.3664483@lists.openembedded.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=axis.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|DB9PR02MB10370:EE_
-x-ms-office365-filtering-correlation-id: 5ced53a0-0408-417b-a711-08de64e2bf16
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|366016|376014|1800799024|38070700021;
-x-microsoft-antispam-message-info: 
- =?us-ascii?Q?n7oVmvP4sL8iTEwTH7sonxRh/y009ZS3DkfkgUXpwBYEn6W9d5ZPKyaVNqyI?=
- =?us-ascii?Q?/g7QdmPzvw6S59vfUPrHstFbBodm6mxWe/WcZH+i/hypM6TNkI2eYZokp41I?=
- =?us-ascii?Q?kBwCoj84Rhds+AI7Wbo9REni+QSqCm625QeuA4BaodqZlfLCtEaYjFmAptmz?=
- =?us-ascii?Q?TZlbjbnF7xZqEsF2Kziw0ids3mBND1dAd+7lrSzrPoMc+rm7b1gcCvqgFoj7?=
- =?us-ascii?Q?FfpVowTVupGUlP9B/ySQjaoAPhZomxqDxOEnxxMoGmcl3FYMtE3VQM6Ex01R?=
- =?us-ascii?Q?UJwhEeANKPiFv83buVW46Xxw0zvVcd8jfsawTWDDtItpveTUZZdyc72jRwhG?=
- =?us-ascii?Q?1N5tBAvPe61xiQwjmHqVzEL0BUU3Onn03n1GPRRmXgON6t5MBaikeg2ord+U?=
- =?us-ascii?Q?u2jx0A+bpuTs6QZJU8O1ZFI6iNj8Q9+C/uKeNFlqb6r4OGvQIpLd/DK4N0mP?=
- =?us-ascii?Q?1Rd4SwzXSsVqKn6bBj3/x0FT7VtMzfBd0Y0nQhPstpFGd5xzd5rvxYhWAfg6?=
- =?us-ascii?Q?D8u1RwSnoDf5ua8AvUSiC63XlrD3EsL9SNhiCHSGUh28nEVmDFNNN99rIODD?=
- =?us-ascii?Q?vXAAbMMWXKxpu+l4jhI94H9YO8cSxm8VV172q16xqxfAl958mA8u83h/Xjvb?=
- =?us-ascii?Q?pZCSRZqcsGWBz1gZ7dyjtdWa+guSN+MBy98BtPQkqqe0hsIJ/fg4ZVCnlj8b?=
- =?us-ascii?Q?kYzsl6Z51esRH3bJPbP+GnzBvIKCK03vFGkGZTf8gQE4PdDNfbWvC0j0xl9W?=
- =?us-ascii?Q?7/LuTVLkwAnLOVG0RqAvFV93mFQjoZlv0N/nkQHnCd3wf2jmt5O7CNKezLQN?=
- =?us-ascii?Q?1wdrEKTkpN7jmfHUm92esa7JdnFyXvRB+3pQfnc1Fzy3vL0aL6hD2AL+SF2/?=
- =?us-ascii?Q?cRJpp9Km4hd7FY+P4gtA8S8cEK375Rf7LMfWUj2TL3UeRuqzKdaj13UPhJ+a?=
- =?us-ascii?Q?U/VyAfrrF0FRJVguo9f3pG98b90i2i8iLmvyv5+56aNmONCYtYq3o04Heg5B?=
- =?us-ascii?Q?iLfSCFybdbUb0vLGyENI0AaScv8ql6nibA9iPMvlTZXuEmu/a4M5ywJQNJ9L?=
- =?us-ascii?Q?8XpDBTkul2kpfXwRcdpOaXpSA6kpQ2pnSpuagsg5CbZC6qIgLXp+zkkSvaaA?=
- =?us-ascii?Q?WPs4R/36R2B3oKbQG6nQ0RbGOEiaDyjiMbSYIV6pSsrjZ9Lke2aQfgD4IT0m?=
- =?us-ascii?Q?8517TsH4v6mf7Vc0QBvSqB72quSnikwU0EvHlFTaxqnLa7PBxbZiJJm7X7/f?=
- =?us-ascii?Q?NHaOWd0GRXz3wS9Pw9EFpZBwAFXhku2m6agD+zxtvpm9So7esHHbv9Juz3BD?=
- =?us-ascii?Q?bxLgn3Cu3TxwcqNH+uL7gNOjxpn0KD2WPNNAzbshbK7ehBz0T8vgSoh9Ab1X?=
- =?us-ascii?Q?tUxzffWNqkqtkc4zhRiwXDy7uET7G8VxItg6y9WJXpCmxH/ToWCR7KbCj3R7?=
- =?us-ascii?Q?oCmsZ9ydBbc/NmBmwfFVdtC10HwcqH9x6bcjlVsz7BGnbw+f/QOmbYXZCnsQ?=
- =?us-ascii?Q?JetVETcGlE68bXnuW4c60/e7fmgv1TiUnxTZefSYyzS1bPGMnjz/hR7oVM8V?=
- =?us-ascii?Q?4ZCfTtwClpO5lSEfz+8PYraQOo+lLsPSuxKWNS+K2RozusbWvdbauLNrMbhs?=
- =?us-ascii?Q?W3G4to2zQ5kfK1J61Zr45R8=3D?=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?t/FGcooDjLQ0jMwOqib+vTRP4KtwVjonBsfGUSqCRDM3jjszrzz/BvRST5Bs?=
- =?us-ascii?Q?r/L2towEbDD0OKQvbMsnkeJcZzlW05RU45Ul/mo0xc8f+GRD4mQuHqQvNdTu?=
- =?us-ascii?Q?rCyQPPQXr7dxqkt4289hK/Vjax/w2XbhQOPRHrKID3N3HbEWo6X6qiMz/ze1?=
- =?us-ascii?Q?5RDdN5UoJL7fKt2HN3eV3RY1VOXdee1iAG0kdGX05hc9RrTX2p8lWKGCwFHS?=
- =?us-ascii?Q?3w2AjUFCc6KWJ9+hht+KF/uzKvli3fd++lXIeW89HIdPhaOW6HFMiTN68tnx?=
- =?us-ascii?Q?9esKi7eiOMEaaLlRjWLnasXv+TQZPj5am+LUsPL5uwpZYwBFAKufJitwTfFC?=
- =?us-ascii?Q?ZGU99j2HQRvExRG13vVAq73cmSIqlFbUTUA1ReRFHlKRKgNrXCUGl2UEYYoA?=
- =?us-ascii?Q?nYu/F7D3/82ZU5D3AYWderlIEGz3xjXUoRjC897NfW9cbDDXW/SR98Vdwepd?=
- =?us-ascii?Q?yuCPHxaBTM0xRIWvgmxc7kJ1XZtAjPnRlBtY1MWS7WM+E/McVXmjdF7eLK5J?=
- =?us-ascii?Q?wm1tjAqIAE2uezoJMqboz1mLPRFq7J9ggkcOckRT1q12AY1/MOrcLfnj0o2n?=
- =?us-ascii?Q?Xv11tthRxNOKJz0pGpHtBXA+3nNczPJ69m5pVZ62SQ7pFv3BnNprH1OgkZ4+?=
- =?us-ascii?Q?Rih/F2A3nszvF/3JCOVEb80wuQ3r3o+ZhjSRi6CX01VGR65jhez/aGO7eu4D?=
- =?us-ascii?Q?77Tatl2gZCoUBzgP7h7haK5eaBceGvFreA5d4woP5y0Xs56yPr2G2lF0G3x6?=
- =?us-ascii?Q?WLcDynvbxTIOd3fYQ3XKUdIvZXcERJtgz8N5Q84tem5Du/DyErYTbVbS6rOM?=
- =?us-ascii?Q?AAY+THlRGoWk1NkGtCdK5JHTvpbOGV2TkJTeL2pnkea45OQklWKLRx5HJV7W?=
- =?us-ascii?Q?lCAC29Uqh4vPWFuMwVhLLrwuaoqBUVM2dmelvvZaBOGUy5NwSl3ycdaX/ir+?=
- =?us-ascii?Q?btV7i1jhjATPTkT+PhpA2LDsTo/Cpife8CrI3Qe8ecx7D8qZD6q31N1+i+wx?=
- =?us-ascii?Q?ljaYva2NF8qPoviuVN/kjLvE3+gDoI9kmLix+yoGYlV1OiUtKBpRKzO9Pb3e?=
- =?us-ascii?Q?y3pARhu/Uno9GO3pj+WGApk+kr21YslBLalsbhE1/lq3myUMX3edv16Qkhcm?=
- =?us-ascii?Q?jNqicjervySHk6tFaYYovX/QzziTRhHhBFdAxsADcGSocgMk/ctztwpt8oNt?=
- =?us-ascii?Q?AiOEUaktuXy8vRbyV83+f3rptj01dJeNeN1Fmu0re8glc11ZOdFVSl/q0YOn?=
- =?us-ascii?Q?t3cTYa1xyU33nc7ap6W3qQB4LRdlWo5f6r/tMl8xNiz0R1KpD1k/fvQ+ylEu?=
- =?us-ascii?Q?sXnWxnwpMU99ft/BTNgy3cOuKcVBkboYj+B/FJIB5vmXm3wV/La4hWjGDweP?=
- =?us-ascii?Q?ULldzWHHz6Sm+mvSBeCI4rliRppwfi+/TgJPg0rihPxsHkpwSrGiuqRUUuiZ?=
- =?us-ascii?Q?UmUSRj8NeCdhILMQyDXP/Dok1sDbzMI2GMtv3vrhx6H/+bP3YtQJ2KJhqNe9?=
- =?us-ascii?Q?4DaIfDmFQHUOULCsFenv8xx87Pw+qnHYwVaAl1lpKLrg4z750CN7mUL2pRgk?=
- =?us-ascii?Q?WwaEHbpLWT571mfKei2B6SOpzbkxBDQrQbt+t5ga6KirPfEGWjHG07Y5umND?=
- =?us-ascii?Q?43B0apgrKsBMNY/fHBNQAzoyGyiymnYuqOxVm7bgnS2hAp/aqbhzAAPta8yf?=
- =?us-ascii?Q?95d3KvD0SG2WliftZCKnqd5Gb5U=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PLyPBtgN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47ee07570deso11665115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 11:06:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770318362; x=1770923162; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MJGpU534I8R6yuO7NumVDbZ4I8LAHVRbV45ADhgdXxc=;
+        b=PLyPBtgNohK7UYRlBZMdATklf7IeYiajHpjTgRrvDzvIh+8he59950MM/miqpfSDSA
+         aKPc1safO/GMLIebhfnz8tkYHDNra9dVU29fUjDyiSmMbUIFb4lyWYGIjeZEf/Tcvdig
+         MFoME2/XMKYqtOh5aMKgmpQDh/zQTJnrBR5CjBEoVHZKG1/Ef/ZXKMxD7inGAJnqyMX/
+         hKsuqDSbYMK6pOfefGr+nhP4u4MdS94VNR2z6AVZP8LhfyLsGscO7UqVI7cghqyRwphK
+         s7FbZeYwDUjVWM5HC1Jwei1tjG4ZtlskEaiY2qEULF1QlJdsrO0euZH7ITVx1TqJepUl
+         Btlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770318362; x=1770923162;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MJGpU534I8R6yuO7NumVDbZ4I8LAHVRbV45ADhgdXxc=;
+        b=B2oZa6rVXtSF/onsAq0ZCThFmGoatNNN9+F2SjzJgOa4SRSYBOE2xPseoKeMkvlx0L
+         LQN8b5Hj+SEseToLRqYLYClD9ZznrnA1jygbUCGlyf+7MnBCYDI5KqqoLpFyBTaQScvC
+         dbJgGBkkOIooBiUTV5zh2G9rSP7jpo+ukzYBIuNjeaqYWmkgBvrCSzs1JOmb+/btlPl3
+         eP4Pb7gbD2Mk6aWxf76kOp7qcj/17quov/ARoMlzbHLPIszqoeRRlPMEa82sQqpfu2Rb
+         yGv2+tQ2BIgjWQBBVJ8epj4tw7gIy4aFDxfhDI4JsZbFOJi1beUXRNyxK8sNMmaUSmCy
+         lubw==
+X-Gm-Message-State: AOJu0YxFDIKuO/E+KYHbjyDj17bE/yYIwROKjCqDiafZyzgSWjGi23Me
+	0nbuqvbBpbX2a90/cXiQFZk+MCsk6WaZWi3INVYMbwa/1F3kbC7kDUu40LYMNw==
+X-Gm-Gg: AZuq6aKrDNmmaOi5Ran5U+4LVI53kuJLXuRsQr52DSUU5Hn9OzLum5qU8cZcwGDbfgA
+	l0v4ElZ6c6Ft1lXlHSBAbDd+nCaQ/XYP1zH0moDumc0sQATR2n8fLaW3bbR04WPWF4996wc8D83
+	fCFez19yLcd0hXohVmkQPrejABcQl52JVfhQzc3bkWukBkqyKcKXGPrwsRhrsd/JCMqFXemlykC
+	2Y0R30UzBSTKKLiDkfXdjB4dfpGMjpODFYDgtQVc1ujr4bQj6txTkzSa5afqPzrEpYXxdP72JCQ
+	+/oAcl+OWygxJ79NrUFn0ljrM69L684Cj1q7fegKidAZg0/xNpNHG461ZxjkI/zGGL4wTxlnjzW
+	bTkJrCKe1XAYI97Rm8Dbg8Slwijh3ghCSN8dhG+SakPndwCjqjnyisjdvKN9mz+RKgSxo9+v/f/
+	GWK233zimM
+X-Received: by 2002:a05:600c:5253:b0:480:6941:d38b with SMTP id 5b1f17b1804b1-4832021cdcamr5731905e9.30.1770318361490;
+        Thu, 05 Feb 2026 11:06:01 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43629756ff1sm205402f8f.43.2026.02.05.11.06.00
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Feb 2026 11:06:01 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] pax-utils: upgrade 1.3.3 -> 1.3.10
+Date: Thu,  5 Feb 2026 20:06:00 +0100
+Message-ID: <20260205190600.3184342-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ced53a0-0408-417b-a711-08de64e2bf16
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2026 18:16:56.3998
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SP5MwdvD0zxbEDkRGuWllci6WzCFZoig1dMP/5yZbczlbftv6KBsBwKmpqnYzrOc
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB10370
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 18:17:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124218
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 19:06:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124219
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
-.openembedded.org> On Behalf Of Peter Kjellerstedt via lists.openembedded.o=
-rg
-> Sent: den 3 februari 2026 11:05
-> To: yogesh.tyagi@intel.com; openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] abseil-cpp: Set CMAKE_CXX_STANDARD to =
-17
->=20
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <openembedded-devel@lis=
-ts.openembedded.org> On Behalf Of Yogesh Tyagi via lists.openembedded.org
-> > Sent: den 2 februari 2026 20:17
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: yogesh.tyagi@intel.com
-> > Subject: [oe] [meta-oe][PATCH] abseil-cpp: Set CMAKE_CXX_STANDARD to 17
-> >
-> > The compiler defaults to C++ < 17 which causes build failures.
-> > Abseil requires C++17 or higher, so explicitly set CMAKE_CXX_STANDARD=
-=3D17
-> > to ensure the build uses the correct C++ standard.
-> >
-> > Error:
-> > CMake Error at CMake/AbseilDll.cmake:745 (message):
-> >   The compiler defaults to or is configured for C++ < 17.  C++ >=3D 17 =
-is
-> >   required and Abseil and all libraries that use Abseil must use the sa=
-me C++
-> >   language standard
-> >
-> > Signed-off-by: Yogesh Tyagi <yogesh.tyagi@intel.com>
-> > ---
-> >  meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.=
-bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
-> > index e2bce0be11..d4475ee73a 100644
-> > --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
-> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
-> > @@ -21,6 +21,7 @@ inherit cmake
-> >  EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
-> >                   -DBUILD_TESTING=3DOFF    \
-> >                   -DABSL_ENABLE_INSTALL=3DON \
-> > +                 -DCMAKE_CXX_STANDARD=3D17 \
-> >                  "
-> >  #  riscv32-yoe-linux-ld.lld: error: undefined reference: __atomic_stor=
-e_8
-> >  #  >>> referenced by <recipe-sysroot>/usr/lib/libabsl_flags_internal.s=
-o.2505.0.0 (disallowed by --no-allow-shlib-undefined)
-> > --
-> > 2.34.1
->=20
-> I am not sure this is the correct thing to do. This means that for target=
-,
-> you will now downgrade the C++ standard when building abseil. However, as
-> it says, all libraries that use abseil must use the same C++ standard. Th=
-is
-> will thus no longer be the case, unless all users of abseil are also
-> modified to use C++17.
->=20
-> I believe the error you are seeing comes from building abseil-native, i.e=
-.,
-> the native compiler you use uses an older C++ standard by default. But al=
-so
-> in this case, just changing it for abseil is probably not the right thing=
- to
-> do.
->=20
-> The correct solution, I believe, is to use a newer native compiler. This =
-may
-> mean that you will have to use a buildtools tarball unless you can upgrad=
-e
-> your host system.
->=20
-> //Peter
+Update the SRC_URI also, the previous one became inaccessible
+a while ago. This is an official mirror[1].
 
-I note that this was integrated without any response to my concerns.
+Since the last update the project switched to meson build system.
 
-//Peter
+Changes:
+https://github.com/gentoo/pax-utils/compare/v1.3.3...v1.3.10
 
+[1]: https://packages.gentoo.org/packages/app-misc/pax-utils
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../pax-utils/pax-utils_1.3.10.bb             | 30 ++++++++++++++++
+ .../pax-utils/pax-utils_1.3.3.bb              | 35 -------------------
+ 2 files changed, 30 insertions(+), 35 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
+ delete mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
+
+diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
+new file mode 100644
+index 0000000000..08dfcb7545
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Security-focused ELF files checking tool"
++DESCRIPTION = "This is a small set of various PaX aware and related \
++utilities for ELF binaries. It can check ELF binary files and running \
++processes for issues that might be relevant when using ELF binaries \
++along with PaX, such as non-PIC code or executable stack and heap."
++HOMEPAGE = "https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities"
++LICENSE = "GPL-2.0-or-later"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++
++SRC_URI = "git://github.com/gentoo/pax-utils;protocol=https;branch=master;tag=v${PV}"
++SRCREV = "d279ca563775105859f1f8c8467b8244d758cc62"
++
++RDEPENDS:${PN} += "bash"
++
++BBCLASSEXTEND = "native"
++
++inherit meson pkgconfig
++
++PACKAGECONFIG ??= ""
++
++PACKAGECONFIG[libcap] = "-Duse_libcap=enabled, -Duse_libcap=disabled, libcap"
++PACKAGECONFIG[libseccomp] = "-Duse_seccomp=true, -Duse_seccomp=false, libseccomp"
++PACKAGECONFIG[pyelftools] = "-Dlddtree_implementation=python, -Dlddtree_implementation=sh,, python3-pyelftools"
++
++do_install:append(){
++    if ${@bb.utils.contains('PACKAGECONFIG', 'pyelftools', 'true', 'false', d)}; then
++        sed -i 's,#!/usr/bin/env python,#!/usr/bin/env python3,' ${D}${bindir}/lddtree
++    fi
++}
++
+diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
+deleted file mode 100644
+index 4e80ca87ee..0000000000
+--- a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-SUMMARY = "Security-focused ELF files checking tool"
+-DESCRIPTION = "This is a small set of various PaX aware and related \
+-utilities for ELF binaries. It can check ELF binary files and running \
+-processes for issues that might be relevant when using ELF binaries \
+-along with PaX, such as non-PIC code or executable stack and heap."
+-HOMEPAGE = "http://www.gentoo.org/proj/en/hardened/pax-utils.xml"
+-LICENSE = "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+-
+-SRC_URI = "https://dev.gentoo.org/~vapier/dist/pax-utils-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "eeca7fbd98bc66bead4a77000c2025d9f17ea8201b84245882406ce00b9b6b14"
+-
+-RDEPENDS:${PN} += "bash"
+-
+-export GNULIB_OVERRIDES_WINT_T = "0"
+-
+-do_configure:prepend() {
+-    touch ${S}/NEWS ${S}/AUTHORS ${S}/ChangeLog ${S}/README
+-}
+-
+-do_install() {
+-    oe_runmake PREFIX=${D}${prefix} DESTDIR=${D} install
+-}
+-
+-BBCLASSEXTEND = "native"
+-
+-inherit autotools pkgconfig
+-
+-PACKAGECONFIG ??= ""
+-
+-PACKAGECONFIG[libcap] = "--with-caps, --without-caps, libcap"
+-PACKAGECONFIG[libseccomp] = "--with-seccomp, --without-seccomp, libseccomp"
+-PACKAGECONFIG[pyelftools] = "--with-python, --without-python,, python3-pyelftools"
+-
+-EXTRA_OECONF += "--enable-largefile"
 
