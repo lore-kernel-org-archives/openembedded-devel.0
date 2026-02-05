@@ -2,143 +2,309 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63698EA7962
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 04:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63105EA7963
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 04:05:07 +0000 (UTC)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13434.1770264133346748152
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13345.1770264299550811482
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 20:02:13 -0800
+ Wed, 04 Feb 2026 20:04:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=DPXvqAfr;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=XGWtd/0m;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=C83mIt4w;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Zag5C2eq;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6153eWhK4148181
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Feb 2026 04:02:12 GMT
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6153dkxH2639675
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Feb 2026 04:04:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FoYBF+3VCY1J55F2DAt34taOpXCRdIRdhsIILoTsoi4=; b=DPXvqAfrqBjdJ/Cg
-	5QGKdgQPTj4alFquZ9Fgv4O3005quDsqZF3PBHyV+z5R+aeja+MqO8a33Iec+FfW
-	ZPEc2eHo9EH1jx56pR/ZwF2x13N51AUAzFAiTjCeFdD6Wjl8+fKMM3eQt1+42Qck
-	eMqV+NVwgxJLtOMiZ+2dfS5hq7j2TmZ78j9Fpj4mR/JW4J01rOQj2bRdFwwVVSj1
-	ToA5WhA8CBzV5YB3eTB562DB3aDCIqLePHaduJNeyqCk9Onzw3e8PblFmH4fk6uk
-	FRH914RUjxpjWkg0UMQQar35a333RQDBx86MANrhD0T6kb872JGajTm+PyUV3x+T
-	KhXkjA==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c45nvjp7j-1
+	content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=Bnw+abm232nnL6hrWkoZb/
+	S5ygsrxHSUvKOzTCqpwVQ=; b=C83mIt4wpS2KZO3G91YaHm/3X803LTU7C83BYu
+	LdD4i2lxsFqba7D7q7dRT4R6W1CafQ6nDmq/H2YW5vlKp1GLXO0k91IYQaPFar3S
+	Aa+c+7JO5ODCyLthBKeSOICfVV+oDW3Rncf8q3yf0jR+PJbRjEf5g8Mpal/BUZ5C
+	Ke7+nyD6eJUmKlZW7daxhLksJAQl7WFymZ8AKBd+r5KtrsR9dPoPpr+8RQYCd57d
+	X3YfF53anZxmNYBTjoQ5AIn0YjhGzu4WAGLGd3wIcxyWd0igQVL+XHrYvYx/VJs3
+	iCZkekC0NEU3IQd9Sp/031CKrMlw5a9tA2em4bXL43iBzkiA==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c47qva9e6-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:02:12 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-890587d4e87so17949006d6.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 20:02:12 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770264131; cv=none;
-        d=google.com; s=arc-20240605;
-        b=KOOVN0ElDCpoU8Grx/niV3pqRBu+5jD+aMBJepmLg6lu54X/wDi83KuxVBU0Tsf6LN
-         Zo6f/VfNhzQgg+n5nwzXVRRM6q1zL6q04OjfUW08kOm/nwLlaelbXsYST7V4QL4murog
-         Cc41RxfTaojtc77PXJ60mLV/Ii5a5ETmLY7FE93bQAs9AjfmLNPB9Lb06RWyNgVrX64Q
-         sWtuZOu762y9U5Geyfq+u5PI79xiqsUkvUj/jb9MHzVhCyYG3qjHsuyhQMxyxytvKMqn
-         glgOEmU3tZucYbbIz9MDQXIWUOVQ983699qQA+tVcGRfIrEWhWIZ9pCGZpaVbWcz8n88
-         nw+g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=FoYBF+3VCY1J55F2DAt34taOpXCRdIRdhsIILoTsoi4=;
-        fh=3L+f5Jby9JuCj0GaFfu8Sw1mouDsennGoBY0C/szd8g=;
-        b=H/ckeagXnPNiY8nzj/xuDhXRJeQ5Fhwmyfr3S2BCTpwar9DaX6anJZYNgUnqQ0AReP
-         /wjS5/ASEmCttFfNahvI3nHRlnOkaDVcw5RbioIYekSIdVSeI+aXO2F0M1AwEfMNyYzF
-         btfuWulLr/6BBjOaj7+8oAa30GVaZFGQg0V+wpkQQZTKlWqdnH9Y6vKHG8AcoAtSURv+
-         Du+g/ANBsttXCPd5Pa7Fditf9tHKrqS4mXSYsRXOtFwAcmyG4XM0aypBML3Ljaamzm1P
-         Fxi84WYDtul2PzWNFaN15wE+kmYNXtJG/gU0i6Hr3NU2ZXtcAtFph/7ivg0XT7FWFcEL
-         juDA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:04:59 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c6310f81285so827913a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 20:04:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1770264131; x=1770868931; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FoYBF+3VCY1J55F2DAt34taOpXCRdIRdhsIILoTsoi4=;
-        b=XGWtd/0mRO6HRF3HA7otxnGdU0hDIc541ONUR6C6NKKQi3h4H9vGwBMXAl4CovlzfQ
-         rqk6P4fY0mysS2ESrqngAniy9tPvp+KbmS7vh+hNLUhrcBFCuyvI77leIHx4SFnN4jds
-         jQ3sSalg/gWxri+rAzTlMXdoOGOEkgDpaisXEz56HZn+TNL5oDgToh7NdincSxqbAIDB
-         lOqRF0NQiFAFmW/tom6cHKSNr9fVgf7PpwNXDWiR1yfhSdsYV8PgiIXTZ9o03WXonbd4
-         KcunLKoC5R1OwlEofXnNDlh4wjKSw66+1nMYw9SFGgb+i7rPsL6XbR+MwjRqiivVpGbZ
-         yoww==
+        d=oss.qualcomm.com; s=google; t=1770264298; x=1770869098; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Bnw+abm232nnL6hrWkoZb/S5ygsrxHSUvKOzTCqpwVQ=;
+        b=Zag5C2eqeFTpVusACuEcaSbBHNrm48DJBDWQemU7m6ZzD+sPZ0Rgawl2lPXslwp8tY
+         5U3uMOGFwhJMQwE2pftUTLs4kxISk+9ZEAbjUDvfL7rhF0zIG6WtLs8lWvRAPf74HZai
+         SCHEq9ACI0rqg4hgn1d5PM++BpTD3XoLsjdMI1gEFGN4hTfLp+2FFke/O1uoPBRN4oD6
+         6+KmcuuYK+YGEn0duVLXhoPEZ58GbLpQoK3a9P8SywAksDDNLJe4ThSIATEkuDNuPIrv
+         8khBrcPLLWUMdFC0Jh27pZZp2lDpMZOR0DdVEx5k6AUPnQXPEpVPO5tIJT8R/9+deBdw
+         m4fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770264131; x=1770868931;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=FoYBF+3VCY1J55F2DAt34taOpXCRdIRdhsIILoTsoi4=;
-        b=tNZEy9nzaz+lQ7c5L7xZEluUqrjgv18fNsQsjbeYMYOk6fQYoKFWKnry9+Ixkl4aCi
-         GKGgVIupoeUTRAYuy1/+Ew7V5hCCU4/wvm8zOURD4a/hJ3US/1mp9A3SsRRbDL5vFyyc
-         3XSIQlmHIPG2dNyLpbDuGM1lqVOxm28D2TouRBeAWX2LWN/ngkMB51EThUNFR4IC114h
-         4w9NA2P0izLCGQEvDlDJ3c02Scz+UQxyXj7jYAW0cXz3weY8HxHUUbFE9hXVgU8J37Yc
-         63l2MNviq02pdnQEXYI3rWZfeY2tFCp4X+ZFn0yWm/VY5tQjVLx/F/Jy4KRNXcDJb9CW
-         jXuw==
-X-Gm-Message-State: AOJu0YxVBbrus/rEPYjyc6SIM7Vdc+/liw2+gOR6L+4iDWjumYfj4kkA
-	tyLbIo7ZiONX90s3GNUk080PQPRAwCsWrVBUmufBcTXbH2HzsXHECks5U8rZrEOsra0TDicklZU
-	+i5e0uMslcR8d0dh2oArlUBLslef0lvxbQebGb/+bYl3wsilF8p+Iq5OqOmV35z5CedrZyqZrzQ
-	99hZBiWLCuZLNwUOPwKPBSsy7neUqwr1+XwiC/BG9gslI0bC0YMWkyFlhtSdY=
-X-Gm-Gg: AZuq6aKJgzdLZVytttE8oBr9bHuB4hh+/2I9lLQen6SXO3KvYIrmwxqcrAmrhgAIeK5
-	LwjPfb93k9xkzDe8oeWzKoGnUUslmAECId6MI34C49Zyl+4pfUMvLzzTzEsQbGGNS95cY+PkPCk
-	NtOpKbAAPvz6+af709c/ATgEFB9ysOaYxiwTcqukt8cS5FvpjxMSdmpjoeRS+SIsxk
-X-Received: by 2002:a05:6214:124a:b0:888:81ad:16b0 with SMTP id 6a1803df08f44-895221be05dmr77360566d6.53.1770264131606;
-        Wed, 04 Feb 2026 20:02:11 -0800 (PST)
-X-Received: by 2002:a05:6214:124a:b0:888:81ad:16b0 with SMTP id
- 6a1803df08f44-895221be05dmr77360276d6.53.1770264131146; Wed, 04 Feb 2026
- 20:02:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20260127050453.84586-1-hprajapati@mvista.com> <1121335.1770263986394226634@lists.openembedded.org>
-In-Reply-To: <1121335.1770263986394226634@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1770264298; x=1770869098;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Bnw+abm232nnL6hrWkoZb/S5ygsrxHSUvKOzTCqpwVQ=;
+        b=foGh0c3GIZHnnkVJdcOBFQ37P3QWgPE3xmNlsJ4PTN1DgnPM/QBc4iOPnpFU985hWM
+         /7aktAaRcdNNmUN9TcaTmKnnlZb6XbT3iyaJThA806XluVYmyTPD5yKpcYasEIjJb47T
+         hL8Xb7/JZSI2W8GURaUBUDlbATthM6Av+Sws3utWWaV0nFktcsEuGOn0jlbEDckusd/p
+         tWUGnU4jcrYZKUDwWdb06LVcLC01G1XZROXBQ+8KPBGL24lNpJe5eXxgyEv1O+I+4T1F
+         ORUmtfJALFi0PW3aQ0Z0mQzK9qm9jfvArRAI+JPQATeN5B5SyozdJAJAThJ4xlELbKAg
+         Qnbg==
+X-Gm-Message-State: AOJu0Yy8qjlsX396psYMvcU5IaIe1o/1J93kXONt2qsDd2569GaXuhng
+	kZ63uHtitriv0HWSpBJ6OJ1xyA5Qpd1ubVLrNsbytVA56xEJt2Y09v/94QbpjBw3eZ0bckqwXML
+	7x3BOjasIQdIyyNXTUTHUc8MjbCsJq51T8OUP55xAubVLk63g7jXilffGA5TPsIgh0OHe+Dey/7
+	G5rAAINvAZj0Xdsl0IZQE=
+X-Gm-Gg: AZuq6aJYg+O1HmTakqf+jeY95uhq8/O/OqpoY+HVqlGioyb8ohxQJjjhL+WIdAL+1e0
+	ZzUlvybM9C/8JOfYSHLUuTrSu+thEdWSX5szS/A1EomhNozsyuptzHqfsHy/YByISn264IFjNT4
+	ZSDTva+XKsgKGpBNS4SVTrCqrJYXCE3TjVQXmQo+rMruDoZucAb3UXDuV78gasxU8ljTd46tRwe
+	imiiF2SZ8tXinFQXXxzI3YKP4ehFBaYRRnyDSfYYumn3X9E0H8PEgS0GRCNL+Oc7x5mH2XA4Q4i
+	X5dGorCtZnXTVIpXRMiikcCIbBGO+C9AjLcHFeQcGEEWmGd4hB70F/79Jz+hbEfmxR+gPyUS8Ka
+	XMfYC871TDnmYsaVH6boW96zwrai4qp94aaeqq5Et
+X-Received: by 2002:a05:6a20:7486:b0:38e:9c64:bd29 with SMTP id adf61e73a8af0-3937240570amr4652472637.50.1770264298225;
+        Wed, 04 Feb 2026 20:04:58 -0800 (PST)
+X-Received: by 2002:a05:6a20:7486:b0:38e:9c64:bd29 with SMTP id adf61e73a8af0-3937240570amr4652455637.50.1770264297668;
+        Wed, 04 Feb 2026 20:04:57 -0800 (PST)
+Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8241d434f17sm3916502b3a.41.2026.02.04.20.04.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Feb 2026 20:04:57 -0800 (PST)
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 5 Feb 2026 12:02:00 +0800
-X-Gm-Features: AZwV_Qig-334XtqdE63gmFXkSnb-3tsUMjt5Ivb43ZEfhpRRpxcZZ77PzYTOZO8
-Message-ID: <CA+s=J=zFAHB=-_8e74+etLTu-DcnDuUDx821Joq3bt_kKsALhQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][scarthgap][PATCH] wireshark: fix for CVE-2026-0959
-To: hprajapati@mvista.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjA1MDAyNCBTYWx0ZWRfX6pZ4eKvBCcMH
- pPt1IQJh2Mdq70mS7+CHmYhcG9ngr2C/z1zPfiq5yCeeg0q5OgM7UPwOIKK8oXXDQzYlo75ZhOB
- /NUBO49npt1Savt/z00Mxt/68XKsL/zS+xRshTX/EJHPTSSgqjaV+OHK6E6JjaIEbEpAhNtEynh
- lIPrh2MR4BzVGAHJcz+SWy+V934EoDhDRGoo9+fZ4OE6ZCRTIahQa/rJTamhV+KwuYlbUINDXjY
- aiDhMgEK8uvMGIkFYgVsXjpCJAHwyhbS58CGtJjy7qaHT49rVJNNObXWDSy9IvN0XTPZZ8G1jj+
- Uwxc8yS0gd/UEnIFHmjyme9nUkyAZORy4aa1v4mnAKYME3eOYjbIwkNZEGDmtLuWGeyUNEPr4Ss
- mEf3Q8uUdqrV7nrsviT+HN4TTNRACGbpelvQd0bROKJJQsxthUOiuGWQoHOd+GU1v5J7VW79cqs
- HHOfEqKotYoH+ZZL6pw==
-X-Authority-Analysis: v=2.4 cv=DLmCIiNb c=1 sm=1 tr=0 ts=69841644 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Q4-j1AaZAAAA:8
- a=EZve6yLuAotA6fU_aigA:9 a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
- a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-GUID: C_Erd7iSmnee1--GvdcEQ6ar3tOe2Na7
-X-Proofpoint-ORIG-GUID: C_Erd7iSmnee1--GvdcEQ6ar3tOe2Na7
+To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
+Subject: [PATCH 00/45] Whinlatter pull request
+Date: Thu,  5 Feb 2026 09:34:38 +0530
+Message-ID: <cover.1770263721.git.anuj.mittal@oss.qualcomm.com>
+X-Mailer: git-send-email 2.52.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=GaEaXAXL c=1 sm=1 tr=0 ts=698416eb cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iGHA9ds3AAAA:8 a=Q4-j1AaZAAAA:8 a=O24Aq5uEAAAA:8
+ a=bBaki8JrksI_8fc6wP0A:9 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
+ a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=SYBONWESK5muIIdMMRMZ:22
+X-Proofpoint-GUID: L59gsd3GMFE5_JfFmYAvxIYgaQ5g6bwO
+X-Proofpoint-ORIG-GUID: L59gsd3GMFE5_JfFmYAvxIYgaQ5g6bwO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjA1MDAyNCBTYWx0ZWRfX0Nbi6if1SXXi
+ D9VfjWRt3CYRhNbLAvQq7b5jUaNhep0ZcGverFTgmkawpvDK97nOoc/a0O/31O8kczFm5cVw+J/
+ IjkaRQsAhlqp/t0Y5spECU3EHX0dvypRmTIXzcO2PlIa29rNh1Gug4ofMwt5RGvVsvwPrX3EjyS
+ euALHEvzdU1siaeli83j8+ivg+x5EPEAfdqXBZ57AAGqDZJpa/mdjCYbrrsbJuOYgSww4Sps8P/
+ OzBva2k602xVWVd2Svx1g7ZvWpq1lh5B7kCUzzyMyVqfdu7fadwCjiIpb0DeyimRv6U1BqkMRdK
+ sVFiVIENJdsVe5Ck9x/LIWYXA5zfK/91hh1Zdke8I96Jko/66sQQfOAu1e5QoB8oT/8O1yE5s/Y
+ DAohMoWJVvKe4gkK/JbXE22x1KU/yWiOPvN2NY/uXlNHS2Os0YyZXh+T0AjgBVHijEBAQrylRl0
+ 3QRp0IIBDVspvYrmMPQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-04_08,2026-02-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- suspectscore=0 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
+ priorityscore=1501 phishscore=0 impostorscore=0 malwarescore=0 spamscore=0
+ suspectscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602050024
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:02:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124149
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:05:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124150
 
-On Thu, Feb 5, 2026 at 11:59=E2=80=AFAM Hitendra Prajapati via
-lists.openembedded.org <hprajapati=3Dmvista.com@lists.openembedded.org>
-wrote:
->
-> Hi Team,
-> Any update on this issue ?
+Please merge these changes in whinlatter. Tested locally and on
+autobuilder.
 
-It'd be picked in next week's testing and pull request.
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1294
 
-Thanks,
+The following changes since commit 16cd5b1b8d06d979f4f191aa95133a90c843c03a:
 
-Anuj
+  libowfat: update SRC_URI (2026-01-21 10:28:20 +0530)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib stable/whinlatter-next
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=stable/whinlatter-next
+
+Gyorgy Sarvari (37):
+  frr: patch CVE-2025-61099..61107
+  xrdp: patch CVE-2022-23468
+  xrdp: patch CVE-2022-23477
+  xrdp: patch CVE-2022-23478
+  xrdp: patch CVE-2022-23479
+  xrdp: patch CVE-2022-23480
+  xrdp: patch CVE-2022-23481
+  xrdp: patch CVE-2022-23482
+  xrdp: patch CVE-2022-23483
+  xrdp: patch CVE-2022-23484
+  xrdp: patch CVE-2022-23493
+  xrdp: patch CVE-2023-40184
+  xrdp: patch CVE-2023-42822
+  fontforge: patch CVE-2025-15279
+  fontforge: patch CVE-2025-15275
+  fontforge: patch CVE-2025-15269
+  fontforge: patch CVE-2025-15270
+  gimp: mark CVE-2025-15059 patched
+  gpsd: patch CVE-2025-67268
+  gpsd: patch CVE-2025-67269
+  libcdio: patch CVE-2024-36600
+  libcupsfilters: patch CVE-2025-64503
+  ndpi: ignore CVE-2025-25066
+  ez-ipupdate: patch CVE-2003-0887
+  proftpd: ignore CVE-2021-47865
+  sblim-sfcc: fix SRC_URI
+  anthy: fix SRC_URI
+  ttf-vlgothic: fix SRC_URI
+  linux-atm: fix SRC_URI
+  gimp: patch libunwind detection
+  python3-aiohttp: patch CVE-2025-69224
+  python3-aiohttp: patch CVE-2025-69225
+  python3-aiohttp: patch CVE-2025-69226
+  python3-aiohttp: patch CVE-2025-69227
+  python3-aiohttp: patch CVE-2025-69228
+  python3-aiohttp: patch CVE-2025-69229
+  python3-aiohttp: patch CVE-2025-69230
+
+Jason Schonberg (2):
+  nodejs: upgrade 22.21.1 -> 22.22.0
+  Use https when accessing archive.xfce.org
+
+Liu Yiding (1):
+  python3-protobuf: upgrade 6.33.1 -> 6.33.2
+
+Markus Volk (1):
+  gimp: update 3.0.6 -> 3.0.8
+
+Peter Marko (1):
+  python3-protobuf: upgrade 6.33.2 -> 6.33.5
+
+Tom Geelen (1):
+  unicode-ucd: adjust to correct checksum values.
+
+Trevor Gamblin (1):
+  hdf5: fix shasum, downloadfilename
+
+Wang Mingyu (1):
+  imagemagick: upgrade 7.1.2-12 -> 7.1.2-13
+
+ .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 --
+ ...ind-header-detection-on-non-macOS-pl.patch |  51 +++
+ .../gimp/gimp/CVE-2025-14422.patch            |  66 ----
+ .../gimp/gimp/CVE-2025-14423.patch            | 106 ------
+ .../gimp/gimp/CVE-2025-14424.patch            |  34 --
+ .../gimp/gimp/CVE-2025-14425.patch            |  79 ----
+ .../gimp/{gimp_3.0.6.bb => gimp_3.0.8.bb}     |  11 +-
+ .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb       |   7 +
+ .../ez-ipupdate/files/CVE-2003-0887.patch     | 158 ++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.9.bb  |   1 +
+ .../frr/frr/CVE-2025-61099-61107-1.patch      |  40 ++
+ .../frr/frr/CVE-2025-61099-61107-2.patch      |  80 ++++
+ .../frr/frr/CVE-2025-61099-61107-3.patch      | 293 ++++++++++++++
+ .../recipes-protocols/frr/frr_10.4.2.bb       |   3 +
+ .../linux-atm/linux-atm_2.5.2.bb              |   2 +-
+ .../recipes-support/ntopng/ndpi_4.2.bb        |   3 +-
+ .../oe-npm-cache                              |   0
+ ....21.bb => nodejs-oe-cache-native_22.22.bb} |   0
+ .../{nodejs_22.21.1.bb => nodejs_22.22.0.bb}  |   2 +-
+ .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |   2 +-
+ .../fontforge/fontforge/CVE-2025-15269.patch  |  35 ++
+ .../fontforge/fontforge/CVE-2025-15270.patch  |  44 +++
+ .../fontforge/fontforge/CVE-2025-15275.patch  |  33 ++
+ .../fontforge/CVE-2025-15279-1.patch          |  41 ++
+ .../fontforge/CVE-2025-15279-2.patch          |  34 ++
+ .../fontforge/fontforge_20230101.bb           |   7 +-
+ .../ttf-fonts/ttf-vlgothic_20200720.bb        |   2 +-
+ .../libcdio/libcdio/CVE-2024-36600.patch      |  32 ++
+ .../libcdio/libcdio_2.2.0.bb                  |   4 +-
+ .../gpsd/gpsd/CVE-2025-67268.patch            |  97 +++++
+ .../gpsd/gpsd/CVE-2025-67269.patch            | 158 ++++++++
+ .../recipes-navigation/gpsd/gpsd_3.26.1.bb    |   2 +
+ .../cups/libcupsfilters/CVE-2025-64503.patch  |  47 +++
+ .../cups/libcupsfilters_2.1.1.bb              |   8 +-
+ meta-oe/recipes-support/anthy/anthy_9100h.bb  |   2 +-
+ meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   6 +-
+ ...ck_7.1.2-12.bb => imagemagick_7.1.2-13.bb} |   6 +-
+ .../unicode-ucd/unicode-ucd_14.0.0.bb         |   6 +-
+ .../xrdp/xrdp/CVE-2022-23468.patch            |  34 ++
+ .../xrdp/xrdp/CVE-2022-23477.patch            |  38 ++
+ .../xrdp/xrdp/CVE-2022-23478.patch            |  85 +++++
+ .../xrdp/xrdp/CVE-2022-23479.patch            |  83 ++++
+ .../xrdp/xrdp/CVE-2022-23480-1.patch          | 356 ++++++++++++++++++
+ .../xrdp/xrdp/CVE-2022-23480-2.patch          |  54 +++
+ .../xrdp/xrdp/CVE-2022-23481.patch            |  46 +++
+ .../xrdp/xrdp/CVE-2022-23482.patch            |  69 ++++
+ .../xrdp/xrdp/CVE-2022-23483.patch            |  65 ++++
+ .../xrdp/xrdp/CVE-2022-23484.patch            |  31 ++
+ .../xrdp/xrdp/CVE-2022-23493.patch            |  33 ++
+ .../xrdp/xrdp/CVE-2023-40184.patch            |  73 ++++
+ .../xrdp/xrdp/CVE-2023-42822.patch            | 304 +++++++++++++++
+ meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  13 +
+ .../python3-aiohttp/CVE-2025-69224.patch      |  93 +++++
+ .../python3-aiohttp/CVE-2025-69225.patch      |  49 +++
+ .../python3-aiohttp/CVE-2025-69226.patch      | 134 +++++++
+ .../python3-aiohttp/CVE-2025-69227.patch      | 148 ++++++++
+ .../python3-aiohttp/CVE-2025-69228.patch      |  47 +++
+ .../python3-aiohttp/CVE-2025-69229-1.patch    | 111 ++++++
+ .../python3-aiohttp/CVE-2025-69229-2.patch    | 255 +++++++++++++
+ .../python3-aiohttp/CVE-2025-69230.patch      |  85 +++++
+ .../python/python3-aiohttp_3.12.15.bb         |   9 +
+ ...f_6.33.1.bb => python3-protobuf_6.33.5.bb} |   2 +-
+ meta-xfce/classes/thunar-plugin.bbclass       |   2 +-
+ meta-xfce/classes/xfce-app.bbclass            |   2 +-
+ meta-xfce/classes/xfce-panel-plugin.bbclass   |   2 +-
+ meta-xfce/classes/xfce.bbclass                |   4 +-
+ .../xfwm4-themes/xfwm4-themes_4.10.0.bb       |   2 +-
+ .../vala/xfce4-vala_4.10.3.bb                 |   2 +-
+ .../diskperf/xfce4-diskperf-plugin_2.8.0.bb   |   2 +-
+ .../netload/xfce4-netload-plugin_1.5.0.bb     |   2 +-
+ .../xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb |   2 +-
+ 71 files changed, 3416 insertions(+), 353 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
+ delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
+ rename meta-gnome/recipes-gimp/gimp/{gimp_3.0.6.bb => gimp_3.0.8.bb} (92%)
+ create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.21 => nodejs-oe-cache-22.22}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb} (98%)
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15270.patch
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15275.patch
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
+ create mode 100644 meta-oe/recipes-multimedia/libcdio/libcdio/CVE-2024-36600.patch
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67269.patch
+ create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-12.bb => imagemagick_7.1.2-13.bb} (98%)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23477.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23480-1.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23480-2.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23484.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2023-40184.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69225.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69226.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69227.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69228.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch
+ rename meta-python/recipes-devtools/python/{python3-protobuf_6.33.1.bb => python3-protobuf_6.33.5.bb} (95%)
+
+-- 
+2.52.0
+
 
