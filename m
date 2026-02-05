@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B687E91274
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59015E9127F
 	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:19 +0000 (UTC)
 Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15347.1770274812087209162
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15266.1770274810140901738
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 23:00:12 -0800
+ Wed, 04 Feb 2026 23:00:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aCSL6Zub;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QeOZ+h5m;
  spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47f5c2283b6so4363105e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:11 -0800 (PST)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-47ee76e8656so8019665e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770274810; x=1770879610; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770274808; x=1770879608; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=e8xFs1sNqW3ASvgOq8j3AC1x7UvvkiKDQnCbRZsrV24=;
-        b=aCSL6Zub78cVOXtMnYeCwnuNj0E0BCDW2yxoF4QH3dc6VIDaLfVynKwSWOU1wxLHrY
-         QRlhjHcjDtuBIqeocce/yauxDIfKVCw+KXcmNTMQ0bd4Xofp84Bw6qNHMaXvYf5QYFCk
-         ckQyzshMFfeY6cWkZZRP07xRAV5E9o2DXbkHDyii5fN8Y1VCooxrZ07YskOLRpuHyJUf
-         ayH8QLkgM4WiadJkpWFFSuWJBph8OBxNFbTzOa/AF+782wbjEex5xYYsR5FIwQ6YZR1f
-         iwRi6AmU4sPfLLw7hv5+xju6mqmHfKtGmhs+sUBrRZiDOhbx1NmC0KRFnH8vt2NmWoX8
-         /jbA==
+        bh=Sm3PBhbPMMtRbL5Lyrfz8MaQDj6hgYct+1lLARk/vVI=;
+        b=QeOZ+h5mdyvMQycW9KDc7eX5XrF1/g6kH7ZtgHKtH2ec5k2OK3k47dzIM+rRZb8+Cm
+         Db/ACRltwXWjnEVh1dqNYeJPQx69ZDKQyV5GFPQU5Cqvk5A6NfenJbcNre6MR7wr25rr
+         xJTJUO+osSspGwkhZiGm76AYdp88Ag5Q2SIHZIM9RKrxT5n5qdFy0fjqXEKs7Gk8YY9p
+         DtmrxKVoftVdvaf4r/iZ2WDl1rIz1QtjbmzwPJ1nUCKOeChgEqKo7Iw51zhgBPcr3mNI
+         C+3lGGId3TBF1ddub3IAsIzuLSTSHV4mV+DF29RTEjxuBZrLXsOdvqYHex3xb3cVuvyi
+         Uzkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770274810; x=1770879610;
+        d=1e100.net; s=20230601; t=1770274808; x=1770879608;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=e8xFs1sNqW3ASvgOq8j3AC1x7UvvkiKDQnCbRZsrV24=;
-        b=AfTQWKB0Yi02UYWib42Ds30EldGwh9dP2wfx7bFr7QmaCAYTP5xRIKDA+7BcmbilLb
-         8yHxe3dqdj1l8tF7dnZfo0hebqYeTJi2704aCoBIFa1oRB6XSUQ4qlWey2udd9uLzsXP
-         0sLDK4T74ZGEvTfXlsrVL9KSMfZciYaxytZgq/MIIHoOgYeu6KgYOlgXAUWUOtw18wPx
-         TkjG291p9Au8SaEwW5/q+bHdGJfH3+RZ9W+25WKI6qWz6QOKzy4A4/ZIiwKXspB9YXr1
-         7WpGfkTzSRzgkag3am06LC2TV2aI3v2nVJHP0L6yXVY8EshqVCjIB6iQP+3BcvwA9LRH
-         9Beg==
-X-Gm-Message-State: AOJu0YzlsawJKUGNLsXd0FW2EVBFAdP9GI17k0w/+MNrwpxIN4yVWGn9
-	uQWDvX4YqP3Izt98pZ9mjdpxM91xJnfRKMGCW54CbSp8WRbcXX+RA4hdPXUvwg==
-X-Gm-Gg: AZuq6aJrJCPFuXuaR5AA/XiBcHMvhYhsFTDAWzD8AHEI4AHok7idSu5TXEBqKMimCV0
-	bL6MWJkjc8tAg5x7gS7GOHW3GZceANdXEzT3/AytcePDQ2iC2+hIT+5tYOYRU0iM/DukV+8HfrH
-	ACejcBuPxINwkutQWk4jT2UeReagaiGcVLvD3+baay7XY6Ji5tbaRYgZhIw5Cd03c6XlMFfZKsv
-	b8MRBRy6TXloul7dyCWf5h95Q8sjYodWkPCi7/fbTXu3IDAI2Zfy+n3eR1+mPxP/wWKe1D2ZNIp
-	z9WAK/O5oOFWFzfnD4ig+/MsuoajTg2baTHT9BiTpi3gM63F+NgZeDqS7G3CqcBstqbzUa3JwgQ
-	0zmhjMWXAFz/MxtGCwvyPpE/2WTnFIZciVeEDvUNHwpFahYfZs8xLP+w+YolLQmsWPgmH2qrUDd
-	O+rcyzND+k
-X-Received: by 2002:a05:600c:848a:b0:46e:6d5f:f68 with SMTP id 5b1f17b1804b1-4830e930426mr72578425e9.12.1770274810365;
-        Wed, 04 Feb 2026 23:00:10 -0800 (PST)
+        bh=Sm3PBhbPMMtRbL5Lyrfz8MaQDj6hgYct+1lLARk/vVI=;
+        b=w9DSQkDQGpUJM4+QYSUPzN0rz/Zuyqo32bt/3GOMNr+7AiNOtUzO7AGiTS33jXmu/O
+         dK9207Eumn2hPlzO2TyQpi8V1dALKo90QcwnlTdxDuo6yBbgFzQ9PyKVuHg56OZfKcCm
+         0uEycZhOqum4rPda8ZO1psCD2hHGRf6JUxmBNm6nuPmssmVtTJMFSBAB6iQNpxzF5vXo
+         PRQ6NoLHgEsdKrbIeUbG+NatuvnCToECulB2Bv1ZBX56Mczr/PvWpgZbVApALwO9X/25
+         eUVphLX4aHePRUNx0Z9BwMMvBTKHtUwa3A19MIFuTVrPT5E09SXwemVFIGF8G5Fb5opR
+         9guQ==
+X-Gm-Message-State: AOJu0YymNbLy7DpSa14QLfudP90WrPjWKQCiSGlWfGd7Ooo0CKlPlPGk
+	DYVHr41i6FYOvDEQE9TLST10I6537SW6IBQK5qNfac9+fzi01DV+HXOLYFA7wA==
+X-Gm-Gg: AZuq6aLEx90icQeFyBK22+Y/ftYHFhx/Z9XqTqYtFi5OMMFFYTNojYS6cTOGIDGZU1z
+	OndiPczJWvYE099pm0av8c9jpn10bTWtIb0fSDfGk3iXl9K1LcFvPXd0Mk05iSWdZiV47d57CbO
+	0MVn7ar8xmQnVPfMhMVxHHvxeGNdxZPYS0z2/buPkWqmBTVVW0lv7R5DINnRso1MVn2PDwfp6xw
+	qGNFIal9eVtqqqP2gYAE+AmTj5CG8uWESNDHdDKA3PZRTxYbJA3nQGf6b2w4nem+drphOOackco
+	iC/jFem4iC7QG7+EAgitID1mw6kN77KSYl4qowL4Q2GOP4WeMHfUrTc10AcTth0HPP47CFwx0WQ
+	Sfm55TfdHCD7PRO8TdPfHRkkn3TofZf12D5nQVNWJW2i3ROI1qrccOuJx6EvWu1393UPRoCxZdd
+	9dttwEK5wg
+X-Received: by 2002:a05:600c:1e1d:b0:480:6910:abd1 with SMTP id 5b1f17b1804b1-4830e966cedmr76890495e9.18.1770274808369;
+        Wed, 04 Feb 2026 23:00:08 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.09
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.07
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 23:00:10 -0800 (PST)
+        Wed, 04 Feb 2026 23:00:08 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 20/20] redis: ignore CVE-2025-46686
-Date: Thu,  5 Feb 2026 07:59:55 +0100
-Message-ID: <20260205065955.1267785-20-skandigraun@gmail.com>
+Subject: [meta-python][whinlatter][PATCH 17/20] python3-werkzeug: upgrade 3.1.3 -> 3.1.4
+Date: Thu,  5 Feb 2026 07:59:52 +0100
+Message-ID: <20260205065955.1267785-17-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260205065955.1267785-1-skandigraun@gmail.com>
 References: <20260205065955.1267785-1-skandigraun@gmail.com>
@@ -67,48 +67,55 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124195
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124193
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-46686
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Upstream disputes that it is a security violation, and says that
-implementing a mitigation for this would negatively affect the rest
-of the application, so they elected to ignore it.
+Changelog:
+==============
+- safe_join on Windows does not allow special device names. This prevents
+  reading from these when using send_from_directory. secure_filename already
+  prevented writing to these.
+- The debugger pin fails after 10 attempts instead of 11.
+- The multipart form parser handles a \r\n sequence at a chunk boundary.
+- Improve CPU usage during Watchdog reloader.
+- Request.json annotation is more accurate.
+- Traceback rendering handles when the line number is beyond the available
+  source lines.
+- HTTPException.get_response annotation and doc better conveys the distinction
+  between WSGI and sans-IO responses.
 
-See Github advisory about the same vulnerability:
-https://github.com/redis/redis/security/advisories/GHSA-2r7g-8hpc-rpq9
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 868b4b2959c1f6be13693e31eae5b27a1fa697e6)
+(cherry picked from commit 74aa2bdac6d658791af34881f291d91aa4dc57ba)
+
+Contains fix for CVE-2025-66221.
+
+From the release notes:
+This is the Werkzeug 3.1.4 fix release, which fixes bugs but does not otherwise
+change behavior and should not result in breaking changes compared to the latest
+feature release.
+
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-extended/redis/redis_6.2.21.bb | 1 +
- meta-oe/recipes-extended/redis/redis_7.2.12.bb | 1 +
- 2 files changed, 2 insertions(+)
+ .../{python3-werkzeug_3.1.3.bb => python3-werkzeug_3.1.4.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_3.1.3.bb => python3-werkzeug_3.1.4.bb} (90%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis_6.2.21.bb b/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-index 6166769ffa..69f7a73f5d 100644
---- a/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-+++ b/meta-oe/recipes-extended/redis/redis_6.2.21.bb
-@@ -23,6 +23,7 @@ SRC_URI[sha256sum] = "6383b32ba8d246f41bbbb83663381f5a5f4c4713235433cec22fc4a47e
- CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
- CVE_STATUS[CVE-2022-0543] = "not-applicable-config: the vulnerability is not present in upstream, only in Debian-packaged version"
- CVE_STATUS[CVE-2022-3734] = "not-applicable-config: only affects Windows"
-+CVE_STATUS[CVE-2025-46686] = "disputed: upstream rejected because mitigating it would affect other functionality"
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
+index 73029eccc7..2cfb5864b1 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.1.3.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.1.4.bb
+@@ -10,7 +10,7 @@ HOMEPAGE = "https://werkzeug.palletsprojects.com"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5dc88300786f1c214c1e9827a5229462"
  
- inherit update-rc.d systemd useradd
+-SRC_URI[sha256sum] = "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
++SRC_URI[sha256sum] = "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
  
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-index 6527fb6996..997c962a96 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-@@ -23,6 +23,7 @@ RPROVIDES:${PN} = "virtual-redis"
+ inherit pypi python_flit_core
  
- CVE_STATUS[CVE-2025-21605] = "cpe-incorrect: the used version already contains the fix"
- CVE_STATUS[CVE-2025-27151] = "cpe-incorrect: the used version already contains the fix"
-+CVE_STATUS[CVE-2025-46686] = "disputed: upstream rejected because mitigating it would affect other functionality"
- CVE_STATUS[CVE-2025-46817] = "cpe-incorrect: the used version already contains the fix"
- CVE_STATUS[CVE-2025-46818] = "cpe-incorrect: the used version already contains the fix"
- CVE_STATUS[CVE-2025-46819] = "cpe-incorrect: the used version already contains the fix"
 
