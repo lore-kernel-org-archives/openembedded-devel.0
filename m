@@ -1,310 +1,407 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63105EA7963
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 04:05:07 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13345.1770264299550811482
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C216BEA7969
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 04:53:37 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14006.1770267210964362341
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 20:04:59 -0800
+ Wed, 04 Feb 2026 20:53:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=C83mIt4w;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Zag5C2eq;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6153dkxH2639675
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Feb 2026 04:04:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=Bnw+abm232nnL6hrWkoZb/
-	S5ygsrxHSUvKOzTCqpwVQ=; b=C83mIt4wpS2KZO3G91YaHm/3X803LTU7C83BYu
-	LdD4i2lxsFqba7D7q7dRT4R6W1CafQ6nDmq/H2YW5vlKp1GLXO0k91IYQaPFar3S
-	Aa+c+7JO5ODCyLthBKeSOICfVV+oDW3Rncf8q3yf0jR+PJbRjEf5g8Mpal/BUZ5C
-	Ke7+nyD6eJUmKlZW7daxhLksJAQl7WFymZ8AKBd+r5KtrsR9dPoPpr+8RQYCd57d
-	X3YfF53anZxmNYBTjoQ5AIn0YjhGzu4WAGLGd3wIcxyWd0igQVL+XHrYvYx/VJs3
-	iCZkekC0NEU3IQd9Sp/031CKrMlw5a9tA2em4bXL43iBzkiA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c47qva9e6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:04:59 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c6310f81285so827913a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 20:04:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W8Ir2EiF;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-794baacdefcso4972567b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 20:53:30 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770267210; cv=none;
+        d=google.com; s=arc-20240605;
+        b=ZpMcFARnsYE0G9cNMtSec1jpa+KNov95LKaj6GykEGG6oLqxeDBIkfPCWZ5NTs+9Y8
+         f2Cey6Ux+jrFDfh/LI6kh44XxlwOWWyzUsehFxKdw7tcSS/oBdYeZ7g+gPr3nzlK9/g7
+         lo6pjP8FdOKxE329PNi+pWKO+8o+s69vBjWNQFXy9wylkq8vIRlObYFrDu1hZwKz8fOa
+         5eJ7bNZ/1/LTxShIbX7buky00vCXpTE2zX5Y97buJ1EYWdQw4QIKEeXyugTjjilwbcc+
+         mM8ZYHpdaJLwK4zDGnnRXbgAABJH2UPRgoUk0f7TaNnJYkRUpr88BfeWFtvHfb8vQaMN
+         khHg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=d3EZnR0tftgx16g4qGFqN81lnlpv1XmeNqA9rweuIrg=;
+        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
+        b=G4y9GfUN2lb5R0gVCteF6027Nao2Wq2YQ7+TWxGwfdYJkVUGZ9DHiiWsTwwMxfjRYv
+         4xc90UPcIsD6/dP92uYBeAv/5mf3takI7Z77HTC6EMebgzrFOI3xrgnh7SqRuAlYJKD1
+         l0HiPf49uUSvCV4Op0nRGQyWdkPtY/k+QO0dHjkjP3f1WSY/otzemJtqQ22tRcYN+Llk
+         12Xh4BQOTKeEgaWuZqY5FLL1/EMZY++25hEWJjBHeJYe2GVGam5X7Hmgm1VVeA/ZFwUS
+         SnhiG6+QgBvcn1KgNtxLMoS6D/HF/HijBZXCNqlDKX/SVJp0W7k3R6cgUGlvzRdCQ6TM
+         wf+g==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1770264298; x=1770869098; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Bnw+abm232nnL6hrWkoZb/S5ygsrxHSUvKOzTCqpwVQ=;
-        b=Zag5C2eqeFTpVusACuEcaSbBHNrm48DJBDWQemU7m6ZzD+sPZ0Rgawl2lPXslwp8tY
-         5U3uMOGFwhJMQwE2pftUTLs4kxISk+9ZEAbjUDvfL7rhF0zIG6WtLs8lWvRAPf74HZai
-         SCHEq9ACI0rqg4hgn1d5PM++BpTD3XoLsjdMI1gEFGN4hTfLp+2FFke/O1uoPBRN4oD6
-         6+KmcuuYK+YGEn0duVLXhoPEZ58GbLpQoK3a9P8SywAksDDNLJe4ThSIATEkuDNuPIrv
-         8khBrcPLLWUMdFC0Jh27pZZp2lDpMZOR0DdVEx5k6AUPnQXPEpVPO5tIJT8R/9+deBdw
-         m4fg==
+        d=gmail.com; s=20230601; t=1770267210; x=1770872010; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=d3EZnR0tftgx16g4qGFqN81lnlpv1XmeNqA9rweuIrg=;
+        b=W8Ir2EiFsO8yu5ofXwCudRko/q0/NJpGqtWSHQtLRdmNyMbDVt8Oc8RYKVViwpqrxW
+         6sauCKFt2mngz5b4htUNVnra/XeL2QQwlvHdMbGHr1UUw9CLLmkmCqLohX+skjwNpUIg
+         jHC+8gVNnbWBtVI1ZzVG6a24F3lNT/RSVbz6xP0Hx1msxiUWxcDT3358Xz0+zJlHap0I
+         lIOutczMyRbpUA86NbwRTB8/b03ET4ono8F6YWCQdw/OKdM4sH+W0w344+2WNLELbUrp
+         lyvATEf7lmRKC3bduHAeoKGqXYsZxXBKq89wVxPP8pTsiuC7TDnuUY1PyiqerSlo2XWg
+         ebdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770264298; x=1770869098;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Bnw+abm232nnL6hrWkoZb/S5ygsrxHSUvKOzTCqpwVQ=;
-        b=foGh0c3GIZHnnkVJdcOBFQ37P3QWgPE3xmNlsJ4PTN1DgnPM/QBc4iOPnpFU985hWM
-         /7aktAaRcdNNmUN9TcaTmKnnlZb6XbT3iyaJThA806XluVYmyTPD5yKpcYasEIjJb47T
-         hL8Xb7/JZSI2W8GURaUBUDlbATthM6Av+Sws3utWWaV0nFktcsEuGOn0jlbEDckusd/p
-         tWUGnU4jcrYZKUDwWdb06LVcLC01G1XZROXBQ+8KPBGL24lNpJe5eXxgyEv1O+I+4T1F
-         ORUmtfJALFi0PW3aQ0Z0mQzK9qm9jfvArRAI+JPQATeN5B5SyozdJAJAThJ4xlELbKAg
-         Qnbg==
-X-Gm-Message-State: AOJu0Yy8qjlsX396psYMvcU5IaIe1o/1J93kXONt2qsDd2569GaXuhng
-	kZ63uHtitriv0HWSpBJ6OJ1xyA5Qpd1ubVLrNsbytVA56xEJt2Y09v/94QbpjBw3eZ0bckqwXML
-	7x3BOjasIQdIyyNXTUTHUc8MjbCsJq51T8OUP55xAubVLk63g7jXilffGA5TPsIgh0OHe+Dey/7
-	G5rAAINvAZj0Xdsl0IZQE=
-X-Gm-Gg: AZuq6aJYg+O1HmTakqf+jeY95uhq8/O/OqpoY+HVqlGioyb8ohxQJjjhL+WIdAL+1e0
-	ZzUlvybM9C/8JOfYSHLUuTrSu+thEdWSX5szS/A1EomhNozsyuptzHqfsHy/YByISn264IFjNT4
-	ZSDTva+XKsgKGpBNS4SVTrCqrJYXCE3TjVQXmQo+rMruDoZucAb3UXDuV78gasxU8ljTd46tRwe
-	imiiF2SZ8tXinFQXXxzI3YKP4ehFBaYRRnyDSfYYumn3X9E0H8PEgS0GRCNL+Oc7x5mH2XA4Q4i
-	X5dGorCtZnXTVIpXRMiikcCIbBGO+C9AjLcHFeQcGEEWmGd4hB70F/79Jz+hbEfmxR+gPyUS8Ka
-	XMfYC871TDnmYsaVH6boW96zwrai4qp94aaeqq5Et
-X-Received: by 2002:a05:6a20:7486:b0:38e:9c64:bd29 with SMTP id adf61e73a8af0-3937240570amr4652472637.50.1770264298225;
-        Wed, 04 Feb 2026 20:04:58 -0800 (PST)
-X-Received: by 2002:a05:6a20:7486:b0:38e:9c64:bd29 with SMTP id adf61e73a8af0-3937240570amr4652455637.50.1770264297668;
-        Wed, 04 Feb 2026 20:04:57 -0800 (PST)
-Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8241d434f17sm3916502b3a.41.2026.02.04.20.04.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 20:04:57 -0800 (PST)
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org, raj.khem@gmail.com
-Subject: [PATCH 00/45] Whinlatter pull request
-Date: Thu,  5 Feb 2026 09:34:38 +0530
-Message-ID: <cover.1770263721.git.anuj.mittal@oss.qualcomm.com>
-X-Mailer: git-send-email 2.52.0
+        d=1e100.net; s=20230601; t=1770267210; x=1770872010;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d3EZnR0tftgx16g4qGFqN81lnlpv1XmeNqA9rweuIrg=;
+        b=nPBQzM9KWf/5f/cpIz7WBYr1kUl6F+wQGqEp28a7YBakUCeCjBR6LaRqKn7wOCDfuc
+         HU82bZSTKJ0ZM9RoY+o2V/dDgSwowg3NPJACzPtzgtQ/jMvEDWmjjrjpbRKybONOH5c4
+         cJyxtmiB0WCAaUxs3moICehbTpMoKRLOLorGlgvPMQTW2iXKP3wh9y6+fnuey3A//U1K
+         jjeIrtPqjQPfdEUNBH5XMUVCob98r/Qkq4df9LIRO9TntUZe4EOWFBCzqxWIoRXVJ5sL
+         +1D84tcZaVRJ1FyCoYJt6oxzNannw9nCpdgwFDF0EGMtv9thGy6DoOqiqHqniCbGZFJ6
+         qprA==
+X-Gm-Message-State: AOJu0YxnGh06VrOaRB7kYcafY2oAytQjLsmDM5wQJ32Z4RI5/LOjP44b
+	oK3w0LHnPGWroe/ARI+2a0HeWqqV5bz4TxaaC74p20Ur3WM02kafagg5suzyOO3LeSDPXEO9NQ+
+	HseLOzb3djTIXPmWaJ1zp/qKPJunse7w=
+X-Gm-Gg: AZuq6aLW0IqUB2ckEV15AqeIgTxhqnOjf1sxt9HyXqN910MnURFkMGzw4qDkU0uHzhf
+	ZDmfMDlxuP0WTUsmkL29H/Aav+W97xHVlz1ius6g9YuVkgn4glQM4g+acq5HX3oWlKsvC0+IINl
+	Jz1CpTZGnC+GkvOVnUaQnjUIDOZD+gOZNC1QU7V4NBdeld9durqjJtEZb6EUdtH3oSQ7dpUkA8+
+	dOjnxhpm7QlIoVwNSD8ofHKzm/OkpBWeBGea7joL1pPbpo51mCvc2R3Ki8RZAiqqMvhyqlZI25D
+	L0NwdlrLpmJXiiO7tw/CbU6H3d905G/4axghx1L4Gu/amSNIj3UMXpqzdtstoi0r903AQe26dwp
+	shKq/dhM+3SfPKDSIJTOECA==
+X-Received: by 2002:a05:690c:4612:b0:794:c74c:afbf with SMTP id
+ 00721157ae682-794fe8428fdmr69846387b3.70.1770267209986; Wed, 04 Feb 2026
+ 20:53:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=GaEaXAXL c=1 sm=1 tr=0 ts=698416eb cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iGHA9ds3AAAA:8 a=Q4-j1AaZAAAA:8 a=O24Aq5uEAAAA:8
- a=bBaki8JrksI_8fc6wP0A:9 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
- a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=SYBONWESK5muIIdMMRMZ:22
-X-Proofpoint-GUID: L59gsd3GMFE5_JfFmYAvxIYgaQ5g6bwO
-X-Proofpoint-ORIG-GUID: L59gsd3GMFE5_JfFmYAvxIYgaQ5g6bwO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjA1MDAyNCBTYWx0ZWRfX0Nbi6if1SXXi
- D9VfjWRt3CYRhNbLAvQq7b5jUaNhep0ZcGverFTgmkawpvDK97nOoc/a0O/31O8kczFm5cVw+J/
- IjkaRQsAhlqp/t0Y5spECU3EHX0dvypRmTIXzcO2PlIa29rNh1Gug4ofMwt5RGvVsvwPrX3EjyS
- euALHEvzdU1siaeli83j8+ivg+x5EPEAfdqXBZ57AAGqDZJpa/mdjCYbrrsbJuOYgSww4Sps8P/
- OzBva2k602xVWVd2Svx1g7ZvWpq1lh5B7kCUzzyMyVqfdu7fadwCjiIpb0DeyimRv6U1BqkMRdK
- sVFiVIENJdsVe5Ck9x/LIWYXA5zfK/91hh1Zdke8I96Jko/66sQQfOAu1e5QoB8oT/8O1yE5s/Y
- DAohMoWJVvKe4gkK/JbXE22x1KU/yWiOPvN2NY/uXlNHS2Os0YyZXh+T0AjgBVHijEBAQrylRl0
- 3QRp0IIBDVspvYrmMPQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-04_08,2026-02-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 impostorscore=0 malwarescore=0 spamscore=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602050024
+References: <20260204030503.1625693-1-skandigraun@gmail.com>
+In-Reply-To: <20260204030503.1625693-1-skandigraun@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Feb 2026 20:53:02 -0800
+X-Gm-Features: AZwV_QgB4rhSLVsi4KE1U3FimFfQJe8JaU3RE4mJW26q51CEYFaq5rRwwg5G9g0
+Message-ID: <CAMKF1spqtXgad06k0iXHjp3-0mAk7yPgf0=73bSBhZE=jMHsAQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] freerdp3: upgrade 3.20.2 -> 3.22.0
+To: skandigraun@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000357761064a0c748a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:05:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124150
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 04:53:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124151
 
-Please merge these changes in whinlatter. Tested locally and on
-autobuilder.
+--000000000000357761064a0c748a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1294
+does this also solve configure issue seen here
 
-The following changes since commit 16cd5b1b8d06d979f4f191aa95133a90c843c03a:
+https://gist.github.com/kraj/bda86016e7b8fc60f5fead5ee3dc9696
 
-  libowfat: update SRC_URI (2026-01-21 10:28:20 +0530)
+On Tue, Feb 3, 2026 at 7:05=E2=80=AFPM Gyorgy Sarvari via lists.openembedde=
+d.org
+<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
 
-are available in the Git repository at:
+> Ptests passed successfully.
+>
+> Dropped manpages PACKAGECONFIG: when it is enabled, it requires an
+> executable that
+> is compiled from the project's source, but since it is cross-compiled, it
+> is not
+> usable. The cmakefile also started to explicitly disable generating this
+> tool
+> when cross-compiling is enabled.
+> Since this recipe has no native counterpart, and the manpages can't be
+> generated
+> in this state, this option was removed.
+>
+> Changes:
+> 3.22.0:
+> - Complete overhaul of SDL client
+> - Introduction of new WINPR_ATTR_NODISCARD macro wrapping compiler or C
+> language
+>   version specific [[nodiscard]] attributes
+> - Addition of WINPR_ATTR_NODISCARD to (some) public API functions so usag=
+e
+> errors
+>   are producing warnings now
+> - Add some more stringify functions for logging
+> - CVE fixes: CVE-2026-23948, CVE-2026-24682, CVE-2026-24683,
+> CVE-2026-24676,
+>   CVE-2026-24677, CVE-2026-24678, CVE-2026-24684, CVE-2026-24679,
+>   CVE-2026-24681, CVE-2026-24675, CVE-2026-24491, CVE-2026-24680
+> - [core,info] fix missing NULL check
+> - [gateway,tsg] fix TSG_PACKET_RESPONSE parsing
+> - Allow querying auth identity with kerberos when running as a server
+> - Sspi krb heimdal
+> - Tsg fix idleTimeout parsing
+> - [channels,smartcard] revert 649f7de
+> - [crypto] deprecate er and der modules
+> - [channels,rdpei] lock full update, not only parts
+> - [winpr,platform] add WINPR_ATTR_NODISCARD macro
+> - Wlog cleanup
+> - new stringify functions & touch API defines
+> - Add support for querying SECPKG_ATTR_PACKAGE_INFO to NTLM and Kerberos
+> - [channels,video] measure times in ns
+> - [utils] Nodiscard
+> - Error handling fixes
+> - [channels,drdynvc] check pointer before reset
+> - Winpr api def
+> - [winpr,platform] drop C23 [[nodiscard]]
+> - [gdi] add additional checks for a valid rdpGdi
+> - Sdl3 high dpiv2
+> - peer: Disconnect if Logon() returned FALSE
+> - [channels,rdpecam] fix PROPERTY_DESCRIPTION parsing
+> - [channel,rdpsnd] only clean up thread before free
+> - [channels,rdpei] add RDPINPUT_CONTACT_FLAG_UP
+>
+> 3.21.0:
+> - CVE fixes: CVE-2026-23530, CVE-2026-23531, CVE-2026-23532,
+> CVE-2026-23533,
+>   CVE-2026-23534, CVE-2026-23732, CVE-2026-23883, CVE-2026-23884
+> - [client,sdl] fix monitor resolution
+> - [codec,progressive] fix progressive_rfx_upgrade_block
+> - Krb cache fix
+> - Rdpdr improved checks
+> - Codec advanced length checks
+> - Glyph fix length checks
+> - Wlog printf format string checks
+> - [warnings,format] fix format string warnings
+> - Double free fixes
+> - [clang-tidy] clean up code warnings
+>
+> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> ---
+>
+> v2: add -DWITH_MANPAGES=3DOFF to EXTRA_OECMAKE
+>
+>  .../freerdp/{freerdp3_3.20.2.bb =3D> freerdp3_3.22.0.bb}        | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/freerdp/{freerdp3_3.20.2.bb =3D>
+> freerdp3_3.22.0.bb} (97%)
+>
+> diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
+> b/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+> similarity index 97%
+> rename from meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
+> rename to meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+> index 81f160a848..c182ee1339 100644
+> --- a/meta-oe/recipes-support/freerdp/freerdp3_3.20.2.bb
+> +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
+> @@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest +=3D "cmake coreutils"
+>
+>  inherit pkgconfig cmake ptest
+>
+> -SRCREV =3D "ef106b0c5adf739085ff4e8f45ef384e5a1c7bb3"
+> +SRCREV =3D "e3ef4c71138f76516299cb3637d2d0c59b2a3737"
+>  SRC_URI =3D "git://
+> github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;tag=3D${P=
+V}
+> <http://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dhttps;t=
+ag=3D$%7BPV%7D>
+> \
+>             file://run-ptest"
+>
+> @@ -38,6 +38,7 @@ EXTRA_OECMAKE =3D " \
+>      -DWITH_CLIENT_SDL=3DOFF \
+>      -DWITH_SAMPLE=3DOFF \
+>      -DWITH_CAIRO=3DON \
+> +    -DWITH_MANPAGES=3DOFF \
+>   "
+>
+>  X11_DEPS =3D "virtual/libx11 libxinerama libxext libxcursor libxv libxi
+> libxrender libxfixes libxdamage libxrandr libxkbfile"
+> @@ -49,7 +50,6 @@ PACKAGECONFIG[gstreamer] =3D
+> "-DWITH_GSTREAMER_1_0=3DON,-DWITH_GSTREAMER_1_0=3DOFF,gst
+>  PACKAGECONFIG[cups] =3D "-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,cups"
+>  PACKAGECONFIG[fuse] =3D "-DWITH_FUSE=3DON,-DWITH_FUSE=3DOFF,fuse3,fuse3"
+>  PACKAGECONFIG[pcsc] =3D "-DWITH_PCSC=3DON,-DWITH_PCSC=3DOFF,pcsc-lite"
+> -PACKAGECONFIG[manpages] =3D "-DWITH_MANPAGES=3DON,-DWITH_MANPAGES=3DOFF,
+> libxslt-native docbook-xsl-stylesheets-native"
+>  PACKAGECONFIG[ffmpeg] =3D "-DWITH_DSP_FFMPEG=3DON -DWITH_FFMPEG=3DON
+> -DWITH_SWSCALE=3DON, -DWITH_DSP_FFMPEG=3DOFF -DWITH_FFMPEG=3DOFF
+> -DWITH_SWSCALE=3DOFF,ffmpeg"
+>  PACKAGECONFIG[krb5] =3D "-DWITH_KRB5=3DON
+> -DWITH_KRB5_NO_NTLM_FALLBACK=3DOFF,-DWITH_KRB5=3DOFF,krb5"
+>  PACKAGECONFIG[openh264] =3D
+> "-DWITH_OPENH264=3DON,-DWITH_OPENH264=3DOFF,openh264"
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124119):
+> https://lists.openembedded.org/g/openembedded-devel/message/124119
+> Mute This Topic: https://lists.openembedded.org/mt/117628610/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-  https://git.openembedded.org/meta-openembedded-contrib stable/whinlatter-next
-  https://git.openembedded.org/meta-openembedded-contrib/log/?h=stable/whinlatter-next
+--000000000000357761064a0c748a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Gyorgy Sarvari (37):
-  frr: patch CVE-2025-61099..61107
-  xrdp: patch CVE-2022-23468
-  xrdp: patch CVE-2022-23477
-  xrdp: patch CVE-2022-23478
-  xrdp: patch CVE-2022-23479
-  xrdp: patch CVE-2022-23480
-  xrdp: patch CVE-2022-23481
-  xrdp: patch CVE-2022-23482
-  xrdp: patch CVE-2022-23483
-  xrdp: patch CVE-2022-23484
-  xrdp: patch CVE-2022-23493
-  xrdp: patch CVE-2023-40184
-  xrdp: patch CVE-2023-42822
-  fontforge: patch CVE-2025-15279
-  fontforge: patch CVE-2025-15275
-  fontforge: patch CVE-2025-15269
-  fontforge: patch CVE-2025-15270
-  gimp: mark CVE-2025-15059 patched
-  gpsd: patch CVE-2025-67268
-  gpsd: patch CVE-2025-67269
-  libcdio: patch CVE-2024-36600
-  libcupsfilters: patch CVE-2025-64503
-  ndpi: ignore CVE-2025-25066
-  ez-ipupdate: patch CVE-2003-0887
-  proftpd: ignore CVE-2021-47865
-  sblim-sfcc: fix SRC_URI
-  anthy: fix SRC_URI
-  ttf-vlgothic: fix SRC_URI
-  linux-atm: fix SRC_URI
-  gimp: patch libunwind detection
-  python3-aiohttp: patch CVE-2025-69224
-  python3-aiohttp: patch CVE-2025-69225
-  python3-aiohttp: patch CVE-2025-69226
-  python3-aiohttp: patch CVE-2025-69227
-  python3-aiohttp: patch CVE-2025-69228
-  python3-aiohttp: patch CVE-2025-69229
-  python3-aiohttp: patch CVE-2025-69230
+<div dir=3D"ltr">does this also solve configure issue seen here=C2=A0<div><=
+br></div><div><a href=3D"https://gist.github.com/kraj/bda86016e7b8fc60f5fea=
+d5ee3dc9696">https://gist.github.com/kraj/bda86016e7b8fc60f5fead5ee3dc9696<=
+/a></div></div><br><div class=3D"gmail_quote gmail_quote_container"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Tue, Feb 3, 2026 at 7:05=E2=80=AFPM Gyorg=
+y Sarvari via <a href=3D"http://lists.openembedded.org">lists.openembedded.=
+org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.or=
+g">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">Ptests passed successfully.<br>
+<br>
+Dropped manpages PACKAGECONFIG: when it is enabled, it requires an executab=
+le that<br>
+is compiled from the project&#39;s source, but since it is cross-compiled, =
+it is not<br>
+usable. The cmakefile also started to explicitly disable generating this to=
+ol<br>
+when cross-compiling is enabled.<br>
+Since this recipe has no native counterpart, and the manpages can&#39;t be =
+generated<br>
+in this state, this option was removed.<br>
+<br>
+Changes:<br>
+3.22.0:<br>
+- Complete overhaul of SDL client<br>
+- Introduction of new WINPR_ATTR_NODISCARD macro wrapping compiler or C lan=
+guage<br>
+=C2=A0 version specific [[nodiscard]] attributes<br>
+- Addition of WINPR_ATTR_NODISCARD to (some) public API functions so usage =
+errors<br>
+=C2=A0 are producing warnings now<br>
+- Add some more stringify functions for logging<br>
+- CVE fixes: CVE-2026-23948, CVE-2026-24682, CVE-2026-24683, CVE-2026-24676=
+,<br>
+=C2=A0 CVE-2026-24677, CVE-2026-24678, CVE-2026-24684, CVE-2026-24679,<br>
+=C2=A0 CVE-2026-24681, CVE-2026-24675, CVE-2026-24491, CVE-2026-24680<br>
+- [core,info] fix missing NULL check<br>
+- [gateway,tsg] fix TSG_PACKET_RESPONSE parsing<br>
+- Allow querying auth identity with kerberos when running as a server<br>
+- Sspi krb heimdal<br>
+- Tsg fix idleTimeout parsing<br>
+- [channels,smartcard] revert 649f7de<br>
+- [crypto] deprecate er and der modules<br>
+- [channels,rdpei] lock full update, not only parts<br>
+- [winpr,platform] add WINPR_ATTR_NODISCARD macro<br>
+- Wlog cleanup<br>
+- new stringify functions &amp; touch API defines<br>
+- Add support for querying SECPKG_ATTR_PACKAGE_INFO to NTLM and Kerberos<br=
+>
+- [channels,video] measure times in ns<br>
+- [utils] Nodiscard<br>
+- Error handling fixes<br>
+- [channels,drdynvc] check pointer before reset<br>
+- Winpr api def<br>
+- [winpr,platform] drop C23 [[nodiscard]]<br>
+- [gdi] add additional checks for a valid rdpGdi<br>
+- Sdl3 high dpiv2<br>
+- peer: Disconnect if Logon() returned FALSE<br>
+- [channels,rdpecam] fix PROPERTY_DESCRIPTION parsing<br>
+- [channel,rdpsnd] only clean up thread before free<br>
+- [channels,rdpei] add RDPINPUT_CONTACT_FLAG_UP<br>
+<br>
+3.21.0:<br>
+- CVE fixes: CVE-2026-23530, CVE-2026-23531, CVE-2026-23532, CVE-2026-23533=
+,<br>
+=C2=A0 CVE-2026-23534, CVE-2026-23732, CVE-2026-23883, CVE-2026-23884<br>
+- [client,sdl] fix monitor resolution<br>
+- [codec,progressive] fix progressive_rfx_upgrade_block<br>
+- Krb cache fix<br>
+- Rdpdr improved checks<br>
+- Codec advanced length checks<br>
+- Glyph fix length checks<br>
+- Wlog printf format string checks<br>
+- [warnings,format] fix format string warnings<br>
+- Double free fixes<br>
+- [clang-tidy] clean up code warnings<br>
+<br>
+Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com" =
+target=3D"_blank">skandigraun@gmail.com</a>&gt;<br>
+---<br>
+<br>
+v2: add -DWITH_MANPAGES=3DOFF to EXTRA_OECMAKE<br>
+<br>
+=C2=A0.../freerdp/{<a href=3D"http://freerdp3_3.20.2.bb" rel=3D"noreferrer"=
+ target=3D"_blank">freerdp3_3.20.2.bb</a> =3D&gt; <a href=3D"http://freerdp=
+3_3.22.0.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.22.0.bb</a>}=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-support/freerdp/{<a href=3D"http://freerdp3_3.=
+20.2.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.2.bb</a> =3D&gt=
+; <a href=3D"http://freerdp3_3.22.0.bb" rel=3D"noreferrer" target=3D"_blank=
+">freerdp3_3.22.0.bb</a>} (97%)<br>
+<br>
+diff --git a/meta-oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.2=
+0.2.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.2.bb</a> b/meta-=
+oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.22.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">freerdp3_3.22.0.bb</a><br>
+similarity index 97%<br>
+rename from meta-oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.20=
+.2.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.2.bb</a><br>
+rename to meta-oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.22.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">freerdp3_3.22.0.bb</a><br>
+index 81f160a848..c182ee1339 100644<br>
+--- a/meta-oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.20.2.bb"=
+ rel=3D"noreferrer" target=3D"_blank">freerdp3_3.20.2.bb</a><br>
++++ b/meta-oe/recipes-support/freerdp/<a href=3D"http://freerdp3_3.22.0.bb"=
+ rel=3D"noreferrer" target=3D"_blank">freerdp3_3.22.0.bb</a><br>
+@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest +=3D &quot;cmake coreutils&quot;<br>
+<br>
+=C2=A0inherit pkgconfig cmake ptest<br>
+<br>
+-SRCREV =3D &quot;ef106b0c5adf739085ff4e8f45ef384e5a1c7bb3&quot;<br>
++SRCREV =3D &quot;e3ef4c71138f76516299cb3637d2d0c59b2a3737&quot;<br>
+=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/FreeRDP/FreeRDP.=
+git;branch=3Dmaster;protocol=3Dhttps;tag=3D$%7BPV%7D" rel=3D"noreferrer" ta=
+rget=3D"_blank">github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=3Dh=
+ttps;tag=3D${PV}</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://run-ptest&quot;<br>
+<br>
+@@ -38,6 +38,7 @@ EXTRA_OECMAKE =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_CLIENT_SDL=3DOFF \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_SAMPLE=3DOFF \<br>
+=C2=A0 =C2=A0 =C2=A0-DWITH_CAIRO=3DON \<br>
++=C2=A0 =C2=A0 -DWITH_MANPAGES=3DOFF \<br>
+=C2=A0 &quot;<br>
+<br>
+=C2=A0X11_DEPS =3D &quot;virtual/libx11 libxinerama libxext libxcursor libx=
+v libxi libxrender libxfixes libxdamage libxrandr libxkbfile&quot;<br>
+@@ -49,7 +50,6 @@ PACKAGECONFIG[gstreamer] =3D &quot;-DWITH_GSTREAMER_1_0=
+=3DON,-DWITH_GSTREAMER_1_0=3DOFF,gst<br>
+=C2=A0PACKAGECONFIG[cups] =3D &quot;-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,cups=
+&quot;<br>
+=C2=A0PACKAGECONFIG[fuse] =3D &quot;-DWITH_FUSE=3DON,-DWITH_FUSE=3DOFF,fuse=
+3,fuse3&quot;<br>
+=C2=A0PACKAGECONFIG[pcsc] =3D &quot;-DWITH_PCSC=3DON,-DWITH_PCSC=3DOFF,pcsc=
+-lite&quot;<br>
+-PACKAGECONFIG[manpages] =3D &quot;-DWITH_MANPAGES=3DON,-DWITH_MANPAGES=3DO=
+FF, libxslt-native docbook-xsl-stylesheets-native&quot;<br>
+=C2=A0PACKAGECONFIG[ffmpeg] =3D &quot;-DWITH_DSP_FFMPEG=3DON -DWITH_FFMPEG=
+=3DON -DWITH_SWSCALE=3DON, -DWITH_DSP_FFMPEG=3DOFF -DWITH_FFMPEG=3DOFF -DWI=
+TH_SWSCALE=3DOFF,ffmpeg&quot;<br>
+=C2=A0PACKAGECONFIG[krb5] =3D &quot;-DWITH_KRB5=3DON -DWITH_KRB5_NO_NTLM_FA=
+LLBACK=3DOFF,-DWITH_KRB5=3DOFF,krb5&quot;<br>
+=C2=A0PACKAGECONFIG[openh264] =3D &quot;-DWITH_OPENH264=3DON,-DWITH_OPENH26=
+4=3DOFF,openh264&quot;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#124119): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/124119" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/124119</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117628610/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117628610/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
-Jason Schonberg (2):
-  nodejs: upgrade 22.21.1 -> 22.22.0
-  Use https when accessing archive.xfce.org
-
-Liu Yiding (1):
-  python3-protobuf: upgrade 6.33.1 -> 6.33.2
-
-Markus Volk (1):
-  gimp: update 3.0.6 -> 3.0.8
-
-Peter Marko (1):
-  python3-protobuf: upgrade 6.33.2 -> 6.33.5
-
-Tom Geelen (1):
-  unicode-ucd: adjust to correct checksum values.
-
-Trevor Gamblin (1):
-  hdf5: fix shasum, downloadfilename
-
-Wang Mingyu (1):
-  imagemagick: upgrade 7.1.2-12 -> 7.1.2-13
-
- .../0001-gimp-cross-compile-fix-for-bz2.patch |  30 --
- ...ind-header-detection-on-non-macOS-pl.patch |  51 +++
- .../gimp/gimp/CVE-2025-14422.patch            |  66 ----
- .../gimp/gimp/CVE-2025-14423.patch            | 106 ------
- .../gimp/gimp/CVE-2025-14424.patch            |  34 --
- .../gimp/gimp/CVE-2025-14425.patch            |  79 ----
- .../gimp/{gimp_3.0.6.bb => gimp_3.0.8.bb}     |  11 +-
- .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb       |   7 +
- .../ez-ipupdate/files/CVE-2003-0887.patch     | 158 ++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.9.bb  |   1 +
- .../frr/frr/CVE-2025-61099-61107-1.patch      |  40 ++
- .../frr/frr/CVE-2025-61099-61107-2.patch      |  80 ++++
- .../frr/frr/CVE-2025-61099-61107-3.patch      | 293 ++++++++++++++
- .../recipes-protocols/frr/frr_10.4.2.bb       |   3 +
- .../linux-atm/linux-atm_2.5.2.bb              |   2 +-
- .../recipes-support/ntopng/ndpi_4.2.bb        |   3 +-
- .../oe-npm-cache                              |   0
- ....21.bb => nodejs-oe-cache-native_22.22.bb} |   0
- .../{nodejs_22.21.1.bb => nodejs_22.22.0.bb}  |   2 +-
- .../sblim-sfcc/sblim-sfcc_2.2.8.bb            |   2 +-
- .../fontforge/fontforge/CVE-2025-15269.patch  |  35 ++
- .../fontforge/fontforge/CVE-2025-15270.patch  |  44 +++
- .../fontforge/fontforge/CVE-2025-15275.patch  |  33 ++
- .../fontforge/CVE-2025-15279-1.patch          |  41 ++
- .../fontforge/CVE-2025-15279-2.patch          |  34 ++
- .../fontforge/fontforge_20230101.bb           |   7 +-
- .../ttf-fonts/ttf-vlgothic_20200720.bb        |   2 +-
- .../libcdio/libcdio/CVE-2024-36600.patch      |  32 ++
- .../libcdio/libcdio_2.2.0.bb                  |   4 +-
- .../gpsd/gpsd/CVE-2025-67268.patch            |  97 +++++
- .../gpsd/gpsd/CVE-2025-67269.patch            | 158 ++++++++
- .../recipes-navigation/gpsd/gpsd_3.26.1.bb    |   2 +
- .../cups/libcupsfilters/CVE-2025-64503.patch  |  47 +++
- .../cups/libcupsfilters_2.1.1.bb              |   8 +-
- meta-oe/recipes-support/anthy/anthy_9100h.bb  |   2 +-
- meta-oe/recipes-support/hdf5/hdf5_2.0.0.bb    |   6 +-
- ...ck_7.1.2-12.bb => imagemagick_7.1.2-13.bb} |   6 +-
- .../unicode-ucd/unicode-ucd_14.0.0.bb         |   6 +-
- .../xrdp/xrdp/CVE-2022-23468.patch            |  34 ++
- .../xrdp/xrdp/CVE-2022-23477.patch            |  38 ++
- .../xrdp/xrdp/CVE-2022-23478.patch            |  85 +++++
- .../xrdp/xrdp/CVE-2022-23479.patch            |  83 ++++
- .../xrdp/xrdp/CVE-2022-23480-1.patch          | 356 ++++++++++++++++++
- .../xrdp/xrdp/CVE-2022-23480-2.patch          |  54 +++
- .../xrdp/xrdp/CVE-2022-23481.patch            |  46 +++
- .../xrdp/xrdp/CVE-2022-23482.patch            |  69 ++++
- .../xrdp/xrdp/CVE-2022-23483.patch            |  65 ++++
- .../xrdp/xrdp/CVE-2022-23484.patch            |  31 ++
- .../xrdp/xrdp/CVE-2022-23493.patch            |  33 ++
- .../xrdp/xrdp/CVE-2023-40184.patch            |  73 ++++
- .../xrdp/xrdp/CVE-2023-42822.patch            | 304 +++++++++++++++
- meta-oe/recipes-support/xrdp/xrdp_0.9.20.bb   |  13 +
- .../python3-aiohttp/CVE-2025-69224.patch      |  93 +++++
- .../python3-aiohttp/CVE-2025-69225.patch      |  49 +++
- .../python3-aiohttp/CVE-2025-69226.patch      | 134 +++++++
- .../python3-aiohttp/CVE-2025-69227.patch      | 148 ++++++++
- .../python3-aiohttp/CVE-2025-69228.patch      |  47 +++
- .../python3-aiohttp/CVE-2025-69229-1.patch    | 111 ++++++
- .../python3-aiohttp/CVE-2025-69229-2.patch    | 255 +++++++++++++
- .../python3-aiohttp/CVE-2025-69230.patch      |  85 +++++
- .../python/python3-aiohttp_3.12.15.bb         |   9 +
- ...f_6.33.1.bb => python3-protobuf_6.33.5.bb} |   2 +-
- meta-xfce/classes/thunar-plugin.bbclass       |   2 +-
- meta-xfce/classes/xfce-app.bbclass            |   2 +-
- meta-xfce/classes/xfce-panel-plugin.bbclass   |   2 +-
- meta-xfce/classes/xfce.bbclass                |   4 +-
- .../xfwm4-themes/xfwm4-themes_4.10.0.bb       |   2 +-
- .../vala/xfce4-vala_4.10.3.bb                 |   2 +-
- .../diskperf/xfce4-diskperf-plugin_2.8.0.bb   |   2 +-
- .../netload/xfce4-netload-plugin_1.5.0.bb     |   2 +-
- .../xfce4-dev-tools/xfce4-dev-tools_4.21.0.bb |   2 +-
- 71 files changed, 3416 insertions(+), 353 deletions(-)
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-gimp-cross-compile-fix-for-bz2.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14422.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14423.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14424.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2025-14425.patch
- rename meta-gnome/recipes-gimp/gimp/{gimp_3.0.6.bb => gimp_3.0.8.bb} (92%)
- create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
- create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-22.21 => nodejs-oe-cache-22.22}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_22.21.bb => nodejs-oe-cache-native_22.22.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.21.1.bb => nodejs_22.22.0.bb} (98%)
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15270.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15275.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
- create mode 100644 meta-oe/recipes-multimedia/libcdio/libcdio/CVE-2024-36600.patch
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67268.patch
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/CVE-2025-67269.patch
- create mode 100644 meta-oe/recipes-printing/cups/libcupsfilters/CVE-2025-64503.patch
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-12.bb => imagemagick_7.1.2-13.bb} (98%)
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23468.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23477.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23478.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23479.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23480-1.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23480-2.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23481.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23482.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23483.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23484.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2022-23493.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2023-40184.patch
- create mode 100644 meta-oe/recipes-support/xrdp/xrdp/CVE-2023-42822.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69224.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69225.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69226.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69227.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69228.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-1.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69229-2.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-aiohttp/CVE-2025-69230.patch
- rename meta-python/recipes-devtools/python/{python3-protobuf_6.33.1.bb => python3-protobuf_6.33.5.bb} (95%)
-
--- 
-2.52.0
-
+--000000000000357761064a0c748a--
 
