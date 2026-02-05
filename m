@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36461E91285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28395E9127F
 	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:09 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15340.1770274799790235256
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15261.1770274808031252590
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 23:00:00 -0800
+ Wed, 04 Feb 2026 23:00:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gapvhgmM;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4806dffc64cso4330155e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 22:59:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IHy+VyiR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4805ef35864so4532385e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770274798; x=1770879598; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770274806; x=1770879606; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=evI2UGvh1ccG/fVi3PsyY7/5wJorfyGtl9dTvBhQefI=;
-        b=gapvhgmMghQ3RLXK9IpfnHh/YU+qcsgd7M+7Hb6dZfBj25ph2/Jym1dnzetv3AwL2A
-         FdsvaL0rgwCIw4ykI7+1VALRPzSc48yyrw5xiBTqdTNU++3R9hPyuidkRnwHRg5a3I4V
-         IEU173cyxTqjP0hwQ4hDLIR3hK979U2m4F8d5c6qxxMDNKyN2dtkvzf4sABcK09GBSjT
-         HA98GsXPGWOqsAuXIKPu2G51UM53Rsvv0FqsceOJ/eg8FadrzkTa2lM2aMXvyHZNGp59
-         prcv0NSkciT4EhXVXYUSOfJ8eUHpficGpa/qqSO4zaqYdwcj3iEgBAbhzHChMtSJDJsG
-         CD6w==
+        bh=FLtYMa/0mFLZQzN3dEAOklD5R3nsx/ab7SlECvngNWk=;
+        b=IHy+VyiR8UfvrLXnETiFMiwJVI6RDaqlV8ij5Ci2bnLCJy6jJ0F8jZ3oqBRzd1S+Kt
+         QyWjk+ZZFfZH0pO2lyznMH1yTAlkbkQ9Ess/guCjZNkF4ylvlLqhr7ukur4WWJxVQO2c
+         kBi4u7f6pzVyyR9V/zsEmT7U1Rj3EqeWPHFo72Rf8jZ/hccadOplO63Kofv7W4HkW0Uh
+         la+d2+8Y4XKnNCvCv1clDrL6TNYwZX+43I8QEdBjz4RdedN6zEN2zpgsIrBnseWt6JT8
+         PfhdF9+z1vjGTgj1kP7BUrZWYCpNX4EgNFVrfx4tSeUze/5lmgSapqvx3y2Wor4W3Id/
+         +Thg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770274798; x=1770879598;
+        d=1e100.net; s=20230601; t=1770274806; x=1770879606;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=evI2UGvh1ccG/fVi3PsyY7/5wJorfyGtl9dTvBhQefI=;
-        b=l9pI5GAuzOt0VOBcDs91pu+wcOwplnbVlj5oC+f7igSW+3rCOtdO8AY7wmXRuGwHZ1
-         VNZ7GgGOW7LRleC6+I3fTMKeQJEfEiIpHCQQXJtn42aDLVsp2AIKnlX+mIBHV/WVux2D
-         L2iWOFdtp4kJW8sXNz2WEGSrz6I+/ccSWwbYP1it/PhnjUgrxcXzvWZR8c35XlcwlNOs
-         KWWd4RF4TiymLKjGAxKK1ou7hFKKtBIQ1JUoBYRWlKdTpg209LG8aJzI2SSCSTlR7Tyn
-         jw3g+dMc/0rnGvar/N8RdkEjIzt+SMRcweWzai0oFs2aTzkfxr9/pUwASeYpOE21zhHb
-         ArcQ==
-X-Gm-Message-State: AOJu0YxkQ/6f5hL2HVr+lRtATRkmfu6eFyMXQJaphvBv2oiTsUNs3Y1M
-	0IdhgpvlqVpqTICV2QxcemRVfUYwozzWAB34Ig98WeHAmFfWziS32+IHwe6UmA==
-X-Gm-Gg: AZuq6aL8Qr7oCCyyPwKWcdcvE3GmLv8t4udxhZFF5uls7L3E29RM0NdlcPuJc5ry7Sy
-	jXEbQ2o6UZ7lzGgPuX/pjPBE3q2UWEtHlGz1MrGzE5MwEUtLNEKPhA18C6mpdA8HA8RT3AM2jwq
-	VM3/2LFP6eQPRWwFDj1nk3mj+3Xj1+MWa2CmXLMumDvSQoEN8upgakxpsWx0OYB+00/PxoxDGo5
-	AqEGHfUfH9ElGfzpM2cucz++8x1OMrx+5Esp5gT6VysdZZoPfzEGhDmOaOaFfS8kV3padkb72mQ
-	U7COeJglNVl0xomiZS8sB1cMgV90itPkfYt3r5SFlezA4xsY8UvZHWve+TsMtJ7/H8H/vgiDqfE
-	6HiP3bnk+8qz0ARd5c4ckZkmSSB4Xyc4VTLxGk4KWwD/vcteF06MRh8uhk9n8HxAQ5/dknMCdvK
-	oedTDWrtvA
-X-Received: by 2002:a05:600c:4513:b0:479:3a89:121d with SMTP id 5b1f17b1804b1-4830e987c39mr73468705e9.36.1770274797796;
-        Wed, 04 Feb 2026 22:59:57 -0800 (PST)
+        bh=FLtYMa/0mFLZQzN3dEAOklD5R3nsx/ab7SlECvngNWk=;
+        b=ecJyKt/IQOHJD+/sI2qQDArqwskZFDfL0ENWSKXfWXnfiXi76Pf1Dp/LfXFGSQVR2W
+         5Ok+9VSkMlf+eONF8pAES2vZyEsy6sO9l1Qgm6PMOeD9wLpg/4XxwTeCf8Im16TeFvzA
+         aHFpY6RmtUqNrngNWsR3ReLU2XLPhUvaC8uxmIEced8NEmX8dy+NpUNh5sfuyhgOVYy8
+         543ifg/iTY3/ajPzMFbA6mrHD3cAzkDi6usmp2z+no8JZEZgDyxMmuu7oIxbcmpZd4B0
+         RRu0I5wAb93BXIaFoMpu+gsP2Bn2jMpawgR/907lQoxaS5UaCMQvLD/UNp3KNW5OKL5D
+         O3Ew==
+X-Gm-Message-State: AOJu0YwTWggRHQTp9FTeMuxOptiamuJ5onqp/P+HyugSlKAY/5yZkavY
+	6aIuhE5/PcTE9QO0k2Uak/C2WfB1WIeKuJuPNlb+pfSItkJAsgG1K6eJ7CwRxw==
+X-Gm-Gg: AZuq6aKFHH+4Et61s+HX/lfjzwQ9DEfJU1I1EYMSzliniDnA/RSkegcwuunhLon8Kt0
+	4TzWKr8kJuHwqJVw3CWL5e95sgwPs+r7XWGAlS3htbFgr5+as05fwKKZwbJgtbXweq5V+Lq2jk9
+	//PstHv0XQMUdFUkgalHr3RH9ntmtox5oC0ePoY+hdcjOsUsAUmgt+qUDM8ZWBeVa+DhJXTfP82
+	WSqoLqKLx6qDVHRIocAKkkKF3gvOyuIXFru8Ykb9EiaVj8+k6tTyvvGbBZQoxAbKSyYVn8NJ7QT
+	mHHR1m64MtnHviIC4Hk9K50kKDPwB/O92ghRWY3poqRKS7Oimt7N28LWXlRIgxDHfrtItHUXfP3
+	otGrbv/eSGaaRj9/NKPc0KMCOcOcg/kTPOJ0Mw2tlXsbBpJQAm1oYQ+ZbDSCYCwWWsHPSUW/QYO
+	UJ5YiyHiRYLKreOWsPYbA=
+X-Received: by 2002:a05:600c:1394:b0:480:53ce:45d3 with SMTP id 5b1f17b1804b1-4830e987c69mr72305265e9.18.1770274806230;
+        Wed, 04 Feb 2026 23:00:06 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.22.59.57
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 22:59:57 -0800 (PST)
+        Wed, 04 Feb 2026 23:00:05 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 03/20] python3-ldap: upgrade 3.4.4 -> 3.4.5
-Date: Thu,  5 Feb 2026 07:59:38 +0100
-Message-ID: <20260205065955.1267785-3-skandigraun@gmail.com>
+Subject: [meta-python][whinlatter][PATCH 14/20] python3-twitter: mark CVE-2012-5825 patched
+Date: Thu,  5 Feb 2026 07:59:49 +0100
+Message-ID: <20260205065955.1267785-14-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260205065955.1267785-1-skandigraun@gmail.com>
 References: <20260205065955.1267785-1-skandigraun@gmail.com>
@@ -67,69 +67,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124179
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124190
 
-Contains fixes for CVE-2025-61911 and CVE-2025-61912
+Details: https://nvd.nist.gov/vuln/detail/CVE-2012-5825
 
-Changelog:
-Security fixes:
-- CVE-2025-61911 (GHSA-r7r6-cc7p-4v5m): Enforce str input in
-  ldap.filter.escape_filter_chars with escape_mode=1; ensure proper
-  escaping.
-- CVE-2025-61912 (GHSA-p34h-wq7j-h5v6): Correct NUL escaping in
-  ldap.dn.escape_dn_chars to \00 per RFC 4514.
+The Debian bugtracker[1] indicated that the issue is tracked by
+upstream in github[2] (with a difference CVE ID, but same issue),
+where the vulnerability was confirmed. Later in the same github issue
+the solution is confirmed: the project switched to use the requests
+library, which doesn't suffer from this vulnerability.
 
-Fixes:
-- ReconnectLDAPObject now properly reconnects on UNAVAILABLE, CONNECT_ERROR
-  and TIMEOUT exceptions (previously only SERVER_DOWN), fixing reconnection
-  issues especially during server restarts
-- Fixed syncrepl.py to use named constants instead of raw decimal values
-  for result types
-- Fixed error handling in SearchNoOpMixIn to prevent a undefined variable error
+Due to this mark the CVE as patched.
 
-Tests:
-- Added comprehensive reconnection test cases including concurrent operation
-  handling and server restart scenarios
-
-Doc:
-- Updated installation docs and fixed various documentation typos
-- Added ReadTheDocs configuration file
-
-Infrastructure:
-- Add testing and document support for Python 3.13
+[1]: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=692444
+[2]: https://github.com/tweepy/tweepy/issues/279
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9eabbca90565e4ae790bedeef9a91df1878c6f93)
+(cherry picked from commit 3ee544e7591b36a49550a263a0ec4d64b5e490e8)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-ldap_3.4.4.bb => python3-ldap_3.4.5.bb}      | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-python/recipes-networking/python/{python3-ldap_3.4.4.bb => python3-ldap_3.4.5.bb} (76%)
+ meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-networking/python/python3-ldap_3.4.4.bb b/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-similarity index 76%
-rename from meta-python/recipes-networking/python/python3-ldap_3.4.4.bb
-rename to meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-index aecffa9d7e..2ec49b58ec 100644
---- a/meta-python/recipes-networking/python/python3-ldap_3.4.4.bb
-+++ b/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-@@ -7,13 +7,13 @@ HOMEPAGE = "https://www.python-ldap.org/"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
- 
--DEPENDS = "python3 openldap cyrus-sasl"
-+DEPENDS = "python3 openldap cyrus-sasl python3-setuptools-scm-native"
- 
--PYPI_PACKAGE = "python-ldap"
-+PYPI_PACKAGE = "python_ldap"
- 
--inherit pypi setuptools3
-+inherit pypi python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "7edb0accec4e037797705f3a05cbf36a9fde50d08c8f67f2aef99a2628fab828"
-+SRC_URI[sha256sum] = "b2f6ef1c37fe2c6a5a85212efe71311ee21847766a7d45fcb711f3b270a5f79a"
- 
- do_configure:prepend() {
-     sed -i -e 's:^library_dirs =.*::' \
+diff --git a/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb b/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+index 54379673c0..78a2b70ab3 100644
+--- a/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twitter_4.16.0.bb
+@@ -17,3 +17,5 @@ RDEPENDS:${PN} += "\
+     python3-requests-oauthlib \
+     python3-six \
+ "
++
++CVE_STATUS[CVE-2012-5825] = "fixed-version: The vulnerability has been fixed since v3.1.0"
 
