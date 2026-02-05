@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B190EE91264
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4395E91272
 	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:08 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15253.1770274801761369010
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15342.1770274803191418158
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 23:00:02 -0800
+ Wed, 04 Feb 2026 23:00:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CYvIMSRx;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-480706554beso5682615e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DI2PDNcr;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4805ef35864so4531185e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770274800; x=1770879600; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770274801; x=1770879601; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=uXTiWNw2pjY9lKP6w5IP4MchTQthCFmptOjdxLH1cXY=;
-        b=CYvIMSRx0+pIvIfLYo6NyREuWx6h0JOGziIdDnFUl086pXWEUI05KzRANupFhIYU0L
-         phuNrzOqBRmnhBCdrIWKuazbfPFpBsH1v4DYzgq1Iu8712se5d57yODADAYHFtGAH4LJ
-         NM/aADPm7jf5Vlnj+SMxCTZas0GvIFzss7BFTUMORwuOiW4BUHljUYRjf59heDx9AUcN
-         QJVFNEruOvMHwWUHWzM/h6vv557AH/P39o9KFn+hKr426uPDLJqMgh/5t9xP6vx7C6Tq
-         a7ipy8DaCHtVKY8kwiuVgH8cULRkyP5t4HRShjyKkE6q8sKhcO/5VsAaph2fNn+M99jK
-         8+GA==
+        bh=fEPHaSmoxb+H3cjYkqBWmCzNfnzI89xNZI7DQinqlF4=;
+        b=DI2PDNcrfhQ8XR14z06NoO1YyCTmmOjQZ88ZkfvpT6p96M4PZ0/DuvTKwj+jHeZILK
+         MFZY1Mf16Z82e/1ALeKTnAAXV752X7ULjVkNyZ/JoqsazLzjBwtmU41ykuKLZ9w4eu1q
+         U1P4IrWQknBZc3LLM+EjCeUqO/JuxQspN4Mnt7oNd7ENpM8ffAPOjDYrh7TEoKN4suvR
+         ZY0QBbaDH67EYm4bYy39RHSkry7i0YrYCARN1pMuMaYBWKUyeP82U2q34RnQWcMFophO
+         1rXORbxi7R/02h6wnQ5avUFzzg2LMorXFRTobun/pGkM8WWEOOIlsCIi8VZgiAt5AiRM
+         A0EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770274800; x=1770879600;
+        d=1e100.net; s=20230601; t=1770274801; x=1770879601;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=uXTiWNw2pjY9lKP6w5IP4MchTQthCFmptOjdxLH1cXY=;
-        b=e3OmRkRLutfYyxxYO3Wxol3W4W9qIb8+k1Ge+n8Fk2zcvpDR7YO0TY/1dUR0si+Kok
-         PKOUje75zOSFLscEIE+ygR38Ep50qF3Z/eKBvt2IcLPbeBu8u33X3LgnUaIR2cstbKmT
-         gbfUtQjagiI/mg+nsnSqA+cVB1XJj6r7Dfw2PXtc1UxWsqQt5T2cQSGbXGU0TNOW4/w0
-         A1Dv8rAmS73mI3haqGBOzpdufsVWFklGlF+x2OobpLVp2NXdAq47eejtRpTG0JKl65CZ
-         WFqbFarMEpppy8jGyeJSciEApsIg41ER16P++4lJiKx1wy3s93RP4TJkcoEYM+jxpGdd
-         L3pQ==
-X-Gm-Message-State: AOJu0YxX3iglqYrBVWbGdzf0fmTOlR9ctbDa9X5/pBEsmx4/vFIOMzVi
-	XikUzFlZdfsV8X39k7L8nwlm7SsaRyJulSKa4dmgEW498HDZLEPVeQM7iUWX+A==
-X-Gm-Gg: AZuq6aJiiQuYrSJdLWmGqTkk0sY98bp/AooZOe0Nd6wxz8Anqpn/Jf9XXCF/iwdIR2g
-	O/qEhz3Sgv54HdBDhE7OFydI4GxPAlJ3yyQTrmBPyhe9QuA6+og07udxRjr/ZG2eX+BlZ8IF0L2
-	C0GUvJyUkibJH1pHtn3CTRCf97bYokbnZmuwrB1FZGbXx6v9KhtGTwS6ezpZ+0sIXsPHz12q2Jc
-	BV3SBvH7AmiHW6XD+E1RFwP4EF5HX6Qk2aVsQ4RTxlBdiMMv82T6WUJbzSN9ujXOgCoDShe639w
-	DdIXfH+p1vhJ9ybOlH/jNC3RdM46RVimd6LdJ2uskf38yqEUSlRuok50ZILbEwiVblPlM1Gxqzu
-	afe6QHhnOvTKKlerKuOMggmZzwMVDoL/GWrOcUbcPpdSiYfFjHOHcNaB4QggU8j7iyOfPkHC/Tz
-	s3lxqA+vRrPJQgAYI3luU=
-X-Received: by 2002:a05:600c:34c4:b0:47a:975b:e3e6 with SMTP id 5b1f17b1804b1-4830e96fa56mr70061945e9.18.1770274800054;
-        Wed, 04 Feb 2026 23:00:00 -0800 (PST)
+        bh=fEPHaSmoxb+H3cjYkqBWmCzNfnzI89xNZI7DQinqlF4=;
+        b=fLCzjGES30KWk7GxrByOWwkQfIH/m0+QI7h6rwpezpaD/7Ako9f8xIWmzfxJJTWXOo
+         UR9ohwJBw4vnGNJ8sjG35UjOTUkh4cPYe32eGgKzljv8rvz3VevWLK8tA0B9NYCKqvGm
+         vlPYkZAYdC9G/9k8oyUQ7R8lgJB0hHt6sHu637mo7rNS8bb29B28uvPvVZy4SaJWwL6d
+         e6pWM1rigIkPh1jUfqGIwDQBe0gWYS5ScgCZja2tLE9Pkc9pmZmWKE+JyHCb2GvkY0m3
+         af2/UNpeKHc3cEnhHnGzQSv8spF86doY9BqYQqQuUB2nn57J94zeDOZn9pXTbnTzxyGa
+         lVSQ==
+X-Gm-Message-State: AOJu0YzS/NZVikw/sxGFcLdYwdocCNrRt8eE4LTYMh/VmGJ1soKMKca8
+	nUD7sjP2swkLSADxCrr1rlKlM6l67jwQmvH7PH4HBU5I+W759Usg+gRTLR9OWw==
+X-Gm-Gg: AZuq6aJVyle45Y+0MV/PKM7DINslD47YzxqMjwLxSTMHLbCU1ztuxjW3rp3UhLMmeJ0
+	fr3UJHlbEjbSaNTb3Eu3oiylIWr2p+6INe3d62ydOZpjZV1Lkbo7yUkKYQJsX7ZW+c5YQ+0koMN
+	ZS3yB5nVt7Y+rsO1x4/VgKmE1DbDf32+GrkzotNpNl4/hu/QpfRtk1nVu92GhMk/Yjzgl/e9E5s
+	errMqASnIiJ9mycQd7g5kpfR2W6gAXsTKC/G3Sw9v9ox9Mj0i/FE4dceTIgX5GHu/wTNyFnHKMh
+	6AQGtglhpgOOvFXkRzoyrHCtZ7ydneFK3SA8TlEBysBFlNtNpcg6pPHiVmpIYizpUAu/eI9qbvn
+	/xaQRGjMZHjBZUtw1XXdF9WzJiiYhwoJGx2Qb+vZE/W1GVHdtzn7Bt7qKK+72guN+fSbMi3dz//
+	hdGCse/ecf
+X-Received: by 2002:a05:600c:19cf:b0:480:1e8f:d15f with SMTP id 5b1f17b1804b1-4830e93eab1mr58067515e9.2.1770274801372;
+        Wed, 04 Feb 2026 23:00:01 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.22.59.59
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.00
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 22:59:59 -0800 (PST)
+        Wed, 04 Feb 2026 23:00:01 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 05/20] python3-m2crypto: ignore CVE-2009-0127
-Date: Thu,  5 Feb 2026 07:59:40 +0100
-Message-ID: <20260205065955.1267785-5-skandigraun@gmail.com>
+Subject: [meta-python][whinlatter][PATCH 07/20] python3-marshmallow: upgrade 4.1.0 -> 4.1.1
+Date: Thu,  5 Feb 2026 07:59:42 +0100
+Message-ID: <20260205065955.1267785-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260205065955.1267785-1-skandigraun@gmail.com>
 References: <20260205065955.1267785-1-skandigraun@gmail.com>
@@ -67,37 +67,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124181
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124183
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2009-0127
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-The vulnerability is disputed[1] by upstream:
-"There is no vulnerability in M2Crypto. Nowhere in the functions
-are the return values of OpenSSL functions interpreted incorrectly.
-The functions provide an interface to their users that may be
-considered confusing, but is not incorrect, nor it is a vulnerability."
+Bug fix:
+  Ensure URL validator is case-insensitive when using custom schemes
 
-[1]: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2009-0127
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit b46a5452a1c1a417f2971e494e151fa1f4022e36)
+(cherry picked from commit 39335015913a8bcc1b40fb7318334f626a9b8285)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...ython3-marshmallow_4.1.0.bb => python3-marshmallow_4.1.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-marshmallow_4.1.0.bb => python3-marshmallow_4.1.1.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
-index 9aac7b344f..efb6c79fa7 100644
---- a/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
-@@ -12,6 +12,8 @@ SRC_URI += " \
-           file://0002-fix-correct-struct-packing-on-32-bit-with-_TIME_BITS.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_4.1.0.bb b/meta-python/recipes-devtools/python/python3-marshmallow_4.1.1.bb
+similarity index 91%
+rename from meta-python/recipes-devtools/python/python3-marshmallow_4.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-marshmallow_4.1.1.bb
+index d1cd21d52c..2919897dc3 100644
+--- a/meta-python/recipes-devtools/python/python3-marshmallow_4.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-marshmallow_4.1.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
+                     file://LICENSE;md5=27586b20700d7544c06933afe56f7df4 \
+                     file://docs/license.rst;md5=13da439ad060419fb7cf364523017cfb"
  
-+CVE_STATUS[CVE-2009-0127] = "disputed: upstream claims there is no bug"
-+
- inherit pypi siteinfo python_setuptools_build_meta
+-SRC_URI[sha256sum] = "daa9862f74e2f7864980d25c29b4ea72944cde48aa17537e3bd5797a4ae62d71"
++SRC_URI[sha256sum] = "550aa14b619072f0a8d8184911b3f1021c5c32587fb27318ddf81ce0d0029c9d"
  
- DEPENDS += "openssl swig-native"
+ inherit python_flit_core pypi ptest-python-pytest
+ 
 
