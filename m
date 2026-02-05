@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 397B1E91286
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B656E91272
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 07:00:19 +0000 (UTC)
 Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15341.1770274801095477391
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15262.1770274808912226019
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Feb 2026 23:00:01 -0800
+ Wed, 04 Feb 2026 23:00:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dlEqSFnQ;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SFPWzAVB;
  spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47ff94b46afso5740575e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:00 -0800 (PST)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4807068eacbso4597385e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Feb 2026 23:00:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770274799; x=1770879599; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770274807; x=1770879607; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ubf1g0s1shXON5Zc/9m0PRLJ+QurfFGUztZuSy9lDhU=;
-        b=dlEqSFnQezqW6YMSOva8sh9lJMIT+ZGr7ZkBH/JKZe929+m6662x1C8FgEBaVUQZBo
-         Qc5bW02cSHI+XqGtdB7oezsA4L/NGFuCTur7d4tk7zoCZI4LRNqeqru/Uxq9sU8N9Dd2
-         r8z+98wgjOSEGVdvgKubb9AFkaiRmKahOl8sRG/w6u28f79eSlrY4ncjkXmuFE0+6ZTI
-         QXMnSKVEl4dA8l82lkRsCBylxT9Q/BaYfPdt3V9l7nwCu4DOwWDfBOl3p8hT5Bb4iIDu
-         ssLEJuecMfac4JcHbGc+YlZNdctOTiQR4dqACFWo0r4kAVONCgbYmw6QznWG3FTjqVSE
-         LLZQ==
+        bh=SVu3UkV/ukG+hvs97x2l4hvdQ8IS0cJvMCg6dDWoIrw=;
+        b=SFPWzAVBIwmPLBhIbfz0fvoNqb2sT39vJH2HR372TX2JOBFIXVSSz+SwoO2AoR6Aeg
+         FKdtq9PVjKL0bDFdDUiQjihumNJVF/M+g8tfG/KIUSUMwslB0ILsLh5XuFvFNKrBo0h+
+         ZfsZmYXBZSIq0v+SHkVeVslieq3RZm4znCK5Y8bqZZwvnHCFPUcMw7PDHgUty0ojLO7m
+         r5Ce7wQvCS6KYFkBUPbeklIb4FFZ9hQZpXa4j55A5Fan+KbXbVKrnqDz4IfxUZp6UsdZ
+         lvOiex7LWhYES3jlut1WNBvCQa7yBoPYVGmhzIF62luI0/IUtq+uNMcBew2htSlnBiM7
+         OIbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770274799; x=1770879599;
+        d=1e100.net; s=20230601; t=1770274807; x=1770879607;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=ubf1g0s1shXON5Zc/9m0PRLJ+QurfFGUztZuSy9lDhU=;
-        b=fdzzjYpS+bpvXQJeHeWrYqXXlIQNrmpBXxiC8+gu92FCvr06vObcqhD01DJ7hdEEtL
-         7Ga3sXVzCRT91mr2pDp5oscqqVpnS4gwALbp4BvBQp+j1qhIcsugomiYgmNsa8RoJu8n
-         tEyWIdSz7d772YC1FEesQBDsbeVuLkhMrkx2i7f1W0EtJSHyeius7tEPX2/jHAcuJ84N
-         UNxwS1lD6zUD0DzyY93oy/QAxcZl1SZBIFsAO4uE2fTKK9uE0/oi14Z7C0oBCvy/HhYL
-         bKaIH0aQ+t5vftiyuU3TfoOihAOMr8qFmJF/u2Y631VNwleYrHwXRIXY8ff5jJvt0/oY
-         Sl7Q==
-X-Gm-Message-State: AOJu0YxRbdeL2NBc5D5qniNcuMo/QZck+not8wrOPAXFndQkvoo003oS
-	aTo92rPJUK7QFbTPnLgk2wZMP+ya4XjEuKzyCLSj+C4PX6sUZzRQqyoYWDw0yQ==
-X-Gm-Gg: AZuq6aJmP1iS9wJuKXO7yymMh1eBQLB8xz4HIiNg2IcyD4VBDhjbH1q4GwTv1ssNLa2
-	jT0lURnSQpBDRPvN0FSirckyoLdKpOJqupJJ+Ae8N3rZddoZMpEspD93CBM7NrmOaQyAHc3DarY
-	pWkUxVVkEHw3zZ/1o1ooUSP8tmVTjAKky06RkJ7epCz3iqilxIH+Mz6reYxFETXCK7JqHv/obNA
-	esFBc2JgtxSPEIV2SqOzA0hKAbXVfgJu+e5H8nPxkn6TErzsiEeD0EYBrudmBg3OFz3vGcmcM/s
-	f6qVQxqAIk/Nh//iKSQtdAwt8K4XzkOXYWhFq169F47l/D9+9hDTFH0rtpN3UjNOyS8nnwCE4L2
-	1ePtEQCx34BSKs9ctQv57mXbxYE9tjDIvw7F/JEubqS+xl37owc6xaGdFgJ0fVlO4PQdSyK1FiL
-	YZmqgkQYTr
-X-Received: by 2002:a05:600c:348b:b0:480:1c1c:47d6 with SMTP id 5b1f17b1804b1-483179a223fmr22473445e9.6.1770274799424;
-        Wed, 04 Feb 2026 22:59:59 -0800 (PST)
+        bh=SVu3UkV/ukG+hvs97x2l4hvdQ8IS0cJvMCg6dDWoIrw=;
+        b=NF0J+t7aGRxe3PtTE8/Q3UL8a37WgGwaZC7tU19gw1p0RUSrWWS/NRWbYh357VkJ4o
+         1I4m+LLE4u058v1M6yC/KWCCCRdqVQ3BwFX1u4SaFOm2HZmq9kVy85t2kPTzJvIFuWuz
+         jn+733Frj3MNOAH6x6XOcHKGcoX+vAsEeFDUV6zwG6LLlIVmiwb6zvgfKbpO83iPOH72
+         bqTdHLpyggTyeWksxXl43qlKbhmmHbP8yAK9x8uLyrgGalF58GH5nYYv69nSU+Is3F+7
+         7JhsNkLkGl0jQSQbZaak+x5ozOKAAWCv/FPaOT87ILcPrc1c8pRmK57VqDzXv7xVrsYD
+         sH2A==
+X-Gm-Message-State: AOJu0YxBzrZRj9nyfhGH5jnVO5clT+qB1KC6bFoQ01zbumZsMai28rBA
+	ZPz0/nt4pFWwhhCVyEgy1Onh3vdzlEO9QjhRxUkiT2yTmmod8+HKNMyksPDj7A==
+X-Gm-Gg: AZuq6aJI+Y3FNwHap7u1tQPzAenRsz+3ZyNFOWjAqjw/dZu/TD+InRDGHtP2tQ/ASl4
+	tcm1xaRth3eJ4enAGhqwGSFPEVhFtvXhCVV6kjzhnjSKJf+3PflLX1YH02aWCvUGHwiPOqtIkYX
+	H2fh8p9wFfyexgj60rCw0DXQoKU+PEzFbtMHhA3Q3KipIb7o0lbD/ldBIOzATBr26WWZFhrCJIo
+	sIzU73mMDFZmXAzKF5PqCasSMBCY0dwxRI2z6jxypU2ismZH3r3BIxSzzHBBoXjMg3HiobEMpKn
+	hsg8a3ph4YswzqulsfzTXNt5XBxjqYLUmhAMNvTNks/jpUw3CAUh29DbtApUlJUZk5NQ0MNWP3y
+	3liiiaVk4hiMr6R15CH50DqIDZwL6JPOLqKax3raBSiqhj/043I4chdg//qYjSGSC368hEduKuc
+	/A0Iuk6Du2
+X-Received: by 2002:a05:600c:820a:b0:480:3338:292d with SMTP id 5b1f17b1804b1-4830e987bb9mr84482955e9.31.1770274807005;
+        Wed, 04 Feb 2026 23:00:07 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.22.59.57
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4830fe86bebsm34545505e9.10.2026.02.04.23.00.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Feb 2026 22:59:58 -0800 (PST)
+        Wed, 04 Feb 2026 23:00:06 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 04/20] python3-lief: upgrade 0.17.1 -> 0.17.2
-Date: Thu,  5 Feb 2026 07:59:39 +0100
-Message-ID: <20260205065955.1267785-4-skandigraun@gmail.com>
+Subject: [meta-python][whinlatter][PATCH 15/20] python3-uvicorn: mark CVE-2020-7694 patched
+Date: Thu,  5 Feb 2026 07:59:50 +0100
+Message-ID: <20260205065955.1267785-15-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260205065955.1267785-1-skandigraun@gmail.com>
 References: <20260205065955.1267785-1-skandigraun@gmail.com>
@@ -66,43 +66,37 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124180
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 07:00:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124191
 
-Contains fix for CVE-2025-15504
+Details: https://nvd.nist.gov/vuln/detail/CVE-2020-7694
 
-Changelog:
-- Differentiate Mach-O FAT magic bytes and Java class
-- Fix MinGW compilation for some configuration
-- Fix alignment issue when rebuilding PE relocations
-- Fix infinite loop when processing v2 dynamic relocation
-- Ensure that added DYN ELF sections are properly aligned
-- Fix GnuHash null dereference
-- Fix strong performance issue when parsing certain Mach-O
+The vulnerability was reported to the project[1], and the commit[2] that
+resolved the issue has been part of the project since version 0.11.7.
+
+Mark the CVE as patched due to this.
+
+[1]: https://github.com/Kludex/uvicorn/issues/723
+[2]: https://github.com/Kludex/uvicorn/commit/895807f94ea9a8e588605c12076b7d7517cda503
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cc4aa9b9d0263de0ea172db4d97ea9f98ae022b3)
+(cherry picked from commit a5ee234b8cf06b6385a9bf1eb5b60d6171a993c9)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python/{python3-lief_0.17.1.bb => python3-lief_0.17.2.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-lief_0.17.1.bb => python3-lief_0.17.2.bb} (95%)
+ meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-lief_0.17.1.bb b/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-lief_0.17.1.bb
-rename to meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
-index de54d45ef2..208e81c39e 100644
---- a/meta-python/recipes-devtools/python/python3-lief_0.17.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-lief_0.17.2.bb
-@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9ab5db472ff936b441055522f5000547"
- SECTION = "libs"
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb
+index b0ce49be97..ee295abf5d 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb
++++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.38.0.bb
+@@ -11,6 +11,7 @@ SRC_URI += "file://0001-ptest-disable-failing-tests.patch"
+ inherit pypi python_hatchling ptest-python-pytest
  
--SRCREV = "fe54643fe3d7a699c68b164dae87afb1eb059342"
-+SRCREV = "aa2b617f47c2f75fca9ff00b146dabbaf1b9f422"
- SRC_URI = " \
-     git://github.com/lief-project/LIEF.git;protocol=https;branch=release/0.17.x;tag=${PV} \
-     file://0001-build-requirements.txt-Allow-newer-versions.patch \
+ PYPI_PACKAGE = "uvicorn"
++CVE_STATUS[CVE-2020-7694] = "fixed-version: The vulnerability has been fixed since 0.11.7"
+ 
+ RDEPENDS:${PN} = "\
+     python3-click \
 
