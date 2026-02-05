@@ -1,164 +1,219 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0BA8ECD997
-	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 19:06:12 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28701.1770318363475241950
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B33FECD99A
+	for <webhook@archiver.kernel.org>; Thu,  5 Feb 2026 19:49:43 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.31])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29664.1770320975437436837
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 11:06:03 -0800
+ Thu, 05 Feb 2026 11:49:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PLyPBtgN;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-47ee07570deso11665115e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 11:06:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770318362; x=1770923162; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MJGpU534I8R6yuO7NumVDbZ4I8LAHVRbV45ADhgdXxc=;
-        b=PLyPBtgNohK7UYRlBZMdATklf7IeYiajHpjTgRrvDzvIh+8he59950MM/miqpfSDSA
-         aKPc1safO/GMLIebhfnz8tkYHDNra9dVU29fUjDyiSmMbUIFb4lyWYGIjeZEf/Tcvdig
-         MFoME2/XMKYqtOh5aMKgmpQDh/zQTJnrBR5CjBEoVHZKG1/Ef/ZXKMxD7inGAJnqyMX/
-         hKsuqDSbYMK6pOfefGr+nhP4u4MdS94VNR2z6AVZP8LhfyLsGscO7UqVI7cghqyRwphK
-         s7FbZeYwDUjVWM5HC1Jwei1tjG4ZtlskEaiY2qEULF1QlJdsrO0euZH7ITVx1TqJepUl
-         Btlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770318362; x=1770923162;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MJGpU534I8R6yuO7NumVDbZ4I8LAHVRbV45ADhgdXxc=;
-        b=B2oZa6rVXtSF/onsAq0ZCThFmGoatNNN9+F2SjzJgOa4SRSYBOE2xPseoKeMkvlx0L
-         LQN8b5Hj+SEseToLRqYLYClD9ZznrnA1jygbUCGlyf+7MnBCYDI5KqqoLpFyBTaQScvC
-         dbJgGBkkOIooBiUTV5zh2G9rSP7jpo+ukzYBIuNjeaqYWmkgBvrCSzs1JOmb+/btlPl3
-         eP4Pb7gbD2Mk6aWxf76kOp7qcj/17quov/ARoMlzbHLPIszqoeRRlPMEa82sQqpfu2Rb
-         yGv2+tQ2BIgjWQBBVJ8epj4tw7gIy4aFDxfhDI4JsZbFOJi1beUXRNyxK8sNMmaUSmCy
-         lubw==
-X-Gm-Message-State: AOJu0YxFDIKuO/E+KYHbjyDj17bE/yYIwROKjCqDiafZyzgSWjGi23Me
-	0nbuqvbBpbX2a90/cXiQFZk+MCsk6WaZWi3INVYMbwa/1F3kbC7kDUu40LYMNw==
-X-Gm-Gg: AZuq6aKrDNmmaOi5Ran5U+4LVI53kuJLXuRsQr52DSUU5Hn9OzLum5qU8cZcwGDbfgA
-	l0v4ElZ6c6Ft1lXlHSBAbDd+nCaQ/XYP1zH0moDumc0sQATR2n8fLaW3bbR04WPWF4996wc8D83
-	fCFez19yLcd0hXohVmkQPrejABcQl52JVfhQzc3bkWukBkqyKcKXGPrwsRhrsd/JCMqFXemlykC
-	2Y0R30UzBSTKKLiDkfXdjB4dfpGMjpODFYDgtQVc1ujr4bQj6txTkzSa5afqPzrEpYXxdP72JCQ
-	+/oAcl+OWygxJ79NrUFn0ljrM69L684Cj1q7fegKidAZg0/xNpNHG461ZxjkI/zGGL4wTxlnjzW
-	bTkJrCKe1XAYI97Rm8Dbg8Slwijh3ghCSN8dhG+SakPndwCjqjnyisjdvKN9mz+RKgSxo9+v/f/
-	GWK233zimM
-X-Received: by 2002:a05:600c:5253:b0:480:6941:d38b with SMTP id 5b1f17b1804b1-4832021cdcamr5731905e9.30.1770318361490;
-        Thu, 05 Feb 2026 11:06:01 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43629756ff1sm205402f8f.43.2026.02.05.11.06.00
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Feb 2026 11:06:01 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] pax-utils: upgrade 1.3.3 -> 1.3.10
-Date: Thu,  5 Feb 2026 20:06:00 +0100
-Message-ID: <20260205190600.3184342-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+ dkim=pass header.i=@axis.com header.s=selector1 header.b=GEmrCddU;
+ spf=pass (domain: axis.com, ip: 52.101.69.31, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SxrwOHHdgC/a50AXv6PDHFqWCN2hGrw4dfXEzFZrIgOb9ebIOzDHVBnL/8ojetNw5bonafQG/2fWx5VfbST43wQSm0FXMjbj+yFLhstyIrXcAwpcL5/PME84dvpo2EPx/FwjF1LtxN+iaHEABjxgLMDkoQb8fTSYkK2zxJlQQ9teSCt5COeVWUdmZNQmJEMOM9WqWsawijZYJ46/xCBFty5nD1tQjy+e46II9uUBaZzm1TzFaLmzdoodmroshaT/HL+HArz+1dOHZKPubkIgoTaNF1cdA7teJfCVHrB4yUzumg+YjXwFK10Ft6/llxKsQWrY5HCt81AvV/0mslUdCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HWb8MH6ic5wyoKPsG9C2LlK7tY0ABQ8orVkSdWbQASk=;
+ b=iDyggjlgL5l6sGWtUbEZwvj0zzWtzJrN9jkyawacm90wqqf9xyMxj6ATRINOgOqFza1H61aSIK3pFehp/sW9nUSZGJLvRaioUwqwngMbeQk8vdZMeU6qfAqtRQFz179aEfXA5D4x3U0C5gkD1wfsBHJdi1vX6xVNKn7Go9foQ80PqdFtWcbZmPKbWYnFmCYrXhD1nUbqvWb14UwHNb74MdcqINTeiXvywr3qPqi/TbIi5Ck0jWpDm8v0mdg4CiPCCFSVa8pydSqPkFYziZCet9VNP+RwOsKfe5kdRjb1auMRSMIQizSSldfkLDpelDsXVmQwRYbD2WymlhckL9z7AQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
+ dkim=pass header.d=axis.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HWb8MH6ic5wyoKPsG9C2LlK7tY0ABQ8orVkSdWbQASk=;
+ b=GEmrCddUQT9pC6x3fiU9CQRLdoLEYSvYnCBROHQI/uwQ8+/W/ZFnR8iNKr38b3i3vbHTUlJRfAotsZfDjVfAUnGS24gQNSUb8PoyB7MQlD2gVE8Ji8Qpyo+bdAH34xrAvj+mEvLUCcQvrBjTrnoUfHwxgUCIMI+nkQMAdNzPpu4=
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
+ by VI1PR02MB10249.eurprd02.prod.outlook.com (2603:10a6:800:1cb::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.7; Thu, 5 Feb
+ 2026 19:49:29 +0000
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::e5b6:b9a8:2a5d:e0cd]) by DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::e5b6:b9a8:2a5d:e0cd%5]) with mapi id 15.20.9587.013; Thu, 5 Feb 2026
+ 19:49:29 +0000
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: "frederikbraendstrup@gmail.com" <frederikbraendstrup@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH v1] glaze: use default install for cmake
+ files
+Thread-Topic: [oe] [meta-oe][PATCH v1] glaze: use default install for cmake
+ files
+Thread-Index: AQHclhA+dGUp0U9430KVNxgDebMIGrV0d27A
+Date: Thu, 5 Feb 2026 19:49:29 +0000
+Message-ID: 
+ <DB5PR02MB10213DB563D39B743A315F251EF99A@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <20260204195202.1101258-3-frederikbraendstrup@gmail.com>
+In-Reply-To: <20260204195202.1101258-3-frederikbraendstrup@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axis.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|VI1PR02MB10249:EE_
+x-ms-office365-filtering-correlation-id: d404af1a-aa92-4b27-33a8-08de64eface1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|376014|1800799024|366016|19132099003|38070700021;
+x-microsoft-antispam-message-info: 
+ =?iso-8859-1?Q?9jtphYmn/HyiTuLmXYvx9/5MftPG6w1QwrPv8YXuqVke8Og6CKL5y+JSWt?=
+ =?iso-8859-1?Q?GAAAefSE2z7HA7QUiRJukPr+AAMbEaIJB/hUt/wpfIdjWavj9YtV7bEo8c?=
+ =?iso-8859-1?Q?GXzVb483UCZn6XmD4e+vwA9dX7OG4Id56QYqdL4X1lOLEg71dk8PdsHMOd?=
+ =?iso-8859-1?Q?MPFj5f5USKOPfw8yOmfFWAUx5fz0I1jQYp3S2ImIQVWqR80YWE0qTdR3gg?=
+ =?iso-8859-1?Q?xHQEYGgie1IP2w6awZK/ykl/Rj2hVDKK9YTxZBGFZXyDh06KQQzZe6kN54?=
+ =?iso-8859-1?Q?LV8QzlZ2m1d39uRjnLEJHOv8tjG4OveZZvTacHNicTnoInwlEyVgJO18V4?=
+ =?iso-8859-1?Q?0QAswxXaBIzuYILp1jSTtmRYNP0LW96MCkKstSc3KcF2CgCRIDNAyoATFq?=
+ =?iso-8859-1?Q?hKO67srdsROLkFDW6DlT4IM26E62qxCaIFK+vlrkU5BmpKsevJthnKWcwX?=
+ =?iso-8859-1?Q?6GwYVHLRj96RcqxqeUtTiOTE5mCgNjPLM/V7kVrm9uFGW3A00WmmOw7ovz?=
+ =?iso-8859-1?Q?L4AhCn9b3KWosLp8my+f0DBNhdHIMrj0a+XoChcMNAIL/Ep5g/cD1UYsP0?=
+ =?iso-8859-1?Q?3kPsIah+VVeca+Rn5r1CLqPKSLEyGOC3HZBTzMYoHCebzWT15KHWRDA5NA?=
+ =?iso-8859-1?Q?PftTax9xkkOdmxsVasdDBhXDcDrvzSsSguzEqM47pc0W2ouYyANeoFhaQI?=
+ =?iso-8859-1?Q?pQ+u38loN3Lr6Ktr/fA8lBYzP67PfF4QXJGRCSUq3u/SnNMIPPX61Fjz7J?=
+ =?iso-8859-1?Q?Bp5uC78gigyf8DDp/xSbfjDQrzDbnLivafDLyK2iiymxQlYu/cC3anqPaT?=
+ =?iso-8859-1?Q?MAuwvHjKq0FCODoDVDRRfeKLMzCau4IzvKrHmLq+HwZIz4VsYLoovxSELb?=
+ =?iso-8859-1?Q?50wpDOcUY03S7RwD5JH1ZvaKWFpbGtl2asAeZ8/0MRxzbczSIkHE1Tet0m?=
+ =?iso-8859-1?Q?duaIWqEsjtrya/MzqR5QTAtx8b5gnXp0kwUO1UxMTnzJU9+/gIWix6i4jp?=
+ =?iso-8859-1?Q?weTNuP2vDBRYZ5n8vqBSBj0346hEymCkkHdeOWdbTTBjeWvYXlQNIDUUtb?=
+ =?iso-8859-1?Q?zD6di4k11Vxzw6Wh8UQE3rpHcepAFT/bDRoM6ss6EiFiP3+K4E8/wNTbmS?=
+ =?iso-8859-1?Q?9aPNuZ605TeRH+xSV/4NEPsDlxKY3Gjm+vm95D4jw7V1ZYjXLEP2r0o0c5?=
+ =?iso-8859-1?Q?B2DoiFDPjK1hbeH1KInAHmPZniEV4V5QqO0GiG2AIalHMfJuo7Zy9l8W7k?=
+ =?iso-8859-1?Q?lnUJXO0eG5SXA/8rMOPZJUdT7GgGKDdcAr7uvQURkjbbQMzliOF1naoFPC?=
+ =?iso-8859-1?Q?AK9OdKJ/z9yzrG2EApTQJVncUwMZi/xiT2BAHd4pNEsCjRc4ML9T7zAAQi?=
+ =?iso-8859-1?Q?hnpufOq6G+CZByVBay1pdk26MhjuHLX9xPYC60XjoJ7fppyX/fsSTYz/XV?=
+ =?iso-8859-1?Q?N7AFWGEsgyQQ8wF/tYjotdZIFG3RScHIKrd/QbhfiDpbgsQqHQmKjouN2O?=
+ =?iso-8859-1?Q?2afgEDvtGmJWVvQbQKDm616J12YQikOx7emczx4Kj3DIUmSAmBcTb8gcLc?=
+ =?iso-8859-1?Q?JjSGlC/BMn55OWS2LOgxWia95AC+tUi8ezdp2FETneL38w3dMmH18O7QAu?=
+ =?iso-8859-1?Q?JtFkHV1YK3kQRqDaOGks2DAW6vt2yiZ2GAo6ynixaU1XJkFy3BlnvfqGr3?=
+ =?iso-8859-1?Q?keHSUY8ErkBQPn8e8V0=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(19132099003)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-1?Q?0Om9ofjLD2W85qaa6SCOPJl8F1Qr0sOBCEGVcclP/Z4+AS2t3AfSqL1QHz?=
+ =?iso-8859-1?Q?B/zWmC0Ub5MmbXTDiW70E9lmNUybHmGcA4iVLKTc0/Jntl1c3BaygRNO+2?=
+ =?iso-8859-1?Q?BL2bWc/jUlwUEvWoPkG2pCQEnOYrorGWY+nOjIqjGPT4M4FlOGWPJuMwCN?=
+ =?iso-8859-1?Q?wFqKpwa5ILm+5RInw+MmslqNvQ+kwUKfUrQlDqEW/lUg2wf9vWhColsVDC?=
+ =?iso-8859-1?Q?1vgfk/QLuAkktlkIKLOKIjwrmYm4fvPtz5FN0LNgHtlZMKqB4c3+dNNr/i?=
+ =?iso-8859-1?Q?n2KiGBOqU0N1/GXcq6UylWeuprI+nI9OLMNZRpXZlfa4EKBBsYRpbKv95k?=
+ =?iso-8859-1?Q?lJVIURrdGZFYDbtHXpT5ZKoixyzPfzMPprxar6OwlDpZ+RN5ihKr4OvgHR?=
+ =?iso-8859-1?Q?Z/RBWERSQKLSN8o8UxlLS6VNMDHRaWHfRvLTRA9w3tlacHNe7Jsrqe4DKH?=
+ =?iso-8859-1?Q?qyY0NBKlqi0d4n+rwDFKp+KzPdUaZHWpZd1LVHcJgbthcviscIs1PsKPW3?=
+ =?iso-8859-1?Q?1twATBpTN2ughQ+g/eFmRiPnkZddjrcdBRgK2eQETS1nzCMFeosRZi68IC?=
+ =?iso-8859-1?Q?WLOkhVwmkKFmw9oS4IfwsFZKcmpjt6IDKYHXC0MKMci/GSGZEfNWef92BI?=
+ =?iso-8859-1?Q?ZBmz/+thqIti788DumQI9WdNG1TZrS4wY8zoknxM1eWHxd4Wfi0J+ZUZ3h?=
+ =?iso-8859-1?Q?Tgu8mRxoJAa3jtMWDj/9rngeh5iDsFThxZYjUmd2o/7rq+N8SbpxqyvCSy?=
+ =?iso-8859-1?Q?Jggxfz1FqG+yfBBHHsvYqCX2LlV8QTLgBGK0SQp17YUXdyGD5KkW5+g77k?=
+ =?iso-8859-1?Q?bwxnvxGIlGGAONQ86nh5+vhNDysWDua5VOSoFpnscDyS9xAJf2kHhGAyL1?=
+ =?iso-8859-1?Q?wLWGyzsZlOuiCLWQGAJjbx74RWyHrUxD+i46i6xjRjgvCJsgS8tyHPSLms?=
+ =?iso-8859-1?Q?P+sOAej4fLbLDhKTA6tmqmy7ChZvDtHypP/svTzkJBwdB3B25jPiHUgunx?=
+ =?iso-8859-1?Q?Ik2H3ixSq0mwmfHj8nqsF0KRSw+sZ8Q8Nd8CxuscEFa9+UkP2hVjm7eNJB?=
+ =?iso-8859-1?Q?oj1ktcXspoHb/mbAWICrxZsxfnGjEtFSzAUlbrYfgI97Vs2lS7wKaQG6cp?=
+ =?iso-8859-1?Q?U5PoA/brMI1BHhlG9DRDJqxi64VIsT7f5AkhjVFLBEb5Uv1Sa3qdHCHRsa?=
+ =?iso-8859-1?Q?sb8oed8O6fM1WC91OaYf7pgHBwIS0Z5HfVB9Dxw5lLhfFWs1R44duibfiL?=
+ =?iso-8859-1?Q?28PfORUnuUfXDJDlPcJodXqbzRwTx1Ll/W9FU+452k6bX8W5vh5tCi6J95?=
+ =?iso-8859-1?Q?vHQCjzf1t/BbjnAy33RWhamD+HBu5Uh68JZFGFAx31FgFZk+2XG3/euSGC?=
+ =?iso-8859-1?Q?nIstcG/e81bCzGdDG9H6gesGwgLEiJ0PsX4P6iZCVnNbY4+TszI03ctDrI?=
+ =?iso-8859-1?Q?BmJ0SNFrMkwGvj8XJli0MiDXskkh791yveJ3fVtan73HqgOc8jfX+hmLCG?=
+ =?iso-8859-1?Q?ET/8cmtaJ8g+BScTsyZD9ucIBszKlYCSnRmx39O3cLQngy+3UF/PKer3Tm?=
+ =?iso-8859-1?Q?+R8SRn36+S02Sl79tnZSZU2m8932NrQa8HsMH8gSoFeud0RN7UqR25egCA?=
+ =?iso-8859-1?Q?DGBPmw7UROZ9cp8cJqk1uwegYRT7jgx/eUiiQMtBnlf9c/pgFpHFtkMiBx?=
+ =?iso-8859-1?Q?2zZ0MZHHzY63xUEy+/6xlNjiAxMwWKdKr+divjNamMhqn6bqSgH7OhpqO9?=
+ =?iso-8859-1?Q?Ft4v7Eu+C7NyY0YtRF5Ys3QWo=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d404af1a-aa92-4b27-33a8-08de64eface1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2026 19:49:29.3320
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: xnHg3B4lsMO59AulF5CmmxPOjKdKH4J3ZDkyweQ/fxHh3blGba0vU18P4LByXeNj
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR02MB10249
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 19:06:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124219
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 19:49:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124220
 
-Update the SRC_URI also, the previous one became inaccessible
-a while ago. This is an official mirror[1].
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists=
+.openembedded.org> On Behalf Of Frederik Br=E6ndstrup via lists.openembedde=
+d.org
+> Sent: den 4 februari 2026 20:52
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+> Subject: [oe] [meta-oe][PATCH v1] glaze: use default install for cmake fi=
+les
+>=20
+> CMake correctly installs glaze in a location that cmake can find via
+> find_package. Without this patch, an application using the following
+>=20
+>     find_package(glaze)
+>     target_link_libraries(myprogram PUBLIC glaze::glaze)
+>=20
+> Would fail with the following error (with tmpdir redacted)
+>=20
+>     CMake Error in deps/vesl/src/Platform/CMakeLists.txt:
+>       Imported target "glaze::glaze" includes non-existent path
+>=20
+>         "$TMPDIR/recipe-sysroot/usr/share/include"
+>=20
+>       in its INTERFACE_INCLUDE_DIRECTORIES.  Possible reasons include:
+>=20
+>       * The path was deleted, renamed, or moved to another location.
+>=20
+>       * An install or uninstall procedure did not complete successfully.
+>=20
+>       * The installation package was faulty and references files it does =
+not
+>       provide.
+>=20
+> Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+> ---
+>  meta-oe/recipes-support/glaze/glaze_7.0.1.bb | 7 -------
+>  1 file changed, 7 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/glaze/glaze_7.0.1.bb b/meta-oe/recip=
+es-support/glaze/glaze_7.0.1.bb
+> index e481290b9c..db87d636e6 100644
+> --- a/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
+> +++ b/meta-oe/recipes-support/glaze/glaze_7.0.1.bb
+> @@ -11,13 +11,6 @@ inherit cmake
+>=20
+>  EXTRA_OECMAKE =3D "-Dglaze_BUILD_EXAMPLES=3DOFF -DBUILD_TESTING=3DOFF -D=
+glaze_ENABLE_FUZZING=3DOFF -Dglaze_DEVELOPER_MODE=3DOFF"
+>=20
+> -do_install:append() {
+> -    install -d ${D}${datadir}/cmake/${BPN}
+> -    mv -f ${D}${datadir}/${BPN}/*.cmake ${D}${datadir}/cmake/${BPN}
+> -    rmdir -p --ignore-fail-on-non-empty ${D}${datadir}/${BPN}
+> -}
+> -
 
-Since the last update the project switched to meson build system.
+To make the cmake files continue to go in the ${PN}-dev package where=20
+they belong, you need to add:
 
-Changes:
-https://github.com/gentoo/pax-utils/compare/v1.3.3...v1.3.10
+FILES:${PN}-dev +=3D "${datadir}/${BPN}/*.cmake"
 
-[1]: https://packages.gentoo.org/packages/app-misc/pax-utils
+> -# Glaze is a header-only C++ library, so the main package will be empty.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../pax-utils/pax-utils_1.3.10.bb             | 30 ++++++++++++++++
- .../pax-utils/pax-utils_1.3.3.bb              | 35 -------------------
- 2 files changed, 30 insertions(+), 35 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
- delete mode 100644 meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
+This comment is still valid (once FILES:${PN}-dev has been added above).
 
-diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
-new file mode 100644
-index 0000000000..08dfcb7545
---- /dev/null
-+++ b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.10.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Security-focused ELF files checking tool"
-+DESCRIPTION = "This is a small set of various PaX aware and related \
-+utilities for ELF binaries. It can check ELF binary files and running \
-+processes for issues that might be relevant when using ELF binaries \
-+along with PaX, such as non-PIC code or executable stack and heap."
-+HOMEPAGE = "https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities"
-+LICENSE = "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
-+
-+SRC_URI = "git://github.com/gentoo/pax-utils;protocol=https;branch=master;tag=v${PV}"
-+SRCREV = "d279ca563775105859f1f8c8467b8244d758cc62"
-+
-+RDEPENDS:${PN} += "bash"
-+
-+BBCLASSEXTEND = "native"
-+
-+inherit meson pkgconfig
-+
-+PACKAGECONFIG ??= ""
-+
-+PACKAGECONFIG[libcap] = "-Duse_libcap=enabled, -Duse_libcap=disabled, libcap"
-+PACKAGECONFIG[libseccomp] = "-Duse_seccomp=true, -Duse_seccomp=false, libseccomp"
-+PACKAGECONFIG[pyelftools] = "-Dlddtree_implementation=python, -Dlddtree_implementation=sh,, python3-pyelftools"
-+
-+do_install:append(){
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'pyelftools', 'true', 'false', d)}; then
-+        sed -i 's,#!/usr/bin/env python,#!/usr/bin/env python3,' ${D}${bindir}/lddtree
-+    fi
-+}
-+
-diff --git a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb b/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
-deleted file mode 100644
-index 4e80ca87ee..0000000000
---- a/meta-oe/recipes-devtools/pax-utils/pax-utils_1.3.3.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--SUMMARY = "Security-focused ELF files checking tool"
--DESCRIPTION = "This is a small set of various PaX aware and related \
--utilities for ELF binaries. It can check ELF binary files and running \
--processes for issues that might be relevant when using ELF binaries \
--along with PaX, such as non-PIC code or executable stack and heap."
--HOMEPAGE = "http://www.gentoo.org/proj/en/hardened/pax-utils.xml"
--LICENSE = "GPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
--
--SRC_URI = "https://dev.gentoo.org/~vapier/dist/pax-utils-${PV}.tar.xz"
--SRC_URI[sha256sum] = "eeca7fbd98bc66bead4a77000c2025d9f17ea8201b84245882406ce00b9b6b14"
--
--RDEPENDS:${PN} += "bash"
--
--export GNULIB_OVERRIDES_WINT_T = "0"
--
--do_configure:prepend() {
--    touch ${S}/NEWS ${S}/AUTHORS ${S}/ChangeLog ${S}/README
--}
--
--do_install() {
--    oe_runmake PREFIX=${D}${prefix} DESTDIR=${D} install
--}
--
--BBCLASSEXTEND = "native"
--
--inherit autotools pkgconfig
--
--PACKAGECONFIG ??= ""
--
--PACKAGECONFIG[libcap] = "--with-caps, --without-caps, libcap"
--PACKAGECONFIG[libseccomp] = "--with-seccomp, --without-seccomp, libseccomp"
--PACKAGECONFIG[pyelftools] = "--with-python, --without-python,, python3-pyelftools"
--
--EXTRA_OECONF += "--enable-largefile"
+>  ALLOW_EMPTY:${PN} =3D "1"
+>=20
+>  BBCLASSEXTEND =3D "native"
+> --
+
+//Peter
+
 
