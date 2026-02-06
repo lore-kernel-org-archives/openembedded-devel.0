@@ -1,216 +1,710 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9B03ECD9B8
-	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 01:44:38 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1829.1770342269839088198
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06FD8ECD9BC
+	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 02:26:09 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2541.1770344759288362823
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 17:44:30 -0800
+ Thu, 05 Feb 2026 18:25:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iLCA+lsC;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1770342270; x=1801878270;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=GLPnAL/GVj0Lt/w7uFCiXh6GfdMWjYXU+ebjMCmdilA=;
-  b=iLCA+lsC0gUDzLQhZIj+XGshw82JojFA9LZi6jHqNG6u4pfRbE9dQ80p
-   YTjqPv9x68IXiCZC2TTtXKg6FkvMqmLhev5O7ql2fo1IA7SGnhSYf7aCW
-   lVokQAox+og84R1QNjVOjJH6AnzAo5zOMwIt1DDIGZar0ChZQxUiM9rXL
-   ZGhdy+4tWyu8AJz3CgVgy/52lI/Yogt4qLbDlZmtzPNep0++iQQTxz+U4
-   u4bveaZA8r8QMR5xXuXV2LY4M4WEv0c4SDqrig26DXL/ZHeSKAVbd3caj
-   WRld0cZYVha95b2tUZkq94/F2/K6T9Aa1fIOW5eHYy0NQogN0uL6Sukef
-   g==;
-X-CSE-ConnectionGUID: 7fy01LqORSOFG45KuhCpsg==
-X-CSE-MsgGUID: JRKC5fQVRi+z4fPyDC6fFg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11692"; a="216135516"
-X-IronPort-AV: E=Sophos;i="6.21,275,1763391600"; 
-   d="scan'208";a="216135516"
-Received: from unknown (HELO mail.fujitsu.com) ([51.138.80.169])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2026 10:44:28 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr3.fujitsu.com (Postfix) with ESMTPS id 244EA1000349
-	for <openembedded-devel@lists.openembedded.org>; Fri,  6 Feb 2026 01:44:28 +0000 (UTC)
-Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id C64151C17294
-	for <openembedded-devel@lists.openembedded.org>; Fri,  6 Feb 2026 01:44:27 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 817E514022F0
-	for <openembedded-devel@lists.openembedded.org>; Fri,  6 Feb 2026 01:44:25 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] ettercap: 0.8.3.1-> 0.8.4
-Date: Fri,  6 Feb 2026 09:44:20 +0800
-Message-ID: <20260206014420.4687-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Zz9YGiQx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-790992528f6so16387287b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 18:25:59 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770344758; cv=none;
+        d=google.com; s=arc-20240605;
+        b=cPiwpYkFFdDkKGA0PrxGMxGIZcU7xf97ReFIDJ7FOXKikb18nO9/Vx2bD/RCLSKXLo
+         4rrzegf3ktVDF3doBP0kE4fOkA+GpOLn54FgCqijgDTrzuGT2kpT9C+vAOcGPOMjvjUr
+         bINo/WCyh6qksGZmQ5kcUEOwV7tFBPugqXTLdWC+C6CxUtDlwRgxfNvrf3L8lOIXoeVW
+         g6MJD/8W4BWCGuChqUc4QYTXTiEbvAPVodhIudHY3f1qjM9vlFoOYRYY+h841javC1vr
+         VIKEYPM0pPFUoGjaZgtrsT/cblip93FaxLu2oPAlcI9h7px2cwvWo7oKELZOoeXhTizG
+         HdJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=xcQOSQ26/rNge5EYlxsLIr2v4C91zfomD6qkyBbFnZc=;
+        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
+        b=IPIcR3aORNev6ziRl5c0zKfWEQkJuc8dt5vdCxO4tLj5nPI608rxNIT9x2s+m07ZC/
+         agKrTmVTo/RV7b5rVh6D7gfmQaXjcrayDMMMDnh0WZyJXRLRJ2tPMkSFABDqgJg7E+GH
+         hv6fC3CJkMIJ668qZYCqn0juo239gny0/DZDb6UUZDDHtyOOBQSXJMdczov50c1YZf4Q
+         XzVn1DEhh4cUJtJnYxa4UlJMqS5AWG1hfeSaQBgqsa6LZ5ioXwCWLkcMdaHkeHRfWtua
+         BliYfndMOj4c15qWmFA0GwSJ3sF1NoY7oJ1+0BtfAvVWYW5xvYn0Wvir+pks5QIqZmhq
+         4pCw==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770344758; x=1770949558; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=xcQOSQ26/rNge5EYlxsLIr2v4C91zfomD6qkyBbFnZc=;
+        b=Zz9YGiQxWClQwfoYYN7C9y+ibl5I38vKk+kub33zLRjIt/6tbRXhtQo3K22ip/ol4u
+         Ql8kz0INVYWX9SPjCDdhDmSr/bIr8fXtdzBvWEff6EHD9jHF8stEjcOchpyOuDODKzmX
+         WGIh5LAgQ7CyndRtF+/5tdM2ry8/V6yIBxjULyeumcOIJVUq/tZi1GNeRuQ+nEeX9JEx
+         EdXjVwP08t9HtG33lBW2tRaE2NFvzTGd1rg/cq0ROw+pkk+t+KqgwvWgLrqS9tbP1t80
+         9FOr2V0NP5l3UhgGFHtUUIS7DjhdFLrDy+hRWVdXesWvDct9EZvaRq668+tFKW0vqoNu
+         OAWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770344758; x=1770949558;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xcQOSQ26/rNge5EYlxsLIr2v4C91zfomD6qkyBbFnZc=;
+        b=wROEj9vEnBzn4TJZjcau+AIwRwVakF+VDtsOA/DRmo9p+gBO9u0CoqNbLIUInAGL+w
+         TSoKasUrPqA2V9IBJdtHpOmWd1MZCn6jckDVs7Qm4nvHFosVhIpTekq3Zraw7jnODpUj
+         H/KU6ZTtyqFJSte4tFoumyTYHxz/akeopDppNWKtzL748hUZebw4n6cCnbzlMcu3Z4zg
+         9Masgxzkx26KcUws5dwAPXgJfYGhInx6b6SBCg8HvSGIP9oxtkTh9hQrsInJfeZmrLgC
+         GLwqPwIm5sZITePd2rHLe63Tb6ZzgYApyCnTyKPblUZdjDttLyWa3AZLE9jz3i6lCQfe
+         SHAw==
+X-Gm-Message-State: AOJu0YxcWnls2zyNPIQ+25YbfyP3lBAO9z1G7ESYAXx29n8dhkr9VSHb
+	5KhY6UbZpzLvhZKnyiXDVldTlpVcE0iPeTvlJattblZm9AzRmemWDPLX+57XB2tKAQLFu6c7IpF
+	Q0yKJBUKT8pqbAQ0Fe3TVA2wXL8W10D/j0H5saSQ=
+X-Gm-Gg: AZuq6aI6b/U/LoxQvxedkmzTPYtVOXgLIdN8MYe0gr3EIErXHQn79LZmoBkdXzfEEHK
+	7D302UwEjB/6bpPp3RTnwrNOF2nUwUYQljFOqQXD2XhIOUBxUTG6GsV4bmpuVDphrpu+Wu2LzQz
+	W/Nqi0ZTKDIm6igVdemfeZ1HtwWIb1HeUUOFJs82L2AIvVLJyR3I0mbU8NWZjZWsh93MVeHdiLA
+	Z9XmDpS+aFwsZ7H6kDnzJ4wifxBJ55y4bjqxjish9m8YQ2DuXCQb/sIWIsk8dVWI8E0iES46x95
+	Awtkny24PJPmknnMC1JbDhkE+tQFPh33tp+rbahx3ZRZtcqRUue8MYHBoBNTbvQrYVSbX6BuYlW
+	Tote8ckDGf4OM
+X-Received: by 2002:a05:690c:dc7:b0:78f:bcc1:88e0 with SMTP id
+ 00721157ae682-7952aa37017mr14630097b3.1.1770344758176; Thu, 05 Feb 2026
+ 18:25:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1769137698.git.anuj.mittal@oss.qualcomm.com> <CAMKF1sp+_GJDJfhD9hfjX0WhiLrPSPBVEBXjsXPt9Yq5ExUR4A@mail.gmail.com>
+In-Reply-To: <CAMKF1sp+_GJDJfhD9hfjX0WhiLrPSPBVEBXjsXPt9Yq5ExUR4A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 5 Feb 2026 18:25:29 -0800
+X-Gm-Features: AZwV_Qhx38ROBKpiPKyqC6879OIldxiuNvPN991kLdhL1V8oys37zE9toSd_Ifk
+Message-ID: <CAMKF1sqgyemiYfZkL7a9AwxzW4Z8jF5Qh4Wyf2hE2dSe9Av0YA@mail.gmail.com>
+Subject: Re: [PATCH 00/42] Whinlatter pull request
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000070f905064a1e8258"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 01:44:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124222
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 02:26:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124223
 
-1. Changelog
-   https://github.com/Ettercap/ettercap/releases/tag/v0.8.4
+--00000000000070f905064a1e8258
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-2. Remove following patches as they were merged upstream
-   0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
-   0002-allow-build-with-cmake-4.patch
+Merged now thanks Anuj
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
----
- ...-the-libcurl-version-check-to-consid.patch | 38 -------------
- .../0002-allow-build-with-cmake-4.patch       | 54 -------------------
- ...{ettercap_0.8.3.1.bb => ettercap_0.8.4.bb} |  7 ++-
- 3 files changed, 3 insertions(+), 96 deletions(-)
- delete mode 100644 meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
- delete mode 100644 meta-networking/recipes-support/ettercap/ettercap/0002-allow-build-with-cmake-4.patch
- rename meta-networking/recipes-support/ettercap/{ettercap_0.8.3.1.bb => ettercap_0.8.4.bb} (85%)
+On Sun, Jan 25, 2026 at 9:25=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
 
-diff --git a/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch b/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
-deleted file mode 100644
-index 592ea52f2e..0000000000
---- a/meta-networking/recipes-support/ettercap/ettercap/0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 40534662043b7d831d1f6c70448afa9d374a9b63 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 23 Mar 2023 10:23:14 -0700
--Subject: [PATCH] sslstrip: Enhance the libcurl version check to consider
-- version 8+
--
--Lately curl has released version 8 and hence LIBCURL_VERSION_MAJOR is
--reset to 0, current check assumes major version to be 7 at max and hence
--on systems with libcurl 8+ this check breaks and build fails
--
--Fixes
--
--TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/ettercap/0.8.3.1-r0/git/plug-ins/sslstrip/sslstrip.c:57:2: error: libcurl 7.26.0 or up is needed
-- ^
--1 error generated.
--
--Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/40534662043b7d831d1f6c70448afa9d374a9b63]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- plug-ins/sslstrip/sslstrip.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/plug-ins/sslstrip/sslstrip.c b/plug-ins/sslstrip/sslstrip.c
--index 327bf58a..d9b67c8b 100644
----- a/plug-ins/sslstrip/sslstrip.c
--+++ b/plug-ins/sslstrip/sslstrip.c
--@@ -51,7 +51,7 @@
-- 
-- #include <curl/curl.h>
-- 
---#if (LIBCURL_VERSION_MAJOR < 7) || (LIBCURL_VERSION_MINOR < 26)
--+#if (LIBCURL_VERSION_MAJOR < 7) || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 26)
-- #error libcurl 7.26.0 or up is needed
-- #endif
-- 
---- 
--2.40.0
--
-diff --git a/meta-networking/recipes-support/ettercap/ettercap/0002-allow-build-with-cmake-4.patch b/meta-networking/recipes-support/ettercap/ettercap/0002-allow-build-with-cmake-4.patch
-deleted file mode 100644
-index 70e48f7d9e..0000000000
---- a/meta-networking/recipes-support/ettercap/ettercap/0002-allow-build-with-cmake-4.patch
-+++ /dev/null
-@@ -1,54 +0,0 @@
--From 337e790d4fc8fed00a4f62047de1bc702f06105e Mon Sep 17 00:00:00 2001
--From: Alper Ak <alperyasinak1@gmail.com>
--Date: Wed, 9 Jul 2025 14:15:32 +0300
--Subject: [PATCH] cmake: Set minimum required version to 3.5 for CMake 4+
-- compatibility
--
--Fix:
--
--| CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
--|   Compatibility with CMake < 3.5 has been removed from CMake.
--|
--|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
--|   to tell CMake that the project requires at least <min> but has been updated
--|   to work with policies introduced by <max> or earlier.
--|
--|   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
--|
--|
--| -- Configuring incomplete, errors occurred!
--
--Upstream-Status: Submitted [https://github.com/Ettercap/ettercap/pull/1279]
--
--Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
-----
-- CMakeLists.txt               | 2 +-
-- cmake/Modules/FindGTK3.cmake | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 1c08875a..600bd9f4 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -1,4 +1,4 @@
---cmake_minimum_required(VERSION 2.8)
--+cmake_minimum_required(VERSION 3.5)
-- project(ettercap C)
-- 
-- set(VERSION "0.8.3.1")
--diff --git a/cmake/Modules/FindGTK3.cmake b/cmake/Modules/FindGTK3.cmake
--index e07a4e90..f37fee1c 100644
----- a/cmake/Modules/FindGTK3.cmake
--+++ b/cmake/Modules/FindGTK3.cmake
--@@ -351,7 +351,7 @@ endif()
-- #
-- if(GTK3_FIND_VERSION)
--   if(NOT DEFINED CMAKE_MINIMUM_REQUIRED_VERSION)
---    cmake_minimum_required(VERSION 2.6.2)
--+    cmake_minimum_required(VERSION 3.5)
--   endif()
--   set(GTK3_FAILED_VERSION_CHECK true)
--   if(GTK3_DEBUG)
---- 
--2.43.0
--
-diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
-similarity index 85%
-rename from meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
-rename to meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
-index 027b6dd190..3784d12b85 100644
---- a/meta-networking/recipes-support/ettercap/ettercap_0.8.3.1.bb
-+++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
-@@ -7,6 +7,7 @@ inherit cmake
- 
- DEPENDS += "ethtool \
-             geoip \
-+            libmaxminddb \
-             librepo \
-             libnet \
-             libpcap \
-@@ -20,11 +21,9 @@ DEPENDS += "ethtool \
- 
- RDEPENDS:${PN} += "bash ethtool libgcc"
- 
--SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https \
--           file://0001-sslstrip-Enhance-the-libcurl-version-check-to-consid.patch \
--           file://0002-allow-build-with-cmake-4.patch"
-+SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV}"
- 
--SRCREV = "7281fbddb7da7478beb1d21e3cb105fff3778b31"
-+SRCREV = "41da65f4026a9e4cea928e61941b976d9279f508"
- 
- EXTRA_OECMAKE = " \
-     -DCMAKE_SKIP_RPATH=TRUE \
--- 
-2.43.0
+> merged now thanks Anuj
+>
+> On Thu, Jan 22, 2026 at 7:11=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qual=
+comm.com>
+> wrote:
+>
+>> Please merge these changes in whinlatter. Tested on autobuilder and
+>> locally.
+>>
+>> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1259
+>>
+>> The following changes since commit
+>> c6849e7529727a2c9eca0f9220836bd0d69ce086:
+>>
+>>   python3-django: upgrade 5.2.8 -> 5.2.9 (2026-01-06 18:07:59 +0530)
+>>
+>> are available in the Git repository at:
+>>
+>>   https://git.openembedded.org/meta-openembedded-contrib
+>> stable/whinlatter-next
+>>
+>> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/w=
+hinlatter-next
+>>
+>> Ankur Tyagi (5):
+>>   php: upgrade 8.4.16 -> 8.4.17
+>>   mozjs-128: Fix build error with arm and musl
+>>   libjxl: Fix build error with arm and musl
+>>   influxdb: ignore CVE-2024-30896
+>>   frr: upgrade 10.4.1 -> 10.4.2
+>>
+>> Dmitry Baryshkov (1):
+>>   vulkan-cts: upgrade 1.4.4.0 -> 1.4.4.2
+>>
+>> Gyorgy Sarvari (16):
+>>   nodejs: remove extra CVE_PRODUCT
+>>   smarty: extend CVE_PRODUCT
+>>   raptor2: set CVE_PRODUCT
+>>   libcereal: set CVE_PRODUCT
+>>   asyncmqtt: set CVE_PRODUCT
+>>   boinc-client: set CVE_PRODUCT
+>>   boinc-client: mark CVE-2013-2018 patched
+>>   lmdb: patch CVE-2026-22185
+>>   xerces-c: set CVE_PRODUCT
+>>   dante: upgrade 1.4.3 -> 1.4.4
+>>   tinyproxy: patch CVE-2025-63938
+>>   python3-scapy: set CVE_PRODUCT
+>>   nginx: set CVE_PRODUCT
+>>   softhsm: fix SRC_URI branch
+>>   ncp: update SRC_URI
+>>   libowfat: update SRC_URI
+>>
+>> Jason Schonberg (1):
+>>   nginx: upgrade 1.28.0 -> 1.28.1
+>>
+>> Jiaying Song (1):
+>>   minicoredumper: fix 2038 year problem in timestamp handling
+>>
+>> Khem Raj (2):
+>>   vboxguestdrivers: Upgrade to 7.2.4
+>>   dante: Add _GNU_SOURCE for musl builds
+>>
+>> Liu Yiding (2):
+>>   liblognorm: upgrade 2.0.7 -> 2.0.8
+>>   libsdl3: upgrade 3.2.28 -> 3.2.30
+>>
+>> Peter Marko (4):
+>>   net-snmp: patch CVE-2025-68615
+>>   libsodium: patch CVE-2025-69277
+>>   libcoap: set CVE version suffix
+>>   nginx: ignore CVE-2025-53859 for 1.28.1
+>>
+>> Sanjay Chitroda (1):
+>>   recipes-core/toybox: Switch SRC_URI to HTTPS for reliable fetch
+>>
+>> Wang Mingyu (9):
+>>   python3-psycopg: upgrade 3.2.12 -> 3.2.13
+>>   parallel: upgrade 20251022 -> 20251122
+>>   libsdl3: upgrade 3.2.26 -> 3.2.28
+>>   usb-modeswitch-data: upgrade 20191128 -> 20251207
+>>   usb-modeswitch: upgrade 2.6.1 -> 2.6.2
+>>   microsoft-gsl: upgrade 4.2.0 -> 4.2.1
+>>   cryptsetup: upgrade 2.8.1 -> 2.8.3
+>>   libdecor: upgrade 0.2.4 -> 0.2.5
+>>   libsdl3-image: upgrade 3.2.4 -> 3.2.6
+>>
+>>  .../libcoap/libcoap_4.3.5a.bb                 |   2 +
+>>  .../python/python3-scapy_2.6.1.bb             |   2 +
+>>  .../dante/{dante_1.4.3.bb =3D> dante_1.4.4.bb}  |   6 +-
+>>  .../frr/{frr_10.4.1.bb =3D> frr_10.4.2.bb}      |   2 +-
+>>  .../net-snmp/net-snmp/CVE-2025-68615.patch    |  33 +++++
+>>  .../net-snmp/net-snmp_5.9.4.bb                |   1 +
+>>  .../recipes-support/ncp/libowfat_0.32.bb      |   2 +-
+>>  .../recipes-support/ncp/ncp_1.2.4.bb          |   2 +-
+>>  .../tinyproxy/tinyproxy/CVE-2025-63938.patch  |  43 ++++++
+>>  .../tinyproxy/tinyproxy_1.11.2.bb             |   1 +
+>>  .../asyncmqtt/asyncmqtt_10.2.6.bb             |   2 +
+>>  meta-oe/recipes-core/toybox/toybox_0.8.13.bb  |   2 +-
+>>  ...ryptsetup_2.8.1.bb =3D> cryptsetup_2.8.3.bb} |   2 +-
+>>  .../libsodium/libsodium/CVE-2025-69277.patch  |  61 ++++++++
+>>  .../libsodium/libsodium_1.0.20.bb             |   2 +
+>>  .../recipes-dbs/influxdb/influxdb_1.8.10.bb   |   1 +
+>>  .../lmdb/files/CVE-2026-22185.patch           |  31 +++++
+>>  meta-oe/recipes-dbs/lmdb/lmdb_0.9.31.bb       |   1 +
+>>  ...ft-gsl_4.2.0.bb =3D> microsoft-gsl_4.2.1.bb} |   8 +-
+>>  .../recipes-devtools/nodejs/nodejs_22.21.1.bb |   2 -
+>>  .../php/{php_8.4.16.bb =3D> php_8.4.17.bb}      |   2 +-
+>>  ...pg_3.2.12.bb =3D> python3-psycopg_3.2.13.bb} |   2 +-
+>>  .../xerces-c/xerces-c_3.3.0.bb                |   2 +
+>>  .../boinc/boinc-client_7.20.5.bb              |   4 +
+>>  ...iblognorm_2.0.7.bb =3D> liblognorm_2.0.8.bb} |   3 +-
+>>  ...001-Cargo.toml-do-not-abort-on-panic.patch |   2 +-
+>>  ...nfigure-do-not-look-for-llvm-objdump.patch |   2 +-
+>>  ...o-not-try-to-find-a-suitable-upstrea.patch |   2 +-
+>>  .../mozjs-128/0004-use-asm-sgidefs.h.patch    |   2 +-
+>>  ...2.patch =3D> 0005-Add-RISCV32-support.patch} |   2 +-
+>>  ...x-one-occasionally-reproduced-confi.patch} |   2 +-
+>>  ...ewrite-cargo-host-linker-in-python3.patch} |   2 +-
+>>  ...e-stack-unwinder-like-glibc-therefo.patch} |   2 +-
+>>  ...om-firefox-bugzilla-to-fix-compile-.patch} |   2 +-
+>>  ...on-isn-t-available-in-ARMv5-or-v6-s.patch} |   2 +-
+>>  ...ith-icu-uc-to-fix-build-with-ICU-76.patch} |   2 +-
+>>  ...gc-and-riscv32gc-as-valid-architect.patch} |  38 +++--
+>>  .../0013-Fix-build-error-with-musl.patch      |  30 ++++
+>>  .../mozjs/mozjs-128_128.5.2.bb                |  17 +--
+>>  ...allel_20251022.bb =3D> parallel_20251122.bb} |   2 +-
+>>  .../{libdecor_0.2.4.bb =3D> libdecor_0.2.5.bb}  |   2 +-
+>>  ...-image_3.2.4.bb =3D> libsdl3-image_3.2.6.bb} |   2 +-
+>>  .../{libsdl3_3.2.26.bb =3D> libsdl3_3.2.30.bb}  |   2 +-
+>>  ...01-decode-fix-build-on-ARMv7-targets.patch |   4 +-
+>>  ...ing-for-non-NEON-enabled-ARM-targets.patch |  73 +++++-----
+>>  .../vk-gl-cts/vulkan-cts-sources.inc          |   2 +-
+>>  ...n-cts_1.4.4.0.bb =3D> vulkan-cts_1.4.4.2.bb} |   2 +-
+>>  ...8-year-problem-in-timestamp-handling.patch |  55 ++++++++
+>>  .../minicoredumper/minicoredumper_2.0.7.bb    |   1 +
+>>  .../libjxl/libjxl_0.11.1.bb                   |   3 +
+>>  .../recipes-security/softhsm/softhsm_2.6.1.bb |   2 +-
+>>  .../libcereal/libcereal_1.3.2.bb              |   2 +
+>>  .../recipes-support/raptor2/raptor2_2.0.16.bb |   2 +
+>>  .../recipes-support/smarty/smarty_5.6.0.bb    |   2 +-
+>>  ...128.bb =3D> usb-modeswitch-data_20251207.bb} |   2 +-
+>>  .../0001-Fix-build-with-gcc-15.patch          |  51 -------
+>>  ...witch_2.6.1.bb =3D> usb-modeswitch_2.6.2.bb} |   6 +-
+>>  ...ers_7.2.2.bb =3D> vboxguestdrivers_7.2.4.bb} |   2 +-
+>>  .../nginx/files/CVE-2025-53859.patch          | 131 ------------------
+>>  meta-webserver/recipes-httpd/nginx/nginx.inc  |   2 +
+>>  .../recipes-httpd/nginx/nginx_1.28.0.bb       |   7 -
+>>  .../recipes-httpd/nginx/nginx_1.28.1.bb       |   7 +
+>>  62 files changed, 404 insertions(+), 286 deletions(-)
+>>  rename meta-networking/recipes-protocols/dante/{dante_1.4.3.bb =3D>
+>> dante_1.4.4.bb} (88%)
+>>  rename meta-networking/recipes-protocols/frr/{frr_10.4.1.bb =3D>
+>> frr_10.4.2.bb} (99%)
+>>  create mode 100644
+>> meta-networking/recipes-protocols/net-snmp/net-snmp/CVE-2025-68615.patch
+>>  create mode 100644
+>> meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2025-63938.patch
+>>  rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.8.1.bb =3D>
+>> cryptsetup_2.8.3.bb} (98%)
+>>  create mode 100644
+>> meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
+>>  create mode 100644 meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patch
+>>  rename meta-oe/recipes-devtools/microsoft-gsl/{microsoft-gsl_4.2.0.bb
+>> =3D> microsoft-gsl_4.2.1.bb} (93%)
+>>  rename meta-oe/recipes-devtools/php/{php_8.4.16.bb =3D> php_8.4.17.bb}
+>> (99%)
+>>  rename meta-oe/recipes-devtools/python/{python3-psycopg_3.2.12.bb =3D>
+>> python3-psycopg_3.2.13.bb} (85%)
+>>  rename meta-oe/recipes-extended/liblognorm/{liblognorm_2.0.7.bb =3D>
+>> liblognorm_2.0.8.bb} (95%)
+>>  rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv32.patch =3D>
+>> 0005-Add-RISCV32-support.patch} (97%)
+>>  rename
+>> meta-oe/recipes-extended/mozjs/mozjs-128/{0001-util.configure-fix-one-oc=
+casionally-reproduced-confi.patch
+>> =3D> 0006-util.configure-fix-one-occasionally-reproduced-confi.patch} (9=
+6%)
+>>  rename
+>> meta-oe/recipes-extended/mozjs/mozjs-128/{0001-rewrite-cargo-host-linker=
+-in-python3.patch
+>> =3D> 0007-Rewrite-cargo-host-linker-in-python3.patch} (97%)
+>>  rename
+>> meta-oe/recipes-extended/mozjs/mozjs-128/{musl-disable-stackwalk.patch =
+=3D>
+>> 0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.patch} (94%)
+>>  rename
+>> meta-oe/recipes-extended/mozjs/mozjs-128/{0001-add-arm-to-list-of-mozinl=
+ine.patch
+>> =3D> 0009-Backport-patch-from-firefox-bugzilla-to-fix-compile-.patch} (9=
+5%)
+>>  rename meta-oe/recipes-extended/mozjs/mozjs-128/{armv5.patch =3D>
+>> 0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch} (93%)
+>>  rename
+>> meta-oe/recipes-extended/mozjs/mozjs-128/{0001-Link-with-icu-uc-to-fix-b=
+uild-with-ICU-76.patch
+>> =3D> 0011-Link-with-icu-uc-to-fix-build-with-ICU-76.patch} (92%)
+>>  rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv.patch =3D>
+>> 0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch} (60%)
+>>  create mode 100644
+>> meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-build-error-with-musl.=
+patch
+>>  rename meta-oe/recipes-extended/parallel/{parallel_20251022.bb =3D>
+>> parallel_20251122.bb} (93%)
+>>  rename meta-oe/recipes-graphics/libdecor/{libdecor_0.2.4.bb =3D>
+>> libdecor_0.2.5.bb} (94%)
+>>  rename meta-oe/recipes-graphics/libsdl3/{libsdl3-image_3.2.4.bb =3D>
+>> libsdl3-image_3.2.6.bb} (87%)
+>>  rename meta-oe/recipes-graphics/libsdl3/{libsdl3_3.2.26.bb =3D>
+>> libsdl3_3.2.30.bb} (97%)
+>>  rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.4.4.0.bb =3D>
+>> vulkan-cts_1.4.4.2.bb} (94%)
+>>  create mode 100644
+>> meta-oe/recipes-kernel/minicoredumper/files/0002-Fix-2038-year-problem-i=
+n-timestamp-handling.patch
+>>  rename meta-oe/recipes-support/usb-modeswitch/{
+>> usb-modeswitch-data_20191128.bb =3D> usb-modeswitch-data_20251207.bb} (8=
+4%)
+>>  delete mode 100644
+>> meta-oe/recipes-support/usb-modeswitch/usb-modeswitch/0001-Fix-build-wit=
+h-gcc-15.patch
+>>  rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch_2.6.1.bb
+>> =3D> usb-modeswitch_2.6.2.bb} (86%)
+>>  rename meta-oe/recipes-support/vboxguestdrivers/{
+>> vboxguestdrivers_7.2.2.bb =3D> vboxguestdrivers_7.2.4.bb} (97%)
+>>  delete mode 100755
+>> meta-webserver/recipes-httpd/nginx/files/CVE-2025-53859.patch
+>>  delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.28.0.bb
+>>  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.28.1.bb
+>>
+>> --
+>> 2.52.0
+>>
+>>
 
+--00000000000070f905064a1e8258
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Merged now thanks Anuj</div><br><div class=3D"gmail_quote =
+gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Jan 25=
+, 2026 at 9:25=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com=
+">raj.khem@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quo=
+te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
+);padding-left:1ex"><div dir=3D"ltr">merged now thanks Anuj</div><br><div c=
+lass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 22, =
+2026 at 7:11=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@oss.q=
+ualcomm.com" target=3D"_blank">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">Please merge the=
+se changes in whinlatter. Tested on autobuilder and<br>
+locally.<br>
+<br>
+<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
+ds/1259" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
+ect.org/valkyrie/#/builders/81/builds/1259</a><br>
+<br>
+The following changes since commit c6849e7529727a2c9eca0f9220836bd0d69ce086=
+:<br>
+<br>
+=C2=A0 python3-django: upgrade 5.2.8 -&gt; 5.2.9 (2026-01-06 18:07:59 +0530=
+)<br>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
+el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
+mbedded-contrib</a> stable/whinlatter-next<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
+g/?h=3Dstable/whinlatter-next" rel=3D"noreferrer" target=3D"_blank">https:/=
+/git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/whinlatter-=
+next</a><br>
+<br>
+Ankur Tyagi (5):<br>
+=C2=A0 php: upgrade 8.4.16 -&gt; 8.4.17<br>
+=C2=A0 mozjs-128: Fix build error with arm and musl<br>
+=C2=A0 libjxl: Fix build error with arm and musl<br>
+=C2=A0 influxdb: ignore CVE-2024-30896<br>
+=C2=A0 frr: upgrade 10.4.1 -&gt; 10.4.2<br>
+<br>
+Dmitry Baryshkov (1):<br>
+=C2=A0 vulkan-cts: upgrade 1.4.4.0 -&gt; 1.4.4.2<br>
+<br>
+Gyorgy Sarvari (16):<br>
+=C2=A0 nodejs: remove extra CVE_PRODUCT<br>
+=C2=A0 smarty: extend CVE_PRODUCT<br>
+=C2=A0 raptor2: set CVE_PRODUCT<br>
+=C2=A0 libcereal: set CVE_PRODUCT<br>
+=C2=A0 asyncmqtt: set CVE_PRODUCT<br>
+=C2=A0 boinc-client: set CVE_PRODUCT<br>
+=C2=A0 boinc-client: mark CVE-2013-2018 patched<br>
+=C2=A0 lmdb: patch CVE-2026-22185<br>
+=C2=A0 xerces-c: set CVE_PRODUCT<br>
+=C2=A0 dante: upgrade 1.4.3 -&gt; 1.4.4<br>
+=C2=A0 tinyproxy: patch CVE-2025-63938<br>
+=C2=A0 python3-scapy: set CVE_PRODUCT<br>
+=C2=A0 nginx: set CVE_PRODUCT<br>
+=C2=A0 softhsm: fix SRC_URI branch<br>
+=C2=A0 ncp: update SRC_URI<br>
+=C2=A0 libowfat: update SRC_URI<br>
+<br>
+Jason Schonberg (1):<br>
+=C2=A0 nginx: upgrade 1.28.0 -&gt; 1.28.1<br>
+<br>
+Jiaying Song (1):<br>
+=C2=A0 minicoredumper: fix 2038 year problem in timestamp handling<br>
+<br>
+Khem Raj (2):<br>
+=C2=A0 vboxguestdrivers: Upgrade to 7.2.4<br>
+=C2=A0 dante: Add _GNU_SOURCE for musl builds<br>
+<br>
+Liu Yiding (2):<br>
+=C2=A0 liblognorm: upgrade 2.0.7 -&gt; 2.0.8<br>
+=C2=A0 libsdl3: upgrade 3.2.28 -&gt; 3.2.30<br>
+<br>
+Peter Marko (4):<br>
+=C2=A0 net-snmp: patch CVE-2025-68615<br>
+=C2=A0 libsodium: patch CVE-2025-69277<br>
+=C2=A0 libcoap: set CVE version suffix<br>
+=C2=A0 nginx: ignore CVE-2025-53859 for 1.28.1<br>
+<br>
+Sanjay Chitroda (1):<br>
+=C2=A0 recipes-core/toybox: Switch SRC_URI to HTTPS for reliable fetch<br>
+<br>
+Wang Mingyu (9):<br>
+=C2=A0 python3-psycopg: upgrade 3.2.12 -&gt; 3.2.13<br>
+=C2=A0 parallel: upgrade 20251022 -&gt; 20251122<br>
+=C2=A0 libsdl3: upgrade 3.2.26 -&gt; 3.2.28<br>
+=C2=A0 usb-modeswitch-data: upgrade 20191128 -&gt; 20251207<br>
+=C2=A0 usb-modeswitch: upgrade 2.6.1 -&gt; 2.6.2<br>
+=C2=A0 microsoft-gsl: upgrade 4.2.0 -&gt; 4.2.1<br>
+=C2=A0 cryptsetup: upgrade 2.8.1 -&gt; 2.8.3<br>
+=C2=A0 libdecor: upgrade 0.2.4 -&gt; 0.2.5<br>
+=C2=A0 libsdl3-image: upgrade 3.2.4 -&gt; 3.2.6<br>
+<br>
+=C2=A0.../libcoap/<a href=3D"http://libcoap_4.3.5a.bb" rel=3D"noreferrer" t=
+arget=3D"_blank">libcoap_4.3.5a.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../python/<a href=3D"http://python3-scapy_2.6.1.bb" rel=3D"noreferre=
+r" target=3D"_blank">python3-scapy_2.6.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../dante/{<a href=3D"http://dante_1.4.3.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">dante_1.4.3.bb</a> =3D&gt; <a href=3D"http://dante_1.4.4.bb" r=
+el=3D"noreferrer" target=3D"_blank">dante_1.4.4.bb</a>}=C2=A0 |=C2=A0 =C2=
+=A06 +-<br>
+=C2=A0.../frr/{<a href=3D"http://frr_10.4.1.bb" rel=3D"noreferrer" target=
+=3D"_blank">frr_10.4.1.bb</a> =3D&gt; <a href=3D"http://frr_10.4.2.bb" rel=
+=3D"noreferrer" target=3D"_blank">frr_10.4.2.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 =C2=A02 +-<br>
+=C2=A0.../net-snmp/net-snmp/CVE-2025-68615.patch=C2=A0 =C2=A0 |=C2=A0 33 ++=
++++<br>
+=C2=A0.../net-snmp/<a href=3D"http://net-snmp_5.9.4.bb" rel=3D"noreferrer" =
+target=3D"_blank">net-snmp_5.9.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
+=C2=A0.../recipes-support/ncp/<a href=3D"http://libowfat_0.32.bb" rel=3D"no=
+referrer" target=3D"_blank">libowfat_0.32.bb</a>=C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0.../recipes-support/ncp/<a href=3D"http://ncp_1.2.4.bb" rel=3D"norefe=
+rrer" target=3D"_blank">ncp_1.2.4.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+|=C2=A0 =C2=A02 +-<br>
+=C2=A0.../tinyproxy/tinyproxy/CVE-2025-63938.patch=C2=A0 |=C2=A0 43 ++++++<=
+br>
+=C2=A0.../tinyproxy/<a href=3D"http://tinyproxy_1.11.2.bb" rel=3D"noreferre=
+r" target=3D"_blank">tinyproxy_1.11.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+=C2=A0.../asyncmqtt/<a href=3D"http://asyncmqtt_10.2.6.bb" rel=3D"noreferre=
+r" target=3D"_blank">asyncmqtt_10.2.6.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0meta-oe/recipes-core/toybox/<a href=3D"http://toybox_0.8.13.bb" rel=
+=3D"noreferrer" target=3D"_blank">toybox_0.8.13.bb</a>=C2=A0 |=C2=A0 =C2=A0=
+2 +-<br>
+=C2=A0...<a href=3D"http://ryptsetup_2.8.1.bb" rel=3D"noreferrer" target=3D=
+"_blank">ryptsetup_2.8.1.bb</a> =3D&gt; <a href=3D"http://cryptsetup_2.8.3.=
+bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.8.3.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../libsodium/libsodium/CVE-2025-69277.patch=C2=A0 |=C2=A0 61 +++++++=
++<br>
+=C2=A0.../libsodium/<a href=3D"http://libsodium_1.0.20.bb" rel=3D"noreferre=
+r" target=3D"_blank">libsodium_1.0.20.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../recipes-dbs/influxdb/<a href=3D"http://influxdb_1.8.10.bb" rel=3D=
+"noreferrer" target=3D"_blank">influxdb_1.8.10.bb</a>=C2=A0 =C2=A0|=C2=A0 =
+=C2=A01 +<br>
+=C2=A0.../lmdb/files/CVE-2026-22185.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0|=C2=A0 31 +++++<br>
+=C2=A0meta-oe/recipes-dbs/lmdb/<a href=3D"http://lmdb_0.9.31.bb" rel=3D"nor=
+eferrer" target=3D"_blank">lmdb_0.9.31.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A01 +<br>
+=C2=A0...<a href=3D"http://ft-gsl_4.2.0.bb" rel=3D"noreferrer" target=3D"_b=
+lank">ft-gsl_4.2.0.bb</a> =3D&gt; <a href=3D"http://microsoft-gsl_4.2.1.bb"=
+ rel=3D"noreferrer" target=3D"_blank">microsoft-gsl_4.2.1.bb</a>} |=C2=A0 =
+=C2=A08 +-<br>
+=C2=A0.../recipes-devtools/nodejs/<a href=3D"http://nodejs_22.21.1.bb" rel=
+=3D"noreferrer" target=3D"_blank">nodejs_22.21.1.bb</a> |=C2=A0 =C2=A02 -<b=
+r>
+=C2=A0.../php/{<a href=3D"http://php_8.4.16.bb" rel=3D"noreferrer" target=
+=3D"_blank">php_8.4.16.bb</a> =3D&gt; <a href=3D"http://php_8.4.17.bb" rel=
+=3D"noreferrer" target=3D"_blank">php_8.4.17.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 =C2=A02 +-<br>
+=C2=A0...<a href=3D"http://pg_3.2.12.bb" rel=3D"noreferrer" target=3D"_blan=
+k">pg_3.2.12.bb</a> =3D&gt; <a href=3D"http://python3-psycopg_3.2.13.bb" re=
+l=3D"noreferrer" target=3D"_blank">python3-psycopg_3.2.13.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../xerces-c/<a href=3D"http://xerces-c_3.3.0.bb" rel=3D"noreferrer" =
+target=3D"_blank">xerces-c_3.3.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
+=C2=A0.../boinc/<a href=3D"http://boinc-client_7.20.5.bb" rel=3D"noreferrer=
+" target=3D"_blank">boinc-client_7.20.5.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +<br>
+=C2=A0...<a href=3D"http://iblognorm_2.0.7.bb" rel=3D"noreferrer" target=3D=
+"_blank">iblognorm_2.0.7.bb</a> =3D&gt; <a href=3D"http://liblognorm_2.0.8.=
+bb" rel=3D"noreferrer" target=3D"_blank">liblognorm_2.0.8.bb</a>} |=C2=A0 =
+=C2=A03 +-<br>
+=C2=A0...001-Cargo.toml-do-not-abort-on-panic.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0...nfigure-do-not-look-for-llvm-objdump.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0...o-not-try-to-find-a-suitable-upstrea.patch |=C2=A0 =C2=A02 +-<br>
+=C2=A0.../mozjs-128/0004-use-asm-sgidefs.h.patch=C2=A0 =C2=A0 |=C2=A0 =C2=
+=A02 +-<br>
+=C2=A0...2.patch =3D&gt; 0005-Add-RISCV32-support.patch} |=C2=A0 =C2=A02 +-=
+<br>
+=C2=A0...x-one-occasionally-reproduced-confi.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...ewrite-cargo-host-linker-in-python3.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...e-stack-unwinder-like-glibc-therefo.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...om-firefox-bugzilla-to-fix-compile-.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...on-isn-t-available-in-ARMv5-or-v6-s.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...ith-icu-uc-to-fix-build-with-ICU-76.patch} |=C2=A0 =C2=A02 +-<br>
+=C2=A0...gc-and-riscv32gc-as-valid-architect.patch} |=C2=A0 38 +++--<br>
+=C2=A0.../0013-Fix-build-error-with-musl.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+30 ++++<br>
+=C2=A0.../mozjs/<a href=3D"http://mozjs-128_128.5.2.bb" rel=3D"noreferrer" =
+target=3D"_blank">mozjs-128_128.5.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 17 +--<br>
+=C2=A0...<a href=3D"http://allel_20251022.bb" rel=3D"noreferrer" target=3D"=
+_blank">allel_20251022.bb</a> =3D&gt; <a href=3D"http://parallel_20251122.b=
+b" rel=3D"noreferrer" target=3D"_blank">parallel_20251122.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://libdecor_0.2.4.bb" rel=3D"noreferrer" target=
+=3D"_blank">libdecor_0.2.4.bb</a> =3D&gt; <a href=3D"http://libdecor_0.2.5.=
+bb" rel=3D"noreferrer" target=3D"_blank">libdecor_0.2.5.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0...-<a href=3D"http://image_3.2.4.bb" rel=3D"noreferrer" target=3D"_b=
+lank">image_3.2.4.bb</a> =3D&gt; <a href=3D"http://libsdl3-image_3.2.6.bb" =
+rel=3D"noreferrer" target=3D"_blank">libsdl3-image_3.2.6.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://libsdl3_3.2.26.bb" rel=3D"noreferrer" target=
+=3D"_blank">libsdl3_3.2.26.bb</a> =3D&gt; <a href=3D"http://libsdl3_3.2.30.=
+bb" rel=3D"noreferrer" target=3D"_blank">libsdl3_3.2.30.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0...01-decode-fix-build-on-ARMv7-targets.patch |=C2=A0 =C2=A04 +-<br>
+=C2=A0...ing-for-non-NEON-enabled-ARM-targets.patch |=C2=A0 73 +++++-----<b=
+r>
+=C2=A0.../vk-gl-cts/vulkan-cts-sources.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 =C2=A02 +-<br>
+=C2=A0...<a href=3D"http://n-cts_1.4.4.0.bb" rel=3D"noreferrer" target=3D"_=
+blank">n-cts_1.4.4.0.bb</a> =3D&gt; <a href=3D"http://vulkan-cts_1.4.4.2.bb=
+" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.4.4.2.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0...8-year-problem-in-timestamp-handling.patch |=C2=A0 55 ++++++++<br>
+=C2=A0.../minicoredumper/<a href=3D"http://minicoredumper_2.0.7.bb" rel=3D"=
+noreferrer" target=3D"_blank">minicoredumper_2.0.7.bb</a>=C2=A0 =C2=A0 |=C2=
+=A0 =C2=A01 +<br>
+=C2=A0.../libjxl/<a href=3D"http://libjxl_0.11.1.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">libjxl_0.11.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A03 +<br>
+=C2=A0.../recipes-security/softhsm/<a href=3D"http://softhsm_2.6.1.bb" rel=
+=3D"noreferrer" target=3D"_blank">softhsm_2.6.1.bb</a> |=C2=A0 =C2=A02 +-<b=
+r>
+=C2=A0.../libcereal/<a href=3D"http://libcereal_1.3.2.bb" rel=3D"noreferrer=
+" target=3D"_blank">libcereal_1.3.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
+=C2=A0.../recipes-support/raptor2/<a href=3D"http://raptor2_2.0.16.bb" rel=
+=3D"noreferrer" target=3D"_blank">raptor2_2.0.16.bb</a> |=C2=A0 =C2=A02 +<b=
+r>
+=C2=A0.../recipes-support/smarty/<a href=3D"http://smarty_5.6.0.bb" rel=3D"=
+noreferrer" target=3D"_blank">smarty_5.6.0.bb</a>=C2=A0 =C2=A0 |=C2=A0 =C2=
+=A02 +-<br>
+=C2=A0...<a href=3D"http://128.bb" rel=3D"noreferrer" target=3D"_blank">128=
+.bb</a> =3D&gt; <a href=3D"http://usb-modeswitch-data_20251207.bb" rel=3D"n=
+oreferrer" target=3D"_blank">usb-modeswitch-data_20251207.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../0001-Fix-build-with-gcc-15.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 51 -------<br>
+=C2=A0...<a href=3D"http://witch_2.6.1.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">witch_2.6.1.bb</a> =3D&gt; <a href=3D"http://usb-modeswitch_2.6.2.bb" =
+rel=3D"noreferrer" target=3D"_blank">usb-modeswitch_2.6.2.bb</a>} |=C2=A0 =
+=C2=A06 +-<br>
+=C2=A0...<a href=3D"http://ers_7.2.2.bb" rel=3D"noreferrer" target=3D"_blan=
+k">ers_7.2.2.bb</a> =3D&gt; <a href=3D"http://vboxguestdrivers_7.2.4.bb" re=
+l=3D"noreferrer" target=3D"_blank">vboxguestdrivers_7.2.4.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../nginx/files/CVE-2025-53859.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 131 ------------------<br>
+=C2=A0meta-webserver/recipes-httpd/nginx/nginx.inc=C2=A0 |=C2=A0 =C2=A02 +<=
+br>
+=C2=A0.../recipes-httpd/nginx/<a href=3D"http://nginx_1.28.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">nginx_1.28.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A07 -<br>
+=C2=A0.../recipes-httpd/nginx/<a href=3D"http://nginx_1.28.1.bb" rel=3D"nor=
+eferrer" target=3D"_blank">nginx_1.28.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A07 +<br>
+=C2=A062 files changed, 404 insertions(+), 286 deletions(-)<br>
+=C2=A0rename meta-networking/recipes-protocols/dante/{<a href=3D"http://dan=
+te_1.4.3.bb" rel=3D"noreferrer" target=3D"_blank">dante_1.4.3.bb</a> =3D&gt=
+; <a href=3D"http://dante_1.4.4.bb" rel=3D"noreferrer" target=3D"_blank">da=
+nte_1.4.4.bb</a>} (88%)<br>
+=C2=A0rename meta-networking/recipes-protocols/frr/{<a href=3D"http://frr_1=
+0.4.1.bb" rel=3D"noreferrer" target=3D"_blank">frr_10.4.1.bb</a> =3D&gt; <a=
+ href=3D"http://frr_10.4.2.bb" rel=3D"noreferrer" target=3D"_blank">frr_10.=
+4.2.bb</a>} (99%)<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snm=
+p/CVE-2025-68615.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/tinyproxy/tinyprox=
+y/CVE-2025-63938.patch<br>
+=C2=A0rename meta-oe/recipes-crypto/cryptsetup/{<a href=3D"http://cryptsetu=
+p_2.8.1.bb" rel=3D"noreferrer" target=3D"_blank">cryptsetup_2.8.1.bb</a> =
+=3D&gt; <a href=3D"http://cryptsetup_2.8.3.bb" rel=3D"noreferrer" target=3D=
+"_blank">cryptsetup_2.8.3.bb</a>} (98%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-crypto/libsodium/libsodium/CVE-202=
+5-69277.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-dbs/lmdb/files/CVE-2026-22185.patc=
+h<br>
+=C2=A0rename meta-oe/recipes-devtools/microsoft-gsl/{<a href=3D"http://micr=
+osoft-gsl_4.2.0.bb" rel=3D"noreferrer" target=3D"_blank">microsoft-gsl_4.2.=
+0.bb</a> =3D&gt; <a href=3D"http://microsoft-gsl_4.2.1.bb" rel=3D"noreferre=
+r" target=3D"_blank">microsoft-gsl_4.2.1.bb</a>} (93%)<br>
+=C2=A0rename meta-oe/recipes-devtools/php/{<a href=3D"http://php_8.4.16.bb"=
+ rel=3D"noreferrer" target=3D"_blank">php_8.4.16.bb</a> =3D&gt; <a href=3D"=
+http://php_8.4.17.bb" rel=3D"noreferrer" target=3D"_blank">php_8.4.17.bb</a=
+>} (99%)<br>
+=C2=A0rename meta-oe/recipes-devtools/python/{<a href=3D"http://python3-psy=
+copg_3.2.12.bb" rel=3D"noreferrer" target=3D"_blank">python3-psycopg_3.2.12=
+.bb</a> =3D&gt; <a href=3D"http://python3-psycopg_3.2.13.bb" rel=3D"norefer=
+rer" target=3D"_blank">python3-psycopg_3.2.13.bb</a>} (85%)<br>
+=C2=A0rename meta-oe/recipes-extended/liblognorm/{<a href=3D"http://liblogn=
+orm_2.0.7.bb" rel=3D"noreferrer" target=3D"_blank">liblognorm_2.0.7.bb</a> =
+=3D&gt; <a href=3D"http://liblognorm_2.0.8.bb" rel=3D"noreferrer" target=3D=
+"_blank">liblognorm_2.0.8.bb</a>} (95%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv32.patch =3D&gt=
+; 0005-Add-RISCV32-support.patch} (97%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-util.configure-=
+fix-one-occasionally-reproduced-confi.patch =3D&gt; 0006-util.configure-fix=
+-one-occasionally-reproduced-confi.patch} (96%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-rewrite-cargo-h=
+ost-linker-in-python3.patch =3D&gt; 0007-Rewrite-cargo-host-linker-in-pytho=
+n3.patch} (97%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{musl-disable-stackwa=
+lk.patch =3D&gt; 0008-Musl-does-not-have-stack-unwinder-like-glibc-therefo.=
+patch} (94%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-add-arm-to-list=
+-of-mozinline.patch =3D&gt; 0009-Backport-patch-from-firefox-bugzilla-to-fi=
+x-compile-.patch} (95%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{armv5.patch =3D&gt; =
+0010-The-ISB-instruction-isn-t-available-in-ARMv5-or-v6-s.patch} (93%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{0001-Link-with-icu-u=
+c-to-fix-build-with-ICU-76.patch =3D&gt; 0011-Link-with-icu-uc-to-fix-build=
+-with-ICU-76.patch} (92%)<br>
+=C2=A0rename meta-oe/recipes-extended/mozjs/mozjs-128/{riscv.patch =3D&gt; =
+0012-Recognise-riscv64gc-and-riscv32gc-as-valid-architect.patch} (60%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-128/0013-Fix-=
+build-error-with-musl.patch<br>
+=C2=A0rename meta-oe/recipes-extended/parallel/{<a href=3D"http://parallel_=
+20251022.bb" rel=3D"noreferrer" target=3D"_blank">parallel_20251022.bb</a> =
+=3D&gt; <a href=3D"http://parallel_20251122.bb" rel=3D"noreferrer" target=
+=3D"_blank">parallel_20251122.bb</a>} (93%)<br>
+=C2=A0rename meta-oe/recipes-graphics/libdecor/{<a href=3D"http://libdecor_=
+0.2.4.bb" rel=3D"noreferrer" target=3D"_blank">libdecor_0.2.4.bb</a> =3D&gt=
+; <a href=3D"http://libdecor_0.2.5.bb" rel=3D"noreferrer" target=3D"_blank"=
+>libdecor_0.2.5.bb</a>} (94%)<br>
+=C2=A0rename meta-oe/recipes-graphics/libsdl3/{<a href=3D"http://libsdl3-im=
+age_3.2.4.bb" rel=3D"noreferrer" target=3D"_blank">libsdl3-image_3.2.4.bb</=
+a> =3D&gt; <a href=3D"http://libsdl3-image_3.2.6.bb" rel=3D"noreferrer" tar=
+get=3D"_blank">libsdl3-image_3.2.6.bb</a>} (87%)<br>
+=C2=A0rename meta-oe/recipes-graphics/libsdl3/{<a href=3D"http://libsdl3_3.=
+2.26.bb" rel=3D"noreferrer" target=3D"_blank">libsdl3_3.2.26.bb</a> =3D&gt;=
+ <a href=3D"http://libsdl3_3.2.30.bb" rel=3D"noreferrer" target=3D"_blank">=
+libsdl3_3.2.30.bb</a>} (97%)<br>
+=C2=A0rename meta-oe/recipes-graphics/vk-gl-cts/{<a href=3D"http://vulkan-c=
+ts_1.4.4.0.bb" rel=3D"noreferrer" target=3D"_blank">vulkan-cts_1.4.4.0.bb</=
+a> =3D&gt; <a href=3D"http://vulkan-cts_1.4.4.2.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">vulkan-cts_1.4.4.2.bb</a>} (94%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0002-F=
+ix-2038-year-problem-in-timestamp-handling.patch<br>
+=C2=A0rename meta-oe/recipes-support/usb-modeswitch/{<a href=3D"http://usb-=
+modeswitch-data_20191128.bb" rel=3D"noreferrer" target=3D"_blank">usb-modes=
+witch-data_20191128.bb</a> =3D&gt; <a href=3D"http://usb-modeswitch-data_20=
+251207.bb" rel=3D"noreferrer" target=3D"_blank">usb-modeswitch-data_2025120=
+7.bb</a>} (84%)<br>
+=C2=A0delete mode 100644 meta-oe/recipes-support/usb-modeswitch/usb-modeswi=
+tch/0001-Fix-build-with-gcc-15.patch<br>
+=C2=A0rename meta-oe/recipes-support/usb-modeswitch/{<a href=3D"http://usb-=
+modeswitch_2.6.1.bb" rel=3D"noreferrer" target=3D"_blank">usb-modeswitch_2.=
+6.1.bb</a> =3D&gt; <a href=3D"http://usb-modeswitch_2.6.2.bb" rel=3D"norefe=
+rrer" target=3D"_blank">usb-modeswitch_2.6.2.bb</a>} (86%)<br>
+=C2=A0rename meta-oe/recipes-support/vboxguestdrivers/{<a href=3D"http://vb=
+oxguestdrivers_7.2.2.bb" rel=3D"noreferrer" target=3D"_blank">vboxguestdriv=
+ers_7.2.2.bb</a> =3D&gt; <a href=3D"http://vboxguestdrivers_7.2.4.bb" rel=
+=3D"noreferrer" target=3D"_blank">vboxguestdrivers_7.2.4.bb</a>} (97%)<br>
+=C2=A0delete mode 100755 meta-webserver/recipes-httpd/nginx/files/CVE-2025-=
+53859.patch<br>
+=C2=A0delete mode 100644 meta-webserver/recipes-httpd/nginx/<a href=3D"http=
+://nginx_1.28.0.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.28.0.bb</a=
+><br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/<a href=3D"http=
+://nginx_1.28.1.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.28.1.bb</a=
+><br>
+<br>
+-- <br>
+2.52.0<br>
+<br>
+</blockquote></div>
+</blockquote></div>
+
+--00000000000070f905064a1e8258--
 
