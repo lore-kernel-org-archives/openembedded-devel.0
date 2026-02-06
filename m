@@ -2,189 +2,138 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AA90EB28D6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2A5BEB28EC
 	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 08:21:00 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6907.1770366050904333960
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7170.1770366052169582626
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Feb 2026 00:20:51 -0800
+ Fri, 06 Feb 2026 00:20:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=crgK3Efs;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-432d2c7dd52so1910820f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 00:20:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fGJZLAwL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4362aadaf09so335314f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 00:20:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770366049; x=1770970849; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fc9Z3WDxjdhXtlJr4ImBI1LWDtmRXZ4R4RjvmbNHdXQ=;
-        b=crgK3Efs9ITW3RcJwD57g/yOc5/T7Y7TaaIN0vspgmMwaTes2bbcqiZfi4dkSoEcr2
-         fL8kCPyDOSEmandMjYV2z1w+sQDu8sMkVDF7lzasBlNJgEFj7Rst00xevbRuAezRXzmO
-         8K8UzSTgxHBRCo1FF8DOPJDdKgQnZwqafUGEBsGtZSmVxtzTlp5zhG68pPmsDK84ux2e
-         o/NktrZa8kpLo0o82IULWmZGL5XcKvEqqXP93yiXYfrPSDvFC/spoZLTtj7DBx4NPclV
-         U+U7Ho85ZV6zZsp+CjKD8dRigssU9oD5cQQ6sKPqaW4oS61QliiyOac9edvm2NJnLD6A
-         ALDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770366049; x=1770970849;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1770366050; x=1770970850; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Fc9Z3WDxjdhXtlJr4ImBI1LWDtmRXZ4R4RjvmbNHdXQ=;
-        b=oIg2uzg4z3+S2n/ZTUoGCnJhVZBHyn/5OcBWiop0gNgNtRx5zVu090cLNnlA/+gQZT
-         quC02kJt5lTvkGNXgyVMM/CwHyHc+Ec72qXNFNUYWaJSop4Wrdg+UATchQF5k4g3VzLV
-         k2SnaTMagnrSQXGXb7vcR/agxl0ln125vXnS0TOcLgD3XJF7pP54acqUt9I3Pp4S3Hq+
-         de22P6/FsrakDaYuOzrxNDjzkY7MLI88B+0Xr0bjbdBGd5viwAx0NqcWQpo49WSvDVdN
-         e1n78le5bOUjqHL9707l3ZhqMMZaonPyyYuuIDXFeqWGf2uosDCSJpNqpqNpE7JG/dID
-         3zzg==
-X-Gm-Message-State: AOJu0Yx6qLnndOPIhkjM+F6d/YrinPLddesaumIXTKxlOkAc2ySN8+EK
-	R5ikKON+l8N0ix/cAJw/sON5sX4TZaR8Uqf6Ak7Vu3MUkus+JcZtcBMLDP++5g==
-X-Gm-Gg: AZuq6aIUzDJ2kVlDX1szvDe3pHQlK0JNX8jC+tuOZlFwgbwVonH0RrNFP/y+g9ywUtd
-	XVAHyfW6W/IS3sLh0OA+oLEa8huGIOUqUzXW9cMMC0Uc//sDLouU0Kd2PGVnR5KnPQ14ddBTmUG
-	eO1siXJYmT38P/WdobTSECa2g7RTJj55iu/qc1UfrmOIEf3Ql/BR8xJ2VUJnneHWDecHoajo8PR
-	ejNvbeuB8e9Mjd0+Whzo1Vhm6cbMThMDVhJ1g5UkKBuFDB+kPFH3s9rZyypnfXl091ZDair/JPL
-	sKoDbaw5FT2lVy71Y6QfEU13IksdVCejmJGHA55zlroecHP0zVwsRPfKcmHPyRYIucevVo+xOJ1
-	/y47r/ZUPiZWCXy5GwWi8jGBX+IpllL5vvxTh+yRs892QfBdzmFbrq7XEuUmj5QkNRRhjpjnjGH
-	x4FpBpEoiq
-X-Received: by 2002:a05:6000:1acf:b0:42f:b9c6:c89a with SMTP id ffacd0b85a97d-4362938b3b0mr2571849f8f.49.1770366049164;
-        Fri, 06 Feb 2026 00:20:49 -0800 (PST)
+        bh=7BPXMlMMJsOdEXfyUStoDZNItN5HeZaymX2C8uwH0BQ=;
+        b=fGJZLAwLAIkljkstNJ3LA4HnlkuAlNd86nqTER8Mt8J1s/AbXT9pOCGFS3bjWnHE+p
+         mxPjzwXuiRxv08F8KKSJ9BsAjBIjOA0FfXeFqfnR8DYrVA5d/+cSHqA7Je0uYK/bDuEw
+         AYAZUgc1cDoICkgMVXyhlkNWY+0Rqig014oSLqZH4/wuOEsvYLVfGtMKwcnGt79Ra2Kc
+         EMklGBvfKEpkfQ/Q7CQrz6yWuqjAo57VBDN0jEd0iUDcr7vgxkZZFUPUvVBQ7F99GmVu
+         MlUrh+7h8R2h8UajaNGE6j4bYIpDVm1Mb3eMf2gmazj1oFqDS5ifdukqmX45TXbSvqEY
+         8XBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770366050; x=1770970850;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=7BPXMlMMJsOdEXfyUStoDZNItN5HeZaymX2C8uwH0BQ=;
+        b=Ikck0++rP4arOAWXcdECpSyUreRo2Saqamq3qoSfi3ClKlt+L7oKVwyLSnbutS9kQq
+         l2Y7BcxnwUXU2i1RGoVK5E1x7zjPzBIzgf2SndGSLu0BEBLI12HwGW7KsvpZhORY2sOD
+         5q8GVVmLXZ269lKqMkPhXmhs3W0W9BQqBPrd1MXhLlQoku1LMEFpmpM3p9FZ1ssHP73j
+         ZXi+moKMo6xgybol1zAIdLc+5WNDbgv/I5XdUAb9tM9MHjuaiQHXtyE3wsipJG6SP1Co
+         /DXrIh/brB4O6i9+NRBi3Q0ua8TMXrS3orYPan1jLOez7Cs80O2CAFhDfYu1oc9VqljJ
+         0kLw==
+X-Gm-Message-State: AOJu0YzkgbxoHun1rBRSto2qjLTJsvScHe3VmV8SyOUC499A+4NhjES+
+	RB23eH7Fji87h755UScQFpJX1pc+VAsUNU3q9YMq8/tun2IRMen5rAaEeKvQaA==
+X-Gm-Gg: AZuq6aLvEmciM/KpyYz4tGCORPTeG7mkRMnA2YRjpUO+9xr223c63/y8kZCYi4Vj3A0
+	tEELw/uY4Dp872mSdFKteAVPhRXB/83hOEL4uIQRI/9fZGcNyX0Gu6aJdkjr8eZAlQbyCBoUIv9
+	ubDElCGiZVfcptSrbyXQu4UYJzPaUNq50I6acEZHjQM2Mqd/9PjDsFLNg8xgumpyni5QaS5ACuP
+	Q5XzKcHEy7kK6F/SMuyZmRzJwQEeN8wo11gErSc7ZMMEw2tFdlgaTAqjpTBGB/fRWTRbVetzoIZ
+	Lil14ht4IC0s/G1HwFVYeGpn3HFI0/joR0gKCd4NFdSKCFBKKqbZxsQZHOyl8fNHQG0APWvq31a
+	GfnLNaCvMQ/vC+UEL/21IXXneGmjMCiZJSrzbW0znB/RJbviDYNqMmc7iNLY+zGaY+MdoZM5kWE
+	W4WqE2Q0quWSeC2nCvws8=
+X-Received: by 2002:a05:6000:4022:b0:430:f68f:ee7d with SMTP id ffacd0b85a97d-4362938c301mr3238294f8f.47.1770366050418;
+        Fri, 06 Feb 2026 00:20:50 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4362975ac28sm4332200f8f.42.2026.02.06.00.20.48
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4362975ac28sm4332200f8f.42.2026.02.06.00.20.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Feb 2026 00:20:48 -0800 (PST)
+        Fri, 06 Feb 2026 00:20:50 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 1/8] fontforge: patch CVE-2025-15279
-Date: Fri,  6 Feb 2026 09:20:41 +0100
-Message-ID: <20260206082048.1442403-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 3/8] fontforge: patch CVE-2025-15269
+Date: Fri,  6 Feb 2026 09:20:43 +0100
+Message-ID: <20260206082048.1442403-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260206082048.1442403-1-skandigraun@gmail.com>
+References: <20260206082048.1442403-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 08:21:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124230
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124232
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15279
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15269
 
-Pick the patch that mentions this vulnerability ID explicitly.
-Also, this patch has caused some regression - pick the patch also
-that fixed that regression.
+Pick the patch that refers to this vulnerability ID explicitly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-(cherry picked from commit 21418bce907ee06695d29f8ad759f2d9dfeed5b9)
+(cherry picked from commit 449999f6767668df4378105b4c79c4a5db5125c3)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../fontforge/CVE-2025-15279-1.patch          | 41 +++++++++++++++++++
- .../fontforge/CVE-2025-15279-2.patch          | 34 +++++++++++++++
- .../fontforge/fontforge_20230101.bb           |  5 ++-
- 3 files changed, 79 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
- create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
+ .../fontforge/fontforge/CVE-2025-15269.patch  | 35 +++++++++++++++++++
+ .../fontforge/fontforge_20230101.bb           |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
 new file mode 100644
-index 0000000000..91306c57c6
+index 0000000000..af04085016
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-1.patch
-@@ -0,0 +1,41 @@
-+From 545b5eedf2a6866aecc04102f2e0853089cb760e Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
+@@ -0,0 +1,35 @@
++From 904971c570f0697a9052c6fa699f1a2c9b2669a2 Mon Sep 17 00:00:00 2001
 +From: Ahmet Furkan Kavraz
 + <55850855+ahmetfurkankavraz@users.noreply.github.com>
-+Date: Thu, 8 Jan 2026 15:47:43 +0100
-+Subject: [PATCH] Fix CVE-2025-15279: Heap buffer overflow in BMP RLE
-+ decompression (#5720)
++Date: Sat, 10 Jan 2026 20:06:53 +0100
++Subject: [PATCH] Fix CVE-2025-15269: Use-after-free in SFD ligature parsing
++ (#5722)
 +
-+CVSS: 7.8 (High)
-+ZDI-CAN-27517
-+Co-authored-by: Ahmet Furkan Kavraz <kavraz@amazon.com>
++Prevent circular linked list in LigaCreateFromOldStyleMultiple by clearing
++the next pointer after shallow copy. The shallow copy propagates liga's
++modified next pointer from previous iterations, creating a cycle that
++causes double-free when the list is traversed and freed.
 +
-+CVE: CVE-2025-15279
-+Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/7d67700cf8888e0bb37b453ad54ed932c8587073]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ gutils/gimagereadbmp.c | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/gutils/gimagereadbmp.c b/gutils/gimagereadbmp.c
-+index 5a137e28a..133336787 100644
-+--- a/gutils/gimagereadbmp.c
-++++ b/gutils/gimagereadbmp.c
-+@@ -181,12 +181,18 @@ static int readpixels(FILE *file,struct bmpheader *head) {
-+ 	int ii = 0;
-+ 	while ( ii<head->height*head->width ) {
-+ 	    int cnt = getc(file);
-++	    if (cnt < 0 || ii + cnt > head->height * head->width) {
-++		return 0;
-++	    }
-+ 	    if ( cnt!=0 ) {
-+ 		int ch = getc(file);
-+ 		while ( --cnt>=0 )
-+ 		    head->byte_pixels[ii++] = ch;
-+ 	    } else {
-+ 		cnt = getc(file);
-++		if (cnt < 0 || ii + cnt > head->height * head->width) {
-++		    return 0;
-++		}
-+ 		if ( cnt>= 3 ) {
-+ 		    int odd = cnt&1;
-+ 		    while ( --cnt>=0 )
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
-new file mode 100644
-index 0000000000..8ef833ff63
---- /dev/null
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15279-2.patch
-@@ -0,0 +1,34 @@
-+From 3bbdf6c7c161ff45d793e3bf5047720156e466ae Mon Sep 17 00:00:00 2001
-+From: Ahmet Furkan Kavraz
-+ <55850855+ahmetfurkankavraz@users.noreply.github.com>
-+Date: Mon, 12 Jan 2026 22:45:16 +0100
-+Subject: [PATCH] Fix CVE-2025-15279: Move bounds check inside cnt >= 3 block
-+ (#5723)
++Fixes: CVE-2025-15269 | ZDI-25-1195 | ZDI-CAN-28564
 +
 +Co-authored-by: Ahmet Furkan Kavraz <kavraz@amazon.com>
 +
-+CVE: CVE-2025-15279
-+Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/720ea95020c964202928afd2e93b0f5fac11027e]
++CVE: CVE-2025-15269
++Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/6aea6db5da332d8ac94e3501bb83c1b21f52074d]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ gutils/gimagereadbmp.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ fontforge/sfd.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/gutils/gimagereadbmp.c b/gutils/gimagereadbmp.c
-+index 133336787..ad365158c 100644
-+--- a/gutils/gimagereadbmp.c
-++++ b/gutils/gimagereadbmp.c
-+@@ -190,10 +190,10 @@ static int readpixels(FILE *file,struct bmpheader *head) {
-+ 		    head->byte_pixels[ii++] = ch;
-+ 	    } else {
-+ 		cnt = getc(file);
-+-		if (cnt < 0 || ii + cnt > head->height * head->width) {
-+-		    return 0;
-+-		}
-+ 		if ( cnt>= 3 ) {
-++		    if (ii + cnt > head->height * head->width) {
-++			return 0;
-++		    }
-+ 		    int odd = cnt&1;
-+ 		    while ( --cnt>=0 )
-+ 			head->byte_pixels[ii++] = getc(file);
++diff --git a/fontforge/sfd.c b/fontforge/sfd.c
++index 4db9feebb..894176254 100644
++--- a/fontforge/sfd.c
+++++ b/fontforge/sfd.c
++@@ -4786,6 +4786,7 @@ static PST1 *LigaCreateFromOldStyleMultiple(PST1 *liga) {
++     while ( (pt = strrchr(liga->pst.u.lig.components,';'))!=NULL ) {
++ 	new = chunkalloc(sizeof( PST1 ));
++ 	*new = *liga;
+++	new->pst.next = NULL;
++ 	new->pst.u.lig.components = copy(pt+1);
++ 	last->pst.next = (PST *) new;
++ 	last = new;
 diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-index d470ff12d4..c625566f69 100644
+index 70667e7f65..b1e5ba0b63 100644
 --- a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
 +++ b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-@@ -21,7 +21,10 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
-            file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
-            file://0001-Fix-Translations-containing-invalid-directives-hs.patch \
-            file://CVE-2024-25081_CVE-2024-25082.patch \
--"
-+           file://CVE-2025-15279-1.patch \
-+           file://CVE-2025-15279-2.patch \
-+           "
-+
- S = "${WORKDIR}/git"
+@@ -24,6 +24,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
+            file://CVE-2025-15279-1.patch \
+            file://CVE-2025-15279-2.patch \
+            file://CVE-2025-15275.patch \
++           file://CVE-2025-15269.patch \
+            "
  
- EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
+ S = "${WORKDIR}/git"
 
