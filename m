@@ -1,111 +1,87 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <frederikbraendstrup@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5376EB28CD
-	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 06:00:59 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5498.1770357656774315103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31B3CEB28D9
+	for <webhook@archiver.kernel.org>; Fri,  6 Feb 2026 07:33:00 +0000 (UTC)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6411.1770363170207151495
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Feb 2026 22:00:57 -0800
+ Thu, 05 Feb 2026 23:32:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EU/CeVip;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-436263e31abso1065521f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 22:00:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nhGByvoG;
+ spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: frederikbraendstrup@gmail.com)
+Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-b884a84e655so268694766b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Feb 2026 23:32:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770357655; x=1770962455; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=J23wY2hLrW1/k77nqH8hOy2k0w6Q3HYguDRJLJV4uVs=;
-        b=EU/CeVipkQ6enkJhTRu3TD2wg9OwGpipFDLO2QtzfXpeoDJ32lijduVkZa6z+bqppA
-         7NqfDQgMhmVy+9PDUqrzN403UGHpOqZni3kHSBQ30xVTllB6phQYKFFCkgxQ22tZkp/h
-         BJWo2qetnpcz5Nl5oswKWMuWZt6JW6MknHrI6eTCI+JeAKIajHQ1PaV5cBzrKkYjkW2h
-         GsxwCr+15B4ywBJDAD9H4iVx1sJV/Xbd7MwRue2xTg8OWK6L5+4KNBMACllQViJ/LcpN
-         qYzZi96kisauuVpw3+gF4yCswglXhSPmmMsvlAlyDd8TvY1k6xdz7Y/FWzmYYslEM8fm
-         aJ6g==
+        d=gmail.com; s=20230601; t=1770363168; x=1770967968; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WEwptagqlhHReuzmj2wHretMbApKBXUbqEHNENL2l2c=;
+        b=nhGByvoG64WySr6Vq5TfNx2yh2hEqSyAVhIPLGntilLBqQh06/LE5AL7bQbA4RzOKY
+         zPPOxDF31fG5SQmEr3zLA8U61UqaN9FwbZYpFFCnCZ0/MrkMWzSZ06ecR1hoFMdQUZCD
+         2qR48etefSeoSLe2Rbsz9/XnUSoFwnKHXWQ/uPeZF6ax4C/nKkyQyGEHKwujuS6XnC8F
+         Jw4fkon1Fkpi/tgA4imh5Dhf7c0EJV/GTjmiVj+VLAouqX5cy4MlQjmvyK/shLUdWOeI
+         9ufZ4Ck0DIiKHhiBO3aTaMg4wh2BjSatjwfcUnZ0mXaJXhG6JcEU/twKGyP5bP8WozGh
+         tFUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770357655; x=1770962455;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=J23wY2hLrW1/k77nqH8hOy2k0w6Q3HYguDRJLJV4uVs=;
-        b=CfrkOMKCqhyNsh9Mt5mDkqxTAt8x8vgmZ3ifTUFzEgEWj9ROdE5auOMe58DxJEZ7UC
-         NHcJuOUMWMt5B+tr6pFpQiJRO20aPquzuh0R52pr9cSk8W+NDjg/mkV4qrBg+8inQtBh
-         5CsOiUepvd8kenGlAGRlAmwVP7seQywX7ZN7bxMU9V2vsA81NwZz5oIarvtqH/XE+PH4
-         VhPM8V0YTQkIl4MOmz1b/1B29NIRqwLdaf8/kgkdyStWU9ZYUlQdYiFmqIxYVU5TjCu9
-         o4Qr3jrVMo9rxvhD8A4G7NmiQ7UkiAxYZ/N5l4a1IzkEyFBLyMa1OhR2RrCQo0I65MgT
-         9UHA==
-X-Forwarded-Encrypted: i=1; AJvYcCXepcuCC1mbK9hcDGDDKJLkaNpPBeLs8wwH4Qao1I5/mXExwViyNG0JnQxMy9dllPye5+j24ZfbhVyyZzO8rAERCYc=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzlTRtDrQydoP4667mA+wWxHenH0JNQXYzUJRvpo/nqLGRbXmh7
-	ONUU/gc1zps1f+rta3Z/ztT7CK0rw6Xt14NQxn81El6ELrzJhN1cLEa4
-X-Gm-Gg: AZuq6aKkw7v+bA19KAZ0LsVg1a4zPoTqWVTWZIRp2Hmwx81vjNK48EZ0AWIUZj4Hatq
-	y+mvM3kglltek/n0hEmm2tDInfWnQR31bLvrTf6K168D2gi25TNZ5RRYOR9C/FAjQQ6KSNvNEhR
-	yfEfs/yRMrUMY3tc+qsyrevktEMRQoZIdlDo0HDxZ2w7UEPuR3bpwjAKB5LYe4g+/RcsZF5aWrC
-	HG2uqQ+lJeKWoK68rcosThMy6flc7dsexcJdZXxlb72sicKl6MvoqVjb5jgplNLkUY+q6YV4A+s
-	RbyUXue8Qn5JkFfkFD2lzt1NAap74tu+mzNbqZTSqb0iafHMEfkyMbobvsXb3Yn81eD3h+jbzvs
-	c0xFmUx+5hqlQZkoCgUouGyfxAIBfqPBksgv+0X6amR6QsNLQumWpqNN/oIvRzQcNLLKpAbgvm5
-	AoflOWeGUXAnh2sgA1wdU=
-X-Received: by 2002:a05:6000:200d:b0:435:8aa0:a30c with SMTP id ffacd0b85a97d-4362938ff04mr2209345f8f.48.1770357654691;
-        Thu, 05 Feb 2026 22:00:54 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-436297460a5sm3111006f8f.32.2026.02.05.22.00.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 05 Feb 2026 22:00:53 -0800 (PST)
-Message-ID: <893d8c83-6ae4-43b4-881f-a87b1d024007@gmail.com>
-Date: Fri, 6 Feb 2026 07:00:52 +0100
+        d=1e100.net; s=20230601; t=1770363168; x=1770967968;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=WEwptagqlhHReuzmj2wHretMbApKBXUbqEHNENL2l2c=;
+        b=n86AXQA6aYUc+kKIjLM8xbO/cg0PPlhJkwN5LxtbeTwdT+ahznunPK4wZ20eiVrqKF
+         w7tN4MjEvnBC5ebsqrtgUIvcxxrQXDZI5vY7fw1Jz108f0hLGEeBCe24GWRXgAjaIvJN
+         Q0KgEvbWUXKhQBxmtsTnHpyvXsZY3daOnckfr8H5n0LPBkUw/f+Thg42d1gt126ZrGbl
+         WfMz6EHN66PnaGKlVI2KyvUn6iHWopGwgaeO226IEdERALwukuwv4SIydKEX0fDLvRot
+         rYRg4TDGQDijwoRUBcMWeC0aJN7DY1nhrDfOBwKQZIS9bLtiZi7Euz3a6WpwO62X65/T
+         /LTw==
+X-Gm-Message-State: AOJu0YwEmHmTgSEP7hEAQX3Eg9ykit3717ptii+EKIWt0GCUF2eYHD0r
+	RFvzpJwZYiitOpDuVpLD7fQhj9q4PGShsxzyy9+zshbQt6f3zuDnxtJMdn11WSWk
+X-Gm-Gg: AZuq6aI+96MY/oHa7WAchmEdHedsG3xH/Gw0COqj65U36GKipaIRLVBhMberBmPAUHH
+	ks5CZbPHNbxS14Pp093Owd1+721nCMzU4jRkxIGwZhD3JcvqFQhLLKOwTJrnUPm/iC07kt3bg8Q
+	VBUO2oGjfv4cdU95FmKU4Dg5lyw1/1jQqM48HSjpnpQqHiZ1AN/6UBPA7UaQhmX9S8UiegDWv4T
+	MafYAcDedBhUpexnVeKivoYjOPqFTsOr5kKpeeGCEDGByYAN8m2tIRqWJRAGnwcEYcmk2b3bMjV
+	bNHrbUD2/HQu1bSvXb1GYqnoof/GMsenGcB2m3+Sb+9uzf/Kqupdf6AzhMO7D1bkCgcQ6TXki/K
+	qc6nTA204YbBpvmC3rKIesCwtM6M2dc8rulgGU0AqQjCKMdrzBNIZwd3QuprD66+NPq/vNxXWMP
+	i8TPm2gTAA7VeA4ZkP+Zc9V8MD2saNnjLyPoslh6qgIxKhU0MDFBuFLoooUR0=
+X-Received: by 2002:a17:907:3cc7:b0:b87:4c74:b316 with SMTP id a640c23a62f3a-b8edf3dc68cmr91475966b.50.1770363168099;
+        Thu, 05 Feb 2026 23:32:48 -0800 (PST)
+Received: from ws.taila4487.ts.net (77.241.128.38.mobile.3.dk. [77.241.128.38])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8edacb18aesm59346366b.41.2026.02.05.23.32.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Feb 2026 23:32:47 -0800 (PST)
+From: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+Subject: [meta-oe/v[PATCH v2 0/1] include glaze cmake files
+Date: Fri,  6 Feb 2026 08:32:08 +0100
+Message-ID: <20260206073208.340688-2-frederikbraendstrup@gmail.com>
+X-Mailer: git-send-email 2.52.0
+In-Reply-To: <DB5PR02MB10213DB563D39B743A315F251EF99A@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <DB5PR02MB10213DB563D39B743A315F251EF99A@DB5PR02MB10213.eurprd02.prod.outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-networking][PATCH] wireshark: Fix do_package_qa Issue
-To: liuyd.fnst@fujitsu.com, openembedded-devel@lists.openembedded.org
-References: <20260206032752.4974-1-liuyd.fnst@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260206032752.4974-1-liuyd.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 06:00:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124226
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Feb 2026 07:33:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124227
 
-On 2/6/26 04:27, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> There is no mate_grammar.c in new version of wireshark, so remove related sed.
->
-> Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> ---
->  meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb b/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-> index 2cf9693f5c..d06310e41e 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-> @@ -71,8 +71,6 @@ do_compile:append:class-target() {
->      sed -i -e "s:** source file.*::g"  ${B}/wiretap/busmaster_parser.c
->      sed -i -e "s:** source file.*::g"  ${B}/epan/protobuf_lang_parser.c
->      sed -i -e "s:** source file.*::g"  ${B}/epan/dfilter/grammar.c
-> -    test -e ${B}/plugins/epan/mate/mate_grammar.c && \
-> -        sed -i -e "s:** source file.*::g"  ${B}/plugins/epan/mate/mate_grammar.c
+v1 moved cmake files to where glaze originally installs cmake files
+(/usr/share/glaze/*.cmake)
 
-Instead of deleting it, could you please convert the test to an "if"?
-The file exist when the plugins packageconfig is enabled.
+v2 reverts v1 and adds the cmake files to FILES:${PN}-dev
 
+Thanks to Peter Kjellerstedt for his insights here
 
->  }
->  
->  do_install:append:class-native() {
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124224): https://lists.openembedded.org/g/openembedded-devel/message/124224
-> Mute This Topic: https://lists.openembedded.org/mt/117666448/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Frede Hoey Braendstrup (1):
+  glaze: include cmake files in glaze-dev package
+
+ meta-oe/recipes-support/glaze/glaze_7.0.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+-- 
 
 
