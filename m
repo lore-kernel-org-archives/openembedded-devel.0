@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1757FEE0AC9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B60AEE0ACD
 	for <webhook@archiver.kernel.org>; Sat,  7 Feb 2026 10:34:11 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2674.1770460444973249853
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2675.1770460445682592197
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Feb 2026 02:34:05 -0800
+ Sat, 07 Feb 2026 02:34:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIJL6jkg;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-48068127f00so27354585e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 02:34:04 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mTeQbh/8;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-483337aa225so392935e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 02:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770460443; x=1771065243; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770460444; x=1771065244; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=cawXVzTaWxPhuZthNqx5H6eSXyYqlw8mRvhr0Tpd40o=;
-        b=lIJL6jkgVjjaU/SEc/sOLVsWAt2SHStjHMMcoLSIIKoNe1QDMaCn83qlx9lesK6364
-         Iu6dqVUt5bI3BstWFOmzPEAsKtpSQHDOAdRWILFsdpTV5/KVFUtwlUMQS+twRkwxYJAX
-         yoZqcfaf+YuesFvrnHR5VfvBUQNHkR9YmcxTG94WVNuOdAASyqG/+B/HbvyVisi0+eob
-         Dot1LF6UmW/sO1jvc+FDb9Y6QYx+MISeQ6LI836TiNSYyqdIswSL2kvEFilII3KOGBqL
-         RLOiZDstXQwkkjofspQBjjtumSWxPlPA3U5kvn2jg6ulyESxMwB32J6MOu6fjd68A7aB
-         uwww==
+        bh=r6HjRJ8CM1uL/KeUGC0wD1I7TB1B6bYYi/enQbhxXoo=;
+        b=mTeQbh/8CJ+VaHQV0sOlcdQWuYRPQ3dAWm7rH2ooHhEXbuSs03iAR1bd78uAWtZ4jl
+         6DSieCsjpoXPFtLxfgOaTAB7rKtGh/9Pi1GLb+R3wUbWwZai4Sa9cfb2bOkHohKBzv0Z
+         QOyEXL2ZnTkkgnhfm7rmGdlm7eLdoWXv8tCZk+Ee3eL5sprnF7vtw/cZPqMX3NigV5tF
+         Ck34kBONCjJfsjGKNQiytajOFZr71FtPXt8m715+eHOBVR0MZIo/9lDCm6T0Z/Idqj97
+         1UE3A3Rhn9oUP0Yh+exXFiqWf/5qc1q8pwEZVGReEi13PiEju2J3oWoGeo9wLnBtN2Dz
+         h+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770460443; x=1771065243;
+        d=1e100.net; s=20230601; t=1770460444; x=1771065244;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=cawXVzTaWxPhuZthNqx5H6eSXyYqlw8mRvhr0Tpd40o=;
-        b=uwnJwAepM/rwV7w380nkBH1nWKTR5X1Bwis9y2SN2Wa8F4HlFlYbThexDBlcqWxOqf
-         cpPxTinS8DOcPNyBq5cS+N1T52OkHelZy9cCN9I3T8wiOJEwYlohovMvIi3sgcXZRGr0
-         zGUxIYllQsVh9ytuNVUjeu2JSznG4tHVElyeJ46mmlk/DsSD6q/78xB72QWcR/NXnbzD
-         Tw8kZW/W2KOSVmy82RVO0CjWBoRUnKKZJ68RGYtJXRQaR0qqD1VSjdE498LFgm18sAUC
-         rm1t8zdNuo9jUsFfG0rZL47upF8adVUYJKfRZfOwnouuv5uTdou0hA39wpZ2Ky9y/A9q
-         P7gg==
-X-Gm-Message-State: AOJu0YzgIndCr0oqVZXRWFP53ewjICoI96lK+f6kH0xRWNskqdYSewIc
-	4Znq6XJ2h/PUDQUXtt1tZAn/3VLdUDC0l3Ag4vfxiZe60GnMu6Lh9OVHsZ0zFg==
-X-Gm-Gg: AZuq6aL/fIXXVY+qp/R9D0ZHrO24TwHRJOcHywns6Du2iBzy54j9hasNK/xaCBj/VC9
-	bvD/qNatzmbAVwVO4XtP5O7yzWvv5b6GWZdW7OUjZHQ8UlAoSMZs/3zCKbYoujkZ1/GLCDFS4x/
-	SewUD4vd7iVBe8x+7sNgnFEtBqkdCCmNE6MVXl7JDQd4SYYbZucIYK11VOKVTb+ANBF8PGYeYsd
-	lcIQl/4QpfJw93bm0oSVTfesJi0+uf/XSj8OfcW3x8cP1jtGjO5OM7bA74iGrgXB6fpmZ6JimpQ
-	oZtDD7x9eM2odrjKxvXu3Wq5zZxla0PyWr9C5ykcm/8Y3tBw1g+twZlbyMGZT2OnuHJzgVyLdS8
-	IXJqJTCNCZ6ylBRiXiTt8rL3nMC7pGJuWvJ/5WXQOAuQitoJz8iRtAJGh+QzoTxNjWW/XsWVznZ
-	PHp6eo9Y51
-X-Received: by 2002:a05:600c:4ecb:b0:471:14b1:da13 with SMTP id 5b1f17b1804b1-4832020df78mr73119525e9.14.1770460443219;
+        bh=r6HjRJ8CM1uL/KeUGC0wD1I7TB1B6bYYi/enQbhxXoo=;
+        b=WGAqwIa9PXzTx1w0rIjhb7yKujuWZUeZT9p1miIdbJVoAH1bi4UxDjv/RZoOvWtEQ6
+         bYYuu7btkQ5wVM+4TW7EnhLTB2y6x+JMliYPYH/8OZwmEnyljHZpqpNW1Vwb2YhlJl/t
+         mSyZMt7rsp/bQTjOW/rnvbwdMQOzmHjwTEOp3AbENZbB+4eWeHaZzgNsL3yzSuWRk4vz
+         iHWaa89R6fLql+MwA3Nz+24CDN3zcl2lMWjAuPZHsREA0s8rEeIQrcOCCKfnP8mUXtXE
+         ZH1/Y3nKecDGxYlDyhbNRadgkWDakZ9ISDQMSymGwbCmfCKytI4YN0fkto9QDvWs1RF3
+         PLXQ==
+X-Gm-Message-State: AOJu0Yz3W2QJZ3f3DniuScUbCL1KTYDnTm0gW3BJQZ0KOFDRd5b9ZIFE
+	7QkkAW9SQfSoMEhdjk50EmbUWUZHtkjYCu4YGh0uTkp7wsTh7YzEXe2bh1iZeQ==
+X-Gm-Gg: AZuq6aI4t9L6RHxdtI8RYD9Am7GtMoE0BN/xR51gQMbHChTWvGB742MTgf9uJrzMj9C
+	GVyep/jxviW5fr+rCfesB0ILC6LSGEU4X3nmkQQuC3CRSQPzdO05qeZTVjNSkt4jcNv/hE94kez
+	43GX3TFHDoAQXXRh4V7jNAqyCC8pjmZRl3UW50M4Kpv2raplISL1DykOUUmWRRmcYQHYGXLBjHc
+	uG67UX/utGdZ8vSYTqz81YAz3F1qo3f26S8tFjLCZr+yEGxutB2hwuHJOSFV+L9Y3IaE4AQqJMP
+	Z+jqodJqeSYhpjf9m1FlVT8Owh8Wt7D71YI6K6mu0T0htVdp1bDAs0igC+vwUabcMoAAEI+curu
+	/cU4HqRI4HcexZwoQuYyqWYzUBX/A/FA85dNUoPCigNlvlUXii2waFFa0bCsKz5motWrGEAsf6I
+	vqo/R7tWdU
+X-Received: by 2002:a05:600c:818f:b0:47e:e20e:bbb7 with SMTP id 5b1f17b1804b1-4832021c808mr73831025e9.25.1770460443917;
         Sat, 07 Feb 2026 02:34:03 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43629664632sm12077622f8f.0.2026.02.07.02.34.02
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43629664632sm12077622f8f.0.2026.02.07.02.34.03
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Feb 2026 02:34:02 -0800 (PST)
+        Sat, 07 Feb 2026 02:34:03 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 04/15] mongodb: ignore CVE-2025-14911
-Date: Sat,  7 Feb 2026 11:33:46 +0100
-Message-ID: <20260207103359.4177243-4-skandigraun@gmail.com>
+Subject: [meta-webserver][scarthgap][PATCH 05/15] netdata: ignore CVE-2024-32019
+Date: Sat,  7 Feb 2026 11:33:47 +0100
+Message-ID: <20260207103359.4177243-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260207103359.4177243-1-skandigraun@gmail.com>
 References: <20260207103359.4177243-1-skandigraun@gmail.com>
@@ -67,31 +67,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 10:34:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124245
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124246
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-14911
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-32019
 
-The CVE is currently tracked without valid CPE. The vulnerability
-affects mongo-c-driver component, not mongodb. They are also stored
-in different repositories.
+The vulnerability affects the ndsudo binary, part of netdata.
+This binary was introduced in version 1.45.0[1], and the recipe
+contains v1.34.1 - which is not vulnerable yet.
 
-Due to this, ignore this CVE.
+Ignore the CVE due to this.
+
+[1]: https://github.com/netdata/netdata/commit/0c8b46cbfd05109a45ee4de27f034567569fa3fa
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../meta-python/recipes-dbs/mongodb/mongodb_git.bb               | 1 +
- 1 file changed, 1 insertion(+)
+ meta-webserver/recipes-webadmin/netdata/netdata_1.44.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-index 48bae85179..baa159adf8 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb
-@@ -52,6 +52,7 @@ S = "${WORKDIR}/git"
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.44.3.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.44.3.bb
+index 700c6b2346..123da8bcf3 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_1.44.3.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.44.3.bb
+@@ -15,6 +15,8 @@ SRC_URI = "\
  
- CVE_STATUS[CVE-2014-8180] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
- CVE_STATUS[CVE-2017-2665] = "not-applicable-config: Not affecting our configuration so it can be safely ignored."
-+CVE_STATUS[CVE-2025-14911] = "cpe-incorrect: The vulnerability is about mongo-c-driver application, not mongodb"
+ SRC_URI[sha256sum] = "50df30a9aaf60d550eb8e607230d982827e04194f7df3eba0e83ff7919270ad2"
  
- COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
++CVE_STATUS[CVE-2024-32019] = "cpe-incorrect: versions <1.45.0 are not vulnerable yet"
++
+ UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/tags"
+ UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
  
 
