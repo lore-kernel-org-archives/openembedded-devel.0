@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 341DFEE0AE0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED29EE0AE7
 	for <webhook@archiver.kernel.org>; Sat,  7 Feb 2026 12:23:42 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3908.1770467013780999233
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3910.1770467016253987133
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Feb 2026 04:23:34 -0800
+ Sat, 07 Feb 2026 04:23:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y/1rCDI+;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48068ed1eccso30997955e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 04:23:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Wov7TkTn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-483337aa225so570605e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 04:23:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770467012; x=1771071812; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770467015; x=1771071815; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+cVMEO7JrdlJ6x827r4P7KvI2QE2zYKKjE1DHdej97A=;
-        b=Y/1rCDI+bXKQTPeJkp8y+LS6ljib1R3rKq3vNXMACI7CZmaBasF1HwNO4qWlcYTpI8
-         PjnxGSViDlcYl/kxoI0b+i4uJG7ktmgd1g8Clw/wWmgvCBgcXODOuQTPsh2LwEu6bYAr
-         9HINrEcojkNHcJh5l7JJJ5pa2Qlft3w9dysxhCGHTON9V7fQ0gSTvHqRFJitGYs547S8
-         EbVILW73aSak09R0m7IHl75ipr0AVIt5ocoYaldApV52B+HhFPh6eTsTChmEUj4FzsR8
-         iGNCPy7H3EVCP5ZlrcvsgN83uPN0ChDNG6qmvs4mYz/th4hdVh3UV2g5sMHQdRUARzec
-         NU2Q==
+        bh=IjQck5sR/pibOnWfhZMpTP2Mr9z3gxXmn2QMLvY4FEw=;
+        b=Wov7TkTngoe0DYOzaNJpUuTHovSJNHecJicTEBrFPT4psETZt1VKgocSGyDTf9ozdK
+         uQEzdooQdwu6mB+J0O3+c+nA+CS+doY7IYqa1MUvwC7YZl+04VwyY+ofbX53I83yrnpw
+         d9aqCZx/UqcnNJVsETLKDB5QbZ9d/giKxfUeJ+ur9ExoAkBRoRA3j6mHGWfKUXgJIl7I
+         EqeGtCRSXuEuvdkOryKz9Ac2WWSuymvkXpDiJAoniIPxOlHDzie1GzUFjWGHDPpqOEcN
+         BvAGvokm27zpaWwWfkL50yFTiKPLfTRzrSbnVHI+ht6tmSstPDYOSfzDzVlR077M1d6/
+         G08Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770467012; x=1771071812;
+        d=1e100.net; s=20230601; t=1770467015; x=1771071815;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=+cVMEO7JrdlJ6x827r4P7KvI2QE2zYKKjE1DHdej97A=;
-        b=I9bwfPpQxqJmknrsfAZ+kdNOYaWgRHEz+GZKmvuNTCxsJQB2m3gQN07j6vNnPCxi79
-         LsWTXds8Cg7RBpI8kxphHVBkY9BiFV6Z3G0DY8cZ9Xla02BCESQIUxR8F9R/OJYqBOC8
-         TTN8vAbdtkM9vFdIg73us3WAuVeeJtOpnhOiUbGe/6NEDrM8N9rcJl1+f+75NhdfToZr
-         hVoffeOe56B7+FVCDZRkDzGKfxHuDUzO3KhEy+07QomGy+g/aYvj+fqYZStsm4SS23nZ
-         fQOSUaz+E5WqGsWHlwf0uOzVGlYjDqLiHiHPrg4j/HTqnMc2iP2nvIrDq7dlV9+lVmKO
-         WeBA==
-X-Gm-Message-State: AOJu0Yz/i0Q4c069WAEvS2o44ckc0fNQsUffCbCshZtIZEk/VFfEPUvc
-	LLa4SD1+2JJJD5e7rcLrO+mr6wt5FdjleVeptXG5luszDsixt/ddEeD995KhiA==
-X-Gm-Gg: AZuq6aKCVqnUNqibUbhujfrT+ivqQOo5ILGIqk+tM2+LLW4Zn2eiKhWNs915+ID90CO
-	KzzZLKQwY7kFrQ63mVW9IL5lGyl01u+71YuOpqXBWkmDyYkTQn3uARboUcICuJjNK6LF6pK1lib
-	+LaotZbX8iqnKEVYwIZxGdn2CVxkE0+ppalabG9E0uOfjSLCAC1OF1EGmF4PRM1wz2ICy1ekx60
-	vXfYNqwa/xJoJxUnSa2xrX3Pft58fyoYmDRn9E1TOWw3KAUQJ6wUN4b2TN031d6jYWtHpzZ/eSn
-	Y1r2lsM/KwMduSkr3N4fIYaqCZRToi5/8wh6XSEIxhAKrntjxzQqXLHBvpD0TyQsD+2OElFZDiX
-	4ZfttbVyIRxCoKq62k5pUKe9+UNo/6vBOSufHfNSFWDlCZIXRYRcoUiXTSHp4/iA8RhCLwezqTa
-	3IvSiQBO/I
-X-Received: by 2002:a05:600c:628d:b0:47d:6856:9bd9 with SMTP id 5b1f17b1804b1-48320216d31mr77009305e9.23.1770467012019;
-        Sat, 07 Feb 2026 04:23:32 -0800 (PST)
+        bh=IjQck5sR/pibOnWfhZMpTP2Mr9z3gxXmn2QMLvY4FEw=;
+        b=APgpxAFHmDMIRa8D6B965oGHN3oe6XYEujPvI0WW1L4zbV0OSicb9c6hr++sC1UT5H
+         JpM0G1TPFSfsOPnbJpyr2jiDef4LSQWMlWuzEleCve9/TyFXuxQsjJlHVPB4X9JE7bVI
+         +06DAJZU+4gOQ0Ueej//p71luaS9h7IlOxMSdn7VdaBSRDT0lZ7a9mHwPlAyt6TjFAAn
+         7mNZpHihXa6OB1WUYiKle3a2WZK9UnMbHxcMl6dn4a3bn8PXEjPlHCDIaSkXG9WGqkV9
+         wS9V4goEox35II/IZ4v+Yb5emLvqDIp3td1rL+iyDeC+NVgDwIiFYkViEfHKW2mhA2Zo
+         fOHQ==
+X-Gm-Message-State: AOJu0YwIlYmVhPVHaT28rHBIJis9Adwv3pfX54spA2FcRMBwAXTbV/PN
+	8eHTXBW3vu9mC42FCmD7Hv3SSQbPTxwKMGCWQgOHGr9+xJjIe2MnqfTd3Oy2qA==
+X-Gm-Gg: AZuq6aLPSXyO9HMXY2cevBvWJ8Gx2TVIHmRK1ifEQlaBkPfzFxPjhdwcR6zl9E886Jf
+	4U2RtWWb/jU268AF6+1+WqnS5CXAHho/DdU+NNSn4PqyOhuMael+DlQ5qaEhIJOT3QQ7ghzmpwR
+	DFwI9nR48k15MInROZ2XRU1bLrzkUo6fcUYMe0zfrPocQB1cUyv4Hcf74BP6hL2UQb+681HTwUo
+	4eXDv8nxP87i0PFYfhx5cIls0Wlr2t6Eb2LgU+ygUwQBsKTooO/7p6Pnaneu5HIGjXf0fDjSQCZ
+	s52niKeP6CqLqLMVRMJQeI8yn/rRjtqLmn/HgAGN5YpPisrW218eHGYwnzqmqJ2n2NWNQZ/9Kjp
+	j4M/b/5yIU4+P8oaoqJ1Q1TlZfahdIj555sNDJ6r3iouBEkZMyVe2hx9xZQCAKnVpFPHuRITUCZ
+	WxTvOWGWwf
+X-Received: by 2002:a05:600c:4745:b0:47e:e807:a05a with SMTP id 5b1f17b1804b1-48320226f11mr81395285e9.33.1770467014479;
+        Sat, 07 Feb 2026 04:23:34 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48320719bf4sm112653835e9.10.2026.02.07.04.23.31
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48320719bf4sm112653835e9.10.2026.02.07.04.23.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Feb 2026 04:23:31 -0800 (PST)
+        Sat, 07 Feb 2026 04:23:34 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][scarthgap][PATCH 06/12] gdm: add missing json-glib dependency
-Date: Sat,  7 Feb 2026 13:23:21 +0100
-Message-ID: <20260207122327.664604-6-skandigraun@gmail.com>
+Subject: [meta-gnome][scarthgap][PATCH 08/12] tracker: upgrade 3.7.2 -> 3.7.3
+Date: Sat,  7 Feb 2026 13:23:23 +0100
+Message-ID: <20260207122327.664604-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260207122327.664604-1-skandigraun@gmail.com>
 References: <20260207122327.664604-1-skandigraun@gmail.com>
@@ -67,33 +67,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 12:23:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124262
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124264
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Fixes do_configure error:
-| Run-time dependency json-glib-1.0 found: NO (tried pkgconfig)
-|
-| ../gdm-46.0/meson.build:64:12: ERROR: Dependency "json-glib-1.0" not found, tried pkgconfig
+Changelog:
+=========
+* Bump database version to fix SQLite 3.45.3 issues in existing
+  installs
+* Fixed possible infinite loop on incomplete/unterminated Turtle/Trig
+  data.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 97eaa95cf36ab224047650e5fea58cbbf5bac30d)
+(cherry picked from commit c6a9b1559cc5b10d61b552d947da83ac81396654)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-gnome/recipes-gnome/gdm/gdm_46.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../tracker/{tracker_3.7.2.bb => tracker_3.7.3.bb}              | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/tracker/{tracker_3.7.2.bb => tracker_3.7.3.bb} (94%)
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_46.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_46.2.bb
-index 97afd37304..d644f12cf9 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_46.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_46.2.bb
-@@ -7,6 +7,7 @@ DEPENDS = " \
-     audit \
-     dconf-native \
-     gtk+3 \
-+    json-glib \
-     keyutils \
-     libcanberra \
-     libgudev \
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb b/meta-gnome/recipes-gnome/tracker/tracker_3.7.3.bb
+similarity index 94%
+rename from meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb
+rename to meta-gnome/recipes-gnome/tracker/tracker_3.7.3.bb
+index f3c482b279..885f3515da 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker_3.7.3.bb
+@@ -22,7 +22,7 @@ DEPENDS = " \
+ inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion python3native
+ 
+ SRC_URI += "file://0001-fix-reproducibility.patch"
+-SRC_URI[archive.sha256sum] = "debcaa291e46afadc1cf6a251f17efb02440aa48bff643d78c61123807dce00f"
++SRC_URI[archive.sha256sum] = "ab3d4a50937e04c5ed7846f6dbb999e2909819402f389ca592ee6b77dd28d1f9"
+ 
+ # text search is not an option anymore and requires sqlite3 build with
+ # PACKAGECONFIG[fts5] set (default)
 
