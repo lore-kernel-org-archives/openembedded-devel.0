@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F47FEE0AE8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FDB2EE0AEC
 	for <webhook@archiver.kernel.org>; Sat,  7 Feb 2026 12:23:42 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3909.1770467014500781663
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3911.1770467016892919288
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Feb 2026 04:23:34 -0800
+ Sat, 07 Feb 2026 04:23:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G8gZaqax;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47ee0291921so14260365e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 04:23:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O2q2clDp;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-47ee0291921so14260605e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 04:23:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770467013; x=1771071813; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770467015; x=1771071815; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GedTFbbjB9r07ksfYFm0fVx86hlaeSaTiNwx38FROls=;
-        b=G8gZaqaxeLqcV2ILAQ+whEvJVtca03OlxqQcj37dALilvDt9+mRLARKcELRCxHr6yb
-         2XX4GkydPZRtyUXRf2xSkabwuUQ19ckk7RiSZSMLdKak3CJk+6gxMV37jF7qkRBpCANQ
-         eNN+RB6SKI7Al8xgg8hV3bbNb22wOXh4SWtjtSsYb+pKQDLiANNgaEL3FUnKtB8+UigV
-         8SZLJ25uUwoPMqsYAHOTkk2CcH2UaWMYBLk1OHaKowcdIYX1No5glXsI7DiySwJ1H1Wj
-         H2NYXTU1rlhzIMwsL+EXJiMwbqxh0HC8yR6sVFJty2zOxEg+RRWVz60ZdlmcV6StGI4M
-         OcWw==
+        bh=dWo+qgo8AJJyBD/gb3rtRvSYxrqtxNV0OIDq6/v3Ua8=;
+        b=O2q2clDpGpGGCFSMx01PRVW4DI6zXzcw5aPnrhznmbB7PruU66WuCw4obAJWXqhmlx
+         qzqylvd7KZuRWF68LyTevt17SuNDtX1I0TmPg44VlRzROegO995vJsw/hKMIL/t1G6rB
+         hjl4sM/0GfXMcVxHFybY/AW6RVPX7Ed5vpaXI6DNMlb4yQke/QYyuTa82LWXqEWCqh1h
+         BphwpYLaAe3dtH/8w8N/N3B74flNZboXk0gS9tnIsW3pz85Zcy2uaNArmudGjR3DjkhX
+         4WKr+2rrsWCCISVKG51jfW6DBBbQB+72QUcOAjlPvzEYCqCN6k+QSh6wEGh5OVilPL+j
+         Y4Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770467013; x=1771071813;
+        d=1e100.net; s=20230601; t=1770467015; x=1771071815;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=GedTFbbjB9r07ksfYFm0fVx86hlaeSaTiNwx38FROls=;
-        b=P52dx+Wg6lg6sZuCoPCVA60fL5u1ri8ZseC5FiBvG/M8vHV4JsIMw0YjcgVX8TtIsB
-         mSdHaQ5e3KLJWmGHY5gOaSnnxnW/6I1qRBxjR9UmpRw+M7/73oZAOffw+iLEsYoxXrRc
-         ABmlNQIr35qO4rCEfq8OR3JgeD7Br174Yu2riyOayHchgJm18iDtLnjlkzRgGCwCXEyA
-         w4wAZqB07BkRuq+vmWSUUMXyP7qF+HsMgRSgSeflvS2lx4CgfoYw9NIeGNSqMKjkGF2K
-         +9ul65sUYsjl+6EEeG0wH5l6Mpd7th7FO6cfKqrQhdIJE5WJl4lAj5vH5gkpB1WxXLfT
-         +dUA==
-X-Gm-Message-State: AOJu0YxrqRpg4LMLzgCNPe26T3tYNSFBUVv7/p9vwJ5O4x1NYtsp7Nph
-	MRZnlgudbVvf8c0Pncs0fEYLhLccOSYX7REkk2Tg2YIuvuV6led6Ye+XKjvfTw==
-X-Gm-Gg: AZuq6aIzcP+d3KxTZqLxH25o01P/+avPTudvOkcrvIMAXWrSCjOcmy7EmJvopGbB6y+
-	m/eVQ6tcrJFWcCcUoOFbE7PNSWoQ8/XY7aIeJAyG1DOXh9hSgmaz6Ykl2H/a55lRbfYA5pEgo0U
-	p5C7DAvPBJy5AZ8mklFeU24VP1dnP2MDSByKyZDMDf1HxE8X1cfuatgRI1knPqB1oClnz4nsKqz
-	NFj7bfg9qKCAemTwJ4yCDL7+IgAFQ3XTxB0nXFbyEhymuDaE/P8Q2Qm4Lw+qF3aS8ZW7dT2ZpEK
-	AgDOI1/r4w0fxR1qiHRpTaOS7S+IaXoiM8++1c6TDpIi4Hd3jyloRnu2EMGS/Roa/EkUWQ6hTqT
-	sG07Ic1CV1G22XS0wcu49kwdfzTotaH+7wl02CvF3Dn3/Hy3qXo4MboBuaZlvQCRBqOMgFIWpig
-	/dBOtI9Uu+
-X-Received: by 2002:a05:600c:1d01:b0:480:1a9a:e571 with SMTP id 5b1f17b1804b1-48320213a37mr84018185e9.22.1770467012757;
-        Sat, 07 Feb 2026 04:23:32 -0800 (PST)
+        bh=dWo+qgo8AJJyBD/gb3rtRvSYxrqtxNV0OIDq6/v3Ua8=;
+        b=XwsS2Xr7Vin9KJDx9vXGr6KAICGNBUntIIPg6CoSOA7CWDf7VnrfqJ1MjAqaTK5b30
+         kMy/qJOVR9Eq9ym5Roqs+lvCBjqDOtNZcW4yj/CGokXGLcgpv1CTafralU3R36r2Zw4z
+         kKbibx09xyHhdMOpugELftk3SCMBD+E4VmlJP7QSem20tuANO+cXtJAWlqTojuoYA+aS
+         OMZyVyMDqT7OXNe5vgTUSs35l4TZ9Sm1c8+A65ghkkZlHjdjutmS66VsGe1rplpaNYWH
+         ej0hZuG7uP/oftd4y4u28al5/6PRGR5mtPUtpRBlzIYcJmuyHRywkhEFptoqcXpLIXNd
+         jsoA==
+X-Gm-Message-State: AOJu0YzBp89khlO+hamTc5sEcpmZ9bcD4AOGSbdf61SKzLbwnQ7wBRLI
+	xbG8P6vgvzyoUltIGk8MRdAbP7Z2fxex/cic7zRaH67xkjYtpdAZpIZCRZQG+Q==
+X-Gm-Gg: AZuq6aIf8bMEPhVsuzDip53/Ss0xAip7OAXidwfKc6LSj4e9IRluwisRifGAZ6kBC4c
+	dC2z3EhJzWF9PCW6yfneyz4YzhxE6GLX10ghEc9/M55nGbvRFE9ybgDwpwyeaTXSVKoqc2LYnLG
+	Cf9Qd58Vw8d/VXRGom1uIOxtgH9m0oX0E3HD5f/WeqEy+om/LYlzC6TBApL6z4DGyltqmqkYXpb
+	R4LcZGWP9CuDzWDntHS5MwncHwphzQaD3eDEqKJ5hO621nJZ+eXSPGohLWExxgBXT2jWN1KxSLx
+	pC3Tai1NE7WmLNltYvBBc66lICB5JJ+Jgz+wST/+KUc65vjoQxiDyMz8TC5WeQSOHJvR+bP+uH2
+	fmgMKwydh3rUuFmBt3Sbk4wTCL7BN+o1/DHuTSjAX/x3aduWrKGi9KESKvTfP68PywqLwI4Uemp
+	DMvl6xVF3A
+X-Received: by 2002:a05:600c:19c7:b0:45d:dc85:c009 with SMTP id 5b1f17b1804b1-483201e160dmr77091125e9.10.1770467015159;
+        Sat, 07 Feb 2026 04:23:35 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48320719bf4sm112653835e9.10.2026.02.07.04.23.32
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48320719bf4sm112653835e9.10.2026.02.07.04.23.34
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Feb 2026 04:23:32 -0800 (PST)
+        Sat, 07 Feb 2026 04:23:34 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][scarthgap][PATCH 07/12] tracker: upgrade 3.7.1 -> 3.7.2
-Date: Sat,  7 Feb 2026 13:23:22 +0100
-Message-ID: <20260207122327.664604-7-skandigraun@gmail.com>
+Subject: [meta-gnome][scarthgap][PATCH 09/12] tracker-miners: upgrade 3.7.1 -> 3.7.2
+Date: Sat,  7 Feb 2026 13:23:24 +0100
+Message-ID: <20260207122327.664604-9-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260207122327.664604-1-skandigraun@gmail.com>
 References: <20260207122327.664604-1-skandigraun@gmail.com>
@@ -67,33 +67,230 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 07 Feb 2026 12:23:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124263
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124265
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
+0001-fix-reproducibility.patch
+refreshed for 3.7.2
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3142a9ca94fca2ab8c36ac5f6b7fe435cfb9a5ef)
+(cherry picked from commit 59c62576b40da737703a0b7a42c63c927d95a7c5)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../tracker/{tracker_3.7.1.bb => tracker_3.7.2.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/tracker/{tracker_3.7.1.bb => tracker_3.7.2.bb} (94%)
+ ...to-a-fixed-path-instead-of-a-host-pa.patch |  15 +--
+ .../0001-fix-reproducibility.patch            | 104 +++++++++---------
+ ...iners_3.7.1.bb => tracker-miners_3.7.2.bb} |   2 +-
+ 3 files changed, 62 insertions(+), 59 deletions(-)
+ rename meta-gnome/recipes-gnome/tracker/{tracker-miners_3.7.1.bb => tracker-miners_3.7.2.bb} (97%)
 
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker_3.7.1.bb b/meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb
-similarity index 94%
-rename from meta-gnome/recipes-gnome/tracker/tracker_3.7.1.bb
-rename to meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb
-index 1d5c79ab4d..f3c482b279 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker_3.7.1.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker_3.7.2.bb
-@@ -22,7 +22,7 @@ DEPENDS = " \
- inherit gettext gnomebase gobject-introspection vala gtk-doc bash-completion python3native
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
+index 7a40ae338c..36dd4a5881 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch
+@@ -7,21 +7,22 @@ Upstream-Status: Inappropriate [embedded specific]
  
- SRC_URI += "file://0001-fix-reproducibility.patch"
--SRC_URI[archive.sha256sum] = "cd91b885ee9839cde5387f8e05ed24a7108d1627629cb6b1b2aa51a9603e130a"
-+SRC_URI[archive.sha256sum] = "debcaa291e46afadc1cf6a251f17efb02440aa48bff643d78c61123807dce00f"
+ Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+ ---
+- src/libtracker-miners-common/tracker-miner-enum-types.c.template        | 1 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
++ .../tracker-miners-enum-types.c.template                        | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
  
- # text search is not an option anymore and requires sqlite3 build with
- # PACKAGECONFIG[fts5] set (default)
+ diff --git a/src/libtracker-miners-common/tracker-miners-enum-types.c.template b/src/libtracker-miners-common/tracker-miners-enum-types.c.template
+-index c712dda..cb449e2 100644
++index 4db7ef1..7c44c13 100644
+ --- a/src/libtracker-miners-common/tracker-miners-enum-types.c.template
+ +++ b/src/libtracker-miners-common/tracker-miners-enum-types.c.template
+ @@ -7,7 +7,7 @@
+-
++ 
+  /*** BEGIN file-production ***/
+  /* enumerations from "@basename@" */
+ -#include "@filename@"
+ +#include "tracker-enums.h"
+  /*** END file-production ***/
++ 
++ 
++-- 
++2.34.1
+ 
+-
+---
+-2.25.1
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-fix-reproducibility.patch b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-fix-reproducibility.patch
+index 98618e5d3e..ea239c41f9 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-fix-reproducibility.patch
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners/0001-fix-reproducibility.patch
+@@ -12,16 +12,18 @@ Upstream-Status: Inappropriate [oe-specific]
+ 
+ Signed-off-by: Markus Volk <f_l_k@t-online.de>
+ ---
+- meson.build                        | 20 ++++++++++----------
+- src/tracker-extract/meson.build    |  2 +-
+- tests/tracker-miner-fs/meson.build |  2 +-
+- 3 files changed, 12 insertions(+), 12 deletions(-)
++ meson.build                                     | 8 ++++----
++ src/libtracker-miners-common/tracker-landlock.c | 4 ++--
++ src/miners/fs/meson.build                       | 4 ++--
++ src/tracker-extract/meson.build                 | 2 +-
++ tests/tracker-miner-fs/meson.build              | 2 +-
++ 5 files changed, 10 insertions(+), 10 deletions(-)
+ 
+ diff --git a/meson.build b/meson.build
+-index 935584185..aa6126081 100644
++index a838344..6945f63 100644
+ --- a/meson.build
+ +++ b/meson.build
+-@@ -380,7 +380,7 @@ conf.set('PACKAGE_VERSION', '"@0@"'.format(meson.project_version()))
++@@ -393,7 +393,7 @@ conf.set('PACKAGE_VERSION', '"@0@"'.format(meson.project_version()))
+  conf.set('TRACKER_VERSION', '"@0@"'.format(meson.project_version()))
+  
+  # Config that goes in some other generated files (.desktop, .pc, etc)
+@@ -30,7 +32,7 @@ index 935584185..aa6126081 100644
+  conf.set('exec_prefix', get_option('prefix'))
+  conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
+  conf.set('datadir', datadir)
+-@@ -409,7 +409,7 @@ tracker_c_args = [
++@@ -422,7 +422,7 @@ tracker_c_args = [
+  configinc = include_directories('./')
+  srcinc = include_directories('src/')
+  
+@@ -39,7 +41,7 @@ index 935584185..aa6126081 100644
+  
+  # We use tracker-miners-3.0 rather than tracker3-miners inside the lib64
+  # directory, following the existing convention in that directory.
+-@@ -438,8 +438,8 @@ subdir('data')
++@@ -451,8 +451,8 @@ subdir('data')
+  subdir('docs')
+  
+  test_c_args = tracker_c_args + [
+@@ -50,11 +52,48 @@ index 935584185..aa6126081 100644
+  ]
+  
+  if get_option('tests_tap_protocol')
++diff --git a/src/libtracker-miners-common/tracker-landlock.c b/src/libtracker-miners-common/tracker-landlock.c
++index 95c652e..608cee4 100644
++--- a/src/libtracker-miners-common/tracker-landlock.c
+++++ b/src/libtracker-miners-common/tracker-landlock.c
++@@ -276,7 +276,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
++ 			          LANDLOCK_ACCESS_FS_READ_DIR);
++ 		}
++ 	}
++-
+++#if 0
++ 	current_dir = g_get_current_dir ();
++ 
++ 	/* Detect running in-tree */
++@@ -296,7 +296,7 @@ tracker_landlock_init (const gchar * const *indexed_folders)
++ 			          in_tree_rules[i].flags);
++ 		}
++ 	}
++-
+++#endif
++ 	/* Add user cache for readonly databases */
++ #ifdef MINER_FS_CACHE_LOCATION
++ 	add_rule (landlock_fd, MINER_FS_CACHE_LOCATION,
++diff --git a/src/miners/fs/meson.build b/src/miners/fs/meson.build
++index 6e58832..04750f8 100644
++--- a/src/miners/fs/meson.build
+++++ b/src/miners/fs/meson.build
++@@ -67,8 +67,8 @@ executable('tracker-miner-fs-@0@'.format(tracker_api_major),
++     dependencies: tracker_miner_fs_deps,
++     c_args: [
++         tracker_c_args,
++-        '-DBUILDROOT="@0@"'.format(meson.global_build_root()),
++-        '-DBUILD_EXTRACTDIR="@0@"'.format(meson.build_root() / 'src' / 'tracker-extract'),
+++        '-DBUILDROOT="@0@"'.format(get_option('prefix') / 'src'),
+++        '-DBUILD_EXTRACTDIR="@0@"'.format(get_option('prefix') / 'src' / 'tracker-extract'),
++         '-DLIBEXECDIR="@0@"'.format(get_option('prefix') / get_option('libexecdir')),
++     ],
++     install: true,
+ diff --git a/src/tracker-extract/meson.build b/src/tracker-extract/meson.build
+-index 4aaad5c41..d17cce221 100644
++index 16ce367..bbd494d 100644
+ --- a/src/tracker-extract/meson.build
+ +++ b/src/tracker-extract/meson.build
+-@@ -159,7 +159,7 @@ endif
++@@ -158,7 +158,7 @@ endif
+  executable('tracker-extract-@0@'.format(tracker_api_major),
+    tracker_extract_sources,
+    # Manually add the root dir to work around https://github.com/mesonbuild/meson/issues/1387
+@@ -64,10 +103,10 @@ index 4aaad5c41..d17cce221 100644
+    dependencies: tracker_extract_dependencies,
+    install: true,
+ diff --git a/tests/tracker-miner-fs/meson.build b/tests/tracker-miner-fs/meson.build
+-index e131b85ad..59e509fa6 100644
++index 8c081fd..9792082 100644
+ --- a/tests/tracker-miner-fs/meson.build
+ +++ b/tests/tracker-miner-fs/meson.build
+-@@ -19,7 +19,7 @@ libtracker_miner_test_c_args = [
++@@ -18,7 +18,7 @@ libtracker_miner_test_c_args = [
+  ]
+  
+  libtracker_miner_test_environment = environment()
+@@ -76,43 +115,6 @@ index e131b85ad..59e509fa6 100644
+  
+  libtracker_miner_test_deps = [tracker_miners_common_dep, tracker_miner_dep, tracker_sparql]
+  
+- 
+-diff --git a/src/miners/fs/meson.build b/src/miners/fs/meson.build
+-index 6e5883288..04750f82b 100644
+---- a/src/miners/fs/meson.build
+-+++ b/src/miners/fs/meson.build
+-@@ -67,8 +67,8 @@ executable('tracker-miner-fs-@0@'.format(tracker_api_major),
+-     dependencies: tracker_miner_fs_deps,
+-     c_args: [
+-         tracker_c_args,
+--        '-DBUILDROOT="@0@"'.format(meson.global_build_root()),
+--        '-DBUILD_EXTRACTDIR="@0@"'.format(meson.build_root() / 'src' / 'tracker-extract'),
+-+        '-DBUILDROOT="@0@"'.format(get_option('prefix') / 'src'),
+-+        '-DBUILD_EXTRACTDIR="@0@"'.format(get_option('prefix') / 'src' / 'tracker-extract'),
+-         '-DLIBEXECDIR="@0@"'.format(get_option('prefix') / get_option('libexecdir')),
+-     ],
+-     install: true,
+-diff --git a/src/libtracker-miners-common/tracker-landlock.c b/src/libtracker-miners-common/tracker-landlock.c
+-index 27e7db65b..3021343eb 100644
+---- a/src/libtracker-miners-common/tracker-landlock.c
+-+++ b/src/libtracker-miners-common/tracker-landlock.c
+-@@ -276,7 +276,7 @@
+- 			          LANDLOCK_ACCESS_FS_READ_DIR);
+- 		}
+- 	}
+--
+-+#if 0
+- 	current_dir = g_get_current_dir ();
+- 
+- 	/* Detect running in-tree */
+-@@ -296,7 +296,7 @@
+- 			          in_tree_rules[i].flags);
+- 		}
+- 	}
+--
+-+#endif
+- 	/* Add user cache for readonly databases */
+- #ifdef MINER_FS_CACHE_LOCATION
+- 	add_rule (landlock_fd, MINER_FS_CACHE_LOCATION,
+ -- 
+-2.41.0
++2.34.1
++
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.1.bb b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.2.bb
+similarity index 97%
+rename from meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.1.bb
+rename to meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.2.bb
+index 7bbee2a885..a1fefe6a00 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.1.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.7.2.bb
+@@ -18,7 +18,7 @@ SRC_URI:append = " \
+ 	file://0001-fix-reproducibility.patch \
+ 	file://0001-Set-header-file-to-a-fixed-path-instead-of-a-host-pa.patch \
+ "
+-SRC_URI[archive.sha256sum] = "50a3abe40cfb0b35ced43ec716dbf1368992e444ef7a0babf202c7ac6ab2f6f4"
++SRC_URI[archive.sha256sum] = "eb4f2b288a0cbe9e614871cb0048274461cfe1cb8467ac817b102d3873dbcba5"
+ 
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
