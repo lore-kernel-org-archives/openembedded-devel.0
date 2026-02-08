@@ -2,116 +2,121 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F28A7EF06EC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F29CAEF06ED
 	for <webhook@archiver.kernel.org>; Sun,  8 Feb 2026 14:51:59 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.26684.1770562312164496358
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.26625.1770562314388419431
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Feb 2026 06:51:52 -0800
+ Sun, 08 Feb 2026 06:51:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ib7stnVJ;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-47ee0291921so19994735e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Feb 2026 06:51:51 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eP9uEi6X;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4801d7c72a5so18786345e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Feb 2026 06:51:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770562310; x=1771167110; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770562313; x=1771167113; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KuKUJPclAKjbPWNFfwuILkCXGfa2SX/b3USTtprkyS8=;
-        b=ib7stnVJ/jwQTvWXqw9vzsU8mL6X4tWD7RBhuMKVYRI5XmOXKsAFpRwXRZR9GDm2Lo
-         iGJ0iHsIcmVa4ePKYqo7vmwIZ4Wm1mbmtsj1bYmG/YJay7Cn6eF0joS0iW60vVVV2SG3
-         d88DJmyfou0dwzusMe6zkKlBtxo53tDW0AQXEE5uiqMyh00hlvTdnKbC+lY8ECvmToPe
-         fN7TCgLje3V+kfMHpR8vzIM4LcHKniIvJhOt+nKLiOuQF5kVutXkSzYPwj8wtRa5ymre
-         JJsK9j4dzfbNWP1gZjm0Z+BjYK19wkLNuBplZ/brIQgTRsXkMyYi26Dbth0mjyBzHPh4
-         osUg==
+        bh=7Nx2gm6wGZ0DXr1yLT5gtjyumQjjtnIUwd2nDV+EuCk=;
+        b=eP9uEi6Xb9oC5CpMCiu3HHqgRa0iody49MK8kgNaSKcON8OixIIcIQkpHnnSFqmqwi
+         NPi4UFtyJ+BB6RW/PzQ/i4+sdfurZCeQst4jftVJCkaK2rTFSn5vDdMEG38y0byfoUGj
+         R298omUHlTJHLQWNruP17wtN/14udcB2ElF2sGYRCIVn2MNYMWFTHIIFeqZqirjrRkAq
+         CywI5HtKpvllZU/7C+dpbswD0RdrvDQuP+d7D3Xmf8z3nM6jE6gmg1uMrtmaJ01jQcBW
+         OuqoSLWGR5bBFj7TlNfwcWhl3sTTYhplI4zrziBfcuIamElCE0rrBPm5hQ9+27rvhiqF
+         BZBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770562310; x=1771167110;
+        d=1e100.net; s=20230601; t=1770562313; x=1771167113;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=KuKUJPclAKjbPWNFfwuILkCXGfa2SX/b3USTtprkyS8=;
-        b=Bk+zWLguBPzMxpX2JYM17Jo/mtlKx/su9n3Z6F1sqPDpzd0AqQ2LroASzmaP7c7lSv
-         wnWHw+8jXQA41LwfzjtWG5P2sQ8h0bUxdHjvoPX3r32E8r98bcJhuonLRK6astrgLH7c
-         6vtwybHwlTkBEZhD5sCGzQPh0wQF43aD1bEH/Rw1g6uvv29SexoUCsoujhz1kIHlwFZV
-         va9cCYYWm/zaiR1h8HrNw6Pk8kFAq7hhNGjA6+kkiziWwFx+mEPm7rCa8CtCd8jBy06c
-         24VaiIpZGC9LjJaf8j3LnjhzltYwk402yO6Pfc8pW62K/lFUzhm7Tj0L6LzaDUlpbWT5
-         eMGg==
-X-Gm-Message-State: AOJu0YzORbPzbeNTfrVbuQVAj7gRtlBY/iFy1IHHtjRdo69RHetMv0Em
-	Jw9cFruI67hvQpr9rs4RCFbLcVwsFx2sWA16QulwH32Kx24GLZ1HJB+B3IOOmQ==
-X-Gm-Gg: AZuq6aLg+/9X0q1ZumvrnQFnMrjJDEv1QYvFykuHL/WPmJDvKuV8fDIP+zJJxrCwNjU
-	9Etzwe1BtcME1oDQC5/Wl/WdFcgPKxL07oMMo4CiRrNRqcOwtlfVa6Pgok76QboqIO+sOwogL7E
-	7h8f3Rnrun4D6pw4lNo1UbAmZIrMAL63eylNh3Wmf6PYws6d9x4up+QT3LmexkUhRTIfmbrlkiv
-	CC5KeOPvBtei8g0K0JrqVS9Outl++2pjzEWiJ/VUIReChHXYokNrEUjwv0GDbf1jkOuHLshjsPV
-	95SLE9kRPt1xI09xSprwdlAw6XS0iZm/YfIo4TAunFPO3FNxxDGzRjgtVvUmcVIqXxxaZZQIMqG
-	pW2MhJBn5GDI2OHfpx9puHyE+pntyzm9zP8IFv4erJGQaP14qQZs5AcTZk8otv14cSzqbTYVefL
-	lp2+OBam/a
-X-Received: by 2002:a05:600c:3553:b0:477:7b16:5f77 with SMTP id 5b1f17b1804b1-483201da2d6mr110348725e9.3.1770562310403;
-        Sun, 08 Feb 2026 06:51:50 -0800 (PST)
+        bh=7Nx2gm6wGZ0DXr1yLT5gtjyumQjjtnIUwd2nDV+EuCk=;
+        b=IggN5Qqdja6MbihRZdB/fqDYJNKqcdzBJWdRz0Tv9jOuJhJhL/IfGLo0rNnFxY4H91
+         qqUX3nf+YCW5lBGZqL1FPL07SrKcF3DvJTv4v6n7faFJX1P40OcanlMrzSzHJ3ph4sEM
+         vsfO6BUYUofq7B19jc+8n9MVAG8PvnWy4nzzP90q49HRyZSmp2vnVakQ9AVd9XC9bxH6
+         /6hrI1dwJ3aZtgOHJSElSeklbgitNnsitV7LJssWWh0HFIer8hMFjwcoUpLEElihVZee
+         L7v8xU28+Z7E0nUGvFLyXvjy4xUWOM6VbM5oY9aTzPkz8v8SbIY8bRkHH/uW7Qnef0/Y
+         XdaQ==
+X-Gm-Message-State: AOJu0YwojXLiVknuoCUW0EV/+rRte89pPRjwyOv+4K+usH4GubQ3BgMU
+	a9PrnzzUyV1CccowJmSHaomt3lBHJdpeEppXi0HouEWkqGGmQFfDb3CW64E+3w==
+X-Gm-Gg: AZuq6aJ2X/JUWyfvQK/hV4F2Hm7+JnaBy/tLCuBsxFGACmQGtHQghG5EZFXSa3paz4x
+	esdEhM77AySi9Wn076L6wcTU1Q6QoMzRm+uD0hgjhhe90BZJQAXAsQQv9JoxJspW0aw0M/OEQva
+	dez4ba9bTGVWUd0rCnPRUCrNuDmljHJpkeCQ2U+oymxCTNv9EqGHn51HlYTZNwsnMG9WitczAls
+	tSiMAaRUNGsri9NJOT6LLxyNilh7S7R7OsfvVAH8UlY+u9wdnx34ieIAVGJnf8o3dQ+h6Dy5mIy
+	YmVw96fi6c8vDL6OH0U85L8TlrQ/VbnOo9DuO8EVHI3/8OXgqMKYCNlKfasPvqEfp1/i+jBLQ3I
+	WMKG8uou1CTNXbzSuBLqdKjqpTdfg66uAZPIdi7VjoxVfXYzLZ9whtIZ02EtQfAEIkL3zfEqrzH
+	EUnmiWUH+P
+X-Received: by 2002:a05:600c:3553:b0:477:7b16:5f77 with SMTP id 5b1f17b1804b1-483201da2d6mr110349425e9.3.1770562312597;
+        Sun, 08 Feb 2026 06:51:52 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48317d2ba61sm402354155e9.1.2026.02.08.06.51.48
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48317d2ba61sm402354155e9.1.2026.02.08.06.51.51
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Feb 2026 06:51:49 -0800 (PST)
+        Sun, 08 Feb 2026 06:51:52 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][scarthgap][PATCH 05/10] nautilus: upgrade 45.1 -> 45.2.1
-Date: Sun,  8 Feb 2026 15:51:38 +0100
-Message-ID: <20260208145143.20464-5-skandigraun@gmail.com>
+Subject: [meta-gnome][scarthgap][PATCH 08/10] gnome-disk-utility: update 46.0 -> 46.1
+Date: Sun,  8 Feb 2026 15:51:41 +0100
+Message-ID: <20260208145143.20464-8-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260208145143.20464-1-skandigraun@gmail.com>
 References: <20260208145143.20464-1-skandigraun@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 08 Feb 2026 14:51:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124278
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124281
 
-Changes:
-45.2.1:
-* Fix a crash in sidebar code
-* Fix build without optional cloudproviders dependency
+From: Markus Volk <f_l_k@t-online.de>
 
-45.2:
-* Bugfixes:
-  - Don't crash when reconnecting to remove server
-  - Actually detect unmount on some non-native mounts
-  - Don't crash on image properties
-  - Allow types and sizes in Properties to expand
-  - Don't corrupt toast messages
-* Translation updates
+46.1 - September 03, 2024
+=========================
 
+Alexandre Franke:
+ * metainfo: fix URLs
+ * metainfo: replace screenshots
+
+Athmane MOKRAOUI:
+ * Add Kabyle translation
+
+Updated translations:
+ * Alexandre Franke (fr), Anders Jonsson (sv), Andi Chandler (en_GB),
+   Andika Triwidada (id), Artur S0 (ru), Asier Sarasua Garmendia (eu),
+   Athmane MOKRAOUI (kab), Aurimas Černius (lt), Balázs Úr (hu), Boyuan
+   Yang (zh_CN), Danial Behzadi (fa), Daniel Rusek (cs), Daniel Șerbănescu
+   (ro), Efstathios Iosifidis (el), Ekaterine Papava (ka), Guntupalli
+   Karunakar (hi), Hugo Carvalho (pt), Jordi Mas i Hernandez (ca), Juliano de
+   Souza Camargo (pt_BR), Jürgen Benvenuti (de), Martin (sl), Matej Mrenica
+   (sk), Piotr Drąg (pl), Rachida SACI (kab), Sabri Ünal (tr), Seong-ho Cho
+   (ko), Vasil Pupkin (be), Vincent Chatelain (fr), Yaron Shahrabani (he),
+   Yuri Chornoivan (uk)
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 8233ca7595d2ce05a8ace6ffdc3dfb2ba031681e)
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../nautilus/{nautilus_45.1.bb => nautilus_45.2.1.bb}      | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/nautilus/{nautilus_45.1.bb => nautilus_45.2.1.bb} (81%)
+ .../{gnome-disk-utility_46.0.bb => gnome-disk-utility_46.1.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-disk-utility/{gnome-disk-utility_46.0.bb => gnome-disk-utility_46.1.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_45.1.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_45.2.1.bb
-similarity index 81%
-rename from meta-gnome/recipes-gnome/nautilus/nautilus_45.1.bb
-rename to meta-gnome/recipes-gnome/nautilus/nautilus_45.2.1.bb
-index 9c0d154ec8..3192d7b704 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_45.1.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_45.2.1.bb
-@@ -22,7 +22,7 @@ DEPENDS = " \
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
+similarity index 91%
+rename from meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.0.bb
+rename to meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
+index e4998f6276..6f910c4c13 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_46.1.bb
+@@ -29,7 +29,7 @@ PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
+ PACKAGECONFIG[x11] = ",,libcanberra"
  
- inherit gnomebase gsettings gobject-introspection gi-docgen gettext features_check mime-xdg gtk-icon-cache
+ SRC_URI:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'file://0001-gnome-disk-utility-remove-libcanberra-dependency.patch', '', d)}"
+-SRC_URI[archive.sha256sum] = "464649148c6d6771f1ac2ebfe43a4e519205b11c2d914a09f2a001821d06957d"
++SRC_URI[archive.sha256sum] = "c24e9439a04d70bcfae349ca134c7005435fe2b6f452114df878bff0b89bbffe"
  
--SRC_URI[archive.sha256sum] = "23bdaa9a85466c5937a89daddd080ed03bcc2b49e8b64af607206353bde82fe3"
-+SRC_URI[archive.sha256sum] = "ba5d53df39a155562df971ef5e31e827074905d0c48eab1eb2421a10284b990d"
+ EXTRA_OEMESON = "-Dman=false"
  
- REQUIRED_DISTRO_FEATURES = "x11 opengl gobject-introspection-data"
- 
-@@ -52,3 +52,8 @@ FILES:${PN} += " \
- # mandatory - not checked during configuration:
- # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
- RDEPENDS:${PN} += "tracker-miners bubblewrap"
-+
-+# This override is from gnomebase.bbclass. The original expects only a minor
-+# version in the version number, and it breaks if there is a patch version also.
-+def gnome_verdir(v):
-+    return v.split(".")[0] or v
 
