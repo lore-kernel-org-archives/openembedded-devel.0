@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17DC4E7E0D0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28CDDE7E0D3
 	for <webhook@archiver.kernel.org>; Mon,  9 Feb 2026 11:39:18 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.45581.1770637148469583735
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.45792.1770637156032523230
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Feb 2026 03:39:08 -0800
+ Mon, 09 Feb 2026 03:39:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=F9Qnb1Dl;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-4362507f0feso1950950f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 03:39:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cieHUYN9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-48329eb96a7so11408425e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 03:39:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770637147; x=1771241947; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770637154; x=1771241954; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mj0+gkN1u6gSc/nAzjY4nNqtAnzrxXQIMXr+RF6VLoc=;
-        b=F9Qnb1DleU/AyzTGO3Fed5qCEnRwjRqljCFJPumczpq2m5g8i5VEq9Ki4w2oYMjuX4
-         9WbxHQcxOv0SteNmyeQYceYgtUFEKlwKKSOHzV1++wJt/vpCxyi9OEG4hVm7OE5c2rmF
-         mfhRcDJ3cjMmVSqxmY4XIrNDYvuDCbCbX3gxbWLrjwDbeWxDqC27WcY9YL/PWk6fra3t
-         szoH6+X64a07zgkAr6HTyNvL6I26xesIiKmnqay66wN/par6RFUkcjOSx77vr8oR/bWV
-         R25GSMSUb/+GSXrDhW7HfBh7iP4uzQxGSf17zgLrdOCFrjtgxJE86Y7t9oow93hk5TOq
-         NTZw==
+        bh=8KniZGCwMCBhyjWz7aYWTEPQ2NHfOebtBjtmslglI9k=;
+        b=cieHUYN9+TOLpL/cfuuaC8mVvEP6Kh9zmdUE5EUBfTEbOwf3V29nRvF3oN8X1sJtrS
+         P7cgGCfqswMz5zsFMWutKef0kK4OmjhP18mIwGXJYewU4YsYYRcX2J2PSXTObTNf3whX
+         Y4aRkSiVWBZBQIMeriGo0u1KBMm/ot010J94YXNgB04YidqoQlcOCHbb6+59Y4NiwDVV
+         D6IjZb/cd6Cb0FOuEOZpTjPOgkQCcD0LwYueNO2Paqk6+Ret6fempIHFXUMjTdpfH/Hd
+         bb5545g5PiwI8WEQBXbDuqt8iviqwZj+llvb5ZQ0ogSDPbON80zt8usRhu++4gE7PVhG
+         yayw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770637147; x=1771241947;
+        d=1e100.net; s=20230601; t=1770637154; x=1771241954;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=mj0+gkN1u6gSc/nAzjY4nNqtAnzrxXQIMXr+RF6VLoc=;
-        b=W1lp13DeP07+Kb7CLTtBX+JWhgkIytSi59b1V68qhjw/kkL0gbHnjoOdgxY8AamD1S
-         dmuM1GGLfAIZASqXA5OTL+mHRcjUygDyZMOaUqHedHDq+SXslglQ4D8g5sCeLNZaAUhH
-         Pc/lMp890cMv8yIdh9n2Ye02xcF4xwAZr25xaqInb4WvYwcMAn4IsFzTdTDsIUkgu+ih
-         KTM5fZTwlqPdGtf/D6rjHgRkflBkf7uALnMh7V/z98t85FnJP4t41j1nbZbojgTqALpj
-         4WSr5DVIK4a/zeX8y38NAvYVP8XqFv3muMz3Qermt5CJ6t1r5FluJmq79uhJN7DzveE1
-         sx+A==
-X-Gm-Message-State: AOJu0YyNorNVmfeHWhO8ajnL395VDKu4C6m1l+Druz25PrfXMbh+2PT8
-	+crJ4unwPxPA2FxscQOnjweyQXtR3HvwTCs01QbMbUmQtu9tbDFJxsz9+Ki8yA==
-X-Gm-Gg: AZuq6aLgbkFUpQShBk5CmCL9J0nQI/39Lm5AcHm9LFZwhpk/YLOcw+1MQwh76upBnuD
-	zdDMA2bdLFnnZu64w0JjDwZteDw1XrnTC8RMwGQQ99hcLB1lWX/jOjjL+U0RBUIuK07hlRWEDeY
-	K1zFm31G018jigxTadi+ub5LUzqZQPc4+yOgxS0ty/ZzPl6Pl2ocqima+uz6guoRuUrGfHA/+Cu
-	S8VXsQv3cMadSD9HM3RtlqzUBQlC+Wgp9s8uHspDa7U4U9e4mRJjw5KoHidNyK98tC2IX8AJcjM
-	bACW3XhuEj8M9NFN8i2nCu+NFZQYJrULLI1Z/tGLtaIqyg194r+f+bBwBNuIrodFDLXaU2I1J+T
-	Rmq+RcQr7B0fyLPwV0U0qvBMR9p4rjNbvbF4i8RQyqsBDG9OXYpvcZ4F+GXZfUK+Q0NXBU2ugOZ
-	hZMfEkkuOXrjIXXfvT1v8=
-X-Received: by 2002:a05:600c:5488:b0:480:1e8f:d15f with SMTP id 5b1f17b1804b1-483201d5fa2mr144440535e9.2.1770637146079;
-        Mon, 09 Feb 2026 03:39:06 -0800 (PST)
+        bh=8KniZGCwMCBhyjWz7aYWTEPQ2NHfOebtBjtmslglI9k=;
+        b=GN1XuUkDuMuLjL0OWA6nIKXPFJd6eB2omyyDUpXVj2uU8FdICmUWEaxr3aVmTnw1ig
+         e73u/e+83I/IpgYUM22hARiyjhf+n+VuX/K4jRIxH/jRFi+pyMKy2+lzRMV0KjE/CBxZ
+         ttDwbRtOyjFBLZTGRqAa00uN3roUUo5oC3oU1zfa42ZbHwBqFGijEM4am3e/8NeYDxE9
+         dZCphAsBxcc9/sCj7aw2CH+zcKtQ+Xzy336Qq0GdZ72oeMGdfe0j09hZtxulvZO8Ntb9
+         EPTqzeRfClXN9ELZaFx7JtGftMx8/2Cg/b8JXxeklzFgKRIsFcysepqjvivW8xDZJ+ex
+         t0Xg==
+X-Gm-Message-State: AOJu0YxiuACa7Csa54PfhittQYfUxDEbQ0WaqFAnBbz4F8rw4zRO/dWi
+	yMHRBjDHwn/QugtjC/FERDEaaiJJCKYezXJdr/X5TLF7wON5LX2iB3Ydmi+G/w==
+X-Gm-Gg: AZuq6aJSbVpXOTe7gPJkONhpz9r8jT26HtC/nMzBXckyMN12h9FPtBEc/qtHQzaOMMe
+	l+vdUsRlouZhR60wTPD89jFtxpWNvPuKoyNyGgELD4CdGt55U+265lMGc3CjlqBkjwlnXzcHgxN
+	bAQSufqLBgzS3GXzvmdxHENDvmZBAKiZMhcL/qHMk0ygqw269R82PHdFn1QbMmegQIGmhutMhs9
+	rOfjvFySJlrT/JzBCpggHZTnrqvfETXBoDegrAtHtIlhOSWhRiD71zWL7ZM2rw0Lr0orTOwJyI5
+	1B/f7IwnaWKWDOpRe2b8bGUoAfekKB5K7bU01b9dtiOXodnst+A9Rz64MY3P/j0imcWga3E3wZb
+	/+Wi6YDNOICKAaI5+rNqM0rDj4h61IarAOJl3zenTNnKoDzvqp96DpLrvpx/tyZr84Nhd72E35H
+	aJIS0HGJTJEQ7GBLw0O+ZB
+X-Received: by 2002:a05:600c:5307:b0:480:4a4f:c36f with SMTP id 5b1f17b1804b1-4832096671dmr167229855e9.21.1770637154207;
+        Mon, 09 Feb 2026 03:39:14 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834304232bsm56030375e9.2.2026.02.09.03.39.05
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834304232bsm56030375e9.2.2026.02.09.03.39.13
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 03:39:05 -0800 (PST)
+        Mon, 09 Feb 2026 03:39:13 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][kirkstone][PATCH 02/16] sox: patch CVE-2017-11358
-Date: Mon,  9 Feb 2026 12:38:49 +0100
-Message-ID: <20260209113904.3442496-2-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 13/16] tigervnc: ignore CVE-2023-6377
+Date: Mon,  9 Feb 2026 12:39:00 +0100
+Message-ID: <20260209113904.3442496-13-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260209113904.3442496-1-skandigraun@gmail.com>
 References: <20260209113904.3442496-1-skandigraun@gmail.com>
@@ -67,66 +67,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 11:39:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124297
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124308
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2017-11358
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-6377
 
-Pick the patch that was identified by Debian[1] as the solution.
+TigerVNC compiles its own xserver, this is why this CVE is associated
+with it - despite the vulnerability being in xserver.
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2017-11358
+The vulnerability was fixed by [1] (from the nvd report), which has been
+backported[2] to the xserver version used by the recipe - so ignore the
+CVE, since it's patched already.
+
+[1]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/0c1a93d319558fe3ab2d94f51d174b4f93810afd
+[2]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/a7bda3080d2b44eae668cdcec7a93095385b9652
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit f691f2178b15eec22f09a1c17b9945fad4e330e6)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../sox/sox/CVE-2017-11358.patch              | 29 +++++++++++++++++++
- .../recipes-multimedia/sox/sox_14.4.2.bb      |  1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11358.patch
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11358.patch b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11358.patch
-new file mode 100644
-index 0000000000..9e797c0e7b
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11358.patch
-@@ -0,0 +1,29 @@
-+From 0e3909288d38487d7c86b11c7509cca01296fdc8 Mon Sep 17 00:00:00 2001
-+From: Mans Rullgard <mans@mansr.com>
-+Date: Sun, 5 Nov 2017 16:43:35 +0000
-+Subject: [PATCH] hcom: fix crash on input with corrupt dictionary
-+ (CVE-2017-11358)
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+index f995c1ef08..9e4d05186f 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+@@ -121,3 +121,6 @@ FILES:${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
+ 
+ # fixed-version: The vulnerable code is not present in the used version (1.11.0)
+ CVE_CHECK_IGNORE += "CVE-2014-8241"
 +
-+CVE: CVE-2017-11358
-+Upstream-Status: Backport [https://github.com/mansr/sox/commit/6cb44a44b9eda6b321ccdbf6483348d4a9798b00]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/hcom.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/src/hcom.c b/src/hcom.c
-+index e76820e..ee28cba 100644
-+--- a/src/hcom.c
-++++ b/src/hcom.c
-+@@ -150,6 +150,11 @@ static int startread(sox_format_t * ft)
-+                 lsx_debug("%d %d",
-+                        p->dictionary[i].dict_leftson,
-+                        p->dictionary[i].dict_rightson);
-++                if ((unsigned) p->dictionary[i].dict_leftson >= dictsize ||
-++                    (unsigned) p->dictionary[i].dict_rightson >= dictsize) {
-++                        lsx_fail_errno(ft, SOX_EHDR, "Invalid dictionary");
-++                        return SOX_EOF;
-++                }
-+         }
-+         rc = lsx_skipbytes(ft, (size_t) 1); /* skip pad byte */
-+         if (rc)
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-index c8a7a1829d..b1cf516f62 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
-            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
-            file://0001-Update-exported-symbol-list.patch \
-            file://CVE-2017-11332.patch \
-+           file://CVE-2017-11358.patch \
-            "
- SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
- SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
++# fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)
++CVE_CHECK_IGNORE += "CVE-2023-6377"
 
