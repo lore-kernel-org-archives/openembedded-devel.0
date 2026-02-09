@@ -2,127 +2,101 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DE50E7E0D1
-	for <webhook@archiver.kernel.org>; Mon,  9 Feb 2026 11:39:08 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.45580.1770637147301875427
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15411E7E0D2
+	for <webhook@archiver.kernel.org>; Mon,  9 Feb 2026 11:39:18 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.45592.1770637157062453034
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Feb 2026 03:39:07 -0800
+ Mon, 09 Feb 2026 03:39:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ejFdiESq;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4834826e555so2550575e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 03:39:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eRwINMes;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-483487335c2so2005185e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 03:39:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770637146; x=1771241946; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0hReedumWv9bObsfCo1a115xFMbIDmYnR1idXADXTUc=;
-        b=ejFdiESqkOtjMdMa3qmMibN4QoUPgTIdMMmbrxLPrZJ0t5t0sk26N0dUJa2dlplhM6
-         RPKbVux1ftAxD4g6D8YBH8FmsribmV1MIjcZyMRBCav9J/xdvd6Lfe7VzePyffr6JpQX
-         tqVOBdGppSwtQE5fdaMPODvj7U+6a+4S/r4h747JSiffogNxSX7auusVYxy1O/nXYlTu
-         pdS1eQpkmFuSiApXc17eZgPHEI+94/rSH1FBkRRJRBK/A8lVkNLmCdycAE78LoeDZwca
-         QVAoyGUPIYUMoVo7GPvafavL549FLTHSDn7bJb6xcsAAbCEPNbPh1m1qxZZfmaeh5tGu
-         gIFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770637146; x=1771241946;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1770637155; x=1771241955; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0hReedumWv9bObsfCo1a115xFMbIDmYnR1idXADXTUc=;
-        b=f61HEnIYt5DuYaufCmmIXk+rkk7y3U6y09bXZpXGsT45Q9zN6iQb4I1GDb7mfXTIf2
-         hmMI+MxqX5fiRhsIFGzokocfS9ixjJHKS82FV15Z9FlDcN7DwgcydCXkpb2+vPg1kel2
-         Se1YgfZLnv9gOxUsERiejD8CIQEj0KinqKVLqFmbhBQVvgqnEJiiO2zVXmmX6Hqfylwg
-         6Icci3a+0CK3PPu4Dph3bAgppJ64PTQGYrSHWFn41ALbzSCj8gMreKS+NnpNkkqMIqDG
-         OJhcZ61FiqxsKd9Dr8I5ujLdyuWFSsuc7fAjeVtHyTwHMeFKwzunQJw8JWXzigUvTtza
-         aURw==
-X-Gm-Message-State: AOJu0Yx8UQpt15YTTAjg/wHFOPTQAFoEA5j6VboukBf1kfJFqhUmfTvQ
-	joRkJpsdu0fcvXZKSh3BUn9vF1p7G2C3IxBVGpIJtEC7JK1DajOsBw5W5bwVYA==
-X-Gm-Gg: AZuq6aJtVeQIU7ugCpOclpTu4yQxifbsDEEcKY1+qt7XUVVVQ4QWVcSvXXmgU9/9FAQ
-	+hbnl6xt9+3kHNkAKQgGQfKSE6mLfNXhBi9TG38edkL/0rFmW8+cB9dVn4U8bGmchx89CN8NV3a
-	o1SeRLKIYRCVjd7vIO4wTMHyX2D+pDSsHNT8RGPIcp6ZHnPuGJbaudDjFBRVp+I+2Hc05Kbad3W
-	w7ciuHfNtseeljtTawtwFcnllRL4ANRN7TYteT3h7UHKsO9oe3/B8jAPMOwbv/Ithr7fa9idaAY
-	SA2M5lPOuYvet4UNR2wqm7hyQVbl5DkfB/KP6zoFsIzgiH6O96sdtSrJiYwDO2difvTb6pxuqRU
-	1pmQnGod6H34ugWC51CGSnCNmQNiejAL9l3t/wzZB/sHQpFDAvWePHAr6Q8vo11R8ywEupahtAJ
-	iMD8N9FXgT
-X-Received: by 2002:a05:600c:1390:b0:477:5ad9:6df1 with SMTP id 5b1f17b1804b1-483201dc4bamr148234595e9.3.1770637145402;
-        Mon, 09 Feb 2026 03:39:05 -0800 (PST)
+        bh=1MT5NRjeHBxN2fbWKBJMx9Qy1U6c7sQEsoyn5FdtMiQ=;
+        b=eRwINMesKdRrRzCY5jAsxn4EroAoWCE0JYt4sS4YBEnNgeNez3W+wXesXGBWKF4Tqc
+         ufMDEIf7YT5+h4wg7UjIeH59Qapq58UZx9EQaupI5HaLldYrmJ48/rpzVacymPIL8eHa
+         vquCRhpev7IdVVbPPaCiJmmNd4fw+y4FGwLXujcUO1/9JcvaRcnRy9CEOexpK8neZ87t
+         ckRubP9JNcrkdqQ6t2E49yBVAjtxERpJbpj7Ko5yNywxOvQ4jnhWPTJSVjtOCCRJDbcG
+         x92cPfrAdshWE1Bgeb3CMFaGcoyr2muS06RyFVntgHD20Za8tjMwxJnUs5A+CQOE8LSm
+         BNSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770637155; x=1771241955;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=1MT5NRjeHBxN2fbWKBJMx9Qy1U6c7sQEsoyn5FdtMiQ=;
+        b=YaCVo/dfgtEepNYeKWf9qj6uhPPbV7BgDV/LAcJNULdFKIeNRrpv4AW/1CeIKQYpz8
+         vNPicDwcgXWT+sO/Ll5rEOvLDnOnBC5Sod6foLkznL7T00fL2ZqmD0dek6xJZM5Y4Lva
+         YGLHaWLAIhnnAHQMUSHkdNv9DDBJUxpaETCmX+CCsk/1bD0QRiTxdxfuIxvRpqrMw2KL
+         WG6DtIREO2zanXDityln4jkul1DFfh0osXY1uwgmOwJvMEsQ8cwrTblnRSOPzEu0K7Xv
+         sY02EANcJKoMY+No/e4Vp5cSrWDOTt/hpX3h3MAeDtrSOtH9IevVPh2Ky7ZsQpqJ48Yq
+         NR3Q==
+X-Gm-Message-State: AOJu0YwIRb8LXtUUw2yDy4KUK+/m+0Vj2eo73B1vWbhkm4RxR4zma2BN
+	fcC1TLO+EiyaJA7KqkMpzat59XtWyw6V1IN/GIqhu1KvVtUJfP9r76flY45KiA==
+X-Gm-Gg: AZuq6aI3Lok/sPFWhcO/fBFR9VlkDbKtOApkn8BZsGAuJ3y22Y4q6Dq5/RfHbiLE05w
+	9zE5Ge7BitpRJTQnQ+tgmA3J0FB09H66nfQnxrcsl7HYgK0ylmRnYPqFxOZXGEOKqAJdhgn56bn
+	NUwlf8L8V/LNJbetvOVuNCkQaZ2FCmq9ZHQmRba50sAAjysmgcbmNKKZDwVnxVdJ1t+XfFcojOI
+	JSf4DFySFLXwSsAMiwzNNFR8KOwhMgNg4Y0xIVkIz6gM6ACZ7VDtVqbepHeIpyPbtPQySTFt+vs
+	kNhi+M2xm4ebLfooMy1h3aF0FlFBfZr1KEBEG3Br5yYW0o9FTVFZmhXeRp2QJJtRVFwmLSnQFJY
+	Ozb1Cn3Cj+0zV3xl87rwQp+MmTgGkUia0DhnhHdhmpu3DuWBR6R6B33hBXdnRzJO2yhoLvsUFXY
+	npPxpesiJT
+X-Received: by 2002:a05:600c:3b87:b0:477:df7:b020 with SMTP id 5b1f17b1804b1-48320966a0cmr164359105e9.18.1770637155213;
+        Mon, 09 Feb 2026 03:39:15 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834304232bsm56030375e9.2.2026.02.09.03.39.04
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834304232bsm56030375e9.2.2026.02.09.03.39.14
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 03:39:05 -0800 (PST)
+        Mon, 09 Feb 2026 03:39:14 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][kirkstone][PATCH 01/16] sox: patch CVE-2017-11332
-Date: Mon,  9 Feb 2026 12:38:48 +0100
-Message-ID: <20260209113904.3442496-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 14/16] tigervnc: ignore CVE-2023-6478
+Date: Mon,  9 Feb 2026 12:39:01 +0100
+Message-ID: <20260209113904.3442496-14-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260209113904.3442496-1-skandigraun@gmail.com>
+References: <20260209113904.3442496-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 11:39:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124296
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 11:39:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124309
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2017-11332
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-6478
 
-Pick the patch that was identified by Debian[1] as the solution.
+TigerVNC compiles its own xserver, this is why this CVE is associated
+with it - despite the vulnerability being in xserver.
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2017-11332
+The vulnerability was fixed by [1] (from the nvd report), which has been
+backported[2] to the xserver version used by the recipe - so ignore the
+CVE, since it's patched already.
+
+[1]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/14f480010a93ff962fef66a16412fafff81ad632
+[2]: https://gitlab.freedesktop.org/xorg/xserver/-/commit/58e83c683950ac9e253ab05dd7a13a8368b70a3c
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 62a78f8ba7c8bd229cc82cf81bcc6a6d8116ebca)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../sox/sox/CVE-2017-11332.patch              | 28 +++++++++++++++++++
- .../recipes-multimedia/sox/sox_14.4.2.bb      |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
-new file mode 100644
-index 0000000000..383813e469
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/CVE-2017-11332.patch
-@@ -0,0 +1,28 @@
-+From 80479b4978ddeb6fadb75007abc81f1ca2c50abb Mon Sep 17 00:00:00 2001
-+From: Mans Rullgard <mans@mansr.com>
-+Date: Sun, 5 Nov 2017 16:29:28 +0000
-+Subject: [PATCH] wav: fix crash if channel count is zero (CVE-2017-11332)
-+
-+CVE: CVE-2017-11332
-+Upstream-Status: Backport [https://github.com/mansr/sox/commit/7405bcaacb1ded8c595cb751d407cf738cb26571]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/wav.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/src/wav.c b/src/wav.c
-+index 5202556..71fd52a 100644
-+--- a/src/wav.c
-++++ b/src/wav.c
-+@@ -712,6 +712,11 @@ static int startread(sox_format_t * ft)
-+     else
-+         lsx_report("User options overriding channels read in .wav header");
-+ 
-++    if (ft->signal.channels == 0) {
-++        lsx_fail_errno(ft, SOX_EHDR, "Channel count is zero");
-++        return SOX_EOF;
-++    }
-++
-+     if (ft->signal.rate == 0 || ft->signal.rate == dwSamplesPerSecond)
-+         ft->signal.rate = dwSamplesPerSecond;
-+     else
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-index 0791c85f74..c8a7a1829d 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.2.bb
-@@ -30,6 +30,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
- SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
-            file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
-            file://0001-Update-exported-symbol-list.patch \
-+           file://CVE-2017-11332.patch \
-            "
- SRC_URI[md5sum] = "d04fba2d9245e661f245de0577f48a33"
- SRC_URI[sha256sum] = "b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c"
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+index 9e4d05186f..4f9b9f7267 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.11.0.bb
+@@ -123,4 +123,4 @@ FILES:${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
+ CVE_CHECK_IGNORE += "CVE-2014-8241"
+ 
+ # fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)
+-CVE_CHECK_IGNORE += "CVE-2023-6377"
++CVE_CHECK_IGNORE += "CVE-2023-6377 CVE-2023-6478"
 
