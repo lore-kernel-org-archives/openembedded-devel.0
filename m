@@ -2,61 +2,61 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D6BCE7C706
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40846EE6B73
 	for <webhook@archiver.kernel.org>; Mon,  9 Feb 2026 08:10:45 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.42948.1770624640566626807
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.42950.1770624642350781603
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Feb 2026 00:10:40 -0800
+ Mon, 09 Feb 2026 00:10:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=APrzJbFc;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4806ce0f97bso34750445e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 00:10:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jBd8X64U;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-4376de3f128so451935f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 00:10:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770624639; x=1771229439; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770624641; x=1771229441; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FqyfSAAhes0yA3ahAHCCMAeX6a9qcLu2Vt5XQIOXOWY=;
-        b=APrzJbFcWPemMFxBeNr2BQepRTr57raH8AblkDxv25E4Yghd+443rYyZQsL5sWeNnB
-         IZlOtfBsNkRT8bEdvEs+6czb6thL/mykGTZaQTJfku7xUaZuSQ1gyzA5SuLByyn9Mitg
-         u91XaATIM4WJzx4h9Y6or540Rs8RM6R5px1USUl2zHZK6Epp2cN8AG3J4YSz6Rn6GKPK
-         QIEUT6aX75vVJkmOa7Jch1Dzv8uUdKLe50pMurRQicl6/o4NEocq6mxMAooO+J5E2Zif
-         Rzkdtxm+zk76hKgpYePqXPBEENjedzUpMDtA1paysVnzbYmCg8gihwng9X3YTGjLf0o9
-         kNfA==
+        bh=ThQkHAa9bUfzIU2P9IdVY04Rv1Vx211rmAXV+Ijefmw=;
+        b=jBd8X64U7MlHvaXsKWRuDbSB07SmGe/GKE8+zVtfBOi4zpatG4Tvtqd4jCxpjHFdOP
+         mgwbP5iggqBOMuc8PF0TE7vTqer22PodAxdZ7c/IcsizVoggDgM1exm0sFMrg9qbWVWG
+         FoVliDDVNyFb3+sa0YwuGO25zaBhoNQ1KogKk1Fz4yQ4tnmHVGqvv/szzGmdtKsjPwva
+         E7Eew90VA1jyvWC1vaiWhmDGDJaNnUSK3K8A7rJ2L076ROp8+DORq3Flbhq6t7ZmgpHK
+         CoTn65qt6NDlRz/1Dcj84TkiFGOqvWozq48kiqnsQtMMgyvWpOUzN6c3t+wMRii6CrBw
+         GwkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770624639; x=1771229439;
+        d=1e100.net; s=20230601; t=1770624641; x=1771229441;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FqyfSAAhes0yA3ahAHCCMAeX6a9qcLu2Vt5XQIOXOWY=;
-        b=BpjnWxTeCIayOKw2k7UYxY8RPPaHjZClDDaAyL5t51mEj136+5slGG86Opw0hkR7lR
-         v8WKmoyHASOyrigoq1byxt3EfEm7DpPhHREM9Ekg4cGcrVN21kzW5uZEg8nIc3dsqP9y
-         kiI6NM8gY2jyTMW/vzMhjWXU04/C8saOl6sGEIOR4TKuf/8UgNaIZy5LZjnPmK1lgKrN
-         FMotJEASzqyBRa97etbeb99vhI+QofT0qkGujIuWIYV2Hww+kScLHvIrultzQiRlx6IF
-         3y2XxG6CnHzRR9GVcbi0OvhGvao4TsDbqqSQUJoIniQRIieEN6wkdxUH0B/D84eNBWEo
-         9JXg==
-X-Gm-Message-State: AOJu0YwAnhEV6kYv3UHRPN9xQ+Y1HJX2NL/tW/vtO7J4hXk7gyxSQgz5
-	QBUOYNg0jEqYy75g/sQqeKh8rUYRxU7/m8St7SBkE9OJ97a7XRAXEoqXRP0ONw==
-X-Gm-Gg: AZuq6aLxPMQOlNb6wJ2PkLyKx38ccf9SJ2X0f2ydZEUpoM+vXnf3a2jc3AWPuMkbe0I
-	SufgnfJU7BpUUkvSQhImHsRDWC/zTNW7Hc72vVsCbeEDHuyvex5OIWwtahaskQ5rm6v+rRnTQWX
-	Dw+n3We/GELayS8HfinmkA0P6xteTC874shMMjZD+DjLPwUsqaAmzpc1JjiQD8lCgBx0WH5+ZrB
-	fvVJtJsDzE0V/GkJhmN6Sl/WQlPhWH079OiTwKkZhb8TlR0nDnvYBRO/1KIo+wLAfVd+SPrjnCK
-	WRht8O3pMetO/yr/oQ2K6BKJNj4sfTyywTrkFLFgRO44o2vZjVSlrEXQZBCd0wd6SYh8eqUWagE
-	w6uG9AOA08apr9cX7/wHMVzHX8hvQwhx5G34m72ZZ52N4Ky4J8fZQwMZpK0NFFTm0WE6S1KI6Du
-	C62r6ISGZv9Wrvh2QLu3o=
-X-Received: by 2002:a05:600d:a:b0:483:27b7:5f36 with SMTP id 5b1f17b1804b1-48327b75f62mr116453935e9.31.1770624638740;
-        Mon, 09 Feb 2026 00:10:38 -0800 (PST)
+        bh=ThQkHAa9bUfzIU2P9IdVY04Rv1Vx211rmAXV+Ijefmw=;
+        b=jRJhZiotMSI4hnexzrse2wDEVUhMH8kmqK4z17MpW71RmDgZKGg7F1P7YzZhPNcxn/
+         7AREKgJcPY5+J6cbCdS7wikewFA9NwcWVip0pOwohSh8Fe168fKX7NNHbxL8qvcbbGLy
+         BcLTCVJg6pNS2OP+KydYP9bC41F6/o1Em52n9yWwlVkRc+sdQmOfJnvQFkr0ORYOjXCx
+         XBohstQ67q5JV3/nJNdmt4a1RwCAfFbcus6QFRWA1LsKDvmJfTx3i0Y/yscVG6ITrQrw
+         OTIsm+w3BXxyYu2Bc4unZJLpAt5fmHwKEVSorHPkUprS4TFsLq4AuK85Ejbbluldj7AS
+         491g==
+X-Gm-Message-State: AOJu0YwTzytW0/eoWsS/LmoBwvQxGhiqZ9TXgklaky0jZswigOqnqmv9
+	Brv8YmRs01MdwAZeP6ei+LTLCmiKQZWuAqvs6HoFD/JJPDJyFPH4o4WNcbg1TQ==
+X-Gm-Gg: AZuq6aJXqOJYoTbHwWJjOg+87POwEXaitKxjSwZ02j8rwvEHn7R6F4zOoVXa5+45ulP
+	EKV9jMemPf88eTjwcWjb8WYqyZsrv+Jt7qKqoPBTWsJY4QLg3s9ImNZxxmDfeiOKwF8i0d8S/CH
+	02FK3M7KBpFJGwgai8eZJo8pgHVqawJ2JdUdS7WO5wiATqHNXFS0EsGJemCG5knND0PNtvzCRwG
+	/mu7PMJNiAfApEWrGLMNA3/XVlgX+TmyyEoLqGrZHHD3YTPvIHV7i+jWl6i9jWQO33b0EwP9R2V
+	myQXtBD9U3Zye3e8BKxt6DiwjfW4iKgsiihtKRDTxKsi7M1h6qJ8L3bBgHxP4rlLwmeOdJL2Veh
+	xGV+A8d/MfUvEEGVfzoqtRoVZfUKlEB4T/9rccsdegHNECYoJabJwtv8YzV0sc5m2C+5yMB+OQ/
+	rsvf7yjA4n
+X-Received: by 2002:a05:6000:613:b0:437:719d:a753 with SMTP id ffacd0b85a97d-437719da955mr1899603f8f.11.1770624640524;
+        Mon, 09 Feb 2026 00:10:40 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-436297450b4sm25583703f8f.34.2026.02.09.00.10.37
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-436297450b4sm25583703f8f.34.2026.02.09.00.10.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Feb 2026 00:10:38 -0800 (PST)
+        Mon, 09 Feb 2026 00:10:40 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: CVE report - master - 2026-02-09
-Date: Mon,  9 Feb 2026 09:10:34 +0100
-Message-ID: <20260209081036.1295243-2-skandigraun@gmail.com>
+Subject: CVE report - whinlatter - 2026-02-09
+Date: Mon,  9 Feb 2026 09:10:36 +0100
+Message-ID: <20260209081036.1295243-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -64,11 +64,11 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 Feb 2026 08:10:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124290
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124292
 
 Do you see a recipe on this list that is important for you? Help us busting some CVEs by sending some patches.
 
-List of all open CVEs (70, out of which new this week: 10):
+List of all open CVEs (120, out of which new this week: 9):
 
  - dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
  - docopt.cpp: CVE-2025-67125: https://nvd.nist.gov/vuln/detail/CVE-2025-67125
@@ -80,6 +80,7 @@ List of all open CVEs (70, out of which new this week: 10):
  - fontforge: CVE-2025-15277: https://nvd.nist.gov/vuln/detail/CVE-2025-15277
  - fontforge: CVE-2025-15278: https://nvd.nist.gov/vuln/detail/CVE-2025-15278
  - fontforge: CVE-2025-15280: https://nvd.nist.gov/vuln/detail/CVE-2025-15280
+ - freerdp: CVE-2025-68118: https://nvd.nist.gov/vuln/detail/CVE-2025-68118
  - freerdp: CVE-2026-22851: https://nvd.nist.gov/vuln/detail/CVE-2026-22851
  - freerdp: CVE-2026-22852: https://nvd.nist.gov/vuln/detail/CVE-2026-22852
  - freerdp: CVE-2026-22853: https://nvd.nist.gov/vuln/detail/CVE-2026-22853
@@ -98,10 +99,10 @@ List of all open CVEs (70, out of which new this week: 10):
  - freerdp: CVE-2026-23883: https://nvd.nist.gov/vuln/detail/CVE-2026-23883
  - freerdp: CVE-2026-23884: https://nvd.nist.gov/vuln/detail/CVE-2026-23884
  - giflib: CVE-2024-45993: https://nvd.nist.gov/vuln/detail/CVE-2024-45993
+ - gnome-shell: CVE-2021-3982: https://nvd.nist.gov/vuln/detail/CVE-2021-3982
  - hiawatha: CVE-2025-57783: https://nvd.nist.gov/vuln/detail/CVE-2025-57783
  - hiawatha: CVE-2025-57784: https://nvd.nist.gov/vuln/detail/CVE-2025-57784
  - hiawatha: CVE-2025-57785: https://nvd.nist.gov/vuln/detail/CVE-2025-57785
- - libcdio: CVE-2024-36600: https://nvd.nist.gov/vuln/detail/CVE-2024-36600
  - libde265: CVE-2024-38949: https://nvd.nist.gov/vuln/detail/CVE-2024-38949
  - libde265: CVE-2024-38950: https://nvd.nist.gov/vuln/detail/CVE-2024-38950
  - [NEW] libuvc: CVE-2026-1991: https://nvd.nist.gov/vuln/detail/CVE-2026-1991
@@ -121,36 +122,106 @@ List of all open CVEs (70, out of which new this week: 10):
  - openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
  - openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
  - polkit: CVE-2016-2568: https://nvd.nist.gov/vuln/detail/CVE-2016-2568
- - [NEW] protobuf: CVE-2026-0994: https://nvd.nist.gov/vuln/detail/CVE-2026-0994
+ - protobuf: CVE-2026-0994: https://nvd.nist.gov/vuln/detail/CVE-2026-0994
+ - python3-aiohttp: CVE-2025-69223: https://nvd.nist.gov/vuln/detail/CVE-2025-69223
+ - python3-cbor2: CVE-2025-68131: https://nvd.nist.gov/vuln/detail/CVE-2025-68131
  - [NEW] python3-django: CVE-2025-13473: https://nvd.nist.gov/vuln/detail/CVE-2025-13473
  - [NEW] python3-django: CVE-2025-14550: https://nvd.nist.gov/vuln/detail/CVE-2025-14550
  - [NEW] python3-django: CVE-2026-1207: https://nvd.nist.gov/vuln/detail/CVE-2026-1207
  - [NEW] python3-django: CVE-2026-1285: https://nvd.nist.gov/vuln/detail/CVE-2026-1285
  - [NEW] python3-django: CVE-2026-1287: https://nvd.nist.gov/vuln/detail/CVE-2026-1287
  - [NEW] python3-django: CVE-2026-1312: https://nvd.nist.gov/vuln/detail/CVE-2026-1312
+ - python3-flask-cors: CVE-2024-1681: https://nvd.nist.gov/vuln/detail/CVE-2024-1681
  - python3-flask-user: CVE-2021-23401: https://nvd.nist.gov/vuln/detail/CVE-2021-23401
+ - python3-ldap: CVE-2025-61911: https://nvd.nist.gov/vuln/detail/CVE-2025-61911
+ - python3-ldap: CVE-2025-61912: https://nvd.nist.gov/vuln/detail/CVE-2025-61912
+ - python3-lief: CVE-2025-15504: https://nvd.nist.gov/vuln/detail/CVE-2025-15504
+ - python3-m2crypto: CVE-2009-0127: https://nvd.nist.gov/vuln/detail/CVE-2009-0127
+ - python3-m2crypto: CVE-2020-25657: https://nvd.nist.gov/vuln/detail/CVE-2020-25657
  - python3-m2crypto: CVE-2023-50781: https://nvd.nist.gov/vuln/detail/CVE-2023-50781
+ - python3-marshmallow: CVE-2025-68480: https://nvd.nist.gov/vuln/detail/CVE-2025-68480
+ - python3-orjson: CVE-2025-67221: https://nvd.nist.gov/vuln/detail/CVE-2025-67221
+ - python3-py: CVE-2022-42969: https://nvd.nist.gov/vuln/detail/CVE-2022-42969
+ - python3-pyjwt: CVE-2025-45768: https://nvd.nist.gov/vuln/detail/CVE-2025-45768
+ - python3-python-multipart: CVE-2026-24486: https://nvd.nist.gov/vuln/detail/CVE-2026-24486
+ - python3-tornado: CVE-2025-67724: https://nvd.nist.gov/vuln/detail/CVE-2025-67724
+ - python3-tornado: CVE-2025-67725: https://nvd.nist.gov/vuln/detail/CVE-2025-67725
+ - python3-tornado: CVE-2025-67726: https://nvd.nist.gov/vuln/detail/CVE-2025-67726
+ - python3-twitter: CVE-2012-5825: https://nvd.nist.gov/vuln/detail/CVE-2012-5825
+ - python3-uvicorn: CVE-2020-7694: https://nvd.nist.gov/vuln/detail/CVE-2020-7694
+ - python3-virtualenv: CVE-2026-22702: https://nvd.nist.gov/vuln/detail/CVE-2026-22702
+ - python3-werkzeug: CVE-2025-66221: https://nvd.nist.gov/vuln/detail/CVE-2025-66221
+ - python3-werkzeug: CVE-2026-21860: https://nvd.nist.gov/vuln/detail/CVE-2026-21860
+ - raptor2: CVE-2024-57822: https://nvd.nist.gov/vuln/detail/CVE-2024-57822
+ - raptor2: CVE-2024-57823: https://nvd.nist.gov/vuln/detail/CVE-2024-57823
+ - redis: CVE-2025-46686: https://nvd.nist.gov/vuln/detail/CVE-2025-46686
  - samba: CVE-2025-10230: https://nvd.nist.gov/vuln/detail/CVE-2025-10230
  - samba: CVE-2025-9640: https://nvd.nist.gov/vuln/detail/CVE-2025-9640
  - sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
  - [NEW] streamripper: CVE-2020-37065: https://nvd.nist.gov/vuln/detail/CVE-2020-37065
+ - unbound: CVE-2025-5994: https://nvd.nist.gov/vuln/detail/CVE-2025-5994
+ - uriparser: CVE-2025-67899: https://nvd.nist.gov/vuln/detail/CVE-2025-67899
  - webkitgtk3: CVE-2025-13502: https://nvd.nist.gov/vuln/detail/CVE-2025-13502
  - webkitgtk3: CVE-2025-13947: https://nvd.nist.gov/vuln/detail/CVE-2025-13947
  - webkitgtk3: CVE-2025-43343: https://nvd.nist.gov/vuln/detail/CVE-2025-43343
  - webkitgtk3: CVE-2025-66287: https://nvd.nist.gov/vuln/detail/CVE-2025-66287
  - webmin: CVE-2025-67738: https://nvd.nist.gov/vuln/detail/CVE-2025-67738
+ - wireshark: CVE-2026-0962: https://nvd.nist.gov/vuln/detail/CVE-2026-0962
+ - wolfssl: CVE-2025-13912: https://nvd.nist.gov/vuln/detail/CVE-2025-13912
+ - wolfssl: CVE-2025-7394: https://nvd.nist.gov/vuln/detail/CVE-2025-7394
+ - wolfssl: CVE-2025-7395: https://nvd.nist.gov/vuln/detail/CVE-2025-7395
  - xerces-c: CVE-2012-0880: https://nvd.nist.gov/vuln/detail/CVE-2012-0880
+ - xrdp: CVE-2024-39917: https://nvd.nist.gov/vuln/detail/CVE-2024-39917
+ - xrdp: CVE-2025-68670: https://nvd.nist.gov/vuln/detail/CVE-2025-68670
+ - yasm: CVE-2021-33455: https://nvd.nist.gov/vuln/detail/CVE-2021-33455
+ - yasm: CVE-2021-33457: https://nvd.nist.gov/vuln/detail/CVE-2021-33457
+ - yasm: CVE-2021-33458: https://nvd.nist.gov/vuln/detail/CVE-2021-33458
+ - yasm: CVE-2021-33459: https://nvd.nist.gov/vuln/detail/CVE-2021-33459
+ - yasm: CVE-2021-33460: https://nvd.nist.gov/vuln/detail/CVE-2021-33460
+ - yasm: CVE-2021-33461: https://nvd.nist.gov/vuln/detail/CVE-2021-33461
+ - yasm: CVE-2021-33462: https://nvd.nist.gov/vuln/detail/CVE-2021-33462
+ - yasm: CVE-2021-33463: https://nvd.nist.gov/vuln/detail/CVE-2021-33463
+ - yasm: CVE-2021-33465: https://nvd.nist.gov/vuln/detail/CVE-2021-33465
+ - yasm: CVE-2021-33466: https://nvd.nist.gov/vuln/detail/CVE-2021-33466
+ - yasm: CVE-2021-33467: https://nvd.nist.gov/vuln/detail/CVE-2021-33467
+ - yasm: CVE-2021-33468: https://nvd.nist.gov/vuln/detail/CVE-2021-33468
+ - yasm: CVE-2023-30402: https://nvd.nist.gov/vuln/detail/CVE-2023-30402
+ - yasm: CVE-2023-31972: https://nvd.nist.gov/vuln/detail/CVE-2023-31972
+ - yasm: CVE-2023-31973: https://nvd.nist.gov/vuln/detail/CVE-2023-31973
+ - yasm: CVE-2023-31974: https://nvd.nist.gov/vuln/detail/CVE-2023-31974
+ - yasm: CVE-2023-51258: https://nvd.nist.gov/vuln/detail/CVE-2023-51258
 
 ====================
 
-Removed this week (8): 
+Removed this week (29): 
 
  - ez-ipupdate: CVE-2003-0887: https://nvd.nist.gov/vuln/detail/CVE-2003-0887
+ - fontforge: CVE-2025-15269: https://nvd.nist.gov/vuln/detail/CVE-2025-15269
  - fontforge: CVE-2025-15270: https://nvd.nist.gov/vuln/detail/CVE-2025-15270
+ - fontforge: CVE-2025-15275: https://nvd.nist.gov/vuln/detail/CVE-2025-15275
+ - fontforge: CVE-2025-15279: https://nvd.nist.gov/vuln/detail/CVE-2025-15279
  - gimp: CVE-2025-15059: https://nvd.nist.gov/vuln/detail/CVE-2025-15059
+ - gpsd: CVE-2025-67268: https://nvd.nist.gov/vuln/detail/CVE-2025-67268
+ - gpsd: CVE-2025-67269: https://nvd.nist.gov/vuln/detail/CVE-2025-67269
+ - imagemagick: CVE-2026-22770: https://nvd.nist.gov/vuln/detail/CVE-2026-22770
+ - imagemagick: CVE-2026-23874: https://nvd.nist.gov/vuln/detail/CVE-2026-23874
+ - imagemagick: CVE-2026-23876: https://nvd.nist.gov/vuln/detail/CVE-2026-23876
+ - imagemagick: CVE-2026-23952: https://nvd.nist.gov/vuln/detail/CVE-2026-23952
+ - libcdio: CVE-2024-36600: https://nvd.nist.gov/vuln/detail/CVE-2024-36600
  - libcupsfilters: CVE-2025-64503: https://nvd.nist.gov/vuln/detail/CVE-2025-64503
  - ndpi: CVE-2025-25066: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
+ - nodejs: CVE-2025-55130: https://nvd.nist.gov/vuln/detail/CVE-2025-55130
+ - nodejs: CVE-2025-55131: https://nvd.nist.gov/vuln/detail/CVE-2025-55131
+ - nodejs: CVE-2025-55132: https://nvd.nist.gov/vuln/detail/CVE-2025-55132
+ - nodejs: CVE-2025-59465: https://nvd.nist.gov/vuln/detail/CVE-2025-59465
+ - nodejs: CVE-2025-59466: https://nvd.nist.gov/vuln/detail/CVE-2025-59466
+ - nodejs: CVE-2026-21637: https://nvd.nist.gov/vuln/detail/CVE-2026-21637
  - proftpd: CVE-2021-47865: https://nvd.nist.gov/vuln/detail/CVE-2021-47865
- - python3-pyjwt: CVE-2025-45768: https://nvd.nist.gov/vuln/detail/CVE-2025-45768
- - xrdp: CVE-2025-68670: https://nvd.nist.gov/vuln/detail/CVE-2025-68670
+ - python3-aiohttp: CVE-2025-69224: https://nvd.nist.gov/vuln/detail/CVE-2025-69224
+ - python3-aiohttp: CVE-2025-69225: https://nvd.nist.gov/vuln/detail/CVE-2025-69225
+ - python3-aiohttp: CVE-2025-69226: https://nvd.nist.gov/vuln/detail/CVE-2025-69226
+ - python3-aiohttp: CVE-2025-69227: https://nvd.nist.gov/vuln/detail/CVE-2025-69227
+ - python3-aiohttp: CVE-2025-69228: https://nvd.nist.gov/vuln/detail/CVE-2025-69228
+ - python3-aiohttp: CVE-2025-69229: https://nvd.nist.gov/vuln/detail/CVE-2025-69229
+ - python3-aiohttp: CVE-2025-69230: https://nvd.nist.gov/vuln/detail/CVE-2025-69230
 
