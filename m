@@ -1,196 +1,103 @@
-Return-Path: <daniel.klauer@gin.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACEDFEB2704
-	for <webhook@archiver.kernel.org>; Tue, 10 Feb 2026 19:20:21 +0000 (UTC)
-Received: from good-out-34.clustermail.de (good-out-34.clustermail.de [212.223.166.12])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1422.1770751217350390973
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33049EB2716
+	for <webhook@archiver.kernel.org>; Tue, 10 Feb 2026 20:46:22 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3327.1770756372968891216
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Feb 2026 11:20:17 -0800
+ Tue, 10 Feb 2026 12:46:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gin.de, ip: 212.223.166.12, mailfrom: daniel.klauer@gin.de)
-Received: from [10.0.0.12] (helo=frontend.clustermail.de)
-	by smtpout-03.clustermail.de with esmtp (Exim 4.96)
-	(envelope-from <Daniel.Klauer@gin.de>)
-	id 1vpsBF-00HIia-1H
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Feb 2026 19:09:47 +0100
-Received: from [62.157.191.2] (helo=GIN-GR-EXCH01.gin-domain.local)
-	by frontend.clustermail.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <Daniel.Klauer@gin.de>)
-	id 1vpsBG-00BeCp-2K
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Feb 2026 19:09:46 +0100
-Received: from daniel-desktop2.gin-domain.local (10.176.8.90) by
- GIN-GR-EXCH01.gin-domain.local (10.160.128.6) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.10; Tue, 10 Feb 2026 19:09:46 +0100
-From: Daniel Klauer <daniel.klauer@gin.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Silvio Fricke <silvio.fricke@gin.de>
-Subject: [meta-oe][PATCH] nbench-byte: Fix sysinfo generation in parallel build
-Date: Tue, 10 Feb 2026 19:09:11 +0100
-Message-ID: <20260210180911.838540-1-daniel.klauer@gin.de>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mY5pXzyC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-47ee3a63300so14892585e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Feb 2026 12:46:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1770756371; x=1771361171; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=wXFHiXZAj5HeK9gy8I8h+u1mWYf6geTW7fKznws5weQ=;
+        b=mY5pXzyC7rDy3YFrfXdebSvGveaAyW7avzPQmjZWoZnxZS9bonNtNnDetvyVXCNHDu
+         o8bn6eapKDnNiV2nHqxQgtMoV6nY24G0IW51AmeVFeIx3Jy4uLjcQ4KNE0CMpPayUX22
+         8yl1bCBOgJ21BwIEKBhde0fza3VXkst9QO7DIichZGdbMRdAW364wZkuBMzKfM12w9j4
+         NcrTe9rhW6YhX/wtjXuMvP0wTnJqK1k4LN0EaysqAQ1m3om+4N74B8PeFmAXCTBXlrkl
+         QveZ8mjdRJHSVPyZumMSh4HW4ykuFFLNqMhfIIm4jbUoHnKZ6fqhD1mAhwMZsnq1a8Or
+         m+3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770756371; x=1771361171;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wXFHiXZAj5HeK9gy8I8h+u1mWYf6geTW7fKznws5weQ=;
+        b=jwcmWbm6FN8P4WjUjttk+HCK/AZFDDhpK56gZ5jIvhcvPSIcC1Cvf8TlBft9ONFgNM
+         sKGon/qdYRmPFNfMfEuD1cHOf9P3PL6X7t5k62mpSmEMKkEAntYMzVwrVXln40O2P+P6
+         FeW8GZllXrjg8auS2xWYn35an0FLg39PbKFx8kZ0LlfkFaK+yV6Iw4/DAndzhs1ssn43
+         95HOjEnUqMrzTqqaQriGNIhClAQ6r7DOBMfkVT2Yf1gn9yDNKljsqql1HKsXSORalRsm
+         Rcag1cAF6K9tdnEqWLX/+L4ATL4QiXySQVnYNv8UlULqwFuX1xr5WLIps5Eao7IRD9aP
+         gXGQ==
+X-Gm-Message-State: AOJu0YzFSjaJmPgcaQgRRUvQ0ZsREEpwSHE48zVSypphzw1KiHceIj1p
+	eELf2vGJn+I1AjZqc7pMgnOIo9GgI5OAwhvqeEgQdlmZX9G1gP7pcfr760jIbg==
+X-Gm-Gg: AZuq6aKbVI88XH3ffvQXuOJbKkdagsp093RRbF937O9rq3dXamvFTcChoEsCuFLdZTO
+	6clHXoRN2z/sJCjyNDYJ9OT/4arnf6MqtJcBicUJ/CJLX9r1WzRJ6csJu0MhCo+eHRd7xgEetZM
+	LdQ4hRA/okTtlAz1Xhd8DaH4JZEGwYOKbAqC45zyxO2XBqVGDKALtxRe/u28pPRlFXsSRJeYYnb
+	bk2CoimrIuyX62e/uHkr/w2Poi02GJzCfs9QELLAC6XHgiRZeBR+VXZlMBXTn8uy+9sckzh8Mn3
+	dkeTpdlUqVex31crk8DneEjBMSQxF63Fp5Wvam3cTZYnIN4D3uprUERyZTvUntgwu6dGWO21V0n
+	Z7p/PjlTk/huX72vDcMNEL3IvWp37jpjuuxReu8CO94DFUa1RuIjK7WvjIW4KhtvRQCIrFG7XJ5
+	H4U7LbSlwy2lJHRVhCWtWp
+X-Received: by 2002:a05:6000:613:b0:437:719d:a74a with SMTP id ffacd0b85a97d-437719da8femr10316386f8f.58.1770756371175;
+        Tue, 10 Feb 2026 12:46:11 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4376d3a32basm20198176f8f.14.2026.02.10.12.46.10
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Feb 2026 12:46:10 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][whinlatter][PATCH 1/2] python3-django: upgrade 5.2.9 -> 5.2.11
+Date: Tue, 10 Feb 2026 21:46:09 +0100
+Message-ID: <20260210204610.169129-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.176.8.90]
-X-ClientProxiedBy: GIN-GR-EXCH01.gin-domain.local (10.160.128.6) To
- GIN-GR-EXCH01.gin-domain.local (10.160.128.6)
-X-EsetResult: clean, is OK
-X-EsetId: 37303A2952B0055E667D6A
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Feb 2026 19:20:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124324
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Feb 2026 20:46:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124325
 
-The project Makefile uses a script (sysinfo.sh) to non-atomically generate
-two .c files (sysinfo.c, sysinfoc.c) which are then included in the build.
-Since the script always overwrites both .c files, the Makefile should only
-invoke it once, not twice in parallel. Otherwise the .c files may be
-corrupted and cause random build failures in parallel builds.
+Changelog:
+5.2.11:
+Contains fixes for CVE-2025-13473, CVE-2025-14550, CVE-2026-1207, CVE-2026-1285,
+CVE-2026-1287 and CVE-2026-1312
 
-Requires at least GNU make 4.3, for Grouped Targets support [1].
+5.2.10:
+* Fixed a bug in Django 5.2 where data exceeding max_length was silently
+  truncated by QuerySet.bulk_create on PostgreSQL.
 
-[1] https://lists.gnu.org/archive/html/info-gnu/2020-01/msg00004.html
-Reviewed-by: Silvio Fricke <silvio.fricke@gin.de>
-Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
+* Fixed a bug where management command colorized help (introduced in
+  Python 3.14) ignored the --no-color option and the DJANGO_COLORS setting.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- ...sysinfo-generation-in-parallel-build.patch | 69 +++++++++++++++++++
- .../sysinfo.sh-Fix-typo-in-rm-command.patch   | 27 ++++++++
- .../nbench-byte/nbench-byte_2.2.3.bb          |  4 +-
- 3 files changed, 99 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
- create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
+ .../{python3-django_5.2.9.bb => python3-django_5.2.11.bb}       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-django_5.2.9.bb => python3-django_5.2.11.bb} (60%)
 
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
-new file mode 100644
-index 0000000000..b5f60b1c87
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
-@@ -0,0 +1,69 @@
-+From 26e13ce45ffeb2f233d1dd7e4321cb65ab10b0fb Mon Sep 17 00:00:00 2001
-+From: Daniel Klauer <daniel.klauer@gin.de>
-+Date: Fri, 6 Feb 2026 17:13:49 +0100
-+Subject: [PATCH] Makefile: Fix sysinfo generation in parallel build
-+
-+sysinfo.sh non-atomically overwrites both sysinfo.c and sysinfoc.c,
-+so it should only be invoked once, not twice in parallel.
-+
-+Requires at least GNU make 4.3, for Grouped Targets support [1].
-+
-+Should fix random build failures like this one:
-+
-+| NOTE: make -j 20 -e MAKEFLAGS=
-+[...]
-+| ./sysinfo.sh x86_64-gin-linux-gcc [...]
-+| ./sysinfo.sh x86_64-gin-linux-gcc [...]
-+[...]
-+| x86_64-gin-linux-gcc [...] \
-+| 	-c nbench0.c
-+| In file included from nbench0.c:219:
-+| sysinfo.c: In function 'main':
-+| sysinfo.c:11:1: error: 'fer' undeclared (first use in this function)
-+|    11 | fer);
-+|       | ^~~
-+| sysinfo.c:11:1: note: each undeclared identifier is reported only once for each function it appears in
-+| sysinfo.c:11:4: error: expected ';' before ')' token
-+|    11 | fer);
-+|       |    ^
-+|       |    ;
-+| sysinfo.c:11:4: error: expected statement before ')' token
-+| In file included from nbench0.c:317:
-+| sysinfoc.c:5:4: error: expected ';' before ')' token
-+|     5 | fer);
-+|       |    ^
-+|       |    ;
-+| sysinfoc.c:5:4: error: expected statement before ')' token
-+| make: *** [Makefile:115: nbench0.o] Error 1
-+| make: *** Waiting for unfinished jobs....
-+| ERROR: oe_runmake failed
-+| WARNING: exit code 1 from a shell command.
-+NOTE: recipe nbench-byte-2.2.3-r0: task do_compile: Failed
-+
-+[1] https://lists.gnu.org/archive/html/info-gnu/2020-01/msg00004.html
-+Upstream-Status: Inactive-Upstream [lastrelease 2003, no vcs]
-+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
-+---
-+ Makefile | 6 ++----
-+ 1 file changed, 2 insertions(+), 4 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index edd9ea2..66b2ddc 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -95,10 +95,8 @@ DEFINES= -DLINUX $(NO_UNAME)
-+ 
-+ ##########################################################################
-+ # For LINUX-like systems with gcc
-+-sysinfoc.c: Makefile
-+-	./sysinfo.sh $(CC) $(MACHINE) $(DEFINES) $(CFLAGS)
-+-
-+-sysinfo.c: Makefile
-++# sysinfo.sh generates both sysinfo.c and sysinfoc.c
-++sysinfo.c sysinfoc.c &: Makefile
-+ 	./sysinfo.sh $(CC) $(MACHINE) $(DEFINES) $(CFLAGS)
-+ 
-+ ##########################################################################
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
-new file mode 100644
-index 0000000000..c6a37c3e56
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
-@@ -0,0 +1,27 @@
-+From 0019af6eb5188f5111a0f2008c0002b545382b67 Mon Sep 17 00:00:00 2001
-+From: Daniel Klauer <daniel.klauer@gin.de>
-+Date: Fri, 6 Feb 2026 17:14:53 +0100
-+Subject: [PATCH] sysinfo.sh: Fix typo in rm command
-+
-+Upstream-Status: Inactive-Upstream [lastrelease 2003, no vcs]
-+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
-+---
-+ sysinfo.sh | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/sysinfo.sh b/sysinfo.sh
-+index 57754fe..1373699 100755
-+--- a/sysinfo.sh
-++++ b/sysinfo.sh
-+@@ -61,7 +61,7 @@ if ($* hello.c -o hello) >/dev/null 2>&1; then
-+   fi
-+ fi
-+ 
-+-rm -f sysinfo.crm sysinfoc.c hello
-++rm -f sysinfo.c sysinfoc.c hello
-+ 
-+ # this bombs out on Ultrix which expect "cut -d"
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-index da03ebb291..538ff24c0a 100644
---- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-+++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-@@ -10,7 +10,9 @@ SECTION = "console/utils"
- SRC_URI = "https://fossies.org/linux/misc/old/${BP}.tar.gz \
-            file://nbench_32bits.patch \
-            file://Makefile-add-more-dependencies-to-pointer.h.patch \
--           file://0001-Fix-build-error-with-gcc-15.patch"
-+           file://0001-Fix-build-error-with-gcc-15.patch \
-+           file://Makefile-Fix-sysinfo-generation-in-parallel-build.patch \
-+           file://sysinfo.sh-Fix-typo-in-rm-command.patch"
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.2.9.bb b/meta-python/recipes-devtools/python/python3-django_5.2.11.bb
+similarity index 60%
+rename from meta-python/recipes-devtools/python/python3-django_5.2.9.bb
+rename to meta-python/recipes-devtools/python/python3-django_5.2.11.bb
+index c0aff44a78..edf9aabb79 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.2.9.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.2.11.bb
+@@ -1,7 +1,7 @@
+ require python3-django.inc
+ inherit python_setuptools_build_meta
  
- SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
+-SRC_URI[sha256sum] = "16b5ccfc5e8c27e6c0561af551d2ea32852d7352c67d452ae3e76b4f6b2ca495"
++SRC_URI[sha256sum] = "7f2d292ad8b9ee35e405d965fbbad293758b858c34bbf7f3df551aeeac6f02d3"
  
--- 
-2.43.0
-
+ RDEPENDS:${PN} += "\
+     python3-sqlparse \
 
