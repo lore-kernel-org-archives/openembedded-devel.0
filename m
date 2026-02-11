@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA417E9E2F8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA3DEE9E2F7
 	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 12:01:06 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17594.1770811258123761869
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17597.1770811261977534163
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Feb 2026 04:00:58 -0800
+ Wed, 11 Feb 2026 04:01:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VQaJzvle;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-81f4f4d4822so907533b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 04:00:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gk964mzJ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-8249fc726e9so291347b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 04:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770811257; x=1771416057; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770811261; x=1771416061; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oV0QsS4DQ/q2kdTa3S57naw47ldaGMO9qMIKGGtj1mM=;
-        b=VQaJzvleTJpwqjtN/ecPojHnxuvcTMmsAJWr/wDVnr8VpAgcA9VSXDA1B1yrYr7Vv6
-         wv/MDp6q0PP0Fp7iJ5KHfI8zIXaeJ7g5992r6e+wjJdVu9beeUT+LRFlvnIN9BvuGDAI
-         SB4wyMbwIMc5OOLWaP0wKXqJLNam4rLpBhC2zqSEPcicB+aG/KiLHnKFmBqfA17PJgVQ
-         TxNKFhZeGohiS+AHzEIm0hGJkdvKhdJmvm0tPz+aTWqT2PSbE43msg0/60UVU4A/RlcI
-         7n0pF8aObIxMKEBXSH0AHp3YAxSFonl97vTkNVMQOMJ2Zwdwj27HsKl4UbYvEk46v/AF
-         7Vgg==
+        bh=FJSZNDOx4Q9tXEImrn9xaKvki9n2UTfSh9OZJPSZiXc=;
+        b=gk964mzJDcie9Dw0gy2E+LtueEV7PPePNEcJ/Km0llxbWFBuluFeyFGIEy+JMVyecJ
+         +nIZLpqrXdY9BMcuDG0nflDkgGib1igZGTC5jXBgXeMnaiaOXXfRs1W8JU/VbUgAeHJH
+         Z7uFM3nMMn9TB/HW7GauQ2LE1Ff8wF3S+yxtQp7idWq2bwURX+wD4h07AlcTpVUDo52n
+         YxU+ZA9pkJA2Tjqj6PSfQlf4ASIpdG5wbIM3TYmMuDKvvcjSQkkh1KPg3u5kFzjoRn3R
+         Tf/vbUnJO0zn+BAcRJHgbiy7yB6Cx1Q0oGYHNf/1YuX2SlYXPHSuo+QRd2RKla6AAGkn
+         +UgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770811257; x=1771416057;
+        d=1e100.net; s=20230601; t=1770811261; x=1771416061;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=oV0QsS4DQ/q2kdTa3S57naw47ldaGMO9qMIKGGtj1mM=;
-        b=c6+fv3dEhQeesWSNk2Maeg40Es4jet7D04f71szlln16m1k734L0u3bJJVKPktqBLy
-         F5uugtvN8ydpbVS4lMzdtY79BtIz/TPFSEfnSqTvuxq8TxHef8XZh5UsVYDAXdSMuJLu
-         76G388vBbuq90xl4ESeLhCAfF2EKWCP22tonGzyPVR6MmGyCYtWAbmpFTSXS4ztmm4lM
-         6gkD8UMTbPnHp+MAR2J72hW+mFo2ET0ZbYSdIegad8DGAu0b+nVVUkKTz8jyQGOm6a5d
-         wUeHm71Gx1UPvZbY0cOkf7Ly5LK7seNMHTvlLokWVQxKZ7Z0XasGsTwbtMeOEWZ/DI4Y
-         I+LQ==
-X-Gm-Message-State: AOJu0YxgvXdnmbYj/PZIoVk11ajgx8qLU0cvMrhpuJMwumHmtOe3kG6d
-	0Mu4N6Hek1shSgcvkm9scdCXqhfp40mkbQeHyzDcSgJABmGTtdbep5zld0141Q==
-X-Gm-Gg: AZuq6aIaSlRTCCSyaLGbVjudiUufnvd5d189Fzo7vEStvXcc1hwKPk+BGwVBzNNsHQc
-	hHkuvxXH0aDATBReYoaGQ8XnRfzHGFQXYuHQObcEjAkAl0eP5bS3sjcQg6XJqz1pTBrnZ8DRBBh
-	BVJoTTSAlR4W/Mkt6aJ2pi6s08w9jWWbZZKBnrKsXAaw7oEbxslE2YMByBT9DP2vIvFJjXzrOxf
-	8hPti/nW4ulRwL71XLEJPTniLCBCVpFW1tWCjEMRi23x+1Dl+BnKAkXQSgitzX9uOzw2oz1U+vW
-	CHF3eHQz+LrbbgvxzwGX1DYFbWEEke+Tdfv7YNh23K7ZJw9EUrz19o9m/t72JNNIg8ywe+chKZz
-	m4bvVlnlLxP9kLr/tPNlZC6ZB9Ici0bTFX/aGXdmAAoyLqBiPKKvB+Xs5LUym7gchZiQPZDLuh/
-	wHPMEXzwJb4dd8hqbMW3gRcDtzXwHSGCNI1tU=
-X-Received: by 2002:a05:6a00:450a:b0:822:7481:6c7b with SMTP id d2e1a72fcca58-82441753ca0mr17774626b3a.49.1770811257291;
-        Wed, 11 Feb 2026 04:00:57 -0800 (PST)
+        bh=FJSZNDOx4Q9tXEImrn9xaKvki9n2UTfSh9OZJPSZiXc=;
+        b=h+4LVT1v9E57EYZyJXkJTwTLy7yNR1qsDBdlJvKW4j/mU4g5l9OSbYJQuIqbmveknk
+         BO0hMzjN7wUsjHslZk1lMUsGsKNnugxPVbtNyIrsU8XK2Tu3yxFjnh2VWVBOpn07040G
+         1Flpg285wq54IPiRFclbEZftXJl6bbzjBzS/mMLctNOlWN7i6brZUHYTYRwbP+cJeZfS
+         Ap4xboacr5LRCE2i2q3MeKKPSwkQQRPDaw/ioBw3seW+qSc3wTKO/s38tI8Uq/sE9uiV
+         un4+o2lUXUs5x2IshKZPXTOEry2RJwIrI8AZ45Pz/+7gm0ZA8tzG6sAGJcw3smibVLC/
+         qJJg==
+X-Gm-Message-State: AOJu0YzaMB5Xli/5oQk4kntPJ2BygL7dViz0+e9/Rv1thzy6w9UD/Hat
+	eS4z6QCrn1E3DqFM/59T0auEErAsp1gSEFY8fyA5Z4o9zrRQFoB0yWnN+4LupA==
+X-Gm-Gg: AZuq6aJf9aeBtwlYctjBkkUG45RyYQ3hKBYinmq1HmfaZGBSv+Z4CwaDitpXIfM0XGQ
+	5wP68ahbGRZPhc24weerUI3FIrw7EvKg7uL/1F6mM2UP/TsWW3jqxzbALTdjDZ4AUfBOJI0HO6/
+	DjzI+u5IwMRMH6LLhxphAZlGQKonqp6cM9GGsC3VF3bhDf5JwFEEgnOuFihtr4XWGH9r3SwQp9y
+	eivbFtmf48rW35SeM+YQS/BYcrGLtwuCb/uWA7VJDDXGpsJKyMID3snOeK9ppbGte9jMkf2gq88
+	DcIYm8O4y6g9naKb06PAQvKBUZkZCGCCv+OWW3kQ8pYUiHazZXQyZhRPMwN+T44Emg7RqAi/8vM
+	4PEo0OzW+Y5HlbkQ1E55BWNECpvf2MNEvkn8XhQnyrA44DV8nRtDPIMRgOp2FaVeWsG56GThC5/
+	RvxoATtPn9Yw5e3jKneVrkuzhr5lXw4hboJ0g=
+X-Received: by 2002:a05:6a00:4c1a:b0:81f:be3c:37e4 with SMTP id d2e1a72fcca58-8249aecc919mr2049104b3a.27.1770811260681;
+        Wed, 11 Feb 2026 04:01:00 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.33])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8249e3669d8sm1805831b3a.2.2026.02.11.04.00.54
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8249e3669d8sm1805831b3a.2.2026.02.11.04.00.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Feb 2026 04:00:56 -0800 (PST)
+        Wed, 11 Feb 2026 04:00:59 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>,
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 6/8] usbids: upgrade 2025.09.15 -> 2025.12.13
-Date: Thu, 12 Feb 2026 01:00:23 +1300
-Message-ID: <20260211120025.4190831-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 7/8] libtracefs: upgrade 1.8.2 -> 1.8.3
+Date: Thu, 12 Feb 2026 01:00:24 +1300
+Message-ID: <20260211120025.4190831-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
 References: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
@@ -69,35 +69,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 12:01:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124334
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124335
 
-From: Jason Schonberg <schonm@gmail.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5aca0a216d07a1876ed6e9d22f34456f0595ed64)
+(cherry picked from commit 0fbbddd53762d6cb273e898dbea6838a8af468d5)
+
+Changes:
+https://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git/tag/?h=libtracefs-1.8.3
+
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb} (83%)
+ .../libtracefs/{libtracefs_1.8.2.bb => libtracefs_1.8.3.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-kernel/libtracefs/{libtracefs_1.8.2.bb => libtracefs_1.8.3.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-similarity index 83%
-rename from meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
-rename to meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-index 925a8ddda9..ebaa1d1f99 100644
---- a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
-+++ b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+diff --git a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+similarity index 94%
+rename from meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb
+rename to meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+index 35eabc7b11..8f27db9bf0 100644
+--- a/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.2.bb
++++ b/meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97
+ SECTION = "libs"
+ DEPENDS = "libtraceevent bison-native flex-native"
  
- SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
- 
--# September 15, 2025
--SRCREV = "18b3055a9819a341ac2ff957f0b92f564d0d5d6e"
-+# December 13, 2025
-+SRCREV = "5de1427442504bc8e28d35cca5397d64ea177456"
- 
- 
- do_install() {
+-SRCREV = "03790961bf2e83b7b61fb6d326fb1076a4293adb"
++SRCREV = "6fad6a14ba0d4c4b437d9e4eed7098d4bb07b4fc"
+ SRC_URI = "git://git.kernel.org/pub/scm/libs/libtrace/libtracefs.git;branch=${BPN};protocol=https \
+            file://0001-makefile-Do-not-preserve-ownership-in-cp-command.patch \
+            "
 
