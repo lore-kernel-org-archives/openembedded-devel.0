@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C271BE9E2F4
-	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 12:00:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA417E9E2F8
+	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 12:01:06 +0000 (UTC)
 Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17421.1770811255362702160
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17594.1770811258123761869
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Feb 2026 04:00:55 -0800
+ Wed, 11 Feb 2026 04:00:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fNevDzXY;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VQaJzvle;
  spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-823081bb15fso2648728b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 04:00:55 -0800 (PST)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-81f4f4d4822so907533b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 04:00:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770811254; x=1771416054; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1770811257; x=1771416057; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5qpCwHFeQBPdItq8hLGh3vQZ3i3fvGmeWGJ463D6tYM=;
-        b=fNevDzXYiXXy37Ae6k4wihSr51pHIjvMzNYTKpHz8764XJzRwcsYDbY/29jNCw6ZOH
-         tqMeVrxAGWAfIPlvwzOGwEHA/RqLJRrUhi8HWqKnFEDedonTA9EoaA6fIwf7Pij0Jyi6
-         SHqIdeexpIk+tYfy1n4M43k+qpAoGy+WhraGnN25gjc/gt7F3pK3mtWFo08FV1xIJS5R
-         wtCu730qfKaad+H6GMSbsQXGdwT3+71dK6mwG/droo+0g+Cy5zX/N+MMILp0qQRhqCoQ
-         HfoTyshH85SdJyYv8sDLgdoj54DvjY9yHulZvPdTktFYPGfkHUYaa/jYqIplPaEuaWd7
-         Iyug==
+        bh=oV0QsS4DQ/q2kdTa3S57naw47ldaGMO9qMIKGGtj1mM=;
+        b=VQaJzvleTJpwqjtN/ecPojHnxuvcTMmsAJWr/wDVnr8VpAgcA9VSXDA1B1yrYr7Vv6
+         wv/MDp6q0PP0Fp7iJ5KHfI8zIXaeJ7g5992r6e+wjJdVu9beeUT+LRFlvnIN9BvuGDAI
+         SB4wyMbwIMc5OOLWaP0wKXqJLNam4rLpBhC2zqSEPcicB+aG/KiLHnKFmBqfA17PJgVQ
+         TxNKFhZeGohiS+AHzEIm0hGJkdvKhdJmvm0tPz+aTWqT2PSbE43msg0/60UVU4A/RlcI
+         7n0pF8aObIxMKEBXSH0AHp3YAxSFonl97vTkNVMQOMJ2Zwdwj27HsKl4UbYvEk46v/AF
+         7Vgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770811254; x=1771416054;
+        d=1e100.net; s=20230601; t=1770811257; x=1771416057;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=5qpCwHFeQBPdItq8hLGh3vQZ3i3fvGmeWGJ463D6tYM=;
-        b=G05e9fcf9CMOpXKSl9DV4beHLi0ty72HUvXPPHk5x+7u03sstqkRgd7DdNGi6R8NkR
-         go98GIUsFxowlY7JxOCkUc5SoHUXVhFvh4k9i2qupU8FqpuyYLkur5iqg5Ovbb74Rak1
-         g+F2hcnOdi2mgi6pn5WgJephqxuL00NlsOtRjNlM5BPfH16EN6Dv21jvjsBmkfVN4jMa
-         h1REW6gPLZbZmt5Fh4PSEacfiIAq68oWq2oZGxxb+1SLy0XZXkL35nY+oc1KluQbqC5L
-         CQ4UYr49FhS9J9L8QWCQWd/nZxHlK4a8TMKmAlVfC/LSbXPAtD2pi41J0dbu3zCyFTFd
-         5rAQ==
-X-Gm-Message-State: AOJu0Yx/aPp/YMHN7u44Ko9QgoM6PuetD9Osg7TtpjDOr7Kol/A+7PFo
-	kSMq56NO7cWiIxQEs7fBlAyDv7ahZ1wBWvAWkF3x4NTrJu8HL/ouxAh2KkycNw==
-X-Gm-Gg: AZuq6aJ3EstKndeHuL439Z1yRkfxKMHylTZlDDlOKWEEe3ViPErQ0vzHEjlqH3DexnI
-	06ufW5Gt3OKmAmn96Cr8rP/o0K7WJWBa5WTUiHr2xN02KRzB7qFdIgcRqW5ANcDzhWdj5ue7HlA
-	7WgjKZQotoDo74UaFDuaraF7aXwwQYywoutsOe37aufrN9QSeepk6i7n817wwweYWur2fPXDO07
-	5CVBLafsU5dOWY91hELYCFnaKPyXmRWf9NgtfhfqVDqwZJpUvIE9RVYDqYfmJkdhxqyn2p4r/9r
-	NAA4W1t9hAqnhBFX9nsOyxFIUsDJJFDNzYXHZWSlqQLBDl6sEJNUeJPbjIR8BOilsBd2yedOEO9
-	0ZYfZQgI/LRAFsFvRKpxO5sPwR1KO0P40QOBAzI7Z78qajQpGINhxgunTZx0SD0svCFx/rAbW51
-	8tvuB2TTcLEpIE3VZDj00FT3UUgcooGmQZy6g=
-X-Received: by 2002:a05:6a00:238b:b0:81c:717b:9d39 with SMTP id d2e1a72fcca58-8249b13565amr2017031b3a.56.1770811254511;
-        Wed, 11 Feb 2026 04:00:54 -0800 (PST)
+        bh=oV0QsS4DQ/q2kdTa3S57naw47ldaGMO9qMIKGGtj1mM=;
+        b=c6+fv3dEhQeesWSNk2Maeg40Es4jet7D04f71szlln16m1k734L0u3bJJVKPktqBLy
+         F5uugtvN8ydpbVS4lMzdtY79BtIz/TPFSEfnSqTvuxq8TxHef8XZh5UsVYDAXdSMuJLu
+         76G388vBbuq90xl4ESeLhCAfF2EKWCP22tonGzyPVR6MmGyCYtWAbmpFTSXS4ztmm4lM
+         6gkD8UMTbPnHp+MAR2J72hW+mFo2ET0ZbYSdIegad8DGAu0b+nVVUkKTz8jyQGOm6a5d
+         wUeHm71Gx1UPvZbY0cOkf7Ly5LK7seNMHTvlLokWVQxKZ7Z0XasGsTwbtMeOEWZ/DI4Y
+         I+LQ==
+X-Gm-Message-State: AOJu0YxgvXdnmbYj/PZIoVk11ajgx8qLU0cvMrhpuJMwumHmtOe3kG6d
+	0Mu4N6Hek1shSgcvkm9scdCXqhfp40mkbQeHyzDcSgJABmGTtdbep5zld0141Q==
+X-Gm-Gg: AZuq6aIaSlRTCCSyaLGbVjudiUufnvd5d189Fzo7vEStvXcc1hwKPk+BGwVBzNNsHQc
+	hHkuvxXH0aDATBReYoaGQ8XnRfzHGFQXYuHQObcEjAkAl0eP5bS3sjcQg6XJqz1pTBrnZ8DRBBh
+	BVJoTTSAlR4W/Mkt6aJ2pi6s08w9jWWbZZKBnrKsXAaw7oEbxslE2YMByBT9DP2vIvFJjXzrOxf
+	8hPti/nW4ulRwL71XLEJPTniLCBCVpFW1tWCjEMRi23x+1Dl+BnKAkXQSgitzX9uOzw2oz1U+vW
+	CHF3eHQz+LrbbgvxzwGX1DYFbWEEke+Tdfv7YNh23K7ZJw9EUrz19o9m/t72JNNIg8ywe+chKZz
+	m4bvVlnlLxP9kLr/tPNlZC6ZB9Ici0bTFX/aGXdmAAoyLqBiPKKvB+Xs5LUym7gchZiQPZDLuh/
+	wHPMEXzwJb4dd8hqbMW3gRcDtzXwHSGCNI1tU=
+X-Received: by 2002:a05:6a00:450a:b0:822:7481:6c7b with SMTP id d2e1a72fcca58-82441753ca0mr17774626b3a.49.1770811257291;
+        Wed, 11 Feb 2026 04:00:57 -0800 (PST)
 Received: from NVAPF55DW0D-IPD.. ([147.161.217.33])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8249e3669d8sm1805831b3a.2.2026.02.11.04.00.51
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8249e3669d8sm1805831b3a.2.2026.02.11.04.00.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Feb 2026 04:00:53 -0800 (PST)
+        Wed, 11 Feb 2026 04:00:56 -0800 (PST)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Liu Yiding <liuyd.fnst@fujitsu.com>,
+Cc: Jason Schonberg <schonm@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 5/8] minizip-ng: 4.0.8 -> 4.0.10
-Date: Thu, 12 Feb 2026 01:00:22 +1300
-Message-ID: <20260211120025.4190831-5-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 6/8] usbids: upgrade 2025.09.15 -> 2025.12.13
+Date: Thu, 12 Feb 2026 01:00:23 +1300
+Message-ID: <20260211120025.4190831-6-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
 References: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
@@ -68,86 +68,36 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 12:00:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124333
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 12:01:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124334
 
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+From: Jason Schonberg <schonm@gmail.com>
 
-1.Changelog:
-  https://github.com/zlib-ng/minizip-ng/releases/tag/4.0.10
-
-2.Remove 0001-crypt.h-Remove-register-keyword.patch as it was merged upstream.
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5f6dbb284a16d3e0e85bb9ece7566703c213ba63)
+(cherry picked from commit 5aca0a216d07a1876ed6e9d22f34456f0595ed64)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...0001-crypt.h-Remove-register-keyword.patch | 35 -------------------
- ...nizip-ng_4.0.8.bb => minizip-ng_4.0.10.bb} |  3 +-
- 2 files changed, 1 insertion(+), 37 deletions(-)
- delete mode 100644 meta-oe/recipes-core/minizip-ng/minizip-ng/0001-crypt.h-Remove-register-keyword.patch
- rename meta-oe/recipes-core/minizip-ng/{minizip-ng_4.0.8.bb => minizip-ng_4.0.10.bb} (91%)
+ .../usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/usbids/{usbids_2025.09.15.bb => usbids_2025.12.13.bb} (83%)
 
-diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng/0001-crypt.h-Remove-register-keyword.patch b/meta-oe/recipes-core/minizip-ng/minizip-ng/0001-crypt.h-Remove-register-keyword.patch
-deleted file mode 100644
-index c471b098d4..0000000000
---- a/meta-oe/recipes-core/minizip-ng/minizip-ng/0001-crypt.h-Remove-register-keyword.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 469beab0747549599959a30188deb3b27df3a346 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Wed, 2 Apr 2025 11:19:54 +0800
--Subject: [PATCH] crypt.h: Remove register keyword
--
--Fixes:
-- | In file included from /buildarea/tmp/work/core2-64-poky-linux/minizip-ng/4.0.8/git/test/test_compat.cc:17:
-- | /buildarea/tmp/work/core2-64-poky-linux/minizip-ng/4.0.8/git/compat/crypt.h:62:9: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
-- |    62 |         register int keyshift = (int)((*(pkeys + 1)) >> 24);
-- |       |         ^~~~~~~~
-- | 1 error generated.
--
--Upstream-Status: Submitted [https://github.com/zlib-ng/minizip-ng/pull/853]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- compat/crypt.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/compat/crypt.h b/compat/crypt.h
--index 41c6454..ccdd83a 100644
----- a/compat/crypt.h
--+++ b/compat/crypt.h
--@@ -59,7 +59,7 @@ static int update_keys(unsigned long *pkeys, const z_crc_t *pcrc_32_tab, int c)
--     (*(pkeys + 1)) += (*(pkeys + 0)) & 0xff;
--     (*(pkeys + 1)) = (*(pkeys + 1)) * 134775813L + 1;
--     {
---        register int keyshift = (int)((*(pkeys + 1)) >> 24);
--+        int keyshift = (int)((*(pkeys + 1)) >> 24);
--         (*(pkeys + 2)) = CRC32((*(pkeys + 2)), keyshift);
--     }
--     return c;
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb
-similarity index 91%
-rename from meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
-rename to meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb
-index cf98c0cf2e..2e7f438821 100644
---- a/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.8.bb
-+++ b/meta-oe/recipes-core/minizip-ng/minizip-ng_4.0.10.bb
-@@ -7,11 +7,10 @@ LICENSE = "Zlib"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=36964f044224efeedd694983c34e716f"
+diff --git a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
+similarity index 83%
+rename from meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
+rename to meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
+index 925a8ddda9..ebaa1d1f99 100644
+--- a/meta-oe/recipes-support/usbids/usbids_2025.09.15.bb
++++ b/meta-oe/recipes-support/usbids/usbids_2025.12.13.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
  
- SRC_URI = "git://github.com/zlib-ng/minizip-ng.git;protocol=https;branch=master \
--           file://0001-crypt.h-Remove-register-keyword.patch \
-            file://run-ptest \
- "
+ SRC_URI = "git://github.com/usbids/usbids.git;branch=master;protocol=https"
  
--SRCREV = "55db144e03027b43263e5ebcb599bf0878ba58de"
-+SRCREV = "f3ed731e27a97e30dffe076ed5e0537daae5c1bd"
+-# September 15, 2025
+-SRCREV = "18b3055a9819a341ac2ff957f0b92f564d0d5d6e"
++# December 13, 2025
++SRCREV = "5de1427442504bc8e28d35cca5397d64ea177456"
  
  
- RCONFLICTS:${PN} += "minizip"
+ do_install() {
 
