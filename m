@@ -1,109 +1,124 @@
-Return-Path: <eric.meyers15310@gmail.com>
+Return-Path: <tafil@tafhub.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58D70EE36AE
-	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 17:39:06 +0000 (UTC)
-Received: from mail-oa1-f68.google.com (mail-oa1-f68.google.com [209.85.160.68])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.50949.1770917941731145858
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66EDEEE36B4
+	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 17:54:36 +0000 (UTC)
+Received: from mail.tafhub.de (mail.tafhub.de [5.189.191.204])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.51343.1770918868135382632
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Feb 2026 09:39:01 -0800
+ Thu, 12 Feb 2026 09:54:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XFXpMwli;
- spf=pass (domain: gmail.com, ip: 209.85.160.68, mailfrom: eric.meyers15310@gmail.com)
-Received: by mail-oa1-f68.google.com with SMTP id 586e51a60fabf-4086661715cso41456fac.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 09:39:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770917941; x=1771522741; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ptw+WygcpRADyEO+oWro+3kU4V3rB+XOy9VpVxZQBTM=;
-        b=XFXpMwliIoQ7bPmUX+igTEZBsjQGvFpMPj+bljsju2LeG9PyoL3mOpuQB+KhvijwRE
-         K+nVVk4C2nFwI7oHmm2SX21eiaMwh2ZcROMV1Z9U7Nr00ReGOcNV1nzFtOwGgGWnbyP1
-         wBUDnw7fCN3dWu+sMg3V+QX5v5G05vFxjN9psqoT2grailM0nE7OuFyT5QdvbgeTjOn4
-         YeHzAd8Ru0yBFxRQQ/pp1nDGgwWvRKudR/iQakh8refr0fZ+Svn+qEKuDwSB6XwaeUGn
-         udOOJoy8aoBEGlA7vw8STDLd4uWh959o2EnXdbrpQ/gvc60bf2xxGURBru1IajF7ZMgk
-         L9CA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770917941; x=1771522741;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ptw+WygcpRADyEO+oWro+3kU4V3rB+XOy9VpVxZQBTM=;
-        b=UzrcaRt4PG0As0VQrna4tOGYdLrXGt9qS0eYaAcGi5YwBpzVSwd/muzoxkiNZTUgUT
-         +mGQPl1tVog9Pnirt5fjdkYfpJsCTw/mGqKt/uzQapqtxDjX6pxPeDwdPwTVBRRCs+lp
-         q0eQT2EgD+m7hzKLtFb6DLNia0brmSnym1ejz7QG9/iepqTkrR+jVi3ahawAO0IxilpV
-         C+yI3ewVAUMY4EZ3F+CtCpNyyOdfh6YfC/dl/wWKxIAmrnuSZoMZOCFSGsl0JGUYMGd5
-         fvNcRtX1/wtVp/26AEOa3ngMJo7B6dD2kdtaxz2dTSuA3wzBxCc/fWzN2Yo3d6Mnigmo
-         XXGg==
-X-Gm-Message-State: AOJu0Yw2FbyIoNFRlgifkWYkQg0B9ihriBKDcN1103efnq3cEfZ7Yxqv
-	X4GZ1TZrMkHyfUfDsOIyxtRjkqqF/CbYQfAICIhXTqIp8C6v0gOZglI+P6gpVaHJ
-X-Gm-Gg: AZuq6aIhlJV7UNb7/X859iZlfYjieMIn7B7uGnw9IYqXIqDQ5mo8OVIcEuh8oYkGB0a
-	9tuL8jiblF5Kdf8QZ3gF6i4ksxAW10hYVfiUyUVLxIY7F+SFB+BVBmOLrkuzb0CaA9VTowiA81/
-	6KIVqDY5ZwSoQSE/DX6NaFN45PhlqXt3JG4JlvsKR4N8x0hJIbLebsBnAhowoxa9MIBU/rSCZqj
-	QN1TwTX9sie6WJ6q95tV9g+J/xEHAQX/KHr4assTSlOdHLBzQPEI/ZBDrwQRNA25shAo4wCqHl4
-	REkpLYH2RGAPzmA0okG9hr1IO6yjK9mCDRnoozWkg4rthCrI49mU3XsG/7otSPGCSjJuqlGCFlD
-	etxJXvwGVyWcT9mIOMcY0A1IXQrzn5GYK0upuVMEP8VA1xhajKV8Ap8omps2GNsYwodQveovuaF
-	A+0nRR4fuIqjEWiP4tRMd6amg/1SkwaDNNEY/z5BipCHPegYFV3hQU6qKt9oXjKXugESilPum7y
-	+Tqom/F3ABcPrfzV61D0QtMnRB/EDOOuQ==
-X-Received: by 2002:a05:6871:3863:b0:409:784b:cb6c with SMTP id 586e51a60fabf-40ec6f42373mr2075895fac.17.1770917940690;
-        Thu, 12 Feb 2026 09:39:00 -0800 (PST)
-Received: from ACT-L-SWD024.yourbase.domain.local (c-73-168-239-54.hsd1.il.comcast.net. [73.168.239.54])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-40eaf173f5asm4307182fac.15.2026.02.12.09.38.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Feb 2026 09:39:00 -0800 (PST)
-From: Eric Meyers <eric.meyers15310@gmail.com>
-X-Google-Original-From: Eric Meyers <eric.meyers@arthrex.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=JjQrFcVw;
+ spf=pass (domain: tafhub.de, ip: 5.189.191.204, mailfrom: tafil@tafhub.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E4A0018802F4;
+	Thu, 12 Feb 2026 18:54:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
+	t=1770918865; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=NKguWops62h8esxDBHaJTGvtmLNea7S9HOWMixEkd7k=;
+	b=JjQrFcVwMvI0vRIZLfmpeLd0P/0HyV/BZE6v/10OH6FOYjKYLy4M9q4opNIizuoAx3V4UO
+	MZFihZFX9HleqI/I78ARN1iHd+VkkFKSXXgqVmPQtSX0/piKpDUhaPGRj9FGr+6WTDSiK1
+	vC2DAnM3jeZ0mj1czT1mp4eXy/+Dmk0T6PXL9n1QD45P5fU1eOqqGPSq0vFVSoS1EYrHrZ
+	Km+F5vsWIpD6hx0qMJss8dMp2KO1hSgJ+ekgOFYuAKR4Jv51Rv2v91weR9NGd/6XAVBQdU
+	dV/1pY6WRKaQGMN8bx2J1rWFR7fKF8tY5RoIPXnvI/nqQ36OWGDfIzKqG9W+0g==
+From: Tafil Avdyli <tafil@tafhub.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Eric Meyers <eric.meyers@arthrex.com>
-Subject: [meta-oe][PATCH] redis: Remove debug paths to avoid TMPDIR [buildpaths] errors
-Date: Thu, 12 Feb 2026 11:39:01 -0600
-Message-Id: <20260212173901.29309-1-eric.meyers@arthrex.com>
-X-Mailer: git-send-email 2.39.5
+Cc: Tafil Avdyli <tafil@tafhub.de>
+Subject: [meta-python][PATCH] python3-pybind11-json: fix Targets.cmake trying to reference host
+Date: Thu, 12 Feb 2026 18:54:08 +0100
+Message-ID: <20260212175408.146005-1-tafil@tafhub.de>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 17:39:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124358
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 17:54:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124359
 
-Takes similar approach to valkey recipe seen here:
+The resulting pybind11_jsonTargets.cmake in the dev-package adds an
+absolute path to python include directories in the target properties:
 
-https://github.com/openembedded/meta-openembedded/commit/1b820b98afd55c881822beb9057162dc67ecb386
+  set_target_properties(pybind11_json PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "/usr/include/python3.13;${_IMPORT_PREF=
+IX}/include"
+  )
 
-Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
+The patch removes ${PYTHON_INCLUDE_DIRS} which is set by pybind11 from
+set_target_properties to remove the poisonous host path.
+
+Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
 ---
- meta-oe/recipes-extended/redis/redis_7.2.12.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ ...p-PYTHON_INCLUDE_DIRS-from-interface.patch | 34 +++++++++++++++++++
+ .../python/python3-pybind11-json_0.2.15.bb    |  3 +-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11-=
+json/0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch
 
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-index 8abf758930..34f426457b 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-@@ -52,6 +52,11 @@ do_compile:prepend() {
- }
- 
- do_install() {
-+    # Remove debug paths to avoid TMPDIR [buildpaths] errors
-+    sed -i -e 's#${TMPDIR}##g' ${S}/${PN}-${PV}/src/redis-benchmark
-+    sed -i -e 's#${TMPDIR}##g' ${S}/${PN}-${PV}/src/redis-server
-+    sed -i -e 's#${TMPDIR}##g' ${S}/${PN}-${PV}/src/redis-cli
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json/00=
+01-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch b/meta-python=
+/recipes-devtools/python/python3-pybind11-json/0001-CMakeLists-drop-PYTHO=
+N_INCLUDE_DIRS-from-interface.patch
+new file mode 100644
+index 0000000000..e1bf82e506
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybind11-json/0001-CMak=
+eLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch
+@@ -0,0 +1,34 @@
++From 6d4af27d1b43860d8deb3d1d2b2a910e82618ac1 Mon Sep 17 00:00:00 2001
++From: Tafil Avdyli <tafil@tafhub.de>
++Date: Sat, 24 Jan 2026 09:14:03 +0100
++Subject: [PATCH] CMakeLists: drop PYTHON_INCLUDE_DIRS from interface
 +
-     export PREFIX=${D}/${prefix}
-     oe_runmake install
-     install -d ${D}/${sysconfdir}/redis
-@@ -69,8 +74,12 @@ do_install() {
-         sed -i 's!daemonize yes!# daemonize yes!' ${D}/${sysconfdir}/redis/redis.conf
-         sed -i 's!supervised no!supervised systemd!' ${D}/${sysconfdir}/redis/redis.conf
-     fi
++Including PYTHON_INCLUDE_DIRS in the INTERFACE list caused a hard-coded
++Python include directory (e.g. /usr/include/python3.13) to appear in the
++generated Targets.cmake file. This resulted in a CMake configuration
++error when the path did not exist:
 +
++    Imported target "pybind11_json" includes non-existent path
++      "/usr/include/python3.13"
 +
- }
- 
-+INSANE_SKIP:${PN} += "already-stripped"
++pybind11_json is header-only and does not use Python headers, so the
++include path should not be exported.
 +
- CONFFILES:${PN} = "${sysconfdir}/redis/redis.conf"
- 
- INITSCRIPT_NAME = "redis-server"
++Upstream-Status: Submitted [https://github.com/pybind/pybind11_json/pull=
+/77]
++Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
++---
++ CMakeLists.txt | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 0be4838..4b305e4 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -45,7 +45,6 @@ add_library(${PROJECT_NAME} INTERFACE)
++=20
++ target_include_directories(${PROJECT_NAME}
++                            INTERFACE
++-                           ${PYTHON_INCLUDE_DIRS}
++                            $<BUILD_INTERFACE:${PYBIND11_JSON_INCLUDE_DI=
+R}>
++                            $<INSTALL_INTERFACE:include>)
++=20
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json_0.=
+2.15.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.1=
+5.bb
+index 8ad7dba76a..2a030af988 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0e25ff0ec476d0=
+6d366439e1120cce98"
+=20
+ SRCREV =3D "32043f433ed987b2c2ce99d689ec337bcbd4ba95"
+ SRC_URI =3D "git://github.com/pybind/pybind11_json;branch=3Dmaster;proto=
+col=3Dhttps \
+-           file://d72ad4df929bc9d0882298fc1f85ecf589456ff6.patch"
++           file://d72ad4df929bc9d0882298fc1f85ecf589456ff6.patch \
++           file://0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interfac=
+e.patch"
+=20
+ DEPENDS +=3D "nlohmann-json python3-pybind11"
+=20
 
