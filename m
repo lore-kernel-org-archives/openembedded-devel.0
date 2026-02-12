@@ -1,148 +1,193 @@
-Return-Path: <rsangam@mvista.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7255AE9E316
-	for <webhook@archiver.kernel.org>; Wed, 11 Feb 2026 14:36:07 +0000 (UTC)
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20234.1770820561194931896
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B8D6E9E31B
+	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 01:08:21 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.34508.1770858493627497035
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Feb 2026 06:36:01 -0800
+ Wed, 11 Feb 2026 17:08:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=PapA9aYX;
- spf=pass (domain: mvista.com, ip: 74.125.82.50, mailfrom: rsangam@mvista.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-1271195d2a7so5358684c88.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 06:36:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RNNfPD3x;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48039fdc8aeso16729055e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 17:08:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1770820560; x=1771425360; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fppuc5DS6GKCWot2aNP+FhQnrBl/SP9frOm8HpcK4TI=;
-        b=PapA9aYXDRpd8jpVemT1LGQG/+zRBstymgm1YdJeUj5/g9zR8swg0LkR9tw+twsStb
-         US1VtOSik22rNCH4htsXziT+olHiEB9QD6/n6PMeCFAoumzZ2J5WLJkHi8yV9S9/vOKU
-         GfsNzE4CWZKfHZ2IV8Ya83eT2EFjRQZXCGdhw=
+        d=gmail.com; s=20230601; t=1770858492; x=1771463292; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QaNR1JlF5A6zJL4i2Jl9u+/IlhtiK/IUKB57H1NXiok=;
+        b=RNNfPD3xUlmJ+/6aDAX0VheQUb5DQ6KZPoMwY81/oHthiI3WUSV8UTjXzvo6Da+vVK
+         YS5tM0C7OW7y8Zb+VctE4+TwGvvjMPkalfMI/cIef0BAR+2kRwQDlzC20z1j/IeeryXO
+         IYX1PHJThkB9pIzn3KdKp6jpg7egl0/CJWz50oZypr7lc6FaOyuPaPDi17kdn6+1KkSz
+         wjxNcbWn9g8ue2oUL35xzWaXGShpufcrkV0P15b6Wvm25WVS0mss0LN3irN1qdzdOo4O
+         YLcZO1c8MGbP/FjA35U0ADHjRYW0xy+UumQWg17B5k9PDNnZ16+fM57a3Z9XtN9VEZz3
+         ofbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770820560; x=1771425360;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fppuc5DS6GKCWot2aNP+FhQnrBl/SP9frOm8HpcK4TI=;
-        b=FA92T1q0YxlkaNhIp5Krdbpo0D7KsUN+RSeI/Ql8E65IBa6yZ9m8LhFD/caQcsQMD/
-         v4oiL1FuZdU9g7d5EnaweWpxoaWrPkPfNikIHFti0Cfgd/YybHV1jP2B8Vc4xXHgPRZx
-         zJ8tfSLgVki7VgS3VZlZ1V67r9Yf0yQ3AVptcwlCIPous7LS6EFZNs4+1bLxYsO2LuCr
-         uUsKFBDw4JVhoMIKtX46tbjFNx1n7J2hU0E40633EcVeI+Tv6gNGMo3fb/TVK0rM0Yim
-         zymRM0jXicNzcda9gD8yf/WS/nPLLZFIhoc/y9EvmVp6w7kuVnsFf7sDLnKuPXiw78yZ
-         taXg==
-X-Gm-Message-State: AOJu0Yz/Uvq7htFaQ4X5i2v2vd3BN/zz6r8yFipauim7fO6xRk5CudqC
-	seNXxxlN5ZqEwFiNqeY5FZCXGjRySUayrP2j2Hqe6ZDp61pNUl0T7RYpGPSgZ3ciUzgJ2IJi42p
-	i3tKFuNg=
-X-Gm-Gg: AZuq6aIcjr1RcdPsHOP0GQGtuy28L2n7Xwnw/UHCjFd+EL2AuNc4h2lmm+Ss4Y/acs3
-	y49039F9iNyyk0A0eoztU3aAQfzxlsZzPdTGvHwyYfFTs2YgsCwCQS5rBxh48LBIFxhYaPoZej0
-	Vq8o6nnSe2NdOKZFfh6VPQJJxcg6kMfjBrCF8bvmqKE2lbeh3zgyds+MxCz37zLPvdCkPKuWC9b
-	NcWBWzY7ZAzEtQI0IMd7sV7QX3Ssz7KD2GGFKM/GM60bXtjcea8C1nHdNbQqadaiCTLRgYojifm
-	S5PaKWtGPIjtBVXXkT4aiiRmuJo03v72rM4MoMXEu68bbGOVPsuTQc9yFbpCIlwi11iNYEa2Rr2
-	Zp23mNy89OCN/YYp6SQzf8eckAs8fIwRw9xKcrZMoZ7P6qeWjFjgHqwOib0y2I365pdq1it1fBt
-	AnzZ/YvajTsriVWeagpDex7HOp4OIKvmiBrBpt7ZsI5auHG7n4ZfEeUkAu
-X-Received: by 2002:a05:7022:ba0:b0:119:e569:f27f with SMTP id a92af1059eb24-127299a1e0amr1139318c88.40.1770820560324;
-        Wed, 11 Feb 2026 06:36:00 -0800 (PST)
-Received: from MVIN00040.mvista.com ([2405:201:d00d:417b:59fd:c9d9:8cbf:b47f])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2ba9dd00adcsm1336380eec.32.2026.02.11.06.35.58
+        d=1e100.net; s=20230601; t=1770858492; x=1771463292;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QaNR1JlF5A6zJL4i2Jl9u+/IlhtiK/IUKB57H1NXiok=;
+        b=v74ftH73ehzcegZHgrcmS2JkekkmxujR1BwW8SgmCB+L3fTAyPRi+w8L3BcRyhCcH+
+         CLDea7GSMp0MayzgxvDCREC4ml5EBPQimk1Jjcs15t8GboH8/mWn9InwrWxzXuOOomRO
+         kYaWopNMWvXwGj1spe7TJgAVVu0udmGSF56q1YB5HT5Mil3vOpp1FLLGXkKISwoCrlxW
+         sC0wtF0pc6V2KgTpyNg1yHGhNP9NsaezQ1wE/UGCeTf/wQIErWpCA9xpuGM5alRUwc8I
+         zx4tcHDKF6/9fBqrplJqmyZF1H3QMCUrLWErI94DA++S3kSI7LZOPptZQUEXN2zScVkB
+         HLjQ==
+X-Gm-Message-State: AOJu0YyuRKlrypb50BpOk1hY9j/DXexU0xDhKduOaY1gDQY7VdnsRIer
+	2xQOvQm6p4ltBBh1+L7sAactavScrTb5/YuycwUOD+zh5EzP5fJ5+mBr+18nYw==
+X-Gm-Gg: AZuq6aI2VrsrU4l8FiTpqeV41KsLiu75vKW/tjUC1lYESkudpt1sYMjMF44glOGtznb
+	c7wgzYGkJsRK2R4nUiJyPrvz9VwePW3FKIeqXRujdTmK6Im51DJi0Y+vVHZ/aEVAUfDziCcVLSg
+	UZXCSVSIv8b5cggRH3NFNBbvUUdgXVSM70FQrVBxkX9aHw+v+LoWgYNwQ9JHlOV3NX3P6Ux9D4g
+	+3AVuyk7s5Ce3U2fmDKuRggJMQECeGKtjB/SFXCp2Bpk/aUhWEZN5XguwI6hjJb74xv/xvDxhGB
+	6hBfi5Cx1AoFKTA1w5vK9cdEhOQcuBRCS+vxyy/wqKTJb/Xl3eGA19sOxk8T4iPYxFX468C1uhB
+	MgY6zENt4i52KF7WoUwIEhC7v0QNEI3gMhEFAF0JkL+0AYtx1lacHbsTRdhbhSBzMch1o802+rs
+	+t68IxHqJ0CemUQSCl94AA
+X-Received: by 2002:a05:600c:818c:b0:483:2c98:435e with SMTP id 5b1f17b1804b1-4836717eb60mr5719635e9.34.1770858491425;
+        Wed, 11 Feb 2026 17:08:11 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d82a4c4sm291954905e9.10.2026.02.11.17.08.10
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Feb 2026 06:36:00 -0800 (PST)
-From: Rohini Sangam <rsangam@mvista.com>
+        Wed, 11 Feb 2026 17:08:10 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Rohini Sangam <rsangam@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] strongswan: Security fix for CVE-2025-62291
-Date: Wed, 11 Feb 2026 20:05:53 +0530
-Message-Id: <20260211143553.106263-1-rsangam@mvista.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-oe][PATCH] webkitgtk3: upgrade 2.48.7 -> 2.50.5
+Date: Thu, 12 Feb 2026 02:08:09 +0100
+Message-ID: <20260212010809.1597122-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 14:36:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124340
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 01:08:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124341
 
-CVE fixed:
-- CVE-2025-62291 strongswan: Arbitrary Code Execution and Denial of Service via crafted EAP-MSCHAPv2 message
-Upstream-Status: Backport from https://download.strongswan.org/security/CVE-2025-62291/strongswan-4.4.0-6.0.2_eap_mschapv2_failure_request_len.patch
+Includes fixes for CVE-2025-13502, CVE-2025-13947, CVE-2025-43421,
+CVE-2025-43458 and CVE-2025-66287.
 
-Signed-off-by: Rohini Sangam <rsangam@mvista.com>
+Drop libsoup2 support. Even though this particular version still supports
+it, this is the last major version that is not libsoup3-only. Starting
+with version 2.52 (which is only 3-4 weeks away at the time of writing this
+message) upstream is dropping libsoup2 support completely[1].
+
+This is a proactive removal of this feature, the sooner users start the
+migration, the better.
+
+Made opengl a mandatory DISTRO_FEATURE: libepoxy requires it, which is
+an indirect dependency, from gtk3.
+
+Changelogs:
+https://webkitgtk.org/2026/02/09/webkitgtk2.50.5-released.html
+https://webkitgtk.org/2025/12/16/webkitgtk2.50.4-released.html
+https://webkitgtk.org/2025/12/04/webkitgtk2.50.3-released.html
+https://webkitgtk.org/2025/11/19/webkitgtk2.50.2-released.html
+https://webkitgtk.org/2025/10/10/webkitgtk2.50.1-released.html
+https://webkitgtk.org/2025/09/17/webkitgtk2.50.0-released.html
+
+[1]: https://webkitgtk.org/2025/10/07/webkitgtk-soup2-deprecation.html
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../strongswan/files/CVE-2025-62291.patch     | 49 +++++++++++++++++++
- .../strongswan/strongswan_5.9.13.bb           |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/files/CVE-2025-62291.patch
+ .../webkitgtk/webkitgtk3/no-musttail-arm.patch   | 12 ++++++------
+ ...webkitgtk3_2.48.7.bb => webkitgtk3_2.50.5.bb} | 16 ++++++++--------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+ rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.48.7.bb => webkitgtk3_2.50.5.bb} (94%)
 
-diff --git a/meta-networking/recipes-support/strongswan/files/CVE-2025-62291.patch b/meta-networking/recipes-support/strongswan/files/CVE-2025-62291.patch
-new file mode 100644
-index 0000000000..d66c76971f
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/files/CVE-2025-62291.patch
-@@ -0,0 +1,49 @@
-+From dda24815d148b91209ebf2d27e3a7acefe9b6435 Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Thu, 9 Oct 2025 11:33:45 +0200
-+Subject: [PATCH] eap-mschapv2: Fix length check for Failure Request packets on
-+ the client
-+
-+For message lengths between 6 and 8, subtracting HEADER_LEN (9) causes
-+`message_len` to become negative, which is then used in calls to malloc()
-+and memcpy() that both take size_t arguments, causing an integer
-+underflow.
-+
-+For 6 and 7, the huge size requested from malloc() will fail (it exceeds
-+PTRDIFF_MAX) and the returned NULL pointer will cause a segmentation
-+fault in memcpy().
-+
-+However, for 8, the allocation is 0, which succeeds.  But then the -1
-+passed to memcpy() causes a heap-based buffer overflow (and possibly a
-+segmentation fault when attempting to read/write that much data).
-+Fortunately, if compiled with -D_FORTIFY_SOURCE=3 (the default on e.g.
-+Ubuntu), the compiler will use __memcpy_chk(), which prevents that buffer
-+overflow and causes the daemon to get aborted immediately instead.
-+
-+Fixes: f98cdf7a4765 ("adding plugin for EAP-MS-CHAPv2")
-+Fixes: CVE-2025-62291
-+
-+Upstream-Status: Backport from https://download.strongswan.org/security/CVE-2025-62291/strongswan-4.4.0-6.0.2_eap_mschapv2_failure_request_len.patch
-+CVE: CVE-2025-62291
-+
-+Signed-off-by: Rohini Sangam <rsangam@mvista.com>
-+---
-+ src/libcharon/plugins/eap_mschapv2/eap_mschapv2.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/libcharon/plugins/eap_mschapv2/eap_mschapv2.c b/src/libcharon/plugins/eap_mschapv2/eap_mschapv2.c
-+index 1bb54c8..9ad509a 100644
-+--- a/src/libcharon/plugins/eap_mschapv2/eap_mschapv2.c
-++++ b/src/libcharon/plugins/eap_mschapv2/eap_mschapv2.c
-+@@ -974,7 +974,7 @@ static status_t process_peer_failure(private_eap_mschapv2_t *this,
-+ 	data = in->get_data(in);
-+ 	eap = (eap_mschapv2_header_t*)data.ptr;
-+ 
-+-	if (data.len < 3) /* we want at least an error code: E=e */
-++	if (data.len < HEADER_LEN + 3) /* we want at least an error code: E=e */ 
-+ 	{
-+ 		DBG1(DBG_IKE, "received invalid EAP-MS-CHAPv2 message: too short");
-+ 		return FAILED;
-+-- 
-+2.35.7
-+
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
-index afa1a684b1..4c10636871 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
-@@ -9,6 +9,7 @@ DEPENDS = "flex-native flex bison-native"
- DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss', '', d)}"
- 
- SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-+           file://CVE-2025-62291.patch \
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
+index 367e6b8342..411164433a 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
+@@ -23,12 +23,12 @@ diff --git a/Source/WTF/wtf/Compiler.h b/Source/WTF/wtf/Compiler.h
+ index 16e416d..68dd9a0 100644
+ --- a/Source/WTF/wtf/Compiler.h
+ +++ b/Source/WTF/wtf/Compiler.h
+-@@ -293,7 +293,7 @@
+- #if COMPILER(CLANG)
+- #if __SIZEOF_POINTER__ == 8
+- #if !defined(MUST_TAIL_CALL) && defined(__cplusplus) && defined(__has_cpp_attribute)
+--#if __has_cpp_attribute(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32)
+-+#if __has_cpp_attribute(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32) && !defined(__arm__)
++@@ -290,7 +290,7 @@
++ // written for 64-bit may fail to tail call on 32-bit.
++ // It also doesn't work on ppc64le: https://github.com/llvm/llvm-project/issues/98859
++ // and on Windows: https://github.com/llvm/llvm-project/issues/116568
++-#if !defined(MUST_TAIL_CALL) && COMPILER(CLANG) && __SIZEOF_POINTER__ == 8 && defined(__cplusplus) && COMPILER_HAS_CPP_ATTRIBUTE(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32)
+++#if !defined(MUST_TAIL_CALL) && COMPILER(CLANG) && __SIZEOF_POINTER__ == 8 && defined(__cplusplus) && COMPILER_HAS_CPP_ATTRIBUTE(clang::musttail) && !defined(__powerpc__) && !defined(_WIN32) && !defined(__arm__)
+  #define MUST_TAIL_CALL [[clang::musttail]]
+  #define HAVE_MUST_TAIL_CALL 1
+  #endif
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+similarity index 94%
+rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb
+rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+index 118592d42b..0ab9782d6a 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.48.7.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+@@ -23,14 +23,14 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
+            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
+            file://0001-Fix-32bit-arm.patch \
             "
+-SRC_URI[sha256sum] = "2c62aebb608e09f930a539f3623a5cc8023b5068029f42a208f45f9124da6e30"
++SRC_URI[sha256sum] = "8737631bac3e9c7ad3e5208f9370e076c09d9c45b39980021ce54edadcc6f94f"
  
- SRC_URI[sha256sum] = "56e30effb578fd9426d8457e3b76c8c3728cd8a5589594b55649b2719308ba55"
--- 
-2.34.1
-
+ inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
+ 
+ S = "${UNPACKDIR}/webkitgtk-${PV}"
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+-REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'opengl', '', d)}"
++REQUIRED_DISTRO_FEATURES = "opengl"
+ 
+ CVE_PRODUCT = "webkitgtk webkitgtk\+"
+ 
+@@ -51,11 +51,9 @@ DEPENDS += " \
+           gstreamer1.0-plugins-base \
+           glib-2.0-native \
+           gettext-native \
++          libsoup \
+           "
+ 
+-# using soup2 builds (JavaScript) API version 4.0
+-# using soup3 builds (JavaScript) API version 4.1
+-PACKAGECONFIG_SOUP ?= "soup3"
+ PACKAGECONFIG ??= " \
+ 	   ${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland x11', d)} \
+ 	   ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'webgl opengl', '', d)} \
+@@ -63,7 +61,6 @@ PACKAGECONFIG ??= " \
+ 	   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl-or-es', '', d)} \
+ 	   enchant \
+ 	   libsecret \
+-	   ${PACKAGECONFIG_SOUP} \
+ 	   "
+ 
+ PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND_TARGET=ON,-DENABLE_WAYLAND_TARGET=OFF,wayland libwpe wpebackend-fdo wayland-native"
+@@ -83,8 +80,6 @@ PACKAGECONFIG[openjpeg] = "-DUSE_OPENJPEG=ON,-DUSE_OPENJPEG=OFF,openjpeg"
+ PACKAGECONFIG[systemd] = "-DUSE_SYSTEMD=ON,-DUSE_SYSTEMD=off,systemd"
+ PACKAGECONFIG[reduce-size] = "-DCMAKE_BUILD_TYPE=MinSizeRel,-DCMAKE_BUILD_TYPE=Release,,"
+ PACKAGECONFIG[lcms] = "-DUSE_LCMS=ON,-DUSE_LCMS=OFF,lcms"
+-PACKAGECONFIG[soup2] = "-DUSE_SOUP2=ON,-DUSE_SOUP2=OFF,libsoup-2.4,,,soup3"
+-PACKAGECONFIG[soup3] = ",,libsoup,,,soup2"
+ PACKAGECONFIG[journald] = "-DENABLE_JOURNALD_LOG=ON,-DENABLE_JOURNALD_LOG=OFF,systemd"
+ PACKAGECONFIG[avif] = "-DUSE_AVIF_LOG=ON,-DUSE_AVIF=OFF,libavif"
+ PACKAGECONFIG[media-recorder] = "-DENABLE_MEDIA_RECORDER=ON,-DENABLE_MEDIA_RECORDER=OFF,gstreamer1.0-plugins-bad"
+@@ -103,6 +98,7 @@ EXTRA_OECMAKE = " \
+         ${@oe.utils.vartrue('DEBUG_BUILD', '-DWEBKIT_NO_INLINE_HINTS=ON', '-DWEBKIT_NO_INLINE_HINTS=OFF', d)} \
+ 	-DENABLE_MINIBROWSER=ON \
+ 	-DCMAKE_EXPORT_COMPILE_COMMANDS=OFF \
++        -DUSE_SOUP2=OFF \
+ 		"
+ # pass -g1 to massively reduce the size of the debug symbols (4.3GB to 700M at time of writing)
+ DEBUG_LEVELFLAG = "-g1"
+@@ -181,3 +177,7 @@ src_package_preprocess () {
+             ${B}/WebKitGTK/DerivedSources/webkit/*.cpp
+ }
+ 
++
++# complation fails with Clang-21 issue - https://github.com/llvm/llvm-project/issues/132322
++# Can be removed when clang is updated to v22
++TOOLCHAIN:arm = "gcc"
 
