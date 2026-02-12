@@ -2,435 +2,629 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF0EEEB48F9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0A3FEB48FC
 	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 10:32:53 +0000 (UTC)
 Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
  by mx.groups.io with SMTP id smtpd.msgproc01-g2.38879.1770873688848250541
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 11 Feb 2026 21:21:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=MksSKr6j;
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Q5kYWpUR;
  spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: adongare@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=14792; q=dns/txt;
-  s=iport01; t=1770873688; x=1772083288;
+  d=cisco.com; i=@cisco.com; l=20944; q=dns/txt;
+  s=iport01; t=1770873689; x=1772083289;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=nb3v8mWlBDe0G4s3CqTz2KtcIDIQCYX5dAp+ncI6SgM=;
-  b=MksSKr6jWHYXyJhG8qv2ExnQA8oymli5SOZth763wfi4OkSXn/EKp+qv
-   x1B5JpaZTIsZDe5Zkwuz+CngJnDvvbW0s9ggrqVxOurcV/fA+q3R1KbgP
-   LpK53Kt7X7bXkh2Oxvn+m7djtVmtD3d6I0CcUlg1uoFRX6okr7/PMHCaf
-   a+Nwr8lHk1Y3P7qsvaelTKy5DQKuVA0pk2SQoMK0qtZQ5p60/0CK/xw6u
-   sEDdBkBcwzf3YYsbU5pGe5/zyFTlB8zQwgeRSHq53kZbyABeD7rPnZ/od
-   eXN+tThe60KbSN9+7v6gfIsNRk5CIvmf7Cvrc6o63HJ7xCktQE4Ga3QRD
-   Q==;
-X-CSE-ConnectionGUID: p3HX75khThWHokkMV8mQTw==
-X-CSE-MsgGUID: 7oGARGHWS4WR5cgWw1b2xA==
-X-IPAS-Result: =?us-ascii?q?A0CrBgBQYo1p/5T/Ja1aglmCSA9xXkNJlksDgn6IZpI2g?=
- =?us-ascii?q?X8PAQEBDz0UBAEBhQcCjR0CJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBA?=
- =?us-ascii?q?QUBAQECAQcFgQ4Thk8NhloBAgEDMgEYAS0QHAMBAi8gCyMIGYMCAYI6AzYDE?=
- =?us-ascii?q?ahugiyBAYMoAT8CQ0/YRw2CUgELFAGBOIU7gnmFH1sYAYR4JxsbgXKEB3aBB?=
- =?us-ascii?q?YEaQgEBiCQEgiKBDoFkJw+RVEiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjP?=
- =?us-ascii?q?heBCxsHBYgVD4kPeHCBIHIDCxgNSBEsNxQbBD5uB45LQYIzWiETASoBUF8UC?=
- =?us-ascii?q?ggjCwIDDBhOklcTB5I1oB1xCiiDdIwejz4BhXsaM4QEgVeSPpJSC5h7iyaCY?=
- =?us-ascii?q?4QJkSsHInOEaIFoPIFHCwdwFYMiCUkZD444g2mBf4MUvE4lMgI6AgcLAQEDC?=
- =?us-ascii?q?ZFsLYFOAQE?=
-IronPort-Data: A9a23:S6sxpq5cd9PSGDjaNxSSuQxRtGjGchMFZxGqfqrLsTDasY5as4F+v
- msXW2+OOvbbMWCke9wgYIm29BxQvMKHnYJqGVZv+yswZn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyGa/lH2dOC98RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wo+qUzBHf/g2QqajhNsfrawP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoaSW
- +bZwbilyXjS9hErB8nNuu6TnpoiG+O60aCm0xK6aoD66vRwjnVaPpUTaJLwXXxqZwChxLid/
- jniWauYEm/FNoWU8AgUvoIx/ytWZcWq85efSZSzXFD6I0DuKxPRL/tS4E4eJdY4yrkqAmFy9
- cM4LzMOSy7TgtuK3+fuIgVsrpxLwMjDJogTvDRkiDreF/tjGMmFSKTR7tge1zA17ixMNa+BP
- IxCNnw1MUmGOkEfUrsUIMpWcOOAj3X4dTJRsl+9rqss6G+Vxwt0uFToGISLJoTbFZ0Jzi50o
- EqZ+EvQOD46C+fD9gDY+X2TmbbFxzPSDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
- 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUg4w2Lj66R6AGDCy1dF3hKaccts4k9QjlCO
- kK1ou4FzAdH6NW9IU9xPJ/Nxd9uEUD59VM/WBI=
-IronPort-HdrOrdr: A9a23:1BirCKGpKooNI/j/pLqE78eALOsnbusQ8zAXPo5KJiC9Ffbo8P
- xG88576faZslsssTQb6LK90cq7MBfhHPxOgbX5VI3KNGKNhILrFvAG0WKI+VPd8kPFmtK1rZ
- 0QEJSXzLbLfCFHZQGQ2njfL+od
-X-Talos-CUID: 9a23:sTssamxm6HocXtM/GauxBgUMQeAVLSDezEvQHG+/CmVMdu2QcGOPrfY=
-X-Talos-MUID: 9a23:HTgz0QuWLwSFDR9YXM2n2zZNHf1Hw5uVVH83zJ4JhNbdP3ZgEmLI
+  bh=dTx7fm1OMI6O+k1xUM5LFLuFM6smWAM5fAhNuoS737M=;
+  b=Q5kYWpURipSPDpgvWoSOIRype9MHXEAbmI7PYsLVjifuJRQLepyv2XE1
+   tD9UpP1dO/EOfvj7ia5ouruHJfJpdKqYByShdCrDa1s/lE0odVIZse3NK
+   202DW797WXYEZ28MF+c4cIRIzV8p3EMGNvC6e7ZGvP1iKGesGArVu0XVV
+   H8KhJvAEfBVGIqy9qNKQH9mWMpJU0Lz4NIRMgwpZjqWCnQEIFjhEr/kgS
+   Wzito+ly/DYok2WUDNeZFwfa/ydnI5om+u9wKZas7GefcnxW+2bFFJ5GG
+   uuKnUgs9eDKmH6m5maqFnjhdWs7tELImuFOder/g4l0xH/WuAUFhjdr2R
+   g==;
+X-CSE-ConnectionGUID: UdQntKpOS/SA6/W0XNJz2g==
+X-CSE-MsgGUID: jLkjp7FURQeU6pdJJO3trw==
+X-IPAS-Result: =?us-ascii?q?A0CCCABQYo1p/5X/Ja1aHgEBCxIMggULghgwD3FeQ0mWS?=
+ =?us-ascii?q?wOBE4FriGaFZolxgl8UgWgDDwEBAQ89FAQBAYUHAo0dAiY1CA4BAgQBAQEBA?=
+ =?us-ascii?q?wIDAQEBAQEBAQEBAQELAQEFAQEBAgEHBYEOE4ZPDYZaAQIBAycLARgBLRAcA?=
+ =?us-ascii?q?wECLyALIwgZgwIBgjoDNgMRqCxCgXkzgQGDKAE/AkNP2EcNA4JPAQsUAYE4h?=
+ =?us-ascii?q?TuCeYUfWxgBhHgnGxuBcoEVgnJ2gQWBGkIBAYEtGoZdBIIigQ6BZCcPiU6IB?=
+ =?us-ascii?q?kiBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBCxsHBYgVD4kPeHCBIHIDC?=
+ =?us-ascii?q?xgNSBEsNxQbBD5uB45LQYIsBwEVJxMJGwcTASoBIAJjEzU2Aw4YHB6SVxQQA?=
+ =?us-ascii?q?ZAdgiGgHXEKKIN0jB6PPgGFexozhVulEAuYe4smgmOECZFXBBxQhGiBagE5R?=
+ =?us-ascii?q?oEBCwdwFYMiCUkZD44tCwuBEgECfIFNgX+DFLxOJTICOgIHCwEBAwmRa4F8A?=
+ =?us-ascii?q?QE?=
+IronPort-Data: A9a23:fSVagK8vwa3Km+J63RpTDrUD0H+TJUtcMsCJ2f8bNWPcYEJGY0x3n
+ WoZWjyDPf/YMTb3c951btix/UsFvZHTz4BgQQdk+SxEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmE4EzrauS9xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mryyHjEAX9gWAsaDtOs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2kLMbQe5sVvJloJz
+ tVGbw9VXjahlbi5lefTpulE3qzPLeHxN48Z/3UlxjbDALN/G9bIQr7B4plT2zJYasJmRKmFI
+ ZFGL2AyMVKZP0wn1lQ/UPrSmM+hin75fDRCpXqepLE85C7YywkZPL3FboSJIo3aHZsE9qqej
+ mDi/GbhXT8nDuWS9GSd/lCOobTThzyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzFeCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u38Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:6r7vuaitJFdkN+I/6oA5QWOLBnBQXt0ji2hC6mlwRA09TyVXra
+ +TdZMgpHjJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7BZmnbUQKTRekIh7cKgQeQfhEWndQy6U
+ 4PScRD4aXLfDtHZQKQ2njALz7mq+P3lpyVuQ==
+X-Talos-CUID: 9a23:rv9siG/1K9fZAFeCLKWVv3MYI8Y5UWX69zDrChH/Nj5Zbp+HE1DFrQ==
+X-Talos-MUID: 9a23:m2wWCAWiSRAdp6/q/D3IhzN6a+lV2Z2jNR4VnbcknJKYLzMlbg==
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.21,286,1763424000"; 
-   d="scan'208";a="664098048"
-Received: from rcdn-l-core-11.cisco.com ([173.37.255.148])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 12 Feb 2026 05:21:27 +0000
+   d="scan'208";a="664098069"
+Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
+  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 12 Feb 2026 05:21:28 +0000
 Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-11.cisco.com (Postfix) with ESMTPS id 9C06118000152;
-	Thu, 12 Feb 2026 05:21:27 +0000 (GMT)
+	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id AD6F9180001E9;
+	Thu, 12 Feb 2026 05:21:28 +0000 (GMT)
 Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
-	id 49725CC12A6; Wed, 11 Feb 2026 21:21:27 -0800 (PST)
+	id 5B542CC12A6; Wed, 11 Feb 2026 21:21:28 -0800 (PST)
 From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com, to@cisco.com,
 	Anil Dongare <adongare@cisco.com>
-Subject: [meta-OE] [scarthgap] [PATCH 2/5] Nodejs 20.18.2: Fix CVE-2025-55130
-Date: Wed, 11 Feb 2026 21:21:07 -0800
-Message-ID: <20260212052114.3215220-2-adongare@cisco.com>
+Subject: [meta-OE] [scarthgap] [PATCH 3/5] Nodejs 20.18.2: Fix CVE-2025-59466
+Date: Wed, 11 Feb 2026 21:21:08 -0800
+Message-ID: <20260212052114.3215220-3-adongare@cisco.com>
 X-Mailer: git-send-email 2.44.1
 In-Reply-To: <20260212052114.3215220-1-adongare@cisco.com>
 References: <20260212052114.3215220-1-adongare@cisco.com>
 MIME-Version: 1.0
 X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
-X-Outbound-Node: rcdn-l-core-11.cisco.com
+X-Outbound-Node: rcdn-l-core-12.cisco.com
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 10:32:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124349
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124350
 
 From: Anil Dongare <adongare@cisco.com>
 
 Upstream Repository: https://github.com/nodejs/node.git
 
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-55130
+Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2025-59466
 Type: Security Fix
-CVE: CVE-2025-55130
-Score: 9.1
-Patch: https://github.com/nodejs/node/commit/6b4849583ad6
+CVE: CVE-2025-59466
+Score: 7.5
+Patch: https://github.com/nodejs/node/commit/ddadc31f09af
 
 Signed-off-by: Anil Dongare <adongare@cisco.com>
 ---
- .../nodejs/nodejs/CVE-2025-55130.patch        | 315 ++++++++++++++++++
+ .../nodejs/nodejs/CVE-2025-59466.patch        | 508 ++++++++++++++++++
  .../recipes-devtools/nodejs/nodejs_20.18.2.bb |   1 +
- 2 files changed, 316 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-55130.patch
+ 2 files changed, 509 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-59466.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-55130.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-55130.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-59466.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-59466.patch
 new file mode 100644
-index 0000000000..2e0b1a0fa7
+index 0000000000..6121432697
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-55130.patch
-@@ -0,0 +1,315 @@
-+From b64d87994164e965a46f4144ea59a01e76c30efd Mon Sep 17 00:00:00 2001
-+From: RafaelGSS <rafael.nunu@hotmail.com>
-+Date: Mon, 10 Nov 2025 19:27:51 -0300
-+Subject: [PATCH] lib,permission: require full read and write to symlink APIs
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2025-59466.patch
+@@ -0,0 +1,508 @@
++From c5cad9d8ec0bccc8136903823c079da7cc6b1930 Mon Sep 17 00:00:00 2001
++From: Matteo Collina <hello@matteocollina.com>
++Date: Tue, 9 Dec 2025 23:50:18 +0100
++Subject: [PATCH 3/6] src: rethrow stack overflow exceptions in async_hooks
 +
-+Refs: https://hackerone.com/reports/3417819
-+Signed-off-by: RafaelGSS <rafael.nunu@hotmail.com>
-+PR-URL: https://github.com/nodejs-private/node-private/pull/760
-+Reviewed-By: Matteo Collina <matteo.collina@gmail.com>
-+CVE-ID: CVE-2025-55130
++When a stack overflow exception occurs during async_hooks callbacks
++(which use TryCatchScope::kFatal), detect the specific "Maximum call
++stack size exceeded" RangeError and re-throw it instead of immediately
++calling FatalException. This allows user code to catch the exception
++with try-catch blocks instead of requiring uncaughtException handlers.
 +
-+CVE: CVE-2025-55130
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/6b4849583ad6]
++The implementation adds IsStackOverflowError() helper to detect stack
++overflow RangeErrors and re-throws them in TryCatchScope destructor
++instead of calling FatalException.
 +
-+(cherry picked from commit 6b4849583ad655d96365d9c665dcdb7912b67e2c)
++This fixes the issue where async_hooks would cause stack overflow
++exceptions to exit with code 7 (kExceptionInFatalExceptionHandler)
++instead of being catchable.
++
++Fixes: https://github.com/nodejs/node/issues/37989
++Ref: https://hackerone.com/reports/3456295
++PR-URL: https://github.com/nodejs-private/node-private/pull/773
++Refs: https://hackerone.com/reports/3456295
++Reviewed-By: Robert Nagy <ronagy@icloud.com>
++Reviewed-By: Paolo Insogna <paolo@cowtech.it>
++Reviewed-By: Marco Ippolito <marcoippolito54@gmail.com>
++Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
++Reviewed-By: Anna Henningsen <anna@addaleax.net>
++CVE-ID: CVE-2025-59466
++
++CVE: CVE-2025-59466
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/ddadc31f09af]
++
++(cherry picked from commit ddadc31f09afdbab7545c86cc0f17d137beb8048)
 +Signed-off-by: Anil Dongare <adongare@cisco.com>
 +---
-+ lib/fs.js                                     | 34 ++++++-------------
-+ lib/internal/fs/promises.js                   | 20 +++--------
-+ .../permission/fs-symlink-target-write.js     | 18 ++--------
-+ test/fixtures/permission/fs-symlink.js        | 18 ++++++++--
-+ .../test-permission-fs-symlink-relative.js    | 10 +++---
-+ test/parallel/test-permission-fs-symlink.js   | 14 ++++++++
-+ 6 files changed, 52 insertions(+), 62 deletions(-)
++ src/async_wrap.cc                             |  9 ++-
++ src/debug_utils.cc                            |  3 +-
++ src/node_errors.cc                            | 71 ++++++++++++++--
++ src/node_errors.h                             |  2 +-
++ src/node_report.cc                            |  3 +-
++ ...async-hooks-stack-overflow-nested-async.js | 80 +++++++++++++++++++
++ ...st-async-hooks-stack-overflow-try-catch.js | 47 +++++++++++
++ .../test-async-hooks-stack-overflow.js        | 47 +++++++++++
++ ...andler-stack-overflow-on-stack-overflow.js | 29 +++++++
++ ...caught-exception-handler-stack-overflow.js | 29 +++++++
++ 10 files changed, 306 insertions(+), 14 deletions(-)
++ create mode 100644 test/parallel/test-async-hooks-stack-overflow-nested-async.js
++ create mode 100644 test/parallel/test-async-hooks-stack-overflow-try-catch.js
++ create mode 100644 test/parallel/test-async-hooks-stack-overflow.js
++ create mode 100644 test/parallel/test-uncaught-exception-handler-stack-overflow-on-stack-overflow.js
++ create mode 100644 test/parallel/test-uncaught-exception-handler-stack-overflow.js
 +
-+diff --git a/lib/fs.js b/lib/fs.js
-+index 9206a18663c..4f9ff6da371 100644
-+--- a/lib/fs.js
-++++ b/lib/fs.js
-+@@ -59,7 +59,6 @@ const {
-+ } = constants;
++diff --git a/src/async_wrap.cc b/src/async_wrap.cc
++index 65829a31a36..2b6fa142385 100644
++--- a/src/async_wrap.cc
+++++ b/src/async_wrap.cc
++@@ -67,7 +67,8 @@ static const char* const provider_names[] = {
++ void AsyncWrap::DestroyAsyncIdsCallback(Environment* env) {
++   Local<Function> fn = env->async_hooks_destroy_function();
 +
-+ const pathModule = require('path');
-+-const { isAbsolute } = pathModule;
-+ const { isArrayBufferView } = require('internal/util/types');
++-  TryCatchScope try_catch(env, TryCatchScope::CatchMode::kFatal);
+++  TryCatchScope try_catch(env,
+++                          TryCatchScope::CatchMode::kFatalRethrowStackOverflow);
 +
-+ const binding = internalBinding('fs');
-+@@ -1744,18 +1743,12 @@ function symlink(target, path, type_, callback_) {
-+   const type = (typeof type_ === 'string' ? type_ : null);
-+   const callback = makeCallback(arguments[arguments.length - 1]);
++   do {
++     std::vector<double> destroy_async_id_list;
++@@ -96,7 +97,8 @@ void Emit(Environment* env, double async_id, AsyncHooks::Fields type,
 +
-+-  if (permission.isEnabled()) {
-+-    // The permission model's security guarantees fall apart in the presence of
-+-    // relative symbolic links. Thus, we have to prevent their creation.
-+-    if (BufferIsBuffer(target)) {
-+-      if (!isAbsolute(BufferToString(target))) {
-+-        callback(new ERR_ACCESS_DENIED('relative symbolic link target'));
-+-        return;
-+-      }
-+-    } else if (typeof target !== 'string' || !isAbsolute(toPathIfFileURL(target))) {
-+-      callback(new ERR_ACCESS_DENIED('relative symbolic link target'));
-+-      return;
-+-    }
-++  // Due to the nature of Node.js runtime, symlinks has different edge cases that can bypass
-++  // the permission model security guarantees. Thus, this API is disabled unless fs.read
-++  // and fs.write permission has been given.
-++  if (permission.isEnabled() && !permission.has('fs')) {
-++    callback(new ERR_ACCESS_DENIED('fs.symlink API requires full fs.read and fs.write permissions.'));
-++    return;
++   HandleScope handle_scope(env->isolate());
++   Local<Value> async_id_value = Number::New(env->isolate(), async_id);
++-  TryCatchScope try_catch(env, TryCatchScope::CatchMode::kFatal);
+++  TryCatchScope try_catch(env,
+++                          TryCatchScope::CatchMode::kFatalRethrowStackOverflow);
++   USE(fn->Call(env->context(), Undefined(env->isolate()), 1, &async_id_value));
++ }
++
++@@ -668,7 +670,8 @@ void AsyncWrap::EmitAsyncInit(Environment* env,
++     object,
++   };
++
++-  TryCatchScope try_catch(env, TryCatchScope::CatchMode::kFatal);
+++  TryCatchScope try_catch(env,
+++                          TryCatchScope::CatchMode::kFatalRethrowStackOverflow);
++   USE(init_fn->Call(env->context(), object, arraysize(argv), argv));
++ }
++
++diff --git a/src/debug_utils.cc b/src/debug_utils.cc
++index 9d36082db67..7d85ab72615 100644
++--- a/src/debug_utils.cc
+++++ b/src/debug_utils.cc
++@@ -333,7 +333,8 @@ void DumpJavaScriptBacktrace(FILE* fp) {
 +   }
 +
-+   target = getValidatedPath(target, 'target');
-+@@ -1815,16 +1808,11 @@ function symlinkSync(target, path, type) {
-+     }
++   Local<StackTrace> stack;
++-  if (!GetCurrentStackTrace(isolate).ToLocal(&stack)) {
+++  if (!GetCurrentStackTrace(isolate).ToLocal(&stack) ||
+++      stack->GetFrameCount() == 0) {
++     return;
 +   }
 +
-+-  if (permission.isEnabled()) {
-+-    // The permission model's security guarantees fall apart in the presence of
-+-    // relative symbolic links. Thus, we have to prevent their creation.
-+-    if (BufferIsBuffer(target)) {
-+-      if (!isAbsolute(BufferToString(target))) {
-+-        throw new ERR_ACCESS_DENIED('relative symbolic link target');
-+-      }
-+-    } else if (typeof target !== 'string' || !isAbsolute(toPathIfFileURL(target))) {
-+-      throw new ERR_ACCESS_DENIED('relative symbolic link target');
-+-    }
-++  // Due to the nature of Node.js runtime, symlinks has different edge cases that can bypass
-++  // the permission model security guarantees. Thus, this API is disabled unless fs.read
-++  // and fs.write permission has been given.
-++  if (permission.isEnabled() && !permission.has('fs')) {
-++    throw new ERR_ACCESS_DENIED('fs.symlink API requires full fs.read and fs.write permissions.');
++diff --git a/src/node_errors.cc b/src/node_errors.cc
++index 69e474257b0..f984fd4c3d9 100644
++--- a/src/node_errors.cc
+++++ b/src/node_errors.cc
++@@ -188,7 +188,7 @@ static std::string GetErrorSource(Isolate* isolate,
++ }
++
++ static std::atomic<bool> is_in_oom{false};
++-static std::atomic<bool> is_retrieving_js_stacktrace{false};
+++static thread_local std::atomic<bool> is_retrieving_js_stacktrace{false};
++ MaybeLocal<StackTrace> GetCurrentStackTrace(Isolate* isolate, int frame_count) {
++   if (isolate == nullptr) {
++     return MaybeLocal<StackTrace>();
++@@ -216,9 +216,6 @@ MaybeLocal<StackTrace> GetCurrentStackTrace(Isolate* isolate, int frame_count) {
++       StackTrace::CurrentStackTrace(isolate, frame_count, options);
++
++   is_retrieving_js_stacktrace.store(false);
++-  if (stack->GetFrameCount() == 0) {
++-    return MaybeLocal<StackTrace>();
++-  }
++
++   return scope.Escape(stack);
++ }
++@@ -293,7 +290,8 @@ void PrintStackTrace(Isolate* isolate,
++
++ void PrintCurrentStackTrace(Isolate* isolate, StackTracePrefix prefix) {
++   Local<StackTrace> stack;
++-  if (GetCurrentStackTrace(isolate).ToLocal(&stack)) {
+++  if (GetCurrentStackTrace(isolate).ToLocal(&stack) &&
+++      stack->GetFrameCount() > 0) {
++     PrintStackTrace(isolate, stack, prefix);
 +   }
++ }
++@@ -664,13 +662,52 @@ v8::ModifyCodeGenerationFromStringsResult ModifyCodeGenerationFromStrings(
++   };
++ }
 +
-+   target = getValidatedPath(target, 'target');
-+diff --git a/lib/internal/fs/promises.js b/lib/internal/fs/promises.js
-+index 8314cf29a85..f734f93d763 100644
-+--- a/lib/internal/fs/promises.js
-++++ b/lib/internal/fs/promises.js
-+@@ -17,7 +17,6 @@ const {
-+   Symbol,
-+   Uint8Array,
-+   FunctionPrototypeBind,
-+-  uncurryThis,
-+ } = primordials;
-+
-+ const { fs: constants } = internalBinding('constants');
-+@@ -31,8 +30,6 @@ const {
-+
-+ const binding = internalBinding('fs');
-+ const { Buffer } = require('buffer');
-+-const { isBuffer: BufferIsBuffer } = Buffer;
-+-const BufferToString = uncurryThis(Buffer.prototype.toString);
-+
-+ const {
-+   codes: {
-+@@ -88,8 +85,6 @@ const {
-+   kValidateObjectAllowNullable,
-+ } = require('internal/validators');
-+ const pathModule = require('path');
-+-const { isAbsolute } = pathModule;
-+-const { toPathIfFileURL } = require('internal/url');
-+ const {
-+   kEmptyObject,
-+   lazyDOMException,
-+@@ -983,16 +978,11 @@ async function symlink(target, path, type_) {
-+     }
-+   }
-+
-+-  if (permission.isEnabled()) {
-+-    // The permission model's security guarantees fall apart in the presence of
-+-    // relative symbolic links. Thus, we have to prevent their creation.
-+-    if (BufferIsBuffer(target)) {
-+-      if (!isAbsolute(BufferToString(target))) {
-+-        throw new ERR_ACCESS_DENIED('relative symbolic link target');
-+-      }
-+-    } else if (typeof target !== 'string' || !isAbsolute(toPathIfFileURL(target))) {
-+-      throw new ERR_ACCESS_DENIED('relative symbolic link target');
-+-    }
-++  // Due to the nature of Node.js runtime, symlinks has different edge cases that can bypass
-++  // the permission model security guarantees. Thus, this API is disabled unless fs.read
-++  // and fs.write permission has been given.
-++  if (permission.isEnabled() && !permission.has('fs')) {
-++    throw new ERR_ACCESS_DENIED('fs.symlink API requires full fs.read and fs.write permissions.');
-+   }
-+
-+   target = getValidatedPath(target, 'target');
-+diff --git a/test/fixtures/permission/fs-symlink-target-write.js b/test/fixtures/permission/fs-symlink-target-write.js
-+index c17d674d59e..6e07bfa838e 100644
-+--- a/test/fixtures/permission/fs-symlink-target-write.js
-++++ b/test/fixtures/permission/fs-symlink-target-write.js
-+@@ -26,8 +26,7 @@ const writeOnlyFolder = process.env.WRITEONLYFOLDER;
-+     fs.symlinkSync(path.join(readOnlyFolder, 'file'), path.join(readWriteFolder, 'link-to-read-only'), 'file');
-+   }, common.expectsError({
-+     code: 'ERR_ACCESS_DENIED',
-+-    permission: 'FileSystemWrite',
-+-    resource: path.toNamespacedPath(path.join(readOnlyFolder, 'file')),
-++    message: 'fs.symlink API requires full fs.read and fs.write permissions.',
-+   }));
-+   assert.throws(() => {
-+     fs.linkSync(path.join(readOnlyFolder, 'file'), path.join(readWriteFolder, 'link-to-read-only'));
-+@@ -37,18 +36,6 @@ const writeOnlyFolder = process.env.WRITEONLYFOLDER;
-+     resource: path.toNamespacedPath(path.join(readOnlyFolder, 'file')),
-+   }));
-+
-+-  // App will be able to symlink to a writeOnlyFolder
-+-  fs.symlink(path.join(readWriteFolder, 'file'), path.join(writeOnlyFolder, 'link-to-read-write'), 'file', (err) => {
-+-    assert.ifError(err);
-+-    // App will won't be able to read the symlink
-+-    fs.readFile(path.join(writeOnlyFolder, 'link-to-read-write'), common.expectsError({
-+-      code: 'ERR_ACCESS_DENIED',
-+-      permission: 'FileSystemRead',
-+-    }));
-+-
-+-    // App will be able to write to the symlink
-+-    fs.writeFile(path.join(writeOnlyFolder, 'link-to-read-write'), 'some content', common.mustSucceed());
-+-  });
-+   fs.link(path.join(readWriteFolder, 'file'), path.join(writeOnlyFolder, 'link-to-read-write2'), (err) => {
-+     assert.ifError(err);
-+     // App will won't be able to read the link
-+@@ -66,8 +53,7 @@ const writeOnlyFolder = process.env.WRITEONLYFOLDER;
-+     fs.symlinkSync(path.join(readWriteFolder, 'file'), path.join(readOnlyFolder, 'link-to-read-only'), 'file');
-+   }, common.expectsError({
-+     code: 'ERR_ACCESS_DENIED',
-+-    permission: 'FileSystemWrite',
-+-    resource: path.toNamespacedPath(path.join(readOnlyFolder, 'link-to-read-only')),
-++    message: 'fs.symlink API requires full fs.read and fs.write permissions.',
-+   }));
-+   assert.throws(() => {
-+     fs.linkSync(path.join(readWriteFolder, 'file'), path.join(readOnlyFolder, 'link-to-read-only'));
-+diff --git a/test/fixtures/permission/fs-symlink.js b/test/fixtures/permission/fs-symlink.js
-+index 4cf3b45f0eb..ba60f7811bd 100644
-+--- a/test/fixtures/permission/fs-symlink.js
-++++ b/test/fixtures/permission/fs-symlink.js
-+@@ -54,7 +54,6 @@ const symlinkFromBlockedFile = process.env.EXISTINGSYMLINK;
-+     fs.readFileSync(blockedFile);
-+   }, common.expectsError({
-+     code: 'ERR_ACCESS_DENIED',
-+-    permission: 'FileSystemRead',
-+   }));
-+   assert.throws(() => {
-+     fs.appendFileSync(blockedFile, 'data');
-+@@ -68,7 +67,6 @@ const symlinkFromBlockedFile = process.env.EXISTINGSYMLINK;
-+     fs.symlinkSync(regularFile, blockedFolder + '/asdf', 'file');
-+   }, common.expectsError({
-+     code: 'ERR_ACCESS_DENIED',
-+-    permission: 'FileSystemWrite',
-+   }));
-+   assert.throws(() => {
-+     fs.linkSync(regularFile, blockedFolder + '/asdf');
-+@@ -82,7 +80,6 @@ const symlinkFromBlockedFile = process.env.EXISTINGSYMLINK;
-+     fs.symlinkSync(blockedFile, path.join(__dirname, '/asdf'), 'file');
-+   }, common.expectsError({
-+     code: 'ERR_ACCESS_DENIED',
-+-    permission: 'FileSystemRead',
-+   }));
-+   assert.throws(() => {
-+     fs.linkSync(blockedFile, path.join(__dirname, '/asdf'));
-+@@ -90,4 +87,19 @@ const symlinkFromBlockedFile = process.env.EXISTINGSYMLINK;
-+     code: 'ERR_ACCESS_DENIED',
-+     permission: 'FileSystemRead',
-+   }));
+++// Check if an exception is a stack overflow error (RangeError with
+++// "Maximum call stack size exceeded" message). This is used to handle
+++// stack overflow specially in TryCatchScope - instead of immediately
+++// exiting, we can use the red zone to re-throw to user code.
+++static bool IsStackOverflowError(Isolate* isolate, Local<Value> exception) {
+++  if (!exception->IsNativeError()) return false;
+++
+++  Local<Object> err_obj = exception.As<Object>();
+++  Local<String> constructor_name = err_obj->GetConstructorName();
+++
+++  // Must be a RangeError
+++  Utf8Value name(isolate, constructor_name);
+++  if (name.ToStringView() != "RangeError") return false;
+++
+++  // Check for the specific stack overflow message
+++  Local<Context> context = isolate->GetCurrentContext();
+++  Local<Value> message_val;
+++  if (!err_obj->Get(context, String::NewFromUtf8Literal(isolate, "message"))
+++           .ToLocal(&message_val)) {
+++    return false;
+++  }
+++
+++  if (!message_val->IsString()) return false;
+++
+++  Utf8Value message(isolate, message_val.As<String>());
+++  return message.ToStringView() == "Maximum call stack size exceeded";
 ++}
 ++
-++// fs.symlink API is blocked by default
-++{
-++  assert.throws(() => {
-++    fs.symlinkSync(regularFile, regularFile);
-++  }, common.expectsError({
-++    message: 'fs.symlink API requires full fs.read and fs.write permissions.',
-++    code: 'ERR_ACCESS_DENIED',
++ namespace errors {
++
++ TryCatchScope::~TryCatchScope() {
++-  if (HasCaught() && !HasTerminated() && mode_ == CatchMode::kFatal) {
+++  if (HasCaught() && !HasTerminated() && mode_ != CatchMode::kNormal) {
++     HandleScope scope(env_->isolate());
++     Local<v8::Value> exception = Exception();
++     Local<v8::Message> message = Message();
+++
+++    // Special handling for stack overflow errors in async_hooks: instead of
+++    // immediately exiting, re-throw the exception. This allows the exception
+++    // to propagate to user code's try-catch blocks.
+++    if (mode_ == CatchMode::kFatalRethrowStackOverflow &&
+++        IsStackOverflowError(env_->isolate(), exception)) {
+++      ReThrow();
+++      Reset();
+++      return;
+++    }
+++
++     EnhanceFatalException enhance = CanContinue() ?
++         EnhanceFatalException::kEnhance : EnhanceFatalException::kDontEnhance;
++     if (message.IsEmpty())
++@@ -1221,8 +1258,26 @@ void TriggerUncaughtException(Isolate* isolate,
++   if (env->can_call_into_js()) {
++     // We do not expect the global uncaught exception itself to throw any more
++     // exceptions. If it does, exit the current Node.js instance.
++-    errors::TryCatchScope try_catch(env,
++-                                    errors::TryCatchScope::CatchMode::kFatal);
+++    // Special case: if the original error was a stack overflow and calling
+++    // _fatalException causes another stack overflow, rethrow it to allow
+++    // user code's try-catch blocks to potentially catch it.
+++    auto is_stack_overflow = [&] {
+++      return IsStackOverflowError(env->isolate(), error);
+++    };
+++    // Without a JS stack, rethrowing may or may not do anything.
+++    // TODO(addaleax): In V8, expose a way to check whether there is a JS stack
+++    // or TryCatch that would capture the rethrown exception.
+++    auto has_js_stack = [&] {
+++      HandleScope handle_scope(env->isolate());
+++      Local<StackTrace> stack;
+++      return GetCurrentStackTrace(env->isolate(), 1).ToLocal(&stack) &&
+++             stack->GetFrameCount() > 0;
+++    };
+++    errors::TryCatchScope::CatchMode mode =
+++        is_stack_overflow() && has_js_stack()
+++            ? errors::TryCatchScope::CatchMode::kFatalRethrowStackOverflow
+++            : errors::TryCatchScope::CatchMode::kFatal;
+++    errors::TryCatchScope try_catch(env, mode);
++     // Explicitly disable verbose exception reporting -
++     // if process._fatalException() throws an error, we don't want it to
++     // trigger the per-isolate message listener which will call this
++diff --git a/src/node_errors.h b/src/node_errors.h
++index ac07b96b5ca..0b60e521df1 100644
++--- a/src/node_errors.h
+++++ b/src/node_errors.h
++@@ -265,7 +265,7 @@ namespace errors {
++
++ class TryCatchScope : public v8::TryCatch {
++  public:
++-  enum class CatchMode { kNormal, kFatal };
+++  enum class CatchMode { kNormal, kFatal, kFatalRethrowStackOverflow };
++
++   explicit TryCatchScope(Environment* env, CatchMode mode = CatchMode::kNormal)
++       : v8::TryCatch(env->isolate()), env_(env), mode_(mode) {}
++diff --git a/src/node_report.cc b/src/node_report.cc
++index 5368d8eef2f..f7ec2c6ed0e 100644
++--- a/src/node_report.cc
+++++ b/src/node_report.cc
++@@ -463,7 +463,8 @@ static void PrintJavaScriptStack(JSONWriter* writer,
++                                  const char* trigger) {
++   HandleScope scope(isolate);
++   Local<v8::StackTrace> stack;
++-  if (!GetCurrentStackTrace(isolate, MAX_FRAME_COUNT).ToLocal(&stack)) {
+++  if (!GetCurrentStackTrace(isolate, MAX_FRAME_COUNT).ToLocal(&stack) ||
+++      stack->GetFrameCount() == 0) {
++     PrintEmptyJavaScriptStack(writer);
++     return;
++   }
++diff --git a/test/parallel/test-async-hooks-stack-overflow-nested-async.js b/test/parallel/test-async-hooks-stack-overflow-nested-async.js
++new file mode 100644
++index 00000000000..779f8d75ae2
++--- /dev/null
+++++ b/test/parallel/test-async-hooks-stack-overflow-nested-async.js
++@@ -0,0 +1,80 @@
+++'use strict';
+++
+++// This test verifies that stack overflow during deeply nested async operations
+++// with async_hooks enabled can be caught by try-catch. This simulates real-world
+++// scenarios like processing deeply nested JSON structures where each level
+++// creates async operations (e.g., database calls, API requests).
+++
+++require('../common');
+++const assert = require('assert');
+++const { spawnSync } = require('child_process');
+++
+++if (process.argv[2] === 'child') {
+++  const { createHook } = require('async_hooks');
+++
+++  // Enable async_hooks with all callbacks (simulates APM tools)
+++  createHook({
+++    init() {},
+++    before() {},
+++    after() {},
+++    destroy() {},
+++    promiseResolve() {},
+++  }).enable();
+++
+++  // Simulate an async operation (like a database call or API request)
+++  async function fetchThing(id) {
+++    return { id, data: `data-${id}` };
+++  }
+++
+++  // Recursively process deeply nested data structure
+++  // This will cause stack overflow when the nesting is deep enough
+++  function processData(data, depth = 0) {
+++    if (Array.isArray(data)) {
+++      for (const item of data) {
+++        // Create a promise to trigger async_hooks init callback
+++        fetchThing(depth);
+++        processData(item, depth + 1);
+++      }
+++    }
+++  }
+++
+++  // Create deeply nested array structure iteratively (to avoid stack overflow
+++  // during creation)
+++  function createNestedArray(depth) {
+++    let result = 'leaf';
+++    for (let i = 0; i < depth; i++) {
+++      result = [result];
+++    }
+++    return result;
+++  }
+++
+++  // Create a very deep nesting that will cause stack overflow during processing
+++  const deeplyNested = createNestedArray(50000);
+++
+++  try {
+++    processData(deeplyNested);
+++    // Should not complete successfully - the nesting is too deep
+++    console.log('UNEXPECTED: Processing completed without error');
+++    process.exit(1);
+++  } catch (err) {
+++    assert.strictEqual(err.name, 'RangeError');
+++    assert.match(err.message, /Maximum call stack size exceeded/);
+++    console.log('SUCCESS: try-catch caught the stack overflow in nested async');
+++    process.exit(0);
+++  }
+++} else {
+++  // Parent process - spawn the child and check exit code
+++  const result = spawnSync(
+++    process.execPath,
+++    [__filename, 'child'],
+++    { encoding: 'utf8', timeout: 30000 }
+++  );
+++
+++  // Should exit successfully (try-catch worked)
+++  assert.strictEqual(result.status, 0,
+++                     `Expected exit code 0, got ${result.status}.\n` +
+++                     `stdout: ${result.stdout}\n` +
+++                     `stderr: ${result.stderr}`);
+++  // Verify the error was handled by try-catch
+++  assert.match(result.stdout, /SUCCESS: try-catch caught the stack overflow/);
+++}
++diff --git a/test/parallel/test-async-hooks-stack-overflow-try-catch.js b/test/parallel/test-async-hooks-stack-overflow-try-catch.js
++new file mode 100644
++index 00000000000..43338905e78
++--- /dev/null
+++++ b/test/parallel/test-async-hooks-stack-overflow-try-catch.js
++@@ -0,0 +1,47 @@
+++'use strict';
+++
+++// This test verifies that when a stack overflow occurs with async_hooks
+++// enabled, the exception can be caught by try-catch blocks in user code.
+++
+++require('../common');
+++const assert = require('assert');
+++const { spawnSync } = require('child_process');
+++
+++if (process.argv[2] === 'child') {
+++  const { createHook } = require('async_hooks');
+++
+++  createHook({ init() {} }).enable();
+++
+++  function recursive(depth = 0) {
+++    // Create a promise to trigger async_hooks init callback
+++    new Promise(() => {});
+++    return recursive(depth + 1);
+++  }
+++
+++  try {
+++    recursive();
+++    // Should not reach here
+++    process.exit(1);
+++  } catch (err) {
+++    assert.strictEqual(err.name, 'RangeError');
+++    assert.match(err.message, /Maximum call stack size exceeded/);
+++    console.log('SUCCESS: try-catch caught the stack overflow');
+++    process.exit(0);
+++  }
+++
+++  // Should not reach here
+++  process.exit(2);
+++} else {
+++  // Parent process - spawn the child and check exit code
+++  const result = spawnSync(
+++    process.execPath,
+++    [__filename, 'child'],
+++    { encoding: 'utf8', timeout: 30000 }
+++  );
+++
+++  assert.strictEqual(result.status, 0,
+++                     `Expected exit code 0 (try-catch worked), got ${result.status}.\n` +
+++                     `stdout: ${result.stdout}\n` +
+++                     `stderr: ${result.stderr}`);
+++  assert.match(result.stdout, /SUCCESS: try-catch caught the stack overflow/);
+++}
++diff --git a/test/parallel/test-async-hooks-stack-overflow.js b/test/parallel/test-async-hooks-stack-overflow.js
++new file mode 100644
++index 00000000000..aff41969dbd
++--- /dev/null
+++++ b/test/parallel/test-async-hooks-stack-overflow.js
++@@ -0,0 +1,47 @@
+++'use strict';
+++
+++// This test verifies that when a stack overflow occurs with async_hooks
+++// enabled, the uncaughtException handler is still called instead of the
+++// process crashing with exit code 7.
+++
+++const common = require('../common');
+++const assert = require('assert');
+++const { spawnSync } = require('child_process');
+++
+++if (process.argv[2] === 'child') {
+++  const { createHook } = require('async_hooks');
+++
+++  let handlerCalled = false;
+++
+++  function recursive() {
+++    // Create a promise to trigger async_hooks init callback
+++    new Promise(() => {});
+++    return recursive();
+++  }
+++
+++  createHook({ init() {} }).enable();
+++
+++  process.on('uncaughtException', common.mustCall((err) => {
+++    assert.strictEqual(err.name, 'RangeError');
+++    assert.match(err.message, /Maximum call stack size exceeded/);
+++    // Ensure handler is only called once
+++    assert.strictEqual(handlerCalled, false);
+++    handlerCalled = true;
 ++  }));
 ++
-++  fs.symlink(regularFile, regularFile, common.expectsError({
-++    message: 'fs.symlink API requires full fs.read and fs.write permissions.',
-++    code: 'ERR_ACCESS_DENIED',
-++  }));
-+ }
-+\ No newline at end of file
-+diff --git a/test/parallel/test-permission-fs-symlink-relative.js b/test/parallel/test-permission-fs-symlink-relative.js
-+index 4cc7d920593..9080f16c663 100644
-+--- a/test/parallel/test-permission-fs-symlink-relative.js
-++++ b/test/parallel/test-permission-fs-symlink-relative.js
-+@@ -1,4 +1,4 @@
-+-// Flags: --experimental-permission --allow-fs-read=* --allow-fs-write=*
-++// Flags: --experimental-permission --allow-fs-read=*
-+ 'use strict';
-+
-+ const common = require('../common');
-+@@ -10,7 +10,7 @@ const { symlinkSync, symlink, promises: { symlink: symlinkAsync } } = require('f
-+
-+ const error = {
-+   code: 'ERR_ACCESS_DENIED',
-+-  message: /relative symbolic link target/,
-++  message: /symlink API requires full fs\.read and fs\.write permissions/,
-+ };
-+
-+ for (const targetString of ['a', './b/c', '../d', 'e/../f', 'C:drive-relative', 'ntfs:alternate']) {
-+@@ -27,14 +27,14 @@ for (const targetString of ['a', './b/c', '../d', 'e/../f', 'C:drive-relative',
-+   }
-+ }
-+
-+-// Absolute should not throw
-++// Absolute should throw too
-+ for (const targetString of [path.resolve('.')]) {
-+   for (const target of [targetString, Buffer.from(targetString)]) {
-+     for (const path of [__filename]) {
-+       symlink(target, path, common.mustCall((err) => {
-+         assert(err);
-+-        assert.strictEqual(err.code, 'EEXIST');
-+-        assert.match(err.message, /file already exists/);
-++        assert.strictEqual(err.code, error.code);
-++        assert.match(err.message, error.message);
-+       }));
-+     }
-+   }
-+diff --git a/test/parallel/test-permission-fs-symlink.js b/test/parallel/test-permission-fs-symlink.js
-+index c7d753c267c..268a8ecb9aa 100644
-+--- a/test/parallel/test-permission-fs-symlink.js
-++++ b/test/parallel/test-permission-fs-symlink.js
-+@@ -21,15 +21,26 @@ const commonPathWildcard = path.join(__filename, '../../common*');
-+ const blockedFile = fixtures.path('permission', 'deny', 'protected-file.md');
-+ const blockedFolder = tmpdir.resolve('subdirectory');
-+ const symlinkFromBlockedFile = tmpdir.resolve('example-symlink.md');
-++const allowedFolder = tmpdir.resolve('allowed-folder');
-++const traversalSymlink = path.join(allowedFolder, 'deep1', 'deep2', 'deep3', 'gotcha');
-+
-+ {
-+   tmpdir.refresh();
-+   fs.mkdirSync(blockedFolder);
-++  // Create deep directory structure for path traversal test
-++  fs.mkdirSync(allowedFolder);
-++  fs.writeFileSync(path.resolve(allowedFolder, '../protected-file.md'), 'protected');
-++  fs.mkdirSync(path.join(allowedFolder, 'deep1'));
-++  fs.mkdirSync(path.join(allowedFolder, 'deep1', 'deep2'));
-++  fs.mkdirSync(path.join(allowedFolder, 'deep1', 'deep2', 'deep3'));
-+ }
-+
-+ {
-+   // Symlink previously created
-++  // fs.symlink API is allowed when full-read and full-write access
-+   fs.symlinkSync(blockedFile, symlinkFromBlockedFile);
-++  // Create symlink for path traversal test - symlink points to parent directory
-++  fs.symlinkSync(allowedFolder, traversalSymlink);
-+ }
-+
-+ {
-+@@ -38,6 +49,7 @@ const symlinkFromBlockedFile = tmpdir.resolve('example-symlink.md');
-+     [
-+       '--experimental-permission',
-+       `--allow-fs-read=${file}`, `--allow-fs-read=${commonPathWildcard}`, `--allow-fs-read=${symlinkFromBlockedFile}`,
-++      `--allow-fs-read=${allowedFolder}`,
-+       `--allow-fs-write=${symlinkFromBlockedFile}`,
-+       file,
-+     ],
-+@@ -47,6 +59,8 @@ const symlinkFromBlockedFile = tmpdir.resolve('example-symlink.md');
-+         BLOCKEDFOLDER: blockedFolder,
-+         BLOCKEDFILE: blockedFile,
-+         EXISTINGSYMLINK: symlinkFromBlockedFile,
-++        TRAVERSALSYMLINK: traversalSymlink,
-++        ALLOWEDFOLDER: allowedFolder,
-+       },
-+     }
-+   );
+++  setImmediate(recursive);
+++} else {
+++  // Parent process - spawn the child and check exit code
+++  const result = spawnSync(
+++    process.execPath,
+++    [__filename, 'child'],
+++    { encoding: 'utf8', timeout: 30000 }
+++  );
+++
+++  // Should exit with code 0 (handler was called and handled the exception)
+++  // Previously would exit with code 7 (kExceptionInFatalExceptionHandler)
+++  assert.strictEqual(result.status, 0,
+++                     `Expected exit code 0, got ${result.status}.\n` +
+++                     `stdout: ${result.stdout}\n` +
+++                     `stderr: ${result.stderr}`);
+++}
++diff --git a/test/parallel/test-uncaught-exception-handler-stack-overflow-on-stack-overflow.js b/test/parallel/test-uncaught-exception-handler-stack-overflow-on-stack-overflow.js
++new file mode 100644
++index 00000000000..1923b7f24d9
++--- /dev/null
+++++ b/test/parallel/test-uncaught-exception-handler-stack-overflow-on-stack-overflow.js
++@@ -0,0 +1,29 @@
+++'use strict';
+++
+++// This test verifies that when the uncaughtException handler itself causes
+++// a stack overflow, the process exits with a non-zero exit code.
+++// This is important to ensure we don't silently swallow errors.
+++
+++require('../common');
+++const assert = require('assert');
+++const { spawnSync } = require('child_process');
+++
+++if (process.argv[2] === 'child') {
+++  function f() { f(); }
+++  process.on('uncaughtException', f);
+++  f();
+++} else {
+++  // Parent process - spawn the child and check exit code
+++  const result = spawnSync(
+++    process.execPath,
+++    [__filename, 'child'],
+++    { encoding: 'utf8', timeout: 30000 }
+++  );
+++
+++  // Should exit with non-zero exit code since the uncaughtException handler
+++  // itself caused a stack overflow.
+++  assert.notStrictEqual(result.status, 0,
+++                        `Expected non-zero exit code, got ${result.status}.\n` +
+++                        `stdout: ${result.stdout}\n` +
+++                        `stderr: ${result.stderr}`);
+++}
++diff --git a/test/parallel/test-uncaught-exception-handler-stack-overflow.js b/test/parallel/test-uncaught-exception-handler-stack-overflow.js
++new file mode 100644
++index 00000000000..050cd0923ee
++--- /dev/null
+++++ b/test/parallel/test-uncaught-exception-handler-stack-overflow.js
++@@ -0,0 +1,29 @@
+++'use strict';
+++
+++// This test verifies that when the uncaughtException handler itself causes
+++// a stack overflow, the process exits with a non-zero exit code.
+++// This is important to ensure we don't silently swallow errors.
+++
+++require('../common');
+++const assert = require('assert');
+++const { spawnSync } = require('child_process');
+++
+++if (process.argv[2] === 'child') {
+++  function f() { f(); }
+++  process.on('uncaughtException', f);
+++  throw new Error('X');
+++} else {
+++  // Parent process - spawn the child and check exit code
+++  const result = spawnSync(
+++    process.execPath,
+++    [__filename, 'child'],
+++    { encoding: 'utf8', timeout: 30000 }
+++  );
+++
+++  // Should exit with non-zero exit code since the uncaughtException handler
+++  // itself caused a stack overflow.
+++  assert.notStrictEqual(result.status, 0,
+++                        `Expected non-zero exit code, got ${result.status}.\n` +
+++                        `stdout: ${result.stdout}\n` +
+++                        `stderr: ${result.stderr}`);
+++}
 +--
 +2.43.7
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
-index 67574a2ec1..7c97c7282c 100644
+index 7c97c7282c..779c70dbd0 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
-@@ -30,6 +30,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-src-fix-build-with-GCC-15.patch \
+@@ -31,6 +31,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
             file://run-ptest \
             file://CVE-2025-55132.patch \
-+           file://CVE-2025-55130.patch \
+            file://CVE-2025-55130.patch \
++           file://CVE-2025-59466.patch \
             "
  SRC_URI:append:class-target = " \
             file://0001-Using-native-binaries.patch \
