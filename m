@@ -1,227 +1,778 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C94B9EDF04E
-	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 07:07:32 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.40669.1770880051022164843
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15E62EDF04C
+	for <webhook@archiver.kernel.org>; Thu, 12 Feb 2026 08:06:33 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.40977.1770883591763281044
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Feb 2026 23:07:31 -0800
+ Thu, 12 Feb 2026 00:06:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bw2GHLBN;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-7964f1405a0so44886467b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Feb 2026 23:07:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sgjddrl3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-47ee07570deso56747115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 00:06:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770880050; x=1771484850; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NHfUbgr9OcsVNmtflDpDEiNSabPHr38Trd15XzEIFlc=;
-        b=Bw2GHLBNSQd1m2RkG8RdtAOO43eYkuDHD7gg4qTuhL3EHoHFKosoChjP9MISK9/6GE
-         2dAcm7QzLLH/caEo86Pfo67+swZmvpipdW1u+M7iSmDNvxCOL7g4wTuX48xL5cwlIt1v
-         +ohnOn9xpZKn7+Aq1Icc35tArqNSWCXttKCWNiGpOYdkwDJXT5CMDbGFGNKz3fU4mnCt
-         oyE7J0OLVnTFH4m+JWt57RhFEnxZkL0GfQNJBw5Qw165fjcwvDd+P6NKfoO+eZa4WURE
-         4xbrNuHhdICROU9e3jpJCi3CsZyIOU6D1sONzUxIxu7CghO3LFjlw/1dL+vPaLrCbSJS
-         qppA==
+        d=gmail.com; s=20230601; t=1770883590; x=1771488390; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=yIrwjCwYzsVqsISxXEn0tVaLK1bZOrwpmzvLjaBs1Xw=;
+        b=Sgjddrl3ckojyK9lXF+IUw/eeC0VMXXtI/BhRYFo4A7rgiQnpLn5UmkU0vUGVoUmFj
+         TYg3z6/dW+7SrNcOszLSd6BDJNyynZAGpuzqpeOI/K1LegD5c6ePbDVJi8UkcAo0p2It
+         yWS0rDbs2KpvGS66ezUEEs8xFclbpJTBo6W92JwM6SyVR6+s6zx70xyqLgdvk0Eq3dZM
+         3t9r/f84bWaDOnB4AOFQHcWSDQvtS2wmObOvbsmxuGHUti1TA5P63e7glADEXvO5PEQi
+         LaWCh9aOKKnytdloT6bR7siSaOZPNtwsMb2LdF0Smp8fWL46MaqQgEAf9L/ZABI2IvgN
+         9NUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770880050; x=1771484850;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NHfUbgr9OcsVNmtflDpDEiNSabPHr38Trd15XzEIFlc=;
-        b=BHysp2fwYBjgHUq3h91vXx98AbxUoZW6rdwxADveCUl3HM5jTTCQVmhJYVOIi9zRIJ
-         poAT/HczaCfDbHDHOWYsv1rsem8V1Q+VWbnuEAsltSV1JSIYphUxMvFj8M3S8R2w/zbs
-         EMmKzhm6ReFh7jKuBU73JHjCd2/v/u0uKSsyfwfU+ogbFIF1vjg3SF4uXKGa1xQ/gqWq
-         JrW30DxR4nlY25eCrftIeXC1DcIgUd+khK6UEXdkunlbvrriPJHWhJdSP9wak/ARgJiN
-         cGXBpd82CQ2GiYCgtORM7df1uiAnI6nEFKUZVCJqQZSHxt3bxyKkA3tLhc2NXg2FLYzW
-         CMRA==
-X-Gm-Message-State: AOJu0Yyx39d0PQ5lqYiRpEQowJ/zuFsRHwaBLvz2Aacj8aWvmc6Hngvm
-	fN1j364OxwVnB/Ff6c5qe1IVf6jAtvoqBfdz9DAXVcBrxZjeGW8B/sY6wSZs3CQK
-X-Gm-Gg: AZuq6aJ9tLlgJGrFSmKosGOBPoUGPzyGkG2gEucPUZEDAsNkeY8xAqygexX8eUOSCzQ
-	mb2uXHnYHDHOybL67WJSEAM/xwvNoY53mstXPVc/PK1fm7EbxzcDAFduHFZOfayYlBs/hSQCCpW
-	cP+TyoYeuJkqy80va/DsdjvJ6fktEGJL6drNWGo0ONt+jjj1PsnYaV4FAtMoyaUWYZs4jzBE9KU
-	1UYMLrodhUde6Dyhk0D9EdJJpM7Ibujuuraf1WVoH1N8VpLgUqtr8YsJNtpcyGRIveFoevymXkL
-	o1XIfJzLvWvYfBjTnVdX3cp+Qvb3EtJ17oesbsC+joJSN+5yIfmT7pI7hxUwqH9scYAJeInmzac
-	K5A59lQDrMrYwzjFAnYiPP0ljx/fcOaPHYgDDMpSeHGUbsdwWCihP7p/VhyIivZYhC+R28/bYr3
-	q5F1EC1C33grgoVN0i+cElmlR2buY5MghImSNDaMD4o5Eoetp8UNQrt3bF6AmKK9L/eAyoLml3t
-	qUS9v1LEnvpCeEeeWM3EhufsOfL0Vb7dp+STvpHC9kL24ufKm1NJasxWznRzQ==
-X-Received: by 2002:a05:690c:c50d:b0:795:3e1:ddac with SMTP id 00721157ae682-797376de053mr21113017b3.21.1770880044871;
-        Wed, 11 Feb 2026 23:07:24 -0800 (PST)
-Received: from localhost.localdomain ([67.233.59.72])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7966c16e5desm37695817b3.11.2026.02.11.23.07.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Feb 2026 23:07:24 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-xfce][kirkstone][PATCH] Use https when accessing archive.xfce.org
-Date: Thu, 12 Feb 2026 02:06:49 -0500
-Message-ID: <20260212070649.8819-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1770883590; x=1771488390;
+        h=content-transfer-encoding:in-reply-to:content-language:references
+         :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=yIrwjCwYzsVqsISxXEn0tVaLK1bZOrwpmzvLjaBs1Xw=;
+        b=B89IasCkFU30h0E0ScBThiV8mTCA6PPRJ9z/rGvQgIa3/DFqDCTmzWG+7ATF1mXUDP
+         wQLy+b+UsXwZU++OoSNyi3CDOpWBKpExRAWChw6UpzIr6NqB94IPKVZ5c9s1lTuGiz6o
+         Ma7c6D52Q6cioY2MoVaLg0ZtAMt85ipH6U4REksdc3Lev56dhblDK2PXCKcAShau9Xkj
+         sO98Jo8M/utJWckaVVCGgA1oBOaGFRopIAoljX5qtUOzpH9swSdn/D6fLEVpK6g8q0n2
+         Er12ieVZJJu1WYWZ3WxlVuSDVoZcJoSPIVgTAoAr/5q5E6jZ2mL2A4zvMKq7bSvQBmd2
+         BmQQ==
+X-Gm-Message-State: AOJu0YzSkc2SF2fzfkK1sjI1C8aMErF3WCH53RS/hEHv2D2nhOIEhUeH
+	omhOoBpkLoVclOIMRjS8vrGBMnGppSnlWoGDwnPnPSjwq+4DQUEHgCA/
+X-Gm-Gg: AZuq6aK5jP0TOeIuI32yJ7JAf20pjuMOkgFI12qz73mN1Gil+1vtDX8j9OgCtSHj/GP
+	0ot2SgzWJB/qnJGI+y8HJbWypBFsYrIbvDf1oKyo8Kwr3KZzDhjMDZitK32GjfcSYJ7Imet34et
+	FUUfubehPOtVAgtBSnfPSiWjw/kMJT0OOJlA6Yl/Wxkt5TngsQt1io3vcJ/B2vR2elrz8vAm03O
+	QntEiCK8skylz73oQ5Ru6Cj+hZbIpQAchaO3BXLTCaQyn2eGqNXaXQUf/k9zJQ1Hs8DX9b9pY3l
+	oNOJtKoZS/5xaip96Q0ABnM/y3PMQZigKYme3piiOS+7un9x5GrB/NKCkJQa2cHHtNKyyhZVpnR
+	zk0/v4bd9LVNMVmqjaUqavRtOMHDB4kE/VrBpyppxFx7jKOi0DvWqrZHgYt9Mx5WEI/Th1c/1pN
+	Ecmf8uSBuIl6c2LWZ8K5GgAp9NvM5n5jQ=
+X-Received: by 2002:a05:600c:8b64:b0:480:1c85:88bf with SMTP id 5b1f17b1804b1-48365717939mr24333365e9.27.1770883589554;
+        Thu, 12 Feb 2026 00:06:29 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d82a4afsm343141005e9.11.2026.02.12.00.06.28
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 12 Feb 2026 00:06:28 -0800 (PST)
+Message-ID: <11c07009-36cc-4e01-abc2-0785e56c6f9a@gmail.com>
+Date: Thu, 12 Feb 2026 09:06:28 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 06/15] nodejs: upgrade 20.18.2 ->
+ 20.20.0
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260207103359.4177243-1-skandigraun@gmail.com>
+ <20260207103359.4177243-6-skandigraun@gmail.com>
+ <CA+s=J=zCL6Ud_5WQinoZNcf1mHhcRyU8ZVkavr_cOv1GfNf7-w@mail.gmail.com>
+ <1b6e809e-098e-4918-98f7-43f0b3c7411b@gmail.com>
+Content-Language: en-US
+In-Reply-To: <1b6e809e-098e-4918-98f7-43f0b3c7411b@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 07:07:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124344
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 08:06:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124345
 
-While using devtool to check available versions, I noticed a 301 http error.
+On 2/12/26 07:10, Gyorgy Sarvari wrote:
+> On 2/12/26 06:55, Anuj Mittal wrote:
+>> This is failing with qemuarm + gcc:
+>>
+>> | ../deps/llhttp/src/llhttp.c: In function 'llhttp__internal__run':
+>> | ../deps/llhttp/src/llhttp.c:2645:9: note: use
+>> '-flax-vector-conversions' to permit conversions between vectors with
+>> differing element types or numbers of subparts
+>> |  2645 |         );
+>> |       |         ^
+>> | ../deps/llhttp/src/llhttp.c:2643:11: error: incompatible type for
+>> argument 1 of 'vandq_u16'
+>> |  2643 |           vcgeq_u8(input, vdupq_n_u8(' ')),
+>> |       |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> |       |           |
+>> |       |           uint8x16_t
+>>
+>> This seems same: https://github.com/xmrig/xmrig/issues/3673
+>
+> I see... Hongxu has already added it in master[1]. Testing it now. If it
+> doesn't blow up, will send a cherry pick.
+>
+> [1]:
+> https://git.openembedded.org/meta-openembedded/commit/?id=fe7aaabb1c30cf263738dbf5df927650809e8074
 
-Specifically :
 
-$ devtool latest-version libxfce4ui
+Sorry, please feel free to drop this for now, I will take another stab
+at it soon-ish.
+I think I understand why it happens with arm, but I don't get it yet why
+it doesn't happen with aarch64, and it bothers me a bit. Want to stare
+at it a bit more, but can do it only a bit later.
 
-Resolving archive.xfce.org (archive.xfce.org)... 217.70.191.87
-Connecting to archive.xfce.org (archive.xfce.org)|217.70.191.87|:80... connected
-.
-HTTP request sent, awaiting response... 301 Moved Permanently
-Location: https://archive.xfce.org/src/xfce/libxfce4ui/4.20/ [following]
 
-With this patch, we change to make the SRC_URI an https request.
-
-A similar patch is already in master - commit 808916819692d4ee2a592ef25af55081d80a8021
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-xfce/classes/thunar-plugin.bbclass                         | 2 +-
- meta-xfce/classes/xfce-app.bbclass                              | 2 +-
- meta-xfce/classes/xfce-panel-plugin.bbclass                     | 2 +-
- meta-xfce/classes/xfce.bbclass                                  | 2 +-
- .../xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb         | 2 +-
- meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb       | 2 +-
- meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb            | 2 +-
- .../diskperf/xfce4-diskperf-plugin_2.7.0.bb                     | 2 +-
- .../recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.0.bb | 2 +-
- .../recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.16.0.bb      | 2 +-
- 10 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/meta-xfce/classes/thunar-plugin.bbclass b/meta-xfce/classes/thunar-plugin.bbclass
-index 423f337bef..969360a0d2 100644
---- a/meta-xfce/classes/thunar-plugin.bbclass
-+++ b/meta-xfce/classes/thunar-plugin.bbclass
-@@ -4,7 +4,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS += "thunar"
- 
--SRC_URI = "http://archive.xfce.org/src/thunar-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/thunar-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
- 
- FILES:${PN} += "${libdir}/thunarx-3/*.so"
- 
-diff --git a/meta-xfce/classes/xfce-app.bbclass b/meta-xfce/classes/xfce-app.bbclass
-index d1b07d7457..d539b720a6 100644
---- a/meta-xfce/classes/xfce-app.bbclass
-+++ b/meta-xfce/classes/xfce-app.bbclass
-@@ -2,5 +2,5 @@ inherit xfce features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
- 
-diff --git a/meta-xfce/classes/xfce-panel-plugin.bbclass b/meta-xfce/classes/xfce-panel-plugin.bbclass
-index b43f9e3125..9ba117a484 100644
---- a/meta-xfce/classes/xfce-panel-plugin.bbclass
-+++ b/meta-xfce/classes/xfce-panel-plugin.bbclass
-@@ -4,7 +4,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS += "libxfce4ui libxfce4util xfce4-panel"
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
- 
- FILES:${PN} += "${datadir}/xfce4/panel-plugins/"
- FILES:${PN} += "${datadir}/xfce4/panel/plugins/"
-diff --git a/meta-xfce/classes/xfce.bbclass b/meta-xfce/classes/xfce.bbclass
-index 913202be59..79a249f92c 100644
---- a/meta-xfce/classes/xfce.bbclass
-+++ b/meta-xfce/classes/xfce.bbclass
-@@ -4,7 +4,7 @@ def xfce_verdir(v):
-     return "%s.%s" % (m.group(1), m.group(2))
- 
- HOMEPAGE = "http://www.xfce.org"
--SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
- 
- inherit autotools gettext gtk-icon-cache pkgconfig
- 
-diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
-index f4681f4602..fa13f32be8 100644
---- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
-+++ b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.13.bb
-@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS += "intltool-native"
- 
--SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2 \
-+SRC_URI = "https://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2 \
-            file://not-create-link-to-locale.patch \
-            file://0001-Makefile.in.in-Pass-arguments-to-tar.patch \
-            "
-diff --git a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-index 272f83c01b..9472c6e2cf 100644
---- a/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-+++ b/meta-xfce/recipes-art/xfwm4-themes/xfwm4-themes_4.10.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit xfce
- 
--SRC_URI = "http://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/art/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.bz2"
- SRC_URI[md5sum] = "eaa58362053a3549c8be0b32efd3c54f"
- SRC_URI[sha256sum] = "3214d5f00e9703b5e8c9e7c3287d606dedec7285ceb4d5db332e93ada66fd575"
- 
-diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-index 0a65bd94a2..b910acf64d 100644
---- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-+++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-@@ -8,7 +8,7 @@ inherit xfce pkgconfig features_check
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI = " \
--    http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
-+    https://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2 \
-     file://0001-configure.ac-Detect-vapidir-if-not-set-explicitly.patch \
- "
- SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-index 583aa9a006..5acc3b2508 100644
---- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.7.0.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
- SRC_URI[sha256sum] = "5909a65341a6af4d7ff3c7bb87aeac91c763f69b43ae9dc4a10668ac226fecc9"
-diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.0.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.0.bb
-index 267d11b44b..242813130d 100644
---- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.4.0.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
- SRC_URI[sha256sum] = "6c76260e101790754dd93255ec979accd97d21a21da85d8edcd6c7b01ddcd70c"
-diff --git a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.16.0.bb b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.16.0.bb
-index 5c41a76ed6..1536d5fb7f 100644
---- a/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.16.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools_4.16.0.bb
-@@ -11,7 +11,7 @@ inherit autotools pkgconfig
- 
- BBCLASSEXTEND = "native"
- 
--SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "https://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BPN}-${PV}.tar.bz2"
- SRC_URI:append:class-target = " file://0001-Run-native-xdt-csource-on-tests.patch"
- SRC_URI[sha256sum] = "f50b3070e66f3ebdf331744dd1ec5e1af5de333965d491e15ce05545e8eb4f04"
- 
--- 
-2.43.0
+>
+>> On Sat, Feb 7, 2026 at 6:34 PM Gyorgy Sarvari via
+>> lists.openembedded.org <skandigraun=gmail.com@lists.openembedded.org>
+>> wrote:
+>>> Part of nodejs LTS release, contains many security- and bugfixes.
+>>>
+>>> Ptests passed successfully.
+>>>
+>>> Full changelog:
+>>> https://github.com/nodejs/node/blob/v20.x/doc/changelogs/CHANGELOG_V20.md
+>>>
+>>> Dropped patches that are included in this release.
+>>>
+>>> Added 0001-Revert-stop-using-deprecated-ares_query.patch:
+>>> Nodejs has changed a deprecated c-ares call to a newer version,
+>>> however this newer method is not available in the c-ares shipped
+>>> in meta-oe, and it failed to compile (the new call was added to c-ares
+>>> in v1.28.0, but Scarthgap comes with v1.27.0). This patch reverts this
+>>> failing commit completely. Based on the PR/issue discussions, the
+>>> only goal was to eliminate deprecation warnings. There seem to be
+>>> no logic change from this change.
+>>>
+>>> License-Update:
+>>> - The license file was regenerated, to ensure it is up to date.
+>>>   It contains all licenses from all vendored dependecies. This
+>>>   resulted in adding nlohmann-json license to the file, which
+>>>   is MIT. There were already other MIT dependencies, so this
+>>>   didn't change the overall license declaration.
+>>> - base64 related license was removed, because base64 code was
+>>>   simplified, so it doesn't depend on this library anymore.
+>>>   (It was BSD-2-Clause, but there ar other dependencies using
+>>>   this license, so the overall license didn't change)
+>>>
+>>> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>>> ---
+>>>  .../oe-npm-cache                              |   0
+>>>  ....18.bb => nodejs-oe-cache-native_20.20.bb} |   0
+>>>  ...e-running-gyp-files-for-bundled-deps.patch |  46 -----
+>>>  ...ert-stop-using-deprecated-ares_query.patch | 164 ++++++++++++++++
+>>>  ...4-Do-not-use-mminimal-toc-with-clang.patch |  27 ++-
+>>>  .../0001-src-fix-build-with-GCC-15.patch      |  33 ----
+>>>  .../nodejs/nodejs/182d9c05e78.patch           | 182 ------------------
+>>>  .../nodejs/zlib-fix-pointer-alignment.patch   |  64 ------
+>>>  .../{nodejs_20.18.2.bb => nodejs_20.20.0.bb}  |   9 +-
+>>>  9 files changed, 185 insertions(+), 340 deletions(-)
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.18 => nodejs-oe-cache-20.20}/oe-npm-cache (100%)
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.18.bb => nodejs-oe-cache-native_20.20.bb} (100%)
+>>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+>>>  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
+>>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
+>>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
+>>>  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.patch
+>>>  rename meta-oe/recipes-devtools/nodejs/{nodejs_20.18.2.bb => nodejs_20.20.0.bb} (95%)
+>>>
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.18/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.20/oe-npm-cache
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.18/oe-npm-cache
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.20/oe-npm-cache
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.20.bb
+>>> similarity index 100%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.18.bb
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.20.bb
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+>>> deleted file mode 100644
+>>> index 12f6cd8b96..0000000000
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+>>> +++ /dev/null
+>>> @@ -1,46 +0,0 @@
+>>> -From 7d94bfe53beeb2d25eb5f2ff6b1d509df7e6ab80 Mon Sep 17 00:00:00 2001
+>>> -From: Zuzana Svetlikova <zsvetlik@redhat.com>
+>>> -Date: Thu, 27 Apr 2017 14:25:42 +0200
+>>> -Subject: [PATCH] Disable running gyp on shared deps
+>>> -
+>>> -Upstream-Status: Inappropriate [embedded specific]
+>>> -
+>>> -Probably imported from:
+>>> -https://src.fedoraproject.org/rpms/nodejs/c/41af04f2a3c050fb44628e91ac65fd225b927acb?branch=22609d8c1bfeaa21fe0057645af20b3a2ccc7f53
+>>> -which is probably based on dont-run-gyp-files-for-bundled-deps.patch added in:
+>>> -https://github.com/alpinelinux/aports/commit/6662eb3199902e8451fb20dce82554ad96f796bb
+>>> -
+>>> -We also explicitly prune some dependencies from source in the bitbake recipe:
+>>> -
+>>> -python prune_sources() {
+>>> -    import shutil
+>>> -
+>>> -    shutil.rmtree(d.getVar('S') + '/deps/openssl')
+>>> -    if 'ares' in d.getVar('PACKAGECONFIG'):
+>>> -        shutil.rmtree(d.getVar('S') + '/deps/cares')
+>>> -    if 'brotli' in d.getVar('PACKAGECONFIG'):
+>>> -        shutil.rmtree(d.getVar('S') + '/deps/brotli')
+>>> -    if 'libuv' in d.getVar('PACKAGECONFIG'):
+>>> -        shutil.rmtree(d.getVar('S') + '/deps/uv')
+>>> -    if 'nghttp2' in d.getVar('PACKAGECONFIG'):
+>>> -        shutil.rmtree(d.getVar('S') + '/deps/nghttp2')
+>>> -    if 'zlib' in d.getVar('PACKAGECONFIG'):
+>>> -        shutil.rmtree(d.getVar('S') + '/deps/zlib')
+>>> -}
+>>> -do_unpack[postfuncs] += "prune_sources"
+>>> -
+>>> ----
+>>> - Makefile | 2 +-
+>>> - 1 file changed, 1 insertion(+), 1 deletion(-)
+>>> -
+>>> ---- a/Makefile
+>>> -+++ b/Makefile
+>>> -@@ -169,7 +169,7 @@ with-code-cache test-code-cache:
+>>> -       $(warning '$@' target is a noop)
+>>> -
+>>> - out/Makefile: config.gypi common.gypi node.gyp \
+>>> --      deps/uv/uv.gyp deps/llhttp/llhttp.gyp deps/zlib/zlib.gyp \
+>>> -+      deps/llhttp/llhttp.gyp \
+>>> -       deps/simdutf/simdutf.gyp deps/ada/ada.gyp \
+>>> -       tools/v8_gypfiles/toolchain.gypi tools/v8_gypfiles/features.gypi \
+>>> -       tools/v8_gypfiles/inspector.gypi tools/v8_gypfiles/v8.gyp
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
+>>> new file mode 100644
+>>> index 0000000000..ae4c316baf
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
+>>> @@ -0,0 +1,164 @@
+>>> +From f421a0f1f962acff2c71cba06c9ae2af85bd09ee Mon Sep 17 00:00:00 2001
+>>> +From: Gyorgy Sarvari <skandigraun@gmail.com>
+>>> +Date: Fri, 6 Feb 2026 21:42:56 +0100
+>>> +Subject: [PATCH] Revert "stop using deprecated ares_query"
+>>> +
+>>> +Nodejs has removed the usage of some deprecated c-ares calls[1],
+>>> +however as a result the c-ares requirements have increased beyond
+>>> +the c-ares version than what is available in Scarthgap.
+>>> +
+>>> +Due to this it failed to compile:
+>>> +../src/cares_wrap.h:264:22: error: 'ares_query_dnsrec' was not declared in this scope
+>>> +
+>>> +To be able to still compile nodejs, keep using the original, deprectaed
+>>> +calls. This patch reverts the below linked commit.
+>>> +
+>>> +[1]: https://github.com/nodejs/node/commit/22e0d17097fa419cde5fcd5d648fe70aa9fb80e2
+>>> +
+>>> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+>>> +---
+>>> + src/cares_wrap.cc | 24 ++++++++++++------------
+>>> + src/cares_wrap.h  | 35 ++++++++++++++++-------------------
+>>> + 2 files changed, 28 insertions(+), 31 deletions(-)
+>>> +
+>>> +diff --git a/src/cares_wrap.cc b/src/cares_wrap.cc
+>>> +index 2388c604..5a8e11c7 100644
+>>> +--- a/src/cares_wrap.cc
+>>> ++++ b/src/cares_wrap.cc
+>>> +@@ -825,62 +825,62 @@ void ChannelWrap::EnsureServers() {
+>>> + }
+>>> +
+>>> + int AnyTraits::Send(QueryWrap<AnyTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_ANY);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_any);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int ATraits::Send(QueryWrap<ATraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_A);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_a);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int AaaaTraits::Send(QueryWrap<AaaaTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_AAAA);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_aaaa);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int CaaTraits::Send(QueryWrap<CaaTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_CAA);
+>>> ++  wrap->AresQuery(name, ns_c_in, T_CAA);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int CnameTraits::Send(QueryWrap<CnameTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_CNAME);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_cname);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int MxTraits::Send(QueryWrap<MxTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_MX);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_mx);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int NsTraits::Send(QueryWrap<NsTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_NS);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_ns);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int TxtTraits::Send(QueryWrap<TxtTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_TXT);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_txt);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int SrvTraits::Send(QueryWrap<SrvTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_SRV);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_srv);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int PtrTraits::Send(QueryWrap<PtrTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_PTR);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_ptr);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int NaptrTraits::Send(QueryWrap<NaptrTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_NAPTR);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_naptr);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> + int SoaTraits::Send(QueryWrap<SoaTraits>* wrap, const char* name) {
+>>> +-  wrap->AresQuery(name, ARES_CLASS_IN, ARES_REC_TYPE_SOA);
+>>> ++  wrap->AresQuery(name, ns_c_in, ns_t_soa);
+>>> +   return ARES_SUCCESS;
+>>> + }
+>>> +
+>>> +diff --git a/src/cares_wrap.h b/src/cares_wrap.h
+>>> +index a770d9e3..820c5d88 100644
+>>> +--- a/src/cares_wrap.h
+>>> ++++ b/src/cares_wrap.h
+>>> +@@ -254,20 +254,18 @@ class QueryWrap final : public AsyncWrap {
+>>> +     return Traits::Send(this, name);
+>>> +   }
+>>> +
+>>> +-  void AresQuery(const char* name,
+>>> +-                 ares_dns_class_t dnsclass,
+>>> +-                 ares_dns_rec_type_t type) {
+>>> ++  void AresQuery(const char* name, int dnsclass, int type) {
+>>> +     channel_->EnsureServers();
+>>> +     TRACE_EVENT_NESTABLE_ASYNC_BEGIN1(
+>>> +       TRACING_CATEGORY_NODE2(dns, native), trace_name_, this,
+>>> +       "name", TRACE_STR_COPY(name));
+>>> +-    ares_query_dnsrec(channel_->cares_channel(),
+>>> +-                      name,
+>>> +-                      dnsclass,
+>>> +-                      type,
+>>> +-                      Callback,
+>>> +-                      MakeCallbackPointer(),
+>>> +-                      nullptr);
+>>> ++    ares_query(
+>>> ++        channel_->cares_channel(),
+>>> ++        name,
+>>> ++        dnsclass,
+>>> ++        type,
+>>> ++        Callback,
+>>> ++        MakeCallbackPointer());
+>>> +   }
+>>> +
+>>> +   void ParseError(int status) {
+>>> +@@ -314,20 +312,19 @@ class QueryWrap final : public AsyncWrap {
+>>> +     return wrap;
+>>> +   }
+>>> +
+>>> +-  static void Callback(void* arg,
+>>> +-                       ares_status_t status,
+>>> +-                       size_t timeouts,
+>>> +-                       const ares_dns_record_t* dnsrec) {
+>>> ++  static void Callback(
+>>> ++      void* arg,
+>>> ++      int status,
+>>> ++      int timeouts,
+>>> ++      unsigned char* answer_buf,
+>>> ++      int answer_len) {
+>>> +     QueryWrap<Traits>* wrap = FromCallbackPointer(arg);
+>>> +     if (wrap == nullptr) return;
+>>> +
+>>> +     unsigned char* buf_copy = nullptr;
+>>> +-    size_t answer_len = 0;
+>>> +     if (status == ARES_SUCCESS) {
+>>> +-      // No need to explicitly call ares_free_string here,
+>>> +-      // as it is a wrapper around free, which is already
+>>> +-      // invoked when MallocedBuffer is destructed.
+>>> +-      ares_dns_write(dnsrec, &buf_copy, &answer_len);
+>>> ++      buf_copy = node::Malloc<unsigned char>(answer_len);
+>>> ++      memcpy(buf_copy, answer_buf, answer_len);
+>>> +     }
+>>> +
+>>> +     wrap->response_data_ = std::make_unique<ResponseData>();
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch
+>>> index dd9c9015e2..3c78ac87ae 100644
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch
+>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch
+>>> @@ -14,12 +14,21 @@ Upstream-Status: Pending
+>>>
+>>>  --- a/common.gypi
+>>>  +++ b/common.gypi
+>>> -@@ -417,7 +417,7 @@
+>>> -             'ldflags': [ '-m32' ],
+>>> -           }],
+>>> -           [ 'target_arch=="ppc64" and OS!="aix"', {
+>>> --            'cflags': [ '-m64', '-mminimal-toc' ],
+>>> -+            'cflags': [ '-m64' ],
+>>> -             'ldflags': [ '-m64' ],
+>>> -           }],
+>>> -           [ 'target_arch=="s390x"', {
+>>> +@@ -498,7 +498,7 @@
+>>> +                 'ldflags': [ '-m32' ],
+>>> +               }],
+>>> +               [ 'host_arch=="ppc64" and OS not in "aix os400"', {
+>>> +-                'cflags': [ '-m64', '-mminimal-toc' ],
+>>> ++                'cflags': [ '-m64' ],
+>>> +                 'ldflags': [ '-m64' ],
+>>> +               }],
+>>> +               [ 'host_arch=="s390x" and OS=="linux"', {
+>>> +@@ -522,7 +522,7 @@
+>>> +                 'ldflags': [ '-m32' ],
+>>> +               }],
+>>> +               [ 'target_arch=="ppc64" and OS not in "aix os400"', {
+>>> +-                'cflags': [ '-m64', '-mminimal-toc' ],
+>>> ++                'cflags': [ '-m64' ],
+>>> +                 'ldflags': [ '-m64' ],
+>>> +               }],
+>>> +               [ 'target_arch=="s390x" and OS=="linux"', {
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
+>>> deleted file mode 100644
+>>> index 9d09f4f482..0000000000
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-src-fix-build-with-GCC-15.patch
+>>> +++ /dev/null
+>>> @@ -1,33 +0,0 @@
+>>> -From bade7a1866618b9e46358b839fe5fdf16b1db2be Mon Sep 17 00:00:00 2001
+>>> -From: tjuhaszrh <tjuhasz@redhat.com>
+>>> -Date: Sat, 25 Jan 2025 10:34:54 +0100
+>>> -Subject: [PATCH] src: fix build with GCC 15
+>>> -
+>>> -Added cstdint to worker_inspector as on more recent version of gcc
+>>> -the build was failing due to changes to libstdc++ and the removal
+>>> -of transitive includes.
+>>> -
+>>> -PR-URL: https://github.com/nodejs/node/pull/56740
+>>> -Fixes: https://github.com/nodejs/node/issues/56731
+>>> -Reviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>
+>>> -Reviewed-By: Chengzhong Wu <legendecas@gmail.com>
+>>> -Reviewed-By: Richard Lau <rlau@redhat.com>
+>>> -Reviewed-By: James M Snell <jasnell@gmail.com>
+>>> -
+>>> -Upstream-Status: Backport [https://github.com/nodejs/node/commit/bade7a1866618b9e46358b839fe5fdf16b1db2be]
+>>> ----
+>>> - src/inspector/worker_inspector.h | 1 +
+>>> - 1 file changed, 1 insertion(+)
+>>> -
+>>> -diff --git a/src/inspector/worker_inspector.h b/src/inspector/worker_inspector.h
+>>> -index d3254d5aa0ebe4..24403bb1704c40 100644
+>>> ---- a/src/inspector/worker_inspector.h
+>>> -+++ b/src/inspector/worker_inspector.h
+>>> -@@ -5,6 +5,7 @@
+>>> - #error("This header can only be used when inspector is enabled")
+>>> - #endif
+>>> -
+>>> -+#include <cstdint>
+>>> - #include <memory>
+>>> - #include <string>
+>>> - #include <unordered_map>
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch b/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
+>>> deleted file mode 100644
+>>> index 9b3fc566c8..0000000000
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/182d9c05e78.patch
+>>> +++ /dev/null
+>>> @@ -1,182 +0,0 @@
+>>> -From 182d9c05e78b1ddb1cb8242cd3628a7855a0336f Mon Sep 17 00:00:00 2001
+>>> -From: Andrey Kosyakov <caseq@chromium.org>
+>>> -Date: Thu, 17 Aug 2023 13:50:11 -0700
+>>> -Subject: [PATCH] Define UChar as char16_t
+>>> -
+>>> -We used to have UChar defined as uint16_t which does not go along
+>>> -with STL these days if you try to have an std::basic_string<> of it,
+>>> -as there are no standard std::char_traits<> specialization for uint16_t.
+>>> -
+>>> -This switches UChar to char16_t where practical, introducing a few
+>>> -compatibility shims to keep CL size small, as (1) this would likely
+>>> -have to be back-ported and (2) crdtp extensively uses uint16_t for
+>>> -wide chars.
+>>> -
+>>> -Bug: b:296390693
+>>> -Change-Id: I66a32d8f0050915225b187de56896c26dd76163d
+>>> -Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/4789966
+>>> -Reviewed-by: Jaroslav Sevcik <jarin@chromium.org>
+>>> -Commit-Queue: Jaroslav Sevcik <jarin@chromium.org>
+>>> -Auto-Submit: Andrey Kosyakov <caseq@chromium.org>
+>>> -Cr-Commit-Position: refs/heads/main@{#89559}
+>>> -
+>>> -Upstream-Status: Backport [https://chromium-review.googlesource.com/c/v8/v8/+/4789966]
+>>> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ----
+>>> - src/inspector/string-16.cc                             |  8 +++++++-
+>>> - src/inspector/string-16.h                              | 10 ++++++++--
+>>> - src/inspector/v8-string-conversions.cc                 |  6 +++---
+>>> - src/inspector/v8-string-conversions.h                  |  6 ++++--
+>>> - .../inspector_protocol/crdtp/test_platform_v8.cc       |  9 ++++++---
+>>> - 5 files changed, 28 insertions(+), 11 deletions(-)
+>>> -
+>>> ---- a/deps/v8/src/inspector/string-16.cc
+>>> -+++ b/deps/v8/src/inspector/string-16.cc
+>>> -@@ -27,7 +27,7 @@ bool isSpaceOrNewLine(UChar c) {
+>>> -   return isASCII(c) && c <= ' ' && (c == ' ' || (c <= 0xD && c >= 0x9));
+>>> - }
+>>> -
+>>> --int64_t charactersToInteger(const UChar* characters, size_t length,
+>>> -+int64_t charactersToInteger(const uint16_t* characters, size_t length,
+>>> -                             bool* ok = nullptr) {
+>>> -   std::vector<char> buffer;
+>>> -   buffer.reserve(length + 1);
+>>> -@@ -50,6 +50,8 @@ int64_t charactersToInteger(const UChar*
+>>> -
+>>> - String16::String16(const UChar* characters, size_t size)
+>>> -     : m_impl(characters, size) {}
+>>> -+String16::String16(const uint16_t* characters, size_t size)
+>>> -+    : m_impl(reinterpret_cast<const UChar*>(characters), size) {}
+>>> -
+>>> - String16::String16(const UChar* characters) : m_impl(characters) {}
+>>> -
+>>> -@@ -241,6 +243,10 @@ String16 String16::fromUTF16LE(const UCh
+>>> - #endif  // V8_TARGET_BIG_ENDIAN
+>>> - }
+>>> -
+>>> -+String16 String16::fromUTF16LE(const uint16_t* stringStart, size_t length) {
+>>> -+  return fromUTF16LE(reinterpret_cast<const UChar*>(stringStart), length);
+>>> -+}
+>>> -+
+>>> - std::string String16::utf8() const {
+>>> -   return UTF16ToUTF8(m_impl.data(), m_impl.size());
+>>> - }
+>>> ---- a/deps/v8/src/inspector/string-16.h
+>>> -+++ b/deps/v8/src/inspector/string-16.h
+>>> -@@ -6,6 +6,7 @@
+>>> - #define V8_INSPECTOR_STRING_16_H_
+>>> -
+>>> - #include <stdint.h>
+>>> -+#include <uchar.h>
+>>> -
+>>> - #include <cctype>
+>>> - #include <climits>
+>>> -@@ -17,7 +18,7 @@
+>>> -
+>>> - namespace v8_inspector {
+>>> -
+>>> --using UChar = uint16_t;
+>>> -+using UChar = char16_t;
+>>> -
+>>> - class String16 {
+>>> -  public:
+>>> -@@ -27,6 +28,7 @@ class String16 {
+>>> -   String16(const String16&) V8_NOEXCEPT = default;
+>>> -   String16(String16&&) V8_NOEXCEPT = default;
+>>> -   String16(const UChar* characters, size_t size);
+>>> -+  String16(const uint16_t* characters, size_t size);
+>>> -   V8_EXPORT String16(const UChar* characters);
+>>> -   V8_EXPORT String16(const char* characters);
+>>> -   String16(const char* characters, size_t size);
+>>> -@@ -48,7 +50,9 @@ class String16 {
+>>> -   int toInteger(bool* ok = nullptr) const;
+>>> -   std::pair<size_t, size_t> getTrimmedOffsetAndLength() const;
+>>> -   String16 stripWhiteSpace() const;
+>>> --  const UChar* characters16() const { return m_impl.c_str(); }
+>>> -+  const uint16_t* characters16() const {
+>>> -+    return reinterpret_cast<const uint16_t*>(m_impl.c_str());
+>>> -+  }
+>>> -   size_t length() const { return m_impl.length(); }
+>>> -   bool isEmpty() const { return !m_impl.length(); }
+>>> -   UChar operator[](size_t index) const { return m_impl[index]; }
+>>> -@@ -78,6 +82,8 @@ class String16 {
+>>> -   // On Big endian architectures, byte order needs to be flipped.
+>>> -   V8_EXPORT static String16 fromUTF16LE(const UChar* stringStart,
+>>> -                                         size_t length);
+>>> -+  V8_EXPORT static String16 fromUTF16LE(const uint16_t* stringStart,
+>>> -+                                        size_t length);
+>>> -
+>>> -   std::size_t hash() const {
+>>> -     if (!hash_code) {
+>>> ---- a/deps/v8/src/inspector/v8-string-conversions.cc
+>>> -+++ b/deps/v8/src/inspector/v8-string-conversions.cc
+>>> -@@ -12,7 +12,7 @@
+>>> -
+>>> - namespace v8_inspector {
+>>> - namespace {
+>>> --using UChar = uint16_t;
+>>> -+using UChar = char16_t;
+>>> - using UChar32 = uint32_t;
+>>> -
+>>> - bool isASCII(UChar c) { return !(c & ~0x7F); }
+>>> -@@ -386,7 +386,7 @@ std::string UTF16ToUTF8(const UChar* str
+>>> -
+>>> - std::basic_string<UChar> UTF8ToUTF16(const char* stringStart, size_t length) {
+>>> -   if (!stringStart || !length) return std::basic_string<UChar>();
+>>> --  std::vector<uint16_t> buffer(length);
+>>> -+  std::vector<UChar> buffer(length);
+>>> -   UChar* bufferStart = buffer.data();
+>>> -
+>>> -   UChar* bufferCurrent = bufferStart;
+>>> -@@ -395,7 +395,7 @@ std::basic_string<UChar> UTF8ToUTF16(con
+>>> -                          reinterpret_cast<const char*>(stringStart + length),
+>>> -                          &bufferCurrent, bufferCurrent + buffer.size(), nullptr,
+>>> -                          true) != conversionOK)
+>>> --    return std::basic_string<uint16_t>();
+>>> -+    return std::basic_string<UChar>();
+>>> -   size_t utf16Length = bufferCurrent - bufferStart;
+>>> -   return std::basic_string<UChar>(bufferStart, bufferStart + utf16Length);
+>>> - }
+>>> ---- a/deps/v8/src/inspector/v8-string-conversions.h
+>>> -+++ b/deps/v8/src/inspector/v8-string-conversions.h
+>>> -@@ -5,14 +5,16 @@
+>>> - #ifndef V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
+>>> - #define V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
+>>> -
+>>> -+#include <uchar.h>
+>>> -+
+>>> - #include <cstdint>
+>>> - #include <string>
+>>> -
+>>> - // Conversion routines between UT8 and UTF16, used by string-16.{h,cc}. You may
+>>> - // want to use string-16.h directly rather than these.
+>>> - namespace v8_inspector {
+>>> --std::basic_string<uint16_t> UTF8ToUTF16(const char* stringStart, size_t length);
+>>> --std::string UTF16ToUTF8(const uint16_t* stringStart, size_t length);
+>>> -+std::basic_string<char16_t> UTF8ToUTF16(const char* stringStart, size_t length);
+>>> -+std::string UTF16ToUTF8(const char16_t* stringStart, size_t length);
+>>> - }  // namespace v8_inspector
+>>> -
+>>> - #endif  // V8_INSPECTOR_V8_STRING_CONVERSIONS_H_
+>>> ---- a/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
+>>> -+++ b/deps/v8/third_party/inspector_protocol/crdtp/test_platform_v8.cc
+>>> -@@ -11,13 +11,16 @@
+>>> - namespace v8_crdtp {
+>>> -
+>>> - std::string UTF16ToUTF8(span<uint16_t> in) {
+>>> --  return v8_inspector::UTF16ToUTF8(in.data(), in.size());
+>>> -+  return v8_inspector::UTF16ToUTF8(reinterpret_cast<const char16_t*>(in.data()),
+>>> -+                                   in.size());
+>>> - }
+>>> -
+>>> - std::vector<uint16_t> UTF8ToUTF16(span<uint8_t> in) {
+>>> --  std::basic_string<uint16_t> utf16 = v8_inspector::UTF8ToUTF16(
+>>> -+  std::basic_string<char16_t> utf16 = v8_inspector::UTF8ToUTF16(
+>>> -       reinterpret_cast<const char*>(in.data()), in.size());
+>>> --  return std::vector<uint16_t>(utf16.begin(), utf16.end());
+>>> -+  return std::vector<uint16_t>(
+>>> -+      reinterpret_cast<const uint16_t*>(utf16.data()),
+>>> -+      reinterpret_cast<const uint16_t*>(utf16.data()) + utf16.size());
+>>> - }
+>>> -
+>>> - }  // namespace v8_crdtp
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.patch b/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.patch
+>>> deleted file mode 100644
+>>> index 824ff678c6..0000000000
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs/zlib-fix-pointer-alignment.patch
+>>> +++ /dev/null
+>>> @@ -1,64 +0,0 @@
+>>> -From bbcd1f33161fd9874e8a61999d2739b177f99723 Mon Sep 17 00:00:00 2001
+>>> -From: Jeroen Hofstee <jhofstee@victronenergy.com>
+>>> -Date: Mon, 28 Apr 2025 14:21:44 +0000
+>>> -Subject: [PATCH] zlib: fix pointer alignment
+>>> -MIME-Version: 1.0
+>>> -Content-Type: text/plain; charset=UTF-8
+>>> -Content-Transfer-Encoding: 8bit
+>>> -
+>>> -The function AllocForBrotli prefixes the allocated memory with its
+>>> -size, and returns a pointer to the region after it. This pointer can
+>>> -however no longer be suitably aligned. Correct this by allocating
+>>> -the maximum of the the size of the size_t and the max alignment.
+>>> -
+>>> -On Arm 32bits the size_t is 4 bytes long, but the alignment is 8 for
+>>> -some NEON instructions. When Brotli is compiled with optimizations
+>>> -enabled newer GCC versions will use the NEON instructions and trigger
+>>> -a bus error killing node.
+>>> -
+>>> -see https://github.com/google/brotli/issues/1159
+>>> -
+>>> -PR-URL: https://github.com/nodejs/node/pull/57727
+>>> -Reviewed-By: Shelley Vohr <shelley.vohr@gmail.com>
+>>> -Reviewed-By: Tobias Nießen <tniessen@tnie.de>
+>>> -Reviewed-By: Daniel Lemire <daniel@lemire.me>
+>>> -Reviewed-By: Gerhard Stöbich <deb2001-github@yahoo.de>
+>>> -
+>>> -Upstream-Status: Backport [https://github.com/nodejs/node/commit/dc035bbc9b310ff8067bc0dad22230978489c061]
+>>> ----
+>>> - src/node_zlib.cc | 8 +++++---
+>>> - 1 file changed, 5 insertions(+), 3 deletions(-)
+>>> -
+>>> -diff --git a/src/node_zlib.cc b/src/node_zlib.cc
+>>> -index 66370e41..a537e766 100644
+>>> ---- a/src/node_zlib.cc
+>>> -+++ b/src/node_zlib.cc
+>>> -@@ -493,20 +493,22 @@ class CompressionStream : public AsyncWrap, public ThreadPoolWork {
+>>> -   }
+>>> -
+>>> -   static void* AllocForBrotli(void* data, size_t size) {
+>>> --    size += sizeof(size_t);
+>>> -+    constexpr size_t offset = std::max(sizeof(size_t), alignof(max_align_t));
+>>> -+    size += offset;
+>>> -     CompressionStream* ctx = static_cast<CompressionStream*>(data);
+>>> -     char* memory = UncheckedMalloc(size);
+>>> -     if (UNLIKELY(memory == nullptr)) return nullptr;
+>>> -     *reinterpret_cast<size_t*>(memory) = size;
+>>> -     ctx->unreported_allocations_.fetch_add(size,
+>>> -                                            std::memory_order_relaxed);
+>>> --    return memory + sizeof(size_t);
+>>> -+    return memory + offset;
+>>> -   }
+>>> -
+>>> -   static void FreeForZlib(void* data, void* pointer) {
+>>> -     if (UNLIKELY(pointer == nullptr)) return;
+>>> -     CompressionStream* ctx = static_cast<CompressionStream*>(data);
+>>> --    char* real_pointer = static_cast<char*>(pointer) - sizeof(size_t);
+>>> -+    constexpr size_t offset = std::max(sizeof(size_t), alignof(max_align_t));
+>>> -+    char* real_pointer = static_cast<char*>(pointer) - offset;
+>>> -     size_t real_size = *reinterpret_cast<size_t*>(real_pointer);
+>>> -     ctx->unreported_allocations_.fetch_sub(real_size,
+>>> -                                            std::memory_order_relaxed);
+>>> ---
+>>> -2.43.0
+>>> -
+>>> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.0.bb
+>>> similarity index 95%
+>>> rename from meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+>>> rename to meta-oe/recipes-devtools/nodejs/nodejs_20.20.0.bb
+>>> index d757a7395c..1bc5a6e9cd 100644
+>>> --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.18.2.bb
+>>> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.20.0.bb
+>>> @@ -1,7 +1,7 @@
+>>>  DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+>>>  HOMEPAGE = "http://nodejs.org"
+>>>  LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+>>> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c83fcdcd43ab352be6429ee1fd8827a0"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=ac91fab5dbaf757274d2b29888f943ef"
+>>>
+>>>  CVE_PRODUCT = "nodejs node.js"
+>>>
+>>> @@ -20,14 +20,11 @@ COMPATIBLE_HOST:riscv32 = "null"
+>>>  COMPATIBLE_HOST:powerpc = "null"
+>>>
+>>>  SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+>>> -           file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+>>>             file://0004-v8-don-t-override-ARM-CFLAGS.patch \
+>>>             file://system-c-ares.patch \
+>>>             file://0001-liftoff-Correct-function-signatures.patch \
+>>>             file://libatomic.patch \
+>>> -           file://182d9c05e78.patch \
+>>> -           file://zlib-fix-pointer-alignment.patch \
+>>> -           file://0001-src-fix-build-with-GCC-15.patch \
+>>> +           file://0001-Revert-stop-using-deprecated-ares_query.patch \
+>>>             file://run-ptest \
+>>>             "
+>>>  SRC_URI:append:class-target = " \
+>>> @@ -36,7 +33,7 @@ SRC_URI:append:class-target = " \
+>>>  SRC_URI:append:toolchain-clang:powerpc64le = " \
+>>>             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+>>>             "
+>>> -SRC_URI[sha256sum] = "69bf81b70f3a95ae0763459f02860c282d7e3a47567c8afaf126cc778176a882"
+>>> +SRC_URI[sha256sum] = "5294d9d2915620e819e6892fd7e545b98d650bad36dae54e6527eaac482add98"
+>>>
+>>>  S = "${WORKDIR}/node-v${PV}"
+>>>
+>>>
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>> Links: You receive all messages sent to this group.
+>>> View/Reply Online (#124247): https://lists.openembedded.org/g/openembedded-devel/message/124247
+>>> Mute This Topic: https://lists.openembedded.org/mt/117686814/3616702
+>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [anuj.mittal@oss.qualcomm.com]
+>>> -=-=-=-=-=-=-=-=-=-=-=-
+>>>
 
 
