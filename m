@@ -2,53 +2,53 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 454B0EDF14F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61A21EDF151
 	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 10:10:22 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.68686.1770977420243207225
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.68684.1770977415886928487
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 02:10:20 -0800
+ Fri, 13 Feb 2026 02:10:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=pKTOXJmY;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=JGrw2vHk;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1770977420; x=1802513420;
+  t=1770977416; x=1802513416;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=OYnzxuu7gE9YjW55Fn1mYqENZDPp47Cs7uV6ybQE5u8=;
-  b=pKTOXJmYIh5DYJFt8nyhqLPACcK1ym8QqGhw7++cTg64uBU0mvyEt5l6
-   n/YukNzaDcfDNTAdpVB9Vbhq553tTmCb6MvY/h+dXCNgEznw4wAreTFhs
-   Vf8j+0DkW16yx0kLYN01IOMYucuM2ppvCUzlrKm8zkbi256F3b58Pc5Kt
-   RMT5jUSRA3tyqjub1AZffRJUH4CwGuzYUYMYc1iss9TaSHUF/Ai7P9TBX
-   8d5qq407wzBt7srDK8r+QE5w5bAiEj1nQ+uDp/jMlUsGm44e+rlr2DOTa
-   2XWTYE43e6pGDvFaP7Kx9guXzwEBPvbBjtIBC5yLs3uL7wgV4wRitWPXS
+  bh=mH1zyrXnIwLuz/E4LWDgDlS4G8x7V63MZzcYtoCRdRY=;
+  b=JGrw2vHkRWP9cZ8cgXAoj211ZY6Wr4bZ3X+9+uhoI8BJUbvRfiQ+Dysu
+   DnqGR+6iue78CA1Z+QPKb/80WfMNClU+w0zVgozO6GoG/e8A3H+04KpBG
+   oTxi09s2gP9kiPlUS71PUvL9g/Hp/5wpG+jMRBfTAao4sYJpxYLJ7OCvT
+   orSYY4yot4LVeKM/UnZZWbZT3QKPU6ai9qRCAPeNV2ChrioWW4U3Tdv5w
+   RU0rz412NmqnGC1kcM8SgYNB3sEXIwLXPKbdNXuZSi6t9Pb2cmVdui9ww
+   V4IqMiinnxC3L+8dFDcOA4hrUdI8AuKG/yCfZ+eo16joa5VmHV3QMcaJA
    w==;
-X-CSE-ConnectionGUID: fUYxBKqEQu2dywp4PiGKhw==
-X-CSE-MsgGUID: 2tpflmUTRcCoNmtZNmhD1g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11699"; a="229519271"
+X-CSE-ConnectionGUID: EoS45lCuQs6vG+YjjyU9QQ==
+X-CSE-MsgGUID: VIGHBFAiSOm1syf1RGyiOQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11699"; a="233656328"
 X-IronPort-AV: E=Sophos;i="6.21,288,1763391600"; 
-   d="scan'208";a="229519271"
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+   d="scan'208";a="233656328"
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr3.fujitsu.com (Postfix) with ESMTPS id 978CE1000149
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:18 +0000 (UTC)
+	by az2nlsmgr3.fujitsu.com (Postfix) with ESMTPS id 3DD4A100037E
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:14 +0000 (UTC)
 Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 4B6AE18041B1
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:18 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id E6D71C00D79
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:13 +0000 (UTC)
 Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id 13E9A2000202
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:15 +0000 (UTC)
+	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id AA6C62000218
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:11 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][PATCH 4/5] python3-dbus-deviation: Add new recipe
-Date: Fri, 13 Feb 2026 18:10:04 +0800
-Message-ID: <20260213101006.21517-5-liuyd.fnst@fujitsu.com>
+Subject: [oe][meta-python][PATCH 1/5] python3-schema: Add new recipe
+Date: Fri, 13 Feb 2026 18:10:01 +0800
+Message-ID: <20260213101006.21517-2-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260213101006.21517-1-liuyd.fnst@fujitsu.com>
 References: <20260213101006.21517-1-liuyd.fnst@fujitsu.com>
@@ -58,75 +58,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124385
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124382
 
 Add this new recipe for runtime dependence of hotdoc.
 
 Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- ...o-donwload-requierment-which-will-ca.patch | 27 +++++++++++++++++++
- .../python/python3-dbus-deviation_0.6.1.bb    | 20 ++++++++++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-dbus-deviation_0.6.1.bb
+ .../recipes-devtools/python/python3-schema_0.7.8.bb    | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-schema_0.7.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch b/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
+diff --git a/meta-python/recipes-devtools/python/python3-schema_0.7.8.bb b/meta-python/recipes-devtools/python/python3-schema_0.7.8.bb
 new file mode 100644
-index 0000000000..b163db772c
+index 0000000000..b27b890374
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dbus-deviation/0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch
-@@ -0,0 +1,27 @@
-+Subject: [PATCH] Prevent trying to donwload requierment which will cause
-+ network error.
++++ b/meta-python/recipes-devtools/python/python3-schema_0.7.8.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "A library for validating Python data structures"
++HOMEPAGE = "https://github.com/keleshev/schema"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=7e70914c99a6ec706baa9fad5e0502df"
 +
-+'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f1e83062ad0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/setuptools-git/
++SRC_URI[sha256sum] = "e86cc08edd6fe6e2522648f4e47e3a31920a76e82cce8937535422e310862ab5"
 +
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com> 
-+---
-+ setup.py | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 245193f..d899e4c 100755
-+--- a/setup.py
-++++ b/setup.py
-+@@ -92,7 +92,6 @@ setuptools.setup(
-+     exclude_package_data={'': ['.gitignore']},
-+     zip_safe=True,
-+     setup_requires=[
-+-        'setuptools_git >= 0.3',
-+         'sphinx',
-+     ],
-+     install_requires=['lxml'],
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-deviation_0.6.1.bb b/meta-python/recipes-devtools/python/python3-dbus-deviation_0.6.1.bb
-new file mode 100644
-index 0000000000..e969e85465
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dbus-deviation_0.6.1.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "dbus-deviation is a project for parsing D-Bus introspection XML and processing it in various ways"
-+HOMEPAGE = "https://tecnocode.co.uk/dbus-deviation/"
-+LICENSE = "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=90263a49bc1d9a204656fec4d5616c66"
-+
-+SRC_URI[sha256sum] = "e06b88efe223885d2725df51cf7c9b7b463d1c6f04ea49d4690874318d0eb7a3"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI += "file://0001-Prevent-trying-to-donwload-requierment-which-will-ca.patch"
-+
-+DEPENDS += "python3-sphinx-native"
-+
-+do_install:append() {
-+    for ss in $(find ${D}${PYTHON_SITEPACKAGES_DIR} -type f -name "*.py"); do
-+        sed -i 's,/usr/bin/python$,/usr/bin/env python3,' "$ss"
-+    done
-+}
++inherit pypi python_setuptools_build_meta
 +
 +BBCLASSEXTEND = "native"
 -- 
