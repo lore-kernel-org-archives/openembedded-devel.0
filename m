@@ -1,896 +1,411 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7A55EF48C2
-	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 02:54:28 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.62654.1770951268335988613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A347EF48DC
+	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 07:20:20 +0000 (UTC)
+Received: from OS0P286CU011.outbound.protection.outlook.com (OS0P286CU011.outbound.protection.outlook.com [52.101.228.21])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.66771.1770967216710144843
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Feb 2026 18:54:28 -0800
+ Thu, 12 Feb 2026 23:20:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mOK/FPp3;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-7946a1f2430so5582637b3.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Feb 2026 18:54:28 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770951267; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Fkm0iYqwO/GQ7k2EqU06wtpQIkARN79K4aFgldTVD82Mqvtj/wPqm0mrKOVdGZcZEw
-         zpjvBf9RVMSIEvY7/v5EHAykctoE+EeDUNUINlLbvhAdatcAag+cc4CtrugdHbjkL8XW
-         cr7H1vA7yXkjqGPXVbgVpghQL4RYcgDeIujkIbTjjYDml76rpTBv9MTmhrE7f5BvetuI
-         peUe06Qqpto31sy/Ijtw80x9XR+PMDHrfBTueCZqhL+C0fmJBAHYHt3W1EXsRdjlymvL
-         kawkVkTLG5LhXo8mZoGU3FwS3C1gWJrsCEozogjAUZ0rLZjTTXWE634mrThlGQwSHtLI
-         /J0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=tOPUQ9iffHUboD1gbWGGKG46polg+Ezsfp/qN0YaEqQ=;
-        fh=ZS13NFA3hg1F9OmIYe889gfWF5cai5+zNqKwmX79x+M=;
-        b=Azf9Ya4Q+J0n+BGoG2dBwxFALEhaJNenJUvlNSxX/w9LZ6v3a/YYb83YOnz7SBX7tC
-         HUligSsot0cD1SrXTSGYTZiw5TvNYYOF9rqmJO2sgG+ZySqTmW7oSgQrIDg6FfF1ULKh
-         820xHOKi9ERnsj4kakY5/pSJAzyPboWCgDLh0TOZqL/086Ika7BoTr+zWCb0HC2BBhs7
-         uUaxX4n7PBFrJd/fFbo2yDDdGSchK+1g+4goRmw28EDY5TS5ViCrEBGrOvjQWPjNqYBa
-         bPrxn0TS/pF1HGmat8I6FhTJQ5TMJ2J0jj0pEeZcC608kMRSshw8zcvNjRRdXrVeWL/E
-         b5Sg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770951267; x=1771556067; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=tOPUQ9iffHUboD1gbWGGKG46polg+Ezsfp/qN0YaEqQ=;
-        b=mOK/FPp3p4InTt/aQMjq0Bi/Kt/1qwplFxL/SrHQkdcH7/NYMrceoXKsLGTvetuUSM
-         qq8svW+NswkvTiJ/Be4f1DC6ln6KGBhnkxExNhb9FHd6//xCDcpoovtn86L8urCWRMQN
-         OD7n+9yFr/3iJkHRzTUSC0HNW4gV0Jk2yxTdjcSyqOydJMqP1JJAOgs2+Pp+MhfEiOev
-         ShGG4OTFk62fRcrRjHlfK97KmGfA1lqmZn1e7rYBHW2MUr/XZc2gS99SwDKI6+czQ9G8
-         vemJVEhCodZuRFKTpLm+lIh+qaPSRmOCEawrY3a23SqhMSDSEqDlYzD0BY0W9FvIPbm+
-         NMKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770951267; x=1771556067;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tOPUQ9iffHUboD1gbWGGKG46polg+Ezsfp/qN0YaEqQ=;
-        b=ifVk27jadhqYqK2BcvczsynpNJQ+I0ewnpArqBkULqj1Mu+NE30CwwUev3N7E/ehUQ
-         9iilYHQDfbT8B8SiJ5XLNq7sJS5+HiA0a9b+tplVHk9yOKuZKUqZ4yYVj/4G3W4BF/Qa
-         o6I1oMgqC3TEXlnnhuRVB8MB0PzuRfn6BIWenCUdPCK80tUOA+PeBpc6q5Y7M6nx5MpA
-         PCzGhEuZoOo2YPSZ8p9HifeFUQnTtsFpDh6BEO0DaxqvXF5E2gbWTyrhaBAWRVsu+yHn
-         CSyozGarPfROexOINpHGgsc8f9vO4DWaB90mlo6Mf1h1ULls9L63w9gA6NldU8oL72xM
-         jnIg==
-X-Forwarded-Encrypted: i=1; AJvYcCX/8cwd+P7LG9F+0Kc10NCv4JwxI3ChsOLG2P4fA6UARR3z1M30I5kE3+mRC6uTuZY1/VWuBiycCYf7tAJ6U4Nts9s=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Ywx4NjaX19mSi1O2lc7dl/oQ+faTznxK2xxcSevX7ZJfuhD9Khc
-	1v5dMzGoyAnoXXP5B97o0DBtIhbdHcC7mrB7kvT31C4dJAd6+Jt2vTGk/ikMJWQHgQBQUa5OUWX
-	YlIvuPkQBG9OMKTUokVwuuz9lG+jzbst/QiC9Hp8=
-X-Gm-Gg: AZuq6aICFRlRNs12ZSnicS4fB2q/7lYZtbGOt4bT3/sGOZ/VLkjqyAUzIuE1XQ5/3Y0
-	6x1Eeq0fS70KG9cRMSTx1+HtcbhXfZihuLTFlTZ2lli5a3bbF2/6/GObGy13+USQ5v6O8Z2IUJU
-	zM5DWe6I8sXWYdWXQaR5iwOpJqCSHLMxVpz/LW3N1hOlF0T3a2jquq/vY1RMdU/hKoqI111wdwn
-	PnoIq0lYoCxkv91ahGf8Zf8OP8FUcgODcoheB37ZmWFNWttz4jotb8lfWSDKXe67nw06Dr1IGYe
-	sFilhTinZNbogCeAJ10M0KWvd+UQWhxAiABLc3uC03IXiUw/u+QbCTpcdX/xJLss/szV5CXD0CZ
-	sEvYSUCniTxvKYDukkQQbqsSw
-X-Received: by 2002:a05:690c:90:b0:792:7823:734 with SMTP id
- 00721157ae682-797a0cb9b5dmr3812877b3.37.1770951267327; Thu, 12 Feb 2026
- 18:54:27 -0800 (PST)
-MIME-Version: 1.0
+ dkim=pass header.i=@fujitsu.com header.s=selector1 header.b=AX1ESNtk;
+ spf=pass (domain: fujitsu.com, ip: 52.101.228.21, mailfrom: liuyd.fnst@fujitsu.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=aFY73ALBhFLbW7kN/ugXJQDuNVqPoe5opvxV1Vzw2tkbwC4vmWhFA3w1ezBnhlO4l+Ej0s62ZGDgmoIghH8ywRk9ztcPrB+CEAr329bBGlwR6xnwDpMPZGFXetVWpqPIBrRmNtyHLiaA5cojELcuT4T/1G/tpJdngjFJ4w0I9zK6MqzOvXP40JmT1w0mKYVGyijkD9juVdwTFSN8mhyM4fNXI29qPfPr5lvm/QO7OYMa5F4xtedGhx3yP81Fq+f2pGhbBE80IrIUz4aq9I8qEbDWBoLigKdA/yzFl9iz7e1+qTrIVixJmcbywCgjSWbsoOUzgRp/j6rP+kO7Qynywg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=R9lz2nmED8tC5IEgdbBYl8MTFrDYpuEpaehVyG6kXGI=;
+ b=m0cg2UsI0dCbgdduBqd9bfYSuEsNs4bBG3TyFUDoqMe4DbaspLh1REjvx7LFzfl0bJy+lFhupBfWNi+6DiE0k3YNWhffkkjRGXKxWrtsJP0eZT+3JzEmDV5JP09xYiGse1Vu2otmX1GCyEwGK5x1rz1bKfMO8DFSzURVdVVSggHtdBAGkcrMpucOjyQug2B5PNUKiq+tjrDTHhaV6H6UneKIjSaD9WCQFU3GqRR0z6Iy+V+KV5AF7777OH3TW0xPPu6a9+pSnW1HJcFW7FhDwlBJiNo1kolcCqGDJEcIb9R0F9CSrcz4v1pktKH7JBPiKrs5Jt7WiD4BuYguY9161A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R9lz2nmED8tC5IEgdbBYl8MTFrDYpuEpaehVyG6kXGI=;
+ b=AX1ESNtkGk31yBCJmkaHpRn5cIqEEvvCFoHUXYS6gXB6aGUEDVGeAS4+67YG3LwxEPP3KFSz/gimF2NK5umRsuaSY8N1El7ovSzvBhSdO3roATO2IRYXlBPSbYP2rh6MoAed512y/1co0AnDIi3u9TobxGw9lQC6ZMctk04wnhLVUy+Dy1djdDxsIdmFzqepK+tM+jGjulduzgAVUDOZYhymQ3yd7E+GUOesrYirruoMi38f0pBsVsM4MpLYXfdEFM8mqF/cCZb+QQ/WUZBBKukVX0CC9nYrzdMsWa9fUZQl9Koz8BFLBFOKODk/Mxp+5gK2y/6QsOUAtH+mF/naig==
+Received: from TY3PR01MB10110.jpnprd01.prod.outlook.com (2603:1096:400:1d9::5)
+ by TYCPR01MB10888.jpnprd01.prod.outlook.com (2603:1096:400:26e::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Fri, 13 Feb
+ 2026 07:20:12 +0000
+Received: from TY3PR01MB10110.jpnprd01.prod.outlook.com
+ ([fe80::65d2:5fd:bb96:1df2]) by TY3PR01MB10110.jpnprd01.prod.outlook.com
+ ([fe80::65d2:5fd:bb96:1df2%5]) with mapi id 15.20.9611.012; Fri, 13 Feb 2026
+ 07:20:12 +0000
+From: "Yiding Liu (Fujitsu)" <liuyd.fnst@fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: 
+ =?utf-8?B?5Zue5aSNOiBbb2VdW21ldGEtcHl0aG9uXVtQQVRDSCA0LzVdIHB5dGhvbjMt?=
+ =?utf-8?Q?dbus-deviation:_Add_new_recipe?=
+Thread-Topic: [oe][meta-python][PATCH 4/5] python3-dbus-deviation: Add new
+ recipe
+Thread-Index: AQHcnJNUM75OP27T0U+vvPkJqzm397WANxDz
+Date: Fri, 13 Feb 2026 07:20:12 +0000
+Message-ID: 
+ <TY3PR01MB101109E8D1F3D248631AFD2D09B61A@TY3PR01MB10110.jpnprd01.prod.outlook.com>
 References: <20260213023217.19706-1-liuyd.fnst@fujitsu.com>
- <20260213023217.19706-6-liuyd.fnst@fujitsu.com> <7036633a-b1a6-4dd3-95d3-0be0ae170a51@gmail.com>
-In-Reply-To: <7036633a-b1a6-4dd3-95d3-0be0ae170a51@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 12 Feb 2026 18:54:01 -0800
-X-Gm-Features: AZwV_QjefGrVWG9amTmY4thU0awSqk7aZ6spZjqYb75fDOCO0UHiAPa9gUsUvdE
-Message-ID: <CAMKF1spAcEYFa6zE-b4wibUqjpZNf3mzGXbPiccnE48cFZoCpw@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 5/5] hotdoc : Add new recipe
-To: skandigraun@gmail.com
-Cc: liuyd.fnst@fujitsu.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000034217b064aabb9d8"
+ <20260213023217.19706-5-liuyd.fnst@fujitsu.com>
+ <CAMKF1somn0UxdPS+Np28cwQtXuc1Zmui7jKnLkP0-BQQK4ZA_A@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1somn0UxdPS+Np28cwQtXuc1Zmui7jKnLkP0-BQQK4ZA_A@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Enabled=True;MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SiteId=a19f121d-81e1-4858-a9d8-736e267fd4c7;MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_SetDate=2026-02-13T07:20:11.538Z;MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Name=FUJITSU-RESTRICTED;MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_ContentBits=1;MSIP_Label_a7295cc1-d279-42ac-ab4d-3b0f4fece050_Method=Standard;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY3PR01MB10110:EE_|TYCPR01MB10888:EE_
+x-ms-office365-filtering-correlation-id: 25744557-c554-420f-eb42-08de6ad0538b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|1800799024|366016|4022899009|376014|38070700021|1580799027|13003099007|8096899003|7053199007;
+x-microsoft-antispam-message-info: 
+ =?utf-8?B?Zkp2Z2ZxR0tnamJ6SHBoOFYrQTdSYm5OdDgyM3ZNNktzcWk1bVVxL1JhV0Qx?=
+ =?utf-8?B?QkY1SmtKKzlrOFpLR1VlcDVlQlc0aVZFMjdPMGdqWDhuY2lWMzZWbmxGTHpi?=
+ =?utf-8?B?bGFSelJqcGRUa0pXNGxrZWVjVHhNK3A5NjFKR2JQNUljTXk1OGxJWEFaTFpu?=
+ =?utf-8?B?QUk1SFljakRCVzR6bVhKMVZKWllPd3E5cktVekxBV2h0dG1ZcXhvQW9SeVFZ?=
+ =?utf-8?B?eUJmb3ZVVm5jVHBTWmpHTzF6YnZaQ2ZpclFtSmcxd2FBYStlU0gzU1pMLzZ6?=
+ =?utf-8?B?b2t6UjZ5YmtpRDZIWTBPS1o1eTRQelBIeTNQOWUrOTNkVUIzeGVOQ3lqN3Ja?=
+ =?utf-8?B?YWJMV1I0WjFqSFJlT0VDaFA0bzh1eUlvYlZBNCtZa1k1Q0drMHJ5d2pOSkF0?=
+ =?utf-8?B?elVHZlQ2RjVvd1loRFJ6QXhnS1FlWEtvay9VbGZkSk1MbG5wVGE0U2xIZGdm?=
+ =?utf-8?B?cWhTZDdkZ3d1aUZmLytwV01CQ2xnZmdhNHVUd29QSkJOcjMvb2JNV1lLdkN4?=
+ =?utf-8?B?MTd6UHRJR1ZaNlZuWXhUOUlqRDJLUlE3ZHdQSDlFV3RhaHo3OEErU21iNSs1?=
+ =?utf-8?B?eUNqamdmNENPNXF2OUo3T1JUdmVEK3R0R3lMS2R1UVZleHk0VlVCU0tFd1Fr?=
+ =?utf-8?B?ekRxb1JFQ2M2QzhqblpBcFpMTjVvZkc5UXY2Z2hvZlQzaVY5OTM1ZVJqTmpr?=
+ =?utf-8?B?SDZIcUVDeGhML1pLWWZXd3pPM2NHYjZDOXRrZ0d1Z2ViMlFQSko4Q002WVJB?=
+ =?utf-8?B?WjVybStIRFZzcnFuRkhNbm1DK2p1VklXMVBidzhRTkNIdzV6WGtCNTVHakJa?=
+ =?utf-8?B?aDJhclliMTFFVVJXMEZpVUhEQnRtMUowOGgwUTBrcnVqUTVzaGx6MzF1bU9U?=
+ =?utf-8?B?aXhmV3lhNEdEeDE1SVZOU1dXUGF3aHFvdUZ6NDBuQVJNRlFNSml4TTF4dmF0?=
+ =?utf-8?B?TzYzWTBqdEljY2pmb0lCYmNiWXdpN2syN25veTV0Q0VpNktMc3ptMWtLQXpT?=
+ =?utf-8?B?U2R1bThkdjFQS2drRHJIVWR5bnFoeDdXa0FrU0RBMnJSdm1lbjllajNJYlhU?=
+ =?utf-8?B?a3NxekgwRUJJZVFJWlRYaTZiMzcrWTczUEpWUDdVWDZsOUE4S3ZINHdrT2RU?=
+ =?utf-8?B?bEZuM0M0ZGdDeEQ3REp0K2pTa29YdE5zMmkzdVVaZnZMYzhISHRucDNHZmtw?=
+ =?utf-8?B?aDJEQUNocExWb1paU083K0NtTXFvNitnZGRnMnc4WlFRelNrYWNmRDdlR256?=
+ =?utf-8?B?VUZDUCs2K3prM3VJamJKaW0vZHU3ZTJDUkcwSE9jV3ZJdE5tUnEzTTdWcjlC?=
+ =?utf-8?B?NzI5NFpEb1RZc0YyYUt6Q3ROUDdDb3pQK2xNUzRPSXVvbWZNRmsvTVFjN0RM?=
+ =?utf-8?B?dzR4c2p3U2ljaCszUW1sMGt1RTg2OVlMTS9RYXBRQ2d2SmZtQ28zbWVPckZS?=
+ =?utf-8?B?bFdKcVJXdHBHYnFvTGFrNXI1a3VwWmY3UDhXcUxoNVRPcElieHhmcXZ6ZnVS?=
+ =?utf-8?B?bEdiazJzWXNnd1B2TFpsVFc2cXdKZVhRM2Q0c2EyT2c0YVdzbVlNQmxHbXVv?=
+ =?utf-8?B?MmJiU2QwNzQ3Q3pxZzJYdW5HTDlxd1NoeUlYSzBWMkVvOUp0TDRoaHJsYVB5?=
+ =?utf-8?B?SUdLajcwR0lyaHI2SGdBOTczSkpUc3haUHB3Y0xSOUNnTGUwTk8vUGpsKzF6?=
+ =?utf-8?B?eTlQM05EZnNMZk1XNVV2endMZXI1eEtDWHBnN0ljSFBFTjl4Z0tobEVKTFpF?=
+ =?utf-8?B?bmtmeWJXWmplaUwwNDdMTUxhNVRaNWIzNGc5OFJWS2x4bEFvZGJDemFuaTA1?=
+ =?utf-8?B?bkE2OUhpZ0NIV1VpNVdkYmVRRi9Uc0NCZGZML2lONWR4dHo3anVwNUlkeFpP?=
+ =?utf-8?B?dDF0SWs3Qk5nS1Z1VzUrYUdmbERCMFdOZG04bWgvRDd1SmJzbE94S3BzMEJn?=
+ =?utf-8?B?N0ZCZVhaY2RVWUY5N3BJNy9kSUx5ZWRtMU9pL096dlpVdG1VT2lXVU9odGNv?=
+ =?utf-8?B?Vk9oM1JiYWhEQStkRVhJczVHeFFuMkQwZ2Z3OERvTUJMc0FpK3Fzc2kzUzNi?=
+ =?utf-8?B?d0VUNHNydUp4R3Jpcm9JUlFycDRWZ3g0VUVHT0lYK2d3Sm5sbWVZRGo1dHFO?=
+ =?utf-8?B?MWZmdGV3bXdTL011U0RheGxhNzNhTGp0Sk8rbS96bmthaXFvTHJTaVhEak0r?=
+ =?utf-8?B?VkE9PQ==?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY3PR01MB10110.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(4022899009)(376014)(38070700021)(1580799027)(13003099007)(8096899003)(7053199007);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?ZXNMdlNZc2R6SFVKTkJvTzNibGNBUFM3WkZQRDl0bG1wSytPbFhlZ0w2bmdK?=
+ =?utf-8?B?Tm9NZDNlTXQwV2xQQStYS3VISklucXgyS0NXTFB6ZFU4dDVLZzZnYXRxNHl4?=
+ =?utf-8?B?V3IxUFhyd0pTUGlkQUVOeFYrQTdsK1F4c2xuamJCUXRVMkhyUlZSbkV5MHZi?=
+ =?utf-8?B?eHVpdk5EWHRCekRRNURkcERNdnZ3elltVG9QeVBqWE1RMm9TMnRSSjVGNW5m?=
+ =?utf-8?B?MWlINVo0UW9MS1MvRU1KRDBicUxBTjE4MTBETk42b3hBMkJjNFJ2bXoxbUF4?=
+ =?utf-8?B?eXJua3U1TDVnU0gxL2FyWDlkbDdNV1l3L3pDdFRzVGNxR2ZHcWRUVTFvQlBX?=
+ =?utf-8?B?V1UzRjJVT1JMcGNIK2MwdzlGWVh6ZEgvbFVWMFEya0tTUzA1VkNQNnVONTFw?=
+ =?utf-8?B?YlZ2OVhZaUR5NUlPMHI1NzFMakhva1E4cW9vZE0wTUNmOFVnNGhDbit6YUdi?=
+ =?utf-8?B?UVpyQVdNU3djenhYeDh6azVtY0t2OE9xYUhIOHFRUytoVGJxZjUvVFRzYTk0?=
+ =?utf-8?B?L1B2RXZrbzJFOTlWcEpudGpPZ21haklZYmVmczFOaFZiUmI0MEMyRS9ZMFJw?=
+ =?utf-8?B?WVVJNUFjR3BWZXJlUWNHUjRLRVgvSnBGTXdzaU9OWHdsZDI0L1RLMUpPYWNy?=
+ =?utf-8?B?ZFBtdUtKSFExYjB1aVpCSElWRVdMR2g0WllCSzUzQk1WL1lmZFgrcGhtTjh0?=
+ =?utf-8?B?S1d2WjRYYnBmbUw3dWk0SUlUbEJxenZIbklieXNSTXpZbTNFR0NMbVcrcGp6?=
+ =?utf-8?B?ZXVOWjdURjYyc2wybnFPaXRGZnZxVVdDZk9qMVBOU3BnR0hpZjBPQ2t6S0RD?=
+ =?utf-8?B?bURWbC94RTlzRzVVU21UUTMwT2FGdTdWSFd2ZmRoRlNPcG5Kc1NKRS94MkMv?=
+ =?utf-8?B?UGxWYnZkb21uTDVLcVpoanZ6UnpPRU5LNm5ENVI5cnJveElCSUlyWkVqeGE2?=
+ =?utf-8?B?WlZWRzdhL0NCSjFsVHppK2JZb0pGRXR2TlY3dU84REVKbzR3Nk82b2ZUYjI4?=
+ =?utf-8?B?aXRxbnpVa09wNHVEdGx2M2w4YUpmdkhYbHlGWjRLY3RrY1FVTlhVWDVJOTdw?=
+ =?utf-8?B?bVRWVWg1MEV1VGxKaml5WWhUWit4TFpUTU12ajNNYjFlNzZObjRhZi93eGpW?=
+ =?utf-8?B?cktDZkxiSGxKMWxsc2xEZkV1NW1oS2NRbWV2NEVCb2gzMmRaaTB1eFArNTl4?=
+ =?utf-8?B?RHJ6NExQMEUyTUttRjhraFJDOXNrNnhYNkNiNUgvUXB2VnROa1pRY1VkRGlP?=
+ =?utf-8?B?VHh3L0RDLzhQNzF6bEJCbnZ4TFBYOERLdFp3RTEySlEyYldSL3B5YTE0NXZ6?=
+ =?utf-8?B?NWs0eUpTUzZJQkJpZFZFRTF6THdwRm1yVm1kQWZtQzF6VzhPNEd4dGZvckQz?=
+ =?utf-8?B?a3liSU1TVXFDTDVzaFJkajdTZlpOWi8rMWVPMnNoZjdoUTZ6d2RoRjlqMnlH?=
+ =?utf-8?B?N2M1WU9nOUdqRVVWRFduaDV5V2poZk93QmFYN1RMRDU1Y0RjbUNlYW80NEhI?=
+ =?utf-8?B?Z3RDWjloWjkxZTE4UExoblJNbTdoOEpaUG01bDNWVk1ZdWJTeFkvd1d2M2N5?=
+ =?utf-8?B?Z1lFYzRkc3JUbXpPVlU1V2t1ZXNZR1ZrSDRhRG5rVXlFN1luY3d0NlJHRE4z?=
+ =?utf-8?B?YWRldEI3WTVoZVkzcEtCTlBZdE1BYktnNjdLaFgrYkROVE90Yi9laEdQeXBq?=
+ =?utf-8?B?Wnh3dENxODBTbEg3MkdYMGoxeFh0cml3NngzUExaK1NjZVRaaUd5aVFwdnND?=
+ =?utf-8?B?cUowQUw3MENTTzljQzBHNXgzdFNkc3RCc1dnZFBIWWFzMDhVSkhRTGlBb2E0?=
+ =?utf-8?B?OEowZElEeisybU42OWpaVEJBaE9HOWtyWXZ0TmRzMUF2UkNIS3ozazVPZHZL?=
+ =?utf-8?B?UDNMOHdRZVFGbWRDMFBGczZzV01wVzZOM1JJR0NPWFRRZ08xQkRRbHRadjdQ?=
+ =?utf-8?B?eFFKZWlybkNOMGFJSzJrR05idjFuQzBUa3prR1djbzcvRi9neThCcnVsd1I4?=
+ =?utf-8?B?cTBNTEoybjV1QkV3Njl1MHFiMVBmeDBVbGhJWjNsUFJlSjh0dU8reTl2Nm04?=
+ =?utf-8?B?WHljeExhcUhzTUtRK0tBNm95bGxmSFZWSDFkSGhob085bWMvK0VnS29Rb2kx?=
+ =?utf-8?B?R2hMK0x4Qlg1cS9QckZWeGVpTHVJZlV4cmpIZnVoSVUrQXdVQ3VNZ1ZjQ2lu?=
+ =?utf-8?B?U3JBcUxhYzI0blJwVStoUDRuUDNXWXJkV2IxZkl6M1oySHRpV0plQW43WmJK?=
+ =?utf-8?B?REttRS9DNG84SXFlSFdqa0laV3B5VytmQ3R2RXl5aE8rVGhSREpWdktBdGE0?=
+ =?utf-8?B?dDBpb0NSRitOVmM3VEZwRDJlNmJ0RnVVRVEzR25yU3ZRQUJFZUo1Zz09?=
+Content-Type: multipart/alternative;
+	boundary="_000_TY3PR01MB101109E8D1F3D248631AFD2D09B61ATY3PR01MB10110jp_"
+MIME-Version: 1.0
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB10110.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 25744557-c554-420f-eb42-08de6ad0538b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2026 07:20:12.0248
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: l1t1yqPSMdsQHUnEItFZsVP/RzoO4/t7wEKAmAfpjSMntuHqWAq6j/CoBfZ0ogUcEVOfDijst6yF2yhnr7J+XA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB10888
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 02:54:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124375
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 07:20:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124376
 
---00000000000034217b064aabb9d8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--_000_TY3PR01MB101109E8D1F3D248631AFD2D09B61ATY3PR01MB10110jp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Feb 12, 2026 at 6:45=E2=80=AFPM Gyorgy Sarvari via lists.openembedd=
-ed.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+SGkgS2hlbQ0KDQotPiB3aGF0IGFyZSBzaWRlLWVmZmVjdHMgb2YgcmVtb3ZpbmcgaXQgPw0KSSBo
+YXZlIHRlc3RlZCBjLWV4dGVuc2lvbnMgb2YgaG90ZG9jIHdpdGggcHJvZHVjaW5nIGRvYyBvZiBv
+cmMsIGFuZCBmb3VuZCBpdCB3b3JrcyB3ZWxsLg0KQXQgbGVhc3Qgd2hlbiB1c2VkIGJ5IG9yYywg
+SSBkaWRuJ3QgZmluZCBzaWRlLWVmZmVjdHMgb2YgcmVtb3Zpbmcgc2V0dXB0b29sc19naXQuDQoN
+CkxpdQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0K5Y+R5Lu25Lq6OiBLaGVt
+IFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0K5Y+R6YCB5pe26Ze0OiAyMDI25bm0MuaciDEz5pel
+IDEwOjQ5DQrmlLbku7bkuro6IExpdSwgWWlkaW5nL+WImCDkuZnkuIEgPGxpdXlkLmZuc3RAZnVq
+aXRzdS5jb20+DQrmioTpgIE6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCuS4u+mimDog
+UmU6IFtvZV1bbWV0YS1weXRob25dW1BBVENIIDQvNV0gcHl0aG9uMy1kYnVzLWRldmlhdGlvbjog
+QWRkIG5ldyByZWNpcGUNCg0KDQoNCk9uIFRodSwgRmViIDEyLCAyMDI2IGF0IDY6MzLigK9QTSBZ
+aWRpbmcgTGl1IChGdWppdHN1KSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZzxodHRwOi8vbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZz4gPGxpdXlkLmZuc3Q9ZnVqaXRzdS5jb21AbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZzxtYWlsdG86ZnVqaXRzdS5jb21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4+IHdy
+b3RlOg0KQWRkIHRoaXMgbmV3IHJlY2lwZSBmb3IgcnVudGltZSBkZXBlbmRlbmNlIG9mIGhvdGRv
+Yy4NCg0KU2lnbmVkLW9mZi1ieTogTGl1IFlpZGluZyA8bGl1eWQuZm5zdEBmdWppdHN1LmNvbTxt
+YWlsdG86bGl1eWQuZm5zdEBmdWppdHN1LmNvbT4+DQotLS0NCiAuLi5vLWRvbndsb2FkLXJlcXVp
+ZXJtZW50LXdoaWNoLXdpbGwtY2EucGF0Y2ggfCAyNyArKysrKysrKysrKysrKysrKysrDQogLi4u
+L3B5dGhvbi9weXRob24zLWRidXMtZGV2aWF0aW9uXzAuNi4xLmJiPGh0dHA6Ly9weXRob24zLWRi
+dXMtZGV2aWF0aW9uXzAuNi4xLmJiPiAgICB8IDIwICsrKysrKysrKysrKysrDQogMiBmaWxlcyBj
+aGFuZ2VkLCA0NyBpbnNlcnRpb25zKCspDQogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtcHl0aG9u
+L3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb24vMDAwMS1QcmV2
+ZW50LXRyeWluZy10by1kb253bG9hZC1yZXF1aWVybWVudC13aGljaC13aWxsLWNhLnBhdGNoDQog
+Y3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5
+dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEuYmI8aHR0cDovL3B5dGhvbjMtZGJ1cy1kZXZpYXRp
+b25fMC42LjEuYmI+DQoNCmRpZmYgLS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xz
+L3B5dGhvbi9weXRob24zLWRidXMtZGV2aWF0aW9uLzAwMDEtUHJldmVudC10cnlpbmctdG8tZG9u
+d2xvYWQtcmVxdWllcm1lbnQtd2hpY2gtd2lsbC1jYS5wYXRjaCBiL21ldGEtcHl0aG9uL3JlY2lw
+ZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb24vMDAwMS1QcmV2ZW50LXRy
+eWluZy10by1kb253bG9hZC1yZXF1aWVybWVudC13aGljaC13aWxsLWNhLnBhdGNoDQpuZXcgZmls
+ZSBtb2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwMC4uYjE2M2RiNzcyYw0KLS0tIC9kZXYvbnVs
+bA0KKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1kYnVz
+LWRldmlhdGlvbi8wMDAxLVByZXZlbnQtdHJ5aW5nLXRvLWRvbndsb2FkLXJlcXVpZXJtZW50LXdo
+aWNoLXdpbGwtY2EucGF0Y2gNCkBAIC0wLDAgKzEsMjcgQEANCitTdWJqZWN0OiBbUEFUQ0hdIFBy
+ZXZlbnQgdHJ5aW5nIHRvIGRvbndsb2FkIHJlcXVpZXJtZW50IHdoaWNoIHdpbGwgY2F1c2UNCisg
+bmV0d29yayBlcnJvci4NCisNCisnTmV3Q29ubmVjdGlvbkVycm9yKCc8cGlwLl92ZW5kb3IudXJs
+bGliMy5jb25uZWN0aW9uLkhUVFBTQ29ubmVjdGlvbiBvYmplY3QgYXQgMHg3ZjFlODMwNjJhZDA+
+OiBGYWlsZWQgdG8gZXN0YWJsaXNoIGEgbmV3IGNvbm5lY3Rpb246IFtFcnJubyAtM10gVGVtcG9y
+YXJ5IGZhaWx1cmUgaW4gbmFtZSByZXNvbHV0aW9uJyknOiAvc2ltcGxlL3NldHVwdG9vbHMtZ2l0
+Lw0KKw0KK1Vwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSBbb2Ugc3BlY2lmaWNdDQorDQor
+U2lnbmVkLW9mZi1ieTogTGl1IFlpZGluZyA8bGl1eWQuZm5zdEBmdWppdHN1LmNvbTxtYWlsdG86
+bGl1eWQuZm5zdEBmdWppdHN1LmNvbT4+DQorLS0tDQorIHNldHVwLnB5IHwgMSAtDQorIDEgZmls
+ZSBjaGFuZ2VkLCAxIGRlbGV0aW9uKC0pDQorDQorZGlmZiAtLWdpdCBhL3NldHVwLnB5IGIvc2V0
+dXAucHkNCitpbmRleCAyNDUxOTNmLi5kODk5ZTRjIDEwMDc1NQ0KKy0tLSBhL3NldHVwLnB5DQor
+KysrIGIvc2V0dXAucHkNCitAQCAtOTIsNyArOTIsNiBAQCBzZXR1cHRvb2xzLnNldHVwKA0KKyAg
+ICAgZXhjbHVkZV9wYWNrYWdlX2RhdGE9eycnOiBbJy5naXRpZ25vcmUnXX0sDQorICAgICB6aXBf
+c2FmZT1UcnVlLA0KKyAgICAgc2V0dXBfcmVxdWlyZXM9Ww0KKy0gICAgICAgICdzZXR1cHRvb2xz
+X2dpdCA+PSAwLjMnLA0KDQp3aGF0IGFyZSBzaWRlLWVmZmVjdHMgb2YgcmVtb3ZpbmcgaXQgPw0K
+DQorICAgICAgICAgJ3NwaGlueCcsDQorICAgICBdLA0KKyAgICAgaW5zdGFsbF9yZXF1aXJlcz1b
+J2x4bWwnXSwNCistLQ0KKzIuNDMuMA0KKw0KZGlmZiAtLWdpdCBhL21ldGEtcHl0aG9uL3JlY2lw
+ZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEuYmI8aHR0cDov
+L3B5dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEuYmI+IGIvbWV0YS1weXRob24vcmVjaXBlcy1k
+ZXZ0b29scy9weXRob24vcHl0aG9uMy1kYnVzLWRldmlhdGlvbl8wLjYuMS5iYjxodHRwOi8vcHl0
+aG9uMy1kYnVzLWRldmlhdGlvbl8wLjYuMS5iYj4NCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRl
+eCAwMDAwMDAwMDAwLi5lOTY5ZTg1NDY1DQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWRidXMtZGV2aWF0aW9uXzAuNi4xLmJi
+PGh0dHA6Ly9weXRob24zLWRidXMtZGV2aWF0aW9uXzAuNi4xLmJiPg0KQEAgLTAsMCArMSwyMCBA
+QA0KK1NVTU1BUlkgPSAiZGJ1cy1kZXZpYXRpb24gaXMgYSBwcm9qZWN0IGZvciBwYXJzaW5nIEQt
+QnVzIGludHJvc3BlY3Rpb24gWE1MIGFuZCBwcm9jZXNzaW5nIGl0IGluIHZhcmlvdXMgd2F5cyIN
+CitIT01FUEFHRSA9ICJodHRwczovL3RlY25vY29kZS5jby51ay9kYnVzLWRldmlhdGlvbi8iDQor
+TElDRU5TRSA9ICJMR1BMLTIuMS1vci1sYXRlciINCitMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6
+Ly9DT1BZSU5HO21kNT05MDI2M2E0OWJjMWQ5YTIwNDY1NmZlYzRkNTYxNmM2NiINCisNCitTUkNf
+VVJJW3NoYTI1NnN1bV0gPSAiZTA2Yjg4ZWZlMjIzODg1ZDI3MjVkZjUxY2Y3YzliN2I0NjNkMWM2
+ZjA0ZWE0OWQ0NjkwODc0MzE4ZDBlYjdhMyINCisNCitpbmhlcml0IHB5cGkgc2V0dXB0b29sczMN
+CisNCitTUkNfVVJJICs9ICJmaWxlOi8vMDAwMS1QcmV2ZW50LXRyeWluZy10by1kb253bG9hZC1y
+ZXF1aWVybWVudC13aGljaC13aWxsLWNhLnBhdGNoIg0KKw0KK0RFUEVORFMgKz0gInB5dGhvbjMt
+c3BoaW54LW5hdGl2ZSINCisNCitkb19pbnN0YWxsOmFwcGVuZCgpIHsNCisgICAgZm9yIHNzIGlu
+ICQoZmluZCAke0R9JHtQWVRIT05fU0lURVBBQ0tBR0VTX0RJUn0gLXR5cGUgZiAtbmFtZSAiKi5w
+eSIpOyBkbw0KKyAgICAgICAgc2VkIC1pICdzLC91c3IvYmluL3B5dGhvbiQsL3Vzci9iaW4vZW52
+IHB5dGhvbjMsJyAiJHNzIg0KKyAgICBkb25lDQorfQ0KKw0KK0JCQ0xBU1NFWFRFTkQgPSAibmF0
+aXZlIg0KLS0NCjIuNDMuMA0KDQoNCi09LT0tPS09LT0tPS09LT0tPS09LT0tDQpMaW5rczogWW91
+IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91cC4NClZpZXcvUmVwbHkgT25s
+aW5lICgjMTI0MzY5KTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVk
+ZGVkLWRldmVsL21lc3NhZ2UvMTI0MzY5DQpNdXRlIFRoaXMgVG9waWM6IGh0dHBzOi8vbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZy9tdC8xMTc3ODY3NzAvMTk5NzkxNA0KR3JvdXAgT3duZXI6IG9wZW5l
+bWJlZGRlZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpvcGVuZW1i
+ZWRkZWQtZGV2ZWwlMkJvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KVW5zdWJzY3JpYmU6
+IGh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1
+YiBbcmFqLmtoZW1AZ21haWwuY29tPG1haWx0bzpyYWoua2hlbUBnbWFpbC5jb20+XQ0KLT0tPS09
+LT0tPS09LT0tPS09LT0tPS0NCg0K
 
-> I think this should go to meta-python also, otherwise meta-oe will
-> depend on meta-python due to the newly added dependencies (or not?)
->
-> On 2/13/26 03:32, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> > 1. Backport following patch to solve build and runtime issue
-> >   0001-c_comment_scanner-fix-function-prototypes.patch
-> >   0002-avoid-third-party-backports-dependency-on-sufficient.patch
-> >   0003-CMake-4-compatibility.patch
-> >
-> > 2. Add do_configure:prepend() to solve buildpaths QA check
-> >   do_package_qa: QA Issue: File
-> /usr/lib/python3.14/site-packages/hotdoc/parsers/
-> cmark.cpython-314-x86_64-linux-gnu.so in package hotdoc contains
-> reference to TMPDIR [buildpaths]
-> >
-> > 3. Add 0004-Make-path-to-relative-in-FlexExtension.patch to solve
-> buildpaths QA check
-> >   do_package_qa:QA Issue: File
-> /usr/src/debug/hotdoc/0.17.4/hotdoc/parsers/c_comment_scanner/scanner.c i=
-n
-> package hotdoc-src contains reference to TMPDIR [buildpaths]
-> >
-> > 4. Add clang as RDEPENDS for following reason
-> >   Hotdoc has some Extensions including c-Extension.
-> >   The c-Extension needs llvm and clang in runtime as introduced in doc
-> of hotdoc.
-> >   https://hotdoc.github.io/c-extension.html#c-extension
-> >   "The extension uses Clang to build and walk an AST from the source
-> code"
-> >
-> > Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> > ---
-> >  ...ment_scanner-fix-function-prototypes.patch | 32 +++++++++
-> >  ...y-backports-dependency-on-sufficient.patch | 72 +++++++++++++++++++
-> >  .../hotdoc/0003-CMake-4-compatibility.patch   | 44 ++++++++++++
-> >  ...ke-path-to-relative-in-FlexExtension.patch | 34 +++++++++
-> >  .../recipes-devtools/hotdoc/hotdoc_0.17.4.bb  | 28 ++++++++
-> >  5 files changed, 210 insertions(+)
-> >  create mode 100644
-> meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-functio=
-n-prototypes.patch
-> >  create mode 100644
-> meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports-d=
-ependency-on-sufficient.patch
-> >  create mode 100644
-> meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-> >  create mode 100644
-> meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-relative-in-Flex=
-Extension.patch
-> >  create mode 100644 meta-oe/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-> >
-> > diff --git
-> a/meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-funct=
-ion-prototypes.patch
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-funct=
-ion-prototypes.patch
-> > new file mode 100644
-> > index 0000000000..c26dde93b3
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-funct=
-ion-prototypes.patch
-> > @@ -0,0 +1,32 @@
-> > +Subject: [PATCH 1/2] c_comment_scanner: fix function prototypes
-> > +
-> > +scanner.l: Fix compile error as the following:
-> > +
-> >
-> +python3-hotdoc/0.17.4/sources/hotdoc-0.17.4/hotdoc/parsers/c_comment_sca=
-nner/scanner.l:126:1:
-> error: conflicting types for 'parse_comment'; have 'int(PyObject *)' {aka
-> 'int(struct _object *)'}
-> > +|   126 | parse_comment (PyObject *comments)
-> > +
-> > +Upstream-Status: Backport [
-> https://github.com/hotdoc/hotdoc/commit/adf8518431fafb78c9b47862a0a9a5882=
-4b6a421
-> ]
-> > +
-> > +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> > +---
-> > + hotdoc/parsers/c_comment_scanner/scanner.l | 4 ++--
-> > + 1 file changed, 2 insertions(+), 2 deletions(-)
-> > +
-> > +diff --git a/hotdoc/parsers/c_comment_scanner/scanner.l
-> b/hotdoc/parsers/c_comment_scanner/scanner.l
-> > +index 0408601..7bccd64 100644
-> > +--- a/hotdoc/parsers/c_comment_scanner/scanner.l
-> > ++++ b/hotdoc/parsers/c_comment_scanner/scanner.l
-> > +@@ -34,8 +34,8 @@
-> > + extern int yylex (PyObject *comments);
-> > + #define YY_DECL int yylex (PyObject *comments)
-> > + static int yywrap (void);
-> > +-static int parse_comment ();
-> > +-static int parse_define ();
-> > ++static int parse_comment (PyObject *);
-> > ++static int parse_define (PyObject *);
-> > + %}
-> > +
-> > + %option nounput
-> > +--
-> > +2.43.0
-> > +
-> > diff --git
-> a/meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports=
--dependency-on-sufficient.patch
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports=
--dependency-on-sufficient.patch
-> > new file mode 100644
-> > index 0000000000..560d1257f0
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports=
--dependency-on-sufficient.patch
-> > @@ -0,0 +1,72 @@
-> > +Subject: [PATCH 2/2] avoid third-party backports dependency on
-> sufficiently
-> > + new python
-> > +
-> > +`backports.entry_points_selectable` backports functionality from pytho=
-n
-> > +3.10 to older versions of python.
-> > +
-> > +Backport this patch to solve runtime backports import problem as
-> following:
-> > +  File "/usr/lib/python3.14/site-packages/hotdoc/utils/utils.py", line
-> 38, in <module>
-> > +  from backports.entry_points_selectable import entry_points
-> > +ModuleNotFoundError: No module named 'backports'
-> > +
-> > +Upstream-Status: Backport [
-> https://github.com/hotdoc/hotdoc/commit/51043c3ef889e36c8232280581598b875=
-073ded7
-> ]
-> > +
-> > +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> > +---
-> > + hotdoc/extensions/gi/utils.py | 6 +++++-
-> > + hotdoc/utils/utils.py         | 6 +++++-
-> > + setup.py                      | 2 +-
-> > + 3 files changed, 11 insertions(+), 3 deletions(-)
-> > +
-> > +diff --git a/hotdoc/extensions/gi/utils.py
-> b/hotdoc/extensions/gi/utils.py
-> > +index 159c2b6..91902cb 100644
-> > +--- a/hotdoc/extensions/gi/utils.py
-> > ++++ b/hotdoc/extensions/gi/utils.py
-> > +@@ -1,9 +1,13 @@
-> > + import os
-> > + from collections import namedtuple
-> > + import pathlib
-> > ++import sys
-> > + import traceback
-> > +
-> > +-from backports.entry_points_selectable import entry_points
-> > ++if sys.version_info >=3D (3, 10):
-> > ++    from importlib.metadata import entry_points
-> > ++else:
-> > ++    from backports.entry_points_selectable import entry_points
-> > +
-> > + from hotdoc.core.links import Link
-> > + from hotdoc.utils.loggable import info, debug
-> > +diff --git a/hotdoc/utils/utils.py b/hotdoc/utils/utils.py
-> > +index 518d308..aef657a 100644
-> > +--- a/hotdoc/utils/utils.py
-> > ++++ b/hotdoc/utils/utils.py
-> > +@@ -35,7 +35,11 @@ import importlib.util
-> > + from urllib.request import urlretrieve
-> > + from pathlib import Path
-> > +
-> > +-from backports.entry_points_selectable import entry_points
-> > ++if sys.version_info >=3D (3, 10):
-> > ++    from importlib.metadata import entry_points
-> > ++else:
-> > ++    from backports.entry_points_selectable import entry_points
-> > ++
-> > + try:
-> > +     import importlib.metadata as meta
-> > + except ImportError:
-> > +diff --git a/setup.py b/setup.py
-> > +index 5d7f131..9ee504d 100644
-> > +--- a/setup.py
-> > ++++ b/setup.py
-> > +@@ -300,7 +300,7 @@ INSTALL_REQUIRES =3D [
-> > +     'wheezy.template',
-> > +     'toposort>=3D1.4',
-> > +     'importlib_metadata; python_version<"3.10"',
-> > +-    'backports.entry_points_selectable',
-> > ++    'backports.entry_points_selectable; python_version<"3.10"',
-> > + ]
-> > +
-> > + # dbus-deviation requires sphinx, which requires python 3.5
-> > +--
-> > +2.43.0
-> > +
-> > diff --git
-> a/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-> > new file mode 100644
-> > index 0000000000..056ad5d340
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-> > @@ -0,0 +1,44 @@
-> > +Subject: [PATCH] CMake 4 compatibility
-> > +
-> > +All CMake versions older than 3.10 are deprecated.
-> > +
-> > +Upstream-Status: Backport [
-> https://github.com/MathieuDuponchelle/cmark/commit/bd78193dbff98c3860e776=
-29b5c7bfee6169d1da
-> ]
-> > +
-> > +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> > +---
-> > + CMakeLists.txt            | 11 ++---------
-> > + extensions/CMakeLists.txt |  2 +-
-> > + 2 files changed, 3 insertions(+), 10 deletions(-)
-> > +
-> > +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> > +index ff97419..45fdf6c 100755
-> > +--- a/CMakeLists.txt
-> > ++++ b/CMakeLists.txt
-> > +@@ -1,12 +1,5 @@
-> > +-cmake_minimum_required(VERSION 2.8.9)
-> > +-
-> > +-# prevent ugly developer warnings because version is set directly, no=
-t
-> through project()
-> > +-# it should be redone properly by using VERSION in project() if on
-> CMake 3.x
-> > +-if(CMAKE_MAJOR_VERSION GREATER 2)
-> > +-    cmake_policy(SET CMP0048 OLD)
-> > +-endif()
-> > +-
-> > +-project(cmark)
-> > ++cmake_minimum_required(VERSION 3.10)
-> > ++project(cmark VERSION 0.28.3)
-> > +
-> > + include("FindAsan.cmake")
-> > +
-> > +diff --git a/extensions/CMakeLists.txt b/extensions/CMakeLists.txt
-> > +index e62d155..b6a1556 100644
-> > +--- a/extensions/CMakeLists.txt
-> > ++++ b/extensions/CMakeLists.txt
-> > +@@ -1,4 +1,4 @@
-> > +-cmake_minimum_required(VERSION 2.8)
-> > ++cmake_minimum_required(VERSION 3.10)
-> > + set(LIBRARY "cmarkextensions")
-> > + set(LIBRARY_SOURCES
-> > +     core-extensions.c
-> > +--
-> > +2.43.0
-> > +
-> > diff --git
-> a/meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-relative-in-Fl=
-exExtension.patch
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-relative-in-Fl=
-exExtension.patch
-> > new file mode 100644
-> > index 0000000000..ae8c2ef3e7
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-relative-in-Fl=
-exExtension.patch
-> > @@ -0,0 +1,34 @@
-> > +Subject: [PATCH] Make path to relative in FlexExtension
-> > +
-> > +To fix following do_package QA Issue:
-> > +
-> > +do_package_qa:QA Issue: File
-> /usr/src/debug/hotdoc/0.17.4/hotdoc/parsers/c_comment_scanner/scanner.c i=
-n
-> package hotdoc-src contains reference to TMPDIR [buildpaths]
-> > +
-> > +Upstream-Status: Inappropriate [oe-specific]
-> > +
->
+--_000_TY3PR01MB101109E8D1F3D248631AFD2D09B61ATY3PR01MB10110jp_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
+ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
+ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgc3R5bGU9ImZvbnQtZmFtaWx5OiBB
+cHRvcywgQXB0b3NfRW1iZWRkZWRGb250LCBBcHRvc19NU0ZvbnRTZXJ2aWNlLCBDYWxpYnJpLCBI
+ZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTJwdDsgY29sb3I6IHJnYigwLCAwLCAw
+KTsiIGNsYXNzPSJlbGVtZW50VG9Qcm9vZiI+DQpIaSBLaGVtPC9kaXY+DQo8ZGl2IHN0eWxlPSJm
+b250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2Vydmlj
+ZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
+OiByZ2IoMCwgMCwgMCk7IiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiPg0KPGJyPg0KPC9kaXY+DQo8
+ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3Nf
+TVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6
+IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiPg0KLSZn
+dDsgd2hhdCBhcmUgc2lkZS1lZmZlY3RzIG9mIHJlbW92aW5nIGl0ID88L2Rpdj4NCjxkaXYgc3R5
+bGU9ImZvbnQtZmFtaWx5OiBBcHRvcywgQXB0b3NfRW1iZWRkZWRGb250LCBBcHRvc19NU0ZvbnRT
+ZXJ2aWNlLCBDYWxpYnJpLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTJwdDsg
+Y29sb3I6IHJnYigwLCAwLCAwKTsiIGNsYXNzPSJlbGVtZW50VG9Qcm9vZiI+DQpJIGhhdmUgdGVz
+dGVkIGMtZXh0ZW5zaW9ucyBvZiBob3Rkb2Mgd2l0aCBwcm9kdWNpbmcgZG9jIG9mIG9yYywgYW5k
+IGZvdW5kIGl0IHdvcmtzIHdlbGwuPC9kaXY+DQo8ZGl2IHN0eWxlPSJmb250LWZhbWlseTogQXB0
+b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVs
+dmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7
+IiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiPg0KQXQgbGVhc3Qgd2hlbiB1c2VkIGJ5IG9yYywgSSBk
+aWRuJ3QgZmluZCBzaWRlLWVmZmVjdHMmbmJzcDtvZiByZW1vdmluZyZuYnNwO3NldHVwdG9vbHNf
+Z2l0LjwvZGl2Pg0KPGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRl
+ZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJp
+ZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyIgY2xhc3M9ImVsZW1lbnRU
+b1Byb29mIj4NCjxicj4NCjwvZGl2Pg0KPGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBB
+cHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGlj
+YSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyIgY2xh
+c3M9ImVsZW1lbnRUb1Byb29mIj4NCkxpdTwvZGl2Pg0KPGRpdiBzdHlsZT0iZm9udC1mYW1pbHk6
+IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmks
+IEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAs
+IDApOyIgY2xhc3M9ImVsZW1lbnRUb1Byb29mIj4NCjxicj4NCjwvZGl2Pg0KPGRpdiBpZD0iYXBw
+ZW5kb25zZW5kIj48L2Rpdj4NCjxociBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7d2lkdGg6
+OTglIiB0YWJpbmRleD0iLTEiPg0KPGRpdiBpZD0iZGl2UnBseUZ3ZE1zZyIgZGlyPSJsdHIiPjxm
+b250IGZhY2U9IkNhbGlicmksIHNhbnMtc2VyaWYiIHN0eWxlPSJmb250LXNpemU6MTFwdCIgY29s
+b3I9IiMwMDAwMDAiPjxiPuWPkeS7tuS6ujo8L2I+IEtoZW0gUmFqICZsdDtyYWoua2hlbUBnbWFp
+bC5jb20mZ3Q7PGJyPg0KPGI+5Y+R6YCB5pe26Ze0OjwvYj4gMjAyNuW5tDLmnIgxM+aXpSAxMDo0
+OTxicj4NCjxiPuaUtuS7tuS6ujo8L2I+IExpdSwgWWlkaW5nL+WImCDkuZnkuIEgJmx0O2xpdXlk
+LmZuc3RAZnVqaXRzdS5jb20mZ3Q7PGJyPg0KPGI+5oqE6YCBOjwvYj4gb3BlbmVtYmVkZGVkLWRl
+dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgJmx0O29wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5v
+cGVuZW1iZWRkZWQub3JnJmd0Ozxicj4NCjxiPuS4u+mimDo8L2I+IFJlOiBbb2VdW21ldGEtcHl0
+aG9uXVtQQVRDSCA0LzVdIHB5dGhvbjMtZGJ1cy1kZXZpYXRpb246IEFkZCBuZXcgcmVjaXBlPC9m
+b250Pg0KPGRpdj4mbmJzcDs8L2Rpdj4NCjwvZGl2Pg0KPGRpdj4NCjxkaXYgZGlyPSJsdHIiPg0K
+PGRpdiBkaXI9Imx0ciI+PGJyPg0KPC9kaXY+DQo8YnI+DQo8ZGl2IGNsYXNzPSJ4X2dtYWlsX3F1
+b3RlIHhfZ21haWxfcXVvdGVfY29udGFpbmVyIj4NCjxkaXYgZGlyPSJsdHIiIGNsYXNzPSJ4X2dt
+YWlsX2F0dHIiPk9uIFRodSwgRmViIDEyLCAyMDI2IGF0IDY6MzLigK9QTSBZaWRpbmcgTGl1IChG
+dWppdHN1KSB2aWENCjxhIGhyZWY9Imh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnIj5saXN0
+cy5vcGVuZW1iZWRkZWQub3JnPC9hPiAmbHQ7bGl1eWQuZm5zdD08YSBocmVmPSJtYWlsdG86ZnVq
+aXRzdS5jb21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZyI+ZnVqaXRzdS5jb21AbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZzwvYT4mZ3Q7IHdyb3RlOjxicj4NCjwvZGl2Pg0KPGJsb2NrcXVvdGUgY2xhc3M9
+InhfZ21haWxfcXVvdGUiIHN0eWxlPSJtYXJnaW46MHB4IDBweCAwcHggMC44ZXg7IGJvcmRlci1s
+ZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpOyBwYWRkaW5nLWxlZnQ6MWV4Ij4NCkFkZCB0
+aGlzIG5ldyByZWNpcGUgZm9yIHJ1bnRpbWUgZGVwZW5kZW5jZSBvZiBob3Rkb2MuPGJyPg0KPGJy
+Pg0KU2lnbmVkLW9mZi1ieTogTGl1IFlpZGluZyAmbHQ7PGEgaHJlZj0ibWFpbHRvOmxpdXlkLmZu
+c3RAZnVqaXRzdS5jb20iIHRhcmdldD0iX2JsYW5rIj5saXV5ZC5mbnN0QGZ1aml0c3UuY29tPC9h
+PiZndDs8YnI+DQotLS08YnI+DQombmJzcDsuLi5vLWRvbndsb2FkLXJlcXVpZXJtZW50LXdoaWNo
+LXdpbGwtY2EucGF0Y2ggfCAyNyArKysrKysrKysrKysrKysrKysrPGJyPg0KJm5ic3A7Li4uL3B5
+dGhvbi88YSBocmVmPSJodHRwOi8vcHl0aG9uMy1kYnVzLWRldmlhdGlvbl8wLjYuMS5iYiIgcmVs
+PSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+cHl0aG9uMy1kYnVzLWRldmlhdGlvbl8wLjYu
+MS5iYjwvYT4mbmJzcDsgJm5ic3A7IHwgMjAgKysrKysrKysrKysrKys8YnI+DQombmJzcDsyIGZp
+bGVzIGNoYW5nZWQsIDQ3IGluc2VydGlvbnMoKyk8YnI+DQombmJzcDtjcmVhdGUgbW9kZSAxMDA2
+NDQgbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1kYnVzLWRldmlh
+dGlvbi8wMDAxLVByZXZlbnQtdHJ5aW5nLXRvLWRvbndsb2FkLXJlcXVpZXJtZW50LXdoaWNoLXdp
+bGwtY2EucGF0Y2g8YnI+DQombmJzcDtjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1weXRob24vcmVj
+aXBlcy1kZXZ0b29scy9weXRob24vPGEgaHJlZj0iaHR0cDovL3B5dGhvbjMtZGJ1cy1kZXZpYXRp
+b25fMC42LjEuYmIiIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxhbmsiPnB5dGhvbjMtZGJ1
+cy1kZXZpYXRpb25fMC42LjEuYmI8L2E+PGJyPg0KPGJyPg0KZGlmZiAtLWdpdCBhL21ldGEtcHl0
+aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb24vMDAwMS1Q
+cmV2ZW50LXRyeWluZy10by1kb253bG9hZC1yZXF1aWVybWVudC13aGljaC13aWxsLWNhLnBhdGNo
+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1kYnVzLWRldmlh
+dGlvbi8wMDAxLVByZXZlbnQtdHJ5aW5nLXRvLWRvbndsb2FkLXJlcXVpZXJtZW50LXdoaWNoLXdp
+bGwtY2EucGF0Y2g8YnI+DQpuZXcgZmlsZSBtb2RlIDEwMDY0NDxicj4NCmluZGV4IDAwMDAwMDAw
+MDAuLmIxNjNkYjc3MmM8YnI+DQotLS0gL2Rldi9udWxsPGJyPg0KKysrIGIvbWV0YS1weXRob24v
+cmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1kYnVzLWRldmlhdGlvbi8wMDAxLVByZXZl
+bnQtdHJ5aW5nLXRvLWRvbndsb2FkLXJlcXVpZXJtZW50LXdoaWNoLXdpbGwtY2EucGF0Y2g8YnI+
+DQpAQCAtMCwwICsxLDI3IEBAPGJyPg0KK1N1YmplY3Q6IFtQQVRDSF0gUHJldmVudCB0cnlpbmcg
+dG8gZG9ud2xvYWQgcmVxdWllcm1lbnQgd2hpY2ggd2lsbCBjYXVzZTxicj4NCisgbmV0d29yayBl
+cnJvci48YnI+DQorPGJyPg0KKydOZXdDb25uZWN0aW9uRXJyb3IoJyZsdDtwaXAuX3ZlbmRvci51
+cmxsaWIzLmNvbm5lY3Rpb24uSFRUUFNDb25uZWN0aW9uIG9iamVjdCBhdCAweDdmMWU4MzA2MmFk
+MCZndDs6IEZhaWxlZCB0byBlc3RhYmxpc2ggYSBuZXcgY29ubmVjdGlvbjogW0Vycm5vIC0zXSBU
+ZW1wb3JhcnkgZmFpbHVyZSBpbiBuYW1lIHJlc29sdXRpb24nKSc6IC9zaW1wbGUvc2V0dXB0b29s
+cy1naXQvPGJyPg0KKzxicj4NCitVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW29lIHNw
+ZWNpZmljXTxicj4NCis8YnI+DQorU2lnbmVkLW9mZi1ieTogTGl1IFlpZGluZyAmbHQ7PGEgaHJl
+Zj0ibWFpbHRvOmxpdXlkLmZuc3RAZnVqaXRzdS5jb20iIHRhcmdldD0iX2JsYW5rIj5saXV5ZC5m
+bnN0QGZ1aml0c3UuY29tPC9hPiZndDsNCjxicj4NCistLS08YnI+DQorIHNldHVwLnB5IHwgMSAt
+PGJyPg0KKyAxIGZpbGUgY2hhbmdlZCwgMSBkZWxldGlvbigtKTxicj4NCis8YnI+DQorZGlmZiAt
+LWdpdCBhL3NldHVwLnB5IGIvc2V0dXAucHk8YnI+DQoraW5kZXggMjQ1MTkzZi4uZDg5OWU0YyAx
+MDA3NTU8YnI+DQorLS0tIGEvc2V0dXAucHk8YnI+DQorKysrIGIvc2V0dXAucHk8YnI+DQorQEAg
+LTkyLDcgKzkyLDYgQEAgc2V0dXB0b29scy5zZXR1cCg8YnI+DQorJm5ic3A7ICZuYnNwOyAmbmJz
+cDtleGNsdWRlX3BhY2thZ2VfZGF0YT17Jyc6IFsnLmdpdGlnbm9yZSddfSw8YnI+DQorJm5ic3A7
+ICZuYnNwOyAmbmJzcDt6aXBfc2FmZT1UcnVlLDxicj4NCismbmJzcDsgJm5ic3A7ICZuYnNwO3Nl
+dHVwX3JlcXVpcmVzPVs8YnI+DQorLSZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAnc2V0dXB0
+b29sc19naXQgJmd0Oz0gMC4zJyw8YnI+DQo8L2Jsb2NrcXVvdGU+DQo8ZGl2Pjxicj4NCjwvZGl2
+Pg0KPGRpdj53aGF0IGFyZSBzaWRlLWVmZmVjdHMgb2YgcmVtb3ZpbmcgaXQgPzwvZGl2Pg0KPGRp
+dj4mbmJzcDs8L2Rpdj4NCjxibG9ja3F1b3RlIGNsYXNzPSJ4X2dtYWlsX3F1b3RlIiBzdHlsZT0i
+bWFyZ2luOjBweCAwcHggMHB4IDAuOGV4OyBib3JkZXItbGVmdDoxcHggc29saWQgcmdiKDIwNCwy
+MDQsMjA0KTsgcGFkZGluZy1sZWZ0OjFleCI+DQorJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
+ICZuYnNwOydzcGhpbngnLDxicj4NCismbmJzcDsgJm5ic3A7ICZuYnNwO10sPGJyPg0KKyZuYnNw
+OyAmbmJzcDsgJm5ic3A7aW5zdGFsbF9yZXF1aXJlcz1bJ2x4bWwnXSw8YnI+DQorLS0gPGJyPg0K
+KzIuNDMuMDxicj4NCis8YnI+DQpkaWZmIC0tZ2l0IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
+b29scy9weXRob24vPGEgaHJlZj0iaHR0cDovL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEu
+YmIiIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxhbmsiPnB5dGhvbjMtZGJ1cy1kZXZpYXRp
+b25fMC42LjEuYmI8L2E+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vPGEg
+aHJlZj0iaHR0cDovL3B5dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEuYmIiIHJlbD0ibm9yZWZl
+cnJlciIgdGFyZ2V0PSJfYmxhbmsiPnB5dGhvbjMtZGJ1cy1kZXZpYXRpb25fMC42LjEuYmI8L2E+
+PGJyPg0KbmV3IGZpbGUgbW9kZSAxMDA2NDQ8YnI+DQppbmRleCAwMDAwMDAwMDAwLi5lOTY5ZTg1
+NDY1PGJyPg0KLS0tIC9kZXYvbnVsbDxicj4NCisrKyBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2
+dG9vbHMvcHl0aG9uLzxhIGhyZWY9Imh0dHA6Ly9weXRob24zLWRidXMtZGV2aWF0aW9uXzAuNi4x
+LmJiIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdldD0iX2JsYW5rIj5weXRob24zLWRidXMtZGV2aWF0
+aW9uXzAuNi4xLmJiPC9hPjxicj4NCkBAIC0wLDAgKzEsMjAgQEA8YnI+DQorU1VNTUFSWSA9ICZx
+dW90O2RidXMtZGV2aWF0aW9uIGlzIGEgcHJvamVjdCBmb3IgcGFyc2luZyBELUJ1cyBpbnRyb3Nw
+ZWN0aW9uIFhNTCBhbmQgcHJvY2Vzc2luZyBpdCBpbiB2YXJpb3VzIHdheXMmcXVvdDs8YnI+DQor
+SE9NRVBBR0UgPSAmcXVvdDs8YSBocmVmPSJodHRwczovL3RlY25vY29kZS5jby51ay9kYnVzLWRl
+dmlhdGlvbi8iIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxhbmsiPmh0dHBzOi8vdGVjbm9j
+b2RlLmNvLnVrL2RidXMtZGV2aWF0aW9uLzwvYT4mcXVvdDs8YnI+DQorTElDRU5TRSA9ICZxdW90
+O0xHUEwtMi4xLW9yLWxhdGVyJnF1b3Q7PGJyPg0KK0xJQ19GSUxFU19DSEtTVU0gPSAmcXVvdDtm
+aWxlOi8vQ09QWUlORzttZDU9OTAyNjNhNDliYzFkOWEyMDQ2NTZmZWM0ZDU2MTZjNjYmcXVvdDs8
+YnI+DQorPGJyPg0KK1NSQ19VUklbc2hhMjU2c3VtXSA9ICZxdW90O2UwNmI4OGVmZTIyMzg4NWQy
+NzI1ZGY1MWNmN2M5YjdiNDYzZDFjNmYwNGVhNDlkNDY5MDg3NDMxOGQwZWI3YTMmcXVvdDs8YnI+
+DQorPGJyPg0KK2luaGVyaXQgcHlwaSBzZXR1cHRvb2xzMzxicj4NCis8YnI+DQorU1JDX1VSSSAr
+PSAmcXVvdDtmaWxlOi8vMDAwMS1QcmV2ZW50LXRyeWluZy10by1kb253bG9hZC1yZXF1aWVybWVu
+dC13aGljaC13aWxsLWNhLnBhdGNoJnF1b3Q7PGJyPg0KKzxicj4NCitERVBFTkRTICs9ICZxdW90
+O3B5dGhvbjMtc3BoaW54LW5hdGl2ZSZxdW90Ozxicj4NCis8YnI+DQorZG9faW5zdGFsbDphcHBl
+bmQoKSB7PGJyPg0KKyZuYnNwOyAmbmJzcDsgZm9yIHNzIGluICQoZmluZCAke0R9JHtQWVRIT05f
+U0lURVBBQ0tBR0VTX0RJUn0gLXR5cGUgZiAtbmFtZSAmcXVvdDsqLnB5JnF1b3Q7KTsgZG88YnI+
+DQorJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IHNlZCAtaSAncywvdXNyL2Jpbi9weXRob24k
+LC91c3IvYmluL2VudiBweXRob24zLCcgJnF1b3Q7JHNzJnF1b3Q7PGJyPg0KKyZuYnNwOyAmbmJz
+cDsgZG9uZTxicj4NCit9PGJyPg0KKzxicj4NCitCQkNMQVNTRVhURU5EID0gJnF1b3Q7bmF0aXZl
+JnF1b3Q7PGJyPg0KLS0gPGJyPg0KMi40My4wPGJyPg0KPGJyPg0KPGJyPg0KLT0tPS09LT0tPS09
+LT0tPS09LT0tPS08YnI+DQpMaW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNlbnQgdG8g
+dGhpcyBncm91cC48YnI+DQpWaWV3L1JlcGx5IE9ubGluZSAoIzEyNDM2OSk6IDxhIGhyZWY9Imh0
+dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdl
+LzEyNDM2OSIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS8xMjQzNjk8L2E+
+PGJyPg0KTXV0ZSBUaGlzIFRvcGljOiA8YSBocmVmPSJodHRwczovL2xpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmcvbXQvMTE3Nzg2NzcwLzE5OTc5MTQiIHJlbD0ibm9yZWZlcnJlciIgdGFyZ2V0PSJfYmxh
+bmsiPg0KaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzExNzc4Njc3MC8xOTk3OTE0
+PC9hPjxicj4NCkdyb3VwIE93bmVyOiA8YSBocmVmPSJtYWlsdG86b3BlbmVtYmVkZGVkLWRldmVs
+JTJCb3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIgdGFyZ2V0PSJfYmxhbmsiPg0Kb3BlbmVt
+YmVkZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc8L2E+PGJyPg0KVW5zdWJz
+Y3JpYmU6IDxhIGhyZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJl
+ZGRlZC1kZXZlbC91bnN1YiIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRw
+czovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWI8L2E+
+IFs8YSBocmVmPSJtYWlsdG86cmFqLmtoZW1AZ21haWwuY29tIiB0YXJnZXQ9Il9ibGFuayI+cmFq
+LmtoZW1AZ21haWwuY29tPC9hPl08YnI+DQotPS09LT0tPS09LT0tPS09LT0tPS09LTxicj4NCjxi
+cj4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRt
+bD4NCg==
 
-
-
-> > +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> > +---
-> > + setup.py | 4 ++--
-> > + 1 file changed, 2 insertions(+), 2 deletions(-)
-> > +
-> > +diff --git a/setup.py b/setup.py
-> > +index 9ee504d..fc03c57 100644
-> > +--- a/setup.py
-> > ++++ b/setup.py
-> > +@@ -357,11 +357,11 @@ build_c_extension =3D
-> os.environ.get('HOTDOC_BUILD_C_EXTENSION', 'auto')
-> > + class FlexExtension (Extension):
-> > +     def __init__(self, flex_sources, *args, **kwargs):
-> > +         Extension.__init__(self, *args, **kwargs)
-> > +-        self.__flex_sources =3D [src(s) for s in flex_sources]
-> > ++        self.__flex_sources =3D list(flex_sources)
-> > +
-
-
-how does this appear in sources I wonder if  using flex with
---noline option can be of help here.
-
-
-> > +     def __build_flex(self):
-> > +         src_dir =3D os.path.dirname(self.__flex_sources[0])
-> > +-        built_scanner_path =3D src(os.path.join(src_dir, 'scanner.c')=
-)
-> > ++        built_scanner_path =3D os.path.join(src_dir, 'scanner.c')
-> > +
-> > +         self.sources.append(built_scanner_path)
-> > +         if newer_group(self.__flex_sources, built_scanner_path):
-> > +--
-> > +2.43.0
-> > +
-> > diff --git a/meta-oe/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-> b/meta-oe/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-> > new file mode 100644
-> > index 0000000000..6192a78989
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-> > @@ -0,0 +1,28 @@
-> > +SUMMARY =3D "Hotdoc is a documentation framework"
-> > +DESCRIPTION =3D "Hotdoc is a documentation micro-framework. It provide=
-s
-> an interface for extensions to plug upon, along with some base objects
-> (formatters, ...)"
-> > +HOMEPAGE =3D "https://github.com/hotdoc/hotdoc"
-> > +
-> > +LICENSE =3D "LGPL-2.1-or-later"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D90263a49bc1d9a204656fec4d56=
-16c66"
-> > +
-> > +SRC_URI[sha256sum] =3D
-> "c4d5dff647f03aa87a1d2d06035d2819edd099b91635e3b2ee390829357ae9fc"
-> > +
-> > +SRC_URI =3D "file://0001-c_comment_scanner-fix-function-prototypes.pat=
-ch \
-> > +
->  file://0002-avoid-third-party-backports-dependency-on-sufficient.patch \
-> > +           file://0003-CMake-4-compatibility.patch;patchdir=3Dcmark \
-> > +          "
-> > +
-> > +SRC_URI:append:class-target =3D
-> "file://0004-Make-path-to-relative-in-FlexExtension.patch"
-> > +
-> > +DEPENDS +=3D "libxml2 glib-2.0 json-glib"
-> > +
-> > +inherit pypi python_setuptools_build_meta pkgconfig
-> > +
-> > +#Fix LIBDIR path to fix buildpaths QA check of hotdoc/parsers/
-> cmark.cpython-314-x86_64-linux-gnu.so
-> > +do_configure:prepend:class-target() {
-> > +    sed -i -e "s#'\"%s\"' %
-> CMARK_BUILD_DIR#'\"${PYTHON_SITEPACKAGES_DIR}/${PN}\"'#" ${S}/setup.py
-> > +}
-> > +
-> > +RDEPENDS:${PN} +=3D "clang python3-appdirs python3-cchardet
-> python3-dbus-deviation python3-lxml python3-networkx python3-pkgconfig
-> python3-pyyaml python3-schema python3-toposort python3-wheezy-template"
-> > +
-> > +BBCLASSEXTEND =3D "native"
-> >
-> >
-> >
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124372):
-> https://lists.openembedded.org/g/openembedded-devel/message/124372
-> Mute This Topic: https://lists.openembedded.org/mt/117786773/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000034217b064aabb9d8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 12,=
- 2026 at 6:45=E2=80=AFPM Gyorgy Sarvari via <a href=3D"http://lists.openemb=
-edded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:g=
-mail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">I think th=
-is should go to meta-python also, otherwise meta-oe will<br>
-depend on meta-python due to the newly added dependencies (or not?)<br>
-<br>
-On 2/13/26 03:32, Yiding Liu (Fujitsu) via <a href=3D"http://lists.openembe=
-dded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> w=
-rote:<br>
-&gt; 1. Backport following patch to solve build and runtime issue<br>
-&gt;=C2=A0 =C2=A00001-c_comment_scanner-fix-function-prototypes.patch<br>
-&gt;=C2=A0 =C2=A00002-avoid-third-party-backports-dependency-on-sufficient.=
-patch<br>
-&gt;=C2=A0 =C2=A00003-CMake-4-compatibility.patch<br>
-&gt;<br>
-&gt; 2. Add do_configure:prepend() to solve buildpaths QA check<br>
-&gt;=C2=A0 =C2=A0do_package_qa: QA Issue: File /usr/lib/python3.14/site-pac=
-kages/hotdoc/parsers/<a href=3D"http://cmark.cpython-314-x86_64-linux-gnu.s=
-o" rel=3D"noreferrer" target=3D"_blank">cmark.cpython-314-x86_64-linux-gnu.=
-so</a> in package hotdoc contains reference to TMPDIR [buildpaths]<br>
-&gt;<br>
-&gt; 3. Add 0004-Make-path-to-relative-in-FlexExtension.patch to solve buil=
-dpaths QA check<br>
-&gt;=C2=A0 =C2=A0do_package_qa:QA Issue: File /usr/src/debug/hotdoc/0.17.4/=
-hotdoc/parsers/c_comment_scanner/scanner.c in package hotdoc-src contains r=
-eference to TMPDIR [buildpaths]<br>
-&gt;<br>
-&gt; 4. Add clang as RDEPENDS for following reason<br>
-&gt;=C2=A0 =C2=A0Hotdoc has some Extensions including c-Extension.<br>
-&gt;=C2=A0 =C2=A0The c-Extension needs llvm and clang in runtime as introdu=
-ced in doc of hotdoc.<br>
-&gt;=C2=A0 =C2=A0<a href=3D"https://hotdoc.github.io/c-extension.html#c-ext=
-ension" rel=3D"noreferrer" target=3D"_blank">https://hotdoc.github.io/c-ext=
-ension.html#c-extension</a><br>
-&gt;=C2=A0 =C2=A0&quot;The extension uses Clang to build and walk an AST fr=
-om the source code&quot;<br>
-&gt;<br>
-&gt; Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.com=
-" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 ...ment_scanner-fix-function-prototypes.patch | 32 +++++++++<br>
-&gt;=C2=A0 ...y-backports-dependency-on-sufficient.patch | 72 +++++++++++++=
-++++++<br>
-&gt;=C2=A0 .../hotdoc/0003-CMake-4-compatibility.patch=C2=A0 =C2=A0| 44 +++=
-+++++++++<br>
-&gt;=C2=A0 ...ke-path-to-relative-in-FlexExtension.patch | 34 +++++++++<br>
-&gt;=C2=A0 .../recipes-devtools/hotdoc/<a href=3D"http://hotdoc_0.17.4.bb" =
-rel=3D"noreferrer" target=3D"_blank">hotdoc_0.17.4.bb</a>=C2=A0 | 28 ++++++=
-++<br>
-&gt;=C2=A0 5 files changed, 210 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c=
-_comment_scanner-fix-function-prototypes.patch<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/hotdoc/hotdoc/0002-a=
-void-third-party-backports-dependency-on-sufficient.patch<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/hotdoc/hotdoc/0003-C=
-Make-4-compatibility.patch<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/hotdoc/hotdoc/0004-M=
-ake-path-to-relative-in-FlexExtension.patch<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-devtools/hotdoc/<a href=3D"ht=
-tp://hotdoc_0.17.4.bb" rel=3D"noreferrer" target=3D"_blank">hotdoc_0.17.4.b=
-b</a><br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_sca=
-nner-fix-function-prototypes.patch b/meta-oe/recipes-devtools/hotdoc/hotdoc=
-/0001-c_comment_scanner-fix-function-prototypes.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..c26dde93b3<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fi=
-x-function-prototypes.patch<br>
-&gt; @@ -0,0 +1,32 @@<br>
-&gt; +Subject: [PATCH 1/2] c_comment_scanner: fix function prototypes<br>
-&gt; +<br>
-&gt; +scanner.l: Fix compile error as the following:<br>
-&gt; +<br>
-&gt; +python3-hotdoc/0.17.4/sources/hotdoc-0.17.4/hotdoc/parsers/c_comment_=
-scanner/scanner.l:126:1: error: conflicting types for &#39;parse_comment&#3=
-9;; have &#39;int(PyObject *)&#39; {aka &#39;int(struct _object *)&#39;}<br=
->
-&gt; +|=C2=A0 =C2=A0126 | parse_comment (PyObject *comments)<br>
-&gt; +<br>
-&gt; +Upstream-Status: Backport [<a href=3D"https://github.com/hotdoc/hotdo=
-c/commit/adf8518431fafb78c9b47862a0a9a58824b6a421" rel=3D"noreferrer" targe=
-t=3D"_blank">https://github.com/hotdoc/hotdoc/commit/adf8518431fafb78c9b478=
-62a0a9a58824b6a421</a>]<br>
-&gt; +<br>
-&gt; +Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.co=
-m" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + hotdoc/parsers/c_comment_scanner/scanner.l | 4 ++--<br>
-&gt; + 1 file changed, 2 insertions(+), 2 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/hotdoc/parsers/c_comment_scanner/scanner.l b/hotdoc/pars=
-ers/c_comment_scanner/scanner.l<br>
-&gt; +index 0408601..7bccd64 100644<br>
-&gt; +--- a/hotdoc/parsers/c_comment_scanner/scanner.l<br>
-&gt; ++++ b/hotdoc/parsers/c_comment_scanner/scanner.l<br>
-&gt; +@@ -34,8 +34,8 @@<br>
-&gt; + extern int yylex (PyObject *comments);<br>
-&gt; + #define YY_DECL int yylex (PyObject *comments)<br>
-&gt; + static int yywrap (void);<br>
-&gt; +-static int parse_comment ();<br>
-&gt; +-static int parse_define ();<br>
-&gt; ++static int parse_comment (PyObject *);<br>
-&gt; ++static int parse_define (PyObject *);<br>
-&gt; + %}<br>
-&gt; + <br>
-&gt; + %option nounput<br>
-&gt; +-- <br>
-&gt; +2.43.0<br>
-&gt; +<br>
-&gt; diff --git a/meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-p=
-arty-backports-dependency-on-sufficient.patch b/meta-oe/recipes-devtools/ho=
-tdoc/hotdoc/0002-avoid-third-party-backports-dependency-on-sufficient.patch=
-<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..560d1257f0<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-ba=
-ckports-dependency-on-sufficient.patch<br>
-&gt; @@ -0,0 +1,72 @@<br>
-&gt; +Subject: [PATCH 2/2] avoid third-party backports dependency on suffic=
-iently<br>
-&gt; + new python<br>
-&gt; +<br>
-&gt; +`backports.entry_points_selectable` backports functionality from pyth=
-on<br>
-&gt; +3.10 to older versions of python.<br>
-&gt; +<br>
-&gt; +Backport this patch to solve runtime backports import problem as foll=
-owing:<br>
-&gt; +=C2=A0 File &quot;/usr/lib/python3.14/site-packages/hotdoc/utils/util=
-s.py&quot;, line 38, in &lt;module&gt;<br>
-&gt; +=C2=A0 from backports.entry_points_selectable import entry_points<br>
-&gt; +ModuleNotFoundError: No module named &#39;backports&#39;<br>
-&gt; +<br>
-&gt; +Upstream-Status: Backport [<a href=3D"https://github.com/hotdoc/hotdo=
-c/commit/51043c3ef889e36c8232280581598b875073ded7" rel=3D"noreferrer" targe=
-t=3D"_blank">https://github.com/hotdoc/hotdoc/commit/51043c3ef889e36c823228=
-0581598b875073ded7</a>]<br>
-&gt; +<br>
-&gt; +Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.co=
-m" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + hotdoc/extensions/gi/utils.py | 6 +++++-<br>
-&gt; + hotdoc/utils/utils.py=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 6 +++++-<br=
->
-&gt; + setup.py=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 2 +-<br>
-&gt; + 3 files changed, 11 insertions(+), 3 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/hotdoc/extensions/gi/utils.py b/hotdoc/extensions/gi/uti=
-ls.py<br>
-&gt; +index 159c2b6..91902cb 100644<br>
-&gt; +--- a/hotdoc/extensions/gi/utils.py<br>
-&gt; ++++ b/hotdoc/extensions/gi/utils.py<br>
-&gt; +@@ -1,9 +1,13 @@<br>
-&gt; + import os<br>
-&gt; + from collections import namedtuple<br>
-&gt; + import pathlib<br>
-&gt; ++import sys<br>
-&gt; + import traceback<br>
-&gt; + <br>
-&gt; +-from backports.entry_points_selectable import entry_points<br>
-&gt; ++if sys.version_info &gt;=3D (3, 10):<br>
-&gt; ++=C2=A0 =C2=A0 from importlib.metadata import entry_points<br>
-&gt; ++else:<br>
-&gt; ++=C2=A0 =C2=A0 from backports.entry_points_selectable import entry_po=
-ints<br>
-&gt; + <br>
-&gt; + from hotdoc.core.links import Link<br>
-&gt; + from hotdoc.utils.loggable import info, debug<br>
-&gt; +diff --git a/hotdoc/utils/utils.py b/hotdoc/utils/utils.py<br>
-&gt; +index 518d308..aef657a 100644<br>
-&gt; +--- a/hotdoc/utils/utils.py<br>
-&gt; ++++ b/hotdoc/utils/utils.py<br>
-&gt; +@@ -35,7 +35,11 @@ import importlib.util<br>
-&gt; + from urllib.request import urlretrieve<br>
-&gt; + from pathlib import Path<br>
-&gt; + <br>
-&gt; +-from backports.entry_points_selectable import entry_points<br>
-&gt; ++if sys.version_info &gt;=3D (3, 10):<br>
-&gt; ++=C2=A0 =C2=A0 from importlib.metadata import entry_points<br>
-&gt; ++else:<br>
-&gt; ++=C2=A0 =C2=A0 from backports.entry_points_selectable import entry_po=
-ints<br>
-&gt; ++<br>
-&gt; + try:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0import importlib.metadata as meta<br>
-&gt; + except ImportError:<br>
-&gt; +diff --git a/setup.py b/setup.py<br>
-&gt; +index 5d7f131..9ee504d 100644<br>
-&gt; +--- a/setup.py<br>
-&gt; ++++ b/setup.py<br>
-&gt; +@@ -300,7 +300,7 @@ INSTALL_REQUIRES =3D [<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0&#39;wheezy.template&#39;,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0&#39;toposort&gt;=3D1.4&#39;,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0&#39;importlib_metadata; python_version&lt;&quot;=
-3.10&quot;&#39;,<br>
-&gt; +-=C2=A0 =C2=A0 &#39;backports.entry_points_selectable&#39;,<br>
-&gt; ++=C2=A0 =C2=A0 &#39;backports.entry_points_selectable; python_version=
-&lt;&quot;3.10&quot;&#39;,<br>
-&gt; + ]<br>
-&gt; + <br>
-&gt; + # dbus-deviation requires sphinx, which requires python 3.5<br>
-&gt; +-- <br>
-&gt; +2.43.0<br>
-&gt; +<br>
-&gt; diff --git a/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compa=
-tibility.patch b/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compat=
-ibility.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..056ad5d340<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibilit=
-y.patch<br>
-&gt; @@ -0,0 +1,44 @@<br>
-&gt; +Subject: [PATCH] CMake 4 compatibility<br>
-&gt; +<br>
-&gt; +All CMake versions older than 3.10 are deprecated.<br>
-&gt; +<br>
-&gt; +Upstream-Status: Backport [<a href=3D"https://github.com/MathieuDupon=
-chelle/cmark/commit/bd78193dbff98c3860e77629b5c7bfee6169d1da" rel=3D"norefe=
-rrer" target=3D"_blank">https://github.com/MathieuDuponchelle/cmark/commit/=
-bd78193dbff98c3860e77629b5c7bfee6169d1da</a>]<br>
-&gt; +<br>
-&gt; +Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.co=
-m" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + CMakeLists.txt=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 11 ++-----=
-----<br>
-&gt; + extensions/CMakeLists.txt |=C2=A0 2 +-<br>
-&gt; + 2 files changed, 3 insertions(+), 10 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/CMakeLists.txt b/CMakeLists.txt<br>
-&gt; +index ff97419..45fdf6c 100755<br>
-&gt; +--- a/CMakeLists.txt<br>
-&gt; ++++ b/CMakeLists.txt<br>
-&gt; +@@ -1,12 +1,5 @@<br>
-&gt; +-cmake_minimum_required(VERSION 2.8.9)<br>
-&gt; +-<br>
-&gt; +-# prevent ugly developer warnings because version is set directly, n=
-ot through project()<br>
-&gt; +-# it should be redone properly by using VERSION in project() if on C=
-Make 3.x<br>
-&gt; +-if(CMAKE_MAJOR_VERSION GREATER 2)<br>
-&gt; +-=C2=A0 =C2=A0 cmake_policy(SET CMP0048 OLD)<br>
-&gt; +-endif()<br>
-&gt; +-<br>
-&gt; +-project(cmark)<br>
-&gt; ++cmake_minimum_required(VERSION 3.10)<br>
-&gt; ++project(cmark VERSION 0.28.3)<br>
-&gt; + <br>
-&gt; + include(&quot;FindAsan.cmake&quot;)<br>
-&gt; + <br>
-&gt; +diff --git a/extensions/CMakeLists.txt b/extensions/CMakeLists.txt<br=
->
-&gt; +index e62d155..b6a1556 100644<br>
-&gt; +--- a/extensions/CMakeLists.txt<br>
-&gt; ++++ b/extensions/CMakeLists.txt<br>
-&gt; +@@ -1,4 +1,4 @@<br>
-&gt; +-cmake_minimum_required(VERSION 2.8)<br>
-&gt; ++cmake_minimum_required(VERSION 3.10)<br>
-&gt; + set(LIBRARY &quot;cmarkextensions&quot;)<br>
-&gt; + set(LIBRARY_SOURCES<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0core-extensions.c<br>
-&gt; +-- <br>
-&gt; +2.43.0<br>
-&gt; +<br>
-&gt; diff --git a/meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-=
-relative-in-FlexExtension.patch b/meta-oe/recipes-devtools/hotdoc/hotdoc/00=
-04-Make-path-to-relative-in-FlexExtension.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..ae8c2ef3e7<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/hotdoc/hotdoc/0004-Make-path-to-relativ=
-e-in-FlexExtension.patch<br>
-&gt; @@ -0,0 +1,34 @@<br>
-&gt; +Subject: [PATCH] Make path to relative in FlexExtension<br>
-&gt; +<br>
-&gt; +To fix following do_package QA Issue:<br>
-&gt; +<br>
-&gt; +do_package_qa:QA Issue: File /usr/src/debug/hotdoc/0.17.4/hotdoc/pars=
-ers/c_comment_scanner/scanner.c in package hotdoc-src contains reference to=
- TMPDIR [buildpaths]<br>
-&gt; +<br>
-&gt; +Upstream-Status: Inappropriate [oe-specific]<br>
-&gt; +<br></blockquote><div><br></div><div><br></div><div>=C2=A0</div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">
-&gt; +Signed-off-by: Liu Yiding &lt;<a href=3D"mailto:liuyd.fnst@fujitsu.co=
-m" target=3D"_blank">liuyd.fnst@fujitsu.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + setup.py | 4 ++--<br>
-&gt; + 1 file changed, 2 insertions(+), 2 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/setup.py b/setup.py<br>
-&gt; +index 9ee504d..fc03c57 100644<br>
-&gt; +--- a/setup.py<br>
-&gt; ++++ b/setup.py<br>
-&gt; +@@ -357,11 +357,11 @@ build_c_extension =3D os.environ.get(&#39;HOTDO=
-C_BUILD_C_EXTENSION&#39;, &#39;auto&#39;)<br>
-&gt; + class FlexExtension (Extension):<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0def __init__(self, flex_sources, *args, **kwargs)=
-:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Extension.__init__(self, *args, **k=
-wargs)<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 self.__flex_sources =3D [src(s) for s in=
- flex_sources]<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 self.__flex_sources =3D list(flex_source=
-s)<br>
-&gt; +</blockquote><div><br></div><div>how does this appear in sources I wo=
-nder if=C2=A0 using flex with --noline=C2=A0option can be of help here.</di=
-v><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
-x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; +=C2=A0 =C2=A0 =C2=A0def __build_flex(self):<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0src_dir =3D os.path.dirname(self.__=
-flex_sources[0])<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 built_scanner_path =3D src(os.path.join(=
-src_dir, &#39;scanner.c&#39;))<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 built_scanner_path =3D os.path.join(src_=
-dir, &#39;scanner.c&#39;)<br>
-&gt; + <br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0self.sources.append(built_scanner_p=
-ath)<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if newer_group(self.__flex_sources,=
- built_scanner_path):<br>
-&gt; +-- <br>
-&gt; +2.43.0<br>
-&gt; +<br>
-&gt; diff --git a/meta-oe/recipes-devtools/hotdoc/<a href=3D"http://hotdoc_=
-0.17.4.bb" rel=3D"noreferrer" target=3D"_blank">hotdoc_0.17.4.bb</a> b/meta=
--oe/recipes-devtools/hotdoc/<a href=3D"http://hotdoc_0.17.4.bb" rel=3D"nore=
-ferrer" target=3D"_blank">hotdoc_0.17.4.bb</a><br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..6192a78989<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-devtools/hotdoc/<a href=3D"http://hotdoc_0.17.4.=
-bb" rel=3D"noreferrer" target=3D"_blank">hotdoc_0.17.4.bb</a><br>
-&gt; @@ -0,0 +1,28 @@<br>
-&gt; +SUMMARY =3D &quot;Hotdoc is a documentation framework&quot;<br>
-&gt; +DESCRIPTION =3D &quot;Hotdoc is a documentation micro-framework. It p=
-rovides an interface for extensions to plug upon, along with some base obje=
-cts (formatters, ...)&quot;<br>
-&gt; +HOMEPAGE =3D &quot;<a href=3D"https://github.com/hotdoc/hotdoc" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/hotdoc/hotdoc</a>&quot=
-;<br>
-&gt; +<br>
-&gt; +LICENSE =3D &quot;LGPL-2.1-or-later&quot;<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D90263a49bc1d9a204656f=
-ec4d5616c66&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;c4d5dff647f03aa87a1d2d06035d2819edd099b9=
-1635e3b2ee390829357ae9fc&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI =3D &quot;file://0001-c_comment_scanner-fix-function-prototyp=
-es.patch \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0002-avoid-third-part=
-y-backports-dependency-on-sufficient.patch \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0003-CMake-4-compatib=
-ility.patch;patchdir=3Dcmark \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-&gt; +<br>
-&gt; +SRC_URI:append:class-target =3D &quot;file://0004-Make-path-to-relati=
-ve-in-FlexExtension.patch&quot;<br>
-&gt; +<br>
-&gt; +DEPENDS +=3D &quot;libxml2 glib-2.0 json-glib&quot;<br>
-&gt; +<br>
-&gt; +inherit pypi python_setuptools_build_meta pkgconfig<br>
-&gt; +<br>
-&gt; +#Fix LIBDIR path to fix buildpaths QA check of hotdoc/parsers/<a href=
-=3D"http://cmark.cpython-314-x86_64-linux-gnu.so" rel=3D"noreferrer" target=
-=3D"_blank">cmark.cpython-314-x86_64-linux-gnu.so</a><br>
-&gt; +do_configure:prepend:class-target() {<br>
-&gt; +=C2=A0 =C2=A0 sed -i -e &quot;s#&#39;\&quot;%s\&quot;&#39; % CMARK_BU=
-ILD_DIR#&#39;\&quot;${PYTHON_SITEPACKAGES_DIR}/${PN}\&quot;&#39;#&quot; ${S=
-}/setup.py<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +RDEPENDS:${PN} +=3D &quot;clang python3-appdirs python3-cchardet pyth=
-on3-dbus-deviation python3-lxml python3-networkx python3-pkgconfig python3-=
-pyyaml python3-schema python3-toposort python3-wheezy-template&quot;<br>
-&gt; +<br>
-&gt; +BBCLASSEXTEND =3D &quot;native&quot;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#124372): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/124372" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/124372</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117786773/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117786773/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---00000000000034217b064aabb9d8--
+--_000_TY3PR01MB101109E8D1F3D248631AFD2D09B61ATY3PR01MB10110jp_--
 
