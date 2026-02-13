@@ -1,274 +1,316 @@
-Return-Path: <philip@balister.org>
+Return-Path: <eric.meyers15310@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6929CEDF163
-	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 13:44:03 +0000 (UTC)
-Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.71332.1770989334786538654
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFEF4EDF168
+	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 14:21:13 +0000 (UTC)
+Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com [209.85.217.68])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.72689.1770992470234884072
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 05:28:55 -0800
+ Fri, 13 Feb 2026 06:21:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ilHUPaap;
- spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: adongare@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIozufC1;
+ spf=pass (domain: gmail.com, ip: 209.85.217.68, mailfrom: eric.meyers15310@gmail.com)
+Received: by mail-vs1-f68.google.com with SMTP id ada2fe7eead31-5fc414b9c99so598763137.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 06:21:10 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770992469; cv=none;
+        d=google.com; s=arc-20240605;
+        b=BggYUytuo+goe0fec39YaX2wmAdt4wNbHX43MWrRA9XFFTJ5i0QISm9rYzHIgIryS9
+         CwGlteDXUHOFxlITNqk3fR8icgKxOevRy42+OPVdcsuZg6qHNXptym0a/yHZRyrQ4nvX
+         OL2t/4pBT/mM2njOj6zpIAYpWPx3bhatSR9Ahh6qG2gUVh6YOGzj0yusfTrCdiANxnjV
+         bnjD/71AP46k6PFBu6Mz/kbxyeWm1JF8eYw5GljgfFavXAQEK0D61QxL4HTmcFM/UXZ4
+         Blfdv9HBHCN+nY5Cao8ZBUH40CUH/WQBtCgPBczD4JLolWOsJ8bvN8lfdXnht8LIaDAl
+         +5RA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
+        fh=R1b/v2rm2m1KyOdwoCUBwZcBbO4hGy4571MZcGknbU0=;
+        b=XK9QQ2Wm7L19xCOOjF3Cb8hcM2ujikIpHIJ/QTcaJkX7xpEw+OxHuutjE4pv6f842T
+         ya1aaOOU/6JMqaFy0fv2rHXEGyTAzDHyTxSSlOoeGA39+ki9vn2i+SlLcjcL++hheZxv
+         jjENT6E1bYBA5Pv1Oj6saJ9z0UaLmWCpZ+O9VM+33vt/x9vRms9kS08NX34t2VDluqKE
+         ANdFKoeGBktvyzwF3jnudkEZrDKF7cIkmctrcSoacdXvhakTAqNfG3nCik8vqowbyx8V
+         h4fk+ZQ75RhuRIACicfW+heRN0Ff12tkGwIQk3fkhcErQuHpYsUWyUs6VM+a6p5WYT9M
+         OdgQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=9967; q=dns/txt;
-  s=iport01; t=1770989334; x=1772198934;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=jw5xXoSNubZrfJbMYZpXe1lvyDAN2KE7nYX0Y3S48HM=;
-  b=ilHUPaapl+pPHcxdO5Fj7r4aU25Q4Z14kmVE9Ra6T8uHs5EEN/qmyXhf
-   /yds2qDNgIDW6Xc5gLg63pSzz0RSI/eiZqiHu0bHxVbGejtPe5ov8Xykz
-   2ZxRnV1GJE9FJrDmfYM8qvcjonJA0n1kADfezt6A12tabaSmTRi4PCN8I
-   hsxveojE1eksLWZbr89/vGgxcrHDO3gIpz2gxvqbYSGYJi7yeD8z2aW99
-   Qc+S0I/alLZMhL27G4ZuINpsB3Gr6e4h3wlKCBRGPZkcCMFozVtGZur+Y
-   Wbomeh0FBbPDOwbWMS8uQ/VCmZqG2FLXblNDZKSSFVxHAy6U4eniMuOk4
-   Q==;
-X-CSE-ConnectionGUID: Ilil4rsDS9y67sUCOLAtOw==
-X-CSE-MsgGUID: 4hc0IKWrR1q/awnK6906/Q==
-X-IPAS-Result: =?us-ascii?q?A0AQBAA1Jo9p/4//Ja1aglmCSA9xXkNJlkueHYF/DwEBA?=
- =?us-ascii?q?Q89FAQBAYUHjSACJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBAQECA?=
- =?us-ascii?q?QcFgQ4Thk8NhloBAgE1ARgBHw4sAwECWiMhgwIBgnMDEQatcIIsgQGDKAExB?=
- =?us-ascii?q?QkCQ0/bJgELFAGBOIU8iBlbGAGEeicbG4FygRQBg2iBBYFcAYIHhh4EgiKBD?=
- =?us-ascii?q?oFhIw+GdwaKX0iBHgNZLAFVEw0KCwcFgWYDNRIqFW4yHYEjPheBCxsHBYgLD?=
- =?us-ascii?q?4kHeG6BIHwDCxgNSBEsNxQbBD5uB45IQYIzgQ4BK12BTxE9klcaE5IioQ4KK?=
- =?us-ascii?q?IN0jB6VOhozhASmZ5kGgliLMZVnaYRogWg8gUcLB3AVgyIJSRkPji0LC4Neg?=
- =?us-ascii?q?X+DFLwyJTICATkCBwsBAQMJk2cBAQ?=
-IronPort-Data: A9a23:Srszw6CYBQjkUBVW/3niw5YqxClBgxIJ4kV8jS/XYbTApG8g1DIBy
- 2ZLWmyBa/mMYGL9KNF2a96wpB9UuZWDxtU1OVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jWmthh
- fuo+5eBYAX8gGYtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE4vFvCB0sJqEjq/cpXnpz3
- ts8ASwqcUXW7w626OrTpuhEnM8vKozveYgYoHwllW+fBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGY0BPjDS0Un1lM/AZ45muihnHTXeDxDo1XTrq0yi4TW5FIuieO3YYSNIrRmQ+0Jnk3Ah
- 0H55V6gG1YTK9q8l2vdrDWV07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++MvUCSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXPIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:vYCgzqOiGmqhH8BcTsqjsMiBIKoaSvp037Dk7S9MoHtuA6mlfq
- +V/cjzuSWYtN9zYgBDpTnjAsm9qBrnnPYfi7X5Vo3NYOCJggeVxflZnOjfK/mKIVyYygabvp
- 0QF5RDNA==
-X-Talos-CUID: 9a23:QDtYam7SaUeFBbVxFNss1UoVHpw/aVHmnWaOfFSFIkFNYaGyVgrF
-X-Talos-MUID: 9a23:n4bgSgocrGrBzzfkagcez21iP59JwJu0MhkU1pwZveraZHQufA7I2Q==
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.21,288,1763424000"; 
-   d="scan'208";a="671329600"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 13 Feb 2026 13:28:53 +0000
-Received: from sjc-ads-10055.cisco.com (sjc-ads-10055.cisco.com [10.30.210.59])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id A49131800025D;
-	Fri, 13 Feb 2026 13:28:53 +0000 (GMT)
-Received: by sjc-ads-10055.cisco.com (Postfix, from userid 1870532)
-	id 47DAECC12A6; Fri, 13 Feb 2026 05:28:53 -0800 (PST)
-From: "Anil Dongare -X (adongare - E INFOCHIPS PRIVATE LIMITED at Cisco)" <adongare@cisco.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: xe-linux-external@cisco.com, to@cisco.com,
-	Anil Dongare <adongare@cisco.com>
-Subject: [meta-OE] [scarthgap] [PATCH] wireshark 4.2.14: Fix CVE-2026-0962
-Date: Fri, 13 Feb 2026 05:28:46 -0800
-Message-ID: <20260213132846.1616740-1-adongare@cisco.com>
-X-Mailer: git-send-email 2.44.1
+        d=gmail.com; s=20230601; t=1770992469; x=1771597269; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
+        b=lIozufC1vIc000t+8Bx0iiWKclaHiwX9DcFuDW1OOLsOkDNCvpR9sfZZ0aI3fbrYm8
+         afGTR2fq/jHdFHmVr8mtMnzO0YvHrEsqp5SqTehzuyyCWQMXXfrIW49ZcuCiZSjk/XZb
+         nFyxmjY4U5gQkYqLnnPM5icHZzjGrdMmjmcHv5T3v9AHAnbhNRDtLqrTF0nwxu2R7oGF
+         O4YncqNetQK2aXdRIyJZPhsyYPLsijtUM3ZV38S7mfsuH022y8S9nLTHqvwzV2/a3XM1
+         2eHk6vIIv1ip+viOIqcun7uIHxUflNK+Zf9G3QS8XwkUX5zhb30amcG6J11Q89ILz391
+         YmGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1770992469; x=1771597269;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
+        b=ZbKCj07IVzi6iQ85AOJWRjf05mqjwT2N3Id89JPUav93G5Y7Nz9WB37fxCkgXK0IY4
+         BJpgFgfZNzOfmFsP1EVZC4zyglWDplA26GZhS5iqSDomAGHLKrd+smcSvTty+s0tg/a7
+         jWaF1DL+5KH1pmKQJ7DfB4yUXpmp0MD6r9877toA1KsXrX7rzKYnacDk8KWMPJRPe6DN
+         XoBagUGpjJj680RWNIrNU0I08Ar4n+Gps7c9W3SDRJIbJrVYMiu+MOdxhd4Czn0YSS7n
+         ifrGi5JbUWBYQ43lEjmvta5Yglg4FOuw8r5nckeIgRYuFa68U/Hi081hOJSFvTTEm3aZ
+         1r4A==
+X-Forwarded-Encrypted: i=1; AJvYcCWzZtp0zKD8Sx43g9L+zoq9UvN9JzGrFTpqdbuGVygrwMSHaJkuZCpBLJ1kTfxDn5pMeF0vnFELk/qnzn4a2jH2Duo=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyJqFYw8jyTZ9q9UuwnIQ83RDZQheFrQ2Kcg+ounscMxdpmtK5G
+	JLnVHqL9iUb2c8QxmzOtFU2tw+UM+TvcoSTaOefNm/8SnOnd9yYi6bO4SKuTzPXj2xnensRBOE0
+	Q2Q4LxjWDQCU/z6FHSKC7iUuoPHmrX6g=
+X-Gm-Gg: AZuq6aIPi92doQEeXU0JuAOIkLTSC9ff3JDuPh4HhEgopoLYBDSwEpADz6gZD/mi5Lg
+	9jfY0ugLVLmWHOQpU5jvdcx4ZrmRH7I5L8PO2m17YD53wNKywHElz+PrGqyk12X2G5u62kYNGsC
+	MpUsPuYFabgJmFYrCy4W27yc1aHpl7vk8G2AjLhti7djaxJOgsxjCauwOpJsHZJgTaaHnnGq56m
+	OLrDAL1LpIqAY7CIPWiS/Sn9XzcmpUgtJD6/Gu/e4/UrFqc1lBp444PKQjLLVFa+zbqzUA09Ty+
+	/lX9Bam5dZGRJaAfag==
+X-Received: by 2002:a05:6102:41a3:b0:5ee:a590:6b11 with SMTP id
+ ada2fe7eead31-5fe1ae5c5d1mr734184137.36.1770992468852; Fri, 13 Feb 2026
+ 06:21:08 -0800 (PST)
 MIME-Version: 1.0
-X-Outbound-SMTP-Client: 10.30.210.59, sjc-ads-10055.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
-Content-Transfer-Encoding: 8bit
+References: <20260212182929.8047-1-eric.meyers@arthrex.com>
+ <18939BFE647A0E33.653184@lists.openembedded.org> <7814b942-6309-48eb-8151-658f107f1cb2@gmail.com>
+ <CAMKF1sogR_FXy3By7w9sKtH-rCzL5V1=rf1EoXs6wwHFocLssw@mail.gmail.com>
+In-Reply-To: <CAMKF1sogR_FXy3By7w9sKtH-rCzL5V1=rf1EoXs6wwHFocLssw@mail.gmail.com>
+From: Eric Meyers <eric.meyers15310@gmail.com>
+Date: Fri, 13 Feb 2026 08:21:03 -0600
+X-Gm-Features: AZwV_QhvytcxOrXy_aO4AOZXylU1zTq4u-1okUXQwUXP97_SN1GQHAWh8c6qaMA
+Message-ID: <CA+cKJ+G7imomNAkVicNGCqw807CAKkdLJ814dr97ZCoYvcDGEw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] redis: Remove debug paths to avoid
+ TMPDIR [buildpaths] errors
+To: Khem Raj <raj.khem@gmail.com>
+Cc: skandigraun@gmail.com, openembedded-devel@lists.openembedded.org, 
+	Eric Meyers <eric.meyers@arthrex.com>
+Content-Type: multipart/alternative; boundary="0000000000000189d5064ab551e3"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 13:44:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124388
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 14:21:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124389
 
-From: Anil Dongare <adongare@cisco.com>
+--0000000000000189d5064ab551e3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upstream Repository: https://gitlab.com/wireshark/wireshark.git
+On Thu, Feb 12, 2026 at 8:46=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
+:
 
-Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2026-0962
-Type: Security Fix
-CVE: CVE-2026-0962
-Score: 6.5
-Patch: https://gitlab.com/wireshark/wireshark/-/commit/825b83e1ed14
+>
+>
+> On Thu, Feb 12, 2026 at 2:39=E2=80=AFPM Gyorgy Sarvari via lists.openembe=
+dded.org
+> <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>> On 2/12/26 22:09, Gyorgy Sarvari via lists.openembedded.org wrote:
+>> > On 2/12/26 19:29, Eric Meyers via lists.openembedded.org wrote:
+>> >> Takes similar approach to valkey recipe seen here:
+>> >>
+>> >>
+>> https://github.com/openembedded/meta-openembedded/commit/1b820b98afd55c8=
+81822beb9057162dc67ecb386
+>> >>
+>> >> Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
+>> >> ---
+>> >>  meta-oe/recipes-extended/redis/redis_7.2.12.bb | 7 +++++++
+>> >>  1 file changed, 7 insertions(+)
+>> >>
+>> >> diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
+>> b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
+>> >> index 8abf758930..589ffd6fb2 100644
+>> >> --- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
+>> >> +++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
+>> >> @@ -52,6 +52,11 @@ do_compile:prepend() {
+>> >>  }
+>> >>
+>> >>  do_install() {
+>> >> +    # Remove debug paths to avoid TMPDIR [buildpaths] errors
+>> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-benchmark
+>> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-server
+>> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-cli
+>> >> +
+>> > If I check the file type of these files, I get this:
+>> >
+>> https://gist.githubusercontent.com/OldManYellsAtCloud/5892bde7408475a93d=
+2faa699ae65aea/raw/3309eb40e0467bd7e2a2bcbd540c822b071242d4/gistfile1.txt
+>> >
+>> > These are binary files, cutting out parts with sed will break them mos=
+t
+>> > probably. I think this will need another solution (will take a look at
+>> > valkey also, if it has the same)
+>> >
+>>
+>> I have sent an alternative proposal[1] - do you think you could test it
+>> if works for you also?
+>>
+>> [1]: https://lists.openembedded.org/g/openembedded-devel/message/124363
+>>
+>>
+> yeah I think this would ensure that LDFLAGS behaviour prior to OE-core
+> change so I would
+> take the patch proposed in [1]
+>
+>
+>> >
+>> >>      export PREFIX=3D${D}/${prefix}
+>> >>      oe_runmake install
+>> >>      install -d ${D}/${sysconfdir}/redis
+>> >> @@ -71,6 +76,8 @@ do_install() {
+>> >>      fi
+>> >>  }
+>> >>
+>> >> +INSANE_SKIP:${PN} +=3D "already-stripped"
+>> >> +
+>> >>  CONFFILES:${PN} =3D "${sysconfdir}/redis/redis.conf"
+>> >>
+>> >>  INITSCRIPT_NAME =3D "redis-server"
+>> >>
+>> >>
+>> >>
+>> >
+>> >
+>> >
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#124364):
+>> https://lists.openembedded.org/g/openembedded-devel/message/124364
+>> Mute This Topic: https://lists.openembedded.org/mt/117779563/1997914
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+>> raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>>
+I'm okay with using patch [1]. Things seem to be building on my end after
+pruning sstate/cleaning.
 
-Signed-off-by: Anil Dongare <adongare@cisco.com>
----
- .../wireshark/files/CVE-2026-0962.patch       | 152 ++++++++++++++++++
- .../wireshark/wireshark_4.2.14.bb             |   1 +
- 2 files changed, 153 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch
+--0000000000000189d5064ab551e3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch b/meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch
-new file mode 100644
-index 0000000000..c9a3723ba9
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch
-@@ -0,0 +1,152 @@
-+From 912286bc877a2914f089a063dbf5fa8037efd709 Mon Sep 17 00:00:00 2001
-+From: Gerald Combs <gerald@wireshark.org>
-+Date: Mon, 12 Jan 2026 17:01:48 -0800
-+Subject: [PATCH] SOME/IP-SD: Fix a buffer overflow
-+
-+Make sure we don't write past the end of our option port array. Make our
-+option count unsigned.
-+
-+Fixes #20945
-+
-+(cherry picked from commit 55ec8b3db4968c97115f014fb5974206cdf57454)
-+
-+Conflicts:
-+	epan/dissectors/packet-someip-sd.c
-+(cherry picked from commit 825b83e1ed146f6c8fa8f1d7ad2794061b82c895)
-+
-+CVE: CVE-2026-0962
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/825b83e1ed14]
-+
-+Backport Changes:
-+- In the epan/dissectors/packet-someip-sd.c file, the variable
-+  ef_someipsd_too_many_options was added in place of ei_someipsd_too_many_options
-+  to maintain consistency with the existing expert_field naming conventions.
-+- This update is already included in Wireshark version 4.4 with the following
-+  commit: https://gitlab.com/wireshark/wireshark/-/commit/9e59a18db82f
-+
-+Signed-off-by: Anil Dongare <adongare@cisco.com>
-+---
-+ epan/dissectors/packet-someip-sd.c | 30 ++++++++++++++++++------------
-+ 1 file changed, 18 insertions(+), 12 deletions(-)
-+
-+diff --git a/epan/dissectors/packet-someip-sd.c b/epan/dissectors/packet-someip-sd.c
-+index 85144d5925..7088ee5210 100644
-+--- a/epan/dissectors/packet-someip-sd.c
-++++ b/epan/dissectors/packet-someip-sd.c
-+@@ -242,6 +242,7 @@ static expert_field ef_someipsd_option_unknown = EI_INIT;
-+ static expert_field ef_someipsd_option_wrong_length = EI_INIT;
-+ static expert_field ef_someipsd_L4_protocol_unsupported = EI_INIT;
-+ static expert_field ef_someipsd_config_string_malformed = EI_INIT;
-++static expert_field ef_someipsd_too_many_options = EI_INIT;
-+
-+ /*** prototypes ***/
-+ void proto_register_someip_sd(void);
-+@@ -274,13 +275,13 @@ someip_sd_register_ports(guint32 opt_index, guint32 opt_num, guint32 option_coun
-+ }
-+
-+ static void
-+-dissect_someip_sd_pdu_option_configuration(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, int optionnum) {
-++dissect_someip_sd_pdu_option_configuration(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, unsigned optionnum) {
-+     guint32         offset_orig = offset;
-+     const guint8   *config_string;
-+     proto_item     *ti;
-+     proto_tree     *subtree;
-+
-+-    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, NULL, "%d: Configuration Option", optionnum);
-++    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, NULL, "%u: Configuration Option", optionnum);
-+
-+     /* Add common fields */
-+     proto_tree_add_item(tree, hf_someip_sd_option_length, tvb, offset, 2, ENC_BIG_ENDIAN);
-+@@ -317,8 +318,8 @@ dissect_someip_sd_pdu_option_configuration(tvbuff_t *tvb, packet_info *pinfo, pr
-+ }
-+
-+ static void
-+-dissect_someip_sd_pdu_option_loadbalancing(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree, guint32 offset, guint32 length, int optionnum) {
-+-    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, NULL, "%d: Load Balancing Option", optionnum);
-++dissect_someip_sd_pdu_option_loadbalancing(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree, guint32 offset, guint32 length, unsigned optionnum) {
-++    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, NULL, "%u Load Balancing Option", optionnum);
-+
-+     /* Add common fields */
-+     proto_tree_add_item(tree, hf_someip_sd_option_length, tvb, offset, 2, ENC_BIG_ENDIAN);
-+@@ -337,7 +338,7 @@ dissect_someip_sd_pdu_option_loadbalancing(tvbuff_t *tvb, packet_info *pinfo _U_
-+ }
-+
-+ static void
-+-dissect_someip_sd_pdu_option_ipv4(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, int optionnum, guint32 option_ports[]) {
-++dissect_someip_sd_pdu_option_ipv4(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, unsigned optionnum, guint32 option_ports[]) {
-+     guint8              type = 255;
-+     const gchar        *description = NULL;
-+     guint32             l4port = 0;
-+@@ -350,7 +351,7 @@ dissect_someip_sd_pdu_option_ipv4(tvbuff_t *tvb, packet_info *pinfo, proto_tree
-+
-+     type = tvb_get_guint8(tvb, offset + 2);
-+     description = val_to_str(type, sd_option_type, "(Unknown Option: %d)");
-+-    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti_top, "%d: %s Option", optionnum, description);
-++    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti_top, "%u: %s Option", optionnum, description);
-+
-+     if (length != SD_OPTION_IPV4_LENGTH) {
-+         expert_add_info(pinfo, ti_top, &ef_someipsd_option_wrong_length);
-+@@ -391,7 +392,7 @@ dissect_someip_sd_pdu_option_ipv4(tvbuff_t *tvb, packet_info *pinfo, proto_tree
-+ }
-+
-+ static void
-+-dissect_someip_sd_pdu_option_ipv6(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, int optionnum, guint32 option_ports[]) {
-++dissect_someip_sd_pdu_option_ipv6(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, unsigned optionnum, guint32 option_ports[]) {
-+     guint8              type = 255;
-+     const gchar        *description = NULL;
-+     guint32             l4port = 0;
-+@@ -404,7 +405,7 @@ dissect_someip_sd_pdu_option_ipv6(tvbuff_t *tvb, packet_info *pinfo, proto_tree
-+     type = tvb_get_guint8(tvb, offset + 2);
-+     description = val_to_str(type, sd_option_type, "(Unknown Option: %d)");
-+
-+-    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti_top, "%d: %s Option", optionnum, description);
-++    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti_top, "%u: %s Option", optionnum, description);
-+
-+     if (length != SD_OPTION_IPV6_LENGTH) {
-+         expert_add_info(pinfo, ti_top, &ef_someipsd_option_wrong_length);
-+@@ -444,11 +445,11 @@ dissect_someip_sd_pdu_option_ipv6(tvbuff_t *tvb, packet_info *pinfo, proto_tree
-+ }
-+
-+ static void
-+-dissect_someip_sd_pdu_option_unknown(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, int optionnum) {
-++dissect_someip_sd_pdu_option_unknown(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, guint32 offset, guint32 length, unsigned optionnum) {
-+     guint32             len = 0;
-+     proto_item         *ti;
-+
-+-    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti, "%d: %s Option", optionnum,
-++    tree = proto_tree_add_subtree_format(tree, tvb, offset, length, ett_someip_sd_option, &ti, "%u: %s Option", optionnum,
-+         val_to_str_const(tvb_get_guint8(tvb, offset + 2), sd_option_type, "Unknown"));
-+
-+     expert_add_info(pinfo, ti, &ef_someipsd_option_unknown);
-+@@ -473,7 +474,7 @@ static int
-+ dissect_someip_sd_pdu_options(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, proto_item *ti, guint32 offset_orig, guint32 length, guint32 option_ports[], guint *option_count) {
-+     guint16             real_length = 0;
-+     guint8              option_type = 0;
-+-    int                 optionnum = 0;
-++    unsigned            optionnum = 0;
-+     tvbuff_t           *subtvb = NULL;
-+
-+     guint32             offset = offset_orig;
-+@@ -484,7 +485,11 @@ dissect_someip_sd_pdu_options(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tre
-+     }
-+
-+     while (tvb_bytes_exist(tvb, offset, SD_OPTION_MINLENGTH)) {
-+-        ws_assert(optionnum >= 0 && optionnum < SD_MAX_NUM_OPTIONS);
-++        if (optionnum >= SD_MAX_NUM_OPTIONS) {
-++            expert_add_info(pinfo, ti, &ef_someipsd_too_many_options);
-++            return offset;
-++        }
-++
-+         option_ports[optionnum] = 0;
-+
-+         real_length = tvb_get_ntohs(tvb, offset) + 3;
-+@@ -1195,6 +1200,7 @@ proto_register_someip_sd(void) {
-+         { &ef_someipsd_option_wrong_length,{ "someipsd.option_wrong_length", PI_MALFORMED, PI_ERROR, "SOME/IP-SD Option length is incorrect!", EXPFILL } },
-+         { &ef_someipsd_L4_protocol_unsupported,{ "someipsd.L4_protocol_unsupported", PI_MALFORMED, PI_ERROR, "SOME/IP-SD Unsupported Layer 4 Protocol!", EXPFILL } },
-+         { &ef_someipsd_config_string_malformed,{ "someipsd.config_string_malformed", PI_MALFORMED, PI_ERROR, "SOME/IP-SD Configuration String malformed!", EXPFILL } },
-++        { &ef_someipsd_too_many_options,{ "someipsd.too_many_options", PI_MALFORMED, PI_ERROR, "SOME/IP-SD Too many options!", EXPFILL } },
-+     };
-+
-+     /* Register Protocol, Fields, ETTs, Expert Info, Taps, Dissector */
-+--
-+2.43.7
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb b/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-index c313075ea4..d3fbbc8f3a 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.2.14.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
-            file://0001-UseLemon.cmake-do-not-use-lemon-data-from-the-host.patch \
-            file://CVE-2025-9817.patch \
-            file://CVE-2025-13499.patch \
-+           file://CVE-2026-0962.patch \
-            "
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src/all-versions"
--- 
-2.44.1
+<div dir=3D"ltr"><div dir=3D"ltr">On Thu, Feb 12, 2026 at 8:46=E2=80=AFPM K=
+hem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt=
+; wrote:</div><div class=3D"gmail_quote gmail_quote_container"><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br=
+></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr"=
+>On Thu, Feb 12, 2026 at 2:39=E2=80=AFPM Gyorgy Sarvari via <a href=3D"http=
+://lists.openembedded.org" target=3D"_blank">lists.openembedded.org</a> &lt=
+;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
+=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">On 2/12/26 22:09, Gyorgy Sarvar=
+i via <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=
+=3D"_blank">lists.openembedded.org</a> wrote:<br>
+&gt; On 2/12/26 19:29, Eric Meyers via <a href=3D"http://lists.openembedded=
+.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wrote=
+:<br>
+&gt;&gt; Takes similar approach to valkey recipe seen here:<br>
+&gt;&gt;<br>
+&gt;&gt; <a href=3D"https://github.com/openembedded/meta-openembedded/commi=
+t/1b820b98afd55c881822beb9057162dc67ecb386" rel=3D"noreferrer" target=3D"_b=
+lank">https://github.com/openembedded/meta-openembedded/commit/1b820b98afd5=
+5c881822beb9057162dc67ecb386</a><br>
+&gt;&gt;<br>
+&gt;&gt; Signed-off-by: Eric Meyers &lt;<a href=3D"mailto:eric.meyers@arthr=
+ex.com" target=3D"_blank">eric.meyers@arthrex.com</a>&gt;<br>
+&gt;&gt; ---<br>
+&gt;&gt;=C2=A0 meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
+2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a> | 7 +++++++<=
+br>
+&gt;&gt;=C2=A0 1 file changed, 7 insertions(+)<br>
+&gt;&gt;<br>
+&gt;&gt; diff --git a/meta-oe/recipes-extended/redis/<a href=3D"http://redi=
+s_7.2.12.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a> b/met=
+a-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.12.bb" rel=3D"noref=
+errer" target=3D"_blank">redis_7.2.12.bb</a><br>
+&gt;&gt; index 8abf758930..589ffd6fb2 100644<br>
+&gt;&gt; --- a/meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
+2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a><br>
+&gt;&gt; +++ b/meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
+2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a><br>
+&gt;&gt; @@ -52,6 +52,11 @@ do_compile:prepend() {<br>
+&gt;&gt;=C2=A0 }<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 do_install() {<br>
+&gt;&gt; +=C2=A0 =C2=A0 # Remove debug paths to avoid TMPDIR [buildpaths] e=
+rrors<br>
+&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-b=
+enchmark<br>
+&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-s=
+erver<br>
+&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-c=
+li<br>
+&gt;&gt; +<br>
+&gt; If I check the file type of these files, I get this:<br>
+&gt; <a href=3D"https://gist.githubusercontent.com/OldManYellsAtCloud/5892b=
+de7408475a93d2faa699ae65aea/raw/3309eb40e0467bd7e2a2bcbd540c822b071242d4/gi=
+stfile1.txt" rel=3D"noreferrer" target=3D"_blank">https://gist.githubuserco=
+ntent.com/OldManYellsAtCloud/5892bde7408475a93d2faa699ae65aea/raw/3309eb40e=
+0467bd7e2a2bcbd540c822b071242d4/gistfile1.txt</a><br>
+&gt;<br>
+&gt; These are binary files, cutting out parts with sed will break them mos=
+t<br>
+&gt; probably. I think this will need another solution (will take a look at=
+<br>
+&gt; valkey also, if it has the same)<br>
+&gt;<br>
+<br>
+I have sent an alternative proposal[1] - do you think you could test it<br>
+if works for you also?<br>
+<br>
+[1]: <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
+/124363" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.or=
+g/g/openembedded-devel/message/124363</a><br>
+<br></blockquote><div><br></div><div>yeah I think this would ensure that LD=
+FLAGS behaviour prior to OE-core change so I would</div><div>take the patch=
+ proposed in [1]</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">
+&gt;<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 export PREFIX=3D${D}/${prefix}<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 oe_runmake install<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 install -d ${D}/${sysconfdir}/redis<br>
+&gt;&gt; @@ -71,6 +76,8 @@ do_install() {<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 fi<br>
+&gt;&gt;=C2=A0 }<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt; +INSANE_SKIP:${PN} +=3D &quot;already-stripped&quot;<br>
+&gt;&gt; +<br>
+&gt;&gt;=C2=A0 CONFFILES:${PN} =3D &quot;${sysconfdir}/redis/redis.conf&quo=
+t;<br>
+&gt;&gt;=C2=A0 <br>
+&gt;&gt;=C2=A0 INITSCRIPT_NAME =3D &quot;redis-server&quot;<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;<br>
+&gt; <br>
+&gt;<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#124364): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/124364" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/124364</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117779563/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/117779563/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br></blockquote></div></div></blockquote><div><br></div><div>I&#39;m okay =
+with using patch [1]. Things seem to be building on my end after pruning=C2=
+=A0sstate/cleaning.=C2=A0</div></div></div>
 
+--0000000000000189d5064ab551e3--
 
