@@ -2,164 +2,135 @@ Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18E50EEA870
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BAECEE36B7
 	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 09:44:22 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.68364.1770975861362620548
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.68362.1770975860700473160
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 01:44:21 -0800
+ Fri, 13 Feb 2026 01:44:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=k3XbhcKx;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=dV8k7OA7;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61D54Fsk1827975
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 09:44:21 GMT
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=djCmBUzy;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=fMcU6jex;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61D9fIwr3027114
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 09:44:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=IDyRzgzCkyG
-	9OarOGULmD0AY+/vQGrlm7d6qii9Q0lo=; b=k3XbhcKxbrDMRMZQzClACSjdVjl
-	cqpq8K5/+x4ClZw/uCc7c/sFGU8pqUX/JmYqdpbn1Bvkvekf9tRdDwv5MyQOuu4Y
-	/C3dSW6sy5tp2nszIwoXMGtoxb4p5TfTxuK9NE/BX0zRm7s3OM7t6B/QLPhdzYYe
-	980qF9iwoE3YLy3E7rxoBpbKrgB6/CwZaKzS9GzoYfYw6SzkkYlwpWt5KGwoYO8u
-	mkVDcJPIWnyhi2Ttvh3/UxDF42yFXNshXPWpoAStTeprOepI1Hzqpm+wkm3iGYdZ
-	MmpNedBfqN1OM63St4+F6oCsKNVyWbbZ2xLFj3BL/b2nfg+n3EAeJeDkMiw==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9wg010eq-1
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=fiBro8nxt07bPQywRHZlboB0HoTNfrDu/4k
+	XVmWaSHg=; b=djCmBUzy3owjfQT8nfY9MWcS62+I7rjAqNOjOZkkjl64rZXLABJ
+	9mwwR4Cdqi4a1NHktWyjzWWxHOKWp2aecxUt9X3oz40SveYaq89T9HwXOx+Rwipr
+	PciUv3yizzcR7Wxvy/egy9ufqLVRSYPV3HwiP6MsEhJvqPj2UodWKFlM6G0YUCDl
+	u0/ou9oVZOHUfBhWyJIoLLntXlzpfYQ4Uh25OnZLw96+YcRPGlzffNU3EZ5Yz6bM
+	7HW8QVJsKl3SIksXoivGXiGTauJzlsBG2KEnJQUYN43Wco+D3PHOiNcK2HLjmiiv
+	COfmTJzZzswILIMdEmPWfAQu9sA1oV9u9Xg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ca1hn00ag-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 09:44:20 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8c71655aa11so358447285a.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 01:44:20 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 09:44:19 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-8c71655aa11so358443285a.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 01:44:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=oss.qualcomm.com; s=google; t=1770975859; x=1771580659; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IDyRzgzCkyG9OarOGULmD0AY+/vQGrlm7d6qii9Q0lo=;
-        b=dV8k7OA7t/mb+0a62NXhAOTnLWqlG74IBBL7oNGe4KDPHNrOOiq/Y0qxLWtiE1thb1
-         NucKkp2sEcQ5oJC5+sAQ2CMgQEfID4KWypfbn0+FeiYoTBCTFEMnLWxZ2zxX/GMI6Fcj
-         DBeZ+Azf+gBh4pPZriHNWICCGDdyG8pVC6q/cBLYeORLhdl7+u3ZFXsGNlFSmDI5x/wg
-         CYExoRksPvsz9Y5ddb9syXr9WGiGTEUuPBDVa022xWoUqZCIi9VLxzKzLEU0c3ZsLRqo
-         GDuEWD8KE65Lf8O9LPyAWtvrcftLc38BGUMUCEIUdmcO4fVfSHVJfr1VjLMJSsjIr3F7
-         KDZw==
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fiBro8nxt07bPQywRHZlboB0HoTNfrDu/4kXVmWaSHg=;
+        b=fMcU6jexOwBtF526quRZM/1Q/VaUPXCipmrVlDrzTlPPGpMRAZ4zm+63VVEZOUjzMD
+         IavnXuaEQenu2AWQlqQxRr1hKM3qrd28Y/IiiBzoQd9/UiopRkXAillDvH+1BgtNNua/
+         S+16RbGGAEkOZs+S5vl2+PnGje9YViPTnuG4VQOfWMaO3heGBS1eBfyFiennRMuyfHWL
+         E/kZxHg7QDQEVMOs7pUQRgu5sWIlb4L5Hy84kmKSoeKfaX1bUP2i7ZK+9WDsmFqna4B5
+         ZjY/+QcIrL7NoZdOR39W2lcjJSDSTYhxSTjk80E5oLdBSOSrMsXuupBQh2nhl1sgDxU1
+         UUiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1770975859; x=1771580659;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=IDyRzgzCkyG9OarOGULmD0AY+/vQGrlm7d6qii9Q0lo=;
-        b=oMY7b2nWtclHkpXPqu8YE+jPQqPEXhc2xONwoYVrq9R6IsSCnMos4p4TKnJzMIhcqM
-         fGMGQsLgZd/dfh2IWh9PLzx267DiK3U9VLOafO7ZaM0MzUaYWj5g6/5jAkpLlyK9Tb5h
-         qCGrT+ncs7415GStIEsOquNe9iQlVccjtqQ/voM2Gxhgzb6hcEQOc7g5Y6Jvp+jbhOEm
-         uy4c+UHjj03ZjjII1jYTVhwZVoBmCmxidXsRjEMzW3twlqENKa+9Vcb7c2qII+vcUy4f
-         TSDpUOBnp88H+3iA+2Tv+AYTBTeBraxD2+5JmS1RdUiyb4YQe0eugpF6SO3HfwS6jsZx
-         R5SQ==
-X-Gm-Message-State: AOJu0Yy6iW2Pm/6pMDpzjn7KY1Shluh7hObK2+eYNqjt0sEkNMuOBT3I
-	ZXfaZtyDIWUmuKVn/hJxCuOOwvFFWAAONBojOAWeqL6HHWbBlTMBLiRPOiI+spQDIQY4ifQ6/fs
-	o/btTSIqo/MVfgT4tUtYy+Ot18T2V8w3244QYXkiQsdLzsT3SZcNG68xPNzRz3En1PB4apOtWjQ
-	bURezoytbiSTQCne7E
-X-Gm-Gg: AZuq6aJeLGZ3eDOB2Bl5POt9SBiqriM5HJ/HP+S1eXGDzivADUxc2z1wPElmunKBmjD
-	6xPs6qtasS4ELJN5WGTuqfc1pdF5k7xt0PoPcb4lxJzPj9wUPmSTQk2UmJNfF1CQBPWBQ2WEpFg
-	OdpuhNIJCOVs6MYq/8fz2r4i4wCNdd2bqVKwVppmoNUNV/YRgCokfnpvq6mZp++dl7XHMyeJUlD
-	QUC/BCa4PNeiClfThySoH9JK+3aVutBi8X0A0tfe3nYDkOAb5FBUAlxAYk5yJNyFflfQ8vHuZcF
-	UeQrlAeCb6VoGYNM4XnYjk/ol7lhhSJbOlv9UwB0GiOtaaVzPSLPcne+Ti3B0ksE3XGB9g1Ayvc
-	knJKWvZ2RWW0fF9Q8iVjxUYR9AkBseGf2X7sI80NscAndjIN84Qn7VNRLpuRndscmWRAbOpiq05
-	5JSE0rDP2daPLElBPPKzjEqoF/slR8Bl7Hy/w=
-X-Received: by 2002:a05:620a:7081:b0:8b2:ec00:7840 with SMTP id af79cd13be357-8cb42268fb7mr130234285a.27.1770975859575;
-        Fri, 13 Feb 2026 01:44:19 -0800 (PST)
-X-Received: by 2002:a05:620a:7081:b0:8b2:ec00:7840 with SMTP id af79cd13be357-8cb42268fb7mr130232685a.27.1770975859104;
-        Fri, 13 Feb 2026 01:44:19 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fiBro8nxt07bPQywRHZlboB0HoTNfrDu/4kXVmWaSHg=;
+        b=NidXlJ9s8L6n12ex+foQQvL8BTr/FstEkPYJ/8nYyf0eXsaBC02Zp64edWEpv8Idqz
+         iLq5WZLrZT3ZacjlYZ0pe+7PRTsORhfrhvpEKIxvAUhDaOYlTipQDM33FsNULrcLOrN7
+         Z4gn2hxCr0hgsdIUQlITshLc+MQF+Bp+pHTb4Doev1tAml2b6T2qcQYYE4GqD/18SJi0
+         5afNajL3hn2enymb6X01hgcyKFPlZfuPmkAD0tbRQgR1jlPkO04dIFn3UZp5mg00asWr
+         IOBbGFAGfKsco2OxKF47GgWzcENOiIytepjEp8oTw9W8cOUYE8qF08YuIo+WPCLm5TeQ
+         +mUg==
+X-Gm-Message-State: AOJu0YyZQLVp6G+bbCMZ0/g8NLEF1sSYWD3fLo+HE+D3NWmrhCqXSFRO
+	BOVILH5ezrOgoY0TAE/cykksBxPmg30qsS1yOJ/Qs8Cy8+dLcPwpGcHXJawlkoLJNuQwhwRbJ8D
+	cjlXCxNCmiUzfJ4W/kYl2zblX0xPojBP3BguJVJgmL82uRqToNA+GEhNibSN4qKyPgRRoy2PCBb
+	W2hy0nv4LvV03I4sfM
+X-Gm-Gg: AZuq6aK6HoR383YALfUWqyOgorlxZtJ2Qh1FKMJ0vidq+8xLkv4VNYeNfyn4i0pF4zz
+	oNl64Bjo//y2RNR91wMyuzm/G/YiP+UFHzXKlpx3WoaA0CMhdcf1cgUVSwi1IvF9mbuyFbeNrVY
+	ja3xnNfc/U+YLF+liuMyU8DExtQYn/WzyymjaNfdf6YkKSp4Vk/4R66XQ7g30RDHpyqNl5uESVp
+	jBCK0BjSS9FohBIy4j5amKiu7WBwmFsAdVl6N3eqxN0q38c8jOdWdxNGrxYKKUoFqIZ2VA3d7eV
+	T/yWphus937EpJTW/5Y+RywyEdxLtEKaZgBqRcQ0GqJ+yeGkdHWIq2ckzTm539v4LmB4nlgUfpP
+	35rmkZ5lTZx+oEg5lm4r145HE6qWNnkYvztXucr1gO+DwmAQub9aSFoifUYfOnLytzaWkfQPXkW
+	0brrV9BQra4q0bSWOBOD+RUVZQZPuUsCiOtoc=
+X-Received: by 2002:a05:620a:40c2:b0:8cb:313f:5ce9 with SMTP id af79cd13be357-8cb4249217amr126427285a.81.1770975858746;
+        Fri, 13 Feb 2026 01:44:18 -0800 (PST)
+X-Received: by 2002:a05:620a:40c2:b0:8cb:313f:5ce9 with SMTP id af79cd13be357-8cb4249217amr126424685a.81.1770975858190;
+        Fri, 13 Feb 2026 01:44:18 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59e5f5acb0esm1435563e87.67.2026.02.13.01.44.18
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59e5f5acb0esm1435563e87.67.2026.02.13.01.44.17
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Feb 2026 01:44:18 -0800 (PST)
+        Fri, 13 Feb 2026 01:44:17 -0800 (PST)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] vulkan-cts: upgrade 1.4.5.0 -> 1.4.5.1
-Date: Fri, 13 Feb 2026 11:44:16 +0200
-Message-ID: <20260213094416.88437-2-dmitry.baryshkov@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 1/2] vk-gl-cts: ensure that the SRCREV is correct
+Date: Fri, 13 Feb 2026 11:44:15 +0200
+Message-ID: <20260213094416.88437-1-dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260213094416.88437-1-dmitry.baryshkov@oss.qualcomm.com>
-References: <20260213094416.88437-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA3NCBTYWx0ZWRfXzaw0V2j+HT6C
- eQ8aXTFnRR4aRkzMPqVZGVxCq7o/tHB2CqDT3H+CjFqHNqIA+Tcd3euwJo/zPMxrWwLDMMCSBXS
- O71VqZ5yJbKWYljtRBTeRQS9Sp4JI1+dBv93/GhSZzVBDB0Rky31n3rDrwbv+mhsh9C4ngVKNQu
- rD4ZpjAV0mZjmNzRGOuMD99n1UFF7yVIjBZCyfn+y/k6k78pNWYEYmAexj4TUiN/cfGNUjSYmS9
- f+c1DTO1kPV0wjP0u64A4SLBpqObCT6Bkm7kbpyWbB98B4VsdLTfg7YV9fcVYfqtA2O/quaxXU8
- zF9cr9rzVwDpOiR4FYvFxSuLsfpGOME1avyQQ1e80exeE7MTLyDweAj/r81cEXoIwBFjfagOip9
- PlpEMBroSLXU5yZXubBwec9zGl77ewUXLDk1SyT+sLi4stEafGdNd5Mdf3iSdRzSOby6dikZjiX
- 7a+kNFEm9IopB/QFv8g==
-X-Proofpoint-ORIG-GUID: Q-m6xu8sazOBzmAQvnHkPzTNt3J7aoyD
-X-Proofpoint-GUID: Q-m6xu8sazOBzmAQvnHkPzTNt3J7aoyD
-X-Authority-Analysis: v=2.4 cv=bo5BxUai c=1 sm=1 tr=0 ts=698ef274 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=HzLeVaNsDn8A:10
+X-Authority-Analysis: v=2.4 cv=Wt0m8Nfv c=1 sm=1 tr=0 ts=698ef273 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=HzLeVaNsDn8A:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22
  a=GgsMoib0sEa3-_RKJdDe:22 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8
- a=6r3AYOCa_0SeUzyjCW4A:9 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=vJFsDkwi2ydU_hCt76AA:9 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: V4ifpFvTJ0qDy0bzGYK52fSX006wkTC6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA3MyBTYWx0ZWRfX+ycwvksx8uTa
+ kImW4vUxXf3OP80lD94SUuJMfy0IPBsagvqRSvNQtadp4SfZjWBzeJJXNOB0sW8d8fmyFkblYq7
+ b0bQDMW85QYy99D7+Odc4u/4FnaM9Cw0cLbN/hQvDJGy/jOGPw54IC16ikPk1PQSKK47gjahQxt
+ 9de11VVE8mLetShQbhuOLOWKmeVGapoyO/QYpck0Xi5IPt+IU/YfxDJeZBKo6mCwQs5N+n2NYRs
+ xOxuUEGnzvmMHMlXUqOgscsgozoj+VJrya9d0HZfbe+c0ZPBJZV3DJn2QqL400XReoEd6GI7md1
+ VIET0geRmszPZyNVCxoaSuhkaIQ5RxC9vQmeBlpnvRw2LqIXbUs0+ha9TbA1wgyt0DXYzQUjAlW
+ MNl1wz8o2l6DOe4OPtHr/w34gKKYFi4NJep5s4R0R8C9ODLSMrHQdmS4ZDLfzZFlqdlTNRcl8Sp
+ Z19JBQGZqMyxT5H64wA==
+X-Proofpoint-GUID: V4ifpFvTJ0qDy0bzGYK52fSX006wkTC6
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 impostorscore=0 malwarescore=0 priorityscore=1501
- suspectscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 spamscore=0
+ suspectscore=0 clxscore=1015 priorityscore=1501 adultscore=0 spamscore=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130074
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 09:44:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124380
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124379
 
-Bump Vulkan CTS revision, picking up fixes for sevaral Vulkan tests (and
-updating VVS to 0.3.9).
+Use tag=${BPN}-${PV} in SRC_URI in order to ensure that the SRCREV is
+correctly updated together with the package version.
 
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc     | 4 ++--
- .../{vulkan-cts_1.4.5.0.bb => vulkan-cts_1.4.5.1.bb}          | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.4.5.0.bb => vulkan-cts_1.4.5.1.bb} (92%)
+ meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-index cf1d24f637a5..52116c8ed724 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-@@ -6,7 +6,7 @@
- RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 67a0dc564c22..d6484ecba0d8 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- python __anonymous() {
--    if d.getVar("PV") != "1.4.5.0":
-+    if d.getVar("PV") != "1.4.5.1":
-         bb.warn("-sources.inc out of date, run refresh_srcuri task")
- }
- 
-@@ -19,6 +19,6 @@ SRC_URI += " \
-     git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=0a11cf1257471c22b9e7d620ab48057fb2f53cf9 \
-     git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=9482448393f3f1f75067cc6ba8ad77fda48691c6 \
-     git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
--    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=823364b0c7abdc4f4e39418d3dd9dc11623ef146 \
-+    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=aaf915a0e08d679d1e8b835c30e6a346ab0c7ad2 \
-     git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
- "
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb
-similarity index 92%
-rename from meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.0.bb
-rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb
-index 34dc10e44dec..cd5a66fd9fc5 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.0.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Vulkan CTS"
- 
- require khronos-cts.inc
- 
--SRCREV_vk-gl-cts = "db74f486c9d0594bc997f8f79521b424708ba8da"
-+SRCREV_vk-gl-cts = "7b7c6cda940bec82d1c5a8c39048728d9bd32f39"
- 
- require vulkan-cts-sources.inc
- 
+-SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
++SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1;tag=${BPN}-${PV} \
+            file://0001-use-library-sonames-for-linking.patch \
+            file://generate-srcuri.py \
+            "
 -- 
 2.47.3
 
