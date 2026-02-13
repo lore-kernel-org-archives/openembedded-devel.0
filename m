@@ -1,316 +1,139 @@
-Return-Path: <eric.meyers15310@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFEF4EDF168
-	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 14:21:13 +0000 (UTC)
-Received: from mail-vs1-f68.google.com (mail-vs1-f68.google.com [209.85.217.68])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.72689.1770992470234884072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C24DEDF176
+	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 15:42:34 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.74624.1770997353249730171
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 06:21:10 -0800
+ Fri, 13 Feb 2026 07:42:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lIozufC1;
- spf=pass (domain: gmail.com, ip: 209.85.217.68, mailfrom: eric.meyers15310@gmail.com)
-Received: by mail-vs1-f68.google.com with SMTP id ada2fe7eead31-5fc414b9c99so598763137.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 06:21:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770992469; cv=none;
-        d=google.com; s=arc-20240605;
-        b=BggYUytuo+goe0fec39YaX2wmAdt4wNbHX43MWrRA9XFFTJ5i0QISm9rYzHIgIryS9
-         CwGlteDXUHOFxlITNqk3fR8icgKxOevRy42+OPVdcsuZg6qHNXptym0a/yHZRyrQ4nvX
-         OL2t/4pBT/mM2njOj6zpIAYpWPx3bhatSR9Ahh6qG2gUVh6YOGzj0yusfTrCdiANxnjV
-         bnjD/71AP46k6PFBu6Mz/kbxyeWm1JF8eYw5GljgfFavXAQEK0D61QxL4HTmcFM/UXZ4
-         Blfdv9HBHCN+nY5Cao8ZBUH40CUH/WQBtCgPBczD4JLolWOsJ8bvN8lfdXnht8LIaDAl
-         +5RA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
-        fh=R1b/v2rm2m1KyOdwoCUBwZcBbO4hGy4571MZcGknbU0=;
-        b=XK9QQ2Wm7L19xCOOjF3Cb8hcM2ujikIpHIJ/QTcaJkX7xpEw+OxHuutjE4pv6f842T
-         ya1aaOOU/6JMqaFy0fv2rHXEGyTAzDHyTxSSlOoeGA39+ki9vn2i+SlLcjcL++hheZxv
-         jjENT6E1bYBA5Pv1Oj6saJ9z0UaLmWCpZ+O9VM+33vt/x9vRms9kS08NX34t2VDluqKE
-         ANdFKoeGBktvyzwF3jnudkEZrDKF7cIkmctrcSoacdXvhakTAqNfG3nCik8vqowbyx8V
-         h4fk+ZQ75RhuRIACicfW+heRN0Ff12tkGwIQk3fkhcErQuHpYsUWyUs6VM+a6p5WYT9M
-         OdgQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mjiqO/jK;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-436263e31abso1002607f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 07:42:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1770992469; x=1771597269; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
-        b=lIozufC1vIc000t+8Bx0iiWKclaHiwX9DcFuDW1OOLsOkDNCvpR9sfZZ0aI3fbrYm8
-         afGTR2fq/jHdFHmVr8mtMnzO0YvHrEsqp5SqTehzuyyCWQMXXfrIW49ZcuCiZSjk/XZb
-         nFyxmjY4U5gQkYqLnnPM5icHZzjGrdMmjmcHv5T3v9AHAnbhNRDtLqrTF0nwxu2R7oGF
-         O4YncqNetQK2aXdRIyJZPhsyYPLsijtUM3ZV38S7mfsuH022y8S9nLTHqvwzV2/a3XM1
-         2eHk6vIIv1ip+viOIqcun7uIHxUflNK+Zf9G3QS8XwkUX5zhb30amcG6J11Q89ILz391
-         YmGw==
+        d=gmail.com; s=20230601; t=1770997352; x=1771602152; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GqCwEPL5SYQssa7JrIGpelCWXCHQOGs76fF92jmmJ2A=;
+        b=mjiqO/jK50jaRSblcfTETEUQ9N1vkIftIfugqGO/ZUvj1V66s4M8Cxn0Hjp819hd7c
+         8qPOKp7f/xjqQQcgfNJzPAPlJ6HcsgiJP+ojbtc/PTiff2O1tFcAl8eJ5Nc4rzRBiAFt
+         iBMD9PVSJNij/6+VX6VKHSojEA8oPE+XK5R2Yn4R+pDgYkpfB2O9oyhUdICt2+HJk/Uo
+         GUkofk23p68T5DUnKa4Cv7uHAFwoJz5UJaqSSgWXGNGfM6z+x0SOvYhtGb8bJIAsEtTJ
+         yXBXkNZQQjj6V7UXY/vCCSBceFZj2qf62YcZpGL4MmWFW05H972posULr/SOxcsdGaOA
+         /yDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1770992469; x=1771597269;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=0mRpvvXgDY0rHrZJMSEJdfnZdg2e4oZ66EiKFR04YsQ=;
-        b=ZbKCj07IVzi6iQ85AOJWRjf05mqjwT2N3Id89JPUav93G5Y7Nz9WB37fxCkgXK0IY4
-         BJpgFgfZNzOfmFsP1EVZC4zyglWDplA26GZhS5iqSDomAGHLKrd+smcSvTty+s0tg/a7
-         jWaF1DL+5KH1pmKQJ7DfB4yUXpmp0MD6r9877toA1KsXrX7rzKYnacDk8KWMPJRPe6DN
-         XoBagUGpjJj680RWNIrNU0I08Ar4n+Gps7c9W3SDRJIbJrVYMiu+MOdxhd4Czn0YSS7n
-         ifrGi5JbUWBYQ43lEjmvta5Yglg4FOuw8r5nckeIgRYuFa68U/Hi081hOJSFvTTEm3aZ
-         1r4A==
-X-Forwarded-Encrypted: i=1; AJvYcCWzZtp0zKD8Sx43g9L+zoq9UvN9JzGrFTpqdbuGVygrwMSHaJkuZCpBLJ1kTfxDn5pMeF0vnFELk/qnzn4a2jH2Duo=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyJqFYw8jyTZ9q9UuwnIQ83RDZQheFrQ2Kcg+ounscMxdpmtK5G
-	JLnVHqL9iUb2c8QxmzOtFU2tw+UM+TvcoSTaOefNm/8SnOnd9yYi6bO4SKuTzPXj2xnensRBOE0
-	Q2Q4LxjWDQCU/z6FHSKC7iUuoPHmrX6g=
-X-Gm-Gg: AZuq6aIPi92doQEeXU0JuAOIkLTSC9ff3JDuPh4HhEgopoLYBDSwEpADz6gZD/mi5Lg
-	9jfY0ugLVLmWHOQpU5jvdcx4ZrmRH7I5L8PO2m17YD53wNKywHElz+PrGqyk12X2G5u62kYNGsC
-	MpUsPuYFabgJmFYrCy4W27yc1aHpl7vk8G2AjLhti7djaxJOgsxjCauwOpJsHZJgTaaHnnGq56m
-	OLrDAL1LpIqAY7CIPWiS/Sn9XzcmpUgtJD6/Gu/e4/UrFqc1lBp444PKQjLLVFa+zbqzUA09Ty+
-	/lX9Bam5dZGRJaAfag==
-X-Received: by 2002:a05:6102:41a3:b0:5ee:a590:6b11 with SMTP id
- ada2fe7eead31-5fe1ae5c5d1mr734184137.36.1770992468852; Fri, 13 Feb 2026
- 06:21:08 -0800 (PST)
+        d=1e100.net; s=20230601; t=1770997352; x=1771602152;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=GqCwEPL5SYQssa7JrIGpelCWXCHQOGs76fF92jmmJ2A=;
+        b=YCcDcG6bs+gR8ihXHLpbzmcags5mdsvFiSbNQ7yCDQKT061gXR2DtTwfG8pkcx7bqV
+         f1QZdYFj8PiPM4E6HNthS4T8VRASDGbHXkPi3aFLcZyfGexatslBjVBcWi8vux1z9tiU
+         8/QiIs5bBsWx57Rs6daVPuuVkklbso0XZpZI5rloQ9+PVfxTRW7YK3Vi9lq/qAQoV//k
+         gVtCk+wFZxHogElfasbNqa0AuXDbZ4AoiC5sWf6EFxTYFXDHnRc68ITwPnzAMqX+kjrW
+         1+jolDVYtKwoNODaL2m+ot+iU8bG53tS2I/+Jn1p7enNLjIlzV9N34bxj+SUKm3LeKZw
+         6AUA==
+X-Gm-Message-State: AOJu0Yz0HvAyCAzUVb35bEKHw4ylqTcYeXT7OAq7uQ7MbEJpmHhIj6ue
+	9SFgdoedFe/oTuBM97iQSmbSVIqmGOjMjkgElv2XwYgoVxZp69BtO3/sJvIxTg==
+X-Gm-Gg: AZuq6aI4Y9WSIsFmCh0RPcDsgcbSYVVrMgzRCSUQA2UrSVtxIiDHPynwS+GlbUesikP
+	uYXZ5rxATZ7TZ8rSLqq2u4ru9JXkiwYzEeUL1/D7eZyZPdTHauz1zqG5r6PeRC2lRt+OSdHgkdr
+	p6uxiO7AYzkWrNPsa7TZLGswM1CLYjqXMNxQL0US5qWsdOld9AvyZ5xlrHLb2cGhdMZi2uf82Kn
+	MVqzk2ibjHT8uAT47NYMRqVH23K6Kiqqnvved4Y8qx3wPWN9ZWM00zHe5OLlGjU7v77F7cNeIRt
+	Nzq3TRzpBL7HzEQ668DgBZHtB/+G8tZ69pQuVaNwiFYUb4BuZD9yRA6i0sH/DSMdLyUmYE6qhJk
+	IKdtB155D8L7tkTZh/KaM6R7OM+PI1wjAavYcsu1eB7eLvW5g0zIwqNAV05YiiDJ5BAP8rZxo+I
+	wn026eQsO3VX9Y3ssJaqTm
+X-Received: by 2002:a05:6000:603:b0:436:3483:5c8 with SMTP id ffacd0b85a97d-4379791ce00mr4369678f8f.50.1770997351453;
+        Fri, 13 Feb 2026 07:42:31 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796a6c1b4sm5807957f8f.14.2026.02.13.07.42.30
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Feb 2026 07:42:31 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][kirkstone][PATCH 2/5] libeml: patch CVE-2015-8791
+Date: Fri, 13 Feb 2026 16:42:26 +0100
+Message-ID: <20260213154229.1329476-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260213154229.1329476-1-skandigraun@gmail.com>
+References: <20260213154229.1329476-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-References: <20260212182929.8047-1-eric.meyers@arthrex.com>
- <18939BFE647A0E33.653184@lists.openembedded.org> <7814b942-6309-48eb-8151-658f107f1cb2@gmail.com>
- <CAMKF1sogR_FXy3By7w9sKtH-rCzL5V1=rf1EoXs6wwHFocLssw@mail.gmail.com>
-In-Reply-To: <CAMKF1sogR_FXy3By7w9sKtH-rCzL5V1=rf1EoXs6wwHFocLssw@mail.gmail.com>
-From: Eric Meyers <eric.meyers15310@gmail.com>
-Date: Fri, 13 Feb 2026 08:21:03 -0600
-X-Gm-Features: AZwV_QhvytcxOrXy_aO4AOZXylU1zTq4u-1okUXQwUXP97_SN1GQHAWh8c6qaMA
-Message-ID: <CA+cKJ+G7imomNAkVicNGCqw807CAKkdLJ814dr97ZCoYvcDGEw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] redis: Remove debug paths to avoid
- TMPDIR [buildpaths] errors
-To: Khem Raj <raj.khem@gmail.com>
-Cc: skandigraun@gmail.com, openembedded-devel@lists.openembedded.org, 
-	Eric Meyers <eric.meyers@arthrex.com>
-Content-Type: multipart/alternative; boundary="0000000000000189d5064ab551e3"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 14:21:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124389
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 15:42:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124391
 
---0000000000000189d5064ab551e3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Details: https://nvd.nist.gov/vuln/detail/CVE-2015-8791
 
-On Thu, Feb 12, 2026 at 8:46=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
+Backport the patch that is referenced by the NVD advisory.
 
->
->
-> On Thu, Feb 12, 2026 at 2:39=E2=80=AFPM Gyorgy Sarvari via lists.openembe=
-dded.org
-> <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
->
->> On 2/12/26 22:09, Gyorgy Sarvari via lists.openembedded.org wrote:
->> > On 2/12/26 19:29, Eric Meyers via lists.openembedded.org wrote:
->> >> Takes similar approach to valkey recipe seen here:
->> >>
->> >>
->> https://github.com/openembedded/meta-openembedded/commit/1b820b98afd55c8=
-81822beb9057162dc67ecb386
->> >>
->> >> Signed-off-by: Eric Meyers <eric.meyers@arthrex.com>
->> >> ---
->> >>  meta-oe/recipes-extended/redis/redis_7.2.12.bb | 7 +++++++
->> >>  1 file changed, 7 insertions(+)
->> >>
->> >> diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
->> b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
->> >> index 8abf758930..589ffd6fb2 100644
->> >> --- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
->> >> +++ b/meta-oe/recipes-extended/redis/redis_7.2.12.bb
->> >> @@ -52,6 +52,11 @@ do_compile:prepend() {
->> >>  }
->> >>
->> >>  do_install() {
->> >> +    # Remove debug paths to avoid TMPDIR [buildpaths] errors
->> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-benchmark
->> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-server
->> >> +    sed -i -e 's#${TMPDIR}##g' ${S}/src/redis-cli
->> >> +
->> > If I check the file type of these files, I get this:
->> >
->> https://gist.githubusercontent.com/OldManYellsAtCloud/5892bde7408475a93d=
-2faa699ae65aea/raw/3309eb40e0467bd7e2a2bcbd540c822b071242d4/gistfile1.txt
->> >
->> > These are binary files, cutting out parts with sed will break them mos=
-t
->> > probably. I think this will need another solution (will take a look at
->> > valkey also, if it has the same)
->> >
->>
->> I have sent an alternative proposal[1] - do you think you could test it
->> if works for you also?
->>
->> [1]: https://lists.openembedded.org/g/openembedded-devel/message/124363
->>
->>
-> yeah I think this would ensure that LDFLAGS behaviour prior to OE-core
-> change so I would
-> take the patch proposed in [1]
->
->
->> >
->> >>      export PREFIX=3D${D}/${prefix}
->> >>      oe_runmake install
->> >>      install -d ${D}/${sysconfdir}/redis
->> >> @@ -71,6 +76,8 @@ do_install() {
->> >>      fi
->> >>  }
->> >>
->> >> +INSANE_SKIP:${PN} +=3D "already-stripped"
->> >> +
->> >>  CONFFILES:${PN} =3D "${sysconfdir}/redis/redis.conf"
->> >>
->> >>  INITSCRIPT_NAME =3D "redis-server"
->> >>
->> >>
->> >>
->> >
->> >
->> >
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#124364):
->> https://lists.openembedded.org/g/openembedded-devel/message/124364
->> Mute This Topic: https://lists.openembedded.org/mt/117779563/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
->> raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->>
-I'm okay with using patch [1]. Things seem to be building on my end after
-pruning sstate/cleaning.
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../libebml/libebml/CVE-2015-8791.patch       | 29 +++++++++++++++++++
+ .../recipes-mkv/libebml/libebml_1.3.0.bb      | 10 +++----
+ 2 files changed, 34 insertions(+), 5 deletions(-)
+ create mode 100644 meta-multimedia/recipes-mkv/libebml/libebml/CVE-2015-8791.patch
 
---0000000000000189d5064ab551e3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Thu, Feb 12, 2026 at 8:46=E2=80=AFPM K=
-hem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt=
-; wrote:</div><div class=3D"gmail_quote gmail_quote_container"><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br=
-></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr"=
->On Thu, Feb 12, 2026 at 2:39=E2=80=AFPM Gyorgy Sarvari via <a href=3D"http=
-://lists.openembedded.org" target=3D"_blank">lists.openembedded.org</a> &lt=
-;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">On 2/12/26 22:09, Gyorgy Sarvar=
-i via <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=
-=3D"_blank">lists.openembedded.org</a> wrote:<br>
-&gt; On 2/12/26 19:29, Eric Meyers via <a href=3D"http://lists.openembedded=
-.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wrote=
-:<br>
-&gt;&gt; Takes similar approach to valkey recipe seen here:<br>
-&gt;&gt;<br>
-&gt;&gt; <a href=3D"https://github.com/openembedded/meta-openembedded/commi=
-t/1b820b98afd55c881822beb9057162dc67ecb386" rel=3D"noreferrer" target=3D"_b=
-lank">https://github.com/openembedded/meta-openembedded/commit/1b820b98afd5=
-5c881822beb9057162dc67ecb386</a><br>
-&gt;&gt;<br>
-&gt;&gt; Signed-off-by: Eric Meyers &lt;<a href=3D"mailto:eric.meyers@arthr=
-ex.com" target=3D"_blank">eric.meyers@arthrex.com</a>&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;=C2=A0 meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
-2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a> | 7 +++++++<=
-br>
-&gt;&gt;=C2=A0 1 file changed, 7 insertions(+)<br>
-&gt;&gt;<br>
-&gt;&gt; diff --git a/meta-oe/recipes-extended/redis/<a href=3D"http://redi=
-s_7.2.12.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a> b/met=
-a-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.12.bb" rel=3D"noref=
-errer" target=3D"_blank">redis_7.2.12.bb</a><br>
-&gt;&gt; index 8abf758930..589ffd6fb2 100644<br>
-&gt;&gt; --- a/meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
-2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a><br>
-&gt;&gt; +++ b/meta-oe/recipes-extended/redis/<a href=3D"http://redis_7.2.1=
-2.bb" rel=3D"noreferrer" target=3D"_blank">redis_7.2.12.bb</a><br>
-&gt;&gt; @@ -52,6 +52,11 @@ do_compile:prepend() {<br>
-&gt;&gt;=C2=A0 }<br>
-&gt;&gt;=C2=A0 <br>
-&gt;&gt;=C2=A0 do_install() {<br>
-&gt;&gt; +=C2=A0 =C2=A0 # Remove debug paths to avoid TMPDIR [buildpaths] e=
-rrors<br>
-&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-b=
-enchmark<br>
-&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-s=
-erver<br>
-&gt;&gt; +=C2=A0 =C2=A0 sed -i -e &#39;s#${TMPDIR}##g&#39; ${S}/src/redis-c=
-li<br>
-&gt;&gt; +<br>
-&gt; If I check the file type of these files, I get this:<br>
-&gt; <a href=3D"https://gist.githubusercontent.com/OldManYellsAtCloud/5892b=
-de7408475a93d2faa699ae65aea/raw/3309eb40e0467bd7e2a2bcbd540c822b071242d4/gi=
-stfile1.txt" rel=3D"noreferrer" target=3D"_blank">https://gist.githubuserco=
-ntent.com/OldManYellsAtCloud/5892bde7408475a93d2faa699ae65aea/raw/3309eb40e=
-0467bd7e2a2bcbd540c822b071242d4/gistfile1.txt</a><br>
-&gt;<br>
-&gt; These are binary files, cutting out parts with sed will break them mos=
-t<br>
-&gt; probably. I think this will need another solution (will take a look at=
-<br>
-&gt; valkey also, if it has the same)<br>
-&gt;<br>
-<br>
-I have sent an alternative proposal[1] - do you think you could test it<br>
-if works for you also?<br>
-<br>
-[1]: <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
-/124363" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.or=
-g/g/openembedded-devel/message/124363</a><br>
-<br></blockquote><div><br></div><div>yeah I think this would ensure that LD=
-FLAGS behaviour prior to OE-core change so I would</div><div>take the patch=
- proposed in [1]</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
-ing-left:1ex">
-&gt;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 export PREFIX=3D${D}/${prefix}<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 oe_runmake install<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 install -d ${D}/${sysconfdir}/redis<br>
-&gt;&gt; @@ -71,6 +76,8 @@ do_install() {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 fi<br>
-&gt;&gt;=C2=A0 }<br>
-&gt;&gt;=C2=A0 <br>
-&gt;&gt; +INSANE_SKIP:${PN} +=3D &quot;already-stripped&quot;<br>
-&gt;&gt; +<br>
-&gt;&gt;=C2=A0 CONFFILES:${PN} =3D &quot;${sysconfdir}/redis/redis.conf&quo=
-t;<br>
-&gt;&gt;=C2=A0 <br>
-&gt;&gt;=C2=A0 INITSCRIPT_NAME =3D &quot;redis-server&quot;<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#124364): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/124364" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/124364</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/117779563/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/117779563/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br></blockquote></div></div></blockquote><div><br></div><div>I&#39;m okay =
-with using patch [1]. Things seem to be building on my end after pruning=C2=
-=A0sstate/cleaning.=C2=A0</div></div></div>
-
---0000000000000189d5064ab551e3--
+diff --git a/meta-multimedia/recipes-mkv/libebml/libebml/CVE-2015-8791.patch b/meta-multimedia/recipes-mkv/libebml/libebml/CVE-2015-8791.patch
+new file mode 100644
+index 0000000000..e007e2fb92
+--- /dev/null
++++ b/meta-multimedia/recipes-mkv/libebml/libebml/CVE-2015-8791.patch
+@@ -0,0 +1,29 @@
++From 22b87d8217606d891e73fc59a598bae830e61d65 Mon Sep 17 00:00:00 2001
++From: Moritz Bunkus <moritz@bunkus.org>
++Date: Tue, 20 Oct 2015 14:49:44 +0200
++Subject: [PATCH] EbmlElement: don't read beyond end of buffer when reading
++ variable length integers
++
++CVE: CVE-2015-8791
++Upstream-Status: Backport [https://github.com/Matroska-Org/libebml/commit/24e5cd7c666b1ddd85619d60486db0a5481c1b90]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/EbmlElement.cpp | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/src/EbmlElement.cpp b/src/EbmlElement.cpp
++index 4b96d06..0969468 100644
++--- a/src/EbmlElement.cpp
+++++ b/src/EbmlElement.cpp
++@@ -149,6 +149,11 @@ uint64 ReadCodedSizeValue(const binary * InBuffer, uint32 & BufferSize, uint64 &
++ 			// ID found
++ 			PossibleSizeLength = SizeIdx + 1;
++ 			SizeBitMask >>= SizeIdx;
+++
+++			// Guard against invalid memory accesses with incomplete IDs.
+++			if (PossibleSizeLength > BufferSize)
+++				break;
+++
++ 			for (SizeIdx = 0; SizeIdx < PossibleSizeLength; SizeIdx++) {
++ 				PossibleSize[SizeIdx] = InBuffer[SizeIdx];
++ 			}
+diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
+index 744486fa2a..9caf25205b 100644
+--- a/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
++++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.3.0.bb
+@@ -2,11 +2,11 @@ SUMMARY = "libebml is a C++ libary to parse EBML files"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=7fbc338309ac38fefcd64b04bb903e34"
+ 
+-SRC_URI = "\
+-    http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2 \
+-    file://ldflags.patch \
+-    file://override-uname.patch \
+-"
++SRC_URI = "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2 \
++           file://ldflags.patch \
++           file://override-uname.patch \
++           file://CVE-2015-8791.patch \
++           "
+ SRC_URI[md5sum] = "efec729bf5a51e649e1d9d1f61c0ae7a"
+ SRC_URI[sha256sum] = "83b074d6b62715aa0080406ea84d33df2e44b5d874096640233a4db49b8096de"
+ 
 
