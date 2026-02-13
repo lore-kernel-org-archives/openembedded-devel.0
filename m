@@ -1,99 +1,137 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E7CDEF99D0
-	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 19:25:35 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.80043.1771010726019198790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E23EF99E2
+	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 23:15:57 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1953.1771024553091313096
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 11:25:26 -0800
+ Fri, 13 Feb 2026 15:15:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mj8pdZNA;
- spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-7946a1f2430so13110577b3.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 11:25:25 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=D7sLBCTx;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Vh5IEmW9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61DFLqW33893153
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 23:15:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=HFnul7zPJhFY+an2pGqyoa7WHeSMgkHeO/K
+	NU95/1F4=; b=D7sLBCTxDuq+AE9dKB7Zbt5d5SlfiM9niXunCtQOuc7YV4MhK6R
+	guQIBxrIktJOtNpG08n4d2eqJPj6UN9W0BBv7Vn+GI1YNGVt1D6dxGY7gcI3SOn2
+	JJNIx9rVEQihdIEB0oeuBXYvdOVHjYAE9XLm9HWkssxWgzVYOsbiNxwmznzb0ZfH
+	tWfxt0bXIC2yDDz/k1xDA52SXsksqXg9AHx3zc5n8m3WXAJkgujjQZ8mdF/VWMLk
+	vPj3NDN/4Ti6ukhSzg2R8st4wksAeBsbj76TWf+2Qo5js8w1frsfYrGGIGwN0DaG
+	AkDdkL4NDUj4dnXykwF8tpqWgMbX6wzz3vg==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ca6h7sj5g-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 23:15:52 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-8cb413d0002so464230785a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 15:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771010725; x=1771615525; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IACxc04+FeWfirLERv1x7cm2g1l+Gx/78nqAeQOXuG4=;
-        b=mj8pdZNAIeG8yt5j/VWKiRYGj46EXrQVv/KHLUJfKeuUjb7QRS4Qke0WWgvcqeMINJ
-         fvEFB7XrwiD+1nK+4Ho8m1AnOLwKneex4NT8XOlneN86jK9MlLiD+qOVc+Lhmyw52WkO
-         kAxT4WTHeShr7gsEylR55xFFyNzgTZSRJFY3B55aOtSBl6IvzmDTtiEYi63uTGaiZUZs
-         i3L3aq6u2XbMfo4AClySR5+KfCq2FNwSZL+bosqkWKi6Ntc9SDW5dU9pEq3JAkISZG+3
-         w7XVSUHflHZEiJoyqfPMksyyVVXoROQP13v2AOLlfOlW7n0/HqJOur231ewNIlhJRtZX
-         zFew==
+        d=oss.qualcomm.com; s=google; t=1771024551; x=1771629351; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HFnul7zPJhFY+an2pGqyoa7WHeSMgkHeO/KNU95/1F4=;
+        b=Vh5IEmW91w8DenxDLljITiAPmZ0PGdjNrxls5m5OqQSKBZ8gqO4bbzpY9Ou2R67DCO
+         zXZUUjLkhnbFtkz1hPgtf3XTeazEFtaMDsyUbLnU3vVOEduW2JVl0+Cw5QmtdpY+JWN8
+         manettGiEXQywwXBEV0QININYR7vzslgAk9nSsEhPi5bL20Gj4mgFfNTc1KaQrKc4JrF
+         2OPFeDIO41Zz5lEMNa0GZkLWG85uBHWyqRz9AnfIHcPAuGV6cJNsyODbRPbe4hDejBrM
+         3sLvbAnAqGMrJN5y2fW8NhK6zDybApliLaQIV09cUVmiFJJ8kZxlgp4EvbYCrO4njtpV
+         8toQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771010725; x=1771615525;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IACxc04+FeWfirLERv1x7cm2g1l+Gx/78nqAeQOXuG4=;
-        b=pie7noXP48MqZHNnxExn1krm+/5X2Q6FLetwvScBrkTU3tFkeHoXCnV0VK8d8QWE/c
-         AUasKErAx7HX8R/yQhTtd3a5s0UmPquvRi+K3PkRPu67Jd3Vx8pRvMbP2KvbMCgRNnlM
-         I4Nwm4UWOpxc83Vn7YQ4oFetG7wBiMtFT7PlN+xK2f03lynL2kFU9Zu6etEQu9I9JvYF
-         41GnoOBYxqllUQ6Gb0hZb1QSLpbdUOWGQLUl8GtolwkgEjFgfWD5q5eJ7onSn2HGWPko
-         0lBuTQ9vGjNNpt2VKuFlznHIRWyc8mj9XDrLdUByKttLFiM2yVvKgZhzBaO6kO86wqxH
-         ekEg==
-X-Gm-Message-State: AOJu0YyLjpX3ov3TbjAssX9oEWuEWD03UT1hB3alflk6JwIHWijocjLZ
-	7O9jt2wNNhteVQk3sspZF8lWS+CiU2I4mlA6KUIpKaGolakjSG95//91g3DsX9g2
-X-Gm-Gg: AZuq6aKUpkQ2E3I6Boq8YsZjSJGTje5EZwLo8E0HfCyImM71bkBL0/JPU/aE14HRC2D
-	sF1vYRAZl4pgckP+gdv7/G5m1SVzA5f7KqSI5TxySxnQg/TTbTSbxeRIZAbTAJpbr7gz3uDZXzt
-	5vuFffh7Gb9cd9PXpn/JYcEPjqimQ+XsT+3cKaR+tKhGqFLg4pUcLBC6EjN5Dn4KOphfDTX8SLE
-	IEbOh+3Ja3Uc0TIGVOHYS74yvuUoAczNRNGu1y4nzr2d7Ny5ERQYrFVypIOXhZZCZaC8xqs4/9j
-	eB3qzMp0nICpatgHDxvV5UoP7SicSU1TURjnxikVh7vEk7CcKkEgFrM+M4ju49r0KWD8brZkrAk
-	o0Fv8dbPGvIlrBmxeSUQjOHSkpObD/I20MTR5DfYo9zuLoY0JLwJcRWaZo5B1Jj8TNBXVs0W7zg
-	hNgCdV0oN+C/msYsrY4W3cuWkVfW14JjQnwsIdL9yAT7RxVmuG5wXtdru7GwYDJQ3eLmv7pLqj0
-	TWv985EbvmvU51ik3/z593pS8+n/3Ww4tgGHHElraICHBEpu1g=
-X-Received: by 2002:a05:690c:10c:b0:794:8f0f:e8c7 with SMTP id 00721157ae682-797ac62ca57mr3613387b3.56.1771010724728;
-        Fri, 13 Feb 2026 11:25:24 -0800 (PST)
-Received: from localhost.localdomain ([67.233.59.72])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7966c18ffc5sm72316037b3.18.2026.02.13.11.25.23
+        d=1e100.net; s=20230601; t=1771024551; x=1771629351;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=HFnul7zPJhFY+an2pGqyoa7WHeSMgkHeO/KNU95/1F4=;
+        b=pGLA1WyGA5D7CK4v9MIIFbFr+Zeu+QAQNxmb1SJk9HTLdObklcJVfXUHvSOEd58Pwa
+         iNGfT8HOULj8X9Fl2hP2HUVijpuov5blzOy0V17iy4mIS3T5J21QEggjG3rQNetMi8wO
+         XJi08GHdXjtAwvsN9mblGbCVkUFqqlOfOdULad8nwOU/QjG+IdkpQZOVNG0Rw6D3DXez
+         drs7n5OU/KiOsRjb7RIPZbtlf0OIf7f8yHobTBHEKHq+jG8HyWn1I+otVmvd4qZbab4i
+         0um782xkypios7HnfF2wd9GESJIj1lvrm5o1bXPFGA+JkUOnNFyExw/dRBsGWAyimb1M
+         HGuQ==
+X-Gm-Message-State: AOJu0YyjnCrDcpekCvG717y/oQygMMd8nVRzK9KzLuginLK8lUPN756h
+	sV1BDeMpmcTwD4loABs+wfCczdcBO7fLlbErLAR05p1IwK26ohCU6tQMz5AYXHFM4/4kA5BN3ar
+	Hco9u4Nq+7TLP+IL8LyCXqK2MZC1GKZRaGEotmMVu6kzNDdxC+bFtUFhFmkWHTNKA+HtLrs2ObU
+	ktvTtN332oE/ccm9hH
+X-Gm-Gg: AZuq6aIi/O06C3KOwdHitrFY4FEuQd21y8gqhZCURKjNZ9M82YjXDf0IzrRQL9SpaFI
+	nKGzJbt4kUA/c/GczPRaBSyfbUoz9LKKNujRLMKLCkc42kXbHkPdZ+7pVCi2hxuVJ/TIpImQtzG
+	QAlMtAujm3axV8WF7DuE0UGS6RsjVq3IgDCVgxU+lgL6QDVBbo17VCzBzYktE2fA1GL/EoCMRAB
+	5nURIW1yeG/xx8CwXV1+Y9stDQjBCZB2NqACyPCcd42RBSW9He9odPJbt4wrW7ADzOuAKjcREST
+	kfPocvmtDOOHND/N5Be5xe5Qm7Z7JREDmFmebSLwFPDLt2RRYa0gymWFgCWpy4zsg2nPIowei4l
+	e/I/kHSaTjSWd3wfbC3SL8T8GN1nehfV4i7L9ZHObKGmpyB0IHRGa9Ac084eDoslrbNFJZtY1HH
+	OnmR/bN7/JqiLOpohCF9TPWPHRZLGuMMpa8q0=
+X-Received: by 2002:a05:620a:1926:b0:8c6:dacf:5dbd with SMTP id af79cd13be357-8cb4ac0e7ebmr252945585a.18.1771024550811;
+        Fri, 13 Feb 2026 15:15:50 -0800 (PST)
+X-Received: by 2002:a05:620a:1926:b0:8c6:dacf:5dbd with SMTP id af79cd13be357-8cb4ac0e7ebmr252942185a.18.1771024550158;
+        Fri, 13 Feb 2026 15:15:50 -0800 (PST)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-59e5f5b90adsm1823918e87.88.2026.02.13.15.15.49
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Feb 2026 11:25:24 -0800 (PST)
-From: Jason Schonberg <schonm@gmail.com>
+        Fri, 13 Feb 2026 15:15:49 -0800 (PST)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH] php: upgrade 8.5.2 -> 8.5.3
-Date: Fri, 13 Feb 2026 14:25:20 -0500
-Message-ID: <20260213192520.160110-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH v2 1/2] vk-gl-cts: ensure that the SRCREV is correct
+Date: Sat, 14 Feb 2026 01:15:47 +0200
+Message-ID: <20260213231548.543485-1-dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDE4MCBTYWx0ZWRfX4DSGJvuf8vyO
+ hQfTOsptw5EH1M9wbQBDq5Mspl/oCleL+CgOerQCoMuDhkS+xzOsmbOrkk3a8faGLB/ddjhZBXP
+ 45R+TpXvu7Zr0UWblwbOc34MMs1QBOAngAPCv/OBRDjav8If3gBRun0z1o7WsF0rbqWuQBoNQBg
+ iIUhZ1gGxzF/b0jul7xEOJPdYmaikuZ2k30wrIw0ey1Tx0C63N9atpkJaTc61VVE8ZrD6++aHh0
+ YtBm1GBeamWNBuFZjMbslFnLwLh6W0WziHB7QK4rtOfnp3mkjdvg+q0/DVlwovZ8M49FgMoY2G5
+ O3Fp6C3sJTtNE67RSoDVcKhThgMTcV4E/S+TVbxIS6gzdBlDHwRKt2+aVI+V3O9Wqvab5OTWYMa
+ gKsa4Ss+an4XZ9zz7+Y/Jzcrao6vycWyo+Q1a54pyaB5Te9rdf989gyAVL1iAWjvS1Gt7i/0oa1
+ zW30/ok92OQJWUusO5w==
+X-Authority-Analysis: v=2.4 cv=IaKKmGqa c=1 sm=1 tr=0 ts=698fb0a8 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=HzLeVaNsDn8A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22
+ a=GgsMoib0sEa3-_RKJdDe:22 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8
+ a=vJFsDkwi2ydU_hCt76AA:9 a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-GUID: BkHdfrcWErSzq1G58ic0rRu0DwIfwoaZ
+X-Proofpoint-ORIG-GUID: BkHdfrcWErSzq1G58ic0rRu0DwIfwoaZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-13_05,2026-02-13_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 phishscore=0
+ adultscore=0 bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 19:25:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124396
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 23:15:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124397
 
-This is a bug fix release.
+Use tag=${BP} in SRC_URI in order to ensure that the SRCREV is correctly
+updated together with the package version.
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.5.3
-
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.5.2.bb => php_8.5.3.bb} | 2 +-
+ meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.5.2.bb => php_8.5.3.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.5.2.bb b/meta-oe/recipes-devtools/php/php_8.5.3.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.5.2.bb
-rename to meta-oe/recipes-devtools/php/php_8.5.3.bb
-index 4200363fe3..f4d02dbf22 100644
---- a/meta-oe/recipes-devtools/php/php_8.5.2.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.5.3.bb
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 67a0dc564c22..02f777926eea 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -1,7 +1,7 @@
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- S = "${UNPACKDIR}/php-${PV}"
- 
--SRC_URI[sha256sum] = "f7efdeccc3a810b18920692306536b99a3ba86610dbd0795a296cf77d3fb3a06"
-+SRC_URI[sha256sum] = "fc5ecabc183ceb64d9fca3dcd387bd29b2b67448326af998fde003124916823b"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
++SRC_URI = "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1;tag=${BP} \
+            file://0001-use-library-sonames-for-linking.patch \
+            file://generate-srcuri.py \
+            "
 -- 
-2.43.0
+2.47.3
 
 
