@@ -2,53 +2,53 @@ Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16B9BEDF148
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BC15EDF14B
 	for <webhook@archiver.kernel.org>; Fri, 13 Feb 2026 10:10:22 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.68684.1770977415886928487
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.68564.1770977417797606823
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 02:10:20 -0800
+ Fri, 13 Feb 2026 02:10:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=K33Y4hoj;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Z1RAzMCQ;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: liuyd.fnst@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1770977420; x=1802513420;
+  t=1770977418; x=1802513418;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=gg+thVpUn8FwWlLM85tw8BinDuAXD2OGm2QmvRWhfNk=;
-  b=K33Y4hojImRK3g3vhPM42mggdiEbx2QP3+cpa9qoOBdGrHlpt3hMleEM
-   MJSb8HNueZN6cu+Yy+x7SooYuJEh67Ff8+XZsPxZ3kvN+vFMo/+Suu4y1
-   aHL8v9Vi1G1oGmuFZv4pn8G3q+jMTGwUbWO6Vg2lkNKN00604yKpmkvN4
-   80CsMVPClrJ0gEpzYfEukWXV7nOKDhFokqWLldvJ2Xnnn/lIV0vUir0OC
-   23lxaGB0gJa9Gp1OZdLKEIkxikbr1auU+rn/lX9BCxfwzyh5TSobhC0Tl
-   ATZ23s88VpaAXVh3pWEhC6JZ5iqiHw+NP108hYtka3ichKzjS62LiwVs1
-   Q==;
-X-CSE-ConnectionGUID: eEsYC1NAQKy+gWa2wZDrpw==
-X-CSE-MsgGUID: P1lbD3ryRbCwRTbhQlOvqA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11699"; a="233656338"
+  bh=MsL5VLD3v5XroD+XqJWWt9GEEmtwOsB6yozlV43Db6A=;
+  b=Z1RAzMCQwbOpZFak3gFa0UssZaFNCQQGaz4tfZ+zpg3mQ6kvEsyqTiUO
+   5EIisze2VYbdpEtlxnVx58zIHW8pAJ3gGM1xDOHpRVuNAGEwxFpH+/F2/
+   d8j9Ply4jJMCaLl9elU0BcuRXaA3ghA5+qKg/nEZsNmDFUEgzQZ1lB71L
+   1yC9zQGnS7hfIRJG6uC+wLRhZvkk8rgyIEqg2L0iz6yk+n4Dki5QdI8Xf
+   mTPLiYOB+fSjr6LmWyRspWQYTIWsbPY3bNN4KOqGyQdAyM/V612EOmavU
+   uddvnilphIq2sw5pvwn/0OGaAozIW1Rj1fk8+Pw7p4cgHKLotr02oRCsl
+   w==;
+X-CSE-ConnectionGUID: RHtYz5szSbGTpxuLajbqRg==
+X-CSE-MsgGUID: A3tL0PozRaa91gTCHp4lHw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11699"; a="229504921"
 X-IronPort-AV: E=Sophos;i="6.21,288,1763391600"; 
-   d="scan'208";a="233656338"
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+   d="scan'208";a="229504921"
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr4.fujitsu.com (Postfix) with ESMTPS id 102804071C8
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:20 +0000 (UTC)
+	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id D36521C000A8
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:15 +0000 (UTC)
 Received: from az2nlsmom4.fujitsu.com (az2nlsmom4.o.css.fujitsu.com [10.150.26.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id B187A1C00CCF
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:19 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 75119C01826
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:15 +0000 (UTC)
 Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id 7D58E20000F8
-	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:17 +0000 (UTC)
+	by az2nlsmom4.fujitsu.com (Postfix) with ESMTP id 2483220000EF
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:12 +0000 (UTC)
 From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][PATCH v2 5/5] hotdoc : Add new recipe
-Date: Fri, 13 Feb 2026 18:10:05 +0800
-Message-ID: <20260213101006.21517-6-liuyd.fnst@fujitsu.com>
+Subject: [oe][meta-python][PATCH 2/5] python3-toposort: Add new recipe
+Date: Fri, 13 Feb 2026 18:10:02 +0800
+Message-ID: <20260213101006.21517-3-liuyd.fnst@fujitsu.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260213101006.21517-1-liuyd.fnst@fujitsu.com>
 References: <20260213101006.21517-1-liuyd.fnst@fujitsu.com>
@@ -58,272 +58,30 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 13 Feb 2026 10:10:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124386
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124383
 
-1. Backport following patch to solve build and runtime issue
-  0001-c_comment_scanner-fix-function-prototypes.patch
-  0002-avoid-third-party-backports-dependency-on-sufficient.patch
-  0003-CMake-4-compatibility.patch
+Add this new recipe for runtime dependence of hotdoc.
 
-2. Add do_configure:prepend() to solve buildpaths QA check
-  do_package_qa: QA Issue: File /usr/lib/python3.14/site-packages/hotdoc/parsers/cmark.cpython-314-x86_64-linux-gnu.so in package hotdoc contains reference to TMPDIR [buildpaths]
-
-3. Add 0004-Use-flex-with-noline-option-to-prevent.patch to solve buildpaths QA check
-  do_package_qa:QA Issue: File /usr/src/debug/hotdoc/0.17.4/hotdoc/parsers/c_comment_scanner/scanner.c in package hotdoc-src contains reference to TMPDIR [buildpaths]
-
-4. Add clang as RDEPENDS for following reason
-  Hotdoc has some Extensions including c-Extension.
-  The c-Extension needs llvm and clang in runtime as introduced in doc of hotdoc.
-  https://hotdoc.github.io/c-extension.html#c-extension
-  "The extension uses Clang to build and walk an AST from the source code"
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- ...ment_scanner-fix-function-prototypes.patch | 32 +++++++++
- ...y-backports-dependency-on-sufficient.patch | 72 +++++++++++++++++++
- .../hotdoc/0003-CMake-4-compatibility.patch   | 44 ++++++++++++
- ...e-flex-with-noline-option-to-prevent.patch | 29 ++++++++
- .../recipes-devtools/hotdoc/hotdoc_0.17.4.bb  | 28 ++++++++
- 5 files changed, 205 insertions(+)
- create mode 100644 meta-python/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-function-prototypes.patch
- create mode 100644 meta-python/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports-dependency-on-sufficient.patch
- create mode 100644 meta-python/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
- create mode 100644 meta-python/recipes-devtools/hotdoc/hotdoc/0004-Use-flex-with-noline-option-to-prevent.patch
- create mode 100644 meta-python/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
+ .../recipes-devtools/python/python3-toposort_1.10.bb   | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-toposort_1.10.bb
 
-diff --git a/meta-python/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-function-prototypes.patch b/meta-python/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-function-prototypes.patch
+diff --git a/meta-python/recipes-devtools/python/python3-toposort_1.10.bb b/meta-python/recipes-devtools/python/python3-toposort_1.10.bb
 new file mode 100644
-index 0000000000..c26dde93b3
+index 0000000000..ce903dcec3
 --- /dev/null
-+++ b/meta-python/recipes-devtools/hotdoc/hotdoc/0001-c_comment_scanner-fix-function-prototypes.patch
-@@ -0,0 +1,32 @@
-+Subject: [PATCH 1/2] c_comment_scanner: fix function prototypes
++++ b/meta-python/recipes-devtools/python/python3-toposort_1.10.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Implements a topological sort algorithm"
++HOMEPAGE = "https://gitlab.com/ericvsmith/toposort"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 +
-+scanner.l: Fix compile error as the following:
++SRC_URI[sha256sum] = "bfbb479c53d0a696ea7402601f4e693c97b0367837c8898bc6471adfca37a6bd"
 +
-+python3-hotdoc/0.17.4/sources/hotdoc-0.17.4/hotdoc/parsers/c_comment_scanner/scanner.l:126:1: error: conflicting types for 'parse_comment'; have 'int(PyObject *)' {aka 'int(struct _object *)'}
-+|   126 | parse_comment (PyObject *comments)
-+
-+Upstream-Status: Backport [https://github.com/hotdoc/hotdoc/commit/adf8518431fafb78c9b47862a0a9a58824b6a421]
-+
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+---
-+ hotdoc/parsers/c_comment_scanner/scanner.l | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/hotdoc/parsers/c_comment_scanner/scanner.l b/hotdoc/parsers/c_comment_scanner/scanner.l
-+index 0408601..7bccd64 100644
-+--- a/hotdoc/parsers/c_comment_scanner/scanner.l
-++++ b/hotdoc/parsers/c_comment_scanner/scanner.l
-+@@ -34,8 +34,8 @@
-+ extern int yylex (PyObject *comments);
-+ #define YY_DECL int yylex (PyObject *comments)
-+ static int yywrap (void);
-+-static int parse_comment ();
-+-static int parse_define ();
-++static int parse_comment (PyObject *);
-++static int parse_define (PyObject *);
-+ %}
-+ 
-+ %option nounput
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports-dependency-on-sufficient.patch b/meta-python/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports-dependency-on-sufficient.patch
-new file mode 100644
-index 0000000000..560d1257f0
---- /dev/null
-+++ b/meta-python/recipes-devtools/hotdoc/hotdoc/0002-avoid-third-party-backports-dependency-on-sufficient.patch
-@@ -0,0 +1,72 @@
-+Subject: [PATCH 2/2] avoid third-party backports dependency on sufficiently
-+ new python
-+
-+`backports.entry_points_selectable` backports functionality from python
-+3.10 to older versions of python.
-+
-+Backport this patch to solve runtime backports import problem as following:
-+  File "/usr/lib/python3.14/site-packages/hotdoc/utils/utils.py", line 38, in <module>
-+  from backports.entry_points_selectable import entry_points
-+ModuleNotFoundError: No module named 'backports'
-+
-+Upstream-Status: Backport [https://github.com/hotdoc/hotdoc/commit/51043c3ef889e36c8232280581598b875073ded7]
-+
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+---
-+ hotdoc/extensions/gi/utils.py | 6 +++++-
-+ hotdoc/utils/utils.py         | 6 +++++-
-+ setup.py                      | 2 +-
-+ 3 files changed, 11 insertions(+), 3 deletions(-)
-+
-+diff --git a/hotdoc/extensions/gi/utils.py b/hotdoc/extensions/gi/utils.py
-+index 159c2b6..91902cb 100644
-+--- a/hotdoc/extensions/gi/utils.py
-++++ b/hotdoc/extensions/gi/utils.py
-+@@ -1,9 +1,13 @@
-+ import os
-+ from collections import namedtuple
-+ import pathlib
-++import sys
-+ import traceback
-+ 
-+-from backports.entry_points_selectable import entry_points
-++if sys.version_info >= (3, 10):
-++    from importlib.metadata import entry_points
-++else:
-++    from backports.entry_points_selectable import entry_points
-+ 
-+ from hotdoc.core.links import Link
-+ from hotdoc.utils.loggable import info, debug
-+diff --git a/hotdoc/utils/utils.py b/hotdoc/utils/utils.py
-+index 518d308..aef657a 100644
-+--- a/hotdoc/utils/utils.py
-++++ b/hotdoc/utils/utils.py
-+@@ -35,7 +35,11 @@ import importlib.util
-+ from urllib.request import urlretrieve
-+ from pathlib import Path
-+ 
-+-from backports.entry_points_selectable import entry_points
-++if sys.version_info >= (3, 10):
-++    from importlib.metadata import entry_points
-++else:
-++    from backports.entry_points_selectable import entry_points
-++
-+ try:
-+     import importlib.metadata as meta
-+ except ImportError:
-+diff --git a/setup.py b/setup.py
-+index 5d7f131..9ee504d 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -300,7 +300,7 @@ INSTALL_REQUIRES = [
-+     'wheezy.template',
-+     'toposort>=1.4',
-+     'importlib_metadata; python_version<"3.10"',
-+-    'backports.entry_points_selectable',
-++    'backports.entry_points_selectable; python_version<"3.10"',
-+ ]
-+ 
-+ # dbus-deviation requires sphinx, which requires python 3.5
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch b/meta-python/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-new file mode 100644
-index 0000000000..056ad5d340
---- /dev/null
-+++ b/meta-python/recipes-devtools/hotdoc/hotdoc/0003-CMake-4-compatibility.patch
-@@ -0,0 +1,44 @@
-+Subject: [PATCH] CMake 4 compatibility
-+
-+All CMake versions older than 3.10 are deprecated.
-+
-+Upstream-Status: Backport [https://github.com/MathieuDuponchelle/cmark/commit/bd78193dbff98c3860e77629b5c7bfee6169d1da]
-+
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+---
-+ CMakeLists.txt            | 11 ++---------
-+ extensions/CMakeLists.txt |  2 +-
-+ 2 files changed, 3 insertions(+), 10 deletions(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index ff97419..45fdf6c 100755
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -1,12 +1,5 @@
-+-cmake_minimum_required(VERSION 2.8.9)
-+-
-+-# prevent ugly developer warnings because version is set directly, not through project()
-+-# it should be redone properly by using VERSION in project() if on CMake 3.x
-+-if(CMAKE_MAJOR_VERSION GREATER 2)
-+-    cmake_policy(SET CMP0048 OLD)
-+-endif()
-+-
-+-project(cmark)
-++cmake_minimum_required(VERSION 3.10)
-++project(cmark VERSION 0.28.3)
-+ 
-+ include("FindAsan.cmake")
-+ 
-+diff --git a/extensions/CMakeLists.txt b/extensions/CMakeLists.txt
-+index e62d155..b6a1556 100644
-+--- a/extensions/CMakeLists.txt
-++++ b/extensions/CMakeLists.txt
-+@@ -1,4 +1,4 @@
-+-cmake_minimum_required(VERSION 2.8)
-++cmake_minimum_required(VERSION 3.10)
-+ set(LIBRARY "cmarkextensions")
-+ set(LIBRARY_SOURCES
-+     core-extensions.c
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/hotdoc/hotdoc/0004-Use-flex-with-noline-option-to-prevent.patch b/meta-python/recipes-devtools/hotdoc/hotdoc/0004-Use-flex-with-noline-option-to-prevent.patch
-new file mode 100644
-index 0000000000..06adcbd1c2
---- /dev/null
-+++ b/meta-python/recipes-devtools/hotdoc/hotdoc/0004-Use-flex-with-noline-option-to-prevent.patch
-@@ -0,0 +1,29 @@
-+Subject: [PATCH] Use flex with --noline option to prevent adding #line to c file
-+
-+To fix following do_package QA Issue:
-+
-+do_package_qa:QA Issue: File /usr/src/debug/hotdoc/0.17.4/hotdoc/parsers/c_comment_scanner/scanner.c in package hotdoc-src contains reference to TMPDIR [buildpaths]
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+---
-+ setup.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 9ee504d..9bbc744 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -365,7 +365,7 @@ class FlexExtension (Extension):
-+ 
-+         self.sources.append(built_scanner_path)
-+         if newer_group(self.__flex_sources, built_scanner_path):
-+-            cmd = ['flex', '-o', built_scanner_path]
-++            cmd = ['flex', '--noline', '-o', built_scanner_path]
-+             for s in self.__flex_sources:
-+                 cmd.append(s)
-+             spawn.spawn(cmd, verbose=1)
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/hotdoc/hotdoc_0.17.4.bb b/meta-python/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-new file mode 100644
-index 0000000000..081a8d9607
---- /dev/null
-+++ b/meta-python/recipes-devtools/hotdoc/hotdoc_0.17.4.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Hotdoc is a documentation framework"
-+DESCRIPTION = "Hotdoc is a documentation micro-framework. It provides an interface for extensions to plug upon, along with some base objects (formatters, ...)"
-+HOMEPAGE = "https://github.com/hotdoc/hotdoc"
-+
-+LICENSE = "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=90263a49bc1d9a204656fec4d5616c66"
-+
-+SRC_URI[sha256sum] = "c4d5dff647f03aa87a1d2d06035d2819edd099b91635e3b2ee390829357ae9fc"
-+
-+SRC_URI = "file://0001-c_comment_scanner-fix-function-prototypes.patch \
-+           file://0002-avoid-third-party-backports-dependency-on-sufficient.patch \
-+           file://0003-CMake-4-compatibility.patch;patchdir=cmark \
-+          "
-+
-+SRC_URI:append:class-target = "file://0004-Use-flex-with-noline-option-to-prevent.patch"
-+
-+DEPENDS += "libxml2 glib-2.0 json-glib"
-+
-+inherit pypi python_setuptools_build_meta pkgconfig
-+
-+#Fix LIBDIR path to fix buildpaths QA check of hotdoc/parsers/cmark.cpython-314-x86_64-linux-gnu.so
-+do_configure:prepend:class-target() {
-+    sed -i -e "s#'\"%s\"' % CMARK_BUILD_DIR#'\"${PYTHON_SITEPACKAGES_DIR}/${PN}\"'#" ${S}/setup.py
-+}
-+
-+RDEPENDS:${PN} += "clang python3-appdirs python3-cchardet python3-dbus-deviation python3-lxml python3-networkx python3-pkgconfig python3-pyyaml python3-schema python3-toposort python3-wheezy-template"
++inherit pypi python_setuptools_build_meta
 +
 +BBCLASSEXTEND = "native"
 -- 
