@@ -1,85 +1,69 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41524EF99CA
-	for <webhook@archiver.kernel.org>; Sat, 14 Feb 2026 01:35:58 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4387.1771032956805255709
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5923BEF48C5
+	for <webhook@archiver.kernel.org>; Sat, 14 Feb 2026 14:44:14 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6958.1771080249945237522
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Feb 2026 17:35:57 -0800
+ Sat, 14 Feb 2026 06:44:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=e/igzOHG;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1771032957; x=1802568957;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=UrjTxlkbrHmdXgJN3lsIV2ZmeYgiSbxGlx7pG2m+aYY=;
-  b=e/igzOHGTIFYf6/Zx50d2Dy56x+PHp4DSwWf2VPypmeKHCAHwn75TDMv
-   b7biIPKL4U/RhV0bw9axIt33H5U4cj8/Cu5HsnT7Aaq6X1RlYfsNwpRzO
-   7HWf7a3ymZ35g8TuP9D1Pfo4E+5g07o9SS62UH2wbdqNFiNOv2TWg6cQR
-   KpKo4gdl+jvD1ASvgqfrSjl98aqD05pIWm+ob4Jr55zrtuNsnjAteZI0L
-   r7L4wEVhDRWNQAwUgAp4xmbzwrLy3V5FI5LcW4ap9Fvg9e6HHGY48oqMD
-   ZnbQkyGWv8IVXfqttZxbjK8ch6ZLuWGQlVSrKeqNrVnXZRnv72Pj2uwu1
-   g==;
-X-CSE-ConnectionGUID: 39OlzvMORFW2kHVbmZWwyw==
-X-CSE-MsgGUID: a/l7wr9ETfeDiT8zo7+AeQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11700"; a="218193695"
-X-IronPort-AV: E=Sophos;i="6.21,289,1763391600"; 
-   d="scan'208";a="218193695"
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id E31721C00092
-	for <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 01:35:54 +0000 (UTC)
-Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 92F981C0097E
-	for <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 01:35:54 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.135.3])
-	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id 3504D403B67
-	for <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 01:35:51 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout01.t-online.de (Postfix) with SMTP id E75951C18C
+	for <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 15:44:07 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.37.49]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vrGsJ-2iQjJ30; Sat, 14 Feb 2026 15:43:59 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] tigervnc: Fix do_rootfs Error
-Date: Sat, 14 Feb 2026 09:35:47 +0800
-Message-ID: <20260214013547.22916-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-oe][PATCH] iwd: update 3.10 -> 3.11
+Date: Sat, 14 Feb 2026 15:43:53 +0100
+Message-ID: <20260214144353.398923-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1771080239-E4FC7FB0-61981962/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2a178737-6cae-42f4-b127-1f2b1fc3269d
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 01:35:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124400
+ <openembedded-devel@lists.openembedded.org>; Sat, 14 Feb 2026 14:44:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124401
 
-Fix the following error:
-ERROR: core-image-minimal-1.0-r0 do_rootfs: Postinstall scriptlets of ['tigervnc'] have failed. If the intention is to defer them to first boot,
-then please place them into pkg_postinst_ontarget:${PN} ().
+ver 3.11:
+	Fix issue with interface registration before acquiring name.
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-connectivity/iwd/{iwd_3.10.bb =3D> iwd_3.11.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_3.10.bb =3D> iwd_3.11.bb} (=
+95%)
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-index a5413a9108..12854632d5 100644
---- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-+++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-@@ -95,6 +95,7 @@ FILES:${PN} += " \
- "
- 
- SYSTEMD_SERVICE:${PN} = "vncserver@.service"
-+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
- 
- CVE_STATUS[CVE-2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.15.0)"
- CVE_STATUS[CVE-2023-6377] = "fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)"
--- 
-2.43.0
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_3.10.bb b/meta-oe/recip=
+es-connectivity/iwd/iwd_3.11.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/iwd/iwd_3.10.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_3.11.bb
+index f52472adf8..c4956fb22c 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_3.10.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_3.11.bb
+@@ -9,7 +9,7 @@ SRC_URI =3D "https://www.kernel.org/pub/linux/network/wir=
+eless/${BP}.tar.xz \
+            file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-fo=
+r-e.patch \
+            file://iwd \=20
+            "
+-SRC_URI[sha256sum] =3D "640bff22540e1714f71772a83123aff6f810b7eb9d7d6df1=
+e10fb2695beb5115"
++SRC_URI[sha256sum] =3D "85730e79de05978e26e44b958fd11e2ebb45424ca181f8db=
+7a8daf25fc2226ea"
+=20
+ inherit autotools manpages pkgconfig python3native systemd update-rc.d
+=20
+--=20
+2.52.0
 
 
