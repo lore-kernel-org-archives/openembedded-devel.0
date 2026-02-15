@@ -1,113 +1,99 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04A8FE63F12
-	for <webhook@archiver.kernel.org>; Sun, 15 Feb 2026 20:04:17 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5510.1771185850178958695
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A05CE63F14
+	for <webhook@archiver.kernel.org>; Sun, 15 Feb 2026 20:20:47 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5801.1771186839748536917
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Feb 2026 12:04:10 -0800
+ Sun, 15 Feb 2026 12:20:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fMbTorpE;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-437711e9195so1727993f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Feb 2026 12:04:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cm4vKj1L;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-79495b1aaa7so23687767b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Feb 2026 12:20:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771185848; x=1771790648; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=UCtEWEdCp4K1pHxo42Hiz6T/pWnIu02V0GBBi8J2ENc=;
-        b=fMbTorpEmc21VIwQ3sCLotB7oGAomv43VAGDidSCMtxemjHfuTFdU2abS4URyOJ3FX
-         9SWm6EV2HJn+80qL44wTZrKNq0pnB1lubRYIAwL+j+qag8bcoVCIiLisMc7gwL9apBN/
-         xooSsXSNrq2onWhXYZ5vb2LNg/+5rAAhSaGBrkIec7oYgs4u0H/KDgd/nWfV4h7Vq2eV
-         1Y60iBBVGp+jv4yAJGK7n8u+Wmn1L5K1DywUrMUjjj58YHPC29avtHM4mlSfbNw7zats
-         LhWbNq++6+yrDeBYGV5MkMzQVsLkL463dGS8hdNkSqDH1YFK7gNkgvW2rHXNk5BiJcc+
-         G9TQ==
+        d=gmail.com; s=20230601; t=1771186839; x=1771791639; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0H10GMmvbQkW2jQbVr4xtJsOIHqWwpYTbWC55d0bsVM=;
+        b=cm4vKj1LnGqEJqScrjkmjRm/YWC/ZaaaizYmojHfaxOlh63KOxZ9hBCUTvBCyrdUXH
+         ikUyIvgxo2kZXUvq70cI+eFgWGmx1BupSxHdFXritO4qUudMFjpi1Qoq2EwXaL1tN1S3
+         co9sUExGo/nGkd6LzR6HOhH92jA55evZfggeL2iAxPPYKdEbAJVpifkVUrsYTDJU84ua
+         4J+WQHrGcUgMx5EonILADRn6BVF7mCki/E84guSxJTUcPCGu2oQwO5tR5mbgHQHiORxY
+         nJF0OLNFXonwhJwTpoVWqAGopyt+a1cU8GhsVZp25QHDH2heTXKQhIXVn7Uc55DE7v3f
+         g7kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771185848; x=1771790648;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=UCtEWEdCp4K1pHxo42Hiz6T/pWnIu02V0GBBi8J2ENc=;
-        b=idCZVsGr8Y1opRKWp+I9Mcn1TflPNAXcuCD3WYmIOEy5I0k9RYA8rDVmeGp0tGRCvT
-         qPSUJgUCJdIFmBeXmlxqMR64DacrRt96ZD0efwQrByd9qWBvOwzJbuQ4dnO1sZWNMxsT
-         Rnl2yZ1Pjxy0yNhPHemh+L7Ma1TteD6lKap/3v6gipl7Mkd+QGoUN9na5pa2ZjjO3nle
-         rLIJXC0W7oh4O5qugTT1rnEaAFtFFf527JbKj/GeREMQ5BxUJRBtUL8B1Uc4+PYibrEZ
-         U+xpdqPf3tBu6K5I4sEbBjE0WLLAEhzg3NVkngtfunGzmwZXLZqHHe1SP7Z0ufzKWFRJ
-         fdNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXr8+m7DBfntmWZjjRAYkzOtccRjODh2+9j5+vg6dBGqyHT9msCBz+ps+sxrqst8zsvUnJyino1fzDb9Q1kbj/b9QI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzM8cSVfDXO+1biTZ7uJgNUtDTyl0v9kQUHRRdmy4RZVoofbiAA
-	ZyGTyuvESaFPbBRFtXiNC3zpU5zDcFy4eCFScRIHidIZmJj7MKusV+6D
-X-Gm-Gg: AZuq6aLEdZ0xqb0VM9N7aijNLTE7qXUjfNRMfSn2c8yIHGmuKTRpB4O30hU28hNsK01
-	cb/UgJy/4bXC/+6xaxx/pSk3N/3QbjNGa+4uchk5MdtClK62t6cr1e3YQ136mP98zt8hscbNXGI
-	aqETNmaM9LyPOOsAqSEeMpGPKg4b5CsHbFap3s1hZkM6uU1yaqMA5RRLhpN+/XFBO83rk+Gp6Ie
-	PDnDHR/ejFi0BSxToTOS2u4ET9coV/+OWC+Z31BcZOtb1h7/r4nVB4/EdVnjVjb99N0YuQmgpLY
-	a5Qz+liiO3Myb1fuuxSc+jO9O0W98H52SJPMsCXzqnFOX5Lv1KHtrjDRkkH9u1ttc6vV3WUNvaG
-	Zc3c/Jdwcaj4b6OqV0RKJbIFM2WXS5EL5iRixZSa+KQ5G9ktRm3j6jzde9LqYZRK1clH1h8+eVk
-	KiaB+PBq1/jy7yTC9gPaAU4Yyrmm9HNoM=
-X-Received: by 2002:a05:6000:26c6:b0:437:6ca8:3ee3 with SMTP id ffacd0b85a97d-43796ab18e8mr17396820f8f.5.1771185848332;
-        Sun, 15 Feb 2026 12:04:08 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796abc9b2sm20030901f8f.21.2026.02.15.12.04.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 15 Feb 2026 12:04:07 -0800 (PST)
-Message-ID: <e9706102-3c2d-4173-99ab-32116e0a49ce@gmail.com>
-Date: Sun, 15 Feb 2026 21:03:58 +0100
+        d=1e100.net; s=20230601; t=1771186839; x=1771791639;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=0H10GMmvbQkW2jQbVr4xtJsOIHqWwpYTbWC55d0bsVM=;
+        b=EJX0Zut5OAV3ftk2LkWLDg6H1M6cScLwVTeDMWDgn5uxhFffB5lkAvC/tHmeIoHugN
+         xn9VDNB0LXI6vpg2SP1Xy9lozKA2UXsSdRQkDWjGPLNDB7kizxF6zX5DhUcw7Cs9AnI/
+         /zAaBiOeYvCyxCNeY8t1PjMSPLvoOmFYhgZsKE/BGYzdKnMEpOD//Kpz6fZJSNeupSKX
+         mGt3P9tgQHFt8BAvbXZ03nnyCTrlQFQEVCiGD3Mg203Uks0WsD/C7nZNmxsFZDWAaAtt
+         KZZ1evm9BQf32tXLzeqSiN/0bR+83oi7slHaDTUPOHSD8iS/WivNHLIDPgQ2xHSNAC0O
+         46zw==
+X-Gm-Message-State: AOJu0YyVQcx30QmQ78MaPCpeiMllxmQA0BZDykOnbxBZw1sqejyflstO
+	oLeM4AO1OkSTx4yrOetiUR/8wf2pQLdZD8xFNiXcr4xFgGDkRnLqNKY0ziQgXD4n
+X-Gm-Gg: AZuq6aKq+EZoznrtR/1KdCyLgeuuGXnzyS65Eivj1NKgNI3ggVy8TTFI2SRgLN2Jd4O
+	IKl90fIozslcgp24uxLM8weyO/svIPOwIkLYHbSB0xMnecHqABs8hldtEao0Thqz9eOMfZnjv5T
+	z+1p80C4dJul71cmsOikQU+kZhXYx/2bxnVYh9/8WbRLzpr3hZfWYN1asiAW9QE1rLopsCzuAgq
+	SQyaDcvJ1lFfj4kQZIcTBjFiFHKQuSqgH1patyWglFW2gjldpz3XD7l7x8NqCVgn1MOKTYS5wpm
+	bIYBpwSGzgeh+9qV9x3AWe/YOnXS62buunxYnfKQ8WtgW2G+SSGeBoTXrfn2JFnEqcbjWSYa0Vj
+	NE+xR0odSj7FcxgW1XxdGm7cvHbKGLNs9YB1NpKH0muFdSabjSSCpS+4jf1LQR8EMxdO5Huc/F/
+	StlR40NRPHdDY8P7av8DJxdmZZTSmVQv8i1PHl/kg0c9hsYjenTTdA/iy+dNaJZc+tz7oAHBxrd
+	dnOA15mzlqPvwr1nTThVLlRco8HYE8bDYgx2Guo5eTUUPgPHsF7zfK5mYtwMg==
+X-Received: by 2002:a05:690c:4990:b0:797:afeb:de55 with SMTP id 00721157ae682-797afebe4b0mr42453807b3.32.1771186838565;
+        Sun, 15 Feb 2026 12:20:38 -0800 (PST)
+Received: from localhost.localdomain ([67.233.59.72])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7966c254d82sm93309137b3.39.2026.02.15.12.20.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 15 Feb 2026 12:20:38 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH] php: upgrade 8.4.17 -> 8.4.18
+Date: Sun, 15 Feb 2026 15:20:23 -0500
+Message-ID: <20260215202023.191218-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-oe][PATCH] tigervnc: Fix do_rootfs Error
-To: liuyd.fnst@fujitsu.com, openembedded-devel@lists.openembedded.org
-References: <20260214013547.22916-1-liuyd.fnst@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260214013547.22916-1-liuyd.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Feb 2026 20:04:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124406
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Feb 2026 20:20:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124407
 
-On 2/14/26 02:35, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> Fix the following error:
-> ERROR: core-image-minimal-1.0-r0 do_rootfs: Postinstall scriptlets of ['tigervnc'] have failed. If the intention is to defer them to first boot,
-> then please place them into pkg_postinst_ontarget:${PN} ().
+This is a bug fix release.
 
-How could I reproduce this?
-I added tigervnc to IMAGE_INSTALL, and built it once with systemd as
-INIT_MANAGER and once with sysvinit (also added systemd/sysvinit to
-DISTRO_FEATURES), but the build succeeded in both cases.
-Am I missing some config step?
+Changelog: https://www.php.net/ChangeLog-8.php#8.4.18
 
-> Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> ---
->  meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-> index a5413a9108..12854632d5 100644
-> --- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-> +++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.16.0.bb
-> @@ -95,6 +95,7 @@ FILES:${PN} += " \
->  "
->  
->  SYSTEMD_SERVICE:${PN} = "vncserver@.service"
-> +SYSTEMD_AUTO_ENABLE:${PN} = "disable"
->  
->  CVE_STATUS[CVE-2014-8241] = "fixed-version: The vulnerable code is not present in the used version (1.15.0)"
->  CVE_STATUS[CVE-2023-6377] = "fixed-version: The vulnerable code is not present in the used xserver version (21.1.18)"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124400): https://lists.openembedded.org/g/openembedded-devel/message/124400
-> Mute This Topic: https://lists.openembedded.org/mt/117803450/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+---
+ meta-oe/recipes-devtools/php/{php_8.4.17.bb => php_8.4.18.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/php/{php_8.4.17.bb => php_8.4.18.bb} (99%)
+
+diff --git a/meta-oe/recipes-devtools/php/php_8.4.17.bb b/meta-oe/recipes-devtools/php/php_8.4.18.bb
+similarity index 99%
+rename from meta-oe/recipes-devtools/php/php_8.4.17.bb
+rename to meta-oe/recipes-devtools/php/php_8.4.18.bb
+index 72901f2a34..a9be742317 100644
+--- a/meta-oe/recipes-devtools/php/php_8.4.17.bb
++++ b/meta-oe/recipes-devtools/php/php_8.4.18.bb
+@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+ 
+ S = "${UNPACKDIR}/php-${PV}"
+ 
+-SRC_URI[sha256sum] = "ea67d83d72dd6f3abaaeae7f532f78fd12192861d96aba8e9eca3b2ddade42d2"
++SRC_URI[sha256sum] = "586b32d92cebcfbca495c5f6ad1a33640553d0a9c0bfd2e6715334d959cf9858"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
+-- 
+2.43.0
 
 
