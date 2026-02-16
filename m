@@ -1,108 +1,93 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F15EE7BDB4
-	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 12:30:12 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18536.1771245004027855519
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A6ECE7BDBA
+	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 13:04:02 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18864.1771247034223165332
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Feb 2026 04:30:04 -0800
+ Mon, 16 Feb 2026 05:03:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=q7yKueg3;
- spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48379a42f76so17135675e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 04:30:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=B9tiQSti;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-43767807cf3so2330017f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 05:03:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1771245002; x=1771849802; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9cdHZp5OkzqqY0DmmHOkXXHGsTvHU4b3u3OgzZQN3gs=;
-        b=q7yKueg3UKNrR2OyJjYWSvxgMSOP0Zu9LjcQZgYOKxLALhNlYVhjcEx16TyhtybJmv
-         Z7Ti1s3YpXHnlhwNzevQvFcbMlOr65xBeJfHkNyZnWHL8yjlqbTUP/sg4JBVQPyMGibF
-         rjrVUu+aYT7Zs251BHlvbgbhTNwDI8+Xm5jiA=
+        d=gmail.com; s=20230601; t=1771247032; x=1771851832; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bevcRx9MYcqwtHD9DxsTAilCBfZC6hUp1242RN42Fmo=;
+        b=B9tiQStiEoEW3GqubGcKFFe+iUBRXDmUDhDSH0vI5/iQJ6PMAff8Hu3RFSXV2d1+Jy
+         W5qC3lDk+wnxec73IarKIIHJ2SCVzLcmSp7eewTi9xfu8Vj0ltNgxeadBXWqswExRH8c
+         L5oH77FrDMYOA0blbP5ttvvz+z6wCUKh4uOYy0buiqu3PEwYufwG3qrVZZx70AJ1DJWU
+         Tbmy94vMJz9tp8u9rceFadTdqOqPWy9KxcPFyNfXp/i5UXBnVYer8FeOT5FDVdWp5Pqy
+         SgsOlUQQ1MGgflR6nsPtsYV4HKQVkS3HPSSO0/4pL3MG8MNZXYz/fglf7GKQkbxhdJWl
+         bOXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771245002; x=1771849802;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=9cdHZp5OkzqqY0DmmHOkXXHGsTvHU4b3u3OgzZQN3gs=;
-        b=OYCCPtbWFsb+aKiFfj/yXVhrKHHS5Tngq1GuS8EzF95MzMpJ7LiyH/bZqHDAo4WLtf
-         gwdPiO4GoYmmCviVhZHIfaBUFc5F0/137jwzidGnF58yxJKb7RCEiNt3x9ZmIbjx8h7K
-         Cm0EZizqLYZORp+IAXBU8BwOIgZHk7h0sNdqhZCuv5dMa1asTvMFg7pyb7pyoIV5egmI
-         wLw6UsICfbB70WhMFUpyRrEkaSGxEuzU7OKowMsJePil7pW98YhMPvCYfWlj05Vq8WfK
-         mhkVjVik0CqAnXdHjN+dHd/7wn/uFmOjDJPFNmj+UwRtGhdOhQM733Ttd45npxMeixdp
-         tY2w==
-X-Gm-Message-State: AOJu0YwAZfx0MogeNoyzgA0rTqllGKDWefGO8JeCBNUCglKB2aegec8n
-	lnfBz0+iy5ulORSULqqhZuvyzqsJroaiWE7ivH+hJDsBvuK8TDWLG6x07kd3u9EEjSaUMJlUcMV
-	JU46V
-X-Gm-Gg: AZuq6aIU2dWx3gBQojgabt9Bl22UNqAR7c9j8w9tpXbU9IBReKih8fb06FVLr27w33p
-	m8RqSob0MC4Z/WR35XBarfZaqGXQ7FBhaLtqiqgww0XCz8BQIBZr0fdBKoSddva7O4sT8QiBi7q
-	SQDrOLI10gnHE+3RsbQrANiSUFy6pWlSXOBpfEzQxaQe6dL5Np/u+blWTAcFNXTXfH0HomSy/A0
-	LLwtUrVJv7SfAKUpjKhKKjKF+kbsTayoMwcOUHQXFOO/IZWxSlXXvxZckP5gbqkxMz0moESbnoI
-	wL0dREDldZRPEi5iFRVSUWcMKS8ugE3WTbNzK4i4n4GFzkFNQczt4TUeyGW5xiRMs7W8w13UavX
-	w1Mtk/08K25tbBXEHVdq9JRK0PyADCBtg09a4qYsRvFyKpzJdRadtzXD6IA2Qrf5Ry7KC7leHiR
-	t9eI6a9BTLMlcHh04/bhiGj0lIbYVkqrU9TQUz
-X-Received: by 2002:a05:600c:4e12:b0:483:56c4:73ac with SMTP id 5b1f17b1804b1-48379bac8d4mr129088115e9.7.1771245001943;
-        Mon, 16 Feb 2026 04:30:01 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4835dcfafcdsm664423415e9.9.2026.02.16.04.30.00
+        d=1e100.net; s=20230601; t=1771247032; x=1771851832;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bevcRx9MYcqwtHD9DxsTAilCBfZC6hUp1242RN42Fmo=;
+        b=dn5RWy4JufgtfHPSutGbSaMfJ5sXRnwgdLNzLwALDsYR3uno0N1QjdT9n39zVlG6vn
+         kMB4GnGRj5B+rQcbQY1hYVHiHdXIp5hK/QfmuhnR8Pd5TzII++6fI+2c7iZG008e63nJ
+         je9vkOCiGsGeRbt6SDfWpWVwdzkeP4C9VquJeNZtmwlPBqJ6s1rrKw5OzF+yYRIVsBgr
+         G37O1ies0rcvhouZwCn5paA2fOhKQUiuauVm+EIaeqvlga6amL6TECB44MmKY+51SCG2
+         qdShmvxqom2Np8xUmcS37dQ42y41hvyul9jDDHDEZu6i7ESx0DcHSxjEQC6hQS16mL0C
+         79Yw==
+X-Gm-Message-State: AOJu0Yxb0Z+KsRk+kWW7llprOBdlObnFfzLu1Q834rUdzh2FBA0kTwFg
+	0Airtp42VdSufS+p3uZrEVAI9BGyiqr+hpq7kjBBKdfXa15H8/VtDwn+4BHa7A==
+X-Gm-Gg: AZuq6aKhFZAIhRdfH1Fz5THIOdLzZG9d1G+fxhAR9kzj4lgX6za8sXavRYL2kyCjdNy
+	jnmgfiAd/bi/i4FX3ua+4E+2ct32EanM1FpcDMtLVULcNV/BVBGUlqRYvtWvSCIj6ta9XCobv6I
+	8hlWdKxugrb0ZyDir0Ac+SoORvhxb//Ckp9c4R5O7jTBGcKnpSnFgJVAHHBqg6wdSn08TIoSEVg
+	HA3btKeNT/NdeP+DtTC3NGaI62pX9JoGLAdNm9jKND9Uja/SN+01hLT1QXqIdM4ikthshWgBSSR
+	CQrdrRFaaeOKsGM0DtYjY6bMIlsAp9AyYgCUy45bdFY/pDiCanropNC9IKmfYbeJ3VX4LiBqorn
+	6WiFdylLi3vFocdJjGAX9tVTOd6gOGc5e3ON2rpFLuL3jblaUiJeH3rymVuRqpVr2dAXv2a6qoI
+	jYQct8uGR/5OqGEi3tdUr9
+X-Received: by 2002:a05:6000:40c7:b0:437:6c9c:5d57 with SMTP id ffacd0b85a97d-4379dba7566mr14041425f8f.58.1771247032220;
+        Mon, 16 Feb 2026 05:03:52 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796abcda5sm30386491f8f.19.2026.02.16.05.03.51
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Feb 2026 04:30:01 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 16 Feb 2026 05:03:51 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 5/5] python3-trio: Upgrade 0.32.0 -> 0.33.0
-Date: Mon, 16 Feb 2026 14:29:55 +0200
-Message-ID: <20260216122955.2642743-5-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260216122955.2642743-1-leon.anavi@konsulko.com>
-References: <20260216122955.2642743-1-leon.anavi@konsulko.com>
+Subject: [meta-gnome][PATCH] yelp: add opengl to REQUIRED_DISTRO_FEATURES
+Date: Mon, 16 Feb 2026 14:03:50 +0100
+Message-ID: <20260216130350.259336-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 12:30:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124422
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 13:04:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124423
 
-Upgrade to release 0.33.0:
+webkitgtk3 requires this feature.
 
-Bugfixes:
+Also add wayland as an optional required feature, to match the
+requirements of webkitgtk3.
 
-- Start supporting Android's new "android" sys.platform.
-
-Deprecations and removals:
-
-- Both trio.testing.RaisesGroup and trio.testing.Matcher have
-  been deprecated. Pytest alternatives pytest.RaisesGroup and
-  pytest.RaisesExc (respectively) are considered correct
-  replacement.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python/{python3-trio_0.32.0.bb => python3-trio_0.33.0.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-trio_0.32.0.bb => python3-trio_0.33.0.bb} (86%)
+ meta-gnome/recipes-gnome/yelp/yelp_42.2.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-trio_0.32.0.bb b/meta-python/recipes-devtools/python/python3-trio_0.33.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-trio_0.32.0.bb
-rename to meta-python/recipes-devtools/python/python3-trio_0.33.0.bb
-index cc23d3070e..8bb4514649 100644
---- a/meta-python/recipes-devtools/python/python3-trio_0.32.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-trio_0.33.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=447ea202d14d2aee40d8a2c26c865da9 \
-                     file://LICENSE.APACHE2;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://LICENSE.MIT;md5=5f229c828e5a6f0a2ce90c7d3c054721"
+diff --git a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
+index 14986f2650..e1c9324940 100644
+--- a/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
++++ b/meta-gnome/recipes-gnome/yelp/yelp_42.2.bb
+@@ -7,7 +7,8 @@ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc features_check mime-xdg
  
--SRC_URI[sha256sum] = "150f29ec923bcd51231e1d4c71c7006e65247d68759dd1c19af4ea815a25806b"
-+SRC_URI[sha256sum] = "a29b92b73f09d4b48ed249acd91073281a7f1063f09caba5dc70465b5c7aa970"
+ # for webkitgtk
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "opengl"
++ANY_OF_DISTRO_FEATURES = "wayland x11"
  
- inherit pypi python_setuptools_build_meta
+ SRC_URI[archive.sha256sum] = "a2c5fd0787a9089c722cc66bd0f85cdf7088d870e7b6cc85799f8e5bff9eac4b"
  
--- 
-2.47.3
-
 
