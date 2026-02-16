@@ -2,69 +2,69 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C691FE7BD95
-	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 11:19:51 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17618.1771240789003010101
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BFADE7BDAA
+	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 12:06:52 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18113.1771243606257228078
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Feb 2026 03:19:49 -0800
+ Mon, 16 Feb 2026 04:06:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iCF6lDPU;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-436263e31abso2950101f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 03:19:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bROYcloj;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4836e3288cdso18870765e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 04:06:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771240787; x=1771845587; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1771243604; x=1771848404; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ddLITrcWV379oaOqTisd3A5vVaJcIoZIk4v7eVHaEQs=;
-        b=iCF6lDPU4jFR+mkccdOA2imnCsW/nFPTFUF2RWsjOtJwAlWsa3bt98TADVjGjHXvbn
-         OJdANac71iZ4+U9bbEkrnauNYmI1H1h3SbTnkcRJ6RpHivEn9FMklrpIWPir6LPQcDcJ
-         C+542/woYLjCuQ0xlOpku2maFuhe4TiFTE7C1gFPrZdhSSqaagTDEJRT7y2hiD+cITGX
-         7WYJ4IYucWnyQ7/x+CLI2sohL2ZrIyfjbHGoQsCouUoHds8f6Bt6eoPKqDJJP9qXsBgQ
-         Yed1AFcHtWm4EC/JB6jOs370Sa3s0vwhdzAr4Dz93eklPPs2Q3a4GIpdFQ914GwqyoU9
-         FvpA==
+        bh=82tzUwMZx7gGC7Kp7xlQMy87tYMuSBTN30Tk8Z2Achs=;
+        b=bROYclojRK0HuwBIz+pQV94L1Nw7bTl4kYmmLmjRzg0JJh9PGpYYS1FSFTtD8GPxNH
+         8q2C1KDqd91NKTjqveJtuHrjNyzk99BuAbHBUCIgNdBau1w4S8izqfL3aOLdeMGuV/2p
+         syrireeo6ZsHzuDKQoVtbGT9QJ5+9sTbW2HFn6l2t/+crcPNj4/Ddf74G/2+FUjpQI6z
+         xMLz6T/MQHszGuRrJSxPwlCOULk5l7MxKlFGcU0FaXJa5R2DTBEaUF60ACnqBxocS+YO
+         pXXmK5IYxg7bkIvdNGergdiuY5g904e7U7p123a7HCo7mG3a9jOlV9RpPLoDK90qCmE+
+         PE+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771240787; x=1771845587;
+        d=1e100.net; s=20230601; t=1771243604; x=1771848404;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ddLITrcWV379oaOqTisd3A5vVaJcIoZIk4v7eVHaEQs=;
-        b=bwcB4VfPHElJSgLIGWJumQLdO70pixlvNKW0RaCo4Jy7GJMItylY1WjeSQscRTuD2i
-         rNuF1dSho8wv6Ai4rUdP/mdfjKVWazAgpLI1wJ9iw9n/Z+LgyFxidaZLPWSQY1ffvRo3
-         LPXifCxyXsY6NAfVdRyKpwh4USqcvkdlZne0u5skqQpITg8CI9lifVgFP/DrlSdssRDe
-         r0J2aX3LLQq7J/82zrf+bpHacCNfpfnTocoi4xhjYYv2j8qm8qwRR9p83+5RWsPKhAqQ
-         hK+3TpikCYJ4w1yM5UzDyzOf7tsTQmFGrd5NZ+j0Q6AIgJj4Z/u3EqXtagHran7m7J3/
-         v+Ew==
-X-Gm-Message-State: AOJu0YwZZWG0hjvgfkaiN4EHEhIGVXIWJq77cAfFGOxYvG4KZgILjiab
-	5dzR2g7r+L6P9M5Fkh/E6XXcyPxmHsSHzJjU25uz+w0SOONEQaQDK4+E4EUNTw==
-X-Gm-Gg: AZuq6aKk8YkwOinuqEJhijXImOnWEKdpbfZYbQ5YBGBZGzIX6LzhWQHI02X7llTNeyY
-	4gAdD4IIdRaKrgux8X85ci/iF0zpN2vqfMfUYAzjZ2Y670TSVmFmRPWL9eMGxDaBLTd2pFGqcWl
-	dKUV5TwKErBnPLfjHstbZUlm5+JRnI8HiMd0O66Cl0pVz4vtaXW1dggOZJGdJRNsyPg7h0gEwof
-	bx1Wat25aTgP81gmNMj7iBenChKGFGDHjKqIdFzsFUmdA+rEse3oIzLaHtChjxUdWq8b8d/69qX
-	CbtFteek6jvVpFETLO1+UxKlYu30AjE6MRC5O0GG2gQhBP1gn0mJuXx8zIiKHaU9eKVy3EiWlKZ
-	2LMGcRzJEsSe6rHo75Wc5ZI71MLjSYzed3epGP/MWyY/753Susu09LOQmz21Ka8OOD/Zcc1jZ2n
-	Vlr3u6zyQCPvIjRHoSJPva
-X-Received: by 2002:a5d:5917:0:b0:437:99d2:c115 with SMTP id ffacd0b85a97d-43799d2c495mr14060268f8f.26.1771240785558;
-        Mon, 16 Feb 2026 03:19:45 -0800 (PST)
+        bh=82tzUwMZx7gGC7Kp7xlQMy87tYMuSBTN30Tk8Z2Achs=;
+        b=W+9wxSumwKk5tj2vSLhwToRH+Ya1RcFdZZQYYuh6QD6Fz4pMDV9CUzrTrUCd6vyq/J
+         oNP2a4VGGz7i+/k0l/vLP3x4d2g4XoRz6zSeFzsq9S0Zzong7TZ8i6HKeC0DkjTb9FOj
+         fNSpAcnNk1/t6tFWGJCiteOctsf5SLTqaReiRipgmxL+otHtL0G8pKle3MHP/OP+j9wV
+         4LGah57Kv9RJpSJ2v8e2onLwMrGiu0UK7e1j/+/WWTQSST5FRsbfGqSDwvh9yV7gUbN2
+         YCeFTdIHRFqeD9+fCgIkDsiYHMjr7643IhmoUr/OjpcSTPi4Y3jw5n2zwywTo/DdGMmM
+         ZXsA==
+X-Gm-Message-State: AOJu0YxZFe9yGbwY9D4SeUmo5XNEGj2QVySUeeeSf2t4wdH6qXG65ceK
+	XUzrbM0VN24R8jPB/pAKwy2u9o8TPuuKa+OnesV7a366sHikURyLw5nk3Qd/3g==
+X-Gm-Gg: AZuq6aK61NXadc3q4/e1XmbiQDz2wRh5bxJiEDwAmaCwwtguDy34yTKrVM6qwnSmiLw
+	fHnYlOO1HgjokVbxZXd3/xJ87zmmOWGxUhZSOIvVIADIh964a9+0OuR5Q74q2sDh9MZSQEzzsaI
+	6Uoe3ERWkt8c7aykG5zgd60y67K7atTr2xs9byTtts2lFxE8D89GbwTVZsxA7bncHyUkmeYmJKC
+	MaZ6JDM/B4c/NV4cP/evNHqSg3Ze/uHeFZSmSw7ho1CaBrgBWZapAxeMJohidUn9WNpkdXQvCi4
+	YAykcxiBBx7l0Mt2FedntNvdaCPpQrHE30SFBUnwu5cw7tDucmy7q7eaKjULbNSm0xyNxQuJkCb
+	hkcRDYDjNKkzy5TLNHd/TmOpVxV7pxahXS0CzlGvRe1kr/Z65bcbSsEtEX41ofpOcq5H1H1uKg5
+	Rfa3G+iXgXP8JtBvFilnz/
+X-Received: by 2002:a05:600c:1d10:b0:483:29f4:26b3 with SMTP id 5b1f17b1804b1-48378d58838mr137388045e9.1.1771243604280;
+        Mon, 16 Feb 2026 04:06:44 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796ac8209sm28145166f8f.30.2026.02.16.03.19.44
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483719b8e71sm244683885e9.2.2026.02.16.04.06.43
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Feb 2026 03:19:45 -0800 (PST)
+        Mon, 16 Feb 2026 04:06:43 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] webkitgtk3: upgrade 2.48.7 -> 2.50.5
-Date: Mon, 16 Feb 2026 12:19:44 +0100
-Message-ID: <20260216111944.2318445-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH v3] webkitgtk3: upgrade 2.48.7 -> 2.50.5
+Date: Mon, 16 Feb 2026 13:06:42 +0100
+Message-ID: <20260216120642.2322833-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 11:19:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124416
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 12:06:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124417
 
 Includes fixes for CVE-2025-13502, CVE-2025-13947, CVE-2025-43421,
 CVE-2025-43458 and CVE-2025-66287.
@@ -77,8 +77,8 @@ message) upstream is dropping libsoup2 support completely[1].
 This is a proactive removal of this feature, the sooner users start the
 migration, the better.
 
-Made opengl a mandatory DISTRO_FEATURE: libepoxy requires it, which is
-an indirect dependency, from gtk3.
+Made opengl a mandatory DISTRO_FEATURE: libepoxy requires it, which is both
+a direct dependency, and an indirect one from gtk+3.
 
 Changelogs:
 https://webkitgtk.org/2026/02/09/webkitgtk2.50.5-released.html
@@ -96,6 +96,9 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 v2: add libepoxy as an explicit build dependency (it was a dependency
     previously also, but it was pulled in by gtk+3 usually). This makes it
     clear that the recipe depends on it directly.
+
+v3: updated commit message to indicate that libepoxy is also a direct
+    dependency.
 
  .../webkitgtk/webkitgtk3/no-musttail-arm.patch  | 12 ++++++------
  ...ebkitgtk3_2.48.7.bb => webkitgtk3_2.50.5.bb} | 17 +++++++++--------
