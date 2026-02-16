@@ -2,108 +2,146 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F187E81A49
-	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 17:03:04 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.24387.1771261378640488443
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59A31E81A4F
+	for <webhook@archiver.kernel.org>; Mon, 16 Feb 2026 17:08:44 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.24519.1771261717265345574
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Feb 2026 09:02:58 -0800
+ Mon, 16 Feb 2026 09:08:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DNJU1TVu;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4834826e5a0so32801845e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 09:02:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GwgD30em;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4806ce0f97bso26015735e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 09:08:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771261377; x=1771866177; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=vT0nhQEW7MFV4uKk3NVNRJDqbSkPdhj4YnukXh1B5wU=;
-        b=DNJU1TVuZHGXtU/qMbNXMJbDr388BtaMC2gfGq5ocqXpMi+DMuT/TaxCcTEdN5MZgy
-         APEDnIR263ekBUCd730Fldv6Q+Q4wcDmfJXRx+UlGy0vv/5zrJKhPOe5vCXXGsFKZY3m
-         wCSAHXn2+ujVajQiMvKtT6jLYn415KvYDy/aavlqID+Yp9jzHuflCSxYWugdCoqiuxBE
-         ihjHBZN46duUFvsKzCqvibS51vS+AMyeZXUU8Z4IsYTgMQ0FsY6WnTkggYkgSWZbebUP
-         R0/T9/taWKZnyxbhhUtdejg+B7GdnHquBt50gc0YzggebzGLb1hGjYV+tYP6wzuZ1eX0
-         yK5w==
+        d=gmail.com; s=20230601; t=1771261716; x=1771866516; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oVuTebC9KNu03eyFPpFtXVIFJ8VN47170kq5+wTQR5E=;
+        b=GwgD30emhLhuYsRVHYtYv5UA8vDGm93bYx4QF57UaRkGrszXgIi+lTE0cm2hfpWDW3
+         AqhsJVTpHzAKkCbREAB1RxL2kuCQBAjrtq67xcKFlEwtnDxRgzKLo/XuQfIUoPEENj2m
+         M0m8SPah6aCbyd4yCYsgzBhrhcJKuRtJfVJz2qHreY5gLFjNqtMcc3GcC5/3LYjipAOC
+         i2oK/coih7PCXBbFlpxwegSx0sgSsqcKhrjILlcNPCyBQdaPIeK0AJ87UWDQtkjXErN9
+         YhJokOGcj1deJYjgnLRCnf0T5pghAxFreXwRKTqUUEgptIhLl0w4VXLhQxUWJhAMXdW6
+         Rjmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771261377; x=1771866177;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1771261716; x=1771866516;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vT0nhQEW7MFV4uKk3NVNRJDqbSkPdhj4YnukXh1B5wU=;
-        b=tCatppqAIyraGTXfO/gbprb6F6v5+bcOGEq/p5Kv8rq0iecRcDra5yaaEUgVQOXYlc
-         vko9mqY47LF/0TqOskmFl+G9KURPhJA3XJK+EB8nWfC1YqCpC9GsCz7jfECnE/trlOFx
-         QZwilfX6IxknNWj0SmfzG1tW/HMO1l8Mr+4JjwYnmQHsKyNEp+Ec2PmefWJ8SeOOOV+i
-         AjF8UYiclB+nxzBnFLaYVoolPnLm7keO6IWdqdjuYh4ySwmcDF9BrOsFzIvFluBLX4Ar
-         DH0VBy7tV9DZ8fqm9NqGNfG+Xs1JeUpYOQXhCqkeTM142twvFpmCd+TMQ1BQvCbUEiok
-         gX6A==
-X-Forwarded-Encrypted: i=1; AJvYcCUfyRpM4a+ZjUJCY4fDH7aAgVQ11jy2bOwTmMLpngEWVPLRMzrGm54Up8bb4iGe+ohXBdlh1uK3DJg58gpBiZmHMNQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxL2SGugwnkksyampYPvaXF8e4ObeQQiWk9ZrJ1IPErLZM3I5Rb
-	Ixw3ixhW7ZUzNiQjlphR4oRI/eWtECiM8fuFFlTC7/3L6WNRCu1Jcs4s
-X-Gm-Gg: AZuq6aL2r3+L/bWsvelcVfORUReCEVmE0dWzsiUoUq4WPuqw6PRqttAq5/KTuzqr3BH
-	s6kQqhmsRfwvNSKtAfesTxzvA1AvG0ht71PR9Crq3TL3eHPpi1ckm8BgAEIa3XN85puSWYVyPkO
-	tTa9qYSNExD2ngi4ALi1Uy8j3wl3ZgxpnK5oiDY7HMx2OuJx6+NVuLNxzrNCxwnExx+adVcOQWr
-	avxzxW/7Hg2SXllG1OENCn6jO5ABrTt5liDHsoU6VrPLwCz3AAU03g1/XHwCh75o+E+kVO6XVWW
-	j3jzGI2XiG/GqWbO8pOJ1rrcQ0w4dyezp4+yePuLL5ZbrWV0jdkdoR8FKYq2oF8sm26+6/tyG8j
-	vFZXp+I/5FpwjnJbNc350C/5BUfx8RxjhikU3FYZ7+g+Hu8eyStRe51mob/mXxn7kAqQdskKQfv
-	s7Gm8mgG1Wd9TgXvhgT3qGwkc0lp6N0BA=
-X-Received: by 2002:a05:600c:4f4b:b0:477:98f7:2aec with SMTP id 5b1f17b1804b1-48373a160b8mr215665985e9.3.1771261376738;
-        Mon, 16 Feb 2026 09:02:56 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4834d82a4afsm825051835e9.11.2026.02.16.09.02.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 16 Feb 2026 09:02:56 -0800 (PST)
-Message-ID: <8e0422a2-d70a-46a8-98fa-8093bb7764c1@gmail.com>
-Date: Mon, 16 Feb 2026 18:02:55 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] rocksdb: Add an option to set
- static library
-To: mail2szahir@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20260210133500.30649-1-zahir.basha@kpit.com>
- <700cc6f1-6aff-430a-8e8c-086df76cb5df@gmail.com>
- <920657.1771260365675421294@lists.openembedded.org>
-Content-Language: en-US
+        bh=oVuTebC9KNu03eyFPpFtXVIFJ8VN47170kq5+wTQR5E=;
+        b=K6CpK3J7VIhHbr6vOOJL5dgwLUOGlh0lB+JQEFPuIv/Pqmf3hfGvAI99ph5CQpfDHe
+         +jEIUOGT3qXCFM28yGJfiTBfmgrmAtrHW5rLZwAY34yShKEamG2O+UQzUs8VLzAmXLbz
+         iJ87QKGQeSkmXYMV1KswGIZO+h19L9Wclwjw7Si0yq09blQG/YPxwtkMBlyAG/cxtDyN
+         DQgIoJO3Ua585ywX0a2tNj9Xl3sbSXrZvl54YWkLo8HCh8IVdeYW92494DPrPy416XS4
+         EPgzAfUkeHbx+2XvUZ11AzimgaSCTUvCWaQeqjy58LYLK6bIIh/PfEBe1ZRtI5CJ6rDb
+         /5fw==
+X-Gm-Message-State: AOJu0YzdwsmFbDQYKdqZGd1i9+afbJXar/C+RGX0f3EIO9EmHrq2Af/C
+	9FnytIqoQ5+B1DraIe9h6vRM3wrphRHQaMTJ0MKIkF0daGYRpcKZyoOIlEIyoQ==
+X-Gm-Gg: AZuq6aL8gU/ZWwIfKXFDhBNvYUNLnpeQcvDp6BRJkA+EKmkQyXStAfoZtFWXaHN5wsy
+	B3T63hPwXbsXCgcdbxKOKKQIjYS9b/hH1GrnJVjlyowfTG3Jn1o5CRKwR67pZaG4RQPw4kQJLNb
+	Wk1jYONFPSbiMCY3egKnaJkfr23lQ7946TPog6wB9t/3c4RlMUHiK84EazqNXX6LoXrVMTxnVYw
+	0GpvPtMUdT4iKM5yrXimdphHngcIa9eV5NfFEw1OAMVaOEIR+eJc9L8ZEWQvlkaf96x68ydssyu
+	orJTvwTjZ4XBlAQdt/6LNSwM6AVFFuPEU4yYkwlQI5gNWlDVKhZtw3tRBrQ0Wu98zzJ/OQ8E4wC
+	ximsaaHGt01elzIxzYC7EcOrRZQ3RrQzsyOlHRZqmm4/MlxPz4sD5uWqz2ag9jUo/gLLwgE0oAT
+	4Rmr2ZE4af8XxsObUKaZf3Qcf1qIeF2M8=
+X-Received: by 2002:a05:600c:1c12:b0:477:7925:f7fb with SMTP id 5b1f17b1804b1-48373a1b999mr233406755e9.10.1771261715453;
+        Mon, 16 Feb 2026 09:08:35 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48371998777sm327090995e9.1.2026.02.16.09.08.34
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Feb 2026 09:08:34 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <920657.1771260365675421294@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-webserver][scarthgap][PATCH] nginx: patch CVE-2026-1642
+Date: Mon, 16 Feb 2026 18:08:34 +0100
+Message-ID: <20260216170834.3087649-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 17:03:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124427
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 17:08:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124428
 
-On 2/16/26 17:46, aszh07 via lists.openembedded.org wrote:
-> As per these change, the static library option is turned off through
-> Extra_OEMAKE config. The same way we had done in scarthgap and master
-> branch.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-1642
 
-My point would be that if someone relies on generating this library for
-whatever reason, that build will be broken.
-If someone has a change in a bbappend to disable it, that will be broken
-also.
-One expects breaking working builds in the master branch, and when one
-migrates between branches. In a stable branch (especially a few weeks
-before EOL), not so much. That's why I'd prefer to have this change as
-opt-in, and preserve the existing recipe behavior by default.
+Pick the commit that was identified by the reporter on the oss-sec
+mailing list[1]
 
->
-> Also We have confirmed that with the default setting ON, it generated
-> a static library without -DROCKSDB_BUILD_STATIC=OFF in the
-> EXTRA_OECMAKE section of the recipe. 
->
-> However, according to official upstream comments from RocksDB
-> developers, it shouldn't be ON by default as it breaks their Java build.
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124426): https://lists.openembedded.org/g/openembedded-devel/message/124426
-> Mute This Topic: https://lists.openembedded.org/mt/117737559/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+[1]: https://www.openwall.com/lists/oss-security/2026/02/05/1
 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../nginx/files/CVE-2026-1642.patch           | 46 +++++++++++++++++++
+ meta-webserver/recipes-httpd/nginx/nginx.inc  |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch
+
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch
+new file mode 100644
+index 0000000000..7cbdda6adc
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch
+@@ -0,0 +1,46 @@
++From 12a0f6a27e77b09807c93d9e4f8605c0dc37e21f Mon Sep 17 00:00:00 2001
++From: Roman Arutyunyan <arut@nginx.com>
++Date: Thu, 29 Jan 2026 13:27:32 +0400
++Subject: [PATCH] Upstream: detect premature plain text response from SSL
++ backend.
++
++When connecting to a backend, the connection write event is triggered
++first in most cases.  However if a response arrives quickly enough, both
++read and write events can be triggered together within the same event loop
++iteration.  In this case the read event handler is called first and the
++write event handler is called after it.
++
++SSL initialization for backend connections happens only in the write event
++handler since SSL handshake starts with sending Client Hello.  Previously,
++if a backend sent a quick plain text response, it could be parsed by the
++read event handler prior to starting SSL handshake on the connection.
++The change adds protection against parsing such responses on SSL-enabled
++connections.
++
++CVE: CVE-2026-1642
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/a59f5f099a89dc8eaebd48077292313f9f7e33e3]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/http/ngx_http_upstream.c | 9 +++++++++
++ 1 file changed, 9 insertions(+)
++
++diff --git a/src/http/ngx_http_upstream.c b/src/http/ngx_http_upstream.c
++index 3ae822b..6c310d8 100644
++--- a/src/http/ngx_http_upstream.c
+++++ b/src/http/ngx_http_upstream.c
++@@ -2441,6 +2441,15 @@ ngx_http_upstream_process_header(ngx_http_request_t *r, ngx_http_upstream_t *u)
++             return;
++         }
++ 
+++#if (NGX_HTTP_SSL)
+++        if (u->ssl && c->ssl == NULL) {
+++            ngx_log_error(NGX_LOG_ERR, c->log, 0,
+++                          "upstream prematurely sent response");
+++            ngx_http_upstream_next(r, u, NGX_HTTP_UPSTREAM_FT_ERROR);
+++            return;
+++        }
+++#endif
+++
++         u->state->bytes_received += n;
++ 
++         u->buffer.last += n;
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 865d7f86ee..722e2508d4 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -27,6 +27,7 @@ SRC_URI = " \
+     file://CVE-2024-7347-2.patch \
+     file://CVE-2025-53859.patch \
+     file://CVE-2025-23419.patch \
++    file://CVE-2026-1642.patch \
+ "
+ 
+ inherit siteinfo update-rc.d useradd systemd
 
