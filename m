@@ -2,60 +2,60 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66ABBE68170
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59455E6816E
 	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 10:31:15 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9267.1771324270149050832
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9269.1771324270810179120
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Feb 2026 02:31:10 -0800
+ Tue, 17 Feb 2026 02:31:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=gygbrKxP;
- spf=pass (domain: konsulko.com, ip: 209.85.128.44, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-481188b7760so33870665e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 02:31:09 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=aEjN0mg0;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43638a33157so3919402f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 02:31:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1771324268; x=1771929068; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1771324269; x=1771929069; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=F2auiRHpOgvpwZKnb/PJGNhPhYYBK0xEUPzUkXPSIiM=;
-        b=gygbrKxPou0YdsqkYHHTySPA6MTt7bHctL9E1Wj1ZhJrwvMWUhB6sAJRfrJ6vvQFNt
-         SBr8rnPPBgENat37h1tPBfKevjSMzCdyMuhIbMBQAlGj2jX0rXltyUjKIlAUCwJC1bpZ
-         27hkPOTQmtB/2RlE0UEGkjqO1iFXlj88uJHz0=
+        bh=B4aP7ab3TQBEO1Vtm4vaO71lDRjAKzMsEbh6sm30g10=;
+        b=aEjN0mg0YKKXhjLEd0pgFlQ50aJv9yB4fHNWmFh2/0lEpy2I6e5RtMXi8GGzgajw6A
+         O+q7kVX42BQOqWvTN3tGBe4/We0a5WG9b8piXMu84h7Sf2kcsVURhL2WgPjyHVu9aiza
+         bbf3xtVzvyDZdEUQg/aJjxKZEmHlhUxA7/apU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771324268; x=1771929068;
+        d=1e100.net; s=20230601; t=1771324269; x=1771929069;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=F2auiRHpOgvpwZKnb/PJGNhPhYYBK0xEUPzUkXPSIiM=;
-        b=MnPD5+JOQNN0eGv5b+c5TqVLfKGlcdtVEc7jEbHHg2SFMZsqDAvHCx8kUzMmHczBXD
-         Fi2LpHv5HhbqsvH6OQCDXZ0hcn0L5yyoGnD2cmTWbPR1oP/cpFlv3dikEz+xHUSSLpjN
-         mSaTPOfDdljkI4yu53NgwIqWoQLNUZxNWyAOCgENp3FKiTGhqOT92AHei3lgFxdQ/ajw
-         w26o/0WW64ZJPgLt0XrAoalzgD3tSXBI0iBcoYJ+JJBXuB3gBgDQ2j/hbOtuUmAWql7p
-         +4vZsaa9z/e6uQq1vI7uzY+X0BeY2VyqLs8xANGaNiieCo+keDA4y3++/lk3Uiw0GQ6b
-         SQMA==
-X-Gm-Message-State: AOJu0YwBtpnLi3xBMcOsMs3qu6tnsJwkDX7RFVf0JB3DCGe2eifY8FnC
-	M3LZRuy+UlZQec/uykT0va/gXhaHSgRRAVGfOot66QCGZr1dZEIWX3azSvD7z/KODQiwONazlxn
-	M5+sx
-X-Gm-Gg: AZuq6aIPELGsFuWWcSfvvFn4bgPoEFBH3d+19Yd/v2W2TTn0KKBKaxBc0L3G+TJL+IW
-	7/uC5GHtaABtyZvJSV++FtVFcUyj7NTiC9vwY0nurLHsqvDG/+ti+nULZoNgokHpu4s4X0c0J1j
-	0ZSp0vBmLe9LnEtT9qoFMMe4EHWWVXOm9w62tVm/iOSwK4gXlUrgBQ4FvVGVuKSdb9Y2W7PKEO3
-	9qttA8lU72ulPGIi7NwoNZpl4RM1wP4BDc6FV/dpKP9U3Uh0TTtQViv90kwkGvZUghzOfYwy2uq
-	uNlv8UqbFYu7Nu0OrBC5AJ5qQhrBA5z4MgpeDskZYTJvSjNDjiEWugYceo+Dt1Kx/gNW+Km7PWI
-	5Xy84vELUjlpAvvEARh9p6s5SWhwNU2pKwxvLYXNYgj7nxpKI2xqGJyt6hvjgVageTrCELFMIKi
-	J2PIq9q1rP5Cx6HLQ9CA81WtxGHx97P86U9Jo/
-X-Received: by 2002:a05:600c:1d10:b0:480:6852:8d94 with SMTP id 5b1f17b1804b1-48373a45d65mr213387675e9.27.1771324267502;
-        Tue, 17 Feb 2026 02:31:07 -0800 (PST)
+        bh=B4aP7ab3TQBEO1Vtm4vaO71lDRjAKzMsEbh6sm30g10=;
+        b=SufJnEzBoz2VKDxlRASWPbJqRjn5biEorZQzxJHbkEgh7Omv2/Xd2yrGwxQZSJnX6C
+         4Cayt0MnNKK6csmcW1A0hW+TjTv7glFvUdmUWhQ2f/pPB+1tKPSQq93RHjDlsoeGOU8J
+         o4hEXkAP12xdT0cLshmiIG/3EAnZh+3U3SUPYBJRFgUIK7NUokncMJvtYdFYjviJ9i/f
+         ScIrXDoV4azxPen1qdiF2Vmscw67biBXzZBYRi31jQ3kPCuRr8Jxz98bemO9RrGltp50
+         XXGLLK1DD0XkAnEQpC5USobhdwDcTL6bQCCa8uT//kd0xRuKncwtv41exkJpb8IPg+Of
+         g2wg==
+X-Gm-Message-State: AOJu0YyaxSVhq+q4UEYXz9yGefrLeFfvRXvCo+KTbDWV4Oa4NfGzvoxQ
+	vaIOqSUomto4qL9nI3IjVQwgPgIpCy0WaA4TwYeCX5E1DngWSMy+evnnf7VeH00QlpPmY3hsqMS
+	g5ioX
+X-Gm-Gg: AZuq6aJnCSysBf3DIXMpjfN5MpclMDDrCCruJo8nEf3baCqN+6h/rPVsJ8BUKDWpCv7
+	zbfwMwGrviOyOXdLJgbN1nk1/+7GRCyTYpEG7jBKb/1oNDUEQ+sK3CgVTQ1o9h18j/YilutTCHr
+	MX39fZPgPevkE6Rf+EA72w1U9XsTEULOvC6hTWUt32sEbFzms1tG3RJBM71oMHK7m9JRUULMzCl
+	OAxZlBjWDRkuX1IS3JCSrOhuPyKak7Ay/DQ86Q1ZeOb2PxsFMN7+dctRVF89T80yLS5AeAZgm3x
+	VQHEIu2iMpIdm5i34QYpbvmaH7msMAbOfGQxxm8r5QkKZmL+C7uDrjyGviZYSYJCFtKJbgNuKha
+	JiY14hpknbyByKyisYn6h8YNg6uixo4M/oIBMJjVHYWfIuewC3GVHAWAKKnLPPM4IVHBgLnYZXB
+	eHbYq5oErsjuDBOZx2ifrckJmqouQld64pt423u+y6ImhyPwI=
+X-Received: by 2002:a5d:5f82:0:b0:431:3a5:d9c1 with SMTP id ffacd0b85a97d-4379791c1a0mr23790699f8f.30.1771324268369;
+        Tue, 17 Feb 2026 02:31:08 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796ac8d82sm33305378f8f.31.2026.02.17.02.31.06
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796ac8d82sm33305378f8f.31.2026.02.17.02.31.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 17 Feb 2026 02:31:07 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/4] python3-tox: Upgrade 4.27.0 -> 4.36.1
-Date: Tue, 17 Feb 2026 12:31:02 +0200
-Message-ID: <20260217103104.2849723-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/4] python3-platformdirs: Upgrade 4.5.1 -> 4.9.2
+Date: Tue, 17 Feb 2026 12:31:03 +0200
+Message-ID: <20260217103104.2849723-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260217103104.2849723-1-leon.anavi@konsulko.com>
 References: <20260217103104.2849723-1-leon.anavi@konsulko.com>
@@ -65,41 +65,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 10:31:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124446
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124447
 
-Upgrade to release 4.36.1:
+Upgrade to release 4.9.2:
 
-- ci(workflows): add explicit permissions to workflows
-- Add architecture documentation
-- docs(man): add Unix man page and composable CLI argument
-  inheritance
-- Add new logging section in documentation
-- Report TOML parse errors during config discovery instead of
-  silently ignoring them
-- fix(execute): adopt CPython subprocess stream handling
+- docs(platforms): fix RST formatting and TOC hierarchy
+- docs: restructure following Diataxis framework
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-tox_4.27.0.bb => python3-tox_4.36.1.bb}     | 2 +-
+ ...hon3-platformdirs_4.5.1.bb => python3-platformdirs_4.9.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-tox_4.27.0.bb => python3-tox_4.36.1.bb} (92%)
+ rename meta-python/recipes-devtools/python/{python3-platformdirs_4.5.1.bb => python3-platformdirs_4.9.2.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-tox_4.27.0.bb b/meta-python/recipes-devtools/python/python3-tox_4.36.1.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-tox_4.27.0.bb
-rename to meta-python/recipes-devtools/python/python3-tox_4.36.1.bb
-index 4deacdb3d9..98646b44a7 100644
---- a/meta-python/recipes-devtools/python/python3-tox_4.27.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-tox_4.36.1.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://tox.readthedocs.org/"
+diff --git a/meta-python/recipes-devtools/python/python3-platformdirs_4.5.1.bb b/meta-python/recipes-devtools/python/python3-platformdirs_4.9.2.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-platformdirs_4.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-platformdirs_4.9.2.bb
+index 666ba6805e..cbe638d47d 100644
+--- a/meta-python/recipes-devtools/python/python3-platformdirs_4.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-platformdirs_4.9.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/platformdirs/platformdirs"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4f5a41454746a9ed111e3d8723d17a"
  
--SRC_URI[sha256sum] = "b97d5ecc0c0d5755bcc5348387fef793e1bfa68eb33746412f4c60881d7f5f57"
-+SRC_URI[sha256sum] = "085ddf2e6ebd2a5be04ae8f4a2c6422a7994a4702b3c187edc4e99f1e7ccdc2a"
+-SRC_URI[sha256sum] = "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
++SRC_URI[sha256sum] = "9a33809944b9db043ad67ca0db94b14bf452cc6aeaac46a88ea55b26e2e9d291"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+ inherit pypi python_hatchling ptest-python-pytest
+ 
 -- 
 2.47.3
 
