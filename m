@@ -2,63 +2,63 @@ Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49906E8385D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A904E83856
 	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 06:52:34 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7076.1771311145725440362
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7078.1771311153514621214
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Feb 2026 22:52:25 -0800
+ Mon, 16 Feb 2026 22:52:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U5+5nUn7;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: bindudaniel1996@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-82318702afbso2747388b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 22:52:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Uqe9VE/+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: bindudaniel1996@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-824ba8f0acaso2551145b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Feb 2026 22:52:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771311145; x=1771915945; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1771311153; x=1771915953; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9I5MRLb4iWZOh/Wuufp4g1kF52dvUjWdb0ExQvCOdnc=;
-        b=U5+5nUn7agXCy9Xia8nSfTtG7PCH41hrsRJGT8oUuYgedY0COv9xey7GZp6in/Mo8K
-         GqtN9n+bn6zopogfZ83JPAbSl6VUMe7BOYur8e5BMcHHlrimkqfTQ19UsN+iggF1qjPC
-         SO9g4TDAchWCYxyosfr+YZV4cxBEDAmBuysfA1BdDTsavnFGsDMvndewbgbbdtR7n4Vc
-         nnHIaDKhy8b2jUlfpHODdpotlIzLZI9apGI1syhGIlO7KdGeM1pnkld62fMbm5ft7Yyi
-         /DWeV2x8wdB/AwoOHiij+2fdxpS64PxLbGJD/UWMkduimvfGzEyvDQ+c4uvHqVAteNdn
-         fkpA==
+        bh=6uSs3a5CCNddVNUFgszf13QY/vGsIVMTQKLdqg9rcSU=;
+        b=Uqe9VE/+hgn5z/Rfcp1dxmdvaUjGQ/kJEuoe7n9ZOB21w+nrmyDKue8xlDCE6Gbsry
+         bATsw3LNX4OJoczsdvX6O2/JBegQpXSPn4i/5/QkT6HqxVyG3Ag1AkRZwYVKQfaIZRiQ
+         2NiXXjBQ3iuaNQyLW6AiqsWkGDRGiHlxuk72mpsT58JDnfpaoomoe+IZbmorXvTVibqG
+         LhVZNc6yeRcxWKdDc68Zp/ib8r803cKB+KTgHrqFfUiBvSEa6aFwaW5AgRB0rXx+1HHv
+         bWwmABdRhDypxWU6Hph6H9jCwyb8cR9+ZPldlQXurzkEAEtxUOsIrk+Wg1BHntQauoyt
+         X8hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771311145; x=1771915945;
+        d=1e100.net; s=20230601; t=1771311153; x=1771915953;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=9I5MRLb4iWZOh/Wuufp4g1kF52dvUjWdb0ExQvCOdnc=;
-        b=EJn+3fWinDnV6IO3bJxyIE4B+Qbbz6D6+QuK8Cjf1vKCiKQNYlCZoWZIFVso0S6+tH
-         gxSj/x4pmuPw8UzIEfspfeYGcKwbZxCLGTAf7bPx0HtdXPtLZgfpvn/nSYuJGHgIa/ix
-         5mehhlVwOGpFIx5BGtLfGEriU2R30uBKSWACAJnnAOX3nmpssy0gpFgzbxx8bJ+JRpBh
-         qtMmf0dhDqEFcHdHsVtY1/0DbJE+MSWt84Fw4x1OTouIdL3+YFsIOCEOVPwxMKfD0sjz
-         er+BoL5CwA69sw/83p/pjLTCXZ8PFhGSVQDxMF4OcNONOUd9cszjkQrsDcoofxWjhcdr
-         Dnig==
-X-Gm-Message-State: AOJu0YzmgyzhtUddeCBuJqq6doG4UH+LLbDvudl1aa2gO5Rb2h1bXjPS
-	YWFncBCps7k9EAPB/7r5TdYC6Yg8fKDy3I6kOJX5OY2TwKUFQHRrMrG09xv6PQ==
-X-Gm-Gg: AZuq6aLVFWpDLbrwgWJZzFjy0CciHbOftIKAu+D/G5qxu0NwCzNETCqAhTbaMAOk4ar
-	IhhwuDH2UlPmAJG3M2i1s6iqMAAU0GNQowrubfT6OpBn5QD2IMo2pSHnioG1yd1L86uEBy4A9v0
-	VYLZdzuiOykRDccTjX1yoOeTggYfnyzArZZgUlBXdRICpHV4R/KhPGD8FlQNVVwBcm8CEXxdM4P
-	5xe9iYguJBRKotxU/cUWwHHtjKZmgyq9V6YHULFZ66Uw486r5r7jleEkj1vk4VbgKBNNsbftGYf
-	YejUKks58NAPkgHqvMmL5PgPtO/Dq1ajBE15/ksg9SpHq5gXxlhJlbJcYkgzxOaahiMNPWOwnXQ
-	aBl5TV2rIiVEOm4uQx2kxE2ZJTQMM4Kn1BGHmGyE0z59qDJbHP9GNEiJIwNnU6JDTa+NH6TJDuw
-	MAYYzSmmzOXR2B1YKV+8Hkz9ToqUtQzg==
-X-Received: by 2002:a05:6a20:438e:b0:392:e5ab:3125 with SMTP id adf61e73a8af0-39483aa0c07mr10252000637.66.1771311144879;
-        Mon, 16 Feb 2026 22:52:24 -0800 (PST)
+        bh=6uSs3a5CCNddVNUFgszf13QY/vGsIVMTQKLdqg9rcSU=;
+        b=Kp2pegSL+T/SFmfIb/NJn79m9Gx+ftNNufLqgCnT7Ca4aOwONiyPKOXkx3x9X4AzVr
+         FBzNRKD576H4mCkJGUV/EV5JjPe7QRWJVrIsshRBIgttP9i/cMraT4tFQwxUbVSLgWTf
+         PXyPMRfUW3IFlK0X3dwlbaKvdxCGdbF5R4JqgoAQ5sn06tLww435BiKwMFi2mssD7N5m
+         mxJRBqPVKLCxHH747cWB/hJvXgdHHhXl+U25tflfa6pCOKDhUeZch0syyI9M+iTlw6a6
+         7bs40XTEdGVf0YFleKq3UqHeKU3y8Pto/5ajMJ1hrYOi2pYmPjpMPzO3t4exK1WDkj4J
+         5jEw==
+X-Gm-Message-State: AOJu0Yz0hBXEg5TvzWFPcHw9vYAo22CMWD7XM9rhQztfgWvRnvUfCa4/
+	JrbRZ9G0ChIpN6FwV6k85954dyPEY6ebf17rlI5b9MsNKXVBLTbx+60El6vQQQ==
+X-Gm-Gg: AZuq6aIYllzOSaCEzZfXkOXJG1bpT4APIKCYLX6EEwt9yS5kwwysG1qqSVbdRUMYxH4
+	sIMdrr7Dfao070lo5V+9SBLfT/cGtqPg0LcKfJDQSkPRkFQex8kyljH8GP0cfXcnMapFQ5D75aZ
+	KJcztaOAcrbQ3Ms3e39KTvkVKw3RqxxDAUW7pH9hpFVEvkuznjmrF7XzZovO7vOs8cMHJhd6Mwp
+	YBwSInBDq48Eg+OMmYSJvy2KadDdePcPXQ1cgoYzwqE3Gmh045GUiFRyMDbT2tMcWdcfcIMU5I8
+	P6Pa7ILewuxehZ/DqGHtBF+8UW6vWeOTCPphUMmJqeMFf8CRvt/uIfULb3wQh9J0GgXqQ1LWOJM
+	fOSgVbePOAmISKTD01cUcai46nohgkqJRc+7SdfSQXlveFYQIXt4sP32PHEuu0bSTrzD5B1oCDO
+	C71gx9qmK7H8GRfAJQTd2K5pb2n68tKw==
+X-Received: by 2002:a05:6a21:6f16:b0:343:af1:9a57 with SMTP id adf61e73a8af0-3946c9587c9mr10968383637.56.1771311152721;
+        Mon, 16 Feb 2026 22:52:32 -0800 (PST)
 Received: from L-12443L.kpit.com ([106.51.47.218])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad1a61cf8asm131561585ad.0.2026.02.16.22.52.23
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ad1a61cf8asm131561585ad.0.2026.02.16.22.52.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Feb 2026 22:52:24 -0800 (PST)
+        Mon, 16 Feb 2026 22:52:32 -0800 (PST)
 From: Bhabu Bindu <bindudaniel1996@gmail.com>
 X-Google-Original-From: Bhabu Bindu <bhabu.bindu@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	bhabu.bindu@kpit.com
-Subject: [OE-core][scartgap][PATCH 2/4] imagemagick: Fix CVE-2026-23874
-Date: Tue, 17 Feb 2026 12:21:21 +0530
-Message-Id: <20260217065123.1001038-2-bhabu.bindu@kpit.com>
+Subject: [OE-core][scartgap][PATCH 4/4] imagemagick: Fix CVE-2026-23952
+Date: Tue, 17 Feb 2026 12:21:23 +0530
+Message-Id: <20260217065123.1001038-4-bhabu.bindu@kpit.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260217065123.1001038-1-bhabu.bindu@kpit.com>
 References: <20260217065123.1001038-1-bhabu.bindu@kpit.com>
@@ -68,74 +68,91 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 06:52:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124436
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124438
 
-Fix CVE-2026-23874 with patch provided by Debian from fixed version.
+Fix CVE-2026-23952 with patch provided by Debian from fixed version.
 
-Link: https://security-tracker.debian.org/tracker/CVE-2026-23874
+Link: https://security-tracker.debian.org/tracker/CVE-2026-23952
 
 Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
 ---
- .../imagemagick/CVE-2026-23874.patch          | 40 +++++++++++++++++++
+ .../imagemagick/CVE-2026-23952.patch          | 57 +++++++++++++++++++
  .../imagemagick/imagemagick_7.1.1.bb          |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
+ 2 files changed, 58 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23952.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23952.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23952.patch
 new file mode 100644
-index 0000000000..59fa8354e2
+index 0000000000..d8eb44b44d
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
-@@ -0,0 +1,40 @@
-+From 2a09644b10a5b146e0a7c63b778bd74a112ebec3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23952.patch
+@@ -0,0 +1,57 @@
++From 1eefab41bc0ab1c6c2c1fd3e4a49e3ee1849751d Mon Sep 17 00:00:00 2001
 +From: Cristy <urban-warrior@imagemagick.org>
-+Date: Thu, 15 Jan 2026 17:50:19 -0500
-+Subject: [PATCH] MSL: Stack overflow via infinite recursion in
-+ ProcessMSLScript
++Date: Thu, 15 Jan 2026 17:34:46 -0500
++Subject: [PATCH] 
++ https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-5vx3-wx4q-6cj8
 +
-+CVE: CVE-2026-23874
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/2a09644b10a5b146e0a7c63b778bd74a112ebec3]
++CVE: CVE-2026-23952
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/1eefab41bc0ab1c6c2c1fd3e4a49e3ee1849751d]
 +Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
 +---
-+ coders/msl.c | 16 +++++++++++++---
-+ 1 file changed, 13 insertions(+), 3 deletions(-)
++ PerlMagick/quantum/quantum.pm |  2 +-
++ coders/msl.c                  | 12 ++++++++++++
++ 2 files changed, 13 insertions(+), 1 deletion(-)
 +
++diff --git a/PerlMagick/quantum/quantum.pm b/PerlMagick/quantum/quantum.pm
++index 1dd5921fa8e..74cc8168f37 100644
++--- a/PerlMagick/quantum/quantum.pm
+++++ b/PerlMagick/quantum/quantum.pm
++@@ -6,7 +6,7 @@ package Image::Magick::Q16HDRI;
++ #  You may not use this file except in compliance with the License.  You may
++ #  obtain a copy of the License at
++ #
++-#    https://imagemagick.org/script/license.php
+++#    https://imagemagick.org/license/
++ #
++ #  Unless required by applicable law or agreed to in writing, software
++ #  distributed under the License is distributed on an "AS IS" BASIS,
 +diff --git a/coders/msl.c b/coders/msl.c
-+index 5b182b5922f..53e3a95d14b 100644
++index fa29764563b..5b182b5922f 100644
 +--- a/coders/msl.c
 ++++ b/coders/msl.c
-+@@ -7041,9 +7041,19 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+ 
-+           /* process */
-+           {
-+-            *msl_info->image_info[n]->magick='\0';
-+-            (void) WriteImage(msl_info->image_info[n], msl_info->image[n],
-+-              msl_info->exception);
-++            (void) CopyMagickString(msl_info->image_info[n]->filename,
-++              msl_info->image[n]->filename,MagickPathExtent);
-++            (void) SetImageInfo(msl_info->image_info[n],1,exception);
-++            if (LocaleCompare(msl_info->image_info[n]->magick,"msl") != 0)
-++              {
-++                *msl_info->image_info[n]->magick='\0';
-++                (void) WriteImage(msl_info->image_info[n],msl_info->image[n],
-++                  msl_info->exception);
-++              }
-++            else
-++              (void) ThrowMagickException(msl_info->exception,GetMagickModule(),
-++                FileOpenError,"UnableToWriteFile","`%s'",
-++                msl_info->image[n]->filename);
++@@ -7088,6 +7088,12 @@ static void MSLEndElement(void *context,const xmlChar *tag)
++     {
++       if (LocaleCompare((const char *) tag,"comment") == 0 )
++         {
+++          if (msl_info->image[n] == (Image *) NULL)
+++            {
+++              ThrowMSLException(OptionError,"NoImagesDefined",
+++                (const char *) tag);
+++              break;
+++            }
++           (void) DeleteImageProperty(msl_info->image[n],"comment");
++           if (msl_info->content == (char *) NULL)
 +             break;
-+           }
-+         }
++@@ -7137,6 +7143,12 @@ static void MSLEndElement(void *context,const xmlChar *tag)
++     {
++       if (LocaleCompare((const char *) tag,"label") == 0 )
++         {
+++          if (msl_info->image[n] == (Image *) NULL)
+++            {
+++              ThrowMSLException(OptionError,"NoImagesDefined",
+++                (const char *) tag);
+++              break;
+++            }
++           (void) DeleteImageProperty(msl_info->image[n],"label");
++           if (msl_info->content == (char *) NULL)
++             break;
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index 94b2df10a2..0a1d34e313 100644
+index abad1fe5d1..3917eed92e 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://CVE-2025-62171.patch \
-            file://CVE-2025-65955.patch \
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
             file://CVE-2026-22770.patch \
-+           file://CVE-2026-23874.patch \
+            file://CVE-2026-23874.patch \
+            file://CVE-2026-23876.patch \
++           file://CVE-2026-23952.patch \
             "
  SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
  
