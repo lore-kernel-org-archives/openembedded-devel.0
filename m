@@ -1,167 +1,93 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BDB9E909B3
-	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 14:31:27 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13340.1771338680534992951
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42EAFE909B9
+	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 14:39:47 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13413.1771339178209621475
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Feb 2026 06:31:20 -0800
+ Tue, 17 Feb 2026 06:39:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lRyarb9H;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48371bb515eso48788435e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 06:31:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CQ9c9PYJ;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-43621bf67ceso2645463f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 06:39:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771338679; x=1771943479; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=3fLyJ3G7GnPPvV7gm9csc7zxd+SXBfOEax2cwY+I3V0=;
-        b=lRyarb9HmqMFjsWqq/3dL/cIwIi3X9q421vwUH4jDBhcBqHCqk/aPW88D6P5VJ1UfM
-         /GwUq2xiQU0FDPxWyWXV3uwHKVLfu9L6MdqQljw0r7/W/kN5CWVsrK8/WQzeBJCjyTxp
-         cfFBdzaUWRvYJd6vjboBj3EAqA7xc/7TPbq9zDOmlBz7KLQb4PkQbr+Mnc8issA9MFmH
-         qiUK0KKPPU5xBNe6EBXAllGPz4uOfx79yutfpB06x55zQYNMxSVSrb5XY7RgHNqPuqXR
-         OyPjJ4FbTOEhshBN1K78JoJ3XzeIkHl4v+aQhR6VVrCdgB6eLH+sXRrSGptJELLKnv87
-         lyNA==
+        d=gmail.com; s=20230601; t=1771339176; x=1771943976; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J9IBtsLM5YmJ1jWwu0Vw+8ddmts3wdMxRppYJ5F0mQ4=;
+        b=CQ9c9PYJ3JYgyzq629tsqNS6p0TkU8hAxWZP6rzhH1+ldvP7gZou/MnC20fZdiBiv4
+         V7xcuMRMl329ydTfqrGpquZImQECuJS2Bux3s9QhtRlx7VQ04s4j4ZYkuV6TCUrNigcg
+         A7PrDvk0C5spBw44PeYfDCK4UwDdLV2ER64NUyFAmheosYjNvBjxGOZUUV09E2xJRx2V
+         /2jEp2qSVSVYftrY/RUBFODsmYaJoSPLOIE6HRH3P2UnvLM+B3LR0cGLA+0K7krwvPxc
+         tHgkXIBy1Teuv4qgPCb1Mbph417iDUB1NzOKN23eIMzUWPM8dU6r+8E9XsSr870ExbVe
+         7yhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771338679; x=1771943479;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3fLyJ3G7GnPPvV7gm9csc7zxd+SXBfOEax2cwY+I3V0=;
-        b=dXTXg5D/lcLt2aff+Vuo4uMdbkoHu4J4kbMgiBdHmWfR8LHeg94HgRVYEf8JoiULVc
-         bS/BDe59lo5hqsa/S5LFYmtY/xEncajkWqfPzk1GCAyfsqxqkui+EfK4zlarotr3E2Eb
-         j/h6Be/zVvBM1YDZZdwCTBkw6pAC6Y2igBrHqqWQT/vLcJUSiveU1JNlCBnZb7y6MofK
-         Vib86qmn294B3JdJ7UmFvyMLmz1FcU6FWqqlpBnAAJT8AT4e9AIrs8ZiZPqWr873EyE/
-         LJnS+G8ZhulAbgJ2jpXt+w+rLNSqPolnu5wdmi5nh/M4orBCWFFY/HfDExtLy4rWRzwk
-         tvVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUiGYE2lnLKcTlziWLXxH1o2eD18OPVZZhd5Rm+oq9dWk+mKOYMQHrsycoxgfKVPpDMpJhtGEYFq+uEAm0pG98DHiQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxMPySejIGCqxM4gZr3+varBo0excD4umchJqELioWFOcDobXII
-	2bvkH6cVKs9STMpkGXCPyExUlxFRAiOhYqhIVsKClJbHTs2/RSdu7vFb
-X-Gm-Gg: AZuq6aIrvndFLmHxYHTOJPIigu8oONi9A5pCwHi1Wkv+sSB3PXwIhG6FTfQWIeMq2TI
-	soqfa+nHJMCZjU0ISoxt75uTMWHeCmhYrNd1jHqvXe/SzkbTr38yvblLliLA7WI44d2QC8teP16
-	Rai++Ox2dSGze89JPNhipcAst8ty86+59tOJdYNuIX7E0rj5kNTRvm3YZMLT2rr/krHAtA9/D5R
-	sGEXafFHxPzCT6psFcL35j725IL3ICEg+OM+w1RZ5og1i4dYsqyxWOyAYnWlGNgKQ4szNVT8usa
-	yHDycNOzg7SEosOEHZVci88ZT6iy3iVpxzEcy51DO/D+7iKnFChD48nouH/sk6RgA0lPZWJ1nMu
-	2B1NYtZT3M8PUP+l8FYh+vgamVi3m1QQkoVdLO+DMM2Go2laONJ+uP/NbODJ7JMBYqAMS7hMuh4
-	zlGfc5vsPZrtoq7Hl+VhWHBmKwc4QAttU=
-X-Received: by 2002:a05:600c:870b:b0:483:71f7:2767 with SMTP id 5b1f17b1804b1-48373a13679mr211898205e9.11.1771338678649;
-        Tue, 17 Feb 2026 06:31:18 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48371a23c6csm158478275e9.7.2026.02.17.06.31.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 17 Feb 2026 06:31:18 -0800 (PST)
-Message-ID: <929dcb10-a224-4fa1-9dd8-8f888e076c38@gmail.com>
-Date: Tue, 17 Feb 2026 15:31:16 +0100
+        d=1e100.net; s=20230601; t=1771339176; x=1771943976;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=J9IBtsLM5YmJ1jWwu0Vw+8ddmts3wdMxRppYJ5F0mQ4=;
+        b=IEAFLvhoGnMGb0bi9XP0g2SBN3ThRAZF1OnMcBqbBuWjRd7NyxBIAG5+RIv6PguZxh
+         CE0vfgST0xmXUNd46cwtE7ia7uMSSAZlRR16iK4JFRTMTF2wfs/fyrZZlEYvKmGtNQXs
+         Q6XgVYB/xFCD35k/Wlswa5/LMuo1IiJAJaIAGfFKl5Ny5/TxUQrGRVUClZWuiW5VGMAw
+         BHyooP98uZbolOjSoxAc7SjXCb2z7h+WeUDek0aO2DmZAM45wX6amML+o+iNFhtnT/8x
+         n1okxcWKfuTnNpLiqIox8JoLnMxeTF0nKkwVyJL0Jfvw9SKcZzEs/+cg6h4ByffNgRe2
+         Ujgg==
+X-Gm-Message-State: AOJu0YyfhX9x2tUYIJTAHNR8qZqo1kDQe2wkHsgTJPYOPq4gTpQFmaPH
+	0GbW4vtzGpAKn3qH5gY5JFFYAAxt8yPG80ov1sdiCFpnZfrU93oQCGt0Sd4YaqD4
+X-Gm-Gg: AZuq6aK3iV+AQVGxX2C+9j8NAnrbx3xOSXN2JRGDk+afZJ6i+CeOMgfGgNmvHtDYSVb
+	OtZe2dF/FG6CrVUs6Gex6uovtZnis4BlMMD0BAc/0GECrTHHuEgnlTXT84BTqgfi1ON4Pa2iFCE
+	SJLNnFB35VC5eXSnQ2/YHJ9bT3scbrrzfWgU59X7qCEJFl0Y8d9/gLM06vp7rXDUDVd547vWPNa
+	mruRhi38/FlbRjFUivMoifhIELvOBOnZAukxdCLpnNpzRA7RkOxHXB54B6zU01mfbnVYpBm3KxA
+	aRgWa3FCQoOjo9dMTxVbArZbQIi4as7H4XhH85N8EliKmeTRzNu+q1tOi+Ov+uc5ut169M1RNEK
+	j9AmL+YFebJNVtw41QcCI3xuLtuXuzgfg00qd5FHYAjkRb6BLi9lM2OT4LMUOuEqyeHrUDSGNaW
+	qY+5IKU51rA5yS9i3J9Y1zT7wqog==
+X-Received: by 2002:a05:6000:40df:b0:437:7168:af52 with SMTP id ffacd0b85a97d-4379db25d28mr21723823f8f.11.1771339176207;
+        Tue, 17 Feb 2026 06:39:36 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-437969fd36dsm36862235f8f.0.2026.02.17.06.39.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Feb 2026 06:39:35 -0800 (PST)
+From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [scarthgap][PATCH] nodejs: add missing Upstream-Status
+Date: Tue, 17 Feb 2026 15:39:31 +0100
+Message-ID: <20260217143931.3173999-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH 00/73] Scarthgap pull request
-To: Martin Jansa <martin.jansa@gmail.com>, raj.khem@gmail.com
-Cc: Anuj Mittal <anuj.mittal@oss.qualcomm.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <cover.1770970700.git.anuj.mittal@oss.qualcomm.com>
- <CAMKF1soLJVcZEOcLzE1MUERuAgSv0nq86xWy2ssP6933t1Mf+w@mail.gmail.com>
- <CA+chaQdLs=1ua6CpS1uQPY-sGFQwVx=AGVQ8GuHd3aPF1c8-jQ@mail.gmail.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CA+chaQdLs=1ua6CpS1uQPY-sGFQwVx=AGVQ8GuHd3aPF1c8-jQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 14:31:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124454
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 14:39:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124455
 
-On 2/17/26 15:23, Martin Jansa wrote:
-> On Mon, Feb 16, 2026 at 9:22 PM Khem Raj via lists.openembedded.org
-> <raj.khem=gmail.com@lists.openembedded.org> wrote:
->> Merged now thanks Anuj
->>
->> On Mon, Feb 16, 2026, 1:55 AM Anuj Mittal via lists.openembedded.org <anuj.mittal=oss.qualcomm.com@lists.openembedded.org> wrote:
->>> Please merge these changes in scarthgap. Tested locally with
->>> qemuarm/qemuarm64/qemux86-64 and on autobuilder.
->>>
->>> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1305
->>>
->>> The following changes since commit 7a5075cef77b5f7af454e9868e1d0019f2fd1394:
->>>
->>>   gnome-keyring: set CVE_PRODUCT (2026-01-26 11:16:37 +0530)
->>>
->>> are available in the Git repository at:
->>>
->>>   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
->>>   https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
->>>
->>> Anil Dongare (2):
->>>   php 8.2.29: Fix CVE-2025-14178
->>>   php 8.2.29: Fix CVE-2025-14180
->>>
->>> Gyorgy Sarvari (52):
->>>   sox: patch CVE-2017-11332
->>>   sox: patch CVE-2017-11358
->>>   sox: patch CVE-2017-11359
->>>   sox: patch CVE-2017-15370
->>>   sox: patch CVE-2017-15371
->>>   sox: patch CVE-2017-15372
->>>   sox: patch CVE-2017-15642
->>>   sox: patch CVE-2017-18189
->>>   sox: mark CVE-2019-1010004 as patched
->>>   sox: patch CVE-2019-13590
->>>   sox: patch CVE-2019-8354
->>>   tigervnc: sync xserver component with oe-core
->>>   tigervnc: ignore CVE-2014-8241
->>>   tigervnc: ignore CVE-2023-6377
->>>   tigervnc: ignore CVE-2023-6478
->>>   tigervnc: ignore CVE-2025-26594...26601
->>>   fontforge: patch CVE-2025-15279
->>>   fontforge: patch CVE-2025-15275
->>>   fontforge: patch CVE-2025-15269
->>>   fontforge: patch CVE-2025-15270
->>>   ez-ipupdate: patch CVE-2003-0887
->>>   freerdp: ignore CVE-2025-68118
->>>   gimp: ignore CVE-2025-14423
->>>   gnome-settings-daemon: ignore CVE-2024-38394
->>>   imagemagick: patch CVE-2025-66628
->>>   libcupsfilters: patch CVE-2025-64503
->>>   mongodb: upgrade 4.4.29 -> 4.4.30
->>>   mongodb: ignore CVE-2025-14911
->>>   netdata: ignore CVE-2024-32019
->>>   proftpd: ignore CVE-2021-47865
->>>   python3-aiohttp: patch CVE-2025-69225
->>>   python3-aiohttp: patch CVE-2025-69226
->>>   python3-aiohttp: patch CVE-2025-69228
->>>   python3-django: patch CVE-2025-64460
->>>   raptor2: patch CVE-2024-57822 and CVE-2024-57823
->>>   python3-tornado: mark CVE-2025-67725 patched
->>>   python3-virtualenv: patch CVE-2026-22702
->>>   gnome-desktop: upgrade 44.0 -> 44.4
->>>   gtksourceview5: upgrade 5.12.0 -> 5.12.1
->>>   gnuchess: upgrade 6.2.9 -> 6.2.11
->>>   gnome-calculator: upgrade 46.0 -> 46.2
->>>   gdm: upgrade 46.0 -> 46.2
->>>   mutter: upgrade 46.1 -> 46.9
->>>   mutter: fix profiler PACKAGECONFIG
->>>   gnome-bluetooth: upgrade 46.0 -> 46.2
->>>   gnome-shell-extensions: upgrade 46.1 -> 46.4
->>>   nautilus: upgrade 45.1 -> 45.2.1
->>>   gnome-tweaks: upgrade 40.0 -> 40.10
->>>   tigervnc: mark CVE-2024-0408 and CVE-2024-0409 patched
->>>   python3-django: upgrade 4.2.27 -> 4.2.28
->>>   gnome-commander: upgrade 1.16.1 -> 1.16.2
->>>   nodejs: upgrade 20.18.2 -> 20.20.0
-> This introduces patch-status issue with missing Upstream-Status in
-> meta-oe/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
->
-> patch-status isn't in default ERROR_QA for scarthgap, but can we
-> please add Upstream-Status here?
->
-> I can send a fix if needed.
+From: Martin Jansa <martin.jansa@gmail.com>
 
-Sorry for missing this - yes, I think a fix would be useful
+The patch was introduced in:
+https://git.openembedded.org/meta-openembedded/commit/?h=scarthgap&id=3f9623aaefed5b070294a0d52a54a50ea709b389
+and it's the only one in missing it (as default ERROR_QA in scarthgap
+doesn't have patch-status).
 
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../nodejs/0001-Revert-stop-using-deprecated-ares_query.patch    | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
+index ae4c316baf..c841f0369c 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-stop-using-deprecated-ares_query.patch
+@@ -16,6 +16,7 @@ calls. This patch reverts the below linked commit.
+ [1]: https://github.com/nodejs/node/commit/22e0d17097fa419cde5fcd5d648fe70aa9fb80e2
+ 
+ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++Upstream-Status: Inappropriate [oe-specific]
+ ---
+  src/cares_wrap.cc | 24 ++++++++++++------------
+  src/cares_wrap.h  | 35 ++++++++++++++++-------------------
 
