@@ -2,140 +2,138 @@ Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2B14E6814E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1AC5E6814B
 	for <webhook@archiver.kernel.org>; Tue, 17 Feb 2026 09:01:34 +0000 (UTC)
 Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8204.1771318894035334582
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8201.1771318889254037187
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Feb 2026 01:01:34 -0800
+ Tue, 17 Feb 2026 01:01:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Idfc8D++;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MICxQ2ub;
  spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: bindudaniel1996@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-824af5e5c81so3816581b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 01:01:33 -0800 (PST)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-8230f8f27cfso2105065b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 01:01:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771318893; x=1771923693; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9I5MRLb4iWZOh/Wuufp4g1kF52dvUjWdb0ExQvCOdnc=;
-        b=Idfc8D++NcNcK6WBpwDh+WAlMjkmADkvLfG1RDGcBs2ScAULM1rcRPvti+09+h79yD
-         QXICr4n47Y8zDlSKizjc8GpuwhohkokCC6Fj6exlayd5B0jHEuh/E84aTtWG0ZoOhnUl
-         Zh3M+21R+Q7KLAgxWK9iC7v/sCYWMb3e2VEl8Wk/Zn/1RWzXMxyfbmA0XRPrO5DyAq1o
-         b8m2A9aBFyyTY1BEaYYbCHHEWWyytA5nui3ZbDQ88sYZKuC75pGlPAQm416F/BxcCb7J
-         PJ3IlqItJltSFjAVllKsYlB5EJ35Mj67eVhqg+3yjTCgYre/kVnjv01dWdF6CahILI2n
-         A6ew==
+        d=gmail.com; s=20230601; t=1771318888; x=1771923688; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=a/HX91UWFyGzU15GDcamJ8bHbbw0Kmxu6jtwy1NiRvQ=;
+        b=MICxQ2ub7zBZewkBzzTLtAWE2F7yYgj+IZWdmYzLM73nUyz1qps61pYx9Ngyn7mH5n
+         PE73pDPJ23GCtbtzHIUbTu6zcC4CWDUq0ng/Sc4/Ti5KPLHavUd9NfCZ/YKbEj0s4zcU
+         i4m4nS3YVD5Lhj7gdxemoQJDHi0dLLsuGjcSX+mHwp8uQ/95c1W+Jip6Ed4w+Ht1xZ4N
+         4gLdo7yFvvomvDRoI8PDG+gh0q+aEiuKb0Nx8e756KHfLzlag4pBdQNYe6p+t0Spx5s3
+         g9TgHAWY1gGPXQV/1V+kfeDCNpyjEmGmajtz7TuMhc1I0XyG5hsuurmTUpjtsX7MyYlw
+         Y1lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771318893; x=1771923693;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=9I5MRLb4iWZOh/Wuufp4g1kF52dvUjWdb0ExQvCOdnc=;
-        b=WazI9s8s2dxvKGPhfkSAqaeekst35n5qclmxd/Jd37XFBNjLwlS50dJ4/2x7GU4KDc
-         R9EYiQHaVJIXJ8HojLGlIuGlYdJY72DIBlKQsqlLBx+XYIqfBI3brIf66GCi4HwHwju5
-         0dGUGih2CyVEdX3WvY61qzh7/8srxSfYVhIAeDks7QFkBoCQ51vSTWT/g1CNk6JgnB5V
-         aiqLqVMGeJMvh0kffSmT9/bkWQc166VjN9e/EMpJaycHCbKc+hZaMv+ij4ssVQ/FLbM5
-         SYCmqVgM0iSwtfoMzLx1qW5wdQOh+FL+gXuWUXfGGVWTLD8H9119RNbVe5Bp7Ug7srY8
-         lD4A==
-X-Gm-Message-State: AOJu0Yw44rhHnctxJoEyGQwORWGZk6j51rdkQl0YOspitKb36rrQingc
-	RjU0agp99K8I/9itshHLtOwh+EjOAz1H78FVAchs+detmbBT8g+E89jc6KRAIA==
-X-Gm-Gg: AZuq6aKZmLl6zEcPceDGBdWSNlLr6eimTSpKJqamd0CdXlO9MfmNcomSOXOBlVB93yv
-	DUcSsxaLy8m8dmHPCBACMs8QvYszccKg2Qe/YBxomR9XrdwPd/GiA85JPN9EgzPAlVkbVSiYLGG
-	V+Ar2pVR0QFOH/CCGbHR54JjQZBMy9mhJBqWkJGr6WTaAtGXF5VAo5AeEgscn8/ncDTwLAMP5yk
-	IGiajgs+h/O1mGprWoo7yi/MS5YtRtGDGaq2txBCuWhBDaT5O+wYsyFofK9WUHgjKlVROFDSXee
-	r/0p9KWSOQnUmDVd/fZXBwFStLecEINeLFvATwYI0nildiy4qC05vvEidmJmyBRgC8UeyPSLpaq
-	8/zsiAZW7eOgiw3/Z+p1npMQzKbwXbJLcTMfDDmgLm3aaiNqakKCvR/wwIp1RvXjD9o25Dz1+BE
-	HrK7c/Wxrcz+bITfxM4xUyWS3eBIOfzQ==
-X-Received: by 2002:a05:6a20:e292:b0:366:14ac:e1f0 with SMTP id adf61e73a8af0-3946733e2f3mr14526806637.66.1771318893241;
-        Tue, 17 Feb 2026 01:01:33 -0800 (PST)
+        d=1e100.net; s=20230601; t=1771318888; x=1771923688;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=a/HX91UWFyGzU15GDcamJ8bHbbw0Kmxu6jtwy1NiRvQ=;
+        b=S16J49hrw/yLdfhie3TcXWYyCvd7RPKndui+BnyEHGNcgkZgc7dxWLJ+fbRob+UmAK
+         pgXHME09yBjklmT0bFvr2CiomI1R8zxxjvwQlkzUjDkChWBqvXxEG2AjGbkYNu3RgZSe
+         DFnfJI6jopXDUBuEY73XeR5Z3V1sGmCI4BCzjhKUzElpQomtzEmbU0a9//xE2rT5+BwL
+         wjpMQkRiyA1t4vjzJ+nNXkm9HKhaAWq0Nc4bcazdD1Q/T3nTFg7yflFpalFxx5ZembQ9
+         bD3Q+In2iFfLPUL27EEb9gZY9A7dErZ1C7DRXHVwlXKBvkbYRRoRqvh/z0TBugSgVgO1
+         1Skw==
+X-Gm-Message-State: AOJu0Yy431uSSJzYpqJs+7g5acn85Qu0UH4OrPo84pk7k42j5dAgPC7t
+	sJLsuHQ1ckHjfPDXWlpXnsC0POUhJBXjCqKOxcGEr8XyQpxwZZUGx5lZdWF3OA==
+X-Gm-Gg: AZuq6aLf1PGE2VHUi+0gL3JETehlmD2X/XxRzPKqbTPVhzm9V9GCNP7wG5BZtW295Lg
+	shnXxVeijoWBzTcQSc860fZzXp+TJkgTFJXvA130spMkGxIVpWV1q40QnNJ2co2xLasubRdS6FR
+	f8UktZUUWjxHq0NBNMiKUh60/1pYF+mkO+31i1ZeLNg316DFt+/03IQg2JYSIhyc2X/bw2CQAkZ
+	oFsO1hxgPPixXj0110NiEYmW/aL6vlZ7XKOi+534qtOayaQ2FYTzbQvx1dedPUM0vtxC4HT81Mm
+	FVI9QYJdh+/egVoSZ/Eh/KL1kQm7vwpM+S0wcz2UZj5D/TzcPWwjwPCGGz9tvJWTz2Lh+wgX2xr
+	puw6e9PkN9Ct4cfXSpBRSD/CBKswh6S81VTNwVuo4W2b8XD6QPKiEiSnHKJ184l1t6JMS1EkTiH
+	649fQmTp25YPlX7YpdW/FK+Ls9w/Jkag==
+X-Received: by 2002:a05:6a20:748e:b0:35e:e604:f78b with SMTP id adf61e73a8af0-3946c79956fmr12928843637.3.1771318888324;
+        Tue, 17 Feb 2026 01:01:28 -0800 (PST)
 Received: from L-12443L.kpit.com ([106.51.47.218])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6e5332facfsm9171274a12.32.2026.02.17.01.01.31
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6e5332facfsm9171274a12.32.2026.02.17.01.01.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Feb 2026 01:01:32 -0800 (PST)
+        Tue, 17 Feb 2026 01:01:28 -0800 (PST)
 From: Bhabu Bindu <bindudaniel1996@gmail.com>
 X-Google-Original-From: Bhabu Bindu <bhabu.bindu@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	bhabu.bindu@kpit.com
-Subject: [meta-oe][scartgap][PATCH 2/4] imagemagick: Fix CVE-2026-23874
-Date: Tue, 17 Feb 2026 14:30:17 +0530
-Message-Id: <20260217090019.1076725-2-bhabu.bindu@kpit.com>
+Subject: [meta-oe][scartgap][PATCH 1/4] imagemagick: Fix CVE-2026-22770
+Date: Tue, 17 Feb 2026 14:30:16 +0530
+Message-Id: <20260217090019.1076725-1-bhabu.bindu@kpit.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260217090019.1076725-1-bhabu.bindu@kpit.com>
-References: <20260217090019.1076725-1-bhabu.bindu@kpit.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 17 Feb 2026 09:01:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124442
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124441
 
-Fix CVE-2026-23874 with patch provided by Debian from fixed version.
+Fix CVE-2026-22770 with patch provided by NVD advisory.
 
-Link: https://security-tracker.debian.org/tracker/CVE-2026-23874
+Link: https://nvd.nist.gov/vuln/detail/CVE-2026-22770
 
 Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
 ---
- .../imagemagick/CVE-2026-23874.patch          | 40 +++++++++++++++++++
+ .../imagemagick/CVE-2026-22770.patch          | 41 +++++++++++++++++++
  .../imagemagick/imagemagick_7.1.1.bb          |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-22770.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-22770.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-22770.patch
 new file mode 100644
-index 0000000000..59fa8354e2
+index 0000000000..a89a8b9d3c
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-23874.patch
-@@ -0,0 +1,40 @@
-+From 2a09644b10a5b146e0a7c63b778bd74a112ebec3 Mon Sep 17 00:00:00 2001
-+From: Cristy <urban-warrior@imagemagick.org>
-+Date: Thu, 15 Jan 2026 17:50:19 -0500
-+Subject: [PATCH] MSL: Stack overflow via infinite recursion in
-+ ProcessMSLScript
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-22770.patch
+@@ -0,0 +1,41 @@
++From 3e0330721020e0c5bb52e4b77c347527dd71658e Mon Sep 17 00:00:00 2001
++From: Dirk Lemstra <dirk@lemstra.org>
++Date: Sun, 4 Jan 2026 15:26:48 +0100
++Subject: [PATCH] Correct memset initialization and add an overflow check
++ (GHSA-39h3-g67r-7g3c)
 +
-+CVE: CVE-2026-23874
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/2a09644b10a5b146e0a7c63b778bd74a112ebec3]
++CVE: CVE-2026-22770
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/3e0330721020e0c5bb52e4b77c347527dd71658e]
 +Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
 +---
-+ coders/msl.c | 16 +++++++++++++---
-+ 1 file changed, 13 insertions(+), 3 deletions(-)
++ MagickCore/effect.c | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
 +
-+diff --git a/coders/msl.c b/coders/msl.c
-+index 5b182b5922f..53e3a95d14b 100644
-+--- a/coders/msl.c
-++++ b/coders/msl.c
-+@@ -7041,9 +7041,19 @@ static void MSLStartElement(void *context,const xmlChar *tag,
++diff --git a/MagickCore/effect.c b/MagickCore/effect.c
++index a343e42259d..b2fdf626cb1 100644
++--- a/MagickCore/effect.c
+++++ b/MagickCore/effect.c
++@@ -876,16 +876,21 @@ static double **AcquireBilateralTLS(const size_t number_threads,
++   double
++     **weights;
 + 
-+           /* process */
-+           {
-+-            *msl_info->image_info[n]->magick='\0';
-+-            (void) WriteImage(msl_info->image_info[n], msl_info->image[n],
-+-              msl_info->exception);
-++            (void) CopyMagickString(msl_info->image_info[n]->filename,
-++              msl_info->image[n]->filename,MagickPathExtent);
-++            (void) SetImageInfo(msl_info->image_info[n],1,exception);
-++            if (LocaleCompare(msl_info->image_info[n]->magick,"msl") != 0)
-++              {
-++                *msl_info->image_info[n]->magick='\0';
-++                (void) WriteImage(msl_info->image_info[n],msl_info->image[n],
-++                  msl_info->exception);
-++              }
-++            else
-++              (void) ThrowMagickException(msl_info->exception,GetMagickModule(),
-++                FileOpenError,"UnableToWriteFile","`%s'",
-++                msl_info->image[n]->filename);
-+             break;
-+           }
-+         }
+++  size_t
+++    count;
+++
++   ssize_t
++     i;
++ 
+++  if (HeapOverflowSanityCheckGetSize(height,sizeof(**weights),&count) != MagickFalse)
+++    return((double **) NULL);
++   weights=(double **) AcquireQuantumMemory(number_threads+1,sizeof(*weights));
++   if (weights == (double **) NULL)
++     return((double **) NULL);
++-  (void) memset(weights,0,number_threads*sizeof(*weights));
+++  (void) memset(weights,0,(number_threads+1)*sizeof(*weights));
++   for (i=0; i <= (ssize_t) number_threads; i++)
++   {
++-    weights[i]=(double *) AcquireQuantumMemory(width,height*sizeof(**weights));
+++    weights[i]=(double *) AcquireQuantumMemory(width,count);
++     if (weights[i] == (double *) NULL)
++       return(DestroyBilateralTLS(number_threads,weights));
++   }
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index 94b2df10a2..0a1d34e313 100644
+index 99632967c2..94b2df10a2 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://CVE-2025-57807.patch \
             file://CVE-2025-62171.patch \
             file://CVE-2025-65955.patch \
-            file://CVE-2026-22770.patch \
-+           file://CVE-2026-23874.patch \
++           file://CVE-2026-22770.patch \
             "
  SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
  
