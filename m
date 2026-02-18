@@ -1,124 +1,194 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7B05E9A02C
-	for <webhook@archiver.kernel.org>; Wed, 18 Feb 2026 15:42:02 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14750.1771429314169283693
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 014C2E9A02C
+	for <webhook@archiver.kernel.org>; Wed, 18 Feb 2026 16:18:13 +0000 (UTC)
+Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15545.1771431490209893676
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Feb 2026 07:41:54 -0800
+ Wed, 18 Feb 2026 08:18:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=VLKHP5bU;
- spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-43945763558so2433218f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 07:41:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1771429312; x=1772034112; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mMdhAtP+dCvfp86IcrBj8sk18zsgF2UXgl4EwUHSg7M=;
-        b=VLKHP5bU6PcdDlVnYYJsLXssrCcIAFt2Fqy6UePzie+BIvHANfyJZhgqaNJCfG8CZz
-         qk038Rx59hbJG2dUv02StHgTqRVChfqtd9cso29UY3Uko6Y44d2miiC54iaYniHGVQ/3
-         3OdV3ig45aMrAVYggZpP1dTx0AXt2vFwG2j/I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771429312; x=1772034112;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=mMdhAtP+dCvfp86IcrBj8sk18zsgF2UXgl4EwUHSg7M=;
-        b=ZSkAWV8R+pk7ADKxxDwH4DJg9HbewG5XYTn4UQ04PayayBFDWQL7LBZ2wAFTR0FiBM
-         pkvhclra9v+j78uaSsn/I/Bwc2OpicLfKJQ+AuPL43H+y7o1Zbi5SX8t0HbcXB9dtG2H
-         ER9ErJnpLvqCiK6NDEb4eCf0gDQHF0f3vKA9DgBNhEz5YbK+hBkwOCpbKbbCOAFib0HC
-         Ho/k4OywCRwiT1P7z2SLW4Y97nH5N1QKQJbAUBwoctgtvM0dHz2qeGvzOz69+gQrApYO
-         vaj/zwQ+mMV/Kyd3n/y6EawFn+Ozv6hv/hEFnP+aMpYpD8vIezigpavT5fx8VVxZs8Lv
-         ppcQ==
-X-Gm-Message-State: AOJu0YxBEKKuNnaJfiqc69XAq9ef0q90GWy06DIQf4AsuPgp+yGDWgqP
-	YV31i9L0FTkQcm4pxuw0mb0nbEgec+lOX9JD47RNM9XhLUVU4p542gPklCkKCKNQzTFqgELkO36
-	gfOqP
-X-Gm-Gg: AZuq6aJff7IIzjX9GzXUWRe/Lfohrvq+WpUvZu0w84gvM+ZRFzkZG3d3G9iW7XWHk/m
-	p7Wca9WzN/KJW8ZdeDxT2cgGJhgJOt+aSgM64dtbuFv5sUe4/wQ8beXRzuAXBgvLvQwzIxt0bwn
-	xS1L0YaVKPZs/VpFHCVPcCzmRNWH69DZ6d+vLPD+/EHk6UFSTQCYYzKMZPAqALPTjD+MSuoom3d
-	C2U5nm36fbwN7AJZ5Mq5oEGuc08p27a+HJrUVKmgxAaZKqAl2IjxoZWHiQr9L1z/llm7YJrgewj
-	BynVdCC0z8XcCLwTYMQ5zY19Zka4J/dyg9pTmn6aQK+SfKmvG5zWZfLIjPKSx2qzh/Qm+qkTadd
-	0+7cEwi7WQSc1jJtxfOmAm9U8zHpyJvhDSZ4j+GPOaTy6xQA9GQJYEbM9sO4F/6PvtRE48O93Tb
-	2EScojTS03QGJc5pzBw5CxunbsJFU9+ArzDMrt
-X-Received: by 2002:a05:6000:2502:b0:435:9f1b:8d19 with SMTP id ffacd0b85a97d-43796aefb41mr35864148f8f.38.1771429312131;
-        Wed, 18 Feb 2026 07:41:52 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43796a74704sm45102522f8f.16.2026.02.18.07.41.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Feb 2026 07:41:51 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout11.t-online.de (Postfix) with SMTP id 1E12F1C84C
+	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 17:18:08 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.40.86]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1vskFR-1ncTqr0; Wed, 18 Feb 2026 17:17:57 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-astroid: Upgrade 4.0.3 -> 4.1.0
-Date: Wed, 18 Feb 2026 17:41:45 +0200
-Message-ID: <20260218154146.3267220-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260218154146.3267220-1-leon.anavi@konsulko.com>
-References: <20260218154146.3267220-1-leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCHv2] snapper: update 0.12.2 -> 0.13.0
+Date: Wed, 18 Feb 2026 17:17:49 +0100
+Message-ID: <20260218161749.2831-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1771431477-0E7CAFB0-2393E049/0/0 CLEAN NORMAL
+X-TOI-MSGID: 1cb4d88e-6198-469e-9768-7678e9035489
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 15:42:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124489
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 16:18:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124491
 
-Upgrade to release 4.1.0:
+- Remove 0001-Fix-build-with-boost-1.89.patch. Seems to be fixed
+  upstream
+- Use manpages class
 
-- Add support for equality constraints (``==``, ``!=``) in inference.
-- Ensure ``ast.JoinedStr`` nodes are ``Uninferable`` when the
-  ``ast.FormattedValue`` is ``Uninferable``. This prevents
-  ``unexpected-keyword-arg`` messages in Pylint where the
-  ``Uninferable`` string appeared in function arguments that were
-  constructed dynamically.
-- Add support for type constraints (`isinstance(x, y)`) in inference.
-- Make `type.__new__()` raise clear errors instead of returning `None`.
-- Move object dunder methods from ``FunctionModel`` to ``ObjectModel``
-  to make them available on all object types, not just functions.
-- ``lineno`` and ``end_lineno`` are now available on ``Arguments``.
-- Add helper to iterate over all annotations nodes of function
-  arguments, ``Arguments.get_annotations()``.
-- Skip direct parent when determining the ``Decorator`` frame.
-- Add simple command line interface for astroid to output generated
-  AST. Use with ``python -m astroid``.
-- Fix incorrect type inference for ``super().method()`` calls that
-  return ``Self``. Previously, astroid would infer the parent class
-  type instead of the child class type, causing pylint E1101 false
-  positives in method chaining scenarios.
-- Add missing ``dtype`` and ``casting`` parameters to
-  ``numpy.concatenate`` brain.
-- Fix ``random.sample`` inference crash when sequence contains
-  uninferable elements.
-- Fix ``random.sample`` crash when cloning ``ClassDef`` or
-  ``FunctionDef`` nodes.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../{python3-astroid_4.0.3.bb => python3-astroid_4.1.0.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-astroid_4.0.3.bb => python3-astroid_4.1.0.bb} (90%)
+ .../0001-Fix-build-with-boost-1.89.patch      | 89 -------------------
+ .../{snapper_0.12.2.bb =3D> snapper_0.13.0.bb}  | 12 ++-
+ 2 files changed, 5 insertions(+), 96 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/snapper/snapper/0001-Fix-buil=
+d-with-boost-1.89.patch
+ rename meta-oe/recipes-support/snapper/{snapper_0.12.2.bb =3D> snapper_0=
+.13.0.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_4.0.3.bb b/meta-python/recipes-devtools/python/python3-astroid_4.1.0.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-astroid_4.0.3.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_4.1.0.bb
-index efa59fc198..1303b0165d 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_4.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_4.1.0.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
- 
--SRC_URI[sha256sum] = "08d1de40d251cc3dc4a7a12726721d475ac189e4e583d596ece7422bc176bda3"
-+SRC_URI[sha256sum] = "e2fbab37f205a651e6a168cb1e9a6a10677f6fa6a1c21833d113999855b04259"
- 
- inherit pypi python_setuptools_build_meta
- 
--- 
-2.47.3
+diff --git a/meta-oe/recipes-support/snapper/snapper/0001-Fix-build-with-=
+boost-1.89.patch b/meta-oe/recipes-support/snapper/snapper/0001-Fix-build=
+-with-boost-1.89.patch
+deleted file mode 100644
+index a6598b5635..0000000000
+--- a/meta-oe/recipes-support/snapper/snapper/0001-Fix-build-with-boost-1=
+.89.patch
++++ /dev/null
+@@ -1,89 +0,0 @@
+-From c33e7707da86a23c4ad7e2451ddb04df419d6412 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 31 Aug 2025 00:13:07 -0700
+-Subject: [PATCH] Fix build with boost 1.89
+-
+-boost 1.89+ does not have boost system lib anymore all needed functions
+-are now in header
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- dbus/Makefile.am             | 2 +-
+- examples/c++-lib/Makefile.am | 1 -
+- server/Makefile.am           | 2 +-
+- snapper/Makefile.am          | 2 +-
+- testsuite-cmp/Makefile.am    | 1 -
+- zypp-plugin/Makefile.am      | 1 -
+- 6 files changed, 3 insertions(+), 6 deletions(-)
+-
+-diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+-index 9c0456a..2078d7d 100644
+---- a/dbus/Makefile.am
+-+++ b/dbus/Makefile.am
+-@@ -15,4 +15,4 @@ libdbus_la_SOURCES =3D					\
+- 	DBusMainLoop.cc		DBusMainLoop.h
+-=20
+- libdbus_la_LIBADD =3D $(DBUS_LIBS)
+--libdbus_la_LDFLAGS =3D -lboost_system -lboost_thread
+-+libdbus_la_LDFLAGS =3D -lboost_thread
+-diff --git a/examples/c++-lib/Makefile.am b/examples/c++-lib/Makefile.am
+-index 52c81e5..f55da6f 100644
+---- a/examples/c++-lib/Makefile.am
+-+++ b/examples/c++-lib/Makefile.am
+-@@ -5,7 +5,6 @@
+- AM_CPPFLAGS =3D -I$(top_srcdir)
+-=20
+- LDADD =3D ../../snapper/libsnapper.la
+--AM_LDFLAGS =3D -lboost_system
+-=20
+- noinst_PROGRAMS =3D List ListAll Create CmpDirs CreateNumber CreateTime=
+line
+-=20
+-diff --git a/server/Makefile.am b/server/Makefile.am
+-index c03f373..1aef916 100644
+---- a/server/Makefile.am
+-+++ b/server/Makefile.am
+-@@ -16,4 +16,4 @@ snapperd_SOURCES =3D					\
+- 	FilesTransferTask.cc	FilesTransferTask.h
+-=20
+- snapperd_LDADD =3D ../snapper/libsnapper.la ../dbus/libdbus.la -lrt
+--snapperd_LDFLAGS =3D -lboost_system -lboost_thread -lpthread
+-+snapperd_LDFLAGS =3D -lboost_thread -lpthread
+-diff --git a/snapper/Makefile.am b/snapper/Makefile.am
+-index b0fe55c..d75599f 100644
+---- a/snapper/Makefile.am
+-+++ b/snapper/Makefile.am
+-@@ -71,7 +71,7 @@ endif
+-=20
+- libsnapper_la_CPPFLAGS =3D $(XML2_CFLAGS) $(ZLIB_CFLAGS)
+- libsnapper_la_LDFLAGS =3D -version-info @LIBVERSION_INFO@
+--libsnapper_la_LIBADD =3D -lboost_thread -lboost_system $(XML2_LIBS) -la=
+cl $(ZLIB_LIBS)
+-+libsnapper_la_LIBADD =3D -lboost_thread $(XML2_LIBS) -lacl $(ZLIB_LIBS)
+- if ENABLE_ROLLBACK
+- libsnapper_la_LIBADD +=3D -lmount
+- endif
+-diff --git a/testsuite-cmp/Makefile.am b/testsuite-cmp/Makefile.am
+-index 81104bf..555bc3b 100644
+---- a/testsuite-cmp/Makefile.am
+-+++ b/testsuite-cmp/Makefile.am
+-@@ -3,7 +3,6 @@
+- #
+-=20
+- AM_CPPFLAGS =3D -I$(top_srcdir)
+--AM_LDFLAGS =3D -lboost_system
+-=20
+- LDADD =3D ../snapper/libsnapper.la
+-=20
+-diff --git a/zypp-plugin/Makefile.am b/zypp-plugin/Makefile.am
+-index 9d102e0..e395f59 100644
+---- a/zypp-plugin/Makefile.am
+-+++ b/zypp-plugin/Makefile.am
+-@@ -33,7 +33,6 @@ forwarding_zypp_plugin_SOURCES =3D \
+- forwarding_zypp_plugin_LDADD =3D \
+- 	../snapper/libsnapper.la \
+- 	../stomp/libstomp.la \
+--	-lboost_system \
+- 	-lpthread
+-=20
+- TESTS =3D solvable-matcher.test
+diff --git a/meta-oe/recipes-support/snapper/snapper_0.12.2.bb b/meta-oe/=
+recipes-support/snapper/snapper_0.13.0.bb
+similarity index 76%
+rename from meta-oe/recipes-support/snapper/snapper_0.12.2.bb
+rename to meta-oe/recipes-support/snapper/snapper_0.13.0.bb
+index 981ca84c13..56d4c89d0f 100644
+--- a/meta-oe/recipes-support/snapper/snapper_0.12.2.bb
++++ b/meta-oe/recipes-support/snapper/snapper_0.13.0.bb
+@@ -6,19 +6,17 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa9=
+54499f7abaabaa882bbe"
+ DEPENDS =3D "acl boost btrfs-tools dbus e2fsprogs json-c libxml2 lvm2 nc=
+urses zlib"
+=20
+ # Build separation is slightly broken
+-inherit autotools-brokensep pkgconfig gettext
++inherit autotools-brokensep pkgconfig gettext manpages
+=20
+-SRC_URI =3D "git://github.com/openSUSE/snapper.git;protocol=3Dhttps;bran=
+ch=3Dmaster \
+-           file://0001-Fix-build-with-boost-1.89.patch \
+-          "
+-SRCREV =3D "4f3d2b2fc58aefa976668cd25b8eac02ba0f85e7"
++SRC_URI =3D "git://github.com/openSUSE/snapper.git;protocol=3Dhttps;bran=
+ch=3Dmaster"
++SRCREV =3D "3a3bd97083976d28538d402284ff947b4aab5b8f"
+=20
+ EXTRA_OECONF +=3D "--disable-zypp"
+=20
+-PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'api-documenta=
+tion systemd pam', d)}"
++PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd pam',=
+ d)}"
+ PACKAGECONFIG[pam] =3D "--enable-pam --with-pam-security=3D${base_libdir=
+}/security, --disable-pam,libpam"
+ PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-systemd"
+-PACKAGECONFIG[api-documentation] =3D "--enable-doc,--disable-doc,libxslt=
+-native docbook-xsl-stylesheets-native"
++PACKAGECONFIG[manpages] =3D "--enable-doc,--disable-doc,libxslt-native d=
+ocbook-xsl-stylesheets-native"
+=20
+ # Avoid HOSTTOOLS path in binaries
+ export DIFF_BIN =3D "${bindir}/diff"
+--=20
+2.52.0
 
 
