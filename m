@@ -1,99 +1,105 @@
-Return-Path: <frederikbraendstrup@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3815EE9A03E
-	for <webhook@archiver.kernel.org>; Wed, 18 Feb 2026 08:55:30 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8126.1771404927189164251
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F981E9A03E
+	for <webhook@archiver.kernel.org>; Wed, 18 Feb 2026 10:20:20 +0000 (UTC)
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9035.1771410019347246469
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Feb 2026 00:55:27 -0800
+ Wed, 18 Feb 2026 02:20:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EbSjAgZt;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: frederikbraendstrup@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-65a36c8bcabso2709796a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 00:55:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZidQB5IW;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-824a3509a12so3052455b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 02:20:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771404925; x=1772009725; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1771410018; x=1772014818; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HNzms1xVUgdbNUnaO/9IvUiesT39VhEVr1PowSCrGCc=;
-        b=EbSjAgZtW75FP8Q/i3lMGzQnXvRJ7X8J867fd7SIKbZvym/im1JDl5ZyA+7LRYwCYn
-         /wl4+VqpzsG2rQX4KXeqawma46dbKiWGtZ5stnzBktHcn6fZhN/QIvLuQ+OJ3z88Sh4Y
-         At1R0Q9Mv+a4BdV/2c15RYnBNp3aXGyXq2vMi0x2BMvi1m9FkSmnvfb7bYaW/xJJmzdf
-         aABKuS/GuWQybCVawFIVSF2XqS23ksStibeEPk55hj67EitlEK8O8TxYSSz4PWtYHp5a
-         Fivo4EsAuMSjDnF0Vdo0xoPNSPoeRK9JqythoKIWbhoafmkDc0EUepH5LfRNfnwcx+f2
-         eiUQ==
+        bh=iRY18TlGJ00WH5+x+iqsaZC3EXGn/hFQW4VCVdnXgt8=;
+        b=ZidQB5IW/YIiMpla9jV2zE1+an2tMVCVJHDCVkcxJ43EhPT7s7msnoGW9favertTy/
+         ozfhnoBcl5w3rxAMKfG7d75dcf/meaTAuckM63oER63zZVnEE6ClvFt5c/7T5TyADwTx
+         pJnvArYDMQimUvZe/G8WTLxMC2VR8tln05/04eFEgSV5LRnZ5cI3gXs6ON5iuSupAqRZ
+         cHBVdh4MLr40dAi7vWWn7k+hpZBOyE5au7RacjW3Se1azI9K3rii6SGX6jkdH3DkIX36
+         J03jGu3h955D1wFmzZ2RMDFx85ZbZciGYO0GEkaX5Ikr3vl9DEuyn9BQ4OqrSuVkYcXj
+         SZ1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771404925; x=1772009725;
+        d=1e100.net; s=20230601; t=1771410018; x=1772014818;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HNzms1xVUgdbNUnaO/9IvUiesT39VhEVr1PowSCrGCc=;
-        b=jaARxmOj35C9DDNxXb2QWg8gSuMlgauQ9hYTHnS2vDxSrnjKcmToh9m3HaKd3jEQab
-         iWsAcGMfpXr7w/YAiIciVZ6wEpgy6mLJMhD49IGeh30OS+89BC31COQWDuHNHLY5atuo
-         amJy2KAquIU32UMvFFpCgUmcYspOsYDKZe/1XbcSeoFQ7zUYrrriDLMLau9Yf1hhLDfY
-         dePQVs9kntFi+aqG9d0jZFFIZHGgl4G5tbpJ9R+OwO39ALkoo5+JF+8wmhaN4Y0ickav
-         z7O0NLf8VvAPLi7hT/pAnjDKrvHoB0KUCBNKQGtMWfY3NPAiqDFyRLz0Edpw0PXJrQ8o
-         /uTQ==
-X-Gm-Message-State: AOJu0YzHtxVrCfbCJE1iIyOQdC3/t2Qf39LU1RvBC3vSxU6y8aq+tVEt
-	Fytqm+X9BRLQSQxm9YHwB6bsTB7dgtWYvaiMkjj2oAEggBxMs/lM83akfoqMuw==
-X-Gm-Gg: AZuq6aK469cBv37+Lmq0sVVfYKEKz6TkJ6zY+zNHKDZnZGTVVlRGAYGURNyvahkqtPO
-	U9ar+EgrXNhwmS068MC3KkZLxf51wN60BmqIwS7yOZduLf6+WZSSbJkKwF8w0SrJi9ajAoVZgTW
-	saSHZAOlAUjgx/ZW5xgu8OLKDSWD46tWKhswYnOVXZ60aKTqBXPX1U1QvXiQOWuwDwiyT4FPA2u
-	oalDiY6l3s2f9EkfuXz2E3VXLzYW10OQUk039atOnATzdZzlprfT5f22Tbm9eSSCKyzKyKspQ46
-	MpUCMfWoyxYGo3SBBJ08aw4whUrYQONEJC1oc9hyuz8CUAeN+BzZkhxmNQwT4qjZ+5ls+ME0FSi
-	LA5qO0yNnR75j92iBaCmOG+Ivm9ZQqLj5mn2vdaLqaaznZ2GP89WkKU+8n4rEWujzSW3qaVc8wN
-	ln11L6etIZMy+W5WFFhu5XyfL8mKKBpwhDaor8oIcft/wEblJr4L3TkJBFiruyOZHD032BgSsF8
-	Q==
-X-Received: by 2002:a17:907:1ca9:b0:b8f:e9fa:ddf7 with SMTP id a640c23a62f3a-b8fe9faf0a2mr645668866b.40.1771404925177;
-        Wed, 18 Feb 2026 00:55:25 -0800 (PST)
-Received: from ws.taila4487.ts.net (77.241.136.67.bredband.3.dk. [77.241.136.67])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b8fc76278b8sm436826066b.33.2026.02.18.00.55.24
+        bh=iRY18TlGJ00WH5+x+iqsaZC3EXGn/hFQW4VCVdnXgt8=;
+        b=qht01e9e6O6Hwk0LGj2vuJEK6E/IeG3Oms4h1tiC5qy5udMATdvGQFKjr6OX9MzPwp
+         egJliKCPldlJYQcptQ8CfOj3ThdiHbTa1QBWzuA5mbfLxuACrkhTpo31Nt+D0ctuqOHe
+         qntwYMEOJ0ZxEj4Y1g+qEXOxGvxWa8cUG2F5GmCKJVHTz7TgluG0DAZbWtpSTnXU1fIb
+         14EW3n3uXByJ6fnqd+W4yoajW8kAaZO3wKB9e3OYourOEfIvpoyztxGThA+x9f4aCd+6
+         EyQwVint0wSfJ5JcN0KH0Fp94LusFeJDZwx4FkumCEVmOxWwqpKpi+i/K1IuWrW1JArw
+         JFPA==
+X-Gm-Message-State: AOJu0YxSAg1udTEwo8eCfLpK9m4dGMEWt6Eexh8abThNgyL7px0wDimF
+	8NkI94RxNMfuyoI/RPJO7cBleZ6xKkJbJzSxrkQnAytjxK8vDNbDFJh5bgPZjA==
+X-Gm-Gg: AZuq6aIjhjriCV6ko82HO7DOYE3/8Eu86U5wXUUzXmxFMgf4eBpDj26aByQOHe6rgzy
+	3CdU3MTiIdfg0DMQd4+76ma6hmjoiS/L+6wrVLONPz1pUdIxwAikq2BKgISTTywt6JH827chqGY
+	uZO4NvDz7SWzOJdTSDyKu/d6lJTrorGepGEEC7vfGLncygLOuyHQxZrKhhEenx3BP5r46VcaBmb
+	K90uTbNTWSTcIZN7j7Pai/SyroVZcbPEXjkuuryW6PQmrMmn8lshRlNcw4SlumsrLTgO8N38w5Q
+	iqOU/8fp3RS/qT/rVYE6sjrn1KzAgpIzEF7EA2v2QO4D0fqKU39N+lx3Zz22sshpVSLEduMT/yZ
+	ERoSMdcKXD8WJchVI8yWoW7yojdUfswh9kIiaK5PqmMvtSUNHbdUPUh1PySxs6OiPPESALqM+Ah
+	/FzWSL+6PSERJAMIxpjkYUfgejXlWJYZXAzCQ=
+X-Received: by 2002:a05:6a21:389:b0:38d:f0f3:b94e with SMTP id adf61e73a8af0-394fc1a2465mr1279455637.24.1771410018321;
+        Wed, 18 Feb 2026 02:20:18 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.217.33])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c6e531e6dccsm11826670a12.19.2026.02.18.02.20.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Feb 2026 00:55:24 -0800 (PST)
-From: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+        Wed, 18 Feb 2026 02:20:17 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-Subject: [meta-oe][PATCH] dbus-cxx: update 2.6.0 -> 2.6.1
-Date: Wed, 18 Feb 2026 09:55:18 +0100
-Message-ID: <20260218085518.213124-1-frederikbraendstrup@gmail.com>
-X-Mailer: git-send-email 2.52.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 1/2] libjxl: upgrade 0.11.1 -> 0.11.2
+Date: Wed, 18 Feb 2026 23:20:02 +1300
+Message-ID: <20260218102003.3812885-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 08:55:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124470
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Feb 2026 10:20:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124471
 
-Changelog from upstream:
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Some minor fixes for code generation. Qt6 is now properly detected.
+- fix tile dimension in low memory rendering pipeline (CVE-2025-12474)
+- fix number of channels for gray-to-gray color transform (CVE-2026-1837)
+- djxl: reject decoding JXL files if "packed" representation size overflows
+    size_t
 
-Signed-off-by: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
+https://github.com/libjxl/libjxl/releases/tag/v0.11.2
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../dbus-cxx/{dbus-cxx_2.6.0.bb => dbus-cxx_2.6.1.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/dbus-cxx/{dbus-cxx_2.6.0.bb => dbus-cxx_2.6.1.bb} (96%)
+ .../libjxl/{libjxl_0.11.1.bb => libjxl_0.11.2.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/libjxl/{libjxl_0.11.1.bb => libjxl_0.11.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.0.bb b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.1.bb
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
 similarity index 96%
-rename from meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.0.bb
-rename to meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.1.bb
-index cfa476cd1c..bedd379e89 100644
---- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.0.bb
-+++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.6.1.bb
-@@ -6,7 +6,7 @@ LICENSE = "LGPL-3.0-or-later | BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=24594f493407a4cd401ce9794e0b9308"
+rename from meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb
+rename to meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
+index 8170c9055d..617d3bc502 100644
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.1.bb
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
+@@ -8,11 +8,11 @@ inherit cmake pkgconfig mime
  
- SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https;tag=${PV}"
--SRCREV = "b705ad73bef724de0ed33f60462c70b380b6b300"
-+SRCREV = "521a3d88bb731b94cc9998a0f711a5ca9e831e04"
+ DEPENDS = "highway brotli"
  
- DEPENDS = "libsigc++-3"
+-SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
++SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1;tag=v${PV} \
+            file://0001-cmake-Do-not-use-mrelax-all-with-clang-on-RISCV64.patch \
+            "
  
--- 
-2.52.0
-
+-SRCREV = "794a5dcf0d54f9f0b20d288a12e87afb91d20dfc"
++SRCREV = "332feb17d17311c748445f7ee75c4fb55cc38530"
+ 
+ EXTRA_OECMAKE = " \
+ 	-DCMAKE_BUILD_TYPE=Release \
 
