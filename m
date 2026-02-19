@@ -1,176 +1,278 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33438E9A03B
-	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 10:26:24 +0000 (UTC)
-Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.103.33.8])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10901.1771496318631038445
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B772E9A048
+	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 10:32:54 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11060.1771497166722873873
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Feb 2026 02:18:38 -0800
+ Thu, 19 Feb 2026 02:32:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@hotmail.com header.s=selector1 header.b=LFi0J2AW;
- spf=pass (domain: hotmail.com, ip: 52.103.33.8, mailfrom: johanneskauffmann@hotmail.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gPZdP77S3ADai/gW/VoQtIEgUvN+r37o2qD1weMGJrtvnqV4/ZmQxVo+IMA/kTl95pN7R0nPkvO7wyMb27UNJCrBE5yOdybO8wwg+4FDOG65t4V4B4ckFDrIvAe6zmIr8dHnURFScKDyvHulXitQ7mmORzayIU6p+6/ZUv24a7VJivpi4OCSjuHwb5UTUDW7Ow5Rns1LUMg4T1qkwJfNKAaViFWcKcYJox8MSLGkDgyuaUJCmXN48rDnFvMUdz//6Z3O19vQJxUGo49kpu7GEMvv946r20xf7KB1fyYckT7h+2gHwAIGCpmJJeM0bXXSn09KzNMXu4bGVEsnFJNRUw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KM9wpAZBbkypZf3HwoVV4ojtrXnw4gqx4ipESQreb9A=;
- b=YEsX6NzOASRMekg/BJ8fecaxGPpWRC2E9MoI2TnexHZFhIRq2wCxwfzr/bKFHxGSMq0t8IEKIrvEc7CK4JeITH6D4u8pZlR18Mqp3lAhxLxwNRU96/9xmI8uG/Vz8fVKgQos6oq5JM7eICsiPoypLuFaQyzGij7bArxpzhmRXIjqJVIYGgEmsrQNpFoWyARkKkxWDIJ5oc7Vvl2lpjMETWbYAIoLBMasZx3V65bMb9CTu4TY8uj6+WZs/MI/Oa5YiZE6tu6+Rt373BBOLqtJVGpxkeKkpqpvToXTzKqIeWqzRqJTcJW+bF94VidI+Z+ny5Y6jxnR05STlcuKjDW1yA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KM9wpAZBbkypZf3HwoVV4ojtrXnw4gqx4ipESQreb9A=;
- b=LFi0J2AWhLEQlr6iKFOeLT3Uc0oaw5fTpibCmUna9fg7qMA44O+wtzPY7chbW8BQPXioNyEjaTmk7swn48ODxk6/ZrceGdvwxmF0sFTQNxjFIPeu/ko8Ok4Q8QS2+EGVIwWgfb7QzbwjhJfdZNo26lKRgz3bbt8ioHi6Q7QOrDZdQgu7agmC13jUgtbSapLlswk3VbKOiNINoKhKIMLeoCQ+Jg4Zv3iN6tpHPk+q9+rrVQ5X1CdIPYIfLt/gYwzfOKSd1LYrqkyFnQJPrLTqpNjdCb+Y93yZ3bVTNPpebKaYE5hj45CxH1lCPgr6dSPXypezHbwf4CIEAnqLwPxPUw==
-Received: from DU2PR02MB7805.eurprd02.prod.outlook.com (2603:10a6:10:2e5::10)
- by DU4PR02MB12227.eurprd02.prod.outlook.com (2603:10a6:10:631::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Thu, 19 Feb
- 2026 10:18:35 +0000
-Received: from DU2PR02MB7805.eurprd02.prod.outlook.com
- ([fe80::c843:bc28:efe3:e298]) by DU2PR02MB7805.eurprd02.prod.outlook.com
- ([fe80::c843:bc28:efe3:e298%5]) with mapi id 15.20.9632.015; Thu, 19 Feb 2026
- 10:18:35 +0000
-Message-ID: 
- <DU2PR02MB7805CD011989050AD3975D69A66BA@DU2PR02MB7805.eurprd02.prod.outlook.com>
-Date: Thu, 19 Feb 2026 11:18:34 +0100
-User-Agent: Mozilla Thunderbird
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y1713BAH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4833115090dso7645165e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 02:32:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1771497165; x=1772101965; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yrxDmTTsce0EkKin8r4LaTckCFTkXD/jIognCrnLO0o=;
+        b=Y1713BAHuO1tmalr1yE/kRLBhjD+nbvCbYjysIgamiHPUxxO0mVC/rso7GuH0yaBpL
+         dvkZkxRcQLV5tiSA86VKfr3AfYrVLi3LBb/Cfr4H17gDHzekWgSuO/uHGRc5KDUkI8zU
+         vMHoQQIWo9guR3uMLLFInNSCrr+jYwf782Bp86V++KaUxtyuQl9IC5WtmZPF37D/gwWi
+         mgC5IZgbSgtTqpUaHgx/n8kTkDqNBg5kq9osVtZM9OA8NgjV/IKom2PSgLgjzwAgTIUK
+         tQ0RiTeH7Bb4e+uR5KTXcCwgg1Jzr9HRBSjzJ/ueyLe3USUmQrhUs3FCuTpAgeC2gtfO
+         72oQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771497165; x=1772101965;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yrxDmTTsce0EkKin8r4LaTckCFTkXD/jIognCrnLO0o=;
+        b=Xg2pwvzCDwiB2p5jtkWJrKcRWmrMMPSeUoe2CrumViy+IqG0xcNMT2JnnokYIouyJN
+         kY9EWd2TIy2xH08e4ju/9abCF+oI0ypnM5NiXKu9UFkJmL2dXbPTJ6jHbtIOHgylGLT3
+         r5/E9U3NUimXSw2qcmpSZdU93M+yRLTXsfWkg2dz6rSF1op4eXtogLOYS9TkLzICs5NJ
+         /y76/qTbrY4JOGHM/u3xiDMmIzJgjAtzuCu5RK27vw4yqVGU6bXN5iHl+koMjIUwjJEV
+         TN3P8cUbepIl/A+XnxDVo6XVelDtgjxYNoa7NtupBARjuDW4UvdRNUkUBGKDNN5z3pvS
+         naUw==
+X-Gm-Message-State: AOJu0Yy/7+8vz3IqyWodDa6Y3i/5+vw/g6MEKGddxO3tEw3H5cgad2IL
+	7t9Wo6Z/kHBDu+vhkcR+rpB+dW2mUDHIF6PTcQTd75XfYBppCqNyaG46TZIfpg==
+X-Gm-Gg: AZuq6aLXT95P7oyyeAbNyxUfDZXt75c/jlHj9ioGhN/BmakQ1xcyn6MZlXMSdVq96+g
+	nfgZh9di/oGLGDmVu2/fCOXkKE+Clqw/m3N+B33klraFIyR45hn3VKKgd9Xq7fK7v0y1Eydkwv8
+	P2ayexnv1GM3dab3bVUX8cocI3k8yx+s8CPBYaPk/GHqZrUr+HVS8Sd8R1aiI9ejfKLTsyUlXUW
+	zw6QFb8XYDBLzI610KB06yvaQ+wc3tCljQykGawJpMaGT63MEB2L7XWb36e5HXhlYsUa1oPkGPA
+	+xasSEhM4aRiwrgATT2Jz19UHfdASFmGdBAbVAevQxYT7B8QDSAuahHjqhUfgUc1y9C85gvfoCt
+	kcAQLE+5iZ1Kj2kxLR4iPhqFo1y79M+MLpDewCagQHzRinuPNTCEv1w1fY4qjBcG7nPCL/fUZUl
+	E1r+eCH1nPBPxzIF9wwj3+
+X-Received: by 2002:a05:600c:1987:b0:483:79a6:e7e1 with SMTP id 5b1f17b1804b1-48398a4839bmr89040815e9.7.1771497164829;
+        Thu, 19 Feb 2026 02:32:44 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4839f978328sm16680325e9.14.2026.02.19.02.32.44
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 19 Feb 2026 02:32:44 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: "Johannes Kauffmann" <johanneskauffmann@hotmail.com>
-Subject: [meta-networking][PATCH] open62541: update to v1.4.16
-X-ClientProxiedBy: AS4P189CA0053.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:20b:659::17) To DU2PR02MB7805.eurprd02.prod.outlook.com
- (2603:10a6:10:2e5::10)
-X-Microsoft-Original-Message-ID: 
- <e770708f-a651-4d1e-b32e-9b04b807c14f@hotmail.com>
+Subject: [meta-multimedia][PATCH] vlc: upgrade 3.0.21 -> 3.0.23
+Date: Thu, 19 Feb 2026 11:32:43 +0100
+Message-ID: <20260219103243.3622583-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR02MB7805:EE_|DU4PR02MB12227:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9091cab4-8513-4b29-10cb-08de6fa03d61
-X-MS-Exchange-SLBlob-MailProps: 
-	9IecXKUgicB5Y5xtj3Bi4po1AHQXatGhAwNK89kQAKFfDOEgMEtwZeNiiZX51i85ere8T+wDep94bY56jxRz2pZnn8TRB4U2kHqdBFPFFzE3F8yqeW8CElUliRJxZiZJ+ls25WOUrl5gHYJZmicaYPdg+VOPp+ASJe/iGXA+i+NMkt+wxXN5+jUBHG81up9/RPrgnMvlR8ficYnC6MUyedr5PBDZ6xMf8Vj/Wib8EpZv+izS4jKNyF/U1wU/fXD5RebdTmD9PJym2spCgXJBl4k/aecUdl+EIRLDyca4ExiKqdzV7+T2dZt1o/tni7iwyG+RojWe0nDucbPefbRMbkoyS6fwQWlGVPD303jNanKMKyHdEvg/g7nanCmkF+lmWDWNc8vGt6K3doRH2BeGD5HZsGKJyOCCB/4QYYoVxgCfXycxNwwlxYEnIbhB2o3/XOByzPF2SXRSIEuYLq1wJji2FeLOeZnluc0w2X2+pb7b0zqmKbnHKsaZ+Ufz5dta6V0rC6LfubnyrlPaLtxSoKYKWzHgVek0ENp7A/SpSULFBLLj8OLNScCwcZBAQ+abzviIT76I868UVJRFpcmIH4Ye5nLzXFyRJfh697CYo0is/4YFGIyG0SWublstPwsvyfo9JCDHKJfkrTP0t4X6Nw2asr++keBN9OiZ+YfdyCBHnX85AT28P8edPeglvQX7HfO9UYgcCiHdGrUkbaHDvhWpt7l9ldgD0O9CRvvO8cufcz/fTs1bHw==
-X-Microsoft-Antispam: 
-	BCL:0;ARA:14566002|23021999003|461199028|12121999013|8060799015|21061999006|19110799012|15080799012|5072599009|6090799003|51005399006|5062599005|3412199025|440099028|40105399003;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?S3lXVjBxMHpuRC9pVWwzWUU0anFDZFR3dytBQ0RUTXBZNWJoalJEQ2lVWVFt?=
- =?utf-8?B?UnkzYldMeHhOOWMyNW44VmJ0Q3NwZHJUVFplcGh5MHNZWkp1NjNRLzVhTzlV?=
- =?utf-8?B?amhGeXE0NGVzOE9MREVRNFpMQXUzMjVCaUp2Yzd3Q1Y4V2xxVWE0ZzNZY3k0?=
- =?utf-8?B?bk43b2JraFBSWmpoSXRJdUh4QWU5dUJWK2M2ZkgwdE4xa250TmswTlNGZVlP?=
- =?utf-8?B?VXR4YlhKQVJpUE9iakc3d1FPMVJON08xT0VVcmJPZThQVk51cFJVQ094bG5T?=
- =?utf-8?B?ZytpYnV3b1BuSUM4am9ickVEaEZISWQwQlFpSDFaTVdDcTkwTk10Vjd2KzhM?=
- =?utf-8?B?aE5MTEFISUJ1TktGcTNRaWZMeUFLbmJaOVZyb1NJdTlTRU9HZnJqYi9ENWpN?=
- =?utf-8?B?eVFER1BzL202bkl4UE9FTVBZdktVaGRCQ3pDMmdTbDRTNVdTTFdEWFJ5MEFh?=
- =?utf-8?B?Z1Y3eHd2dmJuWkdqelN4MUFPVGFWZ0xKYXY5WXJ3NmZESTJhSFU5WTdnRDdI?=
- =?utf-8?B?RDZzbE14d3N1WWRVRXFHTkJWcUloV0M3LzZkaVh1M2FraHFFanNYMGZCcHgv?=
- =?utf-8?B?UFJRM2FWbGwwUW9OYm9nU29iVWZMVTErdXdFY0l6QzdTdlc3MXlVV0xiTVBC?=
- =?utf-8?B?T3VrL0szd2hpUEVsQmNNdnpId3FFVlB2VENiS2hSMTUyOTkzS3ZQVWVueUxV?=
- =?utf-8?B?OUhtV1lJa3FyRmVVQjg4L0pXdlNtWkVaa05sdk9wT3JsdURseXBWcFpuQTdF?=
- =?utf-8?B?ZE1EREpEcHlxa0NlMm1aVFNBU3BjWFpueGV3TnhmK2I3NVg0U2hlRzNBNVcx?=
- =?utf-8?B?TVlzM2YwQ2Q5NFVqVUQyYzUyL29RMElacXlDWVFvVnlkdDhmWnM1TFplekcr?=
- =?utf-8?B?VXFLNk1mUERMWFljejU2NUJtTm04elJ5RWNJRG1kVlppU1dERWkvU0NBeDdX?=
- =?utf-8?B?emdzL0NrTGJyVU9JOTFSaXZUblVZZTdkc2pqNFF0TTBYMzU2YXo0UXJ6bGJz?=
- =?utf-8?B?TTNnc0hRWEZmRitYQU4rRHVMK0N5L0hjZCtxaklqdU96eUNqTnI2Q1YvZVN5?=
- =?utf-8?B?bWhQdENBZGJvRFRmZ3NCSkdhdDdNaTdLMEE3ZXpNVnBXOU9sdnpORTBaWXRV?=
- =?utf-8?B?dmt0MzdYZXpmTjROOXhMYlhxYk9vRXA1R1phZWk3YVV6NnRCWkNBQ3FoNmNU?=
- =?utf-8?B?U00vdWh4U0dOakw5MlhqdnYxSnpmeXVCUklXajNlcE1BQkxrbkhFMUxORmxu?=
- =?utf-8?B?bms2VFl2UGZqRm1FSncrRFZCeFdORDFwNDQyTTl4OEpGdXRRSXhQeEY5Q1FS?=
- =?utf-8?B?V1UrblErWXdhQkNseTBBNFNOcHVQM2NLenUxa1hVbG1FVHlPR2I2N2d2aHg5?=
- =?utf-8?B?alBEUHBJZVU5S1RKUTFxaXduQSt6emtJS1kxTUVyR1d1TmxuMkVXd3poUkFa?=
- =?utf-8?B?cGlraUgzN0xGUjVQOFN1cCtLV1RrODlnUXJGaVJ0SVdmSzdUUlNNTGYzY2Fa?=
- =?utf-8?B?UnEycU1mK0R0TXFxaWlyblFQekxOVFo4Mm15dDVTWWcxd3h2VGFRY04vQk5G?=
- =?utf-8?B?eXpuWTUzZmlUY3FVUUEzVmRPZHlvaGUwUXUwdWsxWGRyU2ZXeittODRLSEhL?=
- =?utf-8?B?cktWays1WnU2UWVJWDd6RHZzMVpBL3g2VDhDRHcyZHA5cjlFNmU3cDZJRTRH?=
- =?utf-8?B?QzR2QUw0eTN6VnFYdGw0bDUyZU4wYVRiYjM2emwwNExpWEdkMjVCa3ZvUXN1?=
- =?utf-8?Q?uwMjiULVnyj8VGKZQs=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?QkZsTTR2Y05DMjI5ZWtrSWZZQ0UzNXhKSlJqNVNtYVBTaXU3RndWS0hzelk4?=
- =?utf-8?B?a0FDZlozSFFNYkpOdlVjeWJZdkNBNk9JK09IeTZ4VUJhZmgwTnVRNHFWcThp?=
- =?utf-8?B?ZUVDbHNFa21nOGZQa1lNaWwycHhPRjR4Q1A1eFlHQmZ2RHBvclovNEdBeGJs?=
- =?utf-8?B?SnlYV2ZZTFpINTB6c0tSQi96KzZGdlRMWjc2UzJxZTFwRmJMRHZLdkR1OW02?=
- =?utf-8?B?NjgvREY1b2FNT0xPcktxVGhUbU90aEQxS0Y1bU9SL0JqTFlsUUsvZ3dYVnZU?=
- =?utf-8?B?L3hwT3hTcHV3L2J0c2xsbm1pdHJWOHRSaVN2Y2hPWitkLzJ0N2xrZ1paMEY1?=
- =?utf-8?B?M1VVSDJNNlhDejNrNDh1dm1zRjZzWDZOQmcrODQ2WlF4dHdKN2UvUk5xbmQz?=
- =?utf-8?B?RU96Sy9PbEh1Qnh2SXgzYkRSa2RKTmJ6UGhGU0pHM3VzOEJXRmhDWlJwT3RT?=
- =?utf-8?B?OE1vN3FFcW5xeXdibWJNWGo2djErekppaENtVk1lWmplem5sR1BqT2k4dUY1?=
- =?utf-8?B?U0VzdElqUEoyRU5YeUZXMTl1N3BkdXRhMWpuYUhsUzVmQ2xlUlpYKzNqREVx?=
- =?utf-8?B?am5HYnUxWWRpWktvcXNBSWtVSjY2eGNRc1N4Q0l5blRZRDU4MTJuUnBrMFBo?=
- =?utf-8?B?cEpGcmZwZ3VDTVpWbkRNMmZ3SEticmRKRWNWVlVVdDNDWFM0dktLcUJsVUlN?=
- =?utf-8?B?TjJFZ1BlZDNrS0dNVzhpcG0wcGR4NEJoZWQ4Y2JaRHZNZXRSYnhJZFhFT1B5?=
- =?utf-8?B?a2tPaVhsUFlHQ244ZGM0cS9mYWMwT1plZDVYbFVpQkkzaTRoOHJLZWhDWm9X?=
- =?utf-8?B?S1NZN1lDQ3p0dGlYR0JSOGovdWpUOGJDdEZiSzg5UElBZFZBQWZ1aUZMSnRR?=
- =?utf-8?B?ZmFKZG9HSmRjRStkMjV1cXA4bmtaNlJZakw3UnRVQi9TWGFiWVBMTWc0S3gv?=
- =?utf-8?B?T3J0dUlLT0JhckdUNFZHNGlEZHNESDhEcnp0WW9KVmMxUEFlZlc2bjMrQTVR?=
- =?utf-8?B?VENvTlFwb0h4NHVrZ2cxdXcwT1lVUXJrZ0VkTUxUSWE0Wk1iV2d0ZXVaVm5t?=
- =?utf-8?B?R3JFVnFSMG9IZFVIbDNqUUNZZFBBaWRZckRQSW52VEx5dW1teTZSdFNMdVBQ?=
- =?utf-8?B?UmZ4WVdRbjFMaHFtRDJmcys0SXNRRlBPVWZGVDRWdWNldTQ3Ulc5YUE3UHQ5?=
- =?utf-8?B?TzBmaWlnYzZkbU43RFNSMmphK3JFRHo4amVuK1hDZGJPZnFUUVFiLzNEbUFv?=
- =?utf-8?B?Wmh2YzM1NzdYMVdkdzlBM2w4MzQyS1l2SG1nV3B2U09XTzZzRFFZUnNzUVMr?=
- =?utf-8?B?dlNYOVVnQW5iUFZzWVROWXNQSkQwMEQ4NFAxdVZYRTY2MDduTnMxaWhlZnd3?=
- =?utf-8?B?L043M2xrcVZZRWNyUDZiZlNYcFFnZ1E5REdPZW1tK2dwM3h0NUZPeTVzWXhs?=
- =?utf-8?B?ckM5cStOVUwvdjNCZWF1dG1xM0NuRWJ0bTVRaXBzcXNYeDkvK0RHWnQ3UkIx?=
- =?utf-8?B?SXV6TjVvc1FCMW52TW5nc0tqV3cxdXk2SVJBakN0S0JlbVFSVmlCYUNqUlRt?=
- =?utf-8?B?T2ZHT1REY0REbklXOU9jRXNsYnlvclhnVisxbXB3ZVZnY2xHeWVmc2FBUVMy?=
- =?utf-8?B?Q0FzRkliV25lWE5VMXphbGQrSnFyellIdWtQUmpoT1BHTjdCR00vUW9uVTdt?=
- =?utf-8?B?cEVRRHgrYWcrWUNmVUhvcytFWUZKbVVGTEROa3pWVmpmVVBFS0kzTHFyNmgr?=
- =?utf-8?B?ZStWRWRFQlZrS0poVEZrQWpGYm5EM2hzOHVPN01QU3RRcnQ5VXRDUnhKWURS?=
- =?utf-8?B?M0hQSlEwbXFTeGJHNlR6NkJHRmkzVXdxTDR3eVlqZmJ5Q1MrWnhYM2k5QkpF?=
- =?utf-8?B?c1F2eG0vc3JQVWw4elU4NW1ROSt1SnZyem9QY29KTWRtY3c9PQ==?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3f6e.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9091cab4-8513-4b29-10cb-08de6fa03d61
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR02MB7805.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 10:18:35.3167
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR02MB12227
-Content-Language: nl-NL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 10:26:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124504
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 10:32:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124505
 
-Important changes from the v1.4.16 patch release notes:
+Vlc can be compiled again against modern ffmpeg - the SKIP_RECIPE tag is removed.
 
-- server: Block transfer of subscriptions between anonymous users
-- server: Track transferred subscriptions for correct diagnostics counter update
-- client: Don't close the SecureChannel when the servers sends a late async response
-- pubsub: Add null check after UA_Array_new in addDataSetReaderConfig
-- pubsub: Prevent NULL dereference in UA_DataSetMessage_decodeBinary
-- pubsub: Initialize value in UA_NetworkMessage_decodePayload to avoid undefined behavior
+Drop patches that became obsolete, because the underlying problems were solved.
 
-Signed-off-by: Johannes Kauffmann <johanneskauffmann@hotmail.com>
+Was able to build it successfully with meta-qt5, and also play a video in core-image-sato.
+
+Some (opt-in) PACKAGECONFIGs are broken (not removed as part of this patch):
+- freerdp - it requires a too old freerdp codebase
+- opencv - it requires a too old opencv codebase
+- vdpau - compilation fails (undefined symbol av_vdpau_get_surface_parameters),
+  not really sure about the reason
+
+Changelog: https://github.com/videolan/vlc/blob/3.0.23/NEWS
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../opcua/{open62541_1.4.15.bb => open62541_1.4.16.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-protocols/opcua/{open62541_1.4.15.bb => open62541_1.4.16.bb} (98%)
+ .../0001-taglib-Fix-build-on-x86-32-bit.patch | 50 --------------
+ .../recipes-multimedia/vlc/vlc/taglib-2.patch | 67 -------------------
+ .../vlc/{vlc_3.0.21.bb => vlc_3.0.23.bb}      | 16 ++---
+ 3 files changed, 8 insertions(+), 125 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/0001-taglib-Fix-build-on-x86-32-bit.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc/taglib-2.patch
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc_3.0.21.bb => vlc_3.0.23.bb} (92%)
 
-diff --git a/meta-networking/recipes-protocols/opcua/open62541_1.4.15.bb b/meta-networking/recipes-protocols/opcua/open62541_1.4.16.bb
-similarity index 98%
-rename from meta-networking/recipes-protocols/opcua/open62541_1.4.15.bb
-rename to meta-networking/recipes-protocols/opcua/open62541_1.4.16.bb
-index 15dbd4b2dc..32f7148f4b 100644
---- a/meta-networking/recipes-protocols/opcua/open62541_1.4.15.bb
-+++ b/meta-networking/recipes-protocols/opcua/open62541_1.4.16.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "\
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-taglib-Fix-build-on-x86-32-bit.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/0001-taglib-Fix-build-on-x86-32-bit.patch
+deleted file mode 100644
+index 2dff9b63ce..0000000000
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc/0001-taglib-Fix-build-on-x86-32-bit.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From 5b921009b0db2c5c15aef7ce241d3c81f9c272c9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 9 Mar 2024 12:26:39 -0800
+-Subject: [PATCH] taglib: Fix build on x86 32-bit
+-
+-While compiling with clang, there are errors seen such as
+-on function override signature mismatches
+-
+-meta_engine/taglib.cpp:240:10: error: virtual function 'tell' has a different return type ('long') than the function it overrides (which has return type 'offset_t' (aka 'long long'))
+-  240 |     long tell() const
+-      |     ~~~~ ^
+-/mnt/b/yoe/master/build/tmp/work/core2-32-yoe-linux/vlc/3.0.20/recipe-sysroot/usr/include/taglib/tiostream.h:156:22: note: overridden virtual function is here
+-  156 |     virtual offset_t tell() const = 0;
+-      |             ~~~~~~~~ ^
+-meta_engine/taglib.cpp:245:10: error: virtual function 'length' has a different return type ('long') than the function it overrides (which has return type 'offset_t' (aka 'long long'))
+-  245 |     long length()
+-      |     ~~~~ ^
+-/mnt/b/yoe/master/build/tmp/work/core2-32-yoe-linux/vlc/3.0.20/recipe-sysroot/usr/include/taglib/tiostream.h:161:22: note: overridden virtual function is here
+-  161 |     virtual offset_t length() = 0;
+-      |             ~~~~~~~~ ^
+-
+-Upstream-Status: Submitted [https://mailman.videolan.org/pipermail/vlc-devel/2024-March/143639.html]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- modules/meta_engine/taglib.cpp | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/modules/meta_engine/taglib.cpp b/modules/meta_engine/taglib.cpp
+-index f371485008..129fdf55f1 100644
+---- a/modules/meta_engine/taglib.cpp
+-+++ b/modules/meta_engine/taglib.cpp
+-@@ -237,12 +237,12 @@ public:
+-         return;
+-     }
+- 
+--    long tell() const
+-+    offset_t tell() const
+-     {
+--        return m_previousPos;
+-+        return (offset_t)m_previousPos;
+-     }
+- 
+--    long length()
+-+    offset_t length()
+-     {
+-         uint64_t i_size;
+-         if (vlc_stream_GetSize( m_stream, &i_size ) != VLC_SUCCESS)
+--- 
+-2.44.0
+-
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc/taglib-2.patch b/meta-multimedia/recipes-multimedia/vlc/vlc/taglib-2.patch
+deleted file mode 100644
+index f238ff4244..0000000000
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc/taglib-2.patch
++++ /dev/null
+@@ -1,67 +0,0 @@
+-Fix build with taglib 2.0
+-
+-Source: https://gitlab.archlinux.org/archlinux/packaging/packages/vlc/-/blob/main/taglib-2.patch?ref_type=heads
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+---- a/modules/meta_engine/taglib.cpp
+-+++ b/modules/meta_engine/taglib.cpp
+-@@ -185,7 +185,7 @@ public:
+-         ByteVector res(length, 0);
+-         ssize_t i_read = vlc_stream_Read( m_stream, res.data(), length);
+-         if (i_read < 0)
+--            return ByteVector::null;
+-+            return ByteVector();
+-         else if ((size_t)i_read != length)
+-             res.resize(i_read);
+-         return res;
+-@@ -465,7 +465,7 @@ static void ReadMetaFromASF( ASF::Tag* t
+- static void ReadMetaFromBasicTag(const Tag* tag, vlc_meta_t *dest)
+- {
+- #define SET( accessor, meta )                                                  \
+--    if( !tag->accessor().isNull() && !tag->accessor().isEmpty() )              \
+-+    if( !tag->accessor().isEmpty() )              \
+-         vlc_meta_Set##meta( dest, tag->accessor().toCString(true) )
+- #define SETINT( accessor, meta )                                               \
+-     if( tag->accessor() )                                                      \
+-@@ -806,15 +806,15 @@ static void ReadMetaFromMP4( MP4::Tag* t
+- {
+-     MP4::Item list;
+- #define SET( keyName, metaName )                                                             \
+--    if( tag->itemListMap().contains(keyName) )                                               \
+-+    if( tag->itemMap().contains(keyName) )                                               \
+-     {                                                                                        \
+--        list = tag->itemListMap()[keyName];                                                  \
+-+        list = tag->itemMap()[keyName];                                                  \
+-         vlc_meta_Set##metaName( p_meta, list.toStringList().front().toCString( true ) );     \
+-     }
+- #define SET_EXTRA( keyName, metaName )                                                   \
+--    if( tag->itemListMap().contains(keyName) )                                  \
+-+    if( tag->itemMap().contains(keyName) )                                  \
+-     {                                                                                \
+--        list = tag->itemListMap()[keyName];                                     \
+-+        list = tag->itemMap()[keyName];                                     \
+-         vlc_meta_AddExtra( p_meta, metaName, list.toStringList().front().toCString( true ) ); \
+-     }
+- 
+-@@ -824,9 +824,9 @@ static void ReadMetaFromMP4( MP4::Tag* t
+- #undef SET
+- #undef SET_EXTRA
+- 
+--    if( tag->itemListMap().contains("covr") )
+-+    if( tag->itemMap().contains("covr") )
+-     {
+--        MP4::CoverArtList list = tag->itemListMap()["covr"].toCoverArtList();
+-+        MP4::CoverArtList list = tag->itemMap()["covr"].toCoverArtList();
+-         const char *psz_format = list[0].format() == MP4::CoverArt::PNG ? "image/png" : "image/jpeg";
+- 
+-         msg_Dbg( p_demux_meta, "Found embedded art (%s) is %i bytes",
+-@@ -1337,7 +1337,7 @@ static int WriteMeta( vlc_object_t *p_th
+-         if( RIFF::AIFF::File* riff_aiff = dynamic_cast<RIFF::AIFF::File*>(f.file()) )
+-             WriteMetaToId3v2( riff_aiff->tag(), p_item );
+-         else if( RIFF::WAV::File* riff_wav = dynamic_cast<RIFF::WAV::File*>(f.file()) )
+--            WriteMetaToId3v2( riff_wav->tag(), p_item );
+-+            WriteMetaToId3v2( riff_wav->ID3v2Tag(), p_item );
+-     }
+-     else if( TrueAudio::File* trueaudio = dynamic_cast<TrueAudio::File*>(f.file()) )
+-     {
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.21.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.23.bb
+similarity index 92%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc_3.0.21.bb
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.23.bb
+index 2d2ecc63b9..d17357b727 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.21.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.23.bb
+@@ -23,10 +23,8 @@ SRC_URI = "https://get.videolan.org/${BPN}/${PV}/${BP}.tar.xz \
+            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+            file://0005-ioctl-does-not-have-same-signature-between-glibc-and.patch \
+            file://0006-configure-Disable-incompatible-function-pointer-type.patch \
+-           file://taglib-2.patch \
+-           file://0001-taglib-Fix-build-on-x86-32-bit.patch \
  "
-
- SRCREV_FORMAT = "opcua_mdnsd_ua-nodeset_mqtt-c"
--SRCREV_opcua = "45e4cd3ef6c79a8e503d37c9f5c89fefe90d99db"
-+SRCREV_opcua = "f63e2a819aff6e468242dc2e54ccbd5b75d63654"
- SRCREV_mdnsd = "488d24fb9d427aec77df180268f0291eeee7fb8b"
- SRCREV_ua-nodeset = "d1bb6a22125bd7cd986272b1ee98a18a91d76fff"
- SRCREV_mqtt-c = "0f4c34c8cc00b16cfee094745d68b8cdbaecd8e0"
--- 
-2.43.0
+-SRC_URI[sha256sum] = "24dbbe1d7dfaeea0994d5def0bbde200177347136dbfe573f5b6a4cee25afbb0"
++SRC_URI[sha256sum] = "e891cae6aa3ccda69bf94173d5105cbc55c7a7d9b1d21b9b21666e69eff3e7e0"
+ inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+@@ -44,7 +42,6 @@ EXTRA_OECONF = "\
+     --without-contrib \
+     --without-kde-solid \
+     --enable-realrtsp \
+-    --disable-libtar \
+     --enable-avcodec \
+     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/moc \
+     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/rcc \
+@@ -94,7 +91,12 @@ PACKAGECONFIG[vnc] = "--enable-vnc,--disable-vnc, libvncserver"
+ PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util-keysyms libxpm libxinerama"
+ PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
+ PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
+-PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland wayland-native"
++PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland wayland-native wayland-protocols"
++
++do_configure:prepend() {
++    # use wayland-scanner from native sysroot instead of build host
++    sed -i 's,\(WAYLAND_SCANNER=\).*,\1${STAGING_BINDIR_NATIVE}/wayland-scanner,' configure.ac
++}
+ 
+ do_configure:append() {
+     # moc needs support: precreate build paths
+@@ -117,7 +119,7 @@ FILES:${PN} += "\
+     ${datadir}/applications \
+     ${datadir}/vlc/ \
+     ${datadir}/icons \
+-    ${datadir}/metainfo/vlc.appdata.xml \
++    ${datadir}/metainfo/org.videolan.vlc.appdata.xml \
+ "
+ 
+ FILES:${PN}-dbg += "\
+@@ -132,5 +134,3 @@ FILES:${PN}-staticdev += "\
+ INSANE_SKIP:${PN} = "dev-so"
+ 
+ EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
+-
+-SKIP_RECIPE[vlc] = "requires porting to ffmpeg >= 7 as of ffmpeg >= 5 it requires extensive changes disabling VAAPI (only supported with vlc >= 4)"
 
