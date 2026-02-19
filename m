@@ -1,253 +1,101 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <geoffhp@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18655C531CC
-	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 21:11:27 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24855.1771535480910797166
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35F9AC531D3
+	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 21:31:07 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.25208.1771536660938500721
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Feb 2026 13:11:21 -0800
+ Thu, 19 Feb 2026 13:31:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IoceoYPH;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-435f177a8f7so1324287f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 13:11:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gJsgCRjn;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: geoffhp@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-6798f3b7163so889480eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 13:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771535479; x=1772140279; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=cREDqSZGfsxiHUDNPdWT5vr/endrQk0ocI0NpaahLgc=;
-        b=IoceoYPHuw7t71JujCHMWEszacHtwBRFf3Er84bZBjmM/8rDJlinkmwst+bfdqrdST
-         xizl8/rPpFBAVibJaCyUVlmsBA7jEClEePa5Y2Sbup/v6QjwhofJxjWIMUmVJ7vRqKfZ
-         XIWGl6+3Qw+HuJjUSF6ErnC5SEAi4w/gUf+p3v207FtCzwWRkJkJcHN4T95SmLYchoaV
-         UjaDvEkwEzmwc1lImT2V3VfwTMoIudqbYvGTUvb/YX3DWTcxFGwZd5As6XDQ6SUwv9Mc
-         peFqt7UpsBQdIyhXxCOiewtfW3/VKopx2zt9n3mIG2X45jvyQMKlpZ98Vp8G6HGOgZjg
-         YR4g==
+        d=gmail.com; s=20230601; t=1771536660; x=1772141460; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bkMzRcq5VP2cDzLr9AhEqLEbhLA5VQk/LhXXNWqR904=;
+        b=gJsgCRjnjQRtdg8cp2CjLYyVM3Suar9MpWBQptdjvR8eGKCu7Yq63+NQf+ezysNGNK
+         mm5eFpw8J2HvG75uf4pOuqoyaAVyvIMVWXNlZV6pqNS/6N1mhMi6ZLTJMBfjO8EPha6e
+         x18KQCpYXUd93SJRUxEgcm1qdycy68PfCubRzOLqXlaoafn/dsr9WVtdXLPglk5fAz+5
+         +Fbd6G57QPIYk59umhiNo7Cz3ECmDRZjUn1ykOMT+H0qT50SqPFfIW9ER0vg5zDq6i5n
+         CWqopoMGOiUEfYAkkGYLTOzeQ/NO1QUVwnSAV0MLRmyejTeqi5C5g+KXoJN+FDKh6yEN
+         y28A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771535479; x=1772140279;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=cREDqSZGfsxiHUDNPdWT5vr/endrQk0ocI0NpaahLgc=;
-        b=e9ewv+ousrIpb/mFAT9jY36c5b/Z9E24wXUCoHjZ423qvxop/eyM0LMWlCAQLDJB+o
-         Ble0ybrD0Hd3uPzlQpgnZWkKlVe2+6WXfvwavZsokl6zuaxWMOwOh3Bky95Ggsi0VDPQ
-         DFiemMbN55pLeqITllq5c1CxDDCRdYq2F/fQs6420qQMI0la1y/1v0MtbmnQ+DrTCKgd
-         2LbYa+WsOhrFnYzfSSaArc+ek2ARen5sgdtzpks6OL+mOTmCydkhA1YB7+BbvJkqaKgy
-         zP2Y+ZNki7Zay0Y2+7bLss1RSrCmN6jJwjUJgrlDo5GqglPZORz/otg7vUN+WEEPtNBy
-         GbEA==
-X-Gm-Message-State: AOJu0YypQ82dYyNRMjXYitmonffOhQgNZXIatrAvm0VWIu5CmhPUT0Ox
-	rDBywrEt0BlpsAszVQi7zrpk2Jpe6gQQHwzKg8j1OIWDr97kSglAF0F3/IiLXw==
-X-Gm-Gg: AZuq6aJLlNOl5MKSIaHSEFrk+hcwvsWrmqej42+HV5M2xki5mghSlnW1KQdJYkZXLeZ
-	3AML17tXnzOMplMOnJA8qAuEEMqGbCRgsPNBsA1ydDK5X/bTisoSSlOnD0Jdj+Q9apmS3xwe0Od
-	NH1OX3FKtcESMCVPLJ4vbSz81PRTkMRZXomqtvgXyvIo+v7faIxmxxKpwhBm1BJ75XWbN7+isTK
-	cAxDGYP3izpELO5BR+ooAKsxaHRJuo7h3f2izXOhYSj/GVMxpHhC3opLidE1G3L0ODGouJ+mJYV
-	4Lsj1q+Hzo0jFc3Frtk/Z5dvg6qRBqFVnXj3ZSNu3L3NsKTpZg2T2i1ewG+MuyAfrKFab/tSix1
-	PS9fIBOVkgGADKbF2pJy6Z8j1ECevbN9rsxgDNpWLjIDjDXWxmbZghKz6JiKSseOZyfFVUCY6k5
-	lk/mSkaPqqM9YoaDVUKYUt
-X-Received: by 2002:a05:6000:4283:b0:437:812c:316d with SMTP id ffacd0b85a97d-4379db31b68mr32973909f8f.2.1771535479126;
-        Thu, 19 Feb 2026 13:11:19 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439567aad3csm17773434f8f.36.2026.02.19.13.11.18
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1771536660; x=1772141460;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=bkMzRcq5VP2cDzLr9AhEqLEbhLA5VQk/LhXXNWqR904=;
+        b=QjDQrlP89XRU9dqGqZoabK9rZUCNOfgo8eULB3gtg/FiEZhkY/kbr3v5J/2CvbSQgl
+         /fFpbgiUbQ94x/1BxoST7C1ymXPl6r2wOp0UTvc8WDXWGx0i442aK1yk8f+o0mqHHLJ0
+         kedMFjm/7QQUNaQeui3WzYImDuD8kpv2DNYOLkLZe6lzBp5M/qRnW6E5vflD+iU27DIa
+         ls0ab2wy9O9fihIbYFT6zo96taBUYrW7Qz9bqO8EYcXcFiARWqzrn6s7yarBGmvjSUl/
+         AT1LI5afnDCzXX4qlXs0mSx+P+Z2sdyNxUY0tQtxiap6RR1g6qHanNve8o2YDcH+WKBR
+         cgnQ==
+X-Gm-Message-State: AOJu0Yzo2X3PfaJicvnYIO37f+rvMb6ogeDxzwOPTc8I6+kAx882LjGm
+	7ad4+VBCxVMzam3AVnGR1qHzrnDiwHHwTSnD9OS2Qmr/Fv1QysGReDKqdt6feQ==
+X-Gm-Gg: AZuq6aInFiPjvg4V31/bszUAwcvf4ueh1Dbl60iwlMol3uO3ToP2rRiimomK9Ptau7N
+	N+wN9l52SuvSUWEGvf+NYkzMxVPQV1qCmGz7qDDXxIIujpM2oXSbFDfME8h5+a3KXlDCecyTjup
+	YrnnryerK+vQd0JhUkrfsPtNgGjobq7RZ9NaAL7guvM3MPbKbpj1SxoOhaJPddsHKXXU0jcWseG
+	oC7t6WWCwhGeKFtzxphz9/AFSr7bg4LxWsHTafVM37KxXO+8jgtrtnYnDUNMpemZ10akgUDNwmJ
+	Hkk+HhJdvCFxWvT1hLdkLpI7bzb4WMzamkI3zDaDErhPZpXaBqZv2z3NTJOIGqjtT5c+61JhxOD
+	SMB6PJnp0SXdPIoe3b6a5EoLYEKiIZtBMHnKQ1zajwNDG7eL+af8A01CkLZ9lfjDRmfW8rNpohx
+	MhoHijdwf0RNJAjqV6pw5V5Xb7qqg7Qe7hNWcef9cGetfMRpRY/8U0nbsNF3GVcRP1RM6/JbvYY
+	pnd3w==
+X-Received: by 2002:a05:6820:f036:b0:679:97d5:dd25 with SMTP id 006d021491bc7-679a7444f11mr3840419eaf.56.1771536659962;
+        Thu, 19 Feb 2026 13:30:59 -0800 (PST)
+Received: from faraday.ACTDEV.local ([207.154.79.109])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-678b13aec01sm10962182eaf.8.2026.02.19.13.30.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Feb 2026 13:11:18 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Thu, 19 Feb 2026 13:30:59 -0800 (PST)
+From: Geoff Parker <geoffhp@gmail.com>
+X-Google-Original-From: Geoff Parker <geoffrey.parker@arthrex.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] cfengine: upgrade 3.21.0 -> 3.26.0
-Date: Thu, 19 Feb 2026 22:11:17 +0100
-Message-ID: <20260219211117.604149-2-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260219211117.604149-1-skandigraun@gmail.com>
-References: <20260219211117.604149-1-skandigraun@gmail.com>
+Cc: geoffhp@gmail.com,
+	Geoff Parker <geoffrey.parker@arthrex.com>
+Subject: [meta-python][PATCH] python3-matplotlib: Fix TMPDIR in debug binaries, [buildaths] errors
+Date: Thu, 19 Feb 2026 13:30:55 -0800
+Message-Id: <20260219213055.368528-1-geoffrey.parker@arthrex.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 21:11:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124516
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 21:31:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124517
 
-Changelog: https://github.com/cfengine/core/blob/3.26.0/ChangeLog
+Fix errors like:
 
-License-Update: The project switched from pcre to pcre2. This small
-change is incorporated in the license, where the dependencies are listed.
+    ERROR: python3-matplotlib-3.10.8-r0 do_package_qa: QA Issue: File
+           /usr/lib/python3.14/site-packages/matplotlib/backends/.debug/
+           _backend_agg.cpython-314-arm-linux-gnueabihf.so
+           in package python3-matplotlib-dbg contains reference to TMPDIR
+           [buildpaths]
 
-libpcre2 and OpenSSL is now a mandatory dependencies, the corresponding
-PACKAGECONFIGs are dropped.
-
-Patch that was incorporated in this release is also dropped.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 ---
- ...with-libxml2-no-case-in-configure.ac.patch | 89 -------------------
- ...{cfengine_3.21.0.bb => cfengine_3.26.0.bb} | 22 +++--
- 2 files changed, 10 insertions(+), 101 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
- rename meta-oe/recipes-extended/cfengine/{cfengine_3.21.0.bb => cfengine_3.26.0.bb} (78%)
+ .../recipes-devtools/python/python3-matplotlib_3.10.8.bb        | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch b/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
-deleted file mode 100644
-index 78f36bde45..0000000000
---- a/meta-oe/recipes-extended/cfengine/cfengine/0001-Fixed-with-libxml2-no-case-in-configure.ac.patch
-+++ /dev/null
-@@ -1,89 +0,0 @@
--From a08acdfadb5eba2a3201209c6da3ad6f2ca4ae79 Mon Sep 17 00:00:00 2001
--From: Craig Comstock <craig.comstock@northern.tech>
--Date: Fri, 27 Jan 2023 15:19:48 -0600
--Subject: [PATCH] Fixed --with-libxml2=no case in configure.ac
--
--The CF3_WITH_LIBRARY and AC_CHECK_HEADERS were moved to outside of the check for with-libxml2=no
--
--Ticket: CFE-4023
--Changelog: title
-----
--Upstream-Status: Pending
--
-- configure.ac          | 21 +++++++++++----------
-- libntech/configure.ac | 21 +++++++++++----------
-- 2 files changed, 22 insertions(+), 20 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index e189b10..f6b8226 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -659,19 +659,20 @@ if test "x$with_libxml2" != "xno"; then
--             LIBXML2_CPPFLAGS=-I$with_libxml2/include/libxml2
--         fi
--     fi
---fi
-- 
---CF3_WITH_LIBRARY(libxml2,
---    [AC_CHECK_LIB(xml2, xmlFirstElementChild,
---    [],
---    [if test "x$with_libxml2" != xcheck; then
---        AC_MSG_ERROR(Cannot find libxml2); fi]
---    )
---    AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
--+    CF3_WITH_LIBRARY(libxml2,
--+        [AC_CHECK_LIB(xml2, xmlFirstElementChild,
--+        [],
--         [if test "x$with_libxml2" != xcheck; then
--             AC_MSG_ERROR(Cannot find libxml2); fi]
---    )]
---)
--+        )
--+        AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
--+            [if test "x$with_libxml2" != xcheck; then
--+                AC_MSG_ERROR(Cannot find libxml2); fi]
--+        )]
--+    )
--+    
--+fi
-- 
-- AM_CONDITIONAL([HAVE_LIBXML2],
--     [test "x$with_libxml2" != xno &&
--diff --git a/libntech/configure.ac b/libntech/configure.ac
--index 7bb8787..28b3683 100644
----- a/libntech/configure.ac
--+++ b/libntech/configure.ac
--@@ -571,19 +571,20 @@ if test "x$with_libxml2" != "xno"; then
--             LIBXML2_CPPFLAGS=-I$with_libxml2/include/libxml2
--         fi
--     fi
---fi
-- 
---CF3_WITH_LIBRARY(libxml2,
---    [AC_CHECK_LIB(xml2, xmlFirstElementChild,
---    [],
---    [if test "x$with_libxml2" != xcheck; then
---        AC_MSG_ERROR(Cannot find libxml2); fi]
---    )
---    AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
--+    CF3_WITH_LIBRARY(libxml2,
--+        [AC_CHECK_LIB(xml2, xmlFirstElementChild,
--+        [],
--         [if test "x$with_libxml2" != xcheck; then
--             AC_MSG_ERROR(Cannot find libxml2); fi]
---    )]
---)
--+        )
--+        AC_CHECK_HEADERS([libxml/xmlwriter.h], [break],
--+            [if test "x$with_libxml2" != xcheck; then
--+                AC_MSG_ERROR(Cannot find libxml2); fi]
--+        )]
--+    )
--+
--+fi
-- 
-- AM_CONDITIONAL([HAVE_LIBXML2],
--     [test "x$with_libxml2" != xno &&
---- 
--2.39.1
--
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.26.0.bb
-similarity index 78%
-rename from meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb
-rename to meta-oe/recipes-extended/cfengine/cfengine_3.26.0.bb
-index 5fd5279d7d..28ea16ea6f 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine_3.21.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine_3.26.0.bb
-@@ -11,37 +11,33 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
- HOMEPAGE = "http://cfengine.com"
- 
- LICENSE = "GPL-3.0-only"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=eef43e6a0b5a8f46ef7f11e1e4b32a6c"
- 
--DEPENDS += "attr tokyocabinet bison-native libxml2"
-+DEPENDS += "attr tokyocabinet bison-native openssl libpcre2 librsync"
- 
- SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BPN}-community-${PV}.tar.gz \
--           file://0001-Fixed-with-libxml2-no-case-in-configure.ac.patch \
-            file://set-path-of-default-config-file.patch \
-            "
--SRC_URI[sha256sum] = "911778ddb0a4e03a3ddfc8fc0f033136e1551849ea2dcbdb3f0f14359dfe3126"
-+SRC_URI[sha256sum] = "d3c3884b314dae48a6884e919d0a12acac5aea95d970544e4632a1773857d19b"
- 
- inherit autotools-brokensep systemd
- 
- export EXPLICIT_VERSION = "${PV}"
- 
- SYSTEMD_SERVICE:${PN} = "cfengine3.service cf-apache.service cf-hub.service cf-postgres.service \
--                         cf-runalerts.service cf-execd.service \
-+                         cf-execd.service cf-php-fpm.service \
-                          cf-monitord.service  cf-serverd.service \
-                          cf-reactor.service \
+diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
+index ce8c7a276a..8489b91402 100644
+--- a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
++++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
+@@ -47,6 +47,8 @@ RDEPENDS:${PN} = "\
+     python3-packaging \
  "
- SYSTEMD_AUTO_ENABLE:${PN} = "disable"
  
--PACKAGECONFIG ??= "libpcre openssl \
--                   ${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd', d)} \
--"
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd', d)}"
++TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 +
- PACKAGECONFIG[libxml2] = "--with-libxml2=yes,--with-libxml2=no,libxml2,"
- PACKAGECONFIG[mysql] = "--with-mysql=yes,--with-mysql=no,mariadb,"
- PACKAGECONFIG[postgresql] = "--with-postgresql=yes,--with-postgresql=no,postgresql,"
- PACKAGECONFIG[acl] = "--with-libacl=yes,--with-libacl=no,acl,"
- PACKAGECONFIG[libvirt] = "--with-libvirt=yes,--with-libvirt=no,libvirt,"
--PACKAGECONFIG[libpcre] = "--with-pcre=yes,--with-pcre=no,libpcre,"
--PACKAGECONFIG[openssl] = "--with-openssl=yes,--with-openssl=no,openssl,"
- PACKAGECONFIG[pam] = "--with-pam=yes,--with-pam=no,libpam,"
- PACKAGECONFIG[libyaml] = "--with-libyaml,--without-libyaml,libyaml,"
- PACKAGECONFIG[systemd] = "--with-systemd-service=${systemd_system_unitdir},--without-systemd-service"
-@@ -53,8 +49,8 @@ CFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'libxml2', '-I${STAGING_INCDIR}
+ CVE_PRODUCT = "matplotlib"
  
- do_install:append() {
-     install -d ${D}${localstatedir}/${BPN}/bin
--    for f in `ls ${D}${bindir}`; do
--        ln -s ${bindir}/`basename $f` ${D}${localstatedir}/${BPN}/bin/
-+    for f in $(find ${D}${bindir} -type f); do
-+         ln -sr $f ${D}${localstatedir}/${BPN}/bin/
-     done
- 
-     install -d ${D}${sysconfdir}/default
-@@ -73,3 +69,5 @@ EOF
- }
- 
- RDEPENDS:${PN} += "${BPN}-masterfiles"
-+
-+FILES:${PN} += "${libdir}/python"
+ BBCLASSEXTEND = "native"
+-- 
+2.39.5
+
 
