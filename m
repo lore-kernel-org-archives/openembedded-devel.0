@@ -2,32 +2,32 @@ Return-Path: <tafil@tafhub.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70EEFE9A059
-	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 18:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 633FEE9A05A
+	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 18:31:26 +0000 (UTC)
 Received: from mail.tafhub.de (mail.tafhub.de [5.189.191.204])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20688.1771525794114480790
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21184.1771525878191510076
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Feb 2026 10:29:55 -0800
+ Thu, 19 Feb 2026 10:31:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=NvQV5IVV;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=ZzAEgK8c;
  spf=pass (domain: tafhub.de, ip: 5.189.191.204, mailfrom: tafil@tafhub.de)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9C2531880265;
-	Thu, 19 Feb 2026 19:29:49 +0100 (CET)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E59E018800EF;
+	Thu, 19 Feb 2026 19:31:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
-	t=1771525791; h=from:subject:date:message-id:to:cc:mime-version:
-	 content-transfer-encoding; bh=u/atkwz3N2TeetWHsfCZrrl12BYv3P9mhjmn3tFC7y4=;
-	b=NvQV5IVV8eiUyAe2daw116j7cxqNQ9mC9jKEzozCa6SXWK9lZJoM4RlpMnEACemTvWfHn6
-	MU+2sKwozgqDNJ6buvp+850PtH7IdeQJMU7Q34JTVhRS/LwFZreaNsZzcSu/XCHBOKvJTu
-	JWIjN5fMOipYGtaOkBDRxXYKtdjKPO0++eC4Qtit2N6t0AA61nQzjxnTLxe+OIsVfZguSM
-	Y6IcBIgDvjSW50FI2AdgIiZRu64Wog/YjLedJl1x/It3xVVAt7Bji8RKaxCYZdrcQQ/8BD
-	A+nH7NgktbhGB/6ZqkYJm5g9xseAf4vjUFUlOchhDzU3qdwokwMUs2UgNiDahw==
+	t=1771525876; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=Hj5dB5W5u/0Vhrnz3MhFkgDsUWpjGKxON+GKgYbo5nQ=;
+	b=ZzAEgK8cod3gmjWmY3kcKyi1Hk3XiR0iWOL3tLQaH7bxbP1bbZsm6fppT5P9o7VNAu+gXH
+	FlDE60OMIrXAxLmJ7HHOMYV8fTlFbBFMe/bbZD5L+vnCDucZ/m5PMrqv4YzcDpWVx4+SEJ
+	RfL1SfWrSI8Ap4VLw1cCE+HcNonVT262ZZ9oSAuCmZ5R/13UiYXmkJ4/hEmed0DPBb0B1X
+	cT8voLXHff7F6TyCofFW+mh7W2Zkody1ljfhWvC/weAujYjHzSBQPoj99ZVmnWNbkgAOZQ
+	SD4LdE5qDpEI6pFkujt3QC9UU3b/21EvskxaVIdoCNfRtv5nl0ua7b8VW4djNg==
 From: Tafil Avdyli <tafil@tafhub.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tafil Avdyli <tafil@tafhub.de>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][scarthgap][PATCH] python3-pybind11-json: fix Targets.cmake trying to reference host
-Date: Thu, 19 Feb 2026 19:29:18 +0100
-Message-ID: <20260219182918.970549-1-tafil@tafhub.de>
+Subject: [meta-python][whinlatter][PATCH] python3-pybind11-json: fix Targets.cmake trying to reference host
+Date: Thu, 19 Feb 2026 19:31:13 +0100
+Message-ID: <20260219183113.972052-1-tafil@tafhub.de>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 X-Last-TLS-Session-Version: TLSv1.3
@@ -35,8 +35,8 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 18:29:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124512
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 18:31:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124513
 
 The resulting pybind11_jsonTargets.cmake in the dev-package adds an
 absolute path to python include directories in the target properties:
@@ -55,7 +55,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
 ---
  ...p-PYTHON_INCLUDE_DIRS-from-interface.patch | 34 +++++++++++++++++++
- .../python/python3-pybind11-json_0.2.13.bb    |  3 +-
+ .../python/python3-pybind11-json_0.2.15.bb    |  3 +-
  2 files changed, 36 insertions(+), 1 deletion(-)
  create mode 100644 meta-python/recipes-devtools/python/python3-pybind11-=
 json/0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch
@@ -107,20 +107,19 @@ R}>
 +                            $<INSTALL_INTERFACE:include>)
 +=20
 diff --git a/meta-python/recipes-devtools/python/python3-pybind11-json_0.=
-2.13.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.1=
-3.bb
-index 67bd2a33a7..e348168b8d 100644
---- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.13.bb
-+++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.13.bb
-@@ -3,7 +3,8 @@ LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0e25ff0ec476d06d366439e1120cc=
-e98"
+2.15.bb b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.1=
+5.bb
+index 8ad7dba76a..2a030af988 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
++++ b/meta-python/recipes-devtools/python/python3-pybind11-json_0.2.15.bb
+@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0e25ff0ec476d0=
+6d366439e1120cce98"
 =20
- SRCREV =3D "b02a2ad597d224c3faee1f05a56d81d4c4453092"
--SRC_URI =3D "git://github.com/pybind/pybind11_json;branch=3Dmaster;proto=
-col=3Dhttps"
-+SRC_URI =3D "git://github.com/pybind/pybind11_json;branch=3Dmaster;proto=
+ SRCREV =3D "32043f433ed987b2c2ce99d689ec337bcbd4ba95"
+ SRC_URI =3D "git://github.com/pybind/pybind11_json;branch=3Dmaster;proto=
 col=3Dhttps \
+-           file://d72ad4df929bc9d0882298fc1f85ecf589456ff6.patch"
++           file://d72ad4df929bc9d0882298fc1f85ecf589456ff6.patch \
 +           file://0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interfac=
 e.patch"
 =20
