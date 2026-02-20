@@ -1,158 +1,154 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E987C531FC
-	for <webhook@archiver.kernel.org>; Fri, 20 Feb 2026 03:35:19 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.31362.1771558510847924857
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22BC2C53216
+	for <webhook@archiver.kernel.org>; Fri, 20 Feb 2026 06:45:41 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.33017.1771569933411717635
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Feb 2026 19:35:10 -0800
+ Thu, 19 Feb 2026 22:45:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GjFtWARI;
- spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7d4bd4db87aso1121642a34.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 19:35:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771558510; cv=none;
-        d=google.com; s=arc-20240605;
-        b=EeTCDDXsRUJhEM9vAQBO/aIvXy0SifO55X4lCc1Df7yt5lQ3DJD7U2qHlJcOeMmuEF
-         +ynWPJjADBXSKIIWKo2JdJceE2Rd1WpRgUL2rr4m8nAyO1eOo8885cVxd9K6AarSZ5+c
-         mMtliGjNcHDU5rMwFCcnHknpZloVyzXCeunlJEl2rinceWgy+38uUADzZ8h788K3Al4p
-         PCzVtIOX1k5gQYlIWE7qkwSHbghCDUe+xWf3FsrJMk9g9H/LAAuubMQaoUiRkqUvI7mC
-         3ISqOx/ZSGesOMini+Rq1MpW1pEI/zCWapIhO4QquBrqC6cXnRJI4gDXrk8KGnplye1v
-         auJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=anlyW0WZpS1xx62JJtIU9gWYg7v5Yhl7auw1ktIz/Us=;
-        fh=1F/KlRuiAPiAsKdrSnI65aEUZ1bE3uTgdbCP6boSjYc=;
-        b=WemUfnC72gJGzse9sX0rcX4YHvtYTRVEKBXahvdwgQce5gIIp/Gg98WHLSvoDy7cUd
-         uf4i73eRh3CSpskiG5pbr6lin4ySxi8Dx3FltY2VBSJzw/HzlXaMMq/b6zs84vy+AkyJ
-         ZetNWmfzm4qbEEkIrnqPeC9ZbVEKQkVJbFOpYJ7RJRV98zMrNJidxfAOqKTLvsxsFuMZ
-         FpHtPlW3D8Uzys2uRtg5ghnSZofSPl115miHVZNgrM5N2x9QsKKppySUbxBXBFmQl6Fj
-         h59KnKzCNChh5SlE3URsRbKZL/PHXRdIPjaIOqAiZUu23I0DgWn6Y3VALptPKkbvbr4A
-         8M9w==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ByiLBHQw;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4836f4cbe0bso12670895e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 22:45:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771558510; x=1772163310; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=anlyW0WZpS1xx62JJtIU9gWYg7v5Yhl7auw1ktIz/Us=;
-        b=GjFtWARIzhGpeprfA10riY2lfJXmo1KtDvmv0LtUouwXnIQYlQQireGm/FQlNCpf4h
-         YiKbcgu//AxGb964haQvmwr8eompsUMrt436wyMbOf5oAMxiKXyGOWai7EuDgBH4n++9
-         s3yFSvOTn97K1GZhTYThepOoAnuFw0KGMY5KWu09K47NwQ7nTq7AsSyLt0YJ7lQoITr/
-         wssvbvl/688rM2yP2qN7Tjtg1u/4k42qY3b7aOaWI8n/nROhmiqxwO+QrmhXepdXxLUU
-         vCXbK1nJ6aHaMcW/MbcuFg0wi8J518OmV/0s8jJ/oLuzOYaciP1mk/ulRYRLzFpHoC/Y
-         gEPw==
+        d=gmail.com; s=20230601; t=1771569931; x=1772174731; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=6Ti/dQf7fXgJeRoYitDgJ3a+Ap88f1hwORQVyjpx9SM=;
+        b=ByiLBHQwj7XB+FANMLqiT10oo42UeZhrlNspcsHGVg9eTmYNixw3KiW9etu1crJIsU
+         9Ph10HVhZ+rRbKuVmvo/IevfjHNC5L28OwUTj+TqkQb0j839bgDbG9lLg//0eCq2+zrZ
+         l6+yipesUG5lH6Seu592UEjKtvOcXrZROufaiZSKw6ddt5mp6xN3QewtYb8i/p8wDYy2
+         Y+thQw0YZcIa0F7GkLuEStfooLh2jlmKY8EpFjFHAlVqpwEN8N5u9x3hLmTP9xrk7yIj
+         Fg8eUS5DRJan6W66BoqwmBYsYkpg0RZp1Swx7KgS10/6vwA9SWz92NDccllvjl4fqnqH
+         TAZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771558510; x=1772163310;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=anlyW0WZpS1xx62JJtIU9gWYg7v5Yhl7auw1ktIz/Us=;
-        b=edcGSxEYoSTsKwKBdLR3WtNmeqcdf13cPzcQs7hAkYURXiM7fFftlWx2nhQKQnppuh
-         OTrqdlsYtAOU+NHk5p63UCwynR2EKhJGADn2Bu+F3leC8S7OFeAfViq6+8kG0cI6tiaV
-         +PM7N3eM0L4FXcyT4374v9kkBHKbifVzN1yK58BUNP6FXPWe0KLyvaAI8DbHY9JLc2dq
-         VF87KxiYRDYBAzI+FGv/Sj8pVY2t+drHcB1hdj/HwGhm+umTiGHWyuU1teOsyHD+r2IL
-         F6mlb/WqyFH27H5z8Bt7iAvish3tFaEfPaJTljcEHI81Enkh/cOvMcxxocDz84RsvL7X
-         gDyQ==
-X-Forwarded-Encrypted: i=1; AJvYcCUKvhMXa5VRycmHNqLwqb8yj5TRoQQhN9tUnCdpN70KaQLzFi0bQ/kPMIiI52gdwZYoNB0elBp/n2bw/Czvk+bBNtQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwN/ocWejNtsQcide2OWaDx+bW9/HpTMxBvhnDobHBl7ozMsT30
-	EiKAZ7UMm7d/c0yT0oTfLW7PoxqwaCpXzdxeGuur2bWqa22ojRfzMaBYJ7OXE4ZiTOv5umnMIN1
-	w4mn+SvcmrUh6qBiXy1TnXf7TcXBFZ+s=
-X-Gm-Gg: AZuq6aJwNFXBtXcf9ufTAPu2x0hGM6XP2RQa+3BDsfhpd0pvtk9FECoZaMIXVC7aOmp
-	eqx7HNj6YAw5XElvy1gEfaHTZ4WMFPWrSbtQmpl2lJOfwHpIUorgeITkOzt5SkZdG+L04XHMMVH
-	gJkWG7LzI0swYyxZJ3thLhUPE6YTtWq9Qp4SFHFskf4sCP9HFJSHNI5J9dNtCWZbwxFcVNdUbRs
-	U1mNEXWYjeH/spMc9h/hv5b/vCzd1wQ+4PMey9/xEIE7obsCkWANCuaI7JzJfcJ1zjFCjp267R4
-	JJnBVxSD
-X-Received: by 2002:a05:6820:2216:b0:676:aeb2:63f with SMTP id
- 006d021491bc7-679a71e1c91mr4053071eaf.33.1771558509987; Thu, 19 Feb 2026
- 19:35:09 -0800 (PST)
+        d=1e100.net; s=20230601; t=1771569931; x=1772174731;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6Ti/dQf7fXgJeRoYitDgJ3a+Ap88f1hwORQVyjpx9SM=;
+        b=wkhBooMR6bfL0Hkh3PQUERP7qD93uUmVmQLVywO8DtBbe3vhoDwMCKf4i7YzX1128b
+         3QSFgyV267M9mGLy3DbTvZ0xwzzJ88jkclh8GtcKMWo+mkmuOf93/OqSeBPGqbocktLr
+         x3wGL3uyU4oXQPFp39fc4R1I+jvtrODdDWpxW8T9A1flbtidVc5wav0LC79EylyWpFi7
+         Vvf79z0owskn02rOVF3/q1QYcRgvCZVGptr25RDONNypdnoVJAnsIKMga5EdiS9Uf70P
+         Cy4skUdfZXO5eNmUxonrVTpIIu0dichxa4kXnnwWaCqzHjY4VBoAeb5DfuqaZ1JmWaai
+         2tTw==
+X-Forwarded-Encrypted: i=1; AJvYcCW10347fa3aRNVEevpO5JxY9zfKrrf4kn53BExyEVVnmJN+KXA2laoosuo5C+QlWGxMBvZhIo2oUIFp3wBli+RlWi4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx1zXoCqN3bqp2OzWwT8aps62+23kqzgXExupEIzCV9R4o1XX57
+	GR8jUgbnKnTqQrDMmAJZyTM6f5kdDxdhtb3EGoSbFYLcMMt5MTLKHE55
+X-Gm-Gg: AZuq6aL4pAYviXiSrBA77BQnJxiEFBHN69dsXZ28rMJ0aTC4hMTzsf93TZuasA8JKR1
+	PMU38sAjIQ8PC53qzpMfescUeXb5SJ7pRfPaFU4bOGMBuIOEii0PC1jTknECqK0R3ERQBILRyp5
+	X51vDAXfVMqz81xKCFouUX9KqZZfoHi4gYVGdSrrQ/zpoW+/MclrnggRtRaSld/6ptakLJn2h1z
+	y18AnT4eC5xbnYFGpodaNH22uFruijcJdyOISem/Oe/q/kLa35ZuesKK4HZookiCfVnLnvlCaKT
+	B4NGfuVgDwn1vRK/mTWXlGnfrqLSJXyEInNKGDH7nEgLcU7w4NjW7egvc3jWgarDcu2b82jF8FS
+	Vk3Z3+7johSWnPtCXSEYmt/HDlbCNYKo2RHxJrpJGnFJxYoqW7c86a3NUiU8DpbIs4Jb8cSL0nB
+	MgbHSR4+jwtk08vLm7B/fNzID56/WZ7fs=
+X-Received: by 2002:a05:600c:8211:b0:483:348a:d3f3 with SMTP id 5b1f17b1804b1-48398ad6e9cmr131494955e9.18.1771569931358;
+        Thu, 19 Feb 2026 22:45:31 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a31b1712sm52881205e9.1.2026.02.19.22.45.30
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Feb 2026 22:45:30 -0800 (PST)
+Message-ID: <cfd43b84-61a3-41ba-8931-42d2ca77c44d@gmail.com>
+Date: Fri, 20 Feb 2026 07:45:30 +0100
 MIME-Version: 1.0
-References: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
- <20260211120025.4190831-8-ankur.tyagi85@gmail.com> <CA+s=J=zMxXHgnsua6gXT0T6X7ZQPioAH53uu6K=WnkmNtmnhBQ@mail.gmail.com>
- <DGISHQI5DDPV.2BHEPKY23Q3VH@smile.fr>
-In-Reply-To: <DGISHQI5DDPV.2BHEPKY23Q3VH@smile.fr>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Fri, 20 Feb 2026 16:34:59 +1300
-X-Gm-Features: AaiRm52vWyZFv4rMxSRKmh6auEFNKowQR3cmPp59cTIuCUiTk-_kfRRdsoQ_EHM
-Message-ID: <CADySD0FrCrza-8-Qvv8dWA9rXFkv=OkgNwO-Pof8efCrEWdXgg@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [oe][meta-oe][whinlatter][PATCH 8/8] tomoyo-tools: update SRC_URI
-To: Yoann Congal <yoann.congal@smile.fr>
+To: ankur.tyagi85@gmail.com, Yoann Congal <yoann.congal@smile.fr>
 Cc: anuj.mittal@oss.qualcomm.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20260211120025.4190831-1-ankur.tyagi85@gmail.com>
+ <20260211120025.4190831-8-ankur.tyagi85@gmail.com>
+ <CA+s=J=zMxXHgnsua6gXT0T6X7ZQPioAH53uu6K=WnkmNtmnhBQ@mail.gmail.com>
+ <DGISHQI5DDPV.2BHEPKY23Q3VH@smile.fr>
+ <CADySD0FrCrza-8-Qvv8dWA9rXFkv=OkgNwO-Pof8efCrEWdXgg@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CADySD0FrCrza-8-Qvv8dWA9rXFkv=OkgNwO-Pof8efCrEWdXgg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Feb 2026 03:35:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124520
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Feb 2026 06:45:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124521
 
-On Thu, Feb 19, 2026 at 9:19=E2=80=AFPM Yoann Congal <yoann.congal@smile.fr=
-> wrote:
->
-> On Thu Feb 19, 2026 at 4:04 AM CET, Anuj Mittal via lists.openembedded.or=
-g wrote:
-> > On Wed, Feb 11, 2026 at 8:01=E2=80=AFPM Ankur Tyagi via lists.openembed=
-ded.org
-> > <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
-> >>
-> >> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >>
-> >> The previous one became inaccessible.
-> >>
-> >> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >> ---
-> >>  meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb | 3 ++-
-> >>  1 file changed, 2 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.=
-bb b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
-> >> index f172168335..a90a33ada4 100644
-> >> --- a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
-> >> +++ b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
-> >> @@ -5,9 +5,10 @@ being useful purely as a system analysis tool."
-> >>  HOMEPAGE =3D "http://tomoyo.sourceforge.jp/"
-> >>  SECTION =3D "System Environment/Kernel"
-> >>
-> >> -SRC_URI =3D "http://jaist.dl.sourceforge.jp/tomoyo/70710/${BP}-202109=
-10.tar.gz"
-> >> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/tomoyo/${BP}.tar.gz"
-> >
-> > How do we know it's -20210910?
->
-> Also, please put add a downloadfilename containing "${PV}". If not, it
-> will break the mirroring test at the next upgrade.
->
-> Thanks!
 
-Thanks Anuj, Yoann.
+On 2/20/26 04:34, Ankur Tyagi via lists.openembedded.org wrote:
+> On Thu, Feb 19, 2026 at 9:19 PM Yoann Congal <yoann.congal@smile.fr> wrote:
+>> On Thu Feb 19, 2026 at 4:04 AM CET, Anuj Mittal via lists.openembedded.org wrote:
+>>> On Wed, Feb 11, 2026 at 8:01 PM Ankur Tyagi via lists.openembedded.org
+>>> <ankur.tyagi85=gmail.com@lists.openembedded.org> wrote:
+>>>> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>>>>
+>>>> The previous one became inaccessible.
+>>>>
+>>>> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+>>>> ---
+>>>>  meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb | 3 ++-
+>>>>  1 file changed, 2 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
+>>>> index f172168335..a90a33ada4 100644
+>>>> --- a/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
+>>>> +++ b/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.6.1.bb
+>>>> @@ -5,9 +5,10 @@ being useful purely as a system analysis tool."
+>>>>  HOMEPAGE = "http://tomoyo.sourceforge.jp/"
+>>>>  SECTION = "System Environment/Kernel"
+>>>>
+>>>> -SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/70710/${BP}-20210910.tar.gz"
+>>>> +SRC_URI = "${SOURCEFORGE_MIRROR}/tomoyo/${BP}.tar.gz"
+>>> How do we know it's -20210910?
+>> Also, please put add a downloadfilename containing "${PV}". If not, it
+>> will break the mirroring test at the next upgrade.
+>>
+>> Thanks!
+> Thanks Anuj, Yoann.
+>
+> Let's drop this patch for now as existing SRC_URI seems to be working again.
 
-Let's drop this patch for now as existing SRC_URI seems to be working again=
-.
-I will monitor the situation and send a new patch if needed.
+Is it working though? When I visit it, it offers me to buy the domain,
+and the direct SRC_URI[1] gives me http 403. Is it geo-dependent?
 
-cheers
-Ankur
+That "-20210910" comes from the original filename. IMO the full BPN
+should be tomoyo-tools-2.6.1 (this number refers to another software),
+and the version is 20210910, but didn't want to start messing with the
+versions with such an old recipe. 
 
+[1]:
+http://jaist.dl.sourceforge.jp/tomoyo/70710/tomoyo-tools-2.6.1-20210910.tar.gz
+
+> I will monitor the situation and send a new patch if needed.
 >
-> >
-> >>  SRC_URI[sha256sum] =3D "47a12cdb1fe7bbd0b2e3486150fe1e754fa9c869aeefd=
-42fd311c4022b78010a"
-> >>
-> >> +PV .=3D "-20210910"
-> >>  S =3D "${UNPACKDIR}/${BPN}"
-> >>
-> >>  LICENSE =3D "GPL-2.0-only"
-> >>
-> >>
-> >>
+> cheers
+> Ankur
 >
->
-> --
-> Yoann Congal
-> Smile ECS
->
+>>>>  SRC_URI[sha256sum] = "47a12cdb1fe7bbd0b2e3486150fe1e754fa9c869aeefd42fd311c4022b78010a"
+>>>>
+>>>> +PV .= "-20210910"
+>>>>  S = "${UNPACKDIR}/${BPN}"
+>>>>
+>>>>  LICENSE = "GPL-2.0-only"
+>>>>
+>>>>
+>>>>
+>>
+>> --
+>> Yoann Congal
+>> Smile ECS
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#124520): https://lists.openembedded.org/g/openembedded-devel/message/124520
+>> Mute This Topic: https://lists.openembedded.org/mt/117754895/6084445
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+
 
