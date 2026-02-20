@@ -2,99 +2,96 @@ Return-Path: <geoffhp@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35F9AC531D3
-	for <webhook@archiver.kernel.org>; Thu, 19 Feb 2026 21:31:07 +0000 (UTC)
-Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.25208.1771536660938500721
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35E25C531F7
+	for <webhook@archiver.kernel.org>; Fri, 20 Feb 2026 00:52:48 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29128.1771548761418862944
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Feb 2026 13:31:01 -0800
+ Thu, 19 Feb 2026 16:52:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gJsgCRjn;
- spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: geoffhp@gmail.com)
-Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-6798f3b7163so889480eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 13:31:00 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K3ISwnUM;
+ spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: geoffhp@gmail.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-40ef10ec84cso1114543fac.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 16:52:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771536660; x=1772141460; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1771548760; x=1772153560; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bkMzRcq5VP2cDzLr9AhEqLEbhLA5VQk/LhXXNWqR904=;
-        b=gJsgCRjnjQRtdg8cp2CjLYyVM3Suar9MpWBQptdjvR8eGKCu7Yq63+NQf+ezysNGNK
-         mm5eFpw8J2HvG75uf4pOuqoyaAVyvIMVWXNlZV6pqNS/6N1mhMi6ZLTJMBfjO8EPha6e
-         x18KQCpYXUd93SJRUxEgcm1qdycy68PfCubRzOLqXlaoafn/dsr9WVtdXLPglk5fAz+5
-         +Fbd6G57QPIYk59umhiNo7Cz3ECmDRZjUn1ykOMT+H0qT50SqPFfIW9ER0vg5zDq6i5n
-         CWqopoMGOiUEfYAkkGYLTOzeQ/NO1QUVwnSAV0MLRmyejTeqi5C5g+KXoJN+FDKh6yEN
-         y28A==
+        bh=VcX32udDk9lF6455K7p1gKrhbWF0P+IkqJr8TIrLotc=;
+        b=K3ISwnUM619QjNoz7o88+9JdJdvNNC5LFdVenJWUQTYKSG0dJ3+JjDSlbfhFWqRhIf
+         1vs8ZEup0fTVjvndvMYYwi61SLnPBmvvDXulEBDQmBcwd4dPGibNTjZCAQ7rvGr8IcpA
+         0FrTqDHuLUXDEYA847tIRMrFJrUq0zTPKpkpdK7kIJ8ug/2/0Cfyx3wM0PCpmXZ0UFMX
+         Xgxc51OiJbkLxvceLQ1HpDnjWK2l+yVnwsC71xjdqx9O5bck+p7jWCshO65jr56uOE8W
+         2u21Bj5nBUsv7mWFy9oahtDdjlW/VqWpBBddnVyswj6sM2kP/UZigFUaZTaslbTRa9Ls
+         6chg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771536660; x=1772141460;
+        d=1e100.net; s=20230601; t=1771548760; x=1772153560;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=bkMzRcq5VP2cDzLr9AhEqLEbhLA5VQk/LhXXNWqR904=;
-        b=QjDQrlP89XRU9dqGqZoabK9rZUCNOfgo8eULB3gtg/FiEZhkY/kbr3v5J/2CvbSQgl
-         /fFpbgiUbQ94x/1BxoST7C1ymXPl6r2wOp0UTvc8WDXWGx0i442aK1yk8f+o0mqHHLJ0
-         kedMFjm/7QQUNaQeui3WzYImDuD8kpv2DNYOLkLZe6lzBp5M/qRnW6E5vflD+iU27DIa
-         ls0ab2wy9O9fihIbYFT6zo96taBUYrW7Qz9bqO8EYcXcFiARWqzrn6s7yarBGmvjSUl/
-         AT1LI5afnDCzXX4qlXs0mSx+P+Z2sdyNxUY0tQtxiap6RR1g6qHanNve8o2YDcH+WKBR
-         cgnQ==
-X-Gm-Message-State: AOJu0Yzo2X3PfaJicvnYIO37f+rvMb6ogeDxzwOPTc8I6+kAx882LjGm
-	7ad4+VBCxVMzam3AVnGR1qHzrnDiwHHwTSnD9OS2Qmr/Fv1QysGReDKqdt6feQ==
-X-Gm-Gg: AZuq6aInFiPjvg4V31/bszUAwcvf4ueh1Dbl60iwlMol3uO3ToP2rRiimomK9Ptau7N
-	N+wN9l52SuvSUWEGvf+NYkzMxVPQV1qCmGz7qDDXxIIujpM2oXSbFDfME8h5+a3KXlDCecyTjup
-	YrnnryerK+vQd0JhUkrfsPtNgGjobq7RZ9NaAL7guvM3MPbKbpj1SxoOhaJPddsHKXXU0jcWseG
-	oC7t6WWCwhGeKFtzxphz9/AFSr7bg4LxWsHTafVM37KxXO+8jgtrtnYnDUNMpemZ10akgUDNwmJ
-	Hkk+HhJdvCFxWvT1hLdkLpI7bzb4WMzamkI3zDaDErhPZpXaBqZv2z3NTJOIGqjtT5c+61JhxOD
-	SMB6PJnp0SXdPIoe3b6a5EoLYEKiIZtBMHnKQ1zajwNDG7eL+af8A01CkLZ9lfjDRmfW8rNpohx
-	MhoHijdwf0RNJAjqV6pw5V5Xb7qqg7Qe7hNWcef9cGetfMRpRY/8U0nbsNF3GVcRP1RM6/JbvYY
-	pnd3w==
-X-Received: by 2002:a05:6820:f036:b0:679:97d5:dd25 with SMTP id 006d021491bc7-679a7444f11mr3840419eaf.56.1771536659962;
-        Thu, 19 Feb 2026 13:30:59 -0800 (PST)
+        bh=VcX32udDk9lF6455K7p1gKrhbWF0P+IkqJr8TIrLotc=;
+        b=tFQWNCG17f8XiqEgQCG/hYTehB+0OqAIfV1qMjUp6enyli5ymIP0LXwhUq0iyvXQxr
+         aascXJ9lmtg6mFQZmZgV89tzgBBJbtwBQr0WWNt0rrc1XzINLer5DgXMPq39l8kUWcp4
+         AD0OuRWq34NhQIsHsjy7xOETZzK8D0WxQzgiI7gYRODSRHhV9VsWbCkzJqVhDqlXVgG6
+         CbvtWPiUSsK8O5J6tJyNJ8rCTXzsnmTNvtHPuKEYa9BmMLm0zDD02bKPDJ7KSXwaQ9nB
+         iuzK6PB4sDsnGwpi6JAF9rlV3wzMElrByWCZrTzs92Dg2anPs+0P35tmxcEY96Q0AjE4
+         LnGg==
+X-Gm-Message-State: AOJu0YysFxGS+ZCaaEj9hCW/kUP61VO9Dm8st0VAMQLQXWiyXnF4PR4C
+	nl92AyrEdaa1Iqbde6Xk86suIDsfNnZcc6LV+79cgFiyWJY7Hjc1corEhnIFHA==
+X-Gm-Gg: AZuq6aIluL6R5AmTD9mEvV+G5mDa8juKgNi0p6QUmudPulieMJ/7v7TDyXWRnc5G4/8
+	+quF0tFspF6j+cQu1A/8IierTi7gXRW6UQaAWrOVjDRb195noBdpOkFn/+RMuExzBHyfhLAJt73
+	xUrz5o6F9I4JbJukplapacaw/E3ubPcC+pP68bcsvnK57Q33sjJl/ejuhmUPEqN9Pbapk8f4+tD
+	buifC65owUf7hEjwf+WFPKY7nBSGyhL18AjSrVOtDoMfk6Zp/RuHIjM105CTai1rIGsPv+7ArVu
+	QwnaaoQ7stYbo8cIMnEt0kSpXJiOJTU1Edx965nTfsdYZH+gxZyx8/uAEWYCC9usk/6zOLV4Nir
+	UTLcT7KuPJYWJRXzNW/Z9WQdq8wqLH8wVSKxOkRdiimxPjjb8Uxc2imLbeN8upmErImkqPUGwz8
+	Je8FKmq1m0h1aVLfKn7bYrIMGZaGcPHnGx3rTbuPqAj3HiaSZhOBbCEYnbuBe/6QSphUc=
+X-Received: by 2002:a05:6871:8ab:b0:3ec:48ba:8f3e with SMTP id 586e51a60fabf-41529183eadmr4216600fac.49.1771548760442;
+        Thu, 19 Feb 2026 16:52:40 -0800 (PST)
 Received: from faraday.ACTDEV.local ([207.154.79.109])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-678b13aec01sm10962182eaf.8.2026.02.19.13.30.59
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-413956e44aasm10847207fac.15.2026.02.19.16.52.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 19 Feb 2026 13:30:59 -0800 (PST)
+        Thu, 19 Feb 2026 16:52:40 -0800 (PST)
 From: Geoff Parker <geoffhp@gmail.com>
 X-Google-Original-From: Geoff Parker <geoffrey.parker@arthrex.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: geoffhp@gmail.com,
 	Geoff Parker <geoffrey.parker@arthrex.com>
-Subject: [meta-python][PATCH] python3-matplotlib: Fix TMPDIR in debug binaries, [buildaths] errors
-Date: Thu, 19 Feb 2026 13:30:55 -0800
-Message-Id: <20260219213055.368528-1-geoffrey.parker@arthrex.com>
+Subject: [meta-python][PATCH] python3-m2crypto: fix python3-m2crypto-native do_configure:prepend()
+Date: Thu, 19 Feb 2026 16:52:25 -0800
+Message-Id: <20260220005225.401958-1-geoffrey.parker@arthrex.com>
 X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Feb 2026 21:31:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124517
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Feb 2026 00:52:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124518
 
-Fix errors like:
+The recent workaround for https://github.com/swiftlang/swift/issues/69311
+breaks python3-m2crypto-native, with error about missing e_os2.h file in
+recipe-sysroot-native.
 
-    ERROR: python3-matplotlib-3.10.8-r0 do_package_qa: QA Issue: File
-           /usr/lib/python3.14/site-packages/matplotlib/backends/.debug/
-           _backend_agg.cpython-314-arm-linux-gnueabihf.so
-           in package python3-matplotlib-dbg contains reference to TMPDIR
-           [buildpaths]
+Apply do_configure:prepend to class-target only to fix.
 
 Signed-off-by: Geoff Parker <geoffrey.parker@arthrex.com>
 ---
- .../recipes-devtools/python/python3-matplotlib_3.10.8.bb        | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-index ce8c7a276a..8489b91402 100644
---- a/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.10.8.bb
-@@ -47,6 +47,8 @@ RDEPENDS:${PN} = "\
-     python3-packaging \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb b/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
+index bd7a2369bd..abe79671d2 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.46.2.bb
+@@ -44,7 +44,7 @@ export SWIG_FEATURES
  
-+TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
-+
- CVE_PRODUCT = "matplotlib"
+ export STAGING_DIR
  
- BBCLASSEXTEND = "native"
+-do_configure:prepend() {
++do_configure:prepend:class-target() {
+     # workaround for https://github.com/swiftlang/swift/issues/69311
+     sed -i "/sys\/types.h/d" ${RECIPE_SYSROOT}${includedir}/openssl/e_os2.h
+ }
 -- 
 2.39.5
 
