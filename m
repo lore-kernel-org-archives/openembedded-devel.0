@@ -1,96 +1,165 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0634C636A0
-	for <webhook@archiver.kernel.org>; Sun, 22 Feb 2026 16:45:39 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16922.1771778734843188682
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14CECC636C2
+	for <webhook@archiver.kernel.org>; Sun, 22 Feb 2026 22:00:31 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22919.1771797627061112182
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Feb 2026 08:45:35 -0800
+ Sun, 22 Feb 2026 14:00:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BaLObNYU;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4836f363d0dso30827015e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Feb 2026 08:45:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771778733; x=1772383533; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8Oot0KeI6H9bWCy3XycscchSIiEUYd0wzsMlzO9I/+g=;
-        b=BaLObNYUKXS1AxIYO4108sgmLDULqpKp0acDn+N6fkKntxHaoDu09di3prga5qDkC2
-         pi6FdfZFWSJaWWX6YmVAMnq9YU+D8mLFky5fXNt85xI4BvE7s2pyh3aPvoeakGSMx1xQ
-         Af1jUTG2rpMRKBP7yLAiv4FwdCGtw2OikqUzC9as1xHTAs1Q9vRL8LnAcYhINV4tUPMN
-         C933BoHkFpZmc9Npqh8kJ5hKD04VFQTZ8JVuHdFPnzSQi2EHUEp4dGpSkiItbgMGwHUQ
-         jGIDDB2jdrlyV+xbpCUhZ0dWa1QEo3K7/64PYk+jWp2inTLPOgWLRbIXqbE3Olwb2Qe0
-         sPsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771778733; x=1772383533;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8Oot0KeI6H9bWCy3XycscchSIiEUYd0wzsMlzO9I/+g=;
-        b=JU8VmsgsujCe9F/d7HRNzyiVJWt0SxwpS0qZ125HNdxz2NJ2Ze02tQKPGSb1lm5Dc/
-         6NgVx8t3wJr/Uwc4EyBDli8rLAtnSXEVX5eX6/8u3ekFpR7B2VSuijWNHZ1VALI1mQUN
-         GzaJ0vtRrZg82w0Dx9QqBp+12COV6mqn8YYZnZxrSb0lqsJHD9sGpQqpASk/Wv14anSw
-         yWJBuKMGQU7M1BfM3jFuT54NKKp4KLE1tarA2Dsjr9LyJEQehtpenazqcIHVWohwiysM
-         JCy17JFlNv9YWovs8qjDi67Iy9ooijmt1GBDOBj3DzSF81RpcuLbXFbP2qRLNlTyoYG/
-         Xnpw==
-X-Gm-Message-State: AOJu0YySUW4muuXaWuPU4T9UAaN0rlxsEke1U0C6BDWJROsPswxhT/5n
-	5xDK7nLoEereun15WX5A55eVwBOyrklDdoAO2YH3BzOygjoe/20VzjKVcdRPyQ==
-X-Gm-Gg: AZuq6aLaeIZTS2nUL9yX42ONQRaIxnOzqge7IDeNBKWjvThq7TnAj96p23EMwlBZTmy
-	DNT402Itrd9wFES9TUmwDPMFg0vyekkSu4p2FEAbMKLaINHKeJ+PB90POmXCS3xd26lKmmqJ/G6
-	mKQ/+k9XRlm0VrUVHLm07yNWCUWEfA5WUcIn304CcJlmc+Xoj7GgT1rB5z6HINRmGWJ+yHaED36
-	XGtPr9SbHA4ysPjfxOF3jOQQ2BniBZKSSOcxNmOR4oprEsvusW25vpqvd1HgMNM8Mtx8OBMpOsf
-	9gChEl2crdDzJ4DPB1+FjaLJdkD+67FIuBPBfCfQNpjf2gh2xVkIEB1XDrgU+7nfJS3L5rEJJR6
-	V8NIdRcQYxhg9wk1NnvXHkyQxWsTnDxjWr/milYdmxa8IFh3RbK899rmjqENHiC0fqUKSrlAsxG
-	pWu46Niaoj7Q7u9+WBc/gz
-X-Received: by 2002:a05:600c:699b:b0:480:6941:d38b with SMTP id 5b1f17b1804b1-483a963baf7mr91134325e9.30.1771778732992;
-        Sun, 22 Feb 2026 08:45:32 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a9b75b4dsm204792545e9.4.2026.02.22.08.45.32
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Feb 2026 08:45:32 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=LL5BB2mj;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-20260222220023ca358055de000207dc-kbzayu@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 20260222220023ca358055de000207dc
+        for <openembedded-devel@lists.openembedded.org>;
+        Sun, 22 Feb 2026 23:00:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=qnj7z3iwmj7L5Z1Uo6lXBsjHycqoxf8K1zwA83py9F4=;
+ b=LL5BB2mjfhq4K35oBdi5I2MzpY5UkpG4VSb8kiOYsOIo5l7b0TgO2vJXfHvVqMYh7S4p5Q
+ JtC3TfaZK3/gGZGopeXexkhgnjFOn5vwJrkH06hc/L5sTVGpB56CQnjm66PMtQrvHG5mkB7F
+ l1tdRx89NqvTx/tviXYGMxwf+7y9cyW1OkCD3QTZ4lhXJqN8YTfVGgGgRw0IlHwJ7SjJxAD7
+ cs3fZz+jhb4w89a6IxRmCNTcRMZQkLdIWHDfSCMezhASxKdOcoKc1serDBi6WMVLaPxXealr
+ afyOYaOMbbr5Q47MP9V6GFPFeboD7d8AklDqYUPDnd9B2as6mJe9YQdA==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH] dovecot: ignore CVE-2025-30189
-Date: Sun, 22 Feb 2026 17:45:31 +0100
-Message-ID: <20260222164531.1971606-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-webserver][scarthgap][PATCH] fcgi: add follow-up patch for CVE-2025-23016
+Date: Sun, 22 Feb 2026 23:00:17 +0100
+Message-Id: <20260222220017.3828181-1-peter.marko@siemens.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Feb 2026 16:45:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124532
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Feb 2026 22:00:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124533
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+From: Peter Marko <peter.marko@siemens.com>
 
-Vulnerable versions are 2.4.0, 2.4.1 according to the full disclosure[1]
+New release [1] added additional fir for this CVE.
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-30189
+[1] https://github.com/FastCGI-Archives/fcgi2/releases/tag/2.4.7
 
-[1] https://seclists.org/fulldisclosure/2025/Oct/29
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-
-Adapted to Kirkstone.
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...25-23016.patch => CVE-2025-23016-01.patch} |  0
+ .../fcgi/fcgi/CVE-2025-23016-02.patch         | 83 +++++++++++++++++++
+ .../recipes-support/fcgi/fcgi_git.bb          |  3 +-
+ 3 files changed, 85 insertions(+), 1 deletion(-)
+ rename meta-webserver/recipes-support/fcgi/fcgi/{CVE-2025-23016.patch => CVE-2025-23016-01.patch} (100%)
+ create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
-index b9473d0345..c1fa702eaa 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.3.14.bb
-@@ -78,3 +78,6 @@ FILES:${PN}-dbg += "${libdir}/dovecot/*/.debug"
- 
- # CVE-2016-4983 affects only postinstall script on specific distribution
- CVE_CHECK_IGNORE += "CVE-2016-4983"
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016.patch b/meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-01.patch
+similarity index 100%
+rename from meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016.patch
+rename to meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-01.patch
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch b/meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch
+new file mode 100644
+index 0000000000..1f855db3e0
+--- /dev/null
++++ b/meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch
+@@ -0,0 +1,83 @@
++From 7c476394e799f39f749d7a7a50f62e5d3ec8db61 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Petr=20P=C3=ADsa=C5=99?= <ppisar@redhat.com>
++Date: Mon, 19 May 2025 13:49:32 +0200
++Subject: [PATCH] Fix size_t overflow in Malloc() argument in ReadParams()
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+# cpe-incorrect: The current version (2.3.14) is not affected.
-+CVE_CHECK_IGNORE += "CVE-2025-30189"
++There were still two issues after commit
++b0eabcaf4d4f371514891a52115c746815c2ff15 (Update fcgiapp.c, Fixing an
++integer overflow (CVE-2025-23016)):
++
++* Signed int overflow in "nameLen + valueLen + 2" expression.
++
++* Sizes of size_t and int types are in general unrelated.
++
++This fix resolves both of the issues.
++
++Related to CVE-2025-23016.
++Resolve #67.
++
++Signed-off-by: Petr Písař <ppisar@redhat.com>
++
++CVE: CVE-2025-23016
++Upstream-Status: Backport [https://github.com/FastCGI-Archives/fcgi2/commit/7c476394e799f39f749d7a7a50f62e5d3ec8db61]
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ libfcgi/fcgiapp.c | 13 ++++++++++---
++ 1 file changed, 10 insertions(+), 3 deletions(-)
++
++diff --git a/libfcgi/fcgiapp.c b/libfcgi/fcgiapp.c
++index 99c3630..0cd3dd1 100644
++--- a/libfcgi/fcgiapp.c
+++++ b/libfcgi/fcgiapp.c
++@@ -18,6 +18,7 @@
++ #include <memory.h>     /* for memchr() */
++ #include <stdarg.h>
++ #include <stdio.h>
+++#include <stdint.h>
++ #include <stdlib.h>
++ #include <string.h>
++ #include <sys/types.h>
++@@ -1158,6 +1159,7 @@ char *FCGX_GetParam(const char *name, FCGX_ParamArray envp)
++ static int ReadParams(Params *paramsPtr, FCGX_Stream *stream)
++ {
++     int nameLen, valueLen;
+++    size_t totalLen;
++     unsigned char lenBuff[3];
++     char *nameValue;
++ 
++@@ -1173,7 +1175,7 @@ static int ReadParams(Params *paramsPtr, FCGX_Stream *stream)
++ 	    }
++             nameLen = ((nameLen & 0x7f) << 24) + (lenBuff[0] << 16)
++                     + (lenBuff[1] << 8) + lenBuff[2];
++-	    if (nameLen >= INT_MAX) {
+++	    if (nameLen >= INT_MAX || nameLen >= SIZE_MAX) {
++                 SetError(stream, FCGX_PARAMS_ERROR);
++                 return -1;
++ 	    }
++@@ -1189,16 +1191,21 @@ static int ReadParams(Params *paramsPtr, FCGX_Stream *stream)
++ 	    }
++             valueLen = ((valueLen & 0x7f) << 24) + (lenBuff[0] << 16)
++                     + (lenBuff[1] << 8) + lenBuff[2];
++-	    if (valueLen >= INT_MAX) {
+++	    if (valueLen >= INT_MAX || valueLen >= SIZE_MAX) {
++                 SetError(stream, FCGX_PARAMS_ERROR);
++                 return -1;
++ 	    }
++         }
+++        totalLen = (size_t)nameLen + (size_t)valueLen + 2u;
+++        if (totalLen < (size_t)nameLen || totalLen < (size_t)valueLen) {
+++            SetError(stream, FCGX_PARAMS_ERROR);
+++            return -1;
+++        }
++         /*
++          * nameLen and valueLen are now valid; read the name and value
++          * from stream and construct a standard environment entry.
++          */
++-        nameValue = (char *)Malloc(nameLen + valueLen + 2);
+++        nameValue = (char *)Malloc(totalLen);
++         if(FCGX_GetStr(nameValue, nameLen, stream) != nameLen) {
++             SetError(stream, FCGX_PARAMS_ERROR);
++             free(nameValue);
+diff --git a/meta-webserver/recipes-support/fcgi/fcgi_git.bb b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+index d327d435d5..b83f8a872d 100644
+--- a/meta-webserver/recipes-support/fcgi/fcgi_git.bb
++++ b/meta-webserver/recipes-support/fcgi/fcgi_git.bb
+@@ -7,7 +7,8 @@ SRCREV = "382aa2b0d53a87c27f2f647dfaf670375ba0b85f"
+ PV = "2.4.2"
+ 
+ SRC_URI = "git://github.com/FastCGI-Archives/fcgi2.git;protocol=https;branch=master \
+-           file://CVE-2025-23016.patch \
++           file://CVE-2025-23016-01.patch \
++           file://CVE-2025-23016-02.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 
