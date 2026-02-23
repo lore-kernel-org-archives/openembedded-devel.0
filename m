@@ -1,140 +1,79 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DCFFEA4FD7
-	for <webhook@archiver.kernel.org>; Mon, 23 Feb 2026 15:19:56 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37443.1771859986153051087
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22649EC110B
+	for <webhook@archiver.kernel.org>; Mon, 23 Feb 2026 16:49:07 +0000 (UTC)
+Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39711.1771865341806479134
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Feb 2026 07:19:46 -0800
+ Mon, 23 Feb 2026 08:49:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=pq4ENFVY;
- spf=pass (domain: konsulko.com, ip: 209.85.128.48, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-483770e0b25so41135175e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 07:19:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1771859984; x=1772464784; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9Jb7r+tqB7r+B27Kxto0zHK8WWfXMxfmYo/jmfChOPQ=;
-        b=pq4ENFVYIg+yrvP5bTzDXhDmr/3Ns0LlqWw0zhMqaCo1TG/p/Y5DYpdCEufSwqapqo
-         6R8k1gsKZ6wECdH3rw70XWXLsfXKXzer5ME/hiURHRpwcqZ4MRwgvRoxzbqfz3x2bOvZ
-         EaPe+5uy21IHoXdZg3u+DIeXlmyGOqrmCHpeQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771859984; x=1772464784;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=9Jb7r+tqB7r+B27Kxto0zHK8WWfXMxfmYo/jmfChOPQ=;
-        b=NpPNPXtMW29kHgPyEHepvC67poVwBd6M1hLfjjSfIbTEO4SXvPw2VOS006G+Pf/lA3
-         wN86Dt+/m7nm/snPuHlVeMBZD+GF/kvTgVLPff+kEp02X7m3dRhtGdJUrUnsem4pXXTo
-         8g+wUYaxkbnF7VyhFLy3OYv/+alfexDYE7Wnhykqho29wL3SvNCb3xR9dseoU3Nlse6i
-         QBLP5384jlR/SkqKDcuAGMwSP/0PkGN+loDHwMMnSosSFSYGDcmGDZSUXAbq5170Gq1r
-         T0iPfc8ANim/e7sND7hQRYhA639LkiZ4oHrnqRCdQhPbLrNNwLtkIVInMjVyqVJAyJY5
-         SttA==
-X-Gm-Message-State: AOJu0YyEBEWS42s1CyIyfwY4MRhcxTk+P7fhGnkBazrg944H+zP16XTD
-	ucpUaR+H8rMm1lpugd+P/XLGwdMNVBN+Z5WaUO5NZFPFpZEMvBRq2yCkDBL6CtXUGgoEjhbl0dE
-	ClFcb
-X-Gm-Gg: AZuq6aJybMXOZ6byMKX2tFaKohh90mP2XBOzUtCvw0f6rrr3k3Xqhsi4v1I3y/B1nn+
-	OjvLNBisOITDsr0GVCE07sWZs9rRiGw5v0Zf55WDbp8+Ko7fgtRppLRaNFJuH7LsVqbgplFyWrS
-	nRJG7lTY/3piuQJL7wigf89J8KW6d4HI6MuHe9pKAQ6UDbzyK3Ekagr8VQ/Zu3ixkks18WIO99n
-	KACDfvu5RBim5CkQwyD30kHU6fyfP0etP1pGKNiMISEinbbhGfoLzYbAnPvhELp+h41yvX4gEXJ
-	bYPTZ9oou6NX8OMBT8AI8dKSGE0kpixRXZfY+uU2hUM3jZAr53Waa2Xe/ElQ/YAJo5/n2gPMIGL
-	UbNa+TU1+aPlNl8ePyhKRPBmhxfGOHgyj2bBR7FMM8AOrfuhwCP4fkRI3EkXf9A5j+XhTuNhD0F
-	wK9YrDDP/HWtChkLny8HAmlYVLb1xlVNUBuzsI
-X-Received: by 2002:a05:600c:8b16:b0:480:68ed:1e70 with SMTP id 5b1f17b1804b1-483a963de73mr202480025e9.35.1771859984068;
-        Mon, 23 Feb 2026 07:19:44 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483a9cb4bb3sm195184285e9.14.2026.02.23.07.19.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 07:19:43 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=BPxn8oT5;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-2026022316485802e280f61e00020790-kwhv0f@rts-flowmailer.siemens.com)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 2026022316485802e280f61e00020790
+        for <openembedded-devel@lists.openembedded.org>;
+        Mon, 23 Feb 2026 17:48:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=XhTDexf0st0/b+rjM/A959wUg68933tlWQwCthS7sX4=;
+ b=BPxn8oT5ppVJ19T0c9YOx29isY6qq6twclrPFQEQ2zD2CkdpiqAuOkrxsD2yC2Pvpl/245
+ cgG8w7xFm0ZSmi5cG5foBuqvTEZDxfxPCh/FZpkaytXENiAsnxfbIXeeexbkL3JDMWxPC6Uq
+ gHcIIJEGzljfLn/XYtgWXVSNP6a6DLOGO0XrDSs1VK5WM6C6svGkjQPJYuNRpRoZYut7vGZU
+ HitVIwI0FqKAbejlfZwZqFMekH01V9R7Hn22g3ekJf1jUGLipBXMO8oEFnRTxRMxrMJEsF7f
+ NuVe0kd6WWk4eWydKSyW8PEbfC40lIcDZY5ILX0rnQfFbMdc5Vsw3Aiw==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-gunicorn: Upgrade 24.1.1 -> 25.1.0
-Date: Mon, 23 Feb 2026 17:19:39 +0200
-Message-ID: <20260223151939.1352991-3-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260223151939.1352991-1-leon.anavi@konsulko.com>
-References: <20260223151939.1352991-1-leon.anavi@konsulko.com>
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-webserver][kirkstone][PATCH] nginx: apply patchs for CVE-2025-23419 and CVE-2026-1642 to all versions
+Date: Mon, 23 Feb 2026 17:48:54 +0100
+Message-Id: <20260223164854.39462-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 15:19:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124551
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 16:49:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124552
 
-Upgrade to release 25.1.0:
+From: Peter Marko <peter.marko@siemens.com>
 
-- Control Interface (gunicornc): Add interactive control interface
-  for managing running Gunicorn instances, similar to birdc for
-  BIRD routing daemon
-- Unix socket-based communication with JSON protocol
-- Interactive mode with readline support and command history
-- Commands: show all/workers/dirty/config/stats/listeners
-- Worker management: worker add/remove/kill, dirty add/remove
-- Server control: reload, reopen, shutdown
-- New settings: --control-socket, --control-socket-mode,
-  --no-control-socket
-- New CLI tool: gunicornc for connecting to control socket
-- Dirty Stash: Add global shared state between workers via dirty.stash
-- In-memory key-value store accessible by all workers
-- Supports get, set, delete, clear, keys, and has operations
-- Useful for sharing state like feature flags, rate limits, or
-  cached data
-- Dirty Binary Protocol: Implement efficient binary protocol for
-  dirty arbiter IPC using TLV (Type-Length-Value) encoding
-- More efficient than JSON for binary data
-- Supports all Python types: str, bytes, int, float, bool, None,
-  list, dict
-- Better performance for large payloads
-- Dirty TTIN/TTOU Signals: Add dynamic worker scaling for dirty
-  arbiters
-- Send SIGTTIN to increase dirty workers
-- Send SIGTTOU to decrease dirty workers
-- Respects minimum worker constraints from app configurations
-- ASGI Worker: Promoted from beta to stable
-- Dirty Arbiters: Now marked as beta feature
+There is no reason to apply them only to single version when they apply
+properly to all versions.
 
-License-Update: Update years
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- ...python3-gunicorn_24.1.1.bb => python3-gunicorn_25.1.0.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-gunicorn_24.1.1.bb => python3-gunicorn_25.1.0.bb} (74%)
+ meta-webserver/recipes-httpd/nginx/nginx.inc       | 2 ++
+ meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb | 3 ---
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gunicorn_24.1.1.bb b/meta-python/recipes-devtools/python/python3-gunicorn_25.1.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-gunicorn_24.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-gunicorn_25.1.0.bb
-index f7951b9b32..a8b06786ae 100644
---- a/meta-python/recipes-devtools/python/python3-gunicorn_24.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-gunicorn_25.1.0.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "WSGI HTTP Server for UNIX"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 94cecabd54..6a53a50505 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -27,6 +27,8 @@ SRC_URI = " \
+     file://CVE-2024-7347-1.patch \
+     file://CVE-2024-7347-2.patch \
+     file://CVE-2025-53859.patch \
++    file://CVE-2025-23419.patch \
++    file://CVE-2026-1642.patch \
+ "
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5b70a8b30792a916f50dc96123e61ddf"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5dc9171ccd8fcbd7827c850148b3ca98"
+ inherit siteinfo update-rc.d useradd systemd
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+index 93a27ebd56..2e865e400e 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+@@ -2,8 +2,5 @@ require nginx.inc
  
--SRC_URI[sha256sum] = "f006d110e5cb3102859b4f5cd48335dbd9cc28d0d27cd24ddbdafa6c60929408"
-+SRC_URI[sha256sum] = "1426611d959fa77e7de89f8c0f32eed6aa03ee735f98c01efba3e281b1c47616"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
  
- inherit pypi python_setuptools_build_meta ptest
+-SRC_URI:append = " file://CVE-2025-23419.patch"
+-SRC_URI:append = " file://CVE-2026-1642.patch"
+-
+ SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
  
-@@ -15,6 +15,7 @@ SRC_URI += " \
- 
- # python-misc for wsgiref
- RDEPENDS:${PN}-ptest += " \
-+    bash \
-     python3-eventlet \
-     python3-gevent \
-     python3-misc \
--- 
-2.47.3
-
 
