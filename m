@@ -2,132 +2,114 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B898AEC1123
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C19DBEC1128
 	for <webhook@archiver.kernel.org>; Mon, 23 Feb 2026 19:19:03 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2754.1771874334165865465
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2744.1771874340455852440
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Feb 2026 11:18:54 -0800
+ Mon, 23 Feb 2026 11:19:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=M/nDp68w;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-43638a33157so4394621f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 11:18:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Snwa+uCf;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-4327790c4e9so3576306f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 11:19:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771874332; x=1772479132; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vscse/4JetqiAolj10CCXyJJT3UL8VNvDJ6MThYsCrk=;
-        b=M/nDp68wCfZPY+ndcy9S3rbFgUhhqn+LkOkAPjdKbm+LMDfk0jr5NKs4NAens2oWbX
-         U6T8WyISbYPJWRg+ELHmont3q8XcFCmFPRnLDXYtGyrQtFj0IyixuAL0ESE4plvGZ53L
-         Oyy5JRkzA6juyV45smlaKhnSVP4muloVAv2GsXMu/plVjmlD9znOSNKgw3Q7pGWn+Lm2
-         nyQ9DygqnaViKzXxQioBtkqCHmLwzcKIBBncB4nbfxn5HyEMIxrsee0iWHdj4hC5ipbu
-         6J1NL8S8iV5eyapwg6duJtSi/xQRY4ux5PTiN8SBgQYporylfVe14cpefKmA/UhYieoW
-         6m0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771874332; x=1772479132;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1771874339; x=1772479139; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vscse/4JetqiAolj10CCXyJJT3UL8VNvDJ6MThYsCrk=;
-        b=D00kR2YAb582lZZM898ehti3M6kXq9nykq/Uc2uN2OEUqN+h1hoyMrxSsuYM/QJSUZ
-         BOeDHWm2lsMLLjIFCVdQzBi1sPDjcZ43oPKH1XxhFNA5849fQ3kSEZ4/cX/Mvr3prVTX
-         oWBLLaoDLuMzyDMgdj7Ec+D2nD3HTN1qTRldbvDQlMFtj9DEqu2/nlnz6j52Os4jTS2L
-         37EWnQ+2cnqeSeTc+xtTmT4+2XDp7lvXOhF/XN9tJNcHVabDZ2qXesYAF6d7OTtKhrMv
-         hRxeed1ys/s+4gW0+h5cCxu/oZlv+bViXWC6Z4UzaI0nlNWUN8EdWooJksA8KZy7as2C
-         ehOQ==
-X-Gm-Message-State: AOJu0YzUVKYhpgF1bcILv+w1/xhQtdi5F2OPs+ddqGBxQb12SRHZ8W7A
-	7tRUsdFjN9EAqXgvXlHRoIx1U/1nTF5pN8zrrGcUZX+CpfnPU/n8Hdj0lgx6KA==
-X-Gm-Gg: ATEYQzyMZ1Qtn2GvjECLDmosawv3Ef2Ucz9ULZ3isuSn1b0XBtdLKeXunoJanSAJ0jd
-	LbmY/bVUIxuFnWdZb4NAXsSTR0BfZiNGo7rc+UOhKP7yYUrc3Q0HCvgpJ0E2otVyWRAv5B9bh47
-	l3yM+iv7ZYix32+/rWe1uYxF2VnekrJsbUGqmpxbUo5kD5fKZzKHAGKZA74RQD4BawOU1GlR+0l
-	TMA3WXAtLpV93szrsVuWKUL9RQtVm8kFCytr5FX7yZoMCRwF4kDTf6kjSstYQC8bx5y8VCuT2Xf
-	p2XYZKA1QyN9PAHdbTRtv049fs0iRAgWjRudu4J+fybWwaHhwe9KORDqwLq/3VC5LsbrDVH/wx7
-	pKiBU9cdestR9fstadfvSqtSITSRWTeWvTNih+PQ+9sda1C/7lt/OKryedpL8byTjKW+NEQ5zb2
-	jL8gTPWk7uVKglejwUjCh3
-X-Received: by 2002:a05:6000:22c1:b0:437:719d:a74a with SMTP id ffacd0b85a97d-4396f1822eemr16953779f8f.58.1771874332081;
-        Mon, 23 Feb 2026 11:18:52 -0800 (PST)
+        bh=Dkd0jCmjeUvkEdzlu9HGX2itL4Yu84AW4bYTRGD5zd0=;
+        b=Snwa+uCfevFnFxJb4vppvvfR8p26Y/o2Cp6dO7noWDmPTy+xD34ebgfLIW+R2rdemm
+         46Mx6E9MvuffMMjVWEtN9oLMp2R5OP5UCU2spb/WqjwJwhQkkdQ3fZqup/6MsyVnLwBb
+         9JZ+Fnb+L37XsAiMTpJUqF2tQ5P1ZzVVKgsC7lb0omXIfg5I48rrB0Rdt/7SJMIkVtsL
+         QvLgW9dsjSmqp4plhCWnpZsAW+1WiWBvsTdIQ1jM3uPwniZK06HIXdqhcD4WZgwtvp0A
+         QrX1Gl6r91mSc9uigTU+WRxocqQmcVHIHpUpIZmpRBY8LxO2hnNIBFk1vAPI4GU6t0T5
+         PmPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1771874339; x=1772479139;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Dkd0jCmjeUvkEdzlu9HGX2itL4Yu84AW4bYTRGD5zd0=;
+        b=ODWfvlWTqYWDFb3/XD7HkE6498/so9FkVtPpyBQfSUDqVfe/VIR+1psJm8qPKlBGTN
+         JkNG6MhW3K24t5thR5ajZNjhv7/JKYajLSax/5XTT6s4So89dL3G1k7fCy/XU3BE247Q
+         B0VSe31rETnjztaAU/43S8mqUwaYrsglVMO2GHCDx1ow5lpB62MbLyFDP/GAHf/Vou90
+         7iYk+s7W3iDMKgG0tm/ONGggiP5fZQlP7MPbhMiUTdKW2jpzNQqaqwl2Jis1Ssudv2w8
+         SkuPV0Xxpyq7Ms3V2DB5iX5A4344wBJwflkXNjnwfB8Jj3T96Fs+KvlNeRUjKWFHulh1
+         4UVg==
+X-Gm-Message-State: AOJu0YwU4wvcveUOEqUxUdonAmeHoowxs+ySs0evMUqIm//H5vHxBrw4
+	ZAk2o+FyhzC5H0VMJkkhnzdnd7L+7kB5umFMDpqYqnMdXCIfI244mEzA0tm5Hw==
+X-Gm-Gg: ATEYQzx+6Euj8/K6iDv3wgGUdYZN5VDDQ0cTec4qi+sBDLY5nPsb7+RZNWRinH1wVU0
+	1Qc5fQBRtEnsgffZSgGxMLzdYEWy20p7fhGSa9tJtJyvB/6Wa3efNEYFUr+pGDMZ7vfh2tGdHFR
+	hGHlm7P1VFB9+RnmoRaAC51lTsmW+yMHVETiNhQwDjVwOCRAcADBxG+D+5J+lOvjTy8Y9t81ngf
+	imOnig6J4KdCh6uq1oZ6YoMGu3xaxQ+lmGf5w8FPkN+LI41gLGFKbgvNegXRcBSFdAtkDfV3tsY
+	ExWfu98IdY47ter0BnVGWT8f5acYontaovTmBCVVevVOyZu5qxPeopJiJRI5pN+V9U0OitmYsPZ
+	5PjCIgn895Y+RqR0HbYpucrjNrDUc5MhLVdsJIn+/w33V1CwZOp3/RI/MqmRCuPgF4IW/76upz2
+	PpSl1vE9Rz4nDfoxzEMyfw
+X-Received: by 2002:a05:6000:1884:b0:435:e436:7fb with SMTP id ffacd0b85a97d-4396f19fe06mr16752931f8f.50.1771874338677;
+        Mon, 23 Feb 2026 11:18:58 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970d54760sm21308781f8f.35.2026.02.23.11.18.51
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970d54760sm21308781f8f.35.2026.02.23.11.18.58
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Feb 2026 11:18:51 -0800 (PST)
+        Mon, 23 Feb 2026 11:18:58 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 01/13] freerdp: patch CVE-2026-22852
-Date: Mon, 23 Feb 2026 20:18:38 +0100
-Message-ID: <20260223191850.1049304-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 11/13] python3-pillow: upgrade 12.1.0 -> 12.1.1
+Date: Mon, 23 Feb 2026 20:18:48 +0100
+Message-ID: <20260223191850.1049304-11-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260223191850.1049304-1-skandigraun@gmail.com>
+References: <20260223191850.1049304-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 23 Feb 2026 19:19:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124555
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124565
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-22852
+Contains fix for CVE-2026-25990
 
-The related github advisory[1] comes with an analysis of the
-vulnerability, including pointing to the vulnerable code
-snippet. Backported the commit that touched the mentioned
-code part in the fixed version, and is in line with the
-description of the issue.
+Ptests passed successfully:
 
-Ptests passed successfully.
+Testsuite summary
+TOTAL: 5024
+PASS: 4587
+SKIP: 434
+XFAIL: 3
+FAIL: 0
+XPASS: 0
+ERROR: 0
 
-[1]: https://github.com/FreeRDP/FreeRDP/security/advisories/GHSA-9chc-g79v-4qq4
+Changelog:
+Patch libavif for svt-av1 4.0 compatibility
+Fix OOB Write with invalid tile extents
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../freerdp/freerdp/CVE-2026-22852.patch      | 27 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp_2.11.7.bb |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2026-22852.patch
+ .../{python3-pillow_12.1.0.bb => python3-pillow_12.1.1.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_12.1.0.bb => python3-pillow_12.1.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-22852.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-22852.patch
-new file mode 100644
-index 0000000000..aa6952fb7d
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-22852.patch
-@@ -0,0 +1,27 @@
-+From e3391e8d160f4b1b43d53b4a7d462a3601c45408 Mon Sep 17 00:00:00 2001
-+From: akallabeth <akallabeth@posteo.net>
-+Date: Sat, 10 Jan 2026 08:36:38 +0100
-+Subject: [PATCH] free up old audio formats
-+
-+CVE: CVE-2026-22852
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/cd1ffa112cfbe1b40a9fd57e299a8ea12e23df0d]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ channels/audin/client/audin_main.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/channels/audin/client/audin_main.c b/channels/audin/client/audin_main.c
-+index 23561b153..5ffe09127 100644
-+--- a/channels/audin/client/audin_main.c
-++++ b/channels/audin/client/audin_main.c
-+@@ -219,6 +219,10 @@ static UINT audin_process_formats(AUDIN_PLUGIN* audin, AUDIN_CHANNEL_CALLBACK* c
-+ 	}
-+ 
-+ 	Stream_Seek_UINT32(s); /* cbSizeFormatsPacket */
-++
-++	audio_formats_free(callback->formats, callback->formats_count);
-++	callback->formats_count = 0;
-++
-+ 	callback->formats = audio_formats_new(NumFormats);
-+ 
-+ 	if (!callback->formats)
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-index 3ee4f99c1a..70198a1e21 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
-            file://CVE-2024-32661.patch \
-            file://CVE-2026-22854.patch \
-            file://CVE-2026-22855.patch \
-+           file://CVE-2026-22852.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_12.1.0.bb b/meta-python/recipes-devtools/python/python3-pillow_12.1.1.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-pillow_12.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_12.1.1.bb
+index 83231cad06..2b3660fc56 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_12.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_12.1.1.bb
+@@ -5,10 +5,10 @@ HOMEPAGE = "https://pillow.readthedocs.io"
+ LICENSE = "MIT-CMU"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a1b708da743e3fc0e5c35e92daac0bf8"
  
+-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https;tag=${PV} \
++SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=12.1.x;protocol=https;tag=${PV} \
+            file://0001-support-cross-compiling.patch \
+            "
+-SRCREV = "46f45f674d47b5d8bc54230dda8fe9e214598b87"
++SRCREV = "5158d98c807e719c5938aa3886913ef0ea6814e9"
+ 
+ inherit python_setuptools_build_meta ptest-python-pytest
  
 
