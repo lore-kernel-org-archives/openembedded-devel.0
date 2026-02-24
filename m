@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A955FF4BB7D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B60DDF4BB80
 	for <webhook@archiver.kernel.org>; Tue, 24 Feb 2026 19:05:05 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.28134.1771959895345826985
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28139.1771959898494550980
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Feb 2026 11:04:55 -0800
+ Tue, 24 Feb 2026 11:04:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YcI8hdUl;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-43770c94dfaso5763438f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 11:04:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DWtzGJeF;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4837907f535so52790205e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 11:04:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771959894; x=1772564694; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1771959897; x=1772564697; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7MbJLB61wvgORgx1WPAMij7z5TOyyRs6D91L9ql4jQI=;
-        b=YcI8hdUlZwaSOqBL2lDWEpTqsg6gDgXu32QosMQz3o9z4Z93wfb9s5cy/h3DMBnLq1
-         Bu+7a2rK2LCU600110UuVFVO9Vecvrbt6PBcT0/XxNsNvbEmlkHwy5tqne4By/b/UXeO
-         AX94NhDdY7kGEhx98CyHIhT1gZ5jcnwP4fayMv25i5a9PV052OIIowDnAOUm90PV7OSH
-         VzGqtw/POjSEoB00P+y5fw9Kr0HFbrJnjIOii613IaDe/jHyy2wwMAdTCNOd1IClDcxO
-         0DMm1iU4FLlhqslumkSfYf6UJv1XVfNBnbp339s7nqcKrsakdZXGg0b4frCg++F90/9R
-         k+dw==
+        bh=BcpNwamY0aYUD774U7ILtCJap41jYlb9ONMHQrpFu8w=;
+        b=DWtzGJeFMsJMXj4OIp0E49TSl8xhHRqmb/Ff3F0AXUKNYTBuh8C8t+NPVo/WdyHeCV
+         fSz+/Rgn+9Bafhc9VA8nSJdQJJHYc6MRvU6gnM2xavgYE1YsrI8yuVT8cL9ov+bkWJcf
+         PoIg9vjKt5sBlnsEJPFQ0My0k1mgh9RfQN9MyASZXLNEMr0Flr2CIMfHHKw1a9cB5NTE
+         4O8ArUKCzN+a5z2k3cG7bV7qrS6dbNANU2xz22y5p91jF8VTvag5oeYZS7PhxXO+2cEZ
+         RlIkg+j07iCg0S9Df6h5v/DA3fLCJE0h1bjOk8U4polMUqMRGwCXdEqkXcTdR+CqluzN
+         zGxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771959894; x=1772564694;
+        d=1e100.net; s=20230601; t=1771959897; x=1772564697;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=7MbJLB61wvgORgx1WPAMij7z5TOyyRs6D91L9ql4jQI=;
-        b=NvSJfCu0BrQ3vXryj0RqEQ9vT6rPHC7k+dT1iYIyE77+/9cZ4gHNpstIOoB8id3CTh
-         M71rPmNdBqKZXeruW9I0jgNZ9/VTrHPvF6KtiC/leJew6aM/b3bjbJcsHXSKQp6x1hpY
-         qZ7CshiUGmOztJhIDkI/eoXAjykpTawIiTCqmOjRd1T9G/Rr1taqLS+muMNMe57YYA3K
-         e5VLmiUeAHtj6gow+yf1FaF93M/+v0y42jyATZNeoRcq9I8D/+ljSd9wImDFXlEepxBg
-         Dyxy7ohNWanqovpVdrngY//swnd3pYFjWbDExtGgvVx1nzV430x0Xa48Gu3eeErprq3Z
-         eRWQ==
-X-Gm-Message-State: AOJu0YzwYxQ4Or8bSxiHlCBm3kGIjEOYgtUvD/h3cMR4DJR4ufPILPJz
-	96Rc1MIIjNp5p3ic2ZWO/oSURcryW2cPR5CoKVWTApoRhMewFRldYlRn4LfnNw==
-X-Gm-Gg: ATEYQzwMuVKraquYrwIig9lNIBxSX0u25F0Phz18sI+0iQP7z3Up+znE/nNsMl4cHFP
-	sAPw6/OKIsijbpdwLF9dniInuTd+BoUOxaJ8uPasw/iUlNi1hpL2MiM+0xhpRboOYm7R5hXXUqI
-	IM1T6rgNiHGYOK6zEvWE8yQIV/Ga0Gp1HJZ/S+3TRhpRluiT/rlgXXH/+rDXr10TIj1KBJac3uv
-	E6OZEFpIcyFFRVDYOApYIB8YDyhcQd8o8SbAHb+VgWX435RC37PBJSPIxFDZtrSoYdeUVhZ/zV+
-	+G80EvQu3iOCnQjy/vKscBzrH/KRVVvzYCE2LYItoDIoEU4ylfl4wnH8KPGK8zoPf8qw50+xE2P
-	+2o92dbzoAy37KhbPz867qljMyyf6RfQ62WOJpdRYCxCffwTNnVGU3TMbxX4Q7Fuku4cvh2IUUV
-	AWqsC/WMoEyP0ydlrXsMC1zzN2zC/hjCc=
-X-Received: by 2002:a05:6000:2285:b0:437:71b2:6f34 with SMTP id ffacd0b85a97d-4396f154b8emr23979947f8f.1.1771959893577;
-        Tue, 24 Feb 2026 11:04:53 -0800 (PST)
+        bh=BcpNwamY0aYUD774U7ILtCJap41jYlb9ONMHQrpFu8w=;
+        b=rciUE1TWNb0HTw+gZx9lBCz6mT0oCBEP+WznHwOMvoowbpbFIgaFWVyQSIu4cV2Y17
+         4rSyXjT1ieR7v36ysr79F9lAYH/9hG8pfafkrkVIcdiL7W4wwxcKP9FcQZqPSmlJnoEe
+         R8H9qBv8Jin6bKv9lBc2Q2ADiaME0QuaaSTd9QTyHmPRixWNpnXFBCcBKgBj2C4D/BLS
+         AHEzqEkcK3obSaTa/AGwlYRhodi6EvCBeRghLZho2RJyZbQBoOT4SkFp427XvXQhlQMv
+         Maw+doBaNhWo8AbzZq+Miy8ZPr1IC9Th7LDyG1YjFhm0j6u+uNOVmIM79MmABz0poAaZ
+         N0cw==
+X-Gm-Message-State: AOJu0Yw7WJrS/vISSHrMuHrBYVg0QQCrbbHddf3J8jjY9CoC7h2Re9io
+	8F4B3XUA1ZjEk0cSIxVPNk6KHHdH7k+aqZFfjk/roPJJWQQNsT+0/gfEwqi1pw==
+X-Gm-Gg: AZuq6aLXwp0uJhA/hXl5DL1Co8rW0dD8Tc3dia2W1UP2XInWJ5BORE4gBDQ6c8oYIEE
+	+fCGQeqNEAdL85TNNBua8SerXFWD+9mC+F7jdLJJJFIvXd6imp5wDo7iAh+deE0X//DMWnNJ1Lr
+	W0/bCYuG8YO6PBHV3oXU9T65bvEa5DE8GYU70OhbuW3L8svDJiPyasLDe1Lz/q1zJDelYkZYFGs
+	Rlpbhsw0US49BWSI4nZjs0zwyqwFRF1oA/EE6hkGuEMikU5McMKgLqO57vgT4DpW09BCFLKRPNC
+	7mpIkEfWFWIce1/LH7wfSJewJNXPjYW0rk3pmYnfAX7yXRjGK+xKLzlFbWPYYkcV61Jwr54f0Io
+	79sEH+YDmc9RL12wttpf7yVlb0sKMSGLB1NU6J64MpWuufnXm4tIJ63uKxGK5eo75GTraTMkWFk
+	R2iMhCG6O9Ms+rshgNuxlJ
+X-Received: by 2002:a05:600c:3b27:b0:483:702f:4641 with SMTP id 5b1f17b1804b1-483a95bd842mr209610635e9.3.1771959896711;
+        Tue, 24 Feb 2026 11:04:56 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970c09897sm29394920f8f.17.2026.02.24.11.04.53
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43970c09897sm29394920f8f.17.2026.02.24.11.04.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Feb 2026 11:04:53 -0800 (PST)
+        Tue, 24 Feb 2026 11:04:56 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 2/8] openjpeg: patch CVE-2023-39327
-Date: Tue, 24 Feb 2026 20:04:45 +0100
-Message-ID: <20260224190451.1596179-2-skandigraun@gmail.com>
+Subject: [meta-gnome][whinlatter][PATCH 7/8] gimp: ignore already fixed CVEs
+Date: Tue, 24 Feb 2026 20:04:50 +0100
+Message-ID: <20260224190451.1596179-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260224190451.1596179-1-skandigraun@gmail.com>
 References: <20260224190451.1596179-1-skandigraun@gmail.com>
@@ -67,86 +67,42 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 19:05:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124590
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124595
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-39327
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-0797
+https://nvd.nist.gov/vuln/detail/CVE-2026-2044
+https://nvd.nist.gov/vuln/detail/CVE-2026-2045
+https://nvd.nist.gov/vuln/detail/CVE-2026-2047
+https://nvd.nist.gov/vuln/detail/CVE-2026-2048
 
-Take the patch that is used by OpenSUSE to mitigate this vulnerability.
-Upstream seems to be unresponsive to this issue.
+All these CVEs are already fixed in the recipe version, however
+NVD tracks them currently without CPE info. Ignore them.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Relevant upstream commits:
+CVE-2026-0797: https://gitlab.gnome.org/GNOME/gimp/-/commit/ca449c745d58daa3f4b1ed4c2030d35d401a009d
+Note that the commit referenced by NVD is incorrect. This commit
+was identified from the relevant upstream Gitlab issue:
+https://gitlab.gnome.org/GNOME/gimp/-/issues/15555
+
+CVE-2026-2044: https://gitlab.gnome.org/GNOME/gimp/-/commit/3b5f9ec2b4c03cf4a51a5414f2793844c26747e5
+CVE-2026-2045: https://gitlab.gnome.org/GNOME/gimp/-/commit/bb896f67942557658b3fbfc67a1c073775c002c7
+CVE-2026-2047: https://gitlab.gnome.org/GNOME/gimp/-/commit/5873e16f80cf4152d25a4c86b08553008a331e90
+CVE-2026-2048: https://gitlab.gnome.org/GNOME/gimp/-/commit/fa69ac5ec5692f675de5c50a6df758f7d3e45117
 ---
- .../openjpeg/openjpeg/CVE-2023-39327.patch    | 50 +++++++++++++++++++
- .../openjpeg/openjpeg_2.5.4.bb                |  1 +
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
+ meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
-new file mode 100644
-index 0000000000..05e504a18e
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2023-39327.patch
-@@ -0,0 +1,50 @@
-+From a3504b2484cf7443c547037511c40f59aff8ae5a Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Mon, 23 Feb 2026 17:22:18 +0100
-+Subject: [PATCH] CVE-2023-39327
-+
-+This patch fixes CVE-2023-39327.
-+
-+This patch comes from OpenSuse:
-+https://build.opensuse.org/projects/openSUSE:Factory/packages/openjpeg2/files/openjpeg2-cve-2023-39327-limit-iterations.patch
-+
-+Upstream seems to unresponsive to this vulnerability.
-+
-+Upstream-Status: Inactive-Upstream [inactive, when it comes to CVEs]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/lib/openjp2/t2.c | 13 +++++++++++++
-+ 1 file changed, 13 insertions(+)
-+
-+diff --git a/src/lib/openjp2/t2.c b/src/lib/openjp2/t2.c
-+index 4e8cf601..ad39cd74 100644
-+--- a/src/lib/openjp2/t2.c
-++++ b/src/lib/openjp2/t2.c
-+@@ -441,6 +441,8 @@ OPJ_BOOL opj_t2_decode_packets(opj_tcd_t* tcd,
-+          * and no l_img_comp->resno_decoded are computed
-+          */
-+         OPJ_BOOL* first_pass_failed = NULL;
-++        OPJ_UINT32 l_packet_count = 0;
-++        OPJ_UINT32 l_max_packets = 100000;
-+ 
-+         if (l_current_pi->poc.prg == OPJ_PROG_UNKNOWN) {
-+             /* TODO ADE : add an error */
-+@@ -457,6 +459,17 @@ OPJ_BOOL opj_t2_decode_packets(opj_tcd_t* tcd,
-+ 
-+         while (opj_pi_next(l_current_pi)) {
-+             OPJ_BOOL skip_packet = OPJ_FALSE;
-++            
-++            /* CVE-2023-39327: Check for excessive packet iterations */
-++            if (++l_packet_count > l_max_packets) {
-++                opj_event_msg(p_manager, EVT_ERROR,
-++                              "Excessive packet iterations detected (>%u). Possible malformed stream.\n",
-++                              l_max_packets);
-++                opj_pi_destroy(l_pi, l_nb_pocs);
-++                opj_free(first_pass_failed);
-++                return OPJ_FALSE;
-++            }
-++            
-+             JAS_FPRINTF(stderr,
-+                         "packet offset=00000166 prg=%d cmptno=%02d rlvlno=%02d prcno=%03d lyrno=%02d\n\n",
-+                         l_current_pi->poc.prg1, l_current_pi->compno, l_current_pi->resno,
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
-index 23f46c45cd..971cdb2ff9 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
-@@ -7,6 +7,7 @@ DEPENDS = "libpng tiff lcms zlib"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+index 860fb5d26b..5cbb94055a 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
+@@ -135,4 +135,7 @@ RDEPENDS:${PN} = "mypaint-brushes-1.0 glib-networking python3-pygobject"
  
- SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
-            file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-+           file://CVE-2023-39327.patch \
-            "
- SRCREV = "6c4a29b00211eb0430fa0e5e890f1ce5c80f409f"
- 
+ CVE_STATUS[CVE-2007-3741] = "not-applicable-platform: This only applies for Mandriva Linux"
+ CVE_STATUS[CVE-2025-8672] = "not-applicable-config: the vulnerability only affects MacOS"
+-CVE_STATUS[CVE-2025-15059] = "fixed-version: The issue is fixed since v3.0.8"
++
++CVE_STATUS_GROUPS += "CVE_STATUS_FIXED_ALREADY"
++CVE_STATUS_FIXED_ALREADY[status] = "fixed-version: The issue is fixed since v3.0.8"
++CVE_STATUS_FIXED_ALREADY = "CVE-2025-15059 CVE-2026-0797 CVE-2026-2044 CVE-2026-2045 CVE-2026-2047 CVE-2026-2048"
 
