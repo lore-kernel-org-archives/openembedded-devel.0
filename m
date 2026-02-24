@@ -1,154 +1,540 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3490EF357D9
-	for <webhook@archiver.kernel.org>; Tue, 24 Feb 2026 17:04:55 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.25260.1771952692911628146
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B21A1F4BB76
+	for <webhook@archiver.kernel.org>; Tue, 24 Feb 2026 18:54:55 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28006.1771959291467724351
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Feb 2026 09:04:53 -0800
+ Tue, 24 Feb 2026 10:54:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Etvr7SiI;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4806ce0f97bso46781775e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 09:04:52 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AzzKRt3o;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-82318b640beso3050066b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 10:54:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1771952691; x=1772557491; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6sTdKzQYxfaDLT0pyDsvqdzil+Xkl6JCul0PFqaiWEg=;
-        b=Etvr7SiIjWa98qz2GI8hnN3endx5glWL58c/Mbi6bZ6xIyf7XtmkpU2H+Ibovz8Owi
-         3S8t7pecoZ/vH2ksGYhPVy4ZGSe1VI5cliXYSRPQ0CVN2asAgrqFyHvkmaTnvdXkk6S4
-         TI43Og9ppBKFTSgb40e2G5wLXkkPtouzDJ+nIhm2gNIg3UInACqH5tc7S3pVmpHGT9GB
-         Mkemxdc8IlQqa1W0naRf6MGss2LY6jJPGhHUD4FdGBinSBT2vHXuNterMvvNu5dCgXUo
-         arH0Fkbp+T0LVWZ7v+7ICzdclbp/uCqDRf+GrmN4m1zbZaCIxvQK09hq7azO2G/1//p4
-         V2zA==
+        d=gmail.com; s=20230601; t=1771959291; x=1772564091; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Of240SzeVUBje+X7ZF/S0DKUo56i14qmYSthLL109fY=;
+        b=AzzKRt3oOzcj5CVbyqqOoMop70qrREwAAt/1KH+kRbQL/JmcN/oFFdbqWxwELmk9rJ
+         345nYs29quM85DcDL5SyrqDD8fXpL34M2fGGes0oo5V9jfKMsx0bhlrGA7XYyS0xhkKD
+         e8i0xbQoDsqWOBzid6Pmw1rsMzOkG38f1N7Xi/lPDt5CPWQslOBE3TK3529qliN0543r
+         rqtYQjEDwWJ4O78ywrM9zAVAK+KymEisAhp8fzygcKi2We8C3DIH+HSaTQJk5MXaKnar
+         QtFPkvjaTyWK2yeYmHkMedvjx6KzC09JoCl0GbiBY/MrZeqXsoG0epCJYtkAt72LmrVS
+         HJYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1771952691; x=1772557491;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=6sTdKzQYxfaDLT0pyDsvqdzil+Xkl6JCul0PFqaiWEg=;
-        b=HVge00rOQ1CtTcKyyrbcbwZSKdE2ejglXXI3T1/44IJPvPBAHOPcL8gKrT7eA98GXv
-         jMU2aGm2sy4rxzVTFyNpCKPfc6sLn62yuoKGubzNF36DoaVUdV6Ve7jReTIJ5zGvabO0
-         yYGe9ll81wmLNLT9GD2Hs895rO0SALoPqX6rIVm12z8V+MUCb+Smi5xNXhsn/ZzOhP87
-         1AJH89O0Fon1B4VQ/KQHEoQjo5Vd7YsBD9D12CfuGTHIkySPTV0o5YjhGsJp111HZqKB
-         UBit8hFPEwa4RqjFf+b90hbhUatGXj8XpNzkRVL4zoMltx25KWzgRx9IOZy7S5bsu0RW
-         2UBQ==
-X-Gm-Message-State: AOJu0Yy8DtyZjPsT1HwKmr4M20CZnLK+bHxdKrTEP9T0yaODv51kcHDz
-	k69j20Fav0lDxdOsuZQMGmVu988pQpl5qhn9o8NoDUQy/JYxxRt7QZDJIE4wHQ==
-X-Gm-Gg: AZuq6aLHnXRSzndpbBS/pfeowS84zd5Yn81AafdrqrRBXfzdoYWa3xf8yv/0CznQHaN
-	mlLKQi5m8MhZAyF+2TLWkRspYLyAQQtmjhg6daEy+5E5vbDqD4D3p6s0we1D2hlI3k3j3qJGAQR
-	TmER/PH8eadhgA32eiKgt9BHd2pmn226p+n60+YAKnV4aZvZAO2fTcz8jjQxVK5y5aoJCA/0CGn
-	PFipN6RAJkqR4bh2PdsHLZBnglKCCRSjEFUnR5dVMIgUOKxT8EA+99A/MmLo/He/HdHNoE9tHPh
-	On5GPPA0njg8SNQSsCitfx1mI35Tro7EqxOLsGZkWn0kGLGF/2MypukwMJL4LPlPVs4cISFT+RS
-	3PoVHpn7PtT+KdphD/T2S4IION2s6u+G+RGWzmtbXY9R5STI96vRHU8R5t7Ipq4+BCXDT70T+X3
-	mQPOt1FoJG7AkTU4s9y+qwX5muX5hbwy0=
-X-Received: by 2002:a05:600c:3e05:b0:483:78e1:784 with SMTP id 5b1f17b1804b1-483a95aaeb9mr214380975e9.4.1771952691056;
-        Tue, 24 Feb 2026 09:04:51 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bd68826asm19990535e9.0.2026.02.24.09.04.50
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1771959291; x=1772564091;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Of240SzeVUBje+X7ZF/S0DKUo56i14qmYSthLL109fY=;
+        b=wAMboujNVxTQKeJK2PVHbgKw7YG0h1kwhl4s79ECrk4J8N5SvMNwkbgl1DjA8hxgn/
+         IpR8itGufcevFEzECbmUXBlc6+1NXD+UOWI+EX3e5rn3ciggyvgLZoNZLo+mFvB5eBYd
+         2BHjwebeGpoWzFD6CgF8+Sput4YYL82asjOTknp7aMg7x6OKMCIp6sIPP3HI96S0tVSS
+         vxPauahtnyMfcGE1YeCW/ausMvxYGB2VPoHaa/Z1sRa+1/qnsXhOmAfHbcWme3EGRp8e
+         EJLiANqFCSdxSmBjPtSFO0WwZC2nsNowsgRJm1NEL0DgpyhE7LvU0YcnMdtVVpQmXNRa
+         3b7Q==
+X-Gm-Message-State: AOJu0YyST5jBqROZM24NoXECLKp3rkTyNhkc6wcO58ZRPf+1TUvmgPyy
+	3v/40CFoG6+crzpJ6Ge8qtJ5dvRfev9P6t1iriAZZqw6hN9NpKd3QfHVOuGqKQ==
+X-Gm-Gg: ATEYQzy34m27XrIYdkMbq9ct+t46lZkgSP1X9dwyt7ybo/qJpwrGi/LQfNQmor171XP
+	O1QukdMl1RgPn9uwJN81algoT1MMJyI/svXwZnhl21/ThnOd7Q2tkA3WrOqfmKRg57eAJZ2dj9n
+	D/kagvCHRhCwKhG4z40BAHDPe8Ihy4pmbq4tg94o/QnHaWjepDTmKeQZWs+HSNy2Oh8qTy1arml
+	7AL8HaTpNkTIMJge7yEmH2yvpC/rF4YJ9vfm6S2Wbm7wNQFedwPrwOFnWSM+fogU1UmNxSff7jz
+	cKmuQFC5ChBVRIEx4NHyPudYKclC1I2QhuZvifA82R/qA2b9eers4BG/h6F7yBlvfJxA1dFrY9Q
+	/OJLUCsG1T6CJ7SLEwM+QRlPJFI6VkgyFcMqmbDYZlW5pxqZ4gYVBPKxqwSjRrPJrRTaCWD7h0N
+	+wLBE5JJyMpy1NssrHpWUdZW2TX8lJkHLVydw=
+X-Received: by 2002:a05:6a00:4fce:b0:821:8496:da9 with SMTP id d2e1a72fcca58-826daaa6937mr10950266b3a.60.1771959290336;
+        Tue, 24 Feb 2026 10:54:50 -0800 (PST)
+Received: from NVAPF55DW0D-IPD.. ([147.161.217.33])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-826dd8ee179sm10945104b3a.61.2026.02.24.10.54.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Feb 2026 09:04:50 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Tue, 24 Feb 2026 10:54:49 -0800 (PST)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/3] freerdp: patch CVE-2026-23532
-Date: Tue, 24 Feb 2026 18:04:47 +0100
-Message-ID: <20260224170448.1310931-2-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260224170448.1310931-1-skandigraun@gmail.com>
-References: <20260224170448.1310931-1-skandigraun@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 1/3] wolfssl: patch CVE-2025-13912
+Date: Wed, 25 Feb 2026 07:54:09 +1300
+Message-ID: <20260224185412.1835468-2-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 17:04:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124584
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Feb 2026 18:54:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124586
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-23532
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-The related Github advisory[1] contains a detailed analysis about
-the vulnerability. Pick the patch that describes the same
-issue in its description.
+Backport changes from PR[1] mentioned in nvd[2]
 
-[1]: https://github.com/FreeRDP/FreeRDP/security/advisories/GHSA-fq8c-87hj-7gvr
+[1] https://github.com/wolfSSL/wolfssl/pull/9148
+[2] https://nvd.nist.gov/vuln/detail/CVE-2025-13912
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../freerdp/freerdp/CVE-2026-23532.patch      | 49 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp_2.11.7.bb |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/CVE-2026-23532.patch
+ .../wolfssl/files/CVE-2025-13912.patch        | 439 ++++++++++++++++++
+ .../wolfssl/wolfssl_5.8.0.bb                  |   1 +
+ 2 files changed, 440 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-13912.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-23532.patch b/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-23532.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-13912.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-13912.patch
 new file mode 100644
-index 0000000000..80d4af30b9
+index 0000000000..32252058f7
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/CVE-2026-23532.patch
-@@ -0,0 +1,49 @@
-+From 51929613e6897489736a35eaaf14a3accf143963 Mon Sep 17 00:00:00 2001
-+From: Gyorgy Sarvari <skandigraun@gmail.com>
-+Date: Thu, 15 Jan 2026 12:04:36 +0100
-+Subject: [PATCH] properly clamp SurfaceToSurface
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-13912.patch
+@@ -0,0 +1,439 @@
++From 797e0e7abf5830d515ca838201c03a47f83356b0 Mon Sep 17 00:00:00 2001
++From: Daniel Pouzzner <douzzer@wolfssl.com>
++Date: Tue, 30 Sep 2025 20:35:52 -0500
++Subject: [PATCH] Merge pull request #9148 from SparkiDev/ct_volatile
 +
-+From: akallabeth <akallabeth@posteo.net>
++Mark variables as volatile
 +
-+CVE: CVE-2026-23532
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/c4a7c371342edf0d307cea728f56d3302f0ab38c]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++CVE: CVE-2025-13912
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/234ba7780ad3b7c8c1509973accdc43ed6c328b3]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ libfreerdp/gdi/gfx.c | 9 +++++----
-+ 1 file changed, 5 insertions(+), 4 deletions(-)
++ src/internal.c         | 25 ++++++++++++---------
++ src/tls.c              |  8 +++++--
++ wolfcrypt/src/aes.c    |  4 ++--
++ wolfcrypt/src/ecc.c    |  8 +++----
++ wolfcrypt/src/misc.c   |  4 ++--
++ wolfcrypt/src/rsa.c    | 18 +++++++++------
++ wolfcrypt/src/sp_int.c | 51 ++++++++++++++++++++++--------------------
++ 7 files changed, 67 insertions(+), 51 deletions(-)
 +
-+diff --git a/libfreerdp/gdi/gfx.c b/libfreerdp/gdi/gfx.c
-+index 3970715e0..812568bbb 100644
-+--- a/libfreerdp/gdi/gfx.c
-++++ b/libfreerdp/gdi/gfx.c
-+@@ -1175,7 +1175,6 @@ static UINT gdi_SurfaceToSurface(RdpgfxClientContext* context,
-+ 	UINT status = ERROR_INTERNAL_ERROR;
-+ 	UINT16 index;
-+ 	BOOL sameSurface;
-+-	UINT32 nWidth, nHeight;
-+ 	const RECTANGLE_16* rectSrc;
-+ 	RECTANGLE_16 invalidRect;
-+ 	gdiGfxSurface* surfaceSrc;
-+@@ -1199,8 +1198,8 @@ static UINT gdi_SurfaceToSurface(RdpgfxClientContext* context,
-+ 	if (!is_rect_valid(rectSrc, surfaceSrc->width, surfaceSrc->height))
-+ 		goto fail;
++diff --git a/src/internal.c b/src/internal.c
++index eb2f16d63..6b3a227bc 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -20887,7 +20887,7 @@ static byte MaskPadding(const byte* data, int sz, int macSz)
++         checkSz = TLS_MAX_PAD_SZ;
 + 
-+-	nWidth = rectSrc->right - rectSrc->left;
-+-	nHeight = rectSrc->bottom - rectSrc->top;
-++	const UINT32 nWidth = rectSrc->right - rectSrc->left;
-++	const UINT32 nHeight = rectSrc->bottom - rectSrc->top;
++     for (i = 0; i < checkSz; i++) {
++-        byte mask = ctMaskLTE(i, paddingSz);
+++        volatile byte mask = ctMaskLTE(i, paddingSz);
++         good |= mask & (data[sz - 1 - i] ^ paddingSz);
++     }
 + 
-+ 	for (index = 0; index < surfaceToSurface->destPtsCount; index++)
-+ 	{
-+@@ -1209,8 +1208,10 @@ static UINT gdi_SurfaceToSurface(RdpgfxClientContext* context,
-+ 		if (!is_rect_valid(&rect, surfaceDst->width, surfaceDst->height))
-+ 			goto fail;
++@@ -20907,16 +20907,21 @@ static byte MaskPadding(const byte* data, int sz, int macSz)
++ static byte MaskMac(const byte* data, int sz, int macSz, byte* expMac)
++ {
++     int i, j;
++-    unsigned char mac[WC_MAX_DIGEST_SIZE];
++-    int scanStart = sz - 1 - TLS_MAX_PAD_SZ - macSz;
++-    int macEnd = sz - 1 - data[sz - 1];
++-    int macStart = macEnd - macSz;
++     int r = 0;
++-    unsigned char started, notEnded;
+++    unsigned char mac[WC_MAX_DIGEST_SIZE];
+++    volatile int scanStart = sz - 1 - TLS_MAX_PAD_SZ - macSz;
+++    volatile int macEnd = sz - 1 - data[sz - 1];
+++    volatile int macStart = macEnd - macSz;
+++    volatile int maskScanStart;
+++    volatile int maskMacStart;
+++    volatile unsigned char started;
+++    volatile unsigned char notEnded;
++     unsigned char good = 0;
 + 
-++		const UINT32 rwidth = rect.right - rect.left;
-++		const UINT32 rheight = rect.bottom - rect.top;
-+ 		if (!freerdp_image_copy(surfaceDst->data, surfaceDst->format, surfaceDst->scanline,
-+-		                        destPt->x, destPt->y, nWidth, nHeight, surfaceSrc->data,
-++		                        destPt->x, destPt->y, rwidth, rheight, surfaceSrc->data,
-+ 		                        surfaceSrc->format, surfaceSrc->scanline, rectSrc->left,
-+ 		                        rectSrc->top, NULL, FREERDP_FLIP_NONE))
-+ 			goto fail;
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-index d4efcccdbd..dff3f6dafe 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https
-            file://CVE-2026-22855.patch \
-            file://CVE-2026-22852.patch \
-            file://CVE-2026-23530.patch \
-+           file://CVE-2026-23532.patch \
-            "
++-    scanStart &= ctMaskIntGTE(scanStart, 0);
++-    macStart &= ctMaskIntGTE(macStart, 0);
+++    maskScanStart = ctMaskIntGTE(scanStart, 0);
+++    maskMacStart = ctMaskIntGTE(macStart, 0);
+++    scanStart &= maskScanStart;
+++    macStart &= maskMacStart;
++ 
++     /* Div on Intel has different speeds depending on value.
++      * Use a bitwise AND or mod a specific value (converted to mul). */
++@@ -41636,7 +41641,7 @@ static int DefTicketEncCb(WOLFSSL* ssl, byte key_name[WOLFSSL_TICKET_NAME_SZ],
++                     case rsa_kea:
++                     {
++                         RsaKey* key = (RsaKey*)ssl->hsKey;
++-                        int lenErrMask;
+++                        volatile int lenErrMask;
++ 
++                         ret = RsaDec(ssl,
++                             input + args->idx,
++@@ -41850,7 +41855,7 @@ static int DefTicketEncCb(WOLFSSL* ssl, byte key_name[WOLFSSL_TICKET_NAME_SZ],
++                     case rsa_kea:
++                     {
++                         byte *tmpRsa;
++-                        byte mask;
+++                        volatile byte mask;
++ 
++                         /* Add the signature length to idx */
++                         args->idx += args->length;
++diff --git a/src/tls.c b/src/tls.c
++index 6ad21c924..4f57ea938 100644
++--- a/src/tls.c
+++++ b/src/tls.c
++@@ -944,7 +944,10 @@ static int Hmac_UpdateFinal_CT(Hmac* hmac, byte* digest, const byte* in,
++     unsigned int k;
++     int          blockBits, blockMask;
++     int          lastBlockLen, extraLen, eocIndex;
++-    int          blocks, safeBlocks, lenBlock, eocBlock;
+++    int          blocks;
+++    int          safeBlocks;
+++    int          lenBlock;
+++    int          eocBlock;
++     word32       maxLen;
++     int          blockSz, padSz;
++     int          ret;
++@@ -1054,7 +1057,8 @@ static int Hmac_UpdateFinal_CT(Hmac* hmac, byte* digest, const byte* in,
++ 
++         for (j = 0; j < blockSz; j++) {
++             unsigned char atEoc = ctMaskEq(j, eocIndex) & isEocBlock;
++-            unsigned char pastEoc = ctMaskGT(j, eocIndex) & isEocBlock;
+++            volatile unsigned char maskPastEoc = ctMaskGT(j, eocIndex);
+++            volatile unsigned char pastEoc = maskPastEoc & isEocBlock;
++             unsigned char b = 0;
++ 
++             if (k < headerSz)
++diff --git a/wolfcrypt/src/aes.c b/wolfcrypt/src/aes.c
++index 6e7f104dd..2cf7c695e 100644
++--- a/wolfcrypt/src/aes.c
+++++ b/wolfcrypt/src/aes.c
++@@ -6577,7 +6577,7 @@ static WC_INLINE void RIGHTSHIFTX(byte* x)
++ {
++     int i;
++     int carryIn = 0;
++-    byte borrow = (byte)((0x00U - (x[15] & 0x01U)) & 0xE1U);
+++    volatile byte borrow = (byte)((0x00U - (x[15] & 0x01U)) & 0xE1U);
++ 
++     for (i = 0; i < WC_AES_BLOCK_SIZE; i++) {
++         int carryOut = (x[i] & 0x01) << 7;
++@@ -9113,7 +9113,7 @@ int WARN_UNUSED_RESULT AES_GCM_decrypt_C(
++     ALIGN16 byte scratch[WC_AES_BLOCK_SIZE];
++     ALIGN16 byte Tprime[WC_AES_BLOCK_SIZE];
++     ALIGN16 byte EKY0[WC_AES_BLOCK_SIZE];
++-    sword32 res;
+++    volatile sword32 res;
++ 
++     if (ivSz == GCM_NONCE_MID_SZ) {
++         /* Counter is IV with bottom 4 bytes set to: 0x00,0x00,0x00,0x01. */
++diff --git a/wolfcrypt/src/ecc.c b/wolfcrypt/src/ecc.c
++index 6d4cd4de7..1fd30cfd9 100644
++--- a/wolfcrypt/src/ecc.c
+++++ b/wolfcrypt/src/ecc.c
++@@ -3166,7 +3166,7 @@ static int ecc_mulmod(const mp_int* k, ecc_point* P, ecc_point* Q,
++     ecc_point** R, mp_int* a, mp_int* modulus, mp_digit mp, WC_RNG* rng)
++ {
++     int      err = MP_OKAY;
++-    int      bytes = (mp_count_bits(modulus) + 7) / 8;
+++    int      bytes = (mp_count_bits(modulus) + 7) >> 3;
++     int      i;
++     int      j = 1;
++     int      cnt = DIGIT_BIT;
++@@ -3406,7 +3406,7 @@ static int ecc_mulmod(const mp_int* k, ecc_point* P, ecc_point* Q,
++     ecc_point** R, mp_int* a, mp_int* modulus, mp_digit mp, WC_RNG* rng)
++ {
++     int          err = MP_OKAY;
++-    int          bytes = (mp_count_bits(modulus) + 7) / 8;
+++    int          bytes = (mp_count_bits(modulus) + 7) >> 3;
++     int          i;
++     int          j = 1;
++     int          cnt;
++@@ -4450,7 +4450,7 @@ int wc_ecc_get_curve_id_from_params(int fieldSize,
++         Gx == NULL || Gy == NULL)
++         return BAD_FUNC_ARG;
++ 
++-    curveSz = (fieldSize + 1) / 8;    /* round up */
+++    curveSz = (fieldSize + 1) >> 3;    /* round up */
++ 
++     for (idx = 0; ecc_sets[idx].size != 0; idx++) {
++         if (curveSz == ecc_sets[idx].size) {
++@@ -11922,7 +11922,7 @@ int wc_ecc_sig_size(const ecc_key* key)
++     keySz = key->dp->size;
++     orderBits = wc_ecc_get_curve_order_bit_count(key->dp);
++     if (orderBits > keySz * 8) {
++-        keySz = (orderBits + 7) / 8;
+++        keySz = (orderBits + 7) >> 3;
++     }
++     /* maximum possible signature header size is 7 bytes */
++     maxSigSz = (keySz * 2) + SIG_HEADER_SZ;
++diff --git a/wolfcrypt/src/misc.c b/wolfcrypt/src/misc.c
++index 98b83c7ae..496b0dbcc 100644
++--- a/wolfcrypt/src/misc.c
+++++ b/wolfcrypt/src/misc.c
++@@ -762,7 +762,7 @@ WC_MISC_STATIC WC_INLINE void ctMaskCopy(byte mask, byte* dst, byte* src,
++     WC_MISC_STATIC WC_INLINE word32 min(word32 a, word32 b)
++     {
++ #if !defined(WOLFSSL_NO_CT_OPS) && defined(WORD64_AVAILABLE)
++-        word32 gte_mask = (word32)ctMaskWord32GTE(a, b);
+++        volatile word32 gte_mask = (word32)ctMaskWord32GTE(a, b);
++         return (a & ~gte_mask) | (b & gte_mask);
++ #else /* WOLFSSL_NO_CT_OPS */
++         return a > b ? b : a;
++@@ -778,7 +778,7 @@ WC_MISC_STATIC WC_INLINE void ctMaskCopy(byte mask, byte* dst, byte* src,
++     WC_MISC_STATIC WC_INLINE word32 max(word32 a, word32 b)
++     {
++ #if !defined(WOLFSSL_NO_CT_OPS) && defined(WORD64_AVAILABLE)
++-        word32 gte_mask = (word32)ctMaskWord32GTE(a, b);
+++        volatile word32 gte_mask = (word32)ctMaskWord32GTE(a, b);
++         return (a & gte_mask) | (b & ~gte_mask);
++ #else /* WOLFSSL_NO_CT_OPS */
++         return a > b ? a : b;
++diff --git a/wolfcrypt/src/rsa.c b/wolfcrypt/src/rsa.c
++index 94d57bd8b..acd0c04c5 100644
++--- a/wolfcrypt/src/rsa.c
+++++ b/wolfcrypt/src/rsa.c
++@@ -1561,11 +1561,11 @@ static int RsaUnPad_OAEP(byte *pkcsBlock, unsigned int pkcsBlockLen,
++                             byte* optLabel, word32 labelLen, void* heap)
++ {
++     word32 hLen;
++-    int ret;
+++    volatile int ret;
++     byte h[WC_MAX_DIGEST_SIZE]; /* max digest size */
++     word32 idx;
++     word32 i;
++-    word32 inc;
+++    volatile word32 inc;
++ 
++ #if defined(WOLFSSL_SMALL_STACK) && !defined(WOLFSSL_NO_MALLOC)
++     byte* tmp  = NULL;
++@@ -1850,9 +1850,11 @@ static int RsaUnPad(const byte *pkcsBlock, unsigned int pkcsBlockLen,
++     }
++ #ifndef WOLFSSL_RSA_VERIFY_ONLY
++     else {
++-        unsigned int j;
++-        word16 pastSep = 0;
++-        byte   invalid = 0;
+++        unsigned int    j;
+++        volatile word16 pastSep = 0;
+++        volatile byte   invalid = 0;
+++        volatile byte   minPad;
+++        volatile int    invalidMask;
++ 
++         i = 0;
++         /* Decrypted with private key - unpad must be constant time. */
++@@ -1864,7 +1866,8 @@ static int RsaUnPad(const byte *pkcsBlock, unsigned int pkcsBlockLen,
++         }
++ 
++         /* Minimum of 11 bytes of pre-message data - including leading 0x00. */
++-        invalid |= ctMaskLT(i, RSA_MIN_PAD_SZ);
+++        minPad = ctMaskLT(i, RSA_MIN_PAD_SZ);
+++        invalid |= minPad;
++         /* Must have seen separator. */
++         invalid |= (byte)~pastSep;
++         /* First byte must be 0x00. */
++@@ -1873,7 +1876,8 @@ static int RsaUnPad(const byte *pkcsBlock, unsigned int pkcsBlockLen,
++         invalid |= ctMaskNotEq(pkcsBlock[1], padValue);
++ 
++         *output = (byte *)(pkcsBlock + i);
++-        ret = ((int)-1 + (int)(invalid >> 7)) & ((int)pkcsBlockLen - i);
+++        invalidMask = (int)-1 + (int)(invalid >> 7);
+++        ret = invalidMask & ((int)pkcsBlockLen - i);
++     }
++ #endif
++ 
++diff --git a/wolfcrypt/src/sp_int.c b/wolfcrypt/src/sp_int.c
++index 1769840e7..0ee8aa252 100644
++--- a/wolfcrypt/src/sp_int.c
+++++ b/wolfcrypt/src/sp_int.c
++@@ -5502,7 +5502,7 @@ int sp_exch(sp_int* a, sp_int* b)
++ int sp_cond_swap_ct_ex(sp_int* a, sp_int* b, int cnt, int swap, sp_int* t)
++ {
++     unsigned int i;
++-    sp_int_digit mask = (sp_int_digit)0 - (sp_int_digit)swap;
+++    volatile sp_int_digit mask = (sp_int_digit)0 - (sp_int_digit)swap;
++ 
++     /* XOR other fields in sp_int into temp - mask set when swapping. */
++     t->used = (a->used ^ b->used) & (sp_size_t)mask;
++@@ -5772,7 +5772,7 @@ static int _sp_cmp_ct(const sp_int* a, const sp_int* b, unsigned int n)
++ {
++     int ret = MP_EQ;
++     int i;
++-    int mask = -1;
+++    volatile int mask = -1;
++ 
++     for (i = n - 1; i >= 0; i--) {
++         sp_int_digit ad = a->dp[i] & ((sp_int_digit)0 - (i < (int)a->used));
++@@ -7305,7 +7305,8 @@ static void _sp_div_2(const sp_int* a, sp_int* r)
++ 
++     /* Shift down each word by 1 and include bottom bit of next at top. */
++     for (i = 0; i < (int)a->used - 1; i++) {
++-        r->dp[i] = (a->dp[i] >> 1) | (a->dp[i+1] << (SP_WORD_SIZE - 1));
+++        r->dp[i]  = a->dp[i] >> 1;
+++        r->dp[i] |= a->dp[i+1] << (SP_WORD_SIZE - 1);
++     }
++     /* Last word only needs to be shifted down. */
++     r->dp[i] = a->dp[i] >> 1;
++@@ -7385,7 +7386,7 @@ int sp_div_2_mod_ct(const sp_int* a, const sp_int* m, sp_int* r)
++         sp_int_digit t;
++     #endif
++         /* Mask to apply to modulus. */
++-        sp_int_digit mask = (sp_int_digit)0 - (a->dp[0] & 1);
+++        volatile sp_int_digit mask = (sp_int_digit)0 - (a->dp[0] & 1);
++         sp_size_t i;
++ 
++     #if 0
++@@ -7396,7 +7397,7 @@ int sp_div_2_mod_ct(const sp_int* a, const sp_int* m, sp_int* r)
++         /* Add a to m, if a is odd, into r in constant time. */
++         for (i = 0; i < m->used; i++) {
++             /* Mask to apply to a - set when used value at index. */
++-            sp_int_digit mask_a = (sp_int_digit)0 - (i < a->used);
+++            volatile sp_int_digit mask_a = (sp_int_digit)0 - (i < a->used);
++ 
++         #ifndef SQR_MUL_ASM
++             /* Conditionally add modulus. */
++@@ -8017,7 +8018,7 @@ static void sp_clamp_ct(sp_int* a)
++ {
++     int i;
++     sp_size_t used = a->used;
++-    sp_size_t mask = (sp_size_t)-1;
+++    volatile sp_size_t mask = (sp_size_t)-1;
++ 
++     for (i = (int)a->used - 1; i >= 0; i--) {
++ #if ((SP_WORD_SIZE == 64) && \
++@@ -8066,9 +8067,9 @@ int sp_addmod_ct(const sp_int* a, const sp_int* b, const sp_int* m, sp_int* r)
++     sp_int_digit sh;
++     sp_int_digit t;
++ #endif
++-    sp_int_digit mask;
++-    sp_int_digit mask_a = (sp_int_digit)-1;
++-    sp_int_digit mask_b = (sp_int_digit)-1;
+++    volatile sp_int_digit mask;
+++    volatile sp_int_digit mask_a = (sp_int_digit)-1;
+++    volatile sp_int_digit mask_b = (sp_int_digit)-1;
++     sp_size_t i;
++ 
++     /* Check result is as big as modulus. */
++@@ -8230,9 +8231,9 @@ static void _sp_submod_ct(const sp_int* a, const sp_int* b, const sp_int* m,
++     sp_int_digit h;
++     sp_int_digit t;
++ #endif
++-    sp_int_digit mask;
++-    sp_int_digit mask_a = (sp_int_digit)-1;
++-    sp_int_digit mask_b = (sp_int_digit)-1;
+++    volatile sp_int_digit mask;
+++    volatile sp_int_digit mask_a = (sp_int_digit)-1;
+++    volatile sp_int_digit mask_b = (sp_int_digit)-1;
++     unsigned int i;
++ 
++     /* In constant time, subtract b from a putting result in r. */
++@@ -17458,7 +17459,7 @@ static int _sp_mont_red(sp_int* a, const sp_int* m, sp_int_digit mp, int ct)
++         /* 1. mask = (1 << (NumBits(m) % WORD_SIZE)) - 1
++          *    Mask when last digit of modulus doesn't have highest bit set.
++          */
++-        sp_int_digit mask = (sp_int_digit)
+++        volatile sp_int_digit mask = (sp_int_digit)
++             (((sp_int_digit)1 << (bits & (SP_WORD_SIZE - 1))) - 1);
++         /* Overflow. */
++         sp_int_word o = 0;
++@@ -17539,7 +17540,7 @@ static int _sp_mont_red(sp_int* a, const sp_int* m, sp_int_digit mp, int ct)
++     int bits;
++     sp_int_digit mu;
++     sp_int_digit o;
++-    sp_int_digit mask;
+++    volatile sp_int_digit mask;
++ 
++ #if 0
++     sp_print(a, "a");
++@@ -18041,7 +18042,7 @@ int sp_unsigned_bin_size(const sp_int* a)
++     int cnt = 0;
++ 
++     if (a != NULL) {
++-        cnt = (sp_count_bits(a) + 7) / 8;
+++        cnt = (sp_count_bits(a) + 7) >> 3;
++     }
++ 
++     return cnt;
++@@ -18265,20 +18266,22 @@ int sp_to_unsigned_bin_len_ct(const sp_int* a, byte* out, int outSz)
++         /* Start at the end of the buffer - least significant byte. */
++         int j;
++         unsigned int i;
++-        sp_int_digit mask = (sp_int_digit)-1;
+++        volatile sp_int_digit mask = (sp_int_digit)-1;
++         sp_int_digit d;
++ 
++         /* Put each digit in. */
++         i = 0;
++         for (j = outSz - 1; j >= 0; ) {
++             unsigned int b;
+++            volatile unsigned int notFull = (i < (unsigned int)a->used - 1);
+++
++             d = a->dp[i];
++             /* Place each byte of a digit into the buffer. */
++             for (b = 0; (j >= 0) && (b < SP_WORD_SIZEOF); b++) {
++                 out[j--] = (byte)(d & mask);
++                 d >>= 8;
++             }
++-            mask &= (sp_int_digit)0 - (i < (unsigned int)a->used - 1);
+++            mask &= (sp_int_digit)0 - notFull;
++             i += (unsigned int)(1 & mask);
++         }
++     }
++@@ -18289,7 +18292,7 @@ int sp_to_unsigned_bin_len_ct(const sp_int* a, byte* out, int outSz)
++     if (err == MP_OKAY) {
++         unsigned int i;
++         int j;
++-        sp_int_digit mask = (sp_int_digit)-1;
+++        volatile sp_int_digit mask = (sp_int_digit)-1;
++ 
++         i = 0;
++         for (j = outSz - 1; j >= 0; j--) {
++@@ -18360,11 +18363,12 @@ static int _sp_read_radix_16(sp_int* a, const char* in)
++     /* Step through string a character at a time starting at end - least
++      * significant byte. */
++     for (i = (int)(XSTRLEN(in) - 1); i >= 0; i--) {
+++        volatile char c = in[i];
++         /* Convert character from hex. */
++-        int ch = (int)HexCharToByte(in[i]);
+++        int ch = (int)HexCharToByte(c);
++         /* Check for invalid character. */
++         if (ch < 0) {
++-            if (!eol_done && CharIsWhiteSpace(in[i]))
+++            if (!eol_done && CharIsWhiteSpace(c))
++                 continue;
++             err = MP_VAL;
++             break;
++@@ -18424,7 +18428,6 @@ static int _sp_read_radix_10(sp_int* a, const char* in)
++ {
++     int  err = MP_OKAY;
++     int  i;
++-    char ch;
++ 
++     /* Start with a being zero. */
++     _sp_zero(a);
++@@ -18432,7 +18435,7 @@ static int _sp_read_radix_10(sp_int* a, const char* in)
++     /* Process all characters. */
++     for (i = 0; in[i] != '\0'; i++) {
++         /* Get character. */
++-        ch = in[i];
+++        volatile char ch = in[i];
++         /* Check character is valid. */
++         if ((ch >= '0') && (ch <= '9')) {
++             /* Assume '0'..'9' are continuous values as characters. */
++@@ -18794,7 +18797,7 @@ int sp_radix_size(const sp_int* a, int radix, int* size)
++         }
++         else {
++             /* Count of nibbles. */
++-            int cnt = (sp_count_bits(a) + 3) / 4;
+++            int cnt = (sp_count_bits(a) + 3) >> 2;
++         #ifndef WC_DISABLE_RADIX_ZERO_PAD
++             /* Must have even number of nibbles to have complete bytes. */
++             if (cnt & 1) {
++@@ -19404,7 +19407,7 @@ static int _sp_prime_random_trials(const sp_int* a, int trials, int* result,
++ {
++     int err = MP_OKAY;
++     int bits = sp_count_bits(a);
++-    word32 baseSz = ((word32)bits + 7) / 8;
+++    word32 baseSz = ((word32)bits + 7) >> 3;
++     DECL_SP_INT_ARRAY(ds, a->used + 1, 2);
++     DECL_SP_INT_ARRAY(d, a->used * 2 + 1, 2);
++ 
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+index af591cfd7a..9cd7c07ad2 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+@@ -16,6 +16,7 @@ SRC_URI = " \
+     git://github.com/wolfSSL/wolfssl.git;protocol=https;branch=master \
+     file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.patch \
+     file://run-ptest \
++    file://CVE-2025-13912.patch \
+ "
  
- 
+ SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
 
