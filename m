@@ -2,54 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A39DEFD226
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34676EFD228
 	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 09:38:11 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.42038.1772012282145054287
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.42041.1772012284268859672
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Feb 2026 01:38:02 -0800
+ Wed, 25 Feb 2026 01:38:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=SjMWp25o;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kG41RvdI;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772012282; x=1803548282;
+  t=1772012288; x=1803548288;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Di39ruo0xWB4bnOQ3MPp22/ylzN+/+BZxtRk/sa81YI=;
-  b=SjMWp25oWx2FLfVvCqvZf/cKJOCoxP0jIe1s0nrgGh39V2tP8dG2SXq9
-   WfB9w3kRu0FXoqvCUdzXGvYN79uoEacWwzStODCFZ+I/sTC9ZlacKnhde
-   HhcFhy9Cuc0mCtZVPyyPMYGb0RY3V3I/NzfBGQWTYeJeThWKrnIEHVGVH
-   bnO0yKutKaHJN3xysPWpF9wVzhsflWqIrS1cao/2WSxkoe3KZgITHdqOJ
-   Y0pLCPv8MVV3VaG/LgRU6XTbaGZdSJ37XEs2quVdJFoQYiokiRi0b5L9T
-   B6ANpJY+JcXY4d4Rdw+f4l3fJ+sPJKp2phlUIvcS9ModFl9zQg/OKXien
-   g==;
-X-CSE-ConnectionGUID: ZDek4XZiQn2GjJUHiP5WWQ==
-X-CSE-MsgGUID: Apx7CVs9TBimazTYcQXOmA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="219620571"
+  bh=FARKRQfBMC8yD1VI4/Vgx+SnDjq0XhcOwIItGEzuCv4=;
+  b=kG41RvdIxW6O3qHSGFSqbKg3UKeITdDB9G4vlQtUdsDljIY7xNsV0+x/
+   tL4iV6NmR2zkA9KkmTPxiihTT05X98kWaMy0VrikwqHvVnQDza7tS5O1E
+   5KybKzfsJ2n2jGli0su90QOdix7jZzMt3UM7iTTBlY9ZbbGoaSwfq7Ifz
+   /9UrGBSpKMBme3jFE3p4Pf6MDomz6zLgwJb/LFKB5Bm3IjgIvZeeUQauu
+   2RIa8MldSG2ME25oqUb9OZrb/eKXzyeihWR5Z9lqv4Dfjtmn9fS7671t/
+   tksqfhJpXdum5UwXjyUbqMYgjJXScPMow91i3XjrWb9FjWDCRYlTc1HnV
+   Q==;
+X-CSE-ConnectionGUID: 5/fPsAJfQeenrjls47peJQ==
+X-CSE-MsgGUID: UF/C17G5QqqXivwUmy6atw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="235192635"
 X-IronPort-AV: E=Sophos;i="6.21,310,1763391600"; 
-   d="scan'208";a="219620571"
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="235192635"
+Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr4.fujitsu.com (Postfix) with ESMTPS id AE8FE40757F
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:00 +0000 (UTC)
+	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id 1FF701C000A8
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:09 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 52C381400609
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:00 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id C96E110003A2
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:08 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 743EB101BB70;
-	Wed, 25 Feb 2026 09:37:57 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id F2616101BB42;
+	Wed, 25 Feb 2026 09:38:05 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 13/33] jwt-cpp: upgrade 0.7.1 -> 0.7.2
-Date: Wed, 25 Feb 2026 17:37:07 +0800
-Message-ID: <20260225093727.1284-13-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 17/33] libpanel: upgrade 1.10.3 -> 1.10.4
+Date: Wed, 25 Feb 2026 17:37:11 +0800
+Message-ID: <20260225093727.1284-17-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260225093727.1284-1-wangmy@fujitsu.com>
 References: <20260225093727.1284-1-wangmy@fujitsu.com>
@@ -59,52 +59,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124625
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124629
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-- Improve as_date narrowing conversion from C4244 warning
-- update trait dependencies to support CMake v4
-- Fix linter error
-- Update workflows for new GitHub Action Runner Images
-- Support passing ssl library key handles to algorithms
-- Update CMP0135 to new behaviour
-- Fix error in CMake config-file package
-- CMake: synchronize cmake_minimum_required from main CMakeLists.txt
-- Reduce usage of std::time_t, std::chrono::system_clock::to_time_t and
-  system_clock::from_time_t in order to get correct dates when working with a
-  32bit application
-- Fix set_expires_in not accepting non-default Period
-- AppVeyor Warnings
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../jwt-cpp/{jwt-cpp_0.7.1.bb => jwt-cpp_0.7.2.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/jwt-cpp/{jwt-cpp_0.7.1.bb => jwt-cpp_0.7.2.bb} (85%)
+ .../libpanel/{libpanel_1.10.3.bb => libpanel_1.10.4.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libpanel/{libpanel_1.10.3.bb => libpanel_1.10.4.bb} (85%)
 
-diff --git a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.2.bb
+diff --git a/meta-gnome/recipes-gnome/libpanel/libpanel_1.10.3.bb b/meta-gnome/recipes-gnome/libpanel/libpanel_1.10.4.bb
 similarity index 85%
-rename from meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb
-rename to meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.2.bb
-index 5ad953d260..eb8bc59322 100644
---- a/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.1.bb
-+++ b/meta-oe/recipes-devtools/jwt-cpp/jwt-cpp_0.7.2.bb
-@@ -4,10 +4,10 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
+rename from meta-gnome/recipes-gnome/libpanel/libpanel_1.10.3.bb
+rename to meta-gnome/recipes-gnome/libpanel/libpanel_1.10.4.bb
+index 3fc58a9593..68cff85f9e 100644
+--- a/meta-gnome/recipes-gnome/libpanel/libpanel_1.10.3.bb
++++ b/meta-gnome/recipes-gnome/libpanel/libpanel_1.10.4.bb
+@@ -11,7 +11,7 @@ DEPENDS += " \
+     libadwaita \
+ "
  
--SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/Thalhammer/jwt-cpp.git;branch=master;protocol=https;tag=v${PV} \
-             "
+-SRC_URI[archive.sha256sum] = "42a01baf8b94440f194ea8342b244bd6992dfb024ca3160c9477ff498ec3a2b6"
++SRC_URI[archive.sha256sum] = "593888a7691f0af8aaa6e193c9e14afa86a810c0c2f27515c6d813f18733b1cd"
  
--SRCREV = "e71e0c2d584baff06925bbb3aad683f677e4d498"
-+SRCREV = "b0ea29a58fc852a67d4e896d266880c2c63b0c4c"
- 
- 
- DEPENDS = "openssl"
+ PACKAGECONFIG ?= ""
+ #EXTRA_OEMESON += "-Ddocs=disabled"
 -- 
 2.43.0
 
