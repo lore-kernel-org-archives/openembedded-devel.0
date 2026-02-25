@@ -1,139 +1,198 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <daniel.klauer@gin.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80557FD3750
-	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 12:36:03 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.44212.1772022958348131581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67A91FD3769
+	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 15:38:44 +0000 (UTC)
+Received: from good-out-23.clustermail.de (good-out-23.clustermail.de [212.223.155.3])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48037.1772033908307644700
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Feb 2026 04:35:58 -0800
+ Wed, 25 Feb 2026 07:38:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KvJ+iRza;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-483a233819aso65391125e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 04:35:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772022957; x=1772627757; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=AkRS5W+T/5d2otXQgRkrEzIyH4zuNv/OQFcKiLJg+cI=;
-        b=KvJ+iRza3GjLfftug8YcrWx2thB9SoDAGPEqMj8dCnUJEzUo9napvy8typq9EbLJas
-         lQd837oNnM+qgltlh+buKBQfSf9fxrdeKxq/lkj9ZECQechOkaNUY55SRXrTgHLZugBs
-         RPMoANtzsuQCduXv20YLz2pgMw4GRIyEKhhH8QaPdkK47jhzH5CX3DrX61vkAw26jUst
-         d0Cv/fJoKrVKW9k7d/0siwNT3UivwC9WNFUruRUtBOvbnQqEurwDWwGTQtmFLhOhQai/
-         Xf8DPkJflI7K6CBFRFBiCHmDzk3uWl65u+kWoY9Wnr6WRCfAM+owcqi6CtAp2Cg/LCkM
-         XoNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772022957; x=1772627757;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AkRS5W+T/5d2otXQgRkrEzIyH4zuNv/OQFcKiLJg+cI=;
-        b=tRaatxa2doPiDQJLHhljMt9WG/noRzGfrQAviXChVWXb7kKtTSnZbKFlk7xRqGP8yf
-         nD6WB1Ltdo8nGhzqAoOK2ooB7C0L6uWLrkHG5933rYBnK/hAB4YN2vQl65XWZ1I1GMX9
-         J5+6bV6QS3N3tiVpeOXjdgctdXFnzgFDzDuDYwQkWQD7lEHeIc39W0ZW2Mnz9s94oPQ2
-         1100cPfyfLWJfUW6uarAA+k2pVeC/YAtstuBnZsMMCjUoXXy1xnT0wWyArwpVsvezlUf
-         qzFKaxUtvxc1Xg6NN0lL+yJDwSYtVtB98Vje94rRt9g6AazVV3E/RxxD06FeutlJBJAV
-         sE3w==
-X-Forwarded-Encrypted: i=1; AJvYcCUY0Xp3RXROAwRw2S8N36QxoBmMgI9i3T8EQX/QSOPzZ0TGqw0fuEmxcQAbyJxHUZMuaODJyz2nMOv2CiUKcNBIe1E=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxCYGjdYgMTZB/xs+tH0CRe3ouXIwgTUPh4WRUfPGskyDVTrPUI
-	ZrwPQeoybvEGJc63ABUOAhdJPM+t512OZsrjggOUyUjItMnpvC9Lf921
-X-Gm-Gg: ATEYQzxzwjAZmm9rx/7sNDZAnOzEIl83fJYUWxRJeztkACsj3W19qxMGnACmIs6dObm
-	Fo77yCb3iyU5ZzCdXhr3ijgflOHNM6KF3enKYDvgyTy4O5SO87eN1oC9+jZBHby787M5JT/EG52
-	Gv6oFhRYWj/odesygFuig8ASYOnuygDzwkA8RR2q4xSvhFs6H1viX6inu62zWyCKYfGaRGAqnGb
-	Rplw3wfdjtV/SGqW8Cf3N0tjSB9msz9aIUp8SUafjZy4MAZxpynK6YQudWX5Lbpql23velIiyjw
-	87uSQ8wtEya87ytpgupbTX79vCDVn7IleOp4I+tPREknnIfjC27ZVOLnLfJrZqa5rc/ACfXBzjt
-	IDKaj/qXuGC6F78XcQw4tR//84zHknpQWo1dVt2sc8IgU8i8uebVAWAfvCZJnttSDj308uwAf+V
-	VRrungSNER3w3ijkC1iGPRCPMr9nX8Y5E=
-X-Received: by 2002:a05:600c:1f8f:b0:47e:e57d:404 with SMTP id 5b1f17b1804b1-483a962e459mr300543385e9.16.1772022956452;
-        Wed, 25 Feb 2026 04:35:56 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bd6f1a3fsm75612685e9.3.2026.02.25.04.35.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Feb 2026 04:35:55 -0800 (PST)
-Message-ID: <5f02ad7b-159c-48eb-8fc8-8da43107ad17@gmail.com>
-Date: Wed, 25 Feb 2026 13:35:54 +0100
+ dkim=none (message not signed); spf=pass (domain: gin.de, ip: 212.223.155.3, mailfrom: daniel.klauer@gin.de)
+Received: from [10.0.0.14] (helo=frontend.clustermail.de)
+	by smtpout-01.clustermail.de with esmtp (Exim 4.96)
+	(envelope-from <Daniel.Klauer@gin.de>)
+	id 1vvGy0-007sGW-0r;
+	Wed, 25 Feb 2026 16:38:24 +0100
+Received: from [62.157.191.2] (helo=GIN-GR-EXCH01.gin-domain.local)
+	by frontend.clustermail.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <Daniel.Klauer@gin.de>)
+	id 1vvGy0-00CpYU-0H;
+	Wed, 25 Feb 2026 16:38:24 +0100
+Received: from daniel-desktop.gin-domain.local (10.160.138.39) by
+ GIN-GR-EXCH01.gin-domain.local (10.160.128.6) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.10; Wed, 25 Feb 2026 16:38:23 +0100
+From: Daniel Klauer <daniel.klauer@gin.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Anuj Mittal <anuj.mittal@oss.qualcomm.com>, Daniel Klauer
+	<daniel.klauer@gin.de>, Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH] nbench-byte: Fix sysinfo generation in parallel build
+Date: Wed, 25 Feb 2026 16:37:10 +0100
+Message-ID: <20260225153710.1256698-1-daniel.klauer@gin.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] CVE report - master - 2026-02-23
-To: "Marko, Peter" <Peter.Marko@siemens.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-References: <20260223080942.2282331-2-skandigraun@gmail.com>
- <08f026da-7cda-47fb-984f-6a7c8103ee9c@gmail.com>
- <AS1PR10MB5697E46664E7BB655C2E0C8AFD75A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <AS1PR10MB5697E46664E7BB655C2E0C8AFD75A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.160.138.39]
+X-ClientProxiedBy: GIN-GR-EXCH01.gin-domain.local (10.160.128.6) To
+ GIN-GR-EXCH01.gin-domain.local (10.160.128.6)
+X-EsetResult: clean, is OK
+X-EsetId: 37303A2952B0055E60716A
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 12:36:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124652
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 15:38:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124653
 
-On 2/25/26 13:12, Marko, Peter wrote:
->
->> -----Original Message-----
->> From: openembedded-devel@lists.openembedded.org <openembedded-
->> devel@lists.openembedded.org> On Behalf Of Gyorgy Sarvari via
->> lists.openembedded.org
->> Sent: Wednesday, February 25, 2026 13:05
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] CVE report - master - 2026-02-23
->>
->> On 2/23/26 09:09, Gyorgy Sarvari wrote:
->>>  - freerdp: CVE-2026-22851: https://nvd.nist.gov/vuln/detail/CVE-2026-22851
->>>  - freerdp: CVE-2026-22852: https://nvd.nist.gov/vuln/detail/CVE-2026-22852
->>>  - freerdp: CVE-2026-22853: https://nvd.nist.gov/vuln/detail/CVE-2026-22853
->>>  - freerdp: CVE-2026-22856: https://nvd.nist.gov/vuln/detail/CVE-2026-22856
->>>  - freerdp: CVE-2026-22857: https://nvd.nist.gov/vuln/detail/CVE-2026-22857
->>>  - freerdp: CVE-2026-22858: https://nvd.nist.gov/vuln/detail/CVE-2026-22858
->>>  - freerdp: CVE-2026-22859: https://nvd.nist.gov/vuln/detail/CVE-2026-22859
->>>  - freerdp: CVE-2026-23530: https://nvd.nist.gov/vuln/detail/CVE-2026-23530
->>>  - freerdp: CVE-2026-23531: https://nvd.nist.gov/vuln/detail/CVE-2026-23531
->>>  - freerdp: CVE-2026-23532: https://nvd.nist.gov/vuln/detail/CVE-2026-23532
->>>  - freerdp: CVE-2026-23533: https://nvd.nist.gov/vuln/detail/CVE-2026-23533
->>>  - freerdp: CVE-2026-23534: https://nvd.nist.gov/vuln/detail/CVE-2026-23534
->>>  - freerdp: CVE-2026-23732: https://nvd.nist.gov/vuln/detail/CVE-2026-23732
->>>  - freerdp: CVE-2026-23883: https://nvd.nist.gov/vuln/detail/CVE-2026-23883
->>>  - freerdp: CVE-2026-23884: https://nvd.nist.gov/vuln/detail/CVE-2026-23884
->>>  - freerdp: CVE-2026-23948: https://nvd.nist.gov/vuln/detail/CVE-2026-23948
->>>  - freerdp: CVE-2026-24491: https://nvd.nist.gov/vuln/detail/CVE-2026-24491
->>>  - freerdp: CVE-2026-24675: https://nvd.nist.gov/vuln/detail/CVE-2026-24675
->>>  - freerdp: CVE-2026-24676: https://nvd.nist.gov/vuln/detail/CVE-2026-24676
->>>  - freerdp: CVE-2026-24677: https://nvd.nist.gov/vuln/detail/CVE-2026-24677
->>>  - freerdp: CVE-2026-24678: https://nvd.nist.gov/vuln/detail/CVE-2026-24678
->>>  - freerdp: CVE-2026-24679: https://nvd.nist.gov/vuln/detail/CVE-2026-24679
->>>  - freerdp: CVE-2026-24680: https://nvd.nist.gov/vuln/detail/CVE-2026-24680
->>>  - freerdp: CVE-2026-24681: https://nvd.nist.gov/vuln/detail/CVE-2026-24681
->>>  - freerdp: CVE-2026-24682: https://nvd.nist.gov/vuln/detail/CVE-2026-24682
->>>  - freerdp: CVE-2026-24683: https://nvd.nist.gov/vuln/detail/CVE-2026-24683
->>>  - freerdp: CVE-2026-24684: https://nvd.nist.gov/vuln/detail/CVE-2026-24684
->>>
->> These CVEs are all for freerdp v2. In a few days there will be about 11
->> more made public.
->> Upstream has just released a new version in the 2.x series, the very
->> last one, they say that "From this point on we will no longer maintain
->> this branch and urge all to upgrade to FreeRDP 3.x."
->>
->> It contains some fixes, but not all CVE fixes from 3.x.
->> Considering that freerdp3 recipe is available, and that version is well
->> maintained, what would you say if we dropped the v2 recipe instead of
->> upgrading it to this last version in this series?
->>
->> I'm not a fan of shrinking the CVE list like that, but this recipe's
->> future doesn't look bright...
-> Dual versions like this should be removed ones all recipes depending on them are updated to use newer version.
-> So this means looking if vlc and remmina recipes work with freerdp3 and if so. Drop the old revision.
->
->
+The project Makefile uses a script (sysinfo.sh) to non-atomically generate
+two .c files (sysinfo.c, sysinfoc.c) which are then included in the build.
+Since the script always overwrites both .c files, the Makefile should only
+invoke it once, not twice in parallel. Otherwise the .c files may be
+corrupted and cause random build failures in parallel builds.
 
-Good point, thank you. I see that actually weston from oe-core has an
-optional dependency on it also. I guess my proposal can be ignored then.
+Requires at least GNU make 4.3, for Grouped Targets support [1].
+
+[1] https://lists.gnu.org/archive/html/info-gnu/2020-01/msg00004.html
+
+Reviewed-by: Silvio Fricke <silvio.fricke@gin.de>
+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit add2d94ab7d4170cece4e20af829a7221c572d5f)
+---
+ ...sysinfo-generation-in-parallel-build.patch | 69 +++++++++++++++++++
+ .../sysinfo.sh-Fix-typo-in-rm-command.patch   | 27 ++++++++
+ .../nbench-byte/nbench-byte_2.2.3.bb          |  4 +-
+ 3 files changed, 99 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
+
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
+new file mode 100644
+index 0000000000..b5f60b1c87
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
+@@ -0,0 +1,69 @@
++From 26e13ce45ffeb2f233d1dd7e4321cb65ab10b0fb Mon Sep 17 00:00:00 2001
++From: Daniel Klauer <daniel.klauer@gin.de>
++Date: Fri, 6 Feb 2026 17:13:49 +0100
++Subject: [PATCH] Makefile: Fix sysinfo generation in parallel build
++
++sysinfo.sh non-atomically overwrites both sysinfo.c and sysinfoc.c,
++so it should only be invoked once, not twice in parallel.
++
++Requires at least GNU make 4.3, for Grouped Targets support [1].
++
++Should fix random build failures like this one:
++
++| NOTE: make -j 20 -e MAKEFLAGS=
++[...]
++| ./sysinfo.sh x86_64-gin-linux-gcc [...]
++| ./sysinfo.sh x86_64-gin-linux-gcc [...]
++[...]
++| x86_64-gin-linux-gcc [...] \
++| 	-c nbench0.c
++| In file included from nbench0.c:219:
++| sysinfo.c: In function 'main':
++| sysinfo.c:11:1: error: 'fer' undeclared (first use in this function)
++|    11 | fer);
++|       | ^~~
++| sysinfo.c:11:1: note: each undeclared identifier is reported only once for each function it appears in
++| sysinfo.c:11:4: error: expected ';' before ')' token
++|    11 | fer);
++|       |    ^
++|       |    ;
++| sysinfo.c:11:4: error: expected statement before ')' token
++| In file included from nbench0.c:317:
++| sysinfoc.c:5:4: error: expected ';' before ')' token
++|     5 | fer);
++|       |    ^
++|       |    ;
++| sysinfoc.c:5:4: error: expected statement before ')' token
++| make: *** [Makefile:115: nbench0.o] Error 1
++| make: *** Waiting for unfinished jobs....
++| ERROR: oe_runmake failed
++| WARNING: exit code 1 from a shell command.
++NOTE: recipe nbench-byte-2.2.3-r0: task do_compile: Failed
++
++[1] https://lists.gnu.org/archive/html/info-gnu/2020-01/msg00004.html
++Upstream-Status: Inactive-Upstream [lastrelease 2003, no vcs]
++Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
++---
++ Makefile | 6 ++----
++ 1 file changed, 2 insertions(+), 4 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index edd9ea2..66b2ddc 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -95,10 +95,8 @@ DEFINES= -DLINUX $(NO_UNAME)
++ 
++ ##########################################################################
++ # For LINUX-like systems with gcc
++-sysinfoc.c: Makefile
++-	./sysinfo.sh $(CC) $(MACHINE) $(DEFINES) $(CFLAGS)
++-
++-sysinfo.c: Makefile
+++# sysinfo.sh generates both sysinfo.c and sysinfoc.c
+++sysinfo.c sysinfoc.c &: Makefile
++ 	./sysinfo.sh $(CC) $(MACHINE) $(DEFINES) $(CFLAGS)
++ 
++ ##########################################################################
++-- 
++2.43.0
++
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
+new file mode 100644
+index 0000000000..c6a37c3e56
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
+@@ -0,0 +1,27 @@
++From 0019af6eb5188f5111a0f2008c0002b545382b67 Mon Sep 17 00:00:00 2001
++From: Daniel Klauer <daniel.klauer@gin.de>
++Date: Fri, 6 Feb 2026 17:14:53 +0100
++Subject: [PATCH] sysinfo.sh: Fix typo in rm command
++
++Upstream-Status: Inactive-Upstream [lastrelease 2003, no vcs]
++Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
++---
++ sysinfo.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/sysinfo.sh b/sysinfo.sh
++index 57754fe..1373699 100755
++--- a/sysinfo.sh
+++++ b/sysinfo.sh
++@@ -61,7 +61,7 @@ if ($* hello.c -o hello) >/dev/null 2>&1; then
++   fi
++ fi
++ 
++-rm -f sysinfo.crm sysinfoc.c hello
+++rm -f sysinfo.c sysinfoc.c hello
++ 
++ # this bombs out on Ultrix which expect "cut -d"
++ 
++-- 
++2.43.0
++
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+index da03ebb291..538ff24c0a 100644
+--- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -10,7 +10,9 @@ SECTION = "console/utils"
+ SRC_URI = "https://fossies.org/linux/misc/old/${BP}.tar.gz \
+            file://nbench_32bits.patch \
+            file://Makefile-add-more-dependencies-to-pointer.h.patch \
+-           file://0001-Fix-build-error-with-gcc-15.patch"
++           file://0001-Fix-build-error-with-gcc-15.patch \
++           file://Makefile-Fix-sysinfo-generation-in-parallel-build.patch \
++           file://sysinfo.sh-Fix-typo-in-rm-command.patch"
+ 
+ SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
+ 
+-- 
+2.43.0
 
 
