@@ -2,54 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C34BEFD223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AE8CEFD227
 	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 09:38:01 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.42036.1772012280150233779
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.41949.1772012273283836627
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Feb 2026 01:38:00 -0800
+ Wed, 25 Feb 2026 01:37:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=lNOQ9aLh;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gTGKd0Y9;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772012280; x=1803548280;
+  t=1772012272; x=1803548272;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=whkf92kZh7fbfYSPgByEWSeWO5FbKwW8bi3TGyNC0nM=;
-  b=lNOQ9aLhX60/A5WvMf6LqUWiddCmj6VAQKM4DjbTEdSEB2j2X7wOHmsb
-   BdBXCHEYZBYnZT+n02mPBLPPzYZaD8X0+z+MrahgU0f42th94dI2NPW0J
-   cQZqgDfPpFVAD7ASqCRoATrGuVVnjfWrL193ORZ91FJWMIB5rlyWOJ0ww
-   DFdosROv8WhQoeC5DBZ7AhNb8h7JlohgTJxQ31BdfhkUnpX0RswYLZ3Ay
-   4URJ/ZjtvG5UwoeVI8YJ175JcdVdwIh/1HX6hTN9VZh1bPD+jAnxA6zG+
-   6o1m1oiQMt2d6ES5RVccyzIxGSF3wUnZrGgfKkBwJXAkCeUUJovx6WX0l
+  bh=p0y7mbKnmY4TlTq9RcZg+5EaTmt9uplMkFEXr1enzGw=;
+  b=gTGKd0Y9XttCPR66z3Y25+wZbnmMRkyLiDEL81Q0PeS5DBzGt/XSa2Ns
+   YQiCP2B1TYaU75JbMkEFuzyOCqcZmsOOeVeMRDQsmc5A54v8UbjXKG/Qu
+   IQQMNbssPy6pj/p300NKVkYB4nfRiu248J5zU+gA/KYFNLvp92uUStfCh
+   YPIt/dzRdIkffkO+kULY95z1KGngCXHCKQRw4yof/NFoC5AgZEHVkgcbS
+   zrpAsfcGX72OKantp5mxX+oavK6evkWKd9POM99W66QfFWNQRQ6y7pxZ2
+   VXxBl0/YpxXUWwJ5/T5f0mGv8Ch0Ux5qYRa7vey7dU6fvjS4vjPyTfA78
    w==;
-X-CSE-ConnectionGUID: IgrgCa+zRC+ptG8tfRJTPA==
-X-CSE-MsgGUID: kEEO99U5Ta2coeDNRhhZww==
-X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="218424101"
+X-CSE-ConnectionGUID: aibR4ETsQHCzudOzTibxdA==
+X-CSE-MsgGUID: potAqUflTSm7sMAIYBTjcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="235192615"
 X-IronPort-AV: E=Sophos;i="6.21,310,1763391600"; 
-   d="scan'208";a="218424101"
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="235192615"
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr2.fujitsu.com (Postfix) with ESMTPS id 953C983BC
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:37:58 +0000 (UTC)
+	by az2nlsmgr3.fujitsu.com (Postfix) with ESMTPS id DD9E4100036A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:37:51 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 3D3F1140060C
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:37:58 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 9273FC02194
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:37:51 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 48D5F101BB42;
-	Wed, 25 Feb 2026 09:37:54 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id C8454101BB6B;
+	Wed, 25 Feb 2026 09:37:48 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 12/33] imagemagick: upgrade 7.1.2-13 -> 7.1.2-15
-Date: Wed, 25 Feb 2026 17:37:06 +0800
-Message-ID: <20260225093727.1284-12-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 09/33] feh: upgrade 3.11.2 -> 3.11.3
+Date: Wed, 25 Feb 2026 17:37:03 +0800
+Message-ID: <20260225093727.1284-9-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260225093727.1284-1-wangmy@fujitsu.com>
 References: <20260225093727.1284-1-wangmy@fujitsu.com>
@@ -59,32 +59,40 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124624
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124621
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+==========
+* Support DOS-style \r\n line breaks when loading filelists. Note that
+  they will be saved with UNIX-style \n line breaks regardless of input
+  format. This is intentional.
+* Fix --action, --info, --title and similar commands hard-coding the
+  maximum length of the formatted output to 4095 characters.
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{imagemagick_7.1.2-13.bb => imagemagick_7.1.2-15.bb}        | 2 +-
+ meta-oe/recipes-graphics/feh/{feh_3.11.2.bb => feh_3.11.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-13.bb => imagemagick_7.1.2-15.bb} (99%)
+ rename meta-oe/recipes-graphics/feh/{feh_3.11.2.bb => feh_3.11.3.bb} (88%)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-15.bb
-similarity index 99%
-rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-15.bb
-index 0eb072f84c..952f8c4028 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-15.bb
-@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://imagemagick-ptest.sh \
+diff --git a/meta-oe/recipes-graphics/feh/feh_3.11.2.bb b/meta-oe/recipes-graphics/feh/feh_3.11.3.bb
+similarity index 88%
+rename from meta-oe/recipes-graphics/feh/feh_3.11.2.bb
+rename to meta-oe/recipes-graphics/feh/feh_3.11.3.bb
+index 57c30c3475..c79ad488ba 100644
+--- a/meta-oe/recipes-graphics/feh/feh_3.11.2.bb
++++ b/meta-oe/recipes-graphics/feh/feh_3.11.3.bb
+@@ -9,7 +9,7 @@ DEPENDS = "\
  "
  
--SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
-+SRCREV = "b5fdb90dac0e6d0bf1bbd95704bbd60216a5bc23"
+ SRC_URI = "https://feh.finalrewind.org/feh-${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "020f8bce84c709333dcc6ec5fff36313782e0b50662754947c6585d922a7a7b2"
++SRC_URI[sha256sum] = "f2cca3592a433922c0db7a9365fd63e5402c121d932a9327e279c71be6501063"
  
- inherit autotools pkgconfig update-alternatives ptest
- export ac_cv_sys_file_offset_bits = "64"
+ inherit mime-xdg features_check
+ # depends on virtual/libx11
 -- 
 2.43.0
 
