@@ -2,54 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5123BEFD22C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2496DEFD223
 	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 09:38:11 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.42041.1772012284268859672
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.42043.1772012288754774971
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Feb 2026 01:38:04 -0800
+ Wed, 25 Feb 2026 01:38:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=lDUAvrWS;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=imh4pADx;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772012283; x=1803548283;
+  t=1772012290; x=1803548290;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1Ohb7g6kPp300RxxOcwLY1pmcevttd6bwxvSU/3nIwI=;
-  b=lDUAvrWSlZi64GCdWyrDPSrFnWni9FQNDs/LNUf6exSTSvgqoqIc9gWV
-   boJa6y6BxF4xR5sMd4RuI3PZO+t7mt6axvg52G00AWrjMgYd5xAWE9LZ4
-   QnVcLXDszFnvCavvikwEf4jI/DmE1s1Uo7laWUrUP2+whC4K7PFRZsj6E
-   nhedCEQD5Ms++iMpqtUyF5KT5gIVUBvsbWyaF65MZqUVFlhsJX0iMlk19
-   +VQOVeMAEysd4Uwy0LueYPhRIfOB+v2qFnu3UVrd9z95Fv2A4zirvNRib
-   S1FzMLusz7yzjCH+KDUZHLTW+J0+4udgjeWeqDMpbYzOANWRrxqUAppfo
+  bh=hZgWuLFoA3pvp6seStO0K7SkcaKj2fPfjKjDf6Fv1ys=;
+  b=imh4pADxgLVZjx3FCTNkAhtyjyZxYAJlbn7xhpNbWigmCfYANZCVLUQa
+   n6RinZhr+cJkg7gbOWgoKQXrf2a0ePofbxKM9KG4ug7j9hG3k89BXmyB0
+   QMdHEGjTj9Ctm5SGwvti1vx72sGIHXR23KBJJ6nHIeQvLdx1F9dK2ralD
+   3VjSJD9WPJjcZ90vlZquwopCK1C3GHewQwRAenFjcR8H6FKYazx5g5hbz
+   Wdx4cSRVI1+pAl3EvGiOhKLWhCVXxMMliMse2RRitWYCMbz0Tr+/z/+jX
+   EJQ/fxK36W5bnjt4zY/rdF9d0iWP4N2IiV75/Spoosf+vpGfNxlvNqiI4
    w==;
-X-CSE-ConnectionGUID: Ykk1hFQhTUqpbkE8BjpnHw==
-X-CSE-MsgGUID: rSBj4+c9RrC1bWfE0XNoyg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="235192627"
+X-CSE-ConnectionGUID: bg7fPkDAQZKpmcZPCIRImA==
+X-CSE-MsgGUID: Q+vxKZzyS0i8VkzCZNJOsg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11711"; a="230981961"
 X-IronPort-AV: E=Sophos;i="6.21,310,1763391600"; 
-   d="scan'208";a="235192627"
+   d="scan'208";a="230981961"
 Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgr1.fujitsu.com (Postfix) with ESMTPS id D2FD21C000CB
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:02 +0000 (UTC)
+	by az2nlsmgr3.fujitsu.com (Postfix) with ESMTPS id 3AACB100036A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:07 +0000 (UTC)
 Received: from az2nlsmom3.fujitsu.com (az2nlsmom3.o.css.fujitsu.com [10.150.26.199])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 75DCC18000BD
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:02 +0000 (UTC)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id CDB921801FE8
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:06 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
-	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id 96653101BB42;
-	Wed, 25 Feb 2026 09:37:59 +0000 (UTC)
+	by az2nlsmom3.fujitsu.com (Postfix) with ESMTP id D0EC1101BB7B;
+	Wed, 25 Feb 2026 09:38:03 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 14/33] libdnet: upgrade 1.18.0 -> 1.18.2
-Date: Wed, 25 Feb 2026 17:37:08 +0800
-Message-ID: <20260225093727.1284-14-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 16/33] libgsf: upgrade 1.14.54 -> 1.14.55
+Date: Wed, 25 Feb 2026 17:37:10 +0800
+Message-ID: <20260225093727.1284-16-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260225093727.1284-1-wangmy@fujitsu.com>
 References: <20260225093727.1284-1-wangmy@fujitsu.com>
@@ -59,43 +59,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 09:38:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124626
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124628
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- fix copyright typo
-- Fix encoding (iso-8859 -> utf-8) and add GL CI config
-- config.h.in: Fix wrong return type
-- Update master from devel branch
-- Pull in latest development changes
+=========
+* Reduce stack usage.
+* Documentation fixes.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libdnet/{libdnet_1.18.0.bb => libdnet_1.18.2.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/libdnet/{libdnet_1.18.0.bb => libdnet_1.18.2.bb} (86%)
+ .../libgsf/{libgsf_1.14.54.bb => libgsf_1.14.55.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.54.bb => libgsf_1.14.55.bb} (85%)
 
-diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.2.bb
-similarity index 86%
-rename from meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb
-rename to meta-networking/recipes-connectivity/libdnet/libdnet_1.18.2.bb
-index f79121b142..41745adbde 100644
---- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.0.bb
-+++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.18.2.bb
-@@ -4,9 +4,9 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
+diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.54.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.55.bb
+similarity index 85%
+rename from meta-gnome/recipes-gnome/libgsf/libgsf_1.14.54.bb
+rename to meta-gnome/recipes-gnome/libgsf/libgsf_1.14.55.bb
+index 8973b3e656..77d621ec12 100644
+--- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.54.bb
++++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.55.bb
+@@ -9,7 +9,7 @@ DEPENDS = "libxml2 bzip2 glib-2.0 zlib"
+ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase gobject-introspection gettext gtk-doc
  
--SRC_URI = "git://github.com/ofalk/libdnet.git;nobranch=1;protocol=https"
-+SRC_URI = "git://github.com/ofalk/libdnet.git;nobranch=1;protocol=https;tag=${BPN}-${PV}"
+-SRC_URI[archive.sha256sum] = "d18869264a2513cfb071712486d115dada064ff8a040265b49936bca06f17623"
++SRC_URI[archive.sha256sum] = "74d60abba15bd3ea5ad17da5b924d8e36f649a25c3dc77adbabd2a3628a02131"
+ SRC_URI += " file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
  
--SRCREV = "3dfbe889b1f65077efe579da34fc1d6819fcb7f3"
-+SRCREV = "024ab07d88a2f70ab161cfc0a41f460cb046133f"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "libdnet-(?P<pver>\d+(\.\d+)+)"
- 
+ PACKAGECONFIG ??= ""
 -- 
 2.43.0
 
