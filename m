@@ -1,107 +1,77 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D642FF357DA
-	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 06:59:59 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.40395.1772002795630335185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 874E7EFD20A
+	for <webhook@archiver.kernel.org>; Wed, 25 Feb 2026 08:21:00 +0000 (UTC)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.41159.1772007308543820852
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Feb 2026 22:59:55 -0800
+ Wed, 25 Feb 2026 00:15:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout05.t-online.de (Postfix) with SMTP id 1D98B1DD3;
-	Wed, 25 Feb 2026 07:59:52 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.239.44]) by fwd76.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vv8s3-2xq1D70; Wed, 25 Feb 2026 07:59:43 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCHv3] libsdl3-image: update 3.2.6 -> 3.4.0
-Date: Wed, 25 Feb 2026 07:59:37 +0100
-Message-ID: <20260225065937.61703-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.52.0
+ dkim=pass header.i=@kernel.org header.s=k20201202 header.b=ThMmItAu;
+ spf=pass (domain: kernel.org, ip: 172.234.252.31, mailfrom: brgl@kernel.org)
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sea.source.kernel.org (Postfix) with ESMTP id B32B0440CC
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 08:10:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91BF8C2BC87
+	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 08:10:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1772007001;
+	bh=uSl1dQJ5lGfzIeQPY3zVmZ/RelBsDX6ng0MPmpGAbB4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=ThMmItAuXRMU4lhxiYqOn5CyIeIMr81PAMMMcEAb/l3mHUbWkHUxAJEEH4Izfs+aj
+	 89d1xNFcwW9/gQQEi897jYXNXpW/z0PCa8txCHGihqFNH3h6bxhxPkZaNXrGeA2utC
+	 O/LQr1Jrni8LJLDVwlJjlXvQUUeDbR52uwAMY5duBwxy/xNTorXhDrd5Q+YNTN2k5/
+	 Qs9mulJP/vZRu/dp8rhNjOG9gSfUxRBJuS8JHhQpBSVZzR877p2/3q8oNjXZuGW2xt
+	 V1AxgDnlzMXHqV+bH9pJTsodwtfrx5ZUMW+BKm+9NqLyqkNA1rbFFmba7KQpr20mAe
+	 ykDTaIDnAfYJQ==
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-59e64657f0cso6993523e87.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 00:10:01 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCWddqBudadYTLFO/IRIZaixbvYruQ6seypIVgPg4PwJgIjrPXqrT5EvxwkGYjTPdys9T9HnQIlZVxNzXnLzSElRAdk=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YybZGPsGkXM2W/CAmllJU1qEhAnlLMJTAvTtNQmrebFj1eiT5mI
+	BicrgBIcgcz70FvDGS7/SCmG+7PmIGeEPGMtmwHCl8Ml6/BkYoYuEsQ/m14ubXnafke2It/viUj
+	GBigWfPpDwPB83IKFcDz47yzRQwg++ouSt6iuKtqSwQ==
+X-Received: by 2002:a05:6512:1502:10b0:5a1:4c8:a632 with SMTP id
+ 2adb3069b0e04-5a104c8a721mr42874e87.13.1772007000175; Wed, 25 Feb 2026
+ 00:10:00 -0800 (PST)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1772002783-F0FDD697-3DC9B939/0/0 CLEAN NORMAL
-X-TOI-MSGID: a619d916-c586-4bf1-85eb-185bc47c2817
+References: <20260223101102.92124-1-bartosz.golaszewski@oss.qualcomm.com> <cef486ef-9e0e-4f3d-b2a7-18adf825dac7@gmail.com>
+In-Reply-To: <cef486ef-9e0e-4f3d-b2a7-18adf825dac7@gmail.com>
+From: Bartosz Golaszewski <brgl@kernel.org>
+Date: Wed, 25 Feb 2026 09:09:48 +0100
+X-Gmail-Original-Message-ID: <CAMRc=Mde2oUuUqDWRhNhVPiQmNxVESvet=dQYqF4mWKd5nzeRA@mail.gmail.com>
+X-Gm-Features: AaiRm52SilYvVU3nYiMQv5hK5U1EU1Z9eLXcJ1g5hh9c5AEoC33_aLbTgKRQs_4
+Message-ID: <CAMRc=Mde2oUuUqDWRhNhVPiQmNxVESvet=dQYqF4mWKd5nzeRA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] dtschema: new package
+To: skandigraun@gmail.com
+Cc: bartosz.golaszewski@oss.qualcomm.com, Khem Raj <raj.khem@gmail.com>, 
+	Bruce Ashfield <bruce.ashfield@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 06:59:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124611
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Feb 2026 08:21:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124612
 
-- Fix license checksum: Copyright year has been changed
-- Add support for av1 and jxl
-- libavif is in meta-multimedia -> disable av1 by default
+On Tue, Feb 24, 2026 at 9:13=E2=80=AFPM Gyorgy Sarvari via
+lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> This patch doesn't look correct, I think maybe some changes weren't
+> committed?
+>
+> At first I wanted to check if it really needs no dependencies, but ->
+>
+> 1. do_fetch fails due to checksum mismatch
+> 2. After fixing that, it fails due to license checksum mismatch
+> 3. After fixing that do_compile fails
+>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../libsdl3/libsdl3-image_3.2.6.bb            | 15 ---------------
- .../libsdl3/libsdl3-image_3.4.0.bb            | 19 +++++++++++++++++++
- 2 files changed, 19 insertions(+), 15 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.6.=
-bb
- create mode 100644 meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.4.0.=
-bb
+Yeah, because when testing I accidentally included the existing
+python3-dtschema from openembedded-core instead of this one. I didn't
+see openembedded-core already has it so this patch can be dropped.
 
-diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.6.bb b/me=
-ta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.6.bb
-deleted file mode 100644
-index 7c2f4026f2..0000000000
---- a/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.2.6.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY =3D "Simple DirectMedia Layer image library v2"
--SECTION =3D "libs"
--
--LICENSE =3D "Zlib"
--LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dfbb0010b2f7cf6e8a13bcac1e=
-f4d2455"
--
--DEPENDS =3D "tiff zlib libpng jpeg libsdl3 libwebp"
--
--SRC_URI =3D "git://github.com/libsdl-org/SDL_image.git;protocol=3Dhttps;=
-branch=3Drelease-3.2.x"
--SRCREV =3D "d78dd65454f442bfdbc373201165f1ef579484ab"
--
--
--inherit cmake pkgconfig
--
--FILES:${PN} +=3D "${datadir}/licenses"
-diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.4.0.bb b/me=
-ta-oe/recipes-graphics/libsdl3/libsdl3-image_3.4.0.bb
-new file mode 100644
-index 0000000000..324332eb84
---- /dev/null
-+++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-image_3.4.0.bb
-@@ -0,0 +1,19 @@
-+SUMMARY =3D "Simple DirectMedia Layer image library v2"
-+SECTION =3D "libs"
-+
-+LICENSE =3D "Zlib"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Ddf8f4d887d3997f6e9cf81bb7=
-f43dbf7"
-+
-+DEPENDS =3D "tiff zlib libpng jpeg libsdl3 libwebp libjxl"
-+
-+SRC_URI =3D "git://github.com/libsdl-org/SDL_image.git;protocol=3Dhttps;=
-branch=3Drelease-3.4.x"
-+SRCREV =3D "ad58ecfc27a1bd09e510ceff8bbbdb1094806476"
-+
-+EXTRA_OECMAKE +=3D "-DSDLIMAGE_JXL=3DON"
-+
-+PACKAGECONFIG ?=3D ""
-+PACKAGECONFIG[av1] =3D "-DSDLIMAGE_AVIF=3DON,-DSDLIMAGE_AVIF=3DOFF,libav=
-if"
-+
-+inherit cmake pkgconfig
-+
-+FILES:${PN} +=3D "${datadir}/licenses"
---=20
-2.52.0
-
+Bartosz
 
