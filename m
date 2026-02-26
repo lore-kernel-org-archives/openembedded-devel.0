@@ -2,140 +2,135 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F129FCE09B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DE55FCE09A
 	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 14:46:31 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.71417.1772117187557456118
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.71625.1772117190475130751
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Feb 2026 06:46:27 -0800
+ Thu, 26 Feb 2026 06:46:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WKJ/NCvX;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-48329eb96a7so7080935e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 06:46:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ajBdCNbI;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-4398913af88so869057f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 06:46:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772117186; x=1772721986; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=twItnaHfNbYfvScFIg6n1ga+9tb0cAHNf5rhCPTiicg=;
-        b=WKJ/NCvXkz/NBTbvbkSkH294Q5bDZ2u3cwG2GQKL6AMO4iVcoxz94Mo3iGRCo56bxS
-         6gD0xp3p/PBP34G4Qnldiflb3Xr4BUEwZJCcT4ezb/4wP3snyAq791Z4tCVTmc9XMJq/
-         ftoA/9S/uTjemld6SLb3VfYDMwSUsBW0zWcB0Bih7vusYwVWJgLxCEnFAAdpfR/v44ZF
-         eT3lja9X41ADm5RB3DqHBI4iL/76w4gJFQHoaPLE/zJyuvXKoX4NrFwqxfeqbqyJF1an
-         u5Ha3mW9xPaHSjIPWqvf1oTr5P/rEoXcv0gPekz1ANhJenVB8YgFoejOsslJvVl2AFpZ
-         vuLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772117186; x=1772721986;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1772117189; x=1772721989; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=twItnaHfNbYfvScFIg6n1ga+9tb0cAHNf5rhCPTiicg=;
-        b=If3SzwZT2Mz42FlO4IYqB/ti3dg1wVf5H6xFUYSPjwxmCcWyvVWGXV0DvsNT7J2VLs
-         cAzJoLfFOKr+MXjvKdKjWpu8BYwH8lRC6pjQ9aYClCOBcT1W1iWc8flk32InRK3yud+z
-         7Uag2oMXtMf6x3HyKGTCu44ZlOzj3tN8gAm0aRSpKwZcAb15RBPIF/AFWXN39TmuWiOu
-         +6Y9ZqdcC7N/VFQgxHqlnt+KHhy5PSLHYM8rWiu+rPRqG7W3aBHf0UbkulkzWpQP0pDs
-         pgiVnSZcu3GItD1rJfTIVewtNzgToMyBlJ7FTmrs1yzDerjBcmXgMFNOGK9cPBWlyYd2
-         0fyA==
-X-Gm-Message-State: AOJu0Yz+bQo8giMxcrRcedzNFPhBxc2fSJR6fp2uaUcclOzrgeSYjVun
-	N+Xoem4Nx1+2WsCYd2OVo8ulLqZLNBgPkx6DpDmvSIs9Pf+roU8Te6QUxTN+CQ==
-X-Gm-Gg: ATEYQzwEG8Ap1AB/vgO1MEN6h4TnPtaPAKGt7MUfBdSAPmh0lj1PSDbuFakjdLU+5jv
-	TaJ+nnu2IqPdV9qJybjJvij7ly+ZLHqtVF6S5/xkAnNEnu8yayCDkSqHcbfi5qc5DmPDwnrIAHI
-	QLCWHGZF1hA9j7lHcboSc1DUAxoRE75rv3OSWqJCBsMD3tTFnouUanPyIWy6fcy5oTe7uKMkSpb
-	zh9mGQvzpTFm3tp6dLjrNzGPPojjPqzl75RqtZ2C6i6t2N8zCSxiNQEEi4y6BLsT6Dn+J30p/DC
-	uQJemP99WTUMsTopTZGescLs6Jwb+NmjYSkCbSHzk91ZKYqjYtns8aEf5p9qym/4p1MSP9dxTkK
-	w8MAPPObr6v6EQOZXYBz9STm61aKGAQqI35eT1Ef2uCpK5qpZ+dtvszhtuRjQBoiLfJUf+xtcud
-	GTHPXqM9mSo2JdU0Zkhj7w
-X-Received: by 2002:a05:600c:46c9:b0:483:6f37:1b51 with SMTP id 5b1f17b1804b1-483a95ea9c9mr308392385e9.23.1772117185495;
-        Thu, 26 Feb 2026 06:46:25 -0800 (PST)
+        bh=YQOrG9cZeNgSzjZaF0sO2rv3Hq5+53oo6KZ+UhmC7nQ=;
+        b=ajBdCNbIS0iWuLQM489qx3qZ+sDOX9fQrPFYvSEMu7NPfukMNMtU3yBSHZlvgtPDia
+         /Q7ClaO5eK0Zyrc2nH1DuOfpruHH9Xw9nmPV8AOr0lC18S+uYvyjcaPy8fTVPtGs+whG
+         zEbzDJzwraNotwlrJYRvwwWR1eq3drfB0KY4dt+1XQYFDSoDPsPv2ATVIzT11w2siy2l
+         AH06hEEfDv+yTMFRrBPksgH0iy1Ddyl3pHZPwwitNNF5jKLZyz9dEm1DZr59ewvIvYCH
+         YjsZxf05Wn96IAn9gbYju/OPI3ByCcgr34bil/V+3YQlkMjjuadfF8f4WLeQrfiEFxSB
+         jLnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772117189; x=1772721989;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=YQOrG9cZeNgSzjZaF0sO2rv3Hq5+53oo6KZ+UhmC7nQ=;
+        b=JE7CUiWxifZGTtpWIPPNHf9cGA0y2TIkqcJ4L0Xaaklf1ebSaxKqCM/BUZAW4aCbBz
+         wf6ExudiuSQJhyD1/o+lyudaBaJVqQTZudSRzgcHovSqomZw/ght7JkcNdy1lcgZuZ8g
+         zRDFadwuyBEv8mTH6AtswSWQlsQ+VfdDwJa4BXha1fGwHzvRoBLizTXPp/N4CJlbkXgR
+         xR/V261Twonlcrrg0MC+t6n2ODjctQSu8SZyDobbiEhwWw5PiJEnj5zP66EgWVTOqyhx
+         qfZTk3a6LRa8ifKcL8KwTyWn/HIYsKHH772uVWjqbewTF42fIDZ0mseEIjwDNFL/LpKt
+         lXVA==
+X-Gm-Message-State: AOJu0YxOBHmS/Mf4vXeRzSohdWlm8eoDJkBnuivmbITY5iniDets8d6v
+	xpx5x4SXbUUjQdQJaPuqp6zWutmTTBIRNyINlByW5KYLp8cezFMYz5cLwEoMvg==
+X-Gm-Gg: ATEYQzzo2ujdhfhrBImMv2HuzarTYo5mYMfl2s3FAxDG3VT6CGzsUwTwf4P3Gp32OCi
+	NyvYloZoEbpwVwUPYdcHZ3TciKNAvQ2tR4RbrpimnFBtXIalqaZ1JelUly1yoaPcLA8RZlRJy+v
+	0BnRNcXlgjYCXnVuGavy+T6qPxMmiHwQD73hZPvOk57hZTzlNpSVV/7LnWOD9sLWCPlQO87ltnY
+	QFRb56GqXYF/XsrIYcacmEYmmkaUT3vJEREWSMJY+cRKjIJUguhl0BZiN37NmcedovqakjO5FXp
+	OHC7MkgJWrFDKhhqCey93yIh7t/3pJsiuHe4WZk2/3hJr44eoLaoOC0atNUzYkdajIzVK/i6GgN
+	vAvjTISEkvW/9LLmJNj5cak+Ce6pwAK4fVWVmX7KtDEs6xxCY/hqBRMeFQ5KgcE02Owz6KoFjoc
+	yMccxfMvhlUpAJd63Uiwee
+X-Received: by 2002:a05:600c:3151:b0:477:54f9:6ac2 with SMTP id 5b1f17b1804b1-483c2123ab3mr82581505e9.0.1772117188529;
+        Thu, 26 Feb 2026 06:46:28 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bfcbd781sm75913745e9.8.2026.02.26.06.46.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bfcbd781sm75913745e9.8.2026.02.26.06.46.26
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Feb 2026 06:46:25 -0800 (PST)
+        Thu, 26 Feb 2026 06:46:28 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 1/7] cups-filters: patch CVE-2025-64503
-Date: Thu, 26 Feb 2026 15:46:18 +0100
-Message-ID: <20260226144624.3743168-1-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 4/7] fontforge: patch CVE-2025-15269
+Date: Thu, 26 Feb 2026 15:46:21 +0100
+Message-ID: <20260226144624.3743168-4-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260226144624.3743168-1-skandigraun@gmail.com>
+References: <20260226144624.3743168-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 14:46:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124678
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124681
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-64503
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-15269
 
-Pick the patch that is referenced by the NVD advisory.
+Pick the patch that refers to this vulnerability ID explicitly.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-printing/cups/cups-filters.inc    |  1 +
- .../cups/cups-filters/CVE-2025-64503.patch    | 43 +++++++++++++++++++
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64503.patch
+ .../fontforge/fontforge/CVE-2025-15269.patch  | 35 +++++++++++++++++++
+ .../fontforge/fontforge_20190801.bb           |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
 
-diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
-index ddd6451ccc..401ca9a9e9 100644
---- a/meta-oe/recipes-printing/cups/cups-filters.inc
-+++ b/meta-oe/recipes-printing/cups/cups-filters.inc
-@@ -13,6 +13,7 @@ SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.
-            file://CVE-2025-57812.patch \
-            file://CVE-2025-64524.patch \
-            file://CVE-2023-24805.patch \
-+           file://CVE-2025-64503.patch \
-            "
- 
- inherit autotools-brokensep gettext pkgconfig
-diff --git a/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64503.patch b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64503.patch
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
 new file mode 100644
-index 0000000000..32ded99d92
+index 0000000000..7fa16480ef
 --- /dev/null
-+++ b/meta-oe/recipes-printing/cups/cups-filters/CVE-2025-64503.patch
-@@ -0,0 +1,43 @@
-+From 019bb270f0a8a1db4761e580dc7bb636c1586555 Mon Sep 17 00:00:00 2001
-+From: Till Kamppeter <till.kamppeter@gmail.com>
-+Date: Mon, 10 Nov 2025 18:31:48 +0100
-+Subject: [PATCH] Fix out-of-bounds write in pdftoraster
++++ b/meta-oe/recipes-graphics/fontforge/fontforge/CVE-2025-15269.patch
+@@ -0,0 +1,35 @@
++From bcc5fc655ddd0401595c3f012969de95538e402f Mon Sep 17 00:00:00 2001
++From: Ahmet Furkan Kavraz
++ <55850855+ahmetfurkankavraz@users.noreply.github.com>
++Date: Sat, 10 Jan 2026 20:06:53 +0100
++Subject: [PATCH] Fix CVE-2025-15269: Use-after-free in SFD ligature parsing
++ (#5722)
 +
-+PDFs with too large page dimensions could cause an integer overflow and then a too small buffer for the pixel line to be allocated.
++Prevent circular linked list in LigaCreateFromOldStyleMultiple by clearing
++the next pointer after shallow copy. The shallow copy propagates liga's
++modified next pointer from previous iterations, creating a cycle that
++causes double-free when the list is traversed and freed.
 +
-+Fixed this by cropping the page size to the maximum allowed by the standard, 14400x14400pt, 200x200in, 5x5m
++Fixes: CVE-2025-15269 | ZDI-25-1195 | ZDI-CAN-28564
 +
-+https://community.adobe.com/t5/indesign-discussions/maximum-width-of-a-pdf/td-p/9217372
++Co-authored-by: Ahmet Furkan Kavraz <kavraz@amazon.com>
 +
-+Fixes CVE-2025-64503
-+
-+CVE: CVE-2025-64503
-+Upstream-Status: Backport [https://github.com/OpenPrinting/cups-filters/commit/50d94ca0f2fa6177613c97c59791bde568631865]
++CVE: CVE-2025-15269
++Upstream-Status: Backport [https://github.com/fontforge/fontforge/commit/6aea6db5da332d8ac94e3501bb83c1b21f52074d]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ filter/pdftoraster.cxx | 12 ++++++++++++
-+ 1 file changed, 12 insertions(+)
++ fontforge/sfd.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/filter/pdftoraster.cxx b/filter/pdftoraster.cxx
-+index e8af184..e6fc573 100755
-+--- a/filter/pdftoraster.cxx
-++++ b/filter/pdftoraster.cxx
-+@@ -1688,6 +1688,18 @@ static void outPage(poppler::document *doc, int pageNo,
-+     header.PageSize[0] = (unsigned)l;
-+   else
-+     header.PageSize[1] = (unsigned)l;
-++  /*
-++    Maximum allowed page size for PDF is 200x200 inches (~ 5x5 m), or 14400x14400 pt
-++    https://community.adobe.com/t5/indesign-discussions/maximum-width-of-a-pdf/td-p/9217372
-++  */
-++  if (header.PageSize[0] > 14400) {
-++    fprintf(stderr, "ERROR: Page width is %dpt, too large, cropping to 14400pt\n", header.PageSize[0]);
-++    header.PageSize[0] = 14400;
-++  }
-++  if (header.PageSize[1] > 14400) {
-++    fprintf(stderr, "ERROR: Page height is %dpt, too large, cropping to 14400pt\n", header.PageSize[1]);
-++    header.PageSize[1] = 14400;
-++  }
-+ 
-+   memset(paperdimensions, 0, sizeof(paperdimensions));
-+   memset(margins, 0, sizeof(margins));
++diff --git a/fontforge/sfd.c b/fontforge/sfd.c
++index 132f9fa0c..940627a3b 100644
++--- a/fontforge/sfd.c
+++++ b/fontforge/sfd.c
++@@ -4780,6 +4780,7 @@ static PST1 *LigaCreateFromOldStyleMultiple(PST1 *liga) {
++     while ( (pt = strrchr(liga->pst.u.lig.components,';'))!=NULL ) {
++ 	new = chunkalloc(sizeof( PST1 ));
++ 	*new = *liga;
+++	new->pst.next = NULL;
++ 	new->pst.u.lig.components = copy(pt+1);
++ 	last->pst.next = (PST *) new;
++ 	last = new;
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
+index cfb20ab2bd..41d43114bf 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20190801.bb
+@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
+            file://CVE-2020-25690-1.patch \
+            file://CVE-2020-25690-2.patch \
+            file://CVE-2024-25081-25082.patch \
++           file://CVE-2025-15269.patch \
+            "
+ S = "${WORKDIR}/git"
+ 
 
