@@ -1,160 +1,611 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E49FFC591E
-	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 09:59:09 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.67084.1772099943447641724
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F944FCE069
+	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 12:37:00 +0000 (UTC)
+Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.69101.1772109417086913917
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Feb 2026 01:59:03 -0800
+ Thu, 26 Feb 2026 04:36:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=oEP4pVof;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772099943; x=1803635943;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=cFRV/DsH7mGgIu1TyvnZpnYnNLvbxNNSq22PYAXUufA=;
-  b=oEP4pVofXBqlx9nPfO5riz2bxgg5tPhwoQwwoDeBj+zMisneR0Yw0Gjt
-   7DV7cCmi4oJ60eNlBcZff21NNqzSZiXYQJkS6MzrvGfdY3zvhCW/MIQL6
-   cyklL02E5Bm29mXAdKj6AY7PWZ1fczfsH+qOraz9vJqis/YEICj6OIeAp
-   bHYtybNumG8EuVNmfBYwTfER4tX58o9LSr/sykYn8n5HSRWYpKrnEI9FZ
-   IXNesSgrnXJVOOurP4vQ6xeLbWpDh+zausrOWjfxTeXsN6baymcUJ+3IW
-   SQIKJYxDIAmDut7gduw0bZYJulLwLzcUxbT3bpsumx37QKo58zuBTWbF1
-   A==;
-X-CSE-ConnectionGUID: +06UCW5RR2Gd9YJSFLsRVA==
-X-CSE-MsgGUID: Xe2e6uc3RkCshvsGM64qKw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11712"; a="218587261"
-X-IronPort-AV: E=Sophos;i="6.21,312,1763391600"; 
-   d="scan'208";a="218587261"
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgr1.fujitsu.com (Postfix) with ESMTPS id ACC151C1C706
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 09:59:01 +0000 (UTC)
-Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 66006C041E6
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 09:59:01 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.167.241])
-	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id 1DB95402991
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 09:58:58 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=JR2iIj7G;
+ spf=pass (domain: mvista.com, ip: 74.125.82.47, mailfrom: hprajapati@mvista.com)
+Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-124afd03fd1so954933c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 04:36:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1772109416; x=1772714216; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YqRBxQZgpVq2dmTkm1Frc30iQk1YTNkgOQuhsn0/Jf4=;
+        b=JR2iIj7Gwf0IB6rDqAOl2c+57DSvqZt6xsb0oqnHb/jydbck3WzmfHUQZY1jWN2749
+         Zszr75ZOgShCAYdIF4dc5RhBXifgDZz7SO5DOOs4s3eoecy2EoBfk7UR8Z4yU8qFxehz
+         SJscIcV3KM/LWOQNrQjCNbIEKIi05AJT4io3w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772109416; x=1772714216;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YqRBxQZgpVq2dmTkm1Frc30iQk1YTNkgOQuhsn0/Jf4=;
+        b=DWmw4IWpMD1fhRHYgVoPN91gGDG/qc9Eat++ZYdXECofT6omoMPOgf8eiMAvXoeN92
+         lDVjpqiYjuRLLIDBGfM4oMGh7x7hvQSDTEEVtBNPLG2Jd6ZdbNdIL81iQZd6KBOg2hkP
+         4HfYfNV5f6cttuuo/ofTU8XfR3Skp1TXgAeUMma9v8+hmINGMwsD09zSv9R+CarfxeIc
+         eUA08x9TcOhcBi5pJdWQLnyDnOhBz5Sd5uXBVvZ5+D747wOQjfkibNsT4SGJZZqUFxUO
+         Kwn9PV+1byL80z2cXSb79QwStPDJ0rpgLe/Ksc2JAEk6ILBIWwb0gL0F4Wwr5/0CZwu9
+         hCeg==
+X-Gm-Message-State: AOJu0YyrKgJhw9Rp6MT2nfcewFdCuro/dGpevEtjO6Mk8C4MuilIQf8X
+	QFcHlRVMQQkVPJKHXAhDV6FK9uBvJKH6EqjDxfHAhFfFIFruki3LwDHctf4XjiS6FmQx/m+RoZv
+	0aaV2lCU=
+X-Gm-Gg: ATEYQzz+H7kgc/M1rfE966E1YV2PvvPworvt/K9aJB507XOfea6ZNaaAd9Tgsqvsyoz
+	HE/ibBtfe7S08Gi08wI8V21/wGYoUD4ny5U9E+aGJO4Q2B1WoWVkeTO7Pf3pbLek2scngsZI09E
+	RfP6TBXqqHHtwLKESGFE2Hn8gWa3YdhHg76ymVOjgXhM7GEbKJJ42SmeOioCHnb0UyXzpjQm1oz
+	9Cb2kw7B+4fe5wdnVaCbkaMo1Q+CnC8FE6m3u9B4Y2915i2gm7hMjgm4gQb24+6MxS19HOWuo0B
+	tzVafBxNzEJcmLoaU5PXNGfRdPOhYCzALVLZIAv8J3Rtbkoy0JERcxALJ1uo54qm4jWy6I2ynM3
+	ViYFhG2dynH5vyMxjguqBjUn9ZgRfuZ4z/Zhm78aWjfZdXhxbtI3c8weTR9bqdmhUeYL2TTxgN8
+	Ah9f/4e7CtqrZ8d46OXgEKLiqqNPmpK0u0Gn6OBrVifG4JRlU=
+X-Received: by 2002:a05:7022:128a:b0:123:330b:3a0 with SMTP id a92af1059eb24-12786959dc6mr1807709c88.14.1772109415994;
+        Thu, 26 Feb 2026 04:36:55 -0800 (PST)
+Received: from MVIN00013.mvista.com ([150.129.170.245])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12789a43885sm2438877c88.12.2026.02.26.04.36.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Feb 2026 04:36:55 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH] bcu: upgrade 1.1.115 -> 1.1.128
-Date: Thu, 26 Feb 2026 17:58:44 +0800
-Message-ID: <20260226095855.3160-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-python][kirkstone][PATCHv2] python3-cbor2: patch CVE-2025-68131
+Date: Thu, 26 Feb 2026 18:06:45 +0530
+Message-ID: <20260226123645.180308-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 09:59:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124670
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 12:37:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124671
 
-1. Changelog:
-  Support i.MX952 15x15 EVK with Power group updated.
+Backport the patch[1] which fixes this vulnerability as mentioned in the
+comment[2].
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68131
 
-2. Update 0001-CMakeLists-do-not-use-vendored-libcurl.patch for 1.1.128
+[1] https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0
+[2] https://github.com/agronholm/cbor2/pull/268#issuecomment-3719179000
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Dropped changes to the changelog from the original commit.
+
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- ...akeLists-do-not-use-vendored-libcurl.patch | 34 +++++++------------
- .../bcu/{bcu_1.1.115.bb => bcu_1.1.128.bb}    |  4 +--
- 2 files changed, 15 insertions(+), 23 deletions(-)
- rename meta-oe/recipes-support/bcu/{bcu_1.1.115.bb => bcu_1.1.128.bb} (91%)
+ .../python/python3-cbor2/CVE-2025-68131.patch | 507 ++++++++++++++++++
+ .../python/python3-cbor2_5.4.2.bb             |   1 +
+ 2 files changed, 508 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
 
-diff --git a/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch b/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
-index bab1d1f301..ac72be44dc 100644
---- a/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
-+++ b/meta-oe/recipes-support/bcu/bcu/0001-CMakeLists-do-not-use-vendored-libcurl.patch
-@@ -1,45 +1,37 @@
--From 678c32f867931fd9f410b6e46ea8d101714c7ed5 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Leonard=20G=C3=B6hrs?= <l.goehrs@pengutronix.de>
--Date: Tue, 6 May 2025 07:45:36 +0200
- Subject: [PATCH] CMakeLists: do not use vendored libcurl
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
- 
- Upstream-Status: Inappropriate [upstream ticket https://github.com/nxp-imx/bcu/issues/17]
- 
- Signed-off-by: Leonard Göhrs <l.goehrs@pengutronix.de>
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
+new file mode 100644
+index 0000000000..4c5310edfa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
+@@ -0,0 +1,507 @@
++From 7be0ee8272a541e291f13ed67d69b951ae42a9da Mon Sep 17 00:00:00 2001
++From: Andreas Eriksen <andreer@vespa.ai>
++Date: Thu, 18 Dec 2025 16:48:26 +0100
++Subject: [PATCH] Merge commit from fork
 +
-+Update for 1.1.128
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
- ---
-- CMakeLists.txt | 10 +++++-----
-- 1 file changed, 5 insertions(+), 5 deletions(-)
-+ CMakeLists.txt | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
++* track depth of recursive encode/decode, clear shared refs on start
++
++* test that shared refs are cleared on start
++
++* add fix-shared-state-reset to version history
++
++* clear shared state _after_ encode/decode
++
++* use PY_SSIZE_T_MAX to clear shareables list
++
++* use context manager for python decoder depth tracking
++
++* use context manager for python encoder depth tracking
++
++CVE: CVE-2025-68131
++Upstream-Status: Backport [https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ cbor2/decoder.py      | 26 ++++++++++++++--
++ cbor2/encoder.py      | 42 +++++++++++++++++++++-----
++ source/decoder.c      | 28 +++++++++++++++++-
++ source/decoder.h      |  1 +
++ source/encoder.c      | 23 +++++++++++++--
++ source/encoder.h      |  1 +
++ tests/test_decoder.py | 62 ++++++++++++++++++++++++++++++++++++++
++ tests/test_encoder.py | 69 +++++++++++++++++++++++++++++++++++++++++++
++ 8 files changed, 239 insertions(+), 13 deletions(-)
++
++diff --git a/cbor2/decoder.py b/cbor2/decoder.py
++index be7198b..f2d818c 100644
++--- a/cbor2/decoder.py
+++++ b/cbor2/decoder.py
++@@ -2,6 +2,7 @@ import re
++ import struct
++ import sys
++ from collections.abc import Mapping
+++from contextlib import contextmanager
++ from datetime import datetime, timedelta, timezone
++ from io import BytesIO
++ 
++@@ -40,7 +41,7 @@ class CBORDecoder:
++ 
++     __slots__ = (
++         '_tag_hook', '_object_hook', '_share_index', '_shareables', '_fp_read',
++-        '_immutable', '_str_errors', '_stringref_namespace')
+++        '_immutable', '_str_errors', '_stringref_namespace', '_decode_depth')
++ 
++     def __init__(self, fp, tag_hook=None, object_hook=None,
++                  str_errors='strict'):
++@@ -52,6 +53,7 @@ class CBORDecoder:
++         self._shareables = []
++         self._stringref_namespace = None
++         self._immutable = False
+++        self._decode_depth = 0
++ 
++     @property
++     def immutable(self):
++@@ -173,13 +175,32 @@ class CBORDecoder:
++             if unshared:
++                 self._share_index = old_index
++ 
+++    @contextmanager
+++    def _decoding_context(self):
+++        """
+++        Context manager for tracking decode depth and clearing shared state.
+++        Shared state is cleared at the end of each top-level decode to prevent
+++        shared references from leaking between independent decode operations.
+++        Nested calls (from hooks) must preserve the state.
+++        """
+++        self._decode_depth += 1
+++        try:
+++            yield
+++        finally:
+++            self._decode_depth -= 1
+++            assert self._decode_depth >= 0
+++            if self._decode_depth == 0:
+++                self._shareables.clear()
+++                self._share_index = None
+++
++     def decode(self):
++         """
++         Decode the next value from the stream.
++ 
++         :raises CBORDecodeError: if there is any problem decoding the stream
++         """
++-        return self._decode()
+++        with self._decoding_context():
+++            return self._decode()
++ 
++     def decode_from_bytes(self, buf):
++         """
++@@ -190,6 +211,7 @@ class CBORDecoder:
++         object needs to be decoded separately from the rest but while still
++         taking advantage of the shared value registry.
++         """
+++        with self._decoding_context():
++         with BytesIO(buf) as fp:
++             old_fp = self.fp
++             self.fp = fp
++diff --git a/cbor2/encoder.py b/cbor2/encoder.py
++index 42526c0..0a5722d 100644
++--- a/cbor2/encoder.py
+++++ b/cbor2/encoder.py
++@@ -109,7 +109,7 @@ class CBOREncoder:
++     __slots__ = (
++         'datetime_as_timestamp', '_timezone', '_default', 'value_sharing',
++         '_fp_write', '_shared_containers', '_encoders', '_canonical',
++-        'string_referencing', 'string_namespacing', '_string_references')
+++        'string_referencing', 'string_namespacing', '_string_references', '_encode_depth')
++ 
++     def __init__(self, fp, datetime_as_timestamp=False, timezone=None,
++                  value_sharing=False, default=None, canonical=False,
++@@ -124,6 +124,7 @@ class CBOREncoder:
++         self._canonical = canonical
++         self._shared_containers = {}  # indexes used for value sharing
++         self._string_references = {}  # indexes used for string references
+++        self._encode_depth = 0
++         self._encoders = default_encoders.copy()
++         if canonical:
++             self._encoders.update(canonical_encoders)
++@@ -236,6 +237,23 @@ class CBOREncoder:
++         """
++         self._fp_write(data)
++ 
+++    @contextmanager
+++    def _encoding_context(self):
+++        """
+++        Context manager for tracking encode depth and clearing shared state.
+++        Shared state is cleared at the end of each top-level encode to prevent
+++        shared references from leaking between independent encode operations.
+++        Nested calls (from hooks) must preserve the state.
+++        """
+++        self._encode_depth += 1
+++        try:
+++            yield
+++        finally:
+++            self._encode_depth -= 1
+++            if self._encode_depth == 0:
+++                self._shared_containers.clear()
+++                self._string_references.clear()
+++
++     def encode(self, obj):
++         """
++         Encode the given object using CBOR.
++@@ -243,6 +261,14 @@ class CBOREncoder:
++         :param obj:
++             the object to encode
++         """
+++        with self._encoding_context():
+++            self._encode_value(obj)
+++    def _encode_value(self, obj: Any) -> None:
+++        """
+++        Internal fast path for encoding - used by built-in encoders.
+++        External code should use encode() instead, which properly manages
+++        shared state between independent encode operations.
+++        """
++         obj_type = obj.__class__
++         encoder = (
++             self._encoders.get(obj_type) or
++@@ -390,14 +416,14 @@ class CBOREncoder:
++     def encode_array(self, value):
++         self.encode_length(4, len(value))
++         for item in value:
++-            self.encode(item)
+++            self._encode_value(item)
++ 
++     @container_encoder
++     def encode_map(self, value):
++         self.encode_length(5, len(value))
++         for key, val in value.items():
++-            self.encode(key)
++-            self.encode(val)
+++            self._encode_value(key)
+++            self._encode_value(val)
++ 
++     def encode_sortable_key(self, value):
++         """
++@@ -422,10 +448,10 @@ class CBOREncoder:
++                 # String referencing requires that the order encoded is
++                 # the same as the order emitted so string references are
++                 # generated after an order is determined
++-                self.encode(realkey)
+++                self._encode_value(realkey)
++             else:
++                 self._fp_write(sortkey[1])
++-            self.encode(value)
+++            self._encode_value(value)
++ 
++     def encode_semantic(self, value):
++         # Nested string reference domains are distinct
++@@ -436,7 +462,7 @@ class CBOREncoder:
++             self._string_references = {}
++ 
++         self.encode_length(6, value.tag)
++-        self.encode(value.value)
+++        self._encode_value(value.value)
++ 
++         self.string_referencing = old_string_referencing
++         self._string_references = old_string_references
++@@ -489,7 +515,7 @@ class CBOREncoder:
++     def encode_stringref(self, value):
++         # Semantic tag 25
++         if not self._stringref(value):
++-            self.encode(value)
+++            self._encode_value(value)
++ 
++     def encode_rational(self, value):
++         # Semantic tag 30
++diff --git a/source/decoder.c b/source/decoder.c
++index d4da393..d8df2b5 100644
++--- a/source/decoder.c
+++++ b/source/decoder.c
++@@ -139,6 +139,7 @@ CBORDecoder_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
++         self->str_errors = PyBytes_FromString("strict");
++         self->immutable = false;
++         self->shared_index = -1;
+++        self->decode_depth = 0;
++     }
++     return (PyObject *) self;
++ error:
++@@ -1747,11 +1748,30 @@ decode(CBORDecoderObject *self, DecodeOptions options)
++ }
++ 
++ 
+++// Reset shared state at the end of each top-level decode to prevent
+++// shared references from leaking between independent decode operations.
+++// Nested calls (from hooks) must preserve the state.
+++static inline void
+++clear_shareable_state(CBORDecoderObject *self)
+++{
+++    PyList_SetSlice(self->shareables, 0, PY_SSIZE_T_MAX, NULL);
+++    self->shared_index = -1;
+++}
+++
+++
++ // CBORDecoder.decode(self) -> obj
++ PyObject *
++ CBORDecoder_decode(CBORDecoderObject *self)
++ {
++-    return decode(self, DECODE_NORMAL);
+++    PyObject *ret;
+++    self->decode_depth++;
+++    ret = decode(self, DECODE_NORMAL);
+++    self->decode_depth--;
+++    assert(self->decode_depth >= 0);
+++    if (self->decode_depth == 0) {
+++        clear_shareable_state(self);
+++    }
+++    return ret;
++ }
++ 
++ 
++@@ -1764,6 +1784,7 @@ CBORDecoder_decode_from_bytes(CBORDecoderObject *self, PyObject *data)
++     if (!_CBOR2_BytesIO && _CBOR2_init_BytesIO() == -1)
++         return NULL;
++ 
+++    self->decode_depth++;
++     save_read = self->read;
++     buf = PyObject_CallFunctionObjArgs(_CBOR2_BytesIO, data, NULL);
++     if (buf) {
++@@ -1775,6 +1796,11 @@ CBORDecoder_decode_from_bytes(CBORDecoderObject *self, PyObject *data)
++         Py_DECREF(buf);
++     }
++     self->read = save_read;
+++    self->decode_depth--;
+++    assert(self->decode_depth >= 0);
+++    if (self->decode_depth == 0) {
+++        clear_shareable_state(self);
+++    }
++     return ret;
++ }
++ 
++diff --git a/source/decoder.h b/source/decoder.h
++index 6bb6d52..a2f1bcb 100644
++--- a/source/decoder.h
+++++ b/source/decoder.h
++@@ -13,6 +13,7 @@ typedef struct {
++     PyObject *str_errors;
++     bool immutable;
++     Py_ssize_t shared_index;
+++    Py_ssize_t decode_depth;
++ } CBORDecoderObject;
++ 
++ extern PyTypeObject CBORDecoderType;
++diff --git a/source/encoder.c b/source/encoder.c
++index af2b9c5..ae3fd64 100644
++--- a/source/encoder.c
+++++ b/source/encoder.c
++@@ -112,6 +112,7 @@ CBOREncoder_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
++         self->shared_handler = NULL;
++         self->string_referencing = false;
++         self->string_namespacing = false;
+++        self->encode_depth = 0;
++     }
++     return (PyObject *) self;
++ }
++@@ -2016,17 +2017,35 @@ encode(CBOREncoderObject *self, PyObject *value)
++ }
++ 
++ 
+++// Reset shared state at the end of each top-level encode to prevent
+++// shared references from leaking between independent encode operations.
+++// Nested calls (from hooks or recursive encoding) must preserve the state.
+++static inline void
+++clear_shared_state(CBOREncoderObject *self)
+++{
+++    PyDict_Clear(self->shared);
+++    PyDict_Clear(self->string_references);
+++}
+++
+++
++ // CBOREncoder.encode(self, value)
++ PyObject *
++ CBOREncoder_encode(CBOREncoderObject *self, PyObject *value)
++ {
++     PyObject *ret;
++ 
++-    // TODO reset shared dict?
++-    if (Py_EnterRecursiveCall(" in CBOREncoder.encode"))
+++    self->encode_depth++;
+++    if (Py_EnterRecursiveCall(" in CBOREncoder.encode")) {
+++        self->encode_depth--;
++         return NULL;
+++    }
++     ret = encode(self, value);
++     Py_LeaveRecursiveCall();
+++    self->encode_depth--;
+++    assert(self->encode_depth >= 0);
+++    if (self->encode_depth == 0) {
+++        clear_shared_state(self);
+++    }
++     return ret;
++ }
++ 
++diff --git a/source/encoder.h b/source/encoder.h
++index b994ed9..7a68e2f 100644
++--- a/source/encoder.h
+++++ b/source/encoder.h
++@@ -23,6 +23,7 @@ typedef struct {
++     bool value_sharing;
++     bool string_referencing;
++     bool string_namespacing;
+++    Py_ssize_t encode_depth;
++ } CBOREncoderObject;
++ 
++ extern PyTypeObject CBOREncoderType;
++diff --git a/tests/test_decoder.py b/tests/test_decoder.py
++index d03e288..cc3af11 100644
++--- a/tests/test_decoder.py
+++++ b/tests/test_decoder.py
++@@ -713,6 +713,68 @@ def test_reserved_special_tags(impl, data, expected):
++     ('c400', '4'), ('c500', '5')
++     ],
++ )
+++
+++class TestDecoderReuse:
+++    """
+++    Tests for correct behavior when reusing CBORDecoder instances.
+++    """
+++
+++    def test_decoder_reuse_resets_shared_refs(self, impl):
+++        """
+++        Shared references should be scoped to a single decode operation,
+++        not persist across multiple decodes on the same decoder instance.
+++        """
+++        # Message with shareable tag (28)
+++        msg1 = impl.dumps(impl.CBORTag(28, "first_value"))
+++
+++        # Message with sharedref tag (29) referencing index 0
+++        msg2 = impl.dumps(impl.CBORTag(29, 0))
+++
+++        # Reuse decoder across messages
+++        decoder = impl.CBORDecoder(BytesIO(msg1))
+++        result1 = decoder.decode()
+++        assert result1 == "first_value"
+++
+++        # Second decode should fail - sharedref(0) doesn't exist in this context
+++        decoder.fp = BytesIO(msg2)
+++        with pytest.raises(impl.CBORDecodeValueError, match="shared reference"):
+++            decoder.decode()
+++
+++    def test_decode_from_bytes_resets_shared_refs(self, impl):
+++        """
+++       decode_from_bytes should also reset shared references between calls.
+++        """
+++        msg1 = impl.dumps(impl.CBORTag(28, "value"))
+++        msg2 = impl.dumps(impl.CBORTag(29, 0))
+++
+++        decoder = impl.CBORDecoder(BytesIO(b""))
+++        decoder.decode_from_bytes(msg1)
+++
+++        with pytest.raises(impl.CBORDecodeValueError, match="shared reference"):
+++            decoder.decode_from_bytes(msg2)
+++
+++    def test_shared_refs_within_single_decode(self, impl):
+++       """
+++        Shared references must work correctly within a single decode operation.
+++
+++        Note: This tests non-cyclic sibling references [shareable(x), sharedref(0)],
+++        which is a different pattern from test_cyclic_array/test_cyclic_map that
+++        test self-referencing structures like shareable([sharedref(0)]).
+++        """
+++        # [shareable("hello"), sharedref(0)] -> ["hello", "hello"]
+++        data = unhexlify(
+++           "82"  # array(2)
+++            "d81c"  # tag(28) shareable
+++            "65"  # text(5)
+++            "68656c6c6f"  # "hello"
+++            "d81d"  # tag(29) sharedref
+++            "00"  # unsigned(0)
+++        )
+++
+++        result = impl.loads(data)
+++        assert result == ["hello", "hello"]
+++        assert result[0] is result[1]  # Same object reference
+++
++ def test_decimal_payload_unpacking(impl, data, expected):
++     with pytest.raises(impl.CBORDecodeValueError) as exc_info:
++         impl.loads(unhexlify(data))
++diff --git a/tests/test_encoder.py b/tests/test_encoder.py
++index 8c40000..c76d5e0 100644
++--- a/tests/test_encoder.py
+++++ b/tests/test_encoder.py
++@@ -522,6 +522,75 @@ def test_encode_stringrefs_dict(impl):
++     assert impl.dumps(value, string_referencing=True, canonical=True) == expected
++ 
++ 
+++class TestEncoderReuse:
+++    """
+++    Tests for correct behavior when reusing CBOREncoder instances.
+++    """
+++
+++    def test_encoder_reuse_resets_shared_containers(self, impl):
+++        """
+++        Shared container tracking should be scoped to a single encode operation,
+++        not persist across multiple encodes on the same encoder instance.
+++        """
+++        fp = BytesIO()
+++        encoder = impl.CBOREncoder(fp, value_sharing=True)
+++        shared_obj = ["hello"]
+++
+++        # First encode: object is tracked in shared containers
+++        encoder.encode([shared_obj, shared_obj])
+++
+++        # Second encode on new fp: should produce valid standalone CBOR
+++        # (not a sharedref pointing to stale first-encode data)
+++        encoder.fp = BytesIO()
+++        encoder.encode(shared_obj)
+++        second_output = encoder.fp.getvalue()
+++
+++        # The second output must be decodable on its own
+++        result = impl.loads(second_output)
+++        assert result == ["hello"]
+++
+++    def test_encode_to_bytes_resets_shared_containers(self, impl):
+++        """
+++        encode_to_bytes should also reset shared container tracking between calls.
+++        """
+++        fp = BytesIO()
+++       encoder = impl.CBOREncoder(fp, value_sharing=True)
+++        shared_obj = ["hello"]
+++
+++        # First encode
+++        encoder.encode_to_bytes([shared_obj, shared_obj])
+++
+++        # Second encode should produce valid standalone CBOR
+++        result_bytes = encoder.encode_to_bytes(shared_obj)
+++       result = impl.loads(result_bytes)
+++        assert result == ["hello"]
+++
+++    def test_encoder_hook_does_not_reset_state(self, impl):
+++        """
+++        When a custom encoder hook calls encode(), the shared container
+++        tracking should be preserved (not reset mid-operation).
+++       """
+++
+++        class Custom:
+++            def __init__(self, value):
+++                self.value = value
+++
+++        def custom_encoder(encoder, obj):
+++            # Hook encodes the wrapped value
+++           encoder.encode(obj.value)
+++
+++        # Encode a Custom wrapping a list
+++        data = impl.dumps(Custom(["a", "b"]), default=custom_encoder)
+++
+++        # Verify the output decodes correctly
+++        result = impl.loads(data)
+++        assert result == ["a", "b"]
+++
+++        # Test nested Custom objects - hook should work recursively
+++        data2 = impl.dumps(Custom(Custom(["x"])), default=custom_encoder)
+++        result2 = impl.loads(data2)
+++        assert result2 == ["x"]
+++
++ @pytest.mark.parametrize('tag', [-1, 2**64, 'f'], ids=['too small', 'too large', 'wrong type'])
++ def test_invalid_tag(impl, tag):
++     with pytest.raises(TypeError):
++-- 
++2.50.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2_5.4.2.bb b/meta-python/recipes-devtools/python/python3-cbor2_5.4.2.bb
+index bbdeca7adb..5aeb82b992 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2_5.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-cbor2_5.4.2.bb
+@@ -10,6 +10,7 @@ inherit pypi python_setuptools_build_meta ptest
  
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 42158a2..ac840fc 100644
-+index 0d6b915..f8c76ca 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -17,17 +17,17 @@ pkg_check_modules(LIBFTDI REQUIRED libftdi1)
-+@@ -16,14 +16,15 @@ find_package(PkgConfig REQUIRED)
-+ pkg_check_modules(LIBFTDI REQUIRED libftdi1)
-  pkg_check_modules(LIBYAML REQUIRED yaml-0.1)
-- pkg_check_modules(LIBOPENSSL REQUIRED openssl)
-  pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
- +pkg_check_modules(LIBCURL REQUIRED libcurl)
-  project(bcu)
---include_directories(${LIBUSB_INCLUDE_DIRS} ${LIBFTDI_INCLUDE_DIRS}include ${PROJECT_SOURCE_DIR}/libftdi/src ${LIBYAML_INCLUDEDIR} ${PROJECT_SOURCE_DIR}/libcurl/include)
-+-include_directories(${LIBUSB_INCLUDE_DIRS} ${LIBFTDI_INCLUDE_DIRS}include ${PROJECT_SOURCE_DIR}/libftdi/src ${LIBYAML_INCLUDEDIR})
- +include_directories(${LIBUSB_INCLUDE_DIRS} ${LIBFTDI_INCLUDE_DIRS}include ${LIBYAML_INCLUDEDIR})
-  include_directories(${PROJECT_SOURCE_DIR})
-  
-  message("operation system is ${CMAKE_SYSTEM}")
-  if (LINUX)
--         add_executable(bcu bcu.c port.c chip.c board.c bcu_parser.c bcu_yaml.c bcu_https.c bcu_ftdi_eeprom.c)
-+         add_executable(bcu bcu.c port.c chip.c board.c bcu_parser.c bcu_yaml.c bcu_ftdi_eeprom.c)
- -        link_directories(${LIBUSB_LIBRARY_DIRS} ${LIBFTDI_LIBRARY_DIRS} ${LIBYAML_LIBRARY_DIRS})
---        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} ${PROJECT_SOURCE_DIR}/libcurl/build.bcu/lib/libcurl.a -lpthread -lssl -lcrypto -lm -ldl)
---        execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR}
---                         COMMAND ${PROJECT_SOURCE_DIR}/build_libs.sh ${PROJECT_SOURCE_DIR})
- +        link_directories(${LIBUSB_LIBRARY_DIRS} ${LIBFTDI_LIBRARY_DIRS} ${LIBYAML_LIBRARY_DIRS} ${LIBCURL_LIBRARY_DIRS})
--+        target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} ${LIBCURL_LIBRARIES} -lpthread -lssl -lcrypto -lm -ldl)
--+        execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR})
-+         target_link_libraries (bcu ${LIBUSB_LIBRARIES} ${LIBFTDI_LIBRARIES} ${LIBYAML_LIBRARIES} -lpthread -lm -ldl)
-+         execute_process( COMMAND ${PROJECT_SOURCE_DIR}/create_version_h.sh ${PROJECT_SOURCE_DIR} )
-          install(TARGETS bcu DESTINATION bin)
-- elseif (MACOS)
--         add_executable(bcu_mac bcu.c port.c chip.c board.c bcu_parser.c bcu_yaml.c bcu_https.c bcu_ftdi_eeprom.c)
- -- 
--2.39.5
-+2.43.0
+ SRC_URI += " \
+         file://run-ptest \
++        file://CVE-2025-68131.patch \
+ "
  
-diff --git a/meta-oe/recipes-support/bcu/bcu_1.1.115.bb b/meta-oe/recipes-support/bcu/bcu_1.1.128.bb
-similarity index 91%
-rename from meta-oe/recipes-support/bcu/bcu_1.1.115.bb
-rename to meta-oe/recipes-support/bcu/bcu_1.1.128.bb
-index 260fba02a9..2b2e5e7fa0 100644
---- a/meta-oe/recipes-support/bcu/bcu_1.1.115.bb
-+++ b/meta-oe/recipes-support/bcu/bcu_1.1.128.bb
-@@ -9,10 +9,10 @@ SECTION = "devel"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=884d48c2aa7b82e1ad4a33909fab24b6"
- 
--SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master \
-+SRC_URI = "git://github.com/nxp-imx/bcu;protocol=https;branch=master;tag=${BPN}_${PV} \
-            file://0001-CMakeLists-do-not-use-vendored-libcurl.patch \
-            "
--SRCREV = "f081c69c26e330cf03ec790051c415c4716509d9"
-+SRCREV = "e7027dcb867dae7aebc8fd0a78ab13f05a4557f2"
- 
- 
- DEPENDS = "curl libyaml libusb1 openssl libftdi"
+ # not vulnerable yet, vulnerability was introduced in v5.6.0
 -- 
-2.43.0
+2.50.1
 
 
