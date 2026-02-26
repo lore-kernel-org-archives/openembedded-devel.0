@@ -1,156 +1,105 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <hetpat@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FDFDFCE06A
-	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 12:38:10 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.68889.1772109486638776621
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86D10FCE070
+	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 12:51:10 +0000 (UTC)
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.69306.1772110268137356573
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Feb 2026 04:38:06 -0800
+ Thu, 26 Feb 2026 04:51:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q8DbRYer;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4837f27cf2dso7370425e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 04:38:06 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=O161hDXi;
+ spf=pass (domain: cisco.com, ip: 173.37.142.91, mailfrom: hetpat@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772109485; x=1772714285; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Q/AlIxy8JHGcb4rsm9f/rLguf06JrqgLkiYIodRfA9E=;
-        b=Q8DbRYerJ95wZhRlUziamk/bapsQOnm3UghX2gQVDiJhZ2wYFhtPIWuXkb7mqTPF5I
-         F7E63uAL9fJ8dPEG5YgbEkFaleIYhrOOr7060WcmDD0BIj9bsIfRhFm8nLq6bCxU6inx
-         RB8HELjOL6SsJjB5Y3UD072f7/HPcsSJxRVkxbKYNLDD9FhGF32FllKVWHV2V3+vdFxm
-         NdNg7fhhqgxMRUU490GbTYzR5zBhdscNEzaL7PqyM8Cu6kqxMvMtNWulNFvJm3PNrdKM
-         PH78i4b6Wt/zaqKn1H5MtEAjZOpHyqlPmnjzJzdjxIdaALsciIcJ3TztEeppZowr+hWu
-         L+/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772109485; x=1772714285;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Q/AlIxy8JHGcb4rsm9f/rLguf06JrqgLkiYIodRfA9E=;
-        b=eYEcNnLZYznUAWoJXaB5gfd77XsS11vgjMoP5pdZEWocfP++fitejO9+sGSTjl9J6e
-         oxWhkdsOj35RsQT0MBldTrh7oQx+cRmfH7mdZT1gQs6m4DvGNg13b7sFKWtkWWCOdBje
-         Ix6yMknNx85sdxevxKo9Bme6SkCyTSQT7zJcVDv4E2KXv57yVN7DuWLyGrZI5Z3ep0Kq
-         GnGSS05cWeSyqsMmJe/FcK7ur15VUsl770g0UaDZIGRcGBUB6DW+f8nXJmgR9dp7Ht/k
-         Vb32QxPtWWIKIkmWhL4h9NSZdkldKnxg3YXDnm8Dj6lOvBpY5+C9Vs4eP3k9ed1U4Zl+
-         2gdQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXfy/7xM4QtMiT2NKNKrpIIzROdlgEfaUGsu+u4WwgVeH2j6BzOiEKkE0NIu+Ere0AzXVRpnN2gx9kTmxFqn+kzuPw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yze66sLy1t5OjGV3K6wnCVRv5lNBxzD7U5hWL6Y8kfJNhtA6L8M
-	b2aVM8HYNLJX9Swl75O/TDLUyej5fM0gwklqCKXd7BQfXln/L9/dLh5G
-X-Gm-Gg: ATEYQzxs+BBhyPRg6WvNlmwmxXuboM7mX86TEP8UFtR81KB0ZRFE4jCHP3ihT3ZRtQU
-	9FGyd6AyDzTBuJrlZDBrmRNEhttwnOZoHocXNYMAYsNqzGlxKxe8hBvV7nzA8+LKp46URi9dMnn
-	6eR5TtQk1/SDgBrm7QIYD539nLnCJxQuPapbf0eQx9Z/ejf3cs10F06sURtK+yKR5mLAEnLpwwv
-	qprBuyM4mAfdVgw+R0J9dUoeuQMwPNDIku7T5RnsVfFTbNqzN/nXVFcXFcoWYVqGc3Q0+jf78ZK
-	lp9sh8cvJ1dWJhVITuCtfpQUBCI4uidXL6US/QAIHmnJHwNxb5wH51mUjmdvfnWMRVJl/8yB95M
-	Ydu05cGUiLHlDuVOsG+KUvTwWjCTdfsY7Z6HcSKPiTP+La83c5D/MBHVgZogChCs/FzISjVUCds
-	tcF11Ca5V48puB9qOJG31K0sT2v5VvTAh1DqXoYWb0qA==
-X-Received: by 2002:a05:600c:3587:b0:483:a27e:6706 with SMTP id 5b1f17b1804b1-483a95fc063mr337954145e9.9.1772109484701;
-        Thu, 26 Feb 2026 04:38:04 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bd70e692sm142293015e9.7.2026.02.26.04.38.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Feb 2026 04:38:04 -0800 (PST)
-Message-ID: <0ff67b9a-3ee7-46bf-a698-806031439594@gmail.com>
-Date: Thu, 26 Feb 2026 13:38:03 +0100
+  d=cisco.com; i=@cisco.com; l=805; q=dns/txt;
+  s=iport01; t=1772110268; x=1773319868;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=M9FRA0vgDsPNLC2ldZY5f+fW7Vk8QdXRwlBHRR6xIF0=;
+  b=O161hDXiuIfJy3kO0ZlS14Ku865HGuA7wGAZjPr/XI1CjBWNVa4uYRkR
+   VrxeKf3v4JvO5cus1xUfumPrzRUzZ0SKeWLGrLzwvGhLtFSDDZNRNZJ0G
+   Ti4Q/LpBYzJwfi1GpOvlyNTwQIWhuxD17yVpjo/L61vjlWMTEvJrLfgYs
+   V0v+E1duP2cY3rSwfjEnZ+8HbhR+/KAFYcNyScEKP0WdsdxMyiE679yIT
+   oeq3bD8g46qzmYpqUMSI59Sk/QjmIxEWItcMzF3Q+UdWbn0jeC/P1J0tq
+   8sK3yTDVsQnFyuYlB8AwV8llt5SveZ+ZuK1fTF04KKkTlwSvw+Kql2Gv/
+   A==;
+X-CSE-ConnectionGUID: X85P9xb2SgmOufARogEtng==
+X-CSE-MsgGUID: 9rOm1tN6QyquQVeuYGpIaw==
+X-IPAS-Result: =?us-ascii?q?A0C1CAC9QKBp/5T/Ja1aglmCSA9xX0JJk1oBoQ2Bfw8BA?=
+ =?us-ascii?q?QEPNxoEAQGFB40hAiY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4Zchl02AUYwXESDAgGCcwIBpm2CLIEBhHzbJgELFAGBOIU8iBl0h?=
+ =?us-ascii?q?HonGxuBcoR9hRCFdwSCIoEOgX+FfQaLDEiBHgNZLAFVEw0KCwcFgWYDNRIqF?=
+ =?us-ascii?q?W4yHYEjPheBChsHBYYID4h0eG6BGoIEAwsYDUgRLDcUGwQ+bgeNaT+CNHQag?=
+ =?us-ascii?q?mmjQoIhoQ4KKIN0jB6VOhozqmsumFikWYRogWg8gVlwFYMiCUkZD9klIjU8A?=
+ =?us-ascii?q?gcLAQEDCZNnAQE?=
+IronPort-Data: A9a23:6eDPt6jqfmZgMjqhwpXpdPR6X161NhEKZh0ujC45NGQN5FlHY01je
+ htvDGjSOPrfYWL0c9l+btm39E5X6sWDmNJqQAQ9/CwyEC9jpJueD7x1DKtf0wB+jyHnZBg6h
+ ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
+ vus5ZeGULOZ82QsaDxMsfjd8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
+ 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
+ Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUoqrtPUHFEr
+ 8cXLRcQYDm5gO2b3LS0H7wEasQLdKEHPasFsX1miDWcBvE8TNWaGuPB5MRT23E7gcUm8fT2P
+ pVCL2EwKk6dPlsWZgd/5JEWxI9EglH/fiFAoU69rqss6G+Vxwt0uFToGISKJITTH54KxS50o
+ EqX5UP8Ww08auWO0Ce8zH+xt8DXvCrkDdd6+LqQs6QCbEeo7msLBRsbUFG2rfW0hguyVsxSL
+ 2QQ+zEytu417EGtQ9z3UhG0rXLCuQQTM+e8CMUg4w2Lj66R6AGDCy1dF3hKaccts4k9QjlCO
+ kK1ou4FzAdH6NW9IU9xPJ/Nxd9uEUD59VM/WBI=
+IronPort-HdrOrdr: A9a23:wRMbHaEEU91kDaFspLqE48eALOsnbusQ8zAXPo5KJiC9Ffbo8v
+ xG88576faZslsssRIb6LK90de7IU80nKQdieJ6AV7IZmfbUQWTQL2KlbGSoAEJ30bFh4lgPW
+ AKSdkbNOHN
+X-Talos-CUID: =?us-ascii?q?9a23=3AErT2EWlpuKLV+7Pdv5XJtxJ8O+3XOU2NkU+BM0X?=
+ =?us-ascii?q?iMmlsb6CbYGWX9454lcU7zg=3D=3D?=
+X-Talos-MUID: 9a23:FzXmEgiR5JFMoCc6/FgImMMpZd1P5v2yLh40gIwbgveJKB1fIxaUk2Hi
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.21,312,1763424000"; 
+   d="scan'208";a="676012373"
+Received: from rcdn-l-core-11.cisco.com ([173.37.255.148])
+  by alln-iport-4.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 26 Feb 2026 12:51:07 +0000
+Received: from sjc-ads-4197.cisco.com (sjc-ads-4197.cisco.com [171.70.54.218])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-11.cisco.com (Postfix) with ESMTPS id 540A21800026F;
+	Thu, 26 Feb 2026 12:51:07 +0000 (GMT)
+Received: by sjc-ads-4197.cisco.com (Postfix, from userid 1847788)
+	id EE22CCC1282; Thu, 26 Feb 2026 04:51:06 -0800 (PST)
+From: "Het Patel -X (hetpat - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hetpat@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: xe-linux-external@cisco.com,
+	vchavda@cisco.com
+Subject: [oe] [meta-oe] [PATCH v1] abseil-cpp: Add CVE_PRODUCT to support product name
+Date: Thu, 26 Feb 2026 04:51:02 -0800
+Message-Id: <20260226125105.47526-1-hetpat@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] postgresql: upgrade 14.20 ->
- 14.21
-To: hprajapati@mvista.com, openembedded-devel@lists.openembedded.org
-References: <20260217115833.113044-1-hprajapati@mvista.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260217115833.113044-1-hprajapati@mvista.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 171.70.54.218, sjc-ads-4197.cisco.com
+X-Outbound-Node: rcdn-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 12:38:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124672
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 12:51:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124673
 
-On 2/17/26 12:58, Hitendra Prajapati via lists.openembedded.org wrote:
-> It contains Security fixes for CVE-2026-2003, CVE-2026-2004,
-> CVE-2026-2005, CVE-2026-2006 and CVE-2026-2007.
-> It also contains other bug fixes and for more details refer Release note.
->
-> 0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-> refreshed for 14.21
->
-> Release notes: https://www.postgresql.org/docs/release/14.21/
->
-> Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-> ---
->  ...0001-configure.ac-bypass-autoconf-2.69-version-check.patch | 4 ++--
->  .../postgresql/{postgresql_14.20.bb => postgresql_14.21.bb}   | 4 ++--
->  2 files changed, 4 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-dbs/postgresql/{postgresql_14.20.bb => postgresql_14.21.bb} (71%)
->
-> diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-> index 76363cd26d..81cfc47c4f 100644
-> --- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-> +++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
-> @@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
->   1 file changed, 4 deletions(-)
->  
->  diff --git a/configure.ac b/configure.ac
-> -index bbbb204..0919d2b 100644
-> +index bc0b44d..1a616ac 100644
->  --- a/configure.ac
->  +++ b/configure.ac
->  @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
->   
-> - AC_INIT([PostgreSQL], [14.20], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
-> + AC_INIT([PostgreSQL], [14.21], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
->   
->  -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
->  -Untested combinations of 'autoconf' and PostgreSQL versions are not
-> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
-> similarity index 71%
-> rename from meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
-> rename to meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
-> index 04d8723f15..64af5fd07d 100644
-> --- a/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
-> +++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
-> @@ -1,6 +1,6 @@
->  require postgresql.inc
->  
-> -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=08b6032a749e67f6e3de84ea8e466933"
-> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10ad6fd3d4b124238bc893ba2904cf0f"
+From: Het Patel <hetpat@cisco.com>
 
-A small note: during testing my build failed due to incorrect license
-checksum.
-I have amended this patch manually[1], so I don't think that a v2 is
-required, unless you want to add something else.
-Anyway, just FYI.
+- Set CVE_PRODUCT to align with the NVD CPE and ensure correct CVE
+reporting.
 
-[1]:
-https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/kirkstone-nut&id=631e0ac2f08dc3db4554f9602e7da257929e8107
+Signed-off-by: Het Patel <hetpat@cisco.com>
+---
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
->  
->  SRC_URI += "\
->     file://not-check-libperl.patch \
-> @@ -11,7 +11,7 @@ SRC_URI += "\
->     file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
->  "
->  
-> -SRC_URI[sha256sum] = "7527f10f1640761bc280ad97d105d286d0cf72e54d36d78cf68e5e5f752b646b"
-> +SRC_URI[sha256sum] = "5b30f19347efff32b6e09ed2cdff0b04e9aee913ec9bb7414de2b7c17b17f1f9"
->  
->  CVE_CHECK_IGNORE += "\
->     CVE-2017-8806 \
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124449): https://lists.openembedded.org/g/openembedded-devel/message/124449
-> Mute This Topic: https://lists.openembedded.org/mt/117855111/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
-
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
+index d4475ee73a..abf736131a 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20260107.0.bb
+@@ -53,3 +53,6 @@ python split_dynamic_packages() {
+ ALLOW_EMPTY:${PN} = "1"
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++# Add CVE_PRODUCT to match the NVD CPE product name
++CVE_PRODUCT = "abseil:common_libraries"
 
