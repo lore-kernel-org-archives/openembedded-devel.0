@@ -1,149 +1,159 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D4B4FD4600
-	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 06:45:29 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.87953.1772164295882861164
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDB0CFD5311
+	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 08:54:29 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.11])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.91377.1772182466978834929
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Feb 2026 19:51:36 -0800
+ Fri, 27 Feb 2026 00:54:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=SMIJJwt1;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=cBIP1ElY;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: priyansh.jain@oss.qualcomm.com)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 61R2JulM2402979
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 03:00:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=O4/nKhOYEMz2RaMJosdhq4sJpKQSbRS0yvt
-	Ir6xObCk=; b=SMIJJwt1tM520ck0bvUrTaKP5/tEQ/YOuN3gdsfDqRrCJdCRiUW
-	K5HGQAYKAHDPx+UHHiHajbIydEaessHDVySeIQYJ+pkOzQ07hmlNAcTiL1fKsX4E
-	RDd9lePu7cpVBqLuugc65nknqpi7uKHbqneE0PbuUgCgjDiWBINDiqMQhBOeDk3K
-	pxQEFnlXJVNdh2DLMXz7lr2tMKA2+M8GCOs7auMjFBBkNkyc003UOSYqpUXZTwF3
-	wuDEh5Me9AnODfa7gfGyswKzViA2x5N4sKkbf7WdROdLFLrwilY+mGrnB7z+hDpn
-	KuU2iLdYeD4hw4nl3lQg0mEtRoK3VxQPq/Q==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cjw2391cx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 03:00:08 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-824b3532298so632717b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 19:00:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772161207; x=1772766007; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O4/nKhOYEMz2RaMJosdhq4sJpKQSbRS0yvtIr6xObCk=;
-        b=cBIP1ElYAP6IfXDOKtwE/GqXRzdNmc+t+WPofgQ+iCe+AFV8IBDfgYZe+mOcY10Pqq
-         rHyhChQpQbRspFvlzQsU1eSv6rvZCjKq3aARkofHclAhTc4DIo62U29QD/71nstFSYmq
-         8X8YP2a/GkNf/+4wyn6Gch2DLN92p4X6L/dPhwKHFUKOaPlidJfblG9YOu6CU8N7VTUn
-         U5W9Z6r6Korxj1twFYbo6zYVMk04P/pOPfmqyK6+GZWS50THMlLCuzza1TY3zXc+qPwK
-         mtQ0Sv23nEbyfZpMq1/HoV3PyPdQpME5vf6g1cXSUYaOaG9BIhE40UaUDi5+wPtyKe63
-         VQCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772161207; x=1772766007;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=O4/nKhOYEMz2RaMJosdhq4sJpKQSbRS0yvtIr6xObCk=;
-        b=B+pS+hWq7ji0UpQ1U3Sl9z4BaT5VUDj6Zh8zDtHrs53snBa+jF8IbOongKyUMW3e94
-         WspGBVJhCpv3ZlLC3dm4kHTEh2YNwAEURM/Ra7lD4B/2lbnZSfHqe2SFhANUDLhB8VOE
-         F4EEpxQPBwVORIjcF9wPW1C9gIRUexoZm1rn3V1A5RhTr3+6gSxtQnXrtvHk78COPwi+
-         YiOuPAH2ZVvCT+rv1FfMO/ZYQ1IAaSsmBzi84M4imZZqTxs7cTNOCynNlg+tZUREuUG5
-         TUbQ0clFvGFclMCq6EFiNewHrwqjmupKBTB+/BruV9pPQTKJdjQXZ3tfi+h9sMPna0+Y
-         9HVA==
-X-Gm-Message-State: AOJu0YyICRgeSXAtTKPamoT/Jek/+FxMXuddX9SQyDsZOLW/Gx9nWc2v
-	Slrxa6MrWcdaQXPSp4ouvPL2R5E+QJBSrTvNIRxzCr/Ava+jIa3cRouH2PYz0fJZMKi3G2jod2C
-	JWu0BQXKk/Dtl1lOtuRVij2eT0ej6PEVWfZjtH2mG6fXWH/FvG+cXf/eOuWQP4+6oVgGJymL3aC
-	855StBD5GFU04QRhBf
-X-Gm-Gg: ATEYQzyU26+GgUJ3Zwn2pVBFqRalqHc9DYvdxc8HtgfNXILF6ViknufNPQatoXU3lT6
-	37jEdLKRdQA32nI+uxZ93s+oMui+j8OPbMAIzJYMwVmU22XnE5Wjn2gQ2S1hmnweqNman8C5F0U
-	WO3DiRE5hiImavm7UPhF7bFGTkOBWH4vDGysOpPGRsBigib6CFLMYSnMQ9tJhyA8zZ/ikl+F2aI
-	DxUd1RfCS7GVKjSyFXzzBbPzkyU1C31g1M0Dx8dQE1SG7IgGVtFgYxlp0WIJ3wlK2Vnfsp9EONa
-	vtS036SNueIxOo/sGordEf8vNhRoiwo+WhxCEsV72kLtA4BYXiU0HYF+tJKI+eYCtAE1UGGr/Fk
-	nEOyOoE2HVY2RVbe4ZfhDJzYFUJWjaWIpbxmQ7IB/5p75KToF3jgk8k8=
-X-Received: by 2002:a05:6a00:4505:b0:81e:81fb:b392 with SMTP id d2e1a72fcca58-8274d9347fcmr1186727b3a.11.1772161207492;
-        Thu, 26 Feb 2026 19:00:07 -0800 (PST)
-X-Received: by 2002:a05:6a00:4505:b0:81e:81fb:b392 with SMTP id d2e1a72fcca58-8274d9347fcmr1186702b3a.11.1772161206934;
-        Thu, 26 Feb 2026 19:00:06 -0800 (PST)
-Received: from hu-priyjain-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82739db3ab8sm3529129b3a.27.2026.02.26.19.00.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Feb 2026 19:00:06 -0800 (PST)
-From: Priyansh Jain <priyansh.jain@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: anuj.mittal@oss.qualcomm.com, amit.kucheria@oss.qualcomm.com,
-        dmitry.baryshkov@oss.qualcomm.com,
-        Priyansh Jain <priyansh.jain@oss.qualcomm.com>
-Subject: [PATCH] thermald: upgrade to 2.5.11
-Date: Fri, 27 Feb 2026 08:30:00 +0530
-Message-Id: <20260227030000.1438923-1-priyansh.jain@oss.qualcomm.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@siemens.com header.s=selector2 header.b=i2miAawA;
+ spf=pass (domain: siemens.com, ip: 52.101.65.11, mailfrom: peter.marko@siemens.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=d1YUiq0xEryJce1FdRtzk8QBociLeHgfR2Q4Bkp4Oqabn0j5UBbimKCBiX04fE8htCh0oAim5Ka6yFFRWEwDy3qoeubDYAFEhL59U4OYrjvatm0EN8QnBnfPuAEvwVdHXLLi5twClFIPPk6lUjqD/zyRLDpW5rYsEKZfMPt4ZV5oCgKcK3welfwElmqH51fHSQSc3BxmQgarmm5DrGlYdyvEaLNfwU6bOQpL7bO/kOYcN5DANxcXG9T7MVpmUAnLCqeh+85YF1Rpv3s5veCdkknMmZwi2SGXUX9HaX07vvOxXPKl+FknpwicQKRG8+piqA8KJ6pFESQbkSfvvZA4uA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=58bOV5vG9ALUXx7WdS+Ul52tCqL+hIqkhv0iSYebp1E=;
+ b=wvGmQ2b4QYkkQp8iP5kt/Puq+EAdfCxaGCD7eXIzuJHqfV+c2F2jT1Pj0bbMf975ETb0UhIKhKfM5/sK6MgYgCJyjpKf8d7lCmgXP2VKRelCQT+TMKeHO3+AFVd/cAgQ35i9paK4oPCKKYemjgmY1oSZ04OTUL8a9axlOmfFnwVMaw6TnbL2jpTdWfbrYDBl8oEca40FT1psmppq2yqvbbDqTz7BNUGboDqjJYDgVhpXz/43WH3B0TeBo4+8aCVsS4IOtPtHz6EswY66ygC1hlt0RYtAtmiYCm3Euxm7njYpRRl8na5prGbUZSgl5T6qqiXc6qo7jhS5XAUOMTkbzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=58bOV5vG9ALUXx7WdS+Ul52tCqL+hIqkhv0iSYebp1E=;
+ b=i2miAawAOmJMD+hiwCa28e57OjWOSBY8ULE1DHE2Ux77RxsTwlQCA/kitunPeE575fFo/BZ2xlQq03E1KHufP25PtvEbY1mGBKMX/TsZALqNWBeywXESJaMi5ZPHypokVUEZyF5eFOZDgTJZo2KU7BaGSGUrBOtaBynFwAhCUz/hFwPuJsIC6tlkWcHaNA+odTmSuNdIfdU0ZcAsXcMbhJQlF/xZAxGV4LlLKOdnWiIXZzSTHxY8LqC5L1eoHsXiuujxPkLRGURV716QTpZthzGQGcn9sSrH10ejlkmBJUWj7RA+myBtEuh7NBaTtpjRKJeCWIYDlLmEELLiVY/wLQ==
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:479::20)
+ by VI0PR10MB9285.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:2af::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
+ 2026 08:54:23 +0000
+Received: from AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b54d:255a:1abf:2dc7]) by AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b54d:255a:1abf:2dc7%6]) with mapi id 15.20.9654.014; Fri, 27 Feb 2026
+ 08:54:22 +0000
+From: "Marko, Peter" <Peter.Marko@siemens.com>
+To: "feroz.afshan@gmail.com" <feroz.afshan@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] Net-snmp upgrade to 5.9.5
+Thread-Topic: [oe] Net-snmp upgrade to 5.9.5
+Thread-Index: AQHcp39q0HtM8ly4jUiYE+egU7lb27WWPILw
+Date: Fri, 27 Feb 2026 08:54:22 +0000
+Message-ID: 
+ <AS1PR10MB56974C92F0A1ADBAD52FEA7BFD73A@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+References: 
+ <CA+ZN1cdtUfAf9b36tpvye9JxgsUSgm28c5C-4WZ3VzTMXMJzcA@mail.gmail.com>
+ <CA+ZN1cf8HJLV6RNcGoS3wzHNKBJPLckT=2d8+Z-wMMi6oKMt7A@mail.gmail.com>
+In-Reply-To: 
+ <CA+ZN1cf8HJLV6RNcGoS3wzHNKBJPLckT=2d8+Z-wMMi6oKMt7A@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=ee09278a-fadf-4725-9323-7587f86cd585;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2026-02-27T08:47:49Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Tag=10,
+ 3, 0, 1;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS1PR10MB5697:EE_|VI0PR10MB9285:EE_
+x-ms-office365-filtering-correlation-id: 4dc5fb13-360e-4e2c-2033-08de75ddcd7d
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;ARA:13230040|376014|366016|1800799024|38070700021;
+x-microsoft-antispam-message-info: 
+ YE+sectATSGMZmGAN89TYTCjZ6DBnD6BzMvNoZoyYPMeo7Vs6q2U6x2Cx3KUuFLpmudztwhG5ftht66eVzb8D5opLVMEsjGJ6vElqeb3tXCVGt5tY8sCcky7y498jWFwwKR73u2o36JmEq1v02AUlu24ebS+V9dr1Mm5SJJ+4idxr11+/USFDgsrvB1cp2poBClZwmFE8TkeMocIgU8Nbdrk+APGRaAvXlyf16d+3YJdILQw5ERL0W9nPhbQecmPwtdxPjeyxzHfhdi6viYcT3Kz7rruraBPAOiMazoSBMia+9OzIOBo+T0ucdxw265gw3Y17PnPvHs1fkahAjKr68G1ayPU6oyQVd5KB16VPtyeOFtE9nMLlNym6eMGT+ACR95H+FhTfHPRpKO0Yd+MnouHwcVueCm5ZERmERHOCsQWySWvzdOpHbsIXGsABD8CH/2T+ZpmgiBPuB4rEYXwRLVttsKE4fUkPLE23Wcaggab4wSbi8CegQZ5ouXMT2TrhVlnvVH5+kuEASVspItxlCPAG9MXEuPDFBNDmC9Vn5Egb1TDhlp1N8nYfu9MTDORdkt8npUqCzC4vTHHulv2BKFvW5l/3+tFlPcniUZMaF0yGRAUTkbpHCRm5EHcIkZB4jclKAY6C5uj0kNPDr5zh9mTuOHSvh/tYKPvNN3abYWjDZxPQeD/Kq78+iHxpDvLmlZyOUBL3jRtExnzaMqOzlRfSWLH3pgI0EUwjDWvV1NNDn7ORNbbsIvQ7hUHmMU5QESPXm8yOeKP0mtWDYkWOE5bbXSHzO6nwr5Uj5DPPhI=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?UStjd251YTg5SmhISE9JaDFtS2JDVC9ZSld1bHBvU25PUlRVbDBFWklub1Rv?=
+ =?utf-8?B?UEpqYTdLU0wvT3VKN2lvTldrdEQwWTVxak4rTk52akJtZElMV1RnN1EyU21S?=
+ =?utf-8?B?Rm1VemgrSVJwQ2RLZDBWaGRpd3hqVThUcFpLemNNQTZldHRFeENDRjFGYURW?=
+ =?utf-8?B?dEcwcGdJMjc5aUlTWk93TDV3R2ZIbDFNRHNNcjVwMmkyZFRYLzFXRzQ4UHlL?=
+ =?utf-8?B?Qld5d0V5WUZLczBGbHQ4Tk4ydG1TVEdlbDdlQno1Z09RR2NPYi9rYWJZUnMr?=
+ =?utf-8?B?QUNxNGZlSDFGMmpHYS9RV1JGOHlldTZPN0dSeXFTNFViSVlCQzFhOEhvRlda?=
+ =?utf-8?B?dEtvNHNZZ2dtSkpOcWxQK2NNS1E3YXIvMFQxMEtUZ3NQOWpJM1hzMGRwZW80?=
+ =?utf-8?B?RnRaa0Fjcmhpb1NKZ2R6ZnE0ZExXN3VwQTY5cGd4dE1sckdqYXNWZFp4KzVB?=
+ =?utf-8?B?QUlxQnhPTnRlbnEzV2ova1BWejFjM2E1NjlVMEFlSG5jSXhiR1RuczR5Wkty?=
+ =?utf-8?B?SlhkYU8yeGpORmc5S3k3bkJLL2puSkd0azNnQ2tpcVVIdk43Y2E4Smw1L2FD?=
+ =?utf-8?B?enlOUGtsRW5vQnZrRUZCaDVHaWZoUlVGMjZQQTUyVHNxdTluN0VVaE5yaUZR?=
+ =?utf-8?B?a3F4NWlaOGJkYlIxWDFGL0pjb2VTUHVaTjBudUpNS1FNNjMvNUxWNFNvTVlY?=
+ =?utf-8?B?OW1wUHJaY05qMTdYM1hiM252bVJNbkFmOWhaTEdSRDlNUWhKdmhXK3A5Ym9Q?=
+ =?utf-8?B?a0xEMUJOOXhhYlRCZm9wS2xrdzZyZ01QQk1CdDcyb0lzTlpzYUNnMnlpNHI0?=
+ =?utf-8?B?dUtiVHFvL3ptL0UzN0ZRdnloV0tNZFpvNHhvUWU1cU9zS3JGUDJkYW9iS0pr?=
+ =?utf-8?B?Mzh6NnBPMzhWTGJJQmpTbmt6d1BreGJwL1hzUFJlK0p3ZlkxOHNROUs4bG5s?=
+ =?utf-8?B?ZUU3cWxKeTdLQkJjMnFwTHc4RTdmRXptYU9QcCtzY2I2QXV4RHpHa1U0K3FZ?=
+ =?utf-8?B?dTlMdkd3RGkyUUtSZHlHdVdVT0xjT3c1V1c5ZnFjOGJSQjU1SXVIQmhVVkR5?=
+ =?utf-8?B?Sk5GQlVLZmsxLzVDeG8xQ2x2Q08rbDZiM2kvemhTUGFMNnpnNGROK0lmQngr?=
+ =?utf-8?B?aUsrWG15aGRhSjViZjcwOEcxVVVvZUNxK2NMMmZaVlZXZExieXVaODA4S1Vu?=
+ =?utf-8?B?Tjk1T0tXOVBSS1Z3YXdHd1dXZEc2RmRpYmNhbE9kNzk3SmVYY09OK2NWUXB4?=
+ =?utf-8?B?ZEV5WVo4TjVOenAwYkxVZlc5VjAwWms5MUhpbjhiTGhMcE1aNW5xT2o4MXR0?=
+ =?utf-8?B?ZVkvcHVvTDN0T2JPYXVrRytkV3h3eEdXMFpCRXVaTHFLWm1nNXZ2eUdQQkt0?=
+ =?utf-8?B?TUVLaHVGMjNkQ3ZjeXV5enRsemlsdGhyQ1dRbnR4TEV3b09oeUUycjZ5Rllp?=
+ =?utf-8?B?aW9BVjEzbmUrNWVHd25yS2RJRHRvTktMQVF3UENtOUl3aEtsckcweFhSeG8w?=
+ =?utf-8?B?OHNoL1c4dkgxY0dhQy92NlZPZHoyMHdnWHdCZnc0MmtmdUpkdmQzb0pYTk53?=
+ =?utf-8?B?Ung1YkUzUk0rUVRiOHA4WS9NajUyTit0dXFqZjduLzdJY3R5bHFGUEM5RGE0?=
+ =?utf-8?B?d000NUxXMEx0c0JiOGd5OEFsSzNWZERoandhN3BjSkZrc0xIYk5SOHJZT0tR?=
+ =?utf-8?B?WmM0WWdIRVBkaS9kREIvYTV0WVVYOXpCZHNNWDcrMUJvSTA1a3dsL1R3NTdk?=
+ =?utf-8?B?Y3BLY1FYd3BEUTlBcVdhUFNhRVg0akRMZWRKSDlGRzlQRnphK0hZZUFVTXVG?=
+ =?utf-8?B?NXVvaFYzaEFSNFdjaFI5ZlUyOEplT2tPRkVMQndaSmN6ZVZ3ZmdEck5ZeHQ2?=
+ =?utf-8?B?bmhycktQL2t0TkVaZDdtYzZXb1J4MU5yOEV3S2s1TmNyNUtQbG4yL0hZWll5?=
+ =?utf-8?B?NUlrdk50dEpqWG1JcGo1QnkzS0tzZjJmLzJQaEY1UXNQZjYzR0RGQVFUR3ND?=
+ =?utf-8?B?akxhZkluR3BDV0dkWERWNkxScmVzZkZXSUEzRzd5ZWFxbVIrbFNlVkpkNXUr?=
+ =?utf-8?B?NGhDc1hZdUtwU0lFbjZuZjZHRkZKZE9ndXNHV2swV2o3ZVJzQTlCcnJPTkNH?=
+ =?utf-8?B?blVIU0RJSVlBMml6RG1zTGZQRXBTZjlDRStzSVM2L3JKOFJacnpGSnQ4Uklt?=
+ =?utf-8?B?Q2NrYU05anU4Z3o3N2xSQU92dTBUMHRXcjFzZjZuQVpSTkpaQW85ZTJ2MGxw?=
+ =?utf-8?B?NExMbndOZUVQV0JMU0xqZytlODMwTUp4Qzh5WUdmMng3T244NkllYjMreFJZ?=
+ =?utf-8?B?dklwb1JBYWRrTDJwMDZYUXNlYzlOVm1UZXFNSjJ0am1OWXJpVVN3dz09?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Proofpoint-GUID: LeuhnZDKIBE_niWTBvtJf7u7J1rqQig9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjI3MDAyMSBTYWx0ZWRfX5J24sMK5Q08r
- bQm8gGbFTs/SsHglWlFabc6OyCEJtJvZhdEbJszzW+oORNw/OGCJl6LiWV9gXsr0FJIvZime1p2
- Wj1xmORAFSl6suJRmAzwcfFdGTNWqPxv6LQQKUMBa/zEjsmySSJY9ZSPUtfSO86VVvminIFDkhK
- QoaVQOQ4lMOPUGbXQP02qszjVOdSuxKPicPKpqiv5Sw6hOQna9G30LAs3lkhcWlbC047XZhbNXV
- P9u55XNmFNt1lOZpCF3ql3THUhd1QXyCgkNRQVQOFcBzNUdGoLmE87BllUNt/efq6aWfsFM3h7h
- JSTBDOMKpbzBM1NZPm/+08UfgnvWE84HljmaVaX1tN0wqOwOprBLUurkda58yWGR584vhpb7FNT
- gFVdK4UXo+mi3HFXGVa8oJ0IJC34k4cujyV7qRDWnX2EiMSQKmH9wNmvptCkGg3qmV/HQe/qwiS
- CpEaUUIEWfsxAdsgujw==
-X-Authority-Analysis: v=2.4 cv=cJHtc1eN c=1 sm=1 tr=0 ts=69a108b8 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=NEAV23lmAAAA:8 a=SQK6WCmdDylYjIm04O0A:9 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-ORIG-GUID: LeuhnZDKIBE_niWTBvtJf7u7J1rqQig9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-26_04,2026-02-26_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0 adultscore=0
- spamscore=0 clxscore=1011 priorityscore=1501 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2602270021
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4dc5fb13-360e-4e2c-2033-08de75ddcd7d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Feb 2026 08:54:22.8377
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: S2R7Gjrii+RhUhUzEl3MOweGJDAy59kjAjhfI2Ae+vqQOXzRfcxVPvxBo4kXOAflUqlkxLI/Vg7YSM1laBC0qw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB9285
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 06:45:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124693
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 08:54:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124694
 
-Upgrade thermald to release 2.5.11.
-
-This update includes the following changes:
-
-- Clang-tidy fixes
-- Added support for Wildcat Lake platform
-- Fixes for CVE related to symbolic link exploitations
-- D-Bus interface fixes
-- Removal of power group handling after Thermal Monitor support deprecation
-
-Signed-off-by: Priyansh Jain <priyansh.jain@oss.qualcomm.com>
----
- .../thermald/{thermald_2.5.10.bb => thermald_2.5.11.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-bsp/thermald/{thermald_2.5.10.bb => thermald_2.5.11.bb} (96%)
-
-diff --git a/meta-oe/recipes-bsp/thermald/thermald_2.5.10.bb b/meta-oe/recipes-bsp/thermald/thermald_2.5.11.bb
-similarity index 96%
-rename from meta-oe/recipes-bsp/thermald/thermald_2.5.10.bb
-rename to meta-oe/recipes-bsp/thermald/thermald_2.5.11.bb
-index 98310b4c5c..caec3d5610 100644
---- a/meta-oe/recipes-bsp/thermald/thermald_2.5.10.bb
-+++ b/meta-oe/recipes-bsp/thermald/thermald_2.5.11.bb
-@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ea8831610e926e2e469075b52bf08848"
- SRC_URI = "git://github.com/intel/thermal_daemon/;branch=master;protocol=https \
-            "
- 
--SRCREV = "88369b42ec523787081b9bf8811b364e2a3d5f2d"
-+SRCREV = "5269afcf3e021e4e1b672b4640a0358f4ae5821b"
- 
- inherit pkgconfig autotools systemd gtk-doc
- 
--- 
-2.25.1
-
+SGVsbG8sDQoNClRoYXQncyBob3cgTFRTIHJlbGVhc2VzIHdvcmsgaW4gTGludXggZGlzdHJpYnV0
+aW9ucy4NClZlcnNpb25zIGFyZSBub3QgYmVpbmcgdXBkYXRlZCwgb25seSBwYXRjaGVzIGFyZSBi
+ZWluZyBiYWNrcG9ydGVkLg0KWW91IGNhbiBkZWxpdmVyIHNwZHgvdmV4IGluZm9ybWF0aW9uIHRv
+IHlvdXIgdXNlcnMgdG8gaW5mb3JtIHRoZW0gYWJvdXQgcGF0Y2hlZCB2dWxuZXJhYmlsaXRpZXMu
+DQpJZiBMVFMgc3RyYXRlZ3kgaXMgbm90IHN1aXRhYmxlIGZvciB5b3UsIHBsZWFzZSB1cGRhdGUg
+dG8gbGF0ZXN0IFlvY3RvIHJlbGVhc2UuDQoNClNvbWUgYmFja2dyb3VuZCBpbmZvOg0KaHR0cHM6
+Ly93aWtpLnlvY3RvcHJvamVjdC5vcmcvd2lraS9TdGFibGVfUmVsZWFzZV9hbmRfTFRTDQpodHRw
+czovL3dpa2kueW9jdG9wcm9qZWN0Lm9yZy93aWtpL0xUU19CYWNrZ3JvdW5kDQoNClBldGVyDQoN
+Cj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgPG9wZW5lbWJlZGRlZC0NCj4gZGV2ZWxAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIEZBIHZpYSBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
+DQo+IFNlbnQ6IEZyaWRheSwgRmVicnVhcnkgMjcsIDIwMjYgMDo0Nw0KPiBUbzogb3BlbmVtYmVk
+ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogW29lXSBOZXQtc25t
+cCB1cGdyYWRlIHRvIDUuOS41DQo+IA0KPiBIaSwNCj4gDQo+IEkgd291bGQgbGlrZSB0byBrbm93
+IGlmIHRoZXJlIGlzIGEgcGxhbiB0byB1cGdyYWRlIG5ldC1zbm1wIHRvIDUuOS41Lg0KPiANCj4g
+SSBzZWUgdGhhdCB3ZSBiYWNrcG9ydGluZyBhbGwgdGhlIHZ1bG5lcmFiaWxpdGllcyBhbmQgaW1w
+b3J0YW50IGZpeGVzIHRvIDUuOS40IGluIExUUw0KPiBicmFuY2ggKHNjYXJ0aGdhcCkuDQo+IA0K
+PiBBcyBwZXIgTlZELCBpdCByZWNvbW1lbmRzIHVwZ3JhZGluZyAgdG8gNS45LjUvNS4xMC5wcmUy
+IHRvIGFkZHJlc3MgQ1ZFLTIwMjUtDQo+IDY4NjE1Lg0KPiANCj4gaHR0cHM6Ly9udmQubmlzdC5n
+b3YvdnVsbi9kZXRhaWwvQ1ZFLTIwMjUtNjg2MTUNCj4gDQo+IFNpbmNlIHZ1bG5lcmFibGUgdG9v
+bHMgcmVwb3J0LCBuZXQtc25tcCA1LjkuNCBpcyB2dWxuZXJhYmxlIHRvIENWRS0yMDI1LTY4NjE1
+LA0KPiBkZXNwaXRlIHRoZSBmaXggaXMgYmFja3BvcnRlZCB0byA1LjkuNCwgcmFpc2VzIGEgZmFs
+c2UgYWxhcm0gYW1vbmcgdXNlcnMuDQo+IA0KPiBJIHRoaW5rIGl0J3MgYmV0dGVyIHdlIHVwZ3Jh
+ZGUgTFRTIGJyYW5jaCBOZXRTTk1QIHRvIHZlcnNpb24gNS45LjUuDQo+IA0KPiANCj4gUmVnYXJk
+cywNCj4gRmVyb3ogQWhtZWQNCg==
 
