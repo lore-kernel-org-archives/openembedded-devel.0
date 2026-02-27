@@ -1,91 +1,120 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <hetpat@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CFA2FD9E20
-	for <webhook@archiver.kernel.org>; Thu, 26 Feb 2026 23:03:04 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.83242.1772146974116676439
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBF66FD9E39
+	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 05:10:58 +0000 (UTC)
+Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.88793.1772169050856776456
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Feb 2026 15:02:55 -0800
+ Thu, 26 Feb 2026 21:10:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm2 header.b=TE+CXB9b;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-2026022623025089cda0c02c0002073c-iqncb_@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026022623025089cda0c02c0002073c
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 27 Feb 2026 00:02:51 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=hdWu6maSaCtLBfP60Xun/krHpuXEX6IuVGjytoRUhj0=;
- b=TE+CXB9bij6Aqouty6LxdeB1Gvm2S6fhabX8soQ4KCoZIHZIDAlnt51XpXu9F2xB74CndT
- z/BUrCMJBMRql8crAjQDNKJ7JwkKUtLwj5LoXWUFUum4ph+3wsZ1/9zjY8j/1k+Ed6ylQAmY
- 5H7QURCdJ8ajl4FQ0bmflK2eKkqPMm/SPBVCGKkoQFa1D1InnA0sI4rkD/pZ2+wdD05s3mCA
- 4aLqpxRdJnGNY6VTJ7D0hlNjiAK+0bSQfhIeIZgpGMJYS6FofvtP197TnRLAU9+Jw3C2qdFI
- z8SXenpWPtCGaiYOQh1QIkcMJRTDhbv6YHzZCTaTVGlvJtofgSXGHCHQ==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=d/FuVyzh;
+ spf=pass (domain: cisco.com, ip: 173.37.142.95, mailfrom: hetpat@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=1371; q=dns/txt;
+  s=iport01; t=1772169050; x=1773378650;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Ruk9BRglijS9aBb90jkdZ4zB8kO+3yam7wIqkGbUQKk=;
+  b=d/FuVyzhdDPvnF9b1y2P/5jNPwI8hIoej7hWEW9GReJ6c+XFNY/Ldord
+   nSVUjUG+nZCaAD/uGoDFJKFNXOPvb/SwvGc9P9noUFiZqI44ziucXpbtA
+   KyB56CGB/pN6a8dEdfsWofGt2HiYl2Nt5r++g/lpnDSfu3iS++nNyAdUn
+   ErK5FNEqxN9XFHY1VQkpXxYaQuLnMRJjPy6hHDNOh2BatG9e/8PgElhJd
+   Zku9AlkWWSx2SvJcq/PZllgV0pFqRN6EMRjQXevyeJF4gAI61GEXELCRc
+   mVnhBhbmkkUzUGGkNdbP09Gvq0T0ev02BMF5U8VxJwcpKX5cE2/KjQs6f
+   w==;
+X-CSE-ConnectionGUID: XZFPaaFmQPa2W7nkP1IPmA==
+X-CSE-MsgGUID: RDqi87v3Qv+gqjKjUbvVVw==
+X-IPAS-Result: =?us-ascii?q?A0DqFwDtJqFp/4z/Ja1aHAEBATwBAQQEAQECAQEHAQGBZ?=
+ =?us-ascii?q?QKCRg9xX0JJk1oBgnCeHYF/DwEBAQ8UAi4NBAEBhEFGjSECJjQJDgECBAEBA?=
+ =?us-ascii?q?QEDAgMBAQEBAQEBAQEBAQsBAQUBAQECAQcFgQ4Thk8Nhl02AUYwXESDAgGCc?=
+ =?us-ascii?q?wIBEaZwgiyBAYR82yYBBQYUAYE4AYU7iBl0hHonGxuBcoR9gmECAhiBDYEGh?=
+ =?us-ascii?q?XcEgiKBDoF/kSRIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4XgQobBwWGC?=
+ =?us-ascii?q?A+IdHhugRqCHQMLGA1IESw3FBsEPm4HjXo/gjMBIRxRLIIspXShDgoog3SMH?=
+ =?us-ascii?q?pU6GjOqay6YWI4JlWdphGiBaDyBWXAVgyJSGQ+SIYUTwRQiNQI6AgcLAQEDC?=
+ =?us-ascii?q?ZFqgX0BAQ?=
+IronPort-Data: A9a23:lRtky6k1w2e7Cm+vyyfPhTno5gzXJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJOUDiOO62LNGqgfo8naIvl8khQ65bVzdRgGlFv/ik8H1tH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+ZS31GONgWYubDpOsfzb8nuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05Fb0q1N5+CE9Lz
+ MQRcg9SaBO73sOOxZvuH4GAhux7RCXqFJkUtnclyXTSCuwrBMiYBa7L/tRfmjw3g6iiH96HO
+ JFfMmUpNkmdJUQTYj/7C7pm9AusrnnybyVRtHqepLE85C7YywkZPL3FboWKKoTbHZ8P9qqej
+ ljq5mWpXQ9BDcLcxiOH0XCRjPHxozyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzBfCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:PKkKh611T7SLNZ9T2PjBPgqjBLkkLtp133Aq2lEZdPWaSKOlfq
+ eV7ZEmPHDP6Qr5NEtMpTniAtjjfZqjz/5ICOAqVN/INjUO01HHEGgN1+ffKkXbak7DHio379
+ YGT0C4Y+eAaWRHsQ==
+X-Talos-CUID: 9a23:w28onGC3+MJJwOv6ExlV2nYdE+4gS0XUlkiPJUyAUEdRTZTAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3AL7/oYw3TKzfNevAhzLDChjvKKzUj2Yi3CRBSj84?=
+ =?us-ascii?q?/pYqLLC5TOQqXkgqJXdpy?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.21,313,1763424000"; 
+   d="scan'208";a="677809022"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by alln-iport-8.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 27 Feb 2026 05:10:50 +0000
+Received: from sjc-ads-4197.cisco.com (sjc-ads-4197.cisco.com [171.70.54.218])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id D259918000601;
+	Fri, 27 Feb 2026 05:10:49 +0000 (GMT)
+Received: by sjc-ads-4197.cisco.com (Postfix, from userid 1847788)
+	id 79A4ECC1282; Thu, 26 Feb 2026 21:10:49 -0800 (PST)
+From: "Het Patel -X (hetpat - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hetpat@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] 7zip: upgrade 25.01 -> 26.00
-Date: Fri, 27 Feb 2026 00:02:49 +0100
-Message-Id: <20260226230249.2845169-1-peter.marko@siemens.com>
+Cc: xe-linux-external@cisco.com,
+	vchavda@cisco.com
+Subject: [oe] [meta-selinux] [PATCH v1] selinux_common: Correct `CVE_PRODUCT` value
+Date: Thu, 26 Feb 2026 21:10:48 -0800
+Message-Id: <20260227051048.3950-1-hetpat@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+X-Outbound-SMTP-Client: 171.70.54.218, sjc-ads-4197.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Feb 2026 23:03:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124689
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 05:10:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124691
 
-From: Peter Marko <peter.marko@siemens.com>
+From: Het Patel <hetpat@cisco.com>
 
-Release notes [1]:
-* improved code for ZIP, CPIO, RAR, UFD, QCOW, Compound.
-* 7-Zip File Manager: improved sorting order of the file list. It uses
-  file name as secondary sorting key.
-* 7-Zip File Manager: improved Benchmark to support systems with more
-  than 64 CPU threads.
-* the bug was fixed: 7-Zip could not correctly extract TAR archives
-  containing sparse files.
-* some bugs were fixed.
+The current `CVE_PRODUCT` value (`kernel:selinux`) is incorrect for
+this recipe.
 
-License-Update: copyright years refreshed
+Root Cause Analysis:
+`CVE-2020-10751` is reported against the `kernel:selinux` CPE, and
+its fix (https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=fb73974172ff)
+applies to the Linux kernel source tree. This change is unrelated to
+the source code used by this recipe.
 
-[1] https://github.com/ip7z/7zip/releases/tag/26.00
+Change Justification:
+`CVE-2021-36084` is reported against the `selinux_project:selinux`
+CPE. Its fix (https://github.com/SELinuxProject/selinux/commit/f34d3d30c832)
+directly applies to the SELinux source repository used by this recipe,
+confirming the vulnerability is applicable to this product.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Based on this analysis, `CVE_PRODUCT` has been updated to the
+correct value: `selinux_project:selinux`
+
+Signed-off-by: Het Patel <hetpat@cisco.com>
 ---
- .../recipes-extended/7zip/{7zip_25.01.bb => 7zip_26.00.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/7zip/{7zip_25.01.bb => 7zip_26.00.bb} (94%)
+ recipes-security/selinux/selinux_common.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/7zip/7zip_25.01.bb b/meta-oe/recipes-extended/7zip/7zip_26.00.bb
-similarity index 94%
-rename from meta-oe/recipes-extended/7zip/7zip_25.01.bb
-rename to meta-oe/recipes-extended/7zip/7zip_26.00.bb
-index f4ea6506e1..85219b5052 100644
---- a/meta-oe/recipes-extended/7zip/7zip_25.01.bb
-+++ b/meta-oe/recipes-extended/7zip/7zip_26.00.bb
-@@ -3,16 +3,16 @@ HOMEPAGE = "http://www.7-zip.org/"
- LICENSE = "LGPL-2.1-or-later & unRAR & PD & BSD-2-Clause & BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
-                     file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
--                    file://DOC/License.txt;md5=e80f9280df93aa8da95cac449f9fd115 \
-+                    file://DOC/License.txt;md5=a4ae6e492874f0008c7600c2ef80daa4 \
-                     "
+diff --git a/recipes-security/selinux/selinux_common.inc b/recipes-security/selinux/selinux_common.inc
+index a7f704d..aaf0b90 100644
+--- a/recipes-security/selinux/selinux_common.inc
++++ b/recipes-security/selinux/selinux_common.inc
+@@ -20,4 +20,4 @@ do_install() {
+         SHLIBDIR="${base_libdir}"
+ }
  
- CVE_PRODUCT = "7-zip 7zip"
--SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main \
-+SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
-            file://0001-support-yocto-cross-compiling.patch \
-            file://0001-Remove-treating-warning-as-errors.patch \
-            file://7z_wrapper.sh \
-            "
--SRCREV = "5e96a8279489832924056b1fa82f29d5837c9469"
-+SRCREV = "839151eaaad24771892afaae6bac690e31e58384"
- 
- UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
- 
+-CVE_PRODUCT ?= "kernel:selinux"
++CVE_PRODUCT ?= "selinux_project:selinux"
 
