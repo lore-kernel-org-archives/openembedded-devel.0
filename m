@@ -2,134 +2,91 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF102FD5323
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C03D0FD533E
 	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 12:03:31 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.94118.1772193806837559680
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.94126.1772193810501421324
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 04:03:27 -0800
+ Fri, 27 Feb 2026 04:03:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BFaskl6Q;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4398ebdf520so1921240f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 04:03:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GxOJrIGK;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-4398dd671daso2145509f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 04:03:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772193805; x=1772798605; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BTe8Ire8CFT/w/EU8c4JutNQego3CNpwH8fillQdhAM=;
-        b=BFaskl6Q+R3Cuxg6iw9TRChbiZwWoN2sFjqZXW48AVeJp2rDTENnIPDGZsRo1Dqw9q
-         Pn11/z7HtlWkwLBp/8WU7ytHux2rB2eS8H4ZPEtFcEIoi6/e4MeAEVJzHHeV/RilmNLt
-         /UU69S51AGMfPFrmr8p1ZjQCu2zjrdZlz1M5I5etSjfu4cjGSO08sKxnxue5WeHAVv/n
-         Myt1XPxyjf5iU1oq9nCgqbFPKjZUOoJ7oZ6wH9BdwZebgbJMfMNM4hwSEkwxYSoBG5SY
-         r0TT/R49p7zGKovo7eeM2O2MUR3L+1o/w/DOLXKQo27xv3DbTgA2LZgK5PkbZw0s1PVI
-         d57g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772193805; x=1772798605;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1772193809; x=1772798609; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=BTe8Ire8CFT/w/EU8c4JutNQego3CNpwH8fillQdhAM=;
-        b=DsGSbfDMKudi/4U9XmHK9AzXKJmxQ2+oThKzFW5Zf8FxeqevN5ki/AvPQCM4yvGC0R
-         Ziz03N9x6z2rtEpuZlXZ6Xe4CTkQ7IEkR4iUDkHeOUnwVbXI/a/AiLEXeTIqsrK0nk56
-         LCj1KyuWpEVdyryMRgTX8JeHb2QpnTJ7tjw39cdY5Tp5Qgwg5jQSBsB4V7Is+i7TzsSq
-         eRf4OHlkv625wiL+kzEha+kRiuOgUd6qAzCuBM3t57UYSPq0snJm7oQMpUtM/SliM8RC
-         8TlQZsJNdJtzbgurh560BYb1S7aQ9ux6hec+dvwq5WY+9K29A79dw4jumG1cR0FFogoF
-         ZqmA==
-X-Gm-Message-State: AOJu0YyzEK93/HcQpN+zfOlHqvieYnhMpdLY0q1mnwb8dIKOJESCc6tq
-	hJCI0i8f4K7Nw+31UINcmoizogKG2bk7hgCe0EcMckXv77COedMPs9onSJB/6w==
-X-Gm-Gg: ATEYQzwB4Q/EBxcIh29jgHYKLusWVAEJB4JDqJBAJXCR1GJrsnrZI5tEP+Z5WlvUJYI
-	TcRF+3BI7Iog0fW6qetTUwe7sYr4j/q9ECOAWOgSxhOlEUuzcAbGBZ0uSs4Fsi9yfvfdE9OS3kc
-	bsVoe6ev5/HeloFWRqlL5gqZaBLMIb86F9gkPnxo4zwQ/dlME7zIF4WpICgbd+SvvvnNx4dtn+I
-	agFfmiQCkdjzbKzP8XOn+v6+FkGWKZ4jfBqa7GPr8+CsnloN/wOHZeD5FAyqQhVTIg1kLYMMUUk
-	Dr2hzNyhdKKfg5guleQwTMLMjD0meHDXaiwohYY43BZBNSVjTERYmqDHXRIjf3Ba0ZhzMRc8MHX
-	e9htgFVrNWzTTxJCiL4qWFPOvUF+r/AeC+y/8Bg/0dDvA9cEdLkbE5IWkO2azLzfwZ2TbRsU0sf
-	plgvqi13g3MdmXQJTxskWY
-X-Received: by 2002:a05:6000:2013:b0:439:8f6f:1b32 with SMTP id ffacd0b85a97d-439971fca67mr12596942f8f.25.1772193804791;
-        Fri, 27 Feb 2026 04:03:24 -0800 (PST)
+        bh=piqJAMniF2Byn9dP172F7pbT8NBoZFP5ph72uMWjtkc=;
+        b=GxOJrIGKzVBely7P+dhX4mMPDbpequkrKLIUAo9PA5Z5pfI++A3gxYm9Gqrpj4mLf0
+         QlkB8ufmX83gc9Pg4xXLzEc0i31/j0xj2rzLd3L/afN7XToVRwblYfJZGdMVrF7dg4kS
+         CD72DfqtGL47FJXlmA3BAJqdul+LNa+KByt4icB4atfiSnVQaLobfauM+nNct2GGX10T
+         u2T0A82dHvlxgUVwo5hwYvrGWrOXPwJgouLfGt/RUuAKZ7xTLNGLqXk1dxMz5bUDjRPa
+         c58/1H5xTWkBiqmHmhW+Yq/145/COXResw19N+nEAeqpxaFZ/Fxr1eCt1vDf26g30VBo
+         B0Xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772193809; x=1772798609;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=piqJAMniF2Byn9dP172F7pbT8NBoZFP5ph72uMWjtkc=;
+        b=pWlh4e7IVb4ALdl0/9zl9u4FhLkgvj1WGrtIQ6heg2cA7pIL93n0PdHuTyj4jwwA/+
+         Nr+R43F2MCC1ScoBfkhtNsKzNicvP6emPJfjPF6mh6qu8PdEtecvKCXcB4z2OHQb4DND
+         aTb+vUcjAOSbF9Qvo6pU12bavSZ7tE3sMjUTaADgUQuoEcsBDdpFbC3KoSGjOoB3B9LN
+         vKbp/BuiTNImqAqWMspbDNE3J3UitjBoDqC/7sunqFUHa86OuuIsB5itCaisIBpLUcV1
+         tu08PtNhII9Go1lHyZj2Z0ulYGAasfsInG/oSuaBRo8D8RkvxR487Yz0c06epfRRENhS
+         +ytQ==
+X-Gm-Message-State: AOJu0YxX/MR/843VUUfwo7Zdwr7BOlXPY1wojMtKYFPTLhDMbxfaa4c1
+	x3Ln/+3gotk4CXDaJiMyR4Xl4dh99FpnD/6DgHyZDdu90EKYFDXwIJXEowkTug==
+X-Gm-Gg: ATEYQzzd94Kz7W7gX0cbwvw6FcjUGK3XbxVpQilEngvWNREugiiTMHdIcauDO6vGJj5
+	zp3kZ1PomUaLxbuyRwdjLHbKsbXRGBTf056yfd+ZVyLOkIXqusBQ5sDmsc6J4e/LpH9gJnBpfFe
+	stqnGkQ1lzDAjXcNxu4Wp1+iNlNTrYA6rKbU99wpg5GXX8V4UdHlHMgsUXtbKcAIMjCRGTY1BaS
+	U+w4cI248wkN22FrkLM6N6p3Ed5B0CBdK/Os6KztUDMdVAbJV+cK2eNVgStYQnXksag9WhjYZK5
+	LgCteZOzpP4COW3H3u9lWtLvepLQKm+7ft7HgFL4QM5/LCCGY7fIBOnerhYhH/YiwJHEqOBDOV9
+	vdCWqp0ksTSS7Dch1U/bBLu8ofd1mmRJhFyiotjHok49oEKX9yOBzP1/cX5k78fqCRNuQLXJtTp
+	UsdI/53jnE7MIVACKozsNmfsSkkiJrzBY=
+X-Received: by 2002:a05:6000:2f86:b0:437:677b:4a24 with SMTP id ffacd0b85a97d-4399de14bcfmr4287093f8f.15.1772193808350;
+        Fri, 27 Feb 2026 04:03:28 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4399c70ff6esm9829566f8f.12.2026.02.27.04.03.23
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4399c70ff6esm9829566f8f.12.2026.02.27.04.03.27
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Feb 2026 04:03:23 -0800 (PST)
+        Fri, 27 Feb 2026 04:03:27 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][kirkstone][PATCH 1/5] webmin: patch CVE-2025-67738
-Date: Fri, 27 Feb 2026 13:03:19 +0100
-Message-ID: <20260227120323.333696-1-skandigraun@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 5/5] python3-werkzeug: ignore CVE-2026-27199
+Date: Fri, 27 Feb 2026 13:03:23 +0100
+Message-ID: <20260227120323.333696-5-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260227120323.333696-1-skandigraun@gmail.com>
+References: <20260227120323.333696-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 12:03:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124753
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124756
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-67738
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-27199
 
-Backport the patch referenced by the NVD advisory.
+The vulnerability affects only the application on Windows operating system.
+Due to this, ignore this CVE.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../webmin/files/CVE-2025-67738.patch         | 37 +++++++++++++++++++
- .../recipes-webadmin/webmin/webmin_1.850.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/CVE-2025-67738.patch
+ meta-python/recipes-devtools/python/python3-werkzeug_2.1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/CVE-2025-67738.patch b/meta-webserver/recipes-webadmin/webmin/files/CVE-2025-67738.patch
-new file mode 100644
-index 0000000000..3fb71fec37
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/webmin/files/CVE-2025-67738.patch
-@@ -0,0 +1,37 @@
-+From 21d9cbdc2b719e9d1349f14e03b5a041b476cce5 Mon Sep 17 00:00:00 2001
-+From: Jamie Cameron <jcameron@webmin.com>
-+Date: Wed, 29 Oct 2025 22:02:29 -0700
-+Subject: [PATCH] Fix quoting of args
-+
-+CVE: CVE-2025-67738
-+Upstream-Status: Backport [https://github.com/webmin/webmin/commit/1a52bf4d72f9da6d79250c66e51f41c6f5b880ee]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ squid/cachemgr.cgi | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/squid/cachemgr.cgi b/squid/cachemgr.cgi
-+index b75f9427..41386d35 100755
-+--- a/squid/cachemgr.cgi
-++++ b/squid/cachemgr.cgi
-+@@ -12,6 +12,7 @@ my ($mgr) = glob($config{'cachemgr_path'});
-+ if (&has_command($mgr)) {
-+ 	$| = 1;
-+ 	my $temp;
-++	my $args = join(" ", map { quotemeta($_) } @ARGV);
-+ 	if ($ENV{'REQUEST_METHOD'} eq 'POST') {
-+ 		# Deal with POST data
-+ 		my $post;
-+@@ -21,10 +22,10 @@ if (&has_command($mgr)) {
-+ 		&open_tempfile($fh, ">$temp", 0, 1);
-+ 		&print_tempfile($fh, $post);
-+ 		&close_tempfile($fh);
-+-		open(MGR, "$mgr ".join(" ", @ARGV)." <$temp |");
-++		open(MGR, "$mgr $args <$temp |");
-+ 		}
-+ 	else {
-+-		open(MGR, "$mgr ".join(" ", @ARGV)." |");
-++		open(MGR, "$mgr $args |");
-+ 		}
-+ 	while(<MGR>) {
-+ 		print;
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-index 78ab19601f..a03f44437d 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
-@@ -24,6 +24,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://0001-Object-names-cannot-contact-special-characters.patch \
-            file://0001-Foreign-module-may-need-a-check.patch \
-            file://0001-Add-missing-permissions-check-when-saving-allowed-cr.patch \
-+           file://CVE-2025-67738.patch \
-            "
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_2.1.2.bb b/meta-python/recipes-devtools/python/python3-werkzeug_2.1.2.bb
+index 3c50d19173..9ea345c46a 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_2.1.2.bb
+@@ -45,4 +45,4 @@ RDEPENDS:${PN} += " \
+ "
  
- SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
+ # Windows-only vulnerabilities
+-CVE_CHECK_IGNORE = "CVE-2024-49766 CVE-2025-66221 CVE-2026-21860"
++CVE_CHECK_IGNORE = "CVE-2024-49766 CVE-2025-66221 CVE-2026-21860 CVE-2026-27199"
 
