@@ -1,193 +1,117 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <hetpat@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBDA7FD5322
-	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 09:42:09 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.92002.1772185328298117013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D82F3FD5326
+	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 09:43:09 +0000 (UTC)
+Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.91722.1772185385343680324
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 01:42:08 -0800
+ Fri, 27 Feb 2026 01:43:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ij1hqcDi;
- spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-43767807cf3so1231354f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 01:42:08 -0800 (PST)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=ismt+UCi;
+ spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: hetpat@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772185327; x=1772790127; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=ngNIwXQuE6wgOuJ+oMnCFx2B8HPJs/ZDVOM84Hb0ff8=;
-        b=ij1hqcDip5BpFWhd3Dxw4Gnb00cJ8de1e5pSL2PO27rnc9W61okXdf1qQHfVcqonzR
-         3+q4zGcCYPAFvHOCHxJh7LtypS/R6l1wNHAmE806D1dnQI8Tj/5QpK42hQwSAnRe3vVp
-         jPvBemst0JONtRoGOoQIMmIvvhTjHcQnm5rDb+/7uQ1O4qn9oJJA+uFookLtVy2dt3Xf
-         EwGhhPfhW6N/iDGVsmf1savMetRecmZZZBjSZ++4+iy+i9pFR6OtdCT1Mlx647Tvs8jT
-         qNHjHw0YxifVjsrAZ8HwxEsE29ApuPrTDPmGLapVmiUtfqo/LvMb54oxGwG/Fx2zmwUd
-         B1IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772185327; x=1772790127;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ngNIwXQuE6wgOuJ+oMnCFx2B8HPJs/ZDVOM84Hb0ff8=;
-        b=Hn2f8ml8McwDWZFAOKJecztqA+lYUuN4wp0IXeDxQ9xv+ilVVymJtUbu30h+csnMOj
-         cvHvapEiXkTY67BlWuwSDlHFPW94TnWk2a5jF5KJFsEnw1nqpjiE3cGZdbPy6BQHcOb1
-         L04FOj9nw93Auh4tQHGPH1GAa/qzw1SxX3xXUhMntP6VF1MnbVhBDz2s4NjtYwsQkbBQ
-         zXkjlLXKqRrx/zIHI0o4bOsksGnIsBqHpzFGz+4BQTpz8Upv7HnxVCWQnzA1FOh+Xm1t
-         x52U/amuVr7YXnRB2nKiYLaaLxUVHxdQ/lly6+lVB27rC/EtMsW3a3XPZkIYYd6ktf/Q
-         rkpw==
-X-Forwarded-Encrypted: i=1; AJvYcCWMD+euNqucI1OosnQyYwpS1V29bxowNywPzGk+KmCu3cmpXuOz6jbaYrWQ6ivQulOdIUs23b+cA9aDaAMUp1lx1n8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxhgCahhRWqMttMww8jedeXB09tcbV896HVI8gmHB/dS419ffJU
-	bZow9p11kAh5JDWnmB5GFsCBm67raWYK2XYLvEQ5ZQuy/qmS5TuKbalI
-X-Gm-Gg: ATEYQzyGI11Js7GrvJbiZB0xqt+ORhb5WcbFWPzJwoiozk8m976qe1K/ixEpjzfHStW
-	Up+oZXbUebYmfFL/ElJucb6so+/zIiU5qSbPB29chG4LTjVHoNQ2n7PVnrNngFIceQKR7dmFdgb
-	97WwTA4xYRtzGaavOL0/usHQh9EwugkkNoxCWljlRsRZtRy9McAZSaAbSVlszdTndfmdbSoDptJ
-	B2vY+YaLvVfuSaZ4FvX2zV+uM21sVoOv5sXBaYRFtoaHOwS8JYIjA98mtLMSmPdnagnqGU01ChC
-	9QoY1ykgx4HNLk+xk3TX6g+W4LLna+DlQwnGaO2HgvNIRsPgCmeFbAFXS9j54sTwGZdwVfNA+vZ
-	Dsn78G5IZ4WA+WOOotmA/SbECCNOsbsOCLBtYlS3WcCDB4yxPY8T8xAA4F4jsv+2F7ZiBj37NIo
-	lt+OTBjE3Kqdnt4ixpxUGUfTokGMqfBuo=
-X-Received: by 2002:a05:6000:178a:b0:435:9e81:105a with SMTP id ffacd0b85a97d-4399ddf7b7fmr2916511f8f.20.1772185326329;
-        Fri, 27 Feb 2026 01:42:06 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4399c70f8casm9976767f8f.14.2026.02.27.01.42.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 27 Feb 2026 01:42:05 -0800 (PST)
-Message-ID: <d7a38b94-3863-45e5-951d-47eaa33a18d3@gmail.com>
-Date: Fri, 27 Feb 2026 10:42:05 +0100
+  d=cisco.com; i=@cisco.com; l=1430; q=dns/txt;
+  s=iport01; t=1772185385; x=1773394985;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=VdJVAu0fmVkT/1FEBHBdqW/8nwAOVNTe/4wkA9i3HIQ=;
+  b=ismt+UCij94Q8Tqra8ny5Aj8cWM+DsDwuWyZBg7UevEB/hxmkUsCnuD1
+   aGdPZNSjerdZGGN/qxzy0TZyMzZJwMEQFTUioKsMi98gcXSqGpsIkzYGm
+   slHnNUt6zbNmijWXrq+k3WH/zqV5aCgruFF1/wcLbvDudxxHcJsl5T5pd
+   luNkgV3CluK0rPGO9f6yXeSfFidMvSRB8fCEtRzic0ztY19F5ENG0OfFx
+   RfdM7KioAWoGVeD2BpX/rZKrS+kYEpIcioEUvoGzV0uJ5LyoQ7aZZGOxN
+   FTA0o+9FeNCwZg6cGkm0Bbe2tYtBUIXgYljlNXDgw9eem/QflkwAI39N/
+   Q==;
+X-CSE-ConnectionGUID: hvItyCjvT4Sb15sq6BEF6A==
+X-CSE-MsgGUID: tWXuXhP1Q++txNu5y5gBpg==
+X-IPAS-Result: =?us-ascii?q?A0CsCACYZqFp/43/Ja1aglmCSA9xX0JJk1oBoQ2Bfw8BA?=
+ =?us-ascii?q?QEPRA0EAQGFB40hAiY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4ZPDYZdNgEYAS0wXESDAgGCcwIBEaYmgiyBAYMoAYFT2yYBCxQBg?=
+ =?us-ascii?q?TiFPIgZdIR6JxsbgXKEfYJhAQMYghOFdwSCIoEOgX+LDIYLSIEeA1ksAVUTD?=
+ =?us-ascii?q?QoLBwWBZgM1EioVbjIdgSM+F4ELGwcFhXwPiHR2boETghwDCxgNSBEsNxQbB?=
+ =?us-ascii?q?D5uB41uP4I0UzsslhWPaqMvCiiDdIwelToaM6prLphYjgmWUIRogWg8OQ2BA?=
+ =?us-ascii?q?QsHcBU7gmcJSRkPjl+FQcQDQzUCOgIHCwEBAwmTZwEB?=
+IronPort-Data: A9a23:4AFHkKM9djxJyKLvrR3zlsFynXyQoLVcMsEvi/4bfWQNrUol1TFRm
+ GNODTvSM6zcNmfyKo93YIq+8kpXvpKHmtJmHXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
+ ykmQoCeaphyFTmE+kvF3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVrlV
+ e/a+ZWFZgf/gWAsaAr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQapVUBOOzW
+ 9HYx7i/+G7Dlz91Yj9yuu+mGqGiaue60Tmm0hK6aYD76vRxjnBaPpIACRYpQRw/ZwNlMDxG4
+ I4lWZSYEW/FN0BX8QgXe0Ew/ypWZcWq9FJbSJSymZT78qHIT5fj6/VwLV0nFo8GxrpMCzgT7
+ uVGAh0jMDnW0opawJrjIgVtrt4oIM+uOMYUvWttiGmFS/0nWpvEBa7N4Le03h9p2ZsIRqmYP
+ ZdEL2MzNXwsYDUXUrsTIJIzgP+hmlH0ciZTrxSeoq9fD237klwrjee2aYCOEjCMbdlqrluop
+ lqfxie6HgE8KYGOlDWv6n3504cjmgu+Aur+DoaQ8eZnhlCWzGEfBBAaEFe2v/S9okq/QM5Eb
+ UsM9ywjqKI/+ECmQp/6RRLQnZKflgQXV9wVF6gx7xuAj/KIpQ2YHWMDCDVGbbTKqfMLeNDj7
+ XfR9/uBONClmOH9pa61nltMkQ6PBA==
+IronPort-HdrOrdr: A9a23:vA2VhqF+1l2Sq3Y1pLqE48eALOsnbusQ8zAXPo5KJiC9Ffbo8v
+ xG88576faZslsssRIb6LK90cu7IU80nKQdieJ6AV7IZmfbUQWTQL2KlbGSoAEJ30bFh4lgPW
+ AKSdkbNOHN
+X-Talos-CUID: =?us-ascii?q?9a23=3AOj7Tl2r1XZ6grZm46bP09ZzmUcA7U2HM53XOHxO?=
+ =?us-ascii?q?DAz80U6TLY3K+pooxxg=3D=3D?=
+X-Talos-MUID: 9a23:BmtNNwpApEy74608jj4ezy1dBNpY45z3MQNOjYUgppSVaCNaIzjI2Q==
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.21,313,1763424000"; 
+   d="scan'208";a="682573123"
+Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
+  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 27 Feb 2026 09:43:04 +0000
+Received: from sjc-ads-4197.cisco.com (sjc-ads-4197.cisco.com [171.70.54.218])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id 64A5C1800019D;
+	Fri, 27 Feb 2026 09:43:04 +0000 (GMT)
+Received: by sjc-ads-4197.cisco.com (Postfix, from userid 1847788)
+	id 0DDF8CC1282; Fri, 27 Feb 2026 01:43:04 -0800 (PST)
+From: "Het Patel -X (hetpat - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hetpat@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: xe-linux-external@cisco.com,
+	vchavda@cisco.com
+Subject: [oe] [meta-oe] [PATCH v2] [PATCH] googletest: set CVE_PRODUCT to align with NVD CPE
+Date: Fri, 27 Feb 2026 09:43:02 +0000
+Message-ID: <20260227094302.60264-1-hetpat@cisco.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe][meta-filesystems][PATCH] btrfsmaintenance: upgrade 0.5 ->
- 0.5.2
-To: liuyd.fnst@fujitsu.com, openembedded-devel@lists.openembedded.org
-References: <20260227092309.1381-1-liuyd.fnst@fujitsu.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260227092309.1381-1-liuyd.fnst@fujitsu.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 171.70.54.218, sjc-ads-4197.cisco.com
+X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 09:42:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124698
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 09:43:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124699
 
+From: Het Patel <hetpat@cisco.com>
 
+Set CVE_PRODUCT to "google:google_test" to match the product name
+defined in the NVD CPE database for Googletest.
 
-On 2/27/26 10:23, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
-> 1. Changelog:
->     fix syntax error in run_task, preventing jobs to start
->     start scrub jobs sequentially if RAID5 or RAID6 data profile is found
->     fix btrfsmaintenance-refresh.service description
->
-> 2. Update 0001-change-sysconfig-path-to-etc-default.patch for 0.5.2
->
-> Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-> ---
->  ...nance_0.5.bb => btrfsmaintenance_0.5.2.bb} |  4 +-
->  ...change-sysconfig-path-to-etc-default.patch | 39 ++++++++++---------
->  2 files changed, 23 insertions(+), 20 deletions(-)
->  rename meta-filesystems/recipes-utils/btrfsmaintenance/{btrfsmaintenance_0.5.bb => btrfsmaintenance_0.5.2.bb} (96%)
->
-> diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-> similarity index 96%
-> rename from meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
-> rename to meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-> index 645e38ca49..6722b63c10 100644
-> --- a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
-> +++ b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-> @@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
->  
->  SECTION = "base"
->  
-> -SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https \
-> +SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https;tag=v${PV} \
->      file://0001-change-sysconfig-path-to-etc-default.patch \
->      file://0002-add-WantedBy-directive-to-btrfsmaintenance-refresh.s.patch \
->  "
-> -SRCREV = "be42cb6267055d125994abd6927cf3a26deab74c"
-> +SRCREV = "beb9e2d166cbd856297fe8d28e89e8b36961a723"
->  
->  UPSTREAM_CHECK_URI = "https://github.com/kdave/${BPN}/tags"
->  UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
-> diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-> index d425206f0e..eeb64b29b0 100644
-> --- a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-> +++ b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-> @@ -1,7 +1,7 @@
-> -From b49dbe17e0d9ae463e5a34e6991aa2d3c70d2fb1 Mon Sep 17 00:00:00 2001
-> -From: Claudius Heine <ch@denx.de>
-> -Date: Wed, 11 May 2022 14:33:13 +0200
-> -Subject: [PATCH] change sysconfig path to /etc/default
-> +From 5354785858fb990e1ba863c41786be5534ef869f Mon Sep 17 00:00:00 2001
-> +From: Wang Mingyu <wangmy@fujitsu.com>
-> +Date: Thu, 26 Feb 2026 10:15:33 +0000
-> +Subject: [PATCH] [PATCH] change sysconfig path to /etc/default
->  
->  OE uses /etc/default for service configuration, not /etc/sysconfig which
->  is used by SUSE and RedHat based distributions.
-> @@ -11,37 +11,40 @@ Change the files accordingly
->  Upstream-Status: Inappropriate [OE specific]
->  
->  Signed-off-by: Claudius Heine <ch@denx.de>
-> +
-> +Update for 0.5.2
-> +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
->  ---
-> - btrfsmaintenance-refresh.path    | 4 ++--
-> - btrfsmaintenance-refresh.service | 2 +-
-> - 2 files changed, 3 insertions(+), 3 deletions(-)
-> + btrfsmaintenance-refresh.path    | 2 ++
-> + btrfsmaintenance-refresh.service | 1 +
-> + 2 files changed, 3 insertions(+)
->  
->  diff --git a/btrfsmaintenance-refresh.path b/btrfsmaintenance-refresh.path
-> -index d56ad11..f0b4132 100644
-> +index d56ad11..8e4fa18 100644
->  --- a/btrfsmaintenance-refresh.path
->  +++ b/btrfsmaintenance-refresh.path
-> -@@ -1,8 +1,8 @@
-> +@@ -1,8 +1,10 @@
->   [Unit]
-> --Description=Watch /etc/sysconfig/btrfsmaintenance
-> + Description=Watch /etc/sysconfig/btrfsmaintenance
->  +Description=Watch /etc/default/btrfsmaintenance
->   
->   [Path]
-> --PathChanged=/etc/sysconfig/btrfsmaintenance
-> + PathChanged=/etc/sysconfig/btrfsmaintenance
->  +PathChanged=/etc/default/btrfsmaintenance
->   
->   [Install]
->   WantedBy=multi-user.target
->  diff --git a/btrfsmaintenance-refresh.service b/btrfsmaintenance-refresh.service
-> -index 4ed1eb4..d6225a6 100644
-> +index 19e51c0..e3984d7 100644
->  --- a/btrfsmaintenance-refresh.service
->  +++ b/btrfsmaintenance-refresh.service
-> -@@ -1,5 +1,5 @@
-> +@@ -1,5 +1,6 @@
->   [Unit]
-> --Description=Update cron periods from /etc/sysconfig/btrfsmaintenance
-> -+Description=Update cron periods from /etc/default/btrfsmaintenance
-> + Description=Configure systemd timer schedule according to /etc/sysconfig/btrfsmaintenance
-> ++Description=Configure systemd timer schedule according to /etc/default/btrfsmaintenance
-> + Documentation="file:/usr/share/doc/btrfsmaintenance/README.man"
-> + Documentation="file:/usr/share/doc/packages/btrfsmaintenance/README.man"
->   
-> - [Service]
-> - ExecStart=/usr/share/btrfsmaintenance/btrfsmaintenance-refresh-cron.sh systemd-timer
->  -- 
-> -2.33.3
-> +2.43.0
->  
->
+Reference CPE:
+  cpe:2.3:a:google:google_test
+  https://nvd.nist.gov/products/cpe/detail/5806549A-1DCE-4225-80C6-7099B53A0F77?namingFormat=2.3
 
-Just for confirmation, does this patch change intended the way they
-looks now?
-Previously these patches changed existing lines. Now the original lines
-stay in place, and the new lines added as extra - so for example the
-"Description" is duplicated with the new version.
+Full list of available CPEs for google_test:
+  https://nvd.nist.gov/products/cpe/search/results?namingFormat=2.3&keyword=google_test
 
+Currently, no CVEs are reported for Googletest. However, the source code
+is already mapped to this CPE in NVD. Defining CVE_PRODUCT ensures that
+future CVEs reported against this CPE will be correctly detected and
+attributed during CVE checking.
+
+Signed-off-by: Het Patel <hetpat@cisco.com>
+---
+ meta-oe/recipes-test/googletest/googletest_1.17.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb b/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
+index c8ed80053d..242f0ac7da 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
+@@ -35,3 +35,6 @@ do_configure:prepend() {
+     # there isn't python in HOSTTOOLS so "env python" fails
+     sed -i 's@^#!/usr/bin/env python$@#!/usr/bin/env python3@g' ${S}/googlemock/test/*py ${S}/googletest/test/*py
+ }
++
++# Add CVE_PRODUCT to match the NVD CPE product name
++CVE_PRODUCT = "google:google_test"
 
