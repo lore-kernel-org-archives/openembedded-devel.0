@@ -2,54 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53587FD7F71
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C924FD7F6F
 	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 10:15:00 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.92457.1772187293125646259
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.92460.1772187298658954197
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 02:14:53 -0800
+ Fri, 27 Feb 2026 02:14:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=k39otYZr;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sIdecwhD;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772187293; x=1803723293;
+  t=1772187297; x=1803723297;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=i/FB5Jw+e1uMxxyeUb8tDM+SFiTymT6E0rJL01MFvX0=;
-  b=k39otYZrsWOfyls7euE8+oxwpCTOBM3uj6yk7sy/pnUljlibK7xy8vbl
-   LKl79GunUj0COTyjHVLM1g5Ut4gnzO9ej4tkQXaE4NWBATpPdLzEd9pWc
-   DvkEReimfTjR+QjJjNe4rM31DDWrkEOoP1ftg7SE6BxfQ466sbnDAbseF
-   06UARop5WFl/NDqrIVlI+2DCG0L6ItFFJywhAdveq+FJ4S38Y6gL5DaLE
-   iMIQw4AE2GoS8NKuNna3bvi4wDsdJpktghSon7n2/JD9s8sZle6NO1Mgb
-   RQae85qSMD1uu5FtIj40/MVm7TgZk7acwJ1RsIBXIaII6okII3C3rT+NL
-   Q==;
-X-CSE-ConnectionGUID: LoF3aWkMTPKignv9ZyL2zA==
-X-CSE-MsgGUID: 099qLhzbTXy42af0kxyWTw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11713"; a="230730666"
+  bh=cpCv9J+KwyB8iI5Eg8lo2ZDkBQVnxhJbfoJ8xRCsdaA=;
+  b=sIdecwhDbbDIbvGbaEBwdwQdUr7CiHD4auyfDFpuw+2A7h6mmESI1BZ7
+   cy2ZeLi2L3IxTicNu//N33eYndJEtVUocDhugcEheDBXje3Pg2N3JKRWk
+   3QTncDZSedGmuV9vfbAqEkhx4GOWPlk/DJon4sz78g65VrYHHcUay/GWA
+   DVmmnMRDP/Wc/L40Etuu+0EcwDdhSbWWIBvI967A2c/bh6vbOAeFSXz0R
+   ksyLhETSxt5VoIGMtEkPcgF7VB/xThePQRD+gRZ2W6yPT1GY7IzVsVeU4
+   1PbxiJ6W1EzWPl0Sh58Vdw782JWlxWoPQaB+7fxshRFftFfzkXbL6cLl9
+   A==;
+X-CSE-ConnectionGUID: 0On7zWbaT16dZeGLjEh+ng==
+X-CSE-MsgGUID: XZippWV9Q7WMKJaEufrLcQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11713"; a="231299989"
 X-IronPort-AV: E=Sophos;i="6.21,313,1763391600"; 
-   d="scan'208";a="230730666"
+   d="scan'208";a="231299989"
 Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id AD9761000340
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:14:51 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 268D71000347
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:14:57 +0000 (UTC)
 Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 63B831009E1F
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:14:51 +0000 (UTC)
+	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id CD6391005940
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:14:56 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 79E6818005A1;
-	Fri, 27 Feb 2026 10:14:48 +0000 (UTC)
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 0670E180059F;
+	Fri, 27 Feb 2026 10:14:53 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 27/52] python3-pystemd: upgrade 0.15.1 -> 0.15.3
-Date: Fri, 27 Feb 2026 18:13:02 +0800
-Message-ID: <20260227101327.1432-27-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 29/52] python3-regex: upgrade 2026.1.15 -> 2026.2.19
+Date: Fri, 27 Feb 2026 18:13:04 +0800
+Message-ID: <20260227101327.1432-29-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260227101327.1432-1-wangmy@fujitsu.com>
 References: <20260227101327.1432-1-wangmy@fujitsu.com>
@@ -59,40 +59,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124727
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124729
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-============
-- Fix type invariance causing too strict typing
-- Add E2E testing infrastructure using mkosi for running tests in a real systemd environment
-- Improve type annotations throughout pystemd, modernizing to Python 3.10+ syntax
-- Add AmbientCapabilities to systemd1 KNOWN_UNIT_SIGNATURES
-- Improve README.md clarity, spelling, and grammar
+==========
+- Added \z as alias of \Z, like in re module.
+- Added prefixmatch as alias of match, like in re module.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-pystemd_0.15.1.bb => python3-pystemd_0.15.3.bb}    | 2 +-
+ .../{python3-regex_2026.1.15.bb => python3-regex_2026.2.19.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pystemd_0.15.1.bb => python3-pystemd_0.15.3.bb} (85%)
+ rename meta-python/recipes-devtools/python/{python3-regex_2026.1.15.bb => python3-regex_2026.2.19.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pystemd_0.15.1.bb b/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pystemd_0.15.1.bb
-rename to meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
-index 7698d6394d..b987007e39 100644
---- a/meta-python/recipes-devtools/python/python3-pystemd_0.15.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pystemd_0.15.3.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Python bindings for interacting with systemd over DBus"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-python/recipes-devtools/python/python3-regex_2026.1.15.bb b/meta-python/recipes-devtools/python/python3-regex_2026.2.19.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-regex_2026.1.15.bb
+rename to meta-python/recipes-devtools/python/python3-regex_2026.2.19.bb
+index 9a623122ac..2bdf0bd254 100644
+--- a/meta-python/recipes-devtools/python/python3-regex_2026.1.15.bb
++++ b/meta-python/recipes-devtools/python/python3-regex_2026.2.19.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
  
--SRC_URI[sha256sum] = "f217b5792f1e7c391ae46262f43566b6f83364507eaab5d5e73fcd05ab12d2bb"
-+SRC_URI[sha256sum] = "3533f6d287a1ffe39dbfffcf2f547454bb8ef7a169ac6a24e81f446ddb258802"
+ inherit pypi python_setuptools_build_meta
  
- DEPENDS = "systemd"
- RDEPENDS:${PN} += "\
+-SRC_URI[sha256sum] = "164759aa25575cbc0651bef59a0b18353e54300d79ace8084c818ad8ac72b7d5"
++SRC_URI[sha256sum] = "6fb8cb09b10e38f3ae17cc6dc04a1df77762bd0351b6ba9041438e7cc85ec310"
+ 
+ RDEPENDS:${PN} += " \
+ 	python3-stringold \
 -- 
 2.43.0
 
