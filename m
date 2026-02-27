@@ -2,94 +2,90 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2497FD5323
-	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 12:03:41 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.94337.1772193811838702804
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E66EEFEFB61
+	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 15:40:42 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.98803.1772206835297353949
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 04:03:32 -0800
+ Fri, 27 Feb 2026 07:40:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lq3j22GK;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-43989bd056bso1663061f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 04:03:31 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GIhOt4xD;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-480706554beso25891635e9.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 07:40:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772193810; x=1772798610; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=b+rYnVPChWBD2aXSVyTVYr76+lG+wt1I80lunOmIWOQ=;
-        b=Lq3j22GKBLV5qOrbGDZMvn7AnsLV7manY1skOMR+3Eya1Wpr5/rUmUhfXyPqUXBft/
-         75OgFfXV8j/TW6KFRrGtM1b32io+HuHHWpRNKG533jMjJYESYbls22Sn0Mg7DYHYHXcO
-         Cne9LaGfSvohnRD1yafhf2/nkTanl4AudMh41CDiGUCIFrUXsL5BkFbOf9gT9nqY5+Fe
-         mqrDT3RB7l0lr99UhIysF2ebb+FfeBERxOh9IZ1Y3gJz2LPyHtbJS0z51ST5IG2OTqlo
-         4J3jPip80qoMZt9txQsGN8dG4IuWF5O4cNitpZXmqmOcqrFIhYiDnqLxQrwbwwS/daYS
-         b9TA==
+        d=gmail.com; s=20230601; t=1772206834; x=1772811634; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YUjObkpDxw9dLnRQvun5j6ZioLfvcexP04exBYGY/+k=;
+        b=GIhOt4xDq+05OJ8qINDSANRP7nJ+X1z8vDVeq8KIvZz7ySQbKt3RmftiLoW4TXVKx6
+         VX00wntP5XV86Hrz9V+knJifqkTuaVxXHIY1Gp6CEFu0vTbr0ZTiUs5lnsILcm+nL2Cx
+         LUiRtS4NEetk2+eWiC84zvsqjQBaUJthsUCCWwCcI1IX+Qv675yu/l0ZzqHhaoPoyLvQ
+         q8Gd7ANeNvMOFf2IqTN3iX4o7ejZv4CJk9xiX99WMxmMlcw2yKTjI5LkFDZxuUxWQZYB
+         ZegZ17tMIstViKzwlZLvGnkVIGAJCQm5vQViVi2Jde168CCcnNBXhZ5C2ESGMsxlVTw0
+         AelA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772193810; x=1772798610;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=b+rYnVPChWBD2aXSVyTVYr76+lG+wt1I80lunOmIWOQ=;
-        b=kIL1IMAdofEagWhWxN7px56Q63d++PuafBuZCMSTcQmiN3RBUdCz/ows1IrLpcan4u
-         JtGfvvbDfJFst3O2Gq7rVg04JlzOVdb1GyMmsOae7D3psKhAl0ph1Y8JEzZ5+LcNKWzi
-         aoDoQeqv6Tm6lP4f29Iqf632y+Qngy8dZiHHwkA23hRZtyc9a7YRSyaKlrvRQYQERbH3
-         uS138bLidZ+NnZlfyoXeRdLoCgp4NYuk5VFpWYLE5C48gHxjysixiOrcDwfLn72d62lx
-         vjTOwOs+BAmbtxi9zH5gzbdbf6xEopo6ueWIjq+V7Jo71ONAE9s0WuJFEQ0YZaP5j2Yq
-         e52w==
-X-Gm-Message-State: AOJu0YzksRUhx7CGBf3xxP67OyaT5nMYJ3zPRbFQRkOas6KC1t6m6ws/
-	5cIwd7orV4qz7U0MXeIT2O3qDLvy5I/vhVjSpIYi28X/T/bXPNomqnEY118u1Q==
-X-Gm-Gg: ATEYQzxWRX7/GfrcrrFPGE4mM/ptNPSp8UTCUB7pO6lPX8TBpuY1h3+DUrBQmyq2yO8
-	aViRSaXlDS+xbWHiA3GM3zVcewQizU9N1Z1z6iy1BCkS+HK+5Inbkni3WqF8ZdUPANqPkHbtXXR
-	+bvUCjqkdix8OumuO04Z1HqCDLemthdVdF/QGxDkZc3nkTCy28rO+9oRlGQV7C6/fLl65/cRSv6
-	kdM3GMSrjEjpSerOGieZZw1hmwTMCyvS65ibLx/iVV/vXmP4eCr3VsPVV8DT0mFaSgypqAm67GR
-	XoXdKGxLqYmvPfIXKwfznZSbMh6Qxm7g2/q7puZlZtRENPhQjfZDL2ZPFQfn/iTmknln1uOPeDi
-	kTKitRco9xv5sHFleRnpGSZujpWtTI6CwdTNxAdsfLqrFGfQrCGef7A5zdJpi9zPohsUZMiXgeA
-	sudvLiZDf+RsSSd9estPiM
-X-Received: by 2002:a05:6000:238a:b0:436:34c0:c9c1 with SMTP id ffacd0b85a97d-439971a63e0mr12468488f8f.6.1772193807422;
-        Fri, 27 Feb 2026 04:03:27 -0800 (PST)
+        d=1e100.net; s=20230601; t=1772206834; x=1772811634;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YUjObkpDxw9dLnRQvun5j6ZioLfvcexP04exBYGY/+k=;
+        b=sZbQG9WWNbLKZfgT76qRobWTLu8Ohd/qx/KXuVQciD2FRiuJ3ZZdYZQIoa6+0tdU+/
+         9+npAIH7xKXyc8i6mAETrhLfzh3+9aONXYdaQyBXnn9qkoYFrXhKnpESNPmP1hsOdN3M
+         o1aEEFWFmKdQSQnOBE/wjrTX+kPkO9naiHHMg8tgeX4luIKlw0HDFRvkJV5fQeSyQnhf
+         C/aQi2AM9VySVzAHLCnw/BM/4ukYNRNyiS4Aq+zwDxX7UZb0devHpNj0tQsaAkS2PNmh
+         96fb8AteCOtV18PRgk2NSkYPRjaVAX56e0ljIfTFoxzw8alY/zLsjJox5DeehENqc8qu
+         8OJw==
+X-Gm-Message-State: AOJu0YyK/UoGKWcAqLhH8fj9IVsO86ng3AeFrVJZq9E1HVeUOc89/+4o
+	AwZD6nyPlXxYmMOZWu4Acg7Cw9KWe1CPiA/ypNdB0PdQeFY9J7xa/Hp03yKCrQ==
+X-Gm-Gg: ATEYQzxJSoH9jbhRJWDe4QDzvoFsE1Av3ofvna5o1A0pFsK9wQCvT/gPEzfq13Q5Seb
+	SgQMd+IhaRKo/RyWl4x8vWbmjb2Jg+QqRlk5eAB2ZmnKuVEJuZdKfX3+ZrgrZ3zhsF4QhID4eoz
+	oJbgxXW5ezwt9UHVeYFARmPaMIgoBnWNC/d6G6+8nChxJ1EIMlA+8WZSc8V2iS9ky00/w656jfv
+	EDEf3V3pt+8EtQ7yMhVhgZviaO2qmDa4IKAsEe/c/0BSR3GERHNtsuSS0D6ReM2rZVJsOLQJMIR
+	QXdn5vppmLu2EopRE7BK8ym0nHlSHX7NHenXjCbx856sdmHRZ8l5cPALdYrRKikWSxTHnHgH9l1
+	O4adXvJaZ/JUf0nvKDW9EGGxX0FZBbswxUA/wSnM2AEnUgYrLYkBwcFGDmXkHBBgWUrBSEBP9Wo
+	q3uS4nkxXFVMnGM/QTA7Sq2W+1YJp6gAk=
+X-Received: by 2002:a05:600c:1e2a:b0:480:4a4f:c363 with SMTP id 5b1f17b1804b1-483c9b9e355mr48310245e9.9.1772206833533;
+        Fri, 27 Feb 2026 07:40:33 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4399c70ff6esm9829566f8f.12.2026.02.27.04.03.26
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483c3b770e7sm123409785e9.9.2026.02.27.07.40.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Feb 2026 04:03:26 -0800 (PST)
+        Fri, 27 Feb 2026 07:40:33 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][kirkstone][PATCH 4/5] ndpi: ignore CVE-2025-25066
-Date: Fri, 27 Feb 2026 13:03:22 +0100
-Message-ID: <20260227120323.333696-4-skandigraun@gmail.com>
+Subject: [meta-multimedia][kirkstone][PATCH 1/4] streamripper: ignore CVE-2020-37065
+Date: Fri, 27 Feb 2026 16:40:29 +0100
+Message-ID: <20260227154032.499047-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260227120323.333696-1-skandigraun@gmail.com>
-References: <20260227120323.333696-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 12:03:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124757
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 15:40:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124758
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-25066
+Details: https://nvd.nist.gov/vuln/detail/CVE-2020-37065
 
-The vulnerable code was introduced in v4.12[1], and is not
-present in the recipe version. Due to this, ignore the CVE.
-
-[1]: https://github.com/ntop/nDPI/commit/b9348e9d6e0e754c4b17661c643ca258f1540ca1
+The vulnerability is about a 3rd party Windows-only GUI frontend for
+the streamripper library, and not for the CLI application that the
+recipe builds. Due to this ignore this CVE.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-support/ntopng/ndpi_4.2.bb | 3 +++
+ .../recipes-multimedia/streamripper/streamripper_1.64.6.bb     | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
-index 13c3398c2b..102f612c40 100644
---- a/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
-+++ b/meta-networking/recipes-support/ntopng/ndpi_4.2.bb
-@@ -26,3 +26,6 @@ do_configure:prepend() {
- EXTRA_OEMAKE = " \
-     libdir=${libdir} \
- "
+diff --git a/meta-multimedia/recipes-multimedia/streamripper/streamripper_1.64.6.bb b/meta-multimedia/recipes-multimedia/streamripper/streamripper_1.64.6.bb
+index 6014326826..beea0c5795 100644
+--- a/meta-multimedia/recipes-multimedia/streamripper/streamripper_1.64.6.bb
++++ b/meta-multimedia/recipes-multimedia/streamripper/streamripper_1.64.6.bb
+@@ -30,3 +30,6 @@ EXTRA_OECONF += "\
+ 
+ # the included argv library needs this
+ CPPFLAGS:append = " -DANSI_PROTOTYPES"
 +
-+# vulnerability was introduced in v4.12
-+CVE_CHECK_IGNORE = "CVE-2025-25066"
++# cpe-incorrect: the vulnerability is about a Windows frontend, not the CLI
++CVE_CHECK_IGNORE = "CVE-2020-37065"
 
