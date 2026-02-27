@@ -2,54 +2,54 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F530FD7F7B
-	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 10:15:10 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.92463.1772187304550549350
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CD8CFD7F7A
+	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 10:15:20 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.92464.1772187311204317051
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 02:15:04 -0800
+ Fri, 27 Feb 2026 02:15:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=i85tYN+5;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=q+9cMg2l;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1772187305; x=1803723305;
+  t=1772187313; x=1803723313;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1+JgeG7FXe3gabG9wg7HQ7HJSOXo0TfOalMbXYWm4zI=;
-  b=i85tYN+5bYUWxOz1t/HgdRK/gWma/EoftXs49qnhNFuxld7R7cDPkZc/
-   TZQH6U+I7aate9bHkjDw7TgD5GZPihQB0CYyDhmdSCqeYRAK7qxeaQaLe
-   MqeFEX6ODACk3J/W9qd50tHj/FTuL2lGAUbmUO6f4mdWx/1DAuEgUB7B0
-   PbR67sHTQCYyTcyUlmqLec148Nld0qR79iFLZfbRnG10GmN3HHywYPyna
-   gbutMbay2hMmqVTlxOd0THO3zIqP/CI0Zo+NCmJvgk/TDEdA3w6XuzWeq
-   qKTjx6ypoE+yb0oFi49UcnoAd9YTSQco/yUi1rzfTSxmPsENmQvXl9aey
-   A==;
-X-CSE-ConnectionGUID: SIUSWp1xSTuMzIBcS2lAtg==
-X-CSE-MsgGUID: NYjbPvmNRUa94JdaqV8xjg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11713"; a="235523470"
+  bh=P5sStK4NyV2QJtwABRPNxpSruXXbBXhOkmGp1XvRL18=;
+  b=q+9cMg2lUJtRV+rqJzbzlDnkMsiBj12Td6r5BS2517wtqy5YpS7cij3s
+   TGE5mWDI9QuoU82SQdy/+PFs+V+1I88MpoDMr3QcJu660X25u1P2oXbZ7
+   KBCYqQ7rN3NKrN+Idx3HTqyqdkLPNf2j1yh/+kJ5BGJLjb8XEVs8LY27w
+   iwg0ORQvJ4HosWdzOM+qxkA/WTSctrJ/s80a+Qg0uwf1VKB4QTVHrfetF
+   UGhOTlqhozFq29rPnK5835J7ijx6oxiXkza7o/nIRD93FGrWILBIrl+lR
+   Qszwq1yK6zWMNBXtM/MnEPZ6podQZ+TaQzGCgaTtE8cO7Gp+rZwI10qSg
+   Q==;
+X-CSE-ConnectionGUID: gSgq+045TjGa2mGXDDQcIg==
+X-CSE-MsgGUID: RQTR5iZ2ROya3LqUiTFGoQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11713"; a="231325560"
 X-IronPort-AV: E=Sophos;i="6.21,313,1763391600"; 
-   d="scan'208";a="235523470"
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="231325560"
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgr3.fujitsu.com (Postfix) with ESMTPS id 171DF1002B9B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:03 +0000 (UTC)
+	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id BFBEA7336
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:13 +0000 (UTC)
 Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id C09451400138
-	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:02 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 741A91C00121
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:13 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id DAB6518005A1;
-	Fri, 27 Feb 2026 10:14:59 +0000 (UTC)
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 987A3180059F;
+	Fri, 27 Feb 2026 10:15:10 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 31/52] python3-responses: upgrade 0.25.8 -> 0.26.0
-Date: Fri, 27 Feb 2026 18:13:06 +0800
-Message-ID: <20260227101327.1432-31-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 35/52] python3-typer: upgrade 0.21.1 -> 0.24.1
+Date: Fri, 27 Feb 2026 18:13:10 +0800
+Message-ID: <20260227101327.1432-35-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260227101327.1432-1-wangmy@fujitsu.com>
 References: <20260227101327.1432-1-wangmy@fujitsu.com>
@@ -58,42 +58,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124731
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 10:15:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124735
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-===========
-* When using 'assert_all_requests_are_fired=True', assertions about
-  unfired requests are now raised even when an exception occurs in the context manager or
-  decorated function. Previously, these assertions were suppressed when exceptions occurred.
-  This new behavior provides valuable debugging context about which mocked requests were
-  or weren't called.
-* Consider the 'Retry-After' header when handling retries
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{python3-responses_0.25.8.bb => python3-responses_0.26.0.bb} | 2 +-
+ .../python/{python3-typer_0.21.1.bb => python3-typer_0.24.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-responses_0.25.8.bb => python3-responses_0.26.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-typer_0.21.1.bb => python3-typer_0.24.1.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-responses_0.25.8.bb b/meta-python/recipes-devtools/python/python3-responses_0.26.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-responses_0.25.8.bb
-rename to meta-python/recipes-devtools/python/python3-responses_0.26.0.bb
-index 2370a88843..4d1884225d 100644
---- a/meta-python/recipes-devtools/python/python3-responses_0.25.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-responses_0.26.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0e601511a8517f4daf688a8eb95be7a2"
+diff --git a/meta-python/recipes-devtools/python/python3-typer_0.21.1.bb b/meta-python/recipes-devtools/python/python3-typer_0.24.1.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-typer_0.21.1.bb
+rename to meta-python/recipes-devtools/python/python3-typer_0.24.1.bb
+index 0bf2c0ec4f..6538f16f0d 100644
+--- a/meta-python/recipes-devtools/python/python3-typer_0.21.1.bb
++++ b/meta-python/recipes-devtools/python/python3-typer_0.24.1.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/fastapi/typer"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "ea835607cd752343b6b2b7ce676893e5a0324082268b48f27aa058bdb7d2145d"
++SRC_URI[sha256sum] = "e39b4732d65fbdcde189ae76cf7cd48aeae72919dea1fdfc16593be016256b45"
  
--SRC_URI[sha256sum] = "9374d047a575c8f781b94454db5cab590b6029505f488d12899ddb10a4af1cf4"
-+SRC_URI[sha256sum] = "c7f6923e6343ef3682816ba421c006626777893cb0d5e1434f674b649bac9eb4"
+ inherit pypi python_pdm ptest
  
- RDEPENDS:${PN} += " \
- 	python3-mock \
 -- 
 2.43.0
 
