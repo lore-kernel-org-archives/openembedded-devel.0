@@ -1,146 +1,143 @@
-Return-Path: <matthias.p@variscite.com>
+Return-Path: <liuyd.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38979FEFB6C
-	for <webhook@archiver.kernel.org>; Fri, 27 Feb 2026 15:47:23 +0000 (UTC)
-Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.126])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.99217.1772207238011242152
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FCFD1048927
+	for <webhook@archiver.kernel.org>; Sat, 28 Feb 2026 01:44:56 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.111815.1772243088577434136
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Feb 2026 07:47:18 -0800
+ Fri, 27 Feb 2026 17:44:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@variscite.com header.s=selector2 header.b=PZkW87p5;
- spf=pass (domain: variscite.com, ip: 52.101.66.126, mailfrom: matthias.p@variscite.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s8NiZzuoiy3H2FwsDk7gHRapbSdfL8mxV7H+M9QeI7xCNO2Hcbq1KVEXrBCS2UH4y+N7IVg+bujnwmUKdhZLltP3vQFDs3UdDG4A7oavTx4EH44ExShBAEnWh+Ul+k6Sk4u1drA7IJu48ZaklZl9L7bYUa0tQUwL/L4KmS7XIrzD3Wyf4EeL5DELC8S8ZcBT017k3Gzh628E57jsuL1Vfz2NmadEspPSNTQH9aqJpZv4b8VgZrUZmAMSpNq6JJV+qlclh83ljhB7cP1ZND3duuyUotCcwdIavv5VAm44ZHHrEN6lWZ+PcsZP/s3W3pEQZaNUr3unA+LHPWsANufKYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3OvthUWKWKGYw2YwS0oqOjPdLjL5AMz7Zv7B2vIns8w=;
- b=YnM8EJ3dFgVca+qt5OejrSEP3LtBnWBy7rA+Hs7nRq7j8k/j6OESSt8KU38O+gFs/Vobe/4bt1Y4XlS5w9TTDdHxUqeQMxGQ8W+BhsIe0IqCaqnucW35LJr0FdqnFWcgjo4QoISiruBPmDPri7LCMFA55wSGtTVvK0eXC5eDU1q9Zt0N45eP2s48BU8C9m7VI2yQTCIx5iqfiK8EEKFJDmNnSAVhaJL9kmOPh1Ck0TnkuhQdyAkGBjuERdasBeibmKQ6NrEr216fdvX7g0WrCrGxSeluAhhCnVAiVbA1v4WEmfZYZfHPK8h9aSm6S8S98AH59dMo55Kui6tbbNaXFw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=variscite.com; dmarc=pass action=none
- header.from=variscite.com; dkim=pass header.d=variscite.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=variscite.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3OvthUWKWKGYw2YwS0oqOjPdLjL5AMz7Zv7B2vIns8w=;
- b=PZkW87p5fJzYLgL6BYTwmCYOlHel+8G9jFCQ9DMTbfBGSXO26EdD//pmKAmWlan0ZtCk5eQ/i8IsneQSogOBDYKatbQlhqB1+xlxMOg61Cnm3Lbd3DAkHYDcNVGpGrg3JZldVnvJfWnHGb5yglEhKwx8ADAme9c7MGH5LLMsDD93TjYH9IQ1j9oBTispmqpsvBu/qZrJmTBP3nJ7e68Cj30mO3qCbTT5E4DNEIqWkxi6niEI9LCbAFLgoAIYW5uS1JxUGeT37yXxY6fBG9RtEpBqqHhDjNj/vKlDlgIMhKhf8KB2W5GOMwQXQ2fw1JwGIywqFdQjbbpGNRtjgz2yDw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=variscite.com;
-Received: from AM9PR08MB6706.eurprd08.prod.outlook.com (2603:10a6:20b:303::5)
- by AS4PR08MB7878.eurprd08.prod.outlook.com (2603:10a6:20b:51d::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.13; Fri, 27 Feb
- 2026 15:47:14 +0000
-Received: from AM9PR08MB6706.eurprd08.prod.outlook.com
- ([fe80::1575:987:8b68:bde8]) by AM9PR08MB6706.eurprd08.prod.outlook.com
- ([fe80::1575:987:8b68:bde8%4]) with mapi id 15.20.9632.017; Fri, 27 Feb 2026
- 15:47:13 +0000
-From: Matthias Proske <matthias.p@variscite.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ikQ/3XE9;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: liuyd.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1772243088; x=1803779088;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=/gA3ZFZa2TTAlV59AdKsVVH2r0ylU/hRp8odrdR90MA=;
+  b=ikQ/3XE9nQBIb7N66dtasC/62t2ALg/Y72269l0NdF+TyEA1HVUDivAD
+   yVqTjhzKRDfDlgMYCq/ZR0gGk3Z/NjetN//gVBumyaRLPBLsI/YH/8PEa
+   tWBNjR477SDDorL8VaDcj5EmRemeXG+lXDeCNRcSqjv/OskQkC/XBQrZd
+   VXYc8r7/D1xLJD/IAVNG/ASClc3PsDQIrSy/LDBrF5TjPoiC2TQ9JDKgC
+   a9EaVsv29kow1glBHCozocctNQvoeVcXYqRbh2KaQGSyGi9hxgZQGDbww
+   6b4rTus9OgHklJLiWNkhSwAYEb7QkrmBwPeU8A0BJ2BbkFFz0HITX0C8j
+   Q==;
+X-CSE-ConnectionGUID: Fk4mlWZORAGRgaye8mxYGw==
+X-CSE-MsgGUID: pwtNIWSnRrSMVSu/xRClXw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11714"; a="231309820"
+X-IronPort-AV: E=Sophos;i="6.21,315,1763391600"; 
+   d="scan'208";a="231309820"
+Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgr1.fujitsu.com (Postfix) with ESMTPS id B1F191C1C706
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Feb 2026 01:44:46 +0000 (UTC)
+Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 6A9B8180A33A
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Feb 2026 01:44:46 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.128.218])
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 36760180A5D1
+	for <openembedded-devel@lists.openembedded.org>; Sat, 28 Feb 2026 01:44:43 +0000 (UTC)
+From: Liu Yiding <liuyd.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Matthias Proske <matthias.p@variscite.com>
-Subject: [meta-multimedia][PATCH] bluealsa: fix QA issue staticdev
-Date: Fri, 27 Feb 2026 16:46:47 +0100
-Message-ID: <20260227154646.160184-2-matthias.p@variscite.com>
-X-Mailer: git-send-email 2.53.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: CPCP307CA0009.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380::16)
- To AM9PR08MB6706.eurprd08.prod.outlook.com (2603:10a6:20b:303::5)
+Subject: [oe][meta-filesystems][PATCH v2] btrfsmaintenance: upgrade 0.5 -> 0.5.2
+Date: Sat, 28 Feb 2026 09:44:39 +0800
+Message-ID: <20260228014439.2853-1-liuyd.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR08MB6706:EE_|AS4PR08MB7878:EE_
-X-MS-Office365-Filtering-Correlation-Id: 331605c6-3eef-491c-efd3-08de76177a01
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	394lG11VrB6VUFdJRUbFmPF/uOXFnqljRjfS/Oxv7M4bzPpJO+ckVoAiQ06torgNKGS80+TvcgS1Ryj1zkiusnDynIS8JjUlPsjr5U26DVJtfeY48vBd1GYbFFVwrT4Y5UDN/stMOXx3Yw9S0bfOBvlKYen5EdlkxHCt/hNw3qKnXPHb82SLXmInSBdPu375Z5wiEgKq+PRGjT2jbLuguGDja6OS5tA2YpTbLVFV3k2qS9jZJN+LVR1L6cxmh4gs6JWwHRypgbHqrWjr+P8SD1VzoYzM7XwFc1KFjkg52CplfQNewFQs0nXdksBQd8tH8LYA+ZI7YkdkVXc1JKndXhy+GL+tTFtbnqlZRoFJfCET9p0JGZFyt0ol2xYj9dsXFGKOs8+4E9VtNPGSrcrDNkFAV604ii43b7vraPx23eGr5dkMZpkvWcVaGLjoJ1tVyhyrYCcwRnwPpJrn/6YhWgCBZuc7o5jri2E1pc+HJsnSCFPNwAZZIPc/D9YZXmqRiB17F7yX7TprXHvWdR7u3OS+WTjUxEO7Ni5Gdr0uQTi3BWgAJAuk79Rk0Gv+ap7WIj1jwIsgAA5ghGlW2/qEy1pLSe4pRw36ShebE/QcHVIZA2nvHgh3YCoMTTEbnUrQ6162c6UfvNlVby9qltUWFLd2HbIuD+4aqYNo5wXQoKZE9oPMIOgz6Q/rRqV1+9DEuHs3igFkKachOpCkypgEDmZEfd41LB/XCG8gJ1FwWlA=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR08MB6706.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?zFDgENr/KhNI8yAoFusHOMjzhX00zO09rs8NmXJOJFZRVrUkty2sRGel1sh5?=
- =?us-ascii?Q?SDqRmuYJAqSNklg5pFJPP19MF4j8fNEcqwlwxiqyfXsMDgaLJ9MPfWpnJ2we?=
- =?us-ascii?Q?xAUCfIYST1LP5aAN2wSSrmFt/R7RkNJ5e4RXHkseZSOmdic7KDEzffCUZjBe?=
- =?us-ascii?Q?YGtSsXj2Ze7iVcYbQYrTSCuD3sK9hl3b9S18qwFg9IjVItnS+Wz0fJ6g5vuq?=
- =?us-ascii?Q?9oX/RsrrgphiT/pU8DIlafT3YrgD9jPRUT8aJdZcYH0P0v1F8L40x0OCvIZm?=
- =?us-ascii?Q?M99cBL9rAwJC+buu3fGckOohoZ9yzUDCwEGn7Wxqz2qoJL9+j7sY0g9rZEvX?=
- =?us-ascii?Q?eSYqhRctii/RCY/BsduaRlgRiwiSxYk0OJKrTjliT9rDp0GQdGq4s58J0COA?=
- =?us-ascii?Q?GnOWZvQw7t0DieQw3UftYbVe8k+rSaYlqLyKKG0f6S3+UnmFV4ox33CIPJFY?=
- =?us-ascii?Q?e5Vpzz+nVAuqa4CdXUv6iQKuuDXaxCuWjGRY5ma0xG+NkVAmazdohjvkHVkX?=
- =?us-ascii?Q?2aVGMLbHPXkNnB3NkGhfktVL3cDCBmH7t1r6dBkUaXrCZHXlBbas9ZM9ADwH?=
- =?us-ascii?Q?NvrY6C1uhJF5Rrdc/oMJvaROxuvotd4J6JfW4hw31cRF3cfnzUKOftMrVct4?=
- =?us-ascii?Q?dA0prNmaRgw4ASrPgH1bh3oV1m17Vaa1d7Uy2N3QvePiy4UnjFa3RlcsU4Fq?=
- =?us-ascii?Q?tZJV0cZCLF8Fp2TOwtyqF/UW0RDo8t9c8buk0oiUVCzGOxxcIW9/oeI/F9su?=
- =?us-ascii?Q?Ghy0R/c7SQTA3k+LLEopB2x2Qpv+bzG1jdTZj9M9lmI6aPLWyGRN+XS/vNAL?=
- =?us-ascii?Q?4zOcRJQDQSqryzAuddWJLETO9/kiXQd7iHJ46ZP99+IPpzCnd19eW8f9Qyj6?=
- =?us-ascii?Q?qff/mSusj9fqpZx6pAAHOnfb7Pr6bRMi+/6MMwkdlpwbJvy0wLasxs7D4nFO?=
- =?us-ascii?Q?yqP3o7Zlag7SMzpznojEZMV7epERX7wdpa0rJq46wKNxks8Y+/pxuIocOhec?=
- =?us-ascii?Q?ofaA6taEoKQ7MIe0h7WcW2SAgAjZprnJC9FZWd0VeVV8tcM3D/wd5A247770?=
- =?us-ascii?Q?mPdkr1AZkKOjrR8D/QyGxI282atbUBfqlWgwcbn1EE9bMQQqUoY7CNUHyFdL?=
- =?us-ascii?Q?COM6sW/6PPcymJjK+ksa3kKbs53QoNBFzGeI5YA9LUdqqRZ1DiFDgvRPQRmd?=
- =?us-ascii?Q?01U+jOpo9JCsv8oC7BzOU3ebCEma7bQoD4IwQJ7wp6wJg4WHBe0kKtpc8uMC?=
- =?us-ascii?Q?/gq5WG/+1oXJf3OKd5N03IMN1GgBHlr4wS3Xed5zT7TW1zSj49wUQ/86pSyV?=
- =?us-ascii?Q?RFVadihqD7hwOTGA58I+S6IP0CO2KaLMTTZSHHEayLOn/PXdV0WcSNaY20u7?=
- =?us-ascii?Q?PUywfOb9SosoKmi1H3F3A+USZA84MVm5S1FCFvLGORqxYBLG4txh3xDYH0FF?=
- =?us-ascii?Q?rOPg3aVgAzdKxTGlpHF0r2/07VOVevOjvjRsOAYHYFD3KRh95RAvH4F27wT5?=
- =?us-ascii?Q?qyNIMyF1l/yF3lsEeLDifAm3yzxaqWgc1ycuHjnIDHLg9gMe9qRdHXyStX5s?=
- =?us-ascii?Q?Nk0g/1kefaAiNtXSFcW13Wki9XPHNs1gbbaXg+BMQOMypES39USTijWianud?=
- =?us-ascii?Q?6I6xLCTWs0M/AHZVOAqOEVa7uDqlZKdEN3HGH+USealdWExiyGUG/JAdfIFn?=
- =?us-ascii?Q?5MBm1Q/aak0x7NGKKlWIGlR9SuAU1udpmfP7C3KZDqU3lFS6vd8uoyxSqlB9?=
- =?us-ascii?Q?GlAR5QPYzuCQWxFZ+VWGuujGY1DEO58=3D?=
-X-OriginatorOrg: variscite.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 331605c6-3eef-491c-efd3-08de76177a01
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR08MB6706.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 15:47:13.8096
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 399ae6ac-38f4-4ef0-94a8-440b0ad581de
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KiUy6ZPNI8VdLJheiZNEHLZS1AXQnQXfCmyZxzfCkcXAZBJ03I/EtCPH510wnlVJcb8ZqwX0akGBq3JsBVJvzIW1gKkZ5oBUZoeV6iKFCAM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR08MB7878
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Feb 2026 15:47:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124767
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Feb 2026 01:44:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124768
 
-When building bluealsa with building static libraries NOT disabled, you
-get the following error:
+1.Changelog:
+  fix syntax error in run_task, preventing jobs to start
+  start scrub jobs sequentially if RAID5 or RAID6 data profile is found
+  fix btrfsmaintenance-refresh.service description
 
-ERROR: bluealsa-4.3.0-r0 do_package_qa: QA Issue: non -staticdev package
-contains static .a library: bluealsa path
-'/usr/lib/alsa-lib/libasound_module_pcm_bluealsa.a' [staticdev]
-ERROR: bluealsa-4.3.0-r0 do_package_qa: QA Issue: non -staticdev package
-contains static .a library: bluealsa path
-'/usr/lib/alsa-lib/libasound_module_ctl_bluealsa.a' [staticdev]
-ERROR: bluealsa-4.3.0-r0 do_package_qa: Fatal QA errors were found,
-failing task.
+2.Update 0001-change-sysconfig-path-to-etc-default.patch for 0.5.2
 
-Fix this by explicitly putting these files in the -staticdev package.
-
-Signed-off-by: Matthias Proske <matthias.p@variscite.com>
+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
 ---
- meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...enance_0.5.bb => btrfsmaintenance_0.5.2.bb} |  4 ++--
+ ...-change-sysconfig-path-to-etc-default.patch | 18 +++++++++---------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+ rename meta-filesystems/recipes-utils/btrfsmaintenance/{btrfsmaintenance_0.5.bb => btrfsmaintenance_0.5.2.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb =
-b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-index 162a51284e..4f15465371 100644
---- a/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-+++ b/meta-multimedia/recipes-multimedia/bluealsa/bluealsa_4.3.0.bb
-@@ -58,6 +58,7 @@ EXTRA_OECONF =3D "\
- PACKAGE_BEFORE_PN =3D "${PN}-aplay"
-=20
- FILES:${PN}-aplay +=3D "${bindir}/bluealsa-aplay"
-+FILES:${PN}-staticdev +=3D "${libdir}/alsa-lib/*.a"
- FILES:${PN} +=3D "${libdir}/alsa-lib/* ${datadir}/dbus-1/system.d"
-=20
- RRECOMMENDS:${PN} =3D "${PN}-aplay"
---=20
-2.53.0
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
+similarity index 96%
+rename from meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
+rename to meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
+index 645e38ca49..6722b63c10 100644
+--- a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
+@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+ 
+ SECTION = "base"
+ 
+-SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https \
++SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https;tag=v${PV} \
+     file://0001-change-sysconfig-path-to-etc-default.patch \
+     file://0002-add-WantedBy-directive-to-btrfsmaintenance-refresh.s.patch \
+ "
+-SRCREV = "be42cb6267055d125994abd6927cf3a26deab74c"
++SRCREV = "beb9e2d166cbd856297fe8d28e89e8b36961a723"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/kdave/${BPN}/tags"
+ UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
+diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
+index d425206f0e..b064adcc86 100644
+--- a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
++++ b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
+@@ -1,6 +1,3 @@
+-From b49dbe17e0d9ae463e5a34e6991aa2d3c70d2fb1 Mon Sep 17 00:00:00 2001
+-From: Claudius Heine <ch@denx.de>
+-Date: Wed, 11 May 2022 14:33:13 +0200
+ Subject: [PATCH] change sysconfig path to /etc/default
+ 
+ OE uses /etc/default for service configuration, not /etc/sysconfig which
+@@ -11,6 +8,9 @@ Change the files accordingly
+ Upstream-Status: Inappropriate [OE specific]
+ 
+ Signed-off-by: Claudius Heine <ch@denx.de>
++
++Update for 0.5.2
++Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+ ---
+  btrfsmaintenance-refresh.path    | 4 ++--
+  btrfsmaintenance-refresh.service | 2 +-
+@@ -32,16 +32,16 @@ index d56ad11..f0b4132 100644
+  [Install]
+  WantedBy=multi-user.target
+ diff --git a/btrfsmaintenance-refresh.service b/btrfsmaintenance-refresh.service
+-index 4ed1eb4..d6225a6 100644
++index 19e51c0..223fca9 100644
+ --- a/btrfsmaintenance-refresh.service
+ +++ b/btrfsmaintenance-refresh.service
+ @@ -1,5 +1,5 @@
+  [Unit]
+--Description=Update cron periods from /etc/sysconfig/btrfsmaintenance
+-+Description=Update cron periods from /etc/default/btrfsmaintenance
++-Description=Configure systemd timer schedule according to /etc/sysconfig/btrfsmaintenance
+++Description=Configure systemd timer schedule according to /etc/default/btrfsmaintenance
++ Documentation="file:/usr/share/doc/btrfsmaintenance/README.man"
++ Documentation="file:/usr/share/doc/packages/btrfsmaintenance/README.man"
+  
+- [Service]
+- ExecStart=/usr/share/btrfsmaintenance/btrfsmaintenance-refresh-cron.sh systemd-timer
+ -- 
+-2.33.3
++2.43.0
+ 
+-- 
+2.43.0
 
 
