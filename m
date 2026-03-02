@@ -1,76 +1,80 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ashishkumar.mishra@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A74EBD58E47
-	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 04:33:01 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.153337.1772425976359211283
- for <openembedded-devel@lists.openembedded.org>;
- Sun, 01 Mar 2026 20:32:57 -0800
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout07.t-online.de (Postfix) with SMTP id 39A10E535;
-	Mon,  2 Mar 2026 05:32:54 +0100 (CET)
-Received: from [192.168.178.36] ([84.154.170.43]) by fwd75.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vwuxh-1yv8T20; Mon, 2 Mar 2026 05:32:53 +0100
-Date: Mon, 02 Mar 2026 05:32:48 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [meta-oe][PATCH] pavucontrol: add x11 to REQUIRED_DISTRO_FEATURES
-To: Changqing Li <changqing.li@windriver.com>
-Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Message-Id: <OM89BT.UBC7D2XUOBIJ1@t-online.de>
-In-Reply-To: <e0292a8d-208b-4964-b750-5b21e15b6e27@windriver.com>
-References: <20260228054848.3197690-1-changqing.li@windriver.com>
-	<WAP8BT.7MCV16N6W4811@t-online.de>
-	<e0292a8d-208b-4964-b750-5b21e15b6e27@windriver.com>
-X-Mailer: geary/46.0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A902FD58E51
+	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 04:45:51 +0000 (UTC)
+Subject: Re: [RFC_V2] [meta-oe]: Improving ext* sparse image generation: migrating from img2simg to ext2simg_android for ext* filesystem
+To: openembedded-devel@lists.openembedded.org
+From: "AshishKumar Mishra" <ashishkumar.mishra@bmwtechworks.in>
+X-Originating-Location: IN (1.7.105.116)
+X-Originating-Platform: Windows Edge 145
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-8tuJfkh9rmaqQ+ZKCckt"
-X-TOI-EXPURGATEID: 150726::1772425974-7A7F649A-AEB40893/0/0 CLEAN NORMAL
-X-TOI-MSGID: e7b8314b-793d-402b-8568-7164ce011f89
+Date: Sun, 01 Mar 2026 20:45:43 -0800
+References: <rGsP.1771488393837852960.eVnE@lists.openembedded.org> <a11b45eb-1ee0-4274-9780-5a86105a7a1f@gmail.com> <1030996.1771825388005282969@lists.openembedded.org>
+In-Reply-To: <1030996.1771825388005282969@lists.openembedded.org>
+Message-ID: <1127752.1772426743792609011@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="C8I6SUycOZyOqp5ZAz7p"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 04:33:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124797
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 04:45:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124798
 
---=-8tuJfkh9rmaqQ+ZKCckt
-Content-Type: text/plain; charset=us-ascii; format=flowed
+--C8I6SUycOZyOqp5ZAz7p
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 2 2026 at 09:46:08 +08:00:00, Changqing Li 
-<changqing.li@windriver.com> wrote:
-> I suppose we can only remove it since pangomm
-> 
-> not need it,  but I don't know how to check it.  Maybe upstream not 
-> accept the previous patch with similar reason?   So I resend this 
-> patch.
-> 
-> But if you can ensure that x11 is not needed by pangomm, I think your 
-> previous patch is better to fix the issue.
-> 
-I can't ensure this but I did grep the pangomm code for usual suspects 
-and also had a look at pango and cairo in oe-core which both can
-enable/disable x11 support depending on DISTRO_FEATURES and as far as I 
-remember I also set up a build with DISTRO_FEATURES:remove = "x11"
-and verified that pavucontrol was still buildable.
+Hi Gyorgy Sarvari ,
 
-I'm adding Khem Raj to the discussion. Maybe he can tell if there were 
-any problems with the patches.
+w.r.t "What happens if you add "-Wl,-rpath=3D../${baselib} -Wl,-rpath=3D../=
+../${baselib}" (or similar) to LDFLAGS?"
 
+Added below in meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprogs-ext4=
+sparse_1.0.bb as suggested
+BUILD_LDFLAGS +=3D "-Wl,-rpath,../${baselib} -Wl,-rpath,../../${baselib}"
+TARGET_LDFLAGS +=3D "-Wl,-rpath,../${baselib} -Wl,-rpath,../../${baselib}"
 
---=-8tuJfkh9rmaqQ+ZKCckt
-Content-Type: text/html; charset=us-ascii
+Can i push the patch now in master for this functionality?
+or Is there any other process / feedback that i need to work?
 
-<div id="geary-body" dir="auto">On Mon, Mar 2 2026 at 09:46:08 +08:00:00, Changqing Li &lt;changqing.li@windriver.com&gt; wrote:<br><blockquote type="cite"><p>I suppose
-      we can only remove it since&nbsp;pangomm</p>
-    <p>not need it,&nbsp; but I don't know how to check it.&nbsp;&nbsp;Maybe upstream
-      not accept the previous patch with similar reason?&nbsp; &nbsp;So I resend
-      this patch.</p>
-    <p>But if you can ensure that x11 is not needed by&nbsp;pangomm, I think
-      your previous patch is better to fix the issue.</p></blockquote><div>I can't ensure this but I did grep the pangomm code for usual suspects and also had a look at pango and cairo in oe-core which both ca<span style="white-space-collapse: break-spaces;">n</span></div><div><span style="white-space-collapse: break-spaces;">enable/disable </span><span style="white-space-collapse: break-spaces;">x11 support depending on DISTRO_FEATURES and as far as I remember I also set up a build with DISTRO_FEATURES:remove = "x11"</span></div><div><span style="white-space-collapse: break-spaces;">and verified that pavucontrol was still buildable.</span></div><div><br></div><div>I'm adding Khem Raj to the discussion. Maybe he can tell if there were any problems with the patches.</div></div>
---=-8tuJfkh9rmaqQ+ZKCckt--
+Based on additional feedback, can work on the current implementation and sh=
+are the patches again
 
+Thanks,
+Ashish Kumar Mishra
+
+--C8I6SUycOZyOqp5ZAz7p
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi Gyorgy Sarvari ,&nbsp;<br /><br />
+<div style=3D"box-sizing: border-box; overflow-wrap: break-word !important;=
+ color: #333333; font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neu=
+e', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji',=
+ 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px; =
+font-style: normal; font-variant-ligatures: normal; font-variant-caps: norm=
+al; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start=
+; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -we=
+bkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff=
+; text-decoration-thickness: initial; text-decoration-style: initial; text-=
+decoration-color: initial;">w.r.t "What happens if you add "-Wl,-rpath=3D..=
+/${baselib} -Wl,-rpath=3D../../${baselib}" (or similar) to LDFLAGS?"</div>
+<br />Added below in meta-oe/recipes-devtools/e2fsprogs-ext4sparse/e2fsprog=
+s-ext4sparse_1.0.bb as suggested<br />BUILD_LDFLAGS +=3D "-Wl,-rpath,../${b=
+aselib} -Wl,-rpath,../../${baselib}"<br />TARGET_LDFLAGS +=3D "-Wl,-rpath,.=
+./${baselib} -Wl,-rpath,../../${baselib}"<br /><br />Can i push the patch n=
+ow in master for this functionality?</div>
+<div>or Is there any other process / feedback that i need to work?</div>
+<div>&nbsp;</div>
+<div>Based on additional feedback, can work on the current implementation a=
+nd share the patches again&nbsp;</div>
+<div>&nbsp;</div>
+<div>Thanks,</div>
+<div>Ashish Kumar Mishra</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+--C8I6SUycOZyOqp5ZAz7p--
 
