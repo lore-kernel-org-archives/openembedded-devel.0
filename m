@@ -1,222 +1,170 @@
-Return-Path: <j-sahu@ti.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0500EA4E0B
-	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 14:47:25 +0000 (UTC)
-Received: from CY7PR03CU001.outbound.protection.outlook.com (CY7PR03CU001.outbound.protection.outlook.com [40.93.198.67])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.162189.1772462844278866466
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00283EA4E0E
+	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 14:56:15 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.162189.1772463369338688696
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Mar 2026 06:47:24 -0800
+ Mon, 02 Mar 2026 06:56:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=FeLqvOqr;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.198.67, mailfrom: j-sahu@ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=v0eZ3BAsY17F2FWoQk4dweKudQ9Th6mH0R/v3L4A/U0kUff6YSzKr1IQEPV9r6IPLySujDtE/HYz5VihYKNFThe5TJH0EpHC75WiBj9bwtiNCnXjK/XOSqDgg0HTAeOPn8CE/e6E22X+jJis4TDMEZj64YnISFbnKn2gq+Swhvw5ARFTmlW74AA0ggxeGqTrU4igbh2NKvkhuJqAKZ7gBf7U73bZx/VT6Sl3VZGhZKQx9aQnMy8irg7B+yshdsPEvEH9vPTGR3eD+xXYQ/DLpb9g6Kk0dKQltwrGrWJm+rBBN0qlDZDd2qY12yBZLy7L2hY1c6e5Hd3MW9+3BzlnMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YIjiN6rFrllwm9jXMQbOLwuqmCxNQhR3zyaNrhwWPAw=;
- b=eIJafz+418dvc5TemAzQbXBuYiB08DTJpev7lZgEwIY/Rzbhc6Z3WKQb+k/bQpBlpi1aXXjNno+80NlbFoTXD2EZ4eFIm+uwaa2AnhbwrKKxo9JSxMqn0XvzQsVwL7bZVzKmGP5n1DT+9yo38b5CMsvcprhh73/NDD5Aoglsk4PpIYyq7sKGV7tw1A3ZRZqqvIUZCotcyaXDLT0+CvxHMO9M6jbnbx4At3gR7r8Us/YRFa1BCOll/zKlSy6Sy/fU58ngcUEMT1PLv0OqRnuyerwRfqA9oqQ0zTJazrXC9QFbe2IzV4oT6m+dSAZnHXkcxCfHRL+dwOPNlHG9ePcpJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YIjiN6rFrllwm9jXMQbOLwuqmCxNQhR3zyaNrhwWPAw=;
- b=FeLqvOqrjYqeu6OCJxQWCtzDBwUR/nVYO6soFZFxAx6QRjQKalwEmcRyaH8wmw+B25IzeJJpe1feTdrh/vJM1ntGLpV2O7CWxBiJB5EsnVSvFNVzDJG7eIE1bb29RknkCmSrCaLiVnY5Pt1J+5YsWXaN4oDZtqyQZrGcaT5WcjQ=
-Received: from BL1PR13CA0203.namprd13.prod.outlook.com (2603:10b6:208:2be::28)
- by MW5PR10MB5875.namprd10.prod.outlook.com (2603:10b6:303:191::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.18; Mon, 2 Mar
- 2026 14:47:19 +0000
-Received: from BL6PEPF00020E64.namprd04.prod.outlook.com
- (2603:10b6:208:2be:cafe::70) by BL1PR13CA0203.outlook.office365.com
- (2603:10b6:208:2be::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.21 via Frontend Transport; Mon,
- 2 Mar 2026 14:46:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF00020E64.mail.protection.outlook.com (10.167.249.25) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.16 via Frontend Transport; Mon, 2 Mar 2026 14:47:17 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
- 2026 08:47:15 -0600
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
- 2026 08:47:15 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 2 Mar 2026 08:47:15 -0600
-Received: from jeevan-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com (jeevan-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.233.81])
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 622ElDRV454548;
-	Mon, 2 Mar 2026 08:47:14 -0600
-From: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-Subject: [meta-oe][PATCH] nodejs: fix NEON llhttp ctzll undefined behavior
-Date: Mon, 2 Mar 2026 20:16:34 +0530
-Message-ID: <20260302144634.835048-1-j-sahu@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Ru9WDDXj;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.45, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-439b8a3f2bcso721741f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 06:56:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1772463367; x=1773068167; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zl44npOMK+f3Np+AQPHvPlxUxrTyWA0a1z4yIwmLNZo=;
+        b=Ru9WDDXjXDL3+TKjGBRtfXwYKP74xomIlZV/xYpce++OYDiJHgwhz76aE/81PnbU+9
+         TeoCsCzVjt16j9wTp1QVDHqnLcuxwaRFUl93MkxxFA7AX09OjXMzBL+LdfaOXvH3dY5a
+         mQ/3RZB2kXkiFfai16kLLnIa5VnPF++lkQIzQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772463367; x=1773068167;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=zl44npOMK+f3Np+AQPHvPlxUxrTyWA0a1z4yIwmLNZo=;
+        b=xUXywWr+YfLDkdS74Wh/WgaYbmyxpV8xfRSy0E+BdU4e0U/boVCuR+dEodwWDmu+9h
+         p8abCwTCLRdKbjt3gSisozUEaJFLK78ZqVuot5KL0mlBApXzMyxsecyjlCRjYkUQTVDl
+         LOgsIasBBUHP8jy+Wb1HxSdvldhF5jc4KNwwoONiblzfAgsYUaX0yfBKbQyGzhuneA+Q
+         R5wBqGp7p6ETvZHpcwTO03qiEyTpOpEbSc3a95O1GSSq0XGSUb5CEfs4Ieud1glibYGe
+         hBz5d241vAZtpt38A4BKfpmGFpQJgNQRXeiSXMQY49iZLkJl2uLzpCKvg84+WXhDZdOF
+         r04Q==
+X-Gm-Message-State: AOJu0Yz7ex4NFbgLuMiEvBS0UpHsg0dtq8Gizi8BTYxhrvqM1t5cCzSu
+	yCpGZerMqvd86eQcJYk09Q7iplHadHlnKy76N5rMLDgnKu/hqTb4ivcrITIu7d95EKdtivhpgYd
+	K8jST
+X-Gm-Gg: ATEYQzyvsRrOJJUO88fDGfH9nxhobqmNfBM+ALPGQvSM8g08j2ErHI2pVkxo9VBdbQl
+	b32HM0hgmBed5X6KynYu3Lad5kuBvrryjl/Pqh+dikXwm/B85yMbl+JdTs9U3qCJ6YlCmk5pw2r
+	A8k0KgVJYUQOLgtmvOwi5I8hZO+oXc8cv7QEzzNlu1pn5Ds5yP6XcA80pYrnjrgFcZYFfgl8wUk
+	ixrEEjBvZ10N/bMX9+jubffEPzmtzOY/26etw+CJipU+NqKGdtOWWBUpQMGaMMpoQ7LHbraSRa4
+	M5ISbQssTYM7Qbqb6oFVcv2ktF19aaIsNgc0l4MyNGVyMaJtug2j/l4+5zweoJi7KAsB60ADb+T
+	tNm1xmiW2rogcR7gi2pRnml9ue41W205TmbAuDB9t0Z9FVYK92/2Ir8xwTkeS4pkAeb4EPPLew5
+	bSKFVznSWadh6GuDsfOqqKE7HtUlEIsI4sa9x1
+X-Received: by 2002:a05:6000:1885:b0:439:b486:ba6b with SMTP id ffacd0b85a97d-439b486c39cmr8030539f8f.39.1772463367300;
+        Mon, 02 Mar 2026 06:56:07 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4399c75a25dsm27445295f8f.21.2026.03.02.06.56.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Mar 2026 06:56:06 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-yarl: Upgrade 1.22.0 -> 1.23.0
+Date: Mon,  2 Mar 2026 16:56:01 +0200
+Message-ID: <20260302145602.1385229-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260302145602.1385229-1-leon.anavi@konsulko.com>
+References: <20260302145602.1385229-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00020E64:EE_|MW5PR10MB5875:EE_
-X-MS-Office365-Filtering-Correlation-Id: eb6ab80f-9d9d-4061-f35b-08de786a9a12
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700013|34020700016|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	48EY+iiZP0vw3VTOOpqepIhQ5EPrYmo1rdzulzbZIr2ZhYyxVtZStV8pYxNUrNRrNDyCDWkipsJSK+rowZXyezLC1x7UgwIxbGxB0Q2I3a1anDdda1fYffR0C2uvs2sOFKhfGNPasQxqNRBL6Lq8f/NQ6xr1nkPuqHn9zZGtOnVUZPWakKb5/fVCXUdj2iOFh/YAkMIL0U1jEq+XsDkqHcPBfo5Vjr28GskuAYfW/3IOcjqCukKHPca2Ql3ivIWx0mxlKMPmqftgUqx296qkLkYkVU3oN2Dl0klQsPQ1Mhv2xurs7tSEusy9tlAIqzOVjvMKQ7t2ybJDvm0UQUsYK8xHC6hRY9HnDIZ8DhPQEyIuDCLxfvhKi5XWqjUe+dppPaqFjMP+sZtS+qBtx3Uo9pbf0Z96Zu9qUqjobftD7XXr8TctfaMaHRySrjvhYyoNkDQ1hf6jxCausd3jYFmE9nKA9N9F5UHoTOdYY9FsfH5zCkJ6rCsLmqeXhJEsOE4BI8ZINGanf3Mj87sAiO5NEWEVJEoR36o9VoK35BkHmzN0VijgHjudduE1LR4C/j6Fdlw3k5Pc+c4+yo1jwSqatybC5mkQ/akUP/QV9Mrxd7dpPPDsWJSrb+/uiyK63ulhay0YROhqWzUm0QbQII0G9z0b3aBwd9dq7FNGRC3UwLYPKB8ivkyzYMqIUCNZFqXgzXPtUl6vNTpg7cdwUODSCxs/H92U5Zm5yuR+iFG+eWwj0OwVn62UF7+gXIOTzQiIzCmtafCUpeWgMW45Ru2sHg==
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(34020700016)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	SAhtvWMfcpqgiBQGDwZYQse6HaVEYbARk5mvBnazdYNdwDUXDz3E/ZO6Lmm2qPYzewX8aOeHnqbPT5agTWwOidnieRJyGEMEBuaSdVxuScW2ZXDSqM7ftVxeyB1hjkKRyLQov1TCwkiEERTg7q4S4oJVnRMLVFgGQ53Dij2YO8/Sa2+sh4A2LWhWV1ehFBB6P7YkUnPxz1JvJIq5Yh3eULx03M7SGX/1HWIaAIs6qaP+PJaVL80usgr9kw9+OsjmcbcvZbuVVNQqQSxSEC8wenX0Mbwu0ZpYxvYKDof6nU/ek1gztNiAhb2akKT80EE+IG8v1QOBBwHnaBtq7J0NYgREHnCmhAAMojfc2bZLrnzjrOtUhjGamoxAstfv5voJM62s2YGaARx+4GP5H8pnBqSht9j9ipIM06RTuzWsJJUYtAKH+d44IFtXYThShTtM
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 14:47:17.8862
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb6ab80f-9d9d-4061-f35b-08de786a9a12
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BL6PEPF00020E64.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR10MB5875
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 14:47:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124806
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 14:56:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124808
 
-The NEON SIMD fast path in the bundled llhttp calls
-__builtin_ctzll(match_mask) without checking if match_mask is zero.
-When all 16 bytes in a NEON register are valid header value characters,
-match_mask is 0. Calling __builtin_ctzll(0) is undefined behavior.
+Upgrade to release 1.23.0:
 
-GCC at -O2 exploits this by optimizing "if (match_len !=3D 16)" to
-always-true, causing HTTP 400 Bad Request for any header value longer
-than 16 characters on ARM targets with NEON enabled.
+- Added support for pydantic, the :class:~yarl.URL could be used as
+  a field type in pydantic models seamlessly.
+- The CI has been set up to notify Codecov about upload completion
+- The in-tree build backend allows the end-users appending
+  CFLAGS and LDFLAGS by setting respective environment
+  variables externally.
+- The :pep:517 build backend now supports a new config
+  setting for controlling whether to build the project in-tree
+  or in a temporary directory. It only affects wheels and is
+  set up to build in a temporary directory by default. It does
+  not affect editable wheel builds - they will keep being
+  built in-tree regardless.
+- Starting this version, when building the wheels is happening
+  in an automatically created temporary directory, the build
+  backend makes an effort to normalize the respective file
+  system path to a deterministic source checkout directory.
 
-Fix by explicitly checking for match_mask =3D=3D 0 and setting
-match_len =3D 16. This bug affects both aarch64 and armv7 NEON targets.
-
-The code this patch modifies is generated, so the patch itself isn't
-suitable for upstream submission, as the root cause of the error is
-in the generator itself. The fix has been merged upstream[1] in
-llparse 7.3.1 and is included in llhttp 9.3.1. This patch can be
-dropped when nodejs updates its bundled llhttp to >=3D 9.3.1.
-
-[1]: https://github.com/nodejs/llparse/pull/83
-
-Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...header-value-__builtin_ctzll-undefin.patch | 60 +++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_22.22.0.bb |  1 +
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-=
-NEON-header-value-__builtin_ctzll-undefin.patch
+ .../0001-build-wheel-in-place.patch           | 31 -------------------
+ ...-yarl_1.22.0.bb => python3-yarl_1.23.0.bb} |  9 +++---
+ 2 files changed, 5 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
+ rename meta-python/recipes-devtools/python/{python3-yarl_1.22.0.bb => python3-yarl_1.23.0.bb} (78%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-he=
-ader-value-__builtin_ctzll-undefin.patch b/meta-oe/recipes-devtools/nodejs/=
-nodejs/0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch
-new file mode 100644
-index 0000000000..683dddcf04
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-va=
-lue-__builtin_ctzll-undefin.patch
-@@ -0,0 +1,60 @@
-+From a63a5faea54055973bf5f0a514444532563cc20d Mon Sep 17 00:00:00 2001
-+From: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-+Date: Fri, 27 Feb 2026 20:58:43 +0530
-+Subject: [PATCH] llhttp: fix NEON header value __builtin_ctzll undefined
-+ behavior
+diff --git a/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch b/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
+deleted file mode 100644
+index 84f81da775..0000000000
+--- a/meta-python/recipes-devtools/python/python3-yarl/0001-build-wheel-in-place.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 606843ad079d9d0dac1172533d42b5a2327b99ed Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Wed, 17 Sep 2025 15:41:09 +0800
+-Subject: [PATCH] build wheel in place
+-
+-In order to make the generated library be reproducible, build wheel
+-in source dir other than tmp dir (/tmp/xxxxxx), then yocto toolchain's
+-option -fdebug-prefix-map could work as expected
+-
+-Upstream-Status: Pending
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- packaging/pep517_backend/_backend.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/packaging/pep517_backend/_backend.py b/packaging/pep517_backend/_backend.py
+-index 61cad34..d5d839e 100644
+---- a/packaging/pep517_backend/_backend.py
+-+++ b/packaging/pep517_backend/_backend.py
+-@@ -316,7 +316,7 @@ def build_wheel(
+-     """
+-     with maybe_prebuild_c_extensions(
+-             line_trace_cython_when_unset=False,
+--            build_inplace=False,
+-+            build_inplace=True,
+-             config_settings=config_settings,
+-     ):
+-         return _setuptools_build_wheel(
+--- 
+-2.34.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb b/meta-python/recipes-devtools/python/python3-yarl_1.23.0.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb
+rename to meta-python/recipes-devtools/python/python3-yarl_1.23.0.bb
+index 6c2e2259b7..6a973f9acb 100644
+--- a/meta-python/recipes-devtools/python/python3-yarl_1.22.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yarl_1.23.0.bb
+@@ -3,15 +3,14 @@ HOMEPAGE = "https://github.com/aio-libs/yarl/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI[sha256sum] = "bebf8557577d4401ba8bd9ff33906f1376c877aa78d1fe216ad01b4d6745af71"
++SRC_URI[sha256sum] = "53b1ea6ca88ebd4420379c330aea57e258408dd0df9af0992e5de2078dc9f5d5"
+ 
+ PYPI_PACKAGE = "yarl"
+ 
+ inherit pypi ptest-python-pytest python_setuptools_build_meta cython
+ 
+-SRC_URI += " \
+-    file://0001-build-wheel-in-place.patch \
+-"
++PEP517_BUILD_OPTS = "--config-setting=build-inplace=true"
 +
-+When all 16 bytes match the allowed range, match_mask becomes 0 after
-+the bitwise NOT. Calling __builtin_ctzll(0) is undefined behavior per
-+the C standard.
+ 
+ DEPENDS += " \
+     python3-expandvars-native \
+@@ -33,4 +32,6 @@ RDEPENDS:${PN}-ptest += " \
+     python3-unittest-automake-output \
+ "
+ 
++INSANE_SKIP:${PN} = "already-stripped"
 +
-+The code expects match_len =3D=3D 16 when all bytes match (so the branch
-+is skipped and p +=3D 16 continues the loop), but this relied on
-+ctzll(0) returning 64, which is not guaranteed.
-+
-+GCC at -O2 exploits this UB by deducing that __builtin_ctzll() result
-+is always in range [0, 63], and after >> 2 always in [0, 15], which
-+is never equal to 16. The compiler then optimizes
-+"if (match_len !=3D 16)" to always-true, causing every valid 16-byte
-+chunk to be falsely rejected as containing an invalid character.
-+
-+This manifests as HTTP 400 Bad Request (HPE_INVALID_HEADER_TOKEN) for
-+any HTTP header value longer than 16 characters on ARM targets with
-+NEON enabled.
-+
-+Fix by explicitly checking for match_mask =3D=3D 0 and setting
-+match_len =3D 16, avoiding the undefined behavior entirely. This bug
-+affects both aarch64 and armv7 NEON targets.
-+
-+The fix has been merged upstream in llparse 7.3.1 [1] and is included
-+in llhttp 9.3.1. This patch can be dropped when nodejs updates its
-+bundled llhttp to >=3D 9.3.1.
-+
-+[1]: https://github.com/nodejs/llparse/pull/83
-+
-+Upstream-Status: Inappropriate
-+Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-+---
-+ deps/llhttp/src/llhttp.c | 6 +++++-
-+ 1 file changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
-+index 14b731e..b0a46c6 100644
-+--- a/deps/llhttp/src/llhttp.c
-++++ b/deps/llhttp/src/llhttp.c
-+@@ -2651,7 +2651,11 @@ static llparse_state_t llhttp__internal__run(
-+         mask =3D vorrq_u8(mask, single);
-+         narrow =3D vshrn_n_u16(vreinterpretq_u16_u8(mask), 4);
-+         match_mask =3D ~vget_lane_u64(vreinterpret_u64_u8(narrow), 0);
-+-        match_len =3D __builtin_ctzll(match_mask) >> 2;
-++        if (match_mask =3D=3D 0) {
-++          match_len =3D 16;
-++        } else {
-++          match_len =3D __builtin_ctzll(match_mask) >> 2;
-++        }
-+         if (match_len !=3D 16) {
-+           p +=3D match_len;
-+           goto s_n_llhttp__internal__n_header_value_otherwise;
-+--=20
-+2.34.1
-+
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb b/meta-oe/re=
-cipes-devtools/nodejs/nodejs_22.22.0.bb
-index 05fa608047..d08c5d8318 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
-@@ -33,6 +33,7 @@ SRC_URI =3D "https://nodejs.org/dist/v${PV}/node-v${PV}.t=
-ar.xz \
-            file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
-            file://0001-fix-arm-Neon-intrinsics-types.patch \
-            file://0001-detect-aarch64-Neon-correctly.patch \
-+           file://0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefi=
-n.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target =3D " \
---=20
-2.34.1
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.47.3
 
 
