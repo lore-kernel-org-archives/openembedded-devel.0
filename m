@@ -1,339 +1,349 @@
-Return-Path: <j-sahu@ti.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1928EA4E20
-	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 15:15:05 +0000 (UTC)
-Subject: Re: [meta-oe][PATCH] nodejs: fix NEON llhttp ctzll undefined behavior
-To: openembedded-devel@lists.openembedded.org
-From: "Jeevan" <j-sahu@ti.com>
-X-Originating-Location: IN (103.146.116.9)
-X-Originating-Platform: Linux Firefox 147
-User-Agent: GROUPS.IO Web Poster
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21528EA4E23
+	for <webhook@archiver.kernel.org>; Mon,  2 Mar 2026 15:26:36 +0000 (UTC)
+Received: from mail-yx1-f43.google.com (mail-yx1-f43.google.com [74.125.224.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.163006.1772465192428091829
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 02 Mar 2026 07:26:32 -0800
+Authentication-Results: mx.groups.io;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BFkBxRt4;
+ spf=pass (domain: gmail.com, ip: 74.125.224.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f43.google.com with SMTP id 956f58d0204a3-64ad019bbd4so3956686d50.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 07:26:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772465191; cv=none;
+        d=google.com; s=arc-20240605;
+        b=OjFsTIyOm77eXtx7Nr6ePyyNNeN+VymsZGGDQ/MnU3CaCRri82Xb9zqJjR7waFjfso
+         R20PV9kFDlt78swmRZc+bZs5VIygTJuUJbdQ8gJHD3HC8Qa6fpe0FFSi6oSQ4sWny5CT
+         ZQ8Esk6+QeD7IkDeU1/lFip/iXIMORQyy1WUTwAUMNj0OjijNwQSHke8jeutYw6QQ2Mx
+         6h2vLmTy+9h8ZONSzc+zsqh35yKSjEsjkOBHLhSS9CwbuMN26ad9qBAM7ZsLRLOUUWwC
+         2M0WQQ6hfQ1y9D1CpS4We77aNLFEyF1GUSHfCyhgj5+VUCESja7bXeBsjDs80cyjaXrT
+         abSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=PAXsaqzHyGtx/09edCAWWkZVMYYWs2IGgf5XA93mKxU=;
+        fh=xc7Pw1C2r64/D3IAczFTr6Vs+3vKL6I7LfJKgO2Lfwc=;
+        b=Gh9z4K/bFuCxjO0WcguKj3HIWH2wO3Al5K5apjW47PooV4gqCd9YsuIYz8/gYt8V5W
+         fFnem8JSi8dakbcIvTFgQWpplySHQcdALu1A3TbN6T07XNsLSFOEFyj2Or0elJaevZby
+         IMqQxLJzZMDmsrvY7IIkiWsN8+nkfvA8lWWM8sElhctycXm2AWuBB2uLKY6UVoGMx1tR
+         xqFNFOdg1Qi4onDpV1JSe9K0oOgl4SlbmDY6rm4LcPlPBuUvhkaH3cyva1Sj3vFQAqyX
+         9W5reyAM61V5LmFIpkUZuGWriCcy0FbYFRcmwWcs+/PmfQvD7SEnpedUGBKyrCYOe1Co
+         WtBA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772465191; x=1773069991; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=PAXsaqzHyGtx/09edCAWWkZVMYYWs2IGgf5XA93mKxU=;
+        b=BFkBxRt42gDUWQwpS6++rr5FzhhzB9oIydfL4ArKqhboEjCzzEHTyfA5620lxAfnDw
+         d81UgnioOZOvC1wU7vXKssnE9pc4efLiW+7Iau1V4xOIW12riP3lwfHXiGObz4AWI3Z1
+         KQ8uFkqTYqsCh9bx85axSNINW73gLFKB84mSHVnicre7mjKmDaUiZQG8q8p1ouDvztNa
+         thYdS7u+qD70oyKdsDjAXKLIuJCiqXhr9bZUKITXtuK3tLoz9fWLOp7DWmLAcHmTTckC
+         P62Ietkxm3gy2XU7fWff6gFB7s2ikGWDg3V76VauYiGIT4oiKgTXvsZIg+a731/TDxcQ
+         gU8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772465191; x=1773069991;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PAXsaqzHyGtx/09edCAWWkZVMYYWs2IGgf5XA93mKxU=;
+        b=j/1WfQXdz7RApHCq3OJlMoNyCcjLld4t92TRIQ3WTTsDgE6xdHHEQB7aukK9dHX/Ht
+         X3UnD3WLCTM7hKMfzhly9NP8nD6s/nCUFy+YQ8Weuk6OR26n14383uyxQhdGANtVAZUA
+         AZau0Ws/T7Cq2rAVob7XX4iXabGNHk2bbIeDWOJ2Rg6WMsepjqQRUdJUCsAmtSz5er8H
+         mnz/sIKqTPK2S67G/9SHk3lIykoHON7plgZNJ2yGGrnERtWOaM8ql84STb+LuW6cGFga
+         i5idmiao8f8Al2EnbbeOe5g4LW5UKyVXLVt6asEDH/NUu1KgwxH/ImNCp4wRRd8Yk6oX
+         FVWw==
+X-Gm-Message-State: AOJu0YwN8GiT/pJdAOiEkuq303idQ9QDzcBHT6vN45Usblg3PtQAKWg/
+	4nlrVz/mVfAePTA5oaauQUk1vlo5PhfW/VferPpYaXgZ+3wzgElx49QGkMLD9m4Yv3rghznRaaH
+	wxRbdSsHrMMGZxuMi+5ZBoBX5bBySGC0=
+X-Gm-Gg: ATEYQzx3rTbIom8iK/pa6VgcgcIeSNHBFUZgWqML1PeeRhI6M0KLsQXYZ+0o8Bu/L9o
+	8eTdv4S0p48M7K00eg2CAuYu61n3JA/z4+/chjSRj9+s0rLPGUtVDawc84dbmS88q8E4tih7wjh
+	qRFKelAFp0/VP4nP1LbZscZ/mqJ6USqy7Ef1cqEzV7Jsm0Yj/ojkACE9rviE6nAq+RLHyfrLQKk
+	605Wk6ILdIMkDIrC/D7ouI/CyzWWpNXGykcVR0RNbcp89BtsWurPLBq8sWlivA2g2vswJiy2pv/
+	8uBN/gpg7EYEvx/q6Wx15B9HYJBwAwDjh7VdizT9JIf8OMDfByYggEnbivEqFb0THRfTdJ3IGpY
+	OsEa5Wt9LaoG81IbkeMfyLO5uB7+ChdQlmxA=
+X-Received: by 2002:a53:ac9d:0:b0:64c:e749:15e9 with SMTP id
+ 956f58d0204a3-64ce749196bmr995235d50.68.1772465191223; Mon, 02 Mar 2026
+ 07:26:31 -0800 (PST)
 MIME-Version: 1.0
-Date: Mon, 02 Mar 2026 07:15:01 -0800
-References: <20260302144634.835048-1-j-sahu@ti.com> <CAMKF1sqmBQjDuKWwhQ1gfkz8iqT=7ZDR3JWTXvjQ0e+mPiPQ7Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sqmBQjDuKWwhQ1gfkz8iqT=7ZDR3JWTXvjQ0e+mPiPQ7Q@mail.gmail.com>
-Message-ID: <1127752.1772464501134749224@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="nSAY8ZsRAILd7cgUhf0a"
+References: <20260227101327.1432-1-wangmy@fujitsu.com> <20260227101327.1432-47-wangmy@fujitsu.com>
+In-Reply-To: <20260227101327.1432-47-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 2 Mar 2026 07:26:04 -0800
+X-Gm-Features: AaiRm50AZI646he0H9nh3JGgpr-v1c3nODSOfr3kg1O9P7iaemRGdaHKW4qFi1Y
+Message-ID: <CAMKF1sqLB2woUFbQj8cw9Eh0o0=jEWxQjC68d9KQeeBa6TFMeg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH 47/52] valijson: upgrade 1.0.6 -> 1.1.0
+To: wangmy@fujitsu.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000001987f3064c0c36e5"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 15:15:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124813
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Mar 2026 15:26:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124814
 
---nSAY8ZsRAILd7cgUhf0a
-Content-Type: text/plain; charset="utf-8"
+--0000000000001987f3064c0c36e5
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 2, 2026 at 08:27 PM, Khem Raj wrote:
+This causes sysdig build failure
 
->=20
->=20
->=20
-> On Mon, Mar 2, 2026 at 6:47=E2=80=AFAM Jeevan via lists.openembedded.org =
-(
-> http://lists.openembedded.org ) <j-sahu=3D ti.com@lists.openembedded.org =
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:241:24:
+error: no template named 'optional' in namespace 'std'
+  241 |             const std::optional<Array> array =3D
+m_value.getArrayOptional();
+      |                   ~~~~~^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:259:24:
+error: no template named 'optional' in namespace 'std'
+  259 |             const std::optional<Object> object =3D
+m_value.getObjectOptional();
+      |                   ~~~~~^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:501:28:
+error: no template named 'optional' in namespace 'std'
+  501 |                 const std::optional<ArrayType> array =3D
+m_value.getArrayOptional();
+      |                       ~~~~~^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:511:28:
+error: no template named 'optional' in namespace 'std'
+  511 |                 const std::optional<ObjectType> object =3D
+m_value.getObjectOptional();
+      |                       ~~~~~^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:540:14:
+error: no member named 'optional' in namespace 'std'
+  540 |         std::optional<ArrayType> arrayValue =3D
+m_value.getArrayOptional();
+      |              ^~~~~~~~
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:540:23:
+error: 'ArrayType' does not refer to a value
+  540 |         std::optional<ArrayType> arrayValue =3D
+m_value.getArrayOptional();
+      |                       ^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:79:14:
+note: declared here
+   79 |     typename ArrayType,
+      |              ^
+../recipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:540:34:
+error: use of undeclared identifier 'arrayValue'; did you mean
+'Json::arrayValue'?
+  540 |         std::optional<ArrayType> arrayValue =3D
+m_value.getArrayOptional();
+      |                                  ^~~~~~~~~~
+../recipe-sysroot/usr/include/json/value.h:115:3: note: 'Json::arrayValue'
+declared here
+  115 |   arrayValue,    ///< array value (ordered list)
+      |   ^
+
+
+here is full log
+
+https://termbin.com/y3j0
+
+On Fri, Feb 27, 2026 at 2:15=E2=80=AFAM wangmy via lists.openembedded.org <=
+wangmy=3D
+fujitsu.com@lists.openembedded.org> wrote:
+
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> wrote:
->=20
->> The NEON SIMD fast path in the bundled llhttp calls
->> __builtin_ctzll(match_mask) without checking if match_mask is zero.
->> When all 16 bytes in a NEON register are valid header value characters,
->> match_mask is 0. Calling __builtin_ctzll(0) is undefined behavior.
->>=20
->> GCC at -O2 exploits this by optimizing "if (match_len !=3D 16)" to
->> always-true, causing HTTP 400 Bad Request for any header value longer
->> than 16 characters on ARM targets with NEON enabled.
->>=20
->> Fix by explicitly checking for match_mask =3D=3D 0 and setting
->> match_len =3D 16. This bug affects both aarch64 and armv7 NEON targets.
->>=20
->> The code this patch modifies is generated, so the patch itself isn't
->> suitable for upstream submission, as the root cause of the error is
->> in the generator itself. The fix has been merged upstream[1] in
->> llparse 7.3.1 and is included in llhttp 9.3.1. This patch can be
->> dropped when nodejs updates its bundled llhttp to >=3D 9.3.1.
->>=20
->> [1]: https://github.com/nodejs/llparse/pull/83
->>=20
->> Signed-off-by: Telukula Jeevan Kumar Sahu < j-sahu@ti.com >
->> ---
->> ...header-value-__builtin_ctzll-undefin.patch | 60 +++++++++++++++++++
->> .../recipes-devtools/nodejs/ nodejs_22.22.0.bb ( http://nodejs_22.22.0.b=
-b )
->> |=C2=A0 1 +
->> 2 files changed, 61 insertions(+)
->> create mode 100644
->> meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value=
--__builtin_ctzll-undefin.patch
->>=20
->>=20
->> diff --git
->> a/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-val=
-ue-__builtin_ctzll-undefin.patch
->> b/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-val=
-ue-__builtin_ctzll-undefin.patch
->>=20
->> new file mode 100644
->> index 0000000000..683dddcf04
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-val=
-ue-__builtin_ctzll-undefin.patch
->>=20
->> @@ -0,0 +1,60 @@
->> +From a63a5faea54055973bf5f0a514444532563cc20d Mon Sep 17 00:00:00 2001
->> +From: Telukula Jeevan Kumar Sahu < j-sahu@ti.com >
->> +Date: Fri, 27 Feb 2026 20:58:43 +0530
->> +Subject: [PATCH] llhttp: fix NEON header value __builtin_ctzll undefine=
-d
->> + behavior
->> +
->> +When all 16 bytes match the allowed range, match_mask becomes 0 after
->> +the bitwise NOT. Calling __builtin_ctzll(0) is undefined behavior per
->> +the C standard.
->> +
->> +The code expects match_len =3D=3D 16 when all bytes match (so the branc=
-h
->> +is skipped and p +=3D 16 continues the loop), but this relied on
->> +ctzll(0) returning 64, which is not guaranteed.
->> +
->> +GCC at -O2 exploits this UB by deducing that __builtin_ctzll() result
->> +is always in range [0, 63], and after >> 2 always in [0, 15], which
->> +is never equal to 16. The compiler then optimizes
->> +"if (match_len !=3D 16)" to always-true, causing every valid 16-byte
->> +chunk to be falsely rejected as containing an invalid character.
->> +
->> +This manifests as HTTP 400 Bad Request (HPE_INVALID_HEADER_TOKEN) for
->> +any HTTP header value longer than 16 characters on ARM targets with
->> +NEON enabled.
->> +
->> +Fix by explicitly checking for match_mask =3D=3D 0 and setting
->> +match_len =3D 16, avoiding the undefined behavior entirely. This bug
->> +affects both aarch64 and armv7 NEON targets.
->> +
->> +The fix has been merged upstream in llparse 7.3.1 [1] and is included
->> +in llhttp 9.3.1. This patch can be dropped when nodejs updates its
->> +bundled llhttp to >=3D 9.3.1.
->> +
->> +[1]: https://github.com/nodejs/llparse/pull/83
->> +
->> +Upstream-Status: Inappropriate
->=20
->=20
-> If this fix is merged upstream then status should be 'Backport' with
-> appropriate links to
-> point to upstream fix.
->=20
->=20
->=20
-
-This patch manually applies the logic to the generated C code. Upstream (ll=
-parse/llhttp/nodejs)
-would never accept patches to generated files - they'd regenerate or update=
- the bundled version.
-That's why I used "Inappropriate" per Yocto guidelines.
-
->=20
->=20
->=20
->> +Signed-off-by: Telukula Jeevan Kumar Sahu < j-sahu@ti.com >
->> +---
->> + deps/llhttp/src/llhttp.c | 6 +++++-
->> + 1 file changed, 5 insertions(+), 1 deletion(-)
->> +
->> +diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
->> +index 14b731e..b0a46c6 100644
->> +--- a/deps/llhttp/src/llhttp.c
->> ++++ b/deps/llhttp/src/llhttp.c
->> +@@ -2651,7 +2651,11 @@ static llparse_state_t llhttp__internal__run(
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mask =3D vorrq_u8(mask, single);
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0narrow =3D vshrn_n_u16(vreinterpretq_=
-u16_u8(mask), 4);
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0match_mask =3D ~vget_lane_u64(vreinte=
-rpret_u64_u8(narrow), 0);
->> +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 match_len =3D __builtin_ctzll(match_mask) =
->> 2;
->> ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (match_mask =3D=3D 0) {
->> ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 match_len =3D 16;
->> ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {
->> ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 match_len =3D __builtin_ctzll(match=
-_mask) >> 2;
->> ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (match_len !=3D 16) {
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0p +=3D match_len;
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0goto s_n_llhttp__internal__n_h=
-eader_value_otherwise;
->> +--
->> +2.34.1
->> +
->> diff --git a/meta-oe/recipes-devtools/nodejs/ nodejs_22.22.0.bb (
->> http://nodejs_22.22.0.bb ) b/meta-oe/recipes-devtools/nodejs/ nodejs_22.=
-22.0.bb
->> ( http://nodejs_22.22.0.bb )
->> index 05fa608047..d08c5d8318 100644
->> --- a/meta-oe/recipes-devtools/nodejs/ nodejs_22.22.0.bb (
->> http://nodejs_22.22.0.bb )
->> +++ b/meta-oe/recipes-devtools/nodejs/ nodejs_22.22.0.bb (
->> http://nodejs_22.22.0.bb )
->> @@ -33,6 +33,7 @@ SRC_URI =3D " https://nodejs.org/dist/v${PV}/node-v${P=
-V}.tar.xz
->> ( https://nodejs.org/dist/v$%7BPV%7D/node-v$%7BPV%7D.tar.xz ) \
->> file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
->> file://0001-fix-arm-Neon-intrinsics-types.patch \
->> file://0001-detect-aarch64-Neon-correctly.patch \
->> +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=20
->> file://0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch \
->> file://run-ptest \
->> "
->> SRC_URI:append:class-target =3D " \
->> --
->> 2.34.1
->>=20
->>=20
->>=20
->>=20
->=20
->=20
+> Issues fixed in this release:
+> -----------------------------
+> Update bundle.sh to include regex.hpp
+> Fix copy-paste error message
+> Ensure nlohmann/json non-finite floats are interpreted as null when
+> validating
+> Ensure tests are built in oss-fuzz build
+>
+> Other changes include:
+> ----------------------
+> Added support for JSON pointer paths in validation errors
+> Added a validation benchmark example
+> Added design and architecture docs
+> Removed compatibility shim for std::optional
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../valijson/{valijson_1.0.6.bb =3D> valijson_1.1.0.bb}           | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-devtools/valijson/{valijson_1.0.6.bb =3D>
+> valijson_1.1.0.bb} (93%)
+>
+> diff --git a/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
+> b/meta-oe/recipes-devtools/valijson/valijson_1.1.0.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
+> rename to meta-oe/recipes-devtools/valijson/valijson_1.1.0.bb
+> index 4e5f02746c..b7e45c3057 100644
+> --- a/meta-oe/recipes-devtools/valijson/valijson_1.0.6.bb
+> +++ b/meta-oe/recipes-devtools/valijson/valijson_1.1.0.bb
+> @@ -4,7 +4,7 @@ LICENSE =3D "BSD-2-Clause"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5c4583a434195e4f3b418e17c8ca2=
+daf"
+>
+>  SRC_URI =3D "git://
+> github.com/tristanpenman/valijson.git;branch=3Dmaster;protocol=3Dhttps;ta=
+g=3Dv${PV}
+> <http://github.com/tristanpenman/valijson.git;branch=3Dmaster;protocol=3D=
+https;tag=3Dv$%7BPV%7D>
+> "
+> -SRCREV =3D "4edda758546436462da479bb8c8514f8a95c35ad"
+> +SRCREV =3D "b12841e3fa23a8cc477179face0a5ce5f80b64ab"
+>
+>
+>  inherit cmake
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124747):
+> https://lists.openembedded.org/g/openembedded-devel/message/124747
+> Mute This Topic: https://lists.openembedded.org/mt/118027942/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 >
 
---nSAY8ZsRAILd7cgUhf0a
-Content-Type: text/html; charset="utf-8"
+--0000000000001987f3064c0c36e5
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div>On Mon, Mar 2, 2026 at 08:27 PM, Khem Raj wrote:</div>
-<div>
-<blockquote>
-<div dir=3D"ltr">
-<div dir=3D"ltr">&nbsp;</div>
-<br />
-<div class=3D"gmail_quote gmail_quote_container">
-<div class=3D"gmail_attr" dir=3D"ltr">On Mon, Mar 2, 2026 at 6:47=E2=80=AFA=
-M Jeevan via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
-rg</a> &lt;j-sahu=3D<a href=3D"mailto:ti.com@lists.openembedded.org">ti.com=
-@lists.openembedded.org</a>&gt; wrote:</div>
-<blockquote class=3D"gmail_quote" style=3D"margin: 0px 0px 0px 0.8ex; borde=
-r-left: 1px solid #cccccc; padding-left: 1ex;">The NEON SIMD fast path in t=
-he bundled llhttp calls<br />__builtin_ctzll(match_mask) without checking i=
-f match_mask is zero.<br />When all 16 bytes in a NEON register are valid h=
-eader value characters,<br />match_mask is 0. Calling __builtin_ctzll(0) is=
- undefined behavior.<br /><br />GCC at -O2 exploits this by optimizing "if =
-(match_len !=3D 16)" to<br />always-true, causing HTTP 400 Bad Request for =
-any header value longer<br />than 16 characters on ARM targets with NEON en=
-abled.<br /><br />Fix by explicitly checking for match_mask =3D=3D 0 and se=
-tting<br />match_len =3D 16. This bug affects both aarch64 and armv7 NEON t=
-argets.<br /><br />The code this patch modifies is generated, so the patch =
-itself isn't<br />suitable for upstream submission, as the root cause of th=
-e error is<br />in the generator itself. The fix has been merged upstream[1=
-] in<br />llparse 7.3.1 and is included in llhttp 9.3.1. This patch can be<=
-br />dropped when nodejs updates its bundled llhttp to &gt;=3D 9.3.1.<br />=
-<br />[1]: <a href=3D"https://github.com/nodejs/llparse/pull/83" target=3D"=
-_blank" rel=3D"noopener noreferrer">https://github.com/nodejs/llparse/pull/=
-83</a><br /><br />Signed-off-by: Telukula Jeevan Kumar Sahu &lt;<a href=3D"=
-mailto:j-sahu@ti.com" target=3D"_blank" rel=3D"noopener">j-sahu@ti.com</a>&=
-gt;<br />---<br />&nbsp;...header-value-__builtin_ctzll-undefin.patch | 60 =
-+++++++++++++++++++<br />&nbsp;.../recipes-devtools/nodejs/<a href=3D"http:=
-//nodejs_22.22.0.bb" target=3D"_blank" rel=3D"noopener noreferrer">nodejs_2=
-2.22.0.bb</a> |&nbsp; 1 +<br />&nbsp;2 files changed, 61 insertions(+)<br /=
->&nbsp;create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-llhtt=
-p-fix-NEON-header-value-__builtin_ctzll-undefin.patch<br /><br />diff --git=
- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value=
--__builtin_ctzll-undefin.patch b/meta-oe/recipes-devtools/nodejs/nodejs/000=
-1-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch<br />new file =
-mode 100644<br />index 0000000000..683dddcf04<br />--- /dev/null<br />+++ b=
-/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value-_=
-_builtin_ctzll-undefin.patch<br />@@ -0,0 +1,60 @@<br />+From a63a5faea5405=
-5973bf5f0a514444532563cc20d Mon Sep 17 00:00:00 2001<br />+From: Telukula J=
-eevan Kumar Sahu &lt;<a href=3D"mailto:j-sahu@ti.com" target=3D"_blank" rel=
-=3D"noopener">j-sahu@ti.com</a>&gt;<br />+Date: Fri, 27 Feb 2026 20:58:43 +=
-0530<br />+Subject: [PATCH] llhttp: fix NEON header value __builtin_ctzll u=
-ndefined<br />+ behavior<br />+<br />+When all 16 bytes match the allowed r=
-ange, match_mask becomes 0 after<br />+the bitwise NOT. Calling __builtin_c=
-tzll(0) is undefined behavior per<br />+the C standard.<br />+<br />+The co=
-de expects match_len =3D=3D 16 when all bytes match (so the branch<br />+is=
- skipped and p +=3D 16 continues the loop), but this relied on<br />+ctzll(=
-0) returning 64, which is not guaranteed.<br />+<br />+GCC at -O2 exploits =
-this UB by deducing that __builtin_ctzll() result<br />+is always in range =
-[0, 63], and after &gt;&gt; 2 always in [0, 15], which<br />+is never equal=
- to 16. The compiler then optimizes<br />+"if (match_len !=3D 16)" to alway=
-s-true, causing every valid 16-byte<br />+chunk to be falsely rejected as c=
-ontaining an invalid character.<br />+<br />+This manifests as HTTP 400 Bad=
- Request (HPE_INVALID_HEADER_TOKEN) for<br />+any HTTP header value longer =
-than 16 characters on ARM targets with<br />+NEON enabled.<br />+<br />+Fix=
- by explicitly checking for match_mask =3D=3D 0 and setting<br />+match_len=
- =3D 16, avoiding the undefined behavior entirely. This bug<br />+affects b=
-oth aarch64 and armv7 NEON targets.<br />+<br />+The fix has been merged up=
-stream in llparse 7.3.1 [1] and is included<br />+in llhttp 9.3.1. This pat=
-ch can be dropped when nodejs updates its<br />+bundled llhttp to &gt;=3D 9=
-.3.1.<br />+<br />+[1]: <a href=3D"https://github.com/nodejs/llparse/pull/8=
-3" target=3D"_blank" rel=3D"noopener noreferrer">https://github.com/nodejs/=
-llparse/pull/83</a><br />+<br />+Upstream-Status: Inappropriate</blockquote=
->
-<div>&nbsp;</div>
-<div>If this fix is merged upstream then status should be 'Backport' with a=
-ppropriate links to</div>
-<div>point to upstream fix.</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-</div>
-</div>
-</blockquote>
-&nbsp; This patch manually applies the logic to the generated C code. Upstr=
-eam (llparse/llhttp/nodejs)</div>
-<div>&nbsp; would never accept patches to generated files - they'd regenera=
-te or update the bundled version.</div>
-<div>&nbsp; That's why I used "Inappropriate" per Yocto guidelines.<br /><b=
-r />
-<blockquote>
-<div dir=3D"ltr">
-<div class=3D"gmail_quote gmail_quote_container">
-<div>&nbsp;</div>
-<blockquote class=3D"gmail_quote" style=3D"margin: 0px 0px 0px 0.8ex; borde=
-r-left: 1px solid #cccccc; padding-left: 1ex;">+Signed-off-by: Telukula Jee=
-van Kumar Sahu &lt;<a href=3D"mailto:j-sahu@ti.com" target=3D"_blank" rel=
-=3D"noopener">j-sahu@ti.com</a>&gt;<br />+---<br />+ deps/llhttp/src/llhttp=
-.c | 6 +++++-<br />+ 1 file changed, 5 insertions(+), 1 deletion(-)<br />+<=
-br />+diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c<br /=
->+index 14b731e..b0a46c6 100644<br />+--- a/deps/llhttp/src/llhttp.c<br />+=
-+++ b/deps/llhttp/src/llhttp.c<br />+@@ -2651,7 +2651,11 @@ static llparse_=
-state_t llhttp__internal__run(<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mask=
- =3D vorrq_u8(mask, single);<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;narrow=
- =3D vshrn_n_u16(vreinterpretq_u16_u8(mask), 4);<br />+&nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp;match_mask =3D ~vget_lane_u64(vreinterpret_u64_u8(narrow), 0)=
-;<br />+-&nbsp; &nbsp; &nbsp; &nbsp; match_len =3D __builtin_ctzll(match_ma=
-sk) &gt;&gt; 2;<br />++&nbsp; &nbsp; &nbsp; &nbsp; if (match_mask =3D=3D 0)=
- {<br />++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; match_len =3D 16;<br />++&nbsp=
-; &nbsp; &nbsp; &nbsp; } else {<br />++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; m=
-atch_len =3D __builtin_ctzll(match_mask) &gt;&gt; 2;<br />++&nbsp; &nbsp; &=
-nbsp; &nbsp; }<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (match_len !=3D 1=
-6) {<br />+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;p +=3D match_len;<br />=
-+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;goto s_n_llhttp__internal__n_head=
-er_value_otherwise;<br />+-- <br />+2.34.1<br />+<br />diff --git a/meta-oe=
-/recipes-devtools/nodejs/<a href=3D"http://nodejs_22.22.0.bb" target=3D"_bl=
-ank" rel=3D"noopener noreferrer">nodejs_22.22.0.bb</a> b/meta-oe/recipes-de=
-vtools/nodejs/<a href=3D"http://nodejs_22.22.0.bb" target=3D"_blank" rel=3D=
-"noopener noreferrer">nodejs_22.22.0.bb</a><br />index 05fa608047..d08c5d83=
-18 100644<br />--- a/meta-oe/recipes-devtools/nodejs/<a href=3D"http://node=
-js_22.22.0.bb" target=3D"_blank" rel=3D"noopener noreferrer">nodejs_22.22.0=
-.bb</a><br />+++ b/meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs=
-_22.22.0.bb" target=3D"_blank" rel=3D"noopener noreferrer">nodejs_22.22.0.b=
-b</a><br />@@ -33,6 +33,7 @@ SRC_URI =3D "<a href=3D"https://nodejs.org/dis=
-t/v$%7BPV%7D/node-v$%7BPV%7D.tar.xz" target=3D"_blank" rel=3D"noopener nore=
-ferrer">https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz</a> \<br />&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file://0001-build-remove-redundant-mXX-=
-flags-for-V8.patch \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; file://=
-0001-fix-arm-Neon-intrinsics-types.patch \<br />&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; file://0001-detect-aarch64-Neon-correctly.patch \<br />+&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;file://0001-llhttp-fix-NEON-header-val=
-ue-__builtin_ctzll-undefin.patch \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; file://run-ptest \<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "<=
-br />&nbsp;SRC_URI:append:class-target =3D " \<br />-- <br />2.34.1<br /><b=
-r /><br /><br /></blockquote>
-</div>
-</div>
-</blockquote>
-</div>
+<div dir=3D"ltr">This causes sysdig build failure<div><br></div><div>../rec=
+ipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:241:24: error: =
+no template named &#39;optional&#39; in namespace &#39;std&#39;<br>=C2=A0 2=
+41 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const std::optional&lt;Array=
+&gt; array =3D m_value.getArrayOptional();<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~~~~~^<br>../recip=
+e-sysroot/usr/include/valijson/internal/basic_adapter.hpp:259:24: error: no=
+ template named &#39;optional&#39; in namespace &#39;std&#39;<br>=C2=A0 259=
+ | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const std::optional&lt;Object&=
+gt; object =3D m_value.getObjectOptional();<br>=C2=A0 =C2=A0 =C2=A0 | =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~~~~~^<br>../re=
+cipe-sysroot/usr/include/valijson/internal/basic_adapter.hpp:501:28: error:=
+ no template named &#39;optional&#39; in namespace &#39;std&#39;<br>=C2=A0 =
+501 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 const std::op=
+tional&lt;ArrayType&gt; array =3D m_value.getArrayOptional();<br>=C2=A0 =C2=
+=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 ~~~~~^<br>../recipe-sysroot/usr/include/valijson/internal/ba=
+sic_adapter.hpp:511:28: error: no template named &#39;optional&#39; in name=
+space &#39;std&#39;<br>=C2=A0 511 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 const std::optional&lt;ObjectType&gt; object =3D m_value.=
+getObjectOptional();<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~~~~~^<br>../recipe-sysroo=
+t/usr/include/valijson/internal/basic_adapter.hpp:540:14: error: no member =
+named &#39;optional&#39; in namespace &#39;std&#39;<br>=C2=A0 540 | =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 std::optional&lt;ArrayType&gt; arrayValue =3D m_value.=
+getArrayOptional();<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0^~~~~~~~<br>../recipe-sysroot/usr/include/valijson/inte=
+rnal/basic_adapter.hpp:540:23: error: &#39;ArrayType&#39; does not refer to=
+ a value<br>=C2=A0 540 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 std::optional&lt;Array=
+Type&gt; arrayValue =3D m_value.getArrayOptional();<br>=C2=A0 =C2=A0 =C2=A0=
+ | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 ^<br>../recipe-sysroot/usr/include/valijson/internal/basic_adapter.h=
+pp:79:14: note: declared here<br>=C2=A0 =C2=A079 | =C2=A0 =C2=A0 typename A=
+rrayType,<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0^<br>../recipe-sysroot/usr/include/valijson/internal/basic_adapte=
+r.hpp:540:34: error: use of undeclared identifier &#39;arrayValue&#39;; did=
+ you mean &#39;Json::arrayValue&#39;?<br>=C2=A0 540 | =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 std::optional&lt;ArrayType&gt; arrayValue =3D m_value.getArrayOption=
+al();<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0^~~~~~~~~~<br>../recipe-sysroot/usr/include/json/value.h:115:3: note: &#=
+39;Json::arrayValue&#39; declared here<br>=C2=A0 115 | =C2=A0 arrayValue, =
+=C2=A0 =C2=A0///&lt; array value (ordered list)<br>=C2=A0 =C2=A0 =C2=A0 | =
+=C2=A0 ^<br></div><div><br></div><div><br></div><div>here is full log</div>=
+<div><br></div><div><a href=3D"https://termbin.com/y3j0">https://termbin.co=
+m/y3j0</a></div></div><br><div class=3D"gmail_quote gmail_quote_container">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Feb 27, 2026 at 2:15=E2=80=AF=
+AM wangmy via <a href=3D"http://lists.openembedded.org">lists.openembedded.=
+org</a> &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@lists.openembedded.org">=
+fujitsu.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex">From: Wang Mingyu &lt;<a href=3D"mailto:w=
+angmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+<br>
+Issues fixed in this release:<br>
+-----------------------------<br>
+Update bundle.sh to include regex.hpp<br>
+Fix copy-paste error message<br>
+Ensure nlohmann/json non-finite floats are interpreted as null when validat=
+ing<br>
+Ensure tests are built in oss-fuzz build<br>
+<br>
+Other changes include:<br>
+----------------------<br>
+Added support for JSON pointer paths in validation errors<br>
+Added a validation benchmark example<br>
+Added design and architecture docs<br>
+Removed compatibility shim for std::optional<br>
+<br>
+Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
+=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
+---<br>
+=C2=A0.../valijson/{<a href=3D"http://valijson_1.0.6.bb" rel=3D"noreferrer"=
+ target=3D"_blank">valijson_1.0.6.bb</a> =3D&gt; <a href=3D"http://valijson=
+_1.1.0.bb" rel=3D"noreferrer" target=3D"_blank">valijson_1.1.0.bb</a>}=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-oe/recipes-devtools/valijson/{<a href=3D"http://valijson_=
+1.0.6.bb" rel=3D"noreferrer" target=3D"_blank">valijson_1.0.6.bb</a> =3D&gt=
+; <a href=3D"http://valijson_1.1.0.bb" rel=3D"noreferrer" target=3D"_blank"=
+>valijson_1.1.0.bb</a>} (93%)<br>
+<br>
+diff --git a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_1=
+.0.6.bb" rel=3D"noreferrer" target=3D"_blank">valijson_1.0.6.bb</a> b/meta-=
+oe/recipes-devtools/valijson/<a href=3D"http://valijson_1.1.0.bb" rel=3D"no=
+referrer" target=3D"_blank">valijson_1.1.0.bb</a><br>
+similarity index 93%<br>
+rename from meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_1.=
+0.6.bb" rel=3D"noreferrer" target=3D"_blank">valijson_1.0.6.bb</a><br>
+rename to meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_1.1.=
+0.bb" rel=3D"noreferrer" target=3D"_blank">valijson_1.1.0.bb</a><br>
+index 4e5f02746c..b7e45c3057 100644<br>
+--- a/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_1.0.6.bb=
+" rel=3D"noreferrer" target=3D"_blank">valijson_1.0.6.bb</a><br>
++++ b/meta-oe/recipes-devtools/valijson/<a href=3D"http://valijson_1.1.0.bb=
+" rel=3D"noreferrer" target=3D"_blank">valijson_1.1.0.bb</a><br>
+@@ -4,7 +4,7 @@ LICENSE =3D &quot;BSD-2-Clause&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D5c4583a434195e4f3b418=
+e17c8ca2daf&quot;<br>
+<br>
+=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/tristanpenman/va=
+lijson.git;branch=3Dmaster;protocol=3Dhttps;tag=3Dv$%7BPV%7D" rel=3D"norefe=
+rrer" target=3D"_blank">github.com/tristanpenman/valijson.git;branch=3Dmast=
+er;protocol=3Dhttps;tag=3Dv${PV}</a>&quot;<br>
+-SRCREV =3D &quot;4edda758546436462da479bb8c8514f8a95c35ad&quot;<br>
++SRCREV =3D &quot;b12841e3fa23a8cc477179face0a5ce5f80b64ab&quot;<br>
+<br>
+<br>
+=C2=A0inherit cmake<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#124747): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/124747" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/124747</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118027942/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/118027942/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
---nSAY8ZsRAILd7cgUhf0a--
+--0000000000001987f3064c0c36e5--
 
