@@ -2,146 +2,111 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECD1EC0482
-	for <webhook@archiver.kernel.org>; Tue,  3 Mar 2026 09:55:17 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14732.1772531712022151096
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ACFEEC1438
+	for <webhook@archiver.kernel.org>; Tue,  3 Mar 2026 12:46:08 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17502.1772541961716279721
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Mar 2026 01:55:12 -0800
+ Tue, 03 Mar 2026 04:46:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XPmWPW1v;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-48372efa020so47385675e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 01:55:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AdSAkV6Z;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4836f363ad2so66730045e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 04:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772531710; x=1773136510; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=lj8SlIjgsHMriK7bVfBtAdJZTE5ah8BfLCSnEUh8s4I=;
-        b=XPmWPW1vGLFyqvnkOMSQwtkNI87ns5X3oEdoY1ZwQJEQ35ZUO4FovDmX1fc2aE7IO5
-         RIS1+R5+JgUjEuC6CcT4kISNBvFeMKTwwe8vCGc4j2mLo6vwzz9NQDzbozumGcnU8sTn
-         WYjae+OSZDk6V4zFjmafjqq+jLuIinHcX/ZPq89rr9zP2D2E+ykYc6rA9pzrTjfO8uIF
-         rdEoz71Arg6pmOjKo5DEnXku90vHVo87pNOmVrsMTS/PM0vqrg67OXNv/FSZrQyJ2Xi1
-         JLOTykIu15u76kOyhxVyR2FvUytMApgStOS8vI6oHOyCrxZ22hwihhYY/GkDCoUozb1Y
-         8e8g==
+        d=gmail.com; s=20230601; t=1772541960; x=1773146760; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7d88WHscKOjlgCcMzXh+vPUL7BwBhwtZr4VodUDmsWI=;
+        b=AdSAkV6Z1s/ZtkfQ4LwzPs1Dl5KTo8B09S9PaldQ40j4zFtXj78rQKFYuqL9Wx1GQG
+         pKg8oyQHqy6Lj7AfwpzlT0cah8XtntGC0OEv7bgX4pWbKB/IfxBDhJGWEUwcRDzU5p1W
+         ZG49oQ8jvHYKYRpPzXkVwncXWLqrSgVscsvtTSHkbomtmt6D1jA5cVzeUbqR/61ZrmCq
+         GhCjl/2uWMdHNCqh2HUnOUJn5Z8b5yQ4AAa2U3qF967Gh+HnQ5BRzBTCGhp5Axrl1iBF
+         yT5cNCBRIuWG6QsTT9DJrYqVq6b8DbktdksDGF8zVQ0qEDb5imRwxQz2QQUQ92ygoxkX
+         i7eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772531710; x=1773136510;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1772541960; x=1773146760;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lj8SlIjgsHMriK7bVfBtAdJZTE5ah8BfLCSnEUh8s4I=;
-        b=EnxIHp21ZGgJGuQvUy/3gUlfV68XhGzLyEsfjD3bOE44FBQt9glyDPZCrejb9uyZw/
-         JqRhMndKQ3aEud9DnSn7uU75HDHL8t2ixTACK2UmEp/UvYUnOTtToxx640PmM9l74x7a
-         WSYynufCTwQMGn/SvIySAgkj3HEwYYvXej8YSjiMHSiUBIba4xfgNz0YFBrC4gtOhzbr
-         DLDLYNtK1wXq4q7b9jKhMKcaGPAsPEpjAXOZv6UNSPgjdqLeCodzJ52nNoqVVPQF2nbJ
-         3HMg9H22iChotdcgaKejLdw1A88GvRDyGNM7dJAiRTeUd/Ha8QMN1ldeNnKYuWEncLIb
-         7qgQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXOg8uJA66p6hCWSdZBlO9lXkSsbO0aVvTsTnVv1nNqr1QP3YhpxztZ0mViObGTbDm9lwLuoL/UgGzv2pPMt/Rq/3c=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YysEi3y3QKnd22j5l1O8Nx9sCisvxXOVzIcVL1yPl5kt4e3zLJh
-	CLlX4rpGt7x/qT58YdVA9NTul5yM5eNeNTF1Wr4xlISsxib0YlEWSDNw
-X-Gm-Gg: ATEYQzy2VaAFJhEJ6P1xdF+O4SCnJ9W6ZHCCKimEHTBGOV4kLRRDroUW/j+5VBh6YfT
-	yilApM7wVj88wBjGqlEqnxaucmNcv3dCz698qhEARmbTpgjj6jMSMzfUz7pXfMUSL3HNGo9GAXf
-	mBZqs2ZqO3ZmFz+cFIljax5na0qh9EkZnXfTa+I0yz/VUgET5IfFOcidCyyluNb+8gxS7Kng6L0
-	+Z/fFj+8jtqljZt0R+9YLa0cNzB8+MCsCeEoZrQW5WMLNMGUMPknX+0Xzi+fkOMI7X1IARR64Ub
-	QDnSjdJ8rdzNJE9kApAIaKbqJzUIkFjmB5aVUTUq1jToq/fMQRPee89MWLkxsQea+Fnjzu0c4u4
-	/Alq1s+VgN2YPLYoO0KJV1mjhWk1l3Vlv3a9Gychh/rY7JbjfeiowehLZm4SxCPdo4KKAkKTHp+
-	/DNEc71Ovs01AH4xZByi9gDqxKMBrqrxw=
-X-Received: by 2002:a05:600c:444f:b0:483:702d:2df with SMTP id 5b1f17b1804b1-483c9c1cc7dmr245357545e9.32.1772531710094;
-        Tue, 03 Mar 2026 01:55:10 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439c4489279sm350929f8f.20.2026.03.03.01.55.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Mar 2026 01:55:09 -0800 (PST)
-Message-ID: <b45eb2b6-2d7a-47ae-987b-61532f40818b@gmail.com>
-Date: Tue, 3 Mar 2026 10:55:08 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH] wowlan-udev: add udev rule to
- enable WoWLAN magic-packet
-To: miaoqing.pan@oss.qualcomm.com, openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com, dmitry.baryshkov@oss.qualcomm.com
-References: <20260303023409.4016900-1-miaoqing.pan@oss.qualcomm.com>
-Content-Language: en-US
+        bh=7d88WHscKOjlgCcMzXh+vPUL7BwBhwtZr4VodUDmsWI=;
+        b=Z1anpbRD8p76Gi7ApYpKn3XJdmy174GrA4aKgOxGsljE9ev/DwJwyaFf90urZq6YPa
+         ALCM1b+/PUPADHrClfsnkZ0BZu2jb7qHanUlVp5zJ7QUNuha5feLNAeS4M40mKf7OMgy
+         wr2nzB3hKQFEOriZ4woE/q7Km2T8nGVZX/IB8dEePBnT1eAZij+mRg1wXDjyv54rtU/a
+         9CSETBzOcV3yWzYTDkCw5iymdS6/tknQlu/w9NtvAzhZ8zN3cIQegjufmthK3ln0xTfQ
+         gelECuhrUcIZcBo56dPKqDdBwQKJ6muim2dCEtgtVOXyzq90VQo4/sSvpJm8fwv+WsBE
+         J1zg==
+X-Gm-Message-State: AOJu0Yz4axqui5Qgj3zEfaZ9xS1mOZk9sjRkd4lOQzmPP4x5nw842YRp
+	CLAYXJ3OuDZYxHvKrty8lD5UC8SEw/fl6xnyWjBlZhZwIE/oTV7qfLhE4qY9Nw==
+X-Gm-Gg: ATEYQzwW95OVZFzc1R+Qu8ooQR5t531z0sPCd2fLIfH1294beHYqAsD5KrvOoQJs1Wt
+	gaz0r/0cbOsqSjUNWDuFWGGY2Qd1O91vDIYK3wfQtJWdHRKBCIq+AfcZnvnDnK7AHg5tdYQOOMY
+	U3H5N4ezLRmb1ZZps/8DaS7Yfs5HlEz4ZMlYPHGR3sFEzk8B4d62xhsX5U23QKMegAXkqlYl+XK
+	aoDYxsQ3CO0o0qvdbsopQLKNidDIT7f5GC6sHOkI1LF1L8QXP4YgqgOGQAlHbaKe3Pg/eAYhDIX
+	zeOGqHiJ/7VnKO5cDV/jV5XE2SH1MPhuTustjnsUB2+APgjQIgRWghU3XiOAIDWOIIgKW7TccR1
+	/F6FDJ7Jr2WjnoElWAAfXfWF9K0owRwHOh+gh6rkRhhvLr50ZVVhFdmdiC+e9mwpO+aJXSnX2Bl
+	Sku6YEWaszpIwUGbu+rpsKzv2rCoWukxA=
+X-Received: by 2002:a05:600c:c4a6:b0:480:1d0b:2d32 with SMTP id 5b1f17b1804b1-483c9bc0344mr264150645e9.12.1772541959781;
+        Tue, 03 Mar 2026 04:45:59 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-483bd7507adsm514257805e9.9.2026.03.03.04.45.59
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 03 Mar 2026 04:45:59 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260303023409.4016900-1-miaoqing.pan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][kirkstone][PATCH] opem-vm-tools: ignore multiple CVEs
+Date: Tue,  3 Mar 2026 13:45:58 +0100
+Message-ID: <20260303124558.1994637-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 09:55:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124830
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 12:46:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124831
 
+Details: https://nvd.nist.gov/vuln/detail/CVE-2014-4199
+https://nvd.nist.gov/vuln/detail/CVE-2014-4200
+https://nvd.nist.gov/vuln/detail/CVE-2022-22943
+https://nvd.nist.gov/vuln/detail/CVE-2022-22977
+https://nvd.nist.gov/vuln/detail/CVE-2022-31693
+https://nvd.nist.gov/vuln/detail/CVE-2023-34057
 
+The fixes for the first two vulnerabilities are already present in the
+used version.
 
-On 3/3/26 03:34, Miaoqing Pan via lists.openembedded.org wrote:
-> On some platforms (for example, QCx6490), XO (Crystal Oscillator) shutdown
-> is prevented by Wireless Processor Subsystem votes on interconnect
-> bandwidth and XO unless the WoWLAN magic-packet trigger is enabled. These
-> votes are released only after running:
->   iw phy0 wowlan enable magic-packet
->
-> Add an udev rule to automatically enable WoWLAN magic-packet support when
-> a Wi-Fi PHY is registered. This rule is provided via a dedicated
-> wowlan-udev package and is not enabled by default.
->
-> Integrators should include this package only if their platform requires
-> automatic WoWLAN magic-packet enablement.
->
-> Signed-off-by: Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>
-> ---
->  .../wowlan-udev/files/99-wowlan.rules               |  4 ++++
->  .../recipes-connectivity/wowlan-udev/wowlan-udev.bb | 13 +++++++++++++
->  2 files changed, 17 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
->  create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
->
-> diff --git a/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
-> new file mode 100644
-> index 0000000000..ba41eef896
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
-> @@ -0,0 +1,4 @@
-> +# Enable WoWLAN when Wi-Fi PHY is registered
-> +ACTION=="add", SUBSYSTEM=="ieee80211", KERNEL=="phy*", \
-> +  RUN+="/usr/sbin/iw %k wowlan enable magic-packet"
-> +
-> diff --git a/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
-> new file mode 100644
-> index 0000000000..06664c8e10
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "Enable WoWLAN via udev on Wi-Fi PHY registration"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+As identified by Redhat:
+CVE-2014-4199: it has been fixed since version 9.10.2[1]
+CVE-2014-4200: it has been fixed since version 9.4.6[2]
 
-Here ${COMMON_LICENSE_DIR}/MIT would be a better instead of ${COREBASE}/...
+CVE-2022-22943, CVE-2022-22977 and CVE-2022-31693 affect only Windows.
 
-> +
-> +SRC_URI = "file://99-wowlan.rules"
-> +
-> +do_install() {
-> +    install -d ${D}${sysconfdir}/udev/rules.d
-> +    install -m 0644 ${UNPACKDIR}/99-wowlan.rules \
-> +        ${D}${sysconfdir}/udev/rules.d/
-> +}
+CVE-2023-34059 affects only Windows and MacOS.
 
-Since it's just a single file copy, adding INHIBIT_DEFAULT_DEPS = "1"
-could save a few file copy calls during build.
+[1]: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-4199
+[2]: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2014-4200
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../open-vm-tools/open-vm-tools_11.3.5.bb              | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-> +
-> +RDEPENDS:${PN} = "iw udev"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124823): https://lists.openembedded.org/g/openembedded-devel/message/124823
-> Mute This Topic: https://lists.openembedded.org/mt/118108140/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
-
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+index 0e671b6557..3d3b2887bc 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+@@ -126,3 +126,13 @@ python() {
+     if 'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
+         raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
+ }
++
++# fixed since 9.10.2
++CVE_CHECK_IGNORE = "CVE-2014-4199"
++
++# fixed since 9.4.6
++CVE_CHECK_IGNORE += "CVE-2014-4200"
++
++# Windows-only vulnerability
++CVE_CHECK_IGNORE += "CVE-2022-22943 CVE-2022-22977 CVE-2022-31693 CVE-2023-34057"
++
 
