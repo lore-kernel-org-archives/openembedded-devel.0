@@ -1,113 +1,147 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1218CEC0467
-	for <webhook@archiver.kernel.org>; Tue,  3 Mar 2026 09:20:17 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14354.1772529610394228832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECD1EC0482
+	for <webhook@archiver.kernel.org>; Tue,  3 Mar 2026 09:55:17 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14732.1772531712022151096
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Mar 2026 01:20:10 -0800
+ Tue, 03 Mar 2026 01:55:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=L8szZBXe;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-824b05d2786so4423083b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 01:20:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XPmWPW1v;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-48372efa020so47385675e9.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 01:55:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772529609; x=1773134409; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cdme63zalnNIMZYrWs8BSddTpUME8w7Ar+3NNn8Oymg=;
-        b=L8szZBXeJ3bRaXMyLlJV8Uez4x/s8Vj+GjwjyjLGsuQqqWXg9wujJsQ59t7hl9lTh3
-         TE5SkJH5zjtCnHOOLcmlyRSOdFW2uF114OVuPfyHbHDwShz5imAZLh6wIWol2JLt5/uW
-         2qOnCsEJMVrxUDXgXBHz7dCFahiocxV8m3IB/ldPfPza8VbSwRoGOw1Dt5UNFYuodudy
-         9CxrqR+QUHBWsT2kULlZgEFuKkuNjaPzBAgv/FMf6zGmGYhu2M9jeIkL9aBPBvpqS2cf
-         xnwuUbJ6DRh1ziCYvn6Csi0jeuivfp1TAMLqrudB6scs/plc3mtOeBB7MhvM1enZewIp
-         H5Fg==
+        d=gmail.com; s=20230601; t=1772531710; x=1773136510; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=lj8SlIjgsHMriK7bVfBtAdJZTE5ah8BfLCSnEUh8s4I=;
+        b=XPmWPW1vGLFyqvnkOMSQwtkNI87ns5X3oEdoY1ZwQJEQ35ZUO4FovDmX1fc2aE7IO5
+         RIS1+R5+JgUjEuC6CcT4kISNBvFeMKTwwe8vCGc4j2mLo6vwzz9NQDzbozumGcnU8sTn
+         WYjae+OSZDk6V4zFjmafjqq+jLuIinHcX/ZPq89rr9zP2D2E+ykYc6rA9pzrTjfO8uIF
+         rdEoz71Arg6pmOjKo5DEnXku90vHVo87pNOmVrsMTS/PM0vqrg67OXNv/FSZrQyJ2Xi1
+         JLOTykIu15u76kOyhxVyR2FvUytMApgStOS8vI6oHOyCrxZ22hwihhYY/GkDCoUozb1Y
+         8e8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772529609; x=1773134409;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=cdme63zalnNIMZYrWs8BSddTpUME8w7Ar+3NNn8Oymg=;
-        b=RZSjuynQxLomut1HNd1sdbhojqxmyX6HrerXv7u7i0pDD/Jsx2xVZ5ezYIgtr8Oc/0
-         5GWU9kCfbDVHDNbjNQkFmk8nw5bZHt/bw4p28krlEZnshirdUhkcfEk+RQTb/eENYrpg
-         GCq0daCuZpqTnozURBIkiAkNzrusCLp5jfHOiyL7ueMVv81ClCP4TIF4uGng1UZOMDh1
-         81YXVS5eQHK/BGvabIR8Krp4/yjkpq1QfJwyB8ApzC/s+rUZbdQCXHattp3rNyaLLMoC
-         CjmF6xzNVjaBX/Xyb+oqMjI0WRyQovPEailvkr1EaV+Gpcn1w/SbGjKoltDi/rLQKdlc
-         TV+Q==
-X-Gm-Message-State: AOJu0YzkC+pQEpLDrUF8OgmZ/WDWhAShxcR5EA2AQyr1y7YuW8x/ggcc
-	jUCABNMNkiYq2fgUU7VxQ9fAUA6FdREVUVuTZ1OoHSA29wS7FsyJudSaYJWseg==
-X-Gm-Gg: ATEYQzxC2LIG7WU2ctCs+G1stlYzypG7Hj6+qlVQrfysRmbyM0mBjDJta+oThY1DJoa
-	tWkS4SH6/ZGpdyMvq8bv8FlrwaQ4rJGv3HZWmZ6nouvBrG0buIDQt2lVIkGq4jw+xjbXMBHFvX7
-	fBYBb5oGcz23S9NfzcM+YB2gsgE3SbWJtmVF+BXEWZOM8DxiRGiSoVpGP+aYe15ChaC7gesfyJ9
-	R/cIEMAFxzG4VFj23gI5+fkJPlmuZUv/5LFDPRuFtcPvesxgJ9Vi83wyyO3I67eWUaX7u96DOVz
-	5TD9ZkQvXaeOraogySr1D4v8VHwQbhSYR08D6AhQOT+F6zrDbqPjoHtXuyeFCLhWbCmqWFtRWeB
-	CLteQBxoEGGPqOr/cN4xO2xX8VUP2LrNoO1n5goAAWAJoERqIeTM5tobh3RSVm5HS/uJNcyLWL8
-	qd14TqFkwCDapWxYagJYwB9zuIPNxwQYxS+w==
-X-Received: by 2002:a05:6a00:9283:b0:824:a635:4181 with SMTP id d2e1a72fcca58-8274d972aaamr16821917b3a.15.1772529609389;
-        Tue, 03 Mar 2026 01:20:09 -0800 (PST)
-Received: from NVAPF55DW0D-IPD.. ([147.161.217.3])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8273a05e831sm15677859b3a.58.2026.03.03.01.20.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Mar 2026 01:20:08 -0800 (PST)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-python][whinlatter][PATCH 3/3] python3-flask: Upgrade 3.1.2 -> 3.1.3
-Date: Tue,  3 Mar 2026 22:19:41 +1300
-Message-ID: <20260303091948.3532301-3-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260303091948.3532301-1-ankur.tyagi85@gmail.com>
-References: <20260303091948.3532301-1-ankur.tyagi85@gmail.com>
+        d=1e100.net; s=20230601; t=1772531710; x=1773136510;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lj8SlIjgsHMriK7bVfBtAdJZTE5ah8BfLCSnEUh8s4I=;
+        b=EnxIHp21ZGgJGuQvUy/3gUlfV68XhGzLyEsfjD3bOE44FBQt9glyDPZCrejb9uyZw/
+         JqRhMndKQ3aEud9DnSn7uU75HDHL8t2ixTACK2UmEp/UvYUnOTtToxx640PmM9l74x7a
+         WSYynufCTwQMGn/SvIySAgkj3HEwYYvXej8YSjiMHSiUBIba4xfgNz0YFBrC4gtOhzbr
+         DLDLYNtK1wXq4q7b9jKhMKcaGPAsPEpjAXOZv6UNSPgjdqLeCodzJ52nNoqVVPQF2nbJ
+         3HMg9H22iChotdcgaKejLdw1A88GvRDyGNM7dJAiRTeUd/Ha8QMN1ldeNnKYuWEncLIb
+         7qgQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXOg8uJA66p6hCWSdZBlO9lXkSsbO0aVvTsTnVv1nNqr1QP3YhpxztZ0mViObGTbDm9lwLuoL/UgGzv2pPMt/Rq/3c=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YysEi3y3QKnd22j5l1O8Nx9sCisvxXOVzIcVL1yPl5kt4e3zLJh
+	CLlX4rpGt7x/qT58YdVA9NTul5yM5eNeNTF1Wr4xlISsxib0YlEWSDNw
+X-Gm-Gg: ATEYQzy2VaAFJhEJ6P1xdF+O4SCnJ9W6ZHCCKimEHTBGOV4kLRRDroUW/j+5VBh6YfT
+	yilApM7wVj88wBjGqlEqnxaucmNcv3dCz698qhEARmbTpgjj6jMSMzfUz7pXfMUSL3HNGo9GAXf
+	mBZqs2ZqO3ZmFz+cFIljax5na0qh9EkZnXfTa+I0yz/VUgET5IfFOcidCyyluNb+8gxS7Kng6L0
+	+Z/fFj+8jtqljZt0R+9YLa0cNzB8+MCsCeEoZrQW5WMLNMGUMPknX+0Xzi+fkOMI7X1IARR64Ub
+	QDnSjdJ8rdzNJE9kApAIaKbqJzUIkFjmB5aVUTUq1jToq/fMQRPee89MWLkxsQea+Fnjzu0c4u4
+	/Alq1s+VgN2YPLYoO0KJV1mjhWk1l3Vlv3a9Gychh/rY7JbjfeiowehLZm4SxCPdo4KKAkKTHp+
+	/DNEc71Ovs01AH4xZByi9gDqxKMBrqrxw=
+X-Received: by 2002:a05:600c:444f:b0:483:702d:2df with SMTP id 5b1f17b1804b1-483c9c1cc7dmr245357545e9.32.1772531710094;
+        Tue, 03 Mar 2026 01:55:10 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439c4489279sm350929f8f.20.2026.03.03.01.55.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 03 Mar 2026 01:55:09 -0800 (PST)
+Message-ID: <b45eb2b6-2d7a-47ae-987b-61532f40818b@gmail.com>
+Date: Tue, 3 Mar 2026 10:55:08 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-networking][PATCH] wowlan-udev: add udev rule to
+ enable WoWLAN magic-packet
+To: miaoqing.pan@oss.qualcomm.com, openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com, dmitry.baryshkov@oss.qualcomm.com
+References: <20260303023409.4016900-1-miaoqing.pan@oss.qualcomm.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260303023409.4016900-1-miaoqing.pan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 09:20:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124829
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 09:55:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124830
 
-From: Leon Anavi <leon.anavi@konsulko.com>
 
-Upgrade to release 3.1.3:
 
-- The session is marked as accessed for operations that only access
-  the keys but not the values, such as in and len.
+On 3/3/26 03:34, Miaoqing Pan via lists.openembedded.org wrote:
+> On some platforms (for example, QCx6490), XO (Crystal Oscillator) shutdown
+> is prevented by Wireless Processor Subsystem votes on interconnect
+> bandwidth and XO unless the WoWLAN magic-packet trigger is enabled. These
+> votes are released only after running:
+>   iw phy0 wowlan enable magic-packet
+>
+> Add an udev rule to automatically enable WoWLAN magic-packet support when
+> a Wi-Fi PHY is registered. This rule is provided via a dedicated
+> wowlan-udev package and is not enabled by default.
+>
+> Integrators should include this package only if their platform requires
+> automatic WoWLAN magic-packet enablement.
+>
+> Signed-off-by: Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>
+> ---
+>  .../wowlan-udev/files/99-wowlan.rules               |  4 ++++
+>  .../recipes-connectivity/wowlan-udev/wowlan-udev.bb | 13 +++++++++++++
+>  2 files changed, 17 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
+>  create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
+>
+> diff --git a/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
+> new file mode 100644
+> index 0000000000..ba41eef896
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
+> @@ -0,0 +1,4 @@
+> +# Enable WoWLAN when Wi-Fi PHY is registered
+> +ACTION=="add", SUBSYSTEM=="ieee80211", KERNEL=="phy*", \
+> +  RUN+="/usr/sbin/iw %k wowlan enable magic-packet"
+> +
+> diff --git a/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
+> new file mode 100644
+> index 0000000000..06664c8e10
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY = "Enable WoWLAN via udev on Wi-Fi PHY registration"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0badc6de53e06045d943143ef70773d6959f1a08)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../python/{python3-flask_3.1.2.bb => python3-flask_3.1.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask_3.1.2.bb => python3-flask_3.1.3.bb} (81%)
+Here ${COMMON_LICENSE_DIR}/MIT would be a better instead of ${COREBASE}/...
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_3.1.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-flask_3.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
-index de4a558bff..a24aae9e4e 100644
---- a/meta-python/recipes-devtools/python/python3-flask_3.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_3.1.3.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "A microframework based on Werkzeug, Jinja2 and good intentions"
- DESCRIPTION = "\
- Flask is a microframework for Python based on Werkzeug, Jinja 2 and good \
--intentions. And before you ask: It’s BSD licensed!"
-+intentions. And before you ask: It is BSD licensed!"
- HOMEPAGE = "https://github.com/pallets/flask"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
- 
--SRC_URI[sha256sum] = "bf656c15c80190ed628ad08cdfd3aaa35beb087855e2f494910aa3774cc4fd87"
-+SRC_URI[sha256sum] = "0ef0e52b8a9cd932855379197dd8f94047b359ca0a78695144304cb45f87c9eb"
- 
- inherit pypi python_flit_core ptest-python-pytest
- 
+> +
+> +SRC_URI = "file://99-wowlan.rules"
+> +
+> +do_install() {
+> +    install -d ${D}${sysconfdir}/udev/rules.d
+> +    install -m 0644 ${UNPACKDIR}/99-wowlan.rules \
+> +        ${D}${sysconfdir}/udev/rules.d/
+> +}
+
+Since it's just a single file copy, adding INHIBIT_DEFAULT_DEPS = "1"
+could save a few file copy calls during build.
+
+> +
+> +RDEPENDS:${PN} = "iw udev"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124823): https://lists.openembedded.org/g/openembedded-devel/message/124823
+> Mute This Topic: https://lists.openembedded.org/mt/118108140/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+
 
