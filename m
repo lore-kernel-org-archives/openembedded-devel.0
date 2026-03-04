@@ -1,227 +1,196 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B724EB7ED9
-	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 11:40:05 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16230.1772624400561582832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19A2EEB7ED8
+	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 11:51:35 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16399.1772625086868390584
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Mar 2026 03:40:00 -0800
+ Wed, 04 Mar 2026 03:51:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WZjbckIB;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4837634de51so28548705e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 03:40:00 -0800 (PST)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=EZhC0i5E;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JjwpqDSb;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6246D65t1203222
+	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Mar 2026 11:51:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUT
+	Uog5Fupg=; b=EZhC0i5EOUEBiWlMzwzDYacF8GNjqof1kqZB2xMK0ZMXonnP0qn
+	+mKVLG7LUBq3a++SwsajlSnimjPPa4GCcIulQsmSC378AWXDRrENKqTlPU7GSKtR
+	ywajnzFN+iMUNMWgnl4VJ9+xWtM5dQIItb+vah0/KmkwUd6WHBnT1lP8WLv2YkHI
+	elOq5KOjUsLjOqck0beO62rSI6S0BUIE5QG8ddeYokRBp2qi5GEcDToDvnuwBSQD
+	xSDUyM74QQjxfWDOI9QeW0VZHYTwWriWnqnfvbvKCtWYeb1MnL7nk1RaD43vbXPJ
+	7xn7QCPm98RAHmwjXuJMifb2qkWjEkyVwqA==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cpf9c13d2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 11:51:26 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-35678f99c6eso4367456a91.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 03:51:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772624399; x=1773229199; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=qZKb4iIe0Qgi4fCxlhy7OBQqcu8h2ZMzEF1mFew2oZI=;
-        b=WZjbckIBIlHG7DDpF8Z2qJaIU0BVKS6ZgRKzpGPn1r0JwTWzYbyfR6g9+zWcSuu9a5
-         iIpxcKi8ep7NMrysyiD4wM/3+zTVrXJMl3rd7InulM6OqvKdPUCVIJMG2cUsTeiOjTI3
-         Lir0TjdWdAjXPsqcpOOk+OOaLdjpYbl9Rfs43idwwg0FS1hdo2b6rHHZttpd+c+0ILr6
-         KCYTczM0TXA8yTfMf21A4VeVbLxAFyqJL1nYy2m3ZjysbUDUM9gZNrDwD2KRcfmRfHtT
-         +rV96M1MPNUtIvau130Pt08OmSQLtfA5Wz1M9IVbP6DWtEE+USaoh1cFMe7TABfwGT/s
-         Cw/A==
+        d=oss.qualcomm.com; s=google; t=1772625086; x=1773229886; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUTUog5Fupg=;
+        b=JjwpqDSbpPrLi6iZJNRtCuQd9UMmhtkXBuRyt+kuqB33/bJVprHwEC1PDuzX0k73Ch
+         BRur7+69SF+fLSU4ymwjlH/Ypheb8kX4au91eYbrwB3ZF7h9eqDhSgRB3UE74FZ6M4p9
+         BCbcbLXpirXzvJfWsxaHRvWkW0CxUR21y97fLz2Q6HKVD1hRr00uUUHWwvUaFnXnYBjS
+         qoOBJOHyPN0gIDYXY+i917SwhMkknjmOugmr0Nqz0nCnYJOWj+CpaNo+s0UnOJVVlTxB
+         nNuAsYJjXohwbUuakTNRhIOLoHZhWTkm1gV89A6fVS4ovPcesAf2g2LPD3BFNcOJd5WC
+         wUXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772624399; x=1773229199;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=qZKb4iIe0Qgi4fCxlhy7OBQqcu8h2ZMzEF1mFew2oZI=;
-        b=dTtlwYWI9nej9T6XjH8HbWBbWIdmKeaXnZ7ZlrOpTiqhtns46jayIle2SATjhubGov
-         QttCGxgzxIkWH8cFHIsDr7uLKkK24gq6Cbpv9hNKnvmM4q+IxEUlshSTx9XBfh/gyxM/
-         IAwS3M9mtTLnTKHZSPhVLm2E16Y/qFh/MQJCkQsMlIl7SN6Iq9Fcgxqz6Rd3y5OKk/pm
-         1ZIkDyjIfzAovntldWKZAVDeB6l9cdiTXrd4fsI5YdyjKkFxATmhUmgT8ClyTLzK18Ax
-         yeZsE6VB3dHr7tC2IZqzIrhanvEuv3g0pWVDgJlvNOCQgnNRX/452XnFc3Zj8/d3ME37
-         Zxwg==
-X-Gm-Message-State: AOJu0YyVc/wFX0x0PAAOq1rl7YkNd9AVk4ftefo+0LWNjy/RDhC9nSgb
-	KFJI/jA6VSMScD8SBqdg35JMIcnJ+WTu68SjVJTF08i2piyowmP+Utz7wiFbaQ==
-X-Gm-Gg: ATEYQzyUkPf1lFsUzx+gjhqC4Ba9d0c5fSPmaGV1D6tKntfa+OpS0biasJPLRwdXCYj
-	oFnzyQ5aczk01Th0r9kujvCvO2b7xWYb6C/zxGCDSE3zT2h1cRKbD8CfinL2gH2w3PvllkgFm4z
-	7M6TfJ0fUPYKM11KrPbxtZJXOGSnTT1+WNbOR9nk8X079DSeNnxbggBFSLcZBnbWgk6WeGLJ9ZN
-	HEsR3Xhb5Yj/s4kiEb00ufS51fAQfii1FJ5RW7Gzh8lPeAVL7t+wYeuhyoRmASKHGEyBTb6+xnB
-	oscFBXtz6VkgoNf1SUTDWfoSs+lETs3EnqibyfWjUYYNhvouyFBSSBEZRjJve4m0x5D9a9OlgBR
-	xpHB5Ce+8e1neOynMOwxHre+Xs7RwIJNEGd1/iF6YE/f0RxCi6LXTDtpFGLghOfJg1zN9zZnG2N
-	b5zgWFLF/0EaQDLSuC2PcZvrlo1gq+ApA=
-X-Received: by 2002:a05:600c:8b67:b0:480:2521:4d92 with SMTP id 5b1f17b1804b1-4851989ca05mr26827045e9.24.1772624398825;
-        Wed, 04 Mar 2026 03:39:58 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4851880724esm88692195e9.9.2026.03.04.03.39.58
+        d=1e100.net; s=20230601; t=1772625086; x=1773229886;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUTUog5Fupg=;
+        b=Shkl1QzIIn5Wc7tAy2tlAgN6Jst3DjrluzZHQR9Vsust26WZgHT77OsZAUlKPqqU28
+         XHE8O6tHXHRGXxEJoH2UJmxADT9/zKcDEZz5/SgtgJSjR15wxezME0OAFLz5ZOGDRCxR
+         oFMFy3pnrQyp0+MOD39g9xn0ucUxbd/+mRpTldM2NkhTxPd6x3uRBG138RBxY82ECM8j
+         1yuoUnzLZscNt0pXhP9ezA3jabckh2dtmIw3pdN9JqUmOjPWYZ2jzMM1s0+LWtXajFS3
+         2O5BoJvTp6PLBwed7/X+wVdw7z9MlAn/4zHxmZfc+Pa+tlMTeEAHWUomVamyXvxajQvs
+         3s4w==
+X-Gm-Message-State: AOJu0YztCU8HMfU7Z2DruWxYCXtATsXzTJBaLJWyGUSPiY1zQXqxBtd3
+	32QC9aPM/WppduSLrnKFjIxdWtF4//pGyvNKsbbTSd4e8w+92sW4G0QXLF5umxwve+6Ce5MqAgh
+	CgGApCMREVB1O60jbFQOMYoWxqr5dvJky8Gt5pocKputJLfxY8Yqi74qhnd7dOqci+C0gEd4+2N
+	ElUpjMIErBHfJ9z0c+L+E=
+X-Gm-Gg: ATEYQzxTROGU3/CrjiDIWLQ3wwDVaS6NVmTbuaORZutmZbilrhIPL2WHTyQd14NETtU
+	+qBTAGPS9AZdwXdjzkkaNLi7D76r5KCdsfZ+a95V9CxM1/b8IbZAmoFefAhoc/+pr8VfI49jkLt
+	kbB0SX7bWjSwmu7R3k2tBjyr7eKIV+ciFJjarLj43f8TSKqh5Pl6ZE20m22KPYAjg1E1aLA9ejd
+	6tfJbcB7UnSqpZv4CojBx0gVK5BbhY+fjDQzJq0+JEDF13sm93cKCHNXZz7T/xItfUFkalBBhWk
+	3/oCjoPdvc30Xk1iSNfuxUd8f1PWsCdSmZ7X/sEBEcf7MQnDMsd7KUNG5e+b9U0MVuvoJWd9ph1
+	5dPGpW3i42wbZxXziM9DTI/h9W04oBqiPoNkTVe2eGa8isN2SPt3L
+X-Received: by 2002:a17:90b:1e01:b0:341:88d5:a74e with SMTP id 98e67ed59e1d1-359a6a4c9ffmr1578165a91.29.1772625085659;
+        Wed, 04 Mar 2026 03:51:25 -0800 (PST)
+X-Received: by 2002:a17:90b:1e01:b0:341:88d5:a74e with SMTP id 98e67ed59e1d1-359a6a4c9ffmr1578153a91.29.1772625085134;
+        Wed, 04 Mar 2026 03:51:25 -0800 (PST)
+Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3599c3c5a61sm5978784a91.17.2026.03.04.03.51.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Mar 2026 03:39:58 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Wed, 04 Mar 2026 03:51:24 -0800 (PST)
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][kirkstone][PATCH 3/3] netdata: patch CVE-2023-22497
-Date: Wed,  4 Mar 2026 12:39:56 +0100
-Message-ID: <20260304113956.2245844-3-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap] source-han-sans-*-fonts: rename downloaded files in SRC_URI
+Date: Wed,  4 Mar 2026 17:21:18 +0530
+Message-ID: <20260304115118.268290-1-anuj.mittal@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260304113956.2245844-1-skandigraun@gmail.com>
-References: <20260304113956.2245844-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA0MDA5MyBTYWx0ZWRfX7NaIKTp2obBS
+ oxH2sSU66UZShxkALIjmI58tqqlVUKfsmQI8uZM05cZEKfiLWrr6/Epl8IV3zSpdMYTkq0dwLnq
+ pSp578lrrmibjRfbaps0Yho7XMwLy/FydWFlFlea8YC9rw/J9NQuyv+lSGmAZvv9wVV8RE5qh+v
+ Hd5u/AJVkKPfUtekuwO6qsvFSlUxrb47nSfnDv8O7n8Agt7Yiex3pGdrD4YEDREIFKwClhOrort
+ XE4VzbA2a7ShuNZbu5bTh+7kJ1FwaUUSu+t6hMYD4QxIc6AVmmF9HY1pZ0NMtL94VSOVIdLnP3y
+ LwioBiUkxYpWohK0UZm6kvmWw8Ba2X9BlmpjH22KTEill0gx6HvNIpGFSJ9iR9wK7Nm+JN/Rjzi
+ vVQR0O5HdtWTn1NucN3yTtM5DKWc5nBEuS10pk6cxfDgOmNLroGtvh+CVU4lLt3Ro7iJ2Y5y+GP
+ Sk08EwxThf78qhvjNzw==
+X-Proofpoint-GUID: UAwqRS-n2mF9g-s-kYye1DgNM5XYwwLk
+X-Authority-Analysis: v=2.4 cv=S4LUAYsP c=1 sm=1 tr=0 ts=69a81cbe cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=Q4-j1AaZAAAA:8
+ a=iGHA9ds3AAAA:8 a=plMWTl-mAAAA:20 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
+ a=L-XXB2h_G8GYiLdhf_0A:9 a=mQ_c8vxmzFEMiUWkPHU9:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=nM-MV4yxpKKO9kiQg6Ot:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: UAwqRS-n2mF9g-s-kYye1DgNM5XYwwLk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-04_05,2026-03-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501
+ lowpriorityscore=0 malwarescore=0 clxscore=1015 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603040093
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 11:40:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124847
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 11:51:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124848
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-22497
+From: Alexandre Truong <alexandre.truong@smile.fr>
 
-This patch was selected based on its description, and based on the
-associated PR. The description matches the issue described in the
-NVD advisory, and the PR credits the same reported that is also
-credited with the CVE ID (in the release notes of the application).
+In commit [0], we've switched away from SVN fetcher in SRC_URI.
+The archives downloaded are named SourceHanSans*.zip
+They are named this way regardless of the version 1.004 or 2.004.
+So when the new archives checksums are tested, the fetcher will
+look for the old archives with the same name in the DL_DIR.
+>From [1], there are checksum failures due to given checksums not
+matching the ones in DL_DIR. Thus, downloaded archives are renamed
+following their package name and version.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+[0]: https://git.openembedded.org/meta-openembedded/commit/?id=36a1e36e1272ca50e5dba0c4cf25ee3ff8b8f1c9
+[1]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/367/steps/16/logs/errors
+
+Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 08e414d496206d0959c2663fad7214596fad3cef)
+Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 ---
- .../netdata/netdata/CVE-2023-22497.patch      | 120 ++++++++++++++++++
- .../netdata/netdata_1.34.1.bb                 |   4 +-
- 2 files changed, 123 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-webadmin/netdata/netdata/CVE-2023-22497.patch
+ .../ttf-fonts/source-han-sans-cn-fonts_2.004.bb                 | 2 +-
+ .../ttf-fonts/source-han-sans-jp-fonts_2.004.bb                 | 2 +-
+ .../ttf-fonts/source-han-sans-kr-fonts_2.004.bb                 | 2 +-
+ .../ttf-fonts/source-han-sans-tw-fonts_2.004.bb                 | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/CVE-2023-22497.patch b/meta-webserver/recipes-webadmin/netdata/netdata/CVE-2023-22497.patch
-new file mode 100644
-index 0000000000..5aa2fde328
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/CVE-2023-22497.patch
-@@ -0,0 +1,120 @@
-+From 1aa77696d0853ab515eddea8ee7a7d16d3813571 Mon Sep 17 00:00:00 2001
-+From: Costa Tsaousis <costa@netdata.cloud>
-+Date: Tue, 29 Nov 2022 17:28:17 +0200
-+Subject: [PATCH] Strict control of streaming API keys and MACHINE GUIDs in
-+ stream.conf (#14063)
-+
-+do not allow machine guids to be used as API keys
-+
-+CVE: CVE-2023-22497
-+Upstream-Status: Backport [https://github.com/netdata/netdata/commit/811028aea2f146cc0ac2bc403f7d692add400d63]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ streaming/rrdpush.c   | 30 ++++++++++++++++++++++++------
-+ streaming/stream.conf | 10 ++++++++++
-+ 2 files changed, 34 insertions(+), 6 deletions(-)
-+
-+diff --git a/streaming/rrdpush.c b/streaming/rrdpush.c
-+index 8829d1e..0a0d9fc 100644
-+--- a/streaming/rrdpush.c
-++++ b/streaming/rrdpush.c
-+@@ -594,21 +594,30 @@ int rrdpush_receiver_thread_spawn(struct web_client *w, char *url) {
-+ 
-+     if(regenerate_guid(key, buf) == -1) {
-+         rrdhost_system_info_free(system_info);
-+-        log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname)?hostname:"-", "ACCESS DENIED - INVALID KEY");
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - INVALID KEY");
-+         error("STREAM [receive from [%s]:%s]: API key '%s' is not valid GUID (use the command uuidgen to generate one). Forbidding access.", w->client_ip, w->client_port, key);
-+         return rrdpush_receiver_permission_denied(w);
-+     }
-+ 
-+     if(regenerate_guid(machine_guid, buf) == -1) {
-+         rrdhost_system_info_free(system_info);
-+-        log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname)?hostname:"-", "ACCESS DENIED - INVALID MACHINE GUID");
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - INVALID MACHINE GUID");
-+         error("STREAM [receive from [%s]:%s]: machine GUID '%s' is not GUID. Forbidding access.", w->client_ip, w->client_port, machine_guid);
-+         return rrdpush_receiver_permission_denied(w);
-+     }
-+ 
-++    const char *api_key_type = appconfig_get(&stream_config, key, "type", "api");
-++    if(!api_key_type || !*api_key_type) api_key_type = "unknown";
-++    if(strcmp(api_key_type, "api") != 0) {
-++        rrdhost_system_info_free(system_info);
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - API KEY GIVEN IS NOT API KEY");
-++        error("STREAM [receive from [%s]:%s]: API key '%s' is a %s GUID. Forbidding access.", w->client_ip, w->client_port, key, api_key_type);
-++        return rrdpush_receiver_permission_denied(w);
-++    }
-++
-+     if(!appconfig_get_boolean(&stream_config, key, "enabled", 0)) {
-+         rrdhost_system_info_free(system_info);
-+-        log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname)?hostname:"-", "ACCESS DENIED - KEY NOT ENABLED");
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - KEY NOT ENABLED");
-+         error("STREAM [receive from [%s]:%s]: API key '%s' is not allowed. Forbidding access.", w->client_ip, w->client_port, key);
-+         return rrdpush_receiver_permission_denied(w);
-+     }
-+@@ -619,7 +628,7 @@ int rrdpush_receiver_thread_spawn(struct web_client *w, char *url) {
-+             if(!simple_pattern_matches(key_allow_from, w->client_ip)) {
-+                 simple_pattern_free(key_allow_from);
-+                 rrdhost_system_info_free(system_info);
-+-                log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname) ? hostname : "-", "ACCESS DENIED - KEY NOT ALLOWED FROM THIS IP");
-++                log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - KEY NOT ALLOWED FROM THIS IP");
-+                 error("STREAM [receive from [%s]:%s]: API key '%s' is not permitted from this IP. Forbidding access.", w->client_ip, w->client_port, key);
-+                 return rrdpush_receiver_permission_denied(w);
-+             }
-+@@ -627,9 +636,18 @@ int rrdpush_receiver_thread_spawn(struct web_client *w, char *url) {
-+         }
-+     }
-+ 
-++    const char *machine_guid_type = appconfig_get(&stream_config, machine_guid, "type", "machine");
-++    if(!machine_guid_type || !*machine_guid_type) machine_guid_type = "unknown";
-++    if(strcmp(machine_guid_type, "machine") != 0) {
-++        rrdhost_system_info_free(system_info);
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - MACHINE GUID GIVEN IS NOT A MACHINE GUID");
-++        error("STREAM [receive from [%s]:%s]: machine GUID '%s' is a %s GUID. Forbidding access.", w->client_ip, w->client_port, machine_guid, machine_guid_type);
-++        return rrdpush_receiver_permission_denied(w);
-++    }
-++
-+     if(!appconfig_get_boolean(&stream_config, machine_guid, "enabled", 1)) {
-+         rrdhost_system_info_free(system_info);
-+-        log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname)?hostname:"-", "ACCESS DENIED - MACHINE GUID NOT ENABLED");
-++        log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - MACHINE GUID NOT ENABLED");
-+         error("STREAM [receive from [%s]:%s]: machine GUID '%s' is not allowed. Forbidding access.", w->client_ip, w->client_port, machine_guid);
-+         return rrdpush_receiver_permission_denied(w);
-+     }
-+@@ -640,7 +658,7 @@ int rrdpush_receiver_thread_spawn(struct web_client *w, char *url) {
-+             if(!simple_pattern_matches(machine_allow_from, w->client_ip)) {
-+                 simple_pattern_free(machine_allow_from);
-+                 rrdhost_system_info_free(system_info);
-+-                log_stream_connection(w->client_ip, w->client_port, (key && *key)?key:"-", (machine_guid && *machine_guid)?machine_guid:"-", (hostname && *hostname) ? hostname : "-", "ACCESS DENIED - MACHINE GUID NOT ALLOWED FROM THIS IP");
-++                log_stream_connection(w->client_ip, w->client_port, key, machine_guid, hostname, "ACCESS DENIED - MACHINE GUID NOT ALLOWED FROM THIS IP");
-+                 error("STREAM [receive from [%s]:%s]: Machine GUID '%s' is not permitted from this IP. Forbidding access.", w->client_ip, w->client_port, machine_guid);
-+                 return rrdpush_receiver_permission_denied(w);
-+             }
-+diff --git a/streaming/stream.conf b/streaming/stream.conf
-+index e65e76f..7229ade 100644
-+--- a/streaming/stream.conf
-++++ b/streaming/stream.conf
-+@@ -115,6 +115,11 @@
-+ [API_KEY]
-+     # Default settings for this API key
-+ 
-++    # This GUID is to be used as an API key from remote agents connecting
-++    # to this machine. Failure to match such a key, denies access.
-++    # YOU MUST SET THIS FIELD ON ALL API KEYS.
-++    type = api
-++
-+     # You can disable the API key, by setting this to: no
-+     # The default (for unknown API keys) is: no
-+     enabled = no
-+@@ -184,6 +189,11 @@
-+ # you can give settings for each sending host here.
-+ 
-+ [MACHINE_GUID]
-++    # This GUID is to be used as a MACHINE GUID from remote agents connecting
-++    # to this machine, not an API key.
-++    # YOU MUST SET THIS FIELD ON ALL MACHINE GUIDs.
-++    type = machine
-++
-+     # enable this host: yes | no
-+     # When disabled, the parent will not receive metrics for this host.
-+     # THIS IS NOT A SECURITY MECHANISM - AN ATTACKER CAN SET ANY OTHER GUID.
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-index 516fde6281..4d57b84b07 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_1.34.1.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
+index 391d465571..db4ff4269a 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
+@@ -11,7 +11,7 @@ inherit allarch fontcache
+ #EXCLUDE_FROM_WORLD = "1"
  
- DEPENDS += "libuv util-linux zlib"
+ SRC_URI = " \
+-    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP} \
++    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP};downloadfilename=${BP}.zip \
+     file://44-source-han-sans-cn.conf \
+ "
+ SRC_URI[sha256sum] = "6841fc13f1c0d255cfeb33d2a2c68d24bbebd94ae2c070347a2b2b200a1db4d6"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
+index f940478a80..7ece511281 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
+@@ -11,7 +11,7 @@ inherit allarch fontcache
+ #EXCLUDE_FROM_WORLD = "1"
  
--SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz"
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-+           file://CVE-2023-22497.patch \
-+           "
- SRC_URI[sha256sum] = "8ea0786df0e952209c14efeb02e25339a0769aa3edc029e12816b8ead24a82d7"
+ SRC_URI = " \
+-    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP} \
++    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP};downloadfilename=${BP}.zip \
+     file://44-source-han-sans-jp.conf \
+ "
+ SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
+index f536d1b61e..0cbe438efc 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
+@@ -11,7 +11,7 @@ inherit allarch fontcache
+ #EXCLUDE_FROM_WORLD = "1"
  
- # default netdata.conf for netdata configuration
+ SRC_URI = " \
+-    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansKR.zip;subdir=${BP} \
++    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansKR.zip;subdir=${BP};downloadfilename=${BP}.zip \
+     file://44-source-han-sans-kr.conf \
+ "
+ SRC_URI[sha256sum] = "02fe28a48c6381c49d61c27a1b173c77f0e6f2b9f2b68e79f076f10a6a8f4bfe"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
+index 0a4aff5e31..3b4eeb2719 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
+@@ -11,7 +11,7 @@ inherit allarch fontcache
+ #EXCLUDE_FROM_WORLD = "1"
+ 
+ SRC_URI = " \
+-    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansTW.zip;subdir=${BP} \
++    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansTW.zip;subdir=${BP};downloadfilename=${BP}.zip \
+     file://44-source-han-sans-tw.conf \
+ "
+ SRC_URI[sha256sum] = "11d78c8fbc1a4bb04a453cdd65c99db8d41ec5cd6ba6d68c8638e6ba170de806"
+-- 
+2.53.0
+
 
