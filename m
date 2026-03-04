@@ -2,194 +2,211 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19A2EEB7ED8
-	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 11:51:35 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16399.1772625086868390584
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A799DE67A8A
+	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 12:39:35 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17096.1772627969697774345
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Mar 2026 03:51:26 -0800
+ Wed, 04 Mar 2026 04:39:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=EZhC0i5E;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JjwpqDSb;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6246D65t1203222
-	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Mar 2026 11:51:26 GMT
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Qog9cGKi;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jcODhI+U;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6249swoR1213795
+	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Mar 2026 12:39:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUT
-	Uog5Fupg=; b=EZhC0i5EOUEBiWlMzwzDYacF8GNjqof1kqZB2xMK0ZMXonnP0qn
-	+mKVLG7LUBq3a++SwsajlSnimjPPa4GCcIulQsmSC378AWXDRrENKqTlPU7GSKtR
-	ywajnzFN+iMUNMWgnl4VJ9+xWtM5dQIItb+vah0/KmkwUd6WHBnT1lP8WLv2YkHI
-	elOq5KOjUsLjOqck0beO62rSI6S0BUIE5QG8ddeYokRBp2qi5GEcDToDvnuwBSQD
-	xSDUyM74QQjxfWDOI9QeW0VZHYTwWriWnqnfvbvKCtWYeb1MnL7nk1RaD43vbXPJ
-	7xn7QCPm98RAHmwjXuJMifb2qkWjEkyVwqA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cpf9c13d2-1
+	:subject:to; s=qcppdkim1; bh=hvhOdT7EVbzz3emh9ZJ8NCw+tfjaw5Tibi6
+	jqxEycGo=; b=Qog9cGKiO6imYasox3KNQ7GDI2Ene6vx/xAfYGa7LIeXwuBQQI7
+	iV3ZuWUNLakfiF2K/1dsf1BbrmqoegifdZBytQBiKFGSfh43vFCD92k040Yq/6NP
+	SsABJH3sbDGUtNNy1LuiMg8qW9kNbD/YAZYFqBU5u0slKdbgm+Qwl54/vhNoF9O6
+	KFum1EMxsi9X0lLPnjGjvdOH3N0+yFFo01ns4KrlJ6K4FR9NiumM27o+H9jG2ZNw
+	L8Oh9AH/V6KxHaD/C/4+xdi6Re/oJRSJJ6EjURxRMMeKdPZsbZ49qNlNxwV6wUvY
+	cdokrjbYUIqJl6N5Pg0FdGa+jqCfDC96+eg==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cpjh5rf1m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 11:51:26 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-35678f99c6eso4367456a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 03:51:26 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 12:39:28 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-827470bd62cso2348270b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 04:39:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772625086; x=1773229886; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1772627967; x=1773232767; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUTUog5Fupg=;
-        b=JjwpqDSbpPrLi6iZJNRtCuQd9UMmhtkXBuRyt+kuqB33/bJVprHwEC1PDuzX0k73Ch
-         BRur7+69SF+fLSU4ymwjlH/Ypheb8kX4au91eYbrwB3ZF7h9eqDhSgRB3UE74FZ6M4p9
-         BCbcbLXpirXzvJfWsxaHRvWkW0CxUR21y97fLz2Q6HKVD1hRr00uUUHWwvUaFnXnYBjS
-         qoOBJOHyPN0gIDYXY+i917SwhMkknjmOugmr0Nqz0nCnYJOWj+CpaNo+s0UnOJVVlTxB
-         nNuAsYJjXohwbUuakTNRhIOLoHZhWTkm1gV89A6fVS4ovPcesAf2g2LPD3BFNcOJd5WC
-         wUXQ==
+        bh=hvhOdT7EVbzz3emh9ZJ8NCw+tfjaw5Tibi6jqxEycGo=;
+        b=jcODhI+U+KlAl6nM6x+gqYvbJPrjt7s4H3AUlbl8ekNB9LMOKsYkDJJcDOcn6NnUoV
+         M5nPAF58ry/Oa9pvOvz0G9NfVyIHLzRxQZ5fzq58oDa/Xh6VePohP04FAzbmiY/CLuhL
+         ddI1ahuJ+dV0tdGqrISl2B3oQrG7D5fdkoLBajw0EPqk8YZhqOHyPES7GXTfL7d1D794
+         2EXDxVrGqf3ulIkRxoyqV10Bm1LAw3bGjKjPx9izqS9tdeP4XjUghBr9EotZmbh6i3Ng
+         0yOkFOhyeIob3q1offBevV7bDurOWv+qBfw+Mi5tBOkZI8LKgF+eyYxAKkXOgX2DAUE3
+         SZHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772625086; x=1773229886;
+        d=1e100.net; s=20230601; t=1772627967; x=1773232767;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Gj0Dq82AckRSEJwkDQlQXxSnWz/aPE+kFUTUog5Fupg=;
-        b=Shkl1QzIIn5Wc7tAy2tlAgN6Jst3DjrluzZHQR9Vsust26WZgHT77OsZAUlKPqqU28
-         XHE8O6tHXHRGXxEJoH2UJmxADT9/zKcDEZz5/SgtgJSjR15wxezME0OAFLz5ZOGDRCxR
-         oFMFy3pnrQyp0+MOD39g9xn0ucUxbd/+mRpTldM2NkhTxPd6x3uRBG138RBxY82ECM8j
-         1yuoUnzLZscNt0pXhP9ezA3jabckh2dtmIw3pdN9JqUmOjPWYZ2jzMM1s0+LWtXajFS3
-         2O5BoJvTp6PLBwed7/X+wVdw7z9MlAn/4zHxmZfc+Pa+tlMTeEAHWUomVamyXvxajQvs
-         3s4w==
-X-Gm-Message-State: AOJu0YztCU8HMfU7Z2DruWxYCXtATsXzTJBaLJWyGUSPiY1zQXqxBtd3
-	32QC9aPM/WppduSLrnKFjIxdWtF4//pGyvNKsbbTSd4e8w+92sW4G0QXLF5umxwve+6Ce5MqAgh
-	CgGApCMREVB1O60jbFQOMYoWxqr5dvJky8Gt5pocKputJLfxY8Yqi74qhnd7dOqci+C0gEd4+2N
-	ElUpjMIErBHfJ9z0c+L+E=
-X-Gm-Gg: ATEYQzxTROGU3/CrjiDIWLQ3wwDVaS6NVmTbuaORZutmZbilrhIPL2WHTyQd14NETtU
-	+qBTAGPS9AZdwXdjzkkaNLi7D76r5KCdsfZ+a95V9CxM1/b8IbZAmoFefAhoc/+pr8VfI49jkLt
-	kbB0SX7bWjSwmu7R3k2tBjyr7eKIV+ciFJjarLj43f8TSKqh5Pl6ZE20m22KPYAjg1E1aLA9ejd
-	6tfJbcB7UnSqpZv4CojBx0gVK5BbhY+fjDQzJq0+JEDF13sm93cKCHNXZz7T/xItfUFkalBBhWk
-	3/oCjoPdvc30Xk1iSNfuxUd8f1PWsCdSmZ7X/sEBEcf7MQnDMsd7KUNG5e+b9U0MVuvoJWd9ph1
-	5dPGpW3i42wbZxXziM9DTI/h9W04oBqiPoNkTVe2eGa8isN2SPt3L
-X-Received: by 2002:a17:90b:1e01:b0:341:88d5:a74e with SMTP id 98e67ed59e1d1-359a6a4c9ffmr1578165a91.29.1772625085659;
-        Wed, 04 Mar 2026 03:51:25 -0800 (PST)
-X-Received: by 2002:a17:90b:1e01:b0:341:88d5:a74e with SMTP id 98e67ed59e1d1-359a6a4c9ffmr1578153a91.29.1772625085134;
-        Wed, 04 Mar 2026 03:51:25 -0800 (PST)
+        bh=hvhOdT7EVbzz3emh9ZJ8NCw+tfjaw5Tibi6jqxEycGo=;
+        b=bzQJBbR2oMdMrOb02evhBqYFbP3LYwjHtmOYL/7StoF8E4Ez2VdZdJKRFZhH+snEKq
+         AYcv0cKKnt+neod0sav3p6gc0MxiKfZ0qrnvG4LlIgsG4G9yO6MM+n1+20aSloLj+2EV
+         BH446uZbNpw3ESvDcjN+dRxxVeuwq2DcLJxOhAwZpfp9Gysw7IfKhg2TOBX4Og15MvRU
+         AJU6z50jRj/X8SQbc1bN6Tfanj74IP5OYX4fFItVwC/fX3ZGzU7AoqWUtgbMqZm5C9Fk
+         m6v8KkncovfX+Z8bZQgdABIKDqWzDCHu3DYih09R6Mqnyo7vlZnPiwycDFlBV0FmRgCR
+         X0Ag==
+X-Gm-Message-State: AOJu0Yz105qQvsDyThNcmLvlr6RKPHPgwWQr/PeLUcX5wjqFk5A3HoD3
+	47682G3ruK8gBiAIu95acTxznURjjrANaSR/XqCXpMlfSX37MLYCDRy48XMWAeiNzy5XY9K9x76
+	IR4w7Ub3RAQ1wgTfz2kmgngceHcD96nW2dCqnUJIRH731hjgpg1e+Wh8f2YdnMrg0Pf2Ee7gI8k
+	mtW3qj3Zlhaf9bBOpAibM=
+X-Gm-Gg: ATEYQzwyzJYT7ApWnh9ZK4lKUo+nLpp7QlQ7BL2N4qL38ogzQ5lr9q9nhUPJ0Uuw4mF
+	oSwOAuHsO/pEsK9jz3oblSbvTpvrIn1ammRNozPN3vXRexwMQgHSDIuhUIONzKrIzetXpzZtbwF
+	0j9Ks58CIqFVGAfTyKSaUs1VMIxpAaBX1nS/Ku9E5ap/u+oXBz0m2vLbiualbx9kuebSG2B15Jb
+	/evsu6MbQWEcDNGp9Mw1Bx00mM2uea9awyF5ZNpinqxyZWtQCSZPbG7R6KOcAiAH0rZTQpJK3Yk
+	REa3IaREf47hXny3uzDBAnI7yrIoislxud5KX9XSBLv3k6cbe5dYFcGmuu2rw8vKUnJL7eVMvbA
+	e4TYjYOnPMEfYnYykH8W62sJ4pl8yZVZBd2fjKGrkeTtjWPJzF29c
+X-Received: by 2002:a05:6a00:240f:b0:823:9b7:9c0e with SMTP id d2e1a72fcca58-82972cef9a9mr1656615b3a.34.1772627967462;
+        Wed, 04 Mar 2026 04:39:27 -0800 (PST)
+X-Received: by 2002:a05:6a00:240f:b0:823:9b7:9c0e with SMTP id d2e1a72fcca58-82972cef9a9mr1656593b3a.34.1772627966924;
+        Wed, 04 Mar 2026 04:39:26 -0800 (PST)
 Received: from hu-anujmitt-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3599c3c5a61sm5978784a91.17.2026.03.04.03.51.24
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82974e75a4csm1342397b3a.30.2026.03.04.04.39.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Mar 2026 03:51:24 -0800 (PST)
+        Wed, 04 Mar 2026 04:39:26 -0800 (PST)
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap] source-han-sans-*-fonts: rename downloaded files in SRC_URI
-Date: Wed,  4 Mar 2026 17:21:18 +0530
-Message-ID: <20260304115118.268290-1-anuj.mittal@oss.qualcomm.com>
+Subject: [PATCH 00/12] Scarthgap pull request
+Date: Wed,  4 Mar 2026 18:09:21 +0530
+Message-ID: <cover.1772625156.git.anuj.mittal@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA0MDA5MyBTYWx0ZWRfX7NaIKTp2obBS
- oxH2sSU66UZShxkALIjmI58tqqlVUKfsmQI8uZM05cZEKfiLWrr6/Epl8IV3zSpdMYTkq0dwLnq
- pSp578lrrmibjRfbaps0Yho7XMwLy/FydWFlFlea8YC9rw/J9NQuyv+lSGmAZvv9wVV8RE5qh+v
- Hd5u/AJVkKPfUtekuwO6qsvFSlUxrb47nSfnDv8O7n8Agt7Yiex3pGdrD4YEDREIFKwClhOrort
- XE4VzbA2a7ShuNZbu5bTh+7kJ1FwaUUSu+t6hMYD4QxIc6AVmmF9HY1pZ0NMtL94VSOVIdLnP3y
- LwioBiUkxYpWohK0UZm6kvmWw8Ba2X9BlmpjH22KTEill0gx6HvNIpGFSJ9iR9wK7Nm+JN/Rjzi
- vVQR0O5HdtWTn1NucN3yTtM5DKWc5nBEuS10pk6cxfDgOmNLroGtvh+CVU4lLt3Ro7iJ2Y5y+GP
- Sk08EwxThf78qhvjNzw==
-X-Proofpoint-GUID: UAwqRS-n2mF9g-s-kYye1DgNM5XYwwLk
-X-Authority-Analysis: v=2.4 cv=S4LUAYsP c=1 sm=1 tr=0 ts=69a81cbe cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: W-r5jNl9snGyMGuvNXLWe5qyj0aOsObt
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA0MDA5OSBTYWx0ZWRfX11OaziJK/eEa
+ G1KOUlwMCv7ZbfOkP9vaMLYD1fGrCb1OfGbZrk5f9XAa4OfiHu6gsgAp0Ud5EScsAUHxQsTugF3
+ G2UJLr1OnYJxU5D6QnENXHrsdTuixy5s4CLtqsCnakqIkHht+oH3qm4Qn+k9XwS8azypCoSP83M
+ wNvj1b+SMZvVdsNdh9RFOflsWrCzGBmk12EU6vedxR2BpEW5nl0OV6IaI9i+omFLYb/ZC/gPlm1
+ tMDG4g+2rp1zW2fxhjMcPsiUQLC23+mbBzAtGkZV2sgiEWyb9GvTjN3PvWUVihCxMy9m+vgRj/W
+ 03vt9UjdTHkTj82EXe0q4eSC/YlXgd/FiC0Wru/dezb8SMpjad11vhng/FPFD2CfDmuZ3oVoQ9v
+ D1QxgyqC+HGsSCuKBvaPSU06cCIAfWovdGTNwUutOvgkI/3r3O7bym0ahUEwgCXADg5AMJfOOUH
+ ZwGPtI7QUBx14G560Xw==
+X-Authority-Analysis: v=2.4 cv=JK82csKb c=1 sm=1 tr=0 ts=69a82800 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=Q4-j1AaZAAAA:8
- a=iGHA9ds3AAAA:8 a=plMWTl-mAAAA:20 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=L-XXB2h_G8GYiLdhf_0A:9 a=mQ_c8vxmzFEMiUWkPHU9:22 a=9H3Qd4_ONW2Ztcrla5EB:22
- a=nM-MV4yxpKKO9kiQg6Ot:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: UAwqRS-n2mF9g-s-kYye1DgNM5XYwwLk
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=iGHA9ds3AAAA:8
+ a=Q4-j1AaZAAAA:8 a=5KgLxMy_OAud9kngw0QA:9 a=IoOABgeZipijB_acs4fv:22
+ a=nM-MV4yxpKKO9kiQg6Ot:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+X-Proofpoint-ORIG-GUID: W-r5jNl9snGyMGuvNXLWe5qyj0aOsObt
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-04_05,2026-03-03_01,2025-10-01_01
+ definitions=2026-03-04_06,2026-03-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 clxscore=1015 phishscore=0 bulkscore=0
+ spamscore=0 phishscore=0 impostorscore=0 priorityscore=1501 malwarescore=0
+ clxscore=1015 bulkscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603040093
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603040099
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 11:51:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124848
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 12:39:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124849
 
-From: Alexandre Truong <alexandre.truong@smile.fr>
+Please merge these changes in scarthgap. Tested locally with
+qemuarm/qemux86-64/qemuarm64 and on autobuilder.
 
-In commit [0], we've switched away from SVN fetcher in SRC_URI.
-The archives downloaded are named SourceHanSans*.zip
-They are named this way regardless of the version 1.004 or 2.004.
-So when the new archives checksums are tested, the fetcher will
-look for the old archives with the same name in the DL_DIR.
->From [1], there are checksum failures due to given checksums not
-matching the ones in DL_DIR. Thus, downloaded archives are renamed
-following their package name and version.
+https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1333
 
-[0]: https://git.openembedded.org/meta-openembedded/commit/?id=36a1e36e1272ca50e5dba0c4cf25ee3ff8b8f1c9
-[1]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/367/steps/16/logs/errors
 
-Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 08e414d496206d0959c2663fad7214596fad3cef)
-Signed-off-by: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
----
- .../ttf-fonts/source-han-sans-cn-fonts_2.004.bb                 | 2 +-
- .../ttf-fonts/source-han-sans-jp-fonts_2.004.bb                 | 2 +-
- .../ttf-fonts/source-han-sans-kr-fonts_2.004.bb                 | 2 +-
- .../ttf-fonts/source-han-sans-tw-fonts_2.004.bb                 | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+The following changes since commit ec0469748be4159fb83fb0fa0148d786484c88cf:
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-index 391d465571..db4ff4269a 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-@@ -11,7 +11,7 @@ inherit allarch fontcache
- #EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP} \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP};downloadfilename=${BP}.zip \
-     file://44-source-han-sans-cn.conf \
- "
- SRC_URI[sha256sum] = "6841fc13f1c0d255cfeb33d2a2c68d24bbebd94ae2c070347a2b2b200a1db4d6"
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-index f940478a80..7ece511281 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-@@ -11,7 +11,7 @@ inherit allarch fontcache
- #EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP} \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP};downloadfilename=${BP}.zip \
-     file://44-source-han-sans-jp.conf \
- "
- SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-index f536d1b61e..0cbe438efc 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-@@ -11,7 +11,7 @@ inherit allarch fontcache
- #EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansKR.zip;subdir=${BP} \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansKR.zip;subdir=${BP};downloadfilename=${BP}.zip \
-     file://44-source-han-sans-kr.conf \
- "
- SRC_URI[sha256sum] = "02fe28a48c6381c49d61c27a1b173c77f0e6f2b9f2b68e79f076f10a6a8f4bfe"
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-index 0a4aff5e31..3b4eeb2719 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-@@ -11,7 +11,7 @@ inherit allarch fontcache
- #EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansTW.zip;subdir=${BP} \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansTW.zip;subdir=${BP};downloadfilename=${BP}.zip \
-     file://44-source-han-sans-tw.conf \
- "
- SRC_URI[sha256sum] = "11d78c8fbc1a4bb04a453cdd65c99db8d41ec5cd6ba6d68c8638e6ba170de806"
+  nodejs: fix gcc compile failed for 32 bit arm target (2026-02-12 15:59:04 +0530)
+
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
+  https://git.openembedded.org/meta-openembedded-contrib/log/?h=anujm/scarthgap
+
+Alexandre Truong (1):
+  source-han-sans-*-fonts: rename downloaded files in SRC_URI
+
+Anil Dongare (1):
+  wireshark 4.2.14: Fix CVE-2026-0962
+
+Ankur Tyagi (1):
+  dovecot: ignore CVE-2025-30189
+
+Anuj Mittal (1):
+  README: update listed maintainer
+
+Daniel Klauer (1):
+  nbench-byte: Fix sysinfo generation in parallel build
+
+Geoff Parker (1):
+  python3-m2crypto: fix python3-m2crypto-native do_configure:prepend()
+
+Gyorgy Sarvari (1):
+  nginx: patch CVE-2026-1642
+
+Martin Jansa (1):
+  nodejs: add missing Upstream-Status
+
+Peter Marko (1):
+  fcgi: add follow-up patch for CVE-2025-23016
+
+Tafil Avdyli (1):
+  python3-pybind11-json: fix Targets.cmake trying to reference host
+
+Vijay Anusuri (1):
+  postgresql: upgrade 16.11 -> 16.12
+
+Yoann Congal (1):
+  polkit: Switch PAM files to common-*
+
+ README.md                                     |   2 +-
+ meta-filesystems/README.md                    |   2 +-
+ meta-gnome/README.md                          |   2 +-
+ meta-initramfs/README.md                      |   2 +-
+ meta-multimedia/README.md                     |   2 +-
+ meta-networking/MAINTAINERS                   |   2 +-
+ meta-networking/README.md                     |   2 +-
+ .../dovecot/dovecot_2.3.21.1.bb               |   1 +
+ .../wireshark/files/CVE-2026-0962.patch       | 152 ++++++++++++++++++
+ .../wireshark/wireshark_4.2.14.bb             |   1 +
+ meta-oe/README.md                             |   2 +-
+ ...sysinfo-generation-in-parallel-build.patch |  69 ++++++++
+ .../sysinfo.sh-Fix-typo-in-rm-command.patch   |  27 ++++
+ .../nbench-byte/nbench-byte_2.2.3.bb          |   4 +-
+ ...c-bypass-autoconf-2.69-version-check.patch |   2 +-
+ ...ostgresql_16.11.bb => postgresql_16.12.bb} |   4 +-
+ ...ert-stop-using-deprecated-ares_query.patch |   1 +
+ ...pport-openembedded-OS-for-PAM-config.patch |  48 ++++++
+ meta-oe/recipes-extended/polkit/polkit_124.bb |   5 +
+ .../source-han-sans-cn-fonts_2.004.bb         |   2 +-
+ .../source-han-sans-jp-fonts_2.004.bb         |   2 +-
+ .../source-han-sans-kr-fonts_2.004.bb         |   2 +-
+ .../source-han-sans-tw-fonts_2.004.bb         |   2 +-
+ meta-perl/README.md                           |   2 +-
+ meta-python/README.md                         |   2 +-
+ .../python/python3-m2crypto_0.40.1.bb         |   2 +-
+ ...p-PYTHON_INCLUDE_DIRS-from-interface.patch |  34 ++++
+ .../python/python3-pybind11-json_0.2.13.bb    |   3 +-
+ meta-webserver/README.md                      |   2 +-
+ .../nginx/files/CVE-2026-1642.patch           |  46 ++++++
+ meta-webserver/recipes-httpd/nginx/nginx.inc  |   1 +
+ ...25-23016.patch => CVE-2025-23016-01.patch} |   0
+ .../fcgi/fcgi/CVE-2025-23016-02.patch         |  83 ++++++++++
+ .../recipes-support/fcgi/fcgi_git.bb          |   3 +-
+ meta-xfce/README.md                           |   2 +-
+ 35 files changed, 495 insertions(+), 23 deletions(-)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-generation-in-parallel-build.patch
+ create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-rm-command.patch
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_16.11.bb => postgresql_16.12.bb} (75%)
+ create mode 100644 meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS-for-PAM-config.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11-json/0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch
+ rename meta-webserver/recipes-support/fcgi/fcgi/{CVE-2025-23016.patch => CVE-2025-23016-01.patch} (100%)
+ create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch
+
 -- 
 2.53.0
 
