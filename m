@@ -2,169 +2,119 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 172FBEDEC1C
-	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 07:07:32 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12124.1772602715876556082
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 209FBEDEC1B
+	for <webhook@archiver.kernel.org>; Wed,  4 Mar 2026 07:07:42 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.12855.1772607938206526586
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Mar 2026 21:38:36 -0800
+ Tue, 03 Mar 2026 23:05:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=PnC7ozbV;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JQF/9Wp2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: miaoqing.pan@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6245TCeb946662
-	for <openembedded-devel@lists.openembedded.org>; Wed, 4 Mar 2026 05:38:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=Wq4zJoxsr0lh5UGanyNIrVJif25LB7B3Sbq
-	+Nvl1F48=; b=PnC7ozbVqCYtHxOmt0miA9XGBlG7YwFStrDbdfpkUIcxAen2btq
-	rkCFjpS9cGzl1KPgFxQZZuE5eyg0QXL+rGNXP8fYAbcV32lqcehAfh1E5boj+AqT
-	14kWNqf8IslN24CPG4lbUDoOkMUFMp+Xh1/NxvdKez5jZxXAECHuT0Is12966ts4
-	mSuSVw7Hlt+7C+MRWDo60xmOxWUs5HNNzVz27If2oPItZwUms3S9JF+nqsEJa2y6
-	2j+IbcniQoLcWjaDb5EDVy64VVkb3HjzXff97MTr1SP22ujcrRvHos/7W+JCJ+Uj
-	1Pi3VSumFI2NoMZ/mkbpH7P3tmGrMjH0fgA==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cnvxfbqd8-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 05:38:34 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-82740488112so15985225b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 21:38:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bFxwfoSn;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: gitbeam@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-b9359c0ec47so702641466b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Mar 2026 23:05:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772602713; x=1773207513; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772607936; x=1773212736; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wq4zJoxsr0lh5UGanyNIrVJif25LB7B3Sbq+Nvl1F48=;
-        b=JQF/9Wp2WdVcGGLaiB2wFzMm3XQtB7sQ7GN7B53cx37uTR0spXJAHNPo02CHsbE5OB
-         6Qu+NZrW7hwILaUGAnCrDyXFbKccgW/EjNMbqrB3DOoNjoIvE5el7/vFwV3y8jkOwk5T
-         IhmR4Yzav5RGXJ9F5rK3ONeFMtKwviThIJeCYvZT1uLvQ+SJeyL9QIrG3XX7Vh6JApxK
-         c5QpVLXzKnj6WJ7/4ieyGoqhSnI7K9ZvCPlsWyCgcf/jJxhGQWYqJTMXQrFndXzgTkl4
-         0vUInMgY+hhwHFczIwOdfpHCDJtVAH+sV6XiS+gsvYY8/NTJ1878xI2nZGm8SH72tALz
-         0q7A==
+        bh=6UK4erm52N3KD3s0YvYwPjw+EH8rDbf8OekFC6G0YNU=;
+        b=bFxwfoSnZaexKsqcl2jSRpFMayqV35cN9dEbjenLb+W7Xiqn79GeGWbrYe71RTUHbg
+         eXQY54GrpHA6lOc9F0G+qj61bNuMWOOc0NrQlwbc20AUZneX9LRc8ny0ml5OjPMWsKdq
+         4SPZZ2syCx+bjqqSpl5VtedD3JeYaIup6cpAopxRIvpDWDPXsNJIC4X2JkFVXV4W1h82
+         c4gYxjXqcZ/VsfN1NVyF8NbllxG83JGz65cP1S4a8Nb20itCRtPBtR5/Z511guXyeRu+
+         AQVWw/u3yY54GSqne5D//be2CSoWEH8Qrg7b9OEHP8vkyUDBCmwqXhcZE4MeTJ7auoPu
+         fLnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772602713; x=1773207513;
+        d=1e100.net; s=20230601; t=1772607936; x=1773212736;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Wq4zJoxsr0lh5UGanyNIrVJif25LB7B3Sbq+Nvl1F48=;
-        b=YYp3jg5v88OZAN1hsp9E05xaMIP+WolqCJXFphigPvKr6BCXJcozf1kGvK+/DkXhmC
-         vcwEeA3FwDMrtoPr2+y6mWtqzmKVUYRh3OTQBalwj/sOf36p/ky0PhQK50Fbf9apmHgI
-         t0HI4X37aaEeh+VhSRcHhRHM36S3AFDRAzev4DhzD+Y582NAaXSRtct/jmqt0B7MsA3/
-         BDlclMM/oc+DJcbT9xZ8yNJF9v5Qws3AVPAUcfw0h0/yMyeWvavz8dpMciunZ+F56KW6
-         BHA6iT8gYLpG5ge6F8SUCtEMdPBmu68GCmiXMjLJ9WzBn/w4NDEggL3p5bDiqN9PK1Mx
-         eX6w==
-X-Gm-Message-State: AOJu0Ywiyrrbq9bIVtk+/TTjPTSZiw6v6xTzl/rtqydQoa8nSqkpC0c3
-	E0OBGanLG2bJvnloj3spFd4dchc0MlVLXrdN4nasvAJvImdzKOvXG4ptBIwvywIBaC66u8KFJY4
-	OpW/j9XwLvWRDVAhz2XV2o5ZxfBPRcHuYAMtMEnTMN/yzv6dvJVrqlDbu0/pYf2gQrDyb8BjDNZ
-	G7b2UBuj9+tBW9Ocvx7xU=
-X-Gm-Gg: ATEYQzyHx+J9YkAwga6TX3dSxA63ez7NGtt76YI1Ejqa/D6H6RRxVgE6H43fjmChEj/
-	Jn//i+fc/OnsLCt3hsTHPIpckWLRwSxglR+izpDw2WXwehbH4mEcraKMvs7yRxlhkBequysl8Mu
-	HX0bFZX3HvEVKaxvuKCtp/lzmT1pEsa/GxckuAB5KnB7r5FeE2I3eC+Gw3Dp6Xf+DZWOthV6nqw
-	FMPi9akpdZegcTCHTT/6dsT6n7wlrRQJmoAvEHwoMtMaMsrA+sxaiE9TG6+rEnPHi8GswP65Elo
-	f3Pai+sj92u5NKcn8WNu3snn0VB/X3WDA86tevMIaJnLFLRTDXBYcvSuJdMiLEYjNJOkhf0I1ED
-	tpPcNZCuaL/XJvVVojh+N1c3QyN7kGfSR3AipSmjLPLWtERadNZzMrIEVfOx7YBwRXWkTB+3+2j
-	rE4hmv
-X-Received: by 2002:a05:6a00:2d94:b0:81f:9938:b07d with SMTP id d2e1a72fcca58-829728f04ebmr829307b3a.7.1772602713464;
-        Tue, 03 Mar 2026 21:38:33 -0800 (PST)
-X-Received: by 2002:a05:6a00:2d94:b0:81f:9938:b07d with SMTP id d2e1a72fcca58-829728f04ebmr829297b3a.7.1772602713038;
-        Tue, 03 Mar 2026 21:38:33 -0800 (PST)
-Received: from Z2-SFF-G9-MQ.ap.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-829751f3867sm408801b3a.55.2026.03.03.21.38.30
+        bh=6UK4erm52N3KD3s0YvYwPjw+EH8rDbf8OekFC6G0YNU=;
+        b=LmJdhK7UJfnMsw48GBsYHkrqOGpa8ZsV08o6dYnSqRj3sbuahTh2aLJs2XMYW38btd
+         D12u/a4flhNP/bnRCa8so8J6kuPDvi+veKicjOiW1Pn0nU+c9mBcZA56KALL+wX4JUmH
+         85nyiECNRcPeF7stu4BKneb+lQgzMsis4YcNslJzWjCV8nAFeasGd8F7RELAdkSw2EYd
+         ZYyMAUDMM38WHqfa50nVyLH9KX+yw8W0RCvhZAP7kcWJ6ogtmX8xRlrg/2Ubpae1s/yg
+         dYoLJwTH6Mbt1B6bU8C96lXuqFSFwltvjK7jRHgtt1oCJkLpU5p8AXZdYKv1MYnUy++H
+         xqtA==
+X-Gm-Message-State: AOJu0Yz7rQ80+CVu4UUv4HQc6ZrCcXzuxgvLGRk/OAi6bCQrGtNdAAet
+	tSg+4eO2NVURUDyodcmFBtNV2R3nPIsxGVZ3V3Ri8P9R2yVukWxKkDeS7X3T2rXvRkmG3wx+
+X-Gm-Gg: ATEYQzy2mlXDMpa0IQOLhcbfV0mW5HfSPL5ixWYQK0gI3fP7cAGFIk6vGZ7LU5j93Nd
+	mVesnGdhSuPpG/0R8gFvqXTkHqQ1Eidv33QjZwMLIxCcyARzn27O6fQXdSsPkWYXeBi87c+5E4T
+	CvZQkYi/8Oyzm9hLsshPkHDUVbY6Mim1nv8qlmhtHIFWSUexI+wkql3/aXIbvlrzV5trtfhcRit
+	2ItxYG4BGg1knmubd7uE/FrY7/rO+/1PsI/3jYLlXVWjuXS3wm2ggceXCe41ODQjU06s6uLi8Jt
+	dug5B9Dg63LZcYAu23LVS784AOfKtZg47HcVlTqM56TqgU5hLZN7bLSoNS5wHPJbGx6WsZoWCbX
+	YJ2Dz38Vx7v4BGAoZeH0B/XwnDY6FdWXSmZZWzeT+WoEwTmFAyE0ML9TKOA6fukWWAFlrZsZ1Mz
+	2oZxISFXNoF3yoHxIkwgiIUFvjvc2hmAiH/e6Vhxen7/4AFH7m+j4/R0nIeLyi7n/Eah4UEsa5G
+	NuYhB3ep57XVLIiC3kwQP5t4zkruqeCVuVaHxE2qIxNP4AtssFzGYrTPwGJfSMf0/Y+EXG0MJcw
+	QRK1ze0=
+X-Received: by 2002:a05:6000:26d3:b0:439:ac6b:dd56 with SMTP id ffacd0b85a97d-439c7ffc996mr1922194f8f.53.1772607627799;
+        Tue, 03 Mar 2026 23:00:27 -0800 (PST)
+Received: from DESKTOP-SJHFTAC.localdomain (dynamic-095-119-200-146.95.119.pool.telefonica.de. [95.119.200.146])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439ba2a5970sm16953745f8f.33.2026.03.03.23.00.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 03 Mar 2026 21:38:32 -0800 (PST)
-From: "Miaoqing Pan" <miaoqing.pan@oss.qualcomm.com>
+        Tue, 03 Mar 2026 23:00:27 -0800 (PST)
+From: G B <gitbeam@gmail.com>
+X-Google-Original-From: G B <gitbeam@proton.me>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com, dmitry.baryshkov@oss.qualcomm.com,
-        skandigraun@gmail.com, Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>
-Subject: [meta-networking][PATCH v2] wowlan-udev: add udev rule to enable WoWLAN magic-packet
-Date: Wed,  4 Mar 2026 13:38:10 +0800
-Message-Id: <20260304053810.1001453-1-miaoqing.pan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+Cc: G B <gitbeam@proton.me>
+Subject: [PATCH] ntpsec: upgrade 1.2.2a -> 1.2.4
+Date: Wed,  4 Mar 2026 08:00:13 +0100
+Message-ID: <20260304070013.2251-1-gitbeam@proton.me>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA0MDA0NCBTYWx0ZWRfXzvEhc3BMbWZV
- ZSe7vu6JEUdT7I9mLfAli7a4xQx8IyYHYH0r2T2sSaE/1c896w11J7w49Oz+S3KsuyuBZ3NFZ9k
- Jn6XB3QKKfPApu0wkPwp+6ZCVLDneD9YlfZdXnG3HAjyG/zocJslBKdxn1PINWkgRTrCX1B/5SZ
- 5PM+WcqksiN5LxwxWKBO7l+FkuHyL8/8bjL6EXxBaCBP7/k+OwznEmjYZJ1gcWxR/zpoqFu5Y3s
- u9pd6cDTFbeBZnJ+cCHChrMYpUozGVP8sSiMMx68ev/m1guk525/wWeRpn/UXK82p0aOTXccpWS
- QhYxpnvHGf6cnOycNVpFCSB3ySIsPhIXYi9H65vHq/synFgMKjbXVWDRCJnTs+e7emRdUw7bBbG
- mVuKSAZu2xTI5yWrqM+Oqca8vujC2D41E+9JuSk1V6Qm5fYIlN1JL+bvxPkU/W8zewQGQ3L/OG6
- 2n/Jn1OgxHEuNxVo4vQ==
-X-Proofpoint-ORIG-GUID: 6a2YOseh9DVzRYp3eoPEHXCavg4F_gSZ
-X-Authority-Analysis: v=2.4 cv=S+HUAYsP c=1 sm=1 tr=0 ts=69a7c55a cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=Yq5XynenixoA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=T8Rb3LcDPC92mQh966MA:9 a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-GUID: 6a2YOseh9DVzRYp3eoPEHXCavg4F_gSZ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-04_02,2026-03-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0
- clxscore=1015 spamscore=0 priorityscore=1501 adultscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603040044
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 07:07:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124839
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 07:07:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124840
 
-On some platforms (for example, QCx6490), XO (Crystal Oscillator) shutdown
-is prevented by Wireless Processor Subsystem votes on interconnect
-bandwidth and XO unless the WoWLAN magic-packet trigger is enabled. These
-votes are released only after running:
-  iw phy0 wowlan enable magic-packet
+Upgrade to latest upstream release 1.2.4.
 
-Add an udev rule to automatically enable WoWLAN magic-packet support when
-a Wi-Fi PHY is registered. This rule is provided via a dedicated
-wowlan-udev package and is not enabled by default.
+Release notes: https://blog.ntpsec.org/2025/04/18/version-1.2.4.html
 
-Integrators should include this package only if their platform requires
-automatic WoWLAN magic-packet enablement.
-
-Signed-off-by: Miaoqing Pan <miaoqing.pan@oss.qualcomm.com>
+Signed-off-by: G B <gitbeam@proton.me>
 ---
-v2: update LICENSE file and set INHIBIT_DEFAULT_DEPS.
----
- .../wowlan-udev/files/99-wowlan.rules              |  4 ++++
- .../wowlan-udev/wowlan-udev.bb                     | 14 ++++++++++++++
- 2 files changed, 18 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
- create mode 100644 meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
+ .../ntpsec/{ntpsec_1.2.2a.bb => ntpsec_1.2.4.bb}   | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-support/ntpsec/{ntpsec_1.2.2a.bb => ntpsec_1.2.4.bb} (88%)
 
-diff --git a/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
-new file mode 100644
-index 0000000000..ba41eef896
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wowlan-udev/files/99-wowlan.rules
-@@ -0,0 +1,4 @@
-+# Enable WoWLAN when Wi-Fi PHY is registered
-+ACTION=="add", SUBSYSTEM=="ieee80211", KERNEL=="phy*", \
-+  RUN+="/usr/sbin/iw %k wowlan enable magic-packet"
-+
-diff --git a/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
-new file mode 100644
-index 0000000000..857bbc3f95
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wowlan-udev/wowlan-udev.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Enable WoWLAN via udev on Wi-Fi PHY registration"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+SRC_URI = "file://99-wowlan.rules"
-+
-+do_install() {
-+    install -d ${D}${sysconfdir}/udev/rules.d
-+    install -m 0644 ${UNPACKDIR}/99-wowlan.rules \
-+        ${D}${sysconfdir}/udev/rules.d/
-+}
-+
-+INHIBIT_DEFAULT_DEPS = "1"
-+RDEPENDS:${PN} = "iw udev"
+diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+similarity index 88%
+rename from meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+rename to meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+index 9ad97e7689..c9a752cdda 100644
+--- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
++++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+@@ -2,12 +2,12 @@ SUMMARY = "The Network Time Protocol suite, refactored"
+ HOMEPAGE = "https://www.ntpsec.org/"
+ 
+ LICENSE = "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSES/BSD-2;md5=653830da7b770a32f6f50f6107e0b186 \
+-                    file://LICENSES/BSD-3;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
+-                    file://LICENSES/CC-BY-4.0;md5=2ab724713fdaf49e4523c4503bfd068d \
+-                    file://LICENSES/MIT;md5=5a9dfc801af3eb49df2055c9b07918b2 \
+-                    file://LICENSES/NTP;md5=cb56b7747f86157c78ca81f224806694"
+-
++LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=653830da7b770a32f6f50f6107e0b186 \
++                    file://LICENSES/BSD-3-Clause.txt;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
++                    file://LICENSES/CC-BY-4.0.txt;md5=2ab724713fdaf49e4523c4503bfd068d \
++                    file://LICENSES/MIT.txt;md5=5a9dfc801af3eb49df2055c9b07918b2 \
++                    file://LICENSES/NTP.txt;md5=cb56b7747f86157c78ca81f224806694"
++                    
+ DEPENDS += "bison-native \
+             openssl \
+             python3"
+@@ -17,7 +17,7 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
+            file://0001-wscript-Add-BISONFLAGS-support.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
++SRC_URI[sha256sum] = "443e54a6149d1b0bf08677d17b18fced9028b101fc2ffd2c81e0834f87eebc7d"
+ 
+ UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
+ 
 -- 
-2.34.1
+2.47.3
 
 
