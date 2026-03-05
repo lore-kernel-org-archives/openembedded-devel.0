@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5371FF33A72
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AD42F33A70
 	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 14:15:24 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.45025.1772720118691552244
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44933.1772720117894656343
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Mar 2026 06:15:19 -0800
+ Thu, 05 Mar 2026 06:15:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Nw0hBTXG;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-439c944bb62so1504130f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:15:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VhyhKYca;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-439c944bb62so1504105f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:15:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772720117; x=1773324917; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772720116; x=1773324916; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/xttFrINTSZAYT9yaWCzjyfBjlGGFTutTRBCuJmt/8E=;
-        b=Nw0hBTXGe0wtw6m3xWQWCUHIkOLXiz6jPOZBbxbJlOkWtVT9KbaMRqYwCn46gWmJxb
-         7OPwMqbC1oYoJ9nZK+nxmZSt9Im1XnT+gDbFhvOnE/NaleuuHC/aZ9l1oIBBwM//c8Sj
-         QDgYQp1kX8XfChIRWhW8FGvABnFcQfPUEksvnbFtbk1UrJGjbYVxDvMXIleWN7PfQgLT
-         5C3+MB3v0gC52kv2qXXIDfXWvY/YZIvKKGuk1reLFPy+/rp9FCA0EJFtZA3DpXnOLnA6
-         GSKIteK9tJQlPD9kcMuZkyKhhyhewUxnYa7lbU46MtGRjXyCNGw199RrUVC/DniczYBF
-         vbTA==
+        bh=rOh3gCbuALKdwg80g4k9LxBXo/PN57S/YIYusTsqGP4=;
+        b=VhyhKYca6ApudlZv3Y1DOa6HC/4m1l0Z2yWCOfgyBnGm7XPruakJOS5W029JLxOT1p
+         Nd7uVanb5kqHcq/r42rZjcSI+lcaW6ECBkJhbpSXlccm8McMdv/+Ke8bM5iVMnhvYtdY
+         +D6eJCt6qJ5m6ZgloA53oIcoipK4bHRdyai/WPSJKNK6HAl2GQ0ESTl1n8xVPuKQCLvX
+         yujYiISQpiIDnQUrcnNHF3pdZCGi/yBZZfyT9qjnkJHgDBiQA7DLF7WcQ1N8xw0PpOwa
+         gNDh5K0OjOM6EkAAt+7OkdvS9W1Ok1pdsX3LYTactdQTwaazeeRfdUvuTzFcr+DUituo
+         rmOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772720117; x=1773324917;
+        d=1e100.net; s=20230601; t=1772720116; x=1773324916;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=/xttFrINTSZAYT9yaWCzjyfBjlGGFTutTRBCuJmt/8E=;
-        b=Aot/dIwU8gvkXOdAClvYxMPk1HvJzzZ81XYQo2oa1RkJ4gA90V1H/yMBHcONk7WDGe
-         E2wq6ae8DxmSWEvzE+Ww92YedSP38j6X8ujGe/MlHG/+/g2qzL/fMfAsO6h55g2GAyoG
-         sXbWtZhVE66ytN6EHuGCznfEUU/T5bQ6vQjGF3KhS5SK09OQQ0O/IyUBmxxfMjuZ90zy
-         0H+XbfRozLHwWSI2tFwJN2719pioMRFMTzRBGCnYFOKvF9O4dzzYpDSdgAqctoVKbdVf
-         sVEcZ78jkP4zWDk3g3EjuflfdwidhSlLUL1SBUsyhFloUqMI3NpUwykOTxp4/bO032D8
-         jZoA==
-X-Gm-Message-State: AOJu0Yz/aAg/xOhoVWO+vmgzAbC6tw2pYaJAXN6vsBXwzlJ0E0XC5R0F
-	+cPZ4ctGTNP2N77v+g008h6GocgRkKiBThPnWVQeeJ3nqAVKsFVkPfxr9XWBIQ==
-X-Gm-Gg: ATEYQzzY41gUCM738286qUTPYX66TlVuUuWqEwE75OLBCOIjoPvdlsN2FvgugF8Vg4S
-	/Du8HVgCDUUTHM2umig3wx0WmYWhGPkOhqxkxEfHigI4TNQETFLfMawcOY9b7JDzTd6hWmvOuzZ
-	d2vM8vyNjRPGsyJ77wSsxGFIPdoXBpf18G0bxqlsIAzRAgo53AmAYqBTP8zhLjHbwcS3I9jyWcS
-	RN1m8Pqnsm462YiS+v1uyB9P1o57L+yVc/7It6NaNYij2rlMt4ri/a982A7VYaos1sbQrI/HOr3
-	ZssxTzVHvxRJsYeAABw0Hr5E+is8yoWllWZqjWgNv1pWjreWYt+6TSw/RscB3KE98dF7hlXFd4C
-	wHVWo7PF0t1HpSuLGzCcMr5nAjHq5epYLlRlLt5+KWFZCapXgHdsEmoPwgIawIZUCzt8VfaLgst
-	o3C9h6ljBtXLDHqU3odGOP
-X-Received: by 2002:a05:6000:26ce:b0:439:c356:9f65 with SMTP id ffacd0b85a97d-439c7fadd3dmr11094560f8f.15.1772720116709;
-        Thu, 05 Mar 2026 06:15:16 -0800 (PST)
+        bh=rOh3gCbuALKdwg80g4k9LxBXo/PN57S/YIYusTsqGP4=;
+        b=V1SvJFLJ8+MfBih3dFsQMh8UNWqb/1J6JdNmm6U2BTZf2ezySodrzPasGN9PSjwp69
+         pXfus9Hj/pqhL4YjsJVJZawJaVi9pD1fl8QwzeXHYVzugOr7pqPXUkI0y5mT4aIR0a9d
+         O+m7fL2WAIOBsxESiGCQgh3Qnncqm37+W2JmFKzt0dZ0c+oY1p+Uvrp3f5EueP+RND4N
+         j60c+tbpxSDR42bU4SnYHoRZaFNdw8kqocI3rK44EEmYL4KegByk0Xejm+I6KsLV0Rh2
+         54ffkZzG852DCV5xVmoaGt5GjAVKOqpYHV8nLMt75yu/ePKEuYMlNOQTXS09T/SvI1ex
+         43vA==
+X-Gm-Message-State: AOJu0YwnUjDdnuCeDnViIlloA8NLgVxZA5b6mnGBc/Pb92aEVwmYh3Rz
+	gO197DKWrjVr+k7attc1azBmMnGksZfsBhS2sfUpyD+Ar6iEGqgCcHBYfaQoBg==
+X-Gm-Gg: ATEYQzyTfBHod21YMpjPHsriCWD2+1zfuHnBB6Dm1LkzXXtrSTv5vbf2IoEQnMuP3Rl
+	EK02rOAYYATgqtJtca00CStE8Fq7121NjkdJ9A9jWu4+QGylBWVcY541acfm3R1wG0h4e0JKUmg
+	heJIFZhYaeC//GAUcydtUKjAIpJY5WelFK6SmbyLRsKNEUrI81IBFGNEWzFqSA8gnOmmCWsoxLG
+	CQtDEyPgEtVfHDxmvjkKF0UTTj78dmcGsAl+FyhCgIVlZQ6DjAcLb6aWBMNLWAbt1y0JkdkEAbG
+	iKCsiy2DkdEBRPo51yrNzywBFUlX/LPZKQD3YShAPT0l3mwCxJNXRsRaoZGMrBjCQ79qmnlOWYy
+	n3yqwaiDgruQugSYCG9nF0d5wPIl6j09DE7I7oHHfcq7XBkYi0pVweWdysqrtgn2EV5Qz0xSSr4
+	F3ZWFj/pDEV045f+b1Gt23
+X-Received: by 2002:a05:6000:184a:b0:439:8da3:d77e with SMTP id ffacd0b85a97d-439c7fae58fmr11541402f8f.20.1772720115981;
+        Thu, 05 Mar 2026 06:15:15 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439abdf5430sm40034096f8f.5.2026.03.05.06.15.16
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439abdf5430sm40034096f8f.5.2026.03.05.06.15.15
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 06:15:16 -0800 (PST)
+        Thu, 05 Mar 2026 06:15:15 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 3/3] libjxl: upgrade 0.10.2 -> 0.10.5
-Date: Thu,  5 Mar 2026 15:15:14 +0100
-Message-ID: <20260305141514.3058998-3-skandigraun@gmail.com>
+Subject: [meta-networking][scarthgap][PATCH 2/3] keepalived: patch CVE-2024-41184
+Date: Thu,  5 Mar 2026 15:15:13 +0100
+Message-ID: <20260305141514.3058998-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260305141514.3058998-1-skandigraun@gmail.com>
 References: <20260305141514.3058998-1-skandigraun@gmail.com>
@@ -67,248 +67,376 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 14:15:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124877
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124876
 
-Bug fix release, mostly CVE fixes.
-Drop patches that are included.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2024-41184
 
-Changelog:
-0.10.5:
-fix tile dimension in low memory rendering pipeline (CVE-2025-12474)
-fix number of channels for gray-to-gray color transform (CVE-2026-1837)
-djxl: reject decoding JXL files if "packed" representation size overflows size_t
-
-0.10.4:
-Huffman lookup table size fix (CVE-2024-11403)
-Check height limit in modular trees (CVE-2024-11498)
-
-0.10.3:
-fixed decoding of some special images
+Backport the patches referenced by upstream in the bug
+mentioned by the NVD advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libjxl/libjxl/CVE-2024-11403.patch        |  70 -----------
- .../libjxl/libjxl/CVE-2024-11498.patch        | 113 ------------------
- .../{libjxl_0.10.2.bb => libjxl_0.10.5.bb}    |   7 +-
- 3 files changed, 2 insertions(+), 188 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
- delete mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
- rename meta-oe/recipes-multimedia/libjxl/{libjxl_0.10.2.bb => libjxl_0.10.5.bb} (88%)
+ .../keepalived/CVE-2024-41184-1.patch         | 98 +++++++++++++++++++
+ .../keepalived/CVE-2024-41184-2.patch         | 88 +++++++++++++++++
+ .../keepalived/CVE-2024-41184-3.patch         | 94 ++++++++++++++++++
+ .../keepalived/CVE-2024-41184-4.patch         | 33 +++++++
+ .../keepalived/keepalived_2.2.8.bb            |  4 +
+ 5 files changed, 317 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-1.patch
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-2.patch
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-3.patch
+ create mode 100644 meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-4.patch
 
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
-deleted file mode 100644
-index 625218c2d3..0000000000
---- a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From 9cc451b91b74ba470fd72bd48c121e9f33d24c99 Mon Sep 17 00:00:00 2001
--From: szabadka <9074039+szabadka@users.noreply.github.com>
--Date: Thu, 3 Oct 2024 18:07:38 +0200
--Subject: [PATCH] Port the Huffman lookup table size fix from brunsli. (#3871)
--
--CVE: CVE-2024-11403
--Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/9cc451b91b74ba470fd72bd48c121e9f33d24c99]
--Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-----
-- lib/jpegli/huffman.h                   | 16 ++++++++++++----
-- lib/jxl/jpeg/enc_jpeg_huffman_decode.h | 16 ++++++++++++----
-- 2 files changed, 24 insertions(+), 8 deletions(-)
--
--diff --git a/lib/jpegli/huffman.h b/lib/jpegli/huffman.h
--index f0e5e1de..99549668 100644
----- a/lib/jpegli/huffman.h
--+++ b/lib/jpegli/huffman.h
--@@ -15,10 +15,18 @@ namespace jpegli {
-- 
-- constexpr int kJpegHuffmanRootTableBits = 8;
-- // Maximum huffman lookup table size.
---// According to zlib/examples/enough.c, 758 entries are always enough for
---// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
---// max bit length 16 if the root table has 8 bits.
---constexpr int kJpegHuffmanLutSize = 758;
--+// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
--+// code) and max bit length 16, the root table has 8 bits.
--+// zlib/examples/enough.c works with an assumption that Huffman code is
--+// "complete". Input JPEGs might have this assumption broken, hence the
--+// following sum is used as estimate:
--+//  + number of 1-st level cells
--+//  + number of symbols
--+//  + asymptotic amount of repeated 2nd level cells
--+// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
--+// each "size" might be almost completely be filled with repetitions.
--+// Total sum is slightly less than 1024,...
--+constexpr int kJpegHuffmanLutSize = 1024;
-- 
-- struct HuffmanTableEntry {
--   uint8_t bits;    // number of bits used for this symbol
--diff --git a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--index b8a60e41..fc9bd17b 100644
----- a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--+++ b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--@@ -15,10 +15,18 @@ namespace jpeg {
-- 
-- constexpr int kJpegHuffmanRootTableBits = 8;
-- // Maximum huffman lookup table size.
---// According to zlib/examples/enough.c, 758 entries are always enough for
---// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
---// max bit length 16 if the root table has 8 bits.
---constexpr int kJpegHuffmanLutSize = 758;
--+// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
--+// code) and max bit length 16, the root table has 8 bits.
--+// zlib/examples/enough.c works with an assumption that Huffman code is
--+// "complete". Input JPEGs might have this assumption broken, hence the
--+// following sum is used as estimate:
--+//  + number of 1-st level cells
--+//  + number of symbols
--+//  + asymptotic amount of repeated 2nd level cells
--+// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
--+// each "size" might be almost completely be filled with repetitions.
--+// Total sum is slightly less than 1024,...
--+constexpr int kJpegHuffmanLutSize = 1024;
-- 
-- struct HuffmanTableEntry {
--   // Initialize the value to an invalid symbol so that we can recognize it
---- 
--2.50.1
--
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
-deleted file mode 100644
-index 25f85e1527..0000000000
---- a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
-+++ /dev/null
-@@ -1,113 +0,0 @@
--From bf4781a2eed2eef664790170977d1d3d8347efb9 Mon Sep 17 00:00:00 2001
--From: Luca Versari <veluca@google.com>
--Date: Thu, 21 Nov 2024 16:33:08 +0100
--Subject: [PATCH] Check height limit in modular trees. (#3943)
--
--Also rewrite the implementation to use iterative checking instead of
--recursive checking of tree property values, to ensure stack usage is
--low.
--
--Before, it was possible for appropriately-crafted files to use a
--significant amount of stack (in the order of hundreds of MB).
--
--CVE: CVE-2024-11498
--Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/bf4781a2eed2eef664790170977d1d3d8347efb9]
--Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-----
-- lib/jxl/modular/encoding/dec_ma.cc | 66 ++++++++++++++++++++----------
-- 1 file changed, 45 insertions(+), 21 deletions(-)
--
--diff --git a/lib/jxl/modular/encoding/dec_ma.cc b/lib/jxl/modular/encoding/dec_ma.cc
--index b53b9a91..df2948d8 100644
----- a/lib/jxl/modular/encoding/dec_ma.cc
--+++ b/lib/jxl/modular/encoding/dec_ma.cc
--@@ -6,6 +6,7 @@
-- #include "lib/jxl/modular/encoding/dec_ma.h"
-- 
-- #include <limits>
--+#include <vector>
-- 
-- #include "lib/jxl/base/printf_macros.h"
-- #include "lib/jxl/dec_ans.h"
--@@ -17,23 +18,49 @@ namespace jxl {
-- 
-- namespace {
-- 
---Status ValidateTree(
---    const Tree &tree,
---    const std::vector<std::pair<pixel_type, pixel_type>> &prop_bounds,
---    size_t root) {
---  if (tree[root].property == -1) return true;
---  size_t p = tree[root].property;
---  int val = tree[root].splitval;
---  if (prop_bounds[p].first > val) return JXL_FAILURE("Invalid tree");
---  // Splitting at max value makes no sense: left range will be exactly same
---  // as parent, right range will be invalid (min > max).
---  if (prop_bounds[p].second <= val) return JXL_FAILURE("Invalid tree");
---  auto new_bounds = prop_bounds;
---  new_bounds[p].first = val + 1;
---  JXL_RETURN_IF_ERROR(ValidateTree(tree, new_bounds, tree[root].lchild));
---  new_bounds[p] = prop_bounds[p];
---  new_bounds[p].second = val;
---  return ValidateTree(tree, new_bounds, tree[root].rchild);
--+Status ValidateTree(const Tree &tree) {
--+  int num_properties = 0;
--+  for (auto node : tree) {
--+    if (node.property >= num_properties) {
--+      num_properties = node.property + 1;
--+    }
--+  }
--+  std::vector<int> height(tree.size());
--+  std::vector<std::pair<pixel_type, pixel_type>> property_ranges(
--+      num_properties * tree.size());
--+  for (int i = 0; i < num_properties; i++) {
--+    property_ranges[i].first = std::numeric_limits<pixel_type>::min();
--+    property_ranges[i].second = std::numeric_limits<pixel_type>::max();
--+  }
--+  const int kHeightLimit = 2048;
--+  for (size_t i = 0; i < tree.size(); i++) {
--+    if (height[i] > kHeightLimit) {
--+      return JXL_FAILURE("Tree too tall: %d", height[i]);
--+    }
--+    if (tree[i].property == -1) continue;
--+    height[tree[i].lchild] = height[i] + 1;
--+    height[tree[i].rchild] = height[i] + 1;
--+    for (size_t p = 0; p < static_cast<size_t>(num_properties); p++) {
--+      if (p == static_cast<size_t>(tree[i].property)) {
--+        pixel_type l = property_ranges[i * num_properties + p].first;
--+        pixel_type u = property_ranges[i * num_properties + p].second;
--+        pixel_type val = tree[i].splitval;
--+        if (l > val || u <= val) {
--+          return JXL_FAILURE("Invalid tree");
--+        }
--+        property_ranges[tree[i].lchild * num_properties + p] =
--+            std::make_pair(val + 1, u);
--+        property_ranges[tree[i].rchild * num_properties + p] =
--+            std::make_pair(l, val);
--+      } else {
--+        property_ranges[tree[i].lchild * num_properties + p] =
--+            property_ranges[i * num_properties + p];
--+        property_ranges[tree[i].rchild * num_properties + p] =
--+            property_ranges[i * num_properties + p];
--+      }
--+    }
--+  }
--+  return true;
-- }
-- 
-- Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
--@@ -82,10 +109,7 @@ Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
--                        tree->size() + to_decode + 2, Predictor::Zero, 0, 1);
--     to_decode += 2;
--   }
---  std::vector<std::pair<pixel_type, pixel_type>> prop_bounds;
---  prop_bounds.resize(256, {std::numeric_limits<pixel_type>::min(),
---                           std::numeric_limits<pixel_type>::max()});
---  return ValidateTree(*tree, prop_bounds, 0);
--+  return ValidateTree(*tree);
-- }
-- }  // namespace
-- 
---- 
--2.50.1
--
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-similarity index 88%
-rename from meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
-rename to meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-index 2bf0f126b0..0a17d50be0 100644
---- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
-+++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-@@ -8,11 +8,8 @@ inherit cmake pkgconfig mime
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-1.patch b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-1.patch
+new file mode 100644
+index 0000000000..8aa9bb445e
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-1.patch
+@@ -0,0 +1,98 @@
++From 3ff3427da746c4641e1718dcec7a2f7041ae6961 Mon Sep 17 00:00:00 2001
++From: Quentin Armitage <quentin@armitage.org.uk>
++Date: Fri, 12 Jul 2024 15:16:47 +0100
++Subject: [PATCH] vrrp: Handle empty ipset names with vrrp_ipsets keyword
++
++We now handle empty ipset names and return a config error.
++
++Signed-off-by: Quentin Armitage <quentin@armitage.org.uk>
++CVE: CVE-2024-41184
++Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/e78513fe0ce5d83c226ea2c0bd222f375c2438e7]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ keepalived/core/global_parser.c | 36 +++++++++++++++++++--------------
++ 1 file changed, 21 insertions(+), 15 deletions(-)
++
++diff --git a/keepalived/core/global_parser.c b/keepalived/core/global_parser.c
++index a3f2329..504b9a1 100644
++--- a/keepalived/core/global_parser.c
+++++ b/keepalived/core/global_parser.c
++@@ -1086,6 +1086,22 @@ vrrp_iptables_handler(const vector_t *strvec)
++ 	}
++ }
++ #ifdef _HAVE_LIBIPSET_
+++static bool
+++check_valid_ipset_name(const vector_t *strvec, unsigned entry, const char *log_name)
+++{
+++	if (strlen(strvec_slot(strvec, entry)) >= IPSET_MAXNAMELEN - 1) {
+++		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset %s name too long - ignored", log_name);
+++		return false;
+++	}
+++
+++	if (strlen(strvec_slot(strvec, entry)) == 0) {
+++		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset %s name empty - ignored", log_name);
+++		return false;
+++	}
+++
+++	return true;
+++}
+++
++ static void
++ vrrp_ipsets_handler(const vector_t *strvec)
++ {
++@@ -1103,17 +1119,13 @@ vrrp_ipsets_handler(const vector_t *strvec)
++ 		return;
++ 	}
++ 
++-	if (strlen(strvec_slot(strvec,1)) >= IPSET_MAXNAMELEN - 1) {
++-		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset address name too long - ignored");
+++	if (!check_valid_ipset_name(strvec, 1, "address"))
++ 		return;
++-	}
++ 	global_data->vrrp_ipset_address = STRDUP(strvec_slot(strvec,1));
++ 
++ 	if (vector_size(strvec) >= 3) {
++-		if (strlen(strvec_slot(strvec,2)) >= IPSET_MAXNAMELEN - 1) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset IPv6 address name too long - ignored");
+++		if (!check_valid_ipset_name(strvec, 2, "IPv6 address"))
++ 			return;
++-		}
++ 		global_data->vrrp_ipset_address6 = STRDUP(strvec_slot(strvec,2));
++ 	}
++ 	else {
++@@ -1124,10 +1136,8 @@ vrrp_ipsets_handler(const vector_t *strvec)
++ 		global_data->vrrp_ipset_address6 = STRDUP(set_name);
++ 	}
++ 	if (vector_size(strvec) >= 4) {
++-		if (strlen(strvec_slot(strvec,3)) >= IPSET_MAXNAMELEN - 1) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset IPv6 address_iface name too long - ignored");
+++		if (!check_valid_ipset_name(strvec, 3, "IPv6 address_iface"))
++ 			return;
++-		}
++ 		global_data->vrrp_ipset_address_iface6 = STRDUP(strvec_slot(strvec,3));
++ 	}
++ 	else {
++@@ -1142,10 +1152,8 @@ vrrp_ipsets_handler(const vector_t *strvec)
++ 	}
++ 
++ 	if (vector_size(strvec) >= 5) {
++-		if (strlen(strvec_slot(strvec,4)) >= IPSET_MAXNAMELEN - 1) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset IGMP name too long - ignored");
+++		if (!check_valid_ipset_name(strvec, 4, "IGMP"))
++ 			return;
++-		}
++ 		global_data->vrrp_ipset_igmp = STRDUP(strvec_slot(strvec,4));
++ 	}
++ 	else {
++@@ -1156,10 +1164,8 @@ vrrp_ipsets_handler(const vector_t *strvec)
++ 		global_data->vrrp_ipset_igmp = STRDUP(set_name);
++ 	}
++ 	if (vector_size(strvec) >= 6) {
++-		if (strlen(strvec_slot(strvec,5)) >= IPSET_MAXNAMELEN - 1) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset MLD name too long - ignored");
+++		if (!check_valid_ipset_name(strvec, 5, "MLD"))
++ 			return;
++-		}
++ 		global_data->vrrp_ipset_mld = STRDUP(strvec_slot(strvec,5));
++ 	}
++ 	else {
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-2.patch b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-2.patch
+new file mode 100644
+index 0000000000..3565451f92
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-2.patch
+@@ -0,0 +1,88 @@
++From 19e9f69359c204805de4d1467d9f96940910a7dd Mon Sep 17 00:00:00 2001
++From: Quentin Armitage <quentin@armitage.org.uk>
++Date: Fri, 12 Jul 2024 15:18:20 +0100
++Subject: [PATCH] vrrp: handle empty iptables chain names - vrrp_iptables
++ keyword
++
++We now return an error if a chain name is empty.
++
++Signed-off-by: Quentin Armitage <quentin@armitage.org.uk>
++
++CVE: CVE-2024-41184
++Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/281de3aa8a0990fa3cd694a9addc0bf28953da0b]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ keepalived/core/global_parser.c | 42 ++++++++++++++++++++-------------
++ 1 file changed, 25 insertions(+), 17 deletions(-)
++
++diff --git a/keepalived/core/global_parser.c b/keepalived/core/global_parser.c
++index 504b9a1..c49e771 100644
++--- a/keepalived/core/global_parser.c
+++++ b/keepalived/core/global_parser.c
++@@ -1059,6 +1059,28 @@ vrrp_higher_prio_send_advert_handler(const vector_t *strvec)
++ 		global_data->vrrp_higher_prio_send_advert = true;
++ }
++ #ifdef _WITH_IPTABLES_
+++static bool
+++check_valid_iptables_ipset_name(const vector_t *strvec, unsigned entry, unsigned max_len, const char *type_name, const char *log_name)
+++{
+++	if (strlen(strvec_slot(strvec, entry)) >= max_len - 1) {
+++		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : %s %s name too long - ignored", type_name, log_name);
+++		return false;
+++	}
+++
+++	if (strlen(strvec_slot(strvec, entry)) == 0) {
+++		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : %s %s name empty - ignored", type_name, log_name);
+++		return false;
+++	}
+++
+++	return true;
+++}
+++
+++static bool
+++check_valid_iptables_chain_name(const vector_t *strvec, unsigned entry, const char *log_name)
+++{
+++	return check_valid_iptables_ipset_name(strvec, entry, XT_EXTENSION_MAXNAMELEN, "iptables", log_name);
+++}
+++
++ static void
++ vrrp_iptables_handler(const vector_t *strvec)
++ {
++@@ -1068,16 +1090,12 @@ vrrp_iptables_handler(const vector_t *strvec)
++ 	}
++ 
++ 	if (vector_size(strvec) >= 2) {
++-		if (strlen(strvec_slot(strvec,1)) >= XT_EXTENSION_MAXNAMELEN - 1) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : iptables in chain name too long - ignored");
+++		if (!check_valid_iptables_chain_name(strvec, 1, "in chain"))
++ 			return;
++-		}
++ 		global_data->vrrp_iptables_inchain = STRDUP(strvec_slot(strvec,1));
++ 		if (vector_size(strvec) >= 3) {
++-			if (strlen(strvec_slot(strvec,2)) >= XT_EXTENSION_MAXNAMELEN - 1) {
++-				report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : iptables out chain name too long - ignored");
+++			if (!check_valid_iptables_chain_name(strvec, 2, "out chain"))
++ 				return;
++-			}
++ 			global_data->vrrp_iptables_outchain = STRDUP(strvec_slot(strvec,2));
++ 		}
++ 	} else {
++@@ -1089,17 +1107,7 @@ vrrp_iptables_handler(const vector_t *strvec)
++ static bool
++ check_valid_ipset_name(const vector_t *strvec, unsigned entry, const char *log_name)
++ {
++-	if (strlen(strvec_slot(strvec, entry)) >= IPSET_MAXNAMELEN - 1) {
++-		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset %s name too long - ignored", log_name);
++-		return false;
++-	}
++-
++-	if (strlen(strvec_slot(strvec, entry)) == 0) {
++-		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : ipset %s name empty - ignored", log_name);
++-		return false;
++-	}
++-
++-	return true;
+++	return check_valid_iptables_ipset_name(strvec, entry, IPSET_MAXNAMELEN, "ipset", log_name);
++ }
++ 
++ static void
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-3.patch b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-3.patch
+new file mode 100644
+index 0000000000..63ddbb4f50
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-3.patch
+@@ -0,0 +1,94 @@
++From 87f8c80bbbf9ceb3340cc89720fe9aa2284fad3a Mon Sep 17 00:00:00 2001
++From: Quentin Armitage <quentin@armitage.org.uk>
++Date: Fri, 12 Jul 2024 15:32:35 +0100
++Subject: [PATCH] vrrp and ipvs: handle empty nftables chain names
++
++We now return an error if a chain name is empty.
++
++Signed-off-by: Quentin Armitage <quentin@armitage.org.uk>
++
++CVE: CVE-2024-41184
++Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/1e5902c4793ac01b810f0faa3b5cf47b41ae95c1]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ keepalived/core/global_parser.c | 25 +++++++++++++++----------
++ 1 file changed, 15 insertions(+), 10 deletions(-)
++
++diff --git a/keepalived/core/global_parser.c b/keepalived/core/global_parser.c
++index c49e771..1a145f9 100644
++--- a/keepalived/core/global_parser.c
+++++ b/keepalived/core/global_parser.c
++@@ -1058,9 +1058,10 @@ vrrp_higher_prio_send_advert_handler(const vector_t *strvec)
++ 	else
++ 		global_data->vrrp_higher_prio_send_advert = true;
++ }
++-#ifdef _WITH_IPTABLES_
+++
+++#if defined _WITH_IPTABLES_ || defined _WITH_NFTABLES_
++ static bool
++-check_valid_iptables_ipset_name(const vector_t *strvec, unsigned entry, unsigned max_len, const char *type_name, const char *log_name)
+++check_valid_iptables_ipset_nftables_name(const vector_t *strvec, unsigned entry, unsigned max_len, const char *type_name, const char *log_name)
++ {
++ 	if (strlen(strvec_slot(strvec, entry)) >= max_len - 1) {
++ 		report_config_error(CONFIG_GENERAL_ERROR, "VRRP Error : %s %s name too long - ignored", type_name, log_name);
++@@ -1074,11 +1075,13 @@ check_valid_iptables_ipset_name(const vector_t *strvec, unsigned entry, unsigned
++ 
++ 	return true;
++ }
+++#endif
++ 
+++#ifdef _WITH_IPTABLES_
++ static bool
++ check_valid_iptables_chain_name(const vector_t *strvec, unsigned entry, const char *log_name)
++ {
++-	return check_valid_iptables_ipset_name(strvec, entry, XT_EXTENSION_MAXNAMELEN, "iptables", log_name);
+++	return check_valid_iptables_ipset_nftables_name(strvec, entry, XT_EXTENSION_MAXNAMELEN, "iptables", log_name);
++ }
++ 
++ static void
++@@ -1107,7 +1110,7 @@ vrrp_iptables_handler(const vector_t *strvec)
++ static bool
++ check_valid_ipset_name(const vector_t *strvec, unsigned entry, const char *log_name)
++ {
++-	return check_valid_iptables_ipset_name(strvec, entry, IPSET_MAXNAMELEN, "ipset", log_name);
+++	return check_valid_iptables_ipset_nftables_name(strvec, entry, IPSET_MAXNAMELEN, "ipset", log_name);
++ }
++ 
++ static void
++@@ -1201,6 +1204,12 @@ vrrp_iptables_handler(__attribute__((unused)) const vector_t *strvec)
++ 
++ #ifdef _WITH_NFTABLES_
++ #ifdef _WITH_VRRP_
+++static bool
+++check_valid_nftables_chain_name(const vector_t *strvec, unsigned entry, const char *log_name)
+++{
+++	return check_valid_iptables_ipset_nftables_name(strvec, entry, NFT_TABLE_MAXNAMELEN, "nftables", log_name);
+++}
+++
++ static void
++ vrrp_nftables_handler(__attribute__((unused)) const vector_t *strvec)
++ {
++@@ -1212,10 +1221,8 @@ vrrp_nftables_handler(__attribute__((unused)) const vector_t *strvec)
++ 	}
++ 
++ 	if (vector_size(strvec) >= 2) {
++-		if (strlen(strvec_slot(strvec, 1)) >= NFT_TABLE_MAXNAMELEN) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "nftables table name too long - ignoring");
+++		if (!check_valid_nftables_chain_name(strvec, 1, "chain"))
++ 			return;
++-		}
++ 		name = strvec_slot(strvec, 1);
++ 	}
++ 	else {
++@@ -1255,10 +1262,8 @@ ipvs_nftables_handler(__attribute__((unused)) const vector_t *strvec)
++ 	}
++ 
++ 	if (vector_size(strvec) >= 2) {
++-		if (strlen(strvec_slot(strvec, 1)) >= NFT_TABLE_MAXNAMELEN) {
++-			report_config_error(CONFIG_GENERAL_ERROR, "ipvs nftables table name too long - ignoring");
+++		if (!check_valid_nftables_chain_name(strvec, 1, "ipvs chain"))
++ 			return;
++-		}
++ 		name = strvec_slot(strvec, 1);
++ 	}
++ 	else {
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-4.patch b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-4.patch
+new file mode 100644
+index 0000000000..8d3ecb58c4
+--- /dev/null
++++ b/meta-networking/recipes-daemons/keepalived/keepalived/CVE-2024-41184-4.patch
+@@ -0,0 +1,33 @@
++From 5e5fde051d75ffe0449418466832b8b50baeb95e Mon Sep 17 00:00:00 2001
++From: Quentin Armitage <quentin@armitage.org.uk>
++Date: Fri, 12 Jul 2024 15:11:13 +0100
++Subject: [PATCH] lib: don't return subtracted addresses for rb_find() compare
++ function
++
++If sizeof(int) < sizeof(void *) returning the difference between two
++addresses in an int can cause an overflow.
++
++Use less_equal_greater_than() for comparing addresses.
++
++Signed-off-by: Quentin Armitage <quentin@armitage.org.uk>
++
++CVE: CVE-2024-41184
++Upstream-Status: Backport [https://github.com/acassen/keepalived/commit/f3a32e3557520dccb298b36b4952eff3e236fb86]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ lib/memory.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/lib/memory.c b/lib/memory.c
++index c7217fd..4b250ac 100644
++--- a/lib/memory.c
+++++ b/lib/memory.c
++@@ -200,7 +200,7 @@ static unsigned free_list_size;
++ static inline int
++ memcheck_ptr_cmp(const void *key, const struct rb_node *a)
++ {
++-	return (const char *)key - (char *)rb_entry_const(a, MEMCHECK, t)->ptr;
+++	return less_equal_greater_than((const char *)key, (char *)rb_entry_const(a, MEMCHECK, t)->ptr);
++ }
++ 
++ static inline bool
+diff --git a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+index c4d59d3caa..f9b06b612f 100644
+--- a/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
++++ b/meta-networking/recipes-daemons/keepalived/keepalived_2.2.8.bb
+@@ -12,6 +12,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS = "highway brotli"
- 
--SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
--           file://CVE-2024-11403.patch \
--           file://CVE-2024-11498.patch \
--          "
--SRCREV = "e1489592a770b989303b0edc5cc1dc447bbe0515"
-+SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1"
-+SRCREV = "6aa76f3134684f86e239263384230751b56938a7"
- S = "${WORKDIR}/git"
- 
- EXTRA_OECMAKE = " \
+ SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz \
+            file://0001-configure.ac-Do-not-emit-compiler-flags-into-object-.patch \
++           file://CVE-2024-41184-1.patch \
++           file://CVE-2024-41184-2.patch \
++           file://CVE-2024-41184-3.patch \
++           file://CVE-2024-41184-4.patch \
+            "
+ SRC_URI[sha256sum] = "85882eb62974f395d4c631be990a41a839594a7e62fbfebcb5649a937a7a1bb6"
+ UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
 
