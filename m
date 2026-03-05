@@ -2,128 +2,138 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F1BAF30948
-	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 11:07:22 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.41722.1772708838399258447
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A725CF30946
+	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 11:15:12 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.41853.1772709308759923499
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Mar 2026 03:07:18 -0800
+ Thu, 05 Mar 2026 03:15:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kV2GfVlB;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-439a89b6fd0so4770962f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 03:07:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H+FzMSuy;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439cd6b0aedso694768f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 03:15:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772708837; x=1773313637; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=y0WfDSOO35W65cDyx2v5pG6zOWLTUIfFkixT2zk6kDI=;
-        b=kV2GfVlBzN9wrRa/YSCLtPkxqYQU3yJSjZuF6w/mjWzpuq2gt6Y4spkT5oBBThqmGp
-         ZtZfUQE3EdGiRIyRzKP3ei0Usn6rPdS/VsATtorEowKdBlQDZflaifUd5MJ0hX+yQV/J
-         0/E7ngQu4AbkqwSkMn5+qnvt4BS4LCv885piZFexAr0WzcyNweVqWY3NUQyAq8jxo7b6
-         X5yPWpt04yAMLI+vKv4v+jJu7Al9qXWH3MlshFqua+r5b5+sdk01mQW/4Lwef87Rex1H
-         MAHMQqsU0ItlOwiXuAvTSryFt9a939+l1EP4ohxMkqPkdn5IVYZ4mDPEl49/Ie7nPjCt
-         KigA==
+        d=gmail.com; s=20230601; t=1772709307; x=1773314107; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=yE683e4FLcTp8fPuZnQOqa6hVjLNLXTP75shaWjcjhI=;
+        b=H+FzMSuyYErnUMSN8v6PGIP33ZpGDgXXJL3+vHfORajZ6MoQneYkGVV2QR5Deb7Z90
+         6CgPVXObF5WhlUdCFkn9Ac+HVj+f2ofQ/mUAK888FlKuaHfhFsso8pqs0E64zo4hp88s
+         BJmKONLdhjdLPOkHoocezYsetD0J3mdMPYMKGcMK/iiZQdS6KsaSpVWiHzsBJjVtdzcy
+         lQ7pKP6MjI1n8UuF+dHcPT11Gwr5pJftR3fFySqWkzM2U9+fAWX2lI8pE+RxZi7Rth34
+         /hIuItOPDoer/skOKoGwvdIdkim0eXHtnge5yhZg1mf+IHTwWsge8NOQJVDTUNKvxOgG
+         /Vfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772708837; x=1773313637;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=y0WfDSOO35W65cDyx2v5pG6zOWLTUIfFkixT2zk6kDI=;
-        b=pJEI1c7Os8rIdlH1XvpeWTbov53ijzjKz8nQgT69yIIB+SsQOpbG6/NDJNe7JyDqF/
-         c5qThQyc2Hji+Vj8jP4h6bNBv6B1/iVJ2yPf69XGBaSWq8BqUoOJ3xemmGIA2HgeicQq
-         WQuJoYM6vrGbfEXu9aPbl48AZFacr+OZvpRaPg127BlZz0xHIu6zhXg0E+zPq1U7lEGH
-         KoqGN08lY8+G61Ph9rCdou5jvhkHpEgIcuqjJDNAD1nsq1i+jMPw89S9Q/k2nXs42qYu
-         eetWA4V60T5t1Ry96qoqnoyaz71tY1yvLUyegI60XmuFUBCZBP4vA8qy682IRwrJsz+6
-         6CaA==
-X-Gm-Message-State: AOJu0YyKX6aNf6LIiRcYZGNmmIhYn4j847/ansJulozEVKt8fLtSR34c
-	HvgZ35aK71I/WfuNf7czGoeKDeys6IgMeuHiV3PsJjPGH4yFyEGOAuGKNPCgxA==
-X-Gm-Gg: ATEYQzwToRemAia0GyRPVOVxqFvoWLUOGNzoItn3TxOSIy9edkQFn15dvRl+q82IvDH
-	cA8Ee2hhalqgrLQpFnACravYo7O39nrMVdc6gmKsJq2TEY3WZDLoi57mIPpaJUP+zYicetZN4M4
-	5DKCSA1X3x6rxf35zkZ8pXJf6wkw5PjEqbP5ZjjCcuesiEwD0kzms4KEMa1H3wP+dlTzKxlF7+y
-	DuoUQOK+ppLbKA+DyZR3/4Mgf/3WbdYAUDj9Rj2Y1WLtFBMAxMYL8be/3yTL4yyYGXVs2gFxLF7
-	2dTmQoj7Qvwrd0xxDBZkrcqztFxZaRv0lBKzF1MVJkeRKqLVjt4zd2nXeUpn4lirPnkxRDwcQ7f
-	+c7IXxfnM4fIjSjdvtoeViBDuQ31D5pCHNz2SzPfL4HjgDTFI9Gai+tRxEaIo6jPucOHirZhTJ0
-	86I9BPjMSuK5Bt6/FnuEYN
-X-Received: by 2002:a05:600c:4e4e:b0:479:1b0f:dfff with SMTP id 5b1f17b1804b1-48519854b39mr98907325e9.10.1772708836566;
-        Thu, 05 Mar 2026 03:07:16 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4851faeaec0sm32269505e9.11.2026.03.05.03.07.15
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 03:07:16 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][scarthgap][PATCH 4/7] gimp: patch CVE-2026-2044
-Date: Thu,  5 Mar 2026 12:07:10 +0100
-Message-ID: <20260305110713.2893128-4-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260305110713.2893128-1-skandigraun@gmail.com>
-References: <20260305110713.2893128-1-skandigraun@gmail.com>
+        d=1e100.net; s=20230601; t=1772709307; x=1773314107;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yE683e4FLcTp8fPuZnQOqa6hVjLNLXTP75shaWjcjhI=;
+        b=O2ET3He7CVlXfcjIkOIWgTznZRt8V/yqc+RC7Kq+pGv/1+StztuoNiv6QQvvk7GcFe
+         FLMYcGSFfI5+oJgdTeJU5mIwoOIDj0m8uxZ16wb8M5VvarKAnPbH06z/zyCcB1omeaIP
+         HVCGCsVqW2ENRf7+COrAx4HZOXOVpnVTlqqVM0XcUOObhtjLSHtKiTtCK0Pv0htvMZ6K
+         JntMsKlxRYiUeBcZCASvXu20LHAZgjN14jIfHY/0aGJNPcuhHF8diM0eS7dnCTXmlgbd
+         Kd31/TJldfnESmDJW5BLa6Ay0TSnjQNN/GcBSUrdjRozUI6eyKz8fgWsOXcR2CwVQ23T
+         6Alg==
+X-Forwarded-Encrypted: i=1; AJvYcCXymNDh5qA4cnNEWmSlWEweKxUpM7LE1faa4ABIPwKNSVj8Dmk/+wtbA7ExAKbyHjKT5RWvpSmg4yLwQQ6FetQg9Pg=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzcwGTHbp8AkLfqUW+Q8AsuVTDQ69UyKPqPLaPn2M37y7mMip4b
+	I/rWMv9dtzjTlxAPNqOLw0+p56wkan6Nft6cCeLeMxTg+hk5/nVk39rT
+X-Gm-Gg: ATEYQzw6ornlaSh4jsX/E+EUyMUN32+5FES5aQ67/o1rUzd3pAw6XJnEuYpFHg+pKjF
+	VT56EpqEhAkdlLckDzm6tlXzMzIRokMOphkvA4+Am8xhOF8vEnXbVpfcCkpP+FIOQraTE9u8yki
+	qBPxTgslhWMJ7TyZauDU2vf4K9b01AYJO8hSArlqobgqbFD7cJhMdGmCVGGJXKmJPB55HhS0OIo
+	zbr8H31pbWBKLE+XIfkt9mv2AsOMcygQPSNnMtKiUIu71THL1n3iK88hHKvQKVxZ+eiF54wxAOS
+	Md/JId5zlEvUuzV4W6m70aUXUhBpaYi8RkV2bjlwpD+ROMo5xMCexvdR+vdEKcQ4hUNv8esvWDc
+	fKtDk/TcHHax/2g3kYdGRB18ZT5b4WoVlUodWP6zc8rkywM2qGkqzL/w0FbKmHNgn7/rCs8/wxD
+	WH/Rp2L407yUN8Yy1W7lSYDs12RKaVh5KMNdRnI2XBiw==
+X-Received: by 2002:a5d:5d0a:0:b0:439:c6d0:b0e1 with SMTP id ffacd0b85a97d-439c7f8e135mr10276142f8f.26.1772709306859;
+        Thu, 05 Mar 2026 03:15:06 -0800 (PST)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439b34b6252sm33319273f8f.10.2026.03.05.03.15.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 05 Mar 2026 03:15:06 -0800 (PST)
+Message-ID: <d7ee961b-61c5-49a7-b474-bfa79e482c1a@gmail.com>
+Date: Thu, 5 Mar 2026 12:15:05 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-java][PATCH] java-library.bbclass: resolve
+ do_deletebinaries race condition
+To: douglas.royds@taitcommunications.com,
+ openembedded-devel@lists.openembedded.org
+Cc: Stanley Stanton <stanley.stanton@taitcommunications.com>,
+ tim.orling@konsulko.com
+References: <20260305035459.3561243-1-douglas.royds@taitcommunications.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260305035459.3561243-1-douglas.royds@taitcommunications.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 11:07:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124869
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 11:15:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124873
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-2044
+- patches for meta-java should go to yocto-patches ML
+(yocto-patches@lists.yoctoproject.org), though now I see that this info
+isn't updated in all places
+- AFAIK meta-java is still in deep sleep due to bitrot, and accepts no
+patches due to this, until someone makes the layer build at least
 
-Pick the patch referenced by the NVD advisory.
+in any case, cc'd Tim, the last maintainer that I know of.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../gimp/gimp/CVE-2026-2044.patch             | 28 +++++++++++++++++++
- meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb  |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2026-2044.patch
+On 3/5/26 04:54, Douglas Royds via lists.openembedded.org wrote:
+> From: Stanley Stanton <stanley.stanton@taitcommunications.com>
+>
+> The do_deletebinaries task is attempting to delete directories created
+> and destroyed by other bitbake classes such as sstate.bbclass and
+> create-spdx-2.2.bbclass. If these classes remove their directories
+> before do_deletebinaries has a chance to delete them, but after they are
+> found, the following types of errors occur:
+>
+> Log data follows:
+> | DEBUG: Executing shell function do_deletebinaries
+> | find: ‘/build/tmp/work/x86_64-linux/junit-native/3.8.2/sstate-build-create_spdx’: No such file or directory
+> | WARNING: exit code 1 from a shell command.
+>
+> Rewrite do_deletebinaries such that it is explicitly not looking through
+> directories that are managed by other bitbake classes, to avoid this
+> race condition.
+>
+> Suggested-by:  Douglas Royds <douglas.royds@taitcommunications.com>
+> Signed-off-by: Stanley Stanton <stanley.stanton@taitcommunications.com>
+> ---
+>  classes/java-library.bbclass | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
+>
+> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+> index 67541d2..033d6d4 100644
+> --- a/classes/java-library.bbclass
+> +++ b/classes/java-library.bbclass
+> @@ -55,10 +55,9 @@ ALTJARFILENAMES = "${BPN}.jar"
+>  # Java "source" distributions often contain precompiled things
+>  # we want to delete first.
+>  do_deletebinaries() {
+> -  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
+> -                  -name "*.jar" -exec rm {} \;
+> -  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
+> -                  -name "*.class" -exec rm {} \;
+> +  dirs_to_search="$(find ${WORKDIR}/* -maxdepth 0 -type d | grep -Ev "recipe-sysroot|sstate|spdx")"
+> +  find $dirs_to_search -name "*.jar" -exec rm {} \;
+> +  find $dirs_to_search -name "*.class" -exec rm {} \;
+>  }
+>  
+>  addtask deletebinaries after do_unpack before do_patch
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124864): https://lists.openembedded.org/g/openembedded-devel/message/124864
+> Mute This Topic: https://lists.openembedded.org/mt/118149274/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2026-2044.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2026-2044.patch
-new file mode 100644
-index 0000000000..102dc155da
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2026-2044.patch
-@@ -0,0 +1,28 @@
-+From af312f516e23521e1d03255263b22ef4b99761d5 Mon Sep 17 00:00:00 2001
-+From: Gabriele Barbero <barbero.gabriele03@gmail.com>
-+Date: Fri, 5 Dec 2025 19:13:01 +0100
-+Subject: [PATCH] ZDI-CAN-28158: use g_malloc0 instead of g_malloc
-+
-+To avoid accessing uninitialized memory, replace calls to g_malloc with
-+g_malloc0 which initializes the allocated memory to zero.
-+
-+CVE: CVE-2026-2044
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/112a5e038f0646eae5ae314988ec074433d2b365]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ plug-ins/common/file-pnm.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/plug-ins/common/file-pnm.c b/plug-ins/common/file-pnm.c
-+index f514c2b..c82720c 100644
-+--- a/plug-ins/common/file-pnm.c
-++++ b/plug-ins/common/file-pnm.c
-+@@ -571,7 +571,7 @@ load_image (GFile   *file,
-+     return -1;
-+ 
-+   /* allocate the necessary structures */
-+-  pnminfo = g_new (PNMInfo, 1);
-++  pnminfo = g_new0 (PNMInfo, 1);
-+ 
-+   scan = NULL;
-+   /* set error handling */
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-index 9a969bde7c..4f273a7cbb 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
-@@ -55,6 +55,7 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
-            file://CVE-2025-2760-2.patch \
-            file://CVE-2025-2761.patch \
-            file://CVE-2026-0797.patch \
-+           file://CVE-2026-2044.patch \
-            "
- SRC_URI[sha256sum] = "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
- 
 
