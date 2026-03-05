@@ -1,105 +1,95 @@
-Return-Path: <andrea.ricchi@amarulasolutions.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E577CF33A6A
-	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 14:03:53 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.44757.1772719427606023632
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01D10F33A6B
+	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 14:15:24 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44932.1772720117081141079
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Mar 2026 06:03:47 -0800
+ Thu, 05 Mar 2026 06:15:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=b5VeHB5Y;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.128.52, mailfrom: andrea.ricchi@amarulasolutions.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4838c15e3cbso73558085e9.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:03:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IjOcg7xi;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-439baf33150so3469581f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:15:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1772719426; x=1773324226; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4QepHVFC8YxoYbjlWJBjVCD4xcFI2byDqPOgD7Bf7u4=;
-        b=b5VeHB5Y5ichNUPWXuTBKUoShvkUvkiB369SMZgGIVFPE8NFzxKYQBSGUdZVVg5nYU
-         MUP4QN81Yf7va1UHKdZnqn+2aQI3i5zM4+9SllUbzpyT+yAagSjyQXQGh4EwgFpMQc6W
-         9gE0Fgdy5mO+aJJaTsRD3qrmk1YUx1mUXaCik=
+        d=gmail.com; s=20230601; t=1772720115; x=1773324915; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GQLOOqDi/+GdWjLYLYidaHhQxlEoWgbruk5jNQqaRFY=;
+        b=IjOcg7xiDG4cntEDO6c0vLw63Mbq9uCQNli3K46cjdbfXqTDW4P0cR2F/n5i/12sOW
+         K+lN2QPVBVm6+xjQPonsIae6TPXOQDdd6R6FYcvkpwKZzh/8zJSOJd8p/5Gs9w9HMNDf
+         sFGopjEteyVs33Qgx4XlQ2zG6AthfomRWiwx6hYUhd19xxf4QEzCqoWicLHJ5uInNFiv
+         P/unTO0oXzbj1XkzZFFRU6xKrjRLi+hMHoLKCeDAHz/VrdxBJC8JrHpwI4aZtMoIlKSz
+         cChoiObozIWf20+77qtOjmdPsX3ixGB4iVeiDpKD6VtOdjMXd5jeb9zjByPvbH83Owtk
+         ImfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772719426; x=1773324226;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4QepHVFC8YxoYbjlWJBjVCD4xcFI2byDqPOgD7Bf7u4=;
-        b=bfFX4jqGIFmGAMtAD5wd18Jm7D6waFXUTqrfcpUnxv0fEL6+NXFp3TPDtm9N0z8t6c
-         3XOBZwodeEEIOFdS87z9/hEic/QUznDhWaHlbGeacPI4MZ41Xnssqtkfa88DuLp3YiUQ
-         EWi170iFet1ZyzB6Io1u3zNwhjIJB8CB1FHTmHOYgyChwpppIc+dHctUYfGHAjwd4o/j
-         954oc6cA9cgyH7/tuZGoYs6NMQ14KBn+6M42tFITulqLz9Bq+59kSRAA8sdqfSlr1wsI
-         373CQUsDZjH/EArtzvsdRMfsjYunvUC8rf6MIOYvzaNdPzPCDp5IXCMocZjdyxIXDCs8
-         XsdA==
-X-Gm-Message-State: AOJu0YzRIYW2u37Qfc8lS2xK87HAhl6VFIKm/lJHvzk8mSZWTFuaHJuZ
-	/aahwo29R6dRyjjzHvn1/2WPjnAu+xEUn4a4LIGdhlSyrmPXLPmy0rMGRUo5WLtX05FZvpmqfJN
-	nsYcz
-X-Gm-Gg: ATEYQzwctiOmQzhgmZxrpgM47AowgsDbc1sGLyvVSEMWmarTNiHhUuMAgJTsIIjhNKw
-	uXXGM/WYuXmhbuziXQ96ggKZplLBq2qyMiUO0Jo791/69wxVM0Os9u1j9HrGn+Wbj5m5L7x0wNX
-	ZXEczJG97059t+A9b6mc96RsLxrthWL3WqSvhUx/giXHixKMhuKP92JsZi4xwkKo5K+DPsDT05F
-	u/47rSWmpMnQ8s54qXBNQw9Pjx9M0a/5lvrN+lA77s7lcmNS/t+YH8bf3Mo0LfM/TxULh2nc7PE
-	jB+pQAeJzOxr61PXS5QF98ns34OxRtLE84LFhS6I86jUwosypWnrrnDjpWdZEZqs/KhfKbVCWvO
-	7sxQoYVYGOfOQVRp7f4kPaLkRpldWbJVX2DOB3l8baYkXOwBiQmuJ8TFTiV/5hrvqhNQdjsRY4J
-	qON1G5ZzjishgygBvRMJO1LmMayCiA31HLzXUxBJhuCtiQe3R8SHIJ8qBJTevWjihmkI0ZqnC57
-	GgpBB8ayurXgkJ2UnkHSM4tJwkNVOIYyU2J+p0IU3LbN7SD+VFKxj9UavEd8uIJ5GGaLe3CvNqs
-	dPYToJI3Q59s
-X-Received: by 2002:a05:600c:a087:b0:485:110f:5b7f with SMTP id 5b1f17b1804b1-48519888e6amr101972005e9.19.1772719425576;
-        Thu, 05 Mar 2026 06:03:45 -0800 (PST)
-Received: from localhost.localdomain (93-47-52-235.ip111.fastwebnet.it. [93.47.52.235])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439ae0e7abasm37959151f8f.23.2026.03.05.06.03.44
+        d=1e100.net; s=20230601; t=1772720115; x=1773324915;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GQLOOqDi/+GdWjLYLYidaHhQxlEoWgbruk5jNQqaRFY=;
+        b=d3f4PgLOqCumny8mgfeoJbpq4BdZ6rEhimL+4rMPLAQMJC1zoqWjMXoKvOpKUYsMRm
+         38kviA1bnMxr1rDWMtr38VFbT3lMxBt4YFhSH5CsBeE2TIvfsQcVJUlEagJRtJnvL58c
+         igpjT/L02Q9ZC6DJ8D90cfRgUxYQ4dGaOIZzQu7vpmhEMD3pvxXZFlvxJXg0cCF6lT6r
+         PLrP1zDjvVEohg139NekjMliLqKYdIHkz05kgYsVaFvzCHdOMZ/G3PsooVVrKm1fVW23
+         AInLNxBLBEQvTSKN/Yxzo5PYZf1O2+WJjDl9jo3oayJzjXhb3wsxqMeZcg+1l5lzcY7l
+         6nJA==
+X-Gm-Message-State: AOJu0YyBE2OOwdVE89aNLuIsu0PboX8jfjwqBjYyZAE1k1DXlrivH1kq
+	IdUd0sgHYCHQYRCG78JvUqtVTkKL7spqYan2Gw1troyk9QnelCr1o9wF86M1DA==
+X-Gm-Gg: ATEYQzwh296T9sE5wfFAJdfmZE9XQy05LKbQldQTHLymYIK+e7XT/EDfaqpaOUfCqpH
+	HGcwr7E6xnr27j7ayKFwW9KvggeAbTMkZpV3Em2S0D5zM/M5ugcGjRTui5CGRKb/J3iudUtigPb
+	M/HH/eutxWtt9PPWuyNeporJiwShp+HDRwJofb0FrIa0kAcFvqp/F+ri5vclhQKWxnCTezRZ1eW
+	LEr63GRPgxKUL6L0YA16/pYYBk7Gkdtv/p/QCLeiumMzMRJ4/6FD+f5Q6Du7EUOUTIEtZOImf5O
+	VM6hPIIp9Mp5/JfPOkiRvat3UlY6Pfo2uq/8Cva975iY0Dz7X226XJzb/OJ6H3Tceoxq6MT08LT
+	6mwtOHHyndAc19oJflGWSEICENa4YyHBoAB7HguKLCgGicQF4KyiOqGML1cJCLRlcjKSiFLlD3P
+	Aq/D8vPnbs/5jdODpJPbPk
+X-Received: by 2002:a05:6000:2c07:b0:439:be53:e766 with SMTP id ffacd0b85a97d-439cfc31effmr4730307f8f.12.1772720115263;
+        Thu, 05 Mar 2026 06:15:15 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439abdf5430sm40034096f8f.5.2026.03.05.06.15.14
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 06:03:45 -0800 (PST)
-From: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
+        Thu, 05 Mar 2026 06:15:14 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
-Subject: [meta-oe,scarthgap v1 1/1] meta-oe: libcppconnman: add recipe
-Date: Thu,  5 Mar 2026 15:03:40 +0100
-Message-ID: <20260305140340.81357-1-andrea.ricchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [meta-gnome][scarthgap][PATCH 1/3] gnome-shell: ignore CVE-2021-3982
+Date: Thu,  5 Mar 2026 15:15:12 +0100
+Message-ID: <20260305141514.3058998-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 14:03:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124874
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 14:15:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124875
 
-libcppconnman is a C++ library to control ConnMan via D-Bus. It exposes
-simple aync methods to perform all the controls that ConnMan allow via
-D-Bus.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2021-3982
 
-Signed-off-by: Andrea Ricchi <andrea.ricchi@amarulasolutions.com>
+The vulnerability is about a privilege escalation, in case
+the host distribution sets CAP_SYS_NICE capability on the
+gnome-shell binary.
+
+OE distros don't do that, and due to this this recipe is not
+affected by this issue. The CVE is ignored.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 4d6e24106c78eed3b9d9a36115df8d2f057f5178)
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libcppconnman/libcppconnman_git.bb          | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libcppconnman/libcppconnman_git.bb
+ meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/libcppconnman/libcppconnman_git.bb b/meta-oe/recipes-connectivity/libcppconnman/libcppconnman_git.bb
-new file mode 100644
-index 0000000000..daa32a8d48
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libcppconnman/libcppconnman_git.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Amarula libcppconnman library"
-+LICENSE = "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a87a7059d580c45495c1218f53e3610d"
-+
-+SECTION = "libs"
-+
-+SRC_URI = "git://github.com/amarula/libcppconnman.git;protocol=https;branch=main"
-+SRCREV = "d89262c2cd7336da8ba9eb06228d422847fe4b20"
-+
-+inherit cmake pkgconfig
-+
-+DEPENDS += "glib-2.0"
-+
-+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DBUILD_CONNMAN=ON"
-+
-+# LICENSE file
-+FILES:${PN} += "${datadir}/Amarula"
--- 
-2.43.0
-
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb
+index 1bc9b6b394..2e6d70d6f7 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb
+@@ -85,3 +85,4 @@ PACKAGES =+ "${PN}-tools ${PN}-gsettings"
+ FILES:${PN}-tools = "${bindir}/*-tool"
+ RDEPENDS:${PN}-tools = "python3-core"
+ 
++CVE_STATUS[CVE-2021-3982] = "not-applicable-config: OE doesn't set CAP_SYS_NICE capability"
 
