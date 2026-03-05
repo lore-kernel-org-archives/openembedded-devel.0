@@ -2,224 +2,180 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D3B4EEF30A
-	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 06:16:00 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.38328.1772691353499159292
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 217C9EEF30B
+	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 06:20:20 +0000 (UTC)
+Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.38466.1772691616852462699
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Mar 2026 22:15:53 -0800
+ Wed, 04 Mar 2026 22:20:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A4cyw0nj;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64ca1ba0089so6796744d50.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 22:15:53 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772691352; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IBKdt9vv;
+ spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-64ca09f2170so8048636d50.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Mar 2026 22:20:16 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772691616; cv=none;
         d=google.com; s=arc-20240605;
-        b=UCcNiyWDwS9GGb5+5zv+ni50TaKUOVk4PJQO0f7OTr2FHS58lZGdAoHS8IpEJNweNa
-         UsgslhfskQyv7CMUJgGrNsFfSOP+GEQkaFdd0opaQhqszPrecMOIY54jQW7Zze3oqHS7
-         e4oUX78/H3PL21l6bbC//APzf72DHihvhJtf1x5+9c2de3PfnBwepVNbIxtuhkqjSKjm
-         4pQcFrh3XGTpbAxLQ+E6s7POhsaxDnBEQ9W6wowDUR8tR+uP8y9XKS6dvYwjwk6YmCOC
-         dcDCj9Y/sDHZydInodPkEVsxtzpXylZ7+pn+fhkYZg/HtmYK7DgoHBBc3PicFNYmDVRz
-         SXlA==
+        b=MLRvijlQywKYq1xsb+JFjDjwf3TR/y1KkUIDabs+5gSk/6vY2fBItgJb/QU1EVroMJ
+         1IcpPtbGE8JfGfYv0eiz9VqPXOE3Hx0NmC9psXnm7yy7KcDuZZSwbYE/05z7QIIzkGS+
+         W6CFwHGcugzLNxzVcbUgbDZLFE1tPAoum7DZR9gLJEpSfQBAzyvMHQ6U1aFQpjwtIViO
+         U1ZcTc7qV8ATggYL7sWpe0H23niApTuGrbrBO5ethI6i/+Jf8Zb71DRD0Ft6qVdLfc4y
+         8OamZtNK45HoH2O2EUtikNrC0VruouwBx+Kq3be/QyMYfja8A6YTMQu8HkhQXihTmthY
+         oybQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=cJmnGD5mYJTAEPS67N0BQovIBtmmF2UhQrT2jThqeTg=;
-        fh=sQq4UwMItvi2zQkbQsQ7gG/lHqOQ30Mc0djsN0hkevw=;
-        b=HOzvzzWg4S5/yBAdinN8xEGBH7zUhDK/G6nd8YkEFT4vNseVruzqv4hvRg9Y+PTsFA
-         2mpX4pvSMeTI/PCnYr0Ihrs6xExwu1QnXVTnJCZt7Losbob8rO03UdXqveV7r0BclJbi
-         KXXkzkLMs1jVgyZM+fd66CV/iPRBL7gNhZr1zLF5jAjImDC7gRprGyPpDhqSsyyjR6yN
-         o5XmZiF7EMDk1/X0RC3ByAw+2wJ45qHngLchzvpDPjRq0gwOVwefHoO6bpAubOeovQ1n
-         CydhA3Z3k6KeFfvtIAVHH7sgYzCYeUEU5Oc52RGwwAzshjsK3vI7w5dGVZ5uUX4haKf8
-         sBTQ==;
+        bh=hliTMbHec+fNIrJjOtbtu2t/Askctyi2K2dwWjRlgFc=;
+        fh=T4CPLHS+o6DAwGFfKmQ6x8qUYUzzMdir05T+ffiJoHU=;
+        b=CzXtr/B1g4pSgKqcTy0njaWVnyvuXW8kag5BY26aZ+31qABCc9VUslpYebV9/pfmxT
+         /EQVjEjjce1rQBO8lv0h+jz0ZHiSewEmlPJUuy8XTd9Jc5JU8ZaWv1RRjZIib/BNmf+p
+         jAFCPri27Mf1Y9TNEsWSFqnkKnFJ6Yz/RyBpq/3iAZ5K434i832Ow0VJ389ljSnAH1fD
+         RQLE2+6lm14sJ+H+Js86hBFbytWyoP0+oFe0PES0aqloTPNysELxaqRzjswCzdGVal8/
+         SHuSYCn60nzlChAvnsDWL3O9A/lOxgjWG3bfLGcou8fwc99atO06iv9VgT+i5tb2SDWY
+         DKkA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772691352; x=1773296152; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772691616; x=1773296416; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=cJmnGD5mYJTAEPS67N0BQovIBtmmF2UhQrT2jThqeTg=;
-        b=A4cyw0njJxpKamiKJ7L5ym2h2TqLyIcGTuTEp6UhdKouGlzXaNbO87KO3SOI8bwiyQ
-         ek7OBQbx5/7q07M3IbTVuJXE5xD4uaz5Lml40UKon3Ie5xzrzTrLXogvUO7PUUnmq2hb
-         Bw0pb/kqJPdyiA5cnxmcDlnVC7UjfHwRfNsCaZ1cSCLy4cVE2uh0A5q9fH+VsYsjQy0Z
-         6mD7It95uQWVQ7P9HOsG/bh9gdbD6s+p+0KEWIA4dbYD8r4Kqh+yr1AsYbJ1ansv1VyJ
-         gd3b/jykbcdiRBMEPn/eri4yqtNVnSxpeHqBRAJVjfEIU7MUdR5xdsI6K+a21iNYdW89
-         O5Dw==
+        bh=hliTMbHec+fNIrJjOtbtu2t/Askctyi2K2dwWjRlgFc=;
+        b=IBKdt9vvbe2lgVAe9l+WCzm2+annYujDUbUSlLo9+0kA69zi5Ur4DyKTJmEFoZhg97
+         xXsA+xFFCHzpNzKYlJbhaQZZw5PeMwx9sabQLpfGGxDKs8VZoxrG2mW5K1KCfMUjTwL7
+         YkFQ8nQOCRDIVoIfMhgMuJzS1XqvCpVixupa1jv4l8Dr0D0FrXNOig98MBtSiodhDCv0
+         PcyaWVwylpCQOwig0WMKBQjrd8AmDifmS1FxYwZ5I3WOlF+7Y9L3YihX5SnIWYDgalQS
+         3lqbCNQ/GZg32Mj368TUkEhzUAyiAdG7NsM+AdbtbTdm12oVGvV0Is2xwtjfQzWxjDDA
+         qosg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772691352; x=1773296152;
+        d=1e100.net; s=20230601; t=1772691616; x=1773296416;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=cJmnGD5mYJTAEPS67N0BQovIBtmmF2UhQrT2jThqeTg=;
-        b=D6kWXfwldLb9Ned2Y90ahgcRA62j8H76mFDEf+ArKoYBRhXflWz6+UpeReHiSOgksV
-         ECFt6Ojgu5EQamcs15uA1itwBNi7+TUu+P6+476Ph3gAsz98jwlgoAHMXJhvYmH1EjuM
-         wri4nE1gSVZJDPjZBVwH5g8z8vFz71FmSlhH8YRfISHnaMFT0NgMU6SzfwdmYgFaEoxu
-         3bGjC6u3TviPDt/DMHXxjTgmr/bRySN52S91cNZcUgloReBpxEJO+yrjyn+HhYDfPhU/
-         zYWRvBIg9hNj4jbW9NkagbjPyeIPJEhM1gOeOk2OnNEVYrBhqCYpujkL6qeQQSTtWL2T
-         iS2w==
-X-Gm-Message-State: AOJu0Ywf0yWseH/8G23SrAja/zl95a+a3f0CRNMyAMAByR1TK/ksrdqT
-	dPTYHyJkAAzXrEI2CbJOkTeoetu9Rq1HhiJBWTaxYeMKdV8bRo9RjTkDkAR0BuASMjvUUKb7txt
-	pUjnsY7agz/6JoeeWITlu7sY1fIQevYk=
-X-Gm-Gg: ATEYQzzmZu9J1hgDLRyMYTYHdJjdf7VX/ja8FZS3q3mcWmUbJhaXxYeQzSrZczDVp2x
-	nDKsnC/thv/umf2JrO5ztGveNQ/UHeNkv0N6aKoiLh8oOPdoWPq8KQe4VeO/liop8lR1fUDv0U3
-	OEe51jv3bGyjHdHFl6/LFOhUYBpmUWPnuGqIRYKMcO1NSykXTBk+E4+hvgJL/oZxUHxkxY2e5+L
-	IDRY0ue/y7osvX2wR8+AhGYpC9vf5ogCh61vKAHgM5EvuRrrCkb282ndoABnCfFa5X83BF7x1GU
-	gY0l6DfFq+pdkkqH9Yng9stIjMcnpE7ZNk+8S0TqnJMtN3qWM+FpF4TWywrlIoflrRLytL7iQ+Q
-	gFyFEeyxreqgHNuXVhIzE5ZZM
-X-Received: by 2002:a05:690e:134b:b0:64c:ed5a:d1bc with SMTP id
- 956f58d0204a3-64cf9ba362dmr3388361d50.45.1772691352467; Wed, 04 Mar 2026
- 22:15:52 -0800 (PST)
+        bh=hliTMbHec+fNIrJjOtbtu2t/Askctyi2K2dwWjRlgFc=;
+        b=DeKhhSgtT1duNeEqgUB7P6rOdGcQFXqJ8lg0lyLgBD5n5KzjM77Cu0bQPGK+90FkAB
+         XKVPBT9crM36kDaetSd0WRcnBg8rLxT1PRN9hn7MJx4wLnYV/FigvdAT7FHEBLqFtxbk
+         +LFLiQ8i3idAPuPe/BgeU/Ho2h+95XfNC9/ZRNX6GTfSQ4q51RLQx4qxrE4Bu6UQ11PZ
+         CU0erzAoYNIOihdbdbi+8nM3sNwWqD7oz3UKSI7NMetXibtvb+YeJjXqAcXDoGKJ5emg
+         BFn94jdd+lX6B6kLXN2MExjZkGk9ziUf59//e4qDxI3XFHF6fvGfYi40tkNjKCht4ngw
+         aDLw==
+X-Gm-Message-State: AOJu0YxfxcffeJee4lg8UXUjvPFQPzVA509pFLpf77TRTnde+xY7teXX
+	91TgHQxhrF6dJSAFg4KtIUjkNwOfstK6xPDLmktKfyWP87efopROWDm5+XEcBtXpZTq6Msegs9i
+	MiVS2Aaf9dl3jfKHC7DXLEy7Q7v7LbBn1VrLL9Rs=
+X-Gm-Gg: ATEYQzx29iL9c52pVyftGcWxX+vCM7bB0AZuEvKkgCyUymUqfAu3ugMYvsUPauAPJkJ
+	RzsgLFznRHV0RVBydsmjiKqfZTZv/1iX4rwYgu9Ap0c2H3xRQrk4xvuCzhs2AJrQDDVANYndOwi
+	Wt3LmwPPJvQ1Uj6uwJXok5uuf8Iy/8wOidDUS19BldxiRfN5t3lV6qCNgFlA0VxHfeMmCud7nbv
+	8k5B3rckdsaLN7doaGX4uts9oc4VqMq/GaVnAgGqUKpu5aNTSF2G9nrCMlqQeiX1O1TzIUMzsp3
+	tr+7Pzno2RSQMXLoaAOyAulH8KJPL2wyPSg7WEYZn5gTQHWQikWUaOBc7ysOIDaEFU1c/SKgtHj
+	xIQQPZgPfRpFVaExA5CjMbcwE
+X-Received: by 2002:a53:ece4:0:b0:64c:9bc9:307f with SMTP id
+ 956f58d0204a3-64cf9bb0fecmr2981306d50.42.1772691615803; Wed, 04 Mar 2026
+ 22:20:15 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1772625156.git.anuj.mittal@oss.qualcomm.com>
-In-Reply-To: <cover.1772625156.git.anuj.mittal@oss.qualcomm.com>
+References: <20260304090519.14820-1-gitbeam@proton.me>
+In-Reply-To: <20260304090519.14820-1-gitbeam@proton.me>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Mar 2026 22:15:25 -0800
-X-Gm-Features: AaiRm53W5uNj34NSrWKajltNAob_x_Oc27OjTsMaM3cnF62UkVhGKcAddr3ZTA4
-Message-ID: <CAMKF1srODGU-bO3cfRCX2G-vJJvJnKuOUP1_tdS+GPMro7jqDA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 00/12] Scarthgap pull request
-To: anuj.mittal@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000005c3c58064c40dea5"
+Date: Wed, 4 Mar 2026 22:19:49 -0800
+X-Gm-Features: AaiRm52o8W9HftPKuDWap58cZwQM3XRVbFrizwPS8RRjnlXK8vcnIfuFxci4FBI
+Message-ID: <CAMKF1sqTYK2R+y6yP_cJEOZE73+Lgy-tquPUsFhjR=VrfK9t=w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] ntpsec: upgrade 1.2.2a -> 1.2.4
+To: gitbeam@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, G B <gitbeam@proton.me>
+Content-Type: multipart/alternative; boundary="0000000000000e6d09064c40ee00"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:16:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124860
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 06:20:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124861
 
---0000000000005c3c58064c40dea5
+--0000000000000e6d09064c40ee00
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Thanks Anuj, looks good. Installed.
+fails to configure with error
 
-On Wed, Mar 4, 2026 at 4:39=E2=80=AFAM Anuj Mittal via lists.openembedded.o=
-rg
-<anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
+| Unknown option: '--enable-debug-gdb'
 
-> Please merge these changes in scarthgap. Tested locally with
-> qemuarm/qemux86-64/qemuarm64 and on autobuilder.
+for more details See
+
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5616082/raw_inlin=
+e
+
+
+
+On Wed, Mar 4, 2026 at 1:08=E2=80=AFAM G B via lists.openembedded.org <gitb=
+eam=3D
+gmail.com@lists.openembedded.org> wrote:
+
+> Upgrade to latest upstream release 1.2.4.
 >
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1333
+> Release notes: https://blog.ntpsec.org/2025/04/18/version-1.2.4.html
 >
+> Signed-off-by: G B <gitbeam@proton.me>
+> ---
+>  .../ntpsec/{ntpsec_1.2.2a.bb =3D> ntpsec_1.2.4.bb}   | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
+>  rename meta-networking/recipes-support/ntpsec/{ntpsec_1.2.2a.bb =3D>
+> ntpsec_1.2.4.bb} (88%)
 >
-> The following changes since commit
-> ec0469748be4159fb83fb0fa0148d786484c88cf:
+> diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+> b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+> similarity index 88%
+> rename from meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+> rename to meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+> index 872d1ce4f7..057f6582f9 100644
+> --- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+> +++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+> @@ -2,12 +2,12 @@ SUMMARY =3D "The Network Time Protocol suite, refactore=
+d"
+>  HOMEPAGE =3D "https://www.ntpsec.org/"
 >
->   nodejs: fix gcc compile failed for 32 bit arm target (2026-02-12
-> 15:59:04 +0530)
+>  LICENSE =3D "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
+> -LIC_FILES_CHKSUM =3D
+> "file://LICENSES/BSD-2;md5=3D653830da7b770a32f6f50f6107e0b186 \
+> -
+> file://LICENSES/BSD-3;md5=3D55e9dcf6a625a2dcfcda4ef6a647fbfd \
+> -
+> file://LICENSES/CC-BY-4.0;md5=3D2ab724713fdaf49e4523c4503bfd068d \
+> -
+> file://LICENSES/MIT;md5=3D5a9dfc801af3eb49df2055c9b07918b2 \
+> -
+> file://LICENSES/NTP;md5=3Dcb56b7747f86157c78ca81f224806694"
+> -
+> +LIC_FILES_CHKSUM =3D
+> "file://LICENSES/BSD-2-Clause.txt;md5=3D653830da7b770a32f6f50f6107e0b186 =
+\
+> +
+> file://LICENSES/BSD-3-Clause.txt;md5=3D55e9dcf6a625a2dcfcda4ef6a647fbfd \
+> +
+> file://LICENSES/CC-BY-4.0.txt;md5=3D2ab724713fdaf49e4523c4503bfd068d \
+> +
+> file://LICENSES/MIT.txt;md5=3D5a9dfc801af3eb49df2055c9b07918b2 \
+> +
+> file://LICENSES/NTP.txt;md5=3Dcb56b7747f86157c78ca81f224806694"
+> +
+>  DEPENDS +=3D "bison-native \
+>              openssl \
+>              python3"
+> @@ -17,7 +17,7 @@ SRC_URI =3D "
+> https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
+>             file://0001-wscript-Add-BISONFLAGS-support.patch \
+>             "
 >
-> are available in the Git repository at:
+> -SRC_URI[sha256sum] =3D
+> "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
+> +SRC_URI[sha256sum] =3D
+> "443e54a6149d1b0bf08677d17b18fced9028b101fc2ffd2c81e0834f87eebc7d"
 >
->   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
->
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
-rthgap
->
-> Alexandre Truong (1):
->   source-han-sans-*-fonts: rename downloaded files in SRC_URI
->
-> Anil Dongare (1):
->   wireshark 4.2.14: Fix CVE-2026-0962
->
-> Ankur Tyagi (1):
->   dovecot: ignore CVE-2025-30189
->
-> Anuj Mittal (1):
->   README: update listed maintainer
->
-> Daniel Klauer (1):
->   nbench-byte: Fix sysinfo generation in parallel build
->
-> Geoff Parker (1):
->   python3-m2crypto: fix python3-m2crypto-native do_configure:prepend()
->
-> Gyorgy Sarvari (1):
->   nginx: patch CVE-2026-1642
->
-> Martin Jansa (1):
->   nodejs: add missing Upstream-Status
->
-> Peter Marko (1):
->   fcgi: add follow-up patch for CVE-2025-23016
->
-> Tafil Avdyli (1):
->   python3-pybind11-json: fix Targets.cmake trying to reference host
->
-> Vijay Anusuri (1):
->   postgresql: upgrade 16.11 -> 16.12
->
-> Yoann Congal (1):
->   polkit: Switch PAM files to common-*
->
->  README.md                                     |   2 +-
->  meta-filesystems/README.md                    |   2 +-
->  meta-gnome/README.md                          |   2 +-
->  meta-initramfs/README.md                      |   2 +-
->  meta-multimedia/README.md                     |   2 +-
->  meta-networking/MAINTAINERS                   |   2 +-
->  meta-networking/README.md                     |   2 +-
->  .../dovecot/dovecot_2.3.21.1.bb               |   1 +
->  .../wireshark/files/CVE-2026-0962.patch       | 152 ++++++++++++++++++
->  .../wireshark/wireshark_4.2.14.bb             |   1 +
->  meta-oe/README.md                             |   2 +-
->  ...sysinfo-generation-in-parallel-build.patch |  69 ++++++++
->  .../sysinfo.sh-Fix-typo-in-rm-command.patch   |  27 ++++
->  .../nbench-byte/nbench-byte_2.2.3.bb          |   4 +-
->  ...c-bypass-autoconf-2.69-version-check.patch |   2 +-
->  ...ostgresql_16.11.bb =3D> postgresql_16.12.bb} |   4 +-
->  ...ert-stop-using-deprecated-ares_query.patch |   1 +
->  ...pport-openembedded-OS-for-PAM-config.patch |  48 ++++++
->  meta-oe/recipes-extended/polkit/polkit_124.bb |   5 +
->  .../source-han-sans-cn-fonts_2.004.bb         |   2 +-
->  .../source-han-sans-jp-fonts_2.004.bb         |   2 +-
->  .../source-han-sans-kr-fonts_2.004.bb         |   2 +-
->  .../source-han-sans-tw-fonts_2.004.bb         |   2 +-
->  meta-perl/README.md                           |   2 +-
->  meta-python/README.md                         |   2 +-
->  .../python/python3-m2crypto_0.40.1.bb         |   2 +-
->  ...p-PYTHON_INCLUDE_DIRS-from-interface.patch |  34 ++++
->  .../python/python3-pybind11-json_0.2.13.bb    |   3 +-
->  meta-webserver/README.md                      |   2 +-
->  .../nginx/files/CVE-2026-1642.patch           |  46 ++++++
->  meta-webserver/recipes-httpd/nginx/nginx.inc  |   1 +
->  ...25-23016.patch =3D> CVE-2025-23016-01.patch} |   0
->  .../fcgi/fcgi/CVE-2025-23016-02.patch         |  83 ++++++++++
->  .../recipes-support/fcgi/fcgi_git.bb          |   3 +-
->  meta-xfce/README.md                           |   2 +-
->  35 files changed, 495 insertions(+), 23 deletions(-)
->  create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2026-0962.patch
->  create mode 100644
-> meta-oe/recipes-benchmark/nbench-byte/nbench-byte/Makefile-Fix-sysinfo-ge=
-neration-in-parallel-build.patch
->  create mode 100644
-> meta-oe/recipes-benchmark/nbench-byte/nbench-byte/sysinfo.sh-Fix-typo-in-=
-rm-command.patch
->  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.11.bb =3D>
-> postgresql_16.12.bb} (75%)
->  create mode 100644
-> meta-oe/recipes-extended/polkit/files/meson-build-Support-openembedded-OS=
--for-PAM-config.patch
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-pybind11-json/0001-CMakeLists=
--drop-PYTHON_INCLUDE_DIRS-from-interface.patch
->  create mode 100644
-> meta-webserver/recipes-httpd/nginx/files/CVE-2026-1642.patch
->  rename meta-webserver/recipes-support/fcgi/fcgi/{CVE-2025-23016.patch =
-=3D>
-> CVE-2025-23016-01.patch} (100%)
->  create mode 100644
-> meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-23016-02.patch
+>  UPSTREAM_CHECK_URI =3D "ftp://ftp.ntpsec.org/pub/releases/"
 >
 > --
-> 2.53.0
+> 2.47.3
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#124849):
-> https://lists.openembedded.org/g/openembedded-devel/message/124849
-> Mute This Topic: https://lists.openembedded.org/mt/118131078/1997914
+> View/Reply Online (#124843):
+> https://lists.openembedded.org/g/openembedded-devel/message/124843
+> Mute This Topic: https://lists.openembedded.org/mt/118129522/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -227,191 +183,115 @@ rm-command.patch
 >
 >
 
---0000000000005c3c58064c40dea5
+--0000000000000e6d09064c40ee00
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Thanks Anuj, looks good. Installed.</div><br><div class=3D=
-"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
-n Wed, Mar 4, 2026 at 4:39=E2=80=AFAM Anuj Mittal via <a href=3D"http://lis=
-ts.openembedded.org">lists.openembedded.org</a> &lt;anuj.mittal=3D<a href=
-=3D"mailto:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.=
-openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">Please merge these changes in scarthgap. Tested locally wit=
-h<br>
-qemuarm/qemux86-64/qemuarm64 and on autobuilder.<br>
-<br>
-<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
-ds/1333" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
-ect.org/valkyrie/#/builders/81/builds/1333</a><br>
-<br>
-<br>
-The following changes since commit ec0469748be4159fb83fb0fa0148d786484c88cf=
-:<br>
-<br>
-=C2=A0 nodejs: fix gcc compile failed for 32 bit arm target (2026-02-12 15:=
-59:04 +0530)<br>
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
-el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
-mbedded-contrib</a> anujm/scarthgap<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
-g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
-enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
-<br>
-Alexandre Truong (1):<br>
-=C2=A0 source-han-sans-*-fonts: rename downloaded files in SRC_URI<br>
-<br>
-Anil Dongare (1):<br>
-=C2=A0 wireshark 4.2.14: Fix CVE-2026-0962<br>
-<br>
-Ankur Tyagi (1):<br>
-=C2=A0 dovecot: ignore CVE-2025-30189<br>
-<br>
-Anuj Mittal (1):<br>
-=C2=A0 README: update listed maintainer<br>
-<br>
-Daniel Klauer (1):<br>
-=C2=A0 nbench-byte: Fix sysinfo generation in parallel build<br>
-<br>
-Geoff Parker (1):<br>
-=C2=A0 python3-m2crypto: fix python3-m2crypto-native do_configure:prepend()=
-<br>
-<br>
-Gyorgy Sarvari (1):<br>
-=C2=A0 nginx: patch CVE-2026-1642<br>
-<br>
-Martin Jansa (1):<br>
-=C2=A0 nodejs: add missing Upstream-Status<br>
-<br>
-Peter Marko (1):<br>
-=C2=A0 fcgi: add follow-up patch for CVE-2025-23016<br>
-<br>
-Tafil Avdyli (1):<br>
-=C2=A0 python3-pybind11-json: fix Targets.cmake trying to reference host<br=
->
-<br>
-Vijay Anusuri (1):<br>
-=C2=A0 postgresql: upgrade 16.11 -&gt; 16.12<br>
-<br>
-Yoann Congal (1):<br>
-=C2=A0 polkit: Switch PAM files to common-*<br>
-<br>
-=C2=A0README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-filesystems/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-gnome/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-initramfs/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-multimedia/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-networking/MAINTAINERS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-networking/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../dovecot/<a href=3D"http://dovecot_2.3.21.1.bb" rel=3D"noreferrer"=
- target=3D"_blank">dovecot_2.3.21.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
-=C2=A0.../wireshark/files/CVE-2026-0962.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
-52 ++++++++++++++++++<br>
-=C2=A0.../wireshark/<a href=3D"http://wireshark_4.2.14.bb" rel=3D"noreferre=
-r" target=3D"_blank">wireshark_4.2.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
-=C2=A0meta-oe/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0...sysinfo-generation-in-parallel-build.patch |=C2=A0 69 ++++++++<br>
-=C2=A0.../sysinfo.sh-Fix-typo-in-rm-command.patch=C2=A0 =C2=A0|=C2=A0 27 ++=
-++<br>
-=C2=A0.../nbench-byte/<a href=3D"http://nbench-byte_2.2.3.bb" rel=3D"norefe=
-rrer" target=3D"_blank">nbench-byte_2.2.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 |=C2=A0 =C2=A04 +-<br>
-=C2=A0...c-bypass-autoconf-2.69-version-check.patch |=C2=A0 =C2=A02 +-<br>
-=C2=A0...<a href=3D"http://ostgresql_16.11.bb" rel=3D"noreferrer" target=3D=
-"_blank">ostgresql_16.11.bb</a> =3D&gt; <a href=3D"http://postgresql_16.12.=
-bb" rel=3D"noreferrer" target=3D"_blank">postgresql_16.12.bb</a>} |=C2=A0 =
-=C2=A04 +-<br>
-=C2=A0...ert-stop-using-deprecated-ares_query.patch |=C2=A0 =C2=A01 +<br>
-=C2=A0...pport-openembedded-OS-for-PAM-config.patch |=C2=A0 48 ++++++<br>
-=C2=A0meta-oe/recipes-extended/polkit/<a href=3D"http://polkit_124.bb" rel=
-=3D"noreferrer" target=3D"_blank">polkit_124.bb</a> |=C2=A0 =C2=A05 +<br>
-=C2=A0.../<a href=3D"http://source-han-sans-cn-fonts_2.004.bb" rel=3D"noref=
-errer" target=3D"_blank">source-han-sans-cn-fonts_2.004.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../<a href=3D"http://source-han-sans-jp-fonts_2.004.bb" rel=3D"noref=
-errer" target=3D"_blank">source-han-sans-jp-fonts_2.004.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../<a href=3D"http://source-han-sans-kr-fonts_2.004.bb" rel=3D"noref=
-errer" target=3D"_blank">source-han-sans-kr-fonts_2.004.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../<a href=3D"http://source-han-sans-tw-fonts_2.004.bb" rel=3D"noref=
-errer" target=3D"_blank">source-han-sans-tw-fonts_2.004.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-perl/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0meta-python/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-m2crypto_0.40.1.bb" rel=3D"noref=
-errer" target=3D"_blank">python3-m2crypto_0.40.1.bb</a>=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0...p-PYTHON_INCLUDE_DIRS-from-interface.patch |=C2=A0 34 ++++<br>
-=C2=A0.../python/<a href=3D"http://python3-pybind11-json_0.2.13.bb" rel=3D"=
-noreferrer" target=3D"_blank">python3-pybind11-json_0.2.13.bb</a>=C2=A0 =C2=
-=A0 |=C2=A0 =C2=A03 +-<br>
-=C2=A0meta-webserver/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +-<br>
-=C2=A0.../nginx/files/CVE-2026-1642.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0|=C2=A0 46 ++++++<br>
-=C2=A0meta-webserver/recipes-httpd/nginx/nginx.inc=C2=A0 |=C2=A0 =C2=A01 +<=
+<div dir=3D"ltr">fails to configure with error<div><br></div><div>| Unknown=
+ option: &#39;--enable-debug-gdb&#39;<br></div><div><br></div><div>for more=
+ details See</div><div><br></div><div><a href=3D"https://autobuilder.yoctop=
+roject.org/valkyrie/api/v2/logs/5616082/raw_inline">https://autobuilder.yoc=
+toproject.org/valkyrie/api/v2/logs/5616082/raw_inline</a></div><div><br></d=
+iv><div><br></div></div><br><div class=3D"gmail_quote gmail_quote_container=
+"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Mar 4, 2026 at 1:08=E2=80=
+=AFAM G B via <a href=3D"http://lists.openembedded.org">lists.openembedded.=
+org</a> &lt;gitbeam=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">g=
+mail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">Upgrade to latest upstream release 1.2.4.<=
 br>
-=C2=A0...25-23016.patch =3D&gt; CVE-2025-23016-01.patch} |=C2=A0 =C2=A00<br=
->
-=C2=A0.../fcgi/fcgi/CVE-2025-23016-02.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 83 ++++++++++<br>
-=C2=A0.../recipes-support/fcgi/<a href=3D"http://fcgi_git.bb" rel=3D"norefe=
-rrer" target=3D"_blank">fcgi_git.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A03 +-<br>
-=C2=A0meta-xfce/README.md=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A035 files changed, 495 insertions(+), 23 deletions(-)<br>
-=C2=A0create mode 100644 meta-networking/recipes-support/wireshark/files/CV=
-E-2026-0962.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/=
-Makefile-Fix-sysinfo-generation-in-parallel-build.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-benchmark/nbench-byte/nbench-byte/=
-sysinfo.sh-Fix-typo-in-rm-command.patch<br>
-=C2=A0rename meta-oe/recipes-dbs/postgresql/{<a href=3D"http://postgresql_1=
-6.11.bb" rel=3D"noreferrer" target=3D"_blank">postgresql_16.11.bb</a> =3D&g=
-t; <a href=3D"http://postgresql_16.12.bb" rel=3D"noreferrer" target=3D"_bla=
-nk">postgresql_16.12.bb</a>} (75%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-extended/polkit/files/meson-build-=
-Support-openembedded-OS-for-PAM-config.patch<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pybind=
-11-json/0001-CMakeLists-drop-PYTHON_INCLUDE_DIRS-from-interface.patch<br>
-=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-=
-1642.patch<br>
-=C2=A0rename meta-webserver/recipes-support/fcgi/fcgi/{CVE-2025-23016.patch=
- =3D&gt; CVE-2025-23016-01.patch} (100%)<br>
-=C2=A0create mode 100644 meta-webserver/recipes-support/fcgi/fcgi/CVE-2025-=
-23016-02.patch<br>
+<br>
+Release notes: <a href=3D"https://blog.ntpsec.org/2025/04/18/version-1.2.4.=
+html" rel=3D"noreferrer" target=3D"_blank">https://blog.ntpsec.org/2025/04/=
+18/version-1.2.4.html</a><br>
+<br>
+Signed-off-by: G B &lt;<a href=3D"mailto:gitbeam@proton.me" target=3D"_blan=
+k">gitbeam@proton.me</a>&gt;<br>
+---<br>
+=C2=A0.../ntpsec/{<a href=3D"http://ntpsec_1.2.2a.bb" rel=3D"noreferrer" ta=
+rget=3D"_blank">ntpsec_1.2.2a.bb</a> =3D&gt; <a href=3D"http://ntpsec_1.2.4=
+.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.4.bb</a>}=C2=A0 =C2=A0=
+| 14 +++++++-------<br>
+=C2=A01 file changed, 7 insertions(+), 7 deletions(-)<br>
+=C2=A0rename meta-networking/recipes-support/ntpsec/{<a href=3D"http://ntps=
+ec_1.2.2a.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.2a.bb</a> =3D=
+&gt; <a href=3D"http://ntpsec_1.2.4.bb" rel=3D"noreferrer" target=3D"_blank=
+">ntpsec_1.2.4.bb</a>} (88%)<br>
+<br>
+diff --git a/meta-networking/recipes-support/ntpsec/<a href=3D"http://ntpse=
+c_1.2.2a.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.2a.bb</a> b/me=
+ta-networking/recipes-support/ntpsec/<a href=3D"http://ntpsec_1.2.4.bb" rel=
+=3D"noreferrer" target=3D"_blank">ntpsec_1.2.4.bb</a><br>
+similarity index 88%<br>
+rename from meta-networking/recipes-support/ntpsec/<a href=3D"http://ntpsec=
+_1.2.2a.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.2a.bb</a><br>
+rename to meta-networking/recipes-support/ntpsec/<a href=3D"http://ntpsec_1=
+.2.4.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.4.bb</a><br>
+index 872d1ce4f7..057f6582f9 100644<br>
+--- a/meta-networking/recipes-support/ntpsec/<a href=3D"http://ntpsec_1.2.2=
+a.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.2a.bb</a><br>
++++ b/meta-networking/recipes-support/ntpsec/<a href=3D"http://ntpsec_1.2.4=
+.bb" rel=3D"noreferrer" target=3D"_blank">ntpsec_1.2.4.bb</a><br>
+@@ -2,12 +2,12 @@ SUMMARY =3D &quot;The Network Time Protocol suite, refact=
+ored&quot;<br>
+=C2=A0HOMEPAGE =3D &quot;<a href=3D"https://www.ntpsec.org/" rel=3D"norefer=
+rer" target=3D"_blank">https://www.ntpsec.org/</a>&quot;<br>
+<br>
+=C2=A0LICENSE =3D &quot;CC-BY-4.0 &amp; BSD-2-Clause &amp; NTP &amp; BSD-3-=
+Clause &amp; MIT&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSES/BSD-2;md5=3D653830da7b770a32f6f=
+50f6107e0b186 \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/BSD-3;md5=3D55e9dcf6a625a2dcfcda4ef6a647fbfd \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/CC-BY-4.0;md5=3D2ab724713fdaf49e4523c4503bfd068d \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/MIT;md5=3D5a9dfc801af3eb49df2055c9b07918b2 \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/NTP;md5=3Dcb56b7747f86157c78ca81f224806694&quot;<br>
+-<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSES/BSD-2-Clause.txt;md5=3D653830da=
+7b770a32f6f50f6107e0b186 \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/BSD-3-Clause.txt;md5=3D55e9dcf6a625a2dcfcda4ef6a647fbfd \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/CC-BY-4.0.txt;md5=3D2ab724713fdaf49e4523c4503bfd068d \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/MIT.txt;md5=3D5a9dfc801af3eb49df2055c9b07918b2 \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file=
+://LICENSES/NTP.txt;md5=3Dcb56b7747f86157c78ca81f224806694&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 <br>
+=C2=A0DEPENDS +=3D &quot;bison-native \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0openssl \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0python3&quot;<br>
+@@ -17,7 +17,7 @@ SRC_URI =3D &quot;<a href=3D"https://ftp.ntpsec.org/pub/r=
+eleases/ntpsec-$%7BPV%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">https=
+://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-wscript-Add-BISONFLAG=
+S-support.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+<br>
+-SRC_URI[sha256sum] =3D &quot;e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2a=
+ea118a62f0a3226950e&quot;<br>
++SRC_URI[sha256sum] =3D &quot;443e54a6149d1b0bf08677d17b18fced9028b101fc2ff=
+d2c81e0834f87eebc7d&quot;<br>
+<br>
+=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"ftp://ftp.ntpsec.org/pub/rele=
+ases/" rel=3D"noreferrer" target=3D"_blank">ftp://ftp.ntpsec.org/pub/releas=
+es/</a>&quot;<br>
 <br>
 -- <br>
-2.53.0<br>
+2.47.3<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#124849): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/124849" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/124849</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118131078/199=
+View/Reply Online (#124843): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/124843" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/124843</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118129522/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/118131078/1997914</a><br>
+t/118129522/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -423,5 +303,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div>
 
---0000000000005c3c58064c40dea5--
+--0000000000000e6d09064c40ee00--
 
