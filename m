@@ -1,312 +1,292 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 077F8F33A86
-	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 15:10:15 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.46369.1772723409800783464
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 155C5F33A90
+	for <webhook@archiver.kernel.org>; Thu,  5 Mar 2026 15:25:45 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.46820.1772724339215225581
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Mar 2026 07:10:09 -0800
+ Thu, 05 Mar 2026 07:25:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Cs/kOfBL;
- spf=pass (domain: mvista.com, ip: 209.85.216.47, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-35691a231a7so5036197a91.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 07:10:09 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=n5SlGlg+;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.44, mailfrom: tim.orling@konsulko.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-b934f8ec6acso964202766b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 07:25:38 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772724337; cv=none;
+        d=google.com; s=arc-20240605;
+        b=P9Q04tF/Mv/dLTfNIjJsXP0hEJRxCrWkHUq+QEpry96ev9y25ZLgPLLBm9wm5kATQX
+         he4s2kjDRbbyx7m6i9tO4kgA5RQicZKZekmsNnQwq8+fepcoIrxOY4jI+a0+Oa+rHqLe
+         EaC6E3vQvwSYChVMW5yE5gUuaD1XVXpVgtSTbkQ5fmlGbu81fL3w2RMbQmcgfAmzl7Lj
+         t2RQhpByBctDM9qs47vu1N5AYSEVvuwgA0nsWixNxdn3xvtaJ/JrncPRbAgX/GAvVrbR
+         WT5ORV6axTxNwFYMpguFnHLwGBVCzE5a2+NHh/6v1tyDHpB6mZQrbLjDYQrCMp6mDl3K
+         QTpA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=YYn3ePQyh5JpTYWYFbm+B3tBa5lNZeOrTs8DbEeES8w=;
+        fh=3zQyEOHLwbK+Nli0MPPeu/fUDoaWDZsDusV17bzitvM=;
+        b=bmVFQ3h/2E6bBU5gSE+f14A0MLDZQFzwranbbk5z0Qgh3fS1wxc9JmEDAZAS/zJXAI
+         L0uolVMM4RvWXpNkGATGjUsnSnwfYA8AjBVKRiaIyua3V6T+fJf2l8L9VkzC2QcW+Q62
+         e58mk9L+tsCQs58hlAWyk+fLu1MvlOAx1Wgb+ld5lg47ntRorQ1J9fU3qk4w8dOZMaPu
+         mPtjW4OvRkXKb+uQwoqyvxxiErf5M3gychnu7BVkf1kE9L0szHro1rVTD3e5i/VZdg+M
+         xNHABNKZDalcSJpeAX1OJMLf/7P++k72DUiMi4i9PKdMPoMgHUHiow2sBLVAQ9qar2Sw
+         blsQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1772723409; x=1773328209; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aF3amNbj7BHCWyoWy7nytVK85ibaRg0bM8jn7DYxJik=;
-        b=Cs/kOfBL2Cf0u8PSb70QNqESGtpbwJ5XZ8ARFXSDgptWsTXGrQv6Bxou+U8LMuAHVZ
-         9Lg3pLOfanNwPn6FadkmvT2gU4PNPiP82xTr/tKK6yi0ps0go7CgjOsvjPIRGcj6xNlJ
-         J4lzBzDHlJYB7LlZxulMcCZkYjEuOGA1q3kFc=
+        d=konsulko.com; s=google; t=1772724337; x=1773329137; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=YYn3ePQyh5JpTYWYFbm+B3tBa5lNZeOrTs8DbEeES8w=;
+        b=n5SlGlg+a07xYCDkugRf+E8/4xifeYuTTSI1MW81eBaYLd3Xh25TwNZMwO1RWuuYBm
+         tll3OCDwF4panRMWIyfrF9jnDM7pzc0GCTnROrjwgl17BxAoxBWZIazp/ObnAQXYL5T0
+         1PodeYIcxtGWoWwQGWX7ZoUEHiOn95Uq6IBpI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772723409; x=1773328209;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20230601; t=1772724337; x=1773329137;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aF3amNbj7BHCWyoWy7nytVK85ibaRg0bM8jn7DYxJik=;
-        b=rlTi2EY1ZGF3OhCuWvPevFKTYePRbII0ihveuXyNlnlv3PY6PSy8glPvqTPcMNC21F
-         2WkjtHxQ2q41QTzRF09J6z+OJGeywdLx+ufNgpDJA7QctPfoMEeRDZ9ltSP+X6Yq90RN
-         3admCL9cWqy2GxAygAjENb1cEdwxfAax/OAoKqN3yIbRJ41Kme5BuE5GUdRDOtXaq7te
-         +yixtqGir/ms4yrUdSr7tKa7ukmImJvz3+xMULUgaDSDm7iOcjB/YE/HFTpYEQytQ5mA
-         bGWfTb7DYSggvQvlVQPoGzFYjNqUskPTDO1nNA6Ara1o3E/rt8QdOu5vY4Es9UoZLorX
-         w2qw==
-X-Gm-Message-State: AOJu0YzTfdZ80ww0//5LK1M0CHqWBinLgYqOhLoaMpEvEQj34bn2a4C2
-	iLdgYjCBAUaTnRPKWLKZYtbux+ARVXqe6NngvYVT12tEnahQMJn8vA7u8WBPgcqWVzKVFjCJPwv
-	dsXDR
-X-Gm-Gg: ATEYQzw6oK5OiLGA+6SgEwcb+nJ1UKigxmo5wIdZc/uqHQdz9ohsr2iQMp1eK8CDh4e
-	QTuJt79iAjKy/25PKn6ClaaEnsKEXSTKVZ3RwcgwRS7xTaS5bU+H1taTqCGx5IAnPrFqw8N6v8q
-	ChhY2K1syQGVkj+J5l45CgYSwofTUdyWFi8aewWp5wFKMc4awUulDFcqmmbWK+jgPto0mtdFHMD
-	hg8Y+OqpeF3qBUJU6nCUcQtt938Br7qnlUuwyAiXrs6m+nOTX5+WKXUOp2sbBWi8RG4P8a6zb2L
-	PxBwOeixr2jZ8o89CyjmT9J2NsT12dyOLQ1Fz2hDrA6eNF98t7/R4lS/nF5LOAQMJVxbE54hcVQ
-	ekwJL9FrGeVMO+wyuxdbS57RXQsoMr7WfLoUFupsNNF+4EL1nxt6PPwsB0CPcmUvWlU26x10cmE
-	hqwlHZveajkWHBNfZFpI05oln6/ocedXWG+IA=
-X-Received: by 2002:a17:90b:4b47:b0:341:315:f4ed with SMTP id 98e67ed59e1d1-359a69c7705mr5441661a91.10.1772723408355;
-        Thu, 05 Mar 2026 07:10:08 -0800 (PST)
-Received: from MVIN00352.. ([2406:7400:54:1b6c:1a95:22d2:5d51:a99a])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-359b2e14821sm2355275a91.17.2026.03.05.07.10.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Mar 2026 07:10:07 -0800 (PST)
-From: Vijay Anusuri <vanusuri@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][scarthgap][patch] libjxl: upgrade 0.10.2 -> 0.10.5
-Date: Thu,  5 Mar 2026 20:39:53 +0530
-Message-ID: <20260305150953.135315-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.43.0
+        bh=YYn3ePQyh5JpTYWYFbm+B3tBa5lNZeOrTs8DbEeES8w=;
+        b=g+LTqcsDjb61jfVCnG43DKp6tP1Dv5BqB7mLAJR+J09Sdu3Wk5/67dYBAniYW+CpHb
+         xW6ShHH2pgfQdS5/6DEXP5mEmO2wRJ+uZiqqdD5wXQGq0ttb9u0aqD8KDJLITc1/4azJ
+         meDSeLqe3sbWfeeql6mA6apZ8vjKmvx/ulW0nZFzV7aejK+KhCXkXdE40qh2UQIuWKlq
+         9woG1nmOgwJvzQeZU8D4JR5WsPX1Ua7QXIHAr6AvyxKzv1zKvWakiNwuZPMg8JQRE5UQ
+         92XBhQgKXRrnR47c1eRRAdeT3zF/nG+77bpNv2PGJSEOo0JuIzb486vK2lh20gQeUHRj
+         PDGA==
+X-Forwarded-Encrypted: i=1; AJvYcCVqf19ylgnI3WQ6+k2ei9gehQ2QXDm5o1uKZtG7+RJyPKEI9oBuSjWuzhMcznN8bFnVlRFOxF6iK9AmELrUkIZsfqU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyNnJZDauVQyezHPxW4Jcm45xPyGdWH3d5UhJaopxYAoJqqT9gE
+	O/+N/NvJXb3dhk4HqbDl4nnSNORoynA47ZtPNT7gVIjuJq9Yd9wkc63gS8cx7QOTo2raX3I6dDJ
+	DEkvHfITqEgCHdq8WsEIBipW9o7HDmKe/AASht2LPKQ==
+X-Gm-Gg: ATEYQzwchzbMwLf4e59fjAJX0euzpRBIpnAM38AkwO6Djz45reK5WLLJbfvtJzmJjmk
+	2esACptpP16+VwU0oMkepxSaFicolkOGGppZwPbp7TQ+f5ERGZIIzsn9wZmXhlbYogwOnbY22SZ
+	0Rz1rDKGF3MbWOmCCce5HnF3rJ1OilpT9hr2QU250ptYsvGLNJaiJdtrNOECTa4X8X3fjsYAznD
+	BX0JdogqBtHm8edHvpfPjLczn79mm++WnXAcGrFbbKJNKFuHD4DPByuf5pmYY07XQMAVm4rVA1n
+	KiyadJqOTue3dH2KNg==
+X-Received: by 2002:a17:907:25c9:b0:b8e:d04e:e506 with SMTP id
+ a640c23a62f3a-b93f15afc56mr379758866b.57.1772724337262; Thu, 05 Mar 2026
+ 07:25:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260305035459.3561243-1-douglas.royds@taitcommunications.com> <d7ee961b-61c5-49a7-b474-bfa79e482c1a@gmail.com>
+In-Reply-To: <d7ee961b-61c5-49a7-b474-bfa79e482c1a@gmail.com>
+From: Tim Orling <tim.orling@konsulko.com>
+Date: Thu, 5 Mar 2026 07:25:25 -0800
+X-Gm-Features: AaiRm50U2gpUdueX5LpsdkSLiJsLjDDxRQTM9e8juWxURKpDjcgcVarUCfrQ8Zc
+Message-ID: <CAOyo-85eZuSc+pgiJ1kOjazTZ-bNR3dUZub4sueie2f+hftRnA@mail.gmail.com>
+Subject: Re: [oe] [meta-java][PATCH] java-library.bbclass: resolve
+ do_deletebinaries race condition
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: douglas.royds@taitcommunications.com, 
+	openembedded-devel@lists.openembedded.org, 
+	Stanley Stanton <stanley.stanton@taitcommunications.com>
+Content-Type: multipart/alternative; boundary="00000000000068530d064c488c30"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 15:10:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124883
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 15:25:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124884
 
- - fix tile dimension in low memory rendering pipeline (#4495 -
-   CVE-2025-12474)
- - fix number of channels for gray-to-gray color transform (#4579 -
-   CVE-2026-1837)
- - djxl: reject decoding JXL files if "packed" representation size overflows
-   size_t
+--00000000000068530d064c488c30
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changelog:
-https://github.com/libjxl/libjxl/releases/tag/v0.10.5
+On Thu, Mar 5, 2026 at 3:15=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.co=
+m> wrote:
 
-https://github.com/libjxl/libjxl/compare/v0.10.2...v0.10.5
+> - patches for meta-java should go to yocto-patches ML
+> (yocto-patches@lists.yoctoproject.org), though now I see that this info
+> isn't updated in all places
+> - AFAIK meta-java is still in deep sleep due to bitrot, and accepts no
+> patches due to this, until someone makes the layer build at least
+>
+> The state of things has not changed:
+https://www.linkedin.com/pulse/state-meta-java-tim-orling-tcrqc/
+https://lists.yoctoproject.org/g/yocto-patches/message/986
 
-Dropped CVE-2024-11403.patch CVE-2024-11498.patch which are fixed now.
-https://github.com/libjxl/libjxl/releases/tag/v0.10.4
+My guess is anybody actually using the layer is on the 'kirkstone' release,
+as meta-java has been increasingly more and more broken since then.
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
----
- .../libjxl/libjxl/CVE-2024-11403.patch        |  70 -----------
- .../libjxl/libjxl/CVE-2024-11498.patch        | 113 ------------------
- .../{libjxl_0.10.2.bb => libjxl_0.10.5.bb}    |   8 +-
- 3 files changed, 3 insertions(+), 188 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
- delete mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
- rename meta-oe/recipes-multimedia/libjxl/{libjxl_0.10.2.bb => libjxl_0.10.5.bb} (88%)
+in any case, cc'd Tim, the last maintainer that I know of.
+>
+> On 3/5/26 04:54, Douglas Royds via lists.openembedded.org wrote:
+> > From: Stanley Stanton <stanley.stanton@taitcommunications.com>
+> >
+> > The do_deletebinaries task is attempting to delete directories created
+> > and destroyed by other bitbake classes such as sstate.bbclass and
+> > create-spdx-2.2.bbclass. If these classes remove their directories
+> > before do_deletebinaries has a chance to delete them, but after they ar=
+e
+> > found, the following types of errors occur:
+> >
+> > Log data follows:
+> > | DEBUG: Executing shell function do_deletebinaries
+> > | find:
+> =E2=80=98/build/tmp/work/x86_64-linux/junit-native/3.8.2/sstate-build-cre=
+ate_spdx=E2=80=99:
+> No such file or directory
+> > | WARNING: exit code 1 from a shell command.
+> >
+> > Rewrite do_deletebinaries such that it is explicitly not looking throug=
+h
+> > directories that are managed by other bitbake classes, to avoid this
+> > race condition.
+> >
+> > Suggested-by:  Douglas Royds <douglas.royds@taitcommunications.com>
+> > Signed-off-by: Stanley Stanton <stanley.stanton@taitcommunications.com>
+> > ---
+> >  classes/java-library.bbclass | 7 +++----
+> >  1 file changed, 3 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/classes/java-library.bbclass b/classes/java-library.bbclas=
+s
+> > index 67541d2..033d6d4 100644
+> > --- a/classes/java-library.bbclass
+> > +++ b/classes/java-library.bbclass
+> > @@ -55,10 +55,9 @@ ALTJARFILENAMES =3D "${BPN}.jar"
+> >  # Java "source" distributions often contain precompiled things
+> >  # we want to delete first.
+> >  do_deletebinaries() {
+> > -  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path
+> "${RECIPE_SYSROOT_NATIVE}/*" \
+> > -                  -name "*.jar" -exec rm {} \;
+> > -  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path
+> "${RECIPE_SYSROOT_NATIVE}/*" \
+> > -                  -name "*.class" -exec rm {} \;
+> > +  dirs_to_search=3D"$(find ${WORKDIR}/* -maxdepth 0 -type d | grep -Ev
+> "recipe-sysroot|sstate|spdx")"
+> > +  find $dirs_to_search -name "*.jar" -exec rm {} \;
+> > +  find $dirs_to_search -name "*.class" -exec rm {} \;
+> >  }
+> >
+> >  addtask deletebinaries after do_unpack before do_patch
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#124864):
+> https://lists.openembedded.org/g/openembedded-devel/message/124864
+> > Mute This Topic: https://lists.openembedded.org/mt/118149274/6084445
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[
+> skandigraun@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
+>
+>
 
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
-deleted file mode 100644
-index 625218c2d3..0000000000
---- a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11403.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
--From 9cc451b91b74ba470fd72bd48c121e9f33d24c99 Mon Sep 17 00:00:00 2001
--From: szabadka <9074039+szabadka@users.noreply.github.com>
--Date: Thu, 3 Oct 2024 18:07:38 +0200
--Subject: [PATCH] Port the Huffman lookup table size fix from brunsli. (#3871)
--
--CVE: CVE-2024-11403
--Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/9cc451b91b74ba470fd72bd48c121e9f33d24c99]
--Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-----
-- lib/jpegli/huffman.h                   | 16 ++++++++++++----
-- lib/jxl/jpeg/enc_jpeg_huffman_decode.h | 16 ++++++++++++----
-- 2 files changed, 24 insertions(+), 8 deletions(-)
--
--diff --git a/lib/jpegli/huffman.h b/lib/jpegli/huffman.h
--index f0e5e1de..99549668 100644
----- a/lib/jpegli/huffman.h
--+++ b/lib/jpegli/huffman.h
--@@ -15,10 +15,18 @@ namespace jpegli {
-- 
-- constexpr int kJpegHuffmanRootTableBits = 8;
-- // Maximum huffman lookup table size.
---// According to zlib/examples/enough.c, 758 entries are always enough for
---// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
---// max bit length 16 if the root table has 8 bits.
---constexpr int kJpegHuffmanLutSize = 758;
--+// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
--+// code) and max bit length 16, the root table has 8 bits.
--+// zlib/examples/enough.c works with an assumption that Huffman code is
--+// "complete". Input JPEGs might have this assumption broken, hence the
--+// following sum is used as estimate:
--+//  + number of 1-st level cells
--+//  + number of symbols
--+//  + asymptotic amount of repeated 2nd level cells
--+// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
--+// each "size" might be almost completely be filled with repetitions.
--+// Total sum is slightly less than 1024,...
--+constexpr int kJpegHuffmanLutSize = 1024;
-- 
-- struct HuffmanTableEntry {
--   uint8_t bits;    // number of bits used for this symbol
--diff --git a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--index b8a60e41..fc9bd17b 100644
----- a/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--+++ b/lib/jxl/jpeg/enc_jpeg_huffman_decode.h
--@@ -15,10 +15,18 @@ namespace jpeg {
-- 
-- constexpr int kJpegHuffmanRootTableBits = 8;
-- // Maximum huffman lookup table size.
---// According to zlib/examples/enough.c, 758 entries are always enough for
---// an alphabet of 257 symbols (256 + 1 special symbol for the all 1s code) and
---// max bit length 16 if the root table has 8 bits.
---constexpr int kJpegHuffmanLutSize = 758;
--+// Requirements: alphabet of 257 symbols (256 + 1 special symbol for the all 1s
--+// code) and max bit length 16, the root table has 8 bits.
--+// zlib/examples/enough.c works with an assumption that Huffman code is
--+// "complete". Input JPEGs might have this assumption broken, hence the
--+// following sum is used as estimate:
--+//  + number of 1-st level cells
--+//  + number of symbols
--+//  + asymptotic amount of repeated 2nd level cells
--+// The third number is 1 + 3 + ... + 255 i.e. it is assumed that sub-table of
--+// each "size" might be almost completely be filled with repetitions.
--+// Total sum is slightly less than 1024,...
--+constexpr int kJpegHuffmanLutSize = 1024;
-- 
-- struct HuffmanTableEntry {
--   // Initialize the value to an invalid symbol so that we can recognize it
---- 
--2.50.1
--
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch b/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
-deleted file mode 100644
-index 25f85e1527..0000000000
---- a/meta-oe/recipes-multimedia/libjxl/libjxl/CVE-2024-11498.patch
-+++ /dev/null
-@@ -1,113 +0,0 @@
--From bf4781a2eed2eef664790170977d1d3d8347efb9 Mon Sep 17 00:00:00 2001
--From: Luca Versari <veluca@google.com>
--Date: Thu, 21 Nov 2024 16:33:08 +0100
--Subject: [PATCH] Check height limit in modular trees. (#3943)
--
--Also rewrite the implementation to use iterative checking instead of
--recursive checking of tree property values, to ensure stack usage is
--low.
--
--Before, it was possible for appropriately-crafted files to use a
--significant amount of stack (in the order of hundreds of MB).
--
--CVE: CVE-2024-11498
--Upstream-Status: Backport [https://github.com/libjxl/libjxl/commit/bf4781a2eed2eef664790170977d1d3d8347efb9]
--Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-----
-- lib/jxl/modular/encoding/dec_ma.cc | 66 ++++++++++++++++++++----------
-- 1 file changed, 45 insertions(+), 21 deletions(-)
--
--diff --git a/lib/jxl/modular/encoding/dec_ma.cc b/lib/jxl/modular/encoding/dec_ma.cc
--index b53b9a91..df2948d8 100644
----- a/lib/jxl/modular/encoding/dec_ma.cc
--+++ b/lib/jxl/modular/encoding/dec_ma.cc
--@@ -6,6 +6,7 @@
-- #include "lib/jxl/modular/encoding/dec_ma.h"
-- 
-- #include <limits>
--+#include <vector>
-- 
-- #include "lib/jxl/base/printf_macros.h"
-- #include "lib/jxl/dec_ans.h"
--@@ -17,23 +18,49 @@ namespace jxl {
-- 
-- namespace {
-- 
---Status ValidateTree(
---    const Tree &tree,
---    const std::vector<std::pair<pixel_type, pixel_type>> &prop_bounds,
---    size_t root) {
---  if (tree[root].property == -1) return true;
---  size_t p = tree[root].property;
---  int val = tree[root].splitval;
---  if (prop_bounds[p].first > val) return JXL_FAILURE("Invalid tree");
---  // Splitting at max value makes no sense: left range will be exactly same
---  // as parent, right range will be invalid (min > max).
---  if (prop_bounds[p].second <= val) return JXL_FAILURE("Invalid tree");
---  auto new_bounds = prop_bounds;
---  new_bounds[p].first = val + 1;
---  JXL_RETURN_IF_ERROR(ValidateTree(tree, new_bounds, tree[root].lchild));
---  new_bounds[p] = prop_bounds[p];
---  new_bounds[p].second = val;
---  return ValidateTree(tree, new_bounds, tree[root].rchild);
--+Status ValidateTree(const Tree &tree) {
--+  int num_properties = 0;
--+  for (auto node : tree) {
--+    if (node.property >= num_properties) {
--+      num_properties = node.property + 1;
--+    }
--+  }
--+  std::vector<int> height(tree.size());
--+  std::vector<std::pair<pixel_type, pixel_type>> property_ranges(
--+      num_properties * tree.size());
--+  for (int i = 0; i < num_properties; i++) {
--+    property_ranges[i].first = std::numeric_limits<pixel_type>::min();
--+    property_ranges[i].second = std::numeric_limits<pixel_type>::max();
--+  }
--+  const int kHeightLimit = 2048;
--+  for (size_t i = 0; i < tree.size(); i++) {
--+    if (height[i] > kHeightLimit) {
--+      return JXL_FAILURE("Tree too tall: %d", height[i]);
--+    }
--+    if (tree[i].property == -1) continue;
--+    height[tree[i].lchild] = height[i] + 1;
--+    height[tree[i].rchild] = height[i] + 1;
--+    for (size_t p = 0; p < static_cast<size_t>(num_properties); p++) {
--+      if (p == static_cast<size_t>(tree[i].property)) {
--+        pixel_type l = property_ranges[i * num_properties + p].first;
--+        pixel_type u = property_ranges[i * num_properties + p].second;
--+        pixel_type val = tree[i].splitval;
--+        if (l > val || u <= val) {
--+          return JXL_FAILURE("Invalid tree");
--+        }
--+        property_ranges[tree[i].lchild * num_properties + p] =
--+            std::make_pair(val + 1, u);
--+        property_ranges[tree[i].rchild * num_properties + p] =
--+            std::make_pair(l, val);
--+      } else {
--+        property_ranges[tree[i].lchild * num_properties + p] =
--+            property_ranges[i * num_properties + p];
--+        property_ranges[tree[i].rchild * num_properties + p] =
--+            property_ranges[i * num_properties + p];
--+      }
--+    }
--+  }
--+  return true;
-- }
-- 
-- Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
--@@ -82,10 +109,7 @@ Status DecodeTree(BitReader *br, ANSSymbolReader *reader,
--                        tree->size() + to_decode + 2, Predictor::Zero, 0, 1);
--     to_decode += 2;
--   }
---  std::vector<std::pair<pixel_type, pixel_type>> prop_bounds;
---  prop_bounds.resize(256, {std::numeric_limits<pixel_type>::min(),
---                           std::numeric_limits<pixel_type>::max()});
---  return ValidateTree(*tree, prop_bounds, 0);
--+  return ValidateTree(*tree);
-- }
-- }  // namespace
-- 
---- 
--2.50.1
--
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-similarity index 88%
-rename from meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
-rename to meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-index 2bf0f126b0..de4aabee22 100644
---- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
-+++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.5.bb
-@@ -8,11 +8,9 @@ inherit cmake pkgconfig mime
- 
- DEPENDS = "highway brotli"
- 
--SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1 \
--           file://CVE-2024-11403.patch \
--           file://CVE-2024-11498.patch \
--          "
--SRCREV = "e1489592a770b989303b0edc5cc1dc447bbe0515"
-+SRC_URI = "gitsm://github.com/libjxl/libjxl.git;protocol=https;nobranch=1"
-+
-+SRCREV = "6aa76f3134684f86e239263384230751b56938a7"
- S = "${WORKDIR}/git"
- 
- EXTRA_OECMAKE = " \
--- 
-2.43.0
+--00000000000068530d064c488c30
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Mar 5, =
+2026 at 3:15=E2=80=AFAM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gm=
+ail.com">skandigraun@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D=
+"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
+04,204,204);padding-left:1ex">- patches for meta-java should go to yocto-pa=
+tches ML<br>
+(<a href=3D"mailto:yocto-patches@lists.yoctoproject.org" target=3D"_blank">=
+yocto-patches@lists.yoctoproject.org</a>), though now I see that this info<=
+br>
+isn&#39;t updated in all places<br>
+- AFAIK meta-java is still in deep sleep due to bitrot, and accepts no<br>
+patches due to this, until someone makes the layer build at least<br>
+<br></blockquote><div>The state of things has not changed:<br><a href=3D"ht=
+tps://www.linkedin.com/pulse/state-meta-java-tim-orling-tcrqc/">https://www=
+.linkedin.com/pulse/state-meta-java-tim-orling-tcrqc/</a></div><div><a href=
+=3D"https://lists.yoctoproject.org/g/yocto-patches/message/986">https://lis=
+ts.yoctoproject.org/g/yocto-patches/message/986</a></div><div>=C2=A0</div><=
+div>My guess is anybody actually using the layer is on the &#39;kirkstone&#=
+39; release,</div><div>as meta-java has been increasingly more and more bro=
+ken since then.</div><div><br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+in any case, cc&#39;d Tim, the last maintainer that I know of.<br>
+<br>
+On 3/5/26 04:54, Douglas Royds via <a href=3D"http://lists.openembedded.org=
+" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> wrote:<br=
+>
+&gt; From: Stanley Stanton &lt;<a href=3D"mailto:stanley.stanton@taitcommun=
+ications.com" target=3D"_blank">stanley.stanton@taitcommunications.com</a>&=
+gt;<br>
+&gt;<br>
+&gt; The do_deletebinaries task is attempting to delete directories created=
+<br>
+&gt; and destroyed by other bitbake classes such as sstate.bbclass and<br>
+&gt; create-spdx-2.2.bbclass. If these classes remove their directories<br>
+&gt; before do_deletebinaries has a chance to delete them, but after they a=
+re<br>
+&gt; found, the following types of errors occur:<br>
+&gt;<br>
+&gt; Log data follows:<br>
+&gt; | DEBUG: Executing shell function do_deletebinaries<br>
+&gt; | find: =E2=80=98/build/tmp/work/x86_64-linux/junit-native/3.8.2/sstat=
+e-build-create_spdx=E2=80=99: No such file or directory<br>
+&gt; | WARNING: exit code 1 from a shell command.<br>
+&gt;<br>
+&gt; Rewrite do_deletebinaries such that it is explicitly not looking throu=
+gh<br>
+&gt; directories that are managed by other bitbake classes, to avoid this<b=
+r>
+&gt; race condition.<br>
+&gt;<br>
+&gt; Suggested-by:=C2=A0 Douglas Royds &lt;<a href=3D"mailto:douglas.royds@=
+taitcommunications.com" target=3D"_blank">douglas.royds@taitcommunications.=
+com</a>&gt;<br>
+&gt; Signed-off-by: Stanley Stanton &lt;<a href=3D"mailto:stanley.stanton@t=
+aitcommunications.com" target=3D"_blank">stanley.stanton@taitcommunications=
+.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 classes/java-library.bbclass | 7 +++----<br>
+&gt;=C2=A0 1 file changed, 3 insertions(+), 4 deletions(-)<br>
+&gt;<br>
+&gt; diff --git a/classes/java-library.bbclass b/classes/java-library.bbcla=
+ss<br>
+&gt; index 67541d2..033d6d4 100644<br>
+&gt; --- a/classes/java-library.bbclass<br>
+&gt; +++ b/classes/java-library.bbclass<br>
+&gt; @@ -55,10 +55,9 @@ ALTJARFILENAMES =3D &quot;${BPN}.jar&quot;<br>
+&gt;=C2=A0 # Java &quot;source&quot; distributions often contain precompile=
+d things<br>
+&gt;=C2=A0 # we want to delete first.<br>
+&gt;=C2=A0 do_deletebinaries() {<br>
+&gt; -=C2=A0 find ${WORKDIR} ! -path &quot;${RECIPE_SYSROOT}/*&quot; ! -pat=
+h &quot;${RECIPE_SYSROOT_NATIVE}/*&quot; \<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -name =
+&quot;*.jar&quot; -exec rm {} \;<br>
+&gt; -=C2=A0 find ${WORKDIR} ! -path &quot;${RECIPE_SYSROOT}/*&quot; ! -pat=
+h &quot;${RECIPE_SYSROOT_NATIVE}/*&quot; \<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -name =
+&quot;*.class&quot; -exec rm {} \;<br>
+&gt; +=C2=A0 dirs_to_search=3D&quot;$(find ${WORKDIR}/* -maxdepth 0 -type d=
+ | grep -Ev &quot;recipe-sysroot|sstate|spdx&quot;)&quot;<br>
+&gt; +=C2=A0 find $dirs_to_search -name &quot;*.jar&quot; -exec rm {} \;<br=
+>
+&gt; +=C2=A0 find $dirs_to_search -name &quot;*.class&quot; -exec rm {} \;<=
+br>
+&gt;=C2=A0 }<br>
+&gt;=C2=A0 <br>
+&gt;=C2=A0 addtask deletebinaries after do_unpack before do_patch<br>
+&gt;<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; Links: You receive all messages sent to this group.<br>
+&gt; View/Reply Online (#124864): <a href=3D"https://lists.openembedded.org=
+/g/openembedded-devel/message/124864" rel=3D"noreferrer" target=3D"_blank">=
+https://lists.openembedded.org/g/openembedded-devel/message/124864</a><br>
+&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11814927=
+4/6084445" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
+org/mt/118149274/6084445</a><br>
+&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
+bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
+rg</a><br>
+&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
+d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:skandigraun@gmail.c=
+om" target=3D"_blank">skandigraun@gmail.com</a>]<br>
+&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;<br>
+<br>
+</blockquote></div></div>
+
+--00000000000068530d064c488c30--
 
