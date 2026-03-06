@@ -1,135 +1,128 @@
-Return-Path: <peter@berginkonsult.se>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CF61F0182E
-	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 11:39:37 +0000 (UTC)
-Received: from mailrelay-egress7.pub.mailoutpod3-cph3.one.com (mailrelay-egress7.pub.mailoutpod3-cph3.one.com [46.30.211.246])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.67240.1772797170837455369
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEF85FCB60A
+	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 15:06:09 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.70987.1772809565810341357
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Mar 2026 03:39:31 -0800
+ Fri, 06 Mar 2026 07:06:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@berginkonsult.se header.s=rsa2 header.b=wzU5Z6gP;
- dkim=pass header.i=@berginkonsult.se header.s=ed2 header.b=dz7rFSkW;
- spf=none, err=SPF record not found (domain: berginkonsult.se, ip: 46.30.211.246, mailfrom: peter@berginkonsult.se)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1772797169; x=1773401969;
-	d=berginkonsult.se; s=rsa2;
-	h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
-	 subject:cc:to:from:from;
-	bh=fQdjj9uOwQXgl2pG6Vbvj4sv44JXZJDdlb+oh7shajI=;
-	b=wzU5Z6gPlMZJXy/mVAFIdIVwe2luM0vDqzGbw5UTZnEdsZkxiTzt8EwM4/Kbt2O0aG8xlEvt6VpeI
-	 mFnL5ekeGFuxL8G3NVzXROvCkY9mPjEDiQXY4uNma9zAgqO1ZwkDsUfXQ46wc3IUeOPvWaGOq+Jkd/
-	 whJ6X6l/YdbgZLjCkBRNRPCQ5ZpH2ACXkVg0q5AzWsqkaZYt6VA5yYGS4mY4FtMDjfbqVTgQpAHh6n
-	 m2Sn2CBsLtlCDeXPhe1JypgNM6swN3X4VAC91FKsLbNev5HLOHlHU4MrqyWf+4eRvDG8vWCJQQxDyL
-	 H788oSRIKuNrUMnx7j34sTVvqkeukWQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1772797169; x=1773401969;
-	d=berginkonsult.se; s=ed2;
-	h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
-	 subject:cc:to:from:from;
-	bh=fQdjj9uOwQXgl2pG6Vbvj4sv44JXZJDdlb+oh7shajI=;
-	b=dz7rFSkWAoMDPobGImG95nEgEjB0ZHK2myDSxkom2CdCHstKGyIEbIhDIlxqGkC2CnmvsauhoUB8T
-	 A7dQtccBg==
-X-HalOne-ID: 218e9953-1951-11f1-a394-81a63d10fb2d
-Received: from pbkserver2.. (c83-191-168-223.bredband.tele2.se [83.191.168.223])
-	by mailrelay5.pub.mailoutpod3-cph3.one.com (Halon) with ESMTPSA
-	id 218e9953-1951-11f1-a394-81a63d10fb2d;
-	Fri, 06 Mar 2026 11:39:28 +0000 (UTC)
-From: Peter Bergin <peter@berginkonsult.se>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M60h7Vxn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4852a8482fcso2622985e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 07:06:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1772809564; x=1773414364; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=jExustlqghuX4dXxDWYZb/kFnLFFpfyYXErJYiOUxxI=;
+        b=M60h7VxnYu/xrmJR25hJ2l3v0Z8ZSSOMkvrmy36Uf0t/kAiUQxYNjRPRAAMZ5Nfm9n
+         gR18KdXzvObMM4odN+gO5I42iDJSaPzVp9KKVOxo7PSjtS1y/qTT0aNl+58K1bFb9iR5
+         JbSVRLqY8v9Sr6GXbhwj/ktD6vttY/KJDTIr36KaDx44kmv6Nfeu7oubfM5unts/VL4i
+         8aPV3ZZcNe1KSr3E/HzX8P+9PMJwzgDgEoUDeocZ/Z3VagpX6eGIU6S8/ZjUEZKdWJbQ
+         hNEvmmtWXXkXiRTzAXn12wwmU0ng6rDfkg3i3f6WpriDxVyxzRiTru7bl1Hxh17Az0ru
+         NcoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1772809564; x=1773414364;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=jExustlqghuX4dXxDWYZb/kFnLFFpfyYXErJYiOUxxI=;
+        b=QPjwcH7k3UShwAc7TBLsVeZA7DbkNjOtiDN/k5I/OjvjVdMRJQmy5T1Le3YvEwulNM
+         kGkyH2TEh03E/XO1B/xrRgtiLRAAtIL4rWrZrT/8cDCGH88gD77enM9oHi0KWnJmpDLy
+         CtFX3zKFUvohGL8pGM6aK7FEbz9cKhV6EkMJyPEX+JW2FsX40ZcPXvTLn7Wu4XoowO9Q
+         rc8leSpeh0Ay2xPgz3iNNP5qG3Wo3sAiUcjKL5eWPFlozxgnua6qawRiBlOaiS3Y8ns0
+         jO2roUvkVEwujxAsImZsyorjUC1qb2LBtNHRs7QNU5sWIu3W7fbuTiwH1TJyPClHb3J+
+         dmeg==
+X-Gm-Message-State: AOJu0YxkmDtlBMH+Qhi13Q2tF0uk6/REcoT1cgFjqWmjd6t1c1Zk53ft
+	RVnJiG8u67qW0UczRsmAs08g4P53eorpDIvH7ObR2yg3197SOFAjm4XzvZE7fA==
+X-Gm-Gg: ATEYQzzsejUlK49h0ASOphhR1rA84MAZ5Er+dnTrXZdHvwIrKvUDW6iM0oh/LLDIKWV
+	gr2ZGiS5HK/BJ3hItuYvOFllXitRHfaDT0WUiHyj2rmYf0Cvr3NL58ytOYFskv6a2w4dx3N83uc
+	5Ldrfq04SE8zl2MdQOcbBODX+MAtMzUV/v3FBHMua/ZDbbMQWgfdFlPtixydSXJRqYU3jXCDsev
+	YfrlWNsCRSsaihLCgFHSeUWPIJG6OX9RlZ53hdyjK8t82Hs54/ZK4vbTuOqzMxGGOx6rTy0BJo6
+	tE1WyxrtlV/OKdO3xzEb2FpcD0Y14qr1GcfNa2c4Qd9bbbDLqqBgodyW6U8wXZh3z47JGjz+zYS
+	j4cFVMcP2OQjDR7nbAKXEv4ixMHuo6HSLw8WnqeeI4meCGSLdtj9GNzNNeiFgeItgsGwYzFhQ6X
+	LvekBX5bJgiln5t0ePw6bB
+X-Received: by 2002:a05:600c:608f:b0:480:426e:9d38 with SMTP id 5b1f17b1804b1-48526967adfmr38145115e9.27.1772809563833;
+        Fri, 06 Mar 2026 07:06:03 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48527681e3fsm38990205e9.6.2026.03.06.07.06.02
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 06 Mar 2026 07:06:02 -0800 (PST)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Bergin <peter@berginkonsult.se>
-Subject: [meta-oe][PATCH 2/2] rtla: add recipe for real-time linux analysis tool
-Date: Fri,  6 Mar 2026 12:39:22 +0100
-Message-ID: <20260306113922.3319380-2-peter@berginkonsult.se>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260306113922.3319380-1-peter@berginkonsult.se>
-References: <20260306113922.3319380-1-peter@berginkonsult.se>
+Subject: [meta-oe][whinlatter][PATCH 01/11] imagemagick: patch CVE-2026-24481
+Date: Fri,  6 Mar 2026 16:05:52 +0100
+Message-ID: <20260306150602.616834-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 11:39:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124904
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 15:06:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124905
 
-rtla source code is present in the kernel source tree at tools/tracing/rtla.
-There is another build option for rtla to enable bpf bindings, this was
-not a quick one to get working and left as a future improvement.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-24481
 
-Makefile for rtla has evolved in newer kernels (v6.9). Some fixes needed for
-support with older kernels. This commit was tested against 6.18 and 6.8.
+Backport the patch that references the related Github advisory[1]
+in its description explicitly.
 
-Also add rtla to packagegroup-meta-oe-benchmarks.
+[1]: https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-96pc-27rx-pr36
 
-Signed-off-by: Peter Bergin <peter@berginkonsult.se>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-oe.bb     |  1 +
- meta-oe/recipes-kernel/rtla/rtla.bb           | 47 +++++++++++++++++++
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/rtla/rtla.bb
+ .../imagemagick/CVE-2026-24481.patch          | 25 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.1.2-13.bb       |  3 ++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 9fd7af6c08..0cbe3964c4 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -68,6 +68,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
-     nbench-byte \
-     phoronix-test-suite \
-     qperf \
-+    rtla \
-     s-suite \
-     stressapptest \
-     tinymembench \
-diff --git a/meta-oe/recipes-kernel/rtla/rtla.bb b/meta-oe/recipes-kernel/rtla/rtla.bb
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
 new file mode 100644
-index 0000000000..af40fd5bd2
+index 0000000000..3d35a3f1d6
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/rtla/rtla.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "Real-Time Linux Analysis tool"
-+LICENSE = "GPL-2.0-only"
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
+@@ -0,0 +1,25 @@
++From 6778a890f95971c61a16593abc2cd15376d22cdd Mon Sep 17 00:00:00 2001
++From: Dirk Lemstra <dirk@lemstra.org>
++Date: Fri, 23 Jan 2026 13:19:06 +0100
++Subject: [PATCH] Initialize the pixels with empty values to prevent possible
++ heap information disclosure (GHSA-96pc-27rx-pr36)
 +
-+DEPENDS = "libtraceevent libtracefs"
-+PROVIDES = "virtual/rtla"
++CVE: CVE-2026-24481
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/51c9d33f4770cdcfa1a029199375d570af801c97]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ coders/psd.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+B = "${WORKDIR}/${BPN}-${PV}"
-+
-+inherit kernelsrc kernel-arch pkgconfig
-+
-+do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[cpupower] = ",,cpupower"
-+
-+EXTRA_OEMAKE = "V=1 -C ${S}/tools/tracing/rtla O=${B} CROSS=${TARGET_PREFIX} \
-+    CC="${CC} ${DEBUG_PREFIX_MAP}" LD="${LD}" AR=${AR} ARCH=${ARCH} \
-+    BUILD_BPF_SKEL=0"
-+
-+do_compile() {
-+    # Older kernels (before 6.9) use a standalone rtla Makefile that does not honor
-+    # O= so outputs land in the kernel source tree (shared workdir). Remove
-+    # build output to make sure it is rebuilt. For newer kernels this wil be a no-op.
-+    rm -f ${S}/tools/tracing/rtla/rtla
-+    rm -f ${S}/tools/tracing/rtla/src/*.o
-+
-+    # Older kernels need additional variable EXTRA_LDFLAGS to pick up correct linker options.
-+    export EXTRA_LDFLAGS="${LDFLAGS}"
-+    oe_runmake
-+}
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+
-+    # Older kernels (before 6.9) use a standalone rtla Makefile that does not honor
-+    # O= for the final binary, so it ends up in the kernel source tree.
-+    rtla_bin="${B}/rtla"
-+    [ -f "${rtla_bin}" ] || rtla_bin="${S}/tools/tracing/rtla/rtla"
-+    install -m 755 "${rtla_bin}" ${D}${bindir}/rtla
-+
-+    # rtla, osnoise, hwnoise, and timerlat are all the same binary
-+    ln -s rtla ${D}${bindir}/osnoise
-+    ln -s rtla ${D}${bindir}/hwnoise
-+    ln -s rtla ${D}${bindir}/timerlat
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
++diff --git a/coders/psd.c b/coders/psd.c
++index 28495c6d5..bb4ceecd6 100644
++--- a/coders/psd.c
+++++ b/coders/psd.c
++@@ -1334,6 +1334,7 @@ static MagickBooleanType ReadPSDChannelZip(Image *image,
++       ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed",
++         image->filename);
++     }
+++  memset(pixels,0,count*sizeof(*pixels));
++   if (ReadBlob(image,compact_size,compact_pixels) != (ssize_t) compact_size)
++     {
++       pixels=(unsigned char *) RelinquishMagickMemory(pixels);
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
+index e3f4a96d6f..adf65880b6 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
+@@ -15,7 +15,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https;tag=${PV} \
+            file://run-ptest \
+            file://imagemagick-ptest.sh \
+-"
++           file://CVE-2026-24481.patch \
++           "
+ 
+ SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
+ 
 
