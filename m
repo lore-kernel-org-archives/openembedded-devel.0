@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5122EFCB611
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65FD7FCB613
 	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 15:06:20 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.71236.1772809570612841314
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.71238.1772809571388850700
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Mar 2026 07:06:10 -0800
+ Fri, 06 Mar 2026 07:06:11 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fVERd1te;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4837634de51so40782455e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 07:06:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fuz/NsMN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-48372efa020so83210785e9.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 07:06:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772809569; x=1773414369; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772809570; x=1773414370; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Rl+iFb2O3oN4MN0XnYUGgswLpd5/P1b9CYYYPaiXGXg=;
-        b=fVERd1tegWr5S/RX4bY6iCAOSwshTv6Gh3FXnPeTrvDzIsUB2IToQyxcBOd0OKL+T9
-         1bNr/IPUNvAdIpFZOvpkgNLBdtCbtt0JXm4gPUtEA620RBZEz91uHM8axH2ky6asb6gh
-         YdUok7lxRS2NYc5y0pNMBtrVMxa9WiePIZ+p+7xXgrACX9DVtiAoNX1W2SCbogV31xsx
-         TyOp7rUFVijyLQVddQEloUUNrZ5kjMusD2OVo7XMn3HQ3hz5yvoPN/7EZA5XwAqqb8Lp
-         Sxspj/x6OaPRYWiCKB1sLvg6fdJat1Qv/WZzRzrtfQzPqv7uHnw/WV0oZdyYnCZiy0JP
-         gvyg==
+        bh=qeyuoKWIUarf7339bnStNHyb/wbcV6dqRKtpbyCf59w=;
+        b=fuz/NsMN/MuIb05gTp75fZsMp6McKIE/L6MhGvTHGb+1feU5863wz4ROZEJ72OUXkk
+         PtardF6zEpzwfkogBk/YQW2eOvDwuLatNEmfw9zjSJR2jnfk5OOS9JARGhMaJYrn76m1
+         sxFQK6nRwZ93BqA7XOq0FtPOLgJFRp4UVi85NrlTXpKe5x5Kvdme7l8w8m1mMrnxv0dk
+         2ObJBQw8Aax3nc/LNxw7CDOnvLY3h0AkzMuoqQ85rQHv/VbMhE4PBBu3/VUS5/gYYiVr
+         +6oiTQZbiE5X02maYaRPIlnn3B/UInVFrBqmQpCY8ZnJm9iXHccsm77/3KmY1MalFIat
+         2snA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772809569; x=1773414369;
+        d=1e100.net; s=20230601; t=1772809570; x=1773414370;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=Rl+iFb2O3oN4MN0XnYUGgswLpd5/P1b9CYYYPaiXGXg=;
-        b=NHb4ltax61JdwSgypb7Jqn5MX/a5W4M+5B6Bi7zfhAMRFI7OHu6+gLUpzaMYEopsTH
-         YX2+9gHCYXWt/fNpxlL8fuUdZsHLZnQmT2As4T0MqB1juTRh3CXKFBKhZMZdLruM8Rcc
-         GZu8YAp/1UmCIWtN4Ftroi3H83uFpJHg8CD0VxOp6gal4Niy7zRuTLUgtTzcbmJ2UYvX
-         DjgbppAfj0+3AmVBi8i+Qe8fZkWfH/TNtMyNVbRY6KHsN7tL0vWOvJQiB9gAL3rmvdXJ
-         G1ZRG8wViaBicGw/DoDpVhCSToC5yMPL1NzYJBHRmNNhowIENpOB5zwEjCWDtEL5KCz1
-         gtSw==
-X-Gm-Message-State: AOJu0Yy5XqFMLr08BnNKUzSAU2MY1INlBnUxyPLbMqe16WN7iXwutb+y
-	qOq0DV2d+fRCtqY1EbTdES5Npk022PkSPlVbCber0z1juWIJZu1tzB6YUFUN8A==
-X-Gm-Gg: ATEYQzxtpDKni8BYrX8wWI3CbPHhtjdXb9kAfOAdEM7uwveZ5PKRDEN/+PNWBRMk/1y
-	kb3kxg4D5PxVYL3Vbs1m5G106xF7hRQLi5nfAc5PHlC+13dlteAiw/p476e+l3U+i5rhNM7nd56
-	+ZPEPiSIV0Ce6MU0KyWtUChQ1ecVVjjCd7oe/RgotDzzgPHNxSH53ubsiDIFCtBP+aO7rPcNsqU
-	/W+hpkY+wGI3nyQP8IMc4koMbAfIYsTOgvi1+eNQ/rHmznKnwCwztTb8fMfVu3DzMtRtWVZedla
-	kDRm9EKUeeueVYez7novgFS92B9rVIrJ/tP6TFaZec/pYSN9Ew47dKfgu9/8XX8I7dcqjvwB//a
-	g6XkSKAZ9LXwi99oZ7Ctaf8EZvQGsS4l9pwTmBQSd8xDaD+EW6aEa+IQihBmBmnSLIXcWVFNcx/
-	ZdnlPnnz4umZxF6j0rUri+Nzf3WKNDzdc=
-X-Received: by 2002:a05:600c:b86:b0:483:78c5:d743 with SMTP id 5b1f17b1804b1-48526969908mr38172365e9.28.1772809568956;
-        Fri, 06 Mar 2026 07:06:08 -0800 (PST)
+        bh=qeyuoKWIUarf7339bnStNHyb/wbcV6dqRKtpbyCf59w=;
+        b=oL6aBVsTuuOs8TTKHK8JgfwTc5+TJS9nOMvUujznDB/BfGeXMSVomNs6G+nkI3JU9o
+         L9yb9sw6vIPQSWaE8SonCQWdJw1DhRL2WGoo4/1gDMAV8VhRmE50XJdll4OlFq8qbx4M
+         fC0W6SdDX7mSaS0+E7Gj9YpdYlJsMfFy/Vep03+x0nqarrVf5936+bkG1+qGqQf2G2W0
+         FG4yuldXXm2Hvi0jp3ch/lVlBf+06o2ZpkgR4YDJA2T940PoJiELu7Y+CISSiNm8APQx
+         sr78s8hVQJOWO34P4xWx4WzRHtKzv4fk56SsnqH8DgrxV7ye8PSZv+cSp75oY9dCxEM4
+         hVxg==
+X-Gm-Message-State: AOJu0YywYfzqpd3KE/86VZ53SglMFEZPa/OXKYZGvxki/Nabw3gppPdX
+	v/M7dWlfHimg+wPsqCFQRjmO/wmKWViFKu036CjyavhHv6dVJ6EsCEE/gWOh8g==
+X-Gm-Gg: ATEYQzxhrDJcXhMz2Tl/NSYegpzPTd6Q6V7WqAUGOJGH2H/6ru1qpTBsx1cO/I1qMxm
+	RYt9ealjnr3ZpezDxCD0yQp5zoucGOSK5L56XUjMsgUFuXFD0EX8h6Qm3BDyPW7o1Cmt2PYmnR8
+	1pjeAwtFQLF6TdqXlGOx2/F2Rv3QGgnTQp8MaDQUUWcwC55DbjO2dxBi3sTH6x6dJQs8tF7Hkzq
+	0mQQgOJJW2isWsTmqwvtFPxtWp9bz5k8+96YqbFsgbP8JTNAdZl2bP/UyIjdXSXFXbitoDV8fGa
+	yPnpmiFfLIh9FKiTM78ip6rkZZ818NQSALHdq7frwclHAVAMNXtpUc6gCJlTSL/YBfn+eWWgPx3
+	FjnwHfaf8rxQohZHqWd/sX+pks99PB+q/c6ayvVwtRAOL41Yhdg8UC4WjDPzuXBsWifkK/3Yv6c
+	NGSjUVIfrUzBAfQmiYZNXV
+X-Received: by 2002:a05:600c:8b61:b0:483:702d:2df with SMTP id 5b1f17b1804b1-485269840cbmr36248625e9.32.1772809569594;
+        Fri, 06 Mar 2026 07:06:09 -0800 (PST)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48527681e3fsm38990205e9.6.2026.03.06.07.06.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48527681e3fsm38990205e9.6.2026.03.06.07.06.09
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Mar 2026 07:06:08 -0800 (PST)
+        Fri, 06 Mar 2026 07:06:09 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 08/11] imagemagick: patch CVE-2026-25795
-Date: Fri,  6 Mar 2026 16:05:59 +0100
-Message-ID: <20260306150602.616834-8-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 09/11] imagemagick: patch CVE-2026-25796
+Date: Fri,  6 Mar 2026 16:06:00 +0100
+Message-ID: <20260306150602.616834-9-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260306150602.616834-1-skandigraun@gmail.com>
 References: <20260306150602.616834-1-skandigraun@gmail.com>
@@ -67,64 +67,78 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 15:06:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124912
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124913
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-25795
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-25796
 
-Backport the commit the references the related Github advisory[1]
-explicitly in its commit message.
+Backport the patch that mentions the related Github advisory[1]
+in its commit message.
 
-[1]: https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-p33r-fqw2-rqmm
+[1]: https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-g2pr-qxjg-7r2w
+
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../imagemagick/CVE-2026-25795.patch          | 28 +++++++++++++++++++
+ .../imagemagick/CVE-2026-25796.patch          | 41 +++++++++++++++++++
  .../imagemagick/imagemagick_7.1.2-13.bb       |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25795.patch
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25796.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25795.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25795.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25796.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25796.patch
 new file mode 100644
-index 0000000000..8ff74a43a6
+index 0000000000..aa77f22066
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25795.patch
-@@ -0,0 +1,28 @@
-+From 1a9ce954971581375f746fda76c73fc94c0b5535 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-25796.patch
+@@ -0,0 +1,41 @@
++From 0564895c393d0aa21578739ad3126a447a4beace Mon Sep 17 00:00:00 2001
 +From: Dirk Lemstra <dirk@lemstra.org>
-+Date: Fri, 6 Feb 2026 21:16:10 +0100
-+Subject: [PATCH] Fixed NULL pointer dereference in ReadSFWImage
-+ (GHSA-p33r-fqw2-rqmm)
++Date: Fri, 6 Feb 2026 21:10:47 +0100
++Subject: [PATCH] Prevent memory leak in early exits (GHSA-g2pr-qxjg-7r2w)
 +
-+CVE: CVE-2026-25795
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/0c7d0b9671ae2616fca106dcada45536eb4df5dc]
++CVE: CVE-2026-25796
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/93ad259ce4f6d641eea0bee73f374af90f35efc3]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ coders/sfw.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ coders/stegano.c | 11 +++++++++--
++ 1 file changed, 9 insertions(+), 2 deletions(-)
 +
-+diff --git a/coders/sfw.c b/coders/sfw.c
-+index f7ab1ef10..cc5fcedc6 100644
-+--- a/coders/sfw.c
-++++ b/coders/sfw.c
-+@@ -317,9 +317,9 @@ static Image *ReadSFWImage(const ImageInfo *image_info,ExceptionInfo *exception)
-+   if ((unique_file == -1) || (file == (FILE *) NULL))
++diff --git a/coders/stegano.c b/coders/stegano.c
++index 9f5eb6b80..b68d6ce6d 100644
++--- a/coders/stegano.c
+++++ b/coders/stegano.c
++@@ -150,15 +150,22 @@ static Image *ReadSTEGANOImage(const ImageInfo *image_info,
++     return(DestroyImage(image));
++   watermark->depth=MAGICKCORE_QUANTUM_DEPTH;
++   if (AcquireImageColormap(image,MaxColormapSize,exception) == MagickFalse)
++-    ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed");
+++    {
+++      watermark=DestroyImage(watermark);
+++      ThrowReaderException(ResourceLimitError,"MemoryAllocationFailed");
+++    }
++   if (image_info->ping != MagickFalse)
 +     {
-+       buffer=(unsigned char *) RelinquishMagickMemory(buffer);
-+-      read_info=DestroyImageInfo(read_info);
-+       (void) CopyMagickString(image->filename,read_info->filename,
-+         MagickPathExtent);
-++      read_info=DestroyImageInfo(read_info);
-+       ThrowFileException(exception,FileOpenError,"UnableToCreateTemporaryFile",
-+         image->filename);
-+       image=DestroyImageList(image);
+++      watermark=DestroyImage(watermark);
++       (void) CloseBlob(image);
++       return(GetFirstImageInList(image));
++     }
++   status=SetImageExtent(image,image->columns,image->rows,exception);
++   if (status == MagickFalse)
++-    return(DestroyImageList(image));
+++    {
+++      watermark=DestroyImage(watermark);
+++      return(DestroyImageList(image));
+++    }
++   for (y=0; y < (ssize_t) image->rows; y++)
++   {
++     q=QueueAuthenticPixels(image,0,y,image->columns,1,exception);
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-index ab73da952c..8c1e8eb926 100644
+index 8c1e8eb926..bb1272d512 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://CVE-2026-25637.patch \
+@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
             file://CVE-2026-25638.patch \
             file://CVE-2026-25794.patch \
-+           file://CVE-2026-25795.patch \
+            file://CVE-2026-25795.patch \
++           file://CVE-2026-25796.patch \
             "
  
  SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
