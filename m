@@ -2,192 +2,679 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFC44F513F4
-	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 04:41:55 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.62740.1772772108037445293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65686F513F8
+	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 05:32:36 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.63295.1772775154691342875
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Mar 2026 20:41:48 -0800
+ Thu, 05 Mar 2026 21:32:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=PM4QJoa8;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=HTKQHoYy;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6264alMD3886983
-	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Mar 2026 04:41:47 GMT
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=bysgXLO5;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=XYLlJ6LS;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62654Phb4193475
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Mar 2026 05:32:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HRs7qkITW6l3n5TzhJLxOqGJcwS1QylkJFBWTPBeiTc=; b=PM4QJoa8FYTIy61A
-	nTsDsKTwfXQQqjOW+PINaRcsDil7SM1G6k3IRcQPulyqKbRy9Yesfog2VXc9gwjp
-	R9Yp/bEndQyhybLGt5+Iu4BWqMeQ+wMTT5eIq1quCC3vYMExL6+AGM/MQnLcWmar
-	6tYiJbtQ6P8RtV3li3I7DfPcVS0Wc87CNAA2yTVV2I3jOxxl6l0tzQRkNt3+9aK6
-	jKcXiBQHNrCnM0jz5irfqTCyddebMAN/7Yq2MwGS4uvi04ySIX4NNVoVu1nUOT7J
-	V/2xJ4AbeU9+H3O5H+XiNLFNCWyGN8Nno/kDSZIAzk7TcXSta3lLY6oI4Ge+y8Jz
-	0sfygg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cqj4s92uv-1
+	3N/++SAlBCb3qQZTCleuT192h+Od5xpk2DQZEa0mCSQ=; b=bysgXLO5n8tCIoV/
+	NLha2f5KZP1n8xvgyYTg74GQj7B6ElyYMdzEIBNIbqNFfJ9RI3ENj1HsZfB9phg4
+	7yzsqDs1ztiyJavmGR6Ko/b6I4990BToHbCHVRywfXudUXat55QK1ga5Dc1Jqzr2
+	Rr6/+nlVxwEXHW1n8Q951PIA4TZ4Pu2K6YIAc06pqId0BgnaU8a+1UPnJ2SOE0u8
+	8TFyjgZmGM8U5wLzj+5a5IEZIYMegy0tB2NCATQ4YLK6V98eFbL3TPogCBKKDhp5
+	W6v23Ve757vvvfapjBX5dHPpS0xzdS8DnFDN5QqtUiaOaqPIqIUyMn5r20nKEEyT
+	pY5/Fg==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cqrf5r34m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 04:41:47 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-89a0a2afc55so202548186d6.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 20:41:47 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772772106; cv=none;
+	for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 05:32:33 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-506a81bbb50so116005071cf.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Mar 2026 21:32:33 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772775152; cv=none;
         d=google.com; s=arc-20240605;
-        b=FVbc7KEEA2QdsSTsplu/CVQF2ckPC1r0K+kEbUr62iYhfFAvodrF50RJwUU9O3NfLM
-         UL1GDuZJsC3X6X40W9KW8KlU+6tteSnxqwZ2cAvHIk8fLU8h5RsFlOiv3D2g2qDatXKf
-         mNNt1Q7eCanTWnMUa0gPqgd8LhKPU04m8FCIykOWpLyBtqfesazpT9NfqhlZ1D3VKt4F
-         +eUfe0zggzXzUJc+8tixvbPByFs83kLCaraBQzyKTMhIOD2e92v1SmsS0u+Pc6ViR9oj
-         wQp5CzALVsL6/VQxHf6l9vyNSPrf1XOWpVu3f50kjIFzOocmQo/De80yQ6s7Y5U+eUvx
-         copA==
+        b=It1EU/df6zIbnGBvybd4L6W7RQ9oGHHgT0UnRCSbY3sKJbMKdl4ErVX5E2CY9Ihx6j
+         RwApur9aQEVoaeFFftxBY6IX9uZU8Qk37uytvvUrOQCwbOzw6a64NX6D4uEjYNQ58X4Z
+         kVdU76RhOzmwAOF5vRCt/Jk9LAk70AlFYK966zTpQVZ/yY0B3bLVBTbCvuPShmua6eFe
+         cVHWBz6WIlqIJb7iVJhnJcecMxewKfBWSkxBZ3Ax8mlWM7fC3LLIwapDjQkhb28sR5Cb
+         WWv/+nWs7QnGRINcyf/eRhXWP9e7e8+uQQBPpE8G4NH/gDIxcYTsushlUxye5+2imVd9
+         +dCQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=HRs7qkITW6l3n5TzhJLxOqGJcwS1QylkJFBWTPBeiTc=;
-        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
-        b=aFhVuaThGwidymJp2l5qdgxfciFxzwFoHhXRIaRjAdA2sTvgLfL4JSNU8wV8+2vGTH
-         ZS6PrtSlF09U29kHLthLMu59Uh/83oWepiEve0lcdVcOoOv2wQglf2dFfdA/oSFLn2Xw
-         J7Bnha78ucnkjiVPwjnyzXcCsldxDxWbfCLS62010SRxM8HGYNTowKBPUKADPHdK5/Mu
-         RZFiiwEmOf7hloWGYR+txMdiQgRKIARZiSRY82kCb2j+ROcO4vWrXkG6DY5XWS/z3NX0
-         BAq27baauaQ8P/MDVsTff7wGP5vqEgvCgt6wC3gD1gs1tOhggwYnIboP+sBOzbMFQZjo
-         0ssQ==;
+        bh=3N/++SAlBCb3qQZTCleuT192h+Od5xpk2DQZEa0mCSQ=;
+        fh=n0ZnAkKOhGDmrf8RLpwnC7FQ6xmEY5rofL6wXnjsXjs=;
+        b=XeTzGpIdPzagFk4FDzN7cNZdD/4nK6S6tzB9l/lMKdts5o9vnz9g3UHSuOLoKdQxOd
+         jnXnlBTo8RekjwZrLiIADeNajXiXLMNCtq1tMoh1An8oqV0GTqKrPUQQ15MG2HS/eK0Z
+         pM4+0WBfZNfyDojGmC/aoNBtldKnUoRy2/zjxZ/1Y1zCadC6bXLOkGw8GFKX4ARo0Yq1
+         r3lDN1ts++w+lO9z38G0Ei17ACkTz+qgqW9fMPVr4NQpx+9JR1JCZZQQdkSDaDgHPW2Z
+         evWBYBNGSNtCmWhOWeoIRXUPzESMxQE1UitAok7BEFacovEA5LfOf1IMOitN6/j/xTIj
+         Vxgg==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1772772106; x=1773376906; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1772775152; x=1773379952; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=HRs7qkITW6l3n5TzhJLxOqGJcwS1QylkJFBWTPBeiTc=;
-        b=HTKQHoYypzR1L8Y+5nfywK+r2k5f5MVVeo0nzdxfqCJWPkC/iepQngOACUUiMrDqJw
-         +L3kFOv1XFXXBYXOiwx22QZU9JmNPig5CWJiSwlG8J7urKZxuKlQtmX11s/oK7VT16+F
-         SZT4sMNJUZpgbO60TC4/3SpVL3boy/yLXz5HNub+DUtdHUqPR7r9u276PcwXDQxZdhR8
-         bds697Lr937AFVhI15Bde5H22zG9eTIOIis81x2xceCyk1C3fJF7Q2hmv/rhqusUX6RI
-         nFefJ5x1Gj+4NA/sc7mOIwvDrJqRLq0RbvT55hkuLcjgA+akiQDkvw9yf+fdbxVaujWj
-         mS9g==
+        bh=3N/++SAlBCb3qQZTCleuT192h+Od5xpk2DQZEa0mCSQ=;
+        b=XYLlJ6LSSzAV1csMdeNJzeny+9XIKt6+oFBEWImAJdYtkm3g+64yqY6+QsDvFK6mZm
+         O+pCkLXwGJXJh00HIP8PYs2Nn15ohR/FPr/aP5gPxWtEs5t05pHZJ6Jy1LK9RiaV7R+q
+         MkIIC2wEoPVXuebmu49T5fSEcE6jqC3zU7YcXk7IbL6u9cN5PR4epa5Jl3Cwy85nGRuG
+         aHzp3mEh2l8XNDae0BbNbusXEeuVPgWWLFYx5HexoqzXx6OAzQGH7NgzwaxA7ul6lEVZ
+         hL+yFhNTZRfzoM2MAl6OT+4yKEL0Z5kXxjaoE++YoLVlEyQN1g5826IWJfSssMkRaXGJ
+         FC+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772772106; x=1773376906;
+        d=1e100.net; s=20230601; t=1772775152; x=1773379952;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=HRs7qkITW6l3n5TzhJLxOqGJcwS1QylkJFBWTPBeiTc=;
-        b=Wrlj7Hcx5RlKbc4s2dGvp4BjgW4q3JlUYvsMb704tHm6XCQUUaIibKtrspo0OjygjD
-         fx/lsyBCk+vss58XK0jHA1YqQ1Rd9GJv7LM7bcJgDESFHbFK4p92z6Pw3RTgvsGrjkm1
-         JwtEzlxzs+0stQOnrlY//qZC2rPX8UYDijkCXr2otfT1tpo6xTHRx21bDGcX8OPgjCIc
-         QiPVzCtv3+2qVW6UoVDvWf2CGt0V55UujkZKQnzBby3mx8Yqp0tTWuDj00I8EqFjlmuK
-         6L+Vce3JUVtWmYZwFZSi4e9G17TFpT69M7XLmXBqGww2LIQ1XoWiCQ4EtS8x5t9LNt8v
-         2N2w==
-X-Gm-Message-State: AOJu0YyY1SsMTtwqyCsCnjWaP6xkaWs03vnNs1gb8Y5jK4g3Xc9X+7SB
-	VgVsZDP+R8hkEeR/WHE12MsShlTtsXop+PbosHCo8VDv26XGiqZCnTmMZn7QXmr7QvXqmFM9qdX
-	rBuiccgOBF3lKgr/kZhiADT6OJuZtOjP2PG/S819kdZ6FOg6y0GFJeQ5kBQ7+y/QvPGIXeoRU6l
-	zL/wHE420Nzjc4utLlytorTRuro576xudwjWtVrZmkb3eonQFbaL/BYhn6OH4=
-X-Gm-Gg: ATEYQzwkpS1+of2IekIhUdzO56NybVAmZNFybTgXMLEyhSrx1jDNO6IIS//MhOPLghU
-	DEL8x8NedQNTkdvPHMllsiEpBpWq/w/qQUkURQ8D9E97QgWmYvWFcPUnQ/IliyoNjW1koN7gbon
-	fpUP5TcOgRakIfRR0aBwphdv5i9dZUwYHE25lyh6qWyhRQvp7ZHJgG5iYQq+eIsQx1j3MHG3u5A
-	KbB
-X-Received: by 2002:a05:6214:528d:b0:899:fd7c:d46a with SMTP id 6a1803df08f44-89a30a5e418mr9695056d6.18.1772772106433;
-        Thu, 05 Mar 2026 20:41:46 -0800 (PST)
-X-Received: by 2002:a05:6214:528d:b0:899:fd7c:d46a with SMTP id
- 6a1803df08f44-89a30a5e418mr9694896d6.18.1772772106012; Thu, 05 Mar 2026
- 20:41:46 -0800 (PST)
+        bh=3N/++SAlBCb3qQZTCleuT192h+Od5xpk2DQZEa0mCSQ=;
+        b=EA4O/AMyYFPA4kiHfiOoNBVgMrbzG3jCvnThMGTnjKmMTVSCdSEJQ5VOXunIEZxSvL
+         Q9qt7o7UqsKI7hlCXUrMZwWsDBy0ygNqw9Y3W97a+2Mpo0Yjn4b6hgSP8DerdBxGXcVE
+         QKweqLynWIlUB8qEpAAATHNhsm+/nnyOGqus14K0jtsRjbJdSrcVGTcDzRwC/3f22bo5
+         0R5VwXZAir6Ih9teMgqtUvTJSQl1uqapc9cC3YtDNlY6BbpoxcTjyjuQoCIWHte9AnKJ
+         ZgwSn9cilXhz5Gax39VQiyPHvrdrYHijvXoBl3WA1lmgE5AG74svAFgJl6luM5gWGmYn
+         0ysA==
+X-Gm-Message-State: AOJu0YzDL6VP5gBk4Y0NPUrp8ADKHQu8tDow7d0bpZmywRFIxCuQLLc3
+	k39wWH8ipZ/0QIMRqWWI8VHwB5dvoyYgzoWs/EX818vle+kRpYdd6U6yp6NUMA3udivvwpl8pSq
+	I7Q0NO6Hg00s0meSwjCtCMiWFBRiFk5NeVIU9szD+PQ7FN7lxnYCnkPx8zgtdULNLEg6bcbL92E
+	XHlJz9kpNfqK34gXxVMZjqjCYSm6UYkAiqQg5qHU29MeD+Drpxp3dAdI2I7ls=
+X-Gm-Gg: ATEYQzygfCQ/POoFQQHy+sfPKeTbewwKdprpUb3KCOcvu/TfsgBOlmigI8fLoIhD9lT
+	+eagGNvZR28i8iHwo/2W1mLcFntG7xgU53A2srki0MsOXs6/O/Ol21fNmCOIb3G5voXCVwF+6sv
+	GHcLE5wDLIPnosvCtJ1h4ezN+qGueXWKZTkLsiomxfQ3Hxx5T+B0vW0yDxrJKGzA8rztxuTjAHc
+	hCz
+X-Received: by 2002:ac8:5795:0:b0:501:4b67:1210 with SMTP id d75a77b69052e-508f4974874mr11484921cf.56.1772775152399;
+        Thu, 05 Mar 2026 21:32:32 -0800 (PST)
+X-Received: by 2002:ac8:5795:0:b0:501:4b67:1210 with SMTP id
+ d75a77b69052e-508f4974874mr11484821cf.56.1772775151752; Thu, 05 Mar 2026
+ 21:32:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20260305192503.3864009-1-skandigraun@gmail.com>
-In-Reply-To: <20260305192503.3864009-1-skandigraun@gmail.com>
+References: <20260224185412.1835468-2-ankur.tyagi85@gmail.com>
+In-Reply-To: <20260224185412.1835468-2-ankur.tyagi85@gmail.com>
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Fri, 6 Mar 2026 12:41:34 +0800
-X-Gm-Features: AaiRm501blcCcGz3-7T0_t6WuSyx8sFFK1hrNimJ6Hcgqo8vLcl_hSEotScpU1Y
-Message-ID: <CA+s=J=yh6GZMp9Rtp6cX1+VYjS74c+yJqoEUaMqckUUTSTu=4g@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][whinlatter][PATCH] gimp: ignore already fixed CVEs
-To: skandigraun@gmail.com
+Date: Fri, 6 Mar 2026 13:32:20 +0800
+X-Gm-Features: AaiRm523OLVMFD8V6-BazY_me-lX-9YhL9DgDyvXY1cza2yX6mmQJHCgLvwx5Zk
+Message-ID: <CA+s=J=ypghOCPnCkntAeafipwAp814QkYny7DNct2qKwMRNz4Q@mail.gmail.com>
+Subject: Re: [oe][meta-networking][whinlatter][PATCH 1/3] wolfssl: patch CVE-2025-13912
+To: ankur.tyagi85@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA2MDA0MSBTYWx0ZWRfX83OlcGvYw3w4
- 6yUvNI88x5SJz1j0p2L/nEf8KKTO7Q/iIF5lPkQWqonUjWzHC/sDWMVyj3tAQc8YVObKjsOE3kr
- mUSbqc3kV3nbZRGjv6HO8Yq3/BhNsnrHlVAMFainLwzzxRrR59VxbHbI1uCnpoYjpWTQdsOVsik
- YZ0voediaZpOennc97oqav/jd9rN6EnXsXvwHRgJfwDY26WSYyj8LuutQF9/zl+BKTe4PEOUO3l
- IB5CrL/Kcshs4Zd0WNQEM/80AFfjLm2R+zlzQ0ZAHkTZUZsFJvvu875AujhVWg2PQhPwTNxreHL
- XZdZuK0dZGYwm733Z8KhZMB3GY4YDoEt5fZeL0/2HlxamU3zdU1vL9N+8eYpUJ5IjiKbPn9pkyE
- XFUvG/iRUyJOpyNdS914Cp8bh53MefL2TEF0aYIDXJBmdycEbrdPLrrr5+yryBm/unajliLjJh4
- X8lbSvowmB6yi872WRA==
-X-Proofpoint-ORIG-GUID: Kv6rtcjC8dYFegGkj3ibVZB1k08JQ4ET
-X-Proofpoint-GUID: Kv6rtcjC8dYFegGkj3ibVZB1k08JQ4ET
-X-Authority-Analysis: v=2.4 cv=T8uBjvKQ c=1 sm=1 tr=0 ts=69aa5b0b cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
+X-Proofpoint-ORIG-GUID: rKHxbfGbzfpUccgiiNT581b8USCpuxCY
+X-Proofpoint-GUID: rKHxbfGbzfpUccgiiNT581b8USCpuxCY
+X-Authority-Analysis: v=2.4 cv=L+oQguT8 c=1 sm=1 tr=0 ts=69aa66f1 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=GHR8O2WEAAAA:20 a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8
- a=EUspDBNiAAAA:8 a=_otmzqF8z_TApCbmGAUA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=gowsoOTTUOVcmtlkKump:22 a=NEAV23lmAAAA:8 a=PYnjg3YJAAAA:8 a=Q4-j1AaZAAAA:8
+ a=pGLkceISAAAA:8 a=VTTltBjBAAAA:8 a=EUspDBNiAAAA:8 a=3ffmNBvFq6SQ1JR6rgMA:9
+ a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=on_vo79ac8RWgsiwd8Ea:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA2MDA1MSBTYWx0ZWRfX/Wk48GC1QbA2
+ atCQqHL+lEzk6+pau9eg4JhAckOHeVRPrxZEBogZefT7qrMs27ZQnsmnnjo7WwNGWab3A7fokND
+ /Y7IlAuk430jhG+1bwy0uTEddwZ4YhMptHbOa/Lek2zUgwvoXXzgSirwlzqOItqr7C8G8z17YWo
+ ogBOhWfNY6ggwDwHbjAYe8sIrGYDhd7cZmQeFKQs+waZkQD5d4goE2QozIt1zN/L3qynyz9/yR4
+ kuHJHwy8leqr91af/imKaWrZgR5WdxyiNlC6kEi9bSXwxGcWcRGFhei2UrD6ZnJpDMKoTkOgR/w
+ b0eTW2XRbLDondHYoHugGnWBRrlPHenj+Z/YVU0E9bEofsSaQCDeI252yAogmu41wAYM/l708FY
+ 7lKL9TSXZ+NZjWuszZ9JJZjQxbtEEetDGi/WrsnKfs/CMO5R7EZcafT+ozvXV++Il5lVRN+TTPL
+ e+s8/ISW4xsAoboMoAQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-06_01,2026-03-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 adultscore=0 spamscore=0
- impostorscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 suspectscore=0 adultscore=0 bulkscore=0 priorityscore=1501
+ phishscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603060041
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603060051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 04:41:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124897
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 05:32:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124898
 
-This doesn't apply. Can you please check?
-
-On Fri, Mar 6, 2026 at 3:25=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
+On Wed, Feb 25, 2026 at 2:54=E2=80=AFAM Ankur Tyagi via lists.openembedded.=
+org
+<ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> There are a number of CVEs which are tracked by NVD with insufficient
-> version information, but are aleady fixed.
+> From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 >
-> CVE-2026-0797[1][2], CVE-2026-2044[3], CVE-2026-2045[4], CVE-2026-2047[5]
-> CVE-2026-2048[6]
+> Backport changes from PR[1] mentioned in nvd[2]
 >
-> [1]: https://gitlab.gnome.org/GNOME/gimp/-/commit/13849c5a9a65c2366c47f70=
-3d9d075e4bfb83525
-> [2]: https://gitlab.gnome.org/GNOME/gimp/-/commit/ca449c745d58daa3f4b1ed4=
-c2030d35d401a009d
-> [3]: https://gitlab.gnome.org/GNOME/gimp/-/commit/3b5f9ec2b4c03cf4a51a541=
-4f2793844c26747e5
-> [4]: https://gitlab.gnome.org/GNOME/gimp/-/commit/bb896f67942557658b3fbfc=
-67a1c073775c002c7
-> [5]: https://gitlab.gnome.org/GNOME/gimp/-/commit/5873e16f80cf4152d25a4c8=
-6b08553008a331e90
-> [6]: https://gitlab.gnome.org/GNOME/gimp/-/commit/fa69ac5ec5692f675de5c50=
-a6df758f7d3e45117
+> [1] https://github.com/wolfSSL/wolfssl/pull/9148
+> [2] https://nvd.nist.gov/vuln/detail/CVE-2025-13912
 >
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+> Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 > ---
->  meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  .../wolfssl/files/CVE-2025-13912.patch        | 439 ++++++++++++++++++
+>  .../wolfssl/wolfssl_5.8.0.bb                  |   1 +
+>  2 files changed, 440 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CV=
+E-2025-13912.patch
 >
-> diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb b/meta-gnome/reci=
-pes-gimp/gimp/gimp_3.0.8.bb
-> index 860fb5d26b..b22eb3a1d3 100644
-> --- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-> +++ b/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-> @@ -135,4 +135,8 @@ RDEPENDS:${PN} =3D "mypaint-brushes-1.0 glib-networki=
-ng python3-pygobject"
->
->  CVE_STATUS[CVE-2007-3741] =3D "not-applicable-platform: This only applie=
-s for Mandriva Linux"
->  CVE_STATUS[CVE-2025-8672] =3D "not-applicable-config: the vulnerability =
-only affects MacOS"
-> -CVE_STATUS[CVE-2025-15059] =3D "fixed-version: The issue is fixed since =
-v3.0.8"
+> diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-=
+13912.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-1=
+3912.patch
+> new file mode 100644
+> index 0000000000..32252058f7
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2025-13912.p=
+atch
+> @@ -0,0 +1,439 @@
+> +From 797e0e7abf5830d515ca838201c03a47f83356b0 Mon Sep 17 00:00:00 2001
+> +From: Daniel Pouzzner <douzzer@wolfssl.com>
+> +Date: Tue, 30 Sep 2025 20:35:52 -0500
+> +Subject: [PATCH] Merge pull request #9148 from SparkiDev/ct_volatile
 > +
-> +CVE_STATUS_GROUPS +=3D "CVE_STATUS_FIXED_IN_308"
-> +CVE_STATUS_FIXED_IN_308[status] =3D "fixed-version: The issue is fixed s=
-ince v3.0.8"
-> +CVE_STATUS_FIXED_IN_308 =3D "CVE-2025-15059 CVE-2026-0797 CVE-2026-2044 =
-CVE-2026-2045 \
-> +    CVE-2026-2047 CVE-2026-2048"
+> +Mark variables as volatile
+> +
+> +CVE: CVE-2025-13912
+> +Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/234=
+ba7780ad3b7c8c1509973accdc43ed6c328b3]
+> +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+> +---
+> + src/internal.c         | 25 ++++++++++++---------
+> + src/tls.c              |  8 +++++--
+> + wolfcrypt/src/aes.c    |  4 ++--
+> + wolfcrypt/src/ecc.c    |  8 +++----
+> + wolfcrypt/src/misc.c   |  4 ++--
+> + wolfcrypt/src/rsa.c    | 18 +++++++++------
+> + wolfcrypt/src/sp_int.c | 51 ++++++++++++++++++++++--------------------
+
+This seems to be missing a few more volatile related changes when
+compared to the patch mentioned above. Did you skip those on purpose?
+
+> + 7 files changed, 67 insertions(+), 51 deletions(-)
+> +
+> +diff --git a/src/internal.c b/src/internal.c
+> +index eb2f16d63..6b3a227bc 100644
+> +--- a/src/internal.c
+> ++++ b/src/internal.c
+> +@@ -20887,7 +20887,7 @@ static byte MaskPadding(const byte* data, int sz=
+, int macSz)
+> +         checkSz =3D TLS_MAX_PAD_SZ;
+> +
+> +     for (i =3D 0; i < checkSz; i++) {
+> +-        byte mask =3D ctMaskLTE(i, paddingSz);
+> ++        volatile byte mask =3D ctMaskLTE(i, paddingSz);
+> +         good |=3D mask & (data[sz - 1 - i] ^ paddingSz);
+> +     }
+> +
+> +@@ -20907,16 +20907,21 @@ static byte MaskPadding(const byte* data, int =
+sz, int macSz)
+> + static byte MaskMac(const byte* data, int sz, int macSz, byte* expMac)
+> + {
+> +     int i, j;
+> +-    unsigned char mac[WC_MAX_DIGEST_SIZE];
+> +-    int scanStart =3D sz - 1 - TLS_MAX_PAD_SZ - macSz;
+> +-    int macEnd =3D sz - 1 - data[sz - 1];
+> +-    int macStart =3D macEnd - macSz;
+> +     int r =3D 0;
+> +-    unsigned char started, notEnded;
+> ++    unsigned char mac[WC_MAX_DIGEST_SIZE];
+> ++    volatile int scanStart =3D sz - 1 - TLS_MAX_PAD_SZ - macSz;
+> ++    volatile int macEnd =3D sz - 1 - data[sz - 1];
+> ++    volatile int macStart =3D macEnd - macSz;
+> ++    volatile int maskScanStart;
+> ++    volatile int maskMacStart;
+> ++    volatile unsigned char started;
+> ++    volatile unsigned char notEnded;
+> +     unsigned char good =3D 0;
+> +
+> +-    scanStart &=3D ctMaskIntGTE(scanStart, 0);
+> +-    macStart &=3D ctMaskIntGTE(macStart, 0);
+> ++    maskScanStart =3D ctMaskIntGTE(scanStart, 0);
+> ++    maskMacStart =3D ctMaskIntGTE(macStart, 0);
+> ++    scanStart &=3D maskScanStart;
+> ++    macStart &=3D maskMacStart;
+> +
+> +     /* Div on Intel has different speeds depending on value.
+> +      * Use a bitwise AND or mod a specific value (converted to mul). */
+> +@@ -41636,7 +41641,7 @@ static int DefTicketEncCb(WOLFSSL* ssl, byte key=
+_name[WOLFSSL_TICKET_NAME_SZ],
+> +                     case rsa_kea:
+> +                     {
+> +                         RsaKey* key =3D (RsaKey*)ssl->hsKey;
+> +-                        int lenErrMask;
+> ++                        volatile int lenErrMask;
+> +
+> +                         ret =3D RsaDec(ssl,
+> +                             input + args->idx,
+> +@@ -41850,7 +41855,7 @@ static int DefTicketEncCb(WOLFSSL* ssl, byte key=
+_name[WOLFSSL_TICKET_NAME_SZ],
+> +                     case rsa_kea:
+> +                     {
+> +                         byte *tmpRsa;
+> +-                        byte mask;
+> ++                        volatile byte mask;
+> +
+> +                         /* Add the signature length to idx */
+> +                         args->idx +=3D args->length;
+> +diff --git a/src/tls.c b/src/tls.c
+> +index 6ad21c924..4f57ea938 100644
+> +--- a/src/tls.c
+> ++++ b/src/tls.c
+> +@@ -944,7 +944,10 @@ static int Hmac_UpdateFinal_CT(Hmac* hmac, byte* di=
+gest, const byte* in,
+> +     unsigned int k;
+> +     int          blockBits, blockMask;
+> +     int          lastBlockLen, extraLen, eocIndex;
+> +-    int          blocks, safeBlocks, lenBlock, eocBlock;
+> ++    int          blocks;
+> ++    int          safeBlocks;
+> ++    int          lenBlock;
+> ++    int          eocBlock;
+> +     word32       maxLen;
+> +     int          blockSz, padSz;
+> +     int          ret;
+> +@@ -1054,7 +1057,8 @@ static int Hmac_UpdateFinal_CT(Hmac* hmac, byte* d=
+igest, const byte* in,
+> +
+> +         for (j =3D 0; j < blockSz; j++) {
+> +             unsigned char atEoc =3D ctMaskEq(j, eocIndex) & isEocBlock;
+> +-            unsigned char pastEoc =3D ctMaskGT(j, eocIndex) & isEocBloc=
+k;
+> ++            volatile unsigned char maskPastEoc =3D ctMaskGT(j, eocIndex=
+);
+> ++            volatile unsigned char pastEoc =3D maskPastEoc & isEocBlock=
+;
+> +             unsigned char b =3D 0;
+> +
+> +             if (k < headerSz)
+> +diff --git a/wolfcrypt/src/aes.c b/wolfcrypt/src/aes.c
+> +index 6e7f104dd..2cf7c695e 100644
+> +--- a/wolfcrypt/src/aes.c
+> ++++ b/wolfcrypt/src/aes.c
+> +@@ -6577,7 +6577,7 @@ static WC_INLINE void RIGHTSHIFTX(byte* x)
+> + {
+> +     int i;
+> +     int carryIn =3D 0;
+> +-    byte borrow =3D (byte)((0x00U - (x[15] & 0x01U)) & 0xE1U);
+> ++    volatile byte borrow =3D (byte)((0x00U - (x[15] & 0x01U)) & 0xE1U);
+> +
+> +     for (i =3D 0; i < WC_AES_BLOCK_SIZE; i++) {
+> +         int carryOut =3D (x[i] & 0x01) << 7;
+> +@@ -9113,7 +9113,7 @@ int WARN_UNUSED_RESULT AES_GCM_decrypt_C(
+> +     ALIGN16 byte scratch[WC_AES_BLOCK_SIZE];
+> +     ALIGN16 byte Tprime[WC_AES_BLOCK_SIZE];
+> +     ALIGN16 byte EKY0[WC_AES_BLOCK_SIZE];
+> +-    sword32 res;
+> ++    volatile sword32 res;
+> +
+> +     if (ivSz =3D=3D GCM_NONCE_MID_SZ) {
+> +         /* Counter is IV with bottom 4 bytes set to: 0x00,0x00,0x00,0x0=
+1. */
+> +diff --git a/wolfcrypt/src/ecc.c b/wolfcrypt/src/ecc.c
+> +index 6d4cd4de7..1fd30cfd9 100644
+> +--- a/wolfcrypt/src/ecc.c
+> ++++ b/wolfcrypt/src/ecc.c
+> +@@ -3166,7 +3166,7 @@ static int ecc_mulmod(const mp_int* k, ecc_point* =
+P, ecc_point* Q,
+> +     ecc_point** R, mp_int* a, mp_int* modulus, mp_digit mp, WC_RNG* rng=
+)
+> + {
+> +     int      err =3D MP_OKAY;
+> +-    int      bytes =3D (mp_count_bits(modulus) + 7) / 8;
+> ++    int      bytes =3D (mp_count_bits(modulus) + 7) >> 3;
+> +     int      i;
+> +     int      j =3D 1;
+> +     int      cnt =3D DIGIT_BIT;
+> +@@ -3406,7 +3406,7 @@ static int ecc_mulmod(const mp_int* k, ecc_point* =
+P, ecc_point* Q,
+> +     ecc_point** R, mp_int* a, mp_int* modulus, mp_digit mp, WC_RNG* rng=
+)
+> + {
+> +     int          err =3D MP_OKAY;
+> +-    int          bytes =3D (mp_count_bits(modulus) + 7) / 8;
+> ++    int          bytes =3D (mp_count_bits(modulus) + 7) >> 3;
+> +     int          i;
+> +     int          j =3D 1;
+> +     int          cnt;
+> +@@ -4450,7 +4450,7 @@ int wc_ecc_get_curve_id_from_params(int fieldSize,
+> +         Gx =3D=3D NULL || Gy =3D=3D NULL)
+> +         return BAD_FUNC_ARG;
+> +
+> +-    curveSz =3D (fieldSize + 1) / 8;    /* round up */
+> ++    curveSz =3D (fieldSize + 1) >> 3;    /* round up */
+> +
+> +     for (idx =3D 0; ecc_sets[idx].size !=3D 0; idx++) {
+> +         if (curveSz =3D=3D ecc_sets[idx].size) {
+> +@@ -11922,7 +11922,7 @@ int wc_ecc_sig_size(const ecc_key* key)
+> +     keySz =3D key->dp->size;
+> +     orderBits =3D wc_ecc_get_curve_order_bit_count(key->dp);
+> +     if (orderBits > keySz * 8) {
+> +-        keySz =3D (orderBits + 7) / 8;
+> ++        keySz =3D (orderBits + 7) >> 3;
+> +     }
+> +     /* maximum possible signature header size is 7 bytes */
+> +     maxSigSz =3D (keySz * 2) + SIG_HEADER_SZ;
+> +diff --git a/wolfcrypt/src/misc.c b/wolfcrypt/src/misc.c
+> +index 98b83c7ae..496b0dbcc 100644
+> +--- a/wolfcrypt/src/misc.c
+> ++++ b/wolfcrypt/src/misc.c
+> +@@ -762,7 +762,7 @@ WC_MISC_STATIC WC_INLINE void ctMaskCopy(byte mask, =
+byte* dst, byte* src,
+> +     WC_MISC_STATIC WC_INLINE word32 min(word32 a, word32 b)
+> +     {
+> + #if !defined(WOLFSSL_NO_CT_OPS) && defined(WORD64_AVAILABLE)
+> +-        word32 gte_mask =3D (word32)ctMaskWord32GTE(a, b);
+> ++        volatile word32 gte_mask =3D (word32)ctMaskWord32GTE(a, b);
+> +         return (a & ~gte_mask) | (b & gte_mask);
+> + #else /* WOLFSSL_NO_CT_OPS */
+> +         return a > b ? b : a;
+> +@@ -778,7 +778,7 @@ WC_MISC_STATIC WC_INLINE void ctMaskCopy(byte mask, =
+byte* dst, byte* src,
+> +     WC_MISC_STATIC WC_INLINE word32 max(word32 a, word32 b)
+> +     {
+> + #if !defined(WOLFSSL_NO_CT_OPS) && defined(WORD64_AVAILABLE)
+> +-        word32 gte_mask =3D (word32)ctMaskWord32GTE(a, b);
+> ++        volatile word32 gte_mask =3D (word32)ctMaskWord32GTE(a, b);
+> +         return (a & gte_mask) | (b & ~gte_mask);
+> + #else /* WOLFSSL_NO_CT_OPS */
+> +         return a > b ? a : b;
+> +diff --git a/wolfcrypt/src/rsa.c b/wolfcrypt/src/rsa.c
+> +index 94d57bd8b..acd0c04c5 100644
+> +--- a/wolfcrypt/src/rsa.c
+> ++++ b/wolfcrypt/src/rsa.c
+> +@@ -1561,11 +1561,11 @@ static int RsaUnPad_OAEP(byte *pkcsBlock, unsign=
+ed int pkcsBlockLen,
+> +                             byte* optLabel, word32 labelLen, void* heap=
+)
+> + {
+> +     word32 hLen;
+> +-    int ret;
+> ++    volatile int ret;
+> +     byte h[WC_MAX_DIGEST_SIZE]; /* max digest size */
+> +     word32 idx;
+> +     word32 i;
+> +-    word32 inc;
+> ++    volatile word32 inc;
+> +
+> + #if defined(WOLFSSL_SMALL_STACK) && !defined(WOLFSSL_NO_MALLOC)
+> +     byte* tmp  =3D NULL;
+> +@@ -1850,9 +1850,11 @@ static int RsaUnPad(const byte *pkcsBlock, unsign=
+ed int pkcsBlockLen,
+> +     }
+> + #ifndef WOLFSSL_RSA_VERIFY_ONLY
+> +     else {
+> +-        unsigned int j;
+> +-        word16 pastSep =3D 0;
+> +-        byte   invalid =3D 0;
+> ++        unsigned int    j;
+> ++        volatile word16 pastSep =3D 0;
+> ++        volatile byte   invalid =3D 0;
+> ++        volatile byte   minPad;
+> ++        volatile int    invalidMask;
+> +
+> +         i =3D 0;
+> +         /* Decrypted with private key - unpad must be constant time. */
+> +@@ -1864,7 +1866,8 @@ static int RsaUnPad(const byte *pkcsBlock, unsigne=
+d int pkcsBlockLen,
+> +         }
+> +
+> +         /* Minimum of 11 bytes of pre-message data - including leading =
+0x00. */
+> +-        invalid |=3D ctMaskLT(i, RSA_MIN_PAD_SZ);
+> ++        minPad =3D ctMaskLT(i, RSA_MIN_PAD_SZ);
+> ++        invalid |=3D minPad;
+> +         /* Must have seen separator. */
+> +         invalid |=3D (byte)~pastSep;
+> +         /* First byte must be 0x00. */
+> +@@ -1873,7 +1876,8 @@ static int RsaUnPad(const byte *pkcsBlock, unsigne=
+d int pkcsBlockLen,
+> +         invalid |=3D ctMaskNotEq(pkcsBlock[1], padValue);
+> +
+> +         *output =3D (byte *)(pkcsBlock + i);
+> +-        ret =3D ((int)-1 + (int)(invalid >> 7)) & ((int)pkcsBlockLen - =
+i);
+> ++        invalidMask =3D (int)-1 + (int)(invalid >> 7);
+> ++        ret =3D invalidMask & ((int)pkcsBlockLen - i);
+> +     }
+> + #endif
+> +
+> +diff --git a/wolfcrypt/src/sp_int.c b/wolfcrypt/src/sp_int.c
+> +index 1769840e7..0ee8aa252 100644
+> +--- a/wolfcrypt/src/sp_int.c
+> ++++ b/wolfcrypt/src/sp_int.c
+> +@@ -5502,7 +5502,7 @@ int sp_exch(sp_int* a, sp_int* b)
+> + int sp_cond_swap_ct_ex(sp_int* a, sp_int* b, int cnt, int swap, sp_int*=
+ t)
+> + {
+> +     unsigned int i;
+> +-    sp_int_digit mask =3D (sp_int_digit)0 - (sp_int_digit)swap;
+> ++    volatile sp_int_digit mask =3D (sp_int_digit)0 - (sp_int_digit)swap=
+;
+> +
+> +     /* XOR other fields in sp_int into temp - mask set when swapping. *=
+/
+> +     t->used =3D (a->used ^ b->used) & (sp_size_t)mask;
+> +@@ -5772,7 +5772,7 @@ static int _sp_cmp_ct(const sp_int* a, const sp_in=
+t* b, unsigned int n)
+> + {
+> +     int ret =3D MP_EQ;
+> +     int i;
+> +-    int mask =3D -1;
+> ++    volatile int mask =3D -1;
+> +
+> +     for (i =3D n - 1; i >=3D 0; i--) {
+> +         sp_int_digit ad =3D a->dp[i] & ((sp_int_digit)0 - (i < (int)a->=
+used));
+> +@@ -7305,7 +7305,8 @@ static void _sp_div_2(const sp_int* a, sp_int* r)
+> +
+> +     /* Shift down each word by 1 and include bottom bit of next at top.=
+ */
+> +     for (i =3D 0; i < (int)a->used - 1; i++) {
+> +-        r->dp[i] =3D (a->dp[i] >> 1) | (a->dp[i+1] << (SP_WORD_SIZE - 1=
+));
+> ++        r->dp[i]  =3D a->dp[i] >> 1;
+> ++        r->dp[i] |=3D a->dp[i+1] << (SP_WORD_SIZE - 1);
+> +     }
+> +     /* Last word only needs to be shifted down. */
+> +     r->dp[i] =3D a->dp[i] >> 1;
+> +@@ -7385,7 +7386,7 @@ int sp_div_2_mod_ct(const sp_int* a, const sp_int*=
+ m, sp_int* r)
+> +         sp_int_digit t;
+> +     #endif
+> +         /* Mask to apply to modulus. */
+> +-        sp_int_digit mask =3D (sp_int_digit)0 - (a->dp[0] & 1);
+> ++        volatile sp_int_digit mask =3D (sp_int_digit)0 - (a->dp[0] & 1)=
+;
+> +         sp_size_t i;
+> +
+> +     #if 0
+> +@@ -7396,7 +7397,7 @@ int sp_div_2_mod_ct(const sp_int* a, const sp_int*=
+ m, sp_int* r)
+> +         /* Add a to m, if a is odd, into r in constant time. */
+> +         for (i =3D 0; i < m->used; i++) {
+> +             /* Mask to apply to a - set when used value at index. */
+> +-            sp_int_digit mask_a =3D (sp_int_digit)0 - (i < a->used);
+> ++            volatile sp_int_digit mask_a =3D (sp_int_digit)0 - (i < a->=
+used);
+> +
+> +         #ifndef SQR_MUL_ASM
+> +             /* Conditionally add modulus. */
+> +@@ -8017,7 +8018,7 @@ static void sp_clamp_ct(sp_int* a)
+> + {
+> +     int i;
+> +     sp_size_t used =3D a->used;
+> +-    sp_size_t mask =3D (sp_size_t)-1;
+> ++    volatile sp_size_t mask =3D (sp_size_t)-1;
+> +
+> +     for (i =3D (int)a->used - 1; i >=3D 0; i--) {
+> + #if ((SP_WORD_SIZE =3D=3D 64) && \
+> +@@ -8066,9 +8067,9 @@ int sp_addmod_ct(const sp_int* a, const sp_int* b,=
+ const sp_int* m, sp_int* r)
+> +     sp_int_digit sh;
+> +     sp_int_digit t;
+> + #endif
+> +-    sp_int_digit mask;
+> +-    sp_int_digit mask_a =3D (sp_int_digit)-1;
+> +-    sp_int_digit mask_b =3D (sp_int_digit)-1;
+> ++    volatile sp_int_digit mask;
+> ++    volatile sp_int_digit mask_a =3D (sp_int_digit)-1;
+> ++    volatile sp_int_digit mask_b =3D (sp_int_digit)-1;
+> +     sp_size_t i;
+> +
+> +     /* Check result is as big as modulus. */
+> +@@ -8230,9 +8231,9 @@ static void _sp_submod_ct(const sp_int* a, const s=
+p_int* b, const sp_int* m,
+> +     sp_int_digit h;
+> +     sp_int_digit t;
+> + #endif
+> +-    sp_int_digit mask;
+> +-    sp_int_digit mask_a =3D (sp_int_digit)-1;
+> +-    sp_int_digit mask_b =3D (sp_int_digit)-1;
+> ++    volatile sp_int_digit mask;
+> ++    volatile sp_int_digit mask_a =3D (sp_int_digit)-1;
+> ++    volatile sp_int_digit mask_b =3D (sp_int_digit)-1;
+> +     unsigned int i;
+> +
+> +     /* In constant time, subtract b from a putting result in r. */
+> +@@ -17458,7 +17459,7 @@ static int _sp_mont_red(sp_int* a, const sp_int*=
+ m, sp_int_digit mp, int ct)
+> +         /* 1. mask =3D (1 << (NumBits(m) % WORD_SIZE)) - 1
+> +          *    Mask when last digit of modulus doesn't have highest bit =
+set.
+> +          */
+> +-        sp_int_digit mask =3D (sp_int_digit)
+> ++        volatile sp_int_digit mask =3D (sp_int_digit)
+> +             (((sp_int_digit)1 << (bits & (SP_WORD_SIZE - 1))) - 1);
+> +         /* Overflow. */
+> +         sp_int_word o =3D 0;
+> +@@ -17539,7 +17540,7 @@ static int _sp_mont_red(sp_int* a, const sp_int*=
+ m, sp_int_digit mp, int ct)
+> +     int bits;
+> +     sp_int_digit mu;
+> +     sp_int_digit o;
+> +-    sp_int_digit mask;
+> ++    volatile sp_int_digit mask;
+> +
+> + #if 0
+> +     sp_print(a, "a");
+> +@@ -18041,7 +18042,7 @@ int sp_unsigned_bin_size(const sp_int* a)
+> +     int cnt =3D 0;
+> +
+> +     if (a !=3D NULL) {
+> +-        cnt =3D (sp_count_bits(a) + 7) / 8;
+> ++        cnt =3D (sp_count_bits(a) + 7) >> 3;
+> +     }
+> +
+> +     return cnt;
+> +@@ -18265,20 +18266,22 @@ int sp_to_unsigned_bin_len_ct(const sp_int* a,=
+ byte* out, int outSz)
+> +         /* Start at the end of the buffer - least significant byte. */
+> +         int j;
+> +         unsigned int i;
+> +-        sp_int_digit mask =3D (sp_int_digit)-1;
+> ++        volatile sp_int_digit mask =3D (sp_int_digit)-1;
+> +         sp_int_digit d;
+> +
+> +         /* Put each digit in. */
+> +         i =3D 0;
+> +         for (j =3D outSz - 1; j >=3D 0; ) {
+> +             unsigned int b;
+> ++            volatile unsigned int notFull =3D (i < (unsigned int)a->use=
+d - 1);
+> ++
+> +             d =3D a->dp[i];
+> +             /* Place each byte of a digit into the buffer. */
+> +             for (b =3D 0; (j >=3D 0) && (b < SP_WORD_SIZEOF); b++) {
+> +                 out[j--] =3D (byte)(d & mask);
+> +                 d >>=3D 8;
+> +             }
+> +-            mask &=3D (sp_int_digit)0 - (i < (unsigned int)a->used - 1)=
+;
+> ++            mask &=3D (sp_int_digit)0 - notFull;
+> +             i +=3D (unsigned int)(1 & mask);
+> +         }
+> +     }
+> +@@ -18289,7 +18292,7 @@ int sp_to_unsigned_bin_len_ct(const sp_int* a, b=
+yte* out, int outSz)
+> +     if (err =3D=3D MP_OKAY) {
+> +         unsigned int i;
+> +         int j;
+> +-        sp_int_digit mask =3D (sp_int_digit)-1;
+> ++        volatile sp_int_digit mask =3D (sp_int_digit)-1;
+> +
+> +         i =3D 0;
+> +         for (j =3D outSz - 1; j >=3D 0; j--) {
+> +@@ -18360,11 +18363,12 @@ static int _sp_read_radix_16(sp_int* a, const =
+char* in)
+> +     /* Step through string a character at a time starting at end - leas=
+t
+> +      * significant byte. */
+> +     for (i =3D (int)(XSTRLEN(in) - 1); i >=3D 0; i--) {
+> ++        volatile char c =3D in[i];
+> +         /* Convert character from hex. */
+> +-        int ch =3D (int)HexCharToByte(in[i]);
+> ++        int ch =3D (int)HexCharToByte(c);
+> +         /* Check for invalid character. */
+> +         if (ch < 0) {
+> +-            if (!eol_done && CharIsWhiteSpace(in[i]))
+> ++            if (!eol_done && CharIsWhiteSpace(c))
+> +                 continue;
+> +             err =3D MP_VAL;
+> +             break;
+> +@@ -18424,7 +18428,6 @@ static int _sp_read_radix_10(sp_int* a, const ch=
+ar* in)
+> + {
+> +     int  err =3D MP_OKAY;
+> +     int  i;
+> +-    char ch;
+> +
+> +     /* Start with a being zero. */
+> +     _sp_zero(a);
+> +@@ -18432,7 +18435,7 @@ static int _sp_read_radix_10(sp_int* a, const ch=
+ar* in)
+> +     /* Process all characters. */
+> +     for (i =3D 0; in[i] !=3D '\0'; i++) {
+> +         /* Get character. */
+> +-        ch =3D in[i];
+> ++        volatile char ch =3D in[i];
+> +         /* Check character is valid. */
+> +         if ((ch >=3D '0') && (ch <=3D '9')) {
+> +             /* Assume '0'..'9' are continuous values as characters. */
+> +@@ -18794,7 +18797,7 @@ int sp_radix_size(const sp_int* a, int radix, in=
+t* size)
+> +         }
+> +         else {
+> +             /* Count of nibbles. */
+> +-            int cnt =3D (sp_count_bits(a) + 3) / 4;
+> ++            int cnt =3D (sp_count_bits(a) + 3) >> 2;
+> +         #ifndef WC_DISABLE_RADIX_ZERO_PAD
+> +             /* Must have even number of nibbles to have complete bytes.=
+ */
+> +             if (cnt & 1) {
+> +@@ -19404,7 +19407,7 @@ static int _sp_prime_random_trials(const sp_int*=
+ a, int trials, int* result,
+> + {
+> +     int err =3D MP_OKAY;
+> +     int bits =3D sp_count_bits(a);
+> +-    word32 baseSz =3D ((word32)bits + 7) / 8;
+> ++    word32 baseSz =3D ((word32)bits + 7) >> 3;
+> +     DECL_SP_INT_ARRAY(ds, a->used + 1, 2);
+> +     DECL_SP_INT_ARRAY(d, a->used * 2 + 1, 2);
+> +
+> diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.b=
+b b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+> index af591cfd7a..9cd7c07ad2 100644
+> --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+> +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+> @@ -16,6 +16,7 @@ SRC_URI =3D " \
+>      git://github.com/wolfSSL/wolfssl.git;protocol=3Dhttps;branch=3Dmaste=
+r \
+>      file://0001-wolfssl-wolfcrypt-logging.h-and-wolfcrypt-src-loggin.pat=
+ch \
+>      file://run-ptest \
+> +    file://CVE-2025-13912.patch \
+>  "
+>
+>  SRCREV =3D "b077c81eb635392e694ccedbab8b644297ec0285"
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#124892): https://lists.openembedded.org/g/openembedde=
-d-devel/message/124892
-> Mute This Topic: https://lists.openembedded.org/mt/118158077/3616702
+> View/Reply Online (#124586): https://lists.openembedded.org/g/openembedde=
+d-devel/message/124586
+> Mute This Topic: https://lists.openembedded.org/mt/117981422/3616702
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nuj.mittal@oss.qualcomm.com]
