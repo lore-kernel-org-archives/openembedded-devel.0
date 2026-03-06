@@ -2,140 +2,129 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C76E4FCB613
-	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 15:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5BB6FCC05A
+	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 18:33:56 +0000 (UTC)
 Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.71428.1772809988606226577
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1728.1772822031019537574
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Mar 2026 07:13:08 -0800
+ Fri, 06 Mar 2026 10:33:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NhdF5pA6;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kcltdiCN;
  spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-439afc58ac7so6389113f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 07:13:08 -0800 (PST)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-439ac15f35fso6139904f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 10:33:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772809987; x=1773414787; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :to:from:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=K7vJoSBlb9SkuCKp/a6O0axCFM9o+P73M8WxwMsdbyQ=;
-        b=NhdF5pA610FG+p13+jX0+5LgFHeR/QCOOMUKO6G2Wg/in2BZU6w0vNbURUt/WLH5Y+
-         B9+LA5jkg/ugwTZswONvh5WuOreuIHYCjQ9zS4EVfSIPIggrR8MYAoYZlitqX4U8Jr4p
-         K7F3pTfv1Di2oOBTKfDdAXyjGfN219q2sraNn2fJnZrCHXd6sRSNcrpHpYXzGNV1G1Ul
-         frtsgLFHuXT0WH9miAYHi5edEhGFu5zfScR08EGSZePsEbD+J3wzrP7R6gSOn/Bjn1q7
-         8Kwq7iVoK+4vWWNjnS9mi9ZiuQae6LYvaSu0RKSto039GoIWhX7gQ0HSNKLyvesFPtvR
-         Qc4w==
+        d=gmail.com; s=20230601; t=1772822029; x=1773426829; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Z1DLqPUXEHq/zI8rYUe+khtzW/zDu+UkYSiAWZl/Tsk=;
+        b=kcltdiCNFkX00o9E6FvO8Skh1xZZxq3F28oXrzRNVmNxdqUEYq9CwDHZuah0DS91pv
+         0BJAwr9fmvOAg1Ep3Q1XXmkvpOBKcYt3Z9wdZ22voOimkxotFmtULTjZh4PvPYarS1ng
+         qFT4kMX/gM3RP2FVgLUS4ZOrRHSVI1qWWFSX4dRSP8cWSThZC8RTcKX5JfGbrolDZSSy
+         5R29Ugs9xE8Rrqz2ll1Ur4tHVrlvUGYrabH9w9rIv5JkZA9Nn5jghxGEBw2DkgB4I6cq
+         Xaj1TDgFwdfsqHurRdbI1tukllio7ZO2ZWvsGylTLWjmi6G43GqipgyTXdc9jfIcgCWN
+         OirA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772809987; x=1773414787;
-        h=content-transfer-encoding:in-reply-to:content-language:references
-         :to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=K7vJoSBlb9SkuCKp/a6O0axCFM9o+P73M8WxwMsdbyQ=;
-        b=e1id2mbUakZzNSEEEO/OvoyQWbppcZgOHAsF80f3sSdwzJKIBtVWzp4PMUEnezTEta
-         29WxyAiEgHz463vovdVfLrzsYYbDaPMSsSdZEYtETv/4EfT5LJrSXp49He1QqUNeyKQD
-         Dp5iCU5PygP2qDLIQdBHGXr/4LRX1OZBayuM9a7mWnYHLoLXaykTWFBnTXX9ReTOkTyF
-         JuvdsDYysOe7HC7pgukjjxymS837pmoV1SAbxGTmDa+fXlaL5+i4C3C0FTAS9bWfeG1Y
-         hc0Oq12AVxY2wv9z16W5IRdt7s9kbxbbvprpUbHVOwcCsr9Weuc0JFI2ZX8r+yin0Z0H
-         JcPw==
-X-Gm-Message-State: AOJu0Yyq3NquPdwXgzRzs0KhB/vp4BZEZ1kc10Xcq4O/7L1ChhaEjwWW
-	3uFSpGCk8dFS6JP1zoi5xVrIth8bN/HFglBlb5Pcb1LsTdSxReDYEwcDQra9Dw==
-X-Gm-Gg: ATEYQzy7NARUu6E8/5Lw4Edpeu5nIFBd4NdAsC5S8PcLcywj04ZHAaT5YrFAlAQUrBr
-	n+GvKsshBmV+VsTi7N3PudWbZZk92B3GKDsetIhqekuXBAS149tSCM8VweJd8ObctbmovHrsfT+
-	9RpAYI12lygRjbhBzMDpQoPT0HXEzJlVoPogS3DxUpKzy2G8YcuwIlPKKXFUJ7F91qxWmNFH5EO
-	E0HFwWjUl946lVlom98gkYmQlL4kw3qGYQFH9j6wCB7bxVRVN28B6QknYD5sPzK1f+k42/viaNf
-	q+dra5+OCPF9Xl21RNackun0jeezVVoRQ5+JV9O2C72Bw2l+HR8jeguqe1mHzLPnX8X1oWX6xbo
-	fdjc27HM3k23Zygvx8mFI9juIimMg1IQnF+lhI5tnkHcA4O+1bzaf1IhapTYzy5FcUHI/PP7CkZ
-	P7V4CtB6w6EWYhGKaKyyllVgy54FBGjaE=
-X-Received: by 2002:a05:6000:144c:b0:439:c4ea:41a0 with SMTP id ffacd0b85a97d-439da8a0402mr3781781f8f.59.1772809986812;
-        Fri, 06 Mar 2026 07:13:06 -0800 (PST)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae3d98asm5059139f8f.30.2026.03.06.07.13.06
+        d=1e100.net; s=20230601; t=1772822029; x=1773426829;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Z1DLqPUXEHq/zI8rYUe+khtzW/zDu+UkYSiAWZl/Tsk=;
+        b=gHgtEkd/cvGDdFRhGyDUq52b4BZLEg0WbkvfL1PSnm6/aLCS3nVP5oL38I28JN8zVS
+         YlLA3agg4hnxd4UygVLyIzfMpVkneO9FoZkARJA9uaO5IZ3jDj421OCSzYXCd378LbOW
+         5csprt+D5FOVn2tbwhH8STOxEdtkHwM27Am5itxYB1IcdDZ+SXcsIb+n8E14/Z+v7aZw
+         F6LlCXJGhzNQpxsBqch6ondF6tg2Kvm636rqooSZ8qjWWj5rX2ODLmXyWkliI8wL6DrJ
+         0aaKfHiIk7OfeAOoPhvUPjAwJylmrhkVGKRo3pzaVh9KMWW1bZ/k/cV0HxKr5eeAl3rO
+         csng==
+X-Gm-Message-State: AOJu0YylKRUW8CEHi3+4D0DzExjLW1lFOmibfp4ByKWSJhuFdDMmeiZc
+	UxJ9DiUeM7sIOOwHrhh/tQb9yBXfPDWVZB6494haHkkTYOKuZp/iHeEMC7QQVA==
+X-Gm-Gg: ATEYQzx7IBivrpdrtZDO4eCmtHBM9uRO3m7AKqRo/+Wa27xr+gUA9j5t+bN+hSbWvB2
+	9QhInivL4jfH/xegVCbouiL85OfZv/5VEwjeDUitlB4W+/VUFn7pwc7lt5NVsyNxbbC28YQRl07
+	1FNoJCwgmpikCOHx9P82ftBC/dZlRFS/6Jepal/o4SHe3e92xXxThtUVVGpUR7rRhEhLUE4n1PL
+	TdT0yHYMuDj07RqXeD2zpXu9xBDor2559vErj1wINfn0c1hrqv/4l+EzT9XdoNtyIyi45JnNnji
+	eaxxTZoyK7ZBQssEDgyvoPdc2hY6IIYZhhfugKHYI6dwVQHw/NOX4tqvAWtctWSoMBAnoagM+24
+	vtei35jH8rQ1XfPyx8X5O9iCsSUyQtuom9RS2GCpJopJHS5J6Xu4P3ioHfjbjvJTPkPXEF74QHs
+	pe9n24zFVmf3A/i1Pd4tWK
+X-Received: by 2002:a05:6000:2887:b0:439:b057:cb12 with SMTP id ffacd0b85a97d-439da332c4cmr5796222f8f.22.1772822029134;
+        Fri, 06 Mar 2026 10:33:49 -0800 (PST)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae4b860sm5846929f8f.36.2026.03.06.10.33.48
         for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 06 Mar 2026 07:13:06 -0800 (PST)
-Message-ID: <322eed79-db9a-414b-a09f-d6beb0478232@gmail.com>
-Date: Fri, 6 Mar 2026 16:13:05 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][whinlatter][PATCH 01/11] imagemagick: patch
- CVE-2026-24481
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 06 Mar 2026 10:33:48 -0800 (PST)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20260306150602.616834-1-skandigraun@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260306150602.616834-1-skandigraun@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: [meta-oe][whinlatter][PATCH 2/6] libheif: patch CVE-2025-68431
+Date: Fri,  6 Mar 2026 19:33:43 +0100
+Message-ID: <20260306183347.1014705-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260306183347.1014705-1-skandigraun@gmail.com>
+References: <20260306183347.1014705-1-skandigraun@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 15:13:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124916
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 18:33:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124918
 
-Grrrrr, drop this whole series... I just noticed that Whinlatter is
-using ImageMagick 7.1.2, and can be just updated... For some reason I
-was under the impression that it's using the previous version.
-Sorry for the noise.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68431
 
-On 3/6/26 16:05, Gyorgy Sarvari wrote:
-> Details: https://nvd.nist.gov/vuln/detail/CVE-2026-24481
->
-> Backport the patch that references the related Github advisory[1]
-> in its description explicitly.
->
-> [1]: https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-96pc-27rx-pr36
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  .../imagemagick/CVE-2026-24481.patch          | 25 +++++++++++++++++++
->  .../imagemagick/imagemagick_7.1.2-13.bb       |  3 ++-
->  2 files changed, 27 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
->
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
-> new file mode 100644
-> index 0000000000..3d35a3f1d6
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2026-24481.patch
-> @@ -0,0 +1,25 @@
-> +From 6778a890f95971c61a16593abc2cd15376d22cdd Mon Sep 17 00:00:00 2001
-> +From: Dirk Lemstra <dirk@lemstra.org>
-> +Date: Fri, 23 Jan 2026 13:19:06 +0100
-> +Subject: [PATCH] Initialize the pixels with empty values to prevent possible
-> + heap information disclosure (GHSA-96pc-27rx-pr36)
-> +
-> +CVE: CVE-2026-24481
-> +Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/51c9d33f4770cdcfa1a029199375d570af801c97]
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + coders/psd.c | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/coders/psd.c b/coders/psd.c
-> +index 28495c6d5..bb4ceecd6 100644
-> +--- a/coders/psd.c
-> ++++ b/coders/psd.c
-> +@@ -1334,6 +1334,7 @@ static MagickBooleanType ReadPSDChannelZip(Image *image,
-> +       ThrowBinaryException(ResourceLimitError,"MemoryAllocationFailed",
-> +         image->filename);
-> +     }
-> ++  memset(pixels,0,count*sizeof(*pixels));
-> +   if (ReadBlob(image,compact_size,compact_pixels) != (ssize_t) compact_size)
-> +     {
-> +       pixels=(unsigned char *) RelinquishMagickMemory(pixels);
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-> index e3f4a96d6f..adf65880b6 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-13.bb
-> @@ -15,7 +15,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>([0-9][\.|_|-]?)+)"
->  SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=https;tag=${PV} \
->             file://run-ptest \
->             file://imagemagick-ptest.sh \
-> -"
-> +           file://CVE-2026-24481.patch \
-> +           "
->  
->  SRCREV = "dd991e286b96918917a3392d6dc3ffc0e6907a4e"
->  
+Backport the patch referenced by the NVD advisory.
 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../libheif/libheif/CVE-2025-68431.patch      | 26 +++++++++++++++++++
+ .../libheif/libheif_1.20.2.bb                 |  4 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/libheif/libheif/CVE-2025-68431.patch
+
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif/CVE-2025-68431.patch b/meta-multimedia/recipes-multimedia/libheif/libheif/CVE-2025-68431.patch
+new file mode 100644
+index 0000000000..829d94c113
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif/CVE-2025-68431.patch
+@@ -0,0 +1,26 @@
++From 6747399f04736d9bc59e36befae2946c448553a5 Mon Sep 17 00:00:00 2001
++From: Dirk Farin <dirk.farin@gmail.com>
++Date: Tue, 11 Nov 2025 19:47:50 +0100
++Subject: [PATCH] fix wrong copy width in overlay images (thanks to Aldo
++ Ristori for reporting this)
++
++CVE: CVE-2025-68431
++Upstream-Status: Backport [https://github.com/strukturag/libheif/commit/b8c12a7b70f46c9516711a988483bed377b78d46]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ libheif/pixelimage.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libheif/pixelimage.cc b/libheif/pixelimage.cc
++index b46aaf06..d147f66e 100644
++--- a/libheif/pixelimage.cc
+++++ b/libheif/pixelimage.cc
++@@ -1348,7 +1348,7 @@ Error HeifPixelImage::overlay(std::shared_ptr<HeifPixelImage>& overlay, int32_t
++       if (!has_alpha) {
++         memcpy(out_p + out_x0 + (out_y0 + y - in_y0) * out_stride,
++                in_p + in_x0 + y * in_stride,
++-               in_w - in_x0);
+++               in_w);
++       }
++       else {
++         for (uint32_t x = in_x0; x < in_w; x++) {
+diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb
+index b268b37d8e..b9083ddd23 100644
+--- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb
++++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb
+@@ -6,7 +6,9 @@ LICENSE_FLAGS = "commercial"
+ 
+ COMPATIBLE_MACHINE:powerpc64le = "null"
+ 
+-SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases"
++SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases \
++           file://CVE-2025-68431.patch \
++           "
+ 
+ SRCREV = "35dad50a9145332a7bfdf1ff6aef6801fb613d68"
+ 
 
