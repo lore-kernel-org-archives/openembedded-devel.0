@@ -1,150 +1,139 @@
-Return-Path: <max.oss.09@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1807FCB624
-	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 22:59:07 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.207.1772837937491067413
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B2B29FCB638
+	for <webhook@archiver.kernel.org>; Fri,  6 Mar 2026 23:21:47 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.108.1772834473605034497
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Mar 2026 14:58:57 -0800
+ Fri, 06 Mar 2026 14:01:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XuJCdOvY;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: max.oss.09@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-439aeed8a5bso6847715f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 14:58:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fSWmr0r7;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: gitbeam@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-b936b85cc71so1228002366b.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 14:01:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772837936; x=1773442736; darn=lists.openembedded.org;
-        h=content-transfer-encoding:fehler:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JPD09PceR9ZEZElECI/283BmvCkrKd6sW8S82lBghnM=;
-        b=XuJCdOvYQpLdHb6/xJGxnmlkm2MzmMhvmU/qQaBWAHLgmFsTnAr0p9x2sP/wRmN40b
-         qg6u3QqTUXYKLZVeRiWjVoQreWttqjdaS7ZHe5ywEw3+edTlShP3U3091Z/4QWtJGaUy
-         B3+2X+xrlZ9W4MCBqC3BTJRPiJhasUsxVk9e6cxTSoF/mqPx5J6ZVdqepv0CpYDpEXL7
-         qLFb+6SxaGVaJRLHeeEUByoo2UJRy7GmRRbHjn2L4DblByUf5hDwLm6xy91WLfK9bkGd
-         6vSHBZmBqfISnfiQJHVnf9zvjqewIcKa4me9vnJI6YnwsTsu5fyeMb9Rz7YamHD+uw+S
-         sBWQ==
+        d=gmail.com; s=20230601; t=1772834472; x=1773439272; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NBD53rh8/s3UgsMJCJ5cTfv0luucue5tDTdxU50CWhE=;
+        b=fSWmr0r7Oadkb7JyQplhn2SXL/X1776ljJW2mzV7F2TCPd5OMeMDO0BV+9EWWzAVtp
+         wNnkgSDWoA5bg9kP595Jh69aLE6xq3W/ukC9mDeJCOH7denRID1rzXFM5QxbgOIHLVD1
+         tRldE81lPvaL51//hXTiqlZssP3xx6LmDl5Yqo6KMjpUm1g44tr+2nOc8Xew4HddofFD
+         8kTb8i3araorMiqBNLxB521R+Zxz8sGhBVA5J4Bdn48bq0yZezZpiz4quZCvED2c1pAz
+         nPMCzHWuSPUfCMtOl/OkjGwfk0mtz1tVAH2XJSgh4UscsYrriapvU4fLMQbETfYAw+Eb
+         6ivg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772837936; x=1773442736;
-        h=content-transfer-encoding:fehler:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=JPD09PceR9ZEZElECI/283BmvCkrKd6sW8S82lBghnM=;
-        b=RMDi4MdWFHCX17FVIs2FF7QTWHLG14X6jzNgR/rkY0MxT5FGG/yOgY4bv2glYuPpgX
-         R5AKy8xIb3nfkn2xoE6foWUKDFUAu3UBOuLkh6sB1tc1xUXMbx9Z7TM1TA4+KEAE0dPi
-         BEgVBmLzOaEQ2ydHrIsXKuiRRB86NQj/NtAx9bV+D+xBJXQ9xckdtHTHRTIY23aXm/VE
-         PJ6EcqALcgsmvX7eenkSNpCrJ9NsnwaNg6jKUA8K5vnNNzAXtzr5rWATt7taH9kPFIdV
-         CsUAjYImBFCvmkw7zfpEE3QYUBXqn3SKjdvugo8LmRBJXQ/PuL6i2nC1zTiszRukEKcr
-         q2Aw==
-X-Gm-Message-State: AOJu0YztLibObG2SigQHSvV5xQGO0tqjfbvdupCS2OGQ2enRaiNrSimB
-	/QLMUTEmMz9mox7G93CgkUaTIXiAelsRwI+YhjB/TlKwwk3K5QAU1T2AYNF+ag==
-X-Gm-Gg: ATEYQzzefhavYrJtdTJjXdYa65vdyRRwsyOL2uHVmhhtfgqlnJJAF/HHNWqVNzPFEiH
-	zN2pWvxRcQTbb6+OJM+8jgEfwmHVyNuyGeLMi3Cc9cFAtxEoeT0MiPfsQ6nZOCuotJJ9R5Gwes0
-	405hL0Phhab3nqD6cwWnCr65+LMgrQVQ9YQu5VsRMUvomrH3WSmyc6XfsBIatPoXkn0gKX4/HFs
-	6uIHbcWhdpsEwXXDq2blLsV/deBTuMMSGIdJx9nQKxHoEaHxMQDRcRLaZflJBkXaPtzdEkxkyCC
-	p7KlKD1VQcEhxZn5N+tmFA1g0vN5gw4WmiYps6XR0pXVirTAjG8kGraoViiaNz2q4Xo9XLuKUg0
-	Dnkdcf1HphUFCodV13f9JVpsfyIGp0SpabFt4h1W6nXUooDqG5m/0cZkzzBz2DzlCfPyUkPxAjU
-	Qf/MW3YLKnEMw4PZDBGSzA34AD
-X-Received: by 2002:a5d:5d0d:0:b0:439:cd10:a1f9 with SMTP id ffacd0b85a97d-439da89ee26mr6525964f8f.54.1772837935386;
-        Fri, 06 Mar 2026 14:58:55 -0800 (PST)
-Received: from Saturn.local ([81.221.206.143])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad8d968sm6736073f8f.6.2026.03.06.14.58.54
+        d=1e100.net; s=20230601; t=1772834472; x=1773439272;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=NBD53rh8/s3UgsMJCJ5cTfv0luucue5tDTdxU50CWhE=;
+        b=frUSnQZCeEJmAl62KvwvmC5+Lw0BxHDWA3M3TOqxSDltKgCuOlYLbhbvmaQF/mkq6v
+         HUucVCjoeWRB+gd7EFa77T435W0QmQAsdAtfVLiVgdRAGQ24SBPLeC+jvMLsolAtPaiR
+         fOqY0ZjZzI6guvJ6fTCjf/87lxAUUBvT7zujvSM/l5RsimICorZTby0cn1r6HgQiIN3q
+         QPAK38U+rGw8+6vPKkxC0M/sip1UT36QNMnINPbLh38UOg8GzAdwNleaS2j5vjwrUmaD
+         z5PufYT2GfDt8bdlEkermMO3+PnGH4Cy61b6uC0/lj7mG6gd4UKgZoGFzDt8DsxD1c26
+         2dMw==
+X-Gm-Message-State: AOJu0Yy4mmI4cjm7IIeLxWFJIB2NztAlVjTGUGxExpLGW167srnTmNsw
+	qs52/B3tZ+NnTatxCJu73AzgParrwUOpmET69ny0dYEImuI0o1waZELAkgMoMqy8JD0=
+X-Gm-Gg: ATEYQzxbVyHWB3fR3NaFc5MOUrYYdme1kqTByLJa6jvZdN9Ozk7w17iwOfj3mVDUVu2
+	td3AIfYYXuSAmESYWWAqHU3wikdBLxyDgR18PZ7XQizO6Ej5K45fCzb2WlkBbR+IjgEnvu1+jaK
+	jcKfYzYU1GDOetfzPvNV/MET7AGc7JbpheWrYghk586eMwuLhPfwZyKQTiPP8ZIzpTOg52syzey
+	edT+wGxwg5xCHYEkJ2NSW6kidM4crjU2UcHIEJFIpj9aa1bYbackt3r27nqtlBLd77S4GSzc6aH
+	vSx3pSDhyHgTO2/3VrcxfuSTznywMbnq0YCKPmkoRqYnPaP9NsIqUMxP1LJs36CcmsrlI+5d6ap
+	SZiKNII2PpMy3qfqULJfSe4Sf9Fz4mJ9ApY8DYgLhNBu6sSjIhMrUGjg4issqJIezn6cZZD0sc+
+	DJNk7TQby2ErcakpiA+nLQfBUCSQUInRrF0rp5qUfI3HCwc6icwM4tuFlrOZqLL0cpb/GoxdErp
+	Vdqir1G8rz2M3wKiPbisuD6XAKxB6GumvijaiXhHAKaxb5aDhj4tOQZgRYvhmSSHunNeg==
+X-Received: by 2002:a05:600c:3acf:b0:483:6f37:1b33 with SMTP id 5b1f17b1804b1-48526978d48mr63590745e9.30.1772834161429;
+        Fri, 06 Mar 2026 13:56:01 -0800 (PST)
+Received: from DESKTOP-SJHFTAC.localdomain (dynamic-002-241-244-157.2.241.pool.telefonica.de. [2.241.244.157])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48523803b5fsm27000055e9.7.2026.03.06.13.56.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Mar 2026 14:58:55 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
+        Fri, 06 Mar 2026 13:56:01 -0800 (PST)
+From: G B <gitbeam@gmail.com>
+X-Google-Original-From: G B <gitbeam@proton.me>
 To: openembedded-devel@lists.openembedded.org
-Cc: Max Krummenacher <max.oss.09@gmail.com>
-Subject: [meta-oe][PATCH] fio: fix musl builds
-Date: Fri,  6 Mar 2026 23:57:37 +0100
-Message-ID: <20260306225737.2557642-1-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.51.0
+Cc: G B <gitbeam@proton.me>
+Subject: [meta-oe][PATCH] ntpsec: upgrade 1.2.2a -> 1.2.4
+Date: Fri,  6 Mar 2026 22:55:35 +0100
+Message-ID: <20260306215535.6619-1-gitbeam@proton.me>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Fehler: No word lists can be found for the language "de_CH".
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 22:59:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124923
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Mar 2026 23:21:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124924
 
-fio 3.40 added the commit 4175f4dbec5d ("oslib: blkzoned: add
-blkzoned_move_zone_wp() helper function") which uses
-FALLOC_FL_ZERO_RANGE which in a musl build is undefined without
-including its header.
+Upgrade to latest upstream release 1.2.4.
 
-Backport the upstream fix.
+Release notes: https://blog.ntpsec.org/2025/04/18/version-1.2.4.html
 
-Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+Signed-off-by: G B <gitbeam@proton.me>
 ---
+ .../{ntpsec_1.2.2a.bb => ntpsec_1.2.4.bb}     | 20 +++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-support/ntpsec/{ntpsec_1.2.2a.bb => ntpsec_1.2.4.bb} (86%)
 
-With the patch applied a musl build now succeeds, a glibc build still succeeds.
-
- .../fio/fio/0001-fix-musl-builds.patch        | 38 +++++++++++++++++++
- meta-oe/recipes-benchmark/fio/fio_3.41.bb     |  5 ++-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/fio/fio/0001-fix-musl-builds.patch
-
-diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-fix-musl-builds.patch b/meta-oe/recipes-benchmark/fio/fio/0001-fix-musl-builds.patch
-new file mode 100644
-index 000000000000..6c0d69d6e8a3
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/fio/fio/0001-fix-musl-builds.patch
-@@ -0,0 +1,38 @@
-+From ccce76d2850d6e52da3d7986c950af068fbfe0fd Mon Sep 17 00:00:00 2001
-+From: Arthur Gautier <arthur.gautier@arista.com>
-+Date: Sat, 13 Dec 2025 20:07:11 -0800
-+Subject: [PATCH] fix musl builds
-+
-+This commit fixes the build on musl which fails with the following
-+error:
-+```
-+oslib/linux-blkzoned.c: In function 'blkzoned_move_zone_wp':
-+oslib/linux-blkzoned.c:389:37: error: 'FALLOC_FL_ZERO_RANGE' undeclared (first use in this function)
-+  389 |                 ret = fallocate(fd, FALLOC_FL_ZERO_RANGE, z->wp, length);
-+      |                                     ^~~~~~~~~~~~~~~~~~~~
-+oslib/linux-blkzoned.c:389:37: note: each undeclared identifier is reported only once for each function it appears in
-+make: *** [Makefile:501: oslib/linux-blkzoned.o] Error 1
-+make: *** Waiting for unfinished jobs....
-+```
-+
-+Upstream-Status: Backport [https://github.com/axboe/fio/commit/ccce76d2850d6e52da3d7986c950af068fbfe0fd]
-+Signed-off-by: Arthur Gautier <arthur.gautier@arista.com>
-+---
-+ oslib/linux-blkzoned.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/oslib/linux-blkzoned.c b/oslib/linux-blkzoned.c
-+index 78e25fca..c45ef623 100644
-+--- a/oslib/linux-blkzoned.c
-++++ b/oslib/linux-blkzoned.c
-+@@ -25,6 +25,7 @@
-+ #ifndef BLKFINISHZONE
-+ #define BLKFINISHZONE _IOW(0x12, 136, struct blk_zone_range)
-+ #endif
-++#include <linux/falloc.h>
-+ 
-+ /*
-+  * If the uapi headers installed on the system lacks zone capacity support,
-+-- 
-+2.51.0
-+
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.41.bb b/meta-oe/recipes-benchmark/fio/fio_3.41.bb
-index 494a4eb3d7ed..3f03c41f220b 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.41.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.41.bb
-@@ -22,7 +22,10 @@ PACKAGECONFIG_NUMA:armeb = ""
- PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
- PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+similarity index 86%
+rename from meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
+rename to meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+index 872d1ce4f7..9704e2d15e 100644
+--- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.2a.bb
++++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+@@ -2,12 +2,12 @@ SUMMARY = "The Network Time Protocol suite, refactored"
+ HOMEPAGE = "https://www.ntpsec.org/"
  
--SRC_URI = "git://git.kernel.dk/fio.git;branch=master;tag=${BP}"
-+SRC_URI = " \
-+    git://git.kernel.dk/fio.git;branch=master;tag=${BP} \
-+    file://0001-fix-musl-builds.patch \
-+"
- SRCREV = "ed675d3477a70a42d2e757b713f6c7125a27cdca"
+ LICENSE = "CC-BY-4.0 & BSD-2-Clause & NTP & BSD-3-Clause & MIT"
+-LIC_FILES_CHKSUM = "file://LICENSES/BSD-2;md5=653830da7b770a32f6f50f6107e0b186 \
+-                    file://LICENSES/BSD-3;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
+-                    file://LICENSES/CC-BY-4.0;md5=2ab724713fdaf49e4523c4503bfd068d \
+-                    file://LICENSES/MIT;md5=5a9dfc801af3eb49df2055c9b07918b2 \
+-                    file://LICENSES/NTP;md5=cb56b7747f86157c78ca81f224806694"
+-
++LIC_FILES_CHKSUM = "file://LICENSES/BSD-2-Clause.txt;md5=653830da7b770a32f6f50f6107e0b186 \
++                    file://LICENSES/BSD-3-Clause.txt;md5=55e9dcf6a625a2dcfcda4ef6a647fbfd \
++                    file://LICENSES/CC-BY-4.0.txt;md5=2ab724713fdaf49e4523c4503bfd068d \
++                    file://LICENSES/MIT.txt;md5=5a9dfc801af3eb49df2055c9b07918b2 \
++                    file://LICENSES/NTP.txt;md5=cb56b7747f86157c78ca81f224806694"
++                    
+ DEPENDS += "bison-native \
+             openssl \
+             python3"
+@@ -17,7 +17,7 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
+            file://0001-wscript-Add-BISONFLAGS-support.patch \
+            "
  
- SRC_URI += "file://CVE-2025-10823.patch"
+-SRC_URI[sha256sum] = "e0ce93af222a0a9860e6f5a51aadba9bb5ca601d80b2aea118a62f0a3226950e"
++SRC_URI[sha256sum] = "443e54a6149d1b0bf08677d17b18fced9028b101fc2ffd2c81e0834f87eebc7d"
+ 
+ UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
+ 
+@@ -63,7 +63,6 @@ EXTRA_OECONF = "--cross-compiler='${CC}' \
+                 --pyshebang=${bindir}/python3 \
+                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
+                 --pythonarchdir=${PYTHON_SITEPACKAGES_DIR} \
+-                --enable-debug-gdb \
+                 --enable-early-droproot"
+ 
+ EXTRA_OEWAF_BUILD ?= "-v"
+@@ -89,6 +88,11 @@ do_install:append() {
+ 	else
+ 		install -D -m 0644 ${T}/volatiles.ntpsec ${D}${sysconfdir}/default/volatiles/99_${BPN}
+ 	fi
++
++    if [ -d ${D}/usr/lib64 ]; then
++        mv ${D}/usr/lib64/* ${D}${libdir}/
++        rmdir ${D}/usr/lib64
++    fi
+ }
+ 
+ PACKAGE_BEFORE_PN = "${PN}-python ${PN}-utils ${PN}-viz"
 -- 
-2.51.0
+2.47.3
 
 
