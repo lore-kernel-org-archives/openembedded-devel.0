@@ -2,87 +2,138 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C065EA853D
-	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 17:57:55 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.44440.1772992665597215666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 382DEEA853E
+	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 17:58:35 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44456.1772992705203742207
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Mar 2026 10:57:45 -0700
+ Sun, 08 Mar 2026 10:58:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G+4x6n3g;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-439b790af67so4369581f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 10:57:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bbca64tK;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-48334ee0aeaso88352025e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 10:58:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772992664; x=1773597464; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772992703; x=1773597503; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=y85/o8lCidNJHLlaXNTU0nmBNwfXJudFD1ENMAWKFfs=;
-        b=G+4x6n3gzGGyQqdtd2qk7ZdaoyS/wRLgM62Xmu0xMapFOV30uNOYGY98hkzOVCGfKH
-         EdUo5bFCjByDtE/mIPSX8D3ToAErNzaWSe6bXq7h9Li9awqwnsXY1v0AdJHcKZ8FCLdQ
-         lGLw3bDsULUOjPE666/p+VSy9JAZkrGlV1ib1nA85ncQkOKZDylpFgkfBWf4+dbu8pW1
-         AXaNc+fjSod55vbwSXfdsFvxDMymP+mMMcJJwJk5aLZcEht0P9YWT6SYmP7/JVPn5vxS
-         x/ECgQCdpQOgtzvbU1MhsGTJ04nHQLUg22Hm56BKGZXUJLhpgSj6FiCXRuPh23g0qtT6
-         vhHg==
+        bh=eAnG35ul8NdwE+/gyQ56izL9EtZVv1ny4xo0WHOQP1s=;
+        b=bbca64tKr/yrxTI8N9SI7QFkYYrZ5+XYrvish66IYz/RLV70fyY4HdlTAWkbDb3upp
+         g99MJo+7uTtqAZ9em0Lakok4wboYrRfgKF4cXNL5egmHgVZgXXXwMjA1kyRJUQcy+NjZ
+         o+Nlsim2yQByQdCiWlSvyjD9pTluKP7r04u0+AK9Vol7TLLc0w/WbeWNZket6VRkcUf8
+         /dEoNsdXlVbYgQnjONLlEMjuSuv08HTH9ykFy0ydR3O+mb9O8CRdlaM0KvZk8HeyQEKD
+         yPmcbsg+CTaG0W0fCm3Z0Vv4VbwWA3sIZUI3tagSQn3S496R4WYIaPkVX+/Nign+qS8J
+         YLaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772992664; x=1773597464;
+        d=1e100.net; s=20230601; t=1772992703; x=1773597503;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=y85/o8lCidNJHLlaXNTU0nmBNwfXJudFD1ENMAWKFfs=;
-        b=oRTntTSn/p/R1Xr1aQhMYaecGPbIGxGLcyw+4zSybw0ZscUyrQ3NIxEXSwcLEYuV10
-         J+NUBv4uGA6idE25I1vLoYbIktp/MSYxF/GUGV1fnToFdGfDFWXWIEGc1NdoWpQ0Woq8
-         mdf4qA4AjUF2D00jBgemi6fz7R5QKsjaxzbbBUfRE2jt13IGCjTj3hUXmKmn8x3h++KS
-         QoP74y6WNPCla6XJXijkHH3YgSYU+Rj/I3Yyk7euVdISXmaETSHhOLc3kMpt0YstaLo3
-         PMyK0rtXXf0On4ja5rrrpt6W7UYCeAGsnot+yQRg9dxhx6D3K/gy1IdK3DsUf7fSbM/b
-         HfQA==
-X-Gm-Message-State: AOJu0YxfsBhIzz80MnoRJ87XiY65GO3BA/1HrvbN/ODauqIS7FdyMBOc
-	ixTL4RfsofBy6Uio89+uFjo8qzVgNi735GErpquSzzLdENa0zpDYWM6zsNP1Vw==
-X-Gm-Gg: ATEYQzyC3t6xLtgpacR/GktfYJQrYPje/i6HX9vQYqo/jnTc9+2NoV2jnmcFm816Pmd
-	rxrVxYD2hQWBQcn5crJ0tIJ4bSGu4ZXbJqQWk+o9FltANZjO6fJR3s6cyxsoUPst8D1lvQRDM9l
-	j1yFUZt+pJRbU5Cm8RFnLlal+Esx4ySGb+bruQtpUdvmtatjUZ0B0c55hJDen3rD16ZhTJ4+IRN
-	D4fGDysGy9oKxI3RQqDRNXgVGmR44rg+f2ZYctgaJVrXTLIha1vO8DbpQ2eKLlrtSfGx600wiIb
-	MEETlOWoM/6HPL2GttqJ3fkQyfuDJeJSH57/H7VTul8xnz/y0LqJBZYuOw9idPe18iz38iXVp3t
-	fqx4o0Ov6zDOWxY2822vw4RDYladMxRJ9YJKcIo0RtZRsih1FLZ8PYpSLPWjUnX84LvBhEULJU2
-	XojeC9Ql0GFVGf6+3DzC56
-X-Received: by 2002:a05:6000:40db:b0:439:c39e:d9ed with SMTP id ffacd0b85a97d-439da3637b1mr14510251f8f.17.1772992663663;
-        Sun, 08 Mar 2026 10:57:43 -0700 (PDT)
+        bh=eAnG35ul8NdwE+/gyQ56izL9EtZVv1ny4xo0WHOQP1s=;
+        b=HHS0rZnIdLL1yiZ0a2ePrXOOg2MR1hHNFEwWrGF3w+qABM6pTgsFJ7xqt3S2vkj6Bo
+         HUYmT1tb1s5vEqgMk4lNhzqINySrzfzrRF654ZrsVDGqThLLLoNCms5UM3iAcqvNnUtg
+         zWBarCLkH2o84qgx2F1p5HJr0LonzFxudEnxS1rb+1ztCGoPJYi77au27ev4GZb42PYd
+         2B64K8zMS5+uum+owhzCf680jnU8cpPdm7WjN3/npuFTIpcPxZdtER9NvdGStG/wed4T
+         kNnhASy6ZJ55sbkXmy0tTOsKIHvWBHZQS2Eo+URYsr4Caegd0Nlv6pHVF5ZFb7bfi0dd
+         nzwA==
+X-Gm-Message-State: AOJu0Yz2JcJ/aPy4VcNhTzLMYTAH3Sc9MM0GTLiO2nzzl6kqrUL0TVfp
+	tPorp9Q5Pf2XE5PJCsbWgmaYW/xKTQdLV9BphGpl0DE40xypDSlGdu6HluWGtg==
+X-Gm-Gg: ATEYQzytZiBkUBpQSIQl7baMFvURP3rh6FIsNt6ctYzX+VCB7PMRkSQmvXBfz1SXP/K
+	420hNQPtNG7d4acUsG0oh84nwJwDa69E7hMZ6x43cGNcYvQNHaY2jEqQ9xlY5dHxWQchvX7xHci
+	SE5d4BPzbAS8CsYdXFQjYaLdANaRsRCAjwgqAq1jdCNYzXNCXsvstOAUwl5on6EsZKQekWBav7T
+	t+r4BkosFMUn5cY6F6VV0Z1h4JSFG9mjY8PtkXRD9ljSlXrCcbhqojI1wdsnS7x0/UJL4uU7gRx
+	HTwi6UYEVNSkX1PCe7e/n6ZEU8JK64uVIvSbpdAbi3BuZeKroDaLRN0DDM1JkoOMnnHHdWoFWpB
+	h8Edx/ioBlf8W8F9XhWOFZATXJIgZqZby7LwbBBmmBXnQiS1wjUyN7DDRnOpirFjsX4HLX9q2Wc
+	jkEEYPCXbyoPWG+293n9OQ
+X-Received: by 2002:a05:600c:6091:b0:483:348a:d3f3 with SMTP id 5b1f17b1804b1-48526951407mr148275575e9.18.1772992703284;
+        Sun, 08 Mar 2026 10:58:23 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad1cb7csm19952676f8f.0.2026.03.08.10.57.42
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48539e574b5sm44914455e9.8.2026.03.08.10.58.22
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Mar 2026 10:57:43 -0700 (PDT)
+        Sun, 08 Mar 2026 10:58:22 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH] exiftool: ignore CVE-2026-3102
-Date: Sun,  8 Mar 2026 18:57:42 +0100
-Message-ID: <20260308175742.3614559-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] exiftool: upgrade 13.48 -> 13.52
+Date: Sun,  8 Mar 2026 18:58:22 +0100
+Message-ID: <20260308175822.3614638-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 17:57:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124944
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 17:58:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124945
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3102
+Also fixes CVE-2026-3102
 
-The vulnerability impacts only MacOS - ignore it.
+Changelog:
+
+13.52:
+  - Added a number of new XMP tags written by Adobe software
+  - Added UTF-16 support for a few different metadata types in which only UCS-2
+    was previously implemented
+  - Added a few more Canon FlashModel values and decode FlashModel for the
+    5DmkII
+  - Added a new Canon LensType
+  - Added some missing file attribute bits to two of the new LNK tags
+  - Decode internal serial number for the 5DmkII
+  - Decode another OwnerName for the 5DmkII
+  - Decode some timed GPS for a couple of new DJI drones
+  - Enable WindowsLongPath by default only if Win32::API is available
+  - Renamed the Pentax K3III AFInfo tag to AFInfoK3III
+
+13.51:
+  - Added a new Nikon LensID
+  - Decode more tags from Windows LNK files
+  - Decode another LIGOGPSINFO variant
+  - Decode some new Canon tags
+  - Decode some new Nikon tags
+  - Split decoding on Nikon BurstGroupID into separate tags
+  - Fixed round-off error in GPSDateTime seconds for camm6 metadata in MP4
+    videos introduced in 13.45
+  - Fixed bug generating the default-language version of
+    QuickTime:LocationInformation
+
+13.50:
+  - Added a few new Sony lenses
+  - Added a couple of new Canon lenses
+  - Decode another Samsung trailer tag
+  - Decode BlackLevels from some Canon CRW files
+  - Updated Sony maker note decoding for the ILCE-7M5
+  - Patched potential MacOS security issue
+  - Fixed -list options so reading image files beforehand doesn't add tags to
+    the output when running multiple commands using the -execute feature
+
+13.49:
+  - Decode a couple of new Samsung trailer tags
+  - Disabled decoding of MenuSettings for the Nikon Z6III firmware 2.0 until the
+    changes can be worked through in detail
+  - Fixed problem where Google Photos had problems displaying ExifTool-edited
+    HEIC MotionPhoto images.  Files written by older versions of ExifTool may be
+    repaired by re-writing with 13.49 or later
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-devtools/perl/exiftool_13.42.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../perl/{exiftool_13.48.bb => exiftool_13.52.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/perl/{exiftool_13.48.bb => exiftool_13.52.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/perl/exiftool_13.42.bb b/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
-index 5d97cf5838..08549ad2aa 100644
---- a/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
-+++ b/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
-@@ -26,3 +26,5 @@ do_install:append() {
-     # Fix shebang and QA Issue [file-rdeps] to use target /usr/bin/env
-     sed -i -e '1s|^#!.*env perl|#!/usr/bin/env perl|' ${D}${bindir}/exiftool
- }
-+
-+CVE_STATUS[CVE-2026-3102] = "not-applicable-platform: affects only MacOS"
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_13.48.bb b/meta-oe/recipes-devtools/perl/exiftool_13.52.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/perl/exiftool_13.48.bb
+rename to meta-oe/recipes-devtools/perl/exiftool_13.52.bb
+index 0ace1e10eb..f40116144e 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_13.48.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_13.52.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
+ 
+ inherit cpan
+ 
+-SRCREV = "5a760372fadf23effe370ab5e9ca8e2df9448411"
++SRCREV = "02c78a2e051894b57ad8a11024f8cfa05957e725"
+ SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master;tag=${PV}"
+ 
+ RDEPENDS:${PN} = " \
 
