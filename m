@@ -2,90 +2,87 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D0E6EA8539
-	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 17:26:35 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.43511.1772990792562939336
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C065EA853D
+	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 17:57:55 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44440.1772992665597215666
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Mar 2026 10:26:32 -0700
+ Sun, 08 Mar 2026 10:57:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BmT8CWK2;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-439ce3605ecso2549471f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 10:26:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G+4x6n3g;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-439b790af67so4369581f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 10:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772990791; x=1773595591; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772992664; x=1773597464; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fX+nCzFW1zhJWnMPIKaOrRSd7cDWI2Yxl3AtAhmiWnA=;
-        b=BmT8CWK2hnXc45IrGH+xz2vJdLAL66u1rK/jg5CO6sUdHaRXrpVTj+13UQ+K54We7P
-         wVvHRdGtHh8MJq4EhQ/r8T6/g/6QuJh54UrY0hw8aIH8gBN8uK/21tiKFHb1OlPL0w+F
-         Ypm9O74XKzcOB5XE4No6P7cX4nImu2bo6VysNbWseu88DNRww3lwHFnt/emhblo1b8ji
-         stL5DsaF0TldhHK1nCN4mwUXp73FfW/7s8YxvHtDaTInfVYOtvbd2TQWUWSKpNo8G9JX
-         UUFhX4SLfh/3cKNPVfcZk8OUy43RvsGR2BGVePrK8kGBoCXrA5F78bzQVk1eqQdPJfFc
-         spQQ==
+        bh=y85/o8lCidNJHLlaXNTU0nmBNwfXJudFD1ENMAWKFfs=;
+        b=G+4x6n3gzGGyQqdtd2qk7ZdaoyS/wRLgM62Xmu0xMapFOV30uNOYGY98hkzOVCGfKH
+         EdUo5bFCjByDtE/mIPSX8D3ToAErNzaWSe6bXq7h9Li9awqwnsXY1v0AdJHcKZ8FCLdQ
+         lGLw3bDsULUOjPE666/p+VSy9JAZkrGlV1ib1nA85ncQkOKZDylpFgkfBWf4+dbu8pW1
+         AXaNc+fjSod55vbwSXfdsFvxDMymP+mMMcJJwJk5aLZcEht0P9YWT6SYmP7/JVPn5vxS
+         x/ECgQCdpQOgtzvbU1MhsGTJ04nHQLUg22Hm56BKGZXUJLhpgSj6FiCXRuPh23g0qtT6
+         vhHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772990791; x=1773595591;
+        d=1e100.net; s=20230601; t=1772992664; x=1773597464;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fX+nCzFW1zhJWnMPIKaOrRSd7cDWI2Yxl3AtAhmiWnA=;
-        b=mPeV0UlVlYW2fpM63vq6aIbiQKEJmnvv+kEeyuvjQR5Z8LSj1q8X4tx2zOo/D8tsT+
-         oTBWkR7G6i6GvVbu/AjcFMh5f+/SLZ4pW4VPbHBOaYAfhp/64BJWfXocJKSrQf9/WNk3
-         G7T6RCrY4wJhcr9MGP4ZZWAB6Ba2/e9IN7ArFQ+f+Ew6vz64XmkXTfOkWHj0zyo03IdK
-         kg77aYcDAiRwS1mGsZbLJ3vfBsZZpTmR9B8D41eU9+SoTnpYDntpWm+k5zkKFkKTJc4I
-         5NqHGYx40hy0UnDwrYFyqm1NTaENAsNN8Z5yRYL7X+9dURWyG9NBAl4n5Xfv6sQTM9ph
-         kRGA==
-X-Gm-Message-State: AOJu0YzYZ15ebgZ8QLxOxNtuIXpwqARFQCnmrajLWJmGF6lNi2rzdAKF
-	mVyjMx8KH2tsh0m809jRSpUUFRB+FDKA3/Dmp5dFuQN0lRToHc1c6ZbGv+n2nA==
-X-Gm-Gg: ATEYQzxEAgK/vhjK5bUs4LVKhsai0ar7DEJNRaIW6NK8DHUDyfHGVmVAmBSIP5RyuBs
-	LFdSLeynF3PmHjsiLeg3fbR0YUJbeD/tJjIgmLFKHLxMucWwfW01S0Xfs4a6/PJcVz6Nunw0ebG
-	Qg6Qh8ihznuZUNkp7uJwjEUmsft6PHcEk6WJk+Rbe6Jjvjz4qWI606TE7cwy7YoEtJYbxD+KUFG
-	9MZ7bixhmkDTiELmBj7ZdRYOgEXBNnoMV8j+aNDN9EFIFdBjBq9+Kvkzd+Rl7KQgN6qJZ1eZltD
-	rpSj2zuSCyEhqFwED+WhSpn+Pn0Av4VAIphTYVaDUvR7kGN692DQ1vii/e4ZwOLolMtBPlALwd+
-	/+yBJUoaSIG3DAqYHVHtethlVKgME514yjCvNdS8R/MirysIvGcNEmCE7IFpRYmN2NjOFQDIp7v
-	3lhqRaGzumrQSuWM8yZgWZ
-X-Received: by 2002:a05:6000:2207:b0:439:bc31:a05a with SMTP id ffacd0b85a97d-439da8954f0mr14345970f8f.43.1772990790605;
-        Sun, 08 Mar 2026 10:26:30 -0700 (PDT)
+        bh=y85/o8lCidNJHLlaXNTU0nmBNwfXJudFD1ENMAWKFfs=;
+        b=oRTntTSn/p/R1Xr1aQhMYaecGPbIGxGLcyw+4zSybw0ZscUyrQ3NIxEXSwcLEYuV10
+         J+NUBv4uGA6idE25I1vLoYbIktp/MSYxF/GUGV1fnToFdGfDFWXWIEGc1NdoWpQ0Woq8
+         mdf4qA4AjUF2D00jBgemi6fz7R5QKsjaxzbbBUfRE2jt13IGCjTj3hUXmKmn8x3h++KS
+         QoP74y6WNPCla6XJXijkHH3YgSYU+Rj/I3Yyk7euVdISXmaETSHhOLc3kMpt0YstaLo3
+         PMyK0rtXXf0On4ja5rrrpt6W7UYCeAGsnot+yQRg9dxhx6D3K/gy1IdK3DsUf7fSbM/b
+         HfQA==
+X-Gm-Message-State: AOJu0YxfsBhIzz80MnoRJ87XiY65GO3BA/1HrvbN/ODauqIS7FdyMBOc
+	ixTL4RfsofBy6Uio89+uFjo8qzVgNi735GErpquSzzLdENa0zpDYWM6zsNP1Vw==
+X-Gm-Gg: ATEYQzyC3t6xLtgpacR/GktfYJQrYPje/i6HX9vQYqo/jnTc9+2NoV2jnmcFm816Pmd
+	rxrVxYD2hQWBQcn5crJ0tIJ4bSGu4ZXbJqQWk+o9FltANZjO6fJR3s6cyxsoUPst8D1lvQRDM9l
+	j1yFUZt+pJRbU5Cm8RFnLlal+Esx4ySGb+bruQtpUdvmtatjUZ0B0c55hJDen3rD16ZhTJ4+IRN
+	D4fGDysGy9oKxI3RQqDRNXgVGmR44rg+f2ZYctgaJVrXTLIha1vO8DbpQ2eKLlrtSfGx600wiIb
+	MEETlOWoM/6HPL2GttqJ3fkQyfuDJeJSH57/H7VTul8xnz/y0LqJBZYuOw9idPe18iz38iXVp3t
+	fqx4o0Ov6zDOWxY2822vw4RDYladMxRJ9YJKcIo0RtZRsih1FLZ8PYpSLPWjUnX84LvBhEULJU2
+	XojeC9Ql0GFVGf6+3DzC56
+X-Received: by 2002:a05:6000:40db:b0:439:c39e:d9ed with SMTP id ffacd0b85a97d-439da3637b1mr14510251f8f.17.1772992663663;
+        Sun, 08 Mar 2026 10:57:43 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae3a20fsm19923246f8f.28.2026.03.08.10.26.29
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad1cb7csm19952676f8f.0.2026.03.08.10.57.42
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Mar 2026 10:26:30 -0700 (PDT)
+        Sun, 08 Mar 2026 10:57:43 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-protobuf: mark CVE-2026-0994 patched
-Date: Sun,  8 Mar 2026 18:26:29 +0100
-Message-ID: <20260308172629.3559131-1-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH] exiftool: ignore CVE-2026-3102
+Date: Sun,  8 Mar 2026 18:57:42 +0100
+Message-ID: <20260308175742.3614559-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 17:26:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124943
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 17:57:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124944
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-0994
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3102
 
-It is fixed already in the currently used version, however NVD tracks
-it without any version info, so it still shows up in CVE reports.
+The vulnerability impacts only MacOS - ignore it.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/perl/exiftool_13.42.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
-index af30165f81..af9ff85f20 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
-@@ -13,6 +13,7 @@ inherit pypi setuptools3
- SRC_URI[sha256sum] = "6ddcac2a081f8b7b9642c09406bc6a4290128fce5f471cddd165960bb9119e5c"
- 
- CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
-+CVE_STATUS[CVE-2026-0994] = "fixed-version: it is fixed in 6.33.5"
- 
- # http://errors.yoctoproject.org/Errors/Details/184715/
- # Can't find required file: ../src/google/protobuf/descriptor.proto
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_13.42.bb b/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
+index 5d97cf5838..08549ad2aa 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_13.42.bb
+@@ -26,3 +26,5 @@ do_install:append() {
+     # Fix shebang and QA Issue [file-rdeps] to use target /usr/bin/env
+     sed -i -e '1s|^#!.*env perl|#!/usr/bin/env perl|' ${D}${bindir}/exiftool
+ }
++
++CVE_STATUS[CVE-2026-3102] = "not-applicable-platform: affects only MacOS"
 
