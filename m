@@ -1,133 +1,110 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20C9DF55105
-	for <webhook@archiver.kernel.org>; Sat,  7 Mar 2026 18:38:29 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14690.1772908699188988712
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E43DAF55130
+	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 04:27:13 +0000 (UTC)
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23308.1772944028047197455
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Mar 2026 10:38:19 -0800
+ Sat, 07 Mar 2026 20:27:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JWCL8bVz;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4807068eacbso86424855e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Mar 2026 10:38:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bs3rJlwA;
+ spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64aedd812baso9408726d50.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 07 Mar 2026 20:27:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772908697; x=1773513497; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fAn8RktB/H/RjUYr2aXuEnWi9edyJEcLhOGOzsH+DVk=;
-        b=JWCL8bVzWw76wncyc/DhckOOCGc8wpwvqsD/C7s7gN3uGZR6qZIc3MCQEDDWbR4h8q
-         HvpMXj5xSwCSdVuMFE8ABd7qr6UKH+rVR7iy4y3VY9NzvtAXAmebv+U3AerRijjdJA0t
-         NCtaspug/nVdhAaPoeTooG6T4jPx4m/QjmFR6lT9xlBHxy1OX0dkDr/pURWr4RRDswAY
-         1QGMSUZr938J5UJl+4Y1FOv56vuWcWcl8FeXfeFn1RYM0PUSk/mc1QOUOJIKNF8cJM+h
-         oIBWIEWVx0JmgM6WNT7syBG134oWIjnimHgrv7GE5+EJuaaZyA5kqKfVknmpxykAG+rC
-         Vh/A==
+        d=gmail.com; s=20230601; t=1772944027; x=1773548827; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GQKQnvg93mDS1Ndr1XgG1y1tmosocdKfy3r9MyVDMII=;
+        b=bs3rJlwAv8Cy1AEjfnkvZQMnZ2HFLf9fhjCTAbjRqsrkwQMFhq3WYN0h7X3C/3q73s
+         iHZHDCSWu3STbrW4BGidQrpyMH2Am5RRaOmY94GdotEh76BLmZFYT66F+5gB95UsGHQX
+         XZ+W2xYFworbPOmPfuB/0yBapEv58liA7sOpSwzOkd23ve74neLeyknd79Wv/lVhq9UW
+         CqZyUAMBYOMblO/LeAxcUcB0v8MI7XZgFaOCZKWaowgJuj1A8UiufhjgBXY0yN3Iqz4a
+         h5EWAo3RXhuknhVNbqWl8cnvWKImxKGEcWC3hpi5a24fPcKGT0DZwmD5YA/BXzvasE8e
+         LsGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772908697; x=1773513497;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fAn8RktB/H/RjUYr2aXuEnWi9edyJEcLhOGOzsH+DVk=;
-        b=EpdTvl6lfE1IQazWV7kXekZVjSZ1o/yTng86ALJKLhcSFgmLhINgaK9eHnMJZaVfc6
-         olI4mGmtAsqdTgTVZQb21b4z1UWciM8RomuAYJfdLYuLruZpvm8aI2BhP2ajkp/AB8vP
-         IpdsLlH3WGHbFgHtjlSgNIhbGPQ8EtN4F8iHGdVRpaP4Gyw7eS+tePqS+GgN/Da/YS9J
-         3lfWvFVXMgemOx1G1evZXNOD7lszFdQ7tUgUQMlCcrDbihxmAQM0/osGLBUm/PmIuZTl
-         ib+u6fbJ5CQbLOtWbdoWIXoqkst2nLZQWheGb+i4GQZpRkkUQzCcSPP/lxANbzZVdE00
-         Hgyw==
-X-Gm-Message-State: AOJu0Yxegy8XuT8kpG4uC8nQiLMHqou3b59miqng3TcSKcCcxHUqsfxP
-	Sn3CZF4DCX58e8IJ84z5s/6Ic+li3K1WBxcMvTI7DojyUjomlsNRv0vWsEiz5g==
-X-Gm-Gg: ATEYQzwEd9OZXHgTibcL5cUOspLDyuKEuTpOzXK8QZf6KpVhZ4VVI3qdnpILu/57217
-	IuAzRQ4bWy24TArVzpPiR6y0Bnj8Hz0CBOFf3kMBf7h8VPB1sbXPA7zbOHnW3yqTR4Ce86e+wmc
-	8oYozyGO+UPYmVqqWlGbXdkA6mqQlr5NjEKGjRaKQT5mPeetekSN1PmLMlIHcUZxrxMAGGFF9PK
-	OJTX5rcuxdh6Q7BYyJhp9tP/qe0oKPVLBChLoIMM9Xp9XEibCZaBHFYVvSTvx6vk3P5XFC+8JXW
-	uiUEVRnjdU4jvfVfohQCbTatxGqg2kb872c2cKEIvuaax5kjjCwbnHWsI8B6Ugp8JdAcxDhzQBW
-	WJKL/7fikWkhDfyu8GtTlKM4DyfeXX9augz090urFROrr5s+P56qrVduoRiZLpdGYsPQwnDzk3w
-	vb3mGdebvUQO1F5W7IgmsS
-X-Received: by 2002:a05:600c:198f:b0:477:9a28:b0a4 with SMTP id 5b1f17b1804b1-485268b8dbemr104240345e9.0.1772908697191;
-        Sat, 07 Mar 2026 10:38:17 -0800 (PST)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4852e38c013sm127306365e9.8.2026.03.07.10.38.15
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1772944027; x=1773548827;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GQKQnvg93mDS1Ndr1XgG1y1tmosocdKfy3r9MyVDMII=;
+        b=tiLN+CwlEoSX61y50VoJulrPMGsza0s31RC9lcHX7cYGsRkzN7Y09kUuTPkZjah9xh
+         HeeTfiFLtT031o2SKK5DJf40dE0hXd/pPIl7oKCbesbuoPwUsPuvWIX98VDpOyubP+r0
+         3lcxkn/nDxO32ENLanhyieyXtIWL9f6oNRH/257IKVgTaDw7xmaSPMHP0a0XxjASwGCN
+         9p6rgzIWD5SV3xvfpIfgIR1uTWfj/VG88NdqxL7i21NZ4X80djjuMIPmgqbVvEd33c0P
+         X6gm4zxaLQ85BWMHWmFvkzxvpiYHWwFj0S8U48nSx/mqeTzV3ubZGL8mLpxi4Ip+sXst
+         MFYQ==
+X-Gm-Message-State: AOJu0YzhybNoOP3XHP0IUPE05e8YDs6ktzNZgc7Mn6VKRM9mRc3eNm9F
+	Y2ElEEMl37bI3gMZaazx6y9K2ZmFGTy/nOKk9kOZBAYu2lfuScxa1TgqBUWA4ykH
+X-Gm-Gg: ATEYQzw1aAAUwctOIJXuS16dWogtD6QgNFS2UOXdiMNRX6SNcs13Z2YHY9GgX8dwGQJ
+	xs/C/hpaDbbmxt/xIoOnNyFE8Ms3FQJf1V0OpMIMJ6DtbKuWMfN//0/puFn7ApI9DrrBjHsjwuP
+	NcxGOxVwCEx/dkHiXYeNeI1U9OBoTCjvn0oflofVENzxbS7apTLySCsGD8Io2KbG1E4VdY8zy+j
+	XFr5HDiN0+dHDudSfSo71ujEB+oolLEKcw/zLO8Dzf4N5X8OibWFM/SALQ/O0US4OAkhoHoqot9
+	RDfQpgK0S4VQUQcoUi4e7R+NbfSbEynrWPVsuyvzYAFMXX70P41QVaCCd7YoBUXokuMHlaQBVhH
+	BiVEr8eJZnvz/kUlIuTJ97aRewwLj3Xlk2JfkDmAa4/fUOKo6My1rOOT/CwP6Zqm6u/Vy5fQSsA
+	t6fztkRaZVzdgvH18Wy/lexO1QhPrGT3+hpYt5ygx7Tp1odoksn3mWwdXHNwHxW7omJ//AyqDWb
+	3487J4N1qpWwcfsK5QNBJWeoKqDx0hMPfM0gRmDqYiVdtNN+Y0=
+X-Received: by 2002:a05:690e:e0c:b0:64c:adfd:209d with SMTP id 956f58d0204a3-64d141a84d8mr5742768d50.35.1772944026646;
+        Sat, 07 Mar 2026 20:27:06 -0800 (PST)
+Received: from localhost.localdomain ([67.233.59.72])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-64d176c59dbsm2943681d50.11.2026.03.07.20.27.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 07 Mar 2026 10:38:16 -0800 (PST)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Sat, 07 Mar 2026 20:27:06 -0800 (PST)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] emlog: bump to latest revision
-Date: Sat,  7 Mar 2026 19:38:15 +0100
-Message-ID: <20260307183815.630447-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: upgrade 22.22.0 -> 22.22.1
+Date: Sat,  7 Mar 2026 23:26:50 -0500
+Message-ID: <20260308042650.20821-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 07 Mar 2026 18:38:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124933
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 04:27:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124934
 
-Drop the patch that is included in this release.
+License Update: Add sorttable.js under the MIT license - https://github.com/nodejs/node/pull/61348/files
+  Update minimatch to the Blue Oak Model License - https://github.com/nodejs/node/commit/e72da8c7544727f90b857ba86b8c7755e631fe96
 
-Actually that is also the changelog since the previous version - there
-were no other changes beside the accepted patch.
+Changelog: https://github.com/nodejs/node/releases/tag/v22.22.1
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-core/emlog/emlog.inc          |  3 +-
- ...not-use-no_llseek-with-kernel-6.12.0.patch | 32 -------------------
- 2 files changed, 1 insertion(+), 34 deletions(-)
- delete mode 100644 meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
+ .../nodejs/{nodejs_22.22.0.bb => nodejs_22.22.1.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_22.22.0.bb => nodejs_22.22.1.bb} (97%)
 
-diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
-index ff2a106c6e..d51c9723fd 100644
---- a/meta-oe/recipes-core/emlog/emlog.inc
-+++ b/meta-oe/recipes-core/emlog/emlog.inc
-@@ -4,8 +4,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.1.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_22.22.1.bb
+index d08c5d8318..09d6b896b2 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.1.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+-LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1fdf4f79da4006c3b5183fddc768f1c8"
++LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0 & BlueOak-1.0.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b195f4ea4368177a2fd84b879f09cba8"
  
- SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=https;branch=master"
--SRC_URI += "file://0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch"
--SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
-+SRCREV = "a50aae487f689c1abb46b151abc68d6635b9b2fe"
- PV = "0.70+git"
+ CVE_PRODUCT = "nodejs node.js"
  
- CVE_PRODUCT = "nicupavel:emlog"
-diff --git a/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch b/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
-deleted file mode 100644
-index 86f719b0bb..0000000000
---- a/meta-oe/recipes-core/emlog/files/0001-emlog-Do-not-use-no_llseek-with-kernel-6.12.0.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From dca01ea62833249d78ac3bdf277b73424bf93e89 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 14 Dec 2024 09:55:10 -0800
--Subject: [PATCH] emlog: Do not use no_llseek with kernel 6.12.0+
--
--no_llseek is finally gone with 6.12-rc1 [1]
--
--[1] https://github.com/torvalds/linux/commit/cb787f4ac0c2e439ea8d7e6387b925f74576bdf8
--
--Upstream-Status: Submitted [https://github.com/nicupavel/emlog/pull/16]
-----
-- emlog.c | 7 ++++++-
-- 1 file changed, 6 insertions(+), 1 deletion(-)
--
--diff --git a/emlog.c b/emlog.c
--index 2ead738..b45c72d 100644
----- a/emlog.c
--+++ b/emlog.c
--@@ -464,7 +464,12 @@ static const struct file_operations emlog_fops = {
--     .open = emlog_open,
--     .release = emlog_release,
--     .poll = emlog_poll,
---    .llseek = no_llseek,        /* no_llseek by default introduced at v2.6.37-rc1 */
--+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 12, 0)
--+    /* no_llseek by default introduced at v2.6.37-rc1 and
--+     * removed in 6.12.0
--+     */
--+    .llseek = no_llseek,
--+#endif
--     .owner = THIS_MODULE,
-- };
-- 
+@@ -42,7 +42,7 @@ SRC_URI:append:class-target = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "4c138012bb5352f49822a8f3e6d1db71e00639d0c36d5b6756f91e4c6f30b683"
++SRC_URI[sha256sum] = "87104b07e7acee748bcc5391e1bc69cf3571caa0fdfb8b1d6b5fd3f9599b7849"
+ 
+ S = "${UNPACKDIR}/node-v${PV}"
+ 
+-- 
+2.43.0
+
 
