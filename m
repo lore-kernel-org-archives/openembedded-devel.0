@@ -2,94 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB833F5513E
-	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 10:24:11 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.33621.1772965447670013626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D933AFC9EC8
+	for <webhook@archiver.kernel.org>; Sun,  8 Mar 2026 14:04:40 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.38988.1772978671034567127
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 08 Mar 2026 03:24:07 -0700
+ Sun, 08 Mar 2026 07:04:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IGe8Vz1A;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4852ff06541so9517955e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 03:24:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NGsCI4vO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-48539cbb7b1so1836875e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 07:04:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1772965446; x=1773570246; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1772978669; x=1773583469; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XUQtt06vJw1xH80X4m0pOyRQux45CEimmH+ImZBkeUE=;
-        b=IGe8Vz1AaJcJBvoIdkVtUeyRxuekSZTPQ37Kg3HOgJlxjeikeaz/eeH9sGvVFucB6W
-         qWrZLB/UtamHULW6kKh8J9rAbQHl6um1zSRXJcbLAv6sPNcNwvwRYTHpkUnVolb6syxR
-         oaU9iByrX4MvRLMuv9o69NsCXeXJfidoFxt4ZWoLxb8vvLPV8Cj61Mzdae83eLHlNOOP
-         IGDuFL580tmNHSrArXKI7mS3aRPlSlpv1naxG3rBzu0M1Whj06Or8w04O1XZ7Fz047Bj
-         +bqtkLOHe3W31YDHR+jmLVceVLm4LJpkUMIHk0DR1morKxDvAAKS2dkV/uf1zZBIUbnj
-         k9GA==
+        bh=pH+pjOa6+mujrYGLjHyORUUGZ9ZO3bU08Hze87JmsPA=;
+        b=NGsCI4vO5tTYHQjUZNwHYnUtb7cZbAO5HrQkKjCW73S18nL5zcCDyCEPUeyOHUxpDm
+         a63xPN/HCrEVSl089Qd9DYVJaE/FClO9Rj8RgPe1dLbVICTpVfMk2aA2gf6ssSGKn0UY
+         qqUKcwrC7MkEx9+U1NqMrDKTzZYjp2+a02FhbhOOFWvwYLiYImCxob01LJU7Vjhsngml
+         KlCS6AMcYOxolhgR+Ay9tATt2KIKA/YDMdFOrggdHAZFEwPhFe660qn6IRuJTn/MSAyw
+         yzfaZyICbWNs+vSqwu5MSgwNoYgE6XHfXTzFgnICk/xcNmyVl/ari40POoZ7eJf0VCOO
+         XQ8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1772965446; x=1773570246;
+        d=1e100.net; s=20230601; t=1772978669; x=1773583469;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XUQtt06vJw1xH80X4m0pOyRQux45CEimmH+ImZBkeUE=;
-        b=hcf3NEsAk8tLiSxfEKsfnptZch91dmRSHZfEHNxuttfhASpH2ERInHQe0IPLYDpzXE
-         63HuaQ/TyUB3ibpcF63yRqulIA0vigZEsDEWQIuwyxc7Jmndp3cVgtZNHL37PzEnb3eN
-         2Tf/lonFqCABbdmjpVLIaxXu477r3gK3/OwuFxqmubofjCTnas3uC5JbwaM1XQ04x6OR
-         l4+qCHJvMdNMLWs4W00tfBH0tW20Dw2m93YWiWoPZoyrPXn01yDuU6J2orCtH4GgG7j/
-         DdMPR860+5C+mTwkwNAVduEEiTKIyYlYrNuHSlQoldhQ/x7DnOqtR0He5uXJyx+BHouE
-         KPXg==
-X-Gm-Message-State: AOJu0YwIHvFLrzIbjwD9nXV0hmUUx6AtnmcgiCxdgh4b6JDWx29N1Ph3
-	WQfUdyHusTBg0EEqNWtbPAwF1I+tWKlaLticFgUa1pPvqgOWhnz1wQzAxr/e7Q==
-X-Gm-Gg: ATEYQzx9Gzp0Hd+Y1hncIXH/KS1HjvFaFS9amzG/pe17qDo9asZ5EL0Vuh8IdmGH2yA
-	qwlfKjx1AqIsLiau2hmqP8A4hv/xs3w6rpptrXW1ebHXnvfCQokNLBvzv3+Y6S8UKr+adSz1HMv
-	wEVx3qV318ONHUUumNei+a81sI23tlLKiZzA/2P4MP3zzs189Q9TQYX3YHoCZbucCs8wIaTBYtP
-	GNXwmwa4bEm/D9dQIXX+gTQftuzGOpI2oo5rX8soqluk1vH8DujwyYS47DLeq/V8wkGn7BXfB6G
-	amnvpMmxQ6QQ+mahE7h3lb4UScEVgmv8avGw7PKF5ZmO5sUT/DTfpFDwdEe0FCvLNY7zgwTIr62
-	6MuUtuxjRgsGcn02JAqhuK0bV2kuZqu4RFE/7eUoE9BrTd9zIE3SPI1WW7n92zvKEQ0k4SvpQvT
-	s3RmeIIQstqVHIPJdRZAeR
-X-Received: by 2002:a05:600c:3b0c:b0:477:7bca:8b34 with SMTP id 5b1f17b1804b1-48526918923mr123607335e9.6.1772965445710;
-        Sun, 08 Mar 2026 03:24:05 -0700 (PDT)
+        bh=pH+pjOa6+mujrYGLjHyORUUGZ9ZO3bU08Hze87JmsPA=;
+        b=nVHhGbnz+I/+LBDexhSh3ys5w5cGY2FxTD2Qjn84NcuAxWT6ZEu/aX+k0rdBDP9OfJ
+         u0MFiCQQZypg3KwdkLpuyk4hmiv5JXa2+nuAAZM31rlCzf/sSdx/QOMD+zMcKeTyuibY
+         PM/86+C4E3yo9dTIT6k7GMt1hWUslr910CgE8xryDb6jbq7sGo7DaP6DFT3ijWas0N9R
+         PhduqXOBqmU3NxdPZe00aSbzMQACi020x8OKphXMWWmVrSgs7j5dKZsjtF2p+mU4X+bz
+         QNJWL3DvrxUVv7IzdswoUAA0v0qV9eVNxotW4L8mtc6+nQvQ/LDtwLXkouDp8efcVkGL
+         DvKQ==
+X-Gm-Message-State: AOJu0YxK1gDoR2ampdzlIuPNJyvNQ71ICt2USPp+6e5/ygzmzSBtdJZj
+	GMSvEtJPnxNM4qtu5k3/tTcnV65B6SMFLmjiVAccZKdxrPoX0H81PEWboIa7aw==
+X-Gm-Gg: ATEYQzxcC3Xe51cprXCYlKEaDrAVcwbG55kj8LzQPj/MZeQbTaiafkR20hnqKzq2QGq
+	pqZgVYMOxKb5pHWc1V4ZkvT1CIrU411FQNXdvD0W3EYWgKzNurOcxC54rEDFl8oPtEZ69wKH7r/
+	Eenu8LXOOhCheYZuo31Ezp1uim6e6gHcUZGC6xMoyUMFuyBdmWt5UY8ObeHT9/kAGdqA7SSkEPo
+	0IUaqwRvm+4mNSEbzOInswV8njOjfzjaj6AdN1zqHbRfNeyqBJHePpIJLAqmDLKOp5Dvv9BxMQ9
+	bs8CnEoxvcwk1/Z4I7aaygOpJcDzfaVDvK8g7+H9NzAtn/4ZcZsbbl2zxOeOSXAlbNee7iDimWJ
+	M9VY5hckK98BEOIh18ZsDOV9T63gcYL+cDOizaftnmHeZn4qwpfU/FPyAv5a54MohgfPpEg08la
+	3gZ/X7K+zIHxaj0PFcyaC/
+X-Received: by 2002:a05:600c:a108:b0:485:35d3:ce59 with SMTP id 5b1f17b1804b1-48535d3d016mr24768475e9.10.1772978669065;
+        Sun, 08 Mar 2026 07:04:29 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4853833094dsm37947035e9.13.2026.03.08.03.24.05
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-485246ece8bsm90012665e9.4.2026.03.08.07.04.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 08 Mar 2026 03:24:05 -0700 (PDT)
+        Sun, 08 Mar 2026 07:04:28 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] freerdp3: upgrade 3.22.0 -> 3.23.0
-Date: Sun,  8 Mar 2026 11:24:04 +0100
-Message-ID: <20260308102404.2164321-1-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH] gimp: ignore irrelevant CVEs
+Date: Sun,  8 Mar 2026 15:04:27 +0100
+Message-ID: <20260308140427.3258512-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 10:24:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124938
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Mar 2026 14:04:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124939
 
-Contains many CVE and bugfixes.
+These CVEs are not affecting the recipe, because they were introduced
+later, in v3.0.
 
-Changelog: https://github.com/FreeRDP/FreeRDP/releases/tag/3.23.0
+The commits the introduced the vulnerabilities:
+CVE-2025-14423: https://gitlab.gnome.org/GNOME/gimp/-/commit/222bef78c71ed8562a610f6863d56c0b3e2bef68
+CVE-2025-14424: https://gitlab.gnome.org/GNOME/gimp/-/commit/a0fc5a025ae3579609730ebabc3c84146385da76
+CVE-2025-2047: https://gitlab.gnome.org/GNOME/gimp/-/commit/00232e17875d4676a2c797a429db23b1a9815db8
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../freerdp/{freerdp3_3.22.0.bb => freerdp3_3.23.0.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.22.0.bb => freerdp3_3.23.0.bb} (99%)
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.23.0.bb
-similarity index 99%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.23.0.bb
-index c182ee1339..52ec74d5d7 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.22.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.23.0.bb
-@@ -8,7 +8,7 @@ RDEPENDS:${PN}-ptest += "cmake coreutils"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
+index ad9d34ef6d..4d2771e551 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
+@@ -75,3 +75,6 @@ RDEPENDS:${PN} += "mypaint-brushes-1.0"
  
- inherit pkgconfig cmake ptest
- 
--SRCREV = "e3ef4c71138f76516299cb3637d2d0c59b2a3737"
-+SRCREV = "b933ae18d9ad2a1d73c610868fcc30eb61654070"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https;tag=${PV} \
-            file://run-ptest"
- 
+ # It has been fixed in version 2.2.16
+ CVE_CHECK_IGNORE += "CVE-2007-3741"
++
++# These vulnerabilities were introduced in v3.0
++CVE_CHECK_IGNORE += "CVE-2025-14423 CVE-2025-14224 CVE-2025-2047"
 
