@@ -1,176 +1,109 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D376FF3C245
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 12:16:35 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.12796.1773058585045214808
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02302F417F3
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 14:58:30 +0000 (UTC)
+Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16609.1773068301478895432
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 05:16:25 -0700
+ Mon, 09 Mar 2026 07:58:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout08.t-online.de (Postfix) with SMTP id B9C15F1D9
-	for <openembedded-devel@lists.openembedded.org>; Mon,  9 Mar 2026 13:16:22 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.45.136]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vzZX4-4cfD500; Mon, 9 Mar 2026 13:16:22 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=UEQD8eZ8;
+ spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: deeratho@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=927; q=dns/txt;
+  s=iport01; t=1773068301; x=1774277901;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=Kv0lKddJq4p4vuwuf6llbeNG3Mmf1ryah7kDp+Trr1c=;
+  b=UEQD8eZ8hZYzQWF8cMg92Gku0mqYg8FunB1M/QJBpKWUE8MtbAl+xXi/
+   4NFqOjxAZvdHwpkXu2O35kG20FL8vJEgE3x4zJlCACCimDgxvg43YMqJt
+   cGpiCsICHU46VE1PNEMuHd6Wzz/9mjMXDfxIwNgVCesDugtoFmgfvtZoE
+   eu/ntt8YAFcFr69iVOklP7HxLDFUi+txsogb6mX7jI69iX8RyoCNKmKKW
+   DTGtJFwQFWVnYaxrKB+wwLWI+FZ4g3q35TFwJcwC1PNVpemXJY/AWctmR
+   qL7/Oadb6Wy1Nwy/dFYyw8h/QSeqV7XqvU+BIOISS/T12wrsfMundO1GZ
+   A==;
+X-CSE-ConnectionGUID: 5F2IRv0aQv+NIMOqUQkM7A==
+X-CSE-MsgGUID: 5YuPVV4qQ96bWfVEtVk2bA==
+X-IPAS-Result: =?us-ascii?q?A0CIBQDC3q5p/4r/Ja1aglmCSA+BUEJJk1tPoD6Bfw8BA?=
+ =?us-ascii?q?QEPUQQBAZIpAiY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
+ =?us-ascii?q?YEOE4ZchxMBdlxEgwKCdAIBrHiCLIEBhHzbJgELFAGBOIU8iBl0hHonGxuBc?=
+ =?us-ascii?q?oQHdoUQhXcEgiJ6FIF/kRxIgR4DWSwBVRMNCgsHBYFmAzUSKhVuMh2BIz4Xg?=
+ =?us-ascii?q?QsbBwWFIA+IcnRugRODAwMLGA1IESw3FBsEPm4HjWo+gjM+ghhoAaYcoQ4KK?=
+ =?us-ascii?q?IN0oVgaM6prmQakWYRogWg8gVlwFYMiUhkPjl/MaSM1PAIHCwEBAwmTZwEB?=
+IronPort-Data: A9a23:wribca9sqJl0cri/p8Y5DrUD0H+TJUtcMsCJ2f8bNWPcYEJGY0x3n
+ zRLWmmOO/mIYDanKN9+adzioUICvZXcztdhTQI4+3pEQiMRo6IpJzg2wmQcns+2BpeeJK6yx
+ 5xGMrEsFOhtEDmE4EzrauS9xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOdRbrRA2bBVOCvT/
+ 4mpyyHjEAX9gWAsaTpFs/vrRC5H5ZwehhtJ5jTSWtgT1LPuvyF9JI4SI6i3M0z5TuF8dsamR
+ /zOxa2O5WjQ+REgELuNyt4XpWVTH9Y+lSDX4pZnc/DKbipq/0Te4Y5nXBYoUnq7vh3S9zxHJ
+ HqhgrTrIeshFvWkdO3wyHC0GQkmVUFN0OevzXRSLaV/wmWeG0YAzcmCA2lrE9c5wPgvCFhQt
+ to5DRcUUymAor2flefTpulE3qzPLeHxN48Z/3UlxjbDALN+GNbIQr7B4plT2zJYasJmRKmFI
+ ZFGL2AyMVKZOE0n1lQ/UPrSmM+ki3TleiFYr3qepLE85C7YywkZPL3FboqPK4TRFJkN9qqej
+ j/34lzHPE0DDY3BwwWLzF+wuOyVlwquDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzBdCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u38Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:4Gy1Xa2gIBFbDP72rqbQ/QqjBKckLtp133Aq2lEZdPUzSL37qy
+ nAppomPHPP5Qr5O0tQ+uxoRpPgfZq0z/cciuMs1NyZMzUO1lHFEGgb1+vfK/mKIVybygabvp
+ 0QFpRDNA==
+X-Talos-CUID: =?us-ascii?q?9a23=3AZfGBq2hlEaDUz5pKE6AgiZKHpzJuL1OH7U3Oe0a?=
+ =?us-ascii?q?BFyVPaZiyUGKp+4Y7up87?=
+X-Talos-MUID: 9a23:jVyPfgjoIgzzLaItCzugs8MpafZ125qQVFk0wMsMhMe6GDBOOG2XpWHi
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.23,109,1770595200"; 
+   d="scan'208";a="682903940"
+Received: from rcdn-l-core-01.cisco.com ([173.37.255.138])
+  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Mar 2026 14:58:20 +0000
+Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-01.cisco.com (Postfix) with ESMTPS id 65C8F180002AC
+	for <openembedded-devel@lists.openembedded.org>; Mon,  9 Mar 2026 14:58:20 +0000 (GMT)
+Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
+	id 047AECC12B5; Mon,  9 Mar 2026 07:58:20 -0700 (PDT)
+From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/2] gnome-shell: update 48.3 -> 48.7
-Date: Mon,  9 Mar 2026 13:16:09 +0100
-Message-ID: <20260309121609.6867-2-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260309121609.6867-1-f_l_k@t-online.de>
-References: <20260309121609.6867-1-f_l_k@t-online.de>
+Subject: [meta-openembedded][scarthgap][PATCH 1/2] yasm: extend recipe for nativesdk builds
+Date: Mon,  9 Mar 2026 07:58:14 -0700
+Message-Id: <20260309145814.3435361-1-deeratho@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1773058582-DD7F26FB-6C047D4F/0/0 CLEAN NORMAL
-X-TOI-MSGID: baaac2d4-a0f9-4fc0-9939-ed539ea41e7c
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
+X-Outbound-Node: rcdn-l-core-01.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 12:16:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124996
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 14:58:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124998
 
-48.7
-=3D=3D=3D=3D
-* Fix wrong network icon on connectivity loss [Antoine; !3910]
-* Sort session list on login screen by display name [Ball=C3=B3; !3920]
-* Add extended OSK layouts for German and Austrian [Leonidas; !3923]
-* Fix leaving VPN auth helper zombie processes [Michael; !3926]
-* Fix freeze on modifier-only layout switch shortcut [Sebastian; !3939]
-* Fix glitch in list search results [Florian; !3951]
-* Fix swipe gestures behaving erroneously in RTL locales [Florian; !3967]
-* Fix misplaced separator in dash after unpinning running app [Raghuveer;=
- !1973]
-* Fixed crash [Sebastian; !3933]
-* Misc. bug fixes and cleanups [Sebastian, Leonidas, Florian, Jonas,
-  ClarityStorm, Alessandro, Marco, Adrian, Carlos; !3922, !3925, !3931, !=
-3927,
-  !3932, !3924, !3937, !3940, !3942, !3946, !3943, !3950, !3708, !3917, !=
-3971]
+From: Deepak Rathore <deeratho@cisco.com>
 
-Contributors:
-  Leonidas Adaktylos, Alessandro Bono, Michael Catanzaro, ClarityStorm,
-  Carlos Garnacho, Ball=C3=B3 Gy=C3=B6rgy, Raghuveer Kasaraneni, Sebastia=
-n Keller,
-  Antoine Lassagne, Florian M=C3=BCllner, Marco Trevisan (Trevi=C3=B1o), =
-Adrian Vovk,
-  Jonas =C3=85dahl
+Some SDK dependency chains require yasm to be available
+as SDK artifacts. The current metadata only partially provides this,
+which can lead to dependency resolution failures when this recipe is pulled
+into SDK-oriented builds.
 
-Translators:
-  Antonio Marin [ro]
+This change does not alter target package behavior; it only enables required
+nativesdk variant for build and SDK integration paths.
 
-48.6
-=3D=3D=3D=3D
-* Fix key focus on choice list on login screen [Marco; !3849]
-* Fix animation glitch when cancelling overview search [Noam; !3888]
-* Also send activation token for notifications without app [Marco; !3891]
-* Update keyboard indicator on modifier-only layout switches [Carlos; !38=
-95]
-* Improve accessibility of screenshot UI [Luk=C3=A1=C5=A1; !3908]
-* Improve Hindi bolnagri input with on-screen keyboard [Mike; !3911]
-* Do not expire notifications that are about to show [Marco; !3905]
-* Misc. bug fixes and cleanups [SimonMaracine, Daniel, Marco; !3894, !389=
-2,
-  !3907, !3904]
+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 
-Contributors:
-  Mike FABIAN, Carlos Garnacho, Noam Raz, SimonMaracine,
-  Marco Trevisan (Trevi=C3=B1o), Luk=C3=A1=C5=A1 Tyrychtr, Daniel van Vug=
-t
-
-Translators:
-  Abduqadir Abliz [ug]
-
-48.5
-=3D=3D=3D=3D
-* Fix connecting to WPA(2) Enterprise networks [Mitchell; !3834]
-* Improve order in which extensions are enabled/disabled [Kyrill; !3835]
-* Account for scaling when setting cursor location from ibus [Takao; !372=
-9]
-* Do not reset the unlock prompt on every tap [Marco; !3852]
-* Improve legacy tray icon support [Marco; !3818]
-* Fix misplaced background menu [Jonas; !3863]
-* Fix layout of app search results in RTL locales [Khalid; !3851]
-* Fix notification banners sometimes getting stuck [everyx; !3861]
-* Fixed crashes [Johannes, Daniel, Jonas, Alessandro; !3839, !3809, !3872=
-]
-* Plugged leak [Sebastian; !3854]
-* Misc. bug fixes and cleanups [Michael, Marco, Philip, Jonas; !3813, !38=
-46,
-  !3853, !3220, !3850, !3855, !3869]
-
-Contributors:
-  Khalid Abu Shawarib, Alessandro Astone, Mitchell Augustin, Michael Cata=
-nzaro,
-  Jonas Dre=C3=9Fler, everyx, Takao Fujiwara, Sebastian Keller, Johannes =
-Maibaum,
-  Marco Trevisan (Trevi=C3=B1o), Daniel van Vugt, Philip Withnall, Kyrill=
- Zorin,
-  Jonas =C3=85dahl
-
-Translators:
-  Cheng-Chia Tseng [zh_TW], Philipp Kiemle [de], Aefgh Threenine [th],
-  Jiri Gr=C3=B6nroos [fi]
-
-48.4
-=3D=3D=3D=3D
-* Fix taking interactive screenshots via D-Bus [Florian; !3803]
-* Fix pointer scaling glitches in magnifier [Marco; !475]
-* Fix drawing glitch in sliders in RTL locales [Sebastian, Khalid; !3817]
-* Misc. bug fixes and cleanups [Marco, Sebastian, Florian, Mike, Jonas; !=
-3785,
-  !3798, !3799, !3816, !3796, !3750]
-
-Contributors:
-  Khalid Abu Shawarib, Jonas Dre=C3=9Fler, Mike FABIAN, Sebastian Keller,
-  Florian M=C3=BCllner, Marco Trevisan (Trevi=C3=B1o)
-
-Translators:
-  Aefgh Threenine [th]
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../gnome-shell/{gnome-shell_48.3.bb =3D> gnome-shell_48.7.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_48.3.bb =3D> gn=
-ome-shell_48.7.bb} (95%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb b/m=
-eta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.7.bb
-similarity index 95%
-rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb
-rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.7.bb
-index 802a6948ae..3f668fe410 100644
---- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_48.7.bb
-@@ -34,7 +34,7 @@ GIR_MESON_OPTION =3D ""
- REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
-=20
- SRC_URI +=3D "file://0001-shell-app-usage.c-only-include-x11-headers-if-=
-HAVE_X.patch"
--SRC_URI[archive.sha256sum] =3D "fb0203fc748593f14e51732618e1f042525fd719=
-764a0fdb0ee3f6fe413a9b2b"
-+SRC_URI[archive.sha256sum] =3D "2dff328d5f7e29f8c897bc21caac7d2d443be3c6=
-3ae84d7623dec800f23493c3"
-=20
- PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
-'systemd', d)}"
- PACKAGECONFIG[bluetooth] =3D ",,gnome-bluetooth"
-@@ -76,7 +76,7 @@ RDEPENDS:${PN} +=3D " \
- 	accountsservice \
- 	adwaita-icon-theme \
- 	adwaita-icon-theme-cursors \
--	gdm-base \
-+	gdm \
- 	gnome-control-center \
- 	gnome-backgrounds \
- 	gnome-bluetooth \
---=20
-2.53.0
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index 5d1739ebf3..5ba4f67628 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -28,7 +28,7 @@ inherit autotools gettext python3native
+ 
+ CACHED_CONFIGUREVARS = "CCLD_FOR_BUILD='${CC_FOR_BUILD}'"
+ 
+-BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
+ 
+ PARALLEL_MAKE = ""
+ 
+-- 
+2.44.1
 
 
