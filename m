@@ -2,120 +2,101 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EFF6EF371E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C9E0EF371D
 	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 08:48:43 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9632.1773046121176005132
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9633.1773046121450628291
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 09 Mar 2026 01:48:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UWLi8zkI;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-439b9cf8cb5so6991641f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 01:48:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QnV6ZodR;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439b7c2788dso5627877f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 01:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773046119; x=1773650919; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JQ35G0rS7Z+V/qk7q8OoNYaBk5f31Omkx0eL3VlDbc8=;
-        b=UWLi8zkITlHI17BBh5ifQYy9uIvwNk404ClLeLhyOF8Q+c0eLQOoSYC5zUQZSc5s+s
-         ZgGoKj+wMHMglp87GU2mjqZSZM+HIOeKctKz/TKkC1QW8hXZUlnfR4xznoE/P3k/hwL5
-         dQ9oLURXxTo+jVjF26ag9wWs2ctUZI0Y4rz50j9jhZECQEsBarkMhvBnvoqDFX1K3w1P
-         F/ZTxLwx3XDBg3x+sqJ/oqpa7wn8L+Ci+syQIJ9uJt0JYk5Jpk7nOn4WIkGlhPB122fu
-         xj1xvi2QhUMIw+l7bLFCPjhH2p5puvi73mkQa7pQBHqPGJ9jh0tzZ0cTL4C8Ovb8YYdO
-         2+6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773046119; x=1773650919;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1773046120; x=1773650920; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JQ35G0rS7Z+V/qk7q8OoNYaBk5f31Omkx0eL3VlDbc8=;
-        b=b78rbJh1vvJdC80XCEYZZhQpqzmV0joJnCJqoClQkxjIu4T7iefcUQH4cRvlDo2TlB
-         BQruttRGT0s+dq2kmcKsTNhkmtZlmGBJwVFzgJmmn73Nk3BqtJVnJqf/5LohGORbK+NN
-         qgNQR0QusEl/QSjMmlCB5GsnsnSZLoYYe2vrLFKxB47LrHFm/2d+wdFtfHU9+kztVcHX
-         hCIudg7JoZ2l5QUNOftFOBVifOSDHpQsBHMGPvx2noeqje8eRfLUquM4I8/9RbrCtAlu
-         0npUIUc5L1YTt+6u6As0h+YudGjQA6mg5pGgDs+XNF3R9unhuSwNwYe45JGrUPUc3cNB
-         ztXg==
-X-Gm-Message-State: AOJu0Yy8k8A3ApOdfUK43jJkVakame6FDT8CcUnxYPFoJ9odcuHHSBaJ
-	FTiXE2488qgqcJqsVwwU8Vy29IC/2am57Q42lVR61naMtR0jiPTwFeeXAAOYmA==
-X-Gm-Gg: ATEYQzxj9WB80k7mQIW6jugtlb4N+gW+jEj4GezbcYqNRaknwIc+yf/qSlwUgrFi9+x
-	ZG76B93KWkEqh/TAxrh47WawJbMcrtfp3MXMak3KOR8o/A91wgx8bGZMf6f9Re++az8UKPG0REs
-	lAfXFwduJNTTeIQzlX1ITAgfT+piT7FzTsv4o+lUXEBNODaSNa+j9ty1p55dYYGeCbfWqU91Nze
-	ie3eYM+wNUeABIvE0/Z2xZBgD7pPT/dBE7MNxPqnRjOnxVnm9u4l32nauZqeCcvrtKLUqm13px3
-	sUdOj9W0+crJfu532686Il2LNauPTQMn0pUv/wQXaA6lg/B0wxyCyjNnCTLK4g09n12m0DdvevH
-	27Zk+h41dCrS8ZHhy+d+NeU6I9LNApb2VAoC8fs1fKSO5XqwO1YJLJ3tLshemdBIoptoPjd78Zi
-	W5yf2XSxUYgcVjplNa6oYaTaKw1FEAQ7A=
-X-Received: by 2002:a5d:5c89:0:b0:439:bddb:cc77 with SMTP id ffacd0b85a97d-439da880da1mr17230238f8f.37.1773046118995;
-        Mon, 09 Mar 2026 01:48:38 -0700 (PDT)
+        bh=E2GD8fiCXFcVA8HfX9tTcVZ1J91Zj9RJXhyD5/hIRvY=;
+        b=QnV6ZodRvCuILw+vlopfi2FSvl84DU4vHhgH+g94ZaZMKGNZSpv1I1OJ7GfR+hHVzX
+         FDdpgNLDrDvXvvKzBjWQgVWovz24grISmlZxb+k/5pWaqZF+jxLS+8kyh3nfhkyLdjOM
+         juHy6TDAeCksyYfQV5N1S9jq7Vp7DpkzQYRuC7QQqyQHaQfwlxyxCwnpyBNy5ejjwYfl
+         a/d3AGxVf5SNDegHCyTZgomHP/lBJxlDwODWKo84b5YDi1YpNQw+/SoK2hRJdI4zIq0/
+         xiq9bFc6TovWzqrIugpLlurVtyOMbwxwZSSxJQnszYRR6RR9uIqs82DmhCBulxY6P7PZ
+         lViw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773046120; x=1773650920;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=E2GD8fiCXFcVA8HfX9tTcVZ1J91Zj9RJXhyD5/hIRvY=;
+        b=fXE+o5AJp5tmBfYeiaO1UUuinX6vwoO74AKSMuVCHfPIa3CAHMAtIiy4oZKcQWd+VO
+         FSe+Z3QAEM+XNs5AgmcCin0vZUuj52+YYRzP4nSqQSbQ5m/HNgxhUOMDQAZEBSQHo8Gg
+         5+DIPCqeJ7S6zObAlmxXNC4sWV8rnlEehNCQ2gI6Kyjkethh4qYLEP6Zwp6L5VF9LIqO
+         yfjTbj6EqHRqVItQ+1helvgEEQ2V3BKODmHQ+TW09vokg7pzYeLtWVS9gVGTWXEzyQnS
+         FpI/5rYevpBKp52J1hxoTn/zqPxS4raa12CiB/+EaV+Khd85x3QGWY97ei4z6rev8e9/
+         lcMg==
+X-Gm-Message-State: AOJu0YwkOqi6TOiE/YKprwxAvKcX8SHtLBm0Sr7ByLGta5Y6XhmJM73B
+	b40caXA9JRmuPGkX6LasaPaMEtJ0ux2hMhHBXo9ZPcysB7xmCM4/kUzfLHbVXQ==
+X-Gm-Gg: ATEYQzyKNJTPYIMeqO6S9Sr287DciI4EwnnscoX8vDpTXrTFlNy7NoHDB5QCWQoZq/k
+	ftEudNM4RsfQkgwL2O94PxPQNYUiMmXu6GDh0j20P8kpGomiDT7uQYXjceUV6KUgb9JlYCB2NEa
+	EVvMsV2QrAbPDnzeCRTRJURXELnEy4bYLBWwzv11eOYsUfVu2J9/eZfH4LLi6AwcJK0oP4aEq+3
+	eOSeE3VgXTmwlD+zcWdgLugeK1uNqHK1fFXp/ysAR5mQ+iUHPUAhimByJPT6UasgSVlXsgjnlpz
+	jW7bh9Da02EAenzKfDw96ya367EyuxT36Qj5ZdF2u2YHmxuFQNdBFH+pDqrgNzx5EXUxT4HY8Lq
+	66I3weULZgWJxmuhNFIBDVhngDNDmaLRidWSzpBjuTWFil58eeRDawCcn3X0dxO/1sE4xwjaHiF
+	p/q9Fq3Yyx0bbtTj/F155p
+X-Received: by 2002:a05:6000:430d:b0:439:d74f:2109 with SMTP id ffacd0b85a97d-439da680676mr17334555f8f.49.1773046119622;
+        Mon, 09 Mar 2026 01:48:39 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad8d95dsm26850386f8f.7.2026.03.09.01.48.38
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad8d95dsm26850386f8f.7.2026.03.09.01.48.39
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 01:48:38 -0700 (PDT)
+        Mon, 09 Mar 2026 01:48:39 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 1/2] libheif: upgrade 1.20.2 -> 1.21.2
-Date: Mon,  9 Mar 2026 09:48:36 +0100
-Message-ID: <20260309084837.185189-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] aom: add bindir to SYSROOT
+Date: Mon,  9 Mar 2026 09:48:37 +0100
+Message-ID: <20260309084837.185189-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260309084837.185189-1-skandigraun@gmail.com>
+References: <20260309084837.185189-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 08:48:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124959
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124960
 
-Changelog:
+The cmake files files installed by this recipe check the existence of
+the binaries in ${bindir}, and throw a fatal error in case it cannot
+find the expexted files.
 
-1.21.2:
-- build script for JS/WASM now supports building with JPEG2000
-  and "ISO23001-17 Uncompressed" support.
-- image sequence SAI data now works when using the OpenH264 decoder plugin
+Due to this, it is not possible to include aom in other cmake project,
+because it errors out:
 
-1.21.1:
-- This patch release only fixes a build error with some GCC versions
-  because of a missing #include.
+The imported target "AOM::aomdec" references the file
+|
+|      ".../recipe-sysroot/usr/bin/aomdec"
+|
+|   but this file does not exist.  Possible reasons include: ...
 
-1.21.0:
-- CVE-2025-68431 fixed
-- This release adds full support for reading and writing HEIF image sequences.
-- libheif will now encode HEIF image sequences with all included codecs.
-- Since HEIF image sequences are very similar to MP4 videos, this new version
-  is also capable of decoding most MP4 videos (without audio, of course).
-- Support for image sequences with alpha channels. For most codecs, the alpha
-  channel will be stored in a separate, auxiliary, monochrome track. For
-  ISO/IEC 23001-17 (uncompressed) streams, the alpha channel is stored in
-  the main video track.
-- Support for sequence track edit lists to define the number of sequence
-  repetitions (without actually repeating the video data).
-- New encoder plugin using x264 to write H.264-compressed video streams and images.
-- The FFmpeg decoder plugin will now decode both H.265 and H.264.
-- Support for HEIF text items and language properties
+To avoid this error, incldue the content of bindir in the sysroot.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../libheif/{libheif_1.20.2.bb => libheif_1.21.2.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/libheif/{libheif_1.20.2.bb => libheif_1.21.2.bb} (94%)
+ meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb b/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
-similarity index 94%
-rename from meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb
-rename to meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
-index b268b37d8e..7ccac771dc 100644
---- a/meta-multimedia/recipes-multimedia/libheif/libheif_1.20.2.bb
-+++ b/meta-multimedia/recipes-multimedia/libheif/libheif_1.21.2.bb
-@@ -6,9 +6,9 @@ LICENSE_FLAGS = "commercial"
- 
- COMPATIBLE_MACHINE:powerpc64le = "null"
- 
--SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=v1.20.x-releases"
-+SRC_URI = "git://github.com/strukturag/libheif.git;protocol=https;branch=master;tag=v${PV}"
- 
--SRCREV = "35dad50a9145332a7bfdf1ff6aef6801fb613d68"
-+SRCREV = "62f1b8c76ed4d8305071fdacbe74ef9717bacac5"
- 
- inherit cmake pkgconfig
- 
+diff --git a/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb b/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
+index 141b02306d..b157dc79ec 100644
+--- a/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
++++ b/meta-multimedia/recipes-multimedia/aom/aom_3.13.1.bb
+@@ -25,3 +25,5 @@ EXTRA_OECMAKE:append:riscv32 = " -DENABLE_RVV=OFF"
+ do_generate_toolchain_file:append() {
+     echo "set(AOM_AS_FLAGS --debug-prefix-map ${S}=${TARGET_DBGSRC_DIR})" >> ${WORKDIR}/toolchain.cmake
+ }
++
++SYSROOT_DIRS += "${bindir}"
 
