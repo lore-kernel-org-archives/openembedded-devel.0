@@ -1,91 +1,75 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58031EFCD79
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:03:02 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10761.1773050572148813935
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8699EEFCD7E
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:06:42 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10761.1773050801484787620
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 03:02:52 -0700
+ Mon, 09 Mar 2026 03:06:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MXIzweeT;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4852a9c6309so20352585e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 03:02:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773050570; x=1773655370; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bKIy2aYlKE2v0xnc14tEDO962ZQLbA0W8zBmYfqonh0=;
-        b=MXIzweeT/s8cbu6/w1QZjemhL/WBeeuP7Fm7rINhn82nH0BZrevYKtuz+eGbd1MDsi
-         EeVfgaNw5XDozbVd0PSkNa05FCbVNSF+crvw2vvineQ06OhRFVzry5gj1ncsr8F+A/B2
-         86XmUeQr8ZdrjVZYuaSr3WQXlvLHkciADvghqo6ZdSnxyh5IUq0wQoOdl03/cPlb6frG
-         +0UbPLY4LVe3Py+8A9PibcesgpmqeRZwRCxgdcNrJarZoCRIiBR6C50bYhBnRf7qqVSl
-         KD1x/SDXA9gycTvsFzbySA9XYUy4bh1ooegZcQOJN2CTNAM6RKn575feWThVmc2OY6vB
-         kDJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773050570; x=1773655370;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bKIy2aYlKE2v0xnc14tEDO962ZQLbA0W8zBmYfqonh0=;
-        b=odIYs4GXPvRlpMMilWERgSv+SYZ0PhZiMI0YWBLtOmhchcmvPATsZm/Y4b7z0p8fRb
-         sH9C4xm/AjENIxe+tRy+zPiOHSdNB4xSCl0cdtlimceYwyLpM40fpsjdsYqADcTNGjKZ
-         GGuo0NylxbItkINws8Y9qLiGK3A1VGnX8MTOiv4aMvclGDxlxiDWTigmm4JzKkreOloL
-         1ubBTYiigHsrXD4G9jAx2kNzcBQjOTYBeTV3s5MQx0GPJQwxqGsCq78QskPkkYBmeR/9
-         QNc25a+ESxB3pwbkYaN6dyz09f5fBiS1XdwKCfcMXOtalHD3ILj3oiAHfaCidKiLkfoZ
-         76dg==
-X-Gm-Message-State: AOJu0Yz4NV0ZF2HjWRpmDb6gxPwplV5D4QwQsznDN+yP+mYlMJfQZGMv
-	ESTVztOwC8KC+6C5jFPj+zE+RPiw2ahRGg9V55i2gw0ctMuRfbhOQJUZEiJrCQ==
-X-Gm-Gg: ATEYQzzRCdGClAdE8sWbz0mC/Q8wk+COkzE562mLIat+a35dRvxm1VyW2BsHtKe8TdO
-	56iiYVreqi/HrZYNrvsKeYpqB9C72x+TGqIlUPppmD06WeO/UG7Y12I/x2CcqpEseKTdiAh4aw8
-	9vmV1BdYnCC4XvXKtK5Jccu9yLASj7SM/sRi/m0xNFL5OT8FmZjTg+KwRGI2Z6XKxFdEfmpE2kX
-	cz3MVRttKuJ7PWuB3yh4ZlWlDarWShqtzPKE+F7kOuABIx/PovHIeAgINHb3JoZ1hmcxTO/QzJg
-	ZvMbYto6Jtp9lkAd5+JbMd6xOcFTBTCCxMdZmUm6D0IOOVLHeb0xOl1Br9mQU12BcAs1i7sGg3g
-	1Fo+5gPAXNg2qhMgyeNVbywY3i+imFptSWQRM+8qVN7P5wK/Q2dA3QZJ1hmPMp5Q5rsjIn0k5Lg
-	ek268SyThJli4DbuPziYjv
-X-Received: by 2002:a05:600c:8b01:b0:477:561f:6fc8 with SMTP id 5b1f17b1804b1-485269195afmr179781845e9.5.1773050570247;
-        Mon, 09 Mar 2026 03:02:50 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae3f267sm24067636f8f.31.2026.03.09.03.02.49
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 03:02:49 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=PZDaztfY;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-1334352-20260309100639eddc28a96a00020709-juvtrm@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 20260309100639eddc28a96a00020709
+        for <openembedded-devel@lists.openembedded.org>;
+        Mon, 09 Mar 2026 11:06:39 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=andrej.kozemcak@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=0Syymcb5B7xzb09cigUWjErUezwuYHgyD1s+bQfOtmM=;
+ b=PZDaztfYrLv9PwHNpOr3mxtxAUvIF9oCcqiPB2acQ3UdYltvdjx03iG5+2zJjG9YS2GJQZ
+ bS1Z0aW+MfupOyHZ7OboZFNfCGqlrNW6tmsUiWZtzylEfqjqeJNISFOCKS3cEccLGh6iEREe
+ s2JGURhgioaju/+vQ/7L9qcSgL2OUkNoAPitn0vVwVSzVcqGopU+XPCWafvVZsGUtkVV0LOh
+ Z6zBV4v0xYI14BPRyC7tYRO/baz/7i/Y9VievSRDDqXtfAVRlVb2kYm5Y5VUtOCMWFAjJqWs
+ QGDFNkelXsDH0SNOVdu+3eqJe/5ccv+9F/W95/O+OE6xpMxpc6YNxoWw==;
+From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][kirkstone][PATCH] vlc: ignore CVE-2026-26227 and CVE-2026-26228
-Date: Mon,  9 Mar 2026 11:02:49 +0100
-Message-ID: <20260309100249.277314-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Subject: [meta-oe][PATCH 13/14] syslog-ng: upgrade 4.10.2 -> 4.11.0
+Date: Mon,  9 Mar 2026 11:06:29 +0100
+Message-ID: <20260309100630.404637-13-andrej.kozemcak@siemens.com>
+In-Reply-To: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
+References: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:03:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124972
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:06:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124984
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-26227
-https://nvd.nist.gov/vuln/detail/CVE-2026-26228
+Changelog:
+  https://github.com/syslog-ng/syslog-ng/releases/tag/syslog-ng-4.11.0
 
-Both vulnerabilities affect only the Android version of VLC, not
-the other ones. Because of this, ignore these CVEs.
+Highlights
+- kafka-source(): The new kafka() source can directly fetch log messages from the Apache Kafka message bus using the librdkafka client.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../syslog-ng/{syslog-ng_4.10.2.bb => syslog-ng_4.11.0.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/syslog-ng/{syslog-ng_4.10.2.bb => syslog-ng_4.11.0.bb} (98%)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
-index dfc838066b..8a49be72fb 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.17.4.bb
-@@ -130,3 +130,6 @@ FILES:${PN}-staticdev += "\
- INSANE_SKIP:${PN} = "dev-so"
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.10.2.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
+similarity index 98%
+rename from meta-oe/recipes-support/syslog-ng/syslog-ng_4.10.2.bb
+rename to meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
+index c3b201c4a7..1846758681 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.10.2.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
+@@ -26,7 +26,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
+ "
+ SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
  
- EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
-+
-+# Android specific CVEs
-+CVE_CHECK_IGNORE += "CVE-2026-26227 CVE-2026-26228"
+-SRC_URI[sha256sum] = "841503de6c2486e66fd08f0c62ac2568fc8ed1021297f855e8acd58ad7caff76"
++SRC_URI[sha256sum] = "37ea0d4588533316de122df4e1b249867b0a0575f646c7478d0cc4d747462943"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
+ UPSTREAM_CHECK_REGEX = "releases/tag/syslog-ng-(?P<pver>\d+(\.\d+)+)"
+-- 
+2.47.3
+
 
