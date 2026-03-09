@@ -2,33 +2,33 @@ Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A8C3EFCD7C
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:06:42 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10846.1773050801544322536
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 218D7EFCD84
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:06:43 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10845.1773050801375379572
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 09 Mar 2026 03:06:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=duORPptI;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-1334352-20260309100639d497cd125600020753-kzfsa2@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 20260309100639d497cd125600020753
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=cBZ8TWwL;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-1334352-202603091006392c02c59d90000207e2-8sr_f3@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202603091006392c02c59d90000207e2
         for <openembedded-devel@lists.openembedded.org>;
         Mon, 09 Mar 2026 11:06:39 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=andrej.kozemcak@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=T/YLfyVSJ89mnMVKj/UrsvXyIryomC+H6d/av+9Nc9o=;
- b=duORPptIpihu8qmAtwx5mcMrrJYX3f9giUhYhLpRCzLP0ooZnBeAmvEnepSQ1ZSnSQPRSy
- APx4U/WzSWJgzFP5sPohaBTr/0nztM+6GJAhdiNE2rnMVEbID0X7uQdOX6QnYDMVSdTIpMgw
- GNZzg60EQckvN7ojtSuv7XBw0JX3wgryisteiIa6Wdb0kzuuIB4RdJnstmRv3Q6RjK68ipVT
- TZvuboMCBLSKrajSx5uLq+WGIDERvuLIr4KonFaMrcExDPR7UyMcY9fAUHTYwyoZCTMVmJ+F
- 8U7TAXzl5r4+JMl1MnToU7Bq/ZEvNaGvQaxb24l0oqxvXD1Wn8k9nrvQ==;
+ bh=EmElT7DWYb5Y8z78SxD5RJPBTDtk1Tyho9IkHNwApLE=;
+ b=cBZ8TWwLPoVrfYtMlbf5Ju9SxMB0KFWp2aKtHAtGLoRYwIhy2QDIKOnRDARAqFojBhqaR+
+ fUYkJglx+k5BLt3R05/qRfDaV0sSYIDZOYgi5FM7hXqHvRAJ32hlCcVpnXgoQIGFyrcsdc1U
+ JKwEWfqimmmv0PmCERSZfjzd29r2N7tbb7DsXEPd3fXVZ5aN0PucfXA9CXpIgGHV/3vYlqtI
+ 2pjqdtq7cCng/YzVsQ76apoRb7R+ZGlBxinELaVQUODhLQXMdMfGxVSQoyGITOsfrW22vGQ+
+ DexgJzQ7VhRXxfgmVQboFxE4LEo/w07uRn/eRn42AfSx6qJ/sY8ftesg==;
 From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][PATCH 07/14] libsodium: upgrade 1.0.20 -> 1.0.21
-Date: Mon,  9 Mar 2026 11:06:23 +0100
-Message-ID: <20260309100630.404637-7-andrej.kozemcak@siemens.com>
+Subject: [meta-oe][PATCH 09/14] paho-mqtt-cpp: upgrade 1.5.3 -> 1.6.0
+Date: Mon,  9 Mar 2026 11:06:25 +0100
+Message-ID: <20260309100630.404637-9-andrej.kozemcak@siemens.com>
 In-Reply-To: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
 References: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
@@ -38,148 +38,46 @@ Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:06:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124985
-
-License-Update: copyright years refreshed
-
-Removed patch included in this release
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:06:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124980
 
 Changelog:
-  https://github.com/jedisct1/libsodium/releases/tag/1.0.21-RELEASE
+  https://github.com/eclipse-paho/paho.mqtt.cpp/releases/tag/v1.6.0
 
 Changes:
-
-Version 1.0.21
-- security fix for the crypto_core_ed25519_is_valid_point() function
-- new crypto_ipcrypt_* functions
-- sodium_bin2ip and sodium_ip2bin helper functions
-- XOF: the crypto_xof_shake* and crypto_xof_turboshake* functions
-
-Version 1.0.20-stable
-- XCFramework: cross-compilation is now forced on Apple Silicon to avoid Rosetta-related build issues
-- The Fil-C compiler is supported out of the box
-- The CompCert compiler is supported out of the box
-- MSVC 2026 (Visual Studio 2026) is now supported
-- Zig builds now support FreeBSD targets
-- Performance of AES256-GCM and AEGIS on ARM has been improved with some compilers
-- Android binaries have been added to the NuGet package
-- Windows ARM binaries have been added to the NuGet package
-- The Android build script has been improved. The base SDK is now 27c, and the default platform is 21, supporting 16 KB page sizes.
-- The library can now be compiled with Zig 0.15 and Zig 0.16
-- Zig builds now generate position-independent static libraries by default on targets that support PIC
-- arm64e builds have been added to the XCFramework packages
-- XCFramework packages are now full builds instead of minimal builds
-- MSVC builds have been enabled for ARM64
-- iOS 32-bit (armv7/armv7s) support has been removed from the XCFramework build script
-- Security: optblockers have been introduced in critical code paths to prevent compilers from introducing unwanted side channels via conditional jumps. This was observed on RISC-V targets with specific compilers and options.
-- Security: crypto_core_ed25519_is_valid_point() now properly rejects small-order points that are not in the main subgroup
-- ((nonnull)) attributes have been relaxed on some crypto_stream* functions to allow NULL output buffers when the output length is zero
-- A cross-compilation issue with old clang versions has been fixed
-- JavaScript: support for Cloudflare Workers has been added
-- JavaScript: WASM_BIGINT is forcibly disabled to retain compatibility with older runtimes
-- A compilation issue with old toolchains on Solaris has been fixed
-- crypto_aead_aes256gcm_is_available is exported to JavaScript
-- libsodium is now compatible with Emscripten 4.x
-- Security: memory fences have been added after MAC verification in AEAD to prevent speculative access to plaintext before authentication is complete
-- Assembly files now include .gnu.property notes for proper IBT and Shadow Stack support when building with CET instrumentation.
+- Bumped Paho C submodule to v1.3.16 and updated directory name to externals/paho.mqtt.c
+- Some significant performance increases (lower latency) for connect and publish
+- Fixed topic_matcher and topic_filter to properly match parent with multi-level ('#') wildcard.
+- Slight optimization of topic_filter to do simple string comparison if the filter does not contain wildcards.
+- Set a minimum version for Paho C in the CMake file. Report the version found.
+- .deb version properly set, and add architecture name to .deb file
+- remove const from connect_options_builder 'move' constructor
+- fix potential deadlock in thread_queue on capacity increase.
+- Incorrect default retain value in a will options constructor
+- prevent undefined behaviour on empty topic matching
+- Sync reconnect example crashes on first reconnect
 
 Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
- .../libsodium/libsodium/CVE-2025-69277.patch  | 61 -------------------
- ...ibsodium_1.0.20.bb => libsodium_1.0.21.bb} |  5 +-
- 2 files changed, 2 insertions(+), 64 deletions(-)
- delete mode 100644 meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
- rename meta-oe/recipes-crypto/libsodium/{libsodium_1.0.20.bb => libsodium_1.0.21.bb} (58%)
+ .../{paho-mqtt-cpp_1.5.3.bb => paho-mqtt-cpp_1.6.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/paho-mqtt-cpp/{paho-mqtt-cpp_1.5.3.bb => paho-mqtt-cpp_1.6.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch b/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
-deleted file mode 100644
-index a2ced62760..0000000000
---- a/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
-+++ /dev/null
-@@ -1,61 +0,0 @@
--From ad3004ec8731730e93fcfbbc824e67eadc1c1bae Mon Sep 17 00:00:00 2001
--From: Frank Denis <github@pureftpd.org>
--Date: Mon, 29 Dec 2025 23:22:15 +0100
--Subject: [PATCH] core_ed25519_is_valid_point: check Y==Z in addition to X==0
--
--CVE: CVE-2025-69277
--Upstream-Status: Backport [https://github.com/jedisct1/libsodium/commit/ad3004ec8731730e93fcfbbc824e67eadc1c1bae]
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c | 5 ++++-
-- test/default/core_ed25519.c                             | 7 ++++++-
-- 2 files changed, 10 insertions(+), 2 deletions(-)
--
--diff --git a/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c b/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
--index d3020132..4b824f6d 100644
----- a/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
--+++ b/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
--@@ -1141,10 +1141,13 @@ int
-- ge25519_is_on_main_subgroup(const ge25519_p3 *p)
-- {
--     ge25519_p3 pl;
--+    fe25519    t;
-- 
--     ge25519_mul_l(&pl, p);
-- 
---    return fe25519_iszero(pl.X);
--+    fe25519_sub(t, pl.Y, pl.Z);
--+
--+    return fe25519_iszero(pl.X) & fe25519_iszero(t);
-- }
-- 
-- int
--diff --git a/test/default/core_ed25519.c b/test/default/core_ed25519.c
--index bc457493..02f72bd6 100644
----- a/test/default/core_ed25519.c
--+++ b/test/default/core_ed25519.c
--@@ -13,6 +13,10 @@ static const unsigned char max_canonical_p[32] = {
--     0xe4, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
--     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f
-- };
--+static const unsigned char not_main_subgroup_p[32] = {
--+    0x95, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99,
--+    0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99
--+};
-- static const unsigned char L_p1[32] = {
--     0xee, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58, 0xd6, 0x9c, 0xf7, 0xa2, 0xde, 0xf9, 0xde, 0x14,
--     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10
--@@ -133,11 +137,12 @@ main(void)
--     assert(crypto_core_ed25519_is_valid_point(p) == 0);
-- 
--     p[0] = 9;
---    assert(crypto_core_ed25519_is_valid_point(p) == 1);
--+    assert(crypto_core_ed25519_is_valid_point(p) == 0);
-- 
--     assert(crypto_core_ed25519_is_valid_point(max_canonical_p) == 1);
--     assert(crypto_core_ed25519_is_valid_point(non_canonical_invalid_p) == 0);
--     assert(crypto_core_ed25519_is_valid_point(non_canonical_p) == 0);
--+    assert(crypto_core_ed25519_is_valid_point(not_main_subgroup_p) == 0);
-- 
--     memcpy(p2, p, crypto_core_ed25519_BYTES);
--     add_P(p2);
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-similarity index 58%
-rename from meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-rename to meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-index 972b8b8694..5616dbc55e 100644
---- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-+++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-@@ -2,12 +2,11 @@ SUMMARY = "The Sodium crypto library"
- HOMEPAGE = "http://libsodium.org/"
- BUGTRACKER = "https://github.com/jedisct1/libsodium/issues"
- LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c59be7bb29f8e431b5f2d690b6734185"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4942a8ebbbc7f2212bd68a47df264a4f"
+diff --git a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.5.3.bb b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.6.0.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.5.3.bb
+rename to meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.6.0.bb
+index 5b4aed3001..53c1d5770b 100644
+--- a/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.5.3.bb
++++ b/meta-oe/recipes-connectivity/paho-mqtt-cpp/paho-mqtt-cpp_1.6.0.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
+ "
  
- SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
--SRC_URI[sha256sum] = "ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19"
-+SRC_URI[sha256sum] = "9e4285c7a419e82dedb0be63a72eea357d6943bc3e28e6735bf600dd4883feaf"
+ SRC_URI = "git://github.com/eclipse/paho.mqtt.cpp;protocol=https;branch=master;tag=v${PV}"
+-SRCREV = "17ff3dc0270738adc710667be44847eebc038ae0"
++SRCREV = "c0b43a49d7b7e7b5e7009658ca22f19ac1112c83"
  
--SRC_URI += "file://CVE-2025-69277.patch"
- 
- inherit autotools
+ DEPENDS = "openssl paho-mqtt-c"
  
 -- 
 2.47.3
