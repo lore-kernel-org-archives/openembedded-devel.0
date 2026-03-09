@@ -1,108 +1,96 @@
-Return-Path: <andrej.kozemcak@siemens.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61E63EFCD95
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:06:44 +0000 (UTC)
-Received: from mta-64-225.siemens.flowmailer.net (mta-64-225.siemens.flowmailer.net [185.136.64.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10756.1773050799737600479
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9755EFCD8A
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:32:14 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11188.1773052327940673279
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 03:06:40 -0700
+ Mon, 09 Mar 2026 03:32:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=ThwWcWNg;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.225, mailfrom: fm-1334352-2026030910063600ef3756810002075e-pz6qaa@rts-flowmailer.siemens.com)
-Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id 2026030910063600ef3756810002075e
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 09 Mar 2026 11:06:37 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=andrej.kozemcak@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=IJtovI93ENO4cvsaEtH6+WQ3UFWuZY4k2/9rFckUFsM=;
- b=ThwWcWNgz/fzKoMj425nNz0UpVR//a2sj4PF4IQNkKNkwuX3fyF4oyErQu4n2biDf4WXhP
- t+OJjwt4xsc/X10K+jQAKTCyt2yjpNWRkw6gasV/+w7yVUN+Nj58JJoroOqLjkdk0V1FcNVm
- sIqxBtK5+n39v/IOVEJokup7/4j7ScQseCkty01UjCNtVb0xklff8T0kRHrQocIpfPot4Qjt
- N0L10+3/+SSa5ccLdyHSx9KurWDH1JoSexE/DS1BimUXTT4SMlMQgr8XbNRAlI87VUgWUT6O
- RdN/tqJS0VZ7GHViAyoRdspJxW3gcDeLLqNIJcm5c9DJNm95KuiQk87Q==;
-From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b9siO+ZV;
+ spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-829afe24fb5so1532837b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 03:32:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773052327; x=1773657127; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=91yPw1Kbdy20oN0W1Vbbfy3irPSb7ifKizZChL2DD0s=;
+        b=b9siO+ZV4HcaTVYnW95SZBPoVgoMaAILvViw5ZAHTJikoaWomsRLizyA4IublcbU3P
+         WmMw2kAgdGSS/YIqesJ8incTErE6PgyY8PFKxRnxI7b2v5N4afkppuRDbLZTjQXx0ir7
+         8EkrvlXLKhnswGbrJMMzInbJIKoTklCm2PAZ689ipbrNGdM7drMyO5acbpTl005X7BUL
+         C6ZBbENiqgKujS9y4iznfKCBj6xkU5Xe1ALY1KYn7dZ7j/amcaZ4sZg8ry2jHdLxNb+V
+         q6iwprORI4eTNYYF5Ju9pEbp7otm1WKYh4TjxdWHj4flJhtn0PhH2o9lH7YkaqeX3CU2
+         ngFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773052327; x=1773657127;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=91yPw1Kbdy20oN0W1Vbbfy3irPSb7ifKizZChL2DD0s=;
+        b=cK31H/moNJ204/sLxNm1Fd+zLxVhgWxim/IEUawz9GX67z21tfqOhKj8pwT4kNc6kr
+         bjUyNSwLD3Ey/E2fkxZ9QXhJ5U0NRG3kNVTXFI88CI8XeEXRHRCShn2fPfXA+0C7UVGX
+         yXO9CYlKz2pY+WxXuFyT5yvSoudsxNJhEd5BWco+98QBZYxVr57i5JgiK1JcktSHn9v7
+         bpQ3gz565se4Oei6mh7oOLhe/xtqC6ijHupH4plAjj0eqpq0+RoN5uf2KJvsYYbrhT8P
+         4hfGmBsoVX9Mk9+kgKumS6DaQLUdG+kLBhGCD8p2bRz6MladxZefHj3OKVbNLJs59lkI
+         BHLA==
+X-Gm-Message-State: AOJu0YybCQqvPdQbtnK35eav1gmGjE/7Y86ulBZNKSghqOajyKrD+PhG
+	BIwHShZThWluynnePWpjtYQNPbRZnbVqncSOd5cc0uogHh+CSM37urYO9R03IQ==
+X-Gm-Gg: ATEYQzyWMCqcLabR8/+Dc6MrN9YrLlts1ascmrzfkG4XP70qDR7lBLfQOxuGXa+tAcC
+	lcmMwN9HBG7K6GL06SyvVDKsrQ5Xh8M+tOvcbwKTOdN0usQajzPj+yVXNZ4db1X2/GdbcLRzkT3
+	pk711G1pojygs+JMXg9vHLkpvGZyAUS4u6B3RsOn+t1D1TCY7uQgiok6iLK8GpUltf5Df9rCtC2
+	ZIVuMdb+tEiNFyfRjpWhxnXvtuVSd4b0jVv+yCYB1vxsZ6DIHJ7Z5KoDEhMIPjJyXoA68o/b1ho
+	Kkti1+8ZnKR28GELAcx5ZgDIQB9zKRkhAA64Ng8ckuK6CRS3eKHNsplKrhZTI3kA6PHuf0r7yYt
+	FhArbdC2zFpw/u/XrXsGFFJzXIeTeyZihLlDrh45+EAGoiRTSqpAylBxmfAm3rMt6ybd/aQyiH9
+	lVxHZLfhsZZWVhuOVX5ETl1pf4+Rt93i0YFjw=
+X-Received: by 2002:a05:6a00:882:b0:824:9f22:1e95 with SMTP id d2e1a72fcca58-829a2f83a54mr9175294b3a.55.1773052327064;
+        Mon, 09 Mar 2026 03:32:07 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([167.103.127.26])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-829a463a1adsm9877083b3a.11.2026.03.09.03.32.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Mar 2026 03:32:04 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][PATCH 01/14] asio: upgrade 1.30.2 -> 1.36.0
-Date: Mon,  9 Mar 2026 11:06:17 +0100
-Message-ID: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 1/8] frr: upgrade 10.4.2 -> 10.4.3
+Date: Mon,  9 Mar 2026 23:31:46 +1300
+Message-ID: <20260309103153.536284-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:06:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124973
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:32:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124987
 
-License-Update: copyright years refreshed
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changelogs:
+Release Notes:
+https://github.com/FRRouting/frr/releases/tag/frr-10.4.3
 
-Asio 1.36.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_36_0
-
-- Fixed an issue, introduced in Asio 1.35.0, that prevented the creation of internal threads required for running some asynchronous operations on a thread_pool.
-- Fixed co_spawn to adhere to the asynchronous operation requirement for non-reentrant invocation of the completion handler.
-- Added the [[noreturn]] attribute to asio::detail::throw_exception.
-- Fixed compilation errors in channel<void(error_code)> and concurrent_channel<void(error_code)>.
-- Fixed a compilation issue with the Bullseye compiler.
-- Fixed an awaitable coroutine compile error with the clang shipped with MSVC.
-- Fixed support for platforms that don't define SA_NOCLDWAIT.
-- Worked around a warning that occurs when building with _FORTIFY_SOURCE on recent g++.
-- Added a documentation note on basic_signal_set async signal safety.
-
-Asio 1.35.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_35_0
-
-Asio 1.34.2:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_34_2
-
-Asio 1.34.1:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_34_1
-
-Asio 1.34.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_34_0
-
-Asio 1.33.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_33_0
-
-Asio 1.32.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_32_0
-
-Asio 1.31.0:
-  https://think-async.com/Asio/asio-1.36.0/doc/asio/history.html#asio.history.asio_1_31_0
-
-Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-support/asio/{asio_1.30.2.bb => asio_1.36.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/asio/{asio_1.30.2.bb => asio_1.36.0.bb} (86%)
+ .../recipes-protocols/frr/{frr_10.4.2.bb => frr_10.4.3.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-protocols/frr/{frr_10.4.2.bb => frr_10.4.3.bb} (99%)
 
-diff --git a/meta-oe/recipes-support/asio/asio_1.30.2.bb b/meta-oe/recipes-support/asio/asio_1.36.0.bb
-similarity index 86%
-rename from meta-oe/recipes-support/asio/asio_1.30.2.bb
-rename to meta-oe/recipes-support/asio/asio_1.36.0.bb
-index 1f492b71eb..d196a35c69 100644
---- a/meta-oe/recipes-support/asio/asio_1.30.2.bb
-+++ b/meta-oe/recipes-support/asio/asio_1.36.0.bb
-@@ -17,9 +17,9 @@ inherit autotools ptest
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.4.2.bb b/meta-networking/recipes-protocols/frr/frr_10.4.3.bb
+similarity index 99%
+rename from meta-networking/recipes-protocols/frr/frr_10.4.2.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.4.3.bb
+index a246b3459f..147e3b8a8b 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.4.2.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.4.3.bb
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.4;
+            file://CVE-2025-61099-61107-3.patch \
+            "
  
- ALLOW_EMPTY:${PN} = "1"
+-SRCREV = "642f65b9e5853c7207982a9cf8275732737d4e44"
++SRCREV = "6ddbeb5eaf71bc5a3f05f22e211684fb85a34091"
  
--LIC_FILES_CHKSUM = "file://COPYING;md5=2bfc909e030aeafefa72f764165b8d07"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=92db288d8a7d89bb9c5821c447c3052c"
+ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
  
--SRC_URI[sha256sum] = "9f12cef05c0477eace9c68ccabd19f9e3a04b875d4768c323714cbd3a5fa3c2b"
-+SRC_URI[sha256sum] = "7bf4dbe3c1ccd9cc4c94e6e6be026dcc2110f9201d286bb9500dc85d69825524"
- 
- PACKAGECONFIG ??= "boost"
- 
--- 
-2.47.3
-
 
