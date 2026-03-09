@@ -1,154 +1,160 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BD47FCA16E
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 18:21:09 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21688.1773080466608178962
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A94CFCA176
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 18:40:49 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22155.1773081648798105363
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 11:21:06 -0700
+ Mon, 09 Mar 2026 11:40:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U2hBhW8R;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4852f73d0a3so18989985e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 11:21:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aQD/PYeX;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-415e568a7ecso2812194fac.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 11:40:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773081648; cv=none;
+        d=google.com; s=arc-20240605;
+        b=cyooQ5VB9Q2H7TnQwU8mzgHdFCvOpmZS/g5z9ASSuyxidysyI8n6hfpuFEr4T14u9w
+         73PeQ4cb+yJB9UnOEEs3ZNt9iC+Hc3u9cp4prdJ4Ro2hyUhagtlQeGxnkcqaf5jdzTmg
+         vrwi94kmTHvudUECotTx/gLv9PBh6SuJRXo886dEAjus7nMc/IvxmAXUNv3Q5+1Ekg+8
+         o+y51gik4bFZ51OvBW2mkxPo6ab5rz75idKGlkTjfm7Qn2Ljb5cUaVCz3ejuzpuBtQiA
+         LcUeEJ9+kGD3sc3TpxdRUaMqoB4/BevJdvFjyDG7Atpk3jV1/gD7BrUIYTEAITSD6m7M
+         H09Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Sj3vFgowDPdhN8mNIEYMaBK8NzoGlaQiwMx/orUSnyg=;
+        fh=/pKZqiJO6ZyW8l1F3cqMwIj3cJesZI6SFBUzs2mKL9s=;
+        b=IevIL6DBRM/h58MGiYYWGqI6QoDOzvIgDfx0B1FT5+ienXaYTjPvOeWCrG8gtWWk+c
+         hWwMFT19fMmwJMlABbUp6xn7QCAnKg07QTbMcFhogNbpUSfOc9XTMiTVzSEVFYgdDDUJ
+         dFNaWnsmUSayQ8K6sxh+DS+i2p2n6jB29fhYvcBvK4U7EOJgjOL/mJZWDHq/UF0gYBfH
+         kZOlNJ0ADHZaoisiYOqACIS7HoVznX5Hu/jZn9rfAiPcqbkMrUi0HnzpDQMKQgAzJLuF
+         Fdi8OMGHD7lZmKpzd8Qs8GzBkR7pCgAaRzjsteBTjuoUTYE3YYumcA7GbD9PB9pMAGqT
+         YI/A==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773080465; x=1773685265; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZdBJrx9AP5UQtORn20dxTi5Mb2FPpGJ2FkscpxJhRMg=;
-        b=U2hBhW8RpWUWaeP1YAR050MeUSOOuDrMflsF6kjgID1771H483j9pifuG5wZ5ar1hm
-         7SukpNyNwP00QXA+uyjMO4a1i/q0pPhwnvEJw/bRIAcoETniOXl25oQDXGi4VxgkGdBx
-         3I8E/Rs32Jh381c5l69Bx8aCRT43PGzd/7nteSxUomAPUaRmm0jDOocd9lJaCxU3OJBv
-         x1EHrepPMnL27FnlcSGerJ+9BXmlVKEYYFRZIaXIboOXkp5S8MPsBXNM99eyKp9gvbiF
-         u1TPpoDdNbHqpg7S+YqYZ4v5WsyvYSxaozbRHVD/yqdTPPdeUHxF3lqw0Sl8s1Z8Ww5q
-         K0lA==
+        d=gmail.com; s=20230601; t=1773081648; x=1773686448; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Sj3vFgowDPdhN8mNIEYMaBK8NzoGlaQiwMx/orUSnyg=;
+        b=aQD/PYeX5q64JdbCbFMzNTzORyJEdFllKI+XiNL3VKlocQJWVuER++Iur7qWDHOaXv
+         mpUjNyuwCwXa1ELAaWF3t6HsQn2L57RKzhmWFnHYCIMuD4WofwOA/7eBZeS1vBOnO9Oj
+         V99ebbpN946qBadIADG4r6KgMOw3hsqMObO4s9mvGgFHyxoRZg1arpKxFiqTtkkjoi/E
+         wxyQxoGDVrfkBQW+b2AVAjtbhfIT7Y4Oq3r2TIaqlA2+8DC1wI8xRwmn51yXb3fERJPl
+         5zTnq+Jt7A9SU9SSL0RhLyFiYVC8FvEDjAYimpY5VOZtmakqSO4EWBVNTGH/DKz8HQih
+         P6jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773080465; x=1773685265;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ZdBJrx9AP5UQtORn20dxTi5Mb2FPpGJ2FkscpxJhRMg=;
-        b=SVZUT8is/gHb62IroWzlS5tT69wJ5tTx7m2+P00iM3kwAUq4Z29gqkFZpWWbMjHtFd
-         RaviBqGN4E2b59SNVmBYBJTp5rnzIue/Uoxku7vEKWMBptml0ACCLrxEw3+skQKbIFK5
-         ZvHhk34HyXBPFzbwnCvLSjrqutLMvCrCd89ljS33tHgphamuUnuxN0EKsfljuO4pq2o8
-         cKXEXk5VYEy37YuD54ygRmBiEZMlpPqCgh9A9NIFrQDjv5+9SV16XOFfg/7QM0MLtkfl
-         U9rhh2Mj7UuqehMBHjyl7s9XWGUmnSFPuDICVfJCSf9e7CD4rv6YJHa9yR+txMr7Nce+
-         3NDg==
-X-Gm-Message-State: AOJu0YyL6Fs29Ix8+6F7Q2C3NWqwZlIsQDAq+RBgarAP3mgoV/FNYv50
-	DLH92AosImdiqNLvXtbLQO21gKuTrx7I6XD+aReA3jt1dvXRMfqOA/L1UycXFg==
-X-Gm-Gg: ATEYQzwzpmHzNXaySu5+MTfmwK/TlZh+O2TsARx8WFukTrmXvwb/0gTV+JshC/T27NE
-	UjNh9xpoWynLNX8Ckcx2C7JgLp0ndF4PuYfqu0T1gv4bs+ARDrXTxjAgThJwxPdT7r2qG7OpupB
-	iiHlnai9Kq8OHXNmDJmKLauwNHt5WGv5G38fBY546WWZT0xe/JKHev0j4CYGUWnOBYm1iN/lycg
-	++CvtPheOv9xdP6kaldip8pzRCWXw0fy1wjJ6Gsl45r//KU75lDuky7lo55yGhqZ9uV6e0MPTG1
-	SJLt0KE+kvwFaHHD0yPrDMiPHppTS24WdnBJoMWKiImNjOZJCte2PLmJd2sK+TBtUXuZe7sn3QU
-	z/VN0WOyE+YNKFAr56DFQyfo64OYg7DFT0R5UFqK5BE6N3dwiZCHhwkiGh1Y3wm2a2zXYYeh6vw
-	dCN4M9cpNTn+14Qczdotny6/WAMDEcwi8=
-X-Received: by 2002:a05:600c:1f0f:b0:483:703e:4ad5 with SMTP id 5b1f17b1804b1-48526967cd9mr198728375e9.22.1773080464837;
-        Mon, 09 Mar 2026 11:21:04 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541aba60esm9379875e9.5.2026.03.09.11.21.02
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 11:21:02 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 3/3] gimp: patch CVE-2023-44443 and CVE-2023-44444
-Date: Mon,  9 Mar 2026 19:21:00 +0100
-Message-ID: <20260309182100.717697-3-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260309182100.717697-1-skandigraun@gmail.com>
-References: <20260309182100.717697-1-skandigraun@gmail.com>
+        d=1e100.net; s=20230601; t=1773081648; x=1773686448;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Sj3vFgowDPdhN8mNIEYMaBK8NzoGlaQiwMx/orUSnyg=;
+        b=aTKclKO7S5L1VTF8OfeVheArnl6cLWvKZ7q2mqRSCMxbzW1GTJP/ja+huY531726Z5
+         o5CZqj+eyhrhLXeck05oH1c7rV953JAyZSjY5l7J0mQf04KCC3m8eSA9qXuvjlnZUUt0
+         srcUfr/RRSqAmjNebyl1arcOG0g+Z6Xe4E30FwFnMr8Rok4CAptAo9DCWhE/hwDLsgSC
+         7VGHKAhQ5qilMaVNxbTEFDAEpvzRU3x3SlU9n7tJDdeDYrIMl8tczxtK2QLjOWQRlmjK
+         RdiPPZKz3XtaMM9ta9/IjUVZebTJ4QjpREcZdKLFls+hsrwBB1XHuCyS4CygwRo4D0xX
+         yqGg==
+X-Gm-Message-State: AOJu0YxN8qwJqyWy68n4ozOFExQrTO5Ie27LaMkI23IqEGv8vgHfL3Az
+	gGXpjqh7z9b/aFpnsdPHX/iTyuxlmgsjzmvuuI35ADGw3BE87J6jxP9mSqZsD6Qyx1/tVbCL21m
+	Cpq1SFc0A5DiyJhZmsm2cGWT5woqOudc=
+X-Gm-Gg: ATEYQzza42sNdJ/ueWKB3y0FZt+OSiWM4kXS9/jYQgx6Wta5cbrxT9BbvPYsh/xi34u
+	nYZOOgwhk+qpjJ7k7JkHP9UHG1L1LQahxuW27sSwjaD2IPogOnBftuyWuopA5IsBg1+GUmGvGUf
+	c7P4E9ZtmBDqsEtlCXCFTei3Xu0YBmpHri7oYOWzldp3E9lo5FKLSYFNoxAsw8qB5gEja9z8du4
+	y573v88sJLoeMbYwWnA4gWVnxpzpAqzr+G00bWwOVm9qBpbULQTz05fE+dAA2PZ52t9I4ODHyWz
+	0fbQn//l
+X-Received: by 2002:a05:6871:d3c8:b0:3ec:5cc6:315f with SMTP id
+ 586e51a60fabf-416e3f84fa8mr7537406fac.3.1773081647871; Mon, 09 Mar 2026
+ 11:40:47 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260309100630.404637-1-andrej.kozemcak@siemens.com> <20260309100630.404637-14-andrej.kozemcak@siemens.com>
+In-Reply-To: <20260309100630.404637-14-andrej.kozemcak@siemens.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Tue, 10 Mar 2026 07:40:36 +1300
+X-Gm-Features: AaiRm52qWx7pYWiK32J4Wg1SDQw-YWcorIPzO15D7cyxHUwAxGC7c1jdqSWeP6c
+Message-ID: <CADySD0GNT2MFwP4cKG0SSYVd+wMBM7iA3idq+cG5OfQ-8ufMOQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 14/14] zchunk: upgrade 1.5.2 -> 1.5.3
+To: andrej.kozemcak@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 18:21:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125004
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 18:40:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125005
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-44443
-https://nvd.nist.gov/vuln/detail/CVE-2023-44444
+On Mon, Mar 9, 2026 at 11:06=E2=80=AFPM Andrej Kozemcak via
+lists.openembedded.org
+<andrej.kozemcak=3Dsiemens.com@lists.openembedded.org> wrote:
+>
+> The tag is not on any branch.
+>
+> tag cannot be added to SRC_URI as it does not seem to work with nobanch
 
-The relevant upstream issues:
-https://gitlab.gnome.org/GNOME/gimp/-/issues/10072
-https://gitlab.gnome.org/GNOME/gimp/-/issues/10071
+Can you please share more details about what was not working?
+I gave it a quick test and was able to fetch using following SRC_URI
+SRC_URI =3D "git://github.com/zchunk/zchunk.git;protocol=3Dhttps;nobranch=
+=3D1;tag=3D${PV}"
 
-For the backport, upstream has merged the two patches
-into one, solving both CVEs. That patch is in this change.
+cheers
+Ankur
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../gimp/CVE-2023-44443_CVE-2023-44444.patch  | 47 +++++++++++++++++++
- meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb  |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
-
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
-new file mode 100644
-index 0000000000..c92aaa24a9
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
-@@ -0,0 +1,47 @@
-+From 8a8c3fe7cdb498d05d8e61e6b0f36d9a314caa62 Mon Sep 17 00:00:00 2001
-+From: Alx Sa <cmyk.student@gmail.com>
-+Date: Sat, 23 Sep 2023 20:40:18 +0000
-+Subject: [PATCH] plug-ins: Fix vulnerabilities in file-psp
-+
-+Backports commits e1bfd871 and 96f536a3
-+from master
-+
-+CVE: CVE-2023-44443 CVE-2023-44444
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/ef12c0a90752a06d4c465a768d052b07f5e8a8a0]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ plug-ins/common/file-psp.c | 13 +++++++++++--
-+ 1 file changed, 11 insertions(+), 2 deletions(-)
-+
-+diff --git a/plug-ins/common/file-psp.c b/plug-ins/common/file-psp.c
-+index c0f3480..6a6b93d 100644
-+--- a/plug-ins/common/file-psp.c
-++++ b/plug-ins/common/file-psp.c
-+@@ -1128,8 +1128,17 @@ read_color_block (FILE      *f,
-+     }
-+ 
-+   color_palette_entries = GUINT32_FROM_LE (entry_count);
-++  /* TODO: GIMP currently only supports a maximum of 256 colors
-++   * in an indexed image. If this changes, we can change this check */
-++  if (color_palette_entries > 256)
-++    {
-++      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED,
-++                   _("Error: Unsupported palette size"));
-++      return -1;
-++    }
-++
-+   /* psp color palette entries are stored as RGBA so 4 bytes per entry
-+-     where the fourth bytes is always zero */
-++   * where the fourth bytes is always zero */
-+   pal_size = color_palette_entries * 4;
-+   color_palette = g_malloc (pal_size);
-+   if (fread (color_palette, pal_size, 1, f) < 1)
-+@@ -1498,7 +1507,7 @@ read_channel_data (FILE        *f,
-+         else
-+           endq = q + line_width * height;
-+ 
-+-        buf = g_malloc (127);
-++        buf = g_malloc (128);
-+         while (q < endq)
-+           {
-+             fread (&runcount, 1, 1, f);
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-index ff34bfa6fd..07c9fcf666 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-@@ -50,6 +50,7 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
-            file://CVE-2022-32990-3.patch \
-            file://CVE-2023-44441.patch \
-            file://CVE-2023-44442.patch \
-+           file://CVE-2023-44443_CVE-2023-44444.patch \
-            "
- SRC_URI[sha256sum] = "88815daa76ed7d4277eeb353358bafa116cd2fcd2c861d95b95135c1d52b67dc"
- 
+>
+> Changelog:
+>   https://github.com/zchunk/zchunk/compare/1.5.2...1.5.3
+>
+> Changes:
+>   - update to 1.5.3
+>   - rename internal close() functions to close_zck_component to avoid POS=
+IX conflict on AIX
+>
+> Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+> ---
+>  .../zchunk/{zchunk_1.5.2.bb =3D> zchunk_1.5.3.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/zchunk/{zchunk_1.5.2.bb =3D> zchunk_1.5.3=
+.bb} (82%)
+>
+> diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.5.2.bb b/meta-oe/rec=
+ipes-support/zchunk/zchunk_1.5.3.bb
+> similarity index 82%
+> rename from meta-oe/recipes-support/zchunk/zchunk_1.5.2.bb
+> rename to meta-oe/recipes-support/zchunk/zchunk_1.5.3.bb
+> index bbdd06dfda..56aa0baf2e 100644
+> --- a/meta-oe/recipes-support/zchunk/zchunk_1.5.2.bb
+> +++ b/meta-oe/recipes-support/zchunk/zchunk_1.5.3.bb
+> @@ -3,9 +3,9 @@ DESCRIPTION =3D "A file format designed for highly effici=
+ent deltas while maintain
+>  LICENSE =3D "BSD-2-Clause"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddaf6e68539f564601a5a5869c31e5=
+242"
+>
+> -SRC_URI =3D "git://github.com/zchunk/zchunk.git;protocol=3Dhttps;branch=
+=3Dmain"
+> +SRC_URI =3D "git://github.com/zchunk/zchunk.git;protocol=3Dhttps;nobranc=
+h=3D1"
+>
+> -SRCREV =3D "222d1a4da3661dd95c2445b96f7e1e208f55d219"
+> +SRCREV =3D "366cf22e725fc273abe0e082c707753cce76c453"
+>
+>  DEPENDS =3D "zstd"
+>  DEPENDS:append:libc-musl =3D " argp-standalone"
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#124975): https://lists.openembedded.org/g/openembedde=
+d-devel/message/124975
+> Mute This Topic: https://lists.openembedded.org/mt/118218620/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
