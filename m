@@ -2,93 +2,90 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F2BBEFCD76
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 09:51:52 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10336.1773049905026403904
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60502EFCD78
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 10:00:52 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.10638.1773050444697041158
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 02:51:45 -0700
+ Mon, 09 Mar 2026 03:00:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MmG02t/s;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48374014a77so136008055e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 02:51:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AHR/qBTb;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439af7d77f0so7280300f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 03:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773049903; x=1773654703; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773050443; x=1773655243; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kWGpv50E7YQc5xMjXd85ENz6ZMCtEZbLr1DUfjJFvYw=;
-        b=MmG02t/s59rhrql69KCRbfF16s3VOPPef14AD2YI6C7bcKSyZnR9QQu3YMMRsEFyaj
-         uqy7SbQ17fhQSVcs/ptYXFHR4h1/FJN/4wcVZugnKFkNWrnltKPmTSB7ChMFWx8hw3eb
-         QYT4xQ4gqKpX1xVLcLO6hgkbnq1Id/Pag13GSOgasppnMDxyNCIWFapcs1qiNGE1pfw3
-         DRH96kxEzB7yrwN+4vPoEF+e9azXEuW/ooRBSIfQ7Ng5G1b2ulNifbdWtJeDGv8DwIzy
-         sb7RVcCcCAWsSstTeAL2BdDmXTBIgq9Lo1MMyzoFt3p8i/4zVfGR1GdUcj1RDnDNRenL
-         y7ow==
+        bh=TXBjKrVVmLUP9RL9WdZ2uwG/Io9JPdmZgAiZHVl23TI=;
+        b=AHR/qBTbU1N1uiCzYyuKmHtBQiw6aOp/auF9H9RJiPpLldaY4TYpjgehBlGcr6voew
+         rVFpjkhEebtSDn01cR0S9FBkKWgD9Nu0dUi+ItaVYAbnjeBYr/CHnLEYTf8D50h5oy62
+         gk5ZK85pcMQhYZ3auqGQ066MoZ+IN5XZTfx26S162v7gj3x3Z1aJwdnzudTcXrNfGd2K
+         9yDUHJRf8QwPp/N0swQSL2vvDv3pArIzuN9SZoniHV2+pl+y4fNVUSlPTSyOsIEv/fXg
+         U7F9W/lAyorckvJVRmipNWUjwaxU2TA+P/3vVI3PiyNNf6G/+x2HJhZ7FuWrWJCUQPRH
+         9glw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773049903; x=1773654703;
+        d=1e100.net; s=20230601; t=1773050443; x=1773655243;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kWGpv50E7YQc5xMjXd85ENz6ZMCtEZbLr1DUfjJFvYw=;
-        b=PQFmoqTib9c4mocdlPKGCohCxsoojAmsSIjVSyxI1uj6N4HuO90qO3W2ZcUfWYOHAj
-         Kh5iYmvZBkvVazpBTXE99laPBoeQx3t6HJNAnenV6FphQBRZ/UZZ1GMEE1Kn+dqsxIyQ
-         ojR3orm760x0Hql9ecyuzXCbv9gP09T0ZbGPaP/bgNNq8o+SzxYVhP2xfH1K8l1HMx4l
-         NrVX7lWUJ+U2BZ3zHlhkFVKygWW/s8dokqWk8zHElXwgjewCgxGLB6Qm+HU8j4yG3hBE
-         bcKauDMM2gyUe3zR0O7bULZX8Mxh3fjQbohqNjH8HAIT3trqHD08QkEhNliCyj56pH/K
-         UxcA==
-X-Gm-Message-State: AOJu0YwCcDL1T+HDNPqaoB/bX1yHH9r12/7F+d9OV3TGD8YReze0p8jv
-	0lIgSS3Y8U1TflASMEHCS/8f2uoSDVzJHFqG37el0idNp5up4oZA8dKfVuAfHw==
-X-Gm-Gg: ATEYQzyUs5yenBgze0n3P1GvYltsC+WnZh8WZ88YOXjejh4JXrivb6R50XMec1g0Z/N
-	0EMkP+ZI2WVHPNi806LSobpv+OmYLoZEJ24fBZV1EjwaGNYtfSvJq15LR7Si+M/x5TBT8syLL4i
-	MLFL9ecMwnL5TWWEf4oxRp61uIswCy643RLYDLexs6nhc1BsZu6P2wHuZbOZzLi1Vgnr9Fd69IB
-	MmHMhrvxrmRQ+kKs/ZBajWiWmEggemr2JMdmRbaiqniH0q4n1Ty22c/YExQDbEDTN0mzu4FhqfW
-	C9AAKiiCnfsNftyYfVRGa715q8q723stJOU13smtoaJ6ryxb8sz987c/TAr0b9zIg9ynIJlkn/P
-	DJJ0d4D3TMxLHTgvHM8Sco56s3jrKTXE2IEAQsYGpIHk0yDgM6batDDyHjvUyjlYEFBJY7FWnV0
-	YIwSzIxG5UyEPS2vXFlkJr
-X-Received: by 2002:a05:6000:2c10:b0:439:ab3d:1c27 with SMTP id ffacd0b85a97d-439da354a23mr16646233f8f.2.1773049903078;
-        Mon, 09 Mar 2026 02:51:43 -0700 (PDT)
+        bh=TXBjKrVVmLUP9RL9WdZ2uwG/Io9JPdmZgAiZHVl23TI=;
+        b=lTJrswEg4kvhgtZQlUDlIvfBBYbvO5OVlY5NreBK9l0cGU5sQbCcPwF6st1rc8b+9e
+         Cqp/PRrbhX4D+J/D/LyN3liSW5T5EY3fYsG9YBRv4q8oD76p01ZwBJCqF4lM6z91dcDy
+         OZcdrXcyMQHiUrAccFM5e3nLRY1IM1vdac42moSRMthfOk6noz2t1cUUurk/c1pproc+
+         yFQEGHpFH2PxYJNmXOfuN+3RgnGlNkx41Zc8bajSttmA6F0V9k1LzOw5gDCdKyhLvXvn
+         qmHeoSQh3jE3F9Svn55YzkjARqfAz43ng6rq3oaOwFD+3YNs/esmloK8H72SDZWUjbGj
+         DPbg==
+X-Gm-Message-State: AOJu0YzHf+FtK6uD4ukxFBaWyEPQIVz6RXN6Q4l5P9tZxqpr1vg/anih
+	xiBpQRjoeofVstyzg8MUpbm9xEJ/4Kn7FjN47Vs4Z/R5rwJU/kkjjUM9ZBiNQA==
+X-Gm-Gg: ATEYQzxLhNQVUZbYSrNvEab7tgH23saw0iW9zzqjekcIYwmgkKY3YiUmxNAcVEIr1fK
+	1F/Nvd2v0Eqk8t5i6wkyg1kH4+KnfA0O4+ahwdY+4Jm3O0Mqag/i5pT999iIbC9gU6nqQp9A/HP
+	k2QqbzJLoYcvXMpYdF/41QN2tmG2MCBsDHoTp3W15/AbHx9d0AWOcJnkuzqAGl1dZ4mLy67Flje
+	ipQLqY7O0W1uzjHl8ctsTH5dl+h1Rlc83y56JZoQExl6zPDRc1riL63/dgA2PG5tcZr/f/ZtIru
+	xjdYXIh7zeZ31Lr8g1aK4+PTl++8awWj7BeVT1c1WlYFnWZMTy88HrEc6Gyu7AOkl3Q7rSG+91W
+	IVhs1qomfrYHVQR5elZ+UHptonduWt+8AeLgO97z6OaG/ouWeY+P4j5nLXZ3O7PZ2vH2beQAEtR
+	XLrtw0SspBWe/DhqusQQlY
+X-Received: by 2002:a5d:5f82:0:b0:439:b5f9:eeba with SMTP id ffacd0b85a97d-439da354a2emr18359410f8f.3.1773050441214;
+        Mon, 09 Mar 2026 03:00:41 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad8dbb3sm22720730f8f.4.2026.03.09.02.51.42
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dadac2a7sm25387971f8f.15.2026.03.09.03.00.40
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 02:51:42 -0700 (PDT)
+        Mon, 09 Mar 2026 03:00:40 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH v2] zabbix: mark CVE-2026-23925 as patched
-Date: Mon,  9 Mar 2026 10:51:41 +0100
-Message-ID: <20260309095141.276490-1-skandigraun@gmail.com>
+Subject: [meta-multimedia][scarthgap][PATCH] vlc: ignore CVE-2026-26227 and CVE-2026-26228
+Date: Mon,  9 Mar 2026 11:00:39 +0100
+Message-ID: <20260309100039.277132-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 09:51:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124970
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 10:00:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124971
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-23925
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-26227
+https://nvd.nist.gov/vuln/detail/CVE-2026-26228
 
-The vulnerability has been fixed since 7.0.18[1], however NVD
-tracks this CVE without version information.
-
-[1]: https://github.com/zabbix/zabbix/commit/89dec866ec7f8230b25f06ac000575e3b7bd4025
+Both vulnerabilities affect only the Android version of VLC, not
+the other ones. Because of this, ignore these CVEs.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
+ meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-v2: this time I even included closing quotes, not only opening ones
-
- meta-oe/recipes-connectivity/zabbix/zabbix_7.0.19.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_7.0.19.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_7.0.19.bb
-index 28e4cc4eb0..141342c45b 100644
---- a/meta-oe/recipes-connectivity/zabbix/zabbix_7.0.19.bb
-+++ b/meta-oe/recipes-connectivity/zabbix/zabbix_7.0.19.bb
-@@ -75,3 +75,5 @@ do_install:append() {
- FILES:${PN} += "${libdir}"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
+index bf34146e0a..79de6405f3 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.20.bb
+@@ -134,3 +134,6 @@ FILES:${PN}-staticdev += "\
+ INSANE_SKIP:${PN} = "dev-so"
  
- RDEPENDS:${PN} = "logrotate"
+ EXCLUDE_FROM_WORLD = "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "0", "1", d)}"
 +
-+CVE_STATUS[CVE-2026-23925] = "fixed-version: fixed since 7.0.18"
++CVE_STATUS[CVE-2026-26227] = "not-applicable-platform: the vulnerability is Android-specific"
++CVE_STATUS[CVE-2026-26228] = "not-applicable-platform: the vulnerability is Android-specific"
 
