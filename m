@@ -2,159 +2,152 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78C93FCA173
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BD47FCA16E
 	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 18:21:09 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21685.1773080463432954052
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21688.1773080466608178962
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 11:21:03 -0700
+ Mon, 09 Mar 2026 11:21:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iXod7zGl;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-485345e1013so13106655e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 11:21:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=U2hBhW8R;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4852f73d0a3so18989985e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 11:21:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773080462; x=1773685262; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pStnIqaMXjYrGMC5RVdFltljQKdTRk6yEKArZJzSbNo=;
-        b=iXod7zGlvQzCIXFiGaVZ0Uk3l/DqKkuWez+DM/x0x6zZ6qxaOClEb2h5WPq/pD6yiB
-         /wjf3nqfc4PyER3UhhzTmpMkGtKTJFP0mZaYQrUGBcvcaEkm3e2fRddQOq7JMUwoI93T
-         OOkUsxPorTY+SbFBelWVSw1l6kSgjwzXZu4z4bVeQkS3IW8fi76Qg8W3adL+3BHNKZ51
-         AxFDDtvYFzE6YnCSjZ6RZmC+jjDZZdYLOLZFwAu/v7i0XMJl6rnmsS9miZinpNYe2sO7
-         I6WV14/1sKATpxNo4QJ2WGnuEqRlgWs5gpfEM26Drwgr6AUhbyZWfh1H1UkDx14jY80L
-         7FXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773080462; x=1773685262;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1773080465; x=1773685265; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pStnIqaMXjYrGMC5RVdFltljQKdTRk6yEKArZJzSbNo=;
-        b=cJpxSor6w3LoGIVsvN3RT0rsKSQfEn0frZTAPfXEoYlUCxeB3mFt+4aj2dvA1W/MJz
-         pXKh4xJc54U9h0Q3I0ippz6FPZShNjzwinL+rqfamCUjWjZgupEP9ax/5gPzcGo685nS
-         c1EdaLdMWehblXkAQQ0dj+nPq4koXtw1SuXgYY6LUULYZHtXHF6lSbjWtMWOp17EUzAd
-         S9FQ/ttIIUFH0iWYJQ6Ju2L+wXAQxNCurvAhSRJs5x+4AukULxA4ABV73/z7uUcFLJ18
-         uptAlyEEHRf6W/txT7tEkf4BLNNsUk+jtTYTyPFW+1XMyi+qv9EBim0vLfCfxZHv5wR4
-         tObg==
-X-Gm-Message-State: AOJu0YxY5Q4wFH37V/2FuSxvfANeWxudz23c1EICpWNppVzlKzAPUJx9
-	3xJYy/L8SWakw+SU9RSgWPiJU12eGZP1zfmezSNyGqLk+4Ggi7x5VNLTBebkXQ==
-X-Gm-Gg: ATEYQzxFEzWgnodtzHsN0kHABac2k46F0g6OJdkRdpc1AHvjJptJ49vg2+hdRQyS4fd
-	ETBysJ8vrMTOhkSjY2ZmbVaLrfARzIi1JOYCXtpvgC4WdesNre0pVoRxkcacfQ+AUvK+S0ifzbf
-	ROyLX8HbKSfQhuD93vDhZerFofUDQei9YCjD9ZtqdvtrE5tQBoHR2GG3yDdBy2lxWG14x2pPJFH
-	/boFNK3TNL97EvIINNjqT2LBzdN4D/Jh63DR3kUCrXOt67Uzp1vDCrVvE4r/PVPpBRt7KHFIUe1
-	T1Q0VNR18fbut2tYk0xyK+dRLzf9B2qws6iazY6wb2Byv000zwC9eK/25dXUlN/TUtCVU+NUPVv
-	oQJHFp4n34I7XvnvG49WZgWMId8ZE5Mn4NLcIq0PyHvpCnajhVFIo4UeK8j7yR5vm0LSrU47rZE
-	tbuGyWNcthrrJzOhUVM15F
-X-Received: by 2002:a05:600c:468b:b0:47e:e981:78b4 with SMTP id 5b1f17b1804b1-48541a00b6fmr9867425e9.12.1773080461560;
-        Mon, 09 Mar 2026 11:21:01 -0700 (PDT)
+        bh=ZdBJrx9AP5UQtORn20dxTi5Mb2FPpGJ2FkscpxJhRMg=;
+        b=U2hBhW8RpWUWaeP1YAR050MeUSOOuDrMflsF6kjgID1771H483j9pifuG5wZ5ar1hm
+         7SukpNyNwP00QXA+uyjMO4a1i/q0pPhwnvEJw/bRIAcoETniOXl25oQDXGi4VxgkGdBx
+         3I8E/Rs32Jh381c5l69Bx8aCRT43PGzd/7nteSxUomAPUaRmm0jDOocd9lJaCxU3OJBv
+         x1EHrepPMnL27FnlcSGerJ+9BXmlVKEYYFRZIaXIboOXkp5S8MPsBXNM99eyKp9gvbiF
+         u1TPpoDdNbHqpg7S+YqYZ4v5WsyvYSxaozbRHVD/yqdTPPdeUHxF3lqw0Sl8s1Z8Ww5q
+         K0lA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773080465; x=1773685265;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=ZdBJrx9AP5UQtORn20dxTi5Mb2FPpGJ2FkscpxJhRMg=;
+        b=SVZUT8is/gHb62IroWzlS5tT69wJ5tTx7m2+P00iM3kwAUq4Z29gqkFZpWWbMjHtFd
+         RaviBqGN4E2b59SNVmBYBJTp5rnzIue/Uoxku7vEKWMBptml0ACCLrxEw3+skQKbIFK5
+         ZvHhk34HyXBPFzbwnCvLSjrqutLMvCrCd89ljS33tHgphamuUnuxN0EKsfljuO4pq2o8
+         cKXEXk5VYEy37YuD54ygRmBiEZMlpPqCgh9A9NIFrQDjv5+9SV16XOFfg/7QM0MLtkfl
+         U9rhh2Mj7UuqehMBHjyl7s9XWGUmnSFPuDICVfJCSf9e7CD4rv6YJHa9yR+txMr7Nce+
+         3NDg==
+X-Gm-Message-State: AOJu0YyL6Fs29Ix8+6F7Q2C3NWqwZlIsQDAq+RBgarAP3mgoV/FNYv50
+	DLH92AosImdiqNLvXtbLQO21gKuTrx7I6XD+aReA3jt1dvXRMfqOA/L1UycXFg==
+X-Gm-Gg: ATEYQzwzpmHzNXaySu5+MTfmwK/TlZh+O2TsARx8WFukTrmXvwb/0gTV+JshC/T27NE
+	UjNh9xpoWynLNX8Ckcx2C7JgLp0ndF4PuYfqu0T1gv4bs+ARDrXTxjAgThJwxPdT7r2qG7OpupB
+	iiHlnai9Kq8OHXNmDJmKLauwNHt5WGv5G38fBY546WWZT0xe/JKHev0j4CYGUWnOBYm1iN/lycg
+	++CvtPheOv9xdP6kaldip8pzRCWXw0fy1wjJ6Gsl45r//KU75lDuky7lo55yGhqZ9uV6e0MPTG1
+	SJLt0KE+kvwFaHHD0yPrDMiPHppTS24WdnBJoMWKiImNjOZJCte2PLmJd2sK+TBtUXuZe7sn3QU
+	z/VN0WOyE+YNKFAr56DFQyfo64OYg7DFT0R5UFqK5BE6N3dwiZCHhwkiGh1Y3wm2a2zXYYeh6vw
+	dCN4M9cpNTn+14Qczdotny6/WAMDEcwi8=
+X-Received: by 2002:a05:600c:1f0f:b0:483:703e:4ad5 with SMTP id 5b1f17b1804b1-48526967cd9mr198728375e9.22.1773080464837;
+        Mon, 09 Mar 2026 11:21:04 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541aba60esm9379875e9.5.2026.03.09.11.21.00
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541aba60esm9379875e9.5.2026.03.09.11.21.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 11:21:01 -0700 (PDT)
+        Mon, 09 Mar 2026 11:21:02 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][kirkstone][PATCH 1/3] gimp: patch CVE-2023-44441
-Date: Mon,  9 Mar 2026 19:20:58 +0100
-Message-ID: <20260309182100.717697-1-skandigraun@gmail.com>
+Subject: [meta-gnome][kirkstone][PATCH 3/3] gimp: patch CVE-2023-44443 and CVE-2023-44444
+Date: Mon,  9 Mar 2026 19:21:00 +0100
+Message-ID: <20260309182100.717697-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260309182100.717697-1-skandigraun@gmail.com>
+References: <20260309182100.717697-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 18:21:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125002
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125004
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2023-44441
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-44443
+https://nvd.nist.gov/vuln/detail/CVE-2023-44444
 
-Backport the commit that resolved the related upstream issue[1].
+The relevant upstream issues:
+https://gitlab.gnome.org/GNOME/gimp/-/issues/10072
+https://gitlab.gnome.org/GNOME/gimp/-/issues/10071
 
-[1]: https://gitlab.gnome.org/GNOME/gimp/-/issues/10069
+For the backport, upstream has merged the two patches
+into one, solving both CVEs. That patch is in this change.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../gimp/gimp/CVE-2023-44441.patch            | 61 +++++++++++++++++++
+ .../gimp/CVE-2023-44443_CVE-2023-44444.patch  | 47 +++++++++++++++++++
  meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb  |  1 +
- 2 files changed, 62 insertions(+)
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44441.patch
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44441.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44441.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
 new file mode 100644
-index 0000000000..d28cb1e848
+index 0000000000..c92aaa24a9
 --- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44441.patch
-@@ -0,0 +1,61 @@
-+From babb323270a37091604bec44ee3597150cac8227 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44443_CVE-2023-44444.patch
+@@ -0,0 +1,47 @@
++From 8a8c3fe7cdb498d05d8e61e6b0f36d9a314caa62 Mon Sep 17 00:00:00 2001
 +From: Alx Sa <cmyk.student@gmail.com>
-+Date: Sun, 1 Oct 2023 17:54:08 +0000
-+Subject: [PATCH] plug-ins: Fix DDS vulnerability (ZDI-CAN-22093)
++Date: Sat, 23 Sep 2023 20:40:18 +0000
++Subject: [PATCH] plug-ins: Fix vulnerabilities in file-psp
 +
-+Resolves #10069
++Backports commits e1bfd871 and 96f536a3
++from master
 +
-+Currently, the DDS header information for the width, height, and bytes per scan line
-+are read in and assumed to be correct. As these values are used for memory allocation
-+and reading, it would be good to verify they do not exceed the file size.
-+
-+This patch adds a condition after the header is read in to verify those values. If they exceed
-+the file size (mins an offset), the file is not read in and an error message is shown.
-+
-+CVE: CVE-2023-44441
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/7db71cd0b6e36c454aa0d2d3efeec7e636db4dbc]
++CVE: CVE-2023-44443 CVE-2023-44444
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/ef12c0a90752a06d4c465a768d052b07f5e8a8a0]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ plug-ins/file-dds/ddsread.c | 15 +++++++++++++++
-+ 1 file changed, 15 insertions(+)
++ plug-ins/common/file-psp.c | 13 +++++++++++--
++ 1 file changed, 11 insertions(+), 2 deletions(-)
 +
-+diff --git a/plug-ins/file-dds/ddsread.c b/plug-ins/file-dds/ddsread.c
-+index a8eb8b8..98e122d 100644
-+--- a/plug-ins/file-dds/ddsread.c
-++++ b/plug-ins/file-dds/ddsread.c
-+@@ -109,6 +109,7 @@ read_dds (gchar    *filename,
-+   guchar *pixels;
-+   gchar *tmp;
-+   FILE *fp;
-++  gsize file_size;
-+   dds_header_t hdr;
-+   dds_header_dx10_t dx10hdr;
-+   dds_load_info_t d;
-+@@ -130,6 +131,10 @@ read_dds (gchar    *filename,
-+       return GIMP_PDB_EXECUTION_ERROR;
++diff --git a/plug-ins/common/file-psp.c b/plug-ins/common/file-psp.c
++index c0f3480..6a6b93d 100644
++--- a/plug-ins/common/file-psp.c
+++++ b/plug-ins/common/file-psp.c
++@@ -1128,8 +1128,17 @@ read_color_block (FILE      *f,
 +     }
 + 
-++  fseek (fp, 0L, SEEK_END);
-++  file_size = ftell (fp);
-++  fseek (fp, 0, SEEK_SET);
-++
-+   if (strrchr (filename, '/'))
-+     tmp = g_strdup_printf ("Loading %s:", strrchr (filename, '/') + 1);
-+   else
-+@@ -186,6 +191,16 @@ read_dds (gchar    *filename,
-+         }
-+     }
-+ 
-++  /* verify header information is accurate */
-++  if (hdr.depth < 1                                       ||
-++      (hdr.pitch_or_linsize > (file_size - sizeof (hdr))) ||
-++      (((guint64) hdr.height * hdr.width * hdr.depth) > (file_size - sizeof (hdr))))
++   color_palette_entries = GUINT32_FROM_LE (entry_count);
+++  /* TODO: GIMP currently only supports a maximum of 256 colors
+++   * in an indexed image. If this changes, we can change this check */
+++  if (color_palette_entries > 256)
 ++    {
-++      fclose (fp);
-++      g_message ("Invalid or corrupted DDS header\n");
-++      return GIMP_PDB_EXECUTION_ERROR;
+++      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_FAILED,
+++                   _("Error: Unsupported palette size"));
+++      return -1;
 ++    }
 ++
-+   if (hdr.pixelfmt.flags & DDPF_FOURCC)
-+     {
-+       /* fourcc is dXt* or rXgb */
++   /* psp color palette entries are stored as RGBA so 4 bytes per entry
++-     where the fourth bytes is always zero */
+++   * where the fourth bytes is always zero */
++   pal_size = color_palette_entries * 4;
++   color_palette = g_malloc (pal_size);
++   if (fread (color_palette, pal_size, 1, f) < 1)
++@@ -1498,7 +1507,7 @@ read_channel_data (FILE        *f,
++         else
++           endq = q + line_width * height;
++ 
++-        buf = g_malloc (127);
+++        buf = g_malloc (128);
++         while (q < endq)
++           {
++             fread (&runcount, 1, 1, f);
 diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-index 4d2771e551..124760651d 100644
+index ff34bfa6fd..07c9fcf666 100644
 --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
 +++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
-@@ -48,6 +48,7 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
-            file://CVE-2022-32990-1.patch \
-            file://CVE-2022-32990-2.patch \
+@@ -50,6 +50,7 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
             file://CVE-2022-32990-3.patch \
-+           file://CVE-2023-44441.patch \
+            file://CVE-2023-44441.patch \
+            file://CVE-2023-44442.patch \
++           file://CVE-2023-44443_CVE-2023-44444.patch \
             "
  SRC_URI[sha256sum] = "88815daa76ed7d4277eeb353358bafa116cd2fcd2c861d95b95135c1d52b67dc"
  
