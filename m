@@ -2,154 +2,199 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B629CFCA19A
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 22:14:09 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.26996.1773094446313943622
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B24E5FCA19C
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 22:14:19 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.26895.1773094453598969197
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 15:14:06 -0700
+ Mon, 09 Mar 2026 15:14:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=b4PP8Ysm;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-35983877dc5so3946361a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 15:14:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O1PViBJI;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-358d80f60ccso6569301a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 15:14:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773094445; x=1773699245; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SVooxmFBL4p+/lT/I0y8DQXOlVSBPW1yrx32LLiHUD4=;
-        b=b4PP8Ysmkkp03V+RvdJMl4PRCuinD1p1upPJNPocl31LVfcH9S6GsnbjYF//+v7W+w
-         5paEiCAxkBBP8nZ3/R5B0aOHcrwbg4CD3Tc2bSOuDqzK7kUluJ8tD9/IzFfLf2Di6KOr
-         /PlWlfK7dc2CejCtCTLAmghBbO5BDJ+WfRt8Mrbosu7+opqmaETxNc+XgwM9elU0NO0r
-         7Gk1g+tGA7wH3K2eOE4EoFes6VNjW66HlZNHAMKRbC2IzPUwU8/icbF40fg8pppUpN5C
-         nmDJG/LeNk/WOPLMynKuqmAxCzXgv3Eelgj851/y/vrdhlsD3anPo9HyoWSXAOH17jOU
-         eAXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773094445; x=1773699245;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1773094453; x=1773699253; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SVooxmFBL4p+/lT/I0y8DQXOlVSBPW1yrx32LLiHUD4=;
-        b=fIv8oHBc2x2sojJF6KeTgOqCv/tojyDhrFVWW0qHFbxoNKr2Qq66uL6Egz/pEPedX6
-         mH30k6jH3yLHooKUDeHQ/giq85zITaK5sT73h6bTQKzpllfJV1eJU5b4r1NZO5bYH7u9
-         P/vngbq+WkrZ+4GN4IW300vvIIk1eJYoqIQ4EIf+arHUsSE2BpQ3iKn8TjF61lriB0Lk
-         ufMb6iQrTKkd2YJknqzoqLlMsmEQka2YDjkLS1wUmMPDue5XozNNISO4+QaWPx+DWn2s
-         0yksxYkpmDJaeZAv/Fdt5sD2R2VFHAxNvbr4IgBrn8vQFicT2hqJLz7nIc8x+bs3ynzh
-         AnZw==
-X-Gm-Message-State: AOJu0Yx9rhjG4tSxam7iW1gZoaS+N1CHT6JPBzz38Jhe6AEYHqyMqpBd
-	UfQFCbpLZfKDEDyVdVz2ZYFCyAUmhcTH1pa8DNRLEYW4JRFR6rVsQUw5F9/szw==
-X-Gm-Gg: ATEYQzwE7oCEggv/WPvF909UCnmDMHDd/g3nuLOH2bxKsQQiMTBOIoZ0VKoA3h/qPNT
-	PJpr3JaE19t6nYTFmTBZtzxhKsP+okUeDjAKApE919tNMj94VV9tyRnxZSiT8FL/WjwjBmoFKbF
-	ykDYNz/JLHoFdGPCkbAmFhi3NsWNiyCvzSo5Ymg0z28tcnuvGtRKHvWfp8PTze3Kr58cN3LDPHN
-	oLyTP4bjqsJIhEoOhhlMi6YBWPvBbFYuy8+Tl/OVGBPW7B7Vq0pE0ynqQfyQiv7nGg8fxBoYg5U
-	NF8269cMDS3kzp06B0EVYwYG/MFKJxOdZWJXc92Kj4pkKmdhi2fo4b7OadaWr5zIl4rT2ZQE1Xw
-	YM9azA3Kg1t+l3lZwDJL5JDKnEyQT4exebFAJrczg4T6yn4ecQ2AzXEpST0Xdkd9uOuRfxoLwdF
-	k1UkiHlOCHcZbsny0v7tveQd777niKulT7HcQ=
-X-Received: by 2002:a17:90b:39cc:b0:359:8888:6519 with SMTP id 98e67ed59e1d1-359be119427mr11562908a91.0.1773094445369;
-        Mon, 09 Mar 2026 15:14:05 -0700 (PDT)
+        bh=7HYjFNn4MHHbo7k1/8AXiFyizfjEbO9WglKCP/JCirE=;
+        b=O1PViBJIS6WYvw/j7SKB62lww1f4be+8VrQQLyf7FipPABYVgpDBQxX/89qbkJJclX
+         YNJ/gwm1AoNu9O9N2Y6wxS2juSnsDAlyM8W23WjX/G5koNphlYOFtprLymIncwgDRDMB
+         TtGuv2qIATjoFAVd32kZ9+38jeZE0qGM086NPYfO2CihQAbDHac439pmD4tqUaYXWLF1
+         RiSd4NcpeFNpckZ4HcKS3yKd7iu6eySQmdQa3Nqa25EaVGz/KEvJpZhAFkM2DU2y9BKu
+         Tn3JUBf7S85v7zmObiKoygaE4pGv5+Pp+//DeneG37rdIs161P8FEtQL/hCs0Jpv9Znq
+         R48w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773094453; x=1773699253;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=7HYjFNn4MHHbo7k1/8AXiFyizfjEbO9WglKCP/JCirE=;
+        b=CsWHkQ8iHi5iaItjsayTLwWKyRNj1tCSfDhXS1lv33/LeFMrWNShBXHn18b0YEzIW8
+         X7sPbQWl8umhc5GaF1yXhpiuS6F+IDjhsGX71f39d13Sdo3RXcbeyW5tXYsrQuLU7vay
+         fSHAZIc8lpC+xncDnbbloZGjgrNAHz1hqGlsvg/NVPUJoJDwuxT2gCWO1X6tpQ6Zk3oQ
+         SSl9sGfi0O0QXS9WKqrcMJ/32ijK4L48kWSjk5ijc/PYzdrAsX47D+paV134Wq0rtcMP
+         OWzqYJV5EP+fs+YNSRKMqM4KCmTPlTat5YMz78GtdSICKTlMn2JoqlWnYP7AXmTkDTWL
+         JEDg==
+X-Gm-Message-State: AOJu0YyyiKxQe5N1Y6vs8sAre54B48C6Ir45O2sEwXM3ymoAkOs2P8KA
+	aRrCg2qbIqx11G0TDjYZwL63a7AMsbTKpZ4X7JFsoQveiMYjCUIk1Oz0elilVw==
+X-Gm-Gg: ATEYQzya2DxC00YTMkBw+kJy/WqXVSaNyUnC7vNGtNWQ8RG78RJE2xKmBVo1kuKPHyp
+	J4CY26nJ+a08Dgkk+o4YL02G3ohtg+gzBgJEW/vir+VXl+YuToq64VbuRRYnNrs7uo5yLhlBoQS
+	PE9kNyjp5qIJMd07ymOCxXVflzqOs01mq+U2tFUHRBBEFvCVbNoS5f5y8vT/k4aPWN9OBaRTL8q
+	GuoqAXBLwIievgS4qwXjfwHLuaoVjTn4ekoJYCtdkcqyAXmX0ngzy711Fvjixui22/W+2h+2ibJ
+	qsHY/zVAQT4ICad6/vHXxQzhFDhK1BFXFT5OYfW9Cdry8tN35F8GdTCdtKdbAFqiZa4vwJBeoeP
+	c6BEupXGUOvm5kK9oh4hqvbKlybRHKEiY3+zOh1nU0vU4Hfa6AzmyNXGJPplbQ39rWpXAsyzybo
+	C6mURMptV7jQe0aE/aCPNuXegc115moI7PLu0=
+X-Received: by 2002:a17:90b:3e45:b0:354:9b3f:710b with SMTP id 98e67ed59e1d1-359be32bc30mr10862534a91.19.1773094452790;
+        Mon, 09 Mar 2026 15:14:12 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.26])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-359bbc060d7sm5991413a91.2.2026.03.09.15.14.02
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-359bbc060d7sm5991413a91.2.2026.03.09.15.14.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 15:14:04 -0700 (PDT)
+        Mon, 09 Mar 2026 15:14:12 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Liu Yiding <liuyd.fnst@fujitsu.com>,
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-filesystem][whinlatter][PATCH 1/4] btrfsmaintenance: upgrade 0.5 -> 0.5.2
-Date: Tue, 10 Mar 2026 11:13:51 +1300
-Message-ID: <20260309221354.1058134-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-filesystem][whinlatter][PATCH 3/4] owfs: upgrade 3.2p3 -> 3.2p4
+Date: Tue, 10 Mar 2026 11:13:53 +1300
+Message-ID: <20260309221354.1058134-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260309221354.1058134-1-ankur.tyagi85@gmail.com>
+References: <20260309221354.1058134-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 22:14:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125008
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 22:14:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125010
 
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-1.Changelog:
-  fix syntax error in run_task, preventing jobs to start
-  start scrub jobs sequentially if RAID5 or RAID6 data profile is found
-  fix btrfsmaintenance-refresh.service description
+Drop patch that's included in this release.
 
-2.Update 0001-change-sysconfig-path-to-etc-default.patch for 0.5.2
+Changelog:
+v3.2p4 is mainly a bugfix & cleanup release.
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Enhancements
+    Add support for InfernoEmbedded soft-devices (GH-21)
+
+Bug fixes
+    Fix bug (GH-55) related to split packet (GH-64)
+    Fix copy paste bug (474f06d)
+    Add \r to Http header to satisfy RFC2616 specification (GH-20)
+
+Maintenance
+    build system cleanup (GH-72, GH-27, GH-16)
+    Fix missing files in source distribution (GH-70, GH-69)
+    Fix compilation with GCC10 (GH-62)
+
+Minor fixes
+    Fix typos (GH-43 GH-23)
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7adb1a61d26d14132f98c5373d2cee2e91b84361)
+(cherry picked from commit 58259850fe6302a752548e910198fa080b49ea66)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...enance_0.5.bb => btrfsmaintenance_0.5.2.bb} |  4 ++--
- ...-change-sysconfig-path-to-etc-default.patch | 18 +++++++++---------
- 2 files changed, 11 insertions(+), 11 deletions(-)
- rename meta-filesystems/recipes-utils/btrfsmaintenance/{btrfsmaintenance_0.5.bb => btrfsmaintenance_0.5.2.bb} (96%)
+ .../owfs/0001-Add-build-rule-for-README.patch |  6 +--
+ .../0001-Fix-compilation-with-GCC10.patch     | 44 -------------------
+ .../owfs/{owfs_3.2p3.bb => owfs_3.2p4.bb}     |  7 ++-
+ 3 files changed, 6 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
+ rename meta-filesystems/recipes-filesystems/owfs/{owfs_3.2p3.bb => owfs_3.2p4.bb} (96%)
 
-diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-similarity index 96%
-rename from meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
-rename to meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-index 645e38ca49..6722b63c10 100644
---- a/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.bb
-+++ b/meta-filesystems/recipes-utils/btrfsmaintenance/btrfsmaintenance_0.5.2.bb
-@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
- 
- SECTION = "base"
- 
--SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https \
-+SRC_URI = "git://github.com/kdave/${BPN};branch=master;protocol=https;tag=v${PV} \
-     file://0001-change-sysconfig-path-to-etc-default.patch \
-     file://0002-add-WantedBy-directive-to-btrfsmaintenance-refresh.s.patch \
- "
--SRCREV = "be42cb6267055d125994abd6927cf3a26deab74c"
-+SRCREV = "beb9e2d166cbd856297fe8d28e89e8b36961a723"
- 
- UPSTREAM_CHECK_URI = "https://github.com/kdave/${BPN}/tags"
- UPSTREAM_CHECK_REGEX = "${BPN}/releases/tag/v(?P<pver>\d+(?:\.\d+)*)"
-diff --git a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-index d425206f0e..b064adcc86 100644
---- a/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-+++ b/meta-filesystems/recipes-utils/btrfsmaintenance/files/0001-change-sysconfig-path-to-etc-default.patch
-@@ -1,6 +1,3 @@
--From b49dbe17e0d9ae463e5a34e6991aa2d3c70d2fb1 Mon Sep 17 00:00:00 2001
--From: Claudius Heine <ch@denx.de>
--Date: Wed, 11 May 2022 14:33:13 +0200
- Subject: [PATCH] change sysconfig path to /etc/default
- 
- OE uses /etc/default for service configuration, not /etc/sysconfig which
-@@ -11,6 +8,9 @@ Change the files accordingly
- Upstream-Status: Inappropriate [OE specific]
- 
- Signed-off-by: Claudius Heine <ch@denx.de>
-+
-+Update for 0.5.2
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
- ---
-  btrfsmaintenance-refresh.path    | 4 ++--
-  btrfsmaintenance-refresh.service | 2 +-
-@@ -32,16 +32,16 @@ index d56ad11..f0b4132 100644
-  [Install]
-  WantedBy=multi-user.target
- diff --git a/btrfsmaintenance-refresh.service b/btrfsmaintenance-refresh.service
--index 4ed1eb4..d6225a6 100644
-+index 19e51c0..223fca9 100644
- --- a/btrfsmaintenance-refresh.service
- +++ b/btrfsmaintenance-refresh.service
- @@ -1,5 +1,5 @@
-  [Unit]
---Description=Update cron periods from /etc/sysconfig/btrfsmaintenance
--+Description=Update cron periods from /etc/default/btrfsmaintenance
-+-Description=Configure systemd timer schedule according to /etc/sysconfig/btrfsmaintenance
-++Description=Configure systemd timer schedule according to /etc/default/btrfsmaintenance
-+ Documentation="file:/usr/share/doc/btrfsmaintenance/README.man"
-+ Documentation="file:/usr/share/doc/packages/btrfsmaintenance/README.man"
-  
-- [Service]
-- ExecStart=/usr/share/btrfsmaintenance/btrfsmaintenance-refresh-cron.sh systemd-timer
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Add-build-rule-for-README.patch b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Add-build-rule-for-README.patch
+index 870d0ef056..229c58f1d0 100644
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Add-build-rule-for-README.patch
++++ b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Add-build-rule-for-README.patch
+@@ -17,11 +17,11 @@ diff --git a/Makefile.am b/Makefile.am
+ index e0c4ad6..0449321 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -35,3 +35,4 @@ rpmcvs: preparerpm
++@@ -30,3 +30,5 @@ rpm: preparerpm
++ rpmcvs: preparerpm
+  	@LN_S@ -f `pwd`/@PACKAGE@-@VERSION@.tar.gz ${RPMDIR}/SOURCES/@PACKAGE@-@VERSION@_cvs_`date +"%Y%m%d"`.tar.gz
+  	cd ${RPMDIR}/SPECS && @RPMBUILD@ -ba @PACKAGE@.spec --define 'cvs 1'
+- 
+++
+ +README: README.md
  -- 
--2.33.3
-+2.43.0
+ 2.7.4
+-
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch b/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
+deleted file mode 100644
+index 6426ecb247..0000000000
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-GCC10.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From a812202d22a2861318b8e39f1cd74cd222f8e76f Mon Sep 17 00:00:00 2001
+-From: "Azamat H. Hackimov" <azamat.hackimov@gmail.com>
+-Date: Tue, 9 Jun 2020 11:30:38 +0300
+-Subject: [PATCH] Fix compilation with GCC10
+-
+-Fixed compilation with -fno-common, which enabled in GCC 10 by default.
+-See https://bugs.gentoo.org/707438.
+-
+-Upstream-Status: Backport [https://github.com/owfs/owfs/pull/62]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- module/owserver/src/c/owserver.c       | 2 ++
+- module/owserver/src/include/owserver.h | 2 +-
+- 2 files changed, 3 insertions(+), 1 deletion(-)
+-
+-diff --git a/module/owserver/src/c/owserver.c b/module/owserver/src/c/owserver.c
+-index db29988e..2ed29161 100644
+---- a/module/owserver/src/c/owserver.c
+-+++ b/module/owserver/src/c/owserver.c
+-@@ -36,6 +36,8 @@
+- 
+- #include "owserver.h"
+- 
+-+pthread_mutex_t persistence_mutex ;
+-+
+- /* --- Prototypes ------------ */
+- static void SetupAntiloop(int argc, char **argv);
+- 
+-diff --git a/module/owserver/src/include/owserver.h b/module/owserver/src/include/owserver.h
+-index 8be582f0..a257ed02 100644
+---- a/module/owserver/src/include/owserver.h
+-+++ b/module/owserver/src/include/owserver.h
+-@@ -18,7 +18,7 @@
+- #include "ow.h"
+- #include "ow_connection.h"
+- 
+--pthread_mutex_t persistence_mutex ;
+-+extern pthread_mutex_t persistence_mutex ;
+- #define PERSISTENCELOCK    _MUTEX_LOCK(   persistence_mutex ) ;
+- #define PERSISTENCEUNLOCK  _MUTEX_UNLOCK( persistence_mutex ) ;
+- 
+--- 
+-2.28.0
+-
+diff --git a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p4.bb
+similarity index 96%
+rename from meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
+rename to meta-filesystems/recipes-filesystems/owfs/owfs_3.2p4.bb
+index 890c8aecc0..94379939de 100644
+--- a/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p3.bb
++++ b/meta-filesystems/recipes-filesystems/owfs/owfs_3.2p4.bb
+@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628b867016631792781a8735a04760e5 \
+                     file://COPYING.LIB;md5=9021b7435efdd9fb22beef8291134099"
  
+ DEPENDS = "fuse virtual/libusb0"
+-# v3.2p3
+-SRCREV = "3744375dfaa350e31c9b360eb1e1a517bbeb5c47"
+-SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https \
++
++SRCREV = "c68deb1fc6d30fcc5eabe0a0d9c9dc2ca54e455a"
++SRC_URI = "git://github.com/owfs/owfs;branch=master;protocol=https;tag=v${PV} \
+            file://0001-Add-build-rule-for-README.patch \
+-           file://0001-Fix-compilation-with-GCC10.patch \
+            file://owhttpd \
+            file://owserver \
+            "
 
