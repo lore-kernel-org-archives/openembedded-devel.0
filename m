@@ -1,105 +1,152 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06936F417F6
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 15:01:40 +0000 (UTC)
-Received: from alln-iport-2.cisco.com (alln-iport-2.cisco.com [173.37.142.89])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16677.1773068490917731598
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D40C3F41810
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 16:33:34 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18999.1773074011872876399
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 08:01:31 -0700
+ Mon, 09 Mar 2026 09:33:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=VVCunzC4;
- spf=pass (domain: cisco.com, ip: 173.37.142.89, mailfrom: deeratho@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=h4iIBvV4;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4853aec185aso11277505e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 09:33:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=792; q=dns/txt;
-  s=iport01; t=1773068490; x=1774278090;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=hYe1ndueOVllxsAC07dMp8Pqcl2nW1fvQUJM+UHZNdw=;
-  b=VVCunzC4r7M0O/5I0auGHCX0aggbM4VkwsA8QcH/h5iDP/0phVG5nrim
-   3yBQJn+N/3RLZ8KYBpXn2N1ci7vHF2ugYlv1rqHa8Pl1XSd5Oqdb/V5Aj
-   cIuPe95926JOQdHTQMcQ7hbbO/EahKBsjPAg+3beYEPYHOM7iPHW34/70
-   m5HNLQ6AQ25fvjMnvYGPRcoys0kixu/OCCRixtz2Uk0FH5kUVxXe6ymwa
-   fjqErFnmKUGMeFGyfgmEaFMLDAYb0Ptqo/3uhdNJLOlH5wHC6DaxrTz4i
-   VAejnEdmSrqhbGKwdR1/FLa/7XACuuBFXuK4N9paT6GJGL4QfoIxYSZ/6
-   w==;
-X-CSE-ConnectionGUID: 8EneZ/8ARcCxnhRPiHJI2Q==
-X-CSE-MsgGUID: QhNNBz3bRXm29WeNhR+1Ow==
-X-IPAS-Result: =?us-ascii?q?A0DZCgC6365p/4z/Ja1aglmCSA9xX0JJk1tPhSKIZpI2g?=
- =?us-ascii?q?X8PAQEBDzEgBAEBkikCJjUIDgECBAEBAQEDAgMBAQEBAQEBAQEBAQsBAQUBA?=
- =?us-ascii?q?QECAQcFgQ4ThlyHEwEYAV1RCxkrgwIBgjoDNgIBrQKCLIEBgygBgVPYRw2CU?=
- =?us-ascii?q?gELFAGBOIU8gnmFIHSCAIJ6JxsbgXKEfYIfgnGFdwSCIoEOgXmRIkiBHgNZL?=
- =?us-ascii?q?AFVEw0KCwcFgWYDNRIqFW4yHYEjPheBCxsHBYUgD4hydG6BE4MDAwsYDUgRL?=
- =?us-ascii?q?DcUGwQ+bgeNaj6VfgmDHpJpgTWeaHEKKIN0jB6PPgaFdhozqmuZBpISkWpdh?=
- =?us-ascii?q?GiBaQE6gVlwFYMiCUkZD45fzGkjNQI6AgcLAQEDCZNnAQE?=
-IronPort-Data: A9a23:q0PUhak7/VJxEeLpF5nmylLo5gzRJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
- xJNDD/QMveKZWOneox1OYrl8BkA7J/Szd9rTgA6+X1hHltH+JHPbTi7wugcHM8zwunrFh8PA
- xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
- Y20+Za31GONgWYubDpPs/Pb8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
- /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
- OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05Fd01/OtFRjFnz
- /czODYNVCiCp8CXmovuH4GAhux7RCXqFJkUtnclyXTSCuwrBMiYBa7L/tRfmjw3g6iiH96HO
- JFfMmUpNkmdJUQTYj/7C7pm9AusrnXyfidRtFKSjaE2+GPUigd21dABNfKLKobbHZUPwRrwS
- mTuxmTfJDsIb9al+T/fo02hoO/13nrcR9dHfFG/3rsw6LGJ/UQUEBAQWF6xrPW1h0L7V99BJ
- kg8/is1sbN081SmSNT4VRC0rHOI+BkGVLJt//YS8gqBzO/Qpg2eHGVBFmUHY909v8hwTjsvv
- rOUo+7U6fVUmOX9YRqgGn289Fte5QB9wbc+WBI5
-IronPort-HdrOrdr: A9a23:PR1u9aAGAC9by57lHem555DYdb4zR+YMi2TDsHoBKyC9Hfb3qy
- nDppkmPHzP+VUssQ8b+OxoUZPoKRi3yXcf2+Ys1NmZMDUOwFHJEGmnhrGSpwEJ3EbFh4tg6Z
- s=
-X-Talos-CUID: 9a23:o+NYdWHH1KoY7h1+qmI32UgZKId1W0fW52fWI3WACEZLaeesHAo=
-X-Talos-MUID: 9a23:lGFEBgivN8sqv3G8EKfGKcMpDcdOxY68U0o3oZBc6vaJEyxKeG66k2Hi
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.23,109,1770595200"; 
-   d="scan'208";a="682908274"
-Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
-  by alln-iport-2.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 09 Mar 2026 15:01:30 +0000
-Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id 18AC718000588
-	for <openembedded-devel@lists.openembedded.org>; Mon,  9 Mar 2026 15:01:30 +0000 (GMT)
-Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id B418CCC12B5; Mon,  9 Mar 2026 08:01:29 -0700 (PDT)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+        d=gmail.com; s=20230601; t=1773074010; x=1773678810; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=te3NzfaHuc9wevL9VhzFkUaclYzFtTNtg0HjSahyIj8=;
+        b=h4iIBvV4ejhcuUSwShydmUwf7XoKdsnduRkGz4l+lB9iJpsZ0PKYAs4Cs+K2hy6uVQ
+         tD6KU9rdrSL7E1r7YUw6jy4lM1NfrhaFzXtVz+7R1Dl4MkPP/92Ha4AZ1EmGq/lHy7Zh
+         7JKRqB43TOxpj++TLoO9n4It336BA7sQ1IIdpJiR8CBmFqTxiY+T12Wc9TS8prtiTDpt
+         dhQ26P4ePFlRbIgIjR9Qci0m70dymmDPPiJAuFCGUllbnWPL9Oex7zos+y0Vh50DbciJ
+         4brLc2vWfxHaevW0ti8h9qEGtUiN6cHasLH3trZ52R7Q1A44jEocdpuELcAfWtV5MBft
+         L09A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773074010; x=1773678810;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=te3NzfaHuc9wevL9VhzFkUaclYzFtTNtg0HjSahyIj8=;
+        b=HL13V/8vKWHmGWqV8OPQV5jIJGdmxd7Kh/3Jy1Xws/riSrFdgVbSTlvEqxxwKY95d9
+         WQS/hPX8N6eoLuQ00y1D/UBO+z5mn173+ohrsrz3lfp8mvdM2SkTBfVNfiXJhTHbkY4r
+         To6IaL/HimM8Fr1BJlSAHt4FukLxMdAb/M3F+ousM90lbabGS2zvnmfLPklhLxmuMDYy
+         whCHq1y/Ahe6sauE64kciRqkt+9jMGbvJVOQFUAV2Mz2o3s31RL2ixh++DAi3jAzcPvt
+         0AqojqAVvP/ESquhDP/YTH4JnEfKIegG0tctF56Xn7s857+gkpFcN1sgDF2oWoTOwWT5
+         1PqA==
+X-Gm-Message-State: AOJu0YwJkKJel1KEIo7Xm0IXpnUYKB3zsBHqzNHbQyeCo5Hnm1Jzgjsk
+	6tJJ+c2R4ea8SHB+JAdyocDRBix4Tm+IVxArkaARyQC2UyzGre9jBoxtwwdMoA==
+X-Gm-Gg: ATEYQzxGxbb5nw51EmB4RRpjEGfpPf8rcejDB91FbMnPPOCDNBLwG9ZeJWlE2GBFrNJ
+	OEUogrjgaVuNZdter7nEYUTVNK+TuP2EkTUmlELGOzDZKz+hE96svHTqDsBzSW0NQrIP9T4n+FG
+	gYRjbICMeM8gp1cGihWOZrpbmHo7fe4ytdGVbp1/o79Wvx5dieQmgf0Iz+90bONj7KSnx8Ycfis
+	E+lcAqcndKO1eIzqpxf3CSgKPVd9rcBzaVqyQL3JBEHn3s8nD5F9qFmRR+SQ/WOZXZml64Y4J93
+	Ku9h4pAM4npoGyCoxEbmH1PIZD+R5LDjWtj55wxOGrS5cHCha+NRklf11418b1BYFWSMhHJJM0s
+	BIlnILLqWLtk8oRN036wbvSfmKhJ7BdWVfvrS1BD74ww1CyRj05E9IeZ1XZdYGscqrpiWpwGDHM
+	8wnvZREJVm8w9PCFWlYpKP
+X-Received: by 2002:a05:600c:3b92:b0:485:3dfc:57a with SMTP id 5b1f17b1804b1-4853dfc07d7mr45492655e9.32.1773074009829;
+        Mon, 09 Mar 2026 09:33:29 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-485237e8095sm168438005e9.2.2026.03.09.09.33.29
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Mar 2026 09:33:29 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded][scarthgap][PATCH 2/2] nativesdk-pistache: dependency with brotli
-Date: Mon,  9 Mar 2026 08:00:54 -0700
-Message-Id: <20260309150054.3436741-1-deeratho@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Subject: [meta-networking][PATCH] ettercap: patch CVE-2026-3603
+Date: Mon,  9 Mar 2026 17:33:28 +0100
+Message-ID: <20260309163328.489102-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 15:01:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124999
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 16:33:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125000
 
-From: Christos Gavros <gavrosc@yahoo.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3606
 
-Building of nativesdk-pistache aborted due to
-missing dependency with brotli.
-Fixed by extending brotli recipe to build nativesdk
+Pick the commit that is marked to solve the related Github
+issue[1]. Its commit message also references the CVE ID explicitly.
 
-Signed-off-by: Christos Gavros <gavrosc@yahoo.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit cf95ee0ff541289c9423e463b1ee607b642ad1f0)
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+[1]: https://github.com/Ettercap/ettercap/issues/1297
 
-diff --git a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb b/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
-index 83f44833b6..32524094c6 100644
---- a/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
-+++ b/meta-oe/recipes-extended/brotli/brotli_1.1.0.bb
-@@ -20,4 +20,4 @@ do_install:append () {
- 	done
- }
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../ettercap/ettercap/CVE-2026-3603.patch     | 48 +++++++++++++++++++
+ .../ettercap/ettercap_0.8.4.bb                |  4 +-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/ettercap/ettercap/CVE-2026-3603.patch
+
+diff --git a/meta-networking/recipes-support/ettercap/ettercap/CVE-2026-3603.patch b/meta-networking/recipes-support/ettercap/ettercap/CVE-2026-3603.patch
+new file mode 100644
+index 0000000000..e1b19ea05b
+--- /dev/null
++++ b/meta-networking/recipes-support/ettercap/ettercap/CVE-2026-3603.patch
+@@ -0,0 +1,48 @@
++From a7347f49b928f47fc37805c9f3a70a9487d45a65 Mon Sep 17 00:00:00 2001
++From: Alexander Koeppe <alexander@koeppe.rocks>
++Date: Sun, 8 Mar 2026 17:57:39 +0100
++Subject: [PATCH] Fix heap-out-of-bounds read issue in etterfilter
++ (CVE-2026-3606)
++
++CVE: CVE-2026-3603
++Upstream-Status: Backport [https://github.com/Ettercap/ettercap/commit/41c312d4be6f6067968a275bf66b2abd2a0ba385]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ include/ec.h                  | 6 ++++++
++ utils/etterfilter/ef_output.c | 4 ++--
++ 2 files changed, 8 insertions(+), 2 deletions(-)
++
++diff --git a/include/ec.h b/include/ec.h
++index d69de613..80c7eaba 100644
++--- a/include/ec.h
+++++ b/include/ec.h
++@@ -94,6 +94,12 @@
++    ON_ERROR(x, NULL, "virtual memory exhausted"); \
++ } while(0)
++ 
+++#define SAFE_RECALLOC(x, s) do { \
+++   x = realloc(x, s); \
+++   ON_ERROR(x, NULL, "virtual memory exhausted"); \
+++   memset(x, 0, s); \
+++} while(0)
+++
++ #define SAFE_STRDUP(x, s) do{ \
++    x = strdup(s); \
++    ON_ERROR(x, NULL, "virtual memory exhausted"); \
++diff --git a/utils/etterfilter/ef_output.c b/utils/etterfilter/ef_output.c
++index 2530e599..2f49177e 100644
++--- a/utils/etterfilter/ef_output.c
+++++ b/utils/etterfilter/ef_output.c
++@@ -150,10 +150,10 @@ static size_t create_data_segment(u_char** data, struct filter_header *fh, struc
++ static size_t add_data_segment(u_char **data, size_t base, u_char **string, size_t slen)
++ {
++    /* make room for the new string */
++-   SAFE_REALLOC(*data, base + slen + 1);
+++   SAFE_RECALLOC(*data, base + slen + 1);
++ 
++    /* copy the string, NULL separated */
++-   memcpy(*data + base, *string, slen + 1);
+++   memcpy(*data + base, *string, slen);
++ 
++    /* 
++     * change the pointer to the new string location 
+diff --git a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
+index 3784d12b85..b806a77164 100644
+--- a/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
++++ b/meta-networking/recipes-support/ettercap/ettercap_0.8.4.bb
+@@ -21,7 +21,9 @@ DEPENDS += "ethtool \
  
--BBCLASSEXTEND = "native"
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.44.1
-
+ RDEPENDS:${PN} += "bash ethtool libgcc"
+ 
+-SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV}"
++SRC_URI = "gitsm://github.com/Ettercap/ettercap;branch=master;protocol=https;tag=v${PV} \
++           file://CVE-2026-3603.patch \
++           "
+ 
+ SRCREV = "41da65f4026a9e4cea928e61941b976d9279f508"
+ 
 
