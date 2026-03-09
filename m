@@ -1,107 +1,91 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 787C1EFCD65
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 09:15:03 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9877.1773047692836918539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C3DCEFCD6C
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 09:18:02 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9915.1773047876574099116
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 02:14:52 -0700
+ Mon, 09 Mar 2026 02:17:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=i5IledK7;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-3597df496f6so4856835a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 02:14:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fvzlOzoo;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4853c1ca73aso4702625e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 02:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773047692; x=1773652492; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=vAPfeRi3sYfqAUGgva1ldU2ya5Bbgio8vlSp5tQwdfI=;
-        b=i5IledK7r4Xr8omALuSomBZP62+I6afhfHoTB6akJ3J2hw7afiDNIf6rmeiFM+m8mp
-         9nY8uR/HSAjLQyXTpcE77umvQEwAni5A0I+Mx44Zwk92mn/fmbTfpPwVoGBYmTV5meDh
-         wWMIUliXBxPKoYbSes0ikEa75mbqItE0s0cwTeZm257oZCdeSZDiZQdSUYlZscLtcWQH
-         159Bl0/3H5bWLv1CXpj6JAtQ/2qGwzE+KbPLMNjtfCs2otVOcdRw6iqWa22v03f4lgMR
-         SydkB7NOE+7hUCRNB9ViNC6Yny/uB1jg4rkksIhi/rd6st6QTs0lcmzEDLEgDLPDrzwj
-         dMUg==
+        d=gmail.com; s=20230601; t=1773047875; x=1773652675; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SXnkXi6Xw/0V/FrhQKF707VpUI9aMCSFW4xR2+jkxpk=;
+        b=fvzlOzooFym9uLyisuF2anEUhHNM8PJRYCceGsrZfSbKTZkr/eAAl+pjMgzNyd/bhb
+         +Mz4H/70D/XoIzWko/W+jXiDaTXXiZ/5EG0fQxed/nPyrbay/Sk84mUoATIAW/Pujv71
+         TE/0xXklZgULGTNddmG2XwaOcA79RlQhAOj8SI2zQVEY+c16pYIIXQNFNcCUMCo4ZpWz
+         0KVXKtwP2AsDXNoHrcb5o2ZAzZ11Rdlee4nDHDMTZGravJT/C9nEVJKjwVB7Axa94UrY
+         cngVKvE3BzqFAMf5oUsdNC9mgxPRNUgxwYaogyTiRwHU1ulK6JPfOK9khgWR6l4A7Gfr
+         /aJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773047692; x=1773652492;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=vAPfeRi3sYfqAUGgva1ldU2ya5Bbgio8vlSp5tQwdfI=;
-        b=LVaGLRzLuzflKQM7GvKT7Qaekmo30zRnlmhRU76L6KxURaDaaVmax4WIujvvp3fQlG
-         s7mGjaqEnuoWrazaLvqfPYAXBsjTK/Dn5YcN8fhg3ePLi0lFnXrKo9kgEkiOU9A/4XAY
-         7fndjdZWXz2RjorOYk0GbkwoG17k9wCm8zFAtUSbT/oRIvN2149OVmNbq0eCbtH54XEk
-         Z8MO6+uiFTl+nO40VK6oM79F//VsxZsjrXssiUszWggBXAu9sGgcGDO3ta5nUvg1DE1A
-         Pu9IF/f2QTCWGI10UvZDPeZMJQjWYXkJsNoQoaEzKTpqo22ju6rJiXdPR+lpuUVDQRuN
-         aPVA==
-X-Gm-Message-State: AOJu0YyL5PXZ2YsFOURAhx21kqhWl4bNHyyQMmo5QJiazdAL2oa8/2/h
-	7elkPkCmNXHlZaxwiu0q43FJ+JC9ZG42aLIBqiye3zx90Gzf++SFLk7K9/JxCA==
-X-Gm-Gg: ATEYQzzAy95FOIjOZsKbW2tObeWfco0qCFb2MkPLL8yhJCVaRxE5J1IBj0Lppx0jC3y
-	Ecyhb2Zo7q3ZxUUJ4+5oVknLVkVjzZIYT0dkj6uUth+YBN256w7dE70iZmp+SnP/IaVe3N8LkXc
-	RRBliG9XrpFUs3q1fjcy9oftdH32EUA3Qe3TlnpSS9FUpJXI48jGH6T/EaedqouWt+CWOealf9M
-	Ea78uEkOzudii0c5ng6ZROhkmYxiWFSl74bEb9HVueB4N0nBd9FCBmQi66+oihpfcMfRtUSp87l
-	H1XBlVjWMNOKzxOoh0VosBMXrDkPVgMkzQqlHcp9xFp+pwQoPXy6zuBgM7ZsgSNM9GTosofElrx
-	g3XWthmtWGgDVl00KJmkqupQWImW+fYGQJXf1Qfn1H+F8DmxgacWBD8mUCEQlqVSgNDgJu+QWGP
-	Gk3mbnx6FvcKaDaXbmWoF7WFV1Md4WhUvctKo=
-X-Received: by 2002:a17:90b:3d8f:b0:354:a065:ec3e with SMTP id 98e67ed59e1d1-359be31b732mr9784165a91.26.1773047692020;
-        Mon, 09 Mar 2026 02:14:52 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([167.103.127.26])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-359b2d60767sm13822583a91.8.2026.03.09.02.14.47
+        d=1e100.net; s=20230601; t=1773047875; x=1773652675;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SXnkXi6Xw/0V/FrhQKF707VpUI9aMCSFW4xR2+jkxpk=;
+        b=C7GhR+bUlTYABnpJ3gkohuo3uds/5Pg/yZlKMUP4wioLET2Egzr4CaGcxyP3p/fRgf
+         w0sryRtmQKVBlgfuPpNknRKRk2u/KBCiZG2VDLjt8o5CMZdZZM3dQ0SSsCDx3hUfNc5L
+         MD01Wc9/v4E26ofJZLxkxHBIGY0TV04utXLZ6V5MxNv1ddOVd0VjvOXHr8w5yMA8l1Su
+         MWnWNXzt+1PoDuQPW3VHxgwCWQ8jmeqMWMXmYeASTOdJitMf0Sm3degWsjtrLKx+DT5K
+         GnKUWbL2g6p/pLeTAYNsOBOIIZkMMELc3zy33kdPA0UaNz/ew0H0O97ui+NgA310bQLl
+         mZog==
+X-Gm-Message-State: AOJu0YzWdMO94U/MD7zn4g0Dwp4/iamuavIXeJXOLK+wH1dc9ok8dKRV
+	tOKxGZevn+ilF5POUFOZ19QvSiVsORcm3ebjltg84iDkAAd8CLaBimuxFwg16w==
+X-Gm-Gg: ATEYQzyEF3KpzxwUAWlb4+YwbxOo5QKLJnXvVJlPaLl2icb8poTvmIv1WUxFRuwpJeK
+	WitO4hz4X8n95Z5Vzy1OgYBpUXPfjS6OZu5zwehi2TiBYMKXBq22Oa+Sak5MF2Oc+yB7whJ8HrN
+	KEOxgoKfbrPw4XTMnZBapA28DmtYADwQNJgvvlIKuIUV6wp77pKi7E+ZzaogLfD8SIE1SloO1zd
+	TWt7oS588JbWfX22foJgP0RgcXpYbRj2a6dhLXQJfbZeMqI9an1NuZY15DyOJ4tWwVjLYc5NT8J
+	SW2FI5PiW1IHP+E3LMsH+eGwclw+pu/T7tzEf5qN03sewE5qKsR3AjdJ7U7kjgr8OR2IZQJWonz
+	0ycH4THvBKS+zXHSYSIqTrTd0R2YsvlU73EsingBarNjCAmtAA7rRJCYV36IULkseTMhkmMYZIv
+	2CXeOIIPV6ey1tfhCwuuML
+X-Received: by 2002:a05:600c:37cc:b0:485:3f58:da1 with SMTP id 5b1f17b1804b1-4853f580f70mr12364665e9.9.1773047874557;
+        Mon, 09 Mar 2026 02:17:54 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4853afb2011sm68556335e9.15.2026.03.09.02.17.53
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 09 Mar 2026 02:14:50 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+        Mon, 09 Mar 2026 02:17:54 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][whinlatter][PATCH 2/3] libmediaart-2.0: upgrade 1.9.6 -> 1.9.7
-Date: Mon,  9 Mar 2026 22:14:14 +1300
-Message-ID: <20260309091415.393661-2-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260309091415.393661-1-ankur.tyagi85@gmail.com>
-References: <20260309091415.393661-1-ankur.tyagi85@gmail.com>
+Subject: [meta-oe][PATCH] libjxl: mark CVE-2025-12474 and CVE-2026-1837 patched
+Date: Mon,  9 Mar 2026 10:17:53 +0100
+Message-ID: <20260309091753.189719-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 09:15:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124963
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 09:18:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/124965
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-12474
+https://nvd.nist.gov/vuln/detail/CVE-2026-1837
 
-This is a bugfix release, fixing some memory leaks and compiler warning
-(and it also has a couple of commits related to the project's own CI system,
-which doesn't affect the application)
-
-Changelog: https://gitlab.gnome.org/GNOME/libmediaart/-/blob/master/NEWS
+Both CVEs have been fixed in v0.11.2, but NVD tracks these
+vulnerabilities without version information.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 3f6b25f18a00e46bc3b0a72fb8c2f39b28e191a3)
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../{libmediaart-2.0_1.9.6.bb => libmediaart-2.0_1.9.7.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-support/libmediaart/{libmediaart-2.0_1.9.6.bb => libmediaart-2.0_1.9.7.bb} (90%)
+ meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
-similarity index 90%
-rename from meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb
-rename to meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
-index c5d497c468..e52ee61b74 100644
---- a/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.6.bb
-+++ b/meta-multimedia/recipes-support/libmediaart/libmediaart-2.0_1.9.7.bb
-@@ -11,7 +11,7 @@ DEPENDS = "glib-2.0 gdk-pixbuf"
- inherit gnomebase gobject-introspection vala features_check
+diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
+index 617d3bc502..f73fd314c2 100644
+--- a/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
++++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.11.2.bb
+@@ -53,3 +53,6 @@ CXXFLAGS:append:toolchain-clang:arm = " -fno-integrated-as"
+ FILES:${PN} += "${libdir}/gdk-pixbuf-2.0 ${datadir}"
  
- SRC_URI = "${GNOME_MIRROR}/libmediaart/1.9/libmediaart-${PV}.tar.xz"
--SRC_URI[sha256sum] = "c3bc5025d7db380587f9c8eb800c611f6b5a16d6b4b78fcff93f62876a677f17"
-+SRC_URI[sha256sum] = "2b43dd9f54f0d8d0b89e2addb83341ab06d7b98cb1b2e704383584af9c560f6b"
- 
- S = "${UNPACKDIR}/libmediaart-${PV}"
- 
+ BBCLASSEXTEND = "native"
++
++CVE_STATUS[CVE-2025-12474] = "fixed-version: fixed in v0.11.2"
++CVE_STATUS[CVE-2026-1837] = "fixed-version: fixed in v0.11.2"
 
