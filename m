@@ -1,124 +1,131 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27E56FCA170
-	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 18:17:59 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.21601.1773080271157767520
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CDAAFCA174
+	for <webhook@archiver.kernel.org>; Mon,  9 Mar 2026 18:21:09 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21678.1773080463937944979
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Mar 2026 11:17:51 -0700
+ Mon, 09 Mar 2026 11:21:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd95.mgt.mul.t-online.de (fwd95.aul.t-online.de [10.223.144.121])
-	by mailout02.t-online.de (Postfix) with SMTP id DFBE5F34A
-	for <openembedded-devel@lists.openembedded.org>; Mon,  9 Mar 2026 19:17:48 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.45.136]) by fwd95.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1vzfAg-2USXFR0; Mon, 9 Mar 2026 19:17:38 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OoAZEg0J;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-439b7c2788dso6138819f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 11:21:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773080462; x=1773685262; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vECldKQh9dXafK5xmG61SPJGlm8iSb2XIlN1lCdKfWs=;
+        b=OoAZEg0JJBqXgT4EUEy8VUuBkArIw6dzvDXb/EGFUacAzUHvyEckzxaTPdNfFpnn4+
+         SBGL2aGD7jRNfAOZ5x6mdMrNR4o7Cwzm2DhmbUpPNkh3mTAoAtTsD5+4gn17Phj95wux
+         rxOcLp9W6AWF3xwlE5FSiB3HIa+Zltux5GGP/9VYmEUwSuvIuzpw1cuJV2vNBhU6ZeiL
+         8INkRHrK/adMT5MxQ5IqbfsGGX1VqswfowkCP15jVAxKeYrrS7ymFPgg5k9quQ5D/jpJ
+         EVddELnVJojAYixG/Iw24qetKpjEqYxqKLx2e//BBV9tCakXWihaJBy2VXVSRubyx1ta
+         X92A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773080462; x=1773685262;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=vECldKQh9dXafK5xmG61SPJGlm8iSb2XIlN1lCdKfWs=;
+        b=lCqokuJXVcNdNhnuGVAmj3GnUg46+08eyQthe1DjRPbsAWtC7sYxx/XftKvX4Q+JUC
+         u7rUacG537HoTGkwcU8hJ+DXTI+SUkeRrTJV+Pz1YNlSLZyNAdw3zk9HfDqwgZltSYXN
+         YLaqWlWBT0Vkof7vlEiSl6LhlHgRTSPu6O+i6MImFJzSt4gAbEi99p6zMt4nyXmb/v+o
+         JX/4Av3URUPq1QvUfxRdnxL/xWL3YBv+MNpu6xjA8DAD99XsceJX4htcbh1W/FRlUHUu
+         B7C+XZtg/UmN3jzfiMJWWHXYu3b1QUfG5eQXHo7w9KIVE94nRovG8WYVLd5Yzr03ag5Y
+         nmsA==
+X-Gm-Message-State: AOJu0Yz7mjYJSb4X8Sl8VgBwEZQF402BJS0TLl7V1jDvU4WHzbqUKo/K
+	nKynYKq3kvHhqb06NI/+M5QJkelVDff9Y7NaZUhZHAmitPb+6lfYzYv6aaSfuQ==
+X-Gm-Gg: ATEYQzzrejxbg51DC+7X0NhnRkyIZq76HT2dWUpp/mMIsgLHrIUHxbLl6051VqfyN8J
+	0K7hdGncZwF+BmxybWJsIdBW/NiJam5GjTG/gWS6deoMdrLMonPToUB6kvTLq2aSwMEu7Kb0VZ+
+	CIf5cTdrBRRMpplPvfYvqJVcSsl1voXqi6Axz3kS1v3t0avTyLWeG8wGsIOpTwY6Ljkd1UMAo5e
+	2s9uML0pZ7IzaPuxeFgBE+KTcFiAPWeZVYCq+CrYD/FHQ1nHDcdDW13/uceUN3pTnuC6mqxhGxP
+	vfGj/rFt9vYIjT4tbjelkfmlksUEqV9JUSzNGJMuvXyNhDWT4hVBO6bup9v3sgXcaQPyjX6lSGF
+	5MFYdIVrXwY9yalW/aBRcpp4IOpzto6+ajmTqGEKQYwvnqJn/pfVSQi0U/ndCEijix1SahEHhUs
+	Y1NRXAapHQkBbCtAGNNyAq
+X-Received: by 2002:a05:600c:888c:b0:485:3f1c:d8a1 with SMTP id 5b1f17b1804b1-4853f1cd9fcmr32397895e9.9.1773080462208;
+        Mon, 09 Mar 2026 11:21:02 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541aba60esm9379875e9.5.2026.03.09.11.21.01
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Mar 2026 11:21:01 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gvfs: update 1.58.1 -> 1.58.2
-Date: Mon,  9 Mar 2026 19:17:28 +0100
-Message-ID: <20260309181728.3087782-1-f_l_k@t-online.de>
+Subject: [meta-gnome][kirkstone][PATCH 2/3] gimp: patch CVE-2023-44442
+Date: Mon,  9 Mar 2026 19:20:59 +0100
+Message-ID: <20260309182100.717697-2-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260309182100.717697-1-skandigraun@gmail.com>
+References: <20260309182100.717697-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1773080258-288FA520-622EB497/0/0 CLEAN NORMAL
-X-TOI-MSGID: 0e55d37d-20cd-4d3c-a1cb-d6236f8a8587
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 18:17:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125001
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Mar 2026 18:21:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125003
 
-- Make sftp optional
-- inherit pkgconfig
+Details: https://nvd.nist.gov/vuln/detail/CVE-2023-44442
 
-This removes a default runtime recommendation on openssh
+Backport the patch that resolved the related upstream issue[1].
 
-Major changes in 1.58.2
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-* client: Fix use-after-free when creating async proxy failed (Ondrej Hol=
-y)
-* daemon: Fix race on subscribers list when on thread (Ondrej Holy)
-* ftp: Validate fe_size when parsing symlink target (Ondrej Holy)
-* ftp: Check localtime() return value before use (Ondrej Holy)
-* CVE-2026-28295: ftp: Use control connection address for PASV data (Ondr=
-ej Holy)
-* CVE-2026-28296: ftp: Reject paths containing CR/LF characters (Ondrej H=
-oly)
-* gphoto2: Use g_try_realloc() instead of g_realloc() (Ondrej Holy)
-* cdda: Reject path traversal in mount URI host (Ondrej Holy)
-* client: Fail when URI has invalid UTF-8 chars (Ondrej Holy)
-* Some other fixes (correctmost, Ondrej Holy)
+[1]: https://gitlab.gnome.org/GNOME/gimp/-/issues/10101
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-gnome/gvfs/{gvfs_1.58.1.bb =3D> gvfs_1.58.2.bb}  | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.58.1.bb =3D> gvfs_1.58.2.bb=
-} (93%)
+ .../gimp/gimp/CVE-2023-44442.patch            | 28 +++++++++++++++++++
+ meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb  |  1 +
+ 2 files changed, 29 insertions(+)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44442.patch
 
-diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.58.1.bb b/meta-gnome/re=
-cipes-gnome/gvfs/gvfs_1.58.2.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.58.1.bb
-rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.58.2.bb
-index 6dfed59d86..fe5cb1fcfe 100644
---- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.58.1.bb
-+++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.58.2.bb
-@@ -2,7 +2,7 @@ DESCRIPTION =3D "gvfs is a userspace virtual filesystem"
- LICENSE =3D "LGPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D05df38dd77c35ec8431f212410a33=
-29e"
-=20
--inherit gnomebase gsettings bash-completion gettext upstream-version-is-=
-even features_check
-+inherit gnomebase gsettings bash-completion gettext upstream-version-is-=
-even features_check pkgconfig
-=20
- DEPENDS +=3D "\
-     dbus \
-@@ -18,7 +18,7 @@ DEPENDS +=3D "\
- RDEPENDS:${PN} +=3D "gsettings-desktop-schemas"
-=20
- SRC_URI =3D "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("=
-${PV}")}/${BPN}-${PV}.tar.xz;name=3Darchive"
--SRC_URI[archive.sha256sum] =3D "fc537d6bbab1ffa76972df7d4a1819b0c0fe19eb=
-d1dfe82421d1f32e14b5dc3b"
-+SRC_URI[archive.sha256sum] =3D "ad9d5bf0b45caf232520df0adee51eb650200b03=
-70680f80a350ead9d1d61ddf"
-=20
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
-@@ -44,8 +44,6 @@ FILES:gvfsd-ftp =3D "${libexecdir}/gvfsd-ftp ${datadir}=
-/gvfs/mounts/ftp.mount"
- FILES:gvfsd-sftp =3D "${libexecdir}/gvfsd-sftp ${datadir}/gvfs/mounts/sf=
-tp.mount"
- FILES:gvfsd-trash =3D "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/=
-trash.mount"
-=20
--RRECOMMENDS:gvfsd-ftp +=3D "openssh-sftp openssh-ssh"
--
- PACKAGECONFIG ?=3D "libgphoto2 \
-                   ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-                   ${@bb.utils.contains('DISTRO_FEATURES','polkit','udisk=
-s2','',d)} \
-@@ -68,6 +66,7 @@ PACKAGECONFIG[libgphoto2] =3D "-Dgphoto2=3Dtrue, -Dgpho=
-to2=3Dfalse, libgphoto2"
- PACKAGECONFIG[nfs] =3D "-Dnfs=3Dtrue, -Dnfs=3Dfalse,libnfs"
- PACKAGECONFIG[onedrive] =3D "-Donedrive=3Dtrue, -Donedrive=3Dfalse, msgr=
-aph"
- PACKAGECONFIG[samba] =3D "-Dsmb=3Dtrue, -Dsmb=3Dfalse, samba"
-+PACKAGECONFIG[sftp] =3D "-Dsftp=3Dtrue, -Dsftp=3Dfalse,,openssh-sftp ope=
-nssh-ssh"
- PACKAGECONFIG[systemd] =3D "-Dsystemduserunitdir=3D${systemd_user_unitdi=
-r} -Dtmpfilesdir=3D${libdir}/tmpfiles.d, -Dsystemduserunitdir=3Dno -Dtmpf=
-ilesdir=3Dno, systemd"
-=20
- # needs meta-filesystems
---=20
-2.53.0
-
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44442.patch b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44442.patch
+new file mode 100644
+index 0000000000..8b51b35792
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/CVE-2023-44442.patch
+@@ -0,0 +1,28 @@
++From a4f550be80f2f771927e2df9ae09e3f3354d22f1 Mon Sep 17 00:00:00 2001
++From: Alx Sa <cmyk.student@gmail.com>
++Date: Fri, 29 Sep 2023 20:39:29 +0000
++Subject: [PATCH] plug-ins: Fix vulnerability in file-psd
++
++Resolves #10101.
++This patch adds a missing break statement after an error condition
++is detected to prevent the code from continuing afterwards.
++
++CVE: CVE-2023-44442
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/985c0a20e18b5b3b8a48ee9cb12287b1d5732d3d]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ plug-ins/file-psd/psd-util.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/plug-ins/file-psd/psd-util.c b/plug-ins/file-psd/psd-util.c
++index 5686bb7..8514b07 100644
++--- a/plug-ins/file-psd/psd-util.c
+++++ b/plug-ins/file-psd/psd-util.c
++@@ -518,6 +518,7 @@ decode_packbits (const gchar *src,
++             {
++               IFDBG(2) g_debug ("Overrun in packbits replicate of %d chars", n - unpack_left);
++               error_code = 2;
+++              break;
++             }
++           memset (dst, *src, n);
++           src++;
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
+index 124760651d..ff34bfa6fd 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.30.bb
+@@ -49,6 +49,7 @@ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
+            file://CVE-2022-32990-2.patch \
+            file://CVE-2022-32990-3.patch \
+            file://CVE-2023-44441.patch \
++           file://CVE-2023-44442.patch \
+            "
+ SRC_URI[sha256sum] = "88815daa76ed7d4277eeb353358bafa116cd2fcd2c861d95b95135c1d52b67dc"
+ 
 
