@@ -2,105 +2,109 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43740EB106D
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 15:17:30 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.42581.1773155841436721888
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ADE5FD4F08
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 17:19:41 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.784.1773163180080366409
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 08:17:21 -0700
+ Tue, 10 Mar 2026 10:19:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QQN/uFFR;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-439bc14dcf4so6054916f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 08:17:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hOSP/QWK;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-439ce3605ecso4062158f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 10:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773155840; x=1773760640; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773163178; x=1773767978; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=Nyk7o+7smuCYVRYYAY9tWFpGdasPYbOLof9QxXE2xkA=;
-        b=QQN/uFFRhuf7As2/o5mzQ9mt2yb/oTHnNItvxuPcBRWzwvq9iSjm9/T3I3/CP+yNVs
-         hyec+fxz7mkFxU+UdV+dlXnD+ejivZ1WJQyvBAT4MU9nId2l8SmJmato0il6137JQiRQ
-         orm7aUlQchIUvaqOHB52jOWzGX/gvaSA+YIfsZ21StOn4ZcC+pJ4MPD+zjryBdaKaAIY
-         C/WgcvGIK8hYNAqhapKaO8dyX76x83hQ4GO0Cx6jJFhkOxBRMUz/cnjnwqLQkuSGr1jS
-         ooqL1l4FpAFF1CQX/p6Pwy/FlHNd/AWakzegSvrtuDL0R5fFL7htAPwtdoj3Ytd+ziEL
-         peyw==
+        bh=ffEXMT44L9TS0ZW7enfHd4Kfic2hy8z6hhSD6xRhob4=;
+        b=hOSP/QWKirQ0mcELzFfGoDaqXp3W1lj3IiPT3+6qd20UgT0RY7kNA4An58Dp48hkzY
+         EHq6I2LdgDuXtNQlVdBmr5HVioaXgw5A06hYaCaeh3DR9xrwrT2HlX/4m1ePXV5Akcr5
+         FhQ/xCnAeqm/Pq/iJHlhceUxwejpN7huPSGvzA6cNNFtWLSVM6g0JVYBl8n0yDN/bIKm
+         cBHOkQgm/Vh/MS+XMA1TDmnlowmr8gxSYw08sFaGzjQJXy7ue60vGMzmUUtsxgS/Drl5
+         KwUh1rfh7Xr2qjO6OLvPBV6Z60cjLV/CKqscj5sDyxHkGZZRAjK2rKP0koYDJyzardhl
+         AVjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773155840; x=1773760640;
+        d=1e100.net; s=20230601; t=1773163178; x=1773767978;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Nyk7o+7smuCYVRYYAY9tWFpGdasPYbOLof9QxXE2xkA=;
-        b=sTfpY2nKLrET4NfoYGR+MFvBzEeSH+/E7n64dpf29uIrrq+HP8TxqMMlXfUrIAbMot
-         tPJSCJYdsU+LgSitEqfYlfQDFmsbC6j/OqneBKXVBc1mKkeHqz11URragauayob28GJ2
-         2YIVXujAfCt7bqO5UjKcDCx3oASsBjBykCN6nwA7C4ArnuLIAAzRNqFg3FKcjIeg9I6A
-         +YHwMfFVZyKvUl9D69GHplV4smsKDgyve8QKYqEvQjbFdxhvPbl+VI0MuiM0ViPxRsTv
-         UZtn3i17hMa3MILAvP1JVD5WE6SzoQ/AEWrD+NxNi/s8E/F8XjzSZPXjWM+R+HGOKlvs
-         6H8A==
-X-Forwarded-Encrypted: i=1; AJvYcCXH5SIbbM5SIQQLBgWTMB5lAHYK+FMRhMnlF4DN9CigS1H8cqrzv3mGgO3BUgqG2rdaLhSvOmmuA07tYRDx1+JE9zs=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy05XaEQGptrzaYFz1r3GW35B0qBqqv9QDjnlMjWoaNuyAX8Tv5
-	+KkQCljUxKUmyRYTTnm+7uwKPFxqDCs3S5apB/ks501soeKsUocaMPas
-X-Gm-Gg: ATEYQzyWTsZua/Cg5nhm4dNbkQxWxCzMZRb4IpTXSJ9y5wfjpTWTUM+MXCuweo/SvSS
-	QB3sY0wXyzbwj7J8+in3TT6sVBZLYkasJlyN6rYVNwe5fF1Qmv8UASjyb6gzeUfVKmRSjH9EEjB
-	kPW1hVSuhHKn59QPFXSFVyLQb9zbdfWN5T+RTofyG4SjQgv0X+eluV5/DMwXC1V/qeUHpu3MM0e
-	iIqPUwgdBS4aVf+2zifZEHKSkYuvcXHx/yINQTSP2iTypciUDYacRjedNe8JrEjmqGC25s4gTuU
-	hnOPuxwQr9vTvpnTE2vMmd3ivmd9g9amfsS1/EuJ6lcimLoU6P0gkiAiSXBO+jvrybccE0YguQx
-	J6TAEKKrF7w5Ku4veBf+T6NwXstW8N4n95+2/4DZz3qnDtCALfJacxemwMnGONBR0OanQvfVSXE
-	awOUm36wHT+GzWu11G9IeD+jEms6mfTlyqifvFX4QzEA==
-X-Received: by 2002:a05:6000:608:b0:436:3761:583b with SMTP id ffacd0b85a97d-439eff68b10mr7055810f8f.27.1773155839470;
-        Tue, 10 Mar 2026 08:17:19 -0700 (PDT)
+        bh=ffEXMT44L9TS0ZW7enfHd4Kfic2hy8z6hhSD6xRhob4=;
+        b=Dikixm7il18zBb4ely5ArNKyOiVKKwVQOoh07FK0140jYZ20zgvSKV5jMH4EBt+Ru2
+         4E42i+aXTtL3voKzULtQ1QtkckFpzARzISqaBFQBavHy8SYHJQFhpNjfdgl0gQU0dmKj
+         i17eImr8JcuOE4JrHny5PyNlpD9URntZxstfeefc2qw0jU85tmuONwAtuEltmSQaZBHf
+         AQdT0VqirAdS1UKlR/NX74sAXWOu5Ih1Qc4oeLODK9zSYWmnFB6FJb5sPaxROb6q9e0E
+         kfK4GV0w5H6eZK3dL1tDrPW6nGv2dW3/B+6JHhz/PNBbi8amPsadxwQf2+KVufQdcdyA
+         fuGA==
+X-Forwarded-Encrypted: i=1; AJvYcCXIXgdDiT723nwMM3j3ZjbrGEAaxSJT+VW3Rhu18kq12ZvYDVmTlZEX3Vd/SfnYgpCq6iQubHh0lBIBUK5Vho4okU0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Ywco9A2pC4vDE2nffDmI4P4ggGV6lz1AOATVDitNQN2pYj/FzW4
+	nR7edsEgAVqKGhV++oXjoJvroWQH0MzJxQAVRC2dGEj/xIzD5bQ8AzzcEST+/g==
+X-Gm-Gg: ATEYQzxOAIjHbwvKWdxmSzX1NN2nE9YwNIj1mgOyilGAw11oA86VEYyQMd8561Lq+FO
+	UUBFUavt4uuq6KHP6OKJlLGanm5p9LYM0PAGkNVoTqz9CvM0dygJ1OU5T1el8NkC3cNfucYdxAH
+	Orfwwgs6SnSfydGEV3Av+OYXriXg4NorCvuXrWgyv6QAhbc9pVZm735sb2bG/GmeV867cEmXSZy
+	9lyqJC9kXf9azi6lymNZvpdFNeIYahSqz3gHklDURPMw9maXZRbjzD8/rGlg8N20RKrvIZ+4jMN
+	u2kVucvCk4osOFvohhBkqS3wDQLFGvQD5u/S/f1GHrISIg8HMODkqnwiEDgEGZNHeXS8cuCUNQ+
+	1zx/KCXiY6B4ozNY+spfTl9UnP8s0sgthsX/4YsxxCOWuaf3rZouOE/efVcRkmkJKnhAAZ03uUg
+	lt2hh13zQ/CB2M2EsN9KS5BAe09SXqGd0=
+X-Received: by 2002:a05:6000:40dd:b0:439:cb5c:b18d with SMTP id ffacd0b85a97d-439da893f6cmr28150497f8f.38.1773163178072;
+        Tue, 10 Mar 2026 10:19:38 -0700 (PDT)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad1cb7csm37950171f8f.0.2026.03.10.08.17.18
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dad8d840sm39821144f8f.8.2026.03.10.10.19.37
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Mar 2026 08:17:18 -0700 (PDT)
-Message-ID: <593925f1-85be-4064-a5b7-f7bb93c21a12@gmail.com>
-Date: Tue, 10 Mar 2026 16:17:17 +0100
+        Tue, 10 Mar 2026 10:19:37 -0700 (PDT)
+Message-ID: <1f68cd24-b5ab-406a-b245-1c0d9b592367@gmail.com>
+Date: Tue, 10 Mar 2026 18:19:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-openembedded][master][PATCH] libssh 0.11.3: Fix
- CVE-2026-3731
-To: deeratho@cisco.com, openembedded-devel@lists.openembedded.org
-References: <20260310121417.194408-1-deeratho@cisco.com>
- <f6cdce97-d5cb-4d6d-889f-584aa8c51877@gmail.com>
- <86833.1773155605803464203@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH] cxx: Add cxx recipe
+To: deepesh.varatharajan@windriver.com,
+ openembedded-devel@lists.openembedded.org
+References: <20260310134815.374345-1-Deepesh.Varatharajan@windriver.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <86833.1773155605803464203@lists.openembedded.org>
+In-Reply-To: <20260310134815.374345-1-Deepesh.Varatharajan@windriver.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 15:17:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125034
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 17:19:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125035
 
-On 3/10/26 16:13, Deepak Rathore via lists.openembedded.org wrote:
-> Hi Gyorgy Sarvari,
->  
-> This CVE is fixed in libssh-0.12.0 tag and master branch which is
-> major upgrade for master branch. Please refer below URL:
-> projects/libssh.git - libssh shared repository
-> <https://git.libssh.org/projects/libssh.git/commit/?h=libssh-0.12.0&id=855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60>
->  
-> Please suggest if we can upgrade to libssh-0.12.0 release or not.
-
-Certainly you can - the Stable/LTS policy for frozen major versions is
-only valid for the named branches.
-Master branch can take all version updates anytime, without any special
-process.
-
->  
-> Regards,
-> Deepak
+On 3/10/26 14:48, Varatharajan, Deepesh via lists.openembedded.org wrote:
+> From: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
 >
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125033): https://lists.openembedded.org/g/openembedded-devel/message/125033
-> Mute This Topic: https://lists.openembedded.org/mt/118239463/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> Add a recipe for the cxx crate, which provides a safe and efficient
+> bridge for interoperability between Rust and C++ code. It allows
+> defining the FFI boundary in a shared Rust module and generates
+> compatible bindings for both languages during the build process.
+>
+> The crate is implemented in Rust and supports zero-overhead FFI with
+> common Rust and C++ standard library types.
+>
+> More information: https://crates.io/crates/cxx
+>
+> Signed-off-by: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
+> ---
+>  meta-oe/recipes-devtools/cxx/cxx-crates.inc | 130 ++++++++++++++++++++
+>  meta-oe/recipes-devtools/cxx/cxx_1.0.194.bb |  34 +++++
+>  2 files changed, 164 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/cxx/cxx-crates.inc
+>  create mode 100644 meta-oe/recipes-devtools/cxx/cxx_1.0.194.bb
 >
 
+This is mostly just a thought, I don't intend this as a blocker of this
+patch. Maybe a loud thought, or a quick-discussion starter?
+
+cxx is pretty generic name, I find it hard to guess that it's a Rust
+library for FFI.
+
+Debian prefixes this (and similar packages) with librust - this one is
+called librust-cxx. Fedora calls it rust-cxx. (Though OpenSuse just
+calls it cxx - I guess there is accepted no standard)
+What if we would follow Debian or Fedora naming with such Rust
+libraries, similar to what is done with many Python and Perl recipes? I
+imagine that over time there will be more similar recipes.
 
