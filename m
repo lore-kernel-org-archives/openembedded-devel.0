@@ -2,133 +2,142 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53D34FD4F23
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 18:44:14 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2740.1773168253620487634
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D3A8FD4F29
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 19:18:34 +0000 (UTC)
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.3454.1773170306245357286
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 11:44:13 -0700
+ Tue, 10 Mar 2026 12:18:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eK3VzfYy;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-40f1ffba6a0so4746341fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 11:44:13 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773168253; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YJNbnC4N;
+ spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7d556c1a79eso14365407a34.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:18:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773170305; cv=none;
         d=google.com; s=arc-20240605;
-        b=VKD9aS7brE6v1T9uVTS9coU4FqDv0FWipVCRZk4xxGy3fqI75CqsZSux+ygRdqFv7v
-         7yqXdXJcY7suYr++3uvsK8dW1r6VcQZS8Xqf/zLS4+s/HCa9QY9FSnr3mrYRJ/QwIV3Q
-         bTzy/mBvEln4FVR7I2JAlectPCxyuqIGOEQFIxGMao4W5gJO0Oi+Bd5X/U9lI39LC2+D
-         w/LLcXdAve3wfn9YDiYH23OhBWWrWoZs8d3WP8QrB/qbBcgEnCcc19R5QBwfhaSlRKGp
-         kOhEOnUdAm0jelImxqF/SARMPsGKDCJ8imNPxVuw875bZnW6Fl1dSTp5ms7Q2CR7Ggez
-         TGFQ==
+        b=J7+mcwNuoIF+x5XQ3T43WQWu6bwtmVFnuP1zqE4Z7f411Kd5K6ja6WUZp3V3M7bvxl
+         eZ0P2+T50rl147I2MxA5tLUwZurBanQPwx4lgEbcCTAiA/bbMtbhjxOHNL9GLJkKs1XZ
+         afk7K3hxEXNHkBVxYT7F2cRXemdTAm9ffmfG2Rweapx4NpmC7ifHxWj3MpOMlKY9nwl2
+         J7IYDMe7DO3A9cOvqMrVDHDIBHt6icmcRZQPHub3CYRuKNEnCzNwuPcVfGEFB/c4+KqS
+         YCRG17bQUdxkjTDAVvsdY8obJ0lbtoVcjA4ML7Wyyb83mXJetQG5fT0JDhlDhmAalDJP
+         CtNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=ibKM3l6J93C/gOvIhMPooVnXI+5F6LSaHhIk9ewIJ7g=;
-        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
-        b=FXi/2cCu0XJt459stsDufeYlsa1vIlfwJf79Een1lTCcrsCK5x+u5SYAD4HZOtRIhS
-         fOnzrERNT8o2RAkRHsNtAc8bRG6HDEfpgpsAz68rhsioNueuzoNK5KO8g3+YX7VeJ57M
-         NYovHhcTla9WxNYgxPpbRWGCtJZwCNIGtZcX1OitA/OiFI3A4MsjXdxytZxgRiSq+4Y/
-         GSN4AiDjb6zG/JuZpnilbic9LARbLXeKtoqFnspQRaTe1WxLnXE2Od1PydXxwo+F3G9N
-         aO2HbTczyGss64B43eZSAsAwypVzC5j00gzaeRbWul/vMwt0RgmcCZtuK606Au0drqEi
-         +nUg==;
+        bh=2jYfF68q0uNkkd8Y6Akpxj1fI5REcIIGpfmis7N+Cuc=;
+        fh=dChDDggK5Sw66IKwp41lgrt/CSuby2/r2S7UnyZfzes=;
+        b=TimggtUHQNr/SxgexJkwtoiY4Vs6sY8DjRWCj1E4X4ZBXjTipnyHeyppf/f8abrLn9
+         bniHeMwY0anPWN3c8Ab1yXAPO0DNkhuk2EdN1hUHjmk8SNzNe0qqyhK0rca27CBnbnS+
+         v+BY+5hqtQfCHmaZc+oPvpTlt8/qCSSOTJIVXINftG38BqPFjSLD2HRQoMnhm8LNu6av
+         1ZdFw3rzk9v/QlgQDXfFMp+jHqtO2vzc0460HO8Q4aGrD+ti8QwgVHW3qErLj0XXAO0x
+         qKrpNJjSVdrminMYMjjdIlD0T2YOfMQb0Q5O/GCH1W6pZj4fnQdx7EVXlLPZVctRB75G
+         BB7g==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773168253; x=1773773053; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773170305; x=1773775105; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ibKM3l6J93C/gOvIhMPooVnXI+5F6LSaHhIk9ewIJ7g=;
-        b=eK3VzfYyt23bGYnSDqCMeOrka10EINDSRHScvU0q+7yyWZVxduSHOkoxnzfzE8RZMM
-         H7q5erUPIqETtmn0eZBTG/dskbwhGeWK/RJc2bM5cDKt8Tl8UpyKoRYLtLQJ8ObQYbde
-         MYaf3OM2SCwxjoptWX1PiR28Ff3i4gZdj87zi/zOvga5oiM4sIC2zhDLvK7HKMN3gpMx
-         Jux1Zu31hqTY8O1xMSKVSSO4ApAGDO4atCg0Spg4J3VrbBOoMOrMLsgaFqbXBxIONEp2
-         /+u6dXzAW2oX74M4+3Qk7UhZ1tWjmbDL82MVwnbqfpl4lsn0YDFEF4MB0fFzQQUMijIX
-         S20g==
+        bh=2jYfF68q0uNkkd8Y6Akpxj1fI5REcIIGpfmis7N+Cuc=;
+        b=YJNbnC4NJywWPtXRKRdQD0iXGi2+2qU3mu49hNAdk9rvSRIX7pBbKb+T8Cpdigc6R8
+         iVroNvsCunW1I3njcRiYnIbzLbNNJZTqkvGOSTvZtc74Cx9LssFW5kMuhSx64oeFlq9G
+         3uJ2TbzL5KOxgi006TLwUv3bdSZbucF6mQeenMVInPIHw+pzXGXUWfhNC8B2SRVbEN5D
+         JRMUYVpQXxTBuA4J22PtceUoI5oVyD4B2qk5nzcRy04dDmKvJTho+qttByLoYBfkr8OU
+         wH42SJo6lCnmfZT+nLuA+Z1YqHrmOTIFBLpLSL/kHv0AD6YgJ8lhmOFjcAV8fP7WNlWM
+         31iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773168253; x=1773773053;
+        d=1e100.net; s=20230601; t=1773170305; x=1773775105;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ibKM3l6J93C/gOvIhMPooVnXI+5F6LSaHhIk9ewIJ7g=;
-        b=VAvHvLlv5+t9UP9Kwsr7GV8X/PKBeliCRlLzunQ0rw29WDtQdMLudq2hM4M9kg0wKa
-         MNguLBGuWksZhpSXHij0BFI0KdDIPaVzNHnMFutllkQe6gplSCykHqAWm3D9xnSGAVp0
-         ACKMP/77mLNRmUKx+zlzQSbE+8kzIlBTpEZJsd1x2zpkFnCSE3CI6gLDNCwefGIhP644
-         hGWxHI1GrWj55LQSw4hvzEnlogqYFeFG6K0mCE/G8ciq3daNvfB1AhGYaK/Up6VA4N0+
-         GCb9/zPp0rI1DzBzduveVaUmuayjqaOMOw+tVXNf5OzonNJteJwZvbLcTBhX1QEXKHc0
-         pnPQ==
-X-Gm-Message-State: AOJu0YxxNq2ZdZubBdZR7XXm9R2FjYzdfWvu/Mc06ap1EkMyvdb4wqbQ
-	s2CE8rCPKCx1RNMSzNrYtNaEm3qyGK0WgQQS0Bl79VHgJOm1Bu5mR8OBXla9mS/ikOcNgdSv1PO
-	EPGoaYJso+d2yZqVwGlEMAQFgmCZ1aDA=
-X-Gm-Gg: ATEYQzxCGbrn9YEW3zupJ7uvrWPZfrpRldLCZmPVjyDSNaa/4GDidzhwCJrK42hPx4U
-	VWH4EMh9jqipIFp7qEsgWMCoYxSgoCbGHksmyH1f8TV2s6iA1eKbmWD5LBF49ljA+KMwbXicdgU
-	DxtJvZB5yMqc/QicpgQXjs6rHfFx+2v6KbvvqQiv9sW3bRqwNjrhuAvDCgbnfmcScoRKw4vfV+/
-	uJWQHV+izdz++G/wSD9NMH3CvW+Wob7ENqGnz0IAzI1DgW+D2RjtWxsf/x4C8NPLfzUFaC+bY3+
-	pGThWwGZ
-X-Received: by 2002:a05:6870:5589:b0:409:68f6:569b with SMTP id
- 586e51a60fabf-416e400369cmr8878020fac.12.1773168252721; Tue, 10 Mar 2026
- 11:44:12 -0700 (PDT)
+        bh=2jYfF68q0uNkkd8Y6Akpxj1fI5REcIIGpfmis7N+Cuc=;
+        b=X4gmjfcU7Kwyxm73NsxPhdF7jR15Ommwd+KJIg16k3UN7w6JrjN1vvmtX5+rvrGn0Z
+         cE+h6hH9SbEtdzHxJLizUA8IcpBPIgC0lQgCuwoUe+2wXoNex3zq52djf/AiqPeQzvJq
+         E8IyOYQIQSikHFBMvLnyxhOKb7GtqPPoFMJ/q+Hww1SkEKPKKIuG5egDM1Hs4hHFggvM
+         sLeVTeZjc+iyPcj6SteOTfvPXAWJIPgu7IQeURbYTPnHKH3M6Cf3/i3MTiVhrGrWeZc+
+         Uj+6tx8e1kqD+PYrpxdjHq1ZKBSktKP5oIZHpcpkatcV5JUxGfc01cpL7UY7gIOFb09D
+         0/lQ==
+X-Forwarded-Encrypted: i=1; AJvYcCX7JyCtitNlg3Vo/3Rf3KPqUdjPlleS2P+LFpw5vOTIe/MzXlzmfgD4NsjA19mlE96GMaBaU8vdF0UP4Bofwiiw1Oc=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxmpGXEF0qSV+hr8uB7Au60WPSquhDUIpnVsDd5rzTokmF1EzhO
+	vs6ud6rdhKnPbg4AmRszKdbQhNPz0oyp912Bmi3bsbJ15Qu607a4H92i5fOWQs0+sOcl/6wtvMU
+	+/w8AW0BMcQqz/MJkZeqflk+7F18Z5oA=
+X-Gm-Gg: ATEYQzyEU2KWuUf8ryDHWx4siRMHzvYzQ/w7aCRuTU93VjiGWWuSDvWkdOYwLgx2waN
+	17AakhqY/eUtm+YgIATrC225mA7j2u6/oAjzXJCtZ1Jyh9/SvhgOUTn0XcNjjQ0z+0QRVP7AG7w
+	6j/hEM14fRNG1GY49ULJ2ahtjcCah+FNE7S2OuQqKyOP8lP8b+WUs/YWlNzYk0BfobYpbvfj5gA
+	PeMYIiv0J0wmFaU4WXhLSmsVS8lAcCKiGO0zQQfBQ6b6tc3DE9YCs+VY3ShMtaqg/nRnGtjNDNI
+	xEC4Wic/
+X-Received: by 2002:a05:6870:1706:b0:417:2454:278e with SMTP id
+ 586e51a60fabf-4177c9c1e1amr20497fac.51.1773170305264; Tue, 10 Mar 2026
+ 12:18:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260310121726.1115244-1-skandigraun@gmail.com> <20260310121726.1115244-2-skandigraun@gmail.com>
-In-Reply-To: <20260310121726.1115244-2-skandigraun@gmail.com>
+References: <20260310134815.374345-1-Deepesh.Varatharajan@windriver.com> <1f68cd24-b5ab-406a-b245-1c0d9b592367@gmail.com>
+In-Reply-To: <1f68cd24-b5ab-406a-b245-1c0d9b592367@gmail.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Wed, 11 Mar 2026 07:44:01 +1300
-X-Gm-Features: AaiRm5306mwRPOYMz1Z-pozJQByKiq0-S0bj-qwk5Z1vo67OLMJo3TaSyqplnlI
-Message-ID: <CADySD0FuPi9w8JWMjkrDG3wQ-e4GGdjRRZegoX+He823g8BQZQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][whinlatter][PATCH 2/2] python3-django: upgrade
- 4.2.28 -> 4.2.29
+Date: Wed, 11 Mar 2026 08:18:14 +1300
+X-Gm-Features: AaiRm50MP1z64G6T_RjT5F1iPEz1efuboOK_6dVMu4Pb_5tLi8QXYp0yiOdNzRo
+Message-ID: <CADySD0HYvcqYqhkHcXtLo-6A+HUaqo_L4S129Qu-AjPbVeB+Xw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] cxx: Add cxx recipe
 To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
+Cc: deepesh.varatharajan@windriver.com, 
+	openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 18:44:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125036
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 19:18:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125037
 
-On Wed, Mar 11, 2026 at 1:17=E2=80=AFAM Gyorgy Sarvari via
+On Wed, Mar 11, 2026 at 6:19=E2=80=AFAM Gyorgy Sarvari via
 lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
 wrote:
 >
-> Contains fiuxes for CVE-2026-25673 and CVE-2026-25674.
+> On 3/10/26 14:48, Varatharajan, Deepesh via lists.openembedded.org wrote:
+> > From: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
+> >
+> > Add a recipe for the cxx crate, which provides a safe and efficient
+> > bridge for interoperability between Rust and C++ code. It allows
+> > defining the FFI boundary in a shared Rust module and generates
+> > compatible bindings for both languages during the build process.
+> >
+> > The crate is implemented in Rust and supports zero-overhead FFI with
+> > common Rust and C++ standard library types.
+> >
+> > More information: https://crates.io/crates/cxx
+> >
+> > Signed-off-by: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com=
+>
+> > ---
+> >  meta-oe/recipes-devtools/cxx/cxx-crates.inc | 130 ++++++++++++++++++++
+> >  meta-oe/recipes-devtools/cxx/cxx_1.0.194.bb |  34 +++++
+> >  2 files changed, 164 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/cxx/cxx-crates.inc
+> >  create mode 100644 meta-oe/recipes-devtools/cxx/cxx_1.0.194.bb
+> >
+>
+> This is mostly just a thought, I don't intend this as a blocker of this
+> patch. Maybe a loud thought, or a quick-discussion starter?
+>
+> cxx is pretty generic name, I find it hard to guess that it's a Rust
+> library for FFI.
+>
+> Debian prefixes this (and similar packages) with librust - this one is
+> called librust-cxx. Fedora calls it rust-cxx. (Though OpenSuse just
+> calls it cxx - I guess there is accepted no standard)
+> What if we would follow Debian or Fedora naming with such Rust
+> libraries, similar to what is done with many Python and Perl recipes? I
+> imagine that over time there will be more similar recipes.
+>
 
-typo, "fiuxes"-> "fixes"
+Had similar thoughts when I read the recipe name.
+Another idea is to use "cxx-crates" name for both, inc and bb files.
 
->
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  .../{python3-django_4.2.28.bb =3D> python3-django_4.2.29.bb}      | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-django_4.2.28.bb =3D=
-> python3-django_4.2.29.bb} (79%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.28.bb=
- b/meta-python/recipes-devtools/python/python3-django_4.2.29.bb
-> similarity index 79%
-> rename from meta-python/recipes-devtools/python/python3-django_4.2.28.bb
-> rename to meta-python/recipes-devtools/python/python3-django_4.2.29.bb
-> index 2c6d33991c..ded9e6fc1f 100644
-> --- a/meta-python/recipes-devtools/python/python3-django_4.2.28.bb
-> +++ b/meta-python/recipes-devtools/python/python3-django_4.2.29.bb
-> @@ -1,7 +1,7 @@
->  require python3-django.inc
->  inherit python_setuptools_build_meta
->
-> -SRC_URI[sha256sum] =3D "a4b9cd881991add394cafa8bb3b11ad1742d1e1470ba99c3=
-ef53dc540316ccfe"
-> +SRC_URI[sha256sum] =3D "86d91bc8086569c8d08f9c55888b583a921ac1f95ed3bdc7=
-d5659d4709542014"
->
->  RDEPENDS:${PN} +=3D "\
->      python3-sqlparse \
->
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125027): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125027
-> Mute This Topic: https://lists.openembedded.org/mt/118239500/3619737
+> View/Reply Online (#125035): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125035
+> Mute This Topic: https://lists.openembedded.org/mt/118240942/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nkur.tyagi85@gmail.com]
