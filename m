@@ -2,161 +2,352 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2D35FD2D68
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 12:18:17 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.38538.1773145094879659088
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 28146FD2D76
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 13:03:38 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.39534.1773147808641407825
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 05:18:15 -0700
+ Tue, 10 Mar 2026 06:03:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=J7S/LW8h;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-439d8df7620so2853821f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 05:18:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bFk09Pm5;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4853c3c2fe7so13203445e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 06:03:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773145093; x=1773749893; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=b4plU8vCauYKTS/gGCb1C1KKooghxnTrKYvkTsmnAuc=;
-        b=J7S/LW8hHLlGt+UF7KJF+JeE2dlU9A6pj7RTyF5Cv7NBOKqkSdKZn/STiTGjzqtp0s
-         1UolNwuBZMMaA+IAul5SOpISBXnpLx9J+NiLp1KJfHpE7OwJvnhQgkR7NAHU9d6Qr+LF
-         qzcUmxoQ2atU46J8VVaApshkPSZH11ePN00eQkJGeDq/F8/eYC615ffO7FXGhFu3OPZH
-         XetmYST21bNU4mZDo+07NUkYedGf0IJeZxjbh3svWM5xX7OY75fXuFvrUOG32G2s+L04
-         jvMPUpXltUhbT/QuCm3e4wOo4Zslmtj1AzamX5hN5aJ4kunESjUC9AukL2aGs/iGHti2
-         94sg==
+        d=gmail.com; s=20230601; t=1773147807; x=1773752607; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WkD0WXMoWwhp3v6KJfxueQVG/p6LuAjdYERZaHPxet4=;
+        b=bFk09Pm5A5+ecyM6mWaZJgis8eyG0zsTLvLBOlSkMpxW/NoHFuCIpwIDaMUxkdGjYE
+         /dDV2/trndxkuSBZcP7U4fbgA9wTFizbdrJJwpffCEpgDyVOJe4bZy8ZuizSMULv4cbi
+         eVnv3nah0wz+6HiUOKR4IxTZK1nVSVdoMtIUk9svqSllbHC1xFcnTVREjEQp4K07jT3+
+         GnBpZ71fwJvG9D/DoiGNql67R5zO2K2zLRBJta+WgawnC02fLfQQ+nSxOZ9nykqZONmW
+         S6w0Pdm6PqS5LKw3eT+PW4Gn0Vx6uaJ19O8M/kxaVG4TsEUvOnsBEpsZImQ+2QOswk75
+         VLLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773145093; x=1773749893;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1773147807; x=1773752607;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=b4plU8vCauYKTS/gGCb1C1KKooghxnTrKYvkTsmnAuc=;
-        b=eT79ezEb8YNfrLzuA+1l5Z70PvJdVEC+b1pyBOD/ZktmrlpM0v0vJdEpOYB0jzinrs
-         sdh6mG83CeAcIYrxSjWstMhCgITRUmjQ4hA3yHwla1rmopvIc7cqnpNoDkj9m0+ZsCQX
-         vyN6UGu+IW9mvor+hVHRN05CsbQ+wBeUkeSTBnnZYC1YiVhvh3i8dd6yvbXlzRCrMTze
-         2L/LElBc5EY9AM9Iw2Q15Xa+5HtE7RcJYWYBv+a9nH0x9vCGRbXz5W3Jakds355R9tWb
-         2M2M45szYvVEbxpaHyGBLFYfjUmkqHon34vvskgrcKRbUmC1zomsoDk6z9B2lkgFPYRj
-         KxxA==
-X-Forwarded-Encrypted: i=1; AJvYcCVQgeX/eywY6d46N3J1k6GmRvEyB2O61OSxgitOLXj1b3E3379A2MNQ8JlPbw30/kBqkI4jsTDlBI6AtA3FGSp8QK4=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyjtQXxszXiaIvA4gWXXAIXKtcjtXagEanpIDk03vCMxfTnNP+4
-	6gGu6jCyWQDs1tFuiCyLPZz3Ggf5Ndy3L0INIMDBAfV3ihnwz+Cl0axr
-X-Gm-Gg: ATEYQzwmlin688NOw+8oxH61bBQsZFCrsLEoZHK/uB41ke9vuaEC++UdADCWRDYXZ/y
-	ZfOSScCKnfFO2QVZrjKsIxRT6IpCNCPDBnQueQoAaHA2JstP2yCAP/w6E/pEz2BoBmD2M9sSPLq
-	59LCWNnwU8dJnRaofXOgm/wZRxpFP7eJlOu0S1jXs8JmEOmcFaCxxbjIbWDTVooeoBgrqlBSM8x
-	+TL0FgUQ7y468/yWKhaui6HrXdTQGffiHK6p2mZ7mezsApUnFmqSa0NTL79wsILMqJDZPr6LUF3
-	PRdKQESat8D3/hCvvlbrAtqBxDsCxQhv/di6/a1/757paVaklDkQbFi+POB5DX1aFJpsQfuDZCT
-	m/9pX81OGFduElZwNshsJje3+3KZkZID6h8agTUeyU7MWYrzZX6CEdqazaTl185FgmYsrL7RWnI
-	hmFxoUs0CoDzlxM0PmMJBjWqxCjinnr6heIgKEcaMKpQ==
-X-Received: by 2002:a5d:62d2:0:b0:439:f605:b001 with SMTP id ffacd0b85a97d-439f605b389mr133693f8f.51.1773145092857;
-        Tue, 10 Mar 2026 05:18:12 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae45786sm40103553f8f.32.2026.03.10.05.18.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Mar 2026 05:18:12 -0700 (PDT)
-Message-ID: <f6cdce97-d5cb-4d6d-889f-584aa8c51877@gmail.com>
-Date: Tue, 10 Mar 2026 13:18:11 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-openembedded][master][PATCH] libssh 0.11.3: Fix
- CVE-2026-3731
-To: deeratho@cisco.com, openembedded-devel@lists.openembedded.org
-References: <20260310121417.194408-1-deeratho@cisco.com>
-Content-Language: en-US
+        bh=WkD0WXMoWwhp3v6KJfxueQVG/p6LuAjdYERZaHPxet4=;
+        b=bnWN9vrYn4qatyyR0u/Eyjj8var4+zeTNjYaLkysfKvVyQFjBs2wvBqapvxTsuYs7U
+         4wzqpAEZt3XKiYYHjv+vP0SsBam5Nia0H89LTSOJKIFyryccMMjesOxKbm/gzpot0wv4
+         i4tXQWO9qJ7o2wsgMgamPFsufMrEcocOs+u4Wcv29j/DHpdTb4bnEPtAEwNrURq9lphM
+         ChZkEUl1pyeleXy/wsvvhK9zK8W77JkR0J5/a5fhZocmujEw6QRBiiUJ8BjS0yrcLXPY
+         hSQNDAAGp7Di6rUImdcBk5fplkAkMT24PBZ42BMlOc72PFiVR+USeU0mnKCinh19QhtR
+         MrZw==
+X-Gm-Message-State: AOJu0YzRJgH3fMd+VIMq3dxG+1HfmAbl62kO+OlHlHXx8X+r9LtwKNCU
+	AFAE6xB/LXRTAx7/4b9PuDq/kkeHmNRhE27vjgJtKxQh1nErrs6KWpcsOAIo+A==
+X-Gm-Gg: ATEYQzyqndffGEm50gdyuCzC2InpBc0tBvkOLUGFyneClntNp4yjekqVc2Ivh98uZ9S
+	4VgYtzc5+qnXH+hPYupYqG2/T63b7BM/KhKda0fd5qzW6SwzhO6X0zO5OEJCdCRmYxdgr4VMJw9
+	klqT272duhbnDbzM3+4kZXRorv/n8rjL+Xn3nhCPUoX6RbOOKK/yZ9jc1n2dBtvFEgFtBs4sc7l
+	gL9KBhg/udUpmPsAMd3Zr35UMT+1PZd9Tv8stlcK/dRP0V7ciJd9/Ix1l57YU6OYmEdop0BcD64
+	HuEb2x7qhitoNLKqsiep7tf29bZOC6+tGU6V9GfTzErjIkCOBO3ySKTbiUazPva4XmNT9xaR0xn
+	imBY39I5Qil507XFGGT11bTqhMSakOv942X1QDsLY37q/kJKKmXO85mBL9K0tgwSRgK90djPd5L
+	iINFlRbBe7txeWjK53TxQ6
+X-Received: by 2002:a05:600c:528c:b0:485:3d3e:1675 with SMTP id 5b1f17b1804b1-4853d3e2074mr82656445e9.8.1773147805821;
+        Tue, 10 Mar 2026 06:03:25 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541a7f1f5sm132162445e9.4.2026.03.10.06.03.24
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Mar 2026 06:03:25 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260310121417.194408-1-deeratho@cisco.com>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][scarthgap][PATCH] php: upgrade 8.2.29 -> 8.2.30
+Date: Tue, 10 Mar 2026 14:03:23 +0100
+Message-ID: <20260310130323.1321604-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:18:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125028
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 13:03:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125029
 
-Why not upgrade it to 0.11.4 in master, instead of patching it?
+Drop patches that are included in this release.
 
-On 3/10/26 13:14, Deepak Rathore via lists.openembedded.org wrote:
-> From: Deepak Rathore <deeratho@cisco.com>
->
-> Upstream Repository: https://git.libssh.org/projects/libssh.git
->
-> Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3731
-> Type: Security Fix
-> CVE: CVE-2026-3731
-> Score: 9.8
-> Patch: https://git.libssh.org/projects/libssh.git/commit/?id=855a0853ad3a
->
-> Signed-off-by: Deepak Rathore <deeratho@cisco.com>
->
-> diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
-> new file mode 100644
-> index 0000000000..88e6ff1c48
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
-> @@ -0,0 +1,43 @@
-> +From e46f096ad5294428509077c887233554d62ead0e Mon Sep 17 00:00:00 2001
-> +From: Jakub Jelen <jjelen@redhat.com>
-> +Date: Thu, 11 Dec 2025 13:22:44 +0100
-> +Subject: [PATCH] sftp: Fix out-of-bound read from sftp extensions
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=UTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +CVE: CVE-2026-3731
-> +Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=855a0853ad3a]
-> +
-> +Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-> +Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-> +(cherry picked from commit 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60)
-> +Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-> +---
-> + src/sftp.c | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/sftp.c b/src/sftp.c
-> +index 37b4133b..cbcdb066 100644
-> +--- a/src/sftp.c
-> ++++ b/src/sftp.c
-> +@@ -583,7 +583,7 @@ const char *sftp_extensions_get_name(sftp_session sftp, unsigned int idx) {
-> +     return NULL;
-> +   }
-> +
-> +-  if (idx > sftp->ext->count) {
-> ++  if (idx >= sftp->ext->count) {
-> +     ssh_set_error_invalid(sftp->session);
-> +     return NULL;
-> +   }
-> +@@ -599,7 +599,7 @@ const char *sftp_extensions_get_data(sftp_session sftp, unsigned int idx) {
-> +     return NULL;
-> +   }
-> +
-> +-  if (idx > sftp->ext->count) {
-> ++  if (idx >= sftp->ext->count) {
-> +     ssh_set_error_invalid(sftp->session);
-> +     return NULL;
-> +   }
-> +--
-> +2.51.0
-> diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-> index 5928581312..9f66736b29 100644
-> --- a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-> +++ b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-> @@ -9,6 +9,7 @@ DEPENDS = "zlib openssl"
->  SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11;tag=${BPN}-${PV} \
->             file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
->             file://run-ptest \
-> +           file://CVE-2026-3731.patch \
->            "
->  
->  SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125024): https://lists.openembedded.org/g/openembedded-devel/message/125024
-> Mute This Topic: https://lists.openembedded.org/mt/118239463/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Changes: https://www.php.net/ChangeLog-8.php#8.2.30
+- Curl: Fix curl build and test failures with version 8.16.
+- Opcache: Reset global pointers to prevent use-after-free in zend_jit_status().
+- PDO: PDO quoting result null deref - CVE-2025-14180
+- Null byte termination in dns_get_record()
+- Heap buffer overflow in array_merge() - CVE-2025-14178
+- Information Leak of Memory in getimagesize - CVE-2025-14177
 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../php/php/CVE-2025-14177.patch              | 84 -------------------
+ .../php/php/CVE-2025-14178.patch              | 65 --------------
+ .../php/php/CVE-2025-14180.patch              | 69 ---------------
+ .../php/{php_8.2.29.bb => php_8.2.30.bb}      |  5 +-
+ 4 files changed, 1 insertion(+), 222 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2025-14177.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2025-14178.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php/CVE-2025-14180.patch
+ rename meta-oe/recipes-devtools/php/{php_8.2.29.bb => php_8.2.30.bb} (98%)
+
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2025-14177.patch b/meta-oe/recipes-devtools/php/php/CVE-2025-14177.patch
+deleted file mode 100644
+index 6b5ffe0029..0000000000
+--- a/meta-oe/recipes-devtools/php/php/CVE-2025-14177.patch
++++ /dev/null
+@@ -1,84 +0,0 @@
+-From 7aac95c5280ea395ccfcd624cae7e87749ff6eeb Mon Sep 17 00:00:00 2001
+-From: Niels Dossche <7771979+ndossche@users.noreply.github.com>
+-Date: Tue, 25 Nov 2025 23:11:38 +0100
+-Subject: [PATCH] Fix GH-20584: Information Leak of Memory
+-
+-The string added had uninitialized memory due to
+-php_read_stream_all_chunks() not moving the buffer position, resulting
+-in the same data always being overwritten instead of new data being
+-added to the end of the buffer.
+-
+-This is backport as there is a security impact as described in
+-GHSA-3237-qqm7-mfv7 .
+-
+-CVE: CVE-2025-14177
+-Upstream-Status: Backport [https://github.com/php/php-src/commit/c5f28c7cf0a0]
+-
+-(cherry picked from commit c5f28c7cf0a052f48e47877c7aa5c5bcc54f1cfc)
+-Signed-off-by: Anil Dongare <adongare@cisco.com>
+----
+- ext/standard/image.c                  |  1 +
+- ext/standard/tests/image/gh20584.phpt | 39 +++++++++++++++++++++++++++
+- 2 files changed, 40 insertions(+)
+- create mode 100644 ext/standard/tests/image/gh20584.phpt
+-
+-diff --git a/ext/standard/image.c b/ext/standard/image.c
+-index 2bd5429efac..15761364c34 100644
+---- a/ext/standard/image.c
+-+++ b/ext/standard/image.c
+-@@ -403,6 +403,7 @@ static size_t php_read_stream_all_chunks(php_stream *stream, char *buffer, size_
+- 		if (read_now < stream->chunk_size && read_total != length) {
+- 			return 0;
+- 		}
+-+		buffer += read_now;
+- 	} while (read_total < length);
+- 
+- 	return read_total;
+-diff --git a/ext/standard/tests/image/gh20584.phpt b/ext/standard/tests/image/gh20584.phpt
+-new file mode 100644
+-index 00000000000..d117f218202
+---- /dev/null
+-+++ b/ext/standard/tests/image/gh20584.phpt
+-@@ -0,0 +1,39 @@
+-+--TEST--
+-+GH-20584 (Information Leak of Memory)
+-+--CREDITS--
+-+Nikita Sveshnikov (Positive Technologies)
+-+--FILE--
+-+<?php
+-+// Minimal PoC: corruption/uninitialized memory leak when reading APP1 via php://filter
+-+$file = __DIR__ . '/gh20584.jpg';
+-+
+-+// Make APP1 large enough so it is read in multiple chunks
+-+$chunk = 8192;
+-+$tail = 123;
+-+$payload = str_repeat('A', $chunk) . str_repeat('B', $chunk) . str_repeat('Z',
+-+$tail);
+-+$app1Len = 2 + strlen($payload);
+-+
+-+// Minimal JPEG: SOI + APP1 + SOF0(1x1) + EOI
+-+$sof = "\xFF\xC0" . pack('n', 11) . "\x08" . pack('n',1) . pack('n',1) .
+-+"\x01\x11\x00";
+-+$jpeg = "\xFF\xD8" . "\xFF\xE1" . pack('n', $app1Len) . $payload . $sof .
+-+"\xFF\xD9";
+-+file_put_contents($file, $jpeg);
+-+
+-+// Read through a filter to enforce multiple reads
+-+$src = 'php://filter/read=string.rot13|string.rot13/resource=' . $file;
+-+$info = null;
+-+@getimagesize($src, $info);
+-+$exp = $payload;
+-+$ret = $info['APP1'];
+-+
+-+var_dump($ret === $exp);
+-+
+-+?>
+-+--CLEAN--
+-+<?php
+-+@unlink(__DIR__ . '/gh20584.jpg');
+-+?>
+-+--EXPECT--
+-+bool(true)
+--- 
+-2.43.5
+-
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2025-14178.patch b/meta-oe/recipes-devtools/php/php/CVE-2025-14178.patch
+deleted file mode 100644
+index 46fa8679e8..0000000000
+--- a/meta-oe/recipes-devtools/php/php/CVE-2025-14178.patch
++++ /dev/null
+@@ -1,65 +0,0 @@
+-From a46c3692d37f8c539b3b00ea4ab7ebc2d7db5507 Mon Sep 17 00:00:00 2001
+-From: Niels Dossche <7771979+ndossche@users.noreply.github.com>
+-Date: Sun, 9 Nov 2025 13:23:11 +0100
+-Subject: [PATCH] Fix GHSA-h96m-rvf9-jgm2
+-
+-CVE: CVE-2025-14178
+-Upstream-Status: Backport [https://github.com/php/php-src/commit/c4268c15e361]
+-
+-(cherry picked from commit c4268c15e361ccd79289a3909f332ab2153f72e7)
+-Signed-off-by: Anil Dongare <adongare@cisco.com>
+----
+- ext/standard/array.c                             |  7 ++++++-
+- .../tests/array/GHSA-h96m-rvf9-jgm2.phpt         | 16 ++++++++++++++++
+- 2 files changed, 22 insertions(+), 1 deletion(-)
+- create mode 100644 ext/standard/tests/array/GHSA-h96m-rvf9-jgm2.phpt
+-
+-diff --git a/ext/standard/array.c b/ext/standard/array.c
+-index a1a92934084..30b9a425b20 100644
+---- a/ext/standard/array.c
+-+++ b/ext/standard/array.c
+-@@ -3903,7 +3903,7 @@ static zend_always_inline void php_array_merge_wrapper(INTERNAL_FUNCTION_PARAMET
+-	int argc, i;
+-	zval *src_entry;
+-	HashTable *src, *dest;
+--	uint32_t count = 0;
+-+	uint64_t count = 0;
+-
+-	ZEND_PARSE_PARAMETERS_START(0, -1)
+-		Z_PARAM_VARIADIC('+', args, argc)
+-@@ -3923,6 +3923,11 @@ static zend_always_inline void php_array_merge_wrapper(INTERNAL_FUNCTION_PARAMET
+-		count += zend_hash_num_elements(Z_ARRVAL_P(arg));
+-	}
+-
+-+	if (UNEXPECTED(count >= HT_MAX_SIZE)) {
+-+		zend_throw_error(NULL, "The total number of elements must be lower than %u", HT_MAX_SIZE);
+-+		RETURN_THROWS();
+-+	}
+-+
+-	if (argc == 2) {
+-		zval *ret = NULL;
+-
+-diff --git a/ext/standard/tests/array/GHSA-h96m-rvf9-jgm2.phpt b/ext/standard/tests/array/GHSA-h96m-rvf9-jgm2.phpt
+-new file mode 100644
+-index 00000000000..2e3e85357e1
+---- /dev/null
+-+++ b/ext/standard/tests/array/GHSA-h96m-rvf9-jgm2.phpt
+-@@ -0,0 +1,16 @@
+-+--TEST--
+-+GHSA-h96m-rvf9-jgm2
+-+--FILE--
+-+<?php
+-+
+-+$power = 20; // Chosen to be well within a memory_limit
+-+$arr = range(0, 2**$power);
+-+try {
+-+    array_merge(...array_fill(0, 2**(32-$power), $arr));
+-+} catch (Error $e) {
+-+    echo $e->getMessage(), "\n";
+-+}
+-+
+-+?>
+-+--EXPECTF--
+-+The total number of elements must be lower than %d
+---
+-2.43.7
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2025-14180.patch b/meta-oe/recipes-devtools/php/php/CVE-2025-14180.patch
+deleted file mode 100644
+index 110ba99b15..0000000000
+--- a/meta-oe/recipes-devtools/php/php/CVE-2025-14180.patch
++++ /dev/null
+@@ -1,69 +0,0 @@
+-From 86f18141dd016a7927083cc122c71f1a8877b414 Mon Sep 17 00:00:00 2001
+-From: Jakub Zelenka <bukka@php.net>
+-Date: Sat, 11 Oct 2025 19:37:26 +0200
+-Subject: [PATCH] Fix GHSA-8xr5-qppj-gvwj: PDO quoting result null deref
+-
+-CVE: CVE-2025-14180
+-Upstream-Status: Backport [https://github.com/php/php-src/commit/5797b94652c3]
+-
+-(cherry picked from commit 5797b94652c366521bff55f8e1a26ed6188f31b8)
+-Signed-off-by: Anil Dongare <adongare@cisco.com>
+----
+- ext/pdo/pdo_sql_parser.re                    |  6 +++++
+- ext/pdo_pgsql/tests/ghsa-8xr5-qppj-gvwj.phpt | 28 ++++++++++++++++++++
+- 2 files changed, 34 insertions(+)
+- create mode 100644 ext/pdo_pgsql/tests/ghsa-8xr5-qppj-gvwj.phpt
+-
+-diff --git a/ext/pdo/pdo_sql_parser.re b/ext/pdo/pdo_sql_parser.re
+-index 6bb0837fb31..7f4721d12a6 100644
+---- a/ext/pdo/pdo_sql_parser.re
+-+++ b/ext/pdo/pdo_sql_parser.re
+-@@ -287,6 +287,12 @@ safe:
+-							}
+-
+-							plc->quoted = stmt->dbh->methods->quoter(stmt->dbh, buf, param_type);
+-+							if (plc->quoted == NULL) {
+-+								/* bork */
+-+								ret = -1;
+-+								strncpy(stmt->error_code, stmt->dbh->error_code, 6);
+-+								goto clean_up;
+-+							}
+-						}
+-					}
+-
+-diff --git a/ext/pdo_pgsql/tests/ghsa-8xr5-qppj-gvwj.phpt b/ext/pdo_pgsql/tests/ghsa-8xr5-qppj-gvwj.phpt
+-new file mode 100644
+-index 00000000000..736354cab13
+---- /dev/null
+-+++ b/ext/pdo_pgsql/tests/ghsa-8xr5-qppj-gvwj.phpt
+-@@ -0,0 +1,28 @@
+-+--TEST--
+-+#GHSA-8xr5-qppj-gvwj: NULL Pointer Derefernce for failed user input quoting
+-+--EXTENSIONS--
+-+pdo
+-+pdo_pgsql
+-+--SKIPIF--
+-+<?php
+-+require_once dirname(__FILE__) . '/../../../ext/pdo/tests/pdo_test.inc';
+-+require_once dirname(__FILE__) . '/config.inc';
+-+PDOTest::skip();
+-+?>
+-+--FILE--
+-+<?php
+-+require_once dirname(__FILE__) . '/../../../ext/pdo/tests/pdo_test.inc';
+-+require_once dirname(__FILE__) . '/config.inc';
+-+$db = PDOTest::test_factory(dirname(__FILE__) . '/common.phpt');
+-+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+-+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+-+
+-+$sql = "SELECT * FROM users where username = :username";
+-+$stmt = $db->prepare($sql);
+-+
+-+$p1 = "alice\x99";
+-+var_dump($stmt->execute(['username' => $p1]));
+-+
+-+?>
+-+--EXPECT--
+-+bool(false)
+---
+-2.43.7
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.29.bb b/meta-oe/recipes-devtools/php/php_8.2.30.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/php/php_8.2.29.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.30.bb
+index 08e7e80c84..13403855d7 100644
+--- a/meta-oe/recipes-devtools/php/php_8.2.29.bb
++++ b/meta-oe/recipes-devtools/php/php_8.2.30.bb
+@@ -20,9 +20,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
+            file://0010-iconv-fix-detection.patch \
+            file://0001-Change-whether-to-inline-XXH3_hashLong_withSecret-to.patch \
+-           file://CVE-2025-14177.patch \
+-           file://CVE-2025-14178.patch \
+-           file://CVE-2025-14180.patch \
+           "
+ 
+ SRC_URI:append:class-target = " \
+@@ -37,7 +34,7 @@ SRC_URI:append:class-target = " \
+           "
+ 
+ S = "${WORKDIR}/php-${PV}"
+-SRC_URI[sha256sum] = "51979e8d198cbade2aad4ffe9f53dd3f04f9602d3089e5979985e058ade4267c"
++SRC_URI[sha256sum] = "104820b6c8fc959dde4b3342135f42bdabf246e86918a16381a17d8447c866fa"
+ 
+ CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
+ CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
 
