@@ -2,84 +2,84 @@ Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DFC88FD2D63
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 12:14:47 +0000 (UTC)
-Received: from alln-iport-3.cisco.com (alln-iport-3.cisco.com [173.37.142.90])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.38472.1773144880779468301
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6A24FD2D65
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 12:16:37 +0000 (UTC)
+Received: from alln-iport-5.cisco.com (alln-iport-5.cisco.com [173.37.142.92])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.38655.1773144991861675197
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 05:14:41 -0700
+ Tue, 10 Mar 2026 05:16:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=HwFY2eI4;
- spf=pass (domain: cisco.com, ip: 173.37.142.90, mailfrom: deeratho@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=kw/f831r;
+ spf=pass (domain: cisco.com, ip: 173.37.142.92, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=cisco.com; i=@cisco.com; l=2674; q=dns/txt;
-  s=iport01; t=1773144880; x=1774354480;
+  s=iport01; t=1773144991; x=1774354591;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=f72lDFHP/XyV/UW9649lkVwQNahPnUeJT6Ly1jGOsUQ=;
-  b=HwFY2eI4hLVU+aXAGN+pb6iVWo0uxB+eIfVPVqVqwNDRLBWYzaLOHTC4
-   e4P1+bzebSIoVFSEdy/jlWUSQuycMTYmhjza83g5IW/v9AHBiY5vrbvw6
-   WUlR9OPujDxOllBMmwSOkgjy/7/I98ViBSNcgY25vXPo3+irUomFFniNa
-   q6Gz94CP17iMf7rTtNXEduGwD+sry1FR/EAUZ0xx/O0fRcuEL/OIJh0sM
-   LDaQVSvgJxz0bo0ID/XrP+Dax4qFucHYLL7XEnrIRlrah+AVGnkl37Fbb
-   0rJHZK6EMdQ5VXA85D4720q2AhUoui1p+Ya0MwqFscz9zWAiLs640BNQg
-   w==;
-X-CSE-ConnectionGUID: ywwugw+tRJ2fUNG6iNfHfA==
-X-CSE-MsgGUID: eQiz4HQrSaOCqVxBdiDOhA==
-X-IPAS-Result: =?us-ascii?q?A0AqBABFCrBp/4//Ja1agQmBKxAagkQPcV9CSYRXj1OCI?=
- =?us-ascii?q?Z4dgX8PAQEBDz0UBAEBkikCJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBAQEKA?=
- =?us-ascii?q?QEFAQEBAgEHBYEOE4ZPDYZaASkECwEYAUYTAwECAwImAi0jGAmDAgGCcwIBE?=
- =?us-ascii?q?ZRdm0R6fzOBAYMoATEFCQJDT7UIAQsUAYEKLoU8gxgBhQBbGAGEeicbG4Fyg?=
- =?us-ascii?q?RWDaIEFgVwBAxiCE4MOgmkEgiKBDoFhHoU/BoRPhw1IgQIcA1ksAVUTDQoLB?=
- =?us-ascii?q?wWBZgM1EioVbjIdgSM+FzNYGwcFhR8PiHJ0boETgx4DCxgNSBEsNxQbBD0Bb?=
- =?us-ascii?q?geNdD6CNIEOLIIUGA4DkxSST6EOCiiDdIwelToaM4QElBWSUpkGjgmWUIRog?=
- =?us-ascii?q?Wg8gUcLB3AVgyIJSRkPjjiFaIMUwS0jNQI6AgcBCgEBAwmTZwEB?=
-IronPort-Data: A9a23:p8P1FKPRWOsIXjPvrR3klsFynXyQoLVcMsEvi/4bfWQNrUp03zICy
- zYaW26Cb/qLMWrxfNl3b9i3oU1T6pfcmN5iSXM5pCpnJ55oRWUpJjg4wmPYZX76whjrFRo/h
- ykmQoCeap1yFjmH+E3F3oHJ9RFUzbuPSqf3FNnKMyVwQR4MYCo6gHqPocZh6mJTqYb/WVjlV
- e/a+ZWFZgf+gmYsawr41orawP9RlKWq0N8nlgRWicBj5Df2i3QTBZQDEqC9R1OQrl58R7PSq
- 07rldlVz0uBl/sfIorNfoXTLiXmdoXv0T2m0RK6bUQNbi9q/UTe2o5jXBYVhNw+Zz+hx7idw
- /0V3XC8pJtA0qDkwIwgvxdk/y5WLLJZ5bDYYmSFk5ad8mvpLXrKzdVgJRRjVWEY0r4f7WBm7
- /cULnUJKxuEne/zmOz9Qeh3jcNlJ87uVG8dkig/lneCUrB8HM2FGvmRjTNb9G9YasRmEfvTf
- cMFaT1HZxXbaBoJMVASYH47tLjw3SWjKmcD8zp5o4I62mnBkCxIyoPkF/HMRMygScR5uUax8
- zeuE2PRR0ty2Mak4T2d/3Shg+XCkS/2VMceGaO18tZugUaP3SoUEBAQWF6xrPW1h0L4XMhQQ
- 3H44QI0pqQ0sUjuRd7nUljg/jiPvwUXXJxbFOhSBByx95c4Kj2xXgAsJgOtovR/6pFeqeACv
- rNRo+7UOA==
-IronPort-HdrOrdr: A9a23:mQKkG6vf2YtAB8uqrZHY/mSm7skDfdV00zEX/kB9WHVpm6uj5q
- WTdZUgpH3JYVkqNk3I9ersBEDiewK+yXcK2+gs1N6ZNWGM0ldAR7sM0WKN+VHd8lXFltK0Ec
- xbAs9D4BqaNykfsfrH
-X-Talos-CUID: 9a23:+w6VpWza+oewpSOz2NFvBgUFBd84fWKe0E3yeUGFL0k3SZubaVG5rfY=
-X-Talos-MUID: =?us-ascii?q?9a23=3Aobk9pw5RLFm9ClH3UUlwIqNvxoxl2qW8VGA0i64?=
- =?us-ascii?q?PnOKdCzxaNzaxqzSeF9o=3D?=
+  bh=uJm9J1pabnZz3M309RW500Rx2owgsp1Ip/mMA3s6GZc=;
+  b=kw/f831rCgK0AsTuHYKGOtSy0aKZ0f0e9AH/UbhtEWaOBW3Xp+C9A6Gu
+   DOyPezK1rdTUe3WdKso7TgV6VVg+sjFXVgYo9MffA+RJbNkBHCnjeh1ns
+   mJlF6Dq5VMSQYd8RYs46vT2aafekLtzDfrDT+JrM9Ymjw1AZKC0DI1qOv
+   jtfuxEY6Qevbmr7q86TXXvZQI4Lmf03xpsiNbGUYLNsvGmTIb0r/2uRa5
+   6ouu5z8QGcNEh7bRcBkLSh6mDzlQKVZWYdV1vWR7R7MeEqUWaKH/rqyvy
+   AaQdNCz0UjhrwUatTkhS7B+SgzTOJs7n4FlznQUAS4v3iuDeI1KbjquXM
+   A==;
+X-CSE-ConnectionGUID: zCcpFExvTsCu0LT/C8uTfQ==
+X-CSE-MsgGUID: 1/pSSwtnR56UNbZkcUt4rg==
+X-IPAS-Result: =?us-ascii?q?A0AnBADTCrBp/5X/Ja1agQmBUIJID3FfQkmEV49TgiGeH?=
+ =?us-ascii?q?YF/DwEBAQ89FAQBAZIpAiY0CQ4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFA?=
+ =?us-ascii?q?QEBAgEHBYEOE4ZPDYZaASkECwEYAUYTAwECAwImAi0jGAmDAgGCcwIBEZECm?=
+ =?us-ascii?q?0R6fzOBAYMoATEFCQJDT9smAQsUAYEKLoU8gxgBhQBbGAGEeicbG4FygRWDa?=
+ =?us-ascii?q?IEFgVwBAxiCE4MOgmkEgiKBDoFhHoU/BoRPhw1IgQIcA1ksAVUTDQoLBwWBZ?=
+ =?us-ascii?q?gM1EioVbjIdgSM+FzNYGwcFhR8PiHJ0boETgx4DCxgNSBEsNxQbBD0BbgeNd?=
+ =?us-ascii?q?D6CNIEOLIIUGA4DkxSST6EOCiiDdIwelToaM4QElBWSUpkGjgmWUIRogWg8g?=
+ =?us-ascii?q?UcLB3AVgyIJSRkPjjiFaIMUxBAjNQI6AgcBCgEBAwmTZwEB?=
+IronPort-Data: A9a23:R6S7Y6Dlo/Eq7RVW/3niw5YqxClBgxIJ4kV8jS/XYbTApD131D1Un
+ DEeW2+DPquOa2T0Ktp2PIm0pxwDuJTUnYI3OVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jWGthh
+ fuo+5eBYAT8g2YtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE0d5lFG8bLZMk4c1qWUVys
+ tdINQwDV0XW7w626OrTpuhEnM8vKozveYgYoHwllGufBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
+ pdfMGY+BPjDS0Un1lM/BJ8zhu60hn7XeDxDo1XTrq0yi4TW5FIhj+exbISOJbRmQ+0M2V6jn
+ X3a+V6kXCw8Pu6cwgeZrmij07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
+ AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++NuUCSB3MPSXhKb9lOWNIKeAHGH
+ 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
+IronPort-HdrOrdr: A9a23:Ps7g2arADkkppZkm+H7F5jgaV5ogeYIsimQD101hICG9Ffbo8v
+ xG/c5rtyMc5wx+ZJhNo7290cq7MBDhHOBOgLX5VI3KNGKNhILCFu5fBOXZrwEIYxefygaYvp
+ 0QFJSXz7bLfDxHsfo=
+X-Talos-CUID: 9a23:QScQ9WDGhLZegjP6EztM/1Y6N9A7Tmb20S/0HwiTWXtVRoTAHA==
+X-Talos-MUID: =?us-ascii?q?9a23=3AghTRGwwrBQ/Ya/BEnv/ktyrcwqWaqP3pEHs2jok?=
+ =?us-ascii?q?AgZTaCAp6CTSWsSjrWIByfw=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-AV: E=Sophos;i="6.23,112,1770595200"; 
-   d="scan'208";a="703441233"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by alln-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 10 Mar 2026 12:14:30 +0000
+   d="scan'208";a="687744637"
+Received: from rcdn-l-core-12.cisco.com ([173.37.255.149])
+  by alln-iport-5.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 10 Mar 2026 12:16:31 +0000
 Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id 6198D18000275
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:14:26 +0000 (GMT)
+	by rcdn-l-core-12.cisco.com (Postfix) with ESMTPS id E4279180001C9
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:16:30 +0000 (GMT)
 Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id 05DB6CC12B5; Tue, 10 Mar 2026 05:14:25 -0700 (PDT)
+	id 86654CC12B5; Tue, 10 Mar 2026 05:16:30 -0700 (PDT)
 From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded][master][PATCH] libssh 0.11.3: Fix CVE-2026-3731
-Date: Tue, 10 Mar 2026 05:14:17 -0700
-Message-Id: <20260310121417.194408-1-deeratho@cisco.com>
+Subject: [meta-openembedded][whinlatter][PATCH] libssh 0.11.3: Fix CVE-2026-3731
+Date: Tue, 10 Mar 2026 05:16:21 -0700
+Message-Id: <20260310121621.196342-1-deeratho@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
+X-Outbound-Node: rcdn-l-core-12.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:14:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125024
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:16:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125025
 
 From: Deepak Rathore <deeratho@cisco.com>
 
@@ -95,11 +95,11 @@ Signed-off-by: Deepak Rathore <deeratho@cisco.com>
 
 diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
 new file mode 100644
-index 0000000000..88e6ff1c48
+index 0000000000..9c3e5b9dcc
 --- /dev/null
 +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
 @@ -0,0 +1,43 @@
-+From e46f096ad5294428509077c887233554d62ead0e Mon Sep 17 00:00:00 2001
++From 4ba1c265b354056834fc835ecff14c0eeb834312 Mon Sep 17 00:00:00 2001
 +From: Jakub Jelen <jjelen@redhat.com>
 +Date: Thu, 11 Dec 2025 13:22:44 +0100
 +Subject: [PATCH] sftp: Fix out-of-bound read from sftp extensions
