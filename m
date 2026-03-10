@@ -2,71 +2,71 @@ Return-Path: <rs@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BC78FCA19A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E9ABF41808
 	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 21:55:49 +0000 (UTC)
-Received: from CY3PR05CU001.outbound.protection.outlook.com (CY3PR05CU001.outbound.protection.outlook.com [40.93.201.19])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6922.1773179740556473395
+Received: from BL0PR03CU003.outbound.protection.outlook.com (BL0PR03CU003.outbound.protection.outlook.com [52.101.53.33])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6923.1773179741049633130
  for <Openembedded-devel@lists.openembedded.org>;
  Tue, 10 Mar 2026 14:55:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=ZyCq+1mC;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 40.93.201.19, mailfrom: rs@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=ISXRlOHa;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.53.33, mailfrom: rs@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bbFBi9A2yg/e1cLMKEPKUzyggLrl9cjJICjTY9ywOoGcfXZuEj17VH/zpA2GolG6vyReBEHlUL/DuOFPlVSoLIGLs6LmqyS05rvErZRbQEwMEycG8q4nbANn8qm4Q09Rp10xHs/mstIgN3RfNttY4N8LETX3Hv/iORWmz9l6CK7cLM20rwZL+2VFhbk8KdtglDNe7Oj7hNWvV9rexraRmX8sQY/SKF3MVINcNsrKFhH5/5Pn64QlgXcgBzUL8UZc5zKO4Ua7uyLmhM2WVmYAinosesjEfR6s3txwZwWXGqr4gdXfa+xmIlrcoCdaJDWjgRWtf3QSduZGbvhfhXzQ4g==
+ b=KHB2VA3t3eJUt6dAh6GjnirVR5ltOd1nX3j4BDZeeKogEuN+Ft+QPPjJc95H0h2pmA9RCnxFVo804IO97kj00HrGVx0l2bnicJmVHTNKKil37BOAShAcIWpIVfq1kDtJ9CUu+QzzSaL6Z9WQAnUFpV7IT63NnAJh5QgJoaP+j8sAf47UeSV2PtImxWG4tt8vComgl7VaOWrnZ6MPu03C+oUm6TJ84mO2WIDxs9d5aL3HNbqzsGi6AV0FCqplPvZJJU6IEHOFoJOrlEQBcO3G2hSfvqXl9U2rIWgzfb2hpgf1CzBKoJWFEY7A5FZYdxlOfiNrdzgoVEaNAi768XWClg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7fNJSba0IDPel1lOivn70TNSmcCZfUrouHtf7YUCYBs=;
- b=oD/naGM1U3hhY1P3FBAsbZB0JYABWDu8OLpVg2gHQY73PuKEQMvVLH1cU6Iz3xba3Udmg60F/+QN8LGFVd7qv52UF3qEQBWwUZjNdiz+Hph1B+YL3suArhA4t760J04glJxOSk9itw7sJbFTZttSMSKSPLyJuMeARQKaHRmyOgviNtE3KagFAOy+MMCMyp/XmpQTEfqvIGSpzaldidAlyCSeMVLvTlzYHvdrWuudFl0ed5RZpsplw7o5VZ4qnTXRwQ2Jt9d43jgXwHZXW9eTk21p+6O1kPM0qkcij0C1/KJbQKQj2L1I640wBMnJs0Yk0HrJxnIYYV+fXdWei0bY1g==
+ bh=TpQjdFzGOc7U+DXZYbuvN0xbzXn1qddxpNABpiujy8Q=;
+ b=CsMqFGAhWeX8Nerhon0dksA+HTjJQRRWmXiDUSLmn677PbddrE5Y2E6jgutxuF/zts/ZQ/dX14o5tfV1G2JwqAwFqqObJUlrzvq86hrQdTtDTuoq+lFU4lg/nr1TrSIdwTKIo+cLhRe1XyjceV0jKWOo8yMZGyXoXpwmU0c1Q/bFLumY9vLS9PsyaHpxiJXVUL2ePFA2R2XeeDwpE5Q8gmyDP3TI5dj3hpLe9wr6ssDU/I77ZJDcXjE1h1WW6xqkmM4nmwy+eCaGYmu3JMWOIoGaIQv9Sc+/lfJF+etvY/MkAG84k/3APm8xK540g5kjB7NrUra1DlrNkalw/X3CXQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7fNJSba0IDPel1lOivn70TNSmcCZfUrouHtf7YUCYBs=;
- b=ZyCq+1mC9jWejJseQHf0rD2prIbuRPoWpVdEqyNzgkuC5xgDosxqF9Uk7OItgAtsABSJ4bMORU0NyATRbDTjirYM69+qQIBOGsCWhDsituSDBuhzDBdyVCyII+HnghMeDVM4gKGF9TfyHP2PqBwilZC+oMPNy4mtr6DinQxKbbY=
-Received: from SA0PR11CA0174.namprd11.prod.outlook.com (2603:10b6:806:1bb::29)
- by MW5PR10MB5738.namprd10.prod.outlook.com (2603:10b6:303:19b::14) with
+ bh=TpQjdFzGOc7U+DXZYbuvN0xbzXn1qddxpNABpiujy8Q=;
+ b=ISXRlOHaz+cGLif2eSDyE2765rpumc1IBdBu7BtAaZ21WMtkEg53xWcjLP3elAA2OedKcsBdMbhfBOEKHogAU4Ky4ukFHTyjyZ+tVyzK4CQflzdrfOIKuQ4dRY9V67AW1x7Cn7jqFJ2Y8Ui9OkKZt1GAXkZYqYq6FL09y7+gtHw=
+Received: from CH0PR08CA0013.namprd08.prod.outlook.com (2603:10b6:610:33::18)
+ by DM4PR10MB7425.namprd10.prod.outlook.com (2603:10b6:8:180::6) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Tue, 10 Mar
  2026 21:55:37 +0000
-Received: from SN1PEPF000252A4.namprd05.prod.outlook.com
- (2603:10b6:806:1bb:cafe::69) by SA0PR11CA0174.outlook.office365.com
- (2603:10b6:806:1bb::29) with Microsoft SMTP Server (version=TLS1_3,
+Received: from DS2PEPF000061C5.namprd02.prod.outlook.com
+ (2603:10b6:610:33:cafe::ab) by CH0PR08CA0013.outlook.office365.com
+ (2603:10b6:610:33::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Tue,
- 10 Mar 2026 21:55:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ 10 Mar 2026 21:55:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SN1PEPF000252A4.mail.protection.outlook.com (10.167.242.11) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ DS2PEPF000061C5.mail.protection.outlook.com (10.167.23.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9678.18 via Frontend Transport; Tue, 10 Mar 2026 21:55:36 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
  2026 16:55:36 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
  2026 16:55:36 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
  Transport; Tue, 10 Mar 2026 16:55:36 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62ALtZVb3849728;
+	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62ALtZVc3849728;
 	Tue, 10 Mar 2026 16:55:36 -0500
 From: <rs@ti.com>
 To: <raj.khem@gmail.com>
 CC: <Openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH 1/2] openbox: update for emptty
-Date: Tue, 10 Mar 2026 16:55:21 -0500
-Message-ID: <20260310215522.2836352-2-rs@ti.com>
+Subject: [oe][meta-oe][PATCH 2/2] icewm: update for emptty
+Date: Tue, 10 Mar 2026 16:55:22 -0500
+Message-ID: <20260310215522.2836352-3-rs@ti.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260310215522.2836352-1-rs@ti.com>
 References: <20260310215522.2836352-1-rs@ti.com>
@@ -76,35 +76,35 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A4:EE_|MW5PR10MB5738:EE_
-X-MS-Office365-Filtering-Correlation-Id: f1014c67-3531-4dd2-3324-08de7eefc2f8
+X-MS-TrafficTypeDiagnostic: DS2PEPF000061C5:EE_|DM4PR10MB7425:EE_
+X-MS-Office365-Filtering-Correlation-Id: f784ac64-41fe-455f-5169-08de7eefc311
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|36860700016|18002099003|22082099003|56012099003;
+	BCL:0;ARA:13230040|376014|1800799024|82310400026|36860700016|18002099003|22082099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	cI6Wj1K6I0rWQ4uyv1febje4U1V2iwk6ocG4Gkubsfz9o8RQpnZNSJY1o+3TJurpO5YNHNQfK4EXr+zkQ4MAv1NWySFPY0hgsz7PmmY2+ZVqBe84LoQOtBCdrjRWH0/qcaPD9JHQt675mHESD74K2GEzQJlO3aUIBnHcUCIIrYNt7J1lSbbeEEhpQYMlqHbi40vu0Yh3eGaGYT9Qa5y7XecfZBySyV8Gst8OyIIQ/pyRrszAnLJeYks19bjGwNYrzfbYIjOxLmYTzvzGvadJ4hTs9LP5Cr8CFG7Pb6dBGDTeK32VqTETIzH4yA4+ZjVXT4WI542slQsCqoRCl6hs7NfpqIWUxYLG2Lfo0Qo6enovjscr7TAl1ykToeHyblkiB4yGod82/IixyyFu8/Bxj9Suugdrp3YWkCuFuqRq+M5EUlC8jTuR5Vsx5DXY7WiItYP7XdFlA1MNbsgf05xNUVupHu0myazNohLVbyd5dJUZvjTtYYdIH8F1Z3y2wxD70f+FlaI583u/9FLo6FprpBYig9ArZ0Dv3Xhs5YNfNLsz1TWp4gcZX9NR5Yb4gmhsviNEL66sGSTZsZdL/FpvKdQSrf/L04jPImxA1qsypzBkXS9vFwHuoMzSO6bG24Z3ucNOOkE4w+mCeaRi0rzdOR6kEXxwdAskEmI3dZRX5qnun09ZsSNeBSjPZDfbflOX7Cq+4bKKRPo3gnjmiCQxHCOYcdownG81LJBLPNSJ6jlG+hS88Z8NhC7h8eN+HHr7hKqQ4Dup1WUU9PjfLwgwqg==
+	tpqwsnW/DOQ/lehtGzarEECAxS5LfA6aiPSWCoGQVGkocoRXYgYfa9NgIiqfc4UX1bRBPGk9JDtQWvfb6ne7X4srQI0RB/tK+drDpcs6ir+khCYl3EDBr51MXn7WgN4bpypJ+ejV7eHNm0M5j+fj+SBPLsAmFP0Ktx1xIcfVYLYclrc6DoZWpsZAPDMNqDXsbgzVl0fX5HKoOsD+M7Bk8T1Bk5KzzYX3y4aFa2vYPU6QNdibQ8Mmz2Y+9NaRuz6rD/PSZuUQMZXQsY6UFHqJKGEFACoP9fr9zbqKNtsGxCdEtFJG0FrvWTXwoolcFfY900LDGZmGivd8kIvt5JNAeDz6IkgMim7RCIO9r6Dt5Q5ivMJwlrT+oXyNpwXvN7YLvgo+paGFYITsDTGXKHy7G4MybnC6JsP2ojDwjEyJP7Z9SNkSz9LlSCtLtlPhOiUuDisRglRtt4QrEAfpqf43rfjqYH6pqQRLbrzy95GFIp+rdT4zFWDum4Kv3HSez0zLEm41wHeHj6Nk5hyfwIEkyqkAjuM1Tj+bUrGDFbvmYJJoxK6o2/Fcvee7UYpGqSCUI0Ct5QJ1cZGPFlDBygvNY2OPHgE7l0p5xclaPVBIwnSXYE0iHM+0hEgCu9SalkhfUmNPaxT0o9kgBUVyEIcqMwGzLP9UUOVjtk5lpCDTLfoSBCThdy9ZsqgmWDGR5OKsnUT3ymdhntbVhLNXP0PiuPLiM27cXTfOyGIQv92mi+0=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet201.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	yYpYm+zy0WIkzJDxxYlL3sNHsNTsT+x+bAGuECL3PROjjVc9UtxpN56TTaJ1R16sP2mGXzEkfH/cshPhEMjomICRBDkxKXfChFIStjQdQff30oN6hS1/Q0UVxNlDsbW3/dSJECKL1sl82VLyWEgfGI/UsJTN0fCu5K3TiNvRnDYviEZg64lqNl655yuB83xpyIliCEI/SDyXNcDxcH46JJIKEmWV/UNa7skrnYWnBcjRIwoqIqt5Bmvrk5Kkl6qNSnz+fjTt7oqht/fAyNixwFU9knXpQ7aCRf2HW77rkfIs62sA743VvT1/AVBl+LPapd6TREJuP+sCFMecl9CYo4XFUtNrU5c33O5UF1EcDZKzn6YeeB+xoS+yQA5vW7JCRoSWyC42U2eI8nr/VlIXVbPWkwhHNgEFRkqrFubQPRpTfVI6MaIGK+s6ySyUDj22
+	3BYSog4aY7LxrHjs8tt9OavJnGQcBfF7nDjzqUJ+B7v0V04tsPwynVIOe3KJesWDWCFoYPsicF9xzihTU8SPI9oRjURgoUld+fwdmc0sR1elmqwBC4+me7NM2JwcxqTI0e38yjNeTGnUpIFffDAmct+lJhKYZcwREHyC5ML5masDJYBbHOFfdZQd6TpjDIJq+ZOvhX3tty9d4sTA9GULlAGyk7K7HbBQz4s0WhRinFhGMkx+nY7zd3eLMZsELmYWvdMqGNvskSiSX/w5fXbuxNJaPAQzPvpun5sPvfelQMG9Px1sMVoRhprPJpZUB+wQnaKw6Qi5tKXD+tJc6uIjq2zzF+KE8HWhET8JS8Jes4NWW6k76roDx5qjdcrQ2fMurVxKTvp/4oi1DyCeIEjRTMiTS/p6aM4VyWqGhjCKulh7G67P1CwtXbZa9+Ilz6F5
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 21:55:36.6213
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 21:55:36.7260
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f1014c67-3531-4dd2-3324-08de7eefc2f8
+X-MS-Exchange-CrossTenant-Network-Message-Id: f784ac64-41fe-455f-5169-08de7eefc311
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.195];Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	SN1PEPF000252A4.namprd05.prod.outlook.com
+	DS2PEPF000061C5.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR10MB5738
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB7425
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 21:55:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125042
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125041
 
 From: Randolph Sapp <rs@ti.com>
 
@@ -114,79 +114,38 @@ DEFAULT_SESSION variable of xserver-nodm-init.
 
 If the default session cannot be found the user will be presented with a
 menu to pick the session themselves. This relies on the xsessions
-desktop entries.
-
-Add a an xsessions entry for the openbox-session.
+desktop entries, which IceWM already provides.
 
 Signed-off-by: Randolph Sapp <rs@ti.com>
 ---
- .../openbox/files/openbox.desktop                 |  6 ++++++
- meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb | 15 +++++++++++----
- 2 files changed, 17 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/openbox/files/openbox.desktop
+ meta-oe/recipes-extended/icewm/icewm_3.8.2.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/openbox/files/openbox.desktop b/meta-=
-oe/recipes-graphics/openbox/files/openbox.desktop
-new file mode 100644
-index 0000000000..62d1d85b43
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openbox/files/openbox.desktop
-@@ -0,0 +1,6 @@
-+[Desktop Entry]
-+Name=3DOpenbox Session
-+Comment=3DVery simple session manager for Openbox
-+Type=3DApplication
-+Exec=3Dopenbox-session
-+DesktopNames=3DOpenbox
-diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/re=
-cipes-graphics/openbox/openbox_3.6.1.bb
-index 5b62b9b2a7..5dfe0eec5c 100644
---- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-+++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
-@@ -9,6 +9,7 @@ SRC_URI =3D " \
-     file://0001-Makefile.am-avoid-race-when-creating-autostart-direc.patch=
- \
-     file://0001-openbox-xdg-autostart-convert-to-python3.patch \
-     file://0001-Fix-list-traversal-issue-in-client_calc_layer.patch \
-+    file://openbox.desktop \
- "
+diff --git a/meta-oe/recipes-extended/icewm/icewm_3.8.2.bb b/meta-oe/recipe=
+s-extended/icewm/icewm_3.8.2.bb
+index ad92b7b294..e49f1b90a3 100644
+--- a/meta-oe/recipes-extended/icewm/icewm_3.8.2.bb
++++ b/meta-oe/recipes-extended/icewm/icewm_3.8.2.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D "c64b1b7c8ee262a3c4796be57349a3198=
+998564d70ed26f11e724e1b73
+ UPSTREAM_CHECK_URI =3D "https://github.com/ice-wm/${BPN}/releases"
+ UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
 =20
- SRC_URI[sha256sum] =3D "8b4ac0760018c77c0044fab06a4f0c510ba87eae934d9983b1=
-0878483bde7ef7"
-@@ -20,11 +21,9 @@ inherit autotools gettext update-alternatives pkgconfig =
-features_check
- # depends on virtual/libx11
+-inherit autotools pkgconfig gettext perlnative features_check qemu update-=
+alternatives
++inherit autotools pkgconfig gettext perlnative features_check qemu
  REQUIRED_DISTRO_FEATURES =3D "x11"
 =20
--ALTERNATIVE:${PN}-core =3D "x-window-manager x-session-manager"
-+ALTERNATIVE:${PN}-core =3D "x-window-manager"
- ALTERNATIVE_TARGET[x-window-manager] =3D "${bindir}/openbox"
- ALTERNATIVE_PRIORITY[x-window-manager] =3D "10"
--ALTERNATIVE_TARGET[x-session-manager] =3D "${bindir}/openbox-session"
--ALTERNATIVE_PRIORITY[x-session-manager] =3D "100"
-=20
- PACKAGECONFIG ??=3D ""
- PACKAGECONFIG[imlib2] =3D "--enable-imlib2,--disable-imlib2,imlib2"
-@@ -43,7 +42,15 @@ python populate_packages:prepend() {
-     do_split_packages(d, theme_dir, '(.*)', theme_name, '${PN} theme for %=
-s', extra_depends=3D'', allow_dirs=3DTrue)
+ EXTRA_OECONF +=3D "--with-libdir=3D${datadir}/icewm \
+@@ -40,8 +40,4 @@ EOF
+     ./qemuwrapper > src/preferences
  }
 =20
--FILES:${PN}-core =3D "${bindir}/openbox ${bindir}/openbox-session ${libdir=
-}/*${SOLIBS}"
-+do_install:append() {
-+    install -d "${D}${datadir}/xsessions"
-+    install -m 0644 "${UNPACKDIR}/openbox.desktop" "${D}${datadir}/xsessio=
-ns"
-+}
-+
-+FILES:${PN}-core =3D "${bindir}/openbox \
-+                    ${bindir}/openbox-session \
-+                    ${datadir}/xsessions/openbox.desktop \
-+                    ${libdir}/*${SOLIBS}"
-=20
- FILES:${PN}-lxde +=3D "${datadir}/lxde/ \
-                      ${datadir}/lxpanel \
+-ALTERNATIVE:${PN} =3D "x-session-manager"
+-ALTERNATIVE_TARGET[x-session-manager] =3D "${bindir}/icewm-session"
+-ALTERNATIVE_PRIORITY_${PN} =3D "100"
+-
+ FILES:${PN} +=3D "${datadir}/xsessions"
 --=20
 2.53.0
 
