@@ -2,97 +2,161 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E76A6FD2D68
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 12:17:37 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.38525.1773145049851626567
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D2D35FD2D68
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 12:18:17 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.38538.1773145094879659088
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 05:17:30 -0700
+ Tue, 10 Mar 2026 05:18:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mk1W5Yrx;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-439f59dfda2so227407f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 05:17:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J7S/LW8h;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-439d8df7620so2853821f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 05:18:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773145048; x=1773749848; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tnyKSYGAMm7EqPUKcJmMi9aJ9t+IoF46k4mCNkBUBzU=;
-        b=Mk1W5Yrx5g4EW4dDe34JXXQor6OA1OeUlQzzEd6/4jYyir67ovIOlQ0elRmOgta9LF
-         j0rVouNazQfWPdBNGLUNSMbQJccUT4PaPi6vl2JwpYdajM8FqRTdzIKdRRkMffxYRloM
-         /SjorTXidb9dWeQ9H5NQTEggEp/M7VuJAQA72Um5Ti+Wa9frPgEF3EPUfZxMV1sjiq1x
-         XdMopqutzFsoF09XEsnReDyo7Me4TmDkUAMvwUD6fQrPMXT7hO+PFdgd5+B5+zJvhhIX
-         X0dJwSZGY1vXOxIS0T0eK5WQ//s3IMIaI95eUOVtLBpgsJFvbgLurzxlusUFJuE8ADRR
-         8wrA==
+        d=gmail.com; s=20230601; t=1773145093; x=1773749893; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=b4plU8vCauYKTS/gGCb1C1KKooghxnTrKYvkTsmnAuc=;
+        b=J7S/LW8hHLlGt+UF7KJF+JeE2dlU9A6pj7RTyF5Cv7NBOKqkSdKZn/STiTGjzqtp0s
+         1UolNwuBZMMaA+IAul5SOpISBXnpLx9J+NiLp1KJfHpE7OwJvnhQgkR7NAHU9d6Qr+LF
+         qzcUmxoQ2atU46J8VVaApshkPSZH11ePN00eQkJGeDq/F8/eYC615ffO7FXGhFu3OPZH
+         XetmYST21bNU4mZDo+07NUkYedGf0IJeZxjbh3svWM5xX7OY75fXuFvrUOG32G2s+L04
+         jvMPUpXltUhbT/QuCm3e4wOo4Zslmtj1AzamX5hN5aJ4kunESjUC9AukL2aGs/iGHti2
+         94sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773145048; x=1773749848;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1773145093; x=1773749893;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tnyKSYGAMm7EqPUKcJmMi9aJ9t+IoF46k4mCNkBUBzU=;
-        b=q2PORHm7x1Xlv4exkH5geQY8SffgcylVZnoDjjVYx3LnkGRixJlCdoAmFbyO4jFlAF
-         s61CwUPg36ZSJPunS7KR0kXB6vIxOwXO1+uznZEEh30fHevmTjpkOgGH3floMFpRORJ2
-         ODHX42sS0bX3onfUbIHmjiKtAHqiDoNWj+X2h+SOTUB9Q39lvmEZTW7Qt/rB7LgcTyA3
-         0hGm2CrCgOZia9+lfBrBXq2JiVHw8WLULcse0hAuU3PHhe8p8kZ19mz+GOjF6B6SZmsh
-         LJjhgCwiBFO9wFgwv/dWhhiVIjCJ4hBHItlhhn6y6GpcVd3AxAqnyyFE2ilL7vMPg5dy
-         OaOw==
-X-Gm-Message-State: AOJu0YysB/W1TesUxkTNr0d+a2OizGqcSbAix01P+zkNxKtXDrTcGXNE
-	yiXKPvWK7ztXY8bChoSMqYwjXKw+noYFMHe59JoOU0anvIO80MVhRdOYCbx0pw==
-X-Gm-Gg: ATEYQzww1YqOi+vfdegaailP/GpaZZY2Efrs/GkMayQdAyqpZzRAcXDd/+dVVltXX4A
-	NKBWVXJduDc4pGrzFMQkKV5wZNubMysAALXdaJg2EG0bBKNhPLCPg2qJEI6Bjb64LY99xxxvL4D
-	spXXGe1nYfaxn8JQkNIAw6X8cziiISeeOgwEpHfcjUsShxpctaddk0qlT+4Eln++35WzNFHRjkm
-	PD/SCHYZuc4qVr29L5QtC98gHOxW6Q6fngERejEVEi8pnqWy9wfjbmVplFStDUnHqehBXK9WJZX
-	YOkqgMUOzZMxJ7/cxV/rYvVJiYYtCGn0Cja8i8pJSOsP40Wx9c4sKlrihyj8JTh2GPTGXnTt6JD
-	LdNB6r8RX9tFrCo+4M+hmD186aCEMmF8cKniP5Y6+2Gxb6u3vnrZgR7qD4U974VfBz3X7kVBcBn
-	buldMunah4134QXtiskvXN
-X-Received: by 2002:a05:6000:25c4:b0:439:b62d:bea6 with SMTP id ffacd0b85a97d-439da36a70fmr25448741f8f.47.1773145047855;
-        Tue, 10 Mar 2026 05:17:27 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae3c80esm31822538f8f.29.2026.03.10.05.17.27
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Mar 2026 05:17:27 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH 1/2] python3-django: upgrade 5.2.11 -> 5.2.12
-Date: Tue, 10 Mar 2026 13:17:25 +0100
-Message-ID: <20260310121726.1115244-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        bh=b4plU8vCauYKTS/gGCb1C1KKooghxnTrKYvkTsmnAuc=;
+        b=eT79ezEb8YNfrLzuA+1l5Z70PvJdVEC+b1pyBOD/ZktmrlpM0v0vJdEpOYB0jzinrs
+         sdh6mG83CeAcIYrxSjWstMhCgITRUmjQ4hA3yHwla1rmopvIc7cqnpNoDkj9m0+ZsCQX
+         vyN6UGu+IW9mvor+hVHRN05CsbQ+wBeUkeSTBnnZYC1YiVhvh3i8dd6yvbXlzRCrMTze
+         2L/LElBc5EY9AM9Iw2Q15Xa+5HtE7RcJYWYBv+a9nH0x9vCGRbXz5W3Jakds355R9tWb
+         2M2M45szYvVEbxpaHyGBLFYfjUmkqHon34vvskgrcKRbUmC1zomsoDk6z9B2lkgFPYRj
+         KxxA==
+X-Forwarded-Encrypted: i=1; AJvYcCVQgeX/eywY6d46N3J1k6GmRvEyB2O61OSxgitOLXj1b3E3379A2MNQ8JlPbw30/kBqkI4jsTDlBI6AtA3FGSp8QK4=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyjtQXxszXiaIvA4gWXXAIXKtcjtXagEanpIDk03vCMxfTnNP+4
+	6gGu6jCyWQDs1tFuiCyLPZz3Ggf5Ndy3L0INIMDBAfV3ihnwz+Cl0axr
+X-Gm-Gg: ATEYQzwmlin688NOw+8oxH61bBQsZFCrsLEoZHK/uB41ke9vuaEC++UdADCWRDYXZ/y
+	ZfOSScCKnfFO2QVZrjKsIxRT6IpCNCPDBnQueQoAaHA2JstP2yCAP/w6E/pEz2BoBmD2M9sSPLq
+	59LCWNnwU8dJnRaofXOgm/wZRxpFP7eJlOu0S1jXs8JmEOmcFaCxxbjIbWDTVooeoBgrqlBSM8x
+	+TL0FgUQ7y468/yWKhaui6HrXdTQGffiHK6p2mZ7mezsApUnFmqSa0NTL79wsILMqJDZPr6LUF3
+	PRdKQESat8D3/hCvvlbrAtqBxDsCxQhv/di6/a1/757paVaklDkQbFi+POB5DX1aFJpsQfuDZCT
+	m/9pX81OGFduElZwNshsJje3+3KZkZID6h8agTUeyU7MWYrzZX6CEdqazaTl185FgmYsrL7RWnI
+	hmFxoUs0CoDzlxM0PmMJBjWqxCjinnr6heIgKEcaMKpQ==
+X-Received: by 2002:a5d:62d2:0:b0:439:f605:b001 with SMTP id ffacd0b85a97d-439f605b389mr133693f8f.51.1773145092857;
+        Tue, 10 Mar 2026 05:18:12 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439dae45786sm40103553f8f.32.2026.03.10.05.18.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 10 Mar 2026 05:18:12 -0700 (PDT)
+Message-ID: <f6cdce97-d5cb-4d6d-889f-584aa8c51877@gmail.com>
+Date: Tue, 10 Mar 2026 13:18:11 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-openembedded][master][PATCH] libssh 0.11.3: Fix
+ CVE-2026-3731
+To: deeratho@cisco.com, openembedded-devel@lists.openembedded.org
+References: <20260310121417.194408-1-deeratho@cisco.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260310121417.194408-1-deeratho@cisco.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:17:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125026
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 12:18:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125028
 
-Ptests passed successfully.
+Why not upgrade it to 0.11.4 in master, instead of patching it?
 
-Changelog: https://docs.djangoproject.com/en/6.0/releases/5.2.12/
-- Fixed CVE-2026-25673 and CVE-2026-25674
-- Fixed NameError when inspecting functions making use of deferred
-  annotations in Python 3.14.
+On 3/10/26 13:14, Deepak Rathore via lists.openembedded.org wrote:
+> From: Deepak Rathore <deeratho@cisco.com>
+>
+> Upstream Repository: https://git.libssh.org/projects/libssh.git
+>
+> Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3731
+> Type: Security Fix
+> CVE: CVE-2026-3731
+> Score: 9.8
+> Patch: https://git.libssh.org/projects/libssh.git/commit/?id=855a0853ad3a
+>
+> Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+>
+> diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
+> new file mode 100644
+> index 0000000000..88e6ff1c48
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
+> @@ -0,0 +1,43 @@
+> +From e46f096ad5294428509077c887233554d62ead0e Mon Sep 17 00:00:00 2001
+> +From: Jakub Jelen <jjelen@redhat.com>
+> +Date: Thu, 11 Dec 2025 13:22:44 +0100
+> +Subject: [PATCH] sftp: Fix out-of-bound read from sftp extensions
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=UTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +CVE: CVE-2026-3731
+> +Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=855a0853ad3a]
+> +
+> +Signed-off-by: Jakub Jelen <jjelen@redhat.com>
+> +Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
+> +(cherry picked from commit 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60)
+> +Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+> +---
+> + src/sftp.c | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/sftp.c b/src/sftp.c
+> +index 37b4133b..cbcdb066 100644
+> +--- a/src/sftp.c
+> ++++ b/src/sftp.c
+> +@@ -583,7 +583,7 @@ const char *sftp_extensions_get_name(sftp_session sftp, unsigned int idx) {
+> +     return NULL;
+> +   }
+> +
+> +-  if (idx > sftp->ext->count) {
+> ++  if (idx >= sftp->ext->count) {
+> +     ssh_set_error_invalid(sftp->session);
+> +     return NULL;
+> +   }
+> +@@ -599,7 +599,7 @@ const char *sftp_extensions_get_data(sftp_session sftp, unsigned int idx) {
+> +     return NULL;
+> +   }
+> +
+> +-  if (idx > sftp->ext->count) {
+> ++  if (idx >= sftp->ext->count) {
+> +     ssh_set_error_invalid(sftp->session);
+> +     return NULL;
+> +   }
+> +--
+> +2.51.0
+> diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+> index 5928581312..9f66736b29 100644
+> --- a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+> +++ b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+> @@ -9,6 +9,7 @@ DEPENDS = "zlib openssl"
+>  SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11;tag=${BPN}-${PV} \
+>             file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
+>             file://run-ptest \
+> +           file://CVE-2026-3731.patch \
+>            "
+>  
+>  SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125024): https://lists.openembedded.org/g/openembedded-devel/message/125024
+> Mute This Topic: https://lists.openembedded.org/mt/118239463/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../{python3-django_5.2.11.bb => python3-django_5.2.12.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_5.2.11.bb => python3-django_5.2.12.bb} (60%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-django_5.2.11.bb b/meta-python/recipes-devtools/python/python3-django_5.2.12.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-django_5.2.11.bb
-rename to meta-python/recipes-devtools/python/python3-django_5.2.12.bb
-index edf9aabb79..a7567265b5 100644
---- a/meta-python/recipes-devtools/python/python3-django_5.2.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_5.2.12.bb
-@@ -1,7 +1,7 @@
- require python3-django.inc
- inherit python_setuptools_build_meta
- 
--SRC_URI[sha256sum] = "7f2d292ad8b9ee35e405d965fbbad293758b858c34bbf7f3df551aeeac6f02d3"
-+SRC_URI[sha256sum] = "6b809af7165c73eff5ce1c87fdae75d4da6520d6667f86401ecf55b681eb1eeb"
- 
- RDEPENDS:${PN} += "\
-     python3-sqlparse \
 
