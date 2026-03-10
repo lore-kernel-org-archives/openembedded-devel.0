@@ -1,139 +1,174 @@
-Return-Path: <rs@ti.com>
+Return-Path: <reatmon@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B2ACFD2D9D
-	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 21:55:49 +0000 (UTC)
-Received: from BYAPR05CU005.outbound.protection.outlook.com (BYAPR05CU005.outbound.protection.outlook.com [52.101.85.30])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6924.1773179741368083444
- for <Openembedded-devel@lists.openembedded.org>;
- Tue, 10 Mar 2026 14:55:41 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 931D1FD88C6
+	for <webhook@archiver.kernel.org>; Tue, 10 Mar 2026 22:31:09 +0000 (UTC)
+Received: from DM5PR21CU001.outbound.protection.outlook.com (DM5PR21CU001.outbound.protection.outlook.com [52.101.62.35])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7776.1773181864617448562
+ for <openembedded-devel@lists.openembedded.org>;
+ Tue, 10 Mar 2026 15:31:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=J8VLGHS3;
- spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.85.30, mailfrom: rs@ti.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=IU4jvNC5;
+ spf=permerror, err=parse error for token &{10 18 spf.protection.outlook.com}: limit exceeded (domain: ti.com, ip: 52.101.62.35, mailfrom: reatmon@ti.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FVAGjmG8426HmbfmqGbJpLLNO/i/fhN2o3nqKInHpgwgmNX9Op9ux77owKPqBnUarF0L8s3zYgyOAAeoKIMxdsHitlNHz4Okl8zls8MSxHtpVmPraBbDtf+NJfLkn3WJMFRkhTT0Pz9DasgXo/xA9wYSKdX5a/tljhBcP3fDnxku207CvKqleksPTJe13yR3Wjqd/KLcnmJCDWOLQo42A/KRsDLmq+bTl5dpnGEPnhoARJ/77PT4UAYyPP69lILvLgvkJr2Ibkm0CJPW/YHnhw64Uv4Gu1aKflW8Yne2logVz6iauRq8vk14tqHHUQa4WT5JSy8TNNtTuISqxmEw4A==
+ b=nDPU3ClueKs3aaPCR7gGdGUqVQchdo0NDDIfMf3FQd/oq+xvj7zw6KyYSP9GTKl46RMEGmapfka7iS+I1NVL99eEaJ9UiqJoXEVksFO+ovWdC+KoYdeqyx4jW8OhPBTdEsY8lOF9q222atzzsB6eoTd+m7LlwVP9hUNQyJ0+10oS+waoz2tjcvJGwzPRram/H2ImpH7Z5DO+G4La4dPFdVbE5lzzhERF9pIQz2jOU0Q4u1cnyDDcvAWgpI2rNzP4Hf/n9c7trnTFEQdporKlkse9y85WnY0rfrTtkeWE1jx++tkERTBW5B3kW/kZKJFUaAms8BvszuQwthUOd3Oyew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+GY43a7R1syy03j8ztsudfaHyDfkw4IkL9VfDQPV7nE=;
- b=AILxctQiwGd2kMeoGXc1UQnoRUcwvwI1IiMwHanB0pBr0uN7WMqLpat64KYs3i7D0t7NnsRQZiDFCLrW/EzvSap7vaDJVnZfJ0dRieNF3tZ50+HD0ZtLZUs7REBdsB2umMiG3VkJmsHCSXhMZfismo8yGggvzitJamtET3Kd91WAxpTxn74EYqm4iaSNtPUil7ID6T03pU/7sa97hHlBRBBy2+WYSD7N5YevLC/jkDo65UMDHc+VreFyeuciNUxoHvy3zpBsPUSVK5eEE/ltzh9LStiHjtmuy+6tgJZzGcPp3362kamOiorkRE1Ozxx7D19zymaxWBqQXN7SFMu70Q==
+ bh=VtNi9l2C4eD3ZeSVj6gX8FyIlW+c4sJOG2yG+Bcuh+g=;
+ b=fmKeGIWHz0eXriaqEN1mtrnNXsLBGpQx7ZFxZpn1mlR7bUHpwcVBS6tDv4ziu1umWksNHqm4mG5VsPdxd2DiezZI0kRGwOrqzMZFbC3mSK1W2QwRF25t4L8hi0Vk1wGWWUc88tJc7ZeHJr9PGMPczDMMv7lEM7aqqQbC0OTejw8w3DbgKxObL/F6DODeAeZlJ+sAXXuNWvi1Bir8U2jXTPCePQaL/xSaTbJNu7wQMy4RhB8QSGI+w9WTWG9GzdYB1jCo9OYrVb76ocsU82FgDvtamIAn1Y5VxsmWeukchlkrtW/K3Wl3ULd3DqVHDSeIY+6TtLz1O3BEz+IIIQxx0A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
+ 198.47.23.194) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+GY43a7R1syy03j8ztsudfaHyDfkw4IkL9VfDQPV7nE=;
- b=J8VLGHS30nF8qOLndsTS0ScJh7FsKhXtqwyBHCyrPRzNI4NiJe9c2mYyMBWZ2md4x3CpFINKyEMHM7TlhL3mPciM3lzTrXXrZs6alBWSl05H5hsZynU+tYBqCMm3cai/+gckfSnQX34VE3LJcuI2CnxTXWCOG9Ze6Xs1+OBtFP4=
-Received: from CY5P221CA0005.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:b::17) by
- SJ2PR10MB7598.namprd10.prod.outlook.com (2603:10b6:a03:540::22) with
+ bh=VtNi9l2C4eD3ZeSVj6gX8FyIlW+c4sJOG2yG+Bcuh+g=;
+ b=IU4jvNC5eKLPiY7GUT193AscHHjfiJJ/vX9nkXSkKavEz+nKYl7r0D2N4YJ2ZZnHP2cJ4z+oTLYcDpLvKAg6IJRGI4iKnTWpfsODm8PRaDOWkw0f/tDAimUIg2O4Q+iF8ulTUG0oGceV+uhhG6CtIFoRti1dhAkunOROiZmw8G8=
+Received: from DS7PR03CA0065.namprd03.prod.outlook.com (2603:10b6:5:3bb::10)
+ by PH3PPF5FDE66ECB.namprd10.prod.outlook.com (2603:10b6:518:1::7a6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Tue, 10 Mar
- 2026 21:55:39 +0000
-Received: from CY4PEPF0000E9D3.namprd03.prod.outlook.com
- (2603:10b6:930:b:cafe::79) by CY5P221CA0005.outlook.office365.com
- (2603:10b6:930:b::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.20; Tue, 10 Mar
+ 2026 22:31:01 +0000
+Received: from CY4PEPF0000FCC3.namprd03.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::7b) by DS7PR03CA0065.outlook.office365.com
+ (2603:10b6:5:3bb::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Tue,
- 10 Mar 2026 21:55:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ 10 Mar 2026 22:30:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CY4PEPF0000E9D3.mail.protection.outlook.com (10.167.241.138) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CY4PEPF0000FCC3.mail.protection.outlook.com (10.167.242.105) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Tue, 10 Mar 2026 21:55:36 +0000
-Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9678.18 via Frontend Transport; Tue, 10 Mar 2026 22:31:00 +0000
+Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
- 2026 16:55:36 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 17:31:00 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
- 2026 16:55:36 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 17:31:00 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 10 Mar 2026 16:55:36 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.144])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62ALtZVa3849728;
-	Tue, 10 Mar 2026 16:55:36 -0500
-From: <rs@ti.com>
-To: <raj.khem@gmail.com>
-CC: <Openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH 0/2] sessions: update recipes for emptty
-Date: Tue, 10 Mar 2026 16:55:20 -0500
-Message-ID: <20260310215522.2836352-1-rs@ti.com>
-X-Mailer: git-send-email 2.53.0
+ Transport; Tue, 10 Mar 2026 17:31:00 -0500
+Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
+	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62AMV0l63382778
+	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 17:31:00 -0500
+Received: from reatmon by grumpy with local (Exim 4.97)
+	(envelope-from <reatmon@ti.com>)
+	id 1w05bQ-0000000B49l-12Cy
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Mar 2026 17:31:00 -0500
+From: Ryan Eatmon <reatmon@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-websocket-client: Upgrade 1.70 -> 1.9.0
+Date: Tue, 10 Mar 2026 17:31:00 -0500
+Message-ID: <20260310223100.2637578-1-reatmon@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D3:EE_|SJ2PR10MB7598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c3c58bb-3233-4e7c-cf2e-08de7eefc30c
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC3:EE_|PH3PPF5FDE66ECB:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12168385-e706-4fbe-d7d5-08de7ef4b525
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|36860700016|82310400026|376014|18002099003|56012099003;
+	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	V5PGYZ8n2Y+iZ+uIsn/ZdefA0DhXWNRNNIyv0hIm+uoraOgoBv1H7qNBSlxPbaXXsx5STY6ZuUajtLC4tYO64mMTFl/6GWPuyNmCU2mG2as4o3bTwEP+H7rYrGo4kSKW8tigQRXYif/IFkVMTbBl52T3w0PvWKErd9pqLFlhyTDcDCwHksA/Wp1XCDl3xxvoUf16/LHZFdpD98dVwDi6XgPyykWbjS8BbXNDsF5lMOkkHeOPaakNiwIkrdnmXGkH516/nvYjwapZCcbUj/BOZE16vxdE0o8PM4nLmNuy3LgLKokzP2o+8Ffpm5gVeAOe4NyKWeKpSE7/rwG6+Xbn7vM4hQSu42lXXEm9ph6fAVw6WqePinVTyAecmyTyJl8QSeQP+mQqODc00g4vfj389HyCel4c0O2uzn4CqaLs79aOTy00p36DC99I9VUB6/ogU+U0I++dYmRe/G122popC4jYIhiNHi7QtftNbr/ma+RylWUi0lZWHnrIeZdq434ZJrUYlV6yKMzq8k6cqjyGWNQCbZYJV+yQnQ8VowxcpUpuXnwPPCOZ9QvJDkOhQrdRoCdRmsZSEhsgGG//hDjytZwjF3l8kKTywLAMKiQaBAd1gIn1tA6TgGeQxcOm3aQLCTBu/PIYjyWmQ69CRXIAL3UBFqGlRR0JeYIFitRhupKu/7F6ayzQgrAGUzLXB3DCB/wbXCNsRWWtFy721QKnj61We+ZKzTN8GBHqyGkcjv6hjIn6r6hJ7nQqqgJGjOBWgfhlucYVZqnnB8tz11/QeQ==
+	PkH2dDQvVeKVpwGTcr4QDM7eBdVI68KR2Gqxk8x4/cI1wjAhSz9rPoR+21kZyZmRcXJsCCt0CRu+PImhggQBC71uTO5WKSrbUxt/YFde/EAMDVGvEgcZMh4jW9PSQIfrshbcQJGajvM84GU57tyZux5Qx+TPOosRfvcewCrFsBftk6WSHsm005lx2/Z/CQAKoOTgV+DXB34rNCF9GvMRNuThj3vi5hyCBWAR4GNNwR1syALKuxZUNWyCNdirQ3Y483yiVk7cFcg6KujpHdUwCjIKvKOYfSu667IigW7/Up5++S4dHf8/rh3P3faPlpCTBENzn+dIXpM0/HTSDKhL4tSBhujnYUaDETTjS/UdZsEAIxO0N8HBJIEJyf5ujmp/84KAOb6p/zUcUlJlLPrn4zsG7boH+SVyErROVPEI2bsUPJWn08ILBtI03SbzO7NlTqvkCJ2SmxpQygT3eow3J/7WFL7uCjKpsZweKUg/r6Qxgg7xx5eaa66TSa6Co5/bl67oTzDVdHYnDgRHUjll8z4a1+/fdcJHwmbANjm1yMJtIwD2rlZuSL5+e7uXQ/dfTBUSF61MnrLcbKjhrWGr/2Rd8MhImlDsQGz0VUjsFGJMEh4NKvglLY3xB3i+aJJynC541YOn0sFbMBajwOIhI5rLhT7OJ11CZrFCiCIJ5VNvoHt1dI6a81WRueb6kOx8voHsRwQEfyKRJDoSMAPebdERo/5ujfCkpU46N92InUw=
 X-Forefront-Antispam-Report: 
-	CIP:198.47.21.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:flwvzet200.ext.ti.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	CpUI9IjIWJEDUnGlVHV1my4trebl2JOpC2l1dSvFSj6GgUhauaPb2E1tSnvQEnWwQDoD+odhSgfPunXQqg7xBt+QDe26XrEMdVO17ngc96uEHZeeA0LMk4MpdyFZcyxJSUfYPhWfNK7Ffuv1ccrjmh+fNcf8pzqMOBqntBsgD4K/448Vd5gyZyzohAzAgB2Zex4WmEiRaQrZo98jFTsloYdRxy9vw5FOUeeuL8tPTr15ZKFUrQ+heWEUDckaczC640eHDocoV7UX5kQjKCaL/z0hCbodWGjN55SKZXyniNyctN6uhHELZ4NaOHVGbUCb++UgKCv6M4F288l4pK62CAYoOTrU+6zI/xe5uOEcGKH11WeCFliGcsPyNT0l53/HZzN8EDwX26RRWFDcgrOwlbs4/MO4K6D0Hxec5EpTKE8Foj2VbRsgOIp01RQL2qz1
+	zT+I5Lf4dpi+XGa0aDprJKAcFTTKLu7vs9paoMyaqEbG69kypn85GiWRyjzeSFAKOTNlff1fvhBVmz/9G0Ux7jADf8oKG0n4Mc6SzcwcVJmvPf/hZO5VeIsCQegnKNUZu1hSsDi7b4Q+lxv1/84JnT+xrlZ+QvaqPZg6jTPvIntTgapFIlgLUcxhiT7bNS+NPaqNOlOP7RIhJpen7btLaD9Ou4hznaoAPkzi4fuscs48EKTZLdOMB/w3BOpwYhe5IB8eYKTKCoYqQt35pJ2bty5fw/CaQ/4W6fm2XeJ4bcLhZK03X6j2IhsbOtHWewyPFClMzuu0MeVRfL/bLv8pHaVhrxDV5wrljztKopxiWulvCLXRSjjMsMX48KrZIFLuRwl7zAFt693T73f9txMjYnUv3YMZny9RfTh3FhyqtLzrSz8TzZk8ySALfn8fvVch
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 21:55:36.6974
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 22:31:00.8665
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c3c58bb-3233-4e7c-cf2e-08de7eefc30c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12168385-e706-4fbe-d7d5-08de7ef4b525
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.21.194];Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	CY4PEPF0000E9D3.namprd03.prod.outlook.com
+	CY4PEPF0000FCC3.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7598
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF5FDE66ECB
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 21:55:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125043
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Mar 2026 22:31:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125044
 
-From: Randolph Sapp <rs@ti.com>
+Upgrade to release 1.9.0:
 
-The x-session-manager alternative link has been removed. Instead a distro s=
-hould
-choose what the default session is by using the DEFAULT_SESSION variable of
-xserver-nodm-init.
+- 1.9.0
+  - Remove Python 3.8 support (EOL), add Python 3.13 (5f25030)
+  - Remove localhost and 127.0.0.1 from default NO_PROXY list (#994)
+  - Support IPv6 CIDRs in the no_proxy option (#1033)
+  - Fix thread safety condition in `teardown()` to improve `run_forever()` =
+(#1015)
+  - Fix #1024 by chunking data, recursion in on_error callback, thread leak=
+ in `_stop_ping_thread()`, avoid implicit None in `recv()` (#1036)
+  - Avoid bare except clauses for better error handling (#1036)
+  - Fix async (#983)
+  - Resolve mypy type errors (#996, #1006, 813d570)
+  - Test coverage improvements (#1035, #1036)
+  - flake8 linting improvements (#1034)
 
-If the default session cannot be found the user will be presented with a
-menu to pick the session themselves. Some of these sessions already provide=
-d
-their own desktop entries, others needed one to be added.
+- 1.8.0
+  - Added `on_reconnect` parameter to WebSocketApp to handle callback ambig=
+uity (#972)
+  - Improve handling of SSLEOFError and use reconnect bool (#961)
+  - Minor linting and docs CI build upgrades (981c00e, 75ba91a, bec2608)
 
-All required recipe changes have been made, with the only major user facing
-change being that a session will not be automatically selected. It's up to =
-them
-to decide at runtime, with a distro override, or with local.conf override.
+License-Update: copyright years refreshed
 
-This series has a dependency on the emptty series in oe-core.
+Signed-off-by: Ryan Eatmon <reatmon@ti.com>
+---
+ ...et-client_1.7.0.bb =3D> python3-websocket-client_1.9.0.bb} | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-websocket-client_1.7.0=
+.bb =3D> python3-websocket-client_1.9.0.bb} (66%)
 
-Randolph Sapp (2):
-  openbox: update for emptty
-  icewm: update for emptty
-
- meta-oe/recipes-extended/icewm/icewm_3.8.2.bb     |  6 +-----
- .../openbox/files/openbox.desktop                 |  6 ++++++
- meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb | 15 +++++++++++----
- 3 files changed, 18 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/openbox/files/openbox.desktop
-
---
-2.53.0
+diff --git a/meta-python/recipes-devtools/python/python3-websocket-client_1=
+.7.0.bb b/meta-python/recipes-devtools/python/python3-websocket-client_1.9.=
+0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-websocket-client_1.=
+7.0.bb
+rename to meta-python/recipes-devtools/python/python3-websocket-client_1.9.=
+0.bb
+index fc73f1b0a5..87f25db0fc 100644
+--- a/meta-python/recipes-devtools/python/python3-websocket-client_1.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-websocket-client_1.9.0.bb
+@@ -5,9 +5,11 @@ This provide the low level APIs for WebSocket. All APIs \
+ are the synchronous functions."
+ HOMEPAGE =3D "https://github.com/websocket-client/websocket-client"
+ LICENSE =3D "Apache-2.0"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6eae3bb7247ccb2c3a087ea8de759c0=
+1"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db8d4a5e03977c68fad62beee8185704=
+e"
+=20
+-SRC_URI[sha256sum] =3D "10e511ea3a8c744631d3bd77e61eb17ed09304c413ad42cf6d=
+dfa4c7787e8fe6"
++SRC_URI[sha256sum] =3D "9e813624b6eb619999a97dc7958469217c3176312b3a16a4bd=
+1bc7e08a46ec98"
++
++PYPI_PACKAGE =3D "websocket_client"
+=20
+ inherit pypi setuptools3
+=20
+--=20
+2.43.0
 
 
