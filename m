@@ -1,266 +1,127 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 710D7104BED3
-	for <webhook@archiver.kernel.org>; Wed, 11 Mar 2026 10:25:48 +0000 (UTC)
-Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17977.1773224743079250853
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB634106121C
+	for <webhook@archiver.kernel.org>; Wed, 11 Mar 2026 11:12:02 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18843.1773227517472256902
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Mar 2026 03:25:43 -0700
+ Wed, 11 Mar 2026 04:11:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=cubLC5rm;
- spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: deeratho@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JD4Yv1Hl;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-439bcec8613so7854095f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 04:11:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=6247; q=dns/txt;
-  s=iport01; t=1773224743; x=1774434343;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=IYH9ERIMJslBe8tWp1URzWpws6nwMmU2/ZN7aF6kYow=;
-  b=cubLC5rmRNMgCYgj23RJ5bT1fHRUbpZLOZogqDX82HaS6ftgaLXWbZ6n
-   fVCEMsznZTeF/o4ElwpGLJDA6OC6XeKU5mIwlaF+J/XNX+7aQm/A9ZLct
-   4WGp+sA9azA0uMzgCGqnJQw6K4EuyGumr+7IpokrmghnXayBrMpgEbBSo
-   nonueKqnv46WoKKptHvrqb9eD8SDrbbNno7M8mvhDe43cwB4okvgkTlse
-   dNybZIMCRurew9m/b9/buMX0Hul8zrpXQNzCPB/IZjU1vMggXWYul5SDR
-   eK1UOFQ5qPgptnGF0B/n8rjqz5M/TOZowHylwSnD5qz0F6NERJxD12PBt
-   Q==;
-X-CSE-ConnectionGUID: B8RMfY1TSUep19sfkFb4+w==
-X-CSE-MsgGUID: Bbo3CQUVSN2klNc4gRDL0Q==
-X-IPAS-Result: =?us-ascii?q?A0CZBQBmQbFp/4v/Ja1agQmBUIJID3FfQkkDhFSPU4IhA?=
- =?us-ascii?q?54agX8PAQEBD0QNBAEBhQcCjSICJjQJDgECBAEBAQEDAgMBAQEBAQEBAQEBA?=
- =?us-ascii?q?QsBAQUBAQECAQcFgQ4Thk8NhloBAgEDIwQLARgBPQkTAwECAwImAgIrIwgQC?=
- =?us-ascii?q?YMCAYJzAgERklCbRHp/M4EBgygBMQUJAkNP2yYBCxQBgQouhTyDGAGFAFsYA?=
- =?us-ascii?q?YR6JxsbgXKBFYNogQWBXAQYgQ2EFIJpBIIigQ6BYR+FPgaETIcTSIECHANZL?=
- =?us-ascii?q?AFVEw0KCwcFgWYDNRIqFW4yHYEjPhczWBsHBYUeD4hwdG6BEYMpAwsYDUgRL?=
- =?us-ascii?q?DcUGwQ9AW4HjXU9gjSBDiyCFBgOA6NCgiGhDgoog3SMHpU6GjOEBJQVklKZB?=
- =?us-ascii?q?oJYizGWUIRogWg8gVlwFYMiCUkZD44tCwuIccQvIzUCCQMuAgcBCgEBAwmRa?=
- =?us-ascii?q?oF9AQE?=
-IronPort-Data: A9a23:tPasBajMJEYfmoIKUvWdf0kDX161MBEKZh0ujC45NGQN5FlHY01je
- htvDGvSPqrfN2X1Ld91b4+//UNQu8CGm4RnTAA6/Hg1RSpjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeEULOZ82QsaDxMsPva8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqUyqtxSD1AXy
- cclJShUPwuNhMy8nPGkH7wEasQLdKEHPasFsX1miDWcBvE8TNWbGePB5MRT23E7gcUm8fT2P
- pVCL2EwKk6dPlsWYQZ/5JEWxI9EglHzfjBCoU6VooI84nPYy0p6172F3N/9JIzUG5oJxhbBz
- o7A107zBUoxDeGh8hzf8XaKjbPApw/fALtHQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YbLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:2hZ5z6z1IcOToMKQM3ocKrPwK71zdoMgy1knxilNoHtuA6ulfq
- GV7ZAmPHDP5gr5NEtMpTnEAtjifZq+z+8R3WBuB9aftWDd0QPCRr2Kr7GSoQEIcBeQygcy78
- tdmtBFaOEZyTNB/L/HCM7SKadH/OW6
-X-Talos-CUID: 9a23:cGb+EWNiOhvqL+5Dcnld0UAlQ/weT3DFlSbLLUyWAzoqV+jA
-X-Talos-MUID: 9a23:6pAHWQUoTfbBZIPq/BXmg2pJDfpW2IL0C0QrmskJgeWgbRUlbg==
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.23,113,1770595200"; 
-   d="scan'208";a="686674081"
-Received: from rcdn-l-core-02.cisco.com ([173.37.255.139])
-  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 11 Mar 2026 10:25:41 +0000
-Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-02.cisco.com (Postfix) with ESMTPS id C5F7918000360
-	for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 10:25:41 +0000 (GMT)
-Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id 6B981CC12B5; Wed, 11 Mar 2026 03:25:41 -0700 (PDT)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+        d=gmail.com; s=20230601; t=1773227516; x=1773832316; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=1g3V1RGigSmFlriHV7BkG3QyyVY2tPGITL4A3OXjRR8=;
+        b=JD4Yv1HlJLLS0gCXk9A1CbBfe/KIHjAz1/+zMsUdvw2hOlZVSO9uXoVJtxvnVYJUvE
+         /KzFvPaMpoB6Wt/g62MK6W92XQitP2r6VAZEpLXqRChoIkEcbJsptoRhb4kd9M2OFXqa
+         OFHkce3P55i8IVLy1r+f2YcRtwXD0aTByAgAJ9xGCu5NVMMiwZtRu1xZDX9OErziu5C+
+         F8OOhgfulqwMPuvhNuszwqy4y3KM1A9ERE2bSUCcNs917uPXPMXl5GkYtG1Mqsknz+Rn
+         cmFOPmeWiGfnzbh1ZMp8vUPECvYJa5R7h815qAWk6fkJ0nmUZIDM2jdgQ+ZiufyWv2rb
+         v0WA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773227516; x=1773832316;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1g3V1RGigSmFlriHV7BkG3QyyVY2tPGITL4A3OXjRR8=;
+        b=lzpr/4JuVu1BhRs2Aveszy3S2nA1ad5WLRcve5+EIJZEZyUpt3Y44JUbi5/uKUHEjT
+         b4LnRFAS0rnqr2ftb9dV5cRCieC9RNn/YMykYUGpjsFeRZbRzccLoau/3k/s149w6AZL
+         ZnVlpB7DGhda5G2ujrMcWlEBXSVmHWhP2zFjFLBqZrBcyUUBQdip2elJqoK0gy0jtoTB
+         Y4C7C0UUAkmD+KxL142VFd88Q1QQY/IocCw+orm/NNtRRv/JFx4SwLWCY2cX0K2MQBW8
+         B88271hdSWdPMZ5UP0SnFxfimQnr1/pJ74w42fwsgUPm4RdqAyncvZLJ/ZEAWc4lx325
+         qW/g==
+X-Gm-Message-State: AOJu0YxG+lG1lHGYl8EwMiM/plfrCS0QmjAGZE9rMkavc1dtrks819DV
+	VeQZQKVIike1ct8ktjhnKYft4l9rG6ZLJ/dFvjxdLGHhAujsqhniG07h3xAs6g==
+X-Gm-Gg: ATEYQzyYCxPNA+kFlhMqnR85DSQIwta6wO3n4GKlGST6QfH31zKEAQo6EjPRcu0tV+N
+	ONPE6nqTsR/FhlAv5Nl9jwHj1F8/Fi2YoCGkvCUHNTYbx9Qq2m3r5I8xMAXmhoHM7DpA/bsOwnv
+	17Q6xWyx6XAOoIh5Z0r7dGrThKl+zUDFVIQjHI5V/ohxqcLAQnJIOFxacyl3js5TIRNQEdGu5wg
+	JA4pFRMnA5oq8tNYRyl+OLsaPDgreXKKNJIiRxhm2+DaSQdfT7nOcQBMvrngmwfqvfIwSYM8dOR
+	0SnKYlHDCzJjkkGbT952NXG7QNUl5UpUyJdEaHODS1Pa/QeU/GMy8JRyhUUvtvIKh8a18KvdMHA
+	VCn1Oqfh2p0hNu26reF104UINbv7OdC+cRkso6Yhtt+7UKelLvuJD3aoAyuP4EubjIa14fPbjf0
+	QTHv3aCAutR6kxi/9rDGcg
+X-Received: by 2002:a05:600c:c4b7:b0:485:3193:6ddb with SMTP id 5b1f17b1804b1-4854b0a6fadmr34037705e9.3.1773227515538;
+        Wed, 11 Mar 2026 04:11:55 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4854b0c3a10sm16201995e9.12.2026.03.11.04.11.54
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Mar 2026 04:11:55 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded][whinlatter][PATCH v2] libssh: Fix CVE-2026-3731
-Date: Wed, 11 Mar 2026 03:25:14 -0700
-Message-Id: <20260311102514.2921809-1-deeratho@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260310121621.196342-1-deerath@cisco.com>
-References: <20260310121621.196342-1-deerath@cisco.com>
+Subject: [meta-oe][kirkstone][PATCH 1/2] exiv2: patch CVE-2026-25884
+Date: Wed, 11 Mar 2026 12:11:53 +0100
+Message-ID: <20260311111154.1737998-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-02.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 10:25:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125081
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 11:12:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125082
 
-From: Deepak Rathore <deeratho@cisco.com>
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-25884
 
-Pick the patch [1] and [2] as mentioned in [3]
+Backport the commits referenced by the NVD advisory.
 
-[1] https://git.libssh.org/projects/libssh.git/commit/?id=f80670a7aba86cbb442c9b115c9eaf4ca04601b8
-[2] https://git.libssh.org/projects/libssh.git/commit/?id=02c6f5f7ec8629a7cff6a28cde9701ab10304540
-[3] https://security-tracker.debian.org/tracker/CVE-2026-3731
+Note that the regression tests are not included in this test. The
+patch contains binary data, which cannot be applied with any of
+the PATCHTOOLs in do_patch task.
 
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
-Changes from v1 to v2:
-- Update the commit message.
-- Cherry pick it from libssh-0.11.4 release tag and add the second patch
-  to add the reproducer for the CVE.
+ .../exiv2/exiv2/CVE-2026-25884.patch          | 25 +++++++++++++++++++
+ meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch
+diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884.patch
 new file mode 100644
-index 0000000000..bf1fbcc027
+index 0000000000..624c53f49b
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch
-@@ -0,0 +1,35 @@
-+From 04d2f831fa8da74c973538cd3f621061a7656771 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Thu, 11 Dec 2025 13:22:44 +0100
-+Subject: [PATCH 1/2] sftp: Fix out-of-bound read from sftp extensions
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884.patch
+@@ -0,0 +1,25 @@
++From cfbe7e48cbfa63b88b3dcf9d99272330f8349c4f Mon Sep 17 00:00:00 2001
++From: Kevin Backhouse <kevinbackhouse@github.com>
++Date: Sat, 31 Jan 2026 15:31:55 +0000
++Subject: [PATCH] Fix out-of-bounds read.
 +
-+CVE: CVE-2026-3731
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=f80670a7aba86cbb442c9b115c9eaf4ca04601b8]
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-+(cherry picked from commit 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60)
-+(cherry picked from commit f80670a7aba86cbb442c9b115c9eaf4ca04601b8)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
++CVE: CVE-2026-25884
++Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/5b8f1f4d92b8f27a5a80e0c3d3eb9dce7620d9f1]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/sftp.c | 2 +-
++ src/crwimage_int.cpp | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/sftp.c b/src/sftp.c
-+index 37b4133b..05e05019 100644
-+--- a/src/sftp.c
-++++ b/src/sftp.c
-+@@ -583,7 +583,7 @@ const char *sftp_extensions_get_name(sftp_session sftp, unsigned int idx) {
-+     return NULL;
-+   }
-+
-+-  if (idx > sftp->ext->count) {
-++  if (idx >= sftp->ext->count) {
-+     ssh_set_error_invalid(sftp->session);
-+     return NULL;
-+   }
-+--
-+2.35.6
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch
-new file mode 100644
-index 0000000000..b5a267b808
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch
-@@ -0,0 +1,102 @@
-+From df01168bb3863306ba0f35b50e5b2e5dd00ba9f6 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Thu, 11 Dec 2025 13:21:23 +0100
-+Subject: [PATCH 2/2] Reproducer for out of bounds read of SFTP extensions
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+CVE: CVE-2026-3731
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=02c6f5f7ec8629a7cff6a28cde9701ab10304540]
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-+(cherry picked from commit b90b7f24517efa7ab21506db9379aa3dce9fee7d)
-+(cherry picked from commit 02c6f5f7ec8629a7cff6a28cde9701ab10304540)
-+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-+---
-+ tests/client/torture_sftp_init.c | 62 +++++++++++++++++++++++++++++++-
-+ 1 file changed, 61 insertions(+), 1 deletion(-)
-+
-+diff --git a/tests/client/torture_sftp_init.c b/tests/client/torture_sftp_init.c
-+index a17f01fe..cdc24426 100644
-+--- a/tests/client/torture_sftp_init.c
-++++ b/tests/client/torture_sftp_init.c
-+@@ -72,6 +72,63 @@ static void session_setup_channel(void **state)
-+     assert_non_null(s->ssh.tsftp);
-+ }
-+
-++static void session_setup_extensions(void **state)
-++{
-++    struct torture_state *s = *state;
-++    struct passwd *pwd = NULL;
-++    int rc, count;
-++    const char *name = NULL, *data = NULL;
-++    sftp_session sftp = NULL;
-++
-++    pwd = getpwnam("bob");
-++    assert_non_null(pwd);
-++
-++    rc = setuid(pwd->pw_uid);
-++    assert_return_code(rc, errno);
-++
-++    s->ssh.session = torture_ssh_session(s,
-++                                         TORTURE_SSH_SERVER,
-++                                         NULL,
-++                                         TORTURE_SSH_USER_ALICE,
-++                                         NULL);
-++    assert_non_null(s->ssh.session);
-++
-++    s->ssh.tsftp = torture_sftp_session(s->ssh.session);
-++    assert_non_null(s->ssh.tsftp);
-++    sftp = s->ssh.tsftp->sftp;
-++
-++    /* null parameter */
-++    count = sftp_extensions_get_count(NULL);
-++    assert_int_equal(count, 0);
-++
-++    count = sftp_extensions_get_count(sftp);
-++    assert_int_not_equal(count, 0);
-++
-++    /* first null parameter */
-++    name = sftp_extensions_get_name(NULL, 0);
-++    assert_null(name);
-++    data = sftp_extensions_get_data(NULL, 0);
-++    assert_null(data);
-++
-++    /* First extension */
-++    name = sftp_extensions_get_name(sftp, 0);
-++    assert_non_null(name);
-++    data = sftp_extensions_get_data(sftp, 0);
-++    assert_non_null(data);
-++
-++    /* Last extension */
-++    name = sftp_extensions_get_name(sftp, count - 1);
-++    assert_non_null(name);
-++    data = sftp_extensions_get_data(sftp, count - 1);
-++    assert_non_null(data);
-++
-++    /* Overrun */
-++    name = sftp_extensions_get_name(sftp, count);
-++    assert_null(name);
-++    data = sftp_extensions_get_data(sftp, count);
-++    assert_null(data);
-++}
-++
-+ static int session_teardown(void **state)
-+ {
-+     struct torture_state *s = *state;
-+@@ -92,7 +149,10 @@ int torture_run_tests(void) {
-+                                         session_teardown),
-+         cmocka_unit_test_setup_teardown(session_setup_channel,
-+                                         NULL,
-+-                                        session_teardown)
-++                                        session_teardown),
-++        cmocka_unit_test_setup_teardown(session_setup_extensions,
-++                                        NULL,
-++                                        session_teardown),
-+     };
-+
-+     ssh_init();
-+--
-+2.35.6
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-index 5928581312..ab47931fa3 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-@@ -9,6 +9,8 @@ DEPENDS = "zlib openssl"
- SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.11;tag=${BPN}-${PV} \
-            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
-            file://run-ptest \
-+           file://CVE-2026-3731_p1.patch \
-+           file://CVE-2026-3731_p2.patch \
-           "
++diff --git a/src/crwimage_int.cpp b/src/crwimage_int.cpp
++index 570de75..8791dbd 100644
++--- a/src/crwimage_int.cpp
+++++ b/src/crwimage_int.cpp
++@@ -812,7 +812,7 @@ namespace Exiv2 {
++                                     Image&         image,
++                                     ByteOrder      /*byteOrder*/)
++     {
++-        std::string s(reinterpret_cast<const char*>(ciffComponent.pData()));
+++        auto s = std::string(reinterpret_cast<const char*>(ciffComponent.pData()), ciffComponent.size());
++         image.setComment(s);
++     } // CrwMap::decode0x0805
++ 
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+index 4700173de4..602ef3910f 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.27.3.bb
+@@ -32,6 +32,7 @@ SRC_URI = "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${BP}-Source
+            file://CVE-2021-37621-2.patch \
+            file://CVE-2021-37622-1.patch \
+            file://CVE-2021-37622-2.patch \
++           file://CVE-2026-25884.patch \
+            "
+ SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
  
- SRC_URI:append:toolchain-clang = " file://0001-CompilerChecks.cmake-drop-Wunused-variable-flag.patch"
--- 
-2.35.6
-
 
