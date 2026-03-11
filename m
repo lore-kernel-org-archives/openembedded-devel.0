@@ -2,208 +2,198 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55CC8104951F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52584104951A
 	for <webhook@archiver.kernel.org>; Wed, 11 Mar 2026 09:42:45 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17294.1773222158443328538
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16988.1773222159777584236
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Mar 2026 02:42:38 -0700
+ Wed, 11 Mar 2026 02:42:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=exyOkEhd;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-439f5abc829so1288201f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 02:42:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MUbn+n+y;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-439b7c2788dso7413259f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 02:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773222157; x=1773826957; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XTY/b0AezdoB3RXeL2eMkUvZeS2kYoBND4BVKiP0/OE=;
-        b=exyOkEhdEBlf1+YSDKRiU+3Kd+cVtIlzgW4941ZVjp3it9pNVyhhKyC9gDTZuC2Tnz
-         KXS1+rGzGGHmy5ZrLJieWrRn4P9reZRNs1mNvrghFOapf0kfmaI8PLBpGz0ap2rCNYtX
-         FliUDZBgGs3qWoiJQsMcf7MwNa3SMvewEYuEL8aLA1xbg8GASfJ6YJL87VJWdbzvUhfO
-         us8ssmBkmJHpOz2HW0dIRwUdC8nWQridUS7ryAbrGDzj+hzqP2sD1zwIUvToYoawMWb4
-         cdRRIHXRNJHHLvtYz7vRw6ZPKP1qQugr1+qR5beyIr/pcQ9d6m5ZwV7jg6uq6muKRekO
-         CuDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773222157; x=1773826957;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1773222158; x=1773826958; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=XTY/b0AezdoB3RXeL2eMkUvZeS2kYoBND4BVKiP0/OE=;
-        b=fHrtA7D2oHZwzqOkeTqBadFPUlmtvOFhIMUT1gLoz1SkSGtLPJ3gHXqZbKLK/vbSmz
-         tydAnnjqQM9v8zeVEPTv+bkHYFaRwubar9r5gJ+aiy4eqP44p0SESYt0ms+btuFPai+M
-         wIEPp7teihOcSxvL/e9Rsvg02DuGM/t32O0J7aLBvgBfcesWvR4eN8CUe+7Hk2GzMZM5
-         1N0sawPAPCD7md4mcsUB0iO48b+warzmkaemcJlcwpfoBLlqS9on5L+K4d3aQa0z9Lhn
-         scBF90PgDdwEIJ2xt2oyX1TklDZWDBsX8Kg7e2l4EkM2/y/vLLsW/ACwd3iG3FM2kaKb
-         9kag==
-X-Gm-Message-State: AOJu0YwGYEybDJ7T8OGRUmMnD+B6QzCeleOTN8PAromw+ZKeHddAdSuE
-	ssWJXi3sTBAv3lsDLqUljUpOH/DCbTwzxEtZd8uRRqf31CzzkTw8KHNnN2lqeg==
-X-Gm-Gg: ATEYQzzcu7yumIC7D8rJ7MYVoNs+QGj9nldmReJlOBiTCmRyT05Zl1gMARtHDq3FyIC
-	bm2N2FG1a/2f6+1+0XpXjgdoJrPyUgDMf8s3iEEQqsPWRTOdkJmJqT2QUQT0BVlTuy0jMoJPqf1
-	wosabnSkF53Orv3Uxox7hvR5KYHfivBuKjT/uDSzz5n/ryjt2E2zoM4McVN74kxYcWXsP1JnzwZ
-	XdnH/bxpeb/JzZWJCsWNzHxTeaLV4c/JOByu7IKNxJ0wi1gXq3r4DK+HjJ57AJ2tn9nqVSsJu8t
-	rB7Yd/zMsW0773FZJL1SSOZ6NPb1uE845A498PUX/9zE7Vsb8XWBr41mm9JpCvhUL8ighEvEWfF
-	qBFyAKx5eASmATz86NrVrsvN0b/y7YqNVk8icGQ/B8Pm3YAjKRLFUT4U/z1sYfdQthUMfsNnzOc
-	MW6G8dJfbR9WFdkXgizVuf
-X-Received: by 2002:a05:6000:2509:b0:436:369f:39f5 with SMTP id ffacd0b85a97d-439f8423e9cmr3722626f8f.43.1773222156573;
-        Wed, 11 Mar 2026 02:42:36 -0700 (PDT)
+        bh=TKNM8vZTQnRPNnNluyRFTTq8ZQ9w/rx73hYnCaZEPzU=;
+        b=MUbn+n+ytzAEY6QY4lhiZv+rTxi0Nq2E/JDou04bmpFm3r6B7RmUjTRo0EfdenLV+s
+         Ruh6QYCtRu8zvtXuRvQjYcA8xLRRBz0tBjvQCNXWI5ldj6nC/Gh7AwsQVTVbdsNnw4Jx
+         lgYgXMJd/Hl00aW5Zau6oimxEoGFtG3/4dV5nKCKUYnvCRRFfgJNAbK/L+IqXVQzs+F3
+         yNOeko531AJUAOKPiCbL4A7SUmentr8kt4lfDz1efn5WVidMwsl4G0y/fCdFZThgWHUa
+         +DRGm3JVoog1VCMB+1yyWO60t61NLOnKn1O7z/hl53FuCCIxX8xpOuVm61/cTJA3/4OC
+         SkUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773222158; x=1773826958;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=TKNM8vZTQnRPNnNluyRFTTq8ZQ9w/rx73hYnCaZEPzU=;
+        b=ZgiDgVxYjYj+5PtKJqetlDwV/J8GR0SoCWD4fksBw15W4Bm4hbGPeU9dGLp3XgcPKA
+         lqapApJE2+hnY8EY/7H+7+UNPKETNXAu8tVe9Eoz6XGriPrfhW0yvOeV+09TAN0BLZjy
+         nwTmgqkbEnKY+TG4p/0SPn0L/Udfp/OfVb1NDeVJdbxLlZa3qXAtNPrP+vq2VwPy0+Ex
+         jUAPRn4fw71cjsZO94NgXbHa8N/Nx4cl0TVaVHbT7y8ehwa08xB+dywZo/JtmtFfSYqI
+         f0flz8olH3z5CX1d2t6TGoaLSG4zJZsoMyvna/t8YadML6w61dWHvj5SW/U24+gFOrXP
+         33KA==
+X-Gm-Message-State: AOJu0YwaCdQPdqzVIix7hK65y0mfz9nynNiKJPflxo8iamCROsnCppWe
+	33RI2AW6M+WW8xD4cRDfgkTrK/gWRKSgqspzb9GiEUFTbuETt3p94hirzx75xQ==
+X-Gm-Gg: ATEYQzxIHekhoEJlxHq/a33ycZnekmDusv0h2CXTKWT5jZJ9Cxo/DkChCiOMkyvsxH5
+	2lyHGpKG+6LmTkmZYg+IzW0835fhzTmpyiOjJZBWuroX9NvgvTM+4YAKVd8Dbod0tR7OW1bAO0k
+	N6dJcOwAw0huwxLp9trxv7gRoVGb/Mmse/0FSFxP7KH3eXDFxKbTVs3ieph08+bRXH6kcUY3li+
+	hViI1KAgfGvfPxkzz7BfJKV279RkbYngUJ767LSY+1K5bWbKQv+ERlwKBAr9+rFarzwpPMQDcfr
+	7O25JQun6kW6cVtf0FcGprvP9RhTTt3xLgTtegbDx+a3t8XZ5VwLs7N0YQjGcXZawRUxC8nesdm
+	5bKcp5X9WUDnRnzpbODTwvdccBzOXIaBuQ+pE7sq8DfnuSUg8mBZV8Q2//Zi4giHZZyPpepQnX+
+	VaJDtbcl0dXM3DcJUa+sdC
+X-Received: by 2002:a05:6000:2211:b0:439:cb01:b1a3 with SMTP id ffacd0b85a97d-439f821bbfdmr3769246f8f.32.1773222157915;
+        Wed, 11 Mar 2026 02:42:37 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439f8104515sm5130633f8f.0.2026.03.11.02.42.35
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439f8104515sm5130633f8f.0.2026.03.11.02.42.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Mar 2026 02:42:36 -0700 (PDT)
+        Wed, 11 Mar 2026 02:42:37 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 1/3] exiv2: patch CVE-2026-25884
-Date: Wed, 11 Mar 2026 10:42:33 +0100
-Message-ID: <20260311094235.1616493-1-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 3/3] exiv2: patch CVE-2026-27631
+Date: Wed, 11 Mar 2026 10:42:35 +0100
+Message-ID: <20260311094235.1616493-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260311094235.1616493-1-skandigraun@gmail.com>
+References: <20260311094235.1616493-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 09:42:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125075
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125077
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-25884
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-27631
 
-Backport the commits referenced by the NVD advisory.
-
-One of the patches contain some binary data (for test data),
-which needs to be applied with git PATCHTOOL..
+Backport the patches referenced by the NVD advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../exiv2/exiv2/CVE-2026-25884-1.patch        | 69 +++++++++++++++++++
- .../exiv2/exiv2/CVE-2026-25884-2.patch        | 25 +++++++
- meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb |  7 +-
- 3 files changed, 100 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-1.patch
- create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-2.patch
+ .../exiv2/exiv2/CVE-2026-27631-1.patch        | 63 +++++++++++++++++++
+ .../exiv2/exiv2/CVE-2026-27631-2.patch        | 26 ++++++++
+ meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb |  2 +
+ 3 files changed, 91 insertions(+)
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-1.patch
+ create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-2.patch
 
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-1.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-1.patch
+diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-1.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-1.patch
 new file mode 100644
-index 0000000000..a2b41adcef
+index 0000000000..0f85053091
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-1.patch
-@@ -0,0 +1,69 @@
-+From 237f63c2abcd6c346bf5d27044ab76f5388bb4e8 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-1.patch
+@@ -0,0 +1,63 @@
++From 7a93f203cd72a895b26bb633d51b2448a0f629a3 Mon Sep 17 00:00:00 2001
 +From: Kevin Backhouse <kevinbackhouse@github.com>
-+Date: Sat, 7 Feb 2026 22:50:46 +0000
++Date: Thu, 26 Feb 2026 21:14:10 +0000
 +Subject: [PATCH] Regression test for
-+ https://github.com/Exiv2/exiv2/security/advisories/GHSA-9mxq-4j5g-5wrp
++ https://github.com/Exiv2/exiv2/issues/3513
 +
-+CVE: CVE-2026-25884
-+Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/191138fef73f331de1311e735d8e6359a36fa786]
++CVE: CVE-2026-27631
++Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/7adedce8c779e9c7bce843cbaf9eff26bc1659b6]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ test/data/issue_ghsa_9mxq_4j5g_5wrp.crw       | Bin 0 -> 74 bytes
-+ .../github/test_issue_ghsa_9mxq_4j5g_5wrp.py  |  24 ++++++++++++++++++
-+ .../test_regression_allfiles.py               |   1 +
-+ 3 files changed, 25 insertions(+)
-+ create mode 100644 test/data/issue_ghsa_9mxq_4j5g_5wrp.crw
-+ create mode 100644 tests/bugfixes/github/test_issue_ghsa_9mxq_4j5g_5wrp.py
++ test/data/issue_3513_poc.psd                   | Bin 0 -> 206 bytes
++ tests/bugfixes/github/test_issue_3513.py       |  17 +++++++++++++++++
++ .../test_regression_allfiles.py                |   1 +
++ 3 files changed, 18 insertions(+)
++ create mode 100644 test/data/issue_3513_poc.psd
++ create mode 100644 tests/bugfixes/github/test_issue_3513.py
 +
-+diff --git a/test/data/issue_ghsa_9mxq_4j5g_5wrp.crw b/test/data/issue_ghsa_9mxq_4j5g_5wrp.crw
++diff --git a/test/data/issue_3513_poc.psd b/test/data/issue_3513_poc.psd
 +new file mode 100644
-+index 0000000000000000000000000000000000000000..816af2663b3ec93d0d4de4755a02b5d0f5d09640
++index 0000000000000000000000000000000000000000..b8cf982ccc29e4574783b1317347a8494bce4240
 +GIT binary patch
-+literal 74
-+zcmebDRA69W@NjhuaCUYH`mcZv7#X+>WPvJpfmnfwK>?&13|Kip6i5oF1;hjZi0B7h
++literal 206
++zcmcC;3J7LkWXND(VPIfj2I6QSp2oldW&@cF4i-+HzAOnKCIbVQ%?V)xNk#^S{{sU!
++VK$eS7U=ZX2Ii>-KnHh{ttN=+HebfK|
 +
 +literal 0
 +HcmV?d00001
 +
-+diff --git a/tests/bugfixes/github/test_issue_ghsa_9mxq_4j5g_5wrp.py b/tests/bugfixes/github/test_issue_ghsa_9mxq_4j5g_5wrp.py
++diff --git a/tests/bugfixes/github/test_issue_3513.py b/tests/bugfixes/github/test_issue_3513.py
 +new file mode 100644
-+index 000000000..199328f25
++index 000000000..5383470e4
 +--- /dev/null
-++++ b/tests/bugfixes/github/test_issue_ghsa_9mxq_4j5g_5wrp.py
-+@@ -0,0 +1,24 @@
+++++ b/tests/bugfixes/github/test_issue_3513.py
++@@ -0,0 +1,17 @@
 ++# -*- coding: utf-8 -*-
 ++
-++from system_tests import CaseMeta, CopyTmpFiles, path
+++import system_tests
 ++
 ++
-++class CrwMap_decode0x0805_OutOfBoundsRead(metaclass=CaseMeta):
-++    """
-++    Regression test for the bug described in:
-++    https://github.com/Exiv2/exiv2/security/advisories/GHSA-9mxq-4j5g-5wrp
-++    """
+++class test_issue_3513_PsdImage_readResourceBlock(metaclass=system_tests.CaseMeta):
+++    url = "https://github.com/Exiv2/exiv2/issues/3513"
 ++
-++    url = "https://github.com/Exiv2/exiv2/security/advisories/GHSA-9mxq-4j5g-5wrp"
-++
-++    filename = path("$data_path/issue_ghsa_9mxq_4j5g_5wrp.crw")
-++    commands = ["$exiv2 $filename"]
-++    stdout = ["""File name       : $filename
-++File size       : 74 Bytes
-++MIME type       : image/x-canon-crw
-++Image size      : 0 x 0
+++    filename = "$data_path/issue_3513_poc.psd"
+++    commands = ["$exiv2 -pp $filename"]
+++    retval = [1]
+++    stderr = [
+++        """$exiv2_exception_message $filename:
+++$kerCorruptedMetadata
 ++"""
-++]
-++    stderr   = ["""$filename: No Exif data found in the file
-++"""]
-++    retval = [253]
+++    ]
+++    stdout = [""]
 +diff --git a/tests/regression_tests/test_regression_allfiles.py b/tests/regression_tests/test_regression_allfiles.py
-+index d1bec2ed3..87caa9798 100644
++index 6a230e6fc..31f9c844a 100644
 +--- a/tests/regression_tests/test_regression_allfiles.py
 ++++ b/tests/regression_tests/test_regression_allfiles.py
-+@@ -122,6 +122,7 @@ def get_valid_files(data_dir):
-+         "issue_ghsa_g9xm_7538_mq8w_poc.mov",
-+         "issue_ghsa_38h4_fx85_qcx7_poc.tiff",
-+         "issue_ghsa_496f_x7cq_cq39_poc.jpg",
-++        "issue_ghsa_9mxq_4j5g_5wrp.crw",
++@@ -126,6 +126,7 @@ def get_valid_files(data_dir):
 +         "pocIssue283.jpg",
 +         "poc_1522.jp2",
 +         "xmpsdk.xmp",
-diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-2.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-2.patch
+++        "issue_3513_poc.psd",
++         "issue_3511_poc.eps",
++         # large file that creates 11Mb of output so let's exclude it
++         "ReaganLargeTiff.tiff",
+diff --git a/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-2.patch b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-2.patch
 new file mode 100644
-index 0000000000..b461e09c71
+index 0000000000..712b40e22d
 --- /dev/null
-+++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-2.patch
-@@ -0,0 +1,25 @@
-+From 5c5ab83247997396b8a7de8e4425a1a04db01c14 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-2.patch
+@@ -0,0 +1,26 @@
++From 1748fd9763e89a341bdf8a451534067abb964ab2 Mon Sep 17 00:00:00 2001
 +From: Kevin Backhouse <kevinbackhouse@github.com>
-+Date: Sat, 31 Jan 2026 15:31:55 +0000
-+Subject: [PATCH] Fix out-of-bounds read.
++Date: Fri, 27 Feb 2026 10:38:22 +0000
++Subject: [PATCH] Check for integer overflow.
 +
-+CVE: CVE-2026-25884
-+Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/5b8f1f4d92b8f27a5a80e0c3d3eb9dce7620d9f1]
++CVE: CVE-2026-27631
++Upstream-Status: Backport [https://github.com/Exiv2/exiv2/commit/284b4e20229dd6edf492e712871878ae320801fc]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/crwimage_int.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/psdimage.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/src/crwimage_int.cpp b/src/crwimage_int.cpp
-+index 9e2c1c6a4..1d2378a61 100644
-+--- a/src/crwimage_int.cpp
-++++ b/src/crwimage_int.cpp
-+@@ -646,7 +646,7 @@ const CrwMapping* CrwMap::crwMapping(uint16_t crwDir, uint16_t crwTagId) {
++diff --git a/src/psdimage.cpp b/src/psdimage.cpp
++index 1a8e4c61c..b2f5247a2 100644
++--- a/src/psdimage.cpp
+++++ b/src/psdimage.cpp
++@@ -287,6 +287,9 @@ void PsdImage::readResourceBlock(uint16_t resourceId, uint32_t resourceSize) {
++       nativePreview.height_ = getLong(buf + 8, bigEndian);
++       const uint32_t format = getLong(buf + 0, bigEndian);
 + 
-+ void CrwMap::decode0x0805(const CiffComponent& ciffComponent, const CrwMapping* /*pCrwMapping*/, Image& image,
-+                           ByteOrder /*byteOrder*/) {
-+-  std::string s(reinterpret_cast<const char*>(ciffComponent.pData()));
-++  auto s = std::string(reinterpret_cast<const char*>(ciffComponent.pData()), ciffComponent.size());
-+   image.setComment(s);
-+ }  // CrwMap::decode0x0805
-+ 
+++      Internal::enforce(nativePreview.size_ <= static_cast<size_t>(std::numeric_limits<long>::max()),
+++                        Exiv2::ErrorCode::kerCorruptedMetadata);
+++
++       if (nativePreview.size_ > 0 && nativePreview.position_ > 0) {
++         io_->seek(static_cast<long>(nativePreview.size_), BasicIo::cur);
++         if (io_->error() || io_->eof())
 diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb b/meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb
-index e1f57ae8c7..45d88e2a3d 100644
+index 6766ff396d..25f35e203a 100644
 --- a/meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb
 +++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb
-@@ -4,7 +4,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
- 
- DEPENDS = "zlib expat brotli libinih"
- 
--SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${PV}"
-+SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${PV} \
-+           file://CVE-2026-25884-1.patch \
-+           file://CVE-2026-25884-2.patch \
-+           "
+@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/Exiv2/exiv2.git;protocol=https;branch=0.28.x;tag=v${
+            file://CVE-2026-25884-2.patch \
+            file://CVE-2026-27596-1.patch \
+            file://CVE-2026-27596-2.patch \
++           file://CVE-2026-27631-1.patch \
++           file://CVE-2026-27631-2.patch \
+            "
  SRCREV = "afcb7a8ba84a7de36d2f1ee7689394e078697956"
  
-+PATCHTOOL = "git"
-+
- inherit cmake gettext
 
