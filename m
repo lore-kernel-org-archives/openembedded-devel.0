@@ -2,205 +2,170 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B009112586A
-	for <webhook@archiver.kernel.org>; Wed, 11 Mar 2026 19:04:22 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4362.1773255861672911034
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84B71112586D
+	for <webhook@archiver.kernel.org>; Wed, 11 Mar 2026 19:04:32 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4236.1773255862754285897
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Mar 2026 12:04:21 -0700
+ Wed, 11 Mar 2026 12:04:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iZhyXWft;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4852f73d0a3so1760505e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 12:04:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NaQn2xix;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-482f454be5bso14735685e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 12:04:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773255860; x=1773860660; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Nj30dbFjUXKWUDC8gRuRfjtMEMiljFDYUgeXpn97fQU=;
-        b=iZhyXWftH/QRwfkAzzRiFY9roBcIiUMkXnfPpGIlMof5+slrQvkzIuWDIYZhncdo8m
-         w2kwRDyL/9XNO1tzNolxzdSDCol/8xpdyr4hr9no4WKMpCBsakKToXcNmu6lagxLxups
-         oJCjq5FlTAc/YOV0RH0Rj323cbuGjvTNYDdXPJJNnk13u0U8vXiZVwnGPJr38pj7pjvQ
-         z5VBlUF427lYvvHRhQYog247x+W9KZ4pSlrLZ97gIoluYurR7mTkewPg1piEbzbdWKCS
-         Bz3vyh2wpm0UxlrafGT/G1pk2m6QjH9+ctDB6WhzzJr5jtcFUDOqs6eHqjIyse2/3nBt
-         p8+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773255860; x=1773860660;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1773255861; x=1773860661; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Nj30dbFjUXKWUDC8gRuRfjtMEMiljFDYUgeXpn97fQU=;
-        b=ghZKWuAiyL0UtETvgClFdy9vI+XEuf575iCFFo+XZuOSSExSkCZdQGR0SwzvfVugh7
-         0eOFSnPY6EefxkWAiGuJDW+eXahzsAPJ8AECvPIcW2NEKaYDj+GrMVG8XBenTxYP84P+
-         72kYzVWJq5nGwe9MaqtMPtgmsoGFbuy7/OdUPUybjiHWWVzvW49lFTWAGjj7ehsQCH/3
-         Pa+P0SfZyaKRQvX4F4ezMQv4DCFqfYIJYXOQY3bO6Pkkt4LovtS45nYgGl2pVdNRAGhz
-         csyppH7Wd6al07WB+L/GcQU0JJcAg7DJSD9BMdJo7R1+FkN2FJmm6o1h6t9lpAg56dib
-         V/8Q==
-X-Gm-Message-State: AOJu0YwIvW6ElgbLsHIbATKbfq6MbLzae9ln6LBuXdcEIr+vd2yG4uPx
-	Dme5oaHyCVOXja8oDcijd7f2S+9u/rbVJW3j/9zLEX+Rhj0G78wBcAjWqSxg2w==
-X-Gm-Gg: ATEYQzyQ3s6+0qZSa8zxmxH4tE+uZa99QbltbT8x6yqpAWngADv2vI7/hfnofkeHR/f
-	ZAD6NT2nqaRvzg0TjByrmOaUINsLSO9/Pc8/3slKqKEkl1VeZRN+IhipSRxSZjprB7Fb9t/o59Z
-	q+v5lGXL/9wo6ajsIfsU4KJ3OKnIxhULWkXV326m3wUGfyzrArpMgVe7tWZAcuJK7+zjCL+UsVm
-	5HhnVHHVXoUKIyvekGVM4E/PNkEI3Zpusgl+mw12ZzoO1r2jAB8Z5MgU8rSUpPBdsKxxHbaBxUx
-	bkydtljuXeVZLcYlkzEd09TiVwvDYhLcnxjZwFI/8Dz5pTV12TmBS4lnY1Ni/qHGMMfrT1X93g3
-	V26v2MBfloi9A3/xtmcOaocNkM3cRrwGeD3DWb7J+Fs2X6c7ZDfVuwehSuuDYfsxMMzpfSgfmMm
-	CEG0Y1d8w8KyPA0S85i8+r
-X-Received: by 2002:a05:600c:4745:b0:485:2a85:e5ec with SMTP id 5b1f17b1804b1-4854b0ae77bmr59832205e9.2.1773255859649;
-        Wed, 11 Mar 2026 12:04:19 -0700 (PDT)
+        bh=Xp9ZY/TiUDsPOfp2iDvsKEStlUI6ug06cJjJxPVhX0w=;
+        b=NaQn2xixYH1C350anuojFOZbNWAG1J/Ew2CkwSUfAofb31cgnZj/NQSSHuUjUhZ2Wi
+         OLi9Sz7W1tZO2LOoL0kGgnqxoi85PapLRX2jxZ3wCcaq+C2PXxZKkez/fPQnrGY6bEfp
+         rinLG7o6wZIgL0b/iSVuzXxlCv1eZpuBVlEXQv+07zo4+uPlel5CNw7hhHTjHKm79KTr
+         9U7/0WguQzWoYNbDMpNKhIWH67M50GoiNn5RxjpgdKDy1i/Izo9kBXSuBb/gjs9vWAWC
+         vlqWWXIdLl1aTlxBQBC2TWCHz71UcwBiJbyB1rlSsatkBLSpMsVHK9gXGaaKJxuFkHiI
+         8GAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1773255861; x=1773860661;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Xp9ZY/TiUDsPOfp2iDvsKEStlUI6ug06cJjJxPVhX0w=;
+        b=Mg1n/Nl/BW3O34oAZWp+1eNfEhqFI/wk+Bha0p+bJYlBgHJqaa1MWOEzhlS6kGU6jz
+         /cUaJAVbJzWU+0Zlm26gQZBDS+c9+mTV4y9UW3yY6FWmYVEUgbPrnF/6SQLkEZ9phMvB
+         LIGGOK6IUJN42fuug6HuGBhujWZFbt/ygYP4DaYPLWA+1B3IUscZtHzq7ZChdDesFsgD
+         13owmIda7cE0irzsVfd6Rg4Y7jRDBxi3EqKH8iOUHKLr79dNQn82ME9V0Br4lgTVeZbl
+         m64kwiOHXLJ6ifMfcMM6yAiMznb6ryDEvqSZO0ZZr+FgOTiu4sD9ZpcaZ3Ij+BLwayoJ
+         ljIw==
+X-Gm-Message-State: AOJu0YyIM7VTdH8Ux3zpnqMg1uBMJ0hWLPLEy6MMd5HgbGo2sygd7ygL
+	MiYMmA5A0zMi0tR3SEIOWBOHit4/VFmNYVhlGWu5Uh4gSU3ZDR2/k0379SK++g==
+X-Gm-Gg: ATEYQzypx1HeC8VS1e9Z9sY3Yj/PRtB8cY1MaNegGvQbBoMUT/58f5935suJyiAahvQ
+	Yz+sD+57DrfYxKJz8fwNX7IqQhuTPum2MBtmM+O4zdASq90jOQ5ejzazRu1suSXRMnMpFF+EFiI
+	lqnzgGOq0Zkj9Bm3qh1ZuqkeMr0uMpLFahkn6wzQlik4R3k511r+pzHmFPp1WxaHB3KDGhRSZ+j
+	/a/jEpS23pvsja250e3tBy4tBbrFguebqZOy43RKTh92SohNvbnSuHvgObYiXtThXNvluYEvQhF
+	/G/YWJbEpEJytWJDCF2r3KfX6LXZSdTRvVp0wHrRBOIWvcziXb/XUH9/jtkm3f7ByC4XRzgx28v
+	KFTx38i7415mHJ6LrhlTkON9Cno/ViSv74Uc6b768azABYCwTWhqPEm7wwlyjlgshi3ZEH5PnQN
+	wEVvu8mh+GJaRFWPC74qFl
+X-Received: by 2002:a05:600c:c4a4:b0:485:3e00:944a with SMTP id 5b1f17b1804b1-4854f583e77mr10067055e9.9.1773255861058;
+        Wed, 11 Mar 2026 12:04:21 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4854e2537c3sm43135015e9.15.2026.03.11.12.04.19
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4854e2537c3sm43135015e9.15.2026.03.11.12.04.20
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Mar 2026 12:04:19 -0700 (PDT)
+        Wed, 11 Mar 2026 12:04:20 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH 1/3] imagemagick: patch CVE-2025-68618
-Date: Wed, 11 Mar 2026 20:04:16 +0100
-Message-ID: <20260311190418.1962798-1-skandigraun@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH 3/3] imagemagick: patch CVE-2025-69204
+Date: Wed, 11 Mar 2026 20:04:18 +0100
+Message-ID: <20260311190418.1962798-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260311190418.1962798-1-skandigraun@gmail.com>
+References: <20260311190418.1962798-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 19:04:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125088
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 19:04:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125090
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68618
+Details: https://nvd.nist.gov/vuln/detail/CVE-2025-69204
 
-Backport the commit that is referenced by the NVD advisory.
+Backport the patch that is referenced by the NVD advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../imagemagick/CVE-2025-68618.patch          | 109 ++++++++++++++++++
- .../imagemagick/imagemagick_7.1.1.bb          |   1 +
- 2 files changed, 110 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-68618.patch
+ .../imagemagick/CVE-2025-69204.patch          | 71 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.1.1.bb          |  1 +
+ 2 files changed, 72 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-69204.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-68618.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-68618.patch
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-69204.patch b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-69204.patch
 new file mode 100644
-index 0000000000..e5dcc248a8
+index 0000000000..855ed1a12e
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-68618.patch
-@@ -0,0 +1,109 @@
-+From 68f99b5094315eb3b4020f01bf9fab9a7c5c40a1 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/CVE-2025-69204.patch
+@@ -0,0 +1,71 @@
++From 7167dbae8306f51d06da940b50c73452f72029f4 Mon Sep 17 00:00:00 2001
 +From: Cristy <urban-warrior@imagemagick.org>
-+Date: Sun, 21 Dec 2025 12:43:08 -0500
++Date: Sat, 27 Dec 2025 14:37:23 -0500
 +Subject: [PATCH] 
-+ https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-p27m-hp98-6637
++ https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-hrh7-j8q2-4qcw
 +
-+CVE: CVE-2025-68618
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/6f431d445f3ddd609c004a1dde617b0a73e60beb]
++CVE: CVE-2025-69204
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/2c08c2311693759153c9aa99a6b2dcb5f985681e]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ coders/msl.c | 24 ++++++++++++++++--------
-+ coders/svg.c |  8 +++++++-
-+ 2 files changed, 23 insertions(+), 9 deletions(-)
++ coders/svg.c | 27 ++++++++++++++++++++++-----
++ 1 file changed, 22 insertions(+), 5 deletions(-)
 +
-+diff --git a/coders/msl.c b/coders/msl.c
-+index dc7a8bfd8..80468b1ff 100644
-+--- a/coders/msl.c
-++++ b/coders/msl.c
-+@@ -120,6 +120,7 @@ typedef struct _MSLInfo
-+     *exception;
-+ 
-+   ssize_t
-++    depth,
-+     n,
-+     number_groups;
-+ 
-+@@ -328,6 +329,10 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+   RectangleInfo
-+     geometry;
-+ 
-++  size_t
-++    height,
-++    width;
-++
-+   ssize_t
-+     i,
-+     j,
-+@@ -336,11 +341,6 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+     x,
-+     y;
-+ 
-+-
-+-  size_t
-+-    height,
-+-    width;
-+-
-+   xmlParserCtxtPtr
-+     parser;
-+ 
-+@@ -352,6 +352,13 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+   exception=AcquireExceptionInfo();
-+   parser=(xmlParserCtxtPtr) context;
-+   msl_info=(MSLInfo *) parser->_private;
-++  if (msl_info->depth++ >= MagickMaxRecursionDepth)
-++    {        
-++      (void) ThrowMagickException(msl_info->exception,GetMagickModule(),
-++        DrawError,"VectorGraphicsNestedTooDeeply","`%s'",tag);
-++      xmlStopParser((xmlParserCtxtPtr) context);
-++      return;
-++    }
-+   n=msl_info->n;
-+   keyword=(const char *) NULL;
-+   value=(char *) NULL;
-+@@ -7057,15 +7064,15 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+ 
-+ static void MSLEndElement(void *context,const xmlChar *tag)
-+ {
-+-  ssize_t
-+-    n;
-+-
-+   MSLInfo
-+     *msl_info;
-+ 
-+   xmlParserCtxtPtr
-+     parser;
-+ 
-++  ssize_t
-++    n;
-++
-+   /*
-+     Called when the end of an element has been detected.
-+   */
-+@@ -7158,6 +7165,7 @@ static void MSLEndElement(void *context,const xmlChar *tag)
-+   }
-+   if (msl_info->content != (char *) NULL)
-+     msl_info->content=DestroyString(msl_info->content);
-++  msl_info->depth--;
-+ }
-+ 
-+ static void MSLCharacters(void *context,const xmlChar *c,int length)
 +diff --git a/coders/svg.c b/coders/svg.c
-+index b1ac0783d..6a069745f 100644
++index 6a069745f..09705fc39 100644
 +--- a/coders/svg.c
 ++++ b/coders/svg.c
-+@@ -1249,7 +1249,13 @@ static void SVGStartElement(void *context,const xmlChar *name,
++@@ -1249,13 +1249,14 @@ static void SVGStartElement(void *context,const xmlChar *name,
 +     name);
 +   parser=(xmlParserCtxtPtr) context;
 +   svg_info=(SVGInfo *) parser->_private;
-+-  svg_info->n++;
-++  if (svg_info->n++ > MagickMaxRecursionDepth)
-++    {
-++      (void) ThrowMagickException(svg_info->exception,GetMagickModule(),
-++        DrawError,"VectorGraphicsNestedTooDeeply","`%s'",name);
-++      xmlStopParser((xmlParserCtxtPtr) context);
-++      return;
-++    }
++-  if (svg_info->n++ > MagickMaxRecursionDepth)
+++  if (svg_info->n >= MagickMaxRecursionDepth)
++     {
++       (void) ThrowMagickException(svg_info->exception,GetMagickModule(),
++         DrawError,"VectorGraphicsNestedTooDeeply","`%s'",name);
++       xmlStopParser((xmlParserCtxtPtr) context);
++       return;
++     }
+++  svg_info->n++;
 +   svg_info->scale=(double *) ResizeQuantumMemory(svg_info->scale,(size_t)
 +     svg_info->n+1,sizeof(*svg_info->scale));
 +   if (svg_info->scale == (double *) NULL)
++@@ -4721,17 +4722,33 @@ static MagickBooleanType WriteSVGImage(const ImageInfo *image_info,Image *image,
++       }
++       case PathPrimitive:
++       {
++-        int
++-          number_attributes;
+++        size_t
+++          number_attributes,
+++          quantum;
++ 
++         (void) GetNextToken(q,&q,extent,token);
++         number_attributes=1;
++         for (p=token; *p != '\0'; p++)
++           if (isalpha((int) ((unsigned char) *p)) != 0)
++             number_attributes++;
++-        if (i > ((ssize_t) number_points-6*BezierQuantum*number_attributes-1))
+++        if ((6*BezierQuantum) >= (MAGICK_SSIZE_MAX/number_attributes))
++           {
++-            number_points+=(size_t) (6*BezierQuantum*number_attributes);
+++            (void) ThrowMagickException(exception,GetMagickModule(),
+++              ResourceLimitError,"MemoryAllocationFailed","`%s'",
+++              image->filename);
+++            break;
+++          }
+++        quantum=(size_t) 6*BezierQuantum*number_attributes;
+++        if (number_points >= (MAGICK_SSIZE_MAX-quantum))
+++          {
+++            (void) ThrowMagickException(exception,GetMagickModule(),
+++              ResourceLimitError,"MemoryAllocationFailed","`%s'",
+++              image->filename);
+++            break;
+++          }
+++        if (i > (ssize_t) (number_points-quantum-1))
+++          {
+++            number_points+=(size_t) quantum;
++             primitive_info=(PrimitiveInfo *) ResizeQuantumMemory(primitive_info,
++               number_points,sizeof(*primitive_info));
++             if (primitive_info == (PrimitiveInfo *) NULL)
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-index 40e57b7f1d..0e52519558 100644
+index 60e206e8f1..ffc26e7169 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-            file://CVE-2025-62171.patch \
-            file://CVE-2025-65955.patch \
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
             file://CVE-2025-66628.patch \
-+           file://CVE-2025-68618.patch \
+            file://CVE-2025-68618.patch \
+            file://CVE-2025-68950.patch \
++           file://CVE-2025-69204.patch \
             "
  SRCREV = "82572afc879b439cbf8c9c6f3a9ac7626adf98fb"
  
