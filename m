@@ -1,89 +1,97 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BAF59106ACE9
-	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 20:30:02 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.61.1773347398347162508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D0BB106ACEC
+	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 20:52:44 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1484.1773339888441401116
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Mar 2026 13:29:58 -0700
+ Thu, 12 Mar 2026 11:24:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Onfn+3Ll;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-485445e80bdso12622895e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 13:29:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ujgw2qA0;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: aviv.daum@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-b940a00415cso167883566b.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 11:24:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773347397; x=1773952197; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y/sDset/nz/K8PdIK8SQbSctoULR2cw+FuF6j7QpVk4=;
-        b=Onfn+3Llrz8p10ZMLTyFsXfdK2XZCPGvJQDiD+8crsJ4PzBuM65I1VaiXqPGByNL6l
-         0EWBJLMcRpb6Pv7umKx0WTWrN6tojALD99oCzIaWpLPs+n4NXgIDYimDFZ6sL9I3A6Yu
-         nLesbweGcVY1ai3TP1ZzaPkVRdhOMRWtiey6SNrUIW1BFaGPN60olE49lu/XOSyjPnG6
-         JYr6mfcWiMvMlE0e88oVYDmew4J10jcCx7GkTw1GHqfxyWNfkBdQrjeihE2dATWWxB/7
-         z1StrxY+vpJyfR6jkcps5sSojDcTolLE/QXdI4s8pB31ELqurxLc50u5NU6+Chs6UZmy
-         by0w==
+        d=gmail.com; s=20230601; t=1773339886; x=1773944686; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6k+dqMwSVCJyA7g2sMS6yfeSpIgcGCuTaNCzCw0BJxU=;
+        b=Ujgw2qA02vSVvZa6jAI03b3jYmdETr/4w4LBkWldnWEOxGmYF8YOeG3JOTouGYhD2z
+         WQL7xCXfiONhhWVLMNeln/6fTmfxhqQ5rZSopY0UQaIYZUNuE6+IS1Ml2LskULCw+1KQ
+         s0NeqraIsU9bspEFB63sMOZ4++VM8kiIJIx83Jg73mx9hVvbRpzLSTk+bvugvBNde+Kz
+         Ox+JeCTBlDMuJj5rTqHzA6clOsS0CSuq8opcx9pdiDBrqofcb1AgSCQidqDUEsXIHjRN
+         Sf74fL8UCgK0WlM9XdNAoJIEA+DhPamojfVPlAYIkV+GgNneNTpImXS8T7/5zIklWWgL
+         BCRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773347397; x=1773952197;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Y/sDset/nz/K8PdIK8SQbSctoULR2cw+FuF6j7QpVk4=;
-        b=BdU6nQsXBh5YD/Rz/sFXdnsPpH5JekCtWtl0ld2d6SkuZFf9YrXvBdmk8/05nuj+Gt
-         CMfmhOPZ+PAJJb7AEODEEp9qY0nRsRoMsmrQWkj0uGNM9xLt9lKXKALEqzlhiYf3Ut5I
-         Nqddmd7mQDiwcf1zg43ahAgF3iyVDDaOHwTA7ARoINZuZkbf13R+xO9toHRQW7XSV6Zh
-         Qig5bZc91kLtfgCteyFLvchw0WgyOViVykCJYjpHvFb788bEMuOex5OKxc2aWR4LbeE6
-         FZCvfNIYZHG2VoVs++XsqcXLx1B1S42CdiZLOnVPFEvugzdCDbPiFs8UzdLCb5mZmGjY
-         vZwA==
-X-Gm-Message-State: AOJu0YxSxfArbpWVPmjtxvPpogqZKmBFNSCRpLUhQ138RMqOPi2Qjg4Z
-	3XPgAhPWJjJzV5ys3GRTnLNrK0i3EouHx/Cg+VRt6cP6I21cQ8vFa8ofCv8KFQ==
-X-Gm-Gg: ATEYQzyBE0oYYR43RgAoiu95LY5coJfGowKxDSF/o8soOUdtx7T4QMUNoK+rI9SjQkY
-	NDfMTbpq0PUloDrYMYalVcly/SVNx44qLW/IpnQqSNXiLVpCYq0YI7Yv6eVISsAkm5qMtjHUuBn
-	E1VeDBh6VYrJhNl9scAeV1gLPhZZbf9gjkpBfnVCF2Bl3MgwoEPgptcLdMWsAhyQWf3fdazvP3A
-	Pw1m4d662Z0C8pZJ77ZJxlg1G+EcEdQA7iSlxyRi7Vs6uQ040sQJ/53igJx/R9ilsiSEcrrjXPd
-	IHhJxOv0EfmFuAWCi59Huc1wyAhjmylZ++kDncFKx8z5rpv1+cqXd8LGDhQcjqiXsq2iKc+IPuJ
-	6gTIC8XUvzxJFKUuCOnfp0rfUfvJt2qUxUxPjDeBp3Og6FKXTNKaFwIkfU2nypvdQqlRX/E4DNc
-	S1iP4ow4Mzbq9xX3QXX/Es
-X-Received: by 2002:a05:600c:3b90:b0:485:345b:ccb1 with SMTP id 5b1f17b1804b1-48556720f86mr10950665e9.27.1773347396293;
-        Thu, 12 Mar 2026 13:29:56 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541acea11sm285712645e9.7.2026.03.12.13.29.55
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1773339886; x=1773944686;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6k+dqMwSVCJyA7g2sMS6yfeSpIgcGCuTaNCzCw0BJxU=;
+        b=BiU70tMwUc+QF1canhtclhBtwaJGT2wsaWjGieIPZla1XvNbwCzQurmZt6rjagpPAX
+         xdBKebWRgU1S/wuKBrHYLcRBv5rqG8dc0uRvIywkUhaaNB+chVJNpW82CvHhT0F6R2K4
+         VSvkCzci6OTdbtkzuKWVS9TLqX5Y/tKrJtqLtS2a+9JRcH+TGgW74pFZaK5IbZmXCm3W
+         TjY0GxBypF5fN3NeHA/yb19Jn4QQbKRlGMjXKncRkpuUM27Gfz4Ky3KdHzu3CHYKkePy
+         V1zeAofIG/mU82l9JmnXDW6NpxDiqn2rk0hR0rTiXOMalSW7HssdcWXgT3HVt1Hvf1WB
+         sSQg==
+X-Gm-Message-State: AOJu0YyWGuCGzkDw3NPi1J9Q8SHF7OdoVlDarZW7Qp4il7lF/0n6Rzrb
+	1boIMp/j3lxb9ex3VWe8VEcHpH2criW7pkGUYV78hodgLC4Qe/AL2yBtRhiLTA==
+X-Gm-Gg: ATEYQzzh0NypzaappWjSUxdbxv6hsz7/51kceb1psq4U1KeLNHmClxbx+C/qYj5xJY0
+	7LU9wfnYtj3yibC9VhwJ6aPGCqYWmjdOGq4iMHlPu0BaU6xzraN5CbnRqe/szWCC4sUgYh45UiM
+	SFarvnm5E2sl7ICBTnVOgweRDjxWyrZ40KrsNWpyxhXSHgDMg0W1EAlCAw20CzHsAPN7DLu3g7T
+	SRNgs+4vs1iVip/TGzqnkFWvkB6n8O5E9gf10+U7Pt+rt182Ol7OuEFYJWEavJrwlJG1PX6UtTw
+	gRAtUZeGFvRDBro5vewrfegfj5zlTLKr2dmcd1sjnET40H4UbbPR29eT64Y9BAO0yhneZGPyI69
+	R6UvMLkPh4gTT9ctlwhkyHTozsq9HKxkdZL+wCiTEyqMKnlEum2s2kJMRKpUxn7ArmgtDw2Y+9w
+	0HGqqwDq6DLJtDjHCAxmbelHCXBdQZ97zyStA=
+X-Received: by 2002:a05:600c:81c5:b0:485:3812:36da with SMTP id 5b1f17b1804b1-485566cf00bmr5012645e9.9.1773339469455;
+        Thu, 12 Mar 2026 11:17:49 -0700 (PDT)
+Received: from localhost.localdomain ([147.235.207.31])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-439fe19acc6sm10424790f8f.8.2026.03.12.11.17.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Mar 2026 13:29:55 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Thu, 12 Mar 2026 11:17:49 -0700 (PDT)
+From: Aviv Daum <aviv.daum@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH] pcp: fix SRC_URI
-Date: Thu, 12 Mar 2026 21:29:55 +0100
-Message-ID: <20260312202955.3482597-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: akuster808@gmail.com,
+	Aviv Daum <aviv.daum@gmail.com>
+Subject: [meta-networking][kirkstone][PATCH] lldpd: fix xml PACKAGECONFIG dependency
+Date: Thu, 12 Mar 2026 20:17:16 +0200
+Message-Id: <20260312181716.30512-1-aviv.daum@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 20:30:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125177
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 20:52:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125178
 
-The branch where the revision was got deleted, so this is just a floating commit now.
+The xml PACKAGECONFIG entry uses libxm2, which is a typo and not a
+valid dependency in OE.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Replace it with libxml2 so enabling PACKAGECONFIG:xml pulls in the
+correct provider.
+
+Signed-off-by: Aviv Daum <aviv.daum@gmail.com>
 ---
- meta-oe/recipes-support/pcp/pcp.inc | 2 +-
+ meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
-index 07de1d5328..7c6ecc2e22 100644
---- a/meta-oe/recipes-support/pcp/pcp.inc
-+++ b/meta-oe/recipes-support/pcp/pcp.inc
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
-                     "
- COMPATIBLE_HOST:libc-musl = "null"
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+index 34cde7b929..9f168dbad5 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.8.bb
+@@ -30,7 +30,7 @@ EXTRA_OECONF += "--without-embedded-libevent \
+ "
  
--SRC_URI = "git://github.com/performancecopilot/pcp;branch=stable;protocol=https;tag=${PV} \
-+SRC_URI = "git://github.com/performancecopilot/pcp;nobranch=1;protocol=https;tag=${PV} \
-            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
-            file://0001-htop-Change-dependency-order-of-header-and-sourcefil.patch \
-            file://config.linux \
+ PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
+-PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxm2"
++PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxml2"
+ PACKAGECONFIG[snmp] = "--with-snmp,--without-snmp,net-snmp"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
+ PACKAGECONFIG[seccomp] = "--with-seccomp,--without-seccomp,libseccomp"
+-- 
+2.34.1
+
 
