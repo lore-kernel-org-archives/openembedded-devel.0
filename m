@@ -2,88 +2,88 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BD8E106ACE3
-	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 19:37:01 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1301.1773344215859653557
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BAF59106ACE9
+	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 20:30:02 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.61.1773347398347162508
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Mar 2026 12:36:56 -0700
+ Thu, 12 Mar 2026 13:29:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gnpQuIIg;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4852f8ac7e9so15873795e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 12:36:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Onfn+3Ll;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-485445e80bdso12622895e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 13:29:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773344214; x=1773949014; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773347397; x=1773952197; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=n24SJJ4w2iCkrgguFOwaVVYukOdbdK+oJBXR3p8/8fw=;
-        b=gnpQuIIgZ5nrs05ufdnqri2yWoFCgQpssLlAh97tMNFi9WVS1SCwhb/umep4NFYOeA
-         xQtX0vdhPhNhBnPhQ9IjD2RSkJ71V5uWjPbJGLoCRKZ/E6LT8/KB29Hf/g856Ry83Jw3
-         pjbqoMZ7s03LsibjpHo35xZrLOiEHgqqQxm6EnEB9Ex4vLoy8X9mtdOQuC8FqqjUoBrv
-         r4SvSoMClfgi00RPNbGekJ8e8cdsJcZoqQC7WSfKxZko41wseE85AhRDbTToqvXuFFGU
-         zTTTmTt+8sjRAXQ1F3hycUM8BIyBmXjfKS0IPTpEFJHFVYAIsMshS7JTHQzSsrFO/q5O
-         dfKA==
+        bh=Y/sDset/nz/K8PdIK8SQbSctoULR2cw+FuF6j7QpVk4=;
+        b=Onfn+3Llrz8p10ZMLTyFsXfdK2XZCPGvJQDiD+8crsJ4PzBuM65I1VaiXqPGByNL6l
+         0EWBJLMcRpb6Pv7umKx0WTWrN6tojALD99oCzIaWpLPs+n4NXgIDYimDFZ6sL9I3A6Yu
+         nLesbweGcVY1ai3TP1ZzaPkVRdhOMRWtiey6SNrUIW1BFaGPN60olE49lu/XOSyjPnG6
+         JYr6mfcWiMvMlE0e88oVYDmew4J10jcCx7GkTw1GHqfxyWNfkBdQrjeihE2dATWWxB/7
+         z1StrxY+vpJyfR6jkcps5sSojDcTolLE/QXdI4s8pB31ELqurxLc50u5NU6+Chs6UZmy
+         by0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773344214; x=1773949014;
+        d=1e100.net; s=20230601; t=1773347397; x=1773952197;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=n24SJJ4w2iCkrgguFOwaVVYukOdbdK+oJBXR3p8/8fw=;
-        b=dwCV11DQh2ZsFR3+CIBSGIJUiJfKCQwVwWt/OeaacZo+xijvjA8aorTKXQ5ZxsyWYs
-         wtSX9rJ4N2vYYQi+d3EYmG6ySucL5kIwxUnvf/ekCpCZX503lv6TPlz3haB5+Ra6l+zU
-         dqy0r3ywkWFSkMaU+ATV6c441OOoZByabNuSswDJmFT5Wh6LCfKnIdHMZ2eA/wEvelu3
-         idmZFt6V4AXXjbsHXuQYaslqabf4pJNSIoe2BmoyvaoygqJ6HzdACuFeSfH37kJFhLGJ
-         lvG8EqTvChgBqdADL6rDN54Z7ofI6g3G56tBcCcZalGECNh52pll9lGPgfwxVTU7zLMD
-         Jtfw==
-X-Gm-Message-State: AOJu0Yw2pFQa9z/Hh11AOx2R2/PiNT+NsZ6isvKwmKxW6XJZdVbRbL6v
-	2qO3XIaxbQj7Cq2avzdwnEPbygwZzTbElThlpBrhnr05Lp/UxUEpNGQ296+J4A==
-X-Gm-Gg: ATEYQzwLl3DbGZ4QhdV2oG/q7EVKwHbgEiBWo7Ix4CBeGC0seRxGnbKl7mNvUxvOIR8
-	oPVzf8wx7Rs7VnVKxJii9YWN8sqM2UxaiGe/A0/ICG2GnuRdGkNgPFQkB8C2fzkYh5YJZqcsNg8
-	z8IiivmIt/ZVfzBmg9kg4tz0ZCbK9+uS7473+ZMgWyqdYyA643V07YaIZYO6SyMoDSoFEsZ8Id0
-	KZGh6YnMnAZbXrOkInQhp+Q+ChM4ul2TiqJ1PEWvCjdwm6Cz8UVFx81EEOMcpqbwDiJ2nCmE+YB
-	YZtRd/Uf5MUT8Y0weljDuVgNn99E3oB48K4izRNVeRsXQFx8ivZlwvAhxfn/uOhGLNOKX2+pUXD
-	Q6vb1+hqjelZ7zN+s/XYHLJnFLAZPYEGQsnMKnoFf9+N+BOz9jRCCtaTZMHIY+YaWPiRLaYiSGV
-	IAyabvmFyMzQi8vrZcwnR4
-X-Received: by 2002:a05:600c:8b45:b0:485:35ba:1d81 with SMTP id 5b1f17b1804b1-48556703194mr7573155e9.21.1773344213995;
-        Thu, 12 Mar 2026 12:36:53 -0700 (PDT)
+        bh=Y/sDset/nz/K8PdIK8SQbSctoULR2cw+FuF6j7QpVk4=;
+        b=BdU6nQsXBh5YD/Rz/sFXdnsPpH5JekCtWtl0ld2d6SkuZFf9YrXvBdmk8/05nuj+Gt
+         CMfmhOPZ+PAJJb7AEODEEp9qY0nRsRoMsmrQWkj0uGNM9xLt9lKXKALEqzlhiYf3Ut5I
+         Nqddmd7mQDiwcf1zg43ahAgF3iyVDDaOHwTA7ARoINZuZkbf13R+xO9toHRQW7XSV6Zh
+         Qig5bZc91kLtfgCteyFLvchw0WgyOViVykCJYjpHvFb788bEMuOex5OKxc2aWR4LbeE6
+         FZCvfNIYZHG2VoVs++XsqcXLx1B1S42CdiZLOnVPFEvugzdCDbPiFs8UzdLCb5mZmGjY
+         vZwA==
+X-Gm-Message-State: AOJu0YxSxfArbpWVPmjtxvPpogqZKmBFNSCRpLUhQ138RMqOPi2Qjg4Z
+	3XPgAhPWJjJzV5ys3GRTnLNrK0i3EouHx/Cg+VRt6cP6I21cQ8vFa8ofCv8KFQ==
+X-Gm-Gg: ATEYQzyBE0oYYR43RgAoiu95LY5coJfGowKxDSF/o8soOUdtx7T4QMUNoK+rI9SjQkY
+	NDfMTbpq0PUloDrYMYalVcly/SVNx44qLW/IpnQqSNXiLVpCYq0YI7Yv6eVISsAkm5qMtjHUuBn
+	E1VeDBh6VYrJhNl9scAeV1gLPhZZbf9gjkpBfnVCF2Bl3MgwoEPgptcLdMWsAhyQWf3fdazvP3A
+	Pw1m4d662Z0C8pZJ77ZJxlg1G+EcEdQA7iSlxyRi7Vs6uQ040sQJ/53igJx/R9ilsiSEcrrjXPd
+	IHhJxOv0EfmFuAWCi59Huc1wyAhjmylZ++kDncFKx8z5rpv1+cqXd8LGDhQcjqiXsq2iKc+IPuJ
+	6gTIC8XUvzxJFKUuCOnfp0rfUfvJt2qUxUxPjDeBp3Og6FKXTNKaFwIkfU2nypvdQqlRX/E4DNc
+	S1iP4ow4Mzbq9xX3QXX/Es
+X-Received: by 2002:a05:600c:3b90:b0:485:345b:ccb1 with SMTP id 5b1f17b1804b1-48556720f86mr10950665e9.27.1773347396293;
+        Thu, 12 Mar 2026 13:29:56 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48557a73a75sm1111315e9.15.2026.03.12.12.36.53
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541acea11sm285712645e9.7.2026.03.12.13.29.55
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 12 Mar 2026 12:36:53 -0700 (PDT)
+        Thu, 12 Mar 2026 13:29:55 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][kirkstone][PATCH] hiawatha: fix SRC_URI
-Date: Thu, 12 Mar 2026 20:36:52 +0100
-Message-ID: <20260312193652.2758711-1-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH] pcp: fix SRC_URI
+Date: Thu, 12 Mar 2026 21:29:55 +0100
+Message-ID: <20260312202955.3482597-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 19:37:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125176
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 20:30:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125177
 
-The tarball was moved to a new folder on the source server.
+The branch where the revision was got deleted, so this is just a floating commit now.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb | 2 +-
+ meta-oe/recipes-support/pcp/pcp.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-index 497babb89e..9b5a152df7 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.12.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt virtual/crypt"
+diff --git a/meta-oe/recipes-support/pcp/pcp.inc b/meta-oe/recipes-support/pcp/pcp.inc
+index 07de1d5328..7c6ecc2e22 100644
+--- a/meta-oe/recipes-support/pcp/pcp.inc
++++ b/meta-oe/recipes-support/pcp/pcp.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
+                     "
+ COMPATIBLE_HOST:libc-musl = "null"
  
- SECTION = "net"
- 
--SRC_URI = "https://hiawatha.leisink.net/files/hiawatha-10/hiawatha-${PV}.tar.gz \
-+SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-10/hiawatha-${PV}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
+-SRC_URI = "git://github.com/performancecopilot/pcp;branch=stable;protocol=https;tag=${PV} \
++SRC_URI = "git://github.com/performancecopilot/pcp;nobranch=1;protocol=https;tag=${PV} \
+            file://0001-configure-Limit-the-header-search-to-sysroot.patch \
+            file://0001-htop-Change-dependency-order-of-header-and-sourcefil.patch \
+            file://config.linux \
 
