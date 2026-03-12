@@ -1,149 +1,111 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99235FED2CC
-	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 04:27:45 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14549.1773289661180044023
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFCAE103E301
+	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 10:24:25 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18352.1773311055494047339
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Mar 2026 21:27:41 -0700
+ Thu, 12 Mar 2026 03:24:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=HUQI/tD3;
- spf=pass (domain: mvista.com, ip: 209.85.216.50, mailfrom: vanusuri@mvista.com)
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-358d80f60ccso340125a91.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Mar 2026 21:27:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1773289660; x=1773894460; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AUO6w/OK6TIaVHU8t81OV44Bb2cCDawyb8Fra7m8iuY=;
-        b=HUQI/tD3R/ub1gkyLnLTQ6PN2Y624ezV2SUpv2ScjNmiBcfdyXsvDbfF6tTnLx19IM
-         oD6m03y2BgkwSlcoXrGSct5afGXTysjAotJPB/mYIw5c1p6ji2ltaOecMMuUEjkw6Ftk
-         bHIxqnQQfvIlKsEsBWZNzuXMDveC03OPBbZ78=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1773289660; x=1773894460;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=AUO6w/OK6TIaVHU8t81OV44Bb2cCDawyb8Fra7m8iuY=;
-        b=JlOh2p1Ah1WcQIZV1li4h84YzgpmK63dgLIXngcNcsunsv+8ZE85HGMvdchS1JDDuQ
-         t1poQiL0lqsVhPX6aYJcd/AyHq3hFV8XQxPA38MB9qRsaSGr/wdTnLHDP407QXsO4/UD
-         XoMLUAjS8r8bn/4X1zShzfTUUL/5E6Lv+DTv554Y9QANn3+8P8BwHNLE5PR03Qjh2qYa
-         uQArAKG4wnZ+t4tD43aBt73ADGfD4qZPKyN8IbKZ4JtLFxQWWksX9OLbMWVSL7TGBS3t
-         YvzbvZYmvsRHZ4hyv0mhS8zLEAG5yiIerYBkMMSqo0V2mf994AHFSrLVdEijF4jgg/oN
-         tgYA==
-X-Gm-Message-State: AOJu0YzjFmwmr2y76P98vv45HIAHNwUknmc6HXaXrUHKy4xFeJMvpDnF
-	44Apjrwhj4ogCJOgU/Ds4ZRMztNlP/AyJR+5MDoN6icJ5DCe4X2+gHLZI4dYkePOa8KFPo0nStF
-	eORRS
-X-Gm-Gg: ATEYQzzOoOvIW8U1j2GfyC5UsJbHviEqCfXy/TRVSCKnVd2sf60lUexx6NePB9NO0vd
-	sU6J0zPmYPCl9lF4DHSMmZKVdkyL19P0inNY9hoHpZU9ZITfI7RSBkBGrOZzWZRntG6N6GjI+iJ
-	2CkLH5mWIp7/FgvozW5DJpdP5wuhiL8A9dgtBN+ISzqYuJEdhnMBpSERWEN2VDd/quMtvvpzD0j
-	NFDiwkdIxrDFWnhnh2D3DKDpC6/sN8EvyaCZ8R/Pyb8n+R8CHuufpafS2vEzqDNnAdlQI3YvDeD
-	jcjJ0iOcxpANNu08gI8QsWIiEChCCwqlk9Yj8Tk9zCQsIqUmOKlo8j7zttYXd1CLElMFoIaIU55
-	J+kjzFeria33EioSXCoeLg+U2VHqiMU+b+SxXRidWNBL85qiIUIjgrUUY8YUgZmfuJJnXwo1kuu
-	nXrOIUpblvpNVTXYSO3oP2T7t7bLWVgo9FWIYW
-X-Received: by 2002:a17:90b:1f83:b0:359:8727:6448 with SMTP id 98e67ed59e1d1-35a012e13b8mr4729264a91.17.1773289660157;
-        Wed, 11 Mar 2026 21:27:40 -0700 (PDT)
-Received: from localhost.localdomain ([2406:7400:54:4d5d:7619:5e8e:665e:697e])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35a02e196fdsm3911166a91.2.2026.03.11.21.27.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Mar 2026 21:27:39 -0700 (PDT)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-oe][kirkstone][PATCH] libssh: Fix CVE-2026-3731
-Date: Thu, 12 Mar 2026 09:57:28 +0530
-Message-Id: <20260312042728.26936-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=oo3odBfF;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7531ba8309=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62C7XghB3253345
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 10:24:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=S7WqX4yIvAqyauQLCmqz
+	jaleHpTOr8eqPqr3UVk47pE=; b=oo3odBfFt172e+Q9TcZzN3WUwOlbnziQn26L
+	N71PylCDH59F7OnO4Baq/5rDyqkDs8jT3AG4WXVGy5YhirzAt/wsXoXMEqsXhqtj
+	L6stP1Izqt2iM66fS9uqazPnlZarbObIU5fEbRAIhGHO2UEurq4IKB8bhYhd/I26
+	oUGLs47jn8CKGzAJmkDbdZ7cbwDScATmThly7pf4/cxvsDswVViOkosmENv1E2PG
+	KayzV5MUKE5EiYPCxHHNOdH0cS1+xai7N3ZQ3SfER0B+Kp+fqlwsZ33bHfzqW/ZN
+	dS0TWzpbhGrdgCVnWAumIZj1Su5XUOV3Sr52VuJYnykpa9GDig==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4cuh78gjxy-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 10:24:14 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Thu, 12 Mar 2026 03:24:12 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Thu, 12 Mar 2026 03:24:12 -0700
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-redis: Upgrade 5.2.1->7.3.0
+Date: Thu, 12 Mar 2026 18:24:11 +0800
+Message-ID: <20260312102411.128382-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=ALvEU0hV c=1 sm=1 tr=0 ts=69b2944e cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=fTW__CHxibyLmBMfj2wP:22 a=kw_7P3TwAAAA:20 a=t7CeM3EgAAAA:8
+ a=6Pd0Uv8he5BPI44TX3sA:9 a=FdTzh2GWekK77mhwV6Dw:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzEyMDA4MSBTYWx0ZWRfXzJGMFG8stIwr
+ I9ZxVfj1GOZ7zr/psbIok8EqQ2Wy7BtCQIg9wAIOf8uebLcPs6I604jVBlmLazWvvDKHKAO1Kfp
+ rcz3/xCC//n02hTQBpzzYhMJbAM5lnDtun0C+8NQ7u/+rHGAC1EnE5ckR3VP7gzVJNNZqwmA/um
+ sRSr9d0DvgxwdwHUmBfw7rIFqjpnvOPhjsqS2DJ4lI7Zvz5PP3bqnqiqSpB85W2PN9wAy+6nvWn
+ f8fsb2rkI1rvPNcK4D4Y01ueK8mg45XAnRXaqKgjXMt97jsWSMjEo1/wQGf2Ob8RBAsLJoAdxGk
+ LGBXIWfI5Z1AZzSLtA572MTjjsBMeOhGg0PJvdX/eXtpwd3F5j4zBBDQCrJG5EaUZ2Ke+kmQhbx
+ x3lYQk4u9Yz5/Wy4GzOcD4NWN/P+uoY2ipYH7groPtZUPs+VJ8YjJbxZfmeP4nisDoGzByHQk55
+ yLD1U2GaQ8bAId6XwPA==
+X-Proofpoint-ORIG-GUID: Jpk7gzlXpSJRSD-ADxwQ6WOGne7R_4D_
+X-Proofpoint-GUID: Jpk7gzlXpSJRSD-ADxwQ6WOGne7R_4D_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-11_02,2026-03-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 clxscore=1011 adultscore=0 suspectscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 lowpriorityscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
+ definitions=main-2603120081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 04:27:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125099
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 10:24:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125100
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-Pick commit according to [1]
+Switch build system from setuptools3 to python_hatchling
 
-[1] https://security-tracker.debian.org/tracker/CVE-2026-3731
-[2] https://www.libssh.org/security/advisories/libssh-2026-sftp-extensions.txt
+Changelog:
+https://github.com/redis/redis-py/releases
 
-Skip the test file change as it's not available in libssh-0.8.9
-
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
- .../libssh/libssh/CVE-2026-3731.patch         | 44 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.8.9.bb    |  1 +
- 2 files changed, 45 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
+ .../python/{python3-redis_5.2.1.bb => python3-redis_7.3.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-redis_5.2.1.bb => python3-redis_7.3.0.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
-new file mode 100644
-index 0000000000..2ed2d4472f
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731.patch
-@@ -0,0 +1,44 @@
-+From f80670a7aba86cbb442c9b115c9eaf4ca04601b8 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Thu, 11 Dec 2025 13:22:44 +0100
-+Subject: [PATCH] sftp: Fix out-of-bound read from sftp extensions
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-+(cherry picked from commit 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60)
-+
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=f80670a7aba86cbb442c9b115c9eaf4ca04601b8]
-+CVE: CVE-2026-3731
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/sftp.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/sftp.c b/src/sftp.c
-+index 43eb1ad6..be473793 100644
-+--- a/src/sftp.c
-++++ b/src/sftp.c
-+@@ -686,7 +686,7 @@ const char *sftp_extensions_get_name(sftp_session sftp, unsigned int idx) {
-+     return NULL;
-+   }
-+ 
-+-  if (idx > sftp->ext->count) {
-++  if (idx >= sftp->ext->count) {
-+     ssh_set_error_invalid(sftp->session);
-+     return NULL;
-+   }
-+@@ -702,7 +702,7 @@ const char *sftp_extensions_get_data(sftp_session sftp, unsigned int idx) {
-+     return NULL;
-+   }
-+ 
-+-  if (idx > sftp->ext->count) {
-++  if (idx >= sftp->ext->count) {
-+     ssh_set_error_invalid(sftp->session);
-+     return NULL;
-+   }
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 3781b501cd..a1fc64446c 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -28,6 +28,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2025-8277-2.patch \
-            file://CVE-2025-8277-3.patch \
-            file://CVE-2025-8114.patch \
-+           file://CVE-2026-3731.patch \
-           "
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+diff --git a/meta-python/recipes-devtools/python/python3-redis_5.2.1.bb b/meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-redis_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
+index ba214f5869..861221d3ee 100644
+--- a/meta-python/recipes-devtools/python/python3-redis_5.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
+@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=609ded3add9111c4c6e102f1d421d3f8"
+ # Prefix archive to avoid clashing with the main redis archives
+ PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
  
+-SRC_URI[sha256sum] = "16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f"
++SRC_URI[sha256sum] = "4d1b768aafcf41b01022410b3cc4f15a07d9b3d6fe0c66fc967da2c88e551034"
+ 
+-inherit pypi setuptools3
++inherit pypi python_hatchling
+ 
+ RDEPENDS:${PN} += " \
+     python3-asyncio \
 -- 
-2.25.1
+2.34.1
 
 
