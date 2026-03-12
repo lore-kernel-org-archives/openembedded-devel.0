@@ -1,143 +1,206 @@
-Return-Path: <rasmus.villemoes@prevas.dk>
+Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF2DE105A593
-	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 12:12:09 +0000 (UTC)
-Received: from PA4PR04CU001.outbound.protection.outlook.com (PA4PR04CU001.outbound.protection.outlook.com [40.107.162.37])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19725.1773317523767940542
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A9C31067024
+	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 14:05:51 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22326.1773324347089754169
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Mar 2026 05:12:05 -0700
+ Thu, 12 Mar 2026 07:05:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@prevas.dk header.s=selector1 header.b=l2+uaQHi;
- spf=pass (domain: prevas.dk, ip: 40.107.162.37, mailfrom: rasmus.villemoes@prevas.dk)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SQA2aCDk1hefCAlo5TuI/uW7B2g0i/G5d6YblMUmJGxAZKX+VO/uQBStjhd55iCppbJmDVbCMS9VdlNVaRKKLgn7iJ54hX2VUlXQYKT1Lj8raZr8hhkmUbWjjFD6ltLT3V5b24DLVpOKnnQWWsaUqgIseW4ZEIwt/DngiGfTqD4l1w7spZSU0MMriHU/DhLWCxcPGwVAHeoQZXD2rKNAoUwHNZVzO7Jpee/Fy/X7eMjFA5IjtNS/1lj9rHpY3PlwgdMxZqIXekiJ3WTmIfRZbJWc7uZuA0wI//LGQ+wZZi3Cw0usVaO9XHQzy05rBayQMaYszeozsMWQfsY0/hYeJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SCNBFrKk3kGS+hhjWV66OdFeO6MMTvCnCwO3rab+6UY=;
- b=SDiGcmzc0YIMdiYCji1aADD+g+DVIOMcC58Cdbwo8lCOqnHYW8qggPbpBC08LBChiLPoMsSBbGuVMfPF2If3r9LgjJ1G1RkjM3Nmcj6LWwZvIA/pCvB93RjvwWmUX2M3Wxo4ohc/MdeFZ/6X2YwyUMkKk8nLfabyvYAP1p/tZJ+tWFLo9vgCv2d2cEwIRiljklzrj66zZY5GmDtA0abHijDhSCeddJST6lTW5KfYXcyGa0vupyTEuDFwNCJBLMOIBA0SnamWuUYwUXY+mbeZ31skG+6HkFkeEnBmp5Etq+V6rd2E8mRSASrDgphcXvhaeYF1tw6jMJfamfNqm4CW4Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SCNBFrKk3kGS+hhjWV66OdFeO6MMTvCnCwO3rab+6UY=;
- b=l2+uaQHiR7i0P+Q6Pi12NTw8+N3Ki40nC2hywzshAH9n79GpOx705F09woEkwR7Xptx8DYXvY7JHpxacd+hTeDNtj2L0/zR/b+bwhr0ubptgdEsp5pTk5al6TwGrAn2aRoymPwhHJLw0bmdeNZ6OrfpZrSrjjkJZcyfRrDcjr2E=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by VI1PR10MB3677.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:137::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.12; Thu, 12 Mar
- 2026 12:11:56 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9700.013; Thu, 12 Mar 2026
- 12:11:56 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=bdzo44uY;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-1334352-20260312140543abda3f0f9700020751-oveby3@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 20260312140543abda3f0f9700020751
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 12 Mar 2026 15:05:44 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=andrej.kozemcak@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=3CNZ09QatXttHBRrXp+otw7K+H4vnwJWJolfASJL3D4=;
+ b=bdzo44uYW99I9EVX8LTFfFciGnDMuMVMP928GXrOO9LbN87ACIVDBpPEtxjt2CYCGAPYFC
+ gGJzQAYtpQttgZ9Cw1/0ODA9J5Nl+NLS6y4UQthsH4ovqIsibcGkyvETErSBuS0gC8EC+R7Z
+ 0ma8LBykflICSw0pG1MHY2JLPscTcQgu3EzqFIVJyQQN0MWcyiN7Us9eZskNdvJ2ruygqLvN
+ OLQGsLqD6vvZ5nM7ZTrX2ejT32ys9v4c2U+cvXZKkminiNZCXMb8Y++qSjnqWrubao9KEG8R
+ fU/vfRAXXx81E/oSbJrdqXxz7tgGku3s6IWCL/RY4kaA2bagtUAbqvBg==;
+From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-CC: Khem Raj <raj.khem@gmail.com>,
-	Wang Mingyu <wangmy@fujitsu.com>,
-	Leon Anavi <leon.anavi@konsulko.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] python3-snagboot: enable building -native and nativesdk- variants
-Date: Thu, 12 Mar 2026 13:11:51 +0100
-Message-ID: <20260312121151.2536421-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.53.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: GV3PEPF0001DC1D.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:400::106) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+Subject: [meta-networking][PATCH 1/6] mosquitto: upgrade 2.0.22 -> 2.1.2
+Date: Thu, 12 Mar 2026 15:04:56 +0100
+Message-ID: <20260312140501.29859-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|VI1PR10MB3677:EE_
-X-MS-Office365-Filtering-Correlation-Id: effe2445-ec70-402e-37a0-08de80308e16
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|376014|1800799024|52116014|18002099003|56012099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	pyqiabcuXbVw8D2sXNf8DJ2OTkI4hK0FssprfFWC3iR5oP3lhGxPyL1F43qEs+QJj5/S/riY+MN8bIJDYYDE9OjKxriajieuB19F2+ohV/vAyN3PiL/XkbmRy+XWuErk2f3PK93w/daPPH2N4I9yKgGEC17maoxSbUq/acQgHi8PaXEykR8A94EfRGlSriEFICWP1N5eCA6+Holf7nUyeoJDOuxhYD75xsSAAdXso7PMzAQKVXRBofbw4I6Bsl9xXsEMYDyXhfk0lI2Ns+C/MvMYRaQ9/fZPbZTh/KGqtMtSI/dfpgPTPY9ZvzV7en73zhMbEn+hTIR509oW4bJmZf/lhAGhhz8ot91gVl7uTni0l8CY2uwIjoSQs3cQ/hSB9h1CTq5h8vuv0iTlh7nFnrF+H1VP5V8CzFFj4mkvQj6ptLhOstu5WHH2ymR41RJppzy+/PLCSwMU/xrKH/kV9M0SDFVpsaP58Yu/gecdncj68YG4cFpvFovHCw4+4k6hteTq9uLs27pRVIQtVzP6gyZeGWyH7bT64PuxOHHt7x0nglCRVbHPB9y17EQpwRzCjU3jxNIO+5r97bvwEUh5PxutOgmm1gvIUIpj4jbIp8fT1OHiFinNQTwbuilzcOAT5d3NUPaipDSYZIjUfPt1sTYLWQyLe38LcjwuKlUXBOiuHbHriIGFBsiTjNV9EU4xoh9Q2MiUBqAM35agjWGHlfGG4m+HqJTBUbDRcgb2vX31pB48/rYZ+Q0n/z0ciaPWm2hu3unNX08cIYR0/hBGkbx0uyjecWkb6dpZrm/Allo=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(52116014)(18002099003)(56012099003)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?GUykGbOvbqhvkJikfRqhEd755/4geaZkyAYC9e+3B38job/ewGmkRcxd8JPk?=
- =?us-ascii?Q?efe8mCvypEQISy/Yh4hYxEIB+NeTv6z0ULSD2YbIa3Y267aBPoMW4ZGy/ec/?=
- =?us-ascii?Q?tfM0VHZdb28cTUHdEm+gUp4kEPsnz2v0qwH2EpWRFyMMBdu7mbhQDpzm049Y?=
- =?us-ascii?Q?7YwmEQjn/dd3Dms2Yg8Kzyz3/62yG33xZOG2uO2JVnpmNNAlg0sUj3yWUTkw?=
- =?us-ascii?Q?ylsjhqiiQy+tqX/s7lGEQYdhmDOyVFPuZqQbp7tWxi6773YumSwM/Tr/+tVe?=
- =?us-ascii?Q?Hh2SCtLtohqeHd7Qq+lCDIYljD8f5+e3STtjvYJFX4NzcoRn5Z26JmbjUjU4?=
- =?us-ascii?Q?o6gPAShK01S/frx7A7seNt/mLs19eEukbw4TWhyLJNW1nqqL6M8b8wiXhmnV?=
- =?us-ascii?Q?7l3N0ZNPe5Ag4IRNcYle9gkyhiMhsl6RY2TqDXmIF9Vl0W2EJQetOxon18G7?=
- =?us-ascii?Q?mhcDuJ1Ntksh8sOyM0jEMjKOklB0uzUoJAHmH9U/nczm3VdivJllx4A7Nkzm?=
- =?us-ascii?Q?faqo/6NBbtLnxWSJJ5Iz/ZlDFc/fhi1lqMrDkJB7PjrM2mR5ZC2k/19WuZM8?=
- =?us-ascii?Q?9Cgmk4R/SIDm3yFjTcsLhGpuB07Tr24fyuB5324BML2/5zXTeONInLStAgti?=
- =?us-ascii?Q?ybNqpwRWigz8fsxKxSyQKObHa8V98y4cDG7ytOQBB3gFoQ39pmphOsIiGuNA?=
- =?us-ascii?Q?0gbVPyVFiw83FJHrm0zLSRqcVU58PLqBqIdgNmOvPIGmURLaEVKbEVw7a9ge?=
- =?us-ascii?Q?g9qpsvg2RHb2T3PMVNowMdJOFqtbU3NBVYM3XDswQupEDqDA67y5NFUvr6hU?=
- =?us-ascii?Q?m7i5AlVkAZ3TsxubKcFgWeWzEJxS0ftDByOhmg2Oxex96hmt8Fbx1r6w01br?=
- =?us-ascii?Q?VPuE4NVBtn1L+7umI50ZkmjwdoXKMJZx6Bw4YWCob1c+yA+divoPMgnTuwH2?=
- =?us-ascii?Q?p60DPOs4963QL+zACv6YJsUqaPcXS2m0Mj4Ut76o6Ole+V9S7uChylaw+my9?=
- =?us-ascii?Q?bL76bOD66+YDCQN5IXZsUb177xOyPWoMWhLPRwsAJW+MdnbBPMgvPAGxZni5?=
- =?us-ascii?Q?yabnB0hh9JO44Ky7e7g41R91VAofltEmGUGplupMp9XrRLtqUdeCghCS6Loy?=
- =?us-ascii?Q?JlcOwwEIO4naoHQzgABkYAlA91EiUUjf9QeOVDenTK+yHqbyGT+zzxTvrJ3r?=
- =?us-ascii?Q?ydb1IEI6X3gNmWuP2XRhUE5KoNSKeEtt6ZGVYN/rZbZr+zDKhl9yluloNRtY?=
- =?us-ascii?Q?1nKmhqhFix/D6PP3ijhzvSrbz17kTlozcgSgW4tLVoPkFtO8Si8rRvoxTI8e?=
- =?us-ascii?Q?zJrGjTXGAfxXF/i+wRUH6mZXBi67ENAH2AfwlTJL1dEcgjwOglxGZba1r5qi?=
- =?us-ascii?Q?cZS73aMBdeTNutmBXJ2SCUyL+tfXe+E0SkbQmim9Sjw+TR0BQ6sdoCmIIee2?=
- =?us-ascii?Q?IH1oEZnL3SCmPbVX2zMQqaoAMBOTMYBL2KX5O/12vDBGXRH7MkNdrbVhJrBA?=
- =?us-ascii?Q?KAAtmlRI/e0IAd/IPe1vbHefdUdaCM6QTp8B9j0s5xLOYoLXZ9a54s7UbTrh?=
- =?us-ascii?Q?Z3fjKt01Xt2QiaDrauWPETn5L1RH9Iz2a5nuD3H7KB9VdYmq+DyRUPPIcbJo?=
- =?us-ascii?Q?H6uEG7KEBYktD7siuoVFetWMJZFwRgCftes4U/whhjFzcn1WUQQIl2KH51an?=
- =?us-ascii?Q?cu7WZCWb/i5WhcUuuTZkhchU97FSY9ETO4RkEknJ/AGkQ3p75mJUL8brHYU5?=
- =?us-ascii?Q?Po6Xho5gmJ4/7AkAgQowQcGB+shml2s=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: effe2445-ec70-402e-37a0-08de80308e16
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 12:11:56.5601
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lHpHDsrCLK6r9uaSSTjxl5+7DhWgH5UXbXhUMy+7Q0XlogGQ7Nfja8LQ6UXlTKuPhlTpiLD4bV3FhTqL8kcrzQ2HjwARCCvCqRCmtl8DT2I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3677
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 12:12:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125165
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 14:05:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125166
 
-From: Rasmus Villemoes <ravi@prevas.dk>
+License-Update: Change license to EPL-2.0 OR BSD-3-Clause
+  Clarify license in LICENSE.txt: https://github.com/eclipse-mosquitto/mosquitto/commit/f466e454e016825220e8494bd6264a5736ed1112
+  Updated NOTICE.md: https://github.com/eclipse-mosquitto/mosquitto/commit/827c803cb8d6376891548b856a1faa3f0ab5
 
-It can be useful to include snagboot in the SDK, so allow building
-that variant. While I don't see a use case for it during build,
-there's no reason not to also allow building the -native variant while
-at it.
+Removed patch included in this release
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Update PACKAGECONFIG/cmake options:
+
+- manpages: -DDOCUMENTATION → -DWITH_DOCS (the CMake option was renamed in 2.1.x)
+- ssl: removed -DWITH_EC=ON/-DWITH_EC=OFF; the WITH_EC option was dropped in 2.1.x
+       since Elliptic Curve support is now always included with TLS
+- websockets — adapt websockets to properly use with picohttpparser
+
+Disable `DWITH_ADNS` option because it required Argon2, which is not part of
+meta-oe layer
+
+Disable `DWITH_TESTS` option because mosquitto start using GoogleTest
+and we hit a common Yocto + CMake + GoogleTest problem
+
+Changelog:
+v2.1.2:
+  https://github.com/eclipse-mosquitto/mosquitto/blob/v2.1.2/ChangeLog.txt
+
+  Broker:
+    - Forbid running with `persistence true` and with a persistence plugin at the
+      same time.
+
+  Build:
+    - Build fixes for OpenBSD. Closes #3474.
+    - Add missing libedit to docker builds. Closes #3476.
+    - Fix static/shared linking of libwebsockets under cmake.
+
+v2.1.1:
+  https://github.com/eclipse-mosquitto/mosquitto/blob/v2.1.1/ChangeLog.txt
+
+v2.1.0:
+  https://github.com/eclipse-mosquitto/mosquitto/blob/v2.1.0/ChangeLog.txt
+
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
- meta-python/recipes-devtools/python/python3-snagboot_2.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../mosquitto/files/2895.patch                | 38 -------------------
+ ...mosquitto_2.0.22.bb => mosquitto_2.1.2.bb} | 27 ++++++++-----
+ 2 files changed, 17 insertions(+), 48 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.22.bb => mosquitto_2.1.2.bb} (70%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-snagboot_2.5.bb b/=
-meta-python/recipes-devtools/python/python3-snagboot_2.5.bb
-index fe496ffc2f..a280103d63 100644
---- a/meta-python/recipes-devtools/python/python3-snagboot_2.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-snagboot_2.5.bb
-@@ -19,3 +19,5 @@ RDEPENDS:${PN} +=3D " \
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+deleted file mode 100644
+index d9432e749e..0000000000
+--- a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From: Joachim Zobel <jz-2017@heute-morgen.de>
+-Date: Wed, 13 Sep 2023 10:05:43 +0200
+-Subject: [PATCH] Mosquitto now waits for network-online when starting
+- (Closes: #1036450)
+-
+-See: https://github.com/eclipse/mosquitto/issues/2878
+----
+-Upstream-Status: Submitted [https://github.com/eclipse-mosquitto/mosquitto/pull/2895]
+-
+- service/systemd/mosquitto.service.simple | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+---- a/service/systemd/mosquitto.service.simple
+-+++ b/service/systemd/mosquitto.service.simple
+-@@ -1,8 +1,8 @@
+- [Unit]
+- Description=Mosquitto MQTT Broker
+- Documentation=man:mosquitto.conf(5) man:mosquitto(8)
+--After=network.target
+--Wants=network.target
+-+After=network-online.target
+-+Wants=network-online.target
+- 
+- [Service]
+- ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+---- a/service/systemd/mosquitto.service.notify
+-+++ b/service/systemd/mosquitto.service.notify
+-@@ -1,8 +1,8 @@
+- [Unit]
+- Description=Mosquitto MQTT Broker
+- Documentation=man:mosquitto.conf(5) man:mosquitto(8)
+--After=network.target
+--Wants=network.target
+-+After=network-online.target
+-+Wants=network-online.target
+- 
+- [Service]
+- Type=notify
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.1.2.bb
+similarity index 70%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.1.2.bb
+index 1bdf54eea1..c533240010 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.22.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.1.2.bb
+@@ -6,20 +6,19 @@ provides a lightweight method of carrying out messaging using a \
+ publish/subscribe model. "
+ HOMEPAGE = "http://mosquitto.org/"
+ SECTION = "console/network"
+-LICENSE = "EPL-2.0 | EDL-1.0"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
++LICENSE = "EPL-2.0 | BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f6d64fd27a4071b14ef656a0e8a4f4cf \
+                     file://edl-v10;md5=9f6accb1afcb570f8be65039e2fcd49e \
+                     file://epl-v20;md5=2dd765ca47a05140be15ebafddbeadfe \
+-                    file://NOTICE.md;md5=a7a91b4754c6f7995020d1b49bc829c6 \
++                    file://NOTICE.md;md5=611234becddb76dca161d4ffce7ab420 \
+ "
+ DEPENDS = "uthash cjson"
+ 
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+-           file://2895.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "2f752589ef7db40260b633fbdb536e9a04b446a315138d64a7ff3c14e2de6b68"
++SRC_URI[sha256sum] = "fd905380691ac65ea5a93779e8214941829e3d6e038d5edff9eac5fd74cbed02"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
+@@ -27,16 +26,22 @@ PACKAGECONFIG ??= "ssl websockets \
+                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
+                   "
+ 
+-PACKAGECONFIG[manpages] = "-DDOCUMENTATION=ON,-DDOCUMENTATION=OFF,libxslt-native docbook-xsl-stylesheets-native"
++PACKAGECONFIG[manpages] = "-DWITH_DOCS=ON,-DWITH_DOCS=OFF,libxslt-native docbook-xsl-stylesheets-native"
+ PACKAGECONFIG[dns-srv] = "-DWITH_SRV=ON,-DWITH_SRV=OFF,c-ares"
+-PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON -DWITH_EC=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF -DWITH_EC=OFF,openssl"
++PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF,openssl"
+ PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
+-PACKAGECONFIG[websockets] = "-DWITH_WEBSOCKETS=ON,-DWITH_WEBSOCKETS=OFF,libwebsockets"
++PACKAGECONFIG[websockets] = "-DWITH_WEBSOCKETS=ON -DWITH_WEBSOCKETS_BUILTIN=OFF,-DWITH_WEBSOCKETS=OFF,libwebsockets"
+ PACKAGECONFIG[dlt] = "-DWITH_DLT=ON,-DWITH_DLT=OFF,dlt-daemon"
++PACKAGECONFIG[http-api] = "-DWITH_HTTP_API=ON,-DWITH_HTTP_API=OFF,libmicrohttpd"
+ 
++# Disable building/running tests to avoid GoogleTest discovery executing target binaries
++# during cross-compilation (Yocto). This prevents CMake from calling gtest_discover_tests().
++# See: Yocto + GTest cross-compile issues and gtest_discover_tests execution failures.
++# (Refs: SO example and googletest issue)
+ EXTRA_OECMAKE = " \
+     -DWITH_BUNDLED_DEPS=OFF \
+-    -DWITH_ADNS=ON \
++    -DWITH_ADNS=OFF \
++    -DWITH_TESTS=OFF \
+ "
+ 
  do_install:append() {
-     install -D -m 0644 ${S}/src/snagrecover/50-snagboot.rules ${D}${syscon=
-fdir}/udev/rules.d/50-snagboot.rules
- }
-+
-+BBCLASSEXTEND =3D "native nativesdk"
---=20
-2.53.0
+@@ -59,7 +64,9 @@ PACKAGE_BEFORE_PN = "${PN}-examples"
+ FILES:${PN} = "${sbindir}/mosquitto \
+                ${bindir}/mosquitto_passwd \
+                ${bindir}/mosquitto_ctrl \
+-               ${libdir}/mosquitto_dynamic_security.so \
++               ${bindir}/mosquitto_db_dump \
++               ${bindir}/mosquitto_signal \
++               ${libdir}/mosquitto_*.so \
+                ${sysconfdir}/mosquitto \
+                ${sysconfdir}/init.d \
+                ${systemd_unitdir}/system/mosquitto.service \
+-- 
+2.47.3
 
 
