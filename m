@@ -2,33 +2,33 @@ Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20D921067029
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1447F1067027
 	for <webhook@archiver.kernel.org>; Thu, 12 Mar 2026 14:06:21 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22487.1773324375765397859
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22333.1773324370683095866
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Mar 2026 07:06:16 -0700
+ Thu, 12 Mar 2026 07:06:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=UCdiww5x;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-1334352-202603121406139fc1f9ba5900020777-3axnvb@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 202603121406139fc1f9ba5900020777
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=W6CqRvUH;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-1334352-2026031214060865461942cf000207c3-6y5ggy@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026031214060865461942cf000207c3
         for <openembedded-devel@lists.openembedded.org>;
-        Thu, 12 Mar 2026 15:06:13 +0100
+        Thu, 12 Mar 2026 15:06:08 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=andrej.kozemcak@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=QOHDIQergDD8MJa6msrAzixQLod7oD95NlVyDToCsOg=;
- b=UCdiww5xufpaDYVvAkK5ImJyiEBtuFtPhCHBPL+F2Wdw4M9R/X3KcS7XqPlf6qGAAZ99Xj
- ySgS+7ZpLOifsxnjl+WTwdeHKBLUWR5GGmd9M1b9rtDfjaON/DsQ3m76//XlQeicgV+WCAeg
- JcBownuk9bhGP3wU6ROLzj1heRv66vrPGGyJd6cAVpNrPndOmyoCI+IVFr2JN/9DNeH6Ue0V
- JcZ+IpA+QJf+cvaX7rLG6xWmgG2F3aUTNVWzgKSLh6FitYQhbe5zZj6RNe6nhvS4pALhv0zE
- k5dty3f1CVIzLHA2AoqLsaSs+nbCDD38NVQQy+Ip4fNUwPKccwnvDBow==;
+ bh=G86NLsluoiKyrcxFYHqcuo7tBgeZxHZ/q7BiTUcLYlc=;
+ b=W6CqRvUHW5lrenRECppNOty193c9iuaa3j5s5igxCp+tIDW7/qiMdWoY0wIT8lLhfH7kxe
+ oRXSzaw533+YNJT45IRTWSaEDQ+y1mEPjay8PTCcfbRtkqQIxedK2eG2KipN9hXtqrQjQGjm
+ im1XEF/NxQQHjWnnI5AcL5BCCG/mkO792KxfKqdavN0rzuyHPsp1F+N8V423q+hY0X4SNY0W
+ DUVzzX62yiEqsGBg95FRklgokACpSmew911SY23IFmcI25Aj4QTRC6IWyDIZ+sQ+sBqDZFVA
+ 52yb2gbqenMZpPr3AeI8SsYe7YGMxSAfLfUm9mbzT3JS4nOW0nAadVNQ==;
 From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][PATCH 5/6] rocksdb: upgrade 9.10.0 -> 10.10.1
-Date: Thu, 12 Mar 2026 15:05:00 +0100
-Message-ID: <20260312140501.29859-5-andrej.kozemcak@siemens.com>
+Subject: [meta-networking][PATCH 4/6] networkmanager: upgrade 1.52.2 -> 1.56.0
+Date: Thu, 12 Mar 2026 15:04:59 +0100
+Message-ID: <20260312140501.29859-4-andrej.kozemcak@siemens.com>
 In-Reply-To: <20260312140501.29859-1-andrej.kozemcak@siemens.com>
 References: <20260312140501.29859-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
@@ -39,158 +39,235 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 12 Mar 2026 14:06:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125170
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125169
 
-Remove not exist PACKAGECONFIG option `lite`
-Add new PACKAGECONFIG option liburing
+Create path to fix `meson` build errors
+
+Add missing dependencies.
+
+Disables man page generation. The build was using xsltproc to try
+downloading http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+from the network, which fails in embedded build environments.
 
 Changelog:
 
-v10.10.1
-  https://github.com/facebook/rocksdb/releases/tag/v10.10.1
+v1.56.0
+  https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/1.56.0/NEWS?ref_type=tags
 
-  Bugs:
-    - Fixed a bug in best-efforts recovery that causes use-after-free crashes when accessing SST files that were cached during the recovery.
-    - Fix resumable compaction incorrectly allowing resumption from a truncated range deletion that is not well handled currently.
-    - Fixed a bug in PosixRandomFileAccess IO uring submission queue ownership & management. Fix eliminates the false positive 'Bad cqe data' IO errors in PosixRandomFileAccess::MultiRead when interleaved with PosixRandomFileAccess::ReadAsync on the same thread.
-    - Fix Windows VS 2022 build errors.
+  Changed:
+  - Unify the versioning to use everywhere the scheme with the -rcX or -dev
+    suffixes when appropriate. This affects, for example, the URL and filename
+    of the release tarball and the version reported by nmcli and the daemon.
+    As an exception, the C API will continue to use the 90+ scheme for RC versions.
+  - nmcli now supports viewing and managing WireGuard peers.
+  - Support reapplying the "sriov.vfs" property as long as
+    "sriov.total-vfs" is not changed.
+  - Support reapplying "bond-port.vlans".
+  - Accept hostnames longer than 64 characters from DNS lookup.
+  - Make that global-dns configuration overwrites DNS searches and
+    options from connections, instead of merging all together.
+  - Add support for a new rd.net.dhcp.client-id option in
+    nm-initrd-generator.
+  - Add gsm device-uid setting to restrict the devices the connection applies to.
+  - Support configuring the HSR protocol version via the
+    "hsr.protocol-version" property.
+  - Fix a bug that makes broadband connections auto-connect getting
+    blocked if the connection tries to reconnect when modem status is
+    "disconnecting" / "disconnected".
+  - Treat modem connection not having an operator code available
+    as a recoverable error.
+  - Add support for configuring systemd-resolved's DNSSEC option
+    per-connection via the "connection.dnssec" connection property.
+  - Support configuring the HSR interlink port via the
+    "hsr.interlink" property.
+  - Fix some connection properties not being applied to vpn connections
+    (connection.mdns, connection.llmnr, connection.dns-over-tls,
+    connection.mptcp-flags, ipv6.ip6-privacy)
+  - Update n-acd to always compile with eBPF enabled, as support
+    for eBPF is now detected at run time.
+  - Add new MPTCP 'laminar' endpoint type, and set it by default alongside
+    the 'subflow' one.
+  - For private connections (the ones that specify a user in the
+    "connection.permissions" property), verify that the user can access
+    the 802.1X certificates and keys set in the connection.
+  - Introduce a libnm function that can be used by VPN plugins to check
+    user permissions on certificate and keys.
 
-v10.9.1:
-  https://github.com/facebook/rocksdb/releases/tag/v10.9.1
+v1.54.0
+  https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/1.54.0/NEWS?ref_type=tags
 
-v10.8.3:
-  https://github.com/facebook/rocksdb/releases/tag/v10.8.3
-
-v10.7.5:
-  https://github.com/facebook/rocksdb/releases/tag/v10.7.5
-
-v10.6.2:
-  https://github.com/facebook/rocksdb/releases/tag/v10.6.2
-
-v10.5.1:
-  https://github.com/facebook/rocksdb/releases/tag/v10.5.1
-
-v10.4.2:
-  https://github.com/facebook/rocksdb/releases/tag/v10.4.2
-
-v10.2.1:
-  https://github.com/facebook/rocksdb/releases/tag/v10.2.1
-
-v10.1.3:
-  https://github.com/facebook/rocksdb/releases/tag/v10.1.3
-
-v10.0.1:
-  https://github.com/facebook/rocksdb/releases/tag/v10.0.1
+  Changed:
+  - Add support for configuring per-device IPv4 forwarding via the
+    "ipv4.forwarding" connection property.
+  - Add a new "prefix-delegation" setting containing a "subnet-id"
+    property that specifies the subnet to choose on the downstream
+    interface when using IPv6 prefix delegation.
+  - Support OCI baremetal in nm-cloud-setup
+  - When activating a WireGuard connection to an IPv6 endpoint, now
+    NetworkManager creates firewall rules to ensure that the incoming
+    packets are not dropped by kernel reverse path filtering.
+  - Add support for configuring the loopback interface in nmtui.
+  - Most of the properties of ovs-bridge and ovs-port connections can
+    now be reapplied at runtime without bringing the connection down.
+  - Add a new "sriov.preserve-on-down" property that controls whether
+    NetworkManager preserves the SR-IOV parameters set on the device
+    when the connection is deactivated, or whether it resets them to
+    their default value.
+  - Introduce a new "ovs-dpdk.lsc-interrupt" property to configure the
+    Link State Change (LSC) detection mode for OVS DPDK interfaces.
+  - The initrd-generator now can parse the NVMe Boot Firmware Table
+    (NBFT) to configure networking during early boot.
+  - Add systemd services to provide networking in the initrd.
 
 Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
- ...with-gcc-13-by-adding-cstdint-header.patch | 28 +------------------
- ...mer-implementation-for-mips-platform.patch |  4 +--
- .../files/static_library_as_option.patch      |  2 +-
- .../{rocksdb_9.10.0.bb => rocksdb_10.10.1.bb} |  8 +++---
- 4 files changed, 8 insertions(+), 34 deletions(-)
- rename meta-oe/recipes-dbs/rocksdb/{rocksdb_9.10.0.bb => rocksdb_10.10.1.bb} (95%)
+ ...2-meson-fix-cross-compilation-issues.patch | 69 +++++++++++++++++++
+ ...ger_1.52.2.bb => networkmanager_1.56.0.bb} | 13 ++--
+ 2 files changed, 77 insertions(+), 5 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-meson-fix-cross-compilation-issues.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.52.2.bb => networkmanager_1.56.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch
-index 168bd76ac7..31e3eb53d3 100644
---- a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch
-+++ b/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-error-with-gcc-13-by-adding-cstdint-header.patch
-@@ -22,35 +22,9 @@ TOPDIR/tmp/work/core2-64-oe-linux/rocksdb/9.10.0/git/db/blob/blob_file_meta.h:28
- Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/13437]
- Signed-off-by: mark.yang <mark.yang@lge.com>
- ---
-- db/blob/blob_file_meta.h           | 1 +
-- include/rocksdb/trace_record.h     | 1 +
-  include/rocksdb/write_batch_base.h | 1 +
-- 3 files changed, 3 insertions(+)
-+ 1 file changed, 1 insertion(+)
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-meson-fix-cross-compilation-issues.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-meson-fix-cross-compilation-issues.patch
+new file mode 100644
+index 0000000000..617c614958
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0002-meson-fix-cross-compilation-issues.patch
+@@ -0,0 +1,69 @@
++From 49cc7ebaf3ed86b693ac80c76a28ba0db7406374 Mon Sep 17 00:00:00 2001
++From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
++Date: Mon, 9 Mar 2026 15:50:26 +0100
++Subject: [PATCH] meson: fix cross-compilation issues
++
++Strip newline from GI_TYPELIB_PATH and LD_LIBRARY_PATH
++run_command().stdout() returns the raw shell output including a trailing
++newline. When the value is used to build a colon-separated path, the newline
++gets embedded at the end of the last path component, making the directory
++invalid and causing GObject Introspection to fail with:
++
++  ImportError: Typelib file for namespace 'Gio', version '2.0' not found
++
++Use .strip() to remove leading/trailing whitespace from both env variable
++reads.
++
++Fix jansson SONAME detection for cross-compilation
++When cross-compiling, jansson's pkg-config 'libdir' variable returns a
++path relative to the sysroot (e.g., /usr/lib) without the actual sysroot
++prefix.  The host readelf binary cannot find the library at that path.
++
++Fix this by using meson.get_external_property('sys_root', '') to obtain
++the sysroot path set by the cross-compilation environment and prepend it
++to the library path before calling readelf.
++
++Upstream-Status: Submitted [https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/merge_requests/2380]
++Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
++---
++ meson.build                       | 3 ++-
++ src/libnm-client-impl/meson.build | 4 ++--
++ 2 files changed, 4 insertions(+), 3 deletions(-)
++
++diff --git a/meson.build b/meson.build
++index 8b0334240d..75f6871dd2 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -296,7 +296,8 @@ config_h.set10('WITH_JANSSON', jansson_dep.found())
++ jansson_msg = 'no'
++ if jansson_dep.found()
++   jansson_libdir = jansson_dep.get_variable(pkgconfig: 'libdir')
++-  res = run_command(find_program('eu-readelf', 'readelf'), '-d', join_paths(jansson_libdir, 'libjansson.so'), check: false)
+++  jansson_sysroot = meson.is_cross_build() ? meson.get_external_property('sys_root', '') : ''
+++  res = run_command(find_program('eu-readelf', 'readelf'), '-d', jansson_sysroot + join_paths(jansson_libdir, 'libjansson.so'), check: false)
++   jansson_soname = ''
++   foreach line: res.stdout().split('\n')
++     if line.strip().contains('SONAME')
++diff --git a/src/libnm-client-impl/meson.build b/src/libnm-client-impl/meson.build
++index 3352ebfee0..329078ab46 100644
++--- a/src/libnm-client-impl/meson.build
+++++ b/src/libnm-client-impl/meson.build
++@@ -167,13 +167,13 @@ if enable_introspection
++     install: true,
++   )
++ 
++-  gi_typelib_path = run_command('printenv', 'GI_TYPELIB_PATH', check: false).stdout()
+++  gi_typelib_path = run_command('printenv', 'GI_TYPELIB_PATH', check: false).stdout().strip()
++   if gi_typelib_path != ''
++     gi_typelib_path = ':' + gi_typelib_path
++   endif
++   gi_typelib_path = meson.current_build_dir() + gi_typelib_path
++ 
++-  ld_library_path = run_command('printenv', 'LD_LIBRARY_PATH', check: false).stdout()
+++  ld_library_path = run_command('printenv', 'LD_LIBRARY_PATH', check: false).stdout().strip()
++   if ld_library_path != ''
++     ld_library_path = ':' + ld_library_path
++   endif
++-- 
++2.47.3
++
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.2.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
+index cafc6ce3f2..de163fe00e 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.52.2.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
+@@ -38,14 +38,15 @@ DEPENDS:append:class-target = " bash-completion"
+ inherit meson gettext update-rc.d systemd gobject-introspection update-alternatives upstream-version-is-even pkgconfig
  
--diff --git a/db/blob/blob_file_meta.h b/db/blob/blob_file_meta.h
--index d7c8a1243..2e47726f8 100644
----- a/db/blob/blob_file_meta.h
--+++ b/db/blob/blob_file_meta.h
--@@ -6,6 +6,7 @@
-- #pragma once
+ SRC_URI = " \
+-    git://github.com/NetworkManager/NetworkManager.git;protocol=https;branch=nm-1-52;tag=${PV} \
++    git://github.com/NetworkManager/NetworkManager.git;protocol=https;branch=nm-1-56;tag=${PV} \
+     file://${BPN}.initd \
+     file://enable-dhcpcd.conf \
+     file://enable-iwd.conf \
++    file://0002-meson-fix-cross-compilation-issues.patch \
+ "
+ SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
+ 
+-SRCREV = "57a409441bef013f636ac8e72836c19ecb27c1b9"
++SRCREV = "56b51b98fbb8627c4c09a483702e18fd8aee7ce1"
+ 
+ 
+ # ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
+@@ -68,6 +69,7 @@ EXTRA_OEMESON = "\
+     -Dconfig_dhcp_default=${NETWORKMANAGER_DHCP_DEFAULT} \
+     -Diptables=${sbindir}/iptables \
+     -Dnft=${sbindir}/nft \
++    -Dman=false \
+ "
+ 
+ # stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
+@@ -80,7 +82,7 @@ CFLAGS:append:libc-musl = " \
+ # networkmanager-1.52.0/src/nmcli/agent.c:88:29: error: incompatible function pointer types assigning to 'rl_hook_func_t *' (aka 'int (*)(void)') from 'int (const char *, int)' [-Wincompatible-function-pointer-types]
+ #   88 |             rl_startup_hook = set_deftext;
+ #      |                             ^ ~~~~~~~~~~~
 - 
-- #include <cassert>
--+#include <cstdint>
-- #include <iosfwd>
-- #include <memory>
-- #include <string>
--diff --git a/include/rocksdb/trace_record.h b/include/rocksdb/trace_record.h
--index 8f9c3ee2f..d321f5387 100644
----- a/include/rocksdb/trace_record.h
--+++ b/include/rocksdb/trace_record.h
--@@ -5,6 +5,7 @@
-- 
-- #pragma once
-- 
--+#include <cstdint>
-- #include <memory>
-- #include <string>
-- #include <vector>
- diff --git a/include/rocksdb/write_batch_base.h b/include/rocksdb/write_batch_base.h
- index 3334a1292..43b186029 100644
- --- a/include/rocksdb/write_batch_base.h
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0005-Implement-timer-implementation-for-mips-platform.patch b/meta-oe/recipes-dbs/rocksdb/files/0005-Implement-timer-implementation-for-mips-platform.patch
-index 2979b73d2f..6205e55b3f 100644
---- a/meta-oe/recipes-dbs/rocksdb/files/0005-Implement-timer-implementation-for-mips-platform.patch
-+++ b/meta-oe/recipes-dbs/rocksdb/files/0005-Implement-timer-implementation-for-mips-platform.patch
-@@ -14,9 +14,9 @@ diff --git a/utilities/transactions/lock/range/range_tree/lib/portability/toku_t
- index 0a7488c397..ad7d9f2124 100644
- --- a/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
- +++ b/utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
--@@ -162,6 +162,12 @@ static inline tokutime_t toku_time_now(void) {
-+@@ -158,6 +158,12 @@ static inline tokutime_t toku_time_now(void) {
-    unsigned long result;
--   asm volatile ("rdtime.d\t%0,$r0" : "=r" (result));
-+   asm volatile("rdtime.d\t%0,$r0" : "=r"(result));
-    return result;
- +#elif defined(__mips__)
- +  // mips apparently only allows rdtsc for superusers, so we fall
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
-index 9a85e8db45..0f957433a7 100644
---- a/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
-+++ b/meta-oe/recipes-dbs/rocksdb/files/static_library_as_option.patch
-@@ -26,7 +26,7 @@ index 93b884dd9c1..2ca925d505c 100644
- +option(ROCKSDB_BUILD_STATIC "Build static versions of the RocksDB libraries" ON)
++
+ CFLAGS:append:toolchain-clang = " -Wno-error=incompatible-function-pointer-types"
  
-  if( NOT DEFINED CMAKE_CXX_STANDARD )
--   set(CMAKE_CXX_STANDARD 17)
-+   set(CMAKE_CXX_STANDARD 20)
- @@ -1139,11 +1140,13 @@ string(REGEX REPLACE "[^0-9: /-]+" "" GIT_DATE "${GIT_DATE}")
-  set(BUILD_VERSION_CC ${CMAKE_BINARY_DIR}/build_version.cc)
-  configure_file(util/build_version.cc.in ${BUILD_VERSION_CC} @ONLY)
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_10.10.1.bb
-similarity index 95%
-rename from meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
-rename to meta-oe/recipes-dbs/rocksdb/rocksdb_10.10.1.bb
-index d8ba31e8ca..cc0e887ea5 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.10.0.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_10.10.1.bb
-@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+ PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli \
+@@ -111,13 +113,13 @@ PACKAGECONFIG[crypto-null] = "-Dcrypto=null"
+ PACKAGECONFIG[wifi] = "-Dwext=true -Dwifi=true,-Dwext=false -Dwifi=false"
+ PACKAGECONFIG[iwd] = "-Diwd=true,-Diwd=false"
+ PACKAGECONFIG[ifupdown] = "-Difupdown=true,-Difupdown=false"
+-PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false"
++PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false,jansson"
+ PACKAGECONFIG[nmcli] = "-Dnmcli=true,-Dnmcli=false"
+ PACKAGECONFIG[nmtui] = "-Dnmtui=true,-Dnmtui=false,libnewt"
+ PACKAGECONFIG[readline] = "-Dreadline=libreadline,,readline"
+ PACKAGECONFIG[libedit] = "-Dreadline=libedit,,libedit"
+ PACKAGECONFIG[ovs] = "-Dovs=true,-Dovs=false,jansson"
+-PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no"
++PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no,audit"
+ PACKAGECONFIG[selinux] = "-Dselinux=true,-Dselinux=false,libselinux"
+ PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
+ PACKAGECONFIG[dhcpcd] = "-Ddhcpcd=${base_sbindir}/dhcpcd,-Ddhcpcd=no,,dhcpcd"
+@@ -127,6 +129,7 @@ PACKAGECONFIG[adsl] = ",,"
+ PACKAGECONFIG[wwan] = ",,"
+ # The following PACKAGECONFIG is used to determine whether NM is managing /etc/resolv.conf itself or not
+ PACKAGECONFIG[man-resolv-conf] = ",,"
++PACKAGECONFIG[nbft] = "-Dnbft=true,-Dnbft=false"
  
--SRCREV = "ae8fb3e5000e46d8d4c9dbf3a36019c0aaceebff"
--SRCBRANCH = "9.10.fb"
-+SRCREV = "4595a5e95ae8525c42e172a054435782b3479c57"
-+SRCBRANCH = "10.10.fb"
  
--SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https \
-+SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH};protocol=https;tag=v${PV} \
-            file://0001-cmake-Add-check-for-atomic-support.patch \
-            file://0002-cmake-Use-exported-target-for-bz2.patch \
-            file://0003-cmake-Do-not-add-msse4.2-mpclmul-on-clang.patch \
-@@ -39,7 +39,7 @@ PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
- PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
- PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
- PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
--PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
-+PACKAGECONFIG[liburing] = "-DWITH_LIBURING=ON,-DWITH_LIBURING=OFF,liburing"
- PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
- 
- # Tools and tests currently don't compile on armv5 so we disable them
+ PACKAGES =+ " \
 -- 
 2.47.3
 
