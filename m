@@ -2,229 +2,288 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49487106ACF9
-	for <webhook@archiver.kernel.org>; Sat, 14 Mar 2026 19:31:37 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16317.1773516687853998736
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86F3B106FD9E
+	for <webhook@archiver.kernel.org>; Sat, 14 Mar 2026 20:17:07 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17069.1773519424364386670
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Mar 2026 12:31:28 -0700
+ Sat, 14 Mar 2026 13:17:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P/l3Y91/;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-48535a0ef86so27126055e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 12:31:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Qktplwm2;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-439d8df7620so2407567f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 13:17:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773516686; x=1774121486; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773519423; x=1774124223; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=d9HkS8Jk9wV2x5T89r31TyNbNYitzBFN2w5QY3Bu2kk=;
-        b=P/l3Y91/tq8v3IdfNP84nQ30mbYpTij42ZHtjbhbHO/TSSNSF/2EJetkpoxreex9N+
-         hE+oui/Wh8qZhZJjNLQIpPHQdvortHdGJNd0kJB2BVok8PVW8daA7M+rGa4wc3R29GT+
-         8VAfdM+Uw5irhvZfvPy18FuweDHrP+ErhYmcphpNkFvaoC+OLGjrT2bRrcyVrRJ570Jh
-         n+lnnC35rwECB8WcCH3oopAJaPyaeEppT013l1HkJFtMTHvSgaEeKsU9gpbw8oFu8fOu
-         93gsXuS0NFQqn0lOoS5VVESf/uwb73USKPez5WFNzW2CtFFMw/jXy0ojwLorgb8odubf
-         Oh9g==
+        bh=l4PsIpCrzNTegg1fzSdploYp4MTjAQytwTz7GMk+g28=;
+        b=Qktplwm2BZJwZfDdiLSpwemwx4XIxTBsnt8Eyjd1NTfqqb2km7vQhVieSnVOxOn3ci
+         i/qHiIUmeoPCp+s6OTnd0cPUXk4zzZg9i5q2eaJ9zLIbmztBKrBQ4OIaiP8wtHsQgJCM
+         +YQaHpFkHp25sZWTJ8KHXCdvh13U1+mSgskVBF7l6EEkM1s5AY6je2lOzYvpRnuzWjcJ
+         i/DfpA3EHFutQ23+Yu+wiV6BbDuekP4MKZpSk1PSXu5pZl1EVsHiv7Rvz7aQ1BF4g340
+         yQP2B5cHqAink8L/d/18ytFf0yDotAdz9XL8YyHVny0t1fmQO9sCd9BV6mnRk45IPfmz
+         Ytsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773516686; x=1774121486;
+        d=1e100.net; s=20251104; t=1773519423; x=1774124223;
         h=content-transfer-encoding:in-reply-to:from:content-language
          :references:to:subject:user-agent:mime-version:date:message-id
          :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d9HkS8Jk9wV2x5T89r31TyNbNYitzBFN2w5QY3Bu2kk=;
-        b=Jg+RVIFOSeppM8v6MSNSqNo4cR/TBLLFkHVkSCBa6OUzgHLLCoq52t6zPUS39b5D38
-         nyg4D8myVgFtTrsHD7xqVcJ8V2QrwwgoWmn5Mg4Beq5DL1/qn5i9Ucnz/ro06Q1Dt83h
-         PXYnfmigSS+dqiMgAymu97iTbEglZa+jQ150a4yyyn8x1glQqoT6HCirOhaaIzzdOZa9
-         5EuvF4ASQ/EfKvyl7pIbMjJDPISR4x6Pzz7tBFcV/Nl6Vhr2nycKL4wBYysnQ5sGBe0n
-         2dQ8oqhFQibU76Cm97R9kluLCdf9UJ9ouVv9s+o6yPCGmYISe8vxiq6rsmajOPxYdB0x
-         rLPQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWG7klViQpmpHBqCOggqGEW9uUyKU4SKYwWchtJCc49ewZ2GvFIfofRswXFsjXnxFGIPKZ415CVBhuMTME6FTjD+7A=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yy99gYjPAayGryFSIk6DY5/Y8mkZQluPEZPsR/Ruos6pw9zow0H
-	oCYRwNdQ3VfrUq/vYBiGTXNq8eBCeK3NIUONZgiONSCWZ3ANocGT5rhL
-X-Gm-Gg: ATEYQzznvzoFDSWw6XXdFrSl0bw1NA+YdLPXDiNZQkMLobpD7z7ND9iWYY5XNZXGL+i
-	Ps/6J9l8/ddGmEOo1Z5Ln1mmUIupU4a4KVoslpghc+Q8zl8oBSlR0wbI6B7hY/C3kpcWIRU8CwI
-	zR1s71YzW7joRlayGM3Qb126VzdO56iC4bqmAda6zahRH6ugdAHFkopcy163JBruNf7vdhDouYO
-	rrnomKM4oJfEBACJZMzpBLPfS6XbrK5ARyhxHvQ+jeeTpUySIm5aZv0XdPVQAKbOKDs1+99lP2y
-	sifk9BOMwMFZKBaykDcPQkIsRB3n23DLzuzoSCwSv+rxdP6hRcynmOJ73O/JKbo2vx3XRq7yKbm
-	jqvhpRaf4QUqeStfeuw4Onk5HIRPvmT5vbM1AMfWP+p+2o4cbXuHgEzd04q16qXq9hiWFNFiXhI
-	Zr2yLre8qS5APnv2Fm5I4iZzaLt7teZV8=
-X-Received: by 2002:a05:600c:8b6f:b0:477:5c58:3d42 with SMTP id 5b1f17b1804b1-485566d92f3mr127047125e9.10.1773516685951;
-        Sat, 14 Mar 2026 12:31:25 -0700 (PDT)
+        bh=l4PsIpCrzNTegg1fzSdploYp4MTjAQytwTz7GMk+g28=;
+        b=n0eDkoaMxjYiWD7ol3obAHjN+RmnkmVihv4JDLm7tho5U61DgYGi0rGW35vn53tK8f
+         lUpiB/lXR/ybPVpv7hV9Zo7jWUCvdLhjawAcNRFHTbAf39ipHNMszCRRZ5XiIlgFzrqK
+         AyR/SrRVlBQ3AnkHoTewPAniX/x9gWhghUTBJx7fWyVjQfKB3OAdZ5VPR5MxSq5+evMm
+         /86mDUreX+wyGwUS9p6h2wkAHoyh1EUVEf2Jqmptkd/NNSOM+jx3SdVoNCvn4K86KF4P
+         Bd6Joa6eD9FZDBN2IxCMOjUXjhZ4/+x0Res/DhyLxJE4hQP1wByacmwGaHGW/F/76S/g
+         tOmA==
+X-Forwarded-Encrypted: i=1; AJvYcCXVlcF0HdTMLso8AtOS7IuQs90/69kdjDj+i93X7QPcqkm7T9AmO3lHwI3QIO5uvFuB+AP13h0t08Y8dc008yVBKA8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yz7bL1/Sz/XAH4z3oi87ZK4jEQtk9tDbEdGSdB5W9nWKI9DUXYS
+	KRQf31svQQOp5VAFUhGmLFcFYtBb2WMarPO50ISmqNNXA1hUzS3uR0bSQs6TQw==
+X-Gm-Gg: ATEYQzwbLfQs+wMNQcj5dYOtoBRKgENWhVj7fJtTtxpNp1ElChi+Y0InSLKpQHarj55
+	juCh4pkZd+baFEL2+b7AWmQ6t9A/VKXiUBGC5P8fQlDh5me+OfJbFvJTHG73PGlnpeJh3gRT276
+	nUlVtV3QlCQzy7A4rGjCFLEyejaWVFEIXbW2LV9OI76iMLa6g5fEGZ7YEIlZ2d/5IQuJvP8sm7J
+	Rj/sYXa4rTej71y3/oDwbofzb/3L1pdBiERCVNUo0T82Kzq0zjXpZmbe87rwsjyHYZFjMWSBMNF
+	fgY55Z0hWfEUfmeJjmCeWdM9fOZH4tqlFxv3uq5reDeejlvKvaou+NanavCDQzKynWt995puW6i
+	buZoUn8L3LmI4z+owFhgSYh9E8BCcAHqFsz4RKflCM4njghg6yDHn4xfSFTh9g8eIRw10HPPucT
+	hrfmrdHWiMTQDSBN4otA/vDtTXfHPpNVLLRapq9mYefQ==
+X-Received: by 2002:a05:600c:8b41:b0:483:c35d:3659 with SMTP id 5b1f17b1804b1-485566fd0d4mr126406835e9.18.1773519422255;
+        Sat, 14 Mar 2026 13:17:02 -0700 (PDT)
 Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48557c6c69fsm53351585e9.26.2026.03.14.12.31.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-485419c2930sm643254715e9.0.2026.03.14.13.17.01
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 14 Mar 2026 12:31:25 -0700 (PDT)
-Message-ID: <0aab0196-c89e-4a9c-8048-9c2ff203ea32@gmail.com>
-Date: Sat, 14 Mar 2026 20:31:23 +0100
+        Sat, 14 Mar 2026 13:17:01 -0700 (PDT)
+Message-ID: <ae9b1283-dc90-482b-8d8e-33588aca2230@gmail.com>
+Date: Sat, 14 Mar 2026 21:17:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 07/14] libsodium: upgrade 1.0.20 -> 1.0.21
-To: andrej.kozemcak@siemens.com, openembedded-devel@lists.openembedded.org
-References: <20260309100630.404637-1-andrej.kozemcak@siemens.com>
- <20260309100630.404637-7-andrej.kozemcak@siemens.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] librust-cxx: Add librust-cxx recipe
+To: deepesh.varatharajan@windriver.com,
+ openembedded-devel@lists.openembedded.org
+References: <20260311120707.3582512-1-Deepesh.Varatharajan@windriver.com>
 Content-Language: en-US
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260309100630.404637-7-andrej.kozemcak@siemens.com>
+In-Reply-To: <20260311120707.3582512-1-Deepesh.Varatharajan@windriver.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 19:31:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125213
+ <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 20:17:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125214
 
-It seems that this update fails for aarch64:
-https://gist.github.com/OldManYellsAtCloud/3e80a812b4342a990f76c42bb17a6ba4
+For aarch64 it fails with tmpdir-in-final-artifacts qa error:
+
+ERROR: librust-cxx-1.0.194-r0 do_package_qa: QA Issue: File
+/usr/lib/rustlib/aarch64-oe-linux-gnu/lib/liblink_cplusplus-08eb865edce7a7f4.rlib
+in package librust-cxx-dev contains reference to TMPDIR [buildpaths]
 
 
-On 3/9/26 11:06, Andrej Kozemcak via lists.openembedded.org wrote:
-> License-Update: copyright years refreshed
+On 3/11/26 13:07, Varatharajan, Deepesh via lists.openembedded.org wrote:
+> From: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
 > 
-> Removed patch included in this release
+> Add a recipe for the cxx crate, which provides a safe and efficient
+> bridge for interoperability between Rust and C++ code. It allows
+> defining the FFI boundary in a shared Rust module and generates
+> compatible bindings for both languages during the build process.
 > 
-> Changelog:
->   https://github.com/jedisct1/libsodium/releases/tag/1.0.21-RELEASE
+> The crate is implemented in Rust and supports zero-overhead FFI with
+> common Rust and C++ standard library types.
 > 
-> Changes:
+> More information: https://crates.io/crates/cxx
 > 
-> Version 1.0.21
-> - security fix for the crypto_core_ed25519_is_valid_point() function
-> - new crypto_ipcrypt_* functions
-> - sodium_bin2ip and sodium_ip2bin helper functions
-> - XOF: the crypto_xof_shake* and crypto_xof_turboshake* functions
-> 
-> Version 1.0.20-stable
-> - XCFramework: cross-compilation is now forced on Apple Silicon to avoid Rosetta-related build issues
-> - The Fil-C compiler is supported out of the box
-> - The CompCert compiler is supported out of the box
-> - MSVC 2026 (Visual Studio 2026) is now supported
-> - Zig builds now support FreeBSD targets
-> - Performance of AES256-GCM and AEGIS on ARM has been improved with some compilers
-> - Android binaries have been added to the NuGet package
-> - Windows ARM binaries have been added to the NuGet package
-> - The Android build script has been improved. The base SDK is now 27c, and the default platform is 21, supporting 16 KB page sizes.
-> - The library can now be compiled with Zig 0.15 and Zig 0.16
-> - Zig builds now generate position-independent static libraries by default on targets that support PIC
-> - arm64e builds have been added to the XCFramework packages
-> - XCFramework packages are now full builds instead of minimal builds
-> - MSVC builds have been enabled for ARM64
-> - iOS 32-bit (armv7/armv7s) support has been removed from the XCFramework build script
-> - Security: optblockers have been introduced in critical code paths to prevent compilers from introducing unwanted side channels via conditional jumps. This was observed on RISC-V targets with specific compilers and options.
-> - Security: crypto_core_ed25519_is_valid_point() now properly rejects small-order points that are not in the main subgroup
-> - ((nonnull)) attributes have been relaxed on some crypto_stream* functions to allow NULL output buffers when the output length is zero
-> - A cross-compilation issue with old clang versions has been fixed
-> - JavaScript: support for Cloudflare Workers has been added
-> - JavaScript: WASM_BIGINT is forcibly disabled to retain compatibility with older runtimes
-> - A compilation issue with old toolchains on Solaris has been fixed
-> - crypto_aead_aes256gcm_is_available is exported to JavaScript
-> - libsodium is now compatible with Emscripten 4.x
-> - Security: memory fences have been added after MAC verification in AEAD to prevent speculative access to plaintext before authentication is complete
-> - Assembly files now include .gnu.property notes for proper IBT and Shadow Stack support when building with CET instrumentation.
-> 
-> Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
+> Signed-off-by: Deepesh Varatharajan <Deepesh.Varatharajan@windriver.com>
 > ---
->  .../libsodium/libsodium/CVE-2025-69277.patch  | 61 -------------------
->  ...ibsodium_1.0.20.bb => libsodium_1.0.21.bb} |  5 +-
->  2 files changed, 2 insertions(+), 64 deletions(-)
->  delete mode 100644 meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
->  rename meta-oe/recipes-crypto/libsodium/{libsodium_1.0.20.bb => libsodium_1.0.21.bb} (58%)
+>  .../librust-cxx/librust-cxx-crates.inc        | 130 ++++++++++++++++++
+>  .../librust-cxx/librust-cxx_1.0.194.bb        |  34 +++++
+>  2 files changed, 164 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/librust-cxx/librust-cxx-crates.inc
+>  create mode 100644 meta-oe/recipes-devtools/librust-cxx/librust-cxx_1.0.194.bb
 > 
-> diff --git a/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch b/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
-> deleted file mode 100644
-> index a2ced62760..0000000000
-> --- a/meta-oe/recipes-crypto/libsodium/libsodium/CVE-2025-69277.patch
-> +++ /dev/null
-> @@ -1,61 +0,0 @@
-> -From ad3004ec8731730e93fcfbbc824e67eadc1c1bae Mon Sep 17 00:00:00 2001
-> -From: Frank Denis <github@pureftpd.org>
-> -Date: Mon, 29 Dec 2025 23:22:15 +0100
-> -Subject: [PATCH] core_ed25519_is_valid_point: check Y==Z in addition to X==0
-> -
-> -CVE: CVE-2025-69277
-> -Upstream-Status: Backport [https://github.com/jedisct1/libsodium/commit/ad3004ec8731730e93fcfbbc824e67eadc1c1bae]
-> -Signed-off-by: Peter Marko <peter.marko@siemens.com>
-> ----
-> - src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c | 5 ++++-
-> - test/default/core_ed25519.c                             | 7 ++++++-
-> - 2 files changed, 10 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c b/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
-> -index d3020132..4b824f6d 100644
-> ---- a/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
-> -+++ b/src/libsodium/crypto_core/ed25519/ref10/ed25519_ref10.c
-> -@@ -1141,10 +1141,13 @@ int
-> - ge25519_is_on_main_subgroup(const ge25519_p3 *p)
-> - {
-> -     ge25519_p3 pl;
-> -+    fe25519    t;
-> - 
-> -     ge25519_mul_l(&pl, p);
-> - 
-> --    return fe25519_iszero(pl.X);
-> -+    fe25519_sub(t, pl.Y, pl.Z);
-> -+
-> -+    return fe25519_iszero(pl.X) & fe25519_iszero(t);
-> - }
-> - 
-> - int
-> -diff --git a/test/default/core_ed25519.c b/test/default/core_ed25519.c
-> -index bc457493..02f72bd6 100644
-> ---- a/test/default/core_ed25519.c
-> -+++ b/test/default/core_ed25519.c
-> -@@ -13,6 +13,10 @@ static const unsigned char max_canonical_p[32] = {
-> -     0xe4, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-> -     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f
-> - };
-> -+static const unsigned char not_main_subgroup_p[32] = {
-> -+    0x95, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99,
-> -+    0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99, 0x99
-> -+};
-> - static const unsigned char L_p1[32] = {
-> -     0xee, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58, 0xd6, 0x9c, 0xf7, 0xa2, 0xde, 0xf9, 0xde, 0x14,
-> -     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10
-> -@@ -133,11 +137,12 @@ main(void)
-> -     assert(crypto_core_ed25519_is_valid_point(p) == 0);
-> - 
-> -     p[0] = 9;
-> --    assert(crypto_core_ed25519_is_valid_point(p) == 1);
-> -+    assert(crypto_core_ed25519_is_valid_point(p) == 0);
-> - 
-> -     assert(crypto_core_ed25519_is_valid_point(max_canonical_p) == 1);
-> -     assert(crypto_core_ed25519_is_valid_point(non_canonical_invalid_p) == 0);
-> -     assert(crypto_core_ed25519_is_valid_point(non_canonical_p) == 0);
-> -+    assert(crypto_core_ed25519_is_valid_point(not_main_subgroup_p) == 0);
-> - 
-> -     memcpy(p2, p, crypto_core_ed25519_BYTES);
-> -     add_P(p2);
-> diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-> similarity index 58%
-> rename from meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-> rename to meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-> index 972b8b8694..5616dbc55e 100644
-> --- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.20.bb
-> +++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.21.bb
-> @@ -2,12 +2,11 @@ SUMMARY = "The Sodium crypto library"
->  HOMEPAGE = "http://libsodium.org/"
->  BUGTRACKER = "https://github.com/jedisct1/libsodium/issues"
->  LICENSE = "ISC"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c59be7bb29f8e431b5f2d690b6734185"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4942a8ebbbc7f2212bd68a47df264a4f"
->  
->  SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
-> -SRC_URI[sha256sum] = "ebb65ef6ca439333c2bb41a0c1990587288da07f6c7fd07cb3a18cc18d30ce19"
-> +SRC_URI[sha256sum] = "9e4285c7a419e82dedb0be63a72eea357d6943bc3e28e6735bf600dd4883feaf"
->  
-> -SRC_URI += "file://CVE-2025-69277.patch"
->  
->  inherit autotools
->  
+> diff --git a/meta-oe/recipes-devtools/librust-cxx/librust-cxx-crates.inc b/meta-oe/recipes-devtools/librust-cxx/librust-cxx-crates.inc
+> new file mode 100644
+> index 0000000000..c313d24e5c
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/librust-cxx/librust-cxx-crates.inc
+> @@ -0,0 +1,130 @@
+> +# Autogenerated with 'bitbake -c update_crates cxx'
+> +
+> +# from Cargo.lock
+> +SRC_URI += " \
+> +    crate://crates.io/anstyle/1.0.13 \
+> +    crate://crates.io/bitflags/2.10.0 \
+> +    crate://crates.io/cc/1.2.53 \
+> +    crate://crates.io/cfg-if/1.0.4 \
+> +    crate://crates.io/clap/4.5.54 \
+> +    crate://crates.io/clap_builder/4.5.54 \
+> +    crate://crates.io/clap_lex/0.7.7 \
+> +    crate://crates.io/codespan-reporting/0.13.1 \
+> +    crate://crates.io/cxx-build/1.0.194 \
+> +    crate://crates.io/cxx-gen/0.7.194 \
+> +    crate://crates.io/cxx-test-suite/0.0.1 \
+> +    crate://crates.io/cxxbridge-cmd/1.0.194 \
+> +    crate://crates.io/cxxbridge-flags/1.0.194 \
+> +    crate://crates.io/cxxbridge-macro/1.0.194 \
+> +    crate://crates.io/dissimilar/1.0.10 \
+> +    crate://crates.io/equivalent/1.0.2 \
+> +    crate://crates.io/errno/0.3.14 \
+> +    crate://crates.io/fastrand/2.3.0 \
+> +    crate://crates.io/find-msvc-tools/0.1.8 \
+> +    crate://crates.io/foldhash/0.2.0 \
+> +    crate://crates.io/getrandom/0.3.4 \
+> +    crate://crates.io/glob/0.3.3 \
+> +    crate://crates.io/hashbrown/0.16.1 \
+> +    crate://crates.io/indexmap/2.13.0 \
+> +    crate://crates.io/indoc/2.0.7 \
+> +    crate://crates.io/itoa/1.0.17 \
+> +    crate://crates.io/libc/0.2.180 \
+> +    crate://crates.io/link-cplusplus/1.0.12 \
+> +    crate://crates.io/linux-raw-sys/0.11.0 \
+> +    crate://crates.io/memchr/2.7.6 \
+> +    crate://crates.io/once_cell/1.21.3 \
+> +    crate://crates.io/proc-macro2/1.0.105 \
+> +    crate://crates.io/quote/1.0.43 \
+> +    crate://crates.io/r-efi/5.3.0 \
+> +    crate://crates.io/rustix/1.1.3 \
+> +    crate://crates.io/rustversion/1.0.22 \
+> +    crate://crates.io/scratch/1.0.9 \
+> +    crate://crates.io/serde/1.0.228 \
+> +    crate://crates.io/serde_core/1.0.228 \
+> +    crate://crates.io/serde_derive/1.0.228 \
+> +    crate://crates.io/serde_json/1.0.149 \
+> +    crate://crates.io/serde_spanned/1.0.4 \
+> +    crate://crates.io/shlex/1.3.0 \
+> +    crate://crates.io/strsim/0.11.1 \
+> +    crate://crates.io/syn/2.0.114 \
+> +    crate://crates.io/target-triple/1.0.0 \
+> +    crate://crates.io/tempfile/3.24.0 \
+> +    crate://crates.io/termcolor/1.4.1 \
+> +    crate://crates.io/toml/0.9.11+spec-1.1.0 \
+> +    crate://crates.io/toml_datetime/0.7.5+spec-1.1.0 \
+> +    crate://crates.io/toml_parser/1.0.6+spec-1.1.0 \
+> +    crate://crates.io/toml_writer/1.0.6+spec-1.1.0 \
+> +    crate://crates.io/trybuild/1.0.114 \
+> +    crate://crates.io/unicode-ident/1.0.22 \
+> +    crate://crates.io/unicode-width/0.2.2 \
+> +    crate://crates.io/wasip2/1.0.2+wasi-0.2.9 \
+> +    crate://crates.io/winapi-util/0.1.11 \
+> +    crate://crates.io/windows-link/0.2.1 \
+> +    crate://crates.io/windows-sys/0.61.2 \
+> +    crate://crates.io/winnow/0.7.14 \
+> +    crate://crates.io/wit-bindgen/0.51.0 \
+> +    crate://crates.io/zmij/1.0.16 \
+> +"
+> +
+> +SRC_URI[anstyle-1.0.13.sha256sum] = "5192cca8006f1fd4f7237516f40fa183bb07f8fbdfedaa0036de5ea9b0b45e78"
+> +SRC_URI[bitflags-2.10.0.sha256sum] = "812e12b5285cc515a9c72a5c1d3b6d46a19dac5acfef5265968c166106e31dd3"
+> +SRC_URI[cc-1.2.53.sha256sum] = "755d2fce177175ffca841e9a06afdb2c4ab0f593d53b4dee48147dfaade85932"
+> +SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
+> +SRC_URI[clap-4.5.54.sha256sum] = "c6e6ff9dcd79cff5cd969a17a545d79e84ab086e444102a591e288a8aa3ce394"
+> +SRC_URI[clap_builder-4.5.54.sha256sum] = "fa42cf4d2b7a41bc8f663a7cab4031ebafa1bf3875705bfaf8466dc60ab52c00"
+> +SRC_URI[clap_lex-0.7.7.sha256sum] = "c3e64b0cc0439b12df2fa678eae89a1c56a529fd067a9115f7827f1fffd22b32"
+> +SRC_URI[codespan-reporting-0.13.1.sha256sum] = "af491d569909a7e4dee0ad7db7f5341fef5c614d5b8ec8cf765732aba3cff681"
+> +SRC_URI[cxx-build-1.0.194.sha256sum] = "b0f4697d190a142477b16aef7da8a99bfdc41e7e8b1687583c0d23a79c7afc1e"
+> +SRC_URI[cxx-gen-0.7.194.sha256sum] = "035b6c61a944483e8a4b2ad4fb8b13830d63491bd004943716ad16d85dcc64bc"
+> +SRC_URI[cxx-test-suite-0.0.1.sha256sum] = "2a0a413bcefc6b37668d9eae784f5fe11232343e11101f1d1834163a509610e7"
+> +SRC_URI[cxxbridge-cmd-1.0.194.sha256sum] = "d0956799fa8678d4c50eed028f2de1c0552ae183c76e976cf7ca8c4e36a7c328"
+> +SRC_URI[cxxbridge-flags-1.0.194.sha256sum] = "23384a836ab4f0ad98ace7e3955ad2de39de42378ab487dc28d3990392cb283a"
+> +SRC_URI[cxxbridge-macro-1.0.194.sha256sum] = "e6acc6b5822b9526adfb4fc377b67128fdd60aac757cc4a741a6278603f763cf"
+> +SRC_URI[dissimilar-1.0.10.sha256sum] = "8975ffdaa0ef3661bfe02dbdcc06c9f829dfafe6a3c474de366a8d5e44276921"
+> +SRC_URI[equivalent-1.0.2.sha256sum] = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
+> +SRC_URI[errno-0.3.14.sha256sum] = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
+> +SRC_URI[fastrand-2.3.0.sha256sum] = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
+> +SRC_URI[find-msvc-tools-0.1.8.sha256sum] = "8591b0bcc8a98a64310a2fae1bb3e9b8564dd10e381e6e28010fde8e8e8568db"
+> +SRC_URI[foldhash-0.2.0.sha256sum] = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
+> +SRC_URI[getrandom-0.3.4.sha256sum] = "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd"
+> +SRC_URI[glob-0.3.3.sha256sum] = "0cc23270f6e1808e30a928bdc84dea0b9b4136a8bc82338574f23baf47bbd280"
+> +SRC_URI[hashbrown-0.16.1.sha256sum] = "841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100"
+> +SRC_URI[indexmap-2.13.0.sha256sum] = "7714e70437a7dc3ac8eb7e6f8df75fd8eb422675fc7678aff7364301092b1017"
+> +SRC_URI[indoc-2.0.7.sha256sum] = "79cf5c93f93228cf8efb3ba362535fb11199ac548a09ce117c9b1adc3030d706"
+> +SRC_URI[itoa-1.0.17.sha256sum] = "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
+> +SRC_URI[libc-0.2.180.sha256sum] = "bcc35a38544a891a5f7c865aca548a982ccb3b8650a5b06d0fd33a10283c56fc"
+> +SRC_URI[link-cplusplus-1.0.12.sha256sum] = "7f78c730aaa7d0b9336a299029ea49f9ee53b0ed06e9202e8cb7db9bae7b8c82"
+> +SRC_URI[linux-raw-sys-0.11.0.sha256sum] = "df1d3c3b53da64cf5760482273a98e575c651a67eec7f77df96b5b642de8f039"
+> +SRC_URI[memchr-2.7.6.sha256sum] = "f52b00d39961fc5b2736ea853c9cc86238e165017a493d1d5c8eac6bdc4cc273"
+> +SRC_URI[once_cell-1.21.3.sha256sum] = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
+> +SRC_URI[proc-macro2-1.0.105.sha256sum] = "535d180e0ecab6268a3e718bb9fd44db66bbbc256257165fc699dadf70d16fe7"
+> +SRC_URI[quote-1.0.43.sha256sum] = "dc74d9a594b72ae6656596548f56f667211f8a97b3d4c3d467150794690dc40a"
+> +SRC_URI[r-efi-5.3.0.sha256sum] = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
+> +SRC_URI[rustix-1.1.3.sha256sum] = "146c9e247ccc180c1f61615433868c99f3de3ae256a30a43b49f67c2d9171f34"
+> +SRC_URI[rustversion-1.0.22.sha256sum] = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
+> +SRC_URI[scratch-1.0.9.sha256sum] = "d68f2ec51b097e4c1a75b681a8bec621909b5e91f15bb7b840c4f2f7b01148b2"
+> +SRC_URI[serde-1.0.228.sha256sum] = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
+> +SRC_URI[serde_core-1.0.228.sha256sum] = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
+> +SRC_URI[serde_derive-1.0.228.sha256sum] = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
+> +SRC_URI[serde_json-1.0.149.sha256sum] = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
+> +SRC_URI[serde_spanned-1.0.4.sha256sum] = "f8bbf91e5a4d6315eee45e704372590b30e260ee83af6639d64557f51b067776"
+> +SRC_URI[shlex-1.3.0.sha256sum] = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
+> +SRC_URI[strsim-0.11.1.sha256sum] = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
+> +SRC_URI[syn-2.0.114.sha256sum] = "d4d107df263a3013ef9b1879b0df87d706ff80f65a86ea879bd9c31f9b307c2a"
+> +SRC_URI[target-triple-1.0.0.sha256sum] = "591ef38edfb78ca4771ee32cf494cb8771944bee237a9b91fc9c1424ac4b777b"
+> +SRC_URI[tempfile-3.24.0.sha256sum] = "655da9c7eb6305c55742045d5a8d2037996d61d8de95806335c7c86ce0f82e9c"
+> +SRC_URI[termcolor-1.4.1.sha256sum] = "06794f8f6c5c898b3275aebefa6b8a1cb24cd2c6c79397ab15774837a0bc5755"
+> +SRC_URI[toml-0.9.11+spec-1.1.0.sha256sum] = "f3afc9a848309fe1aaffaed6e1546a7a14de1f935dc9d89d32afd9a44bab7c46"
+> +SRC_URI[toml_datetime-0.7.5+spec-1.1.0.sha256sum] = "92e1cfed4a3038bc5a127e35a2d360f145e1f4b971b551a2ba5fd7aedf7e1347"
+> +SRC_URI[toml_parser-1.0.6+spec-1.1.0.sha256sum] = "a3198b4b0a8e11f09dd03e133c0280504d0801269e9afa46362ffde1cbeebf44"
+> +SRC_URI[toml_writer-1.0.6+spec-1.1.0.sha256sum] = "ab16f14aed21ee8bfd8ec22513f7287cd4a91aa92e44edfe2c17ddd004e92607"
+> +SRC_URI[trybuild-1.0.114.sha256sum] = "3e17e807bff86d2a06b52bca4276746584a78375055b6e45843925ce2802b335"
+> +SRC_URI[unicode-ident-1.0.22.sha256sum] = "9312f7c4f6ff9069b165498234ce8be658059c6728633667c526e27dc2cf1df5"
+> +SRC_URI[unicode-width-0.2.2.sha256sum] = "b4ac048d71ede7ee76d585517add45da530660ef4390e49b098733c6e897f254"
+> +SRC_URI[wasip2-1.0.2+wasi-0.2.9.sha256sum] = "9517f9239f02c069db75e65f174b3da828fe5f5b945c4dd26bd25d89c03ebcf5"
+> +SRC_URI[winapi-util-0.1.11.sha256sum] = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
+> +SRC_URI[windows-link-0.2.1.sha256sum] = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
+> +SRC_URI[windows-sys-0.61.2.sha256sum] = "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc"
+> +SRC_URI[winnow-0.7.14.sha256sum] = "5a5364e9d77fcdeeaa6062ced926ee3381faa2ee02d3eb83a5c27a8825540829"
+> +SRC_URI[wit-bindgen-0.51.0.sha256sum] = "d7249219f66ced02969388cf2bb044a09756a083d0fab1e566056b04d9fbcaa5"
+> +SRC_URI[zmij-1.0.16.sha256sum] = "dfcd145825aace48cff44a8844de64bf75feec3080e0aa5cdbde72961ae51a65"
+> diff --git a/meta-oe/recipes-devtools/librust-cxx/librust-cxx_1.0.194.bb b/meta-oe/recipes-devtools/librust-cxx/librust-cxx_1.0.194.bb
+> new file mode 100644
+> index 0000000000..9e8d6f6bf7
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/librust-cxx/librust-cxx_1.0.194.bb
+> @@ -0,0 +1,34 @@
+> +SUMMARY = "Safe interoperability between Rust and C++"
+> +HOMEPAGE = "https://crates.io/crates/cxx"
+> +DESCRIPTION = "cxx is a library that enables safe and efficient interoperability \
+> +               between Rust and C++ code. It defines the FFI boundary in a single \
+> +               Rust module, allowing static analysis of types and function signatures \
+> +               for compatibility and safety. The library generates the necessary Rust \
+> +               and C++ bindings automatically during the build process. It provides near \
+> +               zero-overhead integration and supports idiomatic use of common Rust and C++ \
+> +               standard library types."
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = " \
+> +    file://LICENSE-MIT;md5=b377b220f43d747efdec40d69fcaa69d \
+> +"
+> +
+> +SRC_URI = "crate://crates.io/cxx/${PV};name=cxx"
+> +SRC_URI[cxx.sha256sum] = "747d8437319e3a2f43d93b341c137927ca70c0f5dabeea7a005a73665e247c7e"
+> +
+> +S = "${CARGO_VENDORING_DIRECTORY}/cxx-${PV}"
+> +
+> +inherit cargo cargo-update-recipe-crates
+> +
+> +require ${BPN}-crates.inc
+> +
+> +do_install () {
+> +    install -d ${D}${rustlibdir}
+> +    # The cxx deps directory also contains dependency files (.d) generated
+> +    # during compilation. These files are only needed for incremental builds
+> +    # and are not required when installing the cxx libraries.
+> +    rm -f ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/deps/*.d
+> +    cp ${B}/target/${RUST_TARGET_SYS}/${BUILD_DIR}/deps/* ${D}${rustlibdir}
+> +}
+> +
+> +BBCLASSEXTEND = "native"
 > 
 > 
 > 
 > -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#124985): https://lists.openembedded.org/g/openembedded-devel/message/124985
-> Mute This Topic: https://lists.openembedded.org/mt/118218630/6084445
+> View/Reply Online (#125085): https://lists.openembedded.org/g/openembedded-devel/message/125085
+> Mute This Topic: https://lists.openembedded.org/mt/118258831/6084445
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
 > -=-=-=-=-=-=-=-=-=-=-=-
