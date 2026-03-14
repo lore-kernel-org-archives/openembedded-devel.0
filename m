@@ -1,94 +1,110 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52B6810706D8
-	for <webhook@archiver.kernel.org>; Sat, 14 Mar 2026 12:40:55 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8878.1773492049423829870
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2A2810706D7
+	for <webhook@archiver.kernel.org>; Sat, 14 Mar 2026 13:01:25 +0000 (UTC)
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9135.1773493276024676919
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 14 Mar 2026 05:40:49 -0700
+ Sat, 14 Mar 2026 06:01:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HEx8Q6do;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-48539d21b76so21441935e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 05:40:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773492048; x=1774096848; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lty3sWl6sbd/7OgPo9fiHIhvJbkvROg8JY6yXRgyVzQ=;
-        b=HEx8Q6do4ORTBEM8KcOnbPWPjIfQWSlJ6aWvSRy70WLvQtfbZ7cMCkTVHWfafwoZQi
-         hE8umnnPXsqkfVDsGnHj0YBo9XbSv25F5No8ZrmJt7PDq/j8ywjQ1BS6DPzhayftAiHN
-         4I3xfGSyltq25yd9L2zsTvoBUAp2ONETKvMsAa4gOOobTVlKWti6VqmSX0njcY73sLx9
-         6oBq514MfI4UUDckLjqNEucVbI+Tv1QL6LP+6UysyJRSxPqe5OlnYqTg8tGPr8ZhWNvs
-         3V7sF2pplghvpxDFlQXZQOVe1wMQTqLK53j//xqq/SdAD0j8hPnEfSENpH07UibAp5yI
-         xwWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773492048; x=1774096848;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lty3sWl6sbd/7OgPo9fiHIhvJbkvROg8JY6yXRgyVzQ=;
-        b=jQYZ1su0dIE6911SU/GSfwNArUURPl0HgKZDrh8I0rcmFLvM5xiOQ/77xiea3j5+U7
-         Yzrjf/XD+vPoBGa20ATpxjotlFpuuhNGRdyekRrstbv/KgkJLDqjCTkaizcN473NXjgh
-         Auyl03ipAj+GhTENoEKNxlPe5wocfETR2nN2CkP8xwWsBN+BINukOt1RF+xf1sFdQgwS
-         Ws0U5RKDG6zroM4QvZXHC3Ge+so1hNTPYIFlLOCQlxxGK3JbfA8tSJueWJehAQciSlkn
-         OpYOmsLXbormH0KDE7ynkMZX7GLwtWfJTIVaRNhKUNkdBXW0ZmtZdO4bHFBn+8C+yWx8
-         GXzA==
-X-Gm-Message-State: AOJu0YzbnauAcCUaIMf+agRJM3man2hyjy1DIuMvWSIPTLqBSPX0h8kn
-	xiUW1NYiuTBWKuhWZwT6O1Vyi+T1vQnOmGlbGhG80ikZ1IfBqD+vvQNlnRKb5Q==
-X-Gm-Gg: ATEYQzwJ7z94mDXcj1HgAG+GQi52/KOjvzy8ZTAOO3W8nqFQzFSRlT9ZixYCBtm8FyL
-	4jW3haTE31e9QGsiFN3NeTStHLvOeEqkVHjOxtHFXnfpGIFrUdJ8kQI0cO2YosDhoT/ZrIZtTqt
-	Yt7ezEoKEosuI9ABgIsRUZrtaXm5lA7owHbB3lGKFIwyU7G/pxJTUFakF2oT6GALX8LRBvyUn7I
-	riFXyy5yq3xGxxPUADTVygtacoj5fC5tCM9fTptvgDMfodLWlpHKLTKbHdbBDa1OYOBhvy2XITU
-	eQjvHulxxYZM60pwyObYCw8pDVNNGqnKohQfupBi5Ni0TyDGlYqNy35J//BiEjdFY04I+M8nzV/
-	3HXYwglyVau1Z2sU3qLzmrRWFeLO9+3eA+/Oa42JkpmpvenGwnFUzU2ljUeslXwJU1pXNhYZffE
-	9KjbHfXErgAXPNMtjRFNaJ
-X-Received: by 2002:a05:600c:8b45:b0:485:4526:ee05 with SMTP id 5b1f17b1804b1-48556700c0dmr104796065e9.19.1773492047408;
-        Sat, 14 Mar 2026 05:40:47 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48558fd09d8sm118564135e9.7.2026.03.14.05.40.46
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Mar 2026 05:40:46 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=XWOqYvcp;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20260314130112e8076944f500020781-mwnl1i@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260314130112e8076944f500020781
+        for <openembedded-devel@lists.openembedded.org>;
+        Sat, 14 Mar 2026 14:01:12 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=7u1XQXyIYd98ZkgamPqcZZ6W7sD2sOPcCVay1SM3hN8=;
+ b=XWOqYvcpvVSPZ36ByMG1IFTCeeqUxFNIjNBecw3jW/jxGW0gct4EHATmqdJHnL9EQqw/6f
+ lIfXazdt3iqj32TlVP8DbMSuqOWvZ5Q2QZHKCtL+x4HEY13lPxVzuY/VNciV/3Rv32HA9Dle
+ rrN34oID7fhaGnjE6ZL8l+NBkqAmMO6GBxcHOnt4LbsZQuH6UU1+ABybKUKdLbLszP06WH6W
+ 5eWeaMN8Sk0i5kOWXcxyw29yxdpPa10v/d1PcHAUwdZ8rGNmF9a1peeBGw/kytAZz9Bdd09O
+ Y++AciscIELKwTrANaNV7uY92EFWo7lUs8+iQnaxCE4gOZ4y0qPELO/A==;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] bcc: add missing build dependency
-Date: Sat, 14 Mar 2026 13:40:46 +0100
-Message-ID: <20260314124046.3326920-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-networking][PATCH 1/2] ntp: fix build with glibc 2.43
+Date: Sat, 14 Mar 2026 14:01:01 +0100
+Message-Id: <20260314130102.282943-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 12:40:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125205
+ <openembedded-devel@lists.openembedded.org>; Sat, 14 Mar 2026 13:01:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125206
 
-Without xz present, compilation fails with the following error:
+From: Peter Marko <peter.marko@siemens.com>
 
-| <...>/x86_64-oe-linux-ld: warning: liblzma.so.5, needed by <...>/libbcc.so, not found (try using -rpath or -rpath-link)
-| <...>/x86_64-oe-linux-ld: <...>/libbcc.so: undefined reference to `lzma_code@XZ_5.0'
-| <...>/x86_64-oe-linux-ld: <...>/libbcc.so: undefined reference to `lzma_end@XZ_5.0'
-| <...>/x86_64-oe-linux-ld: <...>/libbcc.so: undefined reference to `lzma_stream_decoder@XZ_5.0'
-| collect2: error: ld returned 1 exit status
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../meta-python/recipes-devtools/bcc/bcc_0.35.0.bb               | 1 +
- 1 file changed, 1 insertion(+)
+ ...d-failure-with-glibc-2.43-_Generic-m.patch | 41 +++++++++++++++++++
+ .../recipes-support/ntp/ntp_4.2.8p18.bb       |  1 +
+ 2 files changed, 42 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntp/ntp/0001-include-fix-build-failure-with-glibc-2.43-_Generic-m.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bcc/bcc_0.35.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bcc/bcc_0.35.0.bb
-index 4051d7fe11..6e821cca7a 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bcc/bcc_0.35.0.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bcc/bcc_0.35.0.bb
-@@ -13,6 +13,7 @@ DEPENDS += "bison-native \
-             clang \
-             libbpf \
-             python3-setuptools-native \
-+            xz \
-             "
- 
- RDEPENDS:${PN} += "bash python3 python3-core python3-setuptools xz"
+diff --git a/meta-networking/recipes-support/ntp/ntp/0001-include-fix-build-failure-with-glibc-2.43-_Generic-m.patch b/meta-networking/recipes-support/ntp/ntp/0001-include-fix-build-failure-with-glibc-2.43-_Generic-m.patch
+new file mode 100644
+index 0000000000..89797b3aa8
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/ntp/0001-include-fix-build-failure-with-glibc-2.43-_Generic-m.patch
+@@ -0,0 +1,41 @@
++From c7d76559dada2a6c0c9c18e8343a69b1eabc031e Mon Sep 17 00:00:00 2001
++From: Peter Marko <peter.marko@siemens.com>
++Date: Fri, 13 Mar 2026 13:20:20 +0100
++Subject: [PATCH] include: fix build failure with glibc 2.38+ _Generic memchr
++ macro
++
++Newer glibc defines memchr as a _Generic macro in <string.h>.
++When sntp's config.h lacks a HAVE_MEMCHR definition, the #ifndef guard
++in l_stdlib.h passes and the extern declaration of memchr is emitted.
++The preprocessor expands the memchr token into _Generic(...), producing:
++
++  l_stdlib.h:225:14: error: expected identifier or '(' before '_Generic'
++
++Guard the fallback declarations of memchr and strnlen with an additional
++!defined(memchr) / !defined(strnlen) check so they are skipped when the
++symbols are already provided as macros by the C library headers.
++
++Upstream-Status: Pending
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ include/l_stdlib.h | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/include/l_stdlib.h b/include/l_stdlib.h
++index fbf57c5..195dc41 100644
++--- a/include/l_stdlib.h
+++++ b/include/l_stdlib.h
++@@ -221,11 +221,11 @@ extern	int	errno;
++ extern	int	h_errno;
++ #endif
++ 
++-#ifndef HAVE_MEMCHR
+++#if !defined(HAVE_MEMCHR) && !defined(memchr)
++ extern void *memchr(const void *s, int c, size_t n);
++ #endif
++ 
++-#ifndef HAVE_STRNLEN
+++#if !defined(HAVE_STRNLEN) && !defined(strnlen)
++ extern size_t strnlen(const char *s, size_t n);
++ #endif
++ 
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
+index a5a6048f8a..e59725e3e9 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p18.bb
+@@ -16,6 +16,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://0001-libntp-Do-not-use-PTHREAD_STACK_MIN-on-glibc.patch \
+            file://0001-test-Fix-build-with-new-compiler-defaults-to-fno-com.patch \
+            file://0001-sntp-Fix-types-in-check-for-pthread_detach.patch \
++           file://0001-include-fix-build-failure-with-glibc-2.43-_Generic-m.patch \
+            file://ntpd \
+            file://ntp.conf \
+            file://ntpd.service \
 
