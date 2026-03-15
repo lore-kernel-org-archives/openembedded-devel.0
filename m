@@ -1,110 +1,119 @@
-Return-Path: <deeratho@cisco.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CFBDDEFCBB1
-	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 13:36:04 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28710.1773581757445980601
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7644F30268
+	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 13:58:33 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.29044.1773583112019150864
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Mar 2026 06:35:57 -0700
+ Sun, 15 Mar 2026 06:58:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=Tofh3RKc;
- spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: deeratho@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d9f5U4HI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48539cbb7b1so20742435e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 06:58:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1053; q=dns/txt;
-  s=iport01; t=1773581757; x=1774791357;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=PJdapcYSkFqCUGkVJZJIZq7Dqx10bE7rU0cT6Gc6rK4=;
-  b=Tofh3RKcqBu3+ZzNbbnJk/hUztTqKgVSJSdFnLWTTYLCBnvAkum0Kuge
-   QLP89plwzYRNYpKUm9SaUfK8jY2mIkH4Hrv2zZI6jbt/Drzek7ejf6yyt
-   OpN8pm0QDOlgyJuGo7FBYIyrgnKd/JKLO1Xs+f4iqxKymcCTnkUxv3arR
-   w3lQ0QS0E9m6r/+KWZ4aqujlA6aysEpThUc3FKr6oqEcpjectjwcqGT2b
-   E59nbfvC2qsZW1sY/KoCFhG0eYwLkpK2E8L8TfAw84Ux/UPCugDqqngBa
-   qSSCV4xPRYXsWkGaqkFOHQ3qwQFBULF2ZaNLLmCwIZ3JEq3iSzb72oS7W
-   A==;
-X-CSE-ConnectionGUID: UeiQniJPRVOGoc9m+XcGsA==
-X-CSE-MsgGUID: X5K/wuI4Q/aVznW6M2YuyQ==
-X-IPAS-Result: =?us-ascii?q?A0AgBwAatbZp/4//Ja1aglmCSA9xX0JJlCqCIQOeGoF/D?=
- =?us-ascii?q?wEBAQ83GgQBAYUHAo0iAiY1CA4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFA?=
- =?us-ascii?q?QEBAgEHBYEOE4ZchlsCAQMyAVYgMSsrGYMCAYJzAgGxfYIsgQGEfNsmAQsUA?=
- =?us-ascii?q?YE4hTyIGXSEeicbG4FyhAd2hRCFdwSCIoEOgX+FPAaLa0iBHgNZLAFVEw0KC?=
- =?us-ascii?q?wcFgWYDNRIqFW4yHYEjPheBCxsHBYUaD4hydG2BE4MtAwsYDUgRLDcUGwQ+b?=
- =?us-ascii?q?geNej2CMwE9UQGBPApoATmlY6EOCiiDdIwelToaM6prmQakWYRogWkBOoFZc?=
- =?us-ascii?q?BWDIglJGQ+OX8x9IzU9AQEHAgcNAwuBaJF9AQE?=
-IronPort-Data: A9a23:yyChsqzSfD13Z7Pw3xJ6t+dnxyrEfRIJ4+MujC+fZmUNrF6WrkUOz
- GtOCjiCbPmOYmP9etAiPI/kpEMHusPXztNlHVM6+1hgHilAwSbn6Xt1DatR0we6dJCroJdPt
- p1GAjX4BJlqCCea/VH1buSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
- 4iaT/H3Ygf/hWYvaz9MsspvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE8NvK6X
- evK0Iai9Wrf+Ro3Yvv9+losWhRXKlJ6FVHmZkt+A8BOsDAbzsAB+vpT2M4nVKtio27hc+adZ
- zl6ncfYpQ8BZsUgkQmGOvVSO3kW0aZuoNcrLZUj2CCe5xWuTpfi/xlhJHw7PLQe+8RPO19p2
- vsTeTVOXhusnMvjldpXSsE07igiBNPgMIVavjRryivUSK54B5vCWK7No9Rf2V/chOgXQq2YP
- JVfM2cyKk2cOHWjOX9PYH46tOuli2P2bz1fgFmUvqEwpWPUyWSd1ZCzYYKPJoHbH5k9ckCwl
- j/luHvkI00jc9Wh2zy6rFf2t/LepHauMG4VPPjinhJwu3WU3mEVBRgcWFe3rPX8hkOgVtZ3L
- 00P5jFoqrA/8kGuRNTxUxC05nmesXYht8F4CeY27kSJj6HT+QvcXjZCRT9aY9tgv8gzLdA36
- mK0cxrSLWQHmNWopbi1r994cRva1fApEFI/
-IronPort-HdrOrdr: A9a23:dBrjWaOxxD+xL8BcTsCjsMiBIKoaSvp037BN7TEUdfU7SKKlfq
- yV8cjzkCWE6wr5O0tQ/OxoRpPgfZq0z/cciuMs1PWZLWvbUQCTQ72Kg7GP/9SZIU3DHio379
- YHT0C4Y+eAamRHsQ==
-X-Talos-CUID: 9a23:Yn0rlW517i+4R6Q0W9ssyUMVI8YkUEXn8lD/JETpDCVZQ5KOYArF
-X-Talos-MUID: 9a23:DVQyWwSXMyjVG18BRXTc2RIlK9pJv53pAX4fl6pYnpO1KD1JbmI=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.23,122,1770595200"; 
-   d="scan'208";a="690245924"
-Received: from rcdn-l-core-06.cisco.com ([173.37.255.143])
-  by alln-iport-7.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 15 Mar 2026 13:35:56 +0000
-Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by rcdn-l-core-06.cisco.com (Postfix) with ESMTPS id 7F0C618000267
-	for <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 13:35:56 +0000 (GMT)
-Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
-	id 28763CC4D0D; Sun, 15 Mar 2026 06:35:56 -0700 (PDT)
-From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+        d=gmail.com; s=20230601; t=1773583110; x=1774187910; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8ZVDahdsiBf43eHhGt5knCb2xgzijlNq2vnQbIQDwCQ=;
+        b=d9f5U4HIXRN7my26f+MwWR2vLEapTmF/vjOeJkMEkSclE9lmd2soyAU+i9kHZKHCGd
+         ibU/CxnyAHVrh2rpactYbR5ou1h96adD6rFYP0Pe4PBqukYvXcCnHUCDbCIXwFp1Z+qY
+         NprVBinVVqLEE0rHlbuLsEPjRHmptqseqJHqrtV6sE8AoIYeUZPTwu2jyjS7Yhz2elAw
+         qKrb/GhTrhTcsjROlxxPjp21OosE5x2BCZ4tfjDdoaO/18Ryeb02hGqRYtZQIJpqTu3G
+         idPDYUNuhkqT6xGixCcO3+JWj+sFMkUIiJUMSez2lKEuM0Xw9+KnbXB6HLuAQqvxx2PE
+         C/8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773583110; x=1774187910;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8ZVDahdsiBf43eHhGt5knCb2xgzijlNq2vnQbIQDwCQ=;
+        b=kWCoqITo2fMPKRAdLwOwjMGekmV4R/2SbfETMmom6DEBCHzi+fH7Y/otOhCPSS2bHR
+         /60erwavIxqnkNT7Ih9O4/rvuG1qJ+fHwMS69l5yqOb+1imDQaxAuyOfHj3myEorhlk3
+         jQRQakVpGrX5FbaV6ns9kbrUpsPd3lntIVSkO0QFV3D2AtoURUmzHgwnccPJVU6pXBez
+         WeJCEaOYFxgy90/2NxO5p8oBS15f/4mF99zAB20HhY18FEnkwtGkJhkVa6cDdymMzNuO
+         gdkumfCKkKr0BOLUpRiAErfU406mSshHWQgupZ7Q8C/Dv4YNOEOiNhdd6bTmViBhJxLb
+         MzDw==
+X-Gm-Message-State: AOJu0Yzaf47d30b7betYj42W/8in3TdCeR3uoyz88fvBuRujNJ+k+3nB
+	+9IbOjR/kmwh87naOvR5reFSvB4oIQ8QxX8f3+NiKZIc65YDhdYWNas+IZ1bzQ==
+X-Gm-Gg: ATEYQzzomivbu8OD1pqczJF/L6fcAg5fNUCg4aHJD7hdlfjB1rbbfLVOA5Kzy+iotX5
+	ZFK9H7rAx35bdDMcOPfZcQ8lPQNaRUbJNQSTVKkNpvo4//NQ82UF/pUnuBLhCAikdW2fXjrsQ8P
+	z2S7ryH1Vq+eNbfBc9vEiLGP919zHbj0FKNqDYI8e+DlMBmQIBNo53vPFub3shnhEBnblp/yL3K
+	cgWVYiB1oL3oYcb+Azt9Besp4EBD6h+DmLkrndyWGK+UBnXdYtC8SlaETDo6V0sQbOTB33P8kRG
+	mJVNLoOLUwC+SLLol7A6rcEQ+GlbFXzOI78x0TZghy/garzLQeFj7ogjS41b/Zzc28taX/H3Cfk
+	wU20VnI/LIN2p3g0fzl/EWussM5UpUd1ZHgK+JeCQBWjUI/4qze6jMECfHVRbav3Y6fefUbCxd/
+	yx6YN/kY/YlrrRuyfJhSKi
+X-Received: by 2002:a05:600c:3b16:b0:480:69b6:dfed with SMTP id 5b1f17b1804b1-4855671e83bmr161825555e9.24.1773583110002;
+        Sun, 15 Mar 2026 06:58:30 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541aa73easm446111605e9.3.2026.03.15.06.58.29
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 15 Mar 2026 06:58:29 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded][master][PATCH 05/24] open-isns: extend recipe for native builds
-Date: Sun, 15 Mar 2026 06:34:22 -0700
-Message-Id: <20260315133441.3034831-6-deeratho@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260315133441.3034831-1-deeratho@cisco.com>
-References: <20260315133441.3034831-1-deeratho@cisco.com>
+Subject: [meta-python][PATCH] python3-httptools: allow building with latest setuptools
+Date: Sun, 15 Mar 2026 14:58:28 +0100
+Message-ID: <20260315135828.1074994-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
-X-Outbound-Node: rcdn-l-core-06.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 13:36:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125222
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 13:58:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125244
 
-From: Deepak Rathore <deeratho@cisco.com>
+By default this recipe requires Setuptools with strictly version 80.9.0.
+oe-core has updated Setuptools to 82.0, and this recipe failed to build.
 
-Some SDK dependency chains require open-isns to be available
-as host artifacts. The current metadata only partially provides this,
-which can lead to dependency resolution failures when this recipe is pulled
-into SDK-oriented builds.
+This patch relaxes the Setuptools version requirements.
 
-This change does not alter target package behavior; it only enables required
-native variant for build and SDK integration paths.
-
-Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-networking/recipes-support/open-isns/open-isns_0.102.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...llow-building-with-latest-setuptools.patch | 23 +++++++++++++++++++
+ .../python/python3-httptools_0.7.1.bb         |  1 +
+ 2 files changed, 24 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-httptools/0001-Allow-building-with-latest-setuptools.patch
 
-diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.102.bb b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
-index 5c38f6b5dc..33847a32a9 100644
---- a/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
-+++ b/meta-networking/recipes-support/open-isns/open-isns_0.102.bb
-@@ -37,3 +37,4 @@ do_install:append () {
- FILES:${PN} += "${libdir} ${systemd_unitdir}"
+diff --git a/meta-python/recipes-devtools/python/python3-httptools/0001-Allow-building-with-latest-setuptools.patch b/meta-python/recipes-devtools/python/python3-httptools/0001-Allow-building-with-latest-setuptools.patch
+new file mode 100644
+index 0000000000..cad199f275
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-httptools/0001-Allow-building-with-latest-setuptools.patch
+@@ -0,0 +1,23 @@
++From 61e4a5acc1ec27ca295f4c0f288b97208fec1f78 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Sat, 14 Mar 2026 16:55:54 +0100
++Subject: [PATCH] Allow building with latest setuptools
++
++Upstream-Status: Submitted [https://github.com/MagicStack/httptools/pull/138]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ pyproject.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pyproject.toml b/pyproject.toml
++index e2acba3..86c46de 100644
++--- a/pyproject.toml
+++++ b/pyproject.toml
++@@ -1,6 +1,6 @@
++ [build-system]
++ build-backend = "setuptools.build_meta"
++-requires = ["setuptools==80.9.0"]
+++requires = ["setuptools>=80.9.0,<=82.0.1"]
++ 
++ [project]
++ name = "httptools"
+diff --git a/meta-python/recipes-devtools/python/python3-httptools_0.7.1.bb b/meta-python/recipes-devtools/python/python3-httptools_0.7.1.bb
+index f961745a1b..01e317732b 100644
+--- a/meta-python/recipes-devtools/python/python3-httptools_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-httptools_0.7.1.bb
+@@ -6,3 +6,4 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0a2d82955bf3facdf04cb882655e840e"
+ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
- INITSCRIPT_NAME = "openisns"
-+BBCLASSEXTEND += "native "
--- 
-2.35.6
-
+ SRC_URI[sha256sum] = "abd72556974f8e7c74a259655924a717a2365b236c882c3f6f8a45fe94703ac9"
++SRC_URI += "file://0001-Allow-building-with-latest-setuptools.patch"
 
