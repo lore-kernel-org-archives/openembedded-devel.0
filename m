@@ -1,175 +1,152 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <deeratho@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D5ACD58B18
-	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 07:49:15 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24871.1773560951621473236
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0D25D58B2C
+	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 13:35:41 +0000 (UTC)
+Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.28880.1773581740338626301
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Mar 2026 00:49:11 -0700
+ Sun, 15 Mar 2026 06:35:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U39cydki;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-485345e1013so32788495e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 00:49:11 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hDE2EAB5;
+ spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: deeratho@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773560950; x=1774165750; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=/vrRJ2kGtOO82v82io0cSY0odab93VrPZC+b/o8UdBo=;
-        b=U39cydkiLSpQBArpP/NbMfbuJz5bVT7qB6qDR8xnQaScLsJHxoHu1LGRsb46BNHNeY
-         ZwueCVtyKOWIno3U69GKYHtp3AC4Kzb81t+OjtR3dVjpp5/7fY2GTAfLIdyw2rWSBrku
-         lfaIdlb/4pAktAVXZAm0Rh6LsqRH99kfUd076Wq7a9XpVjhHusAMxEIMjmxL+oJCbPNf
-         JJ/c+tveIMcDdfealLj5jBQXMUED0R1xGR/G35t8Pz8dMWbETrevzrMjc1WgifYkR6Ro
-         TDFGmC6Yn5CQ/wlPhws01t+v5mSsr0HnVHGWMNSbj8g4dfQAij6y5gNkFIzt9vxHQDCP
-         m5rA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773560950; x=1774165750;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/vrRJ2kGtOO82v82io0cSY0odab93VrPZC+b/o8UdBo=;
-        b=Y2uN2K/ZDkXBl7VE5FznLjW1wxvfd0BWOxBwjADokDtvMpsZjN/0vrvE8/dqHcnWfo
-         m88qXmm6RyoS5/axGfMGNiKwTj8DSJlJkf48hA9gEOcFKDsXlAKTc6UA2WrQqk/N6f4N
-         B+mO7BjS435ShzU1m+IggUgGVM7KfTFQQPMjxSJggCWCmA87dzVWGuJpk2ThrNvmHMzb
-         IEqPy7Yrj40VRI7zZP6a+1ZEdAZXPMN2hNYt568D+qEtTB5OKkJeNjIlSywFvSTvPC9O
-         A1JJeOr1mYjliIumepbyq1UNOwhpPYkaShzgyWHnlFi2j6o9xW+mKnl2zNNK6tjOAjGt
-         m2lQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWxJGhRIPUjRpgqeEpA/4iWDaAJXyQ/dX+/VgzJft/uFHQEnwy9OQYsTvpmz1w2gmXNqaq8zX4+ax+Dx5qT04Lemnk=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwBPNaTeqLUtNkPdJeBTT4TXXTOT4Xnny94jAfjYKJmKxNXBuET
-	GWJjjCxxyGA7om81IBZ8160NUXhHjqGK84fgGD6NKbZrX9P9MQ+g/oEn3fpcRw==
-X-Gm-Gg: ATEYQzxWakGpT8TOrDxIXD/MjTID7veRkcrGQFVeCTbBM9t6LkaHquKmNJYi1xV/sac
-	x2zKJAVuYkXffrLeKsnl6WKDSe9QTxDBn2yyWJ8tcSSg25qzJCOaf4RarCYLy5FCFYojnWTnCLY
-	iDuuJleGMROAsTnAMQ0Pwv7ethGzFHTL8eN6mYpCCpfDXVSBiaUroE28BlLI8vmiOiIvl6cYLX2
-	Pmne/lToJEPFCKMBeqpPgMpMJkY9UHxtwUExx4J4lp8XYGmJJc/cPeQuSDLyNnpp5qBx0ZldGUj
-	HD3QUFK1OhcxuzkhD4Iu+QTeNUtCnGgeeQtK7YmbRMh/hVJxIP5m6Y2W79Wj2o70ugmsEgS8kAa
-	7/6U93vEZOhELTM3l8jqfpHjHiqMescdkj2/pTCI42wfE68zSdn/khDN+Br8OxhydJ8wkckY7DX
-	fMDzupIzr13/KPZcQNrvcTRVJcwLRaq10=
-X-Received: by 2002:a05:600c:1907:b0:485:50ac:b8cf with SMTP id 5b1f17b1804b1-48555a5689amr142247595e9.0.1773560949633;
-        Sun, 15 Mar 2026 00:49:09 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48541b7f255sm439699545e9.12.2026.03.15.00.49.08
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 15 Mar 2026 00:49:09 -0700 (PDT)
-Message-ID: <5936c190-5ec4-478f-8cf1-e27c209b0979@gmail.com>
-Date: Sun, 15 Mar 2026 08:49:08 +0100
+  d=cisco.com; i=@cisco.com; l=3641; q=dns/txt;
+  s=iport01; t=1773581740; x=1774791340;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=0GFuJ51d8t/dOWee8RQcm0wQ5Ef5rUF4Z8dGh2EaGtY=;
+  b=hDE2EAB5z1YjuLpayA2uJXubTk2JXHSe2viWTV643ZRQR2ArsQ1srC9G
+   cuF9IWjs2DfuVfCAkIrIBmBiZMBAERW+fmPcxXe+xsNY+x8FVVUIxMmXs
+   JirecgfXfAxrWx+okcLtDe8SCE1VQshGFo3+JOJ8uePe44QbNZX3Gmsbu
+   DWTB4Zuv+BdeB0dpIpvUx/jc0ttupq+4sIdvbu7/G2+fbjpdJ8SLyLUCO
+   Xv9w7ye6ADTrHAtRf9Mc1H6GPtGTyyqS/zCieu5CCH6Ikqnx6+UBOKskh
+   w1Jqz9O1zXpZAbjhb/UnOZt60mKG0bysS9H4CSh/SIRGbi7RnUuVqStXs
+   g==;
+X-CSE-ConnectionGUID: 5UUczptjQkiYJ7fjdFJbmw==
+X-CSE-MsgGUID: RxIb+EX6RDiKd/CzPoCWdg==
+X-IPAS-Result: =?us-ascii?q?A0BvCgCjtLZp/5T/Ja1aglmCSIEAX0JJA5QngiGeHYF/D?=
+ =?us-ascii?q?wEBAQ89FAQBAZIrAiY1CA4BAgQBAQEBAwIDAQEBAQEBAQEBAQELAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4ZchxMBGAFdXESDAgGCcwIBEbFrgiyBAYMoAYFT2zIVgTiFPIgZd?=
+ =?us-ascii?q?IR6JxsbgXKEB4FhGgGKAQSCInoUgXmFQgaDNYg2SIEeA1ksAVUTDQoLBwWBZ?=
+ =?us-ascii?q?gM1EioVbjIdgSM+F4ELGwcFhRoPiHJ0bYETgy0DCxgNSBEsFCMUGwQ+bgeNe?=
+ =?us-ascii?q?j2CNIEPgTwKaSgRIaVCoQ4KKIN0jB6VOhozqmuETJQ6pAlQhGiBagE5gVlwF?=
+ =?us-ascii?q?YMiCUkZD444zSQjNQIBBTYBBwIHDgKBc5F9AQE?=
+IronPort-Data: A9a23:yHoNZquSqUyXQUsKP0HOCYppcufnVAZfMUV32f8akzHdYApBsoF/q
+ tZmKTrQOKyJYjajeowgad++oxlV68PcndVhQQdk+3xgRn8SgMeUXt7xwmUckM+xwmwvaGo9s
+ q3yv/GZdJhcokf0/0nrav666yEgiclkf5KkYMbcICd9WAR4fykojBNnioYRj5Vh6TSDK1vlV
+ eja/YuFYzdJ5xYuajhKs/na9Us21BjPkGpwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 47r0LGj82rFyAwmA9Wjn6yTWhVirmn6ZFXmZtJ+AsBOszAazsAA+v9T2Mk0NS+7vw60c+VZk
+ 72hg3AfpTABZcUgkMxFO/VR/roX0aduoNcrKlDn2SCfItGvn3bEm51T4E8K0YIwp9tKCnNW6
+ f4hKzE8TE+Nhe6Y4ri+Vbw57igjBJGD0II3oHpsy3TdSP0hW52GGvyM7t5D1zB2jcdLdRrcT
+ 5NGMnw0M1KaPkAJYwtHYH49tL/Aan3XfzBVsluJpa0f6GnIxws327/oWDbQUoLbG5wKwB/B/
+ Qoq+UzDEjAQd/GvlwCp81GgwcTdpSTQZ44dQejQGvlCxQf7KnYoIBoOWF22pPO0hkKzV5dTJ
+ lIZ/gIqrLMu7wqsVtT7UhiyrXKIsxJaXMBfe9DW8ymXwabSpgLcDW8eQ3sYMZottdQ9Qnoh0
+ Vrhc87VOAGDeYa9ERq1nop4ZxvrUcTJBQfuvRM5cDY=
+IronPort-HdrOrdr: A9a23:Mf6T/q8Pqh6VdLJ2vm9uk+DNI+orL9Y04lQ7vn2ZLiYlEPBw+P
+ rBoB1273LJYVUqKRIdcK67WZVoKEm0nfUe3WB7B9iftWfd1FdAVLsD0WMnqAeQfxEXMYVmpM
+ JdT5Q=
+X-Talos-CUID: 9a23:bmITJGHCO9w7cu0aqmI6yXMfCNg5cETezUbyfEG6BUhLQriKHAo=
+X-Talos-MUID: =?us-ascii?q?9a23=3A9+M64AwhIiiOEcawijI9H1LOg3maqJ6+KUpOvKV?=
+ =?us-ascii?q?YgeWFFiA3ECWlix+IToByfw=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.23,122,1770595200"; 
+   d="scan'208";a="696176113"
+Received: from rcdn-l-core-11.cisco.com ([173.37.255.148])
+  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 15 Mar 2026 13:35:39 +0000
+Received: from sjc-ads-3552.cisco.com (sjc-ads-3552.cisco.com [171.68.249.250])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-11.cisco.com (Postfix) with ESMTPS id 5179B18000261
+	for <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 13:35:39 +0000 (GMT)
+Received: by sjc-ads-3552.cisco.com (Postfix, from userid 1795984)
+	id EC8EBCC12B5; Sun, 15 Mar 2026 06:35:38 -0700 (PDT)
+From: "Deepak Rathore -X (deeratho - E INFOCHIPS PRIVATE LIMITED at Cisco)" <deeratho@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-openembedded][master][PATCH 0/24] Pull request (Cover letter only)
+Date: Sun, 15 Mar 2026 06:34:17 -0700
+Message-Id: <20260315133441.3034831-1-deeratho@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 2/2] rtla: add recipe for real-time linux
- analysis tool
-To: peter@berginkonsult.se, openembedded-devel@lists.openembedded.org
-References: <20260306113922.3319380-1-peter@berginkonsult.se>
- <20260306113922.3319380-2-peter@berginkonsult.se>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260306113922.3319380-2-peter@berginkonsult.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 171.68.249.250, sjc-ads-3552.cisco.com
+X-Outbound-Node: rcdn-l-core-11.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 07:49:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125218
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 13:35:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125219
 
-When built against musl, this fails with the following error:
-https://gist.github.com/OldManYellsAtCloud/3a96bf193bad86c8cd67ab30faa38d3a
+From: Deepak Rathore <deeratho@cisco.com>
 
+This series extends a set of recipes to support native and nativesdk variants.
+These packages are needed as host or SDK artifacts in certain dependency chains
+(e.g., perf/tracing and networking toolchains), where dependency resolution
+fails when only the target variant exists.
 
-On 3/6/26 12:39, Peter Bergin via lists.openembedded.org wrote:
-> rtla source code is present in the kernel source tree at tools/tracing/rtla.
-> There is another build option for rtla to enable bpf bindings, this was
-> not a quick one to get working and left as a future improvement.
-> 
-> Makefile for rtla has evolved in newer kernels (v6.9). Some fixes needed for
-> support with older kernels. This commit was tested against 6.18 and 6.8.
-> 
-> Also add rtla to packagegroup-meta-oe-benchmarks.
-> 
-> Signed-off-by: Peter Bergin <peter@berginkonsult.se>
-> ---
->  .../packagegroups/packagegroup-meta-oe.bb     |  1 +
->  meta-oe/recipes-kernel/rtla/rtla.bb           | 47 +++++++++++++++++++
->  2 files changed, 48 insertions(+)
->  create mode 100644 meta-oe/recipes-kernel/rtla/rtla.bb
-> 
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index 9fd7af6c08..0cbe3964c4 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -68,6 +68,7 @@ RDEPENDS:packagegroup-meta-oe-benchmarks = "\
->      nbench-byte \
->      phoronix-test-suite \
->      qperf \
-> +    rtla \
->      s-suite \
->      stressapptest \
->      tinymembench \
-> diff --git a/meta-oe/recipes-kernel/rtla/rtla.bb b/meta-oe/recipes-kernel/rtla/rtla.bb
-> new file mode 100644
-> index 0000000000..af40fd5bd2
-> --- /dev/null
-> +++ b/meta-oe/recipes-kernel/rtla/rtla.bb
-> @@ -0,0 +1,47 @@
-> +SUMMARY = "Real-Time Linux Analysis tool"
-> +LICENSE = "GPL-2.0-only"
-> +
-> +DEPENDS = "libtraceevent libtracefs"
-> +PROVIDES = "virtual/rtla"
-> +
-> +B = "${WORKDIR}/${BPN}-${PV}"
-> +
-> +inherit kernelsrc kernel-arch pkgconfig
-> +
-> +do_populate_lic[depends] += "virtual/kernel:do_shared_workdir"
-> +
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[cpupower] = ",,cpupower"
-> +
-> +EXTRA_OEMAKE = "V=1 -C ${S}/tools/tracing/rtla O=${B} CROSS=${TARGET_PREFIX} \
-> +    CC="${CC} ${DEBUG_PREFIX_MAP}" LD="${LD}" AR=${AR} ARCH=${ARCH} \
-> +    BUILD_BPF_SKEL=0"
-> +
-> +do_compile() {
-> +    # Older kernels (before 6.9) use a standalone rtla Makefile that does not honor
-> +    # O= so outputs land in the kernel source tree (shared workdir). Remove
-> +    # build output to make sure it is rebuilt. For newer kernels this wil be a no-op.
-> +    rm -f ${S}/tools/tracing/rtla/rtla
-> +    rm -f ${S}/tools/tracing/rtla/src/*.o
-> +
-> +    # Older kernels need additional variable EXTRA_LDFLAGS to pick up correct linker options.
-> +    export EXTRA_LDFLAGS="${LDFLAGS}"
-> +    oe_runmake
-> +}
-> +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +
-> +    # Older kernels (before 6.9) use a standalone rtla Makefile that does not honor
-> +    # O= for the final binary, so it ends up in the kernel source tree.
-> +    rtla_bin="${B}/rtla"
-> +    [ -f "${rtla_bin}" ] || rtla_bin="${S}/tools/tracing/rtla/rtla"
-> +    install -m 755 "${rtla_bin}" ${D}${bindir}/rtla
-> +
-> +    # rtla, osnoise, hwnoise, and timerlat are all the same binary
-> +    ln -s rtla ${D}${bindir}/osnoise
-> +    ln -s rtla ${D}${bindir}/hwnoise
-> +    ln -s rtla ${D}${bindir}/timerlat
-> +}
-> +
-> +PACKAGE_ARCH = "${MACHINE_ARCH}"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#124904): https://lists.openembedded.org/g/openembedded-devel/message/124904
-> Mute This Topic: https://lists.openembedded.org/mt/118168854/6084445
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
+None of the changes alter target package behavior; they solely enable the
+required native/nativesdk build paths.
 
+Testing:
+  - Built each recipe as native/nativesdk on x86-64 with no errors.
+  - Verified existing target builds are unaffected.
+
+Deepak Rathore (24):
+  libburn: extend recipe for nativesdk builds
+  libisoburn: extend recipe for nativesdk builds
+  libisofs: extend recipe for nativesdk builds
+  iscsi-initiator-utils: extend recipe for native/nativesdk builds
+  open-isns: extend recipe for native builds
+  tcpdump: extend recipe for native/nativesdk builds
+  nodejs: extend recipe for nativesdk builds
+  libyang: extend recipe for native/nativesdk builds
+  libtracefs: extend recipe for native/nativesdk builds
+  trace-cmd: extend recipe for native/nativesdk builds
+  audit: extend recipe for native builds
+  cunit: extend recipe for nativesdk builds
+  python3-arrow: extend recipe for native/nativesdk builds
+  python3-fastnumbers: extend recipe for native/nativesdk builds
+  python3-future: extend recipe for nativesdk builds
+  python3-icu: extend recipe for native/nativesdk builds
+  python3-ipy: extend recipe for nativesdk builds
+  python3-jsonpatch: extend recipe for native/nativesdk builds
+  python3-natsort: extend recipe for native/nativesdk builds
+  python3-ordered-set: extend recipe for native/nativesdk builds
+  python3-sh: extend recipe for native/nativesdk builds
+  python3-tabulate: extend recipe for native/nativesdk builds
+  python3-types-python-dateutil: extend recipe for native/nativesdk builds
+  python3-websocket-client: extend recipe for native/nativesdk builds
+
+Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+---
+ meta-filesystems/recipes-filesystems/burnia/libburn_1.5.6.bb           | 2 +-
+ meta-filesystems/recipes-filesystems/burnia/libisoburn_1.5.6.bb        | 2 +-
+ meta-filesystems/recipes-filesystems/burnia/libisofs_1.5.6.bb          | 2 +-
+ .../iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb               | 1 +
+ meta-networking/recipes-support/open-isns/open-isns_0.102.bb           | 1 +
+ meta-networking/recipes-support/tcpdump/tcpdump_4.99.6.bb              | 1 +
+ meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb                      | 2 +-
+ meta-oe/recipes-extended/libyang/libyang_3.13.6.bb                     | 1 +
+ meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb                  | 1 +
+ meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb                    | 1 +
+ meta-oe/recipes-security/audit/audit_4.1.3.bb                          | 2 ++
+ meta-oe/recipes-test/cunit/cunit_2.1-3.bb                              | 2 +-
+ meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb             | 1 +
+ meta-python/recipes-devtools/python/python3-fastnumbers_5.1.1.bb       | 1 +
+ meta-python/recipes-devtools/python/python3-future_1.0.0.bb            | 2 +-
+ meta-python/recipes-devtools/python/python3-icu_2.16.1.bb              | 2 ++
+ meta-python/recipes-devtools/python/python3-ipy_1.01.bb                | 2 +-
+ meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb          | 1 +
+ meta-python/recipes-devtools/python/python3-natsort_8.4.0.bb           | 1 +
+ .../recipes-devtools/python/python3-ordered-set_4.1.0.bb               | 2 +-
+ meta-python/recipes-devtools/python/python3-sh_2.2.2.bb                | 1 +
+ meta-python/recipes-devtools/python/python3-tabulate_0.9.0.bb          | 1 +
+ .../python/python3-types-python-dateutil_2.9.0.20241003.bb             | 1 +
+ .../recipes-devtools/python/python3-websocket-client_1.7.0.bb          | 1 +
+ 24 files changed, 26 insertions(+), 8 deletions(-)
+
+-- 
+2.35.6
 
