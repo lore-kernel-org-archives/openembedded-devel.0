@@ -2,169 +2,170 @@ Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43B3BD58B13
-	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 07:41:35 +0000 (UTC)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (DB3PR0202CU003.outbound.protection.outlook.com [52.101.84.105])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24822.1773560490675477775
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 422F8D58B0F
+	for <webhook@archiver.kernel.org>; Sun, 15 Mar 2026 07:48:25 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.112])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.25016.1773560897172634369
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Mar 2026 00:41:32 -0700
+ Sun, 15 Mar 2026 00:48:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=wdMmR367;
- spf=pass (domain: navimatix.de, ip: 52.101.84.105, mailfrom: joerg.sommer@navimatix.de)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=mLk2PF4o;
+ spf=pass (domain: navimatix.de, ip: 52.101.69.112, mailfrom: joerg.sommer@navimatix.de)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L2NJqTnbbpORN6jSduRx9yq6EvQHNq6xBbqi7MvsFd8X0B5dgQYrtyxwrFceHqY6nN2RkuVe2e0FjhfzjbPqw4UdHgmivj/0p1yZjy0bvqDv7/mr2vp+TpQuT/n68EdNwNvGJkURkAShWGKJdvdkAyiHrOeVXw561rVUcKQCWxd00sy3nKcnOgBTzHd2VRN1LXR5qTzBrE6lytbnZdjOj3ymQRLo169vC56AbhZJrm/a/E2kdZlJwKMvxrvJr3x94kiUD6/d8oa3K2d6sQi1r3OxVC/w9Yn5ZSUYkuGNTaBZXfhBkiF0kETCnor/mA/kHLFnTfkQZCtAgoAWDCZi4w==
+ b=OaO1jlx9Kf7Hs+o6VACkq5c7j0TQTlf0XjSJnCRcWTap7Z5O/rBXkQjEe61mvzMZo+rTt+ONQbAa81M0HBp318Ito87KbjfjIy2LiebBresqqWqZMwaiBoFKI+ccdrgcfosXTMi/ZTGId8vq4oOkTcmgieLjpXjsgZQTQxCo5pDZvozQMQJa0ZzP0Gs+gScXzEGlR8jco1N2efhZLjVCNmyhqxTGpOZfSRjl0WOumZvjH0Q4w4rK/0txyFf24Qn1mNtrE/Y8QnfKQ+6/5vYwbmfuwGEHqbfdqFuVrp31WJfpcBTQZn1q2dCaOU7DA13XWSmYVfUlbHy1kfjeNFOhzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DytG8G0NVfaeZ75NoKM0HSQ3uJKsYW3QlxdotkJfNR0=;
- b=P45051FGy2RfEyJKYscYoj9/OpBkH4JsEMp0L2nBe51GqffQZTZJADl5tASLc83sUrKQyQ0JXm+DNchlB0+kjIO0o33hQcjx4zoG8252X1Q2pnBzWVFgWdleIEqLrqzW4ZRnXZyNCO//IK/mh4pl73y1Vn5xaf+qdJAEzsqvv+20sWz9Nd27lm4mNxMF1xZgM1Yz6O3FtbDY7wHthYJyVzOGbG6lSCnZjqsJU3eXmZjtc1cx8nRPe8hnjdwggHny9QL2YTUf76agLde608Brvyk49Qt8QyFHlpkd5B3HIBRFa0LYQ+6dYAbeZD1fI66MWVTKBuVedH+hOgtHFE8Tww==
+ bh=nMF0qT+bcDyq5kGxnO2i56VDL9vF3OLUk/GZqh7KTPM=;
+ b=l2hT+TYKQTrDnoDPjl4s0Hy7gVrtKgYJkMu/PISoWv4qEduGMn4qujIFjRX5rxDZR1J2H1+IJ57Nj06cAM4tI6xEdPcSBJET+mXNQnCsrQjiqKFa4e7AneOKsW5O/ndjvRVPj8vFnEGXb7eVF2DOvpXWs6LMNgrzRq7pBrfH6JVxFWdCNQr5gUBDdkPyhirSiu7JC8MJTSk7bDAQDFlLWuMvg4oStMHD1r0cgFhFwWkVa4Y0Re5RLfxswMtowJv/vZeIXzh7+zhT3tZnwzdgNpPJqRSO5Vt08BpDERHEuyQ7kzC3zCru7imWGPrToXPpci061+dxpWyjuEPD6lcTuw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
  dkim=pass header.d=navimatix.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DytG8G0NVfaeZ75NoKM0HSQ3uJKsYW3QlxdotkJfNR0=;
- b=wdMmR367TuUUai8QcAdO67W3NuRAkn75SMntvd7E9PsORkrvvYA3DiQHt+61CBnSytKK37jtXYeJFAXN52V4nmUcK+tDCn9jPwM17hOWyi7eEgHgL50Cdq3u0QdwclB75QchL1NjA/0D6oZtOn8sjSMgbflklJo0ykOehfMdF9U=
+ bh=nMF0qT+bcDyq5kGxnO2i56VDL9vF3OLUk/GZqh7KTPM=;
+ b=mLk2PF4oCsoEY5aG3k2C4yAT2hTqfnUoBlEla1BJ5LNLdvtGwQ5VOXb2pzroKJkXQElPBp9JWOzJssQA+puMKT9Q3YuZq+i2o842eO0T48HjJaQG9teBcI+aqm0D5paVIdu3yyEV8hng01P8x19h+hAHgkzrsNYBi2h+Sn7uv4Q=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=navimatix.de;
 Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by MATPR01MB12568.eurprd01.prod.exchangelabs.com
- (2603:10a6:250:4b::11) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:150:2cb::8) by AM8PR01MB7761.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:236::10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.19; Sun, 15 Mar
- 2026 07:41:33 +0000
+ 2026 07:47:56 +0000
 Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
  ([fe80::d5c3:2dea:3d98:25fd]) by
  GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.20.9700.018; Sun, 15 Mar 2026 07:41:18 +0000
-Date: Sun, 15 Mar 2026 08:41:24 +0100
+ with mapi id 15.20.9700.018; Sun, 15 Mar 2026 07:48:05 +0000
+Date: Sun, 15 Mar 2026 08:48:11 +0100
 From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, ankur.tyagi85@gmail.com, 
-	joerg.sommer@navimatix.de
-CC: ankur.tyagi85@gmail.com, 
-	=?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH v2] multimedia/fswebcam: New recipe for a webcam image grabber
-Message-ID: <ff39c456c34a262e291c78f44bd63c061cdfaa25.1773560429.git.joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH v2] ncdu: New recipe for ncurses disk usage
+Message-ID: <dcd2ca2774db611a05497dcb7f5879d45c7bef8a.1773560854.git.joerg.sommer@navimatix.de>
 X-Mailer: git-send-email 2.53.0
-References: <CADySD0HOEst_1e+s_FgULQ_TJmh7B3Cj+nS9tR5f3u0q4Ec37g@mail.gmail.com>
+References: <189CB7A6BFC4DA99.2629287@lists.openembedded.org>
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <CADySD0HOEst_1e+s_FgULQ_TJmh7B3Cj+nS9tR5f3u0q4Ec37g@mail.gmail.com>
-X-ClientProxiedBy: BE1P281CA0404.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:83::29) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+In-Reply-To: <189CB7A6BFC4DA99.2629287@lists.openembedded.org>
+X-ClientProxiedBy: BE1P281CA0280.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:84::20) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
  (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|MATPR01MB12568:EE_
-X-MS-Office365-Filtering-Correlation-Id: 023178de-6e63-4acb-f12c-08de82663e9f
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|AM8PR01MB7761:EE_
+X-MS-Office365-Filtering-Correlation-Id: bd1eb4fe-932f-4b55-5691-08de826730fd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|366016|18002099003|56012099003|22082099003;
+	BCL:0;ARA:13230040|366016|376014|1800799024|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	Pxltjol3FM8lCsKpGg9RpU9Y9VQGGRQaKqxMKeYJV/JqkyZvvL7r75W2Bizv68ONFkyP++JyklIy5dW1cQtdIZRddixP0xFG/0uWsTJJI+RgNNo7t9OThRvMs9aL+ASN9sx/Vtmz8a49t/X3FLVsQC11wAZ749quPAGVoVVSS2mHTYC9OMpULRBP+irwf6axrG61iyuza/eDxyl4hO9zqo1SvwhL1a0NNcjkc0qK3SyfmrhiAWn05gRtMexxlcW+4g9tiMxurrbcmdgiNBl7ewW+5JnaRJqRg7J5E4Gjl1WJAVZHT0wy40JMkspekpPUP3HAuJo1KFOZG7f/2j6xdhzPnXagr9KrmN9U99eikJ5m+oLRNqw/ph7+WikN8g4lCZOz3M45fuqrMbPX7o6Noo6/aicK27gdsz6zWXHH4yv83O2KD0WkP/WvITSfQZK7ZDLvapLegcTu61FAPBUPMFs71o0wszyva6rd6UJVZSCV1b7C2D4xsfSViQxFR4PV/IbBpiEbUfN2NHcMTWrizm8CQMnjltp3q1IuPP298VvwXzWheZPYv6Nvm1wKVhWwaIRoiY5NK06QPVi/NI1TICtTj2cHxbntRQKncnLUvonaQxC3aFon8uQMw5fftwE6Zx2bhPSXYcqSrATXqsKZD1RYwvf4aLxDxfYjs/qcLDyzF0KPya7jxL6TKa3hDpcz
+	nZSgBP4NQ54QsqiWbkORpkur4jbt5AO/bC1Hv+xzxfuFZO7PV83v75p/mKBA9hYYl/NvMf7a9gfvc5MoLEKRk7x8YnTQPF7i7XklIKJKZh+OLbjuZCbB7HS9flga7Tj7TdN6lq4b68iOtqKD1lS26ZZhiYHhygZyurNQmoj89G9F2dsSUlaq4MUNRVVz7MvJnE76UZ6oS7teRwHGh8CWPP620qBZ404kBzn8aXNptEFnBNGv5aySEnah3g55QD0j3A3wlLpGv40TYlVTUSZWNEdAVuJYiwphpS3NT3C7s2Gsdt+p879uCAzuQ5etXLwsh2lKwvLCN5XQd15vjOiFcTKwXasbuqq/Acj55sc4tuBKQhlVOnmEtrUNqLEfLfgXpRf+h2w2wyP/ENv0KbvXHsuj8TLNRKsFIcBoAX38/0Wk9oxxAIKk2QjvL53J/a0P2p6ROk2+ruUFh0ZiHrvQfJenwX2wGWUCwelnVCsGee1KerBbC61bYX3vFNOv/OaQu+9K3jkxSoBWXyMefX6qqWxvpwUDZTUofd5213VBidMA0IHJifiGCaT79GBh0gpK3gLHDkPfyEjsjDIaBUj3EnZh7B6f/JuG8u0zL+x1UH+JmUOvbVTLK+3N05t3ugbJ1MIuvwT9jz87qOttcpNI4+as5Um9d5UuzmpAHMEzysvvarRGZC1yiyyf9mYI94ci
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?kkS7lEM8tggm4xy3vlh6qZ0yoClllFiOsgV+9npX8vidCk4VEJpzd5Arwwty?=
- =?us-ascii?Q?XZD/3W0MYZ8FtbqJEigOAUjRZlyuQu5ZK+IOjzgqD3qTtROKiYjxs2ZL7O9P?=
- =?us-ascii?Q?4+5SAhVJYS1QRZ3Pwm0kAlV6eBCn8WU+tIQYCBWdNSreQ64kEmUsHEmFhJuA?=
- =?us-ascii?Q?lR0oMqWRlssAhHPo4JQAURmk7qFGEDkOh7o+NKB0EaQbX0jX5uLq0XMJQkai?=
- =?us-ascii?Q?MFv+XFuRczzsgCtDrHhS5ocfxHb1uRUwxz5GV+sTMFVT+/0zBnZBmkv/gN3N?=
- =?us-ascii?Q?iEKCEMHbxb/UXBkAdS3iOXUJbXmwSK9hr2rNVL+1EPOXubjPtZtGcNM14oe7?=
- =?us-ascii?Q?oHoIULKcW5kPPHsUJD+CkzoYxETj/E734RFWQ+s+mnNavI+thMXZyE3vfTvh?=
- =?us-ascii?Q?iGqpsgMSLFdPwJYUPSbrayciKOpcl1WH7I93W0h/JozoMWaLfZ8Lw1fUMawm?=
- =?us-ascii?Q?hiwuHgrNmA2lpXx33KWiuQ1nPh1eLME/0Ep+sa4LG1KI53RusYaM3ygFnUHX?=
- =?us-ascii?Q?WNaXlj6qaENppFCDVmg7gKP4JJnIctuVKVeXqEmlTVvIueTAcW+sAT3rTd6Z?=
- =?us-ascii?Q?uOLL0rufRD0er4VylhcAVGWct5IavRz3/a/cWtEKkiJbK9+jfyw/8uiCjAmV?=
- =?us-ascii?Q?gW8ABlqtTKetZ/R4YXmLZoRKP+W8PbeoDV9b6fNjo9iRKpwtV0QM+pi6Eh3S?=
- =?us-ascii?Q?1tAglmFSy4rSyL5vrbCkI0lERHtPyqevtcBMJQ6DCswGQbrDLbU88pmrY7bp?=
- =?us-ascii?Q?x8/BZ5kWsPFHt5pnGT+FiFtdfU45c91ran5170rIF4TzqEEhlBSgiLrZBTB5?=
- =?us-ascii?Q?0Z2/EXeuk71fDqwyxxy0csS6V0Rt/nIf0KRSi7uYTUuE1F7Ka9MMH95FcHp0?=
- =?us-ascii?Q?q8YCK4GfeCXkXQYnJufufNynuYyTUU75yZMHTGG5MZu9dtls9IvqLvkXPxgY?=
- =?us-ascii?Q?jXe+eYXMg73P4zGH2gKEwmPxcS83TOr4OuF/xPCgyWZzRRrAPPNF8BMOpdeO?=
- =?us-ascii?Q?LnzSgoPVyXMtOpKI25mS0bNtrjbROALYRlj/ZuZrg8xIfGHoNa2BFOEU/twa?=
- =?us-ascii?Q?uYjOWHAL8I2k7NtbvanEeQ9iJyeXB5Ych8hKJnZRccod2jmlhYZwzXagOe6f?=
- =?us-ascii?Q?qAA109EHsrCCNkwJ6+wF1iD7ZiMcvUaV3Uj0QGTzgffHv66UdbzVpHyndXpp?=
- =?us-ascii?Q?cqYDYltwO/q1llzX3R8C/7P1urrcYqh0O05rm9Z7kJpTNYAWusdtpOfmAJr6?=
- =?us-ascii?Q?s/Xskb16B4KPoUurf95jQ8o9Rjh0HgrgM9mvSfxn+I+PGjIoRgrWVeY+MSa1?=
- =?us-ascii?Q?qoa9dawjmkeZQcLwIezXIiVzrHk6gB26I6SqE1mph30cvsQvscnrYOMod7GH?=
- =?us-ascii?Q?Tqx+4HuxS3VJEKcvEa80F7NN8V4pKYwKHTp2jxOmc1Y5Vsud79RU26cHKXDp?=
- =?us-ascii?Q?GMfehbdhoPFTPnm9ahp5U58z9eniXlunLnyIh6Gph0K5goF6p1vS2arfoZVM?=
- =?us-ascii?Q?rCUNE+vnsx90+3N2P+bcGclmLry4x/BxI8PaNLVybFlinbwhuknSU7aKrTVS?=
- =?us-ascii?Q?m1dyXleyHEJqSYkjXYEYjjleobj3EJJGQ6sF56VOyNZysI1faJ6D2nnA5s2O?=
- =?us-ascii?Q?vo3id1o6iYkeMLB/BhfgXc434hzw3qLH50KfZTk/h49VkbvNYcm1llZh2AnQ?=
- =?us-ascii?Q?fkDdbtfvEV6D1VNF8mAZfK5N0N0QRrGnm2ZRWdfkf3JCVGlXAjJFtBMzfDuG?=
- =?us-ascii?Q?l08uQgFlg3yoZ6kDWETHHziX5SJuGcM=3D?=
+	=?us-ascii?Q?f8rJrFnrrz2gs9nrmO3CBr9kVVdet93Qv0KSxwQRMlN7fsL/IwJ4KBT9Ijmk?=
+ =?us-ascii?Q?4ZDqfbRhPZ62ieBsIi/6WwWhpifGFk4DeIoaw05W81KDAs8WoINQOt0Y7PjR?=
+ =?us-ascii?Q?yyhUb0PU1urVa3MvOLUCiVwopTwZbTYYZ1RSPTAJxWYiISG0ptvL4T18eli6?=
+ =?us-ascii?Q?vY3kpvgUo/mfQp8attjzTPVCoHfVbyUjIWEgoLvfG4BKevO+LxCHAZoPFlL7?=
+ =?us-ascii?Q?tNPFdJy3Bm/Ku55Gtxr5P/0PR8iPSNO+9/gwuk4whD20zw/uD1+xPnWqvblY?=
+ =?us-ascii?Q?06oOROF0iEFZIWNeGEMOiS/RNFLgNKSwsy9lgVYuuQ9Fbpoy9YQNUi6owDee?=
+ =?us-ascii?Q?dlTz43NmTUo1PH7OzWhEJli2E1+EMXmAFYk8Rh7B7xp+SclNnB42vcFO4R1M?=
+ =?us-ascii?Q?S8Kz6rZp9KweHefEjj9C3NuDSdIoWbPXRvDlo+iXyiYqxlCVm7LQk/mZEHkr?=
+ =?us-ascii?Q?IhNShayfoZ+/3soj5Rd+TiBFgxBKW5z3vQaSIsCwxFeeO++FyAb9qfUoP2A7?=
+ =?us-ascii?Q?hP59z2nTJnwYi80rGXNwtzY18NKsRJFWwYwni3vegT5k3zBIxJUE87ELelYN?=
+ =?us-ascii?Q?a9mAMmNn/3YsVeN9jGLXy+tF+v6ogIqt0APaTE57KDNBDxlxb3ALMYY7A79t?=
+ =?us-ascii?Q?RRZEihFUTpme/1W/tYRHBqu/fyFlcF820Xu3vfvdmUA9y4JT7wviI49U4Fpr?=
+ =?us-ascii?Q?O4PIvgu+XFN95FhdGfhd9c+vERIWfQS41Y0uDIVGYE/ZR2xdLjvfNdP38htZ?=
+ =?us-ascii?Q?7rBaaFtVT9RKZll5bqmqsvK8DBY8PtlKlb7vK1Rn5K26dDtCUSYJu03y28Vh?=
+ =?us-ascii?Q?lmjQRYQaSCIM4Wz0g548oeobv9lYbOtcGu+KfplgOuow4aWUUT6iVEFJiItn?=
+ =?us-ascii?Q?WuLmemXz0D4SRxvDMEG+mLUJE04WwC1KMuC/My2TOLJN0eR8j58tJolFPCNQ?=
+ =?us-ascii?Q?hpznO4deHySWN3X3EyzErWg2Hx5t0dicD36LVvTYcQloPZs/ikm+4n0mpP+j?=
+ =?us-ascii?Q?93pBhf5zKDyMhYDqEp5Stz9Qu3D1jPg/mpwdBcyObjb8tx8NC6wiKDxvAoQj?=
+ =?us-ascii?Q?9mEWnBMSmW9frGYE5ThsdOkL1mOncTvSvpT08+s/6A2f9lvO/dwUH/JIz++r?=
+ =?us-ascii?Q?SFx1/UGrDcxmdt7ikohxQoS4hlKsRAh6aVC6tgOt/85mQi5R8RoV6FHKQVph?=
+ =?us-ascii?Q?IdxEeWVFyXrKk/JrN8DjtgEdq+kBn7qjmNr7V8Jf2FrNLHBclV9F0aYjLmMi?=
+ =?us-ascii?Q?Dh87L+8x4UVa7MsvbzJhz1FZDat1RqPg1FLRdCAdLQbVPPX7RsqVSS8dfLyj?=
+ =?us-ascii?Q?c0v12O0MRqRieDgMUioBPGP/aHXM+EsuQkzLPJTVsxniZVM8LeZY6N+Qkr5u?=
+ =?us-ascii?Q?pT19TYuvY+BzS8CbWIC/O+ieqOiV1g+Wo5nEy9TIwK9IEuooQ/iArXgf4LWH?=
+ =?us-ascii?Q?5D8VNzgJiAI0qfj7VukiqOafdVM0GQLti0QOO5APBhwdjz4dMuGKXsZ78+yi?=
+ =?us-ascii?Q?IbmTzhShPnLcX3CvaQW5kJy9DY2SS4g8kKHmJxw8Y6cEO4GuU4p62peOAX3G?=
+ =?us-ascii?Q?io9iYOvD4tWkMYM0dEUflwLnLLApknugCHTNG/JpFkal3F6o4AoY6+YteeiE?=
+ =?us-ascii?Q?XIsDs6ozK+fcGsx8+8H1lVK6Sq5j/LHtsg87sbVOAdW1USXGALzxCSvUzSCJ?=
+ =?us-ascii?Q?E2x2O2/o1VmYhF+XcuhtQo7U0cUSV4nQKua98voItyyv0Sao9f8tBEp3mR6+?=
+ =?us-ascii?Q?yzziOktaTEfFhU/PdsSReKtei6r2r6A=3D?=
 X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 023178de-6e63-4acb-f12c-08de82663e9f
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd1eb4fe-932f-4b55-5691-08de826730fd
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2026 07:41:18.3977
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2026 07:48:05.2288
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EhZgN/jaHNVrQjFKihkFQJInP+oQg0/8ibtRPhv6t6k8JBZyRci/9ydUjddx9FJahnQevq8Ts22Mpe/oWGrpbABN2ooas4vGvMJJHU5uxh0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MATPR01MB12568
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4TIxWVYkOIeleIqSedM/oRDka+UwPT/imQ7Px2g1pnmyMEAqzTPHZ5Ww/XBLPFwQp0YPRUSVVzHy4rYUulqd92bQqfPyT2NHDWQ+v3clLcs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR01MB7761
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 07:41:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125216
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Mar 2026 07:48:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125217
 
 From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-Taken from
-https://github.com/linux4sam/meta-atmel/blob/master/recipes-multimedia/fswe=
-bcam/fswebcam_git.bb
-and amended.
-
 Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
-Changes since v1:
+Changes since v1:                                                          =
+                                                                           =
+        =20
+                                                                           =
+                                                                           =
+        =20
+  * added tag=3Dv${PV} to SRC_URI                                          =
+                                                                           =
+           =20
 
-  * added tag=3D${PV} to SRC_URI
+ meta-oe/recipes-support/ncdu/ncdu_1.22.bb | 25 +++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ncdu/ncdu_1.22.bb
 
- .../fswebcam/fswebcam_20200725.bb             | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20=
-200725.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.=
-bb b/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.bb
+diff --git a/meta-oe/recipes-support/ncdu/ncdu_1.22.bb b/meta-oe/recipes-su=
+pport/ncdu/ncdu_1.22.bb
 new file mode 100644
-index 0000000000..bdda35df40
+index 0000000000..578ae4a5ed
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.bb
-@@ -0,0 +1,21 @@
-+SUMMARY =3D "Webcam image grabber and manipulation application"
++++ b/meta-oe/recipes-support/ncdu/ncdu_1.22.bb
+@@ -0,0 +1,25 @@
++SUMMARY =3D "NCurses Disk Usage"
 +DESCRIPTION =3D "\
-+    fswebcam captures images from a V4L1/V4L2 compatible device or file, \
-+    averages them to reduce noise and draws a caption using the GD Graphic=
-s \
-+    Library which also handles compressing the image to PNG or JPEG. The \
-+    resulting image is saved to a file or sent to stdio where it can be pi=
-ped \
-+    to something like ncftpput or scp. \
++    ncdu is a curses-based version of the well-known 'du', and provides a =
+\
++    fast way to see what directories are using your disk space. \
 +"
-+HOMEPAGE =3D "http://www.sanslogic.co.uk/fswebcam/"
-+BUGTRACKER =3D "https://codeberg.org/fsphil/fswebcam/issues"
-+SECTION =3D "graphics"
++HOMEPAGE =3D "https://dev.yorhel.nl/ncdu"
++BUGTRACKER =3D "https://code.blicky.net/yorhel/ncdu/issues"
++SECTION =3D "console/utils"
 +
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D393a5ca445f6965873eca0259a17f83=
++LICENSE =3D "MIT"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfd36a36514d73885d04105f000da981=
 3"
 +
-+DEPENDS =3D "gd"
++DEPENDS +=3D "ncurses"
 +
-+SRC_URI =3D "git://github.com/fsphil/fswebcam.git;protocol=3Dhttps;branch=
-=3Dmaster;tag=3D${PV}"
-+SRCREV =3D "db35d4bbd336885a44f017ff142bc9523dbdce3c"
++SRC_URI +=3D "git://code.blicky.net/yorhel/ncdu.git;protocol=3Dhttps;branc=
+h=3Dmaster;tag=3Dv${PV}"
++SRCREV =3D "7a1437389691c4adf1999afce63850c808602f08"
 +
-+inherit autotools-brokensep
++inherit autotools pkgconfig
++
++PACKAGECONFIG ?=3D "largefile ncursesw year2038"
++
++PACKAGECONFIG[largefile] =3D "--enable-largefile,--disable-largefile"
++PACKAGECONFIG[ncurses] =3D "--with-ncurses,--without-ncurses"
++PACKAGECONFIG[ncursesw] =3D "--with-ncursesw,--without-ncursesw"
++PACKAGECONFIG[year2038] =3D "--enable-year2038,--disable-year2038"
 --=20
 2.53.0
 
