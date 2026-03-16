@@ -2,100 +2,103 @@ Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF2E0FB5E86
-	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 22:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3DD6FB5E87
+	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 22:51:02 +0000 (UTC)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.63965.1773701451587348890
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.63805.1773701452991977757
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Mar 2026 15:50:51 -0700
+ Mon, 16 Mar 2026 15:50:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=T+21TZYG;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=bUanGiYA;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=mazKdhkS;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=BO6B1hHf;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
 Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62GECKGU1639186
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:50:51 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62GECTL71639402
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:50:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=/lFKIsmwQ3W1i8vXf0S4F2SRTOrNzD/jCKO
-	yrDgD43M=; b=T+21TZYG85704XKfxQT2ggdGoerVyObceidy7JTjxgzzdrP+ZAo
-	oEs7y7MD/AYy/AJO6FziLYBRiWzlb69UxQTU35YBCLL491HnDnpv8IqwNcGKVhC/
-	nVCewOTEcQHsZXLk9eb8FUbrd2PNp6YC5cqFV6FOaO3Xi6ySjG7K00es6J8PYi4e
-	Rpl7Jxj1pGkKG9jXd/L9ZoO4rIwcxnWzS+CTtDbQ25GK44ghZWIuldRVTp/C9/Lx
-	Kv3RekbmNCPR49MvQ9FmKw2l+CSvimq1kWQ5Jov8oiYiC+DK4YQ0NaMlcdnUYlCg
-	lJFa5cf9sNjD+WBW17r5BwAfVeZkj3yGvFA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cxke09psb-1
+	content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=afreQeZlaKv
+	vuvcy0fu7gBq2Y8K0td71Snktlskb0Bs=; b=mazKdhkSw/bYR4ZcuNP/mlVu2DY
+	Fc5UeHr08me24XsSkoFDq0FDExu1vS10yMVNyNRhTCcIvrFTPsXR3DOoxt8YZCN5
+	LOsNYJQ2+e0fSMUubfz7RRmLqRsis723erOjaoNYxMdaO0F71zuJI+vwwm5UekKM
+	JLIWvASwWvBintPykDX5cEUGP4d0veOGcToaQaWLtRF+9kndj53Pa0iu4YjNZU9z
+	OabCz6TRsz3ttrROxPLqe+u9w5+lvWZIG/xD01qk6El9Xb7CNi6cLzuuU/3zsgho
+	+IDducSqKGtCbKII9QYx0k+IRioan7nefllrBEsx3zd1jCfakBmoPw5Be/g==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cxke09psd-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:50:51 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8cd8b37d4b2so361926385a.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 15:50:50 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:50:52 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-8cb52a9c0eeso5309219785a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 15:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1773701450; x=1774306250; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/lFKIsmwQ3W1i8vXf0S4F2SRTOrNzD/jCKOyrDgD43M=;
-        b=bUanGiYA5yGUO0WeaMeYCm32j/Fmqa/hT2DMcgpwmMgvKOiIfSM59WAUPrq2CCVUjH
-         LmX9VVr3J6TDuFHEvguANYNKho97c7SpfIa8mAh3mRgdrPFlpcHhl1pb34z1LbAzSmhY
-         SJAXE48+JDQnucTo7zXeK4YfMw0R7M+y5RZ2wjRhZHpRQpKcP4l4tAFXygD8POi5cmua
-         mbKDkEm1eZmFKfwbhwF05WyOYkeiFvIEsaGJSOhU8OC9Zt1k3p4iF2ZHtdm8lSA21StC
-         498TACbfns0las6Xa4Z0GH8kVkNxowaPESPvl1CBO24BFa4eCc80AX5u28mr6wMvggfg
-         TqEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773701450; x=1774306250;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1773701451; x=1774306251; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/lFKIsmwQ3W1i8vXf0S4F2SRTOrNzD/jCKOyrDgD43M=;
-        b=L1AZpRfi7PcWfY/ORf4aNLW8B50uMz5ioTmSLBKxShcTzJQ6faRckFJNjk7GFJskGl
-         dLPdmzO389geUtNeUUtsWl/mZrv47vLcexcnK/szy6sReJKyTBC3X1aiP3fwjyU7skPH
-         i1PB7QW+al1npPkyV57aH7q0Zs03K8F2zOX5rYnyjP8PxRQxodTVJOc+9IzI66F6Y1v9
-         wWulmXK18vMVtGzvSPbFRqLub+Yjcw+wRmfWgcxCkUOjTWbHxKV6MeWArUxS4WSmbeQL
-         Gm83Qi+fJ2K2P5GXJpbw1pYKH6ZDDBxRaQhpz3UxehTYBQ4+UTaCZRP/auqmiOuCLnie
-         2ILA==
-X-Gm-Message-State: AOJu0Yw0nBouy4SmDO06G1o9x5quYCicQwI91GRg4n4Qegx1R0ALmEgQ
-	t8HBMrM+/9+vlTK9N+l6NMmGsCZTUipTk9l3giLiKM6iOfRMA+EjzqxmDVIaaHjiNH+NsdmpH/i
-	hCtsVPDSfZHre3EqWaeanPEM6afrbxY+mvz4GV+WP0ZxpEa09boHuM7gqzESXmtf4hfudlJ9Sok
-	wkFpbnuiPIcFFh3zcA
-X-Gm-Gg: ATEYQzzkN6re4MrS9HKm5YKsGUTlmJ7zyg/et4D7xj86yGugXI8g+WY/dR/+6DX8Dr9
-	cExlM9/OE97xKwbC3i/6yBDw5qcOMF8/p+BYrWnil+Y2TBDfU6q8kmetr1C7TsEAqRzN7WbhH1+
-	+Zb/8QX0FYdfiHU7salbRIzcTfi3bc++nT1EHllMhJ32c2Xo7AxWgCGHRSHQfu2pNvdORsE08r0
-	GBOxbEQfy3sKv9Kqjo7TqXI3bzsLVVI/9RfdHTzIWuvCQUUPrTA30EchCwF83L1Vwc5Oeu9kGJE
-	3I88zRChrfHQHpz7/OZq0OGM1LEvdhjU2CcirYWcacU/G+CQWn3scBntkMXt+7MCoVMKQph1OzO
-	+eF5puCGyr9MHgW6R436+V/f+CJm9o2yUurc2KfWvpk6lLM9qCve/NoWYi4n3sMzS9++XfbwOdm
-	mofpi3NAL8+OVSsNcdisFeEg1L+qUL4iKmj54=
-X-Received: by 2002:a05:620a:4627:b0:8cd:827a:2abb with SMTP id af79cd13be357-8cdb5a683e0mr1899650185a.31.1773701449734;
-        Mon, 16 Mar 2026 15:50:49 -0700 (PDT)
-X-Received: by 2002:a05:620a:4627:b0:8cd:827a:2abb with SMTP id af79cd13be357-8cdb5a683e0mr1899648285a.31.1773701449239;
-        Mon, 16 Mar 2026 15:50:49 -0700 (PDT)
+        bh=afreQeZlaKvvuvcy0fu7gBq2Y8K0td71Snktlskb0Bs=;
+        b=BO6B1hHfAm5iV2N+Iwe1+DO2cvnkdO1wCBBiL/4OCqCUEAV7qguMZ4FYVYz5D/0KZq
+         G4b5LM9ok5p/AI1AJ6v1dHYcLgfLoJOQwgxqgd+7SRpOvoCn3cMsyu8Q50gb0qm2yRtS
+         058aP1Pq0gRjftx9X1HG8NFyRYuyX5sthlwVZK3pMD+/AfzSMIyag4uF0uGdV5X18Evw
+         8kyXA/rVbkRhFzmpNMZ6/kcNlHDOEMaa1bbjwlUZ2lyzRwpQKMgkFPjppw0PinvVC4qj
+         tdN6vq3fEqJKtyIXWWDDQalshlPdNu1fEm+UHCm5kekSihDJPcrJiey0y1vKMM5Rocps
+         OXfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773701451; x=1774306251;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=afreQeZlaKvvuvcy0fu7gBq2Y8K0td71Snktlskb0Bs=;
+        b=LMOqe9AOaBjcI023vz3tyncGi1U9lU5ka8YGhkicnY3KpiOynWmbOavzz1n++tBscU
+         n6M4oR7OxsIw76OKMN+N4OameJD9QyCjtIWB1rysyNE3xA474cnoBF+YWSbDSr1OWrz3
+         vkbkNPfZdxZIUHddaQje5+dHVYKFtK17hF4byGURnWViLy4xiv8SyTC7yV2f89tpV4wp
+         LA4tpGr84Elcax3IOEUJluMnqNP9mTt6U4mscrRKWfbTfvLj7KgbqvJRksgDZzD03Ogv
+         95mA0krLzcM8nNVf4IcA8BDfvdjAdfjOpv5w0imsVcn5a9TQaC88TRb+VoO51WutK36u
+         KeYg==
+X-Gm-Message-State: AOJu0YzRc39p/tW8J1ogzWl5vrgn1Jo3Ok7oC/NBtLwHAIN7QGvPdImK
+	kgHiDQdqTleAPfm0SMc/LjIrEhObhiD7o5B+IFYPMwqmcC2dCSfZaQao+tvVZm6fQWODEvyIjA+
+	hjTQZXG0vaGrl4KlVkwfbahb9FzMGW9+fCbSBs1IIzkPfh2cmKNaBquZRtmLqZXCos4SYh9IBQb
+	j41Uq2sKD1xlH1vTTK
+X-Gm-Gg: ATEYQzw2I5z4fVimc22y7FjigBeqnjN8saPDE/rSSau73GZy8ashsUMTH/Cl2iqjYJD
+	NCs/fmPmVdzB+yVwpVZ5VApdOJsLHi2R1P0p3JmyKLa7AWgihEqZm1F5zbTO2lsA018u+sSSUMX
+	q/hQ6OOg5WponWAUxzBpgk284xakEda1gMq8h39+V8bwWJXGpL/U5+JmV6B4WWGxMt+uQ/0p221
+	KM2jdDFUJcXtVKaNEMZrTAHybkM1l4D4gnhOVbILEoftRX3Ib0slN6TY+uvYwf5TFAVHV7yk9vJ
+	MRoIyw8bjzfDp0ba0c2ylWREuJmo3uYW5YC78tHBSmmyCohJQbJyyCd0o8ni0UITU5uImPDZjlG
+	T7OQ/5t41lI6vOQX4q/KoEjLz47TC96uOu8wq68R1AABdNKlMR02iQ08PDNpggFhZ5AynG92WTC
+	anzIoB0es/cW/MHBasfDjBD877zGSnbxPrEsk=
+X-Received: by 2002:a05:620a:f0c:b0:8cd:8569:b945 with SMTP id af79cd13be357-8cdb5a00c6amr1958021185a.13.1773701451219;
+        Mon, 16 Mar 2026 15:50:51 -0700 (PDT)
+X-Received: by 2002:a05:620a:f0c:b0:8cd:8569:b945 with SMTP id af79cd13be357-8cdb5a00c6amr1958018085a.13.1773701450639;
+        Mon, 16 Mar 2026 15:50:50 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a156162dcesm3689499e87.58.2026.03.16.15.50.48
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a156162dcesm3689499e87.58.2026.03.16.15.50.49
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Mar 2026 15:50:48 -0700 (PDT)
+        Mon, 16 Mar 2026 15:50:49 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/2] vulkan-cts: upgrade 1.4.5.1 -> 1.4.5.2
-Date: Tue, 17 Mar 2026 00:50:46 +0200
-Message-ID: <20260316225047.1540453-1-dmitry.baryshkov@oss.qualcomm.com>
+Subject: [meta-oe][PATCH 2/2] opengl-es-cts: upgrade 3.2.13.0 -> 3.2.14.0
+Date: Tue, 17 Mar 2026 00:50:47 +0200
+Message-ID: <20260316225047.1540453-2-dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260316225047.1540453-1-dmitry.baryshkov@oss.qualcomm.com>
+References: <20260316225047.1540453-1-dmitry.baryshkov@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: VgDd2F38yLBbwP6XqC6dDOZQm-Eb6czB
-X-Authority-Analysis: v=2.4 cv=aue/yCZV c=1 sm=1 tr=0 ts=69b8894b cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10
+X-Proofpoint-ORIG-GUID: AWLWqRHxWjf_lYxjNgA9ZxVst9hYHlN8
+X-Authority-Analysis: v=2.4 cv=aue/yCZV c=1 sm=1 tr=0 ts=69b8894c cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=PU7NgQ_sEuaNWWYYBg4A:9
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE2MDE4OCBTYWx0ZWRfX2p2+nDw9ZAiY
- oUgI9vKG/F2UGu+fQasJkU5id4uZdq4R4cgG+freWGsIPMfbcelgF+6A5moSfBXYoblqbbtvQnY
- LIwQuh2YiVepFtvS57UX8xI/SbxvgenEQkPBM+9wqX2TI8XeqgDBRCw63Y5393CJ60t5ts6Rai0
- xeZ2S51/STBO7OLFzx4kqTp0rE9Mv4M7UDB37a5/UY/IVlbdTtzrNewJBZ58PDoc+ff6Ni8qufM
- 5grbQzbRzVPcrjVV8G4d9QkrzcAwVMAtY4ibIFQDFQLGixmPnKyHzOK5dX0WkXWf71h4kxzRFCb
- jRQpf4MiPiUg2lvsQ6Qpp0TA6SDbMnQhDrHrjPEw4PUEwjByO33bSg0AhVwXJVa6uJ+TIvsT+3Q
- 6RYn+VVa7zmADeYTyn9j2wAYw+ieEd9w0sqLvaNCFrKxetKSRS2SIw0hBojXit+gf0y2DSMt2/S
- BVvkqH6i7DlA2LL8YNQ==
-X-Proofpoint-GUID: VgDd2F38yLBbwP6XqC6dDOZQm-Eb6czB
+ a=eoimf2acIAo5FJnRuUoq:22 a=JTEwExm7AAAA:20 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8
+ a=QZPcp7hBSQk4G4yxMJkA:9 a=NFOGd7dJGGMPyQGDc5-O:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE2MDE4OCBTYWx0ZWRfX98A9KmaNKpj7
+ SSLRk3oClnAqmm5LNyUg8GF4J3/1imnWtlc6CvcG9YNvrx6iXQV89EoC5MFZ2GrCOY7FGm2X0MW
+ H88k9QctcxwLnsQelmni5bsBFY8BbQffBuPnXclmG6OEqnppIqiXxkt+rh69MfaEbeF9wz6mJ7S
+ vmPBb5SQd+4/ep/Jgp3GJO7Agc5bw8WqNz+l4Zs+JcR6GXPc8ItLVulYQtyDoig4e6l2t7hHdLE
+ ilLUbV57soDjK8TzOz5rnd0zi3eFO7S6+iXHRpOBXIhuJ70q45FO1jqa0gaJVVqUkK4+HUUdPsq
+ Bh3UvK+bzKDRfk5XEJvMlvIE8NC7JwGzojL2RHv3MLvfE/hT8ypoanKMwAZUaEcsjye8u32rzWF
+ JtKu6Fk53L5jHmkocnLGFAwguR3p2bEwyhr6AXgrgiYj5PEpRzbfEKUYQR1cD1vjhSCWu86ZWBN
+ Pr7+NQzRpt9fBEKUBmA==
+X-Proofpoint-GUID: AWLWqRHxWjf_lYxjNgA9ZxVst9hYHlN8
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-16_06,2026-03-16_06,2025-10-01_01
@@ -107,46 +110,66 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:50:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125296
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 22:51:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125297
 
-Upgrade Vulkan CTS, fixing several small issues in the tests.
+Upgrade OpenGL ES CTS to the last release, mostly bringing up fixes for
+the existing tests.
 
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc       | 2 +-
- .../vk-gl-cts/{vulkan-cts_1.4.5.1.bb => vulkan-cts_1.4.5.2.bb}  | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.4.5.1.bb => vulkan-cts_1.4.5.2.bb} (92%)
+ .../vk-gl-cts/opengl-es-cts-sources.inc          | 16 ++++++++--------
+ ...cts_3.2.13.0.bb => opengl-es-cts_3.2.14.0.bb} |  2 +-
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-graphics/vk-gl-cts/{opengl-es-cts_3.2.13.0.bb => opengl-es-cts_3.2.14.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-index 52116c8ed724..6ebb9c18db91 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts-sources.inc
-@@ -6,7 +6,7 @@
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+index da4977ca2826..88eea63ba36d 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts-sources.inc
+@@ -6,19 +6,19 @@
  RECIPE_UPGRADE_EXTRA_TASKS += "do_refresh_srcuri"
  
  python __anonymous() {
--    if d.getVar("PV") != "1.4.5.1":
-+    if d.getVar("PV") != "1.4.5.2":
+-    if d.getVar("PV") != "3.2.13.0":
++    if d.getVar("PV") != "3.2.14.0":
          bb.warn("-sources.inc out of date, run refresh_srcuri task")
  }
  
-diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.2.bb
-similarity index 92%
-rename from meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb
-rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.2.bb
-index cd5a66fd9fc5..0dd78620fbf8 100644
---- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.1.bb
-+++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.4.5.2.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Vulkan CTS"
+ SRC_URI += " \
+     https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;sha256sum=e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e \
+-    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=6d43afe9a0ef71712d8cec5b0ce0cd3570d1fd41 \
+-    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=8e1494f9d742a27b54193ecd9475dcb2ef23b8b7 \
+-    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=9268f3057354a2cb65991ba5f38b16d81e803692 \
+-    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=ac3d0660c45ecf86b2952b298d125270228150d1 \
+-    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=68e4cdd8269c2af39aa16793c9089d1893eae972 \
+-    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=57ba1ca211b6f4890c013dcf42cb16069ae916dd \
++    git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;rev=65b2ace21293057714b7fa1e87bd764d3dcef305 \
++    git://github.com/KhronosGroup/glslang.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;rev=7881226269b1596feb604515743f528f02041375 \
++    git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;rev=babee77020ff82b571d723ce2c0262e2ec0ee3f1 \
++    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;rev=ac8223b312d40a6bc1733fb3490bdcdb5a389d50 \
++    git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-validationlayers/src;rev=0a11cf1257471c22b9e7d620ab48057fb2f53cf9 \
++    git://github.com/google/amber.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;rev=83c140b6f67f45220956b1971e83a53588b4c426 \
+     git://github.com/open-source-parsers/jsoncpp.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;rev=9059f5cad030ba11d37818847443a53918c327b1 \
+-    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=25f4401686c5b5ec726641f134b1989450e81027 \
++    git://github.com/KhronosGroup/Vulkan-Video-Samples.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-video-samples/src;rev=aaf915a0e08d679d1e8b835c30e6a346ab0c7ad2 \
+     git://github.com/Igalia/video_generator.git;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video_generator/src;rev=426300e12a5cc5d4676807039a1be237a2b68187 \
+ "
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.14.0.bb
+similarity index 94%
+rename from meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb
+rename to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.14.0.bb
+index cf01ce2491bf..2a98ba1bbb95 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.13.0.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.14.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "OpenGL CTS"
  
  require khronos-cts.inc
  
--SRCREV_vk-gl-cts = "7b7c6cda940bec82d1c5a8c39048728d9bd32f39"
-+SRCREV_vk-gl-cts = "a02761593aedeb1d3941ddd344ca35d7a2f9de46"
+-SRCREV_vk-gl-cts = "67ce2ed4a32658b6a80afc52dc4d2825cdfdda8a"
++SRCREV_vk-gl-cts = "ed5729a4e50de78f577cc043627aef93af8f16f6"
  
- require vulkan-cts-sources.inc
+ require opengl-es-cts-sources.inc
  
 -- 
 2.47.3
