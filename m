@@ -1,268 +1,186 @@
-Return-Path: <danismostlikely@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 181A9F53D8F
-	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 19:23:41 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.59268.1773689011257234414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23337F53D93
+	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 20:18:43 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.60561.1773692319744992233
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Mar 2026 12:23:31 -0700
+ Mon, 16 Mar 2026 13:18:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lraBCjOm;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: danismostlikely@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-64c9cabfe5dso85227d50.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 12:23:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iJ/x4oIb;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2ae4e538abdso54321425ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 13:18:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773689010; x=1774293810; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3n74CxiYVk5X74osmGXlYXsaKthHkCIsx2D9FP7rhHI=;
-        b=lraBCjOmQYg1b5f732nKsSvQXe+xT1FgvYQge8rgqguuL7RmZKwkOE9fC/cE0uZGlg
-         hfTy8AMCC80wn2DyuLzhQ0X2K5wzvWLcNnO+kfXOaXp9q7L12Qm4FtQWSON1zrEJuQik
-         70H5yjjdMAURYT8fu9Q/y5jj0pGjRXl9WVQv28KH6e7Anl7UNmbNqESpY6o4mj4pye54
-         1xCHYiNu9n8Oim0v5BayJFVJDfFqn2oPvGSHtKssriMWbJNbBK5hWTCmhGI3QpoQhV7P
-         +KOHIQthfayj4Y0M/ok77WOxjkLitd3+TP8hgjf2Uuz7fKqlmHhjhqxSg4+AryNpZFFT
-         iUOQ==
+        d=gmail.com; s=20230601; t=1773692319; x=1774297119; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=dUkHVgU3rQbzRjRLXmSZlTcxf8KvjBcbS6mS4mrChgo=;
+        b=iJ/x4oIbf1aQwXBM+ljoLkVujtO2mPmsD4zYUdb/Ndode8RbSfl3rikaV7FHPfPUPT
+         32YeC8CTJdEvCAYwDsG7mgtJ2BKV8STQ8upeVn0YceooYHk3nEW6m++jo6NpFB0nFd+5
+         7/hBAKrSqPD9I2H4oK9jpya5Qp11PcHZIsylo+rVrwbawgCOa6RWNSPE67FZd+UHFHtA
+         bh/zebbuAb2Z8l+OLWr4iGbMpsdZb8xe9UM05nAr/Kox56qcJntL2/YoTYZae6A8Mh2h
+         buDEERdAtBUArQ+VWcZq55Z2x4LNpXcbagTYJj8xPG6PE2DSnONCcSrpDDoMB/gG+90o
+         x9zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773689010; x=1774293810;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=3n74CxiYVk5X74osmGXlYXsaKthHkCIsx2D9FP7rhHI=;
-        b=aMGqlJrRITN1/QeDIkFXMan8LJZ+5eCi0T7n4K9kpcTgQ0ezHzeU8pvEnYBltT9qy7
-         VbHhMqo7WlUeFWxY8FmVHWrG/EgqEXkA3CN5KABx+PMvxgYgOqLbIImcz1r0s4Sme3cI
-         yuT47VTuwxeFbIO0+668Iwu7eP9tMtoG0y0SkqI1IaLUAraZZd0Y470DRPKjM76VW4Iw
-         8LuYGjwIyGlGtocwD1c00otlnGSIgh/GfPER3kCqLSW8rJJySTeeQkAavPy12darReWG
-         YonOOr3Ddh5FxmTPb1fnygMmtlJSa0TL+EeEzrXBGmsuyJw0TxiDY74Oi8ijIccr8Z2W
-         dInA==
-X-Gm-Message-State: AOJu0YxRFmby1qphyFfJSPZiHlwnEkRSmroTUw5HfvpRZWaDR31ZXcly
-	bmZ9gV1p6DgVwPkFYiiEYTyXMmtyxCvpNayOji1Czyw6dDEvGrxoQxaqgs00/g==
-X-Gm-Gg: ATEYQzx1JWrj6XpbDieeki+Euv/FgdRWiWZB2aNlCNheb9bdoJNwRLl/cTLMzXBc5KV
-	l1G6ZVPr/DupJlNTd+sY/H7cbmh/adaNrnAqUxWFtnm0TEstPS8qy7xzPSW+j9BM3he3XV0gZGz
-	IOAXA65IwR7odUTYNmmUsNnsj3PwHYSP8KbXpdRBPgjfbaNHP+f6FgkocU4P61QiVjXHf4AoDgI
-	3o4Spky1aXzTNBJPP8XTt0HhOfhcP2VJ4401xX8XU9bCuwsDZgL211vuf3gYOFTxf/6cxG4HeB1
-	m6KizCQLGqeYhTSBhi1DR4nNuFQMkH1DgjtS/zT5VQfvoaYQxjeZ7Il9IfMfRcvkL6vC2l9peBU
-	87w58dHxRjPgB488ulmoI9RSwXy4oNHtYTMmyAQO04CWXpthjy157LLaaMRVKSGQYKTTYvrs7Cv
-	+/V02LwDEPkcxiK/pViUiwgQVdYrGl7TqfoZCQ0IbrAjhePEie9FH2g4g=
-X-Received: by 2002:a05:690e:e12:b0:64a:ce57:cac4 with SMTP id 956f58d0204a3-64e88af7282mr536285d50.24.1773689009935;
-        Mon, 16 Mar 2026 12:23:29 -0700 (PDT)
-Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-64e65a51580sm6046840d50.8.2026.03.16.12.23.29
+        d=1e100.net; s=20251104; t=1773692319; x=1774297119;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=dUkHVgU3rQbzRjRLXmSZlTcxf8KvjBcbS6mS4mrChgo=;
+        b=lt4XQl0cck1XV9l6DlYc0R7yzN5uE2laT9hovYWw6DpbGIAXkO5aKtydGKYy+vIV9/
+         uLGv6yu5EXkn6PO+v7iQJPu47CJ00kdmqcxvDrShuSNXt0M87l1WU13T289KPHdLZ205
+         7c0cZPD/Hu2UPGq6gC3HRb8Ry9PduG+QIJH8oelgxPuOwbyvEWlhTH7yequiuKm0KKIb
+         Nvi66qYoRgT7XtWN+b6Gdy9fgt7CtHAHHTm23ZISXprZoqktHdEBHf0icekcV3LZZv8J
+         FCiSzKpyRXsWS1723XV8OSPgrz7GZDw0Bn5iLuc131J16MrKTeoGICqtezYk63HSEq1D
+         qyyA==
+X-Gm-Message-State: AOJu0YyyCCxHQ4J8jPZyais7ERxpD1z8YnTxRq/7I1jp3p90NNjKN/+k
+	PUXIxP2sVYz4ZGjYn/JskWznmRr+Iv5Pld508tdxzKDYbT93LwGOk8fq9+UYRUmg
+X-Gm-Gg: ATEYQzy2vhMS3J099XcHdsIyZj2AEmzqVqVzDBj5y8fcvFV0OzXpBWmFhvZXR5U+21B
+	1DIZsD4k1NhvqOigygtyOQ18Zdx3yRNNoKYTeNSfQBdn0iwMTkXxQDRYdX5zk7Wpr5faR4DciIT
+	2194hf9iU9img3cvrABTiTBmSb6q+AvYbCKxMnXCctfy4JycQtOeXf1MJpLvBZkL7Vm9sITleDb
+	79CHJGiPtS1L8p+ULosrQQuRbVaTEgpL3JYARD0iIf0j+XEW1CDKNTQl0kljrHttjX3uBkhxdSG
+	dwPPK52t/2RvqgMh3BXGNQVrQoFUNuXX1iZmiRt9+0TdmH++swaGL5H99M0ydXyQ7Vd7d/cX97e
+	jp+inlV4+CrK4uXOpo1qrKNZKcJL7bELAVXwPcHsowCLRqSYTKoErBLmeSCkQaJIKdH31uAhybs
+	MXuzf2PqxTjyyHXC6hX6QCQNVedv2ec5oLafA=
+X-Received: by 2002:a17:902:e890:b0:2ae:72fc:92ea with SMTP id d9443c01a7336-2aeca79859bmr138468875ad.0.1773692318702;
+        Mon, 16 Mar 2026 13:18:38 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([167.103.127.26])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2aece56cde9sm137792105ad.15.2026.03.16.13.18.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Mar 2026 12:23:29 -0700 (PDT)
-From: Dan McGregor <danismostlikely@gmail.com>
+        Mon, 16 Mar 2026 13:18:38 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Daniel McGregor <daniel.mcgregor@vecima.com>
-Subject: [meta-oe][PATCH 2/2] redis 8: Update licence
-Date: Mon, 16 Mar 2026 13:22:49 -0600
-Message-ID: <20260316192249.3950474-2-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260316192249.3950474-1-danismostlikely@gmail.com>
-References: <20260316192249.3950474-1-danismostlikely@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][whinlatter][PATCH 1/2] python3-pyjwt: Fix CVE-2026-32597
+Date: Tue, 17 Mar 2026 09:18:26 +1300
+Message-ID: <20260316201828.638877-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 19:23:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125286
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 20:18:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125287
 
-From: Daniel McGregor <daniel.mcgregor@vecima.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Redis 8.0 and later are tri-licensed, the licence options are:
-* Redis Source Available License v2
-* Server Side Public License v1.0
-* GNU Affero GPL v3.0
+Details https://nvd.nist.gov/vuln/detail/CVE-2026-32597
 
-Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
+Backport commit[1] which fixes this vulnerability as mentioned in changelog[2]
+
+Dropped changes to the changelog, version bump and tests during backport.
+
+[1] https://github.com/jpadilla/pyjwt/commit/051ea341b5573fe3edcd53042f347929b92c2b92
+[2] https://github.com/jpadilla/pyjwt/blob/2.12.0/CHANGELOG.rst
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-oe/licenses/RSAL-2                       | 163 ++++++++++++++++++
- meta-oe/recipes-extended/redis/redis_8.0.0.bb |   2 +-
- 2 files changed, 164 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/licenses/RSAL-2
+ .../python/python3-pyjwt/CVE-2026-32597.patch | 79 +++++++++++++++++++
+ .../python/python3-pyjwt_2.10.1.bb            |  2 +
+ 2 files changed, 81 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-32597.patch
 
-diff --git a/meta-oe/licenses/RSAL-2 b/meta-oe/licenses/RSAL-2
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-32597.patch b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-32597.patch
 new file mode 100644
-index 00000000000..4a37cf41364
+index 0000000000..7fec45e13c
 --- /dev/null
-+++ b/meta-oe/licenses/RSAL-2
-@@ -0,0 +1,163 @@
-+1. Redis Source Available License 2.0 (RSALv2) Agreement
-+========================================================
++++ b/meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-32597.patch
+@@ -0,0 +1,79 @@
++From c77d816548bd768df262ba0204904168584c0bd1 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Jos=C3=A9=20Padilla?= <jpadilla@webapplicate.com>
++Date: Thu, 12 Mar 2026 12:46:08 -0400
++Subject: [PATCH] Merge commit from fork
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+Last Update: December 30, 2023
++Co-authored-by: José Padilla <jpadilla@users.noreply.github.com>
 +
-+Acceptance
-+----------
++CVE: CVE-2026-32597
++Upstream-Status: Backport [https://github.com/jpadilla/pyjwt/commit/051ea341b5573fe3edcd53042f347929b92c2b92]
 +
-+This Agreement sets forth the terms and conditions on which the Licensor
-+makes available the Software. By installing, downloading, accessing,
-+Using, or distributing any of the Software, You agree to all of the
-+terms and conditions of this Agreement.
++Dropped changes to the changelog, version bump and tests during backport.
 +
-+If You are receiving the Software on behalf of Your Company, You
-+represent and warrant that You have the authority to agree to this
-+Agreement on behalf of such entity.
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ jwt/api_jws.py | 27 +++++++++++++++++++++++++--
++ 1 file changed, 25 insertions(+), 2 deletions(-)
 +
-+The Licensor reserves the right to update this Agreement from time to
-+time.
-+
-+The terms below have the meanings set forth below for purposes of this
-+Agreement:
-+
-+Definitions
-+-----------
-+
-+Agreement: this Redis Source Available License 2.0 Agreement.
-+
-+Control: ownership, directly or indirectly, of substantially all the
-+assets of an entity, or the power to direct its management and policies
-+by vote, contract, or otherwise.
-+
-+License: the License as described in the License paragraph below.
-+
-+Licensor: the entity offering these terms, which includes Redis Ltd. on
-+behalf of itself and its subsidiaries and affiliates worldwide.
-+
-+Modify, Modified, or Modification: copy from or adapt all or part of the
-+work in a fashion requiring copyright permission other than making an
-+exact copy. The resulting work is called a Modified version of the
-+earlier work.
-+
-+Redis: the Redis software as described in redis.com redis.io.
-+
-+Software: certain Software components designed to work with Redis and
-+provided to You under this Agreement.
-+
-+Trademark: the trademarks, service marks, and any other similar rights.
-+
-+Use: anything You do with the Software requiring one of Your Licenses.
-+
-+You: the recipient of the Software, the individual or entity on whose
-+behalf You are agreeing to this Agreement.
-+
-+Your Company: any legal entity, sole proprietorship, or other kind of
-+organization that You work for, plus all organizations that have control
-+over, are under the control of, or are under common control with that
-+organization.
-+
-+Your Licenses: means all the Licenses granted to You for the Software
-+under this Agreement.
-+
-+License
-+-------
-+
-+The Licensor grants You a non-exclusive, royalty-free, worldwide,
-+non-sublicensable, non-transferable license to use, copy, distribute,
-+make available, and prepare derivative works of the Software, in each
-+case subject to the limitations and conditions below.
-+
-+Limitations
-+-----------
-+
-+You may not make the functionality of the Software or a Modified version
-+available to third parties as a service or distribute the Software or a
-+Modified version in a manner that makes the functionality of the
-+Software available to third parties.
-+
-+Making the functionality of the Software or Modified version available
-+to third parties includes, without limitation, enabling third parties to
-+interact with the functionality of the Software or Modified version in
-+distributed form or remotely through a computer network, offering a
-+product or service, the value of which entirely or primarily derives
-+from the value of the Software or Modified version, or offering a
-+product or service that accomplishes for users the primary purpose of
-+the Software or Modified version.
-+
-+You may not alter, remove, or obscure any licensing, copyright, or other
-+notices of the Licensor in the Software. Any use of the Licensor's
-+Trademarks is subject to applicable law.
-+
-+Patents
-+-------
-+
-+The Licensor grants You a License, under any patent claims the Licensor
-+can License, or becomes able to License, to make, have made, use, sell,
-+offer for sale, import and have imported the Software, in each case
-+subject to the limitations and conditions in this License. This License
-+does not cover any patent claims that You cause to be infringed by
-+Modifications or additions to the Software. If You or Your Company make
-+any written claim that the Software infringes or contributes to
-+infringement of any patent, your patent License for the Software granted
-+under this Agreement ends immediately. If Your Company makes such a
-+claim, your patent License ends immediately for work on behalf of Your
-+Company.
-+
-+Notices
-+-------
-+
-+You must ensure that anyone who gets a copy of any part of the Software
-+from You also gets a copy of the terms and conditions in this Agreement.
-+
-+If You modify the Software, You must include in any Modified copies of
-+the Software prominent notices stating that You have Modified the
-+Software.
-+
-+No Other Rights
-+---------------
-+
-+The terms and conditions of this Agreement do not imply any Licenses
-+other than those expressly granted in this Agreement.
-+
-+Termination
-+-----------
-+
-+If You Use the Software in violation of this Agreement, such Use is not
-+Licensed, and Your Licenses will automatically terminate. If the
-+Licensor provides You with a notice of your violation, and You cease all
-+violations of this License no later than 30 days after You receive that
-+notice, Your Licenses will be reinstated retroactively. However, if You
-+violate this Agreement after such reinstatement, any additional
-+violation of this Agreement will cause your Licenses to terminate
-+automatically and permanently.
-+
-+No Liability
-+------------
-+
-+As far as the law allows, the Software comes as is, without any
-+warranty or condition, and the Licensor will not be liable to You for
-+any damages arising out of this Agreement or the Use or nature of the
-+Software, under any kind of legal claim.
-+
-+Governing Law and Jurisdiction
-+------------------------------
-+
-+If You are located in Asia, Pacific, Americas, or other jurisdictions
-+not listed below, the Agreement will be construed and enforced in all
-+respects in accordance with the laws of the State of California, U.S.A.,
-+without reference to its choice of law rules. The courts located in the
-+County of Santa Clara, California, have exclusive jurisdiction for all
-+purposes relating to this Agreement.
-+
-+If You are located in Israel, the Agreement will be construed and
-+enforced in all respects in accordance with the laws of the State of
-+Israel without reference to its choice of law rules. The courts located
-+in the Central District of the State of Israel have exclusive
-+jurisdiction for all purposes relating to this Agreement.
-+
-+If You are located in Europe, United Kingdom, Middle East or Africa, the
-+Agreement will be construed and enforced in all respects in accordance
-+with the laws of England and Wales without reference to its choice of
-+law rules. The competent courts located in London, England, have
-+exclusive jurisdiction for all purposes relating to this Agreement.
-diff --git a/meta-oe/recipes-extended/redis/redis_8.0.0.bb b/meta-oe/recipes-extended/redis/redis_8.0.0.bb
-index afad578dbab..d4d868d983a 100644
---- a/meta-oe/recipes-extended/redis/redis_8.0.0.bb
-+++ b/meta-oe/recipes-extended/redis/redis_8.0.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Redis key-value store"
- DESCRIPTION = "Redis is an open source, advanced key-value store."
- HOMEPAGE = "http://redis.io"
- SECTION = "libs"
--LICENSE = "BSD-3-Clause"
-+LICENSE = "RSAL-2 | SSPL-1 | AGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4feb9943a139a170b9d6ed6ec3342d0c"
- DEPENDS = "readline lua ncurses"
++diff --git a/jwt/api_jws.py b/jwt/api_jws.py
++index 654ee0b..db2c80f 100644
++--- a/jwt/api_jws.py
+++++ b/jwt/api_jws.py
++@@ -137,7 +137,7 @@ class PyJWS:
++         header: dict[str, Any] = {"typ": self.header_typ, "alg": algorithm_}
++ 
++         if headers:
++-            self._validate_headers(headers)
+++            self._validate_headers(headers, encoding=True)
++             header.update(headers)
++ 
++         if not header["typ"]:
++@@ -208,6 +208,8 @@ class PyJWS:
++ 
++         payload, signing_input, header, signature = self._load(jwt)
++ 
+++        self._validate_headers(header)
+++
++         if header.get("b64", True) is False:
++             if detached_payload is None:
++                 raise DecodeError(
++@@ -327,14 +329,35 @@ class PyJWS:
++         if not alg_obj.verify(signing_input, prepared_key, signature):
++             raise InvalidSignatureError("Signature verification failed")
++ 
++-    def _validate_headers(self, headers: dict[str, Any]) -> None:
+++    # Extensions that PyJWT actually understands and supports
+++    _supported_crit: set[str] = {"b64"}
+++
+++    def _validate_headers(
+++        self, headers: dict[str, Any], *, encoding: bool = False
+++    ) -> None:
++         if "kid" in headers:
++             self._validate_kid(headers["kid"])
+++        if not encoding and "crit" in headers:
+++            self._validate_crit(headers)
++ 
++     def _validate_kid(self, kid: Any) -> None:
++         if not isinstance(kid, str):
++             raise InvalidTokenError("Key ID header parameter must be a string")
++ 
+++    def _validate_crit(self, headers: dict[str, Any]) -> None:
+++        crit = headers["crit"]
+++        if not isinstance(crit, list) or len(crit) == 0:
+++            raise InvalidTokenError("Invalid 'crit' header: must be a non-empty list")
+++        for ext in crit:
+++            if not isinstance(ext, str):
+++                raise InvalidTokenError("Invalid 'crit' header: values must be strings")
+++            if ext not in self._supported_crit:
+++                raise InvalidTokenError(f"Unsupported critical extension: {ext}")
+++            if ext not in headers:
+++                raise InvalidTokenError(
+++                    f"Critical extension '{ext}' is missing from headers"
+++                )
+++
++ 
++ _jws_global_obj = PyJWS()
++ encode = _jws_global_obj.encode
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.10.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.10.1.bb
+index 3954c526f5..981f79a743 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjwt_2.10.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.10.1.bb
+@@ -5,6 +5,8 @@ HOMEPAGE = "https://github.com/jpadilla/pyjwt"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e4b56d2c9973d8cf54655555be06e551"
  
++SRC_URI += "file://CVE-2026-32597.patch"
++
+ SRC_URI[sha256sum] = "3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953"
+ 
+ PYPI_PACKAGE = "pyjwt"
 
