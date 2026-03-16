@@ -1,247 +1,154 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF785F53D82
-	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 17:53:39 +0000 (UTC)
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.57221.1773683614408935859
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5BEBF53D86
+	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 18:33:10 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.7])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.58074.1773685982006795961
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Mar 2026 10:53:34 -0700
+ Mon, 16 Mar 2026 11:33:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kCfJzuHd;
- spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-64ad8435f46so5058316d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 10:53:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773683613; cv=none;
-        d=google.com; s=arc-20240605;
-        b=N7Q6tWUrUTVqL/Qs5Ysbud7GEAHeIFOpCXCBZuvbZYNxt0CCwOJ2cIeIjc/zugb3Fz
-         hLNvWhpDCPQBq0fXU0H+cnOwnb9v/xr9dejFCvqqtiGGCX9QdDHyPUO2cz9S2V1hhnqx
-         vNN/wyis26p0F8xfy9JiBI9bf9tOxW4V93yTPic8M4VVp3B1Y/vz9i5ii/THgUov/b6x
-         A06z1FM53la0ZrCkizvsoNM7GDRSkACo6Ha89l76vkf1OL/3vqJL+0UTkY8jRUb69k+w
-         UPR0W4Ora2714zVuq0Ur71TxhqPrL+xEIAuibLOIhfR1ISH3oOzNTZWINOFl9zGXuwX9
-         AVZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=fcziy1enOTWsdZn3i8FSXpUeM/hpH2a3RrWAnHHmcQU=;
-        fh=h9Ex+wTSRxmfMFCG2Jr02FsC81+oMWKE4EbK/EoR1eM=;
-        b=cUhqdyew1mzJ2YsIuEg3f4IU4DCS7ahlsGZBQHYvKHUMMquyQbmb/MbBLHAvyGyf5V
-         gOzsHEmRgmoeL2Anof4Fg/GVPxVekzoxUomyzl8e9BLnNeazN8806T3ER9DgFLbFmtAU
-         7OKKLfxUylls7cELXB1NL2LSLLCvyfpYsZJV+sE3XvcWyyCCIfZ6IgWsObxt5Gx2dQna
-         pQOLTKPuk/Tto6WiTQykSBH6xJmVSJZnwDPwd/Sna7n+TN5Us9P8WR4spfJ3jhWdT9h0
-         s654DRmc5L1BVJ+ls0iE/s20Pe2K6epbNprksshhp7a8fyjc6in+2jrXDDj0nQRmLQtB
-         qdUQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773683613; x=1774288413; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=fcziy1enOTWsdZn3i8FSXpUeM/hpH2a3RrWAnHHmcQU=;
-        b=kCfJzuHdSKHdyuxF8W7o4ii9PBQjqjxDgRXPdelFgH8QKsmKPWZ1HGr3SCMjIuiBo8
-         PGT4qU80g/Mlu/OMr0zLgcqqr3s38iDzb0TUPY9RxUmj7KGI79v7r5KEXtUAxalNagHt
-         Q6VHFF8PJY/56dv0HgDWx72MbGd5Sv5/BN3yB9rl0fP73Ic1PeG15ZVlDOz+dy/9bE0H
-         a9yvWrCoT2mz0WY+aWiq1QmMexXrGOl/m5khdQ9EANNNxX1l4oHll6HR6VsyHpsiUm5O
-         SX/SbLXnXhnUEzxLsLlC4glr/SbNruoSbUiOZe+13voDKqBfFNFZJz/Ba+LgvZJrlXeS
-         juxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773683613; x=1774288413;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fcziy1enOTWsdZn3i8FSXpUeM/hpH2a3RrWAnHHmcQU=;
-        b=Q8ujm/4wJZUvWsP+F6+kl3/TFgYClKNIk2oxyCjJrDunXVgCi/uKTi374N6s5zhL4D
-         1rnvtOuWXfdHaOOI4V47gwq5/PP0pGEOhx3H7VzyHBGva2OjbXxJRpXA28G3fXIH/yen
-         4jK8MSFGN3X6hsf1ILTVbv/2qidjCrNWRRGjc0/tWGaUJ6zg0BrYVsCLErm3Gtsspwob
-         iWXQ6TexiTBqslkq15bjY1kvl8CRhZm67K0fiIBRpVAwtzL/hJFY8e6KfEXKxrB0QXin
-         yovISaZhySBuwrC2T4O1pIZoiTW+VV0zCfE83LExJSF0JvqCRRWMUBEA/JjU4w8ucaHO
-         hDyw==
-X-Gm-Message-State: AOJu0YzEpa+Ou/fnEo9Lng7OMXYjtw7uEx/wrNjmMYjwMS3NL0JtK3vV
-	tiNm6ZuPKjAbbbck+xobnqMcQKii8nmPFUhkjEhvmCh6IMcg+xLuFZh1Um7SPoRiOhGd0+Jqefm
-	lnAoP5ivD6Y3ZFNhpocp9xDtk3LjvG5o=
-X-Gm-Gg: ATEYQzyIXt10KwNCdmvRLR7L6uOPPxneRnib/Gx6YW/2LNw2LKtH6K2kwzGWruTfnqF
-	TlP5PSLx7sh2oy4v9VbzsennYxcmdwQq4rdue2UboL/lDHxCWLc5769ySsRl/ALDUD26/b+1dfg
-	talDlFgBZJwqQfK6WJVS7l0deKEAbAuaAQTyU1CEXOH96DNfYkWITTU0FhtPQBtkcNNrwxmsJfv
-	6ZmxetClkwVI8uy2qMHlotADWhTo1FpKbKnMfYg2d0ThtDhhu8SDUoZqB1/wzCn0jVS9DD0JDd/
-	xAEgwxZtHd3zgUcELt/Xc7rDdV+8utfqeeczN+xmiM6+BTSdg9X40j98J8ZVN4o6QS7Cg4gXZ7n
-	y8hrRMLQ8WhS4UK5nAals8b6f
-X-Received: by 2002:a05:690e:4492:b0:64c:ed48:dc84 with SMTP id
- 956f58d0204a3-64e630a686fmr11818528d50.63.1773683613424; Mon, 16 Mar 2026
- 10:53:33 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=Owt3v1ic;
+ spf=pass (domain: axis.com, ip: 52.101.66.7, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jsd9uqWzDqrHLPKk5gXfehhmtFc68vvPcryKGqVTm/EjzStB1fk9KFZZ5le8B6vousSo/vr26OU1a32/jqMGbz2Kwq87wGjg5T+SdU9EruGFSd9Y/Bn7sa2molQ4V/HINu883ojhWFQ8t89wTFD/YTu30z9zCflN9cq/cZEizThvv/dJbbukoN3oa5hxJtTdqaO16V6PbxI92krsXC5OQEHdBzAtIUxmaXvIh5Iv/VtFtf8rGibbkgEhEjiB+5CKkNbG2E9M7ugOGVz/cdELrX/MMwc0TerVwdNJjONkJyDPX2wXv7hLufHr24AacmGVL9u+s6ngvSNXgv0p2vd5Sw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4HovUrW/DfvjFkOvp0m+OXFJjo7MSJmV/NBtmU81Jos=;
+ b=J7SsRDA7DWBVXXa/lYiHUOxMc/XDYq0rH/oksacno0FWnF9ZgmsvK7UyGH0vhU7eKMAjrrRoxLAdJl7d/6I5p4JK/hBvZrxF3NaNrdVFJ1+myWSrm5L/3NHexVfCWhx0d+jLnxWZtDIuTCO9zE2CbGgQlZMQ3Pn5ynKAJJr8BJHcCyn8HFBW4fBJF1ygnU5Slpk3aTTI8Hr8qDIT0i8erIIaRTovMvnGUXiE7ME0czQ8V3kzxLATEyY3uw1ooBUMfdLIeV3jbY826h/+e7td2R2HH/uDq9k2oHFrSSjHNKGYQXuaxarVrjd11INip2znrA8VcFvlXHdkflAU4HiPdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4HovUrW/DfvjFkOvp0m+OXFJjo7MSJmV/NBtmU81Jos=;
+ b=Owt3v1icbP7NJdCp8C5zkbSy7oUI1KDTN6VCxc8jskNewLER/4LeKICLkg7hAs0w8pzGiin5xaOu7UjN9l76ZkT2b4sPwBu7zH4mriPfxnIINXHoIu4lTQkQ72dxHit1VQPoKox5fOkSjNuqnfM0gHGt6lK02BAi7IyBPub4FdE=
+Received: from AS9PR05CA0209.eurprd05.prod.outlook.com (2603:10a6:20b:495::18)
+ by DB9PR02MB6715.eurprd02.prod.outlook.com (2603:10a6:10:21b::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.24; Mon, 16 Mar
+ 2026 18:32:55 +0000
+Received: from AM3PEPF0000A798.eurprd04.prod.outlook.com
+ (2603:10a6:20b:495:cafe::69) by AS9PR05CA0209.outlook.office365.com
+ (2603:10a6:20b:495::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.22 via Frontend Transport; Mon,
+ 16 Mar 2026 18:32:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=axis.com;
+Received-SPF: Pass (protection.outlook.com: domain of axis.com designates
+ 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com; pr=C
+Received: from mail.axis.com (195.60.68.100) by
+ AM3PEPF0000A798.mail.protection.outlook.com (10.167.16.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Mon, 16 Mar 2026 18:32:54 +0000
+Received: from se-mail10w.axis.com (10.20.40.10) by se-mail11w.axis.com
+ (10.20.40.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.39; Mon, 16 Mar
+ 2026 19:32:54 +0100
+Received: from se-intmail01x.se.axis.com (10.4.0.28) by se-mail10w.axis.com
+ (10.20.40.10) with Microsoft SMTP Server id 15.2.1748.39 via Frontend
+ Transport; Mon, 16 Mar 2026 19:32:54 +0100
+Received: from pc56063-2339.se.axis.com (pc56063-2339.se.axis.com [10.92.3.2])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 5A62F288B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 19:32:54 +0100 (CET)
+Received: by pc56063-2339.se.axis.com (Postfix, from userid 14323)
+	id 591BE120537; Mon, 16 Mar 2026 19:32:54 +0100 (CET)
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] bpftrace: Update the runtime dependencies
+Date: Mon, 16 Mar 2026 19:32:51 +0100
+Message-ID: <20260316183251.3117288-1-pkj@axis.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260312102411.128382-1-jiaying.song.cn@windriver.com>
-In-Reply-To: <20260312102411.128382-1-jiaying.song.cn@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Mar 2026 10:53:06 -0700
-X-Gm-Features: AaiRm51wwWHE2pYpW7jJ1Au0kkALUgbHfTRZNTO2o9ue5HZr6oVHjiz7LHlJoJQ
-Message-ID: <CAMKF1sqngpzuOopp1zyTq3oMbhrKJ3gmDZt8y+4Dj57WCXFUmQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-redis: Upgrade 5.2.1->7.3.0
-To: Jiaying.Song.CN@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b8e1a8064d27e57b"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A798:EE_|DB9PR02MB6715:EE_
+X-MS-Office365-Filtering-Correlation-Id: 621c778e-0934-449c-3a2a-08de838a706e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700016|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	G/VbzrIfcBDescohg9JHsDQUJW/7xKNHl+Y++yAWwUTIPTdbD7HA9crZ7I3ZqnEkknNzToQuSnc+ZzEdDiBuyxw7WWFpLXogB0feruo04NF7POPlWTEpKzEvrIbs4hsyEVXidvpg1/caJjridxMSbhzhwYuqATqgpL0/AsL6TTFDmxBPunYBp7bZTOFgx6g+t/Yys9cqinLc547GKUKklDTKdaNp0ChXfWL+neJtMZvmpjA/v10810PBvgFUnJtwTFskJ0LAggYy6FTGwhyZykUBnRLxIkTi5Iyb7Oy+bbREI1CT+a3Zj64zgRRrF5ajrm6ckawFIIGtg6iBSKGaZZiDQTix5auP0QsHVH4GMqnnBQeANiGjX9HDDOUsvHooor6wryVepjYpRbGG0KMTTgUClehcsbJ+KNZOv3DIzDivO1mJnc0i/Q9EVDyr43dS1L9CnHSxkW7a62vPCggd1jkI3XjyDquMpbEYD2xjLbWqUrg9CQWE0k1Q1H+fDhOU1o4qG2HXOXVfobDCdrBG2WUftDcgapVbJPR59Iwwuz0n6Rmc7vp/I+ckygZNPmzULy0ykuaQkAn+9kV2GCN0AYuozQFA0RoAh8v5GG4+JOXLGYjqgfQBv863x6ohd0nPCpYt4zS4LSWVJH1cr1b9uwsKzjqWLu4bXyF8eC/o0eqwLVwtyVGxPqbt1j3fugOWljA5Q9xBLuw1BxSKMegKUmcq7jvwYGy4tOMD4Y8Q/0IHkROHN2gA2BTQorOgfR3Ph8zsKoafNc/Bx1WxMmUkRQ==
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	JA7yCT0P/cu5yVdZZshDXQlTCQQENckD2GnPKIjouxn5hQV+V2T2dwIhBKT+ZNB6/s+/Y6z8gKxDHhFyVBgufeU/2P0RbgIMFldo+K6/i+tzWD1YVIHmb+qkOdAeuYwVpW8EZoIZU3/Rg25eyJB8RZYg8VEtF6qu87KbQ9Es7ppb4M4dPA5oMr1elRDoXHv4CQb1ACZSt9PDN6ImGSJ3nhBxdRU4Brv9n8dpW/SMNG7e+mI12sfT7ZQdyIP1hocOY2XEUTQ1/TIKZmkVh8akI3gtyZZDr/ys+LceWVqDLFNsurkDXCQtvv0xqsAPFmsPb/iSCXmxh+Re81+EgEx7driJTGIL5FhP45Tv9G8BN57aWaf1hRE2wYkwv3yKc9dSXxraGlug7Pn0F2gLubew9aqWWXw1hLkmTbVOgikQvAdRcAQtFDbb4pK9IDgd3SEu
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2026 18:32:54.7796
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 621c778e-0934-449c-3a2a-08de838a706e
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM3PEPF0000A798.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB6715
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 17:53:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125281
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 18:33:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125282
 
---000000000000b8e1a8064d27e57b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* bash and python3 are only needed by the ptest package.
+* xz appears to not be needed at all.
 
-There is upgrade to 5.3.1 staged in master-next please rebase it on top of
-that
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ .../recipes-devtools/bpftrace/bpftrace_0.24.1.bb      | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-On Thu, Mar 12, 2026 at 3:24=E2=80=AFAM Song, Jiaying (CN) via
-lists.openembedded.org <Jiaying.Song.CN=3Dwindriver.com@lists.openembedded.=
-org>
-wrote:
-
-> From: Jiaying Song <jiaying.song.cn@windriver.com>
->
-> Switch build system from setuptools3 to python_hatchling
->
-> Changelog:
-> https://github.com/redis/redis-py/releases
->
-> Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
-> ---
->  .../python/{python3-redis_5.2.1.bb =3D> python3-redis_7.3.0.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-redis_5.2.1.bb =3D>
-> python3-redis_7.3.0.bb} (82%)
->
-> diff --git a/meta-python/recipes-devtools/python/python3-redis_5.2.1.bb
-> b/meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
-> similarity index 82%
-> rename from meta-python/recipes-devtools/python/python3-redis_5.2.1.bb
-> rename to meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
-> index ba214f5869..861221d3ee 100644
-> --- a/meta-python/recipes-devtools/python/python3-redis_5.2.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-redis_7.3.0.bb
-> @@ -7,9 +7,9 @@ LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3D609ded3add9111c4c6e102f1d421d3f8"
->  # Prefix archive to avoid clashing with the main redis archives
->  PYPI_ARCHIVE_NAME_PREFIX =3D "pypi-"
->
-> -SRC_URI[sha256sum] =3D
-> "16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f"
-> +SRC_URI[sha256sum] =3D
-> "4d1b768aafcf41b01022410b3cc4f15a07d9b3d6fe0c66fc967da2c88e551034"
->
-> -inherit pypi setuptools3
-> +inherit pypi python_hatchling
->
->  RDEPENDS:${PN} +=3D " \
->      python3-asyncio \
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125100):
-> https://lists.openembedded.org/g/openembedded-devel/message/125100
-> Mute This Topic: https://lists.openembedded.org/mt/118276387/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000b8e1a8064d27e57b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">There is upgrade to 5.3.1 staged in master-next please reb=
-ase it on top of that</div><br><div class=3D"gmail_quote gmail_quote_contai=
-ner"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Mar 12, 2026 at 3:24=E2=
-=80=AFAM Song, Jiaying (CN) via <a href=3D"http://lists.openembedded.org">l=
-ists.openembedded.org</a> &lt;<a href=3D"http://Jiaying.Song.CN">Jiaying.So=
-ng.CN</a>=3D<a href=3D"mailto:windriver.com@lists.openembedded.org">windriv=
-er.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">From: Jiaying Song &lt;<a href=3D"mailto:jiayi=
-ng.song.cn@windriver.com" target=3D"_blank">jiaying.song.cn@windriver.com</=
-a>&gt;<br>
-<br>
-Switch build system from setuptools3 to python_hatchling<br>
-<br>
-Changelog:<br>
-<a href=3D"https://github.com/redis/redis-py/releases" rel=3D"noreferrer" t=
-arget=3D"_blank">https://github.com/redis/redis-py/releases</a><br>
-<br>
-Signed-off-by: Jiaying Song &lt;<a href=3D"mailto:jiaying.song.cn@windriver=
-.com" target=3D"_blank">jiaying.song.cn@windriver.com</a>&gt;<br>
----<br>
-=C2=A0.../python/{<a href=3D"http://python3-redis_5.2.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">python3-redis_5.2.1.bb</a> =3D&gt; <a href=3D"http://=
-python3-redis_7.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_=
-7.3.0.bb</a>} | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--redis_5.2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_5.2.1.b=
-b</a> =3D&gt; <a href=3D"http://python3-redis_7.3.0.bb" rel=3D"noreferrer" =
-target=3D"_blank">python3-redis_7.3.0.bb</a>} (82%)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-redis_5.2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_5.2.1.bb=
-</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-redis_=
-7.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_7.3.0.bb</a><b=
-r>
-similarity index 82%<br>
-rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-r=
-edis_5.2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_5.2.1.bb<=
-/a><br>
-rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-red=
-is_7.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_7.3.0.bb</a=
-><br>
-index ba214f5869..861221d3ee 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-redis_5=
-.2.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_5.2.1.bb</a><br=
->
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-redis_7=
-.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-redis_7.3.0.bb</a><br=
->
-@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D609ded3add9=
-111c4c6e102f1d421d3f8&quot;<br>
-=C2=A0# Prefix archive to avoid clashing with the main redis archives<br>
-=C2=A0PYPI_ARCHIVE_NAME_PREFIX =3D &quot;pypi-&quot;<br>
-<br>
--SRC_URI[sha256sum] =3D &quot;16f2e22dff21d5125e8481515e386711a34cbec50f0e4=
-4413dd7d9c060a54e0f&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;4d1b768aafcf41b01022410b3cc4f15a07d9b3d6fe0c6=
-6fc967da2c88e551034&quot;<br>
-<br>
--inherit pypi setuptools3<br>
-+inherit pypi python_hatchling<br>
-<br>
-=C2=A0RDEPENDS:${PN} +=3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0python3-asyncio \<br>
--- <br>
-2.34.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#125100): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/125100" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/125100</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118276387/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/118276387/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000b8e1a8064d27e57b--
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/b=
+pftrace_0.24.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpf=
+trace/bpftrace_0.24.1.bb
+index add2ff01a8..33de2f4054 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace=
+_0.24.1.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace=
+_0.24.1.bb
+@@ -15,9 +15,6 @@ DEPENDS +=3D "bison-native \
+             "
+ DEPENDS +=3D "${@bb.utils.contains('PTEST_ENABLED', '1', 'pahole-native ll=
+vm-native', '', d)}"
+=20
+-RDEPENDS:${PN} +=3D "bash python3 xz"
+-RDEPENDS:${PN}-ptest +=3D "bpftool"
+-
+ SRC_URI =3D "git://github.com/iovisor/bpftrace;branch=3Drelease/0.24.x;pro=
+tocol=3Dhttps;tag=3Dv${PV} \
+            file://run-ptest \
+            file://0002-CMakeLists.txt-allow-to-set-BISON_FLAGS-like-l.patc=
+h \
+@@ -41,9 +38,9 @@ do_install_ptest() {
+         cp -rf ${B}/tests/test* ${D}${PTEST_PATH}/tests
+     fi
+     for f in testlibs/cmake_install.cmake \
+-    testprogs/cmake_install.cmake \
+-    testlibs/CTestTestfile.cmake \
+-    testprogs/CTestTestfile.cmake
++             testprogs/cmake_install.cmake \
++             testlibs/CTestTestfile.cmake \
++             testprogs/CTestTestfile.cmake
+     do
+         sed -i -e 's|${STAGING_BINDIR_TOOLCHAIN}/||' ${D}${libdir}/bpftrac=
+e/ptest/tests/$f
+         sed -i -e 's|${S}/||' ${D}${libdir}/bpftrace/ptest/tests/$f
+@@ -59,6 +56,8 @@ EXTRA_OECMAKE =3D " \
+     -DBISON_FLAGS=3D'--file-prefix-map=3D${WORKDIR}=3D' \
+ "
+=20
++RDEPENDS:${PN}-ptest +=3D "bash bpftool python3"
++
+ COMPATIBLE_HOST =3D "(x86_64.*|aarch64.*|powerpc64.*|riscv64.*)-linux"
+=20
+ INHIBIT_PACKAGE_STRIP_FILES +=3D "\
 
