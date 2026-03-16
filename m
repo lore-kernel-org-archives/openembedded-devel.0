@@ -1,159 +1,250 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <Jiaying.Song.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C16CF46436
-	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 09:32:50 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.46374.1773652241431213065
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 802C6F46437
+	for <webhook@archiver.kernel.org>; Mon, 16 Mar 2026 09:34:50 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.46948.1773653686117479037
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Mar 2026 02:10:41 -0700
+ Mon, 16 Mar 2026 02:34:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=lrq/jWey;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=X4kb+ZtI;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: bartosz.golaszewski@oss.qualcomm.com)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62G7msI0041580
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 08:37:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=8t0raL/nOgxJpPmf9MgTTNjN/ShZspREhb/
-	tfCBoNcg=; b=lrq/jWeyQSKlme/2EEPQmD1Q1oXKmup30rs23TgMWtvPrC9gtuC
-	POjV8WdWBODONdhqP5bzzV5el/LDQ00HTivOzZPJFLlYR2p3joLi4Ni1asOgxvN4
-	egEofKMYNVnkTuHuWOw910pkvmRomyxfEX6pF77BdfFCQzi3jJShIe36neseYcee
-	gvSWQT675x/OkF4xE4aGtI1E5NiC+fSVMSXTt1KEOymn3KEI8kHZ1SkErIIHxa+1
-	Z7HvrQOl03BkuZh12Fs4dL1Wb3c9I7sisTqwOaIwZL3VMsg2KRpkrbSRjwe/xboC
-	Ka32Sg+Kwn2Z9iLoozxIyIR4yMKeeTVRvTQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cxdt805g2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 08:37:14 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-8cb6291d95aso5006689885a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 01:37:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1773650234; x=1774255034; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8t0raL/nOgxJpPmf9MgTTNjN/ShZspREhb/tfCBoNcg=;
-        b=X4kb+ZtIW/QCGtSxemngr05G6GU4I23VtqJhdA2rbkEymisYpeyb4iTDNajDTuJPhf
-         yO9vlc9cEVSL7MFaW/CKuhoZyZh4rv0PBX/euu0BuV/cwU2P2BO6TDofec6kNynbIlhD
-         sj7Hf+9BGWCFaTJo24Jipt17FPhaH9yqiAXKeZKb9mKrXMHQRxUI15pqiz+olUVtqTj8
-         S/0nYIl5cL5GiF8j43ed83J7zDMxUeyz87vPiGgxu0bAUYI3LbWibd+mQ/Ux+8HeuRsx
-         iUf/B1g2ygwkAW2kS9I2/WCQtWblC8l+at5crg0WC5lKC4ocUh8brqgvLVBswcPINsjk
-         D5gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773650234; x=1774255034;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8t0raL/nOgxJpPmf9MgTTNjN/ShZspREhb/tfCBoNcg=;
-        b=Z/a8Bvoa+liwEEKBkQCe97kHCe2+Xn5/uNhKg3iBJqPd2ZZs3vbKLE/zNMIURAUCPI
-         gN/o/9zcyUuGHOOsIXeOAx3ChNBLv8QH+GZKsadFZMyNmarDx+63pZMSoWWD64uRLbcp
-         5WycnE0yGiT1XhKM7dE0QZ/oJK5pq4jSRuSOAzVR7C6Idw1mMWhBrSIDwRtg+0lzVujy
-         zpQAtYvenpwKnaHdzg8dqG10b2FVU8slu4gENSwr6vofNqVkNMW9RYYSBEcylH8bzLw7
-         A+53/49CX5+ocbtuRkly7jOLWV1Th6N+w/xmFX6oCn7PkUJ9rOZ5JdXcHyG51MB9+65F
-         yElA==
-X-Forwarded-Encrypted: i=1; AJvYcCWPCBn94+h8LXpfluDWVhxtytjiqFi68TrOU3iLuIQKkpzvtxJh1zvp7qaheQEOLDgaBmcU/rjSYi3pZltHsAusKuE=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyWr4f1EOszMSvnab3pUEg2AwsRuP3yZQcRMe4Q1wjP2xnTeQRQ
-	kpqDb42jTHV6JXyLrjXqiZMHFRc6+l3DkGAoDwhPNHShXkO43bTgyEfXxEwRkGPiwDmBFcrlq+3
-	VptsskU7OGmf39wjBe8J3ZPpzgaENKcmnnGyHilqtygA88MRAbMeufCoPE+LASMq5vZ1OM+W2n1
-	CnkJgeDz6E
-X-Gm-Gg: ATEYQzx3UlLpVEvdYH2mDshaIAxOzn88eWFOEJJZZ5/uH1WewazGWdTsOCsBSTFNR10
-	uHEngqOEkQPnq5QJPEzOW0JxIQ10Fc/3M+nJRUhUc8EHI/jRoOqDePUt8Wlqhf+9mzagRN+EW7c
-	2kH5pzmkrSHOuIZL5C7xPfvpUpreONu1NiNpARfMY2ydw43s5KGIvbX1Lf3y5tNwIskrNF/O6rw
-	0Mnuz6H79uFUtZiDc2QOGS4A6IdROqmL3MWJcbgO6HsJkMp+gh4FEPEXFJNmP3l/kgmYlZGHVCU
-	7NX7yJKiB5VG901LWwm09nXgAWPWfAYeriXy30uejhC+qRciamtoYVqJMZ5sWOLy5E6an0ZMTwq
-	97nRtK88Qn+0QOSv0w18xVhJgkquwkdu9d6AdAHnIX9QGlu9Y2s0=
-X-Received: by 2002:a05:620a:4005:b0:8cd:942e:82e6 with SMTP id af79cd13be357-8cdb5a7b3edmr1644720085a.18.1773650233755;
-        Mon, 16 Mar 2026 01:37:13 -0700 (PDT)
-X-Received: by 2002:a05:620a:4005:b0:8cd:942e:82e6 with SMTP id af79cd13be357-8cdb5a7b3edmr1644718285a.18.1773650233367;
-        Mon, 16 Mar 2026 01:37:13 -0700 (PDT)
-Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:ba9e:e504:fb0b:f1f3])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4854b5f6bb4sm397176835e9.4.2026.03.16.01.37.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Mar 2026 01:37:12 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
-        openembedded-devel@lists.openembedded.org
-Cc: brgl@kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: [meta-python][PATCH v2] python3-gpiod: update to v2.4.1
-Date: Mon, 16 Mar 2026 09:37:03 +0100
-Message-ID: <20260316083703.38648-1-bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=V9OB0/wh;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7535dcf6df=jiaying.song.cn@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62G30lEv386076
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 09:34:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=+aZ68XbWNFawWa4EJapG
+	bHUthxNJInsxSJROKTvXRhw=; b=V9OB0/wh1p5QupolSR40U37gC/IRvr863Gst
+	BdC9NGGEegKA+QOERlLzmngtL6BHyCTAIyXt0CAZcwB7W/NKGcxvmmjdam2g/o0e
+	8v9qAD+Sw6P7ClVxkff/rbOQdFtedF6gqbSzZFmIKrP1YzzeKtHWsVrVx9j98iN0
+	apx1AgxAQ3gSDcRxLNAbLoitjtq3ZrG5MGv9vcCjzdQdrc2U09q+5XvMv3KwGmSH
+	AwPnbhLibyN+KrtWfLkLyqul+2QY00vvY4wyXkjCNk3ktNg/zHqXNysp1msiDHhk
+	g0J8I5IMcjCHJ2ImPlmvPKhzdTNKf0bzq/irr/W8lEsIliva9Q==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4cvxn59te6-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 09:34:44 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Mon, 16 Mar 2026 02:34:43 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Mon, 16 Mar 2026 02:34:43 -0700
+From: <jiaying.song.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-ninja: upgrade 1.11.1.1 -> 1.13.0
+Date: Mon, 16 Mar 2026 17:34:42 +0800
+Message-ID: <20260316093442.3450847-1-jiaying.song.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Proofpoint-GUID: TAhwZMwP470rrDMSPgFCil6wrVX8EavR
-X-Authority-Analysis: v=2.4 cv=CKInnBrD c=1 sm=1 tr=0 ts=69b7c13a cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8 a=xwGg-rVqGctdFVeOhD8A:9
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: TAhwZMwP470rrDMSPgFCil6wrVX8EavR
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE2MDA2NCBTYWx0ZWRfX7t95qBmXFn2g
- spxZYMVdty8dWCtY6XQPG/lv94mYAxgSrrZA2AlbprexEAtu6M/7fOWeaVe22QhuMu/OWqw/Lyi
- t7Q83rovBNAOewh8SLRm6HvUiYYx+96QQU341F4rEMlk8XmUj+IVU/sH29A/j/hrpb+X9vSNOvV
- XrIwlSUJgaNy8h1hcwBrR36vSHAWcglTI23uUZdh0jcgg/KuWv1+1V3FFFKtuQGXvGeOV4r+K41
- wuj/WE2jtFHOIDuV6H1bDplf/Q0C6vMY4KjW5cBz1KwkxZzEUxAQrI3wzDQSfvVczA+cn+i3GPQ
- 5deZ1bpcm3WBTp31iBiEzFhUuKC1lrfS44k9RY5TxeleFekWeytXOslF9ZL62Lrc/eU1jGRdtHe
- jqAiFPy89FQi4VZmKncVMY/wtD6HET4RahE0vmBIzqNo9V12yWl3pSlzveMA8WSgNLZ+9GUecRR
- Lc9ARFXXQWmsC7kdIkg==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE2MDA3MiBTYWx0ZWRfX82xy947jbfUL
+ 7VQp0TPLJrJOniqv33jI+YzvTgrEkyxfNxJ5ucDlYSG1x2ZIgg5dbhCb0qireRba65BiXpXOtGA
+ hV9Of7WSZjDIjcYjrHOTB8tSECd4K+sfYPYvZouxdLTciPjihxT9tPuWbMMsdD85NzNbZHFaIlg
+ pSU3kr2hP8IM46dleXt9e6qGnAtBnl7J/czqUJKtj1hCgWepEoX6jndfMpPNGzo67HHm/nb44GX
+ TP/OJMV5Bzzgk33iDL+NGYg2mVuhoEjUUgz5/prTuQ0iwudCxTILMg6z0+B0B+oGvKbx2QaUWcq
+ lHDCzzI8TcvrSwos5OjS5CShbzfB+fPqORRF2DwHMemzTQ/XBhT06Ra87eK/jY6+2837eunL6i2
+ 3nNufLs+RVn/T1QxyiisUuoC5V0mX6sXD2vQA6SKRp48rpROeZvZutgSdPKCecHCkPxPFJsiPR4
+ Yhfkj/bzp0sPJLtfxUg==
+X-Proofpoint-GUID: AzKf9gYKkNJxvm1PenDEUi6yktjkBnEv
+X-Proofpoint-ORIG-GUID: AzKf9gYKkNJxvm1PenDEUi6yktjkBnEv
+X-Authority-Analysis: v=2.4 cv=T52BjvKQ c=1 sm=1 tr=0 ts=69b7ceb4 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=fTW__CHxibyLmBMfj2wP:22 a=qOLvluO_AAAA:20 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=7CQSdrXTAAAA:8 a=zuu0M-wxc3A4uMvWb34A:9 a=FdTzh2GWekK77mhwV6Dw:22
+ a=a-qgeE7W1pNrGK8U0ZQC:22 a=bA3UWDv6hWIuX7UZL3qL:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-16_03,2026-03-13_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 phishscore=0 priorityscore=1501 bulkscore=0
- adultscore=0 impostorscore=0 suspectscore=0 spamscore=0 malwarescore=0
+ impostorscore=0 spamscore=0 clxscore=1015 suspectscore=0 priorityscore=1501
+ phishscore=0 bulkscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603160064
-Content-Transfer-Encoding: 8bit
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603160072
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 09:32:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125269
+ <openembedded-devel@lists.openembedded.org>; Mon, 16 Mar 2026 09:34:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125270
 
-Bug-fix release addressing a memory leak and a couple minor issues.
+From: Jiaying Song <jiaying.song.cn@windriver.com>
 
-We now ship the license file with the dist tarball so update the recipe
-to take this into account. While at it: trim the LICENSE value to only
-include LGPL-v2.1-or-later as the other two licenses cover tests and
-text files.
+Changelog:
+https://github.com/scikit-build/ninja-python-distributions/releases
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Upstream commit [1] switched build system from scikit-build to
+scikit-build-core, which changed pyproject.toml structure and rewrote
+__init__.py. Update patches accordingly:
+
+- no-scikit-build.patch: rewrite for new pyproject.toml structure,
+  replace scikit-build-core with setuptools, and remove 'readme'
+  from dynamic fields as setuptools cannot handle the fancy-pypi-readme
+  plugin.
+- run-ninja-from-path.patch: drop. Old version imported skbuild
+  modules in __init__.py which caused ImportError in OE since
+  scikit-build is not installed. New version replaced these imports
+  with stdlib sysconfig, so the patch is no longer needed.
+- CMakeLists.txt: drop. This was a stub file added to prevent
+  scikit-build from failing when it could not find CMakeLists.txt.
+  Since we now use setuptools which does not require it, the file
+  can be removed.
+
+[1] https://github.com/scikit-build/ninja-python-distributions/commit/f3b4a786be
+
+Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
 ---
-Changes in v2:
-- remove the no longer valid comment
-- trim LICENSE
+ .../python/python3-ninja/CMakeLists.txt       |  9 ----
+ .../python3-ninja/no-scikit-build.patch       | 39 +++++++---------
+ .../python3-ninja/run-ninja-from-path.patch   | 44 -------------------
+ ...ja_1.11.1.1.bb => python3-ninja_1.13.0.bb} |  5 +--
+ 4 files changed, 17 insertions(+), 80 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-ninja/CMakeLists.txt
+ delete mode 100644 meta-python/recipes-devtools/python/python3-ninja/run-ninja-from-path.patch
+ rename meta-python/recipes-devtools/python/{python3-ninja_1.11.1.1.bb => python3-ninja_1.13.0.bb} (73%)
 
- .../{python3-gpiod_2.4.0.bb => python3-gpiod_2.4.1.bb}    | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-gpiod_2.4.0.bb => python3-gpiod_2.4.1.bb} (74%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb
-index 405951fe0c..61a3fb929e 100644
---- a/meta-python/recipes-devtools/python/python3-gpiod_2.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb
-@@ -1,13 +1,11 @@
- SUMMARY = "Python bindings for libgpiod."
+diff --git a/meta-python/recipes-devtools/python/python3-ninja/CMakeLists.txt b/meta-python/recipes-devtools/python/python3-ninja/CMakeLists.txt
+deleted file mode 100644
+index 04fa451e72..0000000000
+--- a/meta-python/recipes-devtools/python/python3-ninja/CMakeLists.txt
++++ /dev/null
+@@ -1,9 +0,0 @@
+-cmake_minimum_required(VERSION 3.15)
+-
+-project(NinjaPythonDistributions)
+-
+-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_MODULE_PATH})
+-
+-install(CODE "
+- message(STATUS \"Install ninja project\")
+-")
+diff --git a/meta-python/recipes-devtools/python/python3-ninja/no-scikit-build.patch b/meta-python/recipes-devtools/python/python3-ninja/no-scikit-build.patch
+index b7d191e244..4dfbb2675a 100644
+--- a/meta-python/recipes-devtools/python/python3-ninja/no-scikit-build.patch
++++ b/meta-python/recipes-devtools/python/python3-ninja/no-scikit-build.patch
+@@ -1,31 +1,22 @@
+-We don't need to build ninja so there's no need to use scikit-build,
+-as we just need the python module with it's one ninja() function.
++We don't need to build ninja so there's no need to use scikit-build-core,
++as we just need the python module with its one ninja() function.
  
--LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
--# The actual license files live in the upstream libgpiod from which the pypi
--# package is spun out.
--LIC_FILES_CHKSUM = "file://pyproject.toml;beginline=13;endline=13;md5=0fbc720d3e48432ee239eedb6adb0f07"
-+LICENSE = "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4b54a1fd55a448865a0b32d41598759d"
+ Upstream-Status: Inappropriate
+ Signed-off-by: Ross Burton <ross.burton@arm.com>
++Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
  
- SRC_URI += "file://run-ptest"
+-diff --git a/pyproject.toml b/pyproject.toml
+-index b895c20..577b642 100644
+ --- a/pyproject.toml
+ +++ b/pyproject.toml
+-@@ -2,7 +2,6 @@
+- requires = [
+-     "setuptools >=42",
+-     "setuptools-scm[toml]",
+--    "scikit-build",
+- ]
+- build-backend = "setuptools.build_meta"
++@@ -1,5 +1,4 @@
++ [build-system]
++-requires = ["scikit-build-core>=0.10"]
++-build-backend = "backend"
++-backend-path = ["_build_backend"]
+++requires = ["setuptools", "setuptools-scm"]
+++build-backend = "setuptools.build_meta"
+  
+-diff --git a/setup.py b/setup.py
+-index dbe1fbc..3259754 100755
+---- a/setup.py
+-+++ b/setup.py
+-@@ -5,7 +5,7 @@ import os
+- import sys
+- from distutils.text_file import TextFile
+- 
+--from skbuild import setup
+-+from setuptools import setup
+- 
+- # Add current folder to path
+- # This is required to import versioneer in an isolated pip build
++@@ -7,3 +6,3 @@
++ name = "ninja"
++-dynamic = ["version", "readme"]
+++dynamic = ["version"]
++ description = "Ninja is a small build system with a focus on speed"
+diff --git a/meta-python/recipes-devtools/python/python3-ninja/run-ninja-from-path.patch b/meta-python/recipes-devtools/python/python3-ninja/run-ninja-from-path.patch
+deleted file mode 100644
+index 0068efcc3a..0000000000
+--- a/meta-python/recipes-devtools/python/python3-ninja/run-ninja-from-path.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-There's no need to hunt around source or install trees when we're just running ninja
+-from PATH.
+-
+-Upstream-Status: Inappropriate
+-Signed-off-by: Ross Burton <ross.burton@arm.com>
+-
+-diff --git a/src/ninja/__init__.py b/src/ninja/__init__.py
+-index f83767e..31bb926 100644
+---- a/src/ninja/__init__.py
+-+++ b/src/ninja/__init__.py
+-@@ -19,32 +19,9 @@ except ImportError:
+-             os.path.dirname(__file__), '../../Ninja-src/misc')))
+-     from ninja_syntax import Writer, escape, expand  # noqa: F401
+- 
+--DATA = os.path.join(os.path.dirname(__file__), 'data')
+--
+--# Support running tests from the source tree
+--if not os.path.exists(DATA):
+--    from skbuild.constants import CMAKE_INSTALL_DIR as SKBUILD_CMAKE_INSTALL_DIR
+--    from skbuild.constants import set_skbuild_plat_name
+--
+--    if platform.system().lower() == "darwin":
+--        # Since building the project specifying --plat-name or CMAKE_OSX_* variables
+--        # leads to different SKBUILD_DIR, the code below attempt to guess the most
+--        # likely plat-name.
+--        _skbuild_dirs = os.listdir(os.path.join(os.path.dirname(__file__), '..', '..', '_skbuild'))
+--        if _skbuild_dirs:
+--            _likely_plat_name = '-'.join(_skbuild_dirs[0].split('-')[:3])
+--            set_skbuild_plat_name(_likely_plat_name)
+--
+--    _data = os.path.abspath(os.path.join(
+--        os.path.dirname(__file__), '..', '..', SKBUILD_CMAKE_INSTALL_DIR(), 'src/ninja/data'))
+--    if os.path.exists(_data):
+--        DATA = _data
+--
+--BIN_DIR = os.path.join(DATA, 'bin')
+--
+- 
+- def _program(name, args):
+--    return subprocess.call([os.path.join(BIN_DIR, name)] + args, close_fds=False)
+-+    return subprocess.call([name] + args, close_fds=False)
+- 
+- 
+- def ninja():
+diff --git a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.1.bb b/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-ninja_1.11.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
+index 8f2e6528db..1591be0912 100644
+--- a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
+@@ -6,10 +6,9 @@ PYPI_PACKAGE = "ninja"
+ PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
  
--SRC_URI[sha256sum] = "9243a1a59d084ec749d1df4a1e2f238ffb9d94515b0d9f5335460175143c3aa1"
-+SRC_URI[sha256sum] = "d29a1e8b2a065f7ed82f00a96009bc1486fc705bb2ad25820a8ae962ec6d7688"
+ inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "9d793b08dd857e38d0b6ffe9e6b7145d7c485a42dcfea04905ca0cdb6017cc3c"
++SRC_URI[sha256sum] = "4a40ce995ded54d9dc24f8ea37ff3bf62ad192b547f6c7126e7e25045e76f978"
  
- inherit python_setuptools_build_meta python_pep517 ptest pypi
+-SRC_URI += "file://no-scikit-build.patch \
+-            file://run-ninja-from-path.patch"
++SRC_URI += "file://no-scikit-build.patch "
+ 
+ DEPENDS += "python3-setuptools-scm-native"
  
 -- 
-2.47.3
+2.34.1
 
 
