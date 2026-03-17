@@ -2,159 +2,125 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36F79FF6E6D
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 20:29:25 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.86397.1773779363729737287
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FBB1FF6E70
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 20:30:46 +0000 (UTC)
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.86422.1773779437821508120
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Mar 2026 13:29:23 -0700
+ Tue, 17 Mar 2026 13:30:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m4tl2hi7;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-64ad8435f46so6753002d50.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 13:29:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773779363; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q+WKWp+Q;
+ spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-64c31ca77b4so6638895d50.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 13:30:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773779437; cv=none;
         d=google.com; s=arc-20240605;
-        b=gtH1j+auKCT8W4hVY+6vx6xgxzJ0FuZFOyDcU5d21JPtSCBOFTI0TgvqbEgGmH4Kah
-         +1dFkHDzqwAEU/wBQoqxCX/uwU5LkTEwEh37hd4fjVxmqawE1b8Biw8/KBFScQMgXcjp
-         x2WW9Pz+pxfl3r66xsDBL/9GiBr9WfoGghX+FD2GwebUmenQKRXQgK1lXS1SwGCms42R
-         kS7YNkEd7gVQioAr/RByqo/Hsro6SiIBk8UEyb5y+JlUE9ZcTwbd3Z84Df9ASLGAWYGt
-         9KqG2K4uclQizhDZvkImjiqwXmjuXk5W2C6t5by1zluTn4RuiNUpluQwkCrsEPr7qcUN
-         xcWA==
+        b=jIn2HomogArgatZaGW/gcioXIMTn4TIyvkTbPhqX6xFHsEl3FQGSmfC6GXz1Un2zlH
+         gu0mTZWEjp3njd7DWp2UBTJn/u3+4HvhVtvi999TSe211Krhmd4ikbxsSOsxiSm4wFi3
+         XU+TRL5hYBWJ3fsY86rvVWPz7K1EV+peR2pT6hdm1zTFzEZA8rMioMS7eIxyID8ma7vg
+         nVnfJnp5a053JDWh2D+9C24AhvKdqeb1VaGcP0hgcRPl9TjDnlVEFO2MnvFtMJJ4SoFT
+         avnYJNZ/vRRMYtcP3TbkHb96I23tlT6oqpX2EI3vFzWQapU8+vQpuF3pHLCpuJyphcq6
+         iU5A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=P+rjANcWwMkjlAEHrpiLvIyQXHfSv2L/dQ2xjrYQGIs=;
-        fh=MWpPOHkCXe0pFwtyVtShChIDmquBPWcpv+alA0IHIdg=;
-        b=e8fhCQHT2jE2m0W8qc+5iUUj+cf2No9P8BDOx2r1ByTqZx5CA2MAWGh3ZOShY89+4L
-         MotvRtwVl4RB/bA1GTEjNuAi01hG1oOQr7cTggRsSAPW3BEqTBbWMH8EFdZH5DLxAOPS
-         0yqf7X9+Mg4mgrWUk7EaWLCeljjUpcycGG3zog2TtM+/RU2+TDFTh8wQipWbJRjPOVHD
-         Wxti8waiUAe6bQkIlg+VigzpXrgwRPzOXPw2Ztof6JPHgXNrtUbnlY/i6A1CIeg+OL1G
-         N7wpGQeHYxLZ+5vYvL0KjAzCFkOfD018m7Jy4o1pKjQYfpEkm45Y2cuix+R3fU9Zw1Cs
-         Gljw==;
+        bh=xft03M1EVXHFrOc1Jymi88Ub1idb1Nmh0CpnMTVMWfY=;
+        fh=mse9LqwZJbjq/ezWXW9Lxg7XK6+ySUiYzgrvPuxBk1U=;
+        b=PK+p7ELcz2wQ5QHJw3xEqlD3LO340hPZ1+S78Llp7l8Y36hTUvTo2k57upJIdhajDv
+         x9qfOP4wIbDvfn5MzSdAetuNat84+C/A17N4yoX4deIKAvkQ9pnjigUowbd0Xi0Q3xEn
+         gMYUBUKzkCXkP9uDbgQMSRwHaWF2d2fBu5nwO6S13jjvcqk4aTETjogrmKWLsIjO6Q6D
+         j8DUqHi8xriFfweqjcIQpdSC59VUq3mIzriYD3feP3XiGG7XYbhI1ZRfH3853A8AAHq9
+         zeWGMwzy7v8VwobvcVIcqDLcdkFJ5wvaM8nVcgn+Gk7890aLqyrmGCLqEvTYly1bUvNf
+         8OVQ==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773779363; x=1774384163; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773779437; x=1774384237; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=P+rjANcWwMkjlAEHrpiLvIyQXHfSv2L/dQ2xjrYQGIs=;
-        b=m4tl2hi7yuAwPSe6vNB/sbRzVjPpQfqnDwgP38HkgIuEARPTXzRU5L/jTcRYz1jmC9
-         rnZpvq/WK4dkBu4z3e7OnVAkxGMBfK3ZHdcjAGqD2O7olFXcjhzzzIEI7lqmTEshoP+P
-         Cg0Nl0TnT60UEEMZ0z29sBCS4rMRrYidgvXkBCRHr0RqppJlepuCdeLMXcx2San5fE1w
-         l6sp0jKTk25OoSLfX4NeLrzP7WvICBiAz8B5hlubXJ1lYWW3+giS1GEcrlmizaj5Ye5J
-         YTMDKYE9XL1IUbZfHsSWmxEbnzgenMMHeAu0f42/GgJKuswCaT//xGTaLca+XJmGGvKy
-         P4xg==
+        bh=xft03M1EVXHFrOc1Jymi88Ub1idb1Nmh0CpnMTVMWfY=;
+        b=Q+WKWp+QVdV3AISbZTHyDmvc1RKryQoeL7zQrwLkR+H+FXdRS4y2qGOozXma28CeHJ
+         essdKrZQohpKlBaFQFsonnGNdC4C9AdlNet0DDEp5rr8pN1oi5iJFvg+nVJHj7bQpqiQ
+         0WaArdyxP4tGwIF+M1Q31q3FiNBoF7dr33UxJt4Yv2y7QLREQ1YsbJ+jeB3NK1G1A+vL
+         I/TVRN1XssPCB5DUQZLHnLlgdDhdO39xvg9eFYDqL34lRiweLa5Wq3eU8rTih8LSQ9z6
+         Xxeo/wRpYPeZic+MGTSK4zDN1g23FSniaU6xPwXwfqpTfAdHch0OLxwBmHPvYVg/ffPq
+         x0EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773779363; x=1774384163;
+        d=1e100.net; s=20251104; t=1773779437; x=1774384237;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=P+rjANcWwMkjlAEHrpiLvIyQXHfSv2L/dQ2xjrYQGIs=;
-        b=HahLuKlHF+hYBXX6/FdfGIC32BWEY1XQBq2scXurOfYbCJ5yKSvY7RAOpouxMZuztF
-         LtVCVgmxYq/mm5L3YDXO8p1+wZIszHHBJtoIN86DSc3w6nxCczOaD5tLA2Ra0HhP4XmT
-         +FWsgAFjib5hViFgb1yo9+gwlQAPRmzk9KD7KMK1sv3/avXHmO6aQSd2+MfS4I8QZyyl
-         tPx/sZEYa3QWBjk9Et0UyXOu5emz93HP6F1wBL3CYIJWXs7vOgCTfpHE73zsd/jn2kbM
-         CQU7Pkk7MtGpdQqYclpHWQlrXsl5rIdo3k+quI4zZv7RcUGE/sqM1UzHY0UpkOjYuN8N
-         JXCg==
-X-Forwarded-Encrypted: i=1; AJvYcCX2fib5SGXwcJe86b0oG4ZUXVYZLFGD54ckiH4YRaMfbwzC0scgnotuL2XtLxLG3jzuvByd6cl0yvJEMPAOxdfuxkg=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzFOoPZzp+Ug9IwWByN6O38KObSwi/jJ2F4HIjcfrQfD5s7d7y8
-	EvPDbdLXe9/8OO0nXoqcPhyWc5UoPEM1imkLqx3TCJi1gxWeuM+sUdwO46WoOwV5k83AhL9VPIO
-	TrdGHLjcXx4Y1CfrMPwwia+YvXkz9ibk=
-X-Gm-Gg: ATEYQzyS1TxsSg4C7+eGQjHlbzFE48YdqVHLexKGbnxtKN7PpsOtt0Mc//vvrA/27SF
-	lIMD8zyhXxRhFBu1A3n8GHN4hna7f1+8xDIYBgHObwEu8tHUt03qnvS/1styyTv8MONE6N8fd+x
-	wulXeFaWlxfRTdEMZNxG6NGenhObA14cBURPdmNoq827/EwqxLv53tcge5Yui4phzUNn+RuB762
-	opMQiKkrIVnAYiaQ8QHOIcF5mXU3kc4zh1QNf0JsmQdSL9Gv7M4Hn+b/3ICDbszPtp0Xv4JlwE4
-	XqWL63UkuYnqt/VZoIxp/lq1jnZ4I1HseDUWCHQv29g7t9/2wHsddnHFzYL5AyRQ2mnwVcJQ7oi
-	DaKsSn574bv5EcBW5TeVGoKOi
-X-Received: by 2002:a53:bbd0:0:b0:64a:db82:a0bf with SMTP id
- 956f58d0204a3-64e912f2812mr1111992d50.5.1773779362536; Tue, 17 Mar 2026
- 13:29:22 -0700 (PDT)
+        bh=xft03M1EVXHFrOc1Jymi88Ub1idb1Nmh0CpnMTVMWfY=;
+        b=KeSNxjAcNAosxr/HzSlPAeU2OaOIz9MzMPh8kNSksBkIuWz4iIyVPpbGUttmynkNUd
+         EvN5fpMrDtyJYwfIqMg1cdanpqSp4y28d5TMIWT1AB3fPXKsyf2BSjeq5gXDFAGSfhmQ
+         FrDjnSbkX3uP1pTL+uTEt6Iz2NudznzH19skM5UPImMxQNbkVIeItfqFU9S8jX9QnVhT
+         r1vhAappdX89qbN1RRAtREU/uymLhCOHouglyszHILOWE7B6RqLE3H4FsVZ3w9Sk9/lW
+         drXk4R4bmpQdIepsGxcfU4h8PFROO4AlNymcJEzcCFc/j9AeWgoq7i8wkWA4nsd5AbdL
+         58MA==
+X-Forwarded-Encrypted: i=1; AJvYcCX144OwHK9WNMHYrNM+hQuySKp4mNZZrsxtKc+gnwgzbEYZbbFJL+tEbxlwuJKBUd/6CeKzaOlFmKnROz+yHWe77Wk=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx9P3zISAvup0x8vxsl8Kpr99I8WDIXjJT+uqc74UBc4vwBZPIT
+	T+XcqqnkzQVyhbkwa7wNRNfDKerIP4hAra5ecSMgbZ5a14oiFF7Y6DWMsT79pbDd18g+qg2L6oJ
+	XA7vP9qK3FhQRWOpKYPpjJdQRZE+RjCk=
+X-Gm-Gg: ATEYQzwsG3YDtA1J5HzKeG3GQCRqZxzRBwXE3lBpZ/02dwJ3dn0q1SNF+1tbbt7Xm+K
+	DDcESHJn25BEhMkdJo4EFc2xG6ae2P1g7C7RVGMs553+Jgsu8xMZJdYnPMEo/HUW1npgA2mrib6
+	MQfDFq9hq+SSsOsAUm0LBvikJLIoaz0PQCsShfzgqB57+JPL3wng8wel7ZdVLNurCg3vhkUghZH
+	IyNTK8U3Ux+bdHj74tw3jN7/+UcB99mnSMGHkD+I08ITAHluJ1ZACCwJW9GGiG6AITe50wprh/N
+	ZSutHkU69VuLkKTkbAdlKH1KF0Voe9svaMJocQSkzGjNnYIdobcEcdqQjSjITOCbEu8QTheVM0E
+	6xkFbamlpUyscok3elg5jLhYB
+X-Received: by 2002:a05:690c:6381:b0:79a:51df:6a0a with SMTP id
+ 00721157ae682-79a71dc2b29mr8669987b3.60.1773779436732; Tue, 17 Mar 2026
+ 13:30:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260305201754.151603-1-skandigraun@gmail.com>
- <20260305201754.151603-3-skandigraun@gmail.com> <V542CT.KE4IFLMSTCWD2@t-online.de>
- <4ba11fc4-05a8-4a78-8b82-2a1e4aad59c7@gmail.com>
-In-Reply-To: <4ba11fc4-05a8-4a78-8b82-2a1e4aad59c7@gmail.com>
+References: <20260313232357.1729272-1-pkj@axis.com> <0Y22CT.71SU5UJGTSVH2@t-online.de>
+In-Reply-To: <0Y22CT.71SU5UJGTSVH2@t-online.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 17 Mar 2026 13:28:55 -0700
-X-Gm-Features: AaiRm50w0RIQDkb7-1yTeWzAeOXiK9Yc4jeDrEJjnnBVhnhLtp8i9_iTbL-Vht8
-Message-ID: <CAMKF1sq3vYuiL3=HO7O6hotNkAdKSdjL-cv021=F3QXJu3qUKQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 3/3] samba: upgrade 4.19.9 -> 4.23.5
-To: skandigraun@gmail.com
-Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d0623b064d3e309b"
+Date: Tue, 17 Mar 2026 13:30:09 -0700
+X-Gm-Features: AaiRm52iye2aWGDac1H6hRLiHHPIIIktSija4y5KAt_0X9x2RWUhvZzEP0LeQP0
+Message-ID: <CAMKF1sp7jWAoB2d+ssHReAJh=_mJagTji92JE9Vg93KArjRkMw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] jq: Use Git to fetch the code
+To: f_l_k@t-online.de
+Cc: peter.kjellerstedt@axis.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000003c841f064d3e3587"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 20:29:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125334
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 20:30:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125335
 
---000000000000d0623b064d3e309b
+--0000000000003c841f064d3e3587
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 17, 2026 at 11:53=E2=80=AFAM Gyorgy Sarvari via lists.openembed=
-ded.org
-<skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+On Tue, Mar 17, 2026 at 11:21=E2=80=AFAM Markus Volk via lists.openembedded=
+.org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 
-> On 3/17/26 19:46, Markus Volk wrote:
-> > On Thu, Mar 5 2026 at 21:17:51 +01:00:00, Gyorgy Sarvari via
-> > lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
+> On Sat, Mar 14 2026 at 00:23:57 +01:00:00, Peter Kjellerstedt via
+> lists.openembedded.org <peter.kjellerstedt=3Daxis.com@lists.openembedded.=
+org>
 > wrote:
-> >> SAMBA4_IDMAP_MODULES
-> >
-> > I see an error with this update:
-> > ERROR: samba-4.23.6-r0 do_compile: Execution of '/home/flk/bitbake-
-> > builds/poky/build/tmp/work/corei7-64-oe-linux/samba/4.23.6/temp/
-> > run.do_compile.1254855' failed with exit code 1
-> > ERROR: Logfile of failure stored in: /home/flk/bitbake-builds/poky/
-> >
-> build/tmp/work/corei7-64-oe-linux/samba/4.23.6/temp/log.do_compile.125485=
-5
-> > Log data follows:
-> > | DEBUG: Executing shell function do_compile
-> > | Waf: Entering directory `/home/flk/bitbake-builds/poky/build/tmp/work=
-/
-> > corei7-64-oe-linux/samba/4.23.6/sources/samba-4.23.6/bin/default'
-> > | Selected system MIT krb5 libraries, Heimdal use is disabled
-> > | Checking project rules ...
-> > | Project rules pass
-> > | [3427/3555] Processing manpages/smb.conf.5: docs-xml/manpages/
-> > smb.conf.5.xml bin/default/docs-xml/smbdotconf/parameters.all.xml bin/
-> > default/docs-xml/build/DTD/samba.build.pathconfig docs-xml/build/DTD/
-> > samba.entities bin/default/docs-xml/build/DTD/samba.build.version ->
-> > bin/default/docs-xml/manpages/smb.conf.5
-> > | runtime error: file file:///home/flk/bitbake-builds/poky/build/tmp/
-> > work/corei7-64-oe-linux/samba/4.23.6/recipe-sysroot-native/usr/share/
-> > xml/docbook/xsl-stylesheets-1.79.1/lib/lib.xsl <file:///home/flk/
-> > bitbake-builds/poky/build/tmp/work/corei7-64-oe-linux/samba/4.23.6/
-> > recipe-sysroot-native/usr/share/xml/docbook/xsl-stylesheets-1.79.1/lib/
-> > lib.xsl> line 58 element choose
-> > | xsltApplySequenceConstructor: A potential infinite template recursion
-> > was detected.
-> > | You can adjust xsltMaxDepth (--maxdepth) in order to raise the maximu=
-m
-> > number of nested template calls and variables/params (currently set to
-> > 3000).
+>
+> jq
 >
 >
-> :)
-> Interesting, because I have seen this too, but then it suddenly
-> disappeared, though I spent like an hour on it trying to get back,
-> because I found a patch to fix this...
+> I see this failure in jq:
+> | cc1: fatal error: src/lexer.c: No such file or directory
 >
-> Anyway, will take a look at it - thank you for testing it.
+>
+> 'inherit autotools-brokensep' fixed the issue for me
 >
 
-I will hold off this one for now then.
+IMO this should be fixed in source to use path to generated lexec.c file, I
+think its pregenerated in archives
+but needs to be regenerated when building from git sources.
 
 
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125332):
-> https://lists.openembedded.org/g/openembedded-devel/message/125332
-> Mute This Topic: https://lists.openembedded.org/mt/118158979/1997914
+> View/Reply Online (#125330):
+> https://lists.openembedded.org/g/openembedded-devel/message/125330
+> Mute This Topic: https://lists.openembedded.org/mt/118307165/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -162,90 +128,40 @@ I will hold off this one for now then.
 >
 >
 
---000000000000d0623b064d3e309b
+--0000000000003c841f064d3e3587
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
 mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Mar 17,=
- 2026 at 11:53=E2=80=AFAM Gyorgy Sarvari via <a href=3D"http://lists.openem=
-bedded.org">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:=
-gmail.com@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; =
-wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 3/17/2=
-6 19:46, Markus Volk wrote:<br>
-&gt; On Thu, Mar 5 2026 at 21:17:51 +01:00:00, Gyorgy Sarvari via<br>
-&gt; <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D=
-"_blank">lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gma=
-il.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openembedd=
-ed.org</a>&gt; wrote:<br>
-&gt;&gt; SAMBA4_IDMAP_MODULES<br>
-&gt; <br>
-&gt; I see an error with this update:<br>
-&gt; ERROR: samba-4.23.6-r0 do_compile: Execution of &#39;/home/flk/bitbake=
--<br>
-&gt; builds/poky/build/tmp/work/corei7-64-oe-linux/samba/4.23.6/temp/<br>
-&gt; run.do_compile.1254855&#39; failed with exit code 1<br>
-&gt; ERROR: Logfile of failure stored in: /home/flk/bitbake-builds/poky/<br=
->
-&gt; build/tmp/work/corei7-64-oe-linux/samba/4.23.6/temp/log.do_compile.125=
-4855<br>
-&gt; Log data follows:<br>
-&gt; | DEBUG: Executing shell function do_compile<br>
-&gt; | Waf: Entering directory `/home/flk/bitbake-builds/poky/build/tmp/wor=
-k/<br>
-&gt; corei7-64-oe-linux/samba/4.23.6/sources/samba-4.23.6/bin/default&#39;<=
-br>
-&gt; | Selected system MIT krb5 libraries, Heimdal use is disabled<br>
-&gt; | Checking project rules ...<br>
-&gt; | Project rules pass<br>
-&gt; | [3427/3555] Processing manpages/smb.conf.5: docs-xml/manpages/<br>
-&gt; smb.conf.5.xml bin/default/docs-xml/smbdotconf/parameters.all.xml bin/=
-<br>
-&gt; default/docs-xml/build/DTD/samba.build.pathconfig docs-xml/build/DTD/<=
-br>
-&gt; samba.entities bin/default/docs-xml/build/DTD/samba.build.version -&gt=
-;<br>
-&gt; bin/default/docs-xml/manpages/smb.conf.5<br>
-&gt; | runtime error: file file:///home/flk/bitbake-builds/poky/build/tmp/<=
-br>
-&gt; work/corei7-64-oe-linux/samba/4.23.6/recipe-sysroot-native/usr/share/<=
-br>
-&gt; xml/docbook/xsl-stylesheets-1.79.1/lib/lib.xsl &lt;file:///home/flk/<b=
-r>
-&gt; bitbake-builds/poky/build/tmp/work/corei7-64-oe-linux/samba/4.23.6/<br=
->
-&gt; recipe-sysroot-native/usr/share/xml/docbook/xsl-stylesheets-1.79.1/lib=
-/<br>
-&gt; lib.xsl&gt; line 58 element choose<br>
-&gt; | xsltApplySequenceConstructor: A potential infinite template recursio=
-n<br>
-&gt; was detected.<br>
-&gt; | You can adjust xsltMaxDepth (--maxdepth) in order to raise the maxim=
-um<br>
-&gt; number of nested template calls and variables/params (currently set to=
-<br>
-&gt; 3000).<br>
-<br>
-<br>
-:)<br>
-Interesting, because I have seen this too, but then it suddenly<br>
-disappeared, though I spent like an hour on it trying to get back,<br>
-because I found a patch to fix this...<br>
-<br>
-Anyway, will take a look at it - thank you for testing it.<br></blockquote>=
-<div><br></div><div>I will hold off this one for now then.</div><div>=C2=A0=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
-order-left:1px solid rgb(204,204,204);padding-left:1ex">
+ 2026 at 11:21=E2=80=AFAM Markus Volk via <a href=3D"http://lists.openembed=
+ded.org">lists.openembedded.org</a> &lt;f_l_k=3D<a href=3D"mailto:t-online.=
+de@lists.openembedded.org">t-online.de@lists.openembedded.org</a>&gt; wrote=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div id=3D"m_-=
+5184816705407950260geary-body" dir=3D"auto">On Sat, Mar 14 2026 at 00:23:57=
+ +01:00:00, Peter Kjellerstedt via <a href=3D"http://lists.openembedded.org=
+" target=3D"_blank">lists.openembedded.org</a> &lt;peter.kjellerstedt=3D<a =
+href=3D"mailto:axis.com@lists.openembedded.org" target=3D"_blank">axis.com@=
+lists.openembedded.org</a>&gt; wrote:<br><blockquote type=3D"cite"><div sty=
+le=3D"white-space:break-spaces">jq</div></blockquote><div><br></div><div>I =
+see this failure in jq:</div><div>| cc1: fatal error: src/lexer.c: No such =
+file or directory</div><div><br></div><div><br></div><div>&#39;inherit auto=
+tools-brokensep&#39; fixed the issue for me</div></div></blockquote><div><b=
+r></div><div>IMO this should be fixed in source to use path to generated le=
+xec.c file, I think its pregenerated in archives</div><div>but needs to be =
+regenerated when building from git sources.</div><div>=C2=A0</div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#125332): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/125332" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/125332</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118158979/199=
+View/Reply Online (#125330): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/125330" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/125330</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118307165/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/118158979/1997914</a><br>
+t/118307165/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -257,5 +173,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div></div>
 
---000000000000d0623b064d3e309b--
+--0000000000003c841f064d3e3587--
 
