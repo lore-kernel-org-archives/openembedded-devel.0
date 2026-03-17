@@ -1,321 +1,379 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5679BFED9EF
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 16:57:22 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.80835.1773766638158997293
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 574E0FED9E8
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 16:58:52 +0000 (UTC)
+Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.81127.1773766729515156581
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Mar 2026 09:57:18 -0700
+ Tue, 17 Mar 2026 09:58:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=XQaLPWBy;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout07.t-online.de (Postfix) with SMTP id EFC7FEA34
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 17:57:15 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.160.82]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1w2XjE-41bjST0; Tue, 17 Mar 2026 17:57:12 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gimp: update 3.0.8 -> 3.2.0
-Date: Tue, 17 Mar 2026 17:56:53 +0100
-Message-ID: <20260317165701.643532-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.53.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=d4+q+NyV;
+ spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-64c9ebd1369so5910529d50.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 09:58:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773766729; cv=none;
+        d=google.com; s=arc-20240605;
+        b=WWtzLygmJjtd4JbYz3yRSSgGhmeM6yL0jf2ndpaL0AIk6XkSPEhukj9Zy5wj2U/6qR
+         11geSD05bXuDEJQ3EEAXxxOlcOvjlPFbzn1N0XuFrbPH0URpc1zTPF/hGOBNhuRWnhed
+         oHxrwQRz86cFP0a8lyn+vt1SB2GBqhJnAkNrvF0S1gh3Rf2YSSltO5Il1+sh1zXhJlXv
+         4sBZ0AI+lCC99S4Ps5sn44XCcIfk2rAbdVaLnHly1jWJVD4SAXAJRU2OKpUOqmpvObey
+         QzKxhIOZypve9/FWllPYxxBgMxK99XetHGTIpj6XiIe+jCjEaKQMEUZFJDXWcKQ/YIa/
+         9XOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=5f0JvVwB0URooRAzMoSlAXGT7mVAr+CWDUBlcwhOoVM=;
+        fh=pdeOg0eUEeSbuFfdgh6mXmfyvsNCruy81TzftImGxD4=;
+        b=VRwvyZOga1grGYZKbyGeBYgM7kLrr5QD28GMgED6zbcBhUa2JczzxKwXu+b/m1OLvc
+         s1Quf7lWMKFz30hwPL1sYe8LCQOfD7UfYJBX1rFOlcZRCBqDsLDWBCkB8k924at2933r
+         H8exx6RPWqYcNYCmfRWACpLfSwtF8HEcUx/nUCp73mZjCmZ03M6SghCi9K9yuHBrsZ1c
+         KaSNgxdFz9Sc6ju/hAMnmbfdt1hrjIccklgG+o9NE736rhdymuA9Hew0BUOrDG7ssprk
+         ZD4yTLH21bZKwUzj9QGDslZOu9X7v3eeJxiKU9Aazp0n8VAWxiuYHCg+UBcpW4MwejLR
+         wgVg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773766728; x=1774371528; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=5f0JvVwB0URooRAzMoSlAXGT7mVAr+CWDUBlcwhOoVM=;
+        b=d4+q+NyVkvG2fepgJOc3PAnfuEiWbUB5ImlRrpktl/cqb4Axrc5iw8FyajToQWw9OP
+         Z+HVX7jICThyDZUE05P92jIMn4rBFaYAzAssJ0JgTFn2ET9RroiJmn8o+Gh0ohcp2Ae5
+         rYGFRPGgFHMoLV4z4tLbY6/v22bFvDlYjDnyCwJBKJpXu/91a619rmdr/U/eIIvyo/Hu
+         YAFMIyUafxxtWUICc+1/QNEJXjRu3q3Kc17lNB8u7DWCHe6NsxYgvMNiPbHvH64MooOR
+         Ua7MrTdOuSpoksq6R05wY9ea4UXim21boYIgzmBx8ZLdIb5D52beGSRt5iHrzTpW/DL7
+         nQig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773766729; x=1774371529;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5f0JvVwB0URooRAzMoSlAXGT7mVAr+CWDUBlcwhOoVM=;
+        b=AE6GCYijrp2zIoUl2NTb9wejr4GSIKXE+qvu05NlzYYjbqBPaNl7Xov/xfxdt0sa6d
+         XBP9LfmUmdG1vtQAdmA7+eQo8sERg2H10sQA1C5sdUeM9/bP3AlqXIJWiFW1bOWIkmj8
+         xmHdiMKO+3i2OfM4YMQIWNgjJ0fCiHnaFlGIYVXbCHXSY8RMhSVa++DYuQH5pnrPsSNg
+         mXT3Wdjw2M6qbYVS2DxgBe0n7CrDdFJskieDXO67myA2Kbqma8UbrizBEMbROE0R/0zQ
+         4gN66/2VGL+OIplfwC6qOMNU9JAIEgvZSxDDt+zcbjXjfQZb8nkQ6uDby9OYoi4UWQF5
+         ZIjg==
+X-Gm-Message-State: AOJu0YwX4yaqU7UiG96dlZu/hpjflGfOjUGs5uwcSQiYJvRPrg6bqX7Q
+	A37oY9a0ZnVpPiWbqGBO0NmJnz9pe+ucuA3KsyjJJqH797sZNByomPpyN6Z2WkhAVoYmRF63Vrq
+	3ZcebAzsC8udzX1teZ6LbSMwEVe/YBbzYO63I
+X-Gm-Gg: ATEYQzy9CeBndPolDyKjW+Spxq2kppQpvmmNGTP4Bnilrf1T7hOzLM+lC/4Fa0eATB5
+	WFvDspxYon3OV/TYo6UyvtjwP02b+sSysn82lDwciz6Xrd+btBEUrLWWSUs418d7nMkgDkFBYE/
+	j7Zl1g9Tcz5kLvzK5/KMoM0ZbhG4+r2TKFSmCLrL9EZl3FeVH/3VnZ0nr/bPAjlXZz8khoJTrkd
+	rgDs2erNxJ9iRhIH8KpKNsWieiOLAVQQur9FPGSUKQgSaAOj/ceAbx2u5Px5cuq+QvFhN7ISgRd
+	rglPOPsecL6Fifeo9jjyQ2hDpe1dy3oIuYNdZ4z316O0GkMQcDLMp/ub7lKcwRevgZL/ot/grPR
+	7gaYnBbe9eb1pyJj5ZxG/W5AY
+X-Received: by 2002:a05:690e:418b:b0:646:7062:22ad with SMTP id
+ 956f58d0204a3-64e915c9e74mr348994d50.46.1773766728365; Tue, 17 Mar 2026
+ 09:58:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1773766632-58FF6842-A3014913/0/0 CLEAN NORMAL
-X-TOI-MSGID: ad5a36c6-f128-473f-950e-00c4e4be52bd
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1773766635; i=f_l_k@t-online.de;
-	bh=Pmel9kEiSGHK8Pv6w1KnOAqWHV36n/zBIO24ogMaQEU=;
-	h=From:To:Subject:Date;
-	b=XQaLPWByNPtyLaU0NSTyrFGy86WCyoN8vqtFOqLZ1sIgXDfc7c4NtTvgNOdmQVDLO
-	 76JE5lDlE3aUDEDIWJC0KrIz7o69jweJ8H6F9v1gKaPVxa81x3oc/wD/xpH6z444Un
-	 Bt5S+3bF9dvaSSrDo7TNYfpnq3IW3AK6/quGRxVUN81vn6VMWdnCoYRNbM2UrkXgsD
-	 nz8EOVISqus+4Hw4tYsvxQ/YJbtjXR8t2HJ8/lbCitNaANlPrEYiMSXNd6ToKkm4wA
-	 UhCBC33DnPR5J6OrHL2pwznKjP1CSnhbHD+Hu/KY+CnPnQ+Rb8zN6ACW5aF/q7KEjv
-	 CPgJ41XdXxz+Q==
-Content-Transfer-Encoding: quoted-printable
+References: <20260315133441.3034831-1-deeratho@cisco.com>
+In-Reply-To: <20260315133441.3034831-1-deeratho@cisco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 Mar 2026 09:58:21 -0700
+X-Gm-Features: AaiRm51dQ8uWwn-lCnTH5nhp7_aKA_cENz4MAIIwOCzt8qg7zm6lnByFyjJg7q0
+Message-ID: <CAMKF1so1J8YHsCstkS1cYdDc0rTgK27abaE7BowvDdgADo-ipA@mail.gmail.com>
+Subject: Re: [oe] [meta-openembedded][master][PATCH 0/24] Pull request (Cover
+ letter only)
+To: deeratho@cisco.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000c239ef064d3b3f92"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 16:57:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125321
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 16:58:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125322
 
-- remove a backport patch
-- rework the fix for host systems that dont provide iso-codes
-- update mypaint-brushes dependency to 2.x
+--000000000000c239ef064d3b3f92
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...ind-header-detection-on-non-macOS-pl.patch | 51 -------------------
- ...meson.build-require-iso-codes-native.patch | 35 -------------
- ...relative-path-for-ISO_CODES_LOCATION.patch | 51 +++++++++++++++++++
- ...003-meson.build-reproducibility-fix.patch} |  0
- .../gimp/{gimp_3.0.8.bb =3D> gimp_3.2.0.bb}     | 15 +++---
- 5 files changed, 58 insertions(+), 94 deletions(-)
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libu=
-nwind-header-detection-on-non-macOS-pl.patch
- delete mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-re=
-quire-iso-codes-native.patch
- create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-us=
-e-relative-path-for-ISO_CODES_LOCATION.patch
- rename meta-gnome/recipes-gimp/gimp/gimp/{0002-meson.build-reproducibili=
-ty-fix.patch =3D> 0003-meson.build-reproducibility-fix.patch} (100%)
- rename meta-gnome/recipes-gimp/gimp/{gimp_3.0.8.bb =3D> gimp_3.2.0.bb} (=
-91%)
+Please run
 
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-h=
-eader-detection-on-non-macOS-pl.patch b/meta-gnome/recipes-gimp/gimp/gimp=
-/0001-meson-Fix-libunwind-header-detection-on-non-macOS-pl.patch
-deleted file mode 100644
-index 879529b80e..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson-Fix-libunwind-header-d=
-etection-on-non-macOS-pl.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From 8862f36fcec74152afeee2a99c0e04b84b6cf5b3 Mon Sep 17 00:00:00 2001
--From: Bruno Lopes <brunvonlope@outlook.com>
--Date: Sun, 25 Jan 2026 11:11:48 -0300
--Subject: [PATCH] meson: Fix libunwind header detection on non-macOS plat=
-forms
--
--Closes: #15750
--
--Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/=
-1aa51ca0637db88a4ea958d03fa6692e6ac0289b]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- meson.build | 17 ++++++++++-------
-- 1 file changed, 10 insertions(+), 7 deletions(-)
--
--diff --git a/meson.build b/meson.build
--index 2192968..cfa1f71 100644
----- a/meson.build
--+++ b/meson.build
--@@ -731,11 +731,14 @@ conf.set('HAVE_LIBBACKTRACE', libbacktrace.found()=
-)
-- ## Check for libunwind
-- # In most platforms, unw_*() functions are in the libunwind library.
-- # In macOS, it is on libSystem (there we only need the SDK header).
---libunwind =3D ( get_option('libunwind')
---  ? dependency('libunwind', version: '>=3D1.1.0', required: false)
---  : no_dep
---)
---have_unwind =3D libunwind.found() or cc.has_header('libunwind.h', requi=
-red: false)
--+libunwind =3D no_dep
--+if get_option('libunwind')
--+  libunwind =3D dependency('libunwind', version: '>=3D1.1.0', required:=
- false)
--+  libunwind_h =3D platform_osx ? cc.has_header('libunwind.h', required:=
- false) : false
--+  have_unwind =3D libunwind.found() or libunwind_h
--+else
--+  have_unwind =3D false
--+endif
-- conf.set('HAVE_LIBUNWIND', have_unwind ? 1 : false)
--=20
-- ## Check for backtrace() API
--@@ -758,11 +761,11 @@ if platform_windows
-- elif platform_linux
--   if not have_execinfo_h
--     dashboard_backtrace=3D'no (missing: execinfo.h)'
---  elif not libbacktrace.found() and not libunwind.found()
--+  elif not libbacktrace.found() and not have_unwind
--     dashboard_backtrace=3D'rough (missing: libbacktrace and libunwind)'
--   elif not libbacktrace.found()
--     dashboard_backtrace=3D'partially detailed (missing: libbacktrace)'
---  elif not libunwind.found()
--+  elif not have_unwind
--     dashboard_backtrace=3D'partially detailed (missing: libunwind)'
--   else
--     dashboard_backtrace=3D'detailed'
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-i=
-so-codes-native.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.buil=
-d-require-iso-codes-native.patch
-deleted file mode 100644
-index ffb8ef29df..0000000000
---- a/meta-gnome/recipes-gimp/gimp/gimp/0001-meson.build-require-iso-code=
-s-native.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 8ccd12d6ec3330e9646ae9db6fd491226d516dc3 Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Fri, 28 Mar 2025 01:33:00 +0100
--Subject: [PATCH] meson.build: require iso-codes-native
--
--This fixes:
--FAILED: app/widgets/gimplanguagestore-data.h
--/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/gimp/3.0.2/buil=
-d/tools/gen-languages
--gimp_language_store_parser_init: 0.006277 seconds
--ERROR: parse_iso_codes: error parsing '/usr/share/xml/iso-codes/iso_639_=
-3.xml': No such file or directory
--
--Upstream-Status: Denied [https://gitlab.gnome.org/GNOME/gimp/-/merge_req=
-uests/2185]
--Upstream argues that iso-codes locale (.mo files) are required on the ta=
-rget
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
-----
-- meson.build | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/meson.build b/meson.build
--index efbc2d8175..fd050f4d3c 100644
----- a/meson.build
--+++ b/meson.build
--@@ -1135,7 +1135,7 @@ endif
-- #######################################################################=
-#########
-- # ISO codes
--=20
---isocodes =3D dependency('iso-codes', required: false)
--+isocodes =3D dependency('iso-codes', required: false, native: true)
-- if isocodes.found()
--   isocodes_prefix =3D isocodes.get_variable(pkgconfig: 'prefix')
--   isocodes_location =3D isocodes_prefix / 'share' / 'xml' / 'iso-codes'
----=20
--2.49.0
--
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-use-relat=
-ive-path-for-ISO_CODES_LOCATION.patch b/meta-gnome/recipes-gimp/gimp/gimp=
-/0002-meson.build-use-relative-path-for-ISO_CODES_LOCATION.patch
-new file mode 100644
-index 0000000000..826d3394ad
---- /dev/null
-+++ b/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-use-relative-pat=
-h-for-ISO_CODES_LOCATION.patch
-@@ -0,0 +1,51 @@
-+From 8ccd12d6ec3330e9646ae9db6fd491226d516dc3 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Fri, 28 Mar 2025 01:33:00 +0100
-+Subject: [PATCH] meson.build: use relative path for ISO_CODES_LOCATION
-+
-+If the host system does not provide iso-codes, the build fails with the =
-following message:
-+FAILED: app/widgets/gimplanguagestore-data.h
-+/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/gimp/3.0.2/buil=
-d/tools/gen-languages
-+gimp_language_store_parser_init: 0.006277 seconds
-+ERROR: parse_iso_codes: Error parsing =E2=80=98/usr/share/xml/iso-codes/=
-iso_639_3.xml=E2=80=99: No such file or directory
-+
-+So far, we have worked around the problem by using the =E2=80=9Ciso-code=
-s-native=E2=80=9D dependency, but the path
-+for 'isocodes_prefix' is then generated from the native pkgconfig entry,=
- resulting in a hard-coded path to
-+${STAGING_DATADIR_NATIVE}, which then leaks into the binaries of gimp an=
-d gimp-console.
-+
-+Instead, use iso-codes for the target and adjust the path stored in ISO_=
-CODES_LOCATION
-+(which is used in tools/gen-languages.c) to a relative path so that the =
-build system can find it.
-+
-+This allows us to depend on iso-codes for the target system, while still=
- working on host systems that
-+do not provide iso-codes.
-+
-+It also fixes a reproducibility issue:
-+ERROR: gimp-3.2.0-r0 do_package_qa: QA Issue: File /usr/bin/gimp-console=
--3.2 in package gimp contains reference to TMPDIR [buildpaths]
-+ERROR: gimp-3.2.0-r0 do_package_qa: QA Issue: File /usr/bin/gimp-3.2 in =
-package gimp contains reference to TMPDIR [buildpaths]
-+ERROR: gimp-3.2.0-r0 do_package_qa: Fatal QA errors were found, failing =
-task.
-+ERROR: Logfile of failure stored in: /home/flk/bitbake-builds/poky/build=
-/tmp/work/corei7-64-oe-linux/gimp/3.2.0/temp/log.do_package_qa.597065
-+ERROR: Task (/home/flk/bitbake-builds/poky/layers/meta-openembedded/meta=
--gnome/recipes-gimp/gimp/gimp_3.2.0.bb:do_package_qa) failed with exit co=
-de '1'
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index efbc2d8175..fd050f4d3c 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -1184,7 +1184,7 @@
-+   isocodes_prefix =3D isocodes.get_variable(pkgconfig: 'prefix')
-+   isocodes_location =3D isocodes_prefix / 'share' / 'xml' / 'iso-codes'
-+   isocodes_localedir=3D isocodes_prefix / 'share' / 'locale'
-+-  conf.set_quoted('ISO_CODES_LOCATION',  isocodes_location)
-++  conf.set_quoted('ISO_CODES_LOCATION',  '..' / 'recipe-sysroot' / 'usr=
-' / 'share' / 'xml' / 'iso-codes')
-+   conf.set_quoted('ISO_CODES_LOCALEDIR', isocodes_localedir)
-+ endif
-+ conf.set('HAVE_ISO_CODES', isocodes.found())
-+--=20
-+2.49.0
-+
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproduci=
-bility-fix.patch b/meta-gnome/recipes-gimp/gimp/gimp/0003-meson.build-rep=
-roducibility-fix.patch
-similarity index 100%
-rename from meta-gnome/recipes-gimp/gimp/gimp/0002-meson.build-reproducib=
-ility-fix.patch
-rename to meta-gnome/recipes-gimp/gimp/gimp/0003-meson.build-reproducibil=
-ity-fix.patch
-diff --git a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb b/meta-gnome/reci=
-pes-gimp/gimp/gimp_3.2.0.bb
-similarity index 91%
-rename from meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-rename to meta-gnome/recipes-gimp/gimp/gimp_3.2.0.bb
-index 1c7f634b65..d6928498ac 100644
---- a/meta-gnome/recipes-gimp/gimp/gimp_3.0.8.bb
-+++ b/meta-gnome/recipes-gimp/gimp/gimp_3.2.0.bb
-@@ -20,7 +20,7 @@ DEPENDS =3D " \
-     glib-2.0-native \
-     gtk+3 \
-     harfbuzz \
--    iso-codes-native \
-+    iso-codes \
-     jpeg \
-     json-glib \
-     lcms \
-@@ -32,7 +32,7 @@ DEPENDS =3D " \
-     librsvg-native \
-     libxmu \
-     libxslt-native \
--    mypaint-brushes-1.0 \
-+    mypaint-brushes \
-     pango \
-     poppler \
-     poppler-data \
-@@ -58,13 +58,12 @@ GIDOCGEN_MESON_OPTION =3D "gi-docgen"
- GIDOCGEN_MESON_ENABLE_FLAG =3D "enabled"
- GIDOCGEN_MESON_DISABLE_FLAG =3D "disabled"
-=20
--SRC_URI =3D "https://download.gimp.org/gimp/v3.0/${BP}.tar.xz \
--           file://0002-meson.build-reproducibility-fix.patch \
-+SRC_URI =3D "https://download.gimp.org/gimp/v3.2/${BP}.tar.xz \
-            file://0001-meson.build-dont-check-for-lgi.patch \
--           file://0001-meson.build-require-iso-codes-native.patch \
--           file://0001-meson-Fix-libunwind-header-detection-on-non-macOS=
--pl.patch \
--           "
--SRC_URI[sha256sum] =3D "feb498acc01b26827cff1ff95aa8fb82cdd6a60d7abf773c=
-fcd19abeafca3386"
-+           file://0002-meson.build-use-relative-path-for-ISO_CODES_LOCAT=
-ION.patch \
-+           file://0003-meson.build-reproducibility-fix.patch \
-+"
-+SRC_URI[sha256sum] =3D "2618391416e51be3c693df9ef90e3860ed72ab3d36363ea1=
-f196e30b75b2e083"
-=20
- PACKAGECONFIG[aa] =3D "-Daa=3Denabled,-Daa=3Ddisabled,aalib"
- PACKAGECONFIG[alsa] =3D "-Dalsa=3Denabled,-Dalsa=3Ddisabled,alsa-lib"
---=20
-2.53.0
+bitbake -c fetch universe --dry-run -k
 
+With these changes and fix the fallouts.
+
+On Sun, Mar 15, 2026 at 6:35=E2=80=AFAM Deepak Rathore via lists.openembedd=
+ed.org
+<deeratho=3Dcisco.com@lists.openembedded.org> wrote:
+
+> From: Deepak Rathore <deeratho@cisco.com>
+>
+> This series extends a set of recipes to support native and nativesdk
+> variants.
+> These packages are needed as host or SDK artifacts in certain dependency
+> chains
+> (e.g., perf/tracing and networking toolchains), where dependency resoluti=
+on
+> fails when only the target variant exists.
+>
+> None of the changes alter target package behavior; they solely enable the
+> required native/nativesdk build paths.
+>
+> Testing:
+>   - Built each recipe as native/nativesdk on x86-64 with no errors.
+>   - Verified existing target builds are unaffected.
+>
+> Deepak Rathore (24):
+>   libburn: extend recipe for nativesdk builds
+>   libisoburn: extend recipe for nativesdk builds
+>   libisofs: extend recipe for nativesdk builds
+>   iscsi-initiator-utils: extend recipe for native/nativesdk builds
+>   open-isns: extend recipe for native builds
+>   tcpdump: extend recipe for native/nativesdk builds
+>   nodejs: extend recipe for nativesdk builds
+>   libyang: extend recipe for native/nativesdk builds
+>   libtracefs: extend recipe for native/nativesdk builds
+>   trace-cmd: extend recipe for native/nativesdk builds
+>   audit: extend recipe for native builds
+>   cunit: extend recipe for nativesdk builds
+>   python3-arrow: extend recipe for native/nativesdk builds
+>   python3-fastnumbers: extend recipe for native/nativesdk builds
+>   python3-future: extend recipe for nativesdk builds
+>   python3-icu: extend recipe for native/nativesdk builds
+>   python3-ipy: extend recipe for nativesdk builds
+>   python3-jsonpatch: extend recipe for native/nativesdk builds
+>   python3-natsort: extend recipe for native/nativesdk builds
+>   python3-ordered-set: extend recipe for native/nativesdk builds
+>   python3-sh: extend recipe for native/nativesdk builds
+>   python3-tabulate: extend recipe for native/nativesdk builds
+>   python3-types-python-dateutil: extend recipe for native/nativesdk build=
+s
+>   python3-websocket-client: extend recipe for native/nativesdk builds
+>
+> Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+> ---
+>  meta-filesystems/recipes-filesystems/burnia/libburn_1.5.6.bb           |
+> 2 +-
+>  meta-filesystems/recipes-filesystems/burnia/libisoburn_1.5.6.bb        |
+> 2 +-
+>  meta-filesystems/recipes-filesystems/burnia/libisofs_1.5.6.bb          |
+> 2 +-
+>  .../iscsi-initiator-utils/iscsi-initiator-utils_2.1.11.bb
+>  | 1 +
+>  meta-networking/recipes-support/open-isns/open-isns_0.102.bb           |
+> 1 +
+>  meta-networking/recipes-support/tcpdump/tcpdump_4.99.6.bb              |
+> 1 +
+>  meta-oe/recipes-devtools/nodejs/nodejs_22.22.0.bb                      |
+> 2 +-
+>  meta-oe/recipes-extended/libyang/libyang_3.13.6.bb                     |
+> 1 +
+>  meta-oe/recipes-kernel/libtracefs/libtracefs_1.8.3.bb                  |
+> 1 +
+>  meta-oe/recipes-kernel/trace-cmd/trace-cmd_3.1.5.bb                    |
+> 1 +
+>  meta-oe/recipes-security/audit/audit_4.1.3.bb                          |
+> 2 ++
+>  meta-oe/recipes-test/cunit/cunit_2.1-3.bb                              |
+> 2 +-
+>  meta-python/recipes-devtools/python/python3-arrow_1.4.0.bb             |
+> 1 +
+>  meta-python/recipes-devtools/python/python3-fastnumbers_5.1.1.bb       |
+> 1 +
+>  meta-python/recipes-devtools/python/python3-future_1.0.0.bb            |
+> 2 +-
+>  meta-python/recipes-devtools/python/python3-icu_2.16.1.bb              |
+> 2 ++
+>  meta-python/recipes-devtools/python/python3-ipy_1.01.bb                |
+> 2 +-
+>  meta-python/recipes-devtools/python/python3-jsonpatch_1.33.bb          |
+> 1 +
+>  meta-python/recipes-devtools/python/python3-natsort_8.4.0.bb           |
+> 1 +
+>  .../recipes-devtools/python/python3-ordered-set_4.1.0.bb               |
+> 2 +-
+>  meta-python/recipes-devtools/python/python3-sh_2.2.2.bb                |
+> 1 +
+>  meta-python/recipes-devtools/python/python3-tabulate_0.9.0.bb          |
+> 1 +
+>  .../python/python3-types-python-dateutil_2.9.0.20241003.bb             |
+> 1 +
+>  .../recipes-devtools/python/python3-websocket-client_1.7.0.bb          |
+> 1 +
+>  24 files changed, 26 insertions(+), 8 deletions(-)
+>
+> --
+> 2.35.6
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125219):
+> https://lists.openembedded.org/g/openembedded-devel/message/125219
+> Mute This Topic: https://lists.openembedded.org/mt/118327819/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000c239ef064d3b3f92
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Please=C2=A0run=C2=A0<div><br></div><div>bitbake -c fetch =
+universe --dry-run -k<br></div><div><br></div><div>With these changes and f=
+ix the fallouts.</div></div><br><div class=3D"gmail_quote gmail_quote_conta=
+iner"><div dir=3D"ltr" class=3D"gmail_attr">On Sun, Mar 15, 2026 at 6:35=E2=
+=80=AFAM Deepak Rathore via <a href=3D"http://lists.openembedded.org">lists=
+.openembedded.org</a> &lt;deeratho=3D<a href=3D"mailto:cisco.com@lists.open=
+embedded.org">cisco.com@lists.openembedded.org</a>&gt; wrote:<br></div><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
+:1px solid rgb(204,204,204);padding-left:1ex">From: Deepak Rathore &lt;<a h=
+ref=3D"mailto:deeratho@cisco.com" target=3D"_blank">deeratho@cisco.com</a>&=
+gt;<br>
+<br>
+This series extends a set of recipes to support native and nativesdk varian=
+ts.<br>
+These packages are needed as host or SDK artifacts in certain dependency ch=
+ains<br>
+(e.g., perf/tracing and networking toolchains), where dependency resolution=
+<br>
+fails when only the target variant exists.<br>
+<br>
+None of the changes alter target package behavior; they solely enable the<b=
+r>
+required native/nativesdk build paths.<br>
+<br>
+Testing:<br>
+=C2=A0 - Built each recipe as native/nativesdk on x86-64 with no errors.<br=
+>
+=C2=A0 - Verified existing target builds are unaffected.<br>
+<br>
+Deepak Rathore (24):<br>
+=C2=A0 libburn: extend recipe for nativesdk builds<br>
+=C2=A0 libisoburn: extend recipe for nativesdk builds<br>
+=C2=A0 libisofs: extend recipe for nativesdk builds<br>
+=C2=A0 iscsi-initiator-utils: extend recipe for native/nativesdk builds<br>
+=C2=A0 open-isns: extend recipe for native builds<br>
+=C2=A0 tcpdump: extend recipe for native/nativesdk builds<br>
+=C2=A0 nodejs: extend recipe for nativesdk builds<br>
+=C2=A0 libyang: extend recipe for native/nativesdk builds<br>
+=C2=A0 libtracefs: extend recipe for native/nativesdk builds<br>
+=C2=A0 trace-cmd: extend recipe for native/nativesdk builds<br>
+=C2=A0 audit: extend recipe for native builds<br>
+=C2=A0 cunit: extend recipe for nativesdk builds<br>
+=C2=A0 python3-arrow: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-fastnumbers: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-future: extend recipe for nativesdk builds<br>
+=C2=A0 python3-icu: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-ipy: extend recipe for nativesdk builds<br>
+=C2=A0 python3-jsonpatch: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-natsort: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-ordered-set: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-sh: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-tabulate: extend recipe for native/nativesdk builds<br>
+=C2=A0 python3-types-python-dateutil: extend recipe for native/nativesdk bu=
+ilds<br>
+=C2=A0 python3-websocket-client: extend recipe for native/nativesdk builds<=
+br>
+<br>
+Signed-off-by: Deepak Rathore &lt;<a href=3D"mailto:deeratho@cisco.com" tar=
+get=3D"_blank">deeratho@cisco.com</a>&gt;<br>
+---<br>
+=C2=A0meta-filesystems/recipes-filesystems/burnia/<a href=3D"http://libburn=
+_1.5.6.bb" rel=3D"noreferrer" target=3D"_blank">libburn_1.5.6.bb</a>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
+=C2=A0meta-filesystems/recipes-filesystems/burnia/<a href=3D"http://libisob=
+urn_1.5.6.bb" rel=3D"noreferrer" target=3D"_blank">libisoburn_1.5.6.bb</a>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A0meta-filesystems/recipes-filesystems/burnia/<a href=3D"http://libisof=
+s_1.5.6.bb" rel=3D"noreferrer" target=3D"_blank">libisofs_1.5.6.bb</a>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A0.../iscsi-initiator-utils/<a href=3D"http://iscsi-initiator-utils_2.1=
+.11.bb" rel=3D"noreferrer" target=3D"_blank">iscsi-initiator-utils_2.1.11.b=
+b</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0meta-networking/recipes-support/open-isns/<a href=3D"http://open-isns=
+_0.102.bb" rel=3D"noreferrer" target=3D"_blank">open-isns_0.102.bb</a>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0meta-networking/recipes-support/tcpdump/<a href=3D"http://tcpdump_4.9=
+9.6.bb" rel=3D"noreferrer" target=3D"_blank">tcpdump_4.99.6.bb</a>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0meta-oe/recipes-devtools/nodejs/<a href=3D"http://nodejs_22.22.0.bb" =
+rel=3D"noreferrer" target=3D"_blank">nodejs_22.22.0.bb</a>=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A0meta-oe/recipes-extended/libyang/<a href=3D"http://libyang_3.13.6.bb"=
+ rel=3D"noreferrer" target=3D"_blank">libyang_3.13.6.bb</a>=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0meta-oe/recipes-kernel/libtracefs/<a href=3D"http://libtracefs_1.8.3.=
+bb" rel=3D"noreferrer" target=3D"_blank">libtracefs_1.8.3.bb</a>=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0meta-oe/recipes-kernel/trace-cmd/<a href=3D"http://trace-cmd_3.1.5.bb=
+" rel=3D"noreferrer" target=3D"_blank">trace-cmd_3.1.5.bb</a>=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0meta-oe/recipes-security/audit/<a href=3D"http://audit_4.1.3.bb" rel=
+=3D"noreferrer" target=3D"_blank">audit_4.1.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +=
++<br>
+=C2=A0meta-oe/recipes-test/cunit/<a href=3D"http://cunit_2.1-3.bb" rel=3D"n=
+oreferrer" target=3D"_blank">cunit_2.1-3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 | 2 +-<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-arrow_1=
+.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-arrow_1.4.0.bb</a>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-fastnum=
+bers_5.1.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-fastnumbers_5.1=
+.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-future_=
+1.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-future_1.0.0.bb</a>=
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-icu_2.1=
+6.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-icu_2.16.1.bb</a>=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 ++<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-ipy_1.0=
+1.bb" rel=3D"noreferrer" target=3D"_blank">python3-ipy_1.01.bb</a>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 2 +-<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-jsonpat=
+ch_1.33.bb" rel=3D"noreferrer" target=3D"_blank">python3-jsonpatch_1.33.bb<=
+/a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-natsort=
+_8.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-natsort_8.4.0.bb</a=
+>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-ordered-set_4.1=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-ordered-set_4.1.0.bb</a=
+>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 +-<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-sh_2.2.=
+2.bb" rel=3D"noreferrer" target=3D"_blank">python3-sh_2.2.2.bb</a>=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-tabulat=
+e_0.9.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-tabulate_0.9.0.bb<=
+/a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0.../python/<a href=3D"http://python3-types-python-dateutil_2.9.0.2024=
+1003.bb" rel=3D"noreferrer" target=3D"_blank">python3-types-python-dateutil=
+_2.9.0.20241003.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +=
+<br>
+=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-websocket-clien=
+t_1.7.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-websocket-client_1=
+.7.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A024 files changed, 26 insertions(+), 8 deletions(-)<br>
+<br>
+-- <br>
+2.35.6<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#125219): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/125219" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/125219</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118327819/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/118327819/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000c239ef064d3b3f92--
 
