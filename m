@@ -2,136 +2,93 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E8B3FD7076
-	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 10:33:41 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.72957.1773743614369495653
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41FB5FD875C
+	for <webhook@archiver.kernel.org>; Tue, 17 Mar 2026 12:18:28 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.74596.1773749907690287323
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Mar 2026 03:33:34 -0700
+ Tue, 17 Mar 2026 05:18:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=K9yC+lB+;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-486b96760easo3534125e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 03:33:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=arJSfPZS;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-48334ee0aeaso50192935e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 05:18:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773743613; x=1774348413; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=qKh4H0XKQqDj5kNuOy5S66S11BDv8aJlGCmpJXGaY2o=;
-        b=K9yC+lB+YSRAncdxNiScAwF/e9nqyLtIBR5j5LGPn7F8BklF+4YUSk0ofMbF4sKHPU
-         ErMivDVrdMqFTLtMxbVx1i99SY7qfUOFXLF7t8eqWgh8lSqGnM3aVez2NKv4Bipsy0go
-         m4LY0F3yDCBQ/a9Z7+5C/JmQPwjTlVfNbbUrDkDkT3Aunyhlqd6kxeucBsFNAgq7En3v
-         W4FctY6wA4iJU9Hlb4mS6i2z/dIQ0UypfZRvp9L8Ah0QfV/tjdF374PIofT9/KP5AeYX
-         k6hd2nvCWC9xoORL+Xlb8WkcyFxmJL4OPpnzVQWSgq/8BP9TPQ6dhYLdwq1iu1aPU50D
-         +U3A==
+        d=gmail.com; s=20230601; t=1773749906; x=1774354706; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=38xgp6fTPjDfuDhHvss6cyVqODJvGdX5Z92ULZ4iK1Q=;
+        b=arJSfPZSV9rRU2nWRIa8czWZ0H6ZYjoMo31gCzbE3tZeLH2mnKBxVX8mzsAzoJU3Q5
+         BdvITzAkFJWbze8qzILl52myYwAudY3aNrLg7T/+/oaF6zjOpaqxeHQTni4pk7fGQYrM
+         ik0JkZse1Od/m0O0ujV7bmZLIg7SgYSRrer4kGxHRXnGxeAE24bDK9s1bG2TRdCiLXhF
+         0ea/qly+F3f4x2tkHxeaXhp7Kmc8vNy/niljr5yPGoop1M6zoVxMDlAHfMRjGBGkgBDy
+         0/P7XZn7gf4nghS0+rzCLQGEwWr5uTUMEDPe44H1KMvMH+OtNJiRLcFFNSi6FVVbyaHU
+         4G3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773743613; x=1774348413;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20251104; t=1773749906; x=1774354706;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qKh4H0XKQqDj5kNuOy5S66S11BDv8aJlGCmpJXGaY2o=;
-        b=IQJoe1YPQYl6YObpYYrhYwwLZnGfDesSMTNSthpu6+lH30rvC9OfI+7VvleKGpwpvq
-         RqVb5xCTKmmgCp+Dl7sXQVoebbJO84Rc9HbzWAG8SxRFf5X/JN5ZSRTcS56Qe0zCQATP
-         dR+Q/+txUb4zgwC1DI4JsMlZMm/oZwJyHJ4/WHVA5+driAllHoooC3tfIL045AjgVqDc
-         EreFzowXCgJ6XlVToMl2uNV7SJdOfbtZMWL5urovQYn+mr1Tub+RnR6XuVeOAe5z3hF0
-         OOKDuhJRvABaViGSUKdErELtrCpHALCP0Pd/zx85sKQjrv17byZaBLk9BoIkmmcND5wa
-         Jhag==
-X-Forwarded-Encrypted: i=1; AJvYcCUp+hPJHbEO3Kyj0EK2Nr4ZEBiHiJWC8/7YgRIcxDS7l/SYILyvcWccgd4wHzW1xvGE3LV/nsvjkPP/Or3+KCsT+cM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwCd/8LY/uXRW4uI97ViCRbGmQ8PpbR6I+sACVdJf+tm7wwqarn
-	r+XdYk9HKxIX6iB2SJchROeQ+Hud/rje0h4RqNjnVGCaSf9ODUNkcns6
-X-Gm-Gg: ATEYQzyPDkuP1nbtRSA0phi+1iU84pjByrNowH8IGwvHPqhwOtuS066im+ie6F/SGk/
-	5z5bwruFg9ZrMJ3ApwEKYVmwPBkvs2ecKrvLbRaX+fqimi298fWwO37ePMuw8T+B9aIgdPDrFzx
-	Ls4x93Wtt7pZsjT+Db9Ggkp29HSir0ceaO++uXD0rO7PX8wNNVDXcDbihcNijjWmnpYZq0Rk9ig
-	54jv6kgb8qIWk0vZwb1xfj36YudUx2WuBSr7sXXUJNK9nOSPTCRTx+SYeEUAsPDC7G3c1WMfYQ1
-	cfM0vOFkGd02rxI61jYlXZv1rP3dmWrusXBXBpoUoNWDgZ1PxgiYCFLCdFAv75t4wUO5Iaa+nev
-	5HhFjZxk1RVYpe3e2avmzbCJC3jbh3u0wGeKjMWmiY4yIEc2SRZCLDnT/he5uPqxWR7SEegzi/v
-	VTV90jhkqzzNt8Q9Bg5tyiFI5vaosHzck=
-X-Received: by 2002:a05:600c:1e28:b0:485:3e19:9e01 with SMTP id 5b1f17b1804b1-4855670e7d2mr259669925e9.28.1773743612476;
-        Tue, 17 Mar 2026 03:33:32 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43a0b2db487sm33086025f8f.28.2026.03.17.03.33.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 17 Mar 2026 03:33:31 -0700 (PDT)
-Message-ID: <cee29eab-457e-481e-857d-f552117fdc4d@gmail.com>
-Date: Tue, 17 Mar 2026 11:33:31 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] dlt-daemon: upgrade 2.18.10 to 3.0.0
-To: Changqing Li <changqing.li@windriver.com>,
- openembedded-devel@lists.openembedded.org
-References: <20260316083826.1550599-1-changqing.li@windriver.com>
- <20260316083826.1550599-6-changqing.li@windriver.com>
- <64b43660-a810-4ea1-a1b3-3015a0c47e1d@gmail.com>
- <9e353be2-26c5-46c4-8cdf-4ea33d24ac8a@gmail.com>
- <9e4de336-1673-4ff8-90fc-878f99ff4888@windriver.com>
-Content-Language: en-US
+        bh=38xgp6fTPjDfuDhHvss6cyVqODJvGdX5Z92ULZ4iK1Q=;
+        b=j3+Ss1onKulwNrNUgdoD5daoxn1EIxsL7JgP8kLvN2SmaPYnxBkiPP0Tm0IqTdtsL0
+         5WbfC073UX1UzvbWlbyl/6q6UFzPhrfLqm4BAlbbgg0yIhP3/ZGTm+BjozWao7qz06yV
+         o6Ih226rCoOPu2QKXwcK7KpmQsY12hbDpFo6bFoc0RvMKKxToWHbgO/xTNY5D7sHMmLP
+         lcGwbhskrx3xcQHPFuHhf2pm9UXbxIx8W6ehRYQ3c40+ZhFK341HOMjsvssWR/B7DwQt
+         SxCMW7yKHhYa6EAMx+xzUh1vwI2TfuiA/saGrsiOC+9PJrSOpoBC5qsdd1SDmYqVcCxG
+         DUhg==
+X-Gm-Message-State: AOJu0YyqDUIFO01M8kCu6DXs2QiJqCsV8FGE122CJJPg8AmTTZjNwsZT
+	W5qxER5aTvshUR8CVr+BVL0jt4ztte9x6Zho11HSXWp1sCYCm43SAFsou5xzTg==
+X-Gm-Gg: ATEYQzziWpwhryZB6wJMNQsZYu5Wv+fiDBq05vn5qnib2NK64rYfrnZS2hKwap28Q+v
+	vcYURMgWLT+Ypp+iBTR5NqTqiSDdESFZlpAQ63+CBFutUySB44+1S6u9onaz7gqv4kinXQt3IPY
+	jr3CLGsUNJ2hOze08BTpq/aRdrjwq7psZull5qDXNUSpsqdesxYmgY4EN9edLZqhI5zKHOF9oUR
+	QHfwXcu5vlLLGh6vxxnL/ErVXUS1+ij3rPR/Wzw/+Iu3TsJBBVx/ORwoaIR4W6uLWyVDLq6Ae5b
+	y17VT5dlQCT8M0WXwvt7bi87ZvzQeacF0LEmafgGofeMoIvr7rpmm4eFKLjs/cs8+xdncKHLZw9
+	dzVSPoq0fYhbstcGw0e5iiCfFmJku5LbESunE/ZCYcFOysaq9+C/DXrniwE1RdGttWEVE1UCRwO
+	fO3kGAaxDggRwO6ZMC43/o
+X-Received: by 2002:a05:600c:3104:b0:477:7ab8:aba with SMTP id 5b1f17b1804b1-485566e316dmr262760725e9.1.1773749905644;
+        Tue, 17 Mar 2026 05:18:25 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48634a7ac2csm31006735e9.1.2026.03.17.05.18.24
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Mar 2026 05:18:25 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <9e4de336-1673-4ff8-90fc-878f99ff4888@windriver.com>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] imagemagick: upgrade 7.1.2-16 -> 7.1.2-17
+Date: Tue, 17 Mar 2026 13:18:24 +0100
+Message-ID: <20260317121824.1770597-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 10:33:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125310
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 12:18:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125311
 
+Contains bugfixes and a couple of CVE fixes:
+https://github.com/ImageMagick/ImageMagick/compare/7.1.2-16...7.1.2-17
 
-On 3/17/26 10:25, Changqing Li wrote:
-> 
-> On 3/16/26 19:29, Gyorgy Sarvari wrote:
->> CAUTION: This email comes from a non Wind River email account!
->> Do not click links or open attachments unless you recognize the sender and know the content is safe.
->>
->> On 3/16/26 09:57, Gyorgy Sarvari wrote:
->>>
->>> On 3/16/26 09:38, Changqing Li via lists.openembedded.org wrote:
->>>> Changes:
->>>> https://github.com/COVESA/dlt-daemon/releases
->>>>
->>>> Remove patches already in 3.0.0:
->>>> 544.patch
->>>> 567.patch
->>>> 0001-CMakeLists-txt-make-DLT_WatchdogSec-can-be-set-by-user.patch
->>>> 0003-allow-build-with-cmake-4.patch
->>>>
->>>> Add 3 patches to fix build failures
->>>> 0001-Fix-compile-failure-related-to-gzlog.patch
->>>> 0001-Fix-kinds-of-build-failure.patch
->>>> 0001-Fix-build-failures.patch
->>>>
->>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->>>> ---
->>>>   .../glib-2.0/glibmm-2.68_2.86.0.bb            |   4 +-
->>>
->>> Is this glibmm change intentional in this patch?
->>>
->>>
->> It seems that there are some compilation failures (different errors with
->> different libc implementations):
->>
->> musl:
->> https://gist.github.com/OldManYellsAtCloud/9ec67b1fae3daa99f2a8d20baba3a19a
-> after research,  this is reproduced since systemd init manager used, so 
-> the PACKAGECONFIG is different.
->>
->> glibc:
->> https://gist.github.com/OldManYellsAtCloud/4cd6a4d28156eb486efff83381394913
-> 
-> I cannot reproduce this.   strrchar return char* is aligned with return 
-> type. seems should not have this error.
-> 
-> I build with sysvinit + musl , systemd + musl , sysvinit+glibc , systemd 
-> +glibc with V2 patch, all can build successfully.
-> 
-> //Changqing
-> 
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../{imagemagick_7.1.2-16.bb => imagemagick_7.1.2-17.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-16.bb => imagemagick_7.1.2-17.bb} (99%)
 
-
-Did you try it with glibc 2.43[1] in oe-core? That error indicates a
-failed new restriction that came with this version
-
-[1]:
-https://git.openembedded.org/openembedded-core/commit/?id=f791d6c52870f3571e740ff7818d45bb0a717934
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-16.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-17.bb
+similarity index 99%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-16.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-17.bb
+index 56b6c0710a..2a1152087a 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-16.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.2-17.bb
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+            file://imagemagick-ptest.sh \
+ "
+ 
+-SRCREV = "70563ce3759b7a55801900a11e69978a9301fbeb"
++SRCREV = "3f2f629405c62106d3569547c03634bc46fcd07d"
+ 
+ inherit autotools pkgconfig update-alternatives ptest
+ export ac_cv_sys_file_offset_bits = "64"
 
