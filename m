@@ -2,64 +2,64 @@ Return-Path: <nitin.wankhade333@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 634A410854D4
-	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 09:09:38 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9872.1773824971573739717
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 770A210854D7
+	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 09:09:48 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9896.1773824981569410720
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Mar 2026 02:09:31 -0700
+ Wed, 18 Mar 2026 02:09:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e6QYl3eI;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: nitin.wankhade333@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-8244105fa96so423607b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 02:09:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OEA/ltHS;
+ spf=pass (domain: gmail.com, ip: 209.85.215.176, mailfrom: nitin.wankhade333@gmail.com)
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-c6e85f76efeso354522a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 02:09:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773824970; x=1774429770; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1773824980; x=1774429780; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=p1Evr/TQcnfY1y3yWQFlmVAN21cmqgH8yCAMYAl4a/w=;
-        b=e6QYl3eIJ5ttzpkApranPIWVdM7rQns3Nw0m7+gTueI9vGaXYYNUiXFmf6DTRzpkG1
-         eGdBJfyTcGjPDpI8G4xcfuSlw0+KUtjiYVXG3ZY+Lf/ZTbB26MkoABtHcSQQhzq+juuI
-         OLlL8lZRZTA9RVdIxBYXq/NQiDuwB/2TDaGNlTtU+xrvHAaqEm6Q0vqcWtArUuHAuaka
-         2di36cR0a2v2ddv4DHscBQxBfjATMuJ012iGQQ28Af/saB+NzfbytT/vjmq4IBRc73iK
-         Ag/OW3I0f8IZ6+jXFHPyU7HdOMlH6ra3jMYpxJXX1Jln55twtI8R2KyA9qenImy9Euu0
-         1oew==
+        bh=AdliWSd5xp7Chvat2iJaoXs8kLfO0UCp90RM25I+rF0=;
+        b=OEA/ltHSmLIizThpBignW/pGGQ2JYzH0ySiCt46qL9aEDSeUrZ7zLbJ2+r6XJBCG9w
+         eehsK8QwP4+YbVcZuPwLWfQ3Jp7KDI4KQLlPpgDuyWG0xAHUDHBhwRB8Bc+/84JruHXc
+         zxnQjHE6qtY+ghRR+CinUHmsZieB4PIb2zPfL/Whq4EGeFxqTucY98WmQthEy2YIvkq8
+         VdYiMOgKg0uPTkjQfyt4YlUbUTGk8HrTmEmNsx8Sna19OY5QsPpqzXJhFQLvhWhAgL04
+         33wDJOE0mdXI0OA7whwTCRIvqkp8AssUDS4Cmbt0bxKfh8RNPEHo68qoXaTKiinceeuZ
+         EWFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773824970; x=1774429770;
+        d=1e100.net; s=20251104; t=1773824980; x=1774429780;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=p1Evr/TQcnfY1y3yWQFlmVAN21cmqgH8yCAMYAl4a/w=;
-        b=StRg41fPkNt+UVnMMGr2L/Qdv6LmxoUkZHqz/PAz1vt2tyKkH4q9ba7hcWbyz1s0bB
-         onZyMwb3beByIqXRHN6ej0442RmkG+QKhN+EYfY4l5em0OyqIHIBJ+2TtUBxflVKY3EA
-         mW47v4upfLlY/zTr1Sma863IABRW2EI0+TCftrOjVOBT3BMRzMgBRf4RHQd2YZLLSY9T
-         k3xxZFr/tiBhJZh5z5OFuoLZuJ+6emYcQDXNgjGgi+S7xAgt0zBYoCaSYkP/d/SfNNiT
-         6en4OvabHbjP+I6V7g/ZzWFN/d+3AAJbxMvwqOhx/LL58NJ1fjHq1LVH/POOQO7PmamY
-         aUhQ==
-X-Gm-Message-State: AOJu0YxgVtcKPfdxHSzkitP8uTRTYitDwCP4CeWb2TQNYXIMBFrvyTqm
-	iwXS48jfSjMraB5e52WAQCHHD53DrJvdVkaEqf1I+WhUDRBl/4lg4H5xGsZAWw==
-X-Gm-Gg: ATEYQzwzdFBLZVzeBjepqG8aLdTdArkG6tGxiQyDlW6uRqVQMuaQOhmhxjkP8JQldFz
-	4E3wsjTMoPGhelgvy8xCol61pth3WfX3K7R4ELlKbwMnUlI8KT03Oh5xEHT5u9vdMugW9/iVimN
-	BNm0ssiWOlyMqU90vhSUIrg1auw3AIYsmvEYMg4YrFrYGtdWD8gZi6UzpClkifKFiYsLAGwG1FA
-	fUNXZ3etzy67H1Fp6t0r3Obt6eZ3EIBvBV+6y2GbiF97M4tRUOm0YQB2VaARtbC0hDvY4jF/zoX
-	tkIufjRDVkV/zVAjHp9ddVP1VXnMoK4QwE1BM6Q991vgwCjtgAbhzFD0/x7nwxmnmUiVBtwYjY5
-	kcngty8PQfyfkf1iDFxYwOyWzEyxh1voshziYo4BFGWv+wC5WipPralogD1V8Hqb+rj5CW0K8AN
-	zQO83y2LhIT/KG1u46Tp2cQfr4kFEdtJelVbDCQNszkB2P/YVkmhZqQw==
-X-Received: by 2002:a05:6a00:a213:b0:81e:fd4c:fb39 with SMTP id d2e1a72fcca58-82a6aec2c5dmr1792822b3a.4.1773824970562;
-        Wed, 18 Mar 2026 02:09:30 -0700 (PDT)
+        bh=AdliWSd5xp7Chvat2iJaoXs8kLfO0UCp90RM25I+rF0=;
+        b=qzNozWowXUxzt6Xr7+buqkvwzIwaQw3b21u2dSB/rLXtEdvjmDgG7mfhdMos9x7bmh
+         +upPQpnHnKkTAqY7UhT9n6vqbB/Coo0ObyMxmnupltgpAuGyNqBV2w66BIeICqMmRpid
+         x0/EsWttukPOoiqN4GaYJGB48+v8EpeV/Ab0YHju+E6FhHIqu/r8AwhhOpUJs27zebIE
+         UQKtpzKrThbLvBkTh4DSMuHwLbNKZD2vRSuexqJ3NGw8Ku4JFMGMPLTupZncqepgDqm4
+         SfK1QmtvGnz2uDtERVxrKw/fOA7rf27pswvYiaXSq2khgzcv5yQjMZXps/Ht1k1Suv4t
+         3z2Q==
+X-Gm-Message-State: AOJu0YwyzWta9/dDKDIj8pC8fENjuz5scfk2ETJx3QZyHFkjEMpw3Rfz
+	QfdkpyxsbUBmbuajy5u+jFZzxdF7BNEFpEkjdyvUTz6jCLE4a7Nfkj4vDKoBKQ==
+X-Gm-Gg: ATEYQzyhiGdieyXLLP6MGTqIgKosoMZ2pOlczHhcrMKAo0uZEut+gKJ/849Z8oQFTE7
+	Y15lgBMdGo8yye9902OJRPSdsyDC/cd0w0BS+ZHWfxu5WaeXaL67eOtpWRoESZNfrRVc/xDW0YW
+	1RgR+EDQGU+31qYytdUvcp5rmc+GcyuewzRCEsDWxKuAIFlu+rqv8Iv4rt4IOwrzdu3gAbDXzJQ
+	+u5Rb677Lx6k39UhfJcBESD1H/Ywv9dHS6do/rgSQIVaMdJ3CUaHj4n2S8dxJFWkA+AVmS8rWIz
+	jMtvSBgcTtbISzcoZot5sU9TD5lFJNyXE8shBwh9Y4tgDd77CtNyBlCn7YpTEwTpikTsdzvILHh
+	PrCPeD8vyXy4mzJgUz2KDDW7yOp+fvsgMxbFByiYkk0saFo77ti7xkmqJ+42TULLc5vRkB42+tU
+	qKO8B6H5UZXNAiMEK3O/5n+9yXhSveqcQm4/lP7hsvVgw=
+X-Received: by 2002:a05:6a00:138a:b0:827:2b42:10ea with SMTP id d2e1a72fcca58-82a6ac781d2mr1873601b3a.1.1773824980550;
+        Wed, 18 Mar 2026 02:09:40 -0700 (PDT)
 Received: from LL-3324L.kpit.com ([122.167.115.31])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82a6befc046sm2590361b3a.59.2026.03.18.02.09.28
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82a6befc046sm2590361b3a.59.2026.03.18.02.09.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Mar 2026 02:09:30 -0700 (PDT)
+        Wed, 18 Mar 2026 02:09:40 -0700 (PDT)
 From: Nitin Wankhade <nitin.wankhade333@gmail.com>
 X-Google-Original-From: Nitin Wankhade <nitin.wankhade@partner.bmw.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: nitin.wankhade@kpit.com,
 	Nitin Wankhade <nitin.wankhade333@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 3/6] imagemagick: Fix CVE-2025-68618
-Date: Wed, 18 Mar 2026 14:43:35 +0530
-Message-Id: <20260318091338.483937-3-nitin.wankhade@partner.bmw.de>
+Subject: [meta-oe][kirkstone][PATCH 5/6] imagemagick: Fix CVE-2026-23874
+Date: Wed, 18 Mar 2026 14:43:37 +0530
+Message-Id: <20260318091338.483937-5-nitin.wankhade@partner.bmw.de>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260318091338.483937-1-nitin.wankhade@partner.bmw.de>
 References: <20260318091338.483937-1-nitin.wankhade@partner.bmw.de>
@@ -68,128 +68,69 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 09:09:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125356
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 09:09:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125358
 
-Reference: https://github.com/ImageMagick/ImageMagick/commit/6f431d445f3ddd609c004a1dde617b0a73e60beb
+Reference: https://github.com/ImageMagick/ImageMagick/commit/2a09644b10a5b146e0a7c63b778bd74a112ebec3
 
 Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
 ---
- .../imagemagick/files/CVE-2025-68618.patch    | 95 +++++++++++++++++++
+ .../imagemagick/files/CVE-2026-23874.patch    | 36 +++++++++++++++++++
  .../imagemagick/imagemagick_7.0.10.bb         |  1 +
- 2 files changed, 96 insertions(+)
- create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2025-68618.patch
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2026-23874.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2025-68618.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2025-68618.patch
+diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2026-23874.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2026-23874.patch
 new file mode 100644
-index 0000000000..c846b0cc31
+index 0000000000..1700f6c06a
 --- /dev/null
-+++ b/meta-oe/recipes-support/imagemagick/files/CVE-2025-68618.patch
-@@ -0,0 +1,95 @@
-+From 6f431d445f3ddd609c004a1dde617b0a73e60beb Mon Sep 17 00:00:00 2001
-+From: Cristy <urban-warrior@imagemagick.org>
-+Date: Sun, 21 Dec 2025 12:43:08 -0500
++++ b/meta-oe/recipes-support/imagemagick/files/CVE-2026-23874.patch
+@@ -0,0 +1,36 @@
++From 2a09644b10a5b146e0a7c63b778bd74a112ebec3 Mon Sep 17 00:00:00 2001
++From: Cristy <urban-warrior@...>
++Date: Thu, 15 Jan 2026 17:50:19 -0500
 +
-+Subject: [PATCH] imagemagick: Fix CVE-2025-68618
-+CVE: CVE-2025-68618
-+Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/6f431d445f3ddd609c004a1dde617b0a73e60beb]
++Subject: [PATCH] imagemagick: Fix CVE-2026-23874
++CVE: CVE-2026-23874
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/2a09644b10a5b146e0a7c63b778bd74a112ebec3]
 +Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
 +===
 +diff --git a/coders/msl.c b/coders/msl.c
-+index 68abd7d..0e8f632 100644
++index 0e8f632..7ace1b3 100644
 +--- a/coders/msl.c
 ++++ b/coders/msl.c
-+@@ -126,6 +126,7 @@ typedef struct _MSLInfo
++@@ -7416,9 +7416,19 @@ static void MSLStartElement(void *context,const xmlChar *tag,
 + 
-+   ssize_t
-+     n,
-++    depth,
-+     number_groups;
-+ 
-+   ImageInfo
-+@@ -660,13 +661,13 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+   RectangleInfo
-+     geometry;
-+ 
-+-  ssize_t
-+-    i;
-+-
-+   size_t
-+     height,
-+     width;
-+ 
-++  ssize_t
-++    i;
-++
-+   /*
-+     Called when an opening tag has been processed.
-+   */
-+@@ -674,6 +675,13 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+     "  SAX.startElement(%s",tag);
-+   exception=AcquireExceptionInfo();
-+   msl_info=(MSLInfo *) context;
-++  if (msl_info->depth++ >= MagickMaxRecursionDepth)
-++    {
-++      (void) ThrowMagickException(msl_info->exception,GetMagickModule(),
-++        DrawError,"VectorGraphicsNestedTooDeeply","`%s'",tag);
-++      xmlStopParser((xmlParserCtxtPtr) context);
-++      return;
-++    }
-+   n=msl_info->n;
-+   keyword=(const char *) NULL;
-+   value=(char *) NULL;
-+@@ -7430,12 +7438,12 @@ static void MSLStartElement(void *context,const xmlChar *tag,
-+ 
-+ static void MSLEndElement(void *context,const xmlChar *tag)
-+ {
-+-  ssize_t
-+-    n;
-+-
-+   MSLInfo
-+     *msl_info;
-+ 
-++  ssize_t
-++    n;
-++
-+   /*
-+     Called when the end of an element has been detected.
-+   */
-+@@ -7525,6 +7533,7 @@ static void MSLEndElement(void *context,const xmlChar *tag)
-+   }
-+   if (msl_info->content != (char *) NULL)
-+     msl_info->content=DestroyString(msl_info->content);
-++  msl_info->depth--;
-+ }
-+ 
-+ static void MSLCharacters(void *context,const xmlChar *c,int length)
-+diff --git a/coders/svg.c b/coders/svg.c
-+index 5caf8af..ab139e2 100644
-+--- a/coders/svg.c
-++++ b/coders/svg.c
-+@@ -1270,7 +1270,13 @@ static void SVGStartElement(void *context,const xmlChar *name,
-+   (void) LogMagickEvent(CoderEvent,GetMagickModule(),"  SAX.startElement(%s",
-+     name);
-+   svg_info=(SVGInfo *) context;
-+-  svg_info->n++;
-++  if (svg_info->n++ > MagickMaxRecursionDepth)
-++    {
-++      (void) ThrowMagickException(svg_info->exception,GetMagickModule(),
-++        DrawError,"VectorGraphicsNestedTooDeeply","`%s'",name);
-++      xmlStopParser((xmlParserCtxtPtr) context);
-++      return;
-++    }
-+   svg_info->scale=(double *) ResizeQuantumMemory(svg_info->scale,
-+     svg_info->n+1UL,sizeof(*svg_info->scale));
-+   if (svg_info->scale == (double *) NULL)
++           /* process */
++           {
++-            *msl_info->image_info[n]->magick='\0';
++-            (void) WriteImage(msl_info->image_info[n], msl_info->image[n],
++-              msl_info->exception);
+++	    (void) CopyMagickString(msl_info->image_info[n]->filename,
+++              msl_info->image[n]->filename,MagickPathExtent);
+++            (void) SetImageInfo(msl_info->image_info[n],1,exception);
+++            if (LocaleCompare(msl_info->image_info[n]->magick,"msl") != 0)
+++              {
+++                *msl_info->image_info[n]->magick='\0';
+++                (void) WriteImage(msl_info->image_info[n],msl_info->image[n],
+++                  msl_info->exception);
+++              }
+++            else
+++              (void) ThrowMagickException(msl_info->exception,GetMagickModule(),
+++                FileOpenError,"UnableToWriteFile","`%s'",
+++                msl_info->image[n]->filename);
++             break;
++           }
++         }
 diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-index 7b2d33ccb8..1afc8bbe2c 100644
+index e235b9eb89..a2e08afc1a 100644
 --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
 +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
-@@ -50,6 +50,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
-     file://CVE-2025-62171.patch \
-     file://CVE-2025-43965.patch \
+@@ -52,6 +52,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
      file://CVE-2025-66628.patch \
-+    file://CVE-2025-68618.patch \
+     file://CVE-2025-68618.patch \
+     file://CVE-2026-22770.patch \
++    file://CVE-2026-23874.patch \
  "
  
  SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
