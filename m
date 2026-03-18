@@ -1,91 +1,159 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 184F2107760F
-	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 19:36:10 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22932.1773862560786673280
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CE011077610
+	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 19:38:10 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.22875.1773862681854931530
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Mar 2026 12:36:01 -0700
+ Wed, 18 Mar 2026 12:38:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jwDhNkHv;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-486b9675d36so1758675e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 12:36:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FTOnYN/7;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-417c34b0509so254787fac.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 12:38:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773862681; cv=none;
+        d=google.com; s=arc-20240605;
+        b=iTlsse+wi78qYqT+RO9oE0LL2H6uaWUgJorTb9uVpx4TY7OtTWvTRAjaiNDj6TUwuX
+         WqB9cy5l0QWUFicafSgTPlkvcunQWGkZlBb2Tg8Iw+CGXManRP1L+JO1QP86DreJwGgW
+         GyuzCE4IEUeN0vC6bvIPyt/swlS7AdHhMOd9kKVzosw67rd4SO66JE63SQIkIdv3uht6
+         Evbay0A2Oego7IDJMjJjGW89sbrzUIphuEKdQtY3TqYbtRA4IRqDaBHwnXJ/ZVRg2oKQ
+         8WKFAkqdoZNmjb5HTzywpBKkNVXL9MLC4Y7Tp6R5WfEBam6HOh5EmHfXOkJ1n/7+Y8Ul
+         IVYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Ay4/BmtCc/sUIoGf9SPhuwy1jWr7YvRibDYTCvHIZBk=;
+        fh=lBLwfWRoc+R2+7ToVxrbMLl8vQztf6e8SRSWi6F5cfc=;
+        b=fEz/zFG3nKnVMSiHONViTOWrKKnFeQmJftHqQ4y+59gOimfTfisU6PnTvjFn3YFkzK
+         Xvc0gkufOEhXRvOg6u28yQwgQP7KI7E7pp1e00el0w8nJ/arMCRlIAc5yz/Av+GvgJXC
+         GndFaUt9iS0QaEZz06vHuFsJ71ZwdGvoHto1k3KXPMj3JM3L7PHVW5cNuFy/awlgWQaC
+         lcEEk8wwdOjpdmNRHyg/k0LncBFun3ZvHCoF3TN5+NcVo+X+jOmAqaoOSK4DtEevUXfg
+         CMQEfqexHi+nEtiIP8mBYEntoEZASy7HXgxcNNM/7SXldDF796cWvwls+oifDJoogENc
+         HEAQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773862559; x=1774467359; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o3/R2qjWp8pa8+SVch8u2Wgyd6lpKmt+nq5sUUQLXSA=;
-        b=jwDhNkHvN4jAvUBm/6URU6S1I+ygC1e8lk0Tqt1P9tV6wvZYhjmIrNCpovVCxqQ+E/
-         YeXwaosRrEit4kUqPAkOLBszeJjTPpoC//I0VtVULcK220TeSJ9hFUxlxycxhKvpD13g
-         y9Db3hjyxPLdmqn1pPlsLFMuZJWnjflqDN8E0y4lVUCzkBYFdhs6KnvX5HrPD6SoeNaF
-         BcuY0VnB50ti7lNK7kHEfa9lAfSosbAvimHQ/Q7s7n7dLjrYOtiTSxUNNh/3ibT7zaQ1
-         bQfCAgJ7Kfk8I04yRfxEUBclHqEkJKvP4uHLdUafkxjhDdemSxyXoK5LV/O08o7AA+MK
-         ElRg==
+        d=gmail.com; s=20230601; t=1773862681; x=1774467481; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Ay4/BmtCc/sUIoGf9SPhuwy1jWr7YvRibDYTCvHIZBk=;
+        b=FTOnYN/7Jzk5VkgQdUNjmky+75tXSsKNY/11zRrLdc7VuqieYGVrJ0kOS1Rtlpv56s
+         nlMc6zNQH8anDHYzUiQFEGp315LWhEtMPRV0IT/PKM9LfQEVKQOyYtMJKJTU2IJwd8EY
+         b9cMwrqrPrJna8pPQMX2ca2i4geMmvYxtEBOMGGAg7gAsL+mcKUZPLzd28hCfV3XvCia
+         HEbMbf0DkL0mUcNTD+gTIc0FHUSw70WMwxd9iAGMoXCEamm10sp+kUCRoJ8rWbrRfpCU
+         +3EdAN9gOt9tzGukx/2pYSUID2bgXVUZV2E9PWCQOQB5viCYeU9Cy53Q+zwj5I4MZKqE
+         xKuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773862559; x=1774467359;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=o3/R2qjWp8pa8+SVch8u2Wgyd6lpKmt+nq5sUUQLXSA=;
-        b=K/z1sI2jEMyadrygIzP1KmdKy7Km6qx/2jWIHyVQt1YJxj8EC60IH5PSMHGQOFgnvn
-         CbygA44muNkmyOodFY2JKgrVfQdDB5IxJ53vkPi7Wzki6B54vi5ich+WpewFJCA4E3qB
-         d27RTHu9ROPNKBwzLgR13smK5IDGjEvl3kVe41bj6JAYQ58WwmPJnTtUTjK2mD9JdT3g
-         YzffaUVfODWh9aN1NImh6mB5HTwU24qa8gMDb4ak5NeTfXYhaYn93KHSCWEKEFgCLAe0
-         V0Dn5mio8GexWsnw238PT6ncd5vCh8LPFt/hhyQwd7BIrnMwi1B4WmAa36vXdVHoriZo
-         A79A==
-X-Gm-Message-State: AOJu0YxCiwTODdbbvwUl4wgGkNxKLWJ/MQReFuEIqaVcAGpmE/b7K0sQ
-	6iqMJSR051/8uagaX41sOFlCUdFi/LsnbXiSTgUZrB0jQF5d0eeLlebwQna0kw==
-X-Gm-Gg: ATEYQzxAvFs/kUmxh63ktjYLk7DEq2B8pXHoRVIWiBvaj97FNW1ZgY9GviCV9e7Lk69
-	H+D/UZPruOocLj+pO4pwc7e14cNNa5C/h3rTBp8QsW4F2lR2qci5fEFACXg6FOYxlVfF4hd45J9
-	loLgZpL742eZHoQTW/tGS6t89J+9PrR5FKjjLRMGUY4vscdwInP0vuL+ErRqF7g/3e2tKgH/hc8
-	hv1tCDjDjgGBkJwod7v2dKKQ4d7jIWjrOq2Bftm4C5W2ZGO22Zn5WQk9udtwP6vTCY8r4zztKRo
-	0kHcJc1vZJi8cl2fiP2HptDn2fWli/NBFZeN2g4tUM+q3RFIvWxzhRb5fCgmR/kQzw4MVDbM7lO
-	GIOE7a70ud8L04F36WI4j0HhxuY5hBU605JQHk/+zqsVdFa7fC63IE1cbY3s0f/qAHh/HiAuX+Y
-	DYbM9HkhPP4aBrpXW0UHXp
-X-Received: by 2002:a05:600c:3f10:b0:485:3af5:7e53 with SMTP id 5b1f17b1804b1-486f4448577mr83767425e9.19.1773862558915;
-        Wed, 18 Mar 2026 12:35:58 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486f8b0b9fdsm14486505e9.2.2026.03.18.12.35.58
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Mar 2026 12:35:58 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][whinlatter][PATCH] python3-marshmallow: mark CVE-2025-68480 patched
-Date: Wed, 18 Mar 2026 20:35:57 +0100
-Message-ID: <20260318193557.3163899-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20251104; t=1773862681; x=1774467481;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Ay4/BmtCc/sUIoGf9SPhuwy1jWr7YvRibDYTCvHIZBk=;
+        b=De0aw2jLeQi9TT3ElFk9tKUAhb1tdfJiZTYd45j0MLM20KghD2mJJvQkLPoYFnFSHG
+         vbNIM/MWCfnoshk/4WoJ/4NOw/UWwSum2l8i3LfMw4kApC7Jpu5PjUVXZkyV79RWSgYF
+         C9F4maVERgyEW/EOvb6e02djs5PA9e2ta/Mz5caog9SOnckRESA1wejviW4jqXGgL+2K
+         N2UPYNgFWL6pLjNKyhadWgxWS7lAADHXFbA8CxOHkb9i4+RHfoUyeSqaX2xTK7visBTL
+         a0QjD5w+gBgFIy7GzK8egJOt6v+Yw0DJe6tyndrAf0Tnqj0GLBnjs9o945sGD8V5xCEm
+         USCA==
+X-Gm-Message-State: AOJu0YzgLYRM3He/fWa6JTd2LsoBhQCAmfL2yiRwoljeCGW9G5OqCxI2
+	+cl/C5orVvjYZXKWIStA9GmCWmdi/LuiatLEjd5LVyq3/4gf1Pv1rm4w9PGzmKVNVuMkUdxo5ar
+	JOTyxOOy4uKywqpcG7j1z92y6o/mvCWI=
+X-Gm-Gg: ATEYQzy+3J6dhSz0QGQVz+4ySQOAgPCoZVsX2Ab/YyADEhJJiTfpzL3u1pOxJVUQF40
+	sFnPza5YLb7GKBYF+Ds1L13w66nfhJja7AOJktwEM1U0evI+NKLiNyoX+hM9R7/VKEnm9hy1FG9
+	g1c5sE0aW0vkuT6pDxWVAt1YgS5p39r+aJ3O6FUtPmZxIffh+OWz8v21JjrFgcAqHSiAmVP6kw0
+	VAP5cOgt2kAwq/IjnZB2Pybl7+aRA8PV7VXGOVVHOIWW6concczlq5DCfov88Ip+/UM/i8qm1Jc
+	UTUq6rI0
+X-Received: by 2002:a05:6820:1606:b0:67b:bed4:b150 with SMTP id
+ 006d021491bc7-67c0daade78mr2815706eaf.30.1773862680848; Wed, 18 Mar 2026
+ 12:38:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260318190300.270982-1-jakubszczudlo40@gmail.com>
+In-Reply-To: <20260318190300.270982-1-jakubszczudlo40@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Thu, 19 Mar 2026 08:37:49 +1300
+X-Gm-Features: AaiRm504lTmjg-EVjtdt5bJNxao9xyHLwwNiGyMEGArltiMFktWqE-os9WhpyGY
+Message-ID: <CADySD0E7DpkLgBU428-GmsT=Txjj2Lboq+W_EdsgeoAUPraddQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] libssh: Upgrade 0.11.3 -> 0.11.4
+To: jakubszczudlo40@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 19:36:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125363
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 19:38:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125364
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2025-68480
+On Thu, Mar 19, 2026 at 8:03=E2=80=AFAM Jakub Szczudlo via
+lists.openembedded.org
+<jakubszczudlo40=3Dgmail.com@lists.openembedded.org> wrote:
+>
+> Release note:
+> https://www.libssh.org/2026/02/10/libssh-0-12-0-and-0-11-4-security-relea=
+ses/
+>
+> Signed-off-by: Jakub Szczudlo <jakubszczudlo40@gmail.com>
+> ---
+>  .../libssh/{libssh_0.11.3.bb =3D> libssh_0.11.4.bb}          | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>  rename meta-oe/recipes-support/libssh/{libssh_0.11.3.bb =3D> libssh_0.11=
+.4.bb} (78%)
+>
+> diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb b/meta-oe/re=
+cipes-support/libssh/libssh_0.11.4.bb
+> similarity index 78%
+> rename from meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+> rename to meta-oe/recipes-support/libssh/libssh_0.11.4.bb
+> index 5928581312..c39b121be6 100644
+> --- a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
+> +++ b/meta-oe/recipes-support/libssh/libssh_0.11.4.bb
+> @@ -13,7 +13,7 @@ SRC_URI =3D "git://git.libssh.org/projects/libssh.git;p=
+rotocol=3Dhttps;branch=3Dstable
+>
+>  SRC_URI:append:toolchain-clang =3D " file://0001-CompilerChecks.cmake-dr=
+op-Wunused-variable-flag.patch"
+>
+> -SRCREV =3D "301d0e16dfa8a5cac1cff956b6880ca90eb82864"
+> +SRCREV =3D "ca9c055d7c78ce357346ac7c2b14047568d47aa1"
+>
+>
+>  inherit cmake ptest
+> @@ -50,3 +50,8 @@ BBCLASSEXTEND =3D "native nativesdk"
+>
+>  CVE_STATUS[CVE-2025-5987] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.2"
+>  CVE_STATUS[CVE-2025-5318] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.2"
+> +CVE_STATUS[CVE-2026-0964] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.4"
+> +CVE_STATUS[CVE-2026-0965] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.4"
+> +CVE_STATUS[CVE-2026-0966] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.4"
+> +CVE_STATUS[CVE-2026-0967] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.4"
+> +CVE_STATUS[CVE-2026-0968] =3D "fixed-version: The vulnerability was fixe=
+d in 0.11.4"
 
-The vulnerability has been fixed in version 4.1.2[1], however
-NVD tracks this CVE without version info. Mark it as patched explicitly.
+These CVEs are not yet available in the NVD, don't think we should be
+adding them here.
 
-[1]: https://github.com/marshmallow-code/marshmallow/commit/d24a0c9df061c4daa92f71cf85aca25b83eee508
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../recipes-devtools/python/python3-marshmallow_4.1.2.bb        | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python3-marshmallow_4.1.2.bb b/meta-python/recipes-devtools/python/python3-marshmallow_4.1.2.bb
-index f3a905a36c..f058bd7123 100644
---- a/meta-python/recipes-devtools/python/python3-marshmallow_4.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-marshmallow_4.1.2.bb
-@@ -30,3 +30,5 @@ RDEPENDS:${PN} += " \
-         python3-pprint \
-         python3-packaging \
- "
-+
-+CVE_STATUS[CVE-2025-68480] = "fixed-version: fixed in 4.1.2"
+> \ No newline at end of file
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125362): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125362
+> Mute This Topic: https://lists.openembedded.org/mt/118388524/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
