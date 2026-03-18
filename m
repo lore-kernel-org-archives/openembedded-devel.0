@@ -1,265 +1,190 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCE27FEDA17
-	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 00:44:43 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4157.1773794674942643610
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 826AC10854D1
+	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 03:05:04 +0000 (UTC)
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6026.1773803096267447004
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Mar 2026 17:44:35 -0700
+ Tue, 17 Mar 2026 20:04:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P+D1YTdU;
- spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-7d773a4af0aso3014039a34.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Mar 2026 17:44:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773794674; cv=none;
-        d=google.com; s=arc-20240605;
-        b=f/PN637Fr5JCdlgWAIanRSBgrpviLdyC3HKOHl91xLJkVGxY+0PmdDu29XJ10Ntotq
-         aPafpElI6YRifgS5VRjW1E4HSZWaCfSxF0CtE0SmG5KI3hQP/1kf/D7ao/lVyOkIFwvC
-         w92h7wij5wEtMAefZyg7QbTbsCc85ly5GgsyU8ai1XTwEgKaeEz6xZHUq5keO+ertPip
-         /8Rx/hsC55WGV/PhwddPRPzRVyQIJ2tCvo+K4tlrYmi0C8SfHPi5/Ctrs0xr4yOF24P6
-         nV23I32O1IxH761sijDKhwe5lLMNvF9dOnxXZlkuGa1ETM3N8ClvospZGwMj+Mndoq8Y
-         So0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=FaMAwvaFcMEv4LRcGhiFHcieT4y0e2dzjrnL1Z8u+vQ=;
-        fh=PqrvWOQDuMW7DBEZMtJk4sUef2SPa7RI/TJA4C6UjCM=;
-        b=VnUSKyCWoG80BCHRq29KeqYiulbywzdpKPb8Eo4JNeThmalBRFAK/uEz47s2FT0CnN
-         K0UzzyLP51FHsGu4jQXb70+yys5SxZNwRYnguOoFxKuDqoUmvU0Zr8F8cNEfXr/InHlp
-         aW199U9YDIPnMMzC0pBHC4T9uzGRSAfhVOhKWpD2aWLpAj4MVtJmrOadVUZ+ABbTNaKs
-         dzqq9rJxmiRIAUbjm4MmiTp6XMuT+Fik3SKvvpq0RCUjp/d1h22OqF4RTj0HfSka7qr8
-         eG11sfdBkSicPlWTTKx/ej5deYFCx3CXVweUVDho4QcCmJj6Fm4x5MCjSmrsvOeb1Po4
-         ZUow==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773794674; x=1774399474; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FaMAwvaFcMEv4LRcGhiFHcieT4y0e2dzjrnL1Z8u+vQ=;
-        b=P+D1YTdUf1poD1lIfiqxz6C2OE3+UBlBm5wwz3/jEZayB/VhbTvl20KQKLdXO1Gg6M
-         p4SK8cNEdSLLgFMwkTcThYYXylknDjHQSue5Uto2lsITa/3Qb+d4XUQXjzpTc/FA3huq
-         5z50gcnIVTccZPy+0wcXPMLcVzlNidtfVqzmInr9SdmAcfO6QTAc4xfNanMz1FS8S0P0
-         P40YZCYbESRXPyUiprd8vzMp0nHYc9lDPHk3/NdoQ9bRXZ3RxIDB0reKpSzbfwIbTWNz
-         FTbuXGGEYA4bjTe6UgJMUicU3rdyXzdcLaxga4tkzSH4vry43G+GMljhO6QJ/DH8kYFl
-         sO1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773794674; x=1774399474;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=FaMAwvaFcMEv4LRcGhiFHcieT4y0e2dzjrnL1Z8u+vQ=;
-        b=pHjAw6NCpvx9RBMzSQc2h4L8wdd1k1kLmIxbONvn/8I2M+5CjtwDCxC5fmOHa+eIXn
-         ierLkmhjSkzDsqTeuxMvzZc6zHrb7Iir6rRjebGQBP3V4eiAeEGqEV22hC5k3W+6NTLY
-         xB90TqfBtbbAAOrCdytz25dRbv/Ax7iAdVL9AC23jyJYfT4vhwdRPnzqIBse0uSaT7Xj
-         42n6NWKEsuewTWB1Z8q5FlYaPESWApRXZ1Q2RbmdgN/HcWd4YztqWbvVZhWd+KtG4zQT
-         cGOwKl5kqUh+4B/XNRcwEfwOAgiV0AsiV2c5th/U0xDkUhio2+BLZGUFmlmuZwv2V5rb
-         ZkLg==
-X-Gm-Message-State: AOJu0Yw7EXzNFPVUBKjvbdX/O3m4yCE36CwH2SnSQ7Cf1kmDjuLYw3+q
-	5UdkO5jCB2+lSPmOkb4vO2ICmUb6btO07cxZCCS0IMl87sjPHLA1QMggHtfOd0IMMzfxkOFs4lm
-	4rTrMvYTEWkE4xYjOCu61+0fVXFYHF2M=
-X-Gm-Gg: ATEYQzw1VxTRH7HaGyYPJIPDMOpzQt4mJRfGsAIqOQuR97bdjj+aD8J+gEPz87V2Czz
-	yvAPuVHal0yJ6hqA+W196z0gB8HlBPZ8paiWvGa76lNukG7WFGKtQ1abOtbvV7FlwL5wDHQ4WrC
-	HqEhoHeRLwzP7xSRklX0hRWEt0iRz1MiQ/50CK6qBxsYn+g9qArVnvPc19M+eU93c+XPwWKMu1u
-	jE404Tj7MZ4fHkPIdIbEqp7dzQ4xs+hQcG/1AEB/yQ3kXUNg3RIwGdekNF2Ym90UjI3zwxZG4//
-	k4i1NcOg
-X-Received: by 2002:a05:6830:3885:b0:7d7:c5c2:b767 with SMTP id
- 46e09a7af769-7d7ca7d54c2mr1047074a34.32.1773794674074; Tue, 17 Mar 2026
- 17:44:34 -0700 (PDT)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=qsZzUDlI;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1773803094; x=1805339094;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=qf+CUfvS7CFx64wKpLrSw7rhlO9DCtWduUqN5ADsG0g=;
+  b=qsZzUDlI9reuwitoZPZDc3ptFZ+Sujm1xOXhMMVCNItDJ3vY6b0LYxZb
+   iS9NMR4xLHlvRhR2Jq6z9xuaA79Pvfy0QFx1LEwCxxeGbR+pud/XiSBLh
+   t9SljRQzBFlhpnQ73y/w35c9KKrfIS++n5yrCJtuVj0WNam2Kfqp6TwU0
+   VrKx+5rxY70X/dgG1neYH6DGLB5cTlH3gF7XWxSLlImiUf3Pa/FLz6kwN
+   8hZognmWLhE7TV3ZcmVuATrwY+rnc1o2JSTC6wH3NPiH4VMYwkoiU4r46
+   xypZqMy9HPVY89aJTP+6mFbfKrZ12G3U/XVuq89iW0WfoRUTEzCkCSp/x
+   w==;
+X-CSE-ConnectionGUID: E/hIR9l0RVah/aYV2yQKvQ==
+X-CSE-MsgGUID: GdDbqcbCQeaczYaICP/pYA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11732"; a="234368910"
+X-IronPort-AV: E=Sophos;i="6.23,126,1770562800"; 
+   d="scan'208";a="234368910"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Mar 2026 12:04:52 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 80B041C000B7
+	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 03:04:54 +0000 (UTC)
+Received: from az2uksmom2.o.css.fujitsu.com (az2uksmom2.o.css.fujitsu.com [10.151.22.203])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 2F47A1809AE6
+	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 03:04:54 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.160.5])
+	by az2uksmom2.o.css.fujitsu.com (Postfix) with ESMTP id 6FCCB140058E;
+	Wed, 18 Mar 2026 03:04:50 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-m2crypto: fix do_compile error using clang
+Date: Wed, 18 Mar 2026 11:04:45 +0800
+Message-ID: <20260318030446.2041-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
-References: <20260317172346.2862459-1-skandigraun@gmail.com> <20260317172346.2862459-2-skandigraun@gmail.com>
-In-Reply-To: <20260317172346.2862459-2-skandigraun@gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Wed, 18 Mar 2026 13:44:23 +1300
-X-Gm-Features: AaiRm52Is4JK3R-PO6B81paeoWHEPoZGm14nc-r4ygqNBSjadvqX4-flPwSnv2U
-Message-ID: <CADySD0EW-SYsi+fDipkif6-2-irpUG4CAg5m4pt9hnCLeSe4cA@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH 2/7] libde265: patch CVE-2025-61147
-To: skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 00:44:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125337
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 03:05:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125338
 
-On Wed, Mar 18, 2026 at 6:23=E2=80=AFAM Gyorgy Sarvari via
-lists.openembedded.org <skandigraun=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> Details: https://nvd.nist.gov/vuln/detail/CVE-2025-61147
->
-> Backport the patch that is referenced by the NVD advisory.
->
-New version 1.0.17 is available which includes fix for this CVE.
-We can drop this patch and upgrade the recipe[1]
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-[1] https://lists.openembedded.org/g/openembedded-devel/message/125336
+erre message:
+| INFO:mkpath:creating build/temp.linux-aarch64-cpython-314/src/SWIG
+| INFO:spawn:aarch64-yoe-linux-clang -mcpu=3Dcortex-a57+crc --dyld-prefix=
+=3D/usr -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wforma=
+t-security -Werror=3Dformat-security -fstack-protector-strong -O2 -D_FORTIF=
+Y_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security --sysroot=
+=3D/srv/build/yoe/build/tmp/work/cortexa57-yoe-linux/python3-m2crypto/0.47.=
+0/recipe-sysroot -O2 -g -ffile-prefix-map=3D/srv/build/yoe/build/tmp/work/c=
+ortexa57-yoe-linux/python3-m2crypto/0.47.0/sources/m2crypto-0.47.0=3D/usr/s=
+rc/debug/python3-m2crypto/0.47.0 -ffile-prefix-map=3D/srv/build/yoe/build/t=
+mp/work/cortexa57-yoe-linux/python3-m2crypto/0.47.0/sources/m2crypto-0.47.0=
+=3D/usr/src/debug/python3-m2crypto/0.47.0 -ffile-prefix-map=3D/srv/build/yo=
+e/build/tmp/work/cortexa57-yoe-linux/python3-m2crypto/0.47.0/recipe-sysroot=
+=3D -ffile-prefix-map=3D/srv/build/yoe/build/tmp/work/cortexa57-yoe-linux/p=
+ython3-m2crypto/0.47.0/recipe-sysroot-native=3D -pipe -fPIC -I/srv/build/yo=
+e/build/tmp/work/cortexa57-yoe-linux/python3-m2crypto/0.47.0/recipe-sysroot=
+/usr/include/python3.14 -I/srv/build/yoe/build/tmp/work/cortexa57-yoe-linux=
+/python3-m2crypto/0.47.0/sources/m2crypto-0.47.0/src/SWIG -c src/SWIG/_m2cr=
+ypto_wrap.c -o build/temp.linux-aarch64-cpython-314/src/SWIG/_m2crypto_wrap=
+.o -DTHREADING -Wno-deprecated-declarations
+| src/SWIG/_m2crypto_wrap.c:4455:1: error: unknown type name 'PRAGMA_IGNORE=
+_UNUSED_LABEL'
+|  4455 | PRAGMA_IGNORE_UNUSED_LABEL
+|       | ^
+| src/SWIG/_m2crypto_wrap.c:4456:30: error: expected ';' after top level de=
+clarator
+|  4456 | PRAGMA_WARN_STRICT_PROTOTYPES
+|       |                              ^
+|       |                              ;
+| 2 errors generated.
 
-cheers
-Ankur
+Add patch 0001-fix-swig-avoid-clang-GNUC-pragma-block-before-_lib.h.patch t=
+o avoid clang GNUC pragma block before _lib.h
 
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  .../libde265/libde265/CVE-2025-61147.patch    | 103 ++++++++++++++++++
->  .../libde265/libde265_1.0.16.bb               |   4 +-
->  2 files changed, 106 insertions(+), 1 deletion(-)
->  create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/=
-CVE-2025-61147.patch
->
-> diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-202=
-5-61147.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-20=
-25-61147.patch
-> new file mode 100644
-> index 0000000000..56d48f2a7d
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2025-61147=
-.patch
-> @@ -0,0 +1,103 @@
-> +From d73508b7578964f2115ddf051b8fe9b4445978d4 Mon Sep 17 00:00:00 2001
-> +From: Dirk Farin <dirk.farin@gmail.com>
-> +Date: Tue, 9 Sep 2025 15:14:05 +0200
-> +Subject: [PATCH] check for valid integer command line parameters (#484)
-> +
-> +CVE: CVE-2025-61147
-> +Upstream-Status: Backport [https://github.com/strukturag/libde265/commit=
-/8b17e0930f77db07f55e0b89399a8f054ddbecf7]
-> +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> +---
-> + CMakeLists.txt   |  2 +-
-> + dec265/dec265.cc | 44 +++++++++++++++++++++++++++++++++++++++++---
-> + 2 files changed, 42 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 4da99216..997945a9 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -5,7 +5,7 @@ project (libde265
-> +     VERSION 1.0.16
-> + )
-> +
-> +-set(CMAKE_CXX_STANDARD 11)
-> ++set(CMAKE_CXX_STANDARD 17)
-> + set(CMAKE_CXX_STANDARD_REQUIRED ON)
-> + set(CMAKE_CXX_EXTENSIONS OFF)
-> + set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-> +diff --git a/dec265/dec265.cc b/dec265/dec265.cc
-> +index 79f67cd3..ecf5d131 100644
-> +--- a/dec265/dec265.cc
-> ++++ b/dec265/dec265.cc
-> +@@ -27,6 +27,10 @@
-> + #define DO_MEMORY_LOGGING 0
-> +
-> + #include "de265.h"
-> ++#include <stdexcept>
-> ++#include <iostream>
-> ++#include <optional>
-> ++
-> + #ifdef HAVE_CONFIG_H
-> + #include "config.h"
-> + #endif
-> +@@ -563,6 +567,40 @@ void (*volatile __malloc_initialize_hook)(void) =3D=
- init_my_hooks;
-> + #endif
-> +
-> +
-> ++int parse_param(const char* arg, std::optional<int> lower_bound, std::o=
-ptional<int> upper_bound, const char* arg_name)
-> ++{
-> ++  int value;
-> ++
-> ++  try {
-> ++    size_t len;
-> ++    value =3D std::stoi(optarg, &len);
-> ++    if (arg[len] !=3D 0) {
-> ++      std::cerr << "invalid argument to " << arg_name << "\n";
-> ++      exit(5);
-> ++    }
-> ++  } catch (std::invalid_argument const& ex) {
-> ++    std::cerr << "invalid argument to " << arg_name << "\n";
-> ++    exit(5);
-> ++  }
-> ++  catch (std::out_of_range const& ex) {
-> ++    std::cerr << "argument to -T is out of range\n";
-> ++    exit(5);
-> ++  }
-> ++
-> ++  if (lower_bound && value < *lower_bound) {
-> ++    std::cerr << "argument to " << arg_name << " may not be smaller tha=
-n " << *lower_bound << "\n";
-> ++    exit(5);
-> ++  }
-> ++
-> ++  if (upper_bound && value > *upper_bound) {
-> ++    std::cerr << "argument to " << arg_name << " may not be larger than=
- " << *upper_bound << "\n";
-> ++    exit(5);
-> ++  }
-> ++
-> ++  return value;
-> ++}
-> ++
-> ++
-> + int main(int argc, char** argv)
-> + {
-> +   while (1) {
-> +@@ -578,9 +616,9 @@ int main(int argc, char** argv)
-> +
-> +     switch (c) {
-> +     case 'q': quiet++; break;
-> +-    case 't': nThreads=3Datoi(optarg); break;
-> ++    case 't': nThreads=3Dparse_param(optarg, 0, std::nullopt, "-t"); br=
-eak;
-> +     case 'c': check_hash=3Dtrue; break;
-> +-    case 'f': max_frames=3Datoi(optarg); break;
-> ++    case 'f': max_frames=3Dparse_param(optarg, 1, std::nullopt, "-f"); =
-break;
-> +     case 'o': write_yuv=3Dtrue; output_filename=3Doptarg; break;
-> +     case 'h': show_help=3Dtrue; break;
-> +     case 'd': dump_headers=3Dtrue; break;
-> +@@ -592,7 +630,7 @@ int main(int argc, char** argv)
-> +     case 'm': measure_quality=3Dtrue; reference_filename=3Doptarg; brea=
-k;
-> +     case 's': show_ssim_map=3Dtrue; break;
-> +     case 'e': show_psnr_map=3Dtrue; break;
-> +-    case 'T': highestTID=3Datoi(optarg); break;
-> ++    case 'T': highestTID =3D parse_param(optarg, 0, std::nullopt, "-T")=
-; break;
-> +     case 'v': verbosity++; break;
-> +     }
-> +   }
-> diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.=
-bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-> index 40910633e8..701f0e5f69 100644
-> --- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-> +++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-> @@ -8,7 +8,9 @@ LICENSE =3D "LGPL-3.0-only & MIT"
->  LICENSE_FLAGS =3D "commercial"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D695b556799abb2435c97a113cdca5=
-12f"
->
-> -SRC_URI =3D "git://github.com/strukturag/libde265.git;branch=3Dmaster;pr=
-otocol=3Dhttps;tag=3Dv${PV}"
-> +SRC_URI =3D "git://github.com/strukturag/libde265.git;branch=3Dmaster;pr=
-otocol=3Dhttps;tag=3Dv${PV} \
-> +           file://CVE-2025-61147.patch \
-> +           "
->  SRCREV =3D "7ba65889d3d6d8a0d99b5360b028243ba843be3a"
->
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125324): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125324
-> Mute This Topic: https://lists.openembedded.org/mt/118368211/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ ...lang-GNUC-pragma-block-before-_lib.h.patch | 49 +++++++++++++++++++
+ .../python/python3-m2crypto_0.47.0.bb         |  3 +-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-m2crypto/00=
+01-fix-swig-avoid-clang-GNUC-pragma-block-before-_lib.h.patch
+
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto/0001-fix-=
+swig-avoid-clang-GNUC-pragma-block-before-_lib.h.patch b/meta-python/recipe=
+s-devtools/python/python3-m2crypto/0001-fix-swig-avoid-clang-GNUC-pragma-bl=
+ock-before-_lib.h.patch
+new file mode 100644
+index 0000000000..7aa768f44d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-m2crypto/0001-fix-swig-av=
+oid-clang-GNUC-pragma-block-before-_lib.h.patch
+@@ -0,0 +1,49 @@
++From df210da932c2cab9d3a80ee88c70611d77824a15 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@fujitsu.com>
++Date: Wed, 18 Mar 2026 02:26:56 +0000
++Subject: [PATCH] fix(swig): avoid clang GNUC pragma block before _lib.h
++
++Clang defines __GNUC__, so the old guard emitted PRAGMA_* tokens before
++they were defined, breaking builds on macOS/clang; move the block after
++<_lib.h> and exclude clang while keeping the GCC<5 workaround.
++
++Fixes: https://todo.sr.ht/~mcepl/m2crypto/392
++
++Upstream-Status: Backport [git.sr.ht/~mcepl/m2crypto/commit/504ca8f438afb0=
+f5041d2b5163e5f666a9a1b742.patch]
++
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
++---
++ src/SWIG/_m2crypto.i | 13 ++++++++-----
++ 1 file changed, 8 insertions(+), 5 deletions(-)
++
++diff --git a/src/SWIG/_m2crypto.i b/src/SWIG/_m2crypto.i
++index d89d355..5426446 100644
++--- a/src/SWIG/_m2crypto.i
+++++ b/src/SWIG/_m2crypto.i
++@@ -43,15 +43,18 @@ typedef unsigned __int64 uint64_t;
++ %}
++=20
++ %{
++-#if defined __GNUC__ && __GNUC__ < 5
++-PRAGMA_IGNORE_UNUSED_LABEL
++-PRAGMA_WARN_STRICT_PROTOTYPES
++-#endif
++-
++ #include <openssl/err.h>
++ #include <openssl/rand.h>
++ #include <_lib.h>
++=20
+++/* _lib.h defines PRAGMA_* helpers; only needed for old GCC (clang defines
+++ * __GNUC__ too, but doesn't need this workaround).
+++ */
+++#if defined(__GNUC__) && !defined(__clang__) && (__GNUC__ < 5)
+++PRAGMA_IGNORE_UNUSED_LABEL
+++PRAGMA_WARN_STRICT_PROTOTYPES
+++#endif
+++
++ #include "compile.h"
++=20
++ static PyObject *ssl_verify_cb_func;
++--=20
++2.43.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-m2crypto_0.47.0.bb=
+ b/meta-python/recipes-devtools/python/python3-m2crypto_0.47.0.bb
+index ba7bd9b8e3..0ebe30f81c 100644
+--- a/meta-python/recipes-devtools/python/python3-m2crypto_0.47.0.bb
++++ b/meta-python/recipes-devtools/python/python3-m2crypto_0.47.0.bb
+@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSES/BSD-2-Clause.txt;md5=
+=3D8099b0e569f862ece05740a
+=20
+ SRC_URI[sha256sum] =3D "9256300be1e0412be802aa1f827e0ce7f94deb1099b8ccdcfd=
+9867a7f0f975bf"
+=20
+-SRC_URI +=3D "file://0001-setup.py-Make-the-cmd-available.patch"
++SRC_URI +=3D "file://0001-setup.py-Make-the-cmd-available.patch \
++            file://0001-fix-swig-avoid-clang-GNUC-pragma-block-before-_lib=
+.h.patch"
+=20
+ CVE_STATUS[CVE-2009-0127] =3D "disputed: upstream claims there is no bug"
+ CVE_STATUS[CVE-2020-25657] =3D "fixed-version: the used version (0.46.2) c=
+ontains the fix already"
+--=20
+2.43.0
+
 
