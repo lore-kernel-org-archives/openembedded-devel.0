@@ -1,166 +1,122 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <nitin.wankhade333@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55722FF6E8C
-	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 08:32:28 +0000 (UTC)
-Received: from OSPPR02CU001.outbound.protection.outlook.com (OSPPR02CU001.outbound.protection.outlook.com [40.107.159.77])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9261.1773822745086014548
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77FC110854D3
+	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 09:09:18 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9868.1773824953210824739
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Mar 2026 01:32:25 -0700
+ Wed, 18 Mar 2026 02:09:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=v9bAha4b;
- spf=pass (domain: navimatix.de, ip: 40.107.159.77, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vMQfE0mfMznC6niZ2ctoSCzqZdZqZdOgQpfw5VT9UGKoUIASd4D95lsEOftfleavtKdcVZ0M/P+S2+fiiGxxLUxl9OK+otkcOvQH7oMmFMC+H1yfopzVlyPRzNCYBKlYGeBihYe50waZV/wsUn7hvJPdcZvz5AJlPXUSo907vFFrV0UeHok94z9o+6UgNCKwzVMz9jI54N7e1XLZw0Jv0h9u9o1236LYR8yx/oZUC6n45WsNtjcQJ34YKTL8NGdMT4i+C11mdyC18TSQnoddn2UrISI0UlCeraA01Hx0IFpj2zZ2pgK0l6tjGffU/HIdHHoT4jQFZLr8+ES/wlryuQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qfSX/b7/wkSUn+qY5GpWEnAQRVXkwqO1OFJFyGXzph8=;
- b=AM5Slz/+c88D6nhAPxxxt4CvWNOc4ipxCP84+RC/ouYgxiwgmmQJD1Dr2ciGoHqZ4to2c6OBnDE9TNZsb8aXb0LpWGm79blyNl1AMTKnRHWD2+WfARAiYsiM/urRhsJERQhccGiMUXd9F1qq++wtCbZTwMCfKTWyVWYh7nUsylI5RO9o11fCm9z/lbP+SsP4XJEgtcUJ0ZrGy5Is/t0an5FqJMi8iWBJ7k5U7ct0nK8f3MvLQhMspW/r2Znm29zT0R/g6a0XA8xCMTrdOpKHbUWzRo1h5DOeJAtLl7ZaFWqPVNIWM/kQt56TLCme+3uVnDiDcOArtpWjX+lOkkrPXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qfSX/b7/wkSUn+qY5GpWEnAQRVXkwqO1OFJFyGXzph8=;
- b=v9bAha4bEZxuEVGjfolpeZiYdUzL3i7QeGzFlM8w3s0+nm4zSAQAUGFNFqo+zILHipT1qel4PlWUV7gXJZhA0zypIDL8F87nEhdZeHxKYT8FC2/WkPV24mxqMvCG/nGqGzebmEcL4r5krRTBu2eraqvTleYZjLNk6KOwQQHKPeg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by PR3PR01MB7147.eurprd01.prod.exchangelabs.com
- (2603:10a6:102:5c::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Wed, 18 Mar
- 2026 08:32:21 +0000
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- ([fe80::d5c3:2dea:3d98:25fd]) by
- GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.20.9700.018; Wed, 18 Mar 2026 08:32:21 +0000
-Date: Wed, 18 Mar 2026 09:32:19 +0100
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH] wireshark: Add xxhash to DEPENDS
-Message-ID: <30f605013fdb1c5767889514cdbec44b3ceac45b.1773822738.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0213.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:88::18) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HrJqcrG5;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: nitin.wankhade333@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2b0500a8152so2265425ad.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 02:09:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773824952; x=1774429752; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+OVUHgkOVBEQDfvJmpQKoo9qIbMv7M0D5WNug0uZ8wk=;
+        b=HrJqcrG5nbGREnSW7/NSfXEtSzK26UKnVEjXZ0c2E/2OT90y8+25XNR4OljMs5xgz/
+         JRyxD89O7fvBByR4vG9U5ha9kvQx0yRqUtNUJZa+dmrYbEAu0cshQGBCmrgUKVD2CVnP
+         8fnzbe+tmjm+GC7jvBblI4VyvOhckoliNPAX2rAxp2AiD2+TL1MHIFUwdZDwwAGnd1mA
+         71hD4WK4R2bz935+q56XzCLGESH1MrZ9uqJCmjdWCnUSdzFCEUw9BPDq2SZB7eWN0XO6
+         OzgwxQ3grfE9+dYwBDHsfChLqz2+R39ehDxVWzJEKplwLUDLUnaMLojN34jrhTIXXxUH
+         6Fjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773824952; x=1774429752;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=+OVUHgkOVBEQDfvJmpQKoo9qIbMv7M0D5WNug0uZ8wk=;
+        b=IHUdFAns4cq9deh2vN1bQOzfUPLJE2YOC5AigRFKMI0RzdSdfOi6bdEWjrvso4jUgJ
+         /N/EOLNfsafOiL93UmQgB2UjxJNIxD95VSgna2wRf/7nZgbTcOiEysl8SYTuiuk9ZbIb
+         sH4XX6bj66RaeX51G7PmArimBzHakw1+4f1XoctgNy09EJ23BAHYCSyEu3b3yQY7pCF8
+         AzRrXrG8YJNMV0sUVkNq0hwnQ2qIbgrhYaS8e2I4Cv4X2I+xZWzPXYDRCGDqGh6fZ+ze
+         iCfzY1ha2Lz2lEDqknr0mPBUgHquyK0tex8ew6B986ZzfIPkCyOuMGuuhGokSoto+QVn
+         k4BQ==
+X-Gm-Message-State: AOJu0YzfUQIKfx7UnKMOgXZ00O/NES5H0RcPHw43ZAIPNLTzdAb8JNMS
+	LCeq2DmJ4bwUkw0Y/LVv3Nw55O0Hfs4WFUxu4N4eyaTr9/1fAtkUJak+DMxq3Q==
+X-Gm-Gg: ATEYQzybuRv3cwP72NVJtFbjTjOa9Cez60SkTWKmqNckcF92+MohkF2Oc2A/XPK/2uM
+	tg2tpTEdI9v+hNWEJ4zxjQ8YisLyxPxaRmNb74FpYuFYIas5be3zk/yOsIw/FcibxZT/AICR6WK
+	V5HcrrEP1sIW42BZE/1M2ovlvlnMvy687aigd1ghJHTpgPRrQc1SS/sQxPrMKKyMgU3V1fO3dxN
+	dIW7KvJEU1hk13PambtgeMd932oVK9T2l0pLe2n/xiJeNDnVEPpJNbQv7E6UuoocRa2wNemMG75
+	pF5Kh0S0f13753+d3173lzrezPyBruYTxjImiPNhRDkX6iUfaD0mxAble3+HoNnhj+Sqy1s0/UD
+	VjhacLdOc2kUG4ZgbsS6qa58gy5gEXI9ThCB80w1qWwCiauVnadKhrV08qtI8sTc1xxMAOzGHgu
+	jilmIoGujpq+B9WgooHls7DQmNUjwdruDc13oiP17ORaA=
+X-Received: by 2002:a05:6a00:1a16:b0:824:9b3b:787e with SMTP id d2e1a72fcca58-82a6ac9e787mr1209924b3a.1.1773824951690;
+        Wed, 18 Mar 2026 02:09:11 -0700 (PDT)
+Received: from LL-3324L.kpit.com ([122.167.115.31])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82a6befc046sm2590361b3a.59.2026.03.18.02.09.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 18 Mar 2026 02:09:11 -0700 (PDT)
+From: Nitin Wankhade <nitin.wankhade333@gmail.com>
+X-Google-Original-From: Nitin Wankhade <nitin.wankhade@partner.bmw.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: nitin.wankhade@kpit.com,
+	Nitin Wankhade <nitin.wankhade333@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 1/6] imagemagick: Fix CVE-2025-43965
+Date: Wed, 18 Mar 2026 14:43:33 +0530
+Message-Id: <20260318091338.483937-1-nitin.wankhade@partner.bmw.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|PR3PR01MB7147:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7338e08d-6bc5-4008-115a-08de84c8df60
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|366016|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	IOrnfTrqcCRIGrV516xh1M4oqHJ3jUiNYy9DsdxPHWv6IsX7cYccR0nuFUOwD1m7Rrcj4+vWJZmXNQBQMg2qY+f97JNEuF+eQrI0RuD9gntmbMKOrl+YZpvqbCa+xdpesDmt5FWuVdHef1TsT2hu3tRLdVCNPOQO3BWvnU48GYYGhvIP2h5DAliqEnq9S61LVOKnk8g6h3Em1acvIDTuwNlO5DywFelaUYRnkmWYgtv8PkzWCqJBzPtw1Kx1C0jBqx8HUeIAQkLRDF3ciNPNVc2Xhflx+xLkUVAQx+24yFTszKFwJvfw0JiYNUeRDsZaTp+VCuH0fBw1NQiUjYM7VdNasoF0sp/5kiSkUWzxYYAagYCGM5U+KDs9FUloUitvTe6P9ZfWrmrMFStS/9ACaNt4IKija7qsPCftnnzhFuWFON/0l7w5sXsjr4g7ntUGd/lyQtnpA+ZuxausXpEH/C6GcA5+oC7tHximguAmSS7PcjNzVIQ2Y1pjHigQit4QgjuPl2vzuh6pcmgXMh6kyJmUHyxqtrVuZvjtsp4o5ZGjZxpMmg2WwBa91X05nMTC1dn2p7escI6zYZeHL0v4zi1DGyiTW9StQV7wjp42cmbbDoIC4J2TUi3xkH4ACDraH5eZ+zRXd4lVuUDGcsN1pZRZjwCN/e6oexSlMT55CSPT9eaMsSzLJGy+WTKXTs9xg59CLAj/M24vxSm/pjw0mhwKd4RVwL1LBziKEqEdXv8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(56012099003)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?EGC5VvG6cp7GfJ7iIUFOtMBPc57yFVfInqnqjKNdBMjb012HTlOksREfNVxk?=
- =?us-ascii?Q?5pqiDeXWadLv+hJRrFVB/mHdv30dYDcwuMjjKAuiItIJ1RUXogzhEv4Rxisc?=
- =?us-ascii?Q?YTI8GAPeCKEVjSMzQHJO+2PtRLf4A+UNbU99dzOd42n5osWewg0uS36e7ecf?=
- =?us-ascii?Q?U3WObgoU3vhAlpU46KJf3JUC0Hh5RNHRoI/H4z0b+iJApXh+JCs/tRjMZWs2?=
- =?us-ascii?Q?6K3//m+s41waedkwegwwxpzsXXaTo8wwoun4kJlfR5IZUKg+IcC1qZ6kRfAT?=
- =?us-ascii?Q?fVfw6/3BShtc3JcH4RghzQBAGQPaWSlrTibWKQqRgdwCjkgUiAsXCHZiEJlP?=
- =?us-ascii?Q?l+/AsAroLJlJBC9Wt1pIKz3Xk/kldMzCwf4N1c7fKsqEqqdtaYaaLUu04WcF?=
- =?us-ascii?Q?m4vENdwRmPLnDW7mW3YPb+aeZ4jFQjCCr5VXyaTpcEKHi4efuWa0phtFNxtj?=
- =?us-ascii?Q?RmaW48zMQS9oMOW+EQGjaHjuWglsjNDXV9dQ3/NydpyWAQF6mDhhMN+aunQy?=
- =?us-ascii?Q?SU0XSA7XphwD3vrEzeaxHpzpMtTq1NHp+qJqfVehgT/gp5uSGpgnjJ9+mV8N?=
- =?us-ascii?Q?jVaGHVxzVwE0L/V8B+zChmcSeQlw0yU5cvzdaCJJxh/amFrvuRbMtSmslqv8?=
- =?us-ascii?Q?VQJ49D0vbEDTMhIu/RF53cF9ja7yP3ZFgAtHUjcGLmW2gyeq6hie1xF49BN5?=
- =?us-ascii?Q?ARwfZo1j8Zzte02e2NHNWDij2A334mNLNDSeJ0DlcjtDHLfjWWS7KOLeK/og?=
- =?us-ascii?Q?87yHpry5oAGO08WvUekfvWB8dGq/VtSAKkrD1W2C2p4Si6HRfk+NEucVXmMm?=
- =?us-ascii?Q?3/WU7Vw+Y6obL1EOcTQkiOf4Cvs9Hy4bKg1MGmGTupFFn0YdxzUFIto4CJL0?=
- =?us-ascii?Q?vUHZIcQIxgRL4hMVI/i7KJ0mv0uI7P027IVopnMiLa6NlLfOcDsUwhgAT9xI?=
- =?us-ascii?Q?yOpavDOUcn1rc6AGoEa3AQ+OUKsg3sJu2m17X3uXyOnU8Sd7WDWDZfCKqBO6?=
- =?us-ascii?Q?IbtBdyJfwW5FH1LslS5KKWdW7zh3402t11ZOzv/WkUnqbZIuhio3Ws+8Tz6Z?=
- =?us-ascii?Q?vw7jT5OZP388PvycOMncsFYZ8CyTtm4sk+1HqjTpkJ4i4quvoOT44h9LPZ3f?=
- =?us-ascii?Q?PHimhZsPcXwfwDGtmzbVYCha9aKNQPnRMxAX4F/PFjTuRBO8dxqPUjslXhan?=
- =?us-ascii?Q?DPt04jw4BoZfGDKeQFZsnNCvNTMjlPYoGX2lw/j/QWDLd63kfpO7aq9RKVd0?=
- =?us-ascii?Q?5NuQdxCXbm/7gTFqNJp3rVT+iBUSx9g6TFSfEUSaWlQ/V0K4px2TEIW0FO5f?=
- =?us-ascii?Q?vcWTyoZ3mA4k7olwr3FLoBcmreI4bqG1Nnu+OFn6ZFy9wdD1H4wH+uI9OYRu?=
- =?us-ascii?Q?kfdFPR0n7flpiJt/Z5WDVlgCmbvlaFtsuPpy9pQpmGZIQUB8mIetfU6wZT2Q?=
- =?us-ascii?Q?bdg3083h4KShYsQLZPv2YymzjAYNHhwkYMzVwA8ECrLdHDT3S+5XoBgHdhlB?=
- =?us-ascii?Q?FsSNHv84O6jDCbZBY/LhDxTKEdn9xk2582o4qrdu8t8Gf90xR6rrRinhEsFp?=
- =?us-ascii?Q?chfR1EtT47RCcLwHLTzUtRL/yxwyOOlTn2unFp72kmWqM14L619mzlMmgGn4?=
- =?us-ascii?Q?AE64uc0B5GFcMpKX6g/zQeTqzMgDVls9lTK8wmFhwU6BhSJA9MaoqmglpO2v?=
- =?us-ascii?Q?0y9JoKdMaOe0o6lBNToxPn69WciFJuWUo2XCeEziXthnY86ARCdVgJLIGLKn?=
- =?us-ascii?Q?CzGPN3jal/AIHqOMW7cxdMX/D0rNakQ=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7338e08d-6bc5-4008-115a-08de84c8df60
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 08:32:21.0055
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sMfutabSUKKRkIG6+wWMo3UfCfbYc/sf5gcqfUI1b/wNzQ5rMo+6jrWhrt8AhAJK6jrCebNUbE7o/d8hGV6y27ZPY7K9gRIRRHBEMZMu4Ro=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR01MB7147
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 08:32:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125353
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 09:09:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125354
 
-From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+Reference: https://github.com/ImageMagick/ImageMagick/commit/bac413a26073923d3ffb258adaab07fb3fe8fdc9
 
-Currently, the build of wireshark fails with
-
-ERROR: wireshark-1_4.6.3-r0 do_package_qa: QA Issue: /usr/lib/libwsutil.so.=
-17.0.0 contained in package wireshark requires libxxhash.so.0()(64bit), but=
- no providers found in RDEPENDS:wireshark? [file-rdeps]
-ERROR: wireshark-1_4.6.3-r0 do_package_qa: Fatal QA errors were found, fail=
-ing task.
-ERROR: Logfile of failure stored in: /build/tmp/work/core2-64-poky-linux/wi=
-reshark/4.6.3/temp/log.do_package_qa.302606
-ERROR: Task (/build/../work/layers-3rdparty/openembedded/meta-networking/re=
-cipes-support/wireshark/wireshark_4.6.3.bb:do_package_qa) failed with exit =
-code '1'
-
-Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
+Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
 ---
- .../recipes-support/wireshark/wireshark_4.6.3.bb   | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ .../imagemagick/files/CVE-2025-43965.patch    | 21 +++++++++++++++++++
+ .../imagemagick/imagemagick_7.0.10.bb         |  1 +
+ 2 files changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2025-43965.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb b=
-/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-index baf3af925d..3365a510cb 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_4.6.3.bb
-@@ -4,7 +4,19 @@ SECTION =3D "net"
- LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D570a9b3749dd0463a1778803b12a6dc=
-e"
-=20
--DEPENDS =3D "pcre2 expat glib-2.0 glib-2.0-native libgcrypt libgpg-error l=
-ibxml2 bison-native c-ares speexdsp virtual/libiconv"
-+DEPENDS =3D "\
-+    bison-native \
-+    c-ares \
-+    expat \
-+    glib-2.0 \
-+    glib-2.0-native \
-+    libgcrypt libgpg-error \
-+    libxml2 \
-+    pcre2 \
-+    speexdsp \
-+    virtual/libiconv \
-+    xxhash \
-+"
-=20
- DEPENDS:append:class-target =3D " wireshark-native chrpath-replacement-nat=
-ive "
-=20
---=20
-2.53.0
+diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2025-43965.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2025-43965.patch
+new file mode 100644
+index 0000000000..385536957f
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/files/CVE-2025-43965.patch
+@@ -0,0 +1,21 @@
++From bac413a26073923d3ffb258adaab07fb3fe8fdc9 Mon Sep 17 00:00:00 2001
++From: Dirk Lemstra <dirk@lemstra.org>
++Date: Sat, 8 Feb 2025 23:31:39 +0100
++
++Subject: [PATCH] imagemagick: Fix CVE-2025-43965
++CVE: CVE-2025-43965
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/bac413a26073923d3ffb258adaab07fb3fe8fdc9]
++Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
++===
++diff --git a/coders/miff.c b/coders/miff.c
++index 21b91d0..91bd36a 100644
++--- a/coders/miff.c
+++++ b/coders/miff.c
++@@ -1307,6 +1307,7 @@ static Image *ReadMIFFImage(const ImageInfo *image_info,
++     if (quantum_format != UndefinedQuantumFormat)
++       {
++         status=SetQuantumFormat(image,quantum_info,quantum_format);
+++        image->depth=quantum_info->depth;
++         if (status == MagickFalse)
++           ThrowMIFFException(ResourceLimitError,"MemoryAllocationFailed");
++       }
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 81f4596456..c4e48b4bbe 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+     file://CVE-2022-1115.patch \
+     file://CVE-2025-65955.patch \
+     file://CVE-2025-62171.patch \
++    file://CVE-2025-43965.patch \
+ "
+ 
+ SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
+-- 
+2.34.1
 
 
