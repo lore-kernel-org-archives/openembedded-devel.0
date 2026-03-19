@@ -1,324 +1,194 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF5001075283
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 09:15:42 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7083.1773911735939731984
- for <Openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 02:15:36 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C07E107528C
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 09:56:13 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7481.1773914167328597459
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 19 Mar 2026 02:56:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=YiIsEOuN;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=NdPLXMp/;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62J748h93772189
-	for <Openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 09:15:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	zlkiREdiUZqZgQu7M9VmU2RDoToI78WXO/2LNqbM7/0=; b=YiIsEOuNpc+DqbOu
-	TK9WqySPQpBSr6bMcdzlR2UlYHc7pPwx7MIOnLEPZoEFoQJOlXaj2Wen7Z66oCUf
-	6RJgw8ITe4K8l2KGl922IQ3lie/FRJjiF/aLGnfiH6lprmmjV+iBdoIKAFYAC6wH
-	vXgM67nhLMNH9KquHEXR9kgv9sVQib9UDZ/tK1xd6QfEaG/G6CZd3Vs09oNnX/lP
-	XYCYcm6r69As5AOt1HngvVTbq+6GxKc1u0v5QZzvflurZu5QOwLKA4z6T8Pan2wE
-	TLC6fU8zdr8rrYliDSd5NVcQK3T+1vCREYzdw+3KEwDtlyT0nNaXMwKiGeodYQSa
-	FY95Xw==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d083r95hx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <Openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 09:15:35 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-89a0013d87bso135951236d6.2
-        for <Openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 02:15:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773911734; cv=none;
-        d=google.com; s=arc-20240605;
-        b=dyZLbNTsdYFkXAU0iPFsRh59LOh+aUbIAlFDbWsZc6kC3MYSew7/Z3zWA44dmiKzjh
-         8zarSuhFAPjQTajeKLQtQd3wyJ9VqbkONw5RTwtaXJPP/BdA53tqYtWpNOec1bxF72Ls
-         qnXksRg/jWEbImx0V2YtmB/W88C1YMcin7WnpM53hcYhvjQUQDhubpe26B/Lo46lPckm
-         Bl/hrCvtn851x2qb0mmpAzOwjPW1DMFjC/QnoiGD8tMI0QwEQi8XVuMypa+ADKCKpDzE
-         rH2eieKvBSdcP45uf7BReTjP92MPsX5HbZTxo/5rY235cGwMAyfDJuYmgljHsNxQj3pk
-         cL3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=zlkiREdiUZqZgQu7M9VmU2RDoToI78WXO/2LNqbM7/0=;
-        fh=9cOsX3dNqNsa/nHgCuGkS2z+MvFWgCjV0I+6JvWnhVs=;
-        b=AlwWAfsz/AxHZJbL/erWL8F6zyn1h1jgTQ9Es5eVelLTnRB3G0XEEaFXrNVbo7lFI3
-         cNzfrWVdc7LL4dhWvpidd55FnWMB9fFBArYjZJSjToe+sQDqGckj0YO6Ejea4fhNyZEx
-         8YN6TJh2LXqOD7w1FEF13Vc7pc1CejlRBnFcThnPqk3Z9lCbEV7ECEhGpCJwgfL8gLsx
-         az62091BaD0oFh5cRVdWElM4NI8GkGGTYDijTEwYKWSaW4vZ9vjk5N/zbyQEq+OsJQaE
-         piQyKOK/oiuE6Wj01MIwI1fweRyB3Oseqk4G+thv20CvsRsNdAiXh2aROa9bF2hJknF4
-         1bDw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1773911734; x=1774516534; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=zlkiREdiUZqZgQu7M9VmU2RDoToI78WXO/2LNqbM7/0=;
-        b=NdPLXMp/1qVS1jVVTxdn9tMWMrFnMzb3kh5hZwfKNxU4Nwjn2ueF4zcdhDNlg15SjF
-         lVhMunUvcqAA1y7qlEn42UPp4gOlwfU8cRH9NjA7rWOAbllkQNXedR9GG1JBETQniQFC
-         YLkCte0/i1U4IJQmx7D+m6gOYpWB2MjkdiK56UXZkRgYrB0DdVpI7byTL9U2QA+AbGh3
-         86XoREOH4SeP2VCfuLCQwrF/PkpC3XR145AiiZW6QlAbHLIX2U7E1n6ztlSPIeD5/5Kx
-         glZdDdy0Ucc0k6S4AoOm+Ds7Aj9ozZCSnZfc37x+RFwX1x4iox5f4iMPW8515OE7EG1o
-         R1Eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773911734; x=1774516534;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=zlkiREdiUZqZgQu7M9VmU2RDoToI78WXO/2LNqbM7/0=;
-        b=CKYFcRIfWYE4SVz/LdtA2Zh6gvOfq08OPgs7p6JrTt3PzYFYPxuFLwrQFlH+EIZhMH
-         KZwPBZtfX4uc/ehheXqlKOOGX+R2fnisRoiQqYGNcbe4qgP3v507rneoJLyCKYk9eP6d
-         MYNd8PM2r88OOym6SOaUxjgpNLgJ72zQ/O4boNaa5utof2hV1zWlEuA8V3OQQ2+gw16H
-         BqKCa3IM1hl00FWvuFG+KukFEzwQTGbdwCFCL71piLHHpTeTUyfyJU8NFjixEdTaj5R4
-         A+ZMyHCNOm380KDu8h8C85Eg5ofx+wxm4XauZacAChFO/rYfW1hYgZ6Y5Ap4HxUFeGh3
-         vy4Q==
-X-Forwarded-Encrypted: i=1; AJvYcCV1OVyDNVIhMMB1CdVBA7SDLrOueTuxi3A//tRlYxfZLqsPBXlPSEOp7resGq2N0cpFc4eBwsi7/nzw1/OgMTWkOho=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzijdOjXytSavE0CnuwB0xA1k9EG7VTaJmxbcZKKgfu6tZga8Jj
-	zCiv3E529cMHM3MsbCEuFNurbGe6hy4Iv3qoIAdCGNpZWKUbMRZOY64+yTlxfL5gVcWKuIkBwHu
-	fwGKItyk1t6CdFASKujDDXiylKkjaXiC7Fb+20nYYFzDX+L/DbtaXoT+mSazOjFKrwLBfoyZxhv
-	2KGd6U5Zx2BDlxeprJW1MS8Qkw8e59yon38Gyr8jK9/Fy4VYOJx/CgnjvrusI=
-X-Gm-Gg: ATEYQzw+Qgz+ULUi91/GBs1Db/cI0cFxlp+Lih4yCFbMQh0P33/cnjQh9dlrb9Rwrrv
-	fgTZb1S7PrNTcFepJs4TfpD7OQLmGDzaBTb/Ve+Rc8bptEuL1ju7NW0gmVTrcpUruRd/AYbKBgz
-	q9Cjmv46zuLx2cyuNsgRTYoABI1PwAM9uPigFhuXcEwxHYnDGGlugMiddwT/EXIsCbbIRnupPx/
-	kxu
-X-Received: by 2002:a05:6214:4687:b0:89c:4be3:5d6 with SMTP id 6a1803df08f44-89c6b561fa8mr98736266d6.29.1773911734282;
-        Thu, 19 Mar 2026 02:15:34 -0700 (PDT)
-X-Received: by 2002:a05:6214:4687:b0:89c:4be3:5d6 with SMTP id
- 6a1803df08f44-89c6b561fa8mr98735816d6.29.1773911733696; Thu, 19 Mar 2026
- 02:15:33 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=UnFXuT4v;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=753824cbf9=peng.zhang1.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62J9OaLX2902634
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 02:56:07 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=PPS06212021;
+	 bh=Nw+WaX6N7aXxNZ8i7cedIPSnPQkk85i+caXKpQfYIWw=; b=UnFXuT4v8sFo
+	j795CK7pIlfm8p50GjucHfCEt7FJUpBlR972QI1HChuPZtUQMxhCtgHghyR0XKN8
+	GgxW4Ymn9LF8vxxzuHIFDBtp0vZM7IqhINHPe00oDY8HpdZExk2iOIMMHe5w2TJ8
+	WeS2hf5SOcnDSjoBDplgCMPC+JdL05Fpdn1MV/90BsTgDY6isK5S/1eNxjPKOrmR
+	XlcilIDfWpjyMWAe/K8sEUfewGhQ84d0vuMJ9oTpnNJdWXsqr52mPFY68BrVFsGS
+	rEPj9Th5VhVGMMuMQnrY5U2cM2IG8eYrTIEMF9hT9cQx3JGTTXTG8fXkx3/5adKu
+	XATZEZsWRw==
+Received: from co1pr03cu002.outbound.protection.outlook.com (mail-westus2azon11010016.outbound.protection.outlook.com [52.101.46.16])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4cw76dwy3t-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 02:56:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GOP2tCuVF87HfiNrsiGiWTTAwFgqD/rrafEA2tCv5dYOj1Jz2fhsvJ5UEdGKvYjnmpAWCk3Pa4TcKh21OqsdadPktR0HIHwqmgedarQEH88C3yh8Ib1NsqPH/9GgmPE9Utnn3eatgyZTkcrzBGE3S23uFpMzV7q9pG7gjS9UkYm0Vq9Q8bUS50/LWC0AMlkU0eGizZG2cWAL6ZLIIYgC78J65TWlnsANbgJU4y9d0qaVI2ojdH6O2iLt0z/QbmTDDzbHUIfaVg9dGg2quKTeypROonYhIErOyhIhAsM+Tlrb6GLEC81UWVDCObG3aNv6ET8Gb+sQQAs5a0OijBx3bw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Nw+WaX6N7aXxNZ8i7cedIPSnPQkk85i+caXKpQfYIWw=;
+ b=W8pulR1t36HXFUjscKUuPDzKKb2gEQ/PzZjWgUriCrfIdv0MGV7ScU6Xnlz6CuvyincFvQh59FZFFkLQqNUVr7uiJ2y0nZZMgc6wCJNuxOJGWpOY4lQjYp/TGoSG8ZjviJJrbCEHzcJgPcqj+pkdz2j20p8CS823C3rJomGtJFZCyPIr9vSZX1wKAA/IutnyB+WZ9C/5+gk1mlC0yuBiWbWRCuOpCrT1GdBhblxNyjoZ0jzsyD8jIiztCMkKLH7RtILZ1rAG1yIU5goFFsaczj+nUElXARA6KzjFuRPbKP15Ncd2+p1BD9P3os0t0kQ8DAcifTaHNivZJ34R9rQfuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
+ by MW4PR11MB5821.namprd11.prod.outlook.com (2603:10b6:303:184::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.16; Thu, 19 Mar
+ 2026 09:56:05 +0000
+Received: from CH3PR11MB8562.namprd11.prod.outlook.com
+ ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
+ ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Thu, 19 Mar 2026
+ 09:56:04 +0000
+From: peng.zhang1.cn@windriver.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][PATCH 5/9] mousepad: upgrade 0.6.1 -> 0.7.0
+Date: Thu, 19 Mar 2026 17:55:43 +0800
+Message-ID: <20260319095547.3614749-5-peng.zhang1.cn@windriver.com>
+X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20260319095547.3614749-1-peng.zhang1.cn@windriver.com>
+References: <20260319095547.3614749-1-peng.zhang1.cn@windriver.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR03CA0123.apcprd03.prod.outlook.com
+ (2603:1096:4:91::27) To CH3PR11MB8562.namprd11.prod.outlook.com
+ (2603:10b6:610:1b8::13)
 MIME-Version: 1.0
-References: <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
- <DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FA@DB5PR02MB10213.eurprd02.prod.outlook.com>
- <CAMKF1srQ2N9F5__Y9k1_yNy5-wfryCqDqAkR8qrJo_rfM878TA@mail.gmail.com> <CAMKF1srrHrDeCxJp1nnu1A_Uj8Qd8MyUhe6ZR78frYmFBajfAw@mail.gmail.com>
-In-Reply-To: <CAMKF1srrHrDeCxJp1nnu1A_Uj8Qd8MyUhe6ZR78frYmFBajfAw@mail.gmail.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 19 Mar 2026 17:15:21 +0800
-X-Gm-Features: AaiRm52V_pJQ62-NG2V-gRLZWhcbY0WlVELgZ7vb9oMuMx8xJfktNh-qjXQJExs
-Message-ID: <CA+s=J=zqQET=sUwGTPDt4GnJpRpi4c6NkVE9aUOvyJ4bs67erw@mail.gmail.com>
-Subject: Re: [oe] Recipes needing build fixes after glibc 2.43 upgrade
-To: raj.khem@gmail.com
-Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-        openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: PKgSmExUc0aYP2CuwS5pK_StXjhVz2pu
-X-Proofpoint-ORIG-GUID: PKgSmExUc0aYP2CuwS5pK_StXjhVz2pu
-X-Authority-Analysis: v=2.4 cv=ApTjHe9P c=1 sm=1 tr=0 ts=69bbbeb7 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=NEAV23lmAAAA:8 a=iGHA9ds3AAAA:8 a=Q4-j1AaZAAAA:8
- a=pGLkceISAAAA:8 a=3-RhneuVAAAA:8 a=EUspDBNiAAAA:8 a=gu2P7IAxhtS1sUO5_zoA:9
- a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22 a=nM-MV4yxpKKO9kiQg6Ot:22
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=VLVLkjT_5ZicWzSuYqSo:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDA3MyBTYWx0ZWRfXy9S3lxRXxcTw
- mgb8XhL+K5v0Ji4yNhnIn5/fkdk/iwX+tlaM9sJ7Ml4OSvwazNaaUekyTTWsnFQ8XCf8bHd7/mh
- c0+65S4vw2SWuN17kZXvVJu0EmKfRiA7pNuKrtLJ9GJ636jWVox+c6zFlp25JVj3jfwCxLJs6Ki
- 0WKjhRG4+sFQD4VmzuIvDC8GJMjOi/NS2wkLwsDI24OZQN5uRNBCVFA8US3BNAlySKdbc0HTSCf
- t01O3UWQXdjeTNoRvxzShZgv3t3R0VjQsWw/YpXbWHDXRCUZId7Ew/mMNNWAGEw3zULh+/1AQNb
- AwXUd+vAEJf6nEuqobr19KzyfFRaHSRlA18at+janbNIu3cTHEFrj+li30Ug7D4z26GUkZhVZT8
- lZoUIQ4B9qDZstb1X60cC+7XD37Wb94FboQALaB/od+UrAWqeRE7dHrAq2EfQHBdXRYPFfxubV5
- kvjxo2hLW44Uv7SF4rg==
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|MW4PR11MB5821:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4c268a4-d31c-4a50-1926-08de859dbc23
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|376014|366016|1800799024|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 
+	fmzJlVXyQ2/h1l6+LjJnEwgggHMQLFavAgoL4noRk/ZtQYOacpuOXmH2w9jLl05QOtIknlZtKuzqdgo7v2+1hwiwpwZWrlFwe1lOJdUqyUfqkijES262JHj6FckWBxKEyWdbVmH3HUbxu4d9/EfwhmsBnBrY/cXyhI1Lgo52eXwj+YCgUVNA36gIkrJm6uzPzdST01KvUJpm+0xZbuYQ0P1aqfimmvJjen7fAW02kuH+6MSWPbPPKbF9+VxgVYWi69wYVKobLEG3DzXqqZDcBJ43rcomGDmCcB8ykOiZM++jdAqCaTPKWDUG7VRngd3u4gEpl4mIdeHyc0XNodV+a0mgXQC8k4ISWVfAwuvzWZwJTUA3/Tcsy7bMzaNr4E/ySLnNBoHlXKyEYnf2le6bECADXBFtHQLhyMQMkp5XTdBnRteVT3DXXtWnEBB5QxT0C4JS5TZMhZ/yZ34Wem8b1DvLS3PeNtrrWJE/eH3yZfFwnhYnxN3XhTJz794JHcn29Dt0A/tddZO9xBFzUQLhQspDg58nCU6r0q5J1v7EedugdvaxCvvacG54NvAHTQVdXQX78ryrv8IaRUjjEiunl5SVu4i4aJcdpgqzU2HjgMilTWWrpz6OA820tJQf2ctrOQqAeGwmFdC+jzS4zIS96bBPjqrKvczKZkTji5AMuzYRFTmqTydxwNJH4DH3Fq6Sa5UTd8L2WW6YS+h8W3Wu8pKd2jC9O+9YdihJSd2e5fOL76T7Ru6IiveLYglNoBqvOpErImaeeolBdFrNjsNY/NRlZw4FrCGF46vVtJHNkRc=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?ss6K0jHDWPN8QV/3hGPauLkXl0o2T1fdM9PJBq7oWbxFp3atQGEm0EMuJ9A1?=
+ =?us-ascii?Q?sYDVNnndPkFFGVm64BU6knK8H0sfnpcJq8DbwPDzubW1MG5UUWBUiYB4RLGJ?=
+ =?us-ascii?Q?bVNFoTGxk1RxbnVO6qxrZLnhpBu9LW/4N0Yd4er2XFyeQKhblu1Rfhs4dx6W?=
+ =?us-ascii?Q?MPMI1pETWV0VKjO7WiX184U+qhkFRkt2eRxdfx2fM4aOivlsj4sGSmM4Yauz?=
+ =?us-ascii?Q?oiCwoqqwQCDBTPApNiG8gbev0fzIykMkzCq3eCe8CIPZ9bdURJg1EoAHQKRy?=
+ =?us-ascii?Q?dWpkYIdS9cxACVRyYHhAi6tNK3LGhmDBH1LJuCfKKwr7hjoMrjwwwN77rlp6?=
+ =?us-ascii?Q?0oSRm/6KWDX5CucLQL5vZ37E1IRYF+Zb+nXk2ETfpaOuao25OWvcc3yD1vQu?=
+ =?us-ascii?Q?p8rZLfPEC+C/CH+WLL+4gn6p6ULYDcdyejfd5QVjnpSWtn4XcBL4RjKfKdTf?=
+ =?us-ascii?Q?gDDMVhDWeHf5lBNsYvbDvhuJS/1aKidSSEp/l05MOrxWgGjkTZVvFN1AZtVb?=
+ =?us-ascii?Q?tfKli+WRmKhZifsq+mbXNnt2LlnKdRtqxtyXtjvqeAHma/WwLaxn/7fGJiZZ?=
+ =?us-ascii?Q?1+AFkcBfx1TJlPrPL+IEikykwUsXo8Jhht9Sj4HwddNoAbQAyM5RGEW0YFkp?=
+ =?us-ascii?Q?3Ht7hdN996W2ECB13jGvkUIsdjFvzWhXIytuDugpepK7QGVR9T4FS3bEXYRh?=
+ =?us-ascii?Q?vsxekvgKT+Tl/HB8/YmITYMD3OxZgGrMc29mMPUZJoL/L8L+BtHhRLCVUevF?=
+ =?us-ascii?Q?x8YUvI1NzisQlDUBnHpHoPIOljo5UubW2B7w/PvwM2ceXYwJQjXt2OEGMgVK?=
+ =?us-ascii?Q?SJMhD+XsdLSdiPOEP1KKAjqXR313KERv3inGzz0SPfxmyuO1rkXb4pmIgiq3?=
+ =?us-ascii?Q?YZJZV7SOQBmV5GZ0GFAw8rI149GCh5xhcdGUT0QKUlJW8WmnNHG4m8l/Luye?=
+ =?us-ascii?Q?H32JZ+0muHWRasGmcrciTnMuRTt2Bq0HjdEt0j3yaYB+cMTn1GdcqkOnrrem?=
+ =?us-ascii?Q?bekGBWJS3aypvq+78nW6FZ61x0eaoTzfF8pX0si63PK28cnp69mOPEvij8Zh?=
+ =?us-ascii?Q?5JKY+XBqSFABOu7kS/TAsAQY3nqsJCUf3WWWOyTqoAXiO52BAvHILJPPiZlM?=
+ =?us-ascii?Q?MWXdkJRntuqXQ0IC4V1/Zw7wIofibpV0oy8MvlplW6gpreFfULWoZxRvN3+D?=
+ =?us-ascii?Q?AI/vkglJ64f2/Ij3fHK2QYIgP9vGHx5FdIEFEUMNxrSy3zzi5+xl9znzfA++?=
+ =?us-ascii?Q?mLKCOtKHVhTJ2MWaEeZ8QFqyaMzYsFfZZ1sbak+9C/oAPaGQh/FovwSHMAdt?=
+ =?us-ascii?Q?bv0J+skAMN8MPz9gR0rnyGCwcLepVrGR2iBr4X8DX9m1IucnUYAMkDOjEtga?=
+ =?us-ascii?Q?YK5aYFZwy51tDwuxzFInGtUDOxEOkZCbaw6WD/N935+awtmT7HIehygqe5fu?=
+ =?us-ascii?Q?V46HUGfuypjSe/hjIikpW/twukzDc/aVHBd7n7ifu5iosazXIyl4QATZYrXJ?=
+ =?us-ascii?Q?3OT5cA0HKj5nE7NKKhL2rqApr1HDU55SsfKg6x9H4cGwoeDOghq89n/Hmr4Z?=
+ =?us-ascii?Q?lADZhmd1iqEMBu8tf1ktplQHekb5sdi2R2OPJl20pYu24Kgc2/zWA4Ik63Zu?=
+ =?us-ascii?Q?wNbI1KVIwPy/vt6DZWyI3ZwRK3jAm80Gekc7ttNd6wzcSJAA+xPwu4X2zy6V?=
+ =?us-ascii?Q?J9Ll3Nvw2lrbalpuLD/iePzjHekkG+ooJzIq7v4rwna+EG9oz/hfofC7tmjF?=
+ =?us-ascii?Q?uPSU1BgdPoIc8zvzIqbzEp/gNy9my2o=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	rd5Na3UDcLL5Y0GfGK6I4DdO66t9sjLfS/OMTWYav0aNn7Z48U8om244zfB753Da8VILOc7pdnk7gpJvmQHJralZongML2IRCNWZDAVDrdgAtIMkZnRP3rfCUFoxMrcBylWUgiVoz/YtONVxzR80gU45D0tEuQtrHxT9QYp41vo69LbToijdJYNDCpeuePiZRT/W3LkRxj1rYAuRbyjsBzIuIH/TjIqDNmTNCH0QgN3OVMS2mj+0vjwjyMLaKXbD7cVo/Z2SMlvMat3B32ZsqJqMXpJORQI9laNVMd4SJTj1ksue8mtQrynEBdNGn9B+HGnFy8RfiPgkodwYHpbnxg==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4c268a4-d31c-4a50-1926-08de859dbc23
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 09:56:04.8276
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cYzWS8eXs+D/PgxVvczWFi38XPw1VFhxk/97DyIYbhp8DXTlx0VSrtJwC428oyxyCFaq0bHGahEJUa5NKjopF0DoBy586eb22Fw35YqwcG0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5821
+X-Authority-Analysis: v=2.4 cv=S9nUAYsP c=1 sm=1 tr=0 ts=69bbc836 cx=c_pps
+ a=+tUgqrp9vGCFEjR5l+cGAg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=O24Aq5uEAAAA:8
+ a=t7CeM3EgAAAA:8 a=4ZU5GxkhvbaFsd5fDeEA:9 a=SYBONWESK5muIIdMMRMZ:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzE5MDA3OSBTYWx0ZWRfX4a3NEW813vZa
+ vSYJg02A7DeqY0Q0AJH41AaQyH5ytIs2Ec/Wt+z5JaBbRs5IrTNhoZH976ASZaGnCUjJrd9ulCL
+ SocgqleEZ0qnmaliE4qvzZkwimbb1VFz3+49wZL6UZrB0L8JeLxn+CQU6YEkyQmhK6UlXso+/cG
+ HyKm2XHhczZ7CwMGelE9O8FaZp31KInwCFUBBr+T483OgbeL+ODThi7b+HP6nwb/DcT5rSo2XiF
+ rMg+Lwc1Ovvw5+CVGdG0SB8WioGm7beiyZKVtWRiW4Q7/x4F5kpJtAEu6taHZq3o39DrgJenW8y
+ 65WlH+/hkK1nuFSJqYTi9v7IlXkFbz5u3Ru84252fMnPuJ4vM8sdruGnvRNxf4YHwzwI6RtN2vP
+ Fo6HCNdECovppfMHDWkPqbQmrdHRAISsZiLBQFwJ1mf+cE2vNVQxzeoDcI3KSOApO1qQgH6kSOU
+ aIVtNbOwxra3Z2ZAHOw==
+X-Proofpoint-ORIG-GUID: TDGxGn-oDAPXSE-5zEiIkn6Yv9XWyZv0
+X-Proofpoint-GUID: TDGxGn-oDAPXSE-5zEiIkn6Yv9XWyZv0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-19_01,2026-03-17_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0 suspectscore=0
- clxscore=1015 impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0
+ phishscore=0 clxscore=1015 bulkscore=0 impostorscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 malwarescore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603190073
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603190079
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 09:15:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125382
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 09:56:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125387
 
-On Thu, Mar 19, 2026 at 1:53=E2=80=AFPM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> remaining list
->
-> Summary: 7 tasks failed:
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/rec=
-ipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_compile
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.809159
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/rec=
-ipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.790297
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/rec=
-ipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.882672
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/rec=
-ipes-extended/qad/qad_git.bb:do_compile
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/qad/0.0+git/temp/log.do_compile.886896
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networ=
-king/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.904879
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networ=
-king/recipes-support/netcf/netcf_0.2.8.bb:do_configure
+From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-This seems to be because of a .gnulib-tool.py file in newer gnulib
-that isn't being copied. Even if that is fixed, it later fails because
-it uses an obsolete macro.
+ChangeLog:
+https://gitlab.xfce.org/apps/mousepad/-/tags/mousepad-0.7.0
+https://gitlab.xfce.org/apps/mousepad/-/tags/mousepad-0.6.5
+https://gitlab.xfce.org/apps/mousepad/-/tags/mousepad-0.6.4
+https://gitlab.xfce.org/apps/mousepad/-/tags/mousepad-0.6.3
+https://gitlab.xfce.org/apps/mousepad/-/tags/mousepad-0.6.2
 
-The last release of netcf was 10 years ago and there have been no
-updates. I didn't find any recipe using it except libvirt. Perhaps it
-should be removed?
+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+---
+ .../mousepad/{mousepad_0.6.1.bb => mousepad_0.7.0.bb}      | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-apps/mousepad/{mousepad_0.6.1.bb => mousepad_0.7.0.bb} (64%)
 
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.916449
->   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networ=
-king/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:do_compile
->     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-=
-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.953431
->
-> On Wed, Mar 18, 2026 at 8:23=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wro=
-te:
->>
->> Awesome, thanks for the help
->>
->> On Wed, Mar 18, 2026, 8:01=E2=80=AFPM Peter Kjellerstedt <peter.kjellers=
-tedt@axis.com> wrote:
->>>
->>> I=E2=80=99ve sent a backport of a patch for liboauth2. Note that upstre=
-am has made a mess. They first fixed the problem in commit 0dcba079907d5595=
-50ee8d9a201d26203bb8aebd (the commit I have backported), but then they reve=
-rted it in commit 155b93b2efd1e8b0022c9bdad2297a2a670dc29c under the preten=
-se of fixing the issue (https://github.com/OpenIDC/liboauth2/issues/70). I =
-have reported the mistake as https://github.com/OpenIDC/liboauth2/issues/73=
-...
->>>
->>>
->>>
->>> //Peter
->>>
->>>
->>>
->>> From: openembedded-devel@lists.openembedded.org <openembedded-devel@lis=
-ts.openembedded.org> On Behalf Of Khem Raj via lists.openembedded.org
->>> Sent: den 18 mars 2026 22:40
->>> To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
->>> Subject: [oe] Recipes needing build fixes after glibc 2.43 upgrade
->>>
->>>
->>>
->>> Hello All,
->>>
->>>
->>>
->>> There are few recipes currently broken on meta-openembedded layers, pre=
-dominantly due to glibc upgrade. Help is needed in fixing them so we can ha=
-ve world builds working again on AB
->>>
->>>
->>>
->>> Here is list
->>>
->>>
->>>
->>> Summary: 16 tasks failed:
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.55019
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.38373
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pyth=
-on/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb:do_compi=
-le
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/python3-xstatic-font-awesome/6.2.1.1/temp/log.do_compile.10=
-7676
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-extended/sysdig/sysdig_0.39.0.bb:do_configure
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/sysdig/0.39.0/temp/log.do_configure.124550
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.145475
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netw=
-orking/recipes-daemons/opensaf/opensaf_5.22.01.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/opensaf/5.22.01/temp/log.do_compile.161530
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netw=
-orking/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.154712
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-pyth=
-on/recipes-devtools/python/python3-pychromecast_14.0.9.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/python3-pychromecast/14.0.9/temp/log.do_compile.175919
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-extended/qad/qad_git.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/qad/0.0+git/temp/log.do_compile.176411
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-test/libfaketime/libfaketime_0.9.10.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/libfaketime/0.9.10/temp/log.do_compile.182340
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-devtools/luaposix/luaposix_36.2.1.bb:do_package
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/luaposix/36.2.1/temp/log.do_package.186406
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-support/liboauth2/liboauth2_2.2.0.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/liboauth2/2.2.0/temp/log.do_compile.199073
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netw=
-orking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.193667
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-netw=
-orking/recipes-support/netcf/netcf_0.2.8.bb:do_configure
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.208957
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-support/links/links-x11_2.26.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/links-x11/2.26/temp/log.do_compile.215047
->>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/r=
-ecipes-support/links/links_2.29.bb:do_compile
->>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-6=
-4-v3-poky-linux/links/2.29/temp/log.do_compile.218734
->>> Summary: There were 26 ERROR messages, returning a non-zero exit code.
->>>
->>>
->>>
->>> and a build log with errors is here
->>>
->>>
->>>
->>> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/raw_i=
-nline
->>>
->>>
->>>
->>> Thanks
->>>
->>> -Khem
->>>
->>>
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125377): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125377
-> Mute This Topic: https://lists.openembedded.org/mt/118391105/3616702
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.6.1.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.7.0.bb
+similarity index 64%
+rename from meta-xfce/recipes-apps/mousepad/mousepad_0.6.1.bb
+rename to meta-xfce/recipes-apps/mousepad/mousepad_0.7.0.bb
+index dc75a4b220..68e84dd3c4 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.6.1.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.7.0.bb
+@@ -5,12 +5,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
+ 
++XFCE_COMPRESS_TYPE = "xz"
++XFCEBASEBUILDCLASS = "meson"
++
+ inherit xfce-app gsettings mime-xdg
+ 
+-SRC_URI[sha256sum] = "560c5436c7bc7de33fbf3e9f6cc545280772ad898dfb73257d86533880ffff36"
++SRC_URI[sha256sum] = "e86c59feb08126d4cace368432c16b2dee8e519aaca8a9d2b409ae1cdd200802"
+ 
+ PACKAGECONFIG ??= ""
+-PACKAGECONFIG[spell] = "--enable-plugin-gspell,--disable-plugin-gspell,gspell"
++PACKAGECONFIG[spell] = "-Dgspell-plugin=enabled,-Dgspell-plugin=disabled,gspell"
+ 
+ FILES:${PN} += " \
+     ${datadir}/glib-2.0/schemas \
+-- 
+2.50.0
+
 
