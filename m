@@ -1,633 +1,380 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B508910854D2
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 12:29:09 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9798.1773923344763057074
- for <Openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 05:29:04 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D6F61088E60
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 12:31:20 +0000 (UTC)
+Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.82])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.9984.1773923473715245075
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 19 Mar 2026 05:31:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CgrvZ0SL;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-64937edbc9eso1030592d50.2
-        for <Openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 05:29:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773923344; cv=none;
-        d=google.com; s=arc-20240605;
-        b=Pb8ZW+UI7buAbRDTJXZB2Emfz7PHFmpDWITqywGBO/sf8Q3A/m/5owztPfr5fhqQDz
-         GE+orK6Ydgt6EdJeUNKEOnZ9zxkEJDB7MP5hAgsIgxjHAoLOMgaDjSF/uGVTT/65sk4/
-         2SNBKN08/c4cygNIuS7J9YknTxlf3FzMU2aka2Y4uAe+qQ8scI2FRD3GkzfTvtlLnQkc
-         jXh5CvrS3OrpfW6nfm87ZUT/NTNnTa45+pkvEPBo5obkiOFXBedi8ZrxheVT+53MokDp
-         PwPkFU7ZAbdiSNbIpw51WDIcQORwO/gMASXP9jfAAwNSjANwBEO26eHk/iOVlCoQzamr
-         Aedg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=tLSGwfsLGB/kJQsRfaqVE/X6bpXEb24KBlp1kfVtVpc=;
-        fh=2LQk0Gt2+x0e6j/k3+VRcd9lQY1zUNhc/tUuyK4mil4=;
-        b=YMzJ+XLWmcURCockC0kHMbFs+LKocsELhmQF0KBhNKxgmES7RskG6ZMAxPa+PUIMPQ
-         zOrmXIampoTsQaBEhQcft3jqo7dbpRruVPN1VYNGoT4IJ/3AF+VCugpv5J4cWbYswqoG
-         DShPSMhSPym+6SWNcDr10miaj48bBPqPxLhp6WRG62Z0hXtwXwVjNl2T5stj+HyyYvL7
-         NDCGHc6OeqSV3DkMdNoO2yHIsnCHCt17lLf0jkH5XzPd+voSfNECOoQ+KE3mu72U71P3
-         /+fBuC/cyFOohsfgfkS3JVndLXCbW+im/m6oKVx0Bo/umGCpdCmCXTplYRppJEktL0gP
-         gvKQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773923344; x=1774528144; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=tLSGwfsLGB/kJQsRfaqVE/X6bpXEb24KBlp1kfVtVpc=;
-        b=CgrvZ0SL6Pjjc9UA5Rxf3bWVEjVLfH+jE/46m8xXMFS+QO7ZnZ6XSpRys1teUyUYou
-         OEGvTj+soYXVtNJy3wjBc5xz3HS9RUV+rc+fcFp9ePkcXDxZPrMPTz0yQnezZZOEzqll
-         y1q14LaMksfgxl65cRWM4C9/vCtQyD1FxhC+k/186a2nCFplmlOKKAeFvWwBlWPfLktf
-         bs7Uug5WaEoMlVGAiN/3jAGnn29+NZO+t45tNeqyYBZY2gBrw38Mb8Fil6k0sGdLOhtO
-         AweBaHEfLLd/jc4KHDk+RlajqSWOzeAl43I3rR4seFWtTBno3to5Zm0Wz7q/bwRiwk8u
-         DCSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773923344; x=1774528144;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tLSGwfsLGB/kJQsRfaqVE/X6bpXEb24KBlp1kfVtVpc=;
-        b=fJQOt3S0qMtoFpYyoYHQvF+bdokUYnbOC6dpSuC2hRb43Q8Lse1IhrW/7LWkEOPd/y
-         j7cCWO1vhdes8NCNtf1rUF6Lp7vVoAJShjII3+9YaOlmIU5xKH6VMw79P2H2Wim3ELOg
-         mvhR/DEwiYsvE4zLyj5v6T/WVIZDlLDmr5LRQKp9NKmFbAd/NNwM5J4m1mIObhYGQW1V
-         3jtHZwVwDhjIRfYhUN7yMIXW8oz78ZLEtj/hB3U341JczsntI0s76kB3btNAe725virM
-         Mavk5QJe2g+mnO3NjSuDFadeBxOU4j336hIHas4rk0uY8TjdJg4o3SDHveTEoXSVkCdg
-         dqgg==
-X-Forwarded-Encrypted: i=1; AJvYcCUcsggHzMRqwizYnzkXRjbWbln0uJOAjGbMIBPAF5tCJdY1jlv75WO/TVTwDvjX7tGwM1WFKIt40j3wYkxVj4mWtI4=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Ywn82jkU59G1dmjzprQ1Pp/3fGvZM09pOs5BQSfQRho8JOGEF94
-	P6qDEXqh/hvfMK1Z/6Iag5yuaomjP5f0+i3qx3iEPe0nb4VVUfpB8y1qtrxqjwMyrJYfM+Y/lSC
-	9o4SEJ1ylKHVjF+xiskGJz4ni6v0Xgd8=
-X-Gm-Gg: ATEYQzwJ5e9pmgvf/WaeIOcOaEzolPlFmG6iVMZ7JDhHbsGAGvZ1FYSyUFd5T9JGwHb
-	3E4R/R7aPxbD+RTaxRDxhw14m9rInBj6YVLenIoRGx69vt1OYKhbcS6anmbjE5DGQKsHfhC4Q0e
-	y8knP+JHYIq2EIylVOWrN5pJhdLSmaTTthiSJ8ad7MGVeu5c52TQLCZGq4jnavpWAibNJvMKG8n
-	lHzLBNcr8qGB0MOUgPAhzWWL+LPLFOKbiU8LjLmxVICP0e3mqE+4hW1s0lZ+p3saHM9UZ8nIdsx
-	6nDeTZ9YlERHYLpLiAu/txcYv0jiBVPEq6b05ZSeqPCLkaVjQyiDPqxWg+RS0YswHkffIttvnWI
-	sRtR/+vYSUgxXfGdvyubRmY/z
-X-Received: by 2002:a53:cb92:0:b0:63f:9fcb:2050 with SMTP id
- 956f58d0204a3-64e91472e15mr5055427d50.50.1773923343589; Thu, 19 Mar 2026
- 05:29:03 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=vKz6p0iz;
+ spf=pass (domain: navimatix.de, ip: 40.107.130.82, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lSLwyeybuvx2vq9wDPjDHWSCCq0EOEL7uOQwKu6qg0u78LqcghjiZ8L5J12EwaIG1ybxfqoS2TpiXXbNqpBeC7m55it2ljzr1XRTt4kJKHh8d4um58mIBYoJOCqH02nRe0sZVG9Pzo92W2wcLtqj+qL4Xsx50kDpURIcHdnU0uTvp4S0M3PnUbzc1uUADTxAmJJl+4SSBmJh+W5lUx0hMEPCAeRqowoPMRfAlcqHhnZumD2t1WGyXYC7cEWNB02P5c4h1+/sdQogR2J59AoBsJA3dHCcUyYLE/Vvxn7aVyEjTbrPNntrAVFV2ebkdoTXfFbOT2Q42YVHTw50I7r+gA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9wmdE0VPAyHoiX3vL2WRX2sB/Qc40UOV44AQ7vn1gZo=;
+ b=HsgLfTUOxHPY0/ftJ+aIyiS3EFZellqriZVtwEobUxZa2A4k6Sm3gfNOoWtMl2K1DY0CDp6UPgH8Xa0EXRWauafDR48sZUGN+qMff8IIWkHYSw6FRoQr3kEnsZ3BduKttE1uX5QcC7gSx8QrUv81dgbqGcAy8xnKpmq7cfGLBUc7oYRztmyTLL3EE8b8d/XhN1BFf82itYTHVQsZdkxLVWFY+S96lQLbDebMrBEJetmBvgLACiqSAKY+8gdhdz6upRxN8fvVLfDoJq5eLCVEdNFqRsZ0sWcHu+h2kuwQepu58Yzi0sqSVEBNnVIoKWIqcqBFwsEbZcdvj7VsfCVkaQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9wmdE0VPAyHoiX3vL2WRX2sB/Qc40UOV44AQ7vn1gZo=;
+ b=vKz6p0iz65TQMTzg/dlrU8ydXr8EgK+gOHpFqvOHfnXRCw+2IZ9Yw1pN1CgZLBEeooANTCA3X+AkO4eaQTqdGEnz1WFBC97ICmKxf8sPHGI+PFXThvCJoMnjPxro14R75P3Jk36OxrqfKk8CJtkDftD3+j3i5joSoFk32/MaZ4g=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by AS1PR01MB10199.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:47b::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
+ 2026 12:31:07 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::d5c3:2dea:3d98:25fd]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
+ with mapi id 15.20.9723.018; Thu, 19 Mar 2026 12:31:07 +0000
+Date: Thu, 19 Mar 2026 13:31:06 +0100
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH v2] conserver: Add recipe for remote console server
+Message-ID: <cf39e1469eeb21555c2da569da8183c3753cfc91.1773923465.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+References: <2f6d1b8f-43e2-4fa4-ba2d-ef3fb77583a3@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <2f6d1b8f-43e2-4fa4-ba2d-ef3fb77583a3@gmail.com>
+X-ClientProxiedBy: BE1P281CA0088.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:78::6) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
-References: <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
- <DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FA@DB5PR02MB10213.eurprd02.prod.outlook.com>
- <CAMKF1srQ2N9F5__Y9k1_yNy5-wfryCqDqAkR8qrJo_rfM878TA@mail.gmail.com>
- <CAMKF1srrHrDeCxJp1nnu1A_Uj8Qd8MyUhe6ZR78frYmFBajfAw@mail.gmail.com> <CA+s=J=zqQET=sUwGTPDt4GnJpRpi4c6NkVE9aUOvyJ4bs67erw@mail.gmail.com>
-In-Reply-To: <CA+s=J=zqQET=sUwGTPDt4GnJpRpi4c6NkVE9aUOvyJ4bs67erw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 19 Mar 2026 05:28:52 -0700
-X-Gm-Features: AaiRm514RCOr6REF3BU4QyvanaatHDV39VINUigyyKwz7gGZGhn6YS0Y_bxY6cs
-Message-ID: <CAMKF1srJJ5uE8Kqz5TM4SAnOF6ST6+esxCoBR4RxPmhJ=Xq32g@mail.gmail.com>
-Subject: Re: [oe] Recipes needing build fixes after glibc 2.43 upgrade
-To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Cc: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000c0e608064d5fb60d"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|AS1PR01MB10199:EE_
+X-MS-Office365-Filtering-Correlation-Id: 734ede10-7145-4842-adfd-08de85b3652c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|376014|366016|13003099007|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	VooWas4Vg9guyIOdtoArUkEEayVC5J3L+W+1Y7v3bh1ybMSSrSm2F13EJ7RY34vWgt56yIipd7fGW07cKU7cnS6g5X6ttQit8dl2BeEmaSmpp7f1uLnXTCM+06r/410fB9X4cin8HLKKaA9HCvCf7sPXBjrsM37fXFVLbChMsttyVgJfMmKNhifNmXnCzZ52wfoN5iMtpGWGReQSwxDI8d3gwGZp3Y/Vuro1wJevbWxYopRJqC8niQWKerbddqozAVD6yvpt9lXqiAr2QKKPSkEF3tQuOnff+sY6BKKQ+KaN8HCABO67LLvXNxhcdNeV4rGQaPsmGWoSMILcBBdNxHXh4ISzH+eJo4pZXe/d1FlE6I1UsDv58+wydHfVAE6B9PzTmXGhucm+pbuCeR9/j6b/lWUhwUpbl7oiXCew8Ij+YiOuCKNC+LSekuET+Lm91B8xpOp4LtKDWq2Mh4WSEebkYxS/FaeavkcKVVa9at7oLVgCz8taOAtPNoNjWq+x27e2gmuA2RiQ3St54R0rxLJ1AX+Kf+ueQogl1zUzQ5/g6pVRMCv6BWYtxVHUyXC6Vs2fqrTC+IBpIQFwIXL4mH+v63gmv7bvrsxo7X3QX1fcVHR93C8x5rWNqAOs1E+XOxph6+9guW9QZlgkeMbPpP+SazIDvzj0JeOdHGEyr2QzmaQpoizve14e4/uq7WIs
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(13003099007)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?sHb2gTbSmf4lcIw394d1HcAGGWMk9S3exz7qxsXRmBkZAHEVnEB2RjWssgIB?=
+ =?us-ascii?Q?llG1Nhkxlfd5z/y8KZGCqaHVSWT9kZPgK4734Q41WIFkhP5kGDc9KzTJsuZe?=
+ =?us-ascii?Q?hlEkmtAoKUnPzVtpIHfCGzMD+Ykp6R1hyyrGgXmJKRVq3tEgsbpEx0JomMnT?=
+ =?us-ascii?Q?Y9JB2AJVa6wnTSeEkRb2glV/hxp6jJnYPsKNNxA81HpH3YIAtF30FX2GDYup?=
+ =?us-ascii?Q?mUky0nZDpuCpM/GL4KbdO2Mtl58EUwnbUOCYI+v7n1ksiB06x6n6umwl1fC5?=
+ =?us-ascii?Q?tca8STXQSjaUhwoVUqWm8ZwK1sFAzDqhosJvd7afxKRBOMU/w8wAlE5J1qPh?=
+ =?us-ascii?Q?8pFpyrLOM2n8jvuiz5h6VHUqldrxW4JH4ocLroQttY4I2lY6JL5GNzsfjNmK?=
+ =?us-ascii?Q?hicCOwEl/jFPsW9hZZFXLZrac+iOCP5pAAMNcI7p98dtVT/V7vmA/Se2Sojh?=
+ =?us-ascii?Q?O+A39XsQ2hdBWdsIHB822YESs2sLb6nXy2cbz48YMOG98EFeB11bslocD4tT?=
+ =?us-ascii?Q?dkHkotciXYb/7jhBU1IxtFx0TE47v7C4Z/zZXIr7iVn/xEiFJSrjU0SuNv1l?=
+ =?us-ascii?Q?tGVNHlBoBMrGMDtvEaD2FQNuuTx4vU3U2rinw4oKPYRLJcFqo9TZns+b6kCR?=
+ =?us-ascii?Q?GQgyRb7bSIqfG6eJOTDoxmftgXiin30xZsM6ehjOYek73UXzarZN00H1/kfP?=
+ =?us-ascii?Q?STrEtPurg05lMoRweSiI73fhimYsrR3EPSS9u+e97AEp78x/eMRAOcIsgVAi?=
+ =?us-ascii?Q?d8J+4MNkGoz13UKckoZZbp8TpCgFQrXXRmqzgmdM1zoQYqdRAjjqMdeadJoA?=
+ =?us-ascii?Q?M+SaA29pTfo8KMDaCGFXB+uwrm8YRdxOJpFX5xyYD2GNNDYhbYx/TtQiNxWZ?=
+ =?us-ascii?Q?eAY7cGfl9WBNy2WDoWn7BhA/LTGjmv/HSbWCpYzjPWMljdggvzMaBu497gL3?=
+ =?us-ascii?Q?sfCe8r12YJBas4qOhRaOL1+bJ/IVrp0/oRAHm0k7gF5Upy25fTjKrKvr4soP?=
+ =?us-ascii?Q?zUNoLpOiDQe8v2Md7rylK1VfT3peowJ0eElL/l01JdZ7dFo9kMc9iqUa8ZvN?=
+ =?us-ascii?Q?TKs0MtDcbRugwSsM9o0BP9t+zFveLsxK/b+QTtBwC/SZB2VqeHDL+wG+QbVA?=
+ =?us-ascii?Q?Mmz5iy3Ii/B5KSeocjvcxD0Cz1+7fMgcQaVuPwnLmVowj6IxhIY/dDAuCT4Q?=
+ =?us-ascii?Q?Nsb79Tj5lnyih2z3B1OQ3F+eoJ+rSyyinU3krUUARfcNyWis2kW2rOTfpkfS?=
+ =?us-ascii?Q?H3FjhrteQke3WnNTM+uN3Pq/vm0eDZB9hc6Kz86SuLy0N9jqJDpq8guQnR4w?=
+ =?us-ascii?Q?bzyV8T9greksRG7pD0JbtCM+IAmDaeV6EuXeRf46D9fsMTod1xZrT++NiaOZ?=
+ =?us-ascii?Q?UIqfzo1bPMTjBQscIELjl2kM99xA1G80ThumLhCcLjIH83wm+hN9IB/0MrZC?=
+ =?us-ascii?Q?ECW+Vl1g7/0TB8gN2iVOqRo4tyudSVqugi3r0N1FU6VQdnoy++iTnQCKSGRU?=
+ =?us-ascii?Q?oR+2J+CLeAqqziO2ztEEQkk1zsizp9FsO7L/QxHq5UcFamH94Onx98qH75L6?=
+ =?us-ascii?Q?VVl5u0jaQOcMLzimFVTYSVkp6Wwp0hhxlc/lYMwABGjsEanr46xygc1Y/kde?=
+ =?us-ascii?Q?ALboXEoswBvcvKKJZw/Q5NM2RunLkOwG9kmQVUTUkvYHhbNJ8N5aJ5x2RcjO?=
+ =?us-ascii?Q?HYPMe1uqpdbP1lsPydlj2O6e5vyjZCPYPGeVQ9CcmCUQQzOE1SN9dZvqw45r?=
+ =?us-ascii?Q?j3lWgm3jP05eM86xUUwx9/bE3gqrJwc=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 734ede10-7145-4842-adfd-08de85b3652c
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 12:31:07.7670
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5NfkLRnUGHi/qE0qhK9j6ADJ/UzirHimDimH0yx+ci/uag2oLn7xKRVUINdL593Pc7tBJ2gL1R0/QXM77M2v1hBuXYy72wg/ezP3kJfnPBc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR01MB10199
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 12:29:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125400
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 12:31:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125401
 
---000000000000c0e608064d5fb60d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 
-On Thu, Mar 19, 2026, 2:15=E2=80=AFAM Anuj Mittal <anuj.mittal@oss.qualcomm=
-.com>
-wrote:
+The patches are required to build with detached build directory and
+cross-compiling.
 
-> On Thu, Mar 19, 2026 at 1:53=E2=80=AFPM Khem Raj via lists.openembedded.o=
-rg
-> <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > remaining list
-> >
-> > Summary: 7 tasks failed:
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-kernel/minicoredumper/minicoredumper_2.0.7.bb:
-> do_compile
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/minicoredumper/2.0.7/temp/log.do_compile.809159
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/canopenterm/canopenterm_1.0.14.bb:
-> do_compile
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/canopenterm/1.0.14/temp/log.do_compile.790297
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-bsp/fwupd/fwupd-efi_1.8.bb:
-> do_configure
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/fwupd-efi/1.8/temp/log.do_configure.882672
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/qad/qad_git.bb:
-> do_compile
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/qad/0.0+git/temp/log.do_compile.886896
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/ntopng/ntopng_5.2.1.bb:
-> do_compile
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/ntopng/5.2.1/temp/log.do_compile.904879
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/netcf/netcf_0.2.8.bb:
-> do_configure
->
-> This seems to be because of a .gnulib-tool.py file in newer gnulib
-> that isn't being copied. Even if that is fixed, it later fails because
-> it uses an obsolete macro.
->
-> The last release of netcf was 10 years ago and there have been no
-> updates. I didn't find any recipe using it except libvirt. Perhaps it
-> should be removed?
->
+Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+---
+ .../include/ptest-packagelists-meta-oe.inc    |   1 +
+ .../conserver/conserver/conserver.service     |  58 +++++++++
+ .../conserver/conserver/run-ptest             |  21 ++++
+ .../conserver/conserver_8.3.0.bb              | 111 ++++++++++++++++++
+ 4 files changed, 191 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/conser=
+ver.service
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/run-pt=
+est
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver_8.3.0.=
+bb
 
-I am for it.
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
+conf/include/ptest-packagelists-meta-oe.inc
+index 4de602ac1c..e88e50b59c 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -13,6 +13,7 @@ PTESTS_FAST_META_OE =3D "\
+     cjson \
+     cli11 \
+     cmocka \
++    conserver \
+     cunit \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'dbus-broker', '', =
+d)} \
+     duktape \
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver/conserver.ser=
+vice b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
+new file mode 100644
+index 0000000000..8649896487
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
+@@ -0,0 +1,58 @@
++[Unit]
++Description=3DConsole server
++Documentation=3Dman:conserver(8)
++Documentation=3Dhttps://www.conserver.com/
++After=3Dnetwork.target
++ConditionPathExists=3D/etc/conserver.cf
++
++[Service]
++Type=3Dexec
++ExecStart=3D/usr/sbin/conserver -C /etc/conserver.cf
++ExecReload=3D+kill -HUP $MAINPID
++User=3Dconserver
++# /run/conserver for Unix domain socket
++RuntimeDirectory=3Dconserver
++
++CapabilityBoundingSet=3D
++
++LockPersonality=3Dtrue
++MemoryDenyWriteExecute=3Dtrue
++NoNewPrivileges=3Dtrue
++
++# No access to /dev/...
++PrivateDevices=3Dtrue
++PrivateTmp=3Dtrue
++ProtectClock=3Dtrue
++ProtectControlGroups=3Dtrue
++ProtectHostname=3Dtrue
++ProtectKernelLogs=3Dtrue
++ProtectKernelModules=3Dtrue
++ProtectKernelTunables=3Dtrue
++
++# strict: mounts the whole system read-only
++# full: mount only /var as read-write
++# true: mount /var and /etc as read-write
++ProtectSystem=3Dfull
++# Make some paths writable
++#ReadWritePaths=3D/=E2=80=A6
++ProtectHome=3Dtrue
++
++# Make sure that the process can only see PIDs and process details of itse=
+lf,
++# and the second option disables seeing details of things like system load=
+ and
++# I/O etc
++ProtectProc=3Dinvisible
++ProcSubset=3Dpid
++
++RemoveIPC=3Dtrue
++RestrictAddressFamilies=3DAF_UNIX AF_INET AF_INET6
++RestrictNamespaces=3Dtrue
++RestrictRealtime=3Dtrue
++RestrictSUIDSGID=3Dtrue
++
++SystemCallArchitectures=3Dnative
++SystemCallFilter=3D@system-service
++SystemCallFilter=3D~@privileged @resources @obsolete
++
++
++[Install]
++WantedBy=3Dmulti-user.target
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver/run-ptest b/m=
+eta-oe/recipes-connectivity/conserver/conserver/run-ptest
+new file mode 100644
+index 0000000000..51eb0ffbcf
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver/run-ptest
+@@ -0,0 +1,21 @@
++#!/bin/sh
++
++set -e -u -C
++
++cd test
++
++./dotest |sed \
++    -e 's,^executing test \(#[0-9]*\)...succeeded$,PASS: conserver \1,' \
++    -e 's,^executing test \(#[0-9]*\)...failed\(.*\)$,FAIL: conserver \1 \=
+2,'
++
++for i in test*.diff conserver.log shell.log shell2.log
++do
++    test "$i" !=3D 'test*.diff' || exit 0
++    test -e "$i" || continue
++
++    echo "----[ $i ]--------------------"
++    cat "$i"
++    echo "------------------------------------"
++done
++
++exit 1
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb b/me=
+ta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+new file mode 100644
+index 0000000000..c32d6f9646
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+@@ -0,0 +1,111 @@
++SUMMARY =3D "Manages connections of multiple users to a serial console or =
+TCP/unix sockets"
++DESCRIPTION =3D "\
++    Conserver allows multiple users to watch a serial console at the same =
+\
++    time. It can log the data, allows users to take write-access of a cons=
+ole \
++    (one at a time), and has a variety of bells and whistles to accentuate=
+ \
++    that basic functionality. The idea is that conserver will log all your=
+ \
++    serial traffic so you can go back and review why something crashed, lo=
+ok \
++    at changes (if done on the console), or tie the console logs into a \
++    monitoring system (just watch the logfiles it creates). \
++"
++HOMEPAGE =3D "https://www.conserver.com/"
++BUGTRACKER =3D "https://github.com/bstansell/conserver/issues"
++SECTION =3D "console/network"
++
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db28513e7b696027d3d2b8dbf117f9fe=
+5"
++
++DEPENDS =3D "libxcrypt"
++
++inherit autotools ptest systemd useradd
++
++SRC_URI =3D "\
++    git://github.com/bstansell/conserver;protocol=3Dhttps;branch=3Dmaster;=
+tag=3Dv${PV} \
++    file://conserver.service \
++    file://run-ptest \
++"
++SRCREV =3D "fe9aac337554f95721dc9f3da721092a81092089"
++
++# In 8.3.0, conserver fails to build with uds and ipv6
++# https://github.com/bstansell/conserver/issues/112
++PACKAGECONFIG ?=3D "\
++    openssl \
++    ${@bb.utils.contains_any('DISTRO_FEATURES', 'ipv4 ipv6', '', 'uds trus=
+t-uds-cred', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
++"
++
++# Trust reverse DNS information
++PACKAGECONFIG[trustrevdns] =3D "--with-trustrevdns,--without-trustrevdns"
++# Produce extended messages
++PACKAGECONFIG[extmsgs] =3D "--with-extmsgs,--without-extmsgs"
++# Use Unix domain sockets for client/server communication [/tmp/conserver]
++PACKAGECONFIG[uds] =3D "--with-uds=3D/run/${PN},--without-uds"
++# Trust UDS credentials obtained via socket
++PACKAGECONFIG[trust-uds-cred] =3D "--with-trust-uds-cred,--without-trust-u=
+ds-cred"
++# Compile in libwrap (tcp_wrappers) support
++PACKAGECONFIG[libwrap] =3D "--with-libwrap,--without-libwrap,tcp-wrappers"
++# Compile in OpenSSL support
++PACKAGECONFIG[openssl] =3D "--with-openssl,--without-openssl,openssl"
++# Require server SSL certificate by client
++PACKAGECONFIG[req-server-cert] =3D "--with-req-server-cert,--without-req-s=
+erver-cert"
++# Compile in GSS-API support
++PACKAGECONFIG[gssapi] =3D "--with-gssapi,--without-gssapi,krb5"
++# retry username without @REALM with gss-api authentication
++PACKAGECONFIG[striprealm] =3D "--with-striprealm,--without-striprealm"
++# Compile in FreeIPMI support
++PACKAGECONFIG[freeipmi] =3D "--with-freeipmi,--without-freeipmi,freeipmi"
++# Compile in dmalloc support
++PACKAGECONFIG[dmalloc] =3D "--with-dmalloc,--without-dmalloc,dmalloc"
++# Enable PAM support
++PACKAGECONFIG[pam] =3D "--with-pam,--without-pam,libpam"
++# (experimental) Use IPv6 for client/server communication
++PACKAGECONFIG[ipv6] =3D "--with-ipv6,--without-ipv6"
++
++EXTRA_OECONF +=3D "\
++    INSTALL_PROGRAM=3D'install --strip-program=3Dtrue' \
++    --with-pidfile=3D/run/conserver/conserver.pid \
++    --without-rpath \
++"
++
++PACKAGE_BEFORE_PN +=3D "${PN}-client"
++SUMMARY:${PN}-client =3D "Client to connect to conserver"
++FILES:${PN}-client +=3D "${bindir}/console"
++
++PACKAGE_BEFORE_PN +=3D "${PN}-convert"
++SUMMARY:${PN}-convert =3D "Converter for old config files of conserver"
++FILES:${PN}-convert +=3D "${libdir}/${PN}"
++
++# tests fail with ash
++RDEPENDS:${PN}-ptest +=3D "bash"
++
++SYSTEMD_SERVICE:${PN} =3D "${PN}.service"
++
++USERADD_PACKAGES =3D "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)} \
++"
++USERADD_PARAM:${PN} =3D "\
++    -M -d /invalid -r -U -s ${sbindir}/nologin conserver; \
++"
++
++do_install:append() {
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',=
+ d)}
++    then
++        rm ${D}${datadir}/examples/${PN}/conserver.rc
++
++        install -m 644 -D -t ${D}/${systemd_unitdir}/system ${UNPACKDIR}/c=
+onserver.service
++    else
++        install -d ${D}${sysconfdir}/init.d
++        mv ${D}${datadir}/examples/${PN}/conserver.rc ${D}${sysconfdir}/in=
+it.d/${PN}
++    fi
++
++    install -d ${D}${datadir}/doc/${PN}/examples
++    mv ${D}${datadir}/examples/${PN}/* ${D}${datadir}/doc/${PN}/examples
++    rmdir ${D}${datadir}/examples/${PN} ${D}${datadir}/examples
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/conserver ${D}${PTEST_PATH}/console
++    ln -s ${sbindir}/conserver ${D}${PTEST_PATH}/conserver
++    ln -s ${bindir}/console ${D}${PTEST_PATH}/console
++    cp -a ${S}/test ${D}${PTEST_PATH}
++}
+--=20
+2.53.0
 
->
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/netcf/0.2.8+git/temp/log.do_configure.916449
-> >
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:
-> do_compile
-> >     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/open-vm-tools/13.0.10/temp/log.do_compile.953431
-> >
-> > On Wed, Mar 18, 2026 at 8:23=E2=80=AFPM Khem Raj <raj.khem@gmail.com> w=
-rote:
-> >>
-> >> Awesome, thanks for the help
-> >>
-> >> On Wed, Mar 18, 2026, 8:01=E2=80=AFPM Peter Kjellerstedt <
-> peter.kjellerstedt@axis.com> wrote:
-> >>>
-> >>> I=E2=80=99ve sent a backport of a patch for liboauth2. Note that upst=
-ream has
-> made a mess. They first fixed the problem in commit
-> 0dcba079907d559550ee8d9a201d26203bb8aebd (the commit I have backported),
-> but then they reverted it in commit
-> 155b93b2efd1e8b0022c9bdad2297a2a670dc29c under the pretense of fixing the
-> issue (https://github.com/OpenIDC/liboauth2/issues/70). I have reported
-> the mistake as https://github.com/OpenIDC/liboauth2/issues/73...
-> >>>
-> >>>
-> >>>
-> >>> //Peter
-> >>>
-> >>>
-> >>>
-> >>> From: openembedded-devel@lists.openembedded.org <
-> openembedded-devel@lists.openembedded.org> On Behalf Of Khem Raj via
-> lists.openembedded.org
-> >>> Sent: den 18 mars 2026 22:40
-> >>> To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-> >>> Subject: [oe] Recipes needing build fixes after glibc 2.43 upgrade
-> >>>
-> >>>
-> >>>
-> >>> Hello All,
-> >>>
-> >>>
-> >>>
-> >>> There are few recipes currently broken on meta-openembedded layers,
-> predominantly due to glibc upgrade. Help is needed in fixing them so we c=
-an
-> have world builds working again on AB
-> >>>
-> >>>
-> >>>
-> >>> Here is list
-> >>>
-> >>>
-> >>>
-> >>> Summary: 16 tasks failed:
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-kernel/minicoredumper/minicoredumper_2.0.7.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/minicoredumper/2.0.7/temp/log.do_compile.55019
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/canopenterm/canopenterm_1.0.14.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/canopenterm/1.0.14/temp/log.do_compile.38373
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/=
-recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/python3-xstatic-font-awesome/
-> 6.2.1.1/temp/log.do_compile.107676
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/sysdig/sysdig_0.39.0.bb:
-> do_configure
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/sysdig/0.39.0/temp/log.do_configure.124550
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-bsp/fwupd/fwupd-efi_1.8.bb:
-> do_configure
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/fwupd-efi/1.8/temp/log.do_configure.145475
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-daemons/opensaf/opensaf_5.22.01.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/opensaf/5.22.01/temp/log.do_compile.161530
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/ntopng/ntopng_5.2.1.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/ntopng/5.2.1/temp/log.do_compile.154712
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/=
-recipes-devtools/python/python3-pychromecast_14.0.9.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/python3-pychromecast/14.0.9/temp/log.do_compile.175919
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-extended/qad/qad_git.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/qad/0.0+git/temp/log.do_compile.176411
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-test/libfaketime/libfaketime_0.9.10.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/libfaketime/0.9.10/temp/log.do_compile.182340
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-devtools/luaposix/luaposix_36.2.1.bb:
-> do_package
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/luaposix/36.2.1/temp/log.do_package.186406
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-support/liboauth2/liboauth2_2.2.0.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/liboauth2/2.2.0/temp/log.do_compile.199073
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/open-vm-tools/13.0.10/temp/log.do_compile.193667
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-network=
-ing/recipes-support/netcf/netcf_0.2.8.bb:
-> do_configure
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/netcf/0.2.8+git/temp/log.do_configure.208957
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-support/links/links-x11_2.26.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/links-x11/2.26/temp/log.do_compile.215047
-> >>>
->  /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/reci=
-pes-support/links/links_2.29.bb:
-> do_compile
-> >>>     log:
-> /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/links/2.29/temp/log.do_compile.218734
-> >>> Summary: There were 26 ERROR messages, returning a non-zero exit code=
-.
-> >>>
-> >>>
-> >>>
-> >>> and a build log with errors is here
-> >>>
-> >>>
-> >>>
-> >>>
-> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/raw_inl=
-ine
-> >>>
-> >>>
-> >>>
-> >>> Thanks
-> >>>
-> >>> -Khem
-> >>>
-> >>>
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#125377):
-> https://lists.openembedded.org/g/openembedded-devel/message/125377
-> > Mute This Topic: https://lists.openembedded.org/mt/118391105/3616702
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> anuj.mittal@oss.qualcomm.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-
---000000000000c0e608064d5fb60d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote gmail_quote_contai=
-ner"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Mar 19, 2026, 2:15=E2=80=
-=AFAM Anuj Mittal &lt;<a href=3D"mailto:anuj.mittal@oss.qualcomm.com">anuj.=
-mittal@oss.qualcomm.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">On Thu, Mar 19, 2026 at 1:53=E2=80=AFPM Khem Raj via=
- <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer noreferrer" ta=
-rget=3D"_blank">lists.openembedded.org</a><br>
-&lt;raj.khem=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank" rel=3D"noreferrer">gmail.com@lists.openembedded.org</a>&gt; wro=
-te:<br>
-&gt;<br>
-&gt; remaining list<br>
-&gt;<br>
-&gt; Summary: 7 tasks failed:<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_compile<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.80=
-9159<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.7902=
-97<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.882672<=
-br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-oe/recipes-extended/qad/qad_git.bb:do_compile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/qad/0.0+git/temp/log.do_compile.886896<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.904879<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-networking/recipes-support/netcf/netcf_0.2.8.bb:do_configure<br>
-<br>
-This seems to be because of a .gnulib-tool.py file in newer gnulib<br>
-that isn&#39;t being copied. Even if that is fixed, it later fails because<=
-br>
-it uses an obsolete macro.<br>
-<br>
-The last release of netcf was 10 years ago and there have been no<br>
-updates. I didn&#39;t find any recipe using it except libvirt. Perhaps it<b=
-r>
-should be removed?<br></blockquote></div></div><div dir=3D"auto"><br></div>=
-<div dir=3D"auto">I am for it.</div><div dir=3D"auto"><div class=3D"gmail_q=
-uote gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x">
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.91644=
-9<br>
-&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedde=
-d/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:do=
-_compile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.9=
-53431<br>
-&gt;<br>
-&gt; On Wed, Mar 18, 2026 at 8:23=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto=
-:raj.khem@gmail.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.co=
-m</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; Awesome, thanks for the help<br>
-&gt;&gt;<br>
-&gt;&gt; On Wed, Mar 18, 2026, 8:01=E2=80=AFPM Peter Kjellerstedt &lt;<a hr=
-ef=3D"mailto:peter.kjellerstedt@axis.com" target=3D"_blank" rel=3D"noreferr=
-er">peter.kjellerstedt@axis.com</a>&gt; wrote:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; I=E2=80=99ve sent a backport of a patch for liboauth2. Note th=
-at upstream has made a mess. They first fixed the problem in commit 0dcba07=
-9907d559550ee8d9a201d26203bb8aebd (the commit I have backported), but then =
-they reverted it in commit 155b93b2efd1e8b0022c9bdad2297a2a670dc29c under t=
-he pretense of fixing the issue (<a href=3D"https://github.com/OpenIDC/libo=
-auth2/issues/70" rel=3D"noreferrer noreferrer" target=3D"_blank">https://gi=
-thub.com/OpenIDC/liboauth2/issues/70</a>). I have reported the mistake as <=
-a href=3D"https://github.com/OpenIDC/liboauth2/issues/73." rel=3D"noreferre=
-r noreferrer" target=3D"_blank">https://github.com/OpenIDC/liboauth2/issues=
-/73.</a>..<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; //Peter<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; From: <a href=3D"mailto:openembedded-devel@lists.openembedded.=
-org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembe=
-dded.org</a> &lt;<a href=3D"mailto:openembedded-devel@lists.openembedded.or=
-g" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembedd=
-ed.org</a>&gt; On Behalf Of Khem Raj via <a href=3D"http://lists.openembedd=
-ed.org" rel=3D"noreferrer noreferrer" target=3D"_blank">lists.openembedded.=
-org</a><br>
-&gt;&gt;&gt; Sent: den 18 mars 2026 22:40<br>
-&gt;&gt;&gt; To: openembeded-devel &lt;<a href=3D"mailto:Openembedded-devel=
-@lists.openembedded.org" target=3D"_blank" rel=3D"noreferrer">Openembedded-=
-devel@lists.openembedded.org</a>&gt;<br>
-&gt;&gt;&gt; Subject: [oe] Recipes needing build fixes after glibc 2.43 upg=
-rade<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Hello All,<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; There are few recipes currently broken on meta-openembedded la=
-yers, predominantly due to glibc upgrade. Help is needed in fixing them so =
-we can have world builds working again on AB<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Here is list<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Summary: 16 tasks failed:<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_=
-compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_co=
-mpile.55019<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.14.bb:do_com=
-pile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_comp=
-ile.38373<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_=
-6.2.1.1.bb:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/python3-xstatic-font-awesome/<a hre=
-f=3D"http://6.2.1.1/temp/log.do_compile.107676" rel=3D"noreferrer noreferre=
-r" target=3D"_blank">6.2.1.1/temp/log.do_compile.107676</a><br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb:do_configure<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/sysdig/0.39.0/temp/log.do_configure=
-.124550<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure=
-.145475<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb:do_com=
-pile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/opensaf/5.22.01/temp/log.do_compile=
-.161530<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile=
-<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.15=
-4712<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-python/recipes-devtools/python/python3-pychromecast_14.0.9.b=
-b:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/python3-pychromecast/14.0.9/temp/lo=
-g.do_compile.175919<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-extended/qad/qad_git.bb:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/qad/0.0+git/temp/log.do_compile.176=
-411<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb:do_compile=
-<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/libfaketime/0.9.10/temp/log.do_comp=
-ile.182340<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb:do_package<b=
-r>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/luaposix/36.2.1/temp/log.do_package=
-.186406<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb:do_compile<b=
-r>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/liboauth2/2.2.0/temp/log.do_compile=
-.199073<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.=
-10.bb:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_c=
-ompile.193667<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-networking/recipes-support/netcf/netcf_0.2.8.bb:do_configure=
-<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configu=
-re.208957<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-support/links/links-x11_2.26.bb:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/links-x11/2.26/temp/log.do_compile.=
-215047<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0/srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-support/links/links_2.29.bb:do_compile<br>
-&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0log: /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/build/tmp/work/x86-64-v3-poky-linux/links/2.29/temp/log.do_compile.2187=
-34<br>
-&gt;&gt;&gt; Summary: There were 26 ERROR messages, returning a non-zero ex=
-it code.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; and a build log with errors is here<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; <a href=3D"https://autobuilder.yoctoproject.org/valkyrie/api/v=
-2/logs/5867932/raw_inline" rel=3D"noreferrer noreferrer" target=3D"_blank">=
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/raw_inlin=
-e</a><br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Thanks<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; -Khem<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#125377): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/125377" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">https://lists.openembedded.org/g/openembedded-devel/message/125=
-377</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11839110=
-5/3616702" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.op=
-enembedded.org/mt/118391105/3616702</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@l=
-ists.openembedded.org</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.=
-openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:anuj.mit=
-tal@oss.qualcomm.com" target=3D"_blank" rel=3D"noreferrer">anuj.mittal@oss.=
-qualcomm.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div></div></div>
-
---000000000000c0e608064d5fb60d--
 
