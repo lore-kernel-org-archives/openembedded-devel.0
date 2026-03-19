@@ -1,263 +1,401 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07E7D10854C9
-	for <webhook@archiver.kernel.org>; Wed, 18 Mar 2026 21:40:03 +0000 (UTC)
-Received: from mail-yx1-f43.google.com (mail-yx1-f43.google.com [74.125.224.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.26193.1773870002486101289
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F4E01088E67
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 03:01:11 +0000 (UTC)
+Received: from AM0PR02CU008.outbound.protection.outlook.com (AM0PR02CU008.outbound.protection.outlook.com [52.101.72.4])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3011.1773889265133084793
  for <Openembedded-devel@lists.openembedded.org>;
- Wed, 18 Mar 2026 14:40:02 -0700
+ Wed, 18 Mar 2026 20:01:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dGTiBuaF;
- spf=pass (domain: gmail.com, ip: 74.125.224.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f43.google.com with SMTP id 956f58d0204a3-64ad79dfb6eso676904d50.0
-        for <Openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 14:40:02 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773870001; cv=none;
-        d=google.com; s=arc-20240605;
-        b=jLdEYRPxbhq71Dle1Yvizq3RkJXQ5g73BILsb968LmL7mEhO3JpLs8HPQcXVAJc3Y+
-         CSLmFSx3FogjbAYofekQgRbL4D+xeS8r5cm7i2uZH3ABV394Stnn/N/+Ri9TldUT2d76
-         6oH700yMJJFi2uZxukWPdl+N6ouCD8hADRDnWQPmo2s4Smdh4p1/o0ONPLiUxRXRV0AP
-         IDNjrjzK8zWFqDPTzLxfcPxWFQq7wmKiKDsj8TeVuHDJwGNAw+ptejwSjJQqxHRJw0bu
-         5S7RPnL8In9MqU3F2cPlg+1Jw88nV4IihSF6VMJQxqdRDtDtzmohJYAnc/ANNVsaMLKO
-         S+nQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=elFtEZdInEbTfsmZU2GdOMJMr4ZJZvRsC2GkpEOzhEg=;
-        fh=MnWQIt+qfwr8t22dRaNnBDw2a+cdT5G5r5+L6LPLbJw=;
-        b=VgyWfcbzeFw1Zdj8D1GpUIpuWVDVOpyNlYOEusWoxvF4cB21DC0RS03xh0Gr8W9Ahh
-         hHw74lObM1uusoItqVZqtjbjklBYuaQCiQCK99a+6xO5GmU5I10YK7RjvlEkq1eYN+5S
-         Hvge3Ux1+Qdno8dlcAp9M9xyaFc9zcezn8o/bGrYF0Y7v0CXouNHruuMUflb4sBBQBWm
-         GYTsavYeRKdt0dhSOELidY79hN15DEqCQBHxCd6UTnWAWZEgs2ip9F32DCgLY80kkRkr
-         /jXCsG020BUZ38ysHr20MgvtJvTVd3chqQO4+dPHdQ+n198ac3CBBmaOFNu4ppDn7SwZ
-         b1dw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773870001; x=1774474801; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=elFtEZdInEbTfsmZU2GdOMJMr4ZJZvRsC2GkpEOzhEg=;
-        b=dGTiBuaFaK2pOek6whqF1S3GaLUi1cPNNPbH5yeLMqO+2eY5rBI1zYGaF/K4oW7hJD
-         ulpFj2DB2/a5iJVLdEg40ueH3mLd8uqRym+rn8NMpNjTAoCBwgtt7poDjZ/Vj318qVUe
-         AjrgN6Vvll50QMZnQlNB77SWrSuo73U8DIKZeMYQ7w9odSoo0sVDLW9aZ4cHt48ShFLz
-         4I+RlGTcv6l2enNE25HITv1F+a09NL7xibRm6VMSGhpcH105ZxuYqkHfDP6O4Xequ8EA
-         dIXPT5t9L8WHTT8bDRhLfhGmJtBd8HdRfx7rMcgC49FvyHqn/xumQenuNHanPmVaJlCa
-         rnmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773870001; x=1774474801;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=elFtEZdInEbTfsmZU2GdOMJMr4ZJZvRsC2GkpEOzhEg=;
-        b=HoG8UALoLFEc5BvzU5bClW/QVbnSHQNmovq/5ep4QFPFgDfgqocsLxjFVsFLqx0DsS
-         lK74eqeY8Z20yy4udlOrgxdD96We7tii8MdMEpgC+MTS0heLFbjMW+7hGuZL0UPnkCwp
-         IbBN59YjTe7mLAVYJ2u/IXL3Q9dwDklOcCDx5t7V2DTbz+dBhtqXvEInQfefj8AKrhQe
-         NT6GxZXsbpTgu2bpcQFRuDplepBur6G20T2AFZmI3ghyWWD/EvtASaNX1mMKEM8BPqPf
-         7qI7Yf0IojxtMvGnDee1uj6MlWsUHjsDzUEpFhPusyonC1Nrran9Ul8+q7CyYfVM4sN9
-         oIfQ==
-X-Gm-Message-State: AOJu0YzLteAK2MqppXXQviJgCqKhYrtHul84N+ZARr+CdDHKuegKhbR1
-	3Coe+GkAFz+oNp8WoR11NB7lHe/8antpA3imxIxPuKE63MF85QgWk+E8HcO7C+LaqGRqheVXymh
-	rU9p31+rlkS2GF7zm/wFb+B2US2sRkLwUNFSC
-X-Gm-Gg: ATEYQzxKDJPDktFJawyd3O1G8dAvKnqceZVe0/2XkRW43v8xI3sA7pW1jysMLsIjix8
-	7peHVWuTILMhqFlTB2ThX1g31Ngjm2eNL2hDvZRQIpupIygfVuR/bIIhL3APiSwlU3cRy6hsy/9
-	3S6NxLkKVjuGvjhOaX68TKh3SxswBqm8P+1j08q+o/cnXOBYKR+HfwmLTY9sJBIBnlHenYVeh/s
-	8cZDAbNDAwHqzHweoUSXFdc786sepdCdDXDu+2EWb0eEj/Pfl0JHf7ALi2zki2fH8mJOENCII3u
-	Yj/uEnFzISjnMwtA23uPke9uF16DXKgRVjU/bnKfVps55jOmlrsWZZFXlfKSxfnJdiPZuaVbfrn
-	+vYx8W164D3fxXIUcbQxniTQV
-X-Received: by 2002:a05:690e:e8e:b0:64d:568b:bcc1 with SMTP id
- 956f58d0204a3-64e912e89b0mr5123885d50.3.1773870000740; Wed, 18 Mar 2026
- 14:40:00 -0700 (PDT)
+ dkim=pass header.i=@axis.com header.s=selector1 header.b=j9E3yQUX;
+ spf=pass (domain: axis.com, ip: 52.101.72.4, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Qy5r1Zk2AuOmCserG45vCH0Q/CzfDzQURuOB0Max6sH3vn4Hz69rSgqT+6k4/JYE/3o5QNie2I2ZF4UysRjZoJbuCRp7vdHYKkL7gIIcNr/fg345Sh/Jo2T5RI/Io+E94XR42uvbkNCkxMP9EqNuMjbu9EGaS7nLgo9vuZD7AV0+Nmoa6lbcDYGOYIeZ+PozJwEMHEGpvgYRK61Hze7qQia8A3TKJnIHtsL5Vx8LpJPHSNrzU/Rv0/nHC9AdkFVTqaEwuCwlOW1vXsfNfwb06aNQQeFRxVA+Yqt8Rpm4M9RZCCRAVg4SAgW03lgJZyO+kWCBn4eS9kM7ssHW0Yff+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dKwJcwWCd6PxLhhF2vjltVRcM1VmHjBqow+uUIL8+rw=;
+ b=d3mjS+2qLKe5ERISua95YwAnU1rAnk8jdQ/BrgBXhjTgZjrEYT8uuSkRi2+pWrnht4z/0/ttcp+eLEi/+iPAq7UkqB3wJPqVmcM7U2Esgugm1R7PEcjzQM3ILcXmdXoTJ9KlRcYEZUr5chUvVcx8z7Xc8WMsacHBDoNpQmHG6Pif8dWOZeO0oXDwoIgw4cKCidu/1Am5z20Sp/XuoYqEwjGWw7iZyTGlmH35h0eUkEZ8f7rJn3QAM1QHdYjrKN0mZbVEw27/B8acKHU2/4tswY2SXH0Q6lUsdhNclNfLCOwr+lh1RmnkYzdSdVS0RCNEXJ1bSYg6xA++ijSr13VDKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
+ dkim=pass header.d=axis.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dKwJcwWCd6PxLhhF2vjltVRcM1VmHjBqow+uUIL8+rw=;
+ b=j9E3yQUX5/5N2v3CXOk3hkmWiYqsdcbDw+b1nLY50axxe9cvekXk29Sus/SqiVdBCDKp2vm0nKZpZjdMsJxDzVX0xdfI0ySpglAupchEmbzSZC3Lg5mIWIvTD88Su65VeUonXrEwulUBSQjqw2jqQ1xja6Ebewpui+oXbR+Q7g0=
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
+ by DBBPR02MB10627.eurprd02.prod.outlook.com (2603:10a6:10:536::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
+ 2026 03:01:00 +0000
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::e5b6:b9a8:2a5d:e0cd]) by DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::e5b6:b9a8:2a5d:e0cd%5]) with mapi id 15.20.9723.018; Thu, 19 Mar 2026
+ 03:01:00 +0000
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: "raj.khem@gmail.com" <raj.khem@gmail.com>, openembeded-devel
+	<Openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] Recipes needing build fixes after glibc 2.43 upgrade
+Thread-Topic: [oe] Recipes needing build fixes after glibc 2.43 upgrade
+Thread-Index: AQHctx/P+ge04uGPCUCRUB+kHQ9jgLW1J7Qw
+Date: Thu, 19 Mar 2026 03:01:00 +0000
+Message-ID: 
+ <DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: 
+ <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axis.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|DBBPR02MB10627:EE_
+x-ms-office365-filtering-correlation-id: 8ec7ac26-6cae-499e-1ccd-08de8563c01b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|1800799024|376014|366016|13003099007|8096899003|38070700021|22082099003|18002099003|56012099003;
+x-microsoft-antispam-message-info: 
+ Y74kOdnJtYDrFgv2P/CMVMCi3wsVPq+CRoQsStK70w9ulPaUqhVlfyZQxGtgQsXBuWGkkzmqzmIhN/8fsjZHmizqlGLL9altEH0R4XzIoLFxmtUkAUq1ntXHjVQti3v2aabk2gVjBHVpLErDPurek5krMUNL/xXOBpQQNCoD90DrKG3AF3XmPSl1bM4qRT/HhqWKsZ3wCjdcTde29wDmgvAzjCrDDC3FhZy+w/Q7a6AGV/a28m2qJ+WHeQhqMaSVtVoimfrMvnLVkvctHjqQTv/K4pwsrLyZPx+YVM6SZT5Mb79l9JAT83JvAjzz0Yi4c35Z3Hz80ucjTe1H/4GfRt6Bz2ZcwnXPWH6HQgdzfJ0SF+rwxVun6riOTrq5dR/O348JImfSq3yZVNU7GWrgPgEPbFhgHoGK35DbBJzb8oDEAKUZv5q/jmnaETia8wTt6nUBVp0TXTyta9eQ6PEL8aIlVGy1j42lKQp1SYUaTfprTexq4DLM75WiyFU9jvSUrsV+FxkuSYTPlTgzwwNPc6zm2DD9dmvDr8otcYePuAfLjOidhW8DC0kVkundcoHaiSPGm/AbA6qEfY36leFwDv2GNatfKTjuFlTDAfjYM18//VqWicYIGihEtUJrbRtFhgpl8whEUtsxfCjMOYxMf+jIm/hOC3yvOwdt+6Ks2Yknbm36XZULF80IFCavVH5cKjjubhvF35LoiwjBxf/qQWaS4q0agVOQLbufunxPBOi//OWVC2ukC0K5+t1xkIAo
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(13003099007)(8096899003)(38070700021)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?Znl0NDh6c3hmbTI4U1d0UUJpZjZQbFFDS1p6RkJZdjZHTC84OUdXN3lFTldh?=
+ =?utf-8?B?R0hJcDZTNFNxS0QzSHlTazY3ZVhqOEcrU3doYlZqWnNOWEJ5UWl1MDdtTlRT?=
+ =?utf-8?B?VDZlTXppSmxRUmh6cVRkUUtNY0xscWI3TWpPMUV5Z0hLYWd0TlhhMVJtYStv?=
+ =?utf-8?B?UWorOVI0b0l2S3lCdkozaG9HaU1NY2Z4WlVCbjRIYTcvVnlad1pkODBHV2Zi?=
+ =?utf-8?B?YnVYbHlreDYxWVRiTFVGYlp3YzlIdkVCWi9GMldwTk5YTk9aajdGQWpRNUkx?=
+ =?utf-8?B?N2VvMko1aWNTZVo1ZDlMb2k4V0w2UmNqcG1Icmh5K3ZZYXRWL3Ntb3lreE16?=
+ =?utf-8?B?T1NGZ1c1VGxwbDFxNmJESSsvMmpjc1NIS2ZZTVNueHFjamlTbmkxTFQ4NklC?=
+ =?utf-8?B?c25kTEc2bm9qR0NuSFcxS1p0d0tpTUtZa3NHWVZ3Rmc3bldMTkJRRXVEQzF6?=
+ =?utf-8?B?eEI1SE8yRGJFMmwwbkZqRTcra3o3QVN4Smo4c08zTUdOMzYzU2t6anpiNzlF?=
+ =?utf-8?B?di9vMzhkTC9POU9xS2VWclJUeUIxbWI4SUR0RDVuTWxlL1Y5L3dKVlpKYjQz?=
+ =?utf-8?B?aTM4dDJ4aEwra29OMHNvbVNCK1Baby8wUUh0amVWc0dTTEI1a3NXVVpISjZj?=
+ =?utf-8?B?TGhnSUdPTGFYVXp3OWV2TzJBYlh1eEFLV2ovbHFUNFdxTE9ERTdCdnNzcTAz?=
+ =?utf-8?B?UXFCUGxONmdsbUtNM0dqTkJaKzJibjJKazBQWEtaU2RiZm5IK1BYUWJyWUFa?=
+ =?utf-8?B?UXNDejJuOEphVXo1MjRhM2gxb0hGNnh2MDU2QzRIdVNUNEVLSURPNkVoc0hs?=
+ =?utf-8?B?d04xWnRzUkRqa215cjVLZUtBQndGQVVBdFZzM2xBSFp2TEdEMzdOOTE5ZW8x?=
+ =?utf-8?B?WktkZDM2c2Z5d0lxbnV5NDl5ejhMWnVFdlZRTkJiL2dYSWY0bmJORFRhcW81?=
+ =?utf-8?B?bGtLMlg0MVFEbisxd09nbnBSUHNwQ3dTaXdMbzdNTlNkcVMvVUs0SkNObVcw?=
+ =?utf-8?B?ZFk5TzFpZURTYjdHU3FVb3lEaCtsc09Ca0NvdFM4WnRJMllDRW5UcjhvMzRn?=
+ =?utf-8?B?UGVvMEpMR0kwYUZPWU9kTmxPNTh4RkJYVlBjV0R5Um1jSGVwOTlhSWl0YW5r?=
+ =?utf-8?B?aVVCYS94RkVaOUJXT3h0QnJsbXRGTFJPNUlCNEcybzNnK3ZtK2x4b1BoazJk?=
+ =?utf-8?B?dnh1WmIvSlB1NTNHUlJlRkFmYis3MllHWlBYaDhLSmJkZTJRNWt0OTFUYVFx?=
+ =?utf-8?B?SS9TWVhQYXB6ZmZKZjlsNXl1MVZLamlaUFozNFJtdjhTLytMM2plaTYvNmtZ?=
+ =?utf-8?B?K1RwbldWQXZGUjFwUFh2YktUZnJ3U3JXcHR6VDNDeXNZMXBDYXpBcjFneWFp?=
+ =?utf-8?B?S3hoRURxUjJ3WUJzbHhKR1hqdnNXRXl1cEJ4MVBQYzgraDFRZGp6dmZYTFlF?=
+ =?utf-8?B?V1BjRkY3OEpsL0dVOHJUUWRlY3pOZU1kL0VBU3UreHpmY2NHWHVVN0MyeVlv?=
+ =?utf-8?B?UXdPcHVIdFNpYmZOTFlJTTdUMm5IeEpSdEZOcWhtTVd2bWVqR2UyR0NHRTgv?=
+ =?utf-8?B?MjlMdUpjeUk5RytLUjJhNlMyNUh1dDZxRTZRSkJ6eG5vdXcwV0NYeXBmMWpS?=
+ =?utf-8?B?aytlajVFb3Y2V25MejZONGxVRHVOT0Y4OWd2amcvS1dQRVc4M29jR09CV3RZ?=
+ =?utf-8?B?YkpHc0tNMVl0eWZzUmFkNmRXMmZvallpRHVCZ1BqNlorSTdnSnlvWFJTQTZh?=
+ =?utf-8?B?MmYwM3Ixd2E3Y05HT25rT1p3MU04by9HSWZiTWVudjVwTGJDb2ZZb1NzYTBy?=
+ =?utf-8?B?MUdBR3FLTzdjZjhMRUZKUE9LNVBpTGJMbk1IeXA1OUlFalUxN2x5U1ZQYS9V?=
+ =?utf-8?B?MUJsUS82UHdiTDJnUGtoNFlmNGpiNGlCR2t4TFhXa08wQWZieHFoalQ2MVBW?=
+ =?utf-8?B?WGpDT0srVDVITU1xdk9SQkJ2RTJGa2dybmVISFIrNndjK081WENlRzJjVUFS?=
+ =?utf-8?B?OWZONWgxMDE5WlZBeW5pbzN3MVQ1S2Q0QjBZaGxJNTNsMTdlUnE4OXEybFhT?=
+ =?utf-8?B?VFFmZEZnSW9xWXBlWUtIcldGbm0xQnpGSll2NUltRXc4aXJ3V3pvZ0NrRWk0?=
+ =?utf-8?B?WGkyS2QvQ2F2VTFLS3FaMDNOUXl4L3VPQVBXeVBleU4zaHU2Zzg1QnhkWXpE?=
+ =?utf-8?B?Y2NtaE56ZzFNay9EWng3RDZHMi9kcWk3bmFMOXl4TTdtYUZkd3IyeGlkT0lp?=
+ =?utf-8?Q?PuhaU3QYvLfSRkeQtLS3Pkv0qm+OlzqzEaGbhTTnJs=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FADB5PR02MB10213eu_"
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Mar 2026 14:39:32 -0700
-X-Gm-Features: AaiRm53RTAoT6Xh64_2TAUlhPo-X_psIctICGut4qMNTt5ke78AYs3_zbKHjN_c
-Message-ID: <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
-Subject: Recipes needing build fixes after glibc 2.43 upgrade
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000459df9064d534bf1"
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ec7ac26-6cae-499e-1ccd-08de8563c01b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Mar 2026 03:01:00.3948
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: jSxE9LAW5+gsmJUX3skYVRyQ3V6kquHs4mrpJgEkKXIK93OH61Ev3F09Xykx3eR8
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR02MB10627
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Mar 2026 21:40:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125368
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 03:01:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125369
 
---000000000000459df9064d534bf1
-Content-Type: text/plain; charset="UTF-8"
+--_000_DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FADB5PR02MB10213eu_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hello All,
+SeKAmXZlIHNlbnQgYSBiYWNrcG9ydCBvZiBhIHBhdGNoIGZvciBsaWJvYXV0aDIuIE5vdGUgdGhh
+dCB1cHN0cmVhbSBoYXMgbWFkZSBhIG1lc3MuIFRoZXkgZmlyc3QgZml4ZWQgdGhlIHByb2JsZW0g
+aW4gY29tbWl0IDBkY2JhMDc5OTA3ZDU1OTU1MGVlOGQ5YTIwMWQyNjIwM2JiOGFlYmQgKHRoZSBj
+b21taXQgSSBoYXZlIGJhY2twb3J0ZWQpLCBidXQgdGhlbiB0aGV5IHJldmVydGVkIGl0IGluIGNv
+bW1pdCAxNTViOTNiMmVmZDFlOGIwMDIyYzliZGFkMjI5N2EyYTY3MGRjMjljIHVuZGVyIHRoZSBw
+cmV0ZW5zZSBvZiBmaXhpbmcgdGhlIGlzc3VlIChodHRwczovL2dpdGh1Yi5jb20vT3BlbklEQy9s
+aWJvYXV0aDIvaXNzdWVzLzcwKS4gSSBoYXZlIHJlcG9ydGVkIHRoZSBtaXN0YWtlIGFzIGh0dHBz
+Oi8vZ2l0aHViLmNvbS9PcGVuSURDL2xpYm9hdXRoMi9pc3N1ZXMvNzMuLi4NCg0KLy9QZXRlcg0K
+DQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVt
+YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+IE9uIEJlaGFsZiBPZiBLaGVtIFJh
+aiB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU2VudDogZGVuIDE4IG1hcnMgMjAyNiAyMjo0
+MA0KVG86IG9wZW5lbWJlZGVkLWRldmVsIDxPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZz4NClN1YmplY3Q6IFtvZV0gUmVjaXBlcyBuZWVkaW5nIGJ1aWxkIGZpeGVzIGFm
+dGVyIGdsaWJjIDIuNDMgdXBncmFkZQ0KDQpIZWxsbyBBbGwsDQoNClRoZXJlIGFyZSBmZXcgcmVj
+aXBlcyBjdXJyZW50bHkgYnJva2VuIG9uIG1ldGEtb3BlbmVtYmVkZGVkIGxheWVycywgcHJlZG9t
+aW5hbnRseSBkdWUgdG8gZ2xpYmMgdXBncmFkZS4gSGVscCBpcyBuZWVkZWQgaW4gZml4aW5nIHRo
+ZW0gc28gd2UgY2FuIGhhdmUgd29ybGQgYnVpbGRzIHdvcmtpbmcgYWdhaW4gb24gQUINCg0KSGVy
+ZSBpcyBsaXN0DQoNClN1bW1hcnk6IDE2IHRhc2tzIGZhaWxlZDoNCiAgL3Nydi9wb2t5YnVpbGQv
+eW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNp
+cGVzLWtlcm5lbC9taW5pY29yZWR1bXBlci9taW5pY29yZWR1bXBlcl8yLjAuNy5iYjpkb19jb21w
+aWxlDQogICAgbG9nOiAvc3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9i
+dWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1saW51eC9taW5pY29yZWR1bXBlci8yLjAuNy90
+ZW1wL2xvZy5kb19jb21waWxlLjU1MDE5DQogIC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9t
+ZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9j
+YW5vcGVudGVybS9jYW5vcGVudGVybV8xLjAuMTQuYmI6ZG9fY29tcGlsZQ0KICAgIGxvZzogL3Ny
+di9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2
+LTY0LXYzLXBva3ktbGludXgvY2Fub3BlbnRlcm0vMS4wLjE0L3RlbXAvbG9nLmRvX2NvbXBpbGUu
+MzgzNzMNCiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1v
+cGVuZW1iZWRkZWQvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy14
+c3RhdGljLWZvbnQtYXdlc29tZV82LjIuMS4xLmJiOmRvX2NvbXBpbGUNCiAgICBsb2c6IC9zcnYv
+cG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02
+NC12My1wb2t5LWxpbnV4L3B5dGhvbjMteHN0YXRpYy1mb250LWF3ZXNvbWUvNi4yLjEuMS90ZW1w
+L2xvZy5kb19jb21waWxlLjEwNzY3NjxodHRwOi8vNi4yLjEuMS90ZW1wL2xvZy5kb19jb21waWxl
+LjEwNzY3Nj4NCiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0
+YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3N5c2RpZy9zeXNkaWdfMC4z
+OS4wLmJiOmRvX2NvbmZpZ3VyZQ0KICAgIGxvZzogL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2Vy
+L21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGludXgvc3lzZGln
+LzAuMzkuMC90ZW1wL2xvZy5kb19jb25maWd1cmUuMTI0NTUwDQogIC9zcnYvcG9reWJ1aWxkL3lv
+Y3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBl
+cy1ic3AvZnd1cGQvZnd1cGQtZWZpXzEuOC5iYjpkb19jb25maWd1cmUNCiAgICBsb2c6IC9zcnYv
+cG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02
+NC12My1wb2t5LWxpbnV4L2Z3dXBkLWVmaS8xLjgvdGVtcC9sb2cuZG9fY29uZmlndXJlLjE0NTQ3
+NQ0KICAvc3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9tZXRhLW9wZW5l
+bWJlZGRlZC9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNhZl81
+LjIyLjAxLmJiOmRvX2NvbXBpbGUNCiAgICBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtl
+ci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L29wZW5z
+YWYvNS4yMi4wMS90ZW1wL2xvZy5kb19jb21waWxlLjE2MTUzMA0KICAvc3J2L3Bva3lidWlsZC95
+b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW5ldHdvcmtp
+bmcvcmVjaXBlcy1zdXBwb3J0L250b3BuZy9udG9wbmdfNS4yLjEuYmI6ZG9fY29tcGlsZQ0KICAg
+IGxvZzogL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1w
+L3dvcmsveDg2LTY0LXYzLXBva3ktbGludXgvbnRvcG5nLzUuMi4xL3RlbXAvbG9nLmRvX2NvbXBp
+bGUuMTU0NzEyDQogIC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21l
+dGEtb3BlbmVtYmVkZGVkL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhv
+bjMtcHljaHJvbWVjYXN0XzE0LjAuOS5iYjpkb19jb21waWxlDQogICAgbG9nOiAvc3J2L3Bva3li
+dWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMt
+cG9reS1saW51eC9weXRob24zLXB5Y2hyb21lY2FzdC8xNC4wLjkvdGVtcC9sb2cuZG9fY29tcGls
+ZS4xNzU5MTkNCiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0
+YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3FhZC9xYWRfZ2l0LmJiOmRv
+X2NvbXBpbGUNCiAgICBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1
+aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L3FhZC8wLjArZ2l0L3RlbXAv
+bG9nLmRvX2NvbXBpbGUuMTc2NDExDQogIC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRh
+LW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBlcy10ZXN0L2xpYmZha2V0
+aW1lL2xpYmZha2V0aW1lXzAuOS4xMC5iYjpkb19jb21waWxlDQogICAgbG9nOiAvc3J2L3Bva3li
+dWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMt
+cG9reS1saW51eC9saWJmYWtldGltZS8wLjkuMTAvdGVtcC9sb2cuZG9fY29tcGlsZS4xODIzNDAN
+CiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1i
+ZWRkZWQvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2x1YXBvc2l4L2x1YXBvc2l4XzM2LjIuMS5i
+Yjpkb19wYWNrYWdlDQogICAgbG9nOiAvc3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1v
+ZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1saW51eC9sdWFwb3NpeC8zNi4y
+LjEvdGVtcC9sb2cuZG9fcGFja2FnZS4xODY0MDYNCiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29y
+a2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLXN1cHBv
+cnQvbGlib2F1dGgyL2xpYm9hdXRoMl8yLjIuMC5iYjpkb19jb21waWxlDQogICAgbG9nOiAvc3J2
+L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYt
+NjQtdjMtcG9reS1saW51eC9saWJvYXV0aDIvMi4yLjAvdGVtcC9sb2cuZG9fY29tcGlsZS4xOTkw
+NzMNCiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVu
+ZW1iZWRkZWQvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9vcGVuLXZtLXRvb2xzL29w
+ZW4tdm0tdG9vbHNfMTMuMC4xMC5iYjpkb19jb21waWxlDQogICAgbG9nOiAvc3J2L3Bva3lidWls
+ZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9r
+eS1saW51eC9vcGVuLXZtLXRvb2xzLzEzLjAuMTAvdGVtcC9sb2cuZG9fY29tcGlsZS4xOTM2NjcN
+CiAgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1i
+ZWRkZWQvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uZXRjZi9uZXRjZl8wLjIuOC5i
+Yjpkb19jb25maWd1cmUNCiAgICBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRh
+LW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L25ldGNmLzAuMi44
+K2dpdC90ZW1wL2xvZy5kb19jb25maWd1cmUuMjA4OTU3DQogIC9zcnYvcG9reWJ1aWxkL3lvY3Rv
+LXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBlcy1z
+dXBwb3J0L2xpbmtzL2xpbmtzLXgxMV8yLjI2LmJiOmRvX2NvbXBpbGUNCiAgICBsb2c6IC9zcnYv
+cG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02
+NC12My1wb2t5LWxpbnV4L2xpbmtzLXgxMS8yLjI2L3RlbXAvbG9nLmRvX2NvbXBpbGUuMjE1MDQ3
+DQogIC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVt
+YmVkZGVkL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpbmtzL2xpbmtzXzIuMjkuYmI6ZG9fY29t
+cGlsZQ0KICAgIGxvZzogL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQv
+YnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGludXgvbGlua3MvMi4yOS90ZW1wL2xvZy5k
+b19jb21waWxlLjIxODczNA0KU3VtbWFyeTogVGhlcmUgd2VyZSAyNiBFUlJPUiBtZXNzYWdlcywg
+cmV0dXJuaW5nIGEgbm9uLXplcm8gZXhpdCBjb2RlLg0KDQphbmQgYSBidWlsZCBsb2cgd2l0aCBl
+cnJvcnMgaXMgaGVyZQ0KDQpodHRwczovL2F1dG9idWlsZGVyLnlvY3RvcHJvamVjdC5vcmcvdmFs
+a3lyaWUvYXBpL3YyL2xvZ3MvNTg2NzkzMi9yYXdfaW5saW5lDQoNClRoYW5rcw0KLUtoZW0NCg0K
 
-There are few recipes currently broken on meta-openembedded layers,
-predominantly due to glibc upgrade. Help is needed in fixing them so we can
-have world builds working again on AB
+--_000_DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FADB5PR02MB10213eu_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Here is list
+PGh0bWwgeG1sbnM6dj0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp2bWwiIHhtbG5zOm89InVy
+bjpzY2hlbWFzLW1pY3Jvc29mdC1jb206b2ZmaWNlOm9mZmljZSIgeG1sbnM6dz0idXJuOnNjaGVt
+YXMtbWljcm9zb2Z0LWNvbTpvZmZpY2U6d29yZCIgeG1sbnM6bT0iaHR0cDovL3NjaGVtYXMubWlj
+cm9zb2Z0LmNvbS9vZmZpY2UvMjAwNC8xMi9vbW1sIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+VFIvUkVDLWh0bWw0MCI+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIg
+Y29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxtZXRhIG5hbWU9IkdlbmVyYXRv
+ciIgY29udGVudD0iTWljcm9zb2Z0IFdvcmQgMTUgKGZpbHRlcmVkIG1lZGl1bSkiPg0KPHN0eWxl
+PjwhLS0NCi8qIEZvbnQgRGVmaW5pdGlvbnMgKi8NCkBmb250LWZhY2UNCgl7Zm9udC1mYW1pbHk6
+IkNhbWJyaWEgTWF0aCI7DQoJcGFub3NlLTE6MiA0IDUgMyA1IDQgNiAzIDIgNDt9DQpAZm9udC1m
+YWNlDQoJe2ZvbnQtZmFtaWx5OkNhbGlicmk7DQoJcGFub3NlLTE6MiAxNSA1IDIgMiAyIDQgMyAy
+IDQ7fQ0KQGZvbnQtZmFjZQ0KCXtmb250LWZhbWlseTpBcHRvczt9DQovKiBTdHlsZSBEZWZpbml0
+aW9ucyAqLw0KcC5Nc29Ob3JtYWwsIGxpLk1zb05vcm1hbCwgZGl2Lk1zb05vcm1hbA0KCXttYXJn
+aW46MGNtOw0KCWZvbnQtc2l6ZToxMi4wcHQ7DQoJZm9udC1mYW1pbHk6IkFwdG9zIixzYW5zLXNl
+cmlmO30NCmE6bGluaywgc3Bhbi5Nc29IeXBlcmxpbmsNCgl7bXNvLXN0eWxlLXByaW9yaXR5Ojk5
+Ow0KCWNvbG9yOmJsdWU7DQoJdGV4dC1kZWNvcmF0aW9uOnVuZGVybGluZTt9DQpzcGFuLkVtYWls
+U3R5bGUxOA0KCXttc28tc3R5bGUtdHlwZTpwZXJzb25hbC1yZXBseTsNCglmb250LWZhbWlseToi
+Q2FsaWJyaSIsc2Fucy1zZXJpZjsNCgljb2xvcjojOTQzNjM0Ow0KCWZvbnQtd2VpZ2h0Om5vcm1h
+bDsNCglmb250LXN0eWxlOm5vcm1hbDt9DQouTXNvQ2hwRGVmYXVsdA0KCXttc28tc3R5bGUtdHlw
+ZTpleHBvcnQtb25seTsNCglmb250LXNpemU6MTEuMHB0Ow0KCW1zby1saWdhdHVyZXM6bm9uZTsN
+Cgltc28tZmFyZWFzdC1sYW5ndWFnZTpFTi1VUzt9DQpAcGFnZSBXb3JkU2VjdGlvbjENCgl7c2l6
+ZTo2MTIuMHB0IDc5Mi4wcHQ7DQoJbWFyZ2luOjcwLjg1cHQgNzAuODVwdCA3MC44NXB0IDcwLjg1
+cHQ7fQ0KZGl2LldvcmRTZWN0aW9uMQ0KCXtwYWdlOldvcmRTZWN0aW9uMTt9DQotLT48L3N0eWxl
+Pg0KPC9oZWFkPg0KPGJvZHkgbGFuZz0iU1YiIGxpbms9ImJsdWUiIHZsaW5rPSJwdXJwbGUiIHN0
+eWxlPSJ3b3JkLXdyYXA6YnJlYWstd29yZCI+DQo8ZGl2IGNsYXNzPSJXb3JkU2VjdGlvbjEiPg0K
+PHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNpemU6
+MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssc2Fucy1zZXJpZjtjb2xvcjoj
+OTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj5J4oCZdmUgc2VudCBhIGJhY2twb3J0
+IG9mIGEgcGF0Y2ggZm9yIGxpYm9hdXRoMi4gTm90ZSB0aGF0IHVwc3RyZWFtIGhhcyBtYWRlIGEg
+bWVzcy4gVGhleSBmaXJzdCBmaXhlZCB0aGUgcHJvYmxlbSBpbiBjb21taXQNCiAwZGNiYTA3OTkw
+N2Q1NTk1NTBlZThkOWEyMDFkMjYyMDNiYjhhZWJkICh0aGUgY29tbWl0IEkgaGF2ZSBiYWNrcG9y
+dGVkKSwgYnV0IHRoZW4gdGhleSByZXZlcnRlZCBpdCBpbiBjb21taXQgMTU1YjkzYjJlZmQxZThi
+MDAyMmM5YmRhZDIyOTdhMmE2NzBkYzI5YyB1bmRlciB0aGUgcHJldGVuc2Ugb2YgZml4aW5nIHRo
+ZSBpc3N1ZSAoPGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29tL09wZW5JREMvbGlib2F1dGgyL2lz
+c3Vlcy83MCI+aHR0cHM6Ly9naXRodWIuY29tL09wZW5JREMvbGlib2F1dGgyL2lzc3Vlcy83MDwv
+YT4pLg0KIEkgaGF2ZSByZXBvcnRlZCB0aGUgbWlzdGFrZSBhcyA8YSBocmVmPSJodHRwczovL2dp
+dGh1Yi5jb20vT3BlbklEQy9saWJvYXV0aDIvaXNzdWVzLzczIj4NCmh0dHBzOi8vZ2l0aHViLmNv
+bS9PcGVuSURDL2xpYm9hdXRoMi9pc3N1ZXMvNzM8L2E+Li4uPG86cD48L286cD48L3NwYW4+PC9w
+Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PHNwYW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNp
+emU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90O0NhbGlicmkmcXVvdDssc2Fucy1zZXJpZjtjb2xv
+cjojOTQzNjM0O21zby1mYXJlYXN0LWxhbmd1YWdlOkVOLVVTIj48bzpwPiZuYnNwOzwvbzpwPjwv
+c3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1VUyIgc3R5bGU9
+ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90OyxzYW5zLXNl
+cmlmO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPi8vUGV0ZXI8bzpw
+PjwvbzpwPjwvc3Bhbj48L3A+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48c3BhbiBsYW5nPSJFTi1V
+UyIgc3R5bGU9ImZvbnQtc2l6ZToxMS4wcHQ7Zm9udC1mYW1pbHk6JnF1b3Q7Q2FsaWJyaSZxdW90
+OyxzYW5zLXNlcmlmO2NvbG9yOiM5NDM2MzQ7bXNvLWZhcmVhc3QtbGFuZ3VhZ2U6RU4tVVMiPjxv
+OnA+Jm5ic3A7PC9vOnA+PC9zcGFuPjwvcD4NCjxkaXYgc3R5bGU9ImJvcmRlcjpub25lO2JvcmRl
+ci1sZWZ0OnNvbGlkIGJsdWUgMS41cHQ7cGFkZGluZzowY20gMGNtIDBjbSA0LjBwdCI+DQo8ZGl2
+Pg0KPGRpdiBzdHlsZT0iYm9yZGVyOm5vbmU7Ym9yZGVyLXRvcDpzb2xpZCAjRTFFMUUxIDEuMHB0
+O3BhZGRpbmc6My4wcHQgMGNtIDBjbSAwY20iPg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+PGI+PHNw
+YW4gbGFuZz0iRU4tVVMiIHN0eWxlPSJmb250LXNpemU6MTEuMHB0O2ZvbnQtZmFtaWx5OiZxdW90
+O0NhbGlicmkmcXVvdDssc2Fucy1zZXJpZiI+RnJvbTo8L3NwYW4+PC9iPjxzcGFuIGxhbmc9IkVO
+LVVTIiBzdHlsZT0iZm9udC1zaXplOjExLjBwdDtmb250LWZhbWlseTomcXVvdDtDYWxpYnJpJnF1
+b3Q7LHNhbnMtc2VyaWYiPiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
+ZyAmbHQ7b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcmZ3Q7DQo8Yj5P
+biBCZWhhbGYgT2YgPC9iPktoZW0gUmFqIHZpYSBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPGJyPg0K
+PGI+U2VudDo8L2I+IGRlbiAxOCBtYXJzIDIwMjYgMjI6NDA8YnI+DQo8Yj5Ubzo8L2I+IG9wZW5l
+bWJlZGVkLWRldmVsICZsdDtPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
+ZyZndDs8YnI+DQo8Yj5TdWJqZWN0OjwvYj4gW29lXSBSZWNpcGVzIG5lZWRpbmcgYnVpbGQgZml4
+ZXMgYWZ0ZXIgZ2xpYmMgMi40MyB1cGdyYWRlPG86cD48L286cD48L3NwYW4+PC9wPg0KPC9kaXY+
+DQo8L2Rpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPGRp
+dj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPkhlbGxvIEFsbCw8bzpwPjwvbzpwPjwvcD4NCjxkaXY+
+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRp
+dj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlRoZXJlIGFyZSBmZXcgcmVjaXBlcyBjdXJyZW50bHkg
+YnJva2VuIG9uIG1ldGEtb3BlbmVtYmVkZGVkIGxheWVycywgcHJlZG9taW5hbnRseSBkdWUgdG8g
+Z2xpYmMgdXBncmFkZS4gSGVscCBpcyBuZWVkZWQgaW4gZml4aW5nIHRoZW0gc28gd2UgY2FuIGhh
+dmUgd29ybGQgYnVpbGRzIHdvcmtpbmcgYWdhaW4gb24gQUI8bzpwPjwvbzpwPjwvcD4NCjwvZGl2
+Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9k
+aXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+SGVyZSBpcyBsaXN0PG86cD48L286cD48
+L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBjbGFzcz0iTXNvTm9ybWFsIj48bzpwPiZuYnNwOzwvbzpw
+PjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPlN1bW1hcnk6IDE2IHRh
+c2tzIGZhaWxlZDo8YnI+DQombmJzcDsgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEt
+b2UvYnVpbGQvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLWtlcm5lbC9taW5pY29y
+ZWR1bXBlci9taW5pY29yZWR1bXBlcl8yLjAuNy5iYjpkb19jb21waWxlPGJyPg0KJm5ic3A7ICZu
+YnNwOyBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxk
+L3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L21pbmljb3JlZHVtcGVyLzIuMC43L3RlbXAv
+bG9nLmRvX2NvbXBpbGUuNTUwMTk8YnI+DQombmJzcDsgL3Nydi9wb2t5YnVpbGQveW9jdG8td29y
+a2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLWV4dGVu
+ZGVkL2Nhbm9wZW50ZXJtL2Nhbm9wZW50ZXJtXzEuMC4xNC5iYjpkb19jb21waWxlPGJyPg0KJm5i
+c3A7ICZuYnNwOyBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxk
+L2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L2Nhbm9wZW50ZXJtLzEuMC4xNC90
+ZW1wL2xvZy5kb19jb21waWxlLjM4MzczPGJyPg0KJm5ic3A7IC9zcnYvcG9reWJ1aWxkL3lvY3Rv
+LXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtcHl0aG9uL3JlY2lw
+ZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMteHN0YXRpYy1mb250LWF3ZXNvbWVfNi4yLjEuMS5i
+Yjpkb19jb21waWxlPGJyPg0KJm5ic3A7ICZuYnNwOyBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3Rv
+LXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4
+L3B5dGhvbjMteHN0YXRpYy1mb250LWF3ZXNvbWUvPGEgaHJlZj0iaHR0cDovLzYuMi4xLjEvdGVt
+cC9sb2cuZG9fY29tcGlsZS4xMDc2NzYiPjYuMi4xLjEvdGVtcC9sb2cuZG9fY29tcGlsZS4xMDc2
+NzY8L2E+PGJyPg0KJm5ic3A7IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1
+aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9zeXNkaWcvc3lz
+ZGlnXzAuMzkuMC5iYjpkb19jb25maWd1cmU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9w
+b2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0
+LXYzLXBva3ktbGludXgvc3lzZGlnLzAuMzkuMC90ZW1wL2xvZy5kb19jb25maWd1cmUuMTI0NTUw
+PGJyPg0KJm5ic3A7IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21l
+dGEtb3BlbmVtYmVkZGVkL21ldGEtb2UvcmVjaXBlcy1ic3AvZnd1cGQvZnd1cGQtZWZpXzEuOC5i
+Yjpkb19jb25maWd1cmU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9wb2t5YnVpbGQveW9j
+dG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGlu
+dXgvZnd1cGQtZWZpLzEuOC90ZW1wL2xvZy5kb19jb25maWd1cmUuMTQ1NDc1PGJyPg0KJm5ic3A7
+IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVk
+ZGVkL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvb3BlbnNhZi9vcGVuc2FmXzUuMjIu
+MDEuYmI6ZG9fY29tcGlsZTxicj4NCiZuYnNwOyAmbmJzcDsgbG9nOiAvc3J2L3Bva3lidWlsZC95
+b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1s
+aW51eC9vcGVuc2FmLzUuMjIuMDEvdGVtcC9sb2cuZG9fY29tcGlsZS4xNjE1MzA8YnI+DQombmJz
+cDsgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1i
+ZWRkZWQvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9udG9wbmcvbnRvcG5nXzUuMi4x
+LmJiOmRvX2NvbXBpbGU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9wb2t5YnVpbGQveW9j
+dG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGlu
+dXgvbnRvcG5nLzUuMi4xL3RlbXAvbG9nLmRvX2NvbXBpbGUuMTU0NzEyPGJyPg0KJm5ic3A7IC9z
+cnYvcG9reWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVk
+L21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtcHljaHJvbWVjYXN0
+XzE0LjAuOS5iYjpkb19jb21waWxlPGJyPg0KJm5ic3A7ICZuYnNwOyBsb2c6IC9zcnYvcG9reWJ1
+aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1w
+b2t5LWxpbnV4L3B5dGhvbjMtcHljaHJvbWVjYXN0LzE0LjAuOS90ZW1wL2xvZy5kb19jb21waWxl
+LjE3NTkxOTxicj4NCiZuYnNwOyAvc3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9i
+dWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcWFkL3FhZF9n
+aXQuYmI6ZG9fY29tcGlsZTxicj4NCiZuYnNwOyAmbmJzcDsgbG9nOiAvc3J2L3Bva3lidWlsZC95
+b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1s
+aW51eC9xYWQvMC4wK2dpdC90ZW1wL2xvZy5kb19jb21waWxlLjE3NjQxMTxicj4NCiZuYnNwOyAv
+c3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9tZXRhLW9wZW5lbWJlZGRl
+ZC9tZXRhLW9lL3JlY2lwZXMtdGVzdC9saWJmYWtldGltZS9saWJmYWtldGltZV8wLjkuMTAuYmI6
+ZG9fY29tcGlsZTxicj4NCiZuYnNwOyAmbmJzcDsgbG9nOiAvc3J2L3Bva3lidWlsZC95b2N0by13
+b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1saW51eC9s
+aWJmYWtldGltZS8wLjkuMTAvdGVtcC9sb2cuZG9fY29tcGlsZS4xODIzNDA8YnI+DQombmJzcDsg
+L3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0YS1vcGVuZW1iZWRk
+ZWQvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2x1YXBvc2l4L2x1YXBvc2l4XzM2LjIuMS5iYjpk
+b19wYWNrYWdlPGJyPg0KJm5ic3A7ICZuYnNwOyBsb2c6IC9zcnYvcG9reWJ1aWxkL3lvY3RvLXdv
+cmtlci9tZXRhLW9lL2J1aWxkL2J1aWxkL3RtcC93b3JrL3g4Ni02NC12My1wb2t5LWxpbnV4L2x1
+YXBvc2l4LzM2LjIuMS90ZW1wL2xvZy5kb19wYWNrYWdlLjE4NjQwNjxicj4NCiZuYnNwOyAvc3J2
+L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9tZXRhLW9wZW5lbWJlZGRlZC9t
+ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJvYXV0aDIvbGlib2F1dGgyXzIuMi4wLmJiOmRvX2Nv
+bXBpbGU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2Vy
+L21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGludXgvbGlib2F1
+dGgyLzIuMi4wL3RlbXAvbG9nLmRvX2NvbXBpbGUuMTk5MDczPGJyPg0KJm5ic3A7IC9zcnYvcG9r
+eWJ1aWxkL3lvY3RvLXdvcmtlci9tZXRhLW9lL2J1aWxkL21ldGEtb3BlbmVtYmVkZGVkL21ldGEt
+bmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvb3Blbi12bS10b29scy9vcGVuLXZtLXRvb2xzXzEz
+LjAuMTAuYmI6ZG9fY29tcGlsZTxicj4NCiZuYnNwOyAmbmJzcDsgbG9nOiAvc3J2L3Bva3lidWls
+ZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9r
+eS1saW51eC9vcGVuLXZtLXRvb2xzLzEzLjAuMTAvdGVtcC9sb2cuZG9fY29tcGlsZS4xOTM2Njc8
+YnI+DQombmJzcDsgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0
+YS1vcGVuZW1iZWRkZWQvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uZXRjZi9uZXRj
+Zl8wLjIuOC5iYjpkb19jb25maWd1cmU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9wb2t5
+YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYz
+LXBva3ktbGludXgvbmV0Y2YvMC4yLjgrZ2l0L3RlbXAvbG9nLmRvX2NvbmZpZ3VyZS4yMDg5NTc8
+YnI+DQombmJzcDsgL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21ldGEtb2UvYnVpbGQvbWV0
+YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlua3MvbGlua3MteDExXzIu
+MjYuYmI6ZG9fY29tcGlsZTxicj4NCiZuYnNwOyAmbmJzcDsgbG9nOiAvc3J2L3Bva3lidWlsZC95
+b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9idWlsZC90bXAvd29yay94ODYtNjQtdjMtcG9reS1s
+aW51eC9saW5rcy14MTEvMi4yNi90ZW1wL2xvZy5kb19jb21waWxlLjIxNTA0Nzxicj4NCiZuYnNw
+OyAvc3J2L3Bva3lidWlsZC95b2N0by13b3JrZXIvbWV0YS1vZS9idWlsZC9tZXRhLW9wZW5lbWJl
+ZGRlZC9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saW5rcy9saW5rc18yLjI5LmJiOmRvX2NvbXBp
+bGU8YnI+DQombmJzcDsgJm5ic3A7IGxvZzogL3Nydi9wb2t5YnVpbGQveW9jdG8td29ya2VyL21l
+dGEtb2UvYnVpbGQvYnVpbGQvdG1wL3dvcmsveDg2LTY0LXYzLXBva3ktbGludXgvbGlua3MvMi4y
+OS90ZW1wL2xvZy5kb19jb21waWxlLjIxODczNDxicj4NClN1bW1hcnk6IFRoZXJlIHdlcmUgMjYg
+RVJST1IgbWVzc2FnZXMsIHJldHVybmluZyBhIG5vbi16ZXJvIGV4aXQgY29kZS48bzpwPjwvbzpw
+PjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9v
+OnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xhc3M9Ik1zb05vcm1hbCI+YW5kIGEgYnVpbGQg
+bG9nIHdpdGggZXJyb3JzIGlzIGhlcmU8bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxw
+IGNsYXNzPSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0K
+PHAgY2xhc3M9Ik1zb05vcm1hbCI+PGEgaHJlZj0iaHR0cHM6Ly9hdXRvYnVpbGRlci55b2N0b3By
+b2plY3Qub3JnL3ZhbGt5cmllL2FwaS92Mi9sb2dzLzU4Njc5MzIvcmF3X2lubGluZSI+aHR0cHM6
+Ly9hdXRvYnVpbGRlci55b2N0b3Byb2plY3Qub3JnL3ZhbGt5cmllL2FwaS92Mi9sb2dzLzU4Njc5
+MzIvcmF3X2lubGluZTwvYT48bzpwPjwvbzpwPjwvcD4NCjwvZGl2Pg0KPGRpdj4NCjxwIGNsYXNz
+PSJNc29Ob3JtYWwiPjxvOnA+Jm5ic3A7PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAgY2xh
+c3M9Ik1zb05vcm1hbCI+VGhhbmtzPG86cD48L286cD48L3A+DQo8L2Rpdj4NCjxkaXY+DQo8cCBj
+bGFzcz0iTXNvTm9ybWFsIj4tS2hlbTxvOnA+PC9vOnA+PC9wPg0KPC9kaXY+DQo8ZGl2Pg0KPHAg
+Y2xhc3M9Ik1zb05vcm1hbCI+PG86cD4mbmJzcDs8L286cD48L3A+DQo8L2Rpdj4NCjwvZGl2Pg0K
+PC9kaXY+DQo8L2Rpdj4NCjwvYm9keT4NCjwvaHRtbD4NCg==
 
-Summary: 16 tasks failed:
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.55019
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.14.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.38373
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/python3-xstatic-font-awesome/
-6.2.1.1/temp/log.do_compile.107676
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb:
-do_configure
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/sysdig/0.39.0/temp/log.do_configure.124550
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-bsp/fwupd/fwupd-efi_1.8.bb:
-do_configure
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.145475
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/opensaf/5.22.01/temp/log.do_compile.161530
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking/recipes-support/ntopng/ntopng_5.2.1.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.154712
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pychromecast_14.0.9.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/python3-pychromecast/14.0.9/temp/log.do_compile.175919
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-extended/qad/qad_git.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/qad/0.0+git/temp/log.do_compile.176411
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/libfaketime/0.9.10/temp/log.do_compile.182340
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-devtools/luaposix/luaposix_36.2.1.bb:
-do_package
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/luaposix/36.2.1/temp/log.do_package.186406
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-support/liboauth2/liboauth2_2.2.0.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/liboauth2/2.2.0/temp/log.do_compile.199073
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.193667
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-networking/recipes-support/netcf/netcf_0.2.8.bb:
-do_configure
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.208957
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-support/links/links-x11_2.26.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/links-x11/2.26/temp/log.do_compile.215047
-
-/srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-support/links/links_2.29.bb:
-do_compile
-    log:
-/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/links/2.29/temp/log.do_compile.218734
-Summary: There were 26 ERROR messages, returning a non-zero exit code.
-
-and a build log with errors is here
-
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/raw_inline
-
-Thanks
--Khem
-
---000000000000459df9064d534bf1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello All,<div><br></div><div>There are few recipes curren=
-tly broken on meta-openembedded layers, predominantly due to glibc upgrade.=
- Help is needed in fixing them so we can have world builds working again on=
- AB</div><div><br></div><div>Here is list</div><div><br></div><div>Summary:=
- 16 tasks failed:<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-=
-openembedded/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:=
-do_compile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/=
-build/tmp/work/x86-64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compil=
-e.55019<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedd=
-ed/meta-oe/recipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile<br=
->=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/wor=
-k/x86-64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.38373<br>=C2=
-=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-python=
-/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb:do_compile=
-<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/=
-work/x86-64-v3-poky-linux/python3-xstatic-font-awesome/<a href=3D"http://6.=
-2.1.1/temp/log.do_compile.107676">6.2.1.1/temp/log.do_compile.107676</a><br=
->=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe=
-/recipes-extended/sysdig/sysdig_0.39.0.bb:do_configure<br>=C2=A0 =C2=A0 log=
-: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-l=
-inux/sysdig/0.39.0/temp/log.do_configure.124550<br>=C2=A0 /srv/pokybuild/yo=
-cto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-bsp/fwupd/fwupd-=
-efi_1.8.bb:do_configure<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/m=
-eta-oe/build/build/tmp/work/x86-64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_=
-configure.145475<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-o=
-penembedded/meta-networking/recipes-daemons/opensaf/opensaf_5.22.01.bb:do_c=
-ompile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/buil=
-d/tmp/work/x86-64-v3-poky-linux/opensaf/5.22.01/temp/log.do_compile.161530<=
-br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-=
-networking/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile<br>=C2=A0 =C2=
-=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3=
--poky-linux/ntopng/5.2.1/temp/log.do_compile.154712<br>=C2=A0 /srv/pokybuil=
-d/yocto-worker/meta-oe/build/meta-openembedded/meta-python/recipes-devtools=
-/python/python3-pychromecast_14.0.9.bb:do_compile<br>=C2=A0 =C2=A0 log: /sr=
-v/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/=
-python3-pychromecast/14.0.9/temp/log.do_compile.175919<br>=C2=A0 /srv/pokyb=
-uild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-extended/=
-qad/qad_git.bb:do_compile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker=
-/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/qad/0.0+git/temp/log.do_=
-compile.176411<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-ope=
-nembedded/meta-oe/recipes-test/libfaketime/libfaketime_0.9.10.bb:do_compile=
-<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/=
-work/x86-64-v3-poky-linux/libfaketime/0.9.10/temp/log.do_compile.182340<br>=
-=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
-recipes-devtools/luaposix/luaposix_36.2.1.bb:do_package<br>=C2=A0 =C2=A0 lo=
-g: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-=
-linux/luaposix/36.2.1/temp/log.do_package.186406<br>=C2=A0 /srv/pokybuild/y=
-octo-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-support/liboaut=
-h2/liboauth2_2.2.0.bb:do_compile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto=
--worker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/liboauth2/2.2.0/t=
-emp/log.do_compile.199073<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/bui=
-ld/meta-openembedded/meta-networking/recipes-support/open-vm-tools/open-vm-=
-tools_13.0.10.bb:do_compile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-work=
-er/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/open-vm-tools/13.0.10/=
-temp/log.do_compile.193667<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/bu=
-ild/meta-openembedded/meta-networking/recipes-support/netcf/netcf_0.2.8.bb:=
-do_configure<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-worker/meta-oe/buil=
-d/build/tmp/work/x86-64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure=
-.208957<br>=C2=A0 /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedd=
-ed/meta-oe/recipes-support/links/links-x11_2.26.bb:do_compile<br>=C2=A0 =C2=
-=A0 log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-64-v3=
--poky-linux/links-x11/2.26/temp/log.do_compile.215047<br>=C2=A0 /srv/pokybu=
-ild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipes-support/li=
-nks/links_2.29.bb:do_compile<br>=C2=A0 =C2=A0 log: /srv/pokybuild/yocto-wor=
-ker/meta-oe/build/build/tmp/work/x86-64-v3-poky-linux/links/2.29/temp/log.d=
-o_compile.218734<br>Summary: There were 26 ERROR messages, returning a non-=
-zero exit code.<br></div><div><br></div><div>and a build log with errors is=
- here</div><div><br></div><div><a href=3D"https://autobuilder.yoctoproject.=
-org/valkyrie/api/v2/logs/5867932/raw_inline">https://autobuilder.yoctoproje=
-ct.org/valkyrie/api/v2/logs/5867932/raw_inline</a></div><div><br></div><div=
->Thanks</div><div>-Khem</div><div><br></div></div>
-
---000000000000459df9064d534bf1--
+--_000_DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FADB5PR02MB10213eu_--
 
