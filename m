@@ -1,378 +1,363 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE95E108E1E4
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 10:42:36 +0000 (UTC)
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8137.1773916943773450576
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFFBA108E1E6
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 10:47:36 +0000 (UTC)
+Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.101])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8208.1773917249431480313
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 03:42:23 -0700
+ Thu, 19 Mar 2026 03:47:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aAQuvFc7;
- spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-7d75ed779bfso647933a34.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 03:42:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773916943; cv=none;
-        d=google.com; s=arc-20240605;
-        b=d1tfKh6eUSnz3/ETaQJNGS6bXbeVNPgA/Gl/o07V5IEV7PD6phSl5mJUZfS/gC2IRo
-         JZRnsL1LfeWTURM/thUgucuzHuhCOlTvovB6ZMPEx3LE2kP5+YeswteUNdFRNm4TYXVn
-         yzw6HvF1EexwSz4Fi5Yb/XqZ9M1JlFndmjPUOg8pbAJgGpJxXiIrG5xcdQU2mfDHibC1
-         COUztB/eo6ZUNpU6aWnVoxdc+Grdf3AlMx2xF03FGJDeshOzgnsrBlThv9BTKP9wQw4m
-         BJ7fFS4d0ori2+/5c42nFOl7g0c+hcLVs3JZ0RUN1utcS67PYGyu8C2VGEqnhfxQ71W6
-         Wblw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=/nxmm9jROY5FtV+Tpz4FWlneZ193fo2EwWXAdqC8e+o=;
-        fh=pdeOg0eUEeSbuFfdgh6mXmfyvsNCruy81TzftImGxD4=;
-        b=MnuXCn6BtUYpOT1B9oyl1+3OB+xHmzPq7WAGMoTGGnssqAYQ6kzU6GB9tIuXOZ94Fh
-         mKUbL7/uVhdw/FSVpOPPwXsK/2JCwvGMlNRfRUc7+vBcD8Xsvib90W7SAYbWV/S8Q2z0
-         NxS0Y9EzWr9HgsEzYGM8nNMGN4eOwbLGckdeYxDk5H3GjaPhfwZM4MaldvHkSt1segA9
-         w6UH5Gcy5tblho5X4Hq5vuSinIna1DgSgO/7zuD7kHvq4lp3Vmjpuep/4OABjYNTqXv+
-         7ldVllL8Dpw0MX87C2RZHw3Ycw0uibYZtRb3fiK6KnMQaYVMnn6KDmoj410FTrhdLBi2
-         5CZg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773916943; x=1774521743; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/nxmm9jROY5FtV+Tpz4FWlneZ193fo2EwWXAdqC8e+o=;
-        b=aAQuvFc7ERlxKU6o9/zvttCdaubVRWtO6sZrv+oghufR62EK+XuB8IAKY3DsCrAhGQ
-         4GAXLVivRq/Kw7WqELGiR8EiaxE03CpyrYhH3WsLlMD9eZ1B2NnhmXs4yuRE21fP2ShW
-         T7CdYSEV8wzjZb9KLeYRVf4mxxRU8/VzFw1fga2Ke5SNCWekqOniUGZ5noHu4nUbzSnB
-         +nXHt6H3OupewXAcEO1YP1yOA8AIF23UIB+AqkVU6eNKuLl5EXP7B8Cdxd7NToC08HpD
-         ZJJO4aHa+T3f1k1hBWExe49ur95FZYvxIpPswjXE0kBBqX28NSTfHTWsdUncUbzzox5S
-         gEFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773916943; x=1774521743;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=/nxmm9jROY5FtV+Tpz4FWlneZ193fo2EwWXAdqC8e+o=;
-        b=FpXUNzBFZkqKQzwS9xATnADI+dr0e7yS4dbtcfKGhxdjUxK4E1B5S147SbiRk7a5RV
-         wO24r06Or32fnLtxtGrTP0oWuA5B1WLHjxJrLgtAL68vPShjmgc4JRPsEDB7VnGT08ne
-         f5b0xT1n1HAka/cw6gAsDjjph2ShmCVFfKJyyoPHn4iq6GDyoqAjtjvRUEc5rm9tAdgr
-         U3ZCY+Rlr0CeD5n/B+PHkE/2o0Ni44pVNvMGX2v/hC8ooDhGb8M/ICNSTLr7RooloItv
-         68UbFqdj2DHTtwPLQq5oncGfZnYhnfHMyn6j5WWYtRBKxzNKbTRwFdpaadMpVaudDPsJ
-         ec2w==
-X-Gm-Message-State: AOJu0Yx9Dz+bqmsXWmTzqlAniXjLhBFYVMMYsA3R6ruHDigf+y7PgZzK
-	owm5NSn2Ojg5N1mDZSWn7pzNWu414yPJT7TLrp1bPOvI74lU2JQVWVrxJVhWKkyiCGPz+GYJSNR
-	sCChgnBfFayzM2iWAT78BkGfLsCCRwog=
-X-Gm-Gg: ATEYQzzBGlmRXfCcRjzr7cxT6TUU7VnuL7Emv9nZgo8OtbLmAIXBPEGryVYwAK5rG7B
-	ojWZXCiPE6ubrVcCH/eZlTAjho0SmEJ1OWm8pt03IhDCjHg959kcy72fvYIfvocphh6mQtWQ94D
-	7t9IKk1l2Lj8Zv+MqW+jAWfYqGKE+sGT0x88vy1J1cFEIDLGcHKu993pm4NHsm5wpHxx84hrZC8
-	lBjncfGXrmrfqBgsaZ3kZq++SshhXpq0ugwe6ZCRRVrphPfyJdYXlgw1yalRd+3By4RgLj7tU6h
-	KQk02O2g
-X-Received: by 2002:a05:6820:4b09:b0:679:dd38:994b with SMTP id
- 006d021491bc7-67c0db0242amr4497394eaf.57.1773916942742; Thu, 19 Mar 2026
- 03:42:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260319095713.1219910-1-deeratho@cisco.com>
-In-Reply-To: <20260319095713.1219910-1-deeratho@cisco.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Thu, 19 Mar 2026 23:42:10 +1300
-X-Gm-Features: AaiRm52It-kQesk23xFv8ob4qXDj1B2k7WfrKaBJ9e3yVSu4l69bsphoS221YIU
-Message-ID: <CADySD0HkkSWC8tzrwE497obTnA2VFtDbt3D6AXXBdhOvEK4G8Q@mail.gmail.com>
-Subject: Re: [oe][meta-oe][whinlatter][PATCH] mariadb: Upgrade 11.4.9 -> 11.4.10
-To: deeratho@cisco.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=RoR7OVA3;
+ spf=pass (domain: navimatix.de, ip: 52.101.69.101, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hDK++LAm4InuKu+XmE6vFvvfSzQKSk1r98r5AwGyO+/3hOkvD8oX+Yvq75NN11fXD8k94b85Ih2sfGD7ttr699YytdTLyjAzT6IDBMDdoTsJb3M9ZxoyazuyRF1zvdzIdGfZMn14107+VcC/Cjfv+taFznfhxaiekGKoYpGoFx4Z2NGQLjp292riiQPnkRLVyBoBOQ3TI5ERfVgYr6mauqwOanU5U9oFU5Mph8kmauixkr9wJM+ypQD+T3lBCp42z1zqWahgXAuS/3wIQJrnitt0j7+6glv5Kv6XUWAp1KbZ+X8Cssr1Fu9wQYnv88ZJ/2Kr4P78RjXX9164RapxAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PY00OhNh/QnnlGgq//7z3lepqS9xF7LzK9A7zHomIBY=;
+ b=FoUXgCxtf0zK7L2bLH6kMxn1qh/rRKx+pH81XjAwcO6pa9p2z27oQGzL0GI+IYu/pYakFSHDuPXEQngIXZGMA7GZKMMfFXO7BRbaFvaRz3E4vk3b/SRXCKV5rh7g4+3+zxfbcT7lMpRaUaEZ3kxMLCUy2Ixx5queNqStIqA2putjEO2It4Q92jz0gvCeIjDut2lQxMDXG7151P6x7mp39mdT0TAv7Qzo0lQS/TCU/+Fk+Pi/6r24wStpQiSsv4tEJu+D0e89iREiImbxQdAHj9FN+d3eM2oW1GqlcWk5OBqwgycmm50sfnp/1ilVGE/GtP2z0FIvREhLZmIXT/Vkfg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PY00OhNh/QnnlGgq//7z3lepqS9xF7LzK9A7zHomIBY=;
+ b=RoR7OVA3YtFEH4H5Dwn0o3U5+nZCzuRwojFcJ5DHfdiJtKRoPzfpIUoY9DSocuYVA9E6Zn4iOQt7Nu70rmlmBA85aNdF2Mnuvdee5/oVrTE3yngvA5pUXEcGJb+/UM5iQ/0rmfo60ufWz41sptHmk47b9sKTXGM/mxrbrYnWhug=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by DB9PR01MB7225.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:211::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
+ 2026 10:47:25 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::d5c3:2dea:3d98:25fd]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
+ with mapi id 15.20.9723.018; Thu, 19 Mar 2026 10:47:25 +0000
+Date: Thu, 19 Mar 2026 11:47:23 +0100
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH] conserver: Add recipe for remote console server
+Message-ID: <ada1edc64fc422e4e638c4a98613bd86f321f321.1773917242.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0051.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:23::9) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|DB9PR01MB7225:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5e12921d-1372-414e-2bea-08de85a4e814
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|376014|1800799024|56012099003|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	3Rbzyeo5Ba0d8YKFMJwo5M6cJ+8Cq1ScxBdt0nLTalOPTf6pWV6wpuzHyrWqB9nw4B2ZaZJqv9DTnaC5UAQK/VIsKf8ztjD/bY4ZWtHy+Zviijq92WF1thgBPDcOoZfJoj3nWfRT01JVnrx2JT5o7Aa2PEfL0JaK9x0kliNlJ7vAUDYUS7IrvFcTmbxgdYPFFGDCZTVPHNVfKFsooDkV6y9MCV9962oc5Pf6XJYze0oXnXZaR/1KrkefYuyrJpH75l8G545qHmn0mJ/hka1uhzMQ/ZwD0vfH2M+02Pf77dp3TKeH2lzoA9GWa8pk9NpOIdodvMM/7ocWkLrPxYbBci2/0zR6a6BjUFkWM2yeZyMW8ClxWh94FWsUZFRGW1ElbjuirpSwPyOxBoR71Yyn6HUepD+p3/9/0ie20NiEirM1rXODBChjqTA4x+e+JtOir3QAsJIkIAt2SmBTj90mjZX1TuTiDabluJhKmuqo8xWHvAYPXO+Sp8aJNiws31vWme5Q1HC+y2/2GfzVXel8Zhdf60439OUxYvhQf32YK0Gs5JUsh5T8Nz14wYEzaALFr9YcAyZNzpcODl9OBhs4mN9TjQv0mimmzZFPvl9uUz0U3Y8WB2GC9ZYM0oU72ZCNRrPknKas+dVppakIdrxCbGsYewAV1mNOwn0ul14sU4fQee6JtjQxEQO265RV8ElA
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(56012099003)(18002099003)(13003099007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?I9Z8if/qjAo6jVDzoLgS59+7+lNpQAOGE1z3967E/me5iesghmAXix+gk6Mh?=
+ =?us-ascii?Q?+FWkKKjD2PBoAs9dVc7BtV812BOB3aPVrOuFuGJHuwkZ7S2qlG0mi67bfxrh?=
+ =?us-ascii?Q?QqcU1jHvc/tJoXpZxOPF4JIIHzpDibpeoZFWOgnaz0VDUApo7GKI/oSJnLxF?=
+ =?us-ascii?Q?QVVQ0kHcY1wBgJhrA5ui81LT4M51plsVip1KuRfgF3sfIAnRkDnilKUvlM0C?=
+ =?us-ascii?Q?zYCT/z6xn0XBQ4nTtkh63VdxXIEsVI9HobD6o4RsCDF6udwdei8IPcLpYRts?=
+ =?us-ascii?Q?dH7btpB13lc/KuIKPOiYlqqPmW6Wde15afRfzPQ6ozeq9WCYn2OhnIMgjgWN?=
+ =?us-ascii?Q?AqmV59l18/qvNWPlBr9yFq54PkbJmWqFSQ9yOmkFQ8hn6K8J3GXJAi1YdQ3u?=
+ =?us-ascii?Q?bx610PWSM7emnKUhQz6ETgba0BiynvnFvh0tRCx9rB2otbMCCAPtW3vDOSDd?=
+ =?us-ascii?Q?JvLJoFsSX0XMPko/hzPhaqdGc3PHZl/iiU5eehpWn2WBIz6P5ZcAdoJqhbom?=
+ =?us-ascii?Q?vXqi71V0mDA9LccSCpZNkubodjMxI7DjqCoiGVKnsuGA3Ocalfcbs2XFFz/7?=
+ =?us-ascii?Q?9eaevHzmLUPfdFhNUsxWZDrv+JDu0uLhizolo6jaLEWzPWh8i/M0hA03wi7c?=
+ =?us-ascii?Q?Po1PWyXOWvpWEpARM7sBYIsoa8rshRn+df6MOrsQmp9uQLT5P9Y4Xzy5bi/i?=
+ =?us-ascii?Q?7uF/uIbtwV2kIAV7xtlzbyYwDi9DYo7JEhd5Krmc8qQ8zgkGEpau0HV0Vy6M?=
+ =?us-ascii?Q?6FjgJ6nOB5XTO9+OLggzg8cWO/gYY9GFRik0NH7M9mY+f+LGJvoDhAPc0aoT?=
+ =?us-ascii?Q?ru96RJ1d9BXgqm4M4tEvaD2sm5b2QfhiL2JcObVFMoauLvJZPHAjudoa/Ksg?=
+ =?us-ascii?Q?dwxWRefCqfAJ91xIL3qJf7QDzntQ3doRGV/n15rEYBz1EQztl94efcoC6yiF?=
+ =?us-ascii?Q?eh63BZGxhWh3X1yMYusj+airG3W8pF/0VO03010mHvgPtyKMTp16Qu5Nqfye?=
+ =?us-ascii?Q?ffSvM96cI6kLZq5EpETA5rY8RChLULz0ttP4EDb2f9/xYdRBfa3eI5gQArWJ?=
+ =?us-ascii?Q?RMuX1WGwdKmrjZ8ziYRFzngsUlciHuWZCj/i3+d8d8JiLK0UYaqD86PmDNdJ?=
+ =?us-ascii?Q?JTAlg1QU0HfhiVBh8hy6Fx/A4Ef6YMp+x2cNI07NsAxvK/t+1AKsXK6m5kE7?=
+ =?us-ascii?Q?Z9GPoNIrTlVoYY0mtHEpH4DChepTvyW9RxAYSpuK2Fkx1BCBSnGz9i6gBYTx?=
+ =?us-ascii?Q?64cNE1Hwq9VRQTRCUnqu5Saoy2JAS2ja6tmbnSDU6EHUSognkwuq6OpdYuU9?=
+ =?us-ascii?Q?L1zxZIepUQflIGBsOl8252B4MLrIousaYsFliaL2AxobWrVv7yruKLPbhM0e?=
+ =?us-ascii?Q?DTr9Kd2waMTLg2guI9KxK/70KD9sTOW3nCgMqiCM9GJEpI+Vuy2Nv6BgmzOp?=
+ =?us-ascii?Q?jFMwawRjTrZN999TEQQqU4DhrJTm3ykL4CuIG6RDacUwHX33lSOy/8QckDeG?=
+ =?us-ascii?Q?bC3pckaStqbGjSv6Z5qPihSluYErqRyg6sOBGH+WQoKV2qM3NikgJqz8oRxo?=
+ =?us-ascii?Q?Pc66IfOa+gM7OzfOUge9NhVsNRCjwioGs9jVp+gZJ3mwk/1ID8F/q3ybzYMr?=
+ =?us-ascii?Q?fcmSsumyMrISJj3TkY7aOekA4f0fRx0WNC+LtQNv1rAIYmUOIgPzfmoci1tX?=
+ =?us-ascii?Q?kKjb/vsCU/cogP8LEbMETFDp7kdfkKOsh943vPPGRy74aDBAjcu7+v/iUhOG?=
+ =?us-ascii?Q?CpTydb0VyZevI7TTvGm749jCXLGX5NA=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e12921d-1372-414e-2bea-08de85a4e814
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 10:47:24.9336
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pQ0gJJ6HOlxbkggkPzfVxA5cHJspkBintI9bpFUKwR092IithUDlcRiIFn36Vpf7KMvNiLyTtuDKuyz3zwqJ9MDftpqssncvAvatF8eYuao=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR01MB7225
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 10:42:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125393
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 10:47:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125394
 
-Already submitted[1] earlier, we can drop this one
-[1] https://lists.openembedded.org/g/openembedded-devel/message/125365
+From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 
-On Thu, Mar 19, 2026 at 10:57=E2=80=AFPM Deepak Rathore via
-lists.openembedded.org <deeratho=3Dcisco.com@lists.openembedded.org>
-wrote:
->
-> From: Mingli Yu <mingli.yu@windriver.com>
->
-> Remove 0001-Remove-x86-specific-loop-in-my_convert.patch as it's fixed
-> in new version [1].
->
-> Remove 0001-MDEV-38029-my_tzinfo-t-fails-for-certain-TZ-values-o.patch
-> as its logic is included in new version [2].
->
-> Release note:
-> https://mariadb.com/docs/release-notes/community-server/11.4/11.4.10
->
-> [1] https://github.com/MariaDB/server/commit/470487c
-> [2] https://github.com/MariaDB/server/commit/a61a746
->
-> This also include the fix for CVE-2026-3494.
->
-> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 9dff889e43b5b564cbe1e98bec75e0eb449f21d9)
-> Signed-off-by: Deepak Rathore <deeratho@cisco.com>
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_11.4.9.bb b/meta-oe=
-/recipes-dbs/mysql/mariadb-native_11.4.10.bb
-> similarity index 100%
-> rename from meta-oe/recipes-dbs/mysql/mariadb-native_11.4.9.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb-native_11.4.10.bb
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
-mysql/mariadb.inc
-> index 4fcb5a1e40..9470184d3d 100644
-> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-> @@ -23,12 +23,10 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source=
-/${BP}.tar.gz \
->             file://lfs64.patch \
->             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
->             file://riscv32.patch \
-> -           file://0001-Remove-x86-specific-loop-in-my_convert.patch \
->             file://0001-support-reproducible-builds.patch \
->             file://0001-storage-mroonga-CMakeLists.txt-fix-reproducible-b=
-uil.patch \
-> -           file://0001-MDEV-38029-my_tzinfo-t-fails-for-certain-TZ-value=
-s-o.patch \
->            "
-> -SRC_URI[sha256sum] =3D "8e481ca29b5a740444d45451c8ea2d93711cf525d6fa5d27=
-bc9512cf8973b075"
-> +SRC_URI[sha256sum] =3D "14783ddc5edd966ff05aa0efd5ed6d3d369ed5b9e4080a44=
-8f00f87a9f0a4a6b"
->
->  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/tags"
->
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-38029-my_tzinfo-=
-t-fails-for-certain-TZ-values-o.patch b/meta-oe/recipes-dbs/mysql/mariadb/0=
-001-MDEV-38029-my_tzinfo-t-fails-for-certain-TZ-values-o.patch
-> deleted file mode 100644
-> index f1e07e304a..0000000000
-> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-38029-my_tzinfo-t-fails=
--for-certain-TZ-values-o.patch
-> +++ /dev/null
-> @@ -1,47 +0,0 @@
-> -From 61bc216ff9e1d0a8a7fafce57ba916018cd6ac6d Mon Sep 17 00:00:00 2001
-> -From: Vladislav Vaintroub <vvaintroub@gmail.com>
-> -Date: Wed, 19 Nov 2025 13:01:56 +0100
-> -Subject: [PATCH] MDEV-38029 my_tzinfo-t fails for certain TZ values on m=
-usl
-> -
-> -From: Vladislav Vaintroub <vvaintroub@gmail.com>
-> -
-> -The test fails for TZ values such as `PST8PDT` (present but outdated in
-> -tzdb) and custom forms like `GST-1GDT`. On musl, these values do not
-> -trigger the expected DST transitions, leading to incorrect DST offsets
-> -or abbreviations.
-> -
-> -This appears to be a musl libc bug; the same TZ values behave correctly
-> -elsewhere, including Windows. We work around it by skipping the
-> -affected tests when musl is detected.
-> -
-> -Upstream-Status: Submitted [https://github.com/MariaDB/server/pull/4452]
-> -Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ----
-> - unittest/mysys/my_tzinfo-t.c | 14 ++++++++++++++
-> - 1 file changed, 14 insertions(+)
-> -
-> -diff --git a/unittest/mysys/my_tzinfo-t.c b/unittest/mysys/my_tzinfo-t.c
-> -index b38ebd37..585d52f8 100644
-> ---- a/unittest/mysys/my_tzinfo-t.c
-> -+++ b/unittest/mysys/my_tzinfo-t.c
-> -@@ -112,6 +112,20 @@ void test_timezone(const char *tz_env, const char *=
-*expected_tznames,
-> -     }
-> -   }
-> -   ok(found, "%s: timezone_name =3D %s", tz_env, timezone_name);
-> -+
-> -+#if defined __linux__ && !defined __GLIBC__ && !defined __UCLIBC__
-> -+  /*
-> -+    MUSL incorrectly calculates UTC offsets and abbreviations
-> -+    for certain values of TZ (DST related). See MDEV-38029
-> -+    Skip tests in this case.
-> -+  */
-> -+  if (!strcmp(tz_env, "PST8PDT") || !strcmp(tz_env, "GST-1GDT"))
-> -+  {
-> -+    skip(6, "musl UTC offset/abbreviation bug, tzname %s, see MDEV-3802=
-9", tz_env);
-> -+    return;
-> -+  }
-> -+#endif
-> -+
-> -   my_tzinfo(SUMMER_TIMESTAMP, &tz);
-> -   ok(summer_gmt_off =3D=3D tz.seconds_offset, "%s: Summer GMT offset %l=
-d", tz_env, tz.seconds_offset);
-> -   check_utc_offset(SUMMER_TIMESTAMP,tz.seconds_offset, tz_env);
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-l=
-oop-in-my_convert.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86=
--specific-loop-in-my_convert.patch
-> deleted file mode 100644
-> index afcf4fe843..0000000000
-> --- a/meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-=
-my_convert.patch
-> +++ /dev/null
-> @@ -1,93 +0,0 @@
-> -From 79d2a95391abc133e86688696ae21628b7035b2d Mon Sep 17 00:00:00 2001
-> -From: =3D?UTF-8?q?Zolt=3DC3=3DA1n=3D20B=3DC3=3DB6sz=3DC3=3DB6rm=3DC3=3DA=
-9nyi?=3D
-> - <zboszor@gmail.com>
-> -Date: Wed, 1 Oct 2025 09:29:04 +0200
-> -Subject: [PATCH] Remove x86 specific loop in my_convert()
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=3DUTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
-> -mysqldump/mariadb-dump crashes with this backtrace:
-> -
-> -| (gdb) bt
-> -| #0  my_convert (to=3D<optimized out>, to_length=3D160, to_cs=3D0x55b57=
-40fbda0 <my_charset_utf8mb4_general_ci>, from=3D<optimized out>, from_lengt=
-h=3D40,
-> -|     from_cs=3D0x55b57408bda0 <my_charset_utf8mb3_unicode_ci>, errors=
-=3D0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/strings/ctype.c:1256
-> -| #1  0x000055b572d9f4a0 in copy_and_convert (to=3D0x7f94fc00c9db "Confi=
-guratiogicate_log\020automagicate_log\017is_done_message\017is_done_message=
-",
-> -|     to_length=3D<optimized out>, to_cs=3D<optimized out>, from=3D0x7f9=
-4fc059f37 "Configuration downloading from portal...", from_length=3D40, fro=
-m_cs=3D<optimized out>,
-> -|     errors=3D0x7f950c35cd6c) at /usr/src/debug/mariadb/11.8.3/sql/sql_=
-string.h:53
-> -| #2  Protocol::net_store_data_cs (this=3D0x7f94fc001260, from=3D0x7f94f=
-c059f37 "Configuration downloading from portal...", length=3D40, from_cs=3D=
-<optimized out>,
-> -|     to_cs=3D<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/prot=
-ocol.cc:114
-> -| #3  0x000055b572da103f in Protocol::send_result_set_row (this=3Dthis@e=
-ntry=3D0x7f94fc001260, row_items=3Drow_items@entry=3D0x7f94fc013418)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/protocol.cc:1359
-> -| #4  0x000055b572e19442 in select_send::send_data (this=3D0x7f94fc014f7=
-8, items=3D...) at /usr/src/debug/mariadb/11.8.3/sql/sql_class.cc:3294
-> -| #5  0x000055b572ef7c69 in select_result_sink::send_data_with_check (u=
-=3D<optimized out>, sent=3D<optimized out>, this=3D<optimized out>, items=
-=3D...)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6264
-> -| #6  select_result_sink::send_data_with_check (this=3D<optimized out>, =
-items=3D..., u=3D<optimized out>, sent=3D<optimized out>)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_class.h:6254
-> -| #7  end_send (join=3D<optimized out>, join_tab=3D<optimized out>, end_=
-of_records=3D<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_sele=
-ct.cc:25629
-> -| #8  0x000055b572ec38b6 in evaluate_join_record (join=3Djoin@entry=3D0x=
-7f94fc014fa0, join_tab=3Djoin_tab@entry=3D0x7f94fc016940, error=3Derror@ent=
-ry=3D0)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24523
-> -| #9  0x000055b572edcbf2 in sub_select (join=3D0x7f94fc014fa0, join_tab=
-=3D0x7f94fc016940, end_of_records=3D<optimized out>)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:24290
-> -| #10 0x000055b572f119c6 in do_select (join=3D0x7f94fc014fa0, procedure=
-=3D<optimized out>) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:2380=
-1
-> -| #11 JOIN::exec_inner (this=3Dthis@entry=3D0x7f94fc014fa0) at /usr/src/=
-debug/mariadb/11.8.3/sql/sql_select.cc:5071
-> -| #12 0x000055b572f11d43 in JOIN::exec (this=3Dthis@entry=3D0x7f94fc014f=
-a0) at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:4859
-> -| #13 0x000055b572f0ffe6 in mysql_select (thd=3Dthd@entry=3D0x7f94fc000c=
-d8, tables=3D0x7f94fc013f38, fields=3D..., conds=3D0x0, og_num=3D0, order=
-=3D0x0, group=3D0x0, having=3D0x0,
-> -|     proc_param=3D0x0, select_options=3D551922436864, result=3D0x7f94fc=
-014f78, unit=3D0x7f94fc005038, select_lex=3D0x7f94fc013160)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:5387
-> -| #14 0x000055b572f107dd in handle_select (thd=3Dthd@entry=3D0x7f94fc000=
-cd8, lex=3Dlex@entry=3D0x7f94fc004f58, result=3Dresult@entry=3D0x7f94fc014f=
-78,
-> -|     setup_tables_done_option=3Dsetup_tables_done_option@entry=3D0) at =
-/usr/src/debug/mariadb/11.8.3/sql/sql_select.cc:633
-> -| #15 0x000055b572e77d9e in execute_sqlcom_select (thd=3Dthd@entry=3D0x7=
-f94fc000cd8, all_tables=3D0x7f94fc013f38) at /usr/src/debug/mariadb/11.8.3/=
-sql/sql_parse.cc:6190
-> -| #16 0x000055b572e877be in mysql_execute_command (thd=3Dthd@entry=3D0x7=
-f94fc000cd8, is_called_from_prepared_stmt=3Dis_called_from_prepared_stmt@en=
-try=3Dfalse)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:3975
-> -| #17 0x000055b572e88e03 in mysql_parse (thd=3D0x7f94fc000cd8, rawbuf=3D=
-<optimized out>, length=3D<optimized out>, parser_state=3D<optimized out>)
-> -|     at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:7905
-> -| #18 0x000055b572e8b2a1 in dispatch_command (command=3Dcommand@entry=3D=
-COM_QUERY, thd=3Dthd@entry=3D0x7f94fc000cd8, packet=3Dpacket@entry=3D0x7f94=
-fc0088a9 "",
-> -|     packet_length=3Dpacket_length@entry=3D152, blocking=3Dblocking@ent=
-ry=3Dtrue) at /usr/src/debug/mariadb/11.8.3/sql/sql_parse.cc:1903
-> -| #19 0x000055b572e8cf7c in do_command (thd=3Dthd@entry=3D0x7f94fc000cd8=
-, blocking=3Dblocking@entry=3Dtrue) at /usr/src/debug/mariadb/11.8.3/sql/sq=
-l_parse.cc:1416
-> -| #20 0x000055b572fcfc0d in do_handle_one_connection (connect=3D<optimiz=
-ed out>, put_in_cache=3Dtrue) at /usr/src/debug/mariadb/11.8.3/sql/sql_conn=
-ect.cc:1415
-> -| #21 0x000055b572fcffc5 in handle_one_connection (arg=3Darg@entry=3D0x5=
-5b57943cbd8) at /usr/src/debug/mariadb/11.8.3/sql/sql_connect.cc:1327
-> -| #22 0x000055b573382440 in pfs_spawn_thread (arg=3D0x55b5795eb598) at /=
-usr/src/debug/mariadb/11.8.3/storage/perfschema/pfs.cc:2198
-> -| #23 0x00007f952e8571dd in start_thread (arg=3D<optimized out>) at pthr=
-ead_create.c:448
-> -| #24 0x00007f952e8d318c in __GI___clone3 () at ../sysdeps/unix/sysv/lin=
-ux/x86_64/clone3.S:78
-> -
-> -See also:
-> -https://jira.mariadb.org/browse/MDEV-37786
-> -https://jira.mariadb.org/browse/MDEV-37148
-> -
-> -Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.com=
->
-> -Upstream-Status: Inappropriate [oe specific]
-> ----
-> - strings/ctype.c | 16 ----------------
-> - 1 file changed, 16 deletions(-)
-> -
-> -diff --git a/strings/ctype.c b/strings/ctype.c
-> -index 629514e5e9c..d7e788c693b 100644
-> ---- a/strings/ctype.c
-> -+++ b/strings/ctype.c
-> -@@ -1243,22 +1243,6 @@ my_convert(char *to, uint32 to_length, CHARSET_IN=
-FO *to_cs,
-> -
-> -   length=3D length2=3D MY_MIN(to_length, from_length);
-> -
-> --#if defined(__i386__) || defined(__x86_64__)
-> --  /*
-> --    Special loop for i386, it allows to refer to a
-> --    non-aligned memory block as UINT32, which makes
-> --    it possible to copy four bytes at once. This
-> --    gives about 10% performance improvement comparing
-> --    to byte-by-byte loop.
-> --  */
-> --  for ( ; length >=3D 4; length-=3D 4, from+=3D 4, to+=3D 4)
-> --  {
-> --    if ((*(uint32*)from) & 0x80808080)
-> --      break;
-> --    *((uint32*) to)=3D *((const uint32*) from);
-> --  }
-> --#endif /* __i386__ */
-> --
-> -   for (; ; *to++=3D *from++, length--)
-> -   {
-> -     if (!length)
-> ---
-> -2.51.0
-> -
-> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_11.4.9.bb b/meta-oe/recipe=
-s-dbs/mysql/mariadb_11.4.10.bb
-> similarity index 100%
-> rename from meta-oe/recipes-dbs/mysql/mariadb_11.4.9.bb
-> rename to meta-oe/recipes-dbs/mysql/mariadb_11.4.10.bb
-> --
-> 2.35.6
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125392): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125392
-> Mute This Topic: https://lists.openembedded.org/mt/118389744/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+The patches are required to build with detached build directory and
+cross-compiling.
+
+Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+---
+ .../conserver/conserver/conserver.service     |  58 +++++++++
+ .../conserver/conserver/run-ptest             |  21 ++++
+ .../conserver/conserver_8.3.0.bb              | 111 ++++++++++++++++++
+ 3 files changed, 190 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/conser=
+ver.service
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/run-pt=
+est
+ create mode 100644 meta-oe/recipes-connectivity/conserver/conserver_8.3.0.=
+bb
+
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver/conserver.ser=
+vice b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
+new file mode 100644
+index 0000000000..8649896487
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
+@@ -0,0 +1,58 @@
++[Unit]
++Description=3DConsole server
++Documentation=3Dman:conserver(8)
++Documentation=3Dhttps://www.conserver.com/
++After=3Dnetwork.target
++ConditionPathExists=3D/etc/conserver.cf
++
++[Service]
++Type=3Dexec
++ExecStart=3D/usr/sbin/conserver -C /etc/conserver.cf
++ExecReload=3D+kill -HUP $MAINPID
++User=3Dconserver
++# /run/conserver for Unix domain socket
++RuntimeDirectory=3Dconserver
++
++CapabilityBoundingSet=3D
++
++LockPersonality=3Dtrue
++MemoryDenyWriteExecute=3Dtrue
++NoNewPrivileges=3Dtrue
++
++# No access to /dev/...
++PrivateDevices=3Dtrue
++PrivateTmp=3Dtrue
++ProtectClock=3Dtrue
++ProtectControlGroups=3Dtrue
++ProtectHostname=3Dtrue
++ProtectKernelLogs=3Dtrue
++ProtectKernelModules=3Dtrue
++ProtectKernelTunables=3Dtrue
++
++# strict: mounts the whole system read-only
++# full: mount only /var as read-write
++# true: mount /var and /etc as read-write
++ProtectSystem=3Dfull
++# Make some paths writable
++#ReadWritePaths=3D/=E2=80=A6
++ProtectHome=3Dtrue
++
++# Make sure that the process can only see PIDs and process details of itse=
+lf,
++# and the second option disables seeing details of things like system load=
+ and
++# I/O etc
++ProtectProc=3Dinvisible
++ProcSubset=3Dpid
++
++RemoveIPC=3Dtrue
++RestrictAddressFamilies=3DAF_UNIX AF_INET AF_INET6
++RestrictNamespaces=3Dtrue
++RestrictRealtime=3Dtrue
++RestrictSUIDSGID=3Dtrue
++
++SystemCallArchitectures=3Dnative
++SystemCallFilter=3D@system-service
++SystemCallFilter=3D~@privileged @resources @obsolete
++
++
++[Install]
++WantedBy=3Dmulti-user.target
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver/run-ptest b/m=
+eta-oe/recipes-connectivity/conserver/conserver/run-ptest
+new file mode 100644
+index 0000000000..51eb0ffbcf
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver/run-ptest
+@@ -0,0 +1,21 @@
++#!/bin/sh
++
++set -e -u -C
++
++cd test
++
++./dotest |sed \
++    -e 's,^executing test \(#[0-9]*\)...succeeded$,PASS: conserver \1,' \
++    -e 's,^executing test \(#[0-9]*\)...failed\(.*\)$,FAIL: conserver \1 \=
+2,'
++
++for i in test*.diff conserver.log shell.log shell2.log
++do
++    test "$i" !=3D 'test*.diff' || exit 0
++    test -e "$i" || continue
++
++    echo "----[ $i ]--------------------"
++    cat "$i"
++    echo "------------------------------------"
++done
++
++exit 1
+diff --git a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb b/me=
+ta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+new file mode 100644
+index 0000000000..c32d6f9646
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
+@@ -0,0 +1,111 @@
++SUMMARY =3D "Manages connections of multiple users to a serial console or =
+TCP/unix sockets"
++DESCRIPTION =3D "\
++    Conserver allows multiple users to watch a serial console at the same =
+\
++    time. It can log the data, allows users to take write-access of a cons=
+ole \
++    (one at a time), and has a variety of bells and whistles to accentuate=
+ \
++    that basic functionality. The idea is that conserver will log all your=
+ \
++    serial traffic so you can go back and review why something crashed, lo=
+ok \
++    at changes (if done on the console), or tie the console logs into a \
++    monitoring system (just watch the logfiles it creates). \
++"
++HOMEPAGE =3D "https://www.conserver.com/"
++BUGTRACKER =3D "https://github.com/bstansell/conserver/issues"
++SECTION =3D "console/network"
++
++LICENSE =3D "BSD-3-Clause"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db28513e7b696027d3d2b8dbf117f9fe=
+5"
++
++DEPENDS =3D "libxcrypt"
++
++inherit autotools ptest systemd useradd
++
++SRC_URI =3D "\
++    git://github.com/bstansell/conserver;protocol=3Dhttps;branch=3Dmaster;=
+tag=3Dv${PV} \
++    file://conserver.service \
++    file://run-ptest \
++"
++SRCREV =3D "fe9aac337554f95721dc9f3da721092a81092089"
++
++# In 8.3.0, conserver fails to build with uds and ipv6
++# https://github.com/bstansell/conserver/issues/112
++PACKAGECONFIG ?=3D "\
++    openssl \
++    ${@bb.utils.contains_any('DISTRO_FEATURES', 'ipv4 ipv6', '', 'uds trus=
+t-uds-cred', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
++"
++
++# Trust reverse DNS information
++PACKAGECONFIG[trustrevdns] =3D "--with-trustrevdns,--without-trustrevdns"
++# Produce extended messages
++PACKAGECONFIG[extmsgs] =3D "--with-extmsgs,--without-extmsgs"
++# Use Unix domain sockets for client/server communication [/tmp/conserver]
++PACKAGECONFIG[uds] =3D "--with-uds=3D/run/${PN},--without-uds"
++# Trust UDS credentials obtained via socket
++PACKAGECONFIG[trust-uds-cred] =3D "--with-trust-uds-cred,--without-trust-u=
+ds-cred"
++# Compile in libwrap (tcp_wrappers) support
++PACKAGECONFIG[libwrap] =3D "--with-libwrap,--without-libwrap,tcp-wrappers"
++# Compile in OpenSSL support
++PACKAGECONFIG[openssl] =3D "--with-openssl,--without-openssl,openssl"
++# Require server SSL certificate by client
++PACKAGECONFIG[req-server-cert] =3D "--with-req-server-cert,--without-req-s=
+erver-cert"
++# Compile in GSS-API support
++PACKAGECONFIG[gssapi] =3D "--with-gssapi,--without-gssapi,krb5"
++# retry username without @REALM with gss-api authentication
++PACKAGECONFIG[striprealm] =3D "--with-striprealm,--without-striprealm"
++# Compile in FreeIPMI support
++PACKAGECONFIG[freeipmi] =3D "--with-freeipmi,--without-freeipmi,freeipmi"
++# Compile in dmalloc support
++PACKAGECONFIG[dmalloc] =3D "--with-dmalloc,--without-dmalloc,dmalloc"
++# Enable PAM support
++PACKAGECONFIG[pam] =3D "--with-pam,--without-pam,libpam"
++# (experimental) Use IPv6 for client/server communication
++PACKAGECONFIG[ipv6] =3D "--with-ipv6,--without-ipv6"
++
++EXTRA_OECONF +=3D "\
++    INSTALL_PROGRAM=3D'install --strip-program=3Dtrue' \
++    --with-pidfile=3D/run/conserver/conserver.pid \
++    --without-rpath \
++"
++
++PACKAGE_BEFORE_PN +=3D "${PN}-client"
++SUMMARY:${PN}-client =3D "Client to connect to conserver"
++FILES:${PN}-client +=3D "${bindir}/console"
++
++PACKAGE_BEFORE_PN +=3D "${PN}-convert"
++SUMMARY:${PN}-convert =3D "Converter for old config files of conserver"
++FILES:${PN}-convert +=3D "${libdir}/${PN}"
++
++# tests fail with ash
++RDEPENDS:${PN}-ptest +=3D "bash"
++
++SYSTEMD_SERVICE:${PN} =3D "${PN}.service"
++
++USERADD_PACKAGES =3D "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)} \
++"
++USERADD_PARAM:${PN} =3D "\
++    -M -d /invalid -r -U -s ${sbindir}/nologin conserver; \
++"
++
++do_install:append() {
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',=
+ d)}
++    then
++        rm ${D}${datadir}/examples/${PN}/conserver.rc
++
++        install -m 644 -D -t ${D}/${systemd_unitdir}/system ${UNPACKDIR}/c=
+onserver.service
++    else
++        install -d ${D}${sysconfdir}/init.d
++        mv ${D}${datadir}/examples/${PN}/conserver.rc ${D}${sysconfdir}/in=
+it.d/${PN}
++    fi
++
++    install -d ${D}${datadir}/doc/${PN}/examples
++    mv ${D}${datadir}/examples/${PN}/* ${D}${datadir}/doc/${PN}/examples
++    rmdir ${D}${datadir}/examples/${PN} ${D}${datadir}/examples
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/conserver ${D}${PTEST_PATH}/console
++    ln -s ${sbindir}/conserver ${D}${PTEST_PATH}/conserver
++    ln -s ${bindir}/console ${D}${PTEST_PATH}/console
++    cp -a ${S}/test ${D}${PTEST_PATH}
++}
+--=20
+2.53.0
+
 
