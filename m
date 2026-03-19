@@ -1,160 +1,140 @@
-Return-Path: <mark.jonas@de.bosch.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF0121075270
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 17:10:03 +0000 (UTC)
-Received: from AM0PR83CU005.outbound.protection.outlook.com (AM0PR83CU005.outbound.protection.outlook.com [52.101.69.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1297.1773940198872045899
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4BD7109025E
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 17:14:43 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1396.1773940482117708836
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 10:09:59 -0700
+ Thu, 19 Mar 2026 10:14:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=AIjiVqsP;
- spf=pass (domain: de.bosch.com, ip: 52.101.69.51, mailfrom: mark.jonas@de.bosch.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YP3PlWA4UIshCVUGKy/ugdSm48ztzAe5p/taur9GbsHGMnVDN4R1+muMZvwdObzFM8QVJHFUjIiDUDfGWjT4c8BV9tfs1XIZozzzMLthN4caru4hlyxHwG5u2PbxMOypVaXs6TLI19OSSF7g0RmHMFt6ezFN68pByhYAlquzwO9iMsyj9Dty/AAsv6418uByC6jY1qOrgSzHFi+f2ZKQ/iSMpwiDWWnDUyr2EzmasCNdQT8qm4ijRjmdG5kpjKyQqN8ZRV1oCCErhna1onHksyYHMoG+phf6u48Z0BoXDxEIh4TKeKnTPtKfLMjFV5Kof6+IRrU78+VbqEEwI5ja3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cYke+TuAQLMCZPGr+4OeklPJj5yuwWfQHif4lryzC2I=;
- b=UGBrd5wsTaZJI8ghiE5ejEoYiEaWOoZ1i85YoHxpj2/+n5+/qAqPJgKx2jYxSNBFx5wfpDPx2nU/a4/6dqmlOOOkPZQknNQA29YsAGLX3wejdhzzs0cx9SGU0+vJRW9o1iLTqcZ/L1YsEX3QbaJikHJmjkB5J+1bjaorJ8+EFRdgEp+2EgfWxjTdk9f3s9XwKd33rV40ePitioxehXkqV/cMf9AjcqV+VsKPnpYshX8DOAHakZ6fOwhbHcOEGEIbPZvePIe98RFXUG4MJrgZbKPngI9d+wHg6Yvam23HDFqONBYnn+f2n4iFpwjR/e6OIk1/mCTK8+h8GQqDo4iRzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.205) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
- header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cYke+TuAQLMCZPGr+4OeklPJj5yuwWfQHif4lryzC2I=;
- b=AIjiVqsP2H90UR3I+qywNiFiycA0kY/eDUUNsuCc+okJ1D+bBP9zuPVrGzdJJWsPTKHCwja3XmqebAF8i1wPZ7/SRRYIWnynb69tSiW4IEkpLGaRgP2oqjpNcbzIwcVLCVO6kKtMKyo05bX32Po0BO5k9yHH/YJuaY3PAzM7DElMb1hO0PXWFacA8rQDi7acYbn63ud1tZ3zxhoE0zyQ29qkwaPyOXuMUVe1+jpd2wfGcrl4OTvZHxcpzURg5OvKchXUoSYX43SptXbeAySLukLyPj4VFFlt5bcp8lc7AuHxcUlXOLU8BOeLe9TGItHkv1+ejXoZWW8flRTUHkzWbQ==
-Received: from AM9P195CA0019.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:21f::24)
- by DU0PR10MB5631.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:319::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
- 2026 17:09:53 +0000
-Received: from AMS1EPF00000040.eurprd04.prod.outlook.com
- (2603:10a6:20b:21f:cafe::b9) by AM9P195CA0019.outlook.office365.com
- (2603:10a6:20b:21f::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.19 via Frontend Transport; Thu,
- 19 Mar 2026 17:09:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.205)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.205 as permitted sender) receiver=protection.outlook.com;
- client-ip=139.15.153.205; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.205) by
- AMS1EPF00000040.mail.protection.outlook.com (10.167.16.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9723.19 via Frontend Transport; Thu, 19 Mar 2026 17:09:53 +0000
-Received: from RNGMBX3003.de.bosch.com (10.124.11.208) by eop.bosch-org.com
- (139.15.153.205) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 19 Mar
- 2026 18:09:50 +0100
-Received: from GRB-C-0009M.ot.de.bosch.com (10.22.70.204) by
- smtp.app.bosch.com (10.124.11.208) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.37; Thu, 19 Mar 2026 18:09:50 +0100
-From: <mark.jonas@de.bosch.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Khem Raj <raj.khem@gmail.com>, <mark.jonas@de.bosch.com>,
-	<ricardo.simoes@pt.bosch.com>
-Subject: [meta-networking][PATCH 1/2] phytool: Refactor recipe
-Date: Thu, 19 Mar 2026 18:09:02 +0100
-Message-ID: <20260319170903.1447-2-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260319170903.1447-1-mark.jonas@de.bosch.com>
-References: <20260319170903.1447-1-mark.jonas@de.bosch.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GifCI73A;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-486fe36cfabso1268115e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 10:14:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773940480; x=1774545280; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ihP/RwKBEKgO3JlnPPlltEmaNvxdTXywkHLryCtltq8=;
+        b=GifCI73AwD7uXxjpeRT5Wm9OymPs7GfUzB9BTB+2HmqZPRqiysz9BmNPMOAjqIy7j9
+         I0ge9CMsPn0nFqoNxaTAYkwWbFXEQJ78GNbsBe6e6XfyGr9+Ccb9sHYDIVT0mqq6dVLW
+         d/vvpquVQpX5+n5+ahNFJnfcPkk/LL47BrRYIUlsJu1puntF9LG00P7Gpb410Lxnb/Cm
+         77+3I9puEtQwdAGb8ttJA6XlUc0wrQNuiPLqEZe20L4umx9USgJBKXJsBYA2fXdVvX/+
+         i9Lwmgguqg52f0458q4CurqlTV8eln5Ka/iU2azrLUSt74ToQriILI5ad2KULBXNi3Yt
+         uAmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773940480; x=1774545280;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ihP/RwKBEKgO3JlnPPlltEmaNvxdTXywkHLryCtltq8=;
+        b=aL94ZYl40UM2oJYknXUhsS34BnFarkfEYJx6tEHP7rO/9DUvxYAK0jUjz+P7n80mDa
+         pEnmJIHP9OT2bXm/+PZgZUzU5kzGu2KPWfZSgO+wCqQiWsStMVS4v9qotkV/5Mav56dz
+         D5sKCpA61do/GXMIHyCAc00T3M4g76FHXgRgNbC/dEfMkFwTvncU8hBUxzbu12pGLEEq
+         wgbH3RLPyb0U0r7ynQeVOm2zUFTQ2PLAY67+GjtZjgKdu6iC4CvBa9qJlf2cEB9N4mmw
+         YSGv8K/PMQpBw1UQEUdlrYePotZ43nOiKtBb2IqDgr2xNUvcKaXkuRJwHZKboTmOYVqQ
+         7bEw==
+X-Gm-Message-State: AOJu0YzfioJIWvjF+2YoIs9Tz/IZYjLT0gvTSeAyW26g0Wk3kkDlbBO1
+	uF/TT8APklreOUsbmp/eEIRelJ4Sq0peNfgmSAcwoWAGLeSD5ZlOmNFL
+X-Gm-Gg: ATEYQzwFCxN/S9XHRWe9Eecj8FrQDLK8md0AedSa1SuRaxoaaAVR5daK4Ut6ccTNrNS
+	CBcXs18wCuPyN+lRGbOUnFenGhGPNhZIPFl5T6OtAfaM2H4mmLwbAFpOEA05YthlLNXkWtZfRTP
+	PUKE1+NfnEExqdepRFgiksSyT8fW+Lqzft8xVNYgcVFPZDPSXrV4wDTYd9l49t1WrR075ceKtME
+	9nqSbTwyo5CmhHpquq7BBJlfGyuy66FH13FGECG5fgkvOa5Ld8L0Kc2d8EiHZNGF/PJp8Gqj3v/
+	LH+baWZ+ks9MVRF5iqZtYHgsdtYAQ+1DZfcAXdrXUhTMjDeC0I/I67fZpL8GgWHfEZ2iCn7c1I5
+	cnsq51pRA+LbtMbfCL8tgIK329ikdFMmMGHEQQddlDZKXs07alO+jYmWiAyio7ldVuFKIm1vxO4
+	hdofhPWkQyFagfJ0v0zcyXlTfJhJULzNg=
+X-Received: by 2002:a05:600c:2d94:b0:47e:e59c:67c5 with SMTP id 5b1f17b1804b1-486fe8c5883mr1210725e9.8.1773940480212;
+        Thu, 19 Mar 2026 10:14:40 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486f4bbfb2csm63517905e9.30.2026.03.19.10.14.39
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Mar 2026 10:14:39 -0700 (PDT)
+Message-ID: <6e6738a7-086c-42e6-bb45-48adfb389212@gmail.com>
+Date: Thu, 19 Mar 2026 18:14:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.22.70.204]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000040:EE_|DU0PR10MB5631:EE_
-X-MS-Office365-Filtering-Correlation-Id: a58e6869-71e7-4dd6-1b36-08de85da5690
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|82310400026|36860700016|376014|1800799024|56012099003|18002099003|22082099003|13003099007;
-X-Microsoft-Antispam-Message-Info: 
-	l9rQAvw4hI/6VGoFZeYrqL7iO98tVK9YuVrO4WFgd0ynBxPYKHtHpFFvAUltsJXDDG7mJzmkaCzoBF9I9XMgjpcMfkqI2vj2suTrfc/BTVlb+fbma0iLrfZyUVCR04cnyp1dygPfWJMWSUM2rYHzJM8KU7m7j4nRdRY8vrFkxv9SALhISovpZz2nkM70gTVOR0KUQwFrZYSUb1Mv2u6OyVERLuDxO/Ld7SacbIQdj5WbmwP1+15ZZMIgcsBl0ipYBwGSWHTqooRsorXW1GLwd4riAG76jUvvOOuPVzNf8iiSJ9oE4N9ZR0LWmMI7sCAwqe9Qv4+/5hHyHXM9zj703Kqi2nrYXcrHy4DuGy7att4Rl2Qa4yFbwOMEDPQcY4Zit99Ib2vi0mH9Bxich6128OWDRDQi39o/7xNLfEPCK4ZlrSYf2LANwlSpWLO1lk0pnL2S4lNA103YHqEwSel4nyLHjwaFPB2UFRqPRbNdrDTlz6BXFO3zYXhTc5ni3wUnYlgO9TUbONz4XsHtz/xuFxFTyI/83JKxFBa8OpoVNnThsJGEtHkKFffB4oeI47HlTuHi0aOiw4LpM1CJYpzlj5K++W+46jBkPGbWnkLiaiMNMegxe9aMKFEKgYHNPlIKvTIkSJERA9GMUBl/amE7Sc3p/pFrj8a+IxsAB2XTETP6mVOPgD0Wnn7TNJZecuzQDewqXLEAKMsLsship7rP11BpQrah4ZhMGX2teRU+KP4=
-X-Forefront-Antispam-Report: 
-	CIP:139.15.153.205;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099003)(18002099003)(22082099003)(13003099007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	n/XDShbiQGaObSdjdQwGhgdVvkQCnIBuf0E/8c7yrLDeCT9u7wZBXVmeRRcAdUgqAvzRyajth5e5iQ9VfPzKQVZpQ4LzOWj7ABnqELaXmfux1YwkZUuYjJ80ZL8pxJSlA7fA4vQGgYg3gbPju2UfsJpOqdfcga5bsVDpnXZ5cLRhL85lMBAcvnTi9QgnMu5NWkCWiNEoqyNmtCRulAzBaCV34+nengm16DqMkWgwav2zM9zq0pKcU5DKBI5FvVQsWiEpkfXe0ztL0i6r7Z6NgnXqbORiqwel/TxNe6Tcw7UjrLlIeAdwf5mF2LOG1zHSlp34xGE9OQWOeILQbzSdvi6HcnU0g3xDjsi7hxELv6xjlxu2w8FtIk/t4jSX7nFLle7WVmy2yHPhgOxAId8bVpMkGIoTBNxQeYTu0YVQsZqrV6G/2HdKE2bE5uAmTqs/
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 17:09:53.4025
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a58e6869-71e7-4dd6-1b36-08de85da5690
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.205];Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AMS1EPF00000040.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5631
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][PATCH] sysdig: upgrade 0.28.0 -> 0.39.0
+To: liuyd.fnst@fujitsu.com, Khem Raj <raj.khem@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20260313032649.4383-1-liuyd.fnst@fujitsu.com>
+ <CAMKF1spaPcV+r8EMNrwiJCWhB9-YbG2c6=Vdsztw2vR9-oLLTw@mail.gmail.com>
+ <OS7PR01MB144441C4000FF5BABC2824D779B4FA@OS7PR01MB14444.jpnprd01.prod.outlook.com>
+ <189E42746E482DF9.1764087@lists.openembedded.org>
+ <189E46D8B9992270.2964266@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <189E46D8B9992270.2964266@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 17:10:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125409
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 17:14:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125410
 
-From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+On 3/19/26 16:13, Gyorgy Sarvari via lists.openembedded.org wrote:
+> On 3/19/26 14:52, Gyorgy Sarvari via lists.openembedded.org wrote:
+>> On 3/19/26 07:54, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
+>>> Hi Khem
+>>>    There is no build fail on my environment.
+>>>    I use the default local.conf with target qemux86-64, and oe-core,
+>>> meta-oe is the latest commit.
+>>> Build Configuration:
+>>> BB_VERSION           = "2.16.0"
+>>> BUILD_SYS            = "x86_64-linux"
+>>> NATIVELSBSTRING      = "universal"
+>>> TARGET_SYS           = "x86_64-poky-linux"
+>>> MACHINE              = "qemux86-64"
+>>> SDKMACHINE           = "x86_64"
+>>> DISTRO               = "poky"
+>>> DISTRO_VERSION       =
+>>> "5.3.99+snapshot-71c5fd2bbdeb00b4200b3b94627ce43500b6b081"
+>>> TUNE_FEATURES        = "m64 x86-64-v3"
+>>> meta                 = "master:71c5fd2bbdeb00b4200b3b94627ce43500b6b081"
+>>> meta-poky
+>>> meta-yocto-bsp       = "master:31e68c7cf6a3686bedbcbdd99056bbd23dda2551"
+>>> meta-oe
+>>> meta-filesystems
+>>> meta-networking
+>>> meta-python
+>>> meta-webserver
+>>> meta-perl
+>>> meta-gnome
+>>> meta-multimedia      = "master:f8936cc03a5d69ea3ea2788309f06903da5eecdd" 
+>>>
+>>>    So I want to ensure the difference from AB environment to check the
+>>> issue further.
+>>>
+>>
+>> Something doesn't look right with this recipe/application, it seems to
+>> break out of the sandbox(?)
+>>
+>> I can build it successfully too, without a problem, but look at these
+>> do_config logs[1] - it not only tries to download things from the
+>> internet, it even succeeds?!
+>> The recipe doesn't have network enabled.
+>>
+>> [1]:
+>> https://gist.github.com/OldManYellsAtCloud/511fdbe5a9c185d98f7e4419b0997d2f
+>>
+>>
+> Huhhh... this looks something else. I can access the network in all
+> steps (and all recipes) when I run it in my usual Docker image (fairly
+> vanilla Debian12 with Python 3.11, that comes with Debian).
+> 
+> If I run it outside of docker (reasonably up to date EndeavourOS, Python
+> 3.14), it fails with network error as expected.
+> 
+> What setup do you use?
+> 
 
-This commit fixes a few issues with the phytool recipe:
-- Missing "_git" suffix in the recipe name, as required by [1];
-- Missing description, homepage, and bugtracker metadata [2]';
-- Missing section metadata, which is improved package management [3];
-- As defined by [4], the SRCREV should be defined after the SRC_URI.
-
-[1] https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html=
-#recipe-naming-conventions
-[2] https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html=
-#required-variables
-[3] https://docs.yoctoproject.org/ref-manual/variables.html#term-SECTION
-[4] https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html=
-#recipe-ordering
-
-Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
----
- .../phytool/{phytool.bb =3D> phytool_git.bb}                | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/phytool/{phytool.bb =3D> phytool_gi=
-t.bb} (71%)
-
-diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-netw=
-orking/recipes-support/phytool/phytool_git.bb
-similarity index 71%
-rename from meta-networking/recipes-support/phytool/phytool.bb
-rename to meta-networking/recipes-support/phytool/phytool_git.bb
-index 6471f46c28..8a141358e7 100644
---- a/meta-networking/recipes-support/phytool/phytool.bb
-+++ b/meta-networking/recipes-support/phytool/phytool_git.bb
-@@ -1,11 +1,15 @@
- SUMMARY =3D "PHY interface tool for Linux"
-+DESCRIPTION =3D "A tool to read and write PHY registers on Linux."
-+HOMEPAGE =3D "https://github.com/wkz/phytool"
-+BUGTRACKER =3D "https://github.com/wkz/phytool/issues"
-+SECTION =3D "console/network"
-+
- LICENSE =3D "GPL-2.0-only"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D39bba7d2cf0ba1036f2a6e2be52fe3f=
-0"
-=20
- PV =3D "2+git"
--SRCREV =3D "8882328c08ba2efb13c049812098f1d0cb8adf0c"
- SRC_URI =3D "git://github.com/wkz/phytool.git;branch=3Dmaster;protocol=3Dh=
-ttps"
--
-+SRCREV =3D "8882328c08ba2efb13c049812098f1d0cb8adf0c"
-=20
- # The Makefile has "$PREFIX/bin" hardcoded into it, hence not using $bindi=
-r here
- do_install() {
---=20
-2.34.1
-
+I had some time to look a bit more - please ignore my last email. Most
+probably network-disabling never worked in my Docker image, it requires
+some extra permissions which is not always present. Possibly your system
+has the same?
 
