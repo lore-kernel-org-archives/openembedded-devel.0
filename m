@@ -1,380 +1,534 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D6F61088E60
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 12:31:20 +0000 (UTC)
-Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.82])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9984.1773923473715245075
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D70E8109022B
+	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 13:53:00 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11511.1773928370491083446
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 05:31:16 -0700
+ Thu, 19 Mar 2026 06:52:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=vKz6p0iz;
- spf=pass (domain: navimatix.de, ip: 40.107.130.82, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lSLwyeybuvx2vq9wDPjDHWSCCq0EOEL7uOQwKu6qg0u78LqcghjiZ8L5J12EwaIG1ybxfqoS2TpiXXbNqpBeC7m55it2ljzr1XRTt4kJKHh8d4um58mIBYoJOCqH02nRe0sZVG9Pzo92W2wcLtqj+qL4Xsx50kDpURIcHdnU0uTvp4S0M3PnUbzc1uUADTxAmJJl+4SSBmJh+W5lUx0hMEPCAeRqowoPMRfAlcqHhnZumD2t1WGyXYC7cEWNB02P5c4h1+/sdQogR2J59AoBsJA3dHCcUyYLE/Vvxn7aVyEjTbrPNntrAVFV2ebkdoTXfFbOT2Q42YVHTw50I7r+gA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9wmdE0VPAyHoiX3vL2WRX2sB/Qc40UOV44AQ7vn1gZo=;
- b=HsgLfTUOxHPY0/ftJ+aIyiS3EFZellqriZVtwEobUxZa2A4k6Sm3gfNOoWtMl2K1DY0CDp6UPgH8Xa0EXRWauafDR48sZUGN+qMff8IIWkHYSw6FRoQr3kEnsZ3BduKttE1uX5QcC7gSx8QrUv81dgbqGcAy8xnKpmq7cfGLBUc7oYRztmyTLL3EE8b8d/XhN1BFf82itYTHVQsZdkxLVWFY+S96lQLbDebMrBEJetmBvgLACiqSAKY+8gdhdz6upRxN8fvVLfDoJq5eLCVEdNFqRsZ0sWcHu+h2kuwQepu58Yzi0sqSVEBNnVIoKWIqcqBFwsEbZcdvj7VsfCVkaQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9wmdE0VPAyHoiX3vL2WRX2sB/Qc40UOV44AQ7vn1gZo=;
- b=vKz6p0iz65TQMTzg/dlrU8ydXr8EgK+gOHpFqvOHfnXRCw+2IZ9Yw1pN1CgZLBEeooANTCA3X+AkO4eaQTqdGEnz1WFBC97ICmKxf8sPHGI+PFXThvCJoMnjPxro14R75P3Jk36OxrqfKk8CJtkDftD3+j3i5joSoFk32/MaZ4g=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by AS1PR01MB10199.eurprd01.prod.exchangelabs.com
- (2603:10a6:20b:47b::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.19; Thu, 19 Mar
- 2026 12:31:07 +0000
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- ([fe80::d5c3:2dea:3d98:25fd]) by
- GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.20.9723.018; Thu, 19 Mar 2026 12:31:07 +0000
-Date: Thu, 19 Mar 2026 13:31:06 +0100
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH v2] conserver: Add recipe for remote console server
-Message-ID: <cf39e1469eeb21555c2da569da8183c3753cfc91.1773923465.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.53.0
-References: <2f6d1b8f-43e2-4fa4-ba2d-ef3fb77583a3@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <2f6d1b8f-43e2-4fa4-ba2d-ef3fb77583a3@gmail.com>
-X-ClientProxiedBy: BE1P281CA0088.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:78::6) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Unstl6G6;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: skandigraun@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-38bd15d82bdso7328851fa.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 06:52:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1773928369; x=1774533169; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=uJ0oF++EwkxkIhmfHVuDNWloM4a7v9YcOPSgYWWgoVA=;
+        b=Unstl6G6/jHRtq1w4rDFoswW28WYLSPWw4+DBMWEK+zPsM2htiuO1VG+ZIDUE0cdze
+         +piL0yrQEoOtb5QRS6Kamj9VRrgOca/fcuqUPz0h38+YqOSXEPJlc8IjKlxIYrKrpSaW
+         EjOyj4rb9i/Ja4+4BkMI0YVBALv85CsS79BAi33mU35A5W0Kd7XkHJmfa/aAelCtUGdR
+         GrNZGC6WQJoZd6I5PeApKWaKVNMhSns9yGWl8hV+NVirl7CN4cFraqJ1Ko6X0LxzHwuw
+         2biCzwrp5LbwrDOnOYu4VZsoUUjxQHQNwV2+Mhxu2cNPK6I7YGJp2U4jxP/gw8Lj4GDz
+         5eRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1773928369; x=1774533169;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uJ0oF++EwkxkIhmfHVuDNWloM4a7v9YcOPSgYWWgoVA=;
+        b=mpmeZzG7VnR3vFkl78tpcIFZvJJ9ddgVc2K+TVWXsYCSia7MYxpgt5TS665/WR9nOr
+         2qwNJ9O1pkTR4t6qctQLUoXyK/d/tbMV9q9Qm9Sbmevsvl7Ptbb1E7fbjqPThT4nFbzj
+         RnI8a5arfaVna1eYvl3nXYHUlMMuXi4Tz9ECmhD5P5ro4UKK35C1CtZTyFwb3UZDtc4U
+         Klaeku9s5vMDvtdSL6g/BoObQFNoPQ49RKUPm3WZ3E5rrBXOB/yQl+cPTovXAVj48im7
+         3riefT9H5jfRuFBiZQ2cOn+6VrgLxri9tRlNBFggk6Nj9HtFXZkOtXmQfjrNUtS+iWvB
+         GVLw==
+X-Gm-Message-State: AOJu0Yy/7LzUTSQOo+0iGTk/OH14cdsOwyS95hBHY3U3anzK/FmxGUOu
+	iEluEPLN/DYNc9/bJoF2L4/6Q07Iz1TtOT9xCMM0X8Ew/l/YyIkjFkUj
+X-Gm-Gg: ATEYQzxQNx3lRag4RZVCoHmY+JKjAMTuwd7vy6oNBoD9yEzZoFRX+0pOx0UNUi7jzy0
+	KhH5+cRGXsZD+UePOExBSVxOJieXVlK50KVM1V/RebNd3jXeyukaFwUPeEY4H/h9LBbgFfk52cz
+	Cri00zYLYQ5SU3Z5l//x51w0lD0esmpQwVm7QrspnEg+000gdWEP2NMktrZ0eSlP22Vcl63Gm3V
+	IOoCqVdyCxONtTXW92mIIr2j8FWC9+4kVN08uF2qp6lykap4DyNQgCZavo/eQQdqSssNTE30zPe
+	JqimEVWikvelSlOzNyHFlJFSMozlOsH4W8gf91tOeGFq8ElmR8i9oZL35zUM+xX+4apEO5YXBn/
+	i8znwew7W18pipAwt0qTRxuYDmWgfalX1h+rLv2PKS1Enk2+JNwIV5lyGiuK21Vl1OriZ7PLPBI
+	85ScTg6+64DP08Gk4Q2FhLBpZucJgzWZ8=
+X-Received: by 2002:a2e:bc08:0:b0:38b:dae9:87ee with SMTP id 38308e7fff4ca-38bdae98945mr25303661fa.36.1773928367991;
+        Thu, 19 Mar 2026 06:52:47 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-38bd54bc645sm11498311fa.30.2026.03.19.06.52.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Mar 2026 06:52:47 -0700 (PDT)
+Message-ID: <6469a907-d93c-45ca-afb6-f0ed3220775c@gmail.com>
+Date: Thu, 19 Mar 2026 14:52:46 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|AS1PR01MB10199:EE_
-X-MS-Office365-Filtering-Correlation-Id: 734ede10-7145-4842-adfd-08de85b3652c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|376014|366016|13003099007|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	VooWas4Vg9guyIOdtoArUkEEayVC5J3L+W+1Y7v3bh1ybMSSrSm2F13EJ7RY34vWgt56yIipd7fGW07cKU7cnS6g5X6ttQit8dl2BeEmaSmpp7f1uLnXTCM+06r/410fB9X4cin8HLKKaA9HCvCf7sPXBjrsM37fXFVLbChMsttyVgJfMmKNhifNmXnCzZ52wfoN5iMtpGWGReQSwxDI8d3gwGZp3Y/Vuro1wJevbWxYopRJqC8niQWKerbddqozAVD6yvpt9lXqiAr2QKKPSkEF3tQuOnff+sY6BKKQ+KaN8HCABO67LLvXNxhcdNeV4rGQaPsmGWoSMILcBBdNxHXh4ISzH+eJo4pZXe/d1FlE6I1UsDv58+wydHfVAE6B9PzTmXGhucm+pbuCeR9/j6b/lWUhwUpbl7oiXCew8Ij+YiOuCKNC+LSekuET+Lm91B8xpOp4LtKDWq2Mh4WSEebkYxS/FaeavkcKVVa9at7oLVgCz8taOAtPNoNjWq+x27e2gmuA2RiQ3St54R0rxLJ1AX+Kf+ueQogl1zUzQ5/g6pVRMCv6BWYtxVHUyXC6Vs2fqrTC+IBpIQFwIXL4mH+v63gmv7bvrsxo7X3QX1fcVHR93C8x5rWNqAOs1E+XOxph6+9guW9QZlgkeMbPpP+SazIDvzj0JeOdHGEyr2QzmaQpoizve14e4/uq7WIs
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(13003099007)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?sHb2gTbSmf4lcIw394d1HcAGGWMk9S3exz7qxsXRmBkZAHEVnEB2RjWssgIB?=
- =?us-ascii?Q?llG1Nhkxlfd5z/y8KZGCqaHVSWT9kZPgK4734Q41WIFkhP5kGDc9KzTJsuZe?=
- =?us-ascii?Q?hlEkmtAoKUnPzVtpIHfCGzMD+Ykp6R1hyyrGgXmJKRVq3tEgsbpEx0JomMnT?=
- =?us-ascii?Q?Y9JB2AJVa6wnTSeEkRb2glV/hxp6jJnYPsKNNxA81HpH3YIAtF30FX2GDYup?=
- =?us-ascii?Q?mUky0nZDpuCpM/GL4KbdO2Mtl58EUwnbUOCYI+v7n1ksiB06x6n6umwl1fC5?=
- =?us-ascii?Q?tca8STXQSjaUhwoVUqWm8ZwK1sFAzDqhosJvd7afxKRBOMU/w8wAlE5J1qPh?=
- =?us-ascii?Q?8pFpyrLOM2n8jvuiz5h6VHUqldrxW4JH4ocLroQttY4I2lY6JL5GNzsfjNmK?=
- =?us-ascii?Q?hicCOwEl/jFPsW9hZZFXLZrac+iOCP5pAAMNcI7p98dtVT/V7vmA/Se2Sojh?=
- =?us-ascii?Q?O+A39XsQ2hdBWdsIHB822YESs2sLb6nXy2cbz48YMOG98EFeB11bslocD4tT?=
- =?us-ascii?Q?dkHkotciXYb/7jhBU1IxtFx0TE47v7C4Z/zZXIr7iVn/xEiFJSrjU0SuNv1l?=
- =?us-ascii?Q?tGVNHlBoBMrGMDtvEaD2FQNuuTx4vU3U2rinw4oKPYRLJcFqo9TZns+b6kCR?=
- =?us-ascii?Q?GQgyRb7bSIqfG6eJOTDoxmftgXiin30xZsM6ehjOYek73UXzarZN00H1/kfP?=
- =?us-ascii?Q?STrEtPurg05lMoRweSiI73fhimYsrR3EPSS9u+e97AEp78x/eMRAOcIsgVAi?=
- =?us-ascii?Q?d8J+4MNkGoz13UKckoZZbp8TpCgFQrXXRmqzgmdM1zoQYqdRAjjqMdeadJoA?=
- =?us-ascii?Q?M+SaA29pTfo8KMDaCGFXB+uwrm8YRdxOJpFX5xyYD2GNNDYhbYx/TtQiNxWZ?=
- =?us-ascii?Q?eAY7cGfl9WBNy2WDoWn7BhA/LTGjmv/HSbWCpYzjPWMljdggvzMaBu497gL3?=
- =?us-ascii?Q?sfCe8r12YJBas4qOhRaOL1+bJ/IVrp0/oRAHm0k7gF5Upy25fTjKrKvr4soP?=
- =?us-ascii?Q?zUNoLpOiDQe8v2Md7rylK1VfT3peowJ0eElL/l01JdZ7dFo9kMc9iqUa8ZvN?=
- =?us-ascii?Q?TKs0MtDcbRugwSsM9o0BP9t+zFveLsxK/b+QTtBwC/SZB2VqeHDL+wG+QbVA?=
- =?us-ascii?Q?Mmz5iy3Ii/B5KSeocjvcxD0Cz1+7fMgcQaVuPwnLmVowj6IxhIY/dDAuCT4Q?=
- =?us-ascii?Q?Nsb79Tj5lnyih2z3B1OQ3F+eoJ+rSyyinU3krUUARfcNyWis2kW2rOTfpkfS?=
- =?us-ascii?Q?H3FjhrteQke3WnNTM+uN3Pq/vm0eDZB9hc6Kz86SuLy0N9jqJDpq8guQnR4w?=
- =?us-ascii?Q?bzyV8T9greksRG7pD0JbtCM+IAmDaeV6EuXeRf46D9fsMTod1xZrT++NiaOZ?=
- =?us-ascii?Q?UIqfzo1bPMTjBQscIELjl2kM99xA1G80ThumLhCcLjIH83wm+hN9IB/0MrZC?=
- =?us-ascii?Q?ECW+Vl1g7/0TB8gN2iVOqRo4tyudSVqugi3r0N1FU6VQdnoy++iTnQCKSGRU?=
- =?us-ascii?Q?oR+2J+CLeAqqziO2ztEEQkk1zsizp9FsO7L/QxHq5UcFamH94Onx98qH75L6?=
- =?us-ascii?Q?VVl5u0jaQOcMLzimFVTYSVkp6Wwp0hhxlc/lYMwABGjsEanr46xygc1Y/kde?=
- =?us-ascii?Q?ALboXEoswBvcvKKJZw/Q5NM2RunLkOwG9kmQVUTUkvYHhbNJ8N5aJ5x2RcjO?=
- =?us-ascii?Q?HYPMe1uqpdbP1lsPydlj2O6e5vyjZCPYPGeVQ9CcmCUQQzOE1SN9dZvqw45r?=
- =?us-ascii?Q?j3lWgm3jP05eM86xUUwx9/bE3gqrJwc=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 734ede10-7145-4842-adfd-08de85b3652c
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Mar 2026 12:31:07.7670
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5NfkLRnUGHi/qE0qhK9j6ADJ/UzirHimDimH0yx+ci/uag2oLn7xKRVUINdL593Pc7tBJ2gL1R0/QXM77M2v1hBuXYy72wg/ezP3kJfnPBc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR01MB10199
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][PATCH] sysdig: upgrade 0.28.0 -> 0.39.0
+To: liuyd.fnst@fujitsu.com, Khem Raj <raj.khem@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20260313032649.4383-1-liuyd.fnst@fujitsu.com>
+ <CAMKF1spaPcV+r8EMNrwiJCWhB9-YbG2c6=Vdsztw2vR9-oLLTw@mail.gmail.com>
+ <OS7PR01MB144441C4000FF5BABC2824D779B4FA@OS7PR01MB14444.jpnprd01.prod.outlook.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <OS7PR01MB144441C4000FF5BABC2824D779B4FA@OS7PR01MB14444.jpnprd01.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 12:31:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125401
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 13:53:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125402
 
-From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+On 3/19/26 07:54, Yiding Liu (Fujitsu) via lists.openembedded.org wrote:
+> Hi Khem
+>    There is no build fail on my environment.
+>    I use the default local.conf with target qemux86-64, and oe-core,
+> meta-oe is the latest commit.
+> Build Configuration:
+> BB_VERSION           = "2.16.0"
+> BUILD_SYS            = "x86_64-linux"
+> NATIVELSBSTRING      = "universal"
+> TARGET_SYS           = "x86_64-poky-linux"
+> MACHINE              = "qemux86-64"
+> SDKMACHINE           = "x86_64"
+> DISTRO               = "poky"
+> DISTRO_VERSION       =
+> "5.3.99+snapshot-71c5fd2bbdeb00b4200b3b94627ce43500b6b081"
+> TUNE_FEATURES        = "m64 x86-64-v3"
+> meta                 = "master:71c5fd2bbdeb00b4200b3b94627ce43500b6b081"
+> meta-poky
+> meta-yocto-bsp       = "master:31e68c7cf6a3686bedbcbdd99056bbd23dda2551"
+> meta-oe
+> meta-filesystems
+> meta-networking
+> meta-python
+> meta-webserver
+> meta-perl
+> meta-gnome
+> meta-multimedia      = "master:f8936cc03a5d69ea3ea2788309f06903da5eecdd" 
+> 
+>    So I want to ensure the difference from AB environment to check the
+> issue further.
+> 
 
-The patches are required to build with detached build directory and
-cross-compiling.
+Something doesn't look right with this recipe/application, it seems to
+break out of the sandbox(?)
 
-Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
----
- .../include/ptest-packagelists-meta-oe.inc    |   1 +
- .../conserver/conserver/conserver.service     |  58 +++++++++
- .../conserver/conserver/run-ptest             |  21 ++++
- .../conserver/conserver_8.3.0.bb              | 111 ++++++++++++++++++
- 4 files changed, 191 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/conser=
-ver.service
- create mode 100644 meta-oe/recipes-connectivity/conserver/conserver/run-pt=
-est
- create mode 100644 meta-oe/recipes-connectivity/conserver/conserver_8.3.0.=
-bb
+I can build it successfully too, without a problem, but look at these
+do_config logs[1] - it not only tries to download things from the
+internet, it even succeeds?!
+The recipe doesn't have network enabled.
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
-conf/include/ptest-packagelists-meta-oe.inc
-index 4de602ac1c..e88e50b59c 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -13,6 +13,7 @@ PTESTS_FAST_META_OE =3D "\
-     cjson \
-     cli11 \
-     cmocka \
-+    conserver \
-     cunit \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'dbus-broker', '', =
-d)} \
-     duktape \
-diff --git a/meta-oe/recipes-connectivity/conserver/conserver/conserver.ser=
-vice b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
-new file mode 100644
-index 0000000000..8649896487
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/conserver/conserver/conserver.service
-@@ -0,0 +1,58 @@
-+[Unit]
-+Description=3DConsole server
-+Documentation=3Dman:conserver(8)
-+Documentation=3Dhttps://www.conserver.com/
-+After=3Dnetwork.target
-+ConditionPathExists=3D/etc/conserver.cf
-+
-+[Service]
-+Type=3Dexec
-+ExecStart=3D/usr/sbin/conserver -C /etc/conserver.cf
-+ExecReload=3D+kill -HUP $MAINPID
-+User=3Dconserver
-+# /run/conserver for Unix domain socket
-+RuntimeDirectory=3Dconserver
-+
-+CapabilityBoundingSet=3D
-+
-+LockPersonality=3Dtrue
-+MemoryDenyWriteExecute=3Dtrue
-+NoNewPrivileges=3Dtrue
-+
-+# No access to /dev/...
-+PrivateDevices=3Dtrue
-+PrivateTmp=3Dtrue
-+ProtectClock=3Dtrue
-+ProtectControlGroups=3Dtrue
-+ProtectHostname=3Dtrue
-+ProtectKernelLogs=3Dtrue
-+ProtectKernelModules=3Dtrue
-+ProtectKernelTunables=3Dtrue
-+
-+# strict: mounts the whole system read-only
-+# full: mount only /var as read-write
-+# true: mount /var and /etc as read-write
-+ProtectSystem=3Dfull
-+# Make some paths writable
-+#ReadWritePaths=3D/=E2=80=A6
-+ProtectHome=3Dtrue
-+
-+# Make sure that the process can only see PIDs and process details of itse=
-lf,
-+# and the second option disables seeing details of things like system load=
- and
-+# I/O etc
-+ProtectProc=3Dinvisible
-+ProcSubset=3Dpid
-+
-+RemoveIPC=3Dtrue
-+RestrictAddressFamilies=3DAF_UNIX AF_INET AF_INET6
-+RestrictNamespaces=3Dtrue
-+RestrictRealtime=3Dtrue
-+RestrictSUIDSGID=3Dtrue
-+
-+SystemCallArchitectures=3Dnative
-+SystemCallFilter=3D@system-service
-+SystemCallFilter=3D~@privileged @resources @obsolete
-+
-+
-+[Install]
-+WantedBy=3Dmulti-user.target
-diff --git a/meta-oe/recipes-connectivity/conserver/conserver/run-ptest b/m=
-eta-oe/recipes-connectivity/conserver/conserver/run-ptest
-new file mode 100644
-index 0000000000..51eb0ffbcf
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/conserver/conserver/run-ptest
-@@ -0,0 +1,21 @@
-+#!/bin/sh
-+
-+set -e -u -C
-+
-+cd test
-+
-+./dotest |sed \
-+    -e 's,^executing test \(#[0-9]*\)...succeeded$,PASS: conserver \1,' \
-+    -e 's,^executing test \(#[0-9]*\)...failed\(.*\)$,FAIL: conserver \1 \=
-2,'
-+
-+for i in test*.diff conserver.log shell.log shell2.log
-+do
-+    test "$i" !=3D 'test*.diff' || exit 0
-+    test -e "$i" || continue
-+
-+    echo "----[ $i ]--------------------"
-+    cat "$i"
-+    echo "------------------------------------"
-+done
-+
-+exit 1
-diff --git a/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb b/me=
-ta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
-new file mode 100644
-index 0000000000..c32d6f9646
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/conserver/conserver_8.3.0.bb
-@@ -0,0 +1,111 @@
-+SUMMARY =3D "Manages connections of multiple users to a serial console or =
-TCP/unix sockets"
-+DESCRIPTION =3D "\
-+    Conserver allows multiple users to watch a serial console at the same =
-\
-+    time. It can log the data, allows users to take write-access of a cons=
-ole \
-+    (one at a time), and has a variety of bells and whistles to accentuate=
- \
-+    that basic functionality. The idea is that conserver will log all your=
- \
-+    serial traffic so you can go back and review why something crashed, lo=
-ok \
-+    at changes (if done on the console), or tie the console logs into a \
-+    monitoring system (just watch the logfiles it creates). \
-+"
-+HOMEPAGE =3D "https://www.conserver.com/"
-+BUGTRACKER =3D "https://github.com/bstansell/conserver/issues"
-+SECTION =3D "console/network"
-+
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db28513e7b696027d3d2b8dbf117f9fe=
-5"
-+
-+DEPENDS =3D "libxcrypt"
-+
-+inherit autotools ptest systemd useradd
-+
-+SRC_URI =3D "\
-+    git://github.com/bstansell/conserver;protocol=3Dhttps;branch=3Dmaster;=
-tag=3Dv${PV} \
-+    file://conserver.service \
-+    file://run-ptest \
-+"
-+SRCREV =3D "fe9aac337554f95721dc9f3da721092a81092089"
-+
-+# In 8.3.0, conserver fails to build with uds and ipv6
-+# https://github.com/bstansell/conserver/issues/112
-+PACKAGECONFIG ?=3D "\
-+    openssl \
-+    ${@bb.utils.contains_any('DISTRO_FEATURES', 'ipv4 ipv6', '', 'uds trus=
-t-uds-cred', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
-+"
-+
-+# Trust reverse DNS information
-+PACKAGECONFIG[trustrevdns] =3D "--with-trustrevdns,--without-trustrevdns"
-+# Produce extended messages
-+PACKAGECONFIG[extmsgs] =3D "--with-extmsgs,--without-extmsgs"
-+# Use Unix domain sockets for client/server communication [/tmp/conserver]
-+PACKAGECONFIG[uds] =3D "--with-uds=3D/run/${PN},--without-uds"
-+# Trust UDS credentials obtained via socket
-+PACKAGECONFIG[trust-uds-cred] =3D "--with-trust-uds-cred,--without-trust-u=
-ds-cred"
-+# Compile in libwrap (tcp_wrappers) support
-+PACKAGECONFIG[libwrap] =3D "--with-libwrap,--without-libwrap,tcp-wrappers"
-+# Compile in OpenSSL support
-+PACKAGECONFIG[openssl] =3D "--with-openssl,--without-openssl,openssl"
-+# Require server SSL certificate by client
-+PACKAGECONFIG[req-server-cert] =3D "--with-req-server-cert,--without-req-s=
-erver-cert"
-+# Compile in GSS-API support
-+PACKAGECONFIG[gssapi] =3D "--with-gssapi,--without-gssapi,krb5"
-+# retry username without @REALM with gss-api authentication
-+PACKAGECONFIG[striprealm] =3D "--with-striprealm,--without-striprealm"
-+# Compile in FreeIPMI support
-+PACKAGECONFIG[freeipmi] =3D "--with-freeipmi,--without-freeipmi,freeipmi"
-+# Compile in dmalloc support
-+PACKAGECONFIG[dmalloc] =3D "--with-dmalloc,--without-dmalloc,dmalloc"
-+# Enable PAM support
-+PACKAGECONFIG[pam] =3D "--with-pam,--without-pam,libpam"
-+# (experimental) Use IPv6 for client/server communication
-+PACKAGECONFIG[ipv6] =3D "--with-ipv6,--without-ipv6"
-+
-+EXTRA_OECONF +=3D "\
-+    INSTALL_PROGRAM=3D'install --strip-program=3Dtrue' \
-+    --with-pidfile=3D/run/conserver/conserver.pid \
-+    --without-rpath \
-+"
-+
-+PACKAGE_BEFORE_PN +=3D "${PN}-client"
-+SUMMARY:${PN}-client =3D "Client to connect to conserver"
-+FILES:${PN}-client +=3D "${bindir}/console"
-+
-+PACKAGE_BEFORE_PN +=3D "${PN}-convert"
-+SUMMARY:${PN}-convert =3D "Converter for old config files of conserver"
-+FILES:${PN}-convert +=3D "${libdir}/${PN}"
-+
-+# tests fail with ash
-+RDEPENDS:${PN}-ptest +=3D "bash"
-+
-+SYSTEMD_SERVICE:${PN} =3D "${PN}.service"
-+
-+USERADD_PACKAGES =3D "\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)} \
-+"
-+USERADD_PARAM:${PN} =3D "\
-+    -M -d /invalid -r -U -s ${sbindir}/nologin conserver; \
-+"
-+
-+do_install:append() {
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',=
- d)}
-+    then
-+        rm ${D}${datadir}/examples/${PN}/conserver.rc
-+
-+        install -m 644 -D -t ${D}/${systemd_unitdir}/system ${UNPACKDIR}/c=
-onserver.service
-+    else
-+        install -d ${D}${sysconfdir}/init.d
-+        mv ${D}${datadir}/examples/${PN}/conserver.rc ${D}${sysconfdir}/in=
-it.d/${PN}
-+    fi
-+
-+    install -d ${D}${datadir}/doc/${PN}/examples
-+    mv ${D}${datadir}/examples/${PN}/* ${D}${datadir}/doc/${PN}/examples
-+    rmdir ${D}${datadir}/examples/${PN} ${D}${datadir}/examples
-+}
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/conserver ${D}${PTEST_PATH}/console
-+    ln -s ${sbindir}/conserver ${D}${PTEST_PATH}/conserver
-+    ln -s ${bindir}/console ${D}${PTEST_PATH}/console
-+    cp -a ${S}/test ${D}${PTEST_PATH}
-+}
---=20
-2.53.0
+[1]:
+https://gist.github.com/OldManYellsAtCloud/511fdbe5a9c185d98f7e4419b0997d2f
+
+
+> Liu
+> ------------------------------------------------------------------------
+> *发件人:* Khem Raj <raj.khem@gmail.com>
+> *发送时间:* 2026年3月19日 05:33
+> *收件人:* Liu, Yiding/刘 乙丁 <liuyd.fnst@fujitsu.com>
+> *抄送:* openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org>
+> *主题:* Re: [oe][meta-oe][PATCH] sysdig: upgrade 0.28.0 -> 0.39.0
+>  
+> This is failing to build on AB see
+> 
+> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/
+> raw_inline <https://autobuilder.yoctoproject.org/valkyrie/api/v2/
+> logs/5867932/raw_inline>
+> 
+> On Thu, Mar 12, 2026 at 8:26 PM Yiding Liu (Fujitsu) via
+> lists.openembedded.org <http://
+> lists.openembedded.org> <liuyd.fnst=fujitsu.com@lists.openembedded.org
+> <mailto:fujitsu.com@lists.openembedded.org>> wrote:
+> 
+>     Upgrade sysdig to solve build failure after upgrading valijson to 1.1.0.
+> 
+>     1.Changelog
+>       https://github.com/draios/sysdig/releases/tag/0.39.0 <https://
+>     github.com/draios/sysdig/releases/tag/0.39.0>
+> 
+>     2.Update 0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch for 0.39.0
+> 
+>     3.Remove following patches as merged upstream
+>       0001-Add-cstdint-for-uintXX_t-types.patch
+>       0001-libsinsp-fix-build-with-gcc-15.patch
+> 
+>     4.Add 0001-Avoid-duplicate-operations-of-add_library.patch to fix
+>     do_configure errors
+>       -- Existing strlcat found, will *not* use local definition
+>       CMake Error at falcosecurity-libs/userspace/libscap/
+>     CMakeLists.txt:64 (add_library):
+>         add_library cannot create target "scap_error" because another
+>     target with
+>         the same name already exists.  The existing target is a static
+>     library
+> 
+>     5.Add CMAKE option -DBUILD_SYSDIG_MODERN_BPF=OFF to fix bpf header
+>     file not found issue
+>       sysdig/0.39.0/recipe-sysroot/usr/include/bits/syscall.h:23:10:
+>     fatal error: 'bits/syscall-32.h' file not found
+>       |    23 | #include <bits/syscall-32.h>
+> 
+>     6.Add do_configure:prepend() function and CFLAGS/CXXFLAGS to fix
+>     header file not found issue
+>       sysdig/0.39.0/sources/sysdig-0.39.0/falcosecurity-libs/userspace/
+>     libscap/engine/kmod/scap_kmod.c:30:10: fatal error: driver_config.h:
+>     No such file or directory
+>       |    30 | #include <driver_config.h>
+> 
+>     7.Add do_compile:append() function to fix do_package QA Issue
+> 
+>     Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com
+>     <mailto:liuyd.fnst@fujitsu.com>>
+>     ---
+>      .../0001-Add-cstdint-for-uintXX_t-types.patch | 38 ---------------
+>      ...-duplicate-operations-of-add_library.patch | 47 +++++++++++++++++++
+>      ...001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch | 21 +++++----
+>      .../0001-libsinsp-fix-build-with-gcc-15.patch | 31 ------------
+>      .../{sysdig_0.28.0.bb <http://sysdig_0.28.0.bb> => sysdig_0.39.0.bb
+>     <http://sysdig_0.39.0.bb>}    | 43 ++++++++++++++---
+>      5 files changed, 95 insertions(+), 85 deletions(-)
+>      delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Add-
+>     cstdint-for-uintXX_t-types.patch
+>      create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-
+>     Avoid-duplicate-operations-of-add_library.patch
+>      delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-
+>     libsinsp-fix-build-with-gcc-15.patch
+>      rename meta-oe/recipes-extended/sysdig/{sysdig_0.28.0.bb <http://
+>     sysdig_0.28.0.bb> => sysdig_0.39.0.bb <http://sysdig_0.39.0.bb>} (56%)
+> 
+>     diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-
+>     cstdint-for-uintXX_t-types.patch b/meta-oe/recipes-extended/sysdig/
+>     sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
+>     deleted file mode 100644
+>     index e564958dad..0000000000
+>     --- a/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-
+>     uintXX_t-types.patch
+>     +++ /dev/null
+>     @@ -1,38 +0,0 @@
+>     -From 3d076ea588eb3c7f334133b4c31172a14beadf5b Mon Sep 17 00:00:00 2001
+>     -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
+>     -Date: Thu, 2 Feb 2023 20:18:27 -0800
+>     -Subject: [PATCH] Add <cstdint> for uintXX_t types
+>     -
+>     -gcc 13 moved some includes around and as a result <cstdint> is no
+>     -longer transitively included [1]. Explicitly include it
+>     -for uintXX_t.
+>     -
+>     -[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
+>     <https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes>
+>     -
+>     -Upstream-Status: Submitted [https://github.com/falcosecurity/libs/
+>     pull/862 <https://github.com/falcosecurity/libs/pull/862>]
+>     -Signed-off-by: Khem Raj <raj.khem@gmail.com
+>     <mailto:raj.khem@gmail.com>>
+>     ----
+>     - userspace/libsinsp/filter/parser.h | 1 +
+>     - userspace/libsinsp/filter_value.h  | 1 +
+>     - 2 files changed, 2 insertions(+)
+>     -
+>     ---- a/userspace/libsinsp/filter/parser.h
+>     -+++ b/userspace/libsinsp/filter/parser.h
+>     -@@ -18,6 +18,7 @@ limitations under the License.
+>     - #pragma once
+>     -
+>     - #include "ast.h"
+>     -+#include <cstdint>
+>     -
+>     - //
+>     - // Context-free Grammar for Sinsp Filters
+>     ---- a/userspace/libsinsp/filter_value.h
+>     -+++ b/userspace/libsinsp/filter_value.h
+>     -@@ -18,6 +18,7 @@ limitations under the License.
+>     - #pragma once
+>     -
+>     - #include <string.h>
+>     -+#include <cstdint>
+>     - #include <utility>
+>     -
+>     - // Used for CO_IN/CO_PMATCH filterchecks using PT_CHARBUFs to allow
+>     diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-
+>     duplicate-operations-of-add_library.patch b/meta-oe/recipes-
+>     extended/sysdig/sysdig/0001-Avoid-duplicate-operations-of-
+>     add_library.patch
+>     new file mode 100644
+>     index 0000000000..b8ca7dd38b
+>     --- /dev/null
+>     +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-duplicate-
+>     operations-of-add_library.patch
+>     @@ -0,0 +1,47 @@
+>     +From 74dec208d95821855130f6ed7b167327f1247e99 Mon Sep 17 00:00:00 2001
+>     +From: Liu Yiding <liuyd.fnst@fujitsu.com
+>     <mailto:liuyd.fnst@fujitsu.com>>
+>     +Date: Thu, 5 Mar 2026 09:28:03 +0000
+>     +Subject: [PATCH] Avoid duplicate operations of add_library.
+>     +
+>     +To fix following configure error
+>     +| -- Existing strlcat found, will *not* use local definition
+>     +| CMake Error at falcosecurity-libs/userspace/libscap/
+>     CMakeLists.txt:64 (add_library):
+>     +|   add_library cannot create target "scap_error" because another
+>     target with
+>     +|   the same name already exists.  The existing target is a static
+>     library
+>     +
+>     +Upstream-Status: Inappropriate [oe-specific]
+>     +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com
+>     <mailto:liuyd.fnst@fujitsu.com>>
+>     +---
+>     + cmake/modules/libscap.cmake  | 2 +-
+>     + cmake/modules/libsinsp.cmake | 2 +-
+>     + 2 files changed, 2 insertions(+), 2 deletions(-)
+>     +
+>     +diff --git a/cmake/modules/libscap.cmake b/cmake/modules/libscap.cmake
+>     +index b41b12ff3..1753598e9 100644
+>     +--- a/cmake/modules/libscap.cmake
+>     ++++ b/cmake/modules/libscap.cmake
+>     +@@ -14,7 +14,7 @@
+>     + #
+>     +
+>     + if(NOT HAVE_LIBSCAP)
+>     +-      set(HAVE_LIBSCAP On)
+>     ++        set(HAVE_LIBSCAP On CACHE INTERNAL "Flag to indicate
+>     libscap has been processed")
+>     +
+>     +       if(NOT LIBS_DIR)
+>     +               get_filename_component(LIBS_DIR
+>     ${CMAKE_CURRENT_LIST_DIR}/../.. ABSOLUTE)
+>     +diff --git a/cmake/modules/libsinsp.cmake b/cmake/modules/
+>     libsinsp.cmake
+>     +index ff336e27f..0fdd2d4a9 100644
+>     +--- a/cmake/modules/libsinsp.cmake
+>     ++++ b/cmake/modules/libsinsp.cmake
+>     +@@ -14,7 +14,7 @@
+>     + #
+>     +
+>     + if(NOT HAVE_LIBSINSP)
+>     +-      set(HAVE_LIBSINSP On)
+>     ++        set(HAVE_LIBSINSP On CACHE INTERNAL "Flag to indicate
+>     libsinsp has been processed")
+>     +
+>     +       if(NOT LIBS_DIR)
+>     +               get_filename_component(LIBS_DIR
+>     ${CMAKE_CURRENT_LIST_DIR}/../.. ABSOLUTE)
+>     +--
+>     +2.43.0
+>     +
+>     diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-
+>     PROBE_NAME-via-CFLAGS.patch b/meta-oe/recipes-extended/sysdig/
+>     sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
+>     index 903ccdf36a..bcf5da4f2c 100644
+>     --- a/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-
+>     PROBE_NAME-via-CFLAGS.patch
+>     +++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-
+>     PROBE_NAME-via-CFLAGS.patch
+>     @@ -1,6 +1,6 @@
+>     -From ed8969a233adb6bf701de96d0fd0570e5ddcc787 Mon Sep 17 00:00:00 2001
+>     -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
+>     -Date: Mon, 21 Mar 2022 19:35:48 -0700
+>     +From 6ff4114dcbb87f34751064249967aa96c7b8b030 Mon Sep 17 00:00:00 2001
+>     +From: Liu Yiding <liuyd.fnst@fujitsu.com
+>     <mailto:liuyd.fnst@fujitsu.com>>
+>     +Date: Wed, 4 Mar 2026 10:02:10 +0000
+>      Subject: [PATCH] cmake: Pass PROBE_NAME via CFLAGS
+> 
+>      This helps compliation of driver code where its calling modprobe on the
+>     @@ -8,22 +8,25 @@ given kernel module via system() API
+> 
+>      Upstream-Status: Pending
+>      Signed-off-by: Khem Raj <raj.khem@gmail.com
+>     <mailto:raj.khem@gmail.com>>
+>     +
+>     +Update for 0.39.0
+>     +Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com
+>     <mailto:liuyd.fnst@fujitsu.com>>
+>      ---
+>       CMakeLists.txt | 1 +
+>       1 file changed, 1 insertion(+)
+> 
+>      diff --git a/CMakeLists.txt b/CMakeLists.txt
+>     -index 7dceb7ae..e156c36f 100644
+>     +index 8e8850dbe..c6d725c05 100644
+>      --- a/CMakeLists.txt
+>      +++ b/CMakeLists.txt
+>     -@@ -149,6 +149,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+>     -       if(NOT DEFINED PROBE_NAME)
+>     -               set(PROBE_NAME "scap")
+>     +@@ -174,6 +174,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+>     +       if(NOT DEFINED DRIVER_NAME)
+>     +               set(DRIVER_NAME "scap")
+>             endif()
+>     -+      add_definitions(-DPROBE_NAME="${PROBE_NAME}")
+>     ++       add_definitions(-DPROBE_NAME="${PROBE_NAME}")
+> 
+>             set(DRIVERS_REPO "https://download.sysdig.com/scap-drivers
+>     <https://download.sysdig.com/scap-drivers>")
+> 
+>      --
+>     -2.35.1
+>     +2.43.0
+> 
+>     diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-
+>     fix-build-with-gcc-15.patch b/meta-oe/recipes-extended/sysdig/
+>     sysdig/0001-libsinsp-fix-build-with-gcc-15.patch
+>     deleted file mode 100644
+>     index 9a81f1c74c..0000000000
+>     --- a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-fix-
+>     build-with-gcc-15.patch
+>     +++ /dev/null
+>     @@ -1,31 +0,0 @@
+>     -From 47a86dabd065096ffc8818a1cffca96964d18120 Mon Sep 17 00:00:00 2001
+>     -From: Martin Jansa <martin.jansa@gmail.com
+>     <mailto:martin.jansa@gmail.com>>
+>     -Date: Tue, 22 Apr 2025 18:43:46 +0200
+>     -Subject: [PATCH] libsinsp: fix build with gcc-15
+>     -
+>     -fixes:
+>     -http://errors.yoctoproject.org/Errors/Details/852848/ <http://
+>     errors.yoctoproject.org/Errors/Details/852848/>
+>     -
+>     -In file included from TOPDIR/tmp/work/core2-64-oe-linux/
+>     sysdig/0.28.0/git/falcosecurity-libs/userspace/chisel/lua_parser.cpp:20:
+>     -TOPDIR/tmp/work/core2-64-oe-linux/sysdig/0.28.0/git/falcosecurity-
+>     libs/userspace/libsinsp/./gen_filter.h:87:17: error: 'uint64_t' does
+>     not name a type
+>     -   87 |         virtual uint64_t get_ts() const = 0;
+>     -      |                 ^~~~~~~~
+>     -
+>     -Upstream-Status: Pending [gen_filter is removed in newer version
+>     with https://github.com/falcosecurity/libs/
+>     commit/47e245f3d343eff27ed178ec2449caa3a01faabb <https://github.com/
+>     falcosecurity/libs/commit/47e245f3d343eff27ed178ec2449caa3a01faabb>]
+>     -Signed-off-by: Martin Jansa <martin.jansa@gmail.com
+>     <mailto:martin.jansa@gmail.com>>
+>     ----
+>     - userspace/libsinsp/gen_filter.h | 1 +
+>     - 1 file changed, 1 insertion(+)
+>     -
+>     -diff --git a/userspace/libsinsp/gen_filter.h b/userspace/libsinsp/
+>     gen_filter.h
+>     -index f4cfa08b1..79ac30dc3 100644
+>     ---- a/userspace/libsinsp/gen_filter.h
+>     -+++ b/userspace/libsinsp/gen_filter.h
+>     -@@ -16,6 +16,7 @@ along with Falco.  If not, see <http://
+>     www.gnu.org/licenses/ <http://www.gnu.org/licenses/>>.
+>     -
+>     - #pragma once
+>     -
+>     -+#include <cstdint>
+>     - #include <set>
+>     - #include <list>
+>     - #include <map>
+>     diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
+>     <http://sysdig_0.28.0.bb> b/meta-oe/recipes-extended/sysdig/
+>     sysdig_0.39.0.bb <http://sysdig_0.39.0.bb>
+>     similarity index 56%
+>     rename from meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
+>     <http://sysdig_0.28.0.bb>
+>     rename to meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb <http://
+>     sysdig_0.39.0.bb>
+>     index c988b0af59..85e687a17b 100644
+>     --- a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb <http://
+>     sysdig_0.28.0.bb>
+>     +++ b/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb <http://
+>     sysdig_0.39.0.bb>
+>     @@ -19,21 +19,30 @@ JIT:powerpc64le = ""
+>      JIT:powerpc64 = ""
+> 
+>      DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl
+>     ncurses jsoncpp \
+>     -            tbb jq openssl elfutils protobuf protobuf-native jq-
+>     native valijson"
+>     +            tbb jq openssl elfutils protobuf protobuf-native jq-
+>     native valijson \
+>     +            uthash libbpf clang-native bpftool-native yaml-cpp
+>     nlohmann-json"
+>      RDEPENDS:${PN} = "bash"
+> 
+>      SRC_URI = "git://github.com/draios/
+>     sysdig.git;branch=dev;protocol=https;name=sysdig <http://github.com/
+>     draios/sysdig.git;branch=dev;protocol=https;name=sysdig> \
+>     -           git://github.com/falcosecurity/
+>     libs;protocol=https;branch=master;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs <http://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=$%7BBB_GIT_DEFAULT_DESTSUFFIX%7D/falcosecurity-libs> \
+>     +           git://github.com/falcosecurity/
+>     libs;protocol=https;branch=release/0.18.x;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs <http://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=falco;subdir=$%7BBB_GIT_DEFAULT_DESTSUFFIX%7D/falcosecurity-libs> \
+>     +           git://github.com/falcosecurity/
+>     libs;protocol=https;branch=release/0.18.x;name=driver;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/driver <http://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=driver;subdir=$%7BBB_GIT_DEFAULT_DESTSUFFIX%7D/driver> \
+>                 file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
+>     -           file://0001-Add-cstdint-for-uintXX_t-
+>     types.patch;patchdir=./falcosecurity-libs \
+>     -           file://0001-libsinsp-fix-build-with-
+>     gcc-15.patch;patchdir=./falcosecurity-libs \
+>     -           file://0001-update-cmake-Only-add-dependencies-when-we-
+>     bundle.patch;patchdir=./falcosecurity-libs \
+>     +           file://0001-Avoid-duplicate-operations-of-
+>     add_library.patch;patchdir=./falcosecurity-libs \
+>                "
+>     -SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
+>     -SRCREV_falco = "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
+>     +SRCREV_sysdig = "6ef29110cf1add746e10ab5b38957e22730b7349"
+>     +SRCREV_falco = "e1999d079880d10800c57e004fca794a03cd060a"
+>     +SRCREV_driver = "d4efc80ece48174a71c1a420cb52d233fa94f946"
+> 
+>      SRCREV_FORMAT = "sysdig_falco"
+> 
+>     +#Add this function to generate driver_config.h
+>     +do_configure:prepend() {
+>     +    mkdir -p ${WORKDIR}/driver_Make
+>     +    cd ${WORKDIR}/driver_Make
+>     +    cmake ${S}/driver -DMINIMAL_BUILD=ON
+>     +    cd -
+>     +}
+>     +do_configure[cleandirs] = "${WORKDIR}/driver_Make"
+> 
+>      EXTRA_OECMAKE = "\
+>                      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+>     @@ -44,11 +53,31 @@ EXTRA_OECMAKE = "\
+>                      -DDIR_ETC=${sysconfdir} \
+>                      -DLUA_INCLUDE_DIR=${STAGING_INCDIR}/luajit-2.1 \
+>                      -DFALCOSECURITY_LIBS_SOURCE_DIR=${S}/falcosecurity-
+>     libs \
+>     +                -DDRIVER_SOURCE_DIR=${S}/driver \
+>                      -DVALIJSON_INCLUDE=${STAGING_INCDIR}/valijson \
+>     +                -DUSE_BUNDLED_RE2=OFF \
+>     +                -DUSE_BUNDLED_TBB=OFF \
+>     +                -DUSE_BUNDLED_JSONCPP=OFF \
+>     +                -DBUILD_SYSDIG_MODERN_BPF=OFF \
+>     +                -DCREATE_TEST_TARGETS=OFF \
+>      "
+> 
+>     +#Add include dir to find driver_config.h
+>     +CXXFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
+>     +CFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
+>     +
+>     +#To fix do_package QA Issue
+>     +do_compile:append() {
+>     +    sed -i -e "s,${WORKDIR},,g" ${B}/libsinsp/libsinsp.pc
+>     +    sed -i -e "s,${WORKDIR},,g" ${B}/driver/libscap/libscap.pc
+>     +    mkdir -p ${B}/driver/libsinsp
+>     +    cp ${B}/libsinsp/libsinsp.pc ${B}/driver/libsinsp/
+>     +}
+>     +do_compile[cleandirs] = "${B}/driver/libsinsp"
+>     +
+>      #CMAKE_VERBOSE = "VERBOSE=1"
+> 
+>     +
+>      FILES:${PN} += " \
+>          ${DIR_ETC}/* \
+>          ${datadir}/zsh/* \
+>     --
+>     2.43.0
+> 
+> 
+> 
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125379): https://lists.openembedded.org/g/openembedded-devel/message/125379
+> Mute This Topic: https://lists.openembedded.org/mt/118291998/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
 
