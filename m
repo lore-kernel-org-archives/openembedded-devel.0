@@ -2,105 +2,92 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B48A108B8ED
-	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 10:23:17 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9510.1774002188445492871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7501D108B8ED
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 10:29:37 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9583.1774002568437616782
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Mar 2026 03:23:08 -0700
+ Fri, 20 Mar 2026 03:29:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dH1w5o3D;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4853e1ce427so4193375e9.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 03:23:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IghSLjGL;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-439c56e822eso1810835f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 03:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774002187; x=1774606987; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1774002567; x=1774607367; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LVBVL8yGa95fpPU/PxEqVF77479Po3TE9HRYgTFEsLw=;
-        b=dH1w5o3DxZ8NiNYyGocyAD+/AQYMyNafmDOzGy9XbknD/AeeT3cMdc9bjxfFj/fRY+
-         pb0G8/xnQVw9uBaUoHHO8jicCarrNWziJIltoaUoJYTyYpA6HPg1vXhWnSUL22038DQN
-         i0Y3SStChH2pAIDOs9VoD4CATh6MnniFQFFktWARzxlcyzxAllcQPGSxqhsCcmtQSmpC
-         IkLsoM2PfLoEkOZeXfD59QTrCPBgO25O5tp5+ysyzLTFqWaeCJokRcBhjj4TFp9+9f+q
-         fALYR7PAIJfMG3p3nCjwZzRtnsPBF+eIQdlqqI27F0PZQ7QOo+av9Gd+X8vQ+aDEP2nE
-         Rm4A==
+        bh=u/tQHDYkLDxEb0KQ3ULsuKRSGSCu8tSiSZzX0q2vkmc=;
+        b=IghSLjGLG7R1Q1U5lzwOYOHY8/se1Zz2Oxitrzex0gZ+36EsGL6a3bxuxVV4UIJ8eA
+         NB760kFYgs0ETchj/fH4PDq8QpjffN4CsukeTsAyB/lN4fajZGx0pHRUMBpO/6EpkPL/
+         bSHLGR+c9BE8z9HYaT/CSGoe9m2i0lYQFAQ6KD+n2PZA9NJhJJk/Y17iT13ba8x6d5ks
+         p6kwgAhrWJSz5Cp/aKnGR4FmrJSkOkBk4rJbmSNBQNJfAh/ibkYl+cKQQKzB4jm550wF
+         nOa2ze1qII5hA8imQ3XHcJFwCQl0pG0uGKrqTZmzJcSUzWxxzNPVeEoEf9dy0pul9Us9
+         O7EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774002187; x=1774606987;
+        d=1e100.net; s=20251104; t=1774002567; x=1774607367;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LVBVL8yGa95fpPU/PxEqVF77479Po3TE9HRYgTFEsLw=;
-        b=CXLfUTBxL/EWDwK0h6p5N75iROMyQQ8LF2Rc/onY9tVRkZDVZe65JU0PnqsNuhCfhz
-         uKnOyrYdCc2qncu33QE20g11K6S3aem2N/Hk92DKLmAlrtfas0wcBDGh5B5kky7p0qr6
-         GKM4Ed5p1exg1th/QJMmTfiL3DimqFC4VdtJfjInS1BgDalEfvXn+qKvsVHh6l4fdULa
-         wWCjdW2h53jl3aN2lZoBL1P7C8hR6SZgDFvCa78SObq39eJcP5hsalX1GyQopNWwaJXx
-         a1bNDN8ohJMnhTEcGmCGsg4m/cApEC9y6kBXc82/ZvickS+XD8HYWgvs5+mk4vncPB1a
-         9qdA==
-X-Gm-Message-State: AOJu0Yx6OpM09zBz+uWNVGt+z1IVO2jFmPUKMDnFnuBHNfJnNj8V4FPV
-	YXBL35Qx9xWf+XrRFtiqji6meQttOtsD61dKzTBau29/wJd/e2a+ahaJ2dIqAQ==
-X-Gm-Gg: ATEYQzx/VdPOkgFHNeHkBAapOEENJX0G4DA6T841p2Q4le1m+1HPpb2f58E5455S9o9
-	32HCwrQWVk4womf0w/HRcB4quICioboR7OdUsVufNypKxlrGwdy7uzq/oJGj9eQ2c69pmn68M9q
-	KqqPrV3xC56HyotmhxIKMMuc1sPNWuE+9YMDPKmNk55hdCzu2cK3THK3kEmVOjW+B0K2GgHvhjl
-	cm/baNCj0OpGz7ZaunuH3PQfHtdalTN+E319Tmym11HBPFqyrZHqCu0JkO33EAIqtpRG+yYKvqT
-	uO0El0jUlOEe1bB3D5MT2ZOHgATfDCvS1WHgW8mLG72dNshQ3eLn6Px6/ImS9PempfbOObY6n/z
-	pJll5QocTR5TQ5IUcoG8R0vg/OekBSz1EaSZYXFGDnppwzurALZJDb5S9FlOa7UtE0ab1FhWO5F
-	I+0TiXGUaeYibGWlzU0Szy
-X-Received: by 2002:a05:600c:1c16:b0:485:39d4:2dd9 with SMTP id 5b1f17b1804b1-486ff04fb4cmr41523275e9.33.1774002186401;
-        Fri, 20 Mar 2026 03:23:06 -0700 (PDT)
+        bh=u/tQHDYkLDxEb0KQ3ULsuKRSGSCu8tSiSZzX0q2vkmc=;
+        b=bmwmr2zKkWxwTnrXqwzJ1r/PvcTpUo8+wZqM9v/4/P7f2DVzOsuGtcVDx5OQ2dv8e8
+         DSLN6IdV9UvENGU0nYliClzeomM+e9eEpvMKJNP4yq/eu/Hw3abLSmZNaiBYmRf+3I1K
+         Eu9erZFGhORlpKcjHbqBp6AJDCbut8Lo0YIKXUt8BORgzV0VP0iyRPgtwZPh7jEAdoNP
+         GnRoz6tBCUzoyHPF+SYyHF2dKMRPnYFlx9sqe4RnV+nKGxe4PMmLl7Y5eeQZqqkBdGxy
+         XQoWLLD1/T8ZaIfGyH8ejj+LLqf79Ng8igv/KFh2Zf8yyNugvcRfhVdRQQ9hS3yQUqnN
+         xPGQ==
+X-Gm-Message-State: AOJu0YwfPHzNa6l8WK6TGm6a46Qt1As68WrOXhVAId1iywIJ1FxV8DS/
+	PWF35T9NFBdQ3LGsxYb8i9t8L1a+OHWssV/w74PienaUwx+YVidKYZdS1ttZ6Q==
+X-Gm-Gg: ATEYQzwo9xb3xQXZSjVLpHt0v1ylLK5BLNFvdYxZ1+txRhaxX5i206FbqwtwoveBIYt
+	ZhzWJzU490c4rpfUzw0AaESAEzqUKVX2lprGrzdc/nMXv/A7hH3HgedOGpZHzbWhYYQBa8mMCYf
+	G0rViRnO5lL6aQlEaVctbpDWRiuEeQa6emRXwUCnNgfIYGUkuO8SmyMRJsH52KD30H2vQGH5mEi
+	tnfPpYICPkY3BHnpAJyaCFKiyOqANjDEZSRkLudQE9Upj/ZaHxano36K02lpiwvNi9rDMrLW7S5
+	c8XJ3lpCqZlKqQsKLG3mW5pD+7ck7KM3KNGt/7To4ZT3RDqKUjqruQtIKI1F23ycq6vPILWqZwp
+	mtcTcwZmQ+SxqxjHnBqAWqq2UeZ1De+2cjw1sfusTWbqXgzBjpqg4+UO+Av/ihCIQVmoDP/yUpB
+	ZWWkncW0K/A3dO9HgKxXg7
+X-Received: by 2002:a05:6000:184d:b0:43b:5762:2999 with SMTP id ffacd0b85a97d-43b6427854dmr4397688f8f.37.1774002566475;
+        Fri, 20 Mar 2026 03:29:26 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486ff1d8138sm12201725e9.34.2026.03.20.03.23.04
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b64714e2esm5441196f8f.32.2026.03.20.03.29.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Mar 2026 03:23:06 -0700 (PDT)
+        Fri, 20 Mar 2026 03:29:26 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] transmission: upgrade 4.1.0 -> 4.1.1
-Date: Fri, 20 Mar 2026 11:23:04 +0100
-Message-ID: <20260320102304.2808111-1-skandigraun@gmail.com>
+Subject: [meta-gnome][PATCH] gnome-system-monitor: add DEBUG_PREFIX_MAP to LDFLAGS to fix qa error
+Date: Fri, 20 Mar 2026 11:29:25 +0100
+Message-ID: <20260320102925.2821845-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:23:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125432
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:29:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125433
 
-Also disable running clang-tidy on the code. On one hand the cmake script is trying to run
-the target version of it, and on the other hand it is not needed for compiling it,
-it is intended for upstream developers.
-
-Changelog: https://github.com/transmission/transmission/releases/tag/4.1.1
+Fixes:
+ERROR: gnome-system-monitor-49.1-r0 do_package_qa: QA Issue: File /usr/bin/.debug/gnome-system-monitor in package gnome-system-monitor-dbg contains reference to TMPDIR [buildpaths]
+ERROR: gnome-system-monitor-49.1-r0 do_package_qa: QA Issue: File /usr/libexec/gnome-system-monitor/.debug/gsm-taskset in package gnome-system-monitor-dbg contains reference to TMPDIR [buildpaths]
+ERROR: gnome-system-monitor-49.1-r0 do_package_qa: QA Issue: File /usr/libexec/gnome-system-monitor/.debug/gsm-renice in package gnome-system-monitor-dbg contains reference to TMPDIR [buildpaths]
+ERROR: gnome-system-monitor-49.1-r0 do_package_qa: QA Issue: File /usr/libexec/gnome-system-monitor/.debug/gsm-kill in package gnome-system-monitor-dbg contains reference to TMPDIR [buildpaths]
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{transmission_4.1.0.bb => transmission_4.1.1.bb}          | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/transmission/{transmission_4.1.0.bb => transmission_4.1.1.bb} (96%)
+ .../gnome-system-monitor/gnome-system-monitor_49.1.bb           | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb b/meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
-similarity index 96%
-rename from meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb
-rename to meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
-index aed1e2e32a..a4b7856abe 100644
---- a/meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb
-+++ b/meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
-@@ -15,7 +15,7 @@ SRC_URI = " \
- "
+diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_49.1.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_49.1.bb
+index b23e8bb8f3..e0de81db32 100644
+--- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_49.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_49.1.bb
+@@ -28,6 +28,8 @@ SRC_URI[archive.sha256sum] = "915b6a321ada12eba7bf578c20c9fe5e41f55d532847cbd124
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
  
- # Transmission release 4.1.0
--SRCREV = "272401184f0736e6063f9da90be7d037e907508a"
-+SRCREV = "56442e2929cf4e9e20c8604a229e99fbb352190c"
- 
- 
- inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
-@@ -28,6 +28,8 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'gtk', ''
- PACKAGECONFIG[gtk] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF,gtk4 gtkmm4,"
- PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd,"
- 
-+EXTRA_OECMAKE = "-DRUN_CLANG_TIDY=OFF"
++TARGET_LDFLAGS:append = " ${DEBUG_PREFIX_MAP}"
 +
- # Weak default values for transmission user and group
- # Change them in bbappend if needed
- TRANSMISSION_USER ??= "root"
+ RRECOMMENDS:${PN} = "adwaita-icon-theme"
+ 
+ FILES:${PN} += " \
 
