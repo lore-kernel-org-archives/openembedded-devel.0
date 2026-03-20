@@ -2,296 +2,220 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71E581099B34
-	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 18:25:47 +0000 (UTC)
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.19855.1774031142982876735
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A7A41099B35
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 18:26:57 +0000 (UTC)
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19883.1774031214818610721
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Mar 2026 11:25:43 -0700
+ Fri, 20 Mar 2026 11:26:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kwgOrD5s;
- spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-64c9ebd1369so2315196d50.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 11:25:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774031142; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J8XRaB8B;
+ spf=pass (domain: gmail.com, ip: 74.125.224.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-64e8c7f5082so2045203d50.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 11:26:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774031214; cv=none;
         d=google.com; s=arc-20240605;
-        b=AZweQKO8z8hd4MGLQh1nwRAdxUbZ3BPFSR4SNFMuU5DUblyvYinp0NtM7gZTRqkrXD
-         h/UPOfHhSSGlEORh+buahA7WVPjS/Tx8Sv4ZueSnCb6UUxeuUXQhKdXy0qZmUe3uN6/0
-         lXYfc/6g0xr8xssuWag1lrdWL1ueAVlE8Xa4owEfH0qrOCltSBAjdE4OWZOqjojQa5A3
-         VnHYRQIRPoqtVT6cXtY57YrwU18hsLKlhsGBpP1bQ59qiVB1MK64vyrXCu6sE3bscmW8
-         9PxB6ctNHq/hpfdE9sG2rBHw35C5MZdsWgr+txHHiOImnD9/cO+BuJ3Z6S51w9aQ7V3k
-         zEvw==
+        b=HI7nq1BdaQLxv+8s01JhoJaZMXXLUXDywDsXJtfALe0B21MROVXs9FFIfvSmOaM1X7
+         TPH6+012esyaMzwMGONuH6s57BfK8TongpvwV16O8xnCKK7yfUQrPv3igku7ROeBCRhP
+         Cd3boEvywZ/PfbejYwONxtUsv/EY6jdK1XoT1v9ckQN41LdCLRr2uFHZTmwNPERUtfnR
+         jr7I+KTcLZ6fINeW1OXqIFjCY2C/+bj9+1+ycyQnVBV4TU82pL4W8keZqMtty5t/PpmN
+         tGPrU8mndD/PHfz9gw5Ebt+AdFTviDJKeDBi794bK+UdbX5vxzYMHbemSRjIasx22NOC
+         lRHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=ik/END/95fqWiTQyWOfTcaLq2wlRkaGkKINvvo38Uto=;
+        bh=NSzyIyEC3ZCFPm4gKpXJtMScpkKbNndS9Z7S3n+jrQ8=;
         fh=lmVfLuXiORWQ6/4diYrzJXM3e5aGWnwjhaIT8qJCvr0=;
-        b=VzdBX8XIn/ZYXrVBYoSX0ywN8qED2mitZqnZJR9jtsbfrUNEIw61tKviBt5VLRoLyp
-         Yw7MKBwtAdrxx5nZCIWdBMlDFHt2MuSOLRV9TeT/hK+WM37Bt3BFx6J3Qm/OAA+iWETJ
-         4cVf/FjroqbLSykom+Gdwx7UJd7Y1A9HaApuADL2E/ycmWD9dIu6F0i4O1hBr/XSAMRS
-         awoWMpAPJmXOZBifoCTAiivnUh2aFK2dG/D3ioApTAYwZX5bQwCsS79WPTXO5vCeF2xs
-         u1hnr/g9nyCxum8kva4adjOvZJ7P0O/ZENTX/IGhB9LzfVs/+8sD4hTimRnKEULmEi1O
-         LEMA==;
+        b=cYGJSH3k4btZ/Zn8yIaq6tqFiPZRVJ1HAQmx8isU3C7kctYYD5ainY9lRV6j88Wfgz
+         j+vb04h5CH3C5JT/hSBOrt5DIQY/9m6d+sezuT2qp+5xqw1N/SAsKR4Eyy2r5wdlhQqC
+         ws1snv3MHOGv/w++/JDwezYL+QDUopm2cCTq9eiOgpw8pq/jg7Oj4f+UaIKMPdk9v2Pt
+         lPLOZywTOB2sRFUH1Aspv94Nd5SGrl8OQrFl7+Ilb5bm5vBQtq7SusN9IGuNknWGmjN5
+         XAS0fkG0y3uDBCBA4aNhokNWYUk5W9KIYXdzBoM0rjIMnLLfsNp4C10EWAVR2Bd7CBSF
+         HdRw==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774031142; x=1774635942; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1774031214; x=1774636014; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ik/END/95fqWiTQyWOfTcaLq2wlRkaGkKINvvo38Uto=;
-        b=kwgOrD5sn8KNE9WUwIcb1JJ7dLELwCIc2rGrRQfgNbWBcksjrHgiLfYYXsBvxniZK6
-         1RGV6YIKrqk+R6mJfrSRx5tBbbF9e1QWTajnHFCnXnZBYWUE0GUC9499XKGDidL/obv/
-         I+QtvNZk6rQpFefg16zFLffOnj7jNDZPLS890wXjpsu7LFQBaSPPRGwbU7DaF+zCM60G
-         IwIx4yskEe9w9ak423lA7VdOM0ckyVhxyE6xw2KHZR1+YjkTOBUFYUd1PMx9a7J38wKW
-         R5yHviYpzW8Twtc8sC5+4aGurVm4iIDlHpd0/4I0XbiBOdkTOW9k45/5RleomyEOBKfD
-         nI/Q==
+        bh=NSzyIyEC3ZCFPm4gKpXJtMScpkKbNndS9Z7S3n+jrQ8=;
+        b=J8XRaB8BQVVdytm23KsBLqGecOsAy1nma1qeH9Ag7i+Uxwr6BAL/FgMqAhODndryB0
+         ufhZgB2dF3kXAftIrDiktyyb/sXGYgg6o4esI2cQgEzJ1mCpMjXBSDtjziPR00es0tOV
+         ovdpzsStVHgBKbMV1HqUarVJwOWNqfeztZS+PcdQZZOAkHf9NCAxCDW2v2xn9+yl0WRt
+         vO9EfJdruxY9njVck5Ea4UbEuQB593x4pABYoCULgHEd17VTd27/eSxY5kSJlUDyMOGw
+         Z+rcszAvpfH8d38heOTsfEjY5drot6TX5ooCH9v7q/7m6BtyMaxDSgGSwj73/EcC8UR4
+         wI2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774031142; x=1774635942;
+        d=1e100.net; s=20251104; t=1774031214; x=1774636014;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ik/END/95fqWiTQyWOfTcaLq2wlRkaGkKINvvo38Uto=;
-        b=fEoXeNJDKPbWDuwmIvCDHu1neotMO8HzgVKgBrmgbXVm3vZWiNsqEEWatcYREovRcs
-         hWeLUUFhsvresN+6alwmxkfDcCA3lS3G0RDEQka/SrDueB7PQiWRezZuS8LoZa7s6C3b
-         PGYZZ2NYiFVG6XwBjbIGnuLXqQRAcXIC2wCnWUjaUWdZ9ixG7XKgYJfgDyww0vh22bE7
-         r9YallbsDLU046Yg47zZEhTlRnED/LwyxP6a7ihRQU4dHzO4kFt1ulkPljJr5/NSbrg3
-         aFZrLgiDYaoZxXb/oyVnRiF9PY6tF6kfNok8sG4TG8a5d987yzUhxW5tIutccGcHeVgh
-         038A==
-X-Gm-Message-State: AOJu0Ywy8q1Iv3EB7d+UF5tvySJoUixhhxYwGwT7WQTn+pZiB3OcoM5O
-	wUjPb6I2KTt9RVzhmMUkSf0UkrWUjBKTKTX7TqJ2PbDtrK5A/OlODXHsqzQ5AaqZME4UONhA4e1
-	c5euNxf+kB7wsfLos7Pbsgv4nyAM/pUZlPw==
-X-Gm-Gg: ATEYQzzzElkSw+IQoA7r+SEcKbTpBj9dN4+MDZwuH8EZXvfx2uRpYocXvYxQFOZ287o
-	CFELGfGEup7i+gN7Ql4nCE79VV6C+psXVoHDAyzDQY8bKDA22usGnT76Tg1iGDQ3mO+jNub8G3H
-	5fb8lzUw5piF+b4g0tHry6tJ8NK2uYWvSC8oGV0S3qyPiqU/vDOQPgGUJubLL1md9ytksVTWY50
-	2/TM8MpxWPg8/7tEkvJYxWS03J7goL5Lz7wuoFSsdXMJFabM6RmwAjZo5rne7HlSiDacTU2nyxT
-	2rSvdZI0aR572ongV2kzjNsLZorF8jUPDj6sWCbkbfUMJ7xINt4745+pBfGfLg1rIKkE2w9/yM0
-	pXWpFN7HieByhPAn+YN94PPr+sbo+xWsCFVK7pFdQutdfCw7kVoh4SeeAgsQ=
-X-Received: by 2002:a05:690e:687:b0:64a:deac:d943 with SMTP id
- 956f58d0204a3-64eaa69e091mr2627442d50.10.1774031141763; Fri, 20 Mar 2026
- 11:25:41 -0700 (PDT)
+        bh=NSzyIyEC3ZCFPm4gKpXJtMScpkKbNndS9Z7S3n+jrQ8=;
+        b=r4H5foUq6YDxGiCsxCckepBAwahEG/gOBHOzkky2fs2zpV9fVrqh0vQCz9fgYPa/74
+         0WbZDhOKgnDDPBXjoRuSS9dyTM+OzSMY2UPGh7ooA9mj44j3DmFPbB6s2nhnZmuxeQ9W
+         wfOZRJx9qIi/vliuxZG8SdEpXI1f+4gd5+my29CEALxJnxi0jIfSYMDJ8VUgvsKx9Kbj
+         sJEYI6Na4b42w7Y56Aoj4jTl+wtZOYFeaUTVR2qZOo6odc4voGUwQQOGAt9dyNJowEFO
+         b8+aV6G0XuhrNaHUZwMlsXIRmTyAaW0ONPHwH2jg/Ax4ajKYd0C0rNSz/HOlWP+JmCa0
+         YqTQ==
+X-Gm-Message-State: AOJu0YxnRE1cITYDfKubqlDmg1jn5lr/XF5Mv8GLM95YEyzaqShupyVk
+	OF6wQLyUBym29KOfyIEIEAWNkA9C2VUQrL2BN1asuJ6iGx8Ib6Vrw8THI2g2GnHoHJiUEteQ6Qy
+	2r71eCg/QarrvVbBUsBzQVy0/0k66SbU=
+X-Gm-Gg: ATEYQzzD/j7+2atWcKciJwoHMok1NtLsZxsbN2ICWocAnIW5hwWy/Y0cx+szNV1mR0I
+	31Dxlcm7v2M35lTNN6Jkb6ZSL4XFlZqeyajZPAS1QR9GyCOyVeAEr+XXcUg06KryL2DC7zVGWWC
+	/FGIzDJkqwuFUYSFMSOfpIu5ma60RKncIXScsRRBkct2T32MEhcR+py5tq2bXB/2mQx25Q4JS+s
+	LcQ+QKWD6iF/QVCmUFuSWDnrPeGMJfe/pzVnCRIy57sF9muCFD+y0QTqQSsNxaCqKrPxwVElr2U
+	9azjaJT0Y7BdQ0hlJdg7rfc7ki0iifikXSuLNASPRA5jv8xLDT+Poi1H/DoNRwlODHwxnVTzSOT
+	x+bTCVoOyj4XJAbrIWYWXvzid/F9f3NkaudzyqDP5XNJ2OodP0sXZb/e7tAc=
+X-Received: by 2002:a53:c052:0:10b0:64e:a220:295c with SMTP id
+ 956f58d0204a3-64eaa6de30amr3561791d50.23.1774031213743; Fri, 20 Mar 2026
+ 11:26:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260320170155.1413929-1-khem.raj@oss.qualcomm.com> <c0e10c9a-39fd-4cf6-9868-e1b85649167e@gmail.com>
-In-Reply-To: <c0e10c9a-39fd-4cf6-9868-e1b85649167e@gmail.com>
+References: <20260320083033.2703890-1-skandigraun@gmail.com>
+ <CAMKF1spZyOr-=86hia5ittUnTXXXuxV8rRiyEeT5r67w0pPtuA@mail.gmail.com> <4efbf53d-8e2a-4494-afd8-8c73300326f9@gmail.com>
+In-Reply-To: <4efbf53d-8e2a-4494-afd8-8c73300326f9@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 20 Mar 2026 11:25:30 -0700
-X-Gm-Features: AaiRm508Y5RmOGUE6eFq_HLsH6WFzqY28kVNYzOoulUXBldf-5Ebn3gjXlTVUFQ
-Message-ID: <CAMKF1spU5Au-=maJF42O7BoOPFNgnzRq6-UCs=LgN=qj+pBVdQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/8] python3-xstatic-font-awesome:
- Upgrade to 6.2.1.2
+Date: Fri, 20 Mar 2026 11:26:42 -0700
+X-Gm-Features: AaiRm5254taHBNZOv705RY4BRWDkml3_9ro7S3e2eY3XmwQPsCzfgos43R6igPU
+Message-ID: <CAMKF1soCG1g5mDUtSVzKksWihQve5Uo0srzFSiBEr+OP621aPA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] samba: upgrade 4.19.9 -> 4.23.5
 To: Gyorgy Sarvari <skandigraun@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000068005064d78d038"
+Content-Type: multipart/alternative; boundary="00000000000050ddbe064d78d4f4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 18:25:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125452
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 18:26:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125453
 
---000000000000068005064d78d038
+--00000000000050ddbe064d78d4f4
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 20, 2026, 10:11=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.co=
+On Fri, Mar 20, 2026, 10:01=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.co=
 m> wrote:
 
 >
-> On 3/20/26 18:01, Khem Raj via lists.openembedded.org wrote:
-> > From: Khem Raj <raj.khem@gmail.com>
+>
+> On 3/20/26 15:50, Khem Raj wrote:
+>
+> >      SRC_URI =3D "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+> >                 file://smb.conf \
+> >                 file://volatiles.03_samba \
+> >     @@ -24,11 +28,11 @@ SRC_URI =3D "${SAMBA_MIRROR}/stable/samba-
+> >     ${PV}.tar.gz \
 > >
-> > License-Update: Updated font-awesome version number to 6.2.1
+> file://0005-Fix-pyext_PATTERN-for-cross-compilation.patch \
 > >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  ...e_6.2.1.1.bb =3D> python3-xstatic-font-awesome_6.2.1.2.bb} | 6 +++-=
---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{
-> python3-xstatic-font-awesome_6.2.1.1.bb =3D>
-> python3-xstatic-font-awesome_6.2.1.2.bb} (61%)
+> file://0006-smbtorture-skip-test-case-tfork_cmd_send.patch \
+> >                 file://0007-Deleted-settiong-of-python-to-fix-the-
+> >     install-confli.patch \
+> >     -           file://9aa5c43315d83c19514251a11c4fba5a137f2821.patch \
+> >                 file://0001-lib-replace-Implement-memset_explicit.patch=
+ \
 > >
-> > diff --git a/meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.1.bb
-> b/meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.2.bb
-> > similarity index 61%
-> > rename from meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.1.bb
-> > rename to meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.2.bb
-> > index 0562cc2671..934b236983 100644
-> > --- a/meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.1.bb
-> > +++ b/meta-python/recipes-devtools/python/
-> python3-xstatic-font-awesome_6.2.1.2.bb
-> > @@ -2,12 +2,12 @@ DESCRIPTION =3D "Font Awesome icons packaged for
-> setuptools (easy_install) / pip."
-> >  HOMEPAGE =3D "https://pypi.python.org/pypi/XStatic-Font-Awesome"
-> >  SECTION =3D "devel/python"
-> >  LICENSE =3D "Apache-2.0"
-> > -LIC_FILES_CHKSUM =3D
-> "file://PKG-INFO;md5=3Df1a2fe131dcb2fc6243c26cf05ecdb36"
-> > +LIC_FILES_CHKSUM =3D
-> "file://PKG-INFO;md5=3D7c083fdfe0b927a9de368a17fbf13b20"
+> file://0002-lib-replace-Add-test-for-memset_explicit.patch \
+> >                 file://0003-Replace-memset_s-with-memset_explicit.patch=
+ \
+> >                 file://0004-lib-replace-Remove-memset_s.patch \
+> >     +           file://use-xslt-replace-function-when-
+> >     available.patch;rev=3Dneed-to-be-applied-manually \
+> >
+> >
+> > use apply=3Dno if you want patch to be created in build area but not
+> applied.
+> > however, this patch should be applied to oe-core docbook-xsl-stylesheet=
+s
+> > recipe
+> > the recipe should perhaps also swtich to using https://github.com/
+> > docbook/xslt10-stylesheets <
+> https://github.com/docbook/xslt10-stylesheets>
+> >  for sources as there seems to be newer releases there 1.79.1 was
+> > released in 2015
+> >
+> >                 "
+> >
 >
->
-> This file doesn't seem to say much about the license, only that it's the
-> same as font-awesome. There is however a license file in
-> xstatic/pkg/font_awesome/data/LICENSE.txt path, which seems to be the
-> license it refers to. One thing worth noting is that searching for
-> "apache" brings no results in that file.
->
-> What if we would check that file instead of pkg-info, and switch to
-> "OFL-1.0 & MIT & CC-BY-4.0" (or similar)?
->
->
-> Sounds good to me
+> Thanks, deep down I had a feeling that there is a better way to avoid
+> do_patch, but couldn't find in the docs.
+> The oe-core submission will be left for someone else, however.
 >
 
+Let me find some time to send that
 
-> >
-> > -PYPI_PACKAGE =3D "XStatic-Font-Awesome"
-> > +PYPI_PACKAGE =3D "xstatic_font_awesome"
-> >  UPSTREAM_CHECK_PYPI_PACKAGE =3D "${PYPI_PACKAGE}"
-> >
-> > -SRC_URI[sha256sum] =3D
-> "f075871096128638f2e1539020d8227754c3d885dd68e7ee6de9a01235076828"
-> > +SRC_URI[sha256sum] =3D
-> "9f3cb2f038fad7d352722375d3f25af346da9ee093ed9dc2c8c46bd911ab1971"
-> >
-> >  DEPENDS +=3D " \
-> >      python3-xstatic \
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#125441):
-> https://lists.openembedded.org/g/openembedded-devel/message/125441
-> > Mute This Topic: https://lists.openembedded.org/mt/118421458/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
 >
 
---000000000000068005064d78d038
+--00000000000050ddbe064d78d4f4
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"auto"><div><br><br><div class=3D"gmail_quote gmail_quote_contai=
-ner"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 20, 2026, 10:11=E2=
+ner"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 20, 2026, 10:01=E2=
 =80=AFAM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@gmail.com">skandi=
 graun@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" s=
 tyle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pad=
 ding-left:1ex"><br>
-On 3/20/26 18:01, Khem Raj via <a href=3D"http://lists.openembedded.org" re=
-l=3D"noreferrer noreferrer" target=3D"_blank">lists.openembedded.org</a> wr=
-ote:<br>
-&gt; From: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_bl=
-ank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-&gt; <br>
-&gt; License-Update: Updated font-awesome version number to 6.2.1<br>
-&gt; <br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 ...<a href=3D"http://e_6.2.1.1.bb" rel=3D"noreferrer noreferrer"=
- target=3D"_blank">e_6.2.1.1.bb</a> =3D&gt; <a href=3D"http://python3-xstat=
-ic-font-awesome_6.2.1.2.bb" rel=3D"noreferrer noreferrer" target=3D"_blank"=
->python3-xstatic-font-awesome_6.2.1.2.bb</a>} | 6 +++---<br>
-&gt;=C2=A0 1 file changed, 3 insertions(+), 3 deletions(-)<br>
-&gt;=C2=A0 rename meta-python/recipes-devtools/python/{<a href=3D"http://py=
-thon3-xstatic-font-awesome_6.2.1.1.bb" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">python3-xstatic-font-awesome_6.2.1.1.bb</a> =3D&gt; <a href=3D"=
-http://python3-xstatic-font-awesome_6.2.1.2.bb" rel=3D"noreferrer noreferre=
-r" target=3D"_blank">python3-xstatic-font-awesome_6.2.1.2.bb</a>} (61%)<br>
-&gt; <br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-xstatic-font-awesome_6.2.1.1.bb" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">python3-xstatic-font-awesome_6.2.1.1.bb</a> b/meta-python/recip=
-es-devtools/python/<a href=3D"http://python3-xstatic-font-awesome_6.2.1.2.b=
-b" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-xstatic-font-awe=
-some_6.2.1.2.bb</a><br>
-&gt; similarity index 61%<br>
-&gt; rename from meta-python/recipes-devtools/python/<a href=3D"http://pyth=
-on3-xstatic-font-awesome_6.2.1.1.bb" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">python3-xstatic-font-awesome_6.2.1.1.bb</a><br>
-&gt; rename to meta-python/recipes-devtools/python/<a href=3D"http://python=
-3-xstatic-font-awesome_6.2.1.2.bb" rel=3D"noreferrer noreferrer" target=3D"=
-_blank">python3-xstatic-font-awesome_6.2.1.2.bb</a><br>
-&gt; index 0562cc2671..934b236983 100644<br>
-&gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-xs=
-tatic-font-awesome_6.2.1.1.bb" rel=3D"noreferrer noreferrer" target=3D"_bla=
-nk">python3-xstatic-font-awesome_6.2.1.1.bb</a><br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-xs=
-tatic-font-awesome_6.2.1.2.bb" rel=3D"noreferrer noreferrer" target=3D"_bla=
-nk">python3-xstatic-font-awesome_6.2.1.2.bb</a><br>
-&gt; @@ -2,12 +2,12 @@ DESCRIPTION =3D &quot;Font Awesome icons packaged fo=
-r setuptools (easy_install) / pip.&quot;<br>
-&gt;=C2=A0 HOMEPAGE =3D &quot;<a href=3D"https://pypi.python.org/pypi/XStat=
-ic-Font-Awesome" rel=3D"noreferrer noreferrer" target=3D"_blank">https://py=
-pi.python.org/pypi/XStatic-Font-Awesome</a>&quot;<br>
-&gt;=C2=A0 SECTION =3D &quot;devel/python&quot;<br>
-&gt;=C2=A0 LICENSE =3D &quot;Apache-2.0&quot;<br>
-&gt; -LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;md5=3Df1a2fe131dcb2fc6243c=
-26cf05ecdb36&quot;<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://PKG-INFO;md5=3D7c083fdfe0b927a9de36=
-8a17fbf13b20&quot;<br>
 <br>
+On 3/20/26 15:50, Khem Raj wrote:<br>
 <br>
-This file doesn&#39;t seem to say much about the license, only that it&#39;=
-s the<br>
-same as font-awesome. There is however a license file in<br>
-xstatic/pkg/font_awesome/data/LICENSE.txt path, which seems to be the<br>
-license it refers to. One thing worth noting is that searching for<br>
-&quot;apache&quot; brings no results in that file.<br>
-<br>
-What if we would check that file instead of pkg-info, and switch to<br>
-&quot;OFL-1.0 &amp; MIT &amp; CC-BY-4.0&quot; (or similar)?<br>
-<br><br>Sounds good to me=C2=A0<br></blockquote></div></div><div dir=3D"aut=
-o"><br></div><div dir=3D"auto"><div class=3D"gmail_quote gmail_quote_contai=
-ner"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex">
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0SRC_URI =3D &quot;${SAMBA_MIRROR}/stable/samb=
+a-${PV}.tar.gz \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sm=
+b.conf \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://vo=
+latiles.03_samba \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0@@ -24,11 +28,11 @@ SRC_URI =3D &quot;${SAMBA_MIRRO=
+R}/stable/samba-<br>
+&gt;=C2=A0 =C2=A0 =C2=A0${PV}.tar.gz \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+05-Fix-pyext_PATTERN-for-cross-compilation.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+06-smbtorture-skip-test-case-tfork_cmd_send.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+07-Deleted-settiong-of-python-to-fix-the-<br>
+&gt;=C2=A0 =C2=A0 =C2=A0install-confli.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://9a=
+a5c43315d83c19514251a11c4fba5a137f2821.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+01-lib-replace-Implement-memset_explicit.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+02-lib-replace-Add-test-for-memset_explicit.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+03-Replace-memset_s-with-memset_explicit.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://00=
+04-lib-replace-Remove-memset_s.patch \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://us=
+e-xslt-replace-function-when-<br>
+&gt;=C2=A0 =C2=A0 =C2=A0available.patch;rev=3Dneed-to-be-applied-manually \=
 <br>
 &gt; <br>
-&gt; -PYPI_PACKAGE =3D &quot;XStatic-Font-Awesome&quot;<br>
-&gt; +PYPI_PACKAGE =3D &quot;xstatic_font_awesome&quot;<br>
-&gt;=C2=A0 UPSTREAM_CHECK_PYPI_PACKAGE =3D &quot;${PYPI_PACKAGE}&quot;<br>
 &gt; <br>
-&gt; -SRC_URI[sha256sum] =3D &quot;f075871096128638f2e1539020d8227754c3d885=
-dd68e7ee6de9a01235076828&quot;<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;9f3cb2f038fad7d352722375d3f25af346da9ee0=
-93ed9dc2c8c46bd911ab1971&quot;<br>
+&gt; use apply=3Dno if you want patch to be created in build area but not a=
+pplied.<br>
+&gt; however, this patch should be applied to oe-core docbook-xsl-styleshee=
+ts<br>
+&gt; recipe<br>
+&gt; the recipe should perhaps also swtich to using <a href=3D"https://gith=
+ub.com/" rel=3D"noreferrer noreferrer" target=3D"_blank">https://github.com=
+/</a><br>
+&gt; docbook/xslt10-stylesheets &lt;<a href=3D"https://github.com/docbook/x=
+slt10-stylesheets" rel=3D"noreferrer noreferrer" target=3D"_blank">https://=
+github.com/docbook/xslt10-stylesheets</a>&gt;<br>
+&gt; =C2=A0for sources as there seems to be newer releases there 1.79.1 was=
+<br>
+&gt; released in 2015<br>
 &gt; <br>
-&gt;=C2=A0 DEPENDS +=3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-xstatic \<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#125441): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/125441" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">https://lists.openembedded.org/g/openembedded-devel/message/125=
-441</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11842145=
-8/6084445" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.op=
-enembedded.org/mt/118421458/6084445</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@l=
-ists.openembedded.org</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.=
-openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:skandigr=
-aun@gmail.com" target=3D"_blank" rel=3D"noreferrer">skandigraun@gmail.com</=
-a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br=
+>
 &gt; <br>
 <br>
+Thanks, deep down I had a feeling that there is a better way to avoid<br>
+do_patch, but couldn&#39;t find in the docs.<br>
+The oe-core submission will be left for someone else, however.<br></blockqu=
+ote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">Let me find s=
+ome time to send that</div><div dir=3D"auto"><div class=3D"gmail_quote gmai=
+l_quote_container"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0p=
+x 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
 </blockquote></div></div></div>
 
---000000000000068005064d78d038--
+--00000000000050ddbe064d78d4f4--
 
