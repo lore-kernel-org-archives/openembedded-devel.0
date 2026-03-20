@@ -2,133 +2,105 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 630E7108B8E8
-	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 10:06:37 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9355.1774001193939703816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B48A108B8ED
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 10:23:17 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9510.1774002188445492871
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Mar 2026 03:06:34 -0700
+ Fri, 20 Mar 2026 03:23:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dJ7DMaSJ;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-486fda2a389so3098735e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 03:06:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dH1w5o3D;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4853e1ce427so4193375e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 03:23:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774001192; x=1774605992; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=l8c7skHkSZXn4vyiSuiMmFU7wAvKXeEljUE1XMKLb1U=;
-        b=dJ7DMaSJiOzsGECbjlpUIJrwUsITg+3WIiB+dQATV9qho4UQaENjraiZzlniJ+8MgS
-         O0bqNJ+fGqzn6cINDSywamE1KXRwWhHJ5wuxvSaD+Ro58q3qmbQ537+W+uBgHnoLEfpb
-         lwUpIBsj4yv8UnMbou5SDpbSNCyZ5pCWoWYdmXBkrh1cuQGQ4TeQu7gHRLx4b/HXpDWt
-         mvrmTAoQPRKl0SuR/RAhS6RUuYph2RX4/qHALYD6/Y3Ywo5l9fGMmfVkdc7oeYYjwj9b
-         7c3HxJHNS5xYzJjYOAKMMvMo9UQE3KDHojYSOLJHUpwATtrCb+3SHO+hjVD4v+vkhGrm
-         qanw==
+        d=gmail.com; s=20230601; t=1774002187; x=1774606987; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LVBVL8yGa95fpPU/PxEqVF77479Po3TE9HRYgTFEsLw=;
+        b=dH1w5o3DxZ8NiNYyGocyAD+/AQYMyNafmDOzGy9XbknD/AeeT3cMdc9bjxfFj/fRY+
+         pb0G8/xnQVw9uBaUoHHO8jicCarrNWziJIltoaUoJYTyYpA6HPg1vXhWnSUL22038DQN
+         i0Y3SStChH2pAIDOs9VoD4CATh6MnniFQFFktWARzxlcyzxAllcQPGSxqhsCcmtQSmpC
+         IkLsoM2PfLoEkOZeXfD59QTrCPBgO25O5tp5+ysyzLTFqWaeCJokRcBhjj4TFp9+9f+q
+         fALYR7PAIJfMG3p3nCjwZzRtnsPBF+eIQdlqqI27F0PZQ7QOo+av9Gd+X8vQ+aDEP2nE
+         Rm4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774001192; x=1774605992;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=l8c7skHkSZXn4vyiSuiMmFU7wAvKXeEljUE1XMKLb1U=;
-        b=q9/ofKmZ2Ca437sENz9fUMHjhjAchDq6K0d+VlDeiZHhI1YOtNnGwtKA3ibggM+DM/
-         Ij+W5qcUDoBYEmzE+9/JRv0bn6BO9yJtU164DmfsKeXuMwElc5EqQaSxqHlOFiGungvO
-         hDRSkqsRjwHrcx8fHdVgk3GmNmFtyOHXccweCgO0hW37jlZOW7UgyjBIy6e6S79uo87P
-         SQDiZoCBq7Ivq9G2P6CqqCU/sOrjINXgEOoMoOwaFWzMOKM+BFS43juDFkmpqjgu+v6f
-         K69eCULhEsotfQ6HHbQvKfeg0J0kFQk1gxjIr3EUzUhOytFO2JMqNub7MV3EymTz1Hny
-         sVCg==
-X-Gm-Message-State: AOJu0YyrPNaVpkRucBlnyYtRBfUpnWiQVtHmx/vVSxtm57LVDxn7mhHh
-	sR/Xo3IolV8NExVRqORYvgK80x8UnmQ8ClEZkLRtrcRpRqOuEkLb2YrFgGswew==
-X-Gm-Gg: ATEYQzxI8lyUuxWMblA02Z0bzDoMsSI5YrInXQ/NHufzXMbCV4IO4PMNlF+toetaDqN
-	HCLvdKUl3z43naKzXKLFhW2e7TLa3b4nU8ze2i0TABNjZoHrccUWw2oh3/cqXUUVf3XOByDyd+V
-	pKhCzo1gEnCVZ+1/hXQsDaa6mibYsP5WDqZh3XwdITSUcvCvNygxZKBjbAhH42JC6TZjeSHKc3O
-	Q8LlV7uwBXw3pVf4guVIo5EzBN4v31e0+MFY4TWpdrN+0i2oNLS9qEeaisKEP8PzzxO0nbzNKhd
-	x2ELQFLinmZgEvpp4ATeCBQfbMHlBZFubeVd5Xr2tFlIiyH5sJRW8fa5wGstZizGQX40u+7Iv7Z
-	qY5HffcvyVRtcgz0s/CoAAWQLreFnur30dg83TyUowU+csWEiJ5QZYNoPbcVYHrO434A5e/IuuZ
-	OnsKCkxfN17winoo5Qy1bi
-X-Received: by 2002:a05:600c:3f19:b0:483:badb:618e with SMTP id 5b1f17b1804b1-486fedf70a8mr36103435e9.8.1774001192121;
-        Fri, 20 Mar 2026 03:06:32 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774002187; x=1774606987;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LVBVL8yGa95fpPU/PxEqVF77479Po3TE9HRYgTFEsLw=;
+        b=CXLfUTBxL/EWDwK0h6p5N75iROMyQQ8LF2Rc/onY9tVRkZDVZe65JU0PnqsNuhCfhz
+         uKnOyrYdCc2qncu33QE20g11K6S3aem2N/Hk92DKLmAlrtfas0wcBDGh5B5kky7p0qr6
+         GKM4Ed5p1exg1th/QJMmTfiL3DimqFC4VdtJfjInS1BgDalEfvXn+qKvsVHh6l4fdULa
+         wWCjdW2h53jl3aN2lZoBL1P7C8hR6SZgDFvCa78SObq39eJcP5hsalX1GyQopNWwaJXx
+         a1bNDN8ohJMnhTEcGmCGsg4m/cApEC9y6kBXc82/ZvickS+XD8HYWgvs5+mk4vncPB1a
+         9qdA==
+X-Gm-Message-State: AOJu0Yx6OpM09zBz+uWNVGt+z1IVO2jFmPUKMDnFnuBHNfJnNj8V4FPV
+	YXBL35Qx9xWf+XrRFtiqji6meQttOtsD61dKzTBau29/wJd/e2a+ahaJ2dIqAQ==
+X-Gm-Gg: ATEYQzx/VdPOkgFHNeHkBAapOEENJX0G4DA6T841p2Q4le1m+1HPpb2f58E5455S9o9
+	32HCwrQWVk4womf0w/HRcB4quICioboR7OdUsVufNypKxlrGwdy7uzq/oJGj9eQ2c69pmn68M9q
+	KqqPrV3xC56HyotmhxIKMMuc1sPNWuE+9YMDPKmNk55hdCzu2cK3THK3kEmVOjW+B0K2GgHvhjl
+	cm/baNCj0OpGz7ZaunuH3PQfHtdalTN+E319Tmym11HBPFqyrZHqCu0JkO33EAIqtpRG+yYKvqT
+	uO0El0jUlOEe1bB3D5MT2ZOHgATfDCvS1WHgW8mLG72dNshQ3eLn6Px6/ImS9PempfbOObY6n/z
+	pJll5QocTR5TQ5IUcoG8R0vg/OekBSz1EaSZYXFGDnppwzurALZJDb5S9FlOa7UtE0ab1FhWO5F
+	I+0TiXGUaeYibGWlzU0Szy
+X-Received: by 2002:a05:600c:1c16:b0:485:39d4:2dd9 with SMTP id 5b1f17b1804b1-486ff04fb4cmr41523275e9.33.1774002186401;
+        Fri, 20 Mar 2026 03:23:06 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486ff19d3b7sm12865355e9.20.2026.03.20.03.06.31
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486ff1d8138sm12201725e9.34.2026.03.20.03.23.04
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Mar 2026 03:06:31 -0700 (PDT)
+        Fri, 20 Mar 2026 03:23:06 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: schonm@gmail.com
-Subject: [meta-xfce][PATCH] imsettings: upgrade 1.8.10 -> 1.8.11
-Date: Fri, 20 Mar 2026 11:06:30 +0100
-Message-ID: <20260320100631.2774563-1-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] transmission: upgrade 4.1.0 -> 4.1.1
+Date: Fri, 20 Mar 2026 11:23:04 +0100
+Message-ID: <20260320102304.2808111-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:06:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125431
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:23:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125432
 
-Fixes building with glibc 2.43
+Also disable running clang-tidy on the code. On one hand the cmake script is trying to run
+the target version of it, and on the other hand it is not needed for compiling it,
+it is intended for upstream developers.
 
-Shortlog:
-Reset gtk-im-module in gsettings to use the wayland module instead gtk4
-Ensure collecting proper information on even Wayland session
-Fix unexpected D-Bus session lifetime
-Fix "assignment discards 'const' qualifier from pointer target type"
-Show few more information in log
-Drop cinnamon backend
-Disable imsettings for Cinnamon
+Changelog: https://github.com/transmission/transmission/releases/tag/4.1.1
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../imsettings/imsettings/0001-remove-man-page.patch      | 8 ++++----
- .../{imsettings_1.8.10.bb => imsettings_1.8.11.bb}        | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-xfce/recipes-extended/imsettings/{imsettings_1.8.10.bb => imsettings_1.8.11.bb} (94%)
+ .../{transmission_4.1.0.bb => transmission_4.1.1.bb}          | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/transmission/{transmission_4.1.0.bb => transmission_4.1.1.bb} (96%)
 
-diff --git a/meta-xfce/recipes-extended/imsettings/imsettings/0001-remove-man-page.patch b/meta-xfce/recipes-extended/imsettings/imsettings/0001-remove-man-page.patch
-index a2fe0451b0..e2ade1aa6c 100644
---- a/meta-xfce/recipes-extended/imsettings/imsettings/0001-remove-man-page.patch
-+++ b/meta-xfce/recipes-extended/imsettings/imsettings/0001-remove-man-page.patch
-@@ -45,9 +45,9 @@ index b492532..2236257 100644
- -SUFFIXES = .1.xml
- +
-  
-- ##
-- # Local Rules
--@@ -50,12 +42,6 @@ bin_PROGRAMS =						\
-+ #
-+ imsettings_boot_in = imsettings-boot.sh.in
-+@@ -59,12 +51,6 @@ bin_PROGRAMS =						\
-  libexec_PROGRAMS =					\
-  	imsettings-check				\
-  	$(NULL)
-@@ -60,7 +60,7 @@ index b492532..2236257 100644
-  #
-  autostartdir = $(sysconfdir)/xdg/autostart
-  #
--@@ -64,13 +50,6 @@ autostart_in_files =					\
-+@@ -73,13 +59,6 @@ autostart_in_files =					\
-  	$(NULL)
-  autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
-  #
-diff --git a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.11.bb
-similarity index 94%
-rename from meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
-rename to meta-xfce/recipes-extended/imsettings/imsettings_1.8.11.bb
-index 6daf1f57b1..e3fe0241b3 100644
---- a/meta-xfce/recipes-extended/imsettings/imsettings_1.8.10.bb
-+++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.8.11.bb
-@@ -16,11 +16,11 @@ DEPENDS = "autoconf-archive-native gtk+3 libnotify"
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb b/meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
+similarity index 96%
+rename from meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb
+rename to meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
+index aed1e2e32a..a4b7856abe 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_4.1.0.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_4.1.1.bb
+@@ -15,7 +15,7 @@ SRC_URI = " \
+ "
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main \
-+SRC_URI = "git://gitlab.com/tagoh/imsettings.git;protocol=https;branch=main;tag=${PV} \
-            file://imsettings-gcc10.patch \
-            file://0001-remove-man-page.patch \
-           "
--SRCREV = "27d84c88831ef76397a15891ba0738ce9a83902a"
-+SRCREV = "7fadd84fcbfe6c321dbe1c97b50cbb70efe20155"
+ # Transmission release 4.1.0
+-SRCREV = "272401184f0736e6063f9da90be7d037e907508a"
++SRCREV = "56442e2929cf4e9e20c8604a229e99fbb352190c"
  
  
- do_configure:prepend() {
+ inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
+@@ -28,6 +28,8 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'gtk', ''
+ PACKAGECONFIG[gtk] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF,gtk4 gtkmm4,"
+ PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd,"
+ 
++EXTRA_OECMAKE = "-DRUN_CLANG_TIDY=OFF"
++
+ # Weak default values for transmission user and group
+ # Change them in bbappend if needed
+ TRANSMISSION_USER ??= "root"
 
