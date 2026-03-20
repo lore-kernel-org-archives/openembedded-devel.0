@@ -1,338 +1,304 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D8CF1091919
-	for <webhook@archiver.kernel.org>; Thu, 19 Mar 2026 20:39:56 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5840.1773952794370207403
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 13:39:54 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64F301093168
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 00:31:59 +0000 (UTC)
+Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2710.1773966715693900292
+ for <Openembedded-devel@lists.openembedded.org>;
+ Thu, 19 Mar 2026 17:31:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VSARppU0;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-48540d21f7dso15116775e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 13:39:54 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WQCDPUXm;
+ spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-7d756f2a06dso1446806a34.1
+        for <Openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 17:31:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773966715; cv=none;
+        d=google.com; s=arc-20240605;
+        b=ZiZGXsXqktBcelphvSMmkifVWLIy5aSzrYfR3290nitAETHnv8vFNj+tSetJrD9x5k
+         lDMHLr071yek/UVR9ZMsQtoRzz0liqHbm7g1LiMIiG40hrOvABIV/YWZXeq+d6jPPM3e
+         R1BbRQtit5L+TU+GyoqyBQrte4ILvKNr6PlXMHyYHTexMoDs0mkgc9Vcj+EM9meUdbL6
+         FSqV90VrNIy+AeN4F+v+viFlmuG2SPSxiHLoyQHjd0/HRONHkloFj49dm/yvqbwcCklM
+         8s673lSmMJutleoMf+7SeI8pe++X9oer7IzywMOv6VmLffrjuCEbHjYfjnqmD1N2XOpA
+         I+RQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=V0fj2LBY20RU7B+z17S9JJ7XXI83PkLKCLG/U6jZqoc=;
+        fh=bMqJyVx1OSo0APHvv7nrEO5hri16l/Fg/z1tKXRIzPE=;
+        b=YFEm4zXR6/gSOfHTnH1DJ23Uopo+xG0QbhQMcHtsjQJ8RAtpoguap6aUCPVM+ORIAD
+         vpfbPBWHe3wYPIWSqNC2a+80vQxTwnEBKV6c0VREEi5Knsk3tcxJnZuIBpN2jUnSehnX
+         aOQoNnVPbvzcAwW1zTl6bkSx+gyR9KTqZVxxtEr+lPFqSs2B9jPDhPVHd6tu7UR14OiQ
+         nDh+MxMVhZ39UBjJH/7kmR7mgNdl37tYrOByyT98pqNzZUJzgfhGteJIeAXbNFNAR1ph
+         V2asaxCEVAc+P9gRqs10kXRFzeNBi7Ju/hsNvHQTXJogROzTKI1pZ7TXZcjIYxTVHQu9
+         4TwA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1773952793; x=1774557593; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=rBZOtddYXm/zUKruQN7gbMy4tO7A17H4k/wlRaGk8Sk=;
-        b=VSARppU00N2jRGLe9IQjHWBn2TKzXTUOTifn15YlEs/w1u6so4+c3pioZw1bVtV5lJ
-         okpd9w9A3+BIb3Zql+nUIeb9NRdQNGIrXGMLlonACGRFRYKRVtoqhLlWOnbmCUGinHG0
-         K4qorcrfP6u0keXmXc9bHLlZggSMyQzpi4YC+aFerLrbaqgiizF3v0QQ5G9wHJwd3K8U
-         xkNB7G4LIR8NcEkKv99cu5iZK/PIB4+1VX3MtzNTc5hCGiBaDjnbPycY02H+wOC9HSk+
-         QqP0FhR1zwkO2ApfpFcUC3RGi1QPf1VlUFFNh7tVk0yMJqPBpmFUSNKPJBLsjbxMlJKg
-         UVYQ==
+        d=gmail.com; s=20230601; t=1773966715; x=1774571515; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=V0fj2LBY20RU7B+z17S9JJ7XXI83PkLKCLG/U6jZqoc=;
+        b=WQCDPUXm5eV22zaFCStzJFJPNjmfEEzf744c72FFHED/Ftw7WvpJZ8Zzzwn5Ejx+8h
+         y0Or0lLa5xPoMaVW4hFbw96hOg3OG/Y8RCK64gToZuQkXvQKDmwFOVa97NV89KT3zU3N
+         gRrwg5GiT0+dKMb9GClrBRIm3wSW9WBQtx5dT4dYphyQT6zWubk3yqw4/vesPCKQQxcL
+         EbpFPC4KIMGVkxzTpc1jt/N5iZaCWulJ7CYonDdM/jcfBYeDiSmj5/Az3FZ5IaqsWSw8
+         ECQzLwBF/kP23+jF8f4jMAYwXrrEHGuOZjByCgQgdR5lWu2lHzdaP/UmsWYdafmGyQBa
+         +RyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1773952793; x=1774557593;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rBZOtddYXm/zUKruQN7gbMy4tO7A17H4k/wlRaGk8Sk=;
-        b=q6f5lxNh8iRN7LeETfDXH8R3TdZ3xpzWGlhVKx6osMyhWynyvRkRNWVAR6qb8Lcu/t
-         ht2Q/cOLpU25vTfRxxoYllzjWWiF4fUHib49rSiBVUhDyhQK25/cy6SYe2du+H6ErtVr
-         Rk4vALrsZyTi5HZ2hYScGfu891r4OKcnp6ce/za2jPN3r3weHMCs4xNF/7qfKcoJSyaL
-         MvUzbobkJ1NyZphc8Na6PGTjQvf6RQ7k69QsrbSjPebVz6FCIVaD7itsgal/qhigQM3X
-         FXQd9YALzKkJacICIBl7B3tDEfbMLtt4gx46E+EBSRCBqEmR2zqfXqXzyZrvJRzsGgfq
-         0geg==
-X-Gm-Message-State: AOJu0YwXyEF0u9MSqVRVZOTFgoKMIKqY5eZ2HsVcIwtWAWGb/xNHMLqs
-	XNiIAhuzxbxzqXmPhCmBAKBMY/VGDHOqAfXmCxK8QQZvjj9TcxVtR6mgiLgU/g==
-X-Gm-Gg: ATEYQzyEsloSeiILtbk/zWWDVWaWavO2Kf6q15DKj1hKmejwUroZWtPIGdpyHi3fwzu
-	Dnl/dAFtyo+5Thni/xb2lgRgDSpNrdkGUdRhbVdE8hsZkXIqr22fJiUxFoaXU9fKple7sE2aGIU
-	oNOhd1KWJYGq7Tn06nVm5GODcX+nkYub2gpqpgF41xd7OhWpkGCvBSt7mGrRP/MKqI1MZ0Qf54M
-	wRlafgIweUvOzqSOUsBDy9tnVGCkal19QDcFv0AYjj2JHfyeR/GrRAn4arbfWjmJbBGVre9KhpX
-	LCNTsrvs1vrjs242aF+7Y7203O273GgsRWGAFakyRs3W9Or1SDdXwokyTwOexWM5XQBEOaHTA9p
-	hLAMbX09R0IZrhulIyGG4YrKzIcMTCEaS+Ylbiaa3b3vaW4HMi9KM8/HZc1NtytVFpc2EqeXsYz
-	K2fzeRt93Z7KNlM8cGxL7DU0xQZgeV3CA=
-X-Received: by 2002:a05:600c:8119:b0:485:54cc:2e7c with SMTP id 5b1f17b1804b1-486ff034137mr6125075e9.24.1773952792564;
-        Thu, 19 Mar 2026 13:39:52 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486ff1ce0b9sm2155535e9.6.2026.03.19.13.39.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 19 Mar 2026 13:39:52 -0700 (PDT)
-Message-ID: <d1656f73-13d0-47ef-9ad1-a2b71175b2bb@gmail.com>
-Date: Thu, 19 Mar 2026 21:39:51 +0100
+        d=1e100.net; s=20251104; t=1773966715; x=1774571515;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=V0fj2LBY20RU7B+z17S9JJ7XXI83PkLKCLG/U6jZqoc=;
+        b=VNTr96Tm9+Ioiz52N+rTqDAV48ApL0EkHZTcbgUNz8NBDonZEZl+bQxPirXbrtTWAE
+         PG1ym8NK8S4PdgyTk4Dva+IAX54+NruHjNGhgAA7NoKf3ve+EfWZzsXdCGV23f/qQYzk
+         0Wn5jms2ItBCOapZR3TjDKUksNHPML9Nb1IGgTRUI/SVKsGPQs4TpzHMnVQEI+p/620H
+         k1CjZwUy5Qo8cjHWu5xL+LGU8c96sPw3wnkz9+v2f5Ip9oiDtdah7SemK2Vc2MRGpz9n
+         VlJHP1S9R5s4pJ68id1ElxSsVku1g0E9pkSAX1Q0UWiuWXeOYFODrHakgkUlRY+WbQFi
+         J/sw==
+X-Forwarded-Encrypted: i=1; AJvYcCUD/dCWpJ6TSKOmmgQBHDNYRyV7Kb7YVpDhS+LJjVe1ooNYzTQSyVpE3xGX/jVWp0RxTdPwu5v13BhqqUEvi/Mpzm0=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yx+YVEmBX69d72yoUtSu/vpSJfODmdY9fq9uQX4YAQKJ7lvowUk
+	8tTLE5DfOXLSVdtVXGg8katQ79SHKDixtvTQI7pf05rlYNNEeaDDlcNtT4I2J0jVci7tRNzh+Rw
+	GeF6BAVqp5D++nvS/vZjx0+n0mhvYfbM=
+X-Gm-Gg: ATEYQzyiftm91R4CTbB/72DwR5ZpoLWEWvSe0akETTHOBmkykI++aRrWJ0LLXClYu4w
+	Ma9H6U8Vgc37qKrUq8dr2LMXALKQKC3y+lAde1hRQgkJKTY5jLtlRMkDw3gkXmv2VQEUAphXlkc
+	lwm3HBYYKbGqEd5qAIyaTsVckjZnm+vZFPghExhgyU3UGOPHkqRSo5sdrju5Bz7CCUeKIHtaCJI
+	Qn14XRO3nItGkBVbPhBrutcqbzFpcOkFKXQ71n558InMH/wPRzczXYOm+NuNfiZyc1FJg0O1q4K
+	Pjb5BaIL
+X-Received: by 2002:a05:6830:6d26:b0:7d7:e3d7:e200 with SMTP id
+ 46e09a7af769-7d7ea9f0564mr910289a34.6.1773966714707; Thu, 19 Mar 2026
+ 17:31:54 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-gnome][PATCH] gedit: upgrade 46.2 -> 49.0
-To: openembedded-devel@lists.openembedded.org
-Cc: f_l_k@t-online.de
-References: <189E589145FDCC75.3006288@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <189E589145FDCC75.3006288@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <CAMKF1so=RHPpR_uQk5XhGWLPywr_x-4cr=Ub-nODf14hSAw83A@mail.gmail.com>
+ <DB5PR02MB10213E9B6359ED0E2BCAD3968EF4FA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+ <CAMKF1srQ2N9F5__Y9k1_yNy5-wfryCqDqAkR8qrJo_rfM878TA@mail.gmail.com>
+ <CAMKF1srrHrDeCxJp1nnu1A_Uj8Qd8MyUhe6ZR78frYmFBajfAw@mail.gmail.com>
+ <CA+s=J=zqQET=sUwGTPDt4GnJpRpi4c6NkVE9aUOvyJ4bs67erw@mail.gmail.com> <CAMKF1srJJ5uE8Kqz5TM4SAnOF6ST6+esxCoBR4RxPmhJ=Xq32g@mail.gmail.com>
+In-Reply-To: <CAMKF1srJJ5uE8Kqz5TM4SAnOF6ST6+esxCoBR4RxPmhJ=Xq32g@mail.gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Fri, 20 Mar 2026 13:31:43 +1300
+X-Gm-Features: AaiRm501lRBY3G5GEdZXl8cd-Nq3R0Ds-Gm9ISOD1_JLPJrhSAd58SZtO2GNLOs
+Message-ID: <CADySD0FobO4ybY8_wPuA1h2fxHcA5h+cWTSNY56wzmHVJ+uqmA@mail.gmail.com>
+Subject: Re: [oe] Recipes needing build fixes after glibc 2.43 upgrade
+To: raj.khem@gmail.com
+Cc: Anuj Mittal <anuj.mittal@oss.qualcomm.com>, 
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 20:39:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125415
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 00:31:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125416
 
-Khem,
+On Fri, Mar 20, 2026 at 1:29=E2=80=AFAM Khem Raj via lists.openembedded.org
+<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>
+>
+> On Thu, Mar 19, 2026, 2:15=E2=80=AFAM Anuj Mittal <anuj.mittal@oss.qualco=
+mm.com> wrote:
+>>
+>> On Thu, Mar 19, 2026 at 1:53=E2=80=AFPM Khem Raj via lists.openembedded.=
+org
+>> <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
+>> >
+>> > remaining list
+>> >
+>> > Summary: 7 tasks failed:
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
+recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_compile
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.809159
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
+recipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.790297
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
+recipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.882672
 
-This patch requires your libtepl and libgedit-gtksourceview updates from
-master-next - if you merge this, you will need to promote those too.
+I am not able to replicate the AB error with version 1.8 in my local
+env and managed to upgrade the recipe.
 
-On 3/19/26 21:38, Gyorgy Sarvari via lists.openembedded.org wrote:
-> Switched to fetch from git, because the related tarball is not available
-> (yet?) in the gnome download server.
-> 
-> Dropped patch that became unnecessary.
-> 
-> Changelog:
-> 
-> News in 49.0, 2026-01-03
-> ------------------------
-> 
-> * Metainfo data: add more infos to fix Flathub warnings.
-> * Cleanup: remove BuildStream and Snap from build-aux/ (outdated).
-> * Translation updates.
-> 
-> News in 49.alpha2, 2025-11-17
-> -----------------------------
-> 
-> User-visible changes:
-> * Add a max-file-size setting for document loading, fixing the common problem
->   with very large files.
-> * New symbolic app icon (to have a square one).
-> * Statusbar: fix a bug with the language button popover.
-> 
-> Under the hood changes:
-> * Fix a compilation warning.
-> * Statusbar:
->   - Move some features of GeditStatusbar to libgedit-tepl as TeplStatusbar.
->   - GeditWindowStatus: new internal class to offload some work that was done in
->     GeditWindow, to avoid a god class.
->   - *.ui -> code.
-> 
-> Other:
-> * Translation updates.
-> * Tools: generate-html-list-of-plugins-description.sh script (output HTML
->   content that is put on the website instead of generating a Markdown file
->   located in the git repository).
-> 
-> News in 49.alpha1, 2025-09-05
-> -----------------------------
-> 
-> User-visible changes:
-> * gedit icon: take an older version for small sizes. The older version looks
->   nicer.
-> * Code Comment/Uncomment plugin: some bugs have been fixed, and the behavior can
->   be slightly different in some situations. A new user manual page has also been
->   written.
-> * Setup allowed GDK backends to disable Wayland. Only the X11 backend is allowed
->   on Linux (so it relies on XWayland when running the application on a Wayland
->   session). It fixes some bugs, especially for the Word Completion plugin.
-> 
-> Under the hood changes:
-> * Tools: add generate-c-plugin, to generate the boilerplate C code for a new
->   plugin.
-> * Code Comment/Uncomment plugin: rewrite it in C, and have the bulk of the
->   implementation in libgedit-tepl.
-> * Port to new GtkSourceEncoding API.
-> * GeditTab refactorings:
->   - Extract gedit-tab-utils.c.
->   - Start to extract GeditTabLoader (private class).
-> * Various other code refactorings.
-> 
-> Developer documentation:
-> * Improve the developer documentation, and start to write the
->   “Gedit Development Guidelines”.
-> * Improve API docs of the Activatable classes.
-> 
-> Other:
-> * Metainfo data: add a donation URL.
-> * Translation updates.
-> 
-> News in 48.2, 2025-04-14
-> ------------------------
-> 
-> * Update links to new website domain name: https://gedit-text-editor.org/
-> 
-> * It is no longer possible to implement plugins in Python.
-> 
-> * New features:
->   - Reset All button in the preferences dialog.
->   - In the Spell Checker plugin: be able to configure the default language used
->     for the spell-checking in new documents.
-> 
-> * Code refactorings:
->   - In GeditWindow and GeditPreferencesDialog.
->   - Don't use the g_slice_*() functions (deprecated).
->   - In the Spell Checker plugin.
-> 
-> * MS Windows: change default font to Consolas.
-> * macOS: install an icon (work by LI Daobing).
-> * Metainfo: improve it (work by Daniel Rusek).
-> * Some updates to the user manual.
-> * Improve the devel documentation.
-> * Translation updates.
-> 
-> News in 48.1, 2024-12-07
-> ------------------------
-> This is _not_ a bug-fix release, it contains other changes. The current plan is
-> to release gedit 49.0 at the same time as GNOME 49.0, to come back to the same
-> numbers as GNOME, but with more frequent releases like this one.
-> 
-> * Removed plugins: External Tools, Snippets, Python Console.
-> * Text Size plugin: rewrite in C.
-> * Remove the background-pattern feature (with the grid).
-> * Fix bug on Wayland to unmaximize the window.
-> * Code refactorings.
-> * Fix compilation warning.
-> * Translation updates.
-> 
-> News in 48.0, 2024-09-14
-> ------------------------
-> New features:
-> * Full support of light/dark GTK theme variants. Configuration is done in the
->   Preferences dialog -> Font & Colors.
-> 
-> Visible changes:
-> * Add missing tooltips to some buttons (Sabri Ünal).
-> * The Text Size plugin has been moved from gedit-plugins to this repository, and
->   is now enabled by default.
-> * Remove Quick Open plugin.
-> * Mark some plugins as "buggy plugins": External Tools and Snippets.
-> 
-> Bug fixes:
-> * Fix some warning messages that appeared at runtime.
-> * Fix a crash.
-> 
-> For Microsoft Windows:
-> * Add Portable Executable resource icon, to associate an icon with the
->   executable (Hernan Martinez, gwillems and Sébastien Wilmet).
-> * Make gedit work without patches for MINGW-packages.
-> 
-> Misc:
-> * Some code refactorings.
-> * Update the user manual for the new feature ("Change the color scheme" page).
-> * Side panel: adapt to latest libgedit-tepl API.
-> * Bottom panel: port to TeplPanel.
-> * Build instructions: Meson refactorings.
-> * Translation updates (GNOME Translation Project contributors).
-> 
-> -- Sébastien Wilmet (main contributor and reviewer).
-> 
-> News in 47.0, 2024-04-27 (stable version)
-> -----------------------------------------
-> Web presence:
-> * New website for gedit: https://gedit-technology.github.io/apps/gedit/
-> * Update URLs for gedit-technology.net -> https://gedit-technology.github.io/
-> * Start to migrate away from wiki.gnome.org.
-> 
-> Branding:
-> * Restore the previous app icons and logo.
-> 
-> New features:
-> * Experimental: add light/dark GTK theme variant configuration (as a hidden
->   GSettings key for now).
-> 
-> Removed features:
-> * Localization (l10n): all the translations are disabled, gedit is available in
->   English only because some underlying modules are not on l10n.gnome.org or
->   equivalent.
-> * In the preferences dialog, remove the toolbar to install/uninstall color
->   schemes. Third-party color schemes are still supported, but the XML file(s)
->   need to be copied into the right directory by another means, see:
->   https://gedit-technology.github.io/developer-docs/extra/libgedit-gtksourceview/style-schemes.html
->   or also the gedit user help documentation.
-> 
-> Under-the-hood changes:
-> * Adapt the code for libgedit-gtksourceview API changes.
-> * Adapt the code for the Tepl -> libgedit-tepl module rename.
-> * Code refactorings, various improvements and bug fixes.
-> * Continue to reduce usage of *.ui files, write code instead.
-> * Use newer GLib API at some places.
-> * Add -Wshadow to the CFLAGS and fix the corresponding warnings.
-> 
-> For plugins:
-> * Some API changes (see the page documenting the API breaks).
-> * Improve the API documentation.
-> 
-> Misc:
-> * Rename *.appdata.xml to *.metainfo.xml and do some updates to that file.
-> * Update documentation for contributors.
-> * Links to some third-party plugins.
-> 
-> Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-> ---
->  .../gedit/gedit/0001-fix-for-clang-18.patch   | 32 -------------------
->  .../gedit/{gedit_46.2.bb => gedit_49.0.bb}    |  4 +--
->  2 files changed, 2 insertions(+), 34 deletions(-)
->  delete mode 100644 meta-gnome/recipes-gnome/gedit/gedit/0001-fix-for-clang-18.patch
->  rename meta-gnome/recipes-gnome/gedit/{gedit_46.2.bb => gedit_49.0.bb} (88%)
-> 
-> diff --git a/meta-gnome/recipes-gnome/gedit/gedit/0001-fix-for-clang-18.patch b/meta-gnome/recipes-gnome/gedit/gedit/0001-fix-for-clang-18.patch
-> deleted file mode 100644
-> index 40fd93b984..0000000000
-> --- a/meta-gnome/recipes-gnome/gedit/gedit/0001-fix-for-clang-18.patch
-> +++ /dev/null
-> @@ -1,32 +0,0 @@
-> -Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> -Upstream-Status: Inappropriate [https://gitlab.gnome.org/GNOME/gedit/-/issues/588]
-> -
-> -Temporary workaround to fix build:
-> -../plugins/quickhighlight/gedit-quick-highlight-plugin.c: In function ‘gedit_quick_highlight_plugin_load_style’:
-> -../plugins/quickhighlight/gedit-quick-highlight-plugin.c:96:47: error: implicit declaration of function ‘gtk_source_style_copy’; did you mean ‘gtk_source_style_apply’? [-Wimplicit-function-declaration]
-> -
-> -   96 |                         plugin->priv->style = gtk_source_style_copy (style);
-> -      |                                               ^~~~~~~~~~~~~~~~~~~~~
-> -      |                                               gtk_source_style_apply
-> -../plugins/quickhighlight/gedit-quick-highlight-plugin.c:96:47: warning: nested extern declaration of ‘gtk_source_style_copy’ [-Wnested-externs]
-> -../plugins/quickhighlight/gedit-quick-highlight-plugin.c:96:45: error: assignment to ‘GtkSourceStyle *’ {aka ‘struct _GtkSourceStyle *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
-> -   96 |                         plugin->priv->style = gtk_source_style_copy (style);
-> -      |                                             ^
-> -
-> ---- a/plugins/quickhighlight/gedit-quick-highlight-plugin.c	2024-02-20 08:11:47.925749255 +0100
-> -+++ b/plugins/quickhighlight/gedit-quick-highlight-plugin.c	2024-02-20 08:12:16.218594067 +0100
-> -@@ -90,11 +90,12 @@
-> - 	if (style_scheme != NULL)
-> - 	{
-> - 		style = gtk_source_style_scheme_get_style (style_scheme, "quick-highlight-match");
-> --
-> -+#if 0
-> - 		if (style != NULL)
-> - 		{
-> - 			plugin->priv->style = gtk_source_style_copy (style);
-> - 		}
-> -+#endif
-> - 	}
-> - }
-> - 
-> -
-> diff --git a/meta-gnome/recipes-gnome/gedit/gedit_46.2.bb b/meta-gnome/recipes-gnome/gedit/gedit_49.0.bb
-> similarity index 88%
-> rename from meta-gnome/recipes-gnome/gedit/gedit_46.2.bb
-> rename to meta-gnome/recipes-gnome/gedit/gedit_49.0.bb
-> index 91b2221d7a..15b14b2c90 100644
-> --- a/meta-gnome/recipes-gnome/gedit/gedit_46.2.bb
-> +++ b/meta-gnome/recipes-gnome/gedit/gedit_49.0.bb
-> @@ -23,8 +23,8 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc get
->  def gnome_verdir(v):
->      return oe.utils.trim_version(v, 1)
->  
-> -SRC_URI += "file://0001-fix-for-clang-18.patch"
-> -SRC_URI[archive.sha256sum] = "c0866412bad147ebace2d282ffcbb5a0e9a304b20fd55640bee21c81e6d501ef"
-> +SRC_URI = "git://gitlab.gnome.org/World/gedit/gedit.git;protocol=https;branch=master;tag=${PV}"
-> +SRCREV = "684abd8299139e1a3b87446da501ad034e78c840"
->  
->  # gobject-introspection is mandatory and cannot be configured
->  REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/=
+recipes-extended/qad/qad_git.bb:do_compile
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/qad/0.0+git/temp/log.do_compile.886896
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
+working/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.904879
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
+working/recipes-support/netcf/netcf_0.2.8.bb:do_configure
+>>
+>> This seems to be because of a .gnulib-tool.py file in newer gnulib
+>> that isn't being copied. Even if that is fixed, it later fails because
+>> it uses an obsolete macro.
+>>
+>> The last release of netcf was 10 years ago and there have been no
+>> updates. I didn't find any recipe using it except libvirt. Perhaps it
+>> should be removed?
+>
+>
+> I am for it.
+>>
+>>
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.916449
+>> >   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-net=
+working/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:do_compile
+>> >     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86-=
+64-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.953431
+>> >
+>> > On Wed, Mar 18, 2026 at 8:23=E2=80=AFPM Khem Raj <raj.khem@gmail.com> =
+wrote:
+>> >>
+>> >> Awesome, thanks for the help
+>> >>
+>> >> On Wed, Mar 18, 2026, 8:01=E2=80=AFPM Peter Kjellerstedt <peter.kjell=
+erstedt@axis.com> wrote:
+>> >>>
+>> >>> I=E2=80=99ve sent a backport of a patch for liboauth2. Note that ups=
+tream has made a mess. They first fixed the problem in commit 0dcba079907d5=
+59550ee8d9a201d26203bb8aebd (the commit I have backported), but then they r=
+everted it in commit 155b93b2efd1e8b0022c9bdad2297a2a670dc29c under the pre=
+tense of fixing the issue (https://github.com/OpenIDC/liboauth2/issues/70).=
+ I have reported the mistake as https://github.com/OpenIDC/liboauth2/issues=
+/73...
+>> >>>
+>> >>>
+>> >>>
+>> >>> //Peter
+>> >>>
+>> >>>
+>> >>>
+>> >>> From: openembedded-devel@lists.openembedded.org <openembedded-devel@=
+lists.openembedded.org> On Behalf Of Khem Raj via lists.openembedded.org
+>> >>> Sent: den 18 mars 2026 22:40
+>> >>> To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+>> >>> Subject: [oe] Recipes needing build fixes after glibc 2.43 upgrade
+>> >>>
+>> >>>
+>> >>>
+>> >>> Hello All,
+>> >>>
+>> >>>
+>> >>>
+>> >>> There are few recipes currently broken on meta-openembedded layers, =
+predominantly due to glibc upgrade. Help is needed in fixing them so we can=
+ have world builds working again on AB
+>> >>>
+>> >>>
+>> >>>
+>> >>> Here is list
+>> >>>
+>> >>>
+>> >>>
+>> >>> Summary: 16 tasks failed:
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/minicoredumper/2.0.7/temp/log.do_compile.55019
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-extended/canopenterm/canopenterm_1.0.14.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/canopenterm/1.0.14/temp/log.do_compile.38373
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
+ython/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb:do_co=
+mpile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/python3-xstatic-font-awesome/6.2.1.1/temp/log.do_compile=
+.107676
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-extended/sysdig/sysdig_0.39.0.bb:do_configure
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/sysdig/0.39.0/temp/log.do_configure.124550
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-bsp/fwupd/fwupd-efi_1.8.bb:do_configure
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/fwupd-efi/1.8/temp/log.do_configure.145475
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
+etworking/recipes-daemons/opensaf/opensaf_5.22.01.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/opensaf/5.22.01/temp/log.do_compile.161530
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
+etworking/recipes-support/ntopng/ntopng_5.2.1.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/ntopng/5.2.1/temp/log.do_compile.154712
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-p=
+ython/recipes-devtools/python/python3-pychromecast_14.0.9.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/python3-pychromecast/14.0.9/temp/log.do_compile.175919
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-extended/qad/qad_git.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/qad/0.0+git/temp/log.do_compile.176411
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-test/libfaketime/libfaketime_0.9.10.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/libfaketime/0.9.10/temp/log.do_compile.182340
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-devtools/luaposix/luaposix_36.2.1.bb:do_package
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/luaposix/36.2.1/temp/log.do_package.186406
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-support/liboauth2/liboauth2_2.2.0.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/liboauth2/2.2.0/temp/log.do_compile.199073
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
+etworking/recipes-support/open-vm-tools/open-vm-tools_13.0.10.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/open-vm-tools/13.0.10/temp/log.do_compile.193667
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-n=
+etworking/recipes-support/netcf/netcf_0.2.8.bb:do_configure
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/netcf/0.2.8+git/temp/log.do_configure.208957
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-support/links/links-x11_2.26.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/links-x11/2.26/temp/log.do_compile.215047
+>> >>>   /srv/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-o=
+e/recipes-support/links/links_2.29.bb:do_compile
+>> >>>     log: /srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x8=
+6-64-v3-poky-linux/links/2.29/temp/log.do_compile.218734
+>> >>> Summary: There were 26 ERROR messages, returning a non-zero exit cod=
+e.
+>> >>>
+>> >>>
+>> >>>
+>> >>> and a build log with errors is here
+>> >>>
+>> >>>
+>> >>>
+>> >>> https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/5867932/ra=
+w_inline
+>> >>>
+>> >>>
+>> >>>
+>> >>> Thanks
+>> >>>
+>> >>> -Khem
+>> >>>
+>> >>>
+>> >
+>> >
+>> >
+>> >
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125414): https://lists.openembedded.org/g/openembedded-devel/message/125414
-> Mute This Topic: https://lists.openembedded.org/mt/118407722/6084445
+> View/Reply Online (#125400): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125400
+> Mute This Topic: https://lists.openembedded.org/mt/118391105/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
