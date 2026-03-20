@@ -1,133 +1,135 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E000A1099B23
-	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 17:02:16 +0000 (UTC)
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18037.1774026126952058260
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C6F91099B25
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 17:11:27 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18301.1774026682292193920
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Mar 2026 10:02:06 -0700
+ Fri, 20 Mar 2026 10:11:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=L+QL9Ad1;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-2c0c955a481so930478eec.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:02:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YbAP2Qlv;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4852b81c73aso7934985e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 10:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774026126; x=1774630926; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ik0rOdkmEDRi9tLGuFywGeXApPnQNKGkOuvvOyIxidY=;
-        b=L+QL9Ad1UMyfDi/hbumWJn70eKPFim9g7j1zymS1rfPE+mfd7TR57OP+hldrtWl83r
-         2KI/n295TPN6GYvDkuliPEdFp7HAziBsfYeetTXdlg4vg7dLnFP4EmTlExmse5uQmITD
-         Y1uIKu5JhlcfiuaPjYsnPX3c9HlRfydBwIDmMc/PzkhUZ585hONYrsxieW26MsxvognZ
-         YuPwrH0ZAyj2kjP0/GiDY8QNT1wRN2CfEvvBUx2JmSQsHuDm2z4AiJB/C+9Bfn1/gWsu
-         U10RGWi8qMlwNMfcsvjaTg9/BkhZ+uLFggNa8T3bUsGbN4GLGM/74j1UAavjPMrloSXF
-         6yzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774026126; x=1774630926;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+        d=gmail.com; s=20230601; t=1774026681; x=1774631481; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ik0rOdkmEDRi9tLGuFywGeXApPnQNKGkOuvvOyIxidY=;
-        b=hGGwHEbNbn/VM0VCpgNW4omX3/wQ+erszxM+kHcD2kJtLCgeZ0AwKjYzxYOyfzmQvp
-         pELD1Stm/gjFjFnbPGf3dQDAKBWvhqSUesHeKsGeZ0/BTCymV3C7oCxWD/dh9htwLc++
-         ggrFhGzKamC8XqRGCRNQownlfpcIdCyvaeAuNe/9ZAgxZyDwKSf17s+2g8GAGnkCFYCa
-         74nrNOXDGGT2hvUx9oNwfnVJVBBRzkr76aE8qckiorXJm9ldvICMvuE4i/LTfG3YzAjp
-         fj2N5nA+rH5fDubPMGwj1J5Bt3cBaE39fOHh7DtksIm5rhX6a5kKeSc6vF38resRWKDH
-         rnGA==
-X-Gm-Message-State: AOJu0YzoqvJbNbB1ffX6uEojJLzWYBZonl55GkyhZYNSqH9kPizW6G+Q
-	Zy8KvPyX74Z4QU+WqUtEPmFiTde0w7QU3DPiZ0luVRCOHTK5XA7ZxF0uM//MCOQl
-X-Gm-Gg: ATEYQzyMbv7dl/6LuZargu7IMm2YPJ0FrcL5zaMuXeeKRx2zGRMcc+mXrlN9Mf+YxwA
-	chCqS7uZHOOM/tSVCLvjwCdFrBPA1OkAIUd+Uh0kX6YeGTEQQfGT2S0UvgrFzmh0+o9S71mhcrW
-	1LcHHgk8EzLxn1UbxnGFWW2Bgl6IOPveec4tSeSelBNTjPfB1OyGh41qBLhRXYIb+B3bbxRpDKk
-	NJKFdmp6ZC5xofxCTTUsjtGFS3mt/lNvq5lxK0CcccPhov0TBznIAXdI7yHylyIWcIyFPyJD8lx
-	uxh1K7xJvFc7ONOUYTNjV5YS21KjgMOx7Y6quOSKkTwYaUepJJaUQ2jYBLx2dULbWKkfQki8M9O
-	qFRWt+hm+39ijolEjG9jStwFCL9V3BSF/PhDs4y0zmKigPinf6Vpigr0MIM0qMeUrF516aygyY9
-	hgSCs2I/Ros52MErOl1GaoMm2v/dfKlvFUS8FA94nLthfLgss354wWAorlID7M+qfd9t390w1O8
-	14rBc6/+sT5ZOieZ3WdT6aGvdjNkb05yfjEyfAGllJmtY4og6/xwPiR6XtL
-X-Received: by 2002:a05:7022:41a8:b0:127:33e0:ea33 with SMTP id a92af1059eb24-12a726b3177mr1805861c88.22.1774026125571;
-        Fri, 20 Mar 2026 10:02:05 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c10b14caf3sm5148632eec.5.2026.03.20.10.02.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Mar 2026 10:02:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 7/8] memstat: Pass OE environment CFLAGS to makefile
-Date: Fri, 20 Mar 2026 10:01:54 -0700
-Message-ID: <20260320170155.1413929-7-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260320170155.1413929-1-khem.raj@oss.qualcomm.com>
-References: <20260320170155.1413929-1-khem.raj@oss.qualcomm.com>
+        bh=bP92xB2SklevdyINYW5dFwPekDQIGoHTOX6hMPdfJ+I=;
+        b=YbAP2QlvxwLVIKPsihAkrdBho+2geXu1bJObaWj/LadYP3EhhZvjkamRLODyNuDW6x
+         HKNJpl0lm3TycyNtwzAtw17W+Df9rIFuJXJfe15hvJmdW7GuKO++yWKrlxzBz3B2h3dI
+         4QgBWJS/okhgYNTvhOXlNsoNNnv3i8VyBjXslT7QAYJ8vKw5m73s0EVmntgGOQxfy0XH
+         f6fBJNZMdf/mm4C/myqVmHr4hXR2AK7tJbBuzU6MjHi5paOaymxs/4XCD43TWsG+eq93
+         8Fxh6lpURT/lpxtSqXn/x2ceSEEEuKT37Dxvmnq+95jxpgLBZsJQY4M37b0Nx/2+YNdO
+         kIQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774026681; x=1774631481;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bP92xB2SklevdyINYW5dFwPekDQIGoHTOX6hMPdfJ+I=;
+        b=kMh0wlMGsH+alE56aJzNwtuWOmEWQlkBiXOd2wMTPhpUrsdQdjSiQBEmBUAytCVyp7
+         SCaskhcwubGQGkULaAU9qucKd9rg9OzHg1wQovYjlcgyZSVIRhTUUSxi2HsVN0E4Tcwg
+         zCepWV+EKR5JALaVPz3aV9PCgVnjhdwgZxKCu30CJTRZ1sJx3QTFHuPy3xMU6EWCgOCE
+         kKmKyr0Gsy5hl7bVN3240rM3IEm5xUi55I4J++LEx/Vck/tSv1h7IGFfjlUAuIczAA3+
+         N4LQViVCFcyjKDzEyoQh6I7fbf2y/4BdMEqFpdJh9A5qRsM4d5uxz8OE8y/id8jc/y9V
+         PywA==
+X-Forwarded-Encrypted: i=1; AJvYcCX/KEckuQTOB7/21/iI1fH+ngnzrvX4QNAsxsxktmPwi4DBWjMpOv9d80rkwGM0oLkU40hsg6vskHwIBkDfvzpgI7Y=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yz10BG3GvAYwDr16bCfvmB3KbNHZR+E06ZuKZ7FltiG8S5da4Sn
+	HiXVUIxAddwtgNz6NP8p+qC2Ui4dgpuyK8rxBd9kssQ93gtf+2q0Xe+h
+X-Gm-Gg: ATEYQzyDVFnfrac6AEa0mUxL+Sl+jckyBEsZ1g07oyvdHR2nxThVUaWgNsLAbFtOD5F
+	EtAvAnavuzKfRldFbc7rKwVvWe3XCLtxzrB0znPdbZI7z3HpqEihEB5IA5lnah1n0w7qeiM3dmM
+	rmWoUvQb7W5yCIj5ikFVwJnHLIiso9YIxaF6o0A1VjHnCXL/F6Gxg5sUTUgpuErmLjnjqGXJODJ
+	ih5ptZIkcRtmhhr8V0N23XrCGnV7/itR/+oWdEGjYQr7B2wq+xTE0a0E7+uJlqctD1FMW+4OEMZ
+	e+bE/F5AYgyrttOdmIJvb9glITsuHBmSCFUugXUqbU0yFVlnrquL7FgtSECCfyP6Q0ulVhLYCok
+	YLWKz5/opgFR+wa/TSLr0oeOMRmJroH6IOCazVV75Ocjlj7OI1ZrzyrIL2EOy5hP2HR/jvISQJB
+	bA33NU8fieJ8E7XNx3Dweu8uF9MLz98Tw=
+X-Received: by 2002:a05:600c:3b07:b0:485:3abe:ab86 with SMTP id 5b1f17b1804b1-486fedab424mr58974485e9.4.1774026680396;
+        Fri, 20 Mar 2026 10:11:20 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486f8b949e1sm250815745e9.9.2026.03.20.10.11.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 20 Mar 2026 10:11:19 -0700 (PDT)
+Message-ID: <c0e10c9a-39fd-4cf6-9868-e1b85649167e@gmail.com>
+Date: Fri, 20 Mar 2026 18:11:19 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python][PATCH 1/8] python3-xstatic-font-awesome:
+ Upgrade to 6.2.1.2
+To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20260320170155.1413929-1-khem.raj@oss.qualcomm.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260320170155.1413929-1-khem.raj@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 17:02:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125448
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 17:11:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125450
 
-From: Khem Raj <raj.khem@gmail.com>
 
-Helps with reproducible builds
+On 3/20/26 18:01, Khem Raj via lists.openembedded.org wrote:
+> From: Khem Raj <raj.khem@gmail.com>
+> 
+> License-Update: Updated font-awesome version number to 6.2.1
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...e_6.2.1.1.bb => python3-xstatic-font-awesome_6.2.1.2.bb} | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-xstatic-font-awesome_6.2.1.1.bb => python3-xstatic-font-awesome_6.2.1.2.bb} (61%)
+> 
+> diff --git a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.2.bb
+> similarity index 61%
+> rename from meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb
+> rename to meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.2.bb
+> index 0562cc2671..934b236983 100644
+> --- a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_6.2.1.2.bb
+> @@ -2,12 +2,12 @@ DESCRIPTION = "Font Awesome icons packaged for setuptools (easy_install) / pip."
+>  HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Font-Awesome"
+>  SECTION = "devel/python"
+>  LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=f1a2fe131dcb2fc6243c26cf05ecdb36"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7c083fdfe0b927a9de368a17fbf13b20"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...0001-makefile-Do-not-override-cflags.patch | 30 +++++++++++++++++++
- .../recipes-devtools/memstat/memstat_1.0.bb   |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/memstat/memstat/0001-makefile-Do-not-override-cflags.patch
 
-diff --git a/meta-oe/recipes-devtools/memstat/memstat/0001-makefile-Do-not-override-cflags.patch b/meta-oe/recipes-devtools/memstat/memstat/0001-makefile-Do-not-override-cflags.patch
-new file mode 100644
-index 0000000000..8ac7a8ff54
---- /dev/null
-+++ b/meta-oe/recipes-devtools/memstat/memstat/0001-makefile-Do-not-override-cflags.patch
-@@ -0,0 +1,30 @@
-+From a0806283da1b82b511aa879fa2f71deb01f849bd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 26 Jan 2026 22:22:54 -0800
-+Subject: [PATCH] makefile: Do not override cflags
-+
-+bitbake environment passes correct clfags for OE env
-+overriding it means some important flags for cross-compiling
-+go missing and causes
-+
-+memstat-1.0-r0 do_package_qa: QA Issue: File /usr/bin/.debug/memstat in package memstat-dbg contains reference to TMPDIR [buildpaths]
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 29f8129..5426bf4 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -3,7 +3,6 @@
-+ # Copyright 1998, by Bernd Eckenfels <ecki@debian.org>
-+ # This file is under the GPL.
-+ #
-+-CFLAGS = -g -Wall -O2
-+ prefix = $(DESTDIR)/
-+ exec_prefix = $(prefix)/usr
-+
-diff --git a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-index 6289f3a27a..a0b4d0b9cc 100644
---- a/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-+++ b/meta-oe/recipes-devtools/memstat/memstat_1.0.bb
-@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=87be186443b1ac2cfa466f475e1ee0cb
+This file doesn't seem to say much about the license, only that it's the
+same as font-awesome. There is however a license file in
+xstatic/pkg/font_awesome/data/LICENSE.txt path, which seems to be the
+license it refers to. One thing worth noting is that searching for
+"apache" brings no results in that file.
 
- SRC_URI = "http://sourceforge.net/projects/memstattool/files/memstat_${PV}.tar.gz \
-            file://0001-Include-limits.h-for-PATH_MAX-definition.patch \
-+           file://0001-makefile-Do-not-override-cflags.patch \
-            "
+What if we would check that file instead of pkg-info, and switch to
+"OFL-1.0 & MIT & CC-BY-4.0" (or similar)?
 
- SRC_URI[sha256sum] = "245d5fc7fb87bcfd14486cd34917cae2856e799559ac568434af12c4852bce94"
+
+> 
+> -PYPI_PACKAGE = "XStatic-Font-Awesome"
+> +PYPI_PACKAGE = "xstatic_font_awesome"
+>  UPSTREAM_CHECK_PYPI_PACKAGE = "${PYPI_PACKAGE}"
+> 
+> -SRC_URI[sha256sum] = "f075871096128638f2e1539020d8227754c3d885dd68e7ee6de9a01235076828"
+> +SRC_URI[sha256sum] = "9f3cb2f038fad7d352722375d3f25af346da9ee093ed9dc2c8c46bd911ab1971"
+> 
+>  DEPENDS += " \
+>      python3-xstatic \
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125441): https://lists.openembedded.org/g/openembedded-devel/message/125441
+> Mute This Topic: https://lists.openembedded.org/mt/118421458/6084445
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
 
