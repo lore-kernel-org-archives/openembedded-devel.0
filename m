@@ -1,363 +1,203 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <guocai.he.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E08071093172
-	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 05:11:50 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6141.1773983509924101589
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08E55109317A
+	for <webhook@archiver.kernel.org>; Fri, 20 Mar 2026 05:52:41 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6438.1773985953987560325
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Mar 2026 22:11:50 -0700
+ Thu, 19 Mar 2026 22:52:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=k1WDhlOz;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1773983510; x=1805519510;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=VzmeaozB9RWqR8Gr5odxJeOW1xM3JWinrhyOlCDvqqg=;
-  b=k1WDhlOzF/lfo5P7tbLcb//GwIvLRHy0uh4FZhC0kw9HqONvXTwGZeDs
-   VNJGZCRki0ZdT7LRw4LA0hWvQJDdDbXIjDgFpEQWw6PiSBBeGNOGGOkSz
-   iFnjW0Gd3MmIx+K5+c7bmeId+sN5LF+OJ3AbiaOVsn5KJhI4aeC5wejyM
-   tpBYp0HEFlAW3Yho2TIgyO1pN82rYEJ7dQeYgKq1Tj0/no5SZRAq0jZmL
-   k0KmhNkhzrAc/1ttKRdbyGkz9J8JqMDvh/hNeFHMVX/wKqHz2jgDMi1hK
-   KApPPGWpFDuxrYVwLf+FkNz36Vo9QwqCi9cdpvT3gmp26SMXLvVlT5Wuy
-   w==;
-X-CSE-ConnectionGUID: POKqcoRxQq6uhDU+l/ELwQ==
-X-CSE-MsgGUID: RxeJkq6oT1+5uzim0J/a8w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11734"; a="212959301"
-X-IronPort-AV: E=Sophos;i="6.23,130,1770562800"; 
-   d="scan'208";a="212959301"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Mar 2026 14:11:48 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 31503C00225
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 05:11:48 +0000 (UTC)
-Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id D607C14003D9
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 05:11:47 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.193.128.218])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 84C8C1800D6B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 05:11:45 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O/hVY2AN;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=753931f270=guocai.he.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62K574g2731053
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 22:52:33 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=oUu4W7DjQ1KHfIEMrrBD
+	O7HzfHKvMVCjDMiLo51f6Jc=; b=O/hVY2ANjyoJjdU4+r+qb98s5Ls77rQIFAB2
+	2MqiQUj/xnWvNEZJgoCpzJHEutUTHHdAp6z2d0XFjJxvLq1rnCBHAvOLiFWFJV2g
+	qil2/DXiyT2dte3iqGzDaGS1rAH6H8wpL146PeeO5e5O5z+OoOejxePK45z00ZYF
+	B+gBC9Sai59YaJFwsJjME98l1Zwn5QJ6UHrj6ByU0YHrHsvy8PFwFfBCL6flQQGd
+	gA9T7tDFDsjzJL5JiD+AteUKNp/rfxVxxfwE2mO2GeZ/u0RV5XytJvkKzhpc598W
+	hZF6iVbgUWCI9GZNfKo1f4AA0sn57QhkGD05lsl3QRVGw0cG0A==
+Received: from cy3pr05cu001.outbound.protection.outlook.com (mail-westcentralusazon11013044.outbound.protection.outlook.com [40.93.201.44])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4cw76dyeat-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 19 Mar 2026 22:52:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TLYzwBZpmE7vEB0iqc5eK9DjuiTPSVTJkCKph2y4ZCcMdFAZVMqO+62jb+bOMasPIHx+B8LneSND3Gont6ymC+uWksJisqg1c1pYXSTgtJMjO9Irw5fUenMh81oSSPDSpug/Xnpi8KlkOfvISwaRo3W87Z1WuzR7ezJEseSnQHqV22qD6LCTYfs1WKVgVMdCjn1SQDzaDiYRO5cYxDHdCZjtef0WfWib1G7wsicsR64xuTQj3aFqPzrD2kcF3V6b4ODCsiqdm+d8wf5kAM8m1xG3N42LMKvZG3UQZjbIwHO92UFumeTdBD983bkjy6oOL9byDG/l+jv0Otdf5GR5wg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oUu4W7DjQ1KHfIEMrrBDO7HzfHKvMVCjDMiLo51f6Jc=;
+ b=fb5bFJVEvCd9PTVPPpLCcOfLjVjnVW+2WZALJbZsS1t4UDuq4gwd6BAgiVfyoD6UjrVoEpDIdpLDsug1eCDGo8mVGlWz7uqzvqD/xqxIWJmYFxgeAurvJ9PnHouGWM4t5PvRP7ZOsAfh0J9jgsMggEfLQn+rCz/BCdzhM26vH+f3jbh3q++gSk0ijOGorfFRtJkfWzX65zw2SyfhHNmms9U4GmriPOVdzvygBBLmCL7lnt8n5bllTgnbL42mbvtheOgt4TiqP7fFePPkLHKXC+Amu9nZ8TmoFszXOqHwGnxayhqcnXrCmg1t7S7zhVvifQ1erohcRNQuE82LQr+AyA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CO6PR11MB5586.namprd11.prod.outlook.com (2603:10b6:5:35d::21)
+ by IA1PR11MB7725.namprd11.prod.outlook.com (2603:10b6:208:3fd::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.9; Fri, 20 Mar
+ 2026 05:52:30 +0000
+Received: from CO6PR11MB5586.namprd11.prod.outlook.com
+ ([fe80::89ea:ecfa:c345:3fc6]) by CO6PR11MB5586.namprd11.prod.outlook.com
+ ([fe80::89ea:ecfa:c345:3fc6%4]) with mapi id 15.20.9745.007; Fri, 20 Mar 2026
+ 05:52:30 +0000
+From: guocai.he.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-oe][PATCH v2] sysdig: upgrade 0.28.0 -> 0.39.0
-Date: Fri, 20 Mar 2026 13:11:36 +0800
-Message-ID: <20260320051136.16784-1-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+Subject: [oe] [meta-oe][kirkstone][PATCH] postgresql: upgrade 14.20 -> 14.21
+Date: Fri, 20 Mar 2026 13:52:12 +0800
+Message-Id: <20260320055212.1821470-1-guocai.he.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR01CA0018.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::7) To CO6PR11MB5586.namprd11.prod.outlook.com
+ (2603:10b6:5:35d::21)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR11MB5586:EE_|IA1PR11MB7725:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b06f13e-7043-431d-0a09-08de8644dfc1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|376014|366016|1800799024|56012099003|18002099003|38350700014|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	+V0LETV0g9aoyvr2xP88HvYl14+pMi4oUqvNIu8vV/JR6PJggHhgHMrb4Woq/Hq3T1yVxIFUK3pZK8XOY6DWpGPJ1DoZ5zvIEve/lso67gppRTSofzy4p+47qUUOV9q3etqvFZ5AeFJjyEge9eMZcAh3f3PBLfLBV/fQkQkPf+8zzZkwgt/QlKQuVXfnNzHX22KB4cgByY1TdSqFqDnOrSkFFcTyM0yoxOiJNx9pWgNS4tqSIS5qg+eRMqEt4JJc7HbcndV+91eb8JG8OvhjE+51noMqPwpUXJp0TH/G3nBGvtMT3H2XdWUC8GzfSk0EsHOh5WnHz6zCkRDuPnrFyrmYZqK014LhGz6Urpjz5ziyrRS96dWVrBj16T/L5Neq1lalnylBzvRbX+z5fOjFetIGaXwXFEYJ4IAhKtlgl5MmORQxht/LjEKx+Jmjsu3zkzyOl1oTCWNEjeQBvgBrucNHDWqdzon0l/CQbw0rtO9HqBbexdL840s5Yw/MOtoXlMA0M54hqcXGqJUcmTfNJesVPl1HdtdFxXMjKVXlW4sSI4QZaHO+TisZY9YEymTv0Po5Nr0226tVqWjVXs0W7l4uLrETdNEnmfzA2NN464GDLgecywA575jY4SVugOJb92hb6DlxojF6GdRGSqjP8rqNtyodBxHE9aVXVLpHBR+aIplc4TH2Mbl+lUDD57vs0R2pjtzNh+j0Jxv4+LsVNSqq1CbCJNQVIx3jOT5TvpnYBMnohH1wZZgE0j+O7mcP
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO6PR11MB5586.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(376014)(366016)(1800799024)(56012099003)(18002099003)(38350700014)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?hkSUGAWjCwIvqAjrLucDlav3+ztfsl1R3WjSqUJawZhH5vNZAVshXNI47+CJ?=
+ =?us-ascii?Q?4f89YXjBtfECEtDFlKzfw2MSfWGjn2U5yFrKXm+5P53bVY0M3aFXVfosicNh?=
+ =?us-ascii?Q?F19lH7/6o9sIkFFDTkzdvmg2chQknr+lujcsiPihsPFYiRPClXPz7UGGGkmO?=
+ =?us-ascii?Q?r++28k/HBMA47q3AauY9LFiHmrKvbadl7KuVYR4oLuXUNWFpnT28p1tJrFnH?=
+ =?us-ascii?Q?gmcWtH5fodEK8F/fjdzgcHxQl0yahDHOhmEvCftTMba3F7TxV16EXXSWgVbh?=
+ =?us-ascii?Q?XmXQshGvT1kHCKsOZsj8nml8k8kr4BGK1qLrUAMLsaCB+u7MtN4q+PZSQSFm?=
+ =?us-ascii?Q?J7aqGDvyGYG9JiLZxqcXFAP8OtUdUVvuxPc2jtKyBgFYHAnktbWFLkttRIKr?=
+ =?us-ascii?Q?qgC5oxe0r6u6j4R1FJwQ1NLjU0lMTw2MDdJOg4VLSv+VlXaYaSZ1HDqPjSkb?=
+ =?us-ascii?Q?/TwQWCw0de/Enp13PZWMMMI2cDGlDp1hbqIZ6y8Kf4FgIif8du1VbJZ24C08?=
+ =?us-ascii?Q?veE2riGAA3ZnJ/uM1d3IbZVEA0IwE9HAjWgQaUUEuscuanKlwYINKN6791tZ?=
+ =?us-ascii?Q?gs2wPegkczFlZsxgqCbX/Z9TbIHjYgZg89nM8ArPiI0IOda/m/PWxyE6uOem?=
+ =?us-ascii?Q?BWDjNhiPZKwtVZx0UWG33YjD04q6Z4vMuHcMtD46wifa4dTuVcja7grxfn23?=
+ =?us-ascii?Q?rGQ3qt41BT61MGBJ/fs9GbhjMGQgK5nKbjSdKN5BRjQBG/i2Qaje9SzPO0Ph?=
+ =?us-ascii?Q?dS1EbSmihyY4xOQ+PAcXeuu0rxGxwrcqrMl7TyYpnyJHq6wgujEuRzWWtbHw?=
+ =?us-ascii?Q?GZAXayVicjD6EJGWvQ03y60jGRKVKNXqG1+Qv36pfU3gqUCim0Pb+ofPt+75?=
+ =?us-ascii?Q?BYjwSJim+Z4R2Bt6yshUus1bfEm+R+Nt6Ds7rxRTwK+KtrfZP+Lc4RKshmOn?=
+ =?us-ascii?Q?cd+rY33KiUMMJjffTibyWGdAdi8G//n3qgFVw2nSGQaB3bAUYFsdYBFXFKkw?=
+ =?us-ascii?Q?jp/tWKjY7bREBYTmFL+/uhFIX56R1VrdAdpm0uidJAFs2JAk/W2zZ6pNkmMx?=
+ =?us-ascii?Q?a1qa7fDXPkt8qcbR4jewvSa1k8a5CnUwIqKZLGfkHz/VtQSKN8BHS3GuuNwj?=
+ =?us-ascii?Q?y9HJtiFqTXW0yQM2knT4ggkI51Rv3gDg7nxLCvvqLEv1ysHQnb5WSPePLEvH?=
+ =?us-ascii?Q?XWNq+u1ogFSIrl92bF8MFPJLov8twknC+ybT1oh3rXazZxspHwO6FBEU7JOw?=
+ =?us-ascii?Q?m1keX76Ji3dpOpCnR1mTBoU5N3AkCIZd+G/vgEKshavI/g5jtIsjIPqecm+5?=
+ =?us-ascii?Q?ZbxsXRc9P1feZHEnlyV2MAQ088tqqdPVKFTty+3qnJEPLiGscmeBDxQvYJOv?=
+ =?us-ascii?Q?23oDcvV3tN5JXnj1BwHRvFCf37FGk7cLWDfX2BvF1H1qxKv0xJO0avqvvpgx?=
+ =?us-ascii?Q?QfUd39Gva2UhByXnnpGuAr4Zns+AP1ixuwdIy5ZrOMMQ48hUU8Rbf77ki4RF?=
+ =?us-ascii?Q?LVqGd7LqonUx7EF0g9tuMbRYbJce7IQjxy8cIf+6xSGDM8RCvJYfiF2zn+oD?=
+ =?us-ascii?Q?KvIxT8rDOkVUoPwbuw+Ql5VPog16nyknLUmXZ56IDpBcixdNmDjXXq4IbpqA?=
+ =?us-ascii?Q?+aMOZwOkHy87HQAdt7f4IUc7/IySj/WSFjW9qp6231ANB87qiLEI6TGN6LHg?=
+ =?us-ascii?Q?gQLP+zzWRfHsOLv3bWqzxi/0K96CArTMI5y3R66XX8xDWqj3RAGSm+V5Skwd?=
+ =?us-ascii?Q?d7HAVrRTVsyINYfTObKyx7tglujsi7s=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	Nbloa6qvSQsL+22+8tRtcd7sOVtcfuJoqY/kjrg56FixmNBezqD77GEIpqbqHo917xVKaiQQW0UhQizpkKNc8BwIYVqiHj4Bu2YdPD1K99f6r5/L1ZQ+8CMOPx5rQ0iXVueLc70GEBq7gzX6z8wFPuRV9/MsZTxgB4QjnQ86JyvSBWZ8rqh7nzhVt9cnWMuGwy6I1l/b10yqTiWkSmB1gncSizS1IL0j95nO/YNzMzsDB7dVFjnbfM31uaacIP3UPRdv6WI3UkFTS+AXn5XobaTnNTyXpCbPVhEdQ/22jNz/JeFF+YDcPXNfMAOmT+0EximEPxJNIDVNnqlLNUtGjA==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b06f13e-7043-431d-0a09-08de8644dfc1
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5586.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Mar 2026 05:52:30.6459
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: icpeAi19Ph+Kh51XEcqVNTO3Enfl5AtVx9to+yCnq+oTckEv7JdYGbKQRBDKM4WdYQtU+9FpqVR2LUBULp8LlhwLD6OruPDTOHuEOwM6tZg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7725
+X-Authority-Analysis: v=2.4 cv=S9nUAYsP c=1 sm=1 tr=0 ts=69bce0a1 cx=c_pps
+ a=fVVZRgaqDuj868rfKEvgUg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=epTmVMiNAAAA:8
+ a=t7CeM3EgAAAA:8 a=VdJxyN7lVYxgHUX6UD8A:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIwMDA0MSBTYWx0ZWRfX186dnGW0df66
+ N9iFXuwTTphu+UZX7zWHDebz4TWKOt9rId9hWg9tZWlY3vMXjRCAWsDPgTl6uw9mRM0xR/ZOXq6
+ nPfQwtvdEnGMZnFA+KjvBuVPvYGUJ8PDPYtw/Cwa7uoecDix0NQa1MTfOe/+LU1s1oDlSWUthVA
+ CEUdcfZh5rvIGp1JUhsDBqZvpg0L5wnw2I3oaYXDBri0rD/zOcSC8E6Cefr7XfHtfORtHg3P2gx
+ Cye3aw+wJeWV1jkpV8AtpB0kCy5JXljQx7PCHC5Huu0isLcmRJrqUdJwQBzJ3UJA/JtdJ60Qz4g
+ kC2LM/Bd/B9W4Zw0ny11MsG/1ad89ST/veBY7ISOtE4AaMj7MwvoxybAZWTefZk8TpLSaFARW/K
+ wx5eqg6+b84xMP9jXnh33qD0ioHWRTgCypePXBT/6+XPZTdLwxheciTNENWhbDkZdo/dhe0/SM4
+ hasLdaZ+Hpd9/63dZ3g==
+X-Proofpoint-ORIG-GUID: mFMoTiNYdT_YlotYKkul53_PlI_ruhTM
+X-Proofpoint-GUID: mFMoTiNYdT_YlotYKkul53_PlI_ruhTM
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-19_04,2026-03-19_05,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 clxscore=1011 bulkscore=0 impostorscore=0 suspectscore=0
+ spamscore=0 priorityscore=1501 adultscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603200041
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 05:11:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125418
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Mar 2026 05:52:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125419
 
-Upgrade sysdig to solve build failure after upgrading valijson to 1.1.0.
+From: Guocai He <guocai.he.cn@windriver.com>
 
-1.Changelog
-  https://github.com/draios/sysdig/releases/tag/0.39.0
+Beside other bugfixes, it contains fixes for CVE-2026-2003, CVE-2026-2004,
+CVE-2026-2005 and CVE-2026-2006.
 
-2.Update 0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch for 0.39.0
+License-Update: Update copyright year to 2026
 
-3.Remove following patches as merged upstream
-  0001-Add-cstdint-for-uintXX_t-types.patch
-  0001-libsinsp-fix-build-with-gcc-15.patch
+Release notes: https://www.postgresql.org/docs/release/14.21/
 
-4.Add 0001-Avoid-duplicate-operations-of-add_library.patch to fix do_configure errors
-  -- Existing strlcat found, will *not* use local definition
-  CMake Error at falcosecurity-libs/userspace/libscap/CMakeLists.txt:64 (add_library):
-    add_library cannot create target "scap_error" because another target with
-    the same name already exists.  The existing target is a static library
-
-5.Add CMAKE option -DBUILD_SYSDIG_MODERN_BPF=OFF to fix bpf header file not found issue
-  sysdig/0.39.0/recipe-sysroot/usr/include/bits/syscall.h:23:10: fatal error: 'bits/syscall-32.h' file not found
-  |    23 | #include <bits/syscall-32.h>
-
-6.Add do_configure:prepend() function and CFLAGS/CXXFLAGS to fix header file not found issue
-  sysdig/0.39.0/sources/sysdig-0.39.0/falcosecurity-libs/userspace/libscap/engine/kmod/scap_kmod.c:30:10: fatal error: driver_config.h: No such file or directory
-  |    30 | #include <driver_config.h>
-
-7.Add do_compile:append() function to fix do_package QA Issue
-
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
+Signed-off-by: Guocai He <guocai.he.cn@windriver.com>
 ---
- .../0001-Add-cstdint-for-uintXX_t-types.patch | 38 ---------------
- ...-duplicate-operations-of-add_library.patch | 47 +++++++++++++++++++
- ...001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch | 21 +++++----
- .../0001-libsinsp-fix-build-with-gcc-15.patch | 31 ------------
- .../{sysdig_0.28.0.bb => sysdig_0.39.0.bb}    | 43 ++++++++++++++---
- 5 files changed, 95 insertions(+), 85 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-duplicate-operations-of-add_library.patch
- delete mode 100644 meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-fix-build-with-gcc-15.patch
- rename meta-oe/recipes-extended/sysdig/{sysdig_0.28.0.bb => sysdig_0.39.0.bb} (56%)
+ ...0001-configure.ac-bypass-autoconf-2.69-version-check.patch | 2 +-
+ .../postgresql/{postgresql_14.20.bb => postgresql_14.21.bb}   | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_14.20.bb => postgresql_14.21.bb} (71%)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
-deleted file mode 100644
-index e564958dad..0000000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/0001-Add-cstdint-for-uintXX_t-types.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 3d076ea588eb3c7f334133b4c31172a14beadf5b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 2 Feb 2023 20:18:27 -0800
--Subject: [PATCH] Add <cstdint> for uintXX_t types
--
--gcc 13 moved some includes around and as a result <cstdint> is no
--longer transitively included [1]. Explicitly include it
--for uintXX_t.
--
--[1] https://gcc.gnu.org/gcc-13/porting_to.html#header-dep-changes
--
--Upstream-Status: Submitted [https://github.com/falcosecurity/libs/pull/862]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- userspace/libsinsp/filter/parser.h | 1 +
-- userspace/libsinsp/filter_value.h  | 1 +
-- 2 files changed, 2 insertions(+)
--
----- a/userspace/libsinsp/filter/parser.h
--+++ b/userspace/libsinsp/filter/parser.h
--@@ -18,6 +18,7 @@ limitations under the License.
-- #pragma once
-- 
-- #include "ast.h"
--+#include <cstdint>
-- 
-- //
-- // Context-free Grammar for Sinsp Filters
----- a/userspace/libsinsp/filter_value.h
--+++ b/userspace/libsinsp/filter_value.h
--@@ -18,6 +18,7 @@ limitations under the License.
-- #pragma once
-- 
-- #include <string.h>
--+#include <cstdint>
-- #include <utility>
-- 
-- // Used for CO_IN/CO_PMATCH filterchecks using PT_CHARBUFs to allow
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-duplicate-operations-of-add_library.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-duplicate-operations-of-add_library.patch
-new file mode 100644
-index 0000000000..b8ca7dd38b
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-Avoid-duplicate-operations-of-add_library.patch
-@@ -0,0 +1,47 @@
-+From 74dec208d95821855130f6ed7b167327f1247e99 Mon Sep 17 00:00:00 2001
-+From: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Date: Thu, 5 Mar 2026 09:28:03 +0000
-+Subject: [PATCH] Avoid duplicate operations of add_library.
-+
-+To fix following configure error
-+| -- Existing strlcat found, will *not* use local definition
-+| CMake Error at falcosecurity-libs/userspace/libscap/CMakeLists.txt:64 (add_library):
-+|   add_library cannot create target "scap_error" because another target with
-+|   the same name already exists.  The existing target is a static library
-+
-+Upstream-Status: Inappropriate [oe-specific]
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
-+---
-+ cmake/modules/libscap.cmake  | 2 +-
-+ cmake/modules/libsinsp.cmake | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/cmake/modules/libscap.cmake b/cmake/modules/libscap.cmake
-+index b41b12ff3..1753598e9 100644
-+--- a/cmake/modules/libscap.cmake
-++++ b/cmake/modules/libscap.cmake
-+@@ -14,7 +14,7 @@
-+ #
-+ 
-+ if(NOT HAVE_LIBSCAP)
-+-	set(HAVE_LIBSCAP On)
-++        set(HAVE_LIBSCAP On CACHE INTERNAL "Flag to indicate libscap has been processed")
-+ 
-+ 	if(NOT LIBS_DIR)
-+ 		get_filename_component(LIBS_DIR ${CMAKE_CURRENT_LIST_DIR}/../.. ABSOLUTE)
-+diff --git a/cmake/modules/libsinsp.cmake b/cmake/modules/libsinsp.cmake
-+index ff336e27f..0fdd2d4a9 100644
-+--- a/cmake/modules/libsinsp.cmake
-++++ b/cmake/modules/libsinsp.cmake
-+@@ -14,7 +14,7 @@
-+ #
-+ 
-+ if(NOT HAVE_LIBSINSP)
-+-	set(HAVE_LIBSINSP On)
-++        set(HAVE_LIBSINSP On CACHE INTERNAL "Flag to indicate libsinsp has been processed")
-+ 
-+ 	if(NOT LIBS_DIR)
-+ 		get_filename_component(LIBS_DIR ${CMAKE_CURRENT_LIST_DIR}/../.. ABSOLUTE)
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
-index 903ccdf36a..bcf5da4f2c 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
-+++ b/meta-oe/recipes-extended/sysdig/sysdig/0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch
-@@ -1,6 +1,6 @@
--From ed8969a233adb6bf701de96d0fd0570e5ddcc787 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 21 Mar 2022 19:35:48 -0700
-+From 6ff4114dcbb87f34751064249967aa96c7b8b030 Mon Sep 17 00:00:00 2001
-+From: Liu Yiding <liuyd.fnst@fujitsu.com>
-+Date: Wed, 4 Mar 2026 10:02:10 +0000
- Subject: [PATCH] cmake: Pass PROBE_NAME via CFLAGS
- 
- This helps compliation of driver code where its calling modprobe on the
-@@ -8,22 +8,25 @@ given kernel module via system() API
- 
- Upstream-Status: Pending
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Update for 0.39.0
-+Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
- ---
-  CMakeLists.txt | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 7dceb7ae..e156c36f 100644
-+index 8e8850dbe..c6d725c05 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -149,6 +149,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-- 	if(NOT DEFINED PROBE_NAME)
-- 		set(PROBE_NAME "scap")
-+@@ -174,6 +174,7 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-+ 	if(NOT DEFINED DRIVER_NAME)
-+ 		set(DRIVER_NAME "scap")
-  	endif()
--+	add_definitions(-DPROBE_NAME="${PROBE_NAME}")
-++       add_definitions(-DPROBE_NAME="${PROBE_NAME}")
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 76363cd26d..9da1ace8a8 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -18,7 +18,7 @@ index bbbb204..0919d2b 100644
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
   
-  	set(DRIVERS_REPO "https://download.sysdig.com/scap-drivers")
-  	
- -- 
--2.35.1
-+2.43.0
+- AC_INIT([PostgreSQL], [14.20], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [14.21], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
+similarity index 71%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
+index 04d8723f15..ba7a7bb03b 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_14.20.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.21.bb
+@@ -1,6 +1,6 @@
+ require postgresql.inc
  
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-fix-build-with-gcc-15.patch b/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-fix-build-with-gcc-15.patch
-deleted file mode 100644
-index 9a81f1c74c..0000000000
---- a/meta-oe/recipes-extended/sysdig/sysdig/0001-libsinsp-fix-build-with-gcc-15.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 47a86dabd065096ffc8818a1cffca96964d18120 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <martin.jansa@gmail.com>
--Date: Tue, 22 Apr 2025 18:43:46 +0200
--Subject: [PATCH] libsinsp: fix build with gcc-15
--
--fixes:
--http://errors.yoctoproject.org/Errors/Details/852848/
--
--In file included from TOPDIR/tmp/work/core2-64-oe-linux/sysdig/0.28.0/git/falcosecurity-libs/userspace/chisel/lua_parser.cpp:20:
--TOPDIR/tmp/work/core2-64-oe-linux/sysdig/0.28.0/git/falcosecurity-libs/userspace/libsinsp/./gen_filter.h:87:17: error: 'uint64_t' does not name a type
--   87 |         virtual uint64_t get_ts() const = 0;
--      |                 ^~~~~~~~
--
--Upstream-Status: Pending [gen_filter is removed in newer version with https://github.com/falcosecurity/libs/commit/47e245f3d343eff27ed178ec2449caa3a01faabb]
--Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-----
-- userspace/libsinsp/gen_filter.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/userspace/libsinsp/gen_filter.h b/userspace/libsinsp/gen_filter.h
--index f4cfa08b1..79ac30dc3 100644
----- a/userspace/libsinsp/gen_filter.h
--+++ b/userspace/libsinsp/gen_filter.h
--@@ -16,6 +16,7 @@ along with Falco.  If not, see <http://www.gnu.org/licenses/>.
-- 
-- #pragma once
-- 
--+#include <cstdint>
-- #include <set>
-- #include <list>
-- #include <map>
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-similarity index 56%
-rename from meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-rename to meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-index c988b0af59..85e687a17b 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_0.28.0.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_0.39.0.bb
-@@ -19,21 +19,30 @@ JIT:powerpc64le = ""
- JIT:powerpc64 = ""
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=08b6032a749e67f6e3de84ea8e466933"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=55760ee57ce4e51e4b57f0801ff032dd"
  
- DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
--            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson"
-+            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson \
-+            uthash libbpf clang-native bpftool-native yaml-cpp nlohmann-json"
- RDEPENDS:${PN} = "bash"
- 
- SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
--           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
-+           git://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=falco;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/falcosecurity-libs \
-+           git://github.com/falcosecurity/libs;protocol=https;branch=release/0.18.x;name=driver;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/driver \
-            file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
--           file://0001-Add-cstdint-for-uintXX_t-types.patch;patchdir=./falcosecurity-libs \
--           file://0001-libsinsp-fix-build-with-gcc-15.patch;patchdir=./falcosecurity-libs \
--           file://0001-update-cmake-Only-add-dependencies-when-we-bundle.patch;patchdir=./falcosecurity-libs \
-+           file://0001-Avoid-duplicate-operations-of-add_library.patch;patchdir=./falcosecurity-libs \
-           "
--SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
--SRCREV_falco = "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
-+SRCREV_sysdig = "6ef29110cf1add746e10ab5b38957e22730b7349"
-+SRCREV_falco = "e1999d079880d10800c57e004fca794a03cd060a"
-+SRCREV_driver = "d4efc80ece48174a71c1a420cb52d233fa94f946"
- 
- SRCREV_FORMAT = "sysdig_falco"
- 
-+#Add this function to generate driver_config.h
-+do_configure:prepend() {
-+    mkdir -p ${WORKDIR}/driver_Make
-+    cd ${WORKDIR}/driver_Make
-+    cmake ${S}/driver -DMINIMAL_BUILD=ON -DCREATE_TEST_TARGETS=OFF
-+    cd -
-+}
-+do_configure[cleandirs] = "${WORKDIR}/driver_Make"
- 
- EXTRA_OECMAKE = "\
-                 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-@@ -44,11 +53,31 @@ EXTRA_OECMAKE = "\
-                 -DDIR_ETC=${sysconfdir} \
-                 -DLUA_INCLUDE_DIR=${STAGING_INCDIR}/luajit-2.1 \
-                 -DFALCOSECURITY_LIBS_SOURCE_DIR=${S}/falcosecurity-libs \
-+                -DDRIVER_SOURCE_DIR=${S}/driver \
-                 -DVALIJSON_INCLUDE=${STAGING_INCDIR}/valijson \
-+                -DUSE_BUNDLED_RE2=OFF \
-+                -DUSE_BUNDLED_TBB=OFF \
-+                -DUSE_BUNDLED_JSONCPP=OFF \
-+                -DBUILD_SYSDIG_MODERN_BPF=OFF \
-+                -DCREATE_TEST_TARGETS=OFF \
+ SRC_URI += "\
+    file://not-check-libperl.patch \
+@@ -11,7 +11,7 @@ SRC_URI += "\
+    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
  "
  
-+#Add include dir to find driver_config.h
-+CXXFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
-+CFLAGS:append = " -I${WORKDIR}/driver_Make/driver/src"
-+
-+#To fix do_package QA Issue
-+do_compile:append() {
-+    sed -i -e "s,${WORKDIR},,g" ${B}/libsinsp/libsinsp.pc
-+    sed -i -e "s,${WORKDIR},,g" ${B}/driver/libscap/libscap.pc
-+    mkdir -p ${B}/driver/libsinsp
-+    cp ${B}/libsinsp/libsinsp.pc ${B}/driver/libsinsp/
-+}
-+do_compile[cleandirs] = "${B}/driver/libsinsp"
-+
- #CMAKE_VERBOSE = "VERBOSE=1"
+-SRC_URI[sha256sum] = "7527f10f1640761bc280ad97d105d286d0cf72e54d36d78cf68e5e5f752b646b"
++SRC_URI[sha256sum] = "5b30f19347efff32b6e09ed2cdff0b04e9aee913ec9bb7414de2b7c17b17f1f9"
  
-+
- FILES:${PN} += " \
-     ${DIR_ETC}/* \
-     ${datadir}/zsh/* \
+ CVE_CHECK_IGNORE += "\
+    CVE-2017-8806 \
 -- 
-2.43.0
+2.34.1
 
 
