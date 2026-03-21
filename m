@@ -1,155 +1,247 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02CCC109449B
-	for <webhook@archiver.kernel.org>; Sat, 21 Mar 2026 20:39:41 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18656.1774125576875152195
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 554C7109449E
+	for <webhook@archiver.kernel.org>; Sat, 21 Mar 2026 21:47:52 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19780.1774129662010470554
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 21 Mar 2026 13:39:37 -0700
+ Sat, 21 Mar 2026 14:47:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PbawqQ7C;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-48374014a77so28517005e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Mar 2026 13:39:36 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lJPVsiaS;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-43b45bb7548so2122353f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 21 Mar 2026 14:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774125575; x=1774730375; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XlC2om8uKag+VLwHKNEAo7+VXH3wPesUihytTV1vVIY=;
-        b=PbawqQ7CqGKAF1IGVxeZwFjS97Uj7jFzR5bZpEuVsbHIWonFan/KZFGCYRua2JbmfB
-         rXqVuH/mrO0Jpuz7mK1gdxRZezxmiv4fk79XmmXvSnoJlG8fIxKDpWfPK8vCxCrKLMMN
-         z7wQojvIY6W7M1o+AchOapqayJ3l6LPLXhmP0dQoaARmfldpQb5+iM+bfvOYf8rcvalq
-         RZdKXRFNq/I1ne2dMMmcJuXqG+DFfBPLqJw1dwXk6KdY30XrrK7IWZkFf2pyytnOy8OZ
-         uUn73i5FBIUBYsAynjSgf2mdUX6uJzGqvx3+rhYfatp0rkFyELxYf5mq2Wx7zHnzW0vs
-         n6Vw==
+        d=gmail.com; s=20230601; t=1774129660; x=1774734460; darn=lists.openembedded.org;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=q6p2o1RbFJhL/BoUUvix8HvQPOE8Xas4oAm8VLO5K0E=;
+        b=lJPVsiaS7YaWmJpwerkUX4OHMkEI5OdrdplZsrjV5lyENiVsJDoSJmCddmdj7ffZqJ
+         53ELVFNwM8U6TeFsE9SK4HHh9su7R2fJfFSgu7C7EbJMrZpn8Udn77+t8lsCJVm1g+cB
+         v7QATCuazyGDxbPJR1+2nQSC2iLc/HpaT9y6OADmn9PLOu7O7avnLweYXtJfhVslLI36
+         qtERVF49t1y+TRZKNS0BwtvkF6uawGBKqxg6aMb43+juS1SMQ7JKeNwjbYejExqoTXFW
+         lmbjwpnRC+KeRJXniObvEZsd5BTrz/BDyB7eQjrOf6AE+woY+7Q7JyMeHigGDUapsOsp
+         qchQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774125575; x=1774730375;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XlC2om8uKag+VLwHKNEAo7+VXH3wPesUihytTV1vVIY=;
-        b=kGhHMW3TQJQ6VLE3GygHKep1YJX3y96ThCGM8lceZW87VEdnyrQKqf/FQy+L7uOFSW
-         16blC+5a4I2LBVmrrpI/s6DyXMyxyOQIWKdY+FGAnGTs4Elqkh1txBUDS+HcRWBZHrJs
-         MYuQcMjS/WxKfoB1+SnXWnc60VDYG8K9onzuFnsuoxiKnCagqEiQnhJDKnDilezxhD3j
-         YJhfflInGfGP25LqAMTFvolMG8Wc8kdy2NyY+GvZEnMbyQp0XrmW0ERxHWtoupFM+sQG
-         LWzm66UzoiaTz2TrwILam8WBibDbcKVVNo6pJ9UxKSuXFoxQDqG4dUgv0bd5ErAN1Gxx
-         2CrA==
-X-Gm-Message-State: AOJu0Yz1R32A3YeYgz4fvX8X2vooPj4qaxy21CerJEd6wrcmg0fWeaHz
-	qKRX8jBu8BbX97KkG4FpQQfq+sD5FH6oEhz7jaGynX3GWLs7mbDLKWxKasll0w==
-X-Gm-Gg: ATEYQzwDyWn25+qTyjvSyX6N0YvmEOEfpR9Vua4e1nYAaJoICgtB09PWMscVU+OtzTp
-	2ajReRDKgPRU4/8dB1AEukEmJe9oTFq5Rd/wwbaP6X1Su1olPu9eq3MbIcGcTbtrQDpLrbjbRzv
-	yd9CkEnVpg/gcYgCzAuVAObqYY/eMW2EKJS99tcsQmA2mTAuYY/CTvsBFL2DsJpRqgJj091dbqM
-	lreSDYk7G50JpiQdAi6k1Aa7Nausmp/TJSdrZTATjg1veLKL+gBrL5U7oyRO/MHgUagV6mLDDjk
-	hGNA4DDIsrXIjxTF2k1YPppzrvu5MWnvFXC0HWA06ldqBhtTj84mQtcCnX/7L/pkKO6HlU9IdP0
-	yxY9X4KppjCO044BNgik+H1qd0b7j9FbYpCFX9KyYcVnjLGJIrUKDQRX2vjoWR5HQYaWbX5wv/0
-	6d8meMxynlAaIB0gO3a8ZXUZDgc3wxRcw=
-X-Received: by 2002:a05:600c:35c4:b0:485:3f1c:d8a4 with SMTP id 5b1f17b1804b1-486fedb2551mr122221865e9.9.1774125574943;
-        Sat, 21 Mar 2026 13:39:34 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-486fe7e2665sm186123545e9.6.2026.03.21.13.39.34
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20251104; t=1774129660; x=1774734460;
+        h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+         :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=q6p2o1RbFJhL/BoUUvix8HvQPOE8Xas4oAm8VLO5K0E=;
+        b=NiYi+Ye+1PUltOaRxssyRumHRyVI0Iy3VidejHOXYZdORpTaWeVdnDtIE79dE75N1C
+         Y6fkwiT4ukzJtV8lx39A48kCsikanPLqAPtykjkncYBQ13q7EJ1mm9kLCO3I+GKyKg8T
+         OxFEIPZ2JbcbQ6UACHVqfNwjh4ExwqfGR7VW/DyqQsWeG8RLJeGwpWVg6Z/yxQQoycJb
+         3pDkx0XMQLs+PfAwOXPA/Lp+fszps1OaxIsB5wV/div87xdnKOqqwHetITmf4d/aBYMr
+         o9bGNOphf6GorQKJljZPqtqL0am+oM3S1X5f8vDmmks1nCYKvvuJ6htb9BKTUrpgCzyj
+         HrbA==
+X-Gm-Message-State: AOJu0YxkBxHPxhCM7ZU14mzNDBcV7Ok0/w2rc41AHWY8JgrXPDNCj8MT
+	EDps6Z6yEbctBSPDLI5/OnRVsXd3X7EJwvqiXZuD6FrUfhw2TheSCTrkDP3FKQ==
+X-Gm-Gg: ATEYQzy82sA6pU41ZVOQ3tb2UhBAie0rd+gnWo+IQxGlVCZT95fGL+IOLWN0TZrSDaI
+	w3u2zGcwLSnZPSFXJSixRpF8cj5x+HBvqxMBt2lrKx0Ai/5nEye+hBMvNsQkTkH2aPj4je94oxf
+	eYRtnFaoX8CX73QbIuJKDmoPiNAu+Au31KQU++5LsCd0yiEZIND/T8b3Jt8NiEDpEUbdZ35f0Rc
+	nh9k2bzxIJkulKnboID4wNTSonIAoKRA5q3Yxz/aZTgVaGy7kwgcrsWmHKcPmuPLxPamV9KDznY
+	9o6Zq7WWqKsZS4WeOq+rokIcIMYsI+JT6ZPyWHglfy4DSb3iJwksSTUVc/a1nmMJNvk749XlfdQ
+	/Mh2TGNvrihmsQzHqwYo1TBFSlPXu0WCMoafbAno2+EnTHw0IYNslQU7/KlcXLPgMC3/o0klgOB
+	FnY34amxjQYThgbc/RCql0v6rHcIOAckmhk3dN/fCNONdVHTdrlgvvGuku8cpeTvIKFovNtNcfy
+	g==
+X-Received: by 2002:a05:6000:4382:b0:439:c5c5:4146 with SMTP id ffacd0b85a97d-43b64240753mr12082526f8f.11.1774129659869;
+        Sat, 21 Mar 2026 14:47:39 -0700 (PDT)
+Received: from [192.168.5.15] (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b64703c35sm17418324f8f.22.2026.03.21.14.47.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Mar 2026 13:39:34 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][scarthgap][PATCH] mariadb: upgrade 10.11.12 -> 10.11.16
-Date: Sat, 21 Mar 2026 21:39:33 +0100
-Message-ID: <20260321203933.366585-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        Sat, 21 Mar 2026 14:47:39 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Sat, 21 Mar 2026 21:47:10 +0000
+Subject: [meta-networking][PATCH] mdns: Upgrade 2881.0.25 -> 2881.80.4.0.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260321-master-v1-1-527a93a26936@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAN4Rv2kC/yXM2w6CMBCE4Vche22TdokEfBXCRcURV0Mxu/WQE
+ N7dqpdf8s+sZFCB0aFaSfEUkyUVhF1F4yWmCU5OxcSeG19zcHO0DHWNj4HbruZu31KJ74qzvH9
+ H/fC3PY5XjPm77mfk6BLya9GbpGmgbfsA+8qn+XsAAAA=
+X-Change-ID: 20260321-master-60a128932958
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+X-Mailer: b4 0.15.0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 21 Mar 2026 20:39:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125471
+ <openembedded-devel@lists.openembedded.org>; Sat, 21 Mar 2026 21:47:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125472
 
-10.11 is an LTS version of MariaDB. This upgrade is part of that commitment.
+Add new patch to fix breakage from Apple Wireless Direct Link support on
+macOS.
 
-Release notes:
-https://mariadb.com/docs/release-notes/community-server/10.11/10.11.16
-https://mariadb.com/docs/release-notes/community-server/10.11/10.11.15
-https://mariadb.com/docs/release-notes/community-server/10.11/10.11.14
-https://mariadb.com/docs/release-notes/community-server/10.11/10.11.13
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...iadb-native_10.11.12.bb => mariadb-native_10.11.16.bb} | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                     | 2 +-
- ...io_linux-Check-if-syscall-exists-before-using-it.patch | 8 ++++----
- ...01-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch | 6 +++---
- .../mysql/{mariadb_10.11.12.bb => mariadb_10.11.16.bb}    | 0
- 5 files changed, 8 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.12.bb => mariadb-native_10.11.16.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.12.bb => mariadb_10.11.16.bb} (100%)
+ .../mdns/mdns/0001-Fix-build-with-gcc-15.patch     |  2 +-
+ .../mdns/0001-dns-sd-Include-missing-headers.patch |  2 +-
+ ...02-make-Set-libdns_sd.so-soname-correctly.patch |  4 ++--
+ ...-make-Separate-TLS-targets-from-libraries.patch |  4 ++--
+ .../0005-mDNSCore-Fix-broken-debug-parameter.patch | 12 +++++-----
+ .../mdns/0006-make-Add-top-level-Makefile.patch    |  2 +-
+ ...Make-Apple-Wireless-Direct-Link-depend-on.patch | 27 ++++++++++++++++++++++
+ .../{mdns_2881.0.25.bb => mdns_2881.80.4.0.1.bb}   |  5 ++--
+ 8 files changed, 43 insertions(+), 15 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.16.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.12.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.16.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index f0cec75568..be310ef80a 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -23,7 +23,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://lfs64.patch \
-            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
-           "
--SRC_URI[sha256sum] = "d61f23090cfc14f43e8a27c2d3ce7f80247e74481bb26a2d3a6308b8d194e167"
-+SRC_URI[sha256sum] = "e4f9f2035d38345464ae8abaeaf68380d1ceadbafb4e84744ed2ed5b7aab64e7"
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0001-Fix-build-with-gcc-15.patch b/meta-networking/recipes-protocols/mdns/mdns/0001-Fix-build-with-gcc-15.patch
+index af33d5444cca..c232685a156e 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0001-Fix-build-with-gcc-15.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0001-Fix-build-with-gcc-15.patch
+@@ -1,4 +1,4 @@
+-From c84f185f29d0839b97177aecb0a78b9717947973 Mon Sep 17 00:00:00 2001
++From 0ec55ecaa7386f924ee3d64fdfbe1c2d0df1341a Mon Sep 17 00:00:00 2001
+ From: Nguyen Dat Tho <tho3.nguyen@lge.com>
+ Date: Wed, 9 Apr 2025 13:05:24 +0900
+ Subject: [PATCH] Fix build with gcc-15
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0001-dns-sd-Include-missing-headers.patch b/meta-networking/recipes-protocols/mdns/mdns/0001-dns-sd-Include-missing-headers.patch
+index 5464e3febe83..c9929db4cabd 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0001-dns-sd-Include-missing-headers.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0001-dns-sd-Include-missing-headers.patch
+@@ -1,4 +1,4 @@
+-From cdbc28c668dd627906f833f9a8e32ac53b0b0139 Mon Sep 17 00:00:00 2001
++From 18b1239b7abd289fe5275fddc2545727a956a4ad Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Thu, 4 Nov 2021 07:31:32 -0700
+ Subject: [PATCH] dns-sd: Include missing headers
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0002-make-Set-libdns_sd.so-soname-correctly.patch b/meta-networking/recipes-protocols/mdns/mdns/0002-make-Set-libdns_sd.so-soname-correctly.patch
+index f547c64d9321..5f91e91b1dd9 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0002-make-Set-libdns_sd.so-soname-correctly.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0002-make-Set-libdns_sd.so-soname-correctly.patch
+@@ -1,4 +1,4 @@
+-From dcc1f39a0918cdebf53ac7c105b3d33df960ed14 Mon Sep 17 00:00:00 2001
++From 7319d6c328d7b18a048e9855902e180fe23641a2 Mon Sep 17 00:00:00 2001
+ From: Alex Kiernan <alex.kiernan@gmail.com>
+ Date: Mon, 5 Dec 2022 15:14:12 +0000
+ Subject: [PATCH] make: Set libdns_sd.so soname correctly
+@@ -10,7 +10,7 @@ Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ diff --git a/mDNSPosix/Makefile b/mDNSPosix/Makefile
+-index e05ba10b4340..7c510317f1b6 100755
++index 22789f0368c7..2bb57eae5659 100755
+ --- a/mDNSPosix/Makefile
+ +++ b/mDNSPosix/Makefile
+ @@ -276,7 +276,7 @@ libdns_sd: setup $(BUILDDIR)/libdns_sd.$(LDSUFFIX)
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0004-make-Separate-TLS-targets-from-libraries.patch b/meta-networking/recipes-protocols/mdns/mdns/0004-make-Separate-TLS-targets-from-libraries.patch
+index 2969b5e2441f..b6697f0ba6fc 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0004-make-Separate-TLS-targets-from-libraries.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0004-make-Separate-TLS-targets-from-libraries.patch
+@@ -1,4 +1,4 @@
+-From f7ee12c1f8e85b9d2fe4023b6539c8051dc710c3 Mon Sep 17 00:00:00 2001
++From e27ac4bb6243b33d23ccb7a137983887676fda7f Mon Sep 17 00:00:00 2001
+ From: Alex Kiernan <alex.kiernan@gmail.com>
+ Date: Mon, 5 Dec 2022 15:14:26 +0000
+ Subject: [PATCH] make: Separate TLS targets from libraries
+@@ -13,7 +13,7 @@ Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+  1 file changed, 8 insertions(+), 6 deletions(-)
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-index aba9b9d966..1f6ae13102 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-aio_linux-Check-if-syscall-exists-before-using-it.patch
-@@ -18,13 +18,13 @@ Upstream-Status: Pending
-  tpool/aio_linux.cc | 4 ++++
-  1 file changed, 4 insertions(+)
+ diff --git a/mDNSPosix/Makefile b/mDNSPosix/Makefile
+-index 7c510317f1b6..8dd5984020ee 100755
++index 2bb57eae5659..490165561410 100755
+ --- a/mDNSPosix/Makefile
+ +++ b/mDNSPosix/Makefile
+ @@ -112,9 +112,11 @@ ifeq ($(findstring linux,$(os)),linux)
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch b/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
+index 0c1a9f373f9f..b8929ea4394f 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
+@@ -1,4 +1,4 @@
+-From e79f75487e32f87677519ec40c021b1623395bde Mon Sep 17 00:00:00 2001
++From ab62d343d7e13ae79b0445a0b3d0954ba3534a0c Mon Sep 17 00:00:00 2001
+ From: Alex Kiernan <alex.kiernan@gmail.com>
+ Date: Mon, 5 Dec 2022 22:49:49 +0000
+ Subject: [PATCH] mDNSCore: Fix broken debug parameter
+@@ -9,11 +9,11 @@ Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+  mDNSCore/mDNS.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
--diff --git a/tpool/aio_linux.cc b/tpool/aio_linux.cc
-+diff --git a/tpool/aio_libaio.cc b/tpool/aio_libaio.cc
- index 4abc213..da75411 100644
----- a/tpool/aio_linux.cc
--+++ b/tpool/aio_linux.cc
-+--- a/tpool/aio_libaio.cc
-++++ b/tpool/aio_libaio.cc
- @@ -58,6 +58,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111 - 1301 USA*/
-- */
-  static int my_getevents(io_context_t ctx, long min_nr, long nr, io_event *ev)
-+   noexcept
-  {
- +#ifdef __NR_io_getevents
-    int saved_errno= errno;
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-index 456a2bad64..cb8a2a3d2d 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-sql-CMakeLists.txt-fix-gen_lex_hash-not-found.patch
-@@ -18,8 +18,8 @@ diff --git a/sql/CMakeLists.txt b/sql/CMakeLists.txt
- index 241b482..27a3991 100644
- --- a/sql/CMakeLists.txt
- +++ b/sql/CMakeLists.txt
--@@ -60,11 +60,18 @@ ${CMAKE_BINARY_DIR}/sql
-- ${CMAKE_SOURCE_DIR}/tpool
-+@@ -61,11 +61,18 @@ ${CMAKE_BINARY_DIR}/sql
-+ ${CMAKE_BINARY_DIR}/sql
-  )
-  
- -ADD_CUSTOM_COMMAND(
-@@ -41,7 +41,7 @@ index 241b482..27a3991 100644
-  
-  FIND_PACKAGE(BISON 2.4)
-  
--@@ -372,11 +379,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
-+@@ -394,11 +401,18 @@ IF(NOT CMAKE_CROSSCOMPILING OR DEFINED CMAKE_CROSSCOMPILING_EMULATOR)
-    ADD_EXECUTABLE(gen_lex_hash gen_lex_hash.cc)
-  ENDIF()
-  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.16.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.12.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.16.bb
+-Index: mDNSResponder/mDNSCore/mDNS.c
+-===================================================================
+---- mDNSResponder.orig/mDNSCore/mDNS.c
+-+++ mDNSResponder/mDNSCore/mDNS.c
+-@@ -9481,7 +9481,7 @@ mDNSlocal void mDNSCoreReceiveNoUnicastA
++diff --git a/mDNSCore/mDNS.c b/mDNSCore/mDNS.c
++index 08bfafb11d8d..079c9742e419 100644
++--- a/mDNSCore/mDNS.c
+++++ b/mDNSCore/mDNS.c
++@@ -9481,7 +9481,7 @@ mDNSlocal void mDNSCoreReceiveNoUnicastAnswers(mDNS *const m, const DNSMessage *
+                          {
+                              CacheRecord *negcr;
+                              const DNSServRef dnsserv = qptr->qDNSServer;
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0006-make-Add-top-level-Makefile.patch b/meta-networking/recipes-protocols/mdns/mdns/0006-make-Add-top-level-Makefile.patch
+index 5f8f428302da..87b163f1e28b 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns/0006-make-Add-top-level-Makefile.patch
++++ b/meta-networking/recipes-protocols/mdns/mdns/0006-make-Add-top-level-Makefile.patch
+@@ -1,4 +1,4 @@
+-From a1c982808ebfb71ba7e0f16040013b7127a6e2ab Mon Sep 17 00:00:00 2001
++From a90eacb0f42e4ac63fe8c0ab624e8af7d9d47bd1 Mon Sep 17 00:00:00 2001
+ From: Alex Kiernan <alex.kiernan@gmail.com>
+ Date: Tue, 6 Dec 2022 13:28:31 +0000
+ Subject: [PATCH] make: Add top-level Makefile
+diff --git a/meta-networking/recipes-protocols/mdns/mdns/0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch b/meta-networking/recipes-protocols/mdns/mdns/0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch
+new file mode 100644
+index 000000000000..7a47ddd789dd
+--- /dev/null
++++ b/meta-networking/recipes-protocols/mdns/mdns/0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch
+@@ -0,0 +1,27 @@
++From eac5e89c884b4dd28a80f77d2c447a398e8db94f Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Sat, 21 Mar 2026 20:12:39 +0000
++Subject: [PATCH] mDNSShared: Make Apple Wireless Direct Link depend on macOS
++
++Upstream-Status: Inactive-Upstream [Upstream does not take patches]
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++---
++ mDNSShared/uds_daemon.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/mDNSShared/uds_daemon.c b/mDNSShared/uds_daemon.c
++index 6486f1ed51dd..3113313191d7 100644
++--- a/mDNSShared/uds_daemon.c
+++++ b/mDNSShared/uds_daemon.c
++@@ -3626,7 +3626,11 @@ mDNSlocal void resolve_result_callback(mDNS *const m, DNSQuestion *question, con
++     request_state *const req = question->QuestionContext;
++     const mDNSu32 name_hash = mDNS_DomainNameFNV1aHash(&question->qname);
++     const mDNSBool isMDNSQuestion = mDNSOpaque16IsZero(question->TargetQID);
+++#if MDNS_OS(macOS)
++     const mDNSBool is_split_awdl_query = (req->resolve_awdl && question->InterfaceID == AWDLInterfaceID);
+++#else
+++    const mDNSBool is_split_awdl_query = mDNSfalse;
+++#endif
++     UDS_LOG_ANSWER_EVENT(isMDNSQuestion ? MDNS_LOG_CATEGORY_MDNS : MDNS_LOG_CATEGORY_DEFAULT, MDNS_LOG_DEFAULT,
++         req, question, answer, mDNSfalse, "DNSServiceResolve result", AddRecord);
++ 
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_2881.0.25.bb b/meta-networking/recipes-protocols/mdns/mdns_2881.80.4.0.1.bb
+similarity index 96%
+rename from meta-networking/recipes-protocols/mdns/mdns_2881.0.25.bb
+rename to meta-networking/recipes-protocols/mdns/mdns_2881.80.4.0.1.bb
+index d44eb72f67fd..48bf3291b6f5 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_2881.0.25.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_2881.80.4.0.1.bb
+@@ -14,9 +14,10 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
+            file://0006-make-Add-top-level-Makefile.patch \
+            file://0001-Fix-build-with-gcc-15.patch \
+            file://mdns.service \
++           file://0007-mDNSShared-Make-Apple-Wireless-Direct-Link-depend-on.patch \
+            "
+-BRANCH = "main"
+-SRCREV = "d4658af3f5f291311c6aee4210aa6d39bda82bbe"
++BRANCH = "rel/mDNSResponder-2881"
++SRCREV = "e2a1e56a2f8d29640908c48f4de3f1ba65d1af46"
+ 
+ inherit github-releases manpages systemd update-rc.d
+ 
+
+---
+base-commit: b883bd25cdd27560fdebc5a4bf56f90e99964c4c
+change-id: 20260321-master-60a128932958
+
+Best regards,
+--  
+Alex Kiernan <alex.kiernan@gmail.com>
+
 
