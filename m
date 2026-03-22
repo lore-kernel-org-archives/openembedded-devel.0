@@ -1,98 +1,93 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B72AAFC72D0
-	for <webhook@archiver.kernel.org>; Sun, 22 Mar 2026 18:25:57 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.715.1774203947590768068
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9B9AFC72D8
+	for <webhook@archiver.kernel.org>; Sun, 22 Mar 2026 18:26:57 +0000 (UTC)
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.741.1774204015781459696
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Mar 2026 11:25:47 -0700
+ Sun, 22 Mar 2026 11:26:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GH/memb8;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-486fb14227cso36539775e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 11:25:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lqvIvpoi;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-2ba9c484e5eso2029595eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 11:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774203946; x=1774808746; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=d8eMxbkHxor4Gkfh4ACzbJ0q+t2d4UQtt0WsXu0km0s=;
-        b=GH/memb8pJRV3tYCGKbR9oMnBWEwjwnKiWLahXa8oxmFIvBQqTWIY0BAdjmgq4m788
-         oWAcrnLzxmvfqtM+58iHuzpuoWcH+C6Kdb4nT0v4r6jtobzeBRU3iustPNBH8Xp+6+p2
-         dzMTJP1bl9CgDELz96FifhrvOq/rFj1COZ9EoVEbsdZEy6luHBJ/jB2imw8rGPVSVDFx
-         q0n9KGoAPYohwrEpkXSOExi2NhBrU1kARzQOkrTjf0EB6xQY6vlPIS8L+W74MLJ9KDUa
-         VoLeeFPoIe8R0KCZjCZRm7ZKHaEGSSpAMxNLQbzomivMRsD2sHd51+d1SFV6Jq2ooSwF
-         E8wA==
+        d=gmail.com; s=20230601; t=1774204015; x=1774808815; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=z6iP9ie9jnSRTnRcJWxJOaj+UTD/q/L0472twFGycB4=;
+        b=lqvIvpoiS7AA8YbOH1O21Tt5RcRitRSXl+i13ummE3zWOzKiLmHaADCnesys+pQtXR
+         pl0+qv4ZxtHt75VLS+ebuAJJau5HRtOEBbJv87CqfPyX+dvSls6OT5RQm0GCCvkJJCoI
+         nPiw/8CUqQDTjQrWKXIKH+cTDFTqK2Eg488ABVh+MW9JwG9x9qRZGU2okXD1zEdMpXG+
+         3rF21vEM2AqVRWVyX2cCqlUZlPd4fReiCpds3d475hFd7rFeYTdY0NiTUsb2ZcFnW3t+
+         Yn/fchr+sS92qeGH3lc/WlKROQ5sgTDMDXO87PicLTTvcW+YOdTWI2t9sfChpNQUOE/4
+         q0LA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774203946; x=1774808746;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=d8eMxbkHxor4Gkfh4ACzbJ0q+t2d4UQtt0WsXu0km0s=;
-        b=KGxk4wjSLMIv4dveSAM+vCKAlWAbKKOfjcFab6arH/BUycAEOvaamf2i6X786J1r9v
-         qvOy5r0vohkrW9lBHkTUb8n3rbwJiEqKd4WbaNpYM+Mom/C32jvkNx1sGKqlVr+qHk/S
-         +2t2wapkP5V92gN+c+27EyO7sdZlyysAZWIBo55mXlzQ4JqgCtX2qMzgvA2E0xnWvgKT
-         wbmo0UVfNsCuD/a++x5pSPEqeihm6t6FaUJZTY54/tVaL+0yWD8pUgxorkMauvRZvw2Q
-         bytrWa0IpXb9iGSP2uo/ykSib3w2mOz88vnLDpIOnTUE6ZsrBp55VjJJv/JRFv9edvEj
-         wQaQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWLhehK0Hs++3mQiB1FCpL0Jp4rAdg00r2qYGikG3zPLl3fYQ3Vo2RZZCHX/LBUG3qtosWsrU4QXUqHRuS7Vm+eDy8=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyrCQ2E9sj1Lp+L49UdbuD5UVb/U9KKeoe3K/MFbWsi7O98ccqB
-	cME8uxXpACCwVJvrTwPZeKwgRfUNE9LvlXeyC5pEwLLF1TUfKscXT3h7
-X-Gm-Gg: ATEYQzwUNVCd2v7WfcwVkFhvEOnkwFAfBiVX7eiVC/ueux/ntwxSnkadqp4D7XO/gqN
-	UCxE2y1ECd4Plgt0kOsbVgmGs9o2KbfpNqNG2mkP/iXSZGeQ2QnxquYR7fKWo1pVbm+umwKZi80
-	kKL5w/JPGUKFjdpbH0OlyyBdLg3Q1OoVIlhT3oeAqhtIJeAdDPO5psNEfKKLqhTAPggRZtOgDKc
-	pMcocuD7j8jcqDqLcGJUrfWBIbur/xB1hU/CVQrvp+CDnnuvlkL5r594g5iG0cO2r5dyfNNN0BA
-	t2MinVLoJsNriumfzFEtOuatXyR+bTqlnrG2FZL6P5TK1lDT1OmMr242ydilRjHHMY39QEpkW1p
-	RsuQOn5+ByncXBbzqvBRv/TU9DMom4CzAAeDq6pAWQF6pOg512jbkbTtLu19Byi480tH6iDQOTX
-	AcqcfvNw8NGV8AYvWcuh+yh/iFono8k2M=
-X-Received: by 2002:a05:600c:548e:b0:485:40c6:f51a with SMTP id 5b1f17b1804b1-486ff028ff2mr132562625e9.31.1774203945682;
-        Sun, 22 Mar 2026 11:25:45 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b644ae132sm22388502f8f.6.2026.03.22.11.25.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 22 Mar 2026 11:25:45 -0700 (PDT)
-Message-ID: <f5f9d5c4-d5d3-443a-ad48-53743ebb212a@gmail.com>
-Date: Sun, 22 Mar 2026 19:25:43 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH] ntopng: Upgrade to 6.6
-To: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
+        d=1e100.net; s=20251104; t=1774204015; x=1774808815;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z6iP9ie9jnSRTnRcJWxJOaj+UTD/q/L0472twFGycB4=;
+        b=OIStswockT9dmqENnRN7z4Fkm+IxOBtQzWeexEXaL9k3390IigahRgpQNM+YJ8K65z
+         7EyWuw1rfq0mEJdJTW7c2qyCSuzX+3B/SFTZ3kc5LWGNC4D4u21btalgVE9NCZGOkx8+
+         uj/miaVX0AKg3JjG1DUXS9gWnGXWzrvab/TypD59IhTsHiqyYEJTSxSFLekTsnuCXeB/
+         hyCZVHwWTsmyb3fq2PXz8NNE0kTapDGLtIO7ZsRBP4B9n8XDY2jpDQI/7QeOh2TBxe4/
+         73QvJB5ZDzlJdlF5UWZXQkbK1YpHyicND4H97V3EMRe4ejvf1XmFOsT0xw3a9f+88crd
+         ma7g==
+X-Gm-Message-State: AOJu0YxZQ/IIekznUXv5H2B6d4VCK//Yp38Bu0sDZucmAS1yRHdiL5v4
+	od3yXMk/7B7Q12vxxcCCvjJx7VoBhTOIrPbrNZXrjh22IbjkRzclxtbY2k30P+6W3hhhFA==
+X-Gm-Gg: ATEYQzwZemnGW4UTiCwR17ZHzt33yk/mNNxxbQ6v6+o3puzU2/akh7In0pZphBQPafv
+	lYrx3Q6HNqmVIabqwJg/U63ZmtBGi1BUwg7IW8v13pAmLqUWVHzExgRnJNSRUQ9xE73hTI3onrw
+	QJfQUhGZs1J4PKSO22CsE0SPTIHis0xJbzU92xyO8XHmf9uqllnJYtDsPDUAPsL7ihjq+EGvXeP
+	QkbKATQIuAGkEEHbY5LaltYeeFtD/EGbrxRPkWG5Z62i+27Luds0EC8GAfr5S9Uhte5miA6iaLS
+	y8ySv5Yf7h8a5EOpS6iJSWkUgDFdXqyzkrosRKUgCoVbd7OeMQo4/pP1EEIDmOtZzvIEYiEO/5s
+	L4drI+MQtz5z/HpBHAEJ3+AMezkMAaMqxrHqywAzrUhsXpQedGi0s03mgnrni/+KjB3HHlFkEKq
+	AiqvTPdQpY6kF2dE1JMNWKezo2C98T7e5wIbKCH3qppB6LMHewR1I7zu40Ghzg1euuldvdDB+lq
+	15mHWFYZu/l5bUAdLqXQMWbBOk5i7qKd5I5r5oPez9QgbZRKms5bhME4tST
+X-Received: by 2002:a05:7300:818c:b0:2c1:27c:75d2 with SMTP id 5a478bee46e88-2c109752926mr3886834eec.17.1774204014739;
+        Sun, 22 Mar 2026 11:26:54 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c10b14c985sm10212316eec.2.2026.03.22.11.26.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 22 Mar 2026 11:26:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-References: <20260322171515.1955265-1-khem.raj@oss.qualcomm.com>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <20260322171515.1955265-1-khem.raj@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: [meta-oe][PATCH 1/2] gnulib: Copy hidden files to staging area as well
+Date: Sun, 22 Mar 2026 11:26:50 -0700
+Message-ID: <20260322182651.4090587-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 18:25:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125487
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 18:26:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125488
 
+newer gnulib-tool wrappers try to run a sibling Python
+launcher file, .gnulib-tool.py, when Python 3 is available.
+In current gnulib, that file is a real part of the tree,
+and gnulib-tool will exec "$prog.py" in that mode
 
-On 3/22/26 18:15, Khem Raj via lists.openembedded.org wrote:
-> Fix build with Lua 5.5
-> Add fixes to build with ndpi 5.0
-> 
-> Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-> ---
->  .../0001-Follow-rrd-post-1.8-change.patch     |  32 ---
->  ...kefile.in-don-t-use-the-internal-lua.patch |  36 +--
->  ...utogen.sh-generate-configure.ac-only.patch |  36 ---
->  ...Allow-dynamic-linking-against-ndpi-3.patch |  51 ++--
->  ...-configure.ac.in-fix-configure-error.patch |  42 ---
->  ...nfigure.ac.in-fix-host-contamination.patch | 188 +++++++++++--
->  ...figure.ac.in-not-check-clang-on-host.patch |  44 ----
->  ...a-5.5-API-signature-for-lua_newstate.patch | 247 ++++++++++++++++++
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ meta-oe/recipes-support/gnulib/gnulib_202601.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-
-Could this patch be trimmed? It is 200+ lines long, but it changes only
-1 line, the rest seems to be whitespace change.
-
-
+diff --git a/meta-oe/recipes-support/gnulib/gnulib_202601.bb b/meta-oe/recipes-support/gnulib/gnulib_202601.bb
+index d3ebdca8dd..763be6c11a 100644
+--- a/meta-oe/recipes-support/gnulib/gnulib_202601.bb
++++ b/meta-oe/recipes-support/gnulib/gnulib_202601.bb
+@@ -20,6 +20,7 @@ SRC_URI = "git://git.savannah.gnu.org/git/gnulib.git;branch=stable-${PV};protoco
+ do_install () {
+     install -d ${D}/${datadir}/gnulib
+     cp --no-preserve=ownership --recursive ${S}/* ${D}/${datadir}/gnulib/
++    cp --no-preserve=ownership --recursive ${S}/.gnulib-tool.py ${D}/${datadir}/gnulib/
+     cp --no-preserve=ownership --recursive ${S}/.git ${D}/${datadir}/gnulib/
+ }
 
 
