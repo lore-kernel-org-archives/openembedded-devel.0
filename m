@@ -2,64 +2,63 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33BF3FC72C0
-	for <webhook@archiver.kernel.org>; Sun, 22 Mar 2026 10:51:51 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.28530.1774176707378240441
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30053FC72C1
+	for <webhook@archiver.kernel.org>; Sun, 22 Mar 2026 10:52:01 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.28531.1774176715639975154
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Mar 2026 03:51:47 -0700
+ Sun, 22 Mar 2026 03:51:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=d/wikz3f;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-354a18c48b5so2592962a91.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 03:51:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b7wDxWyy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2b0586d5bb8so23442755ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 03:51:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1774176706; x=1774781506; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1774176715; x=1774781515; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=p/IXlsScGxINDGn6HqUI5bsAuO3euU7fI52STecF/1A=;
-        b=d/wikz3fWITIyem+BfvpPPxSK1s/i/GTsQfGwz7E6GgjWs/npaMb3wbo7BjLstnVJN
-         mZodbgIp18fEjaeGcieuB574p5Cuv6peYWyHB030y8JgeuPDgBJuaADSx8xfc8gfRMuf
-         kAeoOvaZbtaBU9XR96Run9ra83boQ3m6Q/oYwyJPddkHGIGfYgt8Nc1gsGdZkHcALXLy
-         tO307eJp5KR2faRZc7nW/QTx8U6oLahS8jKPIl8mDCgscblMHi/HdqJZKW0ONYC4NUbD
-         5lW0/cemuVp5NLckmx3AGwEf6C1SM6MmOHMJ5EeWuJhhTgpj0NftearVMxVVQeUTbM09
-         LsAw==
+        bh=AEBI7E1vtEa2Bi6mxTyVFfvwGqOKsldKZx29NQ3UtHk=;
+        b=b7wDxWyyfV738uB2/drrqNfTvBmTpHKDu2q1qyxVqfacbpX953cUPQkURemdBb9FhX
+         gFI+THagVyHctIbddjzk2spz5qxBO5JY7maR9Q9ZBtXFsMbZe3tUTJu4WWCHpVO01ZD7
+         lZSuMx4S/mdP/Bnzksnr2AWTay/K3PW/0S5vbnr+HFAaFO/cyFhZPFZ895bUaY5X6GR5
+         xPcbIW3TZtR9fyfA8n/WoDT97CE7zzrcAuyF4oEks1dL2+jYhcqK2vLGp1kfXTw278KY
+         8AoVdrmGe58ZpeCz5c05IcyZorodo0klUVFI5+8YsHX+Kwbo89Y2TMjjxmwEp9rZVpjr
+         Y20Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774176706; x=1774781506;
+        d=1e100.net; s=20251104; t=1774176715; x=1774781515;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=p/IXlsScGxINDGn6HqUI5bsAuO3euU7fI52STecF/1A=;
-        b=IUpjkoLoXNgb5QdXhPooMmDG7/dzoeoJ4/zVVR1TDsBYQWpVxG6FXCzdoxWLW0SUF2
-         gAaV+eHBU50wKy5DlWnuaJWOHxLMnnkyV+NCb0N1pSLATJdTl6im8YnyryBLsjpcQ/mN
-         zsjvv3BX25m5JSAJu+Mn3+quDo93X5KIQgPIxqCPMrIZ+mabWImd962AjpBxfRJIuYxH
-         YNqUGvDrepI41ybthRBp/KX9Ip3/lsa6bAp3hPROBPbXt+HHoNMCTbS4Hf3SvRHNEhFV
-         sfEjaIvth2RoE1nDue0NX575VjjVDBVrgYBQE97mX5QCrbfWyWj4k3edIJk6jVYmpibr
-         73vg==
-X-Gm-Message-State: AOJu0YzLUDHR0VArZOOlcYfsEghPk2QD+nywH5bPRtwxX4VvDJXRq0EL
-	oWDJWs7h2nJvAc1UCboju2nkn5ubeiz6vfkOC3ADdAu/8vhdZTeNWAYlIUW1sHi8
-X-Gm-Gg: ATEYQzxZk2BRP66F4F70NEDL9lbiKq7wl4WdlxlndtNaeEERA8PP92V3S+ovHfbW4Vt
-	5vlMtFZsFODUCMJNp95uEGkbRJ2Q5d7TqAH9mGfaiVcNJ+EsqZRbZ8dsdWBJ+fFd14bviyWZzpd
-	kxt8ic8p16pIiksaefF+hx44yGxD8WU1qK2ZDtWSxiwCyBMyYNgpONHFOebnjvJwpQSq4Vh1siY
-	fFoLL2SDraZgEVz64WHejOh8J63+YKl6gP6bz2n0vZylzv213w/18ZMNhkOE2VmpgHW+dHSPYzk
-	HD89KUN8bIc0DEB3kl0s9gefLz0NRzcDKVuKLxZFQbu/cy391iF5C0Q06icSrkfNmHqegm61V9P
-	z7Sef3yUU9f/zk9kfDsjuzxurOhJ+lGZr2o4SjLe8dFvs2Uu1Om5I8BhJiroE9C2Rq1QWxYejBy
-	tS1rCVP9mXfLAyg7Izbn7kGMtxiDA2V0iCRks=
-X-Received: by 2002:a17:902:dace:b0:2b0:62dd:3a80 with SMTP id d9443c01a7336-2b08271a32emr87039845ad.17.1774176706576;
-        Sun, 22 Mar 2026 03:51:46 -0700 (PDT)
+        bh=AEBI7E1vtEa2Bi6mxTyVFfvwGqOKsldKZx29NQ3UtHk=;
+        b=rNXyUH/PRlEX8IVxKm1J81DRVDW7yF+n+yB+yJjhPxs7TTkKIyYqK92KY6S0O0bKwL
+         1JHQX9xWbyvXvU2jgjeYvSQRfEEgHJxlDA+NpmiGvrX/8YRloIMHdjvyDYAKrIDcdDsG
+         KgCHspahjVeH4Fd8JraFt/pajXCtDhsBwKWgxJ4yLDg9OyrS5wBExjMRXWQYGImkzEKy
+         gcqg+tGcqQDJne3yeYOyGiGvr1/Sm0myj3fuw0UVUufE4tKsMV45kFuG90BNhp9nNLlE
+         a1bOaeJ097Xo+fLv9p/mF+lvvzUBHHTzbFCHTXaU9DkMI8XoUAZLVFYroY66Lq5zFb3O
+         qTBg==
+X-Gm-Message-State: AOJu0YwjzVt+7bnkRHH3nYSsaxD9uWMRKwQ5OYItN5nJ204G/39VlZ+n
+	xTr13TmFBfuxeWnbPGlUWt/nbQGQ8QWIka5aTi/ahtWDhY3XAcgumkk1P7UOPNcR
+X-Gm-Gg: ATEYQzwxkWKwEORS0m6OwQhUzNn+L+dwNEbKzGuSBYjFe7ukveD/sDgBXdwQXuKMExQ
+	X8x8BzDGyEy8bW65k3qiSEVLS0YsP+GEZgdJ5HopUIIr5JjcxFG4C5dkTCzqZkJGmkSXsdKNUN1
+	vWH6Zi07JKjiyQsSLM5K0tpEFmOtaQ6smldN0WP7EYX46Oasa7p2p1Tesr2t8S4/rNHqro3FAEs
+	Z1YhrodnuN2wseVkADYC+LptyR1UOoMpnQ2vbJYrnbsF75Ip5WNqjfIMglB/yWPxXoLU7F1nP6p
+	x+5b41jmEakHbosGojnuQyGlUOed4ThDZp4VErfpQjl8YZsuKQH79qtncjbk31DfGUPNu5MeVyR
+	UdAvOpHuAaJZlRHAs+YNd0ZtSEO+LRQnBDR6qB9jbvMHYrpCv8oCsVC8iVlsBwCxLBQTjVTs0b5
+	IsNH91YrRkzQKMwDab5BBFUx7vyAhEMK/1DQ0=
+X-Received: by 2002:a17:903:2b0f:b0:2ae:66c9:4953 with SMTP id d9443c01a7336-2b0826c6681mr100944905ad.9.1774176714786;
+        Sun, 22 Mar 2026 03:51:54 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.14])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b0836744a5sm75613895ad.63.2026.03.22.03.51.43
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b0836744a5sm75613895ad.63.2026.03.22.03.51.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Mar 2026 03:51:46 -0700 (PDT)
+        Sun, 22 Mar 2026 03:51:54 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>,
-	Khem Raj <raj.khem@gmail.com>,
+Cc: Aviv Daum <aviv.daum@gmail.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 2/4] imapfilter: upgrade 2.8.3 -> 2.8.5
-Date: Sun, 22 Mar 2026 23:51:23 +1300
-Message-ID: <20260322105125.528264-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 3/4] lldpd: fix xml PACKAGECONFIG dependency
+Date: Sun, 22 Mar 2026 23:51:24 +1300
+Message-ID: <20260322105125.528264-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260322105125.528264-1-ankur.tyagi85@gmail.com>
 References: <20260322105125.528264-1-ankur.tyagi85@gmail.com>
@@ -68,42 +67,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 10:51:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125480
+ <openembedded-devel@lists.openembedded.org>; Sun, 22 Mar 2026 10:52:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125481
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Aviv Daum <aviv.daum@gmail.com>
 
-License-Update: copyright year updated to 2026.
+The xml PACKAGECONFIG entry uses libxm2, which is a typo and not a
+valid dependency in OE.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 89b961c889ce885597ca669150d998470d05bf4d)
+Replace it with libxml2 so enabling PACKAGECONFIG:xml pulls in the
+correct provider.
 
-https://github.com/lefcha/imapfilter/blob/v2.8.5/NEWS
-
+Signed-off-by: Aviv Daum <aviv.daum@gmail.com>
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../imapfilter/{imapfilter_2.8.3.bb => imapfilter_2.8.5.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/imapfilter/{imapfilter_2.8.3.bb => imapfilter_2.8.5.bb} (80%)
+ meta-networking/recipes-daemons/lldpd/lldpd_1.0.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-similarity index 80%
-rename from meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb
-rename to meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-index f4905e3c0b..754e793faa 100644
---- a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.3.bb
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.5.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "IMAPFilter is a mail filtering utility that processes mailboxes based on IMAP queries"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f8d2fc4954306888fd0e4b27bef83525"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c9e8d74e78283c6319317d3cb15eded4"
- 
- # v2.7.6
--SRCREV = "72f7fa621357299bb6c8f5d29b4efbafcbd34bf7"
-+SRCREV = "23b693f7f7cad8b459beb5cf748078f9cc0e5dc8"
- SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master;tag=v${PV} \
-            file://ldflags.patch \
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.20.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.20.bb
+index 044f1e0745..b7224d0f3d 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.20.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.20.bb
+@@ -29,7 +29,7 @@ EXTRA_OECONF += "--without-embedded-libevent \
  "
+ 
+ PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
+-PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxm2"
++PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxml2"
+ PACKAGECONFIG[snmp] = "--with-snmp,--without-snmp,net-snmp"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
+ PACKAGECONFIG[seccomp] = "--with-seccomp,--without-seccomp,libseccomp"
 
