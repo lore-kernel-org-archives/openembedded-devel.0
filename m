@@ -1,118 +1,97 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1B7CF483FB
-	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 20:30:08 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4711.1774297800316489382
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5F59FC72D2
+	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 23:49:23 +0000 (UTC)
+Received: from mail-dy1-f177.google.com (mail-dy1-f177.google.com [74.125.82.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8785.1774309759143037502
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 13:30:00 -0700
+ Mon, 23 Mar 2026 16:49:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=OHH/GD/d;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-2026032320295820ea398666000207a2-bbrzkm@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 2026032320295820ea398666000207a2
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 23 Mar 2026 21:29:58 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=8drfzXRXYPYfXskVH6hboknbhxuJY8xl6P57JutUGGA=;
- b=OHH/GD/dK7xL7U9LD3/eWQW3LkyXSy8aoVcXuh+iGRm48e07gOXh8yTdrv+WFnUbksJ/IG
- wvkh8waDA1eh6wiTScYaZVoXLRM6YqShDOuczpfSd4f3LxGJNSC57edbpoQxP8MgoHh/IiHx
- A4PE3TtxXOoYbUkgdSxOwjUICouq7FPIqGokuKXWfDtkIhMZAe4w9dR52IJl2M1iJj51MXqE
- EgNxprdrUlyWThKpvxGnxUQBnzKnzg3aLudhyfvxlKjBCGBU4SYV9itFc8HAHYMbdNNgZofY
- viS/0YR//yZy4WkuvX0HlR7PnmA1EhGa1w0cupcc4jxt0+l1tbR/uuww==;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=o+DDKNmn;
+ spf=pass (domain: gmail.com, ip: 74.125.82.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f177.google.com with SMTP id 5a478bee46e88-2c0c482e069so2654344eec.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 16:49:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774309758; x=1774914558; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Cq/8naK4GayVZ3yNS+CHOb/HE1r7OTRrJbnMrc18Diw=;
+        b=o+DDKNmnufHUbdgTPf2aq30Bk7odFmOj+XuyMjPukZxs2VPQHFUGPRHNH2OYSZ7Pob
+         PyH8pE6R9SyGcRVIoyGJDtRRRPdzQCFeE8ZfK2d4m8DtYJxOfpYaApPLOnCfAbYWzunR
+         82kUMqdqi18aw5x4fIGxJ1TIiFwmXGwtWe3KaK5HdzKw+XNSarwMSBPbZkJEIjypa7GC
+         6AyMR4LreqR49mtcsBjkmyimInUvJi1ELTs/esLT0iCwf5eJ9UTJEhOtvvtsg7H0WTBu
+         cADWh7Tk6aF77EoSzhXGtaBz9Thw+hrvq7Y4r/teroCCK9ilckUtiVqOXeLbq085ONC2
+         eIUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774309758; x=1774914558;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Cq/8naK4GayVZ3yNS+CHOb/HE1r7OTRrJbnMrc18Diw=;
+        b=cYJg/Qmdk3m0qFKuFQixE9t7A32tTpJICIqBau0BLcW7a85uGdZoYdcqKUhrHXfpif
+         cp9mSkOnjKoIEJedCHBgzH4uqYTP6ZA2goiF912MaoUzAShEmZRYU/qSFEKGk5aUEEFA
+         UZbkJm9CF4Wi0+2VKfjrgbHtWGk1dWmfg3hGW23wIy8ZltoMQMC3U5cD4bZJm4+DynyP
+         D80sWSfmMfp33sTDaUuiMuFJWGBv/k20esZ7DzICWmuGj+q1RuJ1Vb+1OAF9W1knUTa6
+         rJwJGjqAb3nyc6hGvYXxeLZRXncQp80JOtdmcTCixJIELZ5Klq3cKut15YDi6yQ/fZkK
+         6nCg==
+X-Gm-Message-State: AOJu0YwVp7coc8VZ7pymqyyw9FweBcbMaUccriPCpvQ26Xur3vq5Lbcu
+	KKKsu+XHEGGN54NhYExf2a1xKhSPH0qJqUd7zMMzqml3rlLDbzGNfMmc8K1hvvpV
+X-Gm-Gg: ATEYQzzpy4EXX32BTsq0v+yPQANmCJnHQtyPELAOdriVGNP5pg9p3VLXeOJ+swPjX3Z
+	qsiKa5Buqhg/UJMdkBXKXGMHCSaXDpI3mdGgsaGab+0ineFYhzM1hhVEpPiEYPEbV+xWKxOU3Df
+	QnFGRCsyUxbBltxXoNiSFZDufpKNGjHFn8FVWSWP3hhNEOLqEBBwqSmcw5Ev1rDSQ0lbFhVqBIq
+	/di+bsD3W+eX+T6dt7Qaank/3OPOjvMurqpDf5RuSwZNPSAoKk7vBwnLIdnIf3c8yxHc4zumTb/
+	hkgXRF4/C5so5kSM2NvnyUSO7VRV3DZHim7HebblYsVrtV75luu5SDLIz76t9Fs/kZ7raz4GlYA
+	XQSZCQ6puWUe2zkqF3oZ4yZ5SQ2x38TVwZ9NakiZ7qQmskfLj6jkepPKlBhgSVtz9X+xMldSkLw
+	UlMM7lYkrO76lh0EZtborjPO7LXyB4h7/4Y1T7raiBfUjuwiWzPnmN5CIiferCESidW+aXvqZLL
+	0SNxezWad47ODnEVGWw1R04ewVEgy9CinyDqi+/MRNDnpFAoKd58Pt/GZOk
+X-Received: by 2002:a05:7301:6794:b0:2be:d6e:6ba3 with SMTP id 5a478bee46e88-2c109724823mr6410934eec.24.1774309758079;
+        Mon, 23 Mar 2026 16:49:18 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c10b14caf3sm18478008eec.5.2026.03.23.16.49.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Mar 2026 16:49:17 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH v2 3/3] jsoncpp: upgrade 1.9.6 -> 1.9.7
-Date: Mon, 23 Mar 2026 21:29:41 +0100
-Message-Id: <20260323202941.11696-3-peter.marko@siemens.com>
-In-Reply-To: <20260323202941.11696-1-peter.marko@siemens.com>
-References: <20260323202941.11696-1-peter.marko@siemens.com>
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>,
+	Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] libsdl3-mixer: Keep opus support off by default
+Date: Mon, 23 Mar 2026 16:49:14 -0700
+Message-ID: <20260323234914.4161119-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 20:30:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125533
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 23:49:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125534
 
-From: Peter Marko <peter.marko@siemens.com>
+opusfile comes from meta-multimedia and meta-oe does
+not depend on it, for keeping layer compatible, it
+must be kept disabled
 
-Added tag to SRC_URI.
+Fixes YP Compatible checks
 
-Release information [1]:
-
-1.9.7: Bugfixes, build system cleanups
-What's Changed
-* Fixes PreventInSourceBuilds.cmake to work with add_subdirectory by @morbo84 in #1383
-* json_value.cpp bug in the edges of uint/int by @YaalLek in #1519
-* Release 1.9.6 and move versions to 1.9.7 by @baylesj in #1566
-* Fixed work secure_allocator on old compiers by @TsynkPavel in #1478
-* Fix flag -DJSONCPP_USE_SECURE_MEMORY:BOOL=TRUE by @tfc in #1567
-* fix(build): remove check_required_components for meson build by @chenrui333 in #1570
-* the cgi module was removed from Python3.13 by @a-detiste in #1578
-* Fix name of static library when targeting MinGW. by @mmuetzel in #1579
-* Fix comparison warnings caused by 54fc4e2 by @JensMertelmeyer in #1575
-* Drop pre-C++11 alternatives by @BillyDonahue in #1593
-* feat: support std::string_view in Value API by @evalon32 in #1584
-* Added Value::findType with String key by @SwintonStreet in #1574
-* Set up for Bazel module builds. by @bcsgh in #1597
-* Add a BUILD.bazel file for //example. by @bcsgh in #1602
-* Fix "include what you use" issue by @victorvianna in #1625
-* Make the build configuration under Bazel more correct. by @bcsgh in #1600
-* Add Bazel tests by @bcsgh in #1601
-* Return false in Reader::readValue when stack limit is exceeded by @xuhdev in #1619
-* Remove deprecated/removed clang-tidy key AnalyzeTemporaryDtors (#1614) by @bmagistro in #1615
-* [docs] Consuming JSONCpp via Conan package manager by @uilianries in #1622
-* Cleanup README.md, fix broken link. by @baylesj in #1633
-* Add gcovr.cfg to fix CI coverage merge errors by @baylesj in #1635
-* Remove build directory exclusion from gcovr config by @baylesj in #1640
-* Add test for allowDroppedNullPlaceholders by @baylesj in #1648
-* Prevent test colision when running in parallel via RESOURCE_LOCK by @marty1885 in #1637
-* fixup project version updater by @baylesj in #1649
-* Update README with project status and focus by @baylesj in #1639
-* Adding a cmake option to exclude the jsoncpp files from install. by @nv-jdeligiannis in #1596
-* Change stack depth limit to 256 by @baylesj in #1657
-* Fix uninitialized CMake variable in version.in by @baylesj in #1658
-* Fix CMake deprecation warning for compatibility with CMake < 3.10 by @baylesj in #1659
-* Scope JSON_DLL_BUILD to shared lib target only by @baylesj in #1660
-* Fix number parsing failing under non-C locales by @baylesj in #1662
-* Reject unescaped control characters in JSON strings by @baylesj in #1663
-* Fix MSAN issue in #1626 by @baylesj in #1654
-* Fix string_view ABI mismatch between library and consumers by @baylesj in #1661
-* Revert "Fix number parsing failing under non-C locales" by @baylesj in #1664
-* Fix use-after-free in Reader::parse(std::istream&) by @baylesj in #1665
-* Update bazel config for 9.x by @keith in #1655
-
-[1] https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Cc: Markus Volk <f_l_k@t-online.de>
 ---
- .../jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb} (90%)
+ meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-index f68ffd2c0f..b70a84304f 100644
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
- 
- PE = "1"
- 
--SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
--SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
-+SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
-+SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https;tag=${PV}"
- 
- 
- inherit cmake
+diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
+index 8540ec55fc..c5af2f038f 100644
+--- a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
++++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
+@@ -9,7 +9,7 @@ SRCREV = "cedfeef30e93db35eee6b25759117da63f8e5a4f"
+
+ inherit cmake pkgconfig
+
+-PACKAGECONFIG ?= "flac opus wave vorbis"
++PACKAGECONFIG ?= "flac wave vorbis"
+ PACKAGECONFIG[opus] = "-DSDLMIXER_OPUS=ON -DSDLMIXER_OPUS_SHARED=ON, -DSDLMIXER_OPUS=OFF,opusfile"
+ PACKAGECONFIG[vorbis] = "-DSDLMIXER_VORBIS_VORBISFILE=ON -DSDLMIXER_VORBIS_STB=OFF -DSDLMIXER_VORBIS_TREMOR=OFF, -DSDLMIXER_VORBIS_VORBISFILE=OFF -DSDLMIXER_VORBIS_STB=OFF -DSDLMIXER_VORBIS_TREMOR=OFF,libvorbis"
+ PACKAGECONFIG[flac] = "-DSDLMIXER_FLAC_LIBFLAC=ON -DSDLMIXER_FLAC_LIBFLAC_SHARED=ON, -DSDLMIXER_FLAC_LIBFLAC=OFF,flac"
 
