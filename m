@@ -2,162 +2,193 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20F2AF483EC
-	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 19:51:58 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3783.1774295515813060976
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4069BF483ED
+	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 19:55:38 +0000 (UTC)
+Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4127.1774295733520580756
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 12:51:55 -0700
+ Mon, 23 Mar 2026 12:55:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=OEwTjraU;
- spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f48.google.com with SMTP id 46e09a7af769-7d7ebe11bffso3048597a34.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 12:51:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774295515; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qNHaGyCw;
+ spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-662f30d3f1fso3189357eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 12:55:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774295733; cv=none;
         d=google.com; s=arc-20240605;
-        b=ShIzBkHRhGDqKUjrjcgwtrg7h5N9kglrb6EeCIYXuj1wmpjR8UUXX5LVnLvDRzEfND
-         OpsHeX69mq2w8Lh/PnMgYGiXA95iqD/MHWYE43qQV6GyyMl1GvkZZb7c8a2jobt4KAPd
-         sME370FzRJEZONhc60zX+Y4eW4ZdnwJHLukpAncrt4AKfpx3PKjoET6tP4iGhg7DdfPF
-         9rDHW8ecIbYfhxHKbcJVKgx0yPueh8UYzsWTDVxUNzXv2ocs3QmMl7vW/5ECoiLWkp/h
-         arM2FZuEMuYVSIj6YJFrIzXVrWrL8vWeYUe2bKDcuIChds9Ki+5cXFQV3LF55hoFbsGL
-         gNWw==
+        b=eIEFlaPq2LbZjS53HztrNl19YyHeVqQ7bfKaYvc3Lw/26roAmtlobESAw2J2ztvcOI
+         wdxTDU5ew1D07mBLGK67u5f5lfD37PTstBuKAnlBCrIZG4GJjuIJsiD2+JS5J11YisBK
+         zphXmyIyP7x5UXuvIPAM46UUGjcf6t79bGCwbqlYpQ98FVKA43ItaF26NHRj0nxDqsbZ
+         CVjTWDaHkCi2kuZdvuYUiS8iA9i8tXTAqwmyQW1EjGo2xF1EL+1C8r6mZdI0OXnGIlHU
+         0dLImVsOFXpqxb11B0caa4MeP9inQVIAcM/TVgvlKMglYCsR3TLfXopR9WvDeHG3KcIe
+         dVYQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=9vmddBHK8wrLZJf87CFd5XOMr5LfRYMRYfDfpD6i8sc=;
-        fh=U2Dan7hfekB9wNyi01PMtyzA+CqyoEK6y+FQAJceQMA=;
-        b=RTHk8FLEnytRAukYdGq1MMPx0arMEgmTVTrgiCF9CG2+eSocFi12I0wP8yLfXoQdw/
-         /w9ndXgYp6bthHre3ldoDCOJAsO8IaxgoeVt4CuFB8YHSA23LAOa5nxmk5rwY2A4DU3U
-         lK6m+4WlvupEoZbLDxVMh2qs/NHT4nk+iYTH2y2yNIOlEsa3l5Anb8EifjH6W1+OG5oA
-         72+1sc7Q46E6epY0iBMpHCDzhrVkeBWuJFLZi02nzZMvn0KGR4YVYg8b+bEur6JB6tcs
-         1O27g0SEtNX184r/COY6Qt92FPPtvZse5/d2Tv30UIxoxiSG/a8pgP2CYN6le3hqfsVS
-         1DSA==;
+        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
+        fh=EqFFGVnRn0qz4znwnmk0n+hFhLaJvAVW0pujP36Ql9U=;
+        b=BBD7xNpqzWd1ctsGfqYP6ZBiaRdi7vgb3GcQdDXtps1g+tMGjiGIVkPX1EeXxNUZWS
+         9IEKabYOHTnyQTN75cjVfzZQVmP/mA8YVgy6Ss2Z8ZLXmdsdVqIlcN8NogBYYrabDBfw
+         fcv+t5TrJA0BOPMo51DKI7FRhi1nHjm8e5SBZH9jEkfcGPUvaKUOljJVLEaKRVfCQ40q
+         2scoqL5+GBaHOHcE2yPes5ymsPGHzK72f7+xkWeX7BPk5HY8q2vkfaopxGYouteC77AD
+         pi/LqLmG8SIA0/+R5tEHrNtLGACvGnLcrof44UAohP0c3dcCNcHskdLFO4+d0KE1atMu
+         4buA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774295515; x=1774900315; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774295733; x=1774900533; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9vmddBHK8wrLZJf87CFd5XOMr5LfRYMRYfDfpD6i8sc=;
-        b=OEwTjraUYbNueL3svdZSUVyrp0udD2cLbBEE0gPvbFpEXdMOJ0BYB23ODtEgnmC/6S
-         kNIeuBR/wUDqkAHDoMmkGlXcySZz4++NyJ2YkR2zJeLqBXzhjq8tqF8eyONj23i9BJIF
-         IBdSMpNOP7ImROpSSsPrEsBOwCdvbx6Pfl7CqVPzNNtrGWRq4T3tEKuSutn93+cZLiL0
-         dljpmiT3VDhBWK0h0lujsX1YKzQuyhtkHbjfNlf8E1dKPHQmpf5+dLSE6PwbXX4Y67T/
-         37et4RgQnFx+vHZTgN3oVJuFHEXyPeMjt/EjH0hPW85uhsgoAUYRDBDBwb9Bn0+usU8L
-         iWXA==
+        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
+        b=qNHaGyCwhaZfrKfj0wNztbMT5K/d8ZOFWv0In5jPR8r5DD2Iq7ewHjexxhjqIT/5vh
+         /HPpRwTmejz8lj2JBOMcrgmoHSPgRnT6lwtyskssK/DNmyQDzu967X0TPjuVM1lN5UBZ
+         i7BfL6O/KcuKQbYBtSWDzLOkmZViy0DYTYytH5WpZspSP+ME0hD9aAWxoBGKln47DQQx
+         pkApNzeG3FH4aK5L8EHtDIkUddQFNm7qw/kHxP4Y+cewokH+thEoREmOyfnd8fB4r8e8
+         0pn5ae0xo1mgGfvttQpRnNlQN3O2RaqsY7E+1soVEA5nyJVcqX/7/f1AwVBzZ6nv3sDv
+         LqIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774295515; x=1774900315;
+        d=1e100.net; s=20251104; t=1774295733; x=1774900533;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=9vmddBHK8wrLZJf87CFd5XOMr5LfRYMRYfDfpD6i8sc=;
-        b=XSYHoHcmxSRDiQFxZBiua5JtP+Q9GfzWiQXhF0MqxsGayJIVANqokcuDxSf0cMFN7g
-         Ts2LAzgDETAj1CftVj9WgTQxDu4dBroGcy2ckpo7X+OqxgFPnw/IqkwZiiFtdlWfgnqm
-         xSjjTCD1Q6PUHOiVhNtYCrmg7uBrwBPmAZLzb3Ys2Jfdj2XHQ5ojVCx4RpzOMrkVftSg
-         VdmL8Mu3yGqMTo5JshCFrX+beRv+E5u0NR62+Jj49Qp+D9mdWlI/hqJHpezVhIs+1HZ9
-         5wIaqACCTpgPWGusB2xlCVbX4n0mNyKLkzpVC50zrogN1tIWgXvsQ3QpFQ6km8W5wIch
-         DoWw==
-X-Gm-Message-State: AOJu0YzBCfmsXUUmRBox3kIII9E5nxWJv9QAr+HzUd3GUs/ZEQxXUQ3O
-	KPKfAa9aLhe3kN4vH+dvMb/QUsMhrz9N4APSWfP2bTehBIar1njiclcatlB/st1QrTI0dUggkiX
-	lPMd3Kk9MF7CpOYosGtr95oAsto+uGrU=
-X-Gm-Gg: ATEYQzzURdA8ML1va721ZEU0N+QHjoytph+sFNlh6V/YqlaxErIs342uenX5A6I36L9
-	pVl3jxZSUlvnWrUcRmPey3d+xYdR70DjRysZuwB/5RJrGaktvDgsuh0kXKRw6aamdiQfRgCZdh8
-	TwJQPgOYfMwj7CoN4YHni6jwZ1QKwQuYp/z4vU1+sQ2ayfge6cSM/Y6gsO3tLWbzgG13HjbPsks
-	fZSTKqqzuAkBGc1/2TXJcrADs6cK+BZ0J7+bgsHTBhRgacoLypSDd9QGPWdPgAt8Dnl/b9j2Z5w
-	BKWbK22MzvOG8PyU18A=
-X-Received: by 2002:a05:6830:2685:b0:7d9:ad90:5670 with SMTP id
- 46e09a7af769-7d9ad9062acmr6020606a34.18.1774295515004; Mon, 23 Mar 2026
- 12:51:55 -0700 (PDT)
+        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
+        b=aDEDzspxbw4d5S5xpuBg4A4xrD7JNO/IjNlaZIECrpTW9Wkc+AgwyotWjhkdkJBbsG
+         KM4A6LI/GbaTOcb4lzhVQD+N6K5ZBGQAzbCDrFdFW2bOLycXrf+oKF6f+6KSlYIb+PqA
+         59YayzrwahNsqjfUP4G+lTGfKLaYkU9VCvehqLDf4eqT8ij5e6KmDDlLpWqluFaRN0dr
+         KJ/pNq2ouChfKOQa1DILQtdPtJEV5AGBVfLU+JES5F/B95D9/OV8oza1I5HfEIpfC3/8
+         3TAX6sUVmSOxO+S12dsGrj4F3neSu3D0/wyyOtWK+Xkg0yXSKQjwAjvhyEDQ62adv3Lr
+         coCg==
+X-Gm-Message-State: AOJu0Yzxost7u+g6VG79UYmk/MQSUdu9k81C8y5XOHy0xzApONmKzO5h
+	UrRrGbxC9+/IJgHPRq93ZB9VO/kilqk5hGNLAsBY8WTqBYVuXHJw2vpmvwlMM8Iu+FdZIC8JpqH
+	z57Zk8cKhsN9r7GqPQK/5MMCWkFvPH0M=
+X-Gm-Gg: ATEYQzx3Rkdi7BIiTyqwzQxA8wGDfBxodeVyh23JJ7WUhwTu470eSVIZ3w15M6B2o2p
+	DOpG40TzXZgGNqLLlOhv6vDhNw/6NCQVkdW5xzIxMqCvc9tG+nWJLbgAjM7emHng0XOP/lXWk8I
+	odloRIAFzTvC6HJP6DkNXFEVYiDB12p9Wt2XAzs/lk+qcxMpPqgtaKRCCvCB7hCYBpyg7CY0GZe
+	R8sCjUTPN+Rheh1NlWe8EkM/sxxxs0urherqyesdADUGDMeuQFF3R9hz/voMYqrZHGx0letnF1v
+	2VOlSUI71JDKW8gHQbQ=
+X-Received: by 2002:a05:6820:1999:b0:67d:b2f2:6e73 with SMTP id
+ 006d021491bc7-67df5d03f02mr620702eaf.8.1774295732666; Mon, 23 Mar 2026
+ 12:55:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260323103724.2341742-1-ankur.tyagi85@gmail.com>
- <20260323103724.2341742-2-ankur.tyagi85@gmail.com> <AS1PR10MB56972570AA535263AE8F173AFD4BA@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AS1PR10MB56972570AA535263AE8F173AFD4BA@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+References: <20260323162731.8483-1-peter.marko@siemens.com> <20260323162731.8483-3-peter.marko@siemens.com>
+In-Reply-To: <20260323162731.8483-3-peter.marko@siemens.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Tue, 24 Mar 2026 08:51:43 +1300
-X-Gm-Features: AaiRm52TjRezW7sAmT0xrVSq3hp0mGnzfNzSJ3PzAjMsERhOvpSI92FvLMfA1Os
-Message-ID: <CADySD0H2kJA_DF4NfJ89L+f7HLmf9rj2JUiF_dXadaR-URP_3w@mail.gmail.com>
-Subject: Re: [oe][meta-networking][PATCH 2/3] wolfssl: upgrade 5.8.4 -> 5.9.0
-To: "Marko, Peter (FT D EU SK BFS1)" <Peter.Marko@siemens.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Mar 2026 08:55:21 +1300
+X-Gm-Features: AQROBzCZBsCF3K93ZYVx8mhJKAH13Gs4mF62GmkdDWNEVHwxJBzEiSZ66IiY_vA
+Message-ID: <CADySD0FW89Hz_7Q=D9RqkRqpwOX5sQ6t0F_QiKSOxzwhF0i9uQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 3/3] jsoncpp: upgrade 1.9.6 -> 1.9.7
+To: peter.marko@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 19:51:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125527
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 19:55:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125528
 
-On Mon, Mar 23, 2026 at 11:55=E2=80=AFPM Marko, Peter (FT D EU SK BFS1)
-<Peter.Marko@siemens.com> wrote:
+On Tue, Mar 24, 2026 at 5:27=E2=80=AFAM Peter Marko via lists.openembedded.=
+org
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
 >
+> From: Peter Marko <peter.marko@siemens.com>
 >
+> Release information [1]:
 >
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org <openembedded-
-> > devel@lists.openembedded.org> On Behalf Of Ankur Tyagi via
-> > lists.openembedded.org
-> > Sent: Monday, March 23, 2026 11:37 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > Subject: [oe][meta-networking][PATCH 2/3] wolfssl: upgrade 5.8.4 -> 5.9=
-.0
-> >
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >
-> > Conatins many CVE fixes:
-> > https://github.com/wolfSSL/wolfssl/releases/tag/v5.9.0-stable
-> >
-> > Dropped CVE_STATUS for version 5.8.4 specific CVE conflicts.
+> 1.9.7: Bugfixes, build system cleanups
+> What's Changed
+> * Fixes PreventInSourceBuilds.cmake to work with add_subdirectory by @mor=
+bo84 in #1383
+> * json_value.cpp bug in the edges of uint/int by @YaalLek in #1519
+> * Release 1.9.6 and move versions to 1.9.7 by @baylesj in #1566
+> * Fixed work secure_allocator on old compiers by @TsynkPavel in #1478
+> * Fix flag -DJSONCPP_USE_SECURE_MEMORY:BOOL=3DTRUE by @tfc in #1567
+> * fix(build): remove check_required_components for meson build by @chenru=
+i333 in #1570
+> * the cgi module was removed from Python3.13 by @a-detiste in #1578
+> * Fix name of static library when targeting MinGW. by @mmuetzel in #1579
+> * Fix comparison warnings caused by 54fc4e2 by @JensMertelmeyer in #1575
+> * Drop pre-C++11 alternatives by @BillyDonahue in #1593
+> * feat: support std::string_view in Value API by @evalon32 in #1584
+> * Added Value::findType with String key by @SwintonStreet in #1574
+> * Set up for Bazel module builds. by @bcsgh in #1597
+> * Add a BUILD.bazel file for //example. by @bcsgh in #1602
+> * Fix "include what you use" issue by @victorvianna in #1625
+> * Make the build configuration under Bazel more correct. by @bcsgh in #16=
+00
+> * Add Bazel tests by @bcsgh in #1601
+> * Return false in Reader::readValue when stack limit is exceeded by @xuhd=
+ev in #1619
+> * Remove deprecated/removed clang-tidy key AnalyzeTemporaryDtors (#1614) =
+by @bmagistro in #1615
+> * [docs] Consuming JSONCpp via Conan package manager by @uilianries in #1=
+622
+> * Cleanup README.md, fix broken link. by @baylesj in #1633
+> * Add gcovr.cfg to fix CI coverage merge errors by @baylesj in #1635
+> * Remove build directory exclusion from gcovr config by @baylesj in #1640
+> * Add test for allowDroppedNullPlaceholders by @baylesj in #1648
+> * Prevent test colision when running in parallel via RESOURCE_LOCK by @ma=
+rty1885 in #1637
+> * fixup project version updater by @baylesj in #1649
+> * Update README with project status and focus by @baylesj in #1639
+> * Adding a cmake option to exclude the jsoncpp files from install. by @nv=
+-jdeligiannis in #1596
+> * Change stack depth limit to 256 by @baylesj in #1657
+> * Fix uninitialized CMake variable in version.in by @baylesj in #1658
+> * Fix CMake deprecation warning for compatibility with CMake < 3.10 by @b=
+aylesj in #1659
+> * Scope JSON_DLL_BUILD to shared lib target only by @baylesj in #1660
+> * Fix number parsing failing under non-C locales by @baylesj in #1662
+> * Reject unescaped control characters in JSON strings by @baylesj in #166=
+3
+> * Fix MSAN issue in #1626 by @baylesj in #1654
+> * Fix string_view ABI mismatch between library and consumers by @baylesj =
+in #1661
+> * Revert "Fix number parsing failing under non-C locales" by @baylesj in =
+#1664
+> * Fix use-after-free in Reader::parse(std::istream&) by @baylesj in #1665
+> * Update bazel config for 9.x by @keith in #1655
 >
-> CVE_STATUS variables were not updated in this patch.
+> [1] https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
+>
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  .../jsoncpp/{jsoncpp_1.9.6.bb =3D> jsoncpp_1.9.7.bb}              | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.6.bb =3D> jsoncpp_1=
+.9.7.bb} (93%)
+>
+> diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/=
+recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+> similarity index 93%
+> rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
+> rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+> index f68ffd2c0f..c44422071e 100644
+> --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
+> +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+> @@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5d73c165a0f9=
+e86a1342f32d19ec5926"
+>
+>  PE =3D "1"
+>
+> -SRCREV =3D "89e2973c754a9c02a49974d839779b151e95afd6"
+> +SRCREV =3D "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+>  SRC_URI =3D "git://github.com/open-source-parsers/jsoncpp;branch=3Dmaste=
+r;protocol=3Dhttps"
 
-Thanks Peter, sent v2
+can please also include tag=3D${PV} in the SRC_URI
 
 >
-> >
-> > Ptests:
-> >
-> > START: ptest-runner
-> > 2026-03-23T10:28
-> > BEGIN: /usr/lib/wolfssl/ptest
-> > ############ Running Wolfssl Ptest ##########
-> > Wolfssl ptest logs are stored in /tmp/wolfss_temp.Y7VEJ2/ptest.log
-> > Test script returned: 0
-> > unit_test: Success for all configured tests.
-> > PASS: Wolfssl
-> > DURATION: 130
-> > END: /usr/lib/wolfssl/ptest
-> > 2026-03-23T10:30
-> > STOP: ptest-runner
-> > TOTAL: 1 FAIL: 0
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  .../wolfssl/{wolfssl_5.8.4.bb =3D> wolfssl_5.9.0.bb}              | 2 =
-+-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_5.8.4.bb =
-=3D>
-> > wolfssl_5.9.0.bb} (97%)
-> >
-> > diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4=
-.bb b/meta-
-> > networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-> > similarity index 97%
-> > rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.=
-bb
-> > rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-> > index f16c8c1e68..625ee66609 100644
-> > --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.4.bb
-> > +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-> > @@ -17,7 +17,7 @@ SRC_URI =3D " \
-> >      file://run-ptest \
-> >  "
-> >
-> > -SRCREV =3D "59f4fa568615396fbf381b073b220d1e8d61e4c2"
-> > +SRCREV =3D "922d04b3568c6428a9fb905ddee3ef5a68db3108"
-> >
-> >
-> >  inherit autotools ptest
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125523): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125523
+> Mute This Topic: https://lists.openembedded.org/mt/118468191/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
