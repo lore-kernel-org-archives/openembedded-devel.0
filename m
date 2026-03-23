@@ -1,114 +1,177 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23D7AF483D6
-	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 16:27:58 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21773.1774283272276709167
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E6BBF483E0
+	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 18:03:50 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1638.1774289025410459795
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 09:27:52 -0700
+ Mon, 23 Mar 2026 11:03:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=eIzUKscD;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20260323162750e1d2664a400002078a-vysv_h@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260323162750e1d2664a400002078a
-        for <openembedded-devel@lists.openembedded.org>;
-        Mon, 23 Mar 2026 17:27:50 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=yVLytNaqmWTt+aXO4ixreXt82c3A5ReCcFaeIgvfr+8=;
- b=eIzUKscDqF+B8TzaUPaisO1SWdrygIEXceqqxgS0f6+MIt0I5ABInBrwjkjvCqWRS5+JwQ
- UBtxPZwBCVnnqKfthNB+1s6G5KOxIHCMdhwMVlGKW+J0csiSgoGuwRHcAdHfBz7nvarxjk2B
- vFJJ7QWeaa6Y1gX0r0TQG+ByTmUF6yqs383CKpEue49aiu5yZQdQ5oM52DY+sc/ELE9iJOHj
- NUce/ZqMqS10UzfRjlccbDHJJfiiF6QBIk0nonaodmdxv4OiVh82k/4wJBml5MQn1moVZbvg
- auA/4de3W3f5XRw2NxUTS/VKIplKkYG/RSnHkqjCwKJ9HMF7F0KIWqyA==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH 3/3] jsoncpp: upgrade 1.9.6 -> 1.9.7
-Date: Mon, 23 Mar 2026 17:27:31 +0100
-Message-Id: <20260323162731.8483-3-peter.marko@siemens.com>
-In-Reply-To: <20260323162731.8483-1-peter.marko@siemens.com>
-References: <20260323162731.8483-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dsSN8fBh;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-48540d21f7dso36633375e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 11:03:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1774289024; x=1774893824; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=a2eV4lFwCO3Dw3UXm/cU49y3lxaZAPTMAgg2G2gdfrU=;
+        b=dsSN8fBh/WCOCVGbMvk2VZGCB747R1UjMRgudDvjU09jKrdf0/X/ZabBDjinkwx8do
+         3sFhDqYx+qd3qIjXNmukgbidVoWhY+qo1KOrxkh/thnBS10G67p0ePl2XFM6cE/0WN50
+         DYB8KUg+HLmO+m5UUeARiFRRnBZtuPX8JqLJ05C0Szhl4EjIdITFNlebIahG7vAIzlMh
+         +UNa3b1mVmxMocc/5dJUiZbgWCxa11iAHtKojQDRqhXmAkyKylIe2lOv4pN9DnTqvwlM
+         ihOdhkcLaKMzmKajWKHU17IKjIrSeN/hb4w/lpNHY692BgCJC9FbtETaROJ2rr9xkRnS
+         LJwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774289024; x=1774893824;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=a2eV4lFwCO3Dw3UXm/cU49y3lxaZAPTMAgg2G2gdfrU=;
+        b=gAnitOuchZ0BLo761cjiwzlRzaGt2YkFzqP/bjt12GTFpIeJ6EGTda0QOV4QXoVizW
+         qMMustqnEUHssCQbCP3EDoNE8PR1nv8cXNAHfyf6ncPREYMXvByUbN5LODmIvkSU+2zf
+         87NplOnK/U9v0NA/nxpCNn8BArukvJoo+U1gzj90W3LMGn8DIs6ZRSA2N3kCl42lwrXy
+         68zkThcw2AFqVOLtvXQF3UzobM1r7YMitzpCXUMxTr3S28ic6EYuDz9pQ+mzXmPii8H+
+         I1mQvWU2xOITYbIEj00hprneiLHsxx+13ao+iTgaKobkM8+wrILyFGalh3PbB73FslFz
+         Wyfg==
+X-Forwarded-Encrypted: i=1; AJvYcCXJXAduzWV58UMB25O7zZYM+LXLz+tZNDiEo4kS7ozjQnf4RArPzIc7+ErhbvtmI8e6b6rABTNDSiUjkmQAAp3m5kI=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yw9O1yh05g7+3E/U/zZBsRdw4I9jv4XeRY55nCB7gbztm1S/HZn
+	szhQLTC1M4iROURgNGOnQBZGBQh2NywelqTfiHlW6n195lseg/+C1VE0
+X-Gm-Gg: ATEYQzykk3TvjCXfYcI7QQR/+fLdqYXB0mvxgD5B2OcwHsjQSKZx4vu6GAxadYaR8VT
+	BB29rRgp3Cwi1mMa4vXuI8XBlZvwFEbPu9svlXfup9eTCcWZNsj+UfSKLpm4v5Gxr5AJZ5pCSMO
+	5NQDf7k7g4/un5YD+M9tMCrMlnaz4FRCk0zGD/93Ctd8ZHDgptBIqlcw1vyQr4FT7c4O3ubxD7Z
+	k1dCF+EkBp4XUZJMb4yC0xOlYRxJEi0hdhWig772jE+QCeQJsPWMPt/xFqvEqqiTkooMJ8sP7NP
+	YJIU3Q0JgvrgmnI13nDcr1ylUq+e6DgaQ07UwfHsPDEESlz1VRZvV1dI5gCmmM8cI0m9empYbOf
+	Q0jm3RYTZkTTYq3ohTmuO5DyIF0PfeC+bdqzzsnQuZkn/8MKFWzcNvzgfQLPR/jVoT2chYL+u8w
+	9T6mPDiFWB1Og8NA6C0W/8hTz+YwqkhiE=
+X-Received: by 2002:a05:600c:4ed1:b0:485:f1d1:8f3d with SMTP id 5b1f17b1804b1-486fede5d12mr189309885e9.6.1774289023439;
+        Mon, 23 Mar 2026 11:03:43 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4870f6e9ce8sm492765e9.2.2026.03.23.11.03.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 23 Mar 2026 11:03:42 -0700 (PDT)
+Message-ID: <63363b44-df2a-4826-a72a-bc83732ad15b@gmail.com>
+Date: Mon, 23 Mar 2026 19:03:42 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH v2] image_types_sparse: switch ext*
+ conversion to ext2simg_android
+To: git-patches@bmwtechworks.in, openembedded-devel@lists.openembedded.org
+Cc: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
+References: <20260323091500.1196198-1-git-patches@bmwtechworks.in>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260323091500.1196198-1-git-patches@bmwtechworks.in>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 16:27:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125523
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 18:03:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125524
 
-From: Peter Marko <peter.marko@siemens.com>
+On 3/23/26 10:15, Ashish Kumar Mishra via lists.openembedded.org wrote:
 
-Release information [1]:
+...SNIP...
 
-1.9.7: Bugfixes, build system cleanups
-What's Changed
-* Fixes PreventInSourceBuilds.cmake to work with add_subdirectory by @morbo84 in #1383
-* json_value.cpp bug in the edges of uint/int by @YaalLek in #1519
-* Release 1.9.6 and move versions to 1.9.7 by @baylesj in #1566
-* Fixed work secure_allocator on old compiers by @TsynkPavel in #1478
-* Fix flag -DJSONCPP_USE_SECURE_MEMORY:BOOL=TRUE by @tfc in #1567
-* fix(build): remove check_required_components for meson build by @chenrui333 in #1570
-* the cgi module was removed from Python3.13 by @a-detiste in #1578
-* Fix name of static library when targeting MinGW. by @mmuetzel in #1579
-* Fix comparison warnings caused by 54fc4e2 by @JensMertelmeyer in #1575
-* Drop pre-C++11 alternatives by @BillyDonahue in #1593
-* feat: support std::string_view in Value API by @evalon32 in #1584
-* Added Value::findType with String key by @SwintonStreet in #1574
-* Set up for Bazel module builds. by @bcsgh in #1597
-* Add a BUILD.bazel file for //example. by @bcsgh in #1602
-* Fix "include what you use" issue by @victorvianna in #1625
-* Make the build configuration under Bazel more correct. by @bcsgh in #1600
-* Add Bazel tests by @bcsgh in #1601
-* Return false in Reader::readValue when stack limit is exceeded by @xuhdev in #1619
-* Remove deprecated/removed clang-tidy key AnalyzeTemporaryDtors (#1614) by @bmagistro in #1615
-* [docs] Consuming JSONCpp via Conan package manager by @uilianries in #1622
-* Cleanup README.md, fix broken link. by @baylesj in #1633
-* Add gcovr.cfg to fix CI coverage merge errors by @baylesj in #1635
-* Remove build directory exclusion from gcovr config by @baylesj in #1640
-* Add test for allowDroppedNullPlaceholders by @baylesj in #1648
-* Prevent test colision when running in parallel via RESOURCE_LOCK by @marty1885 in #1637
-* fixup project version updater by @baylesj in #1649
-* Update README with project status and focus by @baylesj in #1639
-* Adding a cmake option to exclude the jsoncpp files from install. by @nv-jdeligiannis in #1596
-* Change stack depth limit to 256 by @baylesj in #1657
-* Fix uninitialized CMake variable in version.in by @baylesj in #1658
-* Fix CMake deprecation warning for compatibility with CMake < 3.10 by @baylesj in #1659
-* Scope JSON_DLL_BUILD to shared lib target only by @baylesj in #1660
-* Fix number parsing failing under non-C locales by @baylesj in #1662
-* Reject unescaped control characters in JSON strings by @baylesj in #1663
-* Fix MSAN issue in #1626 by @baylesj in #1654
-* Fix string_view ABI mismatch between library and consumers by @baylesj in #1661
-* Revert "Fix number parsing failing under non-C locales" by @baylesj in #1664
-* Fix use-after-free in Reader::parse(std::istream&) by @baylesj in #1665
-* Update bazel config for 9.x by @keith in #1655
+> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+> index 186ff9a488..b7ab46f12b 100644
+> --- a/meta-oe/conf/layer.conf
+> +++ b/meta-oe/conf/layer.conf
+> @@ -12,8 +12,16 @@
+>  BBPATH .= ":${LAYERDIR}"
+>  
+>  # We have a recipes directory, add to BBFILES
+> -BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
+> +# Adding dynamic layers recipes
+> +BBFILES += "\
+> +    ${LAYERDIR}/recipes-*/*/*.bb \
+> +    ${LAYERDIR}/recipes-*/*/*.bbappend \
+> +    ${LAYERDIR}/dynamic-layers/selinux/recipes-*/*/*.bb \
+> +    ${LAYERDIR}/dynamic-layers/selinux/recipes-*/*/*.bbappend \
+> +"
+>  
 
-[1] https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
+Sorry for not asking earlier... but why is this done actually? Only to
+make it available without meta-selinux aswell? If so, then I think
+instead the recipes (or a part of them maybe?) should be moved to the
+main meta-oe folder. Changing BBFILES like this kind of defeats the
+purpose of dynamic-layers.
 
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
----
- .../jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb} (93%)
+Thinking a bit loudly, assuming that the above guess is correct about
+the reason:
+Question is, why do these recipes depend on meta-selinux? Do they really
+depend? This is a question, not a challenge, I'm not that familiar with
+these particular recipe. If they really do depend, then making this
+BBFILES extension will cause broken recipes in the layer, possibly it
+will fail.
+If they don't depend, then there is no need for them to be in the
+dynamic layer folder, they can become standard ones.
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-similarity index 93%
-rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-index f68ffd2c0f..c44422071e 100644
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
- 
- PE = "1"
- 
--SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
-+SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
- SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
- 
- 
+
+> +# Prefer android-tools from selinux dynamic layer (29.0.6) over the older version (5.1.1)
+> +PREFERRED_VERSION:pn-android-tools = "29.0.6.r14%"
+
+PREFERRED_VERSION should use weak assignment (?= or ??=), otherwise it
+may shadow other user-preference. Alternatively, maybe you could check
+the version/avalability of ext2simg_android in image_type_sparse
+bbclass, and complain hard if it's wrong? That would put the version
+selection on the user's shoulder. (Just an idea, no need to like it)
+
+
+>  BBFILE_COLLECTIONS += "openembedded-layer"
+>  BBFILE_PATTERN_openembedded-layer := "^${LAYERDIR}/"
+>  
+> diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+> index 74928ed171..39b8ef5fe8 100644
+> --- a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+> +++ b/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
+> @@ -166,6 +166,37 @@ do_install() {
+>          install -d ${D}${bindir}
+>          install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
+>      fi
+> +
+> +    # e2fsprogs expecting headers in sparse/ subdirectory
+> +    # to resolve the "Multiple shlib providers" conflict.
+> +    rm -f ${D}${libdir}/android/libsparse.so*
+> +    rm -f ${D}${libdir}/android/libbase.so*
+> +    rm -f ${D}${libdir}/android/liblog.so*
+> +
+> +    if [ -d "${S}/system/core/libsparse/include/sparse" ]; then
+> +        install -d ${D}${includedir}/sparse
+> +        cp -r ${S}/system/core/libsparse/include/sparse/* ${D}${includedir}/sparse/
+> +    else
+> +        bberror "Sparse headers not found in ${S}/system/core/libsparse/include/sparse"
+> +    fi
+> +
+> +    install -d ${D}${libdir}
+> +    for lib in libsparse libbase liblog; do
+> +        if [ -f "${S}/debian/out/system/core/${lib}.so" ]; then
+> +            bbwarn "Installing ${lib} to sysroot"
+
+
+One bbwarn escaped here.
+
+
+> +            install -m 0755 ${S}/debian/out/system/core/${lib}.so ${D}${libdir}/${lib}.so.0
+> +            ln -sf ${lib}.so.0 ${D}${libdir}/${lib}.so
+> +        fi
+> +    done
+> +
+> +    install -d ${D}${libdir}/android
+> +    for lib in libsparse libbase liblog; do
+> +        if [ -f "${D}${libdir}/${lib}.so.0" ]; then
+> +            ln -sf ../${lib}.so.0 ${D}${libdir}/android/${lib}.so.0
+> +            ln -sf ../${lib}.so ${D}${libdir}/android/${lib}.so
+> +        fi
+> +    done
+> +
+>  }
+>  
+>  PACKAGES =+ "${PN}-fstools ${PN}-adbd"
+
 
