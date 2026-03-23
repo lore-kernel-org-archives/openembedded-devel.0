@@ -2,190 +2,170 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4069BF483ED
-	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 19:55:38 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.4127.1774295733520580756
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FBDAF483ED
+	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 20:00:48 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4245.1774296039010759484
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 12:55:33 -0700
+ Mon, 23 Mar 2026 13:00:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=qNHaGyCw;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-662f30d3f1fso3189357eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 12:55:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774295733; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=MxtdgLCM;
+ spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-7d744d9acbeso1262463a34.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 13:00:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774296038; cv=none;
         d=google.com; s=arc-20240605;
-        b=eIEFlaPq2LbZjS53HztrNl19YyHeVqQ7bfKaYvc3Lw/26roAmtlobESAw2J2ztvcOI
-         wdxTDU5ew1D07mBLGK67u5f5lfD37PTstBuKAnlBCrIZG4GJjuIJsiD2+JS5J11YisBK
-         zphXmyIyP7x5UXuvIPAM46UUGjcf6t79bGCwbqlYpQ98FVKA43ItaF26NHRj0nxDqsbZ
-         CVjTWDaHkCi2kuZdvuYUiS8iA9i8tXTAqwmyQW1EjGo2xF1EL+1C8r6mZdI0OXnGIlHU
-         0dLImVsOFXpqxb11B0caa4MeP9inQVIAcM/TVgvlKMglYCsR3TLfXopR9WvDeHG3KcIe
-         dVYQ==
+        b=Gv31YtJEnQ5xfR7iZW0NQifuJF7/qzOEErBlug6+1jQeYNkhwskpzlLmBx44N4hjN+
+         412gmiGE8bkZmuoVOvt4/1/O8wl2El2hynSpBJD3Vgpc0Dhn32MaYxaBWlj93Hf7asLq
+         ZTldA574hWJIx5/Wv3eGu4Om5dlijmBcKbocG+7Hccf/FcoCjbvgaXgtEdGiiGUqkZ4I
+         fwrsngU3AgvxeFJWwuXXPVazHxQF7Y+QVlbh6nuRypYlMpfNWAr6yqaBGO9qXZu5UKEr
+         AUFVPxsDDg2VTwFFBMpxgHHFTHY2lRsiP4yaHFKoNuAYaIEo+SMBjI5YtZMCvDbXqb5w
+         FHlw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
-        fh=EqFFGVnRn0qz4znwnmk0n+hFhLaJvAVW0pujP36Ql9U=;
-        b=BBD7xNpqzWd1ctsGfqYP6ZBiaRdi7vgb3GcQdDXtps1g+tMGjiGIVkPX1EeXxNUZWS
-         9IEKabYOHTnyQTN75cjVfzZQVmP/mA8YVgy6Ss2Z8ZLXmdsdVqIlcN8NogBYYrabDBfw
-         fcv+t5TrJA0BOPMo51DKI7FRhi1nHjm8e5SBZH9jEkfcGPUvaKUOljJVLEaKRVfCQ40q
-         2scoqL5+GBaHOHcE2yPes5ymsPGHzK72f7+xkWeX7BPk5HY8q2vkfaopxGYouteC77AD
-         pi/LqLmG8SIA0/+R5tEHrNtLGACvGnLcrof44UAohP0c3dcCNcHskdLFO4+d0KE1atMu
-         4buA==;
+        bh=qQ8copWglYcnUema9iBAEOcgIflx/g44hA8TLhWW+AM=;
+        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
+        b=RrrCQkqEb11kpsPx9WOZfUyqV1hr4QviK4qy87OBMeLXi0TDMXRIsnEPHYXaDrHVtD
+         jvPlZ9WVC+ACwDestsk9enKmH4wYO31mA8HrnhPaS+j1IuKVrnsFZGbJfo6fh4nEV6qD
+         OAR0uMx2JI6i1xT3b0B22j/M7ImxzUUJSxp0hJTFg0Co7UvLnEcDQCNrno0XhJ4Qac3J
+         jRXgFiorVfCfC6GlEEMqvBo9JCTSIfa+yqNICBNMcSuFSGMlMpHQ1kKJTw01RrBcr/uB
+         D1n6eYY3/AbcGX1I+CxomnUZAA0ZMZC5HIibqr5Ne0db2USjKjR0PlKm5xuGO7nEkJhm
+         NO0w==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774295733; x=1774900533; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774296038; x=1774900838; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
-        b=qNHaGyCwhaZfrKfj0wNztbMT5K/d8ZOFWv0In5jPR8r5DD2Iq7ewHjexxhjqIT/5vh
-         /HPpRwTmejz8lj2JBOMcrgmoHSPgRnT6lwtyskssK/DNmyQDzu967X0TPjuVM1lN5UBZ
-         i7BfL6O/KcuKQbYBtSWDzLOkmZViy0DYTYytH5WpZspSP+ME0hD9aAWxoBGKln47DQQx
-         pkApNzeG3FH4aK5L8EHtDIkUddQFNm7qw/kHxP4Y+cewokH+thEoREmOyfnd8fB4r8e8
-         0pn5ae0xo1mgGfvttQpRnNlQN3O2RaqsY7E+1soVEA5nyJVcqX/7/f1AwVBzZ6nv3sDv
-         LqIA==
+        bh=qQ8copWglYcnUema9iBAEOcgIflx/g44hA8TLhWW+AM=;
+        b=MxtdgLCMGFaIt54601FAvgtc0Z7g5axXYHjdU+5SVlD7xlySj8Ix+CdmlCoT9MecX4
+         cUEUPIQqgP4XIP1IzbMsBKQmQn6JSBrB8Wd/0LyBK3dI85OV4ta4KCvUMvSQUVOJ0Avm
+         hGLKMR3p5euiHEr0mQfZsA9q2dg26XdJpnWgXsyitqJGJ1t6kedV6anf+7hMxr3spnJw
+         AGyrJFet07HJ4htYY3RcXLEulY51AhZTqU3vAJfPxqbl7XNdKC9Hh2J25VUjXUD0Bb5D
+         +tdUc4PSo0eDtry5HKdngtnOoCTxKkvfoJyJDfsBV7uuL7nV5R4/INhV6kNAKE3bwfL7
+         pLrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774295733; x=1774900533;
+        d=1e100.net; s=20251104; t=1774296038; x=1774900838;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=3LO1pBXbs/UGLfDqtS0rkbNmDoSZIB+bXQ/qk6ZVQuE=;
-        b=aDEDzspxbw4d5S5xpuBg4A4xrD7JNO/IjNlaZIECrpTW9Wkc+AgwyotWjhkdkJBbsG
-         KM4A6LI/GbaTOcb4lzhVQD+N6K5ZBGQAzbCDrFdFW2bOLycXrf+oKF6f+6KSlYIb+PqA
-         59YayzrwahNsqjfUP4G+lTGfKLaYkU9VCvehqLDf4eqT8ij5e6KmDDlLpWqluFaRN0dr
-         KJ/pNq2ouChfKOQa1DILQtdPtJEV5AGBVfLU+JES5F/B95D9/OV8oza1I5HfEIpfC3/8
-         3TAX6sUVmSOxO+S12dsGrj4F3neSu3D0/wyyOtWK+Xkg0yXSKQjwAjvhyEDQ62adv3Lr
-         coCg==
-X-Gm-Message-State: AOJu0Yzxost7u+g6VG79UYmk/MQSUdu9k81C8y5XOHy0xzApONmKzO5h
-	UrRrGbxC9+/IJgHPRq93ZB9VO/kilqk5hGNLAsBY8WTqBYVuXHJw2vpmvwlMM8Iu+FdZIC8JpqH
-	z57Zk8cKhsN9r7GqPQK/5MMCWkFvPH0M=
-X-Gm-Gg: ATEYQzx3Rkdi7BIiTyqwzQxA8wGDfBxodeVyh23JJ7WUhwTu470eSVIZ3w15M6B2o2p
-	DOpG40TzXZgGNqLLlOhv6vDhNw/6NCQVkdW5xzIxMqCvc9tG+nWJLbgAjM7emHng0XOP/lXWk8I
-	odloRIAFzTvC6HJP6DkNXFEVYiDB12p9Wt2XAzs/lk+qcxMpPqgtaKRCCvCB7hCYBpyg7CY0GZe
-	R8sCjUTPN+Rheh1NlWe8EkM/sxxxs0urherqyesdADUGDMeuQFF3R9hz/voMYqrZHGx0letnF1v
-	2VOlSUI71JDKW8gHQbQ=
-X-Received: by 2002:a05:6820:1999:b0:67d:b2f2:6e73 with SMTP id
- 006d021491bc7-67df5d03f02mr620702eaf.8.1774295732666; Mon, 23 Mar 2026
- 12:55:32 -0700 (PDT)
+        bh=qQ8copWglYcnUema9iBAEOcgIflx/g44hA8TLhWW+AM=;
+        b=celxkc6Lf6kJM2AFynRQLuiPlBD1gnQZgJcwK7a9FuccTEQwLNOYfo14kzngh9VFbY
+         BdvHRW9qZl/ffy2ks73AJoCNokDJuBXDqXAIMAqYEk1gJx2J+r8qurSPuq+bp47cidqb
+         uj5HPQ8jQhthZ35qc5NwE1WwW6hOdBxln+T9XyJ/zrXxgfaq5SfEyZEyVwP/0lWfb5B5
+         m0P/ED21SfDPITsH2atoeQU4VxBenFevu8/FmOM1qItOLdjRSAQkE4fy98jVMjA3/iTC
+         G0UCfu5WG54YHZuSbxZioBGBmRgU2Y4c54/P5wORhDbb7dCA20kqxYc7TWNSWK8XTtEa
+         SNMg==
+X-Gm-Message-State: AOJu0YweZ6+WKzrWgjq/+vFyWL/TZHNakYCL4LrHvULbrkLfPfKu+2oc
+	BNiwkW2BBej9usm0bo6yqdC0bzuzgM4gDd+AEeQXzx16Y57j3UJGuH/8gEjo25e79uUOpcQKbno
+	I7xA+LslIWpK4p9gwh/STbsIYNu7q6G8=
+X-Gm-Gg: ATEYQzxs8yyNM3zmHYM30aCQ4wJ3rlCt2xeXAYDk8tCSJFo2D47ur1oeJjWpK3gSG9U
+	pxbCXMgPaBrlST6R/5K3pEvQ/KKzODncO2N++UEfb1lZhGt2hUhaie0YFcu0IOnbfe6LOjUemwU
+	zefLRaO+zGa7cHrng9tXGazECRlCepg4ffz0Vs8KxAQzPVBuyAGRbYXqsZaJZfUWlcZ4KM+mxJC
+	6zcZEGAdtvaAEI2SJpUhM7d0qCpeVqcd/9KjJr6GhWYCOns0aIPVAwKmFJiI0XvS9nkKawEMEcM
+	QvQ9npdz
+X-Received: by 2002:a4a:e847:0:b0:67b:dd09:bc5a with SMTP id
+ 006d021491bc7-67c22bd0bc9mr10395221eaf.8.1774296038134; Mon, 23 Mar 2026
+ 13:00:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260323162731.8483-1-peter.marko@siemens.com> <20260323162731.8483-3-peter.marko@siemens.com>
-In-Reply-To: <20260323162731.8483-3-peter.marko@siemens.com>
+References: <20260321185219.1746245-1-f_l_k@t-online.de> <20260321185219.1746245-2-f_l_k@t-online.de>
+In-Reply-To: <20260321185219.1746245-2-f_l_k@t-online.de>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Tue, 24 Mar 2026 08:55:21 +1300
-X-Gm-Features: AQROBzCZBsCF3K93ZYVx8mhJKAH13Gs4mF62GmkdDWNEVHwxJBzEiSZ66IiY_vA
-Message-ID: <CADySD0FW89Hz_7Q=D9RqkRqpwOX5sQ6t0F_QiKSOxzwhF0i9uQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/3] jsoncpp: upgrade 1.9.6 -> 1.9.7
-To: peter.marko@siemens.com
+Date: Tue, 24 Mar 2026 09:00:26 +1300
+X-Gm-Features: AQROBzBeorksTilZNwwLq-LUcia4UEp5ngPxqNGYAHwdqulF8pXb997_YP_C0eA
+Message-ID: <CADySD0H7V_wRJmWDb1=YGtrhXAgaeFwXNiXKsdP1eGfNDOC7hA@mail.gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH 2/2] libsdl3-mixer: add recipe
+To: f_l_k@t-online.de
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 19:55:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125528
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 20:00:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125529
 
-On Tue, Mar 24, 2026 at 5:27=E2=80=AFAM Peter Marko via lists.openembedded.=
+On Sun, Mar 22, 2026 at 7:52=E2=80=AFAM Markus Volk via lists.openembedded.=
 org
-<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 >
-> From: Peter Marko <peter.marko@siemens.com>
+> libsdl3-mixer has initially released
 >
-> Release information [1]:
+> - binaries in wavpack-bin are only needed at runtime but cmake checks
+>   for them during compilation and fails because they are (presumably
+>   intentionally) not present in the target sysroot. Workround this issue
+>   by touching the necessary files to please cmake.
 >
-> 1.9.7: Bugfixes, build system cleanups
-> What's Changed
-> * Fixes PreventInSourceBuilds.cmake to work with add_subdirectory by @mor=
-bo84 in #1383
-> * json_value.cpp bug in the edges of uint/int by @YaalLek in #1519
-> * Release 1.9.6 and move versions to 1.9.7 by @baylesj in #1566
-> * Fixed work secure_allocator on old compiers by @TsynkPavel in #1478
-> * Fix flag -DJSONCPP_USE_SECURE_MEMORY:BOOL=3DTRUE by @tfc in #1567
-> * fix(build): remove check_required_components for meson build by @chenru=
-i333 in #1570
-> * the cgi module was removed from Python3.13 by @a-detiste in #1578
-> * Fix name of static library when targeting MinGW. by @mmuetzel in #1579
-> * Fix comparison warnings caused by 54fc4e2 by @JensMertelmeyer in #1575
-> * Drop pre-C++11 alternatives by @BillyDonahue in #1593
-> * feat: support std::string_view in Value API by @evalon32 in #1584
-> * Added Value::findType with String key by @SwintonStreet in #1574
-> * Set up for Bazel module builds. by @bcsgh in #1597
-> * Add a BUILD.bazel file for //example. by @bcsgh in #1602
-> * Fix "include what you use" issue by @victorvianna in #1625
-> * Make the build configuration under Bazel more correct. by @bcsgh in #16=
-00
-> * Add Bazel tests by @bcsgh in #1601
-> * Return false in Reader::readValue when stack limit is exceeded by @xuhd=
-ev in #1619
-> * Remove deprecated/removed clang-tidy key AnalyzeTemporaryDtors (#1614) =
-by @bmagistro in #1615
-> * [docs] Consuming JSONCpp via Conan package manager by @uilianries in #1=
-622
-> * Cleanup README.md, fix broken link. by @baylesj in #1633
-> * Add gcovr.cfg to fix CI coverage merge errors by @baylesj in #1635
-> * Remove build directory exclusion from gcovr config by @baylesj in #1640
-> * Add test for allowDroppedNullPlaceholders by @baylesj in #1648
-> * Prevent test colision when running in parallel via RESOURCE_LOCK by @ma=
-rty1885 in #1637
-> * fixup project version updater by @baylesj in #1649
-> * Update README with project status and focus by @baylesj in #1639
-> * Adding a cmake option to exclude the jsoncpp files from install. by @nv=
--jdeligiannis in #1596
-> * Change stack depth limit to 256 by @baylesj in #1657
-> * Fix uninitialized CMake variable in version.in by @baylesj in #1658
-> * Fix CMake deprecation warning for compatibility with CMake < 3.10 by @b=
-aylesj in #1659
-> * Scope JSON_DLL_BUILD to shared lib target only by @baylesj in #1660
-> * Fix number parsing failing under non-C locales by @baylesj in #1662
-> * Reject unescaped control characters in JSON strings by @baylesj in #166=
-3
-> * Fix MSAN issue in #1626 by @baylesj in #1654
-> * Fix string_view ABI mismatch between library and consumers by @baylesj =
-in #1661
-> * Revert "Fix number parsing failing under non-C locales" by @baylesj in =
-#1664
-> * Fix use-after-free in Reader::parse(std::istream&) by @baylesj in #1665
-> * Update bazel config for 9.x by @keith in #1655
->
-> [1] https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
->
-> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
 > ---
->  .../jsoncpp/{jsoncpp_1.9.6.bb =3D> jsoncpp_1.9.7.bb}              | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.6.bb =3D> jsoncpp_1=
-.9.7.bb} (93%)
+>  .../libsdl3/libsdl3-mixer_3.2.0.bb            | 28 +++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.=
+bb
 >
-> diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/=
-recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-> similarity index 93%
-> rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-> rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-> index f68ffd2c0f..c44422071e 100644
-> --- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
-> +++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-> @@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5d73c165a0f9=
-e86a1342f32d19ec5926"
->
->  PE =3D "1"
->
-> -SRCREV =3D "89e2973c754a9c02a49974d839779b151e95afd6"
-> +SRCREV =3D "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
->  SRC_URI =3D "git://github.com/open-source-parsers/jsoncpp;branch=3Dmaste=
-r;protocol=3Dhttps"
+> diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb b/me=
+ta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
+> new file mode 100644
+> index 0000000000..8540ec55fc
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY =3D "Provides decoding of many popular audio file formats, mixin=
+g, various DSP processing effects and positional audio"
+> +LICENSE =3D "Zlib"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Ddf8f4d887d3997f6e9cf81bb7=
+f43dbf7"
+> +
+> +DEPENDS =3D "libsdl3"
+> +
+> +SRC_URI =3D "git://github.com/libsdl-org/SDL_mixer.git;protocol=3Dhttps;=
+branch=3Drelease-3.2.x"
 
-can please also include tag=3D${PV} in the SRC_URI
+can please also include tag=3Drelease-${PV} in the SRC_URI
 
->
+> +SRCREV =3D "cedfeef30e93db35eee6b25759117da63f8e5a4f"
+> +
+> +inherit cmake pkgconfig
+> +
+> +PACKAGECONFIG ?=3D "flac opus wave vorbis"
+> +PACKAGECONFIG[opus] =3D "-DSDLMIXER_OPUS=3DON -DSDLMIXER_OPUS_SHARED=3DO=
+N, -DSDLMIXER_OPUS=3DOFF,opusfile"
+> +PACKAGECONFIG[vorbis] =3D "-DSDLMIXER_VORBIS_VORBISFILE=3DON -DSDLMIXER_=
+VORBIS_STB=3DOFF -DSDLMIXER_VORBIS_TREMOR=3DOFF, -DSDLMIXER_VORBIS_VORBISFI=
+LE=3DOFF -DSDLMIXER_VORBIS_STB=3DOFF -DSDLMIXER_VORBIS_TREMOR=3DOFF,libvorb=
+is"
+> +PACKAGECONFIG[flac] =3D "-DSDLMIXER_FLAC_LIBFLAC=3DON -DSDLMIXER_FLAC_LI=
+BFLAC_SHARED=3DON, -DSDLMIXER_FLAC_LIBFLAC=3DOFF,flac"
+> +PACKAGECONFIG[xmp] =3D "-DSDLMIXER_MOD=3DON -DSDLMIXER_MOD_XMP=3DON -DSD=
+LMIXER_MOD_XMP_SHARED=3DON, -DSDLMIXER_MOD=3DOFF,libxmp,libxmp"
+> +PACKAGECONFIG[fluidsynth] =3D "-DSDLMIXER_MIDI=3DON -DSDLMIXER_MIDI_FLUI=
+DSYNTH_ENABLED=3DON -DSDLMIXER_MIDI_FLUIDSYNTH_SHARED=3DON, -DSDLMIXER_MIDI=
+=3DOFF,fluidsynth,fluidsynth-bin"
+> +PACKAGECONFIG[wave] =3D "-DSDLMIXER_WAVE=3DON -DSDLMIXER_WAVPACK=3DON -D=
+SDLMIXER_WAVPACK_SHARED=3DON, -DSDLMIXER_WAVE=3DOFF,wavpack,wavpack wavpack=
+-bin"
+> +PACKAGECONFIG[mpg123] =3D "-DSDLMIXER_MP3 -DSDLMIXER_MP3_MPG123_SHARED=
+=3DON -DSDLMIXER_MP3_MPG123=3DON, -DSDLMIXER_MP3=3DOFF,mpg123"
+> +
+> +do_configure:prepend() {
+> +       touch ${STAGING_BINDIR}/wavpack
+> +       touch ${STAGING_BINDIR}/wvunpack
+> +       touch ${STAGING_BINDIR}/wvgain
+> +       touch ${STAGING_BINDIR}/wvtag
+> +}
+> +
+> +FILES:${PN} +=3D "${datadir}/licenses"
+> --
+> 2.53.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125523): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125523
-> Mute This Topic: https://lists.openembedded.org/mt/118468191/3619737
+> View/Reply Online (#125466): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125466
+> Mute This Topic: https://lists.openembedded.org/mt/118438276/3619737
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
 nkur.tyagi85@gmail.com]
