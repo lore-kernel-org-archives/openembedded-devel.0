@@ -1,245 +1,486 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36E12EC01DF
-	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 11:42:34 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15359.1774266145302994945
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFDB8F4613A
+	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 15:01:46 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.19745.1774278099908846310
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 04:42:25 -0700
+ Mon, 23 Mar 2026 08:01:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YtiHKSYv;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7542b98c32=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62N5o1iS3735900
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:25 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=; b=YtiHKSYv04xg
-	JRWof4jmIKFMf31f2Bw0pobys26EqqVNkR5ELc2FiKeanYMFTmUga9/We7wPvavZ
-	ikhQNV87XiRsZakIutT64O+v76kM+CfTwm2Wc9gWNvs/SXe0jjUZ+qTAPg/1W8wq
-	UEeII7zP/WcurmrngLprHdOIOJu54ivkIltOU2ZVfjQAL+eu32enm2pQdIcbbr/I
-	97eDi5Nuo7AUlPRZlKnCvy7ink5DwfCOAgxFiAifdQuzV50rb7dtkDrFH1QolPO6
-	oJie8qcVSq9yKyZiK1+pAZivJEzqc33zsKKtQ2byEQ9kFK762dxYYt6T/apSVadr
-	SIFykxh28w==
-Received: from ch1pr05cu001.outbound.protection.outlook.com (mail-northcentralusazon11010026.outbound.protection.outlook.com [52.101.193.26])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pky9k3g-4
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Fsg23z760WfYHUF/z/s07pC0pPzmyuQuunC64+m24zG8jyJjFXSem0bnIOUVgewILhQEz+J56KaVwYRk2tyb2TbmndHaATiKQp6N/E3xJAz7prIgd+tZHDs/JCbhmqxxpHeyeh2jvUuU90KdF5EkGKGN3MJ3AFnuQt0eIQ5aqofHW03ZO5n+HcYq37po9dFq4hy+1yCYwlbSzLhulgcr0dyR7p4B1RlbzktsqQPO7ux/jsF7TXtw9VFVnT6rx9mvs5/bwHb1UpuhOjD9LvUOw/ZM82JGRfAiA47IirJiCge2Imk+SZhulx3V7CrShA92eMWia8zzEzB91vKHDuFSIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=;
- b=nv4ZOVR+5wpu5XrrDJy4adga56tKnOkc9tRFBLZt0gdEd3yvgRra8SeztxGPKzwXWbJtdEFoHqbfE17AnWs92kTwh38gkXhjrOvTsFTNccA3fRQKCKaBw1ARBtk0ftW4u3zeP4jWpbRdKIPHbu07Dr+lcLK0twC1auAt4rM9RwQZYHAZiKbJ1Exa4YzT5beUSLoNNQ1abwcQXJAFVmmYWaAmb6xK2X0t2kgSlCTt0IJqF86TH7kJYKcOKudr+h2umPvgSqQnDvgPaCQeeSIWGiK8vGiIQe+sARGFPu3lv+cLJubOr5nkNz3YToGIuP0y4JOJQJ532/8otn6sxKtAbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by DS0PR11MB7441.namprd11.prod.outlook.com (2603:10b6:8:141::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.15; Mon, 23 Mar
- 2026 11:42:22 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Mon, 23 Mar 2026
- 11:42:22 +0000
-From: peng.zhang1.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 15/15] xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency
-Date: Mon, 23 Mar 2026 19:41:52 +0800
-Message-Id: <20260323114152.4178269-16-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
-References: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0108.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:29c::14) To CH3PR11MB8562.namprd11.prod.outlook.com
- (2603:10b6:610:1b8::13)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jbdL1Anv;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-79860421382so35400907b3.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 08:01:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774278099; cv=none;
+        d=google.com; s=arc-20240605;
+        b=enULtky6WCAuX/FNqsmvkg98GQNoVZjov6I9rYyW6ZU2kmKQYL/ZId4JI0H4Rx9SyA
+         Ee30iIDQbsoGSQEHuI7YoWLfDw3osMs9m/Eor0Hw4kNUUqqLckvz3kt/b6akBh6J0SaI
+         xhUk1iCzIcRkVuPTwpHIUUib9K3TvyFQGimgYqSCgDQrpfedKUZ45SXbNlgaj+9BLgZV
+         i7JSLpDZjAMj2rpG6f6wbILmsCKvPDFf/ESFK+EgctiXcv7pFR95d8qz96PlrS5K9VOn
+         Npv2yB9m0oBo2/fC88hVAtbPlmgXQeg86k15mJRahHCNsUI1qaCAmtxaEw+wINHfw+4N
+         VFKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=ZCoQ4qT5dwxPnc8EZ9zIKGGhErfMhqwqtiBOYJou+Ng=;
+        fh=7oI9jBHxrWCncumEnzG8BN56QlQkoa9xJ4TUQ95bJdU=;
+        b=QfYtplh3anYPbDSeYmB3ea+pss8tGnqjTXDsxFQ49bTKDm2+bbf6Rs0gMcx6R/0fGN
+         lyUNYF+sk+TmCqFPUp7KXViq/0dGZnXOtOvaqYRFG2BNo2m4z4YnsiVo9xrBFc3DbUnx
+         QKKsp+Do0JhMxKEKco8+DC5OY7RZAko2U9bduwaQnEyhDYh0/kjovYtFCwiYpQd8vPGD
+         4JjD7cc+/I1UPh+e9I5rGPzu7QgbmOdkpfKiW9c2Iw80rDSYruj/8r0gpXe3m3CY2IWz
+         1hVmtQGz3KoaGGN9euYbhADqGNDxv6fIxIAq2s7iMy+2sAHydfb7LjWPSYOcyaHCMxuF
+         dKQg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1774278099; x=1774882899; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZCoQ4qT5dwxPnc8EZ9zIKGGhErfMhqwqtiBOYJou+Ng=;
+        b=jbdL1Anv7LCtyom8R+kY0L1oHs7MffxQrFyVYwe6TxOZL1JTAqAMPwBCz19sFfTPZd
+         z0XVxe6oDODemqLeMiFKjnJ88jtvdMdJK7Jyv7/LfzfYQWrcBfVFJzQPn3X1hjDom9+l
+         eJrSC9oSd39kHwaTn1/ueI49W8tVmHuEklwsCqHeV4ieDadSJI2qDl3zzs8cJUdkTHEi
+         xLU2Xze7hPdJmmT8XSjKO139lGA/5thPKmQ+rj62ODhof3Eh1JNecZytIxWYVDgVdCgM
+         ANOXqOUDm3RBJWBm+W+ZiNZccXZmzC12ksp8IDqkfrYf5RC5soq4w39hYRzhdaMGgasB
+         iCbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774278099; x=1774882899;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZCoQ4qT5dwxPnc8EZ9zIKGGhErfMhqwqtiBOYJou+Ng=;
+        b=YtnUZx90gDvJ+NPosqBoJerf9MHktBHxwg9mLOfZy/MjB3kuXdu3JVH7JD/GF+6J8X
+         TzPEL4itB5z+YvGaGIFOjakmZBJj+6VOjVOgX9y3aNqyaisC68REwTAOBnzTa2aGLbE9
+         0K1DH1VX7YlpwZ6gusI8Q5PC7C4v1aAyY6rQqH5xFIDusm88+5UfP5SqISEAckYC2DpT
+         K52llSouW2KeGVxpzdZEKTuNTBSL9Or5ZsQHl8XbRYo7utBdsRlEUgcjOmYhwsAFqLtm
+         nr9neQTleZi54XLb+GnwYY9SlQS4R4AnTIaLyyetss1C30pze5mrth18SNUasJI0OaEd
+         dtwQ==
+X-Gm-Message-State: AOJu0Yx1Mf/OBXHqMJHQnPjOE0A+x7xyIkd7KrLTD2T8HFIzzTGSBtKp
+	F8jMs8BnnVoRu/UY8+wcZD7wYpsP/psznX0i8Ua7DqvgLyC/gec6TT9BuNV3plwthW1HBq8VbIF
+	dDWBznxrLUHibfKHlwE4f1v7AYzE4Yh/LjQ==
+X-Gm-Gg: ATEYQzyhcKvpdyFzX1PJe9zD+AIK+jdjbDVlMGXNojtGU8YVm5rC2vTiAX5X0g07Dgc
+	cRZwNCPccE4ipkSblD23HGQgdj3zBdZRJJPu1TwqyLZc71lmn5BjREdGTob/dTxu1Kgtgo1ylg2
+	P5eRhXGaRDRmtLPpDSFRXgacRBELV2dwVKq/k1gZMyKvVSredH/Gua/u6RqZAMunxhmTQbXmYwn
+	ufxEKh4CDNJzcv2IQvCKlXZokAESa34YZ3WKRI0Jh13s8a7yqoop+yTPmcrcWn2yAINLSVy51Wz
+	Zo2hhoM5v8dkp2pI9SyRcZ2ZYVRtjSzaIgvz0y8Id3ROCqMykRxxdyS0DmJLl21TTlJopNPNCyM
+	Bm/BL6bO/0PUcLyymQzsINAd1
+X-Received: by 2002:a05:690c:a058:b0:79a:55f5:a3f6 with SMTP id
+ 00721157ae682-79a90aeb6b5mr101651877b3.26.1774278098388; Mon, 23 Mar 2026
+ 08:01:38 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS0PR11MB7441:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8f3cb652-7271-425a-008b-08de88d13f13
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: 
-	aMSaHHUoxYdowqz8ZMQHDPo+OHOsis4T43xQbRxHXSY6V4cZDaCdJ+E+yobN/u7ui9Z7p8B8Kl+ey6HWdSZCkUG/Zq5Mm6vvD0Lmnxs1DZ7ILJN1toTZKgwseRFuF74vrgg8zweYiZYaDUKBnZoarEhhDO8VUB3xAhZzy0wp7ZChrsuDzIytMLb+GpCrCfe/1JPcgJh3UbrkD6zKehZskWA5ltv5YX87hE5Ac39h94uETYT/llvH6ljeIW30OC+BN7y7T1fNMg0Ayger2OVUzeeNxO78Uwz/SNJUvn6Sz3eKosVqVw+ERl0dWYqSwN7YT+T28uUAihf6F843FeWnj7zE+P7MAtPsJAHto/CH/HrKMiOhh/P330atfTMAQ9VOlZz2Qp2GuiMZlK4AhhZQwjCbjX04xTyQp8cR3SWdpSZJwA0szhu2Ct/5dFMU8NyzUFYt2N+7JsMbGkDkLd+vgiqOPLXsne/d09+VtPWAM9eTjro8MUuqUUJf+P4hFRu9edI8fsoq1kjc7UM1yik6m2mfrKZ5eWqGg98RYaOZcEdTxz8a6suMon4cjIcy1jHzOg1YBSdp/Ttloqr91QtZ0giSCjIrObwkFwcr+EJXhhzrTDb92/bJKrb2LzwgGC/HROJ44oJmZjkVuKbC4xjNTpTMOa6lmOKAdCNedkQSumbkY/hXQeg0y8BqiF+V62ZaZ/S+ijr/jNDwy/5DICQPhVczXL5JhG+6QFsBJUOYmKUnyUNHYW508fmmFpt7oYOi
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(56012099003)(22082099003)(18002099003)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?ahE62x4/LuLBuqhBu6RTEPkXEESREQMmsxmEh0yHdLmYsBubov8caR05k/aU?=
- =?us-ascii?Q?hHqZPBiNGooXpmvbA8isOumcZDipaQBhGLWpmiHKmfZk/ERdQI4QeIRF12w6?=
- =?us-ascii?Q?tANhlaBLvmB2AVddEOdGoe2p5NNXS644oGsIJO5Ak21eyrN4yggQSzy0cgWC?=
- =?us-ascii?Q?YEc6IqUAnQjwuKFKVubdwjGpWnNcb+bOBp29m2U/mZu8XyiIoZ1r+C/y/BLo?=
- =?us-ascii?Q?QlMtoqTmkIL95xUHwmIEb/hXVJ9ttz/PqsCufdZE2Uyrx7LjGa1wfQiO5i0L?=
- =?us-ascii?Q?GFDEZ1MfPg1l0mEP6cY5lOmThNALQ05y9RZWlQS5fdTFSOHu8ZNhRtz4Vn7Y?=
- =?us-ascii?Q?2cl+uXUwZAJ8zH86osGghL1e20kSSBpfdomKIzkZ0n663M2jeUz9opSO2zhO?=
- =?us-ascii?Q?e/mLHe/FpdJhi8V5efO0Kpf64W+qr9V470yCYXj0CVgR37xX5EBuwfXSiP5k?=
- =?us-ascii?Q?t3MdJiAudxB9iC9z2jvGXVEL1Pm2ODk1fx2NwN68zpy0PRP7GvlTyR3oa4jY?=
- =?us-ascii?Q?RSCpO+8p+jw30jzSd41gfKlEMLQ9IjZJTnhvCfX5bHBXUwDlpAhq3M2dg+tz?=
- =?us-ascii?Q?wexsOYyZcm8EPAzGZYhFICV2W7geIMn8Jy6OV1Q7cDP2H97b9qHt9iAGmQLa?=
- =?us-ascii?Q?ydmvdQGj4iRIsB4/iCleDjHglmvdpcU+qtvhRka5GGFJHMWMiPu5qG2JCOH3?=
- =?us-ascii?Q?dU4T67+HghLqnhKc+0g4sRkAnO6O434FcpSPXUm+opBpOrfzyuwaprA/8eU/?=
- =?us-ascii?Q?Ak1BNfEF8/y7ldFEtUYf6mTOrvRXZGSHHHsnqJvinMrgEhsuQp2lHbFuAG0S?=
- =?us-ascii?Q?IwPCqfnwncmeeTVigWR3wXSokTXrh/nj3pWb7ukDxh4AJu/eMzOFpb7AVWhQ?=
- =?us-ascii?Q?27gK+eSQ0Wx/dj/1qp8nGuKKjp7RzJFeBt+mIImTKKeRFQyFZcFa339krrAm?=
- =?us-ascii?Q?l4012U3Fth/X3DwG5Bugq+xiGAvZgE8AxxHIUDVrLdcHGRdRwahc7dj16z50?=
- =?us-ascii?Q?m0MxMkmVYmTeIDAuTw/oipeludnRevsoa/B33e3ypVnflxHvyRNz6wWoc53+?=
- =?us-ascii?Q?MNsi+7F9FOKtAwBy+zvcNzWQ74dkT6VHTyfgonpamOgL4EtgwJceeA3d5urI?=
- =?us-ascii?Q?L0ocd7YtMw41XfwHy9CtB+pEcl+5ztgHPc0O79dgWctVL5Wk4UNwUnDhgq0y?=
- =?us-ascii?Q?Y8f4OmbiEIjdj6lFminpqK0HqkQu8hFTqz34VTKLCK10eCBY5gl0fAK8SGzc?=
- =?us-ascii?Q?ToWHCoOxSgyLS4NGgM2DDwQk7iGEROhVSFiK6cpOYb8NIfaEFklW1easpFCU?=
- =?us-ascii?Q?Z2RSckT6vxSFB8pr5GOijBT++LMe7rA9f/rXBjP8x6/K+98ZakR7+Y6dictL?=
- =?us-ascii?Q?qEigZv2LlFOsPVqh4cRMEEjYrhfvLUdugoyZShJvWv1bpJxoLE+WR5nGfvTD?=
- =?us-ascii?Q?CasMlF+ckYTQKU/qVBfru4V/9QqiatVrKYq7SYQWlLAjV+Xz19NEa46YVkaj?=
- =?us-ascii?Q?UiApf9u5uutFscaUk2XMG5jqqI5S7yUnklNMU2NUeV84/IylPKS/A+oAlmEA?=
- =?us-ascii?Q?wGwfv8XvxYQpZpSJbH/LB/AlZ/u/v5X4ZsqrXCmo3azvu480ZhVJj/vY57zr?=
- =?us-ascii?Q?nS2PLjmQY0S/abpghVCnqFnsfaOzVBKWi9cIpsbXAq0WsSzewWt6ml2Cw4Uy?=
- =?us-ascii?Q?t56aA9vzwWGbhzrTvgLoQo/fdna/tLEBwj9fVpZygZWskQ5EgDrZWFAfehKf?=
- =?us-ascii?Q?/bwf9e3TKIuuL5TXzBRy8oOC/5iutjk=3D?=
-X-Exchange-RoutingPolicyChecked: 
-	g/lV6iwhNWht4PbimJbGELHF+d+JO38fw2T5VMxEwJAkE15E0qcEWEvkc7qN2EYgXNYX7ZOvOO2Ph3sRrIERWBYQixgMrOTJoQf/k6UEUG8QQzqgPV0ZMcOnkUpDXBuo9LIXFgd9ySCnYieLFjIdbbWIlUyIgexZGY7YUgEz7MWSTgu/Mkj/gOP8SPMFMOx7ZXErQMBR+ruPEoyQSjSvJKn/wueVl1yBrd4uEarTe9NMUGO0uw078y1pArUfLK8WxEYxSZd2IU5CSb7N5Yfnd6WgxbBf5D4Awaj8pclZOdB84rMF6rt6P5ypn7E8/q2XMpHO4FjHWI8/sOnbBBQ/Pg==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f3cb652-7271-425a-008b-08de88d13f13
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 11:42:22.2835
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: w5LOFpBm8fVdSeFXPPxKt8UT9Ezrv4ZN18NTjQSppKxWrU5fMqgCnpH2zZxP/j6EcJ4coW9I1rfjIgjgVQT+XWSyPNf/I+ePeRh2+Ig3F7k=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7441
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDA5MSBTYWx0ZWRfX+yD/+xxFKQsF
- b84c0RbhqG2WtYru2oHbGFSvWMWaQIGkwF9ORJ0s+v0ph6PawM2TzFhs8HOdwqTalrxeFbYpYIH
- R3evSBjGOnPzcSujkMYXnRiSvk5/pncE3Q+vExYNRkvulmKindaNAE+pLBVEY8armk9pFF/+Jqy
- m7gZtnLzZO4PQmYuNOGgbfkbs/5tIXItgM4ZVTf3y2c1hJo9Yn1cuJ8EKi4GaV0opLMX/ByvnB+
- 69MujrgR5IM5jSfbG/yo31Ym57eUt/orzKPLEe+PRTSbniMT+2I25o2mkbG3V/NviiEwQU8Fok3
- P/dznbQFOf0mHZQV7pBaojZMN86069vTbNVbxrXUE/S/v5IlxEUHvhr0PqbNtTv/3jC6ixe1z3d
- LhuzK/cUcD6uMx1mjlWjOp8F+gpXfFI0Cipd0lCG+Bqqmi4SRtHVMdoYgmKb3h9cd45BBUb5Nrp
- 01PqYaDYcu2jNq9uT3A==
-X-Proofpoint-ORIG-GUID: RwxP0CYqGfg3NwPL0el60rr-ZIkW1Nnn
-X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c12720 cx=c_pps
- a=3NFNipLq04N0pvkhkOyhzw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=e5mUnYsNAAAA:8
- a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=7sqpSKcsBsmI2gz2FRAA:9
- a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: RwxP0CYqGfg3NwPL0el60rr-ZIkW1Nnn
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-23_03,2026-03-20_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 malwarescore=0 phishscore=0 adultscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603230091
+References: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
+In-Reply-To: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 Mar 2026 08:01:10 -0700
+X-Gm-Features: AaiRm51IOZXKxmj8fpcFV4fcnAvTl8p9FNp-wmGmRrapzT-4afKOIiTNh9LiBlE
+Message-ID: <CAMKF1sp-aYrcBdEAyaNDTDBBi7RoJ8czAZ49CoW2fSGcSTXSQg@mail.gmail.com>
+Subject: Re: [oe] [meta-xfce][PATCH 00/15] meta-xfce: upgrade core components
+ to 4.21.x and fix cascading build issues
+To: peng.zhang1.cn@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000c989d6064db24fc4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 11:42:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125518
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 15:01:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125519
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+--000000000000c989d6064db24fc4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-After libxfce4ui upgrade to 4.21.x, its pkgconfig moves gtk+-3.0
-to Requires.private, so the linker no longer automatically pulls in
-libgtk-3. This causes an undefined reference to 'gtk_combo_box_set_model'
-when linking xfce-polkit.
+Can you rebase it on latest master branch and resend please.
 
-Add patch for explicit PKG_CHECK_MODULES for gtk+-3.0 in configure.ac and wire
-GTK3_CFLAGS/GTK3_LIBS into src/Makefile.am.
+On Mon, Mar 23, 2026 at 4:42=E2=80=AFAM Zhang, Peng (Paul) (CN) via
+lists.openembedded.org <peng.zhang1.cn=3Dwindriver.com@lists.openembedded.o=
+rg>
+wrote:
 
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
----
- ...d-missing-direct-dependency-on-gtk-3.patch | 52 +++++++++++++++++++
- .../xfce-polkit/xfce-polkit_0.3.bb            |  7 +--
- 2 files changed, 56 insertions(+), 3 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
+> From: Zhang Peng <peng.zhang1.cn@windriver.com>
+>
+> Upgrade meta-xfce core components from 4.20.x to the 4.21.x
+> development series.
+>
+> This patch series must be applied as a whole and individual patches
+> should NOT be cherry-picked independently, because of the following
+> dependency chain:
+>
+> libxfce4ui 4.21.x moved libxfce4util-1.0 from Requires to
+> Requires.private in its pkg-config file, so `pkg-config --libs
+> libxfce4ui-2` no longer emits -lxfce4util. This causes DSO missing
+> link errors for autotools consumers that use libxfce4util symbols but
+> rely on libxfce4ui to pull in the link dependency. As a result, all
+> downstream components that depend on libxfce4ui must be upgraded
+> together, and several packages require additional build fixes:
+>
+> - xfdesktop: switch to meson build system to correctly declare
+>   libxfce4util dependency and avoid the DSO link issue
+> - xfwm4: backport patch to add missing libxfce4util build flags
+> - xfce4-datetime-setter: fix link failure due to missing libxfce4util
+>   dependency
+> - xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency
+> - xfce4-datetime-plugin: fix build with xfce4-panel 4.21.x API changes
+>
+> Recipe upgrades (patches 01-10):
+>   libxfce4ui        4.20.2 -> 4.21.7
+>   garcon            4.20.0 -> 4.21.0
+>   xfce4-appfinder   4.20.0 -> 4.21.0
+>   xfce4-power-manager 4.20.0 -> 4.21.1
+>   xfce4-session     4.20.3 -> 4.21.1
+>   xfce4-panel       4.20.1 -> 4.21.1
+>   xfce4-settings    4.20.1 -> 4.21.1
+>   tumbler           4.20.1 -> 4.21.1
+>   thunar            4.20.7 -> 4.21.4
+>   xfconf            4.20.0 -> 4.21.2
+>
+> Build fixes (patches 11-15):
+>   xfdesktop, xfce4-datetime-plugin, xfwm4,
+>   xfce4-datetime-setter, xfce-polkit
+>
+> Zhang Peng (15):
+>   libxfce4ui: upgrade 4.20.2 -> 4.21.7
+>   garcon: upgrade 4.20.0 -> 4.21.0
+>   xfce4-appfinder: upgrade 4.20.0 -> 4.21.0
+>   xfce4-power-manager: upgrade 4.20.0 -> 4.21.1
+>   xfce4-session: upgrade 4.20.3 -> 4.21.1
+>   xfce4-panel: upgrade 4.20.1 -> 4.21.1
+>   xfce4-settings: upgrade 4.20.1 -> 4.21.1
+>   tumbler: upgrade 4.20.1 -> 4.21.1
+>   thunar: upgrade 4.20.7 -> 4.21.4
+>   xfconf: upgrade 4.20.0 -> 4.21.2
+>   xfdesktop: switch to meson build system
+>   xfce4-datetime-plugin: fix build with xfce4-panel 4.21.x
+>   xfwm4: backport patch to add missing libxfce4util build flags
+>   xfce4-datetime-setter: fix link failure due to missing libxfce4util
+>     dependency
+>   xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency
+>
+>  ...d-missing-direct-dependency-on-gtk-3.patch |  52 ++++++++
+>  .../xfce-polkit/xfce-polkit_0.3.bb            |   7 +-
+>  ...g-direct-dependencies-to-fix-link-fa.patch |  35 ++++++
+>  .../xfce4-datetime-setter_3.32.2.bb           |   6 +-
+>  .../datetime/xfce4-datetime-plugin_0.8.3.bb   |   2 +
+>  .../{garcon_4.20.0.bb =3D> garcon_4.21.0.bb}    |   8 +-
+>  ...splay-full-path-in-generated-headers.patch |  36 ++++++
+>  ...xfce4ui_4.20.2.bb =3D> libxfce4ui_4.21.7.bb} |  25 ++--
+>  .../{thunar_4.20.7.bb =3D> thunar_4.21.4.bb}    |  12 +-
+>  .../{tumbler_4.20.1.bb =3D> tumbler_4.21.1.bb}  |  24 ++--
+>  ...er_4.20.0.bb =3D> xfce4-appfinder_4.21.0.bb} |   5 +-
+>  ...splay-full-path-in-generated-headers.patch |  36 ++++++
+>  ...-panel_4.20.1.bb =3D> xfce4-panel_4.21.1.bb} |   9 +-
+>  ...splay-full-path-in-generated-headers.patch |  34 ++++++
+>  ....20.0.bb =3D> xfce4-power-manager_4.21.1.bb} |  13 +-
+>  ...nfigure.in-hard-code-path-to-iceauth.patch |  43 -------
+>  ...eson.build-hard-code-path-to-iceauth.patch |  49 ++++++++
+>  ...sion_4.20.3.bb =3D> xfce4-session_4.21.1.bb} |  12 +-
+>  ...splay-full-path-in-generated-headers.patch |  36 ++++++
+>  ...ngs_4.20.1.bb =3D> xfce4-settings_4.21.1.bb} |  17 ++-
+>  ...gdbus-headers-are-generated-before-i.patch | 114 ++++++++++++++++++
+>  .../{xfconf_4.20.0.bb =3D> xfconf_4.21.2.bb}    |  12 +-
+>  .../xfdesktop/xfdesktop_4.20.1.bb             |  12 +-
+>  ...build-Add-missing-libxfce4util-flags.patch |  57 +++++++++
+>  meta-xfce/recipes-xfce/xfwm4/xfwm4_4.20.0.bb  |   5 +-
+>  25 files changed, 545 insertions(+), 116 deletions(-)
+>  create mode 100644
+> meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-di=
+rect-dependency-on-gtk-3.patch
+>  create mode 100644
+> meta-xfce/recipes-apps/xfce4-datetime-setter/files/0001-build-add-missing=
+-direct-dependencies-to-fix-link-fa.patch
+>  rename meta-xfce/recipes-xfce/garcon/{garcon_4.20.0.bb =3D>
+> garcon_4.21.0.bb} (68%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-build-Do-not-display-fu=
+ll-path-in-generated-headers.patch
+>  rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.20.2.bb =3D>
+> libxfce4ui_4.21.7.bb} (58%)
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_4.20.7.bb =3D>
+> thunar_4.21.4.bb} (67%)
+>  rename meta-xfce/recipes-xfce/tumbler/{tumbler_4.20.1.bb =3D>
+> tumbler_4.21.1.bb} (65%)
+>  rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.20.0.bb
+> =3D> xfce4-appfinder_4.21.0.bb} (72%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfce4-panel/files/0001-build-Do-not-display-full-p=
+ath-in-generated-headers.patch
+>  rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.20.1.bb =3D>
+> xfce4-panel_4.21.1.bb} (85%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-build-Do-not-displa=
+y-full-path-in-generated-headers.patch
+>  rename meta-xfce/recipes-xfce/xfce4-power-manager/{
+> xfce4-power-manager_4.20.0.bb =3D> xfce4-power-manager_4.21.1.bb} (77%)
+>  delete mode 100644
+> meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-configure.in-hard=
+-code-path-to-iceauth.patch
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfce4-session/xfce4-session/0001-meson.build-hard-=
+code-path-to-iceauth.patch
+>  rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.20.3.bb =3D=
+>
+> xfce4-session_4.21.1.bb} (75%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfce4-settings/files/0001-build-Do-not-display-ful=
+l-path-in-generated-headers.patch
+>  rename meta-xfce/recipes-xfce/xfce4-settings/{xfce4-settings_4.20.1.bb
+> =3D> xfce4-settings_4.21.1.bb} (67%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfconf/xfconf/0001-build-Make-sure-gdbus-headers-a=
+re-generated-before-i.patch
+>  rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.20.0.bb =3D>
+> xfconf_4.21.2.bb} (64%)
+>  create mode 100644
+> meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Add-missing-libxfce4util-fl=
+ags.patch
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125507):
+> https://lists.openembedded.org/g/openembedded-devel/message/125507
+> Mute This Topic: https://lists.openembedded.org/mt/118462731/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
-new file mode 100644
-index 0000000000..bc20d2f854
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
-@@ -0,0 +1,52 @@
-+From a89bd475c3cf7dc39618bcc9979fc618d7acd537 Mon Sep 17 00:00:00 2001
-+From: Zhang Peng <peng.zhang1.cn@windriver.com>
-+Date: Mon, 23 Mar 2026 16:52:58 +0800
-+Subject: [PATCH] configure.ac: add missing direct dependency on gtk+-3.0
-+
-+xfce-polkit sources directly call GTK+ symbols (gtk_combo_box_set_model,
-+gtk_widget_show, etc.), but only libxfce4ui-2 was listed as a dependency.
-+Since libxfce4ui-2 correctly places gtk+-3.0 in Requires.private, the
-+client must declare its own direct dependency on gtk+-3.0.
-+
-+See https://people.freedesktop.org/~dbn/pkg-config-guide.html#writing
-+
-+Upstream-Status: Submitted [https://github.com/ncopa/xfce-polkit/pull/14]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ configure.ac    | 1 +
-+ src/Makefile.am | 2 ++
-+ 2 files changed, 3 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 88f2432..15c09c9 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -4,6 +4,7 @@ AC_PROG_CC
-+
-+ PKG_CHECK_MODULES([GLIB], [glib-2.0])
-+ PKG_CHECK_MODULES([LIBXFCE4UI], [libxfce4ui-2])
-++PKG_CHECK_MODULES([GTK3], [gtk+-3.0])
-+ PKG_CHECK_MODULES([POLKIT_AGENT], [polkit-agent-1])
-+
-+ AC_CONFIG_FILES([
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 514605a..f13e4cb 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -10,11 +10,13 @@ xfce_polkit_SOURCES = \
-+
-+ xfce_polkit_CFLAGS = @GLIB_CFLAGS@ \
-+	@LIBXFCE4UI_CFLAGS@ \
-++	@GTK3_CFLAGS@ \
-+	@POLKIT_AGENT_CFLAGS@
-+
-+
-+ xfce_polkit_LDADD = @GLIB_LIBS@ \
-+	@LIBXFCE4UI_LIBS@ \
-++	@GTK3_LIBS@ \
-+	@POLKIT_AGENT_LIBS@
-+
-+
-+--
-+2.50.0
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-index 880e73849c..167cc538b9 100644
---- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-+++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-@@ -7,7 +7,8 @@ DEPENDS = "libxfce4ui polkit"
- inherit xfce-app features_check
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
--SRC_URI = " \
--    git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
--"
-+SRC_URI = "\
-+           git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
-+           file://0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch \
-+           "
- SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
--- 
-2.34.1
+--000000000000c989d6064db24fc4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">Can you rebase it on latest master branch and resend pleas=
+e.</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Mon, Mar 23, 2026 at 4:42=E2=80=AFAM Zhang, Peng=
+ (Paul) (CN) via <a href=3D"http://lists.openembedded.org">lists.openembedd=
+ed.org</a> &lt;<a href=3D"http://peng.zhang1.cn">peng.zhang1.cn</a>=3D<a hr=
+ef=3D"mailto:windriver.com@lists.openembedded.org">windriver.com@lists.open=
+embedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">From: Zhang Peng &lt;<a href=3D"mailto:peng.zhang1.cn@windriver=
+.com" target=3D"_blank">peng.zhang1.cn@windriver.com</a>&gt;<br>
+<br>
+Upgrade meta-xfce core components from 4.20.x to the 4.21.x<br>
+development series.<br>
+<br>
+This patch series must be applied as a whole and individual patches<br>
+should NOT be cherry-picked independently, because of the following<br>
+dependency chain:<br>
+<br>
+libxfce4ui 4.21.x moved libxfce4util-1.0 from Requires to<br>
+Requires.private in its pkg-config file, so `pkg-config --libs<br>
+libxfce4ui-2` no longer emits -lxfce4util. This causes DSO missing<br>
+link errors for autotools consumers that use libxfce4util symbols but<br>
+rely on libxfce4ui to pull in the link dependency. As a result, all<br>
+downstream components that depend on libxfce4ui must be upgraded<br>
+together, and several packages require additional build fixes:<br>
+<br>
+- xfdesktop: switch to meson build system to correctly declare<br>
+=C2=A0 libxfce4util dependency and avoid the DSO link issue<br>
+- xfwm4: backport patch to add missing libxfce4util build flags<br>
+- xfce4-datetime-setter: fix link failure due to missing libxfce4util<br>
+=C2=A0 dependency<br>
+- xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency<br>
+- xfce4-datetime-plugin: fix build with xfce4-panel 4.21.x API changes<br>
+<br>
+Recipe upgrades (patches 01-10):<br>
+=C2=A0 libxfce4ui=C2=A0 =C2=A0 =C2=A0 =C2=A0 4.20.2 -&gt; 4.21.7<br>
+=C2=A0 garcon=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4.20.0 -&gt; 4.21.0<=
+br>
+=C2=A0 xfce4-appfinder=C2=A0 =C2=A04.20.0 -&gt; 4.21.0<br>
+=C2=A0 xfce4-power-manager 4.20.0 -&gt; 4.21.1<br>
+=C2=A0 xfce4-session=C2=A0 =C2=A0 =C2=A04.20.3 -&gt; 4.21.1<br>
+=C2=A0 xfce4-panel=C2=A0 =C2=A0 =C2=A0 =C2=A04.20.1 -&gt; 4.21.1<br>
+=C2=A0 xfce4-settings=C2=A0 =C2=A0 4.20.1 -&gt; 4.21.1<br>
+=C2=A0 tumbler=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A04.20.1 -&gt; 4.21.1<=
+br>
+=C2=A0 thunar=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4.20.7 -&gt; 4.21.4<=
+br>
+=C2=A0 xfconf=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 4.20.0 -&gt; 4.21.2<=
+br>
+<br>
+Build fixes (patches 11-15):<br>
+=C2=A0 xfdesktop, xfce4-datetime-plugin, xfwm4,<br>
+=C2=A0 xfce4-datetime-setter, xfce-polkit<br>
+<br>
+Zhang Peng (15):<br>
+=C2=A0 libxfce4ui: upgrade 4.20.2 -&gt; 4.21.7<br>
+=C2=A0 garcon: upgrade 4.20.0 -&gt; 4.21.0<br>
+=C2=A0 xfce4-appfinder: upgrade 4.20.0 -&gt; 4.21.0<br>
+=C2=A0 xfce4-power-manager: upgrade 4.20.0 -&gt; 4.21.1<br>
+=C2=A0 xfce4-session: upgrade 4.20.3 -&gt; 4.21.1<br>
+=C2=A0 xfce4-panel: upgrade 4.20.1 -&gt; 4.21.1<br>
+=C2=A0 xfce4-settings: upgrade 4.20.1 -&gt; 4.21.1<br>
+=C2=A0 tumbler: upgrade 4.20.1 -&gt; 4.21.1<br>
+=C2=A0 thunar: upgrade 4.20.7 -&gt; 4.21.4<br>
+=C2=A0 xfconf: upgrade 4.20.0 -&gt; 4.21.2<br>
+=C2=A0 xfdesktop: switch to meson build system<br>
+=C2=A0 xfce4-datetime-plugin: fix build with xfce4-panel 4.21.x<br>
+=C2=A0 xfwm4: backport patch to add missing libxfce4util build flags<br>
+=C2=A0 xfce4-datetime-setter: fix link failure due to missing libxfce4util<=
+br>
+=C2=A0 =C2=A0 dependency<br>
+=C2=A0 xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency<=
+br>
+<br>
+=C2=A0...d-missing-direct-dependency-on-gtk-3.patch |=C2=A0 52 ++++++++<br>
+=C2=A0.../xfce-polkit/<a href=3D"http://xfce-polkit_0.3.bb" rel=3D"noreferr=
+er" target=3D"_blank">xfce-polkit_0.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 |=C2=A0 =C2=A07 +-<br>
+=C2=A0...g-direct-dependencies-to-fix-link-fa.patch |=C2=A0 35 ++++++<br>
+=C2=A0.../<a href=3D"http://xfce4-datetime-setter_3.32.2.bb" rel=3D"norefer=
+rer" target=3D"_blank">xfce4-datetime-setter_3.32.2.bb</a>=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A06 +-<br>
+=C2=A0.../datetime/<a href=3D"http://xfce4-datetime-plugin_0.8.3.bb" rel=3D=
+"noreferrer" target=3D"_blank">xfce4-datetime-plugin_0.8.3.bb</a>=C2=A0 =C2=
+=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../{<a href=3D"http://garcon_4.20.0.bb" rel=3D"noreferrer" target=3D=
+"_blank">garcon_4.20.0.bb</a> =3D&gt; <a href=3D"http://garcon_4.21.0.bb" r=
+el=3D"noreferrer" target=3D"_blank">garcon_4.21.0.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 =C2=A08 +-<br>
+=C2=A0...splay-full-path-in-generated-headers.patch |=C2=A0 36 ++++++<br>
+=C2=A0...<a href=3D"http://xfce4ui_4.20.2.bb" rel=3D"noreferrer" target=3D"=
+_blank">xfce4ui_4.20.2.bb</a> =3D&gt; <a href=3D"http://libxfce4ui_4.21.7.b=
+b" rel=3D"noreferrer" target=3D"_blank">libxfce4ui_4.21.7.bb</a>} |=C2=A0 2=
+5 ++--<br>
+=C2=A0.../{<a href=3D"http://thunar_4.20.7.bb" rel=3D"noreferrer" target=3D=
+"_blank">thunar_4.20.7.bb</a> =3D&gt; <a href=3D"http://thunar_4.21.4.bb" r=
+el=3D"noreferrer" target=3D"_blank">thunar_4.21.4.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 12 +-<br>
+=C2=A0.../{<a href=3D"http://tumbler_4.20.1.bb" rel=3D"noreferrer" target=
+=3D"_blank">tumbler_4.20.1.bb</a> =3D&gt; <a href=3D"http://tumbler_4.21.1.=
+bb" rel=3D"noreferrer" target=3D"_blank">tumbler_4.21.1.bb</a>}=C2=A0 |=C2=
+=A0 24 ++--<br>
+=C2=A0...<a href=3D"http://er_4.20.0.bb" rel=3D"noreferrer" target=3D"_blan=
+k">er_4.20.0.bb</a> =3D&gt; <a href=3D"http://xfce4-appfinder_4.21.0.bb" re=
+l=3D"noreferrer" target=3D"_blank">xfce4-appfinder_4.21.0.bb</a>} |=C2=A0 =
+=C2=A05 +-<br>
+=C2=A0...splay-full-path-in-generated-headers.patch |=C2=A0 36 ++++++<br>
+=C2=A0...-<a href=3D"http://panel_4.20.1.bb" rel=3D"noreferrer" target=3D"_=
+blank">panel_4.20.1.bb</a> =3D&gt; <a href=3D"http://xfce4-panel_4.21.1.bb"=
+ rel=3D"noreferrer" target=3D"_blank">xfce4-panel_4.21.1.bb</a>} |=C2=A0 =
+=C2=A09 +-<br>
+=C2=A0...splay-full-path-in-generated-headers.patch |=C2=A0 34 ++++++<br>
+=C2=A0....<a href=3D"http://20.0.bb" rel=3D"noreferrer" target=3D"_blank">2=
+0.0.bb</a> =3D&gt; <a href=3D"http://xfce4-power-manager_4.21.1.bb" rel=3D"=
+noreferrer" target=3D"_blank">xfce4-power-manager_4.21.1.bb</a>} |=C2=A0 13=
+ +-<br>
+=C2=A0...nfigure.in-hard-code-path-to-iceauth.patch |=C2=A0 43 -------<br>
+=C2=A0...eson.build-hard-code-path-to-iceauth.patch |=C2=A0 49 ++++++++<br>
+=C2=A0...<a href=3D"http://sion_4.20.3.bb" rel=3D"noreferrer" target=3D"_bl=
+ank">sion_4.20.3.bb</a> =3D&gt; <a href=3D"http://xfce4-session_4.21.1.bb" =
+rel=3D"noreferrer" target=3D"_blank">xfce4-session_4.21.1.bb</a>} |=C2=A0 1=
+2 +-<br>
+=C2=A0...splay-full-path-in-generated-headers.patch |=C2=A0 36 ++++++<br>
+=C2=A0...<a href=3D"http://ngs_4.20.1.bb" rel=3D"noreferrer" target=3D"_bla=
+nk">ngs_4.20.1.bb</a> =3D&gt; <a href=3D"http://xfce4-settings_4.21.1.bb" r=
+el=3D"noreferrer" target=3D"_blank">xfce4-settings_4.21.1.bb</a>} |=C2=A0 1=
+7 ++-<br>
+=C2=A0...gdbus-headers-are-generated-before-i.patch | 114 +++++++++++++++++=
++<br>
+=C2=A0.../{<a href=3D"http://xfconf_4.20.0.bb" rel=3D"noreferrer" target=3D=
+"_blank">xfconf_4.20.0.bb</a> =3D&gt; <a href=3D"http://xfconf_4.21.2.bb" r=
+el=3D"noreferrer" target=3D"_blank">xfconf_4.21.2.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 12 +-<br>
+=C2=A0.../xfdesktop/<a href=3D"http://xfdesktop_4.20.1.bb" rel=3D"noreferre=
+r" target=3D"_blank">xfdesktop_4.20.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 12 +-<br>
+=C2=A0...build-Add-missing-libxfce4util-flags.patch |=C2=A0 57 +++++++++<br=
+>
+=C2=A0meta-xfce/recipes-xfce/xfwm4/<a href=3D"http://xfwm4_4.20.0.bb" rel=
+=3D"noreferrer" target=3D"_blank">xfwm4_4.20.0.bb</a>=C2=A0 |=C2=A0 =C2=A05=
+ +-<br>
+=C2=A025 files changed, 545 insertions(+), 116 deletions(-)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-apps/xfce-polkit/files/0001-conf=
+igure.ac-add-missing-direct-dependency-on-gtk-3.patch<br>
+=C2=A0create mode 100644 meta-xfce/recipes-apps/xfce4-datetime-setter/files=
+/0001-build-add-missing-direct-dependencies-to-fix-link-fa.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/garcon/{<a href=3D"http://garcon_4.20.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">garcon_4.20.0.bb</a> =3D&gt; <a h=
+ref=3D"http://garcon_4.21.0.bb" rel=3D"noreferrer" target=3D"_blank">garcon=
+_4.21.0.bb</a>} (68%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-=
+build-Do-not-display-full-path-in-generated-headers.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/libxfce4ui/{<a href=3D"http://libxfce4u=
+i_4.20.2.bb" rel=3D"noreferrer" target=3D"_blank">libxfce4ui_4.20.2.bb</a> =
+=3D&gt; <a href=3D"http://libxfce4ui_4.21.7.bb" rel=3D"noreferrer" target=
+=3D"_blank">libxfce4ui_4.21.7.bb</a>} (58%)<br>
+=C2=A0rename meta-xfce/recipes-xfce/thunar/{<a href=3D"http://thunar_4.20.7=
+.bb" rel=3D"noreferrer" target=3D"_blank">thunar_4.20.7.bb</a> =3D&gt; <a h=
+ref=3D"http://thunar_4.21.4.bb" rel=3D"noreferrer" target=3D"_blank">thunar=
+_4.21.4.bb</a>} (67%)<br>
+=C2=A0rename meta-xfce/recipes-xfce/tumbler/{<a href=3D"http://tumbler_4.20=
+.1.bb" rel=3D"noreferrer" target=3D"_blank">tumbler_4.20.1.bb</a> =3D&gt; <=
+a href=3D"http://tumbler_4.21.1.bb" rel=3D"noreferrer" target=3D"_blank">tu=
+mbler_4.21.1.bb</a>} (65%)<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfce4-appfinder/{<a href=3D"http://xfce=
+4-appfinder_4.20.0.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-appfinder=
+_4.20.0.bb</a> =3D&gt; <a href=3D"http://xfce4-appfinder_4.21.0.bb" rel=3D"=
+noreferrer" target=3D"_blank">xfce4-appfinder_4.21.0.bb</a>} (72%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0001-buil=
+d-Do-not-display-full-path-in-generated-headers.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfce4-panel/{<a href=3D"http://xfce4-pa=
+nel_4.20.1.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-panel_4.20.1.bb</=
+a> =3D&gt; <a href=3D"http://xfce4-panel_4.21.1.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">xfce4-panel_4.21.1.bb</a>} (85%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfce4-power-manager/files/0=
+001-build-Do-not-display-full-path-in-generated-headers.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfce4-power-manager/{<a href=3D"http://=
+xfce4-power-manager_4.20.0.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-p=
+ower-manager_4.20.0.bb</a> =3D&gt; <a href=3D"http://xfce4-power-manager_4.=
+21.1.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-power-manager_4.21.1.bb=
+</a>} (77%)<br>
+=C2=A0delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session=
+/0001-configure.in-hard-code-path-to-iceauth.patch<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session=
+/0001-meson.build-hard-code-path-to-iceauth.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfce4-session/{<a href=3D"http://xfce4-=
+session_4.20.3.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-session_4.20.=
+3.bb</a> =3D&gt; <a href=3D"http://xfce4-session_4.21.1.bb" rel=3D"noreferr=
+er" target=3D"_blank">xfce4-session_4.21.1.bb</a>} (75%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfce4-settings/files/0001-b=
+uild-Do-not-display-full-path-in-generated-headers.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfce4-settings/{<a href=3D"http://xfce4=
+-settings_4.20.1.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-settings_4.=
+20.1.bb</a> =3D&gt; <a href=3D"http://xfce4-settings_4.21.1.bb" rel=3D"nore=
+ferrer" target=3D"_blank">xfce4-settings_4.21.1.bb</a>} (67%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfconf/xfconf/0001-build-Ma=
+ke-sure-gdbus-headers-are-generated-before-i.patch<br>
+=C2=A0rename meta-xfce/recipes-xfce/xfconf/{<a href=3D"http://xfconf_4.20.0=
+.bb" rel=3D"noreferrer" target=3D"_blank">xfconf_4.20.0.bb</a> =3D&gt; <a h=
+ref=3D"http://xfconf_4.21.2.bb" rel=3D"noreferrer" target=3D"_blank">xfconf=
+_4.21.2.bb</a>} (64%)<br>
+=C2=A0create mode 100644 meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Add-=
+missing-libxfce4util-flags.patch<br>
+<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#125507): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/125507" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/125507</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118462731/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/118462731/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000c989d6064db24fc4--
 
