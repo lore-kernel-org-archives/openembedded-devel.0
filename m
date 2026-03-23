@@ -2,39 +2,39 @@ Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19ED1EC01D4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36E12EC01DF
 	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 11:42:34 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15263.1774266144309869666
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15359.1774266145302994945
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 04:42:24 -0700
+ Mon, 23 Mar 2026 04:42:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=a98PFgGm;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YtiHKSYv;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7542b98c32=peng.zhang1.cn@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62N5o1iP3735900
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:24 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62N5o1iS3735900
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:25 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=uKhm2cSKhz3561ZZP7KeM+DQTx8A69WrvMO7hTyJniE=; b=a98PFgGmaQX9
-	ilO18AsvX4CY6pMPxG3FFZFUVpseDe6Pti0TkeJ5lqglhXj5qqrD8m97o9RQ8Fa/
-	iyXXSTQrB8ZozoNSlP1bVEqgzTq3ll4o0jtV7hD/mYVU8zNe7SfD66bgOhYzLT3s
-	L2TFsToN3vD5wgbX2dQobb/dRV9MKhr3cD+Y1mOsUjeG86oDJXALtyZR30SL1c3u
-	bbj0YsJxa/PkFZ4ilF15iJ4bdKs7vjgoNx66+zkr3ot0OjL7Yas9f+D3JWQS7cPE
-	pHE+r9nWBcdrYF7z0gFRPmYjosy8z9SH8iW7ebCiA3aJs4dGXYoC9CSOROTL5vPR
-	y6S9wiTgbw==
+	 bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=; b=YtiHKSYv04xg
+	JRWof4jmIKFMf31f2Bw0pobys26EqqVNkR5ELc2FiKeanYMFTmUga9/We7wPvavZ
+	ikhQNV87XiRsZakIutT64O+v76kM+CfTwm2Wc9gWNvs/SXe0jjUZ+qTAPg/1W8wq
+	UEeII7zP/WcurmrngLprHdOIOJu54ivkIltOU2ZVfjQAL+eu32enm2pQdIcbbr/I
+	97eDi5Nuo7AUlPRZlKnCvy7ink5DwfCOAgxFiAifdQuzV50rb7dtkDrFH1QolPO6
+	oJie8qcVSq9yKyZiK1+pAZivJEzqc33zsKKtQ2byEQ9kFK762dxYYt6T/apSVadr
+	SIFykxh28w==
 Received: from ch1pr05cu001.outbound.protection.outlook.com (mail-northcentralusazon11010026.outbound.protection.outlook.com [52.101.193.26])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pky9k3g-2
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pky9k3g-4
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:23 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:24 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jzzZ1fAtAD5tVYFz2egH0nK2xc4kI+NKr8VDWqzmmUfx8pTcp4pep/LT4wpaUTiKxMhRbs7pgRKEMZo2jdNTaL2oPSqZStkR3AkPUtYualpWnC+unoklevfh8vIZDDN8MVUefHhO1rKvlozfMc3y0SsQQFWPXaV8XmgG/34fFyUaDLoepIEy7JFYVAT2ZFMcCyjAl6SKTyykhIeuLWUxqsidLK2x7irpCRECEvQ8BWvZVeHLRjhdjFwpmFyKVB9SOW2EAfdD9ZpnhFbSWU3qckhZU/1XZqYSYaiv1A2RgZ9Q6uUpo0S13pDYXidf3R3zqXAXsSH7NeQm96TaCvhlsw==
+ b=Fsg23z760WfYHUF/z/s07pC0pPzmyuQuunC64+m24zG8jyJjFXSem0bnIOUVgewILhQEz+J56KaVwYRk2tyb2TbmndHaATiKQp6N/E3xJAz7prIgd+tZHDs/JCbhmqxxpHeyeh2jvUuU90KdF5EkGKGN3MJ3AFnuQt0eIQ5aqofHW03ZO5n+HcYq37po9dFq4hy+1yCYwlbSzLhulgcr0dyR7p4B1RlbzktsqQPO7ux/jsF7TXtw9VFVnT6rx9mvs5/bwHb1UpuhOjD9LvUOw/ZM82JGRfAiA47IirJiCge2Imk+SZhulx3V7CrShA92eMWia8zzEzB91vKHDuFSIA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uKhm2cSKhz3561ZZP7KeM+DQTx8A69WrvMO7hTyJniE=;
- b=m9ZVM2itCqApO+YOYiO5H9n8ony/4CJTxm0IKHndik13rqGdzxBLm0AJTDMhCDk1bgiLef4t5KPiSNiEUYEyPfvrJmOyRwKt3AXf7rMlOa8k7uaJ79LoEqAaI+lJTt56M8RKOle8s+P6vqv7bH2a9PxHYIm+Kl11INLk9y560D74nSF2e4eWHyTsAyNfZ0lhPKHolSvZMz7B5eJD3RDqa4vVkOjda2iLaXy986hXODGzbBle4RFpuoydO5EiT5qVaSUDY7nJmPlHMQL1flZU4T2N3EEze+4XZ/HFFAuAgt9C5JkP+HJQM/ZzWHj3FHtaY99Jl4puJkNSBNxVJDxT4Q==
+ bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=;
+ b=nv4ZOVR+5wpu5XrrDJy4adga56tKnOkc9tRFBLZt0gdEd3yvgRra8SeztxGPKzwXWbJtdEFoHqbfE17AnWs92kTwh38gkXhjrOvTsFTNccA3fRQKCKaBw1ARBtk0ftW4u3zeP4jWpbRdKIPHbu07Dr+lcLK0twC1auAt4rM9RwQZYHAZiKbJ1Exa4YzT5beUSLoNNQ1abwcQXJAFVmmYWaAmb6xK2X0t2kgSlCTt0IJqF86TH7kJYKcOKudr+h2umPvgSqQnDvgPaCQeeSIWGiK8vGiIQe+sARGFPu3lv+cLJubOr5nkNz3YToGIuP0y4JOJQJ532/8otn6sxKtAbQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -42,107 +42,98 @@ Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
  by DS0PR11MB7441.namprd11.prod.outlook.com (2603:10b6:8:141::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.15; Mon, 23 Mar
- 2026 11:42:21 +0000
+ 2026 11:42:22 +0000
 Received: from CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Mon, 23 Mar 2026
- 11:42:19 +0000
+ 11:42:22 +0000
 From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 13/15] xfwm4: backport patch to add missing libxfce4util build flags
-Date: Mon, 23 Mar 2026 19:41:50 +0800
-Message-Id: <20260323114152.4178269-14-peng.zhang1.cn@windriver.com>
+Subject: [meta-xfce][PATCH 15/15] xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency
+Date: Mon, 23 Mar 2026 19:41:52 +0800
+Message-Id: <20260323114152.4178269-16-peng.zhang1.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
 References: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: TYCP286CA0108.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:29c::14) To CH3PR11MB8562.namprd11.prod.outlook.com
  (2603:10b6:610:1b8::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS0PR11MB7441:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3aae081-c005-4519-a346-08de88d13dac
+X-MS-Office365-Filtering-Correlation-Id: 8f3cb652-7271-425a-008b-08de88d13f13
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|56012099003|22082099003|18002099003|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	xLkKDVueGVytc5gEb4+n/vWNWJE4q1uaRd6RTpj2+Vc51FOHSGR75D0HxqENhqqK5clV6TowiYruyIk5dhyLPTvXjKuaSlxsZAbb4644zPv4xdFC4eCR8W4z+Ot6BtSFXmv9PpuNpl9czN+zyBe75EVbJUARjsnnBsXOxRHShB+Oxkrtc5+ylwnvnIKbgrGixPBNqV1nhZVFGoqPm75uOufHYMs7ijdWeLSHumCT1g/1y5TWhVdo2BPu8EiVYWG1S7JkOm0ZtA5DftWNuy2oInpiDnr5pG5oOodfWwmOMzWZjUuZR876IVU1aX++EOEycBcLc67Z1i9rAPNQUrKl+irEoVrJ9Yq+Wigs5pbhR2cloUU1ajT6+pVmE5iC2ZNjTTJWXLF+7fATqo0YLQcYHDW6VcybNDqssAqxV9tYeejlcQeiKz/zlP+fcpt9oS003pyDJNQubGcVGQTWoauz2ynruNJozvupiXNEJicliQR1GHTNzqLilosKD/8aqQ4DQLksWOufVAv5CpUGFAeolyRusYswkH9GdojwkpmyBAQQQTiYIgubklEDpMeAmDeiH95LBkI+7gAPkWMgC91HL27Na+voBhAb4PIMgNz6NgmdA/EWhupmrwiDH5Y9EaarPKFIHWPnSc4oXwmvfxYwbzS2dz+3FodcK5eFAFfQ8fa1OtzHymJgWXrtNBP3OMgnMWPGHIUb0f2kXr08tDlz33tRl9UToZ0MPwjcD/e21I13i3xYJLU+afmjZc49IMOjyrS51Q48EI1NAuyInCHxntw9ZdgQzvBLA8S8YDG58Xw=
+	aMSaHHUoxYdowqz8ZMQHDPo+OHOsis4T43xQbRxHXSY6V4cZDaCdJ+E+yobN/u7ui9Z7p8B8Kl+ey6HWdSZCkUG/Zq5Mm6vvD0Lmnxs1DZ7ILJN1toTZKgwseRFuF74vrgg8zweYiZYaDUKBnZoarEhhDO8VUB3xAhZzy0wp7ZChrsuDzIytMLb+GpCrCfe/1JPcgJh3UbrkD6zKehZskWA5ltv5YX87hE5Ac39h94uETYT/llvH6ljeIW30OC+BN7y7T1fNMg0Ayger2OVUzeeNxO78Uwz/SNJUvn6Sz3eKosVqVw+ERl0dWYqSwN7YT+T28uUAihf6F843FeWnj7zE+P7MAtPsJAHto/CH/HrKMiOhh/P330atfTMAQ9VOlZz2Qp2GuiMZlK4AhhZQwjCbjX04xTyQp8cR3SWdpSZJwA0szhu2Ct/5dFMU8NyzUFYt2N+7JsMbGkDkLd+vgiqOPLXsne/d09+VtPWAM9eTjro8MUuqUUJf+P4hFRu9edI8fsoq1kjc7UM1yik6m2mfrKZ5eWqGg98RYaOZcEdTxz8a6suMon4cjIcy1jHzOg1YBSdp/Ttloqr91QtZ0giSCjIrObwkFwcr+EJXhhzrTDb92/bJKrb2LzwgGC/HROJ44oJmZjkVuKbC4xjNTpTMOa6lmOKAdCNedkQSumbkY/hXQeg0y8BqiF+V62ZaZ/S+ijr/jNDwy/5DICQPhVczXL5JhG+6QFsBJUOYmKUnyUNHYW508fmmFpt7oYOi
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(56012099003)(22082099003)(18002099003)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?SW1RNEkrTFdHc212Y2tUTXllb0M2dnRubkVIQ3N3Z3VVajdtL2QxczA3bnNq?=
- =?utf-8?B?MG9RbHVna2p3K3RGL1JXUitvWE5ySk1UWko4WTFYdm9lMVhzcnVPUWlSVXVX?=
- =?utf-8?B?YU10c0pCTHNLVGUxMTlTc0E3UVRHYldCZHJEWGszZVR3QTVRV1NMSkhWMkow?=
- =?utf-8?B?Y2ZhTVJGNGZOckZtc21LaXBWd28zc2lOWE8yRTk3VFZwNkYyak5mc2F3Tlgw?=
- =?utf-8?B?SU5HeldxTWhMV0JiMWEyUXFwTlZGN1lvMCszb1V1Q0txdVlZNndMNG5idS84?=
- =?utf-8?B?ZEdycEdXdzlCL1hNUDMyNFpOdGdhOGtnRTZCTjZZQk1mTWZhOVVRWUhValdN?=
- =?utf-8?B?SjBTWjB6VFVkZmdFMUthM0Jqa2M0QWFVc0FNaks4bkVzS3U0TFNNUzcvMjhn?=
- =?utf-8?B?K1k1S3FHQVpBK3pBdDd1MFM5VFp5TS9IL2JLOWc0S3BUcWhEMDhzYUlhWnRU?=
- =?utf-8?B?UkJUdDlGU0wxcXZqSEpIa0s0cmxWbW9yTWIzNmVYR2tOVVRHV2xPZ0J2amVL?=
- =?utf-8?B?eGNUUENqRUpSR0ZtRDk3Y2tQemJhck85MlBBMEtJeUV1c1pKbE5RN1RkdVZF?=
- =?utf-8?B?b1U3U1FJZHRUdDVYZm9ITFZ2U1RZbWpnYnBZZ0JHNGEwc2Jta3FZZWw5Vzdn?=
- =?utf-8?B?elN5WHlEV1craDZpOHpzcFYzK0dadkppbXIyS1JUREVSem9VTEl0d2d2dnQx?=
- =?utf-8?B?TFE1QjZ1OTEyOVp3SW5qeVF2Smt6S1IzZWRZaDlGaWdidTdsT3psVkYzQ2sy?=
- =?utf-8?B?UFFLem45QzBXb1BlWnhDM2g1ZEt2UGtHR0ZZUytnWGYvZDh4OHFYVmE1R0xp?=
- =?utf-8?B?Z0tZd0JZd1ZTd01sazFENUNkRnVwc1AwbGRmT1Z4VGsyTE9LazU4QzlwNFgz?=
- =?utf-8?B?dFE4bjU4QXVoWWRpQXdBendlT3E3by8yRmhRRDkxS2JZMTUrbjE4Q1hna0Ft?=
- =?utf-8?B?SU5DU1JCbmRGRVY1Z0E0UEt6MnVPT0lmaUtHTEhnNU5MckZqaFI5T0VKUWNG?=
- =?utf-8?B?YTNTQmI2YVZyT1poNWtLYXIyU1pQMFNMaUV1MS9odDZnUkdYRzloRGYzelZy?=
- =?utf-8?B?ZEhxL2ZZYy9XYm9RckptTnVDTllBVGF2azlxV3huNU9STVk4Y3U3T3g5anl5?=
- =?utf-8?B?MDJSVWg0bnZVWldwYUdXRnZNTWxpK1lqWDZsVGRCcENaM1RLVTUraFRJalhz?=
- =?utf-8?B?b0RxK0pVcjJHOVJuRFFadXowQit3eldXOHJlZ0hydUMycjh1WEpGQUpSbDBH?=
- =?utf-8?B?ejJqb2ZGMWxhUUZMMCt4emlHMzdITnJZM00zbmFaQjZ4VFA0dEU1WEpBWGIr?=
- =?utf-8?B?NzlwTzVNRjI0SHVURmlTa052YnQrdjVXZ0VUdDVBeThmYkdVU0V0OXIwU2J5?=
- =?utf-8?B?UzliUGk4NmtXN3lRZFVxMnVOVVVtL0JMQjBaSWtqbU1TZ05UK1hxWG5tWEZu?=
- =?utf-8?B?UDF1Y2J2SXNRQzlCc2c3ZzFsWStFdjlad1ZLYnRpTmZxeGttRlJ4Qk15a3lU?=
- =?utf-8?B?d1g4ZWFCK0N0UkVYdS91SDFzY2lmbkNqaFpoNUtzVE5Wblptb2RMblNzdG5C?=
- =?utf-8?B?Nld5cDVOSTFyd2h4SGtCdFZhb1N3cDBQakw3MFN6NGV2Y2N3K1dwZFVvRERx?=
- =?utf-8?B?dE5vNm94ckJBQzdaSEZuWUcvVFBNdXFwaDJIM0ZuYVNjN2lJRUd6UkFXKzE4?=
- =?utf-8?B?V3BHK0RLa3loQitDWEM1dnlwc3FvUjZtcVRoYmVHRXFEc0Z0Vk52MDJkUWhV?=
- =?utf-8?B?c2toSUx6SWd1RmpOVDNNaXRja3RFK0xibU9Oang5UFp2QnIrMmVOclRUL0VE?=
- =?utf-8?B?Wjl6YUt5WGJkZFM1WTF3cy9KamVZVzU5UStVUHEreDNBNHlRWmx4UDU2KzRo?=
- =?utf-8?B?STdVczl0UW1mZlhzcmhqN1BiTHdLUWNZWVJnaWhNb0lZNUZDNmxkV1RVeFly?=
- =?utf-8?B?R2RLNW5KTVYvc2lnZDVnWFpreExFT1ZjRDJYaVRKVm5aN28xbHZKSnFXMjRE?=
- =?utf-8?B?TlR6TnVJRkhHSVFXSkNIMmJLVE9PdStVV3hBZ3pNQUVXNitocGlkTkVkKzZu?=
- =?utf-8?B?SnA4ZDVLRlhIaUVPYThXaEpFSXdGMGE1YzJOaVVMN1huRG5Qai8wOHVPRTMw?=
- =?utf-8?B?d1VFRHU2cXdQR2pCYzBGYURjZ0psdzVGV3JLODFhVzhsb291Z0F2UWRORzFE?=
- =?utf-8?B?VWRIUDI5T0lJU2theWl1MnJ2RnBPRFg4MytaZTVId2RVb0NmdFc2dzlUU3kx?=
- =?utf-8?B?NFZmdmI3Y1p5TFNZS3V5MXdkVTVrWDlacmFwam1kUEVBdkdpYzdWQmlmdWtX?=
- =?utf-8?B?NCtIK0VMeXBkVHBFclo5aHN1ODFXNGllc3gxYkJIcTdkcnVpbFhkdXRYU3Bh?=
- =?utf-8?Q?ggVtwcTCyfgGDGD0=3D?=
+	=?us-ascii?Q?ahE62x4/LuLBuqhBu6RTEPkXEESREQMmsxmEh0yHdLmYsBubov8caR05k/aU?=
+ =?us-ascii?Q?hHqZPBiNGooXpmvbA8isOumcZDipaQBhGLWpmiHKmfZk/ERdQI4QeIRF12w6?=
+ =?us-ascii?Q?tANhlaBLvmB2AVddEOdGoe2p5NNXS644oGsIJO5Ak21eyrN4yggQSzy0cgWC?=
+ =?us-ascii?Q?YEc6IqUAnQjwuKFKVubdwjGpWnNcb+bOBp29m2U/mZu8XyiIoZ1r+C/y/BLo?=
+ =?us-ascii?Q?QlMtoqTmkIL95xUHwmIEb/hXVJ9ttz/PqsCufdZE2Uyrx7LjGa1wfQiO5i0L?=
+ =?us-ascii?Q?GFDEZ1MfPg1l0mEP6cY5lOmThNALQ05y9RZWlQS5fdTFSOHu8ZNhRtz4Vn7Y?=
+ =?us-ascii?Q?2cl+uXUwZAJ8zH86osGghL1e20kSSBpfdomKIzkZ0n663M2jeUz9opSO2zhO?=
+ =?us-ascii?Q?e/mLHe/FpdJhi8V5efO0Kpf64W+qr9V470yCYXj0CVgR37xX5EBuwfXSiP5k?=
+ =?us-ascii?Q?t3MdJiAudxB9iC9z2jvGXVEL1Pm2ODk1fx2NwN68zpy0PRP7GvlTyR3oa4jY?=
+ =?us-ascii?Q?RSCpO+8p+jw30jzSd41gfKlEMLQ9IjZJTnhvCfX5bHBXUwDlpAhq3M2dg+tz?=
+ =?us-ascii?Q?wexsOYyZcm8EPAzGZYhFICV2W7geIMn8Jy6OV1Q7cDP2H97b9qHt9iAGmQLa?=
+ =?us-ascii?Q?ydmvdQGj4iRIsB4/iCleDjHglmvdpcU+qtvhRka5GGFJHMWMiPu5qG2JCOH3?=
+ =?us-ascii?Q?dU4T67+HghLqnhKc+0g4sRkAnO6O434FcpSPXUm+opBpOrfzyuwaprA/8eU/?=
+ =?us-ascii?Q?Ak1BNfEF8/y7ldFEtUYf6mTOrvRXZGSHHHsnqJvinMrgEhsuQp2lHbFuAG0S?=
+ =?us-ascii?Q?IwPCqfnwncmeeTVigWR3wXSokTXrh/nj3pWb7ukDxh4AJu/eMzOFpb7AVWhQ?=
+ =?us-ascii?Q?27gK+eSQ0Wx/dj/1qp8nGuKKjp7RzJFeBt+mIImTKKeRFQyFZcFa339krrAm?=
+ =?us-ascii?Q?l4012U3Fth/X3DwG5Bugq+xiGAvZgE8AxxHIUDVrLdcHGRdRwahc7dj16z50?=
+ =?us-ascii?Q?m0MxMkmVYmTeIDAuTw/oipeludnRevsoa/B33e3ypVnflxHvyRNz6wWoc53+?=
+ =?us-ascii?Q?MNsi+7F9FOKtAwBy+zvcNzWQ74dkT6VHTyfgonpamOgL4EtgwJceeA3d5urI?=
+ =?us-ascii?Q?L0ocd7YtMw41XfwHy9CtB+pEcl+5ztgHPc0O79dgWctVL5Wk4UNwUnDhgq0y?=
+ =?us-ascii?Q?Y8f4OmbiEIjdj6lFminpqK0HqkQu8hFTqz34VTKLCK10eCBY5gl0fAK8SGzc?=
+ =?us-ascii?Q?ToWHCoOxSgyLS4NGgM2DDwQk7iGEROhVSFiK6cpOYb8NIfaEFklW1easpFCU?=
+ =?us-ascii?Q?Z2RSckT6vxSFB8pr5GOijBT++LMe7rA9f/rXBjP8x6/K+98ZakR7+Y6dictL?=
+ =?us-ascii?Q?qEigZv2LlFOsPVqh4cRMEEjYrhfvLUdugoyZShJvWv1bpJxoLE+WR5nGfvTD?=
+ =?us-ascii?Q?CasMlF+ckYTQKU/qVBfru4V/9QqiatVrKYq7SYQWlLAjV+Xz19NEa46YVkaj?=
+ =?us-ascii?Q?UiApf9u5uutFscaUk2XMG5jqqI5S7yUnklNMU2NUeV84/IylPKS/A+oAlmEA?=
+ =?us-ascii?Q?wGwfv8XvxYQpZpSJbH/LB/AlZ/u/v5X4ZsqrXCmo3azvu480ZhVJj/vY57zr?=
+ =?us-ascii?Q?nS2PLjmQY0S/abpghVCnqFnsfaOzVBKWi9cIpsbXAq0WsSzewWt6ml2Cw4Uy?=
+ =?us-ascii?Q?t56aA9vzwWGbhzrTvgLoQo/fdna/tLEBwj9fVpZygZWskQ5EgDrZWFAfehKf?=
+ =?us-ascii?Q?/bwf9e3TKIuuL5TXzBRy8oOC/5iutjk=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	KmCfMpCuSaItG2tVT5w/uj6pu2ijm1KknRWtGAkwbZmHBCPcbKSVJI2E9ukOHLoizCPfpDRXlS3CNpyse6OQ44lCpQyXJdLAWM0q4DpkEbNZGDq/GTY3MpfvPwGjGVM+2GTagt8QlHdU2r5XyqMaR0qoYDneXE4ehz4OHmC0BSgx0zUbVx1eAlaYEWo/dGev0YMldghz8+XPeYn4xOESOV1VtQcyEZSqwMbRTkngolhoSgRd3RfKc13t6fn+QgHbyl2y3C0lq05b1WrEMIIK1XtzUC0AFQySH08M/0/9+Uc+GYvEc+rSYPpyFFXRUSmF+I8P//OfybGJkc2IqIgcMg==
+	g/lV6iwhNWht4PbimJbGELHF+d+JO38fw2T5VMxEwJAkE15E0qcEWEvkc7qN2EYgXNYX7ZOvOO2Ph3sRrIERWBYQixgMrOTJoQf/k6UEUG8QQzqgPV0ZMcOnkUpDXBuo9LIXFgd9ySCnYieLFjIdbbWIlUyIgexZGY7YUgEz7MWSTgu/Mkj/gOP8SPMFMOx7ZXErQMBR+ruPEoyQSjSvJKn/wueVl1yBrd4uEarTe9NMUGO0uw078y1pArUfLK8WxEYxSZd2IU5CSb7N5Yfnd6WgxbBf5D4Awaj8pclZOdB84rMF6rt6P5ypn7E8/q2XMpHO4FjHWI8/sOnbBBQ/Pg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3aae081-c005-4519-a346-08de88d13dac
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f3cb652-7271-425a-008b-08de88d13f13
 X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 11:42:19.8381
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 11:42:22.2835
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: J4BvGcRLzsuF/F0oLadnHRPEpCXx/5IH5vTqoV0pa47moSqDbSQyIdbt9Ij87esPuOzsWQK3GiUpaOqTGqpie7yc0lj9HH33lBHogO2cpOw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: w5LOFpBm8fVdSeFXPPxKt8UT9Ezrv4ZN18NTjQSppKxWrU5fMqgCnpH2zZxP/j6EcJ4coW9I1rfjIgjgVQT+XWSyPNf/I+ePeRh2+Ig3F7k=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR11MB7441
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDA5MSBTYWx0ZWRfX3FTONM+uDhuP
- Iof7toilLqz3ULxlI/PmVtRVZjOT4wSC8ZvAt6h1yoyN+LvjadG2MmcO2iaN3YrxfTUhDvU+7LZ
- FTt9hZvvil3AgScK0+7lpnKfBy+KGaLkdKk9o9QOe9Rw+mmHJWdLptkWf0esNS7T8mpwmOZQP/z
- eym3XO9Ko6p7RXh+fazCf7WkDHs9LUiN+UafkkQmkqiost0eqFUHUfQJK2NYYw6QXCZbG472pMk
- PY2iAWT49ClcDyR9+Z09LMg4xb5n7zpsOoKOqvbtqXK4fhmgGfNVtWduibmSYxJj7pe2aUNR/VC
- 7MgQrSHuTHiuewpy7PCP5cA0h6X3Bwucr0BmBeYaoXbDRYgqmeb4RI5wfHvj8P7BVIE3m8+fBRS
- wCyDF8/ck5cDdmOXj0Jlc9PiAJeVoycWCxb6PHK9iX+oGSdlvkoO7wogtLjnlN+gARZhhhRXy9W
- wbavFRPzav/O0vV2mQw==
-X-Proofpoint-ORIG-GUID: Sdw3YXlOxsd9xDf1Ynpx5-RdDZmfvvfX
-X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c1271f cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDA5MSBTYWx0ZWRfX+yD/+xxFKQsF
+ b84c0RbhqG2WtYru2oHbGFSvWMWaQIGkwF9ORJ0s+v0ph6PawM2TzFhs8HOdwqTalrxeFbYpYIH
+ R3evSBjGOnPzcSujkMYXnRiSvk5/pncE3Q+vExYNRkvulmKindaNAE+pLBVEY8armk9pFF/+Jqy
+ m7gZtnLzZO4PQmYuNOGgbfkbs/5tIXItgM4ZVTf3y2c1hJo9Yn1cuJ8EKi4GaV0opLMX/ByvnB+
+ 69MujrgR5IM5jSfbG/yo31Ym57eUt/orzKPLEe+PRTSbniMT+2I25o2mkbG3V/NviiEwQU8Fok3
+ P/dznbQFOf0mHZQV7pBaojZMN86069vTbNVbxrXUE/S/v5IlxEUHvhr0PqbNtTv/3jC6ixe1z3d
+ LhuzK/cUcD6uMx1mjlWjOp8F+gpXfFI0Cipd0lCG+Bqqmi4SRtHVMdoYgmKb3h9cd45BBUb5Nrp
+ 01PqYaDYcu2jNq9uT3A==
+X-Proofpoint-ORIG-GUID: RwxP0CYqGfg3NwPL0el60rr-ZIkW1Nnn
+X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c12720 cx=c_pps
  a=3NFNipLq04N0pvkhkOyhzw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22
- a=O24Aq5uEAAAA:8 a=t7CeM3EgAAAA:8 a=yTkn3-2k8kfTEQFiIg0A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=SYBONWESK5muIIdMMRMZ:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: Sdw3YXlOxsd9xDf1Ynpx5-RdDZmfvvfX
+ a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=e5mUnYsNAAAA:8
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=7sqpSKcsBsmI2gz2FRAA:9
+ a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: RwxP0CYqGfg3NwPL0el60rr-ZIkW1Nnn
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-23_03,2026-03-20_02,2025-10-01_01
@@ -151,117 +142,104 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603230091
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 62N5o1iP3735900
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 11:42:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125516
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125518
 
 From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-When libxfce4ui is upgrade to 4.21.x, pkgconfig sets private flags by
-default and no longer exposes libxfce4util flags. This causes build
-failures in xfwm4 settings-dialogs due to missing CFLAGS and LIBS.
+After libxfce4ui upgrade to 4.21.x, its pkgconfig moves gtk+-3.0
+to Requires.private, so the linker no longer automatically pulls in
+libgtk-3. This causes an undefined reference to 'gtk_combo_box_set_model'
+when linking xfce-polkit.
 
-Backport upstream fix to add LIBXFCE4UTIL_CFLAGS and
-LIBXFCE4UTIL_LIBS to settings-dialogs/Makefile.am.
+Add patch for explicit PKG_CHECK_MODULES for gtk+-3.0 in configure.ac and wire
+GTK3_CFLAGS/GTK3_LIBS into src/Makefile.am.
 
 Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- ...build-Add-missing-libxfce4util-flags.patch | 57 +++++++++++++++++++
- meta-xfce/recipes-xfce/xfwm4/xfwm4_4.20.0.bb  |  5 +-
- 2 files changed, 61 insertions(+), 1 deletion(-)
- create mode 100644 meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Add-mis=
-sing-libxfce4util-flags.patch
+ ...d-missing-direct-dependency-on-gtk-3.patch | 52 +++++++++++++++++++
+ .../xfce-polkit/xfce-polkit_0.3.bb            |  7 +--
+ 2 files changed, 56 insertions(+), 3 deletions(-)
+ create mode 100644 meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Add-missing-li=
-bxfce4util-flags.patch b/meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Ad=
-d-missing-libxfce4util-flags.patch
+diff --git a/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
 new file mode 100644
-index 0000000000..e5995e09e0
+index 0000000000..bc20d2f854
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4/0001-build-Add-missing-libxfce4u=
-til-flags.patch
-@@ -0,0 +1,57 @@
-+From 6468f80ee9283c03fc18f67361b20c6efdf3df50 Mon Sep 17 00:00:00 2001
-+From: =3D?UTF-8?q?Ga=3DC3=3DABl=3D20Bonithon?=3D <gael@xfce.org>
-+Date: Mon, 3 Feb 2025 11:09:59 +0100
-+Subject: [PATCH] build: Add missing libxfce4util flags
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
+@@ -0,0 +1,52 @@
++From a89bd475c3cf7dc39618bcc9979fc618d7acd537 Mon Sep 17 00:00:00 2001
++From: Zhang Peng <peng.zhang1.cn@windriver.com>
++Date: Mon, 23 Mar 2026 16:52:58 +0800
++Subject: [PATCH] configure.ac: add missing direct dependency on gtk+-3.0
 +
-+This will be necessary when xfwm4 is built against a meson release of
-+libxfce4ui, which sets private flags by default in pkgconfig (and
-+therefore no longer exposes libxfce4util flags).
++xfce-polkit sources directly call GTK+ symbols (gtk_combo_box_set_model,
++gtk_widget_show, etc.), but only libxfce4ui-2 was listed as a dependency.
++Since libxfce4ui-2 correctly places gtk+-3.0 in Requires.private, the
++client must declare its own direct dependency on gtk+-3.0.
 +
-+Signed-off-by: Ga=C3=ABl Bonithon <gael@xfce.org>
++See https://people.freedesktop.org/~dbn/pkg-config-guide.html#writing
 +
-+Upstream-Status: Backport [https://gitlab.xfce.org/xfce/xfwm4/-/commit/6=
-468f80ee9283c03fc18f67361b20c6efdf3df50]
++Upstream-Status: Submitted [https://github.com/ncopa/xfce-polkit/pull/14]
++
++Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 +---
-+ settings-dialogs/Makefile.am | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ configure.ac    | 1 +
++ src/Makefile.am | 2 ++
++ 2 files changed, 3 insertions(+)
 +
-+diff --git a/settings-dialogs/Makefile.am b/settings-dialogs/Makefile.am
-+index 3a1d2a510..86c6ab9be 100644
-+--- a/settings-dialogs/Makefile.am
-++++ b/settings-dialogs/Makefile.am
-+@@ -44,6 +44,7 @@ xfwm4_settings_CFLAGS =3D \
-+	$(GLIB_CFLAGS) \
-+	$(DBUS_GLIB_CFLAGS) \
-+	$(LIBXFCE4UI_CFLAGS) \
-++	$(LIBXFCE4UTIL_CFLAGS) \
-+	$(LIBXFCE4KBD_PRIVATE_CFLAGS) \
-+	$(LIBXFCONF_CFLAGS) \
-+	-DDATADIR=3D\"$(datadir)\" \
-+@@ -56,6 +57,7 @@ xfwm4_settings_LDADD =3D \
-+	$(GLIB_LIBS) \
-+	$(DBUS_GLIB_LIBS) \
-+	$(LIBXFCE4UI_LIBS) \
-++	$(LIBXFCE4UTIL_LIBS) \
-+	$(LIBXFCE4KBD_PRIVATE_LIBS) \
-+	$(LIBXFCONF_LIBS)
++diff --git a/configure.ac b/configure.ac
++index 88f2432..15c09c9 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -4,6 +4,7 @@ AC_PROG_CC
 +
-+@@ -70,6 +72,7 @@ xfwm4_tweaks_settings_CFLAGS =3D \
-+	$(GLIB_CFLAGS) \
-+	$(DBUS_GLIB_CFLAGS) \
-+	$(LIBXFCE4UI_CFLAGS) \
-++	$(LIBXFCE4UTIL_CFLAGS) \
-+	$(LIBXFCONF_CFLAGS) \
-+	-DDATADIR=3D\"$(datadir)\" \
-+	-DSRCDIR=3D\"$(top_srcdir)\" \
-+@@ -81,6 +84,7 @@ xfwm4_tweaks_settings_LDADD =3D \
-+	$(GLIB_LIBS) \
-+	$(DBUS_GLIB_LIBS) \
-+	$(LIBXFCE4UI_LIBS) \
-++	$(LIBXFCE4UTIL_LIBS) \
-+	$(LIBXFCONF_LIBS)
++ PKG_CHECK_MODULES([GLIB], [glib-2.0])
++ PKG_CHECK_MODULES([LIBXFCE4UI], [libxfce4ui-2])
+++PKG_CHECK_MODULES([GTK3], [gtk+-3.0])
++ PKG_CHECK_MODULES([POLKIT_AGENT], [polkit-agent-1])
 +
-+ AM_CPPFLAGS =3D \
++ AC_CONFIG_FILES([
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 514605a..f13e4cb 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -10,11 +10,13 @@ xfce_polkit_SOURCES = \
++
++ xfce_polkit_CFLAGS = @GLIB_CFLAGS@ \
++	@LIBXFCE4UI_CFLAGS@ \
+++	@GTK3_CFLAGS@ \
++	@POLKIT_AGENT_CFLAGS@
++
++
++ xfce_polkit_LDADD = @GLIB_LIBS@ \
++	@LIBXFCE4UI_LIBS@ \
+++	@GTK3_LIBS@ \
++	@POLKIT_AGENT_LIBS@
++
++
 +--
 +2.50.0
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.20.0.bb b/meta-xfce/rec=
-ipes-xfce/xfwm4/xfwm4_4.20.0.bb
-index ef5a682b77..2c0ac1d39c 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.20.0.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.20.0.bb
-@@ -9,7 +9,10 @@ inherit xfce update-alternatives features_check
-=20
- REQUIRED_DISTRO_FEATURES =3D "x11"
-=20
--SRC_URI +=3D "file://xfwm4-fix-incompatible-pointer-type-error.patch"
-+SRC_URI +=3D " \
-+            file://xfwm4-fix-incompatible-pointer-type-error.patch \
-+            file://0001-build-Add-missing-libxfce4util-flags.patch \
-+            "
-=20
- SRC_URI[sha256sum] =3D "a58b63e49397aa0d8d1dcf0636be93c8bb5926779aef5165=
-e0852890190dcf06"
-=20
---=20
+diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+index 880e73849c..167cc538b9 100644
+--- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
++++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+@@ -7,7 +7,8 @@ DEPENDS = "libxfce4ui polkit"
+ inherit xfce-app features_check
+ REQUIRED_DISTRO_FEATURES = "polkit"
+ 
+-SRC_URI = " \
+-    git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
+-"
++SRC_URI = "\
++           git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
++           file://0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch \
++           "
+ SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
+-- 
 2.34.1
 
 
