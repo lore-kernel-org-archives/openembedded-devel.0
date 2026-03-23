@@ -2,33 +2,33 @@ Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22BB4F483D3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23D7AF483D6
 	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 16:27:58 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21771.1774283268931998958
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21773.1774283272276709167
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2026 09:27:49 -0700
+ Mon, 23 Mar 2026 09:27:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=LDty1RLp;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-20260323162747159e20eab20002073b-js1hcw@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 20260323162747159e20eab20002073b
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=eIzUKscD;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-256628-20260323162750e1d2664a400002078a-vysv_h@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260323162750e1d2664a400002078a
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 23 Mar 2026 17:27:47 +0100
+        Mon, 23 Mar 2026 17:27:50 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=peter.marko@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=IyBgq8EU09lJLpGJVQlB3l8YOQLke/TTIBFKIJRFue4=;
- b=LDty1RLp0mYMdFvsOhne/W0wJL1rhWw9bgNasHkXkexANgBe68McT8LuSefZL2HOfYKAKT
- CGnICQKbhG2Y7rV76sME4+ufSAbPPBGCsFo2uzm9cZ5fgdpQsCCoUKYVdk3GsgXvgtwkE4wX
- 5HLxY3XT99bs5jWlLJejtjoPO+DQL+/8rTg2UKLdxlZgcoNYaakaZqaExiAkWobuHVvJz6o/
- QOsqIl/5QodUaTdwL/K86StkJZoBbv1/fYr1drCP4bGMurpW3SIo3W/NoWn+eMdCNfjJMHjQ
- cWZ7jwdZU5WrcIx+3jN8tC1Y0QmK10AzvMidxM/7c1H9j4HyeP9BnVrg==;
+ bh=yVLytNaqmWTt+aXO4ixreXt82c3A5ReCcFaeIgvfr+8=;
+ b=eIzUKscDqF+B8TzaUPaisO1SWdrygIEXceqqxgS0f6+MIt0I5ABInBrwjkjvCqWRS5+JwQ
+ UBtxPZwBCVnnqKfthNB+1s6G5KOxIHCMdhwMVlGKW+J0csiSgoGuwRHcAdHfBz7nvarxjk2B
+ vFJJ7QWeaa6Y1gX0r0TQG+ByTmUF6yqs383CKpEue49aiu5yZQdQ5oM52DY+sc/ELE9iJOHj
+ NUce/ZqMqS10UzfRjlccbDHJJfiiF6QBIk0nonaodmdxv4OiVh82k/4wJBml5MQn1moVZbvg
+ auA/4de3W3f5XRw2NxUTS/VKIplKkYG/RSnHkqjCwKJ9HMF7F0KIWqyA==;
 From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-python][PATCH 2/3] python3-protobuf: upgrade 6.33.5 -> 6.33.6
-Date: Mon, 23 Mar 2026 17:27:30 +0100
-Message-Id: <20260323162731.8483-2-peter.marko@siemens.com>
+Subject: [meta-oe][PATCH 3/3] jsoncpp: upgrade 1.9.6 -> 1.9.7
+Date: Mon, 23 Mar 2026 17:27:31 +0100
+Message-Id: <20260323162731.8483-3-peter.marko@siemens.com>
 In-Reply-To: <20260323162731.8483-1-peter.marko@siemens.com>
 References: <20260323162731.8483-1-peter.marko@siemens.com>
 MIME-Version: 1.0
@@ -39,35 +39,76 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 16:27:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125522
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125523
 
 From: Peter Marko <peter.marko@siemens.com>
 
-Release information [1] does not list python changes, but we should
-match protobuf (C++) recipe version.
+Release information [1]:
 
-[1] https://github.com/protocolbuffers/protobuf/releases/tag/v33.6
+1.9.7: Bugfixes, build system cleanups
+What's Changed
+* Fixes PreventInSourceBuilds.cmake to work with add_subdirectory by @morbo84 in #1383
+* json_value.cpp bug in the edges of uint/int by @YaalLek in #1519
+* Release 1.9.6 and move versions to 1.9.7 by @baylesj in #1566
+* Fixed work secure_allocator on old compiers by @TsynkPavel in #1478
+* Fix flag -DJSONCPP_USE_SECURE_MEMORY:BOOL=TRUE by @tfc in #1567
+* fix(build): remove check_required_components for meson build by @chenrui333 in #1570
+* the cgi module was removed from Python3.13 by @a-detiste in #1578
+* Fix name of static library when targeting MinGW. by @mmuetzel in #1579
+* Fix comparison warnings caused by 54fc4e2 by @JensMertelmeyer in #1575
+* Drop pre-C++11 alternatives by @BillyDonahue in #1593
+* feat: support std::string_view in Value API by @evalon32 in #1584
+* Added Value::findType with String key by @SwintonStreet in #1574
+* Set up for Bazel module builds. by @bcsgh in #1597
+* Add a BUILD.bazel file for //example. by @bcsgh in #1602
+* Fix "include what you use" issue by @victorvianna in #1625
+* Make the build configuration under Bazel more correct. by @bcsgh in #1600
+* Add Bazel tests by @bcsgh in #1601
+* Return false in Reader::readValue when stack limit is exceeded by @xuhdev in #1619
+* Remove deprecated/removed clang-tidy key AnalyzeTemporaryDtors (#1614) by @bmagistro in #1615
+* [docs] Consuming JSONCpp via Conan package manager by @uilianries in #1622
+* Cleanup README.md, fix broken link. by @baylesj in #1633
+* Add gcovr.cfg to fix CI coverage merge errors by @baylesj in #1635
+* Remove build directory exclusion from gcovr config by @baylesj in #1640
+* Add test for allowDroppedNullPlaceholders by @baylesj in #1648
+* Prevent test colision when running in parallel via RESOURCE_LOCK by @marty1885 in #1637
+* fixup project version updater by @baylesj in #1649
+* Update README with project status and focus by @baylesj in #1639
+* Adding a cmake option to exclude the jsoncpp files from install. by @nv-jdeligiannis in #1596
+* Change stack depth limit to 256 by @baylesj in #1657
+* Fix uninitialized CMake variable in version.in by @baylesj in #1658
+* Fix CMake deprecation warning for compatibility with CMake < 3.10 by @baylesj in #1659
+* Scope JSON_DLL_BUILD to shared lib target only by @baylesj in #1660
+* Fix number parsing failing under non-C locales by @baylesj in #1662
+* Reject unescaped control characters in JSON strings by @baylesj in #1663
+* Fix MSAN issue in #1626 by @baylesj in #1654
+* Fix string_view ABI mismatch between library and consumers by @baylesj in #1661
+* Revert "Fix number parsing failing under non-C locales" by @baylesj in #1664
+* Fix use-after-free in Reader::parse(std::istream&) by @baylesj in #1665
+* Update bazel config for 9.x by @keith in #1655
+
+[1] https://github.com/open-source-parsers/jsoncpp/releases/tag/1.9.7
 
 Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../{python3-protobuf_6.33.5.bb => python3-protobuf_6.33.6.bb}  | 2 +-
+ .../jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-protobuf_6.33.5.bb => python3-protobuf_6.33.6.bb} (95%)
+ rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.9.6.bb => jsoncpp_1.9.7.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-similarity index 95%
-rename from meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
-rename to meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-index af9ff85f20..bbc713442b 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
- "
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+similarity index 93%
+rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
+rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+index f68ffd2c0f..c44422071e 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.6.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d73c165a0f9e86a1342f32d19ec5926"
  
- inherit pypi setuptools3
--SRC_URI[sha256sum] = "6ddcac2a081f8b7b9642c09406bc6a4290128fce5f471cddd165960bb9119e5c"
-+SRC_URI[sha256sum] = "a6768d25248312c297558af96a9f9c929e8c4cee0659cb07e780731095f38135"
+ PE = "1"
  
- CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
- CVE_STATUS[CVE-2026-0994] = "fixed-version: it is fixed in 6.33.5"
+-SRCREV = "89e2973c754a9c02a49974d839779b151e95afd6"
++SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+ SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https"
+ 
+ 
 
