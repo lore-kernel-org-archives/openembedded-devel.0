@@ -2,39 +2,39 @@ Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E1E6EC01D2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2471EC01D3
 	for <webhook@archiver.kernel.org>; Mon, 23 Mar 2026 11:42:13 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15350.1774266130538097868
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15256.1774266131556093084
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 23 Mar 2026 04:42:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XOVtdJ1v;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=o9stptun;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7542b98c32=peng.zhang1.cn@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62N5kqHG3731459
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:10 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62N5kqHI3731459
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:11 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=N2ytm2/R24h8QzXU2EIuzZ3b/Cqa2RzxuthdwIAwwRE=; b=XOVtdJ1v4zkJ
-	YX5uILqPAhskDD08gegsOg0wFLickhjBoo/DW3zmpwSMaFn6004E5khktkkR7FsJ
-	YtuBurLKbaECK592A/KjQTLZCkTJjuj66Ut9sHg0hFfYZS/+FgmQhM8DU9Nvadzn
-	Gj3KR7v9rYrR4MSro3wNJ37pNXskdu3HnMxSA8r3XaijwysmcLN4i+loXZhuSIHE
-	J4aKocMrhZPerdwfL2iBbMeGDQkhXgI+mG3BXrXj1tOrbj6X56SpiMEl/Ih0Wsfp
-	gB7iCN8GoCvZHqZw/UJuNXyxtUOeaHsfG/3ZAXsRG74vKrMUcqhO29pEeSWF0/3Z
-	CNkr+pYaSg==
+	 bh=v9Di4Awxz+hOLGrGPLxATlqBI3E5rI0CWqOrYQ8AwW0=; b=o9stptungfUM
+	pc7X/Vc5J57E3kFJjrJPzLBQBXgx8aIZSFk2TQzOBh8w6rYo013Us6pB+aEPRU+c
+	K1hL1O7oWuHegrE/ybmVYRTxyqhIoklV2p+NKwF0okpQ5JlJmmNa++oTmbrEP10I
+	g3fFgIRY1BvBqQVsJNUn/J2wKoO+wyCGBmznYD1wWm9nfFniHnBaqpct2ucOwgNp
+	8Pr52jf7QNA5qkrSWKeLCh+qbCGi6XcEGn/nDgpdi6+9fRg4FCdZUlL1ZOYjeYee
+	/8Ls6J2FwziG2O+Qw8FuxBxSIKMNpIQPfw64kb/mo+kwGRDAKJ2Up36Npw0xvi3C
+	NpVIHhcd6A==
 Received: from sj2pr03cu001.outbound.protection.outlook.com (mail-westusazon11012003.outbound.protection.outlook.com [52.101.43.3])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pky9k2h-3
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pky9k2h-5
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:10 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 04:42:11 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ES7lJksDwIM7oky/zsMZ5ctm1vqBSQObvPrNJrQJEmuTQXMnn59DyJbiKNNoqVH8LHU0ykWOaholQXkeai6zjTGoCI/FW3cOCcmlBDNFT5slaWScAffs8ZBXa1uxo/4kYtDx8E2FVrIPK775xMd4MrTnwGYkH4Uq9SYFc4gmqsEPeVUyiDK7EYgYPd3xYkS2ofwvuDIb2zKPxzw3+gdeuIQ/sOWroFI79vgRcXQSmfHiwAiC9CiKS5uhZIrni2HEqY1MVIi9+LZBQjTAYsHgux3emR48bisI/MZLhlJmoeGnX4h+j8GF8YL85s3c5ZwCdtkORN8ec3/ZTTjDtIRoCg==
+ b=gES8L2MMx8iI/wapBaClUtm9nnHxVmL2ZnMfEMrdgk5BfMQabhz64pnGkhrewiCkE7RKlMHu6V6ULv/sEi21kVcUcq7m1XplGC0ztAOjHAFlHThlYxN3soaWBhryZuTedT9POa+nG1aJMhO0vTHGwmVV4SJ+0arsd+0hq/mDK7wkR869NTysCo3v6hbZaifGgjo4URAhLZL5UVppyFaGi8FV3d0PSQzHu4clhiYqJoT4X7OT3kl/T4rjP1ceJ1dHN7XEOF87vE3FUJc3Xx9lR43aHk0vtY4Kj3QbsXluu7TZZi8JorQ0LqjuIqNooiVTDDndsnvY4UXNddddrigQdw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N2ytm2/R24h8QzXU2EIuzZ3b/Cqa2RzxuthdwIAwwRE=;
- b=VYDJGg82qdF6o9Rj8dnojyVOEsk5jKD5okBF5nTe6Bsv8bEXFQlk31CTgRCIdbC/2mQuLwNtM9FeqhU1PUZIlMhHGGQ9s0rOhKfDyFEZDJeKHa/p/idfhcd8s6hG16K76gX/r6HGl/rnwML5pRVj1Mb9L+5JgUctSlFkMHgnytcIT/GPvBllFCwoPHCcCKTNUJukJbh2M7YXswUoLIDgsRmSDyn098pqrvsy/evtM4xMsBpH7Psw7i9owS8ht2cySGpfpiUzrvZTVdJhL/wZ+hKWvJBoFG+b9lnPvxuOv3AeUMyoke8gHYp/6oBUpb/lf2T14n+lGX4tK6DlURwo+g==
+ bh=v9Di4Awxz+hOLGrGPLxATlqBI3E5rI0CWqOrYQ8AwW0=;
+ b=LMJrOslM2smILbRHQuVYUpZHgoA9eFmNQX7F7KJVzgJ8u0eHDdRdxCQNVDIaAn8N4HXPlnDE0tT3FoowGgt8fnNfFPvWpNKp9trn2+IJgAH+lYdmGj696Js2vkz4828coF5QF2YfuI53HCX31Oo/XwB0MvEJXNhTAfdHjON9t3Mt+14+W/hDBNcrC8I0Cdd4ZsuHM0nOlEsQEY+kg7a32hfKhb6jOQQJkcwgtpzWhQ1xR97LO0riqR6D2W+Yaw5jB9YvFQlkYm6YRHc2nxEmGaZEcBZE7UjQi0wLUq5fByKHtcldQBG31xY0qwidHNK7hOVQ/tJEhbiaSLejPuxoFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -42,16 +42,16 @@ Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
  by CH3PR11MB7763.namprd11.prod.outlook.com (2603:10b6:610:145::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9745.10; Mon, 23 Mar
- 2026 11:42:06 +0000
+ 2026 11:42:08 +0000
 Received: from CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Mon, 23 Mar 2026
- 11:42:04 +0000
+ 11:42:08 +0000
 From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH 01/15] libxfce4ui: upgrade 4.20.2 -> 4.21.7
-Date: Mon, 23 Mar 2026 19:41:38 +0800
-Message-Id: <20260323114152.4178269-2-peng.zhang1.cn@windriver.com>
+Subject: [meta-xfce][PATCH 04/15] xfce4-power-manager: upgrade 4.20.0 -> 4.21.1
+Date: Mon, 23 Mar 2026 19:41:41 +0800
+Message-Id: <20260323114152.4178269-5-peng.zhang1.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
 References: <20260323114152.4178269-1-peng.zhang1.cn@windriver.com>
@@ -63,77 +63,77 @@ X-ClientProxiedBy: TYCP286CA0108.JPNP286.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|CH3PR11MB7763:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4f8f8a15-5dfa-4bed-e648-08de88d1349b
+X-MS-Office365-Filtering-Correlation-Id: 61e506b8-1729-4766-9442-08de88d136d9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|366016|52116014|1800799024|376014|38350700014|22082099003|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	c1rrdXV9cbdZxEovbSS06tbcktYSMqulKP0m+DL6y6VQB1YdGT/QInaMdmMkIU2KKH1mKpc2HLG/xzAczX+pPtctfx6UWphllb1Wp7NC5Bw+fSkd5E+pFWRhIWACCuosPeOI3O2vlgvaeyjUlL0jZiM8Uo9gyfDb0hqaL+2ARtIG/hfz5k+aNCFmoAJgbi5R5ROlGdHMNtiHTsaE/ypQ74PZHALsiaYrSGsNgGO9fOLzO/7B2lnzwUX0ha2NEM8KLvzNJBMPh7Xzzey4thMs2137c1xwwJOcxs2uJH1MaXcb5+BGpKCGwVb4fWtMPPGlcZ5Zt/SSbKFfkg0i+N2e6uLvRNBfc84x4VojqpYTG4N1gf2WwsJeLabDAHQJyyvxtrMbb9Qp0Qo9tXAGjpHl9HDWRQTfM+/Ums8O6xn3vs58NS3J1UPWdMy5yytvn2qwxSjVvMZ6puumNdUQeRjGnEOBr1YopyBYZ1pFUdoYfbto5/ESCX2y4PO5ro2/+hqYeqBHY2+xUNBcB5IlFjk0K0Ca8KGgWBNM0BlfLCJI4l0miDD++ue+43GSFsv+FC3EN7YPma+ZQ3ElY8V8mrp0z75Iybw/ne4awNztnkimsdzO4qbU5f8p0ks9E5IlF69qzX7KvGSkaXH4l2Z6ZuDOxCpXBwTDzQo6ZHqFMuEgm2ibC19cLflMjM6Ypntas1ak3JE351wJeZJ4EfJo7PY2beMxJT8DAf2jmuQ5piIcnb7mvro66shQRKzJOHZIv3OY
+	6gQRpghjiVz+lwEjo5aG92+CXfdNOxBdNpN8GhqH5GRV8sfmmSI6SO9IOhDAYHd8isc+JzyDcmk19IH4LPrss9ZASpIotRn1KeJXQ/ncb1Sm9P/TNyAOuteDqNx0RpG027pZT3baLlPfwRwzGsZl8YG2SD6yUAZszbOMgW5BdxyrpXYumeCHY24Iqie5tE4O750Ik4sRNLATM70dyBsJuZccjtE7uW7I83p0fd66UQEW+vxLg4PGKrl25OcPgpzUk8yweGbcyW5X7UtVIxSyrWZT3llGN7zTRE+mO+Z9/DUKfR6ZU+8TtJjt9ycL5xhCyaQ7DQiIOHYy117rb1CIJ9KS5lds8T97EiYeDAWWgI8nW/+09IovKHz7nAZiZf+odEHS6CfQgyX5tZY9PO577rrqfTxz7UHrWB7t7oEz91aeqfTYNwbCj5j18Sg5jGt1xsoVZ+83E6jBarWgi7RV2CIIuxwhvAQhckijsJoR/E7wEUEhNfv2jYd976KfLclwNy7avXQzTPafdPNrRCkqycRi4N/rEuNGts2o64/dCOjguBe7qEQCzJrgJJPsVWs/40SzkFsc0TimP2UVG8yUGm35ZkNKUH6sXD3ymM3bDIKM8PyRA7CssfPd3fdC0Gt/awjxIZEJnDHp/mxv6Z22PnWGz8UMQXatTSfUQMe+zw/N7cuG1M2Aj54J7i+FJNwctZvuUz+6fA4L5Le4uVXOVmoB6FobeiKEKhMyMXUmARkCTSss0Xr1jkSgtBKaI+oS
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(1800799024)(376014)(38350700014)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?zy5AlfKO7DCrWfPxQzRV0i/fI/PHKHNDPPdNftpUv5nZecFgLyHoBvXyBNyO?=
- =?us-ascii?Q?paz0Z79DBk2jtwuDJpQHdP/yH0VFOwYYsKACfeOutwlTveDXpbWRu+mpZAP9?=
- =?us-ascii?Q?tekle6enGkjqlMpDuHfB84djtdJ8e8HBlQ/nf31BjIoAxDs13DPHE+3wPzmx?=
- =?us-ascii?Q?/gx3RX28/lZUAuFEhJzsIZ+S6bs9cpxCRshdhoGzSyejKXkKpqk3KIet9Jmv?=
- =?us-ascii?Q?Rn2mjEdSBPJfxosYoIqHROnQXTGhCaj78ReAxUspZUAd3dM/CLmYLlFJ4ULm?=
- =?us-ascii?Q?SO6+dDGsxORXfDSTELLMH6oXoOygcBpcuDvVJbvd/M8lCYadiaOxSqCnLyqV?=
- =?us-ascii?Q?fXFlSYjbGq4y32m+cIWO2h6lXm1f+ctYfPWfObkVVdK+D6X6/Jf+I9UhHDlK?=
- =?us-ascii?Q?FGYpOSLfg9PkFDfapRj1kWZ0+C2r4/Ioi5uKMaT9lTCfUBVeWsyq3XIpu9TH?=
- =?us-ascii?Q?Kn2VnJ+lye4yVaCRmC2meZtIrO624uOnyoo3V4+I+2/y5erpw+WUWCmq280a?=
- =?us-ascii?Q?/gO7acb6k+8Y7mreNp4U54EKuKuChgwumcqnXlsO3nERVNqe8Opw+/R+g1Vr?=
- =?us-ascii?Q?YmMejUmQZpVAxaq2bvlXE2QJfr2Of8lVgD7ce2Kv6nEFeB1Iy8L9l8gcROS5?=
- =?us-ascii?Q?6G5YUAai4oKHt/N2PsblXr9XJqIrGgYPeJRB0j5cZMusZm6NbpZK9ms9qeXt?=
- =?us-ascii?Q?EUzDxZZBrbQ98c10BTPnxjjjakxmoLZz/WjtW288cqtERe2jkANcM8wGPygc?=
- =?us-ascii?Q?0E6meJsBRJ0GYIaUVcBo+sp+tUylRVTgWS3N7fPGgxgWA1kOWVotGHFzqd93?=
- =?us-ascii?Q?pmXUnhYIC2qsMKIKhBdkbHeLi7zw32C7k4JDn/GR2oNJK02J2J/vOE9tBRBn?=
- =?us-ascii?Q?8dnsAbjDfLEnYu1hMADDBgqb2rHv4ObY8I9mjuhJ/6uivarzZMz/iuUc5LnV?=
- =?us-ascii?Q?KbUY34OWCdDXwyNGU+ajaSdKaA9i5Rn4oqfA/U6TfeF0S6WQzYhnaeoUZ3oR?=
- =?us-ascii?Q?ERd6eRBOwSsPmtRn2Ikm5FZ4RJtQwrueTfBtaOXxoSdJDDYZMVrneDA0M04c?=
- =?us-ascii?Q?T8k2fESkDakntZjyLSMn3nJcBlmcK3DoGuwVr/gn3k56TSr6BzCoI2U2cmDC?=
- =?us-ascii?Q?qmIZPJ3oYK0wTm/AXgU5pIsiFy+oBFXyri33K/aN3ubHSvLAYJJhrWU0VWu8?=
- =?us-ascii?Q?s/3ICCXNnQXXbvjLGMfeP7fJDVtH+Nggz1thiNY6YAJjtAXOoe8Sa6UUEIUM?=
- =?us-ascii?Q?nKKUy7QAum+SBGOOcnRrJGZBrNyfnj7+0WVYGXz4HWK/S/ONUcjWwmXea3E/?=
- =?us-ascii?Q?J/+HAjpixncnKlaypvjCh1svhQJfwL4zdwipCWpjH0lUgJ1fNvwfy6SUQuq6?=
- =?us-ascii?Q?4VuAAsodvNWLtrafYeUtbjJWph6RlhXPKT3nyka4PCJ7L4KrkKt+UGOvTLF5?=
- =?us-ascii?Q?6XXRfvxwnzmIF0qxw+v5n5T0bXcPgQtTRW6ZXPkorizoj8gdWvFp3I+RURYv?=
- =?us-ascii?Q?77hTRnsXSIQhwo//zNPjufzU965tkC9HW2RTcOO108LlH8FjPeQnqh/jZlKw?=
- =?us-ascii?Q?LOPhfQZ5UeY5Lw+0+ZF03OGU7miRuDwZDSKU2saShsUN+7n/+kI4kWOSUqXU?=
- =?us-ascii?Q?zeHIb0lczCrIbype8msQhkfpM1YQCsZ3XoO4qpeRMVzuek2EQ4eke4S6IbpX?=
- =?us-ascii?Q?AZAMRH4/YOc6GjB7fZmJrxGEunx+07cWFDdprH4fV7hCINgGMCCtLhbsD4ah?=
- =?us-ascii?Q?PtbcyFW5OXpYJmYcK6wjR4u7LrXRQNs=3D?=
+	=?us-ascii?Q?rUyqjO5Y8mDpSQ9mzqc36kUxjX2hVM3jp+UTLxVrcxXMgCIYKf1D8WbozO+u?=
+ =?us-ascii?Q?yXWGv2Iznvs4rQOtIOq6H0tk2YuxT8i7691Md759BojHgzWO7HTwXfgL2B1R?=
+ =?us-ascii?Q?DXflm3B+c0RFiouOS2WxzHNXmnELEIYoBcJhx6U1eca47icLO8LEs0cTFwQH?=
+ =?us-ascii?Q?b/zKN4GZsx9BP4FXYhi2gDbrlRc5XCUmjAQaSszw916+GGC0ix2E2VCrgdYy?=
+ =?us-ascii?Q?wBiXsP5+LMjcSxq4QfhxBE9kR+NS2Xu3Zc59UDI+05q8Qo2ZkpEdz1cNY7SI?=
+ =?us-ascii?Q?BbuL2iwWW7S41JXdh6jXhZfw2I+R8A0kIAFs/GthzOLKh9niiAYeK4ltx6lF?=
+ =?us-ascii?Q?SHRK4eSFvBcMPY/SbAEw3JJkoesckKGtUdZnvGTKFqAYl+CuqyxkyDBHaYLd?=
+ =?us-ascii?Q?+aA6cfwbhRfmA0ZvODi63WYjBCIBJqfF8Rn569IuTUYeSwfD5InwGA9CsFwd?=
+ =?us-ascii?Q?2BTYiy8N1zSs3i98rUuJ8I3OjqqjxBgE4yuorfl6x1EU73mR9gmd3yPhwp+Y?=
+ =?us-ascii?Q?LPISyJ10EE/m59KZoOkDZ20ue+x7ORObA1I9YAig+P+gKAdClrgBZC5+TBw+?=
+ =?us-ascii?Q?C/fdi9Yo/nBQusfRuL6rgKcShGMRppVLnOgeN8IIEVCtMCfoF++wRn8iiGln?=
+ =?us-ascii?Q?wAy5izOQ9svdqwMVN+pvfbmmGiP/6yKS7jl4ev/APomfbvoEXWongThgj0cw?=
+ =?us-ascii?Q?1Py9pfJkmjqAsYbiwmDD5P5UN5f8RBl31/2ATWV+A4oJYrcNgZYo8TPH21Ms?=
+ =?us-ascii?Q?+H6LPNhqWVrTlB+amBsZtZ05TsBa+UqIAgNA9c1HjZNjHGMuKzRSok7aioZF?=
+ =?us-ascii?Q?zZFi0wD2hia6B3CBcAQ0tMqQzfqcz9YC3BSTTiykgN7KXYWd0QUfM1Bn4y4u?=
+ =?us-ascii?Q?JeArIreaUCFbg98x+X3+8UAwkdl4+cd/WEjYfbV8+04PRg3AsYcExu8ZNXE7?=
+ =?us-ascii?Q?aM5qsatA9fz+BJ/NqmNTOZX3O6zTyc7GZ6JFpPSSdpOzSiaSwc8gCAnJKMKk?=
+ =?us-ascii?Q?aJWmO4Alv3avbWI4Yw+PtepMVg+lYGqPpZ5Y4T37xP8XrmFSXcoDIpSWvtPr?=
+ =?us-ascii?Q?ifV40/6KJ4bUet6QCtwamC2XesGnY14bQ1duo8kLHjz6DKJEzIz+CtB/BTO4?=
+ =?us-ascii?Q?4oskCicbcBsxYj8ytZK6dYEE1jvWAOoZO6yPdPQyAVv4n6Vk3wtODf1hXG1a?=
+ =?us-ascii?Q?daL12GOz3Alp14VtH7t8KIuR53ux4EGWmuwir4icd8IAgdsJ4cScNEagyXsm?=
+ =?us-ascii?Q?fCyhRB7FgExC/rfxG6hLZKTlSuW1CUrqg0X9TUeGhI6LgEYVYws7i03Myhr/?=
+ =?us-ascii?Q?RXHrI/EYEvGFklWCIsMdxgTYvn0n6WbnHdgFPOWGnzOYKbSqsoBzeWmbiORv?=
+ =?us-ascii?Q?sujOb0N0qzUSft+dVzbSCTrNxqqX14I8mW4J2ASOobG7LaNvHGfRTVqOVwO2?=
+ =?us-ascii?Q?FrjItqK9LmpeD42o/Uj4xajSKCRwXasyrA3lm6X9/tev/HYxy8wl5HDDW/jV?=
+ =?us-ascii?Q?/hTWW8qRjiNppbcjkEEwHjtCsDD0rSFLj7PXijhHopOyG99NZXCeIFCvKH2g?=
+ =?us-ascii?Q?RcCF15d5Li9UpFfwsMi4oL6UH/V9KNJfa0UpmaszG5Lsk2JXIV+OvknPSjrF?=
+ =?us-ascii?Q?Hf1+sFJIAxi2IE5+2VvV5TdXMBQKgWD3CwzI2o2j9fJjdEdQ16SKW9zTUpJZ?=
+ =?us-ascii?Q?y+UcwDDcKiWQSsipewR3NlaeWuqrIkresMpyO3QUCGeYs4GHlmRF66r3kARQ?=
+ =?us-ascii?Q?pHQ/adwhHZkI3Zc+Hs+z7G7plmLPiEk=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	CXksiD0dZNnrL4Xd4gtawRQznOtXRkRIuG6CGLe2s1Cc4eH1moS2vjirv4HvbYwTp1ssQtfWJTzM2HsSgqFIHVDnR12biIimEkxYBQL4zZJhKK2M9UJYYHf0+iExUQXvazLwt1pJaj4YOg+Xdb4Ut3AIYznOxw14Ln84+0AzOxmkYjvuObRmMjzCM7TNAARazfkbLpVyc2h4HPijgSdcL7HXjP3CZ9/iuLu6rCJvoFgTGFW9zgSJtpMM46m1tA/b/gjwtXC5aIVtB4QFcmL1dAYQsKZ2aJ0yl4FgM4M5bBdjxntA7obm7arjrQ+y+gtOffWBiPNJ5BSnn/t6XckGlw==
+	IjIVlp+860hkhpi94XfzINU2PX46Ro41KnRppOJ1gu887FkoY0IFl7yHZRB1Drj4Z7/E8tF/RIaEbMPrLAN59ka8IHRyfreyvWQkcUG9Qh4yWsnv7PHYzY3oY1xXrAMlliaw/wOZvPZhqPSdTy/u0iI4ewvCWT+4BZyYw8bSVhDQQ3YzRbvDXJ4hG+UsNl3UFuwzZ+UwhlkGolKf/4NtJRF8VPxmiV9joiVQ8+4vRecU7Pqb+DLfZtEQ5JxVTBRTBtSlZq+8DVk+V/2N6Ye5zWWwdPUGQ7kurJu4OyG0dqKmsv4HtRR28gt3HBC11ogflBUcUbGk7sF3p1I7TmAqbA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f8f8a15-5dfa-4bed-e648-08de88d1349b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 61e506b8-1729-4766-9442-08de88d136d9
 X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 11:42:04.7331
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2026 11:42:08.4706
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6WuP3xGXdBp79HsUBcumnp4q7YBoorWmKdBWfvr450Wj2nCkeCc9wJwcZhlVyw64tRkBELAy4kLUWSKV3VcFs93CNaeSk6S/tiVKFeEUbSo=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2XcrxBBKu7tFx24DkevGioMd88iYWjmXivB9HTGTgmt7aWP9cUyJX48NuMRLx4s7fc4Ma2jCuZOyRZ4jy+WKUDGprZIn19MmTOGr3SufRU0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR11MB7763
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDA5MSBTYWx0ZWRfX09TJWAsTmkkb
- 3S65XtWGL2wHBe4hZEtbZ1KhH1lQ1mojJ2RfmYlUad7KIsIqSS7YzsjmwJUR1n1lJ9RveQHC8FW
- VLAHbjIqDXDbKDclZSf8F49BtSJN82vgZXeBO2n2JqTU0IZH4XcqMS9T2MwIamFeKM9KSg1bBtN
- C2o9xcqFselj3HJLovSPu2wbg/wwGWxbJt4IjY8ZxlfRsYbXpJvEm/zd+EYNZ44IH+pOnB4yERA
- YV/CDXpcK69pBzZkuAux52jFTYNYcqGhPBu7+uLC8XhYzHiGKd80qx0ltca4rlSFbxP4R+lDzW7
- sy7yrm8tqucwLQ/Y2hDKixFWj3yJvW4GQ72U8V/YqjMlCIJtwj8ukLxEWG8Ga/6w/tIOn1g9h5+
- qcfVoRG6nTEG4fQobVgJU2pgPjGHQAYJ8X9vhiI4v2W7ikRUAMLETLFMXkF6GSYCzr5xPBY0fhD
- vWUnhurhSMb0KPaGiNQ==
-X-Proofpoint-ORIG-GUID: Ln7GExjNRMRsdEfcgOZpj9qi-RoX3fwt
-X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c12712 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzIzMDA5MSBTYWx0ZWRfX8ryyqfpsYGrN
+ YsIXE3liFuNYJM2RVpKt3RzHIJtj6/9NtbZvoThwbIVdnZV9VeIODfb2TI1tp5VQyG10HDuzJem
+ 9/Hnv3y+2G2jychgKzPlwwjqmosjkueOO8G3jrnFXQaFIWuXLhKGf1G83JS5W3IZtjwrao/7bT5
+ I7Cm/K03rs96WXfB+zVkwXewdnUkCxNV4st0c2lqwb/xKJBgEfNSleseIlh61RhYhPzn/ClXFgc
+ IqwRXQS3fsNvHSrL2U9Im0tCr+mrhgos7He//xdCqIe8dphE9VQxY8tGWpLCTjKUDmuEIFSac5P
+ AyYBCvA75BTtv7506G5O5NcD90kDhYeHGctYXxKyT+VBZ8+y6hjyB33BL8WsrnYhx6t1FO0Jgni
+ Pa8OPsYCFN8VC6FIb0I1vLnkzfoHchHXdGNgMXo9y85UJub+vyYPKA1cYbiRNqklyqDWH3cUJ/Q
+ jx/Dnf7j9o57zxBbPig==
+X-Proofpoint-ORIG-GUID: plRT7uzJmcOZmQ3kBJGfoWhuVdOe7IL9
+X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c12713 cx=c_pps
  a=ayBBURk7jZ4GzqZFlR2IhQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=O24Aq5uEAAAA:8
- a=t7CeM3EgAAAA:8 a=Sn6jEhcweQRtqmlGX_EA:9 a=SYBONWESK5muIIdMMRMZ:22
+ a=t7CeM3EgAAAA:8 a=zRr0LGfZ5qhMSheOc08A:9 a=SYBONWESK5muIIdMMRMZ:22
  a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: Ln7GExjNRMRsdEfcgOZpj9qi-RoX3fwt
+X-Proofpoint-GUID: plRT7uzJmcOZmQ3kBJGfoWhuVdOe7IL9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-23_03,2026-03-20_02,2025-10-01_01
@@ -146,120 +146,95 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2026 11:42:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125506
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125504
 
 From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
 ChangeLog:
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.7
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.6
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.5
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.4
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.3
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.2
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.1
-https://gitlab.xfce.org/xfce/libxfce4ui/-/tags/libxfce4ui-4.21.0
+https://gitlab.xfce.org/xfce/xfce4-power-manager/-/blob/xfce4-power-manager-4.21.1/NEWS?ref_type=tags
 
-Backport upstream patch to fix full buildpath in headers issues.
+Add patch to fix absolute buildpath in generated enum files.
 
 Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- ...splay-full-path-in-generated-headers.patch | 36 +++++++++++++++++++
- ...xfce4ui_4.20.2.bb => libxfce4ui_4.21.7.bb} | 25 +++++++------
- 2 files changed, 48 insertions(+), 13 deletions(-)
- create mode 100644 meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-build-Do-not-display-full-path-in-generated-headers.patch
- rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.20.2.bb => libxfce4ui_4.21.7.bb} (58%)
+ ...splay-full-path-in-generated-headers.patch | 34 +++++++++++++++++++
+ ....20.0.bb => xfce4-power-manager_4.21.1.bb} | 13 ++++---
+ 2 files changed, 40 insertions(+), 7 deletions(-)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-build-Do-not-display-full-path-in-generated-headers.patch
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_4.20.0.bb => xfce4-power-manager_4.21.1.bb} (77%)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-build-Do-not-display-full-path-in-generated-headers.patch b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-build-Do-not-display-full-path-in-generated-headers.patch
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-build-Do-not-display-full-path-in-generated-headers.patch b/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-build-Do-not-display-full-path-in-generated-headers.patch
 new file mode 100644
-index 0000000000..d04f62193a
+index 0000000000..fa401fd977
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui/0001-build-Do-not-display-full-path-in-generated-headers.patch
-@@ -0,0 +1,36 @@
-+From b8bf147d621739a1b8a4d1cc8398d1c90288e9d6 Mon Sep 17 00:00:00 2001
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-build-Do-not-display-full-path-in-generated-headers.patch
+@@ -0,0 +1,34 @@
++From 3f69abae74f4c0ad41c8fa2886148db834ddb9f1 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Ga=C3=ABl=20Bonithon?= <gael@xfce.org>
-+Date: Mon, 16 Mar 2026 16:21:51 +0100
++Date: Mon, 16 Mar 2026 16:46:52 +0100
 +Subject: [PATCH] build: Do not display full path in generated headers
 +
-+Fixes: #144
-+
-+Upstream-Status: Backport [https://gitlab.xfce.org/xfce/libxfce4ui/-/commit/b8bf147d621739a1b8a4d1cc8398d1c90288e9d6]
++Upstream-Status: Backport [https://gitlab.xfce.org/xfce/xfce4-power-manager/-/commit/3f69abae74f4c0ad41c8fa2886148db834ddb9f1]
 +---
-+ libxfce4ui/meson.build | 4 ++--
++ common/meson.build | 4 ++--
 + 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/libxfce4ui/meson.build b/libxfce4ui/meson.build
-+index 8cac84eb..ca5ac927 100644
-+--- a/libxfce4ui/meson.build
-++++ b/libxfce4ui/meson.build
-+@@ -102,7 +102,7 @@ libxfce4ui_enums += gnome.mkenums(
-+   install_dir: libxfce4ui_install_dir,
-+   sources: libxfce4ui_enum_headers,
-+   fhead: '#if !defined(_LIBXFCE4UI_INSIDE_LIBXFCE4UI_H) && !defined(LIBXFCE4UI_COMPILATION)\n#error "Only <libxfce4ui/libxfce4ui.h> can be included directly, this file is not part of the public API."\n#endif\n\n#ifndef __LIBXFCE4UI_ENUM_TYPES_H__\n#define __LIBXFCE4UI_ENUM_TYPES_H__\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n\n',
-+-  fprod: '/* enumerations from "@filename@" */\n\n',
-++  fprod: '/* enumerations from "@basename@" */\n\n',
-+   vhead: 'GType @enum_name@_get_type(void) G_GNUC_CONST;\n#define XFCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n\n',
-+   ftail: 'G_END_DECLS\n\n#endif /* !__LIBXFCE4UI_ENUM_TYPES_H__ */',
-+ )
-+@@ -111,7 +111,7 @@ libxfce4ui_enums += gnome.mkenums(
++diff --git a/common/meson.build b/common/meson.build
++index 7f71309f..cdae226f 100644
++--- a/common/meson.build
+++++ b/common/meson.build
++@@ -37,7 +37,7 @@ common_sources += gnome.mkenums(
 +   install_header: false,
-+   sources: libxfce4ui_enum_headers,
-+   fhead: '#include "libxfce4ui-enums.h"\n#include "xfce-gtk-extensions.h"\n#include "libxfce4ui-enum-types.h"\n#include "libxfce4ui-visibility.h"\n\n',
-+-  fprod: '/* enumerations from "@filename@" */\n\n',
-++  fprod: '/* enumerations from "@basename@" */\n\n',
-+   vhead: 'GType\n@enum_name@_get_type(void)\n{\n    static GType type = 0;\n\n    if(!type) {\n        static const G@Type@Value values[] = {',
-+   vprod: '            { @VALUENAME@, "@VALUENAME@", "@valuenick@" },',
-+   vtail: '            { 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static("@EnumName@", values);\n    }\n\n    return type;\n}\n\n',
++   sources: 'xfpm-enum-glib.h',
++   fhead: '#ifndef _XFPM_ENUM_TYPES_H\n#define _XFPM_ENUM_TYPES_H\n#include <glib-object.h>\nG_BEGIN_DECLS\n',
++-  fprod: '/* enumerations from "@filename@" */\n',
+++  fprod: '/* enumerations from "@basename@" */\n',
++   vhead: 'GType @enum_name@_get_type (void);\n#define XFPM_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n',
++   ftail: 'G_END_DECLS\n\n#endif /* _XFPM_ENUM_TYPES_H__ */',
++ )
++@@ -46,7 +46,7 @@ common_sources += gnome.mkenums(
++   install_header: false,
++   sources: 'xfpm-enum-glib.h',
++   fhead: '#include "xfpm-enum-types.h"\n#include "xfpm-enum-glib.h"\n\n',
++-  fprod: '\n/* enumerations from "@filename@" */\n',
+++  fprod: '\n/* enumerations from "@basename@" */\n',
++   vhead: 'GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {',
++   vprod: '\t{ @VALUENAME@, "@VALUENAME@", "@valuenick@" },',
++   vtail: '\t{ 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static ("@EnumName@", values);\n  }\n\treturn type;\n}\n',
 +--
 +2.34.1
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.2.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.21.7.bb
-similarity index 58%
-rename from meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.2.bb
-rename to meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.21.7.bb
-index d485abc19a..a407b6dd99 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.20.2.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.21.7.bb
-@@ -5,28 +5,27 @@ LICENSE = "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4cf66a4984120007c9881cc871cf49db"
- DEPENDS = "intltool-native perl-native gtk+3 libxfce4util xfce4-dev-tools xfconf"
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.21.1.bb
+similarity index 77%
+rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
+rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.21.1.bb
+index c6eed849be..65b8f84e27 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.20.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_4.21.1.bb
+@@ -11,18 +11,17 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
+ DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
+ 
+-SRC_URI[sha256sum] = "971391cef63352833bdd92df28957392e17e1f2b3d486c0f57294fd204d6ed29"
 +XFCE_COMPRESS_TYPE = "xz"
 +XFCEBASEBUILDCLASS = "meson"
-+
- inherit xfce gtk-doc gobject-introspection features_check
  
-+# libxfce4ui uses 'gtk-doc' instead of 'docs' for meson option
-+GTKDOC_MESON_OPTION = "gtk-doc"
-+
- # xfce4 depends on libwnck3. gtk+3 and libepoxy need to be built with x11 PACKAGECONFIG.
- # cairo would at least needed to be built with xlib.
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- 
- # TODO: Check if 0001-... can go
--SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
--SRC_URI[sha256sum] = "5d3d67b1244a10cee0e89b045766c05fe1035f7938f0410ac6a3d8222b5df907"
-+SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
-+            file://0001-build-Do-not-display-full-path-in-generated-headers.patch \
-+            "
-+SRC_URI[sha256sum] = "a72a7af39cf183819bcfb61b1747d425261e966ccb172b2fc28f1494f524bd17"
- 
--EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
--EXTRA_OECONF += "--disable-vala"
-+EXTRA_OEMESON = "-Dvala=disabled -Dvendor-info=${DISTRO}"
- 
- PACKAGECONFIG ??= " \
-        ${@bb.utils.contains('DISTRO_FEATURES', 'opengl','x11', "", d)} \
- "
--PACKAGECONFIG[gladeui2] = "--enable-gladeui2,--disable-gladeui2,glade"
--PACKAGECONFIG[x11] = "--enable-startup-notification,--disable-startup-notification,libepoxy libice libsm startup-notification"
--
--
--PACKAGES += "${PN}-glade"
--FILES:${PN}-glade = " \
--    ${libdir}/glade \
--    ${datadir}/glade \
+-EXTRA_OECONF = " \
+-    GDBUS_CODEGEN=${STAGING_BINDIR_NATIVE}/gdbus-codegen \
+-    --enable-panel-plugins \
 -"
-+PACKAGECONFIG[x11] = "-Dstartup-notification=enabled,-Dstartup-notification=disabled,libepoxy libice libsm startup-notification"
++SRC_URI += "file://0001-build-Do-not-display-full-path-in-generated-headers.patch"
++SRC_URI[sha256sum] = "bb89be7b1be431b29e765e2c632e98fb20a688e495e4ef18495bd70c1524767a"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)} \
+                    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+                    "
+-PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
+-PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland, wayland-native"
++PACKAGECONFIG[polkit] = "-Dpolkit=enabled,-Dpolkit=disabled,polkit"
++PACKAGECONFIG[wayland] = "-Dwayland=enabled,-Dwayland=disabled,wayland-native"
+ 
+ PACKAGES += "xfce4-powermanager-plugin"
+ 
 -- 
 2.34.1
 
