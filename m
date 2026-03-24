@@ -1,91 +1,133 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80BAFFEC0EB
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 17:33:45 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3177.1774373618537383522
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CB56DFEC0F3
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 18:41:15 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4549.1774377666475020050
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 10:33:38 -0700
+ Tue, 24 Mar 2026 11:41:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Im70iwoC;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-439c56e822eso1448978f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 10:33:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774373617; x=1774978417; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=99rQVKZBbp8ElS+OQC4SDWDMjMNGtTsvk3YtTAZ1Y7c=;
-        b=Im70iwoCEogyLNwVEksF9AxZDLaplo9vdd7ohcvsBpqvb1NOFhwCVUhsNm4mPowRbZ
-         ygGqISqQSTb2RiANanrOaDa0E98mtoxBvYBtrC2Y2wGo3NvRjamG9hSKt4NICGFBS/9W
-         u28ZfLtNexDiUhXSr28x/z3+78V1AcmC9txlAeGAE1INmmuByn/rdy4Z/5GkKm9lrxqx
-         t/3/tKLDKB8OhGHQGYA+PIuOPPa8x6eycVNpmMKHwPQQHcayYoeuD5oP69JWsF0vCouY
-         LTlnMWTiDjbeEEF0Jwusl5zRqfw+Oouu5j0CMsnfWKNzGhJYtCn6apiJWmdarFeFY1+n
-         ZHcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774373617; x=1774978417;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=99rQVKZBbp8ElS+OQC4SDWDMjMNGtTsvk3YtTAZ1Y7c=;
-        b=aqyDT9xkwru3xu13HrAC0MGvajlWUzegJZfuNFfgd86sEH8Fmc/AcuQ6SJjXdThPvg
-         O3Jg8dEpFS5RAJGoOeh5lZwRvgfRvjAUbqv3oNjiJLRJUdfRrPTFWiBGZTxWyVi5VIY9
-         iwYwY1K5N2Obn+5HY6LF9lEoITIH4z0jEaJ7umLuB3DGA3k47M1M1T9OmUYZQ8atfEcc
-         FqWXf10G4rJXoSAHyftMtcnhov4+Vux2w/ui2a2ZQeUzN6WjxKJGmFS1H5/ZEeZHOaxW
-         K9aOAXx+7EQREMxeWKbHJFlxLJIbXlL03rOhzAwxnPMdL224A4szDmP66ZlBRtsMGCu8
-         rFrg==
-X-Forwarded-Encrypted: i=1; AJvYcCUPz6IFAH5u09VEq444rkLfCtyvd4OmcYl8MeLyYa7velT2tvG3JNNc79bbyVRmUGKcixlrNzXT81QQNiQ87om5jyU=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yyk+I1icwGXvPnYuH0NVDXAcByz4bKMrtel8qa/+FgDvienjqtm
-	BjnReIG4sLCFUuAJnvJLWhEPIWUracXPRkqOOHHyYik7vTmt+kagu3qX
-X-Gm-Gg: ATEYQzzGf5TRI3FkV7Cj2bcw4dM22NuVipiKVCkZwa6A60eTXLGmfhAoDQSziqMlImY
-	RQFvjzcoPjJYbOfPSdRI4P+0WeBUZxcI2ag7UVQvYtqncz6VF1PPqgB6oSqmeGRFQxMXsXEpvqF
-	LpS2qmse0gUvpot+Xe7upGONd8YAXAdEQb0l435du8JMIfqBQ3cHCHWAsm/feROOjzCSv2WwxyX
-	pON5uKrFFeTqUDNgrCjGsSbGpEj97jsKLQI2cyMaZalIMSEb/VfhrPdydQIzn5Z7Vm79vVvp9Ag
-	UgjxUPRaS0P7HZa50qsXdifFV/wp3oIw4OzaCLwX/dyps0yNqPgMhtgSkymy9BpYd3PJ9oCucR9
-	R5iDaOM3kncTIFPOPRFVqw+2DtOdmA/PfyJdfjkkVBzHETKyf3MSX2WwLm5EJIKNyjSaNicgEKp
-	2qZOFkqzCM+1TYhUDjRmcxaO3kaoxCXYQ=
-X-Received: by 2002:a05:6000:2084:b0:43b:3f2d:7d3c with SMTP id ffacd0b85a97d-43b88a21758mr505371f8f.2.1774373616675;
-        Tue, 24 Mar 2026 10:33:36 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b646b0d3dsm37620591f8f.16.2026.03.24.10.33.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Mar 2026 10:33:36 -0700 (PDT)
-Message-ID: <02d2aef4-80d1-4c1a-9196-8dcadac7c233@gmail.com>
-Date: Tue, 24 Mar 2026 18:33:35 +0100
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=C1uXjVdX;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202603241841038f6fbf69910002070f-wq8m1s@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202603241841038f6fbf69910002070f
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 24 Mar 2026 19:41:04 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=IqLd6M+4pS28jNyZ6DyZK4pCtnkSalMwM4W/RWoGJqI=;
+ b=C1uXjVdXm6vIc/dRlVlRDQMx5zfzaJBlf9XyL69F+jAwmhGo1EGIbUY3TLXTLJZHq3pf4S
+ ABqyLXkXT3x36SHkDFG0bIMyp15my6KmsJeM+xLqMTx/iHY8ydtHJ6atpl1rFlXbOIZYYOom
+ ip0y9lgGK3F7SRHOXqg9jLfzQ363eyL6md5eDeksviPlt8Wui4vJrFEll0niP7ZO9tyaYW2N
+ ppQW1/5J6QdlM7HGv6sz6Jnw1THNSSA5vGU2KrNg9eqZOYM/xvtQZpJhR54ep28aNwEzGH1D
+ JcyCtewCwqTlXAoU7POWQJoA6C1LjTK/4ZThCDqLYFiFCQDYLXp/OaaA==;
+From: Peter Marko <peter.marko@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] poco: upgrade 1.5.0 -> 1.5.1
+Date: Tue, 24 Mar 2026 19:40:46 +0100
+Message-Id: <20260324184046.8890-1-peter.marko@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH V1] rocksdb: Add an option to set
- static library
-To: mail2szahir@gmail.com, openembedded-devel@lists.openembedded.org
-References: <20260217125514.34002-1-zahir.basha@kpit.com>
- <1727f87b-6567-485b-93ca-4b63e5b8d831@gmail.com>
- <991492.1771485025027262629@lists.openembedded.org>
- <1b945bbb-041e-4f12-91cc-4dd5850fdf40@gmail.com>
- <564384.1774373144857693534@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <564384.1774373144857693534@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 17:33:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125583
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 18:41:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125584
 
+From: Peter Marko <peter.marko@siemens.com>
 
-On 3/24/26 18:25, aszh07 via lists.openembedded.org wrote:
-> Hi Gyorgy Sarvari,
-> 
-> What is the current status of this one and when will it be integrated?
-> 
+* refresh patches
+* remove workaround for cppunit-dev needed only in 1.15.0
 
-It's in my staging repo:
-https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/kirkstone-nut&id=33822593e5aed47f619a385579a47c366859408a
+Release Notes [1]:
 
-I expect it to be part of next week's PR.
+This is a bugfix and maintenance release that also introduces a few new
+features.
+
+Security Fixes:
+  * CVE-2026-32776 (NULL function pointer dereference)
+  * CVE-2026-32777 (infinite loop)
+  * CVE-2026-32778 (NULL dereference on OOM retry)
+
+[1] https://github.com/pocoproject/poco/releases/tag/poco-1.15.1-release
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+---
+ ...pignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch |  6 +++---
+ .../0002-DataTest-disable-testSQLChannel-test.patch    |  2 +-
+ .../poco/{poco_1.15.0.bb => poco_1.15.1.bb}            | 10 +++-------
+ 3 files changed, 7 insertions(+), 11 deletions(-)
+ rename meta-oe/recipes-support/poco/{poco_1.15.0.bb => poco_1.15.1.bb} (94%)
+
+diff --git a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
+index 8575797e89..f8eadb3ee6 100644
+--- a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
++++ b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
+@@ -17,14 +17,14 @@ Updated comment and content after fixing some tests.
+ Left only MongoDBTest.testArray on ignore list, untested.
+ 
+ ---
+- cppignore.lnx | 9 +++++++++
+- 1 file changed, 9 insertions(+)
++ cppignore.lnx | 1 +
++ 1 file changed, 1 insertion(+)
+ 
+ diff --git a/cppignore.lnx b/cppignore.lnx
+ index b3288d474..9aad48ca5 100644
+ --- a/cppignore.lnx
+ +++ b/cppignore.lnx
+-@@ -30,3 +30,4 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
++@@ -35,3 +35,4 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
+  CppUnit::TestCaller<HTTPSStreamFactoryTest>.testProxy
+  CppUnit::TestCaller<DNSTest>.testHostByAddress
+  CppUnit::TestCaller<DNSTest>.testHostByName
+diff --git a/meta-oe/recipes-support/poco/poco/0002-DataTest-disable-testSQLChannel-test.patch b/meta-oe/recipes-support/poco/poco/0002-DataTest-disable-testSQLChannel-test.patch
+index 7628a8625a..38028c1cf8 100644
+--- a/meta-oe/recipes-support/poco/poco/0002-DataTest-disable-testSQLChannel-test.patch
++++ b/meta-oe/recipes-support/poco/poco/0002-DataTest-disable-testSQLChannel-test.patch
+@@ -15,7 +15,7 @@ diff --git a/Data/testsuite/src/DataTest.cpp b/Data/testsuite/src/DataTest.cpp
+ index e18b87edc..60fd266c3 100644
+ --- a/Data/testsuite/src/DataTest.cpp
+ +++ b/Data/testsuite/src/DataTest.cpp
+-@@ -1648,7 +1648,7 @@ CppUnit::Test* DataTest::suite()
++@@ -1659,7 +1659,7 @@ CppUnit::Test* DataTest::suite()
+  	CppUnit_addTest(pSuite, DataTest, testExternalBindingAndExtraction);
+  	CppUnit_addTest(pSuite, DataTest, testTranscode);
+  	CppUnit_addTest(pSuite, DataTest, testSQLParse);
+diff --git a/meta-oe/recipes-support/poco/poco_1.15.0.bb b/meta-oe/recipes-support/poco/poco_1.15.1.bb
+similarity index 94%
+rename from meta-oe/recipes-support/poco/poco_1.15.0.bb
+rename to meta-oe/recipes-support/poco/poco_1.15.1.bb
+index a22694031a..7dd87606ef 100644
+--- a/meta-oe/recipes-support/poco/poco_1.15.0.bb
++++ b/meta-oe/recipes-support/poco/poco_1.15.1.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=http
+            file://0002-DataTest-disable-testSQLChannel-test.patch \
+            file://run-ptest \
+            "
+-SRCREV = "52c558fbcda0578467e4f59c96961eb629ed3c77"
++SRCREV = "a1aacbba1bda4301db01bb1a2c2ab80677756b90"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
+ 
+@@ -126,12 +126,8 @@ PACKAGES_DYNAMIC = "poco-.*"
+ ALLOW_EMPTY:${PN} = "1"
+ 
+ # cppunit and datatest is only built if tests are enabled
+-# Upstream only ships libCppUnit.so.1 + symlink libCppUnit.so (no patch version),
+-# so split: runtime in poco-cppunit, dev symlink in poco-cppunit-dev
+-PACKAGES =+ "${PN}-cppunit-dev ${PN}-cppunit ${PN}-datatest"
+-FILES:${PN}-cppunit-dev += "${libdir}/libCppUnit.so"
+-RDEPENDS:${PN}-cppunit-dev += "${PN}-cppunit"
+-FILES:${PN}-cppunit += "${libdir}/libCppUnit.so.1"
++PACKAGES =+ "${PN}-cppunit ${PN}-datatest"
++FILES:${PN}-cppunit += "${libdir}/libCppUnit.so*"
+ ALLOW_EMPTY:${PN}-cppunit = "1"
+ FILES:${PN}-datatest += "${libdir}/libPocoDataTest.so*"
+ ALLOW_EMPTY:${PN}-datatest = "1"
 
