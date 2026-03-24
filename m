@@ -1,71 +1,77 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <emailaddress.ashish@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4DD7BF532FA
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 08:57:50 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15325.1774342663110640068
- for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 01:57:43 -0700
-Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=DAIA0I29;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd94.mgt.mul.t-online.de (fwd94.aul.t-online.de [10.223.144.120])
-	by mailout07.t-online.de (Postfix) with SMTP id F0BC7EE51
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 09:57:40 +0100 (CET)
-Received: from fedora.fritz.box ([79.219.226.164]) by fwd94.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1w4xZs-4QxFxp0; Tue, 24 Mar 2026 09:57:32 +0100
-From: Markus Volk <f_l_k@t-online.de>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA905E9A75E
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 10:20:45 +0000 (UTC)
+Subject: Re: [meta-oe][PATCH v2] image_types_sparse: switch ext* conversion to ext2simg_android
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] libsdl3-mixer: add tag=release-${PV}
-Date: Tue, 24 Mar 2026 09:57:17 +0100
-Message-ID: <20260324085717.216130-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.53.0
+From: "Ashish Mishra" <emailaddress.ashish@gmail.com>
+X-Originating-Location: Bengaluru, Karnataka, IN (49.207.56.197)
+X-Originating-Platform: Windows Edge 146
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1774342652-297F86AB-83B80F35/0/0 CLEAN NORMAL
-X-TOI-MSGID: 9a71133f-4705-4242-86a3-56e373a5b625
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1774342660; i=f_l_k@t-online.de;
-	bh=6aaWaDqS+qZtWLLX5QSz0PlIY8OxQlG+EqfPC/1r9jY=;
-	h=From:To:Subject:Date;
-	b=DAIA0I29F/GNeP8FXjK4vJjZ6kZcb+AvX73dC46Hv0gjVf/4PnYgdeqbdcFV6vq/7
-	 FB6rIaW1eVvLk+N8G1J7IVVog7HaYhaC99qvHuFjVBS282bru9/hD3SJY/8ugaWZ1d
-	 dub7K4xLrUWqL/8cw88POrAHCzYPGm9EG1vJ1EiLxqfA/IzUCiRwGA4WZPPJ2XJVhU
-	 evPy2EBXwBypYHRuoMP9Lzm7gWPhyaXnUaNs+1aOls4G2t2UZd4iv2Ae5f1Woq5Kg6
-	 60vU3U2iGaef2f17wcTxI2wvP65QN5S+MkfkCvUjUw6w37V9U9Ryx9OsJUIWZkAzoi
-	 O7Hq9xvcVNfgw==
-Content-Transfer-Encoding: quoted-printable
+Date: Tue, 24 Mar 2026 03:20:40 -0700
+References: <20260323091500.1196198-1-git-patches@bmwtechworks.in> <1c0a5fcf-f673-47ba-a989-adcf5691fdbc@gmail.com> <534956.1774332632649907279@lists.openembedded.org>
+In-Reply-To: <534956.1774332632649907279@lists.openembedded.org>
+Message-ID: <561924.1774347640737667744@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="wjzfEtpoWvtJtmIY6dtz"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 08:57:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125549
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 10:20:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125550
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--wjzfEtpoWvtJtmIY6dtz
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb b/me=
-ta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
-index c5af2f038f..27a02fcc32 100644
---- a/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
-+++ b/meta-oe/recipes-graphics/libsdl3/libsdl3-mixer_3.2.0.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Ddf8f4d887d=
-3997f6e9cf81bb7f43dbf7"
-=20
- DEPENDS =3D "libsdl3"
-=20
--SRC_URI =3D "git://github.com/libsdl-org/SDL_mixer.git;protocol=3Dhttps;=
-branch=3Drelease-3.2.x"
-+SRC_URI =3D "git://github.com/libsdl-org/SDL_mixer.git;protocol=3Dhttps;=
-branch=3Drelease-3.2.x;tag=3Drelease-${PV}"
- SRCREV =3D "cedfeef30e93db35eee6b25759117da63f8e5a4f"
-=20
- inherit cmake pkgconfig
---=20
-2.53.0
+*A:* Dropping dynamic-layer/selinux/android-tools over deafult as per
+https://lists.openembedded.org/g/openembedded-devel/topic/117415388
+- Looked at this (topic/117415388 discussion), the discussion leds to remov=
+al of only config file which was duplicated
+Recipes are not to be dropped
+The duplicated config files were removed by Commit-Id: c276518790 in meta-o=
+penembedded (master)
+*
+B:* Is the proposed patch dependent on "selinux"
+- This implementaion is not directly depending on SELINUX but dpendent on h=
+igher version of Android
+The higher version is available under dynamic-layer/selinux and that why th=
+e changes on dynamic-layer
+*C:* Recheck if selinux dependcy is still there in android-tools
+If no selinux dependcy , move it to default meta-oe layer
+- Working on this and will share the observation
 
+- Will use weak assignment for preferred_version in V3 of patch
+
+Thanks ,
+Ashish
+
+--wjzfEtpoWvtJtmIY6dtz
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><strong>A: </strong>Dropping dynamic-layer/selinux/android-tools over =
+deafult as per&nbsp;<br />&nbsp; &nbsp; &nbsp;https://lists.openembedded.or=
+g/g/openembedded-devel/topic/117415388<br />- Looked at this (topic/1174153=
+88 discussion), the discussion leds to removal of only config file which wa=
+s duplicated&nbsp;<br />&nbsp; &nbsp;Recipes are not to be dropped&nbsp;<br=
+ />&nbsp; &nbsp;The duplicated config files were removed by Commit-Id: c276=
+518790 in meta-openembedded (master)<br /><strong><br />B: </strong>Is the =
+proposed patch dependent on "selinux"</div>
+<div>- This implementaion is not directly depending on SELINUX but dpendent=
+ on higher version of Android<br />&nbsp; &nbsp;The higher version is avail=
+able under dynamic-layer/selinux and that why the changes on dynamic-layer<=
+/div>
+<div>&nbsp;
+<div><strong>C: </strong>Recheck if selinux dependcy is still there in andr=
+oid-tools<br />&nbsp; &nbsp; &nbsp;If no selinux dependcy , move it to defa=
+ult meta-oe layer&nbsp;<br />- Working on this and will share the observati=
+on&nbsp;</div>
+<br />- Will use weak assignment for preferred_version in V3 of patch&nbsp;=
+<br /><br />Thanks ,<br />Ashish&nbsp;<br /><br /></div>
+<div>&nbsp;</div>
+
+--wjzfEtpoWvtJtmIY6dtz--
 
