@@ -1,229 +1,148 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <mark.jonas@de.bosch.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4521F54ABC
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 13:58:27 +0000 (UTC)
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20351.1774360697838112240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1401F54ACE
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 15:15:58 +0000 (UTC)
+Received: from MRWPR03CU001.outbound.protection.outlook.com (MRWPR03CU001.outbound.protection.outlook.com [40.107.130.54])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22237.1774365350863049821
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 06:58:17 -0700
+ Tue, 24 Mar 2026 08:15:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gDR29spi;
- spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-2c15849aa2cso316938eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 06:58:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774360697; cv=none;
-        d=google.com; s=arc-20240605;
-        b=AXEcEmfLtAR2lkrlSwXkxzZUmP3iVzGoh/BFk8r8tSq1OxzAG+nREzBM2+cZIadrOB
-         P+3vLuS5kNQTZE3yeKfIGGBsHxbnM1NtrRQ4dYX4aLVMNry7c1Z3Dce1/lM5ylIB+bAM
-         /B84Zlpd/cKiMPGqTr8uWb4Jeyy4U5HnBTW+QkmIIhXsUlsV7/9FrjChNBO1Y3qG16Kg
-         yR3qXUv9XJbBF3V+JVhQRoBPBdI/LQ8yCpVzbFuD7xcPbJCbXxPehKisCHdn3G/CLSA3
-         wKrR321Do/ocAjqXqY55JqO25OLtWivtIhEGqeSsE0CyvMSaFZ3fuiQNIeWcYvH6jrtz
-         wP0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
-        fh=BwBMBeEhAt1p6hM5GusaqqLaQ1OVjTC3OuGEHAhdtOU=;
-        b=UeL7gkVXQLnQQz72GV6r0GBe2p1O1w9aj9iCIXZ7KybPbrott9V8gq4QlI4AMRhNr7
-         h7tOUePVghKdLVb204+sznvGs1bMJW+UHGgD109/KqSK05S/nnPGwUtQ5sy9Ux8rqM8J
-         EQhPGH6L6sUFu/VMQ0eZfrOCH9lGGjIeMvWoghHB/5MLsA7fLDhBoMAwLIhbJTVlf7ld
-         EnQ1pBtRmduBxZLsb/L3Auv4uJ9UWBLR6TzlrtsjRUyfSpsg8xFQEILawiXoq5PrfoG5
-         GX4bKA0wtXawvs4kqPM2maYv23e2jYWwSmTLse5vxoHTUy3LcjjDzBGblIeokL1dQww6
-         pelw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774360697; x=1774965497; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
-        b=gDR29spiUgLRn+iRyEsHdXvhcqLQ7wWDTk/qAe73C1OGuOLie9paVhFERMGJYf9RG5
-         ildKVVybAFqnsdCs1W3atQwicgyFZs8AWX56Zrf9RWLmJzqOHi+R5brTZymGNkCWhrsd
-         kTexnBqF3afdH5/maSXxzglWDpptHeahwIpmoDCblXUGR8/bWBlb8+ZlrAtcSHysnwB3
-         EyXenwx7+uz0ziFiGafqRTKIlYyuKA/TrvIgoDqMx0Q4GuwobYIsBumWoqKX3Lmctb9K
-         6eq/J+adwxutIi0lHlIgQJOOVLx7ZYEaAtHH9Fj5rDHMw1IDZAMjowF/5ASvcDAd4u/8
-         tTgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774360697; x=1774965497;
-        h=to:subject:message-id:date:from:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
-        b=gVYrAiKuQ2PIJkZwEA6pEn6Saad7dT2jKF26ODcAUJyibg5lH9LUaN++uo0myRZzm/
-         BHktn1uOfPKhp+D+LFfQfH/+PHSpMtgTRJzmGtOGZpXmSKLyrZHcQypIJh9932T5WmwV
-         Sy3ZPHuLoMKJxOkZ44gkoh9N9oWZ3U2Nq/6q5F5bR8c/ySetCIeLMyCt30BSm6oyi65S
-         BP4+rHgL7HTErpMdNVxRiyU65Uyfvu+iT/XA4efjmAm3+iiW8AeoN+rfEW6ZrkccVCfx
-         X+f8zdglMIOliCiTzasF+KCDUJWz+PJ7w7cY7Q3LGmTsDzgPOv6lUmUkSB2UwzVQEaq9
-         gxZg==
-X-Gm-Message-State: AOJu0YwUmfJZBQCQ/6KxrQ25ge4dWHFEwBByOWF/U9sSpts2c3UsQ8RI
-	sHm9JEW3MJ3D2YBOjld1iaEVN2fQ0hz6EbAHXouvF6LVA9ay7i/vTar5S4Galfb2i9H7oPkLcfZ
-	/bVVG9NYNZJ8qHiCPcUASLYp6S61he6sKkbpv
-X-Gm-Gg: ATEYQzxfibx4ZsJ5eYdn+Mc6HOhSlQQkrUQYRSBJFJUgaP65H2oNJsYiD2eliVJM+L6
-	5A/kkhOO4TcJUBdgkSuHhV36QDCbvHYPtnLIpL8p915Alex9AD7flXazcx7XjxV7HSY7iHeLMeq
-	aZ4qFc9HVLdTYLGHDJn83Isbscgfyt6urUdAXAdFybzT68HZE42Gw9qcUPIvy+sH0UcSUpdZwJ0
-	6BY+rbuXLWaHgmR1d9VWne5S1KjhN7xhHNnmU+Iw8Z8zEPrngK2Ov6AijENBlmHhEYBPqAtWq+t
-	au2YmvSD3ch5NOP2HXv4dl7hGYr1qFrsDTbR9HiWNWryRu8862ghcMbmJwxfnoHoWNYm5WXDESX
-	Ym9Qot44Spq+VEXT9Q111qn27vcM=
-X-Received: by 2002:a05:7300:e9cb:10b0:2c0:dd1f:1718 with SMTP id
- 5a478bee46e88-2c10980abbcmr5028164eec.34.1774360696815; Tue, 24 Mar 2026
- 06:58:16 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@de.bosch.com header.s=selector2 header.b=bDe72AQk;
+ spf=pass (domain: de.bosch.com, ip: 40.107.130.54, mailfrom: mark.jonas@de.bosch.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qr8QUqMf1jrUjcNz3j/3u8Hh5B9+r8s5YRzSSTJQAoRcgD7ccac7TPKEPq8BdW9Qe5YscA1kRQ+GsuT0qIG8QdufWYMuatU7Uqov8OQOL/Ym0SgQbTMdM/ZYfutAUft1Sty9k5k22YxfpUw9kjvSrqDhI4jazpTJ9D9TfSe6utA9PQof4DFB54OVDI+8LzTHDrd+YIZNTlEGL62vyiOwJBU3oeWQZIWoQMGFITTaG+3wZ3/TU7vDUPg+rendKmM63hXjgCnb/jlBsq1IIEdNdGRXXiOtoaRB+MWoJFRTiIIwVWctlrUYyD6C9nInGyvD3Z/jKqLvBrfcrUOsIlPFcw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=o+JFErJmRRocsUIjRDU7iYrVnNMbKYkC+l+fiNkWJl8=;
+ b=ypxvR5NX+K0DnjSLDNNG/u0CVyb1fYn0FZTSrkUlf/p3HFWp4Xs+uedWfpPMSgkgvd2MGNyHBEbIHQoaiTl5S6fU1xt81vNsdYnq13JHs4dtoYuTXyrU1XKEmd4294rpn029dZu5XPwCuch19M+GfC2MYNkRXdBjGBXzmHIRmC3bLbCPrxR32ooD48XbwehUyIqAKAftIJkN+/hPWTtA8GGgUu26iSUBVwyFWBR2ldGRh7+qV+fHAiMtj0zK/Lms/zuabkX8moJVcNXL7HactcvjqtcyWu5vN8/uFwbrHnT/c2ZR4vYCT2/BwZOCMoGAVK89dNDumhuZNJiHDI2D2Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 139.15.153.206) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=de.bosch.com; dmarc=pass (p=reject sp=none pct=100) action=none
+ header.from=de.bosch.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=o+JFErJmRRocsUIjRDU7iYrVnNMbKYkC+l+fiNkWJl8=;
+ b=bDe72AQkljuGqX5+qAGvuEe+JvhOBf3TiVNpR+ZS8+zjx5+RgPbovExiDx1O0U7pr9iu+x5hD2duULwRauN92K70Fz1sKH0ED8lJOt5uYUEYaAtg/RW2KheRp7CxSoACtimzUOvx9rTG7H7J/EDmRZi1sfyshAoM8baclacdFGCgDVqSwHFivBt+fr2U09JVwf2jpkg+03xsL2QFoQd+ox83j0Pou9BdFfYRtcGGAYhnfhf+DPKWZlAvUvAowPLfgilZWgfloGs+RRO1QPjJqW6n31axE6ogD0V+2ur+OzlNewrA+x+EIdngwK8oauong4jrxpxkhsIBqvveZzN/cQ==
+Received: from AM0PR10CA0057.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:150::37)
+ by DU0PR10MB5993.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3b3::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.31; Tue, 24 Mar
+ 2026 15:15:46 +0000
+Received: from AMS1EPF00000042.eurprd04.prod.outlook.com
+ (2603:10a6:20b:150:cafe::d4) by AM0PR10CA0057.outlook.office365.com
+ (2603:10a6:20b:150::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.31 via Frontend Transport; Tue,
+ 24 Mar 2026 15:15:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.206)
+ smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=de.bosch.com;
+Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
+ 139.15.153.206 as permitted sender) receiver=protection.outlook.com;
+ client-ip=139.15.153.206; helo=eop.bosch-org.com; pr=C
+Received: from eop.bosch-org.com (139.15.153.206) by
+ AMS1EPF00000042.mail.protection.outlook.com (10.167.16.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19 via Frontend Transport; Tue, 24 Mar 2026 15:15:45 +0000
+Received: from RNGMBX3002.de.bosch.com (10.124.11.207) by eop.bosch-org.com
+ (139.15.153.206) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 24 Mar
+ 2026 16:15:45 +0100
+Received: from GRB-C-0009M.ot.de.bosch.com (10.142.116.186) by
+ smtp.app.bosch.com (10.124.11.207) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.37; Tue, 24 Mar 2026 16:15:45 +0100
+From: <mark.jonas@de.bosch.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Khem Raj <raj.khem@gmail.com>, Bartosz Golaszewski
+	<bartosz.golaszewski@linaro.org>, Ricardo Simoes
+	<ricardo.simoes@pt.bosch.com>, Mark Jonas <mark.jonas@de.bosch.com>
+Subject: [meta-oe][PATCH] libgpiod-1: Inherit python3targetconfig
+Date: Tue, 24 Mar 2026 16:15:08 +0100
+Message-ID: <20260324151508.2702-1-mark.jonas@de.bosch.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Tue, 24 Mar 2026 06:58:06 -0700
-X-Gm-Features: AQROBzClt-lDJyRP1vkbAnJGtX-nqJSUl1ibG_82KwW1x5MmwI37RRi2PMzloqg
-Message-ID: <CAK5yBb9Wz6RE53WZDAXHCN+mtgxAR9BMxFPQ5sxjrOb7QrKgpQ@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="00000000000009831e064dc58b81"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.142.116.186]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF00000042:EE_|DU0PR10MB5993:EE_
+X-MS-Office365-Filtering-Correlation-Id: db12cb56-d73c-44b3-8522-08de89b83910
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|82310400026|36860700016|1800799024|376014|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 
+	MgcpwfAbwxXx0Bq/fS2s0Lfr+cfW/KBK3EA3y4VQ/gBUttaKXF/SItm+a+OXvYPP9o7GJUxid34sLZzNrQKLOdkHJJPZmrNBqb2RPGkwa4ytLRgssJ79s5E9wGu+8ys3poksWKSqdxUEoFESeooGxub5+0Gf/Fss86hNDuYmvYjglge3v2NhqMzO1vlUvQ/FAl1Im6/OxCtKDPfUBcfYqVjeeKS9dywEOzVQyisjYD+wy8XieO041hPXxN5oa/kc6MHI0sJRWGM6q7uZOetpDAABWuGHHRvNzNrO13u1QXNWRC12oo6lp1J7j3vCQvjODu2VeFOStqDEidhv5udig8WxxneZZEdqhYdSYdr/BYov8ZsOiwFEEK0NGFqdWYr+pN/zhGz+82cPbTpiMNm28N1IyTRoojSNtsXQTPkf2V0p48qbBuZJc4lFxOHerpV6tHpyKjFXeQXRl7p9deIACVjPaGaD2c9dFbbKg96d9/jJwUHlLxdvKadORxMNzgU03eleSmyZMh9pZz2cBU/m1hpuGeTZuQ6Ve6EAiof7joURt3xt7o5dI0R36sdeKAbGyrd/HLrBj3Asyh2Lop17gcnIr2ermMjPb7SZ3xcjjO8loB7W2k826y/U5J7bGBqlMSXfy6Hz7Fs+zunisc8rxVH2O3w/I0xqBoWD66Ru2G90v51VT5LdqStdn1nwLKPqY7o/AMQKaBnsaMfuVbUVM7lyq/SAFjzzHARcLjSIAX/APPo3KkwDK+r/+J0XrgKctXTdNDa9xGNp2EFGHhl+8w==
+X-Forefront-Antispam-Report: 
+	CIP:139.15.153.206;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:eop.bosch-org.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(1800799024)(376014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	YwqEA+9LQPnUkkO8yCvFN54Duf3BHvcC8BCmLIWAXORLIWiG4nhRYcVj7Lr378T34Xwl4xKQS7wQMJEq9is6vEJ+eSQ5eCNBzx1Rr+0k/bSSYl5yB4aDQUFC9lMmjVZOdceW4FZsLd6umj7YWzGOqdW8G8D3sAl5/GzKy152e1IfiGTnD6uVSwRNaY7ijvIkj30MfIcLo9Uo98wod2v9YEo/YQFg/+drzIzJZMm2nq/sTVCe29aoeosVJXS6TKVuuyGEfXq4qbmh6jzwYlTzFnkCyzxRE8An65z3zqGOA10iCaP6qLr3IASyByRNT+vIvURdEE7FZECiOXmvM76yh1qRgXSeEEkmGmAnPyOemu0PQPK8DdVzPnx/ILlMdzqCmurtwHY9ULqerDDCLCHfrwTimC3asgcnH4jN8bGd0EAbEZdZAWezJ2WaCVLvllSc
+X-OriginatorOrg: de.bosch.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 15:15:45.6792
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: db12cb56-d73c-44b3-8522-08de89b83910
+X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4;Ip=[139.15.153.206];Helo=[eop.bosch-org.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AMS1EPF00000042.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5993
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 13:58:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125575
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 15:15:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125576
 
---00000000000009831e064dc58b81
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
 
-All,
+Inherit python3targetconfig so that cross python3-config is used instead
+of native.
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+This fixes the below error when building on a 64 bit host for a 32 bit
+target:
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+| In file included from /workspaces/yocto/build/tmp/work/core2-32-poky-linu=
+x/libgpiod/1.6.5/recipe-sysroot-native/usr/include/python3.14/Python.h:72,
+|                  from ../../../sources/libgpiod-1.6.5/bindings/python/gpi=
+odmodule.c:8:
+| /workspaces/yocto/build/tmp/work/core2-32-poky-linux/libgpiod/1.6.5/recip=
+e-sysroot-native/usr/include/python3.14/pyport.h:429:2: error: #error "LONG=
+_BIT definition appears wrong for platform (bad gcc/glibc config?)."
+|   429 | #error "LONG_BIT definition appears wrong for platform (bad gcc/g=
+libc config?)."
+|       |  ^~~~~
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 435
-unassigned or newcomer bugs.
+Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
+---
+ meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
-", the more
-pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb b/meta-oe/r=
+ecipes-support/libgpiod/libgpiod_1.6.5.bb
+index 009cf9897a..583648a6a3 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_1.6.5.bb
+@@ -10,6 +10,7 @@ SRC_URI[sha256sum] =3D "ae280f697bf035a1fb780c9972e5c81d0=
+d2712b7ab6124fb3fba24619d
+ FILESEXTRAPATHS:prepend :=3D "${THISDIR}/${BPN}-1.x:"
+=20
+ inherit python3native
++inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3tar=
+getconfig', '', d)}
+=20
+ PACKAGECONFIG[tests] =3D "--enable-tests,--disable-tests,kmod udev glib-2.=
+0 catch2"
+ PACKAGECONFIG[python3] =3D "--enable-bindings-python,--disable-bindings-py=
+thon,python3"
+--=20
+2.34.1
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---00000000000009831e064dc58b81
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
-al">All,<br><br>The triage team is starting to try and collect up and class=
-ify bugs which a newcomer to the project would be able to work on in a way =
-which means people can find them. They&#39;re being listed on the triage pa=
-ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
-wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
-e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
-d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
-org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
-illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
-.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
-ea is these bugs should be straight forward for a person to help work on wh=
-o doesn&#39;t have deep experience with the project.  If anyone can help, p=
-lease take ownership of the bug and send patches!  If anyone needs help/adv=
-ice there are people on irc who can likely do so, or some of the more exper=
-ienced contributors will likely be happy to help too.<br><br>Also, the tria=
-ge team meets weekly and does its best to handle the bugs reported into the=
- Bugzilla. The number of people attending that meeting has fallen, as have =
-the number of people available to help fix bugs. One of the things we hear =
-users report is they don&#39;t know how to help. We (the triage team) are t=
-herefore going to start reporting out the currently 435 unassigned or newco=
-mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
- and again to help out with these.  Bugs are split into two types, &quot;tr=
-ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
-ents&quot; which are features we&#39;d want to add to the system.  There ar=
-e also roughly four different &quot;priority&quot; classes right now, =E2=
-=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
-uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
-=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
-g you would be able to help with either take ownership of the bug, or send =
-me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
- an e-mail with the bug number you would like and I will assign it to you (=
-please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
-_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
-ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
-s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
-al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
-al,sans-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---00000000000009831e064dc58b81--
 
