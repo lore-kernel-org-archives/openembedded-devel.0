@@ -1,244 +1,229 @@
-Return-Path: <peng.zhang1.cn@windriver.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EEAEF54AAA
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 13:00:17 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19084.1774357211119101132
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4521F54ABC
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 13:58:27 +0000 (UTC)
+Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.20351.1774360697838112240
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 06:00:11 -0700
+ Tue, 24 Mar 2026 06:58:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fOZqu25t;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7543866fef=peng.zhang1.cn@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62O4uHJo1918188
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 06:00:10 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=; b=fOZqu25txFSH
-	nw4J9pcvl3Bvu2uxUKnB2x0ITB/1BFm6pbK/0xdBpYnsjjyK+661F34QEeyZ/sRR
-	+B6WhA1+CvzwcOd2MezfJC4711nIkUVCk1KE3VvluMQhON/MJt13i4VNku5f7Rd7
-	bG0kzCcQrvRjRvmHMmLa3OK6A5I9NR2nYZW7vnGRaJG8KF17yW4ZKo6s6FuN/ZLw
-	r7WyTbc+JsBJZ4OlRPpvw15pHQRfEjT6dSw89lwP52CY9TFaO6+gyLmM5GtFt29e
-	C+T4lq2ZZuZLQtQ5cHjvAGHPzX+lLva19P1YO40jTcVCYnnG58i9gN5WXhTFSQ1a
-	08plcRNBzA==
-Received: from dm1pr04cu001.outbound.protection.outlook.com (mail-centralusazon11010000.outbound.protection.outlook.com [52.101.61.0])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pkyb5rc-2
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 06:00:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bXy2DYEOc4OL+HEOkdaykdM5ztecaI6NjRP/QOIkIM1JDhoo3/h7JrVOyxXNp8E+1u/iVzw52792LbE7tHGEOgiNxpkaOz3H03MqIqtbWH7F5KZ82uPIwVCzGLFeS33kbEYsZaqNUFI6wI7kOPlGB2CLh/HUxVAClZOR4Se8PQOwN5Qr4VMHr/z+KENA1k0Z8Har73OlWdJglxBcF+N8u4EYfifHqBKL3YMZa6YegMiW9vKF0PYxByy88w/o3Yf28tCNpy3wO3v1m2BHTt8ta17NxGSu3CuFLaYdramQTIXM+S0zYs/i+GNtdTvOocQFFLuCIKIz5GaEhJnQpF8m+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v4AzM8tV6CPfTtlxrfCS3QfF+lB7e0iZg/+Lt6evu0g=;
- b=gy0L8SySNlYAx2V/wrwzKrKRuYCO5IMdkb6BsTxO04erehC6E8LEq3UpeqfJSxvt7Pv+phPgdIQXXew/si72yUGfxJahaQjiHOhWJ1WU1S3+7tBPSMi/CkkSJnWwKAn98j2myINDHvFVsplYdD46w3Fcv+BPic4vR9SRI4bAk67/dTDauXyKm1CVvobJlBelOWgttTB7aFvzGNoxYLrH6UhlWIzdjgrjvo9e5KvEWzqez+C0lmKS2QwUkdJVDwcdcMhcZW0A3LrJllhVYa8hxv6lR7KZ4l93N0M/ITSA/8j/5mEUKs4K4S2r3DKWLfGYHigCzkW3cBNSJX6IJolATQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
- by DS7PR11MB6128.namprd11.prod.outlook.com (2603:10b6:8:9c::5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9745.20; Tue, 24 Mar 2026 13:00:06 +0000
-Received: from CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
- ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Tue, 24 Mar 2026
- 13:00:05 +0000
-From: peng.zhang1.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-xfce][PATCH v2 15/15] xfce-polkit: fix link failure by adding missing gtk+-3.0 dependency
-Date: Tue, 24 Mar 2026 20:59:27 +0800
-Message-Id: <20260324125927.1070644-16-peng.zhang1.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260324125927.1070644-1-peng.zhang1.cn@windriver.com>
-References: <20260324125927.1070644-1-peng.zhang1.cn@windriver.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2PR01CA0114.apcprd01.prod.exchangelabs.com
- (2603:1096:4:40::18) To CH3PR11MB8562.namprd11.prod.outlook.com
- (2603:10b6:610:1b8::13)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gDR29spi;
+ spf=pass (domain: gmail.com, ip: 74.125.82.180, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-2c15849aa2cso316938eec.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 06:58:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774360697; cv=none;
+        d=google.com; s=arc-20240605;
+        b=AXEcEmfLtAR2lkrlSwXkxzZUmP3iVzGoh/BFk8r8tSq1OxzAG+nREzBM2+cZIadrOB
+         P+3vLuS5kNQTZE3yeKfIGGBsHxbnM1NtrRQ4dYX4aLVMNry7c1Z3Dce1/lM5ylIB+bAM
+         /B84Zlpd/cKiMPGqTr8uWb4Jeyy4U5HnBTW+QkmIIhXsUlsV7/9FrjChNBO1Y3qG16Kg
+         yR3qXUv9XJbBF3V+JVhQRoBPBdI/LQ8yCpVzbFuD7xcPbJCbXxPehKisCHdn3G/CLSA3
+         wKrR321Do/ocAjqXqY55JqO25OLtWivtIhEGqeSsE0CyvMSaFZ3fuiQNIeWcYvH6jrtz
+         wP0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
+        fh=BwBMBeEhAt1p6hM5GusaqqLaQ1OVjTC3OuGEHAhdtOU=;
+        b=UeL7gkVXQLnQQz72GV6r0GBe2p1O1w9aj9iCIXZ7KybPbrott9V8gq4QlI4AMRhNr7
+         h7tOUePVghKdLVb204+sznvGs1bMJW+UHGgD109/KqSK05S/nnPGwUtQ5sy9Ux8rqM8J
+         EQhPGH6L6sUFu/VMQ0eZfrOCH9lGGjIeMvWoghHB/5MLsA7fLDhBoMAwLIhbJTVlf7ld
+         EnQ1pBtRmduBxZLsb/L3Auv4uJ9UWBLR6TzlrtsjRUyfSpsg8xFQEILawiXoq5PrfoG5
+         GX4bKA0wtXawvs4kqPM2maYv23e2jYWwSmTLse5vxoHTUy3LcjjDzBGblIeokL1dQww6
+         pelw==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774360697; x=1774965497; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
+        b=gDR29spiUgLRn+iRyEsHdXvhcqLQ7wWDTk/qAe73C1OGuOLie9paVhFERMGJYf9RG5
+         ildKVVybAFqnsdCs1W3atQwicgyFZs8AWX56Zrf9RWLmJzqOHi+R5brTZymGNkCWhrsd
+         kTexnBqF3afdH5/maSXxzglWDpptHeahwIpmoDCblXUGR8/bWBlb8+ZlrAtcSHysnwB3
+         EyXenwx7+uz0ziFiGafqRTKIlYyuKA/TrvIgoDqMx0Q4GuwobYIsBumWoqKX3Lmctb9K
+         6eq/J+adwxutIi0lHlIgQJOOVLx7ZYEaAtHH9Fj5rDHMw1IDZAMjowF/5ASvcDAd4u/8
+         tTgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774360697; x=1774965497;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hf3g9uwaMVqj0gPD97u7ZAX+c4mp/LLXtUfyzNNo7DY=;
+        b=gVYrAiKuQ2PIJkZwEA6pEn6Saad7dT2jKF26ODcAUJyibg5lH9LUaN++uo0myRZzm/
+         BHktn1uOfPKhp+D+LFfQfH/+PHSpMtgTRJzmGtOGZpXmSKLyrZHcQypIJh9932T5WmwV
+         Sy3ZPHuLoMKJxOkZ44gkoh9N9oWZ3U2Nq/6q5F5bR8c/ySetCIeLMyCt30BSm6oyi65S
+         BP4+rHgL7HTErpMdNVxRiyU65Uyfvu+iT/XA4efjmAm3+iiW8AeoN+rfEW6ZrkccVCfx
+         X+f8zdglMIOliCiTzasF+KCDUJWz+PJ7w7cY7Q3LGmTsDzgPOv6lUmUkSB2UwzVQEaq9
+         gxZg==
+X-Gm-Message-State: AOJu0YwUmfJZBQCQ/6KxrQ25ge4dWHFEwBByOWF/U9sSpts2c3UsQ8RI
+	sHm9JEW3MJ3D2YBOjld1iaEVN2fQ0hz6EbAHXouvF6LVA9ay7i/vTar5S4Galfb2i9H7oPkLcfZ
+	/bVVG9NYNZJ8qHiCPcUASLYp6S61he6sKkbpv
+X-Gm-Gg: ATEYQzxfibx4ZsJ5eYdn+Mc6HOhSlQQkrUQYRSBJFJUgaP65H2oNJsYiD2eliVJM+L6
+	5A/kkhOO4TcJUBdgkSuHhV36QDCbvHYPtnLIpL8p915Alex9AD7flXazcx7XjxV7HSY7iHeLMeq
+	aZ4qFc9HVLdTYLGHDJn83Isbscgfyt6urUdAXAdFybzT68HZE42Gw9qcUPIvy+sH0UcSUpdZwJ0
+	6BY+rbuXLWaHgmR1d9VWne5S1KjhN7xhHNnmU+Iw8Z8zEPrngK2Ov6AijENBlmHhEYBPqAtWq+t
+	au2YmvSD3ch5NOP2HXv4dl7hGYr1qFrsDTbR9HiWNWryRu8862ghcMbmJwxfnoHoWNYm5WXDESX
+	Ym9Qot44Spq+VEXT9Q111qn27vcM=
+X-Received: by 2002:a05:7300:e9cb:10b0:2c0:dd1f:1718 with SMTP id
+ 5a478bee46e88-2c10980abbcmr5028164eec.34.1774360696815; Tue, 24 Mar 2026
+ 06:58:16 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|DS7PR11MB6128:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65f75d67-7992-47a0-1298-08de89a54387
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|52116014|366016|1800799024|38350700014|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	XLi5iN1RuFJ/cTn8n+8e98XDybVWGrwW9t4t0zr5eBvFQk5DnzXTx1bPa2UEKYUqrl/C5y4WnZlSJln0T8X/Qf9BApvrem5bKoT1hqpKpRUDNZyrF8hLKaCBj/e+MMTHUrar93JAb9yFJTcmqgE4tnqMcqslNMs7MKdD+MCYfzOtXLsMULfkna9Rk+aJMuurJECJ9uglvywYABk7Wmb4MnVydja6MvmeJTAWY6KZrqPTbk3jcV0WmwkYQhVklSjBKDJmCw/SuYkG7rsPOAa0vLpn3aETbgG/FNYY7rEDOh5mY9JzSn+r3xGe5bk+X3re8RFl6HpFvENeiqMIjmfIsPOiLXQqygwhYUG2RhUGC37pTUDkFkduHszB62MfM99webUcJV4TcVL6uc1ANyAdT1u61ajYvyqJgb8I2UYokwJqJS6wZsUZolJEvdShQVUjyIjBZYe6vkhGbktyX3HgwA8OKt8zwv7Aj45JMz9jctjCezpx4czHY/bs5OZbRas8+U5etAWZq8WrakivjpxazwUhR2+QbMqKnEi4WQzNcFkSNWRlLOzYTMbnkGg/HdR8q6FU1PJKQ42uf41hNc0Vu3pI7eZ6hG51JBukLX3sNqEve5JBDk923RDWIPXIM1N6iOC5dm9EOzEXgtyKmi9R0AAhROeBdV2OFw3a0F7esRR4ucp7I5trK/q2VBBHHWC5bav0nVqGPoFj81IxicuEuUYMJ0EkKLv9QcBNtyRVG8pqHPYWfqTgfFaQnsrSfA8X
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014)(18002099003)(22082099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?RM4f9gniqEfoN+XVdP+KMuDMhH2WV4oraQ4RkYdfQDngK039WSoNP9nK2cRv?=
- =?us-ascii?Q?x7tXjveghXu+KzhTYOd+lUSCIziqrKBRxOUKK2EvU3FxSQSG/ZaijwGqZgD8?=
- =?us-ascii?Q?qpwyn9rwaeek68/E97zwo56XqmTMA7jOuLgGn02xblUZ0o5Z/gUI3UELEUsi?=
- =?us-ascii?Q?5fRNRS0+GDqE4rrFs7SO9UvHVgs42+q/xTa+WC893Qc+AGXu8g1KMGwiBDID?=
- =?us-ascii?Q?9DRQX24iCBVV9cEiQGqUWQmFlkGG3DKVumio8lAVOEtjHq8UkSHzh0QSwELH?=
- =?us-ascii?Q?zEk5KP/0PA+z6GQLYAsvJpIyTrDcT1783AAtNAN9o1dicDfrrsZMwYlKjNoP?=
- =?us-ascii?Q?Ru09r+70RNOWd4hw3WYjtQ0jtjSVFczjTl2TOT/0P+c0aWepZlG7wnjGvgae?=
- =?us-ascii?Q?5bOKqPwl2t8GC95Z9uCB25AWSVN6i4BRZJtyQDuk197SpV7hWTwx9uhs7VSH?=
- =?us-ascii?Q?uVcnCqPINKam9Lw5IdHgkJS4yKkxbGBOQMttpvkbV03prldQPT5SNePdbdXs?=
- =?us-ascii?Q?udqNP5O32J0vHlsiDa8NQGeYOIgTLTlB8x7f3PWWnjyKqshsQMHPFbOTmT8C?=
- =?us-ascii?Q?+vwd1OCL780UnJDT6wNG9S6cDXnG0GHXF/ct5V9FUTsIVTOjjWZjUkCV1n7n?=
- =?us-ascii?Q?ed+8za//U0XK8RH2fdxbocVzFZl0JjxFqZF7SoHbTRmWkD01HNIOeNuHyxjL?=
- =?us-ascii?Q?3xrwKXAhuRoo56t6brwOvwOuviisBCuIuq20YisKoCSm/AvYrBK1zMd2X2Cp?=
- =?us-ascii?Q?4WMCCpnA9j91EPxTS3faresARfPPZHV2sMI3EQ7yy3eDCqG1+8lNcv+pKnc+?=
- =?us-ascii?Q?3SzPRN075Gnw+XaxOjxlYFF1N8B07TD22VuAIcVqfNXRqaeIu30v+FURq9Yy?=
- =?us-ascii?Q?xK5BsXItDSXfN4SgKK0vk6gAplA6UaFb86WFP5MOOc6mOCpNPe3dPuWjDcrX?=
- =?us-ascii?Q?hujwW+UdEdAk4fit+tOMU4HjGVBUtKHqCy+L+y/aTjXvuuHo6e2ZtTmKMCXI?=
- =?us-ascii?Q?0+fCSL301x/JWXo4nNW1WqWxzqIjMOOq60pxYAMDJyy22SJRXimC2Xhf6tPD?=
- =?us-ascii?Q?9qGiUth7zRFylA/Aq9pEkunG2xyL+WQnmlRkBdDT6VaZhWibsGXDHnfc7Im9?=
- =?us-ascii?Q?92dE9DZckxElt+XZuCneuBWpkaKoocp/4Me6pcVWsCO9Hv201uTwGg5ZMLrM?=
- =?us-ascii?Q?EimNSgsfOCjj36mjMi2OiAwXxN0yvjnzBD3RPM+vXh7QZgu3P7PtAMueyIOu?=
- =?us-ascii?Q?JIhlJPSuJB0BzuBOZenOE1nye1UAwPNTe7nlBvNYQuPSOFoOWCPOR5h9bXXl?=
- =?us-ascii?Q?B6cmJQ+vto3Ok4L+Sfxj93/zC2FDIR0ZzkHaaQJcM4WjFyqT/G/qI4dt1KUS?=
- =?us-ascii?Q?xnecWy/CA/4iE6xvWIkY4HHARrnUOiazEw9jWNBfVP2klqjt8ynxLw2yyPnD?=
- =?us-ascii?Q?ztgDXFsuJ0c2V1TZt3gvN35bhWrZ+clt5gCPSsE6sC0CrGX2tJPxgTMrlfgK?=
- =?us-ascii?Q?urgpdnhyH/njp2C80f2DYiBTE29nzzeE+rydT4HAWBS0BAo9DQYVBFlYCmkj?=
- =?us-ascii?Q?ws3L3qKQ2MHBoaajQqNP2hfyxNYZzgsOyPIzC0jL9cBG8wNQmEw73awOxdME?=
- =?us-ascii?Q?1V9BvnEV01oM5+UIU4f+KV5wzs9S7HXQSW26TryJtr7UuFyrgM8sOIPq4k4k?=
- =?us-ascii?Q?YbkLrvTLSgzeOESNNnmsl4wjKDXBIyvCq1lNQuc+egjGTVnaLcMdkqjj8cvp?=
- =?us-ascii?Q?C9vJf0/P54dHiGBkyKxX04WsGv76KqY=3D?=
-X-Exchange-RoutingPolicyChecked: 
-	RC5na1L+CjQ9FaCfkjr2UzWmOgqGESYgcjv05aeW0aXcuOwxugenmC5SP1BdnMcnKn8L1LE6MUns0RGF6kZFluWgAE+pH6o2iyfStpbgJwFADkU5/BNjsGpy1oCoYIjesLTUZR+mnNm/wYyNs8VgAKLSK8mi7IYeM0owX5/UjTUGeRUE15Ig9U1KHzU8Epqg0cumSDdIDxOmqzfEy9Omnx1c3hK/Cu/2+vjgQNwZsyP6hp18sOa4Z3bJY7W177vWisUhGAKcktb9E4rXlhSN01IiApTYx/UhLwfipXF7RdbYbgHPg2Hk5dSIQINzI6lGvIBZOG9RzDD4ZnIrb+yJ7g==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65f75d67-7992-47a0-1298-08de89a54387
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2026 13:00:03.0769
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: svQfuZMFwEsepn+1B6hMe1LrwxpDldqM0nTyjoCICGBtWNKpvC0NmjVCMRSH45K1RW7zzTU53rike7Dn6AiOUjSILhHd7lDWFfytqUx3peo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR11MB6128
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI0MDEwMyBTYWx0ZWRfXw8iiR1C9odFu
- wvaYUIbD1eSsjDMcyipNpa4Dr/hi9izt4s9/erH4xsSS5/deCyK2iuuC5zapjm+rRIRymyOOvfh
- NaSHsygLnEWCdGnb6y7YPydkn6nasmgjepPBTBv2NK9nBjEDDQJ8IPZJR1r/Ad39sr8FWI8alLk
- 2hX5mhBd7S4fUTkfueowi6+wqSZpzby7cpaNn6a+g6J2PsodV43cv0acgooGgSea9xIX8Cc1hSu
- dEl2sXiYziSJpNNKeeLBkXvVg/QTjirtav65h6KnGanVAda1cpqQpmuTBu9DE3A8qyH3Yw29ntC
- pJLaSHD40EhjRr/bG1CZV26CrSL4xXi7VbCyPENUH9FWTXUoezCbpefTLqKEDSG50I/sLFSX6WK
- 3VnCbw/uj0tBBX9EQaB8p/IvavONvRSyenqF4eifYILfqkeysBM9QEVMgfGIaWQWGDUQtRdDTzR
- XbOLMQfN5hOJY+mptDQ==
-X-Proofpoint-ORIG-GUID: oQu37MWVcVw5GvpaNJTmuqCXqVU8ZAf-
-X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c28ada cx=c_pps
- a=QHQ/c+VJRs0sJIezHEQ2hg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=e5mUnYsNAAAA:8
- a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=7sqpSKcsBsmI2gz2FRAA:9
- a=Vxmtnl_E_bksehYqCbjh:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: oQu37MWVcVw5GvpaNJTmuqCXqVU8ZAf-
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-24_03,2026-03-23_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 malwarescore=0 phishscore=0 adultscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603240103
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Tue, 24 Mar 2026 06:58:06 -0700
+X-Gm-Features: AQROBzClt-lDJyRP1vkbAnJGtX-nqJSUl1ibG_82KwW1x5MmwI37RRi2PMzloqg
+Message-ID: <CAK5yBb9Wz6RE53WZDAXHCN+mtgxAR9BMxFPQ5sxjrOb7QrKgpQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="00000000000009831e064dc58b81"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 13:00:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125574
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 13:58:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125575
 
-From: Zhang Peng <peng.zhang1.cn@windriver.com>
+--00000000000009831e064dc58b81
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-After libxfce4ui upgrade to 4.21.x, its pkgconfig moves gtk+-3.0
-to Requires.private, so the linker no longer automatically pulls in
-libgtk-3. This causes an undefined reference to 'gtk_combo_box_set_model'
-when linking xfce-polkit.
+All,
 
-Add patch for explicit PKG_CHECK_MODULES for gtk+-3.0 in configure.ac and wire
-GTK3_CFLAGS/GTK3_LIBS into src/Makefile.am.
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
----
- ...d-missing-direct-dependency-on-gtk-3.patch | 52 +++++++++++++++++++
- .../xfce-polkit/xfce-polkit_0.3.bb            |  7 +--
- 2 files changed, 56 insertions(+), 3 deletions(-)
- create mode 100644 meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
-new file mode 100644
-index 0000000000..bc20d2f854
---- /dev/null
-+++ b/meta-xfce/recipes-apps/xfce-polkit/files/0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch
-@@ -0,0 +1,52 @@
-+From a89bd475c3cf7dc39618bcc9979fc618d7acd537 Mon Sep 17 00:00:00 2001
-+From: Zhang Peng <peng.zhang1.cn@windriver.com>
-+Date: Mon, 23 Mar 2026 16:52:58 +0800
-+Subject: [PATCH] configure.ac: add missing direct dependency on gtk+-3.0
-+
-+xfce-polkit sources directly call GTK+ symbols (gtk_combo_box_set_model,
-+gtk_widget_show, etc.), but only libxfce4ui-2 was listed as a dependency.
-+Since libxfce4ui-2 correctly places gtk+-3.0 in Requires.private, the
-+client must declare its own direct dependency on gtk+-3.0.
-+
-+See https://people.freedesktop.org/~dbn/pkg-config-guide.html#writing
-+
-+Upstream-Status: Submitted [https://github.com/ncopa/xfce-polkit/pull/14]
-+
-+Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
-+---
-+ configure.ac    | 1 +
-+ src/Makefile.am | 2 ++
-+ 2 files changed, 3 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 88f2432..15c09c9 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -4,6 +4,7 @@ AC_PROG_CC
-+
-+ PKG_CHECK_MODULES([GLIB], [glib-2.0])
-+ PKG_CHECK_MODULES([LIBXFCE4UI], [libxfce4ui-2])
-++PKG_CHECK_MODULES([GTK3], [gtk+-3.0])
-+ PKG_CHECK_MODULES([POLKIT_AGENT], [polkit-agent-1])
-+
-+ AC_CONFIG_FILES([
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 514605a..f13e4cb 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -10,11 +10,13 @@ xfce_polkit_SOURCES = \
-+
-+ xfce_polkit_CFLAGS = @GLIB_CFLAGS@ \
-+	@LIBXFCE4UI_CFLAGS@ \
-++	@GTK3_CFLAGS@ \
-+	@POLKIT_AGENT_CFLAGS@
-+
-+
-+ xfce_polkit_LDADD = @GLIB_LIBS@ \
-+	@LIBXFCE4UI_LIBS@ \
-++	@GTK3_LIBS@ \
-+	@POLKIT_AGENT_LIBS@
-+
-+
-+--
-+2.50.0
-diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-index 880e73849c..167cc538b9 100644
---- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-+++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
-@@ -7,7 +7,8 @@ DEPENDS = "libxfce4ui polkit"
- inherit xfce-app features_check
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
--SRC_URI = " \
--    git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
--"
-+SRC_URI = "\
-+           git://github.com/ncopa/${BPN}.git;branch=master;protocol=https \
-+           file://0001-configure.ac-add-missing-direct-dependency-on-gtk-3.patch \
-+           "
- SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
--- 
-2.34.1
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 435
+unassigned or newcomer bugs.
 
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.3=E2=80=9D, =E2=80=9C6.0", "5.99" and "Future=
+", the more
+pressing/urgent issues being in "5.3" and then =E2=80=9C6.0=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--00000000000009831e064dc58b81
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><span style=3D"font-size:11pt;font-family:Calibri,Ari=
+al">All,<br><br>The triage team is starting to try and collect up and class=
+ify bugs which a newcomer to the project would be able to work on in a way =
+which means people can find them. They&#39;re being listed on the triage pa=
+ge under the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/=
+wiki/Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triag=
+e#Newcomer_Bugs</a>  Also please review: <a href=3D"https://www.openembedde=
+d.org/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.=
+org/wiki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugz=
+illa account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount=
+.cgi">https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The id=
+ea is these bugs should be straight forward for a person to help work on wh=
+o doesn&#39;t have deep experience with the project.  If anyone can help, p=
+lease take ownership of the bug and send patches!  If anyone needs help/adv=
+ice there are people on irc who can likely do so, or some of the more exper=
+ienced contributors will likely be happy to help too.<br><br>Also, the tria=
+ge team meets weekly and does its best to handle the bugs reported into the=
+ Bugzilla. The number of people attending that meeting has fallen, as have =
+the number of people available to help fix bugs. One of the things we hear =
+users report is they don&#39;t know how to help. We (the triage team) are t=
+herefore going to start reporting out the currently 435 unassigned or newco=
+mer bugs.<br><br>We&#39;re hoping people may be able to spare some time now=
+ and again to help out with these.  Bugs are split into two types, &quot;tr=
+ue bugs&quot; where things don&#39;t work as they should and &quot;enhancem=
+ents&quot; which are features we&#39;d want to add to the system.  There ar=
+e also roughly four different &quot;priority&quot; classes right now, =E2=
+=80=9C5.3=E2=80=9D, =E2=80=9C6.0&quot;, &quot;5.99&quot; and &quot;Future&q=
+uot;, the more pressing/urgent issues being in &quot;5.3&quot; and then =E2=
+=80=9C6.0=E2=80=9D.<br><br>Please review this link and if a bug is somethin=
+g you would be able to help with either take ownership of the bug, or send =
+me (<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>)=
+ an e-mail with the bug number you would like and I will assign it to you (=
+please make sure you have a Bugzilla account).  The list is at: <a href=3D"=
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or=
+_Newcomer_Bugs</a></span></div><div dir=3D"ltr" class=3D"gmail_signature" d=
+ata-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p clas=
+s=3D"MsoNormal" style=3D"background-image:initial;background-position:initi=
+al;background-repeat:initial"><span style=3D"font-size:12pt;font-family:Ari=
+al,sans-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--00000000000009831e064dc58b81--
 
