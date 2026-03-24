@@ -2,98 +2,124 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60FC0FEC10C
-	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 20:00:28 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6450.1774382425754678826
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CA0AFEC10C
+	for <webhook@archiver.kernel.org>; Tue, 24 Mar 2026 20:20:08 +0000 (UTC)
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6624.1774383599166449649
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 13:00:26 -0700
+ Tue, 24 Mar 2026 13:19:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=CSxvNXJL;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-48700b1ba53so41030635e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 13:00:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ThjCr2oH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-486fba7ce4cso16604585e9.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 13:19:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774382424; x=1774987224; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3GHYE3VQySG7BMo8RGElkmHktyxWM+Fjl0siS4gn5J4=;
-        b=CSxvNXJLBq+V4u78M6d/2/rfwTDp3zIOtKse0P8hmBnpZZkgTzuy64QF+NvBK3fmm7
-         1bcR6CHTyMhXU+whTyjle6lKE3/YH1QF25xKQ5p2TFbQNfAWniDw6SrXPAu0OHOl0n5d
-         5rl5hJl+FhELpVwAWOYUtHGLe0+6jElne0glbWmlyj7VPzXKAsPF+NDPM/OgVhqgF4Rr
-         kT6AqZfEZunpjc22FGOUHt94v6vhW4OAMPMwS+/Ikqvkxqil2cUJenRHVAzV3RsLbM8z
-         mJczSI9AOesB+wR6GJCNHJVK/9pMXCAanGYWmMoXCuiEyIZUlgFzHWroEQxBLPesME2u
-         zSpg==
+        d=gmail.com; s=20251104; t=1774383597; x=1774988397; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=qa1zfcfn2laL5PSmTczBmu6QBEczrEL/01JQXDknq58=;
+        b=ThjCr2oHCGk+S59/wzpKeO8QnR2buneu9R69AFLTCPHJtD+4o2EZkp2CrYHsffp2Yw
+         Uh0vHbTlnEMP2FeCMwBLi8SRddrXMZPEvfrXGGrE2UdW66rtHMEzcbIRe4xKDPPmOA9S
+         MK7nljq8X/z48+Db43LFRK1oKpv6HBKYsxYPgQsgmaxc8Jfy0a/qULwyhBEWZkXwHZes
+         iDrZ9h/ru2C33Wsl6/pcj+hypRmmym1TQ0fmLUGWFkR6OR7m5yWTQudIXcWd9I0zsrnt
+         V/uiJ16reqxNSK9M81JW8eG71cvX/zdGB2bzqBipUwuU0YxlbNJ9V5ul0glbnu6O73Bu
+         RB2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774382424; x=1774987224;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=3GHYE3VQySG7BMo8RGElkmHktyxWM+Fjl0siS4gn5J4=;
-        b=fz3lN5e2rR+L6doh/izMQYCbWe5dIB0dUqnmh2QFZ328noj8SfbeV0y+dCZoMdxFyt
-         vd3eidElYdCoJiN2I8CQVS/I3svoDNhSj/xWXdakwyb+u4X9lPTOBJiwCrpkmBGOEM11
-         X/JJCxHk5eKuDIWNs9AZ4Gqy/rP5rbZyOz7BB0n/oq24bUPUniwYFzVFGue3bp+1aozr
-         8AJBiF9sLqDtiTrK07VQNA05rf3bB1i1sFRBqy18/rNWJP4gtYGAWC26Ip10/Vb6bYnW
-         zcMl/S/OmVxsffbd36CG1bIQpLcrjakqq6HpBw/xbJCVZpcKmyhVe8NcjAo4NimqOVly
-         Wu6A==
-X-Gm-Message-State: AOJu0YxDhoTnbomh9fwtD3mDWXuxsQyTOxHj1nopHp3KlacGsbRGAoBi
-	nDXnl9BE9/Aoe7GPprVv82QCXv4jJJV017+UQ20FHPmeY8tG7ZuUHzezdAacQw==
-X-Gm-Gg: ATEYQzz+Ai6oNGYRnGOdo6m68DfBIhbDUtui5EjWaUDNJ1+yKwdR0lYSY/hEG9kVbN/
-	ewgRpFabhfZk1rx5/ZZmhF70zRzOli0rUoR5iXdomfJdQOI+ii9ew+uUX7INHnXEzP8HjUkKGzE
-	2N9ENXMZusg24t3XuO93doeJWCzCcGP8jc7KrnsPScSLcILQOxEMCsvmBacFId5H2ypuyeGRlsC
-	YzzU22TPpdbnxLSTnzRXo/00psDi/Q2ufZfhURn0UOzozVcujV9rQbjNNTeLlDhO0WPu4EPQDuk
-	TpwXWz/s8EEtkDA8F4QgK+PSoQ1WRO5aO5HwEk8zdKCtLiDCdpVkEc+1G5b+O9DQLRSo0lL/wGN
-	k3SJf467M7OJ/WdJgSmCTsVkERom/6iKz+39jDEfzKCz58szYstSfa99vayPLSHRfwBw8U8Fjpb
-	st1gPQamRWjxVTRRHL1KfeI87FW40Qnpw=
-X-Received: by 2002:a05:600c:4644:b0:485:2fe9:336f with SMTP id 5b1f17b1804b1-4871607e225mr8846155e9.30.1774382424043;
-        Tue, 24 Mar 2026 13:00:24 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774383597; x=1774988397;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=qa1zfcfn2laL5PSmTczBmu6QBEczrEL/01JQXDknq58=;
+        b=SB8hfjRk1Ouq6FtJjtd4rRoJqyzOqGlIL85/ZPI4HxIXfFvq67DdgQje2nJ09lbT09
+         OsRskrm0bRGkFjTEvbH7h7jFrxL5+6ltl161TscKyrI3L6eGEW+UIMYBw4p89mX0cE3U
+         m+W+N3HU30OzkQnNvmRv2bPLjBQssN4O4I4GgR87dMJnmSejks/AZXZEpqUSpEzFL42z
+         ySVEqLx4INue6Sddc6Ma6CgR1w6IUXJN80FyoQ3B3f5wYBU8zPGaFTRJp903m2kfPqRs
+         o2b7UHQ9eASAf8Fr9RuTDwxmCtmulXDdvwZlIRbRK1fw8nU4gj2eBGyh2CkzFYhNPDmr
+         zG0g==
+X-Gm-Message-State: AOJu0YxnJqnfwgh1LEktyeR58YrQ2xk+XWMvDq8i7bLVU+gtAJ2eOsWT
+	ja3b+Oqu4kTRcGaO2L45jyE+GAMsGxzgEi8JukEr8bZYdU3TE/8Eeq2rid+roA==
+X-Gm-Gg: ATEYQzy9XUvkO2bpFgi8Re6faUvnes1oTRvO555X+ekgbOtA/hpkUeuZGv4RgCEDsor
+	W5DiSeeXJGuckToKn4SUG8ib8+r4XOr+mW4mWoo1/grZ9BHsvRKX7cqaFAlpWZAzksXP3UVDXfo
+	YqQ6/yd0vrxPjClSJ3lVgJ38LuWo1kQfU3gK4oTS8qA2NaxK8ShqNCEmAXN4fQwWJix04FMCNyh
+	Z99t0maTIMKIRV0E96ytObXhaMax6TpnSuAyHSF+BcwIq19BvVNBrr5JRQKg/55FdCihP3d20Fi
+	IKc534sH6p9ByBYN9uPPyNUxMNayiHk/J38bF3ajWxnOtSYwKhvK4QC8AqLNK9YQ43Hn68IlPRb
+	I0OuMzh5s2uzZWeRpbQ+Y9R61Dbx67e0flEvSbKMmm6pC1DYk5/oo5jAyU7EPrHipfoqqdVtuTt
+	pEE3Ub1C7hY2Oltw93mzDN
+X-Received: by 2002:a05:600c:3d90:b0:485:2a4b:7bc3 with SMTP id 5b1f17b1804b1-48715fc38f3mr15699495e9.4.1774383597180;
+        Tue, 24 Mar 2026 13:19:57 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4871728f5a7sm4116625e9.2.2026.03.24.13.00.23
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-487116939b8sm113236475e9.3.2026.03.24.13.19.56
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Mar 2026 13:00:23 -0700 (PDT)
+        Tue, 24 Mar 2026 13:19:56 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/2] python3-txdbus: add missing RDEPENDS
-Date: Tue, 24 Mar 2026 21:00:22 +0100
-Message-ID: <20260324200022.3831228-2-skandigraun@gmail.com>
+Subject: [meta-python][PATCH] python3-scrypt: upgrade 0.8.27 -> 0.9.4
+Date: Tue, 24 Mar 2026 21:19:55 +0100
+Message-ID: <20260324201955.3844896-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260324200022.3831228-1-skandigraun@gmail.com>
-References: <20260324200022.3831228-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 20:00:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125590
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 20:20:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125591
 
-This module depends on python3-six, otherwise it errors out:
+License-Update: Copyright year bump
 
->>> from txdbus.interface import DBusInterface, Method, Signal
-Traceback (most recent call last):
-  File "<python-input-1>", line 1, in <module>
-    from txdbus.interface import DBusInterface, Method, Signal
-  File "/usr/lib/python3.14/site-packages/txdbus/interface.py", line 8, in <module>
-    import six
-ModuleNotFoundError: No module named 'six'
-
-Add the missing dependency.
+Shortlog:
+https://github.com/holgern/py-scrypt/compare/v0.8.27...v0.9.4
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...crypt-remove-the-hard-coded-include-paths.patch | 14 +++++++-------
+ ...n3-scrypt_0.8.27.bb => python3-scrypt_0.9.4.bb} |  4 ++--
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-scrypt_0.8.27.bb => python3-scrypt_0.9.4.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb b/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
-index 01c069291c..ef6c248e80 100644
---- a/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-txdbus_1.1.2.bb
-@@ -8,4 +8,4 @@ SRC_URI[sha256sum] = "8375a5fb68a12054f0def91af800c821fb2232949337756ed975f88d8e
+diff --git a/meta-python/recipes-devtools/python/python3-scrypt/0001-py-scrypt-remove-the-hard-coded-include-paths.patch b/meta-python/recipes-devtools/python/python3-scrypt/0001-py-scrypt-remove-the-hard-coded-include-paths.patch
+index 3678d46cf6..73950f4cd2 100644
+--- a/meta-python/recipes-devtools/python/python3-scrypt/0001-py-scrypt-remove-the-hard-coded-include-paths.patch
++++ b/meta-python/recipes-devtools/python/python3-scrypt/0001-py-scrypt-remove-the-hard-coded-include-paths.patch
+@@ -14,11 +14,11 @@ diff --git a/setup.py b/setup.py
+ index 419a982..3f1fe52 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -26,7 +26,6 @@ if sys.platform.startswith('linux'):
+-         ('_FILE_OFFSET_BITS', '64'),
++@@ -25,7 +25,6 @@
++         # ("DEBUG", "1"),
+      ]
+-     libraries = ['crypto', 'rt']
+--    includes = ['/usr/local/include', '/usr/include']
+-     CFLAGS.append('-O2')
+- elif sys.platform.startswith('win32') and os.environ.get('MSYSTEM'):
+-     msys2_env = os.getenv('MSYSTEM')
++     libraries = ["crypto", "rt"]
++-    includes = ["/usr/local/include", "/usr/include"]
++     CFLAGS.append("-O2")
++     CFLAGS.append("-g")
++     CFLAGS.append("-Wall")
+diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.9.4.bb
+similarity index 73%
+rename from meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb
+rename to meta-python/recipes-devtools/python/python3-scrypt_0.9.4.bb
+index 4cbc4c06c4..0a5a841a71 100644
+--- a/meta-python/recipes-devtools/python/python3-scrypt_0.8.27.bb
++++ b/meta-python/recipes-devtools/python/python3-scrypt_0.9.4.bb
+@@ -1,11 +1,11 @@
+ DESCRIPTION = "Bindings for the scrypt key derivation function library"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=05b5ac2824a7ae7489193b0f6a6f2cd1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=514fe4e05afed341c690c453fc87b10b"
+ HOMEPAGE = "https://github.com/holgern/py-scrypt"
  
- inherit pypi setuptools3
+ SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
  
--RDEPENDS:${PN} += "python3-twisted-core"
-+RDEPENDS:${PN} += "python3-twisted-core python3-six"
+-SRC_URI[sha256sum] = "a7b637848ed518c1ea2b31a9ecaaa3f49616598d8442de8706cf1f01fbabf0a7"
++SRC_URI[sha256sum] = "0d212010ba8c2e55475ba6258f30cee4da0432017514d8f6e855b7f1f8c55c77"
+ 
+ inherit pypi ptest-python-pytest setuptools3 dos2unix
+ 
 
