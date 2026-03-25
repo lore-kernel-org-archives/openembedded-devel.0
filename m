@@ -2,39 +2,38 @@ Return-Path: <peng.zhang1.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B451E103A9A1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ECE3FEC11B
 	for <webhook@archiver.kernel.org>; Wed, 25 Mar 2026 10:26:58 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19005.1774434401728745505
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19004.1774434401307931930
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 25 Mar 2026 03:26:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=cgqvMPmf;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Usd+483X;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=75449cfe7a=peng.zhang1.cn@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62P6W6vm2152221
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62P6W6vl2152221
 	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 10:26:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=pi+z0u2ac8ciRj3jXB5LhCfkhmpHSNGEtLlfUpPecL4=; b=cgqvMPmfL74L
-	tc/wbCQ3ybig+UIrttnHgUkKnD09WqhpugHAdo5Vw5FeXtvH+LBmLxnJJv1oXCN/
-	uFOC/zXDmx96QTTxsDcBerdhQ+2i0WabD488RZHDvYsVV72LABU/3hoH1u0bxhGj
-	TF4DLr8gWZTZoWk0Ji6YOasPH3ouYDfQQycQM/BzWNexHwsaq05/LWx1dasO1V+6
-	Q0VJRONEktVQPK/Qc+wKsNOvW57J2Vd5VU3b/MvEsJ7RmUTH55cqfIilNlxyoyaj
-	MGe8Tm2s374QahSarcVVSldKeqbZ8olD++jD3+yLV0DAHc24twn569QCWadwCRkw
-	5d6S2WhGbw==
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=HAqA+IveHTF3OMuoYgpU
+	hUrGBqpHQWZOC1pyLTsDAng=; b=Usd+483XHJARmvu95fRJrpKYiR4s38zb75V4
+	aZcukL6fz6J0d9rfjx9qz4YMCkIKiWFTjpwT+kB5tKOcf1abqcu1GqQ/BZwr4Mpo
+	qyCesaRpeosqM0AhH/zj5VM37472N3LBW79Bp/tnKvm2o2yw6lzZQLqClQzZUWr6
+	HVsTLNw2iF6kLGuVOTCF/eHGLUHgy8qY6EX943ud9jC0s8CrRFRlWUmoKtwdf3U7
+	0+lyhMyr1QVTabLLyECnwW93KEDtSZxYIx8tnNoZkj67Sxq4D6OpIMEKsSe1qbLw
+	25sy2CUGJ+ped2oSTcph3ltbbfwFDuA0WNgRhtnYMS5TJKMaBw==
 Received: from mw6pr02cu001.outbound.protection.outlook.com (mail-westus2azon11012041.outbound.protection.outlook.com [52.101.48.41])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1ja6vt5f-3
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1ja6vt5f-2
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 10:26:40 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bN6ybyTx5clBK2sevAp0Q6B8e8LXGCi6AdlDFmxAzdBEZ+K4Kb3tKBrJ0LgGVWU7dvquepTAh2JYqk/JdrVU2JzRfUDPkmFPYLSepzm5IlodgjaA41/VXrfUdBMNreZDwNq5gKERG2KbKUOspCSz1YC9oE+al8ZXDxxh+ARdudizQmRAE6ThJP5M651SXP9w7ZN/IWkPyFgfPHcNWLuthuKrPfxmXt4/tClsZyxG3gKiemJ2G1dGylb5j+j7UjPP6gVERVP6E0GHVHgcBuc/mOcEPv8OiLlIzwAtIoKHQpHNgQ66URN0HDyvlFsDuW8fSs6lQXnHISUU7TGMZSfjdg==
+ b=kQtZHWiGkEMqVNuCTQZTNfq7xaXkH8s/6/U5/gA1r3HPfn51ILzHsixRumKIwUMgHLiSS32Ie0u1wlTIn4TmNRIbCoNefGzRhGuLPcplHO14Foi5ljxiegYgVBztG5/Q+/zau8SkE3P7VaYRvuTXuitdZ3j+rNCRsVgiar+xpmAqqGO8hHkNEmXK8qTCjMxjmbccK3H84wDkPMzWbtRWf8qK5QXWCH923Z26/foPBP+/jW+Jq1+jb9bZiR/uCaj61zwldlJ1Kcb5ZFo6AOI4j00ofSARlfyBt5X2xyAzUr9x/qFOdFkpGchfXlfzAPtyPSmcB44BojjwvP49zOldsg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pi+z0u2ac8ciRj3jXB5LhCfkhmpHSNGEtLlfUpPecL4=;
- b=dcW5DwGMLpOvTSRy8yqIDfe2LuH/oRMMDhO8NuJottYBrKORrwlSBb+g820Hq7up+4KFUcnQvMMRX95wdndLUfSNllOO6Ht1r2pAZNcBXIHRTlTYhicbR/hNQSMar+fg7QWJFZHcJtejd7lOTrk7FjBxsw3dC69Gx/pK4J0gV63EIanA8w/7dT7iQ/FyOwqmP083LyX/18kEZR66QPBineH9Mk9bajVecYXuVdLb6cBrUDlQeUIBjR0i4fFZsEIBaicv8jV2B+ze907+eJ6FzW6ncxVNOJ3wxht1j+02HvphLSmvtuWvPugLJaXgUGFWowQ8QArRdXv0eWehi+8kBw==
+ bh=HAqA+IveHTF3OMuoYgpUhUrGBqpHQWZOC1pyLTsDAng=;
+ b=YtzYU2h6p+goqJXefkpY5Jak0Pizd8wjSYGdtUI9gbuHqF4m+g8TYhzEZB9TiL782zohdzTmblcZHumNc5vOnMLK9VZOF0WOLu2Vj7yxFbZmmO+8EgiGFFqvqmd7IPGbJw9U7kXaMdM0C088ek3wDdQ+qSVfLLJvJbkg9svlwPOnS86XC/ev2HXYPFE1nF14Ub+qt3pL2WHSFhWSkiQ3E4SSzmFw9Og35KVA5QD62VJPAVk7i2cHLZmfupo5s+xvqBar+tJA1JHmXinCj0nmbYP9Q+RxLNpzhIgTm1iLW53qEvq7Rkf6iJA4Mh10TLhdp9/lsH9CTJe4DX65MXHqnw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -46,15 +45,13 @@ Received: from CH3PR11MB8562.namprd11.prod.outlook.com (2603:10b6:610:1b8::13)
 Received: from CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484]) by CH3PR11MB8562.namprd11.prod.outlook.com
  ([fe80::ea76:e083:b8bf:7484%5]) with mapi id 15.20.9745.007; Wed, 25 Mar 2026
- 10:26:37 +0000
+ 10:26:31 +0000
 From: peng.zhang1.cn@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 3/3] libwnck3: upgrade 43.2 -> 43.3
-Date: Wed, 25 Mar 2026 18:26:20 +0800
-Message-Id: <20260325102620.1901081-3-peng.zhang1.cn@windriver.com>
+Subject: [meta-gnome][PATCH 1/3] metacity: upgrade 3.56.0 -> 3.58.1
+Date: Wed, 25 Mar 2026 18:26:18 +0800
+Message-Id: <20260325102620.1901081-1-peng.zhang1.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260325102620.1901081-1-peng.zhang1.cn@windriver.com>
-References: <20260325102620.1901081-1-peng.zhang1.cn@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: TY4PR01CA0060.jpnprd01.prod.outlook.com
@@ -63,77 +60,76 @@ X-ClientProxiedBy: TY4PR01CA0060.jpnprd01.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CH3PR11MB8562:EE_|MW4PR11MB7055:EE_
-X-MS-Office365-Filtering-Correlation-Id: b7780b24-0d08-4465-e000-08de8a58fceb
+X-MS-Office365-Filtering-Correlation-Id: 57f577e1-495e-47a9-c228-08de8a58fb4c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|38350700014|22082099003|18002099003|56012099003;
+	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|38350700014|18002099003|56012099003;
 X-Microsoft-Antispam-Message-Info: 
-	kqGlD0r5VaXqQl9IpHiOqAIloBpozzYpy9l4YIuWD5Auim6iEx/zVFFNS0LCWO1LZsSeSwX1+lRVrNBrG3b/ntud55QR6PiTICvS4tneByI0OUE6UgiE4cXowqSJ/1OTGVitH/BjW9gABHZ0iW5stqK8UShjZS4b+mgcEpUtyJB0WM4CQC1tS2nsO8v+0WQftNDN5B/RKe7gycJBXJoLk/O1RVMb61RkJOvwdEggCed4031jXoPJnSkXDHPDcB8TBYCcjfrkT76gh2ZVEjmfmffvaNwpx1rNqTDsnOBTbMz5TmW2igYNXaA8S9PAFHdhg28abIWufSpkjt8sk7OPoBdqdyYx4/8XfnmgVq9RnET/7OZaISvXbubONBPXDxLuuQcJXsTaMEat4H6E+TR+xrvfxQ6nxe10ROCVJFU3XADx0FBzeyjSXXh7q9nmccTDUKTFquKIoYhGgHbnFQszufF3naxEKn5nX7hQhKoEqssDxeuZOdtUq6eG/NfQFkk6wV9J2lvs8LA4qrGbAnJLFnVjIE1UQe4kwV33xywmWzLzRYeT7RiEZx1BBuYj8i2QpKLgkf3YttS7kCmNJ9qUDhUZhfG2LqpZyne3PglVx8rUBO0HBv2hcPqUsm9+wYKU+gIGhFy7r9EMQh6Oe4js3f3tDYkFK72RDTLajYjrHlzuiyomruiO+XpewpNuj81rxPvGkuI3tmcIihg939d6edpDL/dKoquYHmF/kzrtgBdEle+SGW9fA8MdLcSm5YFA
+	Ngc7TjLshhduDrYlx6fsWerE4uPGbmc1QutLuUgy1Ajqf4dP2E3i5rbr7o3V80SSQ6Si5GWiUtSc73xfLwpioc/Ep4CBikEy/NKmSv6KoAWoboGgQCBi05xqi8uPat08jEVGC88sqXrcPo5shAjE+OXJeAj9Hp5VIjoRQGWs46mmQX9rHipqEY1Nnh5DiaWacEbAajUDqGyuRk9PH3L2SRs5bpAQDwjUJM8PSyJ3/Lj8me23GEe14sLU46BydDXjWagX8isXl4+nccHgooJYiQEwsipQW8B9QWEzqs3quceSxO4PUP+BR9k87SB9/RbHMEhI2/VVk6LoS2avchdJmsOaPdbyuGUZVL3K2bjeEtasdCOObzrfHFZMt3htuC2a71Wupb+Z8tbgWoBs+kQ9hDX2VVhNrTPGcsZnbpCIbBANQLv08/3ClaNPKL8cql9g3/mzXNcVSW5nwH7UK8YgNdfWG9SkVU7SuAKpM/Fou03cGTN6oornvCju/NRPL9JLE8k+tt0ZOaxYxIfKTP+u4NmbH2QQWCjl+Hr0GVzzOll8IZUXYAypyJxy+S+Z5P0IdF55BQdx3mtfQbJSWnRn7ft7hLa1BXZUOW61Wnm02UPxSYp0j+yEWDJ2uMNdasTzwBzM/3yi0e5djOXaB0ohukdH0CMADa8TBbDrKIMwEJWrHZ2sqPB5IRtelfaNRMoYjPL5wTQ7Idx5ZrEVonkssYlsTfNFWgkmIctxcjrN5YBI/7sAoHdkVuMnobpn90ngZX4rXtPYh59cOEa12e2324QvPpK9080r7HEAMxxRVs0=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014)(22082099003)(18002099003)(56012099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH3PR11MB8562.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014)(18002099003)(56012099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?5bClB4jyDMwE+fs0/rcid3t2ehZpSk1zL0FIJ6T8voFwxBfRm0vBlXevABPD?=
- =?us-ascii?Q?ZkCMzjEUaxXpaNcpwVzNJ3orYNvHfgsseswwsgwhZi4drtouANWDu/RnzrkM?=
- =?us-ascii?Q?hD95tTSzynzyj9CiqsUXCioZjCbBxokS26yzW8laMJWMBO6ojOWc0p+u1fhl?=
- =?us-ascii?Q?u0jTW0zaev4BzZVeADsCUbZYirEvfdjF/wMNPrefZIJsgknXiMXNMKsdTQfM?=
- =?us-ascii?Q?qaYfsG5C6iHXjnO3MHFyLonHuRGfpoy+c2CTdPbvWoPBIXEhdgZQJf9L0/wQ?=
- =?us-ascii?Q?TY7cVCqvf67rS9RHVjmFANGw1WZkpYE3iNLnf/DVfshAgMS4yzYmqf3ic2m2?=
- =?us-ascii?Q?jOZVz0XPfb6aI/HPbKV9yFbw19KhlVqsSrTeLvTRqdBCjLazMcCr+NhfAbp9?=
- =?us-ascii?Q?FqqTAr6R0vlQsSZb7Itq2HynRvbo53L22zEQCJuA9cRKI7dcmKPIjspJGxeF?=
- =?us-ascii?Q?KtmyMf1PFguHV2batkjd7LSD1MSOhhAJCjNoqrb85ZL26otlhrl5htlk+AHC?=
- =?us-ascii?Q?nTZfGgI2+oRnxw6FMproJobSgjlV7Owv7ogxu0b6zlH17u8bFhZU7x43Q0mu?=
- =?us-ascii?Q?AEUwfAv/DdmYZPyfQ5GlUUusDAp6XTzj87qrRICWTo5av7BRY/8kq+PzSOwF?=
- =?us-ascii?Q?BKGd9s+NEaVH+anfFgb6YbOEow8dSh/VhVZ+JVVO7Pnbc20M5zVDJ5EIiEZh?=
- =?us-ascii?Q?45CfqoqvDfixO93mUNYtJd9Ca+ECPckMnlrf7GN+HSJ9F/gNIA2i5ftjjaT/?=
- =?us-ascii?Q?N6eTxKA11JqPKGXTnFAbZT+y08WM0D9ZS+LLeQzT+CworHJVN8uusiAEehgp?=
- =?us-ascii?Q?PkbxmOwk6aVyx2kIyCSVRHcqrI1fBA8bi0x4iJ7qZPYstpMSwK7wlwjBaZbq?=
- =?us-ascii?Q?0seKuV4d2ygQzioyp0nRjRK2VP/7EJ90HDoV3DmX9/Iv6A6+gl4lTm4MuHzA?=
- =?us-ascii?Q?G/ogxNWENUEki6Sk6UT0Ygc3aQ0gUAO3OQGUsbLC0OeJMJ+6xzDyrgKNREfR?=
- =?us-ascii?Q?r/m2dgfLhqq9Fc5KPR8iYT8zYSzZaUpVZyWoBAOsHqJydmjBVvuJlIy5HmBd?=
- =?us-ascii?Q?XGaKn2Df4bmsd/cG2JBNYjiyG8McQsnDxB8f4lFKevKFHyITPXRG8RdC/i/C?=
- =?us-ascii?Q?nnyGONNSGwMguGWL71a6JuwhH5xZbTz/Z3cFLkHTFkeDDaVygQep8/VSP8AG?=
- =?us-ascii?Q?XrpwlE2FHwxPhn5OmQuiG/AWfHmg9Rn4fEf71vt7ijUHeRAvTiz0hZ+Z6rVh?=
- =?us-ascii?Q?GwW1PsJrVzEFHZLF9Abxz1H63ARhsHamP8g1tmwOVUvCTF86+xj3g9bEsaWy?=
- =?us-ascii?Q?RYU3ssVMzc0v0ISAQUJgGnWQZjMXqiIJwQQssf//RHT6LcmKSc+Bcvy4BP+z?=
- =?us-ascii?Q?iIbqm3+nlLp3zYbePu1o5/QMX8lp9lHpzNqPzRxX0qIHNPdrc1ZwMV8KJbYA?=
- =?us-ascii?Q?YSs4ELs1XE/Ab1dV9q4yLWY1gZFBgoZYIjlmjfWQc9JGrjRtRqe1cGbaCaBp?=
- =?us-ascii?Q?Lu14pkvdj4Sp2oFayzH7elFE/O7CpDXX/F1misj84Eeu2HwkIo4d6p70lVcr?=
- =?us-ascii?Q?6WTyNlh2nsSVAWibKoMyhyB6VOrEdD2YD8MFZHCSzlMopamUmMtDzBpqCgdG?=
- =?us-ascii?Q?el4DfGDmV/WR3P6KQAIFB+huoAjTaQKnhvX7SBx4VkBawTARWcDxGm/PE+j/?=
- =?us-ascii?Q?iY5j4LkgVdztDb2khWwyZu+mz9WsbezqqkmIeM2uFcPzhFEYL3NrOeLVFjnn?=
- =?us-ascii?Q?fttfiVhHNGLxxIrq6WghaKYCHSNvaxQ=3D?=
+	=?us-ascii?Q?Jf6Xn8Lbj8gLN3GILzbL1SiLMq9cHT/QyGBtx418QCif34KVZQVzHFY1rYZF?=
+ =?us-ascii?Q?vQxM68I1OrD2+cB3pOHYkSd44za8wbSpPe0TEtIfL9w3lsPU+6uerHmA5Fmw?=
+ =?us-ascii?Q?uVB7eyduMSTR7UYPp2kYi91+0gr+jr8LNsVgT98qESXXu4C5X9wgoOztvBuO?=
+ =?us-ascii?Q?Myqp9jxtu2G45XWDEC9xC3LdG310yisx9e1JrcHztS5GaNplRfPRk2TbRigH?=
+ =?us-ascii?Q?Cbl6E1d9R2l9IjoVU01utH8i2LWdqUpZ0LNIINJtIW1Ci93Jc8W4JEqw7mak?=
+ =?us-ascii?Q?PlfycpcKj/PBTw31jD4dHzhnGd1LBPw7NQ5WLP7IuWVDu6QXgAifdhnWJdVw?=
+ =?us-ascii?Q?mymu1tFFAhWIl2WNT3MK6BFiXDeAbmv90vocGje1Lcef/jktzQmVJEAItu/p?=
+ =?us-ascii?Q?FbQA6G0HGnkJcOQyiEdEl3CF+iW/3NVeU5JZwAdJWDp/AjFNyDjBbsaT1tBM?=
+ =?us-ascii?Q?GZnM2kSCHouvwY2R/kl7X9ZT6J/4Di3ddBCKx3Wa5ADqtSUeZF9aLi93EwcJ?=
+ =?us-ascii?Q?5m7Xz7IyG4mgyC0u84IiqQ9NLJFsemI1S8eSfOUwHXbd5D5ROhIVXKwLZr3d?=
+ =?us-ascii?Q?59BPcGeFFp0M8DDGPZ7NPWwsxnBoEnfcOeM6jlrlmpY9p7jb4hi+CI55hbZC?=
+ =?us-ascii?Q?KOz8hfPFXbXUMUkxXzXVFDthz1L37FbO9I/2zlBtCtWKmuVIfRAWkLpM9VnU?=
+ =?us-ascii?Q?wVPHi6qPo+/yMfokdC9veezWwMvVrSvGVS1kj3AYmi4XMxsDi1URWhdss4R1?=
+ =?us-ascii?Q?rMSh5XEQVDlrqDEun+cqnGkBcKSwg1WnkNH60l6BKzGcw3mGCLd8rGZRMSUz?=
+ =?us-ascii?Q?bQ+NzbnQP6MNatbOFJrknzoyUKSxupSBAlAM5CRR9GTjKPM8NmuudtHU+wf/?=
+ =?us-ascii?Q?v/FLc43/QEjOVsJSBuNhpdExhocRUKB5GIXuqPd5K6qMjWWMUNL/PaP++Nr+?=
+ =?us-ascii?Q?t6wzXXEccQKALw9vvydl4n7LUSIKErNhYCOAK+KS3rWmyyTgnKwKqvHtDFtd?=
+ =?us-ascii?Q?PP0u5PICTNv9YpMnGXEEsrdp+aLQkAXNcmvEkDou1QEKdK2u1NYYN5ucNgKD?=
+ =?us-ascii?Q?WTvdks+Pbt+oQU8Ktj67gW/sVPYhN8HdfxpdkzdXr8dYjSqgqi3R8+SnFA3H?=
+ =?us-ascii?Q?GCQhXYAlUNzn+0HZW4iCui38hd6lVUSlcPsrGr5wFp17hU7WGSRjvopYgBfr?=
+ =?us-ascii?Q?VBkqtmyb7xWsi0ZqEy/7hb6c5hBYQiG0S+feaHgWFyzgx0xdGUZ8fgf6giKn?=
+ =?us-ascii?Q?kHO6kafMvwgpbd89F6skgLMZ2xTblXS2//2bWdb6jzJ6/oAEzxFDZNSKmIbT?=
+ =?us-ascii?Q?Klux7UcOszAYw5jROrKPhjdGAAs9cIwPohXyio3hvuGseDEQr8TWPinMGQzQ?=
+ =?us-ascii?Q?f4KLa1oWti/vah1ZxCVb0zJh7/LEC4VRD19FST8qTa+Nnv7P8SswJjW1a60X?=
+ =?us-ascii?Q?DYXKCTpLqQhDitCqvt7FfuksUtipJejSQs3NReGN80B8fCu1LGgqfrVOM1jG?=
+ =?us-ascii?Q?i9+dmRRJJY0xSr2KBQgWS0tJAbgV/rzAGQDeVSsNWO3fenMjhOgcEAQANOLR?=
+ =?us-ascii?Q?nQsNWc9ThFTufaBwV5p+tKqztDFjD72UD1NpPp+lQoLNSdO9iGneUatllDLi?=
+ =?us-ascii?Q?0aC/aic+rVc1WNSP9Rt+VzxRd4d3gq/9ZnrTmVRwzNlYL8+nNPPcQqsqeGx2?=
+ =?us-ascii?Q?cR3MvTjw+UoH5XgGaJMrqaOoSO2lGnQW6zJfZ0CgczjRsZZTodsnXm36S1vj?=
+ =?us-ascii?Q?J+H9//Yi8IIbDVMGGn9eDFgqzD01ryA=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	PwJEaOtsqGFZA8trDm32eIHHVQu2yCSZjvW8ELk8TpGr7jIjN2OP9N1rWpdo6qmnQWl3LtBEYKC7c4ufRONVd1juUaV3BQrjMJo1Wb5+GE5g4dETa19JSs5mHiTVrN6WAW4ncMeGZVZKQ1MUsQbMeBRwC02hC6M2iu0TxDTu303nBRZZckNw1taLgfwnAqu/iJXaENtgApGEhFrqPOKNeaKzc9nokZcVKeT/M7PfB+8Car4581RYwe4ShIGVMrSkxF5bZyCbzK919JO+NdZQweRrZFRNhNSJCGrAhuwtPeTmvtjn2DY6MzfxuwkfeZhwt0pBdpprXTGJrlBFGm8NFw==
+	qhgE230ipCOkGRM3aYu43GS9zKT9CNG3POyvqekmpvIlDe798oec6iIfdL1d6sFHoiGsi+pOxaPonVewepUEeoO4l0x3at7PCdrYfuVcVgDheUByamRp8GYQDayXInhkEDId2qeEkbcCrU75/lOaZGvckU/jIRTFvSrLMcZ8krL9vDzfZ/cA3ZdX9rZbm1HRb/BT1imZL3OlltMVgz+YHUOjHtgOl0sx7p4NUIUOLDfbOc+xINhhxALKqm7Q0JI+jiFwnSNZSVBhiPpOQU+Zxsxrvr/AJ13Gcm3yBAGHEZ1VhHBZtGEIHw6sgDG7uugox8tjyGVih2RqE4FzIlQmHg==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7780b24-0d08-4465-e000-08de8a58fceb
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57f577e1-495e-47a9-c228-08de8a58fb4c
 X-MS-Exchange-CrossTenant-AuthSource: CH3PR11MB8562.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 10:26:34.0562
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2026 10:26:31.3746
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kzZCiJUdvYttTD4OgsMJdCK7YLIpdgDT/S13wU4XrmpHfbAn6x59iSYj24Dd42+j5E0+S8fNsn174IjrrZG68UxBqsXhMkwDa1XYpgk8guQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: rsXRIYHUGHyBS7ARle4Mz8F2h5UZ3eWytxdlKXT/HiGOwqoseoFLm3wzc4NetsPn393IBkLwCnZswUem3bUzr5LrsmxIKm8UjfDEbP7U4Jg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB7055
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI1MDA3NCBTYWx0ZWRfX1G7psN4Rwrm+
- 2wmgl4NAY4FdfjrAGxoaDF6GFBf3vAif8+Yv7dT6dYC+ew4ZLcLtcuDJ8i/t4iZrMssgk/4wqhY
- kauQSbEk3NxVLF8oPaIA48rbLEKi9ClOnkTkVNQVZW/nUXLn7YS6/X9D+thjAsQwPURh4fOqYkg
- +OZ+SbLWn6v1B6tJ0q5W99C8+IOaPP1Ux5wpfc3sh43bDHvU+LvcJ3vC9aNTd3TgRIa37LUX1bi
- +r2A2Ljx0hELpy1CdiUnaZXE6BKB5jcH7trOrteJhYdCTsTot1hD2Bihv4B6cPq9gINl1tjdztu
- GEVzvwTRD+idMHaP1cZVlPnoPuYQQx3prDetdSk+2nWmO0s5q9/hcBlfWFjGbroidJ+EumZ0juH
- uOpnZPlhKpsT8ZMtqY1z/tPSsdXsTo4EcT07YL0EPiS2zdnH8ivkeWI+56kRczrnkykQu0RfWSl
- z1EcltsKPPyqrihAMHw==
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI1MDA3NCBTYWx0ZWRfX8g3UqlXrVe5n
+ oomNsCvq9dwQNzt1zPKX/vhPLrh6L9fKnFXy3JvCKhFK2yHC5cy+ZW1h58QWli2ohyxsZVos+bN
+ DO8uK8CthGhxfAad/zV9gKMddcquNt/6mDMbtJCuY14rLjY+3PEetXqtboqfYC6fuzcPLNBHKAe
+ 7dNYlvN1R1CZB0dIW+KAZ8K7mOPH/fLpNzrLGodI3eLJjFbjXKH3dks6VVu1FRr2VcP8THHWCCx
+ Y81q2R3yT5Wr5vu15PzKgNnC8m+FStORRGlD96c21+M0c/VcCgLNuJJYGigt/w6zncLSSSt9fip
+ qRme+Zedg881+yWt+jcEGQ3dP3iXuZootwPF4lAFxKupL/A7b/MeMhcTd9D/2JFrv9MD77wqpnw
+ LY3qOhyIwi756ahkFig7bF1/SBe7RHN96P1f31Bg51Zi5+HZF8bbfujmLGD6ubqetdJvmD0mkuT
+ 99tuKuTVDEADUXwKZaw==
 X-Authority-Analysis: v=2.4 cv=Q5vfIo2a c=1 sm=1 tr=0 ts=69c3b860 cx=c_pps
  a=LPv6HZ59J3TLgKTE/qPS5w==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22 a=GHR8O2WEAAAA:20
- a=t7CeM3EgAAAA:8 a=aiIX5UjjAAAA:8 a=PIyYbEaFYT3du45fyU8A:9
- a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: sVpbwzc_yoNzOV1gQihgpWEK_DjrUJs1
-X-Proofpoint-GUID: sVpbwzc_yoNzOV1gQihgpWEK_DjrUJs1
+ a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22 a=t7CeM3EgAAAA:8
+ a=HQXgToz7zBQMW4iSMwQA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: QgmDHvc7mMmFhdgrX1FQ_KCoVMba-7yx
+X-Proofpoint-GUID: QgmDHvc7mMmFhdgrX1FQ_KCoVMba-7yx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-25_03,2026-03-24_01,2025-10-01_01
@@ -147,90 +143,97 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 10:26:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125606
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125605
 
 From: Zhang Peng <peng.zhang1.cn@windriver.com>
 
-Version 43.3
-============
-  * Fix clang warnings. (!66, !68)
-  * Fix regression with class group and application names. (#166)
+Version 3.58.1
+==============
+- Use pkg-config to get systemd user unit dir.
+- Updated translations.
 
-Drop ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch,
-already included in 43.3.
+Version 3.58.0
+==============
+- Add keybindings to move window between monitors. (!40)
+- Updated translations.
+
+Version 3.57.1
+==============
+- Drop zentiy dependency.
+- Add systemd service.
+- Updated translations.
+
+drop 0001-drop-zenity-detection.patch
 
 Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
 ---
- ...40d59c32d7ebeb94d242436e3144cefc174a.patch | 40 -------------------
- .../{libwnck3_43.2.bb => libwnck3_43.3.bb}    |  5 +--
- 2 files changed, 2 insertions(+), 43 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch
- rename meta-gnome/recipes-gnome/libwnck/{libwnck3_43.2.bb => libwnck3_43.3.bb} (75%)
+ .../metacity/0001-drop-zenity-detection.patch | 30 -------------------
+ ...{metacity_3.56.0.bb => metacity_3.58.1.bb} |  4 +--
+ 2 files changed, 2 insertions(+), 32 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/metacity/metacity/0001-drop-zenity-detection.patch
+ rename meta-gnome/recipes-gnome/metacity/{metacity_3.56.0.bb => metacity_3.58.1.bb} (87%)
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch b/meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity/0001-drop-zenity-detection.patch b/meta-gnome/recipes-gnome/metacity/metacity/0001-drop-zenity-detection.patch
 deleted file mode 100644
-index 2d526e7aba..0000000000
---- a/meta-gnome/recipes-gnome/libwnck/files/ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch
+index cd46824c39..0000000000
+--- a/meta-gnome/recipes-gnome/metacity/metacity/0001-drop-zenity-detection.patch
 +++ /dev/null
-@@ -1,40 +0,0 @@
--From ef0e40d59c32d7ebeb94d242436e3144cefc174a Mon Sep 17 00:00:00 2001
--From: correctmost <136447-correctmost@users.noreply.gitlab.gnome.org>
--Date: Thu, 20 Mar 2025 03:03:44 -0400
--Subject: [PATCH] build: fix -Wheader-guard warnings reported by clang
+@@ -1,30 +0,0 @@
+-From d36e65f3e31c882f62d5cfeb7b0e1441d5fdc821 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Sat, 14 Apr 2018 16:15:59 +0800
+-Subject: [PATCH] drop zenity detection
 -
--Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/libwnck/-/commit/ef0e40d59c32d7ebeb94d242436e3144cefc174a]
+-OE does not support zenity
+-
+-Upstream-Status: Inappropriate [OE specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ----
-- libwnck/pager-accessible-factory.h     | 2 +-
-- libwnck/workspace-accessible-factory.h | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
+- configure.ac | 5 -----
+- 1 file changed, 5 deletions(-)
 -
--diff --git a/libwnck/pager-accessible-factory.h b/libwnck/pager-accessible-factory.h
--index 8e2fe30c..25220fc2 100644
----- a/libwnck/pager-accessible-factory.h
--+++ b/libwnck/pager-accessible-factory.h
--@@ -17,7 +17,7 @@
--  */
+-diff --git a/configure.ac b/configure.ac
+-index bbb4db8..2010d78 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -336,11 +336,6 @@ fi
 - 
-- #ifndef __WNCK_PAGER_ACCESSIBLE_FACTORY_H__
---#define __WBCK_PAGER_ACCESSIBLE_FACTORY_H__
--+#define __WNCK_PAGER_ACCESSIBLE_FACTORY_H__
+- AM_CONDITIONAL(HAVE_SM, test "$found_sm" = "yes") 
 - 
-- #include <atk/atk.h>
-- 
--diff --git a/libwnck/workspace-accessible-factory.h b/libwnck/workspace-accessible-factory.h
--index d2d4a84a..335b465b 100644
----- a/libwnck/workspace-accessible-factory.h
--+++ b/libwnck/workspace-accessible-factory.h
--@@ -17,7 +17,7 @@
--  */
-- 
-- #ifndef __WNCK_WORKSPACE_ACCESSIBLE_FACTORY_H__
---#define __WBCK_WORKSPACE_ACCESSIBLE_FACTORY_H__
--+#define __WNCK_WORKSPACE_ACCESSIBLE_FACTORY_H__
-- 
-- #include <atk/atk.h>
-- 
---- 
--GitLab
--
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_43.2.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_43.3.bb
-similarity index 75%
-rename from meta-gnome/recipes-gnome/libwnck/libwnck3_43.2.bb
-rename to meta-gnome/recipes-gnome/libwnck/libwnck3_43.3.bb
-index 13923a3e17..3a49c0e2f3 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck3_43.2.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_43.3.bb
-@@ -19,8 +19,7 @@ inherit gnomebase gobject-introspection gtk-doc gettext features_check
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
+--AC_PATH_PROG(ZENITY, zenity, no)
+--if test x"$ZENITY" = xno; then
+--  AC_MSG_ERROR([zenity not found in your path - needed for dialogs])
+--fi
+--
+- AC_SEARCH_LIBS([dlsym], [dl], [], [
+-   AC_MSG_ERROR([unable to find the dlsym() function])
+- ])
+diff --git a/meta-gnome/recipes-gnome/metacity/metacity_3.56.0.bb b/meta-gnome/recipes-gnome/metacity/metacity_3.58.1.bb
+similarity index 87%
+rename from meta-gnome/recipes-gnome/metacity/metacity_3.56.0.bb
+rename to meta-gnome/recipes-gnome/metacity/metacity_3.58.1.bb
+index b8b248ba3a..f364b52b98 100644
+--- a/meta-gnome/recipes-gnome/metacity/metacity_3.56.0.bb
++++ b/meta-gnome/recipes-gnome/metacity/metacity_3.58.1.bb
+@@ -24,8 +24,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ GNOMEBASEBUILDCLASS = "autotools"
+ inherit gnomebase gsettings gettext upstream-version-is-even features_check
  
--SRC_URI += "file://ef0e40d59c32d7ebeb94d242436e3144cefc174a.patch;patch=1 \
--            file://0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch;patch=1"
--SRC_URI[archive.sha256sum] = "55a7444ec1fbb95c086d40967388f231b5c0bbc8cffaa086bf9290ae449e51d5"
-+SRC_URI += "file://0001-Fix-build-issue-caused-by-OE-core-changes-to-startup.patch;patch=1"
-+SRC_URI[archive.sha256sum] = "6af8ac41a8f067ade1d3caaed254a83423b5f61ad3f7a460fcacbac2e192bdf7"
+-SRC_URI[archive.sha256sum] = "7554997104b26ff0e79a02b37a2ba189bdf4e7ccd54226f0faf4b1a59006c901"
+-SRC_URI += "file://0001-drop-zenity-detection.patch"
++SRC_URI[archive.sha256sum] = "e430c8a92409ef2f91a4dabd50a71e3d3bbcc474a3dec1caec3813b381d7d1b0"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
+ # enable as neccessary until new warnings are dealt with
+@@ -35,6 +34,7 @@ FILES:${PN} += " \
+     ${datadir}/themes \
+     ${datadir}/gnome-control-center \
+     ${datadir}/gnome\
++    ${systemd_user_unitdir} \
+ "
+ 
+ RDEPENDS:${PN} += "gsettings-desktop-schemas"
 -- 
 2.34.1
 
