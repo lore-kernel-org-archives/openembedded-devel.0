@@ -1,89 +1,116 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0853D1093176
-	for <webhook@archiver.kernel.org>; Wed, 25 Mar 2026 01:55:17 +0000 (UTC)
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13330.1774403712921174862
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D3A0103A99C
+	for <webhook@archiver.kernel.org>; Wed, 25 Mar 2026 02:20:49 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13968.1774405241945117625
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2026 18:55:12 -0700
+ Tue, 24 Mar 2026 19:20:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=OwP7TZgp;
- spf=pass (domain: gmail.com, ip: 74.125.82.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-2c15849aa2cso1091424eec.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Mar 2026 18:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774403712; x=1775008512; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CWCHe6wIwr5Gc3NzQW7cJzpbizlmKjU9iMoVm+/TrKA=;
-        b=OwP7TZgpXe02AY4nbItklaHgHjhp75mKawpbEBCSWjawCvke+prfM6l8im6P/uwsxf
-         R+c9hsB2FsP9QG5eYfeodN3Q6+PtxB8tE3y+7wknU+92q+fCJr36IxR/PFPiLT1fG+nx
-         LE7H4Gzu9IQuUS9dNU/Pq8fyrMTe44gwueNG869014Rx5b+SJYLRHCgFIxpga4otBbXe
-         HFHA3xNgZCAyq1v28HhHK1LHuF43WMDIYy/44LcopYXeSOsNHUxN1h+zpX8rNHbGF40g
-         KaHYwEPSHQXie+suNqaiL1aTXp4R4GSWWQN+XfIToRDQI8DRAaNIim3v4DCsPFObun7F
-         9T5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774403712; x=1775008512;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=CWCHe6wIwr5Gc3NzQW7cJzpbizlmKjU9iMoVm+/TrKA=;
-        b=h8Fxmgx46YGafNfyKxsr1MMuXyDs9VFNPYrCIwqf50WXMe0cfzPUhnYUvo23Nnmot7
-         bPvwdRwXPeFCo8l9iS0d53R+VlQKtHZHX7p+E/d7SGXsPoTvYaEWZByMEOk2nX8dZC5r
-         x5qvrWN8/3PIXzSaAKgkuQT6O84hJwJTOo9Px4MTIdMwi/NVxxcvFzH0VFgcsqfWBAhw
-         gvZ7yNqHzwdLT7wBYMN8Pdq/ynQm5BmxOB6hUFckXdFmrOqdGkrCNIy1luVVPqoEL0q+
-         GxDpf53yPDoadZ0VtNt9mdEpHtejFYc38YKUgpC/gUgGeLKDC3BZPml+O7POpPw9j2NX
-         /pmA==
-X-Gm-Message-State: AOJu0YwMfYarpXFpQu7slHxxHA6mUXAEI6PJ8j8vnFVUGijOEH9/JCTb
-	NR+C4RWuLJwBhnUj415Hk68SS4JBuxOzp/OyTzl6grJz5RwG84gitJGHrgZ6wA==
-X-Gm-Gg: ATEYQzyilgUwnybHWGZV396FdunZek90cFZ4c07nxCl8+aHdyUUHRL+AfowVbFjONuG
-	lRsMN1TCVut2t18daCMpDPd/QNapaPhFEzEjTUi6+u9SFxywbGTdsM1kNdVbq6LSRiU91jNm5+S
-	h5zZ8rrt0e9/OCLtjvemYuUHP8DjvcVrpopMomodnDEeihSSnhjN0R3+msKJzh9e6ViJ8bsoLWI
-	FOugoQtstpToE7SBca5Y6Q3s1iMSmBLIx7Ke41vorBHzSMS6+Bph7AiJqu0xkfI7KUuESui6LLM
-	4XWDpPhKbt4c3pV2hTkSj53NW5Qr5bkKCn3W9HYrYuf4pq32emjgQeDFVF+lbI5dUo7HT3jNMtw
-	IkTP3EUk/PCn00FIXNNZ+lOwlpel69YsoHvPg97+5p3QGbrm/D6YY4AiNreI5GH3DNFagMc+c0f
-	b0jnglr512ivpGb/zo8m/cGm9ASvD9GoLegY9pq912T8P8gVUIeedolf2kteR5675P6i+XZUI8L
-	rJme67UV/ZEXXZeLSwZk+CjYYXdipIcVCmjLJz8Rjsbb5Si+csX2/p1f93O
-X-Received: by 2002:a05:7300:7254:b0:2c0:c55c:1574 with SMTP id 5a478bee46e88-2c15d443c3fmr929946eec.21.1774403712003;
-        Tue, 24 Mar 2026 18:55:12 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c10b14bac4sm22502069eec.4.2026.03.24.18.55.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Mar 2026 18:55:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-webserver][PATCH] hiawatha: Fix checksum mismatch again
-Date: Tue, 24 Mar 2026 18:55:09 -0700
-Message-ID: <20260325015509.3973929-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=jsHHIhHM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7544ec598e=kai.kang@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62O4Jt9v1856584;
+	Tue, 24 Mar 2026 19:20:37 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=PPS06212021; bh=5XWy8ExOm
+	2MH1iFoWxQZOJMEVjj4rtT8C3hIg864tr0=; b=jsHHIhHM4DsrVQ/WsU5RS44kw
+	ps5+pPGDpvcL2vvVc5BgWr0pMCzzGVuOGOVhHr9o6qu+q1lXhPM2RCjwunM3vWzo
+	+6rkTd0KnFYMjNxMoOk1ee1NHeY1yad6SHEZkjGrFd0qrRWlpr11Q3pLS3V1oh6a
+	iLqJBr0dwaqAXNBJENTLNd0HW06L+R6IxoSotOgwp0ENW6ZT+3TugmGXRx1n6dyc
+	cBtkUsTKkr/lILGjG1TKCtAu6xLACFiH/RuGsE8h55xfnZvf/+ps9JZ1ZvbIzzCn
+	GYe94M5cQUFkaRQcdYcf9RJ0DBK9gjkn6YiFNnEzkz1uvcFi5PbmvBpB3MxjA==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1pkyc6xj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Tue, 24 Mar 2026 19:20:37 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Tue, 24 Mar 2026 19:20:36 -0700
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 24 Mar 2026 19:20:35 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <jinoabraham26@gmail.com>
+Subject: [meat-oe][PATCH 1/2] bpftrace: remove ptest subpackage for powerpc64
+Date: Wed, 25 Mar 2026 10:20:30 +0800
+Message-ID: <20260325022031.2902555-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI1MDAxNSBTYWx0ZWRfX62537warZ+v1
+ +HKTCsPy/17ooM/EHjNpfz0URWS8FoFWKUuxYeaAjYycpX3QFfNy6ner3YdfMi0nuhzo8G6i9vu
+ DNsU4dyttf20icHd2QiR5qVpsjZ4g+pS8om58AW8ZQ/QLVuDY80I8foU4UVU+qY+W7DnshXTyfI
+ i0D5TlFHxzBdwfzOzvrDeICseE63wt7DgEPG4P0NrVuzJ6T2CbXHA0d3l/L6hsLsmkPNlo0C8bW
+ JwsQ/F9k46ftituaYCGyJQHXrLGay52eNLR1CSq1T4b8EXlG/whq4XkI2Zoet5sIw5/obbpVxC+
+ W9wqgzqj4kElsHES/qLvTl8wnsGJA9fSderkKo9JmVX9pMWZ4AKT+iIa+7eupCQXzy7kiIKycX7
+ pOS/0DHvPFjs25jVYIp/D1vDRFcI9lSRpQn+Vmf+KnaRqGzMvccW7ouVzaiWY0LG7oT1FYbUiUs
+ mABDi9oqH6Qsvrx9rqw==
+X-Proofpoint-ORIG-GUID: OAgwydIchDI8EvJSMwwvLD26ou2rnd0H
+X-Authority-Analysis: v=2.4 cv=Scr6t/Ru c=1 sm=1 tr=0 ts=69c34675 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=HK-ge7EqtdluswH-FwHe:22 a=t7CeM3EgAAAA:8 a=om9Yg2D3EL44AZhh5WAA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: OAgwydIchDI8EvJSMwwvLD26ou2rnd0H
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-25_01,2026-03-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 lowpriorityscore=0 malwarescore=0 phishscore=0 adultscore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603250015
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 01:55:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125596
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 02:20:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125598
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+From: Kai Kang <kai.kang@windriver.com>
+
+bpftrace-ptest requires bpftool which is not compatible with powerpc64.
+So remove sub-package bpftrace-ptest for powerpc64 & powerpc64le.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-webserver/recipes-httpd/hiawatha/hiawatha_12.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/bpftrace/bpftrace_0.24.1.bb         | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.0.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.0.bb
-index 09f6184a66..d6fa250cb9 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.0.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_12.0.bb
-@@ -11,7 +11,7 @@ SRC_URI = "https://hiawatha.leisink.net/files/download/hiawatha-${PV}.tar.gz \
-            file://hiawatha.service \
-           "
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.24.1.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.24.1.bb
+index 33de2f4054..37e088590f 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.24.1.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/bpftrace/bpftrace_0.24.1.bb
+@@ -48,6 +48,12 @@ do_install_ptest() {
+     done
+ }
+ 
++do_install_ptest:powerpc64() {
++}
++
++do_install_ptest:powerpc64le() {
++}
++
+ EXTRA_OECMAKE = " \
+     -DCMAKE_ENABLE_EXPORTS=1 \
+     -DCMAKE_BUILD_TYPE=Release \
+@@ -56,6 +62,9 @@ EXTRA_OECMAKE = " \
+     -DBISON_FLAGS='--file-prefix-map=${WORKDIR}=' \
+ "
+ 
++PACKAGES:remove:powerpc64 = "${PN}-ptest"
++PACKAGES:remove:powerpc64le = "${PN}-ptest"
++
+ RDEPENDS:${PN}-ptest += "bash bpftool python3"
+ 
+ COMPATIBLE_HOST = "(x86_64.*|aarch64.*|powerpc64.*|riscv64.*)-linux"
+-- 
+2.34.1
 
--SRC_URI[sha256sum] = "f895a35234a3efdda78187acd7ec6da9cc6cb69b3dd186d1c3f474989c418dec"
-+SRC_URI[sha256sum] = "57b61a6d2640e72601d5ba0a063d6f1639613b910287871216f7ea06c75bfb96"
-
- INITSCRIPT_NAME = "hiawatha"
- INITSCRIPT_PARAMS = "defaults 70"
 
