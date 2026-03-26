@@ -2,56 +2,56 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1758710A62EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A74E10A62F3
 	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 14:12:32 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48355.1774534343397604928
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.49227.1774534346155371860
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 07:12:23 -0700
+ Thu, 26 Mar 2026 07:12:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=AcJLdqfe;
- spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: zboszor@gmail.com)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-439fe4985efso785990f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 07:12:23 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=I+qI7K9R;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: zboszor@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43b3d9d0695so716956f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 07:12:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774534341; x=1775139141; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774534344; x=1775139144; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=iKhmyj1KneBmHNCmULMEtW8hAQf5p2uEA4vuUTVqOcA=;
-        b=AcJLdqfe7FG9e+nEjxM63HoovJpYkF2QktwrWKIeTtqmMiC9mSSpIYT+iGWF4QZQJB
-         doDf4YJEhma3uqfiRVo9eSEB5XUUQjQzCeSYoIciIl+dA+MNLIFSUu7ybzY11cKo+J8P
-         kaQuSjld6GrB1mXgSdEMzoVW7xLwI1Cz0rc3lSmauDE+dxVnyvematBAY0mI0E6vEQx3
-         1RF7kcO06CT9DvgF8zKLflxNPYdOgNJ7mYZledviU+Zq2DMsO9ajnnRrsaSa3yZgC4uy
-         3bGhBroh1WNonuJxQ6pkmD71Dvo3rW6ehe6zTg6+MWJlz1aLf08e25tOmvLTf2+hzxNC
-         OtpA==
+        bh=ruk7EcBmYGALcyJ8p2+TWV6qkM79CcIANTBjV9YCSEM=;
+        b=I+qI7K9RjHa5bIILkpoVDfeEq2KEvJ3kKxk3RrLrQbDP8L9RxOQd27UaRmdvAADAAj
+         IsOK3QXKXIcmCyTyayo40UJL4RT6zXzeoQ5mqR9Yl5q0w8RiKqgJdAuHd7UF52jQFwHe
+         0lc1pY8uE8GCbYehEDqoXksCyh2O67lSbb6YOzeaR2dMPXxTWWIHqWN5AhhmO8S7co2O
+         Pjdlc2TfZsMbeboHZEys1xhJ82AF3Dr6Cne2IlAk2GJvcTq01h3DW4Y+lc8aMukNzC1p
+         nTPkmPZMXz1Q7cBZYe0ORR3AclheQ3qoOtkjN3WoYaPoBY3ZAWy5LCOOlP6t3jHYFLGC
+         E8/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774534341; x=1775139141;
+        d=1e100.net; s=20251104; t=1774534344; x=1775139144;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=iKhmyj1KneBmHNCmULMEtW8hAQf5p2uEA4vuUTVqOcA=;
-        b=M+fQ3nxjfVTmi1OpQxU2UGIPpdJo3GRnGYg8gvYqVTw1yfEvB42lromOxxPg/YjRzo
-         RmQ28Dx88Ne9fKFCZgt4WAchY8LitWr14uwPpoE85qSdgncxd81CNc9CwJ+MwU8DBfq4
-         5bCwDPEfKql7CVHxgbCoerz+QnLBMNkekgGsNjlDe7rZEFbeHHKB9RlgLPN2Vh7r7sek
-         lcImLOVJ95fdwbRGeh6mDoY1m7cUotW06VFTuXY8n+WWO7SwOizKQdbbwoVK9oVqxVJM
-         Me+VfOpqXCMfiEBLuQiLglsAgjrxsg4008Wnc85iQmuJAhWAT40Zlfge7zTp08g2zkSm
-         GIsw==
-X-Gm-Message-State: AOJu0Yy5K74kmTfQ3svmc86NfXItxQwo8Q0VtWWJbf11jicX7PDXHLSr
-	Dcu8psb+UNNxt5hAgvUk85HyiHWpRo0XT64u1SFyC+VQSxZHSrGqddWkOou6xQ==
-X-Gm-Gg: ATEYQzyZIwFhySTEupqweFECbPMjAJs3ocrVxp/XeFnu+S1xouT7Abr/uuGvBSIaMCb
-	FLJFuHiMEWQ+pFFgF7MCG5FHE+vp0HsdCHeKrOt83PmMXfDhppdADYHBOKJi8seI7reX9KIIMVk
-	9smA2r3/5WkpzNFi6UAAHgiewldXcnONcglmjQACE+4+XPkhB3ZxnpRNOIslMXF2372Ekw0L7AM
-	vQjtGXPc0xxPx7mDz/Z80PiimDS+7vioBHJjPnBYLZZioijFYER1zG0N1DiQeKkXE+adReHJ7RX
-	tML5+BCldPgZpYkF/ud5KEFnC21VSMbvZOAufE0joLpQCTJzKkZKAHHsrREN+f4Aiegv/vfgbh6
-	o5F66QF/NNprQISvtd9EjM9PawHZ76yvGOngssTJf6gEG0iLthUgqZrvsm1kKSbs9Et1N6uhYmC
-	dJjYbG5eY9Q7wTEQ==
-X-Received: by 2002:a5d:64e6:0:b0:43b:4ae5:d7c8 with SMTP id ffacd0b85a97d-43b8899530fmr11277512f8f.2.1774534341406;
-        Thu, 26 Mar 2026 07:12:21 -0700 (PDT)
+        bh=ruk7EcBmYGALcyJ8p2+TWV6qkM79CcIANTBjV9YCSEM=;
+        b=dp4kLhLhJSe2KLW5rkmm8/HytBHHws1XSRav4nve/kEsGqaHye3Ssop4A6vXxeA2kd
+         GjyiPU7RTEjSjQfVXHLZPfguXPjXsaWT8oOng4J67RMh9LyhfzvqxiShQsbzzJfzJZEN
+         6+ke7BTqqSDSWcyoNkpivmxXWPueaKCNYl1cErzHC0KbqwkmO0GjVzRDhCkW5DDFFDHc
+         Fe4QSb+IG3xRYPPJSzZLseRAYb2YvzM67Nj9/1B1bIsI7RRmi/UtEL2r6i0z3gB1QLrX
+         GgsNKNn626zme61+Y4fsckm5CL1p0EbVVDxQYKMkl0ztkb9kz2ZeFlwsPsfhWqxjugeZ
+         ivXQ==
+X-Gm-Message-State: AOJu0YzkIDX16116qrh5mIEiN9pVnj9TDGt6wHZiRjfFDeWDItK9/pSm
+	oBzKS1Ce+HMiCJHj1YJZLqcMHCQ/OQBwj/pV6rcWx7mH0PGwcWDD9Vy0wWoz5g==
+X-Gm-Gg: ATEYQzxfGccvr6VKeuNUhhUzczHYAJubIoomGu23zp4lnmxs7zn67E03idSSgx03kc9
+	kMpwnr3OXYHKZ0a0Q4rbdoV7HY9c1NNbnzvu3wBD+UBdCY111bDy+gOiQaNgrSJ1zZ9HsJaVYyd
+	IS+3SaefAZm8EWM8IVSr15qHznOZ6Ehl1MTv55zJx3yrchmDalDksgCLfA/0VIHdTlb2aSyd6ik
+	ouAFFbxRaSaZfK+XBPbgB8T/vfzutuDaq+7aVTfq7zTg3LGVUtuwyiVffvKJgcrSwYNqIIqsZoi
+	PnscDZ8KgAchj6Wm1SmyROb8dWjswi/Xpcn4bjcI0qbXGWek7FB7qqFLMHbJENacknG6zzJ42pv
+	zYxWSlcYina4m37wJx/Y9Sv93S4AF6wrbwUNhhuRo0W4kO+Nc7mwxs71BAE5CLOSXw2ysVO29hl
+	bYn+91HGLez/I0lQ==
+X-Received: by 2002:a05:6000:1787:b0:43b:4312:2cbb with SMTP id ffacd0b85a97d-43b97a264dbmr3387654f8f.17.1774534343832;
+        Thu, 26 Mar 2026 07:12:23 -0700 (PDT)
 Received: from term011.lan (95C810F6.dsl.pool.telekom.hu. [149.200.16.246])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919df903sm8609609f8f.30.2026.03.26.07.12.20
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919df903sm8609609f8f.30.2026.03.26.07.12.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 07:12:20 -0700 (PDT)
+        Thu, 26 Mar 2026 07:12:23 -0700 (PDT)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
@@ -59,9 +59,9 @@ Cc: Khem Raj <raj.khem@gmail.com>,
 	Trevor Gamblin <tgamblin@baylibre.com>,
 	Alexander Kanavin <alex.kanavin@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [PATCH v2 04/12] python3native.bbclass: Stop using PYTHON_ABI
-Date: Thu, 26 Mar 2026 15:12:04 +0100
-Message-ID: <20260326141213.2081121-5-zboszor@gmail.com>
+Subject: [PATCH v2 07/12] gdb, gdb-cross-canadian: Stop using PYTHON_ABI
+Date: Thu, 26 Mar 2026 15:12:07 +0100
+Message-ID: <20260326141213.2081121-8-zboszor@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326141213.2081121-1-zboszor@gmail.com>
 References: <18A06529173E9998.57592@lists.openembedded.org>
@@ -73,30 +73,47 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 14:12:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125726
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125729
 
-PYTHON_DIR now contains PYTHON_ABI.
+PYTHON_DIR now contains PYTHON_ABI, don't use the latter.
+Simplify the linked library name to use -l${PYTHON_DIR}.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta/classes-recipe/python3native.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta/recipes-devtools/gdb/gdb-cross-canadian.inc | 4 ++--
+ meta/recipes-devtools/gdb/gdb_17.1.bb            | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta/classes-recipe/python3native.bbclass b/meta/classes-recipe/python3native.bbclass
-index da1283d6b3..755a6c156c 100644
---- a/meta/classes-recipe/python3native.bbclass
-+++ b/meta/classes-recipe/python3native.bbclass
-@@ -20,8 +20,8 @@ export STAGING_LIBDIR
- # find_package(PythonLibs REQUIRED)
- # which ends up using libs/includes from build host
- # Therefore pre-empt that effort
--export PYTHON_LIBRARY = "${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so"
--export PYTHON_INCLUDE_DIR = "${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}"
-+export PYTHON_LIBRARY = "${STAGING_LIBDIR}/lib${PYTHON_DIR}.so"
-+export PYTHON_INCLUDE_DIR = "${STAGING_INCDIR}/${PYTHON_DIR}"
- 
- # suppress host user's site-packages dirs.
- export PYTHONNOUSERSITE = "1"
+diff --git a/meta/recipes-devtools/gdb/gdb-cross-canadian.inc b/meta/recipes-devtools/gdb/gdb-cross-canadian.inc
+index 7b4a7719e4..c4c62d02af 100644
+--- a/meta/recipes-devtools/gdb/gdb-cross-canadian.inc
++++ b/meta/recipes-devtools/gdb/gdb-cross-canadian.inc
+@@ -22,8 +22,8 @@ do_configure:prepend() {
+ cat > ${WORKDIR}/python << EOF
+ #! /bin/sh
+ case "\$2" in
+-        --includes) echo "-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}/" ;;
+-        --ldflags) echo "-Wl,-rpath-link,${STAGING_LIBDIR}/.. -Wl,-rpath,${libdir}/.. -lpthread -ldl -lutil -lm -lpython${PYTHON_BASEVERSION}${PYTHON_ABI}" ;;
++        --includes) echo "-I${STAGING_INCDIR}/${PYTHON_DIR}/" ;;
++        --ldflags) echo "-Wl,-rpath-link,${STAGING_LIBDIR}/.. -Wl,-rpath,${libdir}/.. -lpthread -ldl -lutil -lm -l${PYTHON_DIR}" ;;
+         --exec-prefix) echo "${exec_prefix}" ;;
+         *) exit 1 ;;
+ esac
+diff --git a/meta/recipes-devtools/gdb/gdb_17.1.bb b/meta/recipes-devtools/gdb/gdb_17.1.bb
+index 9c6db4ca2c..a5d96f01eb 100644
+--- a/meta/recipes-devtools/gdb/gdb_17.1.bb
++++ b/meta/recipes-devtools/gdb/gdb_17.1.bb
+@@ -26,8 +26,8 @@ do_configure:prepend() {
+ 		cat > ${WORKDIR}/python << EOF
+ #!/bin/sh
+ case "\$2" in
+-	--includes) echo "-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}/" ;;
+-	--ldflags) echo "-Wl,-rpath-link,${STAGING_LIBDIR}/.. -Wl,-rpath,${libdir}/.. -lpthread -ldl -lutil -lm -lpython${PYTHON_BASEVERSION}${PYTHON_ABI}" ;;
++	--includes) echo "-I${STAGING_INCDIR}/${PYTHON_DIR}/" ;;
++	--ldflags) echo "-Wl,-rpath-link,${STAGING_LIBDIR}/.. -Wl,-rpath,${libdir}/.. -lpthread -ldl -lutil -lm -l${PYTHON_DIR}" ;;
+ 	--exec-prefix) echo "${exec_prefix}" ;;
+ 	*) exit 1 ;;
+ esac
 -- 
 2.53.0
 
