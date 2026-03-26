@@ -2,56 +2,56 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C851010A88D4
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 15:22:04 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.50112.1774538519186538257
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CE6B10A88D5
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 15:22:05 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.50970.1774538524294872648
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 08:21:59 -0700
+ Thu, 26 Mar 2026 08:22:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=iOcf62Ca;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4852c9b4158so9257645e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:21:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cetDVuVz;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: zboszor@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-48540d21f7dso12268065e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:22:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774538517; x=1775143317; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774538521; x=1775143321; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ppC7MnyZcuVfYXis+oWrey3eSjDE8CtFi5SsI0O+BTM=;
-        b=iOcf62CapoCy8DBXHVnlWHqnAl6RLe+UejGiDh67pzDP0BcetP8Xd5sQx+KA+gShzx
-         XyXa4/wzofCGQ1bz5BSAyMcWtGKsyYlXKbyUQ5bDG8UkCGJKL39eNrONzDdzrZv7/ntn
-         hqmNOVETN/DmyR+D0VG5PvumSzXNxilI/e1GonlUSieWrv9s7p8fTVSOoe6RWAlV7w0h
-         RWmPCzFo9XM8k61cBvDDF70nTTaru0CNGJc2yWM1/W8jcubezLmY2YJomtbZPgfutIP9
-         JzjB1VDzTr517IYo9otmAKZ+C1jDc4SFzCCgH1dCEhI9E16/2dHJOBUfKqr68tyuj0X+
-         PqUQ==
+        bh=dOc465uoOplJQ0d0auFqfWdawEgPdJ6hek5Vg77txic=;
+        b=cetDVuVzdBawIFyvr7IpqzyiZz72XQxNSlx17PJASEGxmOFnmvNKrogY0uv4faAgRY
+         2JSvXAopcyr28NAwT4/FeClg9tg9GZG0Fi5Gs2gwcdtZH1KlkQJywXMKxeM8YmRhIEI/
+         W5q6LlL9K1qieAMORAnmCHK20+A5UVcAfTAruuiTno0p+QUGbXMTsYbBKm653v9w/1Kp
+         L/8hpsmQjAommpc8fTu48RVA7wlYxgznSlmbuOVcvR9YP7tgtNivz9YDxE8AMd3b4eQn
+         N1uZIQJYXiQsbLSP8A6fk/nSMrgzTL3O5c7aIzYd0l9fRCgkvN7RZzxcX2d9OuuAnX0E
+         h3Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774538517; x=1775143317;
+        d=1e100.net; s=20251104; t=1774538521; x=1775143321;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=ppC7MnyZcuVfYXis+oWrey3eSjDE8CtFi5SsI0O+BTM=;
-        b=bW99tjFsHRg4HvXnnwBlJdcNGjSR62jN65DxEV+m8IyXApSULSyAoKnlsi2pdIIqgL
-         bD2uv0kdS18H5917R/+co9kho5AvFVnx8/N1gfQhZVh4qBHo1purDcitBDplsIkpDd0g
-         iBeeEusOHETELA+cmHU2RhHYoDaCMwVhcVzxrlosPwLehIIa5mM5pc7ouSnbyYswDWFg
-         J9g76LOgf4269prY+g37+woa36CMmSi3NDj5crZHBHrjIV36eiGB/EGibNSpC1bQdHig
-         SDBtEt+42N3VgtoD5MmD0tdpBh3HV6XULbgfGLDOU1m7/USW1jhkUoUSYwGtbPQU+z1o
-         PJvA==
-X-Gm-Message-State: AOJu0YyISD2Id9a3GlSxTGtt02KYlASjLd8zkdDXe4+lqLCfShbmogCq
-	SqAFpDStMZnsv9CFImqm3Xro9hnDrIhFhKvqmwIDSuFg0MDosR+1OWHvAv1JJQ==
-X-Gm-Gg: ATEYQzycEJzZSXA3eq4PNZhYPElaEo2iTiOEXc2JMYVl+rC4SnSFttB3hhlR2CIiRg5
-	LrE079gWNyG9jrcZWKG15fWtHV0j2LTtYZzix8Wz+R1jkM4R2TkC9NNPJoy5RoIclQhdeHSvuSI
-	AaNdIrLdwQbc67cnyjxYBwY2475LLZ6N8Ozxz9UuQXsu2TWyQlN6dOEuJRs3Sn4xwN8U80Nt7Ie
-	iwbFX+1FzvQx1qjrvNYxZtdXBDFsXR84UJMXsgUtm2NHQRgUEN3wXglpRRPXL9NZPSF2OuUA5tW
-	Jk69x0HZ3LiB71xZgQ1xdygW8yv23ead9ZbT5Ns7sGElxQVnzJHDdKlt1yVIXWjtbKPBBg8AE8F
-	qlZ/TWJq5qkRwOYMjJ+rguVGu98pN4div+zwnHoUXiRPLgp/kuj2TYCzGtwH/O/gP6h8Kf0Cv6H
-	b3nDacGppDtscNdw==
-X-Received: by 2002:a05:600c:64c9:b0:485:3a03:cee1 with SMTP id 5b1f17b1804b1-487160b8be7mr116738135e9.33.1774538516749;
-        Thu, 26 Mar 2026 08:21:56 -0700 (PDT)
+        bh=dOc465uoOplJQ0d0auFqfWdawEgPdJ6hek5Vg77txic=;
+        b=IF+fE1gi3F9r9GuOrvPqAsC+5vlKV9gWiwsdrFsC6SkSLppIIF3qJxt37zkG3Cw0Y2
+         5DWA2XlQrBOCu12gxju11K1pRkmHg4VMN1Tp8+HaQmc8fTl1MNlJXgkUGTiI3yS5X/AG
+         /Z2T90ze4uW1CmcuyqYp1fsLKx49Vo++ARRlilPRvA35YEMma3TLKQB0U2jvCr4lu/zc
+         LvlQCWghN++clyOVSQzF6fqQBU0WqdWD5BCxqPJywd9QrHcIQcFBrn2xXDh6ZYNArdPI
+         USwQ580zMreMnJJTqUgxNsstLB9CJnfqg0s7OWoeOjMZWHecvF/qja7/HV4NUgqRc40F
+         en7g==
+X-Gm-Message-State: AOJu0Yxbid3L+iBoF9ktK6Ytjoz67QDQIyfK1vrN2iJ4Tgjt7/QGN99K
+	7H5qk25HUunI7cno50lv9KW8l57Rd4u0zecfuYcmVgJliAwseUhsH7gmgd9f5Q==
+X-Gm-Gg: ATEYQzy0OxT1kB2f5EkOp7NrH7DZ+TGEEbCIvyrkE1umejbqqTqZ1vJLRm6h/wYJMxh
+	v3+FgmA+2qqlIuUyvyd+q3FnlQEPXWtE8phUx9qsA4680OwrG9QjOTqoVrTViNRjUXpXWHu2jWF
+	pGi7m6t1Q0WJIBxoA5zSWf/yYZc8ptPRgMLXpi9PFU0HekzNWEBvFYMo6V8D6FoYwj7a0/twUrf
+	SDWuCZVmjjj/LE7eWvrK43QCimuj5l1LNposPwXnim7z7fmfjG22JYRSe6N5tNQhYa/osbCIb3g
+	OjPwVfJ0rPDWeAVj47uzC2pK9udfUZcKHFTKGx6FQVln5e1NoQPxtiHtwKHmvRtVJsJ+qjuGMUJ
+	Svo2NjVf2GzA5xLiG0B0Zp9yFLu/K513+tXDcDBSa3HyzzuXY5TB5zmJjcAU9b6a+nEZErySq8M
+	UFGbuCVBrFJ1ZiMg==
+X-Received: by 2002:a05:600d:a:b0:485:4535:73d with SMTP id 5b1f17b1804b1-48715fbf739mr101839735e9.2.1774538519962;
+        Thu, 26 Mar 2026 08:21:59 -0700 (PDT)
 Received: from term011.lan (95C810F6.dsl.pool.telekom.hu. [149.200.16.246])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48720925591sm16478935e9.25.2026.03.26.08.21.54
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48720925591sm16478935e9.25.2026.03.26.08.21.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 08:21:55 -0700 (PDT)
+        Thu, 26 Mar 2026 08:21:59 -0700 (PDT)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
@@ -59,9 +59,9 @@ Cc: Khem Raj <raj.khem@gmail.com>,
 	Trevor Gamblin <tgamblin@baylibre.com>,
 	Alexander Kanavin <alex.kanavin@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-networking][PATCH 03/13] openipmi: Stop using PYTHON_ABI
-Date: Thu, 26 Mar 2026 16:14:28 +0100
-Message-ID: <20260326152143.2224099-4-zboszor@gmail.com>
+Subject: [meta-oe][PATCH 05/13] cmpi-bindings: Use PYTHON_DIR
+Date: Thu, 26 Mar 2026 16:14:30 +0100
+Message-ID: <20260326152143.2224099-6-zboszor@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326152143.2224099-1-zboszor@gmail.com>
 References: <20260326152143.2224099-1-zboszor@gmail.com>
@@ -71,29 +71,29 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 15:22:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125742
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 15:22:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125744
 
-PYTHON_DIR now contains PYTHON_ABI, use that.
+Use PYTHON_DIR instead of the custom constructed directory name.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-networking/recipes-support/openipmi/openipmi_2.0.37.bb | 2 +-
+ meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.37.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.37.bb
-index db74b91f7e..25073fbd3b 100644
---- a/meta-networking/recipes-support/openipmi/openipmi_2.0.37.bb
-+++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.37.bb
-@@ -44,7 +44,7 @@ CFLAGS += "-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
- EXTRA_OECONF = "--disable-static \
-                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
-                 --with-glibver=2.0 \
--                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}' \
-+                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}' \
-                "
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
+index e0d995226e..97c426cc22 100644
+--- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.5.bb
+@@ -18,7 +18,7 @@ SRCREV = "49d6dcfc71ca421100fcf325e31625817c469fc9"
+ inherit cmake python3targetconfig
  
- PACKAGECONFIG ??= "gdbm"
+ EXTRA_OECMAKE = "-DLIB='${baselib}' \
+-                 -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION} \
++                 -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/${PYTHON_DIR} \
+                  -DPYTHON_ABI=${PYTHON_ABI} \
+                  -DBUILD_PYTHON3=NO \
+                  -DPython3_SITE_DIR=${PYTHON_SITEPACKAGES_DIR} \
 -- 
 2.53.0
 
