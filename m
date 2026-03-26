@@ -1,115 +1,160 @@
-Return-Path: <majortomtosourcecontrol@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A052610A88E6
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 17:25:07 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.53160.1774545899455572777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2448310A88F6
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 17:47:30 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.54600.1774547245035002459
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 10:24:59 -0700
+ Thu, 26 Mar 2026 10:47:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=CYmBX5nv;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: majortomtosourcecontrol@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-67e02b821cfso750128eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 10:24:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ofhKkHYh;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439cd6b0aedso823955f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 10:47:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774545898; x=1775150698; darn=lists.openembedded.org;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hkZFKSMMhOR1irNl9Qp4AvjQbmr5uLRAt7K5C4SNC1Q=;
-        b=CYmBX5nvFv+WpgExY2JbN/4RAIh6KhDEbwiKIzZLxnZys8dqgtaxhMcuqNF4FYOhS7
-         OUZjJ+x3hCBh3eX59iCy2hRQ+ZeASi4k81+gjs7aic6gL9f0EMpB0q9/xS1+pyuqi5/4
-         zBdBTMirHtvcjYQrZaYoUpQHeUNVdGKvm1cL60D4XEQc4N8LLqy1jP8XvrympixjIBKO
-         LIy1+T5QIMZ82dsdG8tIwABtEsmY+TIuxfqDzA0PSlwVY8RpE07UmG/D1RqwGuZJcJtF
-         WDaDTsu62NYX86b5f1FAuAvMw38JPYq815RL6JGvSKK5zBeP6zLgx3UXmGauzenaBv5M
-         gqUg==
+        d=gmail.com; s=20251104; t=1774547243; x=1775152043; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SLPBkycirwHGNG9jGEGuWM/HKaMwfz2jrCtl7N30bTw=;
+        b=ofhKkHYhZnVWnX+qaiEBodlLhriuoDBu/WFZls/g2KZYxNU8DuL6Qx76qTtlXOWtZ5
+         d9MY3id068uxptW6gMPCrUBBXvvub0B/veWvkiE3DtGZ0D0JZW6wJDzZ+cs59gBFQWAQ
+         qel2GcAmNysldTrPzigXK0GNnUIPA7UnzNUAqXgxcIe/olA8kBCJiyBJu6Js++Eoh4jr
+         hUMCV22OjE3NHn6xSiP4oCHflU376Tie1rn2mLCf9S8HUfQ5ky6yAwiqyjdcoT7hWG3V
+         KoJgt0stznlM+wwJaJcErQzkS2llI/KaTCJOhGTMg7OOuv06A+Cn10zrll1gzw1zorAi
+         IFCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774545898; x=1775150698;
-        h=content-transfer-encoding:subject:from:cc:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=hkZFKSMMhOR1irNl9Qp4AvjQbmr5uLRAt7K5C4SNC1Q=;
-        b=ajTW+3HmYW2WYZnFr1DytucnSlu7mhw+/4orYpxYe5fLBrgwuvCP2y8kMRcIdx/p3l
-         9WnQOfK+v/6urnvbpbcnR7U7aJdecZ6Bc3uW8SU8gbcxkpXPtBrLSTOmfsf6ZM3W4VMe
-         aPkWdDM9oIJycPYUlPnnYH909cEixzIifSwjg++MM5vjV0WDGfWoZlc3LcX3G9B6fMqr
-         3a1NQFj0sYu9SYIMbaL9byK5v/N0l5xdy3VsJKX9LcYkYrMeRzOc/h4qeoWpxJApbjPV
-         gYoQbyNkZ9+/s30MDlgEobjUtK/9XQEKGF5xpjdMqA70+nUdwRnRVEv37J3Fcgw3vof3
-         mpVQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVGqU2tTb5q5UANjoUEgQtFqPvjzE7ID9/x8gTTpj9H3ZCVzpNNz1SwzWjyzFyKk2BQESICxoEngLv4C/MEdmD+pQ4=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzpEHMzKSyy/mZnecglwIEykPwqDycdP4+sjDU3S0jK7Tv3JERf
-	kMZMdKqqyysOVoGSTCiv7oVaL62BzZncfbe9L0/paGQiSdiXBNa8m6bC
-X-Gm-Gg: ATEYQzyjHInrJ3CGbYp8+6ycE0BZZJKLesJCFUbxBHW4La7qXi8L1O2NP3ofJiJTQ0f
-	5LaoEli5Pw/A02MagTN3yuxSrKKeBLj5rsfJ7y3cH99d8U2O5ajogLsEPxT+DgrcGXijo3TJxbD
-	lQwhuJpBQ0SulOjs7n/yI+Q9dUt2CyByZOzDqUJ9+FfpbVwSG/erSt1GSwRteA5fxwhx9pB/3Qw
-	4+nMfkuZ9YFdE4UQGdHnCC3mxZXnIrLsTUljy8ZaDqyJw46lWYjOgLjH7Xswzjj/Q0bx2cwFHUG
-	PqXawyXejR6BNUn9W+N47ghq4dyynaN4VpNCk6p/2i40w9CrXR0RvImIKF1AXAtD/hHUJ5s5QFv
-	4m/vJvU/j5u9+RutoC22Al+SCe2P28TLEsSK6k5rDBgpyzfx4x9DUNoWOkv8Kvhn8YDKBCF2Kdz
-	qIw6X/0uIBWLbVT1TVBPxSupbrVVP9ekhXA1XwgcrIrrjcbGjFLf//UwgDkD8GZJMIF8N1BPD2X
-	IIpXO7EzoqYygQ=
-X-Received: by 2002:a05:6820:2009:b0:67e:f55:707c with SMTP id 006d021491bc7-67e0f55727dmr1342762eaf.42.1774545898580;
-        Thu, 26 Mar 2026 10:24:58 -0700 (PDT)
-Received: from [172.26.252.3] (97-118-253-141.hlrn.qwest.net. [97.118.253.141])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-41ccb6b1d25sm2127642fac.16.2026.03.26.10.24.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Mar 2026 10:24:58 -0700 (PDT)
-Message-ID: <293a5ad3-bf5c-4cec-85d5-4121e01b76b6@gmail.com>
-Date: Thu, 26 Mar 2026 11:24:57 -0600
+        d=1e100.net; s=20251104; t=1774547243; x=1775152043;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SLPBkycirwHGNG9jGEGuWM/HKaMwfz2jrCtl7N30bTw=;
+        b=bsOLhtVcLu2ZtXcebFp5kd4y92zIpMxpWNMlMtpKlcNPj01AW8OIZDTSQ7ujNSVZ0Z
+         e6+DVA3+fPMfMy+iJ8CkOlfBBTiDpznktK906GFii5M48FghyfQgnZd/YdZWmeYLfH+s
+         LP5v31LVQBiY0LWW1n3Buj0TK4HiO1vVp2Lxu7QR2VA4AGKZpPRaF4YlrTXzBGPyTmg4
+         XY0N6kgV9Ji3+UC1fuHCBlvsyVHtugSWfOyom9XBTAJjkfXlqPdcUtjD85tkpimysTPr
+         1gLOUdAMjT9EJspDzLwp5/mL+8wkqEZ6hmXdbvFP3fsaLDb8LOf4/NE4qo7e4goIV+nl
+         XBjA==
+X-Gm-Message-State: AOJu0YyxfdmYGDWfCtlH+1wJWyNO2GyQ3cd7R/iZIhkabgzuTQNBMgZb
+	hVcLl5m/tydzcapnW5OoEXpwHQMSL7C24gHav+TeCi/jmVY6Dn/Q37OwqfyRdm8y
+X-Gm-Gg: ATEYQzz2bpN5Y8WkclL/FmDQGRxe9zOtxPVIOYf2gmGmd1vHXRkyI1uMFM/LHS1LKSx
+	Z/CpQueIXoS1qo4qKMXP8sNeEp6nw6YY0pa1wByoE8Nx5VeZjAm/xjkfqR2A1ECDHPq7a4M4xtC
+	TEq2THrMj+SgmAVOlAu6GjxHHnK1llm4cWqC1Ze1JTof/4y7+xb6v430wav6ka9WVT6e00Du74T
+	Xu6Hj0p64GWHWb82T9qUfy005LJE5zBf4cedGhIBUWkpVJdNKwdnPEXlwCCyDWMxznubQwdM23M
+	wPHJglkZQAcBFilf4rkN8mVOtYy55r4dqu7l6ozyjeZaYdhnWUF5yG6/0mQKmMk+w4ZXQONnn/+
+	7i4A4fKxYVyBHJRv5eDoKSi4amDWe4S/16P87iN0vXUvstkjeBXI4mgCrSPt4Fiex5F6B/beFek
+	1dn8EiOS+4z1fQPWixFsCsjq8DqA==
+X-Received: by 2002:a05:6000:26cb:b0:43b:9903:2ba3 with SMTP id ffacd0b85a97d-43b99032babmr3300062f8f.33.1774547243218;
+        Thu, 26 Mar 2026 10:47:23 -0700 (PDT)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919588e6sm8908570f8f.16.2026.03.26.10.47.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Mar 2026 10:47:22 -0700 (PDT)
+From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] freerdp: remove 0001-Fix-const-qualifier-error.patch
+Date: Thu, 26 Mar 2026 18:47:14 +0100
+Message-ID: <20260326174714.3811074-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: anuj.mittal@oss.qualcomm.com, openembedded-devel@lists.openembedded.org
-Cc: Yi Zhao <yi.zhao@windriver.com>, joe.macdonald@siemens.com,
- Vincent Davis Jr <vince@underview.tech>, raj.khem@gmail.com,
- ecordonnier@snap.com
-From: Clayton Casciato <majortomtosourcecontrol@gmail.com>
-Subject: [meta-oe][scarthgap][PATCH] uutils-coreutils: drop (filtered)
- "selinux" from PACKAGECONFIG ?=
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:25:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125764
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:47:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125765
 
-"selinux" adds a dependency on clang-native.
+From: Martin Jansa <martin.jansa@gmail.com>
 
-clang-native is provided by meta-clang.
+Instead of fixing the build with clang this is now breaking it after 2.11.8 commit:
+https://github.com/FreeRDP/FreeRDP/commit/67818bddb31900cdf3acb26cb0b673cc90b71cc9
 
-If meta-clang is not included, this surfaces parse-time errors such as:
-ERROR: Nothing PROVIDES 'clang-native' (but
-[...]/uutils-coreutils_0.0.28.bb DEPENDS on or otherwise requires it)
+freerdp/2.11.8/git/client/Wayland/wlfreerdp.c:637:19: error: incompatible function pointer types assigning to 'OBJECT_NEW_FN' (aka 'void *(*)(const void *)') from 'void *(void *)' [-Wincompatible-function-pointer-types]
+  637 |         obj->fnObjectNew = uwac_event_clone;
+      |                          ^ ~~~~~~~~~~~~~~~~
 
-This is an issue in the default case - where uutils-coreutils is not
-enabled.
-
-Suggested-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Clayton Casciato <majortomtosourcecontrol@gmail.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
-Sponsor: 21SoftWare LLC
+ .../0001-Fix-const-qualifier-error.patch      | 57 -------------------
+ .../recipes-support/freerdp/freerdp_2.11.8.bb |  1 -
+ 2 files changed, 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
 
-OE-C whinlatter and master include clang-native:
-https://git.openembedded.org/openembedded-core/commit/meta/recipes-devtools/clang?h=whinlatter&id=d77e398095228b34851762858a76640e3c2cb0ab
-
-Discussion:
-https://lists.openembedded.org/g/openembedded-devel/topic/103440861
-
- .../recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-index 76cecac5a6..41e4f1d831 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
-@@ -22,7 +22,7 @@ require ${BPN}-crates.inc
- PROVIDES = "coreutils"
- RPROVIDES:${PN} = "coreutils"
- 
--PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
-+PACKAGECONFIG ?= ""
- 
- PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
- 
+diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
+deleted file mode 100644
+index 87a456d16d..0000000000
+--- a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From 761b4df04a141cc8c9507c741e4046c6c6b00491 Mon Sep 17 00:00:00 2001
+-From: Wang Mingyu <wangmy@fujitsu.com>
+-Date: Mon, 11 Sep 2023 09:00:39 +0000
+-Subject: [PATCH] Fix const qualifier error
+-
+-Fixes clang error
+-error: incompatible function pointer types assigning to 'OBJECT_NEW_FN' (aka 'void *(*)(void *)') from 'void *(const void *)' [-Wincompatible-function-pointer-types]
+-|         obj->fnObjectNew = uwac_event_clone;
+-|                          ^ ~~~~~~~~~~~~~~~~
+-
+-https://github.com/FreeRDP/FreeRDP/commit/6e3c00725aae99d03a0baa65430eceddebd9dee8
+-Upstream-Status: Backport
+-
+-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+----
+- libfreerdp/codec/rfx.c            | 4 ++--
+- winpr/include/winpr/collections.h | 2 +-
+- 2 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/libfreerdp/codec/rfx.c b/libfreerdp/codec/rfx.c
+-index ccbc5af..eec7365 100644
+---- a/libfreerdp/codec/rfx.c
+-+++ b/libfreerdp/codec/rfx.c
+-@@ -153,7 +153,7 @@ static void rfx_tile_init(void* obj)
+- 	}
+- }
+- 
+--static void* rfx_decoder_tile_new(void* val)
+-+static void* rfx_decoder_tile_new(const void* val)
+- {
+- 	RFX_TILE* tile = NULL;
+- 	WINPR_UNUSED(val);
+-@@ -184,7 +184,7 @@ static void rfx_decoder_tile_free(void* obj)
+- 	}
+- }
+- 
+--static void* rfx_encoder_tile_new(void* val)
+-+static void* rfx_encoder_tile_new(const void* val)
+- {
+- 	WINPR_UNUSED(val);
+- 	return calloc(1, sizeof(RFX_TILE));
+-diff --git a/winpr/include/winpr/collections.h b/winpr/include/winpr/collections.h
+-index 807f011..b8c8d9d 100644
+---- a/winpr/include/winpr/collections.h
+-+++ b/winpr/include/winpr/collections.h
+-@@ -36,7 +36,7 @@ extern "C"
+- {
+- #endif
+- 
+--	typedef void* (*OBJECT_NEW_FN)(void* val);
+-+	typedef void* (*OBJECT_NEW_FN)(const void* val);
+- 	typedef void (*OBJECT_INIT_FN)(void* obj);
+- 	typedef void (*OBJECT_UNINIT_FN)(void* obj);
+- 	typedef void (*OBJECT_FREE_FN)(void* obj);
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
+index 9c3d532438..c596aaa328 100644
+--- a/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
++++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
+@@ -16,7 +16,6 @@ PKGV = "${GITPKGVTAG}"
+ SRCREV = "9b678b6d5a40ce01607d8c3b1b1416437c8416c4"
+ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
+            file://winpr-makecert-Build-with-install-RPATH.patch \
+-           file://0001-Fix-const-qualifier-error.patch \
+            file://0002-Do-not-install-tools-a-CMake-targets.patch \
+            file://CVE-2024-32661.patch \
+            "
 
