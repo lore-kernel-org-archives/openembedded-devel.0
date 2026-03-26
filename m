@@ -1,160 +1,247 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2448310A88F6
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 17:47:30 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.54600.1774547245035002459
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB9B510A88F7
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 17:50:20 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.53859.1774547410250207714
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 10:47:25 -0700
+ Thu, 26 Mar 2026 10:50:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ofhKkHYh;
- spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-439cd6b0aedso823955f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 10:47:24 -0700 (PDT)
+ dkim=pass header.i=@snap.com header.s=google header.b=GOfalmGb;
+ spf=pass (domain: snapchat.com, ip: 209.85.221.53, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-43b88b7ca76so980472f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 10:50:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774547409; cv=none;
+        d=google.com; s=arc-20240605;
+        b=hc/xXyS5tEqT53j9Srjvxc3Rpr5WrHAdQXN+gOXDdG64dZge7xamP+9l6Pb5u/mKmn
+         wqG7BUtOpWWmk4SGqoV+C4EZgziy1bk1tq/o2WYJQSDtDTf6b/JYskaYcLVcsEp6TlMr
+         +SYxnDcuFudYdUUoLUznKghEmF7JQEQfJrjtqy1L/tMDHTxPJRZEyO1+uarxCs5wPnip
+         J7wdcYDx9eSuMNE51GQUaQh85BZHPbT7FdBgzfg+tyemV1EGrQGdUp7B6YnOf9NE12zP
+         hHQ7LdvXGMyJOj58TAkwUFVIWzJqI5m3K4UqN9hvNZracIPJ2mNYwTV1yokNEZ791pGy
+         ezgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=XIJdz9r6+ZRT+Tnvv3AIAEvzRb2bVqqPc60/SRPtu98=;
+        fh=NMrIXR6RLEg4rYPQ8nUsrl7hKeJf/zrqC1DYBwuLxdk=;
+        b=eGZhYeP7W3zC4th9x5+9HLEe9x8IFJ9J2fspXeaweck6fUJqB6I+AVi2F/3dm7uJff
+         cjNOAoqvYVcTLc90o8xsJmQ8n+5r/W1foLC60OcdrFIBpy7mKKQDMH3q58AHdznzm350
+         Haq47+HQX7xR/+A1ABDipPBFPUC0WAGrvraqBI2EAQalstHcfNLmpW9wOJVXCtWSSTqS
+         YcMJoSIDQMpYz7hGOpbWOOFHY1L9z2AnBkXx7a3Mj4j6LA9oDqWSr/vpPAxRJ5DC4B9Y
+         RLHR3e7o7F7NMjZBjxuMevRrhJe8B7cL5oLYP3dgIdd900AVXoC1W5LgNQ/x91cDwmz8
+         AkkQ==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774547243; x=1775152043; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SLPBkycirwHGNG9jGEGuWM/HKaMwfz2jrCtl7N30bTw=;
-        b=ofhKkHYhZnVWnX+qaiEBodlLhriuoDBu/WFZls/g2KZYxNU8DuL6Qx76qTtlXOWtZ5
-         d9MY3id068uxptW6gMPCrUBBXvvub0B/veWvkiE3DtGZ0D0JZW6wJDzZ+cs59gBFQWAQ
-         qel2GcAmNysldTrPzigXK0GNnUIPA7UnzNUAqXgxcIe/olA8kBCJiyBJu6Js++Eoh4jr
-         hUMCV22OjE3NHn6xSiP4oCHflU376Tie1rn2mLCf9S8HUfQ5ky6yAwiqyjdcoT7hWG3V
-         KoJgt0stznlM+wwJaJcErQzkS2llI/KaTCJOhGTMg7OOuv06A+Cn10zrll1gzw1zorAi
-         IFCQ==
+        d=snap.com; s=google; t=1774547409; x=1775152209; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=XIJdz9r6+ZRT+Tnvv3AIAEvzRb2bVqqPc60/SRPtu98=;
+        b=GOfalmGbsAUA2nlNMoyvboEG8+PMdZ+UnTdiQkMtUCwleX7GBfZ4Hv5jRHJdYJ4R/k
+         jcFqO1ntkoo3njWDAYKeAP2MDYEvJGULId2+XJjDRuk3w7WZ9AB3M0kDzL7bG+dds25c
+         sEvTFDl6ESd1ui004OR7NItDyuM3H4A6WiDQw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774547243; x=1775152043;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1774547409; x=1775152209;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=SLPBkycirwHGNG9jGEGuWM/HKaMwfz2jrCtl7N30bTw=;
-        b=bsOLhtVcLu2ZtXcebFp5kd4y92zIpMxpWNMlMtpKlcNPj01AW8OIZDTSQ7ujNSVZ0Z
-         e6+DVA3+fPMfMy+iJ8CkOlfBBTiDpznktK906GFii5M48FghyfQgnZd/YdZWmeYLfH+s
-         LP5v31LVQBiY0LWW1n3Buj0TK4HiO1vVp2Lxu7QR2VA4AGKZpPRaF4YlrTXzBGPyTmg4
-         XY0N6kgV9Ji3+UC1fuHCBlvsyVHtugSWfOyom9XBTAJjkfXlqPdcUtjD85tkpimysTPr
-         1gLOUdAMjT9EJspDzLwp5/mL+8wkqEZ6hmXdbvFP3fsaLDb8LOf4/NE4qo7e4goIV+nl
-         XBjA==
-X-Gm-Message-State: AOJu0YyxfdmYGDWfCtlH+1wJWyNO2GyQ3cd7R/iZIhkabgzuTQNBMgZb
-	hVcLl5m/tydzcapnW5OoEXpwHQMSL7C24gHav+TeCi/jmVY6Dn/Q37OwqfyRdm8y
-X-Gm-Gg: ATEYQzz2bpN5Y8WkclL/FmDQGRxe9zOtxPVIOYf2gmGmd1vHXRkyI1uMFM/LHS1LKSx
-	Z/CpQueIXoS1qo4qKMXP8sNeEp6nw6YY0pa1wByoE8Nx5VeZjAm/xjkfqR2A1ECDHPq7a4M4xtC
-	TEq2THrMj+SgmAVOlAu6GjxHHnK1llm4cWqC1Ze1JTof/4y7+xb6v430wav6ka9WVT6e00Du74T
-	Xu6Hj0p64GWHWb82T9qUfy005LJE5zBf4cedGhIBUWkpVJdNKwdnPEXlwCCyDWMxznubQwdM23M
-	wPHJglkZQAcBFilf4rkN8mVOtYy55r4dqu7l6ozyjeZaYdhnWUF5yG6/0mQKmMk+w4ZXQONnn/+
-	7i4A4fKxYVyBHJRv5eDoKSi4amDWe4S/16P87iN0vXUvstkjeBXI4mgCrSPt4Fiex5F6B/beFek
-	1dn8EiOS+4z1fQPWixFsCsjq8DqA==
-X-Received: by 2002:a05:6000:26cb:b0:43b:9903:2ba3 with SMTP id ffacd0b85a97d-43b99032babmr3300062f8f.33.1774547243218;
-        Thu, 26 Mar 2026 10:47:23 -0700 (PDT)
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919588e6sm8908570f8f.16.2026.03.26.10.47.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 10:47:22 -0700 (PDT)
-From: martin.jansa@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] freerdp: remove 0001-Fix-const-qualifier-error.patch
-Date: Thu, 26 Mar 2026 18:47:14 +0100
-Message-ID: <20260326174714.3811074-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.53.0
+        bh=XIJdz9r6+ZRT+Tnvv3AIAEvzRb2bVqqPc60/SRPtu98=;
+        b=bvW9yMy4M6b7Vgdb6U7C1Fb7lOvfgVSBuoBL7z0MBQ/RqzReA+Elpl84JwvEEVIZbo
+         21mmDVecKz/3HDpa8rmIBU1pqfkGTFMzUTFaelRWmiFbMvG3+Syz+O/+Dkt20N/fJdQn
+         qy7886A2mzuFDEsjnvpOgSPDFW+AjWOOH8lQl5bbPwa5FDpWRv0dvIAbam3MaGPbstJ5
+         0VLSP2j5SDdPpr1Ts0IjaNYZudvRTTCdl/JFwu64J/YguDijpmR1/dwbullMbZe+zEBf
+         J3USGS/H88gACdvzEZ5BvCfBryD5J60J9eTZcIhcxR2HMtsdTWq20XcYu/PZNLyuv3dk
+         LzdQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWArV7eZRcVZ1zmxlXJ60K4vnVUdHMm/KVCVH68Xxd6vI1/MHO0F0a9SeTjlTMMXk6X0cUbwQjOHpoSzR5KvGH7XIU=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxDaBpt0ZD6hxnUCtFUMLhFfUtlzsLXrGilbdSYSEeBilp2vZXh
+	kzkCF8iFWqwrAHjxj31UXCIe/YGDtyKdUYbYo2WZjL37Lzd/7D+kcKE6PatzOi0vV0gL/CCg5lm
+	kghhir1zRnBze4UTS4oxG0YrFKkX3zHJSeIrOv6WPIA==
+X-Gm-Gg: ATEYQzydJnpYVDG/EOXdnoXBx3haTFgvBvabwXanenbmEy55GYNlMyIm0FnJQ9qPlxL
+	aR3DRUCZQbhSKUn5s6naQJitzD2vuWVfJMj8bGPHD2AAPon8/oUI8Vg5aDsifzjjRkcHeq5vlFb
+	9XuIbUftRQG0744b36b8/cinOvqHRFbQ8Wxzd/bQwvD24q9CXtYjDzZbcsoshwFS5Yz+ht8MaR4
+	UzSXvTf2Ie/Sh+6l6ef6iduUBPM+LRAl4VM5nUAajTwJSltfaXb1235e0Xpa5DBJZHIC+oKn3g2
+	U/tSQ76gCd1n9mL/3SlGHxL75xkPonnpFOnCaWol
+X-Received: by 2002:a05:6000:40ce:b0:43b:49a1:8ace with SMTP id
+ ffacd0b85a97d-43b88a0cff0mr13713772f8f.51.1774547408426; Thu, 26 Mar 2026
+ 10:50:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <293a5ad3-bf5c-4cec-85d5-4121e01b76b6@gmail.com>
+In-Reply-To: <293a5ad3-bf5c-4cec-85d5-4121e01b76b6@gmail.com>
+From: Etienne Cordonnier <ecordonnier@snap.com>
+Date: Thu, 26 Mar 2026 18:49:57 +0100
+X-Gm-Features: AQROBzAnt6eq6yVUqce61KeIHLByrg_8TBxT857zypo0X6XNHMBjbZCILAWtZvk
+Message-ID: <CAHUKmYaS-EM=71vO+JMM6GD7joy8WjWQtjcdXXP0+gUOrub=ig@mail.gmail.com>
+Subject: Re: [meta-oe][scarthgap][PATCH] uutils-coreutils: drop (filtered)
+ "selinux" from PACKAGECONFIG ?=
+To: Clayton Casciato <majortomtosourcecontrol@gmail.com>
+Cc: anuj.mittal@oss.qualcomm.com, openembedded-devel@lists.openembedded.org, 
+	Yi Zhao <yi.zhao@windriver.com>, joe.macdonald@siemens.com, 
+	Vincent Davis Jr <vince@underview.tech>, raj.khem@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000eabe3f064df1038e"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:47:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125765
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:50:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125766
 
-From: Martin Jansa <martin.jansa@gmail.com>
+--000000000000eabe3f064df1038e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Instead of fixing the build with clang this is now breaking it after 2.11.8 commit:
-https://github.com/FreeRDP/FreeRDP/commit/67818bddb31900cdf3acb26cb0b673cc90b71cc9
+Hi Clayton,
 
-freerdp/2.11.8/git/client/Wayland/wlfreerdp.c:637:19: error: incompatible function pointer types assigning to 'OBJECT_NEW_FN' (aka 'void *(*)(const void *)') from 'void *(void *)' [-Wincompatible-function-pointer-types]
-  637 |         obj->fnObjectNew = uwac_event_clone;
-      |                          ^ ~~~~~~~~~~~~~~~~
+I agree to merge this patch.
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../0001-Fix-const-qualifier-error.patch      | 57 -------------------
- .../recipes-support/freerdp/freerdp_2.11.8.bb |  1 -
- 2 files changed, 58 deletions(-)
- delete mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
+=C3=89tienne
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
-deleted file mode 100644
-index 87a456d16d..0000000000
---- a/meta-oe/recipes-support/freerdp/freerdp/0001-Fix-const-qualifier-error.patch
-+++ /dev/null
-@@ -1,57 +0,0 @@
--From 761b4df04a141cc8c9507c741e4046c6c6b00491 Mon Sep 17 00:00:00 2001
--From: Wang Mingyu <wangmy@fujitsu.com>
--Date: Mon, 11 Sep 2023 09:00:39 +0000
--Subject: [PATCH] Fix const qualifier error
--
--Fixes clang error
--error: incompatible function pointer types assigning to 'OBJECT_NEW_FN' (aka 'void *(*)(void *)') from 'void *(const void *)' [-Wincompatible-function-pointer-types]
--|         obj->fnObjectNew = uwac_event_clone;
--|                          ^ ~~~~~~~~~~~~~~~~
--
--https://github.com/FreeRDP/FreeRDP/commit/6e3c00725aae99d03a0baa65430eceddebd9dee8
--Upstream-Status: Backport
--
--Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-----
-- libfreerdp/codec/rfx.c            | 4 ++--
-- winpr/include/winpr/collections.h | 2 +-
-- 2 files changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/libfreerdp/codec/rfx.c b/libfreerdp/codec/rfx.c
--index ccbc5af..eec7365 100644
----- a/libfreerdp/codec/rfx.c
--+++ b/libfreerdp/codec/rfx.c
--@@ -153,7 +153,7 @@ static void rfx_tile_init(void* obj)
-- 	}
-- }
-- 
---static void* rfx_decoder_tile_new(void* val)
--+static void* rfx_decoder_tile_new(const void* val)
-- {
-- 	RFX_TILE* tile = NULL;
-- 	WINPR_UNUSED(val);
--@@ -184,7 +184,7 @@ static void rfx_decoder_tile_free(void* obj)
-- 	}
-- }
-- 
---static void* rfx_encoder_tile_new(void* val)
--+static void* rfx_encoder_tile_new(const void* val)
-- {
-- 	WINPR_UNUSED(val);
-- 	return calloc(1, sizeof(RFX_TILE));
--diff --git a/winpr/include/winpr/collections.h b/winpr/include/winpr/collections.h
--index 807f011..b8c8d9d 100644
----- a/winpr/include/winpr/collections.h
--+++ b/winpr/include/winpr/collections.h
--@@ -36,7 +36,7 @@ extern "C"
-- {
-- #endif
-- 
---	typedef void* (*OBJECT_NEW_FN)(void* val);
--+	typedef void* (*OBJECT_NEW_FN)(const void* val);
-- 	typedef void (*OBJECT_INIT_FN)(void* obj);
-- 	typedef void (*OBJECT_UNINIT_FN)(void* obj);
-- 	typedef void (*OBJECT_FREE_FN)(void* obj);
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
-index 9c3d532438..c596aaa328 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.8.bb
-@@ -16,7 +16,6 @@ PKGV = "${GITPKGVTAG}"
- SRCREV = "9b678b6d5a40ce01607d8c3b1b1416437c8416c4"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
-            file://winpr-makecert-Build-with-install-RPATH.patch \
--           file://0001-Fix-const-qualifier-error.patch \
-            file://0002-Do-not-install-tools-a-CMake-targets.patch \
-            file://CVE-2024-32661.patch \
-            "
+On Thu, Mar 26, 2026 at 6:25=E2=80=AFPM Clayton Casciato <
+majortomtosourcecontrol@gmail.com> wrote:
+
+> "selinux" adds a dependency on clang-native.
+>
+> clang-native is provided by meta-clang.
+>
+> If meta-clang is not included, this surfaces parse-time errors such as:
+> ERROR: Nothing PROVIDES 'clang-native' (but
+> [...]/uutils-coreutils_0.0.28.bb DEPENDS on or otherwise requires it)
+>
+> This is an issue in the default case - where uutils-coreutils is not
+> enabled.
+>
+> Suggested-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Clayton Casciato <majortomtosourcecontrol@gmail.com>
+> ---
+> Sponsor: 21SoftWare LLC
+>
+> OE-C whinlatter and master include clang-native:
+>
+> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__git.openembedded.o=
+rg_openembedded-2Dcore_commit_meta_recipes-2Ddevtools_clang-3Fh-3Dwhinlatte=
+r-26id-3Dd77e398095228b34851762858a76640e3c2cb0ab&d=3DDwICaQ&c=3DncDTmphkJT=
+vjIDPh0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa=
+66m67E&m=3D4qaMdrtGvkWreWnK7doGMkiFb-BtHVU_UOlvQ23LpOTa-jYEEQoeNRs0MiX43C0B=
+&s=3DTJh5AjJaNJ4637qYkkSev7d0Jfdmsnw4EdVbI7lfbZA&e=3D
+>
+> Discussion:
+>
+> https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.openembedded=
+.org_g_openembedded-2Ddevel_topic_103440861&d=3DDwICaQ&c=3DncDTmphkJTvjIDPh=
+0hpF_4vCHvabgGkICC2epckfdiw&r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E=
+&m=3D4qaMdrtGvkWreWnK7doGMkiFb-BtHVU_UOlvQ23LpOTa-jYEEQoeNRs0MiX43C0B&s=3DT=
+zTRDBWSUS36fXqwJJT-NpSGXwehEtgi7MHzNUcEjec&e=3D
+>
+>  .../recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb    | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-core/uutils-coreutils/
+> uutils-coreutils_0.0.28.bb b/meta-oe/recipes-core/uutils-coreutils/
+> uutils-coreutils_0.0.28.bb
+> index 76cecac5a6..41e4f1d831 100644
+> --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
+> +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.0.28.bb
+> @@ -22,7 +22,7 @@ require ${BPN}-crates.inc
+>  PROVIDES =3D "coreutils"
+>  RPROVIDES:${PN} =3D "coreutils"
+>
+> -PACKAGECONFIG ?=3D "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}=
+"
+> +PACKAGECONFIG ?=3D ""
+>
+>  PACKAGECONFIG[selinux] =3D "--with-selinux,--without-selinux,libselinux"
+>
+>
+
+--000000000000eabe3f064df1038e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Clayton,<br><br>I agree to merge this patch.<br><br>=C3=
+=89tienne</div><br><div class=3D"gmail_quote gmail_quote_container"><div di=
+r=3D"ltr" class=3D"gmail_attr">On Thu, Mar 26, 2026 at 6:25=E2=80=AFPM Clay=
+ton Casciato &lt;<a href=3D"mailto:majortomtosourcecontrol@gmail.com">major=
+tomtosourcecontrol@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">&quot;selinux&quot; adds a dependency on clang-=
+native.<br>
+<br>
+clang-native is provided by meta-clang.<br>
+<br>
+If meta-clang is not included, this surfaces parse-time errors such as:<br>
+ERROR: Nothing PROVIDES &#39;clang-native&#39; (but<br>
+[...]/<a href=3D"http://uutils-coreutils_0.0.28.bb" rel=3D"noreferrer" targ=
+et=3D"_blank">uutils-coreutils_0.0.28.bb</a> DEPENDS on or otherwise requir=
+es it)<br>
+<br>
+This is an issue in the default case - where uutils-coreutils is not<br>
+enabled.<br>
+<br>
+Suggested-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"=
+_blank">raj.khem@gmail.com</a>&gt;<br>
+Signed-off-by: Clayton Casciato &lt;<a href=3D"mailto:majortomtosourcecontr=
+ol@gmail.com" target=3D"_blank">majortomtosourcecontrol@gmail.com</a>&gt;<b=
+r>
+---<br>
+Sponsor: 21SoftWare LLC<br>
+<br>
+OE-C whinlatter and master include clang-native:<br>
+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__git.opene=
+mbedded.org_openembedded-2Dcore_commit_meta_recipes-2Ddevtools_clang-3Fh-3D=
+whinlatter-26id-3Dd77e398095228b34851762858a76640e3c2cb0ab&amp;d=3DDwICaQ&a=
+mp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx=
+_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D4qaMdrtGvkWreWnK7doGMkiFb-BtHVU_UOlvQ23=
+LpOTa-jYEEQoeNRs0MiX43C0B&amp;s=3DTJh5AjJaNJ4637qYkkSev7d0Jfdmsnw4EdVbI7lfb=
+ZA&amp;e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofp=
+oint.com/v2/url?u=3Dhttps-3A__git.openembedded.org_openembedded-2Dcore_comm=
+it_meta_recipes-2Ddevtools_clang-3Fh-3Dwhinlatter-26id-3Dd77e398095228b3485=
+1762858a76640e3c2cb0ab&amp;d=3DDwICaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabg=
+GkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D=
+4qaMdrtGvkWreWnK7doGMkiFb-BtHVU_UOlvQ23LpOTa-jYEEQoeNRs0MiX43C0B&amp;s=3DTJ=
+h5AjJaNJ4637qYkkSev7d0Jfdmsnw4EdVbI7lfbZA&amp;e=3D</a> <br>
+<br>
+Discussion:<br>
+<a href=3D"https://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__lists.ope=
+nembedded.org_g_openembedded-2Ddevel_topic_103440861&amp;d=3DDwICaQ&amp;c=
+=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epckfdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9=
+TsRih1DULJTKUkSGa66m67E&amp;m=3D4qaMdrtGvkWreWnK7doGMkiFb-BtHVU_UOlvQ23LpOT=
+a-jYEEQoeNRs0MiX43C0B&amp;s=3DTzTRDBWSUS36fXqwJJT-NpSGXwehEtgi7MHzNUcEjec&a=
+mp;e=3D" rel=3D"noreferrer" target=3D"_blank">https://urldefense.proofpoint=
+.com/v2/url?u=3Dhttps-3A__lists.openembedded.org_g_openembedded-2Ddevel_top=
+ic_103440861&amp;d=3DDwICaQ&amp;c=3DncDTmphkJTvjIDPh0hpF_4vCHvabgGkICC2epck=
+fdiw&amp;r=3DAhkbNonVuMIGRfPx_Qj9TsRih1DULJTKUkSGa66m67E&amp;m=3D4qaMdrtGvk=
+WreWnK7doGMkiFb-BtHVU_UOlvQ23LpOTa-jYEEQoeNRs0MiX43C0B&amp;s=3DTzTRDBWSUS36=
+fXqwJJT-NpSGXwehEtgi7MHzNUcEjec&amp;e=3D</a> <br>
+<br>
+=C2=A0.../recipes-core/uutils-coreutils/<a href=3D"http://uutils-coreutils_=
+0.0.28.bb" rel=3D"noreferrer" target=3D"_blank">uutils-coreutils_0.0.28.bb<=
+/a>=C2=A0 =C2=A0 | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-core/uutils-coreutils/<a href=3D"http://uutils=
+-coreutils_0.0.28.bb" rel=3D"noreferrer" target=3D"_blank">uutils-coreutils=
+_0.0.28.bb</a> b/meta-oe/recipes-core/uutils-coreutils/<a href=3D"http://uu=
+tils-coreutils_0.0.28.bb" rel=3D"noreferrer" target=3D"_blank">uutils-coreu=
+tils_0.0.28.bb</a><br>
+index 76cecac5a6..41e4f1d831 100644<br>
+--- a/meta-oe/recipes-core/uutils-coreutils/<a href=3D"http://uutils-coreut=
+ils_0.0.28.bb" rel=3D"noreferrer" target=3D"_blank">uutils-coreutils_0.0.28=
+.bb</a><br>
++++ b/meta-oe/recipes-core/uutils-coreutils/<a href=3D"http://uutils-coreut=
+ils_0.0.28.bb" rel=3D"noreferrer" target=3D"_blank">uutils-coreutils_0.0.28=
+.bb</a><br>
+@@ -22,7 +22,7 @@ require ${BPN}-crates.inc<br>
+=C2=A0PROVIDES =3D &quot;coreutils&quot;<br>
+=C2=A0RPROVIDES:${PN} =3D &quot;coreutils&quot;<br>
+<br>
+-PACKAGECONFIG ?=3D &quot;${@bb.utils.filter(&#39;DISTRO_FEATURES&#39;, &#3=
+9;selinux&#39;, d)}&quot;<br>
++PACKAGECONFIG ?=3D &quot;&quot;<br>
+<br>
+=C2=A0PACKAGECONFIG[selinux] =3D &quot;--with-selinux,--without-selinux,lib=
+selinux&quot;<br>
+<br>
+</blockquote></div>
+
+--000000000000eabe3f064df1038e--
 
