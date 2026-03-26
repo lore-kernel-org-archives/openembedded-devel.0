@@ -2,49 +2,50 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FC8710A88E5
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 16:28:47 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.52541.1774542523514879075
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 954F510A88E6
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 16:48:17 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.52238.1774543687754283792
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 09:28:44 -0700
+ Thu, 26 Mar 2026 09:48:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=b61ASENF;
- spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout05.t-online.de (Postfix) with SMTP id A8988E48
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:28:41 +0100 (CET)
-Received: from fedora.fritz.box ([79.219.228.172]) by fwd72.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=e3k7Q7Fj;
+ spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout03.t-online.de (Postfix) with SMTP id D19F2F212
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 17:48:04 +0100 (CET)
+Received: from fedora.fritz.box ([79.219.228.172]) by fwd78.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1w5nZY-3rL9En0; Thu, 26 Mar 2026 17:28:40 +0100
+	esmtp id 1w5nsK-1aTyzJ0; Thu, 26 Mar 2026 17:48:04 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] localsearch: update 3.9.0 -> 3.11.0
-Date: Thu, 26 Mar 2026 17:28:33 +0100
-Message-ID: <20260326162833.74363-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv2] localsearch: update 3.9.0 -> 3.11.0
+Date: Thu, 26 Mar 2026 17:47:57 +0100
+Message-ID: <20260326164757.97828-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1774542521-B1C7582A-A89F4FDD/0/0 CLEAN NORMAL
-X-TOI-MSGID: d042e3f1-8c84-43a3-b1e1-1808aa9f1182
+X-TOI-EXPURGATEID: 150726::1774543684-25FF889C-382BC6E2/0/0 CLEAN NORMAL
+X-TOI-MSGID: e1c053df-0805-46ef-9a4a-f19a7895a298
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1774542521; i=f_l_k@t-online.de;
-	bh=cGHVSVUwYGngV3+TM1ErPPrIE8GxBzFMLiGojJp92Do=;
+	s=20260216; t=1774543684; i=f_l_k@t-online.de;
+	bh=tkdvVqEvwX0FhNiQXcwmpiblM1BkvuZoISmTCZY3HXw=;
 	h=From:To:Subject:Date;
-	b=b61ASENFUJxXvlQWH1TbaMcEuEw/0gZYEct92Y6G+kWX8y/oBsgLQ9mVNxabXyMOP
-	 zrMFQsm5DyVftHEA2CUKQXCnAWvT2WeWIsR22Gk+aEWr3nLgjVxVHmLXJDv72cNWkC
-	 YODZxdQpCJRYIvLv/Us1p+QXdxRxUqeiAp2xgi5G4nf0/j6TInOWpKgnakIbF1rgA6
-	 stwAfWIMTffMaYYNrMr1ZmTXdOZgV0+HuXAvj3Ghnt5eyGxfgvD0gNvZJjPKejgEI+
-	 I/q6aq9pwIKy8cohV8g0/l3AtoYbvl9XZo0eLmJk1KLKWmAVOEMGB8x8PQKVTgyKmR
-	 IVcmmDINe7tlw==
+	b=e3k7Q7Fj/S5jbzNZa3TPIElT3MKOCcD+zZDSFxje80fqEesTFCbnos05iM/tJ7EXS
+	 THWpkwuwHh5eL2AMFRFDACxDuF8DSRuNE3jsnzInzLhgFTGl9QdUsnECA7EOFpRbZu
+	 tjTEutd4bCU8j+h92tNcYNq8MyK8egyAYMKngfNOvpMhGLo62YJ/umHcI+tq7fbftC
+	 ON+ARD4S8zMn3qOXjK4nIvgm+tL5J7MMlJOkY1ClS0+Q7tqN9x61i3O4zpUpckU7Og
+	 evO2pCyNRpq5CbnGSAILcyWUvMOW3xjOqz5JKftejT6f/jmorIqWJXmfrbOtWpqJXz
+	 QgZXIlrdnZ8yg==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 16:28:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125760
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 16:48:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125761
 
 - rework reproducibility patch
 - disable functional_tests to avoid python3-dbusmock-native dependency
+- add PACKAGECONFIG for libzip and enable by default
 
 NEW in 3.11.0 - 2026-03-15
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
@@ -177,10 +178,10 @@ Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  ...to-a-fixed-path-instead-of-a-host-pa.patch |  4 +-
  .../0001-fix-reproducibility.patch            | 67 +++++++------------
- ...lsearch_3.9.0.bb =3D> localsearch_3.11.0.bb} |  4 +-
- 3 files changed, 28 insertions(+), 47 deletions(-)
+ ...lsearch_3.9.0.bb =3D> localsearch_3.11.0.bb} |  6 +-
+ 3 files changed, 30 insertions(+), 47 deletions(-)
  rename meta-gnome/recipes-gnome/tracker/{localsearch_3.9.0.bb =3D> local=
-search_3.11.0.bb} (95%)
+search_3.11.0.bb} (92%)
 
 diff --git a/meta-gnome/recipes-gnome/tracker/localsearch/0001-Set-header=
 -file-to-a-fixed-path-instead-of-a-host-pa.patch b/meta-gnome/recipes-gno=
@@ -368,10 +369,10 @@ s(meson.project_build_root(), 'data'))
 r_dep, tracker_sparql]
 diff --git a/meta-gnome/recipes-gnome/tracker/localsearch_3.9.0.bb b/meta=
 -gnome/recipes-gnome/tracker/localsearch_3.11.0.bb
-similarity index 95%
+similarity index 92%
 rename from meta-gnome/recipes-gnome/tracker/localsearch_3.9.0.bb
 rename to meta-gnome/recipes-gnome/tracker/localsearch_3.11.0.bb
-index ffea1f76b3..17d0c54574 100644
+index ffea1f76b3..d49482cfec 100644
 --- a/meta-gnome/recipes-gnome/tracker/localsearch_3.9.0.bb
 +++ b/meta-gnome/recipes-gnome/tracker/localsearch_3.11.0.bb
 @@ -18,7 +18,7 @@ SRC_URI:append =3D " \
@@ -386,7 +387,26 @@ e376c3d2338b78993e5f4666"
 =20
  # gobject-introspection is mandatory and cannot be configured
  REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
-@@ -69,7 +69,7 @@ PACKAGECONFIG[landlock]        =3D "-Dlandlock=3Denable=
+@@ -38,6 +38,7 @@ PACKAGECONFIG ??=3D " \
+     tiff \
+     raw \
+     xml \
++    zip \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
+     battery \
+ "
+@@ -62,6 +63,7 @@ PACKAGECONFIG[png]        =3D "-Dpng=3Denabled,-Dpng=3D=
+disabled,libpng"
+ PACKAGECONFIG[tiff]       =3D "-Dtiff=3Denabled,-Dtiff=3Ddisabled,tiff"
+ PACKAGECONFIG[raw]       =3D "-Draw=3Denabled,-Draw=3Ddisabled,libraw"
+ PACKAGECONFIG[xml]        =3D "-Dxml=3Denabled,-Dxml=3Ddisabled,libxml2"
++PACKAGECONFIG[zip]        =3D "-Dzip=3Denabled,-Dzip=3Ddisabled,libzip"
+ PACKAGECONFIG[landlock]        =3D "-Dlandlock=3Denabled,-Dlandlock=3Ddi=
+sabled"
+=20
+ # For security reasons it is strongly recommended to set add meta-securi=
+ty in
+@@ -69,7 +71,7 @@ PACKAGECONFIG[landlock]        =3D "-Dlandlock=3Denable=
 d,-Dlandlock=3Ddisabled"
  PACKAGECONFIG[seccomp] =3D "-Dseccomp=3Dtrue,-Dseccomp=3Dfalse,libseccom=
 p"
