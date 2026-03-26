@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 578C810A3D6C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49EAC10A3D6D
 	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 11:57:54 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.45659.1774526267859854649
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.45657.1774526263215662373
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 04:57:48 -0700
+ Thu, 26 Mar 2026 04:57:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=hO+yx7oA;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ULthfOWN;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1774526268; x=1806062268;
+  t=1774526265; x=1806062265;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=4cVaPxVB2c0npPDBiCU7H9vsnhjaRAccL9tElt4Pr+k=;
-  b=hO+yx7oAfOVg8nwaSsJ+LS28SDdlf9jygicxSjgJj++EDUttkktS37bp
-   YqnPzMNpJNDxXCVc6Kx/J6UtUXG0rekdVSQ7pY0lq27uukCArqum+QVve
-   SjpMJq8lnzOh+z2S/J9J1VEMwfn3AK63Jlho2hLUSJ9JXqJWBg+N2smJh
-   6k/ts/ahcc5NIKzvwMwGKNz6J3Vj3Bvp5TDrnZtLEeRKDKnwaHRMW7pfa
-   JZra6cTt+52ewpjl7NDf7PqOdXsHKsUDnRTQpZhBVJEvDd9WAB7RB222W
-   CFi1r61wLdEF86t/P0qSBwZVyEBXq67WL25p81P/8L30kkFS8Y44OaVCX
-   Q==;
-X-CSE-ConnectionGUID: TF0mFtUyQ0+a0qDGtC3geA==
-X-CSE-MsgGUID: GZhLXD+tROqv0mWum9DfoQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11740"; a="223371885"
+  bh=mqg2rduYhkbpdivYq6L5qigXbo4IKO4gBNVpws+qAAk=;
+  b=ULthfOWN5UIMNpDdlRlsbHv782N5GIZKnztiEW5Xts+9DKKKmV0w8dU2
+   ZTmkgc4m9qaFQWHa5NM0W5DZssQ1yYKGKdMWsbJeUH4ejfjrSkZFPtOy3
+   TcW5W5iYC+0EfVzKohpULQTtePvSkBNOCGhSLEiHEURD54AeW+sKhYQsb
+   QpRTYMh7n4hn3fM4auoMKeHOdGrocyvj1Q5wKPX/4ELQvCo50EDOXSxod
+   4UjHEGscCCu8cTWlw365I+TJ7k8Dq43EKndTaLHQlQFAFGdCfJJOxqe+J
+   d01owwgyUKPlGwFPQITIOxP/WK5bKC5/r/YOXdIR9QBU2pEnSiHhMVH6P
+   A==;
+X-CSE-ConnectionGUID: FHAQ/LA0R+mn2qes0pVvmg==
+X-CSE-MsgGUID: STOAdBFgTbi3pIieTqHphQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11740"; a="222647301"
 X-IronPort-AV: E=Sophos;i="6.23,142,1770562800"; 
-   d="scan'208";a="223371885"
+   d="scan'208";a="222647301"
 Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Mar 2026 20:57:46 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Mar 2026 20:57:44 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 6917882008F
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:57:46 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id CF28B1002815
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:57:44 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 21E4A8D29C6
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:57:46 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 89099C01815
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:57:44 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id C0E9D180714B;
-	Thu, 26 Mar 2026 11:57:43 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 38218180714D;
+	Thu, 26 Mar 2026 11:57:41 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 41/63] python3-mdit-py-plugins: upgrade 0.4.2 -> 0.5.0
-Date: Thu, 26 Mar 2026 19:56:11 +0800
-Message-ID: <20260326115634.1199-41-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 40/63] python3-kiwisolver: upgrade 1.4.9 -> 1.5.0
+Date: Thu, 26 Mar 2026 19:56:10 +0800
+Message-ID: <20260326115634.1199-40-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260326115634.1199-1-wangmy@fujitsu.com>
 References: <20260326115634.1199-1-wangmy@fujitsu.com>
@@ -61,36 +61,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:57:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125696
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125695
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Copyright year updated to 2026
+
 Changelog:
 ==========
-- Add plugin & tests to render subscripts
-- Drop Python 3.9
+- add support for CMakeLists
+- implement more move constructor in the C++ code
+- add C++ tests
+- add support for GraalPy
+- add RiscV support
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...dit-py-plugins_0.4.2.bb => python3-mdit-py-plugins_0.5.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-mdit-py-plugins_0.4.2.bb => python3-mdit-py-plugins_0.5.0.bb} (80%)
+ ...ython3-kiwisolver_1.4.9.bb => python3-kiwisolver_1.5.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-kiwisolver_1.4.9.bb => python3-kiwisolver_1.5.0.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.4.2.bb b/meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.5.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.5.0.bb
-index ef095c74a8..e449b0f11f 100644
---- a/meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-mdit-py-plugins_0.5.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/executablebooks/mdit-py-plugins"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a38a1697260a7ad7bf29f44b362db1fc"
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.9.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.5.0.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python3-kiwisolver_1.4.9.bb
+rename to meta-python/recipes-devtools/python/python3-kiwisolver_1.5.0.bb
+index f84a427446..6669559fcc 100644
+--- a/meta-python/recipes-devtools/python/python3-kiwisolver_1.4.9.bb
++++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.5.0.bb
+@@ -1,9 +1,9 @@
+ SUMMARY = "A fast implementation of the Cassowary constraint solver"
+ HOMEPAGE = "https://github.com/nucleic/kiwi"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=27a71439e89b80e41dc526a4b8bbfa2f"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7a2c756dc2da8fbde2a254cae9a9320e"
  
--SRC_URI[sha256sum] = "5f2cd1fdb606ddf152d37ec30e46101a60512bc0e5fa1a7002c36647b09e26b5"
-+SRC_URI[sha256sum] = "f4918cb50119f50446560513a8e311d574ff6aaed72606ddae6d35716fe809c6"
+-SRC_URI[sha256sum] = "c3b22c26c6fd6811b0ae8363b95ca8ce4ea3c202d3d0975b2914310ceb1bcc4d"
++SRC_URI[sha256sum] = "d4193f3d9dc3f6f79aaed0e5637f45d98850ebf01f7ca20e69457f3e8946b66a"
  
- inherit pypi python_flit_core
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.43.0
