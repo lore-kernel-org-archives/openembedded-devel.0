@@ -2,56 +2,56 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ABB010A88C2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82DE410A88DA
 	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 15:32:35 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.51222.1774539149315865408
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.51220.1774539147064513592
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 08:32:29 -0700
+ Thu, 26 Mar 2026 08:32:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Y1U+ngZU;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4852afd42ceso8746515e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:32:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ADXW+UbY;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: zboszor@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4852c9b4158so9360045e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:32:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774539147; x=1775143947; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774539145; x=1775143945; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nlIH3kP2G6WIt/i8RQ9q5duxSihdUOCh7gLVs480Wsc=;
-        b=Y1U+ngZUEAzFh7asAcQE1CQhrQDO0vNX7BO7ZxaagygieJ1VkT5AFAObO/iYQ/rXSx
-         3hoMF00FjIlLAGrcDjFP2cCNCnnVyThvnm9Ge3BrU0H6/MAyJqCisASUDl8W/2QAGwMQ
-         t/4ncZQAz8vjxfqzRfhFo7glEGCgTQNb6I2szlXGVZQ6P8QMpilhuRRVu4zHAnW6Qxxo
-         LuDOhYrLwdrbWCuR+cuH5dLFFALS7db5n0XxB0wIpig041iVIBYb0SBWirok//EVXPyR
-         hS2XoEX4gLYVjaVEdlxWovyxhWQKb87XqcipWUYyRsB/AKmELW1PjHqo0PXHUdrTT9KV
-         M9Fg==
+        bh=TQ33O9gubfbpvMnRhLJvg7mYjqfrj+6h0eSj0fUqb9I=;
+        b=ADXW+UbYMr/N7LZfXWRZBZe3vlOzUis6b1HbKGsQ38xZME6pPnJIbZxCL7z+oSrVw/
+         OpsRow7SCQkzEi+7FwXFtW8bpxwXJgDbntrUvm1ObgB0PI1P89gQXeUMJElOGb5KiUhQ
+         9pRX9qX7NiJIWAYl0V9RmJD0ky+qdvtWvbxf3SmSnORpnhC67XlH8BgDMQrhMjuPbTET
+         75Yq+TxGdqxJqE3iqlTgtWE4D6VJXNhkaackVUoBOU2tIELx4UuarP7AdNn1DshSe6rO
+         hCV4vUthabVPyPxhALGxwkpqi2XglhYDFTw2tWX02+WaXilt8PyniVJGnLgSMjU8a0BI
+         hwFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774539147; x=1775143947;
+        d=1e100.net; s=20251104; t=1774539145; x=1775143945;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=nlIH3kP2G6WIt/i8RQ9q5duxSihdUOCh7gLVs480Wsc=;
-        b=FpPd0/mJC2/jWUHa6HjfPL+X9V43Dk7i34AAr5znic4DK0+YOL2xsTeFp8UGnM1Xi3
-         Wen/61X75tX+wZFM/vlBRRAIW80gt1uXLoZV4wd0aHToojaAh4xpqJZ8d3BUPYgWHfv2
-         Q5I6oh5Neumx+Z+EJMzozzvZpFLvzh/TNywDeXNW1MRmZvQUUhuldslwSelUT63C7Cn4
-         CKCyxzJsyTimhw9VQcoCwOka9COD7n8bBc2xZiMKRlj03H+bR85CJO25EeTR8mLaXLl5
-         7Ge45kLpN/9YLZVED0yXtt7IPznsu6Fgv/GixlKSUaaK+ZahRUvSMtb4o5mxXLh/jMll
-         5StQ==
-X-Gm-Message-State: AOJu0YwkoclbMee0OFTPyNM3xRDmaQ7t8gk2dLzjwfiY55+cIG39hc4K
-	kdAfVif36zyZA/Rwyb3BrgxoWlQCkmJtC4TnWmAt5vBkUL6rzUvFk0APGLlxGg==
-X-Gm-Gg: ATEYQzw1Swn/MW5rxTNqnLQJ5V79FAqJMWYEUoTdjBoa+bxxwEDFGeNMBzMyEjkGT0y
-	4rR6dLdEJwpD2iKY2uZw9Vc7ndzbJRjD0ucK6/lKppW+wUBNr7TQEcVJCr8M0xokcYZv8+2wSLC
-	eFNcV5XPGp6Ilglk5AS/VnAy71T0/MIK4bVQzvHRbZF19BM5LcgoqB+OzTQCANKCfEocgWTZ+q8
-	zivWMRifjqLJkVAqlEGV+nwIzX/utKYwa+K8tb5cIhXJFrrpM9lG5KD2VV0OpNQWzkoBUHWEf9z
-	HIeJl4OznoqtaXdCs0VgGgeNreKhU0bcNOPLQdzmY7lpDHNLSGNFKMjb0DKL+/8agk4sQ6jPHsd
-	q9/q7mo9QB7ccQq4moEWaO12qcmM70huGT1uaSD5EfyIAmRSZquBAxG5Xq6WxUqH+loYAa8YLUY
-	/tf+HHe2fCJzfztg==
-X-Received: by 2002:a05:600c:4ecb:b0:487:1520:d107 with SMTP id 5b1f17b1804b1-487160aa232mr119969195e9.31.1774539146624;
-        Thu, 26 Mar 2026 08:32:26 -0700 (PDT)
+        bh=TQ33O9gubfbpvMnRhLJvg7mYjqfrj+6h0eSj0fUqb9I=;
+        b=AwwW9dbcO4UVQ6w4y64FQrl4A7e0d4EM8Gry8K0TuYsRmUiraoJne/5GAueZSYL89M
+         /sF5PqFUU3I+ZMks8/OhBvRSP/N7bybMblZJA6PRt6C8CGq8UwiSg0R7ofsKErOu2Dtw
+         aoUCKfMZIIf8BY2qy8jAMUeEu2prcDZBarlEC4J0zsNCfEN5Sk3vWA9vOccC5Wgcsbh4
+         N1kG0rNUqoZy3s6gj6C7cUhiz73qmsc0d9wPoCIFzQZ55gbAljbJ0oqdH1SiRdiyLabY
+         bT53UMGC0GR4CvF7hrdPO+5Txh0Z0kEHWDw6jZP3N478rgE2nfauRoS2goWcfeYHJPvh
+         NuCA==
+X-Gm-Message-State: AOJu0YxkcjYjp9gaNDQS7TFMP8Godimhj/yZlrIXoSOHKASMme+n0ALJ
+	GpXiyJAtyFFcdlantR+I5LkjfNAfgAZjQsiFAhCMelo5MMGZzwB6uUqY6KTauQ==
+X-Gm-Gg: ATEYQzwkZRjJlF/Km0ByRNzCR1aPOQ+ptc9nkF6musAqKorre7+nqlCJmoRK+9ezsmh
+	vmG0Z8bsq9RVR61HCSPWsymxIKkDhBjXydx0Q2e7kZwwOgOW1TmabSBhQsQk1zeXA4V7CWhCiRv
+	PHZR7PMeTAikxiYNuJfZXML1/cclR/W8fJXPslQajCDQ+CsKr3z713sgsnyW+lMqW1SlR0DHdOL
+	AZ0345pLKt5ZCm+qMdeWt2FgEl6yppETiIbwDyOutNIJQRSMnxKTQknnwMqiWWYv/P10VOad8Bv
+	GrcI/6qzznuLFXMRa8f4Qmox+g5Wx8EzKlDsJPw74R4IWhzao6g/0dWZpYuGHxJU/RSUOXQ9Bu1
+	HZwTbByOL5x2PjH5vUlam9Ftr5T6DfFVvKayEwE8uMwXlKGVZ4RgdWDc0C5GLUB6+ci9ffecjjD
+	CN+5+2eK+p4DCZgQ==
+X-Received: by 2002:a05:600c:8216:b0:483:709e:f238 with SMTP id 5b1f17b1804b1-4871609399cmr111444785e9.29.1774539144569;
+        Thu, 26 Mar 2026 08:32:24 -0700 (PDT)
 Received: from term011.lan (95C810F6.dsl.pool.telekom.hu. [149.200.16.246])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48722fa8dc6sm66936295e9.1.2026.03.26.08.32.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48722fa8dc6sm66936295e9.1.2026.03.26.08.32.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 08:32:25 -0700 (PDT)
+        Thu, 26 Mar 2026 08:32:22 -0700 (PDT)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
@@ -59,9 +59,9 @@ Cc: Khem Raj <raj.khem@gmail.com>,
 	Trevor Gamblin <tgamblin@baylibre.com>,
 	Alexander Kanavin <alex.kanavin@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [RFC][meta-gnome][PATCH 2/6] libuser: Support Python free-threading
-Date: Thu, 26 Mar 2026 16:25:06 +0100
-Message-ID: <20260326153210.2245962-3-zboszor@gmail.com>
+Subject: [RFC][meta-networking][PATCH 1/6] ntpsec: Support Python free-threading
+Date: Thu, 26 Mar 2026 16:25:05 +0100
+Message-ID: <20260326153210.2245962-2-zboszor@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326153210.2245962-1-zboszor@gmail.com>
 References: <20260326153210.2245962-1-zboszor@gmail.com>
@@ -72,36 +72,34 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 15:32:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125755
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125754
 
-libuser installs its python module into the ABI-less
-site-packages directory.
+Use PYTHON_MAINVERSION instead of PYTHON_BASEVERSION because
+the former is suffixed with PYTHON_ABI for completeness.
 
-Move the installed site-packages directory to the correct
-location if needed.
+This makes the python module to be installed into the correct
+location when Python free-threading is enabled.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-gnome/recipes-support/libuser/libuser_0.64.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/libuser/libuser_0.64.bb b/meta-gnome/recipes-support/libuser/libuser_0.64.bb
-index 64b51e6c97..dbba5877c2 100644
---- a/meta-gnome/recipes-support/libuser/libuser_0.64.bb
-+++ b/meta-gnome/recipes-support/libuser/libuser_0.64.bb
-@@ -36,6 +36,12 @@ do_configure:prepend() {
-     cd -
- }
+diff --git a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+index 9704e2d15e..acde62a493 100644
+--- a/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
++++ b/meta-networking/recipes-support/ntpsec/ntpsec_1.2.4.bb
+@@ -50,8 +50,8 @@ CC[unexport] = "1"
+ CFLAGS[unexport] = "1"
+ LDFLAGS[unexport] = "1"
  
-+do_install:append () {
-+    if [ ! -d ${D}${libdir}/${PYTHON_DIR} ]; then
-+        mv ${D}${libdir}/python${PYTHON_BASEVERSION} ${D}${libdir}/${PYTHON_DIR}
-+    fi
-+}
-+
- PACKAGES += "${PN}-python "
+-export PYTHON_VERSION = "${PYTHON_BASEVERSION}"
+-export PYTAG = "cpython${@ d.getVar('PYTHON_BASEVERSION').replace('.', '')}"
++export PYTHON_VERSION = "${PYTHON_MAINVERSION}"
++export PYTAG = "cpython${@ d.getVar('PYTHON_MAINVERSION').replace('.', '')}"
+ export pyext_PATTERN = "%s.so"
+ export PYTHON_LDFLAGS = "-lpthread -ldl"
  
- FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
 -- 
 2.53.0
 
