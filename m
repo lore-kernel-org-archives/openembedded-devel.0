@@ -1,282 +1,279 @@
-Return-Path: <hongxu.jia@windriver.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD15510A3D8F
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 12:32:35 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.46274.1774528350488763561
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C794810A62C6
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 12:59:06 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.47543.1774529937184122618
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 05:32:30 -0700
+ Thu, 26 Mar 2026 05:58:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=bP+280rK;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7545558680=hongxu.jia@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62QAo2IA3761288
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:32:30 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=TUAUXp1MZvIo78Jx3Lc1
-	r0LrPrl20EXdoV/yDbYcpC0=; b=bP+280rKJC/a8M1GSNWFWUQrieS+uoRVvccm
-	Cv1T5pSYm2l0py/IKqubHIzyJmUhh+GUc0Yn1/FQdqdTSF8GFXm9AHGYDVY25Gz4
-	PmDaNz8FoDQ9uNlgPVaoXR6TrsofCAeNL5Fg0lmTPZQKA8Z2TvXztWO9pDbypoWr
-	OW30XheiI9xcr2vznbUGHAIqD4d4o7sNydS7C8Gy4opte3NoDRru6kllT5o1DQTg
-	iIkGl5j/nUcFgj1aVD+4hv86d7PUKYpgc8NnQuXgpxi6g83+Q1/RyZm+SNS/3xLq
-	2lNA/+0FW4YzwHoQmBbPDJa4pKiU4TAT4KvQ7gIaqts7fn/Tpg==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1tucx7ga-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:32:29 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Thu, 26 Mar 2026 05:32:28 -0700
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Thu, 26 Mar 2026 05:32:28 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH v2] webkitgtk3: fix compile failed on qemuarm
-Date: Thu, 26 Mar 2026 20:32:27 +0800
-Message-ID: <20260326123227.2212954-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=V9mXdFm4;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-439d8df7620so661718f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:58:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774529935; x=1775134735; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=cR8mG/Q8MzjaN35q2oCDKfbCh0PkvfXLL3w2cJvKDfQ=;
+        b=V9mXdFm4BkPxPuL2FwUy4sYxaDZGMKWVF8LWoIdUzA3tmg2wy29jPheAhwgu+plKRy
+         N0CRdECoLxz6EovyIFyMbQApY+vNrWhFcxAehnycWJdpQ657eoyt/fUjGua4DhjfxzBj
+         bvUyhU4tmnuGaFzy6+bcL2s/HAAqY5OC/0vD4kmOm4edtXIhq68fcctywtHe3mVLLQzS
+         KU8uLxVkJBhv9R2B0BNr8mPyTjjv4F55ZR5vzGHxnZ1R+1P3Ijo+hDuubhSJHUDOUKhh
+         CKA1DgiGPQQLp3BcMfH7uLRG/AMf4N5WXuVDrA76IqxXz9wuxuQSn8HyHInwyIuZdfpl
+         qrOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774529935; x=1775134735;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cR8mG/Q8MzjaN35q2oCDKfbCh0PkvfXLL3w2cJvKDfQ=;
+        b=DPP6hC6zeXrMGrviXrGaz27tOblsi14/j/odLJwp7qH6gpms5m6yba3yeUqQw/wWJp
+         pLwxgUmw/3XNIcbwU6X5bxS5b7XLNxEruxTVOzxs3uCPNHmq+MOA+s9rh1FqqZf/QXuH
+         h19i2YZm+oryO8yTYI8QrmVd4gEjYwJXJh+WzW6K9lLY9UJVMSeJ1sq8uGhpRwHjHfsX
+         GV/Zxg5t4vzPv5ijtqJDJtBz3oeAr/nexKsKpHdVgLI7/v+twHROkQ4gCoW2yQTcR65V
+         LnAtNrZN/99DrbbpQer/S+j2TArw05SSYS0pnDUwuQ5Jyl1KR529kr5XphD0ulwkPPI7
+         Ihnw==
+X-Forwarded-Encrypted: i=1; AJvYcCX6DLZF/5Drwe0rkKYr5EPdz6XZIy3qxp39HFZH+/dOLCizq88Pbx0sl54jPbstclHJJD1uFgE2Huvw0ZnaNbieRL8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzFbB/sjOiGQZGaeQt6hTfHR5rxEV34L4heAOZS3PiSZvUHcg/z
+	RX0wTdfO/Lsau/2m9GwxMdEkUfNJUEk/qzcd1u2NwAkvFOv5KT5Alve8/S5mTA==
+X-Gm-Gg: ATEYQzzESnSUUe/mAn50oBxRwyrCwb0tQiTuTCkDgAYj1OGiqpyzRzbLmf9/7HSrg6Q
+	a2PAsZdNfb1HA/8KKnrm3jwu+NgD+CqO7uQ83bhj5gFuSc8NUvLZ9vx7PLq8gBLKu9u1Xc+jkCz
+	RqDroQQH0eUXugunmGprmHGSavQTLFxm1C8Nuneujs6KwQNUAnkO3R3uMd99U0I5icelH1nZ7cH
+	jHxvjOthsIEiofT0QNqmCf7aEC+flj+pFVA2jFzVGDOk//svEzSA+wC0w24NXjW3IN8edZeokFs
+	36ZMp2m7JinRmRo8T2z/EuME+pjh6gHjWOJKqmGkT9JIPVkXpkU/5SzHGn1FMDTubSo/2AeswH2
+	h3oyxGaJKF4fomGMC3LwqmJIMLOVbZhjvwPsuVcm0LMied5Hqo2C5bTRsWSCONm4yNIpMsE9fKo
+	AWBylz05RNo+1HIYht3v9Mr7PrPgDll18=
+X-Received: by 2002:a5d:44c3:0:b0:43b:8fa4:1937 with SMTP id ffacd0b85a97d-43b8fa41a01mr6106111f8f.5.1774529934949;
+        Thu, 26 Mar 2026 05:58:54 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43b919cf5aesm8809608f8f.24.2026.03.26.05.58.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 26 Mar 2026 05:58:54 -0700 (PDT)
+Message-ID: <3ac55d19-3f24-4578-a6d1-38f3f031e6a5@gmail.com>
+Date: Thu, 26 Mar 2026 13:58:53 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-GUID: zcTEv5AE4aNzt9HmQ59czbsTR0CJlC7o
-X-Proofpoint-ORIG-GUID: zcTEv5AE4aNzt9HmQ59czbsTR0CJlC7o
-X-Authority-Analysis: v=2.4 cv=deCNHHXe c=1 sm=1 tr=0 ts=69c5275e cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=NEAV23lmAAAA:8
- a=Q1sTgoEvAAAA:8 a=LXCGm8LIAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
- a=AL_9DjrWXvHzPdvtZEAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=FkGh3qDytyf094M0uOEt:22 a=NxI9r9ql2kHpUT0AVVEO:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI2MDA4NyBTYWx0ZWRfX1zL0kq+qZQGd
- 9XQGh9YWxm6/IWDbe/xJYX2dmjCj/i9hsZ7bDebW3ij87g9Ic+BP5aiBZrH3wP4ta3EjrAlncTW
- N4nlTicuHdOfBcJru0UZCXmBPUkdceBtQ+iM8Hhmy7YZhhKrUxe4pumdb/aqMtFq4HkXwacHyDi
- SQsQ4uyjdxRrjx/C7eZOgEXgTvvIDIwDMjRjMTjhNpcBiHVBvsQf6lsGZtihtufBdbPTNZoBoWq
- 2miDVA1RvnNJM32+DB+THFSgsHO9cy+aeh0ExEr9+Y27QubEjTqhFA0pd0aFMcKkrl0QdtPx2Qw
- OsNI7YxzX7fx1vzW1C/QBJkihlLBeiukcUrFOgK1Apq9j9CnPe99N1M3JFV32Vw7AOtOi5pY2f5
- PAPJ3a1/HHc2b0d3fPVoP0H9RFK4No0M1cDQ6rgPYl4Yz6OHL9fdppm28/ixlz8wd2aJ1IVsRK7
- RihwVgZVFVve67hRGYw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-26_02,2026-03-24_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 spamscore=0 phishscore=0 priorityscore=1501
- impostorscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603260087
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 62QAo2IA3761288
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] libssh: Fix CVE-2026-0966
+To: Vijay Anusuri <vanusuri@mvista.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20260325124141.142149-1-vanusuri@mvista.com>
+ <CANQUz1-hx-EMd29DGk4_SiU6G5xN9C1e+SxNC68MgFNzLW4hwA@mail.gmail.com>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <CANQUz1-hx-EMd29DGk4_SiU6G5xN9C1e+SxNC68MgFNzLW4hwA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 12:32:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125720
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 12:59:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125721
 
-$ echo 'MACHINE =3D "qemuarm"' >> conf/local.conf
-$ bitbake webkitgtk3
-...
-| {standard input}:43622: Error: symbol `op_instanceof_return_location' i=
-s already defined
-| {standard input}:43623: Error: symbol `.Lop_instanceof_return_location'=
- is already defined
-| {standard input}:44352: Error: symbol `op_instanceof_return_location_wi=
-de16' is already defined
-| {standard input}:44353: Error: symbol `.Lop_instanceof_return_location_=
-wide16' is already defined
-| {standard input}:45090: Error: symbol `op_instanceof_return_location_wi=
-de32' is already defined
-| {standard input}:45091: Error: symbol `.Lop_instanceof_return_location_=
-wide32' is already defined
-...
+On 3/26/26 12:28, Vijay Anusuri wrote:
+> Hi Team,
+> 
+> Just checking in—do we have any updates on this?
+> 
+> I wasn’t able to find it in meta-openembedded-contrib.
+> 
 
-Drop 0001-Fix-32bit-arm.patch which conflicts with upstream solution [1]
+It is queued up now in the repo, thanks.
 
-[1] https://github.com/WebKit/WebKit/commit/fcaa289f6015595a638eb96b9f728=
-eaaa7b13ab8
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../webkitgtk3/0001-Fix-32bit-arm.patch       | 128 ------------------
- .../webkitgtk/webkitgtk3_2.50.5.bb            |   1 -
- 2 files changed, 129 deletions(-)
- delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix=
--32bit-arm.patch
-
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-=
-arm.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-a=
-rm.patch
-deleted file mode 100644
-index fadef2a01b..0000000000
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.pat=
-ch
-+++ /dev/null
-@@ -1,128 +0,0 @@
--From 014b9dad4ec5c432410254c0d0cab7d20b1f31d7 Mon Sep 17 00:00:00 2001
--From: Jason Schonberg <schonm@gmail.com>
--Date: Mon, 29 Sep 2025 14:34:48 -0400
--Subject: [PATCH] From: amaxcz <amaxcz@gmail.com> Date: Fri, 19 Sep 2025
-- 11:55:30 +0000 Subject: [PATCH] JSC: fix op_instanceof handler for 32-b=
-it
-- C-loop build MIME-Version: 1.0 Content-Type: text/plain; charset=3DUTF-=
-8
-- Content-Transfer-Encoding: 8bit
--MIME-Version: 1.0
--Content-Type: text/plain; charset=3DUTF-8
--Content-Transfer-Encoding: 8bit
--
--JSC: fix op_instanceof handler for 32-bit C-loop build
--
--Fixes missing 'op_instanceof' handler in LowLevelInterpreter32_64.asm
--which breaks 32=E2=80=91bit builds.
--
--* No ChangeLog (raw external patch).
--
--Upstream-Status: Backport [https://bugs.webkit.org/show_bug.cgi?id=3D299=
-166]
--
--Signed-off-by: Jason Schonberg <schonm@gmail.com>
-----
-- .../llint/LowLevelInterpreter32_64.asm        | 95 ++++++++++++++++++-
-- 1 file changed, 94 insertions(+), 1 deletion(-)
--
--diff --git a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm b/=
-Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
--index 0d7c92bb..0b81cc1a 100644
----- a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
--+++ b/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
--@@ -3437,4 +3437,97 @@ slowPathOp(enumerator_has_own_property)
-- slowPathOp(mod)
--=20
-- llintSlowPathOp(has_structure_with_flags)
---llintSlowPathOp(instanceof)
--+
--+llintOpWithMetadata(op_instanceof, OpInstanceof, macro (size, get, disp=
-atch, metadata, return)
--+
--+    macro getAndLoadConstantOrVariable(fieldName, tagReg, payloadReg)
--+        get(fieldName, t5)
--+        loadConstantOrVariable(size, t5, tagReg, payloadReg)
--+    end
--+
--+    macro isObject(field, falseLabel)
--+        getAndLoadConstantOrVariable(field, t0, t1)
--+        bineq t0, CellTag, falseLabel
--+        bbneq JSCell::m_type[t1], ObjectType, falseLabel
--+    end
--+
--+    macro overridesHasInstance(hasInstanceField, constructorField, true=
-Label)
--+        getAndLoadConstantOrVariable(hasInstanceField, t0, t1)
--+        bineq t0, CellTag, trueLabel
--+        loadp CodeBlock[cfr], t2
--+        loadp CodeBlock::m_globalObject[t2], t2
--+        loadp JSGlobalObject::m_functionProtoHasInstanceSymbolFunction[=
-t2], t2
--+        bpneq t1, t2, trueLabel
--+
--+        get(constructorField, t5)
--+        loadConstantOrVariablePayload(size, t5, CellTag, t1, trueLabel)
--+        btbz JSCell::m_flags[t1], ImplementsDefaultHasInstance, trueLab=
-el
--+    end
--+
--+    macro storeValue(tagReg, payloadReg, fieldName)
--+        move tagReg, t0
--+        move payloadReg, t1
--+        get(fieldName, t5)
--+        storei t0, TagOffset[cfr, t5, 8]
--+        storei t1, PayloadOffset[cfr, t5, 8]
--+    end
--+
--+.getHasInstance:
--+    isObject(m_constructor, .throwStaticError)
--+    get(m_constructor, t5)
--+    metadata(t2, t6)
--+    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getHasInstanc=
-eSlow)
--+    performGetByIDHelper(OpInstanceof, m_hasInstanceModeMetadata, m_has=
-InstanceValueProfile, .getHasInstanceSlow, size,
--+        macro (resultTag, resultPayload)
--+            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototy=
-pe)
--+            jmp .getPrototype
--+        end)
--+    jmp .getPrototype
--+
--+.getHasInstanceSlow:
--+    callSlowPath(_llint_slow_path_get_hasInstance_from_instanceof)
--+    branchIfException(_llint_throw_from_slow_path_trampoline)
--+    jmp .getPrototype
--+
--+.getHasInstanceInlinedGetterOSRReturnPoint:
--+    # This path is taken when exiting to the LLInt from an inlined gett=
-er for Symbol.hasInstance.
--+    getterSetterOSRExitReturnPoint(op_instanceof, size)
--+    valueProfile(size, OpInstanceof, m_hasInstanceValueProfile, r1, r0,=
- t2)
--+    storeValue(r1, r0, m_hasInstanceOrPrototype)
--+
--+.getPrototype:
--+    overridesHasInstance(m_hasInstanceOrPrototype, m_constructor, .inst=
-anceofCustom)
--+    isObject(m_value, .false)
--+    get(m_constructor, t5)
--+    metadata(t2, t6)
--+    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getPrototypeS=
-low)
--+    performGetByIDHelper(OpInstanceof, m_prototypeModeMetadata, m_proto=
-typeValueProfile, .getPrototypeSlow, size,
--+        macro (resultTag, resultPayload)
--+            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototy=
-pe)
--+            jmp .instanceof
--+        end)
--+    jmp .instanceof
--+
--+.getPrototypeSlow:
--+    callSlowPath(_llint_slow_path_get_prototype_from_instanceof)
--+    branchIfException(_llint_throw_from_slow_path_trampoline)
--+    jmp .instanceof
--+
--+.instanceof:
--+    callSlowPath(_llint_slow_path_instanceof_from_instanceof)
--+    dispatch()
--+
--+.throwStaticError:
--+    callSlowPath(_slow_path_throw_static_error_from_instanceof)
--+    dispatch()
--+
--+.instanceofCustom:
--+    callSlowPath(_slow_path_instanceof_custom_from_instanceof)
--+    dispatch()
--+
--+.false:
--+    get(m_dst, t5)
--+    storei BooleanTag, TagOffset[cfr, t5, 8]
--+    storei 0, PayloadOffset[cfr, t5, 8]
--+    dispatch()
--+end)
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb b/met=
-a-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
-index 9be30506d6..e6007a6667 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
-@@ -21,7 +21,6 @@ SRC_URI =3D "https://www.webkitgtk.org/releases/webkitg=
-tk-${PV}.tar.xz \
-            file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-s=
-how.patch \
-            file://fix-ftbfs-riscv64.patch \
-            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAY=
-S_I.patch \
--           file://0001-Fix-32bit-arm.patch \
-            "
- SRC_URI[sha256sum] =3D "8737631bac3e9c7ad3e5208f9370e076c09d9c45b3998002=
-1ce54edadcc6f94f"
-=20
---=20
-2.34.1
+> Thanks & Regards,
+> 
+> Vijay
+> 
+> 
+> 
+> 
+> On Wed, Mar 25, 2026 at 6:11 PM <vanusuri@mvista.com
+> <mailto:vanusuri@mvista.com>> wrote:
+> 
+>     From: Vijay Anusuri <vanusuri@mvista.com <mailto:vanusuri@mvista.com>>
+> 
+>     Pick commits according to [1]
+> 
+>     [1] https://security-tracker.debian.org/tracker/CVE-2026-0966
+>     <https://security-tracker.debian.org/tracker/CVE-2026-0966>
+>     [2] https://www.libssh.org/security/advisories/CVE-2026-0966.txt
+>     <https://www.libssh.org/security/advisories/CVE-2026-0966.txt>
+> 
+>     Skip the test commit as it's not applicable in libssh-0.8.9
+> 
+>     Signed-off-by: Vijay Anusuri <vanusuri@mvista.com
+>     <mailto:vanusuri@mvista.com>>
+>     ---
+>      .../libssh/libssh/CVE-2026-0966-1.patch       | 38 ++++++++++++
+>      .../libssh/libssh/CVE-2026-0966-2.patch       | 62 +++++++++++++++++++
+>      .../recipes-support/libssh/libssh_0.8.9.bb <http://
+>     libssh_0.8.9.bb>    |  2 +
+>      3 files changed, 102 insertions(+)
+>      create mode 100644 meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-1.patch
+>      create mode 100644 meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-2.patch
+> 
+>     diff --git a/meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-1.patch b/meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-1.patch
+>     new file mode 100644
+>     index 0000000000..a645282afd
+>     --- /dev/null
+>     +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0966-1.patch
+>     @@ -0,0 +1,38 @@
+>     +From 6ba5ff1b7b1547a59f750fbc06b89737b7456117 Mon Sep 17 00:00:00 2001
+>     +From: Jakub Jelen <jjelen@redhat.com <mailto:jjelen@redhat.com>>
+>     +Date: Thu, 8 Jan 2026 12:09:50 +0100
+>     +Subject: [PATCH] CVE-2026-0966 misc: Avoid heap buffer underflow in
+>     ssh_get_hexa
+>     +
+>     +Signed-off-by: Jakub Jelen <jjelen@redhat.com
+>     <mailto:jjelen@redhat.com>>
+>     +Reviewed-by: Pavol Žáčik <pzacik@redhat.com <mailto:pzacik@redhat.com>>
+>     +(cherry picked from commit 417a095e6749a1f3635e02332061edad3c6a3401)
+>     +
+>     +ssh_get_hexa function not present in misc.c. It was in dh.c file in
+>     +older libssh versions.
+>     +
+>     +ssh_get_hexa function moved from dh.c from misc.c by the below commit
+>     +https://git.libssh.org/projects/libssh.git/commit/?
+>     id=43a4f86b6e14a907b3a298d10d5cd7efb59f6a09 <https://git.libssh.org/
+>     projects/libssh.git/commit/?id=43a4f86b6e14a907b3a298d10d5cd7efb59f6a09>
+>     +
+>     +Upstream-Status: Backport [https://git.libssh.org/projects/
+>     libssh.git/commit/?id=6ba5ff1b7b1547a59f750fbc06b89737b7456117
+>     <https://git.libssh.org/projects/libssh.git/commit/?
+>     id=6ba5ff1b7b1547a59f750fbc06b89737b7456117>]
+>     +CVE: CVE-2026-0966
+>     +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com
+>     <mailto:vanusuri@mvista.com>>
+>     +---
+>     + src/dh.c | 2 +-
+>     + 1 file changed, 1 insertion(+), 1 deletion(-)
+>     +
+>     +diff --git a/src/dh.c b/src/dh.c
+>     +index 7116d1dc..321aeba6 100644
+>     +--- a/src/dh.c
+>     ++++ b/src/dh.c
+>     +@@ -1486,7 +1486,7 @@ char *ssh_get_hexa(const unsigned char *what,
+>     size_t len) {
+>     +   size_t i;
+>     +   size_t hlen = len * 3;
+>     +
+>     +-  if (len > (UINT_MAX - 1) / 3) {
+>     ++  if (what == NULL || len < 1 || len > (UINT_MAX - 1) / 3) {
+>     +     return NULL;
+>     +   }
+>     +
+>     +--
+>     +2.25.1
+>     +
+>     diff --git a/meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-2.patch b/meta-oe/recipes-support/libssh/libssh/
+>     CVE-2026-0966-2.patch
+>     new file mode 100644
+>     index 0000000000..9a035dbc1e
+>     --- /dev/null
+>     +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0966-2.patch
+>     @@ -0,0 +1,62 @@
+>     +From 3e1d276a5a030938a8f144f46ff4f2a2efe31ced Mon Sep 17 00:00:00 2001
+>     +From: Jakub Jelen <jjelen@redhat.com <mailto:jjelen@redhat.com>>
+>     +Date: Thu, 8 Jan 2026 12:10:44 +0100
+>     +Subject: [PATCH] CVE-2026-0966 doc: Update guided tour to use
+>     SHA256 fingerprints
+>     +
+>     +Signed-off-by: Jakub Jelen <jjelen@redhat.com
+>     <mailto:jjelen@redhat.com>>
+>     +Reviewed-by: Pavol Žáčik <pzacik@redhat.com <mailto:pzacik@redhat.com>>
+>     +(cherry picked from commit 1b2a4f760bec35121c490f2294f915ebb9c992ae)
+>     +
+>     +Upstream-Status: Backport [https://git.libssh.org/projects/
+>     libssh.git/commit/?id=3e1d276a5a030938a8f144f46ff4f2a2efe31ced
+>     <https://git.libssh.org/projects/libssh.git/commit/?
+>     id=3e1d276a5a030938a8f144f46ff4f2a2efe31ced>]
+>     +CVE: CVE-2026-0966
+>     +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com
+>     <mailto:vanusuri@mvista.com>>
+>     +---
+>     + doc/guided_tour.dox | 10 ++++------
+>     + 1 file changed, 4 insertions(+), 6 deletions(-)
+>     +
+>     +diff --git a/doc/guided_tour.dox b/doc/guided_tour.dox
+>     +index 008ccb4e..bdd7489c 100644
+>     +--- a/doc/guided_tour.dox
+>     ++++ b/doc/guided_tour.dox
+>     +@@ -190,7 +190,6 @@ int verify_knownhost(ssh_session session)
+>     +     ssh_key srv_pubkey = NULL;
+>     +     size_t hlen;
+>     +     char buf[10];
+>     +-    char *hexa = NULL;
+>     +     char *p = NULL;
+>     +     int cmp;
+>     +     int rc;
+>     +@@ -201,7 +200,7 @@ int verify_knownhost(ssh_session session)
+>     +     }
+>     +
+>     +     rc = ssh_get_publickey_hash(srv_pubkey,
+>     +-                                SSH_PUBLICKEY_HASH_SHA1,
+>     ++                                SSH_PUBLICKEY_HASH_SHA256,
+>     +                                 &hash,
+>     +                                 &hlen);
+>     +     ssh_key_free(srv_pubkey);
+>     +@@ -217,7 +216,7 @@ int verify_knownhost(ssh_session session)
+>     +             break;
+>     +         case SSH_KNOWN_HOSTS_CHANGED:
+>     +             fprintf(stderr, "Host key for server changed: it is
+>     now:\n");
+>     +-            ssh_print_hexa("Public key hash", hash, hlen);
+>     ++            ssh_print_hexa(SSH_PUBLICKEY_HASH_SHA256, hash, hlen);
+>     +             fprintf(stderr, "For security reasons, connection will
+>     be stopped\n");
+>     +             ssh_clean_pubkey_hash(&hash);
+>     +
+>     +@@ -238,10 +237,9 @@ int verify_knownhost(ssh_session session)
+>     +             /* FALL THROUGH to SSH_SERVER_NOT_KNOWN behavior */
+>     +
+>     +         case SSH_KNOWN_HOSTS_UNKNOWN:
+>     +-            hexa = ssh_get_hexa(hash, hlen);
+>     +             fprintf(stderr,"The server is unknown. Do you trust
+>     the host key?\n");
+>     +-            fprintf(stderr, "Public key hash: %s\n", hexa);
+>     +-            ssh_string_free_char(hexa);
+>     ++            fprintf(stderr, "Public key hash: ");
+>     ++            ssh_print_hash(SSH_PUBLICKEY_HASH_SHA256, hash, hlen);
+>     +             ssh_clean_pubkey_hash(&hash);
+>     +             p = fgets(buf, sizeof(buf), stdin);
+>     +             if (p == NULL) {
+>     +--
+>     +2.25.1
+>     +
+>     diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb <http://
+>     libssh_0.8.9.bb> b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+>     <http://libssh_0.8.9.bb>
+>     index a1fc64446c..8cc0883b2b 100644
+>     --- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb <http://
+>     libssh_0.8.9.bb>
+>     +++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb <http://
+>     libssh_0.8.9.bb>
+>     @@ -29,6 +29,8 @@ SRC_URI = "git://git.libssh.org/projects/
+>     libssh.git;protocol=https;branch=stable <http://git.libssh.org/
+>     projects/libssh.git;protocol=https;branch=stable>
+>                 file://CVE-2025-8277-3.patch \
+>                 file://CVE-2025-8114.patch \
+>                 file://CVE-2026-3731.patch \
+>     +           file://CVE-2026-0966-1.patch \
+>     +           file://CVE-2026-0966-2.patch \
+>                "
+>      SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
+> 
+>     -- 
+>     2.25.1
+> 
 
 
