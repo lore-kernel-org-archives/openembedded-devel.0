@@ -1,93 +1,282 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <hongxu.jia@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7601410A3D87
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 11:58:25 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.46440.1774526299738939206
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE85D10A3D89
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 12:25:05 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.46929.1774527901145707955
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 04:58:22 -0700
+ Thu, 26 Mar 2026 05:25:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=sYRfOZBo;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1774526301; x=1806062301;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=zLvPkzJC/xBQH9OA6jd6gOgNwZBoGcnB8eOeN4URFBw=;
-  b=sYRfOZBoyFLydNUEtZM1Kt058zxMw29J5EqOJyjOP+To8HwgXLpQpeIo
-   TG/Wc8Cne0Zpwa2HKMOSTLlRYs9qLoUjUMHmr5HvvWV+k3GmLuN8Fldc1
-   i2cIzkYT0OAtN1WtKBkh5Jnq3TUr4d9kXr6Lq4PwuogBJ1YtJhIzT4MjC
-   kXtJyOth/Uh7YYOuAy+DFJNnBwsvvviY5vOeNdfHqShnRTRiLe/oHR2S9
-   16MTTiC04InuBl4RapzPBOu+v5eDLLUF51zs26qhefuuJ6WWiEnlswoA6
-   YeiLD8HysBw9oA3XubHG9I44GDax6o3UYPRVNIsz0/a0zw0eiM5m5FTt/
-   w==;
-X-CSE-ConnectionGUID: k5tPaDWbT5etfewwOFhJ3w==
-X-CSE-MsgGUID: 7yiIX3P1QK6VMru+1I+3wQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11740"; a="213717145"
-X-IronPort-AV: E=Sophos;i="6.23,142,1770562800"; 
-   d="scan'208";a="213717145"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Mar 2026 20:58:21 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 253EC820712
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:58:21 +0000 (UTC)
-Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id D4AD114003CC
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:58:20 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.193.128.28])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 74C861807149;
-	Thu, 26 Mar 2026 11:58:18 +0000 (UTC)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 63/63] tree: upgrade 2.3.1 -> 2.3.2
-Date: Thu, 26 Mar 2026 19:56:33 +0800
-Message-ID: <20260326115634.1199-63-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20260326115634.1199-1-wangmy@fujitsu.com>
-References: <20260326115634.1199-1-wangmy@fujitsu.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=W2AGhMh1;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7545558680=hongxu.jia@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62Q7k14m3445307
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:25:00 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=TUAUXp1MZvIo78Jx3Lc1
+	r0LrPrl20EXdoV/yDbYcpC0=; b=W2AGhMh1UBQCdAdl2aAewuukl2IXXbcdpja4
+	37F7SvBWz345GRuyMY4VvtHVimJQKR3a/3Sg5Mpq8XsNRCcPAZ6hIHab/zNab5yz
+	TKuIyCYNEs2XdbMcfMQtWEpYCpk8njbkcu1TjxDuLhH+sh6tluo2wnW8dQipESrM
+	wu/5hmNGKGesizT/Lmv42EVI+De9eKvyu2g0oKoHWlMpOV6C3a7YazZI7nncWiNQ
+	LuyWVEzJDmKbz4gZjIwBHd2129d6rMD65ern6oEpzp3XBs/zGUsTi8ZCWtW0NMx/
+	cECEPYog/o6S6doRpRUpK/PLW86uKqnpoAmpMuEojRBVdByYjw==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1tucx72t-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:25:00 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Thu, 26 Mar 2026 05:24:59 -0700
+Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Thu, 26 Mar 2026 05:24:59 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] webkitgtk3: fix compile filed on qemuarm
+Date: Thu, 26 Mar 2026 20:24:58 +0800
+Message-ID: <20260326122458.2204368-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+X-Proofpoint-GUID: nMbQPAwC5G_TQpqxVa7iN8lvnLZ16CDb
+X-Proofpoint-ORIG-GUID: nMbQPAwC5G_TQpqxVa7iN8lvnLZ16CDb
+X-Authority-Analysis: v=2.4 cv=deCNHHXe c=1 sm=1 tr=0 ts=69c5259c cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=NEAV23lmAAAA:8
+ a=Q1sTgoEvAAAA:8 a=LXCGm8LIAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8
+ a=AL_9DjrWXvHzPdvtZEAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=FkGh3qDytyf094M0uOEt:22 a=NxI9r9ql2kHpUT0AVVEO:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI2MDA4NiBTYWx0ZWRfX46rrYm6atto3
+ Ju9IQuJl3sm8mEEFzQbqWSf6FSlzD1qzdn6+SjvkCCC18i6Et3Hy8jaeZBY2vbmush/Q+RHqXt7
+ m42OQxWwWwlAMXXRjIqRuYSATkw7VSe8EK0eNsZs+5eM2AYblGaIk4vsMZETRH1lAAsgzQwg5d0
+ iw73gZz8vzfPnseLMtNqrMxF3d66FgifbmeOMAF72mg4P/O/7owqgzU8Z+zNsDiGOfcpjuv+zEK
+ mZ0Eb65h34EvaA3DofCcsyH09EaGUCIGHNQM7t0KPmKJN+ZLxF7SRDQUwoTZwA3m+UtObZh/vIE
+ wWx9IIXsbWT21ZjWFnHfbZKF5JvhpQZGiZtprUheksLFccWZImMi+kpAj/GVWGp02srl3Ql2N/n
+ yWAYFR8nOG+JXEvmvIOWHGF/PYdVq6LoigH6sifhekTuWMybddiN6n2P2v+7MaZbCezqCM6+yje
+ SV2MfkaFY5dwbh7chcA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-26_02,2026-03-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 spamscore=0 phishscore=0 priorityscore=1501
+ impostorscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603260086
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 62Q7k14m3445307
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:58:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125718
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 12:25:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125719
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+$ echo 'MACHINE =3D "qemuarm"' >> conf/local.conf
+$ bitbake webkitgtk3
+...
+| {standard input}:43622: Error: symbol `op_instanceof_return_location' i=
+s already defined
+| {standard input}:43623: Error: symbol `.Lop_instanceof_return_location'=
+ is already defined
+| {standard input}:44352: Error: symbol `op_instanceof_return_location_wi=
+de16' is already defined
+| {standard input}:44353: Error: symbol `.Lop_instanceof_return_location_=
+wide16' is already defined
+| {standard input}:45090: Error: symbol `op_instanceof_return_location_wi=
+de32' is already defined
+| {standard input}:45091: Error: symbol `.Lop_instanceof_return_location_=
+wide32' is already defined
+...
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Drop 0001-Fix-32bit-arm.patch which conflicts with upstream solution [1]
+
+[1] https://github.com/WebKit/WebKit/commit/fcaa289f6015595a638eb96b9f728=
+eaaa7b13ab8
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-support/tree/{tree_2.3.1.bb => tree_2.3.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/tree/{tree_2.3.1.bb => tree_2.3.2.bb} (87%)
+ .../webkitgtk3/0001-Fix-32bit-arm.patch       | 128 ------------------
+ .../webkitgtk/webkitgtk3_2.50.5.bb            |   1 -
+ 2 files changed, 129 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix=
+-32bit-arm.patch
 
-diff --git a/meta-oe/recipes-support/tree/tree_2.3.1.bb b/meta-oe/recipes-support/tree/tree_2.3.2.bb
-similarity index 87%
-rename from meta-oe/recipes-support/tree/tree_2.3.1.bb
-rename to meta-oe/recipes-support/tree/tree_2.3.2.bb
-index b4fa0659b9..6e0d9f943f 100644
---- a/meta-oe/recipes-support/tree/tree_2.3.1.bb
-+++ b/meta-oe/recipes-support/tree/tree_2.3.2.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
- 
- SRC_URI = "https://oldmanprogrammer.net/tar/tree/${BP}.tgz"
--SRC_URI[sha256sum] = "47ca786ed4ea4aa277cabd42b1a54635aca41b29e425e9229bd1317831f25665"
-+SRC_URI[sha256sum] = "6b941dd6cbecfb4d3250700e4d08d8e0c251488981dd4868b90d744234300e21"
- 
- # tree's default CFLAGS for Linux
- CFLAGS += "-Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
--- 
-2.43.0
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-=
+arm.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-a=
+rm.patch
+deleted file mode 100644
+index fadef2a01b..0000000000
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-32bit-arm.pat=
+ch
++++ /dev/null
+@@ -1,128 +0,0 @@
+-From 014b9dad4ec5c432410254c0d0cab7d20b1f31d7 Mon Sep 17 00:00:00 2001
+-From: Jason Schonberg <schonm@gmail.com>
+-Date: Mon, 29 Sep 2025 14:34:48 -0400
+-Subject: [PATCH] From: amaxcz <amaxcz@gmail.com> Date: Fri, 19 Sep 2025
+- 11:55:30 +0000 Subject: [PATCH] JSC: fix op_instanceof handler for 32-b=
+it
+- C-loop build MIME-Version: 1.0 Content-Type: text/plain; charset=3DUTF-=
+8
+- Content-Transfer-Encoding: 8bit
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=3DUTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-JSC: fix op_instanceof handler for 32-bit C-loop build
+-
+-Fixes missing 'op_instanceof' handler in LowLevelInterpreter32_64.asm
+-which breaks 32=E2=80=91bit builds.
+-
+-* No ChangeLog (raw external patch).
+-
+-Upstream-Status: Backport [https://bugs.webkit.org/show_bug.cgi?id=3D299=
+166]
+-
+-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+----
+- .../llint/LowLevelInterpreter32_64.asm        | 95 ++++++++++++++++++-
+- 1 file changed, 94 insertions(+), 1 deletion(-)
+-
+-diff --git a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm b/=
+Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
+-index 0d7c92bb..0b81cc1a 100644
+---- a/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
+-+++ b/Source/JavaScriptCore/llint/LowLevelInterpreter32_64.asm
+-@@ -3437,4 +3437,97 @@ slowPathOp(enumerator_has_own_property)
+- slowPathOp(mod)
+-=20
+- llintSlowPathOp(has_structure_with_flags)
+--llintSlowPathOp(instanceof)
+-+
+-+llintOpWithMetadata(op_instanceof, OpInstanceof, macro (size, get, disp=
+atch, metadata, return)
+-+
+-+    macro getAndLoadConstantOrVariable(fieldName, tagReg, payloadReg)
+-+        get(fieldName, t5)
+-+        loadConstantOrVariable(size, t5, tagReg, payloadReg)
+-+    end
+-+
+-+    macro isObject(field, falseLabel)
+-+        getAndLoadConstantOrVariable(field, t0, t1)
+-+        bineq t0, CellTag, falseLabel
+-+        bbneq JSCell::m_type[t1], ObjectType, falseLabel
+-+    end
+-+
+-+    macro overridesHasInstance(hasInstanceField, constructorField, true=
+Label)
+-+        getAndLoadConstantOrVariable(hasInstanceField, t0, t1)
+-+        bineq t0, CellTag, trueLabel
+-+        loadp CodeBlock[cfr], t2
+-+        loadp CodeBlock::m_globalObject[t2], t2
+-+        loadp JSGlobalObject::m_functionProtoHasInstanceSymbolFunction[=
+t2], t2
+-+        bpneq t1, t2, trueLabel
+-+
+-+        get(constructorField, t5)
+-+        loadConstantOrVariablePayload(size, t5, CellTag, t1, trueLabel)
+-+        btbz JSCell::m_flags[t1], ImplementsDefaultHasInstance, trueLab=
+el
+-+    end
+-+
+-+    macro storeValue(tagReg, payloadReg, fieldName)
+-+        move tagReg, t0
+-+        move payloadReg, t1
+-+        get(fieldName, t5)
+-+        storei t0, TagOffset[cfr, t5, 8]
+-+        storei t1, PayloadOffset[cfr, t5, 8]
+-+    end
+-+
+-+.getHasInstance:
+-+    isObject(m_constructor, .throwStaticError)
+-+    get(m_constructor, t5)
+-+    metadata(t2, t6)
+-+    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getHasInstanc=
+eSlow)
+-+    performGetByIDHelper(OpInstanceof, m_hasInstanceModeMetadata, m_has=
+InstanceValueProfile, .getHasInstanceSlow, size,
+-+        macro (resultTag, resultPayload)
+-+            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototy=
+pe)
+-+            jmp .getPrototype
+-+        end)
+-+    jmp .getPrototype
+-+
+-+.getHasInstanceSlow:
+-+    callSlowPath(_llint_slow_path_get_hasInstance_from_instanceof)
+-+    branchIfException(_llint_throw_from_slow_path_trampoline)
+-+    jmp .getPrototype
+-+
+-+.getHasInstanceInlinedGetterOSRReturnPoint:
+-+    # This path is taken when exiting to the LLInt from an inlined gett=
+er for Symbol.hasInstance.
+-+    getterSetterOSRExitReturnPoint(op_instanceof, size)
+-+    valueProfile(size, OpInstanceof, m_hasInstanceValueProfile, r1, r0,=
+ t2)
+-+    storeValue(r1, r0, m_hasInstanceOrPrototype)
+-+
+-+.getPrototype:
+-+    overridesHasInstance(m_hasInstanceOrPrototype, m_constructor, .inst=
+anceofCustom)
+-+    isObject(m_value, .false)
+-+    get(m_constructor, t5)
+-+    metadata(t2, t6)
+-+    loadConstantOrVariablePayload(size, t5, CellTag, t3, .getPrototypeS=
+low)
+-+    performGetByIDHelper(OpInstanceof, m_prototypeModeMetadata, m_proto=
+typeValueProfile, .getPrototypeSlow, size,
+-+        macro (resultTag, resultPayload)
+-+            storeValue(resultTag, resultPayload, m_hasInstanceOrPrototy=
+pe)
+-+            jmp .instanceof
+-+        end)
+-+    jmp .instanceof
+-+
+-+.getPrototypeSlow:
+-+    callSlowPath(_llint_slow_path_get_prototype_from_instanceof)
+-+    branchIfException(_llint_throw_from_slow_path_trampoline)
+-+    jmp .instanceof
+-+
+-+.instanceof:
+-+    callSlowPath(_llint_slow_path_instanceof_from_instanceof)
+-+    dispatch()
+-+
+-+.throwStaticError:
+-+    callSlowPath(_slow_path_throw_static_error_from_instanceof)
+-+    dispatch()
+-+
+-+.instanceofCustom:
+-+    callSlowPath(_slow_path_instanceof_custom_from_instanceof)
+-+    dispatch()
+-+
+-+.false:
+-+    get(m_dst, t5)
+-+    storei BooleanTag, TagOffset[cfr, t5, 8]
+-+    storei 0, PayloadOffset[cfr, t5, 8]
+-+    dispatch()
+-+end)
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb b/met=
+a-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+index 9be30506d6..e6007a6667 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+@@ -21,7 +21,6 @@ SRC_URI =3D "https://www.webkitgtk.org/releases/webkitg=
+tk-${PV}.tar.xz \
+            file://0001-Fix-build-errors-on-RISCV-https-bugs.webkit.org-s=
+how.patch \
+            file://fix-ftbfs-riscv64.patch \
+            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAY=
+S_I.patch \
+-           file://0001-Fix-32bit-arm.patch \
+            "
+ SRC_URI[sha256sum] =3D "8737631bac3e9c7ad3e5208f9370e076c09d9c45b3998002=
+1ce54edadcc6f94f"
+=20
+--=20
+2.34.1
 
 
