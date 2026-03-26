@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3323810A1E71
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 11:03:41 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.45496.1774523018495838637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24DCE10A1E70
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 11:03:51 +0000 (UTC)
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44807.1774523020945282332
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2026 04:03:38 -0700
+ Thu, 26 Mar 2026 04:03:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=VjF/Thlw;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-8298fad2063so478303b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 04:03:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gLeBlR/h;
+ spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-c742b9b7727so282856a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 04:03:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774523018; x=1775127818; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774523020; x=1775127820; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XPAE/otPlMPYlfwqD3bNSf0vjZ2RDb/NSHyHXmf/3A0=;
-        b=VjF/ThlwE5kXSUB0v2iVwu+ha1VZ7oSezrf7aRxV4qo9a2ZZJvER47l+rUYQ1ZeJBO
-         p6R+FzyfgIW6nYcZeM0SyZ/XcPNjnAyK2L5xOZb4NqTqSgNw3kKd2erjT9VVOQMBT9QR
-         ZLZAh4rK4C16FLQozYTJFReXlVVQa0rPVCBEo7UmPUUV0pzVUTjhaoMEbuZ9n9uiwD61
-         3IPK49NY2BvPVi760BvNHSXirOfoHiD0LLYjPF6BwO+WyPee9Tp00IZ96wCZcA1Ypc/w
-         BLIuhLHFASUdlG4R9ZHQFt9t0K67zPYE1bOw7f+xM2zll5kk89PHy0G+aLPG9bjMV9L3
-         CPxQ==
+        bh=FF9gW54F+4TvjZtkYmDNwtIPYwvA5EIJsAzDMmCQ3hQ=;
+        b=gLeBlR/hqFuJiw0neHekCmbg92hn6/mn9sK1pfhYDsvxlWHqjGn+xbOxbYhTACZXtn
+         1PdpXMNniKrpW/Kfg44au8XnUcDJEMOXGw3KDQUqvsDA9CzgJpix6vwq02KruUbom15g
+         YeTO6Ci+HMBhi4ILW9Xnu0op7dSJwjwhZim40DHvahrklf7tpxaI/dT4IcCc7LCw/ShC
+         1VZPp1jUlpbidVNJLS1RreUBrPJh170S09lewisueNBJBr35vloRrCwfRCz989I9dumr
+         ZuJzhjsAdPUXK00CzDbD6nBy0sU46M/eUhSftbWLwdEfsQLevToEQjtDmvNS/VanKNl7
+         yVkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774523018; x=1775127818;
+        d=1e100.net; s=20251104; t=1774523020; x=1775127820;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=XPAE/otPlMPYlfwqD3bNSf0vjZ2RDb/NSHyHXmf/3A0=;
-        b=MkcBZFZYv0cwlyFMqeCdMPfSraTfPURUCKs3bpAo3q0+dOE9qOB8ryo2zhfDD1WSzh
-         AkuSArLp3awBNM0s4TfDPLu7JDf7/0Ni2gEEEKtq3YrCsDsSdJdUma+wIfdQGvhO9U6G
-         7QE6gHHwdCuWl8uNdNH31oC3T0ZOjkLmat8tiPVC1qlj21DLH0FDxuGQW+SHNrROaOTT
-         T4lA31dnUgxZHvugaHRzUyx+7v6ZAGDm0P3JzS3sPe/DwWO3vjpIHjM6sWQGbsMRCDrn
-         uEew53uFTVWL+Mgh2WgC0Cnm/3b/6Rva6htLnbqJD4QDjJ4T9Mg4OLIzBBoDSRJqMGE9
-         8JPw==
-X-Gm-Message-State: AOJu0Yz4vhvFJRhKjA+zyWKnPIN0KHzpIjvloeCY0J0+nJq7BLxl6nbT
-	Jn9pNJMFvgS+B13pmpCF3ZtATk+E8SbTPnwjVy03D1snkhFcicseh2nfPdGKG7cG
-X-Gm-Gg: ATEYQzwXbiVZjlKp0XSNORojpOiDBD8O1oGZQB1SahKepv0ir6N55q13Q7GZGBMa6CB
-	43UfHRDXbJYL3EyDiZhlkQU2zl5D7gpYX4RuHu/pRQmEGsuv90b9m5HWoKPJN8EIk9MRsPZYH1+
-	41D37jfn5c9ci/aLVkaxFRSkyaeIZgwSwolUaB/byERS3DN9wzM6yTVmYcQVGB0DycQHZiNfAlG
-	T4tRT4PmvHnivlggsDqXIaYmc7a7VN/cF6E2zOgkp4oRxOym0e6rf2wA59F33lvkYAWBp01y6f7
-	CT/dfWcuuoOp6E7V+5hzTBxLpWR363zhxa2dEtHLm7xoT/UlLvK5EZ/SVsDTLvwOmCJAwDW9E6d
-	BW4NWD4aLBHdm2wQQE0nNTk+L/PsdKFBQgQv3SKksj6dK4lda16Jtz1lC684epvd7v+X9MlseP9
-	3qQnrifhWYdktTQBbWvgKW6VvsEpjrhM1Sj5A=
-X-Received: by 2002:a05:6a00:61c4:b0:82c:75df:10ab with SMTP id d2e1a72fcca58-82c75df13a1mr3535770b3a.58.1774523017646;
-        Thu, 26 Mar 2026 04:03:37 -0700 (PDT)
+        bh=FF9gW54F+4TvjZtkYmDNwtIPYwvA5EIJsAzDMmCQ3hQ=;
+        b=o+74OXeuAFuWxuapUsHnKrzPq80+ZgN9BGJRw9bTexuL3uaPhpD5vjZH4l9x+JAStV
+         R7rhUfQkx1/BICQBO4PoWQPAnrPDlkgvd+p0GAiG+7TMENzK8jW2h1QVgHiSNQv08f56
+         ptknzG7bkUdBEz4uTw8vJ71L1q9iX9EbavD8ndzMbhBfLpcvhbyabHdoIdnC7Wzfmm/2
+         2xQOOJavfE/xhBxoOCPdv/zBQvsbqRg1WyKWRSHAEWGvHW68icgAYZe5ELiVR3pEr+ZZ
+         DhKhTINn0X4gxkugpVjSwbaC56zuhAu11XUCWgfjvCeeH8ZHN5Xx8Hqu/pLqk3ZfjR3L
+         oDig==
+X-Gm-Message-State: AOJu0Yw1fvX0iAbTJKEYVquZkwDRE+Og6PIZcXc39qf3KYAlhg7dTI8z
+	p2Hr3KmRFW1v41PKD5Q8otjAfJzMR1KOPDl3iQnf+Pmd1Z+wvK7XshaQRTgNEuJy
+X-Gm-Gg: ATEYQzys30Y+oHojjVUCMceJxw0Rr/MC7AOoS88hGsMMu9iteNT6gFu3M/V7OK8b/lb
+	m1CWqMcnysbiiFrXsynigcHRdwUYuKi9yEL00HjDN+rhRdLOd5h/hZNdCt9Bl1UfzZV/Fu8vsl9
+	zdiMWmxzWGEj581G/ivWgTpQ0fpHetYit98Rd/wZsEDQL2qAkkC+pGbJvNsCdHqIJXr5PU0AJC8
+	pAYvKBz867OxBXIW9URhRKRSbZywAUJCaxYASODBGWNhIKiz2D1yuVxrVKOancViFJ9Uy8ttLPx
+	qElKrHZNMEVTYJdVT1/7bznp+yRuKFTZ97bxDEU3Sm/W8GQnDrang63MTBWVO6j/VhvfeU4fYNb
+	vUlC2RHtz4+HNxRL64n7WydfRT7jP59WDKRRalkSESiGd45pjN/lF3p3qJW5044NeZznAAWK9It
+	H6HB3vXyCSoqHSkhziggN0D8s+f43DDpV0u4WvEuxUmLJl2Q==
+X-Received: by 2002:a05:6a00:8c4:b0:829:8083:472b with SMTP id d2e1a72fcca58-82c864599f8mr1093598b3a.4.1774523020093;
+        Thu, 26 Mar 2026 04:03:40 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.14])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82c7d2113absm2265885b3a.20.2026.03.26.04.03.35
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82c7d2113absm2265885b3a.20.2026.03.26.04.03.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 04:03:37 -0700 (PDT)
+        Thu, 26 Mar 2026 04:03:39 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-filesystems][PATCH 6/13] f2fs-tools: include tag in SRC_URI
-Date: Fri, 27 Mar 2026 00:03:03 +1300
-Message-ID: <20260326110310.1809866-6-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-filesystems][PATCH 7/13] fatcat: include tag in SRC_URI
+Date: Fri, 27 Mar 2026 00:03:04 +1300
+Message-ID: <20260326110310.1809866-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260326110310.1809866-1-ankur.tyagi85@gmail.com>
 References: <20260326110310.1809866-1-ankur.tyagi85@gmail.com>
@@ -66,27 +66,27 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:03:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125647
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 11:03:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125648
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb | 2 +-
+ meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
-index 68727b008e..78a71359cf 100644
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.16.0.bb
-@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=362b4b2594cd362b874a97718faa51d3"
- DEPENDS = "util-linux"
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+index 876e8618eb..47bb8650a6 100644
+--- a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.1.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/Gregwar/fatcat"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
  
- SRCREV = "06c027abc6153c4a97cba5317844e8dcaaee3cf7"
--SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;branch=master \
-+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;branch=master;tag=v${PV} \
-            file://0001-f2fs-tools-use-stdbool.h-instead-of-bool.patch \
-            file://0002-f2fs_io-Define-_FILE_OFFSET_BITS-64.patch \
-            "
+-SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
++SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https;tag=v${PV} \
+            file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
+            file://0002-Enable-64bit-off_t.patch \
+            file://0001-Replace-std-ptr_fun-for-c-17.patch \
 
