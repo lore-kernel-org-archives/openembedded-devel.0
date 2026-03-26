@@ -1,346 +1,248 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <Haixiao.Yan.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FC16109E550
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 05:11:09 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.41540.1774501860901624680
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2BF3106F300
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 08:28:50 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.43425.1774513726350847451
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Mar 2026 22:11:01 -0700
+ Thu, 26 Mar 2026 01:28:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=QFiTx+y0;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=O87kla9A;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62Q0xPFL779734
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:10:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	xDrNMuqRStlfajAZgaeynXGQXbX7bwyBTbTgjdUX0Gs=; b=QFiTx+y0vHov3s0p
-	AErgToPoC5E1AkyHGhjAXyy5jJMbD7/8+JSfyqh0REqRPSTxEmrR1Rhq2GVsTLYQ
-	ZUJFQpalKMXKroUrd6PmVPxncLoXOLNSlfWzHlS1k3GWYnCZmalcNl3mtnlctu7s
-	QmC6m5aqKkPI8+UtEDK27hbTa7E9WlHTgan9Uum10bKF+9DeZ4Iel1rc+T/cyYA+
-	FuFtCDnGg7eS210va4ZeE2/d3U3mTyyqQ9h6YITwiPyN/eGEURx14wL4eg1aiC1X
-	vkpChn74nTtfQ6+loWI1fmziK4wS744kdm2teA8UPwUMk53u5sIzg4eHC0M7c0tR
-	MWfglg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d4cvp3s2d-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:10:59 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-89cc6879a4bso18183706d6.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2026 22:10:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1774501859; cv=none;
-        d=google.com; s=arc-20240605;
-        b=TYJwIU4j0Qm3CbxBJ5dXIoaaIjZB+SYRFtdsFmRNvwIrBrtr4QSpDijZ+PpIEfzrj0
-         rI72BTfMloWSmZc68+HRgDLTQhQaQFqGDaQ9g5LSGtAg5RJfNZ2P/5mNtM5h6tIWNdLD
-         McrQuXK7Pz1H7SlZ7q50xpOb3JzVItMgydiOC3NERjPHu6IZe3f8zgBr2eWHfgNWpRZM
-         rSub3Sdsi665KBm72dRLPvbk3efaAW7PFFM1wXF/gJC6yfxTSmwqKW1Jl7+MhccRlox4
-         t0kdHJI4hkRiEYi3CskwlkKDgvmTMyam1BzqB9SS1cXCfl+Gx7994+AJJHMDn6vNra67
-         zFCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=xDrNMuqRStlfajAZgaeynXGQXbX7bwyBTbTgjdUX0Gs=;
-        fh=pdeOg0eUEeSbuFfdgh6mXmfyvsNCruy81TzftImGxD4=;
-        b=aTaZvjcKyqmsw6FhL6TYjhyz8mitSILr1lVSEKRAAqXIcxJKaRggfUi46+eZhXju6G
-         OMlQG6zi9NONKNikeX0HB/6yVvV3o9rQ7A6GI0NTiNJ5Mt3jA4ZMwzhAzJ7blqjE2Wry
-         S4ArtfCnhh0icmlj1iscF4Kjbd2cD8gpueQgsN+tbPGUwno6xuy7jzNl9XX9OkBJhmhr
-         Q4bwRhyEE/QqmJHZXAC8I2ND8Smv9H6ABRiGFAN45BTIPaVuyFu2D8xl5WysjCzJ1zNf
-         wF/w3SmxNyy9i5diADxxj3UhZ6/hJ7KagNV9DD6HjAzvB21paG3PQkGyXIijXrF1Li/7
-         RJZQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1774501859; x=1775106659; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xDrNMuqRStlfajAZgaeynXGQXbX7bwyBTbTgjdUX0Gs=;
-        b=O87kla9AkBVeIdkLDl468oWprRv7VAmNbBl+PQbqx0HdJLTiZzOWTITY+65O0XN9J1
-         LFYEzRDr+AgmjOaXyw/7LPbeG3klIm+LPurfFq//V5t4c34LwAsduXUCP+eBN9XKl3gU
-         pzTc/KKVZeSgKFv8G6/ZRB94677mg6RYz5Y+s/V8S6pzx5e4xuiT/P/3i5cpfYQYHMax
-         mqOrfPS3surKyKy16O5HAGB+n0DygXBjv4lI515LpsHcZhxPLtnnDxNUIfsoo+yyCCh9
-         /Zk71ObOykTZ56GkzS23ICz7PqMhdemdCOdhXVN+WaQfuHsXY8uEXi14DCA5RgSQAld4
-         Bn+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774501859; x=1775106659;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=xDrNMuqRStlfajAZgaeynXGQXbX7bwyBTbTgjdUX0Gs=;
-        b=DbgTGSxUgUmpKk+ddruFz0dAUs2563gl+GuzEh7GLdVr8ea/A2irdZGhlNsoNCl3sz
-         MheNHdwLVnxW8P2uAon+yHPy7ShDHnKc95SPVdA+N8v6CAufRFuO0MN4VebIL3rT1/4i
-         CXra++gI8cV85X9DXxrKYyWOKrXD/+BOvKuSTug7tPXou1Feev77cCWyo0D6LbcttibO
-         LpL+Jy5346iT8FLsN9v2q/38C5INjxnxX63MY7Bs60O5xS+1uwqhPszYdi3AmEu2YfkA
-         efIJwwQrSb1j0IkP2lhrqwVzcWDTbfh2nf6Ju61oxKQrPpq7lVE+L0JOMhiCz/UYVcv5
-         N8MA==
-X-Gm-Message-State: AOJu0Yw+La0e2ztQswm9eCRN4dDKhUg3A+107ke27Ztf1kBKwGy/IRtZ
-	jQkIHhpOabTezto/TgESdmIggGIUmV/dEnlAhIEp351mRiKGigRieMOX5vExdbzEG0+6CIeX+gI
-	udBW+N6pKqVshGZ6fc+z9gFKVUP7m+pHgQB5N3FZrtmWalHXEJaey/J7iWeDN26WzykunH3v7xZ
-	+nUmve/tTdCEvBLu7LBRqezF3S1/mBQZmJoJca5B9PBTEiLTo4kSx+bejJHag=
-X-Gm-Gg: ATEYQzzrhRtMTst1AJkTdSsnI4zd/p6YPmPfTmBhnVVW4Ce6bbTGWx0fSSvk9EqLp4q
-	FhI6JOlWnTksydkYNE46YlwJMQ3nFipqXKNW1fQDf64UV0Wu4S5m7zxIvEt67GyM6SL+s2tUILu
-	biuRs9VOWfDGhI1fTUB7ozHwzwCYYZ+iXmInIyRxDIEFk8SxmEjH1rh1XZNYC5aS4XMiVjFEOTp
-	Dh9
-X-Received: by 2002:a05:6214:246b:b0:89c:869e:4972 with SMTP id 6a1803df08f44-89cdde0e947mr2213636d6.10.1774501859010;
-        Wed, 25 Mar 2026 22:10:59 -0700 (PDT)
-X-Received: by 2002:a05:6214:246b:b0:89c:869e:4972 with SMTP id
- 6a1803df08f44-89cdde0e947mr2213466d6.10.1774501858527; Wed, 25 Mar 2026
- 22:10:58 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=F0iqZfQI;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7545fc33b6=haixiao.yan.cn@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 62Q5Zbok2067943
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:28:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=NG8kxf3fmymP4h6/YmTKuE7ay+O8lJV72Nz8xgeKaP0=; b=
+	F0iqZfQIIDz3V2h7Pnv6nwnSDOpd3oZmaawURatc8felVrjDh3WkhrNZ/pkP9pO7
+	uMeMqjhSHdNqIdZ7RO9tONwj1/Dru3da+A/KRz+WyFSZxGtDaggfFWOl6FUecRYA
+	KuukGKdoks/Gt/QbR26R0qGPMRGdR+t1xkobk4fe9TCm7ajTBmXDCmg9Z+W3L26T
+	XhDkvcmGu3XbCx4ICpkKry892IHkSxqYSSOefzwAyg7K5GPvFj7l8XbE/BqhILiV
+	tN8n6KJ65su1v/9jF8OSIBV/eYsynKxLH2XmD3VkkXYOA006po52ust5xITvbEq4
+	4PuutAkklrN0I6RNbGCCZw==
+Received: from byapr05cu005.outbound.protection.outlook.com (mail-westusazon11010055.outbound.protection.outlook.com [52.101.85.55])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d1gj868b3-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 26 Mar 2026 08:28:44 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eLkmJb7Z27Yqv6kOC3/9WMgzRLPigBHwsI57nm/OhuZPxQC5xkaJsNpj0eRe45Do9NRolH7nsVsVycaxZO5lJWH2SeOBCDo0xE7GhwhEFjvG6KFHW/WOZ4G9Ow8HdMLFVRonHwoUlQ7AwP2R5XQysDRPfH5ujb5HOsS+AibRm+IAL/t/46m247HsM5TSN9Ra3ZoT3iaKDtfobAIHFnmWUelOiSHL8C8jdnpgzBUl8QOJEd7Q2qG9QPkCUciPHDjBXWAbIoYiyAYs/Y+Acsr7IytAAPa5eY99enxQJ8exQKFrK55dxqBZqavId2q7lrMkbc2dQi75BhOei4FdkfcM8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NG8kxf3fmymP4h6/YmTKuE7ay+O8lJV72Nz8xgeKaP0=;
+ b=XyQzWb4lmYf4N1Bz+ODSoBzBnN1tqLJrgldxX0najhBCZB/+5TB+02xWKD8Im1FPe3v47RlSP6pNEu/+W7rHphH5PzlsJcrey2ASsW6cPPGSNJDIcoixPYKYnuCf3/5aZ5sxo5bHMJZbLpzvtf6yOhDPaslfuouSjZrfJ+OMdTDLMnKeG35a+a4tIBWyEURtsp2NvJGpLm1XKkTmkrVJLK7IbcKmjT7Tm1Zn1I7JaCCB6juxXtKEm6qrLUorc9eOrpPLPAkJx4/1wajiMT1nmnfaUqvZJsxqHrip6Hnxqmen894qSuB1A54KmDvBnvkXtkDSdIbJWpnElR3a2YovRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from CH0PR11MB8189.namprd11.prod.outlook.com (2603:10b6:610:18d::13)
+ by MW4PR11MB5934.namprd11.prod.outlook.com (2603:10b6:303:189::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.7; Thu, 26 Mar
+ 2026 08:28:41 +0000
+Received: from CH0PR11MB8189.namprd11.prod.outlook.com
+ ([fe80::7b99:70e4:edb2:30c2]) by CH0PR11MB8189.namprd11.prod.outlook.com
+ ([fe80::7b99:70e4:edb2:30c2%6]) with mapi id 15.20.9745.019; Thu, 26 Mar 2026
+ 08:28:41 +0000
+Message-ID: <12f04697-921c-4340-ad6e-c999d3463aef@windriver.com>
+Date: Thu, 26 Mar 2026 16:28:34 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-networking][PATCH] openvpn: Upgrade to 2.7.0
+To: zboszor@gmail.com, openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+References: <20260325045056.18301-1-zboszor@gmail.com>
+Content-Language: en-US
+From: Haixiao Yan <haixiao.yan.cn@windriver.com>
+In-Reply-To: <20260325045056.18301-1-zboszor@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: SI2PR04CA0010.apcprd04.prod.outlook.com
+ (2603:1096:4:197::11) To CH0PR11MB8189.namprd11.prod.outlook.com
+ (2603:10b6:610:18d::13)
 MIME-Version: 1.0
-References: <20260310121621.196342-1-deerath@cisco.com> <20260311102514.2921809-1-deeratho@cisco.com>
-In-Reply-To: <20260311102514.2921809-1-deeratho@cisco.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 26 Mar 2026 13:10:47 +0800
-X-Gm-Features: AQROBzBDwN2lSW4PGV0T1iGu2IuT0k0Ub945zt8N-u3eUq1zihjRPc48_1nt8tU
-Message-ID: <CA+s=J=z+CAH7pVNJr45ig9J0BxPTjoxN3dwcEq6h9vPpG=zBPA@mail.gmail.com>
-Subject: Re: [oe] [meta-openembedded][whinlatter][PATCH v2] libssh: Fix CVE-2026-3731
-To: deeratho@cisco.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: wnqzzeEklPUFx_bsSBu80MCY1qkDURqg
-X-Proofpoint-GUID: wnqzzeEklPUFx_bsSBu80MCY1qkDURqg
-X-Authority-Analysis: v=2.4 cv=Q73fIo2a c=1 sm=1 tr=0 ts=69c4bfe3 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=nar8ntqeAAAA:8 a=xNf9USuDAAAA:8 a=Q4-j1AaZAAAA:8
- a=AUd_NHdVAAAA:8 a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=ib6B5nv-OXExPXElO18A:9
- a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22 a=RptMqvEBejqe73AKBt4K:22
- a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI2MDAzNyBTYWx0ZWRfXyeUZIGgILkkX
- gm3T2Ww4ahm6xkgNm5ePyFCML5VSPyE6u+bNNUqLzbTrm8BnnT9+dcBQexCJAXa7dJg2igR6aJg
- hOVa2HHQQvHLbR0RuPScgH97ceRDmaCdov9m6G11NdcTFntQXcy4S9Npk8Cg2KFpOblVGRm4o1M
- Od3bC6+BvRzhjoQwgTppFCGj1QWIieQ3vWV24ajJIhkzdrIgGHiYHwjD/vBMMETowdN5nItdins
- wsr4RbezsH477O6lvw04JB5W3ZcNoGOoP3kSslqVYXkHNIAnsa9ls5XjwSvkS10gvXBL4kok420
- hi9FohQdQnuX9THtiQbqsZD4pg/KBgkghm055gt0DzoHIFvswKFe1hRmgYtFMlAZgCHMADQmc9N
- sM4nct+dgvK584nDPM8P6Bttj76KBN5gg1Qoq62WWpHCFUD6lnDHwpxfgJ47cR+JLjhS+r3QlVH
- vQAR0tlqDVG5b8OlTdA==
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH0PR11MB8189:EE_|MW4PR11MB5934:EE_
+X-MS-Office365-Filtering-Correlation-Id: 874bd77f-9e60-489a-c64a-08de8b11af73
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|4022899009|366016|1800799024|376014|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	q4/yAQW1BHuKicGPlIFqPpRgTin3WA0He2Sr35Mnm3opq+sAj+pVCslsypt4lg2qPpDdeloY895MjrSbsuz1DBw+IBNbSbJtsfD2dRBY7KVBQ4ATntoL7A+fpF5+Ho0EHkWeMOan+TXyswbHpAB1x7GoT0hCVsLOZr0VyutRtZNRsnx6bOkEuCi018HcBL5jDC0oziiXDgHoeQPppsMX0IRyd0ez60bjnG87qss03Oz1dMwjxbdORamUhePNT7JhDh+6bJOkyvIW7+vf1CDzV+F98fVmIUZjvhPvMP0YFUPTO2C/FnT8XxAtgluMByHpUAROQh37rNxQ6LN4sP6ZwUkT1LqXgWbhWOfS3gVnvwIC79uAAN/vLv3xoz7zpd9yjbcT3N8JswpyRjiohRezGxGNf1sUv9mV2IjarEOZgAutDC8oc3oXdY1z9J0lAyG6ppPAoM/6vjn3avkBZsXRUFY4my5nPkoqNScUzZEER7SDWcSI472XzqggQvpZFrnc5thYgpsQqyJL4/pgRfRfdombJqMCS0HuwAnED04SaW1LyhJd4tdIyB2Z47RgSDwgRiMEqVWfxg39xXRsJW2jpycXjjLj9XZk/itnTT6PmAtErCxicVjLaWGgnDWBYbKxQ+AcG4d6metQpeyuB/27SFWWiHq++8t94taktrhpnago4Fd4HOUhjru17LO9iAke
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR11MB8189.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(366016)(1800799024)(376014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?dGpzYzdGTlcraU5OcFlLazlKU0Y2TFRJWUxpL1JDZGtVY3VyVVNra1dFd3FW?=
+ =?utf-8?B?V2NsTkNEM1l4ZXZWTnNlbm5ldDIxYnRjTE8ya01DZGdDc250cENNTHB6L0NB?=
+ =?utf-8?B?RjNEREhiajdTSHJUWUVBOUJqQTlPRVIyTW5rMGIyOGRRQng4RFQ4Wk1CRFM1?=
+ =?utf-8?B?TDhaSzVid0JyV3pwTmNtRnRPcVQzQXczZHk4R2VpdGx5ZjNqUHlhY2MvYjJ5?=
+ =?utf-8?B?VFQvdjFiU1JMdmFrQ2JzTlNTbzNnQ3RBWHpuZE8vNjBZbVhySGFFYTBlaTln?=
+ =?utf-8?B?cHkvYVVTMlh1MTZKZklMZnNxR0RCY2tmSjFYVFVWSnNNWEZRMG9uRzIvdFFs?=
+ =?utf-8?B?bFRrNkkxS1I3S0lBQnVTZWtzZkdEYSsrYU9jcGV6ekFrdTdBMkdJVm8rNkp3?=
+ =?utf-8?B?TWo2Z2JKVitwdlB3RlVWTUYyT0dkejBsRG5QQmJ6bEFENk4venVVTGR4cmpk?=
+ =?utf-8?B?dnkvQWk5R043dHF3RERlUXhQY0c5c1ovSjJyelQ2ZzNiT3dmZzVMYnZBLzlX?=
+ =?utf-8?B?QWEyREQ1Rmw4cTJKZXZua1pOckNyTDdtUEVyRGpTeUxmajQrdG1hR1Rubjhz?=
+ =?utf-8?B?cTJnNzd4SWQ3Y0wwbjBocVBUR2NZOGJyb0JWNUFhVTN4SDlxM01GYzR6bHQ2?=
+ =?utf-8?B?VExBRERlQWYvME04OGJqOG1KRUt6Qk4wNVdFbzc3YVBxYUJHZUkrclBYSEZM?=
+ =?utf-8?B?MGRmTUUxcVByY0hsRU9tcFYvMmtXd0lydlZTSk5PZmxTSUhvTmdKRGFCNEVG?=
+ =?utf-8?B?Sm1zWGlUekNjVlBQOWdocTN6RzNQbllZNzd3OTE5am1WbFQxZ1dyWFlXSzBF?=
+ =?utf-8?B?eVEyYTQ3MVc3aWp6Y3lTeW9RVzhSbk1GclZHRlB4SWo0eGRaWjh2bGVFSHNs?=
+ =?utf-8?B?MTBTb3MrNEVpaGdlVk5DK0lzM09GWGlvTmNYTnY0eGpVR3VlZ1V5NzRWcGdY?=
+ =?utf-8?B?OVBSQUoyNExhVVBtMDNhK0cxZWJMV2FFS1RRUlI5Umt5NEtKbEcyZ3dmOFNq?=
+ =?utf-8?B?L3ZjS3RRRlFvU2VROWdaWkNvR25XamswTEF5c296SW9ZNFJldi9hWmhUYzQv?=
+ =?utf-8?B?U2JZWk9QdUVvZlczMElmdjV4RVZNQXFsaUlYTTFnRXR6UEY3L250b2R0UUZN?=
+ =?utf-8?B?enIvc3RUZ21sOUNTTTJuTHFCcTlSYkkvdmUrQkx6QkFWMEdUZkVOVWpWS2tC?=
+ =?utf-8?B?QVlVbVY3QWExNWlQOEhHVDBlWkpYdDNJMzZWM1lqSTBmdWpKUGMxQmJaeEJT?=
+ =?utf-8?B?YnVRb0tEK2V0V2pDNHVhRi9hOTk4ZjM5ZEpobm5HR2E2VnRyT3diK2Q1MHZL?=
+ =?utf-8?B?bDRPdlQxWVlsZW5jNC9PbkV1UVlOZ3J2WnNFZTNDRE82MGhJVGJZaUFrWkRh?=
+ =?utf-8?B?aWh2Rk9hWElxQ2JBM3pYMTExQ1laVEh5b2lEeTkwYVN0cVFZL1ZTc1RWWG44?=
+ =?utf-8?B?aTgxaER4UGJYUGxPUUUyZjVLRHd5Ulhlc0w2K0FTaUc0RUNXMjhtL3dXYUJz?=
+ =?utf-8?B?cVBZZjJVVUdJYnRwRkIxR0ZlZE94MWRDNVNNNDJoUTlSZytNNDNId1BrdC9U?=
+ =?utf-8?B?OFQyV0pFeEtFaCtuazFWa1NodGN2WGEydGhUakZ6QWh2YmE0akVKZk5UaWRi?=
+ =?utf-8?B?QW5xSEd0bmpXRERGWXBtbi9CeUMwV20zZ1ZhQVVoOVF2ZEVrZldncS8xMDJ2?=
+ =?utf-8?B?QUliZkh5eWErYzdFWW1YNnp1eGFVTlowNXpzR3IrTCt2c0NnS1JHclRTQVJ2?=
+ =?utf-8?B?Q1RwUEgweVB0SExaRndXNXdLTFFKLzBvdDdZajBUUnJ0WUZmc1YvV0RKQ2R4?=
+ =?utf-8?B?dTBYUkNDdmRZKytHSTBHV2JNemhjQ3drV2o1VHBUYVJTSUUrb3hwMW55NDhl?=
+ =?utf-8?B?bFBqRVdybE9NQXJFUUgyMGFNVFpUN1k5NC8vaDZhNE1QVnhXZkd2aDhxR2Y1?=
+ =?utf-8?B?NkZkNmpUNVVGbUZrUE9zelNSc0xVY1dDb1YyaGlFamFRd1VITTJuMWZjRGRs?=
+ =?utf-8?B?NG9PNFRHVnFSWVViRThEYXlITnErN3hpS0VRb28xM280cWZJOElwczEzak9o?=
+ =?utf-8?B?N3pOb0NHVSt4WVZkZ0VGK1hHRmdzM2k0UEN3dU9TMkw3K1ZmUHM4RkY5OW5s?=
+ =?utf-8?B?b3B0eWlXUjVwYk1iRENPYnY1c0NuNVBzZVRxUUNNVk5LUFlQWVJSaTdWNXVm?=
+ =?utf-8?B?NWxqbVBzQnF0cGsxOUh2L1duMS9jMW0xS0FtWnNndWFGSEQyeG1aTkNmamVS?=
+ =?utf-8?B?NFZDZGpRYWF4VVY0UEQ5MlMxSU15c1p6RXR5KzNzN3hMR2puMW00S1ZoUFB4?=
+ =?utf-8?B?Yk5ncjNadVlrc1owVkEzOHZDa3B5NHAyYzRjTEU4VXBVWjFsMTUxVXhrVGZr?=
+ =?utf-8?Q?6pNvNTX9KAdzdzsw=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	l1FLGJkwsnI7q+D9bum8zOXIAsg+CgfHb4mGmxVQOq1/hmd3TynNEnQLnmoHC3gJXVHKux9lYAxTh/L8GaaiQfCcOsRAJN/Y0WDVJ/oAj38tf6vqHRXnkQWqo97w4JfpbbBc/dY2vKviICF0fGkWQ+9nYp3X7pofARRXWYvrZTiciwHViX9XXYtQCE32mxUZzUcQ1KZ3XhRtC+bQi1vbcGK1HGcpRV08a1L8B//KaSlJjlEJgy/N7VZI8kwp/uxivK+Cb3qcKeur43vis7mbogES77IUU8zHCIsku3WGIMuskm8EcZ7JLdRg+hW9bJLFKPsmm2QGfD7GMXgvlGbC7g==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 874bd77f-9e60-489a-c64a-08de8b11af73
+X-MS-Exchange-CrossTenant-AuthSource: CH0PR11MB8189.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2026 08:28:41.1426
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mN8iConijZ+Jwg3aXjevWhhkVzcte4I13R13fq9l22wovDvPVAdlMYabtn1mfk6qSWzxE4BhpzDAWyQkdv40Mry4X9g+DlC43mwzEW913HE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB5934
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-ORIG-GUID: eO86PP2kn14KiB-jdWzMeR0hAX3QO0i6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzI2MDA2MSBTYWx0ZWRfX/aIcqaGpk2kn
+ 62Ne2w0BxOzBrWH69SPQp7peAGfVxEDgFFUVzNCaauVmODZLC2015rKosII3EEGtecIxwy8eJgn
+ hCpokRU1rTRhz7aV+yZdlgrFASgvu7sL9rHLpoFiG6clRK2yOdXfZsX2kTfUTKZ/cmJx6aG48NU
+ 6FAbilQltMDmPH7/jVIntG9/0Q7cxWYNyov/XLoNXDLINbHQR+YAWjX9zUly9V+u4hV8uBvrCP4
+ xhckv9JGA9pUcjaS00cI2o+b+NKpph4uG3BireXJDzVHCZV2PYjjSCBRadf1fvF8nMkoAs4+xAc
+ nmy6YsnzJywItggPQSxBtNPV+ObS6lB4K32A+lAwNcYSoXPB2JhSL3dgkuLxD2VnxEkiQ3IDQfw
+ gVfVBGZhs4epQsb59NYrO1KYTPqH4GJu/6u6SAmCOf6/MLLLFNbGGN1RejtQV+9Jl02AN8OsvLD
+ 7a1ezIkcCD6ghUQr2oQ==
+X-Authority-Analysis: v=2.4 cv=LtqfC3dc c=1 sm=1 tr=0 ts=69c4ee3d cx=c_pps
+ a=25083kmBgh9d5ln0vqlIEw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=Yq5XynenixoA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=klDOsUkWDRETUCZYPvoE:22
+ a=uDo-SIiEAAAA:8 a=9dNbsytUAAAA:8 a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8
+ a=t7CeM3EgAAAA:8 a=3ZU3LdYz__6gy5l6DnAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=Rkhf4GTZPwEC63LfVcCP:22 a=gPpeecpFUKP6j8iU7U-x:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: t_PKtl2zutsesWWscVaA4hp27b7ksg55
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-26_01,2026-03-24_01,2025-10-01_01
+ definitions=2026-03-26_02,2026-03-24_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- malwarescore=0 bulkscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ phishscore=0 bulkscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ adultscore=0 clxscore=1011 impostorscore=0 spamscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603260037
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2603260061
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 62Q5Zbok2067943
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 05:11:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125636
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:28:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125637
 
-On Wed, Mar 11, 2026 at 6:25=E2=80=AFPM Deepak Rathore via
-lists.openembedded.org <deeratho=3Dcisco.com@lists.openembedded.org>
-wrote:
+tests/unit_tests/openvpn/Makefile.am is refactored,=C2=A0 which will bloc=
+k ptest.
+
+On 3/25/26 12:50, Zoltan Boszormenyi via lists.openembedded.org wrote:
+> CAUTION: This email comes from a non Wind River email account!
+> Do not click links or open attachments unless you recognize the sender =
+and know the content is safe.
 >
-> From: Deepak Rathore <deeratho@cisco.com>
+> Release notes:
+> https://community.openvpn.net/ReleaseHistory#openvpn-270-released-11-fe=
+bruary-2026
 >
-> Pick the patch [1] and [2] as mentioned in [3]
->
-> [1] https://git.libssh.org/projects/libssh.git/commit/?id=3Df80670a7aba86=
-cbb442c9b115c9eaf4ca04601b8
-> [2] https://git.libssh.org/projects/libssh.git/commit/?id=3D02c6f5f7ec862=
-9a7cff6a28cde9701ab10304540
-> [3] https://security-tracker.debian.org/tracker/CVE-2026-3731
->
-> Signed-off-by: Deepak Rathore <deeratho@cisco.com>
+> Signed-off-by: Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi <zboszor@gmail.co=
+m>
 > ---
-> Changes from v1 to v2:
-> - Update the commit message.
-> - Cherry pick it from libssh-0.11.4 release tag and add the second patch
->   to add the reproducer for the CVE.
+>   .../openvpn/{openvpn_2.6.17.bb =3D> openvpn_2.7.0.bb}          | 5 ++=
++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>   rename meta-networking/recipes-support/openvpn/{openvpn_2.6.17.bb =3D=
+> openvpn_2.7.0.bb} (96%)
 >
-> diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch=
- b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch
-> new file mode 100644
-> index 0000000000..bf1fbcc027
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch
-> @@ -0,0 +1,35 @@
-> +From 04d2f831fa8da74c973538cd3f621061a7656771 Mon Sep 17 00:00:00 2001
-> +From: Jakub Jelen <jjelen@redhat.com>
-> +Date: Thu, 11 Dec 2025 13:22:44 +0100
-> +Subject: [PATCH 1/2] sftp: Fix out-of-bound read from sftp extensions
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +CVE: CVE-2026-3731
-> +Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/co=
-mmit/?id=3Df80670a7aba86cbb442c9b115c9eaf4ca04601b8]
-
-We are missing a hunk from this commit. Was it dropped on purpose?
-
-> +
-> +Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-> +Reviewed-by: Pavol =C5=BD=C3=A1=C4=8Dik <pzacik@redhat.com>
-> +(cherry picked from commit 855a0853ad3abd4a6cd85ce06fce6d8d4c7a0b60)
-> +(cherry picked from commit f80670a7aba86cbb442c9b115c9eaf4ca04601b8)
-> +Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-> +---
-> + src/sftp.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/src/sftp.c b/src/sftp.c
-> +index 37b4133b..05e05019 100644
-> +--- a/src/sftp.c
-> ++++ b/src/sftp.c
-> +@@ -583,7 +583,7 @@ const char *sftp_extensions_get_name(sftp_session sf=
-tp, unsigned int idx) {
-> +     return NULL;
-> +   }
-> +
-> +-  if (idx > sftp->ext->count) {
-> ++  if (idx >=3D sftp->ext->count) {
-> +     ssh_set_error_invalid(sftp->session);
-> +     return NULL;
-> +   }
-> +--
-> +2.35.6
-> diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch=
- b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch
-> new file mode 100644
-> index 0000000000..b5a267b808
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch
-> @@ -0,0 +1,102 @@
-> +From df01168bb3863306ba0f35b50e5b2e5dd00ba9f6 Mon Sep 17 00:00:00 2001
-> +From: Jakub Jelen <jjelen@redhat.com>
-> +Date: Thu, 11 Dec 2025 13:21:23 +0100
-> +Subject: [PATCH 2/2] Reproducer for out of bounds read of SFTP extension=
-s
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +CVE: CVE-2026-3731
-> +Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/co=
-mmit/?id=3D02c6f5f7ec8629a7cff6a28cde9701ab10304540]
-> +
-> +Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-> +Reviewed-by: Pavol =C5=BD=C3=A1=C4=8Dik <pzacik@redhat.com>
-> +(cherry picked from commit b90b7f24517efa7ab21506db9379aa3dce9fee7d)
-> +(cherry picked from commit 02c6f5f7ec8629a7cff6a28cde9701ab10304540)
-> +Signed-off-by: Deepak Rathore <deeratho@cisco.com>
-> +---
-> + tests/client/torture_sftp_init.c | 62 +++++++++++++++++++++++++++++++-
-> + 1 file changed, 61 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/tests/client/torture_sftp_init.c b/tests/client/torture_sft=
-p_init.c
-> +index a17f01fe..cdc24426 100644
-> +--- a/tests/client/torture_sftp_init.c
-> ++++ b/tests/client/torture_sftp_init.c
-> +@@ -72,6 +72,63 @@ static void session_setup_channel(void **state)
-> +     assert_non_null(s->ssh.tsftp);
-> + }
-> +
-> ++static void session_setup_extensions(void **state)
-> ++{
-> ++    struct torture_state *s =3D *state;
-> ++    struct passwd *pwd =3D NULL;
-> ++    int rc, count;
-> ++    const char *name =3D NULL, *data =3D NULL;
-> ++    sftp_session sftp =3D NULL;
-> ++
-> ++    pwd =3D getpwnam("bob");
-> ++    assert_non_null(pwd);
-> ++
-> ++    rc =3D setuid(pwd->pw_uid);
-> ++    assert_return_code(rc, errno);
-> ++
-> ++    s->ssh.session =3D torture_ssh_session(s,
-> ++                                         TORTURE_SSH_SERVER,
-> ++                                         NULL,
-> ++                                         TORTURE_SSH_USER_ALICE,
-> ++                                         NULL);
-> ++    assert_non_null(s->ssh.session);
-> ++
-> ++    s->ssh.tsftp =3D torture_sftp_session(s->ssh.session);
-> ++    assert_non_null(s->ssh.tsftp);
-> ++    sftp =3D s->ssh.tsftp->sftp;
-> ++
-> ++    /* null parameter */
-> ++    count =3D sftp_extensions_get_count(NULL);
-> ++    assert_int_equal(count, 0);
-> ++
-> ++    count =3D sftp_extensions_get_count(sftp);
-> ++    assert_int_not_equal(count, 0);
-> ++
-> ++    /* first null parameter */
-> ++    name =3D sftp_extensions_get_name(NULL, 0);
-> ++    assert_null(name);
-> ++    data =3D sftp_extensions_get_data(NULL, 0);
-> ++    assert_null(data);
-> ++
-> ++    /* First extension */
-> ++    name =3D sftp_extensions_get_name(sftp, 0);
-> ++    assert_non_null(name);
-> ++    data =3D sftp_extensions_get_data(sftp, 0);
-> ++    assert_non_null(data);
-> ++
-> ++    /* Last extension */
-> ++    name =3D sftp_extensions_get_name(sftp, count - 1);
-> ++    assert_non_null(name);
-> ++    data =3D sftp_extensions_get_data(sftp, count - 1);
-> ++    assert_non_null(data);
-> ++
-> ++    /* Overrun */
-> ++    name =3D sftp_extensions_get_name(sftp, count);
-> ++    assert_null(name);
-> ++    data =3D sftp_extensions_get_data(sftp, count);
-> ++    assert_null(data);
-> ++}
-> ++
-> + static int session_teardown(void **state)
-> + {
-> +     struct torture_state *s =3D *state;
-> +@@ -92,7 +149,10 @@ int torture_run_tests(void) {
-> +                                         session_teardown),
-> +         cmocka_unit_test_setup_teardown(session_setup_channel,
-> +                                         NULL,
-> +-                                        session_teardown)
-> ++                                        session_teardown),
-> ++        cmocka_unit_test_setup_teardown(session_setup_extensions,
-> ++                                        NULL,
-> ++                                        session_teardown),
-> +     };
-> +
-> +     ssh_init();
-> +--
-> +2.35.6
-> diff --git a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb b/meta-oe/re=
-cipes-support/libssh/libssh_0.11.3.bb
-> index 5928581312..ab47931fa3 100644
-> --- a/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-> +++ b/meta-oe/recipes-support/libssh/libssh_0.11.3.bb
-> @@ -9,6 +9,8 @@ DEPENDS =3D "zlib openssl"
->  SRC_URI =3D "git://git.libssh.org/projects/libssh.git;protocol=3Dhttps;b=
-ranch=3Dstable-0.11;tag=3D${BPN}-${PV} \
->             file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-comma=
-nds.patch \
->             file://run-ptest \
-> +           file://CVE-2026-3731_p1.patch \
-> +           file://CVE-2026-3731_p2.patch \
->            "
+> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb =
+b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> similarity index 96%
+> rename from meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb
+> rename to meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> index c454a93276..2567747121 100644
+> --- a/meta-networking/recipes-support/openvpn/openvpn_2.6.17.bb
+> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> @@ -2,7 +2,7 @@ SUMMARY =3D "A full-featured SSL VPN solution via tun d=
+evice."
+>   HOMEPAGE =3D "https://openvpn.net/"
+>   SECTION =3D "net"
+>   LICENSE =3D "GPL-2.0-only"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D89196bacc47ed37a5b242a53566=
+1a049"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D924af2c382c415a0a68d0d9e7b4=
+83d23"
+>   DEPENDS =3D "lzo lz4 openssl libcap-ng ${@bb.utils.contains('DISTRO_F=
+EATURES', 'pam', 'libpam', '', d)} ${@bb.utils.contains('PTEST_ENABLED', =
+'1', 'cmocka', '', d)} "
 >
->  SRC_URI:append:toolchain-clang =3D " file://0001-CompilerChecks.cmake-dr=
-op-Wunused-variable-flag.patch"
+>   inherit autotools systemd update-rc.d pkgconfig ptest
+> @@ -15,7 +15,7 @@ SRC_URI =3D "http://swupdate.openvpn.org/community/re=
+leases/${BP}.tar.gz \
+>
+>   UPSTREAM_CHECK_URI =3D "https://openvpn.net/community-downloads"
+>
+> -SRC_URI[sha256sum] =3D "4cc8e63f710d3001493b13d8a32cf22a214d5e4f71dd37=
+d93831e2fd3208b370"
+> +SRC_URI[sha256sum] =3D "2f0e10eb272be61e8fb25fe1cfa20875ff30ac857ef141=
+8000c02290bd6dfa45"
+>
+>   CVE_STATUS[CVE-2020-27569] =3D "not-applicable-config: Applies only A=
+viatrix OpenVPN client, not openvpn"
+>
+> @@ -46,6 +46,7 @@ PACKAGECONFIG[iproute2] =3D "--enable-iproute2,,iprou=
+te2,iproute2-ip"
+>   PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-systemd,system=
+d"
+>   PACKAGECONFIG[selinux] =3D "--enable-selinux,--disable-selinux,libsel=
+inux"
+>
+> +RDEPENDS:${PN}:append =3D " bash"
+>   RDEPENDS:${PN}-ptest:append =3D " make bash"
+>
+>   do_install:append() {
 > --
-> 2.35.6
+> 2.53.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125081): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125081
-> Mute This Topic: https://lists.openembedded.org/mt/118257651/3616702
+> View/Reply Online (#125600): https://lists.openembedded.org/g/openembed=
+ded-devel/message/125600
+> Mute This Topic: https://lists.openembedded.org/mt/118496782/8599992
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[Haixiao.Yan.CN@windriver.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
