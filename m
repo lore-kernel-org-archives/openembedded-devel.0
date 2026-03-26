@@ -2,56 +2,56 @@ Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F0BC910A88D2
-	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 15:22:14 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.50120.1774538533337131528
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BD0A10A88DA
+	for <webhook@archiver.kernel.org>; Thu, 26 Mar 2026 15:22:15 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.50119.1774538532720095957
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 26 Mar 2026 08:22:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QQI8eecf;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4852a9c6309so10453295e9.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:22:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=KoBXAxa2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: zboszor@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-486fc4725f0so9759765e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 08:22:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20251104; t=1774538530; x=1775143330; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=rG7RBfvPsRBoo8CN+EdIFhwGBD8wxUbJzVmbAQ6LbMU=;
-        b=QQI8eecfU2DL5V3/YTYy37Bb5oD6tbba1DdwO/xDpDSX1LFVr8ietWesByARRJ/tgt
-         a8UXcGBEsXMSOyZ0WSDlAbJYALOugkXuN0m24AWjn1vFVlI/SvFKSry/4RrFkSvFM0bB
-         XXtmjbjZfclOJhmZznxsl4Dt0B8VLMiqscHjhDYQuLzg4OWsHRURiUaJckUPVBMoPwCD
-         bijA6PIagVnXBNjVQqulUDQlAlFvj1fYABHuooFn0F5T2qntDQr4zU25eLz5BDkDjUbG
-         MRNwsTMaiZo3xXhCWi1gnmdxdZ5hsXe2lr7iVAktKtpwzucqUWbnjWW+Vu+2N/v3hTH1
-         jYfQ==
+        bh=JXy4UcVqYHrbeDn9D+MOgLNS+qI1z6qLYg92orrflmc=;
+        b=KoBXAxa2Hg0sHnZZ1xYr65eSnyezqejDv2YXrLHSJhatsWuPi/F17h3RUj/91rtyHh
+         EO6gvdECRlrCpqid5mEHqIaxUIt/EjH6XZZ6VO/2nGuEYPZCIY0Ne2ugaRE3J3tAaXQk
+         0O2QD8DiBAjwS0sMKZFVybAk6Y0FGBXrvemVzYNNck1+AMxPPTWHTYQSGe+JtVmKnAE6
+         7CRGg4ZtjaQe3Cy9F4L+4gQqZAhayVY6XY4e6dKiRJhTGpwTyJlxaSEqrfdEfjMwDhq9
+         nY2/iRGv0YpNJ/oWS9U1sJlc3VvsaLZJ/o3Tmml0GpWJicY20CjmpgWsCkyubtM5jsi+
+         p2pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20251104; t=1774538530; x=1775143330;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=rG7RBfvPsRBoo8CN+EdIFhwGBD8wxUbJzVmbAQ6LbMU=;
-        b=VibLsi4U07g6d+8+WlD71YJaj5B4jzPB8W8iT88q0ruqmmPaVRVQYZ5U6JTSA/eDmb
-         A7ooUjtIrVXMzMr1JlTq/7vrJK4AQ5oGY0469Tyqaghrm6hQ55Sd+pzumhn5lG2Wl3Kv
-         GVv2L9sJBo+XJARZdrgfcKienoeSw3BVgR9NfT943SffXK+RYXlZXZEOqJcHcJZae7T+
-         amegveYRV0+CaheVQsf07buT1nrfDlwdywqcdB14T8h2gNviAvFTwud6cU7Zk2ELoV2A
-         BuIV4QYVTQ4y311usgDnUoZ7Zk2DUGfF16EY/8YpJDKXrpqXhzpH2g+VgNRSCCUfv5SV
-         pXkw==
-X-Gm-Message-State: AOJu0Yy+ia0m6YnIwAXWz0BPPqDc06C5nplp478W0Um2+nWCUUlDDHwW
-	tlF0D1Ozvj7BHrizdkOLcRqHNo9YG5mffpbGzCH5iOY4gTXkt4RTmWW57Wo6Mg==
-X-Gm-Gg: ATEYQzyW512YwT59yaWG6u/Iz9dQ4mGQ6HvGgC8ZXRpugrDvrH0Od+X8gxCUmAkx+Zv
-	A1S7QGLQvtCtLWy6axQ32S2W7tyk9lA3Wv/lWOGLa05BuydxyRgPrYq28Y9Ui1rQCVThfO4CDp4
-	FpdXeywWb1diEdV5yfZae2O+HITRnpot0/pl4MQ9Ve5zlhJRGvOmcziyfqE/dUA9iRwsg/dYiin
-	0LsLcrnyciSdnFxeyacXKFokEQZn4zay7axqMCfJeUCwU8eAyc9Cx5ryc4xg+6EtNTDBCx4bc0Y
-	kcSTwND60UAczoPMPn2zaiDA43Ona3oomGJm0mTnIZTo2VFES00zws7W2WQ0DMNAVAC8WeRTrOJ
-	z770+VK5Y9bQaGt4rTniDybuSTRk4S1lPzMYIuCJUqd36UNOR7nfQBW+7aKBv0vnxBaA8FE9Pp5
-	ZXjYHj2gKiNH8Z1Q==
-X-Received: by 2002:a05:600c:c16e:b0:485:3dfc:569 with SMTP id 5b1f17b1804b1-48716042b0emr118049485e9.16.1774538528873;
-        Thu, 26 Mar 2026 08:22:08 -0700 (PDT)
+        bh=JXy4UcVqYHrbeDn9D+MOgLNS+qI1z6qLYg92orrflmc=;
+        b=pUbFGtTt6TTcdjaUREy35k7JggwFV5LrBs6lkqslFpuoRg+sPlCKw+lmsb9c0LuxLP
+         HZ7XSLl+S5a/MDFERKUnvJwGEn6rAu1Cp6LGarUxv3Uj1+Nyg/GhcyjAv3v7qQn5caGj
+         fSfAC++5JSz802qUbOOLkafPEZniEz3XGcWFS0RGlajD6CGoyURXKDoc+o570jctg99f
+         h80HlbaHLhrFd2IbujFvwDuK0Mu0YUSxESNnA7GRJHsGSXb9W+7UIqOKBYW1yblvxJvT
+         jxiQZaqMYI5tijb+7CNwFnqCxmksEtxjoIk+JNviqhi1Uqbll0XokZxt3NG5gTNGNTmZ
+         /AsA==
+X-Gm-Message-State: AOJu0YwRbxYrWXpiKcjG7JuptSZtfPQOSI88FoAVannToYiQDCwSj+ig
+	7VfJP1STi7Rdxi22ri+pQm+nNWXhNE7HLYZD9yhiar+FamouZo8rnUEiB9o94A==
+X-Gm-Gg: ATEYQzx6yTqF3/IlmR+vHr/PAk2zwgADJLJ0NirWQWp8+PifLsPvF9L2AjMEKDppKrK
+	LrXOjLtNyP4XiFu9AQm7vaWpLkyVpxP4hqmmOX2/fsvSvz8Uj5ZfmSf80HQ2tfsfcbSFzc5z+3u
+	gvzpZCok/aDFhvyYAan3Otl1EFlTBiwfn5pduv8NkXdlt5WHJ80GDPntg3ZhyBpcN2BFqSuMFQk
+	+hoiV+P4GUUZvguWdTnKUApOuXsRI2nAqwoS3wEcYRBfayCYVccHjTqkTeop06crbzN2geTsP0b
+	r8PbBuTpYP6C/Z7/IAJY2q9xGrwGe9K2K6Moo7ZnKVTLnKulnIuNy+UXsxZFWD99WZXsRfJ4nwQ
+	V0PNfSVJCMKcYHbKDhdRNyZLtNKMHckU2JYOMIekihWcqcz8afMBkM9fpjl7YnB5r3FSUXw3Tx8
+	WlTU/eB0KH47/2jQ==
+X-Received: by 2002:a05:600c:a011:b0:485:3f58:da2 with SMTP id 5b1f17b1804b1-48722bfbba2mr31216965e9.16.1774538530272;
+        Thu, 26 Mar 2026 08:22:10 -0700 (PDT)
 Received: from term011.lan (95C810F6.dsl.pool.telekom.hu. [149.200.16.246])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48720925591sm16478935e9.25.2026.03.26.08.22.06
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48720925591sm16478935e9.25.2026.03.26.08.22.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2026 08:22:07 -0700 (PDT)
+        Thu, 26 Mar 2026 08:22:09 -0700 (PDT)
 From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>,
@@ -59,9 +59,9 @@ Cc: Khem Raj <raj.khem@gmail.com>,
 	Trevor Gamblin <tgamblin@baylibre.com>,
 	Alexander Kanavin <alex.kanavin@gmail.com>,
 	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][PATCH 09/13] upm: Stop using PYTHON_ABI
-Date: Thu, 26 Mar 2026 16:14:34 +0100
-Message-ID: <20260326152143.2224099-10-zboszor@gmail.com>
+Subject: [meta-oe][PATCH 10/13] fontforge: Use PYTHON_DIR
+Date: Thu, 26 Mar 2026 16:14:35 +0100
+Message-ID: <20260326152143.2224099-11-zboszor@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260326152143.2224099-1-zboszor@gmail.com>
 References: <20260326152143.2224099-1-zboszor@gmail.com>
@@ -71,29 +71,31 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 15:22:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125749
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2026 15:22:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125748
 
-PYTHON_DIR now contains PYTHON_ABI, use it.
+Use PYTHON_DIR instead of the custom constructed library name.
 
 Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
 ---
- meta-oe/recipes-extended/upm/upm_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index 9b809ce727..df60fb5a81 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -45,7 +45,7 @@ BINDINGS:armv5 ??= "python"
- PACKAGECONFIG ??= "${@bb.utils.contains('PACKAGES', 'node-${PN}', 'nodejs', '', d)} \
-  ${@bb.utils.contains('PACKAGES', 'python3-${PN}', 'python', '', d)}"
+diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
+index 8d65f69354..ce529e3e7b 100644
+--- a/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
++++ b/meta-oe/recipes-graphics/fontforge/fontforge_20251009.bb
+@@ -34,8 +34,8 @@ PACKAGECONFIG = "readline"
+ PACKAGECONFIG[readline] = "-DENABLE_READLINE=ON,-DENABLE_READLINE=OFF,readline"
  
--PACKAGECONFIG[python] = "-DBUILDSWIGPYTHON=ON -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}, -DBUILDSWIGPYTHON=OFF, swig-native python3,"
-+PACKAGECONFIG[python] = "-DBUILDSWIGPYTHON=ON -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}.so -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}, -DBUILDSWIGPYTHON=OFF, swig-native python3,"
- PACKAGECONFIG[nodejs] = "-DBUILDSWIGNODE=ON, -DBUILDSWIGNODE=OFF, swig-native nodejs-native,"
+ CFLAGS += "-fno-strict-aliasing"
+-LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+-BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
++LDFLAGS += "-l${PYTHON_DIR}"
++BUILD_LDFLAGS += "-l${PYTHON_DIR}"
  
- do_configure:prepend() {
+ PACKAGES =+ "${PN}-python"
+ 
 -- 
 2.53.0
 
