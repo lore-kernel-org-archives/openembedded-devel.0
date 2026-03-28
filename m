@@ -1,90 +1,123 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BAB710F3DCF
-	for <webhook@archiver.kernel.org>; Sat, 28 Mar 2026 05:28:15 +0000 (UTC)
-Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5989.1774675691147008498
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA10310BA438
+	for <webhook@archiver.kernel.org>; Sat, 28 Mar 2026 07:30:25 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6939.1774683024778836366
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Mar 2026 22:28:11 -0700
+ Sat, 28 Mar 2026 00:30:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=U1qfeiJJ;
- spf=pass (domain: gmail.com, ip: 74.125.82.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-12776bebe9fso5623456c88.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Mar 2026 22:28:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Jz3tb7uG;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4870206f73bso16621315e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Mar 2026 00:30:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774675690; x=1775280490; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BLVTfbcuvINYLoYmyF823EOhMIaDPpXWe+XXA7JGigU=;
-        b=U1qfeiJJiaqnmZKZJRekM+jbk3wdqKrXjML/De5ymmbTOnxLAwYkzCUVTPYw/sWTHD
-         diwFrkO/WPvU93GcIVI/H7lRB32SqCxUqUr5bkPQpJRx1MsCyqleowZh3JWuqmbeedGL
-         l3bwYQbitRsBB/bfl06UqXdKVh512XquZkv8TZSM8pdwoAdrNjkRkTLWXZJb9ZiohGTj
-         H3FjY67X6FRvgltpZq5J/97AcYTyYwtoWjzkedEQqWawiTghwghLaCf8NhTTUR9N7etS
-         8qK/x5W3usKc54gF+8XINMuol2fDb6uLGekaeNaXW+XF5mgdi6vQr/1kfJs8bOLn1bO9
-         6qzg==
+        d=gmail.com; s=20251104; t=1774683023; x=1775287823; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DrWnjhZmO+UrdnOw5wOM1O/FxvN1jKNnNyyhAKxp5So=;
+        b=Jz3tb7uGXchkO1XFITPK2Waob3PL/rEunFM5LlsQss3iTW5dqUyT7+5RKUzRwG648w
+         mmGOyXzew86rUBlTDR0YHdmfUudik41wxr3PQQxZYLHNPjWMDaccmzCKzRua2VOkAiQ/
+         Nf6nweBU3rtg9Yw4irUnaFo/7BKbwnRzpsl1xMKJPmjCDJ8Ni0FF9dRh5KQsp5sRC6XQ
+         LrSYC1mFLeomOv6id4txS4367axxXzAdEw0Ug5A63bnWZwQ0aDav06djgFhd8F0E/1nR
+         JWcKtQqvbdPcG6s7ROKyU9pZJtt6xETJuPfuhy+NZdWV2p0h0LgWcWrUc3jTeU2Bfnd4
+         xBSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774675690; x=1775280490;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BLVTfbcuvINYLoYmyF823EOhMIaDPpXWe+XXA7JGigU=;
-        b=Dq2YiRfmQUB+EZ0DnWpF0cdGaYe1lSaQP4jwxwlKa2n58FmfH/G5hUMOz/0c/83ZNh
-         Bn+6/2eFfzX1NHtawI2NBWRzW0PqCu93mCF3tVlITnbifujXMiNxxQLcrBgLCRZMRHL1
-         9SHdb7HWeG7gT8ucigNSmSNnEPz46hKakbSQ7gKAoqnB9UXjKZfHVHR5SILvwDsB/sg9
-         1pfhjcAfEE/01RzMvjg+NnDr2U2FoIZPo0j95h1wL4D7fNQixpuizboNpSdfOFFnvKtE
-         pGr9bNLt2A/oeFHSv5RkB/FBLkajaJTpJtQD4RxC924ez54hljSZ8v4VCZ1d1uMYvemz
-         qK3w==
-X-Gm-Message-State: AOJu0YxskVj665m5JPNOJ2BJOhIxf9WHjutcA9/FO4NydHHGg8bSfcxN
-	EFGBJAGXRqL7/ATFB3JrMLMN0MokS4i+C7FaDtBKr5E0qYxCLZd+7K8mgY+eRoDm
-X-Gm-Gg: ATEYQzwCfd3RED3+Qp9/FaDR5i60vlBkt66W82vOAfyYbCE//wG27pzQ1i6dZA1wmzf
-	ymD28kanWPCLdIfGfeMGkaYlZQPGRYVFEtfW4aTHfsR/FvH5ndh9Gn/aPIxqP0/6Sn4zRLf1f2r
-	vdd9sAghpaPfv6bpe92bGhM7Vb+K+w+NN2b6/Zl922gjjZECF1dH5B/5+hA3Lv9i5m/8dbqavmn
-	Mx5DO53V5Z/LKw12w/Gx5Uu94qbojdiCho2yc6j8XGLNbekO2qlUyH7YE+YuJXM0d5OdZaApTZS
-	8RAWmjfK1+YxL1ESj1lXhfoUdGwuQfxPDMHPN5n/W9LfR0XOmI/fglqo/1jv4AIz6RoOFa9heRf
-	zfcHO4SI2g8GdoMnIHmMvW7B2ZbZaY6DbLbA2zdZ9DwPqSaVRH2RbMLy3C9cvXffBlgVc66X/Kk
-	6IPA6gS17W9wzr5rHPQp/E+RshjafjYSSDYA139nE9u6IhLHqZ2g2xkKZkt/yE3qkwKDZ1/rRuC
-	FiSwdjMhW4i9Uegt+eLBkVihx2pFwQgqfCQkwnAKeFaEGQmIBPpu1T8s2nl
-X-Received: by 2002:a05:7022:ea30:b0:128:d7a7:5261 with SMTP id a92af1059eb24-12ab28eba7bmr3554312c88.30.1774675689944;
-        Fri, 27 Mar 2026 22:28:09 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2c3c3bda07asm1305648eec.1.2026.03.27.22.28.09
+        d=1e100.net; s=20251104; t=1774683023; x=1775287823;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DrWnjhZmO+UrdnOw5wOM1O/FxvN1jKNnNyyhAKxp5So=;
+        b=bKNZg0ohGBb8FmV9ocsCzWd1q49VIX4nnB8/zPkPbF7MXUMKSLm2zo75VH2WmrWMAV
+         ihAOg4IjYJ+0IfsylK9FxIDC65BE9iSwmpd9q6JllcDNqM9SWEWcFs+HvV0l9hOlULks
+         iRMMLK10l33Mp9ZmP+kYroIQoFz9y/rA/tiYPxj1JPqdEprnX0z9vtJnLRqljpA9zAf7
+         eBOQ2lCC0OoDaYPJX9Ecgsi4JV4+zEumNw/p5bLVEXswJMjqzNFeaxmk3dO35TAyznz+
+         8vXm/WgsOpvqpxsYvu0hIQMfFABLQHgTrvaHxEXRHAbIryppRrU5Kg2pfEiXcPE9Gfhx
+         Lo5Q==
+X-Gm-Message-State: AOJu0YzyX+4k0Ab0VkZSZibVZGzT6knGPXhYKVSqqpPXckg4eQoIfVh7
+	fNM2aFXof+6mT6xUdyYuVawTreFZoJgalVkcH5RWLBLUK/3dAMIkeIxAkCuWUw==
+X-Gm-Gg: ATEYQzxA1C+kr5Xw3e4+W/M2SkWd5P/EUmkjSlnR4q9YQyvI45Sq+W1KfWUH1+cZhcK
+	LtuZ5xQz39rpGWh1AYBHxbG6NTOpIgVdXATI2pJGWRXQTBF1k3Jdjgj7sY1iXxMij9/DkpoLWYX
+	L9vd1fMjz4mldEAnpwjEvmm1AA2kmrgwgJZZA43EVJsSGUgDIavh+5p2YVXr2lWHAp9zchqzphc
+	K2Z1Yglm2jpHI57sMwh5DLFEZkU5A5KzWKW4alNiZ8tR9v2Qs4nNd2ZCmYgssj43K7EPpppu61L
+	FVAnvGNQ4VPjoI7L97n+UpCsQt3RbpkOGuSQVtNufLfN9Vxw2IaB7UD/hSwpsa6yn3bwFsb4gtD
+	rj3G12qBGWrQRDlpC73Q3XTe3PQfvC6hWQlQwG8Facx5UHCTBLvwt6jK62niUtP87gnNHH7nczj
+	uquCPEWq/eJhmLdNCPTmBk
+X-Received: by 2002:a05:600c:8b4b:b0:485:3fe6:21f5 with SMTP id 5b1f17b1804b1-48727f0e5f8mr81421055e9.10.1774683022776;
+        Sat, 28 Mar 2026 00:30:22 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43cf24707f2sm3458347f8f.26.2026.03.28.00.30.22
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Mar 2026 22:28:09 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Sat, 28 Mar 2026 00:30:22 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: Remove protobuf-ptest from packagegroup-meta-oe-ptest-packages
-Date: Fri, 27 Mar 2026 22:28:06 -0700
-Message-ID: <20260328052806.3132878-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-webserver][PATCH 1/2] nginx: upgrade 1.28.2 -> 1.28.3
+Date: Sat, 28 Mar 2026 08:30:20 +0100
+Message-ID: <20260328073021.1895690-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 Mar 2026 05:28:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125798
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Mar 2026 07:30:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125799
 
-ptests in protobuf are disabled due to pkgconfig -> pkgconf regression
+Changes:
+*) Security: a buffer overflow might occur while handling a COPY or MOVE
+   request in a location with "alias", allowing an attacker to modify
+   the source or destination path outside of the document root
+   (CVE-2026-27654).
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+*) Security: processing of a specially crafted mp4 file by the
+   ngx_http_mp4_module on 32-bit platforms might cause a worker process
+   crash, or might have potential other impact (CVE-2026-27784).
+
+*) Security: processing of a specially crafted mp4 file by the
+   ngx_http_mp4_module might cause a worker process crash, or might have
+   potential other impact (CVE-2026-32647).
+
+*) Security: a segmentation fault might occur in a worker process if the
+   CRAM-MD5 or APOP authentication methods were used and authentication
+   retry was enabled (CVE-2026-27651).
+
+*) Security: an attacker might use PTR DNS records to inject data in
+   auth_http requests, as well as in the XCLIENT command in the backend
+   SMTP connection (CVE-2026-28753).
+
+*) Security: SSL handshake might succeed despite OCSP rejecting a client
+   certificate in the stream module (CVE-2026-28755).
+
+*) Change: now nginx limits the size and rate of QUIC stateless reset
+   packets.
+
+*) Bugfix: receiving a QUIC packet by a wrong worker process could cause
+   the connection to terminate.
+
+*) Bugfix: in the ngx_http_mp4_module.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../recipes-httpd/nginx/{nginx_1.28.2.bb => nginx_1.28.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.28.2.bb => nginx_1.28.3.bb} (66%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 0cbe3964c4..c74114ee61 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -950,7 +950,6 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
-     minicoredumper-ptest \
-     oprofile-ptest \
-     poco-ptest \
--    protobuf-ptest \
-     psqlodbc-ptest \
-     rsyslog-ptest \
-     uthash-ptest \
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+similarity index 66%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+index 9699b7189d..9872a6de3b 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+@@ -2,6 +2,6 @@ require nginx.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
+ 
+-SRC_URI[sha256sum] = "20e5e0f2c917acfb51120eec2fba9a4ba4e1e10fd28465067cc87a7d81a829a3"
++SRC_URI[sha256sum] = "2c96a946bfb0882a21744ed429770a2123ae1828c7c48665092993ddee91a918"
+ 
+ CVE_STATUS[CVE-2025-53859] = "cpe-stable-backport: Fix is included in 1.28.1"
 
