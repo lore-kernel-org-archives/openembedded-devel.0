@@ -2,63 +2,63 @@ Return-Path: <michalwsieron@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 464FBFC9802
-	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:06 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37631.1774820339249399632
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBA67FC9800
+	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:05 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37632.1774820340010924611
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2026 14:38:59 -0700
+ Sun, 29 Mar 2026 14:39:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=htan3dS4;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: michalwsieron@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b9b1df1a6b3so402162466b.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=RrrFbzUr;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: michalwsieron@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-661cfb9f3aaso5637385a12.2
         for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:38:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774820337; x=1775425137; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774820338; x=1775425138; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6C/RMAGik1QL0xdihODP8gg//GFuw8opK1A2ehbilt8=;
-        b=htan3dS4DWcwAjrYdEROqR1rzwIJUxHhFdiNNkaaSrKxbW3lQoDvX6+mF50DqIPJVA
-         bZsmagbBk8KsGMr9BugOEpr/zIkZhHAZqedTfax7rFYuWwYzDtUsl6TleYO77GTDhQFX
-         KdT7zTje9FLpbCvbxEqiGoR2Db0tZIK/XqDZ88XlNR3FIjqOgekFkBh7xZQ1k5HahTyB
-         6NGPqIT8oZF3sie1P7pdXeNPS96t2ZGGtX0Tpeszs1CAyqabkEViyWTZTtFP8f0J/SDp
-         pLB3SuEt93AxPQBskXeHG0v6mAD9J6l7WYx4u5RoMdkplZfrT88CmqemBXj9BmXuJFVB
-         G1tA==
+        bh=iixra+SS3NnEHIz6rlxEtEEl9cSTJcBpc+Z5RhvLsT8=;
+        b=RrrFbzUrRVBrGSZYXBuHzI1fZo9/wyFyzf5FgEYdkFnf9SthW1CxK+ZSRpVwm3teTQ
+         iZkUa4+XhZ3mY1wlu4F7MGJC2ECXJM415z2YekG/ooWu0yNupYF2B1clnjdUUr36QaXl
+         KzQTwrgsmfCexOLFA15B9jnFvTR1e6rnOsROT1jR9sLxMLNEMFYObu6UmOHmXpSbSbZs
+         vndVJCRzh/7plVun8XBi8VTkrSbQB6w0D1Tz5b5j4adRFexO8dDTdt1XsKsh3P3c8Rm7
+         MsvPwwEPvz6beJbFQy0f65PmwWG4D1OKh7Z05tF0MoNalp7innPrJCE9IqogWfOnQTWp
+         OQyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774820337; x=1775425137;
+        d=1e100.net; s=20251104; t=1774820338; x=1775425138;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=6C/RMAGik1QL0xdihODP8gg//GFuw8opK1A2ehbilt8=;
-        b=T9Vx2FshuOLeIsOE4hJc0IGEAhb8q92aFyGKW2+uP4Lh2+NLmeJuiBa7QgC0uQTXvj
-         LyOO5GszeOIsbsIQ62uysyENjl1RoD6DdGyAus3+GbQSTYCFO+dSdJmiE1FrrwmwVmjB
-         Pl4nVGkvVR8eKcWu6qfbLgJv1uhZlk2fnY7iwgbII9TbRdmBgaFBTM5sHdPf0vTfpAg0
-         +gdQunkoxs57jpbBU0cBQZhi23B1vBZEa7DIaOq98eWVKluMIr2+PA0FhbR/lSF2P/bE
-         Zq2aI8wSUDs0/DY2iM0mVGLw2ic3ldG4Jvu7BMG+ZkruKh+uH/f1y5N8jpXKBHFM4Bis
-         KRtA==
-X-Gm-Message-State: AOJu0YwNQrwYw1LaiZekHxYYQWe9JTZsp4J7Mp00jHSJDsrvFHjxyuaH
-	eHPWRZFrq7Xxnzy5aZAjds3qLc2zyUz8kVO9yw5nQtJttHzu5yWaAAhH95S+8A==
-X-Gm-Gg: ATEYQzwmLON2dIfkRrJ/76GdYBK8nL7PssI7JtskWLSSg3pqw0InCk8CVsSlqipti2R
-	/7atgwR1k2JjpUT79D6setDZjD9JTek8VP2JG9DBkQvwcNmIDF89/8BVre1FjKwet+LOpMSEUwE
-	JgwjWd8rUtNXpQ9Qfy1qBzsbpi5YO3klJ6aAKgWjVW853rXphX8TA6Yx2MsNSMVZmqAZhkNJBJU
-	YopTgWKATQFZOt3FQ3EPKu08blarGvnqJj0bwvRt9H410kYFF6hwvBs/NUQ9YVqk4SpXJ9ak/2g
-	MPCA7CXux4zR8uat2Cxv/Tqyl5g2IrB0XQfEKz7zUKS7R49IG+6ghDai6EHkDwPHdw8T6CfP1CZ
-	c0TgNS6acBReg/U8pNlDy/0LUpy7YC4Xdv36n+U6gVXaj1G3wUD0ybHLKTdqyHx+4mCZmU1wcJt
-	79LiClBwUp2Zz7GChX3bO2J9kCJSY86gpmnaFV7cSDBqy887b5B5/20hOYijZshndZ2Qh+q2A=
-X-Received: by 2002:a17:907:1c09:b0:b98:350:8dc1 with SMTP id a640c23a62f3a-b9b50937e25mr699259966b.42.1774820337469;
-        Sun, 29 Mar 2026 14:38:57 -0700 (PDT)
+        bh=iixra+SS3NnEHIz6rlxEtEEl9cSTJcBpc+Z5RhvLsT8=;
+        b=MQiSHX+1UXGueLZCLrFnDTNVIuGagDF3QcVBEgZ3+b1BF0CtxvS1HH/8l3baAbLK9r
+         1cmREun2pNaAff48DzXd77wRXc9YAdzSDgp4Iw175N+JASCWjOHuAieNDaz+tuUmqTq/
+         1olj4cVtcx+mkA/bI9jru7s1xfYxiEGUgRDn0z0rWbiEhimelfEYVJdUelPTSGEA4ImW
+         W/enHxqmfIiKMy2xMO0eIwEpENEUjP4yj8wjllfGup08uwBnGSeCvm47l89h//LsScK1
+         BOsjhpB7J+LD/fB5pPdpMoTV1IEiaqcTqVQ1XeMmRMZfQEe5nVAfDB8M3itSaKOcr2Ql
+         RCpQ==
+X-Gm-Message-State: AOJu0Yy8iyDOoA7v091m8/q3een9u+YraKxucFQUGoAYXrVeQ4ybvCqV
+	xnmUNvUPh6Bgr0Z+rUHbX1G2IGK+kG7t0cohV3/uOhBeHOL5JQYrk8nFx37KGw==
+X-Gm-Gg: ATEYQzyhKEskgco9p3VFtptHaf+T8bKfOaWqBPQzpiF1ZfiTGrA+A8oDzoMOBeoQ84D
+	I4gz/Wm7+aQ6mbHbFOoxzHJ1+xfz0XEw/c8IfJEdT+TlwKVRwjKTYkZ8/DMECJy26JFQHRuREvo
+	4HvRYbwtaGzRr3U/KO3oxtClFIRP3KT9grU7pygUSta5TJ6SG1gGEUuv86Gr2wm7YFTfmT/vPB5
+	VLy0lx7jZPJ1crzpzJafTTVqE0cMFED9BGv3obtGWiuBt6Vh6bLe7BtsdfGLRxo3nyBCNyc9JPY
+	hPmmFDZuSsBYuopbj3LlGanlEt6BQSuDtxzlD+y1TDAi79SOmhJTFsxwiHNSX1UnNHUXZ/QQ6Gy
+	/TKSQVAIB+hoiOWVNNlCA4WGb75oKgiYBxs0D6gVPbjp36CUex4JcZOIweHPQ7biFholh+FyDMO
+	BtqObZu/19bfwVEnXNDMn2QWBU67X4/5dmerBQ8oV+N5GfkceqZZlGGMUwCsrP
+X-Received: by 2002:a17:907:c297:b0:b97:a9ac:5e05 with SMTP id a640c23a62f3a-b9b507b43d6mr586921666b.35.1774820338026;
+        Sun, 29 Mar 2026 14:38:58 -0700 (PDT)
 Received: from [127.0.1.1] (185-72-185-220.cgnat.inetia.pl. [185.72.185.220])
         by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 29 Mar 2026 14:38:57 -0700 (PDT)
 From: Michal Sieron <michalwsieron@gmail.com>
-Date: Sun, 29 Mar 2026 23:37:09 +0200
-Subject: [PATCH 08/13] postgresql: Fix append overriding value
+Date: Sun, 29 Mar 2026 23:37:10 +0200
+Subject: [PATCH 09/13] graphviz: Fix append overriding value
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260329-fix-confusing-appends-v1-8-df7e87b8b879@gmail.com>
+Message-Id: <20260329-fix-confusing-appends-v1-9-df7e87b8b879@gmail.com>
 References: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 In-Reply-To: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -67,31 +67,31 @@ X-Mailer: b4 0.15.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125817
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125818
 
-`EXTRA_OECONF:sh4 += "--disable-spinlocks"` was supposed to simply
-disable unsupported spinlocks, but was also overriding other
-configuration defined in EXTRA_OECONF above.
+It actually overrides value of FILES:${PN} instead of appending.
+In this case SDKPATHNATIVE is the prefix so everything was still
+working, but let's convert it to a proper conditional append.
 
 Signed-off-by: Michal Sieron <michalwsieron@gmail.com>
 ---
- meta-oe/recipes-dbs/postgresql/postgresql.inc | 2 +-
+ meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-index 6858015478..07cd121511 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
-@@ -78,7 +78,7 @@ EXTRA_OECONF += "--disable-rpath \
-     --datadir=${datadir}/${BPN} \
-     --sysconfdir=${sysconfdir}/${BPN} \
- "
--EXTRA_OECONF:sh4 += "--disable-spinlocks"
-+EXTRA_OECONF:append:sh4 = " --disable-spinlocks"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb b/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
+index bfc59c3ca1..a5f08d0c85 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
+@@ -68,7 +68,7 @@ do_install:append:class-nativesdk() {
+     install -d ${D}${SDKPATHNATIVE}/post-relocate-setup.d
+     install -m 0755 ${UNPACKDIR}/graphviz-setup.sh ${D}${SDKPATHNATIVE}/post-relocate-setup.d
+ }
+-FILES:${PN}:class-nativesdk += "${SDKPATHNATIVE}"
++FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}"
  
- DEBUG_OPTIMIZATION:remove:mips = " -Og"
- DEBUG_OPTIMIZATION:append:mips = " -O"
+ # create /usr/lib/graphviz/config6
+ graphviz_sstate_postinst() {
 
 -- 
 2.53.0
