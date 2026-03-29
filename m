@@ -1,245 +1,181 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60734F3D613
-	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 16:37:38 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.32715.1774802251309170907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B73A3FC97E8
+	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 18:57:41 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.34825.1774810652120031763
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2026 09:37:31 -0700
+ Sun, 29 Mar 2026 11:57:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=gpSUVlTU;
- spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout10.t-online.de (Postfix) with SMTP id C103637AD4
-	for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 18:37:28 +0200 (CEST)
-Received: from fedora.fritz.box ([79.219.236.193]) by fwd71.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1w6t8f-4PNMYL0; Sun, 29 Mar 2026 18:37:25 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 1/2] gnome-software: update 49.2 -> 50.0
-Date: Sun, 29 Mar 2026 18:37:16 +0200
-Message-ID: <20260329163717.150915-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.53.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JKt/FUw8;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-7d7447778b9so1947909a34.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 11:57:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1774810651; cv=none;
+        d=google.com; s=arc-20240605;
+        b=eIMZXSBupS/gkMSmB/q42B+eR1C0bGOyAgZE6O5GdKR7UwJNOJilUwDRbtiKVPM40v
+         77zMhiSv5jPj0rovA3H8xi0zqxtqI1iEz+OAf0rQgAcggyG7VgiDjlPXRQ/ykvyCbicy
+         1Xw2HZsGrShlSTdH6nvh/a2v5Y8J+Ux/8S2+1OIDm62ahv1Hi0pbwuQJsBliiCGSVSL6
+         ggf0FOMTgdupujkfHERzwRLAw22C6poYdS15wpc4tVitGdzOFc9Dj5kPSgtApCKikD5/
+         NgKC2RTrJqljZkCfGU4YuGyIFaufhjy7i058s+Z187G7QNfvEb3JO/44/C1crdTT7040
+         bQFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=FPVeq6vLW0PbrzvU0BXHipHSwP8xQSWAqs9KkgJ0WdY=;
+        fh=tvH0fRzsTzWp7W9pVcVBj/Hg9HcaDtV/l9F/msdGtu4=;
+        b=LpqKnDmH2GJJCelQmNupDNQ2r0+B4SyoMOgy8F/BR/vrdc6oX8cy76uZRMhiksQPAl
+         DPahj7F5dupr2MwJWmO6IQ0gyokyJlJl3843UNtDikBLxSVslSGVl4A7PUXEeIr5OV0w
+         4LRXOMeE0TPJyUmwUrV6fhT4kSYMeceQnjqOokM49MeL0qbMqQ6hOCNo3Seb+Zq438x0
+         NYgorTy0GGqaqJ/UCDRJjduGTS+pj3Pyq7DVsBcO/vAxYEXubsngg3CUy0V6dUhoCbIl
+         /K5aenfPC4u5hVuHBZ6Kwj16CaemC/2gyQFF6z2Sbo+9OudA90ZofMJVN1f+uDISCvJR
+         Oihg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774810651; x=1775415451; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FPVeq6vLW0PbrzvU0BXHipHSwP8xQSWAqs9KkgJ0WdY=;
+        b=JKt/FUw8ipa23IsZKwiLZ3jUdLPCuWLdi7pf4Bxot2+qplTOo/HIvq8qpYS+QEWhL8
+         lk+5jMKtxWMSo91PgbB0GMhnuLJq+FLeb2lWWeEomqme+rtkgwTVCgLDK8idB+QbtS4j
+         J3XTI3PzXazlzzbpiuUDa4U+TNkUD0YtsXW7QAKV0sExdEYgWWs3Ki2tdQ2V20jeAjoN
+         2Ftguk59dJPSj84G8JBgvlWx5tqysK/HWrSLCKd40U+q0FZreabsTayIeBcbfrdCKnx2
+         gdxQ7u6VqxwgFbSu2k8HAat/GuZfYNuHA2cwo4T1Qz2cN9k6GkVGm/tA74UPNrBA+MEZ
+         DLcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774810651; x=1775415451;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=FPVeq6vLW0PbrzvU0BXHipHSwP8xQSWAqs9KkgJ0WdY=;
+        b=A041Ff+q+6RkoxRLMaCUHrSLrEKFUqb1QwHs8tMYx4rPzvzWdyqZE/zVTgd2ipmyi1
+         w5KsGdzmKaSA2/Bprt8MmF1OAFQRjoNt09D8Rz8muw4nnubbJwZ2bpkNU4pgRbuX2XxR
+         q2v4RzxEbv1XNxsp+AQT52snVbkywCMkHgSDGpYwwwdZWnwmjJ3qCSNhzVjPQbEQQ8Cr
+         jyGARppA2wvUNeO3xL1PSIYkxrFQQyC4mDkJXLrZB8T0eeZW8luhp5VFb4G3h9bJcd7M
+         0aCIk0KqYVJx9vN8i7GkLC2460Q78D/FM5smGrwNpsJyWVSU6JBd4i79BxS1a3OJIsIC
+         CfRw==
+X-Gm-Message-State: AOJu0Ywly9cSaF3Opn40Rt3zqTVYVVXZsOkTR58KE0wUsart7FaRjKqD
+	FK2DK7+5cAKfS3MlewVw48RcU+y4zJMB8eIRIVqv+sEli5jNMFyumLFd2e+AN1FnLY+Df2q+fTo
+	spaFWmKrfG5OTn7uP1n5nYwUHKtjEVEMkFqnS
+X-Gm-Gg: ATEYQzyBuWMqDSC+5I05XccPrFNreRC30nPGikDkazbUaYQUVyoxXnnD+SzR+a6IeCF
+	pcTmqQOI1L/5V9ZZ76Uen0eVj0bIhOv/5q2EMw5t98fNXlMWW2de82lKE9XvzrOYLiBgWwWi3sh
+	T4315avNT9N0h6sRjohfDVWGARVM1f6emubkL658O+emfDmhAu3Pzs/iliVUx8IlMnhzNQu9NU+
+	feMUq3Sg/sbEJXgzwTCjLWgEB6JkNziuBwh66xQhrydMLCgV9JyBYUY6hM9hQJyU4fqW8LN4c4u
+	y25uWE07
+X-Received: by 2002:a05:6820:1506:b0:67e:2adf:1e68 with SMTP id
+ 006d021491bc7-67e2adf205emr2028605eaf.68.1774810651077; Sun, 29 Mar 2026
+ 11:57:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1774802245-86FFA829-DC120F7C/0/0 CLEAN NORMAL
-X-TOI-MSGID: 91b318b8-6ab2-49b3-ae67-7e3ac9289423
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1774802248; i=f_l_k@t-online.de;
-	bh=qUPwxBF9TI48d2xQ7Zd70wd+h6RNnlFgGgos21in2dM=;
-	h=From:To:Subject:Date;
-	b=gpSUVlTUVYmbmwpSqJIJsmUyIdcBVhYO0tTgwxAdLRkDTEdPeu32t/Be9dlufodzO
-	 q39n7N3rpjXlg7sQ52uLgfv+RlRSAv9f+76xyhpXFEyNQSQKgn7Nah4MIIi++J0Gnt
-	 DtFBseYt6KJVWEBSwoD3ZkMr0H8pMWExdbuVO+IPqV3S5DAjXIHEt+W4Rw7/RqBOvZ
-	 Rc+1cd6ZP/fuGUhW50uI4BD8WdZCB5+Zw5/LnmKlthnBnk11YFKl415ANxyTZNtgno
-	 yL7x5bgSHwmYT54bPdksiPdu5g5FqOev09n/y9hqSHu1xjFQex5/xjopXKWerbp20U
-	 sbewh2b4mV0WA==
+References: <20260328213046.2297947-1-mail@michael-fitzmayer.de>
+In-Reply-To: <20260328213046.2297947-1-mail@michael-fitzmayer.de>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Mon, 30 Mar 2026 07:57:20 +1300
+X-Gm-Features: AQROBzBMPYV3VG2KiNiVvIJ0ry84MmYdHcKwRH3jV05UVNG-tr-Bj-0U6N_yOZw
+Message-ID: <CADySD0Hh1Y9ymzZxXwd08hPrEvcezw47nnpMB3_UyngazXwNbw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] Add recipe: canvenient 1.00
+To: mail@michael-fitzmayer.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 16:37:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125804
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 18:57:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125806
 
-Version 50.0
-~~~~~~~~~~~~
-Released: 2026-03-13
-This is a stable release with updated translations:
- * Danish (Alan Mortensen)
- * English (United Kingdom) (Bruce Cowan)
- * Japanese (=E5=B0=8F=E5=B1=B1=E7=94=B0 =E7=B4=94 - Oyamada Jun)
- * Occitan (post 1500) (Quentin PAG=C3=88S)
- * Polish (Victoria)
- * Portuguese (Hugo Carvalho)
-Version 50~rc
-~~~~~~~~~~~~~
-Released: 2026-02-27
-This is an unstable release with the following changes:
- * Remember window size between app restarts
- * Updates page could be sometimes hidden after resume from suspend
- * Allow remove also Flatpak remotes from system installation
- * Correct check for add-ons when app's ID changed
- * Improve socket permissions checks for Flatpak apps
-This release also updates translations:
- * Basque (Asier Saratsua Garmendia)
- * Catalan (Jordi Mas, Victor Dargallo)
- * Chinese (China) (luming zh)
- * Czech (Daniel Rusek)
- * Finnish (Jiri Gr=C3=B6nroos)
- * French (Lucien Ouoba, Guillaume Bernard)
- * Galician (Fran Di=C3=A9guez)
- * German (Christian Kirbach)
- * Greek, Modern (1453-) (Efstathios Iosifidis)
- * Hungarian (Bal=C3=A1zs =C3=9Ar)
- * Interlingua (International Auxiliary Language Association) (Emilio Sep=
-=C3=BAlveda)
- * Italian (Davide Ferracin)
- * Japanese (Makoto Sakaguchi)
- * Kazakh (Baurzhan Muftakhidinov)
- * Korean (Seong-ho Cho)
- * Spanish (Daniel Mustieles)
- * Swedish (Anders Jonsson)
- * Turkish (Sabri =C3=9Cnal)
-Version 50~beta
-~~~~~~~~~~~~~~~
-Released: 2026-01-30
-This is an unstable release with the following changes:
- * Show install and uninstall progress of an add-on
- * Use lower thread priority when running in background
- * Fix possible crash on session permission change
- * Fix possible crash after XbSilo rebuild
-This release also updates translations:
- * Bulgarian (twlvnn kraftwerk)
- * Georgian (Ekaterine Papava)
- * Hebrew (Yaron Shahrabani)
- * Indonesian (Andika Triwidada)
- * Kazakh (Baurzhan Muftakhidinov)
- * Lithuanian (Aurimas Aurimas =C4=8Cernius)
- * Portuguese (Brazil) (Juliano de Souza Camargo)
- * Romanian (Antonio Marin)
- * Russian (Artur S0)
- * Slovenian (Martin)
- * Uighur (Abduqadir Abliz)
- * Ukrainian (Yuri Chornoivan)
-Version 50~alpha
-~~~~~~~~~~~~~~~~
-Released: 2026-01-15
-
-This is an unstable release with the following changes:
- * Improve display of long repository names
- * Clarify warning about removing data when uninstalling an app
- * Fix minor UI issues when scrolling using gestures on a touchpad
- * Don=E2=80=99t show firmware warning on Installed Updates page
- * Several fixes to update history on rpm-ostree systems
- * Improve notifying the user about newly installed trivial flatpak app u=
-pdates
- * Improve display of keyboard shortcuts
- * Split rpm-ostree changelogs by app
- * Display error toasts in the repositories dialog when something goes wr=
-ong
-This release also updates translations:
- * Catalan (Victor Dargallo)
- * Indonesian (Andika Triwidada)
- * Japanese (Makoto Sakaguchi)
- * Kazakh (Baurzhan Muftakhidinov)
- * Portuguese (Hugo Carvalho)
- * Portuguese (Brazil) (Juliano de Souza Camargo)
- * Russian (Artur S0)
- * Slovenian (Martin)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- ...-look-for-flatpak-http_backend-varia.patch | 56 -------------------
- ...oftware_49.2.bb =3D> gnome-software_50.0.bb} |  3 +-
- 2 files changed, 1 insertion(+), 58 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gnome-software/gnome-softwar=
-e/0001-meson.build-dont-look-for-flatpak-http_backend-varia.patch
- rename meta-gnome/recipes-gnome/gnome-software/{gnome-software_49.2.bb =3D=
-> gnome-software_50.0.bb} (88%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-software/gnome-software/0001-=
-meson.build-dont-look-for-flatpak-http_backend-varia.patch b/meta-gnome/r=
-ecipes-gnome/gnome-software/gnome-software/0001-meson.build-dont-look-for=
--flatpak-http_backend-varia.patch
-deleted file mode 100644
-index 2296b7acd2..0000000000
---- a/meta-gnome/recipes-gnome/gnome-software/gnome-software/0001-meson.b=
-uild-dont-look-for-flatpak-http_backend-varia.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--From 4588a3d34f574619c6f3a4290d53e2ac063ab56a Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Thu, 25 Dec 2025 20:04:49 +0100
--Subject: [PATCH] meson.build: dont look for flatpak http_backend variabl=
-e
--
--flatpak 1.17.1 release dropped libsoup2 support:
--[https://github.com/flatpak/flatpak/blob/c324778b0720cb2d01c217fdc70358e=
-232c38b4d/NEWS#L20]
--
--* Drop libsoup2 support in favor of libcurl. The `http_backend` build op=
-tion has
--  been dropped as well. (#6395)
--
--gnome-software still searches for the http_backend variable and fails:
-- ../sources/gnome-software-49.1/meson.build:218:32: ERROR: Could not get=
- pkg-config variable and no default provided for <PkgConfigDependency fla=
-tpak: True ['>=3D 1.14.1']>
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
--
--Upstream-Status: Inappropriate
-----
-- meson.build | 20 +-------------------
-- 1 file changed, 1 insertion(+), 19 deletions(-)
--
--diff --git a/meson.build b/meson.build
--index 3704e2abc..7e0496a22 100644
----- a/meson.build
--+++ b/meson.build
--@@ -212,26 +212,8 @@ if get_option('fwupd')
-- endif
--=20
-- if get_option('flatpak')
---  flatpak =3D dependency('flatpak', version : '>=3D 1.14.1')
--+  flatpak =3D dependency('flatpak', version : '>=3D 1.17.1')
--   ostree =3D dependency('ostree-1')
---
---  flatpak_httpbackend =3D flatpak.get_variable('httpbackend')
---  if flatpak_httpbackend =3D=3D 'soup'
---    flatpak_soupapiversion =3D flatpak.get_variable('soupapiversion', d=
-efault_value: '2')
---    if flatpak_soupapiversion.version_compare('< 3')
---      error('''Flatpak library has been built with 'libsoup2' http back=
-end, which conflicts with 'libsoup3' used by gnome-software.
---
---You can either:
---
---1. Build gnome-software without flatpak support (with -Dflatpak=3Dfalse=
-) or
---2. Rebuild flatpak library with http backend other than 'libsoup2'.''')
---    else
---      flatpak_summary =3D '@0@ (@1@)'.format(flatpak_httpbackend, flatp=
-ak_soupapiversion)
---    endif
---  else
---    flatpak_summary =3D flatpak_httpbackend
---  endif
---  summary('Flatpak http backend', '@0@'.format(flatpak_summary), sectio=
-n : 'Misc')
-- endif
--=20
-- if get_option('malcontent')
----=20
--2.52.0
--
-diff --git a/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.2.=
-bb b/meta-gnome/recipes-gnome/gnome-software/gnome-software_50.0.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-software/gnome-software_49.2.b=
+On Sun, Mar 29, 2026 at 10:30=E2=80=AFAM Michael Fitzmayer via
+lists.openembedded.org
+<mail=3Dmichael-fitzmayer.de@lists.openembedded.org> wrote:
+>
+> CANvenient is an abstraction layer for multiple CAN APIs on Windows and L=
+inux. It provides a unified
+> interface for CAN communication, allowing developers to write code that i=
+s portable across different
+> platforms and CAN hardware.
+>
+> Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
+> ---
+>  .../canvenient/canvenient_1.00.bb             | 41 +++++++++++++++++++
+>  1 file changed, 41 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/canvenient/canvenient_1.00.b=
 b
-rename to meta-gnome/recipes-gnome/gnome-software/gnome-software_50.0.bb
-index 5c8be9bfb1..0cbf238181 100644
---- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_49.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_50.0.bb
-@@ -28,8 +28,7 @@ RDEPENDS:${PN} =3D "iso-codes"
-=20
- EXTRA_OEMESON +=3D "-Dtests=3Dfalse"
-=20
--SRC_URI +=3D "file://0001-meson.build-dont-look-for-flatpak-http_backend=
--varia.patch"
--SRC_URI[archive.sha256sum] =3D "b610b6932a8d666432bc58d6c78c4568cd63d442=
-ae736db8be2c4ca01bbc946c"
-+SRC_URI[archive.sha256sum] =3D "3515e2015f235b6abb7a342806008acb1f184c29=
-d9c4ced3581f8ed4c1f1c241"
-=20
- PACKAGECONFIG ?=3D "flatpak"
- PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak o=
-stree"
---=20
-2.53.0
+>
+> diff --git a/meta-oe/recipes-devtools/canvenient/canvenient_1.00.bb b/met=
+a-oe/recipes-devtools/canvenient/canvenient_1.00.bb
+> new file mode 100644
+> index 0000000000..a4d5a212c1
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/canvenient/canvenient_1.00.bb
+> @@ -0,0 +1,41 @@
+> +
+> +SUMMARY =3D "CANvenient is an abstraction layer for multiple CAN APIs \
+> +          on Windows and Linux. \
+> +          "
+> +DESCRIPTION =3D "CANvenient is an abstraction layer for multiple CAN API=
+s on \
+> +              Windows and Linux. It provides a unified interface for CAN=
+ \
+> +              communication, allowing developers to write code that is \
+> +              portable across different platforms and CAN hardware. \
+> +              "
+> +HOMEPAGE =3D "https://canopenterm.de/canvenient"
+> +BUGTRACKER =3D "https://github.com/CANopenTerm/CANvenient/issues"
+> +
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Dbd2edc721b4a0289efe949bdbe=
+7dda79"
+> +
+> +DEPENDS =3D "libsocketcan"
+> +
+> +SRC_URI =3D "git://github.com/CANopenTerm/CANvenient.git;protocol=3Dhttp=
+s;branch=3Dmain"
 
+can please include tag=3Dv${PV} in the SRC_URI
+
+> +
+> +SRCREV  =3D "abdfc48b316b3644ec1d0d225c45fd0fd8b07dd7"
+
+Is this intentional? Because upstream tagged commit is
+c1a2c37361cf9dd9c87e213146e37b36be306c8a
+
+> +
+> +inherit cmake ptest
+> +
+> +
+> +do_install:append() {
+> +    install -d ${D}${includedir}
+> +    install -d ${D}${libdir}
+> +
+> +    install -m 0644 ${S}/include/CANvenient.h ${D}${includedir}/
+> +    install -m 0755 ${B}/libCANvenient.so.1.0.0 ${D}${libdir}/
+> +
+> +    ln -sf libCANvenient.so.1.0.0 ${D}${libdir}/libCANvenient.so.1
+> +    ln -sf libCANvenient.so.1.0.0 ${D}${libdir}/libCANvenient.so
+> +}
+> +
+> +FILES:${PN} +=3D "${libdir}/libCANvenient.so ${libdir}/libCANvenient.so.=
+*"
+> +FILES:${PN}-dev +=3D "${includedir}"
+> +
+> +SOLIBS =3D ".so"
+> +
+> +RDEPENDS:${PN} =3D "libsocketcan"
+> --
+> 2.47.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#125802): https://lists.openembedded.org/g/openembedde=
+d-devel/message/125802
+> Mute This Topic: https://lists.openembedded.org/mt/118556741/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
