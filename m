@@ -1,95 +1,101 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <michalwsieron@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBA2CFC97EE
-	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 19:59:31 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.35789.1774814367933740488
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25587FC97F8
+	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:05 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37635.1774820341434863117
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2026 12:59:29 -0700
+ Sun, 29 Mar 2026 14:39:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=ab3n1DQj;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-256628-202603291959240adfd8f0c000020740-jsemiy@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202603291959240adfd8f0c000020740
-        for <openembedded-devel@lists.openembedded.org>;
-        Sun, 29 Mar 2026 21:59:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=6EdWH6cZ5mbbFwBzbPKo0tFIS5quIap+lx0eRKFY7vo=;
- b=ab3n1DQjNE95N2uOwccalVpQOLJ5rwsAXogojjDp+AIVB1JewHEsF2wUyQMwMgPneB3umC
- nWap5FDTCwqWMbTBb5Ln27gkvBcMhc5gQ4shzlcK1Rk1dfShTQFn/OKOCUjolHYdYxLi8zjr
- pVfDHHolkgaoR3CwHVUINIbS/CtyOV6UsSryWxFIb0Rd3nDY8/3q0EAMoKl3bXWgrUd+TneQ
- ubKJ1ZjXTUYudmO2E8uJXqz1HoyfCtnzAapD79ha+bwLQrQhF/IIbRAXhRtnKzkRf0Zu4/bp
- B7cMDOfO8OnGFZvamDJ/2MPeU3rBAVHtHA2+5bl8AaAf87DgLZkwCGZw==;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-oe][PATCH] grpc: upgrade 1.78.1 -> 1.80.0
-Date: Sun, 29 Mar 2026 21:58:58 +0200
-Message-Id: <20260329195858.14273-1-peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=c0YdrXzf;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: michalwsieron@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-66aed966c7eso6107681a12.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:39:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1774820340; x=1775425140; darn=lists.openembedded.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Hbnb6zd330Fpx7pxOcXaoVjLc2N2/eJD4jbu3dd9TBo=;
+        b=c0YdrXzfEtfI6jxOO4x5EItJv64iibxHph8ehB0JAAmZ4grcdjZGKiU+DXnE4hdXuO
+         G5v+m4DfeCifYgwFFpA0cUPXQqRCJlk5vev6Qolh32CL0ISF4KFrBP4/PDJXeeqznnJw
+         4Kdj04Fk7CAdnX/mYWvr16HRKjzWX8VV3ib3CSa+lZ3BYO5ZiU7wVlt0bUYhTe+2xab7
+         +tCb6kIqvyo3yiBY3n4o35e7rJWuPcocEObZLw5y5/b8qWAouswppkq1xPo5bMds07Jm
+         iicNR9OU0uASqA+F6+GS2WmboK5Hu7rEQggxdMzBOrj7EQXgvJu8kbClfpiNqjtdcfzo
+         za1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1774820340; x=1775425140;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Hbnb6zd330Fpx7pxOcXaoVjLc2N2/eJD4jbu3dd9TBo=;
+        b=ilv7aaIXkZfen84g2tXpfMp1i4YRbGJ+7CsJPbVLUilqSEWzwP7XtxTIhMOGpyqbwF
+         zuJwH97pF9qowQSRjRuMWqFJNZlad6zJuR6FSW70vwuAj2GV6KcVG2OhPm9mBvx9Z6tU
+         O45Q1Xte8k20nrSoGIuvOLH3BBrgQc/nMfiuM40QPZ9A27Tp4iBAFjHN83AeHfeDDe+z
+         +P9MqXabLXJ5FdXt74ygxSc9lsiIpXSheCVNXQmUK7mwSpXr7eqyt62LmI86IAXmy9K4
+         PxKLtKM0qPEzKAqTaLVtXbVeTDaQj+mhx8AlWaoUvs9v1AWNHZ7DLm0YSYM5qHiJMZN/
+         FriA==
+X-Gm-Message-State: AOJu0YybkeJWlFhG9C3qilYniHpkqy2fDsjGQ9U/3MDYULZ58VIw7Ugc
+	E0VCFXIZej2fL1QM9QG9qqmk3ufvAAfve/2mo92Z6BEbmVlLpz7003w3eR1Qqg==
+X-Gm-Gg: ATEYQzzNMrqEEWH2GmuVa/m5k/rrCa2ROz8x1BFWI37fSJPrYRyg5TwULhOdu098M0t
+	Nu6262/uMyc4NVXnu+TWyHUL3acwoZFPElvKo1gS0TyMB72XVLRqi+4V2FrPrCjd6ZBjiWEpKpV
+	gbPb5Ulqd/WfBfXv4LLoR/8ThgXWHoSbknZkdd4+QwcBRLNnLAQnmM3F5Wd3o088uv3ZsBAKLCc
+	jQqBQ3sMaSf0wKn1mOgvrfwIXqBRDKco7FhBj/eQZVinA2XfcgJvdNrU7FgYgmlF2Oznhsn1WX7
+	EwZ6/NI2zZVKsIezJJB3mbe+UV+YXr+AwNkh0zyMPfEt6rkXMJup8W2OvRkonvvchmw71DpRQD3
+	djK0aXoXM8smnmUNu+v351DwyDPiall2waz1ednfYS4A19HFfXGHyD7vPlCuo4slVMVsRO2cDOd
+	Yna0a/VvSRCvqX8h2tvuwCYZH4nXnyR10ZeUmrslONhfT500xDZ7FyT4CmCsdW
+X-Received: by 2002:a17:907:928d:b0:b96:ecc3:783e with SMTP id a640c23a62f3a-b9b5033e725mr641077466b.17.1774820339683;
+        Sun, 29 Mar 2026 14:38:59 -0700 (PDT)
+Received: from [127.0.1.1] (185-72-185-220.cgnat.inetia.pl. [185.72.185.220])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Mar 2026 14:38:59 -0700 (PDT)
+From: Michal Sieron <michalwsieron@gmail.com>
+Date: Sun, 29 Mar 2026 23:37:13 +0200
+Subject: [PATCH 12/13] pcsc-lite: Convert confusing append to override
+ syntax
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260329-fix-confusing-appends-v1-12-df7e87b8b879@gmail.com>
+References: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
+In-Reply-To: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Michal Sieron <michalwsieron@gmail.com>
+X-Mailer: b4 0.15.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 19:59:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125808
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125821
 
-License-Update: Re-scope secondary licenses [1]
-Release information [2]:
+While in this case `RPROVIDES:${PN}:class-native +=` wouldn't
+result in any unwanted override, there is no guarantee there won't be a
+change, which would be hidden by this override. To avoid any surprises
+in the future let's use `:append:class-native =` syntax here.
 
-This is release 1.80.0 (glimmering) of gRPC Core.
-Core
-* [ssl] Implement TLS private key signer in Python. (#41701)
-* [TLS Credentials]: Private Key Offload Implementation. (#41606)
-* Fix max sockaddr struct size on OpenBSD. (#40454)
-* [core] Enable EventEngine for Python by default, and EventEngine fork support in Python and Ruby. (#41432)
-* [TLS Credentials]: Create InMemoryCertificateProvider to update certificates independently. (#41484)
-* [Ruby] Build/test ruby 4.0 and build native gems with Ruby 4.0 support. (#41324)
-* [EventEngine] Remove an incorrect std::move in DNSServiceResolver constructor. (#41502)
-* [RR and WRR] enable change to connect from a random index. (#41472)
-* [xds] Implement gRFC A101. (#41051)
-C++
-* [C++] Add SNI override option to C++ channel credentials options API. (#41460)
-
-[1] https://github.com/grpc/grpc/commit/fb53717dfa6b264e7f930bb5e9a7e5c86a31ed9e
-[2] https://github.com/grpc/grpc/releases/tag/v1.80.0
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Michal Sieron <michalwsieron@gmail.com>
 ---
- .../grpc/{grpc_1.78.1.bb => grpc_1.80.0.bb}                 | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/grpc/{grpc_1.78.1.bb => grpc_1.80.0.bb} (95%)
+ meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.78.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.80.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/grpc/grpc_1.78.1.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.80.0.bb
-index 6739c659d3..14ead4ccf9 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.78.1.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.80.0.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://github.com/grpc/grpc"
- SECTION = "libs"
- LICENSE = "Apache-2.0 & BSD-3-Clause & MPL-2.0 & MIT & BSD-2-Clause"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE;md5=731e401b36f8077ae0c134b59be5c906 \
-+    file://LICENSE;md5=fe8c552b7748e45c00ac55ac0257f6c9 \
-     file://third_party/utf8_range/LICENSE;md5=d4974d297231477b2ff507c35d61c13c \
-     file://third_party/xxhash/LICENSE;md5=cdfe7764d5685d8e08b3df302885d7f3 \
- "
-@@ -23,8 +23,8 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
- # Both dependencies are mutually exclusive
- # RDEPENDS:${PN}-dev += "${PN}-compiler"
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
+index 169630d319..9e3c98bb97 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.3.bb
+@@ -34,7 +34,7 @@ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-de
  
--SRCREV = "5b6492ea90b2b867a6adad1b10a6edda28e860d1"
--BRANCH = "v1.78.x"
-+SRCREV = "f5e2d6e856176c2f6b7691032adfefe21e5f64c1"
-+BRANCH = "v1.80.x"
- SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH};tag=v${PV} \
-            file://0001-cmake-Link-with-libatomic-on-rv32-rv64.patch \
-            "
+ RRECOMMENDS:${PN} = "ccid"
+ RRECOMMENDS:${PN}:class-native = ""
+-RPROVIDES:${PN}:class-native += "pcsc-lite-lib-native"
++RPROVIDES:${PN}:append:class-native = " pcsc-lite-lib-native"
+ 
+ FILES:${PN} = "${sbindir}/pcscd \
+                ${datadir}/polkit-1"
+
+-- 
+2.53.0
+
 
