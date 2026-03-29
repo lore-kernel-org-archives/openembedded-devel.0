@@ -2,63 +2,64 @@ Return-Path: <michalwsieron@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBA67FC9800
-	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:05 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.37632.1774820340010924611
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A61A2FC9806
+	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:06 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37388.1774820338113554676
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2026 14:39:00 -0700
+ Sun, 29 Mar 2026 14:38:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=RrrFbzUr;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: michalwsieron@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-661cfb9f3aaso5637385a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:38:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=fmBlnjuN;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: michalwsieron@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b79f8f7ea43so747957866b.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:38:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774820338; x=1775425138; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774820336; x=1775425136; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=iixra+SS3NnEHIz6rlxEtEEl9cSTJcBpc+Z5RhvLsT8=;
-        b=RrrFbzUrRVBrGSZYXBuHzI1fZo9/wyFyzf5FgEYdkFnf9SthW1CxK+ZSRpVwm3teTQ
-         iZkUa4+XhZ3mY1wlu4F7MGJC2ECXJM415z2YekG/ooWu0yNupYF2B1clnjdUUr36QaXl
-         KzQTwrgsmfCexOLFA15B9jnFvTR1e6rnOsROT1jR9sLxMLNEMFYObu6UmOHmXpSbSbZs
-         vndVJCRzh/7plVun8XBi8VTkrSbQB6w0D1Tz5b5j4adRFexO8dDTdt1XsKsh3P3c8Rm7
-         MsvPwwEPvz6beJbFQy0f65PmwWG4D1OKh7Z05tF0MoNalp7innPrJCE9IqogWfOnQTWp
-         OQyw==
+        bh=Cw04602w1ws7BkNyTyDWix1U78x6dT8jfaAk1mTY9sA=;
+        b=fmBlnjuNYWZoBXOBlij6fECIyp6BnrVvHwNYvwP4GtkVoDZNPmzop5YHrE3LSDCl1o
+         Kjt8detIANlcDHeXubhEV3qnBZQiI/NnycjX3dGnHdxomFPe/Fc1gwNuWQlql2I/um/K
+         1WmAf7Kt+9Imx29fZcMoRdcRYI664zWfpGhy1bz/pR9UjKznNMbaOJ/tETMtoieemVRI
+         GPsGzFLBWNh5Ze5C82x7OaXeWXvdA6FUVuc8O7j28awpuwaogmRLWK3Xqib3xnrsG93W
+         6R7q70hAp7Jm1gTD7KbV11wgRIDZpicfLPVFcMHrAlhz6IhmkHVzW4z+9nkn+rioJGGT
+         uIqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774820338; x=1775425138;
+        d=1e100.net; s=20251104; t=1774820336; x=1775425136;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=iixra+SS3NnEHIz6rlxEtEEl9cSTJcBpc+Z5RhvLsT8=;
-        b=MQiSHX+1UXGueLZCLrFnDTNVIuGagDF3QcVBEgZ3+b1BF0CtxvS1HH/8l3baAbLK9r
-         1cmREun2pNaAff48DzXd77wRXc9YAdzSDgp4Iw175N+JASCWjOHuAieNDaz+tuUmqTq/
-         1olj4cVtcx+mkA/bI9jru7s1xfYxiEGUgRDn0z0rWbiEhimelfEYVJdUelPTSGEA4ImW
-         W/enHxqmfIiKMy2xMO0eIwEpENEUjP4yj8wjllfGup08uwBnGSeCvm47l89h//LsScK1
-         BOsjhpB7J+LD/fB5pPdpMoTV1IEiaqcTqVQ1XeMmRMZfQEe5nVAfDB8M3itSaKOcr2Ql
-         RCpQ==
-X-Gm-Message-State: AOJu0Yy8iyDOoA7v091m8/q3een9u+YraKxucFQUGoAYXrVeQ4ybvCqV
-	xnmUNvUPh6Bgr0Z+rUHbX1G2IGK+kG7t0cohV3/uOhBeHOL5JQYrk8nFx37KGw==
-X-Gm-Gg: ATEYQzyhKEskgco9p3VFtptHaf+T8bKfOaWqBPQzpiF1ZfiTGrA+A8oDzoMOBeoQ84D
-	I4gz/Wm7+aQ6mbHbFOoxzHJ1+xfz0XEw/c8IfJEdT+TlwKVRwjKTYkZ8/DMECJy26JFQHRuREvo
-	4HvRYbwtaGzRr3U/KO3oxtClFIRP3KT9grU7pygUSta5TJ6SG1gGEUuv86Gr2wm7YFTfmT/vPB5
-	VLy0lx7jZPJ1crzpzJafTTVqE0cMFED9BGv3obtGWiuBt6Vh6bLe7BtsdfGLRxo3nyBCNyc9JPY
-	hPmmFDZuSsBYuopbj3LlGanlEt6BQSuDtxzlD+y1TDAi79SOmhJTFsxwiHNSX1UnNHUXZ/QQ6Gy
-	/TKSQVAIB+hoiOWVNNlCA4WGb75oKgiYBxs0D6gVPbjp36CUex4JcZOIweHPQ7biFholh+FyDMO
-	BtqObZu/19bfwVEnXNDMn2QWBU67X4/5dmerBQ8oV+N5GfkceqZZlGGMUwCsrP
-X-Received: by 2002:a17:907:c297:b0:b97:a9ac:5e05 with SMTP id a640c23a62f3a-b9b507b43d6mr586921666b.35.1774820338026;
-        Sun, 29 Mar 2026 14:38:58 -0700 (PDT)
+        bh=Cw04602w1ws7BkNyTyDWix1U78x6dT8jfaAk1mTY9sA=;
+        b=lAzut3kDpOPVIpQFzc+ON+MGqRd4uQWEUqBynTealYUjpVNSJmde3bBNr1TWwIJ18w
+         py/ZQ/L/Y8d3IB/oCzwxLnAIEwTyd+Z9cuu7yF/ijtLsWyzLKLZZJVbBIKFZtg7Ohqnh
+         bKVHZ5pvnvUwWOPyVmvkaf85LV3tGjKwItRCp1M2VIXXRPv7ovxiNks0w/Gt0JwPaoxr
+         3khH0QE/GjkalGm/Q7TnVz/I13t3ZNiKyrOSrQzjpR7kvxCvFYosmn1Tez7vBqPQzBdV
+         90IHEl/rj96IryQmcQHwm/iKtHLdaR9NB7jMRaOAkcXgDVKgi2SaTfMh2MVJHjq/R+jt
+         Q2oQ==
+X-Gm-Message-State: AOJu0YyLdj3WGlZcDSNg9WqbaHekLfsQJBoyN0xBTrnWI4O6sXgIRs/Z
+	KLNFR/0a/EDkWx8FmIcDSP5C3RNwI7cyFbFImKBgbdxdIgKw8cc+Fz12iKiA9A==
+X-Gm-Gg: ATEYQzwMpNFzx3LohN/6wwf6RbJ8nZPQply1fmous1Racr5FLkBBbFH68J6yGZkTrCJ
+	fx7ei/aComWtfJ0Xo6oV6lvnh8N9OlvqoK04vXr3MmFi4oWYFFP5R9NSbfcLhvkv7ZZJqon7qyY
+	pzdTReXfRlvW0oM+caw/LqNpoHhTrCjaSI5gpuQ6+wPzCih1OEQVJekez0LxHONchT7A3vLOxOM
+	jprSOHreNp4toP50XV8y3ON5yUdqWEynwGuXaodUtVTi+mK19MGSs7yGPxbhWSeUpMvNzSHwcR0
+	CZ2o+AUtzSEfNIiaPrw1VrEWImZUbB3K/o2YMiQCdT7KYS9BQIwUm5iZHvDysnJ8VzV4SJ4jJG1
+	8UvHDPjNI+3aklYex0FcPpkThAjflhk9u/dyFVTXAYWyR7Fwdy50DSinkGUXt35Q5wop9UmFvaO
+	aynCeBQR2pWrbHvBiJGKbmZNQi0OpCFoKArVjgDtcBhnraIJgjS/GdnuWcvJPUlmY/OhSrDLA=
+X-Received: by 2002:a17:907:80e:b0:b98:29fb:f32 with SMTP id a640c23a62f3a-b9b502b9148mr677166466b.1.1774820336380;
+        Sun, 29 Mar 2026 14:38:56 -0700 (PDT)
 Received: from [127.0.1.1] (185-72-185-220.cgnat.inetia.pl. [185.72.185.220])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.57
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Mar 2026 14:38:57 -0700 (PDT)
+        Sun, 29 Mar 2026 14:38:56 -0700 (PDT)
 From: Michal Sieron <michalwsieron@gmail.com>
-Date: Sun, 29 Mar 2026 23:37:10 +0200
-Subject: [PATCH 09/13] graphviz: Fix append overriding value
+Date: Sun, 29 Mar 2026 23:37:07 +0200
+Subject: [PATCH 06/13] postfix: Convert confusing appends to override
+ syntax
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260329-fix-confusing-appends-v1-9-df7e87b8b879@gmail.com>
+Message-Id: <20260329-fix-confusing-appends-v1-6-df7e87b8b879@gmail.com>
 References: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 In-Reply-To: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -67,31 +68,34 @@ X-Mailer: b4 0.15.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125818
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125815
 
-It actually overrides value of FILES:${PN} instead of appending.
-In this case SDKPATHNATIVE is the prefix so everything was still
-working, but let's convert it to a proper conditional append.
+While in this case `RDEPENDS:class-target +=` wouldn't result in any
+unwanted override, there is no guarantee there won't be a change, which
+would be hidden by this override. To avoid any surprises in the future
+let's use `:append:class-target =` syntax here.
 
 Signed-off-by: Michal Sieron <michalwsieron@gmail.com>
 ---
- meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb b/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
-index bfc59c3ca1..a5f08d0c85 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_14.1.4.bb
-@@ -68,7 +68,7 @@ do_install:append:class-nativesdk() {
-     install -d ${D}${SDKPATHNATIVE}/post-relocate-setup.d
-     install -m 0755 ${UNPACKDIR}/graphviz-setup.sh ${D}${SDKPATHNATIVE}/post-relocate-setup.d
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb
+index 2423e17169..a66ecc0b5d 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb
+@@ -240,8 +240,8 @@ pkg_postinst_ontarget:${PN}-cfg () {
  }
--FILES:${PN}:class-nativesdk += "${SDKPATHNATIVE}"
-+FILES:${PN}:append:class-nativesdk = " ${SDKPATHNATIVE}"
  
- # create /usr/lib/graphviz/config6
- graphviz_sstate_postinst() {
+ PACKAGES =+ "${PN}-cfg"
+-RDEPENDS:${PN}-cfg:class-target += "${PN}-bin"
+-RDEPENDS:${PN}:class-target += "${PN}-cfg"
++RDEPENDS:${PN}-cfg:append:class-target = " ${PN}-bin"
++RDEPENDS:${PN}:append:class-target = " ${PN}-cfg"
+ # Exclude .debug directories from the main package
+ FILES:${PN}-bin += "${localstatedir} ${bindir}/* ${sbindir}/* \
+                ${libexecdir}/* ${systemd_unitdir}/*"
 
 -- 
 2.53.0
