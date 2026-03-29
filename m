@@ -2,64 +2,64 @@ Return-Path: <michalwsieron@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA612FC980C
-	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:06 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37386.1774820336526019454
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 350D7FC980D
+	for <webhook@archiver.kernel.org>; Sun, 29 Mar 2026 21:39:07 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.37629.1774820335420828652
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2026 14:38:56 -0700
+ Sun, 29 Mar 2026 14:38:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WYsdqtx/;
- spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: michalwsieron@gmail.com)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-b97f9587e6eso585794366b.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:38:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Wqd1UNN4;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: michalwsieron@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-b9825ba7f9dso739480766b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 14:38:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774820335; x=1775425135; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774820334; x=1775425134; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fh2y9fdrfWzgZxALxZt5b7jHmm3xvOGBYbY7VMf9Y5E=;
-        b=WYsdqtx/NsnaLWVDseG3IoiFFm0xlEbRzbc4QwPIAhk2kLOmYsdSBgY9kzeqSdR9eI
-         brEbzDDqdeBlz2x1MNMKnMutaWLXm2ChBoPVaD7gYNKwJtiFZQ5yjFFiJ0u6TZODYVtT
-         f54HV7kdSe0e+9iZgEkVFGFeGIngBuadhbtvWJJmfFd2jh03/MNWYsTLadMNZ4H57ga8
-         MfzxOWW7C2j02Keq1pCFsKYgteCkgAJulUtALb76Kpo6m3a57MBrnVUKlODMSceEo/4G
-         1CIZe/wqxvGQ4UMO5u/mqxVAP40jBl0IFaZlNVoHsQH0vusuGIq7FMobZHOXqawv6bG1
-         DgNA==
+        bh=KLSGNV3XpgQg4PIlApbdmPRYqlEveBaDi1oHM6iNaxs=;
+        b=Wqd1UNN4ccZg0TGUqh68w4FsosAMj9LSbFbqqVzztYTxpAQ1t4v/nWeJyPcqTajmyC
+         PzY0t1K6XFr58KEOPf53H6mQgFdWubhcaoyzuD9sUyqw+QQUVwUibFX4nUvbWrJxMHmd
+         R72CzwY8vq6zDysfhfsyYgxm5qMSh/1b1GPrIpx9uhz+3TWB6xoGIna09ElPB59PnXAz
+         jTujKGKBRJ2VeyhAMfPJywfxBCq5UAMeP7GW4CfySMXHX8cksYHcQT5kaAs1VEgi2S6W
+         eYzz7P20R7QzCzQj50oGWdHIqRObTaRrRroS36zJEmeJR62T8o1I6NgAE7yBQ6cfi7XE
+         LEjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774820335; x=1775425135;
+        d=1e100.net; s=20251104; t=1774820334; x=1775425134;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=fh2y9fdrfWzgZxALxZt5b7jHmm3xvOGBYbY7VMf9Y5E=;
-        b=XKLdr1/UNXmm5m5HVUPdjU78QQAsx8fqqa82JYZ1M1Chi8RchntjdY43jQdEduiu/4
-         CYmvfVNqzVdBS4xsy1h0GZfLWY/d8le9HYwzK9ogzQYuyce/QAIJE0X057z/XmOFx/JU
-         G/3rwxlR0mpD1jMvcjxmg6AK8of3hE4vhtx09kVFJT0Iem8Rpup+f8XBGgVbiyIevGZG
-         I0uDxBLx2MB7NX1RcRTIoaxFI7VEgoB8gTNS8yd74CK70fqPIZjKEAkacO22ipKcac4x
-         DhYUJWPZThiogl/nyd8KRshvUMMNyk9qeWmPVOe9W8bhy1Ra/yv9AX0eIKVGLefWh88G
-         2Muw==
-X-Gm-Message-State: AOJu0Yy1sDIAP90/MhXwSKptL12eKU62Q1KYwVZpSYMvQY5HSUsl5AbD
-	x2stgk9Zs9m5crb77a89CBQSu3SLcUj58QS8QM30e8W038MnOsR6MDSAhI44ZQ==
-X-Gm-Gg: ATEYQzzCfeAmdl7lndONsPtn0mZf2gACg5kQC2UjchbsR6vkqWBIrr5yl1hHyTqB+6r
-	dRzr8U2d2p05lekVqQfCsWPXCFvOdPFNHuikRV4ajFca8+WKfhKOJ9eB72Qu8R8SR2WojpddvBb
-	SLO0uwswEHB/hARmUqarUlCM9b+hi6xI28IZbPKsJ+lZIAfaUxAo1NKmcpneyIjIIdGS0TeMWck
-	UulY8RNurvutCcGPFBhyQbs8tvQ8pJ20skRCYFmx2PoM58iJAviaLIg1mSjr3GF4962/egmU/l4
-	hR24+vuWbKzkoMwULkOW/P6qkYz038z/14m86khpx0sFQZku9tmFntlqy7oM0SH+WqKwKB5gzor
-	shHHJhZrxZxTci0/F+ZGzEvSAAyH1T79ad9RXTVZnRHCfKLHI4pIIU5LuSwd+kJCk0PgymkkYrg
-	2gi/WkqkOKgT+aRse0fJ0FVr7r0kbtVaTDN93PzfNee5ubzJx2yjU1qQnr0S+6
-X-Received: by 2002:a17:907:1c9e:b0:b98:40f3:47fc with SMTP id a640c23a62f3a-b9b50169017mr631592966b.1.1774820334794;
-        Sun, 29 Mar 2026 14:38:54 -0700 (PDT)
+        bh=KLSGNV3XpgQg4PIlApbdmPRYqlEveBaDi1oHM6iNaxs=;
+        b=JeO40UX9ie7USuuQmRKg29WyGA3pienHtgBLWddDtReyRppRXSD2/AhtcsOazo6F+V
+         8iFoKCcM+TuS3RyDtQqPXZuDsILXgw3j83m/fVrPBaZs9PoD0DzIR2P6XPRslaJd2zkZ
+         ydtJbkDV9NmmevY4Sh+AetS/IT/S0ep3E8gDlCdXDXiM59OjePMxeoD1EsLQEMwHwljU
+         apsnJShzC4k7nuxSav3aignsRH97EoLvkZchzyZDloW3cQg8ExdWd/6TPDV6sosowAzk
+         KWhMGpYjvPaPHYRKmdSepguPmpypmJX/NATJJZzJSptL+8yoady4G4JxAAwi6v6FAczF
+         tWEQ==
+X-Gm-Message-State: AOJu0YwQXojb2//iwtsO6o/stigr0YFPzJ+q3caHc0qes6qVfrn8pgUy
+	qGjDBzmPSp47c6iqJv+OnyKvL1WNE5zy/fhkdNVDw3wp/5UUZGHGmT7C
+X-Gm-Gg: ATEYQzyYfwivdot9vinS1Yu3y5Tb9LFgZGDvZB8bO2E9gY8EUyolwHGymOsJRC5FIxk
+	tq3sIC/ytXmVQYep7Bin4I4O35uBTsazJC5JuagkWV4UpuNAIfc7yJ1TQV0KGjiHWHYA7DHnutZ
+	v/ob+eDdLaT0W+QgaJ08SQYu663IbZOLZ1SlwIajy6XU8/vW+dfYhTrChO48yBZTIJO5PlwY8nl
+	s+D5m0tih3SUIRyzOEWPUezh97DRrCwvfH66znYM2snTUNkzahfBdReyIbPByQatEA6ClyhZWTu
+	4CQ9JRlerUMAr4+aCpIGcfhaymaaZMnYEvKjbiXtTgaW4jl7wrfEaxy9ydXMenLkvvMt3ntrZ8c
+	YJGiTuSeMz2LpIaS7pk8rO961s7DrasDnQopDQI97KmeKUmVHfQ1PXDXBapTJGmlKWShqVjxElu
+	yd4ADnLzdYy3Ryck5TMcLrgfyBIE7H1j1mt+zVncBl0i/9+w+TnlyrKQlxzF088llQ+C+gOJ4=
+X-Received: by 2002:a17:907:3fa3:b0:b98:4eea:9b72 with SMTP id a640c23a62f3a-b9b51c3843dmr581571266b.11.1774820333561;
+        Sun, 29 Mar 2026 14:38:53 -0700 (PDT)
 Received: from [127.0.1.1] (185-72-185-220.cgnat.inetia.pl. [185.72.185.220])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.54
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-b9b7ae57679sm202102866b.25.2026.03.29.14.38.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Mar 2026 14:38:54 -0700 (PDT)
+        Sun, 29 Mar 2026 14:38:53 -0700 (PDT)
 From: Michal Sieron <michalwsieron@gmail.com>
-Date: Sun, 29 Mar 2026 23:37:04 +0200
-Subject: [PATCH 03/13] aufs-util: Convert confusing append to override
+Date: Sun, 29 Mar 2026 23:37:02 +0200
+Subject: [PATCH 01/13] meta-python: Convert confusing appends to override
  syntax
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260329-fix-confusing-appends-v1-3-df7e87b8b879@gmail.com>
+Message-Id: <20260329-fix-confusing-appends-v1-1-df7e87b8b879@gmail.com>
 References: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 In-Reply-To: <20260329-fix-confusing-appends-v1-0-df7e87b8b879@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -68,31 +68,152 @@ X-Mailer: b4 0.15.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125812
+ <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2026 21:39:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125810
 
-While in this case `RRECOMMENDS:class-target +=` wouldn't result in any
+While in this case `RDEPENDS:class-target +=` wouldn't result in any
 unwanted override, there is no guarantee there won't be a change, which
 would be hidden by this override. To avoid any surprises in the future
 let's use `:append:class-target =` syntax here.
 
 Signed-off-by: Michal Sieron <michalwsieron@gmail.com>
 ---
- meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python3-astroid_4.1.2.bb          | 4 ++--
+ meta-python/recipes-devtools/python/python3-humanfriendly_10.0.bb     | 2 +-
+ meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb          | 2 +-
+ meta-python/recipes-devtools/python/python3-progress_1.6.1.bb         | 2 +-
+ meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb            | 2 +-
+ meta-python/recipes-devtools/python/python3-yamlloader_1.6.0.bb       | 2 +-
+ meta-python/recipes-devtools/python/python3-zopeinterface_8.2.bb      | 2 +-
+ .../recipes-extended/python-pyparted/python3-pyparted_3.13.0.bb       | 2 +-
+ meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.3.1.bb | 2 +-
+ 9 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index 61ec508b43..0abbc9ef50 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -63,6 +63,6 @@ do_install:class-native () {
-     done
- }
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_4.1.2.bb b/meta-python/recipes-devtools/python/python3-astroid_4.1.2.bb
+index d75b14c49f..1e7372f692 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_4.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_4.1.2.bb
+@@ -20,7 +20,7 @@ FILES:${PN}-tests += " \
+     ${PYTHON_SITEPACKAGES_DIR}/astroid/__pycache__/test* \
+ "
  
--RRECOMMENDS:${PN}:class-target += "kernel-module-aufs"
-+RRECOMMENDS:${PN}:append:class-target = " kernel-module-aufs"
+-RDEPENDS:${PN}:class-target += "\
++RDEPENDS:${PN}:append:class-target = " \
+     python3-lazy-object-proxy \
+     python3-logging \
+     python3-six \
+@@ -29,7 +29,7 @@ RDEPENDS:${PN}:class-target += "\
+     python3-typing-extensions \
+ "
  
- BBCLASSEXTEND = "native"
+-RDEPENDS:${PN}-tests:class-target += "\
++RDEPENDS:${PN}-tests:append:class-target = " \
+     python3-unittest \
+     python3-xml \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-humanfriendly_10.0.bb b/meta-python/recipes-devtools/python/python3-humanfriendly_10.0.bb
+index b32fe2e1d0..184ce28c1a 100644
+--- a/meta-python/recipes-devtools/python/python3-humanfriendly_10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-humanfriendly_10.0.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "6b0b831ce8f15f7300721aa49829fc4e83921a9a301cc7f606be6686a2
+ 
+ inherit pypi setuptools3
+ 
+-RDEPENDS:${PN}:class-target += " \
++RDEPENDS:${PN}:append:class-target = " \
+     python3-datetime \
+     python3-fcntl \
+     python3-io \
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
+index 85ec93695d..5b201a7554 100644
+--- a/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_1.1.2.bb
+@@ -8,7 +8,7 @@ PTEST_PYTEST_DIR = "test"
+ 
+ SRC_URI[sha256sum] = "3b60763c1373dd60f398488069bcdc703cd08a711477b5d480eecc9f9626f47e"
+ 
+-RDEPENDS:${PN}:class-target += "\
++RDEPENDS:${PN}:append:class-target = " \
+     python3-io \
+ "
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-progress_1.6.1.bb b/meta-python/recipes-devtools/python/python3-progress_1.6.1.bb
+index 57c0748a5c..9ec4ec2b66 100644
+--- a/meta-python/recipes-devtools/python/python3-progress_1.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-progress_1.6.1.bb
+@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "c1ba719f862ce885232a759eab47971fe74dfc7bb76ab8a51ef5940bad
+ 
+ inherit pypi python_setuptools_build_meta
+ 
+-RDEPENDS:${PN}:class-target += " \
++RDEPENDS:${PN}:append:class-target = " \
+     python3-datetime \
+     python3-math \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb b/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb
+index 70652048f3..ee57717a5c 100644
+--- a/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb
+@@ -13,7 +13,7 @@ RDEPENDS:${PN}-ptest += " \
+ 	python3-misc \
+ "
+ 
+-RDEPENDS:${PN}:class-target += "\
++RDEPENDS:${PN}:append:class-target = " \
+     python3-stringold \
+     python3-threading \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-yamlloader_1.6.0.bb b/meta-python/recipes-devtools/python/python3-yamlloader_1.6.0.bb
+index 4844e10de1..281c73eec4 100644
+--- a/meta-python/recipes-devtools/python/python3-yamlloader_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python3-yamlloader_1.6.0.bb
+@@ -11,6 +11,6 @@ DEPENDS += "\
+     python3-hatch-vcs-native \
+ "
+ 
+-RDEPENDS:${PN}:class-target += "\
++RDEPENDS:${PN}:append:class-target = " \
+     python3-pyyaml \
+ "
+diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_8.2.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_8.2.bb
+index 1446d15935..690c2d26aa 100644
+--- a/meta-python/recipes-devtools/python/python3-zopeinterface_8.2.bb
++++ b/meta-python/recipes-devtools/python/python3-zopeinterface_8.2.bb
+@@ -11,7 +11,7 @@ PACKAGES =. "${PN}-test "
+ 
+ RPROVIDES:${PN} += "zope-interfaces"
+ 
+-RDEPENDS:${PN}:class-target += "python3-datetime"
++RDEPENDS:${PN}:append:class-target = " python3-datetime"
+ RDEPENDS:${PN}-test += "python3-unittest python3-doctest"
+ 
+ FILES:${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.13.0.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.13.0.bb
+index 0f7065f5ae..ab0fe8c602 100644
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.13.0.bb
++++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.13.0.bb
+@@ -15,7 +15,7 @@ inherit pkgconfig pypi setuptools3
+ 
+ DEPENDS += "parted"
+ 
+-RDEPENDS:${PN}:class-target += " \
++RDEPENDS:${PN}:append:class-target = " \
+     parted (>= 2.3) \
+     python3-codecs \
+     python3-math \
+diff --git a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.3.1.bb b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.3.1.bb
+index f02c96e405..83156cfddf 100644
+--- a/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.3.1.bb
++++ b/meta-python/recipes-extended/pywbemtools/python3-pywbemtools_1.3.1.bb
+@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "7fb1c32e358d55c2c6966a071c8ecc0ca81de3d32944a67cc646c57b1a
+ 
+ inherit pypi setuptools3
+ 
+-RDEPENDS:${PN}:class-target += "\
++RDEPENDS:${PN}:append:class-target = " \
+     python3-ply \
+     python3-pyyaml \
+     python3-six \
 
 -- 
 2.53.0
