@@ -2,64 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DC185FB3D0F
-	for <webhook@archiver.kernel.org>; Mon, 30 Mar 2026 10:39:29 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.48204.1774867165378069637
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 094F2FB3D0F
+	for <webhook@archiver.kernel.org>; Mon, 30 Mar 2026 10:39:40 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.48206.1774867170220147609
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2026 03:39:25 -0700
+ Mon, 30 Mar 2026 03:39:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZqRi9OP7;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-35d99bae2ebso1322118a91.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2026 03:39:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ihYK+PX5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-35da01fc0baso758720a91.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2026 03:39:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774867165; x=1775471965; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1774867169; x=1775471969; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=L8o25B4KGJVuedVe6NK9fYer7bMdKqqOk4Vti0dAhWg=;
-        b=ZqRi9OP79HloyX3ez4r/G83WMJ9tg/dJZYi+8lHANg/pKybfcr+bN3IfwkR/GH4Juu
-         SYyYw4cfG5Ih+M7gNrtdeMIlACD2QSz6InQgll+unOukrij37x6hss2D3Yr8NN5iE4wF
-         YAE/P0CtD8k7QIKCBVGIjCIWLE5I4TxzVbWmIL8jUqNELuWngkJWyW8tVzUvTLgnoXzk
-         36y9RynfU1IVWv1Fb8FB734Y3cte4wDOUkDMgxKMCGzvLLtkbYCPmFlYoHimMjZ7UlMw
-         t6R+XOIZ/qe+bGN1BPQbhj74zW9rDxCJWlB5gvLbZI52LYTfRQGTEpZv1L/occKELfv4
-         MQGQ==
+        bh=kQ9I5pkZxN5cRSXKPHsn1rWSMI45/iulmERRQHBk5PM=;
+        b=ihYK+PX5Pj3wPpuxTqtjOAdOEGJAbYFr5u9juhmgibY4A7EZh5aLSCdjYNtBC0nPbz
+         Z5piw0E+O1bQiFdeBM5sli7OXSICmTOlHhUl+GDssRfzYEZv0iVuBSzK+xvW3PXkzmMK
+         K4Vki+WPmlEud6Rw5uael/ihX7GuEn8C5urWuLQ3WeW5tZDJM06USWn1pQJ6ezJXS6g9
+         cuYzQGW0hTQ9GK0tjBpLNsLSOTgimxQWm3ImyG+fLD4Z2vb7XpSfFH5isamjGlvkT8RY
+         fdMdYXGF52b2EaOI+RBC7e24vUf9OggMxlyQ4lowgpwr2+fXAb1F/VbVOlOuwRU+wQvA
+         DnRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774867165; x=1775471965;
+        d=1e100.net; s=20251104; t=1774867169; x=1775471969;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=L8o25B4KGJVuedVe6NK9fYer7bMdKqqOk4Vti0dAhWg=;
-        b=W9uY5tFJerk94i0uzulh5V5c8LjnKTfg94v1k5/qLCanjUI914AFIhdPv4zkxsElcE
-         tmrGTnopKXp2hjMenLxxB7G9OgMB/o7R9YpqT/tRdX46Tki64MAdKEw3VdbGq0qgNPhK
-         AwDPOSXgYKqAqFQUzrwSGHXcuzDmj3gg2q980cZYbul2YjpXtamxTqVkNCe7F9kg8Uts
-         sCFVwYqRdaj42MAinTBXCRdvptHGlZrpUvYUgSm8QMmWqtAgy/WMsA0fpl31RXIeAO/a
-         enST79mz4QMii4ixdT0pL5MWwYRiOnnmMXKBIq4QzuiPPkEnuimIeJahUguhxoMezXYQ
-         vGbA==
-X-Gm-Message-State: AOJu0Yz9pqqTza6LQ3BjTKLrJATOFAT9PKwAyn5NWNxBmtnkVXn6OH/+
-	KrcYFZgnGDRPu0L9LwTQw8xmdUYdc2VXIwwv87yOsSSzmqJXFs49XjLk9vzoNw==
-X-Gm-Gg: ATEYQzxn7R555utS+O672SQvXN7vuTrkDx3sm+FJSAgVlEztAf2e7aXOdYUccmdCeIX
-	9tURQw5jHmhVOxnmN8VpGjqqct86gLL9Risa51ZQIGax8uv+3r6bNEt4dW4K7LMhU6/egTxuL0U
-	LhByvQ86paFf3X5aanVVtN692Bt3RM2MLR4oJ+oJ0sJmxFVNIn7Ih7vQ9hjCHl0mBESTkLhybdd
-	oNTFftCxETMLhh8PzxVFRvIYHpq0bzEqkRIVg3/6wb6nGTQ6kJZTVM8MTKMjcBASFwBKengqgwv
-	jlQlJqLGOJbhzpUruBQKiB6orrgL5TkVxOS9pJD+IrgsAsqBwemELP7cK/X5Xb6L7dXezs8onEK
-	zZRGvB9knq4hBDRtbhNtD8rsugaSspDifYvLy+uLB7RhS40ouL7i0pjDcBZs4jl92KFK7svoM9J
-	2bmW5Bkfmecw0+G2wlYs/R1lzHk49m5M3Vwk4=
-X-Received: by 2002:a17:90b:1e53:b0:35c:8ac:ef74 with SMTP id 98e67ed59e1d1-35c2ffafe42mr11868678a91.6.1774867164547;
-        Mon, 30 Mar 2026 03:39:24 -0700 (PDT)
+        bh=kQ9I5pkZxN5cRSXKPHsn1rWSMI45/iulmERRQHBk5PM=;
+        b=GnAPhu/Qu8pwlGwuGe8KlpE+2crsPy8nrun28wq/fvQl7qnSYUQ7hn2nzXZ2cT+RSR
+         00daLOA2H0JcK9/crvY3Tre+DULQLZMZ8Vfwfsr5Hv02e2sG+PQ/xZp6YfAgEXZQOOtt
+         d2c1LsW10730y//WhzIVVM7iA1dV6aDAiOeZEgo5YBEse3kDeCSDbGfIHn/CwuizK6Nc
+         DtYyOrpOhdzcCg64vBZORNMcjQt30TsH8GnAAu3jWY+UJKNcLMK9xGtSF2rumEPZnXYe
+         NUOITlFsILZL3FE4qs4ndnMtwOtuL+ieigsLDkOey+Gx4ucrhi8JSc928wuxFB1y+FoG
+         EP9g==
+X-Gm-Message-State: AOJu0Yz8vrhRLDSb1y4VpCRHFOi5EHUa6XdLX3NDlHWs3ePMkF4BWSfD
+	W8Fmo+7swV1trevhVasUOjwFawCcVvE/LkNUtjEIs8537v6FS+ov+dGRPHWU0Q==
+X-Gm-Gg: ATEYQzzc0FZPpNZe8vMWyh/LVKlbb3drPzN73UYnsFjvKpB6JYRW4aZvqvrNqxYVRUJ
+	illKerGQuQUAcLsovXy5oQHKM0TcfW6EeFyRsdXC+harU25Pc5DYFnkIOqBtPr/lR44yXkQ9gXJ
+	NHs+JrzIi4jy0d08TAAAnp6wDyU9+59kndRgwsK7BYG8Qf9sEjbiiNFKTaIuMOLecs+lwj+qEMQ
+	XhVU9k26pkjHEKldFTxM6GtWd1jg/8Zkfc0RYnIjVIe2suoFyvAvvw5d5khbdXbLc946kJpbD/4
+	CJcZXQgWArSbPJRO/jjUAIvl2Er8kNM54lzzj5ytOAbH7En2hfNuNDPr6uWbxB41zaA2+ix+Dlh
+	mW6SU+Tkwi7jJpeBU2N0uF4kpTEMlhn5uRqicdiMdB8ZhyMIOMi/DCMM2dUVxBhPeIcQ0bMTQBK
+	fC62RVswDphTD14hnEWt0Z3Fcvc55YGU/1op4=
+X-Received: by 2002:a17:90b:3141:b0:35c:936:d4cc with SMTP id 98e67ed59e1d1-35c3002fd1fmr11588989a91.14.1774867169452;
+        Mon, 30 Mar 2026 03:39:29 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.14])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35d9507dc3bsm6831652a91.9.2026.03.30.03.39.21
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35d9507dc3bsm6831652a91.9.2026.03.30.03.39.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2026 03:39:24 -0700 (PDT)
+        Mon, 30 Mar 2026 03:39:29 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][whinlatter][PATCH 8/19] nginx: upgrade 1.28.2 -> 1.28.3
-Date: Mon, 30 Mar 2026 23:38:35 +1300
-Message-ID: <20260330103846.3381644-8-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][whinlatter][PATCH 10/19] python3-aiofiles: fix HOMEPAGE
+Date: Mon, 30 Mar 2026 23:38:37 +1300
+Message-ID: <20260330103846.3381644-10-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260330103846.3381644-1-ankur.tyagi85@gmail.com>
 References: <20260330103846.3381644-1-ankur.tyagi85@gmail.com>
@@ -68,66 +66,26 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2026 10:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125851
+ <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2026 10:39:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125853
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Changes:
-*) Security: a buffer overflow might occur while handling a COPY or MOVE
-   request in a location with "alias", allowing an attacker to modify
-   the source or destination path outside of the document root
-   (CVE-2026-27654).
-
-*) Security: processing of a specially crafted mp4 file by the
-   ngx_http_mp4_module on 32-bit platforms might cause a worker process
-   crash, or might have potential other impact (CVE-2026-27784).
-
-*) Security: processing of a specially crafted mp4 file by the
-   ngx_http_mp4_module might cause a worker process crash, or might have
-   potential other impact (CVE-2026-32647).
-
-*) Security: a segmentation fault might occur in a worker process if the
-   CRAM-MD5 or APOP authentication methods were used and authentication
-   retry was enabled (CVE-2026-27651).
-
-*) Security: an attacker might use PTR DNS records to inject data in
-   auth_http requests, as well as in the XCLIENT command in the backend
-   SMTP connection (CVE-2026-28753).
-
-*) Security: SSL handshake might succeed despite OCSP rejecting a client
-   certificate in the stream module (CVE-2026-28755).
-
-*) Change: now nginx limits the size and rate of QUIC stateless reset
-   packets.
-
-*) Bugfix: receiving a QUIC packet by a wrong worker process could cause
-   the connection to terminate.
-
-*) Bugfix: in the ngx_http_mp4_module.
-
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 34b3d0f4917169c5cd568cdb13796a2d75f1fbf1)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-httpd/nginx/{nginx_1.28.2.bb => nginx_1.28.3.bb}    | 2 +-
+ meta-python/recipes-devtools/python/python3-aiofiles_24.1.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.28.2.bb => nginx_1.28.3.bb} (66%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-similarity index 66%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-index 9699b7189d..9872a6de3b 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.2.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-@@ -2,6 +2,6 @@ require nginx.inc
+diff --git a/meta-python/recipes-devtools/python/python3-aiofiles_24.1.0.bb b/meta-python/recipes-devtools/python/python3-aiofiles_24.1.0.bb
+index 1e9ebdf97d..726b876701 100644
+--- a/meta-python/recipes-devtools/python/python3-aiofiles_24.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-aiofiles_24.1.0.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "File support for asyncio"
+ DESCRIPTION = "Asynchronous local file IO library for asyncio and Python"
+-HOMEPAGE = "https://github.com/aio-libs/aiohttp"
++HOMEPAGE = "https://github.com/Tinche/aiofiles"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
- 
--SRC_URI[sha256sum] = "20e5e0f2c917acfb51120eec2fba9a4ba4e1e10fd28465067cc87a7d81a829a3"
-+SRC_URI[sha256sum] = "2c96a946bfb0882a21744ed429770a2123ae1828c7c48665092993ddee91a918"
- 
- CVE_STATUS[CVE-2025-53859] = "cpe-stable-backport: Fix is included in 1.28.1"
 
