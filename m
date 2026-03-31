@@ -1,106 +1,89 @@
-Return-Path: <adam.duskett@amarulasolutions.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5C5D1061B34
-	for <webhook@archiver.kernel.org>; Tue, 31 Mar 2026 11:26:10 +0000 (UTC)
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com [209.85.208.65])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18188.1774956368432641971
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B7E01061B37
+	for <webhook@archiver.kernel.org>; Tue, 31 Mar 2026 11:38:40 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17969.1774957118432436006
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Mar 2026 04:26:08 -0700
+ Tue, 31 Mar 2026 04:38:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=Z559lrLD;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.208.65, mailfrom: adam.duskett@amarulasolutions.com)
-Received: by mail-ed1-f65.google.com with SMTP id 4fb4d7f45d1cf-66bd3fe1728so382331a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 04:26:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qGI+SBIH;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-486fb439299so52263955e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 04:38:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1774956367; x=1775561167; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kyDUcKGnR7fT64YcY7pa8Dt6EF17PC+9dGk4f1FA14s=;
-        b=Z559lrLDBhWnULqWLWcpiEjtcEpe7a7kEQYiG1NnX7gFiwW2Z791/KhFB4ye4voNiF
-         lE6m5KEM7G8AiaTfRoyvpCa0t+GsVqoBmlfuyzw7sDPJsVvvM+K0hUmHUEVxbIA5atX1
-         sUtYgsm6gw5MVaMLNiQysbxtHuSLSQrvEwE2Y=
+        d=gmail.com; s=20251104; t=1774957117; x=1775561917; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+kJ5i1vCgZ1a+4HI8HXPaa4JhJ85NEsCGUrSM/QPXMg=;
+        b=qGI+SBIHnJ7oGcel9eBd8FLLyagcNwQ8oRNHfXp2wJcM4BB125OXpuF7NktUWHtT3K
+         jNMdMlAgNGkQXUnsuUjFFFQVYfDgsL5tZTlGalMZh1AMEoMXV/ROmZlsOF1Fsaosw6Ag
+         1CSyOCRji97+vRYy4bEseOlmMWAclGVA3dDdUJyvM7vGitiuYiWDTMR15mfoCnErM3rM
+         yizC7daXCdQpwxIdGTm9379epKeu8aPjYM4C3xiwR2JRVjRDLI2425ExgdqRxvEY0VO3
+         04PhweT6V/HFQFLJC6P9WrNlQM8vDR7ymfaJZktFo2hh7QuX9Y5V7ceVtM1BcmXeWiB/
+         q2dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774956367; x=1775561167;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kyDUcKGnR7fT64YcY7pa8Dt6EF17PC+9dGk4f1FA14s=;
-        b=BJwZOyYBtvIa1+TXT89yRvUruftLrLAOib2rrvrK6E3AowMFZ99Qk+jxwv56RnE7g3
-         rk07RsiAg+J83VFKts1xQu4JHQNeeh14GxzTDp4PI731e2/Vs4vK3jt+QQsz/MyoAb6Q
-         DBlf/6KH1jCUVw/9LkblgQ5UEN7cK0a7Do4/xN9a99sw2XvyZkVZAvEJQ7aXKgOIXFnU
-         1lOo4flo9SW7BLIeO7692cqJ6/vPOubdjviwgsLoYXXl1ancO2q7G8WfGZInlVpHAbb6
-         9d8FPsv4lSlp8hAakT8YFO1VxpyuNl3vjdEnJ3G/1dsuSSvV+5xXOJMQir6lhPyMNpT6
-         bI/w==
-X-Gm-Message-State: AOJu0Yx0Usef0KhDQ/Iy5H+td6ujjBEv1AbAulKAl7Mov0acJCjkkMAR
-	off9BSmmxkbW0PC4dNFAui9yfHbBq/Bp3ommPGu41HW69MBhZah2d3GZfMMp3yQslQ8st7UPnG+
-	q9S6olSSUew==
-X-Gm-Gg: ATEYQzwgMz1YhPhIEmuzbPMfZ8AEMCydbriulm1WTX7FCrwAB7L3ccRAvR42wU1gmCT
-	N+VYHz1N70MjlK9iehprQSpVTNuulUGvM/2/efyys3T41RZjoCGRuNVlQKHWjPOSdfqXqIhqET3
-	AUAZn0U0/bC2hRoRDPU8i2TwSBAkvhMK4GvEVb2IjVf7/cTl8as9ZuwJrVpGJQG7CtcAvXPQEKz
-	Wx9lr8xlBF3/kOJ7YfFLCGwoxipXLAn74kGwAsAhgkc5K3OXSyKXkcnDf3fK9WoZkRZzVLB+lIX
-	MEmd2NVMOTyd6Gpdnel4JDAesegfSsb1vJoGJDdzFHWUs7WWYMj8Fo/bNbPaNu1Znhu4PQcesTu
-	bBL8A9aGAoygVk6QnvgyMxMHxogfDJmxlO9E5p6voNoY5ID6Bik6dWSNWgN/al1FBVf+8wVAhf6
-	mGKad5qml45hIi4AY23mD8jSR1KppCAh0cNufo8b3ool3jcg2iPVJOv/sCi7vxnlr2b+W0S2oFA
-	C5XRWGRVaJC04k50vkq7w==
-X-Received: by 2002:a05:6402:354f:b0:66b:eb42:79fa with SMTP id 4fb4d7f45d1cf-66beb427adfmr1816262a12.4.1774956366604;
-        Tue, 31 Mar 2026 04:26:06 -0700 (PDT)
-Received: from adam.ipgroup.local (212-57-59-66.xdsl.deanconnect.nl. [212.57.59.66])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-66b72963f48sm3533868a12.7.2026.03.31.04.26.05
+        d=1e100.net; s=20251104; t=1774957117; x=1775561917;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+kJ5i1vCgZ1a+4HI8HXPaa4JhJ85NEsCGUrSM/QPXMg=;
+        b=RI/3CJH8zJ8Xsv5Gdun48t1l+ZwouTaVa8ayVgjPOiUmIMvwbnZS4qzZs/Z4LJH4rd
+         fd30UlI4gB7OfSjZNDmqV9fnZI4xWxi8N+CoJ9l4FiUK0UF7kZR4qN9mNd5saL8JpSem
+         HOo5wY2ke9jGrkdm4gY7+cNkySl+YXW5k2okeP5Ap0j54vaazf4lfFQTTH0eculykSZ1
+         6yL6z4IuzP24nQzqPwk9v4bAt1GH6jLgf7OIfqSSRGtwBtz0f46S/FPMzS/N+ZEE/yiK
+         aeBwY5F9G9di150lDiJCLe4iPCLjFiFTJ/LyzNW7zyAlz6fpoal3g99kYVi2qmJJEMek
+         T9tg==
+X-Gm-Message-State: AOJu0YwtGW0seZnLZ0hMcqslF5aZMXgyrj5N4oDbK+U3EagO9k4pdkX1
+	vQakZk/mqO1jvw3spY9a95FkwpjSfAab0xHSm+7sCtPKpnTtPRVT7nVtb6Z42A==
+X-Gm-Gg: ATEYQzyn4TgUujXhZAo2kGbjTIedKV/S5+WGsSvkzLD16SO/cSYF6tpVQBpu6uNffHR
+	npTtKXVzIDgd8lFQK2C9Wt5qv4/Go8jMcyAFNCnjapK+xv6e6r/r+dP9sggM+5LxFbo6R+hHv44
+	rGwEuXhuXYxyr8fJafcvettSIGhzN65BxnoXZc56Q9JQPp5+rnB/jCPegbevlc8L9HYQw7QYS14
+	zxu+MSpeAvpWXSVghJX4JshEPZS2pwPd1ASq2WcXKgNtWojTnPDbnWAcNX8vdTGBRbNAijcHDFW
+	/GFeROa+11i2Dy/aJUHyPDkgqFoinBbL2ayhuKriy6PSF5nrh7eMoMS4pWIoIOzcKgj61l6CbCk
+	Qap97scP2LJ589/CNOeBayKNha6GK5OgmTEsPjlnQF0qbU1cZ4SIKSY/FETT6szGFzzMn72Gezd
+	VZfb10D8SIpi01ukGoTSi/
+X-Received: by 2002:a05:600c:608f:b0:485:41c4:e2e4 with SMTP id 5b1f17b1804b1-48728088485mr244875475e9.23.1774957116508;
+        Tue, 31 Mar 2026 04:38:36 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43cf330872asm24401846f8f.17.2026.03.31.04.38.35
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Mar 2026 04:26:06 -0700 (PDT)
-From: Adam Duskett <adam.duskett@amarulasolutions.com>
+        Tue, 31 Mar 2026 04:38:36 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
-Subject: [PATCH 1/1] kmscon: bump version to 9.3.3
-Date: Tue, 31 Mar 2026 13:26:03 +0200
-Message-ID: <20260331112603.2345146-1-adam.duskett@amarulasolutions.com>
+Subject: [meta-python][PATCH 1/2] python3-pyjwt: drop obsolete CVE_STATUS
+Date: Tue, 31 Mar 2026 13:38:34 +0200
+Message-ID: <20260331113835.3567782-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 11:26:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125886
+ <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 11:38:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125887
 
-Changes:
-  - zlib is now a mandatory dependency
-  - freetype support added
-Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+This CVE is disputed, and it is now tracked with an old version
+of the application, it doesn't show up in the CVE report anymore.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../kmscon/{kmscon_9.3.2.bb => kmscon_9.3.3.bb}               | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/kmscon/{kmscon_9.3.2.bb => kmscon_9.3.3.bb} (93%)
+ meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.2.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb
-similarity index 93%
-rename from meta-oe/recipes-graphics/kmscon/kmscon_9.3.2.bb
-rename to meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb
-index 2db5162857..46550bb6d1 100644
---- a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.2.bb
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb
-@@ -17,15 +17,17 @@ DEPENDS = "\
-     libtsm \
-     libxkbcommon \
-     udev \
-+    zlib \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
+index 96f060aa4e..eb445f9c91 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjwt_2.12.1.bb
+@@ -9,7 +9,6 @@ SRC_URI[sha256sum] = "c74a7a2adf861c04d002db713dd85f84beb242228e671280bf709d765b
  
- SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
--SRCREV = "9ce1dc0dc639e54e243a21d93e13f502a746f0a8"
-+SRCREV = "03e50c7db0489daaa41b5f62946fd6aaeab63a6e"
+ PYPI_PACKAGE = "pyjwt"
+ CVE_PRODUCT = "pyjwt"
+-CVE_STATUS[CVE-2025-45768] = "disputed: vulnerability can be avoided if the library is used correctly"
  
- inherit meson pkgconfig systemd
+ inherit pypi python_setuptools_build_meta
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
- 
-+PACKAGECONFIG[font_freetype] = "-Dfont_freetype=enabled, -Dfont_freetype=disabled, fontconfig freetype"
- PACKAGECONFIG[font_pango] = "-Dfont_pango=enabled, -Dfont_pango=disabled, pango"
- PACKAGECONFIG[multi_seat] = "-Dmulti_seat=enabled, -Dmulti_seat=disabled, systemd"
- PACKAGECONFIG[opengl] = "-Drenderer_gltex=enabled -Dvideo_drm3d=enabled, -Drenderer_gltex=disabled -Dvideo_drm3d=disabled, libdrm virtual/egl virtual/libgles2 virtual/libgbm"
--- 
-2.53.0
-
 
