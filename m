@@ -2,104 +2,91 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABA6E1061B3B
-	for <webhook@archiver.kernel.org>; Tue, 31 Mar 2026 11:38:40 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18374.1774957118931685263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2613E1061B3F
+	for <webhook@archiver.kernel.org>; Tue, 31 Mar 2026 12:44:51 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.19448.1774961089387903102
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Mar 2026 04:38:39 -0700
+ Tue, 31 Mar 2026 05:44:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=HRP+k9Uq;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-43cf7683a28so1407437f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 04:38:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gq8kRJZ4;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-439d8df7620so3991302f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 05:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1774957117; x=1775561917; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ieHvxOf+daO5IOUpkWzzXMQxpt1462V7bIq7E86rMtQ=;
-        b=HRP+k9UqyQEjBWvyMvpzc0zv2Y0F5236U0Do8e8w0AWfJbWh1PzQ+wfoA3H/M8Ors8
-         sG1KZ535jHYZveHU50OpAEMN9Uc5rP8G0mZ2BMTvwWGAfLEWb1wNIa+2JpCtZGMClr65
-         dtGgGiMtqRYRNnvpeQozdaiYManzBBYSwkJ7PNkDsTbgE7JRyBDQK7qfznRNSKIOolEk
-         f0S4LNWO4pI3kHuaNdxtumlWbBQDrjLBEDysUeR8Z13uM4mr9atgRRyqOE8GrV65Z3IL
-         9rU9sZUK1YbG5+KNtYnaJ4YTnuPHtcZ5oFb0+po/iXVGzyALLiUZ9JtpsW1z8q5KJ0hH
-         erNQ==
+        d=gmail.com; s=20251104; t=1774961088; x=1775565888; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=W4NAA/WqVW1BstOsLY8fRQ96peP+/vRH8p9Gil11eCM=;
+        b=gq8kRJZ4UdyzNukflIX7iUNHJeNbT1HGzoRG0nC+foRd0wR6tQnQmClTOMPvOYMEEo
+         oNyqk5cBcwx96HFCcYWiVttggzO55C6VKh20ifjaFW8LXq/30sYWIuGyXV3EYO7X5/w0
+         O7qLGbirGeYJ/BRe7Uw+7+C6VeMq+9JRETqJLGSTeDP8gjklB4xmSRjvUt3G6zbZVagX
+         yFb1bKk53G4f+9zJDMYaBgNANmbOWfpDF9TFJ325MdeJNuZ20ExI7SiMl8zfuuDHWDXj
+         +1b7CwW4fzZzxhSOyQC2t+DxDvyR8ggwkIZxpo+z+ydybZ3aU34JRP9Akx72MQkiu/ie
+         iwyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1774957117; x=1775561917;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ieHvxOf+daO5IOUpkWzzXMQxpt1462V7bIq7E86rMtQ=;
-        b=NCNNHVN8cHV8rkqCQruuB2Py4BNkBE/kl7K8SiisNiljEnm4u+nNDAoxYKjn30Fbgw
-         4AKp1/iI0ISddQK8RLpv2xNqUzwxpdFPhesO7vYRl46aU+Jvtsk1JL63JAOJuvzzJDrD
-         1QJ5QbLM1HgF1pcMVea7C4e/9/j4cpQ3jlt9sHJKESU1i5rHwDckeL1/cyVHS8OTwnoP
-         jmbJpt1t3yBDlXdj7VCn1/V8MgxeUlJ/6zrhct/PHKOBfGqK+L78id80tEmLywx/KVNE
-         wN2LFN9ZnzrGmTwAUIwzJXDQvzVhMUP5l5rq+Us7dmDxdTcKMyb0LxrkX1dn6Rv+jgwb
-         Bdew==
-X-Gm-Message-State: AOJu0Yx3bgW3rsrgvVmZaHzlC/L2wYsijfx7w1L5F4RhmPRhXzzjCsY9
-	6V513Ic/jdAV8xA55b3ARoOZcijJ34JvlYcYgXIxaAX6VKm6dA6LG8Wa0K5/HQ==
-X-Gm-Gg: ATEYQzyoc581tvNtI2M2yx8axGVNpUSPqyT9KUyZdV2iK7BCCiMuJtgyh1WG3dncFMB
-	3P/HHUng4TTkR04GgegJS9TJqVR3lY2R+Q60F01WrWVYyVt0O3xjZJE7HkM3xMyJ2mD22rTPuWm
-	kFKMI7NawDpN/yzUCzfJnd1xsJIEUW23wFT5VOdWv+UUGkCpuE8/uD6y+7+rZPwjA9x8sUwVrLV
-	Jw4rIJxIMcIcA2o0p5481USrgaMCWFDP5668wyHZ1JT8I9nvNQL2B9zxhU9OZ78X+trDlmka6pU
-	Bq+LWNXyX7atctTVUz9b9CdU2l8mpq14UiQZkmVkJSqjYqW3t6R35CUI7X1SSzGUSfDiv8xyjBK
-	8+IGCpHWxP4RZ3rE2d0BD7ddR+Z77hutZQLu1e5U8coCFnl+vps421xhWcWJtSZJM9jrdiiBG+v
-	4WqlY0cXT0Z7Ekzl006NpANOTPJj2srbc=
-X-Received: by 2002:a5d:5f88:0:b0:43b:6356:7d00 with SMTP id ffacd0b85a97d-43b9e990080mr29059732f8f.17.1774957117140;
-        Tue, 31 Mar 2026 04:38:37 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1774961088; x=1775565888;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=W4NAA/WqVW1BstOsLY8fRQ96peP+/vRH8p9Gil11eCM=;
+        b=rdtOKc2cptxUudKLkBOX4uUcRXMjlED2wh6t2nxCEBFToEPNPzHBDRq36Qsv6srlAd
+         U1evRhbI1//BN78fR8HlauhyWLWqOaBpnE6I2K+779Vb9lBBJwqbk19nFx1SJtnz+74o
+         XxpgNHroAtSSAsd88g3g4wAwQQ/yO1nC2IT5qg0adoyLQyVocLplJa+CREhjCfHQnJJJ
+         i3NuPAPoUOZA72rXywIIuEocrC3xyYdNDfAuHeabBpfRyBCYHdTL2QZ/G1dbG0AfkyY6
+         BavYjpmdGnRTtiUlXB6ZlA57qEB4T9uPnzg9fKbH009PIxxceyA/StzJiqs7j5Z/Auvi
+         r+og==
+X-Gm-Message-State: AOJu0YzpW2dwTW1utWXrHyT0nJgdMlOjfrETxPInTLiL9ENZMOYhLhm5
+	svy3CTJciM/nC2TYSS8SuMV0EiVBsa6JakVNbd190kqKqIvaKKRwzH8QN0OLLQ==
+X-Gm-Gg: ATEYQzyuRRZx+T/U5EQLxFhQQo8MdSjuVAVkW6dCUTMdwvbmThcqgUyYjGIJ8cZsT+T
+	gy9AGwPuwOuehy0ZMB/HYs2LQnFh+PkeLZqpAKN6YgifQwdJLkmpdxJXhjHNCTUmt7ODXIz8gAa
+	m+vVlh4vrpz/p1IjZarOmvLySEksIIAZP5TU9fVCc2Vuuca9kfszng/ukK7rA7yrxvjSj1z4U1h
+	Fsp36beYh+H7hgN+228mdXxJuOTH4O2Sy5sEKZoq8M+gdNrzlNu6zrgjOmkRTN7zIUCMYu25Bhe
+	AQ7KsSHjumJpbU8cLLFuhw0bEvkdybjSmEyJD4Lk2FDAjZckbJklZkL3DLg0hV9fRuIHeY0lbal
+	9S2m3Z2f3Am84lQqC6TARxMxDlwGzYydLjdEJsC5/0f9F8Eu2YhrIMk4eBz8QAJcnhhog3yCpJ1
+	aEHPo1WHhWzHmz2Dy1GfWE
+X-Received: by 2002:a05:6000:2013:b0:439:beee:43b5 with SMTP id ffacd0b85a97d-43b9e9d5ceemr28874720f8f.3.1774961087475;
+        Tue, 31 Mar 2026 05:44:47 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43cf330872asm24401846f8f.17.2026.03.31.04.38.36
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43cf2471ee2sm27186994f8f.29.2026.03.31.05.44.46
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Mar 2026 04:38:36 -0700 (PDT)
+        Tue, 31 Mar 2026 05:44:47 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 2/2] python3-nltk: upgrade 3.9.3 -> 3.9.4
-Date: Tue, 31 Mar 2026 13:38:35 +0200
-Message-ID: <20260331113835.3567782-2-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH] gattlib: drop obsolete CVE_STATUS
+Date: Tue, 31 Mar 2026 14:44:46 +0200
+Message-ID: <20260331124446.3575038-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260331113835.3567782-1-skandigraun@gmail.com>
-References: <20260331113835.3567782-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 11:38:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125888
+ <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2026 12:44:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125889
 
-Changes:
-
-* Support Python 3.14
-* Fix bug in Levenshtein distance when substitution_cost > 2
-* Fix bug in Treebank detokeniser re quote ordering
-* Fix bug in Jaro similarity for empty strings
-* Several security enhancements
-* Fix GHSA-rf74-v2fm-23pw: unbounded recursion in JSONTaggedDecoder
-* Implement TextTiling vocabulary introduction method (Hearst 1997)
-* Fix ALINE feature matrix errors and add comprehensive tests
-* Support multiple VerbNet versions, fix longid/shortid regex for VerbNet ids
-* Let downloader fallback to md5 when sha256 is unavailable
-* Several other minor bugfixes and code cleanups
+The CVE is now tracked by NVD with a version that is earlier than
+the recipe, the vulnerability doesn't show up in the CVE report
+anymore.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{python3-nltk_3.9.3.bb => python3-nltk_3.9.4.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python3-nltk/{python3-nltk_3.9.3.bb => python3-nltk_3.9.4.bb} (89%)
+ meta-oe/recipes-connectivity/gattlib/gattlib_0.7.2.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.3.bb b/meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.4.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.3.bb
-rename to meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.4.bb
-index d9f661b262..50c751ba98 100644
---- a/meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.3.bb
-+++ b/meta-python/recipes-devtools/python3-nltk/python3-nltk_3.9.4.bb
-@@ -24,4 +24,4 @@ RRECOMMENDS:${PN} = "\
+diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_0.7.2.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_0.7.2.bb
+index 1ebb8350b2..65b1e93468 100644
+--- a/meta-oe/recipes-connectivity/gattlib/gattlib_0.7.2.bb
++++ b/meta-oe/recipes-connectivity/gattlib/gattlib_0.7.2.bb
+@@ -14,9 +14,6 @@ SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https;ta
+ SRCBRANCH = "master"
+ SRCREV = "f99558d9b8e3dbba2a952a0b292d3497aec8ee69"
  
- inherit setuptools3 pypi
+-
+-CVE_STATUS[CVE-2019-6498] = "fixed-version: patch is already included in sources"
+-
+ PACKAGECONFIG[examples] = "-DGATTLIB_BUILD_EXAMPLES=ON,-DGATTLIB_BUILD_EXAMPLES=OFF"
  
--SRC_URI[sha256sum] = "cb5945d6424a98d694c2b9a0264519fab4363711065a46aa0ae7a2195b92e71f"
-+SRC_URI[sha256sum] = "ed03bc098a40481310320808b2db712d95d13ca65b27372f8a403949c8b523d0"
+ # Set this to force use of DBus API if Bluez version is older than 5.42
 
