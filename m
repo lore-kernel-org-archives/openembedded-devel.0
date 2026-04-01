@@ -1,109 +1,97 @@
-Return-Path: <philip@balister.org>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41534D35164
-	for <webhook@archiver.kernel.org>; Wed,  1 Apr 2026 09:53:39 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.7716.1775029801193896675
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27CC1D35167
+	for <webhook@archiver.kernel.org>; Wed,  1 Apr 2026 09:58:39 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.9521.1775037516294051396
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2026 00:50:01 -0700
+ Wed, 01 Apr 2026 02:58:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Wpf5uIVs;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: asusmith@qualcomm.com)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6316CTI8639226
-	for <openembedded-devel@lists.openembedded.org>; Wed, 1 Apr 2026 07:19:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=wj88zUpYVqxAHPHH4moXMoZnI2d8LZ7PSRC
-	0hTRM+Sk=; b=Wpf5uIVs1dDddJK7Fw46zV+AgexyXVa+8xW2W3OGl4iTj9HJx36
-	A5+omi5bjB36gq7PSE7m+jqU0zHW3LxzVY0Dis00pkOU0GiqIh4ZxYO6UYzT0T6B
-	M2bVHgjXxQalDCb4UeSzAzZgbWpXnQ7QmPc2RSZy/XC0t7ll5wJqY5nu/1402Z/F
-	/H907z7I7k5jFpIGk02tnkN3y5YRElafHx/Z4p2pG1e3A+ATUX/zoGG/Q/6bmA/i
-	MYOs1pbo7dqHjSiOptkWfdcs6b2TEWKozKMiATOLX5Im61kUG4Ungs5LcM+bJ5zs
-	YphCRQvRK4CGGrY0EW58ZG98r76Lq3bR/hw==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d8g2auwhb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 07:19:53 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6317Jo47008680;
-	Wed, 1 Apr 2026 07:19:50 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 4d6qk27cpj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 07:19:50 +0000 (GMT)
-Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6317JowC008671
-	for <openembedded-devel@lists.openembedded.org>; Wed, 1 Apr 2026 07:19:50 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-asusmith-hyd.qualcomm.com [10.147.253.242])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 6317Jned008669
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 01 Apr 2026 07:19:49 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4249264)
-	id A27515E4; Wed,  1 Apr 2026 12:49:48 +0530 (+0530)
-From: Akula Susmitha <asusmith@qti.qualcomm.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=qfN+J3Tb;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-43ccda008cdso532172f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 02:58:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1775037515; x=1775642315; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SEYZhEBDeZaDaiaKfj7jhAWYkCGPhDG/XrUsZ86z7Qo=;
+        b=qfN+J3TbYjNP4LYzomaOS62ekaJIW3Mc3EiGsKELxCFVZlsT9lZaaqMbfAv9Wmpn0q
+         j8kquWJ9AsEWjGwsdO7yQ4GBaIJ6anm378Kl9geaUYBXVCaHYoF2Ghwax+9M618tCDiP
+         LUMQLl47Jf8fC18z3O8TsixFdo6XLY0zy63DJptATEdEttxX2CLH/cbsGQ1PSgcZrCPm
+         arwYECM7PU/0rJ0J3werJNAP/8Qj1iQyHq9Ht84NlYPiqdBP+SkK19yR06cx2sutq/p0
+         HZyJ4o7E3P09XRzTJr3p35YEykFeVksezPDujMcsXeWz6/Zu0H+GeGirWV9DDITVMnMh
+         AxCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775037515; x=1775642315;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SEYZhEBDeZaDaiaKfj7jhAWYkCGPhDG/XrUsZ86z7Qo=;
+        b=Yo3PKrgzdKjvGXLOGvY9OXin/8taM9vD7P+JN9jnq7PevDRfwRUkGa5IgDRmsxpPtq
+         ZE9ZjELr5G2lID0Wh5cxkDSX1bFSCcuACIAY0Vz4xoWqg5EnMoEu1Q56UuiH6v5/UO8e
+         wDXUfVCnEBpbdyG4g6kPJKfAECfcw2iSl4c++Fzzu7ZI+CxXqTVzC3JNG6LyHBArLt08
+         Ub5wvgQls8BL7r7IY43AXVaGY8DJvmJMZpaT4+UyBUqZvb1TZC/D368H5Thbh9gU+AW0
+         c+tQn9zvewAkeaJNEhnL4poG1pq9wko4mYo0PIHj+Y0qTXbwsoHnZhC6AMlqffut58//
+         xhlg==
+X-Gm-Message-State: AOJu0YxFKtS2hmwINx/936mOpqMRvEb5GYq5szsfcT4p4pAGi2oP0uf8
+	q7L/9mLPXr6SXV4127RUCtHTMBIZHlc6xir/Hr5GNM2RwwhuZ/RXArxIWVW9Vg==
+X-Gm-Gg: ATEYQzxgzIA+Wv5cflpqfH1R1HlJVfAYAUItPSygqLHeoso2YV8b93BLmsuOOuFtPK+
+	CG1jLebM7tdFUFQkl5wXm36VORDJuN5k/dwpbrLBX4aVood0GnpxsBl2yIHkzw0+byDJtXj9KcE
+	mWVY5PVv4LFym9atJF+2SzF2u2HKbpUX9QIsO5D2ozvmXJeEpEyfPlHcRI+yV50gt+SLJ/xDgtm
+	2y/T3nDZmSJ6sx4WkcrlKBAtC9LS3X3Wx6LN5wQsPDGb/DAPPK/5LE7HqRU6difxizjqSCfTfJG
+	6PVqCke0QeqqGvbAUVQJk6gnLOW4VV0zit+kjaP/0tjQi1zgrMiMroFwrCUKO/s7as9GWMpOE1G
+	tos0S3KBB+EXO/JlAUm15ISZfDt13sRdluNKnNX811VDApMZL0JegyS0QpOWRbz9lS8L4VzwsSi
+	06GWZSxjR1W6cOBFtvTVz3
+X-Received: by 2002:adf:e98a:0:b0:43b:940a:3457 with SMTP id ffacd0b85a97d-43d08262026mr9304981f8f.28.1775037514178;
+        Wed, 01 Apr 2026 02:58:34 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43cf330872asm32142390f8f.17.2026.04.01.02.58.33
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Apr 2026 02:58:33 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Akula Susmitha <asusmith@qti.qualcomm.com>
-Subject: [meta-networking][PATCH] networkmanager: enable modemmanager for 'phone' devices
-Date: Wed,  1 Apr 2026 12:48:52 +0530
-Message-Id: <20260401071852.406134-1-asusmith@qti.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-networking][PATCH] networkmanager: remove obsolete CLAGS extension
+Date: Wed,  1 Apr 2026 11:58:32 +0200
+Message-ID: <20260401095832.2028622-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAxMDA2MyBTYWx0ZWRfX2I6nCKfhoySx
- V1E/WZx2paWScua7kWGS0SO4c1VvZmAZgqH9aGNR/R8SwNhv41ArKrTGl0EXcbJe1MczGPHeqhm
- xpqEN9dOA+KxAqzNX8Ht8hvLYr9R3JnmPz/tyPh166UO7yKE4a+tMbKQIX4HNUh7O2l6cYMl41L
- ADpUGWI4H4AkU03o/tq12LfbDCZuJkFqDtjc7mKg2QpTakM+xsU8BIdE/xNEMo3j2s+e2yrVowT
- S/9p948Y38TuCp/P7jRnTz/UrXf5QP/ZRT9v8uUpjjGDzHQp7mqhNKUP8CQa7StWXlpcImWmme0
- ImYnWhdv3QJwPnvNp/xaIjjzxQqeKNIKmlFAdhG8iA2qKPigndSNMQkmLuXP7o7JrGwYUYXqlAd
- 8U6OI5hWfUOcf4VJ+s9ahSe/jxKYDOLIHLx10XiRi0VEoM9XUzFUNKo48s+M8yyvs8slXvxcwx9
- LOCWJIdU1QvmfwZr13w==
-X-Authority-Analysis: v=2.4 cv=G4ER0tk5 c=1 sm=1 tr=0 ts=69ccc719 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8 a=b39R_zg6VpF3oCpMgmcA:9
-X-Proofpoint-GUID: amFzBBYBSmM43E2NUnkVvKM8TJDqh6fJ
-X-Proofpoint-ORIG-GUID: amFzBBYBSmM43E2NUnkVvKM8TJDqh6fJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-01_02,2026-03-31_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 clxscore=1011 priorityscore=1501
- malwarescore=0 adultscore=0 impostorscore=0 spamscore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2604010063
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 09:53:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125904
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 09:58:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125905
 
-Enable ModemManager in NetworkManager when the 'phone'
-MACHINE_FEATURE is enabled.
+Compilation with musl has been fixed by upstream[1], no need for custom
+CFLAGS for this anymore.
 
-Signed-off-by: Akula Susmitha <asusmith@qti.qualcomm.com>
+[1]: https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/commit/d38b5d92ee66b0243fd5ea6d8fdf58a456e3a5f4
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-connectivity/networkmanager/networkmanager_1.56.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../networkmanager/networkmanager_1.56.0.bb                | 7 -------
+ 1 file changed, 7 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
-index de163fe00e..31d9f1d2b0 100644
+index de163fe00e..85dc51e163 100644
 --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
 +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.56.0.bb
-@@ -91,6 +91,7 @@ PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'wifi polkit ppp', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux audit', '', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES_BACKFILL_CONSIDERED', 'gobject-introspection-data', '', 'vala', d)} \
-+    ${@bb.utils.contains('MACHINE_FEATURES', 'phone', ' modemmanager ', '', d)} \
+@@ -72,13 +72,6 @@ EXTRA_OEMESON = "\
+     -Dman=false \
  "
  
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'vala', 'vala', '', d)}
--- 
-2.34.1
-
+-# stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
+-# avoids:
+-# | ../NetworkManager-1.16.0/libnm-core/nm-json.c:106:50: error: 'RTLD_DEEPBIND' undeclared (first use in this function); did you mean 'RTLD_DEFAULT'?
+-CFLAGS:append:libc-musl = " \
+-    -DRTLD_DEEPBIND=0 \
+-"
+-
+ # networkmanager-1.52.0/src/nmcli/agent.c:88:29: error: incompatible function pointer types assigning to 'rl_hook_func_t *' (aka 'int (*)(void)') from 'int (const char *, int)' [-Wincompatible-function-pointer-types]
+ #   88 |             rl_startup_hook = set_deftext;
+ #      |                             ^ ~~~~~~~~~~~
 
