@@ -1,179 +1,149 @@
-Return-Path: <gmisra@qti.qualcomm.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5A45CC6B35
-	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 08:41:57 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11257.1775119308956848115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 954BBD3941A
+	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 11:59:14 +0000 (UTC)
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13968.1775131147564948699
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Apr 2026 01:41:49 -0700
+ Thu, 02 Apr 2026 04:59:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=h9LpvjuL;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: gmisra@qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63275cNX1964793
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 08:41:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=M0NAiVQVDwjdAOQIA2ELvXT7gCItrKWN0TN
-	nuy+IQvw=; b=h9LpvjuLg+v7dy5GNalZWHXf+rkXXFvpyCYDiQPN1okWp9TUG6B
-	JnDt8iazMwCw3VuaspHOIbJiqmU0XNQyAfMYOWQcF2qa6s6yC40UzpF195GO0wEY
-	WjRoetCCrM9nay19I19gLB6ryPX0QJtMrelFTltPv1dOMuBMX1TB/W6tLe9hlvDn
-	n5JF3ZlAMDzhi3b3c4mN1X6hOio1R2KSWfsFpLX+klBvsxLCv2YPJeJ0RY5s4g+g
-	GXSmqiqqhlV8bovv8LZ9yrjFyjuyvLWqUcY1Wi3YMTomTDdDjAV3NRStOyw46Y5H
-	F7gk6DsJ8xJlhlNROuv6wZGIb26UewYFA0Q==
-Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d9b9h26x2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:48 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6328fiAF017839;
-	Thu, 2 Apr 2026 08:41:44 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 4d6qj2w4em-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:44 +0000 (GMT)
-Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6328fixX017834
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 08:41:44 GMT
-Received: from hu-devc-hyd-u24-a.qualcomm.com (hu-gmisra-hyd.qualcomm.com [10.213.99.33])
-	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 6328fh8r017833
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 02 Apr 2026 08:41:44 +0000 (GMT)
-Received: by hu-devc-hyd-u24-a.qualcomm.com (Postfix, from userid 4467585)
-	id 2A82120F8D; Thu,  2 Apr 2026 14:11:43 +0530 (+0530)
-From: Gargi Misra <gmisra@qti.qualcomm.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=JsNYGLJs;
+ spf=pass (domain: mvista.com, ip: 209.85.215.169, mailfrom: vanusuri@mvista.com)
+Received: by mail-pg1-f169.google.com with SMTP id 41be03b00d2f7-c76c60c7502so389844a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 04:59:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1775131146; x=1775735946; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=l1kk4C22Cq/U1PZdl0jB2Q3VnF5jdhZ581lophpRtjo=;
+        b=JsNYGLJsRp+ep0eOhPC+dcAQ5hVdM4jNaYDk5f6eCTn2Du2v7FebMI7zZQGVoa3cUO
+         Srl7zALPF1vXktAtvkXHjZ5apK/j8oaiUNPZtk0h87SjHAyisIRVZL6oWl0bvKorRbox
+         237o2NtKcnvncYXJnuuhO1A74heSA+0tvYuBo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775131146; x=1775735946;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=l1kk4C22Cq/U1PZdl0jB2Q3VnF5jdhZ581lophpRtjo=;
+        b=Hiqecnq0vGDlKUtYRI9ouWn9cjmglzyxys+gfvPY9RkKofTRZjCzF6NN5ePLISIXuD
+         LVMaR1iR/PHg0nNd3dljhBINwTIZfyXOyT2Thgal/pelBmTNlxKv5U0P/jl9yaLx/rVh
+         1rD/DyaggiHLX7Cdak9AAo5yLwaMaSsJ8c8MDZSsk7EON76ihHVWxQbiiMk+7vXEc9xZ
+         P50R4YRtO8Fuims5fAJyDbzLbo9Crld1xVoPXuh0sZPEILQX6x19ajaZ9veoVefmRzg2
+         K7QGyC6h92BXIhdDPDQJZlZ+bCpHEeoXLocG+dUbM4VDr8d+h1Z6Q6YyOXPamdoeMxdo
+         ambA==
+X-Gm-Message-State: AOJu0Ywq8/M7AAvDoqD7r+vGMCBBHbr9ZziPA6QkLR62WL9zri8g73Ze
+	qpKRMYJw/iDWvP1/vGGpCWgYBXlZbd9XDglQY0CEr6/fut1AGBZGEsRm3OY7RXpfk4U4Q2RRnlV
+	NIhmDt1o=
+X-Gm-Gg: AeBDiesWVQfispmWR58xeF4AHp3fIxXbiYnQwcXMPDSIKV6YgTDua3Y6PUZ1Jv7Zedo
+	rX9GNQcCzFZNWoSauHICyBzhXqXFmji2oNiLdVOSD1rJ4wviBg5Z+YO8y9TdXHVLYQWJI3l0eY3
+	jSWbweyS5/AywJgjJvV84f7lbiB4z4H8TokhJfXEVjxpAKb2F+x6MtJnX97Fi0vab1hhdD8CRj0
+	eQSsO6uqYIm5xpy/a9vS7A7KleGgVVd7UlLlYYixKXyV6uJ/g0gNwxNSneyF9BzosSACGFM5nFX
+	j7+lOVUkph8nPnNHBAcOcwu/tCV/TPXichFwjl+4mrnz7P6wnQKqxqyCibZFvCHUg7iz5UaoH5r
+	R4d5kduYY2rci31L1Xkx4O/+7F8G3GHYOAJJppullQjvnq/pufE2EbNvqSpZToK+9qG9AzvLUub
+	DH9IbA+yhiBAFy49lMmonm5dlAhEbmu5+ZtcL2ZZQ=
+X-Received: by 2002:a17:903:2b03:b0:2b2:58d9:3f3d with SMTP id d9443c01a7336-2b277dc34a1mr21493675ad.8.1775131146279;
+        Thu, 02 Apr 2026 04:59:06 -0700 (PDT)
+Received: from MVIN00352.mvista.com ([2401:4900:1f29:1ab6:137a:d6ee:8373:3de6])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b27472d20bsm28309055ad.16.2026.04.02.04.59.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Apr 2026 04:59:05 -0700 (PDT)
+From: Vijay Anusuri <vanusuri@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gargi Misra <gmisra@qti.qualcomm.com>
-Subject: [meta-oe][PATCH] refpolicy-targeted: Updated policy to allow adb push and adb pull through adb shell     - adb push is allowed to /tmp only     - adb pull is allowed on all files
-Date: Thu,  2 Apr 2026 14:11:23 +0530
-Message-ID: <20260402084123.405103-1-gmisra@qti.qualcomm.com>
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][scarthgap][patch] strongswan: Fix CVE-2026-25075
+Date: Thu,  2 Apr 2026 17:28:57 +0530
+Message-ID: <20260402115857.609116-1-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=TqLrRTXh c=1 sm=1 tr=0 ts=69ce2bcc cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=954HIxe3JWwfOQJH:21 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=4rTUgi8V-t1-XIL5bpMA:9
-X-Proofpoint-ORIG-GUID: gFn4xNB3V9g1zae-w1FChfr-KrwDqO_Q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAyMDA3NyBTYWx0ZWRfX958kZsAPwOD4
- GrUMpSGCJkK4eAFU0KUUSiokGsNz4XrGPEXVJnPLZe3GH+t6LGTrqHht4W4gcfkpZV9Crjd3pHT
- vp6olRbwzIEeZoFPCaAzWMCLccuSjlNxeRiZ4kB06JyzNTTHTaMvKWmIbvfp8BeSzIYN8eM8va7
- L9qff3JmrEXyaUIYuHvfErTxJT1FlCpDvMPm2CphlD1BVEilpieX2/nnl0Obqp1Jt++ZQRFejg8
- K2QrXgHgo8Dvh2DfglBEw8+wl8cgkDzRZ/d+LeThBlh3bPePK6hyPphXX8RTBRnBTJ/DBtV0cvd
- ARlA4AP8DG2C7acLUHxfpVT0NYKjFgA/foEx3jNjaoUtGKHoHzhTiZbSe6BYjk7djtwPkPlMsN9
- klIqRqbOIwtFR7xCJ7o+Lmff77glkdsHNfijAkKzBmUNGzjpsYwCq0sUX1TNYaRER8aSIIJrcyY
- Zwau2tUMSs04uPpVAmA==
-X-Proofpoint-GUID: gFn4xNB3V9g1zae-w1FChfr-KrwDqO_Q
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-02_01,2026-04-02_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
- clxscore=1011 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2604020077
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125963
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 11:59:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125964
 
-Signed-off-by: Gargi Misra <gmisra@qti.qualcomm.com>
+Pick patch according to [1]
+
+[1] https://download.strongswan.org/security/CVE-2026-25075/
+[2] https://www.strongswan.org/blog/2026/03/23/strongswan-vulnerability-(cve-2026-25075).html
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../0001-Added-sepolicy-for-adb-service.patch | 36 +++++++++++++------
- 1 file changed, 25 insertions(+), 11 deletions(-)
+ .../strongswan/CVE-2026-25075.patch           | 50 +++++++++++++++++++
+ .../strongswan/strongswan_5.9.14.bb           |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-networking/recipes-support/strongswan/strongswan/CVE-2026-25075.patch
 
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch b/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
-index 62f81e4ffb..29d45641d6 100644
---- a/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
-+++ b/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
-@@ -1,6 +1,6 @@
--From c110d893be565ade574ee2933c6e89197f833006 Mon Sep 17 00:00:00 2001
-+From d1c726eb1da3718d05a694222fa0a6a0e944f381 Mon Sep 17 00:00:00 2001
- From: Gargi Misra <gmisra@qti.qualcomm.com>
--Date: Thu, 5 Mar 2026 12:39:42 +0530
-+Date: Tue, 31 Mar 2026 23:39:22 +0530
- Subject: [PATCH] refpolicy-targeted: Added sepolicy for adb service
+diff --git a/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-25075.patch b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-25075.patch
+new file mode 100644
+index 0000000000..46ce5d5ad2
+--- /dev/null
++++ b/meta-networking/recipes-support/strongswan/strongswan/CVE-2026-25075.patch
+@@ -0,0 +1,50 @@
++From d4b3c39776f06948d875614a0eddea9561159f2a Mon Sep 17 00:00:00 2001
++From: Tobias Brunner <tobias@strongswan.org>
++Date: Thu, 5 Mar 2026 12:43:12 +0100
++Subject: [PATCH] eap-ttls: Prevent crash if AVP length header field is invalid
++
++The length field in the AVP header includes the 8 bytes of the header
++itself.  Not checking for that and later subtracting it causes an
++integer underflow that usually triggers a crash when accessing a
++NULL pointer that resulted from the failing chunk_alloc() call because
++of the high value.
++
++The attempted allocations for invalid lengths (0-7) are 0xfffffff8,
++0xfffffffc, or 0x100000000 (0 on 32-bit hosts), so this doesn't result
++in a buffer overflow even if the allocation succeeds.
++
++Fixes: 79f2102cb442 ("implemented server side support for EAP-TTLS")
++Fixes: CVE-2026-25075
++
++Upstream-Status: Backport [https://download.strongswan.org/security/CVE-2026-25075/strongswan-4.5.0-6.0.4_eap_ttls_avp_len.patch]
++CVE: CVE-2026-25075
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ src/libcharon/plugins/eap_ttls/eap_ttls_avp.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c b/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
++index 06389f7ca73e..2983bd021ded 100644
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
++@@ -119,7 +119,7 @@ METHOD(eap_ttls_avp_t, process, status_t,
++ 		chunk_free(&this->input);
++ 		this->inpos = 0;
++ 
++-		if (!success)
+++		if (!success || avp_len < AVP_HEADER_LEN)
++ 		{
++ 			DBG1(DBG_IKE, "received invalid AVP header");
++ 			return FAILED;
++@@ -130,7 +130,7 @@ METHOD(eap_ttls_avp_t, process, status_t,
++ 			return FAILED;
++ 		}
++ 		this->process_header = FALSE;
++-		this->data_len = avp_len - 8;
+++		this->data_len = avp_len - AVP_HEADER_LEN;
++ 		this->input = chunk_alloc(this->data_len + (4 - avp_len) % 4);
++ 	}
++ 
++-- 
++2.43.0
++
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
+index 4592381a36..820a1ad9e8 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
+@@ -10,6 +10,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
  
-     - Labeled adb binary
-@@ -12,15 +12,15 @@ Signed-off-by: Gargi Misra <gmisra@qti.qualcomm.com>
- ---
-  policy/modules/services/adbd.fc |  5 +++++
-  policy/modules/services/adbd.if |  5 +++++
-- policy/modules/services/adbd.te | 25 +++++++++++++++++++++++++
-- 3 files changed, 35 insertions(+)
-+ policy/modules/services/adbd.te | 39 +++++++++++++++++++++++++++++++++
-+ 3 files changed, 49 insertions(+)
-  create mode 100644 policy/modules/services/adbd.fc
-  create mode 100644 policy/modules/services/adbd.if
-  create mode 100644 policy/modules/services/adbd.te
+ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+            file://CVE-2025-62291.patch \
++           file://CVE-2026-25075.patch \
+            "
  
- diff --git a/policy/modules/services/adbd.fc b/policy/modules/services/adbd.fc
- new file mode 100644
--index 000000000..6f5bb9269
-+index 000000000..57d4c1d45
- --- /dev/null
- +++ b/policy/modules/services/adbd.fc
- @@ -0,0 +1,5 @@
-@@ -31,7 +31,7 @@ index 000000000..6f5bb9269
- +
- diff --git a/policy/modules/services/adbd.if b/policy/modules/services/adbd.if
- new file mode 100644
--index 000000000..612fc0106
-+index 000000000..d71ab1374
- --- /dev/null
- +++ b/policy/modules/services/adbd.if
- @@ -0,0 +1,5 @@
-@@ -42,10 +42,10 @@ index 000000000..612fc0106
- +
- diff --git a/policy/modules/services/adbd.te b/policy/modules/services/adbd.te
- new file mode 100644
--index 000000000..f7e8ac7d0
-+index 000000000..a58c61c9e
- --- /dev/null
- +++ b/policy/modules/services/adbd.te
--@@ -0,0 +1,25 @@
-+@@ -0,0 +1,39 @@
- +policy_module(adbd)
- +
- +########################################
-@@ -64,13 +64,27 @@ index 000000000..f7e8ac7d0
- +# Minimal Rules Required for adbd service
- +allow adbd_t self:capability sys_resource;
- +
--+domain_interactive_fd(adbd_t)
- +dev_rw_usbfs(adbd_t)
--+files_read_etc_files(adbd_t)
--+files_rw_etc_runtime_files(adbd_t)
-++
-++# Required for semodule on adb shell
-++domain_interactive_fd(adbd_t)
-++
-++# Required for adb pull
-++files_read_all_symlinks(adbd_t)
-++files_read_all_files(adbd_t)
-++
-++# Required for adb push on /tmp
-++files_list_tmp(adbd_t)
-++files_manage_generic_tmp_files(adbd_t)
-++
- +term_use_ptmx(adbd_t)
- +term_use_generic_ptys(adbd_t)
- +
-++
-++
-++
-++
-++
- -- 
- 2.43.0
- 
+ SRC_URI[sha256sum] = "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e74693b54fc33678"
 -- 
 2.43.0
 
