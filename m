@@ -1,120 +1,180 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <gmisra@qti.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F2FCCC6B1E
-	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 07:54:47 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.10866.1775116476706505162
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5A45CC6B35
+	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 08:41:57 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.11257.1775119308956848115
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Apr 2026 00:54:38 -0700
+ Thu, 02 Apr 2026 01:41:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=k4jc1D0d;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=85522d16b3=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6324XZlA3954511
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 00:54:36 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=JF8ZsLspX/DbhH/sj0nS
-	tf9Rh7hbEfNG/de7r/x877E=; b=k4jc1D0dNbWTqa6O6GRwaj7bXM9Xj/CjnX+w
-	+Qr6zRz5nZG1wlF4GFBLmRvvLnVjK/Sn+hubz7bqDHgKGVw9FPJHTEcMysNTp63t
-	LDNILWrxDxta/VeOeMesV+PcaCm1V5N9CouYJXnb/m32Cm0irBXzJxiySrL7rMY/
-	/gPxMrEQTNTyAxT8kJ96kdpswtMac3QhS4DjAoedAv/2g2tWIxJCvjm99T2asVaX
-	YFRyhIS6zBrcsMLY/LdUr9nN6+0HVS+Suji5EOZ1Kb2SjxKX1CVQF1n43wPyeM/O
-	yMiMo1Ww5ENTaOX0A91QyA0SqS+sdkNxtFPaObWq05EGMYLhBA==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d6egby4ah-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 00:54:35 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Thu, 2 Apr 2026 00:54:35 -0700
-Received: from pek-lpg-core5.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Thu, 2 Apr 2026 00:54:34 -0700
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-ninja: fix ninja_syntax import and version for setuptools build
-Date: Thu, 2 Apr 2026 15:54:34 +0800
-Message-ID: <20260402075434.3803197-1-jiaying.song.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=h9LpvjuL;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: qualcomm.com, ip: 205.220.168.131, mailfrom: gmisra@qualcomm.com)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63275cNX1964793
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 08:41:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=M0NAiVQVDwjdAOQIA2ELvXT7gCItrKWN0TN
+	nuy+IQvw=; b=h9LpvjuLg+v7dy5GNalZWHXf+rkXXFvpyCYDiQPN1okWp9TUG6B
+	JnDt8iazMwCw3VuaspHOIbJiqmU0XNQyAfMYOWQcF2qa6s6yC40UzpF195GO0wEY
+	WjRoetCCrM9nay19I19gLB6ryPX0QJtMrelFTltPv1dOMuBMX1TB/W6tLe9hlvDn
+	n5JF3ZlAMDzhi3b3c4mN1X6hOio1R2KSWfsFpLX+klBvsxLCv2YPJeJ0RY5s4g+g
+	GXSmqiqqhlV8bovv8LZ9yrjFyjuyvLWqUcY1Wi3YMTomTDdDjAV3NRStOyw46Y5H
+	F7gk6DsJ8xJlhlNROuv6wZGIb26UewYFA0Q==
+Received: from apblrppmta01.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4d9b9h26x2-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:48 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6328fiAF017839;
+	Thu, 2 Apr 2026 08:41:44 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 4d6qj2w4em-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:44 +0000 (GMT)
+Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6328fixX017834
+	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 08:41:44 GMT
+Received: from hu-devc-hyd-u24-a.qualcomm.com (hu-gmisra-hyd.qualcomm.com [10.213.99.33])
+	by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 6328fh8r017833
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 02 Apr 2026 08:41:44 +0000 (GMT)
+Received: by hu-devc-hyd-u24-a.qualcomm.com (Postfix, from userid 4467585)
+	id 2A82120F8D; Thu,  2 Apr 2026 14:11:43 +0530 (+0530)
+From: Gargi Misra <gmisra@qti.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gargi Misra <gmisra@qti.qualcomm.com>
+Subject: [meta-oe][PATCH] refpolicy-targeted: Updated policy to allow adb push and adb pull through adb shell     - adb push is allowed to /tmp only     - adb pull is allowed on all files
+Date: Thu,  2 Apr 2026 14:11:23 +0530
+Message-ID: <20260402084123.405103-1-gmisra@qti.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAyMDA2OSBTYWx0ZWRfX63aPN+02l9XT
- OUs1DEPMjb6QtgNRVLb+hJS67wLEeClCue2oxajVUSuRv5KMUCJ/qMFiDzVPG68JMSqtkIUQ3PF
- AgtOjOGAgwNENC/lLFM3hB3aDOlJI/RwnS5D1DO5cr1Zj/GP1xJWE//dLhXuPGFAM2OQZhQXWN1
- 5RVkIQX6ri1FAdDxHR8htbs8ry70Mifp0k1F9sTSQjy0MczCTLP3vD78FMOt+MVRaGpt8JVWXLC
- SD6mgL2LDEC2itfbzz0rfFTqFS54BpaR2EP7U05r6O0Mc4qf84U9r5GaC04OBYm+XKaJmJmsO8B
- RJRmCwkgE7f1SUvkjHI5G6/r2iNWIvv3P6nM2EbUbERN90bkoXXhKcAQmZgw3xVu4sCpSmZKm/E
- mP6au6l8JK77ooaM1xd7C9wRELgv7vDIaGl7CY+Sqb2TnJsPDXjMnBSqE0o1iSu2BICKDjFQEVI
- RS+6/B6UnnnDCAIEU8Q==
-X-Proofpoint-ORIG-GUID: NW6FRw6uhhRYzxa2QlvN-82WI-JOfadf
-X-Proofpoint-GUID: NW6FRw6uhhRYzxa2QlvN-82WI-JOfadf
-X-Authority-Analysis: v=2.4 cv=fvrRpV4f c=1 sm=1 tr=0 ts=69ce20bc cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
- a=iKiJcTA2PjBS6x5JeXcw:22 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
- a=Z19y3jHsMdsfte7MjvAA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Authority-Analysis: v=2.4 cv=TqLrRTXh c=1 sm=1 tr=0 ts=69ce2bcc cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=954HIxe3JWwfOQJH:21 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=4rTUgi8V-t1-XIL5bpMA:9
+X-Proofpoint-ORIG-GUID: gFn4xNB3V9g1zae-w1FChfr-KrwDqO_Q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAyMDA3NyBTYWx0ZWRfX958kZsAPwOD4
+ GrUMpSGCJkK4eAFU0KUUSiokGsNz4XrGPEXVJnPLZe3GH+t6LGTrqHht4W4gcfkpZV9Crjd3pHT
+ vp6olRbwzIEeZoFPCaAzWMCLccuSjlNxeRiZ4kB06JyzNTTHTaMvKWmIbvfp8BeSzIYN8eM8va7
+ L9qff3JmrEXyaUIYuHvfErTxJT1FlCpDvMPm2CphlD1BVEilpieX2/nnl0Obqp1Jt++ZQRFejg8
+ K2QrXgHgo8Dvh2DfglBEw8+wl8cgkDzRZ/d+LeThBlh3bPePK6hyPphXX8RTBRnBTJ/DBtV0cvd
+ ARlA4AP8DG2C7acLUHxfpVT0NYKjFgA/foEx3jNjaoUtGKHoHzhTiZbSe6BYjk7djtwPkPlMsN9
+ klIqRqbOIwtFR7xCJ7o+Lmff77glkdsHNfijAkKzBmUNGzjpsYwCq0sUX1TNYaRER8aSIIJrcyY
+ Zwau2tUMSs04uPpVAmA==
+X-Proofpoint-GUID: gFn4xNB3V9g1zae-w1FChfr-KrwDqO_Q
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-02_01,2026-04-02_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 clxscore=1015 impostorscore=0 phishscore=0
- spamscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604020069
+ impostorscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
+ clxscore=1011 malwarescore=0 spamscore=0 adultscore=0 phishscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
+ definitions=main-2604020077
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 07:54:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125962
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 08:41:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125963
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
-
-Fixes issues introduced in commit 16a72067f5 ("python3-ninja: upgrade
-1.11.1.1 -> 1.13.0").
-
-Upstream's __init__.py uses a relative import:
-  from .ninja_syntax import Writer, escape, expand
-
-This requires ninja_syntax.py to be present inside the ninja package
-directory. Upstream relies on CMake (via scikit-build-core) to copy
-ninja_syntax.py from ninja-upstream/misc/ into the package during
-build [1]. Since the OE recipe replaces scikit-build-core with
-setuptools (no-scikit-build.patch), CMake is not invoked and this
-copy does not happen, causing ImportError at runtime.
-
-Similarly, upstream uses scikit-build-core's generate feature to
-create _version.py from the SCM version. With setuptools, this
-does not happen automatically, so generate it in do_configure.
-
-[1] https://github.com/scikit-build/ninja-python-distributions/commit/f3b4a786be
-
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Gargi Misra <gmisra@qti.qualcomm.com>
 ---
- meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../0001-Added-sepolicy-for-adb-service.patch | 36 +++++++++++++------
+ 1 file changed, 25 insertions(+), 11 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb b/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
-index 1591be0912..35a192a268 100644
---- a/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ninja_1.13.0.bb
-@@ -14,6 +14,11 @@ DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch b/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
+index 62f81e4ffb..29d45641d6 100644
+--- a/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
++++ b/meta-oe/dynamic-layers/selinux/recipes-security/refpolicy/refpolicy-targeted/0001-Added-sepolicy-for-adb-service.patch
+@@ -1,6 +1,6 @@
+-From c110d893be565ade574ee2933c6e89197f833006 Mon Sep 17 00:00:00 2001
++From d1c726eb1da3718d05a694222fa0a6a0e944f381 Mon Sep 17 00:00:00 2001
+ From: Gargi Misra <gmisra@qti.qualcomm.com>
+-Date: Thu, 5 Mar 2026 12:39:42 +0530
++Date: Tue, 31 Mar 2026 23:39:22 +0530
+ Subject: [PATCH] refpolicy-targeted: Added sepolicy for adb service
  
- do_install:append () {
- 	rm -rf ${D}${bindir}
-+	install -m 0644 ${S}/ninja-upstream/misc/ninja_syntax.py ${D}${PYTHON_SITEPACKAGES_DIR}/ninja/ninja_syntax.py
-+}
-+
-+do_configure:prepend() {
-+	echo 'version = "${PV}"' > ${S}/src/ninja/_version.py
- }
+     - Labeled adb binary
+@@ -12,15 +12,15 @@ Signed-off-by: Gargi Misra <gmisra@qti.qualcomm.com>
+ ---
+  policy/modules/services/adbd.fc |  5 +++++
+  policy/modules/services/adbd.if |  5 +++++
+- policy/modules/services/adbd.te | 25 +++++++++++++++++++++++++
+- 3 files changed, 35 insertions(+)
++ policy/modules/services/adbd.te | 39 +++++++++++++++++++++++++++++++++
++ 3 files changed, 49 insertions(+)
+  create mode 100644 policy/modules/services/adbd.fc
+  create mode 100644 policy/modules/services/adbd.if
+  create mode 100644 policy/modules/services/adbd.te
  
- RDEPENDS:${PN} = " \
+ diff --git a/policy/modules/services/adbd.fc b/policy/modules/services/adbd.fc
+ new file mode 100644
+-index 000000000..6f5bb9269
++index 000000000..57d4c1d45
+ --- /dev/null
+ +++ b/policy/modules/services/adbd.fc
+ @@ -0,0 +1,5 @@
+@@ -31,7 +31,7 @@ index 000000000..6f5bb9269
+ +
+ diff --git a/policy/modules/services/adbd.if b/policy/modules/services/adbd.if
+ new file mode 100644
+-index 000000000..612fc0106
++index 000000000..d71ab1374
+ --- /dev/null
+ +++ b/policy/modules/services/adbd.if
+ @@ -0,0 +1,5 @@
+@@ -42,10 +42,10 @@ index 000000000..612fc0106
+ +
+ diff --git a/policy/modules/services/adbd.te b/policy/modules/services/adbd.te
+ new file mode 100644
+-index 000000000..f7e8ac7d0
++index 000000000..a58c61c9e
+ --- /dev/null
+ +++ b/policy/modules/services/adbd.te
+-@@ -0,0 +1,25 @@
++@@ -0,0 +1,39 @@
+ +policy_module(adbd)
+ +
+ +########################################
+@@ -64,13 +64,27 @@ index 000000000..f7e8ac7d0
+ +# Minimal Rules Required for adbd service
+ +allow adbd_t self:capability sys_resource;
+ +
+-+domain_interactive_fd(adbd_t)
+ +dev_rw_usbfs(adbd_t)
+-+files_read_etc_files(adbd_t)
+-+files_rw_etc_runtime_files(adbd_t)
+++
+++# Required for semodule on adb shell
+++domain_interactive_fd(adbd_t)
+++
+++# Required for adb pull
+++files_read_all_symlinks(adbd_t)
+++files_read_all_files(adbd_t)
+++
+++# Required for adb push on /tmp
+++files_list_tmp(adbd_t)
+++files_manage_generic_tmp_files(adbd_t)
+++
+ +term_use_ptmx(adbd_t)
+ +term_use_generic_ptys(adbd_t)
+ +
+++
+++
+++
+++
+++
+ -- 
+ 2.43.0
+ 
 -- 
-2.34.1
+2.43.0
 
 
