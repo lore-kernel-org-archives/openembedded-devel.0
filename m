@@ -1,672 +1,293 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FE3ACC6B01
-	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 04:14:54 +0000 (UTC)
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8675.1775103284938313986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44A89CC6B01
+	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 04:49:14 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8989.1775105345823204474
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2026 21:14:45 -0700
+ Wed, 01 Apr 2026 21:49:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=glVHVAMd;
- spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-79853c0f5b9so6811327b3.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 21:14:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775103284; cv=none;
-        d=google.com; s=arc-20240605;
-        b=XBsNzcG9Dt2oIv01Q0HLIsjHWwolnhiDeDIDoWfofcbYvNcWNI3NokSti8t6yYh1e2
-         PWTumoWtUjOhtAFwEE87k5dWsEcSiRc823D+l0FAnzjZrY6ifvjgACglnsEiXeAzs32Y
-         /7nFV9fctWTVWK4W94Gh3E5OTVKg2jDxV7U8nMONX4vaFzeoeesOcyvYj5tMkeE8dZwn
-         T+m23LVPs8VgWO5U3cXcFoSmqu5UnIMUq/MV1FYGVF95EkKqjs9RA+EP0GwO43Sa/vaa
-         aEEtHPzwDy0iNkjSNADZX8ZSzj4GSRqC+mtJaFa5rsHOdigBCHosX2k+aMAHHxk1ERcW
-         68CQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=ai8KZWizzGQ9SVOzDB7njlEYYNH+GU6acBKRdY5b+WU=;
-        fh=sQq4UwMItvi2zQkbQsQ7gG/lHqOQ30Mc0djsN0hkevw=;
-        b=k/UdlWhiyrEBVwM9kkDuIZu4DI9MFfJfaT54XlessyENJUvmCIjG+oxoHSNXi+PpdC
-         mLzVbH3xCurJrlGDTkcw8uaJd14G/3vZx5v/mcrpAi/TXVsxN7hZWDNekmsE1Tbfqm6c
-         rZQ4ELqXaLs+WLSLng2luC149YrM7cItwA128jeYnOIJuABLQeVNpPGSADd2h93/nMJM
-         7RE/uUUubf48UyF8OSZCKUCDOsg/ZdKLhwWfU7icBrN/Zn61i55/3OUoq1VswjQb9sLO
-         DOAo1o6soCAsmRwIOu8difr++tJtJIAXM3YzspLo5bEP2tZAmzsHTRp5i5jDfSQy4gG1
-         orRg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=VFhRsvcK;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-43cf7683a28so260336f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2026 21:49:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775103284; x=1775708084; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ai8KZWizzGQ9SVOzDB7njlEYYNH+GU6acBKRdY5b+WU=;
-        b=glVHVAMdtjFSIQoMvCFaa/KhH0s3HH5Yj1fq3wSUNMFTfTTJOAZwqlbAUvCNulxt3P
-         XhqzM/kfFwbid7aaB7rMljbhVvcs0k9t75GqljEI4x/pTdTSHLpntxyV5EWthiOmqBzi
-         d1jIDWXyjHE7/0JgfouCR/2X6bgoIf45+ZtEnrhiHXTmmp82Agmp2c/Aj/bc1dCykCkP
-         gELtFpkbrStoo5Xquw3kJF/+L5GHZkcY6w9v8Np6d0BvECltFa5BITdLR3jOGFbAIZIt
-         //4jRgODxN3ZYIZgb4H5mblHCyghTOK8Z3BFWhnTKrP+veViCZGnNNHEKcEA4tpueJ3K
-         SijQ==
+        d=gmail.com; s=20251104; t=1775105344; x=1775710144; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=yioMWOCAjk6PVdjd8MrGCia6q+0Rhk8ciDoSEY6Cm+g=;
+        b=VFhRsvcKysM6Dsge4yRAXaA0HMLOdrKpQuSm5IXsHj9MUbokO1bB/pmQtWH/NBcPie
+         pUuNNkhOsXDFJtYvA4gAq2fq+EUu8seOEoNBRcSuE5uwM3CJ9NT2jartrDSbk8r+isLU
+         RpEHw9X0lK0rBygup1/z5l9RrBn+niw0md++Lidy4vzOubVAUtv22MagdtlfbRIUHMgJ
+         aIfGN82GxQuvrQPFH4p7jl8v3sebs5KNwPThFX6JtWiVLffEec6Mo9CO0OKg6N7HESv6
+         yzcIxysy9Da8U/4CahRSo6rGcwnzaZsaw+o7r2kaYwnwBNf0xKU2OsGxvKYD5izWxNEv
+         Hpfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775103284; x=1775708084;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ai8KZWizzGQ9SVOzDB7njlEYYNH+GU6acBKRdY5b+WU=;
-        b=Eu5Ep5WKojShvNzJdrIetkd+91afWOGjMGJgP0/eT35vjCJFwrJgY8nOeSW1cJGqOV
-         qUojrj6t72M3UJzQls5AD3J2MDDy7hYOTukBPBCTHj8QO5rkrAAHFsxmGjjQnB/z/G2Y
-         hwlOHrLxQMSMSQefhDZhqmCuAbcK1gtMeTSancSsRi7msLkjeUnBo/28j2NiWgrPAQco
-         Yx+yvkwcOdz2jd8au0x/cOKbamCnZ/xHXyQnc+Z402e54HzN7CSgs3qSMkMymCXRFnDl
-         LKlG7CUq2w/mCdH5H5xkLEiVGlHex/2B9mYynH5WtI7HEV541K4g+WfBzZBOp8ppD1K+
-         CBHw==
-X-Gm-Message-State: AOJu0YzARg3XimiIHx2UR67XTGSMtub8A2/sHdFWl543DZvjzGNRbsyi
-	tsfVKTCWXbtt6c57AqwHNwdlqbNrXyBTkBIQBPSgoNO7UUP2l97hA6qQrcJ9DI9eurIq0Aix+yV
-	E89I1QnlNYiMT/XtD1RLNJ05VDK9yJpEkcNsu
-X-Gm-Gg: AeBDiesS6FXobNlaBe9oANV7xzW/d3zIevjstn2dAr+oE7nKhpBsrAiqWDBv41a/CjG
-	LbQuluQnQdaGhXVqPZwiMrTgG8wQwA17cO64jLCm3L3Wpir4b0wSd3W8WwJIw2Uj6z5ndGL66oh
-	vbIhbS+BWAUphyf6c0eRAo7O/eGeuvdAju5GQP/UX89R8yvn4XHBSlQmCWK1s5ouD6WEOSi6QK8
-	Z7VcAMhTJIrNoNZ00Q3xDdFlfbHcf3NcsFqjApDShTeO6OLET36p+1UyCZAlMWZF8L/9cIA2OHh
-	ZKCmgzJ2XcxoK9cFs0LQF6Ljg9tnYOE8CT42+jDOdA/BOX3cPwZ4tAc3bMvgJTPyf/0x46u+8zh
-	WZZ3yzq+VYH+T7zOL7HODgLKH
-X-Received: by 2002:a05:690e:190d:b0:650:379f:3580 with SMTP id
- 956f58d0204a3-650379f38a8mr4119126d50.21.1775103283713; Wed, 01 Apr 2026
- 21:14:43 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775105344; x=1775710144;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yioMWOCAjk6PVdjd8MrGCia6q+0Rhk8ciDoSEY6Cm+g=;
+        b=ZefTnVQWBVO3xx0oPS1mNYNSaxPbGrhuDaS+nI9/w2tGHSDjGIn+4YY2wD+KTi9/PX
+         4WlckxUCbu2BWaINNWYOTcYvalnjprh8Jwjr67DgkC94CnzSoVPc94kroZMgiSfvWMvK
+         MdKuxasU4kKGDngm1ATNS5Ufgepw1TLD2vGtchtfSUDjkOsW9lJqbeyWxZmP+hS9/Lf9
+         Dx4e/JI0IuIjmMRnnRo3Zt4tgpGh8k2UuW9mAJ3QnnhO3g14coeqG4s3dtH3P/M3v2M3
+         CkIIY0FHGLvuaIHhjv8o1AfiLUw1ooHT2OGzmg14EQ9aZzrqoCs+6fXjZpFLxpfxN95c
+         jZPA==
+X-Forwarded-Encrypted: i=1; AJvYcCVfZHsIjFTkqEDOLJikes3SGhukZ89DC4H/TXSbOmeqm/l7zcTYF8Km7ItyocPwHcEUq51nw5kyRMLMTgf6Bkhw3zg=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxDFsBfG6wHq0GVCqA09WfKqapxLVIUB1tL0MT2o8AiSAdUp3mK
+	eACK53vpYateY86ryn4Y5+QnVUI6K8x3e9ATC8dhKie8CCPSvK30Hb2o
+X-Gm-Gg: ATEYQzx2byh868XGwftG7czGnNf4PYblnQTDpYC2bbitk64o+5urGblbIZxtLQx7vvP
+	DnBjWkavK1GMJaK1fwB2iCuEo+ibG3UqDLQLiB8CjU0zF3lpXi7R0ShcaArFDZmt+DNquje7RGp
+	E9ed/TFi4b0VGD6WE1/a+0J3oqxE3XB9YhkKToDaFmqC4QCBr4liHD8uXWkc2quS4IPaAXsn7ZD
+	GD3gwxhvootmVf+6Qw7Ahb9E+V4FwPXUpHNCNZVJ/yJhGgEH66n6/nrpbC86svPowBOlUn2TSz/
+	YTJ8OI11jYVCaUuc9I8Yq99OuZiAscgvqppmqA0mxMmzk4ItNxZZ3qzCepLlU69o+5h91eIenuL
+	ZqFEYSI8WNSceoSERxqPX7xvFdB6YBGbm/Pyrw8hvWqfmo2YFXb4UGeoshJ1oe/XXiZASA6XCoe
+	ZWfwRYnf7f2MGqY/1WChhKHN4tuV+nKqQ=
+X-Received: by 2002:a05:6000:2886:b0:43c:fbfa:20a0 with SMTP id ffacd0b85a97d-43d150da527mr11931402f8f.25.1775105343792;
+        Wed, 01 Apr 2026 21:49:03 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43d1e4f1a99sm5330478f8f.32.2026.04.01.21.49.01
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Apr 2026 21:49:03 -0700 (PDT)
+Message-ID: <3c569855-52ed-4d3b-9e76-e646b5cb2802@gmail.com>
+Date: Thu, 2 Apr 2026 06:49:01 +0200
 MIME-Version: 1.0
-References: <cover.1775010235.git.anuj.mittal@oss.qualcomm.com>
-In-Reply-To: <cover.1775010235.git.anuj.mittal@oss.qualcomm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 1 Apr 2026 21:14:16 -0700
-X-Gm-Features: AQROBzAm0lfFj6L2RNh8BIlPlxwwzxXvGhVExAAA_XpZMExQywv-yAkCGoZHpac
-Message-ID: <CAMKF1srtaDLz7kx1Bdk-rrhQUw8r8qboZX6mugnN-PnOfVZkoQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 00/30] Whinlatter pull request
-To: anuj.mittal@oss.qualcomm.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000aa590d064e7270dc"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH v2 0/2] android-tools: migration and cleanup
+To: git-patches@bmwtechworks.in, openembedded-devel@lists.openembedded.org
+Cc: Ashish Kumar Mishra <ashishkumar.mishra@bmwtechworks.in>,
+ Khem Raj <raj.khem@gmail.com>
+References: <20260320052813.3323280-1-git-patches@bmwtechworks.in>
+ <20260330100744.739123-1-git-patches@bmwtechworks.in>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <20260330100744.739123-1-git-patches@bmwtechworks.in>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 04:14:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125957
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 04:49:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125958
 
---000000000000aa590d064e7270dc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Khem,
 
-Thanks Anuj, this is installed now.
+Got any opinion on this one?
 
-On Tue, Mar 31, 2026 at 11:08=E2=80=AFPM Anuj Mittal via lists.openembedded=
-.org
-<anuj.mittal=3Doss.qualcomm.com@lists.openembedded.org> wrote:
 
-> Please merge these changes in whinlatter. Tested locally and on
-> autobuilder.
->
-> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1420
->
-> The following changes since commit
-> 6f989b75a08aacdcec1edb761da5559d3443c1ef:
->
->   postfix: upgrade 3.10.6 -> 3.10.8 (2026-03-09 17:14:08 +0530)
->
-> are available in the Git repository at:
->
->   https://git.openembedded.org/meta-openembedded-contrib
-> stable/whinlatter-next
->
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/wh=
-inlatter-next
->
-> for you to fetch changes up to 8bcdb0cc1dab116253b409e78fb868ced7d8397c:
->
->   bluealsa: fix QA issue staticdev (2026-03-26 10:31:48 +0530)
->
-> ----------------------------------------------------------------
->
-> Ankur Tyagi (4):
->   zfs: upgrade 2.2.8 -> 2.2.9
->   php: upgrade 8.4.18 -> 8.4.19
->   python3-pyjwt: Fix CVE-2026-32597
->   python3-tornado: upgrade 6.5.4 -> 6.5.5
->
-> Aviv Daum (1):
->   lldpd: fix xml PACKAGECONFIG dependency
->
-> Bartosz Golaszewski (1):
->   python3-gpiod: update to v2.4.1
->
-> Deepak Rathore (1):
->   libssh: Fix CVE-2026-3731
->
-> Gyorgy Sarvari (14):
->   packagegroups: fix foldername
->   owfs: upgrade 3.2p3 -> 3.2p4
->   python3-django: upgrade 5.2.11 -> 5.2.12
->   python3-django: upgrade 4.2.28 -> 4.2.29
->   ettercap: patch CVE-2026-3603
->   exiv2: patch CVE-2026-25884
->   exiv2: patch CVE-2026-27596
->   exiv2: patch CVE-2026-27631
->   hiawatha: fix SRC_URI
->   pcp: fix SRC_URI
->   capnproto: patch CVE-2026-32239 and CVE-2026-32240
->   imagemagick: upgrade 7.1.2-16 -> 7.1.2-17
->   python3-marshmallow: mark CVE-2025-68480 patched
->   libde265: patch CVE-2025-61147
->
-> Liu Yiding (1):
->   btrfsmaintenance: upgrade 0.5 -> 0.5.2
->
-> Matthias Proske (1):
->   bluealsa: fix QA issue staticdev
->
-> Mingli Yu (1):
->   mariadb: Upgrade 11.4.9 -> 11.4.10
->
-> Peter Kjellerstedt (1):
->   bpftrace: Update the runtime dependencies
->
-> Sujeet Nayak (1):
->   libnice: make crypto library configurable via PACKAGECONFIG
->
-> Wang Mingyu (4):
->   ser2net: upgrade 4.6.6 -> 4.6.7
->   imagemagick: upgrade 7.1.2-15 -> 7.1.2-16
->   jasper: upgrade 4.2.8 -> 4.2.9
->   imapfilter: upgrade 2.8.3 -> 2.8.5
->
->  .../owfs/0001-Add-build-rule-for-README.patch |   6 +-
->  .../0001-Fix-compilation-with-GCC10.patch     |  44 -----
->  .../owfs/{owfs_3.2p3.bb =3D> owfs_3.2p4.bb}     |   7 +-
->  .../packagegroup-meta-filesystems.bb          |   0
->  ...Define-strndupa-if-it-does-not-exist.patch |   5 +-
->  ...arch64-inline-assembly-for-gcc-13.1.patch} |   6 +-
->  ...admmap-Replace-uint_t-with-uint32_t.patch} |  11 +-
->  ...e-sys-stat.h-instead-of-linux-stat.h.patch |  83 +++++++++
->  .../zfs/{zfs_2.2.8.bb =3D> zfs_2.2.9.bb}        |   9 +-
->  ...nance_0.5.bb =3D> btrfsmaintenance_0.5.2.bb} |   4 +-
->  ...change-sysconfig-path-to-etc-default.patch |  18 +-
->  .../bluealsa/bluealsa_4.3.0.bb                |   1 +
->  .../libde265/libde265/CVE-2025-61147.patch    |  84 +++++++++
->  .../libde265/libde265_1.0.16.bb               |   4 +-
->  .../recipes-daemons/lldpd/lldpd_1.0.20.bb     |   2 +-
->  .../ettercap/ettercap/CVE-2026-3606.patch     |  48 ++++++
->  .../ettercap/ettercap_0.8.3.1.bb              |   4 +-
->  .../bpftrace/bpftrace_0.24.1.bb               |  11 +-
->  .../{ser2net_4.6.6.bb =3D> ser2net_4.6.7.bb}    |   2 +-
->  ...ve_11.4.9.bb =3D> mariadb-native_11.4.10.bb} |   0
->  meta-oe/recipes-dbs/mysql/mariadb.inc         |   4 +-
->  ...info-t-fails-for-certain-TZ-values-o.patch |  47 -----
->  ...move-x86-specific-loop-in-my_convert.patch |  93 ----------
->  .../{mariadb_11.4.9.bb =3D> mariadb_11.4.10.bb} |   0
->  .../CVE-2026-32239_CVE-2026-32240.patch       | 160 ++++++++++++++++++
->  .../capnproto/capnproto_1.0.2.bb              |   4 +-
->  .../php/{php_8.4.18.bb =3D> php_8.4.19.bb}      |   2 +-
->  .../{jasper_4.2.8.bb =3D> jasper_4.2.9.bb}      |   2 +-
->  .../exiv2/exiv2/CVE-2026-25884-1.patch        |  69 ++++++++
->  .../exiv2/exiv2/CVE-2026-25884-2.patch        |  25 +++
->  .../exiv2/exiv2/CVE-2026-27596-1.patch        |  71 ++++++++
->  .../exiv2/exiv2/CVE-2026-27596-2.patch        |  24 +++
->  .../exiv2/exiv2/CVE-2026-27631-1.patch        |  63 +++++++
->  .../exiv2/exiv2/CVE-2026-27631-2.patch        |  26 +++
->  meta-oe/recipes-support/exiv2/exiv2_0.28.7.bb |  11 +-
->  ...ck_7.1.2-15.bb =3D> imagemagick_7.1.2-17.bb} |   2 +-
->  ...mapfilter_2.8.3.bb =3D> imapfilter_2.8.5.bb} |   4 +-
->  .../recipes-support/libnice/libnice_0.1.23.bb |   5 +-
->  .../libssh/libssh/CVE-2026-3731_p1.patch      |  35 ++++
->  .../libssh/libssh/CVE-2026-3731_p2.patch      | 102 +++++++++++
->  .../recipes-support/libssh/libssh_0.11.3.bb   |   2 +
->  meta-oe/recipes-support/pcp/pcp.inc           |   2 +-
->  ...ngo_4.2.28.bb =3D> python3-django_4.2.29.bb} |   2 +-
->  ...ngo_5.2.11.bb =3D> python3-django_5.2.12.bb} |   2 +-
->  ...-gpiod_2.4.0.bb =3D> python3-gpiod_2.4.1.bb} |   8 +-
->  .../python/python3-marshmallow_4.1.2.bb       |   2 +
->  .../python/python3-pyjwt/CVE-2026-32597.patch |  79 +++++++++
->  .../python/python3-pyjwt_2.10.1.bb            |   2 +
->  ...nado_6.5.4.bb =3D> python3-tornado_6.5.5.bb} |   2 +-
->  .../recipes-httpd/hiawatha/hiawatha_11.7.bb   |   2 +-
->  50 files changed, 952 insertions(+), 249 deletions(-)
->  delete mode 100644
-> meta-filesystems/recipes-filesystems/owfs/owfs/0001-Fix-compilation-with-=
-GCC10.patch
->  rename meta-filesystems/recipes-filesystems/owfs/{owfs_3.2p3.bb =3D>
-> owfs_3.2p4.bb} (96%)
->  rename meta-filesystems/recipes-filesystems/{packageconfigs =3D>
-> packagegroups}/packagegroup-meta-filesystems.bb (100%)
->  rename
-> meta-filesystems/recipes-filesystems/zfs/zfs/{aaf28a4630af60496c9d33db1d0=
-6a7d7d8983422.patch
-> =3D> 0002-fixes-broken-aarch64-inline-assembly-for-gcc-13.1.patch} (94%)
->  rename
-> meta-filesystems/recipes-filesystems/zfs/zfs/{0001-fs-tests-cmd-readmmap-=
-Replace-uint_t-with-uint32_t.patch
-> =3D> 0003-fs-tests-cmd-readmmap-Replace-uint_t-with-uint32_t.patch} (83%)
->  create mode 100644
-> meta-filesystems/recipes-filesystems/zfs/zfs/0004-linux-use-sys-stat.h-in=
-stead-of-linux-stat.h.patch
->  rename meta-filesystems/recipes-filesystems/zfs/{zfs_2.2.8.bb =3D>
-> zfs_2.2.9.bb} (91%)
->  rename meta-filesystems/recipes-utils/btrfsmaintenance/{
-> btrfsmaintenance_0.5.bb =3D> btrfsmaintenance_0.5.2.bb} (96%)
->  create mode 100644
-> meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2025-61147.patch
->  create mode 100644
-> meta-networking/recipes-support/ettercap/ettercap/CVE-2026-3606.patch
->  rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.6.6.bb =3D>
-> ser2net_4.6.7.bb} (91%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_11.4.9.bb =3D>
-> mariadb-native_11.4.10.bb} (100%)
->  delete mode 100644
-> meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-38029-my_tzinfo-t-fails-for-c=
-ertain-TZ-values-o.patch
->  delete mode 100644
-> meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-specific-loop-in-my_con=
-vert.patch
->  rename meta-oe/recipes-dbs/mysql/{mariadb_11.4.9.bb =3D> mariadb_11.4.10=
-.bb}
-> (100%)
->  create mode 100644
-> meta-oe/recipes-devtools/capnproto/capnproto/CVE-2026-32239_CVE-2026-3224=
-0.patch
->  rename meta-oe/recipes-devtools/php/{php_8.4.18.bb =3D> php_8.4.19.bb}
-> (99%)
->  rename meta-oe/recipes-graphics/jasper/{jasper_4.2.8.bb =3D>
-> jasper_4.2.9.bb} (92%)
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-1.patch
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884-2.patch
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27596-1.patch
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27596-2.patch
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-1.patch
->  create mode 100644
-> meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631-2.patch
->  rename meta-oe/recipes-support/imagemagick/{imagemagick_7.1.2-15.bb =3D>
-> imagemagick_7.1.2-17.bb} (99%)
->  rename meta-oe/recipes-support/imapfilter/{imapfilter_2.8.3.bb =3D>
-> imapfilter_2.8.5.bb} (80%)
->  create mode 100644
-> meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p1.patch
->  create mode 100644
-> meta-oe/recipes-support/libssh/libssh/CVE-2026-3731_p2.patch
->  rename meta-python/recipes-devtools/python/{python3-django_4.2.28.bb =3D=
->
-> python3-django_4.2.29.bb} (79%)
->  rename meta-python/recipes-devtools/python/{python3-django_5.2.11.bb =3D=
->
-> python3-django_5.2.12.bb} (60%)
->  rename meta-python/recipes-devtools/python/{python3-gpiod_2.4.0.bb =3D>
-> python3-gpiod_2.4.1.bb} (74%)
->  create mode 100644
-> meta-python/recipes-devtools/python/python3-pyjwt/CVE-2026-32597.patch
->  rename meta-python/recipes-devtools/python/{python3-tornado_6.5.4.bb =3D=
->
-> python3-tornado_6.5.5.bb} (93%)
->
-> --
-> 2.53.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+On 3/30/26 12:07, Ashish Kumar Mishra via lists.openembedded.org wrote:
+> From: Ashish Kumar Mishra <ashishkumar.mishra@bmwtechworks.in>
+> 
+> Following the feedback on the initial RFC, the logic has been split into two 
+> distinct commits to improve clarity and maintainability:
+> 
+> 1. Removal of the legacy android-tools 5.x version from meta-oe/recipes-devtools.
+> 2. Migration of android-tools v29.x from dynamic-layers/selinux to meta-oe.
+> 
+> This ensures the newer version is correctly positioned in meta-oe while 
+> cleaning up the deprecated 5.x recipe.
+> 
+> Ashish Kumar Mishra (2):
+>   android-tools: remove android-tools 5.x from meta-oe/recipes-devtools
+>   android-tools: move android-tools v29.x from dynamic-layers/selinux to
+>     meta-oe
+> 
+>  .../android-tools-conf/android-gadget-setup   |  37 --
+>  .../android-tools/android-tools-conf_1.0.bb   |  20 -
+>  .../android-tools/android-tools/adbd.mk       |  87 -----
+>  .../android-tools/android-tools-adbd.service  |  13 -
+>  .../10-adbd-configfs.conf                     |   4 -
+>  .../android-gadget-cleanup                    |  24 --
+>  .../android-gadget-setup                      |  38 --
+>  .../android-gadget-start                      |   9 -
+>  .../android-tools-conf-configfs_1.0.bb        |  38 --
+>  .../android-tools/android-tools-conf_1.0.bb   |   4 +-
+>  .../0001-Fixes-for-yocto-build.patch          |   0
+>  .../0001-liblp-fix-building-with-GCC-14.patch |   0
+>  ...difications-to-make-it-build-in-yoct.patch |   0
+>  ...usbdevfs_urb-to-match-new-kernel-UAP.patch |   0
+>  ...-adb-Fix-build-on-big-endian-systems.patch |   0
+>  ...005-adb-Allow-adbd-to-be-run-as-root.patch |   0
+>  .../android-tools/android-tools/adb.mk        |  72 ----
+>  .../android-tools/android-tools/adbd.mk       | 247 +++++-------
+>  ...scv-Add-risc-v-Android-config-header.patch | 361 ------------------
+>  .../0001-adb-remove-selinux-extensions.patch  |  44 ---
+>  ...define-strlcpy-for-glibc-based-syste.patch |  35 --
+>  ...-Use-local-sockets-where-appropriate.patch |  70 ----
+>  .../core/0003-adb-define-shell-command.patch  |  29 --
+>  ...-adb-Fix-build-on-big-endian-systems.patch |  47 ---
+>  .../0005-adb-add-base64-implementation.patch  | 350 -----------------
+>  .../core/0006-adb-Musl-fixes.patch            | 130 -------
+>  ...sb_linux.c-fix-build-with-glibc-2.28.patch |  26 --
+>  ...008-adb-Allow-adbd-to-be-ran-as-root.patch |  23 --
+>  ...Add-dt-parameter-to-specify-DT-image.patch | 110 ------
+>  ...ux-capability.h-on-linux-systems-too.patch |  23 --
+>  .../0011-Remove-bionic-specific-calls.patch   |  64 ----
+>  ...laration-of-stlcat-strlcopy-function.patch |  50 ---
+>  .../core/0013-adb-Support-riscv64.patch       | 191 ---------
+>  ...add-u3-ss-descriptor-support-for-adb.patch | 344 -----------------
+>  ...off-most-of-sparse_file_read_normal-.patch |  60 ---
+>  ...se-Add-hole-mode-to-sparse_file_read.patch | 188 ---------
+>  ...port-for-converting-holes-to-don-t-c.patch | 114 ------
+>  .../android-tools/core/adb_libssl_11.diff     |  48 ---
+>  .../core/b64_pton_function_decl.patch         |  14 -
+>  .../debian/Add-riscv64-support.patch          |   0
+>  .../debian/Added-missing-headers.patch        |   0
+>  .../android-tools/debian/Nonnull.patch        |   0
+>  .../android-tools/debian/Vector-cast.patch    |   0
+>  .../debian/add-missing-headers.patch          |   0
+>  .../20150704-CVE-2015-3239_dwarf_i.h.patch    |   0
+>  .../legacy_built-in_sync_functions.patch      |   0
+>  ...nd-fix-strchr-conformance-to-ISO-C23.patch |   0
+>  ...unreachable-macro-to-avoid-redefinit.patch |   0
+>  .../external/libunwind/user_pt_regs.patch     |   0
+>  .../debian/fix-attribute-issue-with-gcc.patch |   0
+>  .../debian/fix-build-on-non-x86.patch         |   0
+>  .../fix-gettid-exception-declaration.patch    |   0
+>  .../fix-standard-namespace-errors.patch       |   0
+>  .../debian/hard-code-build-number.patch       |   0
+>  .../debian/libusb-header-path.patch           |   0
+>  .../debian/move-log-file-to-proper-dir.patch  |   0
+>  .../debian/simg_dump-python3.patch            |   0
+>  .../android-tools/debian/stdatomic.patch      |   0
+>  .../debian/stub-out-fastdeploy.patch          |   0
+>  .../system/core/Add-riscv64-support.patch     |   0
+>  .../system/core/Added-missing-headers.patch   |   0
+>  .../debian/system/core/Nonnull.patch          |   0
+>  .../debian/system/core/Vector-cast.patch      |   0
+>  .../system/core/add-missing-headers.patch     |   0
+>  ...ope-write-macro-to-prevent-conflict-.patch |   0
+>  .../core/fix-attribute-issue-with-gcc.patch   |   0
+>  .../system/core/fix-build-on-non-x86.patch    |   0
+>  .../fix-gettid-exception-declaration.patch    |   0
+>  .../core/fix-standard-namespace-errors.patch  |   0
+>  .../system/core/hard-code-build-number.patch  |   0
+>  .../system/core/libusb-header-path.patch      |   0
+>  ...x-missing-fixed-width-integer-types-.patch |   0
+>  .../core/move-log-file-to-proper-dir.patch    |   0
+>  .../system/core/simg_dump-python3.patch       |   0
+>  .../debian/system/core/stdatomic.patch        |   0
+>  .../system/core/stub-out-fastdeploy.patch     |   0
+>  .../core/throw-exception-on-unknown-os.patch  |   0
+>  .../throw-exception-on-unknown-os.patch       |   0
+>  .../android-tools/android-tools/ext4_utils.mk | 103 -----
+>  ...ext4_utils-remove-selinux-extensions.patch |  39 --
+>  ...add-o-argument-to-preserve-ownership.patch |  78 ----
+>  ...unused-parameter-from-allocate_inode.patch |  69 ----
+>  .../android-tools/android-tools/fastboot.mk   |  89 -----
+>  .../android-tools/android-tools/gitignore     |  59 ---
+>  .../0001-Remove-bionic-specific-calls.patch   |  25 --
+>  ...t-define-gettid-if-glibc-2.30-is-use.patch |  51 ---
+>  .../android-tools/android-tools/mkbootimg.mk  |  29 --
+>  .../android-tools/android-tools/remount       |   0
+>  .../android-tools/rules_yocto.mk              |   0
+>  .../android-tools/android-tools_29.0.6.r14.bb |   7 +-
+>  .../android-tools/android-tools_5.1.1.r37.bb  | 189 ---------
+>  91 files changed, 92 insertions(+), 3560 deletions(-)
+>  delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf/android-gadget-setup
+>  delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb
+>  delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/adbd.mk
+>  delete mode 100644 meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/android-tools-adbd.service
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0001-Fixes-for-yocto-build.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch (100%)
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/adb.mk
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/build/0001-Riscv-Add-risc-v-Android-config-header.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0001-adb-remove-selinux-extensions.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0002-adb-Use-local-sockets-where-appropriate.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0003-adb-define-shell-command.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0004-adb-Fix-build-on-big-endian-systems.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0005-adb-add-base64-implementation.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0006-adb-Musl-fixes.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0008-adb-Allow-adbd-to-be-ran-as-root.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0010-Use-linux-capability.h-on-linux-systems-too.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0011-Remove-bionic-specific-calls.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0013-adb-Support-riscv64.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/b64_pton_function_decl.patch
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Add-riscv64-support.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Added-missing-headers.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Nonnull.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Vector-cast.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/add-missing-headers.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-build-on-non-x86.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-standard-namespace-errors.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/hard-code-build-number.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/libusb-header-path.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/simg_dump-python3.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/stdatomic.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/stub-out-fastdeploy.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Added-missing-headers.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Nonnull.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Vector-cast.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/add-missing-headers.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/hard-code-build-number.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/libusb-header-path.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/simg_dump-python3.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/stdatomic.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch (100%)
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/ext4_utils.mk
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0001-ext4_utils-remove-selinux-extensions.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/fastboot.mk
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/gitignore
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-Remove-bionic-specific-calls.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/mkbootimg.mk
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/remount (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/rules_yocto.mk (100%)
+>  rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools_29.0.6.r14.bb (96%)
+>  delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#125896):
-> https://lists.openembedded.org/g/openembedded-devel/message/125896
-> Mute This Topic: https://lists.openembedded.org/mt/118610707/1997914
+> View/Reply Online (#125864): https://lists.openembedded.org/g/openembedded-devel/message/125864
+> Mute This Topic: https://lists.openembedded.org/mt/118576547/6084445
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
---000000000000aa590d064e7270dc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks Anuj, this is installed now.</div><br><div class=3D=
-"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
-n Tue, Mar 31, 2026 at 11:08=E2=80=AFPM Anuj Mittal via <a href=3D"http://l=
-ists.openembedded.org">lists.openembedded.org</a> &lt;anuj.mittal=3D<a href=
-=3D"mailto:oss.qualcomm.com@lists.openembedded.org">oss.qualcomm.com@lists.=
-openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">Please merge these changes in whinlatter. Tested locally an=
-d on<br>
-autobuilder.<br>
-<br>
-<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
-ds/1420" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
-ect.org/valkyrie/#/builders/81/builds/1420</a><br>
-<br>
-The following changes since commit 6f989b75a08aacdcec1edb761da5559d3443c1ef=
-:<br>
-<br>
-=C2=A0 postfix: upgrade 3.10.6 -&gt; 3.10.8 (2026-03-09 17:14:08 +0530)<br>
-<br>
-are available in the Git repository at:<br>
-<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
-el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
-mbedded-contrib</a> stable/whinlatter-next<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
-g/?h=3Dstable/whinlatter-next" rel=3D"noreferrer" target=3D"_blank">https:/=
-/git.openembedded.org/meta-openembedded-contrib/log/?h=3Dstable/whinlatter-=
-next</a><br>
-<br>
-for you to fetch changes up to 8bcdb0cc1dab116253b409e78fb868ced7d8397c:<br=
->
-<br>
-=C2=A0 bluealsa: fix QA issue staticdev (2026-03-26 10:31:48 +0530)<br>
-<br>
-----------------------------------------------------------------<br>
-<br>
-Ankur Tyagi (4):<br>
-=C2=A0 zfs: upgrade 2.2.8 -&gt; 2.2.9<br>
-=C2=A0 php: upgrade 8.4.18 -&gt; 8.4.19<br>
-=C2=A0 python3-pyjwt: Fix CVE-2026-32597<br>
-=C2=A0 python3-tornado: upgrade 6.5.4 -&gt; 6.5.5<br>
-<br>
-Aviv Daum (1):<br>
-=C2=A0 lldpd: fix xml PACKAGECONFIG dependency<br>
-<br>
-Bartosz Golaszewski (1):<br>
-=C2=A0 python3-gpiod: update to v2.4.1<br>
-<br>
-Deepak Rathore (1):<br>
-=C2=A0 libssh: Fix CVE-2026-3731<br>
-<br>
-Gyorgy Sarvari (14):<br>
-=C2=A0 packagegroups: fix foldername<br>
-=C2=A0 owfs: upgrade 3.2p3 -&gt; 3.2p4<br>
-=C2=A0 python3-django: upgrade 5.2.11 -&gt; 5.2.12<br>
-=C2=A0 python3-django: upgrade 4.2.28 -&gt; 4.2.29<br>
-=C2=A0 ettercap: patch CVE-2026-3603<br>
-=C2=A0 exiv2: patch CVE-2026-25884<br>
-=C2=A0 exiv2: patch CVE-2026-27596<br>
-=C2=A0 exiv2: patch CVE-2026-27631<br>
-=C2=A0 hiawatha: fix SRC_URI<br>
-=C2=A0 pcp: fix SRC_URI<br>
-=C2=A0 capnproto: patch CVE-2026-32239 and CVE-2026-32240<br>
-=C2=A0 imagemagick: upgrade 7.1.2-16 -&gt; 7.1.2-17<br>
-=C2=A0 python3-marshmallow: mark CVE-2025-68480 patched<br>
-=C2=A0 libde265: patch CVE-2025-61147<br>
-<br>
-Liu Yiding (1):<br>
-=C2=A0 btrfsmaintenance: upgrade 0.5 -&gt; 0.5.2<br>
-<br>
-Matthias Proske (1):<br>
-=C2=A0 bluealsa: fix QA issue staticdev<br>
-<br>
-Mingli Yu (1):<br>
-=C2=A0 mariadb: Upgrade 11.4.9 -&gt; 11.4.10<br>
-<br>
-Peter Kjellerstedt (1):<br>
-=C2=A0 bpftrace: Update the runtime dependencies<br>
-<br>
-Sujeet Nayak (1):<br>
-=C2=A0 libnice: make crypto library configurable via PACKAGECONFIG<br>
-<br>
-Wang Mingyu (4):<br>
-=C2=A0 ser2net: upgrade 4.6.6 -&gt; 4.6.7<br>
-=C2=A0 imagemagick: upgrade 7.1.2-15 -&gt; 7.1.2-16<br>
-=C2=A0 jasper: upgrade 4.2.8 -&gt; 4.2.9<br>
-=C2=A0 imapfilter: upgrade 2.8.3 -&gt; 2.8.5<br>
-<br>
-=C2=A0.../owfs/0001-Add-build-rule-for-README.patch |=C2=A0 =C2=A06 +-<br>
-=C2=A0.../0001-Fix-compilation-with-GCC10.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-44 -----<br>
-=C2=A0.../owfs/{<a href=3D"http://owfs_3.2p3.bb" rel=3D"noreferrer" target=
-=3D"_blank">owfs_3.2p3.bb</a> =3D&gt; <a href=3D"http://owfs_3.2p4.bb" rel=
-=3D"noreferrer" target=3D"_blank">owfs_3.2p4.bb</a>}=C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 =C2=A07 +-<br>
-=C2=A0.../<a href=3D"http://packagegroup-meta-filesystems.bb" rel=3D"norefe=
-rrer" target=3D"_blank">packagegroup-meta-filesystems.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A00<br>
-=C2=A0...Define-strndupa-if-it-does-not-exist.patch |=C2=A0 =C2=A05 +-<br>
-=C2=A0...arch64-inline-assembly-for-gcc-13.1.patch} |=C2=A0 =C2=A06 +-<br>
-=C2=A0...admmap-Replace-uint_t-with-uint32_t.patch} |=C2=A0 11 +-<br>
-=C2=A0...e-sys-stat.h-instead-of-linux-stat.h.patch |=C2=A0 83 +++++++++<br=
->
-=C2=A0.../zfs/{<a href=3D"http://zfs_2.2.8.bb" rel=3D"noreferrer" target=3D=
-"_blank">zfs_2.2.8.bb</a> =3D&gt; <a href=3D"http://zfs_2.2.9.bb" rel=3D"no=
-referrer" target=3D"_blank">zfs_2.2.9.bb</a>}=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A09 +-<br>
-=C2=A0...<a href=3D"http://nance_0.5.bb" rel=3D"noreferrer" target=3D"_blan=
-k">nance_0.5.bb</a> =3D&gt; <a href=3D"http://btrfsmaintenance_0.5.2.bb" re=
-l=3D"noreferrer" target=3D"_blank">btrfsmaintenance_0.5.2.bb</a>} |=C2=A0 =
-=C2=A04 +-<br>
-=C2=A0...change-sysconfig-path-to-etc-default.patch |=C2=A0 18 +-<br>
-=C2=A0.../bluealsa/<a href=3D"http://bluealsa_4.3.0.bb" rel=3D"noreferrer" =
-target=3D"_blank">bluealsa_4.3.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
-=C2=A0.../libde265/libde265/CVE-2025-61147.patch=C2=A0 =C2=A0 |=C2=A0 84 ++=
-+++++++<br>
-=C2=A0.../libde265/<a href=3D"http://libde265_1.0.16.bb" rel=3D"noreferrer"=
- target=3D"_blank">libde265_1.0.16.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A04 +-<br>
-=C2=A0.../recipes-daemons/lldpd/<a href=3D"http://lldpd_1.0.20.bb" rel=3D"n=
-oreferrer" target=3D"_blank">lldpd_1.0.20.bb</a>=C2=A0 =C2=A0 =C2=A0|=C2=A0=
- =C2=A02 +-<br>
-=C2=A0.../ettercap/ettercap/CVE-2026-3606.patch=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
-48 ++++++<br>
-=C2=A0.../ettercap/<a href=3D"http://ettercap_0.8.3.1.bb" rel=3D"noreferrer=
-" target=3D"_blank">ettercap_0.8.3.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +-<br>
-=C2=A0.../bpftrace/<a href=3D"http://bpftrace_0.24.1.bb" rel=3D"noreferrer"=
- target=3D"_blank">bpftrace_0.24.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0|=C2=A0 11 +-<br>
-=C2=A0.../{<a href=3D"http://ser2net_4.6.6.bb" rel=3D"noreferrer" target=3D=
-"_blank">ser2net_4.6.6.bb</a> =3D&gt; <a href=3D"http://ser2net_4.6.7.bb" r=
-el=3D"noreferrer" target=3D"_blank">ser2net_4.6.7.bb</a>}=C2=A0 =C2=A0 |=C2=
-=A0 =C2=A02 +-<br>
-=C2=A0...<a href=3D"http://ve_11.4.9.bb" rel=3D"noreferrer" target=3D"_blan=
-k">ve_11.4.9.bb</a> =3D&gt; <a href=3D"http://mariadb-native_11.4.10.bb" re=
-l=3D"noreferrer" target=3D"_blank">mariadb-native_11.4.10.bb</a>} |=C2=A0 =
-=C2=A00<br>
-=C2=A0meta-oe/recipes-dbs/mysql/mariadb.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 =C2=A04 +-<br>
-=C2=A0...info-t-fails-for-certain-TZ-values-o.patch |=C2=A0 47 -----<br>
-=C2=A0...move-x86-specific-loop-in-my_convert.patch |=C2=A0 93 ----------<b=
-r>
-=C2=A0.../{<a href=3D"http://mariadb_11.4.9.bb" rel=3D"noreferrer" target=
-=3D"_blank">mariadb_11.4.9.bb</a> =3D&gt; <a href=3D"http://mariadb_11.4.10=
-.bb" rel=3D"noreferrer" target=3D"_blank">mariadb_11.4.10.bb</a>} |=C2=A0 =
-=C2=A00<br>
-=C2=A0.../CVE-2026-32239_CVE-2026-32240.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
-60 ++++++++++++++++++<br>
-=C2=A0.../capnproto/<a href=3D"http://capnproto_1.0.2.bb" rel=3D"noreferrer=
-" target=3D"_blank">capnproto_1.0.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A04 +-<br>
-=C2=A0.../php/{<a href=3D"http://php_8.4.18.bb" rel=3D"noreferrer" target=
-=3D"_blank">php_8.4.18.bb</a> =3D&gt; <a href=3D"http://php_8.4.19.bb" rel=
-=3D"noreferrer" target=3D"_blank">php_8.4.19.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 =C2=A02 +-<br>
-=C2=A0.../{<a href=3D"http://jasper_4.2.8.bb" rel=3D"noreferrer" target=3D"=
-_blank">jasper_4.2.8.bb</a> =3D&gt; <a href=3D"http://jasper_4.2.9.bb" rel=
-=3D"noreferrer" target=3D"_blank">jasper_4.2.9.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
-|=C2=A0 =C2=A02 +-<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-25884-1.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 69 ++++++++<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-25884-2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 25 +++<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-27596-1.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 71 ++++++++<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-27596-2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 24 +++<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-27631-1.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 63 +++++++<br>
-=C2=A0.../exiv2/exiv2/CVE-2026-27631-2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 26 +++<br>
-=C2=A0meta-oe/recipes-support/exiv2/<a href=3D"http://exiv2_0.28.7.bb" rel=
-=3D"noreferrer" target=3D"_blank">exiv2_0.28.7.bb</a> |=C2=A0 11 +-<br>
-=C2=A0...<a href=3D"http://ck_7.1.2-15.bb" rel=3D"noreferrer" target=3D"_bl=
-ank">ck_7.1.2-15.bb</a> =3D&gt; <a href=3D"http://imagemagick_7.1.2-17.bb" =
-rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2-17.bb</a>} |=C2=A0 =
-=C2=A02 +-<br>
-=C2=A0...<a href=3D"http://mapfilter_2.8.3.bb" rel=3D"noreferrer" target=3D=
-"_blank">mapfilter_2.8.3.bb</a> =3D&gt; <a href=3D"http://imapfilter_2.8.5.=
-bb" rel=3D"noreferrer" target=3D"_blank">imapfilter_2.8.5.bb</a>} |=C2=A0 =
-=C2=A04 +-<br>
-=C2=A0.../recipes-support/libnice/<a href=3D"http://libnice_0.1.23.bb" rel=
-=3D"noreferrer" target=3D"_blank">libnice_0.1.23.bb</a> |=C2=A0 =C2=A05 +-<=
-br>
-=C2=A0.../libssh/libssh/CVE-2026-3731_p1.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
-35 ++++<br>
-=C2=A0.../libssh/libssh/CVE-2026-3731_p2.patch=C2=A0 =C2=A0 =C2=A0 | 102 ++=
-+++++++++<br>
-=C2=A0.../recipes-support/libssh/<a href=3D"http://libssh_0.11.3.bb" rel=3D=
-"noreferrer" target=3D"_blank">libssh_0.11.3.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
-=A02 +<br>
-=C2=A0meta-oe/recipes-support/pcp/pcp.inc=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0|=C2=A0 =C2=A02 +-<br>
-=C2=A0...<a href=3D"http://ngo_4.2.28.bb" rel=3D"noreferrer" target=3D"_bla=
-nk">ngo_4.2.28.bb</a> =3D&gt; <a href=3D"http://python3-django_4.2.29.bb" r=
-el=3D"noreferrer" target=3D"_blank">python3-django_4.2.29.bb</a>} |=C2=A0 =
-=C2=A02 +-<br>
-=C2=A0...<a href=3D"http://ngo_5.2.11.bb" rel=3D"noreferrer" target=3D"_bla=
-nk">ngo_5.2.11.bb</a> =3D&gt; <a href=3D"http://python3-django_5.2.12.bb" r=
-el=3D"noreferrer" target=3D"_blank">python3-django_5.2.12.bb</a>} |=C2=A0 =
-=C2=A02 +-<br>
-=C2=A0...-<a href=3D"http://gpiod_2.4.0.bb" rel=3D"noreferrer" target=3D"_b=
-lank">gpiod_2.4.0.bb</a> =3D&gt; <a href=3D"http://python3-gpiod_2.4.1.bb" =
-rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.4.1.bb</a>} |=C2=A0 =
-=C2=A08 +-<br>
-=C2=A0.../python/<a href=3D"http://python3-marshmallow_4.1.2.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-marshmallow_4.1.2.bb</a>=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
-=C2=A0.../python/python3-pyjwt/CVE-2026-32597.patch |=C2=A0 79 +++++++++<br=
->
-=C2=A0.../python/<a href=3D"http://python3-pyjwt_2.10.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">python3-pyjwt_2.10.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
-=C2=A0...<a href=3D"http://nado_6.5.4.bb" rel=3D"noreferrer" target=3D"_bla=
-nk">nado_6.5.4.bb</a> =3D&gt; <a href=3D"http://python3-tornado_6.5.5.bb" r=
-el=3D"noreferrer" target=3D"_blank">python3-tornado_6.5.5.bb</a>} |=C2=A0 =
-=C2=A02 +-<br>
-=C2=A0.../recipes-httpd/hiawatha/<a href=3D"http://hiawatha_11.7.bb" rel=3D=
-"noreferrer" target=3D"_blank">hiawatha_11.7.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
-=A02 +-<br>
-=C2=A050 files changed, 952 insertions(+), 249 deletions(-)<br>
-=C2=A0delete mode 100644 meta-filesystems/recipes-filesystems/owfs/owfs/000=
-1-Fix-compilation-with-GCC10.patch<br>
-=C2=A0rename meta-filesystems/recipes-filesystems/owfs/{<a href=3D"http://o=
-wfs_3.2p3.bb" rel=3D"noreferrer" target=3D"_blank">owfs_3.2p3.bb</a> =3D&gt=
-; <a href=3D"http://owfs_3.2p4.bb" rel=3D"noreferrer" target=3D"_blank">owf=
-s_3.2p4.bb</a>} (96%)<br>
-=C2=A0rename meta-filesystems/recipes-filesystems/{packageconfigs =3D&gt; p=
-ackagegroups}/<a href=3D"http://packagegroup-meta-filesystems.bb" rel=3D"no=
-referrer" target=3D"_blank">packagegroup-meta-filesystems.bb</a> (100%)<br>
-=C2=A0rename meta-filesystems/recipes-filesystems/zfs/zfs/{aaf28a4630af6049=
-6c9d33db1d06a7d7d8983422.patch =3D&gt; 0002-fixes-broken-aarch64-inline-ass=
-embly-for-gcc-13.1.patch} (94%)<br>
-=C2=A0rename meta-filesystems/recipes-filesystems/zfs/zfs/{0001-fs-tests-cm=
-d-readmmap-Replace-uint_t-with-uint32_t.patch =3D&gt; 0003-fs-tests-cmd-rea=
-dmmap-Replace-uint_t-with-uint32_t.patch} (83%)<br>
-=C2=A0create mode 100644 meta-filesystems/recipes-filesystems/zfs/zfs/0004-=
-linux-use-sys-stat.h-instead-of-linux-stat.h.patch<br>
-=C2=A0rename meta-filesystems/recipes-filesystems/zfs/{<a href=3D"http://zf=
-s_2.2.8.bb" rel=3D"noreferrer" target=3D"_blank">zfs_2.2.8.bb</a> =3D&gt; <=
-a href=3D"http://zfs_2.2.9.bb" rel=3D"noreferrer" target=3D"_blank">zfs_2.2=
-.9.bb</a>} (91%)<br>
-=C2=A0rename meta-filesystems/recipes-utils/btrfsmaintenance/{<a href=3D"ht=
-tp://btrfsmaintenance_0.5.bb" rel=3D"noreferrer" target=3D"_blank">btrfsmai=
-ntenance_0.5.bb</a> =3D&gt; <a href=3D"http://btrfsmaintenance_0.5.2.bb" re=
-l=3D"noreferrer" target=3D"_blank">btrfsmaintenance_0.5.2.bb</a>} (96%)<br>
-=C2=A0create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde2=
-65/CVE-2025-61147.patch<br>
-=C2=A0create mode 100644 meta-networking/recipes-support/ettercap/ettercap/=
-CVE-2026-3606.patch<br>
-=C2=A0rename meta-oe/recipes-connectivity/ser2net/{<a href=3D"http://ser2ne=
-t_4.6.6.bb" rel=3D"noreferrer" target=3D"_blank">ser2net_4.6.6.bb</a> =3D&g=
-t; <a href=3D"http://ser2net_4.6.7.bb" rel=3D"noreferrer" target=3D"_blank"=
->ser2net_4.6.7.bb</a>} (91%)<br>
-=C2=A0rename meta-oe/recipes-dbs/mysql/{<a href=3D"http://mariadb-native_11=
-.4.9.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_11.4.9.bb</a> =
-=3D&gt; <a href=3D"http://mariadb-native_11.4.10.bb" rel=3D"noreferrer" tar=
-get=3D"_blank">mariadb-native_11.4.10.bb</a>} (100%)<br>
-=C2=A0delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-MDEV-38029-=
-my_tzinfo-t-fails-for-certain-TZ-values-o.patch<br>
-=C2=A0delete mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Remove-x86-=
-specific-loop-in-my_convert.patch<br>
-=C2=A0rename meta-oe/recipes-dbs/mysql/{<a href=3D"http://mariadb_11.4.9.bb=
-" rel=3D"noreferrer" target=3D"_blank">mariadb_11.4.9.bb</a> =3D&gt; <a hre=
-f=3D"http://mariadb_11.4.10.bb" rel=3D"noreferrer" target=3D"_blank">mariad=
-b_11.4.10.bb</a>} (100%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto/CVE-2=
-026-32239_CVE-2026-32240.patch<br>
-=C2=A0rename meta-oe/recipes-devtools/php/{<a href=3D"http://php_8.4.18.bb"=
- rel=3D"noreferrer" target=3D"_blank">php_8.4.18.bb</a> =3D&gt; <a href=3D"=
-http://php_8.4.19.bb" rel=3D"noreferrer" target=3D"_blank">php_8.4.19.bb</a=
->} (99%)<br>
-=C2=A0rename meta-oe/recipes-graphics/jasper/{<a href=3D"http://jasper_4.2.=
-8.bb" rel=3D"noreferrer" target=3D"_blank">jasper_4.2.8.bb</a> =3D&gt; <a h=
-ref=3D"http://jasper_4.2.9.bb" rel=3D"noreferrer" target=3D"_blank">jasper_=
-4.2.9.bb</a>} (92%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884=
--1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-25884=
--2.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27596=
--1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27596=
--2.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631=
--1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/exiv2/exiv2/CVE-2026-27631=
--2.patch<br>
-=C2=A0rename meta-oe/recipes-support/imagemagick/{<a href=3D"http://imagema=
-gick_7.1.2-15.bb" rel=3D"noreferrer" target=3D"_blank">imagemagick_7.1.2-15=
-.bb</a> =3D&gt; <a href=3D"http://imagemagick_7.1.2-17.bb" rel=3D"noreferre=
-r" target=3D"_blank">imagemagick_7.1.2-17.bb</a>} (99%)<br>
-=C2=A0rename meta-oe/recipes-support/imapfilter/{<a href=3D"http://imapfilt=
-er_2.8.3.bb" rel=3D"noreferrer" target=3D"_blank">imapfilter_2.8.3.bb</a> =
-=3D&gt; <a href=3D"http://imapfilter_2.8.5.bb" rel=3D"noreferrer" target=3D=
-"_blank">imapfilter_2.8.5.bb</a>} (80%)<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-373=
-1_p1.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-373=
-1_p2.patch<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--django_4.2.28.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_4.2.=
-28.bb</a> =3D&gt; <a href=3D"http://python3-django_4.2.29.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-django_4.2.29.bb</a>} (79%)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--django_5.2.11.bb" rel=3D"noreferrer" target=3D"_blank">python3-django_5.2.=
-11.bb</a> =3D&gt; <a href=3D"http://python3-django_5.2.12.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-django_5.2.12.bb</a>} (60%)<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--gpiod_2.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.4.0.b=
-b</a> =3D&gt; <a href=3D"http://python3-gpiod_2.4.1.bb" rel=3D"noreferrer" =
-target=3D"_blank">python3-gpiod_2.4.1.bb</a>} (74%)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pyjwt/=
-CVE-2026-32597.patch<br>
-=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
--tornado_6.5.4.bb" rel=3D"noreferrer" target=3D"_blank">python3-tornado_6.5=
-.4.bb</a> =3D&gt; <a href=3D"http://python3-tornado_6.5.5.bb" rel=3D"norefe=
-rrer" target=3D"_blank">python3-tornado_6.5.5.bb</a>} (93%)<br>
-<br>
--- <br>
-2.53.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#125896): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/125896" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/125896</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118610707/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/118610707/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000aa590d064e7270dc--
 
