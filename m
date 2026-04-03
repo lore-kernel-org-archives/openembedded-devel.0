@@ -1,182 +1,496 @@
-Return-Path: <changqing.li@windriver.com>
+Return-Path: <zhengrq.fnst@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13EE9D730AC
-	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 07:00:21 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.6367.1775199616018438979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23B93D730B1
+	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 07:24:11 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.6633.1775201049794659560
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2026 00:00:16 -0700
+ Fri, 03 Apr 2026 00:24:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=X3crztvs;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8553e5715c=changqing.li@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6335TAqB1342030
-	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Apr 2026 07:00:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=d5aQxGVWWEN3/2rY1i6f
-	u1WGBNyI7R25kH1eyxUxE44=; b=X3crztvsFqaN/Xl5xDmmVqTkrhj8nTU+AEwd
-	Nm19S4e3RED1NXFAAzNSRj/oZQpMXg8Cul/GH6+FH72DPtCkVR2Dl/DEkl0RNA4+
-	mLNcptVwVyet9HhKRO8tYami8p9sB513Zoq6it7VopxjbhwSvxQGBSlzudJRFpJZ
-	SqGpsKlx1EtJ+/B9B7l+GX8OoDb3tVodHa8YFrcMIKra0tAO3f0ZqbKubdVl0r5Y
-	WToMQ1410jwBccwY5JY2EOBAKe1+Zf/DUsjo4qOc/emUmj8HhEXhtNmF8IhmLwLD
-	S/DqDpJqCitISxVUckE5/nOYvP7HBsujpqRHvf8Co7tdVeQerg==
-Received: from ph0pr06cu001.outbound.protection.outlook.com (mail-westus3azon11011029.outbound.protection.outlook.com [40.107.208.29])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4d646w123t-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:00:14 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hNTFuCJyTgjwKty78BVZRILUmp4KbNM4PU/7HPmC46vEut9Cp0lyAQx1xDXtYRISH6xHhhCm5/+xOBG7rJV1lb/4tuU63v4MuhaDuDGxc8/eETYbSxy2axAECGk0kPklYQDWIDEG01+axMjd7xXMyL0sYy66QIR7RnbTf+YNV2ydzmWl1jvTTEXttBTsB+NDz6a8u/dX9H1pOuIqxtNHBgVVDvkwnHGcAwqaKtaB9MK2uB39mXUmSUfyc4ByFaL0eLvFAGql+TqFu12bfKUhQpohTgxRUqdJV1WiQ2EQk0EMdUAijC65PUZN7y0hbgNCaNPxm+w36/ltp5w3f7RQAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d5aQxGVWWEN3/2rY1i6fu1WGBNyI7R25kH1eyxUxE44=;
- b=kjPafGoK5KvkPHNEUyCRB0dVBBaK/pNGCy5JCpnb6jcWI3/DX9zVn5AtyDkUDTdB+l4K85TmZLZAhkYAwSRL2Zsz0wnhzIBXuYWG86E3raG8sdfQL+Ct5SeJNNPDYAKvW68xJvhjsJwFxoCioY/2md9hGZNeAic0O1FNCfTuztmq/E6zNDOeB46yqq1aitq05pyo5ObQknzwGs1AOdv3QFT/uq4JBgfjmO5/HZz9svrTQwBgE07SO8VfeLnGelA1snbcnAqxJvUHk9ow364/eA0Jaq1ItxtDD5Rd9Y3VZ0kOLNJmtcVQmlQ+gtlFwaBtU8G7FTJN9dRA7FGJzbupeQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB7312.namprd11.prod.outlook.com (2603:10b6:8:11f::18)
- by SA3PR11MB7612.namprd11.prod.outlook.com (2603:10b6:806:31b::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.21; Fri, 3 Apr
- 2026 07:00:10 +0000
-Received: from DS0PR11MB7312.namprd11.prod.outlook.com
- ([fe80::531e:6ef5:812b:48f6]) by DS0PR11MB7312.namprd11.prod.outlook.com
- ([fe80::531e:6ef5:812b:48f6%5]) with mapi id 15.20.9769.018; Fri, 3 Apr 2026
- 07:00:10 +0000
-From: Changqing Li <changqing.li@windriver.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=j8ygxJgM;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: zhengrq.fnst@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1775201050; x=1806737050;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=W5UbsT0TuC624ilHvx16qZ0K7g29Ip4PjsW8ZDhBqvI=;
+  b=j8ygxJgMnDUyYoqsQaKAND9XwzyQGB7akfrUN3kM2fhbZibjk1bzTLdJ
+   tXI6FK+DLDuJbPuZ77JDreoJ+3J0v3FliAqD28jq4nTYowEZ6uRYNN0hr
+   9/V+IwTR8JbGEVzcPmN41hccK/FNyl3+8gg9rpAYelehdFJHFEpNalvkh
+   2qn3r8OuX+PkTL+IScL2mKaOkpgeGtV0tIVKfZ1sBvWznhbmBo+SQ89t0
+   JtiCYxMyirRomKETwe39ve9pjZUjg6vIsWm5XcGEsP5coPmyYR3Hy0vyh
+   I5fYWnjfMPCK+2rvTvtXoAc3VF+GG54N4rplEMBCXuvxpL8nGJKI+1A42
+   Q==;
+X-CSE-ConnectionGUID: GUf3wP06QJCD0EbuB74Vpw==
+X-CSE-MsgGUID: gYg8tdR9Qa+mvipFB3hgEg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11747"; a="235624668"
+X-IronPort-AV: E=Sophos;i="6.23,157,1770562800"; 
+   d="scan'208";a="235624668"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Apr 2026 16:24:08 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id C3D671C166D5
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2026 07:24:07 +0000 (UTC)
+Received: from az2uksmom3.o.css.fujitsu.com (az2uksmom3.o.css.fujitsu.com [10.151.22.205])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 7BEEB83D94E
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2026 07:24:07 +0000 (UTC)
+Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.167.135.148])
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 5B8B31000354
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2026 07:24:05 +0000 (UTC)
+From: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] dlt-daemon: update patch to fix dlt-daemon crash issue
-Date: Fri,  3 Apr 2026 14:59:29 +0800
-Message-Id: <20260403065929.1430874-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY4PR01CA0002.jpnprd01.prod.outlook.com
- (2603:1096:405:26e::19) To DS0PR11MB7312.namprd11.prod.outlook.com
- (2603:10b6:8:11f::18)
+Subject: [oe][meta-oe][PATCH] openct: Drop this recipe
+Date: Fri,  3 Apr 2026 15:23:54 +0800
+Message-ID: <20260403072355.16407-1-zhengrq.fnst@fujitsu.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB7312:EE_|SA3PR11MB7612:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7bbfa167-3452-481f-8167-08de914ea550
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|52116014|38350700014|13003099007|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	8weHSNaUhYAQMxIoojW0eedMMzxBfm+WqfRDpvDZBDci2qi0gRg01TVgnVR7Ss0chaPuMO/r7Yp/HYbTj2PjWLIOcfJCkQ0nBsZ/GvH30hKnBlsUTrCAH2SM8xz/RlD74XHPJeA0J4zJ3pPYwOC9EoQsO0tBGAMfAH5teyPN4R+bbNnOm+i4dZteL/kCKAwzObDdXqVb0bIMl/Js0wYY714xe2Pxead4HUwzObpj0XM9ww5NOfDNjIAviGRXh4Bypx0a9WMYU9bL5b203UCc3rw7BC36ff64IJmYttKdmqaPEbub8R7hNKBR37FbvYNhdALrNUJyPB0DUAb21UR/TbX0fAkKvOifM+TaYHIK+AcE2cq/40ymHfres3UMiuDBBNpKvxQndn3E7z46XlMQB8o+7NnmSiXnynCO9/m33PeGnwqK1FwRE+YTXbXx8ISPY6pfwToW1siYjYmdyxtluaKBZmd9Hnq7v6/+WJoAvOM1egu2LLKkHeEvEs0zySsJQ3p99/rOSaibf5B/0/McI15OJsve7s/+zfhOQQ5SNu5y2PmVwG6drRIgR0O2VKSBF1sR3IvfLlqkFfCvGBL4yx/PrqmIJVEerFAPjCamanJUgkFRAfflFuvUY8G8q7PFoj8i86r9SNB1BguOSQ3ZN3k6xuCx/KNMWu4zoq4N3+ukdGA/wAUK4i/ae9ryizB61cmp8n3N4nt4wPdqQMagI4w4C3ilrCnxbZmptU1gydT7OlvDruh6Xr67XSFVYoNhrj52yfnA+cRNmt1wTSLYHNgWJY9NJOG7gH2WkGm9XYiN5fbSx8vUIogrx+1tbMuk
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7312.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(52116014)(38350700014)(13003099007)(18002099003)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?BWf9QquH/r/GIG5N5VRSWXLx3nc1+lFPPPChJiDcB7O5CH24m9qF1mdTmVb6?=
- =?us-ascii?Q?1RpWlA1liV4F5u/KReR2Stkh/XZmRwjFOEx1JHWR8wdb4o8XhvCJq5i66C4Y?=
- =?us-ascii?Q?ZdcuXoKg0mUUFIZQ0DRUKvoyruUdpJG6ZyLG9dyXlsVmqaYme2MYfRd87ynD?=
- =?us-ascii?Q?iHPnC3BHfTozh3SQmxrKdaN5XR+tAMYFcMUMpCINTW1uDzw2/iTt3+BQmABV?=
- =?us-ascii?Q?hi7wCMAPPUQ/DA4rNR1Iq5S8d3kBufBAilU6A5mDMNih/88Pp1T1uOO3QauS?=
- =?us-ascii?Q?fKeMZr760v+tuaN3ZEdUI/qvNbjv1z3AF14Nbk39Y9xj2PxWPdaxVzgvSZpW?=
- =?us-ascii?Q?jH4S9VVVRWLQdK30tvrE8OjyNqcDY6GP+InjBbbouT1ySQrxTy+/7IqOERIH?=
- =?us-ascii?Q?8HtcvPN7TLrkNeWzc8BfGGWE5lmjy8o3QnbHAWVH5JJaegXMK+g/zaWXng/o?=
- =?us-ascii?Q?gYLWMYNSDZuqWi8G4T4xIfhck9wLObIFPbQPn1xOyr5xW51IEOy8IGP9LWlv?=
- =?us-ascii?Q?NtQAbtRMNvarWIaJHrku3XHuRHWOgbCgp+OnNVZ8/c/i9y8bPTQ6sO2Xl/q+?=
- =?us-ascii?Q?xth4SY9VN3zCx3pJeLjQaljuHJzyt6rIVk4xBguFequei+GoBNW7vHIDdFWY?=
- =?us-ascii?Q?gzc5+x3bRu1BCTnx9CYJZyo33bRn8jj0jZh5XUbSU1ADBImURK6i8JReFg4/?=
- =?us-ascii?Q?H7wMcRluO8MY96ZyCvQKhvqfcG38GgYjXTPBjB126DhH8OxU8VkLz8EmN/fG?=
- =?us-ascii?Q?EDhMVmrOHPCjl8VtNZAOW1UbRl3meitYM64pza6tcYG7xFrzM1tqtJlvLSLo?=
- =?us-ascii?Q?+vQk2GJiqGuS1/Lfyyuf6mUNRP1xXlIRmD2fz1t+DIFM7BwJi92krrVG2gXQ?=
- =?us-ascii?Q?/3CXPP2uVoiItktQ99LCJgzohp0DL+4s1i2qIzkhmsx+ymkgPUMyDN/pGpX2?=
- =?us-ascii?Q?5vWJrGfqE6qZ3nbmtVBfrXltOcZN8Ur3X2pGEbTmCUmaC5h1JNUvaC+BUjx6?=
- =?us-ascii?Q?vF3ssAfa70DjCmuIonYbNOzCkDKatQ6VyXtX+BB3eaWqGOGLjCuutxohCNbK?=
- =?us-ascii?Q?XRYrA5Y6gmqPY3Ds89PK0dUpvqVtL8ixSv5Me4jdU6ioy1BEmaT6O+74l3o8?=
- =?us-ascii?Q?A1zQUi+WRX2cu8vHc4e5dKmFdOeiVhVfr1QkmwrN+aiqmmGo7jHTlxLlz3oA?=
- =?us-ascii?Q?cnQfw8qpgVQK9u1dNSyIdUuCSMrD72/KfuPR4ds3NtENBtlIVsZHUq/D7iML?=
- =?us-ascii?Q?eGy48WRdP+XswPIfM/g5OmeWSPITXM/TdpkgnfwoVX8zaCi479ck1ZOl81/a?=
- =?us-ascii?Q?LS7MDMy4N4dQYPtM8bMT9AmQDNK7T7hHeeUKrvdvMaA/VReC6z8tuZQJsC7m?=
- =?us-ascii?Q?hW8koJe6kyOUaZguOMtlPgjaMbl/cJhmR6qmBod1DPK1VXHFUpy/IF/Tw/48?=
- =?us-ascii?Q?T00OhVezv9Sg8rk93h6wApzs3wCK1UmybmgoXNjM9iH3Tc8dQ4RX67KcgJKe?=
- =?us-ascii?Q?v4p0yO4Ls20AwdqvnR0ymDoDo/U11Q3HNJVcXco46YqiDW6PDcG990IolSb5?=
- =?us-ascii?Q?nIvj/8n9QFBVlU5zL7T1I5tzmSiXbwIAw6u0to0ylfjj63DixJXaWalpHKbu?=
- =?us-ascii?Q?cN+wjapGAK3vrkxRB1h5B+a7uYmlpbNscL8JuWJ+rYIG0hYFOhNhuHV16Xka?=
- =?us-ascii?Q?7BwPDjVB3+ImpJB29Zjha38ZFlV3ij1s5DAhrOUCfYRobiV/1gTLasR3cAOV?=
- =?us-ascii?Q?MnWtSAaOaEt7UDBrislVw2Sf08osTkU=3D?=
-X-Exchange-RoutingPolicyChecked: 
-	NBt2XF00agJcWOmLj1YmhbfqHLnOrIvTfpGKpYD9QABAmMF0SFfgQQL6Dv24EHnqL3vjd0W7FybAxLeiBEHQrxeDdW4t6b1l8IAiTFbCtMO3Zhv6enCHaz564CAgtxgYytyCprBsl149xwqoLj0/clUpv7mYm6NzGD6zSNCL8O589u/2z6hZaBlKT9y1YV3XSVsDVKQwAWIL058u3SDgudA9B+znP6BKaL0rZQ4FDYgLsJOPNsiFGuV5PyoulzS7RSF0upW5P+saOOjzdLJOXUEQT0v0WbpPCO1i/z8byq8Et9BWBmsLyqgGCcUq51UsgDQzMwzcy/MfI5ZlD2Hnfw==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7bbfa167-3452-481f-8167-08de914ea550
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7312.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2026 07:00:10.2432
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Veakl+EhfQDMI0ovRZ7JpAY9Q63Dfs/Qq7vsrod94stYj2yOSew4heJ9Xw81iXbJLjjNm5KNX4IcnJWvl1u6WKHzI8Ivr/MmzT1xIcgDqHU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB7612
-X-Authority-Analysis: v=2.4 cv=Zqjg6t7G c=1 sm=1 tr=0 ts=69cf657e cx=c_pps
- a=WFfob/tpvpsU+KY5JpTU8Q==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=klDOsUkWDRETUCZYPvoE:22 a=NEAV23lmAAAA:8
- a=t7CeM3EgAAAA:8 a=SgZi-1eHzZr7Rd7FQVUA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-ORIG-GUID: qsZD-bEsBwf-qphW5hiV1gOG16IrKaZt
-X-Proofpoint-GUID: qsZD-bEsBwf-qphW5hiV1gOG16IrKaZt
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAzMDA2MCBTYWx0ZWRfXyfPeb5S3BQDf
- mXv8rTmGyZk8FnAXQKja0CWh+5l1uTe8vlZ/3wEmQv4RF85dYnHMnUjQ8xGZDRK4yf3nhbjDwWR
- Z0wQnlCgk2LTltRy4TNJkIE+bQoDs0Eij+bEN+fvtP9OTyisA7GeoGAwj9JnVryklH6ZRsxD/of
- 5jnnf5FvEkRwaTwUKao42S0bgErFvDDTM2OAlqDO0oevXp0M2Uu/CIQ+YG7G58uIDN+r+7E7pRa
- a2wEtGfuJz3Qho5T8UpVm0AIy2/FP5iVOSbkCBeGrw5DvSydUSWCcLzwQzfI2n6sEKuuHFNq8rF
- l1BVRYaNGbbV0DtVbtyh3y5SAjpa78fjfA2/Bt7lfyYh/gPPXGeazff0H9lNfka1kw/wIYsiY/r
- iFjT4nPAYqWeWQUNdKlGNzcErvdLrf27uh9R0L577l5bJDsCRDv+QaKiQL/n6haN/gSt8XUS1Jn
- bP8Y1FgFEu8+8o30a4w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-03_02,2026-04-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0 suspectscore=0 phishscore=0 impostorscore=0
- bulkscore=0 priorityscore=1501 malwarescore=0 lowpriorityscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2604030060
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:00:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125972
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:24:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125973
 
-A wrong type conversion makes dlt-daemon crash, update the patch to fix
-it
+Drop openct as it is unmaintained upstream.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@fujitsu.com>
 ---
- .../dlt-daemon/0001-Fix-kinds-of-build-failure.patch         | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ ...e-pointer-type-error-with-gcc-option.patch | 65 -------------
+ ...t-the-first-line-of-compiler-version.patch | 31 -------
+ .../etc-openct.udev.in-disablePROGRAM.patch   | 31 -------
+ .../etc-openct_usb.in-modify-UDEVINFO.patch   | 35 -------
+ .../recipes-support/openct/openct/openct.init | 89 ------------------
+ .../openct/openct/openct.service              | 13 ---
+ .../openct/openct/openct.sysconfig            |  5 -
+ .../recipes-support/openct/openct_0.6.20.bb   | 91 -------------------
+ 8 files changed, 360 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openct/openct/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
+ delete mode 100644 meta-oe/recipes-support/openct/openct/0001-m4-Just-emit-the-first-line-of-compiler-version.patch
+ delete mode 100644 meta-oe/recipes-support/openct/openct/etc-openct.udev.in-disablePROGRAM.patch
+ delete mode 100644 meta-oe/recipes-support/openct/openct/etc-openct_usb.in-modify-UDEVINFO.patch
+ delete mode 100644 meta-oe/recipes-support/openct/openct/openct.init
+ delete mode 100644 meta-oe/recipes-support/openct/openct/openct.service
+ delete mode 100644 meta-oe/recipes-support/openct/openct/openct.sysconfig
+ delete mode 100644 meta-oe/recipes-support/openct/openct_0.6.20.bb
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-kinds-of-build-failure.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-kinds-of-build-failure.patch
-index 403d1089e2..ff840b809d 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-kinds-of-build-failure.patch
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-Fix-kinds-of-build-failure.patch
-@@ -27,7 +27,8 @@ src/console/dlt-control-common.c:922:25: error: cast discards 'const' qualifier
- 
- Use explicit type conversion to make the build can pass
- 
--Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/826]
-+Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/826,
-+https://github.com/COVESA/dlt-daemon/pull/837]
- 
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-@@ -102,7 +103,7 @@ index 4c40cda8..b3408773 100644
- -        memcpy(data, data1, size1);
- -        memcpy(data + size1, data2, size2);
- +        memcpy(data, data1, (size_t)size1);
--+        memcpy((int*)data + size1, data2, (size_t)size2);
-++        memcpy((char*)data + size1, data2, (size_t)size2);
-  
- -        if (sendto(g_udp_sock_fd, data, size1 + size2, 0, (struct sockaddr *)&clientinfo->clientaddr,
- +        if (sendto(g_udp_sock_fd, data, (size_t)(size1 + size2), 0, (struct sockaddr *)&clientinfo->clientaddr,
+diff --git a/meta-oe/recipes-support/openct/openct/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch b/meta-oe/recipes-support/openct/openct/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
+deleted file mode 100644
+index 73c9d06667..0000000000
+--- a/meta-oe/recipes-support/openct/openct/0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch
++++ /dev/null
+@@ -1,65 +0,0 @@
+-From c4351058da555e1e6a2b4b15d913baee80f55865 Mon Sep 17 00:00:00 2001
+-From: Wang Mingyu <wangmy@fujitsu.com>
+-Date: Thu, 27 Jun 2024 06:27:18 +0000
+-Subject: Fix incompatible pointer type error with gcc option 
+- -Wincompatible-pointer-types
+-
+-| ../../../openct-0.6.20/src/ifd/ifdhandler.c: In function 'ifdhandler_run':
+-| ../../../openct-0.6.20/src/ifd/ifdhandler.c:239:52: error: passing argument 2 of 'ifd_get_eventfd' from incompatible pointer type [-Wincompatible-pointer-types]
+-|   239 |                 sock->fd = ifd_get_eventfd(reader, &sock->events);
+-|       |                                                    ^~~~~~~~~~~~~
+-|       |                                                    |
+-|       |                                                    int *
+-| In file included from ../../../openct-0.6.20/src/ifd/internal.h:17,
+-|                  from ../../../openct-0.6.20/src/ifd/ifdhandler.c:7:
+-| ../../../openct-0.6.20/src/include/openct/ifd.h:182:65: note: expected 'short int *' but argument is of type 'int *'
+-|   182 | extern int                      ifd_get_eventfd(ifd_reader_t *, short *);
+-|       |                                                                 ^~~~~~~
+-
+-| ../../../openct-0.6.20/src/ifd/process.c: In function 'do_memory_write':
+-| ../../../openct-0.6.20/src/ifd/process.c:461:61: error: passing argument 4 of 'ct_tlv_get_opaque' from incompatible pointer type [-Wincompatible-pointer-types]
+-|   461 |             || !ct_tlv_get_opaque(args, CT_TAG_DATA, &data, &data_len))
+-|       |                                                             ^~~~~~~~~
+-|       |                                                             |
+-|       |                                                             unsigned int *
+-| In file included from ../../../openct-0.6.20/src/ifd/process.c:20:
+-| ../../../openct-0.6.20/src/include/openct/tlv.h:40:62: note: expected 'size_t *' {aka 'long unsigned int *'} but argument is of type 'unsigned int *'
+-|    40 |                                 ifd_tag_t, unsigned char **, size_t *);
+-
+-Upstream-Status: Submitted
+-
+-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+----
+- src/ifd/ifdhandler.c | 2 +-
+- src/ifd/process.c    | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/ifd/ifdhandler.c b/src/ifd/ifdhandler.c
+-index 12686c9..ebd1b53 100644
+---- a/src/ifd/ifdhandler.c
+-+++ b/src/ifd/ifdhandler.c
+-@@ -236,7 +236,7 @@ static void ifdhandler_run(ifd_reader_t * reader)
+- 		sock->fd = -1;
+- 	}
+- 	else {
+--		sock->fd = ifd_get_eventfd(reader, &sock->events);
+-+		sock->fd = ifd_get_eventfd(reader, (short int *)&sock->events);
+- 	}
+- 	if (sock->fd == -1) {
+- 		ifd_debug(1, "events inactive for reader %s", reader->name);
+-diff --git a/src/ifd/process.c b/src/ifd/process.c
+-index 4563bdf..7088a76 100644
+---- a/src/ifd/process.c
+-+++ b/src/ifd/process.c
+-@@ -458,7 +458,7 @@ static int do_memory_write(ifd_reader_t * reader, int unit,
+- 		return IFD_ERROR_INVALID_SLOT;
+- 
+- 	if (ct_tlv_get_int(args, CT_TAG_ADDRESS, &address) == 0
+--	    || !ct_tlv_get_opaque(args, CT_TAG_DATA, &data, &data_len))
+-+	    || !ct_tlv_get_opaque(args, CT_TAG_DATA, &data, (size_t *)&data_len))
+- 		return IFD_ERROR_MISSING_ARG;
+- 
+- 	rc = ifd_card_write_memory(reader, unit, address, data, data_len);
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-support/openct/openct/0001-m4-Just-emit-the-first-line-of-compiler-version.patch b/meta-oe/recipes-support/openct/openct/0001-m4-Just-emit-the-first-line-of-compiler-version.patch
+deleted file mode 100644
+index 9bd3d18d6e..0000000000
+--- a/meta-oe/recipes-support/openct/openct/0001-m4-Just-emit-the-first-line-of-compiler-version.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 146b5116140d719e4e9ae19748c0b6dee7d82f96 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 22 May 2023 22:01:28 -0700
+-Subject: [PATCH] m4: Just emit the first line of compiler version
+-
+-Avoids emitting buildpaths into comments
+-Fixes
+-WARNING: openct-0.6.20-r0 do_package_qa: QA Issue: File /usr/include/openct/types.h in package openct-dev contains reference to TMPDIR [buildpaths]
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- m4/ac_create_stdint_h.m4 | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/m4/ac_create_stdint_h.m4 b/m4/ac_create_stdint_h.m4
+-index 66de704..4b7223a 100644
+---- a/m4/ac_create_stdint_h.m4
+-+++ b/m4/ac_create_stdint_h.m4
+-@@ -110,7 +110,7 @@ echo "#define" $_ac_stdint_h "1" >>$ac_stdint_h
+- echo "#ifndef" _GENERATED_STDINT_H >>$ac_stdint_h
+- echo "#define" _GENERATED_STDINT_H '"'$PACKAGE $VERSION'"' >>$ac_stdint_h
+- if test "$GCC" = "yes" ; then
+--  echo "/* generated using a gnu compiler version" `$CC --version` "*/" \
+-+  echo "/* generated using a gnu compiler version" `$CC --version|head -1` "*/" \
+-   >>$ac_stdint_h
+- else
+-   echo "/* generated using $CC */" >>$ac_stdint_h
+--- 
+-2.40.1
+-
+diff --git a/meta-oe/recipes-support/openct/openct/etc-openct.udev.in-disablePROGRAM.patch b/meta-oe/recipes-support/openct/openct/etc-openct.udev.in-disablePROGRAM.patch
+deleted file mode 100644
+index e2401bb31b..0000000000
+--- a/meta-oe/recipes-support/openct/openct/etc-openct.udev.in-disablePROGRAM.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From e0d3e0bb1e38ff851696a7d8826e651d364ad8ce Mon Sep 17 00:00:00 2001
+-From: Li xin <lixin.fnst@cn.fujitsu.com>
+-Date: Fri, 5 Dec 2014 02:00:57 +0900
+-Subject: [PATCH 1/2] etc/openct.udev.in: disablePROGRAM
+-
+-Bug fix: https://bugzilla.redhat.com/show_bug.cgi?id=287871
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+----
+- etc/openct.udev.in | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/etc/openct.udev.in b/etc/openct.udev.in
+-index d11d0e1..48083c9 100644
+---- a/etc/openct.udev.in
+-+++ b/etc/openct.udev.in
+-@@ -22,7 +22,8 @@ ACTION!="add", GOTO="openct_usb_rules_end"
+- # 2010-01-06 removed, as latest udev doesn't know WAIT_FOR_ATTR any more.
+- 
+- # sleep for 100ms - the wait_for_sysfs might not be enough
+--PROGRAM="/bin/sleep 0.1"
+-+# Disabled in this package - see https://bugzilla.redhat.com/287871
+-+# PROGRAM="/bin/sleep 0.1"
+- 
+- # ccid
+- ATTR{bInterfaceClass}=="0b", ATTR{bInterfaceSubClass}=="00", ATTR{bInterfaceProtocol}=="00", ATTRS{idVendor}=="?*"  RUN+="@udevdir@/openct_usb /dev/$parent"
+--- 
+-1.8.4.2
+-
+diff --git a/meta-oe/recipes-support/openct/openct/etc-openct_usb.in-modify-UDEVINFO.patch b/meta-oe/recipes-support/openct/openct/etc-openct_usb.in-modify-UDEVINFO.patch
+deleted file mode 100644
+index 22eda729fb..0000000000
+--- a/meta-oe/recipes-support/openct/openct/etc-openct_usb.in-modify-UDEVINFO.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From d93985a137b553b2723235d03bda341dab14064f Mon Sep 17 00:00:00 2001
+-From: Li xin <lixin.fnst@cn.fujitsu.com>
+-Date: Fri, 5 Dec 2014 02:04:03 +0900
+-Subject: [PATCH 2/2] etc/openct_usb.in: modify UDEVINFO
+-
+-this patch is from Fedora
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+----
+- etc/openct_usb.in | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/etc/openct_usb.in b/etc/openct_usb.in
+-index 32f91aa..917467d 100644
+---- a/etc/openct_usb.in
+-+++ b/etc/openct_usb.in
+-@@ -15,10 +15,10 @@ if [ -z "$DEVNAME" ]; then
+- 	# Guess udev info interface.
+- 	# Newer udev uses udevadm
+- 	#
+--	if which udevinfo > /dev/null 2>&1; then
+--		UDEVINFO="udevinfo"
+--	else
+-+	if which udevadm > /dev/null 2>&1; then
+- 		UDEVINFO="udevadm info"
+-+	else
+-+		UDEVINFO="udevinfo"
+- 	fi
+- 	DEVNAME=/dev/$($UDEVINFO --query=name --path=$(dirname $DEVPATH))
+- fi
+--- 
+-1.8.4.2
+-
+diff --git a/meta-oe/recipes-support/openct/openct/openct.init b/meta-oe/recipes-support/openct/openct/openct.init
+deleted file mode 100644
+index c6896095e3..0000000000
+--- a/meta-oe/recipes-support/openct/openct/openct.init
++++ /dev/null
+@@ -1,89 +0,0 @@
+-#!/bin/sh
+-#
+-# openct       This shell script takes care of starting and stopping OpenCT.
+-#
+-# chkconfig:   2345 24 89
+-# description: OpenCT is a middleware framework for smart card terminals.
+-#
+-# processname: ifdhandler
+-# config:      /etc/openct.conf
+-
+-### BEGIN INIT INFO
+-# Provides: openct
+-# Default-Start: 2 3 4 5
+-# Default-Stop: 0 1 6
+-# Should-Start: $syslog $network
+-# Should-Stop: $syslog $network
+-# Short-Description: Middleware framework for smart card terminals
+-# Description: This starts/stops the OpenCT middleware framework support
+-#              for smart card terminals.
+-### END INIT INFO
+-
+-. /etc/init.d/functions
+-
+-exec="/usr/sbin/openct-control"
+-prog=openct
+-proc=ifdhandler
+-
+-OPENCT_OPTIONS=
+-[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+-
+-lockfile=/var/lock/subsys/$prog
+-
+-start() {
+-    retval=0
+-    if ! status $proc >/dev/null 2>&1 ; then
+-        action $"Initializing OpenCT smart card terminals: " \
+-            $exec $OPENCT_OPTIONS init
+-        retval=$?
+-        [ $retval -eq 0 ] && touch $lockfile
+-    fi
+-    return $retval
+-}
+-
+-stop() {
+-    if status $proc >/dev/null 2>&1 ; then
+-        action $"Stopping OpenCT smart card terminals: " \
+-            $exec $OPENCT_OPTIONS shutdown
+-    fi
+-    retval=$?
+-    if [ $retval -eq 0 ] ; then
+-        rm -f /var/run/openct/status
+-        rm -f $lockfile
+-    fi
+-    return $retval
+-}
+-
+-restart() {
+-    stop
+-    start
+-}
+-
+-oct_status() {
+-    status $proc
+-    retval=$?
+-    if [ -e /var/run/openct/status ] ; then
+-        $exec $OPENCT_OPTIONS status
+-        [ -e /var/run/openct/status ] && \
+-            echo $"Waiting for reader attach/detach events..."
+-    fi
+-    return $retval
+-}
+-
+-case "$1" in
+-    start|stop|restart)
+-        $1
+-        ;;
+-    reload|force-reload)
+-        restart
+-        ;;
+-    status)
+-        oct_status
+-        ;;
+-    try-restart|condrestart)
+-  	[ ! -f $lockfile ] || restart
+-	;;
+-    *)
+-        echo $"Usage: $0 {start|stop|status|restart|try-restart|reload|force-reload}"
+-        exit 2
+-esac
+diff --git a/meta-oe/recipes-support/openct/openct/openct.service b/meta-oe/recipes-support/openct/openct/openct.service
+deleted file mode 100644
+index 57de8c0a88..0000000000
+--- a/meta-oe/recipes-support/openct/openct/openct.service
++++ /dev/null
+@@ -1,13 +0,0 @@
+-[Unit]
+-Description=Openct Middleware framework for smart card terminals
+-After=syslog.target network.target
+-
+-[Service]
+-EnvironmentFile=-/etc/sysconfig/openct
+-ExecStart=/usr/sbin/openct-control $OPENCT_OPTIONS init 
+-ExecStop=/usr/sbin/openct-control $OPENCT_OPTIONS shutdown
+-RemainAfterExit=yes
+-KillMode=mixed
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/openct/openct/openct.sysconfig b/meta-oe/recipes-support/openct/openct/openct.sysconfig
+deleted file mode 100644
+index ffc270790f..0000000000
+--- a/meta-oe/recipes-support/openct/openct/openct.sysconfig
++++ /dev/null
+@@ -1,5 +0,0 @@
+-#                                                                    -*- sh -*-
+-# Extra options to pass to openct-control.
+-# Consult "/usr/sbin/openct-control -h" for available options.
+-#
+-OPENCT_OPTIONS=""
+diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+deleted file mode 100644
+index c7b0d0d56d..0000000000
+--- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
++++ /dev/null
+@@ -1,91 +0,0 @@
+-SUMMARY = "Middleware framework for smart card terminals"
+-HOMEPAGE = "https://github.com/OpenSC/openct/wiki"
+-DESCRIPTION = " \
+-OpenCT implements drivers for several smart card readers. \
+-It comes as driver in ifdhandler format for PC/SC-Lite, \
+-as CT-API driver, or as a small and lean middleware, \
+-so applications can use it with minimal overhead. \
+-OpenCT also has a primitive mechanism to export smart card \
+-readers to remote machines via TCP/IP."
+-
+-DEPENDS += "libtool pcsc-lite libusb-compat"
+-
+-SRC_URI = " \
+-    https://downloads.sourceforge.net/project/opensc/${BPN}/${BPN}-${PV}.tar.gz \
+-    file://etc-openct.udev.in-disablePROGRAM.patch \
+-    file://etc-openct_usb.in-modify-UDEVINFO.patch \
+-    file://0001-m4-Just-emit-the-first-line-of-compiler-version.patch \
+-    file://openct.init \
+-    file://openct.sysconfig \
+-    file://openct.service \
+-    file://0001-Fix-incompatible-pointer-type-error-with-gcc-option.patch \
+-"
+-
+-SRC_URI[sha256sum] = "6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d181a68"
+-
+-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/opensc/files/openct/"
+-
+-LICENSE = "LGPL-2.0-or-later"
+-LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+-
+-inherit systemd
+-SYSTEMD_SERVICE:${PN} += "openct.service "
+-SYSTEMD_AUTO_ENABLE = "enable"
+-
+-EXTRA_OECONF = " \
+-    --disable-static \
+-    --enable-usb \
+-    --enable-pcsc \
+-    --enable-doc \
+-    --enable-api-doc \
+-    --with-udev=${nonarch_libdir}/udev \
+-    --with-bundle=${libdir}/pcsc/drivers \
+-"
+-
+-inherit autotools pkgconfig
+-
+-FILES:${PN} += " \
+-    ${libdir}/ctapi \
+-    ${nonarch_libdir}/udev \
+-    ${libdir}/openct-ifd.so \
+-    ${libdir}/pcsc \
+-"
+-
+-FILES:${PN}-dbg += " \
+-    ${libdir}/ctapi/.debug \
+-    ${libdir}/pcsc/drivers/openct-ifd.bundle/Contents/Linux/.debug \
+-"
+-
+-INSANE_SKIP:${PN} += "dev-deps"
+-
+-do_install[cleandirs] += "${D}"
+-
+-do_install () {
+-    install -d ${D}${sysconfdir}
+-    # fix up hardcoded paths
+-    sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+-        ${UNPACKDIR}/openct.service ${UNPACKDIR}/openct.init
+-
+-    oe_runmake install DESTDIR=${D}
+-    install -dm 755 ${D}${libdir}/ctapi/
+-    mv ${D}${libdir}/libopenctapi.so ${D}${libdir}/ctapi/
+-    install -Dpm 644 etc/openct.udev ${D}${nonarch_libdir}/udev/rules.d/60-openct.rules
+-    install -pm 644 etc/openct.conf ${D}${sysconfdir}/openct.conf
+-
+-    install -Dpm 755 ${UNPACKDIR}/openct.init ${D}${sysconfdir}/init.d/openct
+-    install -Dpm 644 ${UNPACKDIR}/openct.sysconfig ${D}${sysconfdir}/sysconfig/openct
+-
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 644 ${UNPACKDIR}/openct.service ${D}${systemd_unitdir}/system
+-
+-    so=$(find ${D} -name \*.so | sed "s|^${D}||")
+-    sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
+-    install -Dpm 644 etc/reader.conf ${D}${sysconfdir}/reader.conf.d/openct.conf
+-}
+-
+-BBCLASSEXTEND = "native"
+-
+-# http://errors.yoctoproject.org/Errors/Details/766890/
+-# openct-0.6.20/src/ifd/ifdhandler.c:239:52: error: passing argument 2 of 'ifd_get_eventfd' from incompatible pointer type [-Wincompatible-pointer-types]
+-# openct-0.6.20/src/ifd/process.c:461:61: error: passing argument 4 of 'ct_tlv_get_opaque' from incompatible pointer type [-Wincompatible-pointer-types]
+-CFLAGS += "-Wno-error=incompatible-pointer-types"
 -- 
-2.34.1
+2.43.0
 
 
