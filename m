@@ -2,46 +2,46 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AE90E8538D
-	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 18:13:55 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1792.1775240029081515347
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17A01E8538E
+	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 18:29:05 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2076.1775240938716738755
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2026 11:13:49 -0700
+ Fri, 03 Apr 2026 11:28:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=KhiwNnjj;
- spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout07.t-online.de (Postfix) with SMTP id 98078E66B
-	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2026 20:13:46 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.167.238]) by fwd77.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=enSG78EJ;
+ spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd91.mgt.mul.t-online.de (fwd91.aul.t-online.de [10.223.144.117])
+	by mailout09.t-online.de (Postfix) with SMTP id AB67538BCC
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2026 20:28:55 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.167.238]) by fwd91.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1w8j1a-4BfwTh0; Fri, 3 Apr 2026 20:13:42 +0200
+	esmtp id 1w8jGD-1rB14j0; Fri, 3 Apr 2026 20:28:49 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] libavif: update 1.3.0 -> 1.4.1
-Date: Fri,  3 Apr 2026 20:13:36 +0200
-Message-ID: <20260403181336.71605-1-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCHv2] libavif: update 1.3.0 -> 1.4.1
+Date: Fri,  3 Apr 2026 20:28:41 +0200
+Message-ID: <20260403182841.73361-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1775240022-767FB8CB-8CF32110/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2cab7573-8429-4c26-9b88-b932a4f699d9
+X-TOI-EXPURGATEID: 150726::1775240929-95FF96A3-47ABA658/0/0 CLEAN NORMAL
+X-TOI-MSGID: d907e9ab-f241-4ef4-a4cd-e836b068133a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1775240026; i=f_l_k@t-online.de;
-	bh=Lv9yFgPcjhbjkFP52dJvHWRliiOnfqPri8fbBNLYXwU=;
+	s=20260216; t=1775240935; i=f_l_k@t-online.de;
+	bh=kGjD95bzM0y1wF0mEcGPR0yX+eqtS3XCRQWxPl3aYGQ=;
 	h=From:To:Subject:Date;
-	b=KhiwNnjj8CEq31tzrlsaddFbR985SRq9yU/LONba8i8G5He2S7XUPkir2/JuNQFDb
-	 Pu1emJxnBylZu7eobAWU0dh8DLtnGXxmFaPunsdIFgaa4haAnDeLDoe9GGhN8DBoIF
-	 9msWkt7f83viY06yGWo9UCllY4BYiSNt85Of7r+T2kLTVaS3naDGX3dLW9dvDUzjZn
-	 8t5/D3hhKIaZ9W18GeuHA1x0i14gbgr6caeu9B4/CztxGssDqBP95di1u23qYfRaUl
-	 sCAE0Fm4KJKA9ROfuaerGsOZYIk/45VMhZPFOQkHm153WGD1r2gb/2yIdB3HKOmKNO
-	 zpWnp20F4m7DA==
+	b=enSG78EJgBnVPhdzx3y5CClQTBdefZC+hwJc7aPU4hVFwfdkU19BleicY7r8MYF/r
+	 nS6bZmhtFWNk1XgT2MYlRh0j6LDWBpU6tZrJJ7q7ij04uGHRVc9VUVnVSl3D3UZuTV
+	 05cTpPBvLN+tXVqSk3+ho5VNGWHGrtItjkIU3CfJLnyWXAmApnRzO5J2jGtDp+fPvS
+	 4J9ykZTVjEKIOEXBO17ctZndqnn1g5adn/UMbut6Ks6FQ4R4p3MJX2T/AAzkwUYaBi
+	 8K8x+i+pmusla9K5xgNZAN8D7S9W1Inuf8GAqU8exwf3KlFvR0Dgpndn0Xe0BzwRlJ
+	 bXU251mLSymRw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 18:13:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125988
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 18:29:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125989
 
 - add missing dependencies
 - add PACKAGECONFIG for aom,svt-av1
@@ -170,7 +170,7 @@ branch=3Dmain;tag=3Dv${PV}"
 diff --git a/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb =
 b/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb
 new file mode 100644
-index 0000000000..ff1bb34909
+index 0000000000..6f6aea0599
 --- /dev/null
 +++ b/meta-multimedia/recipes-multimedia/libavif/libavif_1.4.1.bb
 @@ -0,0 +1,27 @@
@@ -202,9 +202,12 @@ branch=3Dmain;tag=3Dv${PV}"
 +"
 +
 +PACKAGECONFIG ?=3D "dav1d"
-+PACKAGECONFIG[aom] =3D "-DAVIF_CODEC_AOM=3DSYSTEM,,aom"
-+PACKAGECONFIG[dav1d] =3D "-DAVIF_CODEC_DAV1D=3DSYSTEM,,dav1d"
-+PACKAGECONFIG[svt] =3D "-DAVIF_CODEC_SVT=3DSYSTEM,,svt-av1"
++PACKAGECONFIG[aom] =3D "-DAVIF_CODEC_AOM=3DSYSTEM,-DAVIF_CODEC_AOM=3DOFF=
+,aom"
++PACKAGECONFIG[dav1d] =3D "-DAVIF_CODEC_DAV1D=3DSYSTEM,-DAVIF_CODEC_DAV1D=
+=3DOFF,dav1d"
++PACKAGECONFIG[svt] =3D "-DAVIF_CODEC_SVT=3DSYSTEM,-DAVIF_CODEC_SVT=3DOFF=
+,svt-av1"
 --=20
 2.53.0
 
