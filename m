@@ -1,122 +1,92 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF943D3942C
-	for <webhook@archiver.kernel.org>; Thu,  2 Apr 2026 13:49:44 +0000 (UTC)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com [148.163.156.1])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16034.1775137561002518927
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CB02CC6B3F
+	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 01:24:38 +0000 (UTC)
+Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2626.1775179472307385274
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Apr 2026 06:46:01 -0700
+ Thu, 02 Apr 2026 18:24:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ibm.com header.s=pp1 header.b=V8n2BPUj;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: us.ibm.com, ip: 148.163.156.1, mailfrom: archanak@us.ibm.com)
-Received: from pps.filterd (m0353729.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 632370Fb367956
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 12:28:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=pp1; bh=R8D8Jj2+pIk7G5xYSr/hmttVOLY0se1pS6JznTvng
-	DM=; b=V8n2BPUjpC+43xA1VgTrevvVVZQONVwNkm/S+0M5LLhSw/kdFW8X95UvR
-	yn5gIa/C4nzCdzwtwDnq4UHhToCzMd+2voPg79KBzHIA+exPzTV1VbOhpsgPQ/Co
-	qB3l08JOJvZZA7dad50e1rsUdrRlBl0Vw8XAPLYKIM0Ifszh5rGxCJKYtwd92EDk
-	zaFraWuMAfX0OA5Bocddry0vDU0TN1C6UqbetEvuf1/z2BseKXi6H6gtP2fdJ4l3
-	BRUV1UIHxokTwn4UxXAbANnCmi8YzWRFSiDZwCznsXM0aCm5Oyocsyv8RY+gt1fn
-	dUMUssBRfF/FfnT6fW7gBxduqNFRQ==
-Received: from ppma23.wdc07v.mail.ibm.com (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
-	by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4d66nnvpgs-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 12:28:11 +0000 (GMT)
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
-	by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 632C71fv013922
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Apr 2026 12:28:10 GMT
-Received: from smtprelay06.dal12v.mail.ibm.com ([172.16.1.8])
-	by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4d6ttksweb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 12:28:10 +0000
-Received: from smtpav01.dal12v.mail.ibm.com (smtpav01.dal12v.mail.ibm.com [10.241.53.100])
-	by smtprelay06.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 632CS8bS7537258
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Thu, 2 Apr 2026 12:28:09 GMT
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id D02DB58058;
-	Thu,  2 Apr 2026 12:28:08 +0000 (GMT)
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id C33F958057;
-	Thu,  2 Apr 2026 12:28:08 +0000 (GMT)
-Received: from gfwa600.aus.stglabs.ibm.com (unknown [9.3.84.13])
-	by smtpav01.dal12v.mail.ibm.com (Postfix) with ESMTPS;
-	Thu,  2 Apr 2026 12:28:08 +0000 (GMT)
-Received: by gfwa600.aus.stglabs.ibm.com (Postfix, from userid 607776)
-	id 858462400CD; Thu, 02 Apr 2026 07:28:08 -0500 (CDT)
-From: Archana Kakani <archana.kakani@ibm.com>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=TRNJ/SFV;
+ spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-64edf260b49so2111495d50.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 18:24:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1775179471; x=1775784271; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ertm3hhooXm6Ntgo6qBIgBveeN11SZKFWl0IPJkewUU=;
+        b=TRNJ/SFVxupaZ4iDBzGoDY66Y9VLMYzldx8J53uzG07DC0F/w7C4kjxWP9GRqnbmfK
+         ZhbdZfPnd8MUlKBSlaVop6e72wOEwzpSpLyfElf6mMURdmXkmqLJnreFqQnCokrPcyQN
+         9BL1JZKg+QRulI93qnRVTZBtGlwcFbW2DFCfEoWJELH6QO4dV3Gg0r530paDetLmXlz9
+         MtLgpYd09dY3rX8TMUS6eNPYd5KpUbsIa7orZYlPWEK/ZO1OVGZflw6BxdKBumAKgJ6+
+         tK7ptMfd3Iq/dm4MTMaXhbMot2+qf24CUaMtzHycqI3T8yDbpKUEQz9qUdHJeSnlqujE
+         GW7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775179471; x=1775784271;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Ertm3hhooXm6Ntgo6qBIgBveeN11SZKFWl0IPJkewUU=;
+        b=ecmpIGF/Ka1cOjPOfWk5HUh3DDEjc0EZQuvKtNNpZihL5/EpEYsfmr40l6TqyZz/eP
+         DhUW530hBJpeRF+wmSppg8xKxlgyeg5GRrlA4N43P2zcmfk3V/9wCQrGTIRzX+xtonLi
+         iyNGsYGctHwBebioLSgsYkVuYFSOB4f20svWzy0wJRDVO0ycU+rz0ogDd5+caMst96hK
+         omGwOzjMYEGQR7KSbVJzxnwLd41RpMn7hIxZPEX3C5ttpx1N2cA7dmL0sZQCGV3eS03c
+         M1otc95A+LDPzER++0HmZcX/85Bi8Uu8QxcyfHwWz1qVeNHbMK+1G0G1MxBKnw4hpbUM
+         MOmw==
+X-Gm-Message-State: AOJu0Yx5gmXRc7l1wuWvTZgt8emw5g2p2paoQdPp3X/ncUfJh8GHdaF9
+	lrC79VNe33DzWXoOmjXZ19Tz6px2ZnoTqK4ivhjc+9zoxG3IYqLjhMhrPkMSd/zS
+X-Gm-Gg: AeBDievUD6eL/w+Z4ZZn9fdvZpie2l0tvckP2EcONb2gIKzFNaQ/uB+P/kw6J4GovQf
+	fnY3zKTxNzJiczQGrvPVvlCOEZBalqv+VzYEypU6ACGsqRYHjJppk5M/UqH+LHa3AD5KMGtJFDG
+	hQ7xSs7IBBOb/Vh4BTrO0uEAJS05JF30cm2bTso8wARPZ9NjNB95PesWS79gHSwYUuMzsHnmBy4
+	wQfNj42Y7pRdIuNavRDjAsnfLt7jACe5plHPqdyUO0jgLn2bgddwM3ipHB3YKCG5+tEwVGEwaXo
+	6ywsFuPrdRjKlbh2XaLXshC8n47VjWeTuc2Kq10UIfKvWFwCndBJBcwUG1uL2cdY6D+7YIWuwgh
+	lRPMr6X9UJB/Es35g9iydJj1TLJearb+w2NF5SVHR19fM95QgA9TpCh+i6t2A+sgl403yrmVdhu
+	/I5eCBGpAhk3Yf2I/ckIkmYJmfI6pDWsPlEd+YEjCivysOZZYBltD+/QRzwhEWOfpMseb5LHBb0
+	9vrBpVv6ZIWEx/B+JOy4Q1TnfRkhCVpy4+iOgJQ/mwOPwGJK68BLYZUrGGbNgQ=
+X-Received: by 2002:a05:690e:400b:b0:650:176f:1ae3 with SMTP id 956f58d0204a3-650480e71d0mr1051208d50.25.1775179470929;
+        Thu, 02 Apr 2026 18:24:30 -0700 (PDT)
+Received: from localhost.localdomain ([67.233.60.136])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6503a73d18fsm1852256d50.0.2026.04.02.18.24.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Apr 2026 18:24:30 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Archana Kakani <archana.kakani@ibm.com>
-Subject: [PATCH] libspdm: enable shared library build
-Date: Thu,  2 Apr 2026 07:27:30 -0500
-Message-ID: <20260402122730.1485735-1-archana.kakani@ibm.com>
-X-Mailer: git-send-email 2.51.0
+Cc: Jason Schonberg <schonm@gmail.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-xfce][PATCH] thunar-shares-plugin: add missing HOMEPAGE
+Date: Thu,  2 Apr 2026 21:24:19 -0400
+Message-ID: <20260403012420.4784-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: kQ_4d1F0_05RONc97rPiC2_4-_TxcTIe
-X-Authority-Analysis: v=2.4 cv=KslAGGWN c=1 sm=1 tr=0 ts=69ce60db cx=c_pps
- a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
- a=uAbxVGIbfxUO_5tXvNgY:22 a=VnNF1IyMAAAA:8 a=FUJohrcWeqoYL2q-xIsA:9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAyMDExMSBTYWx0ZWRfX+QZpk4bv979D
- F5IcSBp2ZECkVSqgou6tOmABP3cQ0DH2s0OguZH8mciPokidOjr8cLBgLf3wEjDF3VLKfV2jxuA
- P/Gf8hIjFB8R4Nq4Tqml4jARqmYaX3Bc2TL71Qgbfr/pkxln0KETb44TCXGMmtsSR1Rk3WrOGrL
- 3KxoCqZyr0e0+bro73pfvRt4UZip7NBAdSjmUBlklHnJFByKjeGCu2heqgs276le7H+4gGXaOvs
- M/p9v6+vOixeq/3w8Q0n6u1ygRdoG0cSb94MOrgkXnATeNHtePplrVXCkQtzAG+Pujz6+b4vALH
- V8rY0TmH+j/1PAhYhn0Caitq/SkZ76vqVpPCQIivlnIm8pdkoeKo5BR3KDSK+oZpiOmVeqqYD5k
- fG9KT4oqy4SrMZgaBcgVmBdeMLTo7ARSw89LTauSpfZI6gRxeFrwhE996rhWVCu73NP9xoLu80A
- fRzWo2itiNOn77W1BXw==
-X-Proofpoint-ORIG-GUID: kQ_4d1F0_05RONc97rPiC2_4-_TxcTIe
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-02_01,2026-04-02_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0
- phishscore=0 adultscore=0 bulkscore=0 impostorscore=0 clxscore=1011
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2603050001
- definitions=main-2604020111
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2026 13:49:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125968
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 01:24:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125969
 
-Update the libspdm recipe to build and install shared libraries.
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 
-Signed-off-by: Archana Kakani <archana.kakani@ibm.com>
+(cherry-picked from commit e5c5731771d9b0acd2035338ac6760963f0d0229)
 ---
- meta-oe/recipes-support/libspdm/libspdm_3.8.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../recipes-thunar-plugins/shares/thunar-shares-plugin_0.5.0.bb  | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/libspdm/libspdm_3.8.2.bb b/meta-oe/recipes-support/libspdm/libspdm_3.8.2.bb
-index 04f1ffc1fc..d3e4802d5e 100644
---- a/meta-oe/recipes-support/libspdm/libspdm_3.8.2.bb
-+++ b/meta-oe/recipes-support/libspdm/libspdm_3.8.2.bb
-@@ -51,6 +51,7 @@ EXTRA_OECMAKE += "\
- 	-DTARGET=Release \
- 	-DCRYPTO=openssl \
- 	-DENABLE_BINARY_BUILD=1 \
-+        -DBUILD_LINUX_SHARED_LIB=ON \
- 	-DCOMPILED_LIBCRYPTO_PATH=${libdir} \
- 	-DCOMPILED_LIBSSL_PATH=${libdir} \
- 	-DDISABLE_TESTS=1 \
-@@ -60,7 +61,7 @@ EXTRA_OECMAKE += "\
+diff --git a/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.5.0.bb b/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.5.0.bb
+index 3b4f38da02..b270ad0838 100644
+--- a/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.5.0.bb
++++ b/meta-xfce/recipes-thunar-plugins/shares/thunar-shares-plugin_0.5.0.bb
+@@ -1,4 +1,5 @@
+ SUMMARY = "Quickly share a folder using Samba from Thunar"
++HOMEPAGE = "https://docs.xfce.org/xfce/thunar/thunar-shares-plugin"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- do_install () {
-     install -d ${D}/${libdir}
--    install -m 0644 lib/* ${D}/${libdir}/
-+    cp -rf lib/* ${D}/${libdir}/
- 
-     install -d ${D}/${includedir}/${BPN}/
-     cp -rf ${S}/include/* ${D}/${includedir}/${BPN}/
 -- 
-2.51.0
+2.43.0
 
 
