@@ -2,194 +2,164 @@ Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EE4CD730B3
-	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 07:34:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3239FD730B4
+	for <webhook@archiver.kernel.org>; Fri,  3 Apr 2026 07:36:11 +0000 (UTC)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6780.1775201656839956414
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6873.1775201761359526626
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2026 00:34:16 -0700
+ Fri, 03 Apr 2026 00:36:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=UjiFwkdh;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=iSqWb1bX;
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=XscYDh46;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JUHEDK8R;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6336Eu4E140906
-	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Apr 2026 07:34:16 GMT
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63344ZsW823178
+	for <openembedded-devel@lists.openembedded.org>; Fri, 3 Apr 2026 07:36:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XXRnEBY5X3b04yjWP3PGPHZ7qjWWCYwr/k16it4Uxfk=; b=UjiFwkdhfCepisp9
-	pEKtOiOnT3I12gfFnPp1GXBF28eJhw1Xk4yrkqEqbB5I9u9/kZC5MhpuiCx1mOpc
-	oSftrVVFau73lCTePCo50WMvihHW2U/KtAThcA9/4w6JCv/QdeLqTSAtsu2RVYhM
-	zXQ0yaX914nsWnbLoQJ0ilGg/+/2w0qPIb1HZRww1lJlXGETgYNmv2XdOKykNz+g
-	OsBPxxs7yRaq6QAqvv4L8N47ZSq9l2BAAf3Iid3ryEfDqNoDSvq4/Rp7fhVy2+ns
-	YMYbqOfrMyUS+ppsWDRaEiAOVfxi5exDn7cC4ldmJILSTl0qV3vOeD96vYNk6Bcl
-	VHAv6A==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4da83y07qj-1
+	13Av6M6+aZPCXLUC4sjqMeYm6I39jtcwj2HuXWN2WqY=; b=XscYDh46ZjExZLWR
+	JCT06ojWUUzY/UBu/61OgHm+plUVI/2lvMikMPnreLr1QTmw22NFdwN83UbMiLLg
+	FHxEAKhIahgJKRHdkExacqgJB8lGlWGzkhAsmdE6e+BugFEWp+w5I+c+y0aCnhWE
+	v0ulz6a6L7Lmp3f2KoXIYc5ZBvKjlDu8tqTxc/ymBke8gdccPG5v4DrinntHQ6Ed
+	IIt8vcwKWRlL6lD2tou+DjLZq0nQiH/9EBfVMXPVLxITj21iGvWYQ5UNC6NSOhZg
+	55Dub5OTKuuUDYok2iemnQHYvS1E6eI3xS9UO1vugKB9ZwOucvHtWSqb3I/l7KA3
+	VwiwGA==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4da6738jkr-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:34:16 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-89ce2a7fef6so60874426d6.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 00:34:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775201655; cv=none;
+	for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:36:00 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-509219f94b0so50048931cf.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 00:36:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775201760; cv=none;
         d=google.com; s=arc-20240605;
-        b=B87YmjK36DXohX9swz0ctnZC16rIO7GLt5VjvhoXYaV7L8j4w3uDXZaGUdT32oUnrE
-         xeftyVsczV/02SLKS30s52RNgaqdaKz6sGsQ8dXp9kaIhZPF/jegdtZBLME0+ChTF0m/
-         hHH/vc4SjFkEywNrSlZcWDgU5fVTSEG4OFkVyJ6y13tbWlX4g74QvMFSmjNoM6BiDrm6
-         gtslTZwYZX4Gh8kIddpdo5alVtKH01avJtfKUmBH6PYFNicwDo41AjDSt89s0IVL5g+J
-         v5MNSpACG9gByfb+lcDJmqMg7YwSyiNF9xYB+k+pT+cJuxb7RH8HH3+fMdH+khiXNe8e
-         LWEg==
+        b=M80DNEVKpoAXxhYC0VTdJt7qkW08iTqXAdPo6XI964hGjXKexWfje3HdDaFxTvfM3t
+         0+m/doZokBKE94ID+pFjCfYAATuW/LsyiAGf2RhqCu9KmipLUfXxHtOR4Pyjq3KCLPTL
+         Ja0WF3wauEokJo1PbBrAGgPIj9ksHrsbgjC4JLbuW+Z3ePeuinGUIwSoylakGiGWUTqk
+         suyep9F7CVw1lvQcJTU0cDg+nzXFSJQlgAReRb8zFOsxeiESRWjthvYRKatw3nfDML7r
+         WfToGWwDGPXeXyAO39/2MAc9TclCeXh1SSIeJG+qaqOQl7ys3ZzVDQkb7kbYCKY94ZvS
+         dHzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=XXRnEBY5X3b04yjWP3PGPHZ7qjWWCYwr/k16it4Uxfk=;
-        fh=MgOCXLuYPSiEawotpBqjLBUQld1Qo4kpRFPyEGPTWCc=;
-        b=eub+i6QuckkNsBG+o4NEHMrklznaAw3wtzJDZoxEeTBZ6GeQ+RvNXtSa6i8vXjPBo+
-         Y3oBwQf7p3zxNdABnv4UBg7r9r/Jx13aoLt9FnQgJuKwTWfMkq/877Q7DYmVhypvhiCD
-         Dyox3dqsax2BA4Y73MzpGinY59pQGML1E6SrYCDuXVSNbCgepLZpXaaxoVidNhTvo7fO
-         XVet+RyCII/iHAKskASkgYuHINFUflxjB71KEJ+7D7X+Q/hsmMavh7Jk3HOaQ+z1FfPm
-         rGR9pm1jUJnY7+Mt/cUueu7cnPZcbGD+k+HqDVuiVtWif9tE2A66yvseoEpMvOPy0iK8
-         uabQ==;
+        bh=13Av6M6+aZPCXLUC4sjqMeYm6I39jtcwj2HuXWN2WqY=;
+        fh=/JuOYflSa8hJQfBFDcXPdJq/YGwTP02e39QC4UAl1Nw=;
+        b=eX70p+FJrC6fSF+VTXjDP/WtTx6OVWjpj5QFKwng6+gwzzRc5cUuHkGd52PZHMJv7m
+         JeJkPu+VWEEHEg0EEqCHtLdHFlgprgDuoFZsf9tg8Dx2SVhyEvJIVq+lMwboKR6zIko0
+         cQXbzV6JJyT7uM9QTqzzIvcZy48ERaTeFjqtsqbQMmQn/Wq7aoLpx/rcNeifOvjdIsxw
+         HFf725QztFslV4LQ3df7iUFoKfPndGLFU+3/66riy9GyPX/WeLTRuJgkWtN8R8r4jtq8
+         YariZLJqSzodp09U19MjJXBh1mx/SjBUYsB/Y04dv/xX/hjnJCXPhxkkDBAx4jVRiutF
+         TLaQ==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1775201655; x=1775806455; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1775201760; x=1775806560; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XXRnEBY5X3b04yjWP3PGPHZ7qjWWCYwr/k16it4Uxfk=;
-        b=iSqWb1bXKryIcRhkrMbbp7dDbTGHhvOm4WrmL7otdprWj3xKawoFq8oux7uS4vbT8Q
-         JAQkZs5juXGP7pkn4tdat8pOGptkEXpoA/vX2A70OqaXE24E4dTq8ey2tgVEruJoFqj5
-         sKPqbs1jv9uOyZ6BvYaWcR3+1DyY13KHMwVavhoWNXq1TTY+rSVhTGL1DOVwtDqkcs3w
-         Wc6gLiigciIme6NGKAhkc+hj5QBD7xY+bsry93Ef7DW6S90eOWqRmUEXWlfEUZTqu4dQ
-         uihre6sKWlcwTsf+h6fJgxWEYnyVVBqaHWMFofh4AV+uL8DmKRLGGyCcOlupe69dLv1q
-         zcOg==
+        bh=13Av6M6+aZPCXLUC4sjqMeYm6I39jtcwj2HuXWN2WqY=;
+        b=JUHEDK8RbEQjS5dGVyutrAn6MRw1M/xScFraWb2iwoAb+hK2nh1EX9IKu4H1IRoigr
+         P8xgLdV0k04d5rbNW6skkNsd55t2QWJp2WCfXODKrxQMLSDk4Ue6xfF0cX/Oph0Pf2Pm
+         84DJNeXgugGo++R3XPiQCTxqFv464eDB3JHjBjMtW005zpezVapoLqbZat+Fwaff4VFR
+         4a5lDKYR2mKSNuvuaTyZvGwasrPDpO33BJiqJ3Ty39u9nL6nQy0ci/T1JwrNkPIWbuGb
+         HXKAnOGAICgCG8AssRjBRHHAntjNu2T97hm2TOZdHy0XbsgDh25CNQvYoCevCUo6OmLI
+         9qlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775201655; x=1775806455;
+        d=1e100.net; s=20251104; t=1775201760; x=1775806560;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=XXRnEBY5X3b04yjWP3PGPHZ7qjWWCYwr/k16it4Uxfk=;
-        b=crqXz2FJqYWhznFWu+F/PLnOe2FSZZq1IobOWbUdYF8YVMPbv6NqrkwmXbyYad4m+y
-         ZIb/D34k+M/4Yyj6jERpudTGHwgIw1f9yEyRfHMeV+JV4eO3e3bXPRAEXOLFC0OEveF7
-         lCw2vO0jiUwu3JZJzu1rtPTa+jBo/5CvcatpDgK2TJtHRjSa8E3m5509Xc9o+64iRKKR
-         ObkBsi+QcQlMQHo+WpRlV30y8XUdHhtAT8qSreqPtXzoreqepODueZk7Jz0Au9Yh6DNd
-         E3HfkZ8hXzq14nPKrE0fzdlYN+w2/D6EzLclbG+xYVQSEBPH70Mwb5IXuqmHMyE1ldqa
-         CtQQ==
-X-Gm-Message-State: AOJu0Yx8k11qb6ZSjSdx0D/UdZYkuUqWnf44ImQObaQkMvSx/bHeTvm4
-	SXymW9rsR5OwiUsBG2kHv9raL4BFCt1uJNwbudLcon6LJY8fExvS4gEo+iLaOJfWtq74rCf+u7W
-	DcsTsbW7RfFQ15b8+bOWLT2elhcfBdLwyG/aLFImms/xI4JgB4RZbi/k6nQQCl37j9l/jrn2Wtu
-	xjtVH9LvNr6DAvs0PzdHihu03aGM+dLAPT8Xhrxb0eT4gSEai24l4DF7A6Yxo=
-X-Gm-Gg: AeBDiev0xO3SVgOO88nzSd143pdkPgu2Od8sfOxKZxwSVBtbW/pq512Uzfe6eFORKym
-	lpa3Ak18qhH6MkyQaH/jKsP4U6VJSAkvDNhOjOVWkg6AZkKKSDQEWskTf/0pFkUWO1b7gzrJkPN
-	6WdaTBQkAa3zscy6rgt9VCFUrMBranJCj1YbWZW0jPlQYlKGWes6kDysthEn5oX0P4j4rdW16v6
-	Gl6
-X-Received: by 2002:a05:6214:400b:b0:89c:eabb:f58d with SMTP id 6a1803df08f44-8a704da9f12mr31976686d6.47.1775201654950;
-        Fri, 03 Apr 2026 00:34:14 -0700 (PDT)
-X-Received: by 2002:a05:6214:400b:b0:89c:eabb:f58d with SMTP id
- 6a1803df08f44-8a704da9f12mr31976506d6.47.1775201654501; Fri, 03 Apr 2026
- 00:34:14 -0700 (PDT)
+        bh=13Av6M6+aZPCXLUC4sjqMeYm6I39jtcwj2HuXWN2WqY=;
+        b=c7oCYsinmfglS79bv9NPN5T4uYvxpLqppE5TCFFEyPedqL32ahHTFEXFjOj0e5q9Xj
+         Dkax/8Y3Am6I6A2AvbewypdfDUT2YNtoFSpu050cMMt8STE58TxS6p3wdhuQV7qiGdsM
+         Vwnhg+lWgUA2LaW/q42uQ+kDCUkNMMPaje7b2vwyoGvxuK6s/4JK4g6tXSzXEs1vjYMP
+         Ob9nRKe+fWu4qU0dOVjodgjI1bEkkHXpiYP2e+BMu/G8lTAXFn9dF6X+6Vc6mtKDl6jg
+         lwjQPtjRD9PW+nVg8juGdPINcNpW6E5Nmld/GBLBrrFrqOZNq18HI1nzOzEQiNLCnqBG
+         4C/Q==
+X-Gm-Message-State: AOJu0YyP+qADA0Z6OSc/9kYjQzIYrCTHtBi35+4g6AqdusTw+zYOVm9v
+	eG9lkR+ASnetOTUp+9w2HQsdeQGTI9Y4dOQiZjYrurk5L56c8aviVLTw89AC7cHfwyRT8PFsgeA
+	YWgnKo8gQNNoYTzBVzhPPGp0EEAxX/WrXLRUoGxvf2Hcb8ad/uPdJCqCIr4Q+2fIDB4xRBQUiMR
+	y8L5n93VDexPSVMy6hmP59pi/nVz1iN0ANfoirnFuQFkOMqBaEAgRK09iHvZE=
+X-Gm-Gg: ATEYQzzoogGnXPBAyCY00l+ybIyplqbubvckCWkXsG8B4Ho5724M5DgvcrWaaUrhiXo
+	a6INNhPxzEnSyPk6Z1LXh9LKeaSMRKkFWtohnySDuaWG5PUs3tRtXLAMJY0Vj0uiF8hTKjKSsSX
+	jGqaCX7pE8LPgkIF1i9K2bTxSJwC7fowhMwa1/Tlnkav6TsQd3a6OVPFqL65iN/Bi1/8VePrf5p
+	gpM
+X-Received: by 2002:a05:622a:6a47:b0:50b:5402:62d with SMTP id d75a77b69052e-50d6262d1ddmr21931281cf.11.1775201759803;
+        Fri, 03 Apr 2026 00:35:59 -0700 (PDT)
+X-Received: by 2002:a05:622a:6a47:b0:50b:5402:62d with SMTP id
+ d75a77b69052e-50d6262d1ddmr21931151cf.11.1775201759338; Fri, 03 Apr 2026
+ 00:35:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260331095820.1967914-1-martin.jansa@gmail.com>
-In-Reply-To: <20260331095820.1967914-1-martin.jansa@gmail.com>
+References: <20260330084119.3008435-1-naman.jain@partner.bmw.de>
+In-Reply-To: <20260330084119.3008435-1-naman.jain@partner.bmw.de>
 From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Fri, 3 Apr 2026 15:34:03 +0800
-X-Gm-Features: AQROBzBfjIaJLD7Ki_DgYk5SUFRJ9QOif4ddhpE6BrHs66ykR2XkxoFcc5T_MgI
-Message-ID: <CA+s=J=wiBcqMjM=CLgnWgOrXLxWvQ83iQvEdGCpHeQnB0jWmGA@mail.gmail.com>
-Subject: Re: [oe] [scarthgap][meta-oe][PATCH] flatpak: add PACKAGECONFIG for dconf
-To: martin.jansa@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, Markus Volk <f_l_k@t-online.de>,
-        Khem Raj <raj.khem@gmail.com>
+Date: Fri, 3 Apr 2026 15:35:47 +0800
+X-Gm-Features: AQROBzDTaJgL7z8H7VhrFQZYf8GTr7dgPSy3Z18rGMBEPmu_WZmTiW-UfUQaRQ8
+Message-ID: <CA+s=J=x7ys4Tdzpk44o43roBTm9a+OfXzW_-F5CU_we53Swc6w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH 0/1] imagemagick: upgrade
+ 7.1.1-47 -> 7.1.2-15
+To: nmjain23@gmail.com
+Cc: openembedded-devel@lists.openembedded.org, Naman Jain <namanj1@kpit.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=ar6/yCZV c=1 sm=1 tr=0 ts=69cf6d78 cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
+X-Authority-Analysis: v=2.4 cv=erjSD4pX c=1 sm=1 tr=0 ts=69cf6de0 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=Q4-j1AaZAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=C9iyfSnS6EAt8pBlwu0A:9 a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22
- a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-ORIG-GUID: uKC6A7HfzCedYa0UJEgYxS9WutmC_RnH
-X-Proofpoint-GUID: uKC6A7HfzCedYa0UJEgYxS9WutmC_RnH
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAzMDA2NSBTYWx0ZWRfX4kUhQx2oyruy
- cfcrZLVWYW8gVIGcRVmf7N01bS0/up9NsRANs7GOdptALUplD+kyqk314qhsECPHzlWfObN6i8b
- GBEspeBZo/SPxJTDlHoPmtN4+8vxOhPLMpDIoaXQ6/5Qz57h+WFw+KOEScC9w7lTfr8HL460nz4
- gaFwKk9o43kfv8Df3+X3phT4r/ptw+Gd+vFScV9oubf7G2ru+PCkBiOBKocIPouI1CaE9bL6Ar3
- X/EU5HHnuULL8BD/6CRUh44auHXLbrZQypA1MixMyZk5sbgu/btwctqO1xT5hlszRhzhTFvBm/z
- 4QQYL11oQuvr/jJ7qCfdE814dFSC3LtZKpaaAf4rZNn2R3wPxUqUXq5rFriSV/6Nx26SrIAN9qT
- PdkRkOoOefzKFX+gJageV8Ua43ek8SkerOCbKfW8Tg7OGLlcwMqeJU4g+ct7USD5Pc44gAtWZFY
- Nw8UyUD9D34odLxxWfQ==
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=Q4-j1AaZAAAA:8 a=Qnov7ifiAAAA:8
+ a=F2VJEVaI-yagYGPiMbAA:9 a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10
+ a=zZCYzV9kfG8A:10 a=kacYvNCVWA4VmyqE58fU:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ a=4d9-RgBc9cJG6cC6SkVU:22
+X-Proofpoint-ORIG-GUID: ZJHdGmWMNCuCGXJXTZBXKztf1CPdCij5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDAzMDA2NiBTYWx0ZWRfX1DYIj4Tuw/u6
+ l464pf34k86lX9D7jE0pJiu+2Cc71TYtXcEyRhUr3jkcKDR1U4n0ern0rxok6R0qcz8YYfq1EjU
+ 9riff0XF8/uUtX3lzeHLeSVrF2sKPhx+KYH/9STnFpuvGKzF3cgVUUrugzfyNRpTEyrfzZf3crL
+ jdnkwfpHFpW3hRGXi9uaQwZE9B0x6u2XfuSYTDNB5SMxZMr5jlStoBAdqHSAQNrqQE2NPbb0O6t
+ t42parwYXbMcC0tk+c1+Ipz6XwPWETquOGFVgQXPUouoDsF8Nqnj5XxpYPQQUq46MVqdIDdWOMd
+ QfSjAp/kiCnSyVRQ/aWcW9E6MY6N+VoECwW11hRN/zIaOr+AHhH1YjjRR+Bc4LBCTNvBMU0ZSfT
+ /52O9JpYsTJ2B9XacES2inV7IC9Tbds53+RkCT63ui6T6eKBDoryzhCiSscbLNr6GT5jFWn8Kha
+ ZjGDTOmlCZrfWqjJTMA==
+X-Proofpoint-GUID: ZJHdGmWMNCuCGXJXTZBXKztf1CPdCij5
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-03_02,2026-04-03_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0
- malwarescore=0 phishscore=0 spamscore=0 clxscore=1015 impostorscore=0
+ adultscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604030065
+ reason=mlx scancount=1 engine=8.22.0-2603050001 definitions=main-2604030066
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:34:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125974
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2026 07:36:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/125975
 
-On Tue, Mar 31, 2026 at 5:58=E2=80=AFPM Martin Jansa via
-lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
-wrote:
+On Mon, Mar 30, 2026 at 4:42=E2=80=AFPM Naman Jain via lists.openembedded.o=
+rg
+<nmjain23=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> From: Markus Volk <f_l_k@t-online.de>
+> From: Naman Jain <namanj1@kpit.com>
 >
-> Disable by default to avoid a requirement for meta-gnome
+> Hi,
 >
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-extended/flatpak/flatpak_1.15.8.bb | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+> This patch upgrades ImageMagick from 7.1.1-47 to 7.1.2-15 to address mult=
+iple security vulnerabilities.
+> Do note that there are 50+ open vulnerabilities in current imagemagick ve=
+rsion. It include 5+ CVEs with critical score. It will be very challanging =
+to
+> backport all the CVE fixes.
 >
-> diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.15.8.bb b/meta-oe=
-/recipes-extended/flatpak/flatpak_1.15.8.bb
-> index 639027701b..3a2974294f 100644
-> --- a/meta-oe/recipes-extended/flatpak/flatpak_1.15.8.bb
-> +++ b/meta-oe/recipes-extended/flatpak/flatpak_1.15.8.bb
-> @@ -21,7 +21,6 @@ REQUIRED_DISTRO_FEATURES =3D "polkit"
->  DEPENDS =3D " \
->      appstream \
->      bison-native \
-> -    dconf \
->      fuse3 \
->      gdk-pixbuf \
->      glib-2.0 \
-> @@ -38,7 +37,6 @@ DEPENDS =3D " \
+> Reference: https://lists.openembedded.org/g/openembedded-devel/message/12=
+5827?p=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3Acreated%2C%2Cimagemagick%3A+cve%2C20%=
+2C2%2C0%2C118574723
 >
->  RDEPENDS:${PN} =3D " \
->      ca-certificates \
-> -    dconf \
->      flatpak-xdg-utils \
->      fuse3-utils \
->  "
-> @@ -51,6 +49,7 @@ GTKDOC_MESON_ENABLE_FLAG =3D 'enabled'
->  GTKDOC_MESON_DISABLE_FLAG =3D 'disabled'
->
->  PACKAGECONFIG[curl] =3D "-Dhttp_backend=3Dcurl,,curl"
-> +PACKAGECONFIG[dconf] =3D "-Ddconf=3Denabled,-Ddconf=3Ddisabled,dconf"
+> Along with the version upgrade, relevant upstream oe-core changes between=
+ these versions have been incorporated to maintain alignment and avoid regr=
+essions.
 
-This will change the behaviour for this recipe. Why is it needed? Are
-there problems if it's left enabled?
+I do not think this version upgrade falls under what is acceptable for
+a stable branch.
 
+Thanks,
 
->  PACKAGECONFIG[docbook_docs] =3D "-Ddocbook_docs=3Denabled,-Ddocbook_docs=
-=3Ddisabled,xmlto-native"
->  PACKAGECONFIG[man] =3D "-Dman=3Denabled,-Dman=3Ddisabled,libxslt-native"
->  PACKAGECONFIG[soup] =3D "-Dhttp_backend=3Dsoup,,libsoup-2.4"
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#125884): https://lists.openembedded.org/g/openembedde=
-d-devel/message/125884
-> Mute This Topic: https://lists.openembedded.org/mt/118593820/3616702
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Anuj
 
