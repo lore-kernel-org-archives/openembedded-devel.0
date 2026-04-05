@@ -2,144 +2,132 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4444BE6401D
-	for <webhook@archiver.kernel.org>; Sun,  5 Apr 2026 12:49:37 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.34410.1775393370190419839
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64203E6401F
+	for <webhook@archiver.kernel.org>; Sun,  5 Apr 2026 12:49:47 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.34418.1775393385483078249
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2026 05:49:30 -0700
+ Sun, 05 Apr 2026 05:49:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YOfogWOC;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2ad9516a653so15385365ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 05:49:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hi5UdiDy;
+ spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2b23fcf90b2so30970945ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 05:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775393369; x=1775998169; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/mAdxyZWunOnjStdqiE1W/bTPzf8iFzHSPB6ltvP4kg=;
-        b=YOfogWOCJrZCwjNS9Or6MJ9w37WmF+PZoO7F5MMewGScKZmeF86UbLVlOrsLfazW6u
-         D9s76PKs4q7aNBqPbSTLWwrprcL3ZPO2Ij6qPllalReuw28pht4x/OzWtCNssqoynrwS
-         9Wc52BYLeMj3+3pqIdPWEJ5ejwfIh3e9e9WCAvy99Um7Bo8xUNlsyzJ/e69v8oMF/Ern
-         2oGurpaW6VFh88+4R9o/zmURCigT3mpfaZp38a0P/Im8f/2wqn2xpbyEOGevxlE5C5mn
-         xsQ36Qa5WeTuzaM/oVzTSPyxjjaXPh5wY+S84OqV6wiJWV8viV6w+Du/5ZBqbExQfQYf
-         SobQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775393369; x=1775998169;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1775393385; x=1775998185; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/mAdxyZWunOnjStdqiE1W/bTPzf8iFzHSPB6ltvP4kg=;
-        b=XvhowgrNNlOQovYwjyarsBBL4YcpDcuKdcz3IjwWv9xkEkN4aw1hoIqIw75GqkCEAq
-         7CJ+23UUjPtCpS97KSt+FQ4mnD33mlVfN7ANm6tJbw8DNUIiHnG1hiuH6L8JMAW4rY1H
-         ERD5N/nJTJq2PQBFAr0pBKsu8HEQfj1JLpql7oyb96wlqgKfic2L8hrq9/aotO2Fz4WG
-         /gZra3GenuXRhNaXI6z7F8H6lRzquz1TPt+q9lyr88L/FlEVHsvrd8yRyDvTGRlngOSu
-         POOFMvlrYdYN3DJVQaONQpTbeQg3VQkbtmOWBEvYgfMYpBoSwZ+dwLQJefycCX82Cy+z
-         Tbmg==
-X-Gm-Message-State: AOJu0YyDimzUT9fTJs9MiF0iMUVmXd8pluGovh9xmfKWJcR0ZUn1DBvJ
-	PR6Y45VkCRlFR88H4OzY0X/ByJeSVtppIMXWADfRfVXQO4fQ3bO9ZqyjizAxjfvxDoM=
-X-Gm-Gg: AeBDieu3HiBOtBVZDnjNcF8rThQn+k6oeHqrNSOmOGuDDaDN3/HoRpLq33Bh+Y5NWOe
-	bZI6KpvNwSw0uXtr/PGK/4Z21E9kXaudmSbzER527N4+B1B7ZZn2KdVAHSkzLFJxR8FKsyX1Nhd
-	PTcxiDnqw/pa2NplDtRUOce2A0Yq2aUU14O1WfHufF2oCc4gCB/WSaTfpew+OyR9b3ro9baKdh/
-	HrV6XNLSZrkJg+DTJphMu8p23upNE26noRRiVKFp+I52rvqm7H0/K4aD6lxktTQ2sBJswxzhAtH
-	hurGpOGRwPbZN0mjzuH28aRLQXxiIafyOHd6T4dkoD5MqpyYAs0OmRMVnYC5VJ6Vzb3hanfPzmf
-	LmHHZPiZxJcCBA/+KLYEU1jQlGrD7hEwHy3kbfHp/1/Qq7OaE6vahvLLdclw/skEZYZL4O7oQpA
-	VRKWg/1cKwoB9030JUVxAlv3D3unzIXk4inW4=
-X-Received: by 2002:a17:902:cf05:b0:2b0:6a22:5159 with SMTP id d9443c01a7336-2b28164cfd5mr90913035ad.1.1775393369313;
-        Sun, 05 Apr 2026 05:49:29 -0700 (PDT)
+        bh=K2tOEYEQGp3/vHKMcLKmR74jNUYSyhKr+5pgcz7+sGI=;
+        b=hi5UdiDyom9ja53ry+ax7+1RI525X0XBVdRZFCh3C29kk6MmKTbh5ALEUrrZcftfBN
+         HZV/tfPCHTQx0U7BP08n3obAe0k+EtRgFT6gg9DoeNokCQCq364RSWrTXhDSs6d/fFaY
+         7xTeIzPcG7smoKAeUIAFNnFNpznzE7etNQIS0oKc4yzt4RZ8pTyZZZoq0FQoJWrozKw6
+         rUVEp3FUU9Uk+hg0S10x1xFVnMrwWiCJ1C/l0J4Zi2yl3qUu4iTj+40j/mlDvmqRdBNH
+         jEahB6Mzuf5DT3KULFNz7s3SqraF2djrZY80TN4j4veM8xLVXb0yJAYgRrzt5Ss0TiJl
+         oidQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775393385; x=1775998185;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=K2tOEYEQGp3/vHKMcLKmR74jNUYSyhKr+5pgcz7+sGI=;
+        b=BHJIkCSPY5eu71hiFMtU6NRsnMoEyBMISX+NaBxSE/FCvTEvkyXKVsvKyAkTU7jmi8
+         FzTSgB2tnuOiU4tRlXiT9HmaFcykVThBtKzU5yX4y+2fbDRv37SqKIc6QdNt5lweI+b5
+         19YriVDvR9eAuLqgcGw/lAwDk+5c0HV29vQBiHPQKaneiLXMvQtlUNXEWYJq/d9+6cFV
+         s0WdLrdGCuvvKX+ilmNsZp9Bx4dDD6NseTKWA9anhsKDZC9omyyob4GDFDkrJhX78fzc
+         B4o7LkvGIqXBXTILbEmYmvECOoimu9KUOz36R9Ut2rThMgUuIMOLBrF4OFSr+jWkbGVo
+         X8xA==
+X-Gm-Message-State: AOJu0Yxvi9p/KZcTNVDfhZVmna4qG7s3nRPaV6BddGO5Ynop8K//SKTZ
+	jBumLRyLplO9R+5lio/Nx3OWSMQIuoWIb1978t8W6OWWIfnCxtluhVWbWjEEJjikoM4=
+X-Gm-Gg: AeBDievWmEgNsEqatqzAfgX3xfw7kk1gdcz43FUB6DzD7Z9WgzKuGrDM7cjsUo4rABs
+	pogF2FxpIoqOh358BL7j4DAbBcjUdLJ2vA0EiDAa6F4YqzK9F4n+/aTKJOaRcsie74ztjwIlDNj
+	8c/BKMSJKd8MYip2nknOMytfiQpOycSQMsxNu8R/V4vYj9aOi7W0UDp7CJX8VhWVKptDye9+4Ml
+	GAkmEg+96la8A2qz5vZLnUOj3ice3243s0Isy99jNGl/9dm0vqpVkSaFzYA3ts82uv0t4Z9XiiO
+	Im/iJCphOk2HINo9b5E3q1vP2c8tKH0xc/mRjUOIIdaEvHOgjumODvSEs0Cxsbdf+tZDRFRR/7E
+	QIpqIHT0rgzk27zoPY6FbKrPzwxUiESzUmhrqQrLasFV2EVBN2gEguDUlQN+mUc2RDcoKgX4yu7
+	RcdUsBYKVf7EE4is/7gYE5i3UB9mUDvneJ8OY=
+X-Received: by 2002:a17:903:1984:b0:2b2:4c58:5ba7 with SMTP id d9443c01a7336-2b2818014c8mr102628815ad.30.1775393384682;
+        Sun, 05 Apr 2026 05:49:44 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([167.103.127.14])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b27477736dsm106828025ad.24.2026.04.05.05.49.27
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b27477736dsm106828025ad.24.2026.04.05.05.49.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 05:49:28 -0700 (PDT)
+        Sun, 05 Apr 2026 05:49:44 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-multimedia][whinlatter][PATCH 1/14] libde265: patch CVE-2026-33165
-Date: Mon,  6 Apr 2026 00:49:03 +1200
-Message-ID: <20260405124916.2881008-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 7/14] wolfssl: patch CVE-2026-4159
+Date: Mon,  6 Apr 2026 00:49:09 +1200
+Message-ID: <20260405124916.2881008-7-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260405124916.2881008-1-ankur.tyagi85@gmail.com>
+References: <20260405124916.2881008-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 12:49:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126000
+ <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 12:49:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126006
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport the commit mentioned in the NVD
-
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33165
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-4159
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libde265/libde265/CVE-2026-33165.patch    | 45 +++++++++++++++++++
- .../libde265/libde265_1.0.16.bb               |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-33165.patch
+ .../wolfssl/files/CVE-2026-4159.patch         | 32 +++++++++++++++++++
+ .../wolfssl/wolfssl_5.8.0.bb                  |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-4159.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-33165.patch b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-33165.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-4159.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-4159.patch
 new file mode 100644
-index 0000000000..3606c78078
+index 0000000000..982cbd09af
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265/CVE-2026-33165.patch
-@@ -0,0 +1,45 @@
-+From 9e8560a1b01bf066aaada3c19205170d93047766 Mon Sep 17 00:00:00 2001
-+From: Dirk Farin <dirk.farin@gmail.com>
-+Date: Sun, 15 Mar 2026 22:58:39 +0100
-+Subject: [PATCH] fix reallocation of metadata array when ctb size changes
-+ (thanks to Ana K.)
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-4159.patch
+@@ -0,0 +1,32 @@
++From 4de19e3894e81eeaf3079b1270813d0a2b7fe69c Mon Sep 17 00:00:00 2001
++From: Josh Holtrop <josh@wolfssl.com>
++Date: Tue, 10 Mar 2026 17:26:28 -0400
++Subject: [PATCH] Avoid one-byte read outside of allocated encrypted content
++ buffer in wc_PKCS7_DecodeEnvelopedData()
 +
-+(cherry picked from commit c7891e412106130b83f8e8ea8b7f907e9449b658)
++(cherry picked from commit d37b51c3cef6897e117364ab8b1a257e52a634c0)
 +
-+CVE: CVE-2026-33165
-+Upstream-Status: Backport [https://github.com/strukturag/libde265/commit/c7891e412106130b83f8e8ea8b7f907e9449b658]
++CVE: CVE-2026-4159
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/d37b51c3cef6897e117364ab8b1a257e52a634c0]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ libde265/image.cc | 5 +++--
-+ libde265/image.h  | 2 +-
-+ 2 files changed, 4 insertions(+), 3 deletions(-)
++ wolfcrypt/src/pkcs7.c | 6 ++++++
++ 1 file changed, 6 insertions(+)
 +
-+diff --git a/libde265/image.cc b/libde265/image.cc
-+index fdc80fc2..1387f78d 100644
-+--- a/libde265/image.cc
-++++ b/libde265/image.cc
-+@@ -455,8 +455,9 @@ de265_error de265_image::alloc_image(int w,int h, enum de265_chroma c,
++diff --git a/wolfcrypt/src/pkcs7.c b/wolfcrypt/src/pkcs7.c
++index 4ba96c90d..e65ddd493 100644
++--- a/wolfcrypt/src/pkcs7.c
+++++ b/wolfcrypt/src/pkcs7.c
++@@ -12853,6 +12853,12 @@ WOLFSSL_API int wc_PKCS7_DecodeEnvelopedData(wc_PKCS7* pkcs7, byte* in,
++             /* use cached content */
++             encryptedContent = pkcs7->cachedEncryptedContent;
++             encryptedContentSz = (int)pkcs7->cachedEncryptedContentSz;
+++
+++            if (encryptedContentSz <= 0) {
+++                ret = BUFFER_E;
+++                break;
+++            }
+++
++             padLen = encryptedContent[encryptedContentSz-1];
 + 
-+     // CTB info
-+ 
-+-    if (ctb_info.width_in_units != sps->PicWidthInCtbsY ||
-+-        ctb_info.height_in_units != sps->PicHeightInCtbsY)
-++    if (ctb_info.width_in_units  != sps->PicWidthInCtbsY  ||
-++        ctb_info.height_in_units != sps->PicHeightInCtbsY ||
-++        ctb_info.log2unitSize    != sps->Log2CtbSizeY)
-+       {
-+         delete[] ctb_progress;
-+ 
-+diff --git a/libde265/image.h b/libde265/image.h
-+index 3779580c..6fc34c71 100644
-+--- a/libde265/image.h
-++++ b/libde265/image.h
-+@@ -149,7 +149,7 @@ template <class DataUnit> class MetaDataArray
-+   // private:
-+   DataUnit* data;
-+   int data_size;
-+-  int log2unitSize;
-++  uint8_t log2unitSize;
-+   int width_in_units;
-+   int height_in_units;
-+ };
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-index 2676de5c2e..5024c56831 100644
---- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.16.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
++             /* copy plaintext to output */
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+index 1f5b051d16..992591fb90 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
+@@ -35,6 +35,7 @@ SRC_URI = " \
+     file://CVE-2026-3229-3.patch \
+     file://CVE-2026-3230.patch \
+     file://CVE-2026-3547.patch \
++    file://CVE-2026-4159.patch \
+ "
  
- SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https;tag=v${PV} \
-            file://CVE-2025-61147.patch \
-+           file://CVE-2026-33165.patch \
-            "
- SRCREV = "7ba65889d3d6d8a0d99b5360b028243ba843be3a"
- 
+ SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
 
