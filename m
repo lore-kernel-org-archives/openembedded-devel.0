@@ -2,192 +2,341 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A5A6E9D80C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DCBAE9D80E
 	for <webhook@archiver.kernel.org>; Sun,  5 Apr 2026 15:39:49 +0000 (UTC)
-Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37046.1775403585985017238
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37042.1775403580766443973
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2026 08:39:46 -0700
+ Sun, 05 Apr 2026 08:39:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=kgdP1cXt;
- spf=pass (domain: gmail.com, ip: 74.125.82.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-126ea4e9694so7030436c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 08:39:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=DyB6kM2n;
+ spf=pass (domain: gmail.com, ip: 74.125.82.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-2c7d8bbad06so7927278eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 08:39:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775403585; x=1776008385; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=j3wWymsKv6nQoc45Wy515Qfr+mBELcP92P+q0J7YI3Y=;
-        b=kgdP1cXtWEUmN/X2jGNdYDWzo8Ta6aKGVARmc0mYyAGJfL629xsO9MOb6xrcu4MmRs
-         Z5qSFl48ELcadKE9ZBQ70FVxpk8xxelX0jorVeW7vHhDgJIbMtYqqwp6aVrtKDLeNUiY
-         isgyNfl+pl3DlqgUPuJKcWiOHAIDmk15gYi23gxnNKrJo4RCtnmmphREMDJLIhR99zQl
-         c2YI23DIj2XosuMOSDB8IxdzfVlyC9sHv65NsZIbUKouYQbQP1XUBqJIMaL5fmZsvHVZ
-         1UoGzf16fZUfgSmw30pp0svUwfBW0SU3nQ7fu9qeUIbb3xs6Ci6MPBgNvb9WwdChm3Tu
-         jNEA==
+        d=gmail.com; s=20251104; t=1775403580; x=1776008380; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=4h+73QKHz+ETlNjhGwT7uC41nveztEFpnXjrNf9jtpI=;
+        b=DyB6kM2nHDiFMtK3LvgY51ZHFObNzWJl/8Enh7xj2KfLj2HRYuVmLYkk69I/g9vhls
+         i1ERW59TNxA8y28aRlbHnKB8glWG0KFk2RDesMM/oClgH8HLdtjCCg0wlRkMSpwYs85o
+         n3uf0Ohq79quzCnJeUGmghhnOQ47zYtBFdnsru6BodNf2AFEU9mbby5LbBrGgk5j5Cch
+         krSj2KGHIHkqb5rvARmdH5f53SaMPmQDoEzEk72Hy/s7jkyrZimMh6w91WsN19Vv6iXt
+         QcuC4Oomty2rZNcvVVZL+HoGNTC5u0ULKLdP/T8hOzQMJ0og7NpymkbBU9qWiBGux9lh
+         EbKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775403585; x=1776008385;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=j3wWymsKv6nQoc45Wy515Qfr+mBELcP92P+q0J7YI3Y=;
-        b=cKF3ciWPtnubs0rPz3xknKBlm/sUPjYcDeR1B/GRU3auvMlRX/K4CjRaLiJVnyePYn
-         RmuvgDzl1Z/eFZxRlyQYmA9rwF+7+Xuc54bEzGHxZkfPytOhmG0Y4mYE7kSwRG2I33dI
-         jkcOHXYIVdZLYX9DZZdP2LymJYJgi/BON4Ju/MmtpaWzbZHB/ic/7q08tPaflyc6lLmP
-         DLbjRlmr2GAzgX4RrSiEvaPaoTdkY8ZOXLKaR+UD/XaAKCaYHdCL4QAdwpVL+O/4oNx6
-         YNNPprvUhglzuDTawch7O5wFfAs6yKkkOnCCgH93D7RAqHxyRQiX/6uBNdzeRAVjAjm8
-         1sfw==
-X-Gm-Message-State: AOJu0YytQWy9m7TYdrzwJPlsJkXpFopRD4uqQdYjhrmbTrmCcqZxRITD
-	9bGur8Gy18vd9nii9rt1ZT/pHGnPqex5N7sAmia7Ad4Zy4Pv0X9+pAyZWgEmiA==
-X-Gm-Gg: AeBDiesCsWbz2SKwVm0LmOZJyjyzu0sZ+4KhGnRwCl7a+9PKfUMa9HgJ2Gm+Pt1I/OK
-	9NdUuQQsyT/N4wKZk21Rpq8C2bZQAVlp3T1Dt66Vh8sNJvd1ZYaYIO/LXpw5flhnzkdo0wdwpJ/
-	TFjhLwIvdc/flxiV256yhkryF19T5V5sTa5UkqX6J+lpg9FaBV/6adxr6TXIMlLz0glYcoKWF1o
-	BkBRiB152snB+aTy1tSyoU4QNl9CHmqiaQeHqm/TA5Wu81y1XIUYdI0xcoe5JIFExd9nf0OGLlH
-	YNLVpyCDDGfvQcB2nJ6jsg8U6gSJ1qay0oScZ5LyHPEZCV5pzItwJG9tTwDmf1b29CPUd47IThY
-	dplW2X/EP0p6ajkNsAcqdgrUNz+7ICCrBiXypZRdEDh9Bil/Vhylrd8yS4JivCFcThtt8d5Oxse
-	dmTq8vb6qBtOqQLUDgC+6zNZGMQ8eWngOpTL9HVkd6wLv+m6wSYla4x2xQcMaP11/PDsdQTrS1B
-	2j2hM3+MmkaCojP2xPEqO1c+SMybgDmhvMHNW4DY6txrtpoJT9Wq34g4c82
-X-Received: by 2002:a05:7300:6ca1:b0:2be:2953:fd74 with SMTP id 5a478bee46e88-2cbfa4c471amr4900368eec.14.1775403584855;
-        Sun, 05 Apr 2026 08:39:44 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775403580; x=1776008380;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4h+73QKHz+ETlNjhGwT7uC41nveztEFpnXjrNf9jtpI=;
+        b=kdiqqMi8U4JRS5gd2laxizcO/gJGIIOSm5W0ohqUeDkpVJSn3aL3mgMCmwctuLhAp+
+         THoslK8bnlQdaHBXN9A0KcVFQaiKqlXiBpYQqSlvU+zFI1bFchobGPXoQOcYs6vkEE1d
+         LXY66eAe5YB3/r7VPASz3QVVna+2B+LsFg6NAYhS5Fb+prb084You3xeTkdWopZ/QPA9
+         UYBJ2s7cyf7EkFdFjGpw9ih5buNRUP2zQPSgwXisyWsGvKGMFNzwARWlIQGDbx5HncTo
+         GoD/e5YrOxDmhOc7C/QKyVAOUcoCmnmPtWe457vt1UFje7nxo5FpUIvsQQQj62OPvcqH
+         2+dA==
+X-Gm-Message-State: AOJu0Yw1yBKdVGAi/Nb0WYIz6zQH2wOHw4a0A4apMyeor7bqNaaxchvj
+	d8JHFQyx0qzXGIxjw9K7KzXBqW7bD4NzOcCispf43hgbM5HMJLKJJqduQSvmiw==
+X-Gm-Gg: AeBDiesJj8zOQ0ynQUUbMkufrXV+idVlbfdlAV4inYOoUlGi5YR9WJMjhhEeqpeAkga
+	a+inTq9xRwqfOjZAD/tNsnzcAQaZ3qV+hmFx+WugscNgDvs35IrHwkHiyfIWTNLh4rwpxGVHZ1V
+	b9GAZp9ts/QVDCdBOCuP7Cl+v9wbUQaKpo1NAJL5eSPuz6GFWPAqehrDwQ6fHP0XZQEuK3SsgZ0
+	wANY7jadgU1EI/R/sr21++7Qo0Svh3PDGvwxGP+Yfkzp00XG88OeN/SA+B75NBEXIkgojB9NUcE
+	8rpElnsrf4ClOcuGMSOwahe7YxyN7rOv6TzhDLkXc4UPy4Fxlo4CHH6g2YXYpBFkso3cBz6Wk0I
+	bSwiSGUJ8SNCrpB8GSwAx+914EfgtXnuyXyTFIpKACX0zigU+zt4vazsxxCRORC4rmXpenwmp1o
+	81LhY/tPUPd5zP1rxCFZ0U8raB3u62gJAmGVZWSopQ1h3MhFbZ8PEAC0ZbrihCD5yBq2MXvxDhu
+	O65F14A1tBa6PbWQESAkPdnQOaG+FIOqx5IDGZSXU3wnyVH8O7l9Y99C8ci
+X-Received: by 2002:a05:7300:3242:b0:2c1:27c:75bd with SMTP id 5a478bee46e88-2cbf6a8d94dmr4581318eec.0.1775403579595;
+        Sun, 05 Apr 2026 08:39:39 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2ce39d13decsm3298121eec.8.2026.04.05.08.39.43
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2ce39d13decsm3298121eec.8.2026.04.05.08.39.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 08:39:44 -0700 (PDT)
+        Sun, 05 Apr 2026 08:39:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 3/3] libgphoto2: Fix c23 build errors
-Date: Sun,  5 Apr 2026 08:39:36 -0700
-Message-ID: <20260405153936.1093103-3-khem.raj@oss.qualcomm.com>
+Subject: [meta-networking][PATCH 1/3] ez-ipupdate: Update to 3.0.11b8
+Date: Sun,  5 Apr 2026 08:39:34 -0700
+Message-ID: <20260405153936.1093103-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260405153936.1093103-1-khem.raj@oss.qualcomm.com>
-References: <20260405153936.1093103-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 15:39:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126018
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126016
 
-Fixes errors e.g.
-
-error: assigning to 'char *' from 'const char *' discards qualifiers [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
-  131 |         dot = strrchr(filename, '.');
-      |             ^ ~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
-
-They are latent and brought to fore with autoconf 2.73 which switches
-defaults to use -std=gnu23
+Drop upstreamed patches
+Add a patch to fix C23 build break
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...fix-const-correctness-for-c23-builds.patch | 84 +++++++++++++++++++
- .../gphoto2/libgphoto2_2.5.33.bb              |  1 +
- 2 files changed, 85 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-libgphoto2-fix-const-correctness-for-c23-builds.patch
+ ...te_3.0.11b7.bb => ez-ipupdate_3.0.11b8.bb} | 16 +++---
+ ...ure-Check-for-string.h-system-header.patch | 53 +++++++++++++++++++
+ .../ez-ipupdate/files/CVE-2003-0887.patch     | 20 -------
+ .../ez-ipupdate/files/cache_file.c.patch      | 34 ------------
+ .../ez-ipupdate/files/conf_file.c.patch       | 20 -------
+ 5 files changed, 60 insertions(+), 83 deletions(-)
+ rename meta-networking/recipes-connectivity/ez-ipupdate/{ez-ipupdate_3.0.11b7.bb => ez-ipupdate_3.0.11b8.bb} (50%)
+ create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/0001-configure-Check-for-string.h-system-header.patch
+ delete mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/cache_file.c.patch
+ delete mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/conf_file.c.patch
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-libgphoto2-fix-const-correctness-for-c23-builds.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-libgphoto2-fix-const-correctness-for-c23-builds.patch
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b8.bb
+similarity index 50%
+rename from meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
+rename to meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b8.bb
+index 7a392b2c23..eabf4027d6 100644
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b8.bb
+@@ -4,21 +4,19 @@ HOMEPAGE = "http://sourceforge.net/projects/ez-ipupdate/"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7783169b4be06b54e86730eb01bc3a31"
+
+-SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
++SRC_URI = "${DEBIAN_MIRROR}/main/e/${BPN}/${BPN}_${PV}.orig.tar.gz \
+            file://Makefile.am.patch \
+-           file://cache_file.c.patch \
+-           file://conf_file.c.patch \
+            file://wformat.patch \
+            file://0001-ez-ipupdate-Include-time.h-for-time-API-prototype.patch \
+            file://CVE-2003-0887.patch \
++		   file://0001-configure-Check-for-string.h-system-header.patch \
+            "
+-SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
+-SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
++SRC_URI[sha256sum] = "bf5b8d11ffe055c5891d0ab64bbfa86e99cbda645d40f346146b939fec8d962d"
+
+ inherit autotools pkgconfig
+
+-do_install:append(){
+-    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
+-}
++#do_install:append(){
++#    install -m 0744 -d ${D}${localstatedir}/lib/ez-ipupdate
++#}
+
+-FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
++#FILES:${PN} += "${localstatedir}/lib/ez-ipupdate"
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/0001-configure-Check-for-string.h-system-header.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/0001-configure-Check-for-string.h-system-header.patch
 new file mode 100644
-index 0000000000..9ded174095
+index 0000000000..e9995a3500
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/0001-libgphoto2-fix-const-correctness-for-c23-builds.patch
-@@ -0,0 +1,84 @@
-+From bfa786a260bfd4660e8186ebad8778718e85e8cd Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/0001-configure-Check-for-string.h-system-header.patch
+@@ -0,0 +1,53 @@
++From 811f253c03464489d445ab6627bb4187d27e98ef Mon Sep 17 00:00:00 2001
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Sat, 4 Apr 2026 14:56:01 -0700
-+Subject: [PATCH] libgphoto2: fix const-correctness for c23 builds
++Date: Sat, 4 Apr 2026 19:12:37 +0000
++Subject: [PATCH] configure: Check for string.h system header
 +
-+C23 treats the return values of strrchr() and strchr() as const char *
-+when the input string is const-qualified. Update local variables to use
-+const char * where appropriate to avoid discarded-qualifier warnings and
-+build failures with -std=gnu23.
++This is needed for functions like memcpy in md5.c but
++it only includes string.h when its detected by autotools
++however the needed check for detecting it during configure
++are missing. This patch adds them
 +
-+No functional change intended.
++Upstream-Status: Pending
 +
-+Upstream-Status: Submitted [https://github.com/gphoto/libgphoto2/pull/1235]
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ camlibs/directory/directory.c         | 2 +-
-+ libgphoto2/gphoto2-file.c             | 6 +++---
-+ libgphoto2/gphoto2-filesys.c          | 2 +-
-+ packaging/generic/print-camera-list.c | 2 +-
-+ 4 files changed, 6 insertions(+), 6 deletions(-)
++ config.h.in  | 3 +++
++ configure.in | 3 ++-
++ 2 files changed, 5 insertions(+), 1 deletion(-)
 +
-+diff --git a/camlibs/directory/directory.c b/camlibs/directory/directory.c
-+index 790405d54..cc63c6684 100644
-+--- a/camlibs/directory/directory.c
-++++ b/camlibs/directory/directory.c
-+@@ -125,7 +125,7 @@ static const char *
-+ get_mime_type (const char *filename)
-+ {
++diff --git a/config.h.in b/config.h.in
++index 2ce447f..52a8d7d 100644
++--- a/config.h.in
+++++ b/config.h.in
++@@ -129,6 +129,9 @@
++ /* Define if you have the <signal.h> header file.  */
++ #undef HAVE_SIGNAL_H
 +
-+-	char *dot;
-++	const char *dot;
-+ 	int x=0;
+++/* Define if you have the <string.h> header file.  */
+++#undef HAVE_STRING_H
+++
++ /* Define if you have the <stdarg.h> header file.  */
++ #undef HAVE_STDARG_H
 +
-+ 	dot = strrchr(filename, '.');
-+diff --git a/libgphoto2/gphoto2-file.c b/libgphoto2/gphoto2-file.c
-+index 04d4d5e3e..1a9dbc193 100644
-+--- a/libgphoto2/gphoto2-file.c
-++++ b/libgphoto2/gphoto2-file.c
-+@@ -610,7 +610,7 @@ int
-+ gp_file_open (CameraFile *file, const char *filename)
-+ {
-+ 	FILE *fp;
-+-	char *name, *dot;
-++	const char *name, *dot;
-+ 	long size, size_read;
-+ 	int  i;
-+ 	struct stat s;
-+@@ -906,8 +906,8 @@ gp_file_get_name (CameraFile *file, const char **name)
-+ int
-+ gp_file_get_name_by_type (CameraFile *file, const char *basename, CameraFileType type, char **newname)
-+ {
-+-	char *prefix = NULL, *s, *new, *slash = NULL;
-+-	const char *suffix = NULL;
-++	char *prefix = NULL, *new;
-++	const char *suffix = NULL, *s, *slash = NULL;
-+ 	int i;
-+
-+ 	C_PARAMS (file && basename && newname);
-+diff --git a/libgphoto2/gphoto2-filesys.c b/libgphoto2/gphoto2-filesys.c
-+index 45f957292..07decff24 100644
-+--- a/libgphoto2/gphoto2-filesys.c
-++++ b/libgphoto2/gphoto2-filesys.c
-+@@ -521,7 +521,7 @@ append_to_folder (CameraFilesystemFolder *folder,
-+ 	CameraFilesystemFolder **newfolder
-+ ) {
-+ 	CameraFilesystemFolder	*f;
-+-	char	*s;
-++	const char	*s;
-+
-+ 	GP_LOG_D ("Append to folder %p/%s - %s", folder, folder->name, foldername);
-+ 	/* Handle multiple slashes, and slashes at the end */
-+diff --git a/packaging/generic/print-camera-list.c b/packaging/generic/print-camera-list.c
-+index 1707b4e87..44530b4ae 100644
-+--- a/packaging/generic/print-camera-list.c
-++++ b/packaging/generic/print-camera-list.c
-+@@ -1138,7 +1138,7 @@ escape_html(const char *str) {
-+ 	newstr = malloc(strlen(str)+1+inc);
-+ 	s = str; ns = newstr;
-+ 	do {
-+-		char *x;
-++		const char *x;
-+ 		x = strchr(s,'&');
-+ 		if (x) {
-+ 			memcpy (ns, s, x-s);
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-index 6b5e6c21b9..3644bd9bf4 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-@@ -12,6 +12,7 @@ DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"
- SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.xz;name=libgphoto2 \
-            file://40-libgphoto2.rules \
-            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
-+		   file://0001-libgphoto2-fix-const-correctness-for-c23-builds.patch \
- "
- SRC_URI[libgphoto2.sha256sum] = "28825f767a85544cb58f6e15028f8e53a5bb37a62148b3f1708b524781c3bef2"
++diff --git a/configure.in b/configure.in
++index c97b9fc..f5d0808 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -62,6 +62,7 @@ AC_CHECK_HEADERS( arpa/inet.h \
++ 		  sys/stat.h \
++ 		  fcntl.h \
++ 		  signal.h \
+++		  string.h \
++ 		  syslog.h \
++ 		  pwd.h \
++ 		  stdarg.h \
++@@ -104,7 +105,7 @@ AC_ARG_ENABLE(default-service,
++                           dyndns, dyndns-static, ods, tzo, gnudip, easydns, easydns-partner, dyns, hn, zoneedit, heipv6tb],
++ 	      [ use_SERVICE=$enableval;
++ 		AC_MSG_RESULT(yes) ],
++-	      [ AC_MSG_RESULT(no)
+++	      [ AC_MSG_RESULT(no)
++                 use_SERVICE=null
++                 AC_MSG_WARN(not setting default service) ]   )
++ case "$use_SERVICE" in
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+index 53aa355008..14abe27c00 100644
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/CVE-2003-0887.patch
+@@ -26,8 +26,6 @@ Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+  example-tzo.conf       | 2 +-
+  10 files changed, 10 insertions(+), 10 deletions(-)
 
+-diff --git a/example-dhs.conf b/example-dhs.conf
+-index 3fe9a04..f976ae5 100755
+ --- a/example-dhs.conf
+ +++ b/example-dhs.conf
+ @@ -11,7 +11,7 @@ host=mydomain.whatever.com
+@@ -39,8 +37,6 @@ index 3fe9a04..f976ae5 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-dyndns.conf b/example-dyndns.conf
+-index f539dec..84b4807 100755
+ --- a/example-dyndns.conf
+ +++ b/example-dyndns.conf
+ @@ -19,7 +19,7 @@ max-interval=2073600
+@@ -52,8 +48,6 @@ index f539dec..84b4807 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-dyns.conf b/example-dyns.conf
+-index 868768d..856a4d7 100644
+ --- a/example-dyns.conf
+ +++ b/example-dyns.conf
+ @@ -11,7 +11,7 @@ host=myhost
+@@ -65,8 +59,6 @@ index 868768d..856a4d7 100644
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-easydns.conf b/example-easydns.conf
+-index 0ff20da..15d9b78 100755
+ --- a/example-easydns.conf
+ +++ b/example-easydns.conf
+ @@ -11,7 +11,7 @@ host=mydomain.whatever.com
+@@ -78,8 +70,6 @@ index 0ff20da..15d9b78 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-gnudip.conf b/example-gnudip.conf
+-index 3b2fb63..d09df1f 100755
+ --- a/example-gnudip.conf
+ +++ b/example-gnudip.conf
+ @@ -15,7 +15,7 @@ max-interval=2073600
+@@ -91,8 +81,6 @@ index 3b2fb63..d09df1f 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-heipv6tb.conf b/example-heipv6tb.conf
+-index e31aa9c..3ebc822 100644
+ --- a/example-heipv6tb.conf
+ +++ b/example-heipv6tb.conf
+ @@ -18,7 +18,7 @@ max-interval=2073600
+@@ -104,8 +92,6 @@ index e31aa9c..3ebc822 100644
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-justlinux.conf b/example-justlinux.conf
+-index 0afeb2c..28b3327 100755
+ --- a/example-justlinux.conf
+ +++ b/example-justlinux.conf
+ @@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
+@@ -117,8 +103,6 @@ index 0afeb2c..28b3327 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-ods.conf b/example-ods.conf
+-index d0ff889..7b16f2c 100755
+ --- a/example-ods.conf
+ +++ b/example-ods.conf
+ @@ -11,7 +11,7 @@ host=mydomain.ods.org
+@@ -130,8 +114,6 @@ index d0ff889..7b16f2c 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-pgpow.conf b/example-pgpow.conf
+-index 29a92d6..81e351b 100755
+ --- a/example-pgpow.conf
+ +++ b/example-pgpow.conf
+ @@ -11,7 +11,7 @@ host=mydomain.penguinpowered.com
+@@ -143,8 +125,6 @@ index 29a92d6..81e351b 100755
+
+  # uncomment this once you have everything working how you want and you are
+  # ready to have ez-ipupdate running in the background all the time. to stop it
+-diff --git a/example-tzo.conf b/example-tzo.conf
+-index 2a71db3..10b8dc4 100755
+ --- a/example-tzo.conf
+ +++ b/example-tzo.conf
+ @@ -15,7 +15,7 @@ max-interval=2073600
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/cache_file.c.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/cache_file.c.patch
+deleted file mode 100644
+index 0199cb1278..0000000000
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/files/cache_file.c.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-Upstream-Status: Pending
+-
+-Dont assume errno type
+-
+---- ez-ipupdate-3.0.11b7/cache_file.c.orig	2014-07-02 14:01:07.126029412 -0600
+-+++ ez-ipupdate-3.0.11b7/cache_file.c	2014-07-02 14:08:27.422026332 -0600
+-@@ -43,11 +43,11 @@
+- #include <cache_file.h>
+-
+- #if HAVE_STRERROR
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string strerror(errno)
+- #elif HAVE_SYS_ERRLIST
+- extern const char *const sys_errlist[];
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string (sys_errlist[errno])
+- #else
+- #  define error_string "error message not found"
+-@@ -63,11 +63,11 @@
+- #  define dprintf(x)
+- #endif
+- #if HAVE_STRERROR
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string strerror(errno)
+- #elif HAVE_SYS_ERRLIST
+- extern const char *const sys_errlist[];
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string (sys_errlist[errno])
+- #else
+- #  define error_string "error message not found"
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/conf_file.c.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/conf_file.c.patch
+deleted file mode 100644
+index 6325c1873f..0000000000
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/files/conf_file.c.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-Upstream-Status: Pending
+-
+-Dont assume errno type
+-
+---- ez-ipupdate-3.0.11b7/conf_file.c.orig	2014-07-02 14:01:19.174029328 -0600
+-+++ ez-ipupdate-3.0.11b7/conf_file.c	2014-07-02 14:08:42.982026223 -0600
+-@@ -38,11 +38,11 @@
+- #include <conf_file.h>
+-
+- #if HAVE_STRERROR
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string strerror(errno)
+- #elif HAVE_SYS_ERRLIST
+- extern const char *const sys_errlist[];
+--extern int errno;
+-+#  include <errno.h>
+- #  define error_string (sys_errlist[errno])
+- #else
+- #  define error_string "error message not found"
 
