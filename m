@@ -2,261 +2,278 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7B4EF46C71
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF1C1F46C69
 	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 18:33:03 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.61914.1775500379027121743
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.61917.1775500380339355505
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2026 11:32:59 -0700
+ Mon, 06 Apr 2026 11:33:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QVPY9N16;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4852b81c73aso34864825e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 11:32:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=YATP2EBZ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4852a9c6309so38291435e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 11:33:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775500377; x=1776105177; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=mpjXlg+v/Byr7SQ68oaDBVAZFj+vqDU5USg7N5fXsMk=;
-        b=QVPY9N16vMfzXAxXN6va9Yk86RQDbClo+fF6rj1Pnfmu4Yr8Q8Xj1+V02Lz7KHBlS9
-         QViLQeqhcUTxFyjxGKZH9C4qaf8CS43U0q/Ju6FLpqO8kLcHMNuR+c+1+LcFAJaK0i2p
-         6F6jghLsuGAjyQzjSI4xsfvl2WC8DSs1Es5xmUGhlaB1gpU+FwPImriW2JNQcA4R59hj
-         c04cjtFa72FuvTiiD/Xz71Kr4BhIRJoD7b3xFqh+X8jDcAVMIlRw2QBboI483OqiKVCs
-         pF5PD9dc/C1wuaF6Vrvzja0z0c3DMBSLdP9EVJnQnYedoCCN5J7/LJUMHNMwq8C9U7NA
-         dBJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775500377; x=1776105177;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20251104; t=1775500379; x=1776105179; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=mpjXlg+v/Byr7SQ68oaDBVAZFj+vqDU5USg7N5fXsMk=;
-        b=GYVdGDptkml+a6f75Q5Dkwdq6gdQq6KU3XJRdMwd54oe8huptalOFOx26Thjcu1+Az
-         dZqWcfeje/L7urUBjSRKipdxpdq933HeaeSSJIL39KMzXJXe1KTo3dxG7UCcClcurr6x
-         mE/hsS2r7av7WVL4PrboYlQy3+bt7SgOBJzsmr5bKvC9OeLZJ6P89gM9DQD+hm3KzwXe
-         Ce8P5JiPV2/VsakuZWQF41UC1YQLe5GdsbvIFjD3Y+kDlKuHOv8NRiqSiB40YA0cMlln
-         thf9Bs4USCZnkL6KlwPRcI5KS3PrOQtUNzEK+f4YHb/bSgT05dbQZ0XWYesoT6thtX0M
-         zNnw==
-X-Gm-Message-State: AOJu0YwIuXl14fYrJBbbzPxAzRzkPqecNPeRxYty+2kbGTyOm9qTbvAC
-	rQeu0ZiHr/Vun8549KX1gp8UtFauHPfi7DzglzWHtYt3s3oX4yhE2xmA1+RyFQ==
-X-Gm-Gg: AeBDietnbuciVK3fog7qbnB6+rEAeSZFNOzXzO7IQL/22mbs9NIu1eVn0WCAe7vRRB/
-	eTQ1xqdtmwMww1EwlptsIM+S4K/MpsaiWVxap0f7BlqO3iCI2btPTrFY8gpHm4jHMek0cs7z85R
-	zy8SVJfOKEJxTypPjNBXIa0nEmQp3ArJPFqECozEN6vZUfXZWBmf+HLXbn0wtzom5IiMRIYwP8S
-	54HeW6zQusP4Kkup4SjVaoq7gSamiCC8aCgesgwBGAlB9svW2vysPgPEtNw1cECV2rFjWkqfUhW
-	JMIxMQIMQt3MvQEqLrAtLAFUmoB3pGJrGVGnyWtZUV3NP1NqAP1Jg0WN/8N+lfjdxEoNLgSWLVb
-	Ke53oLURVQVIjT6Z3cqSzeyZ0u0+Y6nfJg26mfY7jugIL7SeT+MLH0TlrGaGAdUUrVGVOMmXMdZ
-	4f6tOTfVRTJgtc5JpNuPPb
-X-Received: by 2002:a05:600c:a104:b0:47e:e952:86c9 with SMTP id 5b1f17b1804b1-488995d1747mr148058445e9.0.1775500376985;
-        Mon, 06 Apr 2026 11:32:56 -0700 (PDT)
+        bh=Dyyrws1LSkMBc1lU0CdNt6tmIgm4zDgih6CzYC9N1h0=;
+        b=YATP2EBZg/mmYCMgTexkjsJbr3Kn69v3FDTlEE8RmaIPSeSUkWAiAjzXQErjQTSohS
+         Em+LNTpRyjGmc0YfB1RUFM/ro2+4Dw5BBs/3iAPKIvvFerNqkVyJ2TGAqhWt6+5l3A3x
+         gSotuS3hxeb7ZZQciRis5cl+EuE9rxUeeoyTuaWzRU4jTssVThQFLnWUQbtCOKakML67
+         TNKy8yDkYfZwcw6B9OLUmLeURh5ZmZv00lBRISt4tF6LZud1clMESFUiPTv5gidUoAx7
+         +wxPdWYwbF6iLyKa58fxuxmfFzbbhZaVCZQkIfbhKrDL7VEmGfUjTR1UHoo3AdSEzbzM
+         yQAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775500379; x=1776105179;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Dyyrws1LSkMBc1lU0CdNt6tmIgm4zDgih6CzYC9N1h0=;
+        b=Asdm9hKee4ZvKT7rnv89VTNhsktTH+Vsf9QUXraBC5N6X2XkRS20Qaw6VYUfD4+D5e
+         kAHjHyFo7KTl4CiUzNOV34EBg+D3aJgX1b2bMiRbWJpuKLxSvN5nhINMieLvqOCKHwAC
+         h9yIK3WQOUskT2nmbQt71XtPppXTsVgyYVxrG0tgreE8gn5VsSw1GdINn1Nd9NzL9AxA
+         yJ/JOezYKAJyMiegOd0jtkYlUVbF4EGofEBtidqlzfj5NK2W7034lQKSgWYdhdb5IKbw
+         UhNuXr/GUriuAzS459Pbe/J9KuferML/A/AQh4u3QoP1tkwD+1SIclI8pTlw9nR+xW8F
+         eHpQ==
+X-Gm-Message-State: AOJu0YzQEijCpA/0esGh2E125MvASMxWw4rRVal/Vf98eFh4NOLa34M2
+	aNaaGWCQn5oX1o95nK6hNguZO3ZL3WwYPHD9aJ7iYhYOyT7zapFiGz2l5/iI7Q==
+X-Gm-Gg: AeBDievkSNg4VCNq2iV0hH2frTaHX8pMz6vRNIPb4UGJPSXqp1RpzDOjM/v3SWUHXhc
+	sVS45YCZYw4q+7IvAUcn9vVERu+viv+4/q2iikLVCWoDCOUr5Q4N6mb3tXQs40NzPACl+OGF8V5
+	zAwkaBLzhAKGTwc1VaKzDZjYTiB9ZpJ7lI4Z/evFj9djOGmRkr89ykxB4PE2we+lN16fBIBFgUI
+	3vM9xMwe/pzA7pH+J8QNYQlKHxqFaFy05Brhi7T2yBQ5wm7PWAHR2rnUDFDMHmlSZUce5qrXfN/
+	a3YMDqcaq8R6fSw4LP5rpis/uRGt+y8LvRxIUs5KxgiY9ScdWnbgnXDRDx7rhLadXNtt1bh65dW
+	cRb4xTij8a/Ix0KFLMRmZAkUoIeeBxbBHdC4y8vafnZ62/qltSQdOwK0eor60NryfDVjcOAIsGC
+	qYyOEtQTR1997KYColkCxI
+X-Received: by 2002:a05:600c:3b1e:b0:485:3abe:ab86 with SMTP id 5b1f17b1804b1-488996cd897mr186572945e9.4.1775500378520;
+        Mon, 06 Apr 2026 11:32:58 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b64f03afsm61164515e9.0.2026.04.06.11.32.56
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b64f03afsm61164515e9.0.2026.04.06.11.32.57
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Apr 2026 11:32:56 -0700 (PDT)
+        Mon, 06 Apr 2026 11:32:58 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][whinlatter][PATCH 1/3] botan: patch CVE-2026-32877
-Date: Mon,  6 Apr 2026 20:32:53 +0200
-Message-ID: <20260406183255.3883660-1-skandigraun@gmail.com>
+Subject: [meta-oe][whinlatter][PATCH 3/3] botan: patch CVE-2026-32884
+Date: Mon,  6 Apr 2026 20:32:55 +0200
+Message-ID: <20260406183255.3883660-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260406183255.3883660-1-skandigraun@gmail.com>
+References: <20260406183255.3883660-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 18:33:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126059
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126061
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-32877
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-32884
 
-Backport the patch that was identified by Debian[1].
+The backported patch was selected based on the security.rst[1]
+file of the project, that mentions the date of the fix. When
+looked through the commits from that date, picked the one that's
+description matches the CVE description.
+
 The included test passed successfully (along with the other tests).
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2026-32877
+[1]: https://github.com/randombit/botan/blob/master/doc/security.rst
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../botan/botan/CVE-2026-32877.patch          | 158 ++++++++++++++++++
- meta-oe/recipes-crypto/botan/botan_3.10.0.bb  |   4 +-
- 2 files changed, 161 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
+ .../botan/botan/CVE-2026-32884.patch          | 171 ++++++++++++++++++
+ meta-oe/recipes-crypto/botan/botan_3.10.0.bb  |   1 +
+ 2 files changed, 172 insertions(+)
+ create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2026-32884.patch
 
-diff --git a/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
+diff --git a/meta-oe/recipes-crypto/botan/botan/CVE-2026-32884.patch b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32884.patch
 new file mode 100644
-index 0000000000..871f5c9a1b
+index 0000000000..f207ee2caa
 --- /dev/null
-+++ b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
-@@ -0,0 +1,158 @@
-+From a0048a6b97a349a3cb4a5f955d350ab2921719cc Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32884.patch
+@@ -0,0 +1,171 @@
++From cbc8b341ea4b38c388e89682b86da107a9fdc38c Mon Sep 17 00:00:00 2001
 +From: Jack Lloyd <jack@randombit.net>
-+Date: Sun, 15 Mar 2026 11:39:50 -0400
-+Subject: [PATCH] In SM2 verify the C3 field is of the required length
++Date: Sun, 15 Mar 2026 11:17:22 -0400
++Subject: [PATCH] Fix name constraint DNS check when falling back to CN
 +
-+Previously the decryption step assumed that C3 was equal in length to the MAC
-+output. If C3 is shorter than expected, up to 31 bytes of arbitrary heap data
-+would be compared with the computed MAC. This heap over-read would potentially
-+result in denial of service.
++When verifying name constraints which restrict the set of allowed DNS names, the
++logic would first check the Subject Alternative Name if available, but if the
++SAN is absent then it would check the CN field of the issued name since that is
++a common fallback for DNS names when the SAN is missing.
 +
-+CVE: CVE-2026-32877
-+Upstream-Status: Backport [https://github.com/randombit/botan/commit/f3c31f96f58f1d1d482032d8f4286dc9ebbc6712]
++However this check failed to properly canonicalize the potential DNS name in the
++CN, allowing a mis-issued cert with a mixed-case CN field and absent SAN to
++bypass any imposed excludedSubtrees rules.
++
++CVE: CVE-2026-32884
++Upstream-Status: Backport [https://github.com/randombit/botan/commit/db8baebd92bded036da6faf8bf3c324b67de9cf4]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/lib/pubkey/sm2/sm2_enc.cpp        |  7 +++-
-+ src/tests/data/pubkey/sm2_invalid.vec | 60 +++++++++++++++++++++++++++
-+ src/tests/test_sm2.cpp                | 31 ++++++++++++++
-+ 3 files changed, 97 insertions(+), 1 deletion(-)
-+ create mode 100644 src/tests/data/pubkey/sm2_invalid.vec
++ src/lib/x509/name_constraint.cpp              | 16 +++++++---
++ .../Invalid_DNS_Excluded_Mixed_Case_CN.crt    | 19 ++++++++++++
++ .../Root_DNS_Excluded_Mixed_Case_CN.crt       | 19 ++++++++++++
++ src/tests/test_name_constraint.cpp            | 29 +++++++++++++++++++
++ 4 files changed, 79 insertions(+), 4 deletions(-)
++ create mode 100644 src/tests/data/x509/name_constraint/Invalid_DNS_Excluded_Mixed_Case_CN.crt
++ create mode 100644 src/tests/data/x509/name_constraint/Root_DNS_Excluded_Mixed_Case_CN.crt
 +
-+diff --git a/src/lib/pubkey/sm2/sm2_enc.cpp b/src/lib/pubkey/sm2/sm2_enc.cpp
-+index 7a1b990..1141089 100644
-+--- a/src/lib/pubkey/sm2/sm2_enc.cpp
-++++ b/src/lib/pubkey/sm2/sm2_enc.cpp
-+@@ -133,6 +133,11 @@ class SM2_Decryption_Operation final : public PK_Ops::Decryption {
-+             .end_cons()
-+             .verify_end();
++diff --git a/src/lib/x509/name_constraint.cpp b/src/lib/x509/name_constraint.cpp
++index e767624..8708b95 100644
++--- a/src/lib/x509/name_constraint.cpp
+++++ b/src/lib/x509/name_constraint.cpp
++@@ -19,6 +19,14 @@ namespace Botan {
 + 
-++         // Wrong length so certainly invalid, reject immediately
-++         if(C3.size() != m_hash->output_length()) {
-++            return secure_vector<uint8_t>();
-++         }
-++
-+          std::vector<uint8_t> recode_ctext;
-+          DER_Encoder(recode_ctext)
-+             .start_sequence()
-+@@ -170,7 +175,7 @@ class SM2_Decryption_Operation final : public PK_Ops::Decryption {
-+          m_hash->update(y2_bytes);
-+          const auto u = m_hash->final();
-+ 
-+-         if(!CT::is_equal(u.data(), C3.data(), m_hash->output_length()).as_bool()) {
-++         if(!CT::is_equal<uint8_t>(u, C3).as_bool()) {
-+             return secure_vector<uint8_t>();
-+          }
-+ 
-+diff --git a/src/tests/data/pubkey/sm2_invalid.vec b/src/tests/data/pubkey/sm2_invalid.vec
-+new file mode 100644
-+index 0000000..2517510
-+--- /dev/null
-++++ b/src/tests/data/pubkey/sm2_invalid.vec
-+@@ -0,0 +1,60 @@
-++
-++Key = 8C84F7F069CD09D59543ED980CFEB77E68C7D39B9B73D359EA67C0CDB2A86B6F
-++
-++
-++# Empty
-++Ctext =
-++
-++# Just the SEQUENCE marker
-++Ctext = 30
-++
-++# Truncated
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E51
-++
-++# C3 MAC too short
-++Ctext = 3071022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF041F2E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F36826493860409CA311F43DB0E5E516F
-++
-++# C3 MAC too long
-++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04212E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F368264938696000409CA311F43DB0E5E516F
-++
-++# C3 and C2 fields swapped
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0409CA311F43DB0E5E516F04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F368264938696
-++
-++# C3 MAC last bit flipped
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386970409CA311F43DB0E5E516F
-++
-++# C3 MAC first byte inverted
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0420D11B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C1 y off by one
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27D004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C1 x/y serialization boundary shift
-++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E500200022100C055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E2704202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C1 is generator point
-++Ctext = 3072022032C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7022100BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C1 is origin (0,0)
-++Ctext = 303302010002010004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C1 x equals field prime
-++Ctext = 3072022100FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# C2 last bit flipped
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516E
-++
-++# C2 replaced with empty
-++Ctext = 3069022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960400
-++
-++# Trailing byte after SEQUENCE
-++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F00
-++
-++# SEQUENCE with non-minimal long-form length
-++Ctext = 308172022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# INTEGER x1 with non-minimal leading zero
-++Ctext = 307302220000A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-++
-++# OCTET STRING C3 with non-minimal long-form length
-++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0481202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
-+diff --git a/src/tests/test_sm2.cpp b/src/tests/test_sm2.cpp
-+index 2ffb14a..c5d2360 100644
-+--- a/src/tests/test_sm2.cpp
-++++ b/src/tests/test_sm2.cpp
-+@@ -9,6 +9,7 @@
-+ 
-+ #if defined(BOTAN_HAS_SM2)
-+    #include "test_pubkey.h"
-++   #include <botan/pubkey.h>
-+    #include <botan/sm2.h>
-+ #endif
-+ 
-+@@ -108,4 +109,34 @@ BOTAN_REGISTER_TEST("pubkey", "sm2_keygen", SM2_Keygen_Tests);
-+ 
-+ #endif
++ class DER_Encoder;
 + 
 ++namespace {
 ++
-++class SM2_Invalid_Ciphertexts : public Text_Based_Test {
-++   public:
-++      SM2_Invalid_Ciphertexts() : Text_Based_Test("pubkey/sm2_invalid.vec", "Key,Ctext") {}
-++
-++      bool clear_between_callbacks() const override { return false; }
-++
-++      Test::Result run_one_test(const std::string& /*header*/, const VarMap& vars) override {
-++         Test::Result result("SM2 invalid ciphertext");
-++
-++         const auto key = vars.get_req_bin("Key");
-++         const auto ctext = vars.get_req_bin("Ctext");
-++
-++         const auto group = Botan::EC_Group::from_name("sm2p256v1");
-++         const auto pkey = Botan::SM2_PrivateKey(group, Botan::EC_Scalar::deserialize(group, key).value());
-++
-++         Botan::PK_Decryptor_EME dec(pkey, rng(), "SM3");
-++
-++         result.test_throws<Botan::Exception>("Decryption should fail for invalid ciphertext",
-++                                              [&] { dec.decrypt(ctext); });
-++
-++         return result;
-++      }
-++};
-++
-++BOTAN_REGISTER_TEST("pubkey", "sm2_invalid_ctext", SM2_Invalid_Ciphertexts);
+++std::string canonicalize_dns_name(std::string_view name) {
+++   return tolower_string(name);
+++}
 ++
 ++}  // namespace
 ++
-+ }  // namespace Botan_Tests
++ std::string GeneralName::type() const {
++    switch(m_type) {
++       case NameType::Unknown:
++@@ -75,7 +83,7 @@ void GeneralName::decode_from(BER_Decoder& ber) {
++       m_type = NameType::DNS;
++       // Store it in case insensitive form so we don't have to do it
++       // again while matching
++-      m_name.emplace<DNS_IDX>(tolower_string(ASN1::to_string(obj)));
+++      m_name.emplace<DNS_IDX>(canonicalize_dns_name(ASN1::to_string(obj)));
++    } else if(obj.is_a(6, ASN1_Class::ContextSpecific)) {
++       m_type = NameType::URI;
++       m_name.emplace<URI_IDX>(ASN1::to_string(obj));
++@@ -174,7 +182,7 @@ GeneralName::MatchResult GeneralName::matches(const X509_Certificate& cert) cons
++          // Check CN instead...
++          for(const std::string& cn : dn.get_attribute("CN")) {
++             if(!string_to_ipv4(cn).has_value()) {
++-               score.add(matches_dns(cn, constraint));
+++               score.add(matches_dns(canonicalize_dns_name(cn), constraint));
++             }
++          }
++       }
++@@ -421,7 +429,7 @@ bool NameConstraints::is_permitted(const X509_Certificate& cert, bool reject_unk
++                   return false;
++                }
++             } else {
++-               if(!is_permitted_dns_name(cn)) {
+++               if(!is_permitted_dns_name(canonicalize_dns_name(cn))) {
++                   return false;
++                }
++             }
++@@ -540,7 +548,7 @@ bool NameConstraints::is_excluded(const X509_Certificate& cert, bool reject_unkn
++                   return true;
++                }
++             } else {
++-               if(is_excluded_dns_name(cn)) {
+++               if(is_excluded_dns_name(canonicalize_dns_name(cn))) {
++                   return true;
++                }
++             }
++diff --git a/src/tests/data/x509/name_constraint/Invalid_DNS_Excluded_Mixed_Case_CN.crt b/src/tests/data/x509/name_constraint/Invalid_DNS_Excluded_Mixed_Case_CN.crt
++new file mode 100644
++index 0000000..fe2c773
++--- /dev/null
+++++ b/src/tests/data/x509/name_constraint/Invalid_DNS_Excluded_Mixed_Case_CN.crt
++@@ -0,0 +1,19 @@
+++-----BEGIN CERTIFICATE-----
+++MIIDCTCCAfGgAwIBAgIUAbjRT6B+WHVf1Wo9JdFHlHegF1cwDQYJKoZIhvcNAQEL
+++BQAwFzEVMBMGA1UEAwwMVGVzdCBSb290IENBMB4XDTI2MDMxNTE0NTM1MloXDTI3
+++MDMxNTE0NTM1MlowFzEVMBMGA1UEAwwMU3ViLkVWSUwuQ09NMIIBIjANBgkqhkiG
+++9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsn1rve+kuZJd2udT4QEnjdws+YRT+lJI+rG/
+++4OpljAcxQywCc6oHDY4ouaqOKdhT9+luvqRVSEnH3JfczT/D+wZD+gBOlgUqsmXp
+++QasD8HSyHWdjyaLrkZuBGICoUZTh9a7ZOPuIQ2sblxOvBm3klndpSpXJC6sJsWAk
+++tyU+5WdNz+ncTC82sFSY0YQLC2QvxckEP6Jxi4I+h9vANtWXCk6CRz/kT4dY3cD4
+++VBFtAy+vUVYUZnLi48fEYlMt4rP64OerY7hjw8gE+66rmUQPml4+DAek+xJtL4Sl
+++Q0SGytWE9tJb1zzICv4TNvj/+IKmbK4BCu7fVjOd2C64zNFTywIDAQABo00wSzAJ
+++BgNVHRMEAjAAMB0GA1UdDgQWBBS6hC1DrVlXAq/GWDYl/UQbP4TmLTAfBgNVHSME
+++GDAWgBQPZ2Gp3izLTRAUzQKCKRLbM5OA2DANBgkqhkiG9w0BAQsFAAOCAQEAcWBy
+++f9+tJDDj7T7z4QziZnxIfKP7x7uP9wAlYGRpKcbbW6SHAg6DA1V5GBWHendkg1hb
+++Nywy7pUFgJ0xlJ7KYr76Ylfa1BTUPT+gExJWvSmsg8WSQ4q3bOMVB1qRxWDv/8KY
+++ZOT03KEzLyGL6ia9r/UFw1jibxS26Ff6qCE9EhDLA/4z0D/+9QzdLATuzSn/SLSR
+++wtarLaWhCfOSpfRrekYhaSndG45BCKpUd99iWt1HA4LyjZe8/8cxsRkD8klaCalG
+++8pRp+PolijzmYsrEXuG22Bq2idgxHTRvw8l4rBQrSdMWuWqqTdIpFIUrXNft0a5f
+++d8RmhI6PZlPL43OCxw==
+++-----END CERTIFICATE-----
++diff --git a/src/tests/data/x509/name_constraint/Root_DNS_Excluded_Mixed_Case_CN.crt b/src/tests/data/x509/name_constraint/Root_DNS_Excluded_Mixed_Case_CN.crt
++new file mode 100644
++index 0000000..503206f
++--- /dev/null
+++++ b/src/tests/data/x509/name_constraint/Root_DNS_Excluded_Mixed_Case_CN.crt
++@@ -0,0 +1,19 @@
+++-----BEGIN CERTIFICATE-----
+++MIIDGjCCAgKgAwIBAgIUJj5ZhECZYOzt5qWnoN8DMcZzlzgwDQYJKoZIhvcNAQEL
+++BQAwFzEVMBMGA1UEAwwMVGVzdCBSb290IENBMB4XDTI2MDMxNTE0NTM1MloXDTM2
+++MDMxMjE0NTM1MlowFzEVMBMGA1UEAwwMVGVzdCBSb290IENBMIIBIjANBgkqhkiG
+++9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtEqBgRHixpRodBHeqXrcttdKD3tpGG+S67tM
+++WT1h+572k6EFIZ9RVfYokH32sNFNz8LNI5FwKKFTf/WaVhMdsqxaMrf/+06UzKdw
+++7dKz+Q5uLGrygv6opSVqhojkjLZH78zmEER0Gba4Ac4FGq5pjafA2jtoIMDyQ2SV
+++IpOy932WCajQL6IM20yHPQAsr0c0hoFP4RdbJPuiEVPfZv95VjEwwV0zMBFmiICk
+++gItEDfiexBHEIvXAGNBModMHaBhUDzHZp0X7gNW/MD2ieiQGoLTyG/t7sKv0J3zV
+++LnUpXVIrmHSIkGVfuc5EFOlq6OXZ/J29VjPEnVVeZARDhgyGRQIDAQABo14wXDAP
+++BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQPZ2Gp3izLTRAUzQKCKRLbM5OA2DAO
+++BgNVHQ8BAf8EBAMCAQYwGgYDVR0eAQH/BBAwDqEMMAqCCGV2aWwuY29tMA0GCSqG
+++SIb3DQEBCwUAA4IBAQA5RLYaZWVxFIKpZRM5ZBk4fDDlAvRl7NVhMeQO3DMyyIzw
+++Bp7IIEgH0I6PlL4/02SzSaqUuVVXYyO1LhbgBlFnE1h818zz+jN06i0lUemuXGAo
+++wnHBwLW+V/r0JBm4BbnbneCYHUFS07sfR9IjQqV9Futp2WILwieZ7Ib96xGuX96L
+++f6pxYEd82rYSXa/K14HvMKXkzC3qe72V+/E1GOPZqzlbZFriYfRUHUOY6P7LjcWl
+++3Z+aUQcG8vEHbJjTd+ZZzP2PICjLKgaX1acpBOUR6pelHgcUmuR3z86V/DD8TWsH
+++BHDLLBxTje/8fL0PR4qo4r4F+2Cj+hXnY/TFVQ+W
+++-----END CERTIFICATE-----
++diff --git a/src/tests/test_name_constraint.cpp b/src/tests/test_name_constraint.cpp
++index 61aff53..5daa343 100644
++--- a/src/tests/test_name_constraint.cpp
+++++ b/src/tests/test_name_constraint.cpp
++@@ -69,6 +69,35 @@ class Name_Constraint_Tests final : public Test {
++ 
++ BOTAN_REGISTER_TEST("x509", "x509_path_name_constraint", Name_Constraint_Tests);
++ 
+++// Verify that DNS constraints are case-insensitive also when falling back to the CN
+++class Name_Constraint_Excluded_CN_Case_Test final : public Test {
+++   public:
+++      std::vector<Test::Result> run() override {
+++         Test::Result result("X509v3 Name Constraints: excluded DNS with mixed-case CN and no SAN");
+++
+++         const Botan::X509_Certificate root(
+++            Test::data_file("x509/name_constraint/Root_DNS_Excluded_Mixed_Case_CN.crt"));
+++         const Botan::X509_Certificate leaf(
+++            Test::data_file("x509/name_constraint/Invalid_DNS_Excluded_Mixed_Case_CN.crt"));
+++
+++         Botan::Certificate_Store_In_Memory trusted;
+++         trusted.add_certificate(root);
+++
+++         const Botan::Path_Validation_Restrictions restrictions(false, 80);
+++         const auto validation_time = Botan::calendar_point(2026, 6, 1, 0, 0, 0).to_std_timepoint();
+++
+++         const auto path_result = Botan::x509_path_validate(
+++            leaf, restrictions, trusted, "" /* hostname */, Botan::Usage_Type::UNSPECIFIED, validation_time);
+++
+++         result.test_eq(
+++            "validation result", path_result.result_string(), "Certificate does not pass name constraint");
+++
+++         return {result};
+++      }
+++};
+++
+++BOTAN_REGISTER_TEST("x509", "x509_name_constraint_excluded_cn_case", Name_Constraint_Excluded_CN_Case_Test);
+++
++ #endif
++ 
++ }  // namespace
 diff --git a/meta-oe/recipes-crypto/botan/botan_3.10.0.bb b/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
-index e079dd73de..392c1aac94 100644
+index b613dd2a04..0986a76557 100644
 --- a/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
 +++ b/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
-@@ -4,7 +4,9 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://license.txt;md5=3f911cecfc74a2d9f1ead9a07bd92a6e"
- SECTION = "libs"
- 
--SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
-+           file://CVE-2026-32877.patch \
-+           "
+@@ -7,6 +7,7 @@ SECTION = "libs"
+ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
+            file://CVE-2026-32877.patch \
+            file://CVE-2026-32883.patch \
++           file://CVE-2026-32884.patch \
+            "
  SRC_URI[sha256sum] = "fde194236f6d5434f136ea0a0627f6cc9d26af8b96e9f1e1c7d8c82cd90f4f24"
  
- S = "${UNPACKDIR}/Botan-${PV}"
 
