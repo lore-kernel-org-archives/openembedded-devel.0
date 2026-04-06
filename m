@@ -2,187 +2,220 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B86DEE9D83C
-	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 05:28:58 +0000 (UTC)
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.49070.1775453332202516039
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF11DE9D83D
+	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 05:36:28 +0000 (UTC)
+Received: from mail-dl1-f49.google.com (mail-dl1-f49.google.com [74.125.82.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.49154.1775453782099993348
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2026 22:28:52 -0700
+ Sun, 05 Apr 2026 22:36:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=e8/WM4dB;
- spf=pass (domain: mvista.com, ip: 74.125.82.45, mailfrom: hprajapati@mvista.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-12776bebe9fso8462426c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 22:28:52 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=bs6hy+tv;
+ spf=pass (domain: mvista.com, ip: 74.125.82.49, mailfrom: hprajapati@mvista.com)
+Received: by mail-dl1-f49.google.com with SMTP id a92af1059eb24-126ea4b77adso3942967c88.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 22:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1775453331; x=1776058131; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1775453781; x=1776058581; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zjRQrzxT0ubjcZoalkI3frChePopNupTGKMVNhkCurE=;
-        b=e8/WM4dBaSMCsxR363scLLhFC4doaRznXhYycSz1x4mW2yQYQvZH8XysCSyp0h55DE
-         aSqpAdIFzDlObgr3XnPrvM9B9j5WgyuVCNYNBBt3sG5ELJsNkewVPmByAUpgMaJr3aOf
-         46yIXkuLzmgWnJy9bCkmgLrNLKT5tsFwHXKQ4=
+        bh=RwMpXshQVnYuIhtf3aYWx0VniSp8h5wJ4igno2ZBjxk=;
+        b=bs6hy+tvwC4YpH8Bdn2YfCELa6VqxgbfjB9Kt94ODttO+ka3DSztbqNwCPlJlp1BLK
+         RTEIC7LNb8rjowh2ayVXvYPLeIPscTEqOeKT9jB/Ww3uUvdlo2dnXLsxe50rQm04fkAw
+         F7T6CVwkj2aylgw6FfBlF8/7kqOPZJau5LtI4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775453331; x=1776058131;
+        d=1e100.net; s=20251104; t=1775453781; x=1776058581;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=zjRQrzxT0ubjcZoalkI3frChePopNupTGKMVNhkCurE=;
-        b=J3EYBfj+wWu4OEyyxvm5ucXMDOIMtYB5+SYzI9Hgh+SzeX1Ab/RIanPufjMPR1C6ws
-         Z/OrKwgwZlTEMU9VXR6pEu8UJjJcIRLkFfSf4SHyx6C6W428HWOEnwjezsQeDhaTloat
-         fNUwOMb3PzlUXM2VyqGbXMP1/fR2frbiVZxV0nkRBkvdMBc2Aj7FwfCwfxBl7HpXLAap
-         zl+AqDXIvU1j7Job7+ek0JSl9Ng+h3qOWTXSSvbHWL9QEUXLpsGgyOUpM4ftLKPua4CR
-         jGPBwgJWtSyYWlnZj6jfBZWy4X+Y/o6CZKrXIoFNJXbJ33tJ38ANG67b3kkXsBDo+UqM
-         2Sdw==
-X-Gm-Message-State: AOJu0Yx/YVNtp1xTDOlBVY99YoThw8rI4TT0NU9mudR9BiHdF0N48ldU
-	R8BP6QWjTaDE3AfwozFyqAMUgLQEkt5fV1KfYzT2f5kh+zFFWimPy8S1DLX2+YXVL/1mhqWjkB5
-	Y55H82j8=
-X-Gm-Gg: AeBDiesoVLBpWy53I15xJuO/wHQgCuhsnDyPY+GE0enMTDlh49zvIz0VI/GcdP06JNz
-	qNXAML8UzRwQddSX0RaF2y1EDc8Ofw6pO/3/UAOhChDk6Juwd/roK8faEE28qNdK16+rQrL2Yjy
-	MrqaBG55/zmVcFa7sI/yjDlNntJHHLSC00MTe/807HV6Tc4UyeyZdVJ8AncU4ETuI5mTvkwUe8q
-	vo8cor7YIOehHFB0FFEcI3xmAsDt8h85ibBBILoENbQIRcAkyeFT7hyXgyfinUZQZ+WNkFT2agm
-	4g69/2McsQE92Ck+2RHWkADG/vjE00avIjB4A3K0eWeoljhEY21tXUrS3GuNc0MBbW+cNG+ow94
-	FGcL7RmWhDkixYn8Vj1CmK9OsVzaU/tzcPlAsVWJ7vd52dffuTDz+/FD1OvenHPZqDkgIamC18P
-	4eBgHbicY+jC0oRZk6h81v/DeEa6u6zV1jt0fq
-X-Received: by 2002:a05:7022:eacb:b0:12a:6ab7:3f8a with SMTP id a92af1059eb24-12bfb6ecb1dmr5234192c88.3.1775453331172;
-        Sun, 05 Apr 2026 22:28:51 -0700 (PDT)
+        bh=RwMpXshQVnYuIhtf3aYWx0VniSp8h5wJ4igno2ZBjxk=;
+        b=Lc7+cU+C441N38Ajn2XrQQRiITKUjG3Zctaa+FtWvYhA+zNPM2FZrZHKYWY0f1oHaU
+         N721Th0eUr/uMosBxTPGsu1vA+t1NOIbfRxwt7tFrlGybx4U+IaCyW9EjEYrTjYZF67k
+         Jdlzoe4hCeJJze+FDnEaP3y3znC69ea2tuVwC0VZsBRkae2KBQGYKvM0FjLkJm8q/sXi
+         OXvTjXwGpmT5qsiwSOTWcf36ixY321uB8l3cXf05nG2iXPsJTMJV1mPhMzbBVggm6PCe
+         fMpn12ByE//h1atwemaBuK1BNmWOSXiFvniwnnQZ8Jlbxvc4/iEDoGMGR4+buRkD977y
+         3sxQ==
+X-Gm-Message-State: AOJu0YwsaRBOxCNkKVxssVLpmEmc2hbDDhZqshNJwmsWNQUahXoZyx5E
+	FxVRL4XO1nNJk9BY+gH+0EvL5W3yLq/qtOG6LIIGbMSbKqtIcXeXqkPeXvS6Y6zZqrdYSFwOm8b
+	dHo73xAw=
+X-Gm-Gg: AeBDietEj9+3lMc11l2YUYlCnrKWTBLWBRDQi3793UVS6Ql6iX4YDvWZq6ie8Ps3IeU
+	p8PkEnSnFdt3gbXFJ4vH4Ky+oQ1DPIdPLbrpigaTR4keoVYKDU/us5mSzWnxUDTBeXiookHE462
+	y8aTSq3hP5rPuBYZhGnu+fPYhzKtZS2YeVsX+HoHZXmPYXDYEgvCVNLM1MMfl+vrArZ5ZSycV4S
+	9E9jCOpnc+Ofpmzfy9fG6UMgEh2E0hTa8oLU3bGdPOsi7IwicRHsiiEPJKSJS2QwHlzWX4mrIDY
+	DxiTQE9Z6Ou/DJYfayqzXMVkC+FimkELApddN4We40f+ElG0yqmGWnZMXWAgZZKswlHviGeH1zr
+	TC60BRBGzZrqxbbLE1Spbab1JiQkR4FXjeMY1qszCmQlRpWLMolutomo8WswIY2I3CpZw1bhpz6
+	0B2i864PlUMayy48aiqu4sdkN3WObWpDUuS13q
+X-Received: by 2002:a05:7022:fd05:b0:12a:b932:81d3 with SMTP id a92af1059eb24-12bfb76b48emr5436533c88.26.1775453781070;
+        Sun, 05 Apr 2026 22:36:21 -0700 (PDT)
 Received: from MVIN00013.mvista.com ([103.250.136.160])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12bfea5f860sm9109874c88.2.2026.04.05.22.28.48
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c05a7beffsm4951322c88.15.2026.04.05.22.36.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 22:28:50 -0700 (PDT)
+        Sun, 05 Apr 2026 22:36:20 -0700 (PDT)
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-webserver][scarthgap][PATCH] nginx: Fix for CVE-2026-27784
-Date: Mon,  6 Apr 2026 10:58:23 +0530
-Message-ID: <20260406052824.102268-1-hprajapati@mvista.com>
+Subject: [meta-webserver][scarthgap][PATCH] nginx: Fix for CVE-2026-28755
+Date: Mon,  6 Apr 2026 11:06:11 +0530
+Message-ID: <20260406053611.103282-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 05:28:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126024
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 05:36:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126025
 
-Pick patch from [1] which mentioned in debian report with [2]
-[1] https://github.com/nginx/nginx/commit/b23ac73b00313d159a99636c21ef71b828781018
-[2] https://security-tracker.debian.org/tracker/CVE-2026-27784
+Pick patch from [1] which mentioned in debian report [2]
+[1] https://github.com/nginx/nginx/commit/78f581487706f2e43eea5a060c516fc4d98090e8
+[2] https://security-tracker.debian.org/tracker/CVE-2026-28755
 
-More details: https://nvd.nist.gov/vuln/detail/CVE-2026-27784
+Note: Add different patch for both version to resolve fuzz issue.
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../nginx/files/CVE-2026-27784.patch          | 88 +++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc  |  1 +
- 2 files changed, 89 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2026-27784.patch
+ .../nginx/nginx-1.24.0/CVE-2026-28755.patch   | 48 +++++++++++++++++++
+ .../nginx/nginx-1.25.5/CVE-2026-28755.patch   | 48 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.24.0.bb       |  5 +-
+ .../recipes-httpd/nginx/nginx_1.25.5.bb       |  2 +
+ 4 files changed, 102 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.25.5/CVE-2026-28755.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2026-27784.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-27784.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
 new file mode 100644
-index 0000000000..41a8563c67
+index 0000000000..37e6d5b3b4
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2026-27784.patch
-@@ -0,0 +1,88 @@
-+From b23ac73b00313d159a99636c21ef71b828781018 Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Mon, 2 Mar 2026 21:12:34 +0400
-+Subject: [PATCH] Mp4: fixed possible integer overflow on 32-bit platforms.
++++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
+@@ -0,0 +1,48 @@
++From 78f581487706f2e43eea5a060c516fc4d98090e8 Mon Sep 17 00:00:00 2001
++From: Sergey Kandaurov <pluknet@nginx.com>
++Date: Tue, 17 Mar 2026 19:20:03 +0400
++Subject: [PATCH] Stream: fixed client certificate validation with OCSP.
 +
-+Previously, a 32-bit overflow could happen while validating atom entries
-+count.  This allowed processing of an invalid atom with entrires beyond
-+its boundaries with reads and writes outside of the allocated mp4 buffer.
++Check for OCSP status was missed in 581cf2267, resulting
++in a broken validation.
 +
-+Reported by Prabhav Srinath (sprabhav7).
++Reported by Mufeed VH of Winfunc Research.
 +
-+CVE: CVE-2026-27784
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/b23ac73b00313d159a99636c21ef71b828781018]
++CVE: CVE-2026-28755
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/78f581487706f2e43eea5a060c516fc4d98090e8]
 +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ src/http/modules/ngx_http_mp4_module.c | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
++ src/stream/ngx_stream_ssl_module.c | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
 +
-+diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules/ngx_http_mp4_module.c
-+index 041ad26..a7f8be7 100644
-+--- a/src/http/modules/ngx_http_mp4_module.c
-++++ b/src/http/modules/ngx_http_mp4_module.c
-+@@ -2294,7 +2294,7 @@ ngx_http_mp4_read_stts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "mp4 time-to-sample entries:%uD", entries);
++diff --git a/src/stream/ngx_stream_ssl_module.c b/src/stream/ngx_stream_ssl_module.c
++index 1ba1825..c8e8323 100644
++--- a/src/stream/ngx_stream_ssl_module.c
+++++ b/src/stream/ngx_stream_ssl_module.c
++@@ -335,6 +335,7 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
++     long                    rc;
++     X509                   *cert;
++     ngx_int_t               rv;
+++    const char		    *str;
++     ngx_connection_t       *c;
++     ngx_stream_ssl_conf_t  *sslcf;
 + 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stts_atom_t)
-+-        + entries * sizeof(ngx_mp4_stts_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_stts_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stts atom too small", mp4->file.name.data);
-+@@ -2597,7 +2597,7 @@ ngx_http_mp4_read_stss_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom->last = atom_table;
++@@ -385,6 +386,15 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
 + 
-+     if (ngx_mp4_atom_data_size(ngx_http_mp4_stss_atom_t)
-+-        + entries * sizeof(uint32_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stss atom too small", mp4->file.name.data);
-+@@ -2802,7 +2802,7 @@ ngx_http_mp4_read_ctts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom->last = atom_table;
++             X509_free(cert);
++         }
+++
+++        if (ngx_ssl_ocsp_get_status(c, &str) != NGX_OK) {
+++            ngx_log_error(NGX_LOG_INFO, c->log, 0,
+++                          "client SSL certificate verify error: %s", str);
+++
+++            ngx_ssl_remove_cached_session(c->ssl->session_ctx,
+++                                       (SSL_get0_session(c->ssl->connection)));
+++            return NGX_ERROR;
+++        }
++     }
 + 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_ctts_atom_t)
-+-        + entries * sizeof(ngx_mp4_ctts_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_ctts_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 ctts atom too small", mp4->file.name.data);
-+@@ -2984,7 +2984,7 @@ ngx_http_mp4_read_stsc_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "sample-to-chunk entries:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stsc_atom_t)
-+-        + entries * sizeof(ngx_mp4_stsc_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_stsc_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stsc atom too small", mp4->file.name.data);
-+@@ -3362,7 +3362,7 @@ ngx_http_mp4_read_stsz_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     if (size == 0) {
-+         if (ngx_mp4_atom_data_size(ngx_mp4_stsz_atom_t)
-+-            + entries * sizeof(uint32_t) > atom_data_size)
-++            + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+         {
-+             ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                           "\"%s\" mp4 stsz atom too small",
-+@@ -3521,7 +3521,7 @@ ngx_http_mp4_read_stco_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "chunks:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stco_atom_t)
-+-        + entries * sizeof(uint32_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stco atom too small", mp4->file.name.data);
-+@@ -3737,7 +3737,7 @@ ngx_http_mp4_read_co64_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "chunks:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_co64_atom_t)
-+-        + entries * sizeof(uint64_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint64_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 co64 atom too small", mp4->file.name.data);
++     return NGX_OK;
 +-- 
 +2.50.1
 +
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 722e2508d4..05e3cab44d 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -28,6 +28,7 @@ SRC_URI = " \
-     file://CVE-2025-53859.patch \
-     file://CVE-2025-23419.patch \
-     file://CVE-2026-1642.patch \
-+    file://CVE-2026-27784.patch \
- "
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.25.5/CVE-2026-28755.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.25.5/CVE-2026-28755.patch
+new file mode 100644
+index 0000000000..fdb3dbb7e5
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx-1.25.5/CVE-2026-28755.patch
+@@ -0,0 +1,48 @@
++From 78f581487706f2e43eea5a060c516fc4d98090e8 Mon Sep 17 00:00:00 2001
++From: Sergey Kandaurov <pluknet@nginx.com>
++Date: Tue, 17 Mar 2026 19:20:03 +0400
++Subject: [PATCH] Stream: fixed client certificate validation with OCSP.
++
++Check for OCSP status was missed in 581cf2267, resulting
++in a broken validation.
++
++Reported by Mufeed VH of Winfunc Research.
++
++CVE: CVE-2026-28755
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/78f581487706f2e43eea5a060c516fc4d98090e8]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ src/stream/ngx_stream_ssl_module.c | 10 ++++++++++
++ 1 file changed, 10 insertions(+)
++
++diff --git a/src/stream/ngx_stream_ssl_module.c b/src/stream/ngx_stream_ssl_module.c
++index 6dee106..9357d09 100644
++--- a/src/stream/ngx_stream_ssl_module.c
+++++ b/src/stream/ngx_stream_ssl_module.c
++@@ -342,6 +342,7 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
++     long                        rc;
++     X509                       *cert;
++     ngx_int_t                   rv;
+++    const char			*str;
++     ngx_connection_t           *c;
++     ngx_stream_ssl_srv_conf_t  *sscf;
++ 
++@@ -392,6 +393,15 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
++ 
++             X509_free(cert);
++         }
+++
+++        if (ngx_ssl_ocsp_get_status(c, &str) != NGX_OK) {
+++            ngx_log_error(NGX_LOG_INFO, c->log, 0,
+++                          "client SSL certificate verify error: %s", str);
+++
+++            ngx_ssl_remove_cached_session(c->ssl->session_ctx,
+++                                       (SSL_get0_session(c->ssl->connection)));
+++            return NGX_ERROR;
+++        }
++     }
++ 
++     return NGX_OK;
++-- 
++2.50.1
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+index e5666f6fe6..ac1178318a 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+@@ -2,7 +2,10 @@ require nginx.inc
  
- inherit siteinfo update-rc.d useradd systemd
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
+ 
+-SRC_URI:append = " file://CVE-2023-44487.patch"
++SRC_URI:append = " \
++		  file://CVE-2023-44487.patch \
++		  file://CVE-2026-28755.patch \
++		  "
+ 
+ SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+ 
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.5.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.25.5.bb
+index b8ab1ef59e..bb2dda0c13 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.5.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.25.5.bb
+@@ -6,5 +6,7 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6547d7e5628787ee2a9c5a3480eb628"
+ 
++SRC_URI:append = " file://CVE-2026-28755.patch"
++
+ SRC_URI[sha256sum] = "2fe2294f8af4144e7e842eaea884182a84ee7970e11046ba98194400902bbec0"
+ 
 -- 
 2.50.1
 
