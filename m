@@ -1,250 +1,333 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D037EF4EAE
-	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 06:33:31 +0000 (UTC)
-Received: from mail-dl1-f44.google.com (mail-dl1-f44.google.com [74.125.82.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.49621.1775457204988548946
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B8A4EF4EAE
+	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 06:47:01 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.49735.1775458011348495844
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2026 23:33:25 -0700
+ Sun, 05 Apr 2026 23:46:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Ap90GX9D;
- spf=pass (domain: mvista.com, ip: 74.125.82.44, mailfrom: hprajapati@mvista.com)
-Received: by mail-dl1-f44.google.com with SMTP id a92af1059eb24-127380532eeso104930c88.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 23:33:24 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=p1doVxld;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: bindudaniel1996@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3591cc98871so1486201a91.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 23:46:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1775457204; x=1776062004; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+PkbdQX536sEJ3cVJ4kD845G9IVTAjtXnA6Lr3+Qw2A=;
-        b=Ap90GX9DrtuSEJc6+f9dJWSvGfUb+8WlLUoYqkpG3jKxEWaueHdoVvajHGJ2JMp5Wi
-         WRwMVmZJhYrtZyx9tru4N6mPCzf0YbBsx2gvQPO3PCBMeBgXLYH6aCfxP9h5qKGUpUqK
-         JgysoVczq6WXzns/0pTISVM9s0Fa5jIh2x8Yo=
+        d=gmail.com; s=20251104; t=1775458010; x=1776062810; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7Du4z1gkIOyDBkGK4ZpH/WoNJAp9AAPwlPE6KcJf3z8=;
+        b=p1doVxlds7V2VpRdzFq/hraLsQeWSiZK/WpyxS2TmC0CPkn26xpUaTHSTwP5KwQDAE
+         HYE8mIooyVGJBMMOKc/ftQZ9rfkRUABGqmojZSquI4x6rCbbRH8xDS5LXXUGL9hXS37g
+         BJioVJp8oQlUXNuxshEI+Jh6SP1ljX4ZpqpsiFuOpBQYFaMplOlANWxu989EaYplT/3g
+         9ZDr4t8Z3cot//+xB5YujNlNJx9zWRjazUBSetp9UvxmvlG4oMsUmalAtdFCxqRqzdgW
+         oDU4BCZoB2+BVFMe8foxLtTgsllOhRbx1F3VWyVGKya0rhPKOolKsEw7EQ6uKyHNjTcY
+         2q5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775457204; x=1776062004;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+PkbdQX536sEJ3cVJ4kD845G9IVTAjtXnA6Lr3+Qw2A=;
-        b=DST6VRcun3/vO/6NqgJvKuArllh0I3/gN18BpwMCX1LdK/ElA/GEbnXt2wMc7U6tEi
-         9DcI7g5zMDSzwGY6pltSKZloZDfEmEPKwIRERDPTWjQ6q7zbCGAoEuBPfkJmrPXYKg1y
-         tFI3Bqtdl9WxigrMt1Y6QVScLCum9lj0NHI2DD3Yo5qnLzxmODHMaYX95cnTAC7BfavG
-         q9tzOQVkmBf0eN0Mu89RGQr13FrU9r5+n87f51KvRDZ1U0P9QXmjxCi71adUhrJae+fv
-         ySusmXX5zGhv+/H+tT1x+/35CTRmb86P0d5tylApZxTapCgH8EFILfh3ByJYUNuAkohJ
-         xWjg==
-X-Gm-Message-State: AOJu0YwUhj+4MXy8xM/cc2qpV8OfvvXZs+eYdCOjKJ+PFBVl4Q6N6V++
-	X5BIXsvkg5skc94AMbRNPIWMvEwbQ1jzAtGo9ol29NRPIoxrHLFMEzRcQOo7xeRiYb1t3AbKvAL
-	cQHyQQ44=
-X-Gm-Gg: AeBDievZKnCoL1eBwKKOifekFz9wqXj7+q63BER8JuyiHY09//FlwICvxZSD/LeJq/H
-	+CPneV/GSF1jqaV4RrhSQtJhNpUEyfdnGA34Nm5ZbIh3D5GHmRVbLzEJ55wCFnVeDU8r08egrJb
-	na2hHABrogvWe97JPnHrOr1nb8Fak+RnJvMVL/IKGUB2gjCLi+4AXkDGnCpbel/8fXcDIH+Z1ag
-	OnEEM85L/UQbhBdi6KKeSV3TdDpzyqqEKjjXlXnRpkTGLOEC48ZAZI9GMMQDifzSV+lAqmaumAc
-	1CWoJeL3Pw0VbguyxCwE93n7F0M6qhvarCiIdrteD833+d+A5sFmDlFw+A89CCa8zmU2KwkDd0A
-	GGYhGQh4YooLDs3IPqr4IZqNPWkZADfgbFIyME3aZwQPTu/ENJGRIn1O1Tb4+IwvOt4bjzTwBGc
-	qtWyahRTTJQQHEBU4+nmcY1rQu+kaggntjv4sy
-X-Received: by 2002:a05:7022:ec17:b0:124:11af:7b75 with SMTP id a92af1059eb24-12bfb76f2a2mr5715109c88.34.1775457204052;
-        Sun, 05 Apr 2026 23:33:24 -0700 (PDT)
-Received: from MVIN00013.mvista.com ([103.250.136.160])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12bedd8ff27sm10760364c88.7.2026.04.05.23.33.19
+        d=1e100.net; s=20251104; t=1775458010; x=1776062810;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=7Du4z1gkIOyDBkGK4ZpH/WoNJAp9AAPwlPE6KcJf3z8=;
+        b=Na2NEyrBdMa+0XvuE2eyUpXNo8Db2KMCk9ju9tpc7lgGbWMu9x0U31ZK9zwTdvphic
+         3MmI47Cn8Yh0XuVSN6SPfbGH9x7AayV22OcWv8xBFeEvNf7bMfK+qNuJXsXDyWqt/y2M
+         kzFGtuYOeFouLCbYxukGPDdsMeopkIDFJ8+TCRKAIthhEaRne8GN2AYkzJFe+J0LZWmh
+         KG6oFH8aQdhy3UmB18IYVQWXLJr7PjNqS0ztQaENsGo50Fp+jnxSNzzDt0ZLWR7+tTV/
+         rVOSh0eLLPHcpYkQ7KQgwEvhgFaU9bw5+yd/Sd2RkjrKoZi0aiW/ft3XxAh4kinH7jUu
+         ySEA==
+X-Gm-Message-State: AOJu0YynsAQBpvVEZgv4wd33lJedgmhb9IRo9O5i9x3qynLXqURpED9k
+	4ICDzbAenH9PNv9BKVfK/wKAHlW80i1TZlyAQmhH4h9GhoElDDfMKFYh1N6YVw==
+X-Gm-Gg: AeBDiesc8OgA2pM1f8YhgfoZCM1X/SS+u5yrzuQyovR/28wweHYvHzPN2nJMkxyuA25
+	t8bNRkczGXfNeMyTOKh1ayv9FAhskiJIW3cFcu8LKvBdRxiNxRVCzS4XAfg8Mss6GzB1AgNdrSm
+	jxVdkByRr8H26lwaYNS6KiEUlFa3nNkJwta+oITa4n7O5kyW2wV6jwQVqnxBnoRgmfnp+ipDJaZ
+	muPBuIFeQzQ55BUg0gljCcxxZaZWXkf9lyn7ZHOovu37/xytt/M2UCNwgBTd8o5F8EgtwYdGs+Y
+	9f5i+yIM7SLD5ACQBKWSuK29K+ri7p9PqDOAz79CyVJH4crkJSHMBwrYU6c3sj/PTyXTGZJkC7e
+	H5n0WFHjtSL3iYEdpUAdcsgyazc3oDno7MD2tA/bgqgyO35ZQ0DGK6PlU+LsIxGplEPMztehvge
+	+5WHXLX0LatL0NuhM5HDiAqTLNFXFUUg==
+X-Received: by 2002:a17:903:faf:b0:2ae:d09c:5241 with SMTP id d9443c01a7336-2b281715d38mr124931435ad.2.1775458010137;
+        Sun, 05 Apr 2026 23:46:50 -0700 (PDT)
+Received: from L-12443L.kpit.com ([106.51.46.147])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b2749a4791sm127925575ad.66.2026.04.05.23.46.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 23:33:23 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-webserver][kirkstone][PATCH] nginx: fix CVE-2026-27784, CVE-2026-28755
-Date: Mon,  6 Apr 2026 12:03:03 +0530
-Message-ID: <20260406063303.161444-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+        Sun, 05 Apr 2026 23:46:49 -0700 (PDT)
+From: Bhabu Bindu <bindudaniel1996@gmail.com>
+X-Google-Original-From: Bhabu Bindu <bhabu.bindu@kpit.com>
+To: openembedded-devel@lists.openembedded.org,
+	bhabu.bindu@kpit.com
+Subject: [meta-oe][kirkstone][PATCH v2] neon: Backport redirect test debug improvements
+Date: Mon,  6 Apr 2026 12:15:13 +0530
+Message-Id: <20260406064513.449580-1-bhabu.bindu@kpit.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <125878>
+References: <125878>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 06:33:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126030
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 06:47:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126031
 
-Pick up patch [1] and [2] from Debian report.
-[1] https://security-tracker.debian.org/tracker/CVE-2026-27784
-[2] https://security-tracker.debian.org/tracker/CVE-2026-28755
+The redirect test in neon 0.30.2 intermittently fails with
+"did not get NE_REDIRECT", making it hard to debug.
 
-More details :
-[1]: https://nvd.nist.gov/vuln/detail/CVE-2026-27784
-[2]: https://nvd.nist.gov/vuln/detail/CVE-2026-28755
+Backport relevant upstream changes from updated neon version to:
+- log actual return value when NE_REDIRECT is not received
+- use double_serve_sstring for improved test reliability
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Upstream-Status: Backport
+[https://github.com/notroj/neon/commit/f7a3d8f1366c7df6578d79af3b5d28a316011be0]
+[https://github.com/notroj/neon/commit/0f8dec6c8e7d672f74bb5f81fc7c6bd0d5c56619]
+[https://github.com/notroj/neon/commit/1e562888d85efc492c434474c8d90cef3aaa8b18]
+[https://github.com/notroj/neon/commit/9e836bb63bf41fd78e12175cd7b35bfb07a031e3]
+
+Signed-off-by: Bhabu Bindu <bhabu.bindu@kpit.com>
 ---
- .../nginx/nginx-1.24.0/CVE-2026-27784.patch   | 88 +++++++++++++++++++
- .../nginx/nginx-1.24.0/CVE-2026-28755.patch   | 48 ++++++++++
- .../recipes-httpd/nginx/nginx_1.24.0.bb       |  5 ++
- 3 files changed, 141 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27784.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
+ ...0001-Temporarily-disable-no_redirect.patch | 45 +++++++++++++++++
+ ...ling-no_redirect-with-more-debugging.patch | 50 +++++++++++++++++++
+ ...Switch-to-using-double_serve_sstring.patch | 48 ++++++++++++++++++
+ .../neon/0004-test-redirect.c-Cleanup.patch   | 49 ++++++++++++++++++
+ meta-oe/recipes-support/neon/neon_0.30.2.bb   |  4 ++
+ 5 files changed, 196 insertions(+)
+ create mode 100644 meta-oe/recipes-support/neon/neon/0001-Temporarily-disable-no_redirect.patch
+ create mode 100644 meta-oe/recipes-support/neon/neon/0002-Re-enabling-no_redirect-with-more-debugging.patch
+ create mode 100644 meta-oe/recipes-support/neon/neon/0003-no_redirect-Switch-to-using-double_serve_sstring.patch
+ create mode 100644 meta-oe/recipes-support/neon/neon/0004-test-redirect.c-Cleanup.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27784.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27784.patch
+diff --git a/meta-oe/recipes-support/neon/neon/0001-Temporarily-disable-no_redirect.patch b/meta-oe/recipes-support/neon/neon/0001-Temporarily-disable-no_redirect.patch
 new file mode 100644
-index 0000000000..41a8563c67
+index 0000000000..e0c373d416
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27784.patch
-@@ -0,0 +1,88 @@
-+From b23ac73b00313d159a99636c21ef71b828781018 Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Mon, 2 Mar 2026 21:12:34 +0400
-+Subject: [PATCH] Mp4: fixed possible integer overflow on 32-bit platforms.
++++ b/meta-oe/recipes-support/neon/neon/0001-Temporarily-disable-no_redirect.patch
+@@ -0,0 +1,45 @@
++From f7a3d8f1366c7df6578d79af3b5d28a316011be0 Mon Sep 17 00:00:00 2001
++From: Joe Orton <jorton@redhat.com>
++Date: Thu, 7 Mar 2019 09:56:57 +0000
++Subject: [PATCH 1/4] Temporarily disable redirect.c:no_redirect
 +
-+Previously, a 32-bit overflow could happen while validating atom entries
-+count.  This allowed processing of an invalid atom with entrires beyond
-+its boundaries with reads and writes outside of the allocated mp4 buffer.
-+
-+Reported by Prabhav Srinath (sprabhav7).
-+
-+CVE: CVE-2026-27784
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/b23ac73b00313d159a99636c21ef71b828781018]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++Upstream-Status: Backport
++[https://github.com/notroj/neon/commit/f7a3d8f1366c7df6578d79af3b5d28a316011be0]
++Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
 +---
-+ src/http/modules/ngx_http_mp4_module.c | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
++ test/redirect.c | 4 ++++
++ 1 file changed, 4 insertions(+)
 +
-+diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules/ngx_http_mp4_module.c
-+index 041ad26..a7f8be7 100644
-+--- a/src/http/modules/ngx_http_mp4_module.c
-++++ b/src/http/modules/ngx_http_mp4_module.c
-+@@ -2294,7 +2294,7 @@ ngx_http_mp4_read_stts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "mp4 time-to-sample entries:%uD", entries);
++diff --git a/test/redirect.c b/test/redirect.c
++index c93b388..920c481 100644
++--- a/test/redirect.c
+++++ b/test/redirect.c
++@@ -162,6 +162,7 @@ static int fail_loop(void)
++ }
++ #endif
 + 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stts_atom_t)
-+-        + entries * sizeof(ngx_mp4_stts_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_stts_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stts atom too small", mp4->file.name.data);
-+@@ -2597,7 +2597,7 @@ ngx_http_mp4_read_stss_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom->last = atom_table;
+++#if 0
++ /* ensure that ne_redirect_location returns NULL when no redirect has
++  * been encountered, or redirect hooks aren't registered. */
++ static int no_redirect(void)
++@@ -187,6 +188,7 @@ static int no_redirect(void)
++     ne_session_destroy(sess);
++     return OK;
++ }
+++#endif
 + 
-+     if (ngx_mp4_atom_data_size(ngx_http_mp4_stss_atom_t)
-+-        + entries * sizeof(uint32_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stss atom too small", mp4->file.name.data);
-+@@ -2802,7 +2802,7 @@ ngx_http_mp4_read_ctts_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     atom->last = atom_table;
++ ne_test tests[] = {
++     T(lookup_localhost),
++@@ -194,7 +196,9 @@ ne_test tests[] = {
++     T(non_absolute),
++     T(relative_1),
++     T(relative_2),
+++#if 0
++     T(no_redirect),
+++#endif
++     T(NULL) 
++ };
 + 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_ctts_atom_t)
-+-        + entries * sizeof(ngx_mp4_ctts_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_ctts_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 ctts atom too small", mp4->file.name.data);
-+@@ -2984,7 +2984,7 @@ ngx_http_mp4_read_stsc_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+                    "sample-to-chunk entries:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stsc_atom_t)
-+-        + entries * sizeof(ngx_mp4_stsc_entry_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(ngx_mp4_stsc_entry_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stsc atom too small", mp4->file.name.data);
-+@@ -3362,7 +3362,7 @@ ngx_http_mp4_read_stsz_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+ 
-+     if (size == 0) {
-+         if (ngx_mp4_atom_data_size(ngx_mp4_stsz_atom_t)
-+-            + entries * sizeof(uint32_t) > atom_data_size)
-++            + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+         {
-+             ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                           "\"%s\" mp4 stsz atom too small",
-+@@ -3521,7 +3521,7 @@ ngx_http_mp4_read_stco_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "chunks:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_stco_atom_t)
-+-        + entries * sizeof(uint32_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint32_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 stco atom too small", mp4->file.name.data);
-+@@ -3737,7 +3737,7 @@ ngx_http_mp4_read_co64_atom(ngx_http_mp4_file_t *mp4, uint64_t atom_data_size)
-+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, mp4->file.log, 0, "chunks:%uD", entries);
-+ 
-+     if (ngx_mp4_atom_data_size(ngx_mp4_co64_atom_t)
-+-        + entries * sizeof(uint64_t) > atom_data_size)
-++        + (uint64_t) entries * sizeof(uint64_t) > atom_data_size)
-+     {
-+         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-+                       "\"%s\" mp4 co64 atom too small", mp4->file.name.data);
 +-- 
-+2.50.1
++2.34.1
 +
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
+diff --git a/meta-oe/recipes-support/neon/neon/0002-Re-enabling-no_redirect-with-more-debugging.patch b/meta-oe/recipes-support/neon/neon/0002-Re-enabling-no_redirect-with-more-debugging.patch
 new file mode 100644
-index 0000000000..37e6d5b3b4
+index 0000000000..e21a43f0b6
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28755.patch
++++ b/meta-oe/recipes-support/neon/neon/0002-Re-enabling-no_redirect-with-more-debugging.patch
+@@ -0,0 +1,50 @@
++From 0f8dec6c8e7d672f74bb5f81fc7c6bd0d5c56619 Mon Sep 17 00:00:00 2001
++From: Joe Orton <jorton@redhat.com>
++Date: Mon, 8 Apr 2019 10:22:52 +0100
++Subject: [PATCH 2/4] * test/redirect: Try re-enabling no_redirect with more
++ debugging.
++
++Upstream-Status: Backport
++[https://github.com/notroj/neon/commit/0f8dec6c8e7d672f74bb5f81fc7c6bd0d5c56619]
++Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
++---
++ test/redirect.c | 9 ++++++---
++ 1 file changed, 6 insertions(+), 3 deletions(-)
++
++diff --git a/test/redirect.c b/test/redirect.c
++index 920c481..e7ecc19 100644
++--- a/test/redirect.c
+++++ b/test/redirect.c
++@@ -64,7 +64,10 @@ static int serve_redir(ne_socket *sock, void *ud)
++ static int process_redir(ne_session *sess, const char *path,
++                          const ne_uri **redir)
++ {
++-    ONN("did not get NE_REDIRECT", any_request(sess, path) != NE_REDIRECT);
+++    int ret = any_request(sess, path);
+++    ONV(ret != NE_REDIRECT,
+++        ("request got %d (%s) rather than NE_REDIRECT",
+++         ret, ne_get_error(sess)));
++     *redir = ne_redirect_location(sess);
++     return OK;
++ }
++@@ -162,7 +165,7 @@ static int fail_loop(void)
++ }
++ #endif
++ 
++-#if 0
+++#if 01
++ /* ensure that ne_redirect_location returns NULL when no redirect has
++  * been encountered, or redirect hooks aren't registered. */
++ static int no_redirect(void)
++@@ -196,7 +199,7 @@ ne_test tests[] = {
++     T(non_absolute),
++     T(relative_1),
++     T(relative_2),
++-#if 0
+++#if 1
++     T(no_redirect),
++ #endif
++     T(NULL) 
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/neon/neon/0003-no_redirect-Switch-to-using-double_serve_sstring.patch b/meta-oe/recipes-support/neon/neon/0003-no_redirect-Switch-to-using-double_serve_sstring.patch
+new file mode 100644
+index 0000000000..21c011f8e5
+--- /dev/null
++++ b/meta-oe/recipes-support/neon/neon/0003-no_redirect-Switch-to-using-double_serve_sstring.patch
 @@ -0,0 +1,48 @@
-+From 78f581487706f2e43eea5a060c516fc4d98090e8 Mon Sep 17 00:00:00 2001
-+From: Sergey Kandaurov <pluknet@nginx.com>
-+Date: Tue, 17 Mar 2026 19:20:03 +0400
-+Subject: [PATCH] Stream: fixed client certificate validation with OCSP.
++From 1e562888d85efc492c434474c8d90cef3aaa8b18 Mon Sep 17 00:00:00 2001
++From: Joe Orton <jorton@redhat.com>
++Date: Mon, 8 Apr 2019 10:32:27 +0100
++Subject: [PATCH 3/4] * test/redirect.c (no_redirect): Switch to using
++ double_serve_sstring.
 +
-+Check for OCSP status was missed in 581cf2267, resulting
-+in a broken validation.
-+
-+Reported by Mufeed VH of Winfunc Research.
-+
-+CVE: CVE-2026-28755
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/78f581487706f2e43eea5a060c516fc4d98090e8]
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++Upstream-Status: Backport
++[https://github.com/notroj/neon/commit/1e562888d85efc492c434474c8d90cef3aaa8b18]
++Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
 +---
-+ src/stream/ngx_stream_ssl_module.c | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
++ test/redirect.c | 14 ++++++++++----
++ 1 file changed, 10 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/stream/ngx_stream_ssl_module.c b/src/stream/ngx_stream_ssl_module.c
-+index 1ba1825..c8e8323 100644
-+--- a/src/stream/ngx_stream_ssl_module.c
-++++ b/src/stream/ngx_stream_ssl_module.c
-+@@ -335,6 +335,7 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
-+     long                    rc;
-+     X509                   *cert;
-+     ngx_int_t               rv;
-++    const char		    *str;
-+     ngx_connection_t       *c;
-+     ngx_stream_ssl_conf_t  *sslcf;
++diff --git a/test/redirect.c b/test/redirect.c
++index e7ecc19..42deadb 100644
++--- a/test/redirect.c
+++++ b/test/redirect.c
++@@ -166,17 +166,23 @@ static int fail_loop(void)
++ #endif
 + 
-+@@ -385,6 +386,15 @@ ngx_stream_ssl_handler(ngx_stream_session_t *s)
-+ 
-+             X509_free(cert);
-+         }
++ #if 01
 ++
-++        if (ngx_ssl_ocsp_get_status(c, &str) != NGX_OK) {
-++            ngx_log_error(NGX_LOG_INFO, c->log, 0,
-++                          "client SSL certificate verify error: %s", str);
+++#define RESP1 "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
+++#define RESP2 "HTTP/1.0 302 Get Ye Away\r\n" "Location: /blah\r\n" "\r\n"
++ /* ensure that ne_redirect_location returns NULL when no redirect has
++  * been encountered, or redirect hooks aren't registered. */
++ static int no_redirect(void)
++ {
++     ne_session *sess;
++     const ne_uri *loc;
+++    struct double_serve_args resp;
 ++
-++            ngx_ssl_remove_cached_session(c->ssl->session_ctx,
-++                                       (SSL_get0_session(c->ssl->connection)));
-++            return NGX_ERROR;
-++        }
-+     }
+++    resp.first.data = RESP1;
+++    resp.first.len = strlen(RESP1);
+++    resp.second.data = RESP2;
+++    resp.second.len = strlen(RESP2);
 + 
-+     return NGX_OK;
++-    CALL(session_server(&sess, single_serve_string, 
++-                        "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
++-                        "HTTP/1.0 302 Get Ye Away\r\n"
++-                        "Location: /blah\r\n" "\r\n"));
+++    CALL(session_server(&sess, double_serve_sstring, &resp));
++     ONN("redirect non-NULL before register", ne_redirect_location(sess));
++     ne_redirect_register(sess);
++     ONN("initial redirect non-NULL", ne_redirect_location(sess));
 +-- 
-+2.50.1
++2.34.1
 +
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-index 2e865e400e..c843b67975 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-@@ -2,5 +2,10 @@ require nginx.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
- 
-+SRC_URI:append = " \
-+		  file://CVE-2026-27784.patch \
-+		  file://CVE-2026-28755.patch \
-+		"
+diff --git a/meta-oe/recipes-support/neon/neon/0004-test-redirect.c-Cleanup.patch b/meta-oe/recipes-support/neon/neon/0004-test-redirect.c-Cleanup.patch
+new file mode 100644
+index 0000000000..602dd4286e
+--- /dev/null
++++ b/meta-oe/recipes-support/neon/neon/0004-test-redirect.c-Cleanup.patch
+@@ -0,0 +1,49 @@
++From 9e836bb63bf41fd78e12175cd7b35bfb07a031e3 Mon Sep 17 00:00:00 2001
++From: Joe Orton <jorton@redhat.com>
++Date: Mon, 8 Apr 2019 10:35:42 +0100
++Subject: [PATCH 4/4] * test/redirect.c: Cleanup.
 +
- SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
++Upstream-Status: Backport
++[https://github.com/notroj/neon/commit/9e836bb63bf41fd78e12175cd7b35bfb07a031e3]
++Signed-off-by: Bindu Bhabu <bhabu.bindu@kpit.com>
++---
++ test/redirect.c | 6 +-----
++ 1 file changed, 1 insertion(+), 5 deletions(-)
++
++diff --git a/test/redirect.c b/test/redirect.c
++index 42deadb..682097d 100644
++--- a/test/redirect.c
+++++ b/test/redirect.c
++@@ -165,10 +165,9 @@ static int fail_loop(void)
++ }
++ #endif
++ 
++-#if 01
++-
++ #define RESP1 "HTTP/1.1 200 OK\r\n" "Content-Length: 0\r\n\r\n"
++ #define RESP2 "HTTP/1.0 302 Get Ye Away\r\n" "Location: /blah\r\n" "\r\n"
+++
++ /* ensure that ne_redirect_location returns NULL when no redirect has
++  * been encountered, or redirect hooks aren't registered. */
++ static int no_redirect(void)
++@@ -197,7 +196,6 @@ static int no_redirect(void)
++     ne_session_destroy(sess);
++     return OK;
++ }
++-#endif
++ 
++ ne_test tests[] = {
++     T(lookup_localhost),
++@@ -205,9 +203,7 @@ ne_test tests[] = {
++     T(non_absolute),
++     T(relative_1),
++     T(relative_2),
++-#if 1
++     T(no_redirect),
++-#endif
++     T(NULL) 
++ };
++ 
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/neon/neon_0.30.2.bb b/meta-oe/recipes-support/neon/neon_0.30.2.bb
+index 646a9eca13..f620d547a9 100644
+--- a/meta-oe/recipes-support/neon/neon_0.30.2.bb
++++ b/meta-oe/recipes-support/neon/neon_0.30.2.bb
+@@ -9,6 +9,10 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
+            file://pkgconfig.patch \
+            file://fix-package-check-for-libxml2.patch \
+            file://run-ptest \
++           file://0001-Temporarily-disable-no_redirect.patch \
++           file://0002-Re-enabling-no_redirect-with-more-debugging.patch \
++           file://0003-no_redirect-Switch-to-using-double_serve_sstring.patch \
++           file://0004-test-redirect.c-Cleanup.patch \
+           "
  
+ SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
 -- 
-2.50.1
+2.34.1
 
 
