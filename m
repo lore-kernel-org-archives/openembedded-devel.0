@@ -2,101 +2,166 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47747F46C56
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 391A8F46C54
 	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 15:50:49 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.58215.1775490648582177866
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.58201.1775490647301309947
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2026 08:50:48 -0700
+ Mon, 06 Apr 2026 08:50:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=grBg2cp5;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4853c1ca73aso40813955e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 08:50:48 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cNhh/6pN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4887f49ec5aso57029105e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 08:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775490647; x=1776095447; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=EetRcmscTjuYhdhrxQktaUgnd8DBi2/LoaMslrvvbh8=;
-        b=grBg2cp5Zlb9zkb9RUxakhSA8WEEaH3BhOYHdW4Sht2jLcdHmerfSierFGFvFDZ+hN
-         3I2w3CObvEHy4z9bpTUDkPYcw5ODeCS+cG9LohZUKXGpLDAUOHrvJIQMdhZPVG0gHLCm
-         +Xw2I+Cgh+zx2eJmKoLrWeKsmaJJ3SUxhyaTqP2mIhc4I75jLDNkpvzy74ZR/jnOuoyG
-         320QPahhjUQc6dLnY0PAu2jUFJdlHuF6hmtfdYgZsGLDfZizjKauF2cDzGTzbg+TiOb2
-         AMCgYDByT9oGZX581ypoXjBZLLnLQyXThoScXiZVxW1UwZTQtB1i+cs283AF4izpNd0T
-         sWkg==
+        d=gmail.com; s=20251104; t=1775490646; x=1776095446; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zkjCWwt4B3b1NLLGyJ7cMyrHQZRKNvzNfgUl1rrTlR4=;
+        b=cNhh/6pNZeixJbKjlxsuF/oYrHC0j5ZvM6JOB6YXI8bm2QbD9Kq0JG79LunwePU+ys
+         vwZAukw2A8nlycu3SC1I4TioSqkIW0hh4rA/U5VlrNEHFCy2ny4rBjUgkIJgtes4sgYh
+         ZMeOuTnVo4ntgPDkuzK50HEUml0g5gq931ouDSatQK7/RRSxli2YZbweC7NLEFfekUAc
+         CncStgkoqhM4glz/bQFPr+RVylKyxXI49TMFUYvdjL5K1+gOTIkWHi/xQCSW+Ao09OZd
+         XM+3XOoI1yNCH1GkOdJq7nXU3CALCwOULfQSwFF8QyzzuEv6IQb7Fl47L4eoMOp75txv
+         mOjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775490647; x=1776095447;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=EetRcmscTjuYhdhrxQktaUgnd8DBi2/LoaMslrvvbh8=;
-        b=qZTZbQQz8Ql1+oZ0ZROzGE2zi79wVeNaijGLeRGMrT03IKcadCsxPEXTTSx27rih21
-         KzuNni5DjpQQt9OXsRvfa1CvFi3Gxt/l+TjN51WWj9StyCqjvDtsZIGBKh/SwSheMUJg
-         d3sgAsmNZ622kOWfrDeW8F08mG9cIdb0Ubi8WmTErpAfPgbka7+JW8VMrqY4Hsni7k9C
-         XSZZXeBVlf5Gfo5849QUYe9gAZ/j/A/zJEEd4PhgAmZAkIU15p43mrhYdAVjSV2jTqtN
-         LQYaJMvKzHAXADx7WrEoNTx3PY+CjNCF9dig+Ug+1W9NK5uUzDSiCPUk5QAvWE2AhCpU
-         dwcQ==
-X-Gm-Message-State: AOJu0Yyk70jaB5Ro0yzyIfEV82P0DtCpZuNlVRKFS/lkWiMbqxNLKgxR
-	UhOJKyumUY76pIp/kytunCkM3uTAlpY3/xs+5ESQdqfBM1C7xy9pVnLpTfaQ2w==
-X-Gm-Gg: AeBDieude/ig127sH5N1wPZVWwjodubDSkY9ViW3ea/sBm7STn1b31ngXS4lggjO9a9
-	xCRuYS0wet2tp4KGyQt5ASDEv90FglLQfqrPdSLf0RuSEQkf19AQ1OCTYxhW9r7kTm/OBrDUP9u
-	RAbiW/QYMIxPlmxO/wb7wJ0314xDJ580172l6EUuOk+PMpfSGZFTnnJ7jck/o2/LRbS+FDOWIDx
-	wh7oL922KVnvyUjUqpQfbU4/I4WhhM9mrm4ZoAMdM7jBEQ4M+JaXAx0CEA7wcM4SERzEo/200l/
-	aEYP0+1FSAyD/mQuZm2BzA5jtBTAGt/P7BYmLFchOS1iqG31Vsh4EU5hg6FR/MjEROk8IYerovY
-	O4Gh+F0s1TkuRmZOLa7aqk31Dq4zhZbLL1f25ec72TLRdZmZqLOnfwHQLwaatrvmV6oCRktFm0U
-	btmKfLxKp54r6oZJHNfW8L
-X-Received: by 2002:a05:600c:3549:b0:483:64b4:79da with SMTP id 5b1f17b1804b1-488997d5e84mr175759145e9.26.1775490646933;
-        Mon, 06 Apr 2026 08:50:46 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775490646; x=1776095446;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zkjCWwt4B3b1NLLGyJ7cMyrHQZRKNvzNfgUl1rrTlR4=;
+        b=HmBl+vl6ZLeBrjY+YhEOhI2iHEnzaiLoAfLS4LSBxdrm4+LWIZlcTnvV2KnSIlyHm1
+         4Q+KD2wPUw9tCwYzHScvd5jzohpNpNh+zxQdFjK+wV/A+JwKvsAv6EDfyrqgt4wiQQcC
+         lEgbPM1JkuiLYokg7Adn/jBz+CqSWBUctsZTd7P3MzagqdMm4Xs9AilLINR+33C0PxV2
+         ELFktvNxGIgng4lxNxY+IsIavVICeSEkQrEDG3abUeSjl0jGqGKiCQBpSQrIaJGIJuYY
+         PPiQD6Wc4c3oZmnLya87c96zhsPXDvN1akeehdufYf6paVCEoCUtNiNfn2DzxbaLDcZn
+         gOAA==
+X-Gm-Message-State: AOJu0YymT1HcyerxEvsHI1jhcfnjpPOSLEqX+G4/U3mbikHH7tD33KdV
+	VEJV3kcSo28qgMJhNF6AYVhlHiu/X3jDYizbcAdVm4g7FfApmfwcBKEobvbYHA==
+X-Gm-Gg: AeBDievbfvSra6cFYXIceiQ/dzwPqOhUDHZu6MyZRrzhyEsPEhsDbWb/3YnZeEu2apA
+	8NYDxrvmnTJrdFtls9suWQQw4X+csvsJBDDEz2qCKfSWFosHplSvAtSWWLeAbQYNnzS8o79PbJ1
+	TfpP76Z35ASKxfbMhRFXas3Kj2GuKOfGG3AnmwLcrSVI3JAmlSrLd4iM9omFWNRr/7O0rF5h5j8
+	JpKEB8Tnp3e8dElMdtpdBKdGtXkiNQwEV/CoNE+nLdu/ZgOJ56FgMga6Ltogt7NahpXgxHLwTY2
+	NuGjKXpZ/TKmsoS9Gx9QLcsf+iBw1XEvIr3tYqhfB8UTyTCgXm/IKLa5RBfoqUSOR3RIEtQXyfQ
+	wXkn1Z2fUMqiwAaGiZvIAtqCJMVVxKQHF3hSsMGApImVQ5qhjIzRDa0++QRdoXj/eh/vEZ5tWHN
+	OiziGl9K75rNjZV1f7A8wB
+X-Received: by 2002:a05:600c:8710:b0:485:5ba3:37d8 with SMTP id 5b1f17b1804b1-488996b0589mr219334785e9.5.1775490645288;
+        Mon, 06 Apr 2026 08:50:45 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4887e80a616sm871341915e9.2.2026.04.06.08.50.45
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4887e80a616sm871341915e9.2.2026.04.06.08.50.44
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Apr 2026 08:50:45 -0700 (PDT)
+        Mon, 06 Apr 2026 08:50:44 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] wolfssl: ignore fixed CVEs
-Date: Mon,  6 Apr 2026 17:50:44 +0200
-Message-ID: <20260406155044.3662500-2-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH 1/2] tinyproxy: patch CVE-2026-3945
+Date: Mon,  6 Apr 2026 17:50:43 +0200
+Message-ID: <20260406155044.3662500-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260406155044.3662500-1-skandigraun@gmail.com>
-References: <20260406155044.3662500-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 15:50:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126052
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126051
 
-These CVEs are tracked without a version by NVD, but all of them
-have been fixed in the current recipe version.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-3945
 
-The relevant fixes (from the NVD reports):
-
-CVE-2026-0819: https://github.com/wolfSSL/wolfssl/commit/2d3941056b6b961828947a2f159200df7f7d1cb2
-CVE-2026-2646: https://github.com/wolfSSL/wolfssl/commit/7245ad02bb1a41235d923288fd640d40c1ecb2ea
-  and https://github.com/wolfSSL/wolfssl/commit/67abcc6f2d0cc45f918325c4ae6fe2b8d5bc8f72
-CVE-2026-3503: https://github.com/wolfSSL/wolfssl/commit/cc2fdda54cd6387e554b444eb2844fa840bd9d5d
-CVE-2026-3548: https://github.com/wolfSSL/wolfssl/commit/84ca4a05fac9c6c055a514f05880c448ecbbed56
-  and https://github.com/wolfSSL/wolfssl/commit/b3f08f33b845d2d6bb523f0f38d191ca25635e1c
+Backport the patches which are references by the NVD avisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-connectivity/wolfssl/wolfssl_5.9.0.bb            | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../tinyproxy/tinyproxy/CVE-2026-3945-1.patch | 29 +++++++++++++++++
+ .../tinyproxy/tinyproxy/CVE-2026-3945-2.patch | 31 +++++++++++++++++++
+ .../tinyproxy/tinyproxy_1.11.3.bb             |  2 ++
+ 3 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-1.patch
+ create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-2.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-index a2d6455d93..7a481e7325 100644
---- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.9.0.bb
-@@ -46,3 +46,8 @@ do_install_ptest() {
-     cp -rf ${S}/certs  ${D}${PTEST_PATH}
-     cp -rf ${S}/tests  ${D}${PTEST_PATH}
- }
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-1.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-1.patch
+new file mode 100644
+index 0000000000..99c4ea705d
+--- /dev/null
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-1.patch
+@@ -0,0 +1,29 @@
++From 245946bb789c8fc0e4758c344f735a5d53827dce Mon Sep 17 00:00:00 2001
++From: rofl0r <rofl0r@users.noreply.github.com>
++Date: Thu, 12 Mar 2026 14:26:24 +0000
++Subject: [PATCH] reqs: check negative length values when reading chunked data
 +
-+CVE_STATUS[CVE-2026-0819] = "fixed-version: fixed in 5.9.0"
-+CVE_STATUS[CVE-2026-2646] = "fixed-version: fixed in 5.9.0"
-+CVE_STATUS[CVE-2026-3503] = "fixed-version: fixed in 5.9.0"
-+CVE_STATUS[CVE-2026-3548] = "fixed-version: fixed in 5.9.0"
++this could lead to a DoS when a legitimate client reads from an
++attacker-controlled web server.
++
++closes #597
++
++CVE: CVE-2026-3945
++Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/969852ccdb1d19d7ed302f0e1d324661be641e0a]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/reqs.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/reqs.c b/src/reqs.c
++index a562c68..94ce767 100644
++--- a/src/reqs.c
+++++ b/src/reqs.c
++@@ -613,6 +613,7 @@ static int pull_client_data_chunked (struct conn_s *connptr) {
++                 }
++ 
++                 chunklen = strtol (buffer, (char**)0, 16);
+++                if (chunklen < 0) goto ERROR_EXIT;
++ 
++                 if (pull_client_data (connptr, chunklen+2, 0) < 0)
++                         goto ERROR_EXIT;
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-2.patch b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-2.patch
+new file mode 100644
+index 0000000000..3da30b54eb
+--- /dev/null
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/CVE-2026-3945-2.patch
+@@ -0,0 +1,31 @@
++From 8f12872b8e50fe22be0a65ead260ebbedde905cd Mon Sep 17 00:00:00 2001
++From: rofl0r <rofl0r@users.noreply.github.com>
++Date: Sun, 29 Mar 2026 16:48:54 +0200
++Subject: [PATCH] reqs: prevent potential int overflow when parsing chunked
++ data (#603)
++
++follow-up to 969852ccdb1d19d7ed302f0e1d324661be641e0a
++
++closes #602
++
++CVE: CVE-2026-3945
++Upstream-Status: Backport [https://github.com/tinyproxy/tinyproxy/commit/bb7edc4778041b3bc8ad7fca448b67d98039cc7d]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/reqs.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/src/reqs.c b/src/reqs.c
++index 94ce767..7aacfd3 100644
++--- a/src/reqs.c
+++++ b/src/reqs.c
++@@ -613,7 +613,8 @@ static int pull_client_data_chunked (struct conn_s *connptr) {
++                 }
++ 
++                 chunklen = strtol (buffer, (char**)0, 16);
++-                if (chunklen < 0) goto ERROR_EXIT;
+++                /* prevent negative or huge values causing overflow */
+++                if (chunklen < 0 || chunklen > 0x0fffffff) goto ERROR_EXIT;
++ 
++                 if (pull_client_data (connptr, chunklen+2, 0) < 0)
++                         goto ERROR_EXIT;
+diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+index 745c55bc0d..56e3296066 100644
+--- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
++++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.11.3.bb
+@@ -7,6 +7,8 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
+            file://tinyproxy.service \
+            file://tinyproxy.conf \
+            file://run-ptest \
++           file://CVE-2026-3945-1.patch \
++           file://CVE-2026-3945-2.patch \
+            "
+ 
+ SRC_URI[sha256sum] = "9bcf46db1a2375ff3e3d27a41982f1efec4706cce8899ff9f33323a8218f7592"
 
