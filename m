@@ -2,73 +2,73 @@ Return-Path: <bindudaniel1996@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B8A4EF4EAE
-	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 06:47:01 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.49735.1775458011348495844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E02F5EF4EBC
+	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 07:19:41 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.50042.1775459980603855634
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2026 23:46:51 -0700
+ Mon, 06 Apr 2026 00:19:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=p1doVxld;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: bindudaniel1996@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-3591cc98871so1486201a91.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2026 23:46:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=sJJiQvEo;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: bindudaniel1996@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2ad9a9be502so23761235ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 00:19:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775458010; x=1776062810; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1775459980; x=1776064780; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
         bh=7Du4z1gkIOyDBkGK4ZpH/WoNJAp9AAPwlPE6KcJf3z8=;
-        b=p1doVxlds7V2VpRdzFq/hraLsQeWSiZK/WpyxS2TmC0CPkn26xpUaTHSTwP5KwQDAE
-         HYE8mIooyVGJBMMOKc/ftQZ9rfkRUABGqmojZSquI4x6rCbbRH8xDS5LXXUGL9hXS37g
-         BJioVJp8oQlUXNuxshEI+Jh6SP1ljX4ZpqpsiFuOpBQYFaMplOlANWxu989EaYplT/3g
-         9ZDr4t8Z3cot//+xB5YujNlNJx9zWRjazUBSetp9UvxmvlG4oMsUmalAtdFCxqRqzdgW
-         oDU4BCZoB2+BVFMe8foxLtTgsllOhRbx1F3VWyVGKya0rhPKOolKsEw7EQ6uKyHNjTcY
-         2q5Q==
+        b=sJJiQvEo3NpwAawAErvHr6SiZEw7micmC1DrRgG082MBEOBLDsUYH4ZSGb2iVY7APv
+         VeoqZ/MGS4GQH6Jw7S2QzRe1bzKiGGfj70zGKC4PY5zkqsV2ZzLnY50zJtGaa7tb0xUw
+         YB5P6y2z3KY6pTOifNHgkei2zKkJQrvnpxbqO3mit7139bI0sdDCAuloeAncHfR9m25D
+         ado3fW/LWGOWaHXllBdxaoMZSeKwetf6rhyn8rPB3AZWcHvGHRV/42oRluVJ6OQNYNA1
+         dYr465wkrswqraERfUfIsDJvAekTIOaTCjmC9DaWEBXPzxBJ/FS3Ms2EXfp41/gUsBws
+         GDiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775458010; x=1776062810;
+        d=1e100.net; s=20251104; t=1775459980; x=1776064780;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
         bh=7Du4z1gkIOyDBkGK4ZpH/WoNJAp9AAPwlPE6KcJf3z8=;
-        b=Na2NEyrBdMa+0XvuE2eyUpXNo8Db2KMCk9ju9tpc7lgGbWMu9x0U31ZK9zwTdvphic
-         3MmI47Cn8Yh0XuVSN6SPfbGH9x7AayV22OcWv8xBFeEvNf7bMfK+qNuJXsXDyWqt/y2M
-         kzFGtuYOeFouLCbYxukGPDdsMeopkIDFJ8+TCRKAIthhEaRne8GN2AYkzJFe+J0LZWmh
-         KG6oFH8aQdhy3UmB18IYVQWXLJr7PjNqS0ztQaENsGo50Fp+jnxSNzzDt0ZLWR7+tTV/
-         rVOSh0eLLPHcpYkQ7KQgwEvhgFaU9bw5+yd/Sd2RkjrKoZi0aiW/ft3XxAh4kinH7jUu
-         ySEA==
-X-Gm-Message-State: AOJu0YynsAQBpvVEZgv4wd33lJedgmhb9IRo9O5i9x3qynLXqURpED9k
-	4ICDzbAenH9PNv9BKVfK/wKAHlW80i1TZlyAQmhH4h9GhoElDDfMKFYh1N6YVw==
-X-Gm-Gg: AeBDiesc8OgA2pM1f8YhgfoZCM1X/SS+u5yrzuQyovR/28wweHYvHzPN2nJMkxyuA25
-	t8bNRkczGXfNeMyTOKh1ayv9FAhskiJIW3cFcu8LKvBdRxiNxRVCzS4XAfg8Mss6GzB1AgNdrSm
-	jxVdkByRr8H26lwaYNS6KiEUlFa3nNkJwta+oITa4n7O5kyW2wV6jwQVqnxBnoRgmfnp+ipDJaZ
-	muPBuIFeQzQ55BUg0gljCcxxZaZWXkf9lyn7ZHOovu37/xytt/M2UCNwgBTd8o5F8EgtwYdGs+Y
-	9f5i+yIM7SLD5ACQBKWSuK29K+ri7p9PqDOAz79CyVJH4crkJSHMBwrYU6c3sj/PTyXTGZJkC7e
-	H5n0WFHjtSL3iYEdpUAdcsgyazc3oDno7MD2tA/bgqgyO35ZQ0DGK6PlU+LsIxGplEPMztehvge
-	+5WHXLX0LatL0NuhM5HDiAqTLNFXFUUg==
-X-Received: by 2002:a17:903:faf:b0:2ae:d09c:5241 with SMTP id d9443c01a7336-2b281715d38mr124931435ad.2.1775458010137;
-        Sun, 05 Apr 2026 23:46:50 -0700 (PDT)
+        b=Lu9JFCmhMpCMAQ0A4kbbMs3pEK4GRVJomS2z5X/ARwaKKxSKAPGDDVsUZzhMYKHetv
+         B9JD+ENLRoiiVKGRACtuKempgjt7rk6WGYkEam5coUeyotaTy8zS+7+Zj/helq2kbCly
+         TVtEiRPLeJyjuiPew7OBffX80xj2lksNHlSnlkcMv+lnQxJ9J8SK1s5ZrHOQfb9O8u6J
+         6LtFlUhPW9BLuETBtgH9OoAcTtZMbJ+/4boqGxkPPgObF7Xbd1LobGg88oZfqqg/kBPQ
+         cCrpwh99wnfDe1SjlVW6vz5+eA1Zp19ndVWlbFry67ZI8VU1qn7JOg8Abi6/hCx/nSg9
+         f88Q==
+X-Gm-Message-State: AOJu0YzCkgYPyYCwu8d7w7UKH5LChAOEoLpRPLN5d18mFqJSE5dgGtDj
+	ejyhEPFYuW2vrnXm2m5ObI8p3NJllkzD0hvA+b5n2ijjgQ2lMe597DgFiXHsDg==
+X-Gm-Gg: AeBDiesZ2hJ1yyW/uR95aYfPKYjm3Mrc7SlMHqWxn203HyGzKz8nPn7PjR57edIe1Zu
+	ANHLG93clFAXaufz1F1oAOJ+5o82psVXb/6hTyhy5979+4ItEpG5+ll1j7JH/rVxqnFwsmLzvWF
+	eDHXWu7TZFnK4lPlS3FMKEln2tTn2OXpBvfzEiTilMRvHjAmlP2NDeChrpNJB4w+QLAjmGup3AP
+	ZLG0FE/KD475Z/YQLaemhlwEKzPeGuuecdJ2RUvP20LyAmZkC3xZpgphue23ktctpAUwsUK4KQd
+	1uiT17WnYx1hnnCJ67LiHUKbCJJxR3fREoNmUIGQxWI4hfCX2mQgPJaFHDWSnRZmZ6L+DKrCnDe
+	XnF+M4pvDZwn3r0pC179cJx0V+TnD8HsNbfm/RgRci0sFvzvD0HLJFi6erFHmeyiTeVXu4rrjd2
+	4cEcP2TKqtu6er//uNUN6kEPes0oL1gA==
+X-Received: by 2002:a17:903:1b4b:b0:2b2:5c31:24bf with SMTP id d9443c01a7336-2b28175bf51mr127233965ad.19.1775459979639;
+        Mon, 06 Apr 2026 00:19:39 -0700 (PDT)
 Received: from L-12443L.kpit.com ([106.51.46.147])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b2749a4791sm127925575ad.66.2026.04.05.23.46.48
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b27472d1f1sm165822695ad.10.2026.04.06.00.19.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2026 23:46:49 -0700 (PDT)
+        Mon, 06 Apr 2026 00:19:39 -0700 (PDT)
 From: Bhabu Bindu <bindudaniel1996@gmail.com>
 X-Google-Original-From: Bhabu Bindu <bhabu.bindu@kpit.com>
 To: openembedded-devel@lists.openembedded.org,
 	bhabu.bindu@kpit.com
 Subject: [meta-oe][kirkstone][PATCH v2] neon: Backport redirect test debug improvements
-Date: Mon,  6 Apr 2026 12:15:13 +0530
-Message-Id: <20260406064513.449580-1-bhabu.bindu@kpit.com>
+Date: Mon,  6 Apr 2026 12:47:49 +0530
+Message-Id: <20260406071749.524124-1-bhabu.bindu@kpit.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <125878>
-References: <125878>
+In-Reply-To: <20260331083134.378318-1-bhabu.bindu@kpit.com>
+References: <20260331083134.378318-1-bhabu.bindu@kpit.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 06:47:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126031
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 07:19:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126032
 
 The redirect test in neon 0.30.2 intermittently fails with
 "did not get NE_REDIRECT", making it hard to debug.
