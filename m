@@ -1,591 +1,262 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCBFFF46C62
-	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 17:21:14 +0000 (UTC)
-Received: from mail-yx1-f53.google.com (mail-yx1-f53.google.com [74.125.224.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.60360.1775496070467712447
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7B4EF46C71
+	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 18:33:03 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.61914.1775500379027121743
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2026 10:21:10 -0700
+ Mon, 06 Apr 2026 11:32:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IAZRfweq;
- spf=pass (domain: gmail.com, ip: 74.125.224.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f53.google.com with SMTP id 956f58d0204a3-6501c9903edso3975819d50.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 10:21:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775496069; cv=none;
-        d=google.com; s=arc-20240605;
-        b=g4c3i+Y5mWYRoh04spw9eH6Kr6jj7xwUyMlNAebfr36bZcNeTz4CzI75BSRcjF4/LU
-         tn3+HjI5e0CZRvQt9goZGuzaaAoHdVz0IabxDWrhrc5/be08gI88fu73PTtfkWQA2RaT
-         VOukt3rbe38n0ioizRDysRdeMWv2QBXJiY9UbS2nCPpXEvRtH4/pDiNVeo4GzXcDLIgW
-         4CwEws1e2orcDunCz8DMQlE5O6oTFneQz1XLk8s5qgY5c7mz9DmwxFzTuSWbTkmnInKB
-         H6EWCpHVfKuhK1IrchY5uO5liBycawy5VJGZEug8TQqE62qoe/6hTCrWgvCqIcZw+tY3
-         4VJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=DDjtQ/1bXmZIFAOTA6nnkg4fJLuSe9qSFyW5sJD6HuU=;
-        fh=/Zfoi4o9G9NEfOtGJ0LSUrfiVhZcuLLzOVZQmzCL8qM=;
-        b=SGAQ3b5+XN2Xil1jyUuxbgHRfy2dvo3v4Bjzxcig6Y1P4elGqORT6qRvzUYJJ0VR9a
-         OOWQltfCNfKAxwq2ctANZDtzy75Lt47SoqS5W4Mwd6Gh6WvjCW8S0epAZ6jycvvutPk4
-         HfXTfozNkhHRlW0g6iPkcAxse5flkaXgFRDCmqqcJJonxjprm1BpsNqI+NdMkQQt61FH
-         NdoSA4j6kT2ZwMSdVAcRqwB/50wYdyydwr/pWfp/J5aHZFAZK1uipa0MLpN6+cAjXkIW
-         DK0EfM3n3H5YAH5xBgwNYqV8jFXK3v9S/qqvIsP09YA7m0lOIT9Km0J1gSPHz69DKxqH
-         NfcA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QVPY9N16;
+ spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4852b81c73aso34864825e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 11:32:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775496069; x=1776100869; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=DDjtQ/1bXmZIFAOTA6nnkg4fJLuSe9qSFyW5sJD6HuU=;
-        b=IAZRfweqOn9SeBOEsEGmUxVAE99rXx7atnol+cme1yu3Gt7ChaFICsj5OrSDgxIcez
-         kZZyLMs2/ItNrzccQsh9xsQz7EvTwXQ9ec2yCMzTUfonQ8RptBE8UWYwr45b/jh28/Y9
-         PMcO2+PzV+8YNtqM6bWAJ6/fTSUHEEz7FYgTVJOJgorXqb22gxzU4MBZELVFt4bdd5xT
-         uMF3y5EZ5HBAAn8t3dZC2TjHKje0US6IZPxdGfSLu2mYf61a6SnPlLKwB+ywFPIOGjdc
-         AzhNYx7bqdsZv5ks3GriLsuHJNHvlDr/8EnTSsaBsS0CBHkEqoLt7KWT1Jq7+FwvFomz
-         uqKQ==
+        d=gmail.com; s=20251104; t=1775500377; x=1776105177; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mpjXlg+v/Byr7SQ68oaDBVAZFj+vqDU5USg7N5fXsMk=;
+        b=QVPY9N16vMfzXAxXN6va9Yk86RQDbClo+fF6rj1Pnfmu4Yr8Q8Xj1+V02Lz7KHBlS9
+         QViLQeqhcUTxFyjxGKZH9C4qaf8CS43U0q/Ju6FLpqO8kLcHMNuR+c+1+LcFAJaK0i2p
+         6F6jghLsuGAjyQzjSI4xsfvl2WC8DSs1Es5xmUGhlaB1gpU+FwPImriW2JNQcA4R59hj
+         c04cjtFa72FuvTiiD/Xz71Kr4BhIRJoD7b3xFqh+X8jDcAVMIlRw2QBboI483OqiKVCs
+         pF5PD9dc/C1wuaF6Vrvzja0z0c3DMBSLdP9EVJnQnYedoCCN5J7/LJUMHNMwq8C9U7NA
+         dBJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775496069; x=1776100869;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DDjtQ/1bXmZIFAOTA6nnkg4fJLuSe9qSFyW5sJD6HuU=;
-        b=Qnw66YX3ErjDEoFY9E5FakRDebvaorshcz/KjcCqOUUCKu5JGcweS3WTVadOg/212M
-         AHOPEfp0QD2LggMirD+doqqFdu7ncE3u7HYUknPV/NRSFtb4rgVK8HACbC2k5RkBsaxy
-         HA9XFIAf0wA/NIP+jRGIpctcWRYTV5RjleFuDrs04OddYkEp6VAqAK3hnkVlh2vj2GfC
-         m6S/ws0UEa/wqIrZXAGLUiRcv5FCdEqIVjFCHT2jkDjYx6rUAGJON6WUaZLA8ghcc0v1
-         MQXuW+03B/bvDd1pBVRiC47891AUGjx8yx1Gi7ECeB8Uqm5cKi9JCZIyYp4ALaLKEGtf
-         WpNA==
-X-Gm-Message-State: AOJu0Yx6HHuvPD46GXO5dBPQ30vceie80TRimEWwTJyhkNuYBEMKhYZu
-	RCH5WZmL4fozU/6cOYXyZfH1GvgNYygdZ2QueQi52HLTGHL9OkELz87yetQ5f5cW4pcgVLH879e
-	p/4o1fn74eOdyR9Dz+q0Lvh8nfzX4j/Q=
-X-Gm-Gg: AeBDietMaT4cLs4Z2cr1bsZRmGf8ZqWR6pgrKJeAVMJCKygijYpDqjieV/n4+QJuQVD
-	aeMxCE2vp3udfL9Otkc5kEyaNsbeYBxCP6tF7pEmDS5akTuKvH+dK02wUXS1GKHeZXS21oEAFxT
-	mBNzaA5F4PPfh4a6f0bqm5b4poQJbEq19oqhU0sZPtuD6coas36DBqywV+CQBpYF4j0LFbVKMKE
-	CQ99Q1bnjqp8TjyhbB43u/fcfdQqLQ+BautGKApPScyR8FeWNq4e0iFcu6z8p3VRb/UvA3tPCSu
-	2zLKjkUQuTWEQBrT/Owps45gkeSbN9k7yCr49tfyFxs1lBDUfz1eIiU8K/DDTq6lsNMr9EMBshD
-	RVL9im38wECxp7UDhvViZtxa9Xuzu4WfPFPs=
-X-Received: by 2002:a53:ba89:0:b0:64e:c5a5:3a5a with SMTP id
- 956f58d0204a3-65048814f8amr10578563d50.46.1775496069156; Mon, 06 Apr 2026
- 10:21:09 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775500377; x=1776105177;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mpjXlg+v/Byr7SQ68oaDBVAZFj+vqDU5USg7N5fXsMk=;
+        b=GYVdGDptkml+a6f75Q5Dkwdq6gdQq6KU3XJRdMwd54oe8huptalOFOx26Thjcu1+Az
+         dZqWcfeje/L7urUBjSRKipdxpdq933HeaeSSJIL39KMzXJXe1KTo3dxG7UCcClcurr6x
+         mE/hsS2r7av7WVL4PrboYlQy3+bt7SgOBJzsmr5bKvC9OeLZJ6P89gM9DQD+hm3KzwXe
+         Ce8P5JiPV2/VsakuZWQF41UC1YQLe5GdsbvIFjD3Y+kDlKuHOv8NRiqSiB40YA0cMlln
+         thf9Bs4USCZnkL6KlwPRcI5KS3PrOQtUNzEK+f4YHb/bSgT05dbQZ0XWYesoT6thtX0M
+         zNnw==
+X-Gm-Message-State: AOJu0YwIuXl14fYrJBbbzPxAzRzkPqecNPeRxYty+2kbGTyOm9qTbvAC
+	rQeu0ZiHr/Vun8549KX1gp8UtFauHPfi7DzglzWHtYt3s3oX4yhE2xmA1+RyFQ==
+X-Gm-Gg: AeBDietnbuciVK3fog7qbnB6+rEAeSZFNOzXzO7IQL/22mbs9NIu1eVn0WCAe7vRRB/
+	eTQ1xqdtmwMww1EwlptsIM+S4K/MpsaiWVxap0f7BlqO3iCI2btPTrFY8gpHm4jHMek0cs7z85R
+	zy8SVJfOKEJxTypPjNBXIa0nEmQp3ArJPFqECozEN6vZUfXZWBmf+HLXbn0wtzom5IiMRIYwP8S
+	54HeW6zQusP4Kkup4SjVaoq7gSamiCC8aCgesgwBGAlB9svW2vysPgPEtNw1cECV2rFjWkqfUhW
+	JMIxMQIMQt3MvQEqLrAtLAFUmoB3pGJrGVGnyWtZUV3NP1NqAP1Jg0WN/8N+lfjdxEoNLgSWLVb
+	Ke53oLURVQVIjT6Z3cqSzeyZ0u0+Y6nfJg26mfY7jugIL7SeT+MLH0TlrGaGAdUUrVGVOMmXMdZ
+	4f6tOTfVRTJgtc5JpNuPPb
+X-Received: by 2002:a05:600c:a104:b0:47e:e952:86c9 with SMTP id 5b1f17b1804b1-488995d1747mr148058445e9.0.1775500376985;
+        Mon, 06 Apr 2026 11:32:56 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b64f03afsm61164515e9.0.2026.04.06.11.32.56
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Apr 2026 11:32:56 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][whinlatter][PATCH 1/3] botan: patch CVE-2026-32877
+Date: Mon,  6 Apr 2026 20:32:53 +0200
+Message-ID: <20260406183255.3883660-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260406141500.3557451-1-skandigraun@gmail.com>
- <CAMKF1spYETBv05ax4eGpxW5==dY3DmAScE7tVMqLYiYHiqiVeQ@mail.gmail.com> <e9d4e5d2-37b3-4cd5-9c5f-28b9e8a00824@gmail.com>
-In-Reply-To: <e9d4e5d2-37b3-4cd5-9c5f-28b9e8a00824@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Apr 2026 10:20:38 -0700
-X-Gm-Features: AQROBzC0ZoNcSObed0roRfXvPCR_97CzFrMX5HDk2qdTDLb30w3P-gKc4kEtmuo
-Message-ID: <CAMKF1so_ubJCn_yTVF5Hu5z=UevUPG2GTb62_cBzqDNHna047g@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 1/2] mbedtls: drop recipe for v2
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000080937a064ecde40b"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 17:21:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126058
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 18:33:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126059
 
---00000000000080937a064ecde40b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-32877
 
-On Mon, Apr 6, 2026 at 10:06=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.c=
-om>
-wrote:
+Backport the patch that was identified by Debian[1].
+The included test passed successfully (along with the other tests).
 
->
-> On 4/6/26 18:57, Khem Raj wrote:
-> > I think we should drop it since upcoming release it LTS and carrying an
-> > EOL package is not good. I also wonder if we should be adding recipe fo=
-r
-> > 4.x release, is it backward compatible to 3.x ? if not maybe a second
-> > recipe.
-> >
->
->
-> Yes, I started to look at 4.x, I also think it would be nice to get in,
-> because 3.x has only a year of support left. I was thinking leaving 3.x,
-> but making the new one the default. It was giving me some errors that I
-> managed to solve, and then it gave me some new very weird errors... plan
-> to try again soon, unless someone else is faster.
->
+[1]: https://security-tracker.debian.org/tracker/CVE-2026-32877
 
-yeah 4.x could spin up some errors which is ok since they will be solved
-over time
- please post your WIP patches somewhere if you like some more eyes on them
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+ .../botan/botan/CVE-2026-32877.patch          | 158 ++++++++++++++++++
+ meta-oe/recipes-crypto/botan/botan_3.10.0.bb  |   4 +-
+ 2 files changed, 161 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
 
->
->
-> > On Mon, Apr 6, 2026 at 7:15=E2=80=AFAM Gyorgy Sarvari via lists.openemb=
-edded.org
-> > <http://lists.openembedded.org>
-> > <skandigraun=3Dgmail.com@lists.openembedded.org
-> > <mailto:gmail.com@lists.openembedded.org>> wrote:
-> >
-> >     It has been unmaintained/EOL for over a year - there is
-> >     a recipe for a newer, still supported version.
-> >
-> >     Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com
-> >     <mailto:skandigraun@gmail.com>>
-> >     ---
-> >      .../mbedtls/mbedtls_2.28.10.bb <http://mbedtls_2.28.10.bb>
-> >           | 79 -------------------
-> >      1 file changed, 79 deletions(-)
-> >      delete mode 100644 meta-networking/recipes-connectivity/mbedtls/
-> >     mbedtls_2.28.10.bb <http://mbedtls_2.28.10.bb>
-> >
-> >     diff --git a/meta-networking/recipes-connectivity/mbedtls/
-> >     mbedtls_2.28.10.bb <http://mbedtls_2.28.10.bb> b/meta-networking/
-> >     recipes-connectivity/mbedtls/mbedtls_2.28.10.bb <http://
-> >     mbedtls_2.28.10.bb>
-> >     deleted file mode 100644
-> >     index b126aee7db..0000000000
-> >     --- a/meta-networking/recipes-connectivity/mbedtls/
-> >     mbedtls_2.28.10.bb <http://mbedtls_2.28.10.bb>
-> >     +++ /dev/null
-> >     @@ -1,79 +0,0 @@
-> >     -SUMMARY =3D "Lightweight crypto and SSL/TLS library"
-> >     -DESCRIPTION =3D "mbedtls is a lean open source crypto library
->   \
-> >     -for providing SSL and TLS support in your programs. It offers
->   \
-> >     -an intuitive API and documented header files, so you can actually
->   \
-> >     -understand what the code does. It features:
->   \
-> >     -
->  \
-> >     - - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES,
-> ARC4,  \
-> >     -   Camellia and XTEA
->  \
-> >     - - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5
->   \
-> >     - - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG
->  \
-> >     - - Public key algorithms, like RSA, Elliptic Curves,
-> Diffie-Hellman, \
-> >     -   ECDSA and ECDH
->   \
-> >     - - SSL v3 and TLS 1.0, 1.1 and 1.2
->  \
-> >     - - Abstraction layers for ciphers, hashes, public key operations,
->   \
-> >     -   platform abstraction and threading
->   \
-> >     -"
-> >     -
-> >     -HOMEPAGE =3D "https://tls.mbed.org/ <https://tls.mbed.org/>"
-> >     -
-> >     -LICENSE =3D "Apache-2.0 | GPL-2.0-or-later"
-> >     -LIC_FILES_CHKSUM =3D "file://
-> >     LICENSE;md5=3D379d5819937a6c2f1ef1630d341e026d"
-> >     -
-> >     -SECTION =3D "libs"
-> >     -
-> >     -SRCREV =3D "2fc8413bfcb51354c8e679141b17b3f1a5942561"
-> >     -SRC_URI =3D "git://github.com/Mbed-TLS/
-> >     mbedtls.git;protocol=3Dhttps;branch=3Darchive/mbedtls-2.28;tag=3D${=
-BPN}
-> >     <http://github.com/Mbed-TLS/
-> >
->  mbedtls.git;protocol=3Dhttps;branch=3Darchive/mbedtls-2.28;tag=3D$%7BBPN=
-%7D> \
-> >     -           file://run-ptest \
-> >     -          "
-> >     -
-> >     -inherit cmake update-alternatives ptest
-> >     -
-> >     -PACKAGECONFIG ??=3D "shared-libs programs
-> >     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
-> >     -PACKAGECONFIG[shared-libs] =3D "-DUSE_SHARED_MBEDTLS_LIBRARY=3DON,=
--
-> >     DUSE_SHARED_MBEDTLS_LIBRARY=3DOFF"
-> >     -PACKAGECONFIG[programs] =3D
-> "-DENABLE_PROGRAMS=3DON,-DENABLE_PROGRAMS=3DOFF"
-> >     -PACKAGECONFIG[werror] =3D "-DMBEDTLS_FATAL_WARNINGS=3DON,-
-> >     DMBEDTLS_FATAL_WARNINGS=3DOFF"
-> >     -# Make X.509 and TLS calls use PSA
-> >     -# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-
-> >     psa-crypto.md
-> >     -PACKAGECONFIG[psa] <https://github.com/Mbed-TLS/mbedtls/blob/
-> >     development/docs/use-psa-crypto.md-PACKAGECONFIG%5Bpsa%5D> =3D ""
-> >     -PACKAGECONFIG[tests] =3D "-DENABLE_TESTING=3DON,-DENABLE_TESTING=
-=3DOFF"
-> >     -
-> >     -EXTRA_OECMAKE =3D "-DLIB_INSTALL_DIR:STRING=3D${libdir}"
-> >     -
-> >     -# For now the only way to enable PSA is to explicitly pass a -D vi=
-a
-> >     CFLAGS
-> >     -CFLAGS:append =3D "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' =
--
-> >     DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
-> >     -
-> >     -PROVIDES +=3D "polarssl"
-> >     -RPROVIDES:${PN} =3D "polarssl"
-> >     -
-> >     -PACKAGES =3D+ "${PN}-programs"
-> >     -FILES:${PN}-programs =3D "${bindir}/"
-> >     -
-> >     -ALTERNATIVE:${PN}-programs =3D "${@bb.utils.contains('PACKAGECONFI=
-G',
-> >     'programs', 'hello', '', d)}"
-> >     -ALTERNATIVE_LINK_NAME[hello] =3D "${bindir}/hello"
-> >     -
-> >     -BBCLASSEXTEND =3D "native nativesdk"
-> >     -
-> >     -CVE_PRODUCT =3D "mbed_tls"
-> >     -
-> >     -CVE_STATUS[CVE-2021-43666] =3D "backported-patch: Fix merged upstr=
-eam
-> >     https://github.com/Mbed-TLS/mbedtls/pull/5310 <https://github.com/
-> >     Mbed-TLS/mbedtls/pull/5310>"
-> >     -CVE_STATUS[CVE-2021-45451] =3D "backported-patch: Fix merged upstr=
-eam
-> >     https://github.com/Mbed-TLS/mbedtls/
-> >     commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c <https://github.com=
-/
-> >     Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c>"
-> >     -
-> >     -# Strip host paths from autogenerated test files
-> >     -do_compile:append() {
-> >     -       sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
-> >     -       sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
-> >     -}
-> >     -
-> >     -# Export source files/headers needed by Arm Trusted Firmware
-> >     -sysroot_stage_all:append() {
-> >     -       sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/
-> >     share/mbedtls-source/library"
-> >     -       sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/
-> >     share/mbedtls-source/include"
-> >     -}
-> >     -
-> >     -do_install_ptest () {
-> >     -       install -d ${D}${PTEST_PATH}/tests
-> >     -       cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
-> >     -       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-> >     -       cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
-> >     -}
-> >
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >     Links: You receive all messages sent to this group.
-> >     View/Reply Online (#126045): https://lists.openembedded.org/g/
-> >     openembedded-devel/message/126045 <https://lists.openembedded.org/g=
-/
-> >     openembedded-devel/message/126045>
-> >     Mute This Topic: https://lists.openembedded.org/mt/118690748/199791=
-4
-> >     <https://lists.openembedded.org/mt/118690748/1997914>
-> >     Group Owner: openembedded-devel+owner@lists.openembedded.org
-> >     <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
-> >     Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/
-> >     unsub <https://lists.openembedded.org/g/openembedded-devel/unsub>
-> >     [raj.khem@gmail.com <mailto:raj.khem@gmail.com>]
-> >     -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
->
-
---00000000000080937a064ecde40b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Apr 6, =
-2026 at 10:06=E2=80=AFAM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@g=
-mail.com">skandigraun@gmail.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex"><br>
-On 4/6/26 18:57, Khem Raj wrote:<br>
-&gt; I think we should drop it since upcoming release it LTS and carrying a=
-n<br>
-&gt; EOL package is not good. I also wonder if we should be adding recipe f=
-or<br>
-&gt; 4.x release, is it backward compatible to 3.x ? if not maybe a second<=
-br>
-&gt; recipe.<br>
-&gt; <br>
-<br>
-<br>
-Yes, I started to look at 4.x, I also think it would be nice to get in,<br>
-because 3.x has only a year of support left. I was thinking leaving 3.x,<br=
->
-but making the new one the default. It was giving me some errors that I<br>
-managed to solve, and then it gave me some new very weird errors... plan<br=
->
-to try again soon, unless someone else is faster.<br></blockquote><div><br>=
-</div><div>yeah 4.x could spin up some errors which is ok since they will b=
-e solved over time</div><div>=C2=A0please post your WIP patches somewhere i=
-f you=C2=A0like some more eyes on them=C2=A0</div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">
-<br>
-<br>
-&gt; On Mon, Apr 6, 2026 at 7:15=E2=80=AFAM Gyorgy Sarvari via <a href=3D"h=
-ttp://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.op=
-enembedded.org</a><br>
-&gt; &lt;<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" targe=
-t=3D"_blank">http://lists.openembedded.org</a>&gt;<br>
-&gt; &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" =
-target=3D"_blank">gmail.com@lists.openembedded.org</a><br>
-&gt; &lt;mailto:<a href=3D"mailto:gmail.com@lists.openembedded.org" target=
-=3D"_blank">gmail.com@lists.openembedded.org</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0It has been unmaintained/EOL for over a year - ther=
-e is<br>
-&gt;=C2=A0 =C2=A0 =C2=A0a recipe for a newer, still supported version.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Signed-off-by: Gyorgy Sarvari &lt;<a href=3D"mailto=
-:skandigraun@gmail.com" target=3D"_blank">skandigraun@gmail.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:skandigraun@gmail.com"=
- target=3D"_blank">skandigraun@gmail.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0.../mbedtls/<a href=3D"http://mbedtls_2.28.10=
-.bb" rel=3D"noreferrer" target=3D"_blank">mbedtls_2.28.10.bb</a> &lt;<a hre=
-f=3D"http://mbedtls_2.28.10.bb" rel=3D"noreferrer" target=3D"_blank">http:/=
-/mbedtls_2.28.10.bb</a>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 | 79 -------------------<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A01 file changed, 79 deletions(-)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0delete mode 100644 meta-networking/recipes-co=
-nnectivity/mbedtls/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://mbedtls_2.28.10.bb" rel=3D"norefe=
-rrer" target=3D"_blank">mbedtls_2.28.10.bb</a> &lt;<a href=3D"http://mbedtl=
-s_2.28.10.bb" rel=3D"noreferrer" target=3D"_blank">http://mbedtls_2.28.10.b=
-b</a>&gt;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-networking/recipes-connectivity/m=
-bedtls/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://mbedtls_2.28.10.bb" rel=3D"norefe=
-rrer" target=3D"_blank">mbedtls_2.28.10.bb</a> &lt;<a href=3D"http://mbedtl=
-s_2.28.10.bb" rel=3D"noreferrer" target=3D"_blank">http://mbedtls_2.28.10.b=
-b</a>&gt; b/meta-networking/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0recipes-connectivity/mbedtls/<a href=3D"http://mbed=
-tls_2.28.10.bb" rel=3D"noreferrer" target=3D"_blank">mbedtls_2.28.10.bb</a>=
- &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://mbedtls_2.28.10.bb" rel=3D"norefe=
-rrer" target=3D"_blank">mbedtls_2.28.10.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0deleted file mode 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index b126aee7db..0000000000<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/meta-networking/recipes-connectivity/mbedtls/=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://mbedtls_2.28.10.bb" rel=3D"norefe=
-rrer" target=3D"_blank">mbedtls_2.28.10.bb</a> &lt;<a href=3D"http://mbedtl=
-s_2.28.10.bb" rel=3D"noreferrer" target=3D"_blank">http://mbedtls_2.28.10.b=
-b</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ /dev/null<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -1,79 +0,0 @@<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SUMMARY =3D &quot;Lightweight crypto and SSL/TLS l=
-ibrary&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-DESCRIPTION =3D &quot;mbedtls is a lean open sourc=
-e crypto library=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-for providing SSL and TLS support in your programs=
-. It offers=C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-an intuitive API and documented header files, so y=
-ou can actually=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-understand what the code does. It features:=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - Symmetric algorithms, like AES, Blowfish, Tripl=
-e-DES, DES, ARC4,=C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0Camellia and XTEA=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 =
-and MD5=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - Entropy pool and random generators, like CTR-DR=
-BG and HMAC-DRBG=C2=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - Public key algorithms, like RSA, Elliptic Curve=
-s, Diffie-Hellman, \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0ECDSA and ECDH=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - SSL v3 and TLS 1.0, 1.1 and 1.2=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0- - Abstraction layers for ciphers, hashes, public =
-key operations,=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0platform abstraction and threading=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-HOMEPAGE =3D &quot;<a href=3D"https://tls.mbed.org=
-/" rel=3D"noreferrer" target=3D"_blank">https://tls.mbed.org/</a> &lt;<a hr=
-ef=3D"https://tls.mbed.org/" rel=3D"noreferrer" target=3D"_blank">https://t=
-ls.mbed.org/</a>&gt;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-LICENSE =3D &quot;Apache-2.0 | GPL-2.0-or-later&qu=
-ot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-LIC_FILES_CHKSUM =3D &quot;file://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0LICENSE;md5=3D379d5819937a6c2f1ef1630d341e026d&quot=
-;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SECTION =3D &quot;libs&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SRCREV =3D &quot;2fc8413bfcb51354c8e679141b17b3f1a=
-5942561&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SRC_URI =3D &quot;git://<a href=3D"http://github.c=
-om/Mbed-TLS/" rel=3D"noreferrer" target=3D"_blank">github.com/Mbed-TLS/</a>=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0mbedtls.git;protocol=3Dhttps;branch=3Darchive/mbedt=
-ls-2.28;tag=3D${BPN}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://github.com/Mbed-TLS/" rel=3D"=
-noreferrer" target=3D"_blank">http://github.com/Mbed-TLS/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0mbedtls.git;protocol=3Dhttps;branch=3Darchive/mbedt=
-ls-2.28;tag=3D$%7BBPN%7D&gt; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://ru=
-n-ptest \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-inherit cmake update-alternatives ptest<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG ??=3D &quot;shared-libs programs<br>
-&gt;=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&#39;PTEST_ENABLED&#39;, &#39;=
-1&#39;, &#39;tests&#39;, &#39;&#39;, d)}&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG[shared-libs] =3D &quot;-DUSE_SHARED_=
-MBEDTLS_LIBRARY=3DON,-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DUSE_SHARED_MBEDTLS_LIBRARY=3DOFF&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG[programs] =3D &quot;-DENABLE_PROGRAM=
-S=3DON,-DENABLE_PROGRAMS=3DOFF&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG[werror] =3D &quot;-DMBEDTLS_FATAL_WA=
-RNINGS=3DON,-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DMBEDTLS_FATAL_WARNINGS=3DOFF&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-# Make X.509 and TLS calls use PSA<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-# <a href=3D"https://github.com/Mbed-TLS/mbedtls/b=
-lob/development/docs/use-" rel=3D"noreferrer" target=3D"_blank">https://git=
-hub.com/Mbed-TLS/mbedtls/blob/development/docs/use-</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0psa-crypto.md<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG[psa] &lt;<a href=3D"https://github.c=
-om/Mbed-TLS/mbedtls/blob/" rel=3D"noreferrer" target=3D"_blank">https://git=
-hub.com/Mbed-TLS/mbedtls/blob/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0development/docs/use-psa-crypto.md-PACKAGECONFIG%5B=
-psa%5D&gt; =3D &quot;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGECONFIG[tests] =3D &quot;-DENABLE_TESTING=3D=
-ON,-DENABLE_TESTING=3DOFF&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-EXTRA_OECMAKE =3D &quot;-DLIB_INSTALL_DIR:STRING=
-=3D${libdir}&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-# For now the only way to enable PSA is to explici=
-tly pass a -D via<br>
-&gt;=C2=A0 =C2=A0 =C2=A0CFLAGS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-CFLAGS:append =3D &quot;${@bb.utils.contains(&#39;=
-PACKAGECONFIG&#39;, &#39;psa&#39;, &#39; -<br>
-&gt;=C2=A0 =C2=A0 =C2=A0DMBEDTLS_USE_PSA_CRYPTO&#39;, &#39;&#39;, d)}&quot;=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PROVIDES +=3D &quot;polarssl&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-RPROVIDES:${PN} =3D &quot;polarssl&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-PACKAGES =3D+ &quot;${PN}-programs&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-FILES:${PN}-programs =3D &quot;${bindir}/&quot;<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-ALTERNATIVE:${PN}-programs =3D &quot;${@bb.utils.c=
-ontains(&#39;PACKAGECONFIG&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;programs&#39;, &#39;hello&#39;, &#39;&#39;, d)=
-}&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-ALTERNATIVE_LINK_NAME[hello] =3D &quot;${bindir}/h=
-ello&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-CVE_PRODUCT =3D &quot;mbed_tls&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-CVE_STATUS[CVE-2021-43666] =3D &quot;backported-pa=
-tch: Fix merged upstream<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://github.com/Mbed-TLS/mbedtls/pull=
-/5310" rel=3D"noreferrer" target=3D"_blank">https://github.com/Mbed-TLS/mbe=
-dtls/pull/5310</a> &lt;<a href=3D"https://github.com/" rel=3D"noreferrer" t=
-arget=3D"_blank">https://github.com/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Mbed-TLS/mbedtls/pull/5310&gt;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-CVE_STATUS[CVE-2021-45451] =3D &quot;backported-pa=
-tch: Fix merged upstream<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"https://github.com/Mbed-TLS/mbedtls/" re=
-l=3D"noreferrer" target=3D"_blank">https://github.com/Mbed-TLS/mbedtls/</a>=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c &lt=
-;<a href=3D"https://github.com/" rel=3D"noreferrer" target=3D"_blank">https=
-://github.com/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a5=
-3310adf73a86c&gt;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-# Strip host paths from autogenerated test files<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0-do_compile:append() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i &#39;s+${S}/++g&=
-#39; ${B}/tests/*.c 2&gt;/dev/null || :<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i &#39;s+${B}/++g&=
-#39; ${B}/tests/*.c 2&gt;/dev/null || :<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-# Export source files/headers needed by Arm Truste=
-d Firmware<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-sysroot_stage_all:append() {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0sysroot_stage_dir &quot=
-;${S}/library&quot; &quot;${SYSROOT_DESTDIR}/usr/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0share/mbedtls-source/library&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0sysroot_stage_dir &quot=
-;${S}/include&quot; &quot;${SYSROOT_DESTDIR}/usr/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0share/mbedtls-source/include&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-do_install_ptest () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${PTEST_=
-PATH}/tests<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0cp -f ${B}/tests/test_s=
-uite_* ${D}${PTEST_PATH}/tests/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0find ${D}${PTEST_PATH}/=
-tests/ -type f -name &quot;*.c&quot; -delete<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 =C2=A0 =C2=A0cp -fR ${S}/tests/data_=
-files ${D}${PTEST_PATH}/tests/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-}<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Links: You receive all messages sent to this group.=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0View/Reply Online (#126045): <a href=3D"https://lis=
-ts.openembedded.org/g/" rel=3D"noreferrer" target=3D"_blank">https://lists.=
-openembedded.org/g/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0openembedded-devel/message/126045 &lt;<a href=3D"ht=
-tps://lists.openembedded.org/g/" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0openembedded-devel/message/126045&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Mute This Topic: <a href=3D"https://lists.openembed=
-ded.org/mt/118690748/1997914" rel=3D"noreferrer" target=3D"_blank">https://=
-lists.openembedded.org/mt/118690748/1997914</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"https://lists.openembedded.org/mt/11=
-8690748/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openemb=
-edded.org/mt/118690748/1997914</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Group Owner: <a href=3D"mailto:openembedded-devel%2=
-Bowner@lists.openembedded.org" target=3D"_blank">openembedded-devel+owner@l=
-ists.openembedded.org</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:openembedded-devel%252=
-Bowner@lists.openembedded.org" target=3D"_blank">openembedded-devel%2Bowner=
-@lists.openembedded.org</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0Unsubscribe: <a href=3D"https://lists.openembedded.=
-org/g/openembedded-devel/" rel=3D"noreferrer" target=3D"_blank">https://lis=
-ts.openembedded.org/g/openembedded-devel/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0unsub &lt;<a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://l=
-ists.openembedded.org/g/openembedded-devel/unsub</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0[<a href=3D"mailto:raj.khem@gmail.com" target=3D"_b=
-lank">raj.khem@gmail.com</a> &lt;mailto:<a href=3D"mailto:raj.khem@gmail.co=
-m" target=3D"_blank">raj.khem@gmail.com</a>&gt;]<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-<br>
-</blockquote></div></div>
-
---00000000000080937a064ecde40b--
+diff --git a/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
+new file mode 100644
+index 0000000000..871f5c9a1b
+--- /dev/null
++++ b/meta-oe/recipes-crypto/botan/botan/CVE-2026-32877.patch
+@@ -0,0 +1,158 @@
++From a0048a6b97a349a3cb4a5f955d350ab2921719cc Mon Sep 17 00:00:00 2001
++From: Jack Lloyd <jack@randombit.net>
++Date: Sun, 15 Mar 2026 11:39:50 -0400
++Subject: [PATCH] In SM2 verify the C3 field is of the required length
++
++Previously the decryption step assumed that C3 was equal in length to the MAC
++output. If C3 is shorter than expected, up to 31 bytes of arbitrary heap data
++would be compared with the computed MAC. This heap over-read would potentially
++result in denial of service.
++
++CVE: CVE-2026-32877
++Upstream-Status: Backport [https://github.com/randombit/botan/commit/f3c31f96f58f1d1d482032d8f4286dc9ebbc6712]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ src/lib/pubkey/sm2/sm2_enc.cpp        |  7 +++-
++ src/tests/data/pubkey/sm2_invalid.vec | 60 +++++++++++++++++++++++++++
++ src/tests/test_sm2.cpp                | 31 ++++++++++++++
++ 3 files changed, 97 insertions(+), 1 deletion(-)
++ create mode 100644 src/tests/data/pubkey/sm2_invalid.vec
++
++diff --git a/src/lib/pubkey/sm2/sm2_enc.cpp b/src/lib/pubkey/sm2/sm2_enc.cpp
++index 7a1b990..1141089 100644
++--- a/src/lib/pubkey/sm2/sm2_enc.cpp
+++++ b/src/lib/pubkey/sm2/sm2_enc.cpp
++@@ -133,6 +133,11 @@ class SM2_Decryption_Operation final : public PK_Ops::Decryption {
++             .end_cons()
++             .verify_end();
++ 
+++         // Wrong length so certainly invalid, reject immediately
+++         if(C3.size() != m_hash->output_length()) {
+++            return secure_vector<uint8_t>();
+++         }
+++
++          std::vector<uint8_t> recode_ctext;
++          DER_Encoder(recode_ctext)
++             .start_sequence()
++@@ -170,7 +175,7 @@ class SM2_Decryption_Operation final : public PK_Ops::Decryption {
++          m_hash->update(y2_bytes);
++          const auto u = m_hash->final();
++ 
++-         if(!CT::is_equal(u.data(), C3.data(), m_hash->output_length()).as_bool()) {
+++         if(!CT::is_equal<uint8_t>(u, C3).as_bool()) {
++             return secure_vector<uint8_t>();
++          }
++ 
++diff --git a/src/tests/data/pubkey/sm2_invalid.vec b/src/tests/data/pubkey/sm2_invalid.vec
++new file mode 100644
++index 0000000..2517510
++--- /dev/null
+++++ b/src/tests/data/pubkey/sm2_invalid.vec
++@@ -0,0 +1,60 @@
+++
+++Key = 8C84F7F069CD09D59543ED980CFEB77E68C7D39B9B73D359EA67C0CDB2A86B6F
+++
+++
+++# Empty
+++Ctext =
+++
+++# Just the SEQUENCE marker
+++Ctext = 30
+++
+++# Truncated
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E51
+++
+++# C3 MAC too short
+++Ctext = 3071022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF041F2E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F36826493860409CA311F43DB0E5E516F
+++
+++# C3 MAC too long
+++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04212E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F368264938696000409CA311F43DB0E5E516F
+++
+++# C3 and C2 fields swapped
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0409CA311F43DB0E5E516F04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F368264938696
+++
+++# C3 MAC last bit flipped
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386970409CA311F43DB0E5E516F
+++
+++# C3 MAC first byte inverted
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0420D11B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C1 y off by one
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27D004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C1 x/y serialization boundary shift
+++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E500200022100C055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E2704202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C1 is generator point
+++Ctext = 3072022032C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7022100BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C1 is origin (0,0)
+++Ctext = 303302010002010004202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C1 x equals field prime
+++Ctext = 3072022100FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# C2 last bit flipped
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516E
+++
+++# C2 replaced with empty
+++Ctext = 3069022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960400
+++
+++# Trailing byte after SEQUENCE
+++Ctext = 3072022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F00
+++
+++# SEQUENCE with non-minimal long-form length
+++Ctext = 308172022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# INTEGER x1 with non-minimal leading zero
+++Ctext = 307302220000A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF04202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
+++
+++# OCTET STRING C3 with non-minimal long-form length
+++Ctext = 3073022100A772DF5FFFDA85C05D9B82233B1E5F7DF7A87788504ABD4F74D265D49E5002C0022055C8A934A29DE58B31A063CDA81F12ABC712FB9ADC8988DA0FBD9FFF304E27CF0481202E1B8A86EF14243EE2E9D74E0D0E7498DFAC2F0EFA8C5883D74F3682649386960409CA311F43DB0E5E516F
++diff --git a/src/tests/test_sm2.cpp b/src/tests/test_sm2.cpp
++index 2ffb14a..c5d2360 100644
++--- a/src/tests/test_sm2.cpp
+++++ b/src/tests/test_sm2.cpp
++@@ -9,6 +9,7 @@
++ 
++ #if defined(BOTAN_HAS_SM2)
++    #include "test_pubkey.h"
+++   #include <botan/pubkey.h>
++    #include <botan/sm2.h>
++ #endif
++ 
++@@ -108,4 +109,34 @@ BOTAN_REGISTER_TEST("pubkey", "sm2_keygen", SM2_Keygen_Tests);
++ 
++ #endif
++ 
+++namespace {
+++
+++class SM2_Invalid_Ciphertexts : public Text_Based_Test {
+++   public:
+++      SM2_Invalid_Ciphertexts() : Text_Based_Test("pubkey/sm2_invalid.vec", "Key,Ctext") {}
+++
+++      bool clear_between_callbacks() const override { return false; }
+++
+++      Test::Result run_one_test(const std::string& /*header*/, const VarMap& vars) override {
+++         Test::Result result("SM2 invalid ciphertext");
+++
+++         const auto key = vars.get_req_bin("Key");
+++         const auto ctext = vars.get_req_bin("Ctext");
+++
+++         const auto group = Botan::EC_Group::from_name("sm2p256v1");
+++         const auto pkey = Botan::SM2_PrivateKey(group, Botan::EC_Scalar::deserialize(group, key).value());
+++
+++         Botan::PK_Decryptor_EME dec(pkey, rng(), "SM3");
+++
+++         result.test_throws<Botan::Exception>("Decryption should fail for invalid ciphertext",
+++                                              [&] { dec.decrypt(ctext); });
+++
+++         return result;
+++      }
+++};
+++
+++BOTAN_REGISTER_TEST("pubkey", "sm2_invalid_ctext", SM2_Invalid_Ciphertexts);
+++
+++}  // namespace
+++
++ }  // namespace Botan_Tests
+diff --git a/meta-oe/recipes-crypto/botan/botan_3.10.0.bb b/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
+index e079dd73de..392c1aac94 100644
+--- a/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
++++ b/meta-oe/recipes-crypto/botan/botan_3.10.0.bb
+@@ -4,7 +4,9 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://license.txt;md5=3f911cecfc74a2d9f1ead9a07bd92a6e"
+ SECTION = "libs"
+ 
+-SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
++SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz \
++           file://CVE-2026-32877.patch \
++           "
+ SRC_URI[sha256sum] = "fde194236f6d5434f136ea0a0627f6cc9d26af8b96e9f1e1c7d8c82cd90f4f24"
+ 
+ S = "${UNPACKDIR}/Botan-${PV}"
 
