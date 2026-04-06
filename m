@@ -2,112 +2,96 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9699F46C47
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8460F46C4D
 	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 15:13:08 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.57249.1775488388136474119
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.57247.1775488386866218965
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2026 08:13:08 -0700
+ Mon, 06 Apr 2026 08:13:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QsjxS1kn;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4838c15e3cbso30429355e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 08:13:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ODm8tJaR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4888244e9f9so38094705e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 08:13:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775488386; x=1776093186; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Bk1Vjq0ddhK0/Qq4HN/OIMvPPPSseBA2kvSoxqx/9WQ=;
-        b=QsjxS1kn8hyN3IT2UOithfgXasU6LqrCAV8TdeTaYYlcPEVJbhKjK7nueG2TIEdZvf
-         Mp5NAsZF8ooo6ybs18y/TsroXiZTMyHaQ+S2KS9YR7XAGDWiqHSOpko93QxQVn7epi3i
-         RRK2pCBVoHepe54PtDDZPiTVifS1iYDwDkfdhq/3JlXEk11kFrMkfZj9vuLEsCORus8v
-         Sn61hPZ+PjndaJhYCUY9ICYf9pYEhMUjHWd6VUkF6Z6UekSyyA24tm+bAN+7qLCnMEPI
-         XsT9QUm69UaUd9iV8d7uds0ll82Iv2uwwpmP+8olGApS8sgWT23yfCIWtaejHyi6BNRf
-         0Eaw==
+        d=gmail.com; s=20251104; t=1775488385; x=1776093185; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=+8cyGx4i5i4fr5cPIE/0jxs5fNFQb74p767tKXeOmho=;
+        b=ODm8tJaRaFMuAVByTSRtxEKdd025ZmrPSqCpvGLr5h2vtEjzNqSJeIuh1RmIuGYgVj
+         9iSocLBKN4GAJtZ2HVGk7Vk+M9IyCGdAvIn9DPJO74h38n5Vk8va6+kqXnX55+0jl3Vt
+         pT9oIt9d8Lc2efLSqD9hg3+GWVeaS2I5I8rvCxCBgxEzEfzgkDi84u4tjkDtIZLW68EB
+         VqsdP+mXCVp4QgoFEdrybrug2gjUG87Q/iexuyrHYeU04ZEIeFhRRb9TxR4imvL0J/HM
+         lXhQO3zh+gr7jSbxgFVWWjOIZVRtsWX/FW8q8A6KMjfAWHBTP5xY8IYeZmDSFK1mveBR
+         4xDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775488386; x=1776093186;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Bk1Vjq0ddhK0/Qq4HN/OIMvPPPSseBA2kvSoxqx/9WQ=;
-        b=dzGWYySEs1W9wbliXHWhKMjORSgl+RDpQ0RmV1oBh/16Brhc3vKGxSSjboyOq4gxbO
-         BEbtlUDfW4LecnQaEe2069bSD0F2ONzP1qQds4tNUm32ip334YRgvqrGUFdkJKy6lwhQ
-         o71I6eAG0SCB+NO8sS7l26radrtupS36eUWns60FZ97imhnzEWqlHddEhekDqZnWbKZO
-         9eDkZYn8F3YPzLH0O6D+1TJyHT5StNDMGjYJJbl3orPVWiZHOHSW6sKfWzIcAblOhytN
-         L3VK2I2YjrKgfZJXHIKIG00PCTkPgzcMuS9hG6manx5wChTS3syHBX7bV+XfeYyXus4q
-         acIQ==
-X-Gm-Message-State: AOJu0YxonPC04hQhtMmjuApw3XmzsV4Z+trFQZhHjFnBmshKd6ZZCIeD
-	3cHSGNZvDvN+xfv8mAcsDBlwdTJsxh5viinJqZpm3hG/WS28dlia3yM+iznMDQ==
-X-Gm-Gg: AeBDievQUBSYQrwipbiNsjKOh0xZ2barz6aBtQ+nfcEtH7euBkFhPVbLxKc1+PSMtS1
-	Hhm92DZtMsK2qG0rC1WY70IxQYGiYupwL6XjNnXXiUDJDA0MeVjA7+QTf5yRfbaz9KDJPy+pb5B
-	VfWfPkrFu5qEKryrSqPR6ytLUAOWPn4hEBoJ2LjMLKgQQ+G2DbK9ogUltfQ50BoUpqR9JiB2O1Y
-	+/+Vj3X7Nn27uSStUQA9esLh8EjXYeBRL7BHnYVyBx9zJZsxRfP42nMucwfDi8fXWSO0PZI0djQ
-	yWxrJBn5i4w0OTbWBvz0ZA/EX3jQogUrmiu38vJArx7dgNHG+lS0qvrZKN7T6lu/05XIOwEEGf5
-	TUJsWvnm/f3BEgYbpEFXRnPjnesIAeqmvwrIcvxxDLBhbBfDRffQy8kEVuZCk4fJjW0ju4j/TGt
-	7Aq6CSdEUBFI32CmU6aHDO
-X-Received: by 2002:a05:600c:1d1d:b0:485:3ec6:e634 with SMTP id 5b1f17b1804b1-4889977600bmr178647085e9.15.1775488386378;
-        Mon, 06 Apr 2026 08:13:06 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775488385; x=1776093185;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=+8cyGx4i5i4fr5cPIE/0jxs5fNFQb74p767tKXeOmho=;
+        b=cSlj5oz2xbvafHCdGjFD27jxKKTTP/++CabUTjWXvJtyaGYugoPLnYQ2d22m6uNU17
+         rujoOCE3rPq94tfYaMM/Erv0nbbji58fMykx09pRyd548U/4YrBgTfCrg03RNLuPs0bW
+         wc42FsUg2ClndNSabXgX0w8+HAFvY04CDnT1Myq/UEh/SzHPCyLy89Y+tYLesXHGjelO
+         WFV+6x5223UE9SXkERvRn+6JzYURNNc5MMef/H1Ld94afLin2DleQOMtHtmit9BLambS
+         +qTazVr89FpF9GteZ38EMRxgxf59KVi/xX23Vo4KO7DkzJK7ud4FqAAtu+U1HPdrjQGb
+         5acg==
+X-Gm-Message-State: AOJu0Yxp8oQtvBXTlggeFIl3i6QeZV64/4ILvd+ghslqJprLVoSex8bf
+	kAUZxIn/SlE9f5Q1j7gMfUsIWsPygT7pOXZCfqGbdThEAhD8xtsSexVhrUD//g==
+X-Gm-Gg: AeBDievra5vSnnnIRiK43ZD2EJtOIZ2YRBmC7E6I1R9F64ZQFLGLOiAj8huxezmyMt7
+	ZJXqhCQ2EqZcsduJ+8+VbOTiLZ+8tbTpm8d66VQjljb8WC6+C9xVC52y7Khjrtz6SWFHsV7chCC
+	U/5yzOwRBV4YgRNdwEFBR3LJjTS8bne/rD/Q+RoN9tl4SPD6pliev562OUkF35BQtEhZOuEqUNp
+	xRXtFPAotQR0wxTGdbqdvWvQUvoKkVe+WeX5LpF3GDeXdocF0tShJI1ikv6rGWkfQmgTykZSyVz
+	FY7BLYnyi7/2p5jfLFNjeGR//RlMV69EagpciH2xfB7K4Yg3SOM8tSmHEL/DTztcr0aznUGU+xA
+	54gNM13a64VfP/56xgq0s0hHMjrUwd4UZAmK0NRbKACAxNu1oNBwIuiBonK9ccPxFwxHQ9tElRZ
+	Ofg16n45GTyp2Ho92Qv0ER
+X-Received: by 2002:a05:600c:4886:b0:488:a797:f0ac with SMTP id 5b1f17b1804b1-488a797f2d4mr60009215e9.28.1775488384954;
+        Mon, 06 Apr 2026 08:13:04 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b6ff70bcsm92848765e9.14.2026.04.06.08.13.05
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b6ff70bcsm92848765e9.14.2026.04.06.08.13.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Apr 2026 08:13:05 -0700 (PDT)
+        Mon, 06 Apr 2026 08:13:04 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 3/4] python3-aiohttp: mark fixed CVEs are patched
-Date: Mon,  6 Apr 2026 17:13:02 +0200
-Message-ID: <20260406151303.3640343-3-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 1/4] nodejs: ignore fixed CVEs
+Date: Mon,  6 Apr 2026 17:13:00 +0200
+Message-ID: <20260406151303.3640343-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260406151303.3640343-1-skandigraun@gmail.com>
-References: <20260406151303.3640343-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 15:13:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126049
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126047
 
-All these CVEs have been fixed already, the relevant NVD
-reports mention it explicitly that 3.13.4 is fixed, along
-with referencing the commit that fixes the respective
-vulnerabilities. However each of these are tracked without
-version info by NVD -.-
+All these CVEs are fixed in v22.22.2[1], except for CVE-2026-21712,
+which does not affect v22 series, because it was introduced in a
+later version[2]. All these CVEs are tracked without version info
+by NVD at the time of creating this patch.
 
-Due to this, mark them explicitly as patched.
-
-Relevant reports:
-https://nvd.nist.gov/vuln/detail/CVE-2026-22815
-https://nvd.nist.gov/vuln/detail/CVE-2026-34513
-https://nvd.nist.gov/vuln/detail/CVE-2026-34514
-https://nvd.nist.gov/vuln/detail/CVE-2026-34515
-https://nvd.nist.gov/vuln/detail/CVE-2026-34516
-https://nvd.nist.gov/vuln/detail/CVE-2026-34517
-https://nvd.nist.gov/vuln/detail/CVE-2026-34518
-https://nvd.nist.gov/vuln/detail/CVE-2026-34519
-https://nvd.nist.gov/vuln/detail/CVE-2026-34520
-https://nvd.nist.gov/vuln/detail/CVE-2026-34525
+[1]: https://github.com/nodejs/node/blob/v22.x/doc/changelogs/CHANGELOG_V22.md
+[2]: https://nodejs.org/en/blog/vulnerability/march-2026-security-releases
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../recipes-devtools/python/python3-aiohttp_3.13.5.bb        | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-index 7e6f80102b..f3a0fbf557 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
-@@ -7,6 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
- SRC_URI[sha256sum] = "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb
+index 8bd5f008af..e6dbc866a1 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb
+@@ -214,3 +214,10 @@ python __anonymous () {
+ }
  
- CVE_PRODUCT = "aiohttp"
-+CVE_STATUS_GROUPS = "CVE_AIOHTTP_FIX_3_13_4"
-+CVE_AIOHTTP_FIX_3_13_4[status] = "fixed-version: fixed in 3.13.4"
-+CVE_AIOHTTP_FIX_3_13_4 = "CVE-2026-22815 CVE-2026-34513 CVE-2026-34514 \
-+CVE-2026-34515 CVE-2026-34516 CVE-2026-34517 CVE-2026-34518 CVE-2026-34519 \
-+CVE-2026-34520 CVE-2026-34525"
- 
- inherit python_setuptools_build_meta pypi 
- 
+ BBCLASSEXTEND = "native"
++
++CVE_STATUS[CVE-2026-21712] = "cpe-incorrect: only v24 and v25 are affected"
++CVE_STATUS[CVE-2026-21713] = "fixed-version: fixed since v22.22.2"
++CVE_STATUS[CVE-2026-21714] = "fixed-version: fixed since v22.22.2"
++CVE_STATUS[CVE-2026-21715] = "fixed-version: fixed since v22.22.2"
++CVE_STATUS[CVE-2026-21716] = "fixed-version: fixed since v22.22.2"
++CVE_STATUS[CVE-2026-21717] = "fixed-version: fixed since v22.22.2"
 
