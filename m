@@ -2,162 +2,112 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A374F46C45
-	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 14:15:07 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.55856.1775484903708108494
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9699F46C47
+	for <webhook@archiver.kernel.org>; Mon,  6 Apr 2026 15:13:08 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.57249.1775488388136474119
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Apr 2026 07:15:04 -0700
+ Mon, 06 Apr 2026 08:13:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=m8ZBmQ9U;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-43d43e09de5so253128f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 07:15:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QsjxS1kn;
+ spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4838c15e3cbso30429355e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 08:13:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775484902; x=1776089702; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yjfcXVatPrGyfNbdhTOYzuKfO6qL3No+HZfe6cF2yso=;
-        b=m8ZBmQ9UmcqJjEQnwtuzANje0PvAF4kijCSY/wLZ6wKn2jHxF133xFzpsueTNwANfK
-         Yuiwh2GKDYCCsTs84y8nnynPJp/3WkmEilU4XbHoVJkIATqFDz6nqkYwDzwY7sKIc7wR
-         fq4BEyrT3hdSLn2ysqXuRXy70+fmlH1bvyup13I19a8I0rw3Q5HrQJDdwzC4eIlGDo76
-         UKANfrkWLcBZsrVjUr0nVD3r+VlikM7Cvwfu+AgL0OnkHhRsX6UVfwJRuIW0b0OAaAm+
-         ABSbYDNV8/X7X88IOwfLcwcQX6Msn/lG52IMJtp0F9KPkjIxOBYu+eyiyxln03ttvzsQ
-         P5Fw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775484902; x=1776089702;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20251104; t=1775488386; x=1776093186; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yjfcXVatPrGyfNbdhTOYzuKfO6qL3No+HZfe6cF2yso=;
-        b=Yb6JOaYoAizNZ7rJ6fDRIRXPtMam4fjNfN+MxdOV/vzgtSd9ZEeaJ5OKBlAhuiP5lD
-         qxXe0niJhDg8ReaOLz2DwR7kiWD5TIHEtvKkQhD6R074VKKWc6n4XcKlbwCv9GDB/Jed
-         RY3bi87ReXY4tsdR84Bo1ZUIbj+3feI6tb6G8x0yRbV5IUv8amdHnZMynkVhE3y4VVQc
-         voBEUCtGHR5IPcN6cgyuzvnzqc9eD6Hi05Qy6281mE1lm1uOOUzChDsAxEMUBsZB2YAh
-         KKUbebZEzmBGYBWSw2jqiV+CkzK6zP9YL+YzDXzPXU8UKm+b9Af86vXa+awhqIoHXkXh
-         yGng==
-X-Gm-Message-State: AOJu0Yy+BVWbFVkAjE7koybcL7T+vLO9AylsuBvn1Nergs8K1952hb5a
-	boSPtYwBYCbcZYuHAzveIvXSoXfglH2YGFKOtLapKjZF6Ts4bablvC82y5pRNw==
-X-Gm-Gg: AeBDieu8CoAaiYErdNzH3P3MGI2qqe0+tnbBIeqdZOPbMZD7LUFxZPS3m/zVGScm1fl
-	b2P+t+5up7TwFTJfEvwnjjIaQUKoTsf79HuVGjTuF3Y2bzro5e52Q81PpREilxP1g/CLS67CCjK
-	iLgI1aFkgTPIkIp3Or/Z+cDTZVoy+eNuIAk1242E3uNdi3K+qML2M8gZOy99sbbX5dsf2eC7uHS
-	/PzDLyiDsDrZGcLuRrVbVFSJp8rDgATqjIIvgMtvs7AODbFNRNKUuNIUWIDvIcLU/da5wEEbr/k
-	zT3RJXtxNaK86LDicHolzOz5jd+LvHHTUnwtVjC1cgArNM0M2VSmjb8hrKz8DUSX/fXF7aEXQC1
-	A/u7c3+3VniCLZklI5oZ5A39d3MhroyC3004+P4wPRYV4j7bPOHUN5dEG6HNWYDAraDUSFJdrfn
-	rNzFZdOwuQNUsZW7I/QmKn
-X-Received: by 2002:a05:6000:1869:b0:43d:dd:8cad with SMTP id ffacd0b85a97d-43d292cbccdmr17936172f8f.32.1775484901963;
-        Mon, 06 Apr 2026 07:15:01 -0700 (PDT)
+        bh=Bk1Vjq0ddhK0/Qq4HN/OIMvPPPSseBA2kvSoxqx/9WQ=;
+        b=QsjxS1kn8hyN3IT2UOithfgXasU6LqrCAV8TdeTaYYlcPEVJbhKjK7nueG2TIEdZvf
+         Mp5NAsZF8ooo6ybs18y/TsroXiZTMyHaQ+S2KS9YR7XAGDWiqHSOpko93QxQVn7epi3i
+         RRK2pCBVoHepe54PtDDZPiTVifS1iYDwDkfdhq/3JlXEk11kFrMkfZj9vuLEsCORus8v
+         Sn61hPZ+PjndaJhYCUY9ICYf9pYEhMUjHWd6VUkF6Z6UekSyyA24tm+bAN+7qLCnMEPI
+         XsT9QUm69UaUd9iV8d7uds0ll82Iv2uwwpmP+8olGApS8sgWT23yfCIWtaejHyi6BNRf
+         0Eaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1775488386; x=1776093186;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=Bk1Vjq0ddhK0/Qq4HN/OIMvPPPSseBA2kvSoxqx/9WQ=;
+        b=dzGWYySEs1W9wbliXHWhKMjORSgl+RDpQ0RmV1oBh/16Brhc3vKGxSSjboyOq4gxbO
+         BEbtlUDfW4LecnQaEe2069bSD0F2ONzP1qQds4tNUm32ip334YRgvqrGUFdkJKy6lwhQ
+         o71I6eAG0SCB+NO8sS7l26radrtupS36eUWns60FZ97imhnzEWqlHddEhekDqZnWbKZO
+         9eDkZYn8F3YPzLH0O6D+1TJyHT5StNDMGjYJJbl3orPVWiZHOHSW6sKfWzIcAblOhytN
+         L3VK2I2YjrKgfZJXHIKIG00PCTkPgzcMuS9hG6manx5wChTS3syHBX7bV+XfeYyXus4q
+         acIQ==
+X-Gm-Message-State: AOJu0YxonPC04hQhtMmjuApw3XmzsV4Z+trFQZhHjFnBmshKd6ZZCIeD
+	3cHSGNZvDvN+xfv8mAcsDBlwdTJsxh5viinJqZpm3hG/WS28dlia3yM+iznMDQ==
+X-Gm-Gg: AeBDievQUBSYQrwipbiNsjKOh0xZ2barz6aBtQ+nfcEtH7euBkFhPVbLxKc1+PSMtS1
+	Hhm92DZtMsK2qG0rC1WY70IxQYGiYupwL6XjNnXXiUDJDA0MeVjA7+QTf5yRfbaz9KDJPy+pb5B
+	VfWfPkrFu5qEKryrSqPR6ytLUAOWPn4hEBoJ2LjMLKgQQ+G2DbK9ogUltfQ50BoUpqR9JiB2O1Y
+	+/+Vj3X7Nn27uSStUQA9esLh8EjXYeBRL7BHnYVyBx9zJZsxRfP42nMucwfDi8fXWSO0PZI0djQ
+	yWxrJBn5i4w0OTbWBvz0ZA/EX3jQogUrmiu38vJArx7dgNHG+lS0qvrZKN7T6lu/05XIOwEEGf5
+	TUJsWvnm/f3BEgYbpEFXRnPjnesIAeqmvwrIcvxxDLBhbBfDRffQy8kEVuZCk4fJjW0ju4j/TGt
+	7Aq6CSdEUBFI32CmU6aHDO
+X-Received: by 2002:a05:600c:1d1d:b0:485:3ec6:e634 with SMTP id 5b1f17b1804b1-4889977600bmr178647085e9.15.1775488386378;
+        Mon, 06 Apr 2026 08:13:06 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43d1e4f7d4esm35554567f8f.34.2026.04.06.07.15.01
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488b6ff70bcsm92848765e9.14.2026.04.06.08.13.05
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Apr 2026 07:15:01 -0700 (PDT)
+        Mon, 06 Apr 2026 08:13:05 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/2] mbedtls: drop recipe for v2
-Date: Mon,  6 Apr 2026 16:14:59 +0200
-Message-ID: <20260406141500.3557451-1-skandigraun@gmail.com>
+Subject: [meta-python][PATCH 3/4] python3-aiohttp: mark fixed CVEs are patched
+Date: Mon,  6 Apr 2026 17:13:02 +0200
+Message-ID: <20260406151303.3640343-3-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260406151303.3640343-1-skandigraun@gmail.com>
+References: <20260406151303.3640343-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 14:15:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126045
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Apr 2026 15:13:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126049
 
-It has been unmaintained/EOL for over a year - there is
-a recipe for a newer, still supported version.
+All these CVEs have been fixed already, the relevant NVD
+reports mention it explicitly that 3.13.4 is fixed, along
+with referencing the commit that fixes the respective
+vulnerabilities. However each of these are tracked without
+version info by NVD -.-
+
+Due to this, mark them explicitly as patched.
+
+Relevant reports:
+https://nvd.nist.gov/vuln/detail/CVE-2026-22815
+https://nvd.nist.gov/vuln/detail/CVE-2026-34513
+https://nvd.nist.gov/vuln/detail/CVE-2026-34514
+https://nvd.nist.gov/vuln/detail/CVE-2026-34515
+https://nvd.nist.gov/vuln/detail/CVE-2026-34516
+https://nvd.nist.gov/vuln/detail/CVE-2026-34517
+https://nvd.nist.gov/vuln/detail/CVE-2026-34518
+https://nvd.nist.gov/vuln/detail/CVE-2026-34519
+https://nvd.nist.gov/vuln/detail/CVE-2026-34520
+https://nvd.nist.gov/vuln/detail/CVE-2026-34525
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../mbedtls/mbedtls_2.28.10.bb                | 79 -------------------
- 1 file changed, 79 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
+ .../recipes-devtools/python/python3-aiohttp_3.13.5.bb        | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-deleted file mode 100644
-index b126aee7db..0000000000
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.10.bb
-+++ /dev/null
-@@ -1,79 +0,0 @@
--SUMMARY = "Lightweight crypto and SSL/TLS library"
--DESCRIPTION = "mbedtls is a lean open source crypto library          \
--for providing SSL and TLS support in your programs. It offers        \
--an intuitive API and documented header files, so you can actually    \
--understand what the code does. It features:                          \
--                                                                     \
-- - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
--   Camellia and XTEA                                                 \
-- - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
-- - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
-- - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
--   ECDSA and ECDH                                                    \
-- - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
-- - Abstraction layers for ciphers, hashes, public key operations,    \
--   platform abstraction and threading                                \
--"
--
--HOMEPAGE = "https://tls.mbed.org/"
--
--LICENSE = "Apache-2.0 | GPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
--
--SECTION = "libs"
--
--SRCREV = "2fc8413bfcb51354c8e679141b17b3f1a5942561"
--SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=archive/mbedtls-2.28;tag=${BPN} \
--           file://run-ptest \
--          "
--
--inherit cmake update-alternatives ptest
--
--PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
--PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
--PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
--PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
--# Make X.509 and TLS calls use PSA
--# https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
--PACKAGECONFIG[psa] = ""
--PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
--
--EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
--
--# For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
--CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
--
--PROVIDES += "polarssl"
--RPROVIDES:${PN} = "polarssl"
--
--PACKAGES =+ "${PN}-programs"
--FILES:${PN}-programs = "${bindir}/"
--
--ALTERNATIVE:${PN}-programs = "${@bb.utils.contains('PACKAGECONFIG', 'programs', 'hello', '', d)}"
--ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
--
--BBCLASSEXTEND = "native nativesdk"
--
--CVE_PRODUCT = "mbed_tls"
--
--CVE_STATUS[CVE-2021-43666] = "backported-patch: Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310"
--CVE_STATUS[CVE-2021-45451] = "backported-patch: Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c"
--
--# Strip host paths from autogenerated test files
--do_compile:append() {
--	sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
--	sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
--}
--
--# Export source files/headers needed by Arm Trusted Firmware
--sysroot_stage_all:append() {
--	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
--	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
--}
--
--do_install_ptest () {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
--	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
--	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
--}
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
+index 7e6f80102b..f3a0fbf557 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.13.5.bb
+@@ -7,6 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+ SRC_URI[sha256sum] = "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1"
+ 
+ CVE_PRODUCT = "aiohttp"
++CVE_STATUS_GROUPS = "CVE_AIOHTTP_FIX_3_13_4"
++CVE_AIOHTTP_FIX_3_13_4[status] = "fixed-version: fixed in 3.13.4"
++CVE_AIOHTTP_FIX_3_13_4 = "CVE-2026-22815 CVE-2026-34513 CVE-2026-34514 \
++CVE-2026-34515 CVE-2026-34516 CVE-2026-34517 CVE-2026-34518 CVE-2026-34519 \
++CVE-2026-34520 CVE-2026-34525"
+ 
+ inherit python_setuptools_build_meta pypi 
+ 
 
