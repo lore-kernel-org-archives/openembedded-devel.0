@@ -1,178 +1,177 @@
-Return-Path: <pascal.bach@siemens.com>
+Return-Path: <Harish.Sadineni@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EE621073CA4
-	for <webhook@archiver.kernel.org>; Wed,  8 Apr 2026 12:04:46 +0000 (UTC)
-Received: from mta-64-228.siemens.flowmailer.net (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.104829.1775649880733875173
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78B591073CA7
+	for <webhook@archiver.kernel.org>; Wed,  8 Apr 2026 12:29:56 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.105251.1775651385985371056
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Apr 2026 05:04:42 -0700
+ Wed, 08 Apr 2026 05:29:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=pascal.bach@siemens.com header.s=fm2 header.b=Abx1x5p7;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.228, mailfrom: fm-1334618-20260408120437e36d2252490002070b-m7ha9l@rts-flowmailer.siemens.com)
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id 20260408120437e36d2252490002070b
-        for <openembedded-devel@lists.openembedded.org>;
-        Wed, 08 Apr 2026 14:04:37 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=pascal.bach@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=IDW4g+yrK6d1oyZfpXgfNXdKpW8N3XjAmQ6a2VkHSxs=;
- b=Abx1x5p745T7n00E5b9teNP2a/PqML64qnmzouwnazkQoYrh53TJIriw+aMvNRq3H8/Epk
- 3ApAhikVtYm8boA8U7YSFuHQp+CY74z7n1G0ZmF2R0yA94XiJDkVSPvYctXcOF4+IUj7SkRo
- +RLc4QiE7v9uFlW3sUFt8wVf3YIe4KX3X3aAo7oY5/PS9sW2pthNUyJYultkw7JwuM1Hkvr6
- F8FJE/GYQc12L8dC6PEHcw80O8MNtS3SXs0xzonVEnUuaa/ZYGGUb2NUIyN+0njJedcaMNQi
- 8J7LMD/fM2g+a4iZA88Kvfk5eLfTxj/74hat4ZtjYBcJ9JIWC/mNzOUw==;
-From: pascal.bach@siemens.com
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=MFd0mY7w;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=855830a691=harish.sadineni@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6385Q7V61961866
+	for <openembedded-devel@lists.openembedded.org>; Wed, 8 Apr 2026 05:29:45 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:message-id:mime-version:subject:to; s=PPS06212021; bh=Jvkag+aaw
+	HeuyYukPAc/J4DSoN6RlVOTGK1kavhjlPE=; b=MFd0mY7wXxaajLSSF2MZGeTdI
+	fWtf410BE9knBpVLddYAdxKHYKpWYKTti9Fgz2RK/o94yQ2h9VjDv1QJSttN/4BU
+	eRD2Ptdz8Fy81R+UcOpw2JR0De/egAUVoidFAYFtTNMRpDlkgDT+Pn6JJX8rdsZg
+	2T49b+OqhEylCQrSx6IWBd+2CasCA3BQpyZqlDboF6EDf0YrvNDMr9TRhSej7tMy
+	jwyCr5KKKAfjJszKKmrdiYZmElZs2Qi44w+xDa3Jh9I0pJbGW+tWjQ59Md8jrmtE
+	FpilHWxG8r38KYzAOBH0rTB72I2Z3VB/ZfX1e2LK+0GVoX+wn6ig/Dpp+NIxQ==
+Received: from bn8pr05cu002.outbound.protection.outlook.com (mail-eastus2azon11011040.outbound.protection.outlook.com [52.101.57.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dcmrmjeyp-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 08 Apr 2026 05:29:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oHYOFpnrefdFMcAhktBKa2uKYvS9xqA3pXOba2Z7xLJ1V/0WjlbUTdyE6vfLt499ZxCluAvrkiE7BHi0v4Y0a0lI0LC+pzoPm4Yz7+VnOb5UVR2yVq6FSQYvVRXNLVm9nd2MbnzTjIXHp5SPcm4yPfTw1qFHFMhmVBd/RPBTgWRE0dtOHrc1p2kg1ff0QFY4hT9FXco/vXNyOr6z2t7EU/WfWq5CPwZYS+lUhwoV5DsLMknNdoR4URJWpllBMJlwnDXFGnbqM0oYzfYD/h73U4aMpd/fC3DwV0nfBoSsW+Fe4jCKUq4lqiJnMWcSSzqKL3Nvsd1eh8cVKNUmz9i8ug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Jvkag+aawHeuyYukPAc/J4DSoN6RlVOTGK1kavhjlPE=;
+ b=LRo2ceFO19BA+oEIoP/Ql3MRld6kW2Pz/sKLXNmTaWVMf/Uh1kcM+TWteZL+tQV5m8Y4OPstA7WvT4oGWM6Gt7yhUYeW2ZlBKF/jqKDGA0q42MSQMqKaU3W6dWUog7JC0SFT52ON8UH/7jvv0zbCKSYgdOo0wrw0hNPQBjbCZ3PwIf+IRm/Ij51zqvKTdI3OmIR0fbzdm8VyVPJAqL0t5j5CXxdC7J0MW2grB47DlYbhD3+xdSY0QINinPgRw6mVije2sQGFbksLwCC5xMEA7CIZ5UBdrB4zxVl23j8H7XFgSzCns7u8JCzlywP0CAFnBCV5/6tXFT6gyQT8z5l6kA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from PH0PR11MB5658.namprd11.prod.outlook.com (2603:10b6:510:e2::23)
+ by IA1PR11MB7822.namprd11.prod.outlook.com (2603:10b6:208:3f2::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.18; Wed, 8 Apr
+ 2026 12:29:42 +0000
+Received: from PH0PR11MB5658.namprd11.prod.outlook.com
+ ([fe80::6852:6964:54d3:49c9]) by PH0PR11MB5658.namprd11.prod.outlook.com
+ ([fe80::6852:6964:54d3:49c9%4]) with mapi id 15.20.9769.018; Wed, 8 Apr 2026
+ 12:29:42 +0000
+From: Harish.Sadineni@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Pascal Bach <pascal.bach@siemens.com>
-Subject: [meta-oe][PATCH] fluentbit: upgrade 4.2.3.1 -> 5.0.2
-Date: Wed,  8 Apr 2026 14:04:34 +0200
-Message-ID: <20260408120434.118647-1-pascal.bach@siemens.com>
-MIME-Version: 1.0
+Cc: Sundeep.Kokkonda@windriver.com
+Subject: [meta-oe][PATCH] layer.conf: add bcc into NON_MULTILIB_RECIPES
+Date: Wed,  8 Apr 2026 05:29:19 -0700
+Message-ID: <20260408122919.4064443-1-Harish.Sadineni@windriver.com>
+X-Mailer: git-send-email 2.49.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1334618:519-21489:flowmailer
+Content-Type: text/plain
+X-ClientProxiedBy: BN9PR03CA0068.namprd03.prod.outlook.com
+ (2603:10b6:408:fc::13) To PH0PR11MB5658.namprd11.prod.outlook.com
+ (2603:10b6:510:e2::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR11MB5658:EE_|IA1PR11MB7822:EE_
+X-MS-Office365-Filtering-Correlation-Id: 35dc81ed-d9ad-48c7-3ab7-08de956a8235
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|38350700014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	XQ1BgJVXQYJjrRzlVq8FAdqMHbbYLPPLgOXfPMnW76f/0lOLYXN+aVFqSJFTHTiF76WeBRtkaAJxaW+56rGDCmus8ecnapXLtIZ9IMCn4rACdRrxq+uvuhGjttGIAV4Aoo2JXlrNCnf5ZSI2HOxUDNgqwByIO2SXPMVYbfxtJYYPYZSngnZRgn9VQk3+JqyK8+G+xma4wFC5rZMcZ2ATnvimRIRZEfJ22VhPZB9OZncwNtlLyUc4LJh0C14eqc5bmWeUlXpj61L5LFz3MUT6+vbBgsx9ChAVglZphhoEtK5i+uy/L1qAVVIn9nd6bN1Szo5PmF/A5dQfJVuH92TbMJHqCH1z/NiUszIl+rA1IM1Vwx1BKBsMFPgWlE1IvDMTGgM1lB5majlFwuQfJkCMqK0O26eZRjXie+viHNj6WKdU8RyZPPMSw7Ha5vKMhhX+gnyZGHgEz4/4H8sTub0bN1bqSzoGuHEttIkMbRoYKKGJ9BVkKOOqQqpOTPgS3+hIICZ22Qi8S8r2ZJgg+pMimbcA58D7AQwiXW2nNGatUxfn7WelGbvLrhu1gzegOkz5lW4k1Es4CHL64g8KSKABv3TwbHu/EE5l/1HG6ahPy6ncxZjjBhgcI2DTOD33IsQ8/ogEfcS4nrUmium/jAEUGYonr6GK3mgPcgQZ6+6rzW96GOY6WDUWHVK0oJsdl89semckQ9aP29qOaOURN+ftKadnAivZgiTRIHP+0lLa9B8CpQ1NxU2Dl4PtWtaIFJN1BezKjgwutxgnT5XN9yVMOIcAvfc7kO+GIux3+hG6jhY=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR11MB5658.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(38350700014)(56012099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?9BP63TRFOq/ojBob8XxcyemJOH8QFYrmM741mxBUVwZAfEUEGlUa1yXbOndo?=
+ =?us-ascii?Q?QEjJE/aK/uLZAYY+g1JLebNO+C6U6scIwmPPhkAKFApjCOYaiDM1rJSdPWNG?=
+ =?us-ascii?Q?r38BCtYb/GHEklSn0fQnUz7Rj5SgVBE3DKLahmO3UulQ423581jx1DELVjW5?=
+ =?us-ascii?Q?K0LKIxTEC7mpF9RIuWLJ9CWQySWgMo7unTX9FMeZMWYA1CVECgFrBDBrAIt7?=
+ =?us-ascii?Q?p2ADWTsUDt6Z1D2kpxsOmeJ254u1Bwc/iWYgx17ZhK1f90IdEb5Fu2g1ZFj8?=
+ =?us-ascii?Q?fIo5mBMyPTRZfJVGYCm9ziZOowPesbVPjNX/+qRC8U1RIDusyYKk58A/pdZg?=
+ =?us-ascii?Q?X827z5iGVZnRcTyPBh1FYCRvnJClakY+q/FnPJOuiHEN/DjobVGs/VQzH3Eq?=
+ =?us-ascii?Q?uhJiZoqunNdOLxj1WAjvtiYQcSYoA3EsLoCkW9JRi7tVVfQXpY6iB/K9OYTT?=
+ =?us-ascii?Q?1kO/98lnyy8spC4L0eGDqmfTylrwJAPNF/dw9kGIqyiTuaiqPa2uWmhdNNd/?=
+ =?us-ascii?Q?BZeo4V96c94GxQPhc4zDzTZaPUSZOQjfXLjmrcR6Wyd0miv9MmDwecsW+osg?=
+ =?us-ascii?Q?ihlzF1d15mNf2ZACiq7byeHtUa57AMMNZgXWke403WU+XGs5BD3Bn1MH2zMk?=
+ =?us-ascii?Q?/wj8hxkHxXqkcUZ+XUCzGcEUutMvha2WbbVCfyxxzAchdiNj+J/4HFNilZLz?=
+ =?us-ascii?Q?RrkYYGrkX3GuB5WOeQDOeFnhKuB+X62hFwAju5I0uYN+wyv6gWALM6Z/0W8d?=
+ =?us-ascii?Q?YTUTSs1MU4ZLUTCaMfM1Ocf/WPoSv1R5ud83ID1RUticUAi6kMlXMngH6huy?=
+ =?us-ascii?Q?KRrWnu3G1Syy7IT8j0yYfjY9lWs7tK5U0WYm7+DpZyw+MOijaejGu0yMs9HF?=
+ =?us-ascii?Q?zY/nJTZTZg1pCaZ0QcLREVgIgmbP622fWMSwA6EP+jxQl4X4ShxWt3Rcukh6?=
+ =?us-ascii?Q?S95SD9RBqdCmaaGlWFwtCtW4aBxOkyNFZ3JACGJQs/Kl/wL5bdFEKHOQMbao?=
+ =?us-ascii?Q?Z4EpdHQvSZBV2y3Hg+G95YnRAknhRWDazsdLwsmFxvmFiHSMFQ4h0HnxeWzZ?=
+ =?us-ascii?Q?uA2z68PpZybG6GV05rkcD3vk62AalkCsRIedkYxyyAuDVTzaq8erHEN7MOsd?=
+ =?us-ascii?Q?KYPO74uzWiHgoSx+JWSRZXubrP3of69nwjtEpN04LblzW/7SPwBP6rONxigD?=
+ =?us-ascii?Q?PuBT7nGJObewiAq8+HMDQp2gJT5EC9D0z6BS9CPQ32GPtzw52DcYM4b8duE7?=
+ =?us-ascii?Q?TiGqRhclJhX4MFRTbczmO8VKKwW5eEYkNc/QZif/I7IMTN4nV29FvMfQMikP?=
+ =?us-ascii?Q?Kbky+DBV4eXURo3uCjTMX4VaekLlxJaHmr3BwUXBb45AlTD7gprSW/WHQkfi?=
+ =?us-ascii?Q?tIr0UVOkiiP8RPFFIR5GZvmtSQCdtVI9YMaJAo+fvJlIV8xfjqBupc59f3OK?=
+ =?us-ascii?Q?clLQUk5N3rfTvCbj9AsxYOtRuJHOCk9wN8igmtni2sgANhS7nSUPaT87Hruh?=
+ =?us-ascii?Q?ZQpbPJB0S/gbfHEJx5iXO6JO1YpimQFVKSoEdsFPGNPlR+WpX27p3XiilRGr?=
+ =?us-ascii?Q?PMxAJAFbqVnj8XILFhn2kY67K5n0iGycdqf0hLYpqrQ+JzDTy6qi04bytCow?=
+ =?us-ascii?Q?I/XtrBhwpMn4E1UtcSMXERp8winW6gGl/21SJp+vf9sM6k4yDMFAzh9uOTpY?=
+ =?us-ascii?Q?FlmLW5oqarxweUT9BRzFx7JQdkYtITD03iJOv9pJ6GmeNvVEBxaokx4lx5lX?=
+ =?us-ascii?Q?v8hZivGbLahr4CJFdMbJaHPS/JKyjmA=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	PkHE9euvxAVSeLgY7p1X1U77hqF5+0uLol1XJsSJNgocJCKWl7xZ+wA4Odp7FGR9vOai++aBEqxJxCrnUmfM5jLSrObGdUK7utCIGdCCa+KXtjz01PwpKFZG/g54J7Pi0z7jdYIzU2WwR76hKtQm3hIB4dxtZA/KiWAzw0heD9gMFXsIGzPCdDVwbwPtlw8Tudo9S1Vet5IVjwmFWjlEK40DZ26R5s1Q9Y+v18WjL608zKkAm4X/YDDo1DJ4edkIYyf4didiR6fUEwiKoAZodL1ccy8EoKbFPbch7KVh4SAo7SgZbjv3rUKt9BaoBiXDszbWN3zdBMHwaWBUD+OTOg==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35dc81ed-d9ad-48c7-3ab7-08de956a8235
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR11MB5658.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2026 12:29:42.1259
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DXbXG2JPMmqznKLmw/jbBTRyTY8bH/ZBWL1TtUPpIp9m5v6VnEFFJDshpzFRP5/nyzyXj+mkTgBfoOTddk5xsnAHl57BrRZnBB+JHlEIcVo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7822
+X-Proofpoint-ORIG-GUID: fY108um6ZGIgZkJgeencV1q4TAhnytMU
+X-Proofpoint-GUID: fY108um6ZGIgZkJgeencV1q4TAhnytMU
+X-Authority-Analysis: v=2.4 cv=PpWjqQM3 c=1 sm=1 tr=0 ts=69d64a39 cx=c_pps
+ a=MmUQU4Mtsiu6HzSWf2FVsg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=t7CeM3EgAAAA:8
+ a=E5lkeIXTZDYB532X7YsA:9 a=zZCYzV9kfG8A:10 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA4MDExNSBTYWx0ZWRfX6/MAt2ldWFw0
+ ny0fSUCgnch0eA4ff6oo6/mBii8CyN+htts5DkQE5kiN9d753X+csDGJj296fbgTGdHTV8eJhXT
+ 3z99RJUZ67NMfo1QQ6r7PALyJ19wleR1YEnaR9Gco6pePVIGK7SFcm5dFDKVKlLTS+TSRJG+wPr
+ kJjSlmo/6Tth2HrNTW62L4JVErUYptNts8lpL10EY947zTXYhbKK2GctjHxaa9ujxDJsZClp7uW
+ ynRM7FtpGaqRgaKmDDu7ztxn5lycBsBCYvcaWc1fHeMoni5sd9ufCDcHzpdmouAaDjvLOhnmvVh
+ hf657YeQPwlfaAk12B2a+lC8zwgBolsvhTbbAs+xF8fyDvRLWY7tTd7cabnhihBfDH7v4CLgolO
+ 8f3ZOFcNbtv9bg5ManygHVCo+33/vG8lkmujwm6fX5mxjTu2qSRpx7+Z2cS6n/D813JmMB5CXBe
+ xj3yuf8yY+Wf6rUj+cw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-08_04,2026-04-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ adultscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604080115
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Apr 2026 12:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126106
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Apr 2026 12:29:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126107
 
-From: Pascal Bach <pascal.bach@siemens.com>
+From: Harish Sadineni <Harish.Sadineni@windriver.com>
 
-Patches have been refreshed to apply to the new version.
+Here is the setting in bcc recipe:
+COMPATIBLE_HOST = "(x86_64.*|aarch64.*|powerpc64.*|riscv64.*)-linux"
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+bcc only support 64 bit arch, so add it into NON_MULTILIB_RECIPES
+to avoid expanding lib32- variant
+
+Signed-off-by: Harish Sadineni <Harish.Sadineni@windriver.com>
 ---
- ...t-use-private-makefile-targets-in-CMakelist.patch | 12 ++++++------
- ...h.in-Do-not-hardcode-compilation-directorie.patch |  2 +-
- ...MakeLists.txt-Revise-init-manager-deduction.patch |  8 ++++----
- ...004-chunkio-Link-with-fts-library-with-musl.patch |  3 +--
- .../{fluentbit_4.2.3.1.bb => fluentbit_5.0.2.bb}     |  2 +-
- 5 files changed, 13 insertions(+), 14 deletions(-)
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_4.2.3.1.bb => fluentbit_5.0.2.bb} (99%)
+ meta-oe/conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-index 1756d74560..55fb0c7414 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch
-@@ -1,4 +1,4 @@
--From 4b47a8f0e3d1d429356cdda8efa7682ab88d344a Mon Sep 17 00:00:00 2001
-+From 8d93bb7c866f88dd7f2cac81d2acfcffae9d555d Mon Sep 17 00:00:00 2001
- From: Niko Mauno <niko.mauno@vaisala.com>
- Date: Sun, 29 Sep 2024 12:00:00 +0000
- Subject: [PATCH] lib: Do not use private makefile targets in CMakelists.txt
-@@ -48,7 +48,7 @@ index 489570026..06d99cbbe 100644
-  
-  
- diff --git a/lib/cmetrics/CMakeLists.txt b/lib/cmetrics/CMakeLists.txt
--index 5421f8c80..0dcf7645c 100644
-+index a3385a8ba..80170f8e7 100644
- --- a/lib/cmetrics/CMakeLists.txt
- +++ b/lib/cmetrics/CMakeLists.txt
- @@ -60,12 +60,8 @@ if(NOT MSVC)
-@@ -67,11 +67,11 @@ index 5421f8c80..0dcf7645c 100644
-  # Configuration options
-  option(CMT_DEV                       "Enable development mode"                    No)
- diff --git a/lib/ctraces/CMakeLists.txt b/lib/ctraces/CMakeLists.txt
--index 73723433d..9f60699d5 100644
-+index bb2c54fa6..7d59dd834 100644
- --- a/lib/ctraces/CMakeLists.txt
- +++ b/lib/ctraces/CMakeLists.txt
--@@ -30,12 +30,8 @@ set(CTR_VERSION_MINOR  6)
-- set(CTR_VERSION_PATCH  6)
-+@@ -30,12 +30,8 @@ set(CTR_VERSION_MINOR  7)
-+ set(CTR_VERSION_PATCH  1)
-  set(CTR_VERSION_STR "${CTR_VERSION_MAJOR}.${CTR_VERSION_MINOR}.${CTR_VERSION_PATCH}")
-  
- -# Define __FILENAME__ consistently across Operating Systems
-@@ -86,7 +86,7 @@ index 73723433d..9f60699d5 100644
-  # Configuration options
-  option(CTR_DEV             "Enable development mode"                   No)
- diff --git a/lib/monkey/CMakeLists.txt b/lib/monkey/CMakeLists.txt
--index 3fbace595..1c6ad031c 100644
-+index 3dc1ef28a..2d08fc5fd 100644
- --- a/lib/monkey/CMakeLists.txt
- +++ b/lib/monkey/CMakeLists.txt
- @@ -15,10 +15,8 @@ include(GNUInstallDirs)
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
-index 4c6cac0cbd..51f48544b1 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch
-@@ -1,4 +1,4 @@
--From 596a53c35166e6cc5c20fb1d28bb5c92a248f695 Mon Sep 17 00:00:00 2001
-+From e7b98c452343a43b924bca684e5ec423eae5d644 Mon Sep 17 00:00:00 2001
- From: Paulo Neves <ptsneves@gmail.com>
- Date: Thu, 28 Jul 2022 11:42:31 +0200
- Subject: [PATCH] flb_info.h.in: Do not hardcode compilation directories
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch
-index 6bd4c6bbb6..2e0e988c19 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0003-CMakeLists.txt-Revise-init-manager-deduction.patch
-@@ -1,4 +1,4 @@
--From 5cc79bdede89e75d713e23cf0fde26634320bc3e Mon Sep 17 00:00:00 2001
-+From fef234a565d5150dc3d3d1374843024381e4f4de Mon Sep 17 00:00:00 2001
- From: Niko Mauno <niko.mauno@vaisala.com>
- Date: Mon, 21 Oct 2024 16:02:46 +0000
- Subject: [PATCH] CMakeLists.txt: Revise init manager deduction
-@@ -15,10 +15,10 @@ Upstream-Status: Inappropriate [configuration]
-  1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index c6974f6dfe..78df6e3c03 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -120,7 +120,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
  
- diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
--index ac5fe5ef8..f47a01b82 100644
-+index a47a5d9d6..ddc93827c 100644
- --- a/src/CMakeLists.txt
- +++ b/src/CMakeLists.txt
--@@ -600,7 +600,7 @@ if(FLB_BINARY)
-+@@ -627,7 +627,7 @@ if(FLB_BINARY)
-      set(SYSTEMD_UNITDIR  /lib/systemd/system)
-    endif()
-  
-@@ -27,7 +27,7 @@ index ac5fe5ef8..f47a01b82 100644
-      if (FLB_AMAZON_LINUX2)
-        set(FLB_SYSTEMD_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.service")
-        configure_file(
--@@ -625,7 +625,7 @@ if(FLB_BINARY)
-+@@ -652,7 +652,7 @@ if(FLB_BINARY)
-        install(FILES ${FLB_SYSTEMD_SCRIPT} COMPONENT binary DESTINATION ${SYSTEMD_UNITDIR})
-        install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR} COMPONENT binary)
-      endif()
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with-fts-library-with-musl.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with-fts-library-with-musl.patch
-index 6df53613c3..1192449909 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with-fts-library-with-musl.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0004-chunkio-Link-with-fts-library-with-musl.patch
-@@ -1,4 +1,4 @@
--From cc688b91c02df9a45ca8816a1d09649fadb9dc4a Mon Sep 17 00:00:00 2001
-+From 26431b786b4c703bc2dcdb57d59487a3fef4a139 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 10 Aug 2022 01:27:16 -0700
- Subject: [PATCH] chunkio: Link with fts library with musl
-@@ -10,7 +10,6 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ DEFAULT_TEST_SUITES:pn-meta-oe-ptest-image = " ${PTESTTESTSUITE}"
  
- Upstream-Status: Pending
- ---
--
-  lib/chunkio/src/CMakeLists.txt | 1 +
-  1 file changed, 1 insertion(+)
+-NON_MULTILIB_RECIPES:append = " crash pahole libbpf bpftrace bpftool"
++NON_MULTILIB_RECIPES:append = " crash pahole libbpf bpftrace bpftool bcc"
  
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.3.1.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_5.0.2.bb
-similarity index 99%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_4.2.3.1.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_5.0.2.bb
-index 03f9e0e003..3f3299459c 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_4.2.3.1.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_5.0.2.bb
-@@ -17,7 +17,7 @@ DEPENDS = "\
- "
- DEPENDS:append:libc-musl = " fts"
- 
--SRCREV = "fca8b5bf46416267a4c8de185e4044da09cf0f16"
-+SRCREV = "66ffbe43bd0b393ec418e6f5851a23461fa478d4"
- SRC_URI = "\
-     git://github.com/fluent/fluent-bit.git;nobranch=1;protocol=https;tag=v${PV} \
-     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
+ NON_MULTILIB_RECIPES:remove:x86 = "libbpf"
+ NON_MULTILIB_RECIPES:remove:x86-64 = "libbpf"
 -- 
-2.53.0
+2.49.0
 
 
