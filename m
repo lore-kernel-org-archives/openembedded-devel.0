@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24DF5E9DE47
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18B11E9DE44
 	for <webhook@archiver.kernel.org>; Thu,  9 Apr 2026 07:09:42 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.126696.1775718575370080357
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.126697.1775718580215741835
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2026 00:09:35 -0700
+ Thu, 09 Apr 2026 00:09:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=P75UR4xK;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-82cf636dac8so317522b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 00:09:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JsDBWSx5;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-82cebbdbdccso326595b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 00:09:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775718574; x=1776323374; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1775718579; x=1776323379; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aRkWk/2Hh+OCHZGnd+wQVaRKZXNjQt5krRcnC1pon0M=;
-        b=P75UR4xKLgxw+ZET1rcBHxEf/+caMlKm4/08hbkbtrKXzt7CqXXaJ2R7MIxrhSbNJN
-         mRCw3seOmdMJkZfopZmPBDxwTAwBgTNgWbLbhhqGg0A1ocIjbfYsIsdWzm2dSAcxiIOC
-         KWa4JxVci6TSbMw+bByg0T6+zZabn67xFXz3QSu8RhYYc/SrehRp38Gt0F4sAO92e7vG
-         nRFam2kRRBud6HsIT0P2sowW7esNt95mc3iRyayFqpjz9/rYYrAtc0T5kDHOy3etnoWP
-         qbdsf7r36sw42Ce7cc6aXvPSQJLJ6gqjXwt+tR/04yqnNYYj/GecZL8VN0ylJn4rsemD
-         Jpqg==
+        bh=phBGia17fX3Di/1P+4br101Fqk6Up2noLFZKO0XKHDs=;
+        b=JsDBWSx5+q/WsUikfKWuxAsxmfFAQeY5HUtVPNmfLHolRIrZXMog9S26glAdIfTyIT
+         mVvpVayO9HkOaH2nm5s8t3eQsRinwPXdNTknwczdIXCPeMw5mr4B/gteeOx6WkHufdgz
+         qU2556A2h1jibENKIO/71FPW6jKRiKHy4ulep2VjyNNkqgdNSECoOtPAGXnEOO5Wsqo8
+         TOZ5LoB9J8WzMvyJmoxQpFBOYH9oTgrAoJz2QSK88U0bCf0YWXHbxQVe/8FkFUT7JILp
+         T4sl6nab2rOZkBasiRRpgPXCNppK/1fgYL4EDWeaMG87YGoP5hn212+/F8lbkTNuxChN
+         JM/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775718574; x=1776323374;
+        d=1e100.net; s=20251104; t=1775718579; x=1776323379;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=aRkWk/2Hh+OCHZGnd+wQVaRKZXNjQt5krRcnC1pon0M=;
-        b=VLDCuzNft1Z8Ar9/3ArYLS5QZWAuztAHlu5zWFmUH4kEO001E6M6HijeiyNPrOCVTb
-         oB9d4JjUVR4RetAF12TD/LssjsWxk7iZTx6NCyUjgtp2Oc/AONYPcVYpN/m1wReTSZkx
-         SL7iIFJ4+MOQgw7l9pb9Ayr/nF60vNo8qgG0iL8KfnmmnCbnhD7F9hMdHq/+5JQOQxni
-         niHtxeSiLiaf0Up0F6GX4+Fc36C/ndI7GdNDACDFTBsCK60w5WKKfkeqTi7AjO2uNPYq
-         sXI606qQ+Lj4zMziJgkrDZyQc1Yd1Go6cnA7kCfMWOOI3O6nRooh5vExUb/JFcLfLcVl
-         7nMw==
-X-Gm-Message-State: AOJu0YziFaPLBuMLQIjiD6GXwdL0zN7fj/LLrmYjxdqGlePAdN34PaHn
-	iBwHf5EJyKdX/i8hzaAU2gbo1XRl7LENe3hal9qswOROoJu92/3HLd+tl83zJw==
-X-Gm-Gg: AeBDieufWQRuaii6m9Gb/zsUN5CUlTT+Gd1Xr+FF1Lk4JdTujv7ie2/wjjzU3nAQXoJ
-	QUdbNNYDtZ69imCMiW0YukeYOKA0vJhgECAyKk0pbOBa5MZdnPFey3Nu+0nFlPebnWBoZfv/9l2
-	egsWgwy6/lK9gfKR3PgNxrLXxP04BG6joazHCxo/QaFcKglEyQcNmANTIMbQk5OtQYoLVes6p0r
-	PdVI5Y9Y4Oxog2rIPFMbAOf9d7htpD1VasYdLhiUQMr82SfPq2BlqTj2B8nk3S/+PxOzuHlqhFA
-	mvcU++o8vAMlIAvvnb/ZGcyeqOqy+8z26yHci00QG5I6sMWr0nUKkDTFTKEvxiiGnsCtHmQp7X6
-	kgyJbNuWfPqJIKxGtNkk5U3/CNZz/Vo/qwJrn/oFAMbGurRspGXLVeDpBYoRFnW8yVswrPJpFx3
-	/P6g6+0hUjkFOdEecda80x6mqpOAy1dhALCh8=
-X-Received: by 2002:a05:6a00:2d86:b0:82c:e775:d430 with SMTP id d2e1a72fcca58-82dd8a9203cmr2500679b3a.28.1775718574430;
-        Thu, 09 Apr 2026 00:09:34 -0700 (PDT)
+        bh=phBGia17fX3Di/1P+4br101Fqk6Up2noLFZKO0XKHDs=;
+        b=qI2LrZjxWbce5CEjidpZkTfVudtREVj9wN/Wy7UxTdXaZZR68Z4uSuKZYWO2dF9edX
+         2yu4+3bq+aTfl8xEb9cFGp+WC3CUcjl/Ju6gKi27HDO+DRh/1OXTT/HQ69sUjStC+Daj
+         g5ZrsJOisz8yG5psYt7XQZujbYptyhXVvXSItoL75wD3dwi/A4K9VsKXdD26R6TjNuWM
+         vKE+jgcNxSiKIePHuc14II3FVzQdks+4friueak2wfI6g0C+yHJFlY1E2GbPlcUHjc4j
+         GrMSV4nnHbmAW5i7bNjX9Pq2nCbLKV1Dxws3fEYZ6EgB9yc4ViX64wctWxJoZ2iZaJMO
+         DJ/g==
+X-Gm-Message-State: AOJu0YyBqJZPbJJgledb+Cj4aYQRE4uo94NGATC5AwCrNfT6UBi6xGcN
+	V76fCsTIQ4KaxsndQsn3kkmy/GgQEq9OS7RpySwBFgWs24skcultXpiQT8+M6w==
+X-Gm-Gg: AeBDiesxrl/Ep4EQPZsyzRL8+qvCwHjXTzGDEoITV5yi+GRI6TXwjCNqHgY2EKLmZMq
+	5oWGKeVB8/0+ufUKNcLy6RGoi8cvIUx6BvG60b6ND6PpACpZkuuISrX0V7b+2USCffo00fshi1u
+	0SFYHpyHuhLlpMdP37JduSezq6C8KYGWF/hdJjXfV95uixOobrG3RT04lc8EhYalj2osv5RF16r
+	ewFDc5cUWwkXAbvoZSE3JQa1LEWlbH1r7nm9aKQvUdu3UeyeJQ9v2QMfcp9H1JT1hNm09rFEeTy
+	bmFBd5uyFGb75AILd0J1hKNF6pyDZejkHaLEBNyweKb9WgN1b2ATB+PdXNSJs1HVg/omWf18Bgc
+	MQI+IU69bUKmXkTTqiIQ2UdMu+KAhp/DUovWRKTu4mThxAFGG4tGNu3qyANHLYGETi5idfuzxs3
+	gOEO42YEdDIPQ59is4LwhDZD8KWQQ7VeI2rFc=
+X-Received: by 2002:a05:6a00:888d:10b0:82a:1c99:dce0 with SMTP id d2e1a72fcca58-82dd8a1dc36mr1648592b3a.2.1775718579341;
+        Thu, 09 Apr 2026 00:09:39 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.51])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82cf9b21c92sm24764936b3a.11.2026.04.09.00.09.32
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82cf9b21c92sm24764936b3a.11.2026.04.09.00.09.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2026 00:09:34 -0700 (PDT)
+        Thu, 09 Apr 2026 00:09:38 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 3/22] freerdp3: fix CVE-2026-33952
-Date: Thu,  9 Apr 2026 19:09:00 +1200
-Message-ID: <20260409070919.3968586-3-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 5/22] freerdp3: fix CVE-2026-24491
+Date: Thu,  9 Apr 2026 19:09:02 +1200
+Message-ID: <20260409070919.3968586-5-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260409070919.3968586-1-ankur.tyagi85@gmail.com>
 References: <20260409070919.3968586-1-ankur.tyagi85@gmail.com>
@@ -67,72 +67,86 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 07:09:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126125
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126127
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33952
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-24491
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2026-33952.patch     | 38 +++++++++++++++++++
+ .../freerdp/freerdp3/CVE-2026-24491.patch     | 52 +++++++++++++++++++
  .../recipes-support/freerdp/freerdp3_3.4.0.bb |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-33952.patch
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24491.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-33952.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-33952.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24491.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24491.patch
 new file mode 100644
-index 0000000000..925843f6b5
+index 0000000000..958d030bfd
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-33952.patch
-@@ -0,0 +1,38 @@
-+From 30e05bdaf4096decf4ce0b1c448cd03c6786323b Mon Sep 17 00:00:00 2001
-+From: Armin Novak <armin.novak@thincast.com>
-+Date: Wed, 25 Mar 2026 09:04:43 +0100
-+Subject: [PATCH] [core,gateway] Check rpcconn_common_hdr_t::auth_length is
-+ valid
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24491.patch
+@@ -0,0 +1,52 @@
++From ef948ef4659f59c10a71083fa8cb5d5da77e94a9 Mon Sep 17 00:00:00 2001
++From: akallabeth <akallabeth@posteo.net>
++Date: Mon, 26 Jan 2026 10:06:29 +0100
++Subject: [PATCH] [channels,drdynvc] reset channel_callback before close
 +
-+Do sanity checks for rpcconn_common_hdr_t::auth_length read from
-+network, abort if the value is out of range.
++The channel_callback usually frees up the memory of the callback. To
++ensure that there is no access to any of the data structures in it
++invalidate the pointer used to access it before a free.
 +
-+(cherry picked from commit 4ac0b6467d371a1ad47c1f751c5b305e4c068adb)
-+
-+CVE: CVE-2026-33952
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/4ac0b6467d371a1ad47c1f751c5b305e4c068adb]
++CVE: CVE-2026-24491
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/e02e052f6692550e539d10f99de9c35a23492db2]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ libfreerdp/core/gateway/rts.c | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
++ channels/drdynvc/client/drdynvc_main.c | 6 ++----
++ 1 file changed, 2 insertions(+), 4 deletions(-)
 +
-+diff --git a/libfreerdp/core/gateway/rts.c b/libfreerdp/core/gateway/rts.c
-+index 2ba757815..9702582da 100644
-+--- a/libfreerdp/core/gateway/rts.c
-++++ b/libfreerdp/core/gateway/rts.c
-+@@ -253,6 +253,15 @@ BOOL rts_read_common_pdu_header(wStream* s, rpcconn_common_hdr_t* header, BOOL i
-+ 			          header->frag_length, sizeof(rpcconn_common_hdr_t));
-+ 		return FALSE;
-+ 	}
-++	if (header->auth_length > header->frag_length - 8ull)
-++	{
-++		if (!ignoreErrors)
-++			WLog_WARN(TAG,
-++			          "Invalid header->auth_length(%" PRIu16 ") > header->frag_length(%" PRIu16
-++			          ") - 8ull",
-++			          header->frag_length, header->auth_length);
-++		return FALSE;
-++	}
++diff --git a/channels/drdynvc/client/drdynvc_main.c b/channels/drdynvc/client/drdynvc_main.c
++index 0b85c0fe3..64c83333a 100644
++--- a/channels/drdynvc/client/drdynvc_main.c
+++++ b/channels/drdynvc/client/drdynvc_main.c
++@@ -485,14 +485,13 @@ static UINT dvcman_channel_close(DVCMAN_CHANNEL* channel, BOOL perRequest, BOOL
++ 			channel->state = DVC_CHANNEL_CLOSED;
 + 
-+ 	if (!ignoreErrors)
++ 			IWTSVirtualChannelCallback* cb = channel->channel_callback;
+++			channel->channel_callback = NULL;
++ 			if (cb)
++ 			{
++ 				check_open_close_receive(channel);
++ 				IFCALL(cb->OnClose, cb);
++ 			}
++ 
++-			channel->channel_callback = NULL;
++-
++ 			if (channel->dvcman && channel->dvcman->drdynvc)
++ 			{
++ 				if (context)
++@@ -763,14 +762,13 @@ out:
++  */
++ static UINT dvcman_open_channel(drdynvcPlugin* drdynvc, DVCMAN_CHANNEL* channel)
++ {
++-	IWTSVirtualChannelCallback* pCallback = NULL;
++ 	UINT error = CHANNEL_RC_OK;
++ 
++ 	WINPR_ASSERT(drdynvc);
++ 	WINPR_ASSERT(channel);
++ 	if (channel->state == DVC_CHANNEL_RUNNING)
 + 	{
++-		pCallback = channel->channel_callback;
+++		IWTSVirtualChannelCallback* pCallback = channel->channel_callback;
++ 
++ 		if (pCallback->OnOpen)
++ 		{
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-index f9e6f64e2f..18795551ec 100644
+index c570e5fb7e..e66a4ed4da 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
-            file://CVE-2024-32662.patch \
-            file://CVE-2025-4478.patch \
+@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
             file://CVE-2026-25941.patch \
-+           file://CVE-2026-33952.patch \
+            file://CVE-2026-33952.patch \
+            file://CVE-2026-23948.patch \
++           file://CVE-2026-24491.patch \
             "
  
  S = "${WORKDIR}/git"
