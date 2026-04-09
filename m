@@ -1,147 +1,299 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 970BAE98FD2
-	for <webhook@archiver.kernel.org>; Thu,  9 Apr 2026 16:20:58 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.132167.1775741346499421241
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51ABEF364AF
+	for <webhook@archiver.kernel.org>; Thu,  9 Apr 2026 18:22:09 +0000 (UTC)
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.139248.1775758919257071124
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2026 06:29:06 -0700
+ Thu, 09 Apr 2026 11:21:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=ipeBxnsD;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=RDG0JOGj;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: bartosz.golaszewski@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 639CGnEZ3712984
-	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Apr 2026 12:33:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=Gp1H11EEaqb
-	HwkrgHVIi/MHprSa6WitY1Fbh7D/FZSY=; b=ipeBxnsDOh8gr50BIbMdjEFZyew
-	cfrCoW9Jo8aQiChTL2BuG+Ud2nQP48f6IjvqiIGH4lhAIjkmwuAwRL5uRM+WnAfi
-	djQm8C5EUuECSVNEje8NPLDB+HQ8mlleIG5TpSd1vJcBVsLxsecXzrEVI8Lgj1tr
-	CIzdlW0s+3NmqHpwpVgDyl9PotvcmTbM66tyRfeSjeFzDNioNRO1ngLH5hG3X0V7
-	ZUjS/Ymwu4vCkcnSsRv+K8ZnxlFQ3NfII9AFEj0A5A17WHiJK1shY4u3QpeJuo+m
-	xgHOtGFmsV540ifOxMBpsUChsjcdqkg/fu5T27bQNXsgSIIv6xLrT33MJwg==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ddt74bykj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 12:33:01 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-50d8e8c47a3so24271521cf.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 05:33:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Dc7Ugbtv;
+ spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-65003f40a22so1099884d50.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 11:21:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1775758918; cv=none;
+        d=google.com; s=arc-20240605;
+        b=MgyTTFbmC6czaT0/NOrYK0gucAcfsqrs+fBcRh2Ya20LMU0TTv2deCWaWL4ClKL3yW
+         ohg/hF6OfA4gNxo9RZukIqswcaW5zQ9jMPwBGeN4J1Xk9RldK1gPSJ5y5687CGVXm98A
+         C6ulDKSkCzE0WlvWBH0f4ng7qFQgUwURt0ud97BlLemDTBmznpcEoWrBOFdwLox+BRYc
+         7RIDgZE5MoUtAFs1CK0ZfPMlrmLQawWYPgmn2VA4W5ckSZqAhYa1aw+6N7cpoJ7pgEoU
+         w5RR+Iy6lfWFprLb50ckAQ5psupA/8di3Ts7+M3FIQAuXTRi5M4t+w4PX3X8DBe0pcV6
+         /yvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=tQyZ5mEvQqUDUKVKD9HJZprsIFtSw02z08QukR99pHo=;
+        fh=7oI9jBHxrWCncumEnzG8BN56QlQkoa9xJ4TUQ95bJdU=;
+        b=QOEiv5OXqvZs1J1fBvw30KZA6RpEziEYeYYihMl9wBN1w7Z0bD1mQUW2wJdNKZj1fy
+         RzqHGlDy1WL9FmHwhfwwJY4SLacOmSkPGJ9vAwBtxxxr4XwvIoY5iLyMFLqOF0gJLWgY
+         pnXuoGt8TQ9re58lzjZLG7Z9bF7hlgAlXVfXCPcBZveD6o4nFVxih+lfzK9WlejU0ZIt
+         NYOkK1utGUW/boYMur/g7Xl0FnWwCeuZDEgACkTdpC4yZDqt5V9eTc1losf/wjrRN7L4
+         KqOa95QtTpaRU8w8ywavvC4kdqVh8gXcYe1feMHsKJb3Fj0aiVWFLrKzo6Le6ecJBPW2
+         kBlA==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1775737981; x=1776342781; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Gp1H11EEaqbHwkrgHVIi/MHprSa6WitY1Fbh7D/FZSY=;
-        b=RDG0JOGjPelC1VS8qcszlb4ZRRT2xY9vcpejoTlxlybh80qcr2g66LqmlYXjae9DRZ
-         dG09binDj/mr3kqCoPMc3ONLH/G8xxJuP9RRx9zFeB8ZpSfh2w/yR49UbXfjB7xuzNSf
-         oSbV08Db4pQoHo5Za1HrotoCmnuevJGLCKVA2ZvDcv+a/aquuIYJt4kyRwa2IArovsPO
-         9VGohSRQHKZI5HkMAXy75swdkviTA/KSdsamt1nQ/CjLKOwnADlY0Xbu8ZAsXDP1kHrL
-         gmd+QmurL8uIOUxsNPO8U3d/dgNBeHksvL35uGHgSrYYNfdEpRhxyg0zgf0F8hdDGIQi
-         6gTQ==
+        d=gmail.com; s=20251104; t=1775758918; x=1776363718; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=tQyZ5mEvQqUDUKVKD9HJZprsIFtSw02z08QukR99pHo=;
+        b=Dc7UgbtvUo8M4vxXuknzZzr40ndDL7P1UrP8nAq3So3jxkpKe8MKevASlWOAGLzUQY
+         teEYkxUzBuuBBXQ2T3vGj/s4VdeG/30ayQTadhfpmz+owBMPO6cbXeRZ50trMnJKSjEC
+         U1Ga3EdQ1sLNNZUWyxjXTxyDyk2lO4I7epgdj2IXSYKv0roo5UeX8IE374Pfkd72i8kU
+         UlBSyVGo+OSQwalnFyygHooJBve3FGV+ShphBuRLOAZjtmCV6N/6Lfl+nzEPApbUweD5
+         0eJuhOnm7qgvik0p30t7RpmcaTh1D83zSRjVPE9AZOI27NzMbTF7TGJ4SxE6HPLLC2lr
+         puhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775737981; x=1776342781;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Gp1H11EEaqbHwkrgHVIi/MHprSa6WitY1Fbh7D/FZSY=;
-        b=VG81Olp562CP4/ezgr6I7F/S+ihWbXN30Apqr11eLKgTtJJ30h+1OUcp2T0MiWJdfP
-         FkO/uGqeCV5TtgRorbNP+SHLLLxiGxwUEDjjKNFjwlZrFeGBtjmNBAunHz7d+GoMJxri
-         kQnPAz0QXKU9Whke7rkSegkM09+iBdj7WgnLnk8tu1+oULmQZYSEDDkGvv0f5uhzS+s0
-         VfRTuZ3kSOSSfdfnbIWMaJQpOWWjV9Oo2KT7LZC4/kumpdtk2A/4ASThlFWuzWeOyrJ8
-         9F9iflEsD9ClPzChw/RV5BPPESwg9fgZCOISqY+qXj2rUhWFs/np9PgUPOl3B4jSiCVu
-         ndew==
-X-Forwarded-Encrypted: i=1; AJvYcCWj4e9OA8rjjRCxGiiGiJXUHQJ4ZnsnTttUhR/YuZGVedVnMzrbIt7c7erdSU5ME+ift+7it0/wsfq0MwiPPkEH1yw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yxr8Xe+MuPhn8xHOjJ+IUGFXMkwxqcpH7x3ElPeC8JsJapU+N6H
-	Hlbet69WMrns0jSC8JKD7LuswIjeXsQVgSDu4tFoXuc0A+PM7/oV4PdBN05Nav8wyag6l6+1Hea
-	174DIIaRnP2/LGOD5orogKNeNMYcHo1Zc8WrFEcyQCd7kNhhPYtjDt87q/4pE9wHrdK4n+r1tXP
-	XLILMolK3/
-X-Gm-Gg: AeBDietWF8F4XgXyVlATvQeb+MEItIK3TzzOqMxKhX280o+aXWdEKGItHO4t//lvemR
-	0L27POnafk+eAPDDZrMYyXJdQ1i/JVS/VJDEhlKp0jGvg8lMBYMsYiOCBz2/WIlNiK1aVe1A59g
-	50vYMSYynpLj1SKKONdx1XycSLQ5nSS4iZR3VamgcJmWtK0ev8+/vldWbmwATzQyXihmswfek9Q
-	RuS5di/zQzSyn8YrtQyIEi3tnWUKnJd52nZ7e7H8LNuefCholS0vTpL4vU5Nj+nuozUFosBA9Mq
-	OUoYxv+2V2KZpMV4SqI6ZNlyC77yj1TPdBy9koBs/DzKxf1WN34Chp7zK9clAOHfyuLldJ0sw6h
-	eFmxjsJIIBtBvVUXkwtUVJ5tfTZxMsV1XOW//phU9BoSTf12eeQ==
-X-Received: by 2002:a05:622a:4c8c:b0:50d:82bc:d2b4 with SMTP id d75a77b69052e-50d82bcd411mr280979741cf.25.1775737980971;
-        Thu, 09 Apr 2026 05:33:00 -0700 (PDT)
-X-Received: by 2002:a05:622a:4c8c:b0:50d:82bc:d2b4 with SMTP id d75a77b69052e-50d82bcd411mr280979271cf.25.1775737980530;
-        Thu, 09 Apr 2026 05:33:00 -0700 (PDT)
-Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:2346:762:14f4:8b01])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488cd17bdefsm22347825e9.23.2026.04.09.05.32.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2026 05:32:59 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
-        openembedded-devel@lists.openembedded.org
-Cc: brgl@kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: [meta-python][PATCH 2/2] python3-gpiod: update to v2.4.2
-Date: Thu,  9 Apr 2026 14:32:52 +0200
-Message-ID: <20260409123253.106920-2-bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260409123253.106920-1-bartosz.golaszewski@oss.qualcomm.com>
-References: <20260409123253.106920-1-bartosz.golaszewski@oss.qualcomm.com>
+        d=1e100.net; s=20251104; t=1775758918; x=1776363718;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tQyZ5mEvQqUDUKVKD9HJZprsIFtSw02z08QukR99pHo=;
+        b=UTMlhWL9byyTm409H1qY95eDXmc+fVn01T4HwQpzkfcC5xa+edpYhmk0FQTcvXj4oN
+         3El6Rw4AMLrFAgqoABVsDHPFOKZF/M/wwIHzbKPcqgIKYRtwPccUh5BnfOHeddQIOEgG
+         Rrhvq2B0JTv78oijdt8mPokmy7x/vjfXUm8n8L4Bex+oUM1StUTJe9E+a8FpmqkCy3sT
+         y3+T3FY9jFtiTofpgLMpmmbnGUofgswuid/XgL+/OYE6LHIt63xBQ7AkO+E/Mc0FXBhu
+         4e9Iyjy0HmRCqdEhtG7SJQ4oNAXMxKC2J5eMVadCScP3sfXNX/fCitNvZDCvLVRP5/HT
+         nH2w==
+X-Gm-Message-State: AOJu0YyCit/0yPz6aeKGPK+zKXWPFg4fDqpBBka2y6CKANSM/GklKBuT
+	xHx/5YHKlZ0TiAisjz6NpHlk68fw5GGY4NLsoDjZL8H12NR1ThW4y4Wi91D+oqZUhns8B2NL0d4
+	i/0pDHmLuuPY1pUr2CfxWIJJBFBe1aMjvwQ==
+X-Gm-Gg: AeBDiev7xprpqMYOcxErauJsQAExwHkhi7eTa8XI7g1rYYTWpFP5yEo9dF7NMoqnkWZ
+	KN5lFyfTI/aoNvCOA7h7FFbFyOPmduc4DViuEoplUHUBKljFTsc3EcYhYAHk3SfSNfK027/hkt+
+	Y5Ms+aO+1gQVvWVxnG+FpReM+6Gy6Zzke9XSK8HyAKx8zTHQ9LzDSxz69v1Khdhoty8EOegImaC
+	BoZ3wN9dRpJ6HsvjFspfFTm+Dn4oPeB9JuH41HvGK+OrqBf1zCpeIlQZgH3TLzPtrhrQpBci8EK
+	ePEigKLFNWG5YLw57He+smHou9yXtJmzzGVGNhHr/RGz+a3CUCyzbtk5FehGmNgkDQ630PU0Y8g
+	71bcgsgSUnFt0bRBjfJS92Ef1+kc=
+X-Received: by 2002:a05:690e:42c1:b0:650:146c:8784 with SMTP id
+ 956f58d0204a3-65198b9fa03mr5204d50.54.1775758918213; Thu, 09 Apr 2026
+ 11:21:58 -0700 (PDT)
 MIME-Version: 1.0
-X-Authority-Analysis: v=2.4 cv=TL51jVla c=1 sm=1 tr=0 ts=69d79c7e cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=2kuNKHlEyhQFlJa_gtUA:9
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: dpAMVhI59Zs3QE8CNkq6uyd0f4bxbW9C
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDA5MDExMyBTYWx0ZWRfXxkELwoqCvqes
- iU+1g1//0z1TwFVHeDfI/zVTkwsr6ZtsDCLX/3pgseaHtK8yE4aQahYiTa7vW7LpbAz2Dl9CwzS
- 2z3htt56TsVSLbciJ9FLtUgckhn+jP/2WxACVpS9qy5XEKMsrlChU8GGs5HKmiKBlPrOgLABh9L
- 1rJAuIx3r9pyX2yBe+d2Jq5tNxDOOV3+yNyTO5xrZY+BjFYPd10G4xPPg2UhTMhwCTZa25AjWHL
- k4YTu/9tyUuBUrAHrOMDQ29smDyQ94DGK8t4RwbxLzJ65U2KaFwPW94W3GGio8oP8gMljLjBt4j
- AL8PWpyU/b5liYqB+dApPA2HqiX50xf+NyV9AVo+O6ZKR3d/Y/qgWTxiMu+kUhtHPtzxlvW5TJp
- 6iLYaXsImXZPgx0RDjNgBCtRibAX9IMIEyPy8eYoAdOhUh31RTkzYQkksLT0qMb/GpILXiMeq70
- W7ugi93K+CyHUKJcnMQ==
-X-Proofpoint-GUID: dpAMVhI59Zs3QE8CNkq6uyd0f4bxbW9C
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-09_03,2026-04-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 priorityscore=1501 clxscore=1015 bulkscore=0 adultscore=0
- spamscore=0 suspectscore=0 impostorscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604090113
-Content-Transfer-Encoding: 8bit
+References: <20260409103446.3079100-1-peng.zhang1.cn@windriver.com>
+In-Reply-To: <20260409103446.3079100-1-peng.zhang1.cn@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 9 Apr 2026 11:21:30 -0700
+X-Gm-Features: AQROBzD-vukcreIDkmfNhq1GZVx6XUAL4GMKHJXWNBNmrVLCv0vbbtUGhQYUsFQ
+Message-ID: <CAMKF1sqPxJ7dAP-pWc6tR3wozBFWp3+Av0w11basE146oeYV1Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pytest-codspeed: upgrade 3.0.0
+ -> 4.3.0
+To: peng.zhang1.cn@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000086e57e064f0b17ac"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 16:20:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126200
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 18:22:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126202
 
-Bug-fix release addressing a buffer overflow bug discovered during an
-AI-augmented security audit as well as another minor issue with
-unnecessarily duplicated code.
+--00000000000086e57e064f0b17ac
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
----
- .../python/{python3-gpiod_2.4.1.bb => python3-gpiod_2.4.2.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-gpiod_2.4.1.bb => python3-gpiod_2.4.2.bb} (92%)
+On Thu, Apr 9, 2026 at 3:35=E2=80=AFAM Zhang, Peng (Paul) (CN) via
+lists.openembedded.org <peng.zhang1.cn=3Dwindriver.com@lists.openembedded.o=
+rg>
+wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.4.2.bb
-similarity index 92%
-rename from meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-gpiod_2.4.2.bb
-index 61a3fb929e..87765c2482 100644
---- a/meta-python/recipes-devtools/python/python3-gpiod_2.4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-gpiod_2.4.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4b54a1fd55a448865a0b32d41598759d"
- 
- SRC_URI += "file://run-ptest"
- 
--SRC_URI[sha256sum] = "d29a1e8b2a065f7ed82f00a96009bc1486fc705bb2ad25820a8ae962ec6d7688"
-+SRC_URI[sha256sum] = "602aae17ff365bb8e2a30ce65c6bbf2d8e7a7e64bf016e82e4fd4c730ef69ab7"
- 
- inherit python_setuptools_build_meta python_pep517 ptest pypi
- 
--- 
-2.47.3
+> From: Zhang Peng <peng.zhang1.cn@windriver.com>
+>
+> Add python3-cffi-native to DEPENDS since v4.0.0 introduced
+> CodSpeedHQ/instrument-hooks which uses cffi FFI bindings at
+> build time.
+>
+> Changelog:
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.3.0
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.2.0
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.1.1
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.1.0
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.0.0
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.2.0
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.2
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.1
+> https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.0
+>
+> Signed-off-by: Zhang Peng <peng.zhang1.cn@windriver.com>
+> ---
+>  ...est-codspeed_3.0.0.bb =3D> python3-pytest-codspeed_4.3.0.bb} | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-python/recipes-devtools/python/{
+> python3-pytest-codspeed_3.0.0.bb =3D> python3-pytest-codspeed_4.3.0.bb}
+> (72%)
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-pytest-codspeed_3.0.0.bb b/meta-python/recipes-devtools/python/
+> python3-pytest-codspeed_4.3.0.bb
+> similarity index 72%
+> rename from meta-python/recipes-devtools/python/
+> python3-pytest-codspeed_3.0.0.bb
+> rename to meta-python/recipes-devtools/python/
+> python3-pytest-codspeed_4.3.0.bb
+> index 0789e9f548..05c05e1048 100644
+> --- a/meta-python/recipes-devtools/python/python3-pytest-codspeed_3.0.0.b=
+b
+> +++ b/meta-python/recipes-devtools/python/python3-pytest-codspeed_4.3.0.b=
+b
+> @@ -3,8 +3,8 @@ HOMEPAGE =3D "https://codspeed.io/"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2856cbe664e8843cd4fd4c1d1d85c=
+2c3"
+>
+> -DEPENDS =3D "python3-hatchling-native"
+> -SRC_URI[sha256sum] =3D
+> "c5b80100ea32dd44079bb2db298288763eb8fe859eafa1650a8711bd2c32fd06"
+> +DEPENDS =3D "python3-hatchling-native python3-cffi-native"
+>
 
+its inheriting python_hatchling, which should automatically add
+python3-hatchling-native to DEPENDS. Remove
+it here.
+
+
+> +SRC_URI[sha256sum] =3D
+> "5230d9d65f39063a313ed1820df775166227ec5c20a1122968f85653d5efee48"
+>
+>  inherit pypi python_hatchling
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#126187):
+> https://lists.openembedded.org/g/openembedded-devel/message/126187
+> Mute This Topic: https://lists.openembedded.org/mt/118739978/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000086e57e064f0b17ac
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Apr 9, =
+2026 at 3:35=E2=80=AFAM Zhang, Peng (Paul) (CN) via <a href=3D"http://lists=
+.openembedded.org">lists.openembedded.org</a> &lt;<a href=3D"http://peng.zh=
+ang1.cn">peng.zhang1.cn</a>=3D<a href=3D"mailto:windriver.com@lists.openemb=
+edded.org">windriver.com@lists.openembedded.org</a>&gt; wrote:<br></div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">From: Zhang Peng &lt;<a href=
+=3D"mailto:peng.zhang1.cn@windriver.com" target=3D"_blank">peng.zhang1.cn@w=
+indriver.com</a>&gt;<br>
+<br>
+Add python3-cffi-native to DEPENDS since v4.0.0 introduced<br>
+CodSpeedHQ/instrument-hooks which uses cffi FFI bindings at<br>
+build time.<br>
+<br>
+Changelog:<br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.3.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v4.3.0</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.2.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v4.2.0</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.1.=
+1" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v4.1.1</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.1.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v4.1.0</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v4.0.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v4.0.0</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.2.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v3.2.0</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.=
+2" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v3.1.2</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.=
+1" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v3.1.1</a><br>
+<a href=3D"https://github.com/CodSpeedHQ/pytest-codspeed/releases/tag/v3.1.=
+0" rel=3D"noreferrer" target=3D"_blank">https://github.com/CodSpeedHQ/pytes=
+t-codspeed/releases/tag/v3.1.0</a><br>
+<br>
+Signed-off-by: Zhang Peng &lt;<a href=3D"mailto:peng.zhang1.cn@windriver.co=
+m" target=3D"_blank">peng.zhang1.cn@windriver.com</a>&gt;<br>
+---<br>
+=C2=A0...<a href=3D"http://est-codspeed_3.0.0.bb" rel=3D"noreferrer" target=
+=3D"_blank">est-codspeed_3.0.0.bb</a> =3D&gt; <a href=3D"http://python3-pyt=
+est-codspeed_4.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytest-=
+codspeed_4.3.0.bb</a>} | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-pytest-codspeed_3.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyt=
+est-codspeed_3.0.0.bb</a> =3D&gt; <a href=3D"http://python3-pytest-codspeed=
+_4.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytest-codspeed_4.3=
+.0.bb</a>} (72%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pytest-codspeed_3.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pyte=
+st-codspeed_3.0.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"h=
+ttp://python3-pytest-codspeed_4.3.0.bb" rel=3D"noreferrer" target=3D"_blank=
+">python3-pytest-codspeed_4.3.0.bb</a><br>
+similarity index 72%<br>
+rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-p=
+ytest-codspeed_3.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytes=
+t-codspeed_3.0.0.bb</a><br>
+rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-pyt=
+est-codspeed_4.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytest-=
+codspeed_4.3.0.bb</a><br>
+index 0789e9f548..05c05e1048 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pytest-=
+codspeed_3.0.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytest-cods=
+peed_3.0.0.bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pytest-=
+codspeed_4.3.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-pytest-cods=
+peed_4.3.0.bb</a><br>
+@@ -3,8 +3,8 @@ HOMEPAGE =3D &quot;<a href=3D"https://codspeed.io/" rel=3D"=
+noreferrer" target=3D"_blank">https://codspeed.io/</a>&quot;<br>
+=C2=A0LICENSE =3D &quot;MIT&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D2856cbe664e8843cd4fd4=
+c1d1d85c2c3&quot;<br>
+<br>
+-DEPENDS =3D &quot;python3-hatchling-native&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;c5b80100ea32dd44079bb2db298288763eb8fe859eafa=
+1650a8711bd2c32fd06&quot;<br>
++DEPENDS =3D &quot;python3-hatchling-native python3-cffi-native&quot;<br></=
+blockquote><div><br></div><div>its inheriting python_hatchling, which shoul=
+d automatically add python3-hatchling-native to DEPENDS. Remove</div><div>i=
+t here.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">
++SRC_URI[sha256sum] =3D &quot;5230d9d65f39063a313ed1820df775166227ec5c20a11=
+22968f85653d5efee48&quot;<br>
+<br>
+=C2=A0inherit pypi python_hatchling<br>
+<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#126187): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/126187" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/126187</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118739978/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/118739978/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000086e57e064f0b17ac--
 
