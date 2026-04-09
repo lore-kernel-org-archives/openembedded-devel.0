@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3EC4E9DE51
-	for <webhook@archiver.kernel.org>; Thu,  9 Apr 2026 07:10:02 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.127040.1775718597606306572
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4C8DE9DE50
+	for <webhook@archiver.kernel.org>; Thu,  9 Apr 2026 07:10:12 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.127047.1775718605538404502
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2026 00:09:57 -0700
+ Thu, 09 Apr 2026 00:10:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=LB5aZnRl;
- spf=pass (domain: gmail.com, ip: 209.85.210.172, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-82cef263bedso295883b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 00:09:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=m/h+Gk6A;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-82ce49785a0so271277b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 00:10:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775718597; x=1776323397; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1775718605; x=1776323405; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jaFA53NeL6VCnUtNCyk6g5RbE0HHz7d6jRLUI8x43Kc=;
-        b=LB5aZnRlyTkDgBDsxVGKoKoBMWdcICQFDIa4IImCU8WX7CMZz53K/1X6A4Je7W95zu
-         Y2O+RvPM3kYn8RqXV482Dx58M1p1Z96/0fsfsPJWk6uIiFsoWmuR6SQOeAw7PMEe+6Ea
-         hs5L2YYTWCH9ICpw0YB4dTs/r8Z1Sbo10ttMivAwdWhOSwt6YpYl5A1SxBKXEB8Ak6AG
-         GW3rWX05q2L7DwHlhG8SFy+x8mhX/f4OFeo7ekK298AfMp08Njv/KAzGUU+sD+oz/jn3
-         /X9juksZ1kQcI0UdUZu2x3jJkfQ9xbJ9/fgAtd3zJHgFgxAqzwZYldgKxJ9Y/PaUbLpv
-         vwCw==
+        bh=73q0c6VlcWOO0PmEZx+/mZLEDrP9nodvH+yPDRS92JU=;
+        b=m/h+Gk6AM8NLgeimdR828gqR2d/DgzF/7GOpn687kEq6+FdsUn623GLQZj9EhmYEhs
+         ipEW1DGsUc9PPFRqa1Lxk6HPx02blHcYx+qVZsBZbL8q4Grv1WJ+gBWbUzrnHrnuILJA
+         eb7zlRcPXrCRgEYd/0aTJexgQj8gh3lkllK8e7ILzvzWldaVB8pk16GpmIB0v65izppQ
+         OnWf55+8VN0akdildBMrdvcFSkWhzdGWMGC2poV+NwIZa6y28XakRtZDXWk6Qi3Pmy0b
+         zKLa+iz9QRKRS1Bi2gVtfB6nmPq+IH0nEofQ33he9rhk0lX/6QtZilfNV0sTTUy2ufSC
+         g7Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775718597; x=1776323397;
+        d=1e100.net; s=20251104; t=1775718605; x=1776323405;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=jaFA53NeL6VCnUtNCyk6g5RbE0HHz7d6jRLUI8x43Kc=;
-        b=BNhyq8twAQT6XgiVLjUrAHQF95HZq/o02Ce/6h1oj7fzjxBQtCH0vC0DxaMFNFO1TU
-         JP4Wv4up3eC2eNJzQcpeolKOZLNpSUDT+wfqsrZhG9ywjFHG5pjJHuU4fcWfOUwfuuuP
-         phAS5zUtdFcNsVR8FkLeIM8jBLBunjV4zLVsPz2Y0BKynduBzHJQd1jxgkl/ELStRjEH
-         ZCawFBOph1lZZKs5bNeSU+v8XPxUIHBRlVyB1WzrBjlx49tS/idHIrorRnwUnPX0jGbH
-         YRcJ+gLD4yp7uhOlK7zhXCHlaVds08Lhw4VbQOYdQaZE5t3dQe/zfoI56mhRuVHUfPWZ
-         jxPg==
-X-Gm-Message-State: AOJu0YxYmhwEVFGEsZ4GtYnTVjN0BKpbQvaFYja2NF9DCQzmM1ogt2Hl
-	+R4HD0KJDpV0LG/lxQNDiEP17+1yedgImze19DI+LeTC/+nxgCL2C1JlRP+v2w==
-X-Gm-Gg: AeBDietE9dvzYUhFvhTz+eIRckLfjh4U0aMrMATaHYWM+QK0OfxLEUbAXdgO+O8vn0Y
-	mXhnnrLDYbn1QkBZMokmuZYM++Ss9fQPyZXMw/m+0JVHZCar8E+unibsj2YsZ1X5dO+VIF3xSmW
-	77wmh5rPMvPVv+RyDmFtHvG66nSIXr/aaKl/89kFbTN2MoCmw3aVXzgCEC3hZuLdYF//ZRWC3Lh
-	v5811LJxzz828vNSajsgQBESfWZzkl6u7ehSJiDoqQM4X0lAQyOEdm850kzlR0gk2PESCr6kbYk
-	8Tb95KnfNmFhbYKqmKBbx4T4DL5I6RwjuROIF1/swVKNDuKeZ+VhRpH5gLq98X7q8oOvuURjm5P
-	1yNUfgaCqu3tQZb58qxKgedp0AnPLy/Lx4DFxX28A15a+rhmhLO9MTRGHc3CoaeACQU41xVC9sg
-	JS5egCWkW5uCz2oY0qNlaosQHh1aS5WVzO3gQ=
-X-Received: by 2002:a05:6a00:10c9:b0:827:2995:3b99 with SMTP id d2e1a72fcca58-82dd8a89b05mr2477208b3a.31.1775718596766;
-        Thu, 09 Apr 2026 00:09:56 -0700 (PDT)
+        bh=73q0c6VlcWOO0PmEZx+/mZLEDrP9nodvH+yPDRS92JU=;
+        b=nBSVaetMT2QqAMT87fEE5MGuEzXEqSx3Dsh/D6T90mGdcJxX7VKb6dKc/w5UR+f1le
+         oyWWg/VhyV9q5vfZcUNyHtQhMbxtCcY0kNGKFCntyz/KB2JYr0VGZ/QM8qHHNxAzNzLs
+         oY7enf3lkzTRjkcu3/KLCMbrTl0H3dhKgYiFLXr7439zTEK7+2pfB7WBk72PADOhBJro
+         AlhxPx3/cGerxCclIVGgJDtROk/h/gTwzqRjAdPcnYwaR6c/y2Y/LIb0yL0n6B7LcbaK
+         NkzjsrbzCAjAYlVM3YKOLym1MRrd4VKwWnsZ3mlMMScLg215ZY8fnIOxysMCL6byFH78
+         sl5g==
+X-Gm-Message-State: AOJu0YxX/BF/ZwZ/aOW2WJpndov3IRtaRElGEjR5Ro2Cb/CuU4Vwlrka
+	2YrPIMRDdV2FadMw97pc8UKR9kVKqK+TZOxzLhP3yNMxXCOm1DNUVYVeqZ1AhQ==
+X-Gm-Gg: AeBDievulO9iqO1gnlCLkfJWdLO1aggQB4LKKyjqF+AUarlvQ1z9AKN4UOu9yYPMUEB
+	49GrtOgSENFDGTigdHtuK7kd3VPZieTDDlTx6oCISryEV9HRhxI7hCy728FdzGcMuHmdlSWsBJU
+	qS+0IZQ8lUjLTB7h7KbRYXjQWgec39GO5IkxG73MzxaVh9g2BkyFc/zxFuNPs2WhdX4sUTUzP8D
+	aV+2jtBUHBNN4FKStU5+CxREyAHR5FSngMxAQ5E3lMiWm2wLBNPaSt24gB2pTB6+2ljBnslUivV
+	0UOju1Y7rDz4ydPbxKJFtPDwF6KMgAsXOEXS4MTwNa5+8OcR4rZl6efjB9zIJwIbGT3YH+Avob8
+	ZbKf7TLGlaqorfOLPUPD/ZGxCz5v1/0fKrUdIdpUT0z+yc1C8xRRcdhllAk103ZRmTvDszUvQoM
+	6Exj5VxU3K/rWG0kr2sCnZBllr21ezqFpuOUM=
+X-Received: by 2002:a05:6a00:18a4:b0:827:37ef:7322 with SMTP id d2e1a72fcca58-82d0da2afacmr24776629b3a.2.1775718604701;
+        Thu, 09 Apr 2026 00:10:04 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.51])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82cf9b21c92sm24764936b3a.11.2026.04.09.00.09.54
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-82cf9b21c92sm24764936b3a.11.2026.04.09.00.10.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2026 00:09:56 -0700 (PDT)
+        Thu, 09 Apr 2026 00:10:04 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 12/22] freerdp3: fix CVE-2026-24682
-Date: Thu,  9 Apr 2026 19:09:09 +1200
-Message-ID: <20260409070919.3968586-12-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 15/22] freerdp3: fix CVE-2026-29775
+Date: Thu,  9 Apr 2026 19:09:12 +1200
+Message-ID: <20260409070919.3968586-15-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260409070919.3968586-1-ankur.tyagi85@gmail.com>
 References: <20260409070919.3968586-1-ankur.tyagi85@gmail.com>
@@ -66,66 +66,65 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 07:10:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126134
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 07:10:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126137
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-24682
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-29775
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../freerdp/freerdp3/CVE-2026-24682.patch     | 31 +++++++++++++++++++
+ .../freerdp/freerdp3/CVE-2026-29775.patch     | 30 +++++++++++++++++++
  .../recipes-support/freerdp/freerdp3_3.4.0.bb |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24682.patch
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-29775.patch
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24682.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24682.patch
+diff --git a/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-29775.patch b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-29775.patch
 new file mode 100644
-index 0000000000..245c3e617c
+index 0000000000..584481e330
 --- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-24682.patch
-@@ -0,0 +1,31 @@
-+From 603f5b79dc142626baed8df6b9abb23d390dfc4e Mon Sep 17 00:00:00 2001
-+From: akallabeth <akallabeth@posteo.net>
-+Date: Mon, 26 Jan 2026 10:14:08 +0100
-+Subject: [PATCH] [channels,audin] fix audin_server_recv_formats cleanup
++++ b/meta-oe/recipes-support/freerdp/freerdp3/CVE-2026-29775.patch
+@@ -0,0 +1,30 @@
++From e4bfcb3197787e7af4246366b643c16de99f56a2 Mon Sep 17 00:00:00 2001
++From: Armin Novak <armin.novak@thincast.com>
++Date: Sat, 28 Feb 2026 11:38:55 +0100
++Subject: [PATCH] [cache,bitmap] overallocate bitmap cache
 +
-+(cherry picked from commit 1c5c74223179d425a1ce6dbbb6a3dd2a958b7aee)
++(cherry picked from commit ffad58fd2b329efd81a3239e9d7e3c927b8e503f)
 +
-+CVE: CVE-2026-24682
-+Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/1c5c74223179d425a1ce6dbbb6a3dd2a958b7aee]
++CVE: CVE-2026-29775
++Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/ffad58fd2b329efd81a3239e9d7e3c927b8e503f]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ channels/audin/server/audin.c | 6 +-----
-+ 1 file changed, 1 insertion(+), 5 deletions(-)
++ libfreerdp/cache/bitmap.c | 5 ++++-
++ 1 file changed, 4 insertions(+), 1 deletion(-)
 +
-+diff --git a/channels/audin/server/audin.c b/channels/audin/server/audin.c
-+index d67937ab7..f0bf96464 100644
-+--- a/channels/audin/server/audin.c
-++++ b/channels/audin/server/audin.c
-+@@ -128,11 +128,7 @@ static UINT audin_server_recv_formats(audin_server_context* context, wStream* s,
-+ 		AUDIO_FORMAT* format = &pdu.SoundFormats[i];
++diff --git a/libfreerdp/cache/bitmap.c b/libfreerdp/cache/bitmap.c
++index dd5ae1d71..0d694dd3f 100644
++--- a/libfreerdp/cache/bitmap.c
+++++ b/libfreerdp/cache/bitmap.c
++@@ -364,7 +364,10 @@ rdpBitmapCache* bitmap_cache_new(rdpContext* context)
++ 	const UINT32 BitmapCacheV2NumCells =
++ 	    freerdp_settings_get_uint32(settings, FreeRDP_BitmapCacheV2NumCells);
++ 	bitmapCache->context = context;
++-	bitmapCache->cells = (BITMAP_V2_CELL*)calloc(BitmapCacheV2NumCells, sizeof(BITMAP_V2_CELL));
+++
+++	/* overallocate by 1. older RDP servers do send a off by 1 cache index. */
+++	bitmapCache->cells =
+++	    (BITMAP_V2_CELL*)calloc(BitmapCacheV2NumCells + 1ull, sizeof(BITMAP_V2_CELL));
 + 
-+ 		if (!audio_format_read(s, format))
-+-		{
-+-			WLog_Print(audin->log, WLOG_ERROR, "Failed to read audio format");
-+-			audio_formats_free(pdu.SoundFormats, i + i);
-+-			return ERROR_INVALID_DATA;
-+-		}
-++			goto fail;
-+ 
-+ 		audio_format_print(audin->log, WLOG_DEBUG, format);
-+ 	}
++ 	if (!bitmapCache->cells)
++ 		goto fail;
 diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-index 43aabf797f..8e53c47103 100644
+index f92d824d66..e3d71ee854 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
-            file://CVE-2026-24679.patch \
-            file://CVE-2026-24680_CVE-2026-27950.patch \
-            file://CVE-2026-24681.patch \
-+           file://CVE-2026-24682.patch \
+@@ -32,6 +32,7 @@ SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https \
+            file://CVE-2026-24682.patch \
+            file://CVE-2026-24683.patch \
+            file://CVE-2026-29774.patch \
++           file://CVE-2026-29775.patch \
             "
  
  S = "${WORKDIR}/git"
