@@ -2,184 +2,2199 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AF79E98FDF
-	for <webhook@archiver.kernel.org>; Fri, 10 Apr 2026 06:53:23 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.150376.1775803295223432512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10795EA3C4A
+	for <webhook@archiver.kernel.org>; Fri, 10 Apr 2026 06:53:33 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.150621.1775803328888344531
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2026 23:41:35 -0700
+ Thu, 09 Apr 2026 23:42:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=bGZ/Vpg4;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: jackson.james9803@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2b24fede2acso9824915ad.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 23:41:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kTPhxTdR;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: jackson.james9803@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-45f053b7b90so969476b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 23:42:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775803294; x=1776408094; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Up53CPgqbAF5TVuh5n+wiMyfDrUQO1Czns/QS2i8AN8=;
-        b=bGZ/Vpg4RG8YsMI3XqEhJCr0TqPdU9g8BhMYivc9sfy2sUVzWQQ+rLC8JdnW77OHNP
-         P4Ckg5VxQl5IPt5QsmbFZ4h3NDh1mLbQSEuGlKPifn6PqcY9PY0+DAWy7Cia7mIkI0As
-         p0y9aR8a5ZEXiHW/1nsgjj9mTd/1HFjCtOqO1faqNfQsdBERtxkx1NsQ7vWyhQqYo+o8
-         iAZaCw0+VpLOv4E2lxvPeTG0Zb+g1DMOENWNZca++1OM8ssev0/61saihIRry1c/C6Si
-         lTEKqGT934PEYIMt3m2WP9eDPzrnwHw/TQL82zEBKdhA5Q5GdgbupOA+IYfcke2kUGnI
-         khHQ==
+        d=gmail.com; s=20251104; t=1775803328; x=1776408128; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=gQ5YGI4P0syrXHAiMTxw4larOf+RoCiSdFEnOmC6aNI=;
+        b=kTPhxTdRPUgrJ1n+9zVAPsupYyrdIp/KM3+Uy39a4faWbV7aJKj7FylVb4uXX8Vy+4
+         OvmHeVAX1RTYnxskbj5L43oZsbecNFPzFIqWuFmoDfNioSIy9GqRPPmVQ3hvnCzDNw1A
+         MEWUFE+oPNF/Tc3dlyEvEjB/CtGPEvHqbEuFC850tmYVPMIc6BiDFTJhvni8KlYOL6lY
+         +hKVedvqEEWRZPkClSn0IAV7O+Glm+Klaj3rvEsKuyqS0S1noFHlVJkWcI5I1ygRGVWp
+         fA0fUfu2TPZdrc1Vk/lHWZ/rWVGXWYKs2wwSHVTG/dcbGT1+1qJg74hWOggaUpT1MkF0
+         LpMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775803294; x=1776408094;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Up53CPgqbAF5TVuh5n+wiMyfDrUQO1Czns/QS2i8AN8=;
-        b=L6jbmorrKlpCFLVkrct/+JCEuij2lNKwG2sCKOY/j1nRWQJjOyQWD9Tl2EVQyvhcQC
-         tHqqdT6V0falt35JMvqjLPfEDG7Rv3sCDesiH3eNm9LH8oLAblThQ0uLxwwkG4tBuzCv
-         TNqyh1+7iMEVluF8HNPWjaUejK9cjvlB2NITIKbHd/JgehT8jVH/T6AVY1WmZUuWOzRf
-         lcLLVumYH1tImL9Gntk8gqvUQlZ8U8PzjAlVeQmO9/ngGhmngjX/APTrHf/ukQtjGk6E
-         oDTCrz5OqTWWPwUhkilu9peq8XIzIH8gDHQ55J2WGrk77KZ13XhESJa7ECuF/jkDkV+X
-         Elgw==
-X-Gm-Message-State: AOJu0Yxiimk5tlo/4PfNfSyFSTzkpGM9oaMcf7ee2alUpXkIVdv626Uh
-	iJ1zxrsx7/1P9pCv8L0DOxDD/csZJPRPnis7fME7nMUcCfoy2hGvm88swavzHA==
-X-Gm-Gg: AeBDiesgKG19HUQNJTclX3Z1l/My6LlMJqZT5rhsz3CFMTUXl2ArmTjiAsR4zDlnMo+
-	DpnwuswshKEnb69fWEudvI1Q5mfIKK64HAZQCZPnP48c36kX08gJMCdOeU1hNcMdgORJ0t7Der/
-	Dr1CZFilv67I06GCpmzwqBjcRJor3mKI3yIx96p7gvQ4PvWbLY9++KmB+jDrYJPJh3wNEb2rqvN
-	Co9wOV3ii3mepiqvxHWlW5JuBIrnI0tK24oyswVwY/a+RahPzweGbGhPXtcGl18A2bOq3xsmwYI
-	07ALH/or4ob+vnA1XT59bYoWa01uYqtHeM8d1RLlfg4ffueh9o1E3wmrp7NV/sPZmWzi0swEjg/
-	SvH0i97CIR+OyQKER94lsElqjsOGAaKAnP7ZjL5tRv5blyUUMv/gRLHrIqVKB1QRgAXIwVJ9IVc
-	AbMs+92t2AX5wgCp0UcBiyMOSRC5w=
-X-Received: by 2002:a17:903:acf:b0:2b2:497e:3f6d with SMTP id d9443c01a7336-2b2d5940e59mr21787055ad.8.1775803294239;
-        Thu, 09 Apr 2026 23:41:34 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1775803328; x=1776408128;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gQ5YGI4P0syrXHAiMTxw4larOf+RoCiSdFEnOmC6aNI=;
+        b=aBfmNCpiPbnMbQPT5sHjClpM5sLa6PCw62GxZhXjU12YhLQ41MyzDWKchrE/AyeT+I
+         2Nf1rrPnzgwDDceMRUCkiR75g+57Y7F18Mn4y9st4qSjtKhQSaa1w8H+EXYdfSzHjooU
+         fLiirBRU0hGR7+BoZutYfGWrsrQ05r+uknLCuLnjw0Umi6wWHQ+ssLwhFvJKsQJcRC9B
+         Mi9wXlWOL1hhdx7quEbu9hrs6awKRYPISg2Chbb7zy/IUu1CeNu91VFlPOnfHVBfuRHN
+         GpDG3QJdPvmOZDMPOGOkMKsvDB+Oqzqu1OWWxT0G6KgpQjsFY31pjLAgTk6SHqknAyBN
+         Q3ig==
+X-Gm-Message-State: AOJu0Yz/PGffy6/NeOhFYlx5SDbv10iPiVnG8CZL3akQUraFyAMMJXMT
+	TrBqGBfiByhEH/QEQDugMF6RdukweBU5cpq8fSHpct+CJy3fYFmkCWW7YjVQHg==
+X-Gm-Gg: AeBDieuPD54LeQykhkWEspx8hTarNOrT+H9/oMwumbrxtVoydDvAtsKE0hbhG6X5qdp
+	GSGRSUha3EqdlN0/lFXwQugB20VMvfwvGELiiZlHidXsyTRiFggN0oQWIRKb8Fnx+szuinKmMJ1
+	67WKVIRiqy6z0Qt67D57+r051AxI7934LRoRGKCNqBVO91mOVV84OJO2BwpzyUliK2uQLCuCcDm
+	ZaSbQzvmYoi/vxRn+76NvwSoBijIXP9tAclgyMEBcf7m11xjDiD1CBImPW7k4mLj42qWDC7F/5H
+	I+Ss/vlt6I+bqQh06cRkGVi+iWb2nA4wV6TxBXqjlKxG2RXIfLNdk75sp7merkzYEZW96ldx9uj
+	7vjjSRU+UqfSBXhlAYNN0y4/FhigqVTIMN7QSn9Wl7L8A1icqP26/n285Ee9Dq3dF28CZWvN06n
+	QxugZmynr386dy8+MsOBrbpV14Lqc=
+X-Received: by 2002:a17:90b:1802:b0:35b:e566:15a6 with SMTP id 98e67ed59e1d1-35e4286354bmr2151699a91.28.1775802996460;
+        Thu, 09 Apr 2026 23:36:36 -0700 (PDT)
 Received: from LL-868L.kpit.com ([103.155.223.83])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b2d4f25d83sm16954005ad.58.2026.04.09.23.41.32
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35e34fdc4bcsm5424213a91.7.2026.04.09.23.36.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2026 23:41:33 -0700 (PDT)
+        Thu, 09 Apr 2026 23:36:35 -0700 (PDT)
 From: Jackson James <jackson.james9803@gmail.com>
 X-Google-Original-From: Jackson James <jacksonj2@kpit.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: jacksonj2@kpit.com
-Subject: [meta-networking][scarthgap][PATCH 2/2] unbound: Add ptest for unbound
-Date: Fri, 10 Apr 2026 12:11:13 +0530
-Message-Id: <20260410064113.1498301-2-jacksonj2@kpit.com>
+Subject: [meta-networking][PATCH 1/2] unbound: Fix CVE-2025-11411
+Date: Fri, 10 Apr 2026 12:06:12 +0530
+Message-Id: <20260410063613.1489769-1-jacksonj2@kpit.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260410064113.1498301-1-jacksonj2@kpit.com>
-References: <20260410064113.1498301-1-jacksonj2@kpit.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 06:53:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126219
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 06:53:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126220
 
-Adapt the compile 'test' phony target from Makefile and deploy as
-ptest for unbound.
+Backport complete patch to fix CVE-2025-11411
 
-All test are successful on a trial and took around >9min and <10min.
-Duration of ptest execution was 587 seconds on an average.
+The existing scarthgap patch is a partial backport with hardcoded logic,
+causing incorrect behavior and ptest failures. Backport the full upstream
+fix along with the follow-up patch to ensure correct functionality.
 
-The previously used minimal CVE-2025-11411.patch caused ptest failures.
-This update switches to the complete upstream patch
-for CVE-2025-11411, which resolves the ptest issues and applies the
-complete security fix.
-
-Reference to master ptest:
-https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-support/unbound?id=d8f21b1dc87408aa86336970e4cb9a9a36a0950b
+Add below patch to fix
+0001-CVE-2025-11411-1.patch
+0002-CVE-2025-11411-2.patch
 
 Signed-off-by: Jackson James <jacksonj2@kpit.com>
 ---
- .../recipes-support/unbound/unbound/run-ptest | 29 +++++++++++++++++++
- .../recipes-support/unbound/unbound_1.19.3.bb | 22 +++++++++++++-
- 2 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/run-ptest
+ .../unbound/0001-CVE-2025-11411-1.patch       | 1874 +++++++++++++++++
+ .../unbound/0002-CVE-2025-11411-2.patch       |  153 ++
+ .../unbound/unbound/CVE-2025-11411.patch      |   48 -
+ .../recipes-support/unbound/unbound_1.19.3.bb |    3 +-
+ 4 files changed, 2029 insertions(+), 49 deletions(-)
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/0001-CVE-2025-11411-1.patch
+ create mode 100644 meta-networking/recipes-support/unbound/unbound/0002-CVE-2025-11411-2.patch
+ delete mode 100644 meta-networking/recipes-support/unbound/unbound/CVE-2025-11411.patch
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/run-ptest b/meta-networking/recipes-support/unbound/unbound/run-ptest
+diff --git a/meta-networking/recipes-support/unbound/unbound/0001-CVE-2025-11411-1.patch b/meta-networking/recipes-support/unbound/unbound/0001-CVE-2025-11411-1.patch
 new file mode 100644
-index 0000000000..3801233eeb
+index 0000000000..5cb0b96c66
 --- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/run-ptest
-@@ -0,0 +1,29 @@
-+#!/bin/sh
++++ b/meta-networking/recipes-support/unbound/unbound/0001-CVE-2025-11411-1.patch
+@@ -0,0 +1,1874 @@
++From a33f0638e1dacf2633cf2292078a674576bca852 Mon Sep 17 00:00:00 2001
++From: Yorgos Thessalonikefs <yorgos@nlnetlabs.nl>
++Date: Wed, 22 Oct 2025 10:54:57 +0200
++Subject: [PATCH] - Fix CVE-2025-11411 (possible domain hijacking attack),
++ reported by Yuxiao Wu,   Yunyi Zhang, Baojun Liu and Haixin Duan from
++ Tsinghua University.
 +
-+cd tests || exit 1
-+retVal=0
-+if ./unittest; then
-+    echo PASS: unittest
-+else
-+    echo FAIL: unittest
-+    retVal=1
-+fi
++This fixes CVE-2025-11411 by applying the complete patch
 +
-+if ./testbound -s; then
-+    echo PASS: testbound selftest
-+else
-+    echo FAIL: testbound selftest
-+    retVal=1
-+fi
++CVE: CVE-2025-11411
++Upstream-Status: Backport [complete backport of https://github.com/NLnetLabs/unbound/commit/a33f0638e1dacf2633cf2292078a674576bca852]
 +
-+for x in ./testdata/*.rpl; do
-+	output="$(./testbound -p $x -o -vvvvv 2>&1)"
-+        if test $? -eq 0; then
-+                echo "PASS: $x"
-+        else
-+                echo "$output"
-+                echo "FAIL: $x"
-+                retVal=1
-+        fi
-+done
-+exit $retVal
++Comment: Patch refreshed
++
++Signed-off-by: Jackson James <jacksonj2@kpit.com>
++---
++ iterator/iter_scrub.c                            | 16 ++++++++++++++++
++ testdata/autotrust_init.rpl                      |  1 +
++ testdata/autotrust_init_ds.rpl                   |  1 +
++ testdata/autotrust_init_sigs.rpl                 |  1 +
++ testdata/autotrust_init_zsk.rpl                  |  1 +
++ testdata/black_data.rpl                          |  1 +
++ testdata/black_prime.rpl                         |  1 +
++ testdata/disable_edns_do.rpl                     |  1 +
++ testdata/dns64_lookup.rpl                        |  1 +
++ testdata/fetch_glue.rpl                          |  1 +
++ testdata/fetch_glue_cname.rpl                    |  1 +
++ testdata/fwd_cached.rpl                          |  1 +
++ .../fwd_compress_c00c.conf                       |  1 +
++ testdata/fwd_minimal.rpl                         |  1 +
++ testdata/ipsecmod_bogus_ipseckey.crpl            |  1 +
++ testdata/ipsecmod_enabled.crpl                   |  1 +
++ testdata/ipsecmod_ignore_bogus_ipseckey.crpl     |  1 +
++ testdata/ipsecmod_max_ttl.crpl                   |  1 +
++ testdata/ipsecmod_strict.crpl                    |  1 +
++ testdata/ipsecmod_whitelist.crpl                 |  1 +
++ testdata/iter_class_any.rpl                      |  1 +
++ testdata/iter_cycle_noh.rpl                      |  1 +
++ testdata/iter_domain_sale.rpl                    |  1 +
++ testdata/iter_domain_sale_nschange.rpl           |  1 +
++ testdata/iter_emptydp.rpl                        |  1 +
++ testdata/iter_emptydp_for_glue.rpl               |  1 +
++ testdata/iter_fwdfirst.rpl                       |  1 +
++ testdata/iter_fwdfirstequal.rpl                  |  1 +
++ testdata/iter_fwdstub.rpl                        |  1 +
++ testdata/iter_fwdstubroot.rpl                    |  1 +
++ testdata/iter_ghost_sub.rpl                      |  1 +
++ testdata/iter_ghost_timewindow.rpl               |  1 +
++ testdata/iter_got6only.rpl                       |  1 +
++ testdata/iter_hint_lame.rpl                      |  1 +
++ testdata/iter_lame_noaa.rpl                      |  1 +
++ testdata/iter_lame_nosoa.rpl                     |  1 +
++ testdata/iter_mod.rpl                            |  1 +
++ testdata/iter_ns_badip.rpl                       |  1 +
++ testdata/iter_ns_spoof.rpl                       |  1 +
++ testdata/iter_nxns_fallback.rpl                  |  1 +
++ testdata/iter_pc_a.rpl                           |  1 +
++ testdata/iter_pc_aaaa.rpl                        |  1 +
++ testdata/iter_pcdiff.rpl                         |  1 +
++ testdata/iter_pcdirect.rpl                       |  1 +
++ testdata/iter_pcname.rpl                         |  1 +
++ testdata/iter_pcnamech.rpl                       |  1 +
++ testdata/iter_pcnamechrec.rpl                    |  1 +
++ testdata/iter_pcnamerec.rpl                      |  1 +
++ testdata/iter_pcttl.rpl                          |  1 +
++ testdata/iter_prefetch.rpl                       |  1 +
++ testdata/iter_prefetch_change.rpl                |  1 +
++ testdata/iter_prefetch_change2.rpl               |  1 +
++ testdata/iter_prefetch_childns.rpl               |  1 +
++ testdata/iter_prefetch_fail.rpl                  |  1 +
++ testdata/iter_prefetch_ns.rpl                    |  1 +
++ testdata/iter_primenoglue.rpl                    |  1 +
++ testdata/iter_privaddr.rpl                       |  1 +
++ testdata/iter_ranoaa_lame.rpl                    |  1 +
++ testdata/iter_reclame_one.rpl                    |  1 +
++ testdata/iter_reclame_two.rpl                    |  1 +
++ testdata/iter_recurse.rpl                        |  1 +
++ testdata/iter_resolve.rpl                        |  1 +
++ testdata/iter_resolve_minimised.rpl              |  1 +
++ testdata/iter_resolve_minimised_nx.rpl           |  1 +
++ testdata/iter_resolve_minimised_refused.rpl      |  1 +
++ testdata/iter_resolve_minimised_timeout.rpl      |  1 +
++ testdata/iter_scrub_cname_an.rpl                 |  1 +
++ testdata/iter_scrub_dname_insec.rpl              |  1 +
++ testdata/iter_scrub_dname_rev.rpl                |  1 +
++ testdata/iter_scrub_dname_sec.rpl                |  1 +
++ testdata/iter_scrub_rr_length.rpl                |  1 +
++ testdata/iter_soamin.rpl                         |  1 +
++ testdata/iter_stub_noroot.rpl                    |  1 +
++ testdata/iter_stubfirst.rpl                      |  1 +
++ testdata/iter_timeout_ra_aaaa.rpl                |  1 +
++ testdata/rrset_rettl.rpl                         |  1 +
++ testdata/rrset_untrusted.rpl                     |  1 +
++ testdata/rrset_updated.rpl                       |  1 +
++ testdata/rrset_use_cached.rpl                    |  1 +
++ testdata/serve_expired.rpl                       |  1 +
++ testdata/serve_expired_0ttl_nodata.rpl           |  1 +
++ testdata/serve_expired_0ttl_nxdomain.rpl         |  1 +
++ testdata/serve_expired_0ttl_servfail.rpl         |  1 +
++ testdata/serve_expired_cached_servfail.rpl       |  1 +
++ testdata/serve_expired_client_timeout.rpl        |  1 +
++ .../serve_expired_client_timeout_no_prefetch.rpl |  1 +
++ .../serve_expired_client_timeout_servfail.rpl    |  1 +
++ testdata/serve_expired_reply_ttl.rpl             |  1 +
++ testdata/serve_expired_ttl.rpl                   |  1 +
++ testdata/serve_expired_ttl_client_timeout.rpl    |  1 +
++ testdata/serve_expired_zerottl.rpl               |  1 +
++ testdata/serve_original_ttl.rpl                  |  1 +
++ testdata/subnet_cached.crpl                      |  1 +
++ testdata/subnet_cached_servfail.crpl             |  1 +
++ testdata/subnet_global_prefetch.crpl             |  1 +
++ .../subnet_global_prefetch_always_forward.crpl   |  1 +
++ testdata/subnet_global_prefetch_expired.crpl     |  1 +
++ .../subnet_global_prefetch_with_client_ecs.crpl  |  1 +
++ testdata/subnet_max_source.crpl                  |  1 +
++ testdata/subnet_prefetch.crpl                    |  1 +
++ testdata/subnet_val_positive.crpl                |  1 +
++ testdata/subnet_val_positive_client.crpl         |  1 +
++ testdata/trust_cname_chain.rpl                   |  1 +
++ testdata/ttl_max.rpl                             |  1 +
++ testdata/ttl_min.rpl                             |  1 +
++ testdata/val_adbit.rpl                           |  1 +
++ testdata/val_adcopy.rpl                          |  1 +
++ testdata/val_cnametocnamewctoposwc.rpl           |  1 +
++ testdata/val_ds_afterprime.rpl                   |  1 +
++ testdata/val_faildnskey_ok.rpl                   |  1 +
++ testdata/val_keyprefetch_verify.rpl              |  1 +
++ testdata/val_noadwhennodo.rpl                    |  1 +
++ testdata/val_nsec3_b3_optout.rpl                 |  1 +
++ testdata/val_nsec3_b3_optout_negcache.rpl        |  1 +
++ testdata/val_nsec3_b4_wild.rpl                   |  1 +
++ testdata/val_nsec3_cnametocnamewctoposwc.rpl     |  1 +
++ testdata/val_positive.rpl                        |  1 +
++ testdata/val_positive_wc.rpl                     |  1 +
++ testdata/val_qds_badanc.rpl                      |  1 +
++ testdata/val_qds_oneanc.rpl                      |  1 +
++ testdata/val_qds_twoanc.rpl                      |  1 +
++ testdata/val_refer_unsignadd.rpl                 |  1 +
++ testdata/val_referd.rpl                          |  1 +
++ testdata/val_referglue.rpl                       |  1 +
++ testdata/val_rrsig.rpl                           |  1 +
++ testdata/val_spurious_ns.rpl                     |  1 +
++ testdata/val_stub_noroot.rpl                     |  1 +
++ testdata/val_ta_algo_dnskey.rpl                  |  1 +
++ testdata/val_ta_algo_dnskey_dp.rpl               |  1 +
++ testdata/val_ta_algo_missing_dp.rpl              |  1 +
++ testdata/val_twocname.rpl                        |  1 +
++ testdata/val_unalgo_anchor.rpl                   |  1 +
++ testdata/val_wild_pos.rpl                        |  1 +
++ testdata/views.rpl                               |  1 +
++ util/config_file.c                               |  3 +++
++ util/config_file.h                               |  3 +++
++ util/configlexer.lex                             |  1 +
++ util/configparser.y                              | 14 +++++++++++++-
++ 138 files changed, 169 insertions(+), 1 deletion(-)
++
++diff --git a/iterator/iter_scrub.c b/iterator/iter_scrub.c
++index 48867e5..cc12f97 100644
++--- a/iterator/iter_scrub.c
+++++ b/iterator/iter_scrub.c
++@@ -571,6 +571,22 @@ scrub_normalize(sldns_buffer* pkt, struct msg_parse* msg,
++ 					"RRset:", pkt, msg, prev, &rrset);
++ 				continue;
++ 			}
+++			/* If the NS set is a promiscuous NS set, scrub that
+++			 * to remove potential for poisonous contents that
+++			 * affects other names in the same zone. Remove
+++			 * promiscuous NS sets in positive answers, that
+++			 * thus have records in the answer section. Nodata
+++			 * and nxdomain promiscuous NS sets have been removed
+++			 * already. Since the NS rrset is scrubbed, its
+++			 * address records are also not marked to be allowed
+++			 * and are removed later. */
+++			if(FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NOERROR &&
+++				msg->an_rrsets != 0 &&
+++				env->cfg->iter_scrub_promiscuous) {
+++				remove_rrset("normalize: removing promiscuous "
+++					"RRset:", pkt, msg, prev, &rrset);
+++				continue;
+++			}
++ 			if(nsset == NULL) {
++ 				nsset = rrset;
++ 			} else {
++diff --git a/testdata/autotrust_init.rpl b/testdata/autotrust_init.rpl
++index d722273..d69e70b 100644
++--- a/testdata/autotrust_init.rpl
+++++ b/testdata/autotrust_init.rpl
++@@ -5,6 +5,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129         # K.ROOT-SERVERS.NET.
++diff --git a/testdata/autotrust_init_ds.rpl b/testdata/autotrust_init_ds.rpl
++index ad4019e..9ffb4d4 100644
++--- a/testdata/autotrust_init_ds.rpl
+++++ b/testdata/autotrust_init_ds.rpl
++@@ -5,6 +5,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129         # K.ROOT-SERVERS.NET.
++diff --git a/testdata/autotrust_init_sigs.rpl b/testdata/autotrust_init_sigs.rpl
++index d5d52f4..a7cb796 100644
++--- a/testdata/autotrust_init_sigs.rpl
+++++ b/testdata/autotrust_init_sigs.rpl
++@@ -5,6 +5,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129         # K.ROOT-SERVERS.NET.
++diff --git a/testdata/autotrust_init_zsk.rpl b/testdata/autotrust_init_zsk.rpl
++index 56a5bc0..2d28d43 100644
++--- a/testdata/autotrust_init_zsk.rpl
+++++ b/testdata/autotrust_init_zsk.rpl
++@@ -5,6 +5,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129         # K.ROOT-SERVERS.NET.
++diff --git a/testdata/black_data.rpl b/testdata/black_data.rpl
++index e6ef1b7..e928d63 100644
++--- a/testdata/black_data.rpl
+++++ b/testdata/black_data.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/black_prime.rpl b/testdata/black_prime.rpl
++index fbe92a7..0301c85 100644
++--- a/testdata/black_prime.rpl
+++++ b/testdata/black_prime.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/disable_edns_do.rpl b/testdata/disable_edns_do.rpl
++index 82a16da..45b4ffc 100644
++--- a/testdata/disable_edns_do.rpl
+++++ b/testdata/disable_edns_do.rpl
++@@ -5,6 +5,7 @@ server:
++ 	qname-minimisation: "no"
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	disable-edns-do: yes
++ 
++ stub-zone:
++diff --git a/testdata/dns64_lookup.rpl b/testdata/dns64_lookup.rpl
++index 327f7df..cec8012 100644
++--- a/testdata/dns64_lookup.rpl
+++++ b/testdata/dns64_lookup.rpl
++@@ -7,6 +7,7 @@ server:
++ 	dns64-ignore-aaaa: ip6ignore.example.com
++ 	dns64-ignore-aaaa: ip6only.example.com
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/fetch_glue.rpl b/testdata/fetch_glue.rpl
++index 8860d85..daf687a 100644
++--- a/testdata/fetch_glue.rpl
+++++ b/testdata/fetch_glue.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/fetch_glue_cname.rpl b/testdata/fetch_glue_cname.rpl
++index 64f00fb..c786a41 100644
++--- a/testdata/fetch_glue_cname.rpl
+++++ b/testdata/fetch_glue_cname.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/fwd_cached.rpl b/testdata/fwd_cached.rpl
++index 2d6b0c2..4a00f87 100644
++--- a/testdata/fwd_cached.rpl
+++++ b/testdata/fwd_cached.rpl
++@@ -2,6 +2,7 @@
++ ; config options go here.
++ server:
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ forward-zone: name: "." forward-addr: 216.0.0.1
++ CONFIG_END
++ 
++diff --git a/testdata/fwd_compress_c00c.tdir/fwd_compress_c00c.conf b/testdata/fwd_compress_c00c.tdir/fwd_compress_c00c.conf
++index 5b2c804..7bc7408 100644
++--- a/testdata/fwd_compress_c00c.tdir/fwd_compress_c00c.conf
+++++ b/testdata/fwd_compress_c00c.tdir/fwd_compress_c00c.conf
++@@ -10,6 +10,7 @@ server:
++ 	username: ""
++ 	do-not-query-localhost: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ forward-zone:
++ 	name: "."
++diff --git a/testdata/fwd_minimal.rpl b/testdata/fwd_minimal.rpl
++index e85d712..ef1d7fc 100644
++--- a/testdata/fwd_minimal.rpl
+++++ b/testdata/fwd_minimal.rpl
++@@ -5,6 +5,7 @@ server:
++ 	; is fine for that, not removed by minimal-responses.
++ 	access-control: 127.0.0.1 allow_snoop
++ 	minimal-responses: yes
+++	iter-scrub-promiscuous: no
++ forward-zone: name: "." forward-addr: 216.0.0.1
++ CONFIG_END
++ 
++diff --git a/testdata/ipsecmod_bogus_ipseckey.crpl b/testdata/ipsecmod_bogus_ipseckey.crpl
++index 094710b..98bc454 100644
++--- a/testdata/ipsecmod_bogus_ipseckey.crpl
+++++ b/testdata/ipsecmod_bogus_ipseckey.crpl
++@@ -9,6 +9,7 @@ server:
++ 	qname-minimisation: "no"
++ 	# test that default value of harden-dnssec-stripped is still yes.
++ 	fake-sha1: yes
+++	iter-scrub-promiscuous: no
++ 	trust-anchor-signaling: no
++ 	access-control: 127.0.0.1 allow_snoop
++ 	module-config: "ipsecmod validator iterator"
++diff --git a/testdata/ipsecmod_enabled.crpl b/testdata/ipsecmod_enabled.crpl
++index 4498429..04e8cb1 100644
++--- a/testdata/ipsecmod_enabled.crpl
+++++ b/testdata/ipsecmod_enabled.crpl
++@@ -11,6 +11,7 @@ server:
++ 	ipsecmod-enabled: no
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/ipsecmod_ignore_bogus_ipseckey.crpl b/testdata/ipsecmod_ignore_bogus_ipseckey.crpl
++index a605c34..4c4d80c 100644
++--- a/testdata/ipsecmod_ignore_bogus_ipseckey.crpl
+++++ b/testdata/ipsecmod_ignore_bogus_ipseckey.crpl
++@@ -18,6 +18,7 @@ server:
++ 	ipsecmod-ignore-bogus: yes
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/ipsecmod_max_ttl.crpl b/testdata/ipsecmod_max_ttl.crpl
++index 592bae0..4dfeddf 100644
++--- a/testdata/ipsecmod_max_ttl.crpl
+++++ b/testdata/ipsecmod_max_ttl.crpl
++@@ -10,6 +10,7 @@ server:
++ 	ipsecmod-max-ttl: 200
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/ipsecmod_strict.crpl b/testdata/ipsecmod_strict.crpl
++index f74e308..51cc11b 100644
++--- a/testdata/ipsecmod_strict.crpl
+++++ b/testdata/ipsecmod_strict.crpl
++@@ -10,6 +10,7 @@ server:
++ 	ipsecmod-max-ttl: 200
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/ipsecmod_whitelist.crpl b/testdata/ipsecmod_whitelist.crpl
++index 34108f3..350c2ad 100644
++--- a/testdata/ipsecmod_whitelist.crpl
+++++ b/testdata/ipsecmod_whitelist.crpl
++@@ -11,6 +11,7 @@ server:
++ 	ipsecmod-whitelist: white.example.com
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_class_any.rpl b/testdata/iter_class_any.rpl
++index 6fb296e..87e0db0 100644
++--- a/testdata/iter_class_any.rpl
+++++ b/testdata/iter_class_any.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_cycle_noh.rpl b/testdata/iter_cycle_noh.rpl
++index eee26ca..e551ac6 100644
++--- a/testdata/iter_cycle_noh.rpl
+++++ b/testdata/iter_cycle_noh.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_domain_sale.rpl b/testdata/iter_domain_sale.rpl
++index 6110148..7c3cc1f 100644
++--- a/testdata/iter_domain_sale.rpl
+++++ b/testdata/iter_domain_sale.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_domain_sale_nschange.rpl b/testdata/iter_domain_sale_nschange.rpl
++index 5664855..886ed51 100644
++--- a/testdata/iter_domain_sale_nschange.rpl
+++++ b/testdata/iter_domain_sale_nschange.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_emptydp.rpl b/testdata/iter_emptydp.rpl
++index ecb49b6..3879a9b 100644
++--- a/testdata/iter_emptydp.rpl
+++++ b/testdata/iter_emptydp.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_emptydp_for_glue.rpl b/testdata/iter_emptydp_for_glue.rpl
++index 94dec2b..fc7933f 100644
++--- a/testdata/iter_emptydp_for_glue.rpl
+++++ b/testdata/iter_emptydp_for_glue.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_fwdfirst.rpl b/testdata/iter_fwdfirst.rpl
++index 0f8a85f..509a1cd 100644
++--- a/testdata/iter_fwdfirst.rpl
+++++ b/testdata/iter_fwdfirst.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_fwdfirstequal.rpl b/testdata/iter_fwdfirstequal.rpl
++index dc64814..abd25d1 100644
++--- a/testdata/iter_fwdfirstequal.rpl
+++++ b/testdata/iter_fwdfirstequal.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_fwdstub.rpl b/testdata/iter_fwdstub.rpl
++index ad5b57c..4c741a5 100644
++--- a/testdata/iter_fwdstub.rpl
+++++ b/testdata/iter_fwdstub.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_fwdstubroot.rpl b/testdata/iter_fwdstubroot.rpl
++index fa93043..dd93ecd 100644
++--- a/testdata/iter_fwdstubroot.rpl
+++++ b/testdata/iter_fwdstubroot.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_ghost_sub.rpl b/testdata/iter_ghost_sub.rpl
++index ccb7367..36767bb 100644
++--- a/testdata/iter_ghost_sub.rpl
+++++ b/testdata/iter_ghost_sub.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_ghost_timewindow.rpl b/testdata/iter_ghost_timewindow.rpl
++index 9e30462..24390a0 100644
++--- a/testdata/iter_ghost_timewindow.rpl
+++++ b/testdata/iter_ghost_timewindow.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	discard-timeout: 86400
++ 
++ stub-zone:
++diff --git a/testdata/iter_got6only.rpl b/testdata/iter_got6only.rpl
++index 1552284..b0d20b3 100644
++--- a/testdata/iter_got6only.rpl
+++++ b/testdata/iter_got6only.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0 "
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129 	# K.ROOT-SERVERS.NET.
++diff --git a/testdata/iter_hint_lame.rpl b/testdata/iter_hint_lame.rpl
++index 2fb6dde..26aa5dc 100644
++--- a/testdata/iter_hint_lame.rpl
+++++ b/testdata/iter_hint_lame.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_lame_noaa.rpl b/testdata/iter_lame_noaa.rpl
++index defaa5c..050866c 100644
++--- a/testdata/iter_lame_noaa.rpl
+++++ b/testdata/iter_lame_noaa.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_lame_nosoa.rpl b/testdata/iter_lame_nosoa.rpl
++index 3bf6ccc..d55ff78 100644
++--- a/testdata/iter_lame_nosoa.rpl
+++++ b/testdata/iter_lame_nosoa.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_mod.rpl b/testdata/iter_mod.rpl
++index 35b3a5a..3d3d678 100644
++--- a/testdata/iter_mod.rpl
+++++ b/testdata/iter_mod.rpl
++@@ -4,6 +4,7 @@ server:
++ 	qname-minimisation: "no"
++ 	module-config: "iterator"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_ns_badip.rpl b/testdata/iter_ns_badip.rpl
++index e0bf966..481f47a 100644
++--- a/testdata/iter_ns_badip.rpl
+++++ b/testdata/iter_ns_badip.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "3 2 1 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_ns_spoof.rpl b/testdata/iter_ns_spoof.rpl
++index f674576..999ff05 100644
++--- a/testdata/iter_ns_spoof.rpl
+++++ b/testdata/iter_ns_spoof.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129 	# K.ROOT-SERVERS.NET.
++diff --git a/testdata/iter_nxns_fallback.rpl b/testdata/iter_nxns_fallback.rpl
++index 2a6a3fd..8c0beb8 100644
++--- a/testdata/iter_nxns_fallback.rpl
+++++ b/testdata/iter_nxns_fallback.rpl
++@@ -8,6 +8,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_pc_a.rpl b/testdata/iter_pc_a.rpl
++index d9add00..be73a79 100644
++--- a/testdata/iter_pc_a.rpl
+++++ b/testdata/iter_pc_a.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pc_aaaa.rpl b/testdata/iter_pc_aaaa.rpl
++index a283543..a7ce186 100644
++--- a/testdata/iter_pc_aaaa.rpl
+++++ b/testdata/iter_pc_aaaa.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pcdiff.rpl b/testdata/iter_pcdiff.rpl
++index 57fb109..a462d33 100644
++--- a/testdata/iter_pcdiff.rpl
+++++ b/testdata/iter_pcdiff.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pcdirect.rpl b/testdata/iter_pcdirect.rpl
++index 0bd5dfe..656ec7a 100644
++--- a/testdata/iter_pcdirect.rpl
+++++ b/testdata/iter_pcdirect.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pcname.rpl b/testdata/iter_pcname.rpl
++index e17c910..af53c90 100644
++--- a/testdata/iter_pcname.rpl
+++++ b/testdata/iter_pcname.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pcnamech.rpl b/testdata/iter_pcnamech.rpl
++index 32b3130..805cb18 100644
++--- a/testdata/iter_pcnamech.rpl
+++++ b/testdata/iter_pcnamech.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_pcnamechrec.rpl b/testdata/iter_pcnamechrec.rpl
++index 8bf7ad8..bbb9c86 100644
++--- a/testdata/iter_pcnamechrec.rpl
+++++ b/testdata/iter_pcnamechrec.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_pcnamerec.rpl b/testdata/iter_pcnamerec.rpl
++index faee6d0..2ea0dad 100644
++--- a/testdata/iter_pcnamerec.rpl
+++++ b/testdata/iter_pcnamerec.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_pcttl.rpl b/testdata/iter_pcttl.rpl
++index 413f8cb..a702017 100644
++--- a/testdata/iter_pcttl.rpl
+++++ b/testdata/iter_pcttl.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	do-ip6: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch.rpl b/testdata/iter_prefetch.rpl
++index bad92dc..fdf5955 100644
++--- a/testdata/iter_prefetch.rpl
+++++ b/testdata/iter_prefetch.rpl
++@@ -4,6 +4,7 @@ server:
++ 	qname-minimisation: "no"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch_change.rpl b/testdata/iter_prefetch_change.rpl
++index 1be9e6a..c1a1a71 100644
++--- a/testdata/iter_prefetch_change.rpl
+++++ b/testdata/iter_prefetch_change.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch_change2.rpl b/testdata/iter_prefetch_change2.rpl
++index 7a8370f..4a966fe 100644
++--- a/testdata/iter_prefetch_change2.rpl
+++++ b/testdata/iter_prefetch_change2.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch_childns.rpl b/testdata/iter_prefetch_childns.rpl
++index 00a91fc..f234065 100644
++--- a/testdata/iter_prefetch_childns.rpl
+++++ b/testdata/iter_prefetch_childns.rpl
++@@ -4,6 +4,7 @@ server:
++ 	qname-minimisation: "no"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch_fail.rpl b/testdata/iter_prefetch_fail.rpl
++index 1d92a4c..d1e3083 100644
++--- a/testdata/iter_prefetch_fail.rpl
+++++ b/testdata/iter_prefetch_fail.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_prefetch_ns.rpl b/testdata/iter_prefetch_ns.rpl
++index 93af216..3192d31 100644
++--- a/testdata/iter_prefetch_ns.rpl
+++++ b/testdata/iter_prefetch_ns.rpl
++@@ -4,6 +4,7 @@ server:
++ 	qname-minimisation: "no"
++ 	prefetch: "yes"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_primenoglue.rpl b/testdata/iter_primenoglue.rpl
++index b9808dd..f8c9803 100644
++--- a/testdata/iter_primenoglue.rpl
+++++ b/testdata/iter_primenoglue.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_privaddr.rpl b/testdata/iter_privaddr.rpl
++index 0c87b4b..b7a6fde 100644
++--- a/testdata/iter_privaddr.rpl
+++++ b/testdata/iter_privaddr.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ 	private-address: 10.0.0.0/8
++ 	private-address: 172.16.0.0/12
++diff --git a/testdata/iter_ranoaa_lame.rpl b/testdata/iter_ranoaa_lame.rpl
++index 8ee8241..313192f 100644
++--- a/testdata/iter_ranoaa_lame.rpl
+++++ b/testdata/iter_ranoaa_lame.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_reclame_one.rpl b/testdata/iter_reclame_one.rpl
++index 4a6abfa..d273e60 100644
++--- a/testdata/iter_reclame_one.rpl
+++++ b/testdata/iter_reclame_one.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_reclame_two.rpl b/testdata/iter_reclame_two.rpl
++index 76c310b..e2b2bc1 100644
++--- a/testdata/iter_reclame_two.rpl
+++++ b/testdata/iter_reclame_two.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/iter_recurse.rpl b/testdata/iter_recurse.rpl
++index be50b4a..1352876 100644
++--- a/testdata/iter_recurse.rpl
+++++ b/testdata/iter_recurse.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_resolve.rpl b/testdata/iter_resolve.rpl
++index ed051ff..3ea56ab 100644
++--- a/testdata/iter_resolve.rpl
+++++ b/testdata/iter_resolve.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_resolve_minimised.rpl b/testdata/iter_resolve_minimised.rpl
++index 2c6f9cc..13f04d4 100644
++--- a/testdata/iter_resolve_minimised.rpl
+++++ b/testdata/iter_resolve_minimised.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_resolve_minimised_nx.rpl b/testdata/iter_resolve_minimised_nx.rpl
++index 74e612c..c68f20c 100644
++--- a/testdata/iter_resolve_minimised_nx.rpl
+++++ b/testdata/iter_resolve_minimised_nx.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_resolve_minimised_refused.rpl b/testdata/iter_resolve_minimised_refused.rpl
++index 66e8e63..8dc76e2 100644
++--- a/testdata/iter_resolve_minimised_refused.rpl
+++++ b/testdata/iter_resolve_minimised_refused.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_resolve_minimised_timeout.rpl b/testdata/iter_resolve_minimised_timeout.rpl
++index 86b9321..3740d79 100644
++--- a/testdata/iter_resolve_minimised_timeout.rpl
+++++ b/testdata/iter_resolve_minimised_timeout.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_scrub_cname_an.rpl b/testdata/iter_scrub_cname_an.rpl
++index 9c5060a..f81916b 100644
++--- a/testdata/iter_scrub_cname_an.rpl
+++++ b/testdata/iter_scrub_cname_an.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++         name: "."
++diff --git a/testdata/iter_scrub_dname_insec.rpl b/testdata/iter_scrub_dname_insec.rpl
++index 826d89e..82ff1d3 100644
++--- a/testdata/iter_scrub_dname_insec.rpl
+++++ b/testdata/iter_scrub_dname_insec.rpl
++@@ -4,6 +4,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++         name: "."
++diff --git a/testdata/iter_scrub_dname_rev.rpl b/testdata/iter_scrub_dname_rev.rpl
++index 9caca66..dfb21b8 100644
++--- a/testdata/iter_scrub_dname_rev.rpl
+++++ b/testdata/iter_scrub_dname_rev.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++         name: "."
++diff --git a/testdata/iter_scrub_dname_sec.rpl b/testdata/iter_scrub_dname_sec.rpl
++index 34a7b32..943b19f 100644
++--- a/testdata/iter_scrub_dname_sec.rpl
+++++ b/testdata/iter_scrub_dname_sec.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++         name: "."
++diff --git a/testdata/iter_scrub_rr_length.rpl b/testdata/iter_scrub_rr_length.rpl
++index 2ef73c2..5463723 100644
++--- a/testdata/iter_scrub_rr_length.rpl
+++++ b/testdata/iter_scrub_rr_length.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 	ede: yes
++ 	log-servfail: yes
++diff --git a/testdata/iter_soamin.rpl b/testdata/iter_soamin.rpl
++index 7e90260..0facc35 100644
++--- a/testdata/iter_soamin.rpl
+++++ b/testdata/iter_soamin.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_stub_noroot.rpl b/testdata/iter_stub_noroot.rpl
++index ef306bd..749462b 100644
++--- a/testdata/iter_stub_noroot.rpl
+++++ b/testdata/iter_stub_noroot.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_stubfirst.rpl b/testdata/iter_stubfirst.rpl
++index 1a7112d..7cd3305 100644
++--- a/testdata/iter_stubfirst.rpl
+++++ b/testdata/iter_stubfirst.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/iter_timeout_ra_aaaa.rpl b/testdata/iter_timeout_ra_aaaa.rpl
++index 126867b..9456f04 100644
++--- a/testdata/iter_timeout_ra_aaaa.rpl
+++++ b/testdata/iter_timeout_ra_aaaa.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/rrset_rettl.rpl b/testdata/rrset_rettl.rpl
++index 55dd623..131a98e 100644
++--- a/testdata/rrset_rettl.rpl
+++++ b/testdata/rrset_rettl.rpl
++@@ -2,6 +2,7 @@
++ ; config options go here.
++ server:
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ forward-zone: name: "." forward-addr: 216.0.0.1
++ CONFIG_END
++ 
++diff --git a/testdata/rrset_untrusted.rpl b/testdata/rrset_untrusted.rpl
++index 6370ebf..207275b 100644
++--- a/testdata/rrset_untrusted.rpl
+++++ b/testdata/rrset_untrusted.rpl
++@@ -2,6 +2,7 @@
++ ; config options go here.
++ server:
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ forward-zone: name: "." forward-addr: 216.0.0.1
++ CONFIG_END
++ 
++diff --git a/testdata/rrset_updated.rpl b/testdata/rrset_updated.rpl
++index 55da56b..ba8e492 100644
++--- a/testdata/rrset_updated.rpl
+++++ b/testdata/rrset_updated.rpl
++@@ -2,6 +2,7 @@
++ ; config options go here.
++ server:
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ forward-zone: name: "." forward-addr: 216.0.0.1
++ CONFIG_END
++diff --git a/testdata/rrset_use_cached.rpl b/testdata/rrset_use_cached.rpl
++index 8420ae0..17696f6 100644
++--- a/testdata/rrset_use_cached.rpl
+++++ b/testdata/rrset_use_cached.rpl
++@@ -1,5 +1,6 @@
++ server:
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	# The value does not matter, we will not simulate delay.
++ 	# We do not want only serve-expired because fetches from that
++diff --git a/testdata/serve_expired.rpl b/testdata/serve_expired.rpl
++index 3f61019..2bba0d9 100644
++--- a/testdata/serve_expired.rpl
+++++ b/testdata/serve_expired.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	access-control: 127.0.0.1/32 allow_snoop
++ 	ede: yes
++diff --git a/testdata/serve_expired_0ttl_nodata.rpl b/testdata/serve_expired_0ttl_nodata.rpl
++index 7f1b5a5..d16a115 100644
++--- a/testdata/serve_expired_0ttl_nodata.rpl
+++++ b/testdata/serve_expired_0ttl_nodata.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	log-servfail: yes
++ 	ede: yes
++diff --git a/testdata/serve_expired_0ttl_nxdomain.rpl b/testdata/serve_expired_0ttl_nxdomain.rpl
++index 4adb4b8..a9195b0 100644
++--- a/testdata/serve_expired_0ttl_nxdomain.rpl
+++++ b/testdata/serve_expired_0ttl_nxdomain.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	log-servfail: yes
++ 	ede: yes
++diff --git a/testdata/serve_expired_0ttl_servfail.rpl b/testdata/serve_expired_0ttl_servfail.rpl
++index 6833af1..b0fa484 100644
++--- a/testdata/serve_expired_0ttl_servfail.rpl
+++++ b/testdata/serve_expired_0ttl_servfail.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	log-servfail: yes
++ 	ede: yes
++diff --git a/testdata/serve_expired_cached_servfail.rpl b/testdata/serve_expired_cached_servfail.rpl
++index f5f4c70..0beb8fc 100644
++--- a/testdata/serve_expired_cached_servfail.rpl
+++++ b/testdata/serve_expired_cached_servfail.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-reply-ttl: 123
++ 	log-servfail: yes
++diff --git a/testdata/serve_expired_client_timeout.rpl b/testdata/serve_expired_client_timeout.rpl
++index 5560aa0..e40e1b4 100644
++--- a/testdata/serve_expired_client_timeout.rpl
+++++ b/testdata/serve_expired_client_timeout.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-client-timeout: 1
++ 	serve-expired-reply-ttl: 123
++diff --git a/testdata/serve_expired_client_timeout_no_prefetch.rpl b/testdata/serve_expired_client_timeout_no_prefetch.rpl
++index aed397d..3a35c46 100644
++--- a/testdata/serve_expired_client_timeout_no_prefetch.rpl
+++++ b/testdata/serve_expired_client_timeout_no_prefetch.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-client-timeout: 1
++ 	serve-expired-reply-ttl: 123
++diff --git a/testdata/serve_expired_client_timeout_servfail.rpl b/testdata/serve_expired_client_timeout_servfail.rpl
++index 51aa043..226e4b5 100644
++--- a/testdata/serve_expired_client_timeout_servfail.rpl
+++++ b/testdata/serve_expired_client_timeout_servfail.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-client-timeout: 1
++ 	serve-expired-reply-ttl: 123
++diff --git a/testdata/serve_expired_reply_ttl.rpl b/testdata/serve_expired_reply_ttl.rpl
++index 124fb87..063aad9 100644
++--- a/testdata/serve_expired_reply_ttl.rpl
+++++ b/testdata/serve_expired_reply_ttl.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-reply-ttl: 123
++ 	ede: yes
++diff --git a/testdata/serve_expired_ttl.rpl b/testdata/serve_expired_ttl.rpl
++index df4ecb8..df3cd90 100644
++--- a/testdata/serve_expired_ttl.rpl
+++++ b/testdata/serve_expired_ttl.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-ttl: 10
++ 
++diff --git a/testdata/serve_expired_ttl_client_timeout.rpl b/testdata/serve_expired_ttl_client_timeout.rpl
++index 169d070..f285790 100644
++--- a/testdata/serve_expired_ttl_client_timeout.rpl
+++++ b/testdata/serve_expired_ttl_client_timeout.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-ttl: 10
++ 	serve-expired-client-timeout: 1
++diff --git a/testdata/serve_expired_zerottl.rpl b/testdata/serve_expired_zerottl.rpl
++index 0239b4a..fbb76f9 100644
++--- a/testdata/serve_expired_zerottl.rpl
+++++ b/testdata/serve_expired_zerottl.rpl
++@@ -3,6 +3,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-reply-ttl: 123
++ 	ede: yes
++diff --git a/testdata/serve_original_ttl.rpl b/testdata/serve_original_ttl.rpl
++index 24d01b6..ced0672 100644
++--- a/testdata/serve_original_ttl.rpl
+++++ b/testdata/serve_original_ttl.rpl
++@@ -4,6 +4,7 @@ server:
++ 	module-config: "validator iterator"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-original-ttl: yes
++ 	cache-max-ttl: 1000
++ 	cache-min-ttl: 20
++diff --git a/testdata/subnet_cached.crpl b/testdata/subnet_cached.crpl
++index 2098313..8f3c3de 100644
++--- a/testdata/subnet_cached.crpl
+++++ b/testdata/subnet_cached.crpl
++@@ -15,6 +15,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/subnet_cached_servfail.crpl b/testdata/subnet_cached_servfail.crpl
++index 9c746d5..535671b 100644
++--- a/testdata/subnet_cached_servfail.crpl
+++++ b/testdata/subnet_cached_servfail.crpl
++@@ -11,6 +11,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	prefetch: yes
++ 
++diff --git a/testdata/subnet_global_prefetch.crpl b/testdata/subnet_global_prefetch.crpl
++index 2f005d4..7665015 100644
++--- a/testdata/subnet_global_prefetch.crpl
+++++ b/testdata/subnet_global_prefetch.crpl
++@@ -12,6 +12,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	prefetch: yes
++ 
++ stub-zone:
++diff --git a/testdata/subnet_global_prefetch_always_forward.crpl b/testdata/subnet_global_prefetch_always_forward.crpl
++index ccfe5df..0713629 100644
++--- a/testdata/subnet_global_prefetch_always_forward.crpl
+++++ b/testdata/subnet_global_prefetch_always_forward.crpl
++@@ -12,6 +12,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/subnet_global_prefetch_expired.crpl b/testdata/subnet_global_prefetch_expired.crpl
++index de1b780..7c00d82 100644
++--- a/testdata/subnet_global_prefetch_expired.crpl
+++++ b/testdata/subnet_global_prefetch_expired.crpl
++@@ -13,6 +13,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	serve-expired: yes
++ 	serve-expired-ttl: 1
++ 	prefetch: yes
++diff --git a/testdata/subnet_global_prefetch_with_client_ecs.crpl b/testdata/subnet_global_prefetch_with_client_ecs.crpl
++index ddc832c..8589db7 100644
++--- a/testdata/subnet_global_prefetch_with_client_ecs.crpl
+++++ b/testdata/subnet_global_prefetch_with_client_ecs.crpl
++@@ -12,6 +12,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	prefetch: yes
++ 
++ stub-zone:
++diff --git a/testdata/subnet_max_source.crpl b/testdata/subnet_max_source.crpl
++index f5c7464..f3f71e7 100644
++--- a/testdata/subnet_max_source.crpl
+++++ b/testdata/subnet_max_source.crpl
++@@ -11,6 +11,7 @@ server:
++ 	verbosity: 3
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/subnet_prefetch.crpl b/testdata/subnet_prefetch.crpl
++index aaa6bf0..243e409 100644
++--- a/testdata/subnet_prefetch.crpl
+++++ b/testdata/subnet_prefetch.crpl
++@@ -12,6 +12,7 @@ server:
++ 	access-control: 127.0.0.1 allow_snoop
++ 	qname-minimisation: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	prefetch: yes
++ 
++ stub-zone:
++diff --git a/testdata/subnet_val_positive.crpl b/testdata/subnet_val_positive.crpl
++index 01456e5..10996ad 100644
++--- a/testdata/subnet_val_positive.crpl
+++++ b/testdata/subnet_val_positive.crpl
++@@ -13,6 +13,7 @@ server:
++ 	fake-dsa: yes
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/subnet_val_positive_client.crpl b/testdata/subnet_val_positive_client.crpl
++index b573742..1b51d52 100644
++--- a/testdata/subnet_val_positive_client.crpl
+++++ b/testdata/subnet_val_positive_client.crpl
++@@ -14,6 +14,7 @@ server:
++ 	fake-dsa: yes
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/trust_cname_chain.rpl b/testdata/trust_cname_chain.rpl
++index f8415ba..e24f8c1 100644
++--- a/testdata/trust_cname_chain.rpl
+++++ b/testdata/trust_cname_chain.rpl
++@@ -2,6 +2,7 @@
++ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ stub-zone:
++ 	name: "."
++ 	stub-addr: 193.0.14.129 	# K.ROOT-SERVERS.NET.
++diff --git a/testdata/ttl_max.rpl b/testdata/ttl_max.rpl
++index 3256963..b24eea3 100644
++--- a/testdata/ttl_max.rpl
+++++ b/testdata/ttl_max.rpl
++@@ -4,6 +4,7 @@ server:
++ 	cache-max-ttl: 10
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/ttl_min.rpl b/testdata/ttl_min.rpl
++index 3c79ff5..94206c7 100644
++--- a/testdata/ttl_min.rpl
+++++ b/testdata/ttl_min.rpl
++@@ -4,6 +4,7 @@ server:
++ 	cache-min-ttl: 10
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_adbit.rpl b/testdata/val_adbit.rpl
++index 7ce62de..233c58b 100644
++--- a/testdata/val_adbit.rpl
+++++ b/testdata/val_adbit.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_adcopy.rpl b/testdata/val_adcopy.rpl
++index 604fd57..7bc31df 100644
++--- a/testdata/val_adcopy.rpl
+++++ b/testdata/val_adcopy.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_cnametocnamewctoposwc.rpl b/testdata/val_cnametocnamewctoposwc.rpl
++index 407666e..9ea8b49 100644
++--- a/testdata/val_cnametocnamewctoposwc.rpl
+++++ b/testdata/val_cnametocnamewctoposwc.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_ds_afterprime.rpl b/testdata/val_ds_afterprime.rpl
++index 3b1c0d6..301a1f6 100644
++--- a/testdata/val_ds_afterprime.rpl
+++++ b/testdata/val_ds_afterprime.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_faildnskey_ok.rpl b/testdata/val_faildnskey_ok.rpl
++index 50f3184..f9196f3 100644
++--- a/testdata/val_faildnskey_ok.rpl
+++++ b/testdata/val_faildnskey_ok.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_keyprefetch_verify.rpl b/testdata/val_keyprefetch_verify.rpl
++index 9b901a8..6cf8184 100644
++--- a/testdata/val_keyprefetch_verify.rpl
+++++ b/testdata/val_keyprefetch_verify.rpl
++@@ -10,6 +10,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_noadwhennodo.rpl b/testdata/val_noadwhennodo.rpl
++index 46e1bad..dbdeb78 100644
++--- a/testdata/val_noadwhennodo.rpl
+++++ b/testdata/val_noadwhennodo.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_nsec3_b3_optout.rpl b/testdata/val_nsec3_b3_optout.rpl
++index 9d84be9..5d8a43a 100644
++--- a/testdata/val_nsec3_b3_optout.rpl
+++++ b/testdata/val_nsec3_b3_optout.rpl
++@@ -7,6 +7,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/val_nsec3_b3_optout_negcache.rpl b/testdata/val_nsec3_b3_optout_negcache.rpl
++index 497a859..e7be762 100644
++--- a/testdata/val_nsec3_b3_optout_negcache.rpl
+++++ b/testdata/val_nsec3_b3_optout_negcache.rpl
++@@ -7,6 +7,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/val_nsec3_b4_wild.rpl b/testdata/val_nsec3_b4_wild.rpl
++index 8bf3a54..295932f 100644
++--- a/testdata/val_nsec3_b4_wild.rpl
+++++ b/testdata/val_nsec3_b4_wild.rpl
++@@ -6,6 +6,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/val_nsec3_cnametocnamewctoposwc.rpl b/testdata/val_nsec3_cnametocnamewctoposwc.rpl
++index 1651ae7..3e4c55a 100644
++--- a/testdata/val_nsec3_cnametocnamewctoposwc.rpl
+++++ b/testdata/val_nsec3_cnametocnamewctoposwc.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_positive.rpl b/testdata/val_positive.rpl
++index daaf360..c808517 100644
++--- a/testdata/val_positive.rpl
+++++ b/testdata/val_positive.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_positive_wc.rpl b/testdata/val_positive_wc.rpl
++index 5384acf..591dcc6 100644
++--- a/testdata/val_positive_wc.rpl
+++++ b/testdata/val_positive_wc.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_qds_badanc.rpl b/testdata/val_qds_badanc.rpl
++index dc68615..cb53136 100644
++--- a/testdata/val_qds_badanc.rpl
+++++ b/testdata/val_qds_badanc.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_qds_oneanc.rpl b/testdata/val_qds_oneanc.rpl
++index f21ab42..bda9f90 100644
++--- a/testdata/val_qds_oneanc.rpl
+++++ b/testdata/val_qds_oneanc.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_qds_twoanc.rpl b/testdata/val_qds_twoanc.rpl
++index 4e4f2e7..f801c02 100644
++--- a/testdata/val_qds_twoanc.rpl
+++++ b/testdata/val_qds_twoanc.rpl
++@@ -9,6 +9,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_refer_unsignadd.rpl b/testdata/val_refer_unsignadd.rpl
++index 4d07301..22f15d2 100644
++--- a/testdata/val_refer_unsignadd.rpl
+++++ b/testdata/val_refer_unsignadd.rpl
++@@ -9,6 +9,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/val_referd.rpl b/testdata/val_referd.rpl
++index d475f83..a25ca7b 100644
++--- a/testdata/val_referd.rpl
+++++ b/testdata/val_referd.rpl
++@@ -10,6 +10,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_referglue.rpl b/testdata/val_referglue.rpl
++index 54b7671..3ca0c0e 100644
++--- a/testdata/val_referglue.rpl
+++++ b/testdata/val_referglue.rpl
++@@ -10,6 +10,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ stub-zone:
++diff --git a/testdata/val_rrsig.rpl b/testdata/val_rrsig.rpl
++index 0b672e0..69df344 100644
++--- a/testdata/val_rrsig.rpl
+++++ b/testdata/val_rrsig.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_spurious_ns.rpl b/testdata/val_spurious_ns.rpl
++index cb0a6e5..8db94a1 100644
++--- a/testdata/val_spurious_ns.rpl
+++++ b/testdata/val_spurious_ns.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_stub_noroot.rpl b/testdata/val_stub_noroot.rpl
++index 07113be..66c3d8e 100644
++--- a/testdata/val_stub_noroot.rpl
+++++ b/testdata/val_stub_noroot.rpl
++@@ -6,6 +6,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_ta_algo_dnskey.rpl b/testdata/val_ta_algo_dnskey.rpl
++index 03bac83..5b0b64d 100644
++--- a/testdata/val_ta_algo_dnskey.rpl
+++++ b/testdata/val_ta_algo_dnskey.rpl
++@@ -9,6 +9,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_ta_algo_dnskey_dp.rpl b/testdata/val_ta_algo_dnskey_dp.rpl
++index 2b3609b..ae0c499 100644
++--- a/testdata/val_ta_algo_dnskey_dp.rpl
+++++ b/testdata/val_ta_algo_dnskey_dp.rpl
++@@ -10,6 +10,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_ta_algo_missing_dp.rpl b/testdata/val_ta_algo_missing_dp.rpl
++index dc55a09..14efdec 100644
++--- a/testdata/val_ta_algo_missing_dp.rpl
+++++ b/testdata/val_ta_algo_missing_dp.rpl
++@@ -11,6 +11,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_twocname.rpl b/testdata/val_twocname.rpl
++index bc7c3bc..b432364 100644
++--- a/testdata/val_twocname.rpl
+++++ b/testdata/val_twocname.rpl
++@@ -5,6 +5,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 	rrset-roundrobin: no
++ 
++ forward-zone:
++diff --git a/testdata/val_unalgo_anchor.rpl b/testdata/val_unalgo_anchor.rpl
++index fbbf288..a935201 100644
++--- a/testdata/val_unalgo_anchor.rpl
+++++ b/testdata/val_unalgo_anchor.rpl
++@@ -7,6 +7,7 @@ server:
++ 	qname-minimisation: "no"
++ 	fake-sha1: yes
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/val_wild_pos.rpl b/testdata/val_wild_pos.rpl
++index 624d8e0..9fafa65 100644
++--- a/testdata/val_wild_pos.rpl
+++++ b/testdata/val_wild_pos.rpl
++@@ -8,6 +8,7 @@ server:
++ 	fake-sha1: yes
++ 	trust-anchor-signaling: no
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ stub-zone:
++ 	name: "."
++diff --git a/testdata/views.rpl b/testdata/views.rpl
++index 6a9052f..a602624 100644
++--- a/testdata/views.rpl
+++++ b/testdata/views.rpl
++@@ -3,6 +3,7 @@ server:
++ 	target-fetch-policy: "0 0 0 0 0"
++ 	qname-minimisation: "no"
++ 	minimal-responses: no
+++	iter-scrub-promiscuous: no
++ 
++ 	access-control: 10.10.10.0/24 allow
++ 	access-control-view: 10.10.10.10/32 "view1"
++diff --git a/util/config_file.c b/util/config_file.c
++index c403d74..a2fefde 100644
++--- a/util/config_file.c
+++++ b/util/config_file.c
++@@ -404,6 +404,7 @@ config_create(void)
++ 	cfg->ipset_name_v6 = NULL;
++ #endif
++ 	cfg->ede = 0;
+++	cfg->iter_scrub_promiscuous = 1;
++ 	return cfg;
++ error_exit:
++ 	config_delete(cfg);
++@@ -712,6 +713,7 @@ int config_set_option(struct config_file* cfg, const char* opt,
++ 	else S_NUMBER_OR_ZERO("serve-expired-client-timeout:", serve_expired_client_timeout)
++ 	else S_YNO("ede:", ede)
++ 	else S_YNO("ede-serve-expired:", ede_serve_expired)
+++	else S_YNO("iter-scrub-promiscuous:", iter_scrub_promiscuous)
++ 	else S_YNO("serve-original-ttl:", serve_original_ttl)
++ 	else S_STR("val-nsec3-keysize-iterations:", val_nsec3_key_iterations)
++ 	else S_YNO("zonemd-permissive-mode:", zonemd_permissive_mode)
++@@ -1175,6 +1177,7 @@ config_get_option(struct config_file* cfg, const char* opt,
++ 	else O_DEC(opt, "serve-expired-client-timeout", serve_expired_client_timeout)
++ 	else O_YNO(opt, "ede", ede)
++ 	else O_YNO(opt, "ede-serve-expired", ede_serve_expired)
+++	else O_YNO(opt, "iter-scrub-promiscuous", iter_scrub_promiscuous)
++ 	else O_YNO(opt, "serve-original-ttl", serve_original_ttl)
++ 	else O_STR(opt, "val-nsec3-keysize-iterations",val_nsec3_key_iterations)
++ 	else O_YNO(opt, "zonemd-permissive-mode", zonemd_permissive_mode)
++diff --git a/util/config_file.h b/util/config_file.h
++index 7ded3c2..b037261 100644
++--- a/util/config_file.h
+++++ b/util/config_file.h
++@@ -752,6 +752,9 @@ struct config_file {
++ #endif
++ 	/** respond with Extended DNS Errors (RFC8914) */
++ 	int ede;
+++	/** Should the iterator scrub promiscuous NS rrsets, from positive
+++	 * answers. */
+++	int iter_scrub_promiscuous;
++ };
++ 
++ /** from cfg username, after daemonize setup performed */
++diff --git a/util/configlexer.lex b/util/configlexer.lex
++index 7455f50..5e9a355 100644
++--- a/util/configlexer.lex
+++++ b/util/configlexer.lex
++@@ -584,6 +584,7 @@ edns-client-string-opcode{COLON} { YDVAR(1, VAR_EDNS_CLIENT_STRING_OPCODE) }
++ nsid{COLON}			{ YDVAR(1, VAR_NSID ) }
++ ede{COLON}			{ YDVAR(1, VAR_EDE ) }
++ proxy-protocol-port{COLON}	{ YDVAR(1, VAR_PROXY_PROTOCOL_PORT) }
+++iter-scrub-promiscuous{COLON}	{ YDVAR(1, VAR_ITER_SCRUB_PROMISCUOUS) }
++ <INITIAL,val>{NEWLINE}		{ LEXOUT(("NL\n")); cfg_parser->line++; }
++ 
++ 	/* Quoted strings. Strip leading and ending quotes */
++diff --git a/util/configparser.y b/util/configparser.y
++index 7d95690..ab99aa0 100644
++--- a/util/configparser.y
+++++ b/util/configparser.y
++@@ -203,6 +203,7 @@ extern struct config_parser_state* cfg_parser;
++ %token VAR_PROXY_PROTOCOL_PORT VAR_STATISTICS_INHIBIT_ZERO
++ %token VAR_HARDEN_UNKNOWN_ADDITIONAL VAR_DISABLE_EDNS_DO VAR_CACHEDB_NO_STORE
++ %token VAR_LOG_DESTADDR
+++%token VAR_ITER_SCRUB_PROMISCUOUS
++ 
++ %%
++ toplevelvars: /* empty */ | toplevelvars toplevelvar ;
++@@ -339,7 +340,8 @@ content_server: server_num_threads | server_verbosity | server_port |
++ 	server_interface_automatic_ports | server_ede |
++ 	server_proxy_protocol_port | server_statistics_inhibit_zero |
++ 	server_harden_unknown_additional | server_disable_edns_do |
++-	server_log_destaddr
+++	server_log_destaddr |
+++	server_iter_scrub_promiscuous
++ 	;
++ stubstart: VAR_STUB_ZONE
++ 	{
++@@ -3945,6 +3947,16 @@ server_cookie_secret: VAR_COOKIE_SECRET STRING_ARG
++ 		free($2);
++ 	}
++ 	;
+++server_iter_scrub_promiscuous: VAR_ITER_SCRUB_PROMISCUOUS STRING_ARG
+++	{
+++		OUTYY(("P(server_iter_scrub_promiscuous:%s)\n", $2));
+++		if(strcmp($2, "yes") != 0 && strcmp($2, "no") != 0)
+++			yyerror("expected yes or no.");
+++		else cfg_parser->cfg->iter_scrub_promiscuous =
+++			(strcmp($2, "yes")==0);
+++		free($2);
+++	}
+++	;
++ 	ipsetstart: VAR_IPSET
++ 		{
++ 			OUTYY(("\nP(ipset:)\n"));
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-support/unbound/unbound/0002-CVE-2025-11411-2.patch b/meta-networking/recipes-support/unbound/unbound/0002-CVE-2025-11411-2.patch
+new file mode 100644
+index 0000000000..382c9f7c64
+--- /dev/null
++++ b/meta-networking/recipes-support/unbound/unbound/0002-CVE-2025-11411-2.patch
+@@ -0,0 +1,153 @@
++From f6269baa605d31859f28770e01a24e3677e5f82c Mon Sep 17 00:00:00 2001
++From: Yorgos Thessalonikefs <yorgos@nlnetlabs.nl>
++Date: Wed, 26 Nov 2025 11:09:40 +0100
++Subject: [PATCH] - Additional fix for CVE-2025-11411 (possible domain
++ hijacking attack),   to include YXDOMAIN and non-referral nodata answers in
++ the mitigation as   well, reported by TaoFei Guo from Peking University, Yang
++ Luo and JianJun   Chen from Tsinghua University.
++
++CVE: CVE-2025-11411
++Upstream-Status: Backport [https://github.com/NLnetLabs/unbound/commit/f6269baa605d31859f28770e01a24e3677e5f82c]
++
++Comment: Patch refreshed
++
++Signed-off-by: Jackson James <jacksonj2@kpit.com>
++---
++ iterator/iter_scrub.c                    | 39 +++++++++++++++++++++---
++ testdata/ratelimit.tdir/ratelimit.testns | 30 ++++++++++++++----
++ 2 files changed, 59 insertions(+), 10 deletions(-)
++
++diff --git a/iterator/iter_scrub.c b/iterator/iter_scrub.c
++index cc12f97..02f1b48 100644
++--- a/iterator/iter_scrub.c
+++++ b/iterator/iter_scrub.c
++@@ -377,19 +377,21 @@ type_allowed_in_additional_section(uint16_t tp)
++  * @param qinfo: original query.
++  * @param region: where to allocate synthesized CNAMEs.
++  * @param env: module env with config options.
+++ * @param zonename: name of server zone.
++  * @return 0 on error.
++  */
++ static int
++ scrub_normalize(sldns_buffer* pkt, struct msg_parse* msg, 
++ 	struct query_info* qinfo, struct regional* region,
++-	struct module_env* env)
+++	struct module_env* env, uint8_t* zonename)
++ {
++ 	uint8_t* sname = qinfo->qname;
++ 	size_t snamelen = qinfo->qname_len;
++ 	struct rrset_parse* rrset, *prev, *nsset=NULL;
++ 
++ 	if(FLAGS_GET_RCODE(msg->flags) != LDNS_RCODE_NOERROR &&
++-		FLAGS_GET_RCODE(msg->flags) != LDNS_RCODE_NXDOMAIN)
+++		FLAGS_GET_RCODE(msg->flags) != LDNS_RCODE_NXDOMAIN &&
+++		FLAGS_GET_RCODE(msg->flags) != LDNS_RCODE_YXDOMAIN)
++ 		return 1;
++ 
++ 	/* For the ANSWER section, remove all "irrelevant" records and add
++@@ -418,6 +420,11 @@ scrub_normalize(sldns_buffer* pkt, struct msg_parse* msg,
++ 				&aliaslen, pkt)) {
++ 				verbose(VERB_ALGO, "synthesized CNAME "
++ 					"too long");
+++				if(FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_YXDOMAIN) {
+++					prev = rrset;
+++					rrset = rrset->rrset_all_next;
+++					continue;
+++				}
++ 				return 0;
++ 			}
++ 			if(nx && nx->type == LDNS_RR_TYPE_CNAME && 
++@@ -587,6 +594,29 @@ scrub_normalize(sldns_buffer* pkt, struct msg_parse* msg,
++ 					"RRset:", pkt, msg, prev, &rrset);
++ 				continue;
++ 			}
+++			/* Also delete promiscuous NS for other RCODEs */
+++			if(FLAGS_GET_RCODE(msg->flags) != LDNS_RCODE_NOERROR
+++				&& env->cfg->iter_scrub_promiscuous) {
+++				remove_rrset("normalize: removing promiscuous "
+++					"RRset:", pkt, msg, prev, &rrset);
+++				continue;
+++			}
+++			/* Also delete promiscuous NS for NOERROR with nodata
+++			 * for authoritative answers, not for delegations.
+++			 * NOERROR with an_rrsets!=0 already handled.
+++			 * Also NOERROR and soa_in_auth already handled.
+++			 * NOERROR with an_rrsets==0, and not a referral.
+++			 * referral is (NS not the zonename, noSOA).
+++			 */
+++			if(FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NOERROR
+++				&& msg->an_rrsets == 0
+++				&& !(dname_pkt_compare(pkt, rrset->dname,
+++				     zonename) != 0 && !soa_in_auth(msg))
+++				&& env->cfg->iter_scrub_promiscuous) {
+++				remove_rrset("normalize: removing promiscuous "
+++					"RRset:", pkt, msg, prev, &rrset);
+++				continue;
+++			}
++ 			if(nsset == NULL) {
++ 				nsset = rrset;
++ 			} else {
++@@ -947,7 +977,8 @@ scrub_message(sldns_buffer* pkt, struct msg_parse* msg,
++ 	/* this is not required for basic operation but is a forgery 
++ 	 * resistance (security) feature */
++ 	if((FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NOERROR ||
++-		FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NXDOMAIN) &&
+++		FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NXDOMAIN ||
+++		FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_YXDOMAIN) &&
++ 		msg->qdcount == 0)
++ 		return 0;
++ 
++@@ -961,7 +992,7 @@ scrub_message(sldns_buffer* pkt, struct msg_parse* msg,
++ 	}
++ 
++ 	/* normalize the response, this cleans up the additional.  */
++-	if(!scrub_normalize(pkt, msg, qinfo, region, env))
+++	if(!scrub_normalize(pkt, msg, qinfo, region, env, zonename))
++ 		return 0;
++ 	/* delete all out-of-zone information */
++ 	if(!scrub_sanitize(pkt, msg, qinfo, zonename, env, ie, qstate))
++diff --git a/testdata/ratelimit.tdir/ratelimit.testns b/testdata/ratelimit.tdir/ratelimit.testns
++index 563c1db..5c22c29 100644
++--- a/testdata/ratelimit.tdir/ratelimit.testns
+++++ b/testdata/ratelimit.tdir/ratelimit.testns
++@@ -3,13 +3,31 @@ $ORIGIN example.com.
++ $TTL 3600
++ 
++ ENTRY_BEGIN
++-MATCH opcode qtype
+++MATCH opcode qname qtype
++ REPLY QR AA NOERROR
++-ADJUST copy_id copy_query
+++ADJUST copy_id
++ SECTION QUESTION
++-wild	IN	A
+++www1	IN	A
++ SECTION ANSWER
++-wild	IN	A	10.20.30.40
++-SECTION AUTHORITY
++-example.com. IN NS ns.example.com.
+++www1	IN	A	1.1.1.1
+++ENTRY_END
+++
+++ENTRY_BEGIN
+++MATCH opcode qname qtype
+++REPLY QR AA NOERROR
+++ADJUST copy_id
+++SECTION QUESTION
+++www2	IN	A
+++SECTION ANSWER
+++www2	IN	A	2.2.2.2
+++ENTRY_END
+++
+++ENTRY_BEGIN
+++MATCH opcode qname qtype
+++REPLY QR AA NOERROR
+++ADJUST copy_id
+++SECTION QUESTION
+++www3	IN	A
+++SECTION ANSWER
+++www3	IN	A	3.3.3.3
++ ENTRY_END
++-- 
++2.34.1
++
+diff --git a/meta-networking/recipes-support/unbound/unbound/CVE-2025-11411.patch b/meta-networking/recipes-support/unbound/unbound/CVE-2025-11411.patch
+deleted file mode 100644
+index a653090770..0000000000
+--- a/meta-networking/recipes-support/unbound/unbound/CVE-2025-11411.patch
++++ /dev/null
+@@ -1,48 +0,0 @@
+-From 98fac0b396e1e85a6345baa59fc178b1f51759b8 Mon Sep 17 00:00:00 2001
+-From: Patrick Vogelaar <patrick.vogelaar@belden.com>
+-Date: Wed, 29 Oct 2025 13:33:23 +0100
+-Subject: [PATCH] Fix CVE-2025-11411 (possible domain hijacking attack)
+-
+-This fixes CVE-2025-11411 by applying the minimal patch [1] listed in [2]
+-
+-[1] https://nlnetlabs.nl/downloads/unbound/patch_CVE-2025-11411.diff
+-[2] https://www.nlnetlabs.nl/downloads/unbound/CVE-2025-11411.txt
+-
+-CVE: CVE-2025-11411
+-Upstream-Status: Backport [minimal backport of https://github.com/NLnetLabs/unbound/commit/a33f0638e1dacf2633cf2292078a674576bca852]
+-
+-Signed-off-by: Patrick Vogelaar <patrick.vogelaar@belden.com>
+----
+- iterator/iter_scrub.c | 16 ++++++++++++++++
+- 1 file changed, 16 insertions(+)
+-
+-diff --git a/iterator/iter_scrub.c b/iterator/iter_scrub.c
+-index 48867e50..5beaa048 100644
+---- a/iterator/iter_scrub.c
+-+++ b/iterator/iter_scrub.c
+-@@ -571,6 +571,22 @@ scrub_normalize(sldns_buffer* pkt, struct msg_parse* msg,
+- 					"RRset:", pkt, msg, prev, &rrset);
+- 				continue;
+- 			}
+-+			/* If the NS set is a promiscuous NS set, scrub that
+-+			 * to remove potential for poisonous contents that
+-+			 * affects other names in the same zone. Remove
+-+			 * promiscuous NS sets in positive answers, that
+-+			 * thus have records in the answer section. Nodata
+-+			 * and nxdomain promiscuous NS sets have been removed
+-+			 * already. Since the NS rrset is scrubbed, its
+-+			 * address records are also not marked to be allowed
+-+			 * and are removed later. */
+-+			if(FLAGS_GET_RCODE(msg->flags) == LDNS_RCODE_NOERROR &&
+-+				msg->an_rrsets != 0 &&
+-+				1 /* env->cfg->iter_scrub_promiscuous */) {
+-+				remove_rrset("normalize: removing promiscuous "
+-+					"RRset:", pkt, msg, prev, &rrset);
+-+				continue;
+-+			}
+- 			if(nsset == NULL) {
+- 				nsset = rrset;
+- 			} else {
+--- 
+-2.34.1
+-
 diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-index 6841049ac5..2489e3c235 100644
+index 7e3e37406f..6841049ac5 100644
 --- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
 +++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-@@ -10,6 +10,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
- 
+@@ -12,7 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
  SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;nobranch=1 \
-+           file://run-ptest \
             file://CVE-2024-8508.patch \
             file://CVE-2024-33655.patch \
-            file://0001-CVE-2025-11411-1.patch \
-@@ -21,7 +22,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;nobranch=1 \
-            "
- SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
- 
--inherit autotools pkgconfig systemd update-rc.d
-+inherit autotools pkgconfig systemd update-rc.d ptest
- 
- DEPENDS = "openssl libtool-native bison-native expat"
- RDEPENDS:${PN} = "bash openssl-bin daemonize"
-@@ -41,6 +42,10 @@ do_configure:append() {
- 	sed -i -e 's#${RECIPE_SYSROOT}##g' ${B}/config.h
- }
- 
-+do_compile_ptest() {
-+        oe_runmake tests CFLAGS="${CFLAGS} -USRCDIR -DSRCDIR=${PTEST_PATH}/tests"
-+}
-+
- do_install:append() {
- 	install -d ${D}${systemd_unitdir}/system
- 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
-@@ -49,6 +54,21 @@ do_install:append() {
- 	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
- }
- 
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        install -d ${D}${PTEST_PATH}/tests/testdata
-+
-+        install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
-+        install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
-+        install -m 0644 ${S}/testdata/test_signatures* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0664 ${S}/testdata/test_ldnsrr* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0664 ${S}/testdata/zonemd.example* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
-+}
-+
- SYSTEMD_SERVICE:${PN} = "${BPN}.service"
- 
- INITSCRIPT_NAME = "unbound"
+-           file://CVE-2025-11411.patch \
++           file://0001-CVE-2025-11411-1.patch \
++           file://0002-CVE-2025-11411-2.patch \
+            file://CVE-2024-43167.patch \
+            file://CVE-2024-43168_1.patch \
+            file://CVE-2024-43168_2.patch \
 -- 
 2.34.1
 
