@@ -1,185 +1,138 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <Jinfeng.Wang.CN@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 091FAEA3C5C
-	for <webhook@archiver.kernel.org>; Fri, 10 Apr 2026 06:53:43 +0000 (UTC)
-Received: from mail-vs1-f46.google.com (mail-vs1-f46.google.com [209.85.217.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.150651.1775803417739455933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32C78E98FDF
+	for <webhook@archiver.kernel.org>; Fri, 10 Apr 2026 07:05:13 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.150632.1775804710548937339
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Apr 2026 23:43:37 -0700
+ Fri, 10 Apr 2026 00:05:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=R6uiT3dm;
- spf=pass (domain: gmail.com, ip: 209.85.217.46, mailfrom: jackson.james9803@gmail.com)
-Received: by mail-vs1-f46.google.com with SMTP id ada2fe7eead31-60579b9c0ccso1322229137.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Apr 2026 23:43:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775803416; x=1776408216; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Up53CPgqbAF5TVuh5n+wiMyfDrUQO1Czns/QS2i8AN8=;
-        b=R6uiT3dmCBUr4Y43Uf9ERQhklLqA/4d+sB94jP/ViR0kv1+2K2jJ5dN+U5KpqjSRyf
-         1f3HFm8uqX4Cc3YRFYH6pF4hyjkH1xh9IMlf+oObRqBnLnob+P0jdUucettg0nHdlaS1
-         MlakpoAYuHrOMbwvslAcAzGqGneaWG98WL3qDsQltBPt0ldHzTujRmNrjeWgIazo9+JF
-         KMPxYdlVtE87kp4+tRkLOmJ5s6bHROyx5Tq3TsyjH/J/y8XSjjKRMj6hsWMO2/N8v67T
-         NvYbU8Coy7GDhGt0nQTsspYqcmhOj59sAqn0fF1tGyK21RZhCd6dQbQ8oaeK7CAlutax
-         2eew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775803416; x=1776408216;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=Up53CPgqbAF5TVuh5n+wiMyfDrUQO1Czns/QS2i8AN8=;
-        b=nCT0IAEkaLdZBOmLIESHAVzcFaGtzPlDA1gJxdvFptMBdigPkn8H35nJQWF1eMgXAR
-         gu9Bhsf2eTMWG4Avr2kxPaO60EDIbYIGG+x/PKVWy2ih5XNQhnq4MY42MPID9RwnZNag
-         50vndryytJ4YbKiCxc0ATpIKMrf+OhcI2WlbrjgjaCbNuofh2O7yuoxLbU5wu+auDoeX
-         sjhkN0g0CEumZxLlbunO0SWnW2cgBYA7K2R4Pe3hbusSxMHQXVi/vy+DjTQegPG1ev0Z
-         bVYgUpiCe5N+u5R2JhvVV75t8LVEkpz0CACM14hb7YWYb5U8IvjS9t9vG4Dod7QlhkUt
-         RyMw==
-X-Gm-Message-State: AOJu0Yxmc//IT7o2grgHQeYHAqKpQbdG+4uEJpI+DxSGmjY2JFq7MBDD
-	8kSmPvCYBtlR6YpyUR+uO+LH3ksnj1oE9HDHqSL/XECyQIvNcX8bZUDBV+bGWw==
-X-Gm-Gg: AeBDiesNrMsQJ5iESFLs9guY756siOGTi9tNxWHEMyJpCXnROJKcILh6iFbSkJHrapA
-	r30Zq0j/e6gHr33DYKspja6pT5rkvya+L0ZU4h3O39UAwYG+vl1vB94yZ7rS52GVjcDNSIdNnBd
-	o/YSHzbTnvAIh4keO5biMNuAoTiGFoaagrCfx2lFI5EuYcIa6ex9etKdFi43neNQB3l5iFMa6aL
-	/VIaA1SOXOMS2bZdLxBuhNs2DL3w49yY+fPlEQx6L0J2XEH3FxMrX4PMrdJCMVDAGCk0R8zch51
-	W8tKeKWa+4I2D4C3sE4t01ONp5M1rQZT6Hrz03Lwcay2vPvtJa/aDGYg39hRR1N0pGu5FNXOWZO
-	FLu2N8d7U+l6Dd1y0xVGu9Is/IdD/hPNqbBd+8i/a5yCOIHyroqtPRzscnjQqqHwzdUFle/hHTw
-	BVxZCLJnqGGIyk9MmVqOj+VVVzdvY=
-X-Received: by 2002:a17:90b:33c6:b0:359:15c8:e8e1 with SMTP id 98e67ed59e1d1-35e42847a4dmr2061780a91.25.1775802998816;
-        Thu, 09 Apr 2026 23:36:38 -0700 (PDT)
-Received: from LL-868L.kpit.com ([103.155.223.83])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35e34fdc4bcsm5424213a91.7.2026.04.09.23.36.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Apr 2026 23:36:38 -0700 (PDT)
-From: Jackson James <jackson.james9803@gmail.com>
-X-Google-Original-From: Jackson James <jacksonj2@kpit.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: jacksonj2@kpit.com
-Subject: [meta-networking][PATCH 2/2] unbound: Add ptest for unbound
-Date: Fri, 10 Apr 2026 12:06:13 +0530
-Message-Id: <20260410063613.1489769-2-jacksonj2@kpit.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=NlQJiZZa;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8560f54642=jinfeng.wang.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63A687Uc3109351
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 00:05:10 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=N3Gai1UwYMVHdBodk+0d
+	JxGOKBmDcBRMUJoy28egSLw=; b=NlQJiZZa6TOwOBaFNjspyoBwpc6XNfetHecX
+	JpxPu6MVxs3+G9l941YGAZtVQeRkZVEM6jCgXcat7kO2am/oZywLBrpeW0vylzeT
+	VWY5CzfXjJhFBHIlfoJWMWSnP6vasxvez0/JXJPx74dO8b3QpWkXlIIsnz5jhnvS
+	3m7XcrProWq2omRx+KCbfFWFFCxsddaOOnJomMlUzGbTyI0JzUh6RTOmzdVbFUhn
+	6c/pfZUx6DzFME9RtSspnpz1bWLnDc4BtbSwgfYXPHYuxbvDbJn0nFGQT4K5ScBT
+	QOwQzpQHUvWHAmQJ3Ab7LiFTw8KZLNqNUw9aX5lBy1zIx59jyw==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dcmrmn546-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 00:05:09 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Fri, 10 Apr 2026 00:05:09 -0700
+Received: from pek-lpg-core4.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Fri, 10 Apr 2026 00:05:08 -0700
+From: <jinfeng.wang.cn@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [scarthgap][PATCH v2 00/11] fix multiple CVEs 
+Date: Fri, 10 Apr 2026 15:04:57 +0800
+Message-ID: <20260410070508.1104455-1-jinfeng.wang.cn@windriver.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260410063613.1489769-1-jacksonj2@kpit.com>
-References: <20260410063613.1489769-1-jacksonj2@kpit.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: bLcFvzCLcgJyRjDDy33eEptZ52uzrvmu
+X-Proofpoint-GUID: bLcFvzCLcgJyRjDDy33eEptZ52uzrvmu
+X-Authority-Analysis: v=2.4 cv=PpWjqQM3 c=1 sm=1 tr=0 ts=69d8a125 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=iKiJcTA2PjBS6x5JeXcw:22 a=t7CeM3EgAAAA:8 a=8lXANP3OH4O7Jx-AkA4A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDEwMDA2MyBTYWx0ZWRfX0JYUYYPEpGwp
+ d/EAWIe/7enrhzLUd+/7xFVIw540iUBu8Nbw//FJoQCbj074s+WRXGz0mgoLMHxVjIbfpr9PKd1
+ p0RV0GiJbmcrXwSwJMblDgVx1QTpq9ZdMqAiSh/uKB0NwWGCVbVUVZRbWbtLnkyObC8eOOLUkMM
+ CWScC6uboF4fsBqh5NSfDqYLJ1GIzAITFTt23b7DueMvLyUSMicayDe4h9Wj8O66LOiQCx9qa5E
+ uRPWB8+wW7jNKI1zUakmCfuDsMuyrGWVCUdOOSmIdg48frLnOYb5/NexmgWfDKH4JJI/6geG4Yc
+ xXwOxsEbD21XyaCl3k5w8t+b8DVBlrReS/c5qzX5Iesu7kjn2g35uR/oHr35On4Jqk6UEGKhHG6
+ ntqTZ4F+8nGJKNBxLujpf3pUyfW9LIRBiiF3xqrgKS3m/zzBbOc01TjplKC95fq0Bmy7fK8FoNE
+ uJn5IHrv5IPj/mGy9jA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-10_02,2026-04-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ adultscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604010000 definitions=main-2604100063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 06:53:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126221
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 07:05:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126222
 
-Adapt the compile 'test' phony target from Makefile and deploy as
-ptest for unbound.
+From: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
 
-All test are successful on a trial and took around >9min and <10min.
-Duration of ptest execution was 587 seconds on an average.
+V2:
+  update the content of patch(11/11 - nmap: rename enum PCAP_SOCKET)
 
-The previously used minimal CVE-2025-11411.patch caused ptest failures.
-This update switches to the complete upstream patch
-for CVE-2025-11411, which resolves the ptest issues and applies the
-complete security fix.
+Test done:
+bitbake world passed.
 
-Reference to master ptest:
-https://git.openembedded.org/meta-openembedded/commit/meta-networking/recipes-support/unbound?id=d8f21b1dc87408aa86336970e4cb9a9a36a0950b
+Note:
+ This patch(11/11 - nmap: rename enum PCAP_SOCKET) addresses a build failure caused by the libpcap 1.10.4 -> 1.10.6 upgrade (submitted separately to the oe-core mailing list). The enum PCAP_SOCKET in nmap conflicts with definitions in libpcap 1.10.6.
 
-Signed-off-by: Jackson James <jacksonj2@kpit.com>
----
- .../recipes-support/unbound/unbound/run-ptest | 29 +++++++++++++++++++
- .../recipes-support/unbound/unbound_1.19.3.bb | 22 +++++++++++++-
- 2 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/unbound/unbound/run-ptest
 
-diff --git a/meta-networking/recipes-support/unbound/unbound/run-ptest b/meta-networking/recipes-support/unbound/unbound/run-ptest
-new file mode 100644
-index 0000000000..3801233eeb
---- /dev/null
-+++ b/meta-networking/recipes-support/unbound/unbound/run-ptest
-@@ -0,0 +1,29 @@
-+#!/bin/sh
-+
-+cd tests || exit 1
-+retVal=0
-+if ./unittest; then
-+    echo PASS: unittest
-+else
-+    echo FAIL: unittest
-+    retVal=1
-+fi
-+
-+if ./testbound -s; then
-+    echo PASS: testbound selftest
-+else
-+    echo FAIL: testbound selftest
-+    retVal=1
-+fi
-+
-+for x in ./testdata/*.rpl; do
-+	output="$(./testbound -p $x -o -vvvvv 2>&1)"
-+        if test $? -eq 0; then
-+                echo "PASS: $x"
-+        else
-+                echo "$output"
-+                echo "FAIL: $x"
-+                retVal=1
-+        fi
-+done
-+exit $retVal
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-index 6841049ac5..2489e3c235 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-@@ -10,6 +10,7 @@ LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
- 
- SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;nobranch=1 \
-+           file://run-ptest \
-            file://CVE-2024-8508.patch \
-            file://CVE-2024-33655.patch \
-            file://0001-CVE-2025-11411-1.patch \
-@@ -21,7 +22,7 @@ SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;nobranch=1 \
-            "
- SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
- 
--inherit autotools pkgconfig systemd update-rc.d
-+inherit autotools pkgconfig systemd update-rc.d ptest
- 
- DEPENDS = "openssl libtool-native bison-native expat"
- RDEPENDS:${PN} = "bash openssl-bin daemonize"
-@@ -41,6 +42,10 @@ do_configure:append() {
- 	sed -i -e 's#${RECIPE_SYSROOT}##g' ${B}/config.h
- }
- 
-+do_compile_ptest() {
-+        oe_runmake tests CFLAGS="${CFLAGS} -USRCDIR -DSRCDIR=${PTEST_PATH}/tests"
-+}
-+
- do_install:append() {
- 	install -d ${D}${systemd_unitdir}/system
- 	install -m 0644 ${B}/contrib/unbound.service ${D}${systemd_unitdir}/system
-@@ -49,6 +54,21 @@ do_install:append() {
- 	install -m 0755 ${S}/contrib/unbound.init_yocto ${D}${sysconfdir}/init.d/unbound
- }
- 
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        install -d ${D}${PTEST_PATH}/tests/testdata
-+
-+        install -m 0544 ${B}/unittest ${D}${PTEST_PATH}/tests/
-+        install -m 0544 ${B}/testbound ${D}${PTEST_PATH}/tests/
-+        install -m 0644 ${S}/testdata/test_signatures* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_sigs* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_ds* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/test_nsec3_hash* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0664 ${S}/testdata/test_ldnsrr* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0664 ${S}/testdata/zonemd.example* ${D}${PTEST_PATH}/tests/testdata
-+        install -m 0644 ${S}/testdata/*.rpl ${D}/${PTEST_PATH}/tests/testdata/
-+}
-+
- SYSTEMD_SERVICE:${PN} = "${BPN}.service"
- 
- INITSCRIPT_NAME = "unbound"
+Guocai He (1):
+  yasm: fix CVE-2021-33454
+
+Haixiao Yan (3):
+  python3-django: fix CVE-2025-64459
+  python3-django: fix CVE-2025-57833
+  python3-django: fix CVE-2025-59681
+
+Jinfeng Wang (1):
+  nmap: rename enum PCAP_SOCKET
+
+Libo Chen (6):
+  hdf5: fix CVE-2025-6857
+  hdf5: fix CVE-2025-2153
+  hdf5: fix CVE-2025-2310
+  hdf5: fix CVE-2025-44905
+  hdf5: fix CVE-2025-2309
+  hdf5: fix CVE-2025-2308
+
+ .../yasm/yasm/CVE-2021-33454.patch            |   29 +
+ meta-oe/recipes-devtools/yasm/yasm_git.bb     |    1 +
+ .../files/nmap-rename-enum-PCAP_SOCKET.patch  |   81 +
+ meta-oe/recipes-security/nmap/nmap_7.80.bb    |    1 +
+ .../hdf5/files/CVE-2025-2153.patch            |   51 +
+ .../hdf5/files/CVE-2025-2308.patch            | 2120 +++++++++++++++++
+ .../hdf5/files/CVE-2025-2309.patch            |   41 +
+ .../hdf5/files/CVE-2025-2310.patch            |   37 +
+ .../hdf5/files/CVE-2025-44905.patch           |   46 +
+ .../hdf5/files/CVE-2025-6857.patch            |  248 ++
+ meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |    6 +
+ .../CVE-2025-57833.patch                      |   88 +
+ .../CVE-2025-59681.patch                      |  179 ++
+ .../CVE-2025-64459-1.patch                    |   57 +
+ .../CVE-2025-64459-2.patch                    |   63 +
+ .../python/python3-django_5.0.14.bb           |    7 +-
+ 16 files changed, 3054 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/yasm/yasm/CVE-2021-33454.patch
+ create mode 100644 meta-oe/recipes-security/nmap/files/nmap-rename-enum-PCAP_SOCKET.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2153.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2309.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2310.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-44905.patch
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2025-57833.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2025-59681.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2025-64459-1.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-5.0.14/CVE-2025-64459-2.patch
+
 -- 
 2.34.1
 
