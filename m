@@ -1,188 +1,102 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E701EF36BA7
-	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 07:26:56 +0000 (UTC)
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.182440.1775892407327253650
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37CD9F3ED47
+	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 11:15:03 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.191320.1775906101064157989
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Apr 2026 00:26:47 -0700
+ Sat, 11 Apr 2026 04:15:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nGrGvSh0;
- spf=pass (domain: gmail.com, ip: 74.125.82.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-2ce22328930so4302970eec.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 00:26:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gVLbPb0Q;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2b258576d8cso17182465ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 04:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775892406; x=1776497206; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1775906100; x=1776510900; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0P1/GZOcbGnt+zApQSPgnDAR96UQwfXRzJVX02+74cI=;
-        b=nGrGvSh0ENpFG44tEx0Oxfbe2uu5iDst5PGiKwSTs5Tg93UKQTIW3/V/rD3QFYJeb6
-         wCQzLV6ETiZS7fVprmLoos3V0xWDrqW6ncu9cv8GYdCpwMwvDB+z+wYMxSWm3IG6kHB2
-         D78IpvoVDOE+pzPAxaAPSnOmNoq7oLsCMcqZV4MGyPfPV3eV5wpf9BMBWthED/jil4Pf
-         Xa6U7tPRBJu0HoSDQ6fr3bW16wV1DzuC9syM+BA3jskRSlgM4/su0vUbL+jCWF5PCO/f
-         DXqqnmSSEIHqhdZFIOarAPxCI2Y09Wex32LwiLTEObkahnxMe+H3CMphrzD9iv6oGGHe
-         eGjw==
+        bh=5iO1WDza3/HXp2IsSfZvOJOmE9sQrYRd0s3bLTsi9iw=;
+        b=gVLbPb0QZuq4Wo1N2LhkghgOQ7iWrJnFfaAYhOrIYePFH5mhzxEJwvDpkAyfBm4Qcd
+         Ft7nslLvW2HGSQgXkuWnr8wIwIN+Q2+Vig29CzXq93KftplZa6i70zTkAnyYR1YlF4qI
+         T/oHGRT92N/oY+eC7im1JHH6aTIrLhZfpKcOYaxeVFpnk4VVGWBy+zNFRZXe5jYFKCLP
+         1ePVtqszAlz+JYWmHbM/wKxrJR8OElPgvqnoUk8ACzSrMdvhvpzZm9SSwTuNyVei6FmJ
+         xFuEuEg3qrmFomlf5v7s4sjYeTdoPu1cooK1mPBcse+3aa9iuBDgF+dkwDiPADQl8W10
+         P2rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775892406; x=1776497206;
+        d=1e100.net; s=20251104; t=1775906100; x=1776510900;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0P1/GZOcbGnt+zApQSPgnDAR96UQwfXRzJVX02+74cI=;
-        b=Icj8Y8tLpmrMCZqbJgzRNYNEQOtPyRb78K+kE6uE/Jm7oQ/llishhmpuHg/u8w26qr
-         ZkJdPdZb4YgU7FdTfkWJd0ZL2T2iXzJakCxkkMHCGIqj2K7oX8mb4WK9NT4tds6QotcC
-         itg2IVyVsOa+Smd5qP6xRGmB+0I0Ezce7rE8XG25ahFMk/t9Mzhr18FtIqzTC/c8Wrx8
-         g0MlWcL/lmfNvASPu6BT8MTLATXzHVT+lMTVBjpBPPq84NWONyx3eVWP4o4oZvxxI4wH
-         wS7B/xCaGwcuRFq44f0QjHYBZheH+/Yswc6FXexHFVWgqA/ldZknrsdE+8YaNHKEyw3n
-         CxRw==
-X-Gm-Message-State: AOJu0Yw9jmhp73zXioxAavrcCbIi2F5LvRmkgd7F6uhRpGN0wL8EghKM
-	2t9YZxYhtV50PL2l7kC+RaBGRaYUFz9hIw9J6Blw2TDeX34hIxyH8qEGreovF0EK
-X-Gm-Gg: AeBDietG1eOXaop7bv1gkZR4OTe/zDSxSU3yWEG7Nc+kETR9TE9aWZ0DYyS2ghsxWV7
-	jRpnjFvGIP9L3ih/LLdx8vMrnwkmzgNllqcGI/0QQOVJpv62ecvarGJvIQjtrS/lj+UMeNtyXxG
-	8b2Yf/YMEJaXG3zkxm4+/lKc3JGd9lsHK0M779LFHmuHlmuWEjDZj/UxttZOleLIfAWUw6+b+xu
-	oZ4OHlANY5gdRhG2Gbuu/ZWXeiqYWTRjVm6Y5fSW6Ch09YSvJvbfdEkmTgpgqcYKFFKXjs5Xasl
-	oE6VaFNOBb2Qp81klkKGSHKkuCmjy1Hf6qFQHIhNWpS6lw2XAxrGPE4EuWAaNnTiZo/x9DLZQiS
-	xWE80cOeFPHLRJh3g2q8k3+4BZ/wMLFyU8F5FbnbGngj2GNi4xcNfXVtfmWoGOADxmmpL2L8k76
-	v1shVOHXDIq+tR3XFy2oGkOlgqbimiOMfFhXZDaRZC0tutvn+jVst/ZBMXLWoZAEGznM+9dY3qX
-	Fq4/7QiIXJ4EjWF6UpAlyymerOEsXI9mBlRJOOw3M2XbbzPNE8AMKPWy4k2
-X-Received: by 2002:a05:7300:8c9e:b0:2d3:d3f:2429 with SMTP id 5a478bee46e88-2d583ed5c11mr3949777eec.0.1775892406128;
-        Sat, 11 Apr 2026 00:26:46 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2d5621d5e43sm7486692eec.21.2026.04.11.00.26.45
+        bh=5iO1WDza3/HXp2IsSfZvOJOmE9sQrYRd0s3bLTsi9iw=;
+        b=WQqN6RExG67F2biX1uyju/ptW+qz91n0iPAsqJ4Aem/hfyBryonAjcVcKrzBt8NaJH
+         tSR8Xo4yTbyOsbHGItxsfk8giB6eiaCdWAR1pmzPOVC8f9PACI+aqjk5Lh1BEqgxmkGJ
+         ltbw54fDDVgt0pyVX6Hx+D/Zuu4v6xpZpndW+dq2jVNyzLQWVV+Nv3YIIxiD1i1ETZI2
+         Lu6skEVu/csrpbJOY+nFWnS/hvhbgmMgc8Lsexrd4nPwkJw7o2d+M0QhK8vZkdL4wSJ1
+         Srfq0z7aGn1UdBzFI/WZLBYAhQrQhZrMgT7JuhyzXB7Pqjg3yBNE3E1DG3wlD7W2oI5J
+         Cz4A==
+X-Gm-Message-State: AOJu0YydxQB7Phy81GwYHqt41STRFXz+YZYVVVIuLkaI+oykwh8wCpIg
+	XzdUcL/DduWWgW50MhIAUEv7bV+MLEsX1SUYqPyAAVBI5DuGgtwFChIIUHYzrg==
+X-Gm-Gg: AeBDiev/tlfLgiv1BOmVmXI4+7AEE08Zk9InpC35T1LPre9bVmuhuSQXnzpiLBKFqv6
+	LFgtyY4sCINKqHcrOVpbWY2NHNKm56uNvNYgIe5YSRBv1La+KH3jCE9GUE2uFPo60ZLOmvJX9VB
+	Gkviq5p7C/GXdeKWxDY/CTSO9PGPzKcYuxJQaOmX0rc58ExtwRL3OuVCjA/O5hOMneBH0NRXT88
+	mY2hE4M/iWkpf/lIkx9FySCfxImLRPkDZvEBA7T1C5d01Vv6OCP6HY2LWLW98yJrTM0iJRfGisC
+	pjzBbUUKuPaZujNaWLYXIoF6HdeaL4DSJ65DV3oeM0S/qXUivPySqTvsGUkCqXUxIfbbfYizg2S
+	/d/LvilMl4wk/VdjO9mdziToEO1Zq5Wo37jjaT6ik/E1cf8g4SMpWlOHXK9qKlkjwl9f1hLNCbH
+	oc2uRzxWyhtpimKZHgH5KGLN3Zx6JpSvKq+UM9
+X-Received: by 2002:a05:6a20:2451:b0:398:71e4:6282 with SMTP id adf61e73a8af0-39fe3c1a50amr7932316637.4.1775906099904;
+        Sat, 11 Apr 2026 04:14:59 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c793488d824sm130447a12.16.2026.04.11.04.14.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Apr 2026 00:26:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+        Sat, 11 Apr 2026 04:14:59 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] log4c: convert K&R function declarations to ANSI C prototypes
-Date: Sat, 11 Apr 2026 00:26:43 -0700
-Message-ID: <20260411072643.129969-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-python][scarthgap][PATCH 1/5] python3-django: upgrade 4.2.29 -> 4.2.30
+Date: Sat, 11 Apr 2026 23:14:45 +1200
+Message-ID: <20260411111451.2739610-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 07:26:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126252
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 11:15:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126253
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+
+Release Notes:
+https://docs.djangoproject.com/en/dev/releases/4.2.30/
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...t-K-R-function-declarations-to-ANSI-.patch | 92 +++++++++++++++++++
- meta-oe/recipes-support/log4c/log4c_1.2.4.bb  |  1 +
- 2 files changed, 93 insertions(+)
- create mode 100644 meta-oe/recipes-support/log4c/log4c/0001-sd-malloc-convert-K-R-function-declarations-to-ANSI-.patch
+ .../0001-lower-setuptools-requirements.patch                    | 0
+ .../{python3-django_4.2.29.bb => python3-django_4.2.30.bb}      | 2 +-
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-django-4.2.29 => python3-django-4.2.30}/0001-lower-setuptools-requirements.patch (100%)
+ rename meta-python/recipes-devtools/python/{python3-django_4.2.29.bb => python3-django_4.2.30.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/log4c/log4c/0001-sd-malloc-convert-K-R-function-declarations-to-ANSI-.patch b/meta-oe/recipes-support/log4c/log4c/0001-sd-malloc-convert-K-R-function-declarations-to-ANSI-.patch
-new file mode 100644
-index 0000000000..fae1a2d0c2
---- /dev/null
-+++ b/meta-oe/recipes-support/log4c/log4c/0001-sd-malloc-convert-K-R-function-declarations-to-ANSI-.patch
-@@ -0,0 +1,92 @@
-+From b0ecadec662a8e35b017e16e92c5b1a04ed72598 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Sat, 11 Apr 2026 00:24:17 -0700
-+Subject: [PATCH] sd/malloc: convert K&R function declarations to ANSI C
-+ prototypes
-+
-+Replace old-style K&R parameter declarations with modern ANSI C
-+(C89/C90) function prototypes across all functions in malloc.c.
-+Also remove trailing whitespace in fixup_null_alloc().
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ src/sd/malloc.c | 23 ++++++++---------------
-+ 1 file changed, 8 insertions(+), 15 deletions(-)
-+
-+diff --git a/src/sd/malloc.c b/src/sd/malloc.c
-+index 7d241ad..43dd460 100644
-+--- a/src/sd/malloc.c
-++++ b/src/sd/malloc.c
-+@@ -41,8 +41,7 @@ typedef void (*sd_malloc_handler_t)();
-+ static sd_malloc_handler_t handler  = NULL;
-+
-+ static void *
-+-fixup_null_alloc (n)
-+-    size_t n;
-++fixup_null_alloc (size_t n)
-+ {
-+     void* p = 0;
-+
-+@@ -62,8 +61,8 @@ fixup_null_alloc (n)
-+ 	    allocated = (char *) sbrk (0) - (char *) &environ;
-+ 	sd_error("\nCannot allocate %lu bytes after allocating %lu bytes\n",
-+ 		 (unsigned long) n, (unsigned long) allocated);
-+-
-+-	if (handler)
-++
-++	if (handler)
-+ 	    handler();
-+ 	else {
-+ 	    sd_error("\n\tMemory exhausted !! Aborting.\n");
-+@@ -75,8 +74,7 @@ fixup_null_alloc (n)
-+ }
-+
-+ sd_malloc_handler_t
-+-sd_malloc_set_handler(a_handler)
-+-    sd_malloc_handler_t a_handler;
-++sd_malloc_set_handler(sd_malloc_handler_t a_handler)
-+ {
-+     sd_malloc_handler_t previous = handler;
-+
-+@@ -87,8 +85,7 @@ sd_malloc_set_handler(a_handler)
-+ /* Allocate N bytes of memory dynamically, with error checking.  */
-+
-+ void *
-+-sd_malloc (n)
-+-    size_t n;
-++sd_malloc (size_t n)
-+ {
-+     void *p;
-+
-+@@ -101,8 +98,7 @@ sd_malloc (n)
-+ /* Allocate memory for N elements of S bytes, with error checking.  */
-+
-+ void *
-+-sd_calloc (n, s)
-+-    size_t n, s;
-++sd_calloc (size_t n, size_t s)
-+ {
-+     void *p;
-+
-+@@ -117,9 +113,7 @@ sd_calloc (n, s)
-+    If P is NULL, run sd_malloc.  */
-+
-+ void *
-+-sd_realloc (p, n)
-+-    void *p;
-+-    size_t n;
-++sd_realloc (void *p, size_t n)
-+ {
-+     if (p == 0)
-+ 	return sd_malloc (n);
-+@@ -132,8 +126,7 @@ sd_realloc (p, n)
-+ /* Return a newly allocated copy of STRING.  */
-+
-+ char *
-+-sd_strdup (string)
-+-     const char *string;
-++sd_strdup (const char *string)
-+ {
-+   return strcpy (sd_malloc (strlen (string) + 1), string);
-+ }
-diff --git a/meta-oe/recipes-support/log4c/log4c_1.2.4.bb b/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
-index a0bd40b03a..eca800dc5e 100644
---- a/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
-+++ b/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://fix_configure_with-expat.patch \
-            file://0001-Use-the-API-properly-in-the-example-format-security-.patch \
-+           file://0001-sd-malloc-convert-K-R-function-declarations-to-ANSI-.patch \
-           "
-
- SRC_URI[sha256sum] = "5991020192f52cc40fa852fbf6bbf5bd5db5d5d00aa9905c67f6f0eadeed48ea"
+diff --git a/meta-python/recipes-devtools/python/python3-django-4.2.29/0001-lower-setuptools-requirements.patch b/meta-python/recipes-devtools/python/python3-django-4.2.30/0001-lower-setuptools-requirements.patch
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-django-4.2.29/0001-lower-setuptools-requirements.patch
+rename to meta-python/recipes-devtools/python/python3-django-4.2.30/0001-lower-setuptools-requirements.patch
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.29.bb b/meta-python/recipes-devtools/python/python3-django_4.2.30.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-django_4.2.29.bb
+rename to meta-python/recipes-devtools/python/python3-django_4.2.30.bb
+index c8d2c17589..146cd1eb90 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.2.29.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.2.30.bb
+@@ -2,7 +2,7 @@ require python-django.inc
+ inherit python_setuptools_build_meta
+ 
+ SRC_URI += "file://0001-lower-setuptools-requirements.patch"
+-SRC_URI[sha256sum] = "86d91bc8086569c8d08f9c55888b583a921ac1f95ed3bdc7d5659d4709542014"
++SRC_URI[sha256sum] = "4ebc7a434e3819db6cf4b399fb5b3f536310a30e8486f08b66886840be84b37c"
+ 
+ RDEPENDS:${PN} += "\
+     python3-sqlparse \
 
