@@ -1,100 +1,159 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89E7AF3ED58
-	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 15:47:14 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.200514.1775922433233531418
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EE57F3ED66
+	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 20:35:35 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.103])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.210157.1775939734799860068
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Apr 2026 08:47:13 -0700
+ Sat, 11 Apr 2026 13:35:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JXnlJ9J+;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-794719afcd4so31006797b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 08:47:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775922432; x=1776527232; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o7RlNfpH7EFOrT5z2SFwpOZnqMWnbeBe/Pm2NGgVCLo=;
-        b=JXnlJ9J+mn8ZVXyIYGWY4NqFU2i02+22fag2JQ8iKtzgrVmb5Qb8pah+kuaRCcfDTv
-         rVmFbXAMvklYhuWuuLjn3txCuxdnfJ/oTYlwFqDcT4Lh73jKtJ+wkYPWJokMzghMQ/4k
-         p2i7NRlSNwqXPcBrzH8DikoMvbXFG0eYvy6tV2jnUdfgRixtB++/y0eJJs9Bu3HlwTxa
-         H2138n04dBZ2HX4D0tQLLBpBxlFio2uoeEmiFzZnK+57WGClqxIQOLyquFN+csm+IBZn
-         Mz5ycCBnyexde6O/lztT51QNoHpEq/MD3FJsgjRHCmPDRZImGOiC8uo0DgOPiTCOsV7L
-         iy2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775922432; x=1776527232;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=o7RlNfpH7EFOrT5z2SFwpOZnqMWnbeBe/Pm2NGgVCLo=;
-        b=KJ6wwB8kAQhKRyJGMoNahalL8pHxZ5Ep9hWqVf4OlzeDuJMlNGLp2YXhMTcw7/msTt
-         XVd1ig6i4LDH3h2PBDNjNAPHwmlFfHWOVt2374cp7K2ChRl453VCyEHpQGCaODX1NI8d
-         LQIaPDb5Mo1y5KbGlGWa4ZvnJ/APQUeftfhbVWzqIPN/r8iQ+xo1ssV2HT6ONW8kCq1r
-         qB/wAq1cIqrnjtkORtvnl7kO+vVMIsU3n+Etgo8VaGxcrZO4cx+032NIi3FUJ+IYgCby
-         ktfzchkuN65ITEkDUKNVh9PSRFIFewficyIIo2QAvrm1aSVfDieme5zeYZGpIBBej4Ev
-         Bg7A==
-X-Gm-Message-State: AOJu0YyLyw6dOvt/yK2/5CBOHz09YdZAUroVq+fp2v/Y0yrWGvb1q1zU
-	nRvPhjQ85D1hLHW7RrS/iErR1W3isOdCdYkEQ5eBNa5gwI2OOkg25Pt9WDRJzw==
-X-Gm-Gg: AeBDieujo+e47TrhRjsAL+pWQ9VenKbDDDvsSnn8Dgb2iCdTBLGShOGFbtU1y1Ry2I+
-	6IqbL0WItkxvOFUwho/J5uWTjKs5BEKGyqLejhxbKSqJR5VWz2eVMAuq2ET+2ZNwAyTXyMZItWk
-	kmznI3Y/2v63OZL7YbZ0YWf5gEeILtRMQ7vmNj44sreivDv3qHBHGPFfHcmsoVapi5UkK9XpAlc
-	EiHdskpk3fvyxh8Dx/Z13AgVjR6jZ5gemyuhgntjWDqlPgoAjuGLy0F5NPoORdvlYEqhIqPprji
-	+KfEklcO2iJiMXySRM9UVcHGv3pE4cH+fppKahnv8hCiwLSg42o5GmX4efOZewC9Hr5AOUm0IKi
-	APcrfk07JXDeHC394UMMjTXlvpQA7HeSrKZEKEmV3/4pCBf5B+azOVBaQQ+B1JsZCllYojmgzql
-	x8F1m/3zCt8qFX20SpM+CDQ66q9rbqXYiWOhG8wZNl/dhfn/TO1hbDfsWWKmZua4rH9EtcrwgUE
-	xZaD4lKbt2+ea9XERyuQYb2UpgOZ1Tkwh46nh2C5vP1qX4DyHOIcF2cCiJG9VTsroRXQ2A2hVrN
-	U9pRRg==
-X-Received: by 2002:a05:690c:6913:b0:7a6:1a8d:3040 with SMTP id 00721157ae682-7af72145df7mr80508357b3.51.1775922431847;
-        Sat, 11 Apr 2026 08:47:11 -0700 (PDT)
-Received: from localhost.localdomain (71-208-10-104.ftmy.qwest.net. [71.208.10.104])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7af400ed949sm30204797b3.49.2026.04.11.08.47.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Apr 2026 08:47:10 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][whinlatter][PATCH] php: upgrade 8.4.19 -> 8.4.20
-Date: Sat, 11 Apr 2026 11:46:58 -0400
-Message-ID: <20260411154658.1076421-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=nWbXCqTp;
+ spf=pass (domain: navimatix.de, ip: 52.101.65.103, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pCAUUFRIJicvv2Y/kSWPJAViJ/iikljawy9T5UXnhMzThZTIBGkx8FqZUYbElWDUKt3VpHUmnPlUEKvlBXi53Lcw1+mWgRvPT9YGv53mjqWwSJEoYpSuzpj6YIJ85gWFN+CdBpwZAiQQ5MV4R0X80jY0IJvdTf688isdipPkO/c3qotbo1ltqKCa/WPxb+c6rFUxnZzklZHE3SornmNQTSah2X6ffFsYIB87+vP03910ecfJ9HcorAg6Eeg2bW+Bt0Arg5b3wryRZpyMJdBgaAfehF476SDOvqMTVMYxJBCxJSBh694r+AF5qqWn3OnOx3W5SArCtKhdRCIu0Og6Ug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=15HKHhcjHwk8qqBjudWRjSJExi/ePrVheHvDjmAQZmI=;
+ b=ux+HdypDVWVhIWAH+hlncywA0CbmHEbtVWFJWsOQVGM+zhHhPP630Z5s/e5dln8Eh9PDZ6LAWZzdZWe62r9gBacBOeBXXMHPh6+wvEN5nMx7nUe2DEnfnVCvZgU1l+rjroW9aPG1dJx9LWIFjRsnsoMaajntV2WKwj4Sjs5v/7p0lA2MsK6dqxDyhGFme3u1uLYwQ3g555Q2bq/qEuMzkaileKTjYN5LggbqhsXyT0ENxymvWYXgHsV/RS2BbPWMdfTLQ9DXffKWJxDUfWACU2roJPeleMj9ClcIzfRn82qI+LxLk2i+LEpfTVNBGfdiH61k0mbHzZa1gvd/2Jdtew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=15HKHhcjHwk8qqBjudWRjSJExi/ePrVheHvDjmAQZmI=;
+ b=nWbXCqTpQFNQ6waEJaE5yNxxpSRAtLXWmSMHBgzNqNJl1iSOv0eopSgCtfoGZyr+yHi+GKmPGcDcOrAlbe12CDJYGC0vpfRQKrk5G6IAZK2D390TU8QmR8bdyNbKgxX9vSYg7KYHFkNd+VioOeb8i+n02godAF/TfMrQFf1aqcA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8) by DBAPR01MB7159.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:199::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.46; Sat, 11 Apr
+ 2026 20:35:31 +0000
+Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ ([fe80::d5c3:2dea:3d98:25fd]) by
+ GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
+ with mapi id 15.20.9769.046; Sat, 11 Apr 2026 20:35:31 +0000
+Date: Sat, 11 Apr 2026 22:35:30 +0200
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, rs@ti.com, 
+	joerg.sommer@navimatix.de
+CC: rs@ti.com, =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH] atop: Fix binmerge
+Message-ID: <0cfa4d49021a742fdf06215e9f1734908e3f6375.1775939729.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+References: <20260410182747.1646597-2-rs@ti.com>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260410182747.1646597-2-rs@ti.com>
+X-ClientProxiedBy: BE1P281CA0253.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:8b::12) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+ (2603:10a6:150:2cb::8)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|DBAPR01MB7159:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5d401247-fc8d-444d-de8e-08de9809e020
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|376014|366016|1800799024|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	oyZdP3V4IHF644jKXs/wHPkkghkVK1KDuuOvFDBJ5DRogg8902AYAT4OU0UF5D3khEXwFgBAsJi6oMtSLHWb37jSr6iaLY3rc9H4hWujrke3DeO7chptSjXnn2Vngos7l3+ibbMF3QVVdinf/RoFoM7qJAFOptGgfN/qoiHaHVw1DhMOBGc5vWmvES4jWjIItzZj89gYYFsSRGF1L8dsqrag8uDbdIgdMZY1ZPjhgauVvBh7qhMZuQRJ/cSHjhp3DS/uoq3vsMZ9R0BypDdb9KBmJ+TgSfEqLUM20Z+oISFn7czBDFOyhM5OrVzbtN0PaKpkCAAqaYmI39w0V+6BAhPvIiokrWgGa5XqxyxR9XURRKuRo3s6hOhNC/ZuzStAMEzc+8Wr0RHt6mEgFKE44X4Bs2KXQB6xZiD9uo2GQtjvnTBEp2lBhKOR+u5EMP6JtbC/fekH2fhov5/Rcl7pNZUKuW08zT0UYHrw4AcGTS2y1etv0BQ6UlaRedxK2d4DwJ8cdxn4V7g/wn0l+lr1HGJMGaInQ5OWaFDUNcN1qHWA3hUL26baTrQse4XLt4J10Q1Fc73epyL3vc/jV7cV5nhxpAoX2zrUoNqgMwoMCUCPgF1KkjzAFnxHj3f+y0phhjmQjGeGg8Nb11oM4POSGuztPDVydLuZ877s0zqxIn3b21IIkjFgZttpNx8mb66vZCByQ0q2SpOpjZt0mANsysstaG0MCK4zoZe/8u1Ne1g=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?m+ZH3jxlvomcJuPr0kd5NhCUmsd64xKtNalmE1zrIJK1hL9ORVYzIM3ZUMcZ?=
+ =?us-ascii?Q?9fBBiVKXo23NF7abMlF2kn5Ni9cbMRB52u3JxOc5KZ92KdsREouPWLtc2P1r?=
+ =?us-ascii?Q?yo2+5IFaLcXQcTqQiviJCW3iG1TB2XURWIsAMem0ahjTEon0azcdIQ5/3HY/?=
+ =?us-ascii?Q?zR5oUC1FCQxDViQqFODY+0ZQZw/WcJNevHJNKHGQRWDfaFFP0hNR7QAWcI+T?=
+ =?us-ascii?Q?VIyCE2x1P1I0t1QmyDtdYNiz3HWiGSoPl3J0oXqJiYcf2Ki+D7anNGlP4nUj?=
+ =?us-ascii?Q?JUkn32MiD9bGaAG6D2bYuI9WJ5n8G9MdPr017KQTP+Cgqedl4hTpjW6asgDh?=
+ =?us-ascii?Q?ZgOUP/4yLARISkL2wiU9vQuqUW7dr362STzcTIh8qt49OS4IDHvDe0JUQiZl?=
+ =?us-ascii?Q?8HoAnkVAyAESo0A/eK3yAkz18jG5mtaHyyavxOlMsAPsAJWxt7U9d9GrdIsS?=
+ =?us-ascii?Q?36ko31IL2rHJ6SrroB5LBr7JLhnlqtuyqagMd61zU6DLDeTWYZucwDoK/Kzh?=
+ =?us-ascii?Q?Owckqmg3FwDkAEapJrUj83uMi8Yi1ru9vQxyzqOOTHIDeSO1VCnFFD9MXA5B?=
+ =?us-ascii?Q?jl29ftKRNmK5EfKacm/yGe58uxzVfiKTebGTbC7IHXkbqs5z1P3YD/8mF1LT?=
+ =?us-ascii?Q?lCRe47xpShRhTQDmhWmBoMYi5G7LwX7a0qtkq2fv0Vg4rphYR+smonbwJ9Aj?=
+ =?us-ascii?Q?cceY7ensaicG2PgDfUvQyRWW/+H7SuNlQQeObVCtQEE1Q78mm2G/nh572BEV?=
+ =?us-ascii?Q?29x3812qqtjICuWbKQQx0z9xwNBa8k8iJiqdqIvpu93mcNQ0Of93IyxNbL87?=
+ =?us-ascii?Q?uzYqOVGpJ4tPf3Ou7uW244iRK3+SqN3ClGZUCI4lohX6KLoxs+ZhXuYl6lk1?=
+ =?us-ascii?Q?44rCrXtLv38AZNn4YZAUMcl2Sa5g6rku/7cN0OaJJako14pgRI3kFOVsnU8P?=
+ =?us-ascii?Q?z9clvZuSJ635h7UQZZcMNg2edwRFIEPutYEBH4FyWaJlyO6cYgO7cU7zpAnX?=
+ =?us-ascii?Q?gsVmJlMBUnzB5EOJro6JmtArPCr4eV2R6ck3ZghHmzVFy2rlfZTFY4Pmvf+p?=
+ =?us-ascii?Q?xlyN1stJkkjtDASrHQpf3lwuoa52Vb4iB4nC1F4Y//YFyKrqAIyskP/tI4TB?=
+ =?us-ascii?Q?e0xjA/tZoQbpTTrWK235K1S/4N0eGs82qcheJKo4pOh2clDwxgKc5vrM43+u?=
+ =?us-ascii?Q?//FiltI2mpT8z2dU+OMtjTXKcDhgufVljVN6JBgO5RxFQZCf4H7mcGUPSRq4?=
+ =?us-ascii?Q?HDDdsL3n2gAQWlfbnN02AqUm0VMiwm4LCpIQEouwf7fQn3W0532b+/+VJw5R?=
+ =?us-ascii?Q?QQQPd00ZCYRlqab/tFkb+KoSC+MWUaMALqb/nfuLiib/3GGXbTS5olmomi3L?=
+ =?us-ascii?Q?xVvnGwRMLWhmo4MoWeChOr2ne+lArdrfuKi8SLTo1GMtDl9+v1sDZlulDCRu?=
+ =?us-ascii?Q?z/XOeujvqhslWmL2ezi3sF7U2C6KlCDm6CJqLoWJQ4vQ723hYMHLMAPCGmfH?=
+ =?us-ascii?Q?MBYZclpyMuinpW9ziTnqJBLzGlkCqo/qQYmZxH9rIrULWUkTlFXQrno86Ckv?=
+ =?us-ascii?Q?Xo7QeM3pI7cGg+9wpCOtsa+YtDhE097Uld+c9hdNT5GsUXin5/5sWVmbZ/uY?=
+ =?us-ascii?Q?VdQuuidMeAVNTff7pmaKsOeWtz6BAAkqOan1XJlH5RaPto3h6xJekrwG+mkH?=
+ =?us-ascii?Q?Vd2oPjLaYxTEXVSovhO4Zyw+kjgpvjscZB+slNcX/XPkfgRPjYhNTUEsA6f6?=
+ =?us-ascii?Q?mBTP/R3vGIHb4eokEiKPKnDr4drlbYU=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5d401247-fc8d-444d-de8e-08de9809e020
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2026 20:35:31.6564
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mxrg2XXZBP7AD9Q+qmVrCmfg9iT63fPv1uyx7bTxovMj0rkEo0DJseHv41LPUsAr1/D4oWyA8r3xtabgv0f4b0j5xybb0CaT1dozayueRX4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR01MB7159
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 15:47:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126258
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 20:35:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126259
 
-This is a bug fix release.
+From: J=F6rg Sommer <joerg.sommer@navimatix.de>
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.4.20
+In case $sbindir =3D $bindir we have to pass this setting to make install a=
+nd
+later on explicitly cleanup the unwanted daemons.
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
- meta-oe/recipes-devtools/php/{php_8.4.19.bb => php_8.4.20.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.4.19.bb => php_8.4.20.bb} (99%)
+ meta-oe/recipes-support/atop/atop_2.12.1.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.4.19.bb b/meta-oe/recipes-devtools/php/php_8.4.20.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.4.19.bb
-rename to meta-oe/recipes-devtools/php/php_8.4.20.bb
-index 4a5a5fa5b8..feed807359 100644
---- a/meta-oe/recipes-devtools/php/php_8.4.19.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.4.20.bb
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
- 
- S = "${UNPACKDIR}/php-${PV}"
- 
--SRC_URI[sha256sum] = "bceb7798ed37b442fe523ae7ef345ccc2231db0b022d30735c2e378d3254a0d4"
-+SRC_URI[sha256sum] = "ce25d2610a5f9522ac8f53fbb7b8280b5c021991e9bd9137068c9c629d9ffb56"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
--- 
-2.43.0
+diff --git a/meta-oe/recipes-support/atop/atop_2.12.1.bb b/meta-oe/recipes-=
+support/atop/atop_2.12.1.bb
+index 4ca74edbaf..6b462a4d8f 100644
+--- a/meta-oe/recipes-support/atop/atop_2.12.1.bb
++++ b/meta-oe/recipes-support/atop/atop_2.12.1.bb
+@@ -37,7 +37,7 @@ do_compile() {
+ do_install() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',=
+ d)}; then
+         make DESTDIR=3D${D} VERS=3D${PV} SYSDPATH=3D${systemd_system_unitd=
+ir} \
+-            PMPATHD=3D${systemd_unitdir}/system-sleep install
++            PMPATHD=3D${systemd_unitdir}/system-sleep SBINPATH=3D${sbindir=
+} install
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         install -m 644 ${UNPACKDIR}/volatiles.atop.conf ${D}${sysconfdir}/=
+tmpfiles.d/atop.conf
+         rm -f ${D}${systemd_system_unitdir}/atopacct.service
+@@ -53,7 +53,8 @@ do_install() {
+     rmdir --ignore-fail-on-non-empty ${D}${localstatedir}
+=20
+     # remove atopacct related files
+-    rm -rf ${D}${sbindir} ${D}${mandir}/man8
++    rm -rf ${D}${sbindir}/atopacctd ${D}${mandir}/man8/atopacctd.8 \
++        ${D}${sbindir}/atopgpud ${D}${mandir}/man8/atopgpud.8
+ }
+=20
+ inherit systemd
+--=20
+2.53.0
 
 
