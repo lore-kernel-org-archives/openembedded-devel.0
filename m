@@ -2,373 +2,1098 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD8A3F364CD
-	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 06:56:06 +0000 (UTC)
-Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.181902.1775890565044440117
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3F65F36BA6
+	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 07:15:46 +0000 (UTC)
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.182658.1775891741690675620
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Apr 2026 23:56:05 -0700
+ Sat, 11 Apr 2026 00:15:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=JxFDvoFW;
- spf=pass (domain: gmail.com, ip: 74.125.224.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-6501418152cso2702310d50.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 23:56:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1775890564; cv=none;
-        d=google.com; s=arc-20240605;
-        b=GnJofpVl6oyeezXleGMzFMymkoJDoC8MSZflQMjbghhzDZt+sOHBFT0D88uy4qGX50
-         wP4SBMdOgWsyVWgfLGjIWYkXNo1GG97M1tZs5TW51+HpMRKvsavEfeh1X4ZoMbIZHtqa
-         Um1a9xC481fg25G+g5f7fUIBM4+qCUuhZ84f8rVGTXYmh6eFDEoD2hCKBEocD1S6U2mX
-         NcoTplh5oYDpOfuKeBLthXVeloMppYanH6QJ1J9VukgAWVIn3ji3FqNcfw9kjG14ADeX
-         Xg/a68k4rqs0JGO1hrfsCiZAtdk4Kyv1zrnd7NHSralGFyS0ucmNrXLCQce+KwFHcCbu
-         QIJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=OUoenNMNnZ8AAhWNNGJXkrDlfY7oJcwvoTwD048dnYA=;
-        fh=omGsxyFJZ50ECKYv3eI9/Wtao+MgVB02tsvOGIAVpcE=;
-        b=R44ItU6xH3GE32ctorpp4qjXQ2flfHXJyO4fOHso+mi2YPAYfo902ozt+aFC1sBgfU
-         FBn2kte0O76uuf9717XYqQmBf80hezgJzm1yHCQtTnRE41ANrN2Mb2I/jGYURrq/VrFv
-         fId28e65ytlBaYa+FA4GAs3VbcEmelFeMsBMcuZyFctNjHBLe4TuUvrpyhSTZdX0PlSr
-         FQg9oQNCcsfFSvwNgF4ZztdV2gojLlkGtx7acUu2wzm1Jlb5K1CH2jmE/Rmarz3NnV0K
-         TIVs4aCAygWurf2L7WXcQ7nIBwmPkTMT6D6pbqRvWfRJO1ZNw7APk38p9i8g8IU8gCbX
-         wOVQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QvFChnqI;
+ spf=pass (domain: gmail.com, ip: 74.125.82.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-2bdd40d3c61so2433470eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 00:15:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775890564; x=1776495364; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=OUoenNMNnZ8AAhWNNGJXkrDlfY7oJcwvoTwD048dnYA=;
-        b=JxFDvoFWwb5yOpUtSZAv7xnWAmF8TgAJv9B2mYUyXdU3+NpgG/EWSkMla1JqW8RV4G
-         Wd1bRQ/0xZTodL5Qa7CxQcnTWL7Ss6vD7DSl7/4W6mIOR1WZq0qr5/qRZ+rjElO7gWlZ
-         Z86Pnx/IS8GyvmWuI47PtZdR52ZzTrwnkUbhIZvWNvMPwHtfe5vx+1o0+b8Vwc/wyBuN
-         aScF9qepwUI1f+hTb7zvncojmbQCL/x16dHMsW4y5ovBom/NTTL6aMzM9FpwOczhc4Ls
-         b4zEPeOXXZMxQ3PK8KwzN3cpQ1xFGOKn060ALujvLKcSkSQyRubL82bKRzvUpUpcD3Lr
-         raew==
+        d=gmail.com; s=20251104; t=1775891741; x=1776496541; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5omdXnKxDxW7kPH/5V+J7pikcnvhyA1SnvBIv/R0W+o=;
+        b=QvFChnqIBEGh0o003BlD+iVSleDI3Sh4yjZbae+kaJiGK+bs6LSoBc2EcwtThKduNH
+         BhBSHIL5bSpmjy9OA594dKjohId/JtR3TAokCnvpwwoJ337nRBu7XxiDO96txpfMvKrk
+         thnuydaOPwPQzcQcb6tHo7ZqP8/IqKqvKJ5n0BK/3chax19DWB/+Nu5rqtvUzFh1EiKr
+         CCTKTL9izkD/gR/LVHGSRxlFWMWppS6o6AB/LjPm+0jsNDXHRyBOhzNUzpNDqaxb5Dqt
+         JuLUnspHd8wngQUg43xRB7E+Ewp8nGwV+xVaQvwfXRHPH1lWE2CDh3vPq/zeRY0r8iN2
+         H5Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775890564; x=1776495364;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1775891741; x=1776496541;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=OUoenNMNnZ8AAhWNNGJXkrDlfY7oJcwvoTwD048dnYA=;
-        b=S1lWuqUX88tx/P5vpHeJZqImKyiKnDfinn6o8435PN/5p6jnK4BpK2g4krsLAJEQdm
-         Eu6hk086UHFfXjxQ1zSni0QuuSN7NRYjbxjZ21+LGn4FsxW/GeqtmAIoXpJMZbrPwlGq
-         vlVsEYuz3u/025B6FaengmYa5IilWqrSGIVN/ooUOMwc5EBuHtLCJKnUSz/Zz8lKXx9u
-         AnChJuWvqWwYdYoXi5zdDnVyMHkrF/hccgPnRD3CrpuZWCYXFhzAKjW9dIt5YsHED7P1
-         gmXqdnOU1044Xz+tsahPC4EfJhPXxIeVSNsyhykuqihx9cfimdkU85BR6ljQ2hVXG79T
-         f8mg==
-X-Forwarded-Encrypted: i=1; AJvYcCWe1RUDi1a9SvP2HtAT+FTgXAOxCpBXWdPtY3nsH6U4pPa/jKRd3k1K9OagrI58bLL5U9kBbGzEY3pK/T9fJKDH/sM=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YwKgrNncfDqNtcLHnnuyhj8AtM2rU+Kbga4T8kY1/1uKAuopuo3
-	FMkfgvETgB4zYqX4tamu2RmsG0zzEO+3wCvXVWScIsPT1WFUbjErOU0vaXzZaxtSMHsm8OCOVwN
-	qfXC1E3hr7mEGYX5kv4yhQrx9YjmoDns=
-X-Gm-Gg: AeBDieup+MMXhKn+LkbfhkMzY820QCDXKzpF9b6+uco18jZR1WZRrumozsj9XkHzwon
-	iIDVZriMjVGmnnhLQmva6KcRUHlNXgKYtJbm7QbEvknifSiGQlmR2vlfWmvuGo4aVE6Rb9z1Hbo
-	Zkvtsuo8uqor0CNEuXAw/tQwfppzYarzsF2v7gNd7CZQk5J24tp0/sfGT/l4qWQEyTbG2Xa+fo8
-	vvDt/3D26MvfuQW4ap1VoWujGxqdonty983KErORgUAInU5HSABJz9YhMlqtPe4Nzyo1gY/OV6d
-	Nu/terVMIpllfNm9j/R2q9hYzVIOJhEPjjCfATkYd1bFbTSDEKwQNfbvuXhCOtIWKazvHSYZoZR
-	p4bT+1fAS7ph40gAxyy8k6LIT2itTpnFUMO0=
-X-Received: by 2002:a05:690e:43db:b0:650:1cdb:5f49 with SMTP id
- 956f58d0204a3-65198a385fdmr3814089d50.2.1775890564010; Fri, 10 Apr 2026
- 23:56:04 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260225093727.1284-1-wangmy@fujitsu.com> <20260225093727.1284-21-wangmy@fujitsu.com>
- <CAMKF1sqyBvg=6Pf0EPLzR8b=N27Nbry6jduL1t-tHdqAygwp8A@mail.gmail.com> <690f7b42-7d44-4ac3-9401-3d79e9ffa317@gmail.com>
-In-Reply-To: <690f7b42-7d44-4ac3-9401-3d79e9ffa317@gmail.com>
+        bh=5omdXnKxDxW7kPH/5V+J7pikcnvhyA1SnvBIv/R0W+o=;
+        b=jqX1EfpmJlb8CBhDNQEW/4Jh58Sj9ccL9pmrBqmg6zCP8WT6/mQ/B+5JgBQldwsjTU
+         fxZDXIr0bsps+BgducE8afyh84pjzPiunrZcwmto6ObkeWppkknk7hFYek3b7OCoDKi4
+         0BGc4Nc+CuvExBUMRfBj3JscsfdybJfGd890ABNcfNNwlrLxviP4FWICXfnd66EFKn0r
+         UlLB5RsR2PObOv8WKBWyCLYrmHvzWiyUmFZdOEVgTzGayU1GC6naA8e/ugoLCLa6En56
+         18h7Zyvn245DpDKVl0dHw5djlPSrzlGMcs9uH1RUMllcjX193AzLNEUETxfod1r8O9u6
+         icmw==
+X-Gm-Message-State: AOJu0YyOhKDSvE+a+hpxCMmy64Ec7Wql1qogpfpOdpcK6mNQeA2DfvY7
+	7xz/R+bZ5jaJ7tFl/f/4wck9h3KdcV0SQfZ7SHOHbx7dFMSZIgGFo41xhbuRvyAU
+X-Gm-Gg: AeBDieupUXaMo4tJpktDMCLi5ksC7saF0A+NtWlDjopeWm0DeJVXfKnpcUa9cIfODk0
+	27XjFwgDloHPdYXedQdGjdth5v+gCuRReF+NiHnNBtqQ4CZT/FrUzSLG6o4ormP/OxQPjMZD+Te
+	teKE5phXk7Jazt05vO/BWS4DwXBiIuLRJBM6EsYooMf6bFhlK13XohteflQmPh/LabB914+xzAd
+	8zphIbdySWOyA+suxdSvoueO592AJUBqpLsSqVcQEznA7tyuiV0ijLDSTF+FXIZkLBHvnT+gFAu
+	R+tcKXi37EgdJIE2CWP898M+APBx2CLFN2cIK2H0uA/K73Ci7At1Q4w4gsbSm8e4tD5lbwX3T7I
+	G/lQapvDlZCGtm7miCk/zeH0IXts2ATIpPDGwIwR5PuTK4u2VvREnMeieokJGsGHw1oTwNIZYo+
+	pxKy8wtfvUf+KgdH9q+PXyXPHKoHKoDJMhWXonz6VrcgiYiBZLvmW+YX5U7mSZIjAcmeaCNauZB
+	Dt2SAzbwR7YUmjgzF0mRbXDsZbwLKh2S/UEvNIKjPliluK1nIyqvqEr1PKT
+X-Received: by 2002:a05:7300:e207:b0:2c5:d833:a4fe with SMTP id 5a478bee46e88-2d5876a10f7mr3615946eec.10.1775891740268;
+        Sat, 11 Apr 2026 00:15:40 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2d562eb05fcsm7986028eec.28.2026.04.11.00.15.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 11 Apr 2026 00:15:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Apr 2026 23:55:36 -0700
-X-Gm-Features: AQROBzCbG1ArA_pENfH3XjplfcoCnvS1hEAZ_9G0hy2OetIlamrKgiyWx-KIUxo
-Message-ID: <CAMKF1sr=3Qu0mPMeFjmwMADN6C6rHoPWUZUfrM1oMDKMovz-_Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH 21/33] minizip: upgrade 1.3.1 -> 1.3.2
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: wangmy@fujitsu.com, Samuli Piippo <samuli.piippo@qt.io>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000003a59f6064f29be16"
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] dlt-daemon: Fix build with clang-22
+Date: Sat, 11 Apr 2026 00:15:37 -0700
+Message-ID: <20260411071537.108106-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 06:56:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126250
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 07:15:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126251
 
---0000000000003a59f6064f29be16
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ ...arnings-Fix-clang-generated-warnings.patch | 1003 +++++++++++++++++
+ .../dlt-daemon/dlt-daemon_3.0.0.bb            |    1 +
+ 2 files changed, 1004 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-warnings-Fix-clang-generated-warnings.patch
 
-On Fri, Apr 10, 2026 at 10:16=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.=
-com>
-wrote:
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-warnings-Fix-clang-generated-warnings.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-warnings-Fix-clang-generated-warnings.patch
+new file mode 100644
+index 0000000000..208e433e53
+--- /dev/null
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0001-warnings-Fix-clang-generated-warnings.patch
+@@ -0,0 +1,1003 @@
++From 74b36fab6e7e66ca470b7b2ca2a494edd8c673d5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <khem.raj@oss.qualcomm.com>
++Date: Fri, 10 Apr 2026 23:42:05 -0700
++Subject: [PATCH] warnings: Fix clang generated warnings
++
++This patch ensures that it can compile with clang-22
++
++Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/850]
++Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++---
++ CMakeLists.txt                                |  3 +
++ examples/example1/example1.c                  |  2 +-
++ examples/example1_v2/example1.c               |  2 +-
++ examples/example2/example2.c                  |  2 +-
++ examples/example2_v2/example2.c               |  2 +-
++ examples/example3/example3.c                  |  2 +-
++ examples/example3_v2/example3.c               |  2 +-
++ examples/example4/example4.c                  |  2 +-
++ examples/example4_v2/example4.c               |  2 +-
++ src/console/dlt-control-v2.c                  |  2 +-
++ src/console/dlt-passive-node-ctrl.c           |  8 +--
++ src/console/dlt-receive-v2.c                  |  2 +-
++ src/console/dlt-sortbytimestamp.c             |  2 +-
++ src/console/logstorage/dlt-logstorage-ctrl.c  |  2 +-
++ src/daemon/dlt-daemon.c                       |  6 +-
++ src/daemon/dlt-daemon.h                       |  2 +-
++ src/daemon/dlt_daemon_client.c                |  6 +-
++ src/examples/dlt-example-filetransfer.c       |  8 ++-
++ .../dlt-example-multicast-clientmsg-view.c    |  4 +-
++ src/examples/dlt-example-user-common-api.c    |  2 +-
++ src/examples/dlt-example-user-func-v2.c       |  2 +-
++ src/examples/dlt-example-user-func.c          |  2 +-
++ src/examples/dlt-example-user-v2.c            |  4 +-
++ src/examples/dlt-example-user.c               |  2 +-
++ src/lib/dlt_env_ll.c                          |  3 +-
++ src/lib/dlt_user.c                            | 70 +++++++++----------
++ .../dlt_offline_logstorage.c                  |  2 +-
++ src/shared/dlt_log.c                          |  8 +--
++ src/system/dlt-system-journal.c               |  8 ++-
++ src/system/dlt-system-process-handling.c      |  2 +-
++ src/system/dlt-system-shell.c                 |  2 +-
++ src/system/dlt-system.h                       |  4 +-
++ src/tests/dlt-test-client-v2.c                |  2 +-
++ src/tests/dlt-test-fork-handler-v2.c          |  2 +-
++ src/tests/dlt-test-fork-handler.c             |  2 +-
++ src/tests/dlt-test-multi-process-v2.c         |  8 +--
++ src/tests/dlt-test-multi-process.c            |  8 +--
++ src/tests/dlt-test-non-verbose.c              |  4 +-
++ src/tests/dlt-test-preregister-context-v2.c   |  2 +-
++ src/tests/dlt-test-preregister-context.c      |  2 +-
++ src/tests/dlt-test-qnx-slogger.c              |  2 +-
++ src/tests/dlt-test-stress-client-v2.c         |  2 +-
++ src/tests/dlt-test-stress-user-v2.c           |  2 +-
++ src/tests/dlt-test-stress-v2.c                |  2 +-
++ src/tests/dlt-test-stress.c                   |  2 +-
++ src/tests/dlt-test-user-v2.c                  |  2 +-
++ src/tests/dlt-test-user.c                     |  2 +-
++ tests/dlt_test_receiver.c                     |  2 +-
++ 48 files changed, 110 insertions(+), 108 deletions(-)
++
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -261,7 +261,11 @@ add_compile_options(
++     -Wcast-qual
++     -Wno-system-headers
++     -Wno-unused-function
++-    -Wno-stringop-truncation
+++    $<$<AND:$<COMPILE_LANGUAGE:C>,$<C_COMPILER_ID:Clang>>:-Wno-gnu-statement-expression-from-macro-expansion>
+++    $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:Clang>>:-Wno-gnu-statement-expression-from-macro-expansion>
+++    $<$<CXX_COMPILER_ID:Clang>:-Wno-gnu-zero-variadic-macro-arguments>
+++    $<$<AND:$<COMPILE_LANGUAGE:C>,$<C_COMPILER_ID:GNU>>:-Wno-stringop-truncation>
+++    $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:GNU>>:-Wno-stringop-truncation>
++ )
++
++ if(WITH_DOC STREQUAL "OFF")
++--- a/examples/example1/example1.c
+++++ b/examples/example1/example1.c
++@@ -50,7 +50,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa1);
++
++-int main()
+++int main(void)
++ {
++     struct timespec ts;
++
++--- a/examples/example1_v2/example1.c
+++++ b/examples/example1_v2/example1.c
++@@ -50,7 +50,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa1);
++
++-int main()
+++int main(void)
++ {
++     struct timespec ts;
++
++--- a/examples/example2/example2.c
+++++ b/examples/example2/example2.c
++@@ -52,7 +52,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa2);
++
++-int main()
+++int main(void)
++ {
++     int num;
++     struct timespec ts;
++--- a/examples/example2_v2/example2.c
+++++ b/examples/example2_v2/example2.c
++@@ -52,7 +52,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa2);
++
++-int main()
+++int main(void)
++ {
++     int num;
++     struct timespec ts;
++--- a/examples/example3/example3.c
+++++ b/examples/example3/example3.c
++@@ -52,7 +52,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa3);
++
++-int main()
+++int main(void)
++ {
++     int num;
++     struct timespec ts;
++--- a/examples/example3_v2/example3.c
+++++ b/examples/example3_v2/example3.c
++@@ -52,7 +52,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa3);
++
++-int main()
+++int main(void)
++ {
++     int num;
++     struct timespec ts;
++--- a/examples/example4/example4.c
+++++ b/examples/example4/example4.c
++@@ -50,7 +50,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa1);
++
++-int main()
+++int main(void)
++ {
++     unsigned char buffer[256];
++     int num;
++--- a/examples/example4_v2/example4.c
+++++ b/examples/example4_v2/example4.c
++@@ -50,7 +50,7 @@
++
++ DLT_DECLARE_CONTEXT(con_exa1);
++
++-int main()
+++int main(void)
++ {
++     unsigned char buffer[256];
++     int num;
++--- a/src/console/dlt-control-v2.c
+++++ b/src/console/dlt-control-v2.c
++@@ -129,7 +129,7 @@ typedef struct {
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/console/dlt-passive-node-ctrl.c
+++++ b/src/console/dlt-passive-node-ctrl.c
++@@ -118,7 +118,7 @@ void set_node_id(char *id)
++     }
++ }
++
++-char *get_node_id()
+++char *get_node_id(void)
++ {
++     return g_options.node_id;
++ }
++@@ -211,7 +211,7 @@ static int dlt_passive_node_analyze_resp
++  *
++  * @return Pointer ot DltControlMsgBody, NULL otherwise
++  */
++-DltControlMsgBody *dlt_passive_node_prepare_message_body()
+++DltControlMsgBody *dlt_passive_node_prepare_message_body(void)
++ {
++     DltControlMsgBody *mb = calloc(1, sizeof(DltControlMsgBody));
++     char *ecuid = get_node_id();
++@@ -271,7 +271,7 @@ void dlt_passive_node_destroy_message_bo
++  *
++  * @return 0 on success, -1 on error
++  */
++-static int dlt_passive_node_ctrl_single_request()
+++static int dlt_passive_node_ctrl_single_request(void)
++ {
++     int ret = -1;
++
++@@ -301,7 +301,7 @@ static int dlt_passive_node_ctrl_single_
++     return ret;
++ }
++
++-static void usage()
+++static void usage(void)
++ {
++     printf("Usage: dlt-passive-node-ctrl [options]\n");
++     printf("Send a trigger to DLT daemon to (dis)connect a passive node "
++--- a/src/console/dlt-receive-v2.c
+++++ b/src/console/dlt-receive-v2.c
++@@ -144,7 +144,7 @@ typedef struct {
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/console/dlt-sortbytimestamp.c
+++++ b/src/console/dlt-sortbytimestamp.c
++@@ -194,7 +194,7 @@ void write_messages(int ohandle, DltFile
++ /**
++  * Print usage information of tool.
++  */
++-void usage() {
+++void usage(void) {
++     char version[DLT_VERBUFSIZE];
++
++     dlt_get_version(version, DLT_VERBUFSIZE);
++--- a/src/console/logstorage/dlt-logstorage-ctrl.c
+++++ b/src/console/logstorage/dlt-logstorage-ctrl.c
++@@ -354,7 +354,7 @@ static int dlt_logstorage_ctrl_setup_eve
++  *
++  * @return 0 on success, -1 otherwise.
++  */
++-static int dlt_logstorage_ctrl_single_request()
+++static int dlt_logstorage_ctrl_single_request(void)
++ {
++     int ret = 0;
++
++--- a/src/daemon/dlt-daemon.c
+++++ b/src/daemon/dlt-daemon.c
++@@ -207,7 +207,7 @@ void close_pipes(int fds[2])
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[DLT_DAEMON_TEXTBUFSIZE];
++     dlt_get_version(version, DLT_DAEMON_TEXTBUFSIZE);
++@@ -2489,7 +2489,7 @@ void dlt_daemon_local_cleanup(DltDaemon
++     free(daemon_local->flags.ipNodes);
++ }
++
++-void dlt_daemon_exit_trigger()
+++void dlt_daemon_exit_trigger(void)
++ {
++     /* stop event loop */
++     g_exit = -1;
++@@ -2655,7 +2655,7 @@ int dlt_daemon_log_internal(DltDaemon *d
++
++         msg.storageheadersizev2 = (uint32_t)(STORAGE_HEADER_V2_FIXED_SIZE + strlen(DLT_DAEMON_ECU_ID));
++         msg.baseheadersizev2 = BASE_HEADER_V2_FIXED_SIZE;
++-        msg.baseheaderextrasizev2 = (int32_t)dlt_message_get_extraparameters_size_v2(msgcontent);
+++        msg.baseheaderextrasizev2 = (uint32_t)dlt_message_get_extraparameters_size_v2(msgcontent);
++         /* Ecu Id, App Id, Ctx Id and Session Id*/
++         msg.extendedheadersizev2 = (uint32_t)(1 + strlen(DLT_DAEMON_ECU_ID) + 1 + strlen(app_id) + 1 + strlen(ctx_id) + sizeof(uint32_t));
++
++--- a/src/daemon/dlt-daemon.h
+++++ b/src/daemon/dlt-daemon.h
++@@ -217,7 +217,7 @@ int dlt_daemon_local_connection_init(Dlt
++ int dlt_daemon_local_ecu_version_init(DltDaemon *daemon, DltDaemonLocal *daemon_local, int verbose);
++
++ void dlt_daemon_daemonize(int verbose);
++-void dlt_daemon_exit_trigger();
+++void dlt_daemon_exit_trigger(void);
++ void dlt_daemon_signal_handler(int sig);
++ #ifdef __QNX__
++ void dlt_daemon_cleanup_timers();
++--- a/src/daemon/dlt_daemon_client.c
+++++ b/src/daemon/dlt_daemon_client.c
++@@ -817,7 +817,7 @@ int dlt_daemon_client_send_control_messa
++
++     msg->storageheadersizev2 = (uint32_t)(STORAGE_HEADER_V2_FIXED_SIZE + (daemon->ecuid2len));
++     msg->baseheadersizev2 = BASE_HEADER_V2_FIXED_SIZE;
++-    msg->baseheaderextrasizev2 = (int32_t)dlt_message_get_extraparameters_size_v2(DLT_CONTROL_MSG);
+++    msg->baseheaderextrasizev2 = (uint32_t)dlt_message_get_extraparameters_size_v2(DLT_CONTROL_MSG);
++     msg->extendedheadersizev2 = (uint32_t)((daemon->ecuid2len) + 1 + appidlen + 1 + ctxidlen + 1);
++
++     msg->headersizev2 = (int32_t)(msg->storageheadersizev2 + msg->baseheadersizev2 +
++@@ -5388,7 +5388,7 @@ void dlt_daemon_control_passive_node_con
++
++         con = &daemon_local->pGateway.connections[i];
++
++-        resp->connection_status[i] = con->status;
+++        resp->connection_status[i] = (uint8_t)con->status;
++         //TBD: Review node_id[i * con->ecuid2len]
++         memcpy(&resp->node_id[i * con->ecuid2len], con->ecuid2, con->ecuid2len);
++     }
++@@ -5471,7 +5471,7 @@ void dlt_daemon_control_passive_node_con
++
++         con = &daemon_local->pGateway.connections[i];
++
++-        resp->connection_status[i] = con->status;
+++        resp->connection_status[i] = (uint8_t)con->status;
++         memcpy(&resp->node_id[i * DLT_ID_SIZE], con->ecuid, DLT_ID_SIZE);
++     }
++
++--- a/src/examples/dlt-example-filetransfer.c
+++++ b/src/examples/dlt-example-filetransfer.c
++@@ -84,9 +84,10 @@ bool shutdownStatus = false;
++  * The function will set the flag (shutdownStatus) to true after .2 sec
++  * @return Null to stop thread
++  */
++-void *cancel_filetransfer()
+++void *cancel_filetransfer(void* arg)
++ {
++     // wait 200msec once a filetransfer is started and then set the flag to true
+++    (void)arg;
++     struct timespec ts;
++     ts.tv_sec = 0;
++     ts.tv_nsec = 200000000; // 200 ms
++@@ -99,8 +100,9 @@ void *cancel_filetransfer()
++  * The function will start dlt filetransfer and will throw error if status of shutdownStatus is high
++  * @return Null to stop thread
++  */
++-void *filetransfer()
+++void *filetransfer(void* arg)
++ {
+++    (void)arg;
++     int transferResult;
++
++     transferResult = dlt_user_log_file_header(&fileContext, file);
++@@ -125,7 +127,7 @@ void *filetransfer()
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/examples/dlt-example-multicast-clientmsg-view.c
+++++ b/src/examples/dlt-example-multicast-clientmsg-view.c
++@@ -96,7 +96,7 @@ int dlt_receive_message_callback_udp(Dlt
++ {
++     static char text[DLT_RECEIVE_TEXTBUFSIZE];
++
++-    if ((message == NULL)) {
+++    if (message == NULL) {
++         printf("NULL message in dlt_receive_message_callback_udp\n");
++         return -1;
++     }
++@@ -119,7 +119,7 @@ int dlt_receive_message_callback_udp(Dlt
++ }
++
++
++-int main()
+++int main(void)
++ {
++     struct clientinfostruct clientinfo;
++     struct ip_mreq mreq;
++--- a/src/examples/dlt-example-user-common-api.c
+++++ b/src/examples/dlt-example-user-common-api.c
++@@ -66,7 +66,7 @@ DLT_DECLARE_CONTEXT(mycontext)
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/examples/dlt-example-user-func-v2.c
+++++ b/src/examples/dlt-example-user-func-v2.c
++@@ -84,7 +84,7 @@ DltContextData mycontextdata;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/examples/dlt-example-user-func.c
+++++ b/src/examples/dlt-example-user-func.c
++@@ -82,7 +82,7 @@ DltContextData mycontextdata;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/examples/dlt-example-user-v2.c
+++++ b/src/examples/dlt-example-user-v2.c
++@@ -88,7 +88,7 @@ DLT_DECLARE_CONTEXT(mycontext3)
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++@@ -458,4 +458,4 @@ int dlt_user_injection_callback_with_spe
++ void dlt_user_log_level_changed_callback_v2(char *context_id, uint8_t log_level, uint8_t trace_status)
++ {
++     printf("Log level changed of context %s, LogLevel=%u, TraceState=%u\n", context_id, log_level, trace_status);
++-}
++\ No newline at end of file
+++}
++--- a/src/examples/dlt-example-user.c
+++++ b/src/examples/dlt-example-user.c
++@@ -86,7 +86,7 @@ DLT_DECLARE_CONTEXT(mycontext3)
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/lib/dlt_env_ll.c
+++++ b/src/lib/dlt_env_ll.c
++@@ -125,7 +125,8 @@ int dlt_env_helper_to_lower(char **const
++
++ int dlt_env_extract_symbolic_ll(char **const env, int8_t *ll)
++ {
++-    char result[strlen("verbose") + 1];
+++    char result[sizeof("verbose")];
+++
++
++     if (!env || !ll) {
++         return -1;
++--- a/src/lib/dlt_user.c
+++++ b/src/lib/dlt_user.c
++@@ -545,7 +545,7 @@ DltReturnValue dlt_init(void)
++
++     /* Check logging mode and internal log file is opened or not*/
++     if (logging_mode == DLT_LOG_TO_FILE && logging_handle == NULL) {
++-        dlt_log_init(logging_mode);
+++        dlt_log_init((int)logging_mode);
++     }
++
++     /* Initialize common part of dlt_init()/dlt_init_file() */
++@@ -2391,14 +2391,14 @@ DltReturnValue dlt_set_application_ll_ts
++
++     /* Update local structures */
++     for (i = 0; i < dlt_user.dlt_ll_ts_num_entries; i++) {
++-        dlt_user.dlt_ll_ts[i].log_level = loglevel;
++-        dlt_user.dlt_ll_ts[i].trace_status = tracestatus;
+++        dlt_user.dlt_ll_ts[i].log_level = (int8_t)loglevel;
+++        dlt_user.dlt_ll_ts[i].trace_status = (int8_t)tracestatus;
++
++         if (dlt_user.dlt_ll_ts[i].log_level_ptr)
++-            *(dlt_user.dlt_ll_ts[i].log_level_ptr) = loglevel;
+++            *(dlt_user.dlt_ll_ts[i].log_level_ptr) = (int8_t)loglevel;
++
++         if (dlt_user.dlt_ll_ts[i].trace_status_ptr)
++-            *(dlt_user.dlt_ll_ts[i].trace_status_ptr) = tracestatus;
+++            *(dlt_user.dlt_ll_ts[i].trace_status_ptr) = (int8_t)tracestatus;
++     }
++
++     dlt_mutex_unlock();
++@@ -2413,7 +2413,7 @@ DltReturnValue dlt_set_application_ll_ts
++     }
++ }
++
++-int dlt_get_log_state()
+++int dlt_get_log_state(void)
++ {
++     return dlt_user.log_state;
++ }
++@@ -2500,25 +2500,6 @@ DltReturnValue dlt_user_log_write_start_
++     return DLT_RETURN_TRUE;
++ }
++
++-static DltReturnValue dlt_user_log_write_start_internal(DltContext *handle,
++-                                                        DltContextData *log,
++-                                                        DltLogLevelType loglevel,
++-                                                        uint32_t messageid,
++-                                                        bool is_verbose);
++-
++-inline DltReturnValue dlt_user_log_write_start(DltContext *handle, DltContextData *log, DltLogLevelType loglevel)
++-{
++-    return dlt_user_log_write_start_internal(handle, log, loglevel, DLT_USER_DEFAULT_MSGID, true);
++-}
++-
++-DltReturnValue dlt_user_log_write_start_id(DltContext *handle,
++-                                           DltContextData *log,
++-                                           DltLogLevelType loglevel,
++-                                           uint32_t messageid)
++-{
++-    return dlt_user_log_write_start_internal(handle, log, loglevel, messageid, false);
++-}
++-
++ DltReturnValue dlt_user_log_write_start_internal(DltContext *handle,
++                                            DltContextData *log,
++                                            DltLogLevelType loglevel,
++@@ -2587,6 +2568,19 @@ DltReturnValue dlt_user_log_write_start_
++     return ret;
++ }
++
+++inline DltReturnValue dlt_user_log_write_start(DltContext *handle, DltContextData *log, DltLogLevelType loglevel)
+++{
+++    return dlt_user_log_write_start_internal(handle, log, loglevel, DLT_USER_DEFAULT_MSGID, true);
+++}
+++
+++DltReturnValue dlt_user_log_write_start_id(DltContext *handle,
+++                                           DltContextData *log,
+++                                           DltLogLevelType loglevel,
+++                                           uint32_t messageid)
+++{
+++    return dlt_user_log_write_start_internal(handle, log, loglevel, messageid, false);
+++}
+++
++ DltReturnValue dlt_user_log_write_start_w_given_buffer(DltContext *handle,
++                                                        DltContextData *log,
++                                                        DltLogLevelType loglevel,
++@@ -3746,7 +3740,7 @@ DltReturnValue dlt_user_trace_network_se
++         }
++
++         log.args_num = 0;
++-        log.trace_status = nw_trace_type;
+++        log.trace_status = (int32_t)nw_trace_type;
++         log.size = 0;
++
++         gettimeofday(&tv, NULL);
++@@ -3848,7 +3842,7 @@ DltReturnValue dlt_user_trace_network_se
++         }
++
++         log.args_num = 0;
++-        log.trace_status = nw_trace_type;
+++        log.trace_status = (int32_t)nw_trace_type;
++         log.size = 0;
++
++         /* Write identifier */
++@@ -3917,7 +3911,7 @@ DltReturnValue dlt_user_trace_network_se
++         }
++
++         log.args_num = 0;
++-        log.trace_status = nw_trace_type;
+++        log.trace_status = (int32_t)nw_trace_type;
++         log.size = 0;
++
++         /* Write identifier */
++@@ -4184,7 +4178,7 @@ DltReturnValue dlt_user_trace_network_tr
++         }
++
++         log.args_num = 0;
++-        log.trace_status = nw_trace_type;
+++        log.trace_status = (int32_t)nw_trace_type;
++         log.size = 0;
++
++         if (header == NULL)
++@@ -4556,7 +4550,7 @@ DltReturnValue dlt_log_raw_v2(DltContext
++     return DLT_RETURN_OK;
++ }
++
++-DltReturnValue dlt_log_marker()
+++DltReturnValue dlt_log_marker(void)
++ {
++     if (!DLT_USER_INITIALIZED) {
++         if (dlt_init() < DLT_RETURN_OK) {
++@@ -6299,8 +6293,8 @@ DltReturnValue dlt_send_app_ll_ts_limit(
++
++     /* set usercontext */
++     dlt_set_id(usercontext.apid, apid);       /* application id */
++-    usercontext.log_level = loglevel;
++-    usercontext.trace_status = tracestatus;
+++    usercontext.log_level = (uint8_t)loglevel;
+++    usercontext.trace_status = (uint8_t)tracestatus;
++
++     if (dlt_user.dlt_is_file)
++         return DLT_RETURN_OK;
++@@ -6354,8 +6348,8 @@ DltReturnValue dlt_send_app_ll_ts_limit_
++     }
++     usercontext.apidlen = (uint8_t)apidlen_sz;
++     dlt_set_id_v2(usercontext.apid, apid, usercontext.apidlen); /* application id */
++-    usercontext.log_level = loglevel;
++-    usercontext.trace_status = tracestatus;
+++    usercontext.log_level = (uint8_t)loglevel;
+++    usercontext.trace_status = (uint8_t)tracestatus;
++
++     size_t buffersize = sizeof(uint8_t) + usercontext.apidlen + sizeof(uint8_t) + sizeof(uint8_t);
++     uint8_t buffer[DLT_ID_SIZE + 3];
++@@ -6435,7 +6429,7 @@ DltReturnValue dlt_user_log_send_log_mod
++     return DLT_RETURN_OK;
++ }
++
++-DltReturnValue dlt_user_log_send_marker()
+++DltReturnValue dlt_user_log_send_marker(void)
++ {
++     DltUserHeader userheader;
++     DltReturnValue ret;
++@@ -7349,7 +7343,7 @@ void dlt_user_test_corrupt_message_size(
++ #endif
++
++
++-int dlt_start_threads()
+++int dlt_start_threads(void)
++ {
++     struct timespec time_to_wait, single_wait;
++     struct timespec now;
++@@ -7438,7 +7432,7 @@ int dlt_start_threads()
++     return 0;
++ }
++
++-void dlt_stop_threads()
+++void dlt_stop_threads(void)
++ {
++     int dlt_housekeeperthread_result = 0;
++     int joined = 0;
++@@ -7510,7 +7504,7 @@ void dlt_stop_threads()
++ #endif /* DLT_NETWORK_TRACE_ENABLE */
++ }
++
++-static void dlt_fork_child_fork_handler()
+++static void dlt_fork_child_fork_handler(void)
++ {
++     g_dlt_is_child = 1;
++     dlt_user_init_state = INIT_UNITIALIZED;
++--- a/src/offlinelogstorage/dlt_offline_logstorage.c
+++++ b/src/offlinelogstorage/dlt_offline_logstorage.c
++@@ -1732,7 +1732,7 @@ DLT_STATIC int dlt_daemon_offline_setup_
++             continue;
++
++         /* check value and store temporary */
++-        ret = dlt_logstorage_check_param(&tmp_data, i, value);
+++        ret = dlt_logstorage_check_param(&tmp_data, (DltLogstorageFilterConfType)i, value);
++
++         if (ret != 0) {
++             if (tmp_data.apids != NULL) {
++--- a/src/shared/dlt_log.c
+++++ b/src/shared/dlt_log.c
++@@ -113,7 +113,7 @@ DltReturnValue dlt_log_init_multiple_log
++     return result;
++ }
++
++-DltReturnValue dlt_log_init_single_logfile()
+++DltReturnValue dlt_log_init_single_logfile(void)
++ {
++     /* internal logging to file */
++     errno = 0;
++@@ -333,14 +333,14 @@ void dlt_log_free(void)
++     }
++ }
++
++-void dlt_log_free_single_logfile()
+++void dlt_log_free_single_logfile(void)
++ {
++     if (logging_handle != NULL) {
++         fclose(logging_handle);
++     }
++ }
++
++-void dlt_log_free_multiple_logfiles()
+++void dlt_log_free_multiple_logfiles(void)
++ {
++     if (DLT_RETURN_ERROR == multiple_files_buffer_free(&multiple_files_ring_buffer)) return;
++
++@@ -348,7 +348,7 @@ void dlt_log_free_multiple_logfiles()
++     multiple_files_ring_buffer.ohandle = -1;
++ }
++
++-bool dlt_is_log_in_multiple_files_active()
+++bool dlt_is_log_in_multiple_files_active(void)
++ {
++     return multiple_files_ring_buffer.ohandle > -1;
++ }
++--- a/src/system/dlt-system-journal.c
+++++ b/src/system/dlt-system-journal.c
++@@ -73,7 +73,7 @@ typedef struct
++ DLT_IMPORT_CONTEXT(dltsystem)
++ DLT_DECLARE_CONTEXT(journalContext)
++
++-int journal_checkUserBufferForFreeSpace()
+++int journal_checkUserBufferForFreeSpace(void)
++ {
++     int total_size, used_size;
++
++@@ -87,7 +87,7 @@ int journal_checkUserBufferForFreeSpace(
++
++ int dlt_system_journal_get(sd_journal *j, char *target, const char *field, size_t max_size)
++ {
++-    char *data;
+++    const char *data;
++     size_t length;
++     int error_code;
++     size_t field_size;
++@@ -100,7 +100,9 @@ int dlt_system_journal_get(sd_journal *j
++     target[0] = 0;
++
++     /* get data from journal */
++-    error_code = sd_journal_get_data(j, field, (const void **)&data, &length);
+++    const void *tmp;
+++    error_code = sd_journal_get_data(j, field, &tmp, &length);
+++    data = (const char *)tmp;
++
++     /* check if an error */
++     if (error_code)
++--- a/src/system/dlt-system-process-handling.c
+++++ b/src/system/dlt-system-process-handling.c
++@@ -72,7 +72,7 @@ volatile uint8_t quit = 0;
++ extern s_ft_inotify ino;
++ #endif
++
++-int daemonize()
+++int daemonize(void)
++ {
++     DLT_LOG(dltsystem, DLT_LOG_DEBUG,
++             DLT_STRING("dlt-system-process-handling, daemonize"));
++--- a/src/system/dlt-system-shell.c
+++++ b/src/system/dlt-system-shell.c
++@@ -112,7 +112,7 @@ int dlt_shell_injection_callback(uint32_
++     return 0;
++ }
++
++-void init_shell()
+++void init_shell(void)
++ {
++     DLT_LOG(dltsystem, DLT_LOG_DEBUG,
++             DLT_STRING("dlt-system-shell, register callback"));
++--- a/src/system/dlt-system.h
+++++ b/src/system/dlt-system.h
++@@ -193,8 +193,8 @@ int read_configuration_file(DltSystemCon
++ void cleanup_config(DltSystemConfiguration *config, DltSystemCliOptions *options);
++
++ /* For dlt-process-handling.c */
++-int daemonize();
++-void init_shell();
+++int daemonize(void);
+++void init_shell(void);
++ void dlt_system_signal_handler(int sig);
++
++ /* Main function for creating/registering all needed file descriptors and starting the poll for all of them. */
++--- a/src/tests/dlt-test-client-v2.c
+++++ b/src/tests/dlt-test-client-v2.c
++@@ -125,7 +125,7 @@ typedef struct
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-fork-handler-v2.c
+++++ b/src/tests/dlt-test-fork-handler-v2.c
++@@ -91,7 +91,7 @@ void dlt_log_message(DltContext *context
++ /**
++  * @brief sample code for using at_fork-handler
++  */
++-int main()
+++int main(void)
++ {
++     DltContext mainContext;
++     struct timespec timeout, r;
++--- a/src/tests/dlt-test-fork-handler.c
+++++ b/src/tests/dlt-test-fork-handler.c
++@@ -49,7 +49,7 @@ void dlt_log_message(DltContext *context
++ /**
++  * @brief sample code for using at_fork-handler
++  */
++-int main()
+++int main(void)
++ {
++     DltContext mainContext;
++     struct timespec timeout, r;
++--- a/src/tests/dlt-test-multi-process-v2.c
+++++ b/src/tests/dlt-test-multi-process-v2.c
++@@ -112,11 +112,11 @@ typedef struct {
++ /* Forward declarations */
++ void init_params(s_parameters *params);
++ void quit_handler(int signum);
++-void cleanup();
+++void cleanup(void);
++ void do_forks(s_parameters params);
++ void run_threads(s_parameters params);
++ void *do_logging(void *data);
++-int wait_for_death();
+++int wait_for_death(void);
++
++ /* State information */
++ volatile sig_atomic_t in_handler = 0;
++@@ -323,7 +323,7 @@ void quit_handler(int signum)
++ /**
++  * Ask the child processes to die
++  */
++-void cleanup()
+++void cleanup(void)
++ {
++     unsigned int i;
++
++@@ -458,7 +458,7 @@ void run_threads(s_parameters params)
++ /**
++  * Wait for child processes to complete their work.
++  */
++-int wait_for_death()
+++int wait_for_death(void)
++ {
++     int pids_left = (int) pidcount;
++
++--- a/src/tests/dlt-test-multi-process.c
+++++ b/src/tests/dlt-test-multi-process.c
++@@ -89,11 +89,11 @@ typedef struct {
++ /* Forward declarations */
++ void init_params(s_parameters *params);
++ void quit_handler(int signum);
++-void cleanup();
+++void cleanup(void);
++ void do_forks(s_parameters params);
++ void run_threads(s_parameters params);
++ void *do_logging(void *arg);
++-int wait_for_death();
+++int wait_for_death(void);
++
++ /* State information */
++ volatile sig_atomic_t in_handler = 0;
++@@ -300,7 +300,7 @@ void quit_handler(int signum)
++ /**
++  * Ask the child processes to die
++  */
++-void cleanup()
+++void cleanup(void)
++ {
++     unsigned int i;
++
++@@ -435,7 +435,7 @@ void run_threads(s_parameters params)
++ /**
++  * Wait for child processes to complete their work.
++  */
++-int wait_for_death()
+++int wait_for_death(void)
++ {
++     int pids_left = (int) pidcount;
++
++--- a/src/tests/dlt-test-non-verbose.c
+++++ b/src/tests/dlt-test-non-verbose.c
++@@ -58,7 +58,7 @@ DltContextData context_data;
++
++ void dlt_user_log_level_changed_callback(char context_id[DLT_ID_SIZE],uint8_t log_level,uint8_t trace_status);
++
++-void usage()
+++void usage(void)
++ {
++     char version[DLT_COMMON_BUFFER_LENGTH];
++
++@@ -84,7 +84,7 @@ void usage()
++ /******************/
++ /* The test cases */
++ /******************/
++-int test_logstorage()
+++int test_logstorage(void)
++ {
++     int delay = LOG_DELAY;
++     int i;
++--- a/src/tests/dlt-test-preregister-context-v2.c
+++++ b/src/tests/dlt-test-preregister-context-v2.c
++@@ -72,7 +72,7 @@
++ /**
++  * @brief sample code for using pre-registered contexts
++  */
++-int main()
+++int main(void)
++ {
++     DltContext mainContext;
++     struct timespec ts;
++--- a/src/tests/dlt-test-preregister-context.c
+++++ b/src/tests/dlt-test-preregister-context.c
++@@ -30,7 +30,7 @@
++ /**
++  * @brief sample code for using pre-registered contexts
++  */
++-int main()
+++int main(void)
++ {
++     DltContext mainContext;
++     struct timespec ts;
++--- a/src/tests/dlt-test-qnx-slogger.c
+++++ b/src/tests/dlt-test-qnx-slogger.c
++@@ -28,7 +28,7 @@
++ #define DELAY 500
++ #define LENGTH 100
++
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-stress-client-v2.c
+++++ b/src/tests/dlt-test-stress-client-v2.c
++@@ -127,7 +127,7 @@ typedef struct
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-stress-user-v2.c
+++++ b/src/tests/dlt-test-stress-user-v2.c
++@@ -86,7 +86,7 @@ DltContextData context_data;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-stress-v2.c
+++++ b/src/tests/dlt-test-stress-v2.c
++@@ -104,7 +104,7 @@ char *env_manual_interruption = 0;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-stress.c
+++++ b/src/tests/dlt-test-stress.c
++@@ -105,7 +105,7 @@ char *env_manual_interruption = 0;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-user-v2.c
+++++ b/src/tests/dlt-test-user-v2.c
++@@ -142,7 +142,7 @@ DltContextData context_data;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/tests/dlt-test-user.c
+++++ b/src/tests/dlt-test-user.c
++@@ -144,7 +144,7 @@ DltContextData context_data;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/tests/dlt_test_receiver.c
+++++ b/tests/dlt_test_receiver.c
++@@ -107,7 +107,7 @@ int result = 0;
++ /**
++  * Print usage information of tool.
++  */
++-void usage()
+++void usage(void)
++ {
++     char version[255];
++
++--- a/src/shared/dlt_common.c
+++++ b/src/shared/dlt_common.c
++@@ -6108,7 +6108,7 @@ DltReturnValue dlt_message_argument_prin
++     return DLT_RETURN_OK;
++ }
++
++-void dlt_check_envvar()
+++void dlt_check_envvar(void)
++ {
++     char *env_log_filename = getenv("DLT_LOG_FILENAME");
++
++--- a/src/system/dlt-system-filetransfer.c
+++++ b/src/system/dlt-system-filetransfer.c
++@@ -724,10 +724,14 @@ int process_files(FiletransferOptions co
++                         }
++
++                         char *tosend = malloc(length);
+++#ifndef __clang__
++ #pragma GCC diagnostic push
++ #pragma GCC diagnostic ignored "-Wformat-truncation="
+++#endif
++                         snprintf(tosend, length, "%s/%s", opts->Directory[j], ie->name);
+++#ifndef __clang__
++ #pragma GCC diagnostic pop
+++#endif
++                         send_one(tosend, opts, j);
++                         free(tosend);
++                     }
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
+index 1c15ef0483..141dce57cd 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_3.0.0.bb
+@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
+            file://0001-fix-build-failure-when-systemd-is-enabled.patch \
+            file://0001-Fix-build-failure-with-glibc-2.43.patch \
+            file://0001-CMakeLists.txt-make-CONFIGURATION_FILES_DIR-aligned.patch \
++           file://0001-warnings-Fix-clang-generated-warnings.patch \
+            "
+ SRCREV = "f595ea29d1007ca1c3b2d1fd3a88adf7d3db6320"
 
-> On 3/3/26 15:58, Khem Raj via lists.openembedded.org wrote:
-> > qtwebengine fails to build with this version of minizip, I do see meta-
-> > qt6 locks its own version but I think it will be good to reconcile the
-> > versions into a single recipe and see if meta-qt6 version can be remove=
-d.
-> >
->
->
-> Why not do a scream test? Apply it, and see what happens.
-> I don't think that this is a good a reason to hold off such a patch
-> indefinitely. Or is it?
->
->
-Well, I am one of the affected ones, so I will be first one to scream :)
-but it makes sense to accept it.
-
-
->
-> > On Wed, Feb 25, 2026 at 1:38=E2=80=AFAM wangmy via lists.openembedded.o=
-rg
-> > <http://lists.openembedded.org>
-> > <wangmy=3Dfujitsu.com@lists.openembedded.org
-> > <mailto:fujitsu.com@lists.openembedded.org>> wrote:
-> >
-> >     From: Wang Mingyu <wangmy@fujitsu.com <mailto:wangmy@fujitsu.com>>
-> >
-> >     License-Update: "Version 1.1, February 14h, 2010" removed
-> >
-> >     Signed-off-by: Wang Mingyu <wangmy@fujitsu.com
-> >     <mailto:wangmy@fujitsu.com>>
-> >     ---
-> >      .../minizip/{minizip_1.3.1.bb <http://minizip_1.3.1.bb> =3D>
-> >     minizip_1.3.2.bb <http://minizip_1.3.2.bb>}            | 4 ++--
-> >      1 file changed, 2 insertions(+), 2 deletions(-)
-> >      rename meta-oe/recipes-core/minizip/{minizip_1.3.1.bb <http://
-> >     minizip_1.3.1.bb> =3D> minizip_1.3.2.bb <http://minizip_1.3.2.bb>}
-> (77%)
-> >
-> >     diff --git a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb <http://
-> >     minizip_1.3.1.bb> b/meta-oe/recipes-core/minizip/minizip_1.3.2.bb
-> >     <http://minizip_1.3.2.bb>
-> >     similarity index 77%
-> >     rename from meta-oe/recipes-core/minizip/minizip_1.3.1.bb <http://
-> >     minizip_1.3.1.bb>
-> >     rename to meta-oe/recipes-core/minizip/minizip_1.3.2.bb <http://
-> >     minizip_1.3.2.bb>
-> >     index 51a74d039b..49e4a4b561 100644
-> >     --- a/meta-oe/recipes-core/minizip/minizip_1.3.1.bb <http://
-> >     minizip_1.3.1.bb>
-> >     +++ b/meta-oe/recipes-core/minizip/minizip_1.3.2.bb <http://
-> >     minizip_1.3.2.bb>
-> >     @@ -4,7 +4,7 @@ library which is used by many different programs."
-> >      HOMEPAGE =3D "http://www.winimage.com/zLibDll/minizip.html <http:/=
-/
-> >     www.winimage.com/zLibDll/minizip.html>"
-> >      SECTION =3D "libs"
-> >      LICENSE =3D "Zlib"
-> >     -LIC_FILES_CHKSUM =3D "file://
-> >     zip.h;beginline=3D14;endline=3D30;md5=3D8eaa8535a3a1a2296b303f40f75=
-385e7"
-> >     +LIC_FILES_CHKSUM =3D "file://
-> >     zip.h;beginline=3D14;endline=3D30;md5=3Db7d2930a7332b2bc68fc1a7fdc5=
-ba775"
-> >
-> >      GITHUB_BASE_URI ?=3D "https://github.com/madler/zlib/releases/
-> >     <https://github.com/madler/zlib/releases/>"
-> >
-> >     @@ -12,7 +12,7 @@ SRC_URI =3D "${GITHUB_BASE_URI}/download/v${PV}/
-> >     zlib-${PV}.tar.xz"
-> >
-> >      S =3D "${UNPACKDIR}/zlib-${PV}/contrib/minizip"
-> >
-> >     -SRC_URI[sha256sum] =3D
-> >     "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"
-> >     +SRC_URI[sha256sum] =3D
-> >     "d7a0654783a4da529d1bb793b7ad9c3318020af77667bcae35f95d0e42a792f3"
-> >
-> >      PACKAGECONFIG ??=3D "demos"
-> >      PACKAGECONFIG[demos] =3D "--enable-demos=3Dyes,,,"
-> >     --
-> >     2.43.0
-> >
-> >
-> >
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#124833):
-> https://lists.openembedded.org/g/openembedded-devel/message/124833
-> > Mute This Topic: https://lists.openembedded.org/mt/117991965/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
->
-
---0000000000003a59f6064f29be16
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 10,=
- 2026 at 10:16=E2=80=AFPM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@=
-gmail.com">skandigraun@gmail.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">On 3/3/26 15:58, Khem Raj via <a href=3D"h=
-ttp://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.op=
-enembedded.org</a> wrote:<br>
-&gt; qtwebengine fails to build with this version of minizip, I do see meta=
--<br>
-&gt; qt6 locks its own version but I think it will be good to reconcile the=
-<br>
-&gt; versions into a single recipe and see if meta-qt6 version can be remov=
-ed.<br>
-&gt; <br>
-<br>
-<br>
-Why not do a scream test? Apply it, and see what happens.<br>
-I don&#39;t think that this is a good a reason to hold off such a patch<br>
-indefinitely. Or is it?<br>
-<br></blockquote><div><br></div><div>Well, I am one of the affected ones, s=
-o I will be first one to scream=C2=A0:)</div><div>but it makes sense to acc=
-ept it.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex">
-<br>
-&gt; On Wed, Feb 25, 2026 at 1:38=E2=80=AFAM wangmy via <a href=3D"http://l=
-ists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembed=
-ded.org</a><br>
-&gt; &lt;<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" targe=
-t=3D"_blank">http://lists.openembedded.org</a>&gt;<br>
-&gt; &lt;wangmy=3D<a href=3D"mailto:fujitsu.com@lists.openembedded.org" tar=
-get=3D"_blank">fujitsu.com@lists.openembedded.org</a><br>
-&gt; &lt;mailto:<a href=3D"mailto:fujitsu.com@lists.openembedded.org" targe=
-t=3D"_blank">fujitsu.com@lists.openembedded.org</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0From: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fuji=
-tsu.com" target=3D"_blank">wangmy@fujitsu.com</a> &lt;mailto:<a href=3D"mai=
-lto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt;&gt;<br=
->
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0License-Update: &quot;Version 1.1, February 14h, 20=
-10&quot; removed<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wa=
-ngmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;mailto:<a href=3D"mailto:wangmy@fujitsu.com" ta=
-rget=3D"_blank">wangmy@fujitsu.com</a>&gt;&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0.../minizip/{<a href=3D"http://minizip_1.3.1.=
-bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.1.bb</a> &lt;<a href=
-=3D"http://minizip_1.3.1.bb" rel=3D"noreferrer" target=3D"_blank">http://mi=
-nizip_1.3.1.bb</a>&gt; =3D&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.2.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.2.bb</a> &lt;<a href=3D"http://minizip_1.=
-3.2.bb" rel=3D"noreferrer" target=3D"_blank">http://minizip_1.3.2.bb</a>&gt=
-;}=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 4 ++--<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A01 file changed, 2 insertions(+), 2 deletions(=
--)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0rename meta-oe/recipes-core/minizip/{<a href=
-=3D"http://minizip_1.3.1.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1=
-.3.1.bb</a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.1.bb</a>&gt; =3D&gt; <a href=3D"http://mi=
-nizip_1.3.2.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.2.bb</a> &=
-lt;<a href=3D"http://minizip_1.3.2.bb" rel=3D"noreferrer" target=3D"_blank"=
->http://minizip_1.3.2.bb</a>&gt;} (77%)<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/meta-oe/recipes-core/minizip/<a href=
-=3D"http://minizip_1.3.1.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1=
-.3.1.bb</a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.1.bb</a>&gt; b/meta-oe/recipes-core/miniz=
-ip/<a href=3D"http://minizip_1.3.2.bb" rel=3D"noreferrer" target=3D"_blank"=
->minizip_1.3.2.bb</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://minizip_1.3.2.bb" rel=3D"nore=
-ferrer" target=3D"_blank">http://minizip_1.3.2.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0similarity index 77%<br>
-&gt;=C2=A0 =C2=A0 =C2=A0rename from meta-oe/recipes-core/minizip/<a href=3D=
-"http://minizip_1.3.1.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.=
-1.bb</a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.1.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0rename to meta-oe/recipes-core/minizip/<a href=3D"h=
-ttp://minizip_1.3.2.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.2.=
-bb</a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.2.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.2.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 51a74d039b..49e4a4b561 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/meta-oe/recipes-core/minizip/<a href=3D"http:=
-//minizip_1.3.1.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.1.bb</=
-a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.1.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.1.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/meta-oe/recipes-core/minizip/<a href=3D"http:=
-//minizip_1.3.2.bb" rel=3D"noreferrer" target=3D"_blank">minizip_1.3.2.bb</=
-a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://minizip_1.3.2.bb" rel=3D"noreferr=
-er" target=3D"_blank">minizip_1.3.2.bb</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -4,7 +4,7 @@ library which is used by many diffe=
-rent programs.&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0HOMEPAGE =3D &quot;<a href=3D"http://www.wini=
-mage.com/zLibDll/minizip.html" rel=3D"noreferrer" target=3D"_blank">http://=
-www.winimage.com/zLibDll/minizip.html</a> &lt;http://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0<a href=3D"http://www.winimage.com/zLibDll/minizip.=
-html" rel=3D"noreferrer" target=3D"_blank">www.winimage.com/zLibDll/minizip=
-.html</a>&gt;&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0SECTION =3D &quot;libs&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0LICENSE =3D &quot;Zlib&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-LIC_FILES_CHKSUM =3D &quot;file://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0zip.h;beginline=3D14;endline=3D30;md5=3D8eaa8535a3a=
-1a2296b303f40f75385e7&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+LIC_FILES_CHKSUM =3D &quot;file://<br>
-&gt;=C2=A0 =C2=A0 =C2=A0zip.h;beginline=3D14;endline=3D30;md5=3Db7d2930a733=
-2b2bc68fc1a7fdc5ba775&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0GITHUB_BASE_URI ?=3D &quot;<a href=3D"https:/=
-/github.com/madler/zlib/releases/" rel=3D"noreferrer" target=3D"_blank">htt=
-ps://github.com/madler/zlib/releases/</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"https://github.com/madler/zlib/relea=
-ses/" rel=3D"noreferrer" target=3D"_blank">https://github.com/madler/zlib/r=
-eleases/</a>&gt;&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -12,7 +12,7 @@ SRC_URI =3D &quot;${GITHUB_BASE_U=
-RI}/download/v${PV}/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0zlib-${PV}.tar.xz&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0S =3D &quot;${UNPACKDIR}/zlib-${PV}/contrib/m=
-inizip&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-SRC_URI[sha256sum] =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;38ef96b8dfe510d42707d9c781877914792541133e187=
-0841463bfa73f883e32&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+SRC_URI[sha256sum] =3D<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;d7a0654783a4da529d1bb793b7ad9c3318020af77667b=
-cae35f95d0e42a792f3&quot;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGECONFIG ??=3D &quot;demos&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0=C2=A0PACKAGECONFIG[demos] =3D &quot;--enable-demos=
-=3Dyes,,,&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-- <br>
-&gt;=C2=A0 =C2=A0 =C2=A02.43.0<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#124833): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/124833" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/124833</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11799196=
-5/6084445" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/117991965/6084445</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:skandigraun@gmail.c=
-om" target=3D"_blank">skandigraun@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-<br>
-</blockquote></div></div>
-
---0000000000003a59f6064f29be16--
 
