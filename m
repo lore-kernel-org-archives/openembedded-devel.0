@@ -2,398 +2,157 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B626F45A12
-	for <webhook@archiver.kernel.org>; Fri, 10 Apr 2026 22:56:44 +0000 (UTC)
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.167844.1775861799461868121
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44153F45A18
+	for <webhook@archiver.kernel.org>; Sat, 11 Apr 2026 01:47:45 +0000 (UTC)
+Received: from mail-dy1-f181.google.com (mail-dy1-f181.google.com [74.125.82.181])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.172615.1775872063195818867
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Apr 2026 15:56:39 -0700
+ Fri, 10 Apr 2026 18:47:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=V3dm3nP8;
- spf=pass (domain: gmail.com, ip: 74.125.82.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1279eced0b9so3870197c88.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 15:56:39 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=clSfKPcm;
+ spf=pass (domain: gmail.com, ip: 74.125.82.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f181.google.com with SMTP id 5a478bee46e88-2cfd69b564dso3795587eec.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 18:47:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1775861798; x=1776466598; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1775872062; x=1776476862; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GpOHAns5+Mrb6YCpVTZx1+QkpgVy5RdBhH4cB9A/tW8=;
-        b=V3dm3nP8HYrXfN2Wwk6zWYhQ7yNQkAXJEs0CG385HM8JiyU99mPKwepTtUOfzgQPT0
-         mFEADu/28dJPIR9X+j1pun/mMLAxx6q7aP1+mrpIuZ8n5z0G8ig9DI18FNBk0H20jKbW
-         o0lukVHNypA/eIxkfmdgFkavEwvpY5gHi9GPhKCkKxejAgH0yb5RkDHmIVr57LoJLp5s
-         JH26K67YsmDOdmZFQ0CB2FAzXgYb+iwG86Gii3Yvs7Uf3hzBTXYK/5BF4MBD5if0k883
-         iPIZxNWay/nqRsyYU4hFKu2oDAfS2HgMaHbG8UpAjYYCw2Ca7jfhNkqyQMy1uPDDme02
-         SG4A==
+        bh=DWvuhHR4e2iZLev7BaePSyQXZ+GkklP9y8xolISBoAA=;
+        b=clSfKPcmw5vnYqCVTt8+2QOj+6dfBFthjU3cSlFqeKMn8AAA05trC9FDgZ/zMfCuMS
+         sQ26xenQ9KFU5yWEDILjBxdOiahHT16YNMCtV0hig5xAnwm/oiHv7U1g311ta/5noRTI
+         cAnnoCh3Yt31yyU4p+50uI/s0W5eDQ23hx/8pvTejBsePMQvXlC/cfXGclzzaHxMRnCJ
+         Ty+0H2Lfx9tu9+eK7fZHKAa1ksUETIlNXf6r2aTsXoRHbNGGS7fPTUQfXMRUyiiTEiAh
+         ezQwa/MDnW4V4ni5x3taIl+Y1sFLDpsRzvm4CtdXomy0f9yzOxSBRdPkgqtDzGMQekZR
+         GkYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1775861798; x=1776466598;
+        d=1e100.net; s=20251104; t=1775872062; x=1776476862;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=GpOHAns5+Mrb6YCpVTZx1+QkpgVy5RdBhH4cB9A/tW8=;
-        b=WVNE7Xqn5lwWtdOsHwSv2Bwu1VGIHCKkpit8NmCAMI8RG1StmCtAz4oGn+h9LW18+F
-         /UZuLLMtvFOyaXAhBySLcL47wfn2jd+/XcmuCTHwbofybE3x4pR0G6N4K0Bc2NdOg0NT
-         L/wUeqJzrTw+8Dg8QYSexv4SaGghrRFOdbKxIrBLnPsrvPRBONCi8uj6XkCZ+4RIAtmA
-         HNvB/AXOwR0+i4wMafXd8T9+dfYt17vH46i4jZPC5ZeOlnDf5jPzLkHXN/nfMOU3aItF
-         gzIdPEbx/kMAAM5IC0QhREd8h4s10ORO75maLVdrZqVSzsnrE6t0oOo20jlSfonurKbK
-         mCeg==
-X-Gm-Message-State: AOJu0YwDhKu6+O4+h/EToNGv2sbfxeq05lNhWn0Hh/Qo3cjKd9PhsiB6
-	8gb7yAoU26DA9Iyw/vrkGFuB6ZxKD3LxmpJ+QMeOj9QXwW9Eq++fbvFOJn0LbRoG
-X-Gm-Gg: AeBDievlZVm3se+Tbxp6dHRiIsNREp3pzjwESzJLEKK0mk7LwqEAbDYy/nDShcHk+Kr
-	tyCbAzWwh+I+2O4knE6u71HcKTAwUvFoK4pylJyLIk+n8IYuakWp/jpZ7z2mwdNY6Z1qnrhNRKs
-	njafwDvjKu/RW9w+wzZaihqhKUjFzhA+BnvawEwXJ63mH6za4lvaR3B+pR6rJaNRDhnLSg8DJ2/
-	xYyxGA7uTneCR1JMh7KdkIxFPPmfsTK72k0UG7jMYawf7TWwz17eLn+0ZuihvMmrz0dgmHfvpkp
-	cbPtAJmgYQqzThcNbqPkTAqTK9F840WtOC5TcHiOtngtZ8C5f5bb3lixY3owSMfg8OanK+SRwhO
-	pjuDqGgiQt76RikSw6y/4fDZz9a4a99x5DCZv7oM8vsbvKars1c3wZ8y4G+T1tgLZVLkDmFYMGO
-	msjX2E+x6tDJFBDu/toNq30o813CfO7BdAs/oQax6rUCe2NTy68KvEhf7cZHic/bO5BAgVSUdg/
-	/Ron98Nz96sMtY7xgQJx9Hi7mN1nJ6UmuirOe9bMYpDPXjiEYH1wNTq7utb
-X-Received: by 2002:a05:7022:69a2:b0:12c:8b9:7208 with SMTP id a92af1059eb24-12c34eeb95cmr2948417c88.26.1775861798167;
-        Fri, 10 Apr 2026 15:56:38 -0700 (PDT)
+        bh=DWvuhHR4e2iZLev7BaePSyQXZ+GkklP9y8xolISBoAA=;
+        b=soOvJxDrOiODBOE/v0H94RAOffWf4U5ZJdz1+3WYMhNe3eVo0fY6AwDWalDatq9ZZy
+         VT5OfT+m0CIqIWhoJ70mzMCS/ZyvfsX7kkOicqfp8HZY7jxlc3Ii7cVZeSvqNZ8hjmjI
+         DZ+wqb7GcWh4UIm1+0t6rhkQm2U3/EsafXa/h49k505oKFigvx6k/x4v0DAU+mrQ52GA
+         ax5rVqGWXb8nQHpJBbS5NiLVE3EwbqzIzCPcMP9+aJob23RV8HVBodxxZirYmvKfo4v2
+         aJa0GlsEIuhqeOlEl2ARiZ4SkhY3fuNTygg/gClGRo0bKqqWIq/xYFdDVa4l4vTYG+Qg
+         RiLA==
+X-Gm-Message-State: AOJu0YzywU653c40+G+S8+1F8E6YAQvlh+22kZ2zpBex4+XgcaMy8PkP
+	fI5KWjBZqTTn0Den857dYZnCxsKX97HJheKb0sA7t4pSe/2Vn5Av9eef2OY+LYsW
+X-Gm-Gg: AeBDiesBLOwWhWyg2a3kd+Rg7zx+eaA7He44T5fLieEAJJ/lkAQwP+lZXrGTa0b9O91
+	ksq60UgaPrfNCjrU+PgigrrIrT3pt6LzHfZtKn9+uaedjr5K3C2XUjr1Sp65as5P6TUFB/y5fKs
+	J1p39gCAKBNOGEPi563rC6JXTvmcwmNSWiQ54ARcR1OWL4YMGJJ1ZoOAiivVhY9KwxAyeVD1EL8
+	+Mf3DunteYzFh9fgDwl+r84IaesEjPpD4DjfTRpgl1cMlfP0lCD7fs5hL0B5j42psv6F0Js1DQa
+	XRbrw74sYq5EW3l4KWOxyvg4MpGMEYDIVJKDX25FMit3ZPl6E+hb+/qr+oXn5HBXuNECQw4cDXI
+	PDcMsuhAPvaHUi8rBFlgqnKAPJCK4NpdJPPenZ45r19mDLxvj0DWWBrhgbF7H2tojWLzaiZCout
+	DEB1l2/TmaW8Tn/gMzzwg9Gs9+jSnJGwnCM5RxABshJKnEspVYz5q5oEL5Xa3D4LOmk7P6o8zuf
+	iCkiicoRdwvo2nU2ABKaAKNoKFTRqcwX/kFfHAO8JyzcxKdYc2bgF88PmUp
+X-Received: by 2002:a05:7301:1296:b0:2c0:da6f:55e0 with SMTP id 5a478bee46e88-2d589174873mr3204072eec.27.1775872062050;
+        Fri, 10 Apr 2026 18:47:42 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c3459faa7sm6157150c88.2.2026.04.10.15.56.37
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2d561cd2c09sm8606751eec.18.2026.04.10.18.47.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Apr 2026 15:56:37 -0700 (PDT)
+        Fri, 10 Apr 2026 18:47:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] cyrus-sasl: Fix build with std=gnu23
-Date: Fri, 10 Apr 2026 15:56:35 -0700
-Message-ID: <20260410225635.411057-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] libtar: Fix build with clang-22 -std=gnu23
+Date: Fri, 10 Apr 2026 18:47:39 -0700
+Message-ID: <20260411014739.658509-1-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Apr 2026 22:56:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126246
-
-clang has dropped K&R style with std=c23
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Apr 2026 01:47:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126247
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...R-function-definitions-to-ANSI-C-sty.patch | 301 ++++++++++++++++++
- .../cyrus-sasl/cyrus-sasl_2.1.28.bb           |   1 +
- 2 files changed, 302 insertions(+)
- create mode 100644 meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-style-convert-K-R-function-definitions-to-ANSI-C-sty.patch
+ ...-R-function-definitions-to-ANSI-C-pr.patch | 62 +++++++++++++++++++
+ .../recipes-support/libtar/libtar_1.2.20.bb   |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libtar/files/0001-compat-convert-K-R-function-definitions-to-ANSI-C-pr.patch
 
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-style-convert-K-R-function-definitions-to-ANSI-C-sty.patch b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-style-convert-K-R-function-definitions-to-ANSI-C-sty.patch
+diff --git a/meta-oe/recipes-support/libtar/files/0001-compat-convert-K-R-function-definitions-to-ANSI-C-pr.patch b/meta-oe/recipes-support/libtar/files/0001-compat-convert-K-R-function-definitions-to-ANSI-C-pr.patch
 new file mode 100644
-index 0000000000..d8efc9b5d7
+index 0000000000..4585c586b4
 --- /dev/null
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl/0001-style-convert-K-R-function-definitions-to-ANSI-C-sty.patch
-@@ -0,0 +1,301 @@
-+From 80bc0c1bfff769728d18ac5d9e22755e60fc23d8 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/libtar/files/0001-compat-convert-K-R-function-definitions-to-ANSI-C-pr.patch
+@@ -0,0 +1,62 @@
++From 5ea04d70221a18cbd711a9d570c81ef0b9be6765 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Fri, 10 Apr 2026 13:08:52 -0700
-+Subject: [PATCH] style: convert K&R function definitions to ANSI C style in
-+ md5.c
++Date: Fri, 10 Apr 2026 18:41:04 -0700
++Subject: [PATCH] compat: convert K&R function definitions to ANSI C prototypes
 +
-+Replace old-style K&R function parameter declarations with modern ANSI
-+C prototypes across all functions in lib/md5.c. Also strip trailing
-+whitespace throughout the file. No functional changes.
++Replace old-style K&R parameter declarations with modern ANSI C
++function prototypes in basename.c, dirname.c, and strmode.c.
 +
-+Upstream-Status: Inappropriate [md5 does not exist in master branch]
++Required for compatibility with clang 22 under -std=gnu23, which
++no longer supports K&R-style function definitions.
++
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ lib/md5.c       | 231 +++++++++++++++++++++++++-----------------------
-+ saslauthd/md5.c |  77 +++++++++-------
-+ 2 files changed, 163 insertions(+), 145 deletions(-)
++ compat/basename.c | 3 +--
++ compat/dirname.c  | 3 +--
++ compat/strmode.c  | 4 +---
++ 3 files changed, 3 insertions(+), 7 deletions(-)
 +
-+--- a/saslauthd/md5.c
-++++ b/saslauthd/md5.c
-+@@ -98,8 +98,9 @@ Rotation is separate from addition to pr
-+ /* MD5 initialization. Begins an MD5 operation, writing a new context.
-+ */
++diff --git a/compat/basename.c b/compat/basename.c
++index 2ac1e13..7b0384a 100644
++--- a/compat/basename.c
+++++ b/compat/basename.c
++@@ -36,8 +36,7 @@ static char rcsid[] = "$OpenBSD: basename.c,v 1.4 1999/05/30 17:10:30 espie Exp
++ #include <sys/param.h>
 +
-+-void _saslauthd_MD5Init (context)
-+-MD5_CTX *context; /* context */
-++void _saslauthd_MD5Init (
-++MD5_CTX *context /* context */
-++)
++ char *
++-openbsd_basename(path)
++-	const char *path;
+++openbsd_basename(const char *path)
 + {
-+        context->count[0] = context->count[1] = 0;
++ 	static char bname[MAXPATHLEN];
++ 	register const char *endp, *startp;
++diff --git a/compat/dirname.c b/compat/dirname.c
++index 986db4a..6c1231d 100644
++--- a/compat/dirname.c
+++++ b/compat/dirname.c
++@@ -36,8 +36,7 @@ static char rcsid[] = "$OpenBSD: dirname.c,v 1.4 1999/05/30 17:10:30 espie Exp $
++ #include <sys/param.h>
 +
-+@@ -114,10 +115,11 @@ MD5_CTX *context; /* context */
-+        operation, processing another message block, and updating the context.
-+ */
-+
-+-void _saslauthd_MD5Update (context, input, inputLen)
-+-MD5_CTX *context; /* context */
-+-unsigned char *input; /* input block */
-+-unsigned int inputLen; /* length of input block */
-++void _saslauthd_MD5Update (
-++MD5_CTX *context, /* context */
-++unsigned char *input, /* input block */
-++unsigned int inputLen /* length of input block */
-++)
++ char *
++-openbsd_dirname(path)
++-	const char *path;
+++openbsd_dirname (const char *path)
 + {
-+        unsigned int i, index, partLen;
++ 	static char bname[MAXPATHLEN];
++ 	register const char *endp;
++diff --git a/compat/strmode.c b/compat/strmode.c
++index 5e7f15e..2ffab61 100644
++--- a/compat/strmode.c
+++++ b/compat/strmode.c
++@@ -40,9 +40,7 @@ static char *rcsid = "$OpenBSD: strmode.c,v 1.3 1997/06/13 13:57:20 deraadt Exp
++ #include <string.h>
 +
-+@@ -159,9 +161,10 @@ unsigned int inputLen; /* length of inpu
-+        the message digest and zeroizing the context.
-+ */
-+
-+-void _saslauthd_MD5Final (digest, context)
-+-unsigned char digest[16]; /* message digest */
-+-MD5_CTX *context; /* context */
-++void _saslauthd_MD5Final (
-++unsigned char digest[16], /* message digest */
-++MD5_CTX *context /* context */
-++)
++ void
++-strmode(mode, p)
++-	register mode_t mode;
++-	register char *p;
+++strmode (register mode_t mode, register char *p)
 + {
-+        unsigned char bits[8];
-+        unsigned int index, padLen;
-+@@ -186,9 +189,10 @@ MD5_CTX *context; /* context */
-+
-+ /* MD5 basic transformation. Transforms state based on block. */
-+
-+-static void MD5Transform (state, block)
-+-UINT4 state[4];
-+-unsigned char block[64];
-++static void MD5Transform (
-++UINT4 state[4],
-++unsigned char block[64]
-++)
-+ {
-+        UINT4 a = state[0], b = state[1], c = state[2], d = state[3], x[16];
-+
-+@@ -281,10 +285,11 @@ unsigned char block[64];
-+
-+         */
-+
-+-static void Encode (output, input, len)
-+-unsigned char *output;
-+-UINT4 *input;
-+-unsigned int len;
-++static void Encode (
-++unsigned char *output,
-++UINT4 *input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i, j;
-+
-+@@ -301,10 +306,11 @@ unsigned int len;
-+
-+         */
-+
-+-static void Decode (output, input, len)
-+-UINT4 *output;
-+-unsigned char *input;
-+-unsigned int len;
-++static void Decode (
-++UINT4 *output,
-++unsigned char *input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i, j;
-+
-+@@ -317,10 +323,11 @@ unsigned int len;
-+
-+         */
-+
-+-static void MD5_memcpy (output, input, len)
-+-POINTER output;
-+-POINTER input;
-+-unsigned int len;
-++static void MD5_memcpy (
-++POINTER output,
-++POINTER input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i;
-+
-+@@ -331,10 +338,11 @@ unsigned int len;
-+ /* Note: Replace "for loop" with standard memset if possible.
-+ */
-+
-+-static void MD5_memset (output, value, len)
-+-POINTER output;
-+-int value;
-+-unsigned int len;
-++static void MD5_memset (
-++POINTER output,
-++int value,
-++unsigned int len
-++)
-+ {
-+        unsigned int i;
-+
-+@@ -452,12 +460,13 @@ void _saslauthd_hmac_md5_final(unsigned
-+ }
-+
-+
-+-void _saslauthd_hmac_md5(text, text_len, key, key_len, digest)
-+-const unsigned char* text; /* pointer to data stream */
-+-int text_len; /* length of data stream */
-+-const unsigned char* key; /* pointer to authentication key */
-+-int key_len; /* length of authentication key */
-+-unsigned char *digest; /* caller digest to be filled in */
-++void _saslauthd_hmac_md5(
-++const unsigned char* text, /* pointer to data stream */
-++int text_len, /* length of data stream */
-++const unsigned char* key, /* pointer to authentication key */
-++int key_len, /* length of authentication key */
-++unsigned char *digest /* caller digest to be filled in */
-++)
-+ {
-+   MD5_CTX context;
-+
-+--- a/lib/md5.c
-++++ b/lib/md5.c
-+@@ -98,8 +98,9 @@ Rotation is separate from addition to pr
-+ /* MD5 initialization. Begins an MD5 operation, writing a new context.
-+ */
-+
-+-void _sasl_MD5Init (context)
-+-MD5_CTX *context; /* context */
-++void _sasl_MD5Init (
-++MD5_CTX *context /* context */
-++)
-+ {
-+        context->count[0] = context->count[1] = 0;
-+
-+@@ -114,10 +115,11 @@ MD5_CTX *context; /* context */
-+        operation, processing another message block, and updating the context.
-+ */
-+
-+-void _sasl_MD5Update (context, input, inputLen)
-+-MD5_CTX *context; /* context */
-+-const unsigned char *input; /* input block */
-+-unsigned int inputLen; /* length of input block */
-++void _sasl_MD5Update (
-++MD5_CTX *context, /* context */
-++const unsigned char *input, /* input block */
-++unsigned int inputLen /* length of input block */
-++)
-+ {
-+        unsigned int i, index, partLen;
-+
-+@@ -159,9 +161,10 @@ unsigned int inputLen; /* length of inpu
-+        the message digest and zeroizing the context.
-+ */
-+
-+-void _sasl_MD5Final (digest, context)
-+-unsigned char digest[16]; /* message digest */
-+-MD5_CTX *context; /* context */
-++void _sasl_MD5Final (
-++unsigned char digest[16], /* message digest */
-++MD5_CTX *context /* context */
-++)
-+ {
-+        unsigned char bits[8];
-+        unsigned int index, padLen;
-+@@ -186,9 +189,10 @@ MD5_CTX *context; /* context */
-+
-+ /* MD5 basic transformation. Transforms state based on block. */
-+
-+-static void MD5Transform (state, block)
-+-UINT4 state[4];
-+-const unsigned char block[64];
-++static void MD5Transform (
-++UINT4 state[4],
-++const unsigned char block[64]
-++)
-+ {
-+        UINT4 a = state[0], b = state[1], c = state[2], d = state[3], x[16];
-+
-+@@ -281,10 +285,11 @@ const unsigned char block[64];
-+
-+         */
-+
-+-static void Encode (output, input, len)
-+-unsigned char *output;
-+-UINT4 *input;
-+-unsigned int len;
-++static void Encode (
-++unsigned char *output,
-++UINT4 *input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i, j;
-+
-+@@ -301,10 +306,11 @@ unsigned int len;
-+
-+         */
-+
-+-static void Decode (output, input, len)
-+-UINT4 *output;
-+-const unsigned char *input;
-+-unsigned int len;
-++static void Decode (
-++UINT4 *output,
-++const unsigned char *input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i, j;
-+
-+@@ -317,10 +323,11 @@ unsigned int len;
-+
-+         */
-+
-+-static void MD5_memcpy (output, input, len)
-+-POINTER output;
-+-POINTER input;
-+-unsigned int len;
-++static void MD5_memcpy (
-++POINTER output,
-++POINTER input,
-++unsigned int len
-++)
-+ {
-+        unsigned int i;
-+
-+@@ -331,10 +338,11 @@ unsigned int len;
-+ /* Note: Replace "for loop" with standard memset if possible.
-+ */
-+
-+-static void MD5_memset (output, value, len)
-+-POINTER output;
-+-int value;
-+-unsigned int len;
-++static void MD5_memset (
-++POINTER output,
-++int value,
-++unsigned int len
-++)
-+ {
-+        unsigned int i;
-+
-+@@ -452,12 +460,13 @@ void _sasl_hmac_md5_final(unsigned char
-+ }
-+
-+
-+-void _sasl_hmac_md5(text, text_len, key, key_len, digest)
-+-const unsigned char* text; /* pointer to data stream */
-+-int text_len; /* length of data stream */
-+-const unsigned char* key; /* pointer to authentication key */
-+-int key_len; /* length of authentication key */
-+-unsigned char *digest; /* caller digest to be filled in */
-++void _sasl_hmac_md5(
-++const unsigned char* text, /* pointer to data stream */
-++int text_len, /* length of data stream */
-++const unsigned char* key, /* pointer to authentication key */
-++int key_len, /* length of authentication key */
-++unsigned char *digest /* caller digest to be filled in */
-++)
-+ {
-+   MD5_CTX context;
-+
-diff --git a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-index bd15b0bda8..26ec8a71a1 100644
---- a/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-+++ b/meta-oe/recipes-networking/cyrus-sasl/cyrus-sasl_2.1.28.bb
-@@ -20,6 +20,7 @@ SRC_URI = " \
-     file://0001-configure-prototypes.patch \
-     file://0002-Fix-incompatible-pointer-types-error-with-gcc-15.patch \
-     file://0003-Add-compatibility-for-gcc-15-869.patch \
-+    file://0001-style-convert-K-R-function-definitions-to-ANSI-C-sty.patch \
- "
++ 	 /* print type */
++ 	switch (mode & S_IFMT) {
+diff --git a/meta-oe/recipes-support/libtar/libtar_1.2.20.bb b/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+index a17509d2e5..39d410064e 100644
+--- a/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
++++ b/meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+@@ -20,6 +20,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libt/${BPN}/${BPN}_${PV}.orig.tar.gz \
+            file://CVE-2021-33643-CVE-2021-33644.patch \
+            file://CVE-2021-33640-CVE-2021-33645-CVE-2021-33646.patch \
+            file://CVE-2013-4420.patch \
++           file://0001-compat-convert-K-R-function-definitions-to-ANSI-C-pr.patch \
+            "
 
- UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+ S = "${UNPACKDIR}/${BPN}"
 
