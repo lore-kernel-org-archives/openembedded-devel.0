@@ -1,230 +1,96 @@
-Return-Path: <jdmason@kudzu.us>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89261F34C59
-	for <webhook@archiver.kernel.org>; Mon, 13 Apr 2026 14:23:51 +0000 (UTC)
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.273805.1776090227853274792
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CE49F34C5F
+	for <webhook@archiver.kernel.org>; Mon, 13 Apr 2026 14:47:41 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.273717.1776091656065839907
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Apr 2026 07:23:48 -0700
+ Mon, 13 Apr 2026 07:47:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kudzu-us.20251104.gappssmtp.com header.s=20251104 header.b=zUQZoxjl;
- spf=none, err=permanent DNS error (domain: kudzu.us, ip: 209.85.222.169, mailfrom: jdmason@kudzu.us)
-Received: by mail-qk1-f169.google.com with SMTP id af79cd13be357-8d67a483d3eso472949785a.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Apr 2026 07:23:47 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=SJFgCkDF;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-488c21c636dso26748905e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Apr 2026 07:47:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=kudzu-us.20251104.gappssmtp.com; s=20251104; t=1776090227; x=1776695027; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776091654; x=1776696454; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FqF6MC7zK/VSIyVgqsJax7/NLK41Rvtw1LkoQA1ZV9s=;
-        b=zUQZoxjlY2QttDmxAM8YT5x0+OdzhU4+NiiEBhJA5ZBrBO3qqJpWVweWhur25dBKZk
-         WT5DkJxU7RBwd9TkWy2rU3K88TO9Hz988RdHJQXlyvPrJc0A/US3/HN3M2JhOed9NiUD
-         feXjfCcF30VDWJfkdN3rUMERT607oWk7mK4EKkyzdz34pCnRDSVzCwqltg/1cWx/rRU7
-         KGl+ne9Ep7f70bIbN/SbHm1WfmAKPfcv+see7g4XHnJVg2dmxGn8H7fOtThUQwS0zBqn
-         UjECOiATUTb8YlRhbyCM2eFKGB6KWzQB+Z1m3QxkyGLxccR1Lh8hp2t41UCHFpSVSYIX
-         jiTw==
+        bh=Es6X9l6I136TyASLt3P+keDeukD2CE8zWviD9op5FFU=;
+        b=SJFgCkDFP0THsrsT3xcOcJ4+uPGgTWxandhCSotRQH8Yo3mxnwC8RbmPADhP0j5Y1R
+         GKRgagVzHPlvnaXhNuFMV+zRUP16DtFLM17WbWqqeoFMaRixT2+D8rsCtU3ofwE+evHl
+         aPFifJArXwd8+mu1zV3z5Mk9ZZiH4opwg37l09KMYTCxGpXDzvPkzvOgnBcbnpZ+8MtL
+         IL+YDZffllQrRTNX7dnvK51804hT65uTTVg+5lXGfQu6ollXnqC2uEhf6pZ9LlNUEP4C
+         P+8JDpLL1+BxOGQAjFBFZjnT3nRajfDAnMtrjkp8ZbQx8vNjj0QlZv33pBLd5jEglfc7
+         E2JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776090227; x=1776695027;
+        d=1e100.net; s=20251104; t=1776091654; x=1776696454;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FqF6MC7zK/VSIyVgqsJax7/NLK41Rvtw1LkoQA1ZV9s=;
-        b=DpPXhtp6cfaENIhSsXZxVFLv63b7Cye6kR6FjjvQFEgYtOtH9aj6gXsNSHTPQ7Stjq
-         eVQVeQcWZk4477ARaeLGJE2Q2Zoz/i1M3ulLkvhRH/WOjNqQikRHoFOiHC1+EwjSXIyV
-         xNvj6H/dl9WrMYqarmyACvfo7xIjzTgtXqiJExTw1cZNj5NR2dHPnBCAVH47OPBIsJVO
-         dageBuTcaaXeApIOj+0O/83j+uTLrBCh6TG+Wl5UyHUoKEKCPx3Zp1VeXzMiVwXsRZIL
-         2Ku5gIm7gdRLMg1Lk4IdeVU0Vn2rAAxpR3vouF3v1vSEIF/V6G1TA5e4P4n6L6nwYhBv
-         UqLw==
-X-Gm-Message-State: AOJu0Yxq9LqbwtF9U0I6yVGUbLr7KWkJ4Np8dH/Zi1BTWV5TSf4L3tUZ
-	2WUXlCbsELDLBRxnlOAtCgYjpCNdptfJnGc41xS9d0Et76zN6NCm80zyeuovs8OfFb0Dx5PPh3Q
-	cYvQ=
-X-Gm-Gg: AeBDieslED7oTcPwtgCOJTgFcIAE0SNYekLxpsKhtD4Yw4Bq/r4lQvUF3GDPADMRu5q
-	rbjxkZaxfFtJ1Z+IForOCf5ffTZOdtbYo5sVkKNQUVOtpGzI8JGqkhmV0YvrkidUpHUWvjr/2fP
-	OHDae7kJnUyzKD2I4xSbc5q2Qom5bZ6Gw4tYQOln5lsnkT1Ecm+uK6McMjJu45rbISf/dU1POXq
-	sviI4nU3mer6UABCiGwzJorrZ1YFdpfaIBpaPxEm2KPjxlcC00IlVeDi4O+7Jrs4IxF5ROpY3l5
-	JmF+nQwDB1p9cqjNVnvbwzbvCBmE+GhJ+BshtM1kPnELFiEGCT/Bek7Sd2d/buTeEUDOYTwjWuw
-	2RhThhzhXqUiFEp1HMaj4YZZOTC/lq1A+YByyuLiFlIq6wqStU8Y+2XXBYtaGnEcmFVF0mNeMc0
-	avXnQoI4sxH7oC
-X-Received: by 2002:a05:620a:7089:b0:8cd:8635:c063 with SMTP id af79cd13be357-8ddcfca6c9cmr1976253985a.50.1776090226318;
-        Mon, 13 Apr 2026 07:23:46 -0700 (PDT)
-Received: from localhost ([136.56.27.188])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8ddb8d6de73sm855580085a.26.2026.04.13.07.23.45
+        bh=Es6X9l6I136TyASLt3P+keDeukD2CE8zWviD9op5FFU=;
+        b=iteJAs6ckNwPOGQazHOumV2h1j1+gntxKRmdLXM+wMC8hv/dcTuPdG1YQGimBUIBbr
+         PX72VRztJSlwTVdudutEld8hWS2L/WVel3QjoHNTrPMQJm0E5OfqnDrhY+58ZPAcUeCu
+         HD5lYJEqG0s+V7zYXtWrnSZSyenCTixdPONKGPolVVKVYWcgNYs4eUWaBuYRnyJ+LAx5
+         PrEE3q/gqRXxtlYlwpeAUUNJi/yRHonJzAlL7BoASCKX61WUATnzyLKLRMd/dJTsxmaC
+         xx/Ik4IMlpSH9goOL562hP0y62PVSTM0jEGeSwlKrrDI1FcGRxBX3VRcYQl/hdXUyG4n
+         LS5Q==
+X-Gm-Message-State: AOJu0Yw5kywz8k8EyMZ40b5QK+uhYIGLnJ0T3I0L9+X9bO1XHQFasYGZ
+	SqVU4A3dCGocRSXqKV6cwrwr2i2eNuA154CgLA8elFo+V/JQZ1Aadh+BM/GWmw==
+X-Gm-Gg: AeBDievcels8rg1XH32E3EaXjWeDINjitlb8xEd4fkqBrUFb5sWRSmbgdTg/reUL1jQ
+	Ux3zdgGkFhpEctuTQv//x4rsvrZ6AKSyMvotw3c0o859vuSDLxlroKjOsxr/3wM2eOdPOqtRhf4
+	FJ4cMVX4LKe3aBQZ6/1NlNm2pzA8E87WVEZunnAv8HVD8VAqSaZVVoIGYcnWjZ/RyRBr5/ckETU
+	RtKeQrSRi4UUGQzYcfi9+jjE//LlFi2NHaY9YWrqemMEhNNOeeLxgBbpuXUgh6ARhhwEcPR0LSa
+	dpuofbNKfTyalWMb4j5GmoYCCeJdjFEmK3cSCVO5tIbsJi9g6FblPe5LmXEK+GiHfHsTyhzXzTZ
+	HnK4baRF9S6pEKGFEU4l7EJjQRbDiwuQMESjdbQ4fV/X+7AvMrG8D4gMPTgFhRe3Kw9lQwMlKmM
+	w+IhWCHAFqIkqjDz0uKXjH
+X-Received: by 2002:a05:600c:a411:b0:488:ac01:72de with SMTP id 5b1f17b1804b1-488d67ec72cmr148531605e9.5.1776091654206;
+        Mon, 13 Apr 2026 07:47:34 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488d67a46bdsm152665455e9.3.2026.04.13.07.47.33
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Apr 2026 07:23:45 -0700 (PDT)
-From: Jon Mason <jdmason@kudzu.us>
-X-Google-Original-From: Jon Mason <jon.mason@arm.com>
+        Mon, 13 Apr 2026 07:47:33 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH] python3-cbor2: Fix CVE-2025-68131 CVE patch error
-Date: Mon, 13 Apr 2026 10:23:41 -0400
-Message-Id: <20260413142341.1946410-1-jon.mason@arm.com>
-X-Mailer: git-send-email 2.39.5
+Subject: [meta-python][kirkstone][PATCH] python3-cbor2: return correct error code from run-ptest
+Date: Mon, 13 Apr 2026 16:47:32 +0200
+Message-ID: <20260413144732.203208-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Apr 2026 14:23:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126277
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Apr 2026 14:47:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126278
 
-The patch for CVE-2025-68131 does not actually match https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0
-Specifically, the indenting in decode_from_bytes
+In case the test fails to even start executing, and there is no
+output on stdout, there are no logs stored of the test run, so
+the test log parser will not report a failure.
+Also, since the run-ptest command is a piped script, by default
+the last command's return code is set as the exit code, which
+is always 0.
 
-This is causing an error in trusted-firmware-m of
-| Traceback (most recent call last):
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/git/tfm/bl2/ext/mcuboot/scripts/wrapper/wrapper.py", line 21, in <module>
-|     import imgtool.main
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/git/mcuboot/scripts/imgtool/main.py", line 25, in <module>
-|     from imgtool import image, imgtool_version
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/git/mcuboot/scripts/imgtool/image.py", line 24, in <module>
-|     from .boot_record import create_sw_component_data
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/git/mcuboot/scripts/imgtool/boot_record.py", line 21, in <module>
-|     from cbor2 import dumps
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/cbor2/__init__.py", line 1, in <module>
-|     from .decoder import load, loads, CBORDecoder  # noqa
-|   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/cbor2/decoder.py", line 215
-|     with BytesIO(buf) as fp:
-|     ^
-| IndentationError: expected an indented block after 'with' statement on line 214
+To report the result correctly return the test executions's
+return code as the exit code (instead of the last command in the
+pipe), and redirect the error output to standard out, to create
+a logfile that can be parsed after the execution.
 
-Indenting to match the original patch fixes this.
-
-Also, because this version of cbor2 is older, it doesn't include commit
-53e21063ed1d72ac8f911044dd598a7f9ef72406, which adds 'Any' to encode.py
-Because that is  missing, we see the following error:
- |   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/cbor2/__init__.py", line 2, in <module>
- |     from .encoder import dump, dumps, CBOREncoder, shareable_encoder  # noqa
- |   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/cbor2/encoder.py", line 68, in <module>
- |     class CBOREncoder:
- |   File "/builder/meta-arm/build/tmp/work/corstone1000_fvp-poky-linux-musl/trusted-firmware-m/1.5.0+gitAUTOINC+f8c7e5361b-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/cbor2/encoder.py", line 266, in CBOREncoder
- |     def _encode_value(self, obj: Any) -> None:
-
-To get around this issue, remove the "Any" from the encoder.py.  The
-logic behind this (instead of importing typing) is that this is the only
-instance, and since this is not something that will be updated
-frequently with patches from upstream.
-
-Signed-off-by: Jon Mason <jon.mason@arm.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../python/python3-cbor2/CVE-2025-68131.patch | 43 ++++++++++++-------
- 1 file changed, 28 insertions(+), 15 deletions(-)
+ meta-python/recipes-devtools/python/python3-cbor2/run-ptest | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
-index 4c5310edfaba..8556c5bdbca3 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
-+++ b/meta-python/recipes-devtools/python/python3-cbor2/CVE-2025-68131.patch
-@@ -21,18 +21,18 @@ CVE: CVE-2025-68131
- Upstream-Status: Backport [https://github.com/agronholm/cbor2/commit/f1d701cd2c411ee40bb1fe383afe7f365f35abf0]
- Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
- ---
-- cbor2/decoder.py      | 26 ++++++++++++++--
-- cbor2/encoder.py      | 42 +++++++++++++++++++++-----
-+ cbor2/decoder.py      | 38 +++++++++++++++++++-----
-+ cbor2/encoder.py      | 43 ++++++++++++++++++++++-----
-  source/decoder.c      | 28 +++++++++++++++++-
-  source/decoder.h      |  1 +
-  source/encoder.c      | 23 +++++++++++++--
-  source/encoder.h      |  1 +
-  tests/test_decoder.py | 62 ++++++++++++++++++++++++++++++++++++++
-  tests/test_encoder.py | 69 +++++++++++++++++++++++++++++++++++++++++++
-- 8 files changed, 239 insertions(+), 13 deletions(-)
-+ 8 files changed, 246 insertions(+), 19 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python3-cbor2/run-ptest b/meta-python/recipes-devtools/python/python3-cbor2/run-ptest
+index b63c4de0d9..c951b418c5 100644
+--- a/meta-python/recipes-devtools/python/python3-cbor2/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-cbor2/run-ptest
+@@ -1,3 +1,4 @@
+ #!/bin/sh
  
- diff --git a/cbor2/decoder.py b/cbor2/decoder.py
--index be7198b..f2d818c 100644
-+index be7198b..6cdd752 100644
- --- a/cbor2/decoder.py
- +++ b/cbor2/decoder.py
- @@ -2,6 +2,7 @@ import re
-@@ -94,16 +94,28 @@ index be7198b..f2d818c 100644
-  
-      def decode_from_bytes(self, buf):
-          """
--@@ -190,6 +211,7 @@ class CBORDecoder:
-+@@ -190,12 +211,13 @@ class CBORDecoder:
-          object needs to be decoded separately from the rest but while still
-          taking advantage of the shared value registry.
-          """
-+-        with BytesIO(buf) as fp:
-+-            old_fp = self.fp
-+-            self.fp = fp
-+-            retval = self._decode()
-+-            self.fp = old_fp
-+-            return retval
- +        with self._decoding_context():
--         with BytesIO(buf) as fp:
--             old_fp = self.fp
--             self.fp = fp
-++            with BytesIO(buf) as fp:
-++                old_fp = self.fp
-++                self.fp = fp
-++                retval = self._decode()
-++                self.fp = old_fp
-++                return retval
-+ 
-+     def _decode_length(self, subtype, allow_indefinite=False):
-+         if subtype < 24:
- diff --git a/cbor2/encoder.py b/cbor2/encoder.py
--index 42526c0..0a5722d 100644
-+index 42526c0..fc22458 100644
- --- a/cbor2/encoder.py
- +++ b/cbor2/encoder.py
- @@ -109,7 +109,7 @@ class CBOREncoder:
-@@ -147,13 +159,14 @@ index 42526c0..0a5722d 100644
-      def encode(self, obj):
-          """
-          Encode the given object using CBOR.
--@@ -243,6 +261,14 @@ class CBOREncoder:
-+@@ -243,6 +261,15 @@ class CBOREncoder:
-          :param obj:
-              the object to encode
-          """
- +        with self._encoding_context():
- +            self._encode_value(obj)
--+    def _encode_value(self, obj: Any) -> None:
-++
-++    def _encode_value(self, obj) -> None:
- +        """
- +        Internal fast path for encoding - used by built-in encoders.
- +        External code should use encode() instead, which properly manages
-@@ -162,7 +175,7 @@ index 42526c0..0a5722d 100644
-          obj_type = obj.__class__
-          encoder = (
-              self._encoders.get(obj_type) or
--@@ -390,14 +416,14 @@ class CBOREncoder:
-+@@ -390,14 +417,14 @@ class CBOREncoder:
-      def encode_array(self, value):
-          self.encode_length(4, len(value))
-          for item in value:
-@@ -180,7 +193,7 @@ index 42526c0..0a5722d 100644
-  
-      def encode_sortable_key(self, value):
-          """
--@@ -422,10 +448,10 @@ class CBOREncoder:
-+@@ -422,10 +449,10 @@ class CBOREncoder:
-                  # String referencing requires that the order encoded is
-                  # the same as the order emitted so string references are
-                  # generated after an order is determined
-@@ -193,7 +206,7 @@ index 42526c0..0a5722d 100644
-  
-      def encode_semantic(self, value):
-          # Nested string reference domains are distinct
--@@ -436,7 +462,7 @@ class CBOREncoder:
-+@@ -436,7 +463,7 @@ class CBOREncoder:
-              self._string_references = {}
-  
-          self.encode_length(6, value.tag)
-@@ -202,7 +215,7 @@ index 42526c0..0a5722d 100644
-  
-          self.string_referencing = old_string_referencing
-          self._string_references = old_string_references
--@@ -489,7 +515,7 @@ class CBOREncoder:
-+@@ -489,7 +516,7 @@ class CBOREncoder:
-      def encode_stringref(self, value):
-          # Semantic tag 25
-          if not self._stringref(value):
--- 
-2.39.5
-
+-pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
++pytest -o log_cli=true -o log_cli_level=INFO 2>&1 | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
++exit ${PIPESTATUS[0]}
 
