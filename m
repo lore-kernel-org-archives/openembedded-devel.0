@@ -1,114 +1,107 @@
-Return-Path: <philip@balister.org>
+Return-Path: <mail2szahir@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 732A1F42105
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 18:03:19 +0000 (UTC)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21872.1776266717115892629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83022F42115
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 18:17:59 +0000 (UTC)
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.1936.1776277073108697642
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 08:25:18 -0700
+ Wed, 15 Apr 2026 11:17:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=NzgwZR3i;
- spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: joaomarcos.costa@bootlin.com)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 1C1DC1A32C2;
-	Wed, 15 Apr 2026 15:25:15 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id E224360420;
-	Wed, 15 Apr 2026 15:25:14 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CE8031045A03B;
-	Wed, 15 Apr 2026 17:25:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1776266714; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=knfVYWplZqoVC5lu+FLntHVZ/5UeTF56yqFkiO64jx4=;
-	b=NzgwZR3i4+6fOfHd0eWQ7h1gKYu5QFnI68cZXi+COekqCt85+CEKqDcJ3YZQOtVlzU/0G5
-	CSdsrhmRRmfVIn4Hph1kwiPldKltDqJFtdS7Eadtq25qmChrVVBjPKNdOJe8TmaaJEgMuf
-	tnetcrx3A102qGmMJPPOqJ+7QYZLn+oYy4F6ZESUPqq2yOe0ALZiW23MJy+z1vbQvmZn1V
-	coOh7aJ752hh16D2wbn0hyOhoe7+0k6+ObOSB/hi8a09/Y7V1Ub0XkbxusZqcoZs6eQZHA
-	JG7akQJZvEn2lUKQHvD4G0kfvXWMwmIejSVKf61+asIwmU7HIiRYzE2S+Lx2zw==
-Message-ID: <f827c128-0f6a-45d4-8497-6deb4c9cd943@bootlin.com>
-Date: Wed, 15 Apr 2026 17:25:11 +0200
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=iG67AWPM;
+ spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: mail2szahir@gmail.com)
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3591cc98871so3338594a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 11:17:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776277072; x=1776881872; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oyYSL5wcNzpVS5gyF9WEGXsoGuPGcQLJVZNVYO1mTu8=;
+        b=iG67AWPMeQ24N8lmcH2gwbigkbm/ahdh5a/c9kIBe8WZS9y669+27NYd1dRPFE0zbD
+         8oYH6KMqT1nrX51Hn81hSmFaIYMjB+4ClewHE4IXG8eG1nqVcWUCmsY6EXZbpJLk/MMb
+         D7Ntdiv2wtGqRnWCc4A+OSkSVNIN3J5ufXTQQHVGoX+TP3cto0Lww/IkISMUaQrDzeBh
+         7r7jpr5ftyqyRVyzsdbQfKyVIXs+6tvrD7OrlWMpQJUtaQSCsCiRpknTv70EcoigUzP4
+         Z8NVw/csxT8FE/6Xoi+Bl2WD6NqRsQeJBJAQ+yRK4PJvHDD3zPyTVD4EpHkkZBaLFBpx
+         Thrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776277072; x=1776881872;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oyYSL5wcNzpVS5gyF9WEGXsoGuPGcQLJVZNVYO1mTu8=;
+        b=QjQU5E7KGAZ9sfp7KFOjOnMHjBPZMFzRHwAf3BrHNdx66Mjyvdno7iO001DYK5dg5X
+         z3oobUdUzubNqLP/wWKP2qYl/f2u/q9f8q/WJOFh0zZw0dJ6qamzyGx2sRmlwQbzy5v9
+         sO4PJKyeKt/sA9uPSxahRRwtVLx61CSJdWMSBKiRE6c7ZQZ8bI/AhsnJYFAUWn9AaU5N
+         yRqKGYyqjf4XVkKtQWZ1enFJNsrd/khbE+YO22h211CU1dqcHKe12r6n+NrSqQ2XbRbE
+         QVMHo2vjNHSiugG7OcKXm7alhqfkfAgYRVGCTpW43RB5e7GVw9rsjBGNy9hsxzHvaya3
+         u2lg==
+X-Gm-Message-State: AOJu0Yyu9hz5LE28iLj+XNWZyTFn58WJoXClL75oybJGWNEnWM3XJh2Z
+	ZDkpmRyzu5b6ZxKEuRPxA23yUr5ClPHY+CkimwTEBREPtrx1lEgaOK7aMSOOIA==
+X-Gm-Gg: AeBDievmLt5htTbsQY/4/aB9BLAmI7GgM5ima9NTnTxw5h5+FZJzGS/xuXgGTj6u7UL
+	Qi4ZF/fZVx9S17lO+sA1VNcj2qh4bCxO+e61anB7ceJopqlYGMKoFqrFhKZCMO98vfIej0AOItm
+	IADL0KJ1j9U+n7HMDyhROn5BaxfP3yNl61KFonNbYAWUAsAlhXAXJC46/moxznHvbZE3cEKylYO
+	FyQvMIkELIeCtwF4jFdMS11I44p7bZnfKQgZWvz8+MuLeIauwy5JAR5hVfxnul/QlUR36o4vYE8
+	CrgScp3SeupK9w184OjZL7aAYYrr8DttTVCEk5r3qfYdtoqMKSjYSAEKumTsg+nWa+u4zvZeRrY
+	gp5TVhmoyKWy36Rpm1VBYpgybqRJGmQMAFcXQZHI2QMdYWVBFSucUxYqmxrtU26aq2QrQx88dqL
+	XJiM+deF/cNS7v0s2q6s2O3EStDT5oKjuuWr3xkcal1Bf33A==
+X-Received: by 2002:a17:90b:1a8f:b0:359:83d3:27d3 with SMTP id 98e67ed59e1d1-35e4274e363mr18703903a91.2.1776277072189;
+        Wed, 15 Apr 2026 11:17:52 -0700 (PDT)
+Received: from L-17367L.kpit.com ([49.47.218.130])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35fd20d0eb5sm4138857a91.12.2026.04.15.11.17.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Apr 2026 11:17:51 -0700 (PDT)
+From: Zahir Hussain <mail2szahir@gmail.com>
+X-Google-Original-From: Zahir Hussain <zahir.basha@partner.bmwgroup.com>
+To: openembedded-devel@lists.openembedded.org,
+	zahir.basha@kpit.com
+Cc: mail2szahir@gmail.com
+Subject: [OE-core][scarthgap][PATCH] rocksdb: packageconfig knob for set static library option
+Date: Wed, 15 Apr 2026 23:46:45 +0530
+Message-Id: <20260415181645.1191232-1-zahir.basha@partner.bmwgroup.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][PATCH] libhugetlbfs: add RISC-V to COMPATIBLE_HOSTS
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, thomas.petazzoni@bootlin.com,
- thomas.perrot@bootlin.com, nylon.chen@sifive.com
-References: <20260415090507.819848-1-joaomarcos.costa@bootlin.com>
- <CAMKF1spT35ddfWAyZAEmA_kQuRSE7boNSeGdM8nV5c1HLpuzkw@mail.gmail.com>
-From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <CAMKF1spT35ddfWAyZAEmA_kQuRSE7boNSeGdM8nV5c1HLpuzkw@mail.gmail.com>
-X-Last-TLS-Session-Version: TLSv1.3
-Content-Language: en-US, fr
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 18:03:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126366
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 18:17:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126369
 
-Hello, Khem
+From: Zahir Hussain <zahir.basha@kpit.com>
 
-On 4/15/26 17:01, Khem Raj wrote:
->=20
->=20
-> On Wed, Apr 15, 2026 at 2:05=E2=80=AFAM Jo=C3=A3o Marcos Costa=20
-> <joaomarcos.costa@bootlin.com <mailto:joaomarcos.costa@bootlin.com>> wr=
-ote:
->=20
->     A preliminar effort to support RISC-V was added in v2.23:
->=20
->     a529598 Introduce basic riscv64 support [1]
->=20
->     Following the guidelines in libhugetlbfs's HOWTO, here are the outp=
-uts
->     of some commands in qemuriscv64:
->=20
->     root@qemuriscv64:~# grep -i huge /proc/filesystems
->     nodev=C2=A0 =C2=A0hugetlbfs
->     root@qemuriscv64:~# hugeadm --pool-list
->      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
-m=C2=A0 Default
->      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
->      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
->     root@qemuriscv64:~# hugeadm --pool-pages-min 2MB:10 --add-temp-swap
->     root@qemuriscv64:~# hugeadm --pool-list
->      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
-m=C2=A0 Default
->      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
->      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=
-=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
->     root@qemuriscv64:~# hugeadm --pool-pages-min 2MB:-5
->     root@qemuriscv64:~# hugeadm --pool-list
->      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
-m=C2=A0 Default
->      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
->      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A0 5=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 5=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
->=20
->     Regarding toolchains, libhugetlbfs for RISC-V builds fine with both
->     clang and gcc.
->=20
->     [1]:
->     https://github.com/libhugetlbfs/libhugetlbfs/commit/a529598dd256c79=
-799d5e43e6d79146ca15f1c16 <https://github.com/libhugetlbfs/libhugetlbfs/c=
-ommit/a529598dd256c79799d5e43e6d79146ca15f1c16>
->=20
->=20
-> Neat. now memcached and vm in kernel-selftest can be enabled for RV64,=20
-> can you check?
+Adding PACKAGECONFIG knob for enable/disable the static library option
 
-Sure, I'm on it.
+It is just a follow-up changes of previous commit
+https://git.openembedded.org/meta-openembedded/commit/?h=scarthgap&id=72018ca1b1a471226917e8246e8bbf9a374ccf97
+and also this changes are already accepted and integrated in kirkstone branch.
 
---=20
-Best regards,
-Jo=C3=A3o Marcos Costa
+Signed-off-by: Zahir Hussain <zahir.basha@kpit.com>
+---
+ meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
+index fae54fdba4..a55a8eb59b 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
+@@ -36,6 +36,7 @@ PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
+ PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
+ PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
+ PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
++PACKAGECONFIG[rocksdb_static] = "-DROCKSDB_BUILD_STATIC=ON, -DROCKSDB_BUILD_STATIC=OFF"
+ 
+ # Tools and tests currently don't compile on armv5 so we disable them
+ EXTRA_OECMAKE = "\
+@@ -44,7 +45,6 @@ EXTRA_OECMAKE = "\
+     -DWITH_BENCHMARK_TOOLS=OFF \
+     -DWITH_TOOLS=OFF \
+     -DFAIL_ON_WARNINGS=OFF \
+-    -DROCKSDB_BUILD_STATIC=OFF \
+ "
+ 
+ CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+-- 
+2.34.1
+
 
