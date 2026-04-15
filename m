@@ -2,94 +2,113 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 901DEF42113
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 732A1F42105
 	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 18:03:19 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.517.1776273696937387158
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21872.1776266717115892629
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 10:21:36 -0700
+ Wed, 15 Apr 2026 08:25:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@wbinvd.org header.s=wbinvd header.b=iaD6pnrD;
- spf=pass (domain: wbinvd.org, ip: 209.85.210.176, mailfrom: calvin@wbinvd.org)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-82a655cfab5so5756271b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 10:21:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=wbinvd.org; s=wbinvd; t=1776273696; x=1776878496; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3Iav/OyJ/W67tQDDh1fpN2U504LXPQIkJFFrM3HDXi0=;
-        b=iaD6pnrDlF0xI2sBBM9CnSG6NMFo2ITG51xOWI3YoQwdvkWVg3rRgR33qb4CBmDSCS
-         voTpNr+BOVS47OxxWqfaAKjz4LdmUbYHmGbXPSlUB64IJe3+1gBR2DJHTANoTbGS0o4I
-         1K2XMSlsBfR3rUGR9J4nLla4pFl+YBiBXRz9PLUUXFf4s27qag8LkIXzmpzOcCK5X17A
-         2A/qKlG1tv8lFo1osUaQbp3bmOb31ZBBdg1hkIuCS/folGNX/dTCMklTFkvO4FGGsQDq
-         Yz6ekseM/gxBo3bWR9L/uIbhEK+swAIhshtvomr276318OZQd+ALkyJKUGT6iyJX1FRF
-         yYhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776273696; x=1776878496;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3Iav/OyJ/W67tQDDh1fpN2U504LXPQIkJFFrM3HDXi0=;
-        b=GPKgt7ETszdjYwk7IJUeKWk7lqmbZBqhclImzODCYzJuNwRcGtDtHfY2bS8vs274YK
-         5eYI1yzZWkaa+HXKrdm8KEzS/4vynsv1EoqFwq3PydirtarDPbVDryvLqIJYVp9yfI9W
-         B8wNn7POcSfpRP/7bOSvawCK1ibuodPvPyVLPwkRFKh4sm/v7JLudeWJ07WlcFPqGhp8
-         BVvFLF/NH7hDMzX4iXOCHKi3rDVG2Hq1LZUhZg9HuHubzdiyN7La119Iqfz3KW6EM1zb
-         ZBjohmk38Ftik2GpKfbcPlQxtjTqCjOanqXpotdEBnzlHDGya68JY6wd0Kl6qp7yapat
-         62Jg==
-X-Gm-Message-State: AOJu0YwffuWjQClzx3ufIKOo4JF1YWChM1x9U28nQxFA0DBMS46dg/in
-	HrEp5KELcwGo4gsgwS7p7+48yKl5olaDzMilURnabGjSwXOkNBdDTkpqnOc3Zo1CvPj1YpcacRu
-	7y2Je
-X-Gm-Gg: AeBDieumEDahTzeBKr121DanL8dLCskMXn3ZWMUS1wNA0viuMvHDfoVem7dp4C+z0i0
-	JLuecW+m2ZAAbt8sG8LSV0YLEBAU8jqgebs13h7+JK8RoxFOEGkmSM6MEu7shtZZ0DASrA45IdL
-	hEyy0Nf2RQn7MKbdKXhEY1e6+0cAjHRG/Ic94wiwach0vYnrwvRvEOEqhJ6apHhNGCOGJAroAoo
-	WECTMh39v/tRdtDr/kya8cE5d0qdQQSqR4rHcw4BHk7sOdK9OiZWcxOGx7QrW1+/nKXOOXNKS7g
-	awFyUJ+BaxORwH3zj9QGsVLVWh002KUJX5fhjVXdtwJLnj+HNg8JBevbQLtmAYlLkBElH9G1UgP
-	5Z6Qb3tvVE3gf78e/wM96Cwm1A4Gao9whhMUj6wX+4cOkBRmon4Z9dH/9sjnOQyao6tUrIQHmp6
-	wbO4rLALdtXfUCnXH96ibQJXsTjg==
-X-Received: by 2002:a05:7301:7c0c:b0:2c7:2cac:8123 with SMTP id 5a478bee46e88-2d5863806b0mr12072308eec.4.1776273282101;
-        Wed, 15 Apr 2026 10:14:42 -0700 (PDT)
-Received: from mozart.vkv.me ([2001:5a8:468b:d015:4408:1d89:c0da:7de7])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2de8c50cee8sm3647589eec.7.2026.04.15.10.14.41
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Apr 2026 10:14:41 -0700 (PDT)
-From: Calvin Owens <calvin@wbinvd.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gedit: Use gitsm in SRC_URI for new gdlib submodule
-Date: Wed, 15 Apr 2026 10:14:31 -0700
-Message-ID: <3a59b53e992a96aa12697237eded7e1955e311e3.1776273056.git.calvin@wbinvd.org>
-X-Mailer: git-send-email 2.47.3
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=NzgwZR3i;
+ spf=pass (domain: bootlin.com, ip: 185.246.84.56, mailfrom: joaomarcos.costa@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 1C1DC1A32C2;
+	Wed, 15 Apr 2026 15:25:15 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id E224360420;
+	Wed, 15 Apr 2026 15:25:14 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CE8031045A03B;
+	Wed, 15 Apr 2026 17:25:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1776266714; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=knfVYWplZqoVC5lu+FLntHVZ/5UeTF56yqFkiO64jx4=;
+	b=NzgwZR3i4+6fOfHd0eWQ7h1gKYu5QFnI68cZXi+COekqCt85+CEKqDcJ3YZQOtVlzU/0G5
+	CSdsrhmRRmfVIn4Hph1kwiPldKltDqJFtdS7Eadtq25qmChrVVBjPKNdOJe8TmaaJEgMuf
+	tnetcrx3A102qGmMJPPOqJ+7QYZLn+oYy4F6ZESUPqq2yOe0ALZiW23MJy+z1vbQvmZn1V
+	coOh7aJ752hh16D2wbn0hyOhoe7+0k6+ObOSB/hi8a09/Y7V1Ub0XkbxusZqcoZs6eQZHA
+	JG7akQJZvEn2lUKQHvD4G0kfvXWMwmIejSVKf61+asIwmU7HIiRYzE2S+Lx2zw==
+Message-ID: <f827c128-0f6a-45d4-8497-6deb4c9cd943@bootlin.com>
+Date: Wed, 15 Apr 2026 17:25:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: add RISC-V to COMPATIBLE_HOSTS
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, thomas.petazzoni@bootlin.com,
+ thomas.perrot@bootlin.com, nylon.chen@sifive.com
+References: <20260415090507.819848-1-joaomarcos.costa@bootlin.com>
+ <CAMKF1spT35ddfWAyZAEmA_kQuRSE7boNSeGdM8nV5c1HLpuzkw@mail.gmail.com>
+From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <CAMKF1spT35ddfWAyZAEmA_kQuRSE7boNSeGdM8nV5c1HLpuzkw@mail.gmail.com>
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Language: en-US, fr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 18:03:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126368
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126366
 
-Upstream now uses a submodule for gdlib, so the build attempts to clone
-the submodule over the network and fails. Fix by cloning the submodule
-via SRC_URI.
+Hello, Khem
 
-Signed-off-by: Calvin Owens <calvin@wbinvd.org>
----
- meta-gnome/recipes-gnome/gedit/gedit_50.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 4/15/26 17:01, Khem Raj wrote:
+>=20
+>=20
+> On Wed, Apr 15, 2026 at 2:05=E2=80=AFAM Jo=C3=A3o Marcos Costa=20
+> <joaomarcos.costa@bootlin.com <mailto:joaomarcos.costa@bootlin.com>> wr=
+ote:
+>=20
+>     A preliminar effort to support RISC-V was added in v2.23:
+>=20
+>     a529598 Introduce basic riscv64 support [1]
+>=20
+>     Following the guidelines in libhugetlbfs's HOWTO, here are the outp=
+uts
+>     of some commands in qemuriscv64:
+>=20
+>     root@qemuriscv64:~# grep -i huge /proc/filesystems
+>     nodev=C2=A0 =C2=A0hugetlbfs
+>     root@qemuriscv64:~# hugeadm --pool-list
+>      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
+m=C2=A0 Default
+>      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
+>      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
+>     root@qemuriscv64:~# hugeadm --pool-pages-min 2MB:10 --add-temp-swap
+>     root@qemuriscv64:~# hugeadm --pool-list
+>      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
+m=C2=A0 Default
+>      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
+>      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=
+=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
+>     root@qemuriscv64:~# hugeadm --pool-pages-min 2MB:-5
+>     root@qemuriscv64:~# hugeadm --pool-list
+>      =C2=A0 =C2=A0 =C2=A0 Size=C2=A0 Minimum=C2=A0 Current=C2=A0 Maximu=
+m=C2=A0 Default
+>      =C2=A0 =C2=A0 =C2=A065536=C2=A0 =C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 0
+>      =C2=A0 =C2=A02097152=C2=A0 =C2=A0 =C2=A0 =C2=A0 5=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 5=C2=A0 =C2=A0 =C2=A0 =C2=A010=C2=A0 =C2=A0 =C2=A0 =C2=A0 *
+>=20
+>     Regarding toolchains, libhugetlbfs for RISC-V builds fine with both
+>     clang and gcc.
+>=20
+>     [1]:
+>     https://github.com/libhugetlbfs/libhugetlbfs/commit/a529598dd256c79=
+799d5e43e6d79146ca15f1c16 <https://github.com/libhugetlbfs/libhugetlbfs/c=
+ommit/a529598dd256c79799d5e43e6d79146ca15f1c16>
+>=20
+>=20
+> Neat. now memcached and vm in kernel-selftest can be enabled for RV64,=20
+> can you check?
 
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_50.0.bb b/meta-gnome/recipes-gnome/gedit/gedit_50.0.bb
-index 92685f085a..d15ab8665d 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_50.0.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_50.0.bb
-@@ -23,7 +23,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc get
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
- 
--SRC_URI = "git://gitlab.gnome.org/World/gedit/gedit.git;protocol=https;branch=master;tag=${PV}"
-+SRC_URI = "gitsm://gitlab.gnome.org/World/gedit/gedit.git;protocol=https;branch=master;tag=${PV}"
- SRCREV = "25d0bf0c3c40b0866fc23ec875f0af6c67f728ef"
- 
- # gobject-introspection is mandatory and cannot be configured
--- 
-2.47.3
+Sure, I'm on it.
 
+--=20
+Best regards,
+Jo=C3=A3o Marcos Costa
 
