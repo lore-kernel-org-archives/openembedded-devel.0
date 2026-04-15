@@ -1,177 +1,200 @@
-Return-Path: <liuyd.fnst@fujitsu.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96F20FA0C48
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 07:19:17 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13243.1776237547868116234
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B519AFA0C4A
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 08:27:17 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14004.1776241630930598674
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 00:19:08 -0700
+ Wed, 15 Apr 2026 01:27:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=CEvf9bps;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: liuyd.fnst@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1776237548; x=1807773548;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=XNlK4ZtNihokQ6kRAwiGB3xzjkh2DMWcdsueRVxSDN8=;
-  b=CEvf9bpspMzcYtj8dENwT9wcoFmjI95A3b7KaTKEcpSvjA0vYeiQyRRN
-   1i1oBqLdQyfiRUbnVOKyGvHIppcw0LEKDOxOSGWvhUWzFr+7VC9Dkhifq
-   ZAaNg723z/GgdtGzC2gIKFyAro5dWR7gP/EhspUl409Mhop3do8h5Ky8R
-   W5Y+NEZYHmTDX0SjuDNCvaY4b+PRsiEJmC2amMfFLdolJJRhry9P0Djll
-   /RWbg+O1fpy0lAlkmwfOwXvIkLvqIqw+xVG7xOOhueFHm4uGje2aIatEZ
-   xccd3HVOKp6IyelnMjIYZ/XLrYTuJm73L3OPQiMnNNpwMlqZL6tw3GdHu
-   g==;
-X-CSE-ConnectionGUID: r+HH+e0xSAWIOHoAY4acGw==
-X-CSE-MsgGUID: YzLk+dQYS4CQW8eFCyrRRw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11759"; a="241455392"
-X-IronPort-AV: E=Sophos;i="6.23,179,1770562800"; 
-   d="scan'208";a="241455392"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Apr 2026 16:19:06 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 1A3041002B85
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 07:19:06 +0000 (UTC)
-Received: from az2nlsmom2.o.css.fujitsu.com (az2nlsmom2.o.css.fujitsu.com [10.150.26.200])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id BE5E81400359
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 07:19:05 +0000 (UTC)
-Received: from G08FNSTD190101.g08.fujitsu.local (unknown [10.167.135.148])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id 6E82F18005D3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 07:19:03 +0000 (UTC)
-From: Liu Yiding <liuyd.fnst@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-gnome][PATCH] onboard: upgrade 1.4.3-9 -> 1.4.4-1
-Date: Wed, 15 Apr 2026 15:18:55 +0800
-Message-ID: <20260415071900.6767-2-liuyd.fnst@fujitsu.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260415071900.6767-1-liuyd.fnst@fujitsu.com>
-References: <20260415071900.6767-1-liuyd.fnst@fujitsu.com>
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Q2nRtxCT;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=h+D5tboJ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63F7tS1J764277
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 08:27:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Yn7csdv/rhrp997hhQLLHaNz7QhQ9ONpeMxdXz/wZRw=; b=Q2nRtxCTaYK4V/1r
+	jBdGFz4WULagrj0mFFXb7jEt3++2BcOjWvRYZuT9PIZLxX0jWsGyUVJDMUIhKb03
+	FkXna/GsJa1UKojw0qfWawcxXuKuaMUU77ICuciS3QpQnG5IKKqEkiCMXdSNglXF
+	2KZ/PtXoDAHUIl56dRYWVD7P+qZ7jYxbN9QMNbBJj64GXIfZdGESgl5cuY4jacM7
+	oThW3OVQ21itEHVa+hOwP0jNinKKU4Ed7COHSC0QbBAP0ffvP9I8uoxZc9QnNrla
+	NqnxO3ECxBGqGdlai8k5Kw6Sa5lZQhz6YZ0UF6U6IO30PMEE/eqiS0jmpePceggn
+	RgKjFQ==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dj6q7r4pw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 08:27:10 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-50d8ed08aa4so129452731cf.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 01:27:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776241629; cv=none;
+        d=google.com; s=arc-20240605;
+        b=Q9omahpDDg6eMZom8yuVpgf6ytSYHcefrzgfsft544K4+p7qbw7819mKuE2xSK4hwz
+         gkZ7SLvsxTXdejHPMR3E6YnuazM8W0OECY7OlazHGPxCv3sNRYkWFYE29ejeTnk4tMzp
+         0Os/hLOF9uLQgGXw72J/mY+fMZfil415EyGrvDZWEU42cssT7l2xEa3YlK/qBzkk1Uqr
+         aL8dxjVds9ILpPpW7HMWsdKl+o1676YyN4I1CmYZ3mKE1MUNLNsSMMFt1Tguwta6IJ8V
+         adP5o77wbcYLH8wYIUx79iUE2V58VXz6BzpE1QrbYvia7OGBgiXrcHad9cW9SQt937Zd
+         5IWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Yn7csdv/rhrp997hhQLLHaNz7QhQ9ONpeMxdXz/wZRw=;
+        fh=RxT9Z8BnVkq3QbZQ+cmFlZk/yrrLX1SZUt4tNZoBRHg=;
+        b=XISh7pZoDcTWqdw4iNadafHnKCxEIhG5qCYZu5kTA+nWLY3H86aXsuW94au/lf2bX4
+         2U6FkOGTzOae/lf3mC1ngpT08KCKNXGMww9Zj2usWB1qiBuRdBTWxCLnCAF5idziW3b6
+         WZrpxKf+WPSECsk9g0DP40hpNmQQ5RIUpVshkXyqDBlddLH43g0f66cz78+X8Tx608zo
+         T8jGQlyHrdN1/wmDy9WxUAqDm9lSDnm6wR399cL0Nxykjar0ZY6va8W9OrV8W6Ockhm2
+         0SJNeVMdDvzH09s38w5Irci0TWjJwu7kI5velyHV9v3BSuc1xDO4W1zbjjXLvlnQ7+Lo
+         f57Q==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1776241629; x=1776846429; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Yn7csdv/rhrp997hhQLLHaNz7QhQ9ONpeMxdXz/wZRw=;
+        b=h+D5tboJQab2JfLhkNKltw0KR6c6PRhIreiQW8wlaneBzFdYou4j2dxYFQddm9hxss
+         zGHtyvm/vfFO4QGt3I4ddQ4B2iexeP1zwP9r2iwqPNXcRntJBvJF1E0ZfZvH5Edl6NCd
+         4gUsLOIzTo56sZqRUQCmD/vxwGoD7HzlrdU0efn0zvIi2X0CKk9RBh6MTi5uveHCd+d4
+         1ELfjSET7ddOXFuJ9Gez04SZ4wX12kGY3Z3ob9f2sHWFmXQQGe36ZFJoq/ezqZpWcXsS
+         2mNEz/dNyNvh30lrxG7174psRMui5LbVVqMhjSZEcxBj0NP6UgleRxkB9nUA2cAL+D4a
+         wzjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776241629; x=1776846429;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Yn7csdv/rhrp997hhQLLHaNz7QhQ9ONpeMxdXz/wZRw=;
+        b=XRSUFTaw4tzkcCj2qv2YTavyA3KqV0RIaSHMETWYMdQqC2jQtXL1/SrUpwUgE9oV1D
+         mDkEvHdqoMVvvrbDsq8/PPouoViLUx0+T+MyIACnH8h7kc5tIt9NXkYvI5TKSFBc9GJu
+         h6grWkR2z8399hnJxp0TIz1d5ELU0LnQsDnf3UjjjvXaWaaRJj0Apb42L1dpWScRv6VV
+         DtpoWVOW1Midg1Q20GCdD3BPwTAmQhLzxt6Joh/8n1nxXpzHIxCbK0gfvc5QiQKLMy2x
+         fYH8vhwZ9ZkGcEJEtq5JfZ0bqAuM1rKXLrUlpWzeCdBQ1yeSzejgbGj4mfv5U6uBCKus
+         VmmA==
+X-Gm-Message-State: AOJu0YyQtgEFHQXxfRS2909osknopUnEbRmJ83QpgqEu2EUBthIfxRGe
+	Z/y4R/0NmT79zHAtAeRC9lGsMRqx2mByGOpEIfcr3UXuDf78Ji73ZDd42ovcdukyyMaAsSqX3aW
+	7wvo+NvVd1/QhH8oHxm9onsg2CubMsD9D4nq3LhTD6nbPTldyGLGQk/5TznFI+zzrPGdYSE2vWu
+	sh9vKr8QhtqXLn+wqqRws8frHsWZEhPiKXgOW3i4JrJuqlie3dYzIosfZ1GN0=
+X-Gm-Gg: AeBDiet06lHW4KWfuuVYFCbPmL8WHFjc95Ki8fbj7Tn/xITtXWcOtW6JwRBoDDEXhS3
+	FUum6uwgpNmueqXWtsZ7HVNWLHKja6cV20hoOhFA4WdblV9tAWQBPtQDmQvFHQdS/XFDNcJwQGP
+	HefxmnzELNQtFfw80Gjz6yAYMag94VHWHbVYrCN9lCfpvAoEedTGtVQqC74wcPHzrEXQ1k43int
+	7Ww
+X-Received: by 2002:a05:622a:4110:b0:50d:b1fc:c7d8 with SMTP id d75a77b69052e-50dd5c0cf95mr320875071cf.30.1776241629349;
+        Wed, 15 Apr 2026 01:27:09 -0700 (PDT)
+X-Received: by 2002:a05:622a:4110:b0:50d:b1fc:c7d8 with SMTP id
+ d75a77b69052e-50dd5c0cf95mr320874861cf.30.1776241628826; Wed, 15 Apr 2026
+ 01:27:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260410070508.1104455-1-jinfeng.wang.cn@windriver.com> <20260410070508.1104455-9-jinfeng.wang.cn@windriver.com>
+In-Reply-To: <20260410070508.1104455-9-jinfeng.wang.cn@windriver.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Wed, 15 Apr 2026 16:26:57 +0800
+X-Gm-Features: AQROBzC6MX_Ye8KaCNv3qvTbUZmAmDybGP7EbUGgzMudGW778ZmutEINXDJQGvQ
+Message-ID: <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 08/11] hdf5: fix CVE-2025-2308
+To: Jinfeng.Wang.CN@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=AvHeGu9P c=1 sm=1 tr=0 ts=69df4bde cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
+ a=t7CeM3EgAAAA:8 a=t1751v2a-wO9OLvF9dUA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: BUJ73d5NKLmwhwrvXgx8Uu3DiMIDdZov
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE1MDA3NiBTYWx0ZWRfX2s0SDu3qHD7L
+ b5WbAgjXyptad9vHDVU3G8MMCXMhYFa351OY64rtjhw0YjdxUFk2PmXh2g8ygYkn0XlfistHY4T
+ R6TBcg6SLQyyNQc8jRyJN9cYoUtBVk5+aIbnLoerqhWNeEkWqmoxJswsGu9kcT4DOqggngG24Am
+ cLfPYUr7jDtm1eq0qpaD3494Itm5nw8bvZkRNY2axorK6sfJL1SDe0/Q+g+Ah7ynnI+juDU0akP
+ ziItj2Bivw1wCygOsxvUdT5oCEX6PDdSoVoJKd4Y6gl5wD9MQiCHwf4NsYXBHA6EbwRtiz1eG9c
+ j+66mKJdnuqEayWHVmRU2bfJuWNv3YA1De8a2iaBK9K95iZ3DWbJsNK6JRDqyRe+KCSwODWxcjG
+ l39NHnHc23cdofHGvD3K7sKbRZFENDVcG6u6lf+2XtZ96aDARVrhu2bLa3t8nYnkNFF63otQu8E
+ BxYvBrX9Gh+eBT98Maw==
+X-Proofpoint-ORIG-GUID: BUJ73d5NKLmwhwrvXgx8Uu3DiMIDdZov
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-14_04,2026-04-13_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 clxscore=1015 adultscore=0 phishscore=0
+ bulkscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604150076
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 07:19:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126345
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 08:27:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126350
 
-1.ChangeLog
-  https://github.com/onboard-osk/onboard/releases/tag/1.4.4-1
+On Fri, Apr 10, 2026 at 3:05=E2=80=AFPM Wang, Jinfeng (CN) via
+lists.openembedded.org
+<Jinfeng.Wang.CN=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> From: Libo Chen <libo.chen.cn@windriver.com>
+>
+> According to [1], A vulnerability, which was classified as critical, was
+> found in HDF5 1.14.6. This affects the function
+> H5Z__scaleoffset_decompress_one_byte of the component Scale-Offset Filter=
+.
+> The manipulation leads to heap-based buffer overflow. An attack has to be
+> approached locally. The exploit has been disclosed to the public and may =
+be
+> used. The vendor plans to fix this issue in an upcoming release.
+>
+> Backport patch [2] from upstream to fix CVE-2025-2308
+>
+> [1] https://nvd.nist.gov/vuln/detail/CVE-2025-2308
+> [2] https://github.com/HDFGroup/hdf5/commit/2ce7fdc4cf147d280aa6d49686297=
+faacc250e40
+>
+> Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+> Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+> ---
+>  .../hdf5/files/CVE-2025-2308.patch            | 2120 +++++++++++++++++
+>  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |    1 +
+>  2 files changed, 2121 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patc=
+h
+>
+> diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch b/met=
+a-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+> new file mode 100644
+> index 0000000000..13b04bf8a1
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+> @@ -0,0 +1,2120 @@
+> +From cbce4c2ecf6f5557605890eec125ecfaa4371131 Mon Sep 17 00:00:00 2001
+> +From: Libo Chen <libo.chen.cn@windriver.com>
+> +Date: Fri, 30 Jan 2026 16:43:04 +0800
+> +Subject: [PATCH] Fix CVE-2025-2308 (#5960)
+> +
+> +A malformed file can cause the scale-offset filter to have too little in=
+put data causing a heap buffer overflow. Additional checks on the maximum b=
+uffer length are required during the decompression.
+> +
+> +This PR fixes CVE-2025-2308.
+> +
+> +CVE: CVE-2025-2308
+> +
+> +Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/2ce7f=
+dc4cf147d280aa6d49686297faacc250e40]
+> +
+> +Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+> +---
+> + src/H5Zscaleoffset.c      |  177 ++--
+> + src/H5Zscaleoffset.c.orig | 1781 +++++++++++++++++++++++++++++++++++++
+> + 2 files changed, 1886 insertions(+), 72 deletions(-)
+> + create mode 100644 src/H5Zscaleoffset.c.orig
 
-2.Remove 0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch as error has been solved in 1.4.4-1.
+Can you please fix this patch and resend?
 
-Signed-off-by: Liu Yiding <liuyd.fnst@fujitsu.com>
----
- ...ine-error-API-if-platform-does-not-h.patch | 69 -------------------
- ...{onboard_1.4.3-9.bb => onboard_1.4.4-1.bb} |  5 +-
- 2 files changed, 2 insertions(+), 72 deletions(-)
- delete mode 100644 meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
- rename meta-gnome/recipes-support/onboard/{onboard_1.4.3-9.bb => onboard_1.4.4-1.bb} (89%)
+Thanks,
 
-diff --git a/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
-deleted file mode 100644
-index 9fb2cd6814..0000000000
---- a/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
-+++ /dev/null
-@@ -1,69 +0,0 @@
--From 71804c06c7179333f44b57e04ba268f37fe54f62 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 13 Jul 2017 09:01:04 -0700
--Subject: [PATCH] pypredict/lm: Define error API if platform does not have it
--
--error() API is not implemented across all libcs on linux
--e.g. musl does not provide it.
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- Onboard/pypredict/lm/lm.cpp         |  1 -
-- Onboard/pypredict/lm/lm.h           | 13 +++++++++++++
-- Onboard/pypredict/lm/lm_dynamic.cpp |  2 --
-- 3 files changed, 13 insertions(+), 3 deletions(-)
--
--diff --git a/Onboard/pypredict/lm/lm.cpp b/Onboard/pypredict/lm/lm.cpp
--index 2e642965..37ae241e 100644
----- a/Onboard/pypredict/lm/lm.cpp
--+++ b/Onboard/pypredict/lm/lm.cpp
--@@ -19,7 +19,6 @@
-- 
-- #include <stdlib.h>
-- #include <stdio.h>
---#include <error.h>
-- #include <algorithm>
-- #include <cmath>
-- #include <string>
--diff --git a/Onboard/pypredict/lm/lm.h b/Onboard/pypredict/lm/lm.h
--index ed4164a4..b8b63ee8 100644
----- a/Onboard/pypredict/lm/lm.h
--+++ b/Onboard/pypredict/lm/lm.h
--@@ -32,6 +32,19 @@
-- #include <algorithm>
-- #include <string>
-- 
--+#if defined(HAVE_ERROR_H)
--+#include <error.h>
--+#else
--+#include <err.h>
--+#define _onboard_error(S, E, F, ...) do { \
--+       if (E) \
--+               err(S, F ": %s", ##__VA_ARGS__, strerror(E)); \
--+       else \
--+               err(S, F, ##__VA_ARGS__); \
--+} while(0)
--+
--+#define error _onboard_error
--+#endif
-- 
-- // break into debugger
-- // step twice to come back out of the raise() call into known code
--diff --git a/Onboard/pypredict/lm/lm_dynamic.cpp b/Onboard/pypredict/lm/lm_dynamic.cpp
--index 7c628240..e7c7f40e 100644
----- a/Onboard/pypredict/lm/lm_dynamic.cpp
--+++ b/Onboard/pypredict/lm/lm_dynamic.cpp
--@@ -17,8 +17,6 @@
--  * along with this program. If not, see <http://www.gnu.org/licenses/>.
--  */
-- 
---#include <error.h>
---
-- #include "lm_dynamic.h"
-- 
-- using namespace std;
---- 
--2.34.1
--
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.3-9.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.4-1.bb
-similarity index 89%
-rename from meta-gnome/recipes-support/onboard/onboard_1.4.3-9.bb
-rename to meta-gnome/recipes-support/onboard/onboard_1.4.4-1.bb
-index d544f169f8..a069fb692e 100644
---- a/meta-gnome/recipes-support/onboard/onboard_1.4.3-9.bb
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.4.4-1.bb
-@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e \
-                     file://COPYING.BSD3;md5=f56403ae5b2d6b82ad136d753c05a82e \
-                    "
- 
--SRC_URI = "git://github.com/onboard-osk/onboard.git;protocol=https;branch=main \
--           file://0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch \
-+SRC_URI = "git://github.com/onboard-osk/onboard.git;protocol=https;branch=main;tag=${PV} \
-            file://0002-toggle-onboard-hoverclick-use-bin-sh-default-shell-i.patch \
-           "
--SRCREV = "350f7643576bc8c5f2cff9c6ddce0e1e7cff995d"
-+SRCREV = "02b19e2aee88e4bf2cdc7094813ddd4a6c05d1e7"
- 
- inherit features_check setuptools3 pkgconfig gtk-icon-cache gsettings mime-xdg
- 
--- 
-2.43.0
-
+Anuj
 
