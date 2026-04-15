@@ -2,105 +2,101 @@ Return-Path: <mail2szahir@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83022F42115
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 18:17:59 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1936.1776277073108697642
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B31CCF42131
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 18:21:50 +0000 (UTC)
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1941.1776277305721844925
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 11:17:53 -0700
+ Wed, 15 Apr 2026 11:21:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=iG67AWPM;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: mail2szahir@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3591cc98871so3338594a91.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 11:17:53 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=H7y/1DlJ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: mail2szahir@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-35da1af3e10so7168380a91.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 11:21:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776277072; x=1776881872; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776277305; x=1776882105; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oyYSL5wcNzpVS5gyF9WEGXsoGuPGcQLJVZNVYO1mTu8=;
-        b=iG67AWPMeQ24N8lmcH2gwbigkbm/ahdh5a/c9kIBe8WZS9y669+27NYd1dRPFE0zbD
-         8oYH6KMqT1nrX51Hn81hSmFaIYMjB+4ClewHE4IXG8eG1nqVcWUCmsY6EXZbpJLk/MMb
-         D7Ntdiv2wtGqRnWCc4A+OSkSVNIN3J5ufXTQQHVGoX+TP3cto0Lww/IkISMUaQrDzeBh
-         7r7jpr5ftyqyRVyzsdbQfKyVIXs+6tvrD7OrlWMpQJUtaQSCsCiRpknTv70EcoigUzP4
-         Z8NVw/csxT8FE/6Xoi+Bl2WD6NqRsQeJBJAQ+yRK4PJvHDD3zPyTVD4EpHkkZBaLFBpx
-         Thrg==
+        bh=M4lfHkZFVyX24Mf5KkC7VHQVvgMGQch85xKmmF0fio0=;
+        b=H7y/1DlJLdB5jhToRLXoE5KDuYavOpGGMwAU4l1/sNIfxCq9HMLPl0PxUNI0uhOXoT
+         D5eEB8QLeVf3fdfy+aUrRY9eDHJTeuTFo5gbgGDs5RRiYB0JCNGfwKz1BhzU35lAq6PH
+         zuiX+ARk2WE1pgJi/rDBTa74ZwLmwdU9GkATN+shp/MUyPeEHUWRBVdFjy+zBSj8loio
+         c1vmki3NbboGHQ5qnjraaxpBL/YaptKG+vcBQfvNQyEhsSqCnlwBvctMvsLCZO2WweCq
+         4IRUM8ggHQqjcQUS2EfHGEC2Kngv0MEbWU7sa/e4+O0ta3R3H/5ianKttYB+8m49Mkax
+         ndow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776277072; x=1776881872;
+        d=1e100.net; s=20251104; t=1776277305; x=1776882105;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oyYSL5wcNzpVS5gyF9WEGXsoGuPGcQLJVZNVYO1mTu8=;
-        b=QjQU5E7KGAZ9sfp7KFOjOnMHjBPZMFzRHwAf3BrHNdx66Mjyvdno7iO001DYK5dg5X
-         z3oobUdUzubNqLP/wWKP2qYl/f2u/q9f8q/WJOFh0zZw0dJ6qamzyGx2sRmlwQbzy5v9
-         sO4PJKyeKt/sA9uPSxahRRwtVLx61CSJdWMSBKiRE6c7ZQZ8bI/AhsnJYFAUWn9AaU5N
-         yRqKGYyqjf4XVkKtQWZ1enFJNsrd/khbE+YO22h211CU1dqcHKe12r6n+NrSqQ2XbRbE
-         QVMHo2vjNHSiugG7OcKXm7alhqfkfAgYRVGCTpW43RB5e7GVw9rsjBGNy9hsxzHvaya3
-         u2lg==
-X-Gm-Message-State: AOJu0Yyu9hz5LE28iLj+XNWZyTFn58WJoXClL75oybJGWNEnWM3XJh2Z
-	ZDkpmRyzu5b6ZxKEuRPxA23yUr5ClPHY+CkimwTEBREPtrx1lEgaOK7aMSOOIA==
-X-Gm-Gg: AeBDievmLt5htTbsQY/4/aB9BLAmI7GgM5ima9NTnTxw5h5+FZJzGS/xuXgGTj6u7UL
-	Qi4ZF/fZVx9S17lO+sA1VNcj2qh4bCxO+e61anB7ceJopqlYGMKoFqrFhKZCMO98vfIej0AOItm
-	IADL0KJ1j9U+n7HMDyhROn5BaxfP3yNl61KFonNbYAWUAsAlhXAXJC46/moxznHvbZE3cEKylYO
-	FyQvMIkELIeCtwF4jFdMS11I44p7bZnfKQgZWvz8+MuLeIauwy5JAR5hVfxnul/QlUR36o4vYE8
-	CrgScp3SeupK9w184OjZL7aAYYrr8DttTVCEk5r3qfYdtoqMKSjYSAEKumTsg+nWa+u4zvZeRrY
-	gp5TVhmoyKWy36Rpm1VBYpgybqRJGmQMAFcXQZHI2QMdYWVBFSucUxYqmxrtU26aq2QrQx88dqL
-	XJiM+deF/cNS7v0s2q6s2O3EStDT5oKjuuWr3xkcal1Bf33A==
-X-Received: by 2002:a17:90b:1a8f:b0:359:83d3:27d3 with SMTP id 98e67ed59e1d1-35e4274e363mr18703903a91.2.1776277072189;
-        Wed, 15 Apr 2026 11:17:52 -0700 (PDT)
+        bh=M4lfHkZFVyX24Mf5KkC7VHQVvgMGQch85xKmmF0fio0=;
+        b=dqQ2Xhume6waL2nCux+NucgbGHtYdEum24gCoLd+nlCiRiQrjpwNQFoq11s4hSyItl
+         FST1F5zyo7gOzK94OC/UxsloLzujbogivVfJPp2zWYHKM4HwyzTA65K0t1aKbEkUSEdV
+         ZDwf1rXkg7Losy38MXyIK4v2OyXInWTycD3T4NtsFhYiZfOT8Cz1pwO9mNNMTiZB120C
+         okPrDGbdOCYBCArXX/sEVBt4mxpsQKtP1hlLnnGd53LkXfw2xfWowj7J2Ep/RtZtq89a
+         tlsWgWmIlLcjC45HFCqOTrMJU2qgRuvXHX/PdEaE3W/z7+yyAhLwtukJKYd/F3loZYU5
+         fWtQ==
+X-Gm-Message-State: AOJu0YzE8cVBvryJTJNYRRUL8Ue/ZDyqSlxw4RkMPJqDf7b6xALXGOjD
+	2A07uPH5ycMNBYjFsHsQ5mkkllUeo9OOK/WG7p2gMzXShn9RAh1EG6OeMfXXrA==
+X-Gm-Gg: AeBDievFokTrfeGnjPA7y2tojBWlvxaUkPwOQ9/JxAvjm21560UJh8RNzpMjUsgxWVO
+	hJtHOgH8OPyLOfpFaT4IOItZfipRjlca/ef3FxZZ4IRI8qCu8kzVED2GuP4uZZerf0UC/YjYXyq
+	xdQO4BKdpQUxCGAQt6SyFwwBPfnIO44kO78sAYK6rh0ZivE3eckPujlLAkSyqHMPMSDMoCbloNC
+	OhC0US8vMcJeaARhiN+FPc/ucaRnxkcMrGjVHVAW6iujQkbU6L8tug4qVH8iKSmetL+oEdGHQWs
+	Sk/ZaB5rDaoBO/7/JGTRB4RtxNOSnP0tfRDbY3ILi3OFBfmyhcaYFHrsL9ksoYiy9u+VL4p9qVk
+	8yf8mezixTUQmLFrCnNGbw9JF54roFr0TPIKhXdLLUhz+9lplt23dTRZh52yW18BCwhrO3/75WT
+	4i9oxZZC/InvfbtVIOjR03mm5uQxaPFZKbOxUIleosa3ncn8HQCZZC3Nk5
+X-Received: by 2002:a17:90b:2d8d:b0:35f:bb33:d728 with SMTP id 98e67ed59e1d1-35fbb33da40mr12480227a91.11.1776277304812;
+        Wed, 15 Apr 2026 11:21:44 -0700 (PDT)
 Received: from L-17367L.kpit.com ([49.47.218.130])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35fd20d0eb5sm4138857a91.12.2026.04.15.11.17.49
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-35fd2101cf1sm4113599a91.15.2026.04.15.11.21.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Apr 2026 11:17:51 -0700 (PDT)
+        Wed, 15 Apr 2026 11:21:44 -0700 (PDT)
 From: Zahir Hussain <mail2szahir@gmail.com>
 X-Google-Original-From: Zahir Hussain <zahir.basha@partner.bmwgroup.com>
 To: openembedded-devel@lists.openembedded.org,
 	zahir.basha@kpit.com
 Cc: mail2szahir@gmail.com
-Subject: [OE-core][scarthgap][PATCH] rocksdb: packageconfig knob for set static library option
-Date: Wed, 15 Apr 2026 23:46:45 +0530
-Message-Id: <20260415181645.1191232-1-zahir.basha@partner.bmwgroup.com>
+Subject: [meta-oe][kirkstone][PATCH] rocksdb: remove rocksdb_static from default PACKAGECONFIG
+Date: Wed, 15 Apr 2026 23:50:40 +0530
+Message-Id: <20260415182040.1193544-1-zahir.basha@partner.bmwgroup.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 18:17:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126369
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 18:21:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126370
 
 From: Zahir Hussain <zahir.basha@kpit.com>
 
-Adding PACKAGECONFIG knob for enable/disable the static library option
+In our previous commit
+https://git.openembedded.org/meta-openembedded/commit/?h=kirkstone&id=33822593e5aed47f619a385579a47c366859408a
 
-It is just a follow-up changes of previous commit
-https://git.openembedded.org/meta-openembedded/commit/?h=scarthgap&id=72018ca1b1a471226917e8246e8bbf9a374ccf97
-and also this changes are already accepted and integrated in kirkstone branch.
+While adding the packageconfig knob for static library generation,
+rocksdb_static was mistakenly included in the default PACKAGECONFIG list.
+
+Remove it from the defaults so that the static library is not built
+unless explicitly enabled by the user.
 
 Signed-off-by: Zahir Hussain <zahir.basha@kpit.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb | 2 +-
+ meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-index fae54fdba4..a55a8eb59b 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-@@ -36,6 +36,7 @@ PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
- PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
- PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
- PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
-+PACKAGECONFIG[rocksdb_static] = "-DROCKSDB_BUILD_STATIC=ON, -DROCKSDB_BUILD_STATIC=OFF"
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+index 7bfe157c1f..7e39928bec 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_6.20.3.bb
+@@ -31,7 +31,7 @@ S = "${WORKDIR}/git"
  
- # Tools and tests currently don't compile on armv5 so we disable them
- EXTRA_OECMAKE = "\
-@@ -44,7 +45,6 @@ EXTRA_OECMAKE = "\
-     -DWITH_BENCHMARK_TOOLS=OFF \
-     -DWITH_TOOLS=OFF \
-     -DFAIL_ON_WARNINGS=OFF \
--    -DROCKSDB_BUILD_STATIC=OFF \
- "
+ inherit cmake ptest
  
- CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
+-PACKAGECONFIG ??= "bzip2 zlib lz4 gflagsi rocksdb_static"
++PACKAGECONFIG ??= "bzip2 zlib lz4 gflags"
+ PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
+ PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
+ PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
 -- 
 2.34.1
 
