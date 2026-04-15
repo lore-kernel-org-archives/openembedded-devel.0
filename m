@@ -1,251 +1,306 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <mail@michael-fitzmayer.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DAA35F9D0FC
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 09:27:31 +0000 (UTC)
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14987.1776245242251720927
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A39EDF41990
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 11:09:02 +0000 (UTC)
+Received: from mailserv.regfish.com (mailserv.regfish.com [52.57.101.90])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16256.1776251341528885666
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 02:27:22 -0700
+ Wed, 15 Apr 2026 04:09:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=XPplk9QA;
- spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-404254ffe8aso4262661fac.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 02:27:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776245241; cv=none;
-        d=google.com; s=arc-20240605;
-        b=AGrsivPs4mUg5CuaXxN3zz3yKxV2zlSmOO+A+7yYCKLYYZozCbEhgnLbRIRmDRYZn6
-         s3wZA2e9X22jcyOxmWXW497ATFu8xLGRoA4R7c8AbZDQ9iSGeoU93Y2Te5ctvQaOCP2g
-         ai7CxPhyBHMJeOlXs/+8AsLTBdbXyP7DCvUfHWrFM8RVMhSe19VCsaNg8EJqVfcuvaNf
-         DqwKd48WKJveo5679WFlejrXX/WKKDJX+sr3kmN+QfTtt3rvWXWEUpRPi9WkbXqR/3Ww
-         Xn8Esh3JtkySyzrwnOq81CNS4Cd4QzBcT5nSmGKys0bthKBUTuvKY4e4Zx9aKdSgbPO5
-         bRyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=HqNZydvZbSsN2cOZ5TTDvT/rBv0WRM7IO6sVCHVPcKU=;
-        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
-        b=TUFx0HZW3SaPCDFZAtudq6iD/6EacsAWmCmUwN6eE8eujsda1JrG6j93zeHQwOy1/t
-         SqDuVck7F83rbM1P/kewUTljyB4b4qbZ8DgRy41ndn7r8KuScvL+2ZwL8gatN3LMqAsP
-         2bcao01Fty2EEZBlldmK6oYYCBt0JiBy8Xg2TZ+dLarmwuuX6ZsxeG/C+MNaLdF6Bp42
-         k6WKfSHPRtEaxWCC4nmh30JOWhscyJMkvC7nBLHS6V+IEikxNUxeMFMEoldvYYNNAHkB
-         U0pq4EnY+ExYk3MQ/4+scf5OWmJMsu1JZkrhMyATq4BOMAYiqHpHkF6SkyWWsyfUH0vm
-         ORJw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776245241; x=1776850041; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HqNZydvZbSsN2cOZ5TTDvT/rBv0WRM7IO6sVCHVPcKU=;
-        b=XPplk9QAHIel1+uogwVh7cs/Md317+mK1BptM+7j7ZcBZ/8FIJAfTKIpLXNqeBHg5W
-         2tzn8mwIS4HgDIawkWXgzid7vBojjXZKnMjAg4uPrWjkY0m1qvtzXrtJM4/egb/f8yqp
-         kwC4FmfFh458RluA7bL1FkZm1c68ju4GOfzyGZTDX1fSY3XKjWAT4Q+1LIUt/krlWUXm
-         ITbOcXSUxTIOJUvrnZ+HeRTcY8X8aKhtrWX6aYf+Qf5oQuhsdt21Z+DeUoNKpRueCtGX
-         5W+ILPWzaKjIv9VgzXKoJ+eymTCko/Ht9zrWS7nh6ciBYDYLJxwVqTgA2acgLGoTSOC6
-         aM/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776245241; x=1776850041;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=HqNZydvZbSsN2cOZ5TTDvT/rBv0WRM7IO6sVCHVPcKU=;
-        b=JtHTPRoJRr7ouZ1Q6jFOTREFwTlzQRgpyuMjGpfO2ZcqLsGRGHY8e9b6SIIb+MrpV0
-         e68eIkiFMnwPeBhde3fseiuTaeO+r/X2TKtLcW6wUd0Rc2UpEGRugW9YzlB5+oeRlX/y
-         36PaqiY1EU3ZXX/nwDi6KBWVdc6rirS3jW+1Ghn2pJ/8N2a1uNG5ieLG0prokxbGL+Za
-         IBdKw1wrpTF2X7D54OB+Qw8CRS4QZVTpvF7lfwpYBqTRxbhpIQx9JektM+nUmcGYAt3/
-         3S+wtHxTSwVhf621CFzdG2mIMUkoAl5R2su4JZHDmuGuHfIFEWYvSFXx7itpma9FCQid
-         FJZA==
-X-Gm-Message-State: AOJu0YxEGhPaRfrH+3JRm13Hy4yH/BSzbeSTkF+xrGs9pfs6JCrvOp9Y
-	ewpLGl8WtyBRAVicfWYiYPLqVHXy5BP2KeIRtdWciGKdrEnbLv1wLPZQTSmZREdyl+2nWh71V6Z
-	W0zIdwGfJ4by2gWHvKSPEMRfYDxBhc4O5ix14
-X-Gm-Gg: AeBDietBOGUm2gYl+kojhPmi8r1uVTcfY7bUghKWBB6XK8tJsRn1l+Z2Pc4kiOOqUM1
-	4GAHhI56tscjcojiIPHcI2IO8PCbdJIgRnuBQo9IAzuBAZonPFJmygfoUpLNfxLBxZ7aRJYQKee
-	HJu1bK65ZW5eeaazdHsk6LJEVMN6WS8hFgRr72kcJOj1BOaERdVFr/wwV0mfFH6QlYJ01F4Uakz
-	yOrfUf7P0qdUFDNKzRALzY56y8sgGtS3aENnBjPe2YxwBH1DdezO7u5TaZtKCe4sQUypy1O6THb
-	DphnQzZpqwZgCp60UFNg
-X-Received: by 2002:a05:6871:c945:b0:417:3930:1b93 with SMTP id
- 586e51a60fabf-423e1b77cd1mr10823976fac.6.1776245241223; Wed, 15 Apr 2026
- 02:27:21 -0700 (PDT)
+ dkim=none (message not signed); spf=none, err=permanent DNS error (domain: michael-fitzmayer.de, ip: 52.57.101.90, mailfrom: mail@michael-fitzmayer.de)
+Received: by mailserv.regfish.com (Postfix, from userid 706)
+	id 9609E60637; Wed, 15 Apr 2026 11:08:59 +0000 (UTC)
+Received: from NB10174-DEV.jetter.local (unknown [217.78.170.132])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: 46272-0001)
+	by mailserv.regfish.com (Postfix) with ESMTPSA id 86DC9605C7;
+	Wed, 15 Apr 2026 11:08:59 +0000 (UTC)
+From: Michael Fitzmayer <mail@michael-fitzmayer.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Michael Fitzmayer <mail@michael-fitzmayer.de>
+Subject: [meta-oe][PATCH] canopenterm: update to release version 2.02
+Date: Wed, 15 Apr 2026 13:08:57 +0200
+Message-ID: <20260415110857.28317-1-mail@michael-fitzmayer.de>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260409112208.1119823-1-ankur.tyagi85@gmail.com>
- <20260409112208.1119823-8-ankur.tyagi85@gmail.com> <CA+s=J=zOjo=epSeHkT9TxynpEM8VH3zM51wFdBTvz2bZsY_yfQ@mail.gmail.com>
-In-Reply-To: <CA+s=J=zOjo=epSeHkT9TxynpEM8VH3zM51wFdBTvz2bZsY_yfQ@mail.gmail.com>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Wed, 15 Apr 2026 21:27:09 +1200
-X-Gm-Features: AQROBzC53hGipIyo_BY2vWgt_kDMnK1Fsqj3UHidKl3V06jX7APl9GPnt1dpvrI
-Message-ID: <CADySD0EYu+qwXvVWWUcTiANoXZPt6GJqeBHYje-VPaM+Dh_oww@mail.gmail.com>
-Subject: Re: [oe][meta-webserver][scarthgap][PATCH 8/8] nginx: fix CVE-2026-32647
-To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 09:27:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126353
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 11:09:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126354
 
-On Mon, Apr 13, 2026 at 11:41=E2=80=AFPM Anuj Mittal
-<anuj.mittal@oss.qualcomm.com> wrote:
->
-> On Thu, Apr 9, 2026 at 7:23=E2=80=AFPM Ankur Tyagi via lists.openembedded=
-.org
-> <ankur.tyagi85=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >
-> > As per the advisory[1] mentioned in NVD[2], version 1.28.3 contains the=
- fix.
-> > Backport the commits[3][4] from 1.28.3 changelog matching the descripti=
-on.
-> >
-> > [1] https://my.f5.com/manage/s/article/K000160366
-> > [2] https://nvd.nist.gov/vuln/detail/CVE-2026-32647
-> > [3] https://github.com/nginx/nginx/commit/a172c880cb51f882a5dc999437e8b=
-3a4f87630cc
-> > [4] https://github.com/nginx/nginx/commit/b23ac73b00313d159a99636c21ef7=
-1b828781018
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  .../nginx/nginx-1.24.0/CVE-2026-32647-1.patch | 77 ++++++++++++++++
-> >  .../nginx/nginx-1.24.0/CVE-2026-32647-2.patch | 87 +++++++++++++++++++
-> >  .../recipes-httpd/nginx/nginx_1.24.0.bb       |  2 +
-> >  3 files changed, 166 insertions(+)
-> >  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE=
--2026-32647-1.patch
-> >  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE=
--2026-32647-2.patch
-> >
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-3=
-2647-1.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-326=
-47-1.patch
-> > new file mode 100644
-> > index 0000000000..506a3fb887
-> > --- /dev/null
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-32647-1.=
-patch
-> > @@ -0,0 +1,77 @@
-> > +From c694db97c62f33d621e73937a63e7b5c206c16c9 Mon Sep 17 00:00:00 2001
-> > +From: Roman Arutyunyan <arut@nginx.com>
-> > +Date: Sat, 21 Feb 2026 12:04:36 +0400
-> > +Subject: [PATCH] Mp4: avoid zero size buffers in output.
-> > +
-> > +Previously, data validation checks did not cover the cases when the ou=
-tput
-> > +contained empty buffers.  Such buffers are considered illegal and prod=
-uce
-> > +"zero size buf in output" alerts.  The change rejects the mp4 files wh=
-ich
-> > +produce such alerts.
-> > +
-> > +Also, the change fixes possible buffer overread and overwrite that cou=
-ld
-> > +happen while processing empty stco and co64 atoms, as reported by
-> > +Pavel Kohout (Aisle Research) and Tim Becker.
-> > +
-> > +(cherry picked from commit a172c880cb51f882a5dc999437e8b3a4f87630cc)
-> > +
-> > +CVE: CVE-2026-32647
-> > +Upstream-Status: Backport [https://github.com/nginx/nginx/commit/a172c=
-880cb51f882a5dc999437e8b3a4f87630cc]
-> > +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > +---
-> > + src/http/modules/ngx_http_mp4_module.c | 15 +++++++++------
-> > + 1 file changed, 9 insertions(+), 6 deletions(-)
-> > +
-> > +diff --git a/src/http/modules/ngx_http_mp4_module.c b/src/http/modules=
-/ngx_http_mp4_module.c
-> > +index 041ad263b..13d87cd6a 100644
-> > +--- a/src/http/modules/ngx_http_mp4_module.c
-> > ++++ b/src/http/modules/ngx_http_mp4_module.c
-> > +@@ -901,8 +901,11 @@ ngx_http_mp4_process(ngx_http_mp4_file_t *mp4)
-> > +         }
-> > +     }
-> > +
-> > +-    if (end_offset < start_offset) {
-> > +-        end_offset =3D start_offset;
-> > ++    if (end_offset <=3D start_offset) {
-> > ++        ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-> > ++                      "no data between start time and end time in \"%=
-s\"",
-> > ++                      mp4->file.name.data);
-> > ++        return NGX_ERROR;
-> > +     }
-> > +
-> > +     mp4->moov_size +=3D 8;
-> > +@@ -913,7 +916,7 @@ ngx_http_mp4_process(ngx_http_mp4_file_t *mp4)
-> > +
-> > +     *prev =3D &mp4->mdat_atom;
-> > +
-> > +-    if (start_offset > mp4->mdat_data.buf->file_last) {
-> > ++    if (start_offset >=3D mp4->mdat_data.buf->file_last) {
-> > +         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-> > +                       "start time is out mp4 mdat atom in \"%s\"",
-> > +                       mp4->file.name.data);
-> > +@@ -3416,7 +3419,7 @@ ngx_http_mp4_update_stsz_atom(ngx_http_mp4_file_=
-t *mp4,
-> > +     if (data) {
-> > +         entries =3D trak->sample_sizes_entries;
-> > +
-> > +-        if (trak->start_sample > entries) {
-> > ++        if (trak->start_sample >=3D entries) {
-> > +             ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-> > +                           "start time is out mp4 stsz samples in \"%s=
-\"",
-> > +                           mp4->file.name.data);
-> > +@@ -3591,7 +3594,7 @@ ngx_http_mp4_update_stco_atom(ngx_http_mp4_file_=
-t *mp4,
-> > +         return NGX_ERROR;
-> > +     }
-> > +
-> > +-    if (trak->start_chunk > trak->chunks) {
-> > ++    if (trak->start_chunk >=3D trak->chunks) {
-> > +         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-> > +                       "start time is out mp4 stco chunks in \"%s\"",
-> > +                       mp4->file.name.data);
-> > +@@ -3806,7 +3809,7 @@ ngx_http_mp4_update_co64_atom(ngx_http_mp4_file_=
-t *mp4,
-> > +         return NGX_ERROR;
-> > +     }
-> > +
-> > +-    if (trak->start_chunk > trak->chunks) {
-> > ++    if (trak->start_chunk >=3D trak->chunks) {
-> > +         ngx_log_error(NGX_LOG_ERR, mp4->file.log, 0,
-> > +                       "start time is out mp4 co64 chunks in \"%s\"",
-> > +                       mp4->file.name.data);
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-3=
-2647-2.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-326=
-47-2.patch
-> > new file mode 100644
-> > index 0000000000..80bf94f5f1
-> > --- /dev/null
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-32647-2.=
-patch
-> > @@ -0,0 +1,87 @@
-> > +From 1742d7fe92ed355ffa5aa68609b96f00f582f3d6 Mon Sep 17 00:00:00 2001
-> > +From: Roman Arutyunyan <arut@nginx.com>
-> > +Date: Mon, 2 Mar 2026 21:12:34 +0400
-> > +Subject: [PATCH] Mp4: fixed possible integer overflow on 32-bit platfo=
-rms.
-> > +
->
-> This is same as:
-> https://lists.openembedded.org/g/openembedded-devel/message/126024
-> sent earlier for a different CVE. Can you please check and resend?
+- Introduced a new API function: print_result()
+- Added support for configuring a dynamic number of filters when executin=
+g replay.lua
+- Added script to interact with the STM32 CAN bootloader (stm32.lua)
+- Add Unified Diagnostic Services (ISO 14229-1) script written in Lua (ud=
+s.lua)
+- Various updates and fixes required by the Debian package and to be able=
+ to get certified by Microsoft
+- Added manpages
 
-Thanks for the review Anuj.
-Both CVE are related and unlike advisory, debian clearly tracks them
-separately which I missed:
-https://security-tracker.debian.org/tracker/CVE-2026-27784
-https://security-tracker.debian.org/tracker/CVE-2026-32647
+Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
+---
+ ...-C-include-path-for-pocketpy-headers.patch | 135 ++++++++++++++++++
+ ...e-search-paths-in-Findpocketpy.cmake.patch |  57 ++++++++
+ ...anopenterm_2.01.bb =3D> canopenterm_2.02.bb} |   9 +-
+ 3 files changed, 198 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/canopenterm/canopenterm/0001=
+-Fix-C-include-path-for-pocketpy-headers.patch
+ create mode 100644 meta-oe/recipes-extended/canopenterm/canopenterm/0002=
+-Update-search-paths-in-Findpocketpy.cmake.patch
+ rename meta-oe/recipes-extended/canopenterm/{canopenterm_2.01.bb =3D> ca=
+nopenterm_2.02.bb} (76%)
 
-Please drop this patch and I will resend once the patch for
-CVE-2026-27784 is merged.
-
-cheers
-Ankur
+diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm/0001-Fix-C-=
+include-path-for-pocketpy-headers.patch b/meta-oe/recipes-extended/canope=
+nterm/canopenterm/0001-Fix-C-include-path-for-pocketpy-headers.patch
+new file mode 100644
+index 0000000000..b76ba44166
+--- /dev/null
++++ b/meta-oe/recipes-extended/canopenterm/canopenterm/0001-Fix-C-include=
+-path-for-pocketpy-headers.patch
+@@ -0,0 +1,135 @@
++From 9a7a39e6cb1e5683d6354c33e74894b58829cc12 Mon Sep 17 00:00:00 2001
++From: Michael Fitzmayer <mail@michael-fitzmayer.de>
++Date: Wed, 15 Apr 2026 11:57:58 +0200
++Subject: [PATCH] Fix C include path for pocketpy headers
++Upstream-Status: Submitted [https://github.com/CANopenTerm/CANopenTerm/c=
+ommit/cbe8d8e6d5787636a32862b20f7c7cf342bb764b]
++
++Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
++---
++ src/api/python_can.c         | 2 +-
++ src/api/python_dbc.c         | 2 +-
++ src/api/python_misc.c        | 2 +-
++ src/api/python_nmt.c         | 2 +-
++ src/api/python_pdo.c         | 2 +-
++ src/api/python_sdo.c         | 2 +-
++ src/api/python_test_report.c | 2 +-
++ src/api/python_widget.c      | 2 +-
++ src/core/scripts.c           | 2 +-
++ 9 files changed, 9 insertions(+), 9 deletions(-)
++
++diff --git a/src/api/python_can.c b/src/api/python_can.c
++index d1c5c6a..c6ee023 100644
++--- a/src/api/python_can.c
+++++ b/src/api/python_can.c
++@@ -11,7 +11,7 @@
++ #include "core.h"
++ #include "dict.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++=20
++diff --git a/src/api/python_dbc.c b/src/api/python_dbc.c
++index f688796..3f3e3d3 100644
++--- a/src/api/python_dbc.c
+++++ b/src/api/python_dbc.c
++@@ -10,7 +10,7 @@
++ #include "core.h"
++ #include "dbc.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++=20
++diff --git a/src/api/python_misc.c b/src/api/python_misc.c
++index a71c39d..da14c01 100644
++--- a/src/api/python_misc.c
+++++ b/src/api/python_misc.c
++@@ -10,7 +10,7 @@
++ #include "python_misc.h"
++ #include "core.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++ #include "scripts.h"
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++diff --git a/src/api/python_nmt.c b/src/api/python_nmt.c
++index 293d2e1..8e467fe 100644
++--- a/src/api/python_nmt.c
+++++ b/src/api/python_nmt.c
++@@ -11,7 +11,7 @@
++ #include "core.h"
++ #include "nmt.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++=20
++diff --git a/src/api/python_pdo.c b/src/api/python_pdo.c
++index fe34bc9..a307b0d 100644
++--- a/src/api/python_pdo.c
+++++ b/src/api/python_pdo.c
++@@ -10,7 +10,7 @@
++ #include "core.h"
++ #include "os.h"
++ #include "pdo.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++=20
++diff --git a/src/api/python_sdo.c b/src/api/python_sdo.c
++index 3378fc2..2d7b583 100644
++--- a/src/api/python_sdo.c
+++++ b/src/api/python_sdo.c
++@@ -10,7 +10,7 @@
++ #include "core.h"
++ #include "dict.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++ #include "sdo.h"
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++diff --git a/src/api/python_test_report.c b/src/api/python_test_report.c
++index 59cc7b1..3ca7536 100644
++--- a/src/api/python_test_report.c
+++++ b/src/api/python_test_report.c
++@@ -10,7 +10,7 @@
++ #include "core.h"
++ #include "eds.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++ #include "test_report.h"
++=20
++ typedef bool (*py_CFunction)(int argc, py_Ref argv);
++diff --git a/src/api/python_widget.c b/src/api/python_widget.c
++index 92891c0..c176ca8 100644
++--- a/src/api/python_widget.c
+++++ b/src/api/python_widget.c
++@@ -13,7 +13,7 @@
++ #include "core.h"
++ #include "led.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++ #include "tachometer.h"
++ #include "window.h"
++=20
++diff --git a/src/core/scripts.c b/src/core/scripts.c
++index 4dbdac3..1f37b7c 100644
++--- a/src/core/scripts.c
+++++ b/src/core/scripts.c
++@@ -14,7 +14,7 @@
++ #include "lua.h"
++ #include "lualib.h"
++ #include "os.h"
++-#include "pocketpy.h"
+++#include <pocketpy.h>
++ #include "table.h"
++=20
++ extern const uint8 max_script_search_paths;
+diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm/0002-Update=
+-search-paths-in-Findpocketpy.cmake.patch b/meta-oe/recipes-extended/cano=
+penterm/canopenterm/0002-Update-search-paths-in-Findpocketpy.cmake.patch
+new file mode 100644
+index 0000000000..9d26a10e34
+--- /dev/null
++++ b/meta-oe/recipes-extended/canopenterm/canopenterm/0002-Update-search=
+-paths-in-Findpocketpy.cmake.patch
+@@ -0,0 +1,57 @@
++From ba48c303e12d6b546fd852527b4b954e28f889f7 Mon Sep 17 00:00:00 2001
++From: Michael Fitzmayer <mail@michael-fitzmayer.de>
++Date: Wed, 15 Apr 2026 12:31:17 +0200
++Subject: [PATCH] Update search paths in Findpocketpy.cmake
++Upstream-Status: Submitted [https://github.com/CANopenTerm/CANopenTerm/c=
+ommit/7a9466029a6e88345e65e794ff1779f778c9358a]
++
++
++Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
++---
++ cmake/Findpocketpy.cmake | 30 ++++++++++++++++++++++++------
++ 1 file changed, 24 insertions(+), 6 deletions(-)
++
++diff --git a/cmake/Findpocketpy.cmake b/cmake/Findpocketpy.cmake
++index 459160f..8083270 100644
++--- a/cmake/Findpocketpy.cmake
+++++ b/cmake/Findpocketpy.cmake
++@@ -3,18 +3,36 @@ cmake_minimum_required(VERSION 3.16)
++ # Findpocketpy.cmake
++ # Locate pocketpy library and include directories
++=20
++-find_path(pocketpy_INCLUDE_DIR NAMES pocketpy/pocketpy.h PATHS /usr/inc=
+lude)
++-find_library(pocketpy_LIBRARY NAMES libpocketpy.so PATHS /usr/lib)
+++find_path(pocketpy_INCLUDE_DIR
+++  NAMES pocketpy.h
+++  PATH_SUFFIXES pocketpy
+++  PATHS
+++    /usr/include
+++    /usr/local/include
+++    /opt/local/include
+++    /opt/homebrew/include
+++)
+++
+++find_library(pocketpy_LIBRARY
+++  NAMES pocketpy
+++  PATHS
+++    /usr/lib
+++    /usr/local/lib
+++    /opt/local/lib
+++    /opt/homebrew/lib
+++)
++=20
++ message(STATUS "pocketpy_INCLUDE_DIR: ${pocketpy_INCLUDE_DIR}")
++ message(STATUS "pocketpy_LIBRARY: ${pocketpy_LIBRARY}")
++=20
++-if (pocketpy_INCLUDE_DIR AND pocketpy_LIBRARY)
++-  set(pocketpy_FOUND TRUE)
+++include(FindPackageHandleStandardArgs)
+++find_package_handle_standard_args(pocketpy
+++  REQUIRED_VARS pocketpy_LIBRARY pocketpy_INCLUDE_DIR
+++)
+++
+++if (pocketpy_FOUND)
++   set(pocketpy_INCLUDE_DIRS ${pocketpy_INCLUDE_DIR})
++   set(pocketpy_LIBRARIES ${pocketpy_LIBRARY})
++-else()
++-  set(pocketpy_FOUND FALSE)
++ endif()
++=20
++ mark_as_advanced(pocketpy_INCLUDE_DIR pocketpy_LIBRARY)
+diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb b/m=
+eta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
+similarity index 76%
+rename from meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb
+rename to meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
+index f44312a6e4..a83d3bee69 100644
+--- a/meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb
++++ b/meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
+@@ -15,13 +15,16 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Dbd2edc7=
+21b4a0289efe949bdbe7dda79"
+=20
+ DEPENDS =3D "canvenient cjson isocline libinih libsdl3 lua pocketpy"
+=20
+-SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
+ps;branch=3Dmain;tag=3Dv${PV}"
+-SRCREV  =3D "4196097f71c7e59b27e9d8ac3c6cf58f44fa9f19"
++SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
+ps;branch=3Dmain;tag=3Dv${PV} \
++           file://0001-Fix-C-include-path-for-pocketpy-headers.patch \
++           file://0002-Update-search-paths-in-Findpocketpy.cmake.patch \
++           "
++SRCREV  =3D "a6a9cd4fdbfaffea01b3eeeaf3c4830d4ee4b313"
+=20
+=20
+ inherit cmake ptest
+=20
+-EXTRA_OECMAKE +=3D "-DBUILD_YOCTO=3DON"
++EXTRA_OECMAKE +=3D "-DUSE_SYSTEM_LIBS=3DON"
+=20
+ FILES:${PN} +=3D "${bindir}/CANopenTerm ${bindir}/codb2json ${datadir}"
+=20
 
