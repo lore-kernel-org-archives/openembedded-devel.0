@@ -1,306 +1,103 @@
-Return-Path: <mail@michael-fitzmayer.de>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A39EDF41990
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 11:09:02 +0000 (UTC)
-Received: from mailserv.regfish.com (mailserv.regfish.com [52.57.101.90])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16256.1776251341528885666
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2F55AF4199E
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 12:28:43 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.17668.1776256116457144519
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Apr 2026 04:09:02 -0700
+ Wed, 15 Apr 2026 05:28:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=permanent DNS error (domain: michael-fitzmayer.de, ip: 52.57.101.90, mailfrom: mail@michael-fitzmayer.de)
-Received: by mailserv.regfish.com (Postfix, from userid 706)
-	id 9609E60637; Wed, 15 Apr 2026 11:08:59 +0000 (UTC)
-Received: from NB10174-DEV.jetter.local (unknown [217.78.170.132])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: 46272-0001)
-	by mailserv.regfish.com (Postfix) with ESMTPSA id 86DC9605C7;
-	Wed, 15 Apr 2026 11:08:59 +0000 (UTC)
-From: Michael Fitzmayer <mail@michael-fitzmayer.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=mL4wbMf+;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.50, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43cfd832155so4657151f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 05:28:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1776256114; x=1776860914; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oZG8LmoA5ashNVHdSmlclCHbKU8xFNzX/qjLROPTxtA=;
+        b=mL4wbMf+pJzybTZUAzwhyKEiMbY7w7+abwMgagSivrWaFsuzzQlJY+0kEWEswHA1Ct
+         n+QoB2q2XonITF+vsKQFR8t8wTU39bd7MEyrP2mWsNH/ZLPvqLLF3zebgxGrSfeGUAOX
+         KmNWE8d6CXbCBuB7yBnLYm6sxlWvySnm8sBYs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776256114; x=1776860914;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oZG8LmoA5ashNVHdSmlclCHbKU8xFNzX/qjLROPTxtA=;
+        b=Jek1kl2i49ySiQOfPNxrY/mooFYGPs9R+GjAE0Akybf8t5UD1q82bUkoN8L8p2jOh0
+         fXQrR02d5Hw0yfRDDLXulTNe8c+6fmcq1zh5F+g7fhiiTivpX2JS+Pg/uGvpyJAk9otL
+         dxJd8+guFT9CPS8wVR2Zr6gQh5LbUvZJ9VQyyxZQxT8vkvmVvBMON4Gpg4P6qTMEJ7BT
+         xouOx3rRbDmEEXBgw0xrMkIsH0xxNeQNTJpRvh4WMbnddK+QfuAEQFGLYhjUuQRdRFiI
+         yGBLrJcEQOgV11XzEK63W34t93M3kr5EFof7ATUHQYH8aiIASX6EpCnrpYmopCz3Md6E
+         OG2g==
+X-Gm-Message-State: AOJu0YzZFIruwkR2928sx7Uyw4tfmCJujf394ViNgbxOz+gyrP8Sg1ut
+	P47hMe2Dn47NjLuh9zUOKUuQfm98ICrxEr/oVzLKo91hWXqetWCr7wg3qAaLR7mHgIhV568jwm0
+	/K+iX
+X-Gm-Gg: AeBDiev6VHDT/WX2Fq0ckUYlcEJszOlZkt4uv7pUP1dc/1z8vDz0/M2qlgOqhoIQkFR
+	6haZBnfX0id4omsBklkVbuMQv2symxplbV/3Zcu1dchO62NBEN5p8v7fVAHgWifZSgwsf2/a6DD
+	dTEP9iphAw00ACbR+mwpJqx+PMNGkRYxfCmtbsCEHFRwjOfK5Ba+4HqFFr5Jz2h/rYAGgC/26Lv
+	cXbgsjT9t3brvtPn16ngKP3MMS8/yc5YsDoQ8BMLBj5FTWH8vuIRCyBDZtoosUGGY0g4pT3XZDw
+	jOzx3qQ6iTIYy/JsZQHg06zvA5WD8DoIFYj/RpXqXtSdJole9c44EX2QejSz3eqJOl0tbifRZyQ
+	7952LQrtrjC+smWfOpbb5LEQdWU0lRbkigyrJAIRRjA/w/DGg5w2qq5MfWinhGBOgP3ax+H/DS7
+	rXs+nVqXnzAPuQj03kpZ8DDjpicJdUtWhXf6/V
+X-Received: by 2002:a05:6000:2c06:b0:43c:f0c0:c571 with SMTP id ffacd0b85a97d-43d642c9401mr30430289f8f.47.1776256114266;
+        Wed, 15 Apr 2026 05:28:34 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43ead3d5c8fsm5135031f8f.19.2026.04.15.05.28.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Apr 2026 05:28:33 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Michael Fitzmayer <mail@michael-fitzmayer.de>
-Subject: [meta-oe][PATCH] canopenterm: update to release version 2.02
-Date: Wed, 15 Apr 2026 13:08:57 +0200
-Message-ID: <20260415110857.28317-1-mail@michael-fitzmayer.de>
-X-Mailer: git-send-email 2.53.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-uvicorn: Upgrade 0.42.0 -> 0.44.0
+Date: Wed, 15 Apr 2026 15:28:28 +0300
+Message-ID: <20260415122831.955529-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 11:09:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126354
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 12:28:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126355
 
-- Introduced a new API function: print_result()
-- Added support for configuring a dynamic number of filters when executin=
-g replay.lua
-- Added script to interact with the STM32 CAN bootloader (stm32.lua)
-- Add Unified Diagnostic Services (ISO 14229-1) script written in Lua (ud=
-s.lua)
-- Various updates and fixes required by the Debian package and to be able=
- to get certified by Microsoft
-- Added manpages
+Upgrade to release 0.44.0:
 
-Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
+- Implement websocket keepalive pings for websockets-sansio
+
+From 0.43.0:
+
+- Emit http.disconnect ASGI receive() event on server shutting down
+  for streaming responses
+- Use native context parameter for create_task on Python 3.11+
+- Drop cast in ASGI types
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...-C-include-path-for-pocketpy-headers.patch | 135 ++++++++++++++++++
- ...e-search-paths-in-Findpocketpy.cmake.patch |  57 ++++++++
- ...anopenterm_2.01.bb =3D> canopenterm_2.02.bb} |   9 +-
- 3 files changed, 198 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/canopenterm/canopenterm/0001=
--Fix-C-include-path-for-pocketpy-headers.patch
- create mode 100644 meta-oe/recipes-extended/canopenterm/canopenterm/0002=
--Update-search-paths-in-Findpocketpy.cmake.patch
- rename meta-oe/recipes-extended/canopenterm/{canopenterm_2.01.bb =3D> ca=
-nopenterm_2.02.bb} (76%)
+ .../{python3-uvicorn_0.42.0.bb => python3-uvicorn_0.44.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-uvicorn_0.42.0.bb => python3-uvicorn_0.44.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm/0001-Fix-C-=
-include-path-for-pocketpy-headers.patch b/meta-oe/recipes-extended/canope=
-nterm/canopenterm/0001-Fix-C-include-path-for-pocketpy-headers.patch
-new file mode 100644
-index 0000000000..b76ba44166
---- /dev/null
-+++ b/meta-oe/recipes-extended/canopenterm/canopenterm/0001-Fix-C-include=
--path-for-pocketpy-headers.patch
-@@ -0,0 +1,135 @@
-+From 9a7a39e6cb1e5683d6354c33e74894b58829cc12 Mon Sep 17 00:00:00 2001
-+From: Michael Fitzmayer <mail@michael-fitzmayer.de>
-+Date: Wed, 15 Apr 2026 11:57:58 +0200
-+Subject: [PATCH] Fix C include path for pocketpy headers
-+Upstream-Status: Submitted [https://github.com/CANopenTerm/CANopenTerm/c=
-ommit/cbe8d8e6d5787636a32862b20f7c7cf342bb764b]
-+
-+Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
-+---
-+ src/api/python_can.c         | 2 +-
-+ src/api/python_dbc.c         | 2 +-
-+ src/api/python_misc.c        | 2 +-
-+ src/api/python_nmt.c         | 2 +-
-+ src/api/python_pdo.c         | 2 +-
-+ src/api/python_sdo.c         | 2 +-
-+ src/api/python_test_report.c | 2 +-
-+ src/api/python_widget.c      | 2 +-
-+ src/core/scripts.c           | 2 +-
-+ 9 files changed, 9 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/api/python_can.c b/src/api/python_can.c
-+index d1c5c6a..c6ee023 100644
-+--- a/src/api/python_can.c
-++++ b/src/api/python_can.c
-+@@ -11,7 +11,7 @@
-+ #include "core.h"
-+ #include "dict.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+=20
-+diff --git a/src/api/python_dbc.c b/src/api/python_dbc.c
-+index f688796..3f3e3d3 100644
-+--- a/src/api/python_dbc.c
-++++ b/src/api/python_dbc.c
-+@@ -10,7 +10,7 @@
-+ #include "core.h"
-+ #include "dbc.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+=20
-+diff --git a/src/api/python_misc.c b/src/api/python_misc.c
-+index a71c39d..da14c01 100644
-+--- a/src/api/python_misc.c
-++++ b/src/api/python_misc.c
-+@@ -10,7 +10,7 @@
-+ #include "python_misc.h"
-+ #include "core.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+ #include "scripts.h"
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+diff --git a/src/api/python_nmt.c b/src/api/python_nmt.c
-+index 293d2e1..8e467fe 100644
-+--- a/src/api/python_nmt.c
-++++ b/src/api/python_nmt.c
-+@@ -11,7 +11,7 @@
-+ #include "core.h"
-+ #include "nmt.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+=20
-+diff --git a/src/api/python_pdo.c b/src/api/python_pdo.c
-+index fe34bc9..a307b0d 100644
-+--- a/src/api/python_pdo.c
-++++ b/src/api/python_pdo.c
-+@@ -10,7 +10,7 @@
-+ #include "core.h"
-+ #include "os.h"
-+ #include "pdo.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+=20
-+diff --git a/src/api/python_sdo.c b/src/api/python_sdo.c
-+index 3378fc2..2d7b583 100644
-+--- a/src/api/python_sdo.c
-++++ b/src/api/python_sdo.c
-+@@ -10,7 +10,7 @@
-+ #include "core.h"
-+ #include "dict.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+ #include "sdo.h"
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+diff --git a/src/api/python_test_report.c b/src/api/python_test_report.c
-+index 59cc7b1..3ca7536 100644
-+--- a/src/api/python_test_report.c
-++++ b/src/api/python_test_report.c
-+@@ -10,7 +10,7 @@
-+ #include "core.h"
-+ #include "eds.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+ #include "test_report.h"
-+=20
-+ typedef bool (*py_CFunction)(int argc, py_Ref argv);
-+diff --git a/src/api/python_widget.c b/src/api/python_widget.c
-+index 92891c0..c176ca8 100644
-+--- a/src/api/python_widget.c
-++++ b/src/api/python_widget.c
-+@@ -13,7 +13,7 @@
-+ #include "core.h"
-+ #include "led.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+ #include "tachometer.h"
-+ #include "window.h"
-+=20
-+diff --git a/src/core/scripts.c b/src/core/scripts.c
-+index 4dbdac3..1f37b7c 100644
-+--- a/src/core/scripts.c
-++++ b/src/core/scripts.c
-+@@ -14,7 +14,7 @@
-+ #include "lua.h"
-+ #include "lualib.h"
-+ #include "os.h"
-+-#include "pocketpy.h"
-++#include <pocketpy.h>
-+ #include "table.h"
-+=20
-+ extern const uint8 max_script_search_paths;
-diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm/0002-Update=
--search-paths-in-Findpocketpy.cmake.patch b/meta-oe/recipes-extended/cano=
-penterm/canopenterm/0002-Update-search-paths-in-Findpocketpy.cmake.patch
-new file mode 100644
-index 0000000000..9d26a10e34
---- /dev/null
-+++ b/meta-oe/recipes-extended/canopenterm/canopenterm/0002-Update-search=
--paths-in-Findpocketpy.cmake.patch
-@@ -0,0 +1,57 @@
-+From ba48c303e12d6b546fd852527b4b954e28f889f7 Mon Sep 17 00:00:00 2001
-+From: Michael Fitzmayer <mail@michael-fitzmayer.de>
-+Date: Wed, 15 Apr 2026 12:31:17 +0200
-+Subject: [PATCH] Update search paths in Findpocketpy.cmake
-+Upstream-Status: Submitted [https://github.com/CANopenTerm/CANopenTerm/c=
-ommit/7a9466029a6e88345e65e794ff1779f778c9358a]
-+
-+
-+Signed-off-by: Michael Fitzmayer <mail@michael-fitzmayer.de>
-+---
-+ cmake/Findpocketpy.cmake | 30 ++++++++++++++++++++++++------
-+ 1 file changed, 24 insertions(+), 6 deletions(-)
-+
-+diff --git a/cmake/Findpocketpy.cmake b/cmake/Findpocketpy.cmake
-+index 459160f..8083270 100644
-+--- a/cmake/Findpocketpy.cmake
-++++ b/cmake/Findpocketpy.cmake
-+@@ -3,18 +3,36 @@ cmake_minimum_required(VERSION 3.16)
-+ # Findpocketpy.cmake
-+ # Locate pocketpy library and include directories
-+=20
-+-find_path(pocketpy_INCLUDE_DIR NAMES pocketpy/pocketpy.h PATHS /usr/inc=
-lude)
-+-find_library(pocketpy_LIBRARY NAMES libpocketpy.so PATHS /usr/lib)
-++find_path(pocketpy_INCLUDE_DIR
-++  NAMES pocketpy.h
-++  PATH_SUFFIXES pocketpy
-++  PATHS
-++    /usr/include
-++    /usr/local/include
-++    /opt/local/include
-++    /opt/homebrew/include
-++)
-++
-++find_library(pocketpy_LIBRARY
-++  NAMES pocketpy
-++  PATHS
-++    /usr/lib
-++    /usr/local/lib
-++    /opt/local/lib
-++    /opt/homebrew/lib
-++)
-+=20
-+ message(STATUS "pocketpy_INCLUDE_DIR: ${pocketpy_INCLUDE_DIR}")
-+ message(STATUS "pocketpy_LIBRARY: ${pocketpy_LIBRARY}")
-+=20
-+-if (pocketpy_INCLUDE_DIR AND pocketpy_LIBRARY)
-+-  set(pocketpy_FOUND TRUE)
-++include(FindPackageHandleStandardArgs)
-++find_package_handle_standard_args(pocketpy
-++  REQUIRED_VARS pocketpy_LIBRARY pocketpy_INCLUDE_DIR
-++)
-++
-++if (pocketpy_FOUND)
-+   set(pocketpy_INCLUDE_DIRS ${pocketpy_INCLUDE_DIR})
-+   set(pocketpy_LIBRARIES ${pocketpy_LIBRARY})
-+-else()
-+-  set(pocketpy_FOUND FALSE)
-+ endif()
-+=20
-+ mark_as_advanced(pocketpy_INCLUDE_DIR pocketpy_LIBRARY)
-diff --git a/meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb b/m=
-eta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-similarity index 76%
-rename from meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb
-rename to meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-index f44312a6e4..a83d3bee69 100644
---- a/meta-oe/recipes-extended/canopenterm/canopenterm_2.01.bb
-+++ b/meta-oe/recipes-extended/canopenterm/canopenterm_2.02.bb
-@@ -15,13 +15,16 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3Dbd2edc7=
-21b4a0289efe949bdbe7dda79"
-=20
- DEPENDS =3D "canvenient cjson isocline libinih libsdl3 lua pocketpy"
-=20
--SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
-ps;branch=3Dmain;tag=3Dv${PV}"
--SRCREV  =3D "4196097f71c7e59b27e9d8ac3c6cf58f44fa9f19"
-+SRC_URI =3D "git://github.com/CANopenTerm/CANopenTerm.git;protocol=3Dhtt=
-ps;branch=3Dmain;tag=3Dv${PV} \
-+           file://0001-Fix-C-include-path-for-pocketpy-headers.patch \
-+           file://0002-Update-search-paths-in-Findpocketpy.cmake.patch \
-+           "
-+SRCREV  =3D "a6a9cd4fdbfaffea01b3eeeaf3c4830d4ee4b313"
-=20
-=20
- inherit cmake ptest
-=20
--EXTRA_OECMAKE +=3D "-DBUILD_YOCTO=3DON"
-+EXTRA_OECMAKE +=3D "-DUSE_SYSTEM_LIBS=3DON"
-=20
- FILES:${PN} +=3D "${bindir}/CANopenTerm ${bindir}/codb2json ${datadir}"
-=20
+diff --git a/meta-python/recipes-devtools/python/python3-uvicorn_0.42.0.bb b/meta-python/recipes-devtools/python/python3-uvicorn_0.44.0.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-uvicorn_0.42.0.bb
+rename to meta-python/recipes-devtools/python/python3-uvicorn_0.44.0.bb
+index f14ba46dc6..ce92c96d8d 100644
+--- a/meta-python/recipes-devtools/python/python3-uvicorn_0.42.0.bb
++++ b/meta-python/recipes-devtools/python/python3-uvicorn_0.44.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5c778842f66a649636561c423c0eec2e"
+ RECIPE_MAINTAINER = "Tom Geelen <t.f.g.geelen@gmail.com>"
+ 
+-SRC_URI[sha256sum] = "9b1f190ce15a2dd22e7758651d9b6d12df09a13d51ba5bf4fc33c383a48e1775"
++SRC_URI[sha256sum] = "6c942071b68f07e178264b9152f1f16dfac5da85880c4ce06366a96d70d4f31e"
+ 
+ SRC_URI += "file://0001-ptest-disable-failing-tests.patch"
+ 
+-- 
+2.47.3
+
 
