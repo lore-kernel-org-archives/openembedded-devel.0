@@ -1,107 +1,122 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8FBAFA0C36
-	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 06:30:35 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12954.1776234630666157388
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF1DBFA0C3A
+	for <webhook@archiver.kernel.org>; Wed, 15 Apr 2026 06:51:15 +0000 (UTC)
+Received: from mail-dl1-f42.google.com (mail-dl1-f42.google.com [74.125.82.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13010.1776235874134951946
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Apr 2026 23:30:30 -0700
+ Tue, 14 Apr 2026 23:51:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=aZTB7yql;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-488aa77a06eso104527185e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2026 23:30:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Hs422wAZ;
+ spf=pass (domain: gmail.com, ip: 74.125.82.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f42.google.com with SMTP id a92af1059eb24-12c287eb77fso10164141c88.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Apr 2026 23:51:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776234629; x=1776839429; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=WcfSxgWDBhUTq+zqGNbzqxG9Oh7bptpAhE5IWkHZ0QE=;
-        b=aZTB7yqljBOZjL54ZiZKbVU06pwWlo31Hi40rzxsoeolztl3fMQItNceqL1wfCB90I
-         vqG8q1SIohSh48x7JZbTjEdGlO/mdEd8bb32CfNcLEMtD43Dq2TbgVewwwCATltVS8j0
-         nSgkTDWn8tmB48yeNRTF7FkQ/tO8C9hUkLB9zHVmI5sGegPUwhI0rAUOurwBy13cjMgU
-         AKySHovBzOIamSzuIv8udUh7MP0k23FKuCcnJhJw4C2hA8+a5cabQ5CI4lTeJ3amMtbC
-         hCDuWe1nJb5QgJ3YVa9ln2byoZutxvZcyiCZz1m8OPCer6A6isfNEGyiKjXlyLh8WPJt
-         Hq7A==
+        d=gmail.com; s=20251104; t=1776235873; x=1776840673; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=cFNq2egMJeDTVrlGeVFDto7mGL36hAOdLjmQz6oPo8Y=;
+        b=Hs422wAZ/mC/Khi9fHswUUcLozFHZRT48AmECDOo4Ref2BXf7Zw6IGaPOGx717Nx2c
+         66OnuQ7sgJ4GobVHehdCk8nT2ClEHK+9v5rIhTKQm+SGzKK0kSvVy6WKg/01MXrnYlwh
+         eHjGXfnJJUbIZ5XVvftJLJttSIxLx43ZqEwB3Pej9dESSJm6ACPTm9DawdJ0+wkEwZnM
+         lPLkpjZ5CRMM7n+BaBg4OyiLjqRGgjiAbse9x0oeRE8Ce68cGxLKB1aL76iqL6hsePvQ
+         3rvNUykI+u2IdDDX2vThdYBlHqtLFueCiQD4zxkY3xFDUxenzK5y4jRWbWGtlP6N8Kph
+         cTjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776234629; x=1776839429;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WcfSxgWDBhUTq+zqGNbzqxG9Oh7bptpAhE5IWkHZ0QE=;
-        b=TRkecDjTV+U671sQL2N8526WqOVPg49JQWost9iMyXQ8RokQE3WXYXCND/tgdh/+K5
-         Ui9zIOLvb6fLMR6gmAqGaRPl74/mVHznbHrWRsp3Ufg8K4dPMCNpf36op4OGiB6zyJ0F
-         ymrkVOL2DGQu3iqUNG7sdWTUO6cFipMaTgjtI/N64DUo3UrnUw7E4fHNy7AEJ9OYlfFm
-         he4kondmnoJ1PLrQbPzLjq2z1ufiP7qRW6zOTT9Tt3uDutbODjjsi2HGJLXDZS03DFQt
-         lY/KXvkMhyTh3wZxsZlexpHwBLbnNWbwsxhhij5E+htb9GJY6OBt+xHDuysW8sCENfC1
-         Ipug==
-X-Forwarded-Encrypted: i=1; AFNElJ/3TgEIkv4cHh0Sda0B7Jc7UUM9mstiMyx8JOkTarGvEOIzkpe7Y4L/j7rIqlme8aZY2GMNy1fkszETuU7umeM+bLQ=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyMTABkfdHYyd0Au0XgQNWRwkDIj+YpESsh3NFkH9Q6EEc7RLAf
-	DcN5lIG+nIo644a6ltKGwB65d0dNRWcaneQ22tE7KnBTIvi/n3i4gMf0
-X-Gm-Gg: AeBDieswKWdWWiJ302SY9Kmh9XhvHPxPybUyx+q1n2sMBqfG+WVlsA6vVaZOmemLNJb
-	3Jewu2/WQfOMXQCjvC6SoUmPOd4jmtpvcvZUDhHDdGtLYYk8yfLvtum0JhpjagqWjwLlhfar6rg
-	SylaT25VKITkPKypqfCyIak5ncZBPLUJG7yFubCX+n28GJdndwUPgsbTNcwO/epSFZdRYFEutqG
-	AWu0hdh4dFVKrb3UpIMuqoLGrYeVKpCuoCDlwfnnV2/z2B1tIkVvJWAotnE6JmFPdznRVtXeHGC
-	ua9mb+hbr/mByR8NTRqhbCGovPDUeu2fPqCHDck9FkgY+aS+awqN92nl5/Y/LJe1Mwg3aQ5t9RV
-	N7QT06FrJn9/+PIKHTgkCJrPaphFwLDn5wLanYFA/kLk1OoaLC2lBP1aGhC/uqyDNwlDYbpSm5F
-	LSCrDc1WWQPNYlDmPYyJhP+2KYdHpKYTDZ1K+CohXmSQ==
-X-Received: by 2002:a05:600c:3ba1:b0:488:90ac:8f71 with SMTP id 5b1f17b1804b1-488d67c704amr292250725e9.5.1776234628816;
-        Tue, 14 Apr 2026 23:30:28 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488ee03897dsm100857505e9.10.2026.04.14.23.30.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 14 Apr 2026 23:30:28 -0700 (PDT)
-Message-ID: <6090fdc1-98f4-4f8f-aa84-40be55266c21@gmail.com>
-Date: Wed, 15 Apr 2026 08:30:27 +0200
+        d=1e100.net; s=20251104; t=1776235873; x=1776840673;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cFNq2egMJeDTVrlGeVFDto7mGL36hAOdLjmQz6oPo8Y=;
+        b=qMb6VR793IomjhZyyGJsJXSD74205elw+dqKzop8DS132mvIvRJPwS0Zurz7727g0d
+         iKCwgXBlpigtgvfSJemJ/NAKoB/awXBOyASxRy2ASLSjM3a7n6VwzBaWxL81IVpqe3ei
+         Xad6qbUT+hKn9tDvs4NLBOHzcT8gi1JSqdqwGtwkoQm0O8h1a9vdJ+sqnRScFAWPGSjt
+         ioU8e0Da8Zql4jQOed0b3QHe3nghH1xXsQz1CPnJeb/6iQPnQJrqA7/XA9W0TBYp9oM1
+         sFkrzT1scCX39XNYflApnfYhpgYpH9Dw7/JLpxUbCAErFbpSSzfik863qUeA5RJHeZwP
+         sFbA==
+X-Gm-Message-State: AOJu0YyPSi2U8ZpaIibYiY0gpS7MII3pg7akcGsak9DIkwRrl4HuW3ay
+	TvIFfKcXveZQAB71eEp6bWwCjRIQPKCLKKTmy6yYrEj+MYTpIvYmURZfM+ARZp4x
+X-Gm-Gg: AeBDieuCPE9qwJcjYKuN2RxP5/NIRYmbJoGvm0+atiJEpx0kzkwY/1nD/2/6XATNxOX
+	sa6l4j5cDPGGtQ0mBG/nNke7UH4T6MAEDSayGDhTTW2YW7L9X4OjeaFxrpufHDkF60nkUrg1pia
+	XdWhqZpRTCGW9F2NvoRMJ/8yJuDcwjZLqA/+xvqGFU+5rKHokp2Kedl3urEYhnWo1cBcjSHqHmd
+	dBjz8KhzW+Y6J36ZhQNRKej5jkI6HFDoDCEibaR01z5JRLgi8RquIAbMsf2kojYVaU1RgkS4caT
+	AHiDKi49+tiLeI6iGpkZaBc+tfuAdTS89B4La0NM2cubMmLDpfiYQxp7FAAC5er0XUWg6ydobn0
+	BURCNoQna1mLbJKQmJmkJIrrkhh3luBNhRy0xDbV5SEnpB5Hbs6P0UP2AcV2Bhb83Bo1OL7GYAS
+	kjAV0Ia43bhV7tOvGOl91dKBKWMAbDSg2gipwFrx0j7U1ldY/MhGGeqLNjmAEewFl4j6S68G02D
+	6yKTUDmZeCTGEoH4+ZdGhY9HJlybsA8oxwA6LOatMBwikf55r5qmiw5ctPm809nQ+PZ3yaUeUSH
+	bp+3JmpYj2MwMfFoRlcIH1oAuOBQEhwqzA9OHQz3L7pxVL3bHGo=
+X-Received: by 2002:a05:7022:faa:b0:127:3915:76b2 with SMTP id a92af1059eb24-12c34f07f1fmr11654395c88.27.1776235873080;
+        Tue, 14 Apr 2026 23:51:13 -0700 (PDT)
+Received: from apollo.localdomain ([208.95.233.74])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c5e6a860fsm870453c88.11.2026.04.14.23.51.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Apr 2026 23:51:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: [meta-gnome][PATCH] gthumb: Upgrade to 3.12.10
+Date: Tue, 14 Apr 2026 23:51:10 -0700
+Message-ID: <20260415065110.1096804-1-khem.raj@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe] [master] [PATCH] augeas: Add CVE_PRODUCT to
- support product name
-To: hjadon@cisco.com, openembedded-devel@lists.openembedded.org
-References: <20260413112313.1825573-1-hjadon@cisco.com>
- <134abd7c-df60-42a4-b836-c7984e62d1e4@gmail.com>
- <1426462.1776233646766468418@lists.openembedded.org>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <1426462.1776233646766468418@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 06:30:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126342
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Apr 2026 06:51:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126343
 
-On 4/15/26 08:14, Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE
-LIMITED at Cisco) via lists.openembedded.org wrote:
-> Thanks for checking and raising this point.
->  
-> You are right that currently NVD shows only one clear CPE mapping for
-> augeas, and at present we have not observed any misreported CVEs or any
-> ambiguous CPE matches for this recipe.
->  
-> This patch was added as a proactive metadata update. The intention is to
-> make the recipe-to-CPE mapping explicit, instead of depending on implicit
-> name matching. This helps us keep mapping behavior stable if matching
-> logic changes later, or if NVD adds another vendor:product combination in
-> future with a similar token.
->  
-> As of now, this change does not alter current CVE report results. It
-> is only for clarity and future safety, and it does not impact build or
-> runtime behaviour.
-> 
-> 
+exiv2 is hard dependency now.
+webservices option and hence soup2 dependency is removed
 
-The current behavior is considered to be a feature, most recipes work
-just fine with the default CVE_PRODUCT (including this one).
-Explicit CVE_PRODUCT tags should be added only when they are really
-needed - when there are multiple CPEs associated with a recipe, or when
-multiple vendors provide different software with the same name.
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+---
+ .../gthumb/{gthumb_3.12.7.bb => gthumb_3.12.10.bb}  | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+ rename meta-gnome/recipes-gnome/gthumb/{gthumb_3.12.7.bb => gthumb_3.12.10.bb} (67%)
 
-(Otherwise, if this explicit vendor:product matching would be really
-desired, it should be done for all recipes, not only 1-2 select ones -
-but in that case the change would fit the originating bbclass better)
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.7.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.10.bb
+similarity index 67%
+rename from meta-gnome/recipes-gnome/gthumb/gthumb_3.12.7.bb
+rename to meta-gnome/recipes-gnome/gthumb/gthumb_3.12.10.bb
+index 8e82b86285..58aefbff2e 100644
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.7.bb
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_3.12.10.bb
+@@ -6,6 +6,8 @@ DEPENDS = " \
+     glib-2.0 \
+     glib-2.0-native \
+     bison-native \
++    desktop-file-utils-native \
++    exiv2 \
+     gtk+3 \
+     gsettings-desktop-schemas \
+     zlib \
+@@ -13,21 +15,16 @@ DEPENDS = " \
+     json-glib \
+ "
+
+-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'colord', '', d)} exiv2 gstreamer lcms libjxl libraw librsvg libwebp"
++PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'colord', '', d)} gstreamer lcms libjxl libraw librsvg libwebp"
+ PACKAGECONFIG[gstreamer] = "-Dgstreamer=true,-Dgstreamer=false,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[libwebp] = "-Dlibwebp=true,-Dlibwebp=false,libwebp"
+ PACKAGECONFIG[libjxl] = "-Dlibjxl=true,-Dlibjxl=false,libjxl"
+ PACKAGECONFIG[lcms] = "-Dlcms2=true,-Dlcms2=false,lcms"
+ PACKAGECONFIG[colord] = "-Dcolord=true,-Dcolord=false,colord"
+-PACKAGECONFIG[exiv2] = "-Dexiv2=true,-Dexiv2=false,exiv2"
+ PACKAGECONFIG[librsvg] = "-Dlibrsvg=true,-Dlibrsvg=false,librsvg"
+ PACKAGECONFIG[libraw] = "-Dlibraw=true,-Dlibraw=false,libraw"
+
+-# webservices would require libsecret and webkitgtk3 built with deprecated libsoup2
+-EXTRA_OEMESON += "-Dwebservices=false -Dlibsecret=false"
+-
+-inherit gnomebase gnome-help gsettings itstool mime-xdg
+-
+-SRC_URI[archive.sha256sum] = "ee12d24cf231010241f758d6c95b9d53a7381278fa76b6a518b3d09b371efaec"
++inherit gnomebase gnome-help gsettings itstool gtk-icon-cache mime-xdg
++SRC_URI[archive.sha256sum] = "3222344653cd6fb5d7981b73951ae3d90c414f74220a8b1c8665b25574284c75"
+
+ FILES:${PN} += "${datadir}/metainfo"
 
