@@ -2,145 +2,98 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C87B8F8E48F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E834FF8E499
 	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 23:38:24 +0000 (UTC)
 Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.29857.1776382702341800974
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29505.1776382703779706675
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 16:38:22 -0700
+ Thu, 16 Apr 2026 16:38:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=npEhXOYE;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=TUJMjBB8;
  spf=pass (domain: gmail.com, ip: 74.125.82.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-12c42a23c8eso95164c88.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 16:38:22 -0700 (PDT)
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-12c565dd3a7so253959c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 16:38:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776382701; x=1776987501; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LAYLzxvTZWWcR+0pns/NDxemgD/i/oi85MMGU0Bq3Cw=;
-        b=npEhXOYE43gAb0iNYmK201mASKSq87xU4E/8EDSFhAbqt2Mr9YQxAF+kYlznxurucO
-         ToP0L85W9JQxAPETkH57oM89iTBUgRpYkNk78kMRAcLbirjdtXBGQeL80ru8YykYKBha
-         whDgOOrXo+WKQUJ2qcn5TJqnG9i6cH+fgq3zmAwzp6ofsRCj+/ig3ZoN1+Dm9AChWVt0
-         Av8nYfHB0AjPRRB5WifwrwxZdDqGqws8c5QbHhFmbozNgtvucHT7RyeukSgwSFIePsDv
-         7hYBNSUPIKdo0mx5t2zheuHj0drzuIrAqAd4AArdryYwG6NC30xlOnfO1/3/8KGWjLOS
-         IU9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776382701; x=1776987501;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1776382703; x=1776987503; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LAYLzxvTZWWcR+0pns/NDxemgD/i/oi85MMGU0Bq3Cw=;
-        b=Ae48FRXOZVhl53ZF6y/obnswU874voUWuva7UkayqAJ/9PUlHhodtGN/38bXbECgX/
-         aURKTz8D5wgyApK2M7pY8EVCN7msKtHaoQvqKF0VJoclkLO5k16qdXakVL3q/APGyvru
-         E4eFA3tqnRMkjdWs9Ox07qZUmg8tLT4kWOd9egP6GTc5v/8MPTtPE1CNRcRQlLkutEDC
-         F4vPD9ZzWuZ8FnU2pStQ7wFduNx/Kl8vJ6YaMWF8QIgBoZcVmjHERI6jLH2v5Nq3i/dD
-         GQu1ttIeFkOG78iMHqMAOW91Y73TRk7r582DxZ144PiQ3KLQrLfFKFPIXrUUE3PgF6jD
-         tt0A==
-X-Gm-Message-State: AOJu0YzhAh10Gh0sIXXjYTYjzguBTmaiNi8dTGW/RUZUKKjCpZwmMnY7
-	auVqUF/z3wNcPYTomqbGPN7RUI/YSkM6FJT4fDRkXkdq+o6ckMYDUvMDxyBsPPZI
-X-Gm-Gg: AeBDietmAP/tCNUrcg3OgcmNhYtY6JEDSd9EF8Q4QjcEkA8/exlH7Lpjxv/Ko3bZi4+
-	jjlDk3EzBEEbXKcUP4VUM77MMBmE0uo/whLcOcSz+dajOCkiIr+Lo30jh6ynIpJwNwhfe193rwI
-	eThK6oOPTSn0GlHEPFcFjrw8fSTXOgs9z0JtOl3lvXit6RbhrkT4jdj+0Y0Bj4Z1/WISXIs83GI
-	sxk3arzuwD0JBWFvZQEi2SDrOpOhAQ+xU3FJDwergoG0MVHpBdcf1mRQqQmgkdz0pf4ILZrUuAW
-	ekikk2oFnpxPBBLQGCLLaw7GjDgu7sIjknPI/B8XrG7UaKHgEFwsDxUyZZlIQwXmFMfJcwQXbSl
-	s0yra4EWlMZhwnL5UJRpneW6RlmuIDY7dh9S2Ya3iU/bl07DYipGzrYxFpq/3ppAQXP6JnOxR9t
-	aY1d21Ojb44ipsDKIPYmjbIXhc+f/OME3vPICNkuMjmpxTTc4COu/7uYvREdakotAMm0bIgwbxZ
-	l70G6dmToaf51kiQgusgufZgMm3f+xJK0bam/Cefm93LMgJ9CxBzivGPAXW+xWWYvrQHJyUX3LD
-	65g3HQzHePLtHwVcFmFo1UDW1U/CyeV/oAQRr/HG+Re5F57K7us=
-X-Received: by 2002:a05:7300:dc88:b0:2be:171c:5048 with SMTP id 5a478bee46e88-2e4646cbd46mr194835eec.5.1776382701028;
-        Thu, 16 Apr 2026 16:38:21 -0700 (PDT)
+        bh=tgvF38B4cNeUVjUggIWMkBoSLpqLvtHviST70kz9pOs=;
+        b=TUJMjBB8Pc4IAzflj+I2XhY6zM8vMmjvKZRTSKP+HxolA/GAnW7iiUvks9ad+sngK0
+         3BigdYzpg7e+yPnaVix1ee3V36KPnZ2N8BMvhSJV9jYBdzDap9Ce0KcFFKKxPTc1NMwO
+         3eJVZ1V85iY7Zah/dcijb+vWrdXUOcKBpO18rEGw5scQqFIPZbD8IKdEaR/iG2JT/QhE
+         H5fTY9F/mOhUzkkkiUe7Ft11dwO29FgVJLNn6HQ9LFvRoDFtUivf36C8syKbZxCBRNZe
+         mHOCl2mSlHBro/idtWW7RvO/jWS3QV6r4sU8gXVhIrPySnS8v1rXOZ9SZdPoj1+9mtme
+         QRyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776382703; x=1776987503;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=tgvF38B4cNeUVjUggIWMkBoSLpqLvtHviST70kz9pOs=;
+        b=dJbH8G2zHJA0wS0XYYLlF2Pucw1misZTs+i764JZOPZpXQsYKLBO0EcAa6o1Q2DbAg
+         Zh/tZGbmXA8Pbyt0TypSS6PGEJnhWJC2TotTDXfFZqs/XXs6Pd1Yy2y2Y5EKmCfRFGLU
+         5KkE2xk9zrfMSg9H4haArdssZ27ifzL+61LAO3O28xaOJ50R2LpYrXqipgiwjzajJNwB
+         5ysS/vsLVWRk54OVmI9mUB2fvI5V69wln1rojznTUcacq8bxRHv9O6kVcC2goaoemWzG
+         gt3LCVmN5BTbsJOKqdTNR9+gjwhb20rB3UAh5XkVFgx3OSO5hsGn80apxZmYxNO47HDC
+         fH8Q==
+X-Gm-Message-State: AOJu0YxVHzy9MXrXGGCG0c6fyalLLETjAZOrLC8NU8wchub6ja7LXXkm
+	93a9Ohp2q+TYF7Lo3e6/GJC9eXulSCMDA2hhfVW7A9BAy0n4nTJR2dQFCmWKerVu
+X-Gm-Gg: AeBDietsEIL8B5rh+dcPBaayckECb9LZ097F7ytz569yTQPdRtzr52Y7qyHTQuCI5eY
+	HBnWyPTxg9WvgehInWB0MTENiGaw+LLVyTFcqMRr4vxxQjOUorKcEv2Plu33gTvpztZyShkj3aI
+	qqjQ2o/V14iUcVx9OIHX0WVLrjBViSrdZBCcw73qYddK0X+euCmCTkRyFOXi52hsGfkTIYF+Ym+
+	bguOXa9gFz1a6pEs0aoqI0R4nomDgdl8G1LFVJy+J63DBiKufWVw5OaTDtWNnJuuyF49LoYYBjW
+	6qS51wevG9acQ0/rTHvsr18fTbxGNyvBs+8q4frJ30s51lBuV3XwBdg15kmXgoc4lmvB1fpEACL
+	a+BzBcG8dYLrP98PXcZ41MZQN6MFc7kyh6ZAHCrR02t3xODVfIqaDl3eykvFEIB2RH0qrqknGlB
+	A9qbCth39lxqtezysAtCQ6iia/uPz/Ur6r74PXMivPwi6emgvdRgH5qmSzhLrIk2fq82WGXQDgi
+	xxUEuIqbtb7fNxrNXTgZgwfqlkpZRSEbOf746Nz2EtkWZtz3XgyhmF4J8tKUcJuxQbIA63CsoaL
+	XO9tDH7fp21q5KHI/b09T6/QdGi3MJGO4UhjOxU2FZOO36SbROk=
+X-Received: by 2002:a05:7301:1e8c:b0:2dd:c066:bf7 with SMTP id 5a478bee46e88-2e465772629mr203623eec.11.1776382702830;
+        Thu, 16 Apr 2026 16:38:22 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2e4c3f4fe72sm247993eec.3.2026.04.16.16.38.20
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2e4c3f4fe72sm247993eec.3.2026.04.16.16.38.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 16:38:20 -0700 (PDT)
+        Thu, 16 Apr 2026 16:38:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH 1/4] composefs: Fix incompatible pointer type qualifier mismatches
-Date: Thu, 16 Apr 2026 16:38:15 -0700
-Message-ID: <20260416233818.3790619-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-oe][PATCH v2 3/4] magic-enum: Upgrade to latest
+Date: Thu, 16 Apr 2026 16:38:17 -0700
+Message-ID: <20260416233818.3790619-3-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260416233818.3790619-1-khem.raj@oss.qualcomm.com>
+References: <20260416233818.3790619-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 23:38:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126420
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126422
+
+It has fixes for C23 and Clang-22 added also fixes/workarounds for
+libstdc++-14 combinations with different versions of gcc and clang.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...-const-char-for-memchr-return-values.patch | 45 +++++++++++++++++++
- .../composefs/composefs_1.0.8.bb              |  5 ++-
- 2 files changed, 48 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/composefs/composefs/0001-mkcomposefs-use-const-char-for-memchr-return-values.patch
+v2: Bump to include clang-22 fixes
 
-diff --git a/meta-oe/recipes-support/composefs/composefs/0001-mkcomposefs-use-const-char-for-memchr-return-values.patch b/meta-oe/recipes-support/composefs/composefs/0001-mkcomposefs-use-const-char-for-memchr-return-values.patch
-new file mode 100644
-index 0000000000..9c45d4fcc0
---- /dev/null
-+++ b/meta-oe/recipes-support/composefs/composefs/0001-mkcomposefs-use-const-char-for-memchr-return-values.patch
-@@ -0,0 +1,45 @@
-+From 9d82303c7a3a780d481469cd8eafa016dcbff86f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Thu, 16 Apr 2026 08:25:28 -0700
-+Subject: [PATCH] mkcomposefs: use const char* for memchr return values
-+
-+memchr returns void*, which when assigned to char* discards the
-+const qualifier of the input pointer. Cast to const char* to
-+preserve const'ness.
-+
-+Fixes build with clang-22/glibc-2.43
-+
-+tools/mkcomposefs.c
-+../sources/composefs-1.0.8/tools/mkcomposefs.c:413:8: error: initializing 'char *' with an expression of type 'const void *' discards qualifiers [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
-+  413 |         char *embedded_nul_offset = memchr(line, 0, line_len);
-+      |               ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
-+1 error generated.
-+
-+Upstream-Status: Submitted [https://github.com/composefs/composefs/pull/435]
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-+---
-+ tools/mkcomposefs.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/tools/mkcomposefs.c b/tools/mkcomposefs.c
-+index 13b505d..e14d8d0 100644
-+--- a/tools/mkcomposefs.c
-++++ b/tools/mkcomposefs.c
-+@@ -63,7 +63,7 @@ static __attribute__((format(printf, 1, 2))) char *make_error(const char *fmt, .
-+ static size_t split_at(const char **start, size_t *length, char split_char,
-+ 		       bool *partial)
-+ {
-+-	char *end = memchr(*start, split_char, *length);
-++	const char *end = (const char*)memchr(*start, split_char, *length);
-+ 	if (end == NULL) {
-+ 		size_t part_len = *length;
-+ 		*start = *start + *length;
-+@@ -410,7 +410,7 @@ static char *tree_from_dump_line(dump_info *info, const char *line,
-+ 	 * We didn't document support for embedded NULs, and it only introduces
-+ 	 * ambiguity in parsing, so let's just reject this early on.
-+ 	 */
-+-	char *embedded_nul_offset = memchr(line, 0, line_len);
-++	const char *embedded_nul_offset = (const char*)memchr(line, 0, line_len);
-+ 	if (embedded_nul_offset != NULL) {
-+ 		size_t off = embedded_nul_offset - line;
-+ 		return make_error("Invalid embedded NUL character at position %lld",
-diff --git a/meta-oe/recipes-support/composefs/composefs_1.0.8.bb b/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
-index f2bae91f44..3450f9a339 100644
---- a/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
-+++ b/meta-oe/recipes-support/composefs/composefs_1.0.8.bb
-@@ -14,8 +14,9 @@ LIC_FILES_CHKSUM = "\
+ meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+index 6d5399c8d0..958ae21065 100644
+--- a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
++++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+@@ -16,7 +16,8 @@ SRC_URI = " \
+     file://run-ptest \
  "
 
- SRCREV = "858ce1b38e1534c2602eb431124b5dca706bc746"
--SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
--
-+SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main;tag=v${PV} \
-+           file://0001-mkcomposefs-use-const-char-for-memchr-return-values.patch \
-+          "
+-SRCREV = "e046b69a3736d314fad813e159b1c192eaef92cd"
++SRCREV = "7d87efb4a3dddbbe8caa9ca14eff05ede1102ab8"
++PV .= "+git"
 
- inherit meson
+ inherit cmake ptest
 
 
