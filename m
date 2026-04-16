@@ -1,141 +1,155 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <hfranco@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFB22F8D775
-	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 19:39:56 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.91])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24166.1776368388359212881
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E32FAF8D77C
+	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 21:07:15 +0000 (UTC)
+Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.26319.1776373631836070815
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 12:39:49 -0700
+ Thu, 16 Apr 2026 14:07:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=hK0B8812;
- spf=pass (domain: navimatix.de, ip: 52.101.83.91, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GJNCaAah4GiEPCnIBzdkLx+rt+MbghY/e3R2dH8jWBVxws1KrWDfNTv2zEsGvos3VXKi70ZwsIQEp9v1gjtfBUk+0+BsAN1oyDzLFm7SlucuipIgjNID+xLGV03UpIDbXX5P9NcBMxewkl1MuiLqBLY72wCUVZoaornx+v9mixDeeHQjdc2v6aAFU52xwQJStKiu+nw+4ojf1lehmfpYqTP/cqy1xN/f4lJCFCwNmBgukiJe2TJ1A+FqMgBO/C7fVxV3nL4s1zrSu5NyNF5AXWXVYrPW/G1OZlLokO1TZgXjcAxjPxPQf0CJtX4Lze567DE2fIMftJq42OJVLs3daA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e2RbzNMX+yXKS/l1p0MGjMB6C90HwENxGQiISLag5Mc=;
- b=P3jvarbKbITbBMl0AuRQv5IjI0k2BCmr8RbyNsQoLIHt2IImJRjrXmdFDAF5plq2wII6cvlC12oAKbc67uyajPM7D6JPkFsvrsVwy66gK8Q7qIMGF/u2J+oKL/usXh5mrnYdYJ+QeOSNT6dgKSgY5RFSFVSRgshydqz9q/zeJZ+aqzAufzQEFnnTzmNbRciwKmz5q+CbkvRQZsOb4Q3oOoukbCfkaQjf5BwDel4J2oi9YxrmDpXgpmf7ee63N9I6KXqF3XFB8k5OzN2sNhuVAaZmsv+tV4qdpy0gGe9q3ZHH/YSZiCjF5G4cRicWSgMo0/YnV/xxZQq3w+9N54i6yg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e2RbzNMX+yXKS/l1p0MGjMB6C90HwENxGQiISLag5Mc=;
- b=hK0B8812rn2l6DqnmLqfhWcGirOXxhSnB9NIdpfB7vE89lx232Go4Di0QTZUCmbxbeL6npSJP5OFV483LFkIjPZUN3l4B33C/d4dWxWiGlQizijWoGxxp+UeL+y54U/6hIl7jzybkWY5/6HUoly/kNRwVe6o+VpqdauG/ak9i04=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by GVXPR01MB11229.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:216::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.48; Thu, 16 Apr
- 2026 19:39:42 +0000
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- ([fe80::d5c3:2dea:3d98:25fd]) by
- GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.20.9818.023; Thu, 16 Apr 2026 19:39:41 +0000
-Date: Thu, 16 Apr 2026 21:39:40 +0200
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH] fswebcam: Add RRECOMMENDS ttf-dejavu-sans
-Message-ID: <325d4f364345811b8217637156b6e1713bc1cd0c.1776368379.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0430.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:81::27) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8)
+ dkim=pass header.i=@baylibre-com.20251104.gappssmtp.com header.s=20251104 header.b=yOWQY6hL;
+ spf=pass (domain: baylibre.com, ip: 74.125.82.47, mailfrom: hfranco@baylibre.com)
+Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-12c1a170a50so2805c88.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 14:07:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776373631; x=1776978431; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Y0gv8WNQMHZqduQcHI5dJTn5HspiB/RABqGkAt1FC4Y=;
+        b=yOWQY6hLqxFNhNCj5SI3y86KNDI5ZZSt8tqeJYqMKlPH/3MIRftbMw1V37wmfdTIsu
+         NE9DanRGs3bYCIzt8OLsKIIjdYTfjaOMXJliX10RaGwQaQXi2DEpjpAB9SWGHDK+4bS2
+         reVDrAsMziemsRNM793qkJx9p2SaE13W0N0LLXKzZOI7F167BDTp8bwKBffOOmgDn+Kq
+         LSF8nRZvV0J4fHpZMmRyq3xEhdDrfqgVkmc7xAWIhUEaUxb9NHTL0kOYHw68lPRoaxKa
+         Jf5cqoltHUID7rY+fCzJdyQ6R2zG9xMLSIoMe2WDzPfFpmuKXI5nz60Z0nTBhyvAVk6Y
+         wTDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776373631; x=1776978431;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Y0gv8WNQMHZqduQcHI5dJTn5HspiB/RABqGkAt1FC4Y=;
+        b=GuUppMRqOS8w7O++rn8aqpr3602u5RvC8YKziiV7hfT+tG+kCOiohMe2cKBixKYcjl
+         RoEvVKQb+ETkP7CjtvNR22MgvvpwrnO3x9NAezqujNSSurBDy6XZMRNj5pBU3Jp+7EBk
+         sfGp803Fcs2vw9Buy2NPI4XdpDYOy5rHd7Edynf57rYeEgEayQN2Z88vhJvzgRabRL1f
+         MGZ3HK6gHMxWV8mqsf1YId2/dJT/lM52vquRliuUzwZ2vzi4bcHYL+JXEkvtUQD78ac/
+         9OlFrL/L8WnE9V6XEpnKcw5l0aPSnGzGUCc3QUL77BZBqE2uuN5k5YtHKsNxLiUUJw1e
+         x9SQ==
+X-Gm-Message-State: AOJu0Ywg4CVnlO4MNxobBeqaQdbGP8F/6n7aDAyXG+xdsj2vcXhu9XRs
+	9UK2Y4tG5OAhkTrSS1UzoKjeW/NUxteAnz6l9gcgFYyGaiQoxOS9FuyFM0nu2sReMnY=
+X-Gm-Gg: AeBDievTB/fvPprDz+p+VL1ldb5aZ4fWfdd9aPnHzh7i991cOqWCQh6c+xXP0uPJNcD
+	upWxrBWZO4gWqEEBEyqeCc/3GWG2X18jp9l5XfThKRBYqRUoixzsHISArJOmJu4H6Ujh3FSfkDJ
+	QAdCgPf9jkfCmkYP+QkyOdxqps3MDHdSqJMf54Mw21NLZCc0kvkT8jZUhfyEo0lgIsWdchtl5p7
+	z2UAgW05UMGGRtnBQkTsTxKQNhlI7KCeHdROPTJra5lpoLDVFC5GV2PRMzo1k8uslYwbw9ATawo
+	FPPsAvaWvWrNXHm6+OJIb7i2tsmH/cl7l0Gt2XxSW6Ok35wlk1txPBYXqIHK+bjqObv8aqOm0aV
+	mZ7Xb7NqkLXtQ7ItFPP6OggfS1EpDRG2u38y72VFtyxroyW85Pl0fJY3BhGYMdKnXF4BtwmDowu
+	8xCWRy+IyJisoW9fj07jVkRDgRIYDoenT6GnAMkxpgo9WqeDcZrJ/S9ujgHFpRBCAquWRuVSNfZ
+	dMmbQs=
+X-Received: by 2002:a05:7022:1e0f:b0:12b:ec15:69d2 with SMTP id a92af1059eb24-12c72865996mr423128c88.33.1776373630800;
+        Thu, 16 Apr 2026 14:07:10 -0700 (PDT)
+Received: from hiagonb ([2804:14c:4c5:9534::d153])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c5e62b9d1sm7387659c88.5.2026.04.16.14.07.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Apr 2026 14:07:10 -0700 (PDT)
+Date: Thu, 16 Apr 2026 18:07:05 -0300
+From: Hiago De Franco <hfranco@baylibre.com>
+To: Gyorgy Sarvari <skandigraun@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Trevor Gamblin <tgamblin@baylibre.com>
+Subject: Re: [oe] [meta-oe][PATCH] uutils-coreutils: make selinux
+ PACKAGECONFIG dependend on clang-layer
+Message-ID: <y6m2etmgi3tlokwm75xlltjsecqnt6r2r5qxhhjs3i6u7m7sas@qgv42ntkotug>
+References: <20260416191754.3910026-1-hfranco@baylibre.com>
+ <a64fce2a-a609-47e7-a60f-634ddee418f6@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|GVXPR01MB11229:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93afa5e6-9a27-4ee2-832b-08de9befe787
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|376014|1800799024|366016|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 
-	3rQdNpwDWl4vwONlu70D8Cg9ZTBwCMFyqJN1MOerxN/6Q6vCUBqrWHosTAacknq87ONgMZxuETs2eUtV65Z/3guSOYCCzqtYjSBulwAOSDTwCW0tMnrsGChddo9F2XUIU2HTUu7pZxUtdzOdLp6YCQ9SskksgnLEs4nl7wOpr82Xss9wW5BxHHvtnZ03E13Yp5Futd3cW0Tmkd0n3J7tbL0qSUp0KqQLGuo9ChYaQNd5UvotJM5toco5+ZQJGDpLKVEsF5dqiAlN4pw8OkgNhNki8e9gthZZ7Ykh9g92nY2M6/JYkSA9WBk36rPnhygMgFj53eJc63RFZ0LxRtKjKnI3AwZRzHFhG3x5DSl0XpX+tsWGGp84xvScc5sEqG1DPM1iXcTOlGhJCkgNYiwUhW7tBx3r4qD48mme3Z2ktC6aXFyJK9iHZ7W82vOuvt/33KpcTYBA9EZ6Mk4KelZsPpta9wQ0l/RAu0B7nc6q4XUOs1kaRzH8E1y80Y4k86F9+EgHckTCUSCtf2xY1xRntkr/GUXOg9cWP+BelA9IrMO091ueN00ESVWHEayg+bVZ0zy/29BkGC/RJfJbmK6xCJKhZSdm5YtZWVP0rpFIySwPFY2a3ogkxDgrWUZLvFmi15T4E7s4T3WxwCuFoj92fWIeuLFQLUM92k1oVZQSeFNjo6pkCkzTsIf4kgE21D9KvbHPlD6vTV33Gvk+OvcHm7RJuBcZAsbW1fyonAZSNkM=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(56012099003)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?bILQCszKrLPIjv283qn2/qFFlxgI3/5PWeKtwqSbdWzk4HstWCk3Xr4wC8Lg?=
- =?us-ascii?Q?v0cRMzht3bnK3HhJ+0GTpCr7NNPPe7qD09vXfqwL7cxYpWjhe6zdH6Ivbn6r?=
- =?us-ascii?Q?1kgIOJCAJKUDaw2sZYbD5oXGx6davP+5tJCovDxdD9H9louAmgWjwrL37ENI?=
- =?us-ascii?Q?FLq2d9q6ZtVTmEz8+h7w82um0suuH6s6Ab9ybZCmZ5riIcyzQyF8N9zXIxXG?=
- =?us-ascii?Q?ec5ClI02UqLpo1AY+KwDAtOlKNzu/ITldE/iPa/GpU0KCUDFOMhKdCY6sR5i?=
- =?us-ascii?Q?9zoRKhFi03wKF5+rz0HPCpzUllSItjGPqbr31uLZFgHU3Y1gzCtzHxdqj/LP?=
- =?us-ascii?Q?bTMUvjY9nWGchX5b5LN9N8lK6Z5yPqVIgAOda65t6D/D2c/ATTjWTiYwrLgP?=
- =?us-ascii?Q?P0EQBtay1sTrEFW4DKhJGiPsp7g51Gz5UdSAvvMkHKowxG6uKIPskprqmGwm?=
- =?us-ascii?Q?dOgclp8V1sy0bccwoRrKeqBJS3D7EbxhNSWxJZWiYgrFeCaBKVx80hgALZhH?=
- =?us-ascii?Q?4ndLZAVt0qwrTtBOQgNsTN2wxFs0W62k5sMJ+heRufwQLkP9m2oLAxRGn68e?=
- =?us-ascii?Q?m8x7eq7j8jzVXfa4o8UuD/vs79O5N0X+x+W8LvoZdZdNurXFKGVvmvExD5j9?=
- =?us-ascii?Q?c26vx+8cwkgOuY/c6MpvHzI8egZUyZCvhJG54kWg/mEu890J875PXYDXh3Li?=
- =?us-ascii?Q?25DeZNcAj6AERGOHMqurNAFT/lTqPzYck8lR66Hb+ruGF5M/tc2lHrhUHdvg?=
- =?us-ascii?Q?MPinEqb7cbkjUAY2BiMzB9uomo+Z0dpMY3L1ScPZersxaDJR7G5hC/uyzreQ?=
- =?us-ascii?Q?uV/Ohyq4NqrcUfvWUrH44voR1z2jGY/4jRp0DEHZoOxRMR7PzSeVlauVsEBn?=
- =?us-ascii?Q?1//p6m1l3OMgMSUaNS9vKFq1ngQJMQJ5x9/pvdXAF0AocQixHIgjN+YfjOv/?=
- =?us-ascii?Q?K1cyLuq6dkao8Y9gfz34oRv/j7SVYv58nfxQNPsmiP1SnJlPXAMxULQ8frD3?=
- =?us-ascii?Q?hDHiROva7mxPxpWtlw3kd8K14Ln3p5/GSiilpHNtJFVeCQjK18d+wFET8OB1?=
- =?us-ascii?Q?+3sh2dlWfYYPMr+fDj4/mdDti6/RthIcH2yZPi8ND3uh5qicvGYjq3TEJQXL?=
- =?us-ascii?Q?OIyPkseXfhLVKe1xn6ljLh2UNHhZR5LisTyKA9t9WU4nxTtd+x25kHsMTkii?=
- =?us-ascii?Q?RlLCCNdMLoYCGVrc5VY6JGkluwc6ev92aB6fShhw09dUvghKONmhOLXSBAU9?=
- =?us-ascii?Q?fALy82T4EV6bVr2GWs3DBTwnzGLmIYu10iYJsZaVudcK1eLNi+I/kX1l6LdF?=
- =?us-ascii?Q?xHmZYcxy0xt3y5MwQVAMWLwtEDF7tcbRSCpnofTFSqzCTamGesoMC3YIDYIP?=
- =?us-ascii?Q?y4xF+lGCKY+jQQyAkZ+J7AYtUSDbsXMm3ofdPvqmdx8YsCfLnjHCbu6LnhwT?=
- =?us-ascii?Q?QBjRcdV0fEzlJQYYqfXfQY+s2/rUmrDzFz2XWcfiQB8nfB4R5h9UDHRD5Hy0?=
- =?us-ascii?Q?5rlnFLEcz+MgVyGxP2ID/1cX0HVHtarT/kHXJpOTI1WV5jTJFOCoJ8Rva7Gm?=
- =?us-ascii?Q?3japR9o3akES2qkgSDWfr7w2mZ4vtR7r2qwgG6rqk6olILqaGpy64XBWvZc0?=
- =?us-ascii?Q?sEcH6JTsMolAHNJ4tN/Ksi8aPiRJH2laOFSkD71gUsAxlUIQSMiINgwkiX6H?=
- =?us-ascii?Q?Ia3Y0EqTmjap2gzVTWOgea3uqRAbS09MvgCrSJCk5VXc6U89hkb2wlTKmkID?=
- =?us-ascii?Q?bWyikQS02u5MpXFzfu3T+su9D0ASdY0=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93afa5e6-9a27-4ee2-832b-08de9befe787
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2026 19:39:41.8601
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gom0Psr7prvNRu8rT0g0F58/YEzUXNalLdEtRfolltcygNq53L+sWpQQHFFTdxo+5zlyJB3k+d8nXk2rFYtogeNAG0KCBrAUsaMEafhmtcw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR01MB11229
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a64fce2a-a609-47e7-a60f-634ddee418f6@gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 19:39:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126413
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 21:07:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126414
 
-From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+On Thu, Apr 16, 2026 at 09:33:48PM +0200, Gyorgy Sarvari wrote:
+> On 4/16/26 21:17, Hiago De Franco via lists.openembedded.org wrote:
+> > SELinux layer build fails if 'meta-clang' is not present, which
+> > shouldn't happen, since 'meta-clang' isn't a dependency.
+> > 
+> > If 'selinux' is on DISTRO_FEATURES, PACKAGECONFIG calls
+> > 'clang-native' even if uutils-coreutils is not being used (this is
+> > enough to make the recipe fails on parsing time if meta-clang is not
+> > present).
+> > 
+> 
+> 
+> But meta-clang doesn't provide clang-native anymore, it's a shadow of
+> what it used to be - clang-native comes from oe-core. Or am I
+> misunderstanding the problem here? I don't really get the role of
+> meta-clang with this recipe.
 
-Add a recommendation for a sans serif font to print text on images. But
-fswebcam works fine without a font to save only plain images.
+You are correct, actually this is only affecting Scarthgap branch. I
+fist spotted this on scarthgap, changed to master to test it too but I
+probably did something wrong and kept the clang-layer or something
+during my test. Sorry, my mistake.
 
-Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
----
- .../recipes-multimedia/fswebcam/fswebcam_20200725.bb           | 3 +++
- 1 file changed, 3 insertions(+)
+Thanks for letting me know clang-native is actually on oe-core now, I
+fount the commit [0]. So maybe I should propose a backport of this to
+fix the scarthgap issue?
 
-diff --git a/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.=
-bb b/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.bb
-index bdda35df40..bc4f324da5 100644
---- a/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.bb
-+++ b/meta-multimedia/recipes-multimedia/fswebcam/fswebcam_20200725.bb
-@@ -18,4 +18,7 @@ DEPENDS =3D "gd"
- SRC_URI =3D "git://github.com/fsphil/fswebcam.git;protocol=3Dhttps;branch=
-=3Dmaster;tag=3D${PV}"
- SRCREV =3D "db35d4bbd336885a44f017ff142bc9523dbdce3c"
-=20
-+# Compile gd with PACKAGECONFIG fontconfig for easier font selection
-+RRECOMMENDS:${PN} =3D "ttf-dejavu-sans"
-+
- inherit autotools-brokensep
---=20
-2.53.0
+I will do a test now on Scarthgap, cherry-picking this commit to see how
+it goes.
 
+[0] https://github.com/openembedded/openembedded-core/commit/43ba5ed17e069b13cd43c36650524a0113c81955
+
+Thanks,
+Hiago.
+> 
+> 
+> 
+> > Make 'selinux' PACKAGECONFIG dependend on clang-layer, and print a
+> > warning if the user wants selinux support o uutils-coreutils but haven't
+> > add clang-layer.
+> > 
+> > Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
+> > ---
+> >  .../uutils-coreutils/uutils-coreutils_0.8.0.bb       | 12 +++++++++++-
+> >  1 file changed, 11 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
+> > index 8b9b4dc199..99beb70104 100644
+> > --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
+> > +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
+> > @@ -18,7 +18,17 @@ require ${BPN}-crates.inc
+> >  PROVIDES = "coreutils"
+> >  RPROVIDES:${PN} = "coreutils"
+> >  
+> > -PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
+> > +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+> > +# This is required since uutils-coreutils uses selinux features that require clang-layer
+> > +python __anonymous() {
+> > +    if bb.utils.contains('DISTRO_FEATURES', 'selinux', True, False, d):
+> > +        if bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', True, False, d):
+> > +            d.appendVar('PACKAGECONFIG', ' selinux')
+> > +        else:
+> > +            bb.warn("selinux is enabled but clang-layer is not in BBFILE_COLLECTIONS, "
+> > +                "selinux support will be disabled. Add meta-clang to your bblayers.conf "
+> > +                "if selinux support on uutils-coreutils is required.")
+> > +}
+> >  PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
+> >  PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
+> >  
+> > 
+> > 
+> > 
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#126407): https://lists.openembedded.org/g/openembedded-devel/message/126407
+> > Mute This Topic: https://lists.openembedded.org/mt/118863961/6084445
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
+> > -=-=-=-=-=-=-=-=-=-=-=-
+> > 
+> 
 
