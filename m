@@ -1,200 +1,319 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 060BCF8A15B
-	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 11:03:53 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11320.1776337431432949066
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AEF75F8A16A
+	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 12:09:33 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com [209.85.222.178])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.11417.1776338165639681181
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 04:03:51 -0700
+ Thu, 16 Apr 2026 04:16:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=FSEZyA2Y;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=H4JQlctv;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63G8CMxe2575787
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 11:03:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=yGwDWiWaB8TExN6AZ6Kv0TZy
-	UUvIUzaSbR06t+G9yhw=; b=FSEZyA2YMOhyGw6weqet7Fksys0tlo+rKJwNVfFi
-	X+uqpbsh2dpmRwuo42WYfrfFuqgqiGLYuItppL2rvGf7PYe/7vTVgzDPHHo1wApF
-	pwcpYE5BgJkrv86ub4a6uAR3qTrJcmz4ueZqGS0sGo54uFXYsQ7KT0+MMvc1Bcph
-	nz4TWs8Tovdno+Xwl79JYDJbJWyK5oGo6QamLnQsv1f8UJ0PpRJSNuLlkZYVI5tK
-	SHo5DIwih3wFjtzwPEVBH2xaLzl5ZKQ2+Fs8CN/UiB72Xho9pLrTUSyxf1P1ghhZ
-	5DGOP+YuQs1RZBcCHDJHqHSabdWaL83l0zcwG/IvyNmRyQ==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djv27gnss-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 11:03:50 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-5fb6622ca5dso3591734137.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 04:03:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=c9aY4G06;
+ spf=pass (domain: gmail.com, ip: 209.85.222.178, mailfrom: careers.myinfo@gmail.com)
+Received: by mail-qk1-f178.google.com with SMTP id af79cd13be357-8cfc3ca1922so57507985a.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 04:16:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1776337430; x=1776942230; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=yGwDWiWaB8TExN6AZ6Kv0TZyUUvIUzaSbR06t+G9yhw=;
-        b=H4JQlctv5gLJjubnO5qALRxKpVq9cXw0XuN1hyIW8wofeFnJIy9BSRcZFHaV7ZmyQW
-         2bdl4DBYH3FU7joquYjjFvbyz6CktG7VRep4PpNIAdR9jM/iHvZGpC7n6YtC1RWEYjtG
-         8FaiNGjHnpeCwc2J/wMoJbOfyUSn0yAb702gaB40Y8TZi7YXO8BJg0X+PsIM2KgCKfPX
-         oFFL/pCKr54zJYNleKCxBuJHR4dV/tVkQ47B5WHj9d8qLWAiRCAA5tWIpORtAJg6KVbi
-         ckIoRcwB64hgUXuwQwyiFhX1KodYsE5R8dby2dOrSse6CvrpftgGGTrXtoC6z5Fxce6m
-         6OeQ==
+        d=gmail.com; s=20251104; t=1776338164; x=1776942964; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QigkK8VqnVVwVjhBn4Dons8VZ1YQqmk97AMAML3kqz4=;
+        b=c9aY4G06QwU6B+RXDv6tRYawnNizjmEb2AB2ddVNW/vXneiiNPLwQgJl1bY5MOEx+j
+         ZGiRVRV5a62d5gPiuWs7/Nd8rj3Xd7+45R4mME83rUW7lCqmAMxS3UqKElXhKyKcUGld
+         3U1G4Fx5TxqNWyNs61/59NzwJmMAlpcQaWOy7AOH2lhITwzK5xTPjCD7+MzTiCuvCygI
+         8xOOJbaUL4T/ZwQTK/6F31dZi4vlUM0drMZ42PudImT7H1kydu6HKc63IFGdYsZIzbSI
+         KuRPcP8WXELhCxmkrn1XdBRweMjOkzM2R8gUi7vNdiSnIvJ37f8TQoCiYVFuja+JjcAE
+         C94A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776337430; x=1776942230;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yGwDWiWaB8TExN6AZ6Kv0TZyUUvIUzaSbR06t+G9yhw=;
-        b=lKyEkD6OQESPpZwZxTtoRV3P8KlNM7+qRauBth+w1QA0TciGi15h1mvlSXsHsuCb9s
-         Lf2Jl758nH0PS4h38xUWSfedvo6gp18XKswJ+BPIA8Z0kYyRM5ZghmKRoIepD8FxZogb
-         MJqq+98bIXXm4Nc73rfj+OgZxQalNjcjg8WhsE8vEwGK0ylCuuVa1CJ4q88MB1bMa57G
-         1UABnEkQVSNiuOGha+2zTsqrGISJw/JBBEJkZaeYhBT2fdnJY+IWtCTcPR4pW2o2A1f5
-         f6skdmnTeixvWIyQbdt8GjitHwPReZfYeB+GWQmmmvwkZq2bwCWWaImWZltHtNFWh2KC
-         ixiQ==
-X-Gm-Message-State: AOJu0YxS/lZkxoEt6lCtH5fUGLsRkCYu7un6XfUa+HQvxT4ANtmfXpa5
-	gXjgxNCtoBUU9r1xAxtrMOfoNHxzygXOoXclX78MR0en68S5GYbbxFHCeNZJ1FADsICF9FoCTCD
-	rz93vt2ItdkFyoCGRzT8tQPQsMCuGt2PhUmlbWoEWAroSkZ/ed0Ta75W5UKvSnz061vgbjstTnY
-	laZBgHB9xL
-X-Gm-Gg: AeBDiessX3xczbXNy1P+SQevi6fBfzff40uOLzZJGVu1A9VIZVOgiuq0/OKDLA9IBKq
-	GBugT/J6+NAzLl9fJEl9bJCb9747R8RPlsKj79blHOnMl61IzA65ehpZSpkYt0R9HVlxC2W/Yuy
-	4CP5nYBHiFIoj6gfFY5O49t/LK5kTxjWzNfLPN7WEPfV7dNw3ICuvt+BuP0iMW2k45EiePDEqtX
-	cgYKwAF1+DonrhPMU9yN/pksa4wEEZAYCnhts7SgTlns8Zsu+G+3OG8FfPGo8XPbPR8QLpcg9Mf
-	8kPJjK7KjZyalTF6A3rP0077Md4lThK/BRnkmRYHm3PGh846v5wrXmXVjihfcfNbaU4o0GykpKt
-	WXCl00qSYP5zvQ0hpRR2GhrWhialkFgWtHIWv0thtXCPGVU5zY0u/PDyuAHLUBKtvVYBJwxy81y
-	pZVS7uGrCgBLlgGwNnIUxEBwKfUAgC9ci9rtvItKSJg9CGrA==
-X-Received: by 2002:a05:6102:9d6:b0:60f:7499:9b6b with SMTP id ada2fe7eead31-60f7499a8ccmr7368403137.29.1776337429577;
-        Thu, 16 Apr 2026 04:03:49 -0700 (PDT)
-X-Received: by 2002:a05:6102:9d6:b0:60f:7499:9b6b with SMTP id ada2fe7eead31-60f7499a8ccmr7368392137.29.1776337429110;
-        Thu, 16 Apr 2026 04:03:49 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-38e9ec80e5fsm11471561fa.41.2026.04.16.04.03.47
+        d=1e100.net; s=20251104; t=1776338164; x=1776942964;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QigkK8VqnVVwVjhBn4Dons8VZ1YQqmk97AMAML3kqz4=;
+        b=gr5oOdhDSSWOyAf9Rw5Dge08smJmYcq63ToDWvsoB7Dhov2r4ykiz9sBbRCLDdGSn0
+         eB7E6M6G8VxM4Jy60lDnbJbV0ya8NjleWk9kENOycu6Qz4HAeZVv/gfdx8xdws36yrTT
+         Oo54ZI/SR5QZYuaIwdcute5sj+CofrZ6KpjdVV6Ikj9qJ0+sHh9sCuDk5nke8nOMbeUG
+         q+fLMarNSBb3vHIt4OB6cSDhy9YQsqnp5q1XL0x/HUb5I8cV72+21yk+wySd0VIgC+k9
+         vgdAbMqVZIusQznGfeHvk34P9G2EL9o4t/bGl/zHjSiwNraDspnqxONszwHmDHarJUwF
+         voMA==
+X-Gm-Message-State: AOJu0Ywuh7mG2bW/8PxwDm5y46ofibbMAeZCNR2JYPDhHSVdU9LU3Byb
+	0AktdCxFxOn2cBk0FiVweQUIviJ426ArTSgu7kia+RPAzfqXVixP7LmdoYnwpQ==
+X-Gm-Gg: AeBDievly4hmczFX9wOd5WpVvEHQLY3xRLsVx3ZZPh2UPKmwUKLvvVWYlYqqzYs2JSE
+	8gvGnuXU2e6GRKbTyqpfMnWknzm6VWVhPkyXB6rQDVgtQx/DlgJmLUElcAiTpbrEk7o8Fg4CG7u
+	pX5q/NQVh+GDqsWZAZiGgUayzMb5lDJC2ErgMBRGlFrk8xNkyVrezkHtwmufmJP+c6TO+4hpAe9
+	n/XHU4ueB2Dh/RwbaZWVOmn+jTXznxai++8jtAFspfOyG/IzUBnHvLGmY7yMm32/E8X/jaT++G/
+	ZbcgbZDPwcy/oMwUqWF3MsTAlWZF5J7nHKc12I50qw0ef8H0fC6xF3OADXVrL8rkeu2cCk8KPgH
+	CC5TFoOCwkTkH0PyvKLeuzbDnE34BYibTSSzjW//N9osz+awKA/wm/qJw3bYgb+DQDnLoqk3KaQ
+	X+JaJe8v+HCK4H9CnLurb6+HuK0h8gx2hmGeOxx0n+bXe3DOaWvUgQRfnj
+X-Received: by 2002:a05:6a20:2589:b0:398:9243:2ae0 with SMTP id adf61e73a8af0-3a06d1072a2mr3360846637.5.1776337840059;
+        Thu, 16 Apr 2026 04:10:40 -0700 (PDT)
+Received: from L-15597L.kpit.com ([49.205.102.244])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c7957eeb35csm4089503a12.12.2026.04.16.04.10.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 04:03:48 -0700 (PDT)
-Date: Thu, 16 Apr 2026 14:03:46 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>,
-        Devendra Tewari <devendra.tewari@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] android-tools-conf-configfs: replace fixed
- sleep with UDC wait loop
-Message-ID: <qk5zmrapwlvjskkrgmom7xfbipq3u44krrxzi36yor7awtepna@xpsfalqldxuc>
-References: <20260416072305.1447652-1-viswanath.kraleti@oss.qualcomm.com>
+        Thu, 16 Apr 2026 04:10:39 -0700 (PDT)
+From: Shaik Moin <careers.myinfo@gmail.com>
+X-Google-Original-From: Shaik Moin <moin.shaik@partner.bmwgroup.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: careers.myinfo@gmail.com
+Subject: [[OE-core][kirkstone][PATCH]] imagemagick: Fix CVE-2025-62594
+Date: Thu, 16 Apr 2026 16:39:39 +0530
+Message-Id: <20260416110939.1051493-1-moin.shaik@partner.bmwgroup.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260416072305.1447652-1-viswanath.kraleti@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=PJQ/P/qC c=1 sm=1 tr=0 ts=69e0c216 cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=A5OVakUREuEA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=x_zqMBe-2U1d59MyKHQA:9 a=CjuIK1q_8ugA:10 a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-GUID: 2v6W_i_NjigoeTC4tJJFiGnXz9jN09H9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE2MDEwNCBTYWx0ZWRfX3oUX5CVrUE8P
- QuZOoVO3IjYAmxVz9s/Dhx2cU3EKgQYPnoxvFsDtnPyKOieIuroZ/yPT7ARCd76+7WRFYTKrnj3
- 4G283TPb13WziV6s1VMXY86I531Qcu+2s2iKPOW5AXxqVrIS2RlWOWZgwVkmqKVjgI84OtoVbSu
- u+b7JwyKMP4Cj0okI8v07wjhIkVaGmZDOF6m81j9tkdKzj+TlA/op27KygEVOnylHoUxRYHDzKT
- XQyTc4e7P8qnRKT7HykcXE/8YiX65l93BNdc5Kvdmq0Zj7EBNyGJryCnP7Qcg9D7U/Tz/7zQOY7
- NQQIYzhg7laIugYkOSIFd8ZF4be3CSlArvyJc/gEMPA7y9ligTjlli/upj8D3MlK7uN4SUfWNyZ
- DDvFCRASPELpPnKI88YLFwX9zulFIDILvf3YTEs0n3GCeVWbDvNrKnnDqC1SzxUsj2k0ASKc0ID
- z1c2uAU/bxrn/B8hzTA==
-X-Proofpoint-ORIG-GUID: 2v6W_i_NjigoeTC4tJJFiGnXz9jN09H9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-16_03,2026-04-13_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 spamscore=0 adultscore=0 phishscore=0
- impostorscore=0 bulkscore=0 priorityscore=1501 clxscore=1015
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
- definitions=main-2604160104
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 11:03:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126404
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 12:09:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126405
 
-On Thu, Apr 16, 2026 at 12:53:05PM +0530, Viswanath Kraleti wrote:
-> The android-gadget-start script previously relied on a fixed `sleep 10`
-> delay for configuring the USB gadget UDC. This approach can either delay
-> boot unnecessarily or still race with UDC or configfs initialization on
-> slower systems.
-> 
-> Replace the fixed sleep with a limited time polling loop that waits for
-> both configfs and a valid UDC before configuring the USB ADB gadget.
-> 
-> This makes USB gadget initialization more deterministic across platforms
-> without relying on arbitrary delays.
-> 
-> Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-> ---
->  .../android-gadget-start                      | 35 +++++++++++++++++--
->  1 file changed, 32 insertions(+), 3 deletions(-)
+From: Shaik Moin <careers.myinfo@gmail.com>
 
-CC'ing Devendra, who changed it from 3 to 10 seconds.
+Backport the fix for CVE-2025-62594
 
-What was the issue? Was it UDC device not being registered or was it
-something else?
+Changes are made with 7.0.10 version code and only required and
+compatible code is taken into patch.
+image-private.h:-
+Integrated only the essential and compatible updates from the 7.0.10
+upstream patch. Specifically, the changes related to the Macro's and
+CastDoubleToPtrdiffT were adopted, as these updates are directly tied to
+the vulnerability fix. The remaining modifications in this file were
+excluded because they do not affect the execution paths relevant to our
+codebase.
+composite.c:-
+This file was intentionally left unchanged. The upstream patch contains
+only a formatting update (a trailing space adjustment) with no
+functional relevance or security impact, so the change was not included
+in our patch.
+enhance.c:-
+All functional hunks from the upstream vulnerability fix were applied.
+These modifications directly contribute to addressing the CVE by
+strengthening bounds handling and improving input validation in the
+enhancement routines.
 
-> 
-> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
-> index 76b5e29624..ecc9a0ff84 100644
-> --- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
-> +++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
-> @@ -2,8 +2,37 @@
->  
->  set -e
->  
-> -sleep 10
-> +n=0
-> +while true; do
-> +    # Pick first available UDC as default. Set UDC_NAME in env to override.
-> +    udcname="${UDC_NAME:-$(ls -1 /sys/class/udc 2>/dev/null | head -n 1)}"
->  
-> -ls /sys/class/udc/ | head -n 1 | xargs echo -n > /sys/kernel/config/usb_gadget/adb/UDC
-> +    if [ $n -eq 30 ]; then
-> +        echo "Timeout waiting for UDC configuration"
-> +        exit 1
-> +    fi
+Signed-off-by: Shaik Moin <careers.myinfo@gmail.com>
+---
+ .../imagemagick/files/CVE-2025-62594.patch    | 197 ++++++++++++++++++
+ .../imagemagick/imagemagick_7.0.10.bb         |   1 +
+ 2 files changed, 198 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/files/CVE-2025-62594.patch
 
-The more I look at it, the more it seems that whole ADB support should
-be rewritten to use udev and generators to start adb only once the UDC
-gets registered in the system (and start it for every UDC that is
-present).
-
-> +
-> +    if [ ! -e /sys/kernel/config/usb_gadget/adb/UDC ]; then
-
-Why do you need this?
-
-> +        echo "Waiting for configfs usb_gadget to be initialized... ($n/30)"
-> +        sleep 1
-> +        n=$((n + 1))
-> +        continue
-> +    fi
-> +    configfs_udc="$(cat /sys/kernel/config/usb_gadget/adb/UDC 2>/dev/null || true)"
-> +
-> +    if [ -n "$udcname" ] && [ "$configfs_udc" = "$udcname" ]; then
-> +        echo "UDC $udcname successfully configured for USB ADB Gadget"
-> +        break
-> +    fi
-> +
-> +    if [ -z "$udcname" ]; then
-> +        echo "Waiting for UDC to appear... ($n/30)"
-> +    else
-> +        echo "Setting UDC $udcname for USB ADB Gadget usage"
-> +        printf '%s' "$udcname" > /sys/kernel/config/usb_gadget/adb/UDC
-> +    fi
-> +
-> +    sleep 1
-> +    n=$((n + 1))
-> +done
->  
-> -echo "Setting UDC $(ls /sys/class/udc/ | head -n 1) for USB ADB Gadget usage"
-> 
-
+diff --git a/meta-oe/recipes-support/imagemagick/files/CVE-2025-62594.patch b/meta-oe/recipes-support/imagemagick/files/CVE-2025-62594.patch
+new file mode 100644
+index 0000000000..66670a61df
+--- /dev/null
++++ b/meta-oe/recipes-support/imagemagick/files/CVE-2025-62594.patch
+@@ -0,0 +1,197 @@
++From 766d3f6eb8a536dd33ce9b43df361e13e34bcf45 Mon Sep 17 00:00:00 2001
++From: Shaik Moin <careers.myinfo@gmail.com>
++Date: Tue, 7 Apr 2026 15:31:24 +0530
++Subject: [PATCH] imagemagick: Fix CVE-2025-62594
++
++ImageMagick CLAHE : Unsigned underflow and division-by-zero lead to OOB pointer arithmetic and process crash (DoS)
++Reference - https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-wpp4-vqfq-v4hp
++
++CVE: CVE-2025-62594
++
++Upstream-Status: Backport [https://github.com/ImageMagick/ImageMagick/commit/7b47fe369eda90483402fcd3d78fa4167d3bb129]
++
++Changes are made with 7.0.10 version code and only required and
++compatible code is taken into patch.
++In image-private.h file, only couple of "MACRO's" and
++"CastDoubleToPtrdiffT" is taken as other functions are not effecting our
++current code.
++Composite.c file - is not taken in consideration as the change is for a
++space " ".
++Enhance.c file - All hunks are taken in our current code.
++
++Signed-off-by: Cristy <urban-warrior@imagemagick.org>
++Signed-off-by: Shaik Moin <careers.myinfo@gmail.com>
++---
++ MagickCore/enhance.c       | 45 ++++++++++++++++++++------------------
++ MagickCore/image-private.h | 26 ++++++++++++++++++++++
++ 2 files changed, 50 insertions(+), 21 deletions(-)
++
++diff --git a/MagickCore/enhance.c b/MagickCore/enhance.c
++index 23134d5..54b2695 100644
++--- a/MagickCore/enhance.c
+++++ b/MagickCore/enhance.c
++@@ -69,6 +69,7 @@
++ #include "MagickCore/option.h"
++ #include "MagickCore/pixel.h"
++ #include "MagickCore/pixel-accessor.h"
+++#include "MagickCore/pixel-private.h"
++ #include "MagickCore/quantum.h"
++ #include "MagickCore/quantum-private.h"
++ #include "MagickCore/resample.h"
++@@ -320,11 +321,8 @@ static void ClipCLAHEHistogram(const double clip_limit,const size_t number_bins,
++   */
++   cumulative_excess=0;
++   for (i=0; i < (ssize_t) number_bins; i++)
++-  {
++-    excess=(ssize_t) histogram[i]-(ssize_t) clip_limit;
++-    if (excess > 0)
++-      cumulative_excess+=excess;
++-  }
+++    if (histogram[i] > clip_limit)
+++      cumulative_excess+=(ssize_t) (histogram[i]-clip_limit);
++   /*
++     Clip histogram and redistribute excess pixels across all bins.
++   */
++@@ -483,9 +481,6 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++   MemoryInfo
++     *tile_cache;
++ 
++-  unsigned short
++-    *p;
++-
++   size_t
++     limit,
++     *tiles;
++@@ -494,14 +489,15 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++     y;
++ 
++   unsigned short
++-    *lut;
+++    *lut,
+++    *p;
++ 
++   /*
++     Constrast limited adapted histogram equalization.
++   */
++   if (clip_limit == 1.0)
++     return(MagickTrue);
++-  tile_cache=AcquireVirtualMemory((size_t) clahe_info->x*number_bins,
+++  tile_cache=AcquireVirtualMemory((size_t) clahe_info->x*number_bins,(size_t)
++     clahe_info->y*sizeof(*tiles));
++   if (tile_cache == (MemoryInfo *) NULL)
++     return(MagickFalse);
++@@ -512,7 +508,8 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++       return(MagickFalse);
++     }
++   tiles=(size_t *) GetVirtualMemoryBlob(tile_cache);
++-  limit=(size_t) (clip_limit*(tile_info->width*tile_info->height)/number_bins);
+++  limit=(size_t) (clip_limit*((double) tile_info->width*tile_info->height)/
+++    number_bins);
++   if (limit < 1UL)
++     limit=1UL;
++   /*
++@@ -537,7 +534,7 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++         tile_info->height,histogram);
++       p+=tile_info->width;
++     }
++-    p+=clahe_info->width*(tile_info->height-1);
+++    p+=CastDoubleToPtrdiffT((double) clahe_info->width*(tile_info->height-1));
++   }
++   /*
++     Interpolate greylevel mappings to get CLAHE image.
++@@ -578,6 +575,11 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++         }
++     for (x=0; x <= (ssize_t) clahe_info->x; x++)
++     {
+++      double
+++        Q11,
+++        Q12,
+++        Q21,
+++        Q22;
++       tile.width=tile_info->width;
++       tile.x=x-1;
++       offset.x=tile.x+1;
++@@ -600,15 +602,16 @@ static MagickBooleanType CLAHE(const RectangleInfo *clahe_info,
++             tile.x=clahe_info->x-1;
++             offset.x=tile.x;
++           }
++-      InterpolateCLAHE(clahe_info,
++-        tiles+(number_bins*(tile.y*clahe_info->x+tile.x)),     /* Q12 */
++-        tiles+(number_bins*(tile.y*clahe_info->x+offset.x)),   /* Q22 */
++-        tiles+(number_bins*(offset.y*clahe_info->x+tile.x)),   /* Q11 */
++-        tiles+(number_bins*(offset.y*clahe_info->x+offset.x)), /* Q21 */
++-        &tile,lut,p);
+++      Q12=(double) number_bins*(tile.y*clahe_info->x+tile.x);
+++      Q22=(double) number_bins*(tile.y*clahe_info->x+offset.x);
+++      Q11=(double) number_bins*(offset.y*clahe_info->x+tile.x);
+++      Q21=(double) number_bins*(offset.y*clahe_info->x+offset.x);
+++      InterpolateCLAHE(clahe_info,tiles+CastDoubleToPtrdiffT(Q12),
+++        tiles+CastDoubleToPtrdiffT(Q22),tiles+CastDoubleToPtrdiffT(Q11),
+++        tiles+CastDoubleToPtrdiffT(Q21),&tile,lut,p);
++       p+=tile.width;
++     }
++-    p+=clahe_info->width*(tile.height-1);
+++    p+=CastDoubleToPtrdiffT((double) clahe_info->width*(tile.height-1));
++   }
++   lut=(unsigned short *) RelinquishMagickMemory(lut);
++   tile_cache=RelinquishVirtualMemory(tile_cache);
++@@ -661,10 +664,10 @@ MagickExport MagickBooleanType CLAHEImage(Image *image,const size_t width,
++     (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",image->filename);
++   range_info.min=0;
++   range_info.max=NumberCLAHEGrays-1;
++-  tile_info.width=width;
+++  tile_info.width=MagickMax(width,2);
++   if (tile_info.width == 0)
++     tile_info.width=image->columns >> 3;
++-  tile_info.height=height;
+++  tile_info.height=MagickMax(height,2);
++   if (tile_info.height == 0)
++     tile_info.height=image->rows >> 3;
++   tile_info.x=0;
++diff --git a/MagickCore/image-private.h b/MagickCore/image-private.h
++index 8ce0208..eaed34f 100644
++--- a/MagickCore/image-private.h
+++++ b/MagickCore/image-private.h
++@@ -38,6 +38,8 @@ extern "C" {
++ #define MagickPHI    1.61803398874989484820458683436563811772030917980576
++ #define MagickPI2    1.57079632679489661923132169163975144209858469968755
++ #define MagickPI  3.14159265358979323846264338327950288419716939937510
+++#define MAGICK_PTRDIFF_MAX  (PTRDIFF_MAX)
+++#define MAGICK_PTRDIFF_MIN  (-PTRDIFF_MAX-1)
++ #define MagickSQ1_2  0.70710678118654752440084436210484903928483593768847
++ #define MagickSQ2    1.41421356237309504880168872420969807856967187537695
++ #define MagickSQ2PI  2.50662827463100024161235523934010416269302368164062
++@@ -53,6 +55,30 @@ extern "C" {
++ #define UndefinedCompressionQuality  0UL
++ #define UndefinedTicksPerSecond  100L
++ 
+++static inline ptrdiff_t CastDoubleToPtrdiffT(const double x)
+++{
+++  double
+++    value;
+++
+++  if (IsNaN(x) != 0)
+++    {
+++      errno=ERANGE;
+++      return(0);
+++    }
+++  value=(x < 0.0) ? ceil(x) : floor(x);
+++  if (value < ((double) MAGICK_PTRDIFF_MIN))
+++    {
+++      errno=ERANGE;
+++      return(MAGICK_PTRDIFF_MIN);
+++    }
+++  if (value > ((double) MAGICK_PTRDIFF_MAX))
+++    {
+++      errno=ERANGE;
+++      return(MAGICK_PTRDIFF_MAX);
+++    }
+++  return((ptrdiff_t) value);
+++}
+++
++ static inline ssize_t CastDoubleToLong(const double x)
++ {
++   if (IsNaN(x) != 0)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+index 9bc857b715..d6e1c647c7 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.10.bb
+@@ -54,6 +54,7 @@ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git;branch=main;protocol=htt
+     file://CVE-2026-22770.patch \
+     file://CVE-2026-23874.patch \
+     file://CVE-2026-23876.patch \
++    file://CVE-2025-62594.patch \
+ "
+ 
+ SRCREV = "35b4991eb0939a327f3489988c366e21068b0178"
 -- 
-With best wishes
-Dmitry
+2.34.1
+
 
