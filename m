@@ -1,113 +1,91 @@
-Return-Path: <hfranco@baylibre.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC9ABF8D770
-	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 19:18:16 +0000 (UTC)
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.23472.1776367090671295097
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D60BF8D771
+	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 19:23:36 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23593.1776367406269877639
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 12:18:10 -0700
+ Thu, 16 Apr 2026 12:23:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20251104.gappssmtp.com header.s=20251104 header.b=ZGUmw8sx;
- spf=pass (domain: baylibre.com, ip: 74.125.82.45, mailfrom: hfranco@baylibre.com)
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-1279eced0b9so12358242c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 12:18:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=X1+CQnbc;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-482f454be5bso10463495e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 12:23:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776367090; x=1776971890; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IF5e5lurc45DRbodDAj1WKSyhqlmjjW8lS3K8E2rByI=;
-        b=ZGUmw8sxGFrcA5AQOXrP6/3XKX6j86fzxziblmE88AdKIkSVxCuFbDRdEZUiwc4+ll
-         GdG6zzvF0S10n+9PYx7jHdEmPZOwmto180EHSqK00OZ5mCjc6P81SFOTI7Ul9YQiEBld
-         TX7t3WSEIAMkFKAu5iX6DIMevRjPSY9y+HpMThoxAnHggKBVdhcoMs1d9QXOfluZRbWK
-         zz37D2APmYVHWRyso749NBBptvPNGDpje1mLSxP19T0eAh94Q7sOvSzlXI35AQOeH3eu
-         nr4rXkjz7l3eSbUan3adfG2KhPy6M3EbD3K37wA+byxexFMqPnVEJDeE0klCBhfrrVbs
-         bEXw==
+        d=gmail.com; s=20251104; t=1776367405; x=1776972205; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=cAUIN7Rlq9oHRv1kGS+LUPhlkVnPKcblWEG0/8n8sFk=;
+        b=X1+CQnbc7GQ/Clbb8IR0czVTO86hWLnDU/KoHEBW1PnSBYQN7GNFyOQa/5Rw8JlU8m
+         /TZ8pcxGWUV2ZcuGeFIwg75oAxs7WnNKf+WZgwxLDxy6a4XteiXQJBcYePkJvKG5JsMd
+         GHoa7otjYiYunC3nlHMqfAIPXTjeh/80NmATax4HlUyPtJWqpySJKtPE4naPhEYhi0wU
+         nO1+PJnYLCrO8n/cuOVQ0zoU3vPTNF+3ZZnbi+4IQE12PR2YAQ1ykkawlrXk56qEm0FM
+         hyhqP/CR9VDjNXKx41ihxlg+3ybkaXWzTuFPWEf9Lempalz07hBOCvfZsXxAlCZg1dRj
+         OpPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776367090; x=1776971890;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IF5e5lurc45DRbodDAj1WKSyhqlmjjW8lS3K8E2rByI=;
-        b=VTxIa533aSLBlnmOQm9zXDA3NC5Fq+7tpDnB9SIJTmdP2CdagB6cCjsSMvVIOLhCnj
-         qfZ1Vmcv7kmSGQA1kkfLxpXf6jjYaFx/UVd4XOzqtChHjOCgD8n/LfJ15rJmC6K3iHho
-         ofi9y7Z3/1IuFJdF3ylrA6ouaNHqd//CLmPEFBW+0vzz6UcZNrEvtdRxIyTJD7YG8rne
-         sZGibwzSWyBY3Mw71yFzwcORugdwOxoZJDCnF1ThwhJAvsMlMmapkn6YIJ0HyJQyQ7/d
-         pO6OVX/fi6R/OoFXzuqTkdYhyle+mb34gSL1sKVji0v/jkveQkOJg++cr70CQB/QXGjY
-         r5wA==
-X-Gm-Message-State: AOJu0YwVXFUUejkNG3B4qyYBGBJoPwfHpKDgYVK8sxqxy4hLPueN8CvM
-	qx6hpZXwirGHl8mWd8D+NQOPx2Y9S41sQGmU/goKYs92hpK2pqI5HwqVfrIdrqTKMfo/g1u/POY
-	MBX3D9fU=
-X-Gm-Gg: AeBDievgkc9Lgfivh2v7WPuLlskl5TK/ofmLfHnVMPYyGU9scNEuEJFsBYeUPDmEhOh
-	ncsjBKhUyRMzmEHs5xTxFFbcMstJcOEIbvYSblJOWs/dS9UOiWKtv5U0PpLVD7ELInzNKLVTruZ
-	Dh4foc5WH9Jd06517J+ozOJJWkcOPqLLAfER61XkdvlGvCusLgl0rOaqTbDiH69j5TYrLr4aAWI
-	NiNKbrfH5Q7oBEEnReKag/Tb/qAPIgU1R8a9USEc3opTrbCAsA/Olh469tRuVUjOF8vnakIRp9y
-	vZ4yX/WMVkJ945el3vDnZk1YdZU9O+/31IfXBfcIhqMvNd4LN8Ow018knUDZHTFvx2FndLjG85H
-	iTfPJmErE3x/LA1ALAFfktqAwvZwBmYfJGeTBPJ38GoWb5GcDbyN3eTOj7ueXEWIcB53aEmGUKn
-	Kfx9Pau6ge0cxFvM38FIA/2M9ioooS7zFjpAarv2WBWZJlC0yO9KIXtRw9rzsbVsmRguti
-X-Received: by 2002:a05:7022:995:b0:128:d5f1:d595 with SMTP id a92af1059eb24-12c727ef249mr240124c88.10.1776367089396;
-        Thu, 16 Apr 2026 12:18:09 -0700 (PDT)
-Received: from hiagonb ([2804:14c:4c5:9534::d153])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c5e61db6bsm7076412c88.1.2026.04.16.12.18.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 12:18:08 -0700 (PDT)
-From: Hiago De Franco <hfranco@baylibre.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Trevor Gamblin <tgamblin@baylibre.com>
-Subject: [meta-oe][PATCH] uutils-coreutils: make selinux PACKAGECONFIG dependend on clang-layer
-Date: Thu, 16 Apr 2026 16:17:54 -0300
-Message-ID: <20260416191754.3910026-1-hfranco@baylibre.com>
-X-Mailer: git-send-email 2.51.0
+        d=1e100.net; s=20251104; t=1776367405; x=1776972205;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cAUIN7Rlq9oHRv1kGS+LUPhlkVnPKcblWEG0/8n8sFk=;
+        b=puFcnbkJrB9TnrqKOJAJGzIXa9ZySnVQ8fYTtXOfsd3GAe57Q2H/cRoFuj6fV35DuU
+         JDML7oM6mtPJnLqdjL/TPeuNWkhwLNry6Tt7Dx2LK4r2SdFL7a2MEnHtTt26nPwdWUU1
+         99QnPmrUDjFPVaU73xxshR4rym7VDG29vpiSMxnYbxArHsj0CTHs0WhdAiYQ+8yn0s28
+         Mdyhk2xny4bW7wQIFxaXPcK+2XClJYSyLi5NTkpXDPQJmpqxNLWUmPTy/GVTKZUG6aDo
+         jJDWm8wFLhobfMkgwTXEn1XX9s5vu8wHh3VJeZw4p/AriIRxLk+q2fFvLZMN3qOu6dGV
+         0jUg==
+X-Forwarded-Encrypted: i=1; AFNElJ/dUKVBnh/LBIEDbBoF6HF52IO202dkAVJh4bMMhlZDE1Va4orVEuFtU+X3gpT1zK0YXBBQj/d0XEiqzgyrnslOtlg=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yw+bAUu6Y3z2vWGBz7QQ8e6ofoRsEIZJcbK7olRxh4GFx/MVGz6
+	S8igS8EUFJmyh4ZhisaAZeqrvL9yMRS+QpQuRN3LoZPkIi27gUZcBSIT
+X-Gm-Gg: AeBDieteNG0MQZr9hid8G+wVQRFnJGiCD1r98punlEqATm5RKixCPXE7UsfLT4dTSv3
+	i7kMwRQfyBUje4v+qt3YKUJqyDVuFxj6Ws+d9VLvkjH2/5+QSGt6o4PErcFOpuMxN/JU39Pjyci
+	U6j+efHBs1CEWOPgm1SNUu24SCu7Twe4leBfFI8XOv6hfx3FZgiV6Y6LphOOWYjpuyyDE4zuL9D
+	WW1M6zzDRfOpBS9R39aDEJ9zjkjLhZPkZukWgtJolL3Fbr5+FmQir4gtqfDCNEXuGniW59SMfSa
+	LKKLGrZ4Pds1V1ck7GA10xiYWpMn+X1zK6O3+QhtwvmggPZWnymsVWRJFrYq6KKJ5n9qev/0YXz
+	Alq97O1TsmTC0Yr4f1SWqz64TtOHFEovbkOjm3c+6je2M0M68XdiaoMlGIKm7j1bEI0PZ8iPoAW
+	m26ljtkofgRRdpj+8SqxkyQFqbPLTgxaDze2kC0OmlAg==
+X-Received: by 2002:a05:600c:6099:b0:485:3c2e:60d5 with SMTP id 5b1f17b1804b1-488fa7d0f01mr7123585e9.2.1776367404459;
+        Thu, 16 Apr 2026 12:23:24 -0700 (PDT)
+Received: from [192.168.1.106] ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488f581d93bsm75618905e9.8.2026.04.16.12.23.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Apr 2026 12:23:24 -0700 (PDT)
+Message-ID: <7a1772a1-238f-487c-ae6f-b258261d783a@gmail.com>
+Date: Thu, 16 Apr 2026 21:23:23 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH] rocksdb: remove rocksdb_static
+ from default PACKAGECONFIG
+To: mail2szahir@gmail.com, openembedded-devel@lists.openembedded.org
+References: <20260415182040.1193544-1-zahir.basha@partner.bmwgroup.com>
+ <2b4203a9-6dd0-48b9-bb67-91c134acc010@gmail.com>
+ <1451444.1776366643402500662@lists.openembedded.org>
+Content-Language: en-US
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+In-Reply-To: <1451444.1776366643402500662@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 19:18:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126407
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 19:23:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126408
 
-SELinux layer build fails if 'meta-clang' is not present, which
-shouldn't happen, since 'meta-clang' isn't a dependency.
+On 4/16/26 21:10, aszh07 via lists.openembedded.org wrote:
+> On Wed, Apr 15, 2026 at 11:57 PM, Gyorgy Sarvari wrote:
+> 
+>     PACKAGECONFIG ??= "bzip2 zlib lz4 gflagsi rocksdb_static"
+> 
+> 
+> Just a heads-up—I spotted a typo in the PACKAGECONFIG string. It says
+> gflagsi instead of gflags.
+> will you correct the typo or can i send the patch for this?
+> 
+> 
 
-If 'selinux' is on DISTRO_FEATURES, PACKAGECONFIG calls
-'clang-native' even if uutils-coreutils is not being used (this is
-enough to make the recipe fails on parsing time if meta-clang is not
-present).
-
-Make 'selinux' PACKAGECONFIG dependend on clang-layer, and print a
-warning if the user wants selinux support o uutils-coreutils but haven't
-add clang-layer.
-
-Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
----
- .../uutils-coreutils/uutils-coreutils_0.8.0.bb       | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-index 8b9b4dc199..99beb70104 100644
---- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-+++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-@@ -18,7 +18,17 @@ require ${BPN}-crates.inc
- PROVIDES = "coreutils"
- RPROVIDES:${PN} = "coreutils"
- 
--PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+# This is required since uutils-coreutils uses selinux features that require clang-layer
-+python __anonymous() {
-+    if bb.utils.contains('DISTRO_FEATURES', 'selinux', True, False, d):
-+        if bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', True, False, d):
-+            d.appendVar('PACKAGECONFIG', ' selinux')
-+        else:
-+            bb.warn("selinux is enabled but clang-layer is not in BBFILE_COLLECTIONS, "
-+                "selinux support will be disabled. Add meta-clang to your bblayers.conf "
-+                "if selinux support on uutils-coreutils is required.")
-+}
- PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
- PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
- 
--- 
-2.51.0
-
+Please send a patch. Thanks
 
