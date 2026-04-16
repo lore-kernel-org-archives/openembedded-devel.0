@@ -1,155 +1,103 @@
-Return-Path: <hfranco@baylibre.com>
+Return-Path: <scott.murray@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E32FAF8D77C
-	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 21:07:15 +0000 (UTC)
-Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.26319.1776373631836070815
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EDD2F8DFC5
+	for <webhook@archiver.kernel.org>; Thu, 16 Apr 2026 21:11:54 +0000 (UTC)
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.26717.1776373910293622718
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 14:07:12 -0700
+ Thu, 16 Apr 2026 14:11:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@baylibre-com.20251104.gappssmtp.com header.s=20251104 header.b=yOWQY6hL;
- spf=pass (domain: baylibre.com, ip: 74.125.82.47, mailfrom: hfranco@baylibre.com)
-Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-12c1a170a50so2805c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 14:07:11 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=gN3VnoAW;
+ spf=pass (domain: konsulko.com, ip: 209.85.219.41, mailfrom: scott.murray@konsulko.com)
+Received: by mail-qv1-f41.google.com with SMTP id 6a1803df08f44-8acb3daf2aaso66455516d6.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 14:11:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre-com.20251104.gappssmtp.com; s=20251104; t=1776373631; x=1776978431; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Y0gv8WNQMHZqduQcHI5dJTn5HspiB/RABqGkAt1FC4Y=;
-        b=yOWQY6hLqxFNhNCj5SI3y86KNDI5ZZSt8tqeJYqMKlPH/3MIRftbMw1V37wmfdTIsu
-         NE9DanRGs3bYCIzt8OLsKIIjdYTfjaOMXJliX10RaGwQaQXi2DEpjpAB9SWGHDK+4bS2
-         reVDrAsMziemsRNM793qkJx9p2SaE13W0N0LLXKzZOI7F167BDTp8bwKBffOOmgDn+Kq
-         LSF8nRZvV0J4fHpZMmRyq3xEhdDrfqgVkmc7xAWIhUEaUxb9NHTL0kOYHw68lPRoaxKa
-         Jf5cqoltHUID7rY+fCzJdyQ6R2zG9xMLSIoMe2WDzPfFpmuKXI5nz60Z0nTBhyvAVk6Y
-         wTDQ==
+        d=konsulko.com; s=google; t=1776373909; x=1776978709; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3lZLiZG2kpCDK45GDI7HHsEur3Qs1yD9tkA9aP+7MaI=;
+        b=gN3VnoAWN/aZO80RaDKSWmUlwlc4Ct3//Fej30Ypm74aIa8NksElN/ay25YE3Zsng5
+         +NZEUwgNY2u9May+q0hVmfWhv3KjyxUuhPLKgJqEbetg4YzCCvDtMZmR/8KIadsXuUWd
+         v8P59iiqlw7/Lr//Xfoymf5MO2cbwUGqruiCQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776373631; x=1776978431;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Y0gv8WNQMHZqduQcHI5dJTn5HspiB/RABqGkAt1FC4Y=;
-        b=GuUppMRqOS8w7O++rn8aqpr3602u5RvC8YKziiV7hfT+tG+kCOiohMe2cKBixKYcjl
-         RoEvVKQb+ETkP7CjtvNR22MgvvpwrnO3x9NAezqujNSSurBDy6XZMRNj5pBU3Jp+7EBk
-         sfGp803Fcs2vw9Buy2NPI4XdpDYOy5rHd7Edynf57rYeEgEayQN2Z88vhJvzgRabRL1f
-         MGZ3HK6gHMxWV8mqsf1YId2/dJT/lM52vquRliuUzwZ2vzi4bcHYL+JXEkvtUQD78ac/
-         9OlFrL/L8WnE9V6XEpnKcw5l0aPSnGzGUCc3QUL77BZBqE2uuN5k5YtHKsNxLiUUJw1e
-         x9SQ==
-X-Gm-Message-State: AOJu0Ywg4CVnlO4MNxobBeqaQdbGP8F/6n7aDAyXG+xdsj2vcXhu9XRs
-	9UK2Y4tG5OAhkTrSS1UzoKjeW/NUxteAnz6l9gcgFYyGaiQoxOS9FuyFM0nu2sReMnY=
-X-Gm-Gg: AeBDievTB/fvPprDz+p+VL1ldb5aZ4fWfdd9aPnHzh7i991cOqWCQh6c+xXP0uPJNcD
-	upWxrBWZO4gWqEEBEyqeCc/3GWG2X18jp9l5XfThKRBYqRUoixzsHISArJOmJu4H6Ujh3FSfkDJ
-	QAdCgPf9jkfCmkYP+QkyOdxqps3MDHdSqJMf54Mw21NLZCc0kvkT8jZUhfyEo0lgIsWdchtl5p7
-	z2UAgW05UMGGRtnBQkTsTxKQNhlI7KCeHdROPTJra5lpoLDVFC5GV2PRMzo1k8uslYwbw9ATawo
-	FPPsAvaWvWrNXHm6+OJIb7i2tsmH/cl7l0Gt2XxSW6Ok35wlk1txPBYXqIHK+bjqObv8aqOm0aV
-	mZ7Xb7NqkLXtQ7ItFPP6OggfS1EpDRG2u38y72VFtyxroyW85Pl0fJY3BhGYMdKnXF4BtwmDowu
-	8xCWRy+IyJisoW9fj07jVkRDgRIYDoenT6GnAMkxpgo9WqeDcZrJ/S9ujgHFpRBCAquWRuVSNfZ
-	dMmbQs=
-X-Received: by 2002:a05:7022:1e0f:b0:12b:ec15:69d2 with SMTP id a92af1059eb24-12c72865996mr423128c88.33.1776373630800;
-        Thu, 16 Apr 2026 14:07:10 -0700 (PDT)
-Received: from hiagonb ([2804:14c:4c5:9534::d153])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12c5e62b9d1sm7387659c88.5.2026.04.16.14.07.08
+        d=1e100.net; s=20251104; t=1776373909; x=1776978709;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3lZLiZG2kpCDK45GDI7HHsEur3Qs1yD9tkA9aP+7MaI=;
+        b=EgsIXa1ZYGy4mepWGPaT3tIIrgDXgypKVqIvZtOlrm3NgTX1FF3VMPYtxqiF1UgZ8U
+         C496q/zTj8cpMEc2Vpti42m0psSjyclM3LuwvFTRoAC4BljWrTWaImVtoL+jD+P6qgqm
+         D+Mz15J3Ky8EDDmxoo0jcsjGisLpAD6HdlWJ3L3IwITFSMOK7smCqmQuT7hqLwqO+UDp
+         za8Xs19qAk33TrLdkW/VCPgssrGPiehJFqsKd2nzg0MK6I25JS6EnS7IS27KWTOy0IC1
+         NR+tL0erj/GIBxofhkGuHifhAfPro62ruz7DGv7OpIWtXF5+vWT2FHzkURV3W1r5d6WK
+         +pzA==
+X-Gm-Message-State: AOJu0YyI+R/YbCPureYFDjiy91WglnnP9KJ/HzoO+W0fk9BkvPRzFZbs
+	ZxRr8vfMyqofRTqFTCIcOcFH+9XzV59b0ZHqDLYNMBoijn4j+iZlv/HjFP0+or9rCRAtN/8V4Tg
+	TOWDl
+X-Gm-Gg: AeBDiev90jk8dGSJIJVUOt5lynd9+Z40PoP/y43c/oBSYOQL6d04U4xi1LuXBjo58xj
+	zTfcKYRLXhdKlDq6J7Y8J+XgTmkZ6bvF0VCF4aue2tiyQA+u9zO3s9zJnjdnUg43gcwVSes1MMK
+	cH7+WoKFicw8ld3mw6ZOauXtZmE7DKG258mWmn8xsw9lUXH4w0XberisPbxnbAp+Gmbf+PhGW8f
+	Y1K75cz0SxcXsc0UpOEfrJKZZ4c96m95w49jLdB/arO+EqvNIJ5pn0MiDtXZCVrUbGI4/ltwevk
+	M1fYEDP2BcBaPITVD3PGKqItLNZr//iDQLOXucbt8/rRqhvvSbDJvK0XrRm9liHaMCjmozXp05B
+	BCraou1vSaDFu2gV7Ak/g8kkhbhPxFnYvTguwmbvTho53YPSM/l3fJx2GH6XmGSrOAnljiWAnuh
+	twVagZFZjEqJOOxvxgdusJKOJId5saQJf8y6aaSakMCiKUioM7C0Uc6IBib9EGhY76zCw6ap7Bb
+	dw972O3/C31YunI13rXFR6ibrhPy1ZHuriOrXw9wNk4m/8oEQLDegfm7KCfVDIfCnZ1CDjRTu0=
+X-Received: by 2002:a05:6214:29e9:b0:89c:6bbd:76d8 with SMTP id 6a1803df08f44-8b0280b2f12mr3154796d6.19.1776373908872;
+        Thu, 16 Apr 2026 14:11:48 -0700 (PDT)
+Received: from ghidorah.spiteful.org (107-179-213-3.cpe.teksavvy.com. [107.179.213.3])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-8ae6cbbbb9asm45807086d6.35.2026.04.16.14.11.48
+        for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2026 14:07:10 -0700 (PDT)
-Date: Thu, 16 Apr 2026 18:07:05 -0300
-From: Hiago De Franco <hfranco@baylibre.com>
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Trevor Gamblin <tgamblin@baylibre.com>
-Subject: Re: [oe] [meta-oe][PATCH] uutils-coreutils: make selinux
- PACKAGECONFIG dependend on clang-layer
-Message-ID: <y6m2etmgi3tlokwm75xlltjsecqnt6r2r5qxhhjs3i6u7m7sas@qgv42ntkotug>
-References: <20260416191754.3910026-1-hfranco@baylibre.com>
- <a64fce2a-a609-47e7-a60f-634ddee418f6@gmail.com>
+        Thu, 16 Apr 2026 14:11:48 -0700 (PDT)
+From: Scott Murray <scott.murray@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] mpd: Fix systemd user unit installation
+Date: Thu, 16 Apr 2026 17:11:36 -0400
+Message-ID: <20260416211136.49864-1-scott.murray@konsulko.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a64fce2a-a609-47e7-a60f-634ddee418f6@gmail.com>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 21:07:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126414
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 21:11:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126415
 
-On Thu, Apr 16, 2026 at 09:33:48PM +0200, Gyorgy Sarvari wrote:
-> On 4/16/26 21:17, Hiago De Franco via lists.openembedded.org wrote:
-> > SELinux layer build fails if 'meta-clang' is not present, which
-> > shouldn't happen, since 'meta-clang' isn't a dependency.
-> > 
-> > If 'selinux' is on DISTRO_FEATURES, PACKAGECONFIG calls
-> > 'clang-native' even if uutils-coreutils is not being used (this is
-> > enough to make the recipe fails on parsing time if meta-clang is not
-> > present).
-> > 
-> 
-> 
-> But meta-clang doesn't provide clang-native anymore, it's a shadow of
-> what it used to be - clang-native comes from oe-core. Or am I
-> misunderstanding the problem here? I don't really get the role of
-> meta-clang with this recipe.
+systemd_system_unitdir was accidentally used as the destination for
+the user systemd unit, which means it overwrites the system unit.
+Correct it to systemd_user_unitdir to fix starting with the system
+unit.
 
-You are correct, actually this is only affecting Scarthgap branch. I
-fist spotted this on scarthgap, changed to master to test it too but I
-probably did something wrong and kept the clang-layer or something
-during my test. Sorry, my mistake.
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+---
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.9.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Thanks for letting me know clang-native is actually on oe-core now, I
-fount the commit [0]. So maybe I should propose a backport of this to
-fix the scarthgap issue?
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.9.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.9.bb
+index cb6bd1569f..0c3d672949 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.9.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.24.9.bb
+@@ -24,7 +24,7 @@ SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=master;protocol=https;t
+ SRCREV = "7a9afa059e95668c912f779219ee8fe1e44dd2aa"
+ 
+ 
+-EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)} \
++EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_user_unitdir}', '-Dsystemd=disabled', d)} \
+     -Dadplug=disabled \
+     -Dsndio=disabled \
+     -Dshine=disabled \
+@@ -93,6 +93,8 @@ do_install:append() {
+     rm -rf ${D}${datadir}/icons
+ }
+ 
++FILES:${PN} += "${systemd_user_unitdir}"
++
+ RPROVIDES:${PN} += "${PN}-systemd"
+ RREPLACES:${PN} += "${PN}-systemd"
+ RCONFLICTS:${PN} += "${PN}-systemd"
+-- 
+2.53.0
 
-I will do a test now on Scarthgap, cherry-picking this commit to see how
-it goes.
-
-[0] https://github.com/openembedded/openembedded-core/commit/43ba5ed17e069b13cd43c36650524a0113c81955
-
-Thanks,
-Hiago.
-> 
-> 
-> 
-> > Make 'selinux' PACKAGECONFIG dependend on clang-layer, and print a
-> > warning if the user wants selinux support o uutils-coreutils but haven't
-> > add clang-layer.
-> > 
-> > Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
-> > ---
-> >  .../uutils-coreutils/uutils-coreutils_0.8.0.bb       | 12 +++++++++++-
-> >  1 file changed, 11 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-> > index 8b9b4dc199..99beb70104 100644
-> > --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-> > +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
-> > @@ -18,7 +18,17 @@ require ${BPN}-crates.inc
-> >  PROVIDES = "coreutils"
-> >  RPROVIDES:${PN} = "coreutils"
-> >  
-> > -PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
-> > +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-> > +# This is required since uutils-coreutils uses selinux features that require clang-layer
-> > +python __anonymous() {
-> > +    if bb.utils.contains('DISTRO_FEATURES', 'selinux', True, False, d):
-> > +        if bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', True, False, d):
-> > +            d.appendVar('PACKAGECONFIG', ' selinux')
-> > +        else:
-> > +            bb.warn("selinux is enabled but clang-layer is not in BBFILE_COLLECTIONS, "
-> > +                "selinux support will be disabled. Add meta-clang to your bblayers.conf "
-> > +                "if selinux support on uutils-coreutils is required.")
-> > +}
-> >  PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
-> >  PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
-> >  
-> > 
-> > 
-> > 
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#126407): https://lists.openembedded.org/g/openembedded-devel/message/126407
-> > Mute This Topic: https://lists.openembedded.org/mt/118863961/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [skandigraun@gmail.com]
-> > -=-=-=-=-=-=-=-=-=-=-=-
-> > 
-> 
 
