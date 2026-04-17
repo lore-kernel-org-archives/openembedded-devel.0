@@ -1,221 +1,96 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <mail@michael-fitzmayer.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E1D8F436BB
-	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 16:21:20 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.49093.1776442874839317716
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8204BF436BD
+	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 16:38:00 +0000 (UTC)
+Received: from mailserv.regfish.com (mailserv.regfish.com [52.57.101.90])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.49463.1776443871833683535
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2026 09:21:15 -0700
+ Fri, 17 Apr 2026 09:37:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=sE/LvjRu;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-48334ee0aeaso8980445e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 09:21:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776442873; x=1777047673; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=9j33hUBeKK4zxwDAbWUn+QoiJcilhwkTShVqcp2e8oE=;
-        b=sE/LvjRumIFdSirbtMGKm9ls4vm59xx5OlsDCi7evnlRs2O1FqY0+sJaNQwEPgtATH
-         FP5/s5DEtjThymnHVqMi8mudb9jUn07YDNWFRzJXqqUlY9/Uic3AHVATqBBfsStVL2MN
-         BK1wCTO9vO37HNukU2CO0Zg9IN3XNRfyHxB23HyOZepJSYlkjRo8tppOH/zMvymWZwK1
-         VuyEkZQkiq13yBvBPLIVK29n7H6uE0S7UfntR0MmF22F5qc6R0slHqfFgbNZm7//0mgX
-         RO2ew0tSjQ3lEXnJQfUUHq8dWpia+dP2lEC/faoJT0ALnqlLjecIPNXItamMj0qCo1JD
-         l1BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776442873; x=1777047673;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9j33hUBeKK4zxwDAbWUn+QoiJcilhwkTShVqcp2e8oE=;
-        b=ohCjqTVbVjUkZOULkKXPLptqU8TxTjvSmaQwdoUOjioPUA0UeBRTaBxwpfqD087L4z
-         BeAkT+HxydGq3di399RWSfu+b3G6B69mk6H3uK8O157W05YOJIvSLtid9lDuctJ8Pbhj
-         UZIWV11822Ac1+b2O+qDw5NgPUbVDyNkTswEz9X8MY+OXuKpo52Sd8l2zMCiKBcuoCJy
-         Sq5+YcgWr+q/DdJPPCIkL26DkDocwYz4GvlzNOgGhqJdtEYbwT0VoVM+KsnNcto0rpLd
-         EjuPxv4cPZI66ivKBJx1GcTHN0t2E/c5vH35DD+Pw6ON5/t7cHtQKFuVyHk6erjEA2vC
-         yRgw==
-X-Gm-Message-State: AOJu0YyUugJ4UvNsnTToTSNlBxjf63EcJ7ZAMLjJn/bewrM0aIIZCbRu
-	PtphcUd6aUMCwT+v7TFuh3ankLOHjq3u6iCEr+B+KQS1pIUlil0R+9yB
-X-Gm-Gg: AeBDieurEuLgKUmwTttxQasrfU6yfaySxHK+p7AGvouXSbVlKnrykAe31ZgKveQ5gHo
-	gNIYO3HTUmtKG/7J7HGWdlWs+q93ExAwcyN5OQlTny+QcCAa7GP2YtHKpGUEz4umOl9YOfXetJg
-	HvXe/Py9qHOW1vaX/QYb+CY98Uws/k6/Hh+wnRuiO/8HdXvw4uGK8BajMJn1s2G0Le3rTX5FQWv
-	R0zEPeXCmlbf7SW0RqiEj+O1fWNm81ukmfw0wqDVEQbi1dGWPaKfHvuUZylldhvQ+7zxPeUv+9h
-	D3j5IQopo6MPS7VbqR2rlt7VG1hS39sQNndFnJvvWXTCGMuKcdt54/ZuY7oOzb8P92ZgMGjyTRh
-	nwuonRSMDgelRa9losnj48GAPQP3u5jqO5JaMvdrptG/KesBL418fxf4h6K1NIuClQdl5yxsrjP
-	3ICeE26ogYZ0QPrP1oYHwylFDtnpUSBEGzq39HNzDOIxdc8tIaY6PZ
-X-Received: by 2002:a05:600c:6296:b0:483:64b4:79da with SMTP id 5b1f17b1804b1-488fb7923a9mr51991315e9.26.1776442872921;
-        Fri, 17 Apr 2026 09:21:12 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fb794d2esm33951535e9.6.2026.04.17.09.21.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Apr 2026 09:21:12 -0700 (PDT)
-Message-ID: <4f2f37e1-321a-40ec-8881-af676788ad20@gmail.com>
-Date: Fri, 17 Apr 2026 18:21:12 +0200
+ dkim=none (message not signed); spf=none, err=permanent DNS error (domain: michael-fitzmayer.de, ip: 52.57.101.90, mailfrom: mail@michael-fitzmayer.de)
+Received: by mailserv.regfish.com (Postfix, from userid 706)
+	id AC1D1619C0; Fri, 17 Apr 2026 16:37:49 +0000 (UTC)
+Received: from DESKTOPB84SDL6 (ipservice-092-209-208-070.092.209.pools.vodafone-ip.de [92.209.208.70])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: 46272-0001)
+	by mailserv.regfish.com (Postfix) with ESMTPSA id 9575E619AE
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 16:37:49 +0000 (UTC)
+From: "Michael Fitzmayer" <mail@michael-fitzmayer.de>
+To: <openembedded-devel@lists.openembedded.org>
+References: <CAMKF1sqWpfSsFVSiBkiQCQkv0pjTSh1i9HJuX06E_EkBd4jmyQ@mail.gmail.com> <3323E3B7-6461-427C-9A02-0C108D4A139B@michael-fitzmayer.de> <6c6a6f90-f25c-4b85-9c00-665f0f4e21b4@gmail.com>
+In-Reply-To: <6c6a6f90-f25c-4b85-9c00-665f0f4e21b4@gmail.com>
+Subject: RE: [oe] [meta-oe][PATCH] canopenterm: update to release version 2.02
+Date: Fri, 17 Apr 2026 18:37:49 +0200
+Message-ID: <002301dcce88$8757bae0$960730a0$@michael-fitzmayer.de>
+X-Mailer: Microsoft Outlook 16.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] uutils-coreutils: make selinux
- PACKAGECONFIG dependend on clang-layer
-To: Hiago De Franco <hfranco@baylibre.com>
-Cc: openembedded-devel@lists.openembedded.org,
- Trevor Gamblin <tgamblin@baylibre.com>, majortomtosourcecontrol@gmail.com
-References: <20260416191754.3910026-1-hfranco@baylibre.com>
- <a64fce2a-a609-47e7-a60f-634ddee418f6@gmail.com>
- <18A6F268395035B3.1570320@lists.openembedded.org>
- <7cryzdxdowehb5ig7rd3boyt2kjheqrtchhgimeu76qz3dmvog@7i53kqjpxctl>
- <04d018b2-00d7-4147-8933-b84171bc20e4@gmail.com>
- <57p2oi523zvfjbffibnnbtlc2d6uc743up4s3tgxoai6ndczlh@b25xfcjuvfzs>
-Content-Language: en-US
-From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <57p2oi523zvfjbffibnnbtlc2d6uc743up4s3tgxoai6ndczlh@b25xfcjuvfzs>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Language: en-gb
+Thread-Index: AQJKQt64/2TAYQACMXA7jTidGpE1fAIf/n+GAfd7Msi0587sUA==
+Content-Type: multipart/signed;
+	boundary="=-=kCbnrWecPjR3hA=-=";
+	protocol="application/pgp-signature";
+	micalg=pgp-sha256
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 16:21:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126446
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 16:38:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126447
 
-On 4/17/26 15:56, Hiago De Franco wrote:
-> On Fri, Apr 17, 2026 at 06:14:14AM +0200, Gyorgy Sarvari wrote:
->>
->>
->> On 4/17/26 00:04, Hiago De Franco wrote:
->>> On Thu, Apr 16, 2026 at 06:07:05PM -0300, Hiago De Franco via lists.openembedded.org wrote:
->>>> On Thu, Apr 16, 2026 at 09:33:48PM +0200, Gyorgy Sarvari wrote:
->>>>> On 4/16/26 21:17, Hiago De Franco via lists.openembedded.org wrote:
->>>>>> SELinux layer build fails if 'meta-clang' is not present, which
->>>>>> shouldn't happen, since 'meta-clang' isn't a dependency.
->>>>>>
->>>>>> If 'selinux' is on DISTRO_FEATURES, PACKAGECONFIG calls
->>>>>> 'clang-native' even if uutils-coreutils is not being used (this is
->>>>>> enough to make the recipe fails on parsing time if meta-clang is not
->>>>>> present).
->>>>>>
->>>>>
->>>>>
->>>>> But meta-clang doesn't provide clang-native anymore, it's a shadow of
->>>>> what it used to be - clang-native comes from oe-core. Or am I
->>>>> misunderstanding the problem here? I don't really get the role of
->>>>> meta-clang with this recipe.
->>>>
->>>> You are correct, actually this is only affecting Scarthgap branch. I
->>>> fist spotted this on scarthgap, changed to master to test it too but I
->>>> probably did something wrong and kept the clang-layer or something
->>>> during my test. Sorry, my mistake.
->>>>
->>>> Thanks for letting me know clang-native is actually on oe-core now, I
->>>> fount the commit [0]. So maybe I should propose a backport of this to
->>>> fix the scarthgap issue?
->>>>
->>>> I will do a test now on Scarthgap, cherry-picking this commit to see how
->>>> it goes.
->>>>
->>>> [0] https://github.com/openembedded/openembedded-core/commit/43ba5ed17e069b13cd43c36650524a0113c81955
->>>
->>> So it is actually harder than only cherry-picking this commit, there are
->>> more commits needed and they do not actually fit into Scarthgap.
->>
->> That commit was a very major change in oe-core that took months to sort
->> out, it wouldn't be considered for acceptance in Scarthgap.
->>
->>>
->>> A BBMASK on uutils-coreutils will fix the issue for now, until I move to
->>> the next LTS.
->>
->>
->> I think your patch could be acceptable and useful for Scarthgap, if you
->> are interested in that.
-> 
-> I am interested. Just for clarification, you mean the original patch I
-> sent, not the BBMASK patch, right?
-> 
-> If this is about the original patch, I can add it to Scarthgap and
-> re-send.
-> 
+This is a multipart message in MIME format.
 
-Yes, I meant it for the original patch - I didn't realize that Clayton
-took a stab at the very same issue also. This is an issue that I think
-deserves a patch, it does have a hidden dependency on meta-clang which
-is not nice, and apparently caused some headaches for multiple people.
+--=-=kCbnrWecPjR3hA=-=
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I do see Anuj's issue with Clayton's patch, as it changes the default
-behavior - I think this patch could have a better chance as it tries to
-keep the original behavior.
+-----Original Message-----
+From: Gyorgy Sarvari <skandigraun@gmail.com>=20
+Sent: 16 April 2026 09:19
+To: mail@michael-fitzmayer.de; openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-oe][PATCH] canopenterm: update to release version 2=
+.02
 
-But overall I don't have a strong opinion on the way it is solved, if
-there is a patch that makes everyone happy.
+< As I can see these patches basically move the recipe to the tip of the ma=
+in branch. In the future, if there would be such cases, where there are ext=
+ra commits after a tag that need to be included in the recipe, you can just=
+ set the SRCREV to the correct revision, if there are no commits that need =
+to be skipped. You can just add `PV .=3D "+git"` to the recipe to indicate =
+that there are some extra goodies included also after the tag (and maybe ad=
+d a quick note in the commit message about it).
+That avoids messing with patches and makes the intent also clearer.
+
+< I wouldn't send a new version because of this, but it might be useful for=
+ the next time.
+
+Understood! I will add `PV .=3D "+git"` in case I have a similar scenario i=
+n the future. Is it fine for the time being?
+
+Thanks!
+
+--=-=kCbnrWecPjR3hA=-=
+Content-Type: application/pgp-signature;
+	name="openpgp-digital-signature.asc"
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCAAdFiEEeko8mQdaojPAePLVyfzHsirX2UkFAmniYdwACgkQyfzHsirX
+2UlRJQv+LxQEpZ5OiPeO4sIfVgU7T1BiqKjll7ey9zIcXSPlxqzPzaCFroMcmACF
+sAcAzpxtRza+FO93Q/CXHDvxkPhyNH5JFi0uB9hHs8ISQX5u3s3c+zm4cjeNge9B
+qiCuQVQNjHy6MhkemAOaprHIMbzAQBIDNBW0/kKtQ1OCoFXcJ031lFxWF4J6e7wf
+znu1M5G29Quvgg1/PAlrxrWUzvoREZuUSAoqfKb8/1lIfOSA7dEN4MR3A9XvLg0P
+6qUHEOkrjgWEKb2WOGF0dnOTLr0BClzRFQ0E9osNdMapCCY91gYKR1vDbdR5drMP
+sbYNFbkBuENhaKGGOg+Mr499d+AbZ2YfPaY1pT+m/uuzwgwNLP8SMb+MIS886Gx3
+rKVgFpL4ktGsl+Jyn+ORxHZr3Vl/eae6gtmBw5660UnBPK0sWZEHYuReYoF/m/H3
+qUQs1wEOaQ2ZOD/JUDNFmNlBxdsvTb72T08gkrHrcm7JlSIBfHMYjnff6sBH86m4
+ZsDYCJPF
+=CIHi
+-----END PGP SIGNATURE-----
 
 
-> Regards,
-> Hiago.
-> 
->>
->>
->>>
->>> Sorry for the noise, please ignore this patch since it is not suitable
->>> for master branch.
->>>
->>> Regards,
->>> Hiago.
->>>>
->>>> Thanks,
->>>> Hiago.
->>>>>
->>>>>
->>>>>
->>>>>> Make 'selinux' PACKAGECONFIG dependend on clang-layer, and print a
->>>>>> warning if the user wants selinux support o uutils-coreutils but haven't
->>>>>> add clang-layer.
->>>>>>
->>>>>> Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
->>>>>> ---
->>>>>>  .../uutils-coreutils/uutils-coreutils_0.8.0.bb       | 12 +++++++++++-
->>>>>>  1 file changed, 11 insertions(+), 1 deletion(-)
->>>>>>
->>>>>> diff --git a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
->>>>>> index 8b9b4dc199..99beb70104 100644
->>>>>> --- a/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
->>>>>> +++ b/meta-oe/recipes-core/uutils-coreutils/uutils-coreutils_0.8.0.bb
->>>>>> @@ -18,7 +18,17 @@ require ${BPN}-crates.inc
->>>>>>  PROVIDES = "coreutils"
->>>>>>  RPROVIDES:${PN} = "coreutils"
->>>>>>  
->>>>>> -PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux systemd', d)}"
->>>>>> +PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
->>>>>> +# This is required since uutils-coreutils uses selinux features that require clang-layer
->>>>>> +python __anonymous() {
->>>>>> +    if bb.utils.contains('DISTRO_FEATURES', 'selinux', True, False, d):
->>>>>> +        if bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', True, False, d):
->>>>>> +            d.appendVar('PACKAGECONFIG', ' selinux')
->>>>>> +        else:
->>>>>> +            bb.warn("selinux is enabled but clang-layer is not in BBFILE_COLLECTIONS, "
->>>>>> +                "selinux support will be disabled. Add meta-clang to your bblayers.conf "
->>>>>> +                "if selinux support on uutils-coreutils is required.")
->>>>>> +}
->>>>>>  PACKAGECONFIG[selinux] = "--features feat_selinux,,clang-native libselinux-native libselinux"
->>>>>>  PACKAGECONFIG[systemd] = "--features feat_systemd_logind,,systemd"
->>>>>>  
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>
->>>
->>>>
->>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>> Links: You receive all messages sent to this group.
->>>> View/Reply Online (#126414): https://lists.openembedded.org/g/openembedded-devel/message/126414
->>>> Mute This Topic: https://lists.openembedded.org/mt/118863961/10204532
->>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
->>>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [hfranco@baylibre.com]
->>>> -=-=-=-=-=-=-=-=-=-=-=-
->>>>
->>>
->>
+--=-=kCbnrWecPjR3hA=-=--
 
 
