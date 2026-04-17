@@ -1,249 +1,578 @@
-Return-Path: <viswanath.kraleti@oss.qualcomm.com>
+Return-Path: <anuj.mittal@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 747C2F8E4AB
-	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 05:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA2D3F8E4B1
+	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 07:00:53 +0000 (UTC)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36200.1776404710083873875
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37110.1776409253227925980
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Apr 2026 22:45:10 -0700
+ Fri, 17 Apr 2026 00:00:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=eehnbQnb;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=OSR2uWn2;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: viswanath.kraleti@oss.qualcomm.com)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H0flE04119536
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 05:45:09 GMT
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=j4FG7ges;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jULnh4An;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H0foJJ2012094
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	nD+VpgHatabJDG4R27v4NTD+Ru6nDzXYuHQJ6+gXPIg=; b=eehnbQnb7r+0R57H
-	JWFT+sI+TKUr0n98VCbMwZ8WpX39CK+ZxBsGsuzpNMsQP7DGN23BTbOu8YISiXh/
-	JGryLPqpSj7y7a8pdrBKCMWS7cfk/5vMXt+dSRY8S91s5X3slZunxMbgLnKVhF0T
-	vap3wsGFB4tfYoFXpz4bQmo/HzvJ8yj8lZs4COODWeJWRN/Bz1gRnekyhbUWc9dg
-	hexQ3APjTneXV/nAKvVNOgNTRiczjaDtBwXqRxyBCPuPtus0ipQTlK6dD9LhLYts
-	1IdqurbSn64KoqxJCbr1qN7MywInvMfa0RO/w9yvatHIWSBMkvWkKsrD/SNny7V4
-	7D0cTQ==
-Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com [209.85.128.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djtd94f60-1
+	9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=; b=j4FG7gescMvLAQmF
+	pjW9e7rNjkQsLPv/Nr9n6uAZyPTiLYoYtNBuvS/OVfcV1IvADiy2n1Avk9ot62Nk
+	8DCLoBxQFo3CMES+hJwSH/E3x2lJxQcmwTqzbdFPR9HzZ9nqPbDVA28kqQNF/zMV
+	sSO7juOFCl3tR26WYiu2kjQKu2SFc4utpFp7PzP62JhB7DMI75scKBlHFSZYtjsi
+	gnjlupnvis/hh0l0VIUUvmKdAOywf9QFKK0/UkviWOwRzIizpBZwTI8ZOMlQn+K4
+	4slv9P6qFY5nNcCIIZe0G2443jdaAjB7UljMr1F4dtbZrDjgQIqbtp2242c3LTXM
+	qWfb5A==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djvrfc3j3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 05:45:08 +0000 (GMT)
-Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-799003e8a77so7434717b3.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Apr 2026 22:45:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776404708; cv=none;
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:51 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8acae7cf136so6077256d6.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 00:00:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776409251; cv=none;
         d=google.com; s=arc-20240605;
-        b=jGGVEfHjrHgSMYE7KNIFTc96U6QvZD0Lc8A/dpenYzUA6weQ5JgqajqMZ2Qp7ISfwB
-         3smZs3F9QqXZpw6lXD9V/pDb6VNg9Su/Tb4qhn+UxAT6Dek7+PriYT/Gntx/SUcoGWr4
-         8mlAqsZBDYUXCyAVaLTcoOMy5REzoqfuT/0LQ85FPwQ47ZYX72SXIM1sQ/tZu3gDeN5Y
-         KGnr5irwKGNHeXBepF040IoBtwFOedh12Bho2AOWLpg9W1AQy6Z8eQ84KLPcm94r9djr
-         oxjoGq78Ka1gUO6KPVoKNfHS9jTb8m1zenVyX8NVm4vqUU/VHfSOzxsRvTVPC1k0c4o5
-         vJhA==
+        b=L542jbbumDTwRjh53L8UxranoVxjK8LpsCV0aLmBje+r3gVqnoJQcXKi7FTyuuEOPD
+         k0iE/KagiwhOOnqBd3ce9FDfxgXB6L3eqdoOBDL9Hxond2TBs4Gvd7DvRQl0iulBI8qm
+         h4r0qEzb4fQnlD+xeZWu2jjDEice+SZWdWDdmqxqMNea0g2Jzl/bdxaUqP1nVC0f3dmU
+         pa712CYKKxGBxssMhjUlYMd4Jvw5Iq1Or78d0bIPM0HzCULPwoQRakMT6eRHUzsB9/Q/
+         AUlXaDaI2vyMFCtAbnnWMp2lCzh6a7z98ggXyZEjfcAkVKJIZUo9+IYk3pw7z2kXM9mU
+         gsHA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=nD+VpgHatabJDG4R27v4NTD+Ru6nDzXYuHQJ6+gXPIg=;
-        fh=8H7K2axg0rFOiPsegKqS4RP8DqRn9skorteae3ufzx0=;
-        b=Gw58UlwJdOzJw+jUuct7wMBAhzq5QV3F6OSsJCO8QO5H/OdiMNS2SObDhjAdFM47tK
-         ZRQNA5saJl0TU8Lw6Mj33Mh6NHI7GvvimoPGVVW/i9+R6tzu9MlrndOA19wQDkqmBeBZ
-         mMf4l9iQl0mPqi4/VKaQokCFyj8ij2URlQC5t6S3zJyamFoKZQVfZSY2rTHf9ilYFmcV
-         VGtAO2h5qCvkDleKYimVk8Jn5HlPlqw2hrygQlmldK1qrf1RBWZiwwWxKsYBBamD9TIi
-         nUMV23/YZfHxpdqanOSZwjRSTvaRb6lwQ40fdFe2fZM/S+jh6aXRs0XU0KbdqRg0lTDc
-         NUTw==;
+        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
+        fh=eHPpItu1Zxk2+V1pMnoGS0+/uq135IXr0P0WcGLaJx8=;
+        b=i91dHsp/jO8acSTXndSnheV7sABn33jRCOjJhCGL6hl5XdaxqFDyxy+SWVYX5QJdcH
+         jqfIKnKPcsg9kz6R7HR7lSj/2HS2uxUPNOfwAmG9Csu0pbM8HdlyfzLRYLuXhKRtJ1wP
+         IuDyj9Wxq2YXWNN37DvhxNFPjiyS+kolAHyGzEk44tr4qcYRSJ6rO11FCF5uvPcFgHT6
+         d3bKNT/j79VDBAkM0JXE0D01GdQ5tGghPoNCHiRBbAgh5M3zL8f7nmUSULrwgFSnwtDX
+         P0oUfACFLABEwZqgx10TwRxUa5sHkekSfaj5hiLUqWCk+gEExBEk3EKxXUPjD9Lxm3d7
+         TnYQ==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1776404708; x=1777009508; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1776409251; x=1777014051; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nD+VpgHatabJDG4R27v4NTD+Ru6nDzXYuHQJ6+gXPIg=;
-        b=OSR2uWn2j+lNf2xjigB/J3iQhPuONxHMlB7+5JflmlrkxYsUQzKSnal7EI7pM1ufWP
-         tcTVUjy1LmyM6zEUY2ezHaGWfmR5bK5666Q1s8BOweVrkKvUT6kpQ8yTWxAndaMYZY+b
-         SL8JKcnNIeNSF+k96FnGeazpDI7W7j+q2iVsVWuE9Wc1ETUyxwE0figZjbDBWjzbnEdN
-         yXMiMneH4MnDhbx8dBNEHO5dgrFi3DmvvZYWhGarinaFirzoBO8SEAJSkL74vsPZuIzr
-         ubLY0LTgJ4Ps51Ki4NphHTkMg2smRMJAjNft+xTI02Bg43pxppY5poQIBenz0LCfPVpR
-         elyQ==
+        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
+        b=jULnh4AnluuDkY4lPlkH//EdekgGoctVlvsCuhr7jxoLTN5Or5j7kwb5QhLXjMCaCb
+         LA6VxomKyzAeLHmApt7ijcGgvlycqpy3oRs4Us3a8Guo9BagiV4AXMfuEiAH6FSLxGEF
+         kOiOHTMape9BFoVc304lp/r0yDHImm4MQQR1kAozhIFoOkgYl/P7/f5aznhE04xGY8Td
+         Yy2+xR116JZY0gNzK8OC7pyBLvym60I2hs76nFuXU/5JD3yy4XzAyXicv9KP1DqG1Ee3
+         MSm7YuThG7GTA4ygUzr9zNxr2RKkm9bA2OMxlZgzE6A+wkw+235lHTnMZOqlvzgXj0iI
+         uA1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776404708; x=1777009508;
+        d=1e100.net; s=20251104; t=1776409251; x=1777014051;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=nD+VpgHatabJDG4R27v4NTD+Ru6nDzXYuHQJ6+gXPIg=;
-        b=A96kHJ/dL5AXhUlFjYMLFB6mE1cEe7WjKIyJ5RqKv5xe9dFZqxUmhDyAbYti27CB7z
-         PcTsb6Y2x4DK6+FW9BE/nlSQHPAVyqeiGj7XpBoHBNge5AmF/PJyIpxSZBVFy13EVy99
-         6vtoQO6fdQmg3mOOhwzmWYTzNNkftHSQaj7TpdIebA0Bifvq2fFR01l0bBFTOMjUppVP
-         vZMb+35lIBCyqU04IfsdKL2mTOph3AYgedhxGrv8pyBSi8NHHc/AIHhClSXg1fbN/a1s
-         djGlew/T24zKnyNsA7zccN+zXTbHsQZ6/kQdnd5qGk1CrePvmg7ONonsPfZQ9lRSsL2I
-         MR0w==
-X-Forwarded-Encrypted: i=1; AFNElJ/q1zq5Devditj6yg7FD71BTaixHI5IUhxcai9x09J+ciSzYy2uUO1KSWnGUwG9E/paf7V6zlC39CW2lYjIbH2rAWY=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzdTUxAW7DJmFAhMjgWP7iZvT9jkJnHrFjVwOsmTb3pgdQU5rep
-	9bdmqbPSmqr2JoEaz8euDP5bTIj/C4/KBUt6zQSlL8vpKtHm3Kalke6Ou2f5jUiBEdsAf8eLSUk
-	nftVFxIgp8d+AHGQ7Jjh0b8vVaXF5/XZbrm/lmRwsORLeDafeqSst/n+0bST9n+EPmb4yQIRwh3
-	4ufk3bHWXYeI4qR+XwF201ZvNObaAvkbb67CS/jvoecqO92EAVWrf5ngdSqsQ=
-X-Gm-Gg: AeBDieu6P1UrH/2TflsADAQTfSeNszt0KO1JkL01gdLGtrWA7hwJ7suElobBnmfuZUz
-	0l8SenwdKSBUKXJUQhJs283eVWhYPLmDhk9RZGqgOKg9CO41djhdsA5CiSN+na+7+uOLufvKIFT
-	1RhGduwczrlaWEnVLTps9jEQStk3M+xcjQnwYDPr8g+rvIDQlFHxKYolUzH5NceSWt7cIOF0CS/
-	DbrpHJOKEVNKI/fJCxbIRv+ibKkMuFyBnRSXKGf/Kfcn1iV+yVBqU9uIQaG
-X-Received: by 2002:a05:690e:1504:b0:650:311d:55cf with SMTP id 956f58d0204a3-6531082ec3emr1229306d50.15.1776404708469;
-        Thu, 16 Apr 2026 22:45:08 -0700 (PDT)
-X-Received: by 2002:a05:690e:1504:b0:650:311d:55cf with SMTP id
- 956f58d0204a3-6531082ec3emr1229300d50.15.1776404708070; Thu, 16 Apr 2026
- 22:45:08 -0700 (PDT)
+        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
+        b=b9sXChJESFFBP2YlurvpLrbjNWJZx7UV7esmXXyy6sl4rNhzrO3rts0pY98ZbuxW2b
+         C0HQ1ETQd3sreIbvTa5KxDcy8xZoYSsikY3+My1gTR7V1PyVSiqXBqHAQEKU3j6n1PPH
+         EQCrdtKSot944o4bUGXOczyXpXpMn8h6QzdnXXakrKAooHjE2/2H/DbQTVtmltV6EiUk
+         dHmptbW6LlC+/P7kOb5qFtCWallD4R6eKPF9Kd0Que56CT2lETAX7EIYinO9Ko1rqv+L
+         LMa8lRE737mK0SIRGHUaJtv9LZJ3wv/hDfSekKBAXFmy+VjSJCRaeI9oyJH+pRU7iJD0
+         8eJQ==
+X-Forwarded-Encrypted: i=1; AFNElJ94Wn/Vn0iVvpWs380xXTPXzCTUVn7WgU5JvbkVLH4oT/gpuQhR24UE5hctVNFOeBqoFLaNHl865HkwkGgHJenaFac=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YxtJQgsA9e6pDPRFqEANIilTHavg22IdA2mHs1L5N4wjOhAjlMf
+	tijy2+2qwGCxzZbsJvmVcFqH6T/zqkvUZcxLGY+Rzxrhdp14xx/tkSIvlvoqNSJKzZn54tNzVk5
+	KnvmN7eojsJWyoE5s12EOv4SflbBYuyU/4HjjkqAUerll2poXxRLG3xaCaKyDMxpWZysjyixzjE
+	uQnFOi+dNQ9VHpv6+t7uumM98IBTqe/WHOse90prPONHwGdpkV5w5Xplw663M=
+X-Gm-Gg: AeBDiev2oKEAbbWpyT76vyefAa7rabxrs/f+yUTsuYMu5/nf97tNtugmhDVXjpxAqb/
+	SXE1UrzYJaEeUsT17W6qKI33rcTunzDA9Qod+bwgPan3z9UvI7Z9zaIzwB+ohuhj15R7Db4tuTU
+	0z7zdvaKT2uukhtg9oZqJnNEojvczujR1tLZFANXnptgSnRnAAO6XP+50/eOFX94TGp+QKr+YS/
+	VqzZ3ZFpGUUGhU=
+X-Received: by 2002:a05:6214:d0c:b0:8a1:8ddd:e12e with SMTP id 6a1803df08f44-8b0281667femr25483376d6.48.1776409250957;
+        Fri, 17 Apr 2026 00:00:50 -0700 (PDT)
+X-Received: by 2002:a05:6214:d0c:b0:8a1:8ddd:e12e with SMTP id
+ 6a1803df08f44-8b0281667femr25482326d6.48.1776409250230; Fri, 17 Apr 2026
+ 00:00:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260416072305.1447652-1-viswanath.kraleti@oss.qualcomm.com> <qk5zmrapwlvjskkrgmom7xfbipq3u44krrxzi36yor7awtepna@xpsfalqldxuc>
-In-Reply-To: <qk5zmrapwlvjskkrgmom7xfbipq3u44krrxzi36yor7awtepna@xpsfalqldxuc>
-From: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-Date: Fri, 17 Apr 2026 11:14:57 +0530
-X-Gm-Features: AQROBzAzDxXndsfrx6U4fdsXDqj9Q2gnJS_zxG248xLXryldIopEDesIMh-Mhts
-Message-ID: <CAHyS93rCqMjR5TNaBtCo_os9UyaPojS-=wFsXFsKVzLvB6+Avg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] android-tools-conf-configfs: replace fixed sleep
- with UDC wait loop
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Devendra Tewari <devendra.tewari@gmail.com>,
-        openembedded-devel@lists.openembedded.org
+References: <20260410070508.1104455-1-jinfeng.wang.cn@windriver.com>
+ <20260410070508.1104455-4-jinfeng.wang.cn@windriver.com> <CA+s=J=zqWBukNym5jYQskuPUa9j0S8z0nEk4se5fyN7373RoNw@mail.gmail.com>
+ <BN9PR11MB53544226814AD60FA3622A0BDE202@BN9PR11MB5354.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB53544226814AD60FA3622A0BDE202@BN9PR11MB5354.namprd11.prod.outlook.com>
+From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Date: Fri, 17 Apr 2026 15:00:38 +0800
+X-Gm-Features: AQROBzC8KaUlIDdlmlREUsUycf0trAiL_Ym9TA-8WULm_JvkBITRShuCsfhDK2k
+Message-ID: <CA+s=J=zvrCt_hz5vrF0ZT4Gc1yH+K0C0yWe3mqjBtqa7w9Bt9g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 03/11] hdf5: fix CVE-2025-6857
+To: "Chen, Libo (CN)" <Libo.Chen.CN@windriver.com>
+Cc: "Wang, Jinfeng (CN)" <Jinfeng.Wang.CN@windriver.com>,
+        "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA1NCBTYWx0ZWRfX29R+9NvueL2q
- dI8MOiVEWIpmTvihC1EJgb4oXSGW9t234FPZ0lBvKZBsrwM1mWMmm0qS3cHSrNCZoKda+MfML0g
- UoqDCwWC4qKb7x3Ox88SaH2/3kPe6saYbgkU+Hp3uLEvBkxckvD0D0vVr5ZQdA2/Ch0JeVPbFrG
- Swg2XuWZBWmPYBdL1dx0CIWXDc8cb5B743tCSIc65YZpOz3NNaeZ/1tDlCOnQDlqQ/aAe8ipVBe
- V/ByPCLLIZHdrV89eQj/WAoUyC7bs8xNdXpIbdi968Cr3NGUClttaQ5plCa9tQZXvIV/HGAaaq3
- LuCTlFpUgSzwW4bOTQOh/2jgUI1g1Vz35hjxR+XXZltmndBGB3ZdTaWPwm3Ujn2cWkzuREVzLeJ
- AlnY0PRLVruW76xUlMdaAUBlQ2aIMFdOD6HSYwoXb1fmKw2vgysp2b/uX0/UppKBulNuLFK1KxR
- 0cE1Tszec/AgclifwcA==
-X-Authority-Analysis: v=2.4 cv=avuCzyZV c=1 sm=1 tr=0 ts=69e1c8e4 cx=c_pps
- a=g1v0Z557R90hA0UpD/5Yag==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
+X-Proofpoint-GUID: shlnSJam2n-pagdsDpU2QLMUI8cgdDfF
+X-Proofpoint-ORIG-GUID: shlnSJam2n-pagdsDpU2QLMUI8cgdDfF
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA2OCBTYWx0ZWRfXyCK/OtLKOihR
+ XXmBb/yoKHE5IO/+gQuoWy3A/bmXMj5cLj2qCGgHBGN76rjm6PpiyiieL5qJCMPhYYFqr07Q+Dk
+ dVg0CQ6gPvJETw6CUJPtp2LCyChz7xr+IC5Pspm/KuZxJIFsPDrIyRNVLgXb0lT8QBUUI+hcesi
+ zklh7ONd8pfIh0MukddV9ly9KGXRI5kJtYz9uD+ePnObPBRvSRmAVf7Hjw7mohiBd7Rh2xBEDss
+ Kn38V77vGFFoeDkeVWfvhRZQkavuKZPZipz+U1+/9DqIoRbD9DzBLtIFbIARyw4fyh3pgXKK/mg
+ pQ5/KdCcI9f0zdTKtltISfPxgVKz+QPrYVADKvAaUTcv7imhEOTveEK9ZIpNBXLwk+I5BnICNgs
+ xEaBPTvIOul/MPotWgu84kk9PRuummDzNb01cokIrue5i5IleNZDoWU5tBdbEsWiBYkkESSwekb
+ /dd+K//FyzTMUtZQbyQ==
+X-Authority-Analysis: v=2.4 cv=YtE/gYYX c=1 sm=1 tr=0 ts=69e1daa4 cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8 a=0Y8f09sD-Lrwx1GFk9cA:9
- a=QEXdDO2ut3YA:10 a=MFSWADHSvvjO3QEy5MdX:22
-X-Proofpoint-GUID: DtmjFL4VIcZInAiFkJlwWjeIJ4UhiMeA
-X-Proofpoint-ORIG-GUID: DtmjFL4VIcZInAiFkJlwWjeIJ4UhiMeA
+ a=gowsoOTTUOVcmtlkKump:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
+ a=Q4-j1AaZAAAA:8 a=1_S3K9cU9Rf37U515rgA:9 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22 a=FdTzh2GWekK77mhwV6Dw:22 a=9H3Qd4_ONW2Ztcrla5EB:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_04,2026-04-16_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 bulkscore=0 priorityscore=1501
- adultscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
+ suspectscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0
+ adultscore=0 malwarescore=0 clxscore=1015 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170054
+ reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 05:45:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126426
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126427
 
-On Thu, Apr 16, 2026 at 4:33=E2=80=AFPM Dmitry Baryshkov
-<dmitry.baryshkov@oss.qualcomm.com> wrote:
+On Fri, Apr 17, 2026 at 12:05=E2=80=AFPM Chen, Libo (CN)
+<Libo.Chen.CN@windriver.com> wrote:
 >
-> On Thu, Apr 16, 2026 at 12:53:05PM +0530, Viswanath Kraleti wrote:
-> > The android-gadget-start script previously relied on a fixed `sleep 10`
-> > delay for configuring the USB gadget UDC. This approach can either dela=
-y
-> > boot unnecessarily or still race with UDC or configfs initialization on
-> > slower systems.
-> >
-> > Replace the fixed sleep with a limited time polling loop that waits for
-> > both configfs and a valid UDC before configuring the USB ADB gadget.
-> >
-> > This makes USB gadget initialization more deterministic across platform=
-s
-> > without relying on arbitrary delays.
-> >
-> > Signed-off-by: Viswanath Kraleti <viswanath.kraleti@oss.qualcomm.com>
-> > ---
-> >  .../android-gadget-start                      | 35 +++++++++++++++++--
-> >  1 file changed, 32 insertions(+), 3 deletions(-)
 >
-> CC'ing Devendra, who changed it from 3 to 10 seconds.
 >
-> What was the issue? Was it UDC device not being registered or was it
-> something else?
+> >-----Original Message-----
+> >From: openembedded-devel@lists.openembedded.org
+> ><openembedded-devel@lists.openembedded.org> On Behalf Of Anuj Mittal via
+> >lists.openembedded.org
+> >Sent: Wednesday, April 15, 2026 4:35 PM
+> >To: Wang, Jinfeng (CN) <Jinfeng.Wang.CN@windriver.com>
+> >Cc: openembedded-devel@lists.openembedded.org
+> >Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 03/11] hdf5: fix CVE-202=
+5-6857
+> >
+> >CAUTION: This email comes from a non Wind River email account!
+> >Do not click links or open attachments unless you recognize the sender a=
+nd know
+> >the content is safe.
+> >
+> >On Fri, Apr 10, 2026 at 3:05=E2=80=AFPM Wang, Jinfeng (CN) via lists.ope=
+nembedded.org
+> ><Jinfeng.Wang.CN=3Dwindriver.com@lists.openembedded.org> wrote:
+> >>
+> >> From: Libo Chen <libo.chen.cn@windriver.com>
+> >>
+> >> According to [1], A vulnerability has been found in HDF5 1.14.6 and
+> >> classified as problematic. Affected by this vulnerability is the
+> >> function
+> >> H5G__node_cmp3 of the file src/H5Gnode.c. The manipulation leads to
+> >> stack-based buffer overflow. It is possible to launch the attack on
+> >> the local host. The exploit has been disclosed to the public and may b=
+e used.
+> >>
+> >> Backport patch [2] from upstream to fix CVE-2025-6857
+> >>
+> >> [1] https://nvd.nist.gov/vuln/detail/CVE-2025-6857
+> >> [2]
+> >>
+> >https://github.com/HDFGroup/hdf5/commit/a8ceb1d95bb997f548c1129363dad
+> >5
+> >> 3c18540096
+> >>
+> >> Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+> >> Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
+> >> ---
+> >>  .../hdf5/files/CVE-2025-6857.patch            | 248
+> >++++++++++++++++++
+> >>  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
+> >>  2 files changed, 249 insertions(+)
+> >>  create mode 100644
+> >> meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
+> >>
+> >> diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
+> >> b/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
+> >> new file mode 100644
+> >> index 0000000000..8b40d0e946
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
+> >> @@ -0,0 +1,248 @@
+> >> +From eb3af284cc0ac8c758c65f492fc693ed50539592 Mon Sep 17 00:00:00
+> >> +2001
+> >> +From: Libo Chen <libo.chen.cn@windriver.com>
+> >> +Date: Thu, 29 Jan 2026 13:59:39 +0800
+> >> +Subject: [PATCH] Fix CVE-2025-6857
+> >> +
+> >> +Add additional checks for v1 B-tree corruption
+> >> +
+> >> +An HDF5 file had a corrupted v1 B-tree that would result in a stack o=
+verflow
+> >when performing a lookup on it. This has been fixed with additional inte=
+grity
+> >checks.
+> >> +
+> >> +CVE: CVE-2025-6857
+> >> +
+> >> +Upstream-Status: Backport
+> >>
+> >+[https://github.com/HDFGroup/hdf5/commit/a8ceb1d95bb997f548c1129363d
+> >a
+> >> +d53c18540096]
+> >> +
+> >> +Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+> >> +---
+> >> + src/H5B.c    | 92
+> >+++++++++++++++++++++++++++++++++++++++++++---------
+> >> + src/H5Bpkg.h |  6 ++++
+> >
+> >This and some other changes are not in the reference patch being backpor=
+ted.
+> >Can you please provide additional details to make it clear what is being=
+ done?
+> >
 >
-> >
-> > diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-=
-configfs/android-gadget-start b/meta-oe/recipes-devtools/android-tools/andr=
-oid-tools-conf-configfs/android-gadget-start
-> > index 76b5e29624..ecc9a0ff84 100644
-> > --- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configf=
-s/android-gadget-start
-> > +++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configf=
-s/android-gadget-start
-> > @@ -2,8 +2,37 @@
-> >
-> >  set -e
-> >
-> > -sleep 10
-> > +n=3D0
-> > +while true; do
-> > +    # Pick first available UDC as default. Set UDC_NAME in env to over=
-ride.
-> > +    udcname=3D"${UDC_NAME:-$(ls -1 /sys/class/udc 2>/dev/null | head -=
-n 1)}"
-> >
-> > -ls /sys/class/udc/ | head -n 1 | xargs echo -n > /sys/kernel/config/us=
-b_gadget/adb/UDC
-> > +    if [ $n -eq 30 ]; then
-> > +        echo "Timeout waiting for UDC configuration"
-> > +        exit 1
-> > +    fi
->
-> The more I look at it, the more it seems that whole ADB support should
-> be rewritten to use udev and generators to start adb only once the UDC
-> gets registered in the system (and start it for every UDC that is
-> present).
+> [Libo> ] Thanks for your comments. There are 2 major other changes in my =
+patch. The 1st one is The H5B_UNKNOWN_NODELEVEL macro and exp_level field i=
+n H5Bpkg.h. It's necessary to introduce them in hdf5 1.14.4 since there are=
+ no such variables due to difference between 1.14.4 and 2.0.0. The 2nd is "=
+cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL" statements in H5B_* functi=
+ons. It just initialized the new variable cache_udata.exp_level.
 >
 
-Agree. Current ADB support is not scaling well for multiple UDCs; it
-is best if it can be rewritten.
-I am happy to send those patches. Since this rework takes a bit of
-time, present change should be
-considered as an improvement to fix ADB delays seen at present.
+Can you please add a note to commit message in patch and resend?
 
-> > +
-> > +    if [ ! -e /sys/kernel/config/usb_gadget/adb/UDC ]; then
->
-> Why do you need this?
->
-
-This script on startup immediately tries to read
-/sys/kernel/config/usb_gadget/adb/UDC.
-At the first iteration if configfs isn't mounted yet, it may produce
-an error/empty read.
-If configfs is guaranteed to be mounted before this script runs, it's
-not necessary. But
-not sure if that would happen.
-
-> > +        echo "Waiting for configfs usb_gadget to be initialized... ($n=
-/30)"
-> > +        sleep 1
-> > +        n=3D$((n + 1))
-> > +        continue
-> > +    fi
-> > +    configfs_udc=3D"$(cat /sys/kernel/config/usb_gadget/adb/UDC 2>/dev=
-/null || true)"
-> > +
-> > +    if [ -n "$udcname" ] && [ "$configfs_udc" =3D "$udcname" ]; then
-> > +        echo "UDC $udcname successfully configured for USB ADB Gadget"
-> > +        break
-> > +    fi
-> > +
-> > +    if [ -z "$udcname" ]; then
-> > +        echo "Waiting for UDC to appear... ($n/30)"
-> > +    else
-> > +        echo "Setting UDC $udcname for USB ADB Gadget usage"
-> > +        printf '%s' "$udcname" > /sys/kernel/config/usb_gadget/adb/UDC
-> > +    fi
-> > +
-> > +    sleep 1
-> > +    n=3D$((n + 1))
-> > +done
-> >
-> > -echo "Setting UDC $(ls /sys/class/udc/ | head -n 1) for USB ADB Gadget=
- usage"
-> >
->
-> --
-> With best wishes
-> Dmitry
+> >> + 2 files changed, 83 insertions(+), 15 deletions(-)
+> >> +
+> >> +diff --git a/src/H5B.c b/src/H5B.c
+> >> +index 5a7a238..4efa679 100644
+> >> +--- a/src/H5B.c
+> >> ++++ b/src/H5B.c
+> >> +@@ -140,6 +140,8 @@ typedef struct H5B_ins_ud_t {
+> >> +/********************/
+> >> + /* Local Prototypes */
+> >> + /********************/
+> >> ++static herr_t    H5B_find_helper(H5F_t *f, const H5B_class_t *type,
+> >haddr_t addr, int exp_level, bool *found,
+> >> ++                                 void *udata);
+> >> + static H5B_ins_t H5B__insert_helper(H5F_t *f, H5B_ins_ud_t *bt_ud, c=
+onst
+> >H5B_class_t *type, uint8_t *lt_key,
+> >> +                                     bool *lt_key_changed, uint8_t
+> >*md_key, void *udata, uint8_t *rt_key,
+> >> +                                     bool *rt_key_changed,
+> >> +H5B_ins_ud_t *split_bt_ud /*out*/); @@ -252,26 +254,67 @@ done:
+> >> + } /* end H5B_create() */
+> >> +
+> >> +
+> >> +/*-------------------------------------------------------------------
+> >> +------
+> >> +- * Function:  H5B_find
+> >> ++ * Function:    H5B_find
+> >> +  *
+> >> +- * Purpose:   Locate the specified information in a B-tree and retur=
+n
+> >> +- *            that information by filling in fields of the caller-su=
+pplied
+> >> +- *            UDATA pointer depending on the type of leaf node
+> >> +- *            requested.  The UDATA can point to additional data pas=
+sed
+> >> +- *            to the key comparison function.
+> >> ++ * Purpose:     Locate the specified information in a B-tree and ret=
+urn
+> >> ++ *              that information by filling in fields of the
+> >> ++ *              caller-supplied UDATA pointer depending on the type =
+of
+> >leaf
+> >> ++ *              node requested.  The UDATA can point to additional d=
+ata
+> >> ++ *              passed to the key comparison function.
+> >> +  *
+> >> +- * Note:      This function does not follow the left/right sibling
+> >> +- *            pointers since it assumes that all nodes can be reache=
+d
+> >> +- *            from the parent node.
+> >> ++ * Note:        This function does not follow the left/right sibling
+> >> ++ *              pointers since it assumes that all nodes can be reac=
+hed
+> >> ++ *              from the parent node.
+> >> +  *
+> >> +- * Return:    Non-negative (true/false) on success (if found, values=
+ returned
+> >> +- *              through the UDATA argument). Negative on failure (if=
+ not
+> >found,
+> >> +- *              UDATA is undefined).
+> >> ++ * Return:      Non-negative (true/false) on success (if found, valu=
+es
+> >> ++ *              returned through the UDATA argument). Negative on
+> >failure
+> >> ++ *              (if not found, UDATA is undefined).
+> >> +  *
+> >> +
+> >> + *-------------------------------------------------------------------
+> >> + ------
+> >> +  */
+> >> + herr_t
+> >> + H5B_find(H5F_t *f, const H5B_class_t *type, haddr_t addr, bool
+> >> + *found, void *udata)
+> >> ++{
+> >> ++    herr_t ret_value =3D SUCCEED;
+> >> ++
+> >> ++    FUNC_ENTER_NOAPI(FAIL)
+> >> ++
+> >> ++    /*
+> >> ++     * Check arguments.
+> >> ++     */
+> >> ++    assert(f);
+> >> ++    assert(type);
+> >> ++    assert(type->decode);
+> >> ++    assert(type->cmp3);
+> >> ++    assert(type->found);
+> >> ++    assert(H5_addr_defined(addr));
+> >> ++
+> >> ++    if ((ret_value =3D H5B_find_helper(f, type, addr,
+> >H5B_UNKNOWN_NODELEVEL, found, udata)) < 0)
+> >> ++        HGOTO_ERROR(H5E_BTREE, H5E_NOTFOUND, FAIL, "can't lookup
+> >> ++ key");
+> >> ++
+> >> ++done:
+> >> ++    FUNC_LEAVE_NOAPI(ret_value)
+> >> ++} /* end H5B_find() */
+> >> ++
+> >> ++/*------------------------------------------------------------------=
+-------
+> >> ++ * Function:    H5B_find_helper
+> >> ++ *
+> >> ++ * Purpose:     Recursive helper routine for H5B_find used to track =
+node
+> >> ++ *              levels and attempt to detect B-tree corruption durin=
+g
+> >> ++ *              lookups.
+> >> ++ *
+> >> ++ * Note:        This function does not follow the left/right sibling
+> >> ++ *              pointers since it assumes that all nodes can be reac=
+hed
+> >> ++ *              from the parent node.
+> >> ++ *
+> >> ++ * Return:      Non-negative on success (if found, values returned t=
+hrough
+> >> ++ *              the UDATA argument). Negative on failure (if not fou=
+nd,
+> >> ++ *              UDATA is undefined).
+> >> ++ *
+> >> ++
+> >> ++*-------------------------------------------------------------------
+> >> ++------
+> >> ++ */
+> >> ++static herr_t
+> >> ++H5B_find_helper(H5F_t *f, const H5B_class_t *type, haddr_t addr, int
+> >> ++exp_level, bool *found, void *udata)
+> >> + {
+> >> +     H5B_t         *bt =3D NULL;
+> >> +     H5UC_t        *rc_shared;           /* Ref-counted shared info *=
+/
+> >> +@@ -281,7 +324,7 @@ H5B_find(H5F_t *f, const H5B_class_t *type, haddr=
+_t
+> >addr, bool *found, void *uda
+> >> +     int            cmp       =3D 1;       /* Key comparison value */
+> >> +     herr_t         ret_value =3D SUCCEED; /* Return value */
+> >> +
+> >> +-    FUNC_ENTER_NOAPI(FAIL)
+> >> ++    FUNC_ENTER_NOAPI_NOINIT
+> >> +
+> >> +     /*
+> >> +      * Check arguments.
+> >> +@@ -306,6 +349,7 @@ H5B_find(H5F_t *f, const H5B_class_t *type, haddr=
+_t
+> >addr, bool *found, void *uda
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D exp_level;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__READ_ONLY_FLAG)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> + load B-tree node");
+> >> +
+> >> +@@ -329,7 +373,17 @@ H5B_find(H5F_t *f, const H5B_class_t *type,
+> >haddr_t addr, bool *found, void *uda
+> >> +         assert(idx < bt->nchildren);
+> >> +
+> >> +         if (bt->level > 0) {
+> >> +-            if ((ret_value =3D H5B_find(f, type, bt->child[idx], fou=
+nd, udata)) <
+> >0)
+> >> ++            /* Sanity check to catch the case where the current node
+> >points to
+> >> ++             * itself and the current node was loaded with an expect=
+ed
+> >node level
+> >> ++             * of H5B_UNKNOWN_NODELEVEL, thus bypassing the
+> >expected node level
+> >> ++             * check during deserialization and in the future if the=
+ node
+> >was
+> >> ++             * cached.
+> >> ++             */
+> >> ++            if (bt->child[idx] =3D=3D addr)
+> >> ++                HGOTO_ERROR(H5E_BTREE, H5E_BADVALUE, FAIL, "cyclic
+> >> ++ B-tree detected");
+> >> ++
+> >> ++            if ((ret_value =3D H5B_find_helper(f, type, bt->child[id=
+x],
+> >(int)(bt->level - 1), found, udata)) <
+> >> ++                0)
+> >> +                 HGOTO_ERROR(H5E_BTREE, H5E_NOTFOUND, FAIL, "can't
+> >lookup key in subtree");
+> >> +         } /* end if */
+> >> +         else {
+> >> +@@ -343,7 +397,7 @@ done:
+> >> +         HDONE_ERROR(H5E_BTREE, H5E_CANTUNPROTECT, FAIL, "unable
+> >to
+> >> +release node");
+> >> +
+> >> +     FUNC_LEAVE_NOAPI(ret_value)
+> >> +-} /* end H5B_find() */
+> >> ++} /* end H5B_find_helper() */
+> >> +
+> >> +
+> >> +/*-------------------------------------------------------------------
+> >> +------
+> >> +  * Function:  H5B__split
+> >> +@@ -425,6 +479,7 @@ H5B__split(H5F_t *f, H5B_ins_ud_t *bt_ud, unsigne=
+d
+> >idx, void *udata, H5B_ins_ud_
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D shared->type;
+> >> +     cache_udata.rc_shared =3D bt_ud->bt->rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (split_bt_ud->bt =3D
+> >> +                      (H5B_t *)H5AC_protect(f, H5AC_BT,
+> >split_bt_ud->addr, &cache_udata, H5AC__NO_FLAGS_SET)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> +protect B-tree"); @@ -532,6 +587,7 @@ H5B_insert(H5F_t *f, const
+> >H5B_class_t *type, haddr_t addr, void *udata)
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     bt_ud.addr            =3D addr;
+> >> +     if (NULL =3D=3D (bt_ud.bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, =
+addr,
+> >&cache_udata, H5AC__NO_FLAGS_SET)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> +locate root of B-tree"); @@ -789,6 +845,7 @@ H5B__insert_helper(H5F_t=
+ *f,
+> >H5B_ins_ud_t *bt_ud, const H5B_class_t *type, uint8
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +
+> >> +     if (0 =3D=3D bt->nchildren) {
+> >> +         /*
+> >> +@@ -1077,6 +1134,7 @@ H5B__iterate_helper(H5F_t *f, const H5B_class_t
+> >*type, haddr_t addr, H5B_operato
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__READ_ONLY_FLAG)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5_ITER_ERROR,
+> >> + "unable to load B-tree node");
+> >> +
+> >> +@@ -1190,6 +1248,7 @@ H5B__remove_helper(H5F_t *f, haddr_t addr,
+> >const H5B_class_t *type, int level, u
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__NO_FLAGS_SET)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5B_INS_ERROR,
+> >> + "unable to load B-tree node");
+> >> +
+> >> +@@ -1542,6 +1601,7 @@ H5B_delete(H5F_t *f, const H5B_class_t *type,
+> >haddr_t addr, void *udata)
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__NO_FLAGS_SET)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> + load B-tree node");
+> >> +
+> >> +@@ -1782,6 +1842,7 @@ H5B__get_info_helper(H5F_t *f, const H5B_class_=
+t
+> >*type, haddr_t addr, const H5B_
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__READ_ONLY_FLAG)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> + load B-tree node");
+> >> +
+> >> +@@ -1923,6 +1984,7 @@ H5B_valid(H5F_t *f, const H5B_class_t *type,
+> >haddr_t addr)
+> >> +     cache_udata.f         =3D f;
+> >> +     cache_udata.type      =3D type;
+> >> +     cache_udata.rc_shared =3D rc_shared;
+> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
+> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
+> >&cache_udata, H5AC__READ_ONLY_FLAG)))
+> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
+> >> + protect B-tree node");
+> >> +
+> >> +diff --git a/src/H5Bpkg.h b/src/H5Bpkg.h index d1ad647..f75e857
+> >> +100644
+> >> +--- a/src/H5Bpkg.h
+> >> ++++ b/src/H5Bpkg.h
+> >> +@@ -39,6 +39,11 @@
+> >> + /* # of bits for node level: 1 byte */  #define LEVEL_BITS 8
+> >> +
+> >> ++/* Indicates that the level of the current node is unknown.  When
+> >> ++the level
+> >> ++ * is known, it can be used to detect corrupted level during
+> >> ++decoding  */ #define H5B_UNKNOWN_NODELEVEL -1
+> >> ++
+> >> + /****************************/
+> >> + /* Package Private Typedefs */
+> >> + /****************************/
+> >> +@@ -60,6 +65,7 @@ typedef struct H5B_t {  typedef struct
+> >> +H5B_cache_ud_t {
+> >> +     H5F_t                    *f;         /* File that B-tree node is
+> >within */
+> >> +     const struct H5B_class_t *type;      /* Type of tree */
+> >> ++    int                       exp_level; /* Expected level of the cu=
+rrent
+> >node */
+> >> +     H5UC_t                   *rc_shared; /* Ref-counted shared info =
+*/
+> >> + } H5B_cache_ud_t;
+> >> +
+> >> +--
+> >> +2.34.1
+> >> +
+> >> diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+> >> b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+> >> index e8432f0d6b..1b9f0fcfa8 100644
+> >> --- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+> >> +++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+> >> @@ -24,6 +24,7 @@ SRC_URI =3D " \
+> >>      file://CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch \
+> >>      file://CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch \
+> >>      file://CVE-2025-2926.patch \
+> >> +    file://CVE-2025-6857.patch \
+> >>  "
+> >>  SRC_URI[sha256sum] =3D
+> >"019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
+> >>
+> >> --
+> >> 2.34.1
+> >>
+> >>
+> >>
+> >>
 
