@@ -1,578 +1,232 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <libo.chen.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA2D3F8E4B1
-	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 07:00:53 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37110.1776409253227925980
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6BB8F8E4B4
+	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 07:07:13 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.37184.1776409626052237607
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2026 00:00:53 -0700
+ Fri, 17 Apr 2026 00:07:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=j4FG7ges;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=jULnh4An;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H0foJJ2012094
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=; b=j4FG7gescMvLAQmF
-	pjW9e7rNjkQsLPv/Nr9n6uAZyPTiLYoYtNBuvS/OVfcV1IvADiy2n1Avk9ot62Nk
-	8DCLoBxQFo3CMES+hJwSH/E3x2lJxQcmwTqzbdFPR9HzZ9nqPbDVA28kqQNF/zMV
-	sSO7juOFCl3tR26WYiu2kjQKu2SFc4utpFp7PzP62JhB7DMI75scKBlHFSZYtjsi
-	gnjlupnvis/hh0l0VIUUvmKdAOywf9QFKK0/UkviWOwRzIizpBZwTI8ZOMlQn+K4
-	4slv9P6qFY5nNcCIIZe0G2443jdaAjB7UljMr1F4dtbZrDjgQIqbtp2242c3LTXM
-	qWfb5A==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4djvrfc3j3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:51 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8acae7cf136so6077256d6.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 00:00:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776409251; cv=none;
-        d=google.com; s=arc-20240605;
-        b=L542jbbumDTwRjh53L8UxranoVxjK8LpsCV0aLmBje+r3gVqnoJQcXKi7FTyuuEOPD
-         k0iE/KagiwhOOnqBd3ce9FDfxgXB6L3eqdoOBDL9Hxond2TBs4Gvd7DvRQl0iulBI8qm
-         h4r0qEzb4fQnlD+xeZWu2jjDEice+SZWdWDdmqxqMNea0g2Jzl/bdxaUqP1nVC0f3dmU
-         pa712CYKKxGBxssMhjUlYMd4Jvw5Iq1Or78d0bIPM0HzCULPwoQRakMT6eRHUzsB9/Q/
-         AUlXaDaI2vyMFCtAbnnWMp2lCzh6a7z98ggXyZEjfcAkVKJIZUo9+IYk3pw7z2kXM9mU
-         gsHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
-        fh=eHPpItu1Zxk2+V1pMnoGS0+/uq135IXr0P0WcGLaJx8=;
-        b=i91dHsp/jO8acSTXndSnheV7sABn33jRCOjJhCGL6hl5XdaxqFDyxy+SWVYX5QJdcH
-         jqfIKnKPcsg9kz6R7HR7lSj/2HS2uxUPNOfwAmG9Csu0pbM8HdlyfzLRYLuXhKRtJ1wP
-         IuDyj9Wxq2YXWNN37DvhxNFPjiyS+kolAHyGzEk44tr4qcYRSJ6rO11FCF5uvPcFgHT6
-         d3bKNT/j79VDBAkM0JXE0D01GdQ5tGghPoNCHiRBbAgh5M3zL8f7nmUSULrwgFSnwtDX
-         P0oUfACFLABEwZqgx10TwRxUa5sHkekSfaj5hiLUqWCk+gEExBEk3EKxXUPjD9Lxm3d7
-         TnYQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1776409251; x=1777014051; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
-        b=jULnh4AnluuDkY4lPlkH//EdekgGoctVlvsCuhr7jxoLTN5Or5j7kwb5QhLXjMCaCb
-         LA6VxomKyzAeLHmApt7ijcGgvlycqpy3oRs4Us3a8Guo9BagiV4AXMfuEiAH6FSLxGEF
-         kOiOHTMape9BFoVc304lp/r0yDHImm4MQQR1kAozhIFoOkgYl/P7/f5aznhE04xGY8Td
-         Yy2+xR116JZY0gNzK8OC7pyBLvym60I2hs76nFuXU/5JD3yy4XzAyXicv9KP1DqG1Ee3
-         MSm7YuThG7GTA4ygUzr9zNxr2RKkm9bA2OMxlZgzE6A+wkw+235lHTnMZOqlvzgXj0iI
-         uA1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776409251; x=1777014051;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=9L9BEN1iJ7INNhw4R2rW2Az9FI7mv15VM6YcJGbQtKs=;
-        b=b9sXChJESFFBP2YlurvpLrbjNWJZx7UV7esmXXyy6sl4rNhzrO3rts0pY98ZbuxW2b
-         C0HQ1ETQd3sreIbvTa5KxDcy8xZoYSsikY3+My1gTR7V1PyVSiqXBqHAQEKU3j6n1PPH
-         EQCrdtKSot944o4bUGXOczyXpXpMn8h6QzdnXXakrKAooHjE2/2H/DbQTVtmltV6EiUk
-         dHmptbW6LlC+/P7kOb5qFtCWallD4R6eKPF9Kd0Que56CT2lETAX7EIYinO9Ko1rqv+L
-         LMa8lRE737mK0SIRGHUaJtv9LZJ3wv/hDfSekKBAXFmy+VjSJCRaeI9oyJH+pRU7iJD0
-         8eJQ==
-X-Forwarded-Encrypted: i=1; AFNElJ94Wn/Vn0iVvpWs380xXTPXzCTUVn7WgU5JvbkVLH4oT/gpuQhR24UE5hctVNFOeBqoFLaNHl865HkwkGgHJenaFac=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YxtJQgsA9e6pDPRFqEANIilTHavg22IdA2mHs1L5N4wjOhAjlMf
-	tijy2+2qwGCxzZbsJvmVcFqH6T/zqkvUZcxLGY+Rzxrhdp14xx/tkSIvlvoqNSJKzZn54tNzVk5
-	KnvmN7eojsJWyoE5s12EOv4SflbBYuyU/4HjjkqAUerll2poXxRLG3xaCaKyDMxpWZysjyixzjE
-	uQnFOi+dNQ9VHpv6+t7uumM98IBTqe/WHOse90prPONHwGdpkV5w5Xplw663M=
-X-Gm-Gg: AeBDiev2oKEAbbWpyT76vyefAa7rabxrs/f+yUTsuYMu5/nf97tNtugmhDVXjpxAqb/
-	SXE1UrzYJaEeUsT17W6qKI33rcTunzDA9Qod+bwgPan3z9UvI7Z9zaIzwB+ohuhj15R7Db4tuTU
-	0z7zdvaKT2uukhtg9oZqJnNEojvczujR1tLZFANXnptgSnRnAAO6XP+50/eOFX94TGp+QKr+YS/
-	VqzZ3ZFpGUUGhU=
-X-Received: by 2002:a05:6214:d0c:b0:8a1:8ddd:e12e with SMTP id 6a1803df08f44-8b0281667femr25483376d6.48.1776409250957;
-        Fri, 17 Apr 2026 00:00:50 -0700 (PDT)
-X-Received: by 2002:a05:6214:d0c:b0:8a1:8ddd:e12e with SMTP id
- 6a1803df08f44-8b0281667femr25482326d6.48.1776409250230; Fri, 17 Apr 2026
- 00:00:50 -0700 (PDT)
-MIME-Version: 1.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Caz2oIgp;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=856723d307=libo.chen.cn@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H5ug6i3559018
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 00:07:05 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=xOU3/HSgbqg7BGoS4A+ol0ZkAw+0IvIQwA/zsP89OeI=; b=
+	Caz2oIgpLLIAaNo49KfmmHsOsEfYeZHmL8iyRcB91vHSrK6VmGTb+y5b4GdxcajW
+	diZgvnmsn629QhZ5UenXNa6fLP/qXQ9iQ7nmQdb8nGZcOEl9WclQGOxfxCJnq2Xz
+	P2/ZpbX1/wRpuuhMxFPijpc+6xk8eXhYTfJeYv84Y1VtVx1Y7/3YLqjqvmFg4zba
+	pY/65V9NQBEBhYaKiBfppEEpiijW09Y0MPSxx1+YwLaaY1imIPMkHssHNAzte3nc
+	VDlOZlLgcn6+pQzeIZm6xEjEK90rp9O0+uDyDhRP73Ii/wGwm1hDELjOgGgAj2tj
+	KxH5sDatcUkIOGaKpSHXHw==
+Received: from byapr05cu005.outbound.protection.outlook.com (mail-westusazon11010022.outbound.protection.outlook.com [52.101.85.22])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dh87mvps4-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 17 Apr 2026 00:07:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WHWoEKDce4fRhaHh8e2fkXg9+689jqFqzA/DdVHYadG8jWpiLBPhR2msxQKrS4v+2sAJkzaNG+qmnagVYjfp7+XJv3DY+9cqzuxxTZtrfPFPKYejMVGM8QLSSFDQrh8ur1dmpKto29BH41D38R6tzzrhufDG5Eb3LnbXTciz8cCtVDyMd0OLd1YYyvVAOAUmsixt4w1dN23Ezkzeku+Et8ZkOSSJFuD4mU2QfRdyk1WpS2zfRHjMQMRpxY8q/5OWi5puVR/fgCAp6+QWRahc0MdEhIMFdlbX4UoiJ6c7RVucPa8rVLYH0QDdOhfX2GzW6nSibLh0S4kqj4ly/zsukg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xOU3/HSgbqg7BGoS4A+ol0ZkAw+0IvIQwA/zsP89OeI=;
+ b=PAlmQ+W3RmVQfE4VQRe+dslfzoVKna4IgOsDejeolXtedbb3kdUGLZ8YnPu8nVGM7wXzfJt8LWsjZob/XI3RXguhr1leoeQQKGdhA/wFFFR+lRLVY30NIZnncp8pjnh4qJEpaYGvtDLpc6tZHA5sChF9g0QA+u/CieeC9zUmlqfcFggl0IgRWmfKi1HHh1B9qQsJ8YUlOVcvPx81GlCyeADlLs23YARmF4DvhGhdes7xPFI0P4yxIcvH1HQgIF6fWx/NZ71xPKblQeb5YAFy31H4BTVEcwOZzP9HvwCVP+4LkCblU9HtDjY1vJxbBFY45DlS007aglszqaR2y1aWzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from BN9PR11MB5354.namprd11.prod.outlook.com (2603:10b6:408:11b::7)
+ by SJ5PPF3F833FA49.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::823) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
+ 2026 07:07:02 +0000
+Received: from BN9PR11MB5354.namprd11.prod.outlook.com
+ ([fe80::4a0e:caa8:c2fa:8700]) by BN9PR11MB5354.namprd11.prod.outlook.com
+ ([fe80::4a0e:caa8:c2fa:8700%3]) with mapi id 15.20.9818.017; Fri, 17 Apr 2026
+ 07:07:02 +0000
+From: "Chen, Libo (CN)" <Libo.Chen.CN@windriver.com>
+To: "anuj.mittal@oss.qualcomm.com" <anuj.mittal@oss.qualcomm.com>,
+        "Wang,
+ Jinfeng (CN)" <Jinfeng.Wang.CN@windriver.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][scarthgap][PATCH v2 08/11] hdf5: fix CVE-2025-2308
+Thread-Topic: [oe] [meta-oe][scarthgap][PATCH v2 08/11] hdf5: fix
+ CVE-2025-2308
+Thread-Index: AQHcyLkjFb1kBXfg8UapYQUXdAXj3bXf0cyAgAMN+xA=
+Date: Fri, 17 Apr 2026 07:07:01 +0000
+Message-ID: 
+ <BN9PR11MB5354B725CCC029112F10F0D1DE202@BN9PR11MB5354.namprd11.prod.outlook.com>
 References: <20260410070508.1104455-1-jinfeng.wang.cn@windriver.com>
- <20260410070508.1104455-4-jinfeng.wang.cn@windriver.com> <CA+s=J=zqWBukNym5jYQskuPUa9j0S8z0nEk4se5fyN7373RoNw@mail.gmail.com>
- <BN9PR11MB53544226814AD60FA3622A0BDE202@BN9PR11MB5354.namprd11.prod.outlook.com>
-In-Reply-To: <BN9PR11MB53544226814AD60FA3622A0BDE202@BN9PR11MB5354.namprd11.prod.outlook.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Fri, 17 Apr 2026 15:00:38 +0800
-X-Gm-Features: AQROBzC8KaUlIDdlmlREUsUycf0trAiL_Ym9TA-8WULm_JvkBITRShuCsfhDK2k
-Message-ID: <CA+s=J=zvrCt_hz5vrF0ZT4Gc1yH+K0C0yWe3mqjBtqa7w9Bt9g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 03/11] hdf5: fix CVE-2025-6857
-To: "Chen, Libo (CN)" <Libo.Chen.CN@windriver.com>
-Cc: "Wang, Jinfeng (CN)" <Jinfeng.Wang.CN@windriver.com>,
-        "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: shlnSJam2n-pagdsDpU2QLMUI8cgdDfF
-X-Proofpoint-ORIG-GUID: shlnSJam2n-pagdsDpU2QLMUI8cgdDfF
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA2OCBTYWx0ZWRfXyCK/OtLKOihR
- XXmBb/yoKHE5IO/+gQuoWy3A/bmXMj5cLj2qCGgHBGN76rjm6PpiyiieL5qJCMPhYYFqr07Q+Dk
- dVg0CQ6gPvJETw6CUJPtp2LCyChz7xr+IC5Pspm/KuZxJIFsPDrIyRNVLgXb0lT8QBUUI+hcesi
- zklh7ONd8pfIh0MukddV9ly9KGXRI5kJtYz9uD+ePnObPBRvSRmAVf7Hjw7mohiBd7Rh2xBEDss
- Kn38V77vGFFoeDkeVWfvhRZQkavuKZPZipz+U1+/9DqIoRbD9DzBLtIFbIARyw4fyh3pgXKK/mg
- pQ5/KdCcI9f0zdTKtltISfPxgVKz+QPrYVADKvAaUTcv7imhEOTveEK9ZIpNBXLwk+I5BnICNgs
- xEaBPTvIOul/MPotWgu84kk9PRuummDzNb01cokIrue5i5IleNZDoWU5tBdbEsWiBYkkESSwekb
- /dd+K//FyzTMUtZQbyQ==
-X-Authority-Analysis: v=2.4 cv=YtE/gYYX c=1 sm=1 tr=0 ts=69e1daa4 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8
- a=Q4-j1AaZAAAA:8 a=1_S3K9cU9Rf37U515rgA:9 a=QEXdDO2ut3YA:10
- a=iYH6xdkBrDN1Jqds4HTS:22 a=FdTzh2GWekK77mhwV6Dw:22 a=9H3Qd4_ONW2Ztcrla5EB:22
+ <20260410070508.1104455-9-jinfeng.wang.cn@windriver.com>
+ <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
+In-Reply-To: 
+ <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_ActionId=18e66673-d749-4eac-8c47-cc83d362aab6;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_ContentBits=0;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Enabled=true;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Method=Standard;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Name=INTERNAL;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SetDate=2026-04-17T07:05:46Z;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SiteId=8ddb2873-a1ad-4a18-ae4e-4644631433be;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Tag=10,
+ 3, 0, 1;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN9PR11MB5354:EE_|SJ5PPF3F833FA49:EE_
+x-ms-office365-filtering-correlation-id: 0fbce73b-e699-4ad0-0b8f-08de9c4fecc1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|366016|376014|1800799024|18002099003|22082099003|56012099003|38070700021;
+x-microsoft-antispam-message-info: 
+ wUOx+6Zpb369h5Xu0VXL0AuHy6QFi1M+H8WmTQV5U5HS5k+g6hNjH6ooXhpsCIiaImK1cw1ze+tlsfqFQWZmgIrB1Usxgw5YiOCFg2+gB3hKaoNKq+38xveSWyiX3h1P1b9Ari7RgShWp+8DYtcFjRrULMLwcgp/qjJb41hxEvGQpyaTcBoin1LlpVbqZDPWeIpia/Xc+qWIUxDwMI8ZRIckbiPUTFCBvU/+hK3o0cZ/OW+t7iH1rpHNt/py/cNhLPDIB+2ipldWU0drH7cjORbbMuzQhfdG92Y9MqnSMjvGXrFasc5EFtpWWQ4WsMSiu+cLeRsOjj3R5WS+H4lhgKkLTBugPxTu/p9O5e3fwR+Q+KYE/17kTDNXEdBAD09SYAsP4YRSO9aGAL4NvoWi86VDToYO5S8j+BwifnmK1cyye0sJVBd2fqeVwCb2MrXo2LiKCUEAmcmK79K+ToGy5OiZuSpLo5Fb/p4/Y2GmhDl17M8kAMIMN+v/AUvbdgROrBqDxiVTk9LCy9T09Kdvaky6dzzwPe42MskyEsj7tBoOZWbO81aBVVX4OJ6aQG2lZvSVuNgnq3K6ddc/PGpZq6hp7Z+i3qs+DLyMUyYlm5AaEeLJX9ZMmUJSd+OVBZYjItR3LJomjp7RXQm+F1WP0/lsMG2abX8bFuY9PW/Wsl7wbl2fG0AGRTvw77T1g8cUGzAVbwHiKk89AlUZ4HYts4HEdMaiQmP/6aEqFtf58cIiHt5fvO9sDUVHufb8JZTfdPUDla5p3ZWdSAfGAs7uLgkAaw57aRufp0V3oX74NVdt3hLjFG6qMSJflDdQoHjg
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5354.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(22082099003)(56012099003)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?d1FjMDlYbjRHUDgzenQ5WHppM2dDSkhSY2lBUGRYUDVPTm5wQlBIWXNuMUxI?=
+ =?utf-8?B?dzE2VVAraTl5VmtRMkxYcUhuRE9TMUJKZFRmcWJPS2lMNWZMbk9YQlllVy9Q?=
+ =?utf-8?B?cC9jK21xOSsxc0h1d052U0ptTEZhejhXYUxBaUtBUmRWK3BWTGNJVGt3YnNh?=
+ =?utf-8?B?YlV5eCtsT2pTbW9FL3NQc1hYL2o3b3F5UGJOd0JnMENWRFQwT2hyVFlSOXFr?=
+ =?utf-8?B?azNaUGRkQ1ZRNGtFWlRaMStWQXdkTUszSGN6WVhDRUFqc0dUdEhVbXBNYmZU?=
+ =?utf-8?B?SnIrVGZBeGNDc3ZIUVZZTGQ1SFlEL2c5Z2htTjc5UkpuVHh2Uk5aMUExQTRp?=
+ =?utf-8?B?MVdCbEk5ZXdmd2k3eExMWWxUTTNmbkRIZ2J4OXYvOXRyUFNPdnE1anBpNDkr?=
+ =?utf-8?B?bndaUGNDMDJ4M0xHYVBuOTNRWGtxWUQ0SFJQaTN1eUQ3WUIwb1JKMTVaSitZ?=
+ =?utf-8?B?SXQ3a3F4bTZyVWdnZ1FhaVVHVjZaM3dGNFFUUElMSmExVVp6cWQrOVhlMUN1?=
+ =?utf-8?B?cXF6QW5YVmI1NkFxVWJ1bW0wZG9teTNabDM3Q2xza0pGbUpEWmtYckZuU3F1?=
+ =?utf-8?B?Um5sZ1pGR3B1Qzc3T2Q0Nk8rOWhBRHU1cEN0OWJWaW1vSEdNY2JhQTMrSGNa?=
+ =?utf-8?B?bkdyaXN3eFBWRHhqVytEZkNyekFjUkZzQ3lKWk1XeDBHL2lHclVFeWlVcUpW?=
+ =?utf-8?B?c1BScUY5L3lEQlBhQmJ3M0k5UHdIOHNodE9MZk1jd2pYQWNyMXRjTk9zTnMy?=
+ =?utf-8?B?UjUwNDNybDVmNWxraFpGQm4rU25oc2NTRjhQcUQyWm9Qdkh3THJoa0EwaUZQ?=
+ =?utf-8?B?Nk9rTGdWWTRpWUt6R0lLQmgxRWsrRnNBVnVlN0RiMXptdzBBaldTZ2RjcFNL?=
+ =?utf-8?B?Nk1Obys0Q1ZoNlIzTEJlRXhJT2s0KzhPUlBVSHFFSFhIVThFczY3eTRuemlJ?=
+ =?utf-8?B?Vk92MGFlSzZqblExQTlzSUthWWJKUGJYZGJ0QjlYQWh2bGdYN0V2cHFxQzY0?=
+ =?utf-8?B?dDExMU9RNUlVRmFlU2NRYXFSR0JOYURBNExpLzRJdmZ6eGVmRDJ2SjNYaGd2?=
+ =?utf-8?B?QjhVaHFjTmMvQ3ZweXV5YktKR05sMHJwZEkrSFhyL3l4VEMrd3J4TUJ4WW52?=
+ =?utf-8?B?VTBaWklMZTZ5b0lONHJCQUkvNy9UT2x0bXh6ZFRGQjhYTU5mSE8vL3BwY0FZ?=
+ =?utf-8?B?QnJlbjZUdmMwUmVKR29jQzA2YjFnMW1nWXU1ZjdxdHpIN21Lc29SUmxSSkpO?=
+ =?utf-8?B?SzRzbGJqVzcvLzB1S0YxcHExVnZlYXY0UjNPSEh3QVBQcmRpejdzenFZdXpi?=
+ =?utf-8?B?ZENGSEc5L09hTlVvUWxManNycTUxM3hOUEp1dlFQMkZlRXpCd2VLVWhsd0FL?=
+ =?utf-8?B?V08xWE4xWEtaeW1ON3JmaU85MHhFdFh4cS9FMHIvenB1U1ZxbElMVEwwdkoz?=
+ =?utf-8?B?bGM4ejcyZDZ5VnpUTDJHdUkvam9YaEpVcDlLejZ6aWRXTWluWmpEZEdvNTEx?=
+ =?utf-8?B?d2RIbmVqMGJHV1ZhQzFHeW5jZ2s3TW94T2J6TVVkamp6S2xzNGxraGZ2NitU?=
+ =?utf-8?B?UUQ2R2R1TWpDa2RCODhxNVU5MExxU2YzQ1FjRVozRG51aXpUcVM5bnVBUDl2?=
+ =?utf-8?B?ZDNKcGJvbFVzYWNrVXNBOHd0SVp2TlA0dGppcEw3S240UVZlTHBublBQOHM1?=
+ =?utf-8?B?V3VnajhWZWVuVHlaaXY3N21NRXNaNG1RcC9qbVhMM2c4VmZmeHZZQkNuR3hY?=
+ =?utf-8?B?TXNjYUxLNjN1VjVrQkRiOUdEZFlFRlIrNXErMFlJT2VyZ1BiWEU3aUZBN2xO?=
+ =?utf-8?B?QkRTUjJNTzk3ZktHSDI1d0FRMnlCeExaU3VTV1N6RE0vSjlldWExeFNmK3Nn?=
+ =?utf-8?B?VzBLS2pBNVNkd1oxUjA0OXZoaTBjR3Y4T2xSVittcU84eTRrR3lieVlQSEVC?=
+ =?utf-8?B?dWVxWGJxS2Znc3ZRaSs1NXNVb2M3K1Y0cnJJN1R4ZDNsMURMVkt3cEZreVpI?=
+ =?utf-8?B?bEpjcDkxUENYZXVzN1RQSWJrb0pZWVNFamNHTlpEczRBUmY3VUYyWXNia1hF?=
+ =?utf-8?B?UzRiQmVoK3hXK2R2VThlc1VuRzhmTW9Jcnd5NDJUVHNYUkd6SEg4Y0thY3lu?=
+ =?utf-8?B?M0dMMnN0UFVTeHBMZ1Y4WEQxT0pyNGFxTCtqWFpEbnkzUitDZHdPSzI3UVNa?=
+ =?utf-8?B?QXdxL1lwemdvaXhDWU5rRm5RU3JNZ2RvY0RzNGZSd1dHcXZnTVhVV2oxSDRw?=
+ =?utf-8?B?VkVWU05sRWQ5RmJNa1RMWDNoNUNMT3JyMEt5cGtxQk5ZTjQzN0JWa2xvZ1Mv?=
+ =?utf-8?B?U0U3Yis0cERvYW1Cbld4NmZOYmVCV2FPemFsaWU1a1dHOFlpVElBQT09?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked: 
+	NcrkzqpZ08ekuxuxFoVFV5SheVgYKxwDI9NLlDsIwO2Tmf1d5I1hVUWdp/ajeWbVXD5h/AenveTsu63mAbj4dqoxOPniJ72yVBkDQRA0NCyGp2VYfB/TF/kVB/NWB/5d4arViBg1mBwZaoTIt+ldEG1Thhmp96ofRYk8GYDIXF5Jb+pXOlUQolj9F+AVBGEXcs6QYtLbIjP0tYJl4XWQ1REpc3nXhytB5Rsljc5RZWgoz2U9uRm5dZK7W4PJLNIifnF7pDseoRRyRPdHIZxTnbR6BDctpL/+AfOsOn2Q8Ap4RCeB6Dqzfp3RfZTX6AUCZG5TObaNEupB+EGngk2BoA==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5354.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0fbce73b-e699-4ad0-0b8f-08de9c4fecc1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Apr 2026 07:07:02.1597
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: XGS/h0q4KirVB70/lzJ/tikmEbQu3c9qlZ+bfd6ME7ujzkqasR3WcsKIaJp5/pPFH9LrbyRfyQWmrt7njnWGF722SjLdxfe6uo0brJNxfkU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF3F833FA49
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA2OCBTYWx0ZWRfX+yIzLych/QKh
+ yoc6fwylfUYDHSPEIjqy1QF8L4+ipA0CoIsAWraH8VQBWsMezbhfr3VDqwE2HW9AaU4Y8vhNNUX
+ Kn0aDdzh3XowoNnXOyAg48IrAvBSbzoQnDNjnTTkk+wY1HxN+zmAzqhePj8GUpb616ewSTqGlyK
+ RMc/jn3gthEJbH3Ezx0IflMCCueeextvn3wOGg/0AI040BdtcdD+o4cZh6ACdjHkBhR8OtyaN51
+ 0yvdXeqZm9yhjHYTcWFqoPvt6+gE+jlotgjRzvtxLByNmekqyUDaiF/9lnrGEQwpQy/JVX6aCZC
+ OEFBwCzO0ynPO7UsOhsgraUVdkW/kw9QQrXrH9qfk+GBrphcoHbgQZv09LWCyl5JCnNpx0pCdjp
+ IFsiG/GXQXh6f6Sq6nK77DHiqL0Rha60dR9/FgnR3qlvFCSE7jsIPCuGt/Q1nYGcyUcyRCtg7q0
+ NFcqRSrH9eki+UWWuEA==
+X-Proofpoint-ORIG-GUID: Bcmp3m_PtRx2dyZxpuF419YHa03aDy_R
+X-Authority-Analysis: v=2.4 cv=GupyPE1C c=1 sm=1 tr=0 ts=69e1dc19 cx=c_pps
+ a=0Qqeoa/8LQ4SOC89qm8Uhg==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=iKiJcTA2PjBS6x5JeXcw:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
+ a=t7CeM3EgAAAA:8 a=Nv9ropGlmozstVHnj6sA:9 a=QEXdDO2ut3YA:10
+ a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: 5aZGNDhvBJayfgg8X8ItzDkkOt0RzPMc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_04,2026-04-16_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0
- adultscore=0 malwarescore=0 clxscore=1015 priorityscore=1501 impostorscore=0
+ phishscore=0 impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0
+ lowpriorityscore=0 bulkscore=0 priorityscore=1501 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:00:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126427
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:07:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126428
 
-On Fri, Apr 17, 2026 at 12:05=E2=80=AFPM Chen, Libo (CN)
-<Libo.Chen.CN@windriver.com> wrote:
->
->
->
-> >-----Original Message-----
-> >From: openembedded-devel@lists.openembedded.org
-> ><openembedded-devel@lists.openembedded.org> On Behalf Of Anuj Mittal via
-> >lists.openembedded.org
-> >Sent: Wednesday, April 15, 2026 4:35 PM
-> >To: Wang, Jinfeng (CN) <Jinfeng.Wang.CN@windriver.com>
-> >Cc: openembedded-devel@lists.openembedded.org
-> >Subject: Re: [oe] [meta-oe][scarthgap][PATCH v2 03/11] hdf5: fix CVE-202=
-5-6857
-> >
-> >CAUTION: This email comes from a non Wind River email account!
-> >Do not click links or open attachments unless you recognize the sender a=
-nd know
-> >the content is safe.
-> >
-> >On Fri, Apr 10, 2026 at 3:05=E2=80=AFPM Wang, Jinfeng (CN) via lists.ope=
-nembedded.org
-> ><Jinfeng.Wang.CN=3Dwindriver.com@lists.openembedded.org> wrote:
-> >>
-> >> From: Libo Chen <libo.chen.cn@windriver.com>
-> >>
-> >> According to [1], A vulnerability has been found in HDF5 1.14.6 and
-> >> classified as problematic. Affected by this vulnerability is the
-> >> function
-> >> H5G__node_cmp3 of the file src/H5Gnode.c. The manipulation leads to
-> >> stack-based buffer overflow. It is possible to launch the attack on
-> >> the local host. The exploit has been disclosed to the public and may b=
-e used.
-> >>
-> >> Backport patch [2] from upstream to fix CVE-2025-6857
-> >>
-> >> [1] https://nvd.nist.gov/vuln/detail/CVE-2025-6857
-> >> [2]
-> >>
-> >https://github.com/HDFGroup/hdf5/commit/a8ceb1d95bb997f548c1129363dad
-> >5
-> >> 3c18540096
-> >>
-> >> Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
-> >> Signed-off-by: Jinfeng Wang <jinfeng.wang.cn@windriver.com>
-> >> ---
-> >>  .../hdf5/files/CVE-2025-6857.patch            | 248
-> >++++++++++++++++++
-> >>  meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
-> >>  2 files changed, 249 insertions(+)
-> >>  create mode 100644
-> >> meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
-> >>
-> >> diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
-> >> b/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
-> >> new file mode 100644
-> >> index 0000000000..8b40d0e946
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-6857.patch
-> >> @@ -0,0 +1,248 @@
-> >> +From eb3af284cc0ac8c758c65f492fc693ed50539592 Mon Sep 17 00:00:00
-> >> +2001
-> >> +From: Libo Chen <libo.chen.cn@windriver.com>
-> >> +Date: Thu, 29 Jan 2026 13:59:39 +0800
-> >> +Subject: [PATCH] Fix CVE-2025-6857
-> >> +
-> >> +Add additional checks for v1 B-tree corruption
-> >> +
-> >> +An HDF5 file had a corrupted v1 B-tree that would result in a stack o=
-verflow
-> >when performing a lookup on it. This has been fixed with additional inte=
-grity
-> >checks.
-> >> +
-> >> +CVE: CVE-2025-6857
-> >> +
-> >> +Upstream-Status: Backport
-> >>
-> >+[https://github.com/HDFGroup/hdf5/commit/a8ceb1d95bb997f548c1129363d
-> >a
-> >> +d53c18540096]
-> >> +
-> >> +Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
-> >> +---
-> >> + src/H5B.c    | 92
-> >+++++++++++++++++++++++++++++++++++++++++++---------
-> >> + src/H5Bpkg.h |  6 ++++
-> >
-> >This and some other changes are not in the reference patch being backpor=
-ted.
-> >Can you please provide additional details to make it clear what is being=
- done?
-> >
->
-> [Libo> ] Thanks for your comments. There are 2 major other changes in my =
-patch. The 1st one is The H5B_UNKNOWN_NODELEVEL macro and exp_level field i=
-n H5Bpkg.h. It's necessary to introduce them in hdf5 1.14.4 since there are=
- no such variables due to difference between 1.14.4 and 2.0.0. The 2nd is "=
-cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL" statements in H5B_* functi=
-ons. It just initialized the new variable cache_udata.exp_level.
->
-
-Can you please add a note to commit message in patch and resend?
-
-> >> + 2 files changed, 83 insertions(+), 15 deletions(-)
-> >> +
-> >> +diff --git a/src/H5B.c b/src/H5B.c
-> >> +index 5a7a238..4efa679 100644
-> >> +--- a/src/H5B.c
-> >> ++++ b/src/H5B.c
-> >> +@@ -140,6 +140,8 @@ typedef struct H5B_ins_ud_t {
-> >> +/********************/
-> >> + /* Local Prototypes */
-> >> + /********************/
-> >> ++static herr_t    H5B_find_helper(H5F_t *f, const H5B_class_t *type,
-> >haddr_t addr, int exp_level, bool *found,
-> >> ++                                 void *udata);
-> >> + static H5B_ins_t H5B__insert_helper(H5F_t *f, H5B_ins_ud_t *bt_ud, c=
-onst
-> >H5B_class_t *type, uint8_t *lt_key,
-> >> +                                     bool *lt_key_changed, uint8_t
-> >*md_key, void *udata, uint8_t *rt_key,
-> >> +                                     bool *rt_key_changed,
-> >> +H5B_ins_ud_t *split_bt_ud /*out*/); @@ -252,26 +254,67 @@ done:
-> >> + } /* end H5B_create() */
-> >> +
-> >> +
-> >> +/*-------------------------------------------------------------------
-> >> +------
-> >> +- * Function:  H5B_find
-> >> ++ * Function:    H5B_find
-> >> +  *
-> >> +- * Purpose:   Locate the specified information in a B-tree and retur=
-n
-> >> +- *            that information by filling in fields of the caller-su=
-pplied
-> >> +- *            UDATA pointer depending on the type of leaf node
-> >> +- *            requested.  The UDATA can point to additional data pas=
-sed
-> >> +- *            to the key comparison function.
-> >> ++ * Purpose:     Locate the specified information in a B-tree and ret=
-urn
-> >> ++ *              that information by filling in fields of the
-> >> ++ *              caller-supplied UDATA pointer depending on the type =
-of
-> >leaf
-> >> ++ *              node requested.  The UDATA can point to additional d=
-ata
-> >> ++ *              passed to the key comparison function.
-> >> +  *
-> >> +- * Note:      This function does not follow the left/right sibling
-> >> +- *            pointers since it assumes that all nodes can be reache=
-d
-> >> +- *            from the parent node.
-> >> ++ * Note:        This function does not follow the left/right sibling
-> >> ++ *              pointers since it assumes that all nodes can be reac=
-hed
-> >> ++ *              from the parent node.
-> >> +  *
-> >> +- * Return:    Non-negative (true/false) on success (if found, values=
- returned
-> >> +- *              through the UDATA argument). Negative on failure (if=
- not
-> >found,
-> >> +- *              UDATA is undefined).
-> >> ++ * Return:      Non-negative (true/false) on success (if found, valu=
-es
-> >> ++ *              returned through the UDATA argument). Negative on
-> >failure
-> >> ++ *              (if not found, UDATA is undefined).
-> >> +  *
-> >> +
-> >> + *-------------------------------------------------------------------
-> >> + ------
-> >> +  */
-> >> + herr_t
-> >> + H5B_find(H5F_t *f, const H5B_class_t *type, haddr_t addr, bool
-> >> + *found, void *udata)
-> >> ++{
-> >> ++    herr_t ret_value =3D SUCCEED;
-> >> ++
-> >> ++    FUNC_ENTER_NOAPI(FAIL)
-> >> ++
-> >> ++    /*
-> >> ++     * Check arguments.
-> >> ++     */
-> >> ++    assert(f);
-> >> ++    assert(type);
-> >> ++    assert(type->decode);
-> >> ++    assert(type->cmp3);
-> >> ++    assert(type->found);
-> >> ++    assert(H5_addr_defined(addr));
-> >> ++
-> >> ++    if ((ret_value =3D H5B_find_helper(f, type, addr,
-> >H5B_UNKNOWN_NODELEVEL, found, udata)) < 0)
-> >> ++        HGOTO_ERROR(H5E_BTREE, H5E_NOTFOUND, FAIL, "can't lookup
-> >> ++ key");
-> >> ++
-> >> ++done:
-> >> ++    FUNC_LEAVE_NOAPI(ret_value)
-> >> ++} /* end H5B_find() */
-> >> ++
-> >> ++/*------------------------------------------------------------------=
--------
-> >> ++ * Function:    H5B_find_helper
-> >> ++ *
-> >> ++ * Purpose:     Recursive helper routine for H5B_find used to track =
-node
-> >> ++ *              levels and attempt to detect B-tree corruption durin=
-g
-> >> ++ *              lookups.
-> >> ++ *
-> >> ++ * Note:        This function does not follow the left/right sibling
-> >> ++ *              pointers since it assumes that all nodes can be reac=
-hed
-> >> ++ *              from the parent node.
-> >> ++ *
-> >> ++ * Return:      Non-negative on success (if found, values returned t=
-hrough
-> >> ++ *              the UDATA argument). Negative on failure (if not fou=
-nd,
-> >> ++ *              UDATA is undefined).
-> >> ++ *
-> >> ++
-> >> ++*-------------------------------------------------------------------
-> >> ++------
-> >> ++ */
-> >> ++static herr_t
-> >> ++H5B_find_helper(H5F_t *f, const H5B_class_t *type, haddr_t addr, int
-> >> ++exp_level, bool *found, void *udata)
-> >> + {
-> >> +     H5B_t         *bt =3D NULL;
-> >> +     H5UC_t        *rc_shared;           /* Ref-counted shared info *=
-/
-> >> +@@ -281,7 +324,7 @@ H5B_find(H5F_t *f, const H5B_class_t *type, haddr=
-_t
-> >addr, bool *found, void *uda
-> >> +     int            cmp       =3D 1;       /* Key comparison value */
-> >> +     herr_t         ret_value =3D SUCCEED; /* Return value */
-> >> +
-> >> +-    FUNC_ENTER_NOAPI(FAIL)
-> >> ++    FUNC_ENTER_NOAPI_NOINIT
-> >> +
-> >> +     /*
-> >> +      * Check arguments.
-> >> +@@ -306,6 +349,7 @@ H5B_find(H5F_t *f, const H5B_class_t *type, haddr=
-_t
-> >addr, bool *found, void *uda
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D exp_level;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__READ_ONLY_FLAG)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> + load B-tree node");
-> >> +
-> >> +@@ -329,7 +373,17 @@ H5B_find(H5F_t *f, const H5B_class_t *type,
-> >haddr_t addr, bool *found, void *uda
-> >> +         assert(idx < bt->nchildren);
-> >> +
-> >> +         if (bt->level > 0) {
-> >> +-            if ((ret_value =3D H5B_find(f, type, bt->child[idx], fou=
-nd, udata)) <
-> >0)
-> >> ++            /* Sanity check to catch the case where the current node
-> >points to
-> >> ++             * itself and the current node was loaded with an expect=
-ed
-> >node level
-> >> ++             * of H5B_UNKNOWN_NODELEVEL, thus bypassing the
-> >expected node level
-> >> ++             * check during deserialization and in the future if the=
- node
-> >was
-> >> ++             * cached.
-> >> ++             */
-> >> ++            if (bt->child[idx] =3D=3D addr)
-> >> ++                HGOTO_ERROR(H5E_BTREE, H5E_BADVALUE, FAIL, "cyclic
-> >> ++ B-tree detected");
-> >> ++
-> >> ++            if ((ret_value =3D H5B_find_helper(f, type, bt->child[id=
-x],
-> >(int)(bt->level - 1), found, udata)) <
-> >> ++                0)
-> >> +                 HGOTO_ERROR(H5E_BTREE, H5E_NOTFOUND, FAIL, "can't
-> >lookup key in subtree");
-> >> +         } /* end if */
-> >> +         else {
-> >> +@@ -343,7 +397,7 @@ done:
-> >> +         HDONE_ERROR(H5E_BTREE, H5E_CANTUNPROTECT, FAIL, "unable
-> >to
-> >> +release node");
-> >> +
-> >> +     FUNC_LEAVE_NOAPI(ret_value)
-> >> +-} /* end H5B_find() */
-> >> ++} /* end H5B_find_helper() */
-> >> +
-> >> +
-> >> +/*-------------------------------------------------------------------
-> >> +------
-> >> +  * Function:  H5B__split
-> >> +@@ -425,6 +479,7 @@ H5B__split(H5F_t *f, H5B_ins_ud_t *bt_ud, unsigne=
-d
-> >idx, void *udata, H5B_ins_ud_
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D shared->type;
-> >> +     cache_udata.rc_shared =3D bt_ud->bt->rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (split_bt_ud->bt =3D
-> >> +                      (H5B_t *)H5AC_protect(f, H5AC_BT,
-> >split_bt_ud->addr, &cache_udata, H5AC__NO_FLAGS_SET)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> +protect B-tree"); @@ -532,6 +587,7 @@ H5B_insert(H5F_t *f, const
-> >H5B_class_t *type, haddr_t addr, void *udata)
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     bt_ud.addr            =3D addr;
-> >> +     if (NULL =3D=3D (bt_ud.bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, =
-addr,
-> >&cache_udata, H5AC__NO_FLAGS_SET)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> +locate root of B-tree"); @@ -789,6 +845,7 @@ H5B__insert_helper(H5F_t=
- *f,
-> >H5B_ins_ud_t *bt_ud, const H5B_class_t *type, uint8
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +
-> >> +     if (0 =3D=3D bt->nchildren) {
-> >> +         /*
-> >> +@@ -1077,6 +1134,7 @@ H5B__iterate_helper(H5F_t *f, const H5B_class_t
-> >*type, haddr_t addr, H5B_operato
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__READ_ONLY_FLAG)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5_ITER_ERROR,
-> >> + "unable to load B-tree node");
-> >> +
-> >> +@@ -1190,6 +1248,7 @@ H5B__remove_helper(H5F_t *f, haddr_t addr,
-> >const H5B_class_t *type, int level, u
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__NO_FLAGS_SET)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, H5B_INS_ERROR,
-> >> + "unable to load B-tree node");
-> >> +
-> >> +@@ -1542,6 +1601,7 @@ H5B_delete(H5F_t *f, const H5B_class_t *type,
-> >haddr_t addr, void *udata)
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__NO_FLAGS_SET)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> + load B-tree node");
-> >> +
-> >> +@@ -1782,6 +1842,7 @@ H5B__get_info_helper(H5F_t *f, const H5B_class_=
-t
-> >*type, haddr_t addr, const H5B_
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__READ_ONLY_FLAG)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> + load B-tree node");
-> >> +
-> >> +@@ -1923,6 +1984,7 @@ H5B_valid(H5F_t *f, const H5B_class_t *type,
-> >haddr_t addr)
-> >> +     cache_udata.f         =3D f;
-> >> +     cache_udata.type      =3D type;
-> >> +     cache_udata.rc_shared =3D rc_shared;
-> >> ++    cache_udata.exp_level =3D H5B_UNKNOWN_NODELEVEL;
-> >> +     if (NULL =3D=3D (bt =3D (H5B_t *)H5AC_protect(f, H5AC_BT, addr,
-> >&cache_udata, H5AC__READ_ONLY_FLAG)))
-> >> +         HGOTO_ERROR(H5E_BTREE, H5E_CANTPROTECT, FAIL, "unable to
-> >> + protect B-tree node");
-> >> +
-> >> +diff --git a/src/H5Bpkg.h b/src/H5Bpkg.h index d1ad647..f75e857
-> >> +100644
-> >> +--- a/src/H5Bpkg.h
-> >> ++++ b/src/H5Bpkg.h
-> >> +@@ -39,6 +39,11 @@
-> >> + /* # of bits for node level: 1 byte */  #define LEVEL_BITS 8
-> >> +
-> >> ++/* Indicates that the level of the current node is unknown.  When
-> >> ++the level
-> >> ++ * is known, it can be used to detect corrupted level during
-> >> ++decoding  */ #define H5B_UNKNOWN_NODELEVEL -1
-> >> ++
-> >> + /****************************/
-> >> + /* Package Private Typedefs */
-> >> + /****************************/
-> >> +@@ -60,6 +65,7 @@ typedef struct H5B_t {  typedef struct
-> >> +H5B_cache_ud_t {
-> >> +     H5F_t                    *f;         /* File that B-tree node is
-> >within */
-> >> +     const struct H5B_class_t *type;      /* Type of tree */
-> >> ++    int                       exp_level; /* Expected level of the cu=
-rrent
-> >node */
-> >> +     H5UC_t                   *rc_shared; /* Ref-counted shared info =
-*/
-> >> + } H5B_cache_ud_t;
-> >> +
-> >> +--
-> >> +2.34.1
-> >> +
-> >> diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-> >> b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-> >> index e8432f0d6b..1b9f0fcfa8 100644
-> >> --- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-> >> +++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
-> >> @@ -24,6 +24,7 @@ SRC_URI =3D " \
-> >>      file://CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_01.patch \
-> >>      file://CVE-2025-6269-CVE-2025-6270-CVE-2025-6516_02.patch \
-> >>      file://CVE-2025-2926.patch \
-> >> +    file://CVE-2025-6857.patch \
-> >>  "
-> >>  SRC_URI[sha256sum] =3D
-> >"019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
-> >>
-> >> --
-> >> 2.34.1
-> >>
-> >>
-> >>
-> >>
+DQoNCj4tLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPkZyb206IG9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgQW51aiBNaXR0YWwgdmlhDQo+bGlzdHMub3BlbmVt
+YmVkZGVkLm9yZw0KPlNlbnQ6IFdlZG5lc2RheSwgQXByaWwgMTUsIDIwMjYgNDoyNyBQTQ0KPlRv
+OiBXYW5nLCBKaW5mZW5nIChDTikgPEppbmZlbmcuV2FuZy5DTkB3aW5kcml2ZXIuY29tPg0KPkNj
+OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPlN1YmplY3Q6IFJl
+OiBbb2VdIFttZXRhLW9lXVtzY2FydGhnYXBdW1BBVENIIHYyIDA4LzExXSBoZGY1OiBmaXggQ1ZF
+LTIwMjUtMjMwOA0KPg0KPkNBVVRJT046IFRoaXMgZW1haWwgY29tZXMgZnJvbSBhIG5vbiBXaW5k
+IFJpdmVyIGVtYWlsIGFjY291bnQhDQo+RG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNo
+bWVudHMgdW5sZXNzIHlvdSByZWNvZ25pemUgdGhlIHNlbmRlciBhbmQga25vdw0KPnRoZSBjb250
+ZW50IGlzIHNhZmUuDQo+DQo+T24gRnJpLCBBcHIgMTAsIDIwMjYgYXQgMzowNeKAr1BNIFdhbmcs
+IEppbmZlbmcgKENOKSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPjxKaW5mZW5nLldhbmcu
+Q049d2luZHJpdmVyLmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiB3cm90ZToNCj4+DQo+PiBG
+cm9tOiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4NCj4+IEFjY29y
+ZGluZyB0byBbMV0sIEEgdnVsbmVyYWJpbGl0eSwgd2hpY2ggd2FzIGNsYXNzaWZpZWQgYXMgY3Jp
+dGljYWwsDQo+PiB3YXMgZm91bmQgaW4gSERGNSAxLjE0LjYuIFRoaXMgYWZmZWN0cyB0aGUgZnVu
+Y3Rpb24NCj4+IEg1Wl9fc2NhbGVvZmZzZXRfZGVjb21wcmVzc19vbmVfYnl0ZSBvZiB0aGUgY29t
+cG9uZW50IFNjYWxlLU9mZnNldCBGaWx0ZXIuDQo+PiBUaGUgbWFuaXB1bGF0aW9uIGxlYWRzIHRv
+IGhlYXAtYmFzZWQgYnVmZmVyIG92ZXJmbG93LiBBbiBhdHRhY2sgaGFzIHRvDQo+PiBiZSBhcHBy
+b2FjaGVkIGxvY2FsbHkuIFRoZSBleHBsb2l0IGhhcyBiZWVuIGRpc2Nsb3NlZCB0byB0aGUgcHVi
+bGljDQo+PiBhbmQgbWF5IGJlIHVzZWQuIFRoZSB2ZW5kb3IgcGxhbnMgdG8gZml4IHRoaXMgaXNz
+dWUgaW4gYW4gdXBjb21pbmcgcmVsZWFzZS4NCj4+DQo+PiBCYWNrcG9ydCBwYXRjaCBbMl0gZnJv
+bSB1cHN0cmVhbSB0byBmaXggQ1ZFLTIwMjUtMjMwOA0KPj4NCj4+IFsxXSBodHRwczovL252ZC5u
+aXN0Lmdvdi92dWxuL2RldGFpbC9DVkUtMjAyNS0yMzA4DQo+PiBbMl0NCj4+DQo+aHR0cHM6Ly9n
+aXRodWIuY29tL0hERkdyb3VwL2hkZjUvY29tbWl0LzJjZTdmZGM0Y2YxNDdkMjgwYWE2ZDQ5Njg2
+Mjk3Zg0KPj4gYWFjYzI1MGU0MA0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IExpYm8gQ2hlbiA8bGli
+by5jaGVuLmNuQHdpbmRyaXZlci5jb20+DQo+PiBTaWduZWQtb2ZmLWJ5OiBKaW5mZW5nIFdhbmcg
+PGppbmZlbmcud2FuZy5jbkB3aW5kcml2ZXIuY29tPg0KPj4gLS0tDQo+PiAgLi4uL2hkZjUvZmls
+ZXMvQ1ZFLTIwMjUtMjMwOC5wYXRjaCAgICAgICAgICAgIHwgMjEyMA0KPisrKysrKysrKysrKysr
+KysrDQo+PiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvaGRmNS9oZGY1XzEuMTQuNC0zLmJiIHwg
+ICAgMSArDQo+PiAgMiBmaWxlcyBjaGFuZ2VkLCAyMTIxIGluc2VydGlvbnMoKykNCj4+ICBjcmVh
+dGUgbW9kZSAxMDA2NDQNCj4+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2hkZjUvZmlsZXMvQ1ZF
+LTIwMjUtMjMwOC5wYXRjaA0KPj4NCj4+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
+cG9ydC9oZGY1L2ZpbGVzL0NWRS0yMDI1LTIzMDgucGF0Y2gNCj4+IGIvbWV0YS1vZS9yZWNpcGVz
+LXN1cHBvcnQvaGRmNS9maWxlcy9DVkUtMjAyNS0yMzA4LnBhdGNoDQo+PiBuZXcgZmlsZSBtb2Rl
+IDEwMDY0NA0KPj4gaW5kZXggMDAwMDAwMDAwMC4uMTNiMDRiZjhhMQ0KPj4gLS0tIC9kZXYvbnVs
+bA0KPj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvaGRmNS9maWxlcy9DVkUtMjAyNS0y
+MzA4LnBhdGNoDQo+PiBAQCAtMCwwICsxLDIxMjAgQEANCj4+ICtGcm9tIGNiY2U0YzJlY2Y2ZjU1
+NTc2MDU4OTBlZWMxMjVlY2ZhYTQzNzExMzEgTW9uIFNlcCAxNyAwMDowMDowMA0KPj4gKzIwMDEN
+Cj4+ICtGcm9tOiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4gK0Rh
+dGU6IEZyaSwgMzAgSmFuIDIwMjYgMTY6NDM6MDQgKzA4MDANCj4+ICtTdWJqZWN0OiBbUEFUQ0hd
+IEZpeCBDVkUtMjAyNS0yMzA4ICgjNTk2MCkNCj4+ICsNCj4+ICtBIG1hbGZvcm1lZCBmaWxlIGNh
+biBjYXVzZSB0aGUgc2NhbGUtb2Zmc2V0IGZpbHRlciB0byBoYXZlIHRvbyBsaXR0bGUgaW5wdXQg
+ZGF0YQ0KPmNhdXNpbmcgYSBoZWFwIGJ1ZmZlciBvdmVyZmxvdy4gQWRkaXRpb25hbCBjaGVja3Mg
+b24gdGhlIG1heGltdW0gYnVmZmVyIGxlbmd0aA0KPmFyZSByZXF1aXJlZCBkdXJpbmcgdGhlIGRl
+Y29tcHJlc3Npb24uDQo+PiArDQo+PiArVGhpcyBQUiBmaXhlcyBDVkUtMjAyNS0yMzA4Lg0KPj4g
+Kw0KPj4gK0NWRTogQ1ZFLTIwMjUtMjMwOA0KPj4gKw0KPj4gK1Vwc3RyZWFtLVN0YXR1czogQmFj
+a3BvcnQNCj4+DQo+K1todHRwczovL2dpdGh1Yi5jb20vSERGR3JvdXAvaGRmNS9jb21taXQvMmNl
+N2ZkYzRjZjE0N2QyODBhYTZkNDk2ODYyOQ0KPj4gKzdmYWFjYzI1MGU0MF0NCj4+ICsNCj4+ICtT
+aWduZWQtb2ZmLWJ5OiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4g
+Ky0tLQ0KPj4gKyBzcmMvSDVac2NhbGVvZmZzZXQuYyAgICAgIHwgIDE3NyArKy0tDQo+PiArIHNy
+Yy9INVpzY2FsZW9mZnNldC5jLm9yaWcgfCAxNzgxDQo+PiArKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKw0KPj4gKyAyIGZpbGVzIGNoYW5nZWQsIDE4ODYgaW5zZXJ0aW9ucygr
+KSwgNzIgZGVsZXRpb25zKC0pICBjcmVhdGUgbW9kZQ0KPj4gKzEwMDY0NCBzcmMvSDVac2NhbGVv
+ZmZzZXQuYy5vcmlnDQo+DQo+Q2FuIHlvdSBwbGVhc2UgZml4IHRoaXMgcGF0Y2ggYW5kIHJlc2Vu
+ZD8NCj4NCj5UaGFua3MsDQo+DQo+QW51ag0KW0xpYm8+IF0gU29ycnksIGl0J3MgbXkgbWlzdGFr
+ZS4gSSB3aWxsIHNlbmQgdGhlIGZpeGVkIHBhdGNoIHNvb24uDQo=
 
