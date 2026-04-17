@@ -1,237 +1,345 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42BBEF4368E
-	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 10:57:00 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.39807.1776413762563789214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 519BAF4368F
+	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 11:05:10 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.42337.1776423903308861711
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2026 01:16:02 -0700
+ Fri, 17 Apr 2026 04:05:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=niV3d8cA;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=8567a08d2d=haiqing.bai@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H4nnQt817117
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:54:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=RrQ6cF5nD4Y5K+B3cIjn
-	EvDgbYdepNWIm8U04bA1GSw=; b=niV3d8cAslzadEdBlaDaL+XQzR/Ok5qdIl+W
-	qrKqNx+HtKr1OqkAc6SjQMdWjxu1MeUnEC/zTX5SwJhVWrfvJV5tFsZsYH64BZCP
-	ecmTudg6BtH7LUSgMVsKepkRXiUUm1pKdAU36rYSM7cO5CrthgSqS2HewQrBffRh
-	qfJC6VwAX7FUyoYnEpCovOy6wGBXvnwOYbE2ew6uHQ9TQPjkOHqpIRuOoY9Vv0fb
-	TokgzyRsEvtT8VeidkuViiOoKlseiPYZ2ZPonVPWUVG5xrdz1B1FcvpzgCDj/Zr3
-	aTOby4ebQzu95Y9lSTS01wWGeptWbt4M/8ewwV1sQDCKFfu0Lw==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dh877mt7b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:54:30 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.61; Fri, 17 Apr 2026 00:54:26 -0700
-Received: from pek-lpggp2.wrs.com (10.11.232.110) by
- ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
- 15.1.2507.61 via Frontend Transport; Fri, 17 Apr 2026 00:54:26 -0700
-From: <haiqing.bai@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
-Subject: [oe][meta-networking][PATCH] drbd-utils: upgrade 9.30.0 -> 9.34.0
-Date: Fri, 17 Apr 2026 15:54:24 +0800
-Message-ID: <20260417075425.1290677-1-haiqing.bai@windriver.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@mvista.com header.s=google header.b=a+2Y6k/Q;
+ spf=pass (domain: mvista.com, ip: 209.85.208.42, mailfrom: vanusuri@mvista.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6712fd40860so867689a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 04:05:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776423901; cv=none;
+        d=google.com; s=arc-20240605;
+        b=kx4Ay4mS4R52bGprQefX7BG2XMFqnGk4/Ve0KL00hM09BxNRgBKafSWmBmSGl0mrOo
+         lHGbBvabszKlHT+B86PI7SSc7kbicCF7C72jKiE9f3wmwzog5UihVsX4B7yffgPumCyb
+         OStBIpM2Ydby2BgSUwLokkUCx0eSs9fAHV+eiwIs9i7BZtFFDY55ZUrv73gz80PkUsCl
+         pKYiLoYL9qXkyZ4Nni/vkVBtTq4chSr6nTPW8cuNShV1Kpm6xLMTLKue+6n4aIsVzbwf
+         1W36/VqE0Py+l5PGqGpyJEN5CFK+8NJ4hlygWl0/OA19BODYP0HZaY+T8Nh0i3bYRisn
+         pkKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=w5vf4m+PCB3GMl1DyL8bixdsIlbRe+oe3Zi+tmjDdnE=;
+        fh=0o8T1UwYufgAJuQ2aJ1FnAjBKcQ9cY25RMo3GCwk7qk=;
+        b=HGZiVLlbZ8vrTVyQzPnL+fMhQhBr+XOLh+xSRj0i3RC+RMLBjS8mXgMCDDkXkqCuN8
+         luku5PSGaPWokDVoGABeuc++ANnDg11wqBGIti+Fyh4ikT1drRBod9tI7LFyQqJVzGPx
+         7KrnEvbh4wqtTA8vXdRfJqtK6L7skDmS0vrlNCvJCGTvNtYqbop24yI5bURMafmOCAOS
+         UJ4SvgMVqSvFouXh/n3x7wV+HPLfnDJ4vTD3aD1VorjUMPC/y1H92QeMwf7BBhjDEPnm
+         KNLilUXO9ormtprI3lNXtHkjOkZ/e845N10pj8IQ0OdZvisgCDQnx19QyFm6aAGoI7d0
+         /Tcg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1776423901; x=1777028701; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=w5vf4m+PCB3GMl1DyL8bixdsIlbRe+oe3Zi+tmjDdnE=;
+        b=a+2Y6k/QuGBcIDj+a0A/FVZUCUEbQ7QaHpJuHgWM4+iCYTB2c4MO9qOEgG0uj+T2f2
+         xtctlWen2r+mjvsmlk5iIOu/2G+GDAZxMZHcYNRkkkW/BRk+HSG3ky/R6X5zKmaq6tJO
+         v+pykbQH8XA+cf94t9Ma/FOpvqwuecYszNV9Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776423901; x=1777028701;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=w5vf4m+PCB3GMl1DyL8bixdsIlbRe+oe3Zi+tmjDdnE=;
+        b=mqGewNWhLh7VoL6VsJkI/IKmNb2H6rQZrThs0xqFAgyv/K5u3IHh0fHlkgRxgwR2u3
+         zLtIRCAmUjG0C7MTWVHgC0Gkrw6PyvpXc+DpS1rrT7wY6ZWEj6b0N192OiWoUzwtRC/Y
+         6m8y2dawKoonZnIynTnhVdt0Vz8gRpofVdH7jZNUh0LgAGNR0oz47AbOb8fA2bPLnhff
+         S59a8aswQ5pbLBLobceSN/DE6V1yFAQesGpT4N3xhMYqv7gi2kjVkpH2caiCaMtoJMtr
+         3lAQ6Li2/0fZHYnfvmaPm3GqEGa4YOivu8pnn1skGVhTeUHVqhuzNZhJFlhbRnX0dqX1
+         5WsA==
+X-Gm-Message-State: AOJu0Yxmfdhd6o8yoWhWhLSZnQEqVfHRGogOd7huZaIVnOzea+gbC/zL
+	eI6cnoc3GGtQAoKTr3mwmV6rodNoj5KZGgsydWj/u10TBWKdD219vXtmIEj91zbphH74Ppx9n2A
+	idDR+Z518dyIuybqaZmcADmYVQLwA+sN97/1RAHba1yLxx04VvtRCtAg=
+X-Gm-Gg: AeBDietvIucTmoXmnpiRvHxOKmv9tPx5QxC/NY3OtS6gHqDGQazZib088/haoOSQcdc
+	eY15fKsREj1lL9w2XWUb+E4cBlLCmtWznkbPP2/ypEEC3B6bTAOs/eUauObHyYO6J5B7x5W0WOj
+	wIq91EzsYN5yVknZ5c+qJANgnWcn2GKFOhzC7xt2RCalf/cxtjW158GZ8fDlHmNHrx0rClboCPq
+	EIro7T+RV+dC7yrRmCIJ6oTfcF739LXXD5PGbeG7Yxnal0yYX7/dpfH2CIOxMGFUsWGm/8K4j3r
+	dM4Pif5AxnVxyixL0M6iYZfwxZJU5g==
+X-Received: by 2002:a05:6402:90a:b0:65f:71ed:7ab9 with SMTP id
+ 4fb4d7f45d1cf-672bfddf0e0mr1139307a12.22.1776423900416; Fri, 17 Apr 2026
+ 04:05:00 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-ORIG-GUID: fUy_Q-zDoE1wagcBS3Z20eGIhyBSmg67
-X-Authority-Analysis: v=2.4 cv=ZtHd7d7G c=1 sm=1 tr=0 ts=69e1e736 cx=c_pps
- a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
- a=fTW__CHxibyLmBMfj2wP:22 a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=57SyGIRnAAAA:8
- a=llHmbnzomCU5aENerkwA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: fUy_Q-zDoE1wagcBS3Z20eGIhyBSmg67
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA3NyBTYWx0ZWRfX+Ds93UVyd/ro
- FEb8DqyUphInmxo6OTPUc3sdBb/YWhTXEfORC8dijCwrOXgqc3PMrOGXxmam+wE9nb2OoKYQkiJ
- Fi5g9nZKRn/sZtuUyWdv8vDWwYAcW2GvI1wM8vjV7YJ6//uJlwAvEstHUQ3SRltexsoF2Yg/+tO
- WAbkhIfcGdHZFPbJ7ViC37fCXS/bquGB5rZmEH9XKA337/8kJJFhs5TdIWOCQ78SkO8ijZXZlzw
- 3OLpkhpwwH+0mmhUfH4w8hsZ5nm/QWwAxY0YV3FGCc6vE1+x7jZKCCqJtFIIVDVOO+swQoI5I2N
- gQoeaBwmTJNcNE99/YXKwNKk8nDO4NgdpJrmiU1obdr9NsRnMWbs+bhe/GVk1WJnF3akSdBqu8L
- JsCXrboBpx1jAgj+ButoSBwCL84SVM0Qy4MiLx9mgoAh2C1dsF8ujCcyW/PwaO8Ws/+5Plul8D3
- 3OyU75/gNxLRkYE73eA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-16_04,2026-04-16_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0 adultscore=0
- suspectscore=0 bulkscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170077
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+References: <20260402035053.69593-1-vanusuri@mvista.com>
+In-Reply-To: <20260402035053.69593-1-vanusuri@mvista.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
+Date: Fri, 17 Apr 2026 16:34:48 +0530
+X-Gm-Features: AQROBzD0dLI-ZKnk9prXNz0hnKj1gpDt_0t_5yiVxgXuxZ_21eTWzpOWNeq71Ek
+Message-ID: <CANQUz19-1_+PGS_yyq+jQaiBAh6Mhi0+Zc7rD3Qte31tMCwv6g@mail.gmail.com>
+Subject: Re: [oe][meta-networking][kirkstone][PATCH] strongswan: Fix CVE-2026-25075
+To: openembedded-devel@lists.openembedded.org, 
+	Gyorgy Sarvari <skandigraun@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000008e2861064fa5eb5e"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 10:57:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126433
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 11:05:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126434
 
-From: Haiqing Bai <haiqing.bai@windriver.com>
+--0000000000008e2861064fa5eb5e
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changes:
-- Drop 0001-Fix-build-with-gcc-15.patch (merged upstream).
-- Add 0001-fix-the-hardcoded-legacy-helper-path.patch: replace the
-  hardcoded "/lib/drbd" path in add_lib_drbd_to_path() with the
-  build-configured DRBD_LEGACY_LIB_DIR derived from LIBDIR
-- Remove sed fixup for the now-absent ocf.ra@.service.
-- Install new upstream 50-drbd.preset into systemd system-preset
+Hi Team,
 
-Signed-off-by: Haiqing Bai <haiqing.bai@windriver.com>
----
- .../0001-Fix-build-with-gcc-15.patch          | 34 ------------
- ...fix-the-hardcoded-legacy-helper-path.patch | 53 +++++++++++++++++++
- ...d-utils_9.30.0.bb => drbd-utils_9.34.0.bb} | 11 ++--
- 3 files changed, 60 insertions(+), 38 deletions(-)
- delete mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-Fix-build-with-gcc-15.patch
- create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-fix-the-hardcoded-legacy-helper-path.patch
- rename meta-networking/recipes-support/drbd/{drbd-utils_9.30.0.bb => drbd-utils_9.34.0.bb} (88%)
+Any update on this ?
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-Fix-build-with-gcc-15.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-Fix-build-with-gcc-15.patch
-deleted file mode 100644
-index 00105fb844..0000000000
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-Fix-build-with-gcc-15.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From b42265af87d9efcc9aac91b3a3da3df5c5c66e29 Mon Sep 17 00:00:00 2001
--From: Nguyen Dat Tho <tho3.nguyen@lge.com>
--Date: Wed, 9 Apr 2025 17:33:25 +0900
--Subject: [PATCH] Fix build with gcc-15
--
--To fix the following error:
--In file included from string_matching.cpp:1:
--./string_matching.h:10:18: error: 'uint16_t' does not name a type
--   10 |     extern const uint16_t   PATTERN_LIMIT;
--      |                  ^~~~~~~~
--./string_matching.h:7:1: note: 'uint16_t' is defined in header '<cstdint>'; this is probably fixable by adding '#include <cstdint>'
--
--Upstream-Status: Submitted [https://github.com/LINBIT/drbd-utils/pull/50]
--
--Signed-off-by: Nguyen Dat Tho <tho3.nguyen@lge.com>
-----
-- user/drbdmon/string_matching.h | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/user/drbdmon/string_matching.h b/user/drbdmon/string_matching.h
--index 9b3918fe..b783ba48 100644
----- a/user/drbdmon/string_matching.h
--+++ b/user/drbdmon/string_matching.h
--@@ -4,6 +4,7 @@
-- #include <string>
-- #include <memory>
-- #include <stdexcept>
--+#include <cstdint>
-- 
-- namespace string_matching
-- {
---- 
--2.34.1
--
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-fix-the-hardcoded-legacy-helper-path.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-fix-the-hardcoded-legacy-helper-path.patch
-new file mode 100644
-index 0000000000..3d7c95b4a8
---- /dev/null
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-fix-the-hardcoded-legacy-helper-path.patch
-@@ -0,0 +1,53 @@
-+From 301e64db17466316ac34a28e30867cc7853777b5 Mon Sep 17 00:00:00 2001
-+From: Haiqing Bai <Haiqing.Bai@windriver.com>
-+Date: Thu, 16 Apr 2026 10:00:19 +0000
-+Subject: [PATCH] Fix the hardcoded legacy helper path
-+
-+Fix the below issue:
-+"~# drbdadm --version
-+execvp() failed to exec drbdadm-84: No such file or directory"
-+
-+The legacy helper path was hardcoded to "/lib/drbd", which does not exist
-+on systems where LIBDIR is configured to a different location (e.g.
-+/usr/lib). This caused drbdadm to fail when attempting to exec drbdadm-84.
-+Use the build-configured DRBD_LEGACY_LIB_DIR (derived from LIBDIR) instead
-+of the hardcoded path, so the legacy helper lookup respects the actual
-+install prefix.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Haiqing Bai <haiqing.bai@windriver.com>
-+---
-+ user/v9/Makefile.in       | 1 +
-+ user/v9/drbdtool_common.c | 3 +--
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/user/v9/Makefile.in b/user/v9/Makefile.in
-+index fa12f79..980c67c 100644
-+--- a/user/v9/Makefile.in
-++++ b/user/v9/Makefile.in
-+@@ -70,6 +70,7 @@ CFLAGS += -DKEYUTILS
-+ endif
-+ ifeq ($(WITH_84_SUPPORT),yes)
-+ CFLAGS += -DWITH_84_SUPPORT
-++CFLAGS += -DDRBD_LEGACY_LIB_DIR=\"$(LIBDIR)\"
-+ endif
-+ CFLAGS += $(EXTRA_CFLAGS)
-+ 
-+diff --git a/user/v9/drbdtool_common.c b/user/v9/drbdtool_common.c
-+index d07d054..ea95a16 100644
-+--- a/user/v9/drbdtool_common.c
-++++ b/user/v9/drbdtool_common.c
-+@@ -332,8 +332,7 @@ void add_component_to_path(const char *path)
-+ 
-+ void add_lib_drbd_to_path(void)
-+ {
-+-		/* TODO: if exec-prefix != "/" ? */
-+-	add_component_to_path("/lib/drbd");
-++	add_component_to_path(DRBD_LEGACY_LIB_DIR);
-+ }
-+ 
-+ /* from linux/crypto/crc32.c */
-+-- 
-+2.53.0
-+
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.34.0.bb
-similarity index 88%
-rename from meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb
-rename to meta-networking/recipes-support/drbd/drbd-utils_9.34.0.bb
-index 4c520e8c78..abc406b5e0 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.30.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.34.0.bb
-@@ -11,10 +11,10 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;prot
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/drbd-headers;branch=master;protocol=https \
-            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
-            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
--           file://0001-Fix-build-with-gcc-15.patch \
-+           file://0001-fix-the-hardcoded-legacy-helper-path.patch \
-            "
--SRCREV_drbd-utils = "36ea199f38b543b2da92219109c2832e122e5bf9"
--SRCREV_drbd-headers = "94f4472513f351efba5788f783feba6ac6efe9fc"
-+SRCREV_drbd-utils = "7fe34d56a7264cfc92fc5270471827bb3f7773e6"
-+SRCREV_drbd-headers = "8ab631bfa8eb606e53c86f50b9f2d6f51d0f9ca5"
- 
- SRCREV_FORMAT = "drbd-utils_drbd-headers"
- 
-@@ -56,7 +56,9 @@ do_install:append() {
-     sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd-wait-promotable@.service
-     sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd.service
-     sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/drbd@.service
--    sed -i -e 's#@nonarch_libdir@#${nonarch_libdir}#g' ${D}${systemd_unitdir}/system/ocf.ra@.service
-+
-+    install -D -m 0644 ${D}/50-drbd.preset ${D}${systemd_unitdir}/system-preset/50-drbd.preset
-+    rm -f ${D}/50-drbd.preset
- }
- 
- RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
-@@ -69,6 +71,7 @@ FILES:${PN} += "${nonarch_base_libdir}/drbd \
-                 ${nonarch_libdir}/tmpfiles.d \
-                 ${nonarch_libdir}/drbdscripts/* \
-                 ${systemd_unitdir}/system/* \
-+                ${systemd_unitdir}/system-preset/50-drbd.preset \
- "
- FILES:${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
- 
--- 
-2.43.0
+Thanks & Regards,
+Vijay
 
+On Thu, Apr 2, 2026 at 9:21=E2=80=AFAM <vanusuri@mvista.com> wrote:
+
+> From: Vijay Anusuri <vanusuri@mvista.com>
+>
+> Pick patch according to [1]
+>
+> [1] https://download.strongswan.org/security/CVE-2026-25075/
+> [2]
+> https://www.strongswan.org/blog/2026/03/23/strongswan-vulnerability-(cve-=
+2026-25075).html
+>
+> Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> ---
+>  .../strongswan/files/CVE-2026-25075.patch     | 50 +++++++++++++++++++
+>  .../strongswan/strongswan_5.9.13.bb           |  1 +
+>  2 files changed, 51 insertions(+)
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/files/CVE-2026-25075.patch
+>
+> diff --git
+> a/meta-networking/recipes-support/strongswan/files/CVE-2026-25075.patch
+> b/meta-networking/recipes-support/strongswan/files/CVE-2026-25075.patch
+> new file mode 100644
+> index 0000000000..3b38a099a2
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/strongswan/files/CVE-2026-25075.pat=
+ch
+> @@ -0,0 +1,50 @@
+> +From d4b3c39776f06948d875614a0eddea9561159f2a Mon Sep 17 00:00:00 2001
+> +From: Tobias Brunner <tobias@strongswan.org>
+> +Date: Thu, 5 Mar 2026 12:43:12 +0100
+> +Subject: [PATCH] eap-ttls: Prevent crash if AVP length header field is
+> invalid
+> +
+> +The length field in the AVP header includes the 8 bytes of the header
+> +itself.  Not checking for that and later subtracting it causes an
+> +integer underflow that usually triggers a crash when accessing a
+> +NULL pointer that resulted from the failing chunk_alloc() call because
+> +of the high value.
+> +
+> +The attempted allocations for invalid lengths (0-7) are 0xfffffff8,
+> +0xfffffffc, or 0x100000000 (0 on 32-bit hosts), so this doesn't result
+> +in a buffer overflow even if the allocation succeeds.
+> +
+> +Fixes: 79f2102cb442 ("implemented server side support for EAP-TTLS")
+> +Fixes: CVE-2026-25075
+> +
+> +Upstream-Status: Backport [
+> https://download.strongswan.org/security/CVE-2026-25075/strongswan-4.5.0-=
+6.0.4_eap_ttls_avp_len.patch
+> ]
+> +CVE: CVE-2026-25075
+> +Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+> +---
+> + src/libcharon/plugins/eap_ttls/eap_ttls_avp.c | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
+> b/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
+> +index 06389f7..2983bd0 100644
+> +--- a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
+> ++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c
+> +@@ -119,7 +119,7 @@ METHOD(eap_ttls_avp_t, process, status_t,
+> +               chunk_free(&this->input);
+> +               this->inpos =3D 0;
+> +
+> +-              if (!success)
+> ++              if (!success || avp_len < AVP_HEADER_LEN)
+> +               {
+> +                       DBG1(DBG_IKE, "received invalid AVP header");
+> +                       return FAILED;
+> +@@ -130,7 +130,7 @@ METHOD(eap_ttls_avp_t, process, status_t,
+> +                       return FAILED;
+> +               }
+> +               this->process_header =3D FALSE;
+> +-              this->data_len =3D avp_len - 8;
+> ++              this->data_len =3D avp_len - AVP_HEADER_LEN;
+> +               this->input =3D chunk_alloc(this->data_len + (4 - avp_len=
+) %
+> 4);
+> +       }
+> +
+> +--
+> +2.25.1
+> +
+> diff --git a/meta-networking/recipes-support/strongswan/
+> strongswan_5.9.13.bb b/meta-networking/recipes-support/strongswan/
+> strongswan_5.9.13.bb
+> index 4c10636871..6a2b219275 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
+> @@ -10,6 +10,7 @@ DEPENDS:append =3D
+> "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
+>
+>  SRC_URI =3D "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+>             file://CVE-2025-62291.patch \
+> +           file://CVE-2026-25075.patch \
+>             "
+>
+>  SRC_URI[sha256sum] =3D
+> "56e30effb578fd9426d8457e3b76c8c3728cd8a5589594b55649b2719308ba55"
+> --
+> 2.25.1
+>
+>
+
+--0000000000008e2861064fa5eb5e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><div><div>Hi Team,<br><br></div>Any update on this ?<=
+br><br></div>Thanks &amp;=C2=A0Regards,<br></div>Vijay</div><br><div class=
+=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr=
+">On Thu, Apr 2, 2026 at 9:21=E2=80=AFAM &lt;<a href=3D"mailto:vanusuri@mvi=
+sta.com">vanusuri@mvista.com</a>&gt; wrote:<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">From: Vijay Anusuri &lt;<a href=3D"mailto:vanus=
+uri@mvista.com" target=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
+<br>
+Pick patch according to [1]<br>
+<br>
+[1] <a href=3D"https://download.strongswan.org/security/CVE-2026-25075/" re=
+l=3D"noreferrer" target=3D"_blank">https://download.strongswan.org/security=
+/CVE-2026-25075/</a><br>
+[2] <a href=3D"https://www.strongswan.org/blog/2026/03/23/strongswan-vulner=
+ability-(cve-2026-25075).html" rel=3D"noreferrer" target=3D"_blank">https:/=
+/www.strongswan.org/blog/2026/03/23/strongswan-vulnerability-(cve-2026-2507=
+5).html</a><br>
+<br>
+Signed-off-by: Vijay Anusuri &lt;<a href=3D"mailto:vanusuri@mvista.com" tar=
+get=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
+---<br>
+=C2=A0.../strongswan/files/CVE-2026-25075.patch=C2=A0 =C2=A0 =C2=A0| 50 +++=
+++++++++++++++++<br>
+=C2=A0.../strongswan/<a href=3D"http://strongswan_5.9.13.bb" rel=3D"norefer=
+rer" target=3D"_blank">strongswan_5.9.13.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 1 +<br>
+=C2=A02 files changed, 51 insertions(+)<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/files/C=
+VE-2026-25075.patch<br>
+<br>
+diff --git a/meta-networking/recipes-support/strongswan/files/CVE-2026-2507=
+5.patch b/meta-networking/recipes-support/strongswan/files/CVE-2026-25075.p=
+atch<br>
+new file mode 100644<br>
+index 0000000000..3b38a099a2<br>
+--- /dev/null<br>
++++ b/meta-networking/recipes-support/strongswan/files/CVE-2026-25075.patch=
+<br>
+@@ -0,0 +1,50 @@<br>
++From d4b3c39776f06948d875614a0eddea9561159f2a Mon Sep 17 00:00:00 2001<br>
++From: Tobias Brunner &lt;<a href=3D"mailto:tobias@strongswan.org" target=
+=3D"_blank">tobias@strongswan.org</a>&gt;<br>
++Date: Thu, 5 Mar 2026 12:43:12 +0100<br>
++Subject: [PATCH] eap-ttls: Prevent crash if AVP length header field is inv=
+alid<br>
++<br>
++The length field in the AVP header includes the 8 bytes of the header<br>
++itself.=C2=A0 Not checking for that and later subtracting it causes an<br>
++integer underflow that usually triggers a crash when accessing a<br>
++NULL pointer that resulted from the failing chunk_alloc() call because<br>
++of the high value.<br>
++<br>
++The attempted allocations for invalid lengths (0-7) are 0xfffffff8,<br>
++0xfffffffc, or 0x100000000 (0 on 32-bit hosts), so this doesn&#39;t result=
+<br>
++in a buffer overflow even if the allocation succeeds.<br>
++<br>
++Fixes: 79f2102cb442 (&quot;implemented server side support for EAP-TTLS&qu=
+ot;)<br>
++Fixes: CVE-2026-25075<br>
++<br>
++Upstream-Status: Backport [<a href=3D"https://download.strongswan.org/secu=
+rity/CVE-2026-25075/strongswan-4.5.0-6.0.4_eap_ttls_avp_len.patch" rel=3D"n=
+oreferrer" target=3D"_blank">https://download.strongswan.org/security/CVE-2=
+026-25075/strongswan-4.5.0-6.0.4_eap_ttls_avp_len.patch</a>]<br>
++CVE: CVE-2026-25075<br>
++Signed-off-by: Vijay Anusuri &lt;<a href=3D"mailto:vanusuri@mvista.com" ta=
+rget=3D"_blank">vanusuri@mvista.com</a>&gt;<br>
++---<br>
++ src/libcharon/plugins/eap_ttls/eap_ttls_avp.c | 4 ++--<br>
++ 1 file changed, 2 insertions(+), 2 deletions(-)<br>
++<br>
++diff --git a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c b/src/libcharon=
+/plugins/eap_ttls/eap_ttls_avp.c<br>
++index 06389f7..2983bd0 100644<br>
++--- a/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c<br>
+++++ b/src/libcharon/plugins/eap_ttls/eap_ttls_avp.c<br>
++@@ -119,7 +119,7 @@ METHOD(eap_ttls_avp_t, process, status_t,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0chunk_free(&amp;thi=
+s-&gt;input);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0this-&gt;inpos =3D =
+0;<br>
++ <br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!success)<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!success || avp_len =
+&lt; AVP_HEADER_LEN)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0DBG1(DBG_IKE, &quot;received invalid AVP header&quot;);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return FAILED;<br>
++@@ -130,7 +130,7 @@ METHOD(eap_ttls_avp_t, process, status_t,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0return FAILED;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0this-&gt;process_he=
+ader =3D FALSE;<br>
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 this-&gt;data_len =3D av=
+p_len - 8;<br>
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 this-&gt;data_len =3D av=
+p_len - AVP_HEADER_LEN;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0this-&gt;input =3D =
+chunk_alloc(this-&gt;data_len + (4 - avp_len) % 4);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
++ <br>
++-- <br>
++2.25.1<br>
++<br>
+diff --git a/meta-networking/recipes-support/strongswan/<a href=3D"http://s=
+trongswan_5.9.13.bb" rel=3D"noreferrer" target=3D"_blank">strongswan_5.9.13=
+.bb</a> b/meta-networking/recipes-support/strongswan/<a href=3D"http://stro=
+ngswan_5.9.13.bb" rel=3D"noreferrer" target=3D"_blank">strongswan_5.9.13.bb=
+</a><br>
+index 4c10636871..6a2b219275 100644<br>
+--- a/meta-networking/recipes-support/strongswan/<a href=3D"http://strongsw=
+an_5.9.13.bb" rel=3D"noreferrer" target=3D"_blank">strongswan_5.9.13.bb</a>=
+<br>
++++ b/meta-networking/recipes-support/strongswan/<a href=3D"http://strongsw=
+an_5.9.13.bb" rel=3D"noreferrer" target=3D"_blank">strongswan_5.9.13.bb</a>=
+<br>
+@@ -10,6 +10,7 @@ DEPENDS:append =3D &quot;${@bb.utils.contains(&#39;DISTRO=
+_FEATURES&#39;, &#39;tpm2&#39;, &#39;=C2=A0 tpm2-tss&#39;,<br>
+<br>
+=C2=A0SRC_URI =3D &quot;<a href=3D"https://download.strongswan.org/strongsw=
+an-$%7BPV%7D.tar.bz2" rel=3D"noreferrer" target=3D"_blank">https://download=
+.strongswan.org/strongswan-${PV}.tar.bz2</a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2025-62291.patch \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://CVE-2026-25075.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;56e30effb578fd9426d8457e3b76c8c3728cd8a5=
+589594b55649b2719308ba55&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+</blockquote></div>
+
+--0000000000008e2861064fa5eb5e--
 
