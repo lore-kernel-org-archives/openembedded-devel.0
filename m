@@ -2,162 +2,140 @@ Return-Path: <libo.chen.cn@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6BB8F8E4B4
-	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 07:07:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36F1CF8DFF7
+	for <webhook@archiver.kernel.org>; Fri, 17 Apr 2026 08:46:25 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37184.1776409626052237607
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.40214.1776415581933072658
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Apr 2026 00:07:06 -0700
+ Fri, 17 Apr 2026 01:46:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Caz2oIgp;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=V7Iy/h52;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=856723d307=libo.chen.cn@windriver.com)
 Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H5ug6i3559018
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 00:07:05 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63H5uJIQ3558827
+	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 01:46:21 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=cc:content-transfer-encoding:content-type:date:from
 	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	PPS06212021; bh=xOU3/HSgbqg7BGoS4A+ol0ZkAw+0IvIQwA/zsP89OeI=; b=
-	Caz2oIgpLLIAaNo49KfmmHsOsEfYeZHmL8iyRcB91vHSrK6VmGTb+y5b4GdxcajW
-	diZgvnmsn629QhZ5UenXNa6fLP/qXQ9iQ7nmQdb8nGZcOEl9WclQGOxfxCJnq2Xz
-	P2/ZpbX1/wRpuuhMxFPijpc+6xk8eXhYTfJeYv84Y1VtVx1Y7/3YLqjqvmFg4zba
-	pY/65V9NQBEBhYaKiBfppEEpiijW09Y0MPSxx1+YwLaaY1imIPMkHssHNAzte3nc
-	VDlOZlLgcn6+pQzeIZm6xEjEK90rp9O0+uDyDhRP73Ii/wGwm1hDELjOgGgAj2tj
-	KxH5sDatcUkIOGaKpSHXHw==
-Received: from byapr05cu005.outbound.protection.outlook.com (mail-westusazon11010022.outbound.protection.outlook.com [52.101.85.22])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dh87mvps4-1
+	PPS06212021; bh=gQkNNFbLYzQ3plK0nk2kflVQhGNOkTD04t98+lS+or0=; b=
+	V7Iy/h52pD/dQeyuWDQzC3QFGe9Oouak3uKp0S2+GAiUblAb7OFAIqP4TRGvlLP8
+	6kHOj4xEU57WBY3jtGXINeIzkaF8qx7j3Y8111Yk8LrPobQgJeoH8GoAzrfp8It+
+	2cYNB1pCfR+553axX3RYMXqEROu18KRmtTEgIJJCgtdh9wWgdcjncP4dWAdQYxFB
+	/zkkhEmIdD6wcCWe1eCXgRiscgmH3s/+aC7AM5yveKTsMmWJc1KdZRmBA4P/viAx
+	0m7PVgaKmiAn+zW7/oXtrZnhatF44byN8Un1V32mU+wtIl3X7STX37NbtsA/aNRc
+	v9xbq+ngGgz98YGre9UXZg==
+Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013064.outbound.protection.outlook.com [40.93.196.64])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dh87mvsmy-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 17 Apr 2026 00:07:05 -0700 (PDT)
+	Fri, 17 Apr 2026 01:46:20 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WHWoEKDce4fRhaHh8e2fkXg9+689jqFqzA/DdVHYadG8jWpiLBPhR2msxQKrS4v+2sAJkzaNG+qmnagVYjfp7+XJv3DY+9cqzuxxTZtrfPFPKYejMVGM8QLSSFDQrh8ur1dmpKto29BH41D38R6tzzrhufDG5Eb3LnbXTciz8cCtVDyMd0OLd1YYyvVAOAUmsixt4w1dN23Ezkzeku+Et8ZkOSSJFuD4mU2QfRdyk1WpS2zfRHjMQMRpxY8q/5OWi5puVR/fgCAp6+QWRahc0MdEhIMFdlbX4UoiJ6c7RVucPa8rVLYH0QDdOhfX2GzW6nSibLh0S4kqj4ly/zsukg==
+ b=Psyshcq+MajCDV+jjr6uSAf+mUg3Z2tvck25wtXPAxB50rFHnz/herWnvnkcjsGPOwYXhaluyIJZhDjUM9p033Tjp3lG8Mf58CHrPyNYfCcq+Yp+yTcozLyyGK1AnIUBajfIk0iqTiPReyeX0m3CRxX/5VB1+hZwqZcnFFvLwabCV5TfW+izHSoo+pOg3XEfTNA6dul8V2v6OT0IrnBla+Ptegjx2GiGusYa9br4F+fmE8SvKhD1REblhMDrvG/ni+rUuvMQyAl8nFd5a99d8Z1NjRoi9S7zIUASSrNegotcFoMzQQynWrmBVJANyO0APm6hUW9vGLdMQBTbbC1khg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xOU3/HSgbqg7BGoS4A+ol0ZkAw+0IvIQwA/zsP89OeI=;
- b=PAlmQ+W3RmVQfE4VQRe+dslfzoVKna4IgOsDejeolXtedbb3kdUGLZ8YnPu8nVGM7wXzfJt8LWsjZob/XI3RXguhr1leoeQQKGdhA/wFFFR+lRLVY30NIZnncp8pjnh4qJEpaYGvtDLpc6tZHA5sChF9g0QA+u/CieeC9zUmlqfcFggl0IgRWmfKi1HHh1B9qQsJ8YUlOVcvPx81GlCyeADlLs23YARmF4DvhGhdes7xPFI0P4yxIcvH1HQgIF6fWx/NZ71xPKblQeb5YAFy31H4BTVEcwOZzP9HvwCVP+4LkCblU9HtDjY1vJxbBFY45DlS007aglszqaR2y1aWzQ==
+ bh=gQkNNFbLYzQ3plK0nk2kflVQhGNOkTD04t98+lS+or0=;
+ b=NcE9lU7VfG2wMv3uQ1zyTQ7annt1OlDS+JYm/TEenuJgMKZe1LToTPvi8r3vszj5aP7VWVaY77aOU33c6PO9RnB7gojbUAQKsCmo9bbzA1XGE9o0W1Utt4zwrFop1uk5lWUFHfl+fvNIq3hRiLCPK7RFQrx37CucXDKaaMp68xf24yackEggOrUSqcfc4OgTNQbwDSKPnBnBrlZ+MePB1XGejqPURz4cIblzBXJTCpT9tOqTsheit9cLiuzM+3u6GbD/gGNDyD9NhAHRRYZyj75K4rxqzY4RO9H1R8yS2ei+mU0InLoLeiAV8gxhoNzUIUHbBERfqdpEgiz+tCj6iQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from BN9PR11MB5354.namprd11.prod.outlook.com (2603:10b6:408:11b::7)
- by SJ5PPF3F833FA49.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::823) with
+ by MW5PR11MB5810.namprd11.prod.outlook.com (2603:10b6:303:192::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.25; Fri, 17 Apr
- 2026 07:07:02 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9818.20; Fri, 17 Apr
+ 2026 08:46:17 +0000
 Received: from BN9PR11MB5354.namprd11.prod.outlook.com
  ([fe80::4a0e:caa8:c2fa:8700]) by BN9PR11MB5354.namprd11.prod.outlook.com
  ([fe80::4a0e:caa8:c2fa:8700%3]) with mapi id 15.20.9818.017; Fri, 17 Apr 2026
- 07:07:02 +0000
-From: "Chen, Libo (CN)" <Libo.Chen.CN@windriver.com>
-To: "anuj.mittal@oss.qualcomm.com" <anuj.mittal@oss.qualcomm.com>,
-        "Wang,
- Jinfeng (CN)" <Jinfeng.Wang.CN@windriver.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][scarthgap][PATCH v2 08/11] hdf5: fix CVE-2025-2308
-Thread-Topic: [oe] [meta-oe][scarthgap][PATCH v2 08/11] hdf5: fix
- CVE-2025-2308
-Thread-Index: AQHcyLkjFb1kBXfg8UapYQUXdAXj3bXf0cyAgAMN+xA=
-Date: Fri, 17 Apr 2026 07:07:01 +0000
-Message-ID: 
- <BN9PR11MB5354B725CCC029112F10F0D1DE202@BN9PR11MB5354.namprd11.prod.outlook.com>
-References: <20260410070508.1104455-1-jinfeng.wang.cn@windriver.com>
- <20260410070508.1104455-9-jinfeng.wang.cn@windriver.com>
- <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
-In-Reply-To: 
- <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_ActionId=18e66673-d749-4eac-8c47-cc83d362aab6;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_ContentBits=0;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Enabled=true;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Method=Standard;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Name=INTERNAL;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SetDate=2026-04-17T07:05:46Z;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_SiteId=8ddb2873-a1ad-4a18-ae4e-4644631433be;MSIP_Label_3ea094ce-8c76-406f-84c8-0af1663f74b7_Tag=10,
- 3, 0, 1;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN9PR11MB5354:EE_|SJ5PPF3F833FA49:EE_
-x-ms-office365-filtering-correlation-id: 0fbce73b-e699-4ad0-0b8f-08de9c4fecc1
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|366016|376014|1800799024|18002099003|22082099003|56012099003|38070700021;
-x-microsoft-antispam-message-info: 
- wUOx+6Zpb369h5Xu0VXL0AuHy6QFi1M+H8WmTQV5U5HS5k+g6hNjH6ooXhpsCIiaImK1cw1ze+tlsfqFQWZmgIrB1Usxgw5YiOCFg2+gB3hKaoNKq+38xveSWyiX3h1P1b9Ari7RgShWp+8DYtcFjRrULMLwcgp/qjJb41hxEvGQpyaTcBoin1LlpVbqZDPWeIpia/Xc+qWIUxDwMI8ZRIckbiPUTFCBvU/+hK3o0cZ/OW+t7iH1rpHNt/py/cNhLPDIB+2ipldWU0drH7cjORbbMuzQhfdG92Y9MqnSMjvGXrFasc5EFtpWWQ4WsMSiu+cLeRsOjj3R5WS+H4lhgKkLTBugPxTu/p9O5e3fwR+Q+KYE/17kTDNXEdBAD09SYAsP4YRSO9aGAL4NvoWi86VDToYO5S8j+BwifnmK1cyye0sJVBd2fqeVwCb2MrXo2LiKCUEAmcmK79K+ToGy5OiZuSpLo5Fb/p4/Y2GmhDl17M8kAMIMN+v/AUvbdgROrBqDxiVTk9LCy9T09Kdvaky6dzzwPe42MskyEsj7tBoOZWbO81aBVVX4OJ6aQG2lZvSVuNgnq3K6ddc/PGpZq6hp7Z+i3qs+DLyMUyYlm5AaEeLJX9ZMmUJSd+OVBZYjItR3LJomjp7RXQm+F1WP0/lsMG2abX8bFuY9PW/Wsl7wbl2fG0AGRTvw77T1g8cUGzAVbwHiKk89AlUZ4HYts4HEdMaiQmP/6aEqFtf58cIiHt5fvO9sDUVHufb8JZTfdPUDla5p3ZWdSAfGAs7uLgkAaw57aRufp0V3oX74NVdt3hLjFG6qMSJflDdQoHjg
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5354.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(22082099003)(56012099003)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?d1FjMDlYbjRHUDgzenQ5WHppM2dDSkhSY2lBUGRYUDVPTm5wQlBIWXNuMUxI?=
- =?utf-8?B?dzE2VVAraTl5VmtRMkxYcUhuRE9TMUJKZFRmcWJPS2lMNWZMbk9YQlllVy9Q?=
- =?utf-8?B?cC9jK21xOSsxc0h1d052U0ptTEZhejhXYUxBaUtBUmRWK3BWTGNJVGt3YnNh?=
- =?utf-8?B?YlV5eCtsT2pTbW9FL3NQc1hYL2o3b3F5UGJOd0JnMENWRFQwT2hyVFlSOXFr?=
- =?utf-8?B?azNaUGRkQ1ZRNGtFWlRaMStWQXdkTUszSGN6WVhDRUFqc0dUdEhVbXBNYmZU?=
- =?utf-8?B?SnIrVGZBeGNDc3ZIUVZZTGQ1SFlEL2c5Z2htTjc5UkpuVHh2Uk5aMUExQTRp?=
- =?utf-8?B?MVdCbEk5ZXdmd2k3eExMWWxUTTNmbkRIZ2J4OXYvOXRyUFNPdnE1anBpNDkr?=
- =?utf-8?B?bndaUGNDMDJ4M0xHYVBuOTNRWGtxWUQ0SFJQaTN1eUQ3WUIwb1JKMTVaSitZ?=
- =?utf-8?B?SXQ3a3F4bTZyVWdnZ1FhaVVHVjZaM3dGNFFUUElMSmExVVp6cWQrOVhlMUN1?=
- =?utf-8?B?cXF6QW5YVmI1NkFxVWJ1bW0wZG9teTNabDM3Q2xza0pGbUpEWmtYckZuU3F1?=
- =?utf-8?B?Um5sZ1pGR3B1Qzc3T2Q0Nk8rOWhBRHU1cEN0OWJWaW1vSEdNY2JhQTMrSGNa?=
- =?utf-8?B?bkdyaXN3eFBWRHhqVytEZkNyekFjUkZzQ3lKWk1XeDBHL2lHclVFeWlVcUpW?=
- =?utf-8?B?c1BScUY5L3lEQlBhQmJ3M0k5UHdIOHNodE9MZk1jd2pYQWNyMXRjTk9zTnMy?=
- =?utf-8?B?UjUwNDNybDVmNWxraFpGQm4rU25oc2NTRjhQcUQyWm9Qdkh3THJoa0EwaUZQ?=
- =?utf-8?B?Nk9rTGdWWTRpWUt6R0lLQmgxRWsrRnNBVnVlN0RiMXptdzBBaldTZ2RjcFNL?=
- =?utf-8?B?Nk1Obys0Q1ZoNlIzTEJlRXhJT2s0KzhPUlBVSHFFSFhIVThFczY3eTRuemlJ?=
- =?utf-8?B?Vk92MGFlSzZqblExQTlzSUthWWJKUGJYZGJ0QjlYQWh2bGdYN0V2cHFxQzY0?=
- =?utf-8?B?dDExMU9RNUlVRmFlU2NRYXFSR0JOYURBNExpLzRJdmZ6eGVmRDJ2SjNYaGd2?=
- =?utf-8?B?QjhVaHFjTmMvQ3ZweXV5YktKR05sMHJwZEkrSFhyL3l4VEMrd3J4TUJ4WW52?=
- =?utf-8?B?VTBaWklMZTZ5b0lONHJCQUkvNy9UT2x0bXh6ZFRGQjhYTU5mSE8vL3BwY0FZ?=
- =?utf-8?B?QnJlbjZUdmMwUmVKR29jQzA2YjFnMW1nWXU1ZjdxdHpIN21Lc29SUmxSSkpO?=
- =?utf-8?B?SzRzbGJqVzcvLzB1S0YxcHExVnZlYXY0UjNPSEh3QVBQcmRpejdzenFZdXpi?=
- =?utf-8?B?ZENGSEc5L09hTlVvUWxManNycTUxM3hOUEp1dlFQMkZlRXpCd2VLVWhsd0FL?=
- =?utf-8?B?V08xWE4xWEtaeW1ON3JmaU85MHhFdFh4cS9FMHIvenB1U1ZxbElMVEwwdkoz?=
- =?utf-8?B?bGM4ejcyZDZ5VnpUTDJHdUkvam9YaEpVcDlLejZ6aWRXTWluWmpEZEdvNTEx?=
- =?utf-8?B?d2RIbmVqMGJHV1ZhQzFHeW5jZ2s3TW94T2J6TVVkamp6S2xzNGxraGZ2NitU?=
- =?utf-8?B?UUQ2R2R1TWpDa2RCODhxNVU5MExxU2YzQ1FjRVozRG51aXpUcVM5bnVBUDl2?=
- =?utf-8?B?ZDNKcGJvbFVzYWNrVXNBOHd0SVp2TlA0dGppcEw3S240UVZlTHBublBQOHM1?=
- =?utf-8?B?V3VnajhWZWVuVHlaaXY3N21NRXNaNG1RcC9qbVhMM2c4VmZmeHZZQkNuR3hY?=
- =?utf-8?B?TXNjYUxLNjN1VjVrQkRiOUdEZFlFRlIrNXErMFlJT2VyZ1BiWEU3aUZBN2xO?=
- =?utf-8?B?QkRTUjJNTzk3ZktHSDI1d0FRMnlCeExaU3VTV1N6RE0vSjlldWExeFNmK3Nn?=
- =?utf-8?B?VzBLS2pBNVNkd1oxUjA0OXZoaTBjR3Y4T2xSVittcU84eTRrR3lieVlQSEVC?=
- =?utf-8?B?dWVxWGJxS2Znc3ZRaSs1NXNVb2M3K1Y0cnJJN1R4ZDNsMURMVkt3cEZreVpI?=
- =?utf-8?B?bEpjcDkxUENYZXVzN1RQSWJrb0pZWVNFamNHTlpEczRBUmY3VUYyWXNia1hF?=
- =?utf-8?B?UzRiQmVoK3hXK2R2VThlc1VuRzhmTW9Jcnd5NDJUVHNYUkd6SEg4Y0thY3lu?=
- =?utf-8?B?M0dMMnN0UFVTeHBMZ1Y4WEQxT0pyNGFxTCtqWFpEbnkzUitDZHdPSzI3UVNa?=
- =?utf-8?B?QXdxL1lwemdvaXhDWU5rRm5RU3JNZ2RvY0RzNGZSd1dHcXZnTVhVV2oxSDRw?=
- =?utf-8?B?VkVWU05sRWQ5RmJNa1RMWDNoNUNMT3JyMEt5cGtxQk5ZTjQzN0JWa2xvZ1Mv?=
- =?utf-8?B?U0U3Yis0cERvYW1Cbld4NmZOYmVCV2FPemFsaWU1a1dHOFlpVElBQT09?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ 08:46:17 +0000
+From: libo.chen.cn@windriver.com
+To: anuj.mittal@oss.qualcomm.com
+Cc: Jinfeng.Wang.CN@windriver.com, openembedded-devel@lists.openembedded.org
+Subject: [oe] [meta-oe][scarthgap][PATCH v3 08/11] hdf5: fix CVE-2025-2308
+Date: Fri, 17 Apr 2026 16:45:46 +0800
+Message-Id: <20260417084546.3482902-1-libo.chen.cn@windriver.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
+References: <CA+s=J=ztc7LcbsPH-QsFCSduqQX7Abqt=4Ve2S4s1ZSK4+DQkA@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SE2P216CA0165.KORP216.PROD.OUTLOOK.COM
+ (2603:1096:101:2cb::14) To BN9PR11MB5354.namprd11.prod.outlook.com
+ (2603:10b6:408:11b::7)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN9PR11MB5354:EE_|MW5PR11MB5810:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f51d37d-4438-4610-7777-08de9c5dc9ed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|376014|52116014|13003099007|38350700014|56012099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: 
+	mEJjbB2hOyxyaPIB0rK8biksH/vSEHBNPxMNFEiHJ8ZZPO663qIxCVkdA+N1j+QlOG1PK6+qduO1Xmxs2kLUggWnO+RNkRXOcV2oJWN1hYDfbfjeCwHIui+Es5LmsMeUfNVA0idil3vhRSZiGpHidWwl2ONSmM5JPqpz9CEQGkZupkvZ/RcB+liO0lbq0yX5DHBCmJTk10eWIFxjRlGrPV61YQtZequK0lW8HzVLcG0iCDfyJcTntZQOKES7Ikrm0N3SKttia5PB5zyjdrdPyterhswB0HiX+JTzj4VajeQQvOPQ4G30XLVwHMHia5ouo3s5DprBfko5FEoOPgoubY+GT4Z/8SzhbjlU6ybDwAzKo7OXDBdihvzUkwDRldGsPRyPdKJ52raeoUokakRAyQ5erLMX/e+S4FtljDIQT0EmI6Audgincr3khn/BVkwGMSNUNIP/ERqdz0Mjr/QrQ+fQC2BKpbZkisupR37tauM+XkbhwCdjJ/u+Db6zfBFTZzJnOI3KPOCroP8PsdkqMl43hTHpqUWswZ4KHdI8bdOPcSCcgOaNX0Lvf43LgiQzTbZ0/8miBgRfCRgYzv9e5rVBuTKmek6Trb7CEQh6xHC+RO6Lvh5gKHPxHkkxsDriqZ+zrfEUWv8fZHmXyFw5Vi9Dh10ckgb1Ecx2vgAOPNYqtKF4ynKNrirbexBdxI5LftyaeJvxeDbY+lMX21MLfTQ3RHnIFr5TVJqsJe9odnJMJLkfczT/DgqOD0Sf3EebXcfodCKG3QSR7I+aZr+HtjyC3tf/gz3r4dTbasK61E0udwJKUrg0rZ8VZAuXap//
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN9PR11MB5354.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(52116014)(13003099007)(38350700014)(56012099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?7essQEPRNMkYh+hhX0lSUhGa5X+u8hoJT237xBaCBgEYyOxDavON8vRXUl4W?=
+ =?us-ascii?Q?8L87d1cd30biKF0NnpGu8WAG0BEXCwOenRMXKUZBhOonxur4CPeq/1PPlsCL?=
+ =?us-ascii?Q?fyd4dJehkop+bglY1EqSzmcYqTKC2CsLzXO38/RzaMZdqBbyisBAqQehNBjC?=
+ =?us-ascii?Q?m2Ddx8+2gOLimBrAbPqE/0Ql/NUe+3ZdKjd7Wcg/PfOnrt4n8qBySNpWCZ+O?=
+ =?us-ascii?Q?nlIPKmvDdt3gCxjLNOVnUlWMx2B3GpTR8trDxbDoUtIe4f/KyCLsusm94myI?=
+ =?us-ascii?Q?nLsD87zpLtRNa3ONNCOaHZvl0nssGI/vaQ8ydp7uZtR5iPt1ehuQbqC0fAnd?=
+ =?us-ascii?Q?04CuXPN7k86AVARF803uR16N2yaygE3cAqaCrRGfBc/MHRtlafsMLLSJbce+?=
+ =?us-ascii?Q?TmWALoHNusFpmTsL/KkQWSBUa0v4d/GElAmZRoyKOw8l/4uVwQhCxG9vsNK0?=
+ =?us-ascii?Q?z7g6zkMZdhmIZXCmljTJJ1EgWRc7P/XUnMzgyev1MEQxmUB2ywZUFGlAOZf/?=
+ =?us-ascii?Q?8cU1L4ix5QNqrp5YozLAFi+RmGVInrfI9oG6zkPhPI9bN5zW6YW8WCZyoa5b?=
+ =?us-ascii?Q?QCPPJi/ABgOUvJVg1Z377YYuDIHFojh2Om7wx+0oeLtLoPuFT0f88DzabDpW?=
+ =?us-ascii?Q?fRMcXKPWgSE0P7z7QjWQYV1h7e9mkwuQ6tVPErnrq5JcsuZUIiqyQ/455c9S?=
+ =?us-ascii?Q?iRBQy3OnrWBI7se1QC9XRJmeROMWHx3h8cFuMrpYpw/6COKBJX2e46Ud95LH?=
+ =?us-ascii?Q?C47lgsfuvlFZ3QYt+eMiNUMfdiQCiZ1mEk0Qqrn9TKbaLZ1vh6ZFTHZZYYZC?=
+ =?us-ascii?Q?ijuZPvBaQ8qGba67nGfKXR5WtqDza5s+ndQ8TQqpg5UXUZHtFUMdzUxJr2RQ?=
+ =?us-ascii?Q?cmOlnerbnw0frj6yKdGLd8Tcu3nIMURvJSbUl9WUGRJ2sJxY9MQmdzxX3q5W?=
+ =?us-ascii?Q?frs/B7DfwASpSRCDxsIPD9+GiRjRlEEOpa9OPzua+W12KL6DEe77ka/tZyYo?=
+ =?us-ascii?Q?Glwk8Fx9269pQj58tVYGP1prSHfp44RLXy0Lgvaap5TJPKUfoSyCDF8LiijS?=
+ =?us-ascii?Q?Q+zVFo7D7a80m1Nr33WjKCFhM153on95YIMCk+wjx3QQThUKSvWa8agizZb/?=
+ =?us-ascii?Q?bSsJN9Fp0qLLRQkWl2qkuszb35SpLbqEoWULJW3Z4OQ+G5UkZluitOmF9ws6?=
+ =?us-ascii?Q?2drdPlaJBjPduolKg418gKbX9IDpHN6Z0TqhyoUIBFjsXUagFQJXN0yqMjTb?=
+ =?us-ascii?Q?uhy19ynrnBcGjpP/J0r/6agAwuD/UZn+moUR7ftH6ZfYGpwAM2NEwjOGIc+v?=
+ =?us-ascii?Q?YpI4fOuJHIU8rbIV/YNzpj+ERIgGjfKS0IPJF+s0KayD6l9WHtsFrR/PzXJ3?=
+ =?us-ascii?Q?zddKVCmL+5lGrna/hQMBIPOoP/wGPRsU6pYSo2pv9UYCZjlmtruhbT3N0Xwn?=
+ =?us-ascii?Q?hl9He6zRvMUOOlEMbA7ab3u7oJwwB4nH42+nIHHigyWYiTZasTb1+IfgYqiA?=
+ =?us-ascii?Q?IDeYYv0TzryNQLbkD2ON5MOd2enS7iL1IIg8UCI13jJMDFqUEuEGKtQGSO5V?=
+ =?us-ascii?Q?g12OJVfV6Ht1whvjbcGf7ZYqHRDVEoYyVQ9b3sYoEZPx3CCXF1Uk3bwJD5jb?=
+ =?us-ascii?Q?bsZ2Y51RSIJoB8Dlo+apn3ikm6Mu3srapK46iwAMJ2tQP4Ya2yt1RWp5gULz?=
+ =?us-ascii?Q?tO5B62YPNhTQ+2XqV1PN+YiEve21X0ff5kuq65GACupBVNdhCnhGmNpq2Mbe?=
+ =?us-ascii?Q?Kmq72YIIF/tJB0ZEzrcmyiHRKL5aMxE=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	NcrkzqpZ08ekuxuxFoVFV5SheVgYKxwDI9NLlDsIwO2Tmf1d5I1hVUWdp/ajeWbVXD5h/AenveTsu63mAbj4dqoxOPniJ72yVBkDQRA0NCyGp2VYfB/TF/kVB/NWB/5d4arViBg1mBwZaoTIt+ldEG1Thhmp96ofRYk8GYDIXF5Jb+pXOlUQolj9F+AVBGEXcs6QYtLbIjP0tYJl4XWQ1REpc3nXhytB5Rsljc5RZWgoz2U9uRm5dZK7W4PJLNIifnF7pDseoRRyRPdHIZxTnbR6BDctpL/+AfOsOn2Q8Ap4RCeB6Dqzfp3RfZTX6AUCZG5TObaNEupB+EGngk2BoA==
+	klgBrBKxoOeAyfvAud0RW/5baEZ0mYN6lCejUrNEUGDIBKFz+U5jCBq81FwvS+AIp9IGNXJA17dFSQ2XivfV4HuHnU/Yk7b2qV1qlk3OEKpu5m3YMTQodV6IdOrl1kbxZktJo0htNg4+TjL4SzkCrN5dLD1fYpC1QRptcOE4OLtYtaN70MLPwZCkysGKxpbg+3K8mQ43wWc7tyiNs/6h7C5MBCeFfF4hp+7waxnSLqDXByu4duq/McaL4OBpxkoRlVo7D+UeEG8w/DvqUHuyrFF9xvbww+J0pcxa1pOUHQElh/gW84XRw2Pw7jv8uHZpqdjjec98aT6hYnEI6aemAw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f51d37d-4438-4610-7777-08de9c5dc9ed
 X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5354.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0fbce73b-e699-4ad0-0b8f-08de9c4fecc1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Apr 2026 07:07:02.1597
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Apr 2026 08:46:16.9427
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: XGS/h0q4KirVB70/lzJ/tikmEbQu3c9qlZ+bfd6ME7ujzkqasR3WcsKIaJp5/pPFH9LrbyRfyQWmrt7njnWGF722SjLdxfe6uo0brJNxfkU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF3F833FA49
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AU1rZ3qFYqRV28j6iA4b+GJCYkX0dv01A3GE/NZxBW6ZbSbuQJkzbFVSmOW0oNPOvzaineAO8vrLSVBsKkm3l4ULPMJrBnb8YBj5GuvLQAA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR11MB5810
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA2OCBTYWx0ZWRfX+yIzLych/QKh
- yoc6fwylfUYDHSPEIjqy1QF8L4+ipA0CoIsAWraH8VQBWsMezbhfr3VDqwE2HW9AaU4Y8vhNNUX
- Kn0aDdzh3XowoNnXOyAg48IrAvBSbzoQnDNjnTTkk+wY1HxN+zmAzqhePj8GUpb616ewSTqGlyK
- RMc/jn3gthEJbH3Ezx0IflMCCueeextvn3wOGg/0AI040BdtcdD+o4cZh6ACdjHkBhR8OtyaN51
- 0yvdXeqZm9yhjHYTcWFqoPvt6+gE+jlotgjRzvtxLByNmekqyUDaiF/9lnrGEQwpQy/JVX6aCZC
- OEFBwCzO0ynPO7UsOhsgraUVdkW/kw9QQrXrH9qfk+GBrphcoHbgQZv09LWCyl5JCnNpx0pCdjp
- IFsiG/GXQXh6f6Sq6nK77DHiqL0Rha60dR9/FgnR3qlvFCSE7jsIPCuGt/Q1nYGcyUcyRCtg7q0
- NFcqRSrH9eki+UWWuEA==
-X-Proofpoint-ORIG-GUID: Bcmp3m_PtRx2dyZxpuF419YHa03aDy_R
-X-Authority-Analysis: v=2.4 cv=GupyPE1C c=1 sm=1 tr=0 ts=69e1dc19 cx=c_pps
- a=0Qqeoa/8LQ4SOC89qm8Uhg==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
- a=iKiJcTA2PjBS6x5JeXcw:22 a=PYnjg3YJAAAA:8 a=NEAV23lmAAAA:8 a=Q4-j1AaZAAAA:8
- a=t7CeM3EgAAAA:8 a=Nv9ropGlmozstVHnj6sA:9 a=QEXdDO2ut3YA:10
- a=9H3Qd4_ONW2Ztcrla5EB:22 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-GUID: 5aZGNDhvBJayfgg8X8ItzDkkOt0RzPMc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDE3MDA4NyBTYWx0ZWRfXz+Ua+pvftl/F
+ uN3Hp24U5jRom7T45nrX7Yw4hVEUSuJqEbbzLf3RvOlw/DMocvU+uWtj1Rwo6w+Dnsi1VJj/cBT
+ +YgDGGaaYUDa2QN++eDhkQmEnSR9qiR5ueT8IEELCKKfNW9Py6dquglUOFADdk7+fzKdVmLaACF
+ EA1yD6aTWFRufHaT3TXlcxpyIdDM8mv0bx6nQn5pgccO/r7Oe1opVMuLfmGf/vvnKy9IOUNw1/E
+ zOo1dmon8anjUS5qdI86AEu4JgKNsmZ7mndVYlEqJEs1KLX4zdqg2IdeccLAflircdSIQBDyllb
+ pxnxH4XPtns1jS1M8/iPxNA4UCp0zdk+4UQnUkit6e1PyCSDpWOcWLg0mqwfZPJBOrTVwdRwOG/
+ +VR9f6bs7x05O0rw/vLqa37sbwoj3TJEZjM6l7ErtH05pVa/6raIFrVyarcOVx7Gi9rB84NGfui
+ sAoBq+byeCIYhAlSV9A==
+X-Proofpoint-ORIG-GUID: Ysi96yFEG77RIgK-FRP32EJUClYmXYzq
+X-Authority-Analysis: v=2.4 cv=GupyPE1C c=1 sm=1 tr=0 ts=69e1f35d cx=c_pps
+ a=Kac4Oh/pgoirBk7HbaAweA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=PYnjg3YJAAAA:8
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=inLRmMHjSyNTGiKv4Y8A:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: ztpyjTymlW9b9keFD0VfWWMdaSlrnj8-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-16_04,2026-04-16_03,2025-10-01_01
@@ -165,68 +143,386 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  phishscore=0 impostorscore=0 spamscore=0 malwarescore=0 suspectscore=0
  lowpriorityscore=0 bulkscore=0 priorityscore=1501 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170068
+ reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604170087
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 07:07:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126428
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Apr 2026 08:46:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126429
 
-DQoNCj4tLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPkZyb206IG9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgQW51aiBNaXR0YWwgdmlhDQo+bGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KPlNlbnQ6IFdlZG5lc2RheSwgQXByaWwgMTUsIDIwMjYgNDoyNyBQTQ0KPlRv
-OiBXYW5nLCBKaW5mZW5nIChDTikgPEppbmZlbmcuV2FuZy5DTkB3aW5kcml2ZXIuY29tPg0KPkNj
-OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPlN1YmplY3Q6IFJl
-OiBbb2VdIFttZXRhLW9lXVtzY2FydGhnYXBdW1BBVENIIHYyIDA4LzExXSBoZGY1OiBmaXggQ1ZF
-LTIwMjUtMjMwOA0KPg0KPkNBVVRJT046IFRoaXMgZW1haWwgY29tZXMgZnJvbSBhIG5vbiBXaW5k
-IFJpdmVyIGVtYWlsIGFjY291bnQhDQo+RG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNo
-bWVudHMgdW5sZXNzIHlvdSByZWNvZ25pemUgdGhlIHNlbmRlciBhbmQga25vdw0KPnRoZSBjb250
-ZW50IGlzIHNhZmUuDQo+DQo+T24gRnJpLCBBcHIgMTAsIDIwMjYgYXQgMzowNeKAr1BNIFdhbmcs
-IEppbmZlbmcgKENOKSB2aWEgbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPjxKaW5mZW5nLldhbmcu
-Q049d2luZHJpdmVyLmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiB3cm90ZToNCj4+DQo+PiBG
-cm9tOiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4NCj4+IEFjY29y
-ZGluZyB0byBbMV0sIEEgdnVsbmVyYWJpbGl0eSwgd2hpY2ggd2FzIGNsYXNzaWZpZWQgYXMgY3Jp
-dGljYWwsDQo+PiB3YXMgZm91bmQgaW4gSERGNSAxLjE0LjYuIFRoaXMgYWZmZWN0cyB0aGUgZnVu
-Y3Rpb24NCj4+IEg1Wl9fc2NhbGVvZmZzZXRfZGVjb21wcmVzc19vbmVfYnl0ZSBvZiB0aGUgY29t
-cG9uZW50IFNjYWxlLU9mZnNldCBGaWx0ZXIuDQo+PiBUaGUgbWFuaXB1bGF0aW9uIGxlYWRzIHRv
-IGhlYXAtYmFzZWQgYnVmZmVyIG92ZXJmbG93LiBBbiBhdHRhY2sgaGFzIHRvDQo+PiBiZSBhcHBy
-b2FjaGVkIGxvY2FsbHkuIFRoZSBleHBsb2l0IGhhcyBiZWVuIGRpc2Nsb3NlZCB0byB0aGUgcHVi
-bGljDQo+PiBhbmQgbWF5IGJlIHVzZWQuIFRoZSB2ZW5kb3IgcGxhbnMgdG8gZml4IHRoaXMgaXNz
-dWUgaW4gYW4gdXBjb21pbmcgcmVsZWFzZS4NCj4+DQo+PiBCYWNrcG9ydCBwYXRjaCBbMl0gZnJv
-bSB1cHN0cmVhbSB0byBmaXggQ1ZFLTIwMjUtMjMwOA0KPj4NCj4+IFsxXSBodHRwczovL252ZC5u
-aXN0Lmdvdi92dWxuL2RldGFpbC9DVkUtMjAyNS0yMzA4DQo+PiBbMl0NCj4+DQo+aHR0cHM6Ly9n
-aXRodWIuY29tL0hERkdyb3VwL2hkZjUvY29tbWl0LzJjZTdmZGM0Y2YxNDdkMjgwYWE2ZDQ5Njg2
-Mjk3Zg0KPj4gYWFjYzI1MGU0MA0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IExpYm8gQ2hlbiA8bGli
-by5jaGVuLmNuQHdpbmRyaXZlci5jb20+DQo+PiBTaWduZWQtb2ZmLWJ5OiBKaW5mZW5nIFdhbmcg
-PGppbmZlbmcud2FuZy5jbkB3aW5kcml2ZXIuY29tPg0KPj4gLS0tDQo+PiAgLi4uL2hkZjUvZmls
-ZXMvQ1ZFLTIwMjUtMjMwOC5wYXRjaCAgICAgICAgICAgIHwgMjEyMA0KPisrKysrKysrKysrKysr
-KysrDQo+PiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvaGRmNS9oZGY1XzEuMTQuNC0zLmJiIHwg
-ICAgMSArDQo+PiAgMiBmaWxlcyBjaGFuZ2VkLCAyMTIxIGluc2VydGlvbnMoKykNCj4+ICBjcmVh
-dGUgbW9kZSAxMDA2NDQNCj4+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2hkZjUvZmlsZXMvQ1ZF
-LTIwMjUtMjMwOC5wYXRjaA0KPj4NCj4+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9oZGY1L2ZpbGVzL0NWRS0yMDI1LTIzMDgucGF0Y2gNCj4+IGIvbWV0YS1vZS9yZWNpcGVz
-LXN1cHBvcnQvaGRmNS9maWxlcy9DVkUtMjAyNS0yMzA4LnBhdGNoDQo+PiBuZXcgZmlsZSBtb2Rl
-IDEwMDY0NA0KPj4gaW5kZXggMDAwMDAwMDAwMC4uMTNiMDRiZjhhMQ0KPj4gLS0tIC9kZXYvbnVs
-bA0KPj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvaGRmNS9maWxlcy9DVkUtMjAyNS0y
-MzA4LnBhdGNoDQo+PiBAQCAtMCwwICsxLDIxMjAgQEANCj4+ICtGcm9tIGNiY2U0YzJlY2Y2ZjU1
-NTc2MDU4OTBlZWMxMjVlY2ZhYTQzNzExMzEgTW9uIFNlcCAxNyAwMDowMDowMA0KPj4gKzIwMDEN
-Cj4+ICtGcm9tOiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4gK0Rh
-dGU6IEZyaSwgMzAgSmFuIDIwMjYgMTY6NDM6MDQgKzA4MDANCj4+ICtTdWJqZWN0OiBbUEFUQ0hd
-IEZpeCBDVkUtMjAyNS0yMzA4ICgjNTk2MCkNCj4+ICsNCj4+ICtBIG1hbGZvcm1lZCBmaWxlIGNh
-biBjYXVzZSB0aGUgc2NhbGUtb2Zmc2V0IGZpbHRlciB0byBoYXZlIHRvbyBsaXR0bGUgaW5wdXQg
-ZGF0YQ0KPmNhdXNpbmcgYSBoZWFwIGJ1ZmZlciBvdmVyZmxvdy4gQWRkaXRpb25hbCBjaGVja3Mg
-b24gdGhlIG1heGltdW0gYnVmZmVyIGxlbmd0aA0KPmFyZSByZXF1aXJlZCBkdXJpbmcgdGhlIGRl
-Y29tcHJlc3Npb24uDQo+PiArDQo+PiArVGhpcyBQUiBmaXhlcyBDVkUtMjAyNS0yMzA4Lg0KPj4g
-Kw0KPj4gK0NWRTogQ1ZFLTIwMjUtMjMwOA0KPj4gKw0KPj4gK1Vwc3RyZWFtLVN0YXR1czogQmFj
-a3BvcnQNCj4+DQo+K1todHRwczovL2dpdGh1Yi5jb20vSERGR3JvdXAvaGRmNS9jb21taXQvMmNl
-N2ZkYzRjZjE0N2QyODBhYTZkNDk2ODYyOQ0KPj4gKzdmYWFjYzI1MGU0MF0NCj4+ICsNCj4+ICtT
-aWduZWQtb2ZmLWJ5OiBMaWJvIENoZW4gPGxpYm8uY2hlbi5jbkB3aW5kcml2ZXIuY29tPg0KPj4g
-Ky0tLQ0KPj4gKyBzcmMvSDVac2NhbGVvZmZzZXQuYyAgICAgIHwgIDE3NyArKy0tDQo+PiArIHNy
-Yy9INVpzY2FsZW9mZnNldC5jLm9yaWcgfCAxNzgxDQo+PiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKw0KPj4gKyAyIGZpbGVzIGNoYW5nZWQsIDE4ODYgaW5zZXJ0aW9ucygr
-KSwgNzIgZGVsZXRpb25zKC0pICBjcmVhdGUgbW9kZQ0KPj4gKzEwMDY0NCBzcmMvSDVac2NhbGVv
-ZmZzZXQuYy5vcmlnDQo+DQo+Q2FuIHlvdSBwbGVhc2UgZml4IHRoaXMgcGF0Y2ggYW5kIHJlc2Vu
-ZD8NCj4NCj5UaGFua3MsDQo+DQo+QW51ag0KW0xpYm8+IF0gU29ycnksIGl0J3MgbXkgbWlzdGFr
-ZS4gSSB3aWxsIHNlbmQgdGhlIGZpeGVkIHBhdGNoIHNvb24uDQo=
+From: Libo Chen <libo.chen.cn@windriver.com>
+
+According to [1], A vulnerability, which was classified as critical, was
+found in HDF5 1.14.6. This affects the function
+H5Z__scaleoffset_decompress_one_byte of the component Scale-Offset Filter.
+The manipulation leads to heap-based buffer overflow. An attack has to be
+approached locally. The exploit has been disclosed to the public and may be
+used. The vendor plans to fix this issue in an upcoming release.
+
+Backport patch [2] from upstream to fix CVE-2025-2308
+
+[1] https://nvd.nist.gov/vuln/detail/CVE-2025-2308
+[2] https://github.com/HDFGroup/hdf5/commit/2ce7fdc4cf147d280aa6d49686297faacc250e40
+
+Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
+---
+ .../hdf5/files/CVE-2025-2308.patch            | 333 ++++++++++++++++++
+ meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb |   1 +
+ 2 files changed, 334 insertions(+)
+ create mode 100644 meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+
+diff --git a/meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch b/meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+new file mode 100644
+index 0000000000..336a0d2697
+--- /dev/null
++++ b/meta-oe/recipes-support/hdf5/files/CVE-2025-2308.patch
+@@ -0,0 +1,333 @@
++From cbce4c2ecf6f5557605890eec125ecfaa4371131 Mon Sep 17 00:00:00 2001
++From: Libo Chen <libo.chen.cn@windriver.com>
++Date: Fri, 30 Jan 2026 16:43:04 +0800
++Subject: [PATCH] Fix CVE-2025-2308 (#5960)
++
++A malformed file can cause the scale-offset filter to have too little input data causing a heap buffer overflow. Additional checks on the maximum buffer length are required during the decompression.
++
++This PR fixes CVE-2025-2308.
++
++CVE: CVE-2025-2308
++
++Upstream-Status: Backport [https://github.com/HDFGroup/hdf5/commit/2ce7fdc4cf147d280aa6d49686297faacc250e40]
++
++Signed-off-by: Libo Chen <libo.chen.cn@windriver.com>
++---
++ src/H5Zscaleoffset.c      |  177 ++--
++ src/H5Zscaleoffset.c.orig | 1781 +++++++++++++++++++++++++++++++++++++
++ 1 files changed, 105 insertions(+), 72 deletions(-)
++ create mode 100644 src/H5Zscaleoffset.c.orig
++
++diff --git a/src/H5Zscaleoffset.c b/src/H5Zscaleoffset.c
++index fbf12d6..8355b13 100644
++--- a/src/H5Zscaleoffset.c
+++++ b/src/H5Zscaleoffset.c
++@@ -69,21 +69,22 @@ static herr_t H5Z__scaleoffset_precompress_fd(void *data, unsigned d_nelmts, enu
++ static herr_t H5Z__scaleoffset_postdecompress_fd(void *data, unsigned d_nelmts, enum H5Z_scaleoffset_t type,
++                                                  unsigned filavail, const unsigned cd_values[],
++                                                  uint32_t minbits, unsigned long long minval, double D_val);
++-static void   H5Z__scaleoffset_next_byte(size_t *j, unsigned *buf_len);
++-static void   H5Z__scaleoffset_decompress_one_byte(unsigned char *data, size_t data_offset, unsigned k,
++-                                                   unsigned begin_i, const unsigned char *buffer, size_t *j,
++-                                                   unsigned *buf_len, parms_atomic p, unsigned dtype_len);
+++static void   H5Z__scaleoffset_next_byte(size_t *j, unsigned *bits_to_fill);
+++static herr_t H5Z__scaleoffset_decompress_one_byte(unsigned char *data, size_t data_offset, unsigned k,
+++                                                   unsigned begin_i, const unsigned char *buffer,
+++                                                   size_t buf_size, size_t *j, unsigned *bits_to_fill,
+++                                                   parms_atomic p, unsigned dtype_len);
++ static void   H5Z__scaleoffset_compress_one_byte(const unsigned char *data, size_t data_offset, unsigned k,
++                                                  unsigned begin_i, unsigned char *buffer, size_t *j,
++-                                                 unsigned *buf_len, parms_atomic p, unsigned dtype_len);
++-static void   H5Z__scaleoffset_decompress_one_atomic(unsigned char *data, size_t data_offset,
++-                                                     unsigned char *buffer, size_t *j, unsigned *buf_len,
++-                                                     parms_atomic p);
+++                                                 unsigned *bits_to_fill, parms_atomic p, unsigned dtype_len);
+++static herr_t H5Z__scaleoffset_decompress_one_atomic(unsigned char *data, size_t data_offset,
+++                                                     unsigned char *buffer, size_t buf_size, size_t *j,
+++                                                     unsigned *bits_to_fill, parms_atomic p);
++ static void   H5Z__scaleoffset_compress_one_atomic(unsigned char *data, size_t data_offset,
++-                                                   unsigned char *buffer, size_t *j, unsigned *buf_len,
+++                                                   unsigned char *buffer, size_t *j, unsigned *bits_to_fill,
++                                                    parms_atomic p);
++-static void   H5Z__scaleoffset_decompress(unsigned char *data, unsigned d_nelmts, unsigned char *buffer,
++-                                          parms_atomic p);
+++static herr_t H5Z__scaleoffset_decompress(unsigned char *data, unsigned d_nelmts, unsigned char *buffer,
+++                                          size_t buf_size, parms_atomic p);
++ static void   H5Z__scaleoffset_compress(unsigned char *data, unsigned d_nelmts, unsigned char *buffer,
++                                         size_t buffer_size, parms_atomic p);
++ 
++@@ -1261,8 +1262,11 @@ H5Z__filter_scaleoffset(unsigned flags, size_t cd_nelmts, const unsigned cd_valu
++         }
++ 
++         /* decompress the buffer if minbits not equal to zero */
++-        if (minbits != 0)
++-            H5Z__scaleoffset_decompress(outbuf, d_nelmts, (unsigned char *)(*buf) + buf_offset, p);
+++        if (minbits != 0) {
+++            if (H5Z__scaleoffset_decompress(outbuf, d_nelmts, (unsigned char *)(*buf) + buf_offset,
+++                                            *buf_size - buf_offset, p))
+++                HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Scaleoffset decompression failed");
+++        }
++         else {
++             /* fill value is not defined and all data elements have the same value */
++             for (i = 0; i < size_out; i++)
++@@ -1603,55 +1607,69 @@ done:
++ }
++ 
++ static void
++-H5Z__scaleoffset_next_byte(size_t *j, unsigned *buf_len)
+++H5Z__scaleoffset_next_byte(size_t *j, unsigned *bits_to_fill)
++ {
++     ++(*j);
++-    *buf_len = 8 * sizeof(unsigned char);
+++    *bits_to_fill = 8 * sizeof(unsigned char);
++ }
++ 
++-static void
+++static herr_t
++ H5Z__scaleoffset_decompress_one_byte(unsigned char *data, size_t data_offset, unsigned k, unsigned begin_i,
++-                                     const unsigned char *buffer, size_t *j, unsigned *buf_len,
++-                                     parms_atomic p, unsigned dtype_len)
+++                                     const unsigned char *buffer, size_t buf_size, size_t *j,
+++                                     unsigned *bits_to_fill, parms_atomic p, unsigned dtype_len)
++ {
++-    unsigned      dat_len; /* dat_len is the number of bits to be copied in each data byte */
++-    unsigned char val;     /* value to be copied in each data byte */
+++    unsigned      bits_to_copy;        /* bits_to_copy is the number of bits to be copied in each data byte */
+++    unsigned char val;                 /* value to be copied in each data byte */
+++    herr_t        ret_value = SUCCEED; /* Return value */
+++
+++    FUNC_ENTER_PACKAGE
+++
+++    if (*j >= buf_size)
+++        HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Buffer too short");
++ 
++     /* initialize value and bits of unsigned char to be copied */
++     val = buffer[*j];
++     if (k == begin_i)
++-        dat_len = 8 - (dtype_len - p.minbits) % 8;
+++        bits_to_copy = 8 - (dtype_len - p.minbits) % 8;
++     else
++-        dat_len = 8;
+++        bits_to_copy = 8;
++ 
++-    if (*buf_len > dat_len) {
++-        data[data_offset + k] =
++-            (unsigned char)((unsigned)(val >> (*buf_len - dat_len)) & (unsigned)(~((unsigned)~0 << dat_len)));
++-        *buf_len -= dat_len;
+++    if (*bits_to_fill > bits_to_copy) {
+++        data[data_offset + k] = (unsigned char)((unsigned)(val >> (*bits_to_fill - bits_to_copy)) &
+++                                                (unsigned)(~((unsigned)~0 << bits_to_copy)));
+++        *bits_to_fill -= bits_to_copy;
++     } /* end if */
++     else {
++         data[data_offset + k] =
++-            (unsigned char)((val & ~((unsigned)(~0) << *buf_len)) << (dat_len - *buf_len));
++-        dat_len -= *buf_len;
++-        H5Z__scaleoffset_next_byte(j, buf_len);
++-        if (dat_len == 0)
++-            return;
+++            (unsigned char)((val & ~((unsigned)(~0) << *bits_to_fill)) << (bits_to_copy - *bits_to_fill));
+++        bits_to_copy -= *bits_to_fill;
+++        H5Z__scaleoffset_next_byte(j, bits_to_fill);
+++        if (bits_to_copy == 0)
+++            goto done;
+++        else if (*j >= buf_size)
+++            HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Buffer too short");
++ 
++         val = buffer[*j];
++-        data[data_offset + k] |=
++-            (unsigned char)((unsigned)(val >> (*buf_len - dat_len)) & ~((unsigned)(~0) << dat_len));
++-        *buf_len -= dat_len;
+++        data[data_offset + k] |= (unsigned char)((unsigned)(val >> (*bits_to_fill - bits_to_copy)) &
+++                                                 ~((unsigned)(~0) << bits_to_copy));
+++        *bits_to_fill -= bits_to_copy;
++     } /* end else */
+++
+++done:
+++    FUNC_LEAVE_NOAPI(ret_value)
++ }
++ 
++-static void
+++static herr_t
++ H5Z__scaleoffset_decompress_one_atomic(unsigned char *data, size_t data_offset, unsigned char *buffer,
++-                                       size_t *j, unsigned *buf_len, parms_atomic p)
+++                                       size_t buf_size, size_t *j, unsigned *bits_to_fill, parms_atomic p)
++ {
++     /* begin_i: the index of byte having first significant bit */
++     unsigned begin_i;
++     unsigned dtype_len;
++     int      k;
+++    herr_t   ret_value = SUCCEED; /* Return value */
+++
+++    FUNC_ENTER_PACKAGE
++ 
++     assert(p.minbits > 0);
++ 
++@@ -1661,8 +1679,9 @@ H5Z__scaleoffset_decompress_one_atomic(unsigned char *data, size_t data_offset,
++         begin_i = p.size - 1 - (dtype_len - p.minbits) / 8;
++ 
++         for (k = (int)begin_i; k >= 0; k--)
++-            H5Z__scaleoffset_decompress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j, buf_len,
++-                                                 p, dtype_len);
+++            if (H5Z__scaleoffset_decompress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer,
+++                                                     buf_size, j, bits_to_fill, p, dtype_len))
+++                HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Atomic decompression failed");
++     }
++     else { /* big endian */
++         assert(p.mem_order == H5Z_SCALEOFFSET_ORDER_BE);
++@@ -1670,67 +1689,81 @@ H5Z__scaleoffset_decompress_one_atomic(unsigned char *data, size_t data_offset,
++         begin_i = (dtype_len - p.minbits) / 8;
++ 
++         for (k = (int)begin_i; k <= (int)(p.size - 1); k++)
++-            H5Z__scaleoffset_decompress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j, buf_len,
++-                                                 p, dtype_len);
+++            if (H5Z__scaleoffset_decompress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer,
+++                                                     buf_size, j, bits_to_fill, p, dtype_len))
+++                HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Atomic decompression failed");
++     }
+++
+++done:
+++    FUNC_LEAVE_NOAPI(ret_value)
++ }
++ 
++-static void
++-H5Z__scaleoffset_decompress(unsigned char *data, unsigned d_nelmts, unsigned char *buffer, parms_atomic p)
+++static herr_t
+++H5Z__scaleoffset_decompress(unsigned char *data, unsigned d_nelmts, unsigned char *buffer, size_t buf_size,
+++                            parms_atomic p)
++ {
++     /* i: index of data, j: index of buffer,
++-       buf_len: number of bits to be filled in current byte */
+++       bits_to_fill: number of bits to be filled in current byte */
++     size_t   i, j;
++-    unsigned buf_len;
+++    unsigned bits_to_fill;
+++    herr_t   ret_value = SUCCEED; /* Return value */
+++
+++    FUNC_ENTER_PACKAGE
++ 
++     /* must initialize to zeros */
++     for (i = 0; i < d_nelmts * (size_t)p.size; i++)
++         data[i] = 0;
++ 
++     /* initialization before the loop */
++-    j       = 0;
++-    buf_len = sizeof(unsigned char) * 8;
+++    j            = 0;
+++    bits_to_fill = sizeof(unsigned char) * 8;
++ 
++     /* decompress */
++     for (i = 0; i < d_nelmts; i++)
++-        H5Z__scaleoffset_decompress_one_atomic(data, i * p.size, buffer, &j, &buf_len, p);
+++        if (H5Z__scaleoffset_decompress_one_atomic(data, i * p.size, buffer, buf_size, &j, &bits_to_fill, p))
+++            HGOTO_ERROR(H5E_PLINE, H5E_BADVALUE, 0, "Scaleoffset decompression failed");
+++
+++done:
+++    FUNC_LEAVE_NOAPI(ret_value)
++ }
++ 
++ static void
++ H5Z__scaleoffset_compress_one_byte(const unsigned char *data, size_t data_offset, unsigned k,
++-                                   unsigned begin_i, unsigned char *buffer, size_t *j, unsigned *buf_len,
+++                                   unsigned begin_i, unsigned char *buffer, size_t *j, unsigned *bits_to_fill,
++                                    parms_atomic p, unsigned dtype_len)
++ {
++-    unsigned      dat_len; /* dat_len is the number of bits to be copied in each data byte */
++-    unsigned char val;     /* value to be copied in each data byte */
+++    unsigned      bits_to_copy; /* bits_to_copy is the number of bits to be copied in each data byte */
+++    unsigned char val;          /* value to be copied in each data byte */
++ 
++     /* initialize value and bits of unsigned char to be copied */
++     val = data[data_offset + k];
++     if (k == begin_i)
++-        dat_len = 8 - (dtype_len - p.minbits) % 8;
+++        bits_to_copy = 8 - (dtype_len - p.minbits) % 8;
++     else
++-        dat_len = 8;
+++        bits_to_copy = 8;
++ 
++-    if (*buf_len > dat_len) {
++-        buffer[*j] |= (unsigned char)((val & ~((unsigned)(~0) << dat_len)) << (*buf_len - dat_len));
++-        *buf_len -= dat_len;
+++    if (*bits_to_fill > bits_to_copy) {
+++        buffer[*j] |=
+++            (unsigned char)((val & ~((unsigned)(~0) << bits_to_copy)) << (*bits_to_fill - bits_to_copy));
+++        *bits_to_fill -= bits_to_copy;
++     }
++     else {
++-        buffer[*j] |=
++-            (unsigned char)((unsigned)(val >> (dat_len - *buf_len)) & ~((unsigned)(~0) << *buf_len));
++-        dat_len -= *buf_len;
++-        H5Z__scaleoffset_next_byte(j, buf_len);
++-        if (dat_len == 0)
+++        buffer[*j] |= (unsigned char)((unsigned)(val >> (bits_to_copy - *bits_to_fill)) &
+++                                      ~((unsigned)(~0) << *bits_to_fill));
+++        bits_to_copy -= *bits_to_fill;
+++        H5Z__scaleoffset_next_byte(j, bits_to_fill);
+++        if (bits_to_copy == 0)
++             return;
++ 
++-        buffer[*j] = (unsigned char)((val & ~((unsigned)(~0) << dat_len)) << (*buf_len - dat_len));
++-        *buf_len -= dat_len;
+++        buffer[*j] =
+++            (unsigned char)((val & ~((unsigned)(~0) << bits_to_copy)) << (*bits_to_fill - bits_to_copy));
+++        *bits_to_fill -= bits_to_copy;
++     } /* end else */
++ }
++ 
++ static void
++ H5Z__scaleoffset_compress_one_atomic(unsigned char *data, size_t data_offset, unsigned char *buffer,
++-                                     size_t *j, unsigned *buf_len, parms_atomic p)
+++                                     size_t *j, unsigned *bits_to_fill, parms_atomic p)
++ {
++     /* begin_i: the index of byte having first significant bit */
++     unsigned begin_i;
++@@ -1745,16 +1778,16 @@ H5Z__scaleoffset_compress_one_atomic(unsigned char *data, size_t data_offset, un
++         begin_i = p.size - 1 - (dtype_len - p.minbits) / 8;
++ 
++         for (k = (int)begin_i; k >= 0; k--)
++-            H5Z__scaleoffset_compress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j, buf_len, p,
++-                                               dtype_len);
+++            H5Z__scaleoffset_compress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j,
+++                                               bits_to_fill, p, dtype_len);
++     }
++     else { /* big endian */
++         assert(p.mem_order == H5Z_SCALEOFFSET_ORDER_BE);
++         begin_i = (dtype_len - p.minbits) / 8;
++ 
++         for (k = (int)begin_i; k <= (int)(p.size - 1); k++)
++-            H5Z__scaleoffset_compress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j, buf_len, p,
++-                                               dtype_len);
+++            H5Z__scaleoffset_compress_one_byte(data, data_offset, (unsigned)k, begin_i, buffer, j,
+++                                               bits_to_fill, p, dtype_len);
++     }
++ }
++ 
++@@ -1763,19 +1796,19 @@ H5Z__scaleoffset_compress(unsigned char *data, unsigned d_nelmts, unsigned char
++                           parms_atomic p)
++ {
++     /* i: index of data, j: index of buffer,
++-       buf_len: number of bits to be filled in current byte */
+++       bits_to_fill: number of bits to be filled in current byte */
++     size_t   i, j;
++-    unsigned buf_len;
+++    unsigned bits_to_fill;
++ 
++     /* must initialize buffer to be zeros */
++     for (j = 0; j < buffer_size; j++)
++         buffer[j] = 0;
++ 
++     /* initialization before the loop */
++-    j       = 0;
++-    buf_len = sizeof(unsigned char) * 8;
+++    j            = 0;
+++    bits_to_fill = sizeof(unsigned char) * 8;
++ 
++     /* compress */
++     for (i = 0; i < d_nelmts; i++)
++-        H5Z__scaleoffset_compress_one_atomic(data, i * p.size, buffer, &j, &buf_len, p);
+++        H5Z__scaleoffset_compress_one_atomic(data, i * p.size, buffer, &j, &bits_to_fill, p);
++ }
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+index ca1e8d7076..b31a8d8cfa 100644
+--- a/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
++++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.4-3.bb
+@@ -28,6 +28,7 @@ SRC_URI = " \
+     file://CVE-2025-2310.patch \
+     file://CVE-2025-44905.patch \
+     file://CVE-2025-2309.patch \
++    file://CVE-2025-2308.patch \
+ "
+ SRC_URI[sha256sum] = "019ac451d9e1cf89c0482ba2a06f07a46166caf23f60fea5ef3c37724a318e03"
+ 
+-- 
+2.34.1
+
 
