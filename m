@@ -1,177 +1,196 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ABD1CF99C9C
-	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 16:55:45 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.24393.1776704140744802544
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 74F5CF5A8AB
+	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 17:39:14 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.25351.1776706746342374695
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 09:55:41 -0700
+ Mon, 20 Apr 2026 10:39:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=mlL76zUI;
- spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd96.mgt.mul.t-online.de (fwd96.aul.t-online.de [10.223.144.122])
-	by mailout04.t-online.de (Postfix) with SMTP id 4FE8811B5
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 18:55:38 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.160.240]) by fwd96.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wEoT2-3O9lQX0; Mon, 20 Apr 2026 15:15:12 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lA1LqTBK;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-43d7213b6ebso2228277f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 10:39:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776706745; x=1777311545; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=00txl/cnEkf6yg/GmUaPHfNSGVpPcUjRKdhyKvr79lI=;
+        b=lA1LqTBKs+Tz2neUhHgiZuft6u/G/MRyYvrbXn1itawvEZmtLH27w4VOTXSWaPjinn
+         A8RbXaWuh2rTTYS5BLrV437a3jZx6IEAwMfYYZ3YRMBMBYJU8oo8gQbo0xa3aLbsiDxm
+         T/CXdhYDy0AVgHw2rl2ZZAyuRl0GgO3VQzoCSqoDfmbdRbuc0LTYkZYbFGmqH2D8sYT0
+         Sp3jyd3Ua9JDPMpzLmb+BfaRAvzBW58Gvz9DESbHAZw5Q6U05vMUZ1RbyeLuGvfuZLD7
+         U/SU0tXSO5rC36NEEDz3YQv0utOGubF5rCnry0Jd0VaHvwIjHKCtBUANPNnp0NXv4n/x
+         rIPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776706745; x=1777311545;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=00txl/cnEkf6yg/GmUaPHfNSGVpPcUjRKdhyKvr79lI=;
+        b=Lb60ApJNfnOMlZJ03GcHugLdSjtA9+P1iyZ/Pd0mA3oKE0NleobC0bZlD71/vIm4iL
+         m++bDDzjeIe7RM/qFj5YT5HfBhwnaz8c7IET0rSxheYlt9BHoDRrOrWOEcz+bSGwR5ZP
+         Md/Jpw3iPI6iywNXeJGTtq3MnJTlQyfVJBRd69GnVm7lV/eGPLayGqmaFoCJOe0oWPpd
+         lBn3LWjwFkUGG7Y8Q5O2DB3PchquyLCMQZnWRhHCLUzNioJOsW5+StXyD9NFjzF3FdxK
+         mYqCpPaxygybIzlnl0G36pLHP5qJkFglFwvmvT7j95Yw5b8udWkXZFMw6J4PHFPNUzqv
+         kZDw==
+X-Gm-Message-State: AOJu0YwA8zrW69QZbdcXtSbMLDMU5N2HzQcTy62b9EU7dckyF3m7smyk
+	OFoDZzh+bplFhMAIsAgMGD+rPNLw1H6E/983L+q8bkCI88nqG1fHh/M7V1Y5Rg==
+X-Gm-Gg: AeBDietNXR2U33j7HbvQbSdV+KBgpDCVButRdMXpUsYuh/3U2KuFkBAyfJ8odqPlFVg
+	lwA3/9VgayU0+04czBtfs7b3gh4SNHi7SkcfrJe/S3EAIJ9NvCqx02CANIEmCwZjmc8Yc5N9anv
+	ocq/kizfSvfILKXTNMuU76Y2uUUh4kQZHl8Y0jO1C8apoHcPDDWDnRkVfNTT1catYJOCsvj7dRJ
+	hAoQo3voR5nsA0YtNB24gCvXRXOzHst/oK66KzQB/en1NO4EH/O5CbySGkLC037iCPQ+6whQcq8
+	TU1nN1/CJl5pSNpoSuVIH116748XZ/pr72kLxO61l+SWmAb3ungbzDYvPl2VmPeg62I26zbXOa7
+	zgxBXksCUSYVkBXfTX3QGxLg454EZByuPJuOx5dzWRXrXAkV8mdgOQ3LuEy3TUrPpbi1tD4Jpy4
+	qXGLCL7Ga54NvlkG/Y8wubKZayQzeBOu0=
+X-Received: by 2002:a05:6000:2c0c:b0:43e:a70d:763c with SMTP id ffacd0b85a97d-43fe3e1e0ccmr20083614f8f.42.1776706744275;
+        Mon, 20 Apr 2026 10:39:04 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4ffa8sm30198059f8f.35.2026.04.20.10.39.03
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Apr 2026 10:39:03 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] wireplumber: update 0.5.13 -> 0.5.14
-Date: Mon, 20 Apr 2026 15:15:07 +0200
-Message-ID: <20260420131507.66316-1-f_l_k@t-online.de>
+Subject: [meta-oe][whinlatter][PATCH 1/3] freeipmi: patch CVE-2026-33554
+Date: Mon, 20 Apr 2026 19:39:01 +0200
+Message-ID: <20260420173903.1007089-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1776690912-98FF6AE8-BDCA39AD/0/0 CLEAN NORMAL
-X-TOI-MSGID: 3ecb49ca-450c-4de6-a523-c41439ced364
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1776704138; i=f_l_k@t-online.de;
-	bh=U/LlNrF6nI5MTEALr7go9CXcwvv35JCgTg0m2YP4jJ0=;
-	h=From:To:Subject:Date;
-	b=mlL76zUIahFdOvZmdp78PBvA3q+NE7wfKHyWxnZYgzZYjRni4NE3w93upe5sTAAer
-	 6U9ELw7nA2znqSkQDgCIrTEyg/dSROs7OZoxib63eWlxtjhZHsRyiGHT1AU1OkjMPv
-	 FA762ciXPBaum3dqONO0zAuI6MSxGTEM4bbvu3lDgd/tgnTVTPaxaV7CB2n23Fgl0p
-	 /eONS1IBkht6mwL8R7MnxrRGdsIcmqi8nHIBowqvX/y08YxKcY+hii4M6HgVVc0N2O
-	 YiYbxfdPnXMHo83SzP0SnaRcqW5W5ylEbR9QWWtOJ/nLWUpAttBbiDTmJDIHaK4naY
-	 PY4s+/yALr05Q==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 16:55:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126516
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 17:39:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126517
 
-WirePlumber 0.5.14
-~~~~~~~~~~~~~~~~~~
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33554
 
-Additions & Enhancements:
+The advisory references 3 bugs, but they were fixed by the same commit.
+The first bug[1] references the commit that was backported in this patch.
 
-  - Added per-device default volume configuration via the
-    ``device.routes.default-{source,sink}-volume`` property, allowing dev=
-ice-specific volume
-    defaults (e.g. a comfortable default for internal speakers or no atte=
-nuation for HDMI) (!772)
+[1]: https://savannah.gnu.org/bugs/?68140
 
-  - Added Lua 5.5 support; the bundled Lua subproject wrap has also been =
-updated to 5.5.0
-    (!775, !788)
-
-  - Enhanced libcamera monitor to load camera nodes locally within the Wi=
-rePlumber
-    process instead of the PipeWire daemon, eliminating race conditions t=
-hat could occur
-    during initial enumeration and hotplug events (!790)
-
-  - Enhanced Bluetooth loopback nodes to always be created when a device =
-supports both
-    A2DP and HSP/HFP profiles, simplifying the logic and making the BT pr=
-ofile autoswitch
-    setting take effect immediately without requiring device reconnection=
- (!782)
-
-  - Enhanced Bluetooth loopback nodes to use ``target.object`` property i=
-nstead of smart
-    filters, fixing issues that prevented users from setting them as defa=
-ult nodes and
-    also allowing smart filters to be used with them (#898; !792)
-
-  - Enhanced Bluetooth profile autoswitch logic with further robustness i=
-mprovements,
-    including better headset profile detection using profile name pattern=
-s and resolving
-    race conditions by running profile switching after ``device/apply-pro=
-file`` in a
-    dedicated event hook (#926, #923; !776, !777, !808)
-
-  - Enhanced wpctl ``set-default`` command to accept virtual nodes (e.g.
-    ``Audio/Source/Virtual``) in addition to regular device nodes (#896; =
-!787)
-
-  - Improved stream linking to make the full graph rescan optional when l=
-inkable items
-    change, saving CPU on low-end systems and reducing audio startup late=
-ncy when
-    connecting multiple streams in quick succession (!800)
-
-  - Allowed installation of systemd service units without libsystemd bein=
-g present,
-    useful for distributions like Alpine Linux that allow systemd service=
- subpackages
-    (!793)
-
-  - Allowed the ``mincore`` syscall in the WirePlumber systemd sandbox, r=
-equired for
-    Mesa/EGL (e.g. for the libcamera GPUISP pipeline)
-
-  - Allowed passing ``WIREPLUMBER_CONFIG_DIR`` via the ``wp-uninstalled``=
- script,
-    useful for passing additional configuration paths in an uninstalled e=
-nvironment (!801)
-
-Fixes:
-
-  - Removed Bluetooth sink loopback node, which was causing issues with K=
-DE and GNOME (!794)
-
-  - Fixed default audio source selection to never automatically use ``Aud=
-io/Sink`` nodes
-    as the default source unless explicitly selected by the user (#886; !=
-781)
-
-  - Fixed crash in ``state-stream`` when the Format parameter has a Choic=
-e for the
-    number of channels (#903; !795)
-
-  - Fixed BAP Bluetooth device set channel properties, where ``audio.posi=
-tion`` was
-    incorrectly serialized as a pointer address instead of the channel ar=
-ray (!786)
-
-  - Fixed memory leaks in ``wp_interest_event_hook_get_matching_event_typ=
-es`` and in
-    the Lua ``LocalModule()`` implementation (!784, !810)
-
-  - Fixed HFP HF stream media class being incorrectly assigned due to
-    ``api.bluez5.internal=3Dtrue`` being set on HFP HF streams (!809)
-
-  - Fixed Lua 5.4 compatibility in ``state-stream`` script
-
-  - Updated translations: Bulgarian, Georgian, Kazakh, Swedish
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../{wireplumber_0.5.13.bb =3D> wireplumber_0.5.14.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.1=
-3.bb =3D> wireplumber_0.5.14.bb} (99%)
+ .../freeipmi/freeipmi/CVE-2026-33554.patch    | 92 +++++++++++++++++++
+ .../freeipmi/freeipmi_1.6.16.bb               |  4 +-
+ 2 files changed, 95 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/freeipmi/freeipmi/CVE-2026-33554.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.5.13.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5=
-.14.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-5.13.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-14.bb
-index abd54515ca..ad05a8bc87 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.b=
-b
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.14.b=
-b
-@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
- "
-=20
--SRCREV =3D "84429b47943d789389fbde17c06b82efb197d04e"
-+SRCREV =3D "07e730b279ac7a520699ae9f6b0797848a731b30"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps;tag=3D${PV} \
-     file://run-ptest \
---=20
-2.53.0
-
+diff --git a/meta-oe/recipes-support/freeipmi/freeipmi/CVE-2026-33554.patch b/meta-oe/recipes-support/freeipmi/freeipmi/CVE-2026-33554.patch
+new file mode 100644
+index 0000000000..7d3602f66b
+--- /dev/null
++++ b/meta-oe/recipes-support/freeipmi/freeipmi/CVE-2026-33554.patch
+@@ -0,0 +1,92 @@
++From 2270d652c4b05bd2ff9f95d4d103c194348d3fb9 Mon Sep 17 00:00:00 2001
++From: Albert Chu <chu11@llnl.gov>
++Date: Wed, 11 Mar 2026 11:06:37 -0700
++Subject: [PATCH] ipmi-oem: fix several memory out of bounds errors
++
++Found by Zhihan Zheng (chnzzh@outlook.com)
++
++CVE: CVE-2026-33554
++Upstream-Status: Backport [https://cgit.git.savannah.gnu.org/cgit/freeipmi.git/diff/?h=freeipmi-1-6-0-stable&id=b03ca4d1bff4626c11db8684564b88cd26a2425d]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ ipmi-oem/ipmi-oem-dell.c       | 12 +++++++++---
++ ipmi-oem/ipmi-oem-supermicro.c |  7 ++++++-
++ ipmi-oem/ipmi-oem-wistron.c    |  7 ++++++-
++ 3 files changed, 21 insertions(+), 5 deletions(-)
++
++diff --git a/ipmi-oem/ipmi-oem-dell.c b/ipmi-oem/ipmi-oem-dell.c
++index 7fbc0c1..cf3bad2 100644
++--- a/ipmi-oem/ipmi-oem-dell.c
+++++ b/ipmi-oem/ipmi-oem-dell.c
++@@ -7161,7 +7161,7 @@ ipmi_oem_dell_get_last_post_code (ipmi_oem_state_data_t *state_data)
++   uint8_t bytes_rq[IPMI_OEM_MAX_BYTES];
++   uint8_t bytes_rs[IPMI_OEM_MAX_BYTES];
++   uint8_t post_code;
++-  uint8_t string_length;
+++  size_t string_length;
++   char post_code_string[IPMI_OEM_STR_BUFLEN + 1];
++   int rs_len;
++   int rv = -1;
++@@ -7216,10 +7216,16 @@ ipmi_oem_dell_get_last_post_code (ipmi_oem_state_data_t *state_data)
++     goto cleanup;
++ 
++   post_code = bytes_rs[2];
++-  string_length = bytes_rs[3];
+++  string_length = (size_t)bytes_rs[3];
++ 
++   if (string_length)
++-    memcpy (post_code_string, &bytes_rs[4], string_length);
+++    {
+++      if (string_length > (size_t)(rs_len - 4))
+++        string_length = rs_len - 4;
+++      if (string_length > IPMI_OEM_STR_BUFLEN)
+++        string_length = IPMI_OEM_STR_BUFLEN;
+++      memcpy (post_code_string, &bytes_rs[4], string_length);
+++    }
++ 
++   pstdout_printf (state_data->pstate,
++                   "Post Code %02Xh : %s\n",
++diff --git a/ipmi-oem/ipmi-oem-supermicro.c b/ipmi-oem/ipmi-oem-supermicro.c
++index 51b8397..01d6b11 100644
++--- a/ipmi-oem/ipmi-oem-supermicro.c
+++++ b/ipmi-oem/ipmi-oem-supermicro.c
++@@ -129,7 +129,12 @@ ipmi_oem_supermicro_extra_firmware_info (ipmi_oem_state_data_t *state_data)
++   firmware_hardware_id = bytes_rs[18];
++ 
++   if (rs_len > 19)
++-    memcpy (firmware_tag, &bytes_rs[19], rs_len - 19);
+++    {
+++      size_t tag_len = (size_t)(rs_len - 19);
+++      if (tag_len > IPMI_OEM_SUPERMICRO_STRING_MAX)
+++        tag_len = IPMI_OEM_SUPERMICRO_STRING_MAX;
+++      memcpy (firmware_tag, &bytes_rs[19], tag_len);
+++    }
++ 
++   /* assume minor version is BCD, just like in Get Device ID command */
++   /* assume sub version is also BCD */
++diff --git a/ipmi-oem/ipmi-oem-wistron.c b/ipmi-oem/ipmi-oem-wistron.c
++index b182cf7..f705c94 100644
++--- a/ipmi-oem/ipmi-oem-wistron.c
+++++ b/ipmi-oem/ipmi-oem-wistron.c
++@@ -3047,6 +3047,7 @@ ipmi_oem_wistron_read_proprietary_string (ipmi_oem_state_data_t *state_data)
++   char string[IPMI_OEM_WISTRON_PROPRIETARY_STRING_MAX + 1];
++   int rs_len;
++   int rv = -1;
+++  size_t len;
++ 
++   assert (state_data);
++   assert (!state_data->prog_data->args->oem_options_count);
++@@ -3107,8 +3108,12 @@ ipmi_oem_wistron_read_proprietary_string (ipmi_oem_state_data_t *state_data)
++       goto cleanup;
++     }
++ 
+++  len = (size_t)bytes_rs[3];
+++  if (len > (size_t)(rs_len - 4))
+++    len = rs_len - 4;
+++
++   memset (string, '\0', IPMI_OEM_WISTRON_PROPRIETARY_STRING_MAX + 1);
++-  memcpy (string, &bytes_rs[4], bytes_rs[3]);
+++  memcpy (string, &bytes_rs[4], len);
++ 
++   pstdout_printf (state_data->pstate,
++                   "%s\n",
+diff --git a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.16.bb b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.16.bb
+index f5be870b1d..eafa000f2c 100644
+--- a/meta-oe/recipes-support/freeipmi/freeipmi_1.6.16.bb
++++ b/meta-oe/recipes-support/freeipmi/freeipmi_1.6.16.bb
+@@ -13,7 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.pstdout;md5=d32239bcb673463ab874e80d47fae504 \
+                     file://COPYING.sunbmc;md5=c03f21cd76ff5caba6b890d1213cbfbb"
+ 
+-SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz"
++SRC_URI = "${GNU_MIRROR}/freeipmi/freeipmi-${PV}.tar.gz \
++           file://CVE-2026-33554.patch \
++           "
+ SRC_URI[sha256sum] = "5bcef6bb9eb680e49b4a3623579930ace7899f53925b2045fe9f91ad6904111d"
+ 
+ DEPENDS = "libgcrypt"
 
