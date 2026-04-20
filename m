@@ -1,162 +1,160 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97ED3F36C5E
-	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 11:51:17 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17336.1776685867582970882
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF9BCF588C4
+	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 13:12:21 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18860.1776690737279986953
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 04:51:07 -0700
+ Mon, 20 Apr 2026 06:12:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=R+g2A846;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-48896199cbaso31309505e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 04:51:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776685866; x=1777290666; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Gu7sc50sM4Ssjz3wLyCp43x+3x2chiIqQKOxcILmTjo=;
-        b=R+g2A846SpmYHx5tMvPNZjMGCSvEPbwhsga9+KguNa0Ruw92mqiuZa57xUDFJXVsCD
-         ojUb7D5Ki7IXTFO5FeLCqXjbENecVZ1GDWFQBsru0MztuE5h0Bi4jrLQtQ53MPnMpV1A
-         hh2ENsYT1bkTL3p6MkzvOJ8MA+3zmPB7rq1HRFdeTyWq0TJTqsTEcpkgT2qsg+yXnsr3
-         w/OLb4ThyVzvdQ+EdQyDFvVefntm3GN2lqD4txp8dCYIjAj16T26UTXWclzkNdWomwpg
-         0Mp1dek5EKg8vtaPYFTKr0wW33p4tGLObYgjuFPCARpNvA9kqeiynLqOEBI0UOvZIO2p
-         A5CQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776685866; x=1777290666;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=Gu7sc50sM4Ssjz3wLyCp43x+3x2chiIqQKOxcILmTjo=;
-        b=a+/w02krnBEPVNlb/h5azV6DkmeilqgZVTeTmd9vDbyuoQjRgbOeIzjoFcO876UFUV
-         YRzMhlHCI0PZCjksBcbwt2/DBh5NuJzhAXBU6eUsG0K0vXVWrvGWeLtb0X1LFb/la8xR
-         A3it1jUiLlDNXhP3jXndnMnz04SJ6WGb2c93MzHRjQtr9qzS1kR9Z9sC28sw3Pg1Z9qi
-         nz2NO7rsBa8aqXboCdGw+cIkBMV9G663EoPXs7QYP96ZnCKIQaw+CySSyN4ZIG8NP8HX
-         4zDwCMHBpPtYGPwJR6WCIun6rdGa2yddmQgOTwGVjDHD83ERGQRBCJ4bSCjzQ7UGX8EJ
-         E8XQ==
-X-Gm-Message-State: AOJu0YyOQeyZwWXmMEgbqLqhNBu9TURSo24lUfkCHlMycOD0LuTF7AOG
-	AKMf3ZKtSVZG9/Mo663Oe8QUD4qCTjJh3twod88c/aFMuGbogxnbGatn5owqaQ==
-X-Gm-Gg: AeBDieuAaB10Bej7p6Ne5dB8lJccQ/O4k1hAlZlyGWV0IAtQJi/baba1n+EkUjzb4g5
-	B3mG0A8/ZhJbDxrWbm8hSnY9o9/inaZ+8RETjY1SXLiELu9tLoZD61OR8DGiwTzyySPTQHPnUjH
-	UAV0qEFXAOOP+l8ycvDg/INL/KVaVYoVAJqgq5cLn7U436MGprtkwfK7gEVhaiSNOsP7JwDddQF
-	pWlo4F8gNZnZpeTLrHhmqB64LTxezR6WMeV/IfNVkmHfpWAoJn+zXmNxDsFjwac7jbW6t0xtaS7
-	7P8jXvvaJpdQVlFr7GnofKu3+wGErJ24/vQeHyXN0K+R5F6wK7yQX81ouDLZFDUBd1LP2x2sV3z
-	uVCfF1Pt/S0DdMvEdXJxe1OT9H2JjgnoH3PqVgIZ6Jt8+QMIzOngxVtjm7AJbOEo1e4qCVbZDcG
-	SW53PChIr4B9uxIyI7TMWWuUryNzqe/7A=
-X-Received: by 2002:a05:600c:c108:b0:488:a82f:bbb6 with SMTP id 5b1f17b1804b1-488fb78e576mr127997985e9.27.1776685865793;
-        Mon, 20 Apr 2026 04:51:05 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fc1c773fsm314595715e9.12.2026.04.20.04.51.05
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 04:51:05 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=Cd1hY0X6;
+ spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd95.mgt.mul.t-online.de (fwd95.aul.t-online.de [10.223.144.121])
+	by mailout04.t-online.de (Postfix) with SMTP id E620CE71
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 15:12:14 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.160.240]) by fwd95.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1wEoQ8-4P4OB70; Mon, 20 Apr 2026 15:12:12 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][whinlatter][PATCH 3/3] corosync: patch CVE-2026-35092
-Date: Mon, 20 Apr 2026 13:51:00 +0200
-Message-ID: <20260420115102.428743-3-skandigraun@gmail.com>
+Subject: [meta-multimedia][PATCH] pipewire: update 1.6.2 -> 1.6.3
+Date: Mon, 20 Apr 2026 15:12:07 +0200
+Message-ID: <20260420131207.52107-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260420115102.428743-1-skandigraun@gmail.com>
-References: <20260420115102.428743-1-skandigraun@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1776690732-03FFCA05-2B09C438/0/0 CLEAN NORMAL
+X-TOI-MSGID: dbf4e2f6-8578-4421-b28d-a55511a2c53f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
+	s=20260216; t=1776690734; i=f_l_k@t-online.de;
+	bh=aGtR+JWnkkEXQrMOvY682KZW9VnJft6InOjuCc+Qi9I=;
+	h=From:To:Subject:Date;
+	b=Cd1hY0X6/V4gQKbRvbt9QwF6BmKh1AVRZ6v4yGvOF6J3jLi03BkVMOsyxrFH+5Anz
+	 OeDqtMJUImqn/J5/10Aaqhj/bjId7NB6Ozr3UfzeOPd5+2X77JLhCgBak6RQ9CJjjY
+	 Ht5Lv28aedn/+bTNW7XWscCcuhkHP/BEvf1qwOS7Q2XMYdQMvWCxMTuUVHUtmzHXcE
+	 2Oe1QPdSoqaz9SAPjHK1wHn9/Fur1ckoYoLZ0WNCjun/UPdD0k/lFnCewMNql5Qe7B
+	 39kjeuYhvBpeH03OHlPdTILuFfbHb5MCGCK5taJYQYvOAYFBKDHkKySf9JHediADI9
+	 Z4/Yu51Ke1ViQ==
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 11:51:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126502
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 13:12:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126503
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-35092
+- remove backport patch
 
-Pick the patch that mentions the CVE ID explicitly (the same commit
-was identified by Debian also[1])
+PipeWire 1.6.3 (2026-04-09)
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2026-35092
+Highlights
+  - Fix some RAOP compatibility regressions.
+  - Fix segfault in the mixer in some cases.
+  - Most nodes now produce and consume MIDI1 again and avoid
+    conversions to and from UMP.
+  - Various small fixes and improvements.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+PipeWire
+  - Fix regression with sample rate changes. (#5207)
+  - Fix a potential integer overflow in the memory mapping.
+
+Modules
+  - Align RTP timestamps to make RAOP work on more devices. (#5167)
+  - Avoid crashes in RTP streams because of concurrent event
+    emmission.
+  - Avoid invalid fd usage in native-protocol with special crafted
+    messages.
+  - Fix properties and params enumeration in filter-chain (#5202).
+
+SPA
+  - Fix compilation with -Werror=3Ddiscarded-qualifiers
+  - Avoid OOB read in mix matrix. (#5176)
+  - Avoid loading plugins from absolute paths that are not in the
+    search path.
+  - Avoid MIDI conversions to and from UMP. (#5183)
+
+Bluetooth
+  - Backport some fixes and avoid some crashes.
+
+JACK
+  - Make sure timebase callback is never called with 0 frames.
+  - Increase the notify queue to avoid losing notifications.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../corosync/corosync/CVE-2026-35092.patch    | 57 +++++++++++++++++++
- .../corosync/corosync_3.1.10.bb               |  1 +
- 2 files changed, 58 insertions(+)
- create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2026-35092.patch
+ ...-acp-compat.h-Fix-missed-Wdiscarded-.patch | 28 -------------------
+ .../{pipewire_1.6.2.bb =3D> pipewire_1.6.3.bb}  |  3 +-
+ 2 files changed, 1 insertion(+), 30 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/pipewire/pipewire/=
+0001-spa-plugins-alsa-acp-compat.h-Fix-missed-Wdiscarded-.patch
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.2.bb =3D=
+> pipewire_1.6.3.bb} (99%)
 
-diff --git a/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35092.patch b/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35092.patch
-new file mode 100644
-index 0000000000..a085d2a29f
---- /dev/null
-+++ b/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35092.patch
-@@ -0,0 +1,57 @@
-+From 8f8a4747a0223b8897deda9a40a8a099c61fa80f Mon Sep 17 00:00:00 2001
-+From: Jan Friesse <jfriesse@redhat.com>
-+Date: Thu, 2 Apr 2026 09:44:06 +0200
-+Subject: [PATCH] totemsrp: Fix integer overflow in memb_join_sanity
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+This commit addresses an integer overflow (wraparound) vulnerability
-+in the check_memb_join_sanity function.
-+
-+Previously, the 32-bit unsigned network values proc_list_entries and
-+failed_list_entries were added together before being promoted to
-+size_t. This allowed the addition to wrap around in 32-bit arithmetic
-+(e.g., 0x80000000 + 0x80000000 = 0), resulting in a required_len
-+calculation that was incorrectly small.
-+
-+The solution is to cast the list entries to size_t and verify that
-+neither exceeds the maximum allowed value before the addition occurs.
-+
-+Fixes: CVE-2026-35092
-+
-+Reported-by: SebastiÃ¡n Alba Vives (@Sebasteuo / 0xS4bb1) <sebasjosue84@gmail.com>
-+Signed-off-by: Jan Friesse <jfriesse@redhat.com>
-+Also-proposed-by: nicholasyang <nicholas.yang@suse.com>
-+Reviewed-by: Christine Caulfield <ccaulfie@redhat.com>
-+
-+CVE: CVE-2026-35092
-+Upstream-Status: Backport [https://github.com/corosync/corosync/commit/4082294f5094a7591e4e00658c5a605f05d644f1]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ exec/totemsrp.c | 12 +++++++++++-
-+ 1 file changed, 11 insertions(+), 1 deletion(-)
-+
-+diff --git a/exec/totemsrp.c b/exec/totemsrp.c
-+index 94d6c21..6845cec 100644
-+--- a/exec/totemsrp.c
-++++ b/exec/totemsrp.c
-+@@ -3786,7 +3786,17 @@ static int check_memb_join_sanity(
-+ 		failed_list_entries = swab32(failed_list_entries);
-+ 	}
-+ 
-+-	required_len = sizeof(struct memb_join) + ((proc_list_entries + failed_list_entries) * sizeof(struct srp_addr));
-++	if (proc_list_entries > PROCESSOR_COUNT_MAX ||
-++	    failed_list_entries > PROCESSOR_COUNT_MAX) {
-++		log_printf (instance->totemsrp_log_level_security,
-++		    "Received memb_join message list_entries exceeds the maximum "
-++		    "allowed value...  ignoring.");
-++
-++		return (-1);
-++	}
-++
-++	required_len = sizeof(struct memb_join) +
-++	  (((size_t)proc_list_entries + (size_t)failed_list_entries) * sizeof(struct srp_addr));
-+ 	if (msg_len < required_len) {
-+ 		log_printf (instance->totemsrp_log_level_security,
-+ 		    "Received memb_join message is too short...  ignoring.");
-diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-index 7ccccefed5..77dea16e98 100644
---- a/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-+++ b/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-@@ -10,6 +10,7 @@ inherit autotools pkgconfig systemd github-releases
- SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
-            file://corosync.conf \
-            file://CVE-2026-35091.patch \
-+           file://CVE-2026-35092.patch \
-            "
- SRC_URI[sha256sum] = "be361c827f99b215b3bd3fa2fb071c03dac6831c2a351963d938caef62604bc8"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-sp=
+a-plugins-alsa-acp-compat.h-Fix-missed-Wdiscarded-.patch b/meta-multimedi=
+a/recipes-multimedia/pipewire/pipewire/0001-spa-plugins-alsa-acp-compat.h=
+-Fix-missed-Wdiscarded-.patch
+deleted file mode 100644
+index 6ded1c15f8..0000000000
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire/0001-spa-plugi=
+ns-alsa-acp-compat.h-Fix-missed-Wdiscarded-.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-From c847b8162959c29b783585e0dcadbfb096e7cb73 Mon Sep 17 00:00:00 2001
+-From: Ripley Tom <discofan420@protonmail.com>
+-Date: Sat, 21 Feb 2026 19:33:11 +0100
+-Subject: [PATCH] spa/plugins/alsa/acp/compat.h: Fix missed
+- -Wdiscarded-qualifiers warning
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/pipewire/pipew=
+ire/-/commit/c847b8162959c29b783585e0dcadbfb096e7cb73]
+-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+----
+- spa/plugins/alsa/acp/compat.h | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/spa/plugins/alsa/acp/compat.h b/spa/plugins/alsa/acp/compat=
+.h
+-index f7592e1a6..0f7b959df 100644
+---- a/spa/plugins/alsa/acp/compat.h
+-+++ b/spa/plugins/alsa/acp/compat.h
+-@@ -429,9 +429,9 @@ static PA_PRINTF_FUNC(1,0) inline char *pa_vsprintf_=
+malloc(const char *fmt, va_l
+-=20
+- #define pa_fopen_cloexec(f,m)	fopen(f,m"e")
+-=20
+--static inline char *pa_path_get_filename(const char *p)
+-+static inline const char *pa_path_get_filename(const char *p)
+- {
+--    char *fn;
+-+    const char *fn;
+-     if (!p)
+-         return NULL;
+-     if ((fn =3D strrchr(p, PA_PATH_SEP_CHAR)))
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.2.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.3.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.2.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.3.bb
+index 1e5e5f0399..82cd928b4a 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.2.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.3.bb
+@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "95da54a482b68475958bbc3fa572a9c20df0df74"
++SRCREV =3D "cc3d0d1191266b263f6d0fa03fce1d1ef57151cc"
+ BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+${BRANCH};protocol=3Dhttps;tag=3D${PV}"
+-SRC_URI +=3D "file://0001-spa-plugins-alsa-acp-compat.h-Fix-missed-Wdisc=
+arded-.patch"
+ SRC_URI +=3D "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-con=
+st-do-.patch"
+=20
+ inherit meson pkgconfig systemd gettext useradd
+--=20
+2.53.0
+
 
