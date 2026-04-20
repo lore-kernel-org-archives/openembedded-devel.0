@@ -1,104 +1,110 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D52C4F55804
-	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 09:33:34 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15572.1776677606880741998
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A581F55818
+	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 11:21:37 +0000 (UTC)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16830.1776683845067221918
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 02:33:27 -0700
+ Mon, 20 Apr 2026 04:17:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Kh7p7DrO;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43eada6d900so2831366f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 02:33:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776677605; x=1777282405; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nQgUYEuRuf9IFHHKNyIKspWOfhWfPTntWK3aRczPoC0=;
-        b=Kh7p7DrOHuAcu4b0xJ71ijPF7Xm+qh2ea8M2AIa+md/ONhKImbWPqv9bsWnM6nEeFY
-         R5qRJ207UhGZOyACesTaD8+a71o/mzT59/L0ySwC6qqbnkzWk5JqWsDmIHGZIaVJCc+J
-         FxeNdAc1+GHIqHaWnuvpOcneMz3k8lnlezvFqAxmzxoVROiFoxPDl7NHGT9ndgW1goce
-         /E3BLOZX+l0xrVgV6Mzpy5OvyFqXRYwXWFrtI+dK1pzuCqD0G7UAiUdMjmyd/RQlVwu0
-         P5xvss1puQ8nZekx+jnbMs2T4VLzdp1tA+6Jn0KWLLL9B+apAG1faBAIlsVXi/GF8e3n
-         ZSGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776677605; x=1777282405;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nQgUYEuRuf9IFHHKNyIKspWOfhWfPTntWK3aRczPoC0=;
-        b=AD2llurU4hEwsJ5CjNyrvBL/dahA49A7u7wSsH0+cud9TE9itgTb3b9zYW/hNpUlZC
-         VtjNjyK6OTiwwHOoMTOVmlAeC+QLRr1GQgW1wJkeXytbZrg/Z2T+KhSglhc/TOZvpbmG
-         /gpOD6nV7v7veu5uttQpEbsa6oloXCpg4xyEiPVvGj+Y0PlDFxnAq+znEgQYpJj52c+j
-         wOpIXGQCcXgtU2p1sY3Qb17ZtDDsvL7Kk8DoGePZYJJUSRD1E5Al77H2j3w4Lwh+JHXV
-         rvY6TtDTC7RJPhWnbSTShXl+zv3xpH5o6aFx2m8LIo6MfClMUAVJVHO1kzVzIQ23yhul
-         pNbQ==
-X-Gm-Message-State: AOJu0YxkoCBTkjjyqfxdBL1Dwq+RYnlaxEnH6czqX1R/HTK8t+VEGyV/
-	umnP5Vi/HyFD7PNQvaczzPO3d1rcLknvGcXeSBy7nsEu0QW/LUrJgVi2B8ImGg==
-X-Gm-Gg: AeBDiet4hK2aAT37Dy56lgpBgoxgLd6tuiGGrYZTSPcgXMKQMIBFi0Idj//oBN8/Ono
-	luq7msNKmjzC5bAVSrkRCJnWOBlaxDtUC1glaKhBcphtmuG96LkLTNb4i4/D+Aw+eg5h9/sNmBJ
-	LuKsFvN+aIETQwXXnaWh7s3MUp+OJaMSJ3aZkvEQj7B0RF1CCjbiusco0+evfXo6LxBoDfDgnfy
-	tgQBcnt46hQTmpbxC66bA90VaBkiHIxM09Phknpuu+VPTJa8cv7M4g1XfJBxNt1Sa3fs7FHvpPV
-	KMWeMdxmfQbwkpn1KKAK29UMylpActDw0ZdUDY/h6H/SnIvwuJ0zS6PYo0tSW5WWDu8+0FMmn5k
-	DOHQz+FVow4MHhQd026QZGtQ96IUHNGu9O62JxM4lJacXHCix14FXvxbQlNWGC0NlgfLw92PphJ
-	/Qi2m4qDgR5QPTJ246Iy0xUn09h+Mh7d8=
-X-Received: by 2002:a05:6000:2212:b0:43d:68dc:9ca6 with SMTP id ffacd0b85a97d-43fe3dc7b4bmr19566145f8f.18.1776677604841;
-        Mon, 20 Apr 2026 02:33:24 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4eec9sm26577488f8f.34.2026.04.20.02.33.24
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 02:33:24 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=vVxc3xZH;
+ spf=pass (domain: bootlin.com, ip: 185.246.85.4, mailfrom: joaomarcos.costa@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 1305E4E42A7B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 11:17:23 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id DF5105FFA5;
+	Mon, 20 Apr 2026 11:17:22 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D7EC610461556;
+	Mon, 20 Apr 2026 13:17:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1776683842; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=UOfhVJS4TcleHSR21SCsbA6VDqrn3JmB9Xkcj66ZPbw=;
+	b=vVxc3xZHIuHZqnaioh1JnQA7DItVVU1SfcdwVv+sEfrn/YsVwjnhAHKVMXb7BeOHcrpPAZ
+	QIRTJRuKUezKhCwcbR0Hejtps60lKN0U9VadkgQ8taDt4/zlJJiIE4D3sdNsU9Kc9L6i7x
+	rZZbREGa8YIq7rIICtYY6BDyD8UFHsj48Pj0GXWhQbjez8u6RM/G6OrWW3Y99CnWP+i44V
+	6fZdmkI1BBYCMNvptYnrv6vMB64Z8Y/b/LsT13ZRe+jetUw2CSA6I2UldHWNBHYQqqkQ+8
+	dGEr/tCwklP2QAjntS094R/Lri8RqEXSWVztYvKOKt3u9TpUuwbJA3bhaHU6jw==
+From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 1/8] ngtcp2: upgrade 1.22.0 -> 1.22.1
-Date: Mon, 20 Apr 2026 11:33:16 +0200
-Message-ID: <20260420093323.357053-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.53.0
+Cc: thomas.petazzoni@bootlin.com,
+	raj.khem@gmail.com,
+	=?UTF-8?q?Jo=C3=A3o=20Marcos=20Costa?= <joaomarcos.costa@bootlin.com>
+Subject: [meta-oe][PATCH 0/4] kernel-selftest: update mm (formerly vm) test category
+Date: Mon, 20 Apr 2026 13:17:08 +0200
+Message-ID: <20260420111712.26945-1-joaomarcos.costa@bootlin.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 09:33:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126487
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 11:21:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126495
 
-Contains fix for CVE-2026-40170 (which is tracked without version
-by NVD, so also mark explicitly as patched).
+Hello,
 
-Changelog: https://github.com/ngtcp2/ngtcp2/releases/tag/v1.22.1
+After a recent change in libhugetlbfs recipe, my attention was drawn (in
+the mailing list) to the impact this could have in recipes suchs as
+memcached and kernel-selftest.
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
----
- .../ngtcp2/{ngtcp2_1.22.0.bb => ngtcp2_1.22.1.bb}           | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-protocols/ngtcp2/{ngtcp2_1.22.0.bb => ngtcp2_1.22.1.bb} (84%)
+This patch series includes my latest changes regarding kernel-selftest,
+and the memcached recipe will be handled in a follow-up series.
 
-diff --git a/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb b/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
-similarity index 84%
-rename from meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb
-rename to meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
-index f7c0ee0d4f..acff7b548b 100644
---- a/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb
-+++ b/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
-@@ -4,8 +4,8 @@ BUGTRACKER = "https://github.com/ngtcp2/ngtcp2/issues"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=de0966c8ff4f62661a3da92967a75434"
- 
--SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=main;tag=v${PV};name=ngtcp2"
--SRCREV = "2a441e8540d192b0707989b146ce80efcae5f0d6"
-+SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=release-1.22;tag=v${PV}"
-+SRCREV = "716e64b05f4a3709dfc0b0522cf9fd4456d055e5"
- 
- DEPENDS = "brotli libev nghttp3"
- 
-@@ -18,3 +18,5 @@ PACKAGECONFIG[shared] = "-DENABLE_SHARED_LIB=ON, -DENABLE_SHARED_LIB=OFF"
- PACKAGECONFIG[build-lib-only] = "-DENABLE_LIB_ONLY=ON, -DENABLE_LIB_ONLY=OFF"
- PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON, -DENABLE_OPENSSL=OFF, openssl"
- PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON, -DENABLE_GNUTLS=OFF, gnutls"
-+
-+CVE_STATUS[CVE-2026-40170] = "fixed-version: fixed in 1.22.1"
+I tested this with both clang and gcc, in qemuriscv64. As you can see in
+the traces below, 'mm' collection of tests is available and can be
+executed:
+
+root@qemuriscv64:~# /usr/kernel-selftest/run_kselftest.sh --list
+firmware:fw_run_tests.sh
+mm:run_vmtests.sh
+cpufreq:main.sh
+cpu-hotplug:cpu-on-off-test.sh
+rtc:rtctest
+ptp:testptp
+ptp:phc.sh
+timers:posix_timers
+timers:nanosleep
+timers:nsleep-lat
+timers:set-timer-lat
+timers:mqueue-lat
+timers:inconsistency-check
+timers:raw_skew
+timers:threadtest
+timers:rtcpie
+
+root@qemuriscv64:~# /usr/kernel-selftest/run_kselftest.sh -c mm
+(...)
+# ok 60 test_page_frag.sh aligned # SKIP
+# # -unnin--./test_---e_f---.s--non-li-ned
+# # running ./test_page_frag.sh nonaligned
+# # -unnin--./test_---e_f---.s--non-li-ned
+# # ./test_page_frag.sh: You need to compile page_frag_test module
+# # [SKIP]
+# ok 61 test_page_frag.sh nonaligned # SKIP
+# # SUMMARY: PASS=3D25 SKIP=3D20 FAIL=3D16
+# 1..61
+ok 1 selftests: mm: run_vmtests.sh # SKIP
+
+Best regards,
+
+Jo=C3=A3o Marcos Costa (4):
+  kernel-selftest: rename vm selftests to mm
+  kernel-selftest: drop libhugetlbfs
+  kernel-selftest: fix mm selftests dependencies
+  kernel-selftest: add missing sources if mm is enabled
+
+ .../kernel-selftest/kernel-selftest.bb        | 23 +++---
+ ...s-down-full-CC-and-CFLAGS-to-check_c.patch | 76 +++++++++++++++++++
+ 2 files changed, 89 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-kernel/kernel-selftest/kernel-selftes=
+t/0001-selftests-mm-pass-down-full-CC-and-CFLAGS-to-check_c.patch
+
+--=20
+2.43.0
+
 
