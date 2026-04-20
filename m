@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4005DF588F9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C277F588FD
 	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 15:49:28 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.22603.1776700165455011631
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.22607.1776700167557935195
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 08:49:25 -0700
+ Mon, 20 Apr 2026 08:49:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=lwl1Gjxz;
- spf=pass (domain: gmail.com, ip: 209.85.128.54, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-48909558b3aso22707005e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 08:49:25 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=jMWn1HfC;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4891f625344so11213745e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 08:49:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776700164; x=1777304964; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776700166; x=1777304966; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=swHWLrRZCSQ5UYkLnqbWvlV9ulK5l7Mduwx3XAZEuJw=;
-        b=lwl1GjxzsHS+qMcmckiVns2C27XhA2fpnCLZc5FmwMEVqjKfVztbJuQPIhP88G3qnx
-         +6Nc5T9H8Kk9mFX+aEjiWh23NKZOJrCRGpgaid3kfxtwPdp7i6OfFJE2sfXYbdk/zkh6
-         ql5LgmpRwJM1NCaoic12U2dtZBmdS3zz4213QhofRFzmP/ce24z6I8Sx/cYHgNzoY3VP
-         /3fdxFu9oAF2ez2KjWo7BqsexI2mSD6CvepJ6nouNQ0TWOZJJ384nutpCeh5GozY7lQB
-         NR+4TBVPqxqpsvx+mDPLh+xREA673owIrpeF7YHUjP6soudO9BqhApJ0s6b0k9yd+lR8
-         4aJg==
+        bh=LdcgccPlyb5I5k82Zt2TFGONqMxwfCgUIsGg62AurgY=;
+        b=jMWn1HfCFplotHyhZuphZnNOHl6/qjAjdr80kdEcj4RKVmQFQHN/4e00E4ySD1Fq59
+         ph/Zh/UgdDrxmQo85JSy+bKKpLY5LbVf+6Z8jAE4GgKTF/xDYm3DphIFzkAdNAA+YIFR
+         h8mvHcAbNHuDJVoRvZtHiMUj7SNaGVtMuxuH2q6gO0zf7HcQLciTJ1nCidA6aTJ5F6B4
+         Zwv+s/jdMCsgnVKbnUWTsO4b93THjptrhMX+ppKLbWWV+WHRVleL1LRuWYDrwiLkN8sV
+         SxBMuyFQVO2Jai04JefOQAgpTPmQoouUvQ9/HkqftRBuUJjywlpmgRv20pcgFp0LKDiZ
+         d/tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776700164; x=1777304964;
+        d=1e100.net; s=20251104; t=1776700166; x=1777304966;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=swHWLrRZCSQ5UYkLnqbWvlV9ulK5l7Mduwx3XAZEuJw=;
-        b=A1HkyRUh2asBiF3FJserEfQvDwBH5HPXTwVL01oCUw90PPdBO09c5Yoa5b6MayGXgs
-         Po1J1kpigobzqoPib9oTm61ivtU6Va479OAz8pfI1jFHGG5vJRNeia4ZMhjZP+9lu2Yw
-         aIWGYLLWnG4hdDTkyoqwe2c1H52eFllx8GVFrLSteVc+rhAyztxEBdI26DHSVFzFCePF
-         CO1o5LAU9FTNw4WP5ucLwYQqGo3JEGK788nQzYCigjhyBbzqFZLU3O1G/DVJuZG5PYrh
-         JmDEZ/LLFCYfhT4Z8bEjOk5A4wYaQ0wzl/fDm0XGAqYqTeYezwTy2WPkXZdLXkTjNXAq
-         N+kw==
-X-Gm-Message-State: AOJu0YxlJfBlXluy9uEGU45/X6qckJZcGsmBsLoUzFCC28DyMHG6x2NQ
-	MJUDptcMOeGUYDtUBdQVG4U+pvTmtpXVHgauxwnVl8HEky0BptJjwA1USAiyMQ==
-X-Gm-Gg: AeBDieuusH7iF4/JtY060QYQ0ekZe/IOzWYRu48PwtuUO7dP4FI/yJcugoB0WyOXk6R
-	2Z1ofpYfVl3Sm3YlopBrNg8VvxUFzP1qTSvsonnygrl4ygAz0G/C2FbBvbUdvCK5tWz3wjJeo8p
-	Omtcer3GzPSGtSRFSVrqSru3C24/reRgh1VM5szfobv/GLip7Wap2tNTMOWXJVCVWddOkIfGLXw
-	pZMZ3Nlw5aCoZ9L1uxpLzpmpG/X/jmoMD7KjMf9ey/ooLWdOZAFdOCJ0iG/xMdDcOqcyukRhbrY
-	iV28J13V9K5MIru9WzNZFDmdavLA1H6EYq9jwRCGrxlV+TEQyrtnSU/FJvn98C/q2ymFzi+336k
-	hTCvaeL+SHpKFB0OTzusdNuP412fD36xPEVX+8Df2jZKQNFvCo9caLc1HJ0m5t/ZneKkryuqw79
-	w34roOHqaICedfAkVQ2D+nEO8eLwkC574=
-X-Received: by 2002:a05:600c:8488:b0:488:a882:c7 with SMTP id 5b1f17b1804b1-488fb77b575mr199965465e9.25.1776700163799;
-        Mon, 20 Apr 2026 08:49:23 -0700 (PDT)
+        bh=LdcgccPlyb5I5k82Zt2TFGONqMxwfCgUIsGg62AurgY=;
+        b=h1h4EHyFDEUN+vW2yP6RGRO2jfaLxN95uZejl+FaGsd/TMQ/8rwJJCPuMWWuIp1yxp
+         jnwdMdPN81Ocz9DVlNYIl0RBlTeFsS7Dn/T18qgwBUHtW8Ka7aAX9aVIp52oJ1gLSwgF
+         KnfvcsL16LCg8CQZePf55uwK8ce9i1iTdFiw3E83sIvhw3CMWTnHl2ZOafF5n7wDRD4d
+         drXHDutUFbFtb0zWKVok+F1H61s3YOhv3o1QcZb0bk33SQq1YTk8lPnOL0A3iisttObN
+         E/xuO+buBuBXflblQsdMRkbdsA4RXOoIbi8j5g6MLtXgAopZZ0kBMduJuHcPZO1EaVAz
+         VumQ==
+X-Gm-Message-State: AOJu0YyCDN91VvPwQfUshJsGB/c6n+4Ke29QXK6CBmSllRmULGaGTLB0
+	vc6WZYeij8f/qrCjNF7+OK8qeQ2SoqXi1TeFkg3c3FdxSllQBLX+8qh6YGun+A==
+X-Gm-Gg: AeBDiesfa9ZNq1vSR1hOZVYor0u3R3k9Ag6vabumHnszgq//lyqNU83sFT0aFaquP9M
+	vT0AfjESw9/oXal3DmWy5KkUNIGSR0YyUGKWwJQTw+lTNQ0oKnf1cHDrf2x+LZBvF3xmwiwb6qt
+	1+BaIc5jDqSDt3a4c8dwvz8Cq9J3dS0Z8S6g4hlQSUL09X4VjsZmfbzI2dJto2spk9D9UcSbuDv
+	bO91JHTvrCBs66hU2jKfazL5RNiIS0ZwNpQXEKIXlnPBt1F+tfI+HeKD6Daq5z6Qps42cHeaJng
+	OvSqzYjehP0toI46PodnNpjGJR4c7fwQAC3mZZqd+FWI1hISVVvXPuOwGFSu8hb/QL2nJP6yrQ8
+	YdROi4e6z3i//ZDumlAMI2kSpHtV67S/HVDsfKMEN/PZcUMnjPe6XzAsgCmSZwpnUiQz5eD8rW5
+	nAA27rA/AfJwMDNeRM/QbML8SN2QvItXU=
+X-Received: by 2002:a05:600c:c167:b0:485:3428:774c with SMTP id 5b1f17b1804b1-488fb889336mr190319115e9.4.1776700165847;
+        Mon, 20 Apr 2026 08:49:25 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4891cca5743sm85279255e9.9.2026.04.20.08.49.22
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4891cca5743sm85279255e9.9.2026.04.20.08.49.25
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 08:49:23 -0700 (PDT)
+        Mon, 20 Apr 2026 08:49:25 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][kirkstone][PATCH 09/12] ttf-sazanami: fix SRC_URI
-Date: Mon, 20 Apr 2026 17:49:12 +0200
-Message-ID: <20260420154915.952359-9-skandigraun@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 12/12] ttf-vlgothic: fix SRC_URI
+Date: Mon, 20 Apr 2026 17:49:15 +0200
+Message-ID: <20260420154915.952359-12-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260420154915.952359-1-skandigraun@gmail.com>
 References: <20260420154915.952359-1-skandigraun@gmail.com>
@@ -67,26 +67,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 15:49:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126512
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126515
 
-The previous one stopped working.
+The old one stopped working.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb | 2 +-
+ meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-index 945a5f3a85..e5f241ebd3 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-sazanami_20040629.bb
-@@ -11,7 +11,7 @@ SRC_DISTRIBUTE_LICENSES += "${PN}"
- RPROVIDES:${PN} = "virtual-japanese-font"
- PR = "r9"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+index 6b79eb9197..ec74eb267c 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20200720.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.en;md5=cc06b20e7a20bdf6c989624405378303 \
+                     file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
+ "
  
--SRC_URI = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2"
-+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/sazanami-fonts/sazanami-20040629.tar.bz2/ceef10579a75c92483171f3bd7f77df2/sazanami-20040629.tar.bz2"
- S = "${WORKDIR}/sazanami-20040629"
+-SRC_URI = "https://osdn.jp/dl/vlgothic/VLGothic-${PV}.tar.xz"
++SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/fonts-vlgothic/${PV}-1ubuntu1/fonts-vlgothic_${PV}.orig.tar.xz"
  
- PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
+ SRC_URI[sha256sum] = "297a3813675fbea12c5813b55a78091c9a5946515ecbf9fde8b8102e01c579f4"
+ 
 
