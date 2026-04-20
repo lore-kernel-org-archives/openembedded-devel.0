@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 454F7F557F7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BC6FF557F8
 	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 09:33:34 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.15579.1776677612702440979
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16002.1776677611453219885
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 02:33:33 -0700
+ Mon, 20 Apr 2026 02:33:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=VrDXLvbC;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-488a8ca4aadso38595375e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 02:33:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WYRaFlRI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-488ad135063so22048485e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 02:33:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776677611; x=1777282411; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776677610; x=1777282410; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aBmsKEoAuaOLxqeDzv+upI1fxj9mAepjkXxqyIFeza0=;
-        b=VrDXLvbCcCUJJftd6T/u5mKsojUs4KwnqaeGMyb+S3uRxLSizKhYHYUFuiP7tvT9JV
-         Vspdhcy0ZcbmDpCyckY6PL6ibXJpnULGYf7K+30zMHmNCVrmXbwq/iUQDFV7VrjdGzq7
-         KNv1VQ9bRGAvZAYRNwQJyri3i+G6uY/HK6jPJs0Dr89xwFJdMWubWhe75nyYHmcM8vmF
-         QE2Ll6IjOkha9Ad97Qdji8GDgRUxkpikg4pjs5wknjiWdvmhc3Kdd7cRQ6NYwVm33Kzf
-         M9LKGwZgc9KUJRDpZNlm/XRVeVpUdBRSuJCTgvtY2eVKSayURyftM0ZG0AWofFsauUCh
-         h1AQ==
+        bh=vXy8eHAkbTOPDQWNkxSRCYMfHGiZy7oFyN/TADXh4oM=;
+        b=WYRaFlRIJ9YI9PiVR7C0ibqtdtQsD9QwvSC3YDrJX42sDtX/dA96BjhAC3RkFTZVG3
+         AYRFkLRfV6OKj7/eyQtkKkD+FhA/neD34AZcuSvJ879AmMLsd2ICOfWENZs5taoQRFFf
+         guD5XEhIUvxl3a0uWvMIAE1pnAMZu74SKdIX+0Y78dvGiZ+Lnf1A6uqMFR4tYHuYwki+
+         grPjLukqTRo8HB+ES6fpEEjHEeFAs6NaPij1lxyFyugX92UAQ8KBlTBKLbLSvV5b8tVu
+         VzHS1hKKE0TUvWMiEZg5AhL8dwX8aHXULEP6voSqUjnDMJP/NBG78+k/VBrXu6r3YMi2
+         rcnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776677611; x=1777282411;
+        d=1e100.net; s=20251104; t=1776677610; x=1777282410;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=aBmsKEoAuaOLxqeDzv+upI1fxj9mAepjkXxqyIFeza0=;
-        b=gRJg16a3OUM8o1NfJcU6Danl9kA25OSWcr44d335zjeLfIGZamxKU5kktwx15WM0g1
-         e8sEyNk22p+0PZZZGBG5GYdEfqRrw5fsHw/tQL/kqAcbDeIU4KXdnB21zyvxa2adavWg
-         x28OOce/y1qQs1rIBgLBgj4PEENfD4AZ2rhuLocPIrkgr5rQa14N/Ia6CcVgFqwoy2Ur
-         ywLn2C42PQ3vq77IA3/tAgCETdpEaf6Y5ajQZqEn8ITIIfbyMvZSNRRL3cs/SnXOLP05
-         j0u88dxNndpx94j7yjMqZW9Ix+JgMSnmfagP/lukhUgGtHKs4MRWz3WaTlMTSIdQl6fc
-         XDlg==
-X-Gm-Message-State: AOJu0Yzu/xzIYYywHiQsxbYgtI/uc4LvB+HhAaotf/gvUvaJMFddra2K
-	GK1NrBx9sus0OKIK7oHFRvfxemNUFgqrNAHRiD7KYh310CpnL2DQsXO5R2VWEg==
-X-Gm-Gg: AeBDietCJAaoe6XtZjZhVLyWqEbG5fvRgetCaxk38ZX1RzHUib6d1KCrl7z5GTCgJU7
-	3+RGg80XYwQKkcqfg4J6BMw/Efovvt3zKgk2LdeFhPE8LbsUCoapiwvnY65WxCZBuoKQbsuZQr4
-	tPSs4sceWu8Ay2CrgzqS+QKzT2D7DFC9VVmr3I5J/S1EMt8Lowzb4P0GVjCgJo6GjdmnDtgVhzZ
-	gztgW+NHB+uln0NPGAzcFLNiC00RN6pVBets/lz6jDJRBAklt/SluozSeebZ9fJoBwstMMvEGnF
-	zxHgTOFA6/NZ8xI5M4GhySp9Te+XsxJtf8w4lNeFBewcZwyXghq+E856G/lmuJEfTfn15E7BtYe
-	nosb18JmdyHUpe6gqDxexfsOAW13lI4fbayBiFXNoUDGNurr8TagkATaBDwsC48ETrAGTyZ3qAm
-	XcXMXcujV6rrcFAJCFvsgOjWE1A5m8TW5BSWA8f2Tnrg==
-X-Received: by 2002:a05:600c:4746:b0:488:9439:881a with SMTP id 5b1f17b1804b1-488fb738412mr166061835e9.2.1776677610792;
-        Mon, 20 Apr 2026 02:33:30 -0700 (PDT)
+        bh=vXy8eHAkbTOPDQWNkxSRCYMfHGiZy7oFyN/TADXh4oM=;
+        b=SYKcgi118R+Qq1hevROcIbUhb8aU2sxt+/89FTjoX0Qi11VtmkdD4HYL2rFKl5tWDt
+         X0SW2X58JVLRrvN1kJMSJheDCS4PBhD0/NWgxQGM2yfG2ofN8/3TuWoR0ClOz7IvnLiU
+         3gRJ2i9TVU9kg0+k00KJSwimpYqRxjQfQZ6UGc5BUiTS5azvjWAcBGaBtVTgpGyInINQ
+         dZ/uoroLz5jqfJlY8BrrrEl93mCQEXA4jkPmn3OEifd7N8zRewhOHOJsMRQXeadTKXS5
+         mBN3lMHeaSza5Pf8pUTdgCQ7HAtP9Am7U/vpFgRTTFY2QTp6DGYqDbpZUuk/7igIEzZy
+         kHxQ==
+X-Gm-Message-State: AOJu0Yx0p6ddkGo72jPyZygJD+cmHBi7VmxVJCIXYjehwJErAOy5sUSv
+	B61RzvfmfPp+5urZeyl7lOwbcAsDvGlMBVp1ac0rkLILtleMQLcx1GM9eUL7Ag==
+X-Gm-Gg: AeBDievrHmcq9OnVl+8TPKIRPoNq2Spniqjta/Z3tSwJidLCSH1tBeWgf7H176hQ3cE
+	wyDMvMsTCwB1RxRZUGCxQSy1OuapoxvvYgxvx8BQ8JXCPD7QC0TlcvLO0+mjSMsx03EpJgJk+Qh
+	MKgSnYFMRnJt5cjJS6cYoT8rgrymPgPHD8jGu/d2AWYPLTlujpe6zC4ZtmQsRzPhZZFH42BBE0f
+	PcHgnreHk0S5krqiykeAALttJ9bEtfJqJ6bhZzPklBO0VuROb6LEKMhls5iF4K3gRtpijCTTWPP
+	DZG3dwUl72rBZuqTzkR6mVJ2IrGYyFOfGaWIhdb+KarAVvlr8/grwAOXoTbHSaWQr3aqaQYxFQT
+	BHQXbiscTV7+Vna94Xofz3wE3YcfFcdTeazVrK97HigQjw/I8ZZ2zlUlWkWb1FDENaZ/ljFdm8j
+	K4HV/lePxclzuZE5GMeitf8GoV8EksIf4=
+X-Received: by 2002:a05:600c:8a08:b0:488:a82f:bb9b with SMTP id 5b1f17b1804b1-488ff369a1cmr111135255e9.30.1776677609638;
+        Mon, 20 Apr 2026 02:33:29 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4eec9sm26577488f8f.34.2026.04.20.02.33.29
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4eec9sm26577488f8f.34.2026.04.20.02.33.28
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 02:33:30 -0700 (PDT)
+        Mon, 20 Apr 2026 02:33:29 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 8/8] xrdp: upgrade 0.10.5 -> 0.10.6
-Date: Mon, 20 Apr 2026 11:33:23 +0200
-Message-ID: <20260420093323.357053-8-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 7/8] xdg-desktop-portal: upgrade 1.20.3 -> 1.20.4
+Date: Mon, 20 Apr 2026 11:33:22 +0200
+Message-ID: <20260420093323.357053-7-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260420093323.357053-1-skandigraun@gmail.com>
 References: <20260420093323.357053-1-skandigraun@gmail.com>
@@ -67,63 +67,53 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 09:33:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126494
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126493
 
-Mark fixed CVEs explicitly patched,because NVD tracks them without version info.
+Fixes CVE-2026-40354: https://github.com/flatpak/xdg-desktop-portal/releases/tag/1.20.4
 
-Changelog:
-Security fixes:
-CVE-2026-32105
-CVE-2026-32107
-CVE-2026-32623
-CVE-2026-32624
-CVE-2026-33145
-CVE-2026-33516
-CVE-2026-33689
-CVE-2026-35512
+Also mark the CVE explicitly patched, as it is tracked without version info
+at this time.
 
-New features:
-Support for xorgxrdp bug fixes
-
-Bug fixes:
-Honour pass_shell_as_env setting only if user sets a shell
-We no longer try to create a NULL authentication file when using VNC over UDS
-Problems with the Brazilian ABNT2 keyboard mapping have been corrected
-A 'file exists' error when installing xrdp over an existing installation has been addressed
+The project now has a dependency on libglnx, which by default it tries to download
+from the internet during configuring. To avoid that error, this dependency is added to the SRC_URI.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../xrdp/{xrdp_0.10.5.bb => xrdp_0.10.6.bb}           | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-support/xrdp/{xrdp_0.10.5.bb => xrdp_0.10.6.bb} (89%)
+ ...portal_1.20.3.bb => xdg-desktop-portal_1.20.4.bb} | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/xdg-desktop-portal/{xdg-desktop-portal_1.20.3.bb => xdg-desktop-portal_1.20.4.bb} (71%)
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.10.5.bb b/meta-oe/recipes-support/xrdp/xrdp_0.10.6.bb
-similarity index 89%
-rename from meta-oe/recipes-support/xrdp/xrdp_0.10.5.bb
-rename to meta-oe/recipes-support/xrdp/xrdp_0.10.6.bb
-index 8d7c5807f2..152b37cb37 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.10.5.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.10.6.bb
-@@ -17,7 +17,7 @@ SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN
-            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
-            file://0001-mark-count-with-unused-attribute.patch \
-            "
--SRC_URI[sha256sum] = "9abc96d164de4b1c40e2f3f537d0593d052a640cf3388978c133715ea69fb123"
-+SRC_URI[sha256sum] = "dfc21d5d603b642cf583987b36706b685bf05fd3aaaaacefb8f57c5f4a448677"
+diff --git a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.3.bb b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.4.bb
+similarity index 71%
+rename from meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.3.bb
+rename to meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.4.bb
+index e0aca558fd..be3c2be069 100644
+--- a/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.3.bb
++++ b/meta-oe/recipes-support/xdg-desktop-portal/xdg-desktop-portal_1.20.4.bb
+@@ -27,11 +27,17 @@ RDEPENDS:${PN} = "bubblewrap rtkit ${PORTAL_BACKENDS} fuse3-utils"
+ inherit meson pkgconfig python3native features_check
  
- UPSTREAM_CHECK_URI = "https://github.com/neutrinolabs/xrdp/releases"
- UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
-@@ -127,3 +127,12 @@ pkg_postinst:${PN}() {
- 		fi
-         fi
+ SRC_URI = " \
+-	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=xdg-desktop-portal-1.20 \
++	git://github.com/flatpak/xdg-desktop-portal.git;protocol=https;branch=xdg-desktop-portal-1.20;name=main;tag=${PV} \
++	git://gitlab.gnome.org/GNOME/libglnx.git;protocol=https;branch=master;name=libglnx;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/libglnx \
+ 	file://0001-meson.build-add-a-hack-for-crosscompile.patch \
+ "
+ 
+-SRCREV = "23a76c392170dbbd26230f85ef56c3a57e52b857"
++SRCREV_main = "f5aec228c9eb0c9a70eadd6424d92c0ca8a78247"
++
++# this revision comes from subprojects/libglnx.wrap file of the main source repo
++SRCREV_libglnx = "ccea836b799256420788c463a638ded0636b1632"
++
++SRCREV_FORMAT = "main"
+ 
+ FILES:${PN} += "${libdir}/systemd ${datadir}/dbus-1"
+ 
+@@ -47,3 +53,5 @@ do_write_config:append() {
+ bwrap = '${bindir}/bwrap'
+ EOF
  }
 +
-+CVE_STATUS[CVE-2026-32105] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-32107] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-32623] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-32624] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-33145] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-33516] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-33689] = "fixed-version: fixed in 0.10.6"
-+CVE_STATUS[CVE-2026-35512] = "fixed-version: fixed in 0.10.6"
++CVE_STATUS[CVE-2026-40354] = "fixed-version: fixed in 1.20.4"
 
