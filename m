@@ -2,62 +2,62 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9D25F36C36
-	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 06:28:05 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13765.1776666476039285489
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19824F36C3D
+	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 06:28:06 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.13774.1776666485315477370
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Apr 2026 23:27:56 -0700
+ Sun, 19 Apr 2026 23:28:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NaPCH5f1;
- spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: skandigraun@gmail.com)
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-488ba840146so24494725e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Apr 2026 23:27:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=OtpNWF1w;
+ spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4891b0786beso5799095e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Apr 2026 23:28:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776666474; x=1777271274; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776666484; x=1777271284; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=K8vCAKDjBfteapj4EvIIkTxzMUBifYBMD6tfeJJqBWE=;
-        b=NaPCH5f1tUd16k/AdM6awyL02w4A81L/wyuZ36seFYIXzlpSRVKtPWcadGTIyAuqhp
-         5il5nWG01b72UI/phL5KRMqzcxNNTyQrR7lVHmyaVPIk0E8MI/kTNQG1dyW6qCQfQQQr
-         PoO0IP2odh+FPji2wfiQ8clIyOwymsfxnxIW7df0u8f1BHWfyC50ho8J6BFrOMSacmJv
-         TR3Q9XqjWedMBQZRJvG1xayZpL1+WxWoK75AOPtvaQ93pbdNVrEHnnIlGvLE3qgeJNF3
-         OZ+gtBwaDnf6VNFxr+37OQR60Wa6RW4X9/5nuu8ZUO570BnVrFBfCVgJr9YQiT2GiMTt
-         ziww==
+        bh=a1B6T9c12VXYW2OFAPQp8c7CAgQohMQQkInOekUN3TI=;
+        b=OtpNWF1wIa3TKUvyn1BZ2zruDDZCiQlI0v6E3jYmbRTRHDKLOPqlgCxdD0BfPFNqdj
+         5DrH/tAVBc6VHoBcbDkzxHdIqJxaxqwLCwznRBtFke0DeaeaKOhxDLr3IdUshRrceTRP
+         DR7ZZbDR9A/NGbZfvSC1FK5RCKFEPokyN/UqhsMYKS59YXuzNclH0asyi7yBgOlLh3eM
+         otrjpn4A0GmoF6u8HmvWs4Xi6u85GR6NkVt9gADNfphud4n/CcLyn0vdh0IGnfzt0pzD
+         0HrkX43JOD41BfKy71Yqoes4vQtrr1M8AhZ1SPFOJgk8ARjzW+5ruGPCuxeweELmxSEi
+         lNHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776666474; x=1777271274;
+        d=1e100.net; s=20251104; t=1776666484; x=1777271284;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=K8vCAKDjBfteapj4EvIIkTxzMUBifYBMD6tfeJJqBWE=;
-        b=Xc9MKQXBmgKIkirSDIXYwQz/yNWj1uP7aiK0dJlrc8Zb+8dmemnf+BFw+VSKCfmbvp
-         YiWWsY9Lro6HuAQz21uY87s2NncU9bWsAbrLzH8dyICGI0ADmo8w3VARpa5WST5851gs
-         PJ3zUSd6k1oD1qucDnW8fNbcokn2iZOupiM6HlG1SKO4KVDH+SugpoSw4surFUmZQSgW
-         g+mg/kuQEhPmdRynGXTIpP4hQE26V3UvD8lStCCEyQC4AphS4XfVJWEGfvuEP7LKVCzJ
-         9A1mWgEZ7CE/7+zP1WYXXZvr5MEf74OO4RoAVIjqmbnUX2WvkksrbzJpG1uwrpNrWPtG
-         uugw==
-X-Gm-Message-State: AOJu0YyI+jzikiyyzTALvGIaulpEcNKl/7wMHkvURNcMnzqGfkLKzffb
-	DYlJN1M94/inXtYXmTf5IvNG7EjAHoRAopCGAxH5qN55SoGxK22jO70fYJ07Bg==
-X-Gm-Gg: AeBDiet7Jv7ozOk3G5nw+JWPd43QbwwPzY/NQWksm4orA38sdFqsilI84M8jmQnctOe
-	u1guF4NLKFpFM2o+k9cyuwKy3ElolsbEvN4MAYL9yynhZub2YmZHiXm2E60ZETIgWbjUrMXri8/
-	pXVc6kH4Pd/+r26JhIhcJ6Jku6bwO304HxeLUA3A7qdNxFYWwZ/9mc45RPyDfzJ69Vv247Z4ILm
-	vdPCpfYWDZN+tVtsHGO3E1BCmsxdDtZQI9T1npvBxHz5jq+QI+XIms+Tkee2ZjnzhFsBshWFmNr
-	aCxB6ReZdQKlNXP402wXSF8a5okvFBQvGYP7hpoary8cKKm/saif3ju2OG7maYnYj4q41EWo8KC
-	TEnJAXsODPRznlVc1zEwTxzMRjvrJxSLWeapKeV0kN5WhawT0D72MeXPB9dzHf1r8E+UAtYSPna
-	U67ay80TkvUN/oavRMGKxYKzydhlBqMK4=
-X-Received: by 2002:a05:600c:4e14:b0:489:1f08:91b with SMTP id 5b1f17b1804b1-4891f080a7emr19711185e9.16.1776666474325;
-        Sun, 19 Apr 2026 23:27:54 -0700 (PDT)
+        bh=a1B6T9c12VXYW2OFAPQp8c7CAgQohMQQkInOekUN3TI=;
+        b=liKntB376XTCJZdiPyEb/8FlWURh1bplHCZm4aj5n6eyFWiFPDXOoACdbOlic8LFz+
+         Gk85yRp+os8EG/F+y2Dwzb1juyWHdqD89p6ll4R0D6if6J+REPjn0WFMfI+Vo8Wp70gU
+         lzLU59Fu8a8cO1x9Ynl+BzbU4aueIH1uNs53XbREJrf1BBAXEIdmxXaAvVrg+K60tH1U
+         UCz6jomRPIL+R78w/HcDOHfWPkb4QV8CP3zPWBJoBxn1CTQ3wDiDOJB0wJvzWEwwEZYx
+         QWtekRx8iKsYDI/psSocmYMVJUKPP/mnpu9Ik04qW5wqBqDnGdqnHFILBu7NrbF7Aq6t
+         PTow==
+X-Gm-Message-State: AOJu0YzvXsATaWMsXu00gWCj6+iiTR5HC+ZEePs7AXhXBSJS5YJOkZGf
+	DwwhlJOE23antLS2g3/a96TWB0bjrLJuQsxLMDz04QkiSOAURFbqDRzRSoTiYA==
+X-Gm-Gg: AeBDietxYVqxVPvOb7xcw6zV6G3vMZT/2oPPIUp1x0v3CeqOi+zlOYecY+WpRdCTgea
+	aoWRvePgvu0xsOzBwTntsGru44047WwvQKn+dTaXSfTorHiimnV8I8mYfIG2icceKO6ovmfoNsG
+	5GH4X4etPQWD1piADTU/vj1I87B9JMLA/Xzjfu5yCU9eAFK1pX1QsH56UZjTw/6/wUNIiOqt/Ik
+	N/F5GuJEqxAlk2JmDG0fS91ZnpqGXAlRZLJtCcTOhqnDdYQtAT+/NkrwYhrZ8mOXr+ETHp0qzUX
+	c8q5+pys6ZKDQnp1RquXrVxcjNjgqD75F14EyR0AFEVh6jxFR7ow9o/+E9TnipjJu+iqzkKOKrF
+	BjiZTRVFjaI3iqpqjgDmBydGplvDx4FMAk0Z6d+lvWQTOIziDsNF44MB9pVquWMFuxgE1fgb3bG
+	Heuj9g0mlN3SxS7KNXsNB4YPzGyrj4Jno=
+X-Received: by 2002:a05:600c:c05a:b0:488:80b6:873a with SMTP id 5b1f17b1804b1-488fb771be4mr133789475e9.21.1776666483486;
+        Sun, 19 Apr 2026 23:28:03 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fc17f642sm238296665e9.5.2026.04.19.23.27.53
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fc17f642sm238296665e9.5.2026.04.19.23.28.02
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Apr 2026 23:27:53 -0700 (PDT)
+        Sun, 19 Apr 2026 23:28:03 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 04/17] jq: patch CVE-2026-33948
-Date: Mon, 20 Apr 2026 08:27:36 +0200
-Message-ID: <20260420062750.3795917-4-skandigraun@gmail.com>
+Subject: [meta-oe][PATCH 17/17] libraw: mark CVE-2026-20911 and CVE-2026-21413 patched
+Date: Mon, 20 Apr 2026 08:27:49 +0200
+Message-ID: <20260420062750.3795917-17-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260420062750.3795917-1-skandigraun@gmail.com>
 References: <20260420062750.3795917-1-skandigraun@gmail.com>
@@ -66,85 +66,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 06:28:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126468
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 06:28:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126481
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33948
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-20911
+https://nvd.nist.gov/vuln/detail/CVE-2026-21413
 
-Backport the patch that is referenced by the NVD advisory.
+Both CVEs are tracked with incorrect version info: NVD indicates that
+0.22.1 is explicitly vulnerable, but the fixes are actually included
+in this release.
+
+Relevant commits:
+CVE-2026-20911: https://github.com/LibRaw/LibRaw/commit/5357bb5fc67ac616838fb84de67260d45987489b
+CVE-2026-21413: https://github.com/LibRaw/LibRaw/commit/75ed2c12a35b765b3b6ad695cc1f044f19efe644
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- .../jq/jq/CVE-2026-33948.patch                | 49 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
+ meta-oe/recipes-support/libraw/libraw_0.22.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
-new file mode 100644
-index 0000000000..8625429c74
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
-@@ -0,0 +1,49 @@
-+From 19a792c4cdb6b91c056eac033ac3367af6e67755 Mon Sep 17 00:00:00 2001
-+From: itchyny <itchyny@cybozu.co.jp>
-+Date: Mon, 13 Apr 2026 08:46:11 +0900
-+Subject: [PATCH] Fix NUL truncation in the JSON parser
-+
-+This fixes CVE-2026-33948.
-+
-+CVE: CVE-2026-33948
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/6374ae0bcdfe33a18eb0ae6db28493b1f34a0a5b]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ src/util.c   | 8 +-------
-+ tests/shtest | 6 ++++++
-+ 2 files changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/util.c b/src/util.c
-+index bcb86da..60ec4d5 100644
-+--- a/src/util.c
-++++ b/src/util.c
-+@@ -309,13 +309,7 @@ static int jq_util_input_read_more(jq_util_input_state *state) {
-+       if (p != NULL)
-+         state->current_line++;
-+ 
-+-      if (p == NULL && state->parser != NULL) {
-+-        /*
-+-         * There should be no NULs in JSON texts (but JSON text
-+-         * sequences are another story).
-+-         */
-+-        state->buf_valid_len = strlen(state->buf);
-+-      } else if (p == NULL && feof(state->current_input)) {
-++      if (p == NULL && feof(state->current_input)) {
-+         size_t i;
-+ 
-+         /*
-+diff --git a/tests/shtest b/tests/shtest
-+index 887a6bb..a046afe 100755
-+--- a/tests/shtest
-++++ b/tests/shtest
-+@@ -842,4 +842,10 @@ if ! $msys && ! $mingw; then
-+   fi
-+ fi
-+ 
-++# CVE-2026-33948: No NUL truncation in the JSON parser
-++if printf '{}\x00{}' | $JQ >/dev/null 2> /dev/null; then
-++  printf 'Error expected but jq exited successfully\n' 1>&2
-++  exit 1
-++fi
-++
-+ exit 0
-diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-index 6df1d46f48..acea1e4b27 100644
---- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-+++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
-            file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
-            file://CVE-2026-32316.patch \
-            file://CVE-2026-33947.patch \
-+           file://CVE-2026-33948.patch \
-            "
- 
- inherit autotools ptest
+diff --git a/meta-oe/recipes-support/libraw/libraw_0.22.1.bb b/meta-oe/recipes-support/libraw/libraw_0.22.1.bb
+index 2e11a7f1f9..e99f0e46b6 100644
+--- a/meta-oe/recipes-support/libraw/libraw_0.22.1.bb
++++ b/meta-oe/recipes-support/libraw/libraw_0.22.1.bb
+@@ -13,3 +13,5 @@ CVE_STATUS[CVE-2026-5318] = "fixed-version: fixed since 0.22.1"
+ CVE_STATUS[CVE-2026-5342] = "fixed-version: fixed since 0.22.1"
+ CVE_STATUS[CVE-2026-20884] = "fixed-version: fixed since 0.22.1"
+ CVE_STATUS[CVE-2026-24450] = "fixed-version: fixed since 0.22.1"
++CVE_STATUS[CVE-2026-20911] = "fixed-version: fixed since 0.22.1"
++CVE_STATUS[CVE-2026-21413] = "fixed-version: fixed since 0.22.1"
 
