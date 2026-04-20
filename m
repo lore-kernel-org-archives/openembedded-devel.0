@@ -2,106 +2,103 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9609DF557FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D52C4F55804
 	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 09:33:34 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15999.1776677608257631929
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15572.1776677606880741998
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 02:33:28 -0700
+ Mon, 20 Apr 2026 02:33:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=WDYtnw6/;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-43fe3e22e33so1859990f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 02:33:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Kh7p7DrO;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: skandigraun@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-43eada6d900so2831366f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 02:33:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776677606; x=1777282406; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4N2xlaeLp2/CMKm1isWlWPF6H1MIDOwPC80NytbQfSI=;
-        b=WDYtnw6/c/CUP1XVm++t3SkoPn3vVJMJoFfcFbH6sM4GSq9ogazr2Vjos/vmvDFYFe
-         VvauaHSfln/9HpNORrDkMrIh0uuS+HBsh3uTpyN6MEC476idVnripXU3l1lxfCc4K9x7
-         CAshjWfDaqyGkggI9WKdWv5N+UVwiOT44+Guh7amF79bjmXZsMseaQrmss2vH0a/2QSs
-         KLgpsOYmC2wApQp645peSLbB+mejvFVPIckysdG0mtZe+l+x9L4ydwiBgNNYV4UKZzZW
-         G5xFIKeAIpckakJZ7cvnN9Af+ZFdr3s0GD0UN0haSkPsGwOX8/8gB+jHrONh+cUm/kZb
-         Hc7Q==
+        d=gmail.com; s=20251104; t=1776677605; x=1777282405; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nQgUYEuRuf9IFHHKNyIKspWOfhWfPTntWK3aRczPoC0=;
+        b=Kh7p7DrOHuAcu4b0xJ71ijPF7Xm+qh2ea8M2AIa+md/ONhKImbWPqv9bsWnM6nEeFY
+         R5qRJ207UhGZOyACesTaD8+a71o/mzT59/L0ySwC6qqbnkzWk5JqWsDmIHGZIaVJCc+J
+         FxeNdAc1+GHIqHaWnuvpOcneMz3k8lnlezvFqAxmzxoVROiFoxPDl7NHGT9ndgW1goce
+         /E3BLOZX+l0xrVgV6Mzpy5OvyFqXRYwXWFrtI+dK1pzuCqD0G7UAiUdMjmyd/RQlVwu0
+         P5xvss1puQ8nZekx+jnbMs2T4VLzdp1tA+6Jn0KWLLL9B+apAG1faBAIlsVXi/GF8e3n
+         ZSGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776677606; x=1777282406;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=4N2xlaeLp2/CMKm1isWlWPF6H1MIDOwPC80NytbQfSI=;
-        b=YOI65yQ9A6eIHkk2gZnnd7Qnfi94PIe8CZZhPXK6+IgcyeV+u2TeDMteYBHnityuOm
-         lO7zJF5wN/sanaNoK5UvETJF3GeXzjp2ycFcspPmJiDNRR/KFSTdRIR9qZrIXfb27ugP
-         psw/GXa6a2xggEZxM8+lLbbBDluQCxUO7YFfrpmtdP6nkCCHRknj3IPkkCfgywNt5PeS
-         NpG8txDW1hntFUJVHYP1s8hULLMNbRvijUF/eZ0v0S6qRvDMyPTws1BZ8qmkbSyXoiyu
-         Jz5LIGNUUdoq9I/wOAjTbHlAD+JsXZYUg6CJ0yE/7BmpXY1jdJM4d+s3CRqw+OSSdSSV
-         P3hA==
-X-Gm-Message-State: AOJu0YxLF6omwHXxIZtZmVAANziSMj6qy2n1/sJpIaywgeyvE3AY+QaH
-	TJ7WjxFrEjN6JvSWcrLWTvmco2qJg7Fy0wXh+APAH/GrDppMZbO+nLAOI7/qKg==
-X-Gm-Gg: AeBDietEPP/ET1Url+Xy7z2Fv4htztMdRoqEsKtzSx+YyQIAqdwcUPDItvw2gOyKNgT
-	V2peJNz1pJ+VWmSPBnCHM9uzcRnd1HOagpKKftIYbfKldrVn+XSoLJ0jaW3CnKcMDOOITF3umTP
-	rzINLe4Bqyv50kiep2B5653/gs5k5WpnR/OvaAEUwvGOHpeUWLRcZvoOzLRld7FGfmAF93lRuKS
-	u47eq1fztHgyIbBJ/i+AsZQIRb6kI6KQBfo5ULgR4rfgHau2uyHWewGMVj3fVDSRlyXbpAyC1V0
-	7xcdgxEaLepGV5r/Kf8nFCBy7Cv3mMqxZzdwCNHKPZQWLDs6fcpK9OQyWEeviRlhpNwKnsFxZbP
-	RKnxnp25ZgoC4EFIRICc0wA5B2BTNGBcSwT1RoI2sPfnv5BWU4XQANCsYn9jOAAYKWfIuBHudiF
-	dCa1Gln9DI6m1d4J1z8ZH/sVjbvRTZFGc=
-X-Received: by 2002:a05:6000:25c7:b0:43d:77a8:3bb5 with SMTP id ffacd0b85a97d-43fe3e1134amr17790589f8f.37.1776677606392;
-        Mon, 20 Apr 2026 02:33:26 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1776677605; x=1777282405;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nQgUYEuRuf9IFHHKNyIKspWOfhWfPTntWK3aRczPoC0=;
+        b=AD2llurU4hEwsJ5CjNyrvBL/dahA49A7u7wSsH0+cud9TE9itgTb3b9zYW/hNpUlZC
+         VtjNjyK6OTiwwHOoMTOVmlAeC+QLRr1GQgW1wJkeXytbZrg/Z2T+KhSglhc/TOZvpbmG
+         /gpOD6nV7v7veu5uttQpEbsa6oloXCpg4xyEiPVvGj+Y0PlDFxnAq+znEgQYpJj52c+j
+         wOpIXGQCcXgtU2p1sY3Qb17ZtDDsvL7Kk8DoGePZYJJUSRD1E5Al77H2j3w4Lwh+JHXV
+         rvY6TtDTC7RJPhWnbSTShXl+zv3xpH5o6aFx2m8LIo6MfClMUAVJVHO1kzVzIQ23yhul
+         pNbQ==
+X-Gm-Message-State: AOJu0YxkoCBTkjjyqfxdBL1Dwq+RYnlaxEnH6czqX1R/HTK8t+VEGyV/
+	umnP5Vi/HyFD7PNQvaczzPO3d1rcLknvGcXeSBy7nsEu0QW/LUrJgVi2B8ImGg==
+X-Gm-Gg: AeBDiet4hK2aAT37Dy56lgpBgoxgLd6tuiGGrYZTSPcgXMKQMIBFi0Idj//oBN8/Ono
+	luq7msNKmjzC5bAVSrkRCJnWOBlaxDtUC1glaKhBcphtmuG96LkLTNb4i4/D+Aw+eg5h9/sNmBJ
+	LuKsFvN+aIETQwXXnaWh7s3MUp+OJaMSJ3aZkvEQj7B0RF1CCjbiusco0+evfXo6LxBoDfDgnfy
+	tgQBcnt46hQTmpbxC66bA90VaBkiHIxM09Phknpuu+VPTJa8cv7M4g1XfJBxNt1Sa3fs7FHvpPV
+	KMWeMdxmfQbwkpn1KKAK29UMylpActDw0ZdUDY/h6H/SnIvwuJ0zS6PYo0tSW5WWDu8+0FMmn5k
+	DOHQz+FVow4MHhQd026QZGtQ96IUHNGu9O62JxM4lJacXHCix14FXvxbQlNWGC0NlgfLw92PphJ
+	/Qi2m4qDgR5QPTJ246Iy0xUn09h+Mh7d8=
+X-Received: by 2002:a05:6000:2212:b0:43d:68dc:9ca6 with SMTP id ffacd0b85a97d-43fe3dc7b4bmr19566145f8f.18.1776677604841;
+        Mon, 20 Apr 2026 02:33:24 -0700 (PDT)
 Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4eec9sm26577488f8f.34.2026.04.20.02.33.25
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-43fe4e4eec9sm26577488f8f.34.2026.04.20.02.33.24
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 02:33:25 -0700 (PDT)
+        Mon, 20 Apr 2026 02:33:24 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/8] protobuf, python3-protobuf: ignore CVE-2026-6409
-Date: Mon, 20 Apr 2026 11:33:18 +0200
-Message-ID: <20260420093323.357053-3-skandigraun@gmail.com>
+Subject: [meta-networking][PATCH 1/8] ngtcp2: upgrade 1.22.0 -> 1.22.1
+Date: Mon, 20 Apr 2026 11:33:16 +0200
+Message-ID: <20260420093323.357053-1-skandigraun@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260420093323.357053-1-skandigraun@gmail.com>
-References: <20260420093323.357053-1-skandigraun@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 09:33:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126489
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126487
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-6409
+Contains fix for CVE-2026-40170 (which is tracked without version
+by NVD, so also mark explicitly as patched).
 
-The vulnerability impacts only the PHP library component, not the
-cpp/python one. Ignore this CVE due to this.
+Changelog: https://github.com/ngtcp2/ngtcp2/releases/tag/v1.22.1
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb           | 1 +
- meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb | 1 +
- 2 files changed, 2 insertions(+)
+ .../ngtcp2/{ngtcp2_1.22.0.bb => ngtcp2_1.22.1.bb}           | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/ngtcp2/{ngtcp2_1.22.0.bb => ngtcp2_1.22.1.bb} (84%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb b/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb
-index 4af48b0b99..880dd82b1d 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_6.33.6.bb
-@@ -29,6 +29,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d\.\d+\.\d+)"
- CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
+diff --git a/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb b/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
+similarity index 84%
+rename from meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb
+rename to meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
+index f7c0ee0d4f..acff7b548b 100644
+--- a/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.0.bb
++++ b/meta-networking/recipes-protocols/ngtcp2/ngtcp2_1.22.1.bb
+@@ -4,8 +4,8 @@ BUGTRACKER = "https://github.com/ngtcp2/ngtcp2/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=de0966c8ff4f62661a3da92967a75434"
  
- CVE_STATUS[CVE-2026-0994] = "cpe-incorrect: the vulnerability affects only python3-protobuf recipe"
-+CVE_STATUS[CVE-2026-6409] = "cpe-incorrect: the vulnerability affects only the php library"
+-SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=main;tag=v${PV};name=ngtcp2"
+-SRCREV = "2a441e8540d192b0707989b146ce80efcae5f0d6"
++SRC_URI = "gitsm://github.com/ngtcp2/ngtcp2;protocol=https;branch=release-1.22;tag=v${PV}"
++SRCREV = "716e64b05f4a3709dfc0b0522cf9fd4456d055e5"
  
- inherit cmake pkgconfig ptest
+ DEPENDS = "brotli libev nghttp3"
  
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-index bbc713442b..0595ec2a47 100644
---- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_6.33.6.bb
-@@ -14,6 +14,7 @@ SRC_URI[sha256sum] = "a6768d25248312c297558af96a9f9c929e8c4cee0659cb07e780731095
- 
- CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
- CVE_STATUS[CVE-2026-0994] = "fixed-version: it is fixed in 6.33.5"
-+CVE_STATUS[CVE-2026-6409] = "cpe-incorrect: the vulnerability affects only the php library"
- 
- # http://errors.yoctoproject.org/Errors/Details/184715/
- # Can't find required file: ../src/google/protobuf/descriptor.proto
+@@ -18,3 +18,5 @@ PACKAGECONFIG[shared] = "-DENABLE_SHARED_LIB=ON, -DENABLE_SHARED_LIB=OFF"
+ PACKAGECONFIG[build-lib-only] = "-DENABLE_LIB_ONLY=ON, -DENABLE_LIB_ONLY=OFF"
+ PACKAGECONFIG[openssl] = "-DENABLE_OPENSSL=ON, -DENABLE_OPENSSL=OFF, openssl"
+ PACKAGECONFIG[gnutls] = "-DENABLE_GNUTLS=ON, -DENABLE_GNUTLS=OFF, gnutls"
++
++CVE_STATUS[CVE-2026-40170] = "fixed-version: fixed in 1.22.1"
 
