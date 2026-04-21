@@ -1,328 +1,311 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <zeming.liu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 35BAFF327A7
-	for <webhook@archiver.kernel.org>; Tue, 21 Apr 2026 05:58:07 +0000 (UTC)
-Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.11882.1776751085575400708
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BCB7F327B3
+	for <webhook@archiver.kernel.org>; Tue, 21 Apr 2026 07:11:27 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.14321.1776755455611386673
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 22:58:05 -0700
+ Tue, 21 Apr 2026 00:10:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=FktCY2Jo;
- spf=pass (domain: mvista.com, ip: 74.125.82.41, mailfrom: hprajapati@mvista.com)
-Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-12c6df0b9bbso8328503c88.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 22:58:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1776751085; x=1777355885; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ayong8rRCrDHzSQmu4WM/Nf3SKK9/e/gMhNZrUvMT4w=;
-        b=FktCY2Jo4NYTuoqaBm+R16japvM8QB0bThhbwxxU93a/iZtmnNcTgow2MRC9WSfIhb
-         bEd5jl32wv5QGsOfdRHdcc/SWPsJMGRFt2QpF/KLD6o6LSoJ0QYD33YqBYPUSeZYfF3N
-         qEsOMyUzqFUT9HwGWgrfEfZcQDXaAuy0ZQB8A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776751085; x=1777355885;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Ayong8rRCrDHzSQmu4WM/Nf3SKK9/e/gMhNZrUvMT4w=;
-        b=cZNTnM6XNJH3t7s7HhtHL5IwZS4bPACahwOOtiiKHo42D3e140unaZRUCaC7FehgLZ
-         LT5CQyRt5gWeR9ZuTx7hQj2XFKjjYF4iOUPc+BjV6YQRVji1UCIJIN851IpfxPzIDNeG
-         VjgqYuSfn6TcyAs7XPaoLq7Ylmo06RVWJXxHoVJD9HV+32PqBWHMi9rZn2tZaRCTs33W
-         wl1uQnTzdXlWiqQZXsUkVTQHZk2VitEOlCf60npdUBfd7BekTgu79iIAnCwFNOacxBay
-         tEKLIcbsCCyb5ujYfBMzkBBssFhV8vW95VOGFngzjw/rcJtC8ykXMhzSR7NOb8WLJ8Us
-         BGwA==
-X-Gm-Message-State: AOJu0YykTkCKimkQIp9U1QENZAEsr9GfXtSyTNW3X61Nn+WkpSZOtuwT
-	lc5OAVaxF9AfaALuPi5HYv9331nz21R3waxWE4QGwrzorx9V2EuhW6uIWJgCCLvQklrjHJyD+4c
-	ms/yfQEs=
-X-Gm-Gg: AeBDies0YWfwiMOtgDydkyExLonYAwxLCjEw+55XdGuzkI/0Iv9a1QvwL8ejLQbvPI6
-	hinPNjdLknOHvunpn8gVVhNrX+7DCz65ZHjqDddjEbErKzK2isjVJQRCISDlXTp5F6WX5uTx0k6
-	bXFsfkrLPDRXuDFHMCgeUK8ZXwLFjXasjw79h+MFQ2q6vyGBcDtKmmoFuechtRcMqjGkOLZ36pF
-	kv8oGt1kGHYjLddZ6C22EhYO1kI2RUB0JOX/aJqbB3lOAhoaBK1aevoPgOHn9lslpo1PSY8RVqY
-	bV+57EJG/iCZ99gZrktMug4QPcJmmwZQxCdGHvjZyb2DKMN6xOO0SwucL1TVlsDynBW/hZZk3fX
-	zvK7/xRdELCCppgAgz9/iTKeKOptJMfmModOYZ508gUMHVxAF7n07Odg3QLjcacsWcN0hUd+xBb
-	L9AKqc/rlB5XLRM0Ik0zhw92LlFkF1gLCTURHWp8K718VRH/yPyzhT2dUfrw==
-X-Received: by 2002:a05:7300:8c9f:b0:2e2:3381:2fba with SMTP id 5a478bee46e88-2e4660475e5mr8744471eec.3.1776751084412;
-        Mon, 20 Apr 2026 22:58:04 -0700 (PDT)
-Received: from MVIN00013.mvista.com ([150.129.170.136])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2e53ccce440sm17236422eec.14.2026.04.20.22.58.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Apr 2026 22:58:04 -0700 (PDT)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-webserver][kirkstone][PATCH] nginx: fix multiple CVEs
-Date: Tue, 21 Apr 2026 11:27:56 +0530
-Message-ID: <20260421055757.9383-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.50.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=kk41D1C8;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=85710dc008=zeming.liu@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63L4GT8b308034
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 07:10:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=MtAjg8mZ9fVYdn2RTHU5
+	xpuqyd6kJDsXUziaUFmHrYI=; b=kk41D1C8ldwSjuNDKY+T7Xgwhnj3tGYQCG/6
+	z9vl7yN0/nLKkkocsrGuRzjmeJeoZOvv7dRu3s/G3IOq6D30UU/t96kUYJTEbg+H
+	M7RliUXUwML55WTVZJTfrUlAZ2QdMjHmcmDGZg0ES5QSsgZVOCcK8arMvP3F0f6q
+	if6Krk0ApNyhXec9wfspUyEIEbimEmexX44XDwJW3li/9F3qz4WogJsF1gaC0iah
+	SraQ8bZr+lIBmU1C6SUgjYsXu2h4cDlHQ8+t5gn1k0/h4UkQSLKWpbCd6A5bwAYG
+	s1nWXsZz5HdfZKsFeodFAwkpMj3QiWTT+SerOxpBhRIdi+9z2w==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dky5yb21h-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 07:10:54 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Tue, 21 Apr 2026 00:10:53 -0700
+Received: from pek-lpgtest20.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Tue, 21 Apr 2026 00:10:52 -0700
+From: Zeming LIU <zeming.liu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][master][PATCH] tbb: Add ptest support
+Date: Tue, 21 Apr 2026 15:10:51 +0800
+Message-ID: <20260421071052.2385333-1-zeming.liu@windriver.com>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDA2OCBTYWx0ZWRfX6baLKS+JL1pC
+ 0gqgqgjnUCmii9SE62AaGaBbAMr1wX+PCt2WB3Ove7ye6Hn4nsyrMq1XqthSpNTZoh8pmzu2kHM
+ XLQWF0loj2dmvMXtcC65v3dm23VU7NRbNQSntKaP6bAImC2YWMEZ2NsjX1Z9RzfXMr8qyv30P2o
+ F7Zhi3ER9oQdcLTR+3IKp5Zq6hFDvTSYNYf0dlVYSP1CzLaVZS75ii803TG8xGNiANq5FBYC+rG
+ det3Fbq8R01ABVCIYpxAhtWacVdJdp/8BNbnFFUTVn1A3HujiKZb3MGqKP7IrFEJmmYaUAXYuNW
+ bJJ+cZ9ADYt9NxYpJCqNnnYYjvNX9wmYZ5aaawyNPYZpb3PwXJh36oh8pWI4H+uD0cwBcAc+pFg
+ G9oXogw6IvNtF/H6WHJ+6fIVbFNE1T43ZlmRzJnODh1SNxzORzUYlGOOxx/R2MgCE5Rtr+serKw
+ 4O8U8sED6HjJui+adPA==
+X-Proofpoint-GUID: I4L117vKNzQD6H1t9uVcGYFTj-UuHGoU
+X-Proofpoint-ORIG-GUID: I4L117vKNzQD6H1t9uVcGYFTj-UuHGoU
+X-Authority-Analysis: v=2.4 cv=Bp+tB4X5 c=1 sm=1 tr=0 ts=69e722fe cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=klDOsUkWDRETUCZYPvoE:22 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
+ a=5u2F3MsDlSJzaU-EJnQA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-04-21_01,2026-04-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 bulkscore=0 phishscore=0 impostorscore=0
+ malwarescore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604070000
+ definitions=main-2604210068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 05:58:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126523
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 07:11:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126524
 
-Pick up patch from NVD report.
+Test result:
+root@qemux86-64:/usr/lib/tbb/ptest# ptest-runner tbb
+START: ptest-runner
+2026-04-21T06:14
+BEGIN: /usr/lib/tbb/ptest
+PASS: test_tick_count
+PASS: test_allocators
+PASS: test_arena_priorities
+PASS: test_dynamic_link
+PASS: test_collaborative_call_once
+PASS: test_concurrent_lru_cache
+PASS: test_concurrent_unordered_map
+PASS: test_concurrent_unordered_set
+PASS: test_concurrent_map
+PASS: test_concurrent_set
+PASS: test_concurrent_priority_queue
+PASS: test_partitioner
+PASS: test_parallel_for
+PASS: test_parallel_for_each
+PASS: test_parallel_reduce
+PASS: test_parallel_sort
+PASS: test_parallel_invoke
+PASS: test_parallel_scan
+PASS: test_parallel_pipeline
+PASS: test_eh_algorithms
+PASS: test_blocked_range
+PASS: test_concurrent_vector
+PASS: test_task_group
+PASS: test_concurrent_hash_map
+PASS: test_task_arena
+PASS: test_parallel_phase
+PASS: test_enumerable_thread_specific
+PASS: test_concurrent_queue
+PASS: test_resumable_tasks
+PASS: test_mutex
+PASS: test_function_node
+PASS: test_multifunction_node
+PASS: test_broadcast_node
+PASS: test_buffer_node
+PASS: test_composite_node
+PASS: test_continue_node
+PASS: test_eh_flow_graph
+PASS: test_flow_graph
+PASS: test_flow_graph_priorities
+PASS: test_flow_graph_whitebox
+PASS: test_indexer_node
+PASS: test_join_node
+PASS: test_join_node_key_matching
+PASS: test_join_node_key_matching_n_args
+PASS: test_join_node_msg_key_matching
+PASS: test_join_node_msg_key_matching_n_args
+PASS: test_join_node_preview
+PASS: test_limiter_node
+PASS: test_priority_queue_node
+PASS: test_queue_node
+PASS: test_sequencer_node
+PASS: test_split_node
+PASS: test_tagged_msg
+PASS: test_overwrite_node
+PASS: test_write_once_node
+PASS: test_async_node
+PASS: test_input_node
+PASS: test_profiling
+PASS: test_concurrent_queue_whitebox
+PASS: test_intrusive_list
+PASS: test_semaphore
+PASS: test_environment_whitebox
+PASS: test_hw_concurrency
+PASS: test_eh_thread
+PASS: test_tbb_version
+PASS: test_global_control
+PASS: test_task
+PASS: test_concurrent_monitor
+PASS: test_scheduler_mix
+PASS: test_handle_perror
+PASS: test_arena_constraints
+PASS: test_tbbbind
+PASS: test_tbb_fork
+PASS: test_tbb_header
+PASS: test_openmp
+PASS: conformance_tick_count
+PASS: conformance_allocators
+PASS: conformance_mutex
+PASS: conformance_task_group
+PASS: conformance_task_group_context
+PASS: conformance_task_arena
+PASS: conformance_collaborative_call_once
+PASS: conformance_concurrent_lru_cache
+PASS: conformance_concurrent_unordered_map
+PASS: conformance_concurrent_unordered_set
+PASS: conformance_concurrent_map
+PASS: conformance_concurrent_set
+PASS: conformance_concurrent_priority_queue
+PASS: conformance_parallel_for
+PASS: conformance_parallel_for_each
+PASS: conformance_parallel_reduce
+PASS: conformance_parallel_scan
+PASS: conformance_parallel_sort
+PASS: conformance_parallel_pipeline
+PASS: conformance_parallel_invoke
+PASS: conformance_blocked_range
+PASS: conformance_blocked_range2d
+PASS: conformance_blocked_range3d
+PASS: conformance_blocked_nd_range
+PASS: conformance_concurrent_vector
+PASS: conformance_global_control
+PASS: conformance_concurrent_hash_map
+PASS: conformance_enumerable_thread_specific
+PASS: conformance_combinable
+PASS: conformance_concurrent_queue
+PASS: conformance_resumable_tasks
+PASS: conformance_version
+PASS: conformance_function_node
+PASS: conformance_multifunction_node
+PASS: conformance_input_node
+PASS: conformance_continue_node
+PASS: conformance_async_node
+PASS: conformance_overwrite_node
+PASS: conformance_write_once_node
+PASS: conformance_buffer_node
+PASS: conformance_queue_node
+PASS: conformance_priority_queue_node
+PASS: conformance_sequencer_node
+PASS: conformance_limiter_node
+PASS: conformance_broadcast_node
+PASS: conformance_composite_node
+PASS: conformance_indexer_node
+PASS: conformance_split_node
+PASS: conformance_join_node
+PASS: conformance_graph
+PASS: conformance_arena_constraints
+PASS: test_scalable_allocator
+PASS: test_malloc_pools
+PASS: test_malloc_init_shutdown
+PASS: test_malloc_regression
+PASS: test_malloc_shutdown_hang
+PASS: test_malloc_compliance
+PASS: test_malloc_used_by_lib
+PASS: test_malloc_lib_unload
+PASS: test_malloc_pure_c
+PASS: test_malloc_whitebox
+PASS: test_malloc_atexit
+PASS: test_malloc_overload
+PASS: test_malloc_overload_disable
+PASS: test_malloc_new_handler
+DURATION: 143
+END: /usr/lib/tbb/ptest
+2026-04-21T06:16
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
-More details :
-[1]: https://nvd.nist.gov/vuln/detail/CVE-2026-27651
-[2]: https://nvd.nist.gov/vuln/detail/CVE-2026-27654
-[3]: https://nvd.nist.gov/vuln/detail/CVE-2026-28753
+Note:
+The test is executed on qemu with kvm and qemuparams="-m 2048",
+as tbb ptest is thread/mem consuming,  the tbb ptests will fail
+or timeout with limited resource.
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+Signed-off-by: Zeming LIU <zeming.liu@windriver.com>
 ---
- .../nginx/nginx-1.24.0/CVE-2026-27651.patch   | 34 +++++++
- .../nginx/nginx-1.24.0/CVE-2026-27654.patch   | 81 ++++++++++++++++
- .../nginx/nginx-1.24.0/CVE-2026-28753.patch   | 93 +++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.24.0.bb       |  3 +
- 4 files changed, 211 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27651.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27654.patch
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28753.patch
+ .../include/ptest-packagelists-meta-oe.inc     |  1 +
+ meta-oe/recipes-support/tbb/files/run-ptest    |  3 +++
+ meta-oe/recipes-support/tbb/tbb_2022.3.0.bb    | 18 ++++++++++++++++--
+ 3 files changed, 20 insertions(+), 2 deletions(-)
+ create mode 100755 meta-oe/recipes-support/tbb/files/run-ptest
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27651.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27651.patch
-new file mode 100644
-index 0000000000..b639b1a158
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index b764d5dd58..528ce16191 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -80,6 +80,7 @@ PTESTS_SLOW_META_OE = "\
+     postgresql \
+     re2 \
+     rocksdb \
++    tbb \
+ "
+ PTESTS_SLOW_META_OE:append:x86 = " kernel-selftest"
+ PTESTS_SLOW_META_OE:append:x86-64 = " kernel-selftest"
+diff --git a/meta-oe/recipes-support/tbb/files/run-ptest b/meta-oe/recipes-support/tbb/files/run-ptest
+new file mode 100755
+index 0000000000..8bd5fd1efb
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27651.patch
-@@ -0,0 +1,34 @@
-+From 4f32484e99671d107d0d6c27c0c674f528d8c9ca Mon Sep 17 00:00:00 2001
-+From: Sergey Kandaurov <pluknet@nginx.com>
-+Date: Wed, 18 Mar 2026 16:39:37 +0400
-+Subject: [PATCH] Mail: fixed clearing s->passwd in auth http requests.
++++ b/meta-oe/recipes-support/tbb/files/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
-+Previously, it was not properly cleared retaining length as part of
-+authenticating with CRAM-MD5 and APOP methods that expect to receive
-+password in auth response.  This resulted in null pointer dereference
-+and worker process crash in subsequent auth attempts with CRAM-MD5.
-+
-+Reported by Arkadi Vainbrand.
-+
-+(cherry picked from commit 0f71dd8ea94ab8c123413b2e465be12a35392e9c)
-+
-+CVE: CVE-2026-27651
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/0f71dd8ea94ab8c123413b2e465be12a35392e9c]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/mail/ngx_mail_auth_http_module.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/mail/ngx_mail_auth_http_module.c b/src/mail/ngx_mail_auth_http_module.c
-+index 27f64b92e..d931183ae 100644
-+--- a/src/mail/ngx_mail_auth_http_module.c
-++++ b/src/mail/ngx_mail_auth_http_module.c
-+@@ -1325,7 +1325,7 @@ ngx_mail_auth_http_create_request(ngx_mail_session_t *s, ngx_pool_t *pool,
-+         b->last = ngx_cpymem(b->last, "Auth-Salt: ", sizeof("Auth-Salt: ") - 1);
-+         b->last = ngx_copy(b->last, s->salt.data, s->salt.len);
-+ 
-+-        s->passwd.data = NULL;
-++        ngx_str_null(&s->passwd);
-+     }
-+ 
-+     b->last = ngx_cpymem(b->last, "Auth-Protocol: ",
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27654.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27654.patch
-new file mode 100644
-index 0000000000..b85c6621e9
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-27654.patch
-@@ -0,0 +1,81 @@
-+From be39034fa93a4d44b52de9b7a463754eda56e712 Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Mon, 16 Mar 2026 20:13:03 +0400
-+Subject: [PATCH] Dav: destination length validation for COPY and MOVE.
-+
-+Previously, when alias was used in a location with Dav COPY or MOVE
-+enabled, and the destination URI was shorter than the alias, integer
-+underflow could happen in ngx_http_map_uri_to_path(), which could
-+result in heap buffer overwrite, followed by a possible segfault.
-+With some implementations of memcpy(), the segfault could be avoided
-+and the overwrite could result in a change of the source or destination
-+file names to be outside of the location root.
-+
-+Reported by Calif.io in collaboration with Claude and Anthropic Research.
-+
-+(cherry picked from commit a1d18284e0a173c4ef2b28425535d0f640ae0a82)
-+
-+CVE: CVE-2026-27654
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/a1d18284e0a173c4ef2b28425535d0f640ae0a82]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/http/modules/ngx_http_dav_module.c | 39 +++++++++++++++++---------
-+ 1 file changed, 26 insertions(+), 13 deletions(-)
-+
-+diff --git a/src/http/modules/ngx_http_dav_module.c b/src/http/modules/ngx_http_dav_module.c
-+index cfb98929e..4619b139a 100644
-+--- a/src/http/modules/ngx_http_dav_module.c
-++++ b/src/http/modules/ngx_http_dav_module.c
-+@@ -535,19 +535,20 @@ ngx_http_dav_mkcol_handler(ngx_http_request_t *r, ngx_http_dav_loc_conf_t *dlcf)
-+ static ngx_int_t
-+ ngx_http_dav_copy_move_handler(ngx_http_request_t *r)
-+ {
-+-    u_char                   *p, *host, *last, ch;
-+-    size_t                    len, root;
-+-    ngx_err_t                 err;
-+-    ngx_int_t                 rc, depth;
-+-    ngx_uint_t                overwrite, slash, dir, flags;
-+-    ngx_str_t                 path, uri, duri, args;
-+-    ngx_tree_ctx_t            tree;
-+-    ngx_copy_file_t           cf;
-+-    ngx_file_info_t           fi;
-+-    ngx_table_elt_t          *dest, *over;
-+-    ngx_ext_rename_file_t     ext;
-+-    ngx_http_dav_copy_ctx_t   copy;
-+-    ngx_http_dav_loc_conf_t  *dlcf;
-++    u_char                    *p, *host, *last, ch;
-++    size_t                     len, root;
-++    ngx_err_t                  err;
-++    ngx_int_t                  rc, depth;
-++    ngx_uint_t                 overwrite, slash, dir, flags;
-++    ngx_str_t                  path, uri, duri, args;
-++    ngx_tree_ctx_t             tree;
-++    ngx_copy_file_t            cf;
-++    ngx_file_info_t            fi;
-++    ngx_table_elt_t           *dest, *over;
-++    ngx_ext_rename_file_t      ext;
-++    ngx_http_dav_copy_ctx_t    copy;
-++    ngx_http_dav_loc_conf_t   *dlcf;
-++    ngx_http_core_loc_conf_t  *clcf;
-+ 
-+     if (r->headers_in.content_length_n > 0 || r->headers_in.chunked) {
-+         ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-+@@ -644,6 +645,18 @@ destination_done:
-+         return NGX_HTTP_CONFLICT;
-+     }
-+ 
-++    clcf = ngx_http_get_module_loc_conf(r, ngx_http_core_module);
-++
-++    if (clcf->alias
-++        && clcf->alias != NGX_MAX_SIZE_T_VALUE
-++        && duri.len < clcf->alias)
-++    {
-++        ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-++                      "client sent invalid \"Destination\" header: \"%V\"",
-++                      &dest->value);
-++        return NGX_HTTP_BAD_REQUEST;
-++    }
-++
-+     depth = ngx_http_dav_depth(r, NGX_HTTP_DAV_INFINITY_DEPTH);
-+ 
-+     if (depth != NGX_HTTP_DAV_INFINITY_DEPTH) {
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28753.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28753.patch
-new file mode 100644
-index 0000000000..de27ffad2a
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-28753.patch
-@@ -0,0 +1,93 @@
-+From 7e705808a8568a091a8ecf418ed9f77914304fcc Mon Sep 17 00:00:00 2001
-+From: Roman Arutyunyan <arut@nginx.com>
-+Date: Thu, 26 Feb 2026 11:52:53 +0400
-+Subject: [PATCH] Mail: host validation.
-+
-+Now host name resolved from client address is validated to only contain
-+the characters specified in RFC 1034, Section 3.5.  The validation allows
-+to avoid injections when using the resolved host name in auth_http and
-+smtp proxy.
-+
-+Reported by Asim Viladi Oglu Manizada, Colin Warren,
-+Xiao Liu (Yunnan University), Yuan Tan (UC Riverside), and
-+Bird Liu (Lanzhou University).
-+
-+(cherry picked from commit 6a8513761fb327f67fcc6cfcf1ad216887e2589f)
-+
-+CVE: CVE-2026-28753
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6a8513761fb327f67fcc6cfcf1ad216887e2589f]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/mail/ngx_mail_smtp_handler.c | 45 ++++++++++++++++++++++++++++++++
-+ 1 file changed, 45 insertions(+)
-+
-+diff --git a/src/mail/ngx_mail_smtp_handler.c b/src/mail/ngx_mail_smtp_handler.c
-+index e68ceedfd..e477741c8 100644
-+--- a/src/mail/ngx_mail_smtp_handler.c
-++++ b/src/mail/ngx_mail_smtp_handler.c
-+@@ -13,6 +13,7 @@
-+ 
-+ 
-+ static void ngx_mail_smtp_resolve_addr_handler(ngx_resolver_ctx_t *ctx);
-++static ngx_int_t ngx_mail_smtp_validate_host(ngx_str_t *name);
-+ static void ngx_mail_smtp_resolve_name(ngx_event_t *rev);
-+ static void ngx_mail_smtp_resolve_name_handler(ngx_resolver_ctx_t *ctx);
-+ static void ngx_mail_smtp_block_reading(ngx_event_t *rev);
-+@@ -127,6 +128,20 @@ ngx_mail_smtp_resolve_addr_handler(ngx_resolver_ctx_t *ctx)
-+         return;
-+     }
-+ 
-++    if (ngx_mail_smtp_validate_host(&ctx->name) != NGX_OK) {
-++        ngx_log_error(NGX_LOG_ERR, c->log, 0,
-++                      "%V resolved to invalid host name \"%V\"",
-++                      &c->addr_text, &ctx->name);
-++
-++        s->host = smtp_tempunavail;
-++
-++        ngx_resolve_addr_done(ctx);
-++
-++        ngx_mail_smtp_greeting(s, s->connection);
-++
-++        return;
-++    }
-++
-+     c->log->action = "in resolving client hostname";
-+ 
-+     s->host.data = ngx_pstrdup(c->pool, &ctx->name);
-+@@ -149,6 +164,36 @@ ngx_mail_smtp_resolve_addr_handler(ngx_resolver_ctx_t *ctx)
-+ }
-+ 
-+ 
-++static ngx_int_t
-++ngx_mail_smtp_validate_host(ngx_str_t *name)
-++{
-++    u_char      ch;
-++    ngx_uint_t  i;
-++
-++    if (name->len == 0) {
-++        return NGX_DECLINED;
-++    }
-++
-++    for (i = 0; i < name->len; i++) {
-++        ch = name->data[i];
-++
-++        /* allow only characters from RFC 1034, Section 3.5 */
-++
-++        if ((ch >= 'a' && ch <= 'z')
-++            || (ch >= 'A' && ch <= 'Z')
-++            || (ch >= '0' && ch <= '9')
-++            || ch == '-' || ch == '.')
-++        {
-++            continue;
-++        }
-++
-++        return NGX_DECLINED;
-++    }
-++
-++    return NGX_OK;
-++}
-++
-++
-+ static void
-+ ngx_mail_smtp_resolve_name(ngx_event_t *rev)
-+ {
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-index c843b67975..a8bbfae9f5 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
- SRC_URI:append = " \
- 		  file://CVE-2026-27784.patch \
- 		  file://CVE-2026-28755.patch \
-+		  file://CVE-2026-27651.patch \
-+		  file://CVE-2026-27654.patch \
-+		  file://CVE-2026-28753.patch \
- 		"
++ctest --force-new-ctest-process | sed -u 's/\*\*\*/   /g' | awk '/Test +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
+diff --git a/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
+index 440b6e0f46..187c2061e5 100644
+--- a/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
++++ b/meta-oe/recipes-support/tbb/tbb_2022.3.0.bb
+@@ -15,20 +15,23 @@ PE = "1"
+ BRANCH = "onetbb_2022"
+ SRCREV = "f1862f38f83568d96e814e469ab61f88336cc595"
+ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
++           file://run-ptest \
+           "
  
- SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+ LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' -Wl,--undefined-version', '', d)}"
+ 
+-inherit cmake pkgconfig
++inherit cmake pkgconfig ptest
+ 
+ # test build fails, error: 'mallinfo mallinfo()' is deprecated
+ EXTRA_OECMAKE += " \
+-                    -DTBB_TEST=OFF \
++                    -DTBB_TEST=${@bb.utils.contains('PTEST_ENABLED', '1', 'ON', 'OFF', d)} \
+                     -DCMAKE_BUILD_TYPE=Release \
+                     -DTBB_STRICT=OFF \
+                     -DTBB_DISABLE_HWLOC_AUTOMATIC_SEARCH=OFF \
+                 "
+ 
++RDEPENDS:${PN}-ptest += "cmake"
++
+ # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
+ # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: /tmp/lto-llvm-264bc2.o: can't link soft-float modules with double-float modules
+ # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: failed to merge target specific data of file /tmp/lto-llvm-264bc2.o
+@@ -60,5 +63,16 @@ do_install:append:class-target() {
+     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/TBB/TBBTargets.cmake
+ }
+ 
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}
++    install ${B}/test/CTestTestfile.cmake ${D}${PTEST_PATH}/
++    cp -rf ${B}/gnu* ${D}${PTEST_PATH}
++    rm -rf ${D}${PTEST_PATH}/gnu*/libtbb*
++    rm -rf ${D}${PTEST_PATH}/gnu*/*.sh
++    sed -i -e s#${S}#${PTEST_PATH}#g \
++           -e s#${B}#${PTEST_PATH}#g \
++            ${D}${PTEST_PATH}/CTestTestfile.cmake
++}
++
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.50.1
+2.51.2
 
 
