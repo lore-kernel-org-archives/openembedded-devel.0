@@ -1,149 +1,138 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <hjadon@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EDA05F327C9
-	for <webhook@archiver.kernel.org>; Tue, 21 Apr 2026 08:41:07 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17374.1776760773911471801
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E89EF8925F
+	for <webhook@archiver.kernel.org>; Tue, 21 Apr 2026 11:18:00 +0000 (UTC)
+Received: from alln-iport-6.cisco.com (alln-iport-6.cisco.com [173.37.142.93])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23834.1776770278865839306
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Apr 2026 01:39:33 -0700
+ Tue, 21 Apr 2026 04:17:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=dW8xn133;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Yzj7YGlD;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: bartosz.golaszewski@oss.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63L6ePaA3574148
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 08:22:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=xHPUgMgoPBcw4v54LNQiU4BVidoAqCiuIiB
-	Q6Y5pMBI=; b=dW8xn13313aZb0HGhXTFejbQA2cR9uBhgTUJXZed05MaIO6oOrZ
-	+xRomaRg1XKKcomYo7xbmK6TfTnNpLPVpKLJ121qW0U0BTQevzLuax1rZe/s/Kkd
-	46HVvNdniBULbaywWp5AwXJPRKrybTaHhOeCe9+KggVeCOEv0lgH9vCvOtIJIM3Z
-	+Zye/q59e/U4FbMhi6gRNws4SC+KuCOe2sOjWH3b3bhwJl+zy+c3UteNUyfSehEs
-	453qoyV8tHzAddZnmSlu/lBUIHMfyQAABaLQq6frWTUW+mupQU7c8uVcmeLHcSd3
-	xUWwr4DgB3i9MNEKtLTnwF65rviGJCHUs/w==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dp465gcsd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 08:22:54 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-50d890580e1so15729251cf.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 01:22:54 -0700 (PDT)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=LVnxB2Q8;
+ spf=pass (domain: cisco.com, ip: 173.37.142.93, mailfrom: hjadon@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1776759774; x=1777364574; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xHPUgMgoPBcw4v54LNQiU4BVidoAqCiuIiBQ6Y5pMBI=;
-        b=Yzj7YGlDuMs525FwtrHQDtggiyhzaVv1FfDwSpdQ0/n4caWU5/ar1FcpUTTSrBWIMa
-         1m73EEZ2YKaBkjsN3EXBHmUcQ4qgWXTnNl92/mBbs+WmNTiU1iEAbCL3e31/T+/7MpGm
-         eqF7C5/hxbDT59XhEQKI1t53Tb5SQFbGOUPQ1ZX41SwQOxmGr0BluwK+u1FgHHtxBNFY
-         cufyGRIfBEFcuwBbR7UsC8Wj1gZt0QDi1sLqNdsKrCmOtFbiT/Sdeq9t0EJAnSmWS78o
-         X/Fq6ESL4TyEDq76mU3Y+b1PkbQay7sGOaEtnmQ1UxNES5ntZ8sL2U6JSPkWi/DZwQeO
-         NHDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776759774; x=1777364574;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xHPUgMgoPBcw4v54LNQiU4BVidoAqCiuIiBQ6Y5pMBI=;
-        b=Q5ah6z5omXJ0wTu4zT+tJ5aHVnv/bRpEOvVSomVaxXAmLBcFiprGEwLtcUI1d2EYe0
-         z3TZodHRbX1TdkF3VvbQmkkKQjH+pWvHbZBs7OUMFw8LZ41p2qTcBqILCrstcFp3L5nD
-         AXlrJsTawl95CCS+IRSuNboi+tH3yQ8vlswVFLVRSvHtgjHsuz8vba3EFZCSoPxn18nG
-         IRGaAQvAIEZ6chLNBUrY3HkvdIrqvCqiKTWodaLNw7wt/4Pt2ZhoIKV3hw+R42mmKjt2
-         mUh4TCv8+7uIU7BZLQrNvIzaDIJQWsmKhpjANy8BaPvpe4l7wPTyK6y0j+NdKQrrPqUJ
-         Qs2A==
-X-Forwarded-Encrypted: i=1; AFNElJ81UU6Aoc9lEDfAV845uZ6xw5L6B4laXdeV4ZmDUDPEl8f9H3SzqWdQ1V51vIWN0A2OI3skgjpY3sXoR4gxSc0nzwI=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YyUbIUJZ13es20K6XYABmh91xnIW3BFbBIU0v3xOY6NcU6xQtbK
-	EJ3S5MTyvxY4A9dsfAVGwNJQ0tNz3Lv4rKLCEOGvjN/PwuHJlmO0SBQHVz84kERDrCuLb+pUbGG
-	D4bqLWCGqDG2Vhqzao/LBqiCd26+UPksCblQaX++3Co1cw4+LyMJAbebjH9ndpfHvxCeALiiSpl
-	KegUKOFmUz
-X-Gm-Gg: AeBDieude2vuDJzTIdqfu3mTAb/JVd8f+7/1nDNSRvWjiKVdJ9HXp/Qaeo5ZdoC+Kah
-	FS3jKh1GkqOG4pHlRJVhXzRkw6gBtqjLJKG5z5PzmFF9sNSh+EzfB48K2js9RsAdm1Wk8jju/48
-	+az/+2K/CBzvv6dFEV9pLXhP6mMp24gL3dbSD9agZNdqEHVlUn+/5sCrwgvMLlOVkcRHgHw86Ku
-	VOtGiSbJo3ClibQ+rV4JcyY6RjvkB8lYx+lgj7u7Cv+00jeKlendKyRYQvFUc5UP5kL/5P9h4FZ
-	bNU/BQfE4XFK3U7yh2SEA+WnE2EdJ3lOE6MeLpdDhAAgigMIDOF7GKNaaUqouMrAldxrj0s7aJe
-	AwoHLH2wDVG8RNLH5r1oTm0yyfRE6chWWtXIZHUpVHRlg7ISxyi3OdejPWgPa
-X-Received: by 2002:ac8:5f48:0:b0:50d:882e:c5ae with SMTP id d75a77b69052e-50e36ebf6bamr248979501cf.44.1776759773880;
-        Tue, 21 Apr 2026 01:22:53 -0700 (PDT)
-X-Received: by 2002:ac8:5f48:0:b0:50d:882e:c5ae with SMTP id d75a77b69052e-50e36ebf6bamr248979261cf.44.1776759773331;
-        Tue, 21 Apr 2026 01:22:53 -0700 (PDT)
-Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:7375:bced:4215:2361])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fb755938sm144887305e9.3.2026.04.21.01.22.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Apr 2026 01:22:52 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
-        openembedded-devel@lists.openembedded.org
-Cc: brgl@kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: [meta-python][PATCH] python3-pyfuse3: new recipe
-Date: Tue, 21 Apr 2026 10:22:47 +0200
-Message-ID: <20260421082247.12962-1-bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+  d=cisco.com; i=@cisco.com; l=2061; q=dns/txt;
+  s=iport01; t=1776770278; x=1777979878;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=ZAEB7Q+jeB4CnLItll+fuOKcXxJjrXdlICG/HVWvlzE=;
+  b=LVnxB2Q8ZOyzBBS5s9t4+Ndc0srt8xje3ZCJSJeq8CzgkPyHISWz5LWU
+   u6Awkm2u5W7DrgWpBegZDQw5jT8Zm3XnCKUgRcEZmUMsTUwHoN7Sopktb
+   vxt6U34SzbYyTD7F1Wn5y8kuLxi2yB8/Knc9TT2ZuFMx7P+y4pxObYwQB
+   Z6kIbNqGS+XqNnmi8ESqilu2lo0jADAPKl+6cBpLb2IXgiNu7vqpy8LF2
+   GHcou+Tlhyr8K2HHx7fziX+LqZ1X0mWqth2lvO3y/faPBkIqP8qR76XZ/
+   1ht36tA2K/B9hvLzoUdEBrJzqy7qTSsSoZ/WtQzTNavsDAqwJHVBF56vO
+   w==;
+X-CSE-ConnectionGUID: iAL9oGVvSHKheYU9XXo9aw==
+X-CSE-MsgGUID: IDMEHhgXQkuSK4shmZ6GUg==
+X-IPAS-Result: =?us-ascii?q?A0CyAwCqW+dp/4r/Ja1aglmCV3FeQ0mTWgGOV5I2gX8PA?=
+ =?us-ascii?q?QEBDzcaBAEBhQaNLgImNQgOAQIEAQEBAQMCAwEBAQEBAQEBAQEBCwEBBQEBA?=
+ =?us-ascii?q?QIBBwWBDhOGXIZdNgEYAS0wUQtEgwIBgjoDNgOxVIIsgQGDKAGBU9hHDYJSA?=
+ =?us-ascii?q?QsUAYE4hT+CeYUjdIR6JxsbgXKEfYIfgnGFdwSCIoEOgX6FAAGCF4ViSIEeA?=
+ =?us-ascii?q?1ksAVUTDQoLBwWBZgM1EioVbjIdgSM+F4EMGwcFgUuENm1qgQuDMYE3AwsYD?=
+ =?us-ascii?q?UgRLDcUGwQ+bgeKFiEQgiqBDgGWQBOReKAdcQoog3SMHo8+hXwaM6prLphYk?=
+ =?us-ascii?q?hKSR4RogWoBOYFZcBWDIglKGQ/WeyYyAjsCBwIHDQMLk2UBAQ?=
+IronPort-Data: A9a23:OGjyramYpF+x0IgtXyRM7eno5gzXJ0RdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJOCjuOO/eNNGb8cth3aIqw8UsCsZDdz94xHgJsqXpmQ1tH+JHPbTi7wugcHM8zwunrFh8PA
+ xA2M4GYRCwMZiaC4E/raf658SUUOZigHtLUEPTDNj16WThqQSIgjQMLs+Mii+aEu/Dha++2k
+ Y20+Za31GONgWYubDpIsfvb8XuDgdyr0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSb
+ /rD1ryw4lTC9B4rDN6/+p6jGqHdauePVeQmoiM+t5mK2nCulARrukoIHKZ0hXNsttm8t4sZJ
+ OOhGnCHYVxB0qXkwIzxWvTDes10FfUuFLTveRBTvSEPpqHLWyOE/hlgMK05FYwx3rdwLl9Qz
+ tw7KD08U0Gzt+Xnya3uH4GAhux7RCXqFJkUtnclyXTSCuwrBMiaBa7L/tRfmjw3g6iiH96HO
+ JFfMmUpNkmdJUQUaj/7C7pm9Ausrnn9ejFfrnqepLE85C7YywkZPL3Fb4CMIoHRHpgN9qqej
+ kPq2knZAh4qDd+C8hnZ6XKptLHgoCyuDer+E5X9rJaGmma7wXQeDhATX1a3rfS1z0KzRd9bA
+ 0gV4TY1668q+UqmS9PwUxG1rDiDpBF0ZjZLO/cx5AfIzu/f5ByUQzBdCDVAc9ch8sQxQFTGy
+ 2O0oj8gPhQ32JX9dJ5X3u78Qe+aUcTNEVI/WA==
+IronPort-HdrOrdr: A9a23:7/MHhKhae72RjlFyhtbJALAHN3BQXuwji2hC6mlwRA09TyVXra
+ +TdZMgpHrJYVkqOU3I9ersBEDiewK/yXcK2+ks1N6ZNWGM0ldAR7sN0WKN+VHd8lXFh41g/J
+ YlVbRiA9vtClU/p8P77A6kV+sE+rC8gcSVbSO09QYKcemsAJsQiDtENg==
+X-Talos-CUID: =?us-ascii?q?9a23=3AaNB+C2vB+2fi/VH1NhVJnzy16IskW1mMy1juPXS?=
+ =?us-ascii?q?YKmZkeYDEeW+Xqap7xp8=3D?=
+X-Talos-MUID: 9a23:Q5XoYgs/NW5T70E7Ic2npR1HGedo7JSXC102sskdu8y2awNNNGLI
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.23,191,1770595200"; 
+   d="scan'208";a="721053350"
+Received: from rcdn-l-core-01.cisco.com ([173.37.255.138])
+  by alln-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 21 Apr 2026 11:17:58 +0000
+Received: from sjc-ads-21441.cisco.com (sjc-ads-21441.cisco.com [10.128.164.182])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by rcdn-l-core-01.cisco.com (Postfix) with ESMTPS id ED7F1180001C7;
+	Tue, 21 Apr 2026 11:17:57 +0000 (GMT)
+Received: by sjc-ads-21441.cisco.com (Postfix, from userid 1879343)
+	id 79D1ECC1288; Tue, 21 Apr 2026 04:17:57 -0700 (PDT)
+From: "Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hjadon@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: vchavda@cisco.com
+Subject: [meta-python] [scarthgap] [PATCH] python3-tornado: set CVE_PRODUCT
+Date: Tue, 21 Apr 2026 04:17:51 -0700
+Message-Id: <20260421111751.2509916-1-hjadon@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIxMDA4MCBTYWx0ZWRfX2KGDTbeBYA89
- qdSmkvr/nZYPH/dGM4nuKP3g2po8vQ8rQp8AiFAaT4KceQMM3kJb7aJs88yc9SaT78RylWJPAwb
- r66v2dibkxwoSBqmdte2mvyMpBJ1gls1ojkDVg6MwDuDh0d0VoQtFOLjrlyTs+NxL+djNbHvg5Z
- Y2VAlk9KG9wPAvgR1jrDWS6IQhnKdXoUJIqb8oIIG2N/zptkzGNL29ylHauCRfTXJnp3xDPwYlc
- 2om+Ij/5QMS8GNyoozUvy45lKqAyIZj8KudTA5sTQ5cAFCwd2+lb99REi8UgjUQb+xbobELsiTn
- k254ZDEGTrtGoMcdpnsXIymsPspKeRs37VXJuuLTHgaEgm8j5zHDyjEKfWIpHQBe74L2+bgCpwf
- vTzt1PM4S1RW7pgxKLYtj+I3pQeGn9pD8PKLzelX7rBF0XytaRBrU7rTiU7XeneLkkU06x8z3R2
- debhzUQreSz8KmAPqMQ==
-X-Proofpoint-ORIG-GUID: jdFZ_bb_wpN_aB5zutB7gnKvLLyu45UU
-X-Authority-Analysis: v=2.4 cv=YOSvDxGx c=1 sm=1 tr=0 ts=69e733de cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8 a=qZtxwWahQDo9n0FDmtUA:9
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-GUID: jdFZ_bb_wpN_aB5zutB7gnKvLLyu45UU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-21_01,2026-04-20_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 bulkscore=0 adultscore=0 clxscore=1015
- spamscore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604070000 definitions=main-2604210080
 Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: ANONYMOUS;sjc-ads-21441.cisco.com [10.128.164.182];TLSv1.3;TLS_AES_256_GCM_SHA384;256
+X-Outbound-SMTP-Client: 10.128.164.182, sjc-ads-21441.cisco.com
+X-Outbound-Node: rcdn-l-core-01.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 08:41:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126528
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 11:18:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126529
 
-Add a recipe for pyfuse3 - a python package providing high-level bindings
-to libfuse3.
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+The default "python:tornado" CVE_PRODUCT doesn't match relevant CVEs, because
+the project's CPE is "tornadoweb:tornado".
+
+See cve db query (docmosis is an irrelevant vendor):
+
+sqlite> select * from products where PRODUCT = 'tornado';
+CVE-2012-2374|tornadoweb|tornado|||2.2|<=
+CVE-2012-2374|tornadoweb|tornado|1.0|=||
+CVE-2012-2374|tornadoweb|tornado|1.0.1|=||
+CVE-2012-2374|tornadoweb|tornado|1.1|=||
+CVE-2012-2374|tornadoweb|tornado|1.1.1|=||
+CVE-2012-2374|tornadoweb|tornado|1.2|=||
+CVE-2012-2374|tornadoweb|tornado|1.2.1|=||
+CVE-2012-2374|tornadoweb|tornado|2.0|=||
+CVE-2012-2374|tornadoweb|tornado|2.1|=||
+CVE-2012-2374|tornadoweb|tornado|2.1.1|=||
+CVE-2014-9720|tornadoweb|tornado|||3.2.2|<
+CVE-2023-25264|docmosis|tornado|||2.9.5|<
+CVE-2023-25265|docmosis|tornado|||2.9.5|<
+CVE-2023-25266|docmosis|tornado|||2.9.5|<
+CVE-2023-28370|tornadoweb|tornado|||6.3.2|<
+CVE-2024-42733|docmosis|tornado|||2.9.7|<=
+CVE-2024-52804|tornadoweb|tornado|||6.4.2|<
+CVE-2025-47287|tornadoweb|tornado|||6.5.0|<
+CVE-2025-67724|tornadoweb|tornado|||6.5.3|<
+CVE-2025-67725|tornadoweb|tornado|||6.5.3|<
+CVE-2025-67726|tornadoweb|tornado|||6.5.3|<
+
+Set the CVE_PRODUCT accordingly.
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 139cc15de304918edc0197346579162b12006faa)
+Signed-off-by: Himanshu Jadon <hjadon@cisco.com>
 ---
- .../python3-pyfuse3/python3-pyfuse3_3.4.2.bb     | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-filesystems/recipes-support/python3-pyfuse3/python3-pyfuse3_3.4.2.bb
+ meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-filesystems/recipes-support/python3-pyfuse3/python3-pyfuse3_3.4.2.bb b/meta-filesystems/recipes-support/python3-pyfuse3/python3-pyfuse3_3.4.2.bb
-new file mode 100644
-index 0000000000..8ef6780788
---- /dev/null
-+++ b/meta-filesystems/recipes-support/python3-pyfuse3/python3-pyfuse3_3.4.2.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "Python bindings for libfuse3."
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb b/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
+index 25f1b2a310..f513679b62 100644
+--- a/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_6.4.2.bb
+@@ -44,4 +44,6 @@ FILES:${PN}-test = " \
+     ${PYTHON_SITEPACKAGES_DIR}/*/test \
+ "
+ 
++CVE_PRODUCT = "tornadoweb:tornado"
 +
-+LICENSE = "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=622e3d340933e3857b7561f37a2f412b"
-+
-+inherit pypi python_setuptools_build_meta python_pep517 cython pkgconfig
-+
-+SRC_URI[sha256sum] = "0a59031969c4ba51a5ec1b67f3c5c24f641a6a3f8119a86edad56debcb9084d9"
-+
-+DEPENDS = " \
-+    fuse3 \
-+    python3-setuptools-native \
-+    python3-setuptools-scm-native \
-+"
-+
-+RDEPENDS:${PN} = "python3-trio"
+ BBCLASSEXTEND  += "native nativesdk"
 -- 
-2.47.3
+2.35.6
 
 
