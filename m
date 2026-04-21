@@ -1,177 +1,99 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60AE2F5A8B8
-	for <webhook@archiver.kernel.org>; Mon, 20 Apr 2026 19:44:46 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.2388.1776714277359397683
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 47CDDF5A8CA
+	for <webhook@archiver.kernel.org>; Tue, 21 Apr 2026 00:58:44 +0000 (UTC)
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1013.1776733123555131245
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Apr 2026 12:44:37 -0700
+ Mon, 20 Apr 2026 17:58:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=P7ixZYoi;
- spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd92.mgt.mul.t-online.de (fwd92.aul.t-online.de [10.223.144.118])
-	by mailout02.t-online.de (Postfix) with SMTP id 2AA6BF017
-	for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 21:44:35 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.160.240]) by fwd92.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wEqOx-43mTQH0; Mon, 20 Apr 2026 17:19:07 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=IaNnvxd4;
+ spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: schonm@gmail.com)
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-650789b22e3so4167334d50.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 17:58:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1776733122; x=1777337922; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mo1Gc6oh09ZB3q2kN92HF+d6YfzvZs2VZ5eHP/6+xHw=;
+        b=IaNnvxd4QWTYB2ZHYs8zbvD4JZn3ctcugotQ3ZV4sZf6lMUJiOY/uLSs45cVIvFc2k
+         5ajinW9yaLP/HD3qpCWDm5X6NQ85kT4mBHoHdGDf1dIrthYcS7EXEBI2kNxJrenBKITH
+         Gxz2RgXzj3GFfbWaOuH9MryPezD9WopmoFcyX0qZEzLnE1bkQ5cMHjRFFl8Lr7lIHUu3
+         4w2nupyrJGnsw04bsRHT6R+akISx9pnEKoAT/cXpFSmrzMnWJrpUAH5/Ktq7RM1Xvgqr
+         GTo4BmmAIYtKcof2ddGX/zES0QLwafjZKMn2wRDT+64RWWW2QD1NrOQVrtSrnGuYwUxg
+         sI6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776733122; x=1777337922;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mo1Gc6oh09ZB3q2kN92HF+d6YfzvZs2VZ5eHP/6+xHw=;
+        b=ZBRFhF8YaY6JoH7dANEH+5scepaLCmqSiuabDXsFl+S1zAnURIpewOpkdE/dSaBOeH
+         0XEKjoupC6yzksT0N/2OamvGk1cM6iC6D+DJN2VPSEDUGdbTVuaWljuSwAAzkMSJ2SoV
+         aBzvKla/locEcuR73Mie8nRnim6IiHSSjYbEx30Y7ZssIur6proKA1xHYxuumUhko4Ki
+         ww4nDT2gneYhM7C/NoNd5ruxgmYrr3os+7pET1CeMaKKykzhov8nzd+1p7Li89nr3vzc
+         p3VooAAc4PJX43AsSG8zKpwB5C4PG0sggVDnnJAeitFy9Xl3WkAmORl1KPeF8xCN9Y66
+         bLDA==
+X-Gm-Message-State: AOJu0Yych7XNPYUAtxFqpesgZoEpLgoLGCXFT/t2BlfjaSHlDJU0IxJ4
+	IcU2+ceHlPpGUylVFbf9lAlAnICkinwo/I2fK3TaFhnXzJY1Zkj1Uoi0qATU9FxI
+X-Gm-Gg: AeBDiev0Rh3FPpisKtOsKmvQojZ2n6tfDdlN7hWBbX9a3p7HU/GUXLpSbBwQJRbCCy9
+	ogPg5X7/9WuZCo4J/QIQUwEsEkP+3FGwYDJ8lDf91RqkM9ZMTtUi1s2ogL33udq2VWxSqe6xnAA
+	4I1hG+k4bIXUc4To5s/46DPkusIlaKZ1uDop6a+X69rghy6+XxhcX8KGyIYNAjz/Knn908uq0S2
+	roXwVNy8q2b0OzIR6En+pWE2r0AX5m+f2uwqe+JzDCIbqItZCJZ9IhF+wSx1dVKERkqXEILnVef
+	vH2TnpPU0sBoZuSIB5zAl6zD3c6XzFBJGWlK72A0kI8flN6R0tG+JSuDBnvSMEWRdotZMza7Tne
+	JH25R6OYzsE+7rfyP4mAUodgdUmvoTFsTePUvzzcp/RIpxgXdB4kF3sYe1cT//CsgfNA+5uxlzU
+	5HoTulYnCp30zRv2XgJoUralEg9ZE16fxWiutpK5zduIsYI1YJM0datEGY11hdZFjCLRSqtdomm
+	SEzsKbd7fT/pDgSLYQQ8MP/A/ZAyxfOMRNEdClJkJuouYuQTU1xE55X/jtGMQ==
+X-Received: by 2002:a05:690e:d49:b0:651:8944:c0de with SMTP id 956f58d0204a3-65310b9478dmr13508172d50.63.1776733122200;
+        Mon, 20 Apr 2026 17:58:42 -0700 (PDT)
+Received: from localhost.localdomain ([71.54.207.93])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-65314b26598sm6039804d50.2.2026.04.20.17.58.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Apr 2026 17:58:41 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] wireplumber: update 0.5.13 -> 0.5.14
-Date: Mon, 20 Apr 2026 17:19:01 +0200
-Message-ID: <20260420151901.162911-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.53.0
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][PATCH] webkitgtk3 update 2.50.5 -> 2.50.6
+Date: Mon, 20 Apr 2026 20:58:33 -0400
+Message-ID: <20260421005833.5976-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1776698347-44FF6A8C-6F4A2133/0/0 CLEAN NORMAL
-X-TOI-MSGID: c2424630-d234-4dc5-95f4-3d7cc732f8a5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1776714275; i=f_l_k@t-online.de;
-	bh=U/LlNrF6nI5MTEALr7go9CXcwvv35JCgTg0m2YP4jJ0=;
-	h=From:To:Subject:Date;
-	b=P7ixZYoiGKEZuIhNOtc+fQK1lAnHREZ0c3D5jdBHozXt3rSc21jPMr/nZ8SaNqSj3
-	 bjpsgTMj3TMsJkrYl7/W7ci4wKpte3DPUP6FBfRE9MTbkHe0wTb0iLdkmTUc/gOxui
-	 o95E7OzCm09mC2NgoZ3Nxhwyt6uJugCJ66z0LelY7WzjZWQFWYnSiH90uk+ZwaVyxg
-	 2sCKo6ILD6DV2Yy306HVBwxabxRiju056pCb7tuPkPdTvLHBKvFOuHxw6m8mwAitb1
-	 BiF9CBSvAycqyT/MBUYsNaSDlITYPM0uC2cq5ricu+04LiwseZjKtM7iz4YyyRT/hf
-	 EarV3yr8IV3Tg==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Apr 2026 19:44:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126521
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 00:58:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126522
 
-WirePlumber 0.5.14
-~~~~~~~~~~~~~~~~~~
+This is a bug fix release.
 
-Additions & Enhancements:
+Changelog: https://www.webkitgtk.org/2026/03/12/webkitgtk2.50.6-released.html
 
-  - Added per-device default volume configuration via the
-    ``device.routes.default-{source,sink}-volume`` property, allowing dev=
-ice-specific volume
-    defaults (e.g. a comfortable default for internal speakers or no atte=
-nuation for HDMI) (!772)
-
-  - Added Lua 5.5 support; the bundled Lua subproject wrap has also been =
-updated to 5.5.0
-    (!775, !788)
-
-  - Enhanced libcamera monitor to load camera nodes locally within the Wi=
-rePlumber
-    process instead of the PipeWire daemon, eliminating race conditions t=
-hat could occur
-    during initial enumeration and hotplug events (!790)
-
-  - Enhanced Bluetooth loopback nodes to always be created when a device =
-supports both
-    A2DP and HSP/HFP profiles, simplifying the logic and making the BT pr=
-ofile autoswitch
-    setting take effect immediately without requiring device reconnection=
- (!782)
-
-  - Enhanced Bluetooth loopback nodes to use ``target.object`` property i=
-nstead of smart
-    filters, fixing issues that prevented users from setting them as defa=
-ult nodes and
-    also allowing smart filters to be used with them (#898; !792)
-
-  - Enhanced Bluetooth profile autoswitch logic with further robustness i=
-mprovements,
-    including better headset profile detection using profile name pattern=
-s and resolving
-    race conditions by running profile switching after ``device/apply-pro=
-file`` in a
-    dedicated event hook (#926, #923; !776, !777, !808)
-
-  - Enhanced wpctl ``set-default`` command to accept virtual nodes (e.g.
-    ``Audio/Source/Virtual``) in addition to regular device nodes (#896; =
-!787)
-
-  - Improved stream linking to make the full graph rescan optional when l=
-inkable items
-    change, saving CPU on low-end systems and reducing audio startup late=
-ncy when
-    connecting multiple streams in quick succession (!800)
-
-  - Allowed installation of systemd service units without libsystemd bein=
-g present,
-    useful for distributions like Alpine Linux that allow systemd service=
- subpackages
-    (!793)
-
-  - Allowed the ``mincore`` syscall in the WirePlumber systemd sandbox, r=
-equired for
-    Mesa/EGL (e.g. for the libcamera GPUISP pipeline)
-
-  - Allowed passing ``WIREPLUMBER_CONFIG_DIR`` via the ``wp-uninstalled``=
- script,
-    useful for passing additional configuration paths in an uninstalled e=
-nvironment (!801)
-
-Fixes:
-
-  - Removed Bluetooth sink loopback node, which was causing issues with K=
-DE and GNOME (!794)
-
-  - Fixed default audio source selection to never automatically use ``Aud=
-io/Sink`` nodes
-    as the default source unless explicitly selected by the user (#886; !=
-781)
-
-  - Fixed crash in ``state-stream`` when the Format parameter has a Choic=
-e for the
-    number of channels (#903; !795)
-
-  - Fixed BAP Bluetooth device set channel properties, where ``audio.posi=
-tion`` was
-    incorrectly serialized as a pointer address instead of the channel ar=
-ray (!786)
-
-  - Fixed memory leaks in ``wp_interest_event_hook_get_matching_event_typ=
-es`` and in
-    the Lua ``LocalModule()`` implementation (!784, !810)
-
-  - Fixed HFP HF stream media class being incorrectly assigned due to
-    ``api.bluez5.internal=3Dtrue`` being set on HFP HF streams (!809)
-
-  - Fixed Lua 5.4 compatibility in ``state-stream`` script
-
-  - Updated translations: Bulgarian, Georgian, Kazakh, Swedish
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../{wireplumber_0.5.13.bb =3D> wireplumber_0.5.14.bb}            | 2 +-
+ .../webkitgtk/{webkitgtk3_2.50.5.bb => webkitgtk3_2.50.6.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.1=
-3.bb =3D> wireplumber_0.5.14.bb} (99%)
+ rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.50.5.bb => webkitgtk3_2.50.6.bb} (98%)
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.5.13.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5=
-.14.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-5.13.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-14.bb
-index abd54515ca..ad05a8bc87 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.13.b=
-b
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.14.b=
-b
-@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
- "
-=20
--SRCREV =3D "84429b47943d789389fbde17c06b82efb197d04e"
-+SRCREV =3D "07e730b279ac7a520699ae9f6b0797848a731b30"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps;tag=3D${PV} \
-     file://run-ptest \
---=20
-2.53.0
+diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.6.bb
+similarity index 98%
+rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
+rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.6.bb
+index 908898f254..c3f736568f 100644
+--- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.5.bb
++++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.50.6.bb
+@@ -22,7 +22,7 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
+            file://fix-ftbfs-riscv64.patch \
+            file://0001-CMake-Add-a-variable-to-control-macro-__PAS_ALWAYS_I.patch \
+            "
+-SRC_URI[sha256sum] = "8737631bac3e9c7ad3e5208f9370e076c09d9c45b39980021ce54edadcc6f94f"
++SRC_URI[sha256sum] = "2b281abf8894ffc6172152e5660b75eeeedbe1cc43d6783d09dc79f7c865bb42"
+ 
+ inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
+ 
+-- 
+2.43.0
 
 
