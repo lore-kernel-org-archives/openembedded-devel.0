@@ -1,171 +1,205 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DCBCF94CB7
-	for <webhook@archiver.kernel.org>; Wed, 22 Apr 2026 01:39:39 +0000 (UTC)
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.61779.1776821968903710742
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FA1BF94CC5
+	for <webhook@archiver.kernel.org>; Wed, 22 Apr 2026 05:42:40 +0000 (UTC)
+Received: from DU2PR03CU002.outbound.protection.outlook.com (DU2PR03CU002.outbound.protection.outlook.com [52.101.65.91])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.70589.1776836548404273127
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Apr 2026 18:39:28 -0700
+ Tue, 21 Apr 2026 22:42:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=NP1sOfNC;
- spf=pass (domain: gmail.com, ip: 74.125.82.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-2b6b0500e06so7904900eec.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 Apr 2026 18:39:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776821968; x=1777426768; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hjNr2s58/2TgZJjf/IgBzFpSckXXgenJaMXtAKz/sIQ=;
-        b=NP1sOfNCslJ5USyc/yZs7AWgvgjKxLxJEQvpVgID6A+b8CJJFwv5S8gbtu4Q+bsFns
-         hAQXGiyQ5iYoUNsGsnQoPha/0CAR9hY4dsRdEmHOYUgTvY9UovAup7dah17slMyQ9TAY
-         /pzM1TBEWPX1vt5C5+vasSYKU9OmFNSQzAbezVR8gi53wZBdP7vkeAlR1Pu8u7qcRRsu
-         47jvfZLbzCbRL7H2s27qYEFlt89ExUZXCIrl4js4Tx8KaF2SU/FoUabmeKeW8otWaNNj
-         +uUb0ASPyVnmeBcTXC04fvdtzJ6Xf2SOeQNpuNEWYUwN29dPO/rPOktt6Nc/HYiH0Nsi
-         Q7RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776821968; x=1777426768;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=hjNr2s58/2TgZJjf/IgBzFpSckXXgenJaMXtAKz/sIQ=;
-        b=ZRnodHCj9oZB0sXFFNZekur9ismf0pstn0VtgB3LPSW0Pa6xRHO5gIrGh1q1Tkw/9g
-         rA5SaeXXTAdd6NH+cua3Skl31bd5maXdwSa85j8N/ihTgj7jsed9/XTx9xrtUJT/ytv1
-         HIOgk1WBTk1/qHcsKg3BMBFLij4W8udiITEqycOlkOgI9+1O9oLJ85C1QuLgrxeHHJWc
-         GmTNKNX0g1bcHc8yVYep12yzb+GqCA8QhBVpdTmK4qqR/9R0crN7cwCt85ZVr+UFRgQj
-         oStRQ9ngbF6NG524QKaWdh4iMHQTxYS+4Lic+TSfvCbOzt8/9KdJlAg3+mmHfOOT9cH1
-         sETA==
-X-Gm-Message-State: AOJu0Yz67JnqKkVd1B1nAWKu1b5CvID6jCW3chks3EcsmXFJlbce/318
-	xcfSqbtY3GYAYia05PdTh1u6eRte4mK6zUBOMhJijJkuho6fIUrDF5vB3UL1+Yxh
-X-Gm-Gg: AeBDietoO9+21YGetZfO5H0TK317K8rFbhdXx7pqqYCI51KXnHubYJKjWMHt+wh7FuF
-	Iz/aJJE1SSbwccPYlzdiWfH0ENlS45w0PDs74C+44TIZcI79dwtJpekbs+NrQHrELK8zgplS6ed
-	IPAXnw2fvjyeqObOB+n6R0Vx1tBn/oPnviETCY0QFCWB+is6zemug6hIiQR4R1SuQR5Rqspq3KE
-	uThUDTA5qbfkRiQAgsPQIqU3Ixcn6BE5TCfhUkGbOd4Y2FNJXNxOq2oc3RFicm1fpKNO6kf0BS8
-	gIcJKqIWtpKHtoTY8TlOvfW0sohpUfYA6IBAi0+4bJQUfig7PBLg4/s+lMN9hDXcW+RxVJDosxk
-	pFfFtNJtnFFP+zbogchNk4ZmIaaDP3g6emf07A2c5F1UsjNR2H8rKCsI6Hp7k2u6xSJk4NBfZZc
-	YcccavC/8SNA/G2bCBfzDcPUyjGreU38vgSw2ZykJHb1a5c6bh0pAzSA5cEY4zQfJ0AvVXOBu6X
-	mwNVX164tTVFwdrO7KCSvtyQr2QaguqI4rtmfW+pFztq8Pu3eera9p57vczYeXJ708G9NPLYH2E
-	lB8VbxGlwvSY9zODLtN7PxqYHK+vyxRJsKp64F/QwvL/YKxF7nQ=
-X-Received: by 2002:a05:7300:80c5:b0:2df:7882:1ce0 with SMTP id 5a478bee46e88-2e479618a50mr12229055eec.29.1776821967901;
-        Tue, 21 Apr 2026 18:39:27 -0700 (PDT)
-Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-2e539fa6134sm21940549eec.3.2026.04.21.18.39.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Apr 2026 18:39:27 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-oe][PATCH] gphoto2: Fix build with clang-22
-Date: Tue, 21 Apr 2026 18:39:24 -0700
-Message-ID: <20260422013925.1791148-1-khem.raj@oss.qualcomm.com>
-X-Mailer: git-send-email 2.54.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=3Xs0ZHuX;
+ spf=pass (domain: navimatix.de, ip: 52.101.65.91, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NAwLj8KVgKiEWiiXsP6gvEhR0M3oFOfkZUKF8UOEUK8sHZR0d/r9XrdSIYrL8UG3VGaDtrrzJkjiIn9W5TJ+LFu4FGoINXj6q49+FLOQpHNKiGOH10LhHMCOkChIIO9AOpjaS0a87k9RdukjTLGV5OPVng9//Dw/OBB/FYZQvwwnONWMN44F4rbAcYrg/Vp21ATrcxpKpHG4DE3p5EBP3wWIo0AD33Uo0X85Z7iUVPaFzLkpkPrEIUoWFe7PR7clIStzJO8YCcYrdUP8unpLMwkh4S1WqwLR3XZ0umCijwjvUNFhoZ5TPdYMILqkSaW1ky1xMKYi4WI771AVTEfE8A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Vg3EavwlDDwVu1yPrOBCQ6cThPiHYp/jt99LpltfTmc=;
+ b=GPzHHdMrxnbQRersoZhSO2aIUsVrGzYfavXteEERgy4e2Xx2gKl2ij5JAbRzOfAEfJwo766/fg0q5baeiZ8cxjJX04watS5bnxltBKacUBV97cZ1kvY291DDSB48e9br4pOLSdpsIZGFd6f+R4Y9maNsXzKhwoimGhsiLz5mQZrdI/EKstrtzF1Jp77Faz4Z4vJC3iND+YS/SdwJf9Q6bwCEqtku/2fTWYyj7wXt7HOCklkacFYK3Wy/6cIshL44xXzckK+T36afzB7UmMw/9Gr6n6UrNxARP2YYKd7FxxhX5qnF3GD28itOTv+Ux/8oH3oztZ9LoB0hWPqar5sn4Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Vg3EavwlDDwVu1yPrOBCQ6cThPiHYp/jt99LpltfTmc=;
+ b=3Xs0ZHuXb/3sLFIOiYZHJrLa1vjNucZO6nhqaWi9Hgg+2IfxguwxDt6pBOupVuPHX6k5gks5NQZ4/876OI/oMft5tPFMGPreE65kE2bOLxYjQdh0ynEVKYDmMDKiR3PxoEVTEHwP4WytFki5fKDVQ04fa/PJu/EiXSyX1WZul78=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from AMDPR01MB11848.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:716::14) by PAXPR01MB9411.eurprd01.prod.exchangelabs.com
+ (2603:10a6:102:2c2::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.18; Wed, 22 Apr
+ 2026 05:42:23 +0000
+Received: from AMDPR01MB11848.eurprd01.prod.exchangelabs.com
+ ([fe80::bd09:997f:d01a:43f0]) by
+ AMDPR01MB11848.eurprd01.prod.exchangelabs.com ([fe80::bd09:997f:d01a:43f0%5])
+ with mapi id 15.20.9846.016; Wed, 22 Apr 2026 05:42:23 +0000
+Date: Wed, 22 Apr 2026 07:42:22 +0200
+From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
+CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
+Subject: [PATCH v2] framebuffer-vncserver: New recipe for VNC server for
+ framebuffer
+Message-ID: <51a38cc73cd03d404d69f8e0cea7137112c332de.1776836541.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.53.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE0P281CA0012.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:a::22) To AMDPR01MB11848.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:716::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMDPR01MB11848:EE_|PAXPR01MB9411:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7e989f69-9dd3-4c97-e2c0-08dea031edb1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|376014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	9+8atHXskipuZswPP9Y+7evjBsrrQJRVbGbHMe95WS3fduPPXjr+MHSIbjtkc7qGjKp79IBZp1JM9jhUFBlv1baWRGO2iuivva7fwiIjHnRwfvdYAtQERUOuGvUPE4zYAuzXXtpOM5XZ+M9k2WiDLLmHymK8MubY5wGoulGdkFSMDtHcNNjI4fdL1XhxWkEJnQQQNxRfMlVbXx7BHZg3P1LKCtLL7iw2s7tgtQ5TwOtM4+hwTUVmYlVqZO8XTAxVlyZdst8Lg3y+wVkTiteAfGqezKzN9n8PQ10FdZAjtE4ornPcZwMXMCCvkHm6rgsaD+9ku7gchI5iPYJMdaByD1haRbXxrdXtrk115hjBPimT3ezVGKWMrcMGqR9xPmsW7SrJbyR7+WvE5vZJn49Q7f0j38xff4xYiJsYL+QwtZjU+KtXeLFQBpd5QH5KoIAqwOAmpVpexWiztatErS0IOCkaop1HnTLwviDm/g9P6ANw8PcYRfZBUVFIiWwv3nMMcsCh54y2jmyh6+QZuCLxr3UqNXRZozMjqv+TEXLg0jgoPIG2qwZ5/hHr9JthJ8KcBPow9XLTwQoRlvrXFYMldyYrrlS9xzNGV3ux6Ecb87oQwDHWya21vLdy01ov/CRkHKCU8rjLv/CoNla//qajTYzrVzuo/6ooutNY1dPVvu32DYdH/XKx851qdbKQuVX/9Ejc6UeINrI5AkzItA8G+SmzulKOAz1pLinJBDYj8ZI=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AMDPR01MB11848.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(56012099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?w+IYW5Cm1CIAeyFPicZbfo+7KBhtUBOSWGQmWtI+eVEHymP6Xo4BfNYRi8fG?=
+ =?us-ascii?Q?yzqnI/811VEqwViA9aJ0R7e/cBv7k8OxaTLdqWIe53VkopwLTKfq0iLEDfB+?=
+ =?us-ascii?Q?7meFnnsGr+F7n4avANF8VDe/f/OGcQs7cOjNLhGrUxtXnloHGHul0S+YuFmL?=
+ =?us-ascii?Q?Hz/5UdtSroRaL7wDRHSZkSTeD0qoXnSRKf1ePCqmCIQwUBftMXI5gkov6aZM?=
+ =?us-ascii?Q?n7WnPDaB7tQq3qNaGkPowl43dLen++5TxluejTtUG2eyks0B+U1GMTmqxnMu?=
+ =?us-ascii?Q?QffbBJpNigrUUS5rhjlZI1r1/s9YtOPiY2uQjCM3XgnIl92HSiTFmPqL5OUV?=
+ =?us-ascii?Q?cpXV5rIoR5cbp5Yu+azmLKG0nhmjEUuldNEMRnGyy78LlAzsrzc7HtTlRo3a?=
+ =?us-ascii?Q?YFwPxPXF9KmH29Ai58T48mQ56YCpmTxQlTZbZGoG7EQmiS4Fe8leHp6hFFdr?=
+ =?us-ascii?Q?6HU0adFsc6pyehQmH3M4pmE7u77MMsvgJIx5sMkXYVIWmZ+ABd+hWWTH6RCB?=
+ =?us-ascii?Q?zywhbIeUQ+oe+imMttgpJBaGh07YD+GuJ+MwsviRM26rWJIOdtve2DSRX8d6?=
+ =?us-ascii?Q?kR5boYdFyXnCONaHQgbISj5zIAxnJzwZYUVUNLp+7T16pUqDX99y1ji8mx/p?=
+ =?us-ascii?Q?VDP230gwlKqB8jiq19CpImaM7mvQ8s8loFIX0gN6M/hMvtzfPrjiGy5n2KRh?=
+ =?us-ascii?Q?qwLOGa66q1DfFMsC/gzDx/SdPOcItLdP2/weh5GyQPCV9ZsbiFIDSuALjZMz?=
+ =?us-ascii?Q?vJCNl+lbnLRwgmG+5hDVYSKarbMzP5Vlbti/j2uiaLr96X3pb2rzdSfqtGvS?=
+ =?us-ascii?Q?LdvZvPxR8yKcxA6t6wDfHBWGWoM99d6kxJc6zE4fULdklWcUUmSEyZLzjJFC?=
+ =?us-ascii?Q?TFAs54iYDOmsX0UZXq2ItPGOCJiyb5buXw2EidzBevek2Im88iXKBnl2RucD?=
+ =?us-ascii?Q?+luX/JdiCjYxi7rNgOMzgs9Ag0dXhd/RqN2zb5BPo73Mqdcsy4P1ntAO7xmL?=
+ =?us-ascii?Q?KDh+XM7Rnl1H5fNB3hQVVtFfOVM45EPRwWJ1ALthGMtYIP4C5Nk0SsOWtmbm?=
+ =?us-ascii?Q?jkjBXm7KTD6tHur38rivm19yA0hBk+KRtqeLbPyBxXPTcR/kQlF3AT24CzSq?=
+ =?us-ascii?Q?DBc7B8tVrShCokSyyvgNi4yRJER4TnnwNhX0oUqeJYYT/qxKHNsNuMMyZkNh?=
+ =?us-ascii?Q?PVY7YJlQultZyISxSmCj80GeGRIXiNJxw/sfWUUEa5IJHaijwxUoSM3apO5+?=
+ =?us-ascii?Q?2IANrABJk626fumTtS8h0FVRHBWl+7CDaFHhnb1o/LmOIDA2QBqmQ9pcWQTc?=
+ =?us-ascii?Q?5mQ7U5nPz4BaNDzm/nIfeNC0UfamqbBg2q79hzYJcP76rWaf/DZ2+bkzYq68?=
+ =?us-ascii?Q?oirXxVfP2ZwcCwnxk/ontq2aWR7+MGk9wIaUhS87TFJrTJS55OaBeF6AdnRA?=
+ =?us-ascii?Q?uDf1fTxaCxyHgPPPyQzlDnnVxfaJt7hAMtdyK9bdFkQEGFYiNlaDCwlCB85a?=
+ =?us-ascii?Q?fsf/IGL52L03Zp/qcuWsVMDfporAWghKDhxXpIqBLjh5c4+5eMLukQ8mUoUZ?=
+ =?us-ascii?Q?z0LF7PWaXvWWrwYk9mDiHBV1e7ZGtUKKaDT/E81WFeMvuue4ZM4DqNGtHENM?=
+ =?us-ascii?Q?yKECGcUDKF+U6zZV1nb2R4Bh6/v3tTZPKQsLsbAHFSg5QwA/USA7XE+4AuVd?=
+ =?us-ascii?Q?32GHkbsXTav8lbP2nnKRy5c4PtKO2yK3w/DASXzA4hIl01W91vPvFgSQzP0W?=
+ =?us-ascii?Q?sqgOz13Xr2PMhAFs2AzN0GbfdqAs4iU=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e989f69-9dd3-4c97-e2c0-08dea031edb1
+X-MS-Exchange-CrossTenant-AuthSource: AMDPR01MB11848.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2026 05:42:23.7604
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MkdLNpxk9ueImiTOfUbv6ER3g70+3WrM3ZUoWcquz0uJv9SdQt/CEH+5/qe0Ee8rz6LpUvnzkouMQGTCbRPjkkSC0JTBy3Zbu5Z+ltvCbLE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR01MB9411
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 01:39:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126539
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 05:42:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126540
 
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+
+Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
 ---
- ...hoto2-fix-const-qualifier-violations.patch | 73 +++++++++++++++++++
- .../gphoto2/gphoto2_2.5.32.bb                 |  1 +
- 2 files changed, 74 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifier-violations.patch
+ .../framebuffer-vncserver/cmake.patch         | 24 ++++++++++++++++
+ .../framebuffer-vncserver_git.bb              | 28 +++++++++++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/framebuffer-vncserver/framebuf=
+fer-vncserver/cmake.patch
+ create mode 100644 meta-oe/recipes-graphics/framebuffer-vncserver/framebuf=
+fer-vncserver_git.bb
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifier-violations.patch b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifier-violations.patch
+diff --git a/meta-oe/recipes-graphics/framebuffer-vncserver/framebuffer-vnc=
+server/cmake.patch b/meta-oe/recipes-graphics/framebuffer-vncserver/framebu=
+ffer-vncserver/cmake.patch
 new file mode 100644
-index 0000000000..a8f85d034c
+index 0000000000..03673ce323
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifier-violations.patch
-@@ -0,0 +1,73 @@
-+From 55edc241e9b61b14153c61fd0baaefac927ad89f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Tue, 21 Apr 2026 17:39:43 -0700
-+Subject: [PATCH] gphoto2: fix const qualifier violations
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-oe/recipes-graphics/framebuffer-vncserver/framebuffer-vncserver/=
+cmake.patch
+@@ -0,0 +1,24 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: =3D?UTF-8?q?J=3DC3=3DB6rg=3D20Sommer?=3D <joerg@jo-so.de>
++Date: Tue, 21 Apr 2026 20:20:42 +0200
++Subject: [PATCH] CMakeLists: Raise minimum version to 3.10
 +
-+No logic is changed. The patch is a pure
-+type-correctness fix that makes the variable
-+declarations match the actual semantics —
-+const char * for pointers into string literals
-+or function parameters that must not be mutated,
-+and char * only for owned heap memory. This
-+satisfies Clang's strict qualifier checking without
-+needing any casts or warning suppressions.
++CMake 4 requires at least 3.5, but suggests 3.10.
 +
-+Fixes errors seen on clang with
-+  -Werror,-Wincompatible-pointer-types-discards-qualifiers
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
++Signed-off-by: J=F6rg Sommer <joerg@jo-so.de>
++Upstream-Status: Submitted [https://github.com/ponty/framebuffer-vncserver=
+/pull/30]
 +---
-+ gphoto2/main.c | 14 ++++++++------
-+ 1 file changed, 8 insertions(+), 6 deletions(-)
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/gphoto2/main.c b/gphoto2/main.c
-+index 5a3c5c1..086f9df 100644
-+--- a/gphoto2/main.c
-++++ b/gphoto2/main.c
-+@@ -146,7 +146,8 @@ static int
-+ get_path_for_file (const char *folder, const char *name, CameraFileType type, CameraFile *file, char **path)
-+ {
-+ 	unsigned int i, l;
-+-	char *s = NULL, b[1024];
-++	const char *s = NULL;
-++	char *p = NULL; char b[1024];
-+ 	time_t t = 0;
-+ 	struct tm *tm;
-+ 	int hour12;
-+@@ -339,18 +340,18 @@ get_path_for_file (const char *folder, const char *name, CameraFileType type, Ca
-+ 			b[1] = '\0';
-+ 		}
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index c8b8f90..d342734 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -1,5 +1,5 @@
++ PROJECT(framebuffer-vncserver)
++-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+++CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
++=20
++=20
++ FILE(GLOB SOURCES src/*.c)
+diff --git a/meta-oe/recipes-graphics/framebuffer-vncserver/framebuffer-vnc=
+server_git.bb b/meta-oe/recipes-graphics/framebuffer-vncserver/framebuffer-=
+vncserver_git.bb
+new file mode 100644
+index 0000000000..d7ce066cb2
+--- /dev/null
++++ b/meta-oe/recipes-graphics/framebuffer-vncserver/framebuffer-vncserver_=
+git.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "VNC server for Linux framebuffer devices"
++DESCRIPTION =3D "\
++    The goal is to access remote embedded Linux systems without X. Impleme=
+nted \
++    features: remote display, touchscreen, keyboard, rotation. Not impleme=
+nted: \
++    file transfer, ... \
++"
++HOMEPAGE =3D "https://github.com/ponty/framebuffer-vncserver"
++BUGTRACKER =3D "https://github.com/ponty/framebuffer-vncserver/issues"
++SECTION =3D "graphics"
 +
-+-		s = *path ? realloc (*path, strlen (*path) + strlen (b) + 1) :
-++		p = *path ? realloc (*path, strlen (*path) + strlen (b) + 1) :
-+ 			    malloc (strlen (b) + 1);
-+-		if (!s) {
-++		if (!p) {
-+ 			free (*path);
-+ 			*path = NULL;
-+ 			return (GP_ERROR_NO_MEMORY);
-+ 		}
-+ 		if (*path) {
-+-			*path = s;
-++			*path = p;
-+ 			strcat (*path, b);
-+ 		} else {
-+-			*path = s;
-++			*path = p;
-+ 			strcpy (*path, b);
-+ 		}
-+ 	}
-+@@ -696,7 +697,8 @@ dissolve_filename (
-+ 	const char *folder, const char *filename,
-+ 	char **newfolder, char **newfilename
-+ ) {
-+-	char *nfolder, *s;
-++	char *nfolder;
-++	const char *s;
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8264535c0c4e9c6c335635c4026a802=
+2"
 +
-+ 	s = strrchr (filename, '/');
-+ 	if (!s) {
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-index e5e7c6926f..dbd2b0e748 100644
---- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-@@ -9,6 +9,7 @@ RDEPENDS:gphoto2 = "libgphoto2"
- SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.bz2;name=gphoto2 \
-            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
-+           file://0001-gphoto2-fix-const-qualifier-violations.patch \
- "
- SRC_URI[gphoto2.sha256sum] = "4e379a0f12f72b49ee5ee2283ffd806b5d12d099939d75197a3f4bbc7f27a1a1"
++DEPENDS =3D "libvncserver"
++
++SRC_URI =3D "\
++    git://github.com/ponty/framebuffer-vncserver.git;protocol=3Dhttps;bran=
+ch=3Dmaster \
++    file://cmake.patch \
++"
++SRCREV =3D "1963e57bebfde420baeecbb2c6848a2382488413"
++
++inherit cmake systemd
++
++do_install:append() {
++    install -m 644 -D -t ${D}${systemd_system_unitdir} ${S}/fbvnc.service
++}
++
++SYSTEMD_SERVICE:${PN} =3D "fbvnc.service"
+--=20
+2.53.0
 
 
