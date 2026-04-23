@@ -2,582 +2,622 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 465AAFAD3EE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37F20FAD3E1
 	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 01:48:48 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3473.1776908920922290729
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3472.1776908919584744102
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Apr 2026 18:48:40 -0700
+ Wed, 22 Apr 2026 18:48:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=cSPZBW4C;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=hem2Pg83;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=857337a20d=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63N101rf1195472
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 18:48:40 -0700
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63N0x4l31596694
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 18:48:39 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=/aoHdd+CJRLuSONsVYI7i1n20X4SqzfzZ+5fgulm2cw=; b=cSPZBW4Cz2Ux
-	OpBfo54SV9LYOlKLYKuc9gxwJZzT0mH4+c6w3UtlPg+2Tjbjm7emVbQtHOEEIUfm
-	sb1I3lsdgPMueAUuZx4vR+u8sQK+ecXHvUw6DEIojuu+XHvrWRBp/2jfVk9kuC0N
-	XlxPgMe97x/P5XV0nRN1BBxYK+gXXVNaVkrxSIss4SDolfTKp/hkMBu3MZ5m1C94
-	GEGF6tbHh4feX3T61D2IUGhlTrBBLW4ZryxtvTxSNMQdgdlgrPb7DTe4gBM/RlCD
-	MJ3ZXfxjBV9bML1vtmeFLKNszHGXuPOznQB31wRP/LL2uZsAJITbR9cUStb1KN68
-	Y/Jk9v0ffg==
-Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013031.outbound.protection.outlook.com [40.93.196.31])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dq8rcr21r-1
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=1qlFFP7DypgR6szkxHSf
+	JDqeAQcoiYbpL+SYXWoh3jg=; b=hem2Pg83KLedq2SrCD6MmK57Dr2822tqzH5I
+	a+Ih1hdHQmGjVnRiiLA+uDKVZ1UJ3Xy+YeoPOkN8lxX7Va0lWQmTPFEUIeLfkDk+
+	sE463pms3eS79PsxrwrSI9EoLjLhFiDmn8hqI6AGdGhsjZMC0t8bon53e333H6OM
+	q5d9V1gmLkMTuQdCDuiWFDE3F9yD8sWZ1XK9aKMNeDL3uX+h/ZQF21RKwaDutoCk
+	33cb8imiOKrh294jQ1l6XgnMzDvyCOW30PKw9sO9BIubzm1JrAYUaUCuWsZoB3Dy
+	b5Gw81etriFxXxAQQgjWoVg75PMC8ITQSh+mx6rT1Zpqxg65DQ==
+Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11013032.outbound.protection.outlook.com [40.93.196.32])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dq8sr01ve-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 18:48:40 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Apr 2026 18:48:38 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MiuZsHj7FdzT7UFyGZi1obVlscOQZnf34hxiwoXbAy2vKcyAGj4gROrI9TXxKRC/jNXjvMVmjJAbIum51XXFt7Vru4sKTzkmsRTbhw8FSxY0qcgrzJHimng2t3WVScxePLeNN82mzfWf/hUx4g+kytTDglatR7zImrD6FZt9/B1zuAA8CVtDFk4S4U7wrSxqntPpPsC8XJ0Jub58uj/hCpL7hZWaHZuxu/6hIM9Wjz8vBKZ/NQZlHh/OYlFWk2NI+OD9rjai/W/1ME9ZMja58Ydw2uGSTa8jDKgB6/T97jNEJCWCqqPRCh0YKAs/tIaNGxDs0oWSv8CyJiOrgOnWmg==
+ b=EB65nYG6DvfRsc7qnIZvncSBMQVsBWt/xsvKKXBJQW3qw+G1Ds0TMv1WmEFbn21Ostds4hg+UBG/kyPDd3FCqn/Fk5Ph3l2ZwK7xf8/zemE89KxHJSq9G5/0OagL4lr7Bl5FRMxUtxctucxhoUuy5y5EEErek46DWg1Vsrf99E00CHmIA1aEQLPDM4TZHKSxuVmKJVU9J4iaoaJsZ9mDdnNPNWsZ4vo7dKXe0MHFbE8JIH3YU1hnpg//n86/q4wg4WI56UsdLaD8OOSsSZZbbTwUe+C4GE0v+N1E4ctzk+Vpviilmtp9Ef3zmvI5r/P3WEc58PSqVAcB0hqAALQnxw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/aoHdd+CJRLuSONsVYI7i1n20X4SqzfzZ+5fgulm2cw=;
- b=g1M+ACBh85ofsAtsoQDvE/ImzUe2eNI79wo9lZo/JC17CUarP71uPDnSTbpHRYUo201k13+f2BFb7sQ9IgyxfuMZvRA5r2bkHr5meFL7V/XWLncgWP41z6pHBY3AoGG1GGOtkpBTPvl7vP3MSOvMHzt+2+SqYtg2iQvjTKophPRMMIVX3xH36v6ijBic9OqHudC0NIUPxOFM6+hOfdwhRtaIQuICCzwDE2rfqiTYQVh5PxrKD1tdMUbCizX2YWT1GKCZSgqPu/o+g4Mzjs7Jhg9i3V3GHwCxzFb7dVDGjlHeQHxVlztWM8D/OamXABBWMr2x7Pvv25ZRMjR5wMdmdg==
+ bh=1qlFFP7DypgR6szkxHSfJDqeAQcoiYbpL+SYXWoh3jg=;
+ b=lBTr29uGYo8sr1QDSegVSxtsWHu4Rqq6kh9LLJDlK+GOmpGNeKZMsvWcMBHHRc3gL1apKLor99NE3RKvb4h2J4Cvcv3WDMFHnsjp4qDE3CE55zd5uqB1B/WXuz1v5wFeTerNn8joBLgEgLBQRTSTvfJWkEcF8l2k0iDA2uiyAQ/3Brj9xvgidDBCRJkV3g3/i+8uBG0Xxozs16RXdRqVGYw1NTg7a7iH2sM0QmiPXj5Ma4xXu+KnQmjJOHrIOUtFVBejg5tT75orBmQW34qKNdhjYa3Jz8FVm1BBlDjAYmY9fyAdnvAwZzRMNEMsHen75Sf5UEmVoOEHfmDiFLpCeg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
  IA3PR11MB9421.namprd11.prod.outlook.com (2603:10b6:208:578::9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9846.16; Thu, 23 Apr 2026 01:48:36 +0000
+ 15.20.9846.16; Thu, 23 Apr 2026 01:48:34 +0000
 Received: from DS0PR11MB6399.namprd11.prod.outlook.com
  ([fe80::3432:2eb3:d0a5:7831]) by DS0PR11MB6399.namprd11.prod.outlook.com
  ([fe80::3432:2eb3:d0a5:7831%6]) with mapi id 15.20.9846.019; Thu, 23 Apr 2026
- 01:48:36 +0000
+ 01:48:34 +0000
 From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 2/2] frr: fix mgmtd crash on ARM32
-Date: Thu, 23 Apr 2026 09:48:19 +0800
-Message-Id: <20260423014819.945909-2-yi.zhao@windriver.com>
+Subject: [meta-networking][PATCH 1/2] frr: upgrade 10.5.3 -> 10.6.1
+Date: Thu, 23 Apr 2026 09:48:18 +0800
+Message-Id: <20260423014819.945909-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260423014819.945909-1-yi.zhao@windriver.com>
-References: <20260423014819.945909-1-yi.zhao@windriver.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: TYCP286CA0333.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:38e::19) To DS0PR11MB6399.namprd11.prod.outlook.com
  (2603:10b6:8:c8::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|IA3PR11MB9421:EE_
-X-MS-Office365-Filtering-Correlation-Id: 13103f2d-41b8-49a1-8a28-08dea0da6efc
+X-MS-Office365-Filtering-Correlation-Id: 7307fe8c-9dc9-4935-4900-08dea0da6df8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|18002099003|56012099003|22082099003|38350700014;
+	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|18002099003|56012099003|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	V2UJpVZ3F1jKlaGKIqoF1BXOG8uxd+6ONB+3utpz540/9xxU/FNz7EM1mcUsZrBaLXdCQ+CvhGecmJFW9iYK0p4is2SchpVla8Fe17/Xdr2+DUxoiT8ncRNHevEaC8+FLHjKq49whg29CbCH8FTB8leAMWPqUh/ogI4LccHvikzdhLyMjjQ2kw23ODlIREy6UB5G5dH+/iORvtKgfm691xoOq/bs3lucQ3D7OREMJC+N6yOf45TxQm/+rhX8+eFQLnh5OLvEMhAp79x19DhMDZX4TkTP/UB6pXVZL3FbedV2NjTHO7tau6GjDUaiJUNpXWEyq8KHHYoNbM+og0QpGuifsFHrYeEDM6Vp7TlkpkeYMUovsezF0nGefLiMg/gXP+L4nma5bznSaBriioohQNpX2S6SDR1bwhIL6YYL0AKE3/jds/inbaoi65UK84qnq5zD2fWtLfW9ueyYUocLWLSvEpLI0J6A0pMAEqmwYyF93LhtTD1CXYXu/pPd9P2Fs2DuYIbAuIZM1njIK9/oaf7rJdWt1LTsDC0QZEJ7O2jmqkyJDsL5ZHE0gONj68RfB3cMfVRHkPq9MTRrS811Q7aPkQxJGMvM67YD7LawEKT2VdCu6HY1iM9bvmgYhvTSYxMEGfgsSWebcUiaW4RJclAq4GfK2g8rkctremHiIoHwPiFvpgZiiRSBt9y67LC6Bx8jMLOX7nsN6nIrr9mJhYr2SfAtBY9niUt3oUDW+Ho1GlZUjkeCyCZaRGi8pdgH
+	3otCQ1QAr/HHLdW/V7/q4Y5+qUy8do39T5RogH0aUgWh8Fj4gTRWe8aDt3sUmjAljfXjxpXkv/Sy3IAPxndj6mPENBsJJJcMEWOhfche4hHrG3eHE8eSgu/kKH1iw6n2S/hcX6js+5S+10ArGe+hWc/J2iJP+Vsu5+LYmf1B1QXWcJdfm365cwqU22M5PkSpGSDVb/XNbRRq1w5k/T1Z+bnmOuknm6x4ykF0hpZwOJ/CwmiD5IenHqPhrOs0CR6xmzXLzo5TsGAcAvJejkCJNkGtebbb61N/DS5AOdrzw9Qkay/bslXmUGgmBK5JbTz3hgXJB6YXJ/2OOP6ycR/tG0p2LgwQCVDrhwPlBzjRNXD83qUZ43/SEV79DAgZgFOA1MF+wGAvPuXb2cpV94VISqEoxmcN7tmFcKYsqbOeQXUTG/kJRMbMI7ZNZZP+5i5LQGFhVbI3WTQ0nQx55wBsS8q5AZiJk/XcoWWDIBemYTf0BWrik7oonlpfLTGNGLY3VJ0hn4Rgpm0RhCQDDd1q7rnxDRUHmcPCQI3VGY7UHYGJhzP0ni0t/ysGaBEUe0m4I36osptHd/lu9f3yfs8VH4Kc4jMf9wUT8cqZvnk0i5lx4upVWbzbaNwWu2fnIroUAJRK4Szxo3Yjp9Sghpx9pXrCjlME1LembZGZxwbXvbW1dNCZzP0XAeT9qjLX4NFYmp7k3LVNZ/18HbzcB+mTOJKzo081B/c+PzUpb+mGWWLugmIGyWNRVPvgPS7qYj+6
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(18002099003)(56012099003)(22082099003)(38350700014);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(18002099003)(56012099003)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Nml6d3EwZkZKNzZGR0U4SkZVcXdsQ2RGZ2NQWHdUNktCVGYwZk9pUkhueVEz?=
- =?utf-8?B?cTZ3VkpRUks5dlZuMVdqOXFuTU5vR2tyK0VvdW1yNmhJSkoxZ1FNSzZoYzBO?=
- =?utf-8?B?RnJpUmw2ajdGWEN2Tkl3N0FSMW9CQURPOE9ZcHhGY0NEc1RUSkFRVk1jQmRK?=
- =?utf-8?B?MDJUdGFET0M0VGFVUWxzemhEK3lpa281UnZ2cmZrRUdUaGNmaEh1YUlsYjZk?=
- =?utf-8?B?R21UWVo5K2NhTmlMSUo0L01yOUpybEk4ZmNjSjBuTStTdDg1RmFmdUxFZXVp?=
- =?utf-8?B?THdxTFFJLy8zTHludmpHVW9MNURCMHpvU1JPRnhDQSt1eklvc2Rmamt3SXh3?=
- =?utf-8?B?MVdXQ05UWmFNUWEvREZFNWU0RkRiM1ZSN3RYUFgrZzNwcWtJcVpWUE15eE9n?=
- =?utf-8?B?S3I4QXg0N1BsMjBiYjdMOXZGb0preU0zZXQ3WFdvUGx5ZjVINEFKRVlraU8r?=
- =?utf-8?B?enJ0RVc3M0htNDRnTnVua1R2Yi9HNEN4ZjVRdTBSUFBXUmFiczNlT2RZTHFZ?=
- =?utf-8?B?L1pBNEpPVTM3VzM4ZkxNUDNxZTQ3dGlzVVNjeHMyN2V6Vkp6YytyQmdCLytF?=
- =?utf-8?B?WWQ0UmJpenkzK0ppT1R1cmRXUUxMUUxJelRTNzVjNFNoME5sOU9jR1Zkbk1j?=
- =?utf-8?B?d0ZlZXBnL1FtYVNvZm9rbHFjLzFXNU9lTW5RSFM1RzQ2aWplMjdSV3pOaEFS?=
- =?utf-8?B?N2c2N2JhbHJRMHVlT0FNRU1Rd2RCSEIwYUxlZnFWbGVwMkNYNEU5OExKTC8v?=
- =?utf-8?B?YVdyTjhyL1lVZGNQZ0xVdGtlTkV3cnJNeTNvajdFQUZHaVVSc1J5bXpaSGhh?=
- =?utf-8?B?NnhBSUJlVlZXMTQxMUdpdS9ocUo5dlJPbDBDWU5rbW9XMXhyYlgrSXpMMGYy?=
- =?utf-8?B?QW5XTWlUL29DUFNFVVBlZU51ektwOHpHNi9uNyt0MkVNRFUrTkx6ajk4Rk93?=
- =?utf-8?B?Y2ZGbDRBaFRqZUtacTZwVjBKZVRQN3FHV3lQQ0JtS21Pc3pxKzR1bmFLeTZ6?=
- =?utf-8?B?MktLeDhOV2FUc0l2RG1wM2pRWWdQek5OVWNpeE4yYlphQ055bHJ0TXpLQlI0?=
- =?utf-8?B?d0k2WWtkdWVkVXRoNlFsY2FVckU5QWtQOTRGVXdjRHZtOXNmQXVxRHB6RDRi?=
- =?utf-8?B?WDM2YmtUb0l3ZjVKelNNZS9KRUUwRXF2QysrZDM3bzJYUDE5ek1rVXFDNk40?=
- =?utf-8?B?OEtlZmllUk1BVU4rUjAxZCtsRmlUbllLLzRWdU5QT3lJbWorQjlGWEcxTito?=
- =?utf-8?B?eksrdEVIR0oyUTFhZ2RkSEpGZVo0Uy9IRzdMWDcwRDgwZ2s1SDFDbENiMTN5?=
- =?utf-8?B?YTk0RjdGb2tJSGkzR0xHSWVlWDJxOVZqMEZsVmpNSlR4RGFGdmk1VlNYcUJq?=
- =?utf-8?B?R1dwTXBXYkpSaG9hR0E1c3BoZmVnaWxNVkdQUC92Y1I4Vm1aK0hpNFV1V1Jj?=
- =?utf-8?B?V3VJYnlLbVgwL0ZWcHFTMFozOVdPQUs1MzBySE1sLzRoUFpoZ0JOdlZzU2tl?=
- =?utf-8?B?SEVicTBBZTZNeWVXQndVR3ordlg3MVdCZFFpRVRycUd6eE1tZ2R0NmIyU0VL?=
- =?utf-8?B?enRhaXp2NDVEZlZHQzN1dmhJUzRraXJJMmJyWVdjN214UkZ4NXFEMlAvUTFI?=
- =?utf-8?B?L1ZPWkVWZ2F3K01KTTV3SGVxY3JJV0hjWlV5a1FLSEVLZkJiSUNMY3V5aS9l?=
- =?utf-8?B?S1o3aXkwRzRybUYwU2M3Vk5zYXlGVzBkYjVVQXNndk9Gc2NkVlpaL0RNV3JU?=
- =?utf-8?B?eUQzN2JOcWFYdXpncnRJcC9hYjR5cGdROGdXR1ZnUkorZW1EZjJNNTQ4Smp2?=
- =?utf-8?B?UGhFWENrZ1dhT1MyTERnT2N3NjRiRWp6MzlSVXQ2djhPQkhJbWtJVGRrMVZT?=
- =?utf-8?B?aEppTDBCR0lHeFJMWm5nbis2VjlvdHFXODlPdnlQR1ZPOGgwR2NFdDFhM1pt?=
- =?utf-8?B?R3FqTThzbXB5anhOTmpzUDZGa2cvUmtvTllvNGd0VVZ2ZTY3dFdXZlluWVFr?=
- =?utf-8?B?dEVQZ2RIYzhPck95TzBGYjdNN1IvQ2N2RkU0elN5eU9RaU5hWUhzZEdPcDJB?=
- =?utf-8?B?ckxQWk9mcVBmR2xMMGF0ckhwdWRlRlRUN2ZzNTUxL0lMeWVUTHlSUlhwcng5?=
- =?utf-8?B?MnNKc2FzYlV5WHJzaEpXeTlmUVRkVU9oNmhnYU5PN1FHbWlUc1NITHBGazhn?=
- =?utf-8?B?a29QaTdDamJQVkZJaGhFRjBqekhJZkVFbmJDdmR5bUlBS0I3OTBPU3VBUDNw?=
- =?utf-8?B?elVtMkppZjJGVXdBNEdWQmxqZUViVklqOGpCU2lHOWFMUWRETDdCT3k2SVd6?=
- =?utf-8?B?TFN5ZzhjS0pieDlkY1pUWU4vZnkrRFI0TFJWbEw2QjVpL0tNRjNkZz09?=
+	=?us-ascii?Q?WgR+V4RQWzd68416eh6I+JJimmXpM/OZevdMtlv+ZtfwW7KMd1zvvKgaC9vV?=
+ =?us-ascii?Q?qEAGplRbgTFlLiQIJ47dsggu2k8JfXrfNzZkIuG5xiXzY0tuFUuu+HfjRzNr?=
+ =?us-ascii?Q?dHUY8aIUeZvNZGSONOjkWzMrkF25neLs1D2NYDEKQD718xqvONH5pSgk5dlK?=
+ =?us-ascii?Q?zMWnPvuu/WN5HvGCLvhfTmJePCKozhgL1mnf195EQz4OgRYD/6GCZH7zpr6U?=
+ =?us-ascii?Q?vGiU6pIlX2JUhytj4/LG+RXgQ1RY3UxOXJ9xZwy9++slzpiQ+UJnWJveD+IY?=
+ =?us-ascii?Q?KIzH5wa8vrOStSw78cwFL+pQFwZp7yVTLk+l5o3iW3cN4/wW0lavP6+xC65w?=
+ =?us-ascii?Q?+uMtLBa1lOSw3aA7+IdiX+mdkACFMLKHjxjjN8Uvmkp3gi8Hpk4zExhSKUqT?=
+ =?us-ascii?Q?AIBDUqc45cOkqsvmOsT5ruXDJWzvz/6LTP9/TuZOVnAOkOBQ8XT0pRxbJZRI?=
+ =?us-ascii?Q?5Or5+8/T7nnWEkqidI1ZB69uO/xGCj43jwXR6OSQKjWCGu48azguexH27BhB?=
+ =?us-ascii?Q?h8Dh6P6AWH6i/Cr4dO4QIZoHUlbC5EPeD6BB1cuNJ1ZlXFGeR50GAyqCLyG/?=
+ =?us-ascii?Q?OVZACF6JYm4EqUCZvNNajXLg3nULm2S4JxeuFKztqB30K6LBCzjSrtQg/U0H?=
+ =?us-ascii?Q?NYwGcIGCgR5CFZXW9IRdSHpwwR1k0meob3xytQdbIiJqVeQDJsEsjnrbaz0p?=
+ =?us-ascii?Q?P5U5/cw2LygNqjkwQdn0WJolyk14FlTYHgjxxwGbB5qrd/4XIPHe847t+WPc?=
+ =?us-ascii?Q?4cxDl0jn09QjrN4EuVSU72kfe6m/A13/lJYqrkv7ivEtTKhSn/lBmq+yM/0R?=
+ =?us-ascii?Q?mZGaHBH3HXO86bru2IYCfyVyZNCCtCJFmqkjFsglVBWqw0MoSXcEyg4w7nav?=
+ =?us-ascii?Q?wiHGuGUEmtB4ApEfto05RTWC7kdQRjFJGYmI6aTqs2QIPsAZR1lhaCV3keNq?=
+ =?us-ascii?Q?UFa8UV/HEIwN6B0NouBFkga+P6KPle9Gq83nhq4tqpkada39I7aq/+hq4qQd?=
+ =?us-ascii?Q?5uHlWUdfbKRAh4NAE/NGwqW/Qkibz4WJC/0fv0WWTLcQ5Lq11kfRBDDYvkbE?=
+ =?us-ascii?Q?S52BnTy8mZDxtUPGrUC7JMXzJrtts8f9mRONeiwgPIX1jzC/AALTmZZYBVpz?=
+ =?us-ascii?Q?NFuNftMFX4BuJDunphhxocH+EkZFAwlx9o6k34MeuIEDyjSfmL0YZvWch1GU?=
+ =?us-ascii?Q?HiLVPEzVhOdepeCnLNvZfGywZA1bftXZO3ldLh0J3ebDGKgjqiL43TZuUUS6?=
+ =?us-ascii?Q?QpnyANX4qblAJnEumLXOQ8HB1gZF1hMJOAzqTQ4UNQVU5d0HA/z2pBjPBKY2?=
+ =?us-ascii?Q?C+PB4Rl1uEacWUCSuCnsoUIdOAOcd6nk5mz+VJ/BfQQ46O/xjIO2TFglyMTW?=
+ =?us-ascii?Q?DRwUZb5wUHlCgDe/wznHJENXGg+ygCnfI4e4Tjbhy2zAYLD2T4YLCNQUBoJE?=
+ =?us-ascii?Q?CGO37HwejQh5l6SN5w7VohJkJx8KEGhpPM3ept1Q07HdGgWgMFPwOSqxGqd4?=
+ =?us-ascii?Q?YrgZBCL5O/6hgCiLO438aQAnk5eQf/aFjMA+4r0aqrBuLipQ7WngbL0VFd7n?=
+ =?us-ascii?Q?V7fXLm9EJw1D7vH3Rya/zQMagvoKlYr7l5MhSQvQckueloLyCopmq1mbJcO4?=
+ =?us-ascii?Q?431C1jVSXDLC1/jkQYS0tpkA4OnYduzmuJETaGmA3vo67r44L+mhA5CCwb0a?=
+ =?us-ascii?Q?DtsjDx5lTOhha6AGv/+HsslU9WATeC+iXgZtnTYKJRGWzMv+zOKXuictJAYx?=
+ =?us-ascii?Q?NiR4bSJEsg=3D=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	KLDLOuSPlYLwHodWXuEMms9f+/F8h1aDGjrRyqAyOa4C0BwZvpXgcSOjWI8woQnAnCNa8tIqd1EduF9wUN0AKg0g9i5OlvLrMAFeojcxPeWg//q09dZupDXisWPSnhtBFYmaXshO+QTRnmyhAgUNgR8/d5dwZmB/LV9m/zBGxJMj9pFBNf8fqrMzYoQdQxYWy+W8HtktDK/FX5FXvK8OFs0ds2Y2wIXcdZIWdPgkqKgpdPy9xd0IDwTdPGLJyViop/GxzXncb50I0EVmlXXqLRYXSQ7xf91tj/IhO7+ULu6lsJ0WXGOQA2cGlJfiPrlmbVBR9A6ifNqwx2Yw3BFRDw==
+	ZVPczidgGtkRO1gcUm6+aAd7aFuWKsAnyJDAgyibDEGVGMHnyErbgpYxXmBUF6k+cy1End2r3Fb4esBRk39wgp4ZoRJNYK7z/Q3kuJbd4vynjZvnHd6GooJe4wREdNshxuGnKQnWuF2yDUfCXTQWFPPn6AbAFIyccCwwM6SHd0kw8VJxWhQ/Pnux+SZO3I4iGKe30COZqtnhMNVXYm1rfBN9H7iu10v5xPUuOUlNAKrxgVIYiI90FmWSMlkcW88yImVZ2qoJt4ORQmPWAshe2mKLDRh0vZMp91ohbRoHislfqQNMKBdpTt5aRkeENq4cVxveLxjmIPybSr+aIY+GNA==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13103f2d-41b8-49a1-8a28-08dea0da6efc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7307fe8c-9dc9-4935-4900-08dea0da6df8
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 01:48:36.2371
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2026 01:48:34.5761
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PRnawqPym050etR4fHZ05iV99RG/GkS6/ZOJoXjOStsR3O2clzocnehRgeywoIligGK5XeRvPLlQLSclols0dw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: jIURfWV3M0x6Fcnt24bVoTOCn/BGjs1UdftuKbnnWP2xqY63I9FkyAisokWXA6ogB2m7QxmrkKo0fu9QZg5ybw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR11MB9421
-X-Proofpoint-ORIG-GUID: Vi2uA3gTS7AE7DJx3mPW8aBWgMOHcT6R
-X-Authority-Analysis: v=2.4 cv=MYhcfZ/f c=1 sm=1 tr=0 ts=69e97a78 cx=c_pps
- a=GI5TgwD/LrSAXmlNZGMSjA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIzMDAxNSBTYWx0ZWRfXxAcr9FEcKzMT
+ Aps8oB/VvU7pyxynvuKVVE0GQLv2xNmc1qi61zXd2LglmzeqXMkUgIki0ju1yNxHaxuYUSF6CbV
+ Q84ecXZRui+aQZFjdG7/oGTnkQE49zp0nIge95dNPtIsOSu6XYHOuYnHvFLr3ZF+NK4Vumj16Ia
+ 3DjUinsun3XCdp2I0w4PNvhyVbO9tNvO+2OwKmhPp78X9fg219m3emZfK2ILcdTpJHUTJ0GckFx
+ TZ0EpcyExC+IaklRC22Ib+CSlLgMKlH8G8vUSqFb5zkpZrk/9ZAAgycdyiGMpoN+X66001wC1uV
+ WEcEJTrsiDTbj33awdPLwzpT3E19UMpNq69zDERR+Hgkfq1L8doNQqbPvtVfLOGPZdlOh151qMH
+ Vj+ktsyCRdhGtk2oxicTnA4/BFW4jOQ3olMfknE55AO0T80lLni7HfzKPRajlkx5U/yGsPeimnx
+ sVJIzhaUtwEnkMQVQZQ==
+X-Proofpoint-GUID: pxAV2rXMU94vewu6d6mzp5-fmJhwQz_k
+X-Authority-Analysis: v=2.4 cv=PfPPQChd c=1 sm=1 tr=0 ts=69e97a76 cx=c_pps
+ a=kXeBnfu3JcJF6EwF0J+eVg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22
- a=NEAV23lmAAAA:8 a=nZ40scU-AAAA:20 a=t7CeM3EgAAAA:8 a=wU2YTnxGAAAA:8
- a=u9XiZHwLAAAA:8 a=P-IC7800AAAA:8 a=ZPpYJ6LdIiJ9JR2BXO4A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22 a=Yz9wTY_ffGCQnEDHKrcv:22
- a=_dVK9oMV_cxv_JnhfDLr:22 a=d3PnA9EDa4IxuAV0gXij:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-GUID: Vi2uA3gTS7AE7DJx3mPW8aBWgMOHcT6R
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDIzMDAxNSBTYWx0ZWRfX1ZHZk1dGkn/C
- FjhogI/d+aWmrSN3xIE6hT+MlniKYcPO6sSru31FeG/1eh1U8She3gPCL+PFDRE5DvdGL8aRPjC
- RSpr5hJ4WMODARMVUZ9pF639gZvn6Kp1LHsifnD9tBazOqq1smy9LBWodQqlOvXPbKmnn1Pjgcb
- ZCuwVBBknttQ0SFhmCda33zh1EGcOz/Tfq7Ud3JUL2V/v97kn7NN3mntSQtqzLoCwBDCgXaZuMO
- 6/IY/lAtXkHdA4E6OL97LHlq54P7Dai4R1dMwSfjI0wQzKs8/I/s8yW/TJe3KRpns6uagSpLpdk
- Koy2Jd85QMjb8A0vVfMVLifkgHrim/sYkvPoislIirbieB/pIBKlB6t5fuacsoQKw+kbOllGlZi
- 5FnaF3LsJBaoIL9u6ONOKbEs6XA5UpdtWT0ZpNqGyAkzcmg6sTHSw/VZzanqFchoQwQ+U+JMBJs
- +LC9rnRwC1hO9/dlg3Q==
+ a=xqWC_Br6kY4A:10 a=A5OVakUREuEA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=yEOxYvs7AAAA:20
+ a=NEAV23lmAAAA:8 a=t7CeM3EgAAAA:8 a=pGLkceISAAAA:8 a=Byx-y9mGAAAA:8
+ a=4YC7WVefAAAA:8 a=tu_hnB3LyGwdYM5peukA:9 a=0bdSyPoMka5OphY3:21
+ a=FdTzh2GWekK77mhwV6Dw:22 a=tPzOKt3quolVTVSLigK1:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: pxAV2rXMU94vewu6d6mzp5-fmJhwQz_k
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-04-22_04,2026-04-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0 priorityscore=1501
- malwarescore=0 adultscore=0 spamscore=0 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 bulkscore=0 priorityscore=1501 spamscore=0 phishscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604230015
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 63N101rf1195472
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 01:48:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126565
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126564
 
-Backport fix[1] for MGMT crash on first start on ARM32 platforms[2].
+ChangeLog:
+https://github.com/FRRouting/frr/releases/tag/frr-10.6.0
+https://github.com/FRRouting/frr/releases/tag/frr-10.6.1
 
-[1] https://github.com/FRRouting/frr/pull/21651
-[2] https://github.com/FRRouting/frr/issues/20087
+Drop backport patches.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ..._msg-recv-to-deal-with-mis-alignment.patch | 352 ++++++++++++++++++
- .../recipes-protocols/frr/frr_10.6.1.bb       |   1 +
- 2 files changed, 353 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/frr/frr/0001-lib-fi=
-x-mgmt_msg-recv-to-deal-with-mis-alignment.patch
+ .../frr/frr/CVE-2025-61099-61107-1.patch      |  40 ---
+ .../frr/frr/CVE-2025-61099-61107-2.patch      |  80 -----
+ .../frr/frr/CVE-2025-61099-61107-3.patch      | 293 ------------------
+ .../frr/{frr_10.5.3.bb => frr_10.6.1.bb}      |   7 +-
+ 4 files changed, 2 insertions(+), 418 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
+ delete mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
+ delete mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+ rename meta-networking/recipes-protocols/frr/{frr_10.5.3.bb => frr_10.6.1.bb} (94%)
 
-diff --git a/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_=
-msg-recv-to-deal-with-mis-alignment.patch b/meta-networking/recipes-proto=
-cols/frr/frr/0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.patch
-new file mode 100644
-index 0000000000..22cc10cf31
---- /dev/null
-+++ b/meta-networking/recipes-protocols/frr/frr/0001-lib-fix-mgmt_msg-rec=
-v-to-deal-with-mis-alignment.patch
-@@ -0,0 +1,352 @@
-+From 5959a3d0cbc73b0c41134bf0d9944a6bd40ba510 Mon Sep 17 00:00:00 2001
-+From: Christian Hopps <chopps@labn.net>
-+Date: Sat, 18 Apr 2026 03:01:46 +0000
-+Subject: [PATCH] lib: fix mgmt_msg recv to deal with mis-alignment
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+We need our messages to start on 64 bit boundaries as the message buffer
-+is accessed directly as structured data. In particular on ARM32 arch
-+using the data this way lead to unaligned access and SIGBUS.
-+
-+The minor optimization of reading multiple messages into a single stream
-+buffer complicated this. Instead we KISS and switch to one message per
-+stream buffer.
-+
-+Fixes #20087.
-+
-+Signed-off-by: Christian Hopps <chopps@labn.net>
-+Co-developed-by: Samir MOUHOUNE <samir.mouhoune@nav-timing.safrangroup.c=
-om>
-+Co-developed-by: Alexis Lothor=C3=A9 <alexis.lothore@bootlin.com>
-+
-+See also PR #20985
-+
-+This issue was identified and another solution was provided by Samir
-+MOUHOUNE with the following commit message comments:
-+
-+On ARM32 systems, mgmtd crashes at startup on an alignment fault:
-+
-+```
-+  frrinit.sh[158]: Starting watchfrr with command: '  /usr/sbin/watchfrr=
-  -d   mgmtd zebra staticd'
-+  watchfrr[168]: [T83RR-8SM5G] watchfrr 10.5.2 starting: vty@0
-+  watchfrr[168]: [ZCJ3S-SPH5S] mgmtd state -> down : initial connection =
-attempt failed
-+  watchfrr[168]: [ZCJ3S-SPH5S] zebra state -> down : initial connection =
-attempt failed
-+  watchfrr[168]: [ZCJ3S-SPH5S] staticd state -> down : initial connectio=
-n attempt failed
-+  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 169]: /usr=
-/sbin/watchfrr.sh restart all
-+  frrinit.sh[180]: 2026/02/27 09:14:13 ZEBRA: [KGY44-D47GD][EC 404330911=
-1] Disabling MPLS support (no kernel support)
-+  watchfrr[168]: [QDG3Y-BY5TN] zebra state -> up : connect succeeded
-+  kernel: Alignment trap: not handling instruction edc30b02 at [<004c3c1=
-c>]
-+  kernel: 8<--- cut here ---
-+  kernel: Unhandled fault: alignment exception (0x801) at 0x008879f6
-+  kernel: [008879f6] *pgd=3D9baf6831
-+  watchfrr[168]: [YFT0P-5Q5YX] Forked background command [pid 189]: /usr=
-/sbin/watchfrr.sh restart mgmtd
-+  frrinit.sh[189]: Cannot stop mgmtd: pid 179 not running
-+  watchfrr.sh[196]: Cannot stop mgmtd: pid 179 not running
-+  frrinit.sh[202]: [202|zebra] sending configuration
-+  frrinit.sh[202]: [202|zebra] done
-+  frrinit.sh[216]: [216|watchfrr] sending configuration
-+  frrinit.sh[218]: [218|staticd] sending configuration
-+  watchfrr[168]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
-+  frrinit.sh[199]: Waiting for children to finish applying config...
-+  frrinit.sh[216]: [216|watchfrr] done
-+```
-+
-+When checking crashlogs in /var/tmp/frr, mgmt gives the following:
-+
-+```
-+  MGMTD: Received signal 7 at 1772183653 (si_addr 0x8879f6); aborting...
-+  MGMTD: /lib/libfrr.so.0(zlog_backtrace_sigsafe+0x5c) [0xb6e89c90]
-+  MGMTD: /lib/libfrr.so.0(zlog_signal+0xe0) [0xb6e89e80]
-+  MGMTD: /lib/libfrr.so.0(+0xd4374) [0xb6ed3374]
-+  MGMTD: /lib/libc.so.6(__default_rt_sa_restorer+0) [0xb6ab4d90]
-+  MGMTD: /usr/sbin/mgmtd(mgmt_fe_adapter_send_notify+0x6b8) [0x4c3c20]
-+  MGMTD: /lib/libfrr.so.0(mgmt_msg_procbufs+0x124) [0xb6e976b8]
-+  MGMTD: /lib/libfrr.so.0(+0x98798) [0xb6e97798]
-+  MGMTD: /lib/libfrr.so.0(event_call+0xa8) [0xb6ee739c]
-+  MGMTD: /lib/libfrr.so.0(frr_run+0xd4) [0xb6e80fc8]
-+  MGMTD: /usr/sbin/mgmtd(main+0x188) [0x4bd7ec]
-+  MGMTD: /lib/libc.so.6(+0x236b0) [0xb6a9f6b0]
-+  MGMTD: /lib/libc.so.6(__libc_start_main+0x98) [0xb6a9f790]
-+  MGMTD: in thread msg_conn_proc_msgs scheduled from lib/mgmt_msg.c:543 =
-msg_conn_sched_proc_msgs()
-+```
-+
-+The issue is that messages are queued for sending/receive back-to-back
-+with no padding. This means that when mgmt creates a pointer back to the
-+data waiting in queue and tries to access fields inside the dereferenced
-+message, those accesses are not performed with the alignment constraints
-+required by some architectures. For example, ARM ABI AAPCS32 ([1])
-+states that structures alignment should be the same as the "most
-+aligned" member; so a struct mgmt_msg_header, which contains some
-+uint64_t fields (which are 8-bytes alignes), should be 8-bytes aligned
-+as well.
-+
-+On x86, this goes unnoticed because the CPU handles unaligned access
-+transparently. On ARM 32-bit with NEON/VFP, the compiler generates
-+64-bit store instructions that trap on unaligned addresses. The kernel
-+cannot emulate these instructions and kills the process with SIGBUS.
-+
-+[1] https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst=
-#data-types-and-alignment
-+
-+Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/5959a=
-3d0cbc73b0c41134bf0d9944a6bd40ba510]
-+
-+Signed-off-by: Christian Hopps <chopps@labn.net>
-+(cherry picked from commit ae7d79f8ff25d5750e5796567ff6317030900d40)
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ lib/mgmt_be_client.h |   3 +-
-+ lib/mgmt_fe_client.h |   3 +-
-+ lib/mgmt_msg.c       | 157 ++++++++++++++++++-------------------------
-+ 3 files changed, 68 insertions(+), 95 deletions(-)
-+
-+diff --git a/lib/mgmt_be_client.h b/lib/mgmt_be_client.h
-+index f5627e3c4e..2f412a6fbd 100644
-+--- a/lib/mgmt_be_client.h
-++++ b/lib/mgmt_be_client.h
-+@@ -21,7 +21,8 @@ extern "C" {
-+=20
-+ #define MGMTD_BE_MAX_NUM_MSG_PROC  500
-+ #define MGMTD_BE_MAX_NUM_MSG_WRITE 1000
-+-#define MGMTD_BE_MAX_MSG_LEN	   (64 * 1024)
-++/* Messages can be any size, this is just the preallocated buffer size =
-*/
-++#define MGMTD_BE_MAX_MSG_LEN (4 * 1024)
-+=20
-+ #define MGMTD_BE_CONTAINER_NODE_VAL "<<container>>"
-+=20
-+diff --git a/lib/mgmt_fe_client.h b/lib/mgmt_fe_client.h
-+index 8ff08b566a..3005c5dd01 100644
-+--- a/lib/mgmt_fe_client.h
-++++ b/lib/mgmt_fe_client.h
-+@@ -29,7 +29,8 @@ extern "C" {
-+=20
-+ #define MGMTD_FE_MAX_NUM_MSG_PROC  500
-+ #define MGMTD_FE_MAX_NUM_MSG_WRITE 100
-+-#define MGMTD_FE_MAX_MSG_LEN	   (64 * 1024)
-++/* Messages can be any size, this is just the preallocated buffer size =
-*/
-++#define MGMTD_FE_MAX_MSG_LEN (4 * 1024)
-+=20
-+ /***************************************************************
-+  * Data-structures
-+diff --git a/lib/mgmt_msg.c b/lib/mgmt_msg.c
-+index f299b52873..fb56f58ab5 100644
-+--- a/lib/mgmt_msg.c
-++++ b/lib/mgmt_msg.c
-+@@ -13,6 +13,7 @@
-+ #include "network.h"
-+ #include "sockopt.h"
-+ #include "stream.h"
-++#include "zlog.h"
-+ #include "frrevent.h"
-+ #include "mgmt_msg.h"
-+ #include "mgmt_msg_native.h"
-+@@ -39,8 +40,8 @@ static bool trace;
-+ DEFINE_MTYPE(LIB, MSG_CONN, "msg connection state");
-+=20
-+ /**
-+- * Read data from a socket into streams containing 1 or more full msgs =
-headed by
-+- * mgmt_msg_hdr which contain API messages (currently protobuf).
-++ * Read data from a socket into a stream containing 1 full msg headed b=
-y
-++ * mgmt_msg_hdr.
-+  *
-+  * Args:
-+  *	ms: mgmt_msg_state for this process.
-+@@ -57,96 +58,80 @@ enum mgmt_msg_rsched mgmt_msg_read(struct mgmt_msg_s=
-tate *ms, int fd,
-+ 				   bool debug)
-+ {
-+ 	const char *dbgtag =3D debug ? ms->idtag : NULL;
-+-	size_t avail =3D STREAM_WRITEABLE(ms->ins);
-+ 	struct mgmt_msg_hdr *mhdr =3D NULL;
-+-	size_t total =3D 0;
-+-	size_t mcount =3D 0;
-+-	ssize_t n, left;
-++	struct stream *news;
-++	size_t nread;
-++	ssize_t n;
-+=20
-+ 	assert(ms && fd !=3D -1);
-+-	MGMT_MSG_TRACE(dbgtag, "enter with %zu bytes available to read on fd %=
-d", avail, fd);
-++	MGMT_MSG_TRACE(dbgtag, "enter to read from fd %d", fd);
-++
-++	assert(stream_get_getp(ms->ins) =3D=3D 0);
-++	nread =3D stream_get_endp(ms->ins);
-+=20
-+ 	/*
-+-	 * Read as much as we can into the stream.
-++	 * Get header, validate, and resize the stream, if needed, to fit inco=
-ming message.
-+ 	 */
-+-	while (avail > sizeof(struct mgmt_msg_hdr)) {
-+-		n =3D stream_read_try(ms->ins, fd, avail);
-+-
-+-		/* -2 is normal nothing read, and to retry */
-+-		if (n =3D=3D -2) {
-+-			MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
-+-			break;
-+-		}
-+-		if (n <=3D 0) {
-+-			if (n =3D=3D 0)
-+-				MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
-+-			else
-+-				MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
-+-					     safe_strerror(errno));
-+-			return MSR_DISCONNECT;
-++	if (nread < sizeof(struct mgmt_msg_hdr)) {
-++		while (nread < sizeof(struct mgmt_msg_hdr)) {
-++			n =3D stream_read_try(ms->ins, fd, sizeof(struct mgmt_msg_hdr) - nre=
-ad);
-++			if (n <=3D 0)
-++				goto not_done;
-++			nread +=3D n;
-++			ms->nrxb +=3D n;
-+ 		}
-+-		MGMT_MSG_TRACE(dbgtag, "read %zd bytes on fd %d", n, fd);
-+-		ms->nrxb +=3D n;
-+-		avail -=3D n;
-+-	}
-+=20
-+-	/*
-+-	 * Check if we have read a complete messages or not.
-+-	 */
-+-	assert(stream_get_getp(ms->ins) =3D=3D 0);
-+-	left =3D stream_get_endp(ms->ins);
-+-	while (left > (ssize_t)sizeof(struct mgmt_msg_hdr)) {
-+-		mhdr =3D (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
-++		/* Validate the header is sane */
-++		mhdr =3D (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
-+ 		if (!MGMT_MSG_IS_MARKER(mhdr->marker)) {
-+ 			MGMT_MSG_DBG(dbgtag, "recv corrupt buffer on fd %d, disconnect", fd)=
-;
-+ 			return MSR_DISCONNECT;
-++		} else if (mhdr->len <=3D sizeof(struct mgmt_msg_hdr)) {
-++			MGMT_MSG_DBG(dbgtag, "recv invalid message length %u on fd %d, disco=
-nnect",
-++				     mhdr->len, fd);
-++			return MSR_DISCONNECT;
-+ 		}
-+-		if ((ssize_t)mhdr->len > left)
-+-			break;
-+-
-+-		MGMT_MSG_TRACE(dbgtag, "read full message on fd %d len %u", fd, mhdr-=
->len);
-+-		total +=3D mhdr->len;
-+-		left -=3D mhdr->len;
-+-		mcount++;
-+-	}
-+=20
-+-	if (!mcount) {
-+-		/* Didn't manage to read a full message */
-+-		if (mhdr && avail =3D=3D 0) {
-+-			struct stream *news;
-+-			/*
-+-			 * Message was longer than what was left and we have no
-+-			 * available space to read more in. B/c mcount =3D=3D 0 the
-+-			 * message starts at the beginning of the stream so
-+-			 * therefor the stream is too small to fit the message..
-+-			 * Resize the stream to fit.
-+-			 */
-++		/* See if message will fit in the stream, realloc if not */
-++		if (mhdr->len > ms->ins->size) {
-++			MGMT_MSG_DBG(dbgtag,
-++				     "message length %u is greater than available %zu on fd %d",
-++				     mhdr->len, ms->ins->size, fd);
-+ 			news =3D stream_new(mhdr->len);
-+-			stream_put(news, mhdr, left);
-+-			stream_set_endp(news, left);
-++			stream_put(news, mhdr, sizeof(struct mgmt_msg_hdr));
-+ 			stream_free(ms->ins);
-+ 			ms->ins =3D news;
-+ 		}
-+-		return MSR_SCHED_STREAM;
-+ 	}
-+=20
-+-	/*
-+-	 * We have read at least one message into the stream, queue it up.
-+-	 */
-+-	mhdr =3D (struct mgmt_msg_hdr *)(STREAM_DATA(ms->ins) + total);
-+-	stream_set_endp(ms->ins, total);
-+-	stream_fifo_push(&ms->inq, ms->ins);
-+-	if (left < (ssize_t)sizeof(struct mgmt_msg_hdr))
-+-		ms->ins =3D stream_new(ms->max_msg_sz);
-+-	else
-+-		/* handle case where message is greater than max */
-+-		ms->ins =3D stream_new(MAX(ms->max_msg_sz, mhdr->len));
-+-	if (left) {
-+-		stream_put(ms->ins, mhdr, left);
-+-		stream_set_endp(ms->ins, left);
-++	/* Read the rest of the message. */
-++	mhdr =3D (struct mgmt_msg_hdr *)STREAM_DATA(ms->ins);
-++	while (nread < mhdr->len) {
-++		n =3D stream_read_try(ms->ins, fd, mhdr->len - nread);
-++		if (n <=3D 0)
-++			goto not_done;
-++		nread +=3D n;
-++		ms->nrxb +=3D n;
-++		MGMT_MSG_TRACE(dbgtag, "read %zd from fd %d (%zu of %u)", n, fd, nrea=
-d, mhdr->len);
-+ 	}
-+=20
-++	/* We've got a full message, push it onto the FIFO and setup for the n=
-ext message. */
-++	MGMT_MSG_TRACE(dbgtag, "read full msg %zu/%u from fd %d", nread, mhdr-=
->len, fd);
-++	stream_fifo_push(&ms->inq, ms->ins);
-++	ms->ins =3D stream_new(ms->max_msg_sz);
-+ 	return MSR_SCHED_BOTH;
-++
-++not_done:
-++	if (n =3D=3D -2) {
-++		MGMT_MSG_TRACE(dbgtag, "nothing more to read on fd %d", fd);
-++		return MSR_SCHED_STREAM;
-++	}
-++	if (n =3D=3D 0)
-++		MGMT_MSG_ERR(ms, "got EOF/disconnect on fd %d", fd);
-++	else
-++		MGMT_MSG_ERR(ms, "got error while reading on fd %d: '%s'", fd,
-++			     safe_strerror(errno));
-++	return MSR_DISCONNECT;
-+ }
-+=20
-+ /**
-+@@ -171,7 +156,6 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
-+ 	const char *dbgtag =3D debug ? ms->idtag : NULL;
-+ 	struct mgmt_msg_hdr *mhdr;
-+ 	struct stream *work;
-+-	uint8_t *data;
-+ 	size_t left, nproc;
-+=20
-+ 	MGMT_MSG_TRACE(dbgtag, "Have %zu streams to process", ms->inq.count);
-+@@ -182,30 +166,17 @@ bool mgmt_msg_procbufs(struct mgmt_msg_state *ms,
-+ 		if (!work)
-+ 			break;
-+=20
-+-		data =3D STREAM_DATA(work);
-+ 		left =3D stream_get_endp(work);
-+ 		MGMT_MSG_TRACE(dbgtag, "Processing stream of len %zu", left);
-+-
-+-		for (; left > sizeof(struct mgmt_msg_hdr);
-+-		     left -=3D mhdr->len, data +=3D mhdr->len) {
-+-			mhdr =3D (struct mgmt_msg_hdr *)data;
-+-
-+-			assert(MGMT_MSG_IS_MARKER(mhdr->marker));
-+-			assert(left >=3D mhdr->len);
-+-
-+-			/*
-+-			 * Q: if the handler disconnects should stop/flush?
-+-			 */
-+-			handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr +=
- 1),
-+-				   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
-+-			ms->nrxm++;
-+-			nproc++;
-+-		}
-+-
-+-		if (work !=3D ms->ins)
-+-			stream_free(work); /* Free it up */
-+-		else
-+-			stream_reset(work); /* Reset stream for next read */
-++		/*
-++		 * Q: if the handler disconnects should we stop/flush?
-++		 */
-++		mhdr =3D (struct mgmt_msg_hdr *)STREAM_DATA(work);
-++		handle_msg(MGMT_MSG_MARKER_VERSION(mhdr->marker), (uint8_t *)(mhdr + =
-1),
-++			   mhdr->len - sizeof(struct mgmt_msg_hdr), user);
-++		ms->nrxm++;
-++		nproc++;
-++		stream_free(work); /* Free it up */
-+ 	}
-+=20
-+ 	/* return true if should reschedule b/c more to process. */
-+--=20
-+2.43.0
-+
-diff --git a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb b/meta-n=
-etworking/recipes-protocols/frr/frr_10.6.1.bb
-index e86e0f3153..1cd102f0da 100644
---- a/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
+deleted file mode 100644
+index a1e1246cce..0000000000
+--- a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-1.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From e21276d430663fd8312940bb3b0ce081957e3d85 Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Sun, 24 Aug 2025 21:17:55 +0800
+-Subject: [PATCH] ospfd: Add null check for vty_out in check_tlv_size
+-
+-From: s1awwhy <seawwhy@163.com>
+-
+-Add security check for vty_out. Specifically,  Check NULL for vty. If vty is not available, dump info via zlog.
+-
+-Signed-off-by: s1awwhy <seawwhy@163.com>
+-
+-CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
+-Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b7d9b7aa47627b31e4b50795284408ab6de98660]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- ospfd/ospf_ext.c | 8 ++++++--
+- 1 file changed, 6 insertions(+), 2 deletions(-)
+-
+-diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
+-index df0b3b9081..8ca0df3200 100644
+---- a/ospfd/ospf_ext.c
+-+++ b/ospfd/ospf_ext.c
+-@@ -1705,11 +1705,15 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
+-  * ------------------------------------
+-  */
+- 
+-+/* Check NULL for vty. If vty is not available, dump info via zlog */
+- #define check_tlv_size(size, msg)                                              \
+- 	do {                                                                   \
+- 		if (ntohs(tlvh->length) != size) {                             \
+--			vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
+--				msg, ntohs(tlvh->length), size);               \
+-+			if (vty != NULL)                         \
+-+				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
+-+					msg, ntohs(tlvh->length), size);               \
+-+			else                                              \
+-+				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
+- 			return size + TLV_HDR_SIZE;                            \
+- 		}                                                              \
+- 	} while (0)
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
+deleted file mode 100644
+index eacada0ec4..0000000000
+--- a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-2.patch
++++ /dev/null
+@@ -1,80 +0,0 @@
+-From d9ed123b814dad7cf4b069de5601c9f279596191 Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Tue, 6 Jan 2026 15:32:32 +0100
+-Subject: [PATCH] ospfd: skip subsequent tlvs after invalid length
+-
+-From: Louis Scalbert <louis.scalbert@6wind.com>
+-
+-Do not attempt to read subsequent TLVs after an TLV invalid length is
+-detected.
+-
+-Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
+-
+-CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
+-Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/33dfc7e7be1ac8b66abbf47c30a709215fbc1926]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- ospfd/ospf_ext.c | 6 +++---
+- ospfd/ospf_ri.c  | 6 +++---
+- ospfd/ospf_te.c  | 6 +++---
+- 3 files changed, 9 insertions(+), 9 deletions(-)
+-
+-diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
+-index 8ca0df3200..62b0020148 100644
+---- a/ospfd/ospf_ext.c
+-+++ b/ospfd/ospf_ext.c
+-@@ -1710,11 +1710,11 @@ static void ospf_ext_lsa_schedule(struct ext_itf *exti, enum lsa_opcode op)
+- 	do {                                                                   \
+- 		if (ntohs(tlvh->length) != size) {                             \
+- 			if (vty != NULL)                         \
+--				vty_out(vty, "  Wrong %s TLV size: %d(%d). Abort!\n",  \
+-+				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
+- 					msg, ntohs(tlvh->length), size);               \
+- 			else                                              \
+--				zlog_debug("    Wrong %s TLV size: %d(%d). Abort!", msg, ntohs(tlvh->length), size);    \
+--			return size + TLV_HDR_SIZE;                            \
+-+				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!", msg, ntohs(tlvh->length), size);    \
+-+			return OSPF_MAX_LSA_SIZE + 1;                            \
+- 		}                                                              \
+- 	} while (0)
+- 
+-diff --git a/ospfd/ospf_ri.c b/ospfd/ospf_ri.c
+-index 76e6efeb83..7934b25451 100644
+---- a/ospfd/ospf_ri.c
+-+++ b/ospfd/ospf_ri.c
+-@@ -1208,12 +1208,12 @@ static int ospf_router_info_lsa_update(struct ospf_lsa *lsa)
+- 	do {                                                                   \
+- 		if (ntohs(tlvh->length) > size) {                              \
+- 			if (vty != NULL)                                       \
+--				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
+-+				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
+- 					msg, ntohs(tlvh->length), size);       \
+- 			else                                                   \
+--				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
+-+				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
+- 					   msg, ntohs(tlvh->length), size);    \
+--			return size + TLV_HDR_SIZE;                            \
+-+			return OSPF_MAX_LSA_SIZE + 1;                            \
+- 		}                                                              \
+- 	} while (0)
+- 
+-diff --git a/ospfd/ospf_te.c b/ospfd/ospf_te.c
+-index d187485b9f..850a7039f1 100644
+---- a/ospfd/ospf_te.c
+-+++ b/ospfd/ospf_te.c
+-@@ -3161,12 +3161,12 @@ static void ospf_te_init_ted(struct ls_ted *ted, struct ospf *ospf)
+- 	do {                                                                   \
+- 		if (ntohs(tlvh->length) > size) {                              \
+- 			if (vty != NULL)                                       \
+--				vty_out(vty, "  Wrong %s TLV size: %d(%d)\n",  \
+-+				vty_out(vty, "  Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!\n",  \
+- 					msg, ntohs(tlvh->length), size);       \
+- 			else                                                   \
+--				zlog_debug("    Wrong %s TLV size: %d(%d)",    \
+-+				zlog_debug("    Wrong %s TLV size: %d(expected %d). Skip subsequent TLVs!",    \
+- 					   msg, ntohs(tlvh->length), size);    \
+--			return size + TLV_HDR_SIZE;                            \
+-+			return OSPF_MAX_LSA_SIZE + 1;                            \
+- 		}                                                              \
+- 	} while (0)
+- 
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
+deleted file mode 100644
+index 7b983198f5..0000000000
+--- a/meta-networking/recipes-protocols/frr/frr/CVE-2025-61099-61107-3.patch
++++ /dev/null
+@@ -1,293 +0,0 @@
+-From 2d02bca97251ee53fb10b4c34c8cda0e20ae8b8e Mon Sep 17 00:00:00 2001
+-From: Gyorgy Sarvari <skandigraun@gmail.com>
+-Date: Sun, 24 Aug 2025 21:21:23 +0800
+-Subject: [PATCH] ospfd: Fix NULL Pointer Deference when dumping link info
+-
+-From: s1awwhy <seawwhy@163.com>
+-
+-When the command debug ospf packet all send/recv detail is enabled in the OSPF
+-configuration,  ospfd will dump detailed information of any received or sent
+-OSPF packets, either via VTY or through the zlog. However, the original Opaque
+-LSA handling code failed to check whether the VTY context and show_opaque_info
+-were available, resulting in NULL pointer dereference and crashes in ospfd.
+-The patch fixes the Null Pointer Deference Vulnerability in
+-show_vty_ext_link_rmt_itf_addr, show_vty_ext_link_adj_sid,
+-show_vty_ext_link_lan_adj_sid, show_vty_unknown_tlv,
+-show_vty_link_info, show_vty_ext_pref_pref_sid, show_vtY_pref_info.
+-Specifically, add NULL check for vty. If vty is not available, dump details
+-via zlog.
+-
+-Signed-off-by: s1awwhy <seawwhy@163.com>
+-Signed-off-by: Louis Scalbert <louis.scalbert@6wind.com>
+-
+-CVE: CVE-2025-61099 CVE-2025-61100 CVE-2025-61101 CVE-2025-61102 CVE-2025-61103 CVE-2025-61104 CVE-2025-61105 CVE-2025-61106 CVE-2025-61107
+-Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/034e6fe67078810b952630055614ee5710d1196e]
+-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+----
+- ospfd/ospf_ext.c | 200 ++++++++++++++++++++++++++++++++---------------
+- 1 file changed, 138 insertions(+), 62 deletions(-)
+-
+-diff --git a/ospfd/ospf_ext.c b/ospfd/ospf_ext.c
+-index 62b0020148..c1fcd632e0 100644
+---- a/ospfd/ospf_ext.c
+-+++ b/ospfd/ospf_ext.c
+-@@ -1729,9 +1729,15 @@ static uint16_t show_vty_ext_link_rmt_itf_addr(struct vty *vty,
+- 	check_tlv_size(EXT_SUBTLV_RMT_ITF_ADDR_SIZE, "Remote Itf. Address");
+- 
+- 	if (!json)
+--		vty_out(vty,
+--			"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
+--			ntohs(top->header.length), &top->value);
+-+		if (vty != NULL) {
+-+			vty_out(vty,
+-+				"  Remote Interface Address Sub-TLV: Length %u\n	Address: %pI4\n",
+-+				ntohs(top->header.length), &top->value);
+-+		} else {
+-+			zlog_debug("  Remote Interface Address Sub-TLV: Length %u",
+-+				   ntohs(top->header.length));
+-+			zlog_debug("  Address: %pI4", &top->value);
+-+		}
+- 	else
+- 		json_object_string_addf(json, "remoteInterfaceAddress", "%pI4",
+- 					&top->value);
+-@@ -1752,18 +1758,30 @@ static uint16_t show_vty_ext_link_adj_sid(struct vty *vty,
+- 			      : SID_INDEX_SIZE(EXT_SUBTLV_ADJ_SID_SIZE);
+- 	check_tlv_size(tlv_size, "Adjacency SID");
+- 
+--	if (!json)
+--		vty_out(vty,
+--			"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
+--			ntohs(top->header.length), top->flags, top->mtid,
+--			top->weight,
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+--				? "Label"
+--				: "Index",
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+--				? GET_LABEL(ntohl(top->value))
+--				: ntohl(top->value));
+--	else {
+-+	if (!json) {
+-+		/* Add security check for vty_out. If vty is not available, dump info via zlog.*/
+-+		if (vty != NULL)
+-+			vty_out(vty,
+-+				"  Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\t%s: %u\n",
+-+				ntohs(top->header.length), top->flags, top->mtid, top->weight,
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+-+										     : "Index",
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+-+					? GET_LABEL(ntohl(top->value))
+-+					: ntohl(top->value));
+-+		else {
+-+			zlog_debug("  Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
+-+			zlog_debug("    Flags: 0x%x", top->flags);
+-+			zlog_debug("    MT-ID:0x%x", top->mtid);
+-+			zlog_debug("    Weight: 0x%x", top->weight);
+-+			zlog_debug("    %s: %u",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+-+											: "Index",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+-+					   ? GET_LABEL(ntohl(top->value))
+-+					   : ntohl(top->value));
+-+		}
+-+	} else {
+- 		json_object_string_addf(json, "flags", "0x%x", top->flags);
+- 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
+- 		json_object_string_addf(json, "weight", "0x%x", top->weight);
+-@@ -1791,18 +1809,32 @@ static uint16_t show_vty_ext_link_lan_adj_sid(struct vty *vty,
+- 			      : SID_INDEX_SIZE(EXT_SUBTLV_LAN_ADJ_SID_SIZE);
+- 	check_tlv_size(tlv_size, "LAN-Adjacency SID");
+- 
+--	if (!json)
+--		vty_out(vty,
+--			"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
+--			ntohs(top->header.length), top->flags, top->mtid,
+--			top->weight, &top->neighbor_id,
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+--				? "Label"
+--				: "Index",
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+--				? GET_LABEL(ntohl(top->value))
+--				: ntohl(top->value));
+--	else {
+-+	if (!json) {
+-+		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+-+		if (vty != NULL) {
+-+			vty_out(vty,
+-+				"  LAN-Adj-SID Sub-TLV: Length %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\tWeight: 0x%x\n\tNeighbor ID: %pI4\n\t%s: %u\n",
+-+				ntohs(top->header.length), top->flags, top->mtid, top->weight,
+-+				&top->neighbor_id,
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+-+										     : "Index",
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+-+					? GET_LABEL(ntohl(top->value))
+-+					: ntohl(top->value));
+-+		} else {
+-+			zlog_debug("  LAN-Adj-SID Sub-TLV: Length %u", ntohs(top->header.length));
+-+			zlog_debug("    Flags: 0x%x", top->flags);
+-+			zlog_debug("    MT-ID:0x%x", top->mtid);
+-+			zlog_debug("    Weight: 0x%x", top->weight);
+-+			zlog_debug("    Neighbor ID: %pI4", &top->neighbor_id);
+-+			zlog_debug("    %s: %u",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG) ? "Label"
+-+											: "Index",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_LINK_ADJ_SID_VFLG)
+-+					   ? GET_LABEL(ntohl(top->value))
+-+					   : ntohl(top->value));
+-+		}
+-+	} else {
+- 		json_object_string_addf(json, "flags", "0x%x", top->flags);
+- 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
+- 		json_object_string_addf(json, "weight", "0x%x", top->weight);
+-@@ -1823,14 +1855,23 @@ static uint16_t show_vty_unknown_tlv(struct vty *vty, struct tlv_header *tlvh,
+- {
+- 	json_object *obj;
+- 
+-+	/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+- 	if (TLV_SIZE(tlvh) > buf_size) {
+--		vty_out(vty, "    TLV size %d exceeds buffer size. Abort!",
+--			TLV_SIZE(tlvh));
+-+		if (vty != NULL)
+-+			vty_out(vty, "    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
+-+		else
+-+			zlog_debug("    TLV size %d exceeds buffer size. Abort!", TLV_SIZE(tlvh));
+-+
+- 		return buf_size;
+- 	}
+- 	if (!json)
+--		vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
+--			ntohs(tlvh->type), ntohs(tlvh->length));
+-+		if (vty != NULL) {
+-+			vty_out(vty, "    Unknown TLV: [type(0x%x), length(0x%x)]\n",
+-+				ntohs(tlvh->type), ntohs(tlvh->length));
+-+		} else {
+-+			zlog_debug("    Unknown TLV: [type(0x%x), length(0x%x)]",
+-+				   ntohs(tlvh->type), ntohs(tlvh->length));
+-+		}
+- 	else {
+- 		obj = json_object_new_object();
+- 		json_object_string_addf(obj, "type", "0x%x",
+-@@ -1855,19 +1896,31 @@ static uint16_t show_vty_link_info(struct vty *vty, struct tlv_header *ext,
+- 
+- 	/* Verify that TLV length is valid against remaining buffer size */
+- 	if (length > buf_size) {
+--		vty_out(vty,
+--			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+--			length);
+-+		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+-+		if (vty != NULL) {
+-+			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+-+				length);
+-+		} else {
+-+			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
+-+				   length);
+-+		}
+- 		return buf_size;
+- 	}
+- 
+- 	if (!json) {
+--		vty_out(vty,
+--			"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
+--			"	Link ID: %pI4\n",
+--			ntohs(top->header.length), top->link_type,
+--			&top->link_id);
+--		vty_out(vty, "	Link data: %pI4\n", &top->link_data);
+-+		/* Add security check for vty_out. If vty is not available, dump info via zlog. */
+-+		if (vty != NULL) {
+-+			vty_out(vty,
+-+				"  Extended Link TLV: Length %u\n	Link Type: 0x%x\n"
+-+				"	Link ID: %pI4\n",
+-+				ntohs(top->header.length), top->link_type, &top->link_id);
+-+			vty_out(vty, "	Link data: %pI4\n", &top->link_data);
+-+		} else {
+-+			zlog_debug("  Extended Link TLV: Length %u", ntohs(top->header.length));
+-+			zlog_debug("    Link Type: 0x%x", top->link_type);
+-+			zlog_debug("    Link ID: %pI4", &top->link_id);
+-+			zlog_debug("    Link data: %pI4", &top->link_data);
+-+		}
+- 	} else {
+- 		json_object_string_addf(json, "linkType", "0x%x",
+- 					top->link_type);
+-@@ -1959,18 +2012,29 @@ static uint16_t show_vty_ext_pref_pref_sid(struct vty *vty,
+- 			      : SID_INDEX_SIZE(EXT_SUBTLV_PREFIX_SID_SIZE);
+- 	check_tlv_size(tlv_size, "Prefix SID");
+- 
+--	if (!json)
+--		vty_out(vty,
+--			"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
+--			ntohs(top->header.length), top->algorithm, top->flags,
+--			top->mtid,
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+--				? "Label"
+--				: "Index",
+--			CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+--				? GET_LABEL(ntohl(top->value))
+--				: ntohl(top->value));
+--	else {
+-+	if (!json) {
+-+		if (vty != NULL) {
+-+			vty_out(vty,
+-+				"  Prefix SID Sub-TLV: Length %u\n\tAlgorithm: %u\n\tFlags: 0x%x\n\tMT-ID:0x%x\n\t%s: %u\n",
+-+				ntohs(top->header.length), top->algorithm, top->flags, top->mtid,
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
+-+										   : "Index",
+-+				CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+-+					? GET_LABEL(ntohl(top->value))
+-+					: ntohl(top->value));
+-+		} else {
+-+			zlog_debug("  Prefix SID Sub-TLV: Length %u", ntohs(top->header.length));
+-+			zlog_debug("    Algorithm: %u", top->algorithm);
+-+			zlog_debug("    Flags: 0x%x", top->flags);
+-+			zlog_debug("    MT-ID:0x%x", top->mtid);
+-+			zlog_debug("    %s: %u",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG) ? "Label"
+-+										      : "Index",
+-+				   CHECK_FLAG(top->flags, EXT_SUBTLV_PREFIX_SID_VFLG)
+-+					   ? GET_LABEL(ntohl(top->value))
+-+					   : ntohl(top->value));
+-+		}
+-+	} else {
+- 		json_object_int_add(json, "algorithm", top->algorithm);
+- 		json_object_string_addf(json, "flags", "0x%x", top->flags);
+- 		json_object_string_addf(json, "mtID", "0x%x", top->mtid);
+-@@ -1995,19 +2059,31 @@ static uint16_t show_vty_pref_info(struct vty *vty, struct tlv_header *ext,
+- 
+- 	/* Verify that TLV length is valid against remaining buffer size */
+- 	if (length > buf_size) {
+--		vty_out(vty,
+--			"  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+--			length);
+-+		if (vty != NULL) {
+-+			vty_out(vty, "  Extended Link TLV size %d exceeds buffer size. Abort!\n",
+-+				length);
+-+		} else {
+-+			zlog_debug("  Extended Link TLV size %d exceeds buffer size. Abort!",
+-+				   length);
+-+		}
+- 		return buf_size;
+- 	}
+- 
+--	if (!json)
+--		vty_out(vty,
+--			"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
+--			"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
+--			ntohs(top->header.length), top->route_type, top->af,
+--			top->flags, &top->address, top->pref_length);
+--	else {
+-+	if (!json) {
+-+		if (vty != NULL) {
+-+			vty_out(vty,
+-+				"  Extended Prefix TLV: Length %u\n\tRoute Type: %u\n"
+-+				"\tAddress Family: 0x%x\n\tFlags: 0x%x\n\tAddress: %pI4/%u\n",
+-+				ntohs(top->header.length), top->route_type, top->af, top->flags,
+-+				&top->address, top->pref_length);
+-+		} else {
+-+			zlog_debug("  Extended Prefix TLV: Length %u", ntohs(top->header.length));
+-+			zlog_debug("    Route Type: %u", top->route_type);
+-+			zlog_debug("    Address Family: 0x%x", top->af);
+-+			zlog_debug("    Flags: 0x%x", top->flags);
+-+			zlog_debug("    Address: %pI4/%u", &top->address, top->pref_length);
+-+		}
+-+	} else {
+- 		json_object_int_add(json, "routeType", top->route_type);
+- 		json_object_string_addf(json, "addressFamily", "0x%x", top->af);
+- 		json_object_string_addf(json, "flags", "0x%x", top->flags);
+diff --git a/meta-networking/recipes-protocols/frr/frr_10.5.3.bb b/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
+similarity index 94%
+rename from meta-networking/recipes-protocols/frr/frr_10.5.3.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.6.1.bb
+index 1c06f7bda5..e86e0f3153 100644
+--- a/meta-networking/recipes-protocols/frr/frr_10.5.3.bb
 +++ b/meta-networking/recipes-protocols/frr/frr_10.6.1.bb
-@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM =3D "file://doc/licenses/GPL-2.0;md5=3D=
-b234ee4d69f5fce4486a80fdaf4a
-=20
- SRC_URI =3D "git://github.com/FRRouting/frr.git;protocol=3Dhttps;branch=3D=
-stable/10.6;tag=3Dfrr-${PV} \
+@@ -10,13 +10,10 @@ LIC_FILES_CHKSUM = "file://doc/licenses/GPL-2.0;md5=b234ee4d69f5fce4486a80fdaf4a
+                     file://doc/licenses/LGPL-2.1;md5=4fbd65380cdd255951079008b364516c"
+ 
+ 
+-SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;nobranch=1;tag=frr-${PV} \
++SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/10.6;tag=frr-${PV} \
             file://frr.pam \
-+           file://0001-lib-fix-mgmt_msg-recv-to-deal-with-mis-alignment.=
-patch \
+-           file://CVE-2025-61099-61107-1.patch \
+-           file://CVE-2025-61099-61107-2.patch \
+-           file://CVE-2025-61099-61107-3.patch \
             "
- SRCREV =3D "71da51baee6fb2a02b24262defc46591c86e8a81"
-=20
---=20
+-SRCREV = "cd39d029a48a1e58929a7f31e7d61a594c2ecb42"
++SRCREV = "71da51baee6fb2a02b24262defc46591c86e8a81"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "frr-(?P<pver>\d+(\.\d+)+)$"
+ 
+-- 
 2.34.1
 
 
