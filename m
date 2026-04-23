@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31F53F589B9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 255EBF589B7
 	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:49:05 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18529.1776948543633672455
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18655.1776948539142715257
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 05:49:03 -0700
+ Thu, 23 Apr 2026 05:48:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QJwwrnty;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2b7adb38d65so5528215ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:49:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=G3R72jLr;
+ spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-35d9f68d011so4404167a91.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776948543; x=1777553343; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776948538; x=1777553338; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9sAxLWYHMN/1KEFGUf+zBSxgWSUToCS60PPo6QWeoNQ=;
-        b=QJwwrntyA6pAvDGgF1CSWveN2vFxqRxidns/ABs9PHTrY6Q8mvortWRm7TQWdk2ztx
-         fnTN9Va/pfrbta+gJbkLM24pE/L5xXAIxiPLSUalbEDtKoCRUm+V7jite1B6vZdeUYwy
-         9f03BdOxNLgyowkt1lRv1O3lBsS8tjK1l45+uGYMn1+3Pi/12T5eKw8hUf4IHdMmC+/U
-         mEh2uq69QYBcO1CNIiOALm8wrnnIxx/kqfs2Wj9etholH3YLR0djtyt5bHTvItdfJK8/
-         CkGP1thk5gy6ls20aAnbcRuygbPwD9vQezemFbOuAa5kiwv5nisFOFcSf1F/vMOZkN7Q
-         hdtg==
+        bh=4XILb0gPHX3WMMKyOhtIuAxPRcHZcIVDDFsSk8zYP0k=;
+        b=G3R72jLrc4X90WAN9Xi5g5Hxp4//U7eUMEsC9IqbEN8cEsJrudipyO4VeIqfuEVNAe
+         dKrqZSHbqa7egz1a+q5QFpxjDOTg7/sMHF89kSo5I1Ue34SEc/8ixamFetzqEPUA+2du
+         mEq+zLWmRNtJdr/cBdJjSjUhsh/5q/vCjO2nH/k/cV/Yl/n1zeNNwWYozynwSGwFBDwG
+         B2eebke11dRtqIhI8fh+WO9q7PI0aWz6c6J6gh7mQqPVXOrJKa2lcxzrHt5Mu1PLX4ws
+         s0pAZob1KLBi2QC/+ZcXcqWZeFXChn7Mk0IWp5t0K668bvkNEaHgPGTJ0pLnVC3J8Paz
+         D7wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776948543; x=1777553343;
+        d=1e100.net; s=20251104; t=1776948538; x=1777553338;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=9sAxLWYHMN/1KEFGUf+zBSxgWSUToCS60PPo6QWeoNQ=;
-        b=kn90plKFiU8WBhXVFqaJyMVnKPeiJ+VBIwHgxUiP7n53sptO1m7C9Tze2mouXpqNk0
-         FvAgO6hh5csc+R0po4BXFvxKHoTr9+o7p6OXTtvjjkk+/9ir1/JM7vpxuT2W8TbegpUI
-         uoqqKY82S0yDNMkU6kWb6+wDVrp2rR9EOJ+eXwEeIpxKejhnEpv2JNglK7dJIM1mjHpf
-         9NRzeaFFz5iSpMhImZs9pZIcr2KRkMbF1C4fLBhg86tvrxggmUiaFumATCMy97ey/ic/
-         8W2qec0Tgm7kA6hCgnVGqyqFlnIMCrzkTMKyLErBUlTbZwWvglftHAaR7SFQN+uh7M5k
-         1VBA==
-X-Gm-Message-State: AOJu0YzVN+kRuyPjP1WCE6uzNfPvbJwNHCKri+LblX62e1qprTt7xKGY
-	6HnjP0GsUXkOB/SJW9Lu+/SpIjHSZ4jI9IVSmlELGR4scEyN51zOkswNwvkZ60xP
-X-Gm-Gg: AeBDietKUzxLLG7mgkVRM+qmjSrZG0NxpAy3iKE1NceKY8oDqn+zEwvkFdeCe2TCAdP
-	caBT5YwbZ5dOoSGuEMZNNimVsmpctw328ifV30yraYJILDtAlpeGdnq2vLhev2yV4RwuLZBxpto
-	f0lPUkGPbvwcuRiX1YWpAstN07wxHsmQAqbdCUSPpPnKwwSGK8pJMQrmIM8WxAwl/WlWV9WOX08
-	M7Hj1I1g8FkwBFA78en5oB039GE1N7IAR90KxcxWTqGyWwp4KGc2hyWtXzMYWtnQqNhIdw7bmT7
-	AnSKcULj7xpcTIxlqdXtT8aLTugHfLJc77Al0lNfhkdU6npYIi3SMx/K01ZRAmD7OfhNHjAjwnN
-	GsGI8Av96UoSvYzMjbHJxnRtjyY/V42vzFG3qdaw8k2C+ubPPEKjBWS4rT5yn6GSmNizlz731BG
-	kHmj2NXiNSev+YJKYhHYSg+4A2Z2zHd9SIGicb1kooiBZniyw=
-X-Received: by 2002:a17:903:350c:b0:2b2:4310:8d1a with SMTP id d9443c01a7336-2b5f9f8204fmr271498605ad.38.1776948542806;
-        Thu, 23 Apr 2026 05:49:02 -0700 (PDT)
+        bh=4XILb0gPHX3WMMKyOhtIuAxPRcHZcIVDDFsSk8zYP0k=;
+        b=nZQd9rYrkcKKjgWqq6wmu3YfR2UK5UPvxxTPtyCbvl1rA3U0d/hP8kyl4cFg7on5YP
+         RW5SYBq+rfD+3Q6AbgKp3qXe3a4ccmtyDMObn5VlGCjESpn0qNH6Wq4blm3Hj7o2ul8n
+         3hxYZXu8L9DYlzw+ggITNCvedQK1GBsObd1KryFylleKGg8lw736Lv+DpvWOqLyL9KB1
+         NL8FaZXSL3dkSvNhxeO6D2zOX7oWzwzctqfsxbLHOiGmCv/4i8uFHruCRDGe7a2bykec
+         JUXfCroXGbhRxI0c4uzQEnMm1niHp/DYKnu7ibw2EEmpwJS3xrRtNbGYiS77mP/dD5kH
+         g2ow==
+X-Gm-Message-State: AOJu0YxlDIYAlOBYrX0+eNDVuW9Bamjy1pp8qlsCVfgjZnyGYWKeg7XQ
+	q4jVpFpsoZaR+vtLtHCsKrjDQ+WkXoJSWQoWskRZIyyIu76XOgpehxMwAoD7hcm3
+X-Gm-Gg: AeBDies7+1y7UDuZR7MO1cojPLT+wXO1rgWEJzRFGlXERNdwKr130tRhW0zRxcq/c3B
+	wPFLPAnHV/ZJJi4jfPY9SsntfdDskxsOEVgeZ3CWco/xby31ytYJ5nHYaKMG/4kOEIVKCl/RP9s
+	SRN/P/lpjjUv4o4FBGlfS3Qv+i8jkoG7qErB4YgZwJaVeTH/EoH2r71ttj5w8C1yCMCj4I0Cd4H
+	nI18AN0F83d9FatwUk8jRe2pPN746YtXOuguNx3cMqsSf1AhVeVBtVw2eXAv/D85tq2/aP7MTN/
+	G71IpupZ4axCA1LXLWncbWi5r+f3gg8YuY2zIfvkac6FqqAMEU259cRH5vIjTz+Grgbr9yl1R+N
+	a5RitoVa3OXby94n9IRf9C6bwXVnDC70sSR/YOmJRe36L19VkxuwRoUOwIJA03gKJC/PPEP6LSX
+	1nr/nR+rg0pWGt1uflhQ7rj3jcrRRQOhg0Xm+++vRYaUX9dEKIzNPP4OE6yg==
+X-Received: by 2002:a17:903:1ac8:b0:2b0:70c8:ccea with SMTP id d9443c01a7336-2b5f9eaeba2mr280291865ad.13.1776948538325;
+        Thu, 23 Apr 2026 05:48:58 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.49.00
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.48.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 05:49:02 -0700 (PDT)
+        Thu, 23 Apr 2026 05:48:57 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 4/19] jq: patch CVE-2026-33948
-Date: Fri, 24 Apr 2026 00:48:02 +1200
-Message-ID: <20260423124823.1983261-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 3/19] jq: patch CVE-2026-33947
+Date: Fri, 24 Apr 2026 00:48:01 +1200
+Message-ID: <20260423124823.1983261-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
 References: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
@@ -69,88 +69,143 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:49:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126580
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126579
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33948
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-33947
 
-Backport the patch that is referenced by the NVD advisory.
+Backport the patch that is referenced by the NVD report.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 8d399af3337b25d71f8cd4308b9788ac4e88b730)
+(cherry picked from commit 525e18ce214213193d9a280de3bfd2deb847110e)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../jq/jq/CVE-2026-33948.patch                | 49 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
+ .../jq/jq/CVE-2026-33947.patch                | 104 ++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       |   1 +
+ 2 files changed, 105 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-33947.patch
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-33947.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33947.patch
 new file mode 100644
-index 0000000000..8625429c74
+index 0000000000..69a8381f06
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33948.patch
-@@ -0,0 +1,49 @@
-+From 19a792c4cdb6b91c056eac033ac3367af6e67755 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-33947.patch
+@@ -0,0 +1,104 @@
++From 5fd935884a6f5b3d8ecdcacfc5d3982140f3a478 Mon Sep 17 00:00:00 2001
 +From: itchyny <itchyny@cybozu.co.jp>
-+Date: Mon, 13 Apr 2026 08:46:11 +0900
-+Subject: [PATCH] Fix NUL truncation in the JSON parser
++Date: Mon, 13 Apr 2026 11:23:40 +0900
++Subject: [PATCH] Limit path depth to prevent stack overflow
 +
-+This fixes CVE-2026-33948.
++Deeply nested path arrays can cause unbounded recursion in
++`jv_setpath`, `jv_getpath`, and `jv_delpaths`, leading to
++stack overflow. Add a depth limit of 10000 to match the
++existing `tojson` depth limit. This fixes CVE-2026-33947.
 +
-+CVE: CVE-2026-33948
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/6374ae0bcdfe33a18eb0ae6db28493b1f34a0a5b]
++CVE: CVE-2026-33947
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/fb59f1491058d58bdc3e8dd28f1773d1ac690a1f]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ src/util.c   | 8 +-------
-+ tests/shtest | 6 ++++++
-+ 2 files changed, 7 insertions(+), 7 deletions(-)
++ src/jv_aux.c  | 21 +++++++++++++++++++++
++ tests/jq.test | 25 +++++++++++++++++++++++++
++ 2 files changed, 46 insertions(+)
 +
-+diff --git a/src/util.c b/src/util.c
-+index bcb86da..60ec4d5 100644
-+--- a/src/util.c
-++++ b/src/util.c
-+@@ -309,13 +309,7 @@ static int jq_util_input_read_more(jq_util_input_state *state) {
-+       if (p != NULL)
-+         state->current_line++;
++diff --git a/src/jv_aux.c b/src/jv_aux.c
++index bc1405f..594a21f 100644
++--- a/src/jv_aux.c
+++++ b/src/jv_aux.c
++@@ -375,6 +375,10 @@ static jv jv_dels(jv t, jv keys) {
++   return t;
++ }
 + 
-+-      if (p == NULL && state->parser != NULL) {
-+-        /*
-+-         * There should be no NULs in JSON texts (but JSON text
-+-         * sequences are another story).
-+-         */
-+-        state->buf_valid_len = strlen(state->buf);
-+-      } else if (p == NULL && feof(state->current_input)) {
-++      if (p == NULL && feof(state->current_input)) {
-+         size_t i;
-+ 
-+         /*
-+diff --git a/tests/shtest b/tests/shtest
-+index 887a6bb..a046afe 100755
-+--- a/tests/shtest
-++++ b/tests/shtest
-+@@ -842,4 +842,10 @@ if ! $msys && ! $mingw; then
-+   fi
-+ fi
-+ 
-++# CVE-2026-33948: No NUL truncation in the JSON parser
-++if printf '{}\x00{}' | $JQ >/dev/null 2> /dev/null; then
-++  printf 'Error expected but jq exited successfully\n' 1>&2
-++  exit 1
-++fi
+++#ifndef MAX_PATH_DEPTH
+++#define MAX_PATH_DEPTH (10000)
+++#endif
 ++
-+ exit 0
++ jv jv_setpath(jv root, jv path, jv value) {
++   if (jv_get_kind(path) != JV_KIND_ARRAY) {
++     jv_free(value);
++@@ -382,6 +386,12 @@ jv jv_setpath(jv root, jv path, jv value) {
++     jv_free(path);
++     return jv_invalid_with_msg(jv_string("Path must be specified as an array"));
++   }
+++  if (jv_array_length(jv_copy(path)) > MAX_PATH_DEPTH) {
+++    jv_free(value);
+++    jv_free(root);
+++    jv_free(path);
+++    return jv_invalid_with_msg(jv_string("Path too deep"));
+++  }
++   if (!jv_is_valid(root)){
++     jv_free(value);
++     jv_free(path);
++@@ -434,6 +444,11 @@ jv jv_getpath(jv root, jv path) {
++     jv_free(path);
++     return jv_invalid_with_msg(jv_string("Path must be specified as an array"));
++   }
+++  if (jv_array_length(jv_copy(path)) > MAX_PATH_DEPTH) {
+++    jv_free(root);
+++    jv_free(path);
+++    return jv_invalid_with_msg(jv_string("Path too deep"));
+++  }
++   if (!jv_is_valid(root)) {
++     jv_free(path);
++     return root;
++@@ -511,6 +526,12 @@ jv jv_delpaths(jv object, jv paths) {
++       jv_free(elem);
++       return err;
++     }
+++    if (jv_array_length(jv_copy(elem)) > MAX_PATH_DEPTH) {
+++      jv_free(object);
+++      jv_free(paths);
+++      jv_free(elem);
+++      return jv_invalid_with_msg(jv_string("Path too deep"));
+++    }
++     jv_free(elem);
++   }
++   if (jv_array_length(jv_copy(paths)) == 0) {
++diff --git a/tests/jq.test b/tests/jq.test
++index 4ecf72f..6186d8b 100644
++--- a/tests/jq.test
+++++ b/tests/jq.test
++@@ -2507,3 +2507,28 @@ strflocaltime("" | ., @uri)
++ 0
++ ""
++ ""
+++
+++# regression test for CVE-2026-33947
+++setpath([range(10000) | 0]; 0) | flatten
+++null
+++[0]
+++
+++try setpath([range(10001) | 0]; 0) catch .
+++null
+++"Path too deep"
+++
+++getpath([range(10000) | 0])
+++null
+++null
+++
+++try getpath([range(10001) | 0]) catch .
+++null
+++"Path too deep"
+++
+++delpaths([[range(10000) | 0]])
+++null
+++null
+++
+++try delpaths([[range(10001) | 0]]) catch .
+++null
+++"Path too deep"
 diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-index 6df1d46f48..acea1e4b27 100644
+index 71d7387bf8..6df1d46f48 100644
 --- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
 +++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${
+            file://run-ptest \
             file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
             file://CVE-2026-32316.patch \
-            file://CVE-2026-33947.patch \
-+           file://CVE-2026-33948.patch \
++           file://CVE-2026-33947.patch \
             "
  
  inherit autotools ptest
