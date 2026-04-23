@@ -2,173 +2,169 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49487F589B5
-	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:48:45 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18650.1776948524904531786
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2671EF589B6
+	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:48:55 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18524.1776948532359787802
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 05:48:44 -0700
+ Thu, 23 Apr 2026 05:48:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Fy6uEy5v;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2ad9516a653so33491625ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:48:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=VIcg7BCV;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2b23fcf90b2so63439615ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:48:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776948524; x=1777553324; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VaY1O2O8lS7g4LAnRXst2arbGik5FBoK/caQLD5hj3s=;
-        b=Fy6uEy5vk8pMhFG7P14vCx1oWqHSoajVgpeM+XPXzeaqYwy7RF2uckT0RHWXQ82Rrn
-         a7+c1mN88Rjr5I/Z8rf4yjB2dZZXrxSlA9nMiXkIaxEkrEM1wV2DNsJzesRtQTV96bBc
-         XdTE/cjR3W+38gbgg4HXL45/MsmtEKKSKirMW65+b7I9f6iZN28m0zOpTTpbnm5V26J7
-         64OybvCvQ7tDFU6OgODfdwKDp0I1vJbR4NUQUd/Q3irh6mEy0p9ABUrPXhUFTksyWIkZ
-         f3f2qisbOB7tQcf1f+hYn84saUp6xRIWM+2VegpFJU36qUlzdp370jb8iAFqFVgJ/qpU
-         PpwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776948524; x=1777553324;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1776948531; x=1777553331; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VaY1O2O8lS7g4LAnRXst2arbGik5FBoK/caQLD5hj3s=;
-        b=OCBH2F+sE1WdqHW2aLhPXeFHH3MnQwZZK8YqzvOq9/308xvKUWMLEfbROx7aY4k5fW
-         i35brtmS2syN0MiwYEpultvpQg0JjCmxFEKO/hBG4Ree/i3Vqosk33LvPk+EjdUBg5Z8
-         MiNs74Uovo8qIHpLTXghAQWEgWoe4QstxR7yCOMDXsCq8xIlRYUaYwVzbYWGloYs0d3G
-         brOubCPsV/BbPcLcM2aQzbDgvFzxD6vRVTxwj4iuVqVhkwKjT9aO7tWf7liYn/DPaEsm
-         7uZVx5sbsS3en94kZjromGVnkGJKB0AM433A8wlCcZRtRCJi2QSJzbEFzVaZhR8cOKu1
-         xWSg==
-X-Gm-Message-State: AOJu0YxMQeWHsOZm2G2QY0kl/yRZf3RRs28SRJ2kQKmUxb7e+zlZECY9
-	Ka9dftHg2p1OTbzrL1iP4ww0nf8wUy6oiHwHEW295Etko5/g5CDhZ8bEr+QiEcWP
-X-Gm-Gg: AeBDievLrPzCQNEtDZGKu+0n71Rsz0QfYN0LWvkQfN4SsOUKtFeolj3orLGQWrLmZTp
-	xL1hc2cETm6XzAqZPunG5BoLtvvIdPKM+RVY8ChfJjRLIT1w2v+2rPQLyyStfhEPx/J3wkZFjgj
-	FVMDnIW1zVbr+PWfZqpaGjBxPTdgwy6HVmzrjGOLujHw5WZbWG/5RlcVZCYqHuRhbTnrHBa6RR2
-	in4J8q+nkZMOJ2597OtHzuIG/Nf8GgHLN6N3/iWuz8gh6y58UblI5jvu2PlG1ZNzlNM32lkPVEy
-	fU5lbfPe+lByBOcvo1iXAhH2YtRvfQkthPUMsAWqeeESqn4SfS3hnOItqEnLs/8IhcTppr6lilg
-	99uv1XKzMxcCFBMAob5D0oFUZRSQHecW31JwAsmftRRGV+qEy1ggaMkV7tJ8rS/tfp3sddgJqK0
-	u/JFTkywDZOM17gPs5XY/zoHP19enOcg/6Qo3FA2wICWDQCOQ=
-X-Received: by 2002:a17:903:8c4:b0:2b0:61c2:8e7a with SMTP id d9443c01a7336-2b5f9f1c601mr263731825ad.25.1776948524036;
-        Thu, 23 Apr 2026 05:48:44 -0700 (PDT)
+        bh=HsZb8JOM11D3/bziILA8/RlDEPZr+Npjm7b/3KXQ7Yw=;
+        b=VIcg7BCVMCn4eQkZ46kRxTFMmPDCAyhXXaJ+YZwDxpw+xaXeEPWSw+08vvSDLcoAgE
+         jnbFSMKItNl5CoATX9rmBJ2cFtQX+eiVRCpylDgeNFOK4uh7pfDeY6m3e36PQK/XOirg
+         Rg72y+ZlnuMYh34mq9qPkxY+GrkI+sa/pdzvLlAEWBUwUYT78aMz02yvTrb/A5RCYM8z
+         SHT2wicPvkM5M/90GPLWPPhRLcShUQK1M2F4IoEOUvS7qrCIbFk6OPcOtgddPLNCiGwB
+         zoBUIT4onsgKDICS4cKWFTJ2h4QasJvO1E3CfO48MWEhlGr9Ibb4ZNY8KLsM/JY6UExa
+         Z52A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1776948531; x=1777553331;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=HsZb8JOM11D3/bziILA8/RlDEPZr+Npjm7b/3KXQ7Yw=;
+        b=Wc8Bpc53GmkOdfOG9frk+hbP+e2CP+EL4YjylLiTDGe58qPXdbWZII7xKqy8y/fzCx
+         WdkfShev9bYGgSPbH3yVIf96cK9cQDi1zyIPwAzvHmOOX8FC0wZAldGFRRmqrGKdMVa7
+         4il7WnkCUhnLUP4Og7/q47GcfRW9bmSQmxjl3GhhvFL8xJCcTsJK8urjeqiJ4U3+msyw
+         wwMa1LiqWui1jfJ7Y526VODOWWf1C68LTUCMfaSFAZ3Xh8I3J3ZWjBgmiYTuKZIK+++3
+         e0/zZn2uPwlUGAWbqxShox9XLgn3t7Kt1Tfjkcr2DWT/OG42dIjv1/kXNCOreAzLh/0j
+         wqNw==
+X-Gm-Message-State: AOJu0YzNDXJ6cbgpsQRIiWUb1RuvQF5JaAZ3b2LiPE/Z87KXsUcw8dLE
+	A378SfNf49xhMkhN5kO+hKXqq7vwqlzEYEl44eY2e5GNKeJWvCuM1wznAOI2ehvq
+X-Gm-Gg: AeBDietES/h77wwy5Q9H3VpgbGDNDeTtbIB3h9AckqFDLxTxLk96q6zG9h+xDXqT4sH
+	kpFIX9xX7nN49G+1ccPeM0kt+dATNcj++ksKKpB1aEESGFzI6XxMQJnnj3ki500fTjZL3BsDMrD
+	h5mC9XASDu7w2MXntzqjHfMYjx4VbCOmcNa7ZDB4TraLOuhGPVifSc09SjZ74sjHyT5QmOotIhi
+	z0gUPhIlh7sy85ruzAdgcl8sWdCim3YuBseB2LpI+9EMqf+w3tahwMHh7zM7rTC9A64TQIxFqew
+	zOM9sFPOqnb2kHbmn2WvleZaG066rcO70dZ/JfRmHBnk1tG6N5du4NMiZI3pOYYR6/zxjWinjP3
+	WS4MO+CzXhE8vJ3n9lLoAsAkmfKBZbB0pzT7iPtmUF88quh+DiK3bGAPjPDIn7evOMLZ4H6bTuU
+	Y0x42QEtAFPf4G2whgCTpGvCph2JJliSV8K4muWEn7HeiMXg0=
+X-Received: by 2002:a17:902:7585:b0:2b4:656b:aeb0 with SMTP id d9443c01a7336-2b5f9f61d74mr175970195ad.35.1776948531403;
+        Thu, 23 Apr 2026 05:48:51 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.48.41
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.48.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 05:48:43 -0700 (PDT)
+        Thu, 23 Apr 2026 05:48:50 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Kjellerstedt <pkj@axis.com>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 1/19] jq: Use Git to fetch the code
-Date: Fri, 24 Apr 2026 00:47:59 +1200
-Message-ID: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 2/19] jq: patch CVE-2026-32316
+Date: Fri, 24 Apr 2026 00:48:00 +1200
+Message-ID: <20260423124823.1983261-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
+References: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:48:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126577
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:48:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126578
 
-From: Peter Kjellerstedt <pkj@axis.com>
+From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-There is a bug (see https://github.com/jqlang/jq/issues/434), which
-results in an empty version being used if autoreconf is run on the jq
-sources when using a release tar ball. The incorrect assumption is that
-autoreconf is only used when fetching the code using Git.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-32316
 
-The empty version results in an incorrect libjq.pc file being created
-where the version is not set, which results in, e.g.,
-`pkgconf --libs 'libjq > 1.6'` failing even if version 1.8.1 of jq is
-actually installed.
+Backport the patch that is referenced by the NVD advisory.
 
-Switch to fetching the code using Git to workaround the bug.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit ed33569f822a3a8d41f82f6980a046d17aca37d5)
+(cherry picked from commit e94ab85126f12d77253107084dc8463c79b3e776)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...-with-disable-maintainer-mode-and-so.patch | 44 +++++++++++++++++++
- meta-oe/recipes-devtools/jq/jq_1.8.1.bb       | 14 +++---
- 2 files changed, 52 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
+ .../jq/jq/CVE-2026-32316.patch                | 53 +++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       | 10 ++--
+ 2 files changed, 58 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/CVE-2026-32316.patch
 
-diff --git a/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch b/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
+diff --git a/meta-oe/recipes-devtools/jq/jq/CVE-2026-32316.patch b/meta-oe/recipes-devtools/jq/jq/CVE-2026-32316.patch
 new file mode 100644
-index 0000000000..12a64a75ed
+index 0000000000..1277b356d8
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
-@@ -0,0 +1,44 @@
-+From 27f417f4812e688a59fc5186b7768cec004cd6e5 Mon Sep 17 00:00:00 2001
-+From: Peter Kjellerstedt <peter.kjellerstedt@gmail.com>
-+Date: Wed, 8 Apr 2026 05:58:49 +0200
-+Subject: [PATCH] Support building with --disable-maintainer-mode and source !=
-+ build dir (#3518)
++++ b/meta-oe/recipes-devtools/jq/jq/CVE-2026-32316.patch
+@@ -0,0 +1,53 @@
++From 321e62b356df2d4ed47aba4f3818e447ec4d77fc Mon Sep 17 00:00:00 2001
++From: itchyny <itchyny@cybozu.co.jp>
++Date: Thu, 12 Mar 2026 20:28:43 +0900
++Subject: [PATCH] Fix heap buffer overflow in `jvp_string_append` and
++ `jvp_string_copy_replace_bad`
 +
-+If --disable-maintainer-mode is enabled, then the rules for generating
-+parser.[ch] and lexer.[ch] did nothing. This worked fine if the source
-+and build directories are the same as the pre-generated parser.c and
-+lexer.c files would suffice. However, if the build directory is not the
-+same as the source directory, then the rest of the Make rules expect
-+parser.[ch] and lexer.[ch] to have been created in the build directory
-+if their source files (parser.y and lexer.l) are newer than the target
-+files, which can happen in case the source is fetched using Git.
++In `jvp_string_append`, the allocation size `(currlen + len) * 2` could
++overflow `uint32_t` when `currlen + len` exceeds `INT_MAX`, causing a small
++allocation followed by a large `memcpy`.
 +
-+Avoid the problem by copying the files to the build directory if needed.
++In `jvp_string_copy_replace_bad`, the output buffer size calculation
++`length * 3 + 1` could overflow `uint32_t`, again resulting in a small
++allocation followed by a large write.
 +
-+Co-authored-by: Peter Kjellerstedt <pkj@axis.com>
-+Upstream-Status: Backport [https://github.com/jqlang/jq/commit/27f417f4812e688a59fc5186b7768cec004cd6e5]
++Add overflow checks to both functions to return an error for strings
++that would exceed `INT_MAX` in length. Fixes CVE-2026-32316.
++
++CVE: CVE-2026-32316
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/e47e56d226519635768e6aab2f38f0ab037c09e5]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ Makefile.am | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
++ src/jv.c | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index 96d6038..acb9443 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -41,9 +41,14 @@ src/lexer.h: src/lexer.c
-+ else
-+ BUILT_SOURCES = src/builtin.inc src/config_opts.inc src/version.h
-+ .y.c:
-+-	$(AM_V_YACC) echo "NOT building parser.c!"
-++	$(AM_V_YACC) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(@F) $@
-++	$(AM_V_YACC) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(*F).h $*.h
-++	$(AM_V_YACC) touch $@ $*.h
-++
-+ .l.c:
-+-	$(AM_V_LEX) echo "NOT building lexer.c!"
-++	$(AM_V_LEX) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(@F) $@
-++	$(AM_V_LEX) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(*F).h $*.h
-++	$(AM_V_LEX) touch $@ $*.h
-+ endif
++diff --git a/src/jv.c b/src/jv.c
++index e4529a4..74be05a 100644
++--- a/src/jv.c
+++++ b/src/jv.c
++@@ -1114,7 +1114,12 @@ static jv jvp_string_copy_replace_bad(const char* data, uint32_t length) {
++   const char* end = data + length;
++   const char* i = data;
 + 
-+ # Tell YACC (Bison) autoconf macros that you want a header file created.
++-  uint32_t maxlength = length * 3 + 1; // worst case: all bad bytes, each becomes a 3-byte U+FFFD
+++  // worst case: all bad bytes, each becomes a 3-byte U+FFFD
+++  uint64_t maxlength = (uint64_t)length * 3 + 1;
+++  if (maxlength >= INT_MAX) {
+++    return jv_invalid_with_msg(jv_string("String too long"));
+++  }
+++
++   jvp_string* s = jvp_string_alloc(maxlength);
++   char* out = s->data;
++   int c = 0;
++@@ -1174,6 +1179,10 @@ static uint32_t jvp_string_remaining_space(jvp_string* s) {
++ static jv jvp_string_append(jv string, const char* data, uint32_t len) {
++   jvp_string* s = jvp_string_ptr(string);
++   uint32_t currlen = jvp_string_length(s);
+++  if ((uint64_t)currlen + len >= INT_MAX) {
+++    jv_free(string);
+++    return jv_invalid_with_msg(jv_string("String too long"));
+++  }
++ 
++   if (jvp_refcnt_unshared(string.u.ptr) &&
++       jvp_string_remaining_space(s) >= len) {
 diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-index b9383c76f7..6eaa2de6df 100644
+index 6eaa2de6df..71d7387bf8 100644
 --- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
 +++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
-@@ -8,15 +8,17 @@ SECTION = "utils"
- LICENSE = "MIT & BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cf7fcb0a1def4a7ad62c028f7d0dca47"
+@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cf7fcb0a1def4a7ad62c028f7d0dca47"
  
--GITHUB_BASE_URI = "https://github.com/jqlang/${BPN}/releases/"
--SRC_URI = "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
-+SRCREV = "4467af7068b1bcd7f882defff6e7ea674c5357f4"
-+
-+SRC_URI = " \
-+    git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
-     file://run-ptest \
--    "
--SRC_URI[sha256sum] = "2be64e7129cecb11d5906290eba10af694fb9e3e7f9fc208a311dc33ca837eb0"
-+    file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
-+"
+ SRCREV = "4467af7068b1bcd7f882defff6e7ea674c5357f4"
  
--inherit autotools github-releases ptest
-+inherit autotools ptest
+-SRC_URI = " \
+-    git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
+-    file://run-ptest \
+-    file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
+-"
++SRC_URI = "git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
++           file://run-ptest \
++           file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
++           file://CVE-2026-32316.patch \
++           "
  
--UPSTREAM_CHECK_REGEX = "releases/tag/${BPN}-(?P<pver>\d+(\.\d+)+)"
-+UPSTREAM_CHECK_GITTAGREGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
- 
- PACKAGECONFIG ?= "oniguruma"
+ inherit autotools ptest
  
 
