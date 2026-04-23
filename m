@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73ECDF589C2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96FFBF589C3
 	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:49:55 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18680.1776948586951755689
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18556.1776948592753741303
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 05:49:47 -0700
+ Thu, 23 Apr 2026 05:49:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=pI4lFIlr;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2b24fede2acso42844415ad.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:49:46 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=HY0aRlgK;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2adff872068so32693515ad.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:49:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776948586; x=1777553386; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776948592; x=1777553392; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=biX2uJrrHn9o2AuZ2J7A8YvWEM1YaV1BS6R3+xNhovE=;
-        b=pI4lFIlruDCvw/YYClN363n378Ipqq8jJi2oupNq64jz3xdaHCkLLKcfeAL64e+2AC
-         vtanRXXOEgVxU7d/4WysKREJ/9vyzJO7GRofxIVI572jzMPB62Zil1T9Yn/iexjCNKfM
-         ui22kSct/6Ckht7rv/zQUTQ3EXXMWj2s7jlBt8EXRvkZd7CF4ZY70hos/b3Pi9Y5+XSB
-         U9so6RsOuI8R97Ous+O6+EOTWGm7QINaiQ+ZWeBr2pOnVqy3si5Tw2zMFVfRzPaxUtic
-         8ajHqlIRl6oRzPKataYSkuIfazF0ordd/nWriZYTGW7rgqJaa8Rzwfq/y/JWx65iTkjw
-         8A4Q==
+        bh=3kMo6Xh4FHlFIdRi5wD7IYMG1VgdrCt9/OxFD/VMsLM=;
+        b=HY0aRlgKhT3yb/Vwnp0iaS3uapuCeNh2tT9R71B5eElD9c5fuhXs68rki9sna+MGbX
+         cuI7DDwvS+EYC2fEz8/FUN2jFsJ4n5I8iPgMu5GRNbsj7MWHX5G1W5KRkyIlLNm36SKp
+         jVPTI/bLVuROu3m4NWoZsY496k7bpFqyYq5vBUDPYcmPQmv409zRJ3rbL5KVWd9UMyrN
+         0CPJX/ZHlFQHRyIc65oPTfs32PuDxKUbw1c3uC0dtILhd90rpybePXLkvedv+jTODlFF
+         ctwdoT3FHzOy4lGLMjRCGDAgIzdA7EnEX0ffXe+DJGAdtPtda2fyA8WrsezNDDI0/wU+
+         U6fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776948586; x=1777553386;
+        d=1e100.net; s=20251104; t=1776948592; x=1777553392;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=biX2uJrrHn9o2AuZ2J7A8YvWEM1YaV1BS6R3+xNhovE=;
-        b=joIAvzQNkANw6IexRPusBVDC/xLHzX30MCGnEdbx2/MfaqVDV+isiP5zmxkvJsZQy3
-         bBZPDHbUHrs/eqbD4YqbLi+FCM8Rr66YY5qvoarYAU/ChOe5oLBZSV0zcJJLFwIjwhWT
-         3zfmlrxnz2CW0p9v9ZJ+TBi6ZHCFHGukJUbfo+J5Ze3WBUpc0IVaXRnIVc5Bc8jM5sIV
-         eSt9M1c1OsHXKaytr41EUt028zETewrDHgzJ0zi1iAOwiTU9p3oYeiYyH2QV9iMfFXdK
-         mY6I9QmAbbRMEVS1DI6GM2B21bw0FDCCyb6v4HEl5o03s9bJjtktAPYmPBCBvoC4VMir
-         HRTA==
-X-Gm-Message-State: AOJu0YzeEFucfNec6h8l2DlIsYFshp7SyLser2uv5sxZGoTjP4Yv25r5
-	/6cgMAD7q6ogyvReTGrfIhqUXI4qn2jyPPPRxyKNzmhJ65gtLSmRohAl6C5zHb+3
-X-Gm-Gg: AeBDiestPN+/EhLTCpD2BZuz4KyIHNmoqPLuQqnHnYpq2JyI29Dvs/fTKQ2KE1AK2wb
-	g1BDd2BKSQwIzspQr8sFC5zb++bjYMqhH/hhNU/Xmo3KjrAwyESreeafz8LQHVmJ2Za9OAsEi8f
-	OZM/hfhj6fVdHHoy4OaBa6kk3QwKbx5Mhnc7+S/5piRmKGXB6Vway3G2zY3HmHMdeCRjMA5D+wv
-	C/FGjOjqawCeX+96w6c0B+gcxHIuslYl9Njcb++yorsI1qbgLjUD/U/eIU2IdIsuLMennzyLGF4
-	FwGOSlmewgh2+EcGBrRBL3XqDxYR0S8keFjzfuKsT0x+Y7b33lqDnYVI1OTKp+NbJzMLglVJzFN
-	SluGcrDK0sORrDVkKRGwUaunzWd6jCleQur+ghRBM83wO6WN1DPpLnANUb2bJvebREMhvykuVAD
-	IATZQVDAJwmAfPq6dol8ZM8g99D91KQyKHob/+RHZF4Hq/db8=
-X-Received: by 2002:a17:902:ea83:b0:2b0:624f:8edc with SMTP id d9443c01a7336-2b5f9eb06e2mr226444865ad.12.1776948586058;
-        Thu, 23 Apr 2026 05:49:46 -0700 (PDT)
+        bh=3kMo6Xh4FHlFIdRi5wD7IYMG1VgdrCt9/OxFD/VMsLM=;
+        b=KCmRmPY9Gpso2ZiUYNIf2VKxmScG4cAXUMYBps9WWwNPuvRDqt0taP823mkgqz+8ls
+         DZzF/MjkLTq/DxsvKEA4mRJ5IQ78f4T/xROq/p6sDBAPnSS+J3QjHLGWA/iMgyRSB5zM
+         OXPTJmR14fJfltqFCr0UEoc2+uLvKuF/LUCeCFKcHjbs/z2txXNtOgTyakbhEXSnNDJq
+         Assav0o85TcA/tW5piG6MhLGD9yKiBqPw+RWP636Jl+ukLIp/++WpfJFiclc834FWhOI
+         CFLSK25GeY9LcFyi9J2/mB7tRND+4zGpVaWfL2b87gk7Y+0MjZkCAJ9LrdtJNhvIhF0p
+         QyZQ==
+X-Gm-Message-State: AOJu0YxKW7CJqmIZ1K77RqMDygUoaY48z6B/o7YmlwOR7FAeEriU+BtO
+	+RAHw1YHZSIpDxRnL2YNnmU6WeVG3JHTy1KOHALhjS+jwlm5eX7jvGoXjDYF0WGm
+X-Gm-Gg: AeBDieuzWY0PlJO5C1gSO85d9lDZFigl3rBx4rocAHWvqqjT3TBYQkZO40fWZ7QcKUX
+	72IaTukwsWPr+lYh/07S+Z/E/9Yas9Q+QEV3P9oowJgM/5/BY1oBdNUqF/0SLAv63Fl5e/ep9yU
+	h8Ez2k+PCNaV0V7/fciheIHiFnvXEJ/nq7lHgtKirwh7V7qEr2Q3wTOqKJF3zRCSt+HSztdy8Zt
+	7Imvm6mnMLGcB8FhDPJHWRUXZiQplQVKBwUm6KLBWxYprmTLMOtt6CHLzpIeKG7NCOVnZe9gV9g
+	zuk0GB1do4oxL5SuxhDVIPSN2Ky5s6KtFeZ+AlGwERxNijEaVpxUtmAKeDEernwg3Mp1hrPUD+o
+	TNiEF91IVGEPewkhGIZ8Sm9zZgYcYf384+qXkBBXUgxYB8Mgs7rTWbIwg0ejMUYKCN6gLA3zs9I
+	zFduPhDimpM44BVbG4XIfzJmP70LcsNVYRby8NI/RxnFjXfYU=
+X-Received: by 2002:a17:903:17cb:b0:2b4:6083:6c15 with SMTP id d9443c01a7336-2b5fa055a6bmr257063375ad.41.1776948591970;
+        Thu, 23 Apr 2026 05:49:51 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.49.43
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.49.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 05:49:45 -0700 (PDT)
+        Thu, 23 Apr 2026 05:49:51 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 15/19] libgphoto2: patch CVE-2026-40341
-Date: Fri, 24 Apr 2026 00:48:13 +1200
-Message-ID: <20260423124823.1983261-15-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 17/19] protobuf, python3-protobuf: ignore CVE-2026-6409
+Date: Fri, 24 Apr 2026 00:48:15 +1200
+Message-ID: <20260423124823.1983261-17-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
 References: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
@@ -69,109 +69,46 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:49:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126591
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126593
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-40341
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-6409
 
-Backport the patch referenced by the NVD advisory.
+The vulnerability impacts only the PHP library component, not the
+cpp/python one. Ignore this CVE due to this.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit de5f93f95d420447043cedbedf798560925c44e1)
+(cherry picked from commit aef8bc34225cd0a56057749d0db1dfac773b17cb)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../gphoto2/libgphoto2/CVE-2026-40341.patch   | 69 +++++++++++++++++++
- .../gphoto2/libgphoto2_2.5.33.bb              |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40341.patch
+ meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb           | 1 +
+ meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40341.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40341.patch
-new file mode 100644
-index 0000000000..b71792c185
---- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40341.patch
-@@ -0,0 +1,69 @@
-+From 3674dbeafa5157a264ca5e562ffdbef159a2185f Mon Sep 17 00:00:00 2001
-+From: Marcus Meissner <marcus@jet.franken.de>
-+Date: Wed, 8 Apr 2026 15:28:52 +0200
-+Subject: [PATCH] Fixed OOB read in ptp_unpack_EOS_FocusInfoEx
-+
-+Do not read out values before checking there is sufficient size
-+
-+CVE-2026-40341
-+
-+CVE: CVE-2026-40341
-+Upstream-Status: Backport [https://github.com/gphoto/libgphoto2/commit/c385b34af260595dfbb5f9329526be5158985987]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ camlibs/ptp2/ptp-pack.c | 34 +++++++++++++++++++++++++---------
-+ 1 file changed, 25 insertions(+), 9 deletions(-)
-+
-+diff --git a/camlibs/ptp2/ptp-pack.c b/camlibs/ptp2/ptp-pack.c
-+index 9eba06f..11428ab 100644
-+--- a/camlibs/ptp2/ptp-pack.c
-++++ b/camlibs/ptp2/ptp-pack.c
-+@@ -1629,23 +1629,39 @@ ptp_pack_EOS_ImageFormat (PTPParams* params, unsigned char* data, uint16_t value
-+ static inline char*
-+ ptp_unpack_EOS_FocusInfoEx (PTPParams* params, const unsigned char** data, uint32_t datasize)
-+ {
-+-	uint32_t size 			= dtoh32a( *data );
-+-	uint32_t halfsize		= dtoh16a( (*data) + 4);
-+-	uint32_t version		= dtoh16a( (*data) + 6);
-+-	uint32_t focus_points_in_struct	= dtoh16a( (*data) + 8);
-+-	uint32_t focus_points_in_use	= dtoh16a( (*data) + 10);
-+-	uint32_t sizeX			= dtoh16a( (*data) + 12);
-+-	uint32_t sizeY			= dtoh16a( (*data) + 14);
-+-	uint32_t size2X			= dtoh16a( (*data) + 16);
-+-	uint32_t size2Y			= dtoh16a( (*data) + 18);
-++	uint32_t size;
-++	uint32_t halfsize;
-++	uint32_t version;
-++	uint32_t focus_points_in_struct;
-++	uint32_t focus_points_in_use;
-++	uint32_t sizeX;
-++	uint32_t sizeY;
-++	uint32_t size2X;
-++	uint32_t size2Y;
-+ 	uint32_t i;
-+ 	uint32_t maxlen;
-+ 	char	*str, *p;
-+ 
-++	if (datasize<4) {
-++		ptp_error(params, "FocusInfoEx has invalid size (%d)", datasize);
-++		return strdup("bad size 0");
-++	}
-++
-++	size 			= dtoh32a( *data );
-+ 	if ((size > datasize) || (size < 20)) {
-+ 		ptp_error(params, "FocusInfoEx has invalid size (%d) vs datasize (%d)", size, datasize);
-+ 		return strdup("bad size 1");
-+ 	}
-++
-++	halfsize		= dtoh16a( (*data) + 4);
-++	version			= dtoh16a( (*data) + 6);
-++	focus_points_in_struct	= dtoh16a( (*data) + 8);
-++	focus_points_in_use	= dtoh16a( (*data) + 10);
-++	sizeX			= dtoh16a( (*data) + 12);
-++	sizeY			= dtoh16a( (*data) + 14);
-++	size2X			= dtoh16a( (*data) + 16);
-++	size2Y			= dtoh16a( (*data) + 18);
-++
-+ 	/* If data is zero-filled, then it is just a placeholder, so nothing
-+ 	   useful, but also not an error */
-+ 	if (!focus_points_in_struct || !focus_points_in_use) {
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-index 40ada8dd20..4ef9bf4272 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-@@ -19,6 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.xz;name=libgphoto2 \
-            file://CVE-2026-40338.patch \
-            file://CVE-2026-40339.patch \
-            file://CVE-2026-40340.patch \
-+           file://CVE-2026-40341.patch \
-            "
- SRC_URI[libgphoto2.sha256sum] = "28825f767a85544cb58f6e15028f8e53a5bb37a62148b3f1708b524781c3bef2"
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb
+index 4356ebeecf..cce2ad11f4 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_6.31.1.bb
+@@ -27,6 +27,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d\.\d+\.\d+)"
+ CVE_PRODUCT = "google:protobuf protobuf:protobuf google-protobuf protobuf-cpp"
  
+ CVE_STATUS[CVE-2026-0994] = "cpe-incorrect: the vulnerability affects only python3-protobuf recipe"
++CVE_STATUS[CVE-2026-6409] = "cpe-incorrect: the vulnerability affects only the php library"
+ 
+ inherit cmake pkgconfig ptest
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb b/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
+index af9ff85f20..3abee615d5 100644
+--- a/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
++++ b/meta-python/recipes-devtools/python/python3-protobuf_6.33.5.bb
+@@ -14,6 +14,7 @@ SRC_URI[sha256sum] = "6ddcac2a081f8b7b9642c09406bc6a4290128fce5f471cddd165960bb9
+ 
+ CVE_PRODUCT += "google:protobuf protobuf:protobuf google-protobuf protobuf-python"
+ CVE_STATUS[CVE-2026-0994] = "fixed-version: it is fixed in 6.33.5"
++CVE_STATUS[CVE-2026-6409] = "cpe-incorrect: the vulnerability affects only the php library"
+ 
+ # http://errors.yoctoproject.org/Errors/Details/184715/
+ # Can't find required file: ../src/google/protobuf/descriptor.proto
 
