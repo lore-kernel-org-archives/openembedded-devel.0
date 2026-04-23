@@ -1,114 +1,174 @@
-Return-Path: <philip@balister.org>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 328A4F34C45
-	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 11:59:34 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com [209.85.222.181])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17699.1776945572907713345
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49487F589B5
+	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:48:45 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18650.1776948524904531786
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 04:59:33 -0700
+ Thu, 23 Apr 2026 05:48:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=hcnl4UZj;
- spf=pass (domain: gmail.com, ip: 209.85.222.181, mailfrom: philip.balister@gmail.com)
-Received: by mail-qk1-f181.google.com with SMTP id af79cd13be357-8cb20bcff5aso615976585a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 04:59:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Fy6uEy5v;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2ad9516a653so33491625ad.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:48:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776945571; x=1777550371; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776948524; x=1777553324; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=nfojaVbFE6saxcl5VxeW/jCEK8BsodxHRyEvq7kAk/E=;
-        b=hcnl4UZj+sRlEq4FrekMlUPhcoe6uhFPmc/B2lBFmZuWhMEEfF/DtaJB3dVlz66Rlg
-         /58mBDAYC3BUMrcJM4Y821f0axtEuwi/ZSQ5gI2CgyeWvXnFq7WiXVsNtNlf8WlBo3yi
-         ZGs5dDEiyO4srvmqmwKq7qDj4fwdUUp2pFNsigI89HBJF4IceIr5XuRppodILosew3b2
-         7AlMBluXc5jKgw9OcuLC3VK+bgWtYk6937cvAEprvGyA7x1ndHin1DxS+ar4Chj2KtYN
-         Ckn1GGgmZcT5drg+cAlz5B6eIKQUt7ww3Q6JjWs27jGBr9Ha3FUChfvZYFQYP517APHp
-         Sdyw==
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VaY1O2O8lS7g4LAnRXst2arbGik5FBoK/caQLD5hj3s=;
+        b=Fy6uEy5vk8pMhFG7P14vCx1oWqHSoajVgpeM+XPXzeaqYwy7RF2uckT0RHWXQ82Rrn
+         a7+c1mN88Rjr5I/Z8rf4yjB2dZZXrxSlA9nMiXkIaxEkrEM1wV2DNsJzesRtQTV96bBc
+         XdTE/cjR3W+38gbgg4HXL45/MsmtEKKSKirMW65+b7I9f6iZN28m0zOpTTpbnm5V26J7
+         64OybvCvQ7tDFU6OgODfdwKDp0I1vJbR4NUQUd/Q3irh6mEy0p9ABUrPXhUFTksyWIkZ
+         f3f2qisbOB7tQcf1f+hYn84saUp6xRIWM+2VegpFJU36qUlzdp370jb8iAFqFVgJ/qpU
+         PpwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776945571; x=1777550371;
+        d=1e100.net; s=20251104; t=1776948524; x=1777553324;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nfojaVbFE6saxcl5VxeW/jCEK8BsodxHRyEvq7kAk/E=;
-        b=CnZQn4pfqIAEDNHUoCJqwOrrsblIZX3l4z8gOdwDK67R500MFZ7u6I6gN/QRKlnHHu
-         SfaeRvIoyxgWSQl46F0WCvZ+tcqnj4HRZaFU1oOkXpKk0D/JGCHVb8MuegKu/QMS7++8
-         dhsTToZgqvjWGPr4FYFBg0dHxP8CyGOoMPgydAo2tdwNnccbUMgCjk6jmQHtvixwW3M4
-         hQMLumUtyJ8aadNdNzYGrnM46Q18NA92n2ZobihqVgoB8OmTYgAYL3OF34e0d0BoOKC+
-         cdGwLOHlZjgSddmtJ20JFm55Rtsf9217EyWKytmMdZ91InFTpej7LN6/c2Qhv2q9/dQ9
-         8kdQ==
-X-Gm-Message-State: AOJu0YzhZPpr3Q8bVptNNvv1acFRaDsf+vduVcNuANttbmux3s62djPg
-	MYSIgx2xqSYyN2ytISFLOctQs9PAjmo/5F8eoezm9JXNt7kLnHCp+2eIxh6+IQ==
-X-Gm-Gg: AeBDies5hJJbU5L7wvgsGvbF9cEIcpVf5EgYafb/3SfP1v5VMHnMZsA8ajYw07JkF+j
-	03gYV2c5PdVnVYY6YoxPkuI/MHeQ3gF0YsLo/eRqy36xQYXOqs9lWLOlbQjXDmsNcENR8xgQQtL
-	6avraT8I/Gk7bOpqtIIl3quBJz+sRXLpLv1ao/duHhm2Zrfu1IpV8oAn7lnH9VheYr/qiuA+RZj
-	i1gqAsyPDYTWmAWwW/vjqHB6JCeDuMrcnjy99PCyKc1SGiIiFvlSARzqtkVuUD6p6aAYxwHrpR1
-	RAlMpkzLQQ6zP7hEwnUn6+8H5ilikc7+AzTb1rRWClMAmrB7JQ3/Ayq5qZ87EvJ9m8Vp7mwD3gR
-	3GyTBEh6rvFxRf7mvMU454PnTrDb6FSMs9q5W06MPS6PNoAhbsZ39H4o7qnn1ywWuvSmwf6ea4z
-	TRCqxFgyWogOJ4O6xe8eNh6KuMaEI3gzgk5RVRn7zLCq/idOdFQL58rUPH
-X-Received: by 2002:a05:620a:7102:b0:8d3:d13e:8ed with SMTP id af79cd13be357-8e791c8e81fmr3696425685a.52.1776945571351;
-        Thu, 23 Apr 2026 04:59:31 -0700 (PDT)
-Received: from bushey.hsd1.va.comcast.net ([2601:5c0:c200:483f:8478:e47c:fbe6:4bdc])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-8e7d5fe90a4sm1648177985a.9.2026.04.23.04.59.30
+        bh=VaY1O2O8lS7g4LAnRXst2arbGik5FBoK/caQLD5hj3s=;
+        b=OCBH2F+sE1WdqHW2aLhPXeFHH3MnQwZZK8YqzvOq9/308xvKUWMLEfbROx7aY4k5fW
+         i35brtmS2syN0MiwYEpultvpQg0JjCmxFEKO/hBG4Ree/i3Vqosk33LvPk+EjdUBg5Z8
+         MiNs74Uovo8qIHpLTXghAQWEgWoe4QstxR7yCOMDXsCq8xIlRYUaYwVzbYWGloYs0d3G
+         brOubCPsV/BbPcLcM2aQzbDgvFzxD6vRVTxwj4iuVqVhkwKjT9aO7tWf7liYn/DPaEsm
+         7uZVx5sbsS3en94kZjromGVnkGJKB0AM433A8wlCcZRtRCJi2QSJzbEFzVaZhR8cOKu1
+         xWSg==
+X-Gm-Message-State: AOJu0YxMQeWHsOZm2G2QY0kl/yRZf3RRs28SRJ2kQKmUxb7e+zlZECY9
+	Ka9dftHg2p1OTbzrL1iP4ww0nf8wUy6oiHwHEW295Etko5/g5CDhZ8bEr+QiEcWP
+X-Gm-Gg: AeBDievLrPzCQNEtDZGKu+0n71Rsz0QfYN0LWvkQfN4SsOUKtFeolj3orLGQWrLmZTp
+	xL1hc2cETm6XzAqZPunG5BoLtvvIdPKM+RVY8ChfJjRLIT1w2v+2rPQLyyStfhEPx/J3wkZFjgj
+	FVMDnIW1zVbr+PWfZqpaGjBxPTdgwy6HVmzrjGOLujHw5WZbWG/5RlcVZCYqHuRhbTnrHBa6RR2
+	in4J8q+nkZMOJ2597OtHzuIG/Nf8GgHLN6N3/iWuz8gh6y58UblI5jvu2PlG1ZNzlNM32lkPVEy
+	fU5lbfPe+lByBOcvo1iXAhH2YtRvfQkthPUMsAWqeeESqn4SfS3hnOItqEnLs/8IhcTppr6lilg
+	99uv1XKzMxcCFBMAob5D0oFUZRSQHecW31JwAsmftRRGV+qEy1ggaMkV7tJ8rS/tfp3sddgJqK0
+	u/JFTkywDZOM17gPs5XY/zoHP19enOcg/6Qo3FA2wICWDQCOQ=
+X-Received: by 2002:a17:903:8c4:b0:2b0:61c2:8e7a with SMTP id d9443c01a7336-2b5f9f1c601mr263731825ad.25.1776948524036;
+        Thu, 23 Apr 2026 05:48:44 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.48.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 04:59:30 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
+        Thu, 23 Apr 2026 05:48:43 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Philip Balister <philip@balister.org>
-Subject: [meta-oe][PATCHv2] fftw_3.3.11.bb: Update version.
-Date: Thu, 23 Apr 2026 07:59:25 -0400
-Message-ID: <20260423115925.102851-1-philip@balister.org>
-X-Mailer: git-send-email 2.53.0
+Cc: Peter Kjellerstedt <pkj@axis.com>,
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
+	Khem Raj <khem.raj@oss.qualcomm.com>,
+	Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 1/19] jq: Use Git to fetch the code
+Date: Fri, 24 Apr 2026 00:47:59 +1200
+Message-ID: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 11:59:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126576
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:48:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126577
 
-Apr 21st, 2026
-New API fftw_copy_plan()
-Support for SVE SIMD instructions.
-Support for LoongArch LSX and LASX SIMD instructions.
-Support for Apple ARM, RISCV, and LoongArch cycle counters.
+From: Peter Kjellerstedt <pkj@axis.com>
 
-Enabling the cycle counters needs a
-kernel module to permit access from user space. We need to add
-SVE (and other architectures) support to the recipe.
+There is a bug (see https://github.com/jqlang/jq/issues/434), which
+results in an empty version being used if autoreconf is run on the jq
+sources when using a release tar ball. The incorrect assumption is that
+autoreconf is only used when fetching the code using Git.
 
-Signed-off-by: Philip Balister <philip@balister.org>
+The empty version results in an incorrect libjq.pc file being created
+where the version is not set, which results in, e.g.,
+`pkgconf --libs 'libjq > 1.6'` failing even if version 1.8.1 of jq is
+actually installed.
+
+Switch to fetching the code using Git to workaround the bug.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+(cherry picked from commit ed33569f822a3a8d41f82f6980a046d17aca37d5)
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../recipes-support/fftw/{fftw_3.3.10.bb => fftw_3.3.11.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/fftw/{fftw_3.3.10.bb => fftw_3.3.11.bb} (94%)
+ ...-with-disable-maintainer-mode-and-so.patch | 44 +++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.8.1.bb       | 14 +++---
+ 2 files changed, 52 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb b/meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-similarity index 94%
-rename from meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-rename to meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-index 52122b9c0c..83010d3e7d 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.10.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.11.bb
-@@ -9,7 +9,7 @@ SRC_URI = " \
-     file://install-bench.patch \
+diff --git a/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch b/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
+new file mode 100644
+index 0000000000..12a64a75ed
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq/0001-Support-building-with-disable-maintainer-mode-and-so.patch
+@@ -0,0 +1,44 @@
++From 27f417f4812e688a59fc5186b7768cec004cd6e5 Mon Sep 17 00:00:00 2001
++From: Peter Kjellerstedt <peter.kjellerstedt@gmail.com>
++Date: Wed, 8 Apr 2026 05:58:49 +0200
++Subject: [PATCH] Support building with --disable-maintainer-mode and source !=
++ build dir (#3518)
++
++If --disable-maintainer-mode is enabled, then the rules for generating
++parser.[ch] and lexer.[ch] did nothing. This worked fine if the source
++and build directories are the same as the pre-generated parser.c and
++lexer.c files would suffice. However, if the build directory is not the
++same as the source directory, then the rest of the Make rules expect
++parser.[ch] and lexer.[ch] to have been created in the build directory
++if their source files (parser.y and lexer.l) are newer than the target
++files, which can happen in case the source is fetched using Git.
++
++Avoid the problem by copying the files to the build directory if needed.
++
++Co-authored-by: Peter Kjellerstedt <pkj@axis.com>
++Upstream-Status: Backport [https://github.com/jqlang/jq/commit/27f417f4812e688a59fc5186b7768cec004cd6e5]
++---
++ Makefile.am | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 96d6038..acb9443 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -41,9 +41,14 @@ src/lexer.h: src/lexer.c
++ else
++ BUILT_SOURCES = src/builtin.inc src/config_opts.inc src/version.h
++ .y.c:
++-	$(AM_V_YACC) echo "NOT building parser.c!"
+++	$(AM_V_YACC) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(@F) $@
+++	$(AM_V_YACC) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(*F).h $*.h
+++	$(AM_V_YACC) touch $@ $*.h
+++
++ .l.c:
++-	$(AM_V_LEX) echo "NOT building lexer.c!"
+++	$(AM_V_LEX) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(@F) $@
+++	$(AM_V_LEX) [ "$(<D)" = "$(@D)" ] || cp $(<D)/$(*F).h $*.h
+++	$(AM_V_LEX) touch $@ $*.h
++ endif
++ 
++ # Tell YACC (Bison) autoconf macros that you want a header file created.
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+index b9383c76f7..6eaa2de6df 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.8.1.bb
+@@ -8,15 +8,17 @@ SECTION = "utils"
+ LICENSE = "MIT & BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cf7fcb0a1def4a7ad62c028f7d0dca47"
+ 
+-GITHUB_BASE_URI = "https://github.com/jqlang/${BPN}/releases/"
+-SRC_URI = "${GITHUB_BASE_URI}/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
++SRCREV = "4467af7068b1bcd7f882defff6e7ea674c5357f4"
++
++SRC_URI = " \
++    git://github.com/jqlang/jq.git;protocol=https;branch=master;tag=jq-${PV} \
      file://run-ptest \
- "
--SRC_URI[sha256sum] = "56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467"
-+SRC_URI[sha256sum] = "5630c24cdeb33b131612f7eb4b1a9934234754f9f388ff8617458d0be6f239a1"
+-    "
+-SRC_URI[sha256sum] = "2be64e7129cecb11d5906290eba10af694fb9e3e7f9fc208a311dc33ca837eb0"
++    file://0001-Support-building-with-disable-maintainer-mode-and-so.patch \
++"
  
- UPSTREAM_CHECK_URI = "http://www.fftw.org/download.html"
+-inherit autotools github-releases ptest
++inherit autotools ptest
  
-@@ -57,7 +57,7 @@ do_configure() {
- do_compile() {
-     for lib in fftw fftwl fftwf; do
-         cd ${WORKDIR}/build-$lib
--        test -n "${TOOLCHAIN_OPTIONS}" && sed -i -e 's|${TOOLCHAIN_OPTIONS}||g' config.h
-+        sed -i -e 's|${DEBUG_PREFIX_MAP}||g; s|--sysroot=${STAGING_DIR_TARGET}||g' config.h
-         autotools_do_compile
-     done
- }
--- 
-2.53.0
-
+-UPSTREAM_CHECK_REGEX = "releases/tag/${BPN}-(?P<pver>\d+(\.\d+)+)"
++UPSTREAM_CHECK_GITTAGREGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)"
+ 
+ PACKAGECONFIG ?= "oniguruma"
+ 
 
