@@ -2,428 +2,287 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1AD0F9EDFD
-	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 07:02:28 +0000 (UTC)
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.14275.1776927742957651434
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6128F9EDFE
+	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 07:04:58 +0000 (UTC)
+Received: from mail-yx1-f51.google.com (mail-yx1-f51.google.com [74.125.224.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.14292.1776927895345286309
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 00:02:23 -0700
+ Thu, 23 Apr 2026 00:04:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=l19EfiKw;
- spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-652fcd5a6d7so6951395d50.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 00:02:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1776927742; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=nS7+hwEk;
+ spf=pass (domain: gmail.com, ip: 74.125.224.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f51.google.com with SMTP id 956f58d0204a3-65075c2ba66so4640409d50.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 00:04:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776927894; cv=none;
         d=google.com; s=arc-20240605;
-        b=IiQjJERClQ0ZL5c/s+oMy/Y57iHlWjgOsCaUfqVodtR/Uz1i806UeBnH7SB+uYW5i/
-         ohltn9EYokPRjpmI4mQk8/5xbm5iJ4vOXLZTjU1XQ80K1g0SrQOkvrphF+mfF94wEW2+
-         ZqKHmg096gNBHga0R6fwj4yS71s8r/GPiJ8Bj37Asb/mRDjKv2dUWZFsD9umRVhJ+BP5
-         9MZEdn5yXYYKH2OJKUlD97A+FFrCJ+4mbIKqs34SG0dKR2g1CmLYC91jaDnTcYOvkikp
-         jhKSUonSDpa63I6ZtbqsEN5YK41npuxVYfxOvc22IPjEtFYrtHKpthNNyjd674dvZ7lC
-         ihRw==
+        b=XHp1O+bV4I/sbM1PZGx6nbPeTUJWepud+3yan24zs/qIs0jGCdKOcQELrcmzqMMFca
+         JZTIUV+JKyjW0dzEiqN41M1zqefu9fO4NImX76Q/kioVgGvLpXXaKX3xyVqjjdlidsoX
+         I8msxjtD7tc3gvCH0hAlB0gMxPMJoLiKPft/+ph3/9jIJKyamt/e2AS1gRpKMgwXQFsO
+         KYBSJY1j+ZYBDgVhntLNPfn9YUNGzzYUv3H1k5IlCuU/BMrOf1IHfEnJBdQ8JS3ixwYc
+         G3atom+tqhLJkbM4Yzyh+YKlP91lamiCZrC2shQnbbaxcgRSRSLWwWJ9LaCEJX4tCMMJ
+         WMxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=6t3Lm7NeTci1aWNnkoeTt3Db296Mnbbp8Ew/hYLWO6I=;
-        fh=YkTfMVMSoA3jC1Sn45nehZmHIXeAnwDt+QDopY86TKg=;
-        b=GBgKsctEAFxegDUIaL67qTVfb581y8QSdb06SIQnpLO4BbT18j2w/tAs6rmhrigwXp
-         MOtkPmblIRfSRAaOfvcwuVgcdWOh1gG2KAYCFUVI9JXY+LO+sMXsjpw26NpoX24bP195
-         ep8JAzcDW14nH4BG4DMgdhWEYEai/PzwE/dBiam9XC5CyaZQsD7Wk7qmypVsJjjm0FR3
-         sMfuOGpxmENcudj1KUBT66hHzwQJ+5Bt54OsJSS46f1fIWcokFr5vSYni6H2XzwTAnWx
-         QBrwtOGOefeRoVNJvRG2/Nfb5X7Xy5G8pUCGhaksoWKED/RbI3gXWiYIuWHR+8J0jmOx
-         N/Mg==;
+        bh=JAGRsk+gMQXs+tbAbLzvBxD8zSCn3xq4h/YHvcqsxXs=;
+        fh=pqXs1Zj5el8SCB4ZVFB/22Udm7OCtXTsjsSPG5Cpfng=;
+        b=W9h7V3UTA2rpBiQQv/eesdz8yd4/8sFMRfikEbRP54oBC3ibv8x2puacHT/jN1dS+I
+         lmjiD3PAWMvF4lR9I9VAFUKnizDh6nao58RXe5A/Tcd0EpjIp9/n9fideLbxMFaGZH7n
+         5xat6FoahEHdGfHMHGLr/1xqe9Esz3VMHou4MaFZ4tnn7xON2W4tUSxhb2ZzFuUAo2/l
+         T+dHaOfPnumV2TAUEECvnkKqDB4X/74MiBQNDl8byIezfjU6L7X2swEzdG6wMM7Rcaqy
+         HtF085mF2fdnVkBARYx2DGPEwKwfnsxufTljhPtVI9TzjwRNFG3m5+qgLJQUpvyvaVY1
+         kRDg==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776927742; x=1777532542; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776927894; x=1777532694; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=6t3Lm7NeTci1aWNnkoeTt3Db296Mnbbp8Ew/hYLWO6I=;
-        b=l19EfiKw0Lk/E7p59vjwwqA/H+yGozo7F57Xk2VtZxsPhfq5O04JF4sPfoYkZWflpf
-         4hbiESsGJDmPPfvyF247avAyuzog8r5pv520YATKyF6SpFo7qG4AW5EvooETfo6/Fq5v
-         wGXvEbInsmgBGJERlVEDaGU1CkCc8+xL/6fnW24TaDBaQTTYmm4QSRhmBqomybAZyzRN
-         cNHm5Z+SukMJbgFsNieeL7sKKSUAwrccu8GakVxE25ql2bBj5O3X29TO73OIQ2LU4fQN
-         mHTD5rnpHyadMzaXVJjX6iq7jvr0jjfkzC27TPIet19N3d6d3p7+oPdUhc1VbTbJsJdR
-         xYbw==
+        bh=JAGRsk+gMQXs+tbAbLzvBxD8zSCn3xq4h/YHvcqsxXs=;
+        b=nS7+hwEkn7nT72y6qelBCLTFIU3f9dTDoFLDPd6hmWUsU/3E+/ZvT8bsrcvD8qg6P1
+         PCnWOIWAPxjPJBxhukjsUS4PYrH3TXAPjRWKKCMBai0nRShNtkgXtmN49P5eIF0v9kNr
+         wrTg2t4wTASnRflEJz+uNkCoTflnRDWRpl2g2Cd3MTriffWOmUP8T00a3UwhufcA1O62
+         +k9MWiAJTPTjVxQayG1c+GT8gJaXavl0fvlVVDjFN9rId+8z3w54RsyAh7wwf4nR11EH
+         431JMGOLE/ZUcaq970TTH5qGHQNZYhUyG4LGgD37LYDSTBoe1CJJbl3dwQnGpPtARoU0
+         CA4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776927742; x=1777532542;
+        d=1e100.net; s=20251104; t=1776927894; x=1777532694;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6t3Lm7NeTci1aWNnkoeTt3Db296Mnbbp8Ew/hYLWO6I=;
-        b=aySb2olsuZrGDFa8LkN/7C943WL8U0EpQBF9PrVRbj0OpKvX3Opz9kNNdMYA9j1bPE
-         hjmIHtcUi7Nqp40hAL8Df/4pA9tr6BqC8c89DYxjXxXDF8i4JArxlfQFajs8t8BCQ7eA
-         u0Aeh1l+CqOXbn5bttkkwSlPFPXzeHogv7GtBVigH9ezLK7YfzUZ5G8LNZM6vmhWnaHv
-         seU2gKWcraYtv91147zwmyLRPXMBvY6b382xG09+cyFcxCEXVgY2V76dJrc6nGTWsuMb
-         quy/JLTliswoV/YVJCmbSeY3iZgEwBHwxLHR7CiF7pQx/KrEtigiXfJJrJ8Pr/GaNMJS
-         nakA==
-X-Gm-Message-State: AOJu0YwH3GM39eKtB8vrQGkqvTcRqCPMQKpG+dSo3K+7hEF2OXx6/JCU
-	PO3MRCDJwpInz+7F0UFoZR0qyqWFkrUi3OK7/qJfrjOiPDJmLLtEnx8aESaNq94qv+OHrDjh4Z5
-	whVdaVqEkNsWxQTy+UHiXF9Rit5BJOqo=
-X-Gm-Gg: AeBDieu0U1UlhnDwGC8xqSra+5vKR3GDdGi4J/WxRR1wmjo2ZYJqHtSJC4+2xWajT6p
-	I7TPycDaNsj6fskEGMkpeW5FOIFSJszN7maiNIV7FcDmUlQvSzyyl3nGISSo1dXLWP4j6gr9G2F
-	Ij3usTT417zaiFzye2uzy0sSg6zP9PFn6yKzlnlGiUn9A9mkrQfPsivXhjWYxvVTO8+SED92pg8
-	+VYYtHNzKsSnUJHdQKTXMD1q/eROZLVxKjwImNxK+3MCMQ+j0r+cqbzWdFn0DLlPkxMWOzJ6EtY
-	LrnmfBH2MgPe1PX9Y3RcWX/HB8TDPceXrMffGJvVsHlBCvT0ODfEx8N+uq/LDcBSD9JAlHySIzp
-	kUiiGKQSUT7UYPMJqK45lbCIHgUk0ljh63rMKuG0GJGioR1O6LYIJB6I13yR3/Snb1SQMpyVZUI
-	krQeiN9ugESssfzUrtqA==
-X-Received: by 2002:a05:690e:1917:b0:654:52b8:4a8e with SMTP id
- 956f58d0204a3-65452b84dfdmr5481766d50.45.1776927742026; Thu, 23 Apr 2026
- 00:02:22 -0700 (PDT)
+        bh=JAGRsk+gMQXs+tbAbLzvBxD8zSCn3xq4h/YHvcqsxXs=;
+        b=hRXFlcFNEsvl3+8dZ/g7lW0W5KkkTnd+Olcqe8Axv5NKrqouXXwxweDR+WaeDnDzyu
+         4EM47nvt+6XQ8QojVr+hcxydkXnBb8LB2bZd2299e2NKWxlt4+65xEp8vTwvQsWB5zYU
+         daGw2bsu8ZrMO5P3XzLjl1qk6kExsxf94CZhL3R6HcXVaCBXeDLn5/bDGfj3MLXKfj02
+         P6Qi43MtB3sVsIdBw9S8SZWDO5U0D9mXyDrscm/OQ/1hS7ONT8qPfqNFvgjYimnJWzah
+         Ih0N+h8rIc8C0Fs3bhH/Q/nGkE1lKijX6kEHc/FQZ8kbISU3En6TUX6DukrXH4brCk5f
+         zSQw==
+X-Forwarded-Encrypted: i=1; AFNElJ+Ot2H30O7mnFD3vS1VdVTGlY93ziOTmk3qgJ5tdKxN8NENb5r0/YAQ2MlRo7yCjS6Odpv0jz66H4h1b28el60UQT8=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzPpNOSDDC6Kw2wf39wjJSwS7rjsMy3GIgUFHskIMIYWxhE2b3Y
+	NM6Vr3ZVQTzYqMjrmf0SqdhUOowGTitKtmyBnFENCR0CmIQCGbXksjealiLEvQm3PGgU11qwoYX
+	Utlj6Cl7dhdUCPyyknLxnbqbphU27s68=
+X-Gm-Gg: AeBDiev5CJcFTnFFauiX3myhbZrvlKPbJUM9jm6eoaPBmP0mF8SRp0zVP0SBz4Fzd0R
+	O4kpLTZoxCPSHKfphzic/MEz0hrbGE4+CtLHGsfURhLp56NiJ0O7TK300WXOMcOh6IUTURKGeXw
+	PcQBi6EXq6T7yqlmNAPlS2NXiFpN70Lt3VSRsHjfgmcAv4UNyjGMMHELT+dHoPzleJYrP0OVNaG
+	k6/1LrO30neLB1Sj/yGlW9vey57L1FZC1z1Eg346s735qMdZbMUT8cpQ6c9L/x0fFd6C5tLWG/R
+	al7FEKOHtRiBLoToBZ1bHPUOCfddH8sGmDfp5euo1dZhjW0wXpzQmmQLRiWsHMqJwavfkr0fdFK
+	kSVR0ooTVjo5EBKj1QSR/0hMWGLaYN00oI/xx7LxcYasBRq2T/tcJkCpJLbeb4gQauXJ/g3Wtv3
+	Yqj9kEC9LgxiPn1Hi07YcrF6P8Yk6h
+X-Received: by 2002:a05:690e:430c:b0:650:1960:c8b4 with SMTP id
+ 956f58d0204a3-653109f9d8bmr17044880d50.42.1776927894358; Thu, 23 Apr 2026
+ 00:04:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260422013925.1791148-1-khem.raj@oss.qualcomm.com> <ab02ec5f-3569-41d4-b846-93a51c8002db@gmail.com>
-In-Reply-To: <ab02ec5f-3569-41d4-b846-93a51c8002db@gmail.com>
+References: <20260423031717.4186749-1-wenlin.kang@windriver.com> <b9fbe190-229f-44ca-acb0-d25f61f52a9f@windriver.com>
+In-Reply-To: <b9fbe190-229f-44ca-acb0-d25f61f52a9f@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 23 Apr 2026 00:01:52 -0700
-X-Gm-Features: AQROBzCjwsjeNZW1PRn9kF9w7exD95IyNBmPByhQ6mcAttornFccikMzbzx8nhg
-Message-ID: <CAMKF1srSFo_+pWhhQXsoHykcZK7FTp-5LJ5QbGVewUvZhF0jbQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] gphoto2: Fix build with clang-22
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Khem Raj <khem.raj@oss.qualcomm.com>
-Content-Type: multipart/alternative; boundary="000000000000dae98906501b3af9"
+Date: Thu, 23 Apr 2026 00:04:27 -0700
+X-Gm-Features: AQROBzAcZis1ox-166_dEyKZKtaCrcMylu8CTrJc6v7MASpR4wyheSlJBDkIfoE
+Message-ID: <CAMKF1spJur5cBF18bt7V5OsaPkb1b7fKauEhat-0eTt2c9FUsA@mail.gmail.com>
+Subject: Re: [oe] [meta-xfce][PATCH] xfce4-session: Make libpam and systemd
+ dependencies conditional
+To: yi.zhao@eng.windriver.com
+Cc: wenlin.kang@windriver.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000ef50f006501b431f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 07:02:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126571
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 07:04:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126572
 
---000000000000dae98906501b3af9
+--000000000000ef50f006501b431f
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 22, 2026 at 12:57=E2=80=AFAM Gyorgy Sarvari <skandigraun@gmail.=
-com>
-wrote:
+On Wed, Apr 22, 2026 at 8:40=E2=80=AFPM Yi Zhao via lists.openembedded.org =
+<yi.zhao=3D
+eng.windriver.com@lists.openembedded.org> wrote:
 
-> On 4/22/26 03:39, Khem Raj via lists.openembedded.org wrote:
-> > Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+> Hi Wenlin,
+>
+> On 4/23/26 11:17, wenlin.kang@windriver.com via lists.openembedded.org
+> wrote:
+> > From: Wenlin Kang <wenlin.kang@windriver.com>
+> >
+> > libpam and systemd require the settings below:
+> >    INIT_MANAGER =3D "systemd"
+> >    DISTRO_FEATURES:append =3D " pam systemd usrmerge"
+> >
+> > So remove hardcoded libpam and systemd dependencies from DEPENDS.
+> > Add conditional logic to include these dependencies only when
+> > the corresponding DISTRO_FEATURES are enabled.
+> >
+> > Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
 > > ---
-> >  ...hoto2-fix-const-qualifier-violations.patch | 73 +++++++++++++++++++
-> >  .../gphoto2/gphoto2_2.5.32.bb                 |  1 +
-> >  2 files changed, 74 insertions(+)
-> >  create mode 100644
-> meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifier=
--violations.patch
+> >   .../xfce4-screensaver/xfce4-screensaver_4.20.2.bb         | 8 +++++++=
+-
+> >   1 file changed, 7 insertions(+), 1 deletion(-)
 > >
-> > diff --git
-> a/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifi=
-er-violations.patch
-> b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifi=
-er-violations.patch
-> > new file mode 100644
-> > index 0000000000..a8f85d034c
-> > --- /dev/null
-> > +++
-> b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-qualifi=
-er-violations.patch
-> > @@ -0,0 +1,73 @@
-> > +From 55edc241e9b61b14153c61fd0baaefac927ad89f Mon Sep 17 00:00:00 2001
-> > +From: Khem Raj <khem.raj@oss.qualcomm.com>
-> > +Date: Tue, 21 Apr 2026 17:39:43 -0700
-> > +Subject: [PATCH] gphoto2: fix const qualifier violations
-> > +MIME-Version: 1.0
-> > +Content-Type: text/plain; charset=3DUTF-8
-> > +Content-Transfer-Encoding: 8bit
+> > diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/
+> xfce4-screensaver_4.20.2.bb b/meta-xfce/recipes-apps/xfce4-screensaver/
+> xfce4-screensaver_4.20.2.bb
+> > index b95bfc170c..191c49b216 100644
+> > --- a/meta-xfce/recipes-apps/xfce4-screensaver/
+> xfce4-screensaver_4.20.2.bb
+> > +++ b/meta-xfce/recipes-apps/xfce4-screensaver/
+> xfce4-screensaver_4.20.2.bb
+> > @@ -10,7 +10,13 @@ LIC_FILES_CHKSUM =3D
+> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
+> >   XFCE_COMPRESS_TYPE =3D "xz"
+> >   XFCEBASEBUILDCLASS =3D "meson"
+> >
+> > -DEPENDS =3D "dbus-glib garcon gtk+3 libxklavier libxscrnsaver
+> virtual/libx11 xfconf libwnck3 libpam systemd"
+> > +DEPENDS =3D "dbus-glib garcon gtk+3 libxklavier libxscrnsaver
+> virtual/libx11 xfconf libwnck3"
 > > +
-> > +No logic is changed. The patch is a pure
-> > +type-correctness fix that makes the variable
-> > +declarations match the actual semantics =E2=80=94
-> > +const char * for pointers into string literals
-> > +or function parameters that must not be mutated,
-> > +and char * only for owned heap memory. This
-> > +satisfies Clang's strict qualifier checking without
-> > +needing any casts or warning suppressions.
+> > +EXTRA_OEMESON +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '',
+> '-Dauthentication-scheme=3Dnone', d)}"
+> > +DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam',
+> '', d)}"
 > > +
-> > +Fixes errors seen on clang with
-> > +  -Werror,-Wincompatible-pointer-types-discards-qualifiers
-> > +
-> > +Upstream-Status: Pending
-> > +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-> > +---
-> > + gphoto2/main.c | 14 ++++++++------
-> > + 1 file changed, 8 insertions(+), 6 deletions(-)
-> > +
-> > +diff --git a/gphoto2/main.c b/gphoto2/main.c
-> > +index 5a3c5c1..086f9df 100644
-> > +--- a/gphoto2/main.c
-> > ++++ b/gphoto2/main.c
-> > +@@ -146,7 +146,8 @@ static int
-> > + get_path_for_file (const char *folder, const char *name,
-> CameraFileType type, CameraFile *file, char **path)
-> > + {
-> > +     unsigned int i, l;
-> > +-    char *s =3D NULL, b[1024];
-> > ++    const char *s =3D NULL;
-> > ++    char *p =3D NULL; char b[1024];
-> > +     time_t t =3D 0;
-> > +     struct tm *tm;
-> > +     int hour12;
-> > +@@ -339,18 +340,18 @@ get_path_for_file (const char *folder, const cha=
-r
-> *name, CameraFileType type, Ca
-> > +                     b[1] =3D '\0';
-> > +             }
-> > +
-> > +-            s =3D *path ? realloc (*path, strlen (*path) + strlen (b)=
- +
-> 1) :
-> > ++            p =3D *path ? realloc (*path, strlen (*path) + strlen (b)=
- +
-> 1) :
-> > +                         malloc (strlen (b) + 1);
-> > +-            if (!s) {
-> > ++            if (!p) {
-> > +                     free (*path);
-> > +                     *path =3D NULL;
-> > +                     return (GP_ERROR_NO_MEMORY);
-> > +             }
-> > +             if (*path) {
-> > +-                    *path =3D s;
-> > ++                    *path =3D p;
-> > +                     strcat (*path, b);
-> > +             } else {
-> > +-                    *path =3D s;
-> > ++                    *path =3D p;
-> > +                     strcpy (*path, b);
-> > +             }
-> > +     }
+> > +EXTRA_OEMESON +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd',
+> '', '-Dsession-manager=3Dnone', d)}"
+> > +DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd',
+> 'systemd', '', d)}"
 >
 >
-> Is this enough? Variable s is still used a few lines later as an input
-> parameter, but now it has a different value than before this patch.
-> (Admittedly haven't looked deep enough to check if the difference is
-> significant)
->
->
-I think p should be used instead of s in that function call
+how did you test it for runtime correctness
 
-return gp_file_get_name_by_type (file, s, type, path);
+
+> I think it would be better to use PACKAGECONFIG.
+>
+>
 
 
 
 >
-> > +@@ -696,7 +697,8 @@ dissolve_filename (
-> > +     const char *folder, const char *filename,
-> > +     char **newfolder, char **newfilename
-> > + ) {
-> > +-    char *nfolder, *s;
-> > ++    char *nfolder;
-> > ++    const char *s;
-> > +
-> > +     s =3D strrchr (filename, '/');
-> > +     if (!s) {
-> > diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-> b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-> > index e5e7c6926f..dbd2b0e748 100644
-> > --- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-> > +++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.32.bb
-> > @@ -9,6 +9,7 @@ RDEPENDS:gphoto2 =3D "libgphoto2"
-> >  SRC_URI =3D "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.bz2;name=3Dgphoto2=
- \
-> >             file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-> >             file://0001-configure-Filter-out-buildpaths-from-CC.patch \
-> > +           file://0001-gphoto2-fix-const-qualifier-violations.patch \
-> >  "
-> >  SRC_URI[gphoto2.sha256sum] =3D
-> "4e379a0f12f72b49ee5ee2283ffd806b5d12d099939d75197a3f4bbc7f27a1a1"
+> //Yi
+>
+> >
+> >   inherit xfce-app
 > >
 > >
 > >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#126539):
-> https://lists.openembedded.org/g/openembedded-devel/message/126539
-> > Mute This Topic: https://lists.openembedded.org/mt/118948760/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#126568):
+> https://lists.openembedded.org/g/openembedded-devel/message/126568
+> Mute This Topic: https://lists.openembedded.org/mt/118966722/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 >
 
---000000000000dae98906501b3af9
+--000000000000ef50f006501b431f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
 mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Apr 22,=
- 2026 at 12:57=E2=80=AFAM Gyorgy Sarvari &lt;<a href=3D"mailto:skandigraun@=
-gmail.com">skandigraun@gmail.com</a>&gt; wrote:<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">On 4/22/26 03:39, Khem Raj via <a href=3D"=
-http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_blank">lists.o=
-penembedded.org</a> wrote:<br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:khem.raj@oss.qualcomm.co=
-m" target=3D"_blank">khem.raj@oss.qualcomm.com</a>&gt;<br>
+ 2026 at 8:40=E2=80=AFPM Yi Zhao via <a href=3D"http://lists.openembedded.o=
+rg">lists.openembedded.org</a> &lt;yi.zhao=3D<a href=3D"mailto:eng.windrive=
+r.com@lists.openembedded.org">eng.windriver.com@lists.openembedded.org</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi We=
+nlin,<br>
+<br>
+On 4/23/26 11:17, <a href=3D"mailto:wenlin.kang@windriver.com" target=3D"_b=
+lank">wenlin.kang@windriver.com</a> via <a href=3D"http://lists.openembedde=
+d.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> <br>
+wrote:<br>
+&gt; From: Wenlin Kang &lt;<a href=3D"mailto:wenlin.kang@windriver.com" tar=
+get=3D"_blank">wenlin.kang@windriver.com</a>&gt;<br>
+&gt;<br>
+&gt; libpam and systemd require the settings below:<br>
+&gt;=C2=A0 =C2=A0 INIT_MANAGER =3D &quot;systemd&quot;<br>
+&gt;=C2=A0 =C2=A0 DISTRO_FEATURES:append =3D &quot; pam systemd usrmerge&qu=
+ot;<br>
+&gt;<br>
+&gt; So remove hardcoded libpam and systemd dependencies from DEPENDS.<br>
+&gt; Add conditional logic to include these dependencies only when<br>
+&gt; the corresponding DISTRO_FEATURES are enabled.<br>
+&gt;<br>
+&gt; Signed-off-by: Wenlin Kang &lt;<a href=3D"mailto:wenlin.kang@windriver=
+.com" target=3D"_blank">wenlin.kang@windriver.com</a>&gt;<br>
 &gt; ---<br>
-&gt;=C2=A0 ...hoto2-fix-const-qualifier-violations.patch | 73 +++++++++++++=
-++++++<br>
-&gt;=C2=A0 .../gphoto2/<a href=3D"http://gphoto2_2.5.32.bb" rel=3D"noreferr=
-er" target=3D"_blank">gphoto2_2.5.32.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
-&gt;=C2=A0 2 files changed, 74 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-oe/recipes-graphics/gphoto2/gphoto2/0001=
--gphoto2-fix-const-qualifier-violations.patch<br>
-&gt; <br>
-&gt; diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix=
--const-qualifier-violations.patch b/meta-oe/recipes-graphics/gphoto2/gphoto=
-2/0001-gphoto2-fix-const-qualifier-violations.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..a8f85d034c<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-oe/recipes-graphics/gphoto2/gphoto2/0001-gphoto2-fix-const-=
-qualifier-violations.patch<br>
-&gt; @@ -0,0 +1,73 @@<br>
-&gt; +From 55edc241e9b61b14153c61fd0baaefac927ad89f Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Khem Raj &lt;<a href=3D"mailto:khem.raj@oss.qualcomm.com" targe=
-t=3D"_blank">khem.raj@oss.qualcomm.com</a>&gt;<br>
-&gt; +Date: Tue, 21 Apr 2026 17:39:43 -0700<br>
-&gt; +Subject: [PATCH] gphoto2: fix const qualifier violations<br>
-&gt; +MIME-Version: 1.0<br>
-&gt; +Content-Type: text/plain; charset=3DUTF-8<br>
-&gt; +Content-Transfer-Encoding: 8bit<br>
+&gt;=C2=A0 =C2=A0.../xfce4-screensaver/<a href=3D"http://xfce4-screensaver_=
+4.20.2.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-screensaver_4.20.2.bb=
+</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 8 +++++++-<br>
+&gt;=C2=A0 =C2=A01 file changed, 7 insertions(+), 1 deletion(-)<br>
+&gt;<br>
+&gt; diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/<a href=3D"http:=
+//xfce4-screensaver_4.20.2.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-s=
+creensaver_4.20.2.bb</a> b/meta-xfce/recipes-apps/xfce4-screensaver/<a href=
+=3D"http://xfce4-screensaver_4.20.2.bb" rel=3D"noreferrer" target=3D"_blank=
+">xfce4-screensaver_4.20.2.bb</a><br>
+&gt; index b95bfc170c..191c49b216 100644<br>
+&gt; --- a/meta-xfce/recipes-apps/xfce4-screensaver/<a href=3D"http://xfce4=
+-screensaver_4.20.2.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-screensa=
+ver_4.20.2.bb</a><br>
+&gt; +++ b/meta-xfce/recipes-apps/xfce4-screensaver/<a href=3D"http://xfce4=
+-screensaver_4.20.2.bb" rel=3D"noreferrer" target=3D"_blank">xfce4-screensa=
+ver_4.20.2.bb</a><br>
+&gt; @@ -10,7 +10,13 @@ LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Db23=
+4ee4d69f5fce4486a80fdaf4a4263 \<br>
+&gt;=C2=A0 =C2=A0XFCE_COMPRESS_TYPE =3D &quot;xz&quot;<br>
+&gt;=C2=A0 =C2=A0XFCEBASEBUILDCLASS =3D &quot;meson&quot;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -DEPENDS =3D &quot;dbus-glib garcon gtk+3 libxklavier libxscrnsaver vi=
+rtual/libx11 xfconf libwnck3 libpam systemd&quot;<br>
+&gt; +DEPENDS =3D &quot;dbus-glib garcon gtk+3 libxklavier libxscrnsaver vi=
+rtual/libx11 xfconf libwnck3&quot;<br>
 &gt; +<br>
-&gt; +No logic is changed. The patch is a pure<br>
-&gt; +type-correctness fix that makes the variable<br>
-&gt; +declarations match the actual semantics =E2=80=94<br>
-&gt; +const char * for pointers into string literals<br>
-&gt; +or function parameters that must not be mutated,<br>
-&gt; +and char * only for owned heap memory. This<br>
-&gt; +satisfies Clang&#39;s strict qualifier checking without<br>
-&gt; +needing any casts or warning suppressions.<br>
+&gt; +EXTRA_OEMESON +=3D &quot;${@bb.utils.contains(&#39;DISTRO_FEATURES&#3=
+9;, &#39;pam&#39;, &#39;&#39;, &#39;-Dauthentication-scheme=3Dnone&#39;, d)=
+}&quot;<br>
+&gt; +DEPENDS +=3D &quot;${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#=
+39;pam&#39;, &#39;libpam&#39;, &#39;&#39;, d)}&quot;<br>
 &gt; +<br>
-&gt; +Fixes errors seen on clang with<br>
-&gt; +=C2=A0 -Werror,-Wincompatible-pointer-types-discards-qualifiers<br>
-&gt; +<br>
-&gt; +Upstream-Status: Pending<br>
-&gt; +Signed-off-by: Khem Raj &lt;<a href=3D"mailto:khem.raj@oss.qualcomm.c=
-om" target=3D"_blank">khem.raj@oss.qualcomm.com</a>&gt;<br>
-&gt; +---<br>
-&gt; + gphoto2/main.c | 14 ++++++++------<br>
-&gt; + 1 file changed, 8 insertions(+), 6 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/gphoto2/main.c b/gphoto2/main.c<br>
-&gt; +index 5a3c5c1..086f9df 100644<br>
-&gt; +--- a/gphoto2/main.c<br>
-&gt; ++++ b/gphoto2/main.c<br>
-&gt; +@@ -146,7 +146,8 @@ static int<br>
-&gt; + get_path_for_file (const char *folder, const char *name, CameraFileT=
-ype type, CameraFile *file, char **path)<br>
-&gt; + {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0unsigned int i, l;<br>
-&gt; +-=C2=A0 =C2=A0 char *s =3D NULL, b[1024];<br>
-&gt; ++=C2=A0 =C2=A0 const char *s =3D NULL;<br>
-&gt; ++=C2=A0 =C2=A0 char *p =3D NULL; char b[1024];<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0time_t t =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0struct tm *tm;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0int hour12;<br>
-&gt; +@@ -339,18 +340,18 @@ get_path_for_file (const char *folder, const ch=
-ar *name, CameraFileType type, Ca<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0b[1] =3D &#39;\0&#39;;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; +<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 s =3D *path ? realloc (*pa=
-th, strlen (*path) + strlen (b) + 1) :<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 p =3D *path ? realloc (*pa=
-th, strlen (*path) + strlen (b) + 1) :<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0malloc (strlen (b) + 1);<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!s) {<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!p) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0free (*path);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0*path =3D NULL;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0return (GP_ERROR_NO_MEMORY);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (*path) {<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 *path =3D s;<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 *path =3D p;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0strcat (*path, b);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
-&gt; +-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 *path =3D s;<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 *path =3D p;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0strcpy (*path, b);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-<br>
-Is this enough? Variable s is still used a few lines later as an input<br>
-parameter, but now it has a different value than before this patch.<br>
-(Admittedly haven&#39;t looked deep enough to check if the difference is<br=
->
-significant)<br>
-<br></blockquote><div><br></div><div>I think p should be used instead of s =
-in that function call</div><div><br></div><div>return gp_file_get_name_by_t=
-ype (file, s, type, path);</div><div><br></div><div>=C2=A0</div><blockquote=
+&gt; +EXTRA_OEMESON +=3D &quot;${@bb.utils.contains(&#39;DISTRO_FEATURES&#3=
+9;, &#39;systemd&#39;, &#39;&#39;, &#39;-Dsession-manager=3Dnone&#39;, d)}&=
+quot;<br>
+&gt; +DEPENDS +=3D &quot;${@bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#=
+39;systemd&#39;, &#39;systemd&#39;, &#39;&#39;, d)}&quot;<br>
+<br></blockquote><div><br></div><div>how did you test it for runtime correc=
+tness=C2=A0</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+I think it would be better to use PACKAGECONFIG.<br>
+<br></blockquote><div><br></div><div><br></div><div>=C2=A0</div><blockquote=
  class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
 lid rgb(204,204,204);padding-left:1ex">
 <br>
-&gt; +@@ -696,7 +697,8 @@ dissolve_filename (<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0const char *folder, const char *filename,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0char **newfolder, char **newfilename<br>
-&gt; + ) {<br>
-&gt; +-=C2=A0 =C2=A0 char *nfolder, *s;<br>
-&gt; ++=C2=A0 =C2=A0 char *nfolder;<br>
-&gt; ++=C2=A0 =C2=A0 const char *s;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0s =3D strrchr (filename, &#39;/&#39;);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0if (!s) {<br>
-&gt; diff --git a/meta-oe/recipes-graphics/gphoto2/<a href=3D"http://gphoto=
-2_2.5.32.bb" rel=3D"noreferrer" target=3D"_blank">gphoto2_2.5.32.bb</a> b/m=
-eta-oe/recipes-graphics/gphoto2/<a href=3D"http://gphoto2_2.5.32.bb" rel=3D=
-"noreferrer" target=3D"_blank">gphoto2_2.5.32.bb</a><br>
-&gt; index e5e7c6926f..dbd2b0e748 100644<br>
-&gt; --- a/meta-oe/recipes-graphics/gphoto2/<a href=3D"http://gphoto2_2.5.3=
-2.bb" rel=3D"noreferrer" target=3D"_blank">gphoto2_2.5.32.bb</a><br>
-&gt; +++ b/meta-oe/recipes-graphics/gphoto2/<a href=3D"http://gphoto2_2.5.3=
-2.bb" rel=3D"noreferrer" target=3D"_blank">gphoto2_2.5.32.bb</a><br>
-&gt; @@ -9,6 +9,7 @@ RDEPENDS:gphoto2 =3D &quot;libgphoto2&quot;<br>
-&gt;=C2=A0 SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.bz2;nam=
-e=3Dgphoto2 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-configure.a=
-c-remove-AM_PO_SUBDIRS.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-configure-F=
-ilter-out-buildpaths-from-CC.patch \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-gphoto2-fix-cons=
-t-qualifier-violations.patch \<br>
-&gt;=C2=A0 &quot;<br>
-&gt;=C2=A0 SRC_URI[gphoto2.sha256sum] =3D &quot;4e379a0f12f72b49ee5ee2283ff=
-d806b5d12d099939d75197a3f4bbc7f27a1a1&quot;<br>
+//Yi<br>
+<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0inherit xfce-app<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;<br>
 &gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#126539): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/126539" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/126539</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11894876=
-0/6084445" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/118948760/6084445</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:skandigraun@gmail.c=
-om" target=3D"_blank">skandigraun@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
+&gt;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#126568): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/126568" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/126568</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/118966722/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/118966722/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
 </blockquote></div></div>
 
---000000000000dae98906501b3af9--
+--000000000000ef50f006501b431f--
 
