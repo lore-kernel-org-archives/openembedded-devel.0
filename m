@@ -2,149 +2,142 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D3E7F589C3
-	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:49:45 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18674.1776948580969607320
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AF65F589C4
+	for <webhook@archiver.kernel.org>; Thu, 23 Apr 2026 12:49:55 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18684.1776948589774223905
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 05:49:41 -0700
+ Thu, 23 Apr 2026 05:49:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Qj4dXgWG;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2a8fba3f769so29711515ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:49:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=hZnoOaB4;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-35fc2b18363so7419950a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 05:49:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1776948580; x=1777553380; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1776948589; x=1777553389; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jGmMMP4U9rVEDfwjqWUt4/8pFwvd8heztUThkaDY0/E=;
-        b=Qj4dXgWG3git9ZekR1cX/60+vuiIJMCbFpJQBk7uXEW3pu3hByXS/gdoGPt1QKguz2
-         1QbPf6xPdIrZkUzoBOktbjUx/a4cQzQATBc0RsdiZ23s+KyUun0wV5NOLfzY6LlfaRas
-         O61a4AVm1f48CA3/f9EYKXATG6Tt9Da97WmVZUm0RHfmyFnpk+iPZF8zZxxIcVAjC009
-         vawJVMZCXQcf1Ch0NVtyq0KOw5q+zbOLVvw4I44MogIGaggBMJ30CIpJbUnDLlIhy295
-         QUlR2SKPVJmalrz6MWWIDhxqJWgjqZMBbTzCPXD+lyWrabgBeewRsz6ETN90Q4+O7HFN
-         oBiA==
+        bh=s4WQ2JMQ3mWa1zfTKtv6qC4WX7ypyxfbiVxAo+Atrsw=;
+        b=hZnoOaB4ENwAiDJmW+azSVILF1QRNG7iHcaDAmZ6AWrTavCj6mnBOLy1IIya4gFba9
+         DuVvSlZASejBKPb81xgqTrvS4xQuNLTM5NUjSxVJksh3OTclWdovzCumq+llA7Z8bFoZ
+         JWnkSsgkeYNViR/BOLIZ7WmjvHKZ+/GhWZvjhNf3fpPh7CxvsxzTNCEWWUIfas6cI5Tk
+         hGF6cNg9yWjaaIFCAwU4UNBhPms9vyUy7L4PZBBU+OJ43+QD0zFzu1FbGXs+u9/aD+8H
+         HmINeG/CGKqQzIG5qeyK3BQulqwO/VsJnk3DBDU5czAPm10eGsmVRzhNgCThy5jz5JpM
+         bsTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1776948580; x=1777553380;
+        d=1e100.net; s=20251104; t=1776948589; x=1777553389;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=jGmMMP4U9rVEDfwjqWUt4/8pFwvd8heztUThkaDY0/E=;
-        b=oBhoDANqRHEfP6LmeWuKMBT9TLRGIQP0jTJXqFbvfGmN9PuV5HRaYucyjohqmFsm8L
-         VS9O6v2/EaiUPLWkO9+gMYH4DzLPrxtq7h9O84QWUo3rpjUdzJZUdN7zUC1/IUYrhUHD
-         8k9k1nprBsWCWDsmxndJzBcuqIK8XLlTMNllVuMXp9Ypk3i13S6/c/IAEB6KJeXdG57w
-         +VRvjHBH7DJnFNAM64ni8MlVOu9FeAwjriWuaNiV7uyQqtmKuuNzJF0HQvB54Ekt+DEn
-         PUKK87VNXb/tWPCDtL7J14qwaJKeBPSHUOrJWo2kPLBkN0CBCLAF1X9bAG29jU4TQMG8
-         KAMQ==
-X-Gm-Message-State: AOJu0YwG/SIx/02PIaipKpqygejjGMTmG3HMjVS92LX1nfIoZpnT0DfM
-	sKPBh2PqiYC/173jzAF7rvMoG0zJGz6U+tQcDGsSrZzIr4cPkB7lf0mSZlsTrnXS
-X-Gm-Gg: AeBDievoJCLSTwDUsGEkL9teQKX80pg91pyfHwqzi3sV+DJKI4KByPC7q58J5yQ6Gxt
-	AQJNJQrOtB6qsKd9YY9Uh9jTljvIOFQpq0DCGxls2viYQobAybUX8/dCvxR8ebPI10cplOeytld
-	3+Dzim1fdSh+6+andkDUcC+8xS8w2aTfiE9SVWBrBR/0olslSwi9Q/uwMIqxB1yVxhY7j8Wzl1U
-	BiS+60228DF9gC3uBGkj26djp8Z4IUMXJJMLzj+bQUHwQOe3KAXz70qN82EwhpyN0ewB/MHco28
-	fafyin8vyOwbmEqpZQ2ieC7/0PFpfN29sBwvHtEZbIYyGkJvuiRPk/LGR3PXI0LMoqbHMHQLwzZ
-	DB0UngOhMVgO0N31F5AoycFFHQF4EB5RgWeD+Vsdcn/84STvcxuqQGXAcNxoDlqrOJsgORhdalt
-	Oj+1OBdq6QArEqI4YELrKc/r0Zvwi+msw6vHntPHE5feZnHKQ=
-X-Received: by 2002:a17:903:3d43:b0:2b0:5d60:7f3f with SMTP id d9443c01a7336-2b5f9ee90bdmr205996165ad.16.1776948580157;
-        Thu, 23 Apr 2026 05:49:40 -0700 (PDT)
+        bh=s4WQ2JMQ3mWa1zfTKtv6qC4WX7ypyxfbiVxAo+Atrsw=;
+        b=KPUuzEDMYlN/uuSsOdLB1/5E4Kk0yN5Yx0v58+JSQP14Q+WYdhnFdqBi0yYFtCpWvE
+         Jacwclqu8u+HyyECzbD5h1a7iBBTgdSzozmUgkmlVRuEErINE2MP0KOnyiCsHmonYjQS
+         IG3eb3FsVWXsYNLRFIJA4Q9ju1FJAcVkBINtTscY0B5jJxAa3eV7fq0uMiSMLnQ7WIgB
+         xLxCyUPtyidcmt8Ran+xg5fM8kxz7eUV33uZAN762TU9E7NtSv4IGJQYV/UCkdi3v8jX
+         1yxbX6SSPK+/RmMMPr/CnTOL3FtKEpS9JC7UO1N0/iCzUN5QA9bYTkEGE9qeeQpcJREl
+         X4Yg==
+X-Gm-Message-State: AOJu0Yy3SvV6a4G7Yvk8aobtF7BKah5Tr02Ramuuo8CG/i0zlsbhUISY
+	eaHsRo7/jfKzm0Jf3WK8dDTa60kW+T05X8Y1WW3ky8TbqWGu9D/NijppKRM4ZBde
+X-Gm-Gg: AeBDietxM7XxYV9GNQV0FgNaiUZUVtHnd9metC0LXHsXstSyb6ibvYD7Y/w1FmGik2f
+	Gu2xHlbYSO6gnQozRyCgyVt+t6VsVpXQXS44GeTJXc+xRm4XxPkY7Y/eqpnXKp44LeSva0KnYzJ
+	TUdjNZ1AxeV8QflzzVXgc0qeBBRU0Us7hIbJtgglKdJeQFeY339kA2AXAxHxoipvxk60aOWHU78
+	Jm/nsBkpBVSOu3AmfM7fE/rlKmIaLF4dNqZyMW0/5LJ1bo2z8FsgsRuL9nedIN+Lzi6rIsNTHtu
+	9wS+DDwtYBDPrXCcaMV6uZHGxIYzmXYmaFgFOOEgSKFoRDrPiM+90OGrKmLqHWqM9y1/TsWpnws
+	PhpjBF9HTsDDko1MyF/K8eOGFCoYRXXFRVM0z5FlFnb/qSkIoEy8Vx/Tl/lPa1DFAAjb8ed5Rzf
+	Sb768LTRjblA62YkcSJlhh5y25VPSA2nNd+kjum6A97olJsA4=
+X-Received: by 2002:a17:90b:35c6:b0:35e:5aa5:ae38 with SMTP id 98e67ed59e1d1-361403ebe7cmr24665271a91.9.1776948589011;
+        Thu, 23 Apr 2026 05:49:49 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.49.37
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b5faa14487sm204043415ad.18.2026.04.23.05.49.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Apr 2026 05:49:39 -0700 (PDT)
+        Thu, 23 Apr 2026 05:49:48 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][whinlatter][PATCH 13/19] libgphoto2: patch CVE-2026-40339
-Date: Fri, 24 Apr 2026 00:48:11 +1200
-Message-ID: <20260423124823.1983261-13-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 16/19] openjpeg: patch CVE-2026-6192
+Date: Fri, 24 Apr 2026 00:48:14 +1200
+Message-ID: <20260423124823.1983261-16-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
 References: <20260423124823.1983261-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:49:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126589
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 12:49:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126592
 
 From: Gyorgy Sarvari <skandigraun@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-40339
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-6192
 
 Backport the patch referenced by the NVD advisory.
 
 Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 2e3be1dddc215192ff277740271d65cdceaa0b18)
+(cherry picked from commit 09050325e6e0736beccc40d125e56430054b7cb8)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../gphoto2/libgphoto2/CVE-2026-40339.patch   | 41 +++++++++++++++++++
- .../gphoto2/libgphoto2_2.5.33.bb              |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40339.patch
+ .../openjpeg/openjpeg/CVE-2026-6192.patch     | 35 +++++++++++++++++++
+ .../openjpeg/openjpeg_2.5.4.bb                |  1 +
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2026-6192.patch
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40339.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40339.patch
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2026-6192.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2026-6192.patch
 new file mode 100644
-index 0000000000..b00ac72772
+index 0000000000..49be9bd0a6
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/CVE-2026-40339.patch
-@@ -0,0 +1,41 @@
-+From 585e8113b541469347d09c341c2e8b468b431adb Mon Sep 17 00:00:00 2001
-+From: Marcus Meissner <marcus@jet.franken.de>
-+Date: Sat, 11 Apr 2026 10:50:47 +0200
-+Subject: [PATCH] =?UTF-8?q?Fixed=20Sony=20DPD=20FormFlag=20OOB=20Read=20(C?=
-+ =?UTF-8?q?WE-125)=20=E2=80=94=20MEDIUM?=
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2026-6192.patch
+@@ -0,0 +1,35 @@
++From 776b00ff792a3c54b65f3bd92dbe7476a5a54106 Mon Sep 17 00:00:00 2001
++From: Even Rouault <even.rouault@spatialys.com>
++Date: Sun, 5 Apr 2026 13:25:27 +0200
++Subject: [PATCH] opj_pi_initialise_encode() (write code path): avoid potential
++ integer overflow leading to insufficient memory allocation
 +
-+ptp_unpack_Sony_DPD() reads the FormFlag byte via dtoh8o(data, *poffset)
-+without a prior bounds check. The standard ptp_unpack_DPD() at line
-+686–687 correctly validates *offset + sizeof(uint8_t) > dpdlen before
-+this same read, but the Sony variant omits this check.
++Fixes #1619
 +
-+CVE-2026-40339
-+
-+Reported-By: Sebastián Alba <sebasjosue84@gmail.com>
-+
-+CVE: CVE-2026-40339
-+Upstream-Status: Backport [https://github.com/gphoto/libgphoto2/commit/09f8a940b1e418b5693f5c11e3016a1ad2cea62d]
++CVE: CVE-2026-6192
++Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/839936aa33eb8899bbbd80fda02796bb65068951]
 +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
 +---
-+ camlibs/ptp2/ptp-pack.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ src/lib/openjp2/pi.c | 9 ++++++---
++ 1 file changed, 6 insertions(+), 3 deletions(-)
 +
-+diff --git a/camlibs/ptp2/ptp-pack.c b/camlibs/ptp2/ptp-pack.c
-+index f90d2a5..28648a5 100644
-+--- a/camlibs/ptp2/ptp-pack.c
-++++ b/camlibs/ptp2/ptp-pack.c
-+@@ -833,9 +833,10 @@ ptp_unpack_Sony_DPD (PTPParams *params, const unsigned char* data, PTPDeviceProp
-+ 	   code or the Data Type is a string (with two empty strings as
-+ 	   values). In both cases Form Flag should be set to 0x00 and FORM is
-+ 	   not present. */
-+-
-+ 	if (*poffset==PTP_dpd_Sony_DefaultValue)
-+ 		return 1;
-++	if (*poffset + sizeof(uint8_t) > dpdlen)
-++		return 1;
++diff --git a/src/lib/openjp2/pi.c b/src/lib/openjp2/pi.c
++index 15ac3314..4abb87af 100644
++--- a/src/lib/openjp2/pi.c
+++++ b/src/lib/openjp2/pi.c
++@@ -1694,9 +1694,12 @@ opj_pi_iterator_t *opj_pi_initialise_encode(const opj_image_t *p_image,
++     l_current_pi = l_pi;
 + 
-+ 	dpd->FormFlag = dtoh8o(data, *poffset);
-+ 	ptp_debug (params, "formflag 0x%04x", dpd->FormFlag);
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-index 440b78dffb..b8d6aee3c1 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.33.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/${BP}.tar.xz;name=libgphoto2 \
-            file://CVE-2026-40335.patch \
-            file://CVE-2026-40336.patch \
-            file://CVE-2026-40338.patch \
-+           file://CVE-2026-40339.patch \
++     /* memory allocation for include*/
++-    l_current_pi->include_size = l_tcp->numlayers * l_step_l;
++-    l_current_pi->include = (OPJ_INT16*) opj_calloc(l_current_pi->include_size,
++-                            sizeof(OPJ_INT16));
+++    l_current_pi->include = NULL;
+++    if (l_step_l <= UINT_MAX / l_tcp->numlayers) {
+++        l_current_pi->include_size = l_tcp->numlayers * l_step_l;
+++        l_current_pi->include = (OPJ_INT16*) opj_calloc(l_current_pi->include_size,
+++                                sizeof(OPJ_INT16));
+++    }
++     if (!l_current_pi->include) {
++         opj_free(l_tmp_data);
++         opj_free(l_tmp_ptr);
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
+index 971cdb2ff9..6f89551a21 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.4.bb
+@@ -8,6 +8,7 @@ DEPENDS = "libpng tiff lcms zlib"
+ SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
+            file://0001-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+            file://CVE-2023-39327.patch \
++           file://CVE-2026-6192.patch \
             "
- SRC_URI[libgphoto2.sha256sum] = "28825f767a85544cb58f6e15028f8e53a5bb37a62148b3f1708b524781c3bef2"
+ SRCREV = "6c4a29b00211eb0430fa0e5e890f1ce5c80f409f"
  
 
