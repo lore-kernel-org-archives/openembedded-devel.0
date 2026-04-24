@@ -1,148 +1,301 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3C01FB44B1
-	for <webhook@archiver.kernel.org>; Fri, 24 Apr 2026 06:04:48 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15318.1777010684901773500
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B061EFB44BF
+	for <webhook@archiver.kernel.org>; Fri, 24 Apr 2026 06:46:08 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15347.1777013167628805419
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Apr 2026 23:04:44 -0700
+ Thu, 23 Apr 2026 23:46:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=OzXSCq6o;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=GVNqSezr;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63O3Ghjx518393
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2026 06:04:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	w2n+X8LK+7bcJWfzkTclWvtNhfqMCExCWNAGiru4nNY=; b=OzXSCq6o2cXNHApI
-	80mxNvVWY9yRVCxCM5T4JG3L9Y6qqSxzXuboIYnEAO2n+caRyA00vZERoOy6l7qR
-	/NKTwWDFp16jLROmlVodtaVbu+VEwaAdRJP/BUnMJ8li2uCYosO7evB7dhXw7dui
-	OjzuUuLNiG352HeIXXyJI1kA0RG6Th/3VhXSl03Y9adfrZ9g5Tr0nO88CQGMGC2h
-	1m9kmnLHwxkhhP/+YgmeVJBgkrQXU1Olq6HNDNoprcHNrxoKKyYVi+m9GSHQSz3e
-	c/1Fgy7Kr5FAkKiNECffbQXDmJroZ7dXs+yFzgj5X48Sn2BhEux5Sumxu2JJwNd4
-	4FB5hw==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4dr0fngfef-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2026 06:04:44 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-8a3bc7f5d43so173762256d6.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 23:04:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777010683; cv=none;
-        d=google.com; s=arc-20240605;
-        b=O2DJZuDyuf50bAsQo8+jQmfZjrb+v4Ikpn9xVgfxz+oPTpYf+9/Xn14SCmYaqVWqW5
-         QWZfKa8trMyu9KnSGFTeWBjMDUdOYcx/IriPlqhQKrmmOlvQ/v5WZQZ8GPWPMkLB79v2
-         CwCbnGtp0skOQy1MrHjLwyBuLKqsBRNWbebNUKszDULkNMdpUQCtuPMNCEdi8jLynoCj
-         o7uRV5muJRO74bpCwcmQNglNmMZZGVApwASfhoNwkW6pEwCa3C/4QhE/c4EF1R5JFUQW
-         SmK3J7b1MBW04yheIu1FXhMU2Vkc2i4JjiVI6Pwr6l6o1dN5VQy0W9te9kcncusxqbkF
-         2ijw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=w2n+X8LK+7bcJWfzkTclWvtNhfqMCExCWNAGiru4nNY=;
-        fh=/JuOYflSa8hJQfBFDcXPdJq/YGwTP02e39QC4UAl1Nw=;
-        b=QlasWHjgMS3tv046jqAjh/XMsbKiF5eGSr/A4QGahlEY+K00DNRscPrWnQCEMJCYEN
-         8SkJ0vZ8TV/3TbGLdIX6LfP/FM3J6NyIQdDSuygbZ8pjC2t3nQ6ylzBU0mebfmmj1/BO
-         Ne7/ZeeYmd4sPVaGwWH74jUj7/wrYgVJHdMOcsCEiy99FkLTiL+ajyQ7BAI1g6/RH/Ry
-         2FK0DAdDf2JEl5FtpfD0YVI2VLeHT+abFNSWZJIlg7lR80IY1G6zWkz39N4+GU98pDwp
-         CMvTBVZLr1BeA3Bhbe7z4MBNmovM+w8jI3Osiwfs/fHet3CS+Tf98jBiF19oHHHGcYjF
-         wbIQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=DwSnBX5K;
+ spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4852a9c6309so68596965e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Apr 2026 23:46:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1777010683; x=1777615483; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=w2n+X8LK+7bcJWfzkTclWvtNhfqMCExCWNAGiru4nNY=;
-        b=GVNqSezrbjV1o+J8qzeABi7OV9K9AJvNhRY4Wf13TNz/qVGSKWwS3nKWZN4kTLjt98
-         LCJSh3X+zMZKzMWKaQOcWo6rcNfoz7+T+5nKUmOt+fQ4JMaHx4zqSx44RuevoUYEqHho
-         iUVJ9Qbb0qiHNzSiba/sZGn2vgpeVAmQd/LmG+DK7BU0iOwaTQfa1rNhW9Zya3Q3/tQ7
-         8kxJ0iprkXLZfgRmkKZ9tZOt+5bheRA3tGaG50DMaCI+Rq96NzFtVvkr0ha4jX2XUhfu
-         G0o2aZRKd/80iSwSsY/KB7lvhU0KDVfpDmrdINTd0KUCNdHFY7LiZnYsh0gB3LQAFN5p
-         9X4g==
+        d=gmail.com; s=20251104; t=1777013166; x=1777617966; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pFpUovGCwt6B7zY+5jsqZQQeyq40gHZUkzAlxj5muI0=;
+        b=DwSnBX5K8OIZN4ADscCal/6jJH4AqsMMBGCnnHErO5VBiH+xdjR0SJ1YKJNyiTeZ5t
+         8C7iddr149IM0fLxcpodFGOSHK/JmPUa8/zfNccLJKvml9she31j3OKBdRv5h4vif7Gf
+         PiAHrf1TlNxdCmG0Zw43TV25GbdyESrbDmD7wUaqD7j/IGS6r7zpQ8rs9dDty+6a//Rz
+         TWKU44wkUvpBLnJy2JuPRYnHvtNRYQxLiHJSu+Wkvb/Qyo/keWOqpFrBCChjF+/thtUJ
+         vVoETHN2Gj9k3D2r0swUYL46PS1IEhQ5pzoUcIRLzZwYWSQVnPkDQFe0dQ2VREObOCew
+         t5wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777010683; x=1777615483;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=w2n+X8LK+7bcJWfzkTclWvtNhfqMCExCWNAGiru4nNY=;
-        b=AT5Ir28LgbD7Wzvrfat3CpkBg2O5r7u0SQZwlkxjzBQYmGs/mLfLMh01ntLsrwppsb
-         YCilr4fn9x9vqGyNzYlqUpWgp8GyuG00r7qccIwSXrs71tMjIrqLSbvC8bsXche/cPZ2
-         erOVWAM4pamrDUQaPSp4HEYfI6wYNXZuyLZl1DVO8y1Sm4TdIHgLBSujmLt/boE7B4F6
-         IDJb0upjA1SRy5WJmzS3G4EvkUzTv3rTlc7dqY9DEKl9kKt7cKQIl3rc7fTxy2GLt0QU
-         UnhZcW/N/DqI4CeBLtPfZHwt9VZ2f68cHfj+05VT6srYjmIElH2q5T2Grs9Aq7gHglm1
-         yJJA==
-X-Gm-Message-State: AOJu0YxgPQQ7/WwhmZyb5kqJaLCjp2oBNrVOQdizu5mn81vLfKEvcAk+
-	ZbdR7x+gSNF7qnwN57Jlu3GTtkV1kCCiFuJ6iev/dAEwRhq546sAkUFpbnRQ/yD1oP76H9W/3dz
-	6FtNTvRYUejx+fFl0MeXzvr8GJWTfuQXnhrxNZMlKTxsZRYiifBNiBIfg6V8JvX1Coks0xvk0U6
-	W5T1yYWDsHISSZVrHDxybqr6U+3lR3kt7BjIras+xXJVVlu6lqqzVhKNk2Bes=
-X-Gm-Gg: AeBDietvo+q86kf8p/m4dFoeytPdBm7trkPklBdZCd96m1+K5cNE9ISuiXlXZzz6n5Y
-	tePKaN0DA3CmY6sQvwjfVvQI0GqOObl0lzkbd9qTXth6TwpS3/ki3WQxuVHg40E8r5T4Kx6+ORg
-	a8l+X9jzX2Bef8AgfRy7PwSb+cQlXHi5+0wGVYi9LWGhLBzGXIl3TbS0Np38i9mA+H0rKkwnmnZ
-	JLo/l/21rVvsjY=
-X-Received: by 2002:a05:6214:5297:b0:89c:e7b9:56d4 with SMTP id 6a1803df08f44-8b027fc88aemr502831936d6.9.1777010683009;
-        Thu, 23 Apr 2026 23:04:43 -0700 (PDT)
-X-Received: by 2002:a05:6214:5297:b0:89c:e7b9:56d4 with SMTP id
- 6a1803df08f44-8b027fc88aemr502831696d6.9.1777010682630; Thu, 23 Apr 2026
- 23:04:42 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1777013166; x=1777617966;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pFpUovGCwt6B7zY+5jsqZQQeyq40gHZUkzAlxj5muI0=;
+        b=ibEnQkLpDxGgwXdcftBiEzng5UQzfxADQQGD63eES4zxQ41SCaAfvq/I23u5T69FFq
+         bnd8HCjJIrUKuQr+k2ELNt326qthbf4k2eaLi3HzHewEP4phuVi5DNoifEReElcgScgw
+         IzRTRBeuNiq8YMHtWA1a3m43C8xn/4qm5+v91Xj97r4OuZgJDpoCMNXkGNFWDJsJC3R0
+         k1aqIqavkIuEU5mNFeS4sM2rJG7kfNHrCAtoVyQUn+Lb5YTvXLLAhxBunx1BotE7bjEJ
+         FCUO3mOC28C6XjuN7S/p/BR+Pp/BAixzI3gpJTEYCSVfq9UwYwaCn37Tr6rC06teYYyx
+         v94A==
+X-Gm-Message-State: AOJu0YwBh6mK233xXWI/Vkx1ibjzlj4lwoWsuRHufafV/Tmk18n07qrC
+	K7WzcNqX2N74jIjbw/zDd+nbmmsX/AZcrz6I3IEKyxWVpgsbrVuCVPGIkwkVpw==
+X-Gm-Gg: AeBDieuWAgywNlZ9a+g/jBppF5vaCEB9BmWgJ/8/31sAVVNhK4o9zV/C9f2Gvde1VHL
+	cn0n4iIeOGJq5ntCWsnQb5Flwu9fnQuYmaoDHSAQvEdJvYNvPfvylcAnm1AjKmZ/OZXVT/xBjo4
+	+WhUAJZWOlLN6JepnYZyi3L+p/tWEfDokcYRgNrwgq1ASbuRu/D3/kYAqpENryqw/FRcKrsXSqi
+	X5O/yQ0LK+V/EeZDBIKnamuukV9hmfCGDLEWsyiJ0YGDKMv2Gdtpnmfnih4zZGgjmHt07oQBokl
+	mQRgAGvTIa/ZnNGdzrza1wRjvpcFUGdM74jLgthYymgyC7dqBBriXTdQITIomkIgWUpvgwvD0M+
+	sjR5ddCwx7Ci3jIp0odmi4tzhjtoUrMQRLrONQZ3yxSR2aw7wfNHauyJCsHMnyOReZpvQMwJfQ4
+	IqdRSupWUDF8RlUrH8l53goIz9/AQfUhs=
+X-Received: by 2002:a05:600c:3110:b0:485:3abe:ab86 with SMTP id 5b1f17b1804b1-488fb739ce4mr416513045e9.4.1777013165738;
+        Thu, 23 Apr 2026 23:46:05 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4896c2a1804sm160671495e9.4.2026.04.23.23.46.04
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Apr 2026 23:46:04 -0700 (PDT)
+From: Gyorgy Sarvari <skandigraun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH v2] mbedtls: add recipe for v4.1.0
+Date: Fri, 24 Apr 2026 08:46:03 +0200
+Message-ID: <20260424064603.728430-1-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260414040405.2258458-1-naman.jain@partner.bmw.de>
- <CALCkg5a+FdjUFquCmFd9K9AA-ePWR2eZtaxUAk8recEnBnv9Fw@mail.gmail.com> <CALCkg5Yk2zWaTpHTMafHXQLWiEZpE-+HC7QeVmRL4L1RM8W8-g@mail.gmail.com>
-In-Reply-To: <CALCkg5Yk2zWaTpHTMafHXQLWiEZpE-+HC7QeVmRL4L1RM8W8-g@mail.gmail.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Fri, 24 Apr 2026 14:04:29 +0800
-X-Gm-Features: AQROBzCwRp4pEQKh-T-m_EZaqfI4EMdoT0m6ENLvyQn2htaoggmnuNrUUEi5-tA
-Message-ID: <CA+s=J=yHs=3P+BY=Xgb7wJYW-CVEgoQjsezgCZuLB9wXuXSG2g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH] Imagemagick: Fix CVEs
-To: nmjain23@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, Naman Jain <namanj1@kpit.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=LfYMLDfi c=1 sm=1 tr=0 ts=69eb07fc cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=Q4-j1AaZAAAA:8 a=wviRmYcNUxn-QqBrIYAA:9
- a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22 a=9H3Qd4_ONW2Ztcrla5EB:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI0MDA1MiBTYWx0ZWRfX7zU0upkfJOXl
- 5vAwbeF9hJO6zm5xGMevYKW1xEhD3yPOHrUDzFWZTLOcZ5Sa+NTpl8BaN/irQ2gD/p6PS2OjOF1
- 0kHO8QtnyKgWap1+j+k3x7ltNGPJ6Ca0b8lA6Vh1f80R7HRAzHSrq88/XXbmfGavzyXbvJy/sYS
- H/Bym80RfMEUxeksJiFrL7VbaLJuSRIpDG1exvQrXED7qq/KAvMglIECNyqZt/laMA27QH4lZ3Z
- lT3cVryCQLNoF3UDYUBsALLlLN+mzRi3Wqo1hrTZsDWIgYmPU75yqdg5FsTOUc6KKmYcVN3mRRa
- 2rtlo2jKZEaw6lqWpTMw4tipkfg+ep0GVcIAKKIbJiHC8hMkugXegjeEBE12QIQvrmPbgJNqMXn
- Nekb4cT/d5Huu5P1z10WB76PG84MR2LlWHQDpKs1xXdlNyfG+Q0MGehbdRZ/oFXXoeqD/vyofs7
- 04zqIWN+GwCjg9jQ0dg==
-X-Proofpoint-ORIG-GUID: _I8fcdr1Uhh3rSXuuxgYtNY-NyxBh7Ne
-X-Proofpoint-GUID: _I8fcdr1Uhh3rSXuuxgYtNY-NyxBh7Ne
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-23_03,2026-04-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
- malwarescore=0 clxscore=1015 spamscore=0 impostorscore=0 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
- definitions=main-2604240052
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2026 06:04:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126601
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2026 06:46:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126602
 
-On Fri, Apr 24, 2026 at 1:17=E2=80=AFPM Naman Jain via lists.openembedded.o=
-rg
-<nmjain23=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Hello,
-> Please let us know if you will need any further information from us.
+This is the current LTS version for mbedtls, add it next to the existing recipe
+for v3.6. This new version will be supported longer than v3.6, but there are
+some incompatibilities between the two (see migration guide[1] and changelog[2]).
 
-Thank you for reminding me. I'll include this in my test queue for
-next week and will reply if I find any issues.
+This recipe is based on the v3.6 recipe. psa PACKAGECONFIG was dropped, as it is
+now the regular behavior, without an option to turn it off. update-alternatives
+class is also removed - it was required due to a sample program called "hello",
+which has been removed from this release.
 
-Thanks,
+Added two small patches:
+- one to handle the CC env var correctly from Python. This is submitted for upstream.
+- one to use qemu to run cross-compiled binaries instead of running them as they are.
+  This is not upstreamed, as it is OE specific.
 
-Anuj
+Ptests passed successfully:
+
+root@qemux86-64:~# ptest-runner
+START: ptest-runner
+2026-04-23T07:29
+BEGIN: /usr/lib/mbedtls/ptest
+PASS: test_suite_config.mbedtls_boolean
+PASS: test_suite_config.tls_combinations
+PASS: test_suite_constant_time_hmac
+PASS: test_suite_debug
+PASS: test_suite_error
+PASS: test_suite_mps
+PASS: test_suite_net
+PASS: test_suite_pkcs7
+PASS: test_suite_ssl
+PASS: test_suite_ssl.records
+PASS: test_suite_ssl.tls-defrag
+PASS: test_suite_ssl_decrypt.misc
+PASS: test_suite_test_helpers
+PASS: test_suite_timing
+PASS: test_suite_version
+PASS: test_suite_x509_oid
+PASS: test_suite_x509parse
+PASS: test_suite_x509write
+DURATION: 7
+END: /usr/lib/mbedtls/ptest
+2026-04-23T07:29
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
+
+[1]: https://github.com/Mbed-TLS/mbedtls/blob/development/docs/4.0-migration-guide.md
+[2]: https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-4.1.0
+
+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+---
+
+v2: Inherit python3native, because some native python modules need to be used. When using the
+    system python, PYTHONPATH gets mixed with build host and sysroot modules, which is incorrect.
+    When using python3native class, the module search path is confined to the sysroot, so it
+    can be better controlled. Also, add python3-jsonschema-native as a build dependency (in v1
+    the recipe took this dependency from my build host)
+
+ ...c_build_helper-Split-cc-command-line.patch | 33 +++++++
+ ...wrapper-to-run-cross-compiled-binary.patch | 29 ++++++
+ .../mbedtls/mbedtls_4.1.0.bb                  | 88 +++++++++++++++++++
+ 3 files changed, 150 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-c_build_helper-Split-cc-command-line.patch
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-binary.patch
+ create mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls_4.1.0.bb
+
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-c_build_helper-Split-cc-command-line.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-c_build_helper-Split-cc-command-line.patch
+new file mode 100644
+index 0000000000..adddb7ad8e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-c_build_helper-Split-cc-command-line.patch
+@@ -0,0 +1,33 @@
++From 178e089683bf42097ac6d27522820d07483bc6bd Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 23 Apr 2026 08:54:02 +0200
++Subject: [PATCH] c_build_helper: Split cc command line
++
++Optionally the CC/HOSTCC environment variable can hold the command to
++invoke the C compiler, however this command can also contain extra
++arguments, not only the binary name. In this particular case Python
++was treating the whole value as a single binary name, and was trying
++to execute as such (e.g. "cc -arg1 -arg2" instead of "cc" and the arguments
++separately), which results in failure.
++
++Split the compiler command into its components to invoke it correctly.
++
++Upstream-Status: Submitted [https://github.com/Mbed-TLS/mbedtls-framework/pull/301]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ scripts/mbedtls_framework/c_build_helper.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/scripts/mbedtls_framework/c_build_helper.py b/scripts/mbedtls_framework/c_build_helper.py
++index 59bb326e2..85dbb628f 100644
++--- a/tf-psa-crypto/framework/scripts/mbedtls_framework/c_build_helper.py
+++++ b/tf-psa-crypto/framework/scripts/mbedtls_framework/c_build_helper.py
++@@ -98,7 +98,7 @@ def compile_c_file(c_filename, exe_filename, include_dirs):
++     cc = os.getenv('HOSTCC', None)
++     if cc is None:
++         cc = os.getenv('CC', 'cc')
++-    cmd = [cc]
+++    cmd = cc.split()
++ 
++     proc = subprocess.Popen(cmd,
++                             stdout=subprocess.DEVNULL,
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-binary.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-binary.patch
+new file mode 100644
+index 0000000000..a9e8bb2ed9
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-binary.patch
+@@ -0,0 +1,29 @@
++From 46f0ea3eb35e8d0d33e88298a9e7c3dbdd49ec17 Mon Sep 17 00:00:00 2001
++From: Gyorgy Sarvari <skandigraun@gmail.com>
++Date: Thu, 23 Apr 2026 09:14:40 +0200
++Subject: [PATCH] use qemuwrapper to run cross-compiled binary
++
++The build process executes a compiled binary to get some details,
++however this results in a failure in case of cross-compiling.
++
++Run it with qemuwrapper, that is created in the recipe.
++
++Upstream-Status: Inappropriate [cross-compile specific]
++Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
++---
++ scripts/mbedtls_framework/c_build_helper.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/scripts/mbedtls_framework/c_build_helper.py b/scripts/mbedtls_framework/c_build_helper.py
++index 59bb326e2..5c4c211ee 100644
++--- a/tf-psa-crypto/framework/scripts/mbedtls_framework/c_build_helper.py
+++++ b/tf-psa-crypto/framework/scripts/mbedtls_framework/c_build_helper.py
++@@ -169,7 +169,7 @@ def get_c_expression_values(
++                              .format(caller, c_name))
++         else:
++             os.remove(c_name)
++-        output = subprocess.check_output([exe_name])
+++        output = subprocess.check_output(['../../../qemuwrapper', exe_name])
++         return output.decode('ascii').strip().split('\n')
++     finally:
++         remove_file_if_exists(exe_name)
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_4.1.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_4.1.0.bb
+new file mode 100644
+index 0000000000..614016b0f1
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_4.1.0.bb
+@@ -0,0 +1,88 @@
++SUMMARY = "Lightweight crypto and SSL/TLS library"
++DESCRIPTION = "mbedtls is a lean open source crypto library          \
++for providing SSL and TLS support in your programs. It offers        \
++an intuitive API and documented header files, so you can actually    \
++understand what the code does. It features:                          \
++                                                                     \
++ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
++   Camellia and XTEA                                                 \
++ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
++ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
++ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
++   ECDSA and ECDH                                                    \
++ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
++ - Abstraction layers for ciphers, hashes, public key operations,    \
++   platform abstraction and threading                                \
++"
++
++HOMEPAGE = "https://www.trustedfirmware.org/projects/mbed-tls/"
++BUGTRACKER = "https://github.com/Mbed-TLS/mbedtls/issues"
++
++LICENSE = "Apache-2.0 | GPL-2.0-or-later"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
++
++SECTION = "libs"
++
++SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=mbedtls-4.1;tag=v${PV} \
++           file://run-ptest \
++           file://0001-c_build_helper-Split-cc-command-line.patch \
++           "
++
++SRC_URI:append:class-target = " file://0001-use-qemuwrapper-to-run-cross-compiled-binary.patch"
++
++SRCREV = "0fe989b6b514192783c469039edd325fd0989806"
++
++DEPENDS += "python3-jinja2-native python3-jsonschema-native qemu-native"
++
++UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
++
++inherit cmake ptest python3native qemu
++
++PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
++PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
++PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
++PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OFF"
++PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
++
++PROVIDES += "polarssl"
++RPROVIDES:${PN} = "polarssl"
++
++PACKAGES =+ "${PN}-programs"
++FILES:${PN}-programs = "${bindir}/"
++
++BBCLASSEXTEND = "native nativesdk"
++
++CVE_PRODUCT = "mbed_tls"
++
++do_configure:prepend() {
++	# during building tf-psa-crypto/framework/scripts/mbedtls_framework/c_build_helper.py
++	# runs some of the cross-compiled binaries.
++
++	qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_LIBDIR}')])}"
++	cat > ${WORKDIR}/qemuwrapper << EOF
++#!/bin/sh
++$qemu_binary "\$@"
++EOF
++
++	chmod +x ${WORKDIR}/qemuwrapper
++}
++
++# Strip host paths from autogenerated test files
++do_compile:append() {
++	sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
++	sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
++}
++
++# Export source files/headers needed by Arm Trusted Firmware
++sysroot_stage_all:append() {
++	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
++	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
++}
++
++do_install_ptest () {
++	install -d ${D}${PTEST_PATH}/tests
++	install -d ${D}${PTEST_PATH}/framework
++	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
++	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
++	cp -fR ${S}/framework/data_files ${D}${PTEST_PATH}/framework/
++}
 
