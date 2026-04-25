@@ -1,135 +1,126 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85995FF885C
-	for <webhook@archiver.kernel.org>; Sat, 25 Apr 2026 05:55:03 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1075.1777096498990001188
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 Apr 2026 22:54:59 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B793EFF8862
+	for <webhook@archiver.kernel.org>; Sat, 25 Apr 2026 17:47:21 +0000 (UTC)
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.2157.1777139234420393369
+ for <Openembedded-devel@lists.openembedded.org>;
+ Sat, 25 Apr 2026 10:47:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=oclAx6Wi;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=T4fiWYHD;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 63P3L8OE944555
-	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2026 05:54:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-type:date:from:message-id:mime-version:subject:to; s=
-	qcppdkim1; bh=/aN4UOXNorEdOJTQLBm9l3QjjGvfNCLclM/Ezza1PpA=; b=oc
-	lAx6Wii2vWpAW/9J7eXEvyGNm2SvWS927CygK7pKvU5cDTRCoXFDUgVgShzlI9ku
-	wAteWyufmU7DHgHhinYujm/570G+67Y553zAwa80NHdWYu9f2c3lHwvoyiHJ7GKl
-	G7sFpiDwEkvEknCTtzOn0vnKYwwAWGLO++dk+chrkGpq3e18dE5O8y+CcBMof0vu
-	NJLNLYX6T+uvnVLoZsP/WmbEO70g+u6dmbK4UqClP9EssTWd6ZlGBvcT9InMz2bJ
-	6HoBgbacQpg3KoxQLvbQyU20X9TOGLj1LBukLyzWXH34gMSta2Hkkn3A4PP5p9pj
-	MgF7M2/cR8rA0SkrEA9Q==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4drnmr088n-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2026 05:54:57 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-8d4c2906fdfso900133085a.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 Apr 2026 22:54:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777096497; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=EEqcBgVd;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-799001d73bdso68673947b3.0
+        for <Openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2026 10:47:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777139233; cv=none;
         d=google.com; s=arc-20240605;
-        b=Ln8xMb6dGx+nXPf5yUkdj+MmNG68TOgqQX7XZ0A/fDE3WVGVBMJe6GCcMCdi26VCQj
-         AAuB8KRsNg0krQwXMSaLytdyzPSDPsqLxkpW5gnvtiTHuSuyo5vWqutLQH85CHZ7YseR
-         SVdySkaj6vt8v2Exk4mrghG3+1aWr4mOXf4j+x+fg2PmOB3Ba+gWlNCh7SIVOyT/Ip2J
-         ziabM0ewAKCNjJVqr3TiPHvSJ70tetWHrxjIa3WarHIv7mdqAqEUK2V58HvKoCC/o9/Y
-         J/43uqoHAjCbBN0gcqBXnNGkP+tvb/filbx5u0iPien1VqutVJ4R4Iaq7ASL5l2vfrsE
-         Yk2w==
+        b=HCTE5nAo/jIdtStWsitdh2WNSiLIjPUbIHncngBwlQhCOV8wmODVjG9YQTU4LtcveN
+         4O3y2iABHxXHJKS/IH8lRyACBOGmUnQiiZ1lu/0wHswQRB+NQdbhvM75vL9zqLyFNov1
+         TLk3JvLlNtQoyoDEP1hvKua++zNqV45n1V1dgKfNLEDEcWDAoVQ7H4Ah02mA0KUDCBQm
+         lgc8x2VWj34r75YaeVggnRyguVDfPPPu9OgK6xWs2iLBGMh9+5S676jxXxZ7Ro89WgiM
+         57rjLMC6YpZtN93Am4dlMCRBYBMaOufF8/l4fx3/VydqgFMEEfyBlSFKYMD5LQAr9UV4
+         6D4Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=/aN4UOXNorEdOJTQLBm9l3QjjGvfNCLclM/Ezza1PpA=;
-        fh=Sz9EADBpfrCLv6q7U9ZBEUz0nl2QuAmXc1tGoo1tqCI=;
-        b=JOqvWpnBVvuP8awV7avk8aAoDIA17x8OyZTt/wRjqzpmBZazQhraKdYbiFuNyJqR0f
-         rqHdRBIXza+pve8mxT4jtxXgy2c5hSbtCRzsshsX6lXITKOi7DWhvpNaV97cqz9k/8Vh
-         bjJPGMD9Zf9uB6G1visS9DJnzqzDssGxCRWgvvZ7fW+4UDLJFsheV7bEDXiXX1XdEzXQ
-         soMP4S002fDKBmr/L1ECNiiSf8C7dzGHDW26nMv9yY6u+te9kH1Llc1oXad5v1xOUuwU
-         k/3Q7iNR6JMhMMLC7SZuDxKXKRHU7G1cNe1/MNTH70/E6bj750rT2otbkKk+m2iz+Mw/
-         aM5w==;
+        bh=fi4SSB6BD5o+VmeBftjK/o4i502kk6h96LLH42Dl1dg=;
+        fh=Gyx13FW3K8G4BZqenkCHUXXeuziF4gxmPRIB0P8ip+M=;
+        b=Qnvmt8zHPgyMiv4f2uLGJ3HqTsQUmWooKrWPclaLPmGyuYVC5uCm23C9Hxj45EL+4K
+         SYwNnrvuDw7ru5WQjbuwGvw0Xl80kLQ3ekeM1xV59khYkFPaQ/cEf0gDWXcIM93+NAw0
+         66e2ee0IN16pV1zRP4VGqBiq2H14XSjfT+qV/jW75N9/bUBqqFkowB8a+nNr1AiU0yVF
+         V0OgeuE349k7wOlqacDc+hr+auKw94FoxAJFTkLmjXkRXdN4pA9qnTatn3aTIaLGd6me
+         QXaKmohvgKRskXAEOlYt2BfNDXdQI6wz3NPCji6ppsR+vy/wojqwSUIF+lW3IrAXDd8p
+         ONYg==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1777096497; x=1777701297; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777139233; x=1777744033; darn=lists.openembedded.org;
         h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=/aN4UOXNorEdOJTQLBm9l3QjjGvfNCLclM/Ezza1PpA=;
-        b=T4fiWYHDoWokA06GId5qXVOxa/VdVCZr9WH3oQin2nmwOrrvRr2rcvEWGbbpyFWe50
-         P2j6LPmxTQW0J+ctQFniHyWV3iMzPYyBvw1JiFTm1pLaEuvRhEusf6CrJ2JJtjOdVl4g
-         165IuAKDbkCy8kORxbkN+0DWETOV5fpwzaXE8SdaKzREpX84RyzRrHRYI8XgMWp8idsz
-         C82sLOz4SCt4XUxBfya17wlSjAu/LoSwUEvHz21JpePOhWqUUtg6Y7SmD6DwDQ39Vzno
-         I4Tar2Y87+g4VZKPQJVcJkHNhG5+HMwdFK8+dXcUi8KifMnIh3iZcao5rUSpCujj1w1H
-         0hgw==
+        bh=fi4SSB6BD5o+VmeBftjK/o4i502kk6h96LLH42Dl1dg=;
+        b=EEqcBgVdk7aRCw4QcqUHgtIEe8hmlIlwh8KCXziDfxj6345CELEz+PDRQvrKROsx2H
+         sxDTD4d4aESgoUfryeOVUy9PIh2srkCIYAfsOyx1UlLrGb3D4sDDT2xJ5i9vBDGv/gie
+         aCnOLItnnqVyHcvSeX96WcVPUqlT5JuAWHHkncRU7mhsYVprUfJimg5iBcmsQLMtmxrl
+         8uMPshDSghbTSED2njkyBHE5T4M0selq1+5xr0nIMSE862p+U/EhfiJEJqMHIKZcbnZk
+         TXhUFLS+1OWllNU5zOUlZWIDOMz6LVaXt9Xn2rm7FwvnRcMRm8H/bnj4cq8fNcNwZT+G
+         b0fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777096497; x=1777701297;
+        d=1e100.net; s=20251104; t=1777139233; x=1777744033;
         h=to:subject:message-id:date:from:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=/aN4UOXNorEdOJTQLBm9l3QjjGvfNCLclM/Ezza1PpA=;
-        b=e9ap1b7P8RmY5e7kL0ekhYTsqVwRjxcDTXKWRGwWg1ZOpGOV2zHSsfmLjoEOyO9sra
-         vy3EHkk70SBQDorIe6sS7CBM3eclEZPOt6b2dUSUw+fmiPdHvuEd8K8XDGf5LNq4Ezsa
-         7TPVe/s2bHZuTxfCaYI15J1XwxefCyeXG6+sO/gn6goQcTFCIPVORs2aVDCaEdhyPZt7
-         2MiynUutZThE4Hekbe2I9fkH4w/CTyuxyGA4B2GUVDP0yucdavNDTj2nZI4ukhLdQg/q
-         3D+5FJenXSDGXIb6bIECA3buT1d8KL672DajLm1vMNDKizWFbclCBr95hmuyes6wA5Xq
-         cr8Q==
-X-Gm-Message-State: AOJu0YxbCqhEZv02sci+dEOd0+Fqza9k+AguOeezsmq7DYYg8oaYfoxR
-	Tt1YMgO6g3M6WozsEvmpOXeVSkNu0QHnzeWdIF8LlG/JQv8GpsW/RG4diUf4da0mKcO1bQOw/OR
-	3aXPKQ8YGX+DJeWEMuldDjsFr1a1YAA0YCsDhtQnKbTsLAosXrUL8UlnwNFEibNn5vK1h5oQEA6
-	k8vGyfND9to6A1bcEEjJfgomdwLRuJAT+TYOJE1QNx+jfe7XV3TZu0xcJy4aGUUDtVMoGKfQ==
-X-Gm-Gg: AeBDievtLGnoBr3srpJy8ai7xaaNBO+hUhFEPgHx5yUIw9TgOY+8W7o4uY3KIsucDHD
-	HLhAV/UpRR19O460jJFi2Yp7tBqhq/QgM3CLXXSC+XuKgBC8zxi2RpLGshc3FPebMnotaVx5D/U
-	RQ8WLzJPOGS5JxZn/rUuOgODpxFoKybBz3QDEJMoloKUuJAMtT75m1bQdb9vB2FgzxEsv3IB29a
-	Dg6WNgHC6SePzc=
-X-Received: by 2002:a05:620a:4803:b0:8d7:2745:6459 with SMTP id af79cd13be357-8e791b8d51bmr5148787385a.38.1777096497184;
-        Fri, 24 Apr 2026 22:54:57 -0700 (PDT)
-X-Received: by 2002:a05:620a:4803:b0:8d7:2745:6459 with SMTP id
- af79cd13be357-8e791b8d51bmr5148786285a.38.1777096496698; Fri, 24 Apr 2026
- 22:54:56 -0700 (PDT)
+        bh=fi4SSB6BD5o+VmeBftjK/o4i502kk6h96LLH42Dl1dg=;
+        b=sq04sTVMQdlgUj/FLyJmVA5EA9O0i8ElQktZ6Nj7I1EA3/T8r9IK713GmUloweA6vx
+         HVFFj/aNGV63y6vE1B4jVMZQfsTlnWgaAJbA70DTeOCFG2fVrXN4wdGJ9is81QTv6Civ
+         ujDqBp+vhYYrlQqdzkRdlP6tiT5peIZWHqKBwLp3DvYvKlhqh447xlrmQuG5Wjs1NU1H
+         IvhHBgR/2CoEKfC7ngO7VE7URJ1YP0u9Dx9RJpdT5zK4Sr0EouRx3yhBryJchEhxcfdO
+         Ab097AyoA2a81RlHlVaHmIXRVrKMmy/KoXBxmFpKfH4kqwBVNboNvod6tZ5zVsFFgtp9
+         gBgg==
+X-Gm-Message-State: AOJu0YxyLSIqtWjJ/1suK/LdlZfbZds8gasrcaTeyXTjDOPxPEQaNMhB
+	HJegprfazgongSLq+BLHk311hJoPVkeNtkadf4jYRh298feUXBiZVsMlrSW4IENBmemKmnE5bLi
+	ROnFGMTRdccsc9qBLC4qc9O/GMFfNtSZkg8DLHbo=
+X-Gm-Gg: AeBDietdRoIc8+obHj5QNmuFNo/VAdtDpQEzl18o31BFlF85TJnOYJ0o4Yl0gVTvswe
+	PtEtu99mr+iE8uxhi33yN/rtLzPrMgZVz6MR1pqEj7kx/VcbU4uX0pU/al+NuK+tO46S78v1xaJ
+	91Kh3vitPJ2ydV7lluFqlOWSA3b1XhRWGfmNPRdldMEZfu1Urw6rXY9oFUTTu8pBnSd/VJMLSux
+	TTyJCB6aRdqNgfphaxy5xfEixfUxKGs2Rc8kQtIhnYIcGE5QOgkoqCKgpAROYeQokhnZczkxrfU
+	GqPEmh4ZUJT72QDzyR122hvqZ+6T/M/YtwwcVhn5DNUQajRyUg9/SNp8ZRHccwxvghsW9vewQ0n
+	MhKHoy5jK2H0FbHT/YPskH8TaKI6yKzDxS/fFykE23fECOkxkcyDniWq4nEOOw8npfAPZzHz6sa
+	yBMF13NHGAth4/ue4=
+X-Received: by 2002:a05:690e:1b60:b0:650:12eb:16db with SMTP id
+ 956f58d0204a3-65310a790a8mr23274404d50.50.1777139233168; Sat, 25 Apr 2026
+ 10:47:13 -0700 (PDT)
 MIME-Version: 1.0
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Sat, 25 Apr 2026 13:54:43 +0800
-X-Gm-Features: AQROBzCMO9MEYpJhEn2_VtbtswpLQ3W07UZDAwtPW5ppLT2f-FrZiq8-lPAeceQ
-Message-ID: <CA+s=J=zJDzB96XxUky09RYP6sXubcYmesi8GKSQkr6DpaGhsVg@mail.gmail.com>
-Subject: Call for whinlatter patches before final release
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Authority-Analysis: v=2.4 cv=aqCCzyZV c=1 sm=1 tr=0 ts=69ec5731 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=IkcTkHD0fZMA:10 a=A5OVakUREuEA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=3WHJM1ZQz_JShphwDgj5:22 a=eZ6GB9mBn6ak2vLqPeAA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-GUID: KNhexV1uaBTAyxWqV-pLoF6j3Q4wQQyp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNDI1MDA1NCBTYWx0ZWRfX733Yzf+9vDD1
- yBF6RT02fhN5QypcMuUhG25FXRcCogtumhC02vlbDjRgxb6NyYl+bOKCJKb3ozeKPsxqyyUWWvL
- FX5cYv3eVh/sRgg9zFKnWDDT2uwCGFPo/Z4+rcBYUGbcdR6vo+TVMxacmXxJzoK7WACmbR7wzgs
- Yi/BCkY/jJHJPTeFhHFMB2IJcmlNkAy/Ind7g6h/ZlIX7dpU4ZmeHRwVUAL5bHzdybXQTHcXhbW
- 06s8rTSnry4Lt0g3fGeYk4Q+k1sUoE/JzHxhiY96/fC2NWvM6qKCO1ZkUt+FGmY00RKG8irw1tS
- hcOOp5Xiz0OYgxuruP06HrSjvlr7VFqRLXIO4iLIvKL3NT6hC+4yO/ajPfF3sCL6pQGXBKGmwUZ
- 3IuqUfexSPJhuagEa4caYDzcOqcQKGqMnjvA1I9a5QXtTInWqPkza8MWQNj54ek2JPtqAa0vQGc
- GMRxQ0Dw0p7B9k9GKzQ==
-X-Proofpoint-ORIG-GUID: KNhexV1uaBTAyxWqV-pLoF6j3Q4wQQyp
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-04-25_02,2026-04-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 spamscore=0 adultscore=0
- suspectscore=0 malwarescore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2604250054
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 25 Apr 2026 10:46:46 -0700
+X-Gm-Features: AQROBzALZRJt5_B-FQyfWLs4On42Ep8YyH_EcqsX_HUPWcZPSGA4UXgnvRxLg9s
+Message-ID: <CAMKF1so=iKQvzr8Hr=6ZxxBcgMU_nocduK3YNTOksqg-qLgQuw@mail.gmail.com>
+Subject: meta-openembedded 'wrynose' release
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>, 
+	Patches and discussions about the oe-core layer <openembedded-core@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000b5a3bb06504c78ef"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2026 05:55:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126612
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 Apr 2026 17:47:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126613
 
-Hello
+--000000000000b5a3bb06504c78ef
+Content-Type: text/plain; charset="UTF-8"
 
-The last YP release for whinlatter branch is scheduled to be released
-in first week of May. Please send any meta-openembedded patches for
-whinlatter by 5 May for inclusion in the next and last merge request
-for this branch.
+Hello All,
 
-Thanks,
+'wrynose' ( yocto 6.0 LTS )  branch for meta-openembedded layers has been
+created.
 
-Anuj
+Anuj Mittal has kindly agreed to maintain the wrynose stable branch.
+
+I would like to see the mbedtls 4.x in there but it still needs some work.
+At this point, it is not part of the branch but we will see if it makes the
+cut.
+
+Please send any patches you would like to see in wrynose release with
+appropriate subject prefix '[wrynose]' so help maintainers.
+
+Report any issues and with patches to fix them would be even better  :)
+
+Thank you
+-Khem
+
+--000000000000b5a3bb06504c78ef
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello All,<div><br></div><div>&#39;wrynose&#39; ( yocto 6.=
+0 LTS )=C2=A0 branch for meta-openembedded layers has been created.</div><d=
+iv><br></div><div>Anuj Mittal has kindly agreed to maintain the wrynose sta=
+ble branch.</div><div><br></div><div>I would like to see the mbedtls 4.x in=
+ there but it still needs some work. At this point, it is not part of the b=
+ranch but we will see if it makes the cut.</div><div><br></div><div>Please =
+send any patches you=C2=A0would like to see in wrynose release with</div><d=
+iv>appropriate subject prefix &#39;[wrynose]&#39; so help maintainers.</div=
+><div><br></div><div>Report any issues and with patches to fix them would b=
+e even better=C2=A0 :)</div><div><br></div><div>Thank you</div><div>-Khem</=
+div><div><br></div></div>
+
+--000000000000b5a3bb06504c78ef--
 
