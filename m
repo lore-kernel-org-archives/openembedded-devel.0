@@ -2,454 +2,223 @@ Return-Path: <skandigraun@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EA02FF885E
-	for <webhook@archiver.kernel.org>; Sun, 26 Apr 2026 15:18:53 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.20964.1777216729549879393
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0636FF8850
+	for <webhook@archiver.kernel.org>; Mon, 27 Apr 2026 05:21:04 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.36358.1777267263990360666
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Apr 2026 08:18:49 -0700
+ Sun, 26 Apr 2026 22:21:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=rASeseVe;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: skandigraun@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-678e678970fso1983755a12.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Apr 2026 08:18:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Yu89YxKs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: skandigraun@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-488a88aeec9so121864045e9.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Apr 2026 22:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777216728; x=1777821528; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=n9IFD/erxFV0kEDN57TXEsAjLxi84xM0iWk/tDcjXXs=;
-        b=rASeseVellHSVV2xo8w5JmAO/hN/ZaM/qWoILfjd+As6xRyKbQvYGI8ZINgbojnGgH
-         j8Mr7Qohi9vnqJCsWkRhUULL0NxST6n+gFGbkZ2vao0zFfflCBXPF1WuXNAF2SH7DXi1
-         UEt6ci2Y0TShPYQ8HCbNDUKxey2VXNjaaU/bDOK2kNp5AktAgkJ7HAqhjkhNxMmI6FE9
-         yB7XdtJlNBYdIeE/K8YmeqjEjhTjbahOWXLr8oeyM5T2wDEyKDlsMkVnMcV4cMyrXwmM
-         LuIPBOg9I+/vOvMSiceV6dJa3H3nBdSgsWI9KsTnVzg7DTNJ0od1/VSrGKoAXkgWjZ55
-         72UQ==
+        d=gmail.com; s=20251104; t=1777267262; x=1777872062; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3RAG/1RVgo/gIvRliYuOKjfcb/h2QLZ/NRGvxtgzvnE=;
+        b=Yu89YxKscuwbq7lkZbxKRt7MLXtr6Sc+9eIi65xOvoudtwCUdfQ87IYBobkxaXK4RP
+         jvw8127Ua0uJTBYg5mMagiuw3Rd7AC8Aclezmd3pYvqJYAaRj7AybCOJqTv908NYuucP
+         hY7vmOn+H6CqCXWG7iOOyNCV8jkoXOwj4wVXadTfvZe26m7qicAZM+yNn548Aa0jDtxN
+         he6AbqWh950ISa6sLbXagLzAiICZ9Y0zCLh9BD69LC+eEkq+5oboHgHzU9K8XpRSurqs
+         fxPykuf9mg4DzcIEMiolRlggKke12iFPqSBnnQ2mrqDX24/pfwZdiIPUBWuOEOcno7kT
+         rumA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777216728; x=1777821528;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20251104; t=1777267262; x=1777872062;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=n9IFD/erxFV0kEDN57TXEsAjLxi84xM0iWk/tDcjXXs=;
-        b=gKxEQ2u6V6rF8QmOOr2g66bt7bi9ujYOk+IDC+h3lXKHgHimT+Yu+vbSNgxVhC//LW
-         750pzoR7PFFgwLdeVsZ1l3teNNhGYPIXXrpCHTUl9Ap3WslKZ0518mlptu+aXCYCJbVw
-         rXF0y59kPiC1h5JxUfmFSTCH/vzSlRwQMF30S9icGYwXN7mFbbgo8rwDu2BQoJ1IxDLj
-         CPAlB5+bWKeifAZJJff17Zw8yLABhWUdBsNRNIberP8nyL6mGDITMiWK0jYvC8yY34Ji
-         CH1GfkyTeQmheuyggKpkQhEzfbZTe4yK6IhXW/Y8ZK6IUTElmE3753HnAPx77UbSEL4H
-         jddA==
-X-Gm-Message-State: AOJu0Yw3HX5+C30BhtD5RygLXVoo3qhiwqwo1b+lJ2WJZ43FmbE6+GBo
-	3u8+aWAwiqCQiv9+B6byj1NCWDAAuQ+wtpJgT3L7xug8IEyWdR0gBzje
-X-Gm-Gg: AeBDietn+gjFi8PQkynJlWBDJeJXRLitfTH4IYqzo2PDeotDAtJLSvWttgRiimpxv2b
-	NOx4+/E5D0qNmgEOGrKzHBdNfSlHupmXVIqCw+GsEQNs99vYrBxf9Xzy24APkJtB9fbcEjRIqVD
-	EjUuty9KglxlP4iXPbHNZAGVEquxz8e12Mq+P+P3lmmx/wkvtiUFfQz0FXn6ka9ezeqjtISRruz
-	5W6B0QS9YdRgeLEV6uIWb1WjMK3yA07p5uIxvw6lT26D3fwsSf1fk2UnZa+ceZIi8tVNfglWXSx
-	pKTJe/OShkrDGYzwoc5QXUOwro15nVEy+TqyVNdpzItfmixlg3CBPRZFr1k7uzrlphQ4g3faIur
-	k0GNPgkopQhj8oYc+Qu4ydJfYy8F+uyaOaJhfjWZhVVi+Y/R6wIkIh41cIHf4arzcIJ8FYQpwto
-	kU2xkH8SJTFisAEaSscArAfDqfU09HzfOVFBPMF/hdBQ==
-X-Received: by 2002:a05:6402:e9c:b0:672:523f:1bf4 with SMTP id 4fb4d7f45d1cf-672bfd999d1mr15611821a12.10.1777216727581;
-        Sun, 26 Apr 2026 08:18:47 -0700 (PDT)
-Received: from [192.168.1.106] ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-672c4d508e7sm5990415a12.20.2026.04.26.08.18.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 26 Apr 2026 08:18:46 -0700 (PDT)
-Message-ID: <962fd041-c7cb-4a9d-8f1a-e616e8f044da@gmail.com>
-Date: Sun, 26 Apr 2026 17:18:44 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH v2] mbedtls: add recipe for v4.1.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, alex.kiernan@gmail.com
-References: <20260424064603.728430-1-skandigraun@gmail.com>
- <CAMKF1sp4hCeyML8MMaOne2t2p_1+oKH37mvJUjF4M-soB2U_6A@mail.gmail.com>
- <CAMKF1so9vPsqk7eTi_ypsr-TiTJSeZFNPgri1KvvKzaT+yinug@mail.gmail.com>
-Content-Language: en-US
+        bh=3RAG/1RVgo/gIvRliYuOKjfcb/h2QLZ/NRGvxtgzvnE=;
+        b=ZYa6ghmk/XE7yCwJjVlhTVFfwJn6NnfPi0MucuRAO9cstNZqxkTk2UUEv68/Fxo7LX
+         uD1TueH3CdVVjtqryLpJY6ZWTWtbsVEyfF0EhthHrNzipxB/0qQQWCFtCDzi+fkp0igc
+         PVPSTGdUPHx89eg4x6fLsZ3uXI1YDdwfS6K0OHdiHWsiGc04md7BTFJQwulRRszaqcQV
+         olTh6yl1s+UF+t0PWJ+Fpmc/ULdprdQS4jMA6aq8YP9d2RdSIitgO3vwzv1QAbqccjpW
+         XDaCPHEYrdtX/62dEGJG0vwzDGFvr6dSh+ko2sZkowQILpptM2msaLM+ZPybpPEOyVrS
+         FXhw==
+X-Gm-Message-State: AOJu0YzfhLfClBy4XEDR09e2ZjYsFJCBhXbxGSAG5SX7+R3MO/EK99dh
+	UWy98QHG4wNj/f2GWVkCMk40GQpV2jL2IRQxqD/ywt0+oH1WYVI9T99FMjU27A==
+X-Gm-Gg: AeBDiesqTQiQszDrm4efBbPP+ccn0hujiZFWwd88tzngMYQF4wkE/NyHpq/yqC/ysWz
+	lPX7bQVsrwF+njGoPIVFSl8/vUzQZgYm1MCI5pt8bSA4QEIZf4pv2n2WICgSmObzCXLcijTato2
+	eKJ+y/tv/6bpMh9ig9tsrylcZ3GgIEo7x1KEUvIFFgpUkGohmrAy/0DKji9ZICbNux47Ukz7Nuq
+	Efx8KwGqQZd9wgma7LLP5WJJRoNAhsY+1oORh1Teuse28OUWZMvMyy7pqBpzHHNSWcbQB0caL91
+	q/2yA9h96qii8kpN7FBKwFbsaObAoPW7k6lrQiMrzcph+orMR/HcJn/wTwrHqIYBkFHaD8CHdkI
+	iKZGdn5E03S2Ze4SpuW+HT7wWqKK5BeQPIZejcWZd4LpSDJ7HXSQ2vYGAjRknS4IXJQm4rAY/xH
+	9/PZO6DfyCYVK8ORxH75EA39uEPn/pHno=
+X-Received: by 2002:a05:600c:1549:b0:48a:761:5808 with SMTP id 5b1f17b1804b1-48a07615c09mr395416115e9.0.1777267261941;
+        Sun, 26 Apr 2026 22:21:01 -0700 (PDT)
+Received: from desktop ([51.154.145.205])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-488fb767961sm231000335e9.16.2026.04.26.22.21.01
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 26 Apr 2026 22:21:01 -0700 (PDT)
 From: Gyorgy Sarvari <skandigraun@gmail.com>
-In-Reply-To: <CAMKF1so9vPsqk7eTi_ypsr-TiTJSeZFNPgri1KvvKzaT+yinug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Subject: CVE report - master - 2026-04-27
+Date: Mon, 27 Apr 2026 07:20:56 +0200
+Message-ID: <20260427052058.805635-2-skandigraun@gmail.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Apr 2026 15:18:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126627
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 05:21:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126629
 
+Do you see a recipe on this list that is important for you? Help us busting some CVEs by sending some patches.
 
+List of all open CVEs (94, out of which new this week: 6):
 
-On 4/25/26 03:35, Khem Raj wrote:
-> and knock on effects perhaps see.
-> 
-> https://errors.yoctoproject.org/Errors/Build/237188/ <https://
-> errors.yoctoproject.org/Errors/Build/237188/>
-> 
-> On Fri, Apr 24, 2026 at 6:33 PM Khem Raj <raj.khem@gmail.com
-> <mailto:raj.khem@gmail.com>> wrote:
-> 
->     here is next error
-> 
->     | *** stack smashing detected ***: terminated
+ - [NEW] civetweb: CVE-2026-5789: https://nvd.nist.gov/vuln/detail/CVE-2026-5789
+ - ctags: CVE-2026-2641: https://nvd.nist.gov/vuln/detail/CVE-2026-2641
+ - dhrystone: CVE-2020-23026: https://nvd.nist.gov/vuln/detail/CVE-2020-23026
+ - docopt.cpp: CVE-2025-67125: https://nvd.nist.gov/vuln/detail/CVE-2025-67125
+ - fontforge: CVE-2025-15271: https://nvd.nist.gov/vuln/detail/CVE-2025-15271
+ - fontforge: CVE-2025-15272: https://nvd.nist.gov/vuln/detail/CVE-2025-15272
+ - fontforge: CVE-2025-15273: https://nvd.nist.gov/vuln/detail/CVE-2025-15273
+ - fontforge: CVE-2025-15274: https://nvd.nist.gov/vuln/detail/CVE-2025-15274
+ - fontforge: CVE-2025-15276: https://nvd.nist.gov/vuln/detail/CVE-2025-15276
+ - fontforge: CVE-2025-15277: https://nvd.nist.gov/vuln/detail/CVE-2025-15277
+ - fontforge: CVE-2025-15278: https://nvd.nist.gov/vuln/detail/CVE-2025-15278
+ - fontforge: CVE-2025-15280: https://nvd.nist.gov/vuln/detail/CVE-2025-15280
+ - freerdp: CVE-2026-22851: https://nvd.nist.gov/vuln/detail/CVE-2026-22851
+ - freerdp: CVE-2026-22856: https://nvd.nist.gov/vuln/detail/CVE-2026-22856
+ - freerdp: CVE-2026-22857: https://nvd.nist.gov/vuln/detail/CVE-2026-22857
+ - freerdp: CVE-2026-22858: https://nvd.nist.gov/vuln/detail/CVE-2026-22858
+ - freerdp: CVE-2026-22859: https://nvd.nist.gov/vuln/detail/CVE-2026-22859
+ - freerdp: CVE-2026-23531: https://nvd.nist.gov/vuln/detail/CVE-2026-23531
+ - freerdp: CVE-2026-23533: https://nvd.nist.gov/vuln/detail/CVE-2026-23533
+ - freerdp: CVE-2026-23534: https://nvd.nist.gov/vuln/detail/CVE-2026-23534
+ - freerdp: CVE-2026-23732: https://nvd.nist.gov/vuln/detail/CVE-2026-23732
+ - freerdp: CVE-2026-23883: https://nvd.nist.gov/vuln/detail/CVE-2026-23883
+ - freerdp: CVE-2026-23884: https://nvd.nist.gov/vuln/detail/CVE-2026-23884
+ - freerdp: CVE-2026-23948: https://nvd.nist.gov/vuln/detail/CVE-2026-23948
+ - freerdp: CVE-2026-24491: https://nvd.nist.gov/vuln/detail/CVE-2026-24491
+ - freerdp: CVE-2026-24675: https://nvd.nist.gov/vuln/detail/CVE-2026-24675
+ - freerdp: CVE-2026-24676: https://nvd.nist.gov/vuln/detail/CVE-2026-24676
+ - freerdp: CVE-2026-24677: https://nvd.nist.gov/vuln/detail/CVE-2026-24677
+ - freerdp: CVE-2026-24678: https://nvd.nist.gov/vuln/detail/CVE-2026-24678
+ - freerdp: CVE-2026-24679: https://nvd.nist.gov/vuln/detail/CVE-2026-24679
+ - freerdp: CVE-2026-24680: https://nvd.nist.gov/vuln/detail/CVE-2026-24680
+ - freerdp: CVE-2026-24681: https://nvd.nist.gov/vuln/detail/CVE-2026-24681
+ - freerdp: CVE-2026-24682: https://nvd.nist.gov/vuln/detail/CVE-2026-24682
+ - freerdp: CVE-2026-24683: https://nvd.nist.gov/vuln/detail/CVE-2026-24683
+ - freerdp: CVE-2026-24684: https://nvd.nist.gov/vuln/detail/CVE-2026-24684
+ - freerdp: CVE-2026-25942: https://nvd.nist.gov/vuln/detail/CVE-2026-25942
+ - freerdp: CVE-2026-25952: https://nvd.nist.gov/vuln/detail/CVE-2026-25952
+ - freerdp: CVE-2026-25953: https://nvd.nist.gov/vuln/detail/CVE-2026-25953
+ - freerdp: CVE-2026-25954: https://nvd.nist.gov/vuln/detail/CVE-2026-25954
+ - freerdp: CVE-2026-25955: https://nvd.nist.gov/vuln/detail/CVE-2026-25955
+ - freerdp: CVE-2026-25959: https://nvd.nist.gov/vuln/detail/CVE-2026-25959
+ - freerdp: CVE-2026-25997: https://nvd.nist.gov/vuln/detail/CVE-2026-25997
+ - freerdp: CVE-2026-26271: https://nvd.nist.gov/vuln/detail/CVE-2026-26271
+ - freerdp: CVE-2026-26955: https://nvd.nist.gov/vuln/detail/CVE-2026-26955
+ - freerdp: CVE-2026-26965: https://nvd.nist.gov/vuln/detail/CVE-2026-26965
+ - freerdp: CVE-2026-26986: https://nvd.nist.gov/vuln/detail/CVE-2026-26986
+ - freerdp: CVE-2026-27015: https://nvd.nist.gov/vuln/detail/CVE-2026-27015
+ - freerdp: CVE-2026-27950: https://nvd.nist.gov/vuln/detail/CVE-2026-27950
+ - freerdp: CVE-2026-27951: https://nvd.nist.gov/vuln/detail/CVE-2026-27951
+ - freerdp: CVE-2026-29774: https://nvd.nist.gov/vuln/detail/CVE-2026-29774
+ - freerdp: CVE-2026-29775: https://nvd.nist.gov/vuln/detail/CVE-2026-29775
+ - freerdp: CVE-2026-29776: https://nvd.nist.gov/vuln/detail/CVE-2026-29776
+ - freerdp: CVE-2026-31806: https://nvd.nist.gov/vuln/detail/CVE-2026-31806
+ - freerdp: CVE-2026-31883: https://nvd.nist.gov/vuln/detail/CVE-2026-31883
+ - freerdp: CVE-2026-31884: https://nvd.nist.gov/vuln/detail/CVE-2026-31884
+ - freerdp: CVE-2026-31885: https://nvd.nist.gov/vuln/detail/CVE-2026-31885
+ - freerdp: CVE-2026-31897: https://nvd.nist.gov/vuln/detail/CVE-2026-31897
+ - freerdp: CVE-2026-33952: https://nvd.nist.gov/vuln/detail/CVE-2026-33952
+ - freerdp: CVE-2026-33977: https://nvd.nist.gov/vuln/detail/CVE-2026-33977
+ - freerdp: CVE-2026-33982: https://nvd.nist.gov/vuln/detail/CVE-2026-33982
+ - freerdp: CVE-2026-33983: https://nvd.nist.gov/vuln/detail/CVE-2026-33983
+ - freerdp: CVE-2026-33984: https://nvd.nist.gov/vuln/detail/CVE-2026-33984
+ - freerdp: CVE-2026-33985: https://nvd.nist.gov/vuln/detail/CVE-2026-33985
+ - freerdp: CVE-2026-33986: https://nvd.nist.gov/vuln/detail/CVE-2026-33986
+ - freerdp: CVE-2026-33987: https://nvd.nist.gov/vuln/detail/CVE-2026-33987
+ - freerdp: CVE-2026-33995: https://nvd.nist.gov/vuln/detail/CVE-2026-33995
+ - [NEW] freerdp: CVE-2026-40254: https://nvd.nist.gov/vuln/detail/CVE-2026-40254
+ - libcoap: CVE-2026-29013: https://nvd.nist.gov/vuln/detail/CVE-2026-29013
+ - libde265: CVE-2024-38949: https://nvd.nist.gov/vuln/detail/CVE-2024-38949
+ - libde265: CVE-2024-38950: https://nvd.nist.gov/vuln/detail/CVE-2024-38950
+ - libheif: CVE-2026-3950: https://nvd.nist.gov/vuln/detail/CVE-2026-3950
+ - libsoup-2.4: CVE-2026-1536: https://nvd.nist.gov/vuln/detail/CVE-2026-1536
+ - [NEW] libsoup-2.4: CVE-2026-2436: https://nvd.nist.gov/vuln/detail/CVE-2026-2436
+ - libsoup-2.4: CVE-2026-3099: https://nvd.nist.gov/vuln/detail/CVE-2026-3099
+ - libsoup-2.4: CVE-2026-3632: https://nvd.nist.gov/vuln/detail/CVE-2026-3632
+ - libsoup-2.4: CVE-2026-3633: https://nvd.nist.gov/vuln/detail/CVE-2026-3633
+ - libsoup-2.4: CVE-2026-3634: https://nvd.nist.gov/vuln/detail/CVE-2026-3634
+ - libsoup-2.4: CVE-2026-4271: https://nvd.nist.gov/vuln/detail/CVE-2026-4271
+ - libsoup-2.4: CVE-2026-5119: https://nvd.nist.gov/vuln/detail/CVE-2026-5119
+ - libuvc: CVE-2026-1991: https://nvd.nist.gov/vuln/detail/CVE-2026-1991
+ - live555: CVE-2026-1200: https://nvd.nist.gov/vuln/detail/CVE-2026-1200
+ - mbedtls: CVE-2025-66442: https://nvd.nist.gov/vuln/detail/CVE-2025-66442
+ - miniupnpd: CVE-2026-5720: https://nvd.nist.gov/vuln/detail/CVE-2026-5720
+ - [NEW] ntfs-3g-ntfsprogs: CVE-2026-40706: https://nvd.nist.gov/vuln/detail/CVE-2026-40706
+ - openflow: CVE-2018-1000155: https://nvd.nist.gov/vuln/detail/CVE-2018-1000155
+ - openjpeg: CVE-2023-39328: https://nvd.nist.gov/vuln/detail/CVE-2023-39328
+ - openjpeg: CVE-2023-39329: https://nvd.nist.gov/vuln/detail/CVE-2023-39329
+ - polkit: CVE-2016-2568: https://nvd.nist.gov/vuln/detail/CVE-2016-2568
+ - [NEW] polkit: CVE-2026-4897: https://nvd.nist.gov/vuln/detail/CVE-2026-4897
+ - python3-flask-user: CVE-2021-23401: https://nvd.nist.gov/vuln/detail/CVE-2021-23401
+ - [NEW] python3-grpcio-tools: CVE-2026-33186: https://nvd.nist.gov/vuln/detail/CVE-2026-33186
+ - python3-m2crypto: CVE-2023-50781: https://nvd.nist.gov/vuln/detail/CVE-2023-50781
+ - sthttpd: CVE-2021-26843: https://nvd.nist.gov/vuln/detail/CVE-2021-26843
+ - xerces-c: CVE-2012-0880: https://nvd.nist.gov/vuln/detail/CVE-2012-0880
 
+====================
 
-Ugh, this seems to happen when sysvinit is set as the init system
-(usually I just use nodistro, that currently defaults to systemd, which
-is why I haven't seen this. But poky distro is sysvinit).
+Removed this week (52): 
 
-Will try to stare at it soonish.
-
-
->     | qemu: uncaught target signal 6 (Aborted) - core dumped
->     | Aborted
->     | Traceback (most recent call last):
->     |   File "/srv/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/
->     x86-64-v3-poky-linux/mbedtls/4.1.0/sources/mbedtls-4.1.0/tf-psa-
->     crypto/framework/scripts/generate_psa_tests.py", line 870, in <module>
->     |     test_data_generation.main(sys.argv[1:], __doc__, PSATestGenerator)
->     |     ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> 
->     Detailed error log
-> 
->     https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/6511632/
->     raw_inline <https://autobuilder.yoctoproject.org/valkyrie/api/v2/
->     logs/6511632/raw_inline>
-> 
->     On Thu, Apr 23, 2026 at 11:46 PM Gyorgy Sarvari via
->     lists.openembedded.org <http://lists.openembedded.org>
->     <skandigraun=gmail.com@lists.openembedded.org
->     <mailto:gmail.com@lists.openembedded.org>> wrote:
-> 
->         This is the current LTS version for mbedtls, add it next to the
->         existing recipe
->         for v3.6. This new version will be supported longer than v3.6,
->         but there are
->         some incompatibilities between the two (see migration guide[1]
->         and changelog[2]).
-> 
->         This recipe is based on the v3.6 recipe. psa PACKAGECONFIG was
->         dropped, as it is
->         now the regular behavior, without an option to turn it off.
->         update-alternatives
->         class is also removed - it was required due to a sample program
->         called "hello",
->         which has been removed from this release.
-> 
->         Added two small patches:
->         - one to handle the CC env var correctly from Python. This is
->         submitted for upstream.
->         - one to use qemu to run cross-compiled binaries instead of
->         running them as they are.
->           This is not upstreamed, as it is OE specific.
-> 
->         Ptests passed successfully:
-> 
->         root@qemux86-64:~# ptest-runner
->         START: ptest-runner
->         2026-04-23T07:29
->         BEGIN: /usr/lib/mbedtls/ptest
->         PASS: test_suite_config.mbedtls_boolean
->         PASS: test_suite_config.tls_combinations
->         PASS: test_suite_constant_time_hmac
->         PASS: test_suite_debug
->         PASS: test_suite_error
->         PASS: test_suite_mps
->         PASS: test_suite_net
->         PASS: test_suite_pkcs7
->         PASS: test_suite_ssl
->         PASS: test_suite_ssl.records
->         PASS: test_suite_ssl.tls-defrag
->         PASS: test_suite_ssl_decrypt.misc
->         PASS: test_suite_test_helpers
->         PASS: test_suite_timing
->         PASS: test_suite_version
->         PASS: test_suite_x509_oid
->         PASS: test_suite_x509parse
->         PASS: test_suite_x509write
->         DURATION: 7
->         END: /usr/lib/mbedtls/ptest
->         2026-04-23T07:29
->         STOP: ptest-runner
->         TOTAL: 1 FAIL: 0
-> 
->         [1]: https://github.com/Mbed-TLS/mbedtls/blob/development/
->         docs/4.0-migration-guide.md <https://github.com/Mbed-TLS/
->         mbedtls/blob/development/docs/4.0-migration-guide.md>
->         [2]: https://github.com/Mbed-TLS/mbedtls/releases/tag/
->         mbedtls-4.1.0 <https://github.com/Mbed-TLS/mbedtls/releases/tag/
->         mbedtls-4.1.0>
-> 
->         Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com
->         <mailto:skandigraun@gmail.com>>
->         ---
-> 
->         v2: Inherit python3native, because some native python modules
->         need to be used. When using the
->             system python, PYTHONPATH gets mixed with build host and
->         sysroot modules, which is incorrect.
->             When using python3native class, the module search path is
->         confined to the sysroot, so it
->             can be better controlled. Also, add python3-jsonschema-
->         native as a build dependency (in v1
->             the recipe took this dependency from my build host)
-> 
->          ...c_build_helper-Split-cc-command-line.patch | 33 +++++++
->          ...wrapper-to-run-cross-compiled-binary.patch | 29 ++++++
->          .../mbedtls/mbedtls_4.1.0.bb <http://mbedtls_4.1.0.bb>         
->                 | 88 +++++++++++++++++++
->          3 files changed, 150 insertions(+)
->          create mode 100644 meta-networking/recipes-connectivity/
->         mbedtls/mbedtls/0001-c_build_helper-Split-cc-command-line.patch
->          create mode 100644 meta-networking/recipes-connectivity/
->         mbedtls/mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-
->         binary.patch
->          create mode 100644 meta-networking/recipes-connectivity/
->         mbedtls/mbedtls_4.1.0.bb <http://mbedtls_4.1.0.bb>
-> 
->         diff --git a/meta-networking/recipes-connectivity/mbedtls/
->         mbedtls/0001-c_build_helper-Split-cc-command-line.patch b/meta-
->         networking/recipes-connectivity/mbedtls/mbedtls/0001-
->         c_build_helper-Split-cc-command-line.patch
->         new file mode 100644
->         index 0000000000..adddb7ad8e
->         --- /dev/null
->         +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-
->         c_build_helper-Split-cc-command-line.patch
->         @@ -0,0 +1,33 @@
->         +From 178e089683bf42097ac6d27522820d07483bc6bd Mon Sep 17
->         00:00:00 2001
->         +From: Gyorgy Sarvari <skandigraun@gmail.com
->         <mailto:skandigraun@gmail.com>>
->         +Date: Thu, 23 Apr 2026 08:54:02 +0200
->         +Subject: [PATCH] c_build_helper: Split cc command line
->         +
->         +Optionally the CC/HOSTCC environment variable can hold the
->         command to
->         +invoke the C compiler, however this command can also contain extra
->         +arguments, not only the binary name. In this particular case Python
->         +was treating the whole value as a single binary name, and was
->         trying
->         +to execute as such (e.g. "cc -arg1 -arg2" instead of "cc" and
->         the arguments
->         +separately), which results in failure.
->         +
->         +Split the compiler command into its components to invoke it
->         correctly.
->         +
->         +Upstream-Status: Submitted [https://github.com/Mbed-TLS/
->         mbedtls-framework/pull/301 <https://github.com/Mbed-TLS/mbedtls-
->         framework/pull/301>]
->         +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com
->         <mailto:skandigraun@gmail.com>>
->         +---
->         + scripts/mbedtls_framework/c_build_helper.py | 2 +-
->         + 1 file changed, 1 insertion(+), 1 deletion(-)
->         +
->         +diff --git a/scripts/mbedtls_framework/c_build_helper.py b/
->         scripts/mbedtls_framework/c_build_helper.py
->         +index 59bb326e2..85dbb628f 100644
->         +--- a/tf-psa-crypto/framework/scripts/mbedtls_framework/
->         c_build_helper.py
->         ++++ b/tf-psa-crypto/framework/scripts/mbedtls_framework/
->         c_build_helper.py
->         +@@ -98,7 +98,7 @@ def compile_c_file(c_filename, exe_filename,
->         include_dirs):
->         +     cc = os.getenv('HOSTCC', None)
->         +     if cc is None:
->         +         cc = os.getenv('CC', 'cc')
->         +-    cmd = [cc]
->         ++    cmd = cc.split()
->         +
->         +     proc = subprocess.Popen(cmd,
->         +                             stdout=subprocess.DEVNULL,
->         diff --git a/meta-networking/recipes-connectivity/mbedtls/
->         mbedtls/0001-use-qemuwrapper-to-run-cross-compiled-binary.patch
->         b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-use-
->         qemuwrapper-to-run-cross-compiled-binary.patch
->         new file mode 100644
->         index 0000000000..a9e8bb2ed9
->         --- /dev/null
->         +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-
->         use-qemuwrapper-to-run-cross-compiled-binary.patch
->         @@ -0,0 +1,29 @@
->         +From 46f0ea3eb35e8d0d33e88298a9e7c3dbdd49ec17 Mon Sep 17
->         00:00:00 2001
->         +From: Gyorgy Sarvari <skandigraun@gmail.com
->         <mailto:skandigraun@gmail.com>>
->         +Date: Thu, 23 Apr 2026 09:14:40 +0200
->         +Subject: [PATCH] use qemuwrapper to run cross-compiled binary
->         +
->         +The build process executes a compiled binary to get some details,
->         +however this results in a failure in case of cross-compiling.
->         +
->         +Run it with qemuwrapper, that is created in the recipe.
->         +
->         +Upstream-Status: Inappropriate [cross-compile specific]
->         +Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com
->         <mailto:skandigraun@gmail.com>>
->         +---
->         + scripts/mbedtls_framework/c_build_helper.py | 2 +-
->         + 1 file changed, 1 insertion(+), 1 deletion(-)
->         +
->         +diff --git a/scripts/mbedtls_framework/c_build_helper.py b/
->         scripts/mbedtls_framework/c_build_helper.py
->         +index 59bb326e2..5c4c211ee 100644
->         +--- a/tf-psa-crypto/framework/scripts/mbedtls_framework/
->         c_build_helper.py
->         ++++ b/tf-psa-crypto/framework/scripts/mbedtls_framework/
->         c_build_helper.py
->         +@@ -169,7 +169,7 @@ def get_c_expression_values(
->         +                              .format(caller, c_name))
->         +         else:
->         +             os.remove(c_name)
->         +-        output = subprocess.check_output([exe_name])
->         ++        output = subprocess.check_output(['../../../
->         qemuwrapper', exe_name])
->         +         return output.decode('ascii').strip().split('\n')
->         +     finally:
->         +         remove_file_if_exists(exe_name)
->         diff --git a/meta-networking/recipes-connectivity/mbedtls/
->         mbedtls_4.1.0.bb <http://mbedtls_4.1.0.bb> b/meta-networking/
->         recipes-connectivity/mbedtls/mbedtls_4.1.0.bb <http://
->         mbedtls_4.1.0.bb>
->         new file mode 100644
->         index 0000000000..614016b0f1
->         --- /dev/null
->         +++ b/meta-networking/recipes-connectivity/mbedtls/
->         mbedtls_4.1.0.bb <http://mbedtls_4.1.0.bb>
->         @@ -0,0 +1,88 @@
->         +SUMMARY = "Lightweight crypto and SSL/TLS library"
->         +DESCRIPTION = "mbedtls is a lean open source crypto library   
->               \
->         +for providing SSL and TLS support in your programs. It offers 
->               \
->         +an intuitive API and documented header files, so you can
->         actually    \
->         +understand what the code does. It features:                   
->               \
->         +                                                               
->              \
->         + - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES,
->         ARC4,  \
->         +   Camellia and XTEA                                           
->              \
->         + - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5     
->               \
->         + - Entropy pool and random generators, like CTR-DRBG and HMAC-
->         DRBG   \
->         + - Public key algorithms, like RSA, Elliptic Curves, Diffie-
->         Hellman, \
->         +   ECDSA and ECDH                                             
->               \
->         + - SSL v3 and TLS 1.0, 1.1 and 1.2                             
->              \
->         + - Abstraction layers for ciphers, hashes, public key
->         operations,    \
->         +   platform abstraction and threading                         
->               \
->         +"
->         +
->         +HOMEPAGE = "https://www.trustedfirmware.org/projects/mbed-tls/
->         <https://www.trustedfirmware.org/projects/mbed-tls/>"
->         +BUGTRACKER = "https://github.com/Mbed-TLS/mbedtls/issues
->         <https://github.com/Mbed-TLS/mbedtls/issues>"
->         +
->         +LICENSE = "Apache-2.0 | GPL-2.0-or-later"
->         +LIC_FILES_CHKSUM = "file://
->         LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
->         +
->         +SECTION = "libs"
->         +
->         +SRC_URI = "gitsm://github.com/Mbed-TLS/
->         mbedtls.git;protocol=https;branch=mbedtls-4.1;tag=v${PV}
->         <http://github.com/Mbed-TLS/
->         mbedtls.git;protocol=https;branch=mbedtls-4.1;tag=v$%7BPV%7D> \
->         +           file://run-ptest \
->         +           file://0001-c_build_helper-Split-cc-command-line.patch \
->         +           "
->         +
->         +SRC_URI:append:class-target = " file://0001-use-qemuwrapper-to-
->         run-cross-compiled-binary.patch"
->         +
->         +SRCREV = "0fe989b6b514192783c469039edd325fd0989806"
->         +
->         +DEPENDS += "python3-jinja2-native python3-jsonschema-native
->         qemu-native"
->         +
->         +UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
->         +
->         +inherit cmake ptest python3native qemu
->         +
->         +PACKAGECONFIG ??= "shared-libs programs
->         ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
->         +PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-
->         DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
->         +PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-
->         DENABLE_PROGRAMS=OFF"
->         +PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-
->         DMBEDTLS_FATAL_WARNINGS=OFF"
->         +PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
->         +
->         +PROVIDES += "polarssl"
->         +RPROVIDES:${PN} = "polarssl"
->         +
->         +PACKAGES =+ "${PN}-programs"
->         +FILES:${PN}-programs = "${bindir}/"
->         +
->         +BBCLASSEXTEND = "native nativesdk"
->         +
->         +CVE_PRODUCT = "mbed_tls"
->         +
->         +do_configure:prepend() {
->         +       # during building tf-psa-crypto/framework/scripts/
->         mbedtls_framework/c_build_helper.py
->         +       # runs some of the cross-compiled binaries.
->         +
->         +       qemu_binary="${@qemu_wrapper_cmdline(d,
->         d.getVar('STAGING_DIR_HOST'),
->         [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_LIBDIR}')])}"
->         +       cat > ${WORKDIR}/qemuwrapper << EOF
->         +#!/bin/sh
->         +$qemu_binary "\$@"
->         +EOF
->         +
->         +       chmod +x ${WORKDIR}/qemuwrapper
->         +}
->         +
->         +# Strip host paths from autogenerated test files
->         +do_compile:append() {
->         +       sed -i 's+${S}/++g' ${B}/tests/*.c 2>/dev/null || :
->         +       sed -i 's+${B}/++g' ${B}/tests/*.c 2>/dev/null || :
->         +}
->         +
->         +# Export source files/headers needed by Arm Trusted Firmware
->         +sysroot_stage_all:append() {
->         +       sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/
->         usr/share/mbedtls-source/library"
->         +       sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/
->         usr/share/mbedtls-source/include"
->         +}
->         +
->         +do_install_ptest () {
->         +       install -d ${D}${PTEST_PATH}/tests
->         +       install -d ${D}${PTEST_PATH}/framework
->         +       cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
->         +       find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
->         +       cp -fR ${S}/framework/data_files ${D}${PTEST_PATH}/
->         framework/
->         +}
-> 
->         -=-=-=-=-=-=-=-=-=-=-=-
->         Links: You receive all messages sent to this group.
->         View/Reply Online (#126602): https://lists.openembedded.org/g/
->         openembedded-devel/message/126602 <https://
->         lists.openembedded.org/g/openembedded-devel/message/126602>
->         Mute This Topic: https://lists.openembedded.org/
->         mt/118983952/1997914 <https://lists.openembedded.org/
->         mt/118983952/1997914>
->         Group Owner: openembedded-devel+owner@lists.openembedded.org
->         <mailto:openembedded-devel%2Bowner@lists.openembedded.org>
->         Unsubscribe: https://lists.openembedded.org/g/openembedded-
->         devel/unsub <https://lists.openembedded.org/g/openembedded-
->         devel/unsub> [raj.khem@gmail.com <mailto:raj.khem@gmail.com>]
->         -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
+ - fio: CVE-2026-30656: https://nvd.nist.gov/vuln/detail/CVE-2026-30656
+ - jq: CVE-2026-32316: https://nvd.nist.gov/vuln/detail/CVE-2026-32316
+ - jq: CVE-2026-33947: https://nvd.nist.gov/vuln/detail/CVE-2026-33947
+ - jq: CVE-2026-33948: https://nvd.nist.gov/vuln/detail/CVE-2026-33948
+ - jq: CVE-2026-39979: https://nvd.nist.gov/vuln/detail/CVE-2026-39979
+ - lcms: CVE-2026-41254: https://nvd.nist.gov/vuln/detail/CVE-2026-41254
+ - libgphoto2: CVE-2026-40333: https://nvd.nist.gov/vuln/detail/CVE-2026-40333
+ - libgphoto2: CVE-2026-40334: https://nvd.nist.gov/vuln/detail/CVE-2026-40334
+ - libgphoto2: CVE-2026-40335: https://nvd.nist.gov/vuln/detail/CVE-2026-40335
+ - libgphoto2: CVE-2026-40336: https://nvd.nist.gov/vuln/detail/CVE-2026-40336
+ - libgphoto2: CVE-2026-40338: https://nvd.nist.gov/vuln/detail/CVE-2026-40338
+ - libgphoto2: CVE-2026-40339: https://nvd.nist.gov/vuln/detail/CVE-2026-40339
+ - libgphoto2: CVE-2026-40340: https://nvd.nist.gov/vuln/detail/CVE-2026-40340
+ - libgphoto2: CVE-2026-40341: https://nvd.nist.gov/vuln/detail/CVE-2026-40341
+ - libraw: CVE-2026-20911: https://nvd.nist.gov/vuln/detail/CVE-2026-20911
+ - libraw: CVE-2026-21413: https://nvd.nist.gov/vuln/detail/CVE-2026-21413
+ - libsoup-2.4: CVE-2026-1467: https://nvd.nist.gov/vuln/detail/CVE-2026-1467
+ - libsoup-2.4: CVE-2026-1539: https://nvd.nist.gov/vuln/detail/CVE-2026-1539
+ - libsoup-2.4: CVE-2026-1801: https://nvd.nist.gov/vuln/detail/CVE-2026-1801
+ - libsoup-2.4: CVE-2026-2443: https://nvd.nist.gov/vuln/detail/CVE-2026-2443
+ - monkey: CVE-2025-63649: https://nvd.nist.gov/vuln/detail/CVE-2025-63649
+ - monkey: CVE-2025-63650: https://nvd.nist.gov/vuln/detail/CVE-2025-63650
+ - monkey: CVE-2025-63651: https://nvd.nist.gov/vuln/detail/CVE-2025-63651
+ - monkey: CVE-2025-63652: https://nvd.nist.gov/vuln/detail/CVE-2025-63652
+ - monkey: CVE-2025-63653: https://nvd.nist.gov/vuln/detail/CVE-2025-63653
+ - monkey: CVE-2025-63655: https://nvd.nist.gov/vuln/detail/CVE-2025-63655
+ - monkey: CVE-2025-63656: https://nvd.nist.gov/vuln/detail/CVE-2025-63656
+ - monkey: CVE-2025-63657: https://nvd.nist.gov/vuln/detail/CVE-2025-63657
+ - monkey: CVE-2025-63658: https://nvd.nist.gov/vuln/detail/CVE-2025-63658
+ - ngtcp2: CVE-2026-40170: https://nvd.nist.gov/vuln/detail/CVE-2026-40170
+ - openjpeg: CVE-2026-6192: https://nvd.nist.gov/vuln/detail/CVE-2026-6192
+ - protobuf: CVE-2026-6409: https://nvd.nist.gov/vuln/detail/CVE-2026-6409
+ - python3-grpcio: CVE-2026-33186: https://nvd.nist.gov/vuln/detail/CVE-2026-33186
+ - python3-pillow: CVE-2026-40192: https://nvd.nist.gov/vuln/detail/CVE-2026-40192
+ - wolfssl: CVE-2026-5188: https://nvd.nist.gov/vuln/detail/CVE-2026-5188
+ - wolfssl: CVE-2026-5392: https://nvd.nist.gov/vuln/detail/CVE-2026-5392
+ - wolfssl: CVE-2026-5393: https://nvd.nist.gov/vuln/detail/CVE-2026-5393
+ - wolfssl: CVE-2026-5447: https://nvd.nist.gov/vuln/detail/CVE-2026-5447
+ - wolfssl: CVE-2026-5448: https://nvd.nist.gov/vuln/detail/CVE-2026-5448
+ - wolfssl: CVE-2026-5460: https://nvd.nist.gov/vuln/detail/CVE-2026-5460
+ - wolfssl: CVE-2026-5466: https://nvd.nist.gov/vuln/detail/CVE-2026-5466
+ - wolfssl: CVE-2026-5479: https://nvd.nist.gov/vuln/detail/CVE-2026-5479
+ - wolfssl: CVE-2026-5500: https://nvd.nist.gov/vuln/detail/CVE-2026-5500
+ - xdg-desktop-portal: CVE-2026-40354: https://nvd.nist.gov/vuln/detail/CVE-2026-40354
+ - xrdp: CVE-2026-32105: https://nvd.nist.gov/vuln/detail/CVE-2026-32105
+ - xrdp: CVE-2026-32107: https://nvd.nist.gov/vuln/detail/CVE-2026-32107
+ - xrdp: CVE-2026-32623: https://nvd.nist.gov/vuln/detail/CVE-2026-32623
+ - xrdp: CVE-2026-32624: https://nvd.nist.gov/vuln/detail/CVE-2026-32624
+ - xrdp: CVE-2026-33145: https://nvd.nist.gov/vuln/detail/CVE-2026-33145
+ - xrdp: CVE-2026-33516: https://nvd.nist.gov/vuln/detail/CVE-2026-33516
+ - xrdp: CVE-2026-33689: https://nvd.nist.gov/vuln/detail/CVE-2026-33689
+ - xrdp: CVE-2026-35512: https://nvd.nist.gov/vuln/detail/CVE-2026-35512
 
