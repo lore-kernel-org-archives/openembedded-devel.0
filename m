@@ -1,143 +1,99 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F392BFF885A
-	for <webhook@archiver.kernel.org>; Tue, 28 Apr 2026 06:34:35 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.6913.1777358066528019225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A2C0FF886C
+	for <webhook@archiver.kernel.org>; Tue, 28 Apr 2026 08:39:49 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.8395.1777365586666076392
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Apr 2026 23:34:26 -0700
+ Tue, 28 Apr 2026 01:39:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ab17DO4j;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5a3d1561e38so9060873e87.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 23:34:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777358064; cv=none;
-        d=google.com; s=arc-20240605;
-        b=WbLPuzXOMrkq7tkVLy99rUIlFRoa7JXBWggQobX9lJVntJnRgLI0x+2uSRTyRF6iRI
-         UErctljqdK/UxSJSA81r+ZmL1ikywLKizoyocETm/JTWYJN0xNQ1edlzDuqYdwNnz2kA
-         jN/YpmXkF4JaKz90XDksxuDxr3d6PI16h2H6HiIibLKS08yDtdygYcjyL3mHpaPaOa8X
-         +ptX39Zgydfpx7iS4ouMXHmSdq0WHjJTplcJYWOibL4AqYM/RIqVjhpTR+E8pX55dvy/
-         dMCMwxjeAKkPpUHqMIr1M495ZIZwQ/QnTdWEBld9epm4tgSzye4/0eBSpeIV6jP3nUy+
-         BFYg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=kDTQTlwX3eL1lebPEm6/Ui3YYf7FK+VSzWK1y7qYY18=;
-        fh=QyNlTcM4pCHJ+HePzkUueMGg5A0IgVxFVjJ/bv3YUOo=;
-        b=UwSxQq0T00rI8KTQ594zgXWdibHBgbyK28BAsjCFtdP+3SvVfkP1Sj332I9a4KwXi8
-         5I70KY5GrxPQxPKIgZwBWlw+vDdmPo1Nxm7jF5Lj1F88p9+FMi/of6qHNCH7g4GUa0qx
-         SgL8YIWPhj6x3m7wUOrV62/pfpMWbbHHVA1BOsjmRBk1uxPlbyEzuPHHHbWpxXfBcGGX
-         1NNnI7RsrErL4qMiLLNr/c/GORpYJj8gZR58sqDsR5W8WrchIZPCEwBhW31lE120oThs
-         wmQCXdstSuzRBSr52oLNi4iQl/xmxEN1mC0GUhPYQfNYNIH9LnNj617CofUkOcjamLDX
-         5veA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cQ8UGKu7;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-488af96f6b2so146742455e9.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 01:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777358064; x=1777962864; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=kDTQTlwX3eL1lebPEm6/Ui3YYf7FK+VSzWK1y7qYY18=;
-        b=Ab17DO4jWBA4WDnLO71Bi+0VkSzBBfK9y2XETyQWSETTUJznG2KojbqzkGAPUIvVeO
-         T/ApJ4/7PWZ1O0P5H7gBslm1+w95YKteOYM9sNrER51uOGMBAC9jh8D5gg85bKLpK8Yx
-         bMtSq4Sashsz/Kpj6fw0eXKBgyYOAMowIJWMGAUePm7ySyXAnlzk7eAErbt0EHhm0fro
-         lqxj7PfRe/aZrS8DJfeooA1A1HSPLXZHiN63a8JkurLM3kd3fZVu74P5De6Ft3X0Jffw
-         T+wV1eQz/eP9ysekyp87p50CtqSSC4rzQKLSJAfpTXztCyp3N1gHfy/cEEAOHjbqUV2z
-         aEhw==
+        d=gmail.com; s=20251104; t=1777365585; x=1777970385; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mQQhu6OxmWN1A6Z4Ydzp9H1K3Xh6cZRDa6F2mg3T4ms=;
+        b=cQ8UGKu7PkDJDdoj9eeRDMKaR7HU9jarU72hK8DOdRKXG1L9ZApBEa/w2OGBBgnoDU
+         z9l9D6gxXZeWjUF4x74dj6pZKvOnko3QQlthho+Z5eSvywVulxg2xizjg+v4Z7LiCzTy
+         pmz7IlM3F2sfI1k8DEjAZZkv6aA8eLid2OWqVMSsmVVl3ydSkKGqCio5/vFi/4sZA1Iy
+         KHT5Sf/WdUhKWHwvFGU3Q79wS4htj/uXPK6j42yHrroxREC/jwE+4oJta2w4WKRx3Xrs
+         fewwzrJTm3ZP9MC30c92oz+guB7zEkO5MwA1nwzaPmPVfJK/mNQqXQ9L8VuKRcNIvNNM
+         HUMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777358064; x=1777962864;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=kDTQTlwX3eL1lebPEm6/Ui3YYf7FK+VSzWK1y7qYY18=;
-        b=qRxfQf8FIN7tsPd/u7WlCT7I0kMGwlyzu6fgh3zVvBREbMZF3tiozpIwYuW3/BIO6v
-         JgjuAy2x3EdXTeFuLPVtM+brpT0jJbrQpFJ+FCktv6XcvgqHBY+jEJBqY6rHbmg1Iyw1
-         0MFO1MG+PuGd1S6HVEMif4ener404HCF9+MbQW+PyxqvyA5/D58OhyWgEGaUysqgY5FT
-         JualM3h761C6OZvgOuA59ihIBnGBqm/wA9HSxa83L2mLjF63gBzxZk2pK+4KiFVJe8Dh
-         fLw2Dyl2UPSQKu/7OKXmSS24J8DOigtdm3xd+avz0ZvOJa6PGIN1U9I/EIovJXf5zpnz
-         3Iyg==
-X-Forwarded-Encrypted: i=1; AFNElJ/lpCBaHp4TSpGZnMw3fMGcYZHmi2IdNjfgsSfQld5ROYaj1NVBaQ9qAkEr0CWZi4ycmGQCv+CxTbYs2KGki1u9lKw=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Yz1XOYK2fsRc5sOGztF8NT0dvDzrf7byDgFQyozLIZik5oyC1/b
-	aB+4DMHi7Woqq6ZTK1pYl1ylvCsUkhZewq/9X760cHs2hUPyLYnfJWKADDlzSC3Z1QFTj7sc4CG
-	d7ldXpDT7MLyB9F2xa1GICcObj4z804o=
-X-Gm-Gg: AeBDieuSahE1UWtzP78Kg//qu8vcX4StQmDL2cZNzinpOjdtau3R6oZmjjalbi5ksit
-	S5R8Kl6FuAvxq3wjr7iuCFuUIr161BJkWih+BaZmaDWCqfwLNkhMyVqKgWDYtj7NBoaxZJVauGn
-	h36vAyGpJ1eOTnjB4wGWsINeGbl0CrPOzkNfO7X8W4Zg0UZypTwVHTYkFak2T89lPaiZ5UF19Cs
-	Xfgew6TaEqNOFbiMxuRbJN/uWT1IOThbGPcxaK5RFlXJIlNezzlqZ0tHY+yAkR5eTCt6TY4sqCj
-	awQMIJgAtomt8S1JZHNQlgoyCPNc77LY2HMsKXmxNU2A2bg=
-X-Received: by 2002:a05:6512:3e0c:b0:5a1:33b6:2b6d with SMTP id
- 2adb3069b0e04-5a74641607bmr681224e87.14.1777358064034; Mon, 27 Apr 2026
- 23:34:24 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1777365585; x=1777970385;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mQQhu6OxmWN1A6Z4Ydzp9H1K3Xh6cZRDa6F2mg3T4ms=;
+        b=MQwZjY8CdlhmUegHrOTb7hAzG0wvDP70lnDDrDpn3tFp5tz4PfXHMpnjWol0m3FGvJ
+         yQSBe5c8psU7YNG8Cy0ZgdAIWTpzVyllLikOz8msuybhx7BbzHKGG4QYIcUU/0y2+OAE
+         ZFE2X0N5bvdziezfwMd0NMBtnRzwyWJUEfC3SsJz521872Kkz59mbOM9Cko63sq0NeBY
+         BVKP8HrTMRqqFyuCOylJCJqgglq0vYHmpxq93ti8Jt9hfdwfAE8NTm9UTwLHcFN8EOD2
+         0QQnEf8mhH2fWOf1J45RMPfcKS4CrlHFQ2X9B0vRSSCehEBZidNuAaTrlAGXyJ3ctARU
+         S1Mg==
+X-Gm-Message-State: AOJu0Yx+UyPwVRJ76uA2s8RYwIxZFU8Uqk5hCt1EFiPsMUAn4rqbtTDr
+	HOeF6es77w3fbg9+dhmOVP11bnjL01nkRWnS/594MqIhCcv6sSqG12BXWCi2pA==
+X-Gm-Gg: AeBDietGk6SAUT4uHbZ9Vs7S8SlWuz3W3KE6OBCZFtpocIlcjWzXNunOqaBlWi7lSks
+	FLJiusZbd9VkttC0cPQ2V5P25NC210pZ3o8gBkT5AtFrTE+X4CK1CuT8sFpjjXP0jJ6GDYJLjd9
+	nd8Qohi5v9oDhj2BNc0oZ7JeOIBNQHvYF06l+0wN0QwclRShpUtWzd8LgEBMCuKocI8lG8n1qNp
+	QIkrOgO5akOplO0o7HdMy/lAqvJqR2maWfqKFp/Co6M7Ufaezb3zZzFwzymU+qWVDp6hE0IwACh
+	sU8mGzvZC+sUgtVuO+f7pa7Ye/y5eJYsrtH4ODHadFz5sIDSiOREW0T35DlfYLd+RUUnt/QLkhm
+	fKaYS6tMNToe0ybf6xJIcQbvuSYIzXWF1sQUyrErPAngaklFbk5Bnhtjevw/fTpWBYvZ7hE8pwr
+	pVndb+Y9atmadrvaojZBxk/3sZTIyYwTraznimpctkyB/h1a/Ubw8Fyk86
+X-Received: by 2002:a05:600c:8b11:b0:485:40db:d40c with SMTP id 5b1f17b1804b1-48a77ad470fmr35594385e9.3.1777365584542;
+        Tue, 28 Apr 2026 01:39:44 -0700 (PDT)
+Received: from Unimatrix04-Noble.. ([2a02:b027:14:a58:8a4a:450d:fe9:a973])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48a7743f922sm20064915e9.0.2026.04.28.01.39.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Apr 2026 01:39:44 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] vboxguestdrivers: Upgrade to 7.2.8
+Date: Tue, 28 Apr 2026 10:39:35 +0200
+Message-ID: <20260428083935.70597-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260424064603.728430-1-skandigraun@gmail.com>
- <CAMKF1sp4hCeyML8MMaOne2t2p_1+oKH37mvJUjF4M-soB2U_6A@mail.gmail.com>
- <CAMKF1so9vPsqk7eTi_ypsr-TiTJSeZFNPgri1KvvKzaT+yinug@mail.gmail.com>
- <18A9E5089EA766DA.2188217@lists.openembedded.org> <CAO5Uq5TarogKhyRTSZeYaZmSPPhJb0k2bKCJhSG3hev-Wf9m-g@mail.gmail.com>
- <7380b427-4e88-4eaa-906d-6274080ff715@gmail.com>
-In-Reply-To: <7380b427-4e88-4eaa-906d-6274080ff715@gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Tue, 28 Apr 2026 07:34:12 +0100
-X-Gm-Features: AVHnY4Lii-oxBm7LE87NdUEvGP_Pu-T2GBqdW0HDurX9KbAuPtHFVCI9CJBcZ-o
-Message-ID: <CAO5Uq5RB4M5DDsUfaYm-Fh7+WmcFDcZntQxv_EdQ0xbFuvzGgA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] mbedtls: add recipe for v4.1.0
-To: Gyorgy Sarvari <skandigraun@gmail.com>
-Cc: raj.khem@gmail.com, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 06:34:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126647
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 08:39:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126648
 
-On Mon, Apr 27, 2026 at 3:08=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.c=
-om> wrote:
->
-> On 4/27/26 11:09, Alex Kiernan wrote:
-> > On Sun, Apr 26, 2026 at 12:35=E2=80=AFPM Alex Kiernan via
-> > lists.openembedded.org <alex.kiernan=3Dgmail.com@lists.openembedded.org=
->
-> > wrote:
-> >>
-> >> Just dropping mbedtls/ecp.h looks like it might be sufficient for mdns
-> >> (untested because of the mbedtls build failure around qemuwrapper):
-> >>
-> >> diff --git a/mDNSPosix/mbedtls.c b/mDNSPosix/mbedtls.c
-> >> index 6726ef9b9145..c2e47ba232a5 100644
-> >> --- a/mDNSPosix/mbedtls.c
-> >> +++ b/mDNSPosix/mbedtls.c
-> >> @@ -31,7 +31,6 @@
-> >>
-> >>  #include <mbedtls/error.h>
-> >>  #include <mbedtls/pk.h>
-> >> -#include <mbedtls/ecp.h>
-> >>  #include <mbedtls/ecdsa.h>
-> >>  #include <mbedtls/entropy.h>
-> >>  #include <mbedtls/ctr_drbg.h>
-> >>
-> >
-> > Scratch that... the changes needed are much more than simple header rem=
-oval.
-> >
->
->
-> Good to know, thanks - but I think this also means that it won't get
-> into Wrynose unfortunately. Doing big changes on multiple recipes is
-> just too unstable for a stable branch, I guess.
->
+From: Gianfranco Costamagna <locutusofborg@debian.org>
 
-Given how much of the legacy API they've removed/the transition to
-PSA, I wonder if we're at the point of needing mbedtls3 as a separate
-recipe - for mDNSResponder we're at Apple's mercy to upgrade it to
-something that works with mbedtls4, or we'll just carry patches
-forever. The only saving grace might be they seem to be engaged with
-matter-openwrt:
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+---
+ .../{vboxguestdrivers_7.2.6.bb => vboxguestdrivers_7.2.8.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.2.6.bb => vboxguestdrivers_7.2.8.bb} (97%)
 
-https://github.com/project-chip/matter-openwrt/tree/main/third_party/mdnsre=
-sponder/patches
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
+index ac941de811..6b6a2f23ff 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.6.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.2.8.bb
+@@ -15,7 +15,7 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[sha256sum] = "c58443a0e6fcc7fc7e84c1011a10823b3540c6a2b8f2e27c4d8971272baf09f7"
++SRC_URI[sha256sum] = "0642ed4a12b7204cd30c0abbc2c10c1cc7ad55ce1756a01e86a16d4b6b066592"
+ 
+ S ?= "${UNPACKDIR}/vbox_module"
+ S:task-unpack = "${UNPACKDIR}/${VBOX_NAME}"
+-- 
+2.43.0
 
---=20
-Alex Kiernan
 
