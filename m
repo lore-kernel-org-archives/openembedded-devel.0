@@ -2,463 +2,318 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91917FF886F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A29D6FF8870
 	for <webhook@archiver.kernel.org>; Tue, 28 Apr 2026 05:01:34 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5618.1777352489031877551
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5617.1777352486853560894
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Apr 2026 22:01:29 -0700
+ Mon, 27 Apr 2026 22:01:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=ByIh+mo5;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-362bb3260f1so5232130a91.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 22:01:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=n5/fMMpq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-35dac556bb2so6418269a91.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 22:01:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777352488; x=1777957288; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777352486; x=1777957286; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0FSdqdHyGR/XEzwmqk5eaeslqyWSMaPKdWu09Z+79ao=;
-        b=ByIh+mo5Tonin2R9WGDEvfvXjQL5VJk7k6lOicUwW0+mMaNySRHEdwuHtDYz2Z/LE2
-         xcCploDjh0HN+5oDPb295zoJzBapJxBOCtD1XGiqy5M+Z1ASEDnUG5lBPoPqUj4WgZ9k
-         u9EvKOiO0G0Bp+gwEMnCgDchA17LksYn0UfRKq4w2gwdpTWSwaa95oZGmly/RTnO0++3
-         96CYLiO587h9dDTxcKFaigwJcnHu92Ln4y5ii5nbhYV26D5LQhSJlyjUyHs7Yyd5yPaA
-         t9Vrd4zWxFfiREtxT9pfKy3NoODhLjVIyupl0VySr1+emQDDtx+a//4kPkUUWz+UdHm9
-         TJZQ==
+        bh=d+eYkv5dzZz3kt8eqixM+1vKGBSXnEQeFxZQYRIg5v8=;
+        b=n5/fMMpqLeNemOvjFNsi0ktqVyzuq7HbYERhVyWoEGzuHj2JLhRL6AFol3wXoVEKAF
+         VdBgZ0wPrAcanAT0rYnAtbERUajVynTJSceGpnLYWwt0hsInhs9kOM9fiLbEtb/nXdPS
+         6vy5F+LOZueFn+I0M/qGKh5X0t7rrLv19ILpBRMmmxJUbEVOnReawx6o3xVDgm6rljOg
+         NgAEQ6G8xOeno7Y2PBwHSlT7jccwNSIAW+vE1kPKg2NdCBg/ZcxS+AHsK5/g14HbLQbm
+         1BjW0vn9x7MDefwN+6uLAzgHbWI6lLGQfIq54Q/QRBxcLFtUbYCwKg8eWgaL94/BpzN0
+         mShQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777352488; x=1777957288;
+        d=1e100.net; s=20251104; t=1777352486; x=1777957286;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=0FSdqdHyGR/XEzwmqk5eaeslqyWSMaPKdWu09Z+79ao=;
-        b=p9112nGskKfyET58TzrgozLP3boH8vuXxdL8J7O9dlxPQR9QGBp3dJCxal3yG9eJwj
-         POet2GZcrwWCujNtPrNvbMJ00xiXOHlGqAkTuuyWwuvDlnBa9zjQlYZFAqTp6Pl5/NIE
-         AB1MbJqJHPv+5WDHwuiaLai2AV+pB7dthXaX6TuL12XVlEn86jmZWZF4qSUjaaJI4Myw
-         LV4EdoylkbmMMPQS2aZUCtsmieeHq/jqNhOyiXHHUVFhXcxNApV+9y7OSh4sADXGXh9s
-         gPFvWcMNqBDFajh1a9UjqDGAXcuNvewfd11ZN5afeLRgTy+4MgXv7WzR0HtnabCHXiOF
-         8CwQ==
-X-Gm-Message-State: AOJu0YxIIXfhCZrN6utiRvaLpgxly4cYS/NQxNofH2IPvre00QwhFSto
-	ECt8yTEN/WYPT7five1iKCAMMvoiQGD9rYgfcZwgBSMBkXqHNQTKBVBJQYcHQPag
-X-Gm-Gg: AeBDietTFUudyNSGo051aWkDNMm/NL7PMiUR1driODTfNLGLQTsMgu0iArdl/qvRoZm
-	P/en7fyI071U/085oldyof1sLXhq8E7u9GqwyunebU0IhrNgTW8rGpft36Wp+bvw6HJSa935Wxn
-	irvOE+vNkoE5tScLkG4HFNkroCExF3Phb3jHO0rBzgWYvLGS/uVXLLJhaxaAKVjsT2Nt2pr7R5V
-	80BWj1bYbDGp20v6a+e6ginCqYnzpiw86WpptEP9KO/u0Einq1FHgaN2i9BExXJgpF/LL/4V754
-	v/XH/yxIFE89sdC42/qTwlP5qKhGOQa8dUqLAMCfMXi3TmOSSg2wRbqSAB04EyoghsNMQUcz+HW
-	e9BrfKddyoidtKdzhUrkD7kIcbtWtNswM7U07eSL/rNmpvBj56/rZ7QNE+d6nGn0/gJGsOsCJfj
-	8tr7/jM3lAWZNDcLIW7io+el6i56DKwzUB38CGzWnBKY1LWtgueFRpapYvHA==
-X-Received: by 2002:a17:90b:48:b0:35b:9ab6:1d4a with SMTP id 98e67ed59e1d1-36492030caemr1653275a91.18.1777352488040;
-        Mon, 27 Apr 2026 22:01:28 -0700 (PDT)
+        bh=d+eYkv5dzZz3kt8eqixM+1vKGBSXnEQeFxZQYRIg5v8=;
+        b=ZVkE8wPCldSjrgEmmyy7+VLF2+W/l3rUg9+7fCR5kBMYVWI78OhVZxcmMg7LVcJxWM
+         llmZysQu6b1nKet9Jf64QeZq0YlcBNCx8YlfUBWMAiCWTXkCSPNnBFW3iVkgPIfNWOtW
+         f0/Qb5JO45/nk/gOqog/VwVDCpWO5xeVdOfkA4i49Pk7tBMlE9WOd3mbOzh4yMFJCbA4
+         TYocoEN/B9AohwK5zNKejLUbBpg5Crtzdl0xRlasB6f7kNkqPzOoR6wXcJtHkc/2VFRa
+         hZ+hGNzGhInoA0iIeYkdcsmvtUHrVLLPmCi48lc3Eo6gRHw8a6htA3H++L34GqNI1Bun
+         LnTA==
+X-Gm-Message-State: AOJu0YwrKvV3xk7SATCjldiLcYtzQLH/BsDddZUDMIrMRuhzIeCP7L7h
+	w96rElCOBNSXFBz+qeJlD5aRCPZG4O8VB4GnI5YJAd6etGjciZVMPLnIxsUERPrf
+X-Gm-Gg: AeBDievB+ZsCmAcB9MfKH3q39tiy+CSsfYwxJ9ELfoc0WsqSefb7KENQeOYOFNALJPb
+	NSOtX8KW/XVkT8yim2R5Q9/oajbk/A+m5QRRCkF6mJB1V8aqVvHx8BCPFS1Z+hHfSImJGGk6TsX
+	PCkbJnHCPgPQG1uUYcXVbzSFH4f1M7pK0MDqrgB9bL7GK/Gss3pWgAXFo8+fBIoL4wpEjzZnDI6
+	HwBRj9YALeiEYksDPLIDltwQ33q9/2M6aFHL5kKtw9+xhQOnW04FA6y4YZ6qnKhmVhyQF1CNfrm
+	cXqR+u0V+iXAWlwmQm1azRgmGxEuHTofuY/6UYsITWRaX+CYItks1qRxrVpnGwGWP5LAGHCvRNm
+	cLW4c1VW3FvBRsBtU/E2KXCRxlf6v94RTWD1BKM5Z2f501oVMXlvQw7NZe8yndctc0+lyVFuce3
+	kWKAdKU4V+o9qbwPHRENTEVzWzi4F8cO+vFKv4sAh4cWHQYJu6otLofnXyVA==
+X-Received: by 2002:a17:90b:57cb:b0:35f:c5cd:cc5 with SMTP id 98e67ed59e1d1-3649207ddc9mr1620101a91.24.1777352485631;
+        Mon, 27 Apr 2026 22:01:25 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b97ac8d619sm11798385ad.70.2026.04.27.22.01.26
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b97ac8d619sm11798385ad.70.2026.04.27.22.01.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Apr 2026 22:01:27 -0700 (PDT)
+        Mon, 27 Apr 2026 22:01:25 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 4/5] libssh: patch CVE-2026-0967
-Date: Tue, 28 Apr 2026 17:01:07 +1200
-Message-ID: <20260428050109.2099228-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 3/5] libssh: patch CVE-2026-0968
+Date: Tue, 28 Apr 2026 17:01:06 +1200
+Message-ID: <20260428050109.2099228-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260428050109.2099228-1-ankur.tyagi85@gmail.com>
 References: <20260428050109.2099228-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 05:01:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126644
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126643
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport patch [1] as mentioned in [2]
+Backport patches [1] and [2] as mentioned in [3]
 
-[1] https://git.libssh.org/projects/libssh.git/commit/?id=6d74aa6138895b3662bade9bd578338b0c4f8a15
-[2] https://security-tracker.debian.org/tracker/CVE-2026-0967
+[1] https://git.libssh.org/projects/libssh.git/commit/?id=796d85f786dff62bd4bcc4408d9b7bbc855841e9
+[2] https://git.libssh.org/projects/libssh.git/commit/?id=212121971fb26e1e00b72bd5402c0454a4d84c03
+[3] https://security-tracker.debian.org/tracker/CVE-2026-0968
+
+Certain functions from sftp.c were moved to a new file sftp_common.c
+in version 0.11.0 by following commit:
+https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
+
+This is the backport of the changes using the original file sftp.c
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../libssh/libssh/CVE-2026-0967.patch         | 360 ++++++++++++++++++
- .../recipes-support/libssh/libssh_0.10.6.bb   |   1 +
- 2 files changed, 361 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-0967.patch
+ .../libssh/libssh/CVE-2026-0968-1.patch       |  64 +++++++++
+ .../libssh/libssh/CVE-2026-0968-2.patch       | 136 ++++++++++++++++++
+ .../recipes-support/libssh/libssh_0.10.6.bb   |   2 +
+ 3 files changed, 202 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-0967.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0967.patch
+diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
 new file mode 100644
-index 0000000000..c34bced2a8
+index 0000000000..5ed1a4e940
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0967.patch
-@@ -0,0 +1,360 @@
-+From bd18dd3a2e1fc1f76a65fbdcc4d88b8d77ff7cab Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
+@@ -0,0 +1,64 @@
++From 9fd388141c973ba6fb7d45966c25d1fad9e1d419 Mon Sep 17 00:00:00 2001
 +From: Jakub Jelen <jjelen@redhat.com>
-+Date: Wed, 17 Dec 2025 18:48:34 +0100
-+Subject: [PATCH] CVE-2026-0967 match: Avoid recursive matching (ReDoS)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+The specially crafted patterns (from configuration files) could cause
-+exhaustive search or timeouts.
-+
-+Previous attempts to fix this by limiting recursion to depth 16 avoided
-+stack overflow, but not timeouts. This is due to the backtracking,
-+which caused the exponential time complexity O(N^16) of existing algorithm.
-+
-+This is code comes from the same function from OpenSSH, where this code
-+originates from, which is not having this issue (due to not limiting the number
-+of recursion), but will also easily exhaust stack due to unbound recursion:
-+
-+https://github.com/openssh/openssh-portable/commit/05bcd0cadf160fd4826a2284afa7cba6ec432633
-+
-+This is an attempt to simplify the algorithm by preventing the backtracking
-+to previous wildcard, which should keep the same behavior for existing inputs
-+while reducing the complexity to linear O(N*M).
-+
-+This fixes the long-term issue we had with fuzzing as well as recently reported
-+security issue by Kang Yang.
++Date: Mon, 22 Dec 2025 20:59:11 +0100
++Subject: [PATCH] CVE-2026-0968: sftp: Sanitize input handling in
++ sftp_parse_longname()
 +
 +Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Pavol Žáčik <pzacik@redhat.com>
-+(cherry picked from commit a411de5ce806e3ea24d088774b2f7584d6590b5f)
-+(cherry picked from commit 6d74aa6138895b3662bade9bd578338b0c4f8a15)
++Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
 +
-+CVE: CVE-2026-0967
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=6d74aa6138895b3662bade9bd578338b0c4f8a15]
++CVE: CVE-2026-0968
++Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=796d85f786dff62bd4bcc4408d9b7bbc855841e9]
++
++Certain functions from sftp.c were moved to a new file sftp_common.c
++in version 0.11.0 by following commit:
++https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
++
++This is the backport of the changes which fixes the CVE in the original file
++sftp.c
 +
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/match.c                      | 111 +++++++++++++----------------
-+ tests/unittests/torture_config.c | 116 +++++++++++++++++++++++--------
-+ 2 files changed, 135 insertions(+), 92 deletions(-)
++ src/sftp.c | 16 +++++++++++++---
++ 1 file changed, 13 insertions(+), 3 deletions(-)
 +
-+diff --git a/src/match.c b/src/match.c
-+index 3e58f733..896d87cb 100644
-+--- a/src/match.c
-++++ b/src/match.c
-+@@ -43,85 +43,70 @@
++diff --git a/src/sftp.c b/src/sftp.c
++index 4a77141b..2194a9ef 100644
++--- a/src/sftp.c
+++++ b/src/sftp.c
++@@ -1289,13 +1289,18 @@ static char *sftp_parse_longname(const char *longname,
++     const char *p, *q;
++     size_t len, field = 0;
 + 
-+ #include "libssh/priv.h"
-+ 
-+-#define MAX_MATCH_RECURSION 16
-+-
-+-/*
-+- * Returns true if the given string matches the pattern (which may contain ?
-+- * and * as wildcards), and zero if it does not match.
-++/**
-++ * @brief Compare a string with a pattern containing wildcards `*` and `?`
-++ *
-++ * This function is an iterative replacement for the previously recursive
-++ * implementation to avoid exponential complexity (DoS) with specific patterns.
-++ *
-++ * @param[in]  s        The string to match.
-++ * @param[in]  pattern  The pattern to match against.
-++ *
-++ * @return              1 if the pattern matches, 0 otherwise.
-+  */
-+-static int match_pattern(const char *s, const char *pattern, size_t limit)
-++static int match_pattern(const char *s, const char *pattern)
-+ {
-+-    bool had_asterisk = false;
-++    const char *s_star = NULL; /* Position in s when last `*` was met */
-++    const char *p_star = NULL; /* Position in pattern after last `*` */
-+ 
-+-    if (s == NULL || pattern == NULL || limit <= 0) {
-++    if (s == NULL || pattern == NULL) {
-+         return 0;
-+     }
-+ 
-+-    for (;;) {
-+-        /* If at end of pattern, accept if also at end of string. */
-+-        if (*pattern == '\0') {
-+-            return (*s == '\0');
-+-        }
-+-
-+-        /* Skip all the asterisks and adjacent question marks */
-+-        while (*pattern == '*' || (had_asterisk && *pattern == '?')) {
-+-            if (*pattern == '*') {
-+-                had_asterisk = true;
-+-            }
-++    while (*s) {
-++        /* Case 1: Exact match or '?' wildcard */
-++        if (*pattern == *s || *pattern == '?') {
-++            s++;
-+             pattern++;
-++            continue;
-+         }
-+ 
-+-        if (had_asterisk) {
-+-            /* If at end of pattern, accept immediately. */
-+-            if (!*pattern)
-+-                return 1;
-+-
-+-            /* If next character in pattern is known, optimize. */
-+-            if (*pattern != '?') {
-+-                /*
-+-                 * Look instances of the next character in
-+-                 * pattern, and try to match starting from
-+-                 * those.
-+-                 */
-+-                for (; *s; s++)
-+-                    if (*s == *pattern && match_pattern(s + 1, pattern + 1, limit - 1)) {
-+-                        return 1;
-+-                    }
-+-                /* Failed. */
-+-                return 0;
-+-            }
-+-            /*
-+-             * Move ahead one character at a time and try to
-+-             * match at each position.
-++        /* Case 2: '*' wildcard */
-++        if (*pattern == '*') {
-++            /* Record the position of the star and the current string position.
-++             * We optimistically assume * matches 0 characters first.
-+              */
-+-            for (; *s; s++) {
-+-                if (match_pattern(s, pattern, limit - 1)) {
-+-                    return 1;
-+-                }
-+-            }
-+-            /* Failed. */
-+-            return 0;
-+-        }
-+-        /*
-+-         * There must be at least one more character in the string.
-+-         * If we are at the end, fail.
-+-         */
-+-        if (!*s) {
-+-            return 0;
-++            p_star = ++pattern;
-++            s_star = s;
-++            continue;
-+         }
-+ 
-+-        /* Check if the next character of the string is acceptable. */
-+-        if (*pattern != '?' && *pattern != *s) {
-+-            return 0;
-++        /* Case 3: Mismatch */
-++        if (p_star) {
-++            /* If we have seen a star previously, backtrack.
-++             * We restore the pattern to just after the star,
-++             * but advance the string position (consume one more char for the
-++             * star).
-++             * No need to backtrack to previous stars as any match of the last
-++             * star could be eaten the same way by the previous star.
-++             */
-++            pattern = p_star;
-++            s = ++s_star;
-++            continue;
-+         }
-+ 
-+-        /* Move to the next character, both in string and in pattern. */
-+-        s++;
-++        /* Case 4: Mismatch and no star to backtrack to */
-++        return 0;
+++    if (longname == NULL || longname_field < SFTP_LONGNAME_PERM ||
+++        longname_field > SFTP_LONGNAME_NAME) {
+++        return NULL;
 ++    }
 ++
-++    /* Handle trailing stars in the pattern
-++     * (e.g., pattern "abc*" matching "abc") */
-++    while (*pattern == '*') {
-+         pattern++;
++     p = longname;
++     /* Find the beginning of the field which is specified by sftp_longname_field_e. */
++-    while(field != longname_field) {
+++    while (*p != '\0' && field != longname_field) {
++         if(isspace(*p)) {
++             field++;
++             p++;
++-            while(*p && isspace(*p)) {
+++            while (*p != '\0' && isspace(*p)) {
++                 p++;
++             }
++         } else {
++@@ -1303,8 +1308,13 @@ static char *sftp_parse_longname(const char *longname,
++         }
 +     }
 + 
-+-    /* NOTREACHED */
-+-    return 0;
-++    /* If we reached the end of the pattern, it's a match */
-++    return (*pattern == '\0');
-+ }
-+ 
-+ /*
-+@@ -172,7 +157,7 @@ int match_pattern_list(const char *string, const char *pattern,
-+     sub[subi] = '\0';
-+ 
-+     /* Try to match the subpattern against the string. */
-+-    if (match_pattern(string, sub, MAX_MATCH_RECURSION)) {
-++    if (match_pattern(string, sub)) {
-+       if (negated) {
-+         return -1;        /* Negative */
-+       } else {
-+diff --git a/tests/unittests/torture_config.c b/tests/unittests/torture_config.c
-+index b7c763af..3569b51a 100644
-+--- a/tests/unittests/torture_config.c
-++++ b/tests/unittests/torture_config.c
-+@@ -1656,80 +1656,138 @@ static void torture_config_match_pattern(void **state)
-+     (void) state;
-+ 
-+     /* Simple test "a" matches "a" */
-+-    rv = match_pattern("a", "a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "a");
-+     assert_int_equal(rv, 1);
-+ 
-+     /* Simple test "a" does not match "b" */
-+-    rv = match_pattern("a", "b", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "b");
-+     assert_int_equal(rv, 0);
-+ 
-+     /* NULL arguments are correctly handled */
-+-    rv = match_pattern("a", NULL, MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", NULL);
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern(NULL, "a", MAX_MATCH_RECURSION);
-++    rv = match_pattern(NULL, "a");
-+     assert_int_equal(rv, 0);
-+ 
-+     /* Simple wildcard ? is handled in pattern */
-+-    rv = match_pattern("a", "?", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "?");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("aa", "?", MAX_MATCH_RECURSION);
-++    rv = match_pattern("aa", "?");
-+     assert_int_equal(rv, 0);
-+     /* Wildcard in search string */
-+-    rv = match_pattern("?", "a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("?", "a");
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern("?", "?", MAX_MATCH_RECURSION);
-++    rv = match_pattern("?", "?");
-+     assert_int_equal(rv, 1);
-+ 
-+     /* Simple wildcard * is handled in pattern */
-+-    rv = match_pattern("a", "*", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "*");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("aa", "*", MAX_MATCH_RECURSION);
-++    rv = match_pattern("aa", "*");
-+     assert_int_equal(rv, 1);
-+     /* Wildcard in search string */
-+-    rv = match_pattern("*", "a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("*", "a");
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern("*", "*", MAX_MATCH_RECURSION);
-++    rv = match_pattern("*", "*");
-+     assert_int_equal(rv, 1);
-+ 
-+     /* More complicated patterns */
-+-    rv = match_pattern("a", "*a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "*a");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("a", "a*", MAX_MATCH_RECURSION);
-++    rv = match_pattern("a", "a*");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("abababc", "*abc", MAX_MATCH_RECURSION);
-++    rv = match_pattern("abababc", "*abc");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("ababababca", "*abc", MAX_MATCH_RECURSION);
-++    rv = match_pattern("ababababca", "*abc");
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern("ababababca", "*abc*", MAX_MATCH_RECURSION);
-++    rv = match_pattern("ababababca", "*abc*");
-+     assert_int_equal(rv, 1);
-+ 
-+     /* Multiple wildcards in row */
-+-    rv = match_pattern("aa", "??", MAX_MATCH_RECURSION);
-++    rv = match_pattern("aa", "??");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("bba", "??a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("bba", "??a");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("aaa", "**a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("aaa", "**a");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("bbb", "**a", MAX_MATCH_RECURSION);
-++    rv = match_pattern("bbb", "**a");
-+     assert_int_equal(rv, 0);
-+ 
-+     /* Consecutive asterisks do not make sense and do not need to recurse */
-+-    rv = match_pattern("hostname", "**********pattern", 5);
-++    rv = match_pattern("hostname", "**********pattern");
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern("hostname", "pattern**********", 5);
-++    rv = match_pattern("hostname", "pattern**********");
-+     assert_int_equal(rv, 0);
-+-    rv = match_pattern("pattern", "***********pattern", 5);
-++    rv = match_pattern("pattern", "***********pattern");
-+     assert_int_equal(rv, 1);
-+-    rv = match_pattern("pattern", "pattern***********", 5);
-++    rv = match_pattern("pattern", "pattern***********");
-+     assert_int_equal(rv, 1);
-+ 
-+-    /* Limit the maximum recursion */
-+-    rv = match_pattern("hostname", "*p*a*t*t*e*r*n*", 5);
-++    rv = match_pattern("hostname", "*p*a*t*t*e*r*n*");
-+     assert_int_equal(rv, 0);
-+-    /* Too much recursion */
-+-    rv = match_pattern("pattern", "*p*a*t*t*e*r*n*", 5);
-++    rv = match_pattern("pattern", "*p*a*t*t*e*r*n*");
-++    assert_int_equal(rv, 1);
+++    /* If we reached NULL before we got our field fail */
+++    if (field != longname_field) {
+++        return NULL;
+++    }
 ++
-++    /* Regular Expression Denial of Service */
-++    rv = match_pattern("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-++                       "*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a");
-++    assert_int_equal(rv, 1);
-++    rv = match_pattern("ababababababababababababababababababababab",
-++                       "*a*b*a*b*a*b*a*b*a*b*a*b*a*b*a*b");
-++    assert_int_equal(rv, 1);
-++
-++    /* A lot of backtracking */
-++    rv = match_pattern("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax",
-++                       "a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*a*ax");
-++    assert_int_equal(rv, 1);
-++
-++    /* Test backtracking: *a matches first 'a', fails on 'b', must backtrack */
-++    rv = match_pattern("axaxaxb", "*a*b");
-++    assert_int_equal(rv, 1);
-++
-++    /* Test greedy consumption with suffix */
-++    rv = match_pattern("foo_bar_baz_bar", "*bar");
-++    assert_int_equal(rv, 1);
-++
-++    /* Test exact suffix requirement (ensure no partial match acceptance) */
-++    rv = match_pattern("foobar_extra", "*bar");
-++    assert_int_equal(rv, 0);
-++
-++    /* Test multiple distinct wildcards */
-++    rv = match_pattern("a_very_long_string_with_a_pattern", "*long*pattern");
-++    assert_int_equal(rv, 1);
-++
-++    /* ? inside a * sequence */
-++    rv = match_pattern("abcdefg", "a*c?e*g");
-++    assert_int_equal(rv, 1);
-++
-++    /* Consecutive mixed wildcards */
-++    rv = match_pattern("abc", "*?c");
-++    assert_int_equal(rv, 1);
-++
-++    /* ? at the very end after * */
-++    rv = match_pattern("abc", "ab?");
-++    assert_int_equal(rv, 1);
-++    rv = match_pattern("abc", "ab*?");
-++    assert_int_equal(rv, 1);
-++
-++    /* Consecutive stars should be collapsed or handled gracefully */
-++    rv = match_pattern("abc", "a**c");
-++    assert_int_equal(rv, 1);
-++    rv = match_pattern("abc", "***");
-++    assert_int_equal(rv, 1);
-++
-++    /* Empty string handling */
-++    rv = match_pattern("", "*");
-++    assert_int_equal(rv, 1);
-++    rv = match_pattern("", "?");
-+     assert_int_equal(rv, 0);
-++    rv = match_pattern("", "");
-++    assert_int_equal(rv, 1);
++     q = p;
++-    while (! isspace(*q)) {
+++    while (*q != '\0' && !isspace(*q)) {
++         q++;
++     }
 + 
-++    /* Pattern longer than string */
-++    rv = match_pattern("short", "short_but_longer");
-++    assert_int_equal(rv, 0);
-+ }
+diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
+new file mode 100644
+index 0000000000..42642ee1ed
+--- /dev/null
++++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
+@@ -0,0 +1,136 @@
++From 04cd54c7302195055d208e0ca00d6e519d674bb2 Mon Sep 17 00:00:00 2001
++From: Jakub Jelen <jjelen@redhat.com>
++Date: Mon, 22 Dec 2025 21:00:03 +0100
++Subject: [PATCH] CVE-2026-0968 tests: Reproducer for invalid longname data
++
++Signed-off-by: Jakub Jelen <jjelen@redhat.com>
++Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
++(cherry picked from commit 90a5d8f47399e8db61b56793cd21476ff6a528e0)
++(cherry picked from commit 212121971fb26e1e00b72bd5402c0454a4d84c03)
++
++CVE: CVE-2026-0968
++Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=212121971fb26e1e00b72bd5402c0454a4d84c03]
++
++Certain functions from sftp.c were moved to a new file sftp_common.c
++in version 0.11.0 by following commit:
++https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
++
++Updated unit test to include sftp.c during the backport.
++
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ tests/unittests/CMakeLists.txt      |  7 +++
++ tests/unittests/torture_unit_sftp.c | 86 +++++++++++++++++++++++++++++
++ 2 files changed, 93 insertions(+)
++ create mode 100644 tests/unittests/torture_unit_sftp.c
++
++diff --git a/tests/unittests/CMakeLists.txt b/tests/unittests/CMakeLists.txt
++index f85da72b..41f25830 100644
++--- a/tests/unittests/CMakeLists.txt
+++++ b/tests/unittests/CMakeLists.txt
++@@ -101,6 +101,13 @@ if (UNIX AND NOT WIN32)
++     endif (WITH_SERVER)
++ endif (UNIX AND NOT WIN32)
 + 
-+ /* Identity file can be specified multiple times in the configuration
+++if (WITH_SFTP)
+++    set(LIBSSH_UNIT_TESTS
+++        ${LIBSSH_UNIT_TESTS}
+++        torture_unit_sftp
+++    )
+++endif (WITH_SFTP)
+++
++ foreach(_UNIT_TEST ${LIBSSH_UNIT_TESTS})
++     add_cmocka_test(${_UNIT_TEST}
++                     SOURCES ${_UNIT_TEST}.c
++diff --git a/tests/unittests/torture_unit_sftp.c b/tests/unittests/torture_unit_sftp.c
++new file mode 100644
++index 00000000..8cdaba8e
++--- /dev/null
+++++ b/tests/unittests/torture_unit_sftp.c
++@@ -0,0 +1,86 @@
+++#include "config.h"
+++
+++#include "sftp.c"
+++#include "torture.h"
+++
+++#define LIBSSH_STATIC
+++
+++static void test_sftp_parse_longname(void **state)
+++{
+++    const char *lname = NULL;
+++    char *value = NULL;
+++
+++    /* state not used */
+++    (void)state;
+++
+++    /* Valid example from SFTP draft, page 18:
+++     * https://datatracker.ietf.org/doc/draft-spaghetti-sshm-filexfer/
+++     */
+++    lname = "-rwxr-xr-x   1 mjos     staff      348911 Mar 25 14:29 t-filexfer";
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
+++    assert_string_equal(value, "-rwxr-xr-x");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_OWNER);
+++    assert_string_equal(value, "mjos");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_GROUP);
+++    assert_string_equal(value, "staff");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_SIZE);
+++    assert_string_equal(value, "348911");
+++    free(value);
+++    /* This function is broken further as the date contains space which breaks
+++     * the parsing altogether */
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_DATE);
+++    assert_string_equal(value, "Mar");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_TIME);
+++    assert_string_equal(value, "25");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
+++    assert_string_equal(value, "14:29");
+++    free(value);
+++}
+++
+++static void test_sftp_parse_longname_invalid(void **state)
+++{
+++    const char *lname = NULL;
+++    char *value = NULL;
+++
+++    /* state not used */
+++    (void)state;
+++
+++    /* Invalid inputs should not crash
+++     */
+++    lname = NULL;
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
+++    assert_null(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
+++    assert_null(value);
+++
+++    lname = "";
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
+++    assert_string_equal(value, "");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
+++    assert_null(value);
+++
+++    lname = "-rwxr-xr-x   1";
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
+++    assert_string_equal(value, "-rwxr-xr-x");
+++    free(value);
+++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
+++    assert_null(value);
+++}
+++
+++int torture_run_tests(void)
+++{
+++    int rc;
+++    const struct CMUnitTest tests[] = {
+++        cmocka_unit_test(test_sftp_parse_longname),
+++        cmocka_unit_test(test_sftp_parse_longname_invalid),
+++    };
+++
+++    rc = cmocka_run_group_tests(tests, NULL, NULL);
+++    return rc;
+++}
 diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index e0ade7f67c..e4a28af7a6 100644
+index 30f68f87ce..e0ade7f67c 100644
 --- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -30,6 +30,7 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+@@ -28,6 +28,8 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
+            file://CVE-2026-0966-1.patch \
+            file://CVE-2026-0966-2.patch \
             file://CVE-2026-0966-3.patch \
-            file://CVE-2026-0968-1.patch \
-            file://CVE-2026-0968-2.patch \
-+           file://CVE-2026-0967.patch \
++           file://CVE-2026-0968-1.patch \
++           file://CVE-2026-0968-2.patch \
            "
  SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
  
