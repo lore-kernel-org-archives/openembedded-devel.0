@@ -1,320 +1,151 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A29D6FF8870
-	for <webhook@archiver.kernel.org>; Tue, 28 Apr 2026 05:01:34 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5617.1777352486853560894
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 316A7FF886F
+	for <webhook@archiver.kernel.org>; Tue, 28 Apr 2026 06:00:05 +0000 (UTC)
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6083.1777356004420396203
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Apr 2026 22:01:26 -0700
+ Mon, 27 Apr 2026 23:00:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=n5/fMMpq;
- spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-35dac556bb2so6418269a91.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 22:01:26 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=kE8b2fqy;
+ spf=pass (domain: mvista.com, ip: 74.125.82.41, mailfrom: hprajapati@mvista.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-12c45281a06so15007486c88.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Apr 2026 23:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777352486; x=1777957286; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=d+eYkv5dzZz3kt8eqixM+1vKGBSXnEQeFxZQYRIg5v8=;
-        b=n5/fMMpqLeNemOvjFNsi0ktqVyzuq7HbYERhVyWoEGzuHj2JLhRL6AFol3wXoVEKAF
-         VdBgZ0wPrAcanAT0rYnAtbERUajVynTJSceGpnLYWwt0hsInhs9kOM9fiLbEtb/nXdPS
-         6vy5F+LOZueFn+I0M/qGKh5X0t7rrLv19ILpBRMmmxJUbEVOnReawx6o3xVDgm6rljOg
-         NgAEQ6G8xOeno7Y2PBwHSlT7jccwNSIAW+vE1kPKg2NdCBg/ZcxS+AHsK5/g14HbLQbm
-         1BjW0vn9x7MDefwN+6uLAzgHbWI6lLGQfIq54Q/QRBxcLFtUbYCwKg8eWgaL94/BpzN0
-         mShQ==
+        d=mvista.com; s=google; t=1777356004; x=1777960804; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XFZJ0lJycR9ia3++NpO86eQau76qEPl93EWk4E2DV/M=;
+        b=kE8b2fqyELyEjTcN26GdguAsrWnSbvNyFC/bWz7cM0vM+LYjUqFBXG62JrNZNFTjKe
+         d2Zgdw3JlQUNI5g2BhFTPLUQnHreaWNNTqO2g2LOnk45dyFHBbOpA5kK3/yg34LT4qCL
+         KVP2iotyxI+0MbNa3ISGtLRvWJh2q2klAenco=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777352486; x=1777957286;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=d+eYkv5dzZz3kt8eqixM+1vKGBSXnEQeFxZQYRIg5v8=;
-        b=ZVkE8wPCldSjrgEmmyy7+VLF2+W/l3rUg9+7fCR5kBMYVWI78OhVZxcmMg7LVcJxWM
-         llmZysQu6b1nKet9Jf64QeZq0YlcBNCx8YlfUBWMAiCWTXkCSPNnBFW3iVkgPIfNWOtW
-         f0/Qb5JO45/nk/gOqog/VwVDCpWO5xeVdOfkA4i49Pk7tBMlE9WOd3mbOzh4yMFJCbA4
-         TYocoEN/B9AohwK5zNKejLUbBpg5Crtzdl0xRlasB6f7kNkqPzOoR6wXcJtHkc/2VFRa
-         hZ+hGNzGhInoA0iIeYkdcsmvtUHrVLLPmCi48lc3Eo6gRHw8a6htA3H++L34GqNI1Bun
-         LnTA==
-X-Gm-Message-State: AOJu0YwrKvV3xk7SATCjldiLcYtzQLH/BsDddZUDMIrMRuhzIeCP7L7h
-	w96rElCOBNSXFBz+qeJlD5aRCPZG4O8VB4GnI5YJAd6etGjciZVMPLnIxsUERPrf
-X-Gm-Gg: AeBDievB+ZsCmAcB9MfKH3q39tiy+CSsfYwxJ9ELfoc0WsqSefb7KENQeOYOFNALJPb
-	NSOtX8KW/XVkT8yim2R5Q9/oajbk/A+m5QRRCkF6mJB1V8aqVvHx8BCPFS1Z+hHfSImJGGk6TsX
-	PCkbJnHCPgPQG1uUYcXVbzSFH4f1M7pK0MDqrgB9bL7GK/Gss3pWgAXFo8+fBIoL4wpEjzZnDI6
-	HwBRj9YALeiEYksDPLIDltwQ33q9/2M6aFHL5kKtw9+xhQOnW04FA6y4YZ6qnKhmVhyQF1CNfrm
-	cXqR+u0V+iXAWlwmQm1azRgmGxEuHTofuY/6UYsITWRaX+CYItks1qRxrVpnGwGWP5LAGHCvRNm
-	cLW4c1VW3FvBRsBtU/E2KXCRxlf6v94RTWD1BKM5Z2f501oVMXlvQw7NZe8yndctc0+lyVFuce3
-	kWKAdKU4V+o9qbwPHRENTEVzWzi4F8cO+vFKv4sAh4cWHQYJu6otLofnXyVA==
-X-Received: by 2002:a17:90b:57cb:b0:35f:c5cd:cc5 with SMTP id 98e67ed59e1d1-3649207ddc9mr1620101a91.24.1777352485631;
-        Mon, 27 Apr 2026 22:01:25 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2b97ac8d619sm11798385ad.70.2026.04.27.22.01.23
+        d=1e100.net; s=20251104; t=1777356004; x=1777960804;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=XFZJ0lJycR9ia3++NpO86eQau76qEPl93EWk4E2DV/M=;
+        b=oYAFXtP/iRZaS3o6AWbXQL6h9vtPOJc/oo+jiJogpQuRUb5IjA3ij/Tt2GR/JOniLm
+         w+z+9BIeE/YZB024oZ3X4t++OtH4/Swof0/gE2N08Bc1F+K1FRd0CqvsCIfIXTS1Jgcg
+         UwiqqRqfDUkwCASdOPJSB5lQ0vIRGXF+M9Gn+R2fYM0rFEnhGEFArDYLw04qtTHedAnJ
+         npQfCn6MEW5Xhp2CrTiwvDFCqnJU7nPi4EcGooKMIEuT4C3joqDpq8ym8s93vvM+5Rl9
+         ofdXoIRRZtKtNR4LwuqGPw141QL1r/NaDwNQmADU+PW+dkb3Fq4sOYnW8PJeze0/cQBa
+         PS5g==
+X-Gm-Message-State: AOJu0Yx7XMycNDNu1iiSnFqbJKY7n3V8NSviqTD2Xbte1GhzfZx83ooP
+	dgd4dBJHbOnb1zv1RNfjPsbJ7zXUuxgcxmA8sKDft1OIuCK/4f9o4zQRVvVTJKrTHx4Q7y3eQK1
+	kL/TVeuY=
+X-Gm-Gg: AeBDievJ0oTtNHVVdex1u4HEAoIo6VcfaXPzLUfNPb8KgRpcEAnPvuEKthAU6pVXOQ9
+	S+nfuB0HA8DuK8PpBH1YN34pVaMKFktUAxl5B92s+NB0MqkCC9OgB868VhjuMxEURqmER5aGxsL
+	yFsS9wp5Cg85Cky4OXZp3GgfqXFmDDRTfcAGBXvuunwuyAzPlrv/aEu/5Gn0OkdUEoBefQlfiiZ
+	b2KuaVtIEA5jMMEYkwpAIDz72JaAFHjXqmItZKtKAzURpI3LjALvWRAvTDD6J1TTxaUA6x1ZY9d
+	ZNq8Ff7Stn7fQYFBT/rPmJpOaw9MG4gLEoaVlSFF6BoZBGUClZ3k1OoZP+m1Ys3f+JH4LS/p0fd
+	YE/ChL+jRTZ+AgecKbyNtlF6zT+vdAd8mnMXv5b/sLoiLHNhUPVblvGzDbklOCz/HTZ3uGq9PpY
+	9REd8QiuHipke9lr4sMuqr24xSC47lESF+AMm10hjzxH6R9IE=
+X-Received: by 2002:a05:7022:43a6:b0:11b:923d:7753 with SMTP id a92af1059eb24-12ddd93f8ecmr840888c88.3.1777356003565;
+        Mon, 27 Apr 2026 23:00:03 -0700 (PDT)
+Received: from MVIN00013.mvista.com ([150.129.170.153])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-12ddd93c1c0sm1396472c88.7.2026.04.27.23.00.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Apr 2026 22:01:25 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+        Mon, 27 Apr 2026 23:00:03 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 3/5] libssh: patch CVE-2026-0968
-Date: Tue, 28 Apr 2026 17:01:06 +1200
-Message-ID: <20260428050109.2099228-3-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260428050109.2099228-1-ankur.tyagi85@gmail.com>
-References: <20260428050109.2099228-1-ankur.tyagi85@gmail.com>
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-python][scarthgap][PATCH] python3-pillow: fix CVE-2026-40192
+Date: Tue, 28 Apr 2026 11:29:53 +0530
+Message-ID: <20260428055953.49083-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 05:01:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126643
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Apr 2026 06:00:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126646
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Backport commit[1] which fixes this vulnerability as mentioned NVD report in [2].
 
-Backport patches [1] and [2] as mentioned in [3]
+[1] https://github.com/python-pillow/Pillow/commit/3cb854e8b2bab43f40e342e665f9340d861aa628
+[2] https://nvd.nist.gov/vuln/detail/CVE-2026-40192
+[3] https://security-tracker.debian.org/tracker/CVE-2026-40192
 
-[1] https://git.libssh.org/projects/libssh.git/commit/?id=796d85f786dff62bd4bcc4408d9b7bbc855841e9
-[2] https://git.libssh.org/projects/libssh.git/commit/?id=212121971fb26e1e00b72bd5402c0454a4d84c03
-[3] https://security-tracker.debian.org/tracker/CVE-2026-0968
-
-Certain functions from sftp.c were moved to a new file sftp_common.c
-in version 0.11.0 by following commit:
-https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
-
-This is the backport of the changes using the original file sftp.c
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../libssh/libssh/CVE-2026-0968-1.patch       |  64 +++++++++
- .../libssh/libssh/CVE-2026-0968-2.patch       | 136 ++++++++++++++++++
- .../recipes-support/libssh/libssh_0.10.6.bb   |   2 +
- 3 files changed, 202 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
+ .../python3-pillow/CVE-2026-40192.patch       | 50 +++++++++++++++++++
+ .../python/python3-pillow_10.3.0.bb           |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2026-40192.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
+diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-40192.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-40192.patch
 new file mode 100644
-index 0000000000..5ed1a4e940
+index 0000000000..7e8170eec6
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-1.patch
-@@ -0,0 +1,64 @@
-+From 9fd388141c973ba6fb7d45966c25d1fad9e1d419 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 22 Dec 2025 20:59:11 +0100
-+Subject: [PATCH] CVE-2026-0968: sftp: Sanitize input handling in
-+ sftp_parse_longname()
++++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2026-40192.patch
+@@ -0,0 +1,50 @@
++From 3cb854e8b2bab43f40e342e665f9340d861aa628 Mon Sep 17 00:00:00 2001
++From: Hugo van Kemenade <1324225+hugovk@users.noreply.github.com>
++Date: Wed, 1 Apr 2026 00:02:08 +0300
++Subject: [PATCH] Only read as much data from gzip-decompressed data as
++ necessary (#9521)
 +
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+
-+CVE: CVE-2026-0968
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=796d85f786dff62bd4bcc4408d9b7bbc855841e9]
-+
-+Certain functions from sftp.c were moved to a new file sftp_common.c
-+in version 0.11.0 by following commit:
-+https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
-+
-+This is the backport of the changes which fixes the CVE in the original file
-+sftp.c
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++CVE: CVE-2026-40192
++Upstream-Status: Backport [https://github.com/python-pillow/Pillow/commit/3cb854e8b2bab43f40e342e665f9340d861aa628]
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ src/sftp.c | 16 +++++++++++++---
-+ 1 file changed, 13 insertions(+), 3 deletions(-)
++ src/PIL/FitsImagePlugin.py | 23 ++++++++++++-----------
++ 1 file changed, 12 insertions(+), 11 deletions(-)
 +
-+diff --git a/src/sftp.c b/src/sftp.c
-+index 4a77141b..2194a9ef 100644
-+--- a/src/sftp.c
-++++ b/src/sftp.c
-+@@ -1289,13 +1289,18 @@ static char *sftp_parse_longname(const char *longname,
-+     const char *p, *q;
-+     size_t len, field = 0;
++diff --git a/src/PIL/FitsImagePlugin.py b/src/PIL/FitsImagePlugin.py
++index 071918925..7791adc50 100644
++--- a/src/PIL/FitsImagePlugin.py
+++++ b/src/PIL/FitsImagePlugin.py
++@@ -124,17 +124,18 @@ class FitsGzipDecoder(ImageFile.PyDecoder):
 + 
-++    if (longname == NULL || longname_field < SFTP_LONGNAME_PERM ||
-++        longname_field > SFTP_LONGNAME_NAME) {
-++        return NULL;
-++    }
++     def decode(self, buffer):
++         assert self.fd is not None
++-        value = gzip.decompress(self.fd.read())
++-
++-        rows = []
++-        offset = 0
++-        number_of_bits = min(self.args[0] // 8, 4)
++-        for y in range(self.state.ysize):
++-            row = bytearray()
++-            for x in range(self.state.xsize):
++-                row += value[offset + (4 - number_of_bits) : offset + 4]
++-                offset += 4
++-            rows.append(row)
+++        with gzip.open(self.fd) as fp:
+++            value = fp.read(self.state.xsize * self.state.ysize * 4)
 ++
-+     p = longname;
-+     /* Find the beginning of the field which is specified by sftp_longname_field_e. */
-+-    while(field != longname_field) {
-++    while (*p != '\0' && field != longname_field) {
-+         if(isspace(*p)) {
-+             field++;
-+             p++;
-+-            while(*p && isspace(*p)) {
-++            while (*p != '\0' && isspace(*p)) {
-+                 p++;
-+             }
-+         } else {
-+@@ -1303,8 +1308,13 @@ static char *sftp_parse_longname(const char *longname,
-+         }
-+     }
+++            rows = []
+++            offset = 0
+++            number_of_bits = min(self.args[0] // 8, 4)
+++            for y in range(self.state.ysize):
+++                row = bytearray()
+++                for x in range(self.state.xsize):
+++                    row += value[offset + (4 - number_of_bits) : offset + 4]
+++                    offset += 4
+++                rows.append(row)
++         self.set_as_raw(bytes([pixel for row in rows[::-1] for pixel in row]))
++         return -1, 0
 + 
-++    /* If we reached NULL before we got our field fail */
-++    if (field != longname_field) {
-++        return NULL;
-++    }
-++
-+     q = p;
-+-    while (! isspace(*q)) {
-++    while (*q != '\0' && !isspace(*q)) {
-+         q++;
-+     }
-+ 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
-new file mode 100644
-index 0000000000..42642ee1ed
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2026-0968-2.patch
-@@ -0,0 +1,136 @@
-+From 04cd54c7302195055d208e0ca00d6e519d674bb2 Mon Sep 17 00:00:00 2001
-+From: Jakub Jelen <jjelen@redhat.com>
-+Date: Mon, 22 Dec 2025 21:00:03 +0100
-+Subject: [PATCH] CVE-2026-0968 tests: Reproducer for invalid longname data
++-- 
++2.50.1
 +
-+Signed-off-by: Jakub Jelen <jjelen@redhat.com>
-+Reviewed-by: Andreas Schneider <asn@cryptomilk.org>
-+(cherry picked from commit 90a5d8f47399e8db61b56793cd21476ff6a528e0)
-+(cherry picked from commit 212121971fb26e1e00b72bd5402c0454a4d84c03)
-+
-+CVE: CVE-2026-0968
-+Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/commit/?id=212121971fb26e1e00b72bd5402c0454a4d84c03]
-+
-+Certain functions from sftp.c were moved to a new file sftp_common.c
-+in version 0.11.0 by following commit:
-+https://git.libssh.org/projects/libssh.git/commit/src/sftp_common.c?id=c3e03ab4651e4f3382e3a51c0273ade894f0c48a
-+
-+Updated unit test to include sftp.c during the backport.
-+
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ tests/unittests/CMakeLists.txt      |  7 +++
-+ tests/unittests/torture_unit_sftp.c | 86 +++++++++++++++++++++++++++++
-+ 2 files changed, 93 insertions(+)
-+ create mode 100644 tests/unittests/torture_unit_sftp.c
-+
-+diff --git a/tests/unittests/CMakeLists.txt b/tests/unittests/CMakeLists.txt
-+index f85da72b..41f25830 100644
-+--- a/tests/unittests/CMakeLists.txt
-++++ b/tests/unittests/CMakeLists.txt
-+@@ -101,6 +101,13 @@ if (UNIX AND NOT WIN32)
-+     endif (WITH_SERVER)
-+ endif (UNIX AND NOT WIN32)
-+ 
-++if (WITH_SFTP)
-++    set(LIBSSH_UNIT_TESTS
-++        ${LIBSSH_UNIT_TESTS}
-++        torture_unit_sftp
-++    )
-++endif (WITH_SFTP)
-++
-+ foreach(_UNIT_TEST ${LIBSSH_UNIT_TESTS})
-+     add_cmocka_test(${_UNIT_TEST}
-+                     SOURCES ${_UNIT_TEST}.c
-+diff --git a/tests/unittests/torture_unit_sftp.c b/tests/unittests/torture_unit_sftp.c
-+new file mode 100644
-+index 00000000..8cdaba8e
-+--- /dev/null
-++++ b/tests/unittests/torture_unit_sftp.c
-+@@ -0,0 +1,86 @@
-++#include "config.h"
-++
-++#include "sftp.c"
-++#include "torture.h"
-++
-++#define LIBSSH_STATIC
-++
-++static void test_sftp_parse_longname(void **state)
-++{
-++    const char *lname = NULL;
-++    char *value = NULL;
-++
-++    /* state not used */
-++    (void)state;
-++
-++    /* Valid example from SFTP draft, page 18:
-++     * https://datatracker.ietf.org/doc/draft-spaghetti-sshm-filexfer/
-++     */
-++    lname = "-rwxr-xr-x   1 mjos     staff      348911 Mar 25 14:29 t-filexfer";
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
-++    assert_string_equal(value, "-rwxr-xr-x");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_OWNER);
-++    assert_string_equal(value, "mjos");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_GROUP);
-++    assert_string_equal(value, "staff");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_SIZE);
-++    assert_string_equal(value, "348911");
-++    free(value);
-++    /* This function is broken further as the date contains space which breaks
-++     * the parsing altogether */
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_DATE);
-++    assert_string_equal(value, "Mar");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_TIME);
-++    assert_string_equal(value, "25");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
-++    assert_string_equal(value, "14:29");
-++    free(value);
-++}
-++
-++static void test_sftp_parse_longname_invalid(void **state)
-++{
-++    const char *lname = NULL;
-++    char *value = NULL;
-++
-++    /* state not used */
-++    (void)state;
-++
-++    /* Invalid inputs should not crash
-++     */
-++    lname = NULL;
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
-++    assert_null(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
-++    assert_null(value);
-++
-++    lname = "";
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
-++    assert_string_equal(value, "");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
-++    assert_null(value);
-++
-++    lname = "-rwxr-xr-x   1";
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_PERM);
-++    assert_string_equal(value, "-rwxr-xr-x");
-++    free(value);
-++    value = sftp_parse_longname(lname, SFTP_LONGNAME_NAME);
-++    assert_null(value);
-++}
-++
-++int torture_run_tests(void)
-++{
-++    int rc;
-++    const struct CMUnitTest tests[] = {
-++        cmocka_unit_test(test_sftp_parse_longname),
-++        cmocka_unit_test(test_sftp_parse_longname_invalid),
-++    };
-++
-++    rc = cmocka_run_group_tests(tests, NULL, NULL);
-++    return rc;
-++}
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-index 30f68f87ce..e0ade7f67c 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
-@@ -28,6 +28,8 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable
-            file://CVE-2026-0966-1.patch \
-            file://CVE-2026-0966-2.patch \
-            file://CVE-2026-0966-3.patch \
-+           file://CVE-2026-0968-1.patch \
-+           file://CVE-2026-0968-2.patch \
-           "
- SRCREV = "10e09e273f69e149389b3e0e5d44b8c221c2e7f6"
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
+index a81bcca215..9f1ef87a46 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_10.3.0.bb
+@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
+            file://0001-support-cross-compiling.patch \
+            file://run-ptest \
+            file://CVE-2026-25990.patch \
++           file://CVE-2026-40192.patch \
+            "
+ SRCREV = "5c89d88eee199ba53f64581ea39b6a1bc52feb1a"
  
+-- 
+2.50.1
+
 
