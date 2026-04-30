@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D92FFF8875
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61376CCFA13
 	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 11:48:04 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18387.1777549678224792790
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18391.1777549682588657334
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2026 04:47:58 -0700
+ Thu, 30 Apr 2026 04:48:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=EQdQf5OB;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-364c5317d67so536276a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:47:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=VuMy+uFk;
+ spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-35d90833cacso626610a91.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:48:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777549677; x=1778154477; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777549682; x=1778154482; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4I3PPpN2v5bXwtF9YaY6OieSq8UYivgJC+qazygldv4=;
-        b=EQdQf5OBUupw+3fW1wvFZJa6n++hsk9G6+NLOc2kcR+/pTgFjvmM1saQkBtEfBALJm
-         QmNppQo9JjrA3NH3G7sxagmn0UdcJiAv3AwpALnZGB3spLgoxMc9ZLD6ZdThN0mvweeW
-         d+l87Bt7ZH6a0ncpGFdGxK/kvazBaeVmPpbVZVYWkkqNpSsMuWeJfc+EIQHd1PaGDLCf
-         oU5Z2Ug0+FqnCuAwd0jigcwY9+1tUmQw3iFkwprghW6OVaPSHI1wnkQrwbW20/Lohrqx
-         pwg5XlB0lMyDHIJuc2pz7SGBKAM6UK9gs5Uy+wZf5FP1BClP8kek9d8pS1hp0uJwtq6J
-         USSg==
+        bh=+6e6lM8AdlccnAQ5SBrO/rPuV4th3EepaXoX9eHEHEA=;
+        b=VuMy+uFkoYh9PA6rnodQU+2sV61F/9eyGoemGIe52bBaD1+eInJyQ9lbSoSW85vtwq
+         Cb6ebzUUq8sCf5ogHD8OSE3fLCaP0WOmEqx8pi9PkAxlYBnegm59ofQ1bj4V5r3ZYXw0
+         6Mo7dTZiHrZFON3/yPsRwEAz4dBKIGBl5lnS5LPE+8GFsofB/ItflDEWSd4txmceaySP
+         ccTa1BsHJkDZmyeFgc2Z3bfzVRBt9dbsoS54J9Uv7w+OMrgKl2OFeg0hhsZYD2Xe+abU
+         VvWZ/innJK9mDFZUIdvmSHvcfTgP5FM4wLQsApU+oybSigL1LOkAwr4l2mVpsgaeT/Pm
+         s0DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777549677; x=1778154477;
+        d=1e100.net; s=20251104; t=1777549682; x=1778154482;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=4I3PPpN2v5bXwtF9YaY6OieSq8UYivgJC+qazygldv4=;
-        b=IPZatzeb4B3EHFnZkh5bSyhHZJXFMn7Ht2pfDrzrEG8QEq+mXqUIO00zAW3HU2OVRh
-         3oN+FjYrLZklo/IDKhkhKNypC6yjYkYVysSO2amxwZgsMb40DNYxAaTsVkyZ5q/ktQ6M
-         9R0dFBfX+MRkzLqSkPZNAAINeDPVeDpvvTXMRcOg2uxzucn0O0Mmx7zag5FqkPdP1AVd
-         ah4KPxL2WJsfonT7sJmRizJw6bUucu1UzJwlOpK6jtN684q7Kda9wmAdEEqQ3L0FJPn6
-         RvxNgnm5BnQhZFMGzlb3E+NvNYOnOulsvlRJy5VfkSVzYrTh2pfioXZqvdBsKQR6qMQl
-         l+1Q==
-X-Gm-Message-State: AOJu0Yx4bWzlUC64UYpunIwUfA2HOtYjnSUabgKRyNRrthE8V6CZPhfJ
-	AKnz79G9mmBr4n3e98Xe/alR/ouUR5Yj67xvYl475lSt388oWsCKl/7Wol7wsAZA
-X-Gm-Gg: AeBDietYG3FLOqpRPJbfN0awUg1z2xS14S/LjQ3aZMF7A0xgk9r7ZlDrTp1vQYY3ieQ
-	CGAeVnbRcsw8c0gXCkSkA0STgmO5rVyILCEqPk6Aa7hRGQxToEJ2VMb0nscJcXQctlwU5jli0Tt
-	h8/mLW3Yi200V42ptg+fKXgrwddzM1STJkljUDu3czV5MeSn+oIODytKflpdRBcdLGZjOmUNv3w
-	CDCNGsdTVynl57TI7Be/ahtbd/D+v+YU6gzu3ld5lAAWMs6ia/VSU/NUjXc8WkU2Xg4i69nvJLp
-	cFMLgLf353RQbR1BSqoQyRKRhEQz1xABYGFbvq1V8E0KwkrpAfU9QhN/EiTfPXESPA1tldZWjqL
-	q5YT0PVaRnaAqQUImQhUglDjwK50eui0iBX1htQZEo0+L3v9AYJnNO9kzYvIUlfpCU8MMicOPS+
-	Lm+XNNsFMR/PFL2/ERJ2Wl+QC6VGgHoQHQi4DWaouLNYSVU1o=
-X-Received: by 2002:a17:90b:384c:b0:35f:b987:4dac with SMTP id 98e67ed59e1d1-364c3065ee5mr2846996a91.12.1777549677351;
-        Thu, 30 Apr 2026 04:47:57 -0700 (PDT)
+        bh=+6e6lM8AdlccnAQ5SBrO/rPuV4th3EepaXoX9eHEHEA=;
+        b=cCCLepVBgKTa+2tbY1ppYbiJn+1sxdsMamRCgoPJejcsH7JvW97eD/TrNI79CJWLfm
+         Vz/4bhCacYP9h9GmX9SHjALdsDD22W5XCwZCPCaN5oM24dkQofbcNiyLCvhtEdMpEDfP
+         YquNoGW04GwGQdSlQUM6bzCnpaXBw/q9jhTrGUSji0bDMWq7qccka7eHAxYBxGmKXlpz
+         XrjJL9XCrkxjCuqMR/XxBhXy7dkGUhhRzbtmEcciihHb+yreNWWKJqG5eTXUByYkvUcX
+         Ot8jK/JsECzvx63LX8ZoZhCvbdw1OZkLm/wAjYFbX2gP1+cUz92EV5YhIpkbzzk2USX1
+         uHjw==
+X-Gm-Message-State: AOJu0YxMURFETdtk484XVXhcV6ZmCpZkNBWL1b1bUtKZdw5Jp8hvQTJb
+	F+HyP3ywS1LC/4o0l7fhPRGpo5IK9IovDpcQ/pJDZTfetUTWoFtJtx/rlUoLO+6K
+X-Gm-Gg: AeBDietAEBqK8kPk+BGKObosDGHrLuAa0czD3BzH39e5m7l4j1Cz32kIKILdsqe2Mk5
+	1WhehbvBN8qFnohYejUGojsAZRS+gcZGc68wA/2EuvB8+DxcQbCH7crzGaC+P9uZqWn6CzGSa/S
+	4JdiRlZyyyY254DmqiFz/DPjqy8XJvOI05xan92irPPa+tqMAH9ZgarW3xRnAhtfN/dmUbpfpOV
+	8uAAk/QkwNCDY+3j5gbJ0ZJCmHsDcbjRPEX5EpUCiyYxI4r9EP6aEUn9Pw31TutMFpqjtxAHTsp
+	l/9s01WMRMy17PccOx5VEDD2M35WdKfvudQhl8sU6XJEZ6j/fLX9VY8eSctheIOdFyKaXdUf4c3
+	GqGbHhLec+6MLS2ipy5XM8kdBlOTu3T/1h1o1tq0AJwerRT3WVUvnfH+V9cGagIxA9618pzt81n
+	UbPRju7v7u8b/hqDEN2Z2fu3FuYRNgakXDx+yDNiGXtrlEwWI=
+X-Received: by 2002:a17:90b:3cc3:b0:35b:e52a:6fe5 with SMTP id 98e67ed59e1d1-364c2f35bd5mr2403492a91.5.1777549681669;
+        Thu, 30 Apr 2026 04:48:01 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.55
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Apr 2026 04:47:56 -0700 (PDT)
+        Thu, 30 Apr 2026 04:48:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][whinlatter][PATCH 22/24] wolfssl: patch CVE-2026-5447
-Date: Thu, 30 Apr 2026 23:46:45 +1200
-Message-ID: <20260430114649.4184890-22-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 24/24] wolfssl: patch CVE-2026-5778
+Date: Thu, 30 Apr 2026 23:46:47 +1200
+Message-ID: <20260430114649.4184890-24-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
 References: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
@@ -67,104 +67,75 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 11:48:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126756
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126758
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Backport commit from the PR[1] mentioned in the nvd[2]
 
-[1]https://github.com/wolfSSL/wolfssl/pull/10112
-[2]https://nvd.nist.gov/vuln/detail/CVE-2026-5447
-
-Dropped unit test changes during the backport.
+[1]https://github.com/wolfSSL/wolfssl/pull/10125
+[2]https://nvd.nist.gov/vuln/detail/CVE-2026-5778
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-5447.patch         | 65 +++++++++++++++++++
+ .../wolfssl/files/CVE-2026-5778.patch         | 38 +++++++++++++++++++
  .../wolfssl/wolfssl_5.8.0.bb                  |  1 +
- 2 files changed, 66 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5447.patch
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5447.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5447.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
 new file mode 100644
-index 0000000000..b296603816
+index 0000000000..b640b41bd0
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5447.patch
-@@ -0,0 +1,65 @@
-+From 4d7eccf50dab080185d3a8763491e3febbcc257a Mon Sep 17 00:00:00 2001
-+From: Eric Blankenhorn <eric@wolfssl.com>
-+Date: Tue, 31 Mar 2026 08:56:23 -0500
-+Subject: [PATCH] Fix CertFromX509 copy length check
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
+@@ -0,0 +1,38 @@
++From 0eee2c2d172a28dc9159211d0d22323c980a48f4 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Thu, 2 Apr 2026 16:41:55 -0700
++Subject: [PATCH] Add sz check to ChachaAEADDecrypt to prevent potential
++ underflow.
 +
-+(cherry picked from commit 772cda3d489d867935202d59393a2ac85a5e6ef0)
++Thanks to Zou Dikai for the report.
 +
-+CVE: CVE-2026-5447
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/772cda3d489d867935202d59393a2ac85a5e6ef0]
++(cherry picked from commit 5b6b138964058ab8d30474bc9fdfb5ffcb3a4726)
 +
-+Dropped unit test changes during the backport.
-+
++CVE: CVE-2026-5778
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/5b6b138964058ab8d30474bc9fdfb5ffcb3a4726]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/x509.c | 33 ++++++++++++++++++---------------
-+ 1 file changed, 18 insertions(+), 15 deletions(-)
++ src/internal.c | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/x509.c b/src/x509.c
-+index 62e3774f4..cf44c7146 100644
-+--- a/src/x509.c
-++++ b/src/x509.c
-+@@ -10622,25 +10622,28 @@ static int CertFromX509(Cert* cert, WOLFSSL_X509* x509)
-+         return WOLFSSL_FAILURE;
-+     }
++diff --git a/src/internal.c b/src/internal.c
++index 6af03cbf0..40d1dd7cc 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -19310,10 +19310,15 @@ int ChachaAEADDecrypt(WOLFSSL* ssl, byte* plain, const byte* input,
++     byte tag[POLY1305_AUTH_SZ];
++     byte poly[CHACHA20_256_KEY_SIZE]; /* generated key for mac */
++     int ret    = 0;
++-    int msgLen = (sz - ssl->specs.aead_mac_size);
+++    int msgLen = 0;
++     Keys* keys = &ssl->keys;
++     byte* seq = NULL;
 + 
-+-    if (x509->authKeyIdSz < sizeof(cert->akid)) {
-+     #ifdef WOLFSSL_AKID_NAME
-+-        cert->rawAkid = 0;
-+-        if (x509->authKeyIdSrc) {
-+-            XMEMCPY(cert->akid, x509->authKeyIdSrc, x509->authKeyIdSrcSz);
-+-            cert->akidSz = (int)x509->authKeyIdSrcSz;
-+-            cert->rawAkid = 1;
-++    cert->rawAkid = 0;
-++    if (x509->authKeyIdSrc) {
-++        if (x509->authKeyIdSrcSz > sizeof(cert->akid)) {
-++            WOLFSSL_MSG("Auth Key ID too large");
-++            WOLFSSL_ERROR_VERBOSE(BUFFER_E);
-++            return WOLFSSL_FAILURE;
-+         }
-+-        else
-++        XMEMCPY(cert->akid, x509->authKeyIdSrc, x509->authKeyIdSrcSz);
-++        cert->akidSz = (int)x509->authKeyIdSrcSz;
-++        cert->rawAkid = 1;
+++    if (sz < ssl->specs.aead_mac_size) {
+++        return BAD_FUNC_ARG;
 ++    }
-++    else
-+     #endif
-+-        if (x509->authKeyId) {
-+-            XMEMCPY(cert->akid, x509->authKeyId, x509->authKeyIdSz);
-+-            cert->akidSz = (int)x509->authKeyIdSz;
-++    if (x509->authKeyId) {
-++        if (x509->authKeyIdSz > sizeof(cert->akid)) {
-++            WOLFSSL_MSG("Auth Key ID too large");
-++            WOLFSSL_ERROR_VERBOSE(BUFFER_E);
-++            return WOLFSSL_FAILURE;
-+         }
-+-    }
-+-    else {
-+-        WOLFSSL_MSG("Auth Key ID too large");
-+-        WOLFSSL_ERROR_VERBOSE(BUFFER_E);
-+-        return WOLFSSL_FAILURE;
-++        XMEMCPY(cert->akid, x509->authKeyId, x509->authKeyIdSz);
-++        cert->akidSz = (int)x509->authKeyIdSz;
-+     }
-+ 
-+     for (i = 0; i < x509->certPoliciesNb; i++) {
+++    msgLen = (sz - ssl->specs.aead_mac_size);
+++
++     #ifdef CHACHA_AEAD_TEST
++        int i;
++        printf("input before decrypt :\n");
 diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-index bad03c5f2a..17b0960c47 100644
+index 3b3db9ad6f..0f1fe43d79 100644
 --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
 +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-@@ -33,6 +33,7 @@ SRC_URI = " \
-     file://CVE-2026-5392.patch \
-     file://CVE-2026-5446-1.patch \
-     file://CVE-2026-5446-2.patch \
-+    file://CVE-2026-5447.patch \
+@@ -36,6 +36,7 @@ SRC_URI = " \
+     file://CVE-2026-5447.patch \
+     file://CVE-2026-5772-1.patch \
+     file://CVE-2026-5772-2.patch \
++    file://CVE-2026-5778.patch \
  "
  
  SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
