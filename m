@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C14BFF8875
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE61ACD13DA
 	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 10:49:57 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.17219.1777546194258626097
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17436.1777546189390808719
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2026 03:49:54 -0700
+ Thu, 30 Apr 2026 03:49:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=jCwwTDky;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=bWTv29Cw;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1777546194; x=1809082194;
+  t=1777546189; x=1809082189;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=j3lcRHJtIllMgzxvJhWTom9vRnTUcCHWOwsfdwA4mbE=;
-  b=jCwwTDky6ioe2GU69PVL6J0IciOMYabY0hiVK03I/He8/p1AvNZuoiqW
-   G3P4vQXi6rP7mSjBVXejT4sBPjIoH81AP13U0ChoQ0gQv1IUu/K2E/Bal
-   pDmUhqza/rgwMluN7DgVIYU3gQLv9f6KSss8c09RAn3iQ4Ugfktslaoac
-   Q2qZl7LyEB8hGyLOwwg56oPTvSPwOpD/EsGIhFwaGpIGlLRQycBwX2YNI
-   o9z4ikj2fIW65jaZMZcNcwFntDRwsbagTUqX/cI/AGBxYoJUu3twgJ3we
-   ueAWuVlRM3hNHc9Us7gDQ7fYKA6H0El3OPSkENKDz4d+bgIVDRWWTJWwq
-   w==;
-X-CSE-ConnectionGUID: BnXK8zqAQIKCYQbEfiXaaQ==
-X-CSE-MsgGUID: RAs//CjeSLixNMTRdri+tQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11771"; a="227309845"
+  bh=h+oCBBGGu6yQlmYTHdbvx/HsbqAxpn3BsiiiOO+lTr8=;
+  b=bWTv29CwwpNdQqP/uBlNXx5J4mtCjCGRpQHVR1Nh9gtss3mLOmLfT53r
+   saQRPX5C+VLtaUipGhnRsisR6Ls77L7BpiJzVtEB1W8lF2TReGqJSNSoh
+   7/6wbTFRsdUH4ui+Lqc0AoYJf15pwTXj8uw4JH/ExG1As0lRyg2eiWCTO
+   RXiGn6fT6jv7YGX2kUrCHzCwnpyGnFkq14OEDeko3CtV9h8qLG2zQJ5wb
+   SZ5NDa3N1L6ewqSROJRe5JItMKwnJllZiq14MBKmWAFpTvHoCFAWm7C0x
+   nlje0VSn0u2MsuNmml5ZufxPFRNpCnanH1I02oUBJtF0AwTT2W/BPvOcU
+   Q==;
+X-CSE-ConnectionGUID: 5DXEQhGzTSqslx+ucBzq0A==
+X-CSE-MsgGUID: wYS5wK1uQiWFzWwq84ZLMA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11771"; a="239352998"
 X-IronPort-AV: E=Sophos;i="6.23,207,1770562800"; 
-   d="scan'208";a="227309845"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Apr 2026 19:49:52 +0900
-Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
+   d="scan'208";a="239352998"
+Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Apr 2026 19:49:47 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id B436242A338
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:52 +0000 (UTC)
+	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id F13494DD4
+	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:47 +0000 (UTC)
 Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 622A31801EA1
-	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:52 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 98C13C012A7
+	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:47 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id DE9AA1801130;
-	Thu, 30 Apr 2026 10:49:49 +0000 (UTC)
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 107E01801137;
+	Thu, 30 Apr 2026 10:49:44 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 15/64] lcms: upgrade 2.18 -> 2.19
-Date: Thu, 30 Apr 2026 18:48:34 +0800
-Message-ID: <20260430104924.1106-15-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 12/64] isocline: upgrade 1.0.9 -> 1.1.0
+Date: Thu, 30 Apr 2026 18:48:31 +0800
+Message-ID: <20260430104924.1106-12-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260430104924.1106-1-wangmy@fujitsu.com>
 References: <20260430104924.1106-1-wangmy@fujitsu.com>
@@ -61,142 +61,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126685
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126682
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-CVE-2026-41254_1.patch
-CVE-2026-41254_2.patch
-removed since they're included in 2.19
-
-Changes:
-========
-- CMake build system. Thanks to Vlad Erium for the initial implementation and
-  kmilos for improvements.
-- Large files support to use profiles up to 4Gb
-- Black point compensation works on multi-channel profiles
-- Added more test platforms/architectures in GitHub tests, Cygwin and MSYS are
-  now fully checked.
-- jpgicc banner is not shown on normal operation, only when help is requested.
-- Added a way to access internal transform pipelines. For read only.
-- Add a way to retrieve the CMM signature
-- Added extra checks on postscript undocumented functions
-- Added guard on integer overflow when reading .cube files
-- Added unneeded checks as a try to get rid of spam reports about
-  "vulnerabilities" that are not real.
-- Utility program names generated by Visual Studio 2026 are now same as all
-  other platforms.
-- Creating an output profile by cmsTransform2DeviceLink does not propagate
-  correctly the colorant table. Fixed.
-- Added some profile class definitions from iccMAX
-- Deprecated uint16 and uint32 types removed from tifdiff
-- fixed generation of tifdiff on Cmake and meson
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../lcms/lcms/CVE-2026-41254_1.patch          | 28 ---------------
- .../lcms/lcms/CVE-2026-41254_2.patch          | 34 -------------------
- .../lcms/{lcms_2.18.bb => lcms_2.19.bb}       |  7 ++--
- 3 files changed, 2 insertions(+), 67 deletions(-)
- delete mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
- delete mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
- rename meta-oe/recipes-support/lcms/{lcms_2.18.bb => lcms_2.19.bb} (60%)
+ .../isocline/{isocline_1.0.9.bb => isocline_1.1.0.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/isocline/{isocline_1.0.9.bb => isocline_1.1.0.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
-deleted file mode 100644
-index 2ed8e9f587..0000000000
---- a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From c83cfcd249d06950a307cee8d1e22b7f6a78a8a7 Mon Sep 17 00:00:00 2001
--From: Marti Maria <marti.maria@littlecms.com>
--Date: Thu, 19 Feb 2026 09:07:20 +0100
--Subject: [PATCH] Fix integer overflow in CubeSize()
--
--Thanks to @zerojackyi for reporting
--
--CVE: CVE-2026-41254
--Upstream-Status: Backport [https://github.com/mm2/Little-CMS/commit/da6110b1d14abc394633a388209abd5ebedd7ab0]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- src/cmslut.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/src/cmslut.c b/src/cmslut.c
--index 1089148..b245209 100644
----- a/src/cmslut.c
--+++ b/src/cmslut.c
--@@ -460,7 +460,8 @@ void EvaluateCLUTfloatIn16(const cmsFloat32Number In[], cmsFloat32Number Out[],
-- static
-- cmsUInt32Number CubeSize(const cmsUInt32Number Dims[], cmsUInt32Number b)
-- {
---    cmsUInt32Number rv, dim;
--+    cmsUInt32Number dim;
--+    cmsUInt64Number rv;
-- 
--     _cmsAssert(Dims != NULL);
-- 
-diff --git a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
-deleted file mode 100644
-index be8c759a6f..0000000000
---- a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From f5994aea02d5620f3182cafdcf116ffe9d6c9fd2 Mon Sep 17 00:00:00 2001
--From: Marti Maria <marti.maria@littlecms.com>
--Date: Thu, 12 Mar 2026 22:57:35 +0100
--Subject: [PATCH] check for overflow
--
--Thanks to Guanni Qu for detecting & reporting the issue
--
--CVE: CVE-2026-41254
--Upstream-Status: Backport [https://github.com/mm2/Little-CMS/commit/e0641b1828d0a1af5ecb1b11fe22f24fceefd4bc]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- src/cmslut.c | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/src/cmslut.c b/src/cmslut.c
--index b245209..c1dbb32 100644
----- a/src/cmslut.c
--+++ b/src/cmslut.c
--@@ -468,12 +468,12 @@ cmsUInt32Number CubeSize(const cmsUInt32Number Dims[], cmsUInt32Number b)
--     for (rv = 1; b > 0; b--) {
-- 
--         dim = Dims[b-1];
---        if (dim <= 1) return 0;  // Error
---
---        rv *= dim;
--+        if (dim <= 1) return 0;  
-- 
--         // Check for overflow
--         if (rv > UINT_MAX / dim) return 0;
--+
--+        rv *= dim;
--     }
-- 
--     // Again, prevent overflow
-diff --git a/meta-oe/recipes-support/lcms/lcms_2.18.bb b/meta-oe/recipes-support/lcms/lcms_2.19.bb
-similarity index 60%
-rename from meta-oe/recipes-support/lcms/lcms_2.18.bb
-rename to meta-oe/recipes-support/lcms/lcms_2.19.bb
-index 1ff3b3908f..fa33678b18 100644
---- a/meta-oe/recipes-support/lcms/lcms_2.18.bb
-+++ b/meta-oe/recipes-support/lcms/lcms_2.19.bb
-@@ -3,11 +3,8 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e9ce323c4b71c943a785db90142b228a"
+diff --git a/meta-oe/recipes-devtools/isocline/isocline_1.0.9.bb b/meta-oe/recipes-devtools/isocline/isocline_1.1.0.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/isocline/isocline_1.0.9.bb
+rename to meta-oe/recipes-devtools/isocline/isocline_1.1.0.bb
+index 2afc4500df..c50ac01c49 100644
+--- a/meta-oe/recipes-devtools/isocline/isocline_1.0.9.bb
++++ b/meta-oe/recipes-devtools/isocline/isocline_1.1.0.bb
+@@ -9,7 +9,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=8d05469c537534c7405c82c81a526bcd"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \
--           file://CVE-2026-41254_1.patch \
--           file://CVE-2026-41254_2.patch \
--           "
--SRC_URI[sha256sum] = "ee67be3566f459362c1ee094fde2c159d33fa0390aa4ed5f5af676f9e5004347"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz"
-+SRC_URI[sha256sum] = "49e7e134e4299733dd0eda434fa468997a28ab3d33fa397c642b03644f552216"
+ SRC_URI = "git://github.com/daanx/isocline.git;protocol=https;branch=main;tag=v${PV}"
+-SRCREV = "74d34bc453f5b91f1f8d8ded2840e1553623d135"
++SRCREV = "d55a58139badbe83d61c5d89954fa5bddcabe6d7"
  
- DEPENDS = "tiff"
  
+ inherit cmake
 -- 
 2.43.0
 
