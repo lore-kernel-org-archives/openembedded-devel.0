@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61376CCFA13
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77F50CD13D2
 	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 11:48:04 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18391.1777549682588657334
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.18389.1777549680340199007
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2026 04:48:02 -0700
+ Thu, 30 Apr 2026 04:48:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=VuMy+uFk;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-35d90833cacso626610a91.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:48:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WwvUPrzr;
+ spf=pass (domain: gmail.com, ip: 209.85.216.53, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-35fc0d7c310so521791a91.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:48:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777549682; x=1778154482; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777549679; x=1778154479; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+6e6lM8AdlccnAQ5SBrO/rPuV4th3EepaXoX9eHEHEA=;
-        b=VuMy+uFkoYh9PA6rnodQU+2sV61F/9eyGoemGIe52bBaD1+eInJyQ9lbSoSW85vtwq
-         Cb6ebzUUq8sCf5ogHD8OSE3fLCaP0WOmEqx8pi9PkAxlYBnegm59ofQ1bj4V5r3ZYXw0
-         6Mo7dTZiHrZFON3/yPsRwEAz4dBKIGBl5lnS5LPE+8GFsofB/ItflDEWSd4txmceaySP
-         ccTa1BsHJkDZmyeFgc2Z3bfzVRBt9dbsoS54J9Uv7w+OMrgKl2OFeg0hhsZYD2Xe+abU
-         VvWZ/innJK9mDFZUIdvmSHvcfTgP5FM4wLQsApU+oybSigL1LOkAwr4l2mVpsgaeT/Pm
-         s0DA==
+        bh=rqIzDI9Lja5uLbVCae/bz6pQlo4KteeX5dUW+7c7hfI=;
+        b=WwvUPrzr+BAl+54JsQpvnZr908EtF7JA3XbgWOtpyRF45J6dJW4ZvBPwml0VPhmqiy
+         DIvwRqLLpwgq7nBGjL4CSxlB0uGZ7DHBeDrAqxRi7O+o1aX8f7cXbVrmblDatHfd5tm+
+         MMpDNyelbvYLsuP2xLgCi9J9nPljSAWvRuI3fqQBO25muQFqeVJjFkRPK9TIVVSUnHMK
+         1M/IKaGiDNq79fwTGqGEFYVXOyV9cz2oAaF58jX7w8R1Hiskfd8ah4IWHEa3BG3qbkhw
+         C1Iklu34dqc2wk9YTzsjo4axhyboeSIEsiIDL5oOMCdHOuxitkaN1vO6KMFRNgrMQePi
+         gzkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777549682; x=1778154482;
+        d=1e100.net; s=20251104; t=1777549679; x=1778154479;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=+6e6lM8AdlccnAQ5SBrO/rPuV4th3EepaXoX9eHEHEA=;
-        b=cCCLepVBgKTa+2tbY1ppYbiJn+1sxdsMamRCgoPJejcsH7JvW97eD/TrNI79CJWLfm
-         Vz/4bhCacYP9h9GmX9SHjALdsDD22W5XCwZCPCaN5oM24dkQofbcNiyLCvhtEdMpEDfP
-         YquNoGW04GwGQdSlQUM6bzCnpaXBw/q9jhTrGUSji0bDMWq7qccka7eHAxYBxGmKXlpz
-         XrjJL9XCrkxjCuqMR/XxBhXy7dkGUhhRzbtmEcciihHb+yreNWWKJqG5eTXUByYkvUcX
-         Ot8jK/JsECzvx63LX8ZoZhCvbdw1OZkLm/wAjYFbX2gP1+cUz92EV5YhIpkbzzk2USX1
-         uHjw==
-X-Gm-Message-State: AOJu0YxMURFETdtk484XVXhcV6ZmCpZkNBWL1b1bUtKZdw5Jp8hvQTJb
-	F+HyP3ywS1LC/4o0l7fhPRGpo5IK9IovDpcQ/pJDZTfetUTWoFtJtx/rlUoLO+6K
-X-Gm-Gg: AeBDietAEBqK8kPk+BGKObosDGHrLuAa0czD3BzH39e5m7l4j1Cz32kIKILdsqe2Mk5
-	1WhehbvBN8qFnohYejUGojsAZRS+gcZGc68wA/2EuvB8+DxcQbCH7crzGaC+P9uZqWn6CzGSa/S
-	4JdiRlZyyyY254DmqiFz/DPjqy8XJvOI05xan92irPPa+tqMAH9ZgarW3xRnAhtfN/dmUbpfpOV
-	8uAAk/QkwNCDY+3j5gbJ0ZJCmHsDcbjRPEX5EpUCiyYxI4r9EP6aEUn9Pw31TutMFpqjtxAHTsp
-	l/9s01WMRMy17PccOx5VEDD2M35WdKfvudQhl8sU6XJEZ6j/fLX9VY8eSctheIOdFyKaXdUf4c3
-	GqGbHhLec+6MLS2ipy5XM8kdBlOTu3T/1h1o1tq0AJwerRT3WVUvnfH+V9cGagIxA9618pzt81n
-	UbPRju7v7u8b/hqDEN2Z2fu3FuYRNgakXDx+yDNiGXtrlEwWI=
-X-Received: by 2002:a17:90b:3cc3:b0:35b:e52a:6fe5 with SMTP id 98e67ed59e1d1-364c2f35bd5mr2403492a91.5.1777549681669;
-        Thu, 30 Apr 2026 04:48:01 -0700 (PDT)
+        bh=rqIzDI9Lja5uLbVCae/bz6pQlo4KteeX5dUW+7c7hfI=;
+        b=GJQ1vLv8YvziR0N1p1Ci+UNhwcLIlDTiOZJCQDQJfZZJz4mmOHqBkHxlQZW0OJpgRR
+         6V41+6M4gify0TmIA8+Mj6BOyrdBGqdqH0eELh9g/rWV6fohI3aqtyWgHjv3f1rXNTyc
+         6gnFjQJI7v00vqJ3s4pgFelrMovMAqPgRdSiSxVZjecuRTOgxAVPUVnhuTDlHH5nShCH
+         ItbmiW84lGq6gnXIWikZBcD+mU0nyeKPPNxGINiAG1qaCbNEqiHLj40D2KeRgdF9ZE3g
+         Af7etyBzT/4qxZD8umJljAvN5BomvJf/NdrJ474qwXrpTyRtnOo2H5qrKlpUjrCZZj4o
+         yPWw==
+X-Gm-Message-State: AOJu0Yz2JvfzTWih/y2lPaS1ZVu711TvhgTy7IrUYUHcT7eOd1RQ8oPK
+	7iY9Ya5q9baSuCMy8J6TSW6REk/jH4u4k/Nyjq3J1OhzqveXN5igv/ICHNAbjXee
+X-Gm-Gg: AeBDiesC+rCTumTqeI3Nk0LO18lWF//Gu35VnyddJ9z9LdZDQuBMpMkQORimVZU0gQ6
+	TJ2qdCsJAOa7voIE92b2Lkj+1WONJaLN9F2CyqgA0XAE5CJEZlmxAG8eYOAW3dXgA7lAvM1whL4
+	rL968vdMrU7IwR19Jq3ApsPQiAI3eIsx7roh7LgiAoznqACh0/E0nAOXWg+gnuJYZ/rR+d0GqZU
+	IXhHOOPgn6U0MaWcUOi7cuIorg0uaLAdD1gLhGQ18OrpwO6hxp3/sjfqkiFUa14Z7n9IFlj0TvR
+	mI5gkEXspKL//+spOnsu/i8TUTwgNPTy24p0z3Ti2mcPSV3CQe6YqQpdOuQYUek8BdJaZeDdtVB
+	zJIYDLUS8CYLdVOAnRur9zkhlqIThjjqQSzlec5H/UxoMsrmaBBs8G/eDuelLQgwNcy1eY61txW
+	MSuQZMuiC/QSyPusSW8HP+dMjr5E3VXNk4ieub93qj1RV5fio=
+X-Received: by 2002:a17:90b:3cc3:b0:35f:bd51:cf60 with SMTP id 98e67ed59e1d1-364c2f23fd8mr2409049a91.1.1777549679480;
+        Thu, 30 Apr 2026 04:47:59 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.59
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Apr 2026 04:48:01 -0700 (PDT)
+        Thu, 30 Apr 2026 04:47:59 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][whinlatter][PATCH 24/24] wolfssl: patch CVE-2026-5778
-Date: Thu, 30 Apr 2026 23:46:47 +1200
-Message-ID: <20260430114649.4184890-24-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][whinlatter][PATCH 23/24] wolfssl: patch CVE-2026-5772
+Date: Thu, 30 Apr 2026 23:46:46 +1200
+Message-ID: <20260430114649.4184890-23-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
 References: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
@@ -67,75 +67,106 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 11:48:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126758
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126757
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Backport commit from the PR[1] mentioned in the nvd[2]
+Backport commits from the PR[1] mentioned in the nvd[2]
 
-[1]https://github.com/wolfSSL/wolfssl/pull/10125
-[2]https://nvd.nist.gov/vuln/detail/CVE-2026-5778
+[1]https://github.com/wolfSSL/wolfssl/pull/10119
+[2]https://nvd.nist.gov/vuln/detail/CVE-2026-5772
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../wolfssl/files/CVE-2026-5778.patch         | 38 +++++++++++++++++++
- .../wolfssl/wolfssl_5.8.0.bb                  |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
+ .../wolfssl/files/CVE-2026-5772-1.patch       | 25 +++++++++++++
+ .../wolfssl/files/CVE-2026-5772-2.patch       | 35 +++++++++++++++++++
+ .../wolfssl/wolfssl_5.8.0.bb                  |  2 ++
+ 3 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-2.patch
 
-diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-1.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-1.patch
 new file mode 100644
-index 0000000000..b640b41bd0
+index 0000000000..cc285ed58b
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5778.patch
-@@ -0,0 +1,38 @@
-+From 0eee2c2d172a28dc9159211d0d22323c980a48f4 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-1.patch
+@@ -0,0 +1,25 @@
++From 9fe2213ba1fd8a05f7fa9b95fa940530b445bae9 Mon Sep 17 00:00:00 2001
 +From: Kareem <kareem@wolfssl.com>
-+Date: Thu, 2 Apr 2026 16:41:55 -0700
-+Subject: [PATCH] Add sz check to ChachaAEADDecrypt to prevent potential
-+ underflow.
++Date: Wed, 1 Apr 2026 11:28:45 -0700
++Subject: [PATCH] Exit MatchDomainName if pattern or string length reach 0.
 +
-+Thanks to Zou Dikai for the report.
-+
-+(cherry picked from commit 5b6b138964058ab8d30474bc9fdfb5ffcb3a4726)
-+
-+CVE: CVE-2026-5778
-+Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/5b6b138964058ab8d30474bc9fdfb5ffcb3a4726]
++CVE: CVE-2026-5772
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/1274c7b5e7e9e28d88caf60662f6f9624bf834b7]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/internal.c | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
++ src/internal.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/src/internal.c b/src/internal.c
-+index 6af03cbf0..40d1dd7cc 100644
++index ccfecc235..1c217b902 100644
 +--- a/src/internal.c
 ++++ b/src/internal.c
-+@@ -19310,10 +19310,15 @@ int ChachaAEADDecrypt(WOLFSSL* ssl, byte* plain, const byte* input,
-+     byte tag[POLY1305_AUTH_SZ];
-+     byte poly[CHACHA20_256_KEY_SIZE]; /* generated key for mac */
-+     int ret    = 0;
-+-    int msgLen = (sz - ssl->specs.aead_mac_size);
-++    int msgLen = 0;
-+     Keys* keys = &ssl->keys;
-+     byte* seq = NULL;
++@@ -12898,7 +12898,7 @@ int MatchDomainName(const char* pattern, int patternLen, const char* str,
++     if (pattern == NULL || str == NULL || patternLen <= 0 || strLen == 0)
++         return 0;
 + 
-++    if (sz < ssl->specs.aead_mac_size) {
-++        return BAD_FUNC_ARG;
-++    }
-++    msgLen = (sz - ssl->specs.aead_mac_size);
++-    while (patternLen > 0) {
+++    while (patternLen > 0 && strLen > 0) {
++         /* Get the next pattern char to evaluate */
++         char p = (char)XTOLOWER((unsigned char)*pattern);
++         if (p == '\0')
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-2.patch b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-2.patch
+new file mode 100644
+index 0000000000..3ca26a8d9e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/CVE-2026-5772-2.patch
+@@ -0,0 +1,35 @@
++From 89938195b946f709f40f653d90ce215f868c7d79 Mon Sep 17 00:00:00 2001
++From: Kareem <kareem@wolfssl.com>
++Date: Wed, 1 Apr 2026 11:50:17 -0700
++Subject: [PATCH] Rework check to avoid changing existing logic.
++
++CVE: CVE-2026-5772
++Upstream-Status: Backport [https://github.com/wolfSSL/wolfssl/commit/90d631232308a59a03f6f6f455f9ac373db7af3d]
++Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
++---
++ src/internal.c | 5 ++++-
++ 1 file changed, 4 insertions(+), 1 deletion(-)
++
++diff --git a/src/internal.c b/src/internal.c
++index 1c217b902..6af03cbf0 100644
++--- a/src/internal.c
+++++ b/src/internal.c
++@@ -12898,7 +12898,7 @@ int MatchDomainName(const char* pattern, int patternLen, const char* str,
++     if (pattern == NULL || str == NULL || patternLen <= 0 || strLen == 0)
++         return 0;
++ 
++-    while (patternLen > 0 && strLen > 0) {
+++    while (patternLen > 0) {
++         /* Get the next pattern char to evaluate */
++         char p = (char)XTOLOWER((unsigned char)*pattern);
++         if (p == '\0')
++@@ -12964,6 +12964,9 @@ int MatchDomainName(const char* pattern, int patternLen, const char* str,
++                 wildcardEligible = 0;
++             }
++ 
+++            if (strLen == 0)
+++                return 0;
 ++
-+     #ifdef CHACHA_AEAD_TEST
-+        int i;
-+        printf("input before decrypt :\n");
++             /* Simple case, pattern match exactly */
++             if (p != (char)XTOLOWER((unsigned char) *str))
++                 return 0;
 diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-index 3b3db9ad6f..0f1fe43d79 100644
+index 17b0960c47..3b3db9ad6f 100644
 --- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
 +++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_5.8.0.bb
-@@ -36,6 +36,7 @@ SRC_URI = " \
+@@ -34,6 +34,8 @@ SRC_URI = " \
+     file://CVE-2026-5446-1.patch \
+     file://CVE-2026-5446-2.patch \
      file://CVE-2026-5447.patch \
-     file://CVE-2026-5772-1.patch \
-     file://CVE-2026-5772-2.patch \
-+    file://CVE-2026-5778.patch \
++    file://CVE-2026-5772-1.patch \
++    file://CVE-2026-5772-2.patch \
  "
  
  SRCREV = "b077c81eb635392e694ccedbab8b644297ec0285"
