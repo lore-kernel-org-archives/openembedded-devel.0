@@ -2,158 +2,123 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B412ACD13D2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC1FBCD13DA
 	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 11:47:13 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.18367.1777549630898553615
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18173.1777549625012814876
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2026 04:47:10 -0700
+ Thu, 30 Apr 2026 04:47:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=IcyaMiyf;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-364ad762ef8so481083a91.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:47:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=fCJ3+9aQ;
+ spf=pass (domain: gmail.com, ip: 209.85.216.43, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-35d971fb6f1so859321a91.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 04:47:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777549630; x=1778154430; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777549624; x=1778154424; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xKdwbkhPuFQ0MyhsfvWL/5UpZi2aDcymWWrgH+1Gaf8=;
-        b=IcyaMiyfY5RgfesNBqR/gpxOgrlZQHqg3QL7Kt/Xdebc/rU7Q3Y2OdrqOx4ijPm8zY
-         SJ3i8KLPju5k5xaQsRc76rNz1Q1FLwFDr6zoF4YN5VNusxyOeygJMuzI8AArGcFUFbTU
-         CF8KTsaAPmmbkVITATX1mulxKGBzQ+hl/PHcXNVO24UgQQo1V7BMxZsYOQhf48BTqFSG
-         SL510biBLMCTILZqnJ9WediQDbauY+pbldTpYhxpSj2hti9XVurnkLOGDbff2ZVx4rLS
-         g7noZEmK9N+MPn6OkAu+2uGNAkdbU8jFl5j32iMWlLwUDhZgjr5bXgaEBuEoGQtSiEd9
-         E48g==
+        bh=hmyuziv4Ad/cgRnrNFV9ufGFGHXw55xV9lVNjH+vSCc=;
+        b=fCJ3+9aQUoz2rW0xp2E53akYVW2LnRXUttywn8wPtsjrW2e5wRsiMkVPSHb7FwLtWH
+         RLz88WFSr4YTwCmh0xrDOUd8XBUqJA9IDprqPeyOBhJox3COQDQl7NUuoWl8sjp3jJZq
+         MzmIERYwWRnc6BHzv3gkLxnOAPFejDBPA7gepvCuKo4M69sUrexmn4gB0oCEgFClVKVw
+         LsgnSFwzEDM2ELCwL3QjYAnU0WWOFxSch03ovadohPrHx/nz5q9eecD+gkRy154p+a2A
+         MhJkBGzSqB0lexVwLfHLazPid4CUJ6zmaFQIqSm6hJbP5J3Eh1Fs8U3oiDbfPtuYuzEH
+         WAfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777549630; x=1778154430;
+        d=1e100.net; s=20251104; t=1777549624; x=1778154424;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=xKdwbkhPuFQ0MyhsfvWL/5UpZi2aDcymWWrgH+1Gaf8=;
-        b=mfwqL9hBDuNTC48sYbvmodEcYYXdS8GeZfRgZoYJUjzA0hihl0ko1NppRcajrDB7AD
-         T6skTKJ+3HEpW1Gs2z0YysTD1hJF9K69sbfTJPNLweMFT51gkF8F/hO4usF4uiy/hhHB
-         OB9lmZ40PSySKy4aGJeTHWvagOXUH/46yEYny+SdEF6dcFFErAYI4ill5yn0iM3oQrCv
-         t1/TQasS3yNijHrU+ukWowJAtmyEYBnJCGnbG3aTrFuYKA5Qcs4Y8N7hCPFfYp7zH2gD
-         erd5vul8/G0YJ3kiLr4zudohrMXw5M4rIt7Pv1I6n95vootyiavIT05Ku2PopUpTqDxO
-         aljg==
-X-Gm-Message-State: AOJu0YxLslbOzSRqqN/2qB4jBtjbMMlUYm3mVWF6XIPh1nN8/XPdZrXL
-	n1Rkg6o14ovwceWQXrmqZasJjoPw5Smufj8HGbhcF3QScMce48kic8SWQpNilLUB
-X-Gm-Gg: AeBDietW+qsR5tH4A/E3FajHb9SbG1cdSJ4Knh967CtKGhHK7GiC1BDKMMshCXPjKuC
-	eUZSPGnKYgV3UhxkwlsLcsP78swNx4EAQSO4zEOTr8QFG4C/mjvh8dgVf/AeuDkEdGRQKfaVysC
-	XCIeLDGUhGflHCsVGofU8jPEFLJG0kH5yx2fZZCgvILA/AJYA4AQDPzDIE6IS9VBxGNjxipTXjB
-	EohYFyVy0OjXCwX2WWgt4YfgwUAJZVXVdkkTcgG49gezL/qk5emPR2+oddkfn2ELDcJYWpyaa+x
-	ih769hZZITGA3XrYLd7NG+73KFVfWOyoFCP6//xKgkOmUPrOrGwv+Ht7jyNEYW12cvYxpft/VYA
-	WnnZ0J8T4COHi+zXVlTs8hzvmrobx5Fw6aIMr1tI7PtJHvpgtOw9g89FCFtZxPg10Dkfu+FnIZ5
-	LBxBpZZuedAS95OdX+GcHB/XiG99Y8yKJ31zJEv7hSa9IwXKFPg3NnfKF0DQ==
-X-Received: by 2002:a17:90b:5783:b0:35f:be09:1a2b with SMTP id 98e67ed59e1d1-364c30042bcmr2769765a91.10.1777549629917;
-        Thu, 30 Apr 2026 04:47:09 -0700 (PDT)
+        bh=hmyuziv4Ad/cgRnrNFV9ufGFGHXw55xV9lVNjH+vSCc=;
+        b=c+mWGD8M3M4/09Lo4kDZyJyLJNwctddu14+JrqiA1Ll+VIK/dEKixTZCJtIrP6UU/s
+         VpJBR+YPhfUWguYz61v4UGkZYWb5Fi+Q5VI1P0gXHjqi1MwUAGY4GhYToiuIOPqWA0PU
+         u3o4RuOxuBwFVrdOaWf+b2C6qInrrgWghzfC34CupWvR/Hhjlv0E3RgPkbBWqKaK8WqU
+         3zkCMOSzRSVJ8JGEYNyA6BPYPkdfbsixD/I1zzn5tTvCAKpXnn/ZWOIhtRwgODMSjzVl
+         fGmgeUGWw3bkdVZARYfc8y03IPhlFD1LtN9jKL6zguQLvniFzVvKDJ6XBTMbnuzWEncO
+         RROA==
+X-Gm-Message-State: AOJu0YyfAd/HB0M6MtFSzUHZCv5LF9aDZkI3u1oIKnNSUpgekuqP3idn
+	KhpU1s0KyPyosXaU3dsW/fmU+DUHO2HeIsLpJpQ1IjwPnu9b02uWbDaxnuNDP13V
+X-Gm-Gg: AeBDiesQsqBrb8Ax7CgIodYIBtDaHydHzoiAzaUwIyFUSBDV7iaEOOlNtGyIPyB92H0
+	11+tiJ8Rr+b8lqnZlzh8waCrn3mjHydmwG2p5EGFRU3lp8Tk5i9+mpLc2PP0e+xfEh2GQ5aW6jD
+	hZ4rwdI6WmOlCqKQHz94nLO8ptZ/LKaCOHEI5cQ2i0rbZE4m+MjH1gOAcBqKJ/Bpnl/tSHAw58a
+	8IYvYRfbparwSyAWpVdMZ+ysdAi93RkdkZrqtv7Qhj/jHOkOq0bChvKGwKiPgMtpkrLSyh/2zKi
+	F2i+Kmmy7E4jgTlHUWWM6nyuwh+w6U8JiRG9nGbc/9trFtDPm48q3/++4iNEjroXmyEFr27CNPO
+	/4Xg/Ihfc+q6j3SXNTU/9Sp+DuGfk7k1m03P67YaZUJi0cpCcom1IWNsbMPyxAqvCyyIhkZIwNT
+	KSt3NpFmp8+c7rhIkDA94Xr22vJ/hgA+cgD2LmwRQnKs1aSHq8lqitD+r4GQ==
+X-Received: by 2002:a17:90b:51cb:b0:35d:93ff:284f with SMTP id 98e67ed59e1d1-364c312dcd4mr2568069a91.15.1777549624170;
+        Thu, 30 Apr 2026 04:47:04 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.07
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364c3fa0240sm769953a91.5.2026.04.30.04.47.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Apr 2026 04:47:09 -0700 (PDT)
+        Thu, 30 Apr 2026 04:47:03 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>,
+Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][whinlatter][PATCH 4/24] corosync: patch CVE-2026-35091
-Date: Thu, 30 Apr 2026 23:46:27 +1200
-Message-ID: <20260430114649.4184890-4-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][whinlatter][PATCH 2/24] libgpiod: update to v2.2.4
+Date: Thu, 30 Apr 2026 23:46:25 +1200
+Message-ID: <20260430114649.4184890-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
 References: <20260430114649.4184890-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 11:47:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126738
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126736
 
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-35091
+Bug-fix release addressing several issues discovered during an
+AI-augmented security audit. The most severe bug was found in the C
+extension code of the python bindings - which also get an update - but
+there were some memory leaks and integer overflow bugs in the core C
+library as well as in tools and DBus daemon.
 
-Pick the patch that mentions the CVE ID explicitly (it was identified
-by Debian also as the fix[1])
+Full changelog:
 
-[1]: https://security-tracker.debian.org/tracker/CVE-2026-35091
+Bug fixes:
+- fix buffer over-read bugs when translating uAPI structs to library types
+- fix variable and argument types where necessary
+- sanitize values returned by the kernel to avoid potential buffer overflows
+- fix memory leaks in gpio-tools
+- add missing return value checks in gpio-tools
+- fix period parsing in gpio-tools
+- use correct loop counter in error path in gpio-manager
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+Improvements:
+- make tests work with newer coreutils by removing cases checking tools'
+  behavior on SIGINT which stopped working due to changes in behavior of the
+  timeout tool
+
+Also: drop the patch that's now upstream from the recipe.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit 701b22fda35648efc333d6e6e7abd8e70aa49870)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../corosync/corosync/CVE-2026-35091.patch    | 47 +++++++++++++++++++
- .../corosync/corosync_3.1.10.bb               |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-networking/recipes-extended/corosync/corosync/CVE-2026-35091.patch
+ .../libgpiod/{libgpiod_2.2.3.bb => libgpiod_2.2.4.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_2.2.3.bb => libgpiod_2.2.4.bb} (98%)
 
-diff --git a/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35091.patch b/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35091.patch
-new file mode 100644
-index 0000000000..8afa5d6841
---- /dev/null
-+++ b/meta-networking/recipes-extended/corosync/corosync/CVE-2026-35091.patch
-@@ -0,0 +1,47 @@
-+From b9cb461121c8721c94a94309eb345a3c2f9ee9b4 Mon Sep 17 00:00:00 2001
-+From: Jan Friesse <jfriesse@redhat.com>
-+Date: Thu, 2 Apr 2026 09:00:39 +0200
-+Subject: [PATCH] totemsrp: Return error if sanity check fails
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Previously, the check_memb_commit_token_sanity function correctly
-+checked the minimum message length. However, if the message was too
-+short, it incorrectly returned a success code (0) instead of the
-+expected failure code (-1).
-+
-+This commit ensures the appropriate error code is returned when the
-+message length sanity check fails.
-+
-+Fixes: CVE-2026-35091
-+
-+Reported-by: Sebastián Alba Vives (@Sebasteuo / 0xS4bb1) <sebasjosue84@gmail.com>
-+Signed-off-by: Jan Friesse <jfriesse@redhat.com>
-+Also-proposed-by: nicholasyang <nicholas.yang@suse.com>
-+Reviewed-by: Christine Caulfield <ccaulfie@redhat.com>
-+
-+CVE: CVE-2026-35091
-+Upstream-Status: Backport [https://github.com/corosync/corosync/commit/a16614accfdb3481264d7281843fadf439d9ab1b]
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ exec/totemsrp.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/exec/totemsrp.c b/exec/totemsrp.c
-+index 35bf971..94d6c21 100644
-+--- a/exec/totemsrp.c
-++++ b/exec/totemsrp.c
-+@@ -3811,10 +3811,10 @@ static int check_memb_commit_token_sanity(
-+ 		log_printf (instance->totemsrp_log_level_security,
-+ 		    "Received memb_commit_token message is too short...  ignoring.");
-+ 
-+-		return (0);
-++		return (-1);
-+ 	}
-+ 
-+-	addr_entries= mct_msg->addr_entries;
-++	addr_entries = mct_msg->addr_entries;
-+ 	if (endian_conversion_needed) {
-+ 		addr_entries = swab32(addr_entries);
-+ 	}
-diff --git a/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb b/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-index 07d9333ec8..7ccccefed5 100644
---- a/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-+++ b/meta-networking/recipes-extended/corosync/corosync_3.1.10.bb
-@@ -9,6 +9,7 @@ inherit autotools pkgconfig systemd github-releases
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.3.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
+similarity index 98%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_2.2.3.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
+index a23d65bcaa..4617f5643b 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.3.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
+@@ -13,7 +13,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}-2.x:"
  
- SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/${BP}.tar.gz \
-            file://corosync.conf \
-+           file://CVE-2026-35091.patch \
-            "
- SRC_URI[sha256sum] = "be361c827f99b215b3bd3fa2fb071c03dac6831c2a351963d938caef62604bc8"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ SRC_URI += "file://gpio-manager.init"
+ 
+-SRC_URI[sha256sum] = "70012b0262e4b90f140431efa841ca89643b02ea6c09f507e23cec664a51b71a"
++SRC_URI[sha256sum] = "13207176b0eb9b3e0f02552d5f49f5a6a449343ce47416158bb484d9d3019592"
+ 
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = " \
 
