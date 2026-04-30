@@ -1,141 +1,100 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62A08CD13D3
-	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 08:14:18 +0000 (UTC)
-Received: from mailrelay-egress16.pub.mailoutpod3-cph3.one.com (mailrelay-egress16.pub.mailoutpod3-cph3.one.com [46.30.212.3])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15203.1777535913281799591
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B84DFF8875
+	for <webhook@archiver.kernel.org>; Thu, 30 Apr 2026 10:49:36 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17424.1777546172057976680
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Apr 2026 00:58:33 -0700
+ Thu, 30 Apr 2026 03:49:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: no key for signature: lookup rsa2._domainkey.embetrix.com on 127.0.0.53:53: no such host" header.i=@embetrix.com header.s=rsa2 header.b=MbMpiDiG;
- dkim=fail reason="dkim: no key for signature: lookup ed2._domainkey.embetrix.com on 127.0.0.53:53: no such host" header.i=@embetrix.com header.s=ed2 header.b=9IR0Rws2;
- spf=none, err=permanent DNS error (domain: embetrix.com, ip: 46.30.212.3, mailfrom: ayoub.zaki@embetrix.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1777535911; x=1778140711;
-	d=embetrix.com; s=rsa2;
-	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
-	 from;
-	bh=FE6mgqz7ZtcUwla3lA8goxgLk5hqEDp4jKInSqJ52TU=;
-	b=MbMpiDiG9jjZb5PV6/dr594gj6XjyehuhTN2JT6/4/MsaqbDRqB2up5uVE4PZREgYBfDYw6tS8NFv
-	 1YVhLxIHhdKWxPPLDGnYXhisKTX1ypPvoT+XnZaTVrHraRqEKPEBn2J35T4Q5x4LVKiZz7vkTrunIa
-	 qdM/ZcYPNloQwDt90eTCUJO2qtCfO2znfPf6yxWzS1/5tDlSnrz1NJTFVdo7HQMUbWCAQV1Xj34a/l
-	 q9/hUr9448NXNhvHrnfv+daN14zuEfIVZYq03Se6jom6jiyuE8uUT+QvczqZsM7FXi+IHcLH1Xt1pp
-	 VuHBBem1HPEOeef1lIcnGh248MMTN1w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1777535911; x=1778140711;
-	d=embetrix.com; s=ed2;
-	h=content-transfer-encoding:mime-version:message-id:date:subject:cc:to:from:
-	 from;
-	bh=FE6mgqz7ZtcUwla3lA8goxgLk5hqEDp4jKInSqJ52TU=;
-	b=9IR0Rws2OFOKI9sQ0M0hVHLPSG0QSB2exlV+M/1ZMUzzq9r0EVEz3qYrsA2OWYrCD34JuCDkOBeFr
-	 6LPzjSPCg==
-X-HalOne-ID: 5ff3b6f2-446a-11f1-a3eb-c9fa7b04d629
-Received: from xps-13.fritz.box (dynamic-2a02-3102-8c10-1ae0-9bb0-8199-2e56-5c1b.310.pool.telefonica.de [2a02:3102:8c10:1ae0:9bb0:8199:2e56:5c1b])
-	by mailrelay1.pub.mailoutpod3-cph3.one.com (Halon) with ESMTPSA
-	id 5ff3b6f2-446a-11f1-a3eb-c9fa7b04d629;
-	Thu, 30 Apr 2026 07:58:30 +0000 (UTC)
-From: "Ayoub Zaki" <ayoub.zaki@embetrix.com>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=PK7aDdvg;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1777546172; x=1809082172;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=aQgkI9LKpjuRPqeP0/SzZiIZHKKjP7idim3+JKcn/Ic=;
+  b=PK7aDdvg9fQnokV/spXK5kNkaJkYZi916S97ypdtjPA2lMhKUImK7hyv
+   QXb5ITkdsQUOl3NIQ73gEymEnzWsFFfOEyCWqgVX+2qB5zAqfCIjyyYOq
+   628/I8yXVUegZNP5JVOivgXn/Ft0d/oyUZ8HHopvmxJwmXRv8BlQUlyhd
+   hpxPLYNqXD93+kCPqPHuuiRFjnwCCniNDHKKYDBVghr/K6RLBEBjl0KPR
+   h8fTMCjFnQhYyF81BqIcMPcpjjIH+lwcS96Ix3pvNAjLmoC6T1SWPkfUY
+   Y8fApWNVzFdN+e1XbPSi/bDMr4QHrrmo2zdSx4f0b1rZNFAJ4PH3182H+
+   A==;
+X-CSE-ConnectionGUID: +HEcxOH8SA+d3Iawr4nmyg==
+X-CSE-MsgGUID: FFsVSy8nQN2ACgmgfypEAQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11771"; a="238552622"
+X-IronPort-AV: E=Sophos;i="6.23,207,1770562800"; 
+   d="scan'208";a="238552622"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Apr 2026 19:49:30 +0900
+Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 1BEE81002B86
+	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:30 +0000 (UTC)
+Received: from az2uksmom1.o.css.fujitsu.com (az2uksmom1.o.css.fujitsu.com [10.151.22.202])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id C962018002CD
+	for <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:29 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
+	by az2uksmom1.o.css.fujitsu.com (Postfix) with ESMTP id 557641801130;
+	Thu, 30 Apr 2026 10:49:27 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ayoub Zaki <ayoub.zaki@embetrix.com>
-Subject: [meta-networking][PATCH] cloudflared: add initial recipe for 2026.3.0 version
-Date: Thu, 30 Apr 2026 09:58:29 +0200
-Message-ID: <20260430075829.15293-1-ayoub.zaki@embetrix.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/64] 7zip: upgrade 26.00 -> 26.01
+Date: Thu, 30 Apr 2026 18:48:20 +0800
+Message-ID: <20260430104924.1106-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 08:14:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126670
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Apr 2026 10:49:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126671
 
-Add initial recipe for Cloudflare Tunnel client (cloudflared).
-The upstream source vendors all Go dependencies so no go-mods.inc
-is needed.
-Includes systemd service with token-based authentication
-via /etc/default/cloudflared.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
+Changelog:
+=============
+- linux version of 7-Zip can use huge pages (2 MB pages). It can increase
+  compression speed for 10% for 7z/xz/LZMA/LZMA2 compression.
+- new -spo[d|c|r] switch specifies the path generation mode for the output
+  directory for archive extraction. The output directory path is generated from
+  the path specified in the -o{dir_path} switch and the name of the archive being
+  unpacked.
+- some bugs were fixed.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../cloudflared/cloudflared_2026.3.0.bb       | 36 +++++++++++++++++++
- .../cloudflared/files/cloudflared.service     | 15 ++++++++
- .../cloudflared/files/default                 |  2 ++
- 3 files changed, 53 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb
- create mode 100644 meta-networking/recipes-connectivity/cloudflared/files/cloudflared.service
- create mode 100644 meta-networking/recipes-connectivity/cloudflared/files/default
+ meta-oe/recipes-extended/7zip/{7zip_26.00.bb => 7zip_26.01.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/7zip/{7zip_26.00.bb => 7zip_26.01.bb} (98%)
 
-diff --git a/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb b/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb
-new file mode 100644
-index 0000000000..f0b8530a69
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cloudflared/cloudflared_2026.3.0.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Cloudflare Tunnel client"
-+DESCRIPTION = "cloudflared is the command-line client for Cloudflare Tunnel, \
-+a tunneling daemon that proxies traffic from the Cloudflare network to your origins."
-+HOMEPAGE = "https://github.com/cloudflare/cloudflared"
-+SECTION = "networking"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-+
-+SRC_URI = "git://github.com/cloudflare/cloudflared.git;protocol=https;branch=master;destsuffix=${GO_SRCURI_DESTSUFFIX} \
-+           file://cloudflared.service \
-+           file://default \
-+           "
-+SRCREV = "d2a87e9b93456ad7f82417400f4209d513668487"
-+
-+GO_IMPORT = "github.com/cloudflare/cloudflared"
-+GO_INSTALL = "${GO_IMPORT}/cmd/cloudflared"
-+GO_LINKSHARED = ""
-+SRCREV_SHORT = "${@d.getVar('SRCREV')[:8]}"
-+GO_EXTRA_LDFLAGS = "-X main.Version=${PV}-${SRCREV_SHORT}"
-+
-+inherit go-mod systemd
-+
-+SYSTEMD_SERVICE:${PN} = "cloudflared.service"
-+
-+do_install:append() {
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 ${UNPACKDIR}/cloudflared.service ${D}${systemd_system_unitdir}/cloudflared.service
-+    install -d ${D}${sysconfdir}/default
-+    install -m 0644 ${UNPACKDIR}/default ${D}${sysconfdir}/default/cloudflared
-+}
-+
-+FILES:${PN}-src += "${libdir}/go/src"
-+
-+# Fix shebang and QA Issue with scripts with /bin/bash and /usr/bin/python3
-+INSANE_SKIP:${PN}-dev = "file-rdeps"
-diff --git a/meta-networking/recipes-connectivity/cloudflared/files/cloudflared.service b/meta-networking/recipes-connectivity/cloudflared/files/cloudflared.service
-new file mode 100644
-index 0000000000..decaf0e329
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cloudflared/files/cloudflared.service
-@@ -0,0 +1,15 @@
-+[Unit]
-+Description=cloudflared
-+After=network-online.target
-+Wants=network-online.target
-+
-+[Service]
-+Type=notify
-+DynamicUser=yes
-+EnvironmentFile=/etc/default/cloudflared
-+ExecStart=/usr/bin/cloudflared --no-autoupdate tunnel run --token ${TUNNEL_TOKEN}
-+Restart=on-failure
-+RestartSec=5s
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-connectivity/cloudflared/files/default b/meta-networking/recipes-connectivity/cloudflared/files/default
-new file mode 100644
-index 0000000000..1e00173af6
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cloudflared/files/default
-@@ -0,0 +1,2 @@
-+# Cloudflare Tunnel token from the dashboard
-+TUNNEL_TOKEN=
+diff --git a/meta-oe/recipes-extended/7zip/7zip_26.00.bb b/meta-oe/recipes-extended/7zip/7zip_26.01.bb
+similarity index 98%
+rename from meta-oe/recipes-extended/7zip/7zip_26.00.bb
+rename to meta-oe/recipes-extended/7zip/7zip_26.01.bb
+index 85219b5052..a3e124518a 100644
+--- a/meta-oe/recipes-extended/7zip/7zip_26.00.bb
++++ b/meta-oe/recipes-extended/7zip/7zip_26.01.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/ip7z/7zip.git;protocol=https;branch=main;tag=${PV} \
+            file://0001-Remove-treating-warning-as-errors.patch \
+            file://7z_wrapper.sh \
+            "
+-SRCREV = "839151eaaad24771892afaae6bac690e31e58384"
++SRCREV = "8c63d71ff886bda90c86db28466287f977374237"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/ip7z/7zip/releases/latest"
+ 
 -- 
 2.43.0
 
