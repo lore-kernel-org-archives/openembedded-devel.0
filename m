@@ -2,195 +2,192 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE5DECD3424
-	for <webhook@archiver.kernel.org>; Sat,  2 May 2026 21:25:53 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13966.1777757151504590584
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EE57CD13DA
+	for <webhook@archiver.kernel.org>; Sat,  2 May 2026 23:03:04 +0000 (UTC)
+Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15233.1777762978810339819
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 May 2026 14:25:51 -0700
+ Sat, 02 May 2026 16:02:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=j6OQxrYO;
- spf=pass (domain: gmail.com, ip: 209.85.210.52, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-7dcd17e19b6so1703494a34.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 14:25:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777757151; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=X82rzikM;
+ spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-7dcd17e19b6so1728515a34.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 16:02:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1777762978; cv=none;
         d=google.com; s=arc-20240605;
-        b=SK7joX4QOvvt2/PJO/yrX9r8VHImIT5sItCaLn8cTzMIoXyV2Y7peQR+7ZF6Xp1J+V
-         sHSoOtTCVF1Y5NEpKzCZ7QAWHnfpmnBnq/2aU83PM4sh5/ji3U10wo8KcVV7+nLjCo8V
-         ldzn/oJ8f2fzJ+IA0/vhXa5iWQ9LWDTXgTbF0eOCBWXuKy/XXxQdYZzPEK6kV9r7uYKJ
-         Bty0HHzZpSmgvmEB7cWT/ExJ70MezDVvSMfTTcmNiu3IEU/IshE6izgk+HbGS8hIjUI/
-         02jmb+ZQYytJ0BqCNdPoD+eVP8pW/s5o0N6Ru0YJq7ZA9wyfh3J34IjNphWr72F2NtAW
-         6mJg==
+        b=lZxVsJAFy7WRAc+gXeNLpesCoUWrvy2U9zOA5v4+MlNvwyPxLLPkAW8XRbrmGMUf/4
+         npc8YEVLWdEWdiAuBFefd9Vrurw3JNPoIY6YwzD42zD533yXPAEgXjta0qRYVgSnZvJh
+         AkyntyPTUgdlpMKrP5lccGxMv+Lr8ytrDhSGeErx+aFMEvFdyd3OFwuILIA8Jc3+wr/2
+         eMFR37BWpOVn51UA+n7HgRbVAFp8KOFDDVF83vQLKcuewQ0qvS5SsxWX5h1Yu7egsnAK
+         X+6iJXTAOUtYPNLRvrYmyxdOeukufwVGn1nhgYm6eFOXhchJ9VDDhY4uiy+4GF7pbuVo
+         Kkfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=QK1/bOyHrQZ/KXMzKRw+oMy/jWv6bOfT2l3IfciXUt8=;
-        fh=/Zfoi4o9G9NEfOtGJ0LSUrfiVhZcuLLzOVZQmzCL8qM=;
-        b=hjVjCwXvq122K8IlQsMI4DSivlxytdLctreNlTARzFpZ7FgMzjDqBRx01E1dnOjWYk
-         kvjfI2JQP1avaWyz7IYUHASmcbrvdETAPsTuX/cDaYSYdcfS6gOzoDA+XauLlQBhi0Lz
-         pzSEYYb9S6duzZ1aar3loLhS7TR3pvC2fksccTQk0YNULiFvjoRvekPyynskEqJoAzv6
-         6IQ+DPzTbWIEK2XY0SuBZxONufMsM6iNgovJwtq8YRdi4Tbhy9d2MtZg/+ODneffhMG5
-         ckV3PhsDI7Z9kI1cyR3rk6NG3B4tUVdafKLiTkdl/I2VT0G9etPabJQqVa5m1W6LBUh8
-         hALw==;
+        bh=+8A8tQgK9gy51WErAQ7ppTXX7j2G/ACWNiWJUIKpcFw=;
+        fh=iuPgE0vqCia+ULEOAROykHtInCWNdKWkXhHUfxtB2n4=;
+        b=g1/jhR1uGWNngB8wHmRD5FBL7mhv1G4U4/S+aXr+zUUSDepq+td2iAOklCDWzj/6ro
+         J4SwOHG9tHKYECf4VYLaxSiiBPdNz1Qnrqxr5hdiBZAl2IMXTncmVgh0wwpJBOlOvZlf
+         BoE0h0kKVET3XPs/PZS14kgVCzrOStmMf9jFjHBYCVOAeDUXD/GqOeBKv22rwGyEi0Mb
+         mPCdsnynOiLpp3N7H5+YjfyomC0wHrChOm3+CS+xlsqGlkywpTaM7Sblt3DHf8fQg58u
+         x+8N5Z5yq4THattq1I10EDv1apss9zQ4hxS4csGIGXDYG+RtH1RK844tI8wkug6kE+y8
+         7U/Q==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777757151; x=1778361951; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777762978; x=1778367778; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=QK1/bOyHrQZ/KXMzKRw+oMy/jWv6bOfT2l3IfciXUt8=;
-        b=j6OQxrYOyvxpAnGfLD1RYlr7+vUedhEkmNtNwsjsYMQfYINtSurZqpkQ7iV6mdpevm
-         QPAvccMDkCEWIxkSevntuGUDBXsNemqXwX1bWTgQEVQkLPtUWeEfc2v67fQ2sk6X8Lbe
-         TbDfvsHF49FcEjFo5nbYSInP2pLd5F+FAOjc5qaAWspYNC/ukt5rVh/pfBEZgPPuTHy6
-         1rQcZi7QAUT1ucFSjDsPgliTvgncU3YpdjL8SvxLnH/g+ycT86gqt5tdZDDvr3AMVLIH
-         /mvmIJah+LDpZS/Gd/KYDC9NdKv0tg3OBc8Jyp84vb6koEusikUUsiagujAKzHSClDD4
-         18Bg==
+        bh=+8A8tQgK9gy51WErAQ7ppTXX7j2G/ACWNiWJUIKpcFw=;
+        b=X82rzikMzQo0xlwiup4qcqV+1HYN9Zk8WmYOtEm+XFJieeUkRUdbhUAqx1BF5XAE7h
+         z9RfINT0Hm8ZMsAsy3zO8QqdvtrUp5H2LvWrUZo4BTExRs+YnWITsAlzYpDjZeXFs9eV
+         Pkd7NLOJank1Qqpcug/S184CrH8AIrMNySL9D4qfCt5V0x8Wpe+idCeTwxEXeqVsmR8A
+         7Khn5BhQ8NsEZvGn0udTQFegyUyEW9pj71B/YNjNGLQjOzC6z1ChLnxgyeeIOOy8LXfN
+         LJx2HqO0S6UbACoaQf4RHaQdwWZJxgDll101oa529MqRvG1Hfr2jWqyeGJjHvk1aWoTn
+         vGvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777757151; x=1778361951;
+        d=1e100.net; s=20251104; t=1777762978; x=1778367778;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=QK1/bOyHrQZ/KXMzKRw+oMy/jWv6bOfT2l3IfciXUt8=;
-        b=mKiv9e4geQDpboIru7hfGZ3Bp0k0KPqPZClhYT8EVtHjCmIsat07eyKbesFU9O8qAl
-         Tg0GDPfGvNaFseDtkRtMU6UZ7uBsFIqvcpPSW0hVJWE5BgjfzhXOBCmL8Br65/3/6TR+
-         QxPddyfjIN9xtUURqLijiM3uSddGR8ibDUuKC6Z852OtO3hyLybN8yFbTH7yTD4Z3XRK
-         bemyrovI4XjYFYgI9NFXu+EWyQsrUUo69Y5uB0DakuzBrEljmgK3po+u3gak7EU3s6u3
-         ZN+AAytUaqU1pUfiuDhPuj2qCiEmv0jJ487cIlQD3clngzNq4sDRG2Py8f7Ui5cWARaN
-         kPag==
-X-Gm-Message-State: AOJu0Yw/f9dtoMQidczlI9LQucrRZ8anNKiIPCkQpvaCUqtpI5gSjT/c
-	LPqMO9lQ7W6FvwzA5IDC4g09FrW3h9rNsS24YwpaKM1by844o06aTsLE30fCQuKhLaOloqIIQNN
-	BvYx1q82CmT/AAkD98suavPnaPtFz0Eg=
-X-Gm-Gg: AeBDiev/mz3Cs1/vsL0sDQXl2wfO0w0/gAP4GJxGcUx39ldeCKU4jVH5hhLDKlJG8tm
-	IaP2bvSpY6UqFzZPpnLGFbxPbHLoaluWNQWS0OcWSgTQydstkgNRD9/TjWqkYgP4aYccfg1lvdP
-	paPXZNmcwleuh1xI2vTYAoQD6qUG7oZuMS4u/xEDsUU8DQOPVD/ZHTlrLDEUs20VZQRDAHGn+nQ
-	S9mrHejOPEzkdz5rK6MazgYVcU/kDnNhw9lSN+qxeejWtLBGnR+MYAt9NERKnpVbT3xNjl/Qwot
-	GTJKja/RwIzNzi73gbsB
-X-Received: by 2002:a05:6830:3703:b0:7de:495a:cf80 with SMTP id
- 46e09a7af769-7dee13b0dd0mr2984364a34.16.1777757150661; Sat, 02 May 2026
- 14:25:50 -0700 (PDT)
+        bh=+8A8tQgK9gy51WErAQ7ppTXX7j2G/ACWNiWJUIKpcFw=;
+        b=E01FAA3L9tQNPFJj2Qbu5CpKqm+eMDYyHRGGoH0EdZW7O00mpYSXdB2cN7RNmYaH4S
+         AnvaGW6KWUUD3pLmuN0hiVMEy0NsxWg6T0H9vRRWpCMhR/YkT0lOcP8641qJ3H2V8qal
+         8xjM3k66y8HTnb2q9zGLHOd3NORXgeA9/bIeS7E1ZRrGTn48+0cZRvapFtmwlBDMnC9k
+         +A0UALlYZGJhQCUfxULbLHm2fDhIC+p174v+J2N+EVdYE1Lo5jLkYIGYFPRZQpDQ1k/H
+         u57xdJIum1tvBCWBV+Zs/igOGKp/zJwRiPdEHWkJ9KPx1sqJp1hGsEm727o+Q7FVrb9U
+         /mpA==
+X-Gm-Message-State: AOJu0YzqDpZLl5Pnn8kd5Y6u5A6RxVQH92fyAsP+TwmWlm0zKFb826KV
+	n2uFewZ9ic6XtI/DVdv+xJC14d9i4E4Le4nor9t5LHfn2ifWMXFwVJdygWv0CSjNBbTs4FG8w2v
+	ECbAm7p+1KnouxPPJDutQ3TU7ZP1Itjk=
+X-Gm-Gg: AeBDieukWtb/s4PD9eZ6B1J3UC9eyb0SXGUpjLV1Uy5Ie4GGsNRl+WErKiL07f3U4R4
+	atU819oh6EO9+T43scTp4VAOBPQGFMqo2p1ihosLWfBDzU9etp4VNwcYsHW26ML1KIS0QU0Q+bz
+	tIm3B5tNGlfuC+3f4zhz7nGmsQKDeiEpIwZGxUGe4iQZARLUVpf1qEKq/oSbyzI8/fGd1EcXrII
+	A/8sPy1EefGkhMhvsTKHWWpeqyNX51qXhCxkDKstENSfW6UNGbkfW/+Vq7ZYgKwDnOwH/v2YDBY
+	qsxOa2GpJktxlw0jkNy7
+X-Received: by 2002:a05:6820:2214:b0:696:1450:ff14 with SMTP id
+ 006d021491bc7-69697c64d5fmr2058310eaf.37.1777762977805; Sat, 02 May 2026
+ 16:02:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260502075925.1861299-1-ankur.tyagi85@gmail.com> <c7d17e42-e8bd-4152-a0c2-91b38cb52399@gmail.com>
-In-Reply-To: <c7d17e42-e8bd-4152-a0c2-91b38cb52399@gmail.com>
+References: <20260502205501.185550-1-tim.orling@konsulko.com> <20260502205501.185550-3-tim.orling@konsulko.com>
+In-Reply-To: <20260502205501.185550-3-tim.orling@konsulko.com>
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Sun, 3 May 2026 09:25:39 +1200
-X-Gm-Features: AVHnY4IuRLaDQKvcG8xLVr6e8cpSkPvo9kY0AIWE-JFO7FBDa4hCdxdRJpmSvSQ
-Message-ID: <CADySD0EpRMD709L5uFQf+72ULcokCHWOcJoMtjL4k7Z8BjNjKQ@mail.gmail.com>
-Subject: Re: [oe][meta-webserver][PATCH 1/1] nginx: upgrade 1.29.7 -> 1.30.0
-To: Gyorgy Sarvari <skandigraun@gmail.com>
+Date: Sun, 3 May 2026 11:02:46 +1200
+X-Gm-Features: AVHnY4JzqCcn2AZwWzIRcAI7LLA95PN-uSJ2aMQiqhCZkVuxtuWU6Vi8iV4vUcA
+Message-ID: <CADySD0F5+T_eiLstknJfbOfkBuoUu3fMoE=Xd91PQHrtL8U4Mw@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH 3/3] nginx: upgrade mainline 1.29.7
+ -> 1.29.8
+To: tim.orling@konsulko.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 21:25:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126767
+ <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 23:03:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126768
 
-On Sat, May 2, 2026 at 8:17=E2=80=AFPM Gyorgy Sarvari <skandigraun@gmail.co=
-m> wrote:
+On Sun, May 3, 2026 at 8:55=E2=80=AFAM Tim Orling via lists.openembedded.or=
+g
+<tim.orling=3Dkonsulko.com@lists.openembedded.org> wrote:
 >
-> On 5/2/26 09:59, Ankur Tyagi via lists.openembedded.org wrote:
-> > From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> >
-> > 1.30.0 stable version has been released, incorporating new features and=
- bug
-> > fixes from the 1.29.x mainline branch (https://nginx.org/en/CHANGES-1.3=
-0)
-> >
-> > Set v1.30.0 branch as default preference.
-> >
-> > Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-> > ---
-> >  meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb |  5 +++++
-> >  meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 10 ----------
-> >  meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb |  6 ++++++
+> From: Tim Orling <tim.orling@konsulko.com>
 >
->
->
-> I think rather the 1.28 recipe should be deleted with this patch. Odd
-> versions are mainline/bleeding edge releases, and even versions are
-> stable ones. AFAIK 1.28 isn't supported anymore with the release of
-> 1.30. (I'd expect that there will be a 1.31 release in a week or two, as
-> a continuation of the 1.29 series)
+> 2026-04-07
+> nginx 1.29.8 is the final release of the 1.29.x mainline branch,
+> published a week before the 1.30.0 stable cut on 2026-04-14. After
+> this point the 1.29.x branch is closed; new development will continue
+> on a future 1.31.x mainline.
 
-Since 1.28 was the last stable branch, I suspect the majority of the
-users will be using it.
-Until 1.31 is released, I wanted to keep both stable versions to allow
-time for the transition.
+There isn't any difference between 1.30.0 and 1.29.8 except[1].
+Don't see benefit in adding both versions.
 
-Once we add 1.31 support, then IMO it will be appropriate to drop
-1.28. Thoughts ?
+There is a discussion already going around this[2], will be good to
+hear your thoughts.
+
+[1]https://github.com/nginx/nginx/commit/654367cb11b08b0a5a67b08d5e1ff058de=
+8b13c3
+[2]https://lists.openembedded.org/g/openembedded-devel/message/126762
+
+cheers
+Ankur
+
+>
+> Notable changes in 1.29.8:
+>
+>   * New 'max_headers' directive that bounds the number of HTTP headers
+>     accepted per request, mitigating header-based DoS exposure.
+>   * OpenSSL 4.0 build compatibility.
+>   * The 'include' directive inside a 'geo' block now accepts wildcard
+>     patterns, matching behaviour in other contexts.
+>   * Bug fix: handling of HTTP 103 (Early Hints) responses received
+>     from a proxied backend.
+>   * Bug fix: $request_port and $is_request_port are now available in
+>     subrequests (previously only in the originating request).
+>
+> Also refreshes the recipe header comment to reflect 1.30.x being the
+> current stable branch (it had previously identified 1.28.x as stable).
+>
+> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+> ---
+>  meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 10 ----------
+>  meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb | 11 +++++++++++
+>  2 files changed, 11 insertions(+), 10 deletions(-)
+>  delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+>  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
+>
+> diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.29.7.bb
+> deleted file mode 100644
+> index 4d884fcbb3..0000000000
+> --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require nginx.inc
+> -
+> -# 1.28.x branch is the current stable branch, the recommended default
+> -# 1.29.x is the current mainline branches containing all new features
+> -DEFAULT_PREFERENCE =3D "-1"
+> -
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad393=
+f99"
+> -
+> -SRC_URI[sha256sum] =3D "673f8fb8c0961c44fbd9410d6161831453609b44063d3f29=
+48253fc2b5692139"
+> -
+> diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.29.8.bb
+> new file mode 100644
+> index 0000000000..f810ac219d
+> --- /dev/null
+> +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
+> @@ -0,0 +1,11 @@
+> +require nginx.inc
+> +
+> +# 1.30.x branch is the current stable branch, the recommended default
+> +# 1.29.x is the most recent mainline branch (final release before the
+> +# 1.30.x stable cut on 2026-04-14)
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad393=
+f99"
+> +
+> +SRC_URI[sha256sum] =3D "7f1b985dace8fe706dfc288b83927c928f0ae60bcb7507c2=
+d4e0025eca7280c3"
+> +
+> --
+> 2.47.3
 >
 >
->
-> >  3 files changed, 11 insertions(+), 10 deletions(-)
-> >  delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> >  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
-> >
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-=
-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-> > index 9872a6de3b..f2b10a5c69 100644
-> > --- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-> > @@ -5,3 +5,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3dc49537b08b=
-14c8b66ad247bb4c4593"
-> >  SRC_URI[sha256sum] =3D "2c96a946bfb0882a21744ed429770a2123ae1828c7c486=
-65092993ddee91a918"
-> >
-> >  CVE_STATUS[CVE-2025-53859] =3D "cpe-stable-backport: Fix is included i=
-n 1.28.1"
-> > +
-> > +# Set DEFAULT_PREFERENCE so that the 1.30.x stable version is built by
-> > +# default. To build the 1.28.x branch,
-> > +# PREFERRED_VERSION_nginx =3D "1.28.%" can be added to local.conf
-> > +DEFAULT_PREFERENCE =3D "-1"
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-=
-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> > deleted file mode 100644
-> > index 4d884fcbb3..0000000000
-> > --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> > +++ /dev/null
-> > @@ -1,10 +0,0 @@
-> > -require nginx.inc
-> > -
-> > -# 1.28.x branch is the current stable branch, the recommended default
-> > -# 1.29.x is the current mainline branches containing all new features
-> > -DEFAULT_PREFERENCE =3D "-1"
-> > -
-> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad3=
-93f99"
-> > -
-> > -SRC_URI[sha256sum] =3D "673f8fb8c0961c44fbd9410d6161831453609b44063d3f=
-2948253fc2b5692139"
-> > -
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb b/meta-=
-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
-> > new file mode 100644
-> > index 0000000000..139fe24dcd
-> > --- /dev/null
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
-> > @@ -0,0 +1,6 @@
-> > +require nginx.inc
-> > +
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad3=
-93f99"
-> > +
-> > +SRC_URI[sha256sum] =3D "058188c64bf22baecaa72b809a6318a4f9ba623889c554=
-feab03f7cb853ab31b"
-> > +
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#126762): https://lists.openembedded.org/g/openembed=
-ded-devel/message/126762
-> > Mute This Topic: https://lists.openembedded.org/mt/119112437/6084445
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[skandigraun@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#126766): https://lists.openembedded.org/g/openembedde=
+d-devel/message/126766
+> Mute This Topic: https://lists.openembedded.org/mt/119120498/3619737
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+nkur.tyagi85@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
