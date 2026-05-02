@@ -1,98 +1,126 @@
-Return-Path: <adam.duskett@amarulasolutions.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D88D1CCFA13
-	for <webhook@archiver.kernel.org>; Fri,  1 May 2026 13:51:37 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.14874.1777643492411343308
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E492CCD3424
+	for <webhook@archiver.kernel.org>; Sat,  2 May 2026 07:59:39 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.2688.1777708774376898369
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 May 2026 06:51:32 -0700
+ Sat, 02 May 2026 00:59:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@amarulasolutions.com header.s=google header.b=EnmvUTrr;
- spf=pass (domain: amarulasolutions.com, ip: 209.85.218.42, mailfrom: adam.duskett@amarulasolutions.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-ba6553dc720so26474566b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2026 06:51:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=m3HM6zpi;
+ spf=pass (domain: gmail.com, ip: 209.85.216.42, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-362bb3260f1so1838311a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 00:59:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google; t=1777643491; x=1778248291; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=MrPXZOD+SbLl2ctQYUwesbPUb+4EKZRaM+L4d/CReM0=;
-        b=EnmvUTrrR2Gr35sJhOyLr/VSMoPuUqN61v7sGLYnzogt2XwBFT0vN+ilhHsCIDKAb5
-         MH+3P+tT94ZRNklMSiRVG37IE11kRv3RA/as2Rl/Kjw+0+zxGF/sqXh28znzPDjkR8ll
-         qFf9UWuoAaq9XxoRO9eUe/ns3VXhfM5hKiLi4=
+        d=gmail.com; s=20251104; t=1777708774; x=1778313574; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=xXDGxYtCm0a9eoAxF+uzQP4mLvS7pfOSm1Q919NsAZo=;
+        b=m3HM6zpifq/QnRPnrhVus9mqAAcdrEsbrMfkywSpr0uQIHNeaHff8hGlwLegvoMsRv
+         G55+fJGWs88ufyeH1WvoOv6IArbioBF3qxu01rxt5mMhKoIXKNHkvWDZ3EEOYf/wU3cn
+         +ijl5KOSSWPrPB0cSIyyDncq9bQPyoUFvRVxPYw5VKdiqSSdZsHdAthp+gH50LVOPSnF
+         ZDBHKWhtBgIKz3TD73RBpNxh2vQWuJAo7UJKvFZy/PZBP93yUlKjKU6zGh7aPKjfRrLK
+         if0mav+018diR59Qk4YWq7CJs9vWC9/NDgPhveSh/Uz6jvDhx4uy6UMqE6h456cnED+O
+         jpcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777643491; x=1778248291;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=MrPXZOD+SbLl2ctQYUwesbPUb+4EKZRaM+L4d/CReM0=;
-        b=ALBLrXNBEFVpMpI2KJLd3VzDkiif1UfNMi25gdpliuhVh7u/wGS+/Tk94ilG+OTjOW
-         P0eylf1lPV/DFgVsWjPJsaSv944lSVDn6UabCmbOVkAYTwvb9EwX9KAx2CdAg8E6WpKN
-         Tfk9YNGg5SInBcyOFAq86xYQzKBFCB6gbhiJQaWywZKjcDsZXDvgcYPoHlNlJ608iwbX
-         dbrFZiFAiF7LcgvNexbZe8IgGib+MQhLaetvbVM16GdwP37SLglsaaNlze3IxvtmZ1QL
-         26dPPCH/gx8HnKeOkndCf0xJuJ/43PXZ5F6Aig6nkt9Xx4F01dGY2DidaDeg4C+FQM62
-         0viQ==
-X-Gm-Message-State: AOJu0YyCiAbvcLnT2rFGLJIaEIkFb3sVZGj8yuNAJN76KYZZ2kEhgKVg
-	uUfByvrC0zSTNoIjewn64wYBN7wbCffxX8XzesD/fY5dd4va11aYtbZpLEn/3ft9NSRfyt0VB1S
-	kjTAz
-X-Gm-Gg: AeBDieuID/qDbFKXOLqQ75GtW3/4S70lgbI/KfRi5eACVCvQ/5wm43ycketjFMn/inS
-	iTp4HNNZzYbQ5uOm29nlxMaslSwK+vq+l9gcqcW40oVBlEc7/tNxgfHWzGfFD7qQ4Yl2ztrvmet
-	hRfmi9zNYTGCvCHK7HcnGvaVfwUdDtz0q1Z/DddAXu0S2G3BwoyW6oDyZ0DqA5fzSRFOWqf+EHZ
-	5QLwfVxucVSfz1jh+qbu5Q+JqB8NK+sZRUXXrkiDdoxDV7z6b3PDykZB+so7WE8QcZ2pEsLTXI9
-	ZzyzJE0oLGsHI0zzkmVbxo2ou1uAy44xGiOCsZjmTHegQt0s2awvbZ8qZBdzEwmjmCx8FpDg2lr
-	36vMswXiVxh8Z5Bl0pshZBZBD8y/CsvXr6vH5OaU/GETNRyAgAxioDwIcYo9Tp9AwIaOaNu1VnP
-	V17XNvBpntW8iiRfhuc2k93jKbbUCiNPF0zIHuWr9bamaza0pWtUMtN5BU0NVMqjxzr4BJJLREx
-	OoLzGl2+pcCT9T63d+sYc/SfARj9Nm9WSkB+RXJ9hzFCbL+ccWh6Z4JhmFWPH7jvRnpPjxxiri8
-X-Received: by 2002:a17:907:748:b0:b9c:131b:b011 with SMTP id a640c23a62f3a-bbac7396a64mr181659266b.8.1777643490553;
-        Fri, 01 May 2026 06:51:30 -0700 (PDT)
-Received: from adam.tail032493.ts.net (2001-1c00-8183-9900-dfb4-52e9-0b83-429b.cable.dynamic.v6.ziggo.nl. [2001:1c00:8183:9900:dfb4:52e9:b83:429b])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bbe6d06947fsm109196666b.37.2026.05.01.06.51.29
+        d=1e100.net; s=20251104; t=1777708774; x=1778313574;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xXDGxYtCm0a9eoAxF+uzQP4mLvS7pfOSm1Q919NsAZo=;
+        b=GHiCJAUVY/FEC5VME3NrGcd3iYbRbwlrQ9vUDaIMe8DWnJN5fUS5Ebl/CM4G0s57rp
+         KIE0mxIcVS5C843y0O/A7Dl35902kKMAb3b9GzCF4FIIkxB98fW6h1+NmLG0v2LxZgWx
+         IsvM7AGS14HPjFtq1+RspNOLTMP/6r4quPkkOAuOB3i4boE/m8MUijPzCCMcs1PJ9Z5K
+         HGmPE31PMziVJoqt84072o95U/MfS1qQgfSmUucOf2iJVXPE8+5oZN7i4IhC2LuonnID
+         3llu/toBWwRdpN7E9wwBaVqNjNbmYdywaCe0W5ulU9j2scVKO9Qwz9S71zxjZkFNYxtu
+         OGPw==
+X-Gm-Message-State: AOJu0Yym4DhACH7BVlFMOQIoDMrIh6wj5f78qbqcSuQtJUwC7E73GILK
+	A9IA2lGGGrSQ5KIglREQhQomaaj1BH4C4H0RfWwGURfbz+9QWajLO9cr8thGl0w8
+X-Gm-Gg: AeBDievr36jijV2VYVCtF56eRnWf4Xc5OQ8LiGJdRL6Iyx6n6qZTVnPJcnYeww0IXbi
+	/S7mQSG1R1YJh6+inqrh+0jD6HnoGCYZauke/PxP7wnwZ1huxX+LoJoswy+Ki5h5YIZ5pWNIFng
+	ziQEVLBUO62Fjs59U+tlo33nVABy60IICLkJj2VqfbQzrHVVyWd47kAmooRLvBZPBAwZehzkWH6
+	cS/xXLQjiaeWaA5XxsrWy9tojMa5YvZCN7sHp8yv7DTQN4iF3lV02rJXoo/gftWC6dIgnF127Vo
+	0DOf9B0TtLi5mPHqocDrB/fVBTsww7asiHkBwuaybGfpag2XGHBinvTgJ039qEZ7MH/KSZ9fXYu
+	89P70tjazvGN4QsskaOjOyVLkfZNRzVYkwyaMNAS5EdAcaPQcXljXxs2WElR+GfhtzekUjeLeAr
+	xop+gu4+LzVWHIFdMgghQHSDG6iB2CeJS9E/CxOqOSb/WnV1k=
+X-Received: by 2002:a17:90b:3901:b0:35f:b714:e516 with SMTP id 98e67ed59e1d1-3650ce4cb11mr2394715a91.16.1777708773543;
+        Sat, 02 May 2026 00:59:33 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364be00b168sm7831480a91.12.2026.05.02.00.59.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 May 2026 06:51:30 -0700 (PDT)
-From: Adam Duskett <adam.duskett@amarulasolutions.com>
+        Sat, 02 May 2026 00:59:33 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
-Subject: [PATCH 2/2] kmscon: upgrade 9.3.3 -> 9.3.5
-Date: Fri,  1 May 2026 15:51:25 +0200
-Message-ID: <20260501135126.1386185-2-adam.duskett@amarulasolutions.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260501135126.1386185-1-adam.duskett@amarulasolutions.com>
-References: <20260501135126.1386185-1-adam.duskett@amarulasolutions.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-webserver][PATCH 1/1] nginx: upgrade 1.29.7 -> 1.30.0
+Date: Sat,  2 May 2026 19:59:25 +1200
+Message-ID: <20260502075925.1861299-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 May 2026 13:51:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126761
+ <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 07:59:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126762
 
-Changelog:
-https://github.com/kmscon/kmscon/releases/tag/v9.3.5
-Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+
+1.30.0 stable version has been released, incorporating new features and bug
+fixes from the 1.29.x mainline branch (https://nginx.org/en/CHANGES-1.30)
+
+Set v1.30.0 branch as default preference.
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../kmscon/{kmscon_9.3.3.bb => kmscon_9.3.5.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/kmscon/{kmscon_9.3.3.bb => kmscon_9.3.5.bb} (97%)
+ meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb |  5 +++++
+ meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 10 ----------
+ meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb |  6 ++++++
+ 3 files changed, 11 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
 
-diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
-similarity index 97%
-rename from meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb
-rename to meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
-index 46550bb6d1..b730faf414 100644
---- a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.3.bb
-+++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
-@@ -21,7 +21,7 @@ DEPENDS = "\
- "
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+index 9872a6de3b..f2b10a5c69 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
+@@ -5,3 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
+ SRC_URI[sha256sum] = "2c96a946bfb0882a21744ed429770a2123ae1828c7c48665092993ddee91a918"
  
- SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
--SRCREV = "03e50c7db0489daaa41b5f62946fd6aaeab63a6e"
-+SRCREV = "a8832afb1dcca5bb4c0476d4c13c7239fecbd93a"
- 
- inherit meson pkgconfig systemd
- 
--- 
-2.54.0
-
+ CVE_STATUS[CVE-2025-53859] = "cpe-stable-backport: Fix is included in 1.28.1"
++
++# Set DEFAULT_PREFERENCE so that the 1.30.x stable version is built by
++# default. To build the 1.28.x branch,
++# PREFERRED_VERSION_nginx = "1.28.%" can be added to local.conf
++DEFAULT_PREFERENCE = "-1"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
+deleted file mode 100644
+index 4d884fcbb3..0000000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require nginx.inc
+-
+-# 1.28.x branch is the current stable branch, the recommended default
+-# 1.29.x is the current mainline branches containing all new features
+-DEFAULT_PREFERENCE = "-1"
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
+-
+-SRC_URI[sha256sum] = "673f8fb8c0961c44fbd9410d6161831453609b44063d3f2948253fc2b5692139"
+-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
+new file mode 100644
+index 0000000000..139fe24dcd
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
+@@ -0,0 +1,6 @@
++require nginx.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
++
++SRC_URI[sha256sum] = "058188c64bf22baecaa72b809a6318a4f9ba623889c554feab03f7cb853ab31b"
++
 
