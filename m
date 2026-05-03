@@ -1,371 +1,179 @@
-Return-Path: <tim.orling@konsulko.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 754BACD13DA
-	for <webhook@archiver.kernel.org>; Sun,  3 May 2026 03:14:25 +0000 (UTC)
-Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17780.1777778063674607384
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7551FF885A
+	for <webhook@archiver.kernel.org>; Sun,  3 May 2026 04:36:15 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18626.1777782964280695996
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 02 May 2026 20:14:24 -0700
+ Sat, 02 May 2026 21:36:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=hq/kumMm;
- spf=pass (domain: konsulko.com, ip: 209.85.128.173, mailfrom: tim.orling@konsulko.com)
-Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-7bd5c773ef3so34447157b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 20:14:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1777778063; cv=none;
-        d=google.com; s=arc-20240605;
-        b=XeBeED8ZdIx/l+hLxi/n9LJxC3WyXfbpzQqFidf+AngFaJ2W12/2WUjDu6ZidyaJMB
-         pKK/kX41UnnirGPhc/i6/3u8arz5hnP1i5lZsLDTljVgRCz3QX7pZQl3DlipXWl6kzX1
-         6qeGkeH9osO7s2bh/sUVpZuvUjOnwLW8BfrAhK9R4qtfZOeOaPGqUfCqmToWGrJchHql
-         frj4jaEbLH/ZRPZXDJoTvSSwZoiXbPCy2fHUIGj5YXYElGaYmm33JP1iArA4kUxNSyhO
-         pZxsNUizwC4dQ81Z3xMmYYK+cxw53x7OHoU/1/ee9QrDr0cDqAwyxOcstgE4OoPJGoYF
-         HXvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=oJl2g1cpX8Aq82onrwYcH3El/cdj5dUjb9mmOxP+e40=;
-        fh=B8F3lforaWXqCOLcYLVP4hd84u8I8RwmQUzZM4ZNJEc=;
-        b=UDmkGboGHjfBTIUn3fUhSPW2neFMKpwBwE+0wc2yATlo0HWeP6lL5x5GoOYqp5Klkk
-         lkNFtUXuG76pXKqh4HRlgOlmJVTqD1ufafWvTQCnMvM9lll7qq/WEa4SJoYj4FZ+bYWs
-         nN3raMfAX7jOw3sjFXVOYte1YS6QMb7Tv32sfhIrY55ZzsZda35s8TUBadexNSxjcZ6C
-         IcFDgCy6tlPm2g5UpdLWWCvEC18nJIGBlyN+boCDINkgWepNptHO+b8oTuVrdOnYZKdw
-         tDx/kzujG+lIGrekD5tDoFxOQ5iORG9Wi1m5PbVoOIO3llDGfU58W/tLRR9zmQYJgKQu
-         uhHg==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1777778063; x=1778382863; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=oJl2g1cpX8Aq82onrwYcH3El/cdj5dUjb9mmOxP+e40=;
-        b=hq/kumMmU8FMLurNgv0oZ1OfUooZp6s/syqkeBGbVhknNzk9g59jyb6crTxTKoK5C5
-         cHoN5C9mYiTeYXLdlwmVWZmuTFmr/iVIebVw/003ODD2cq3NmqbMOx/feJEPIqcYOS3Z
-         7QiCUb6YPig9gwWjZh5IDHYda4ke9N3NwAQwc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777778063; x=1778382863;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oJl2g1cpX8Aq82onrwYcH3El/cdj5dUjb9mmOxP+e40=;
-        b=Sr3P7wEbhe4D63+O7P7+1Vw1enY6DAxD1ql58KhJYXsRc84k4cLTiXwOGuPs62uwm8
-         vTd182UY3OaqQeQRfDhciDMpI9Y/otSRVWqpWS3lQWn4riCBxaqEoo+w9tKJd36cLNGB
-         40d60Qklv4mtsG5I8MCdMwnXVHcNCMI8g5UB3vDVoF6VJ/mN8MZ8o6U032utr1W/Fdni
-         fi/ronaKyufI+R+vs66evSL2q9YSx1thdcLtUGRI6bNZ4IuMAgxJKj6efiq6P4mroRzi
-         87h70r0FD5ndJx+ZoyTvtzdPRcX/zV5msIz8RyTuwYvAryj5biVRMUAYBB1W10+8VpjQ
-         bRHA==
-X-Gm-Message-State: AOJu0Yz2jofm7AEnqQhAN7tLKn/Z4FJCO4yKoIMwvIX0MqxKL66Aaj9P
-	MWYkMRkxdP3Q/oUfc6+FZf6EoI4lJ1ZnR8zZb9rWC25w65r6pgUk5yLfVwykOh1BPNofHOdAG7m
-	2yFixbfl/m3hrtUgEwEg/LtrIM1uJjd+qsPcQLUMGZQ==
-X-Gm-Gg: AeBDies/YD34FqPTBKQ1qZvLjn63A5khiJukzVdEycSZKMrlOoRiRHuO9Wo62MnoXuJ
-	cj1G4YYJaVnVrxCKusrXsu9fL5uN4qNeLHUFDUMMv1IFpMdM/IKmfe788EhPVXO+mIzEJ1mxfFX
-	EmG/Jl4uKyueruWkWsqPBU4a0TgGX9ojMANNmhZiqiO7R1WU0X+I4uNwEyIb+TRAzLxPqQPE2qq
-	+1zckUa4nY3cselPYtRVrV0nKpV7OGv8ufRgc3Kf90MeFgVjTnuKG7Vf1EF9BvAnr9FikpjP1Uc
-	SM8qo8kCyruoRwWlGgtDrzoCe60Zn58rrpe597EQ3YqF8GBIIO4=
-X-Received: by 2002:a05:690c:ed6:b0:7a2:ce0e:864a with SMTP id
- 00721157ae682-7bd76fc4be5mr52380727b3.17.1777778062721; Sat, 02 May 2026
- 20:14:22 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=T8TvGi+q;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=95835b5179=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6434RHGO1311432
+	for <openembedded-devel@lists.openembedded.org>; Sat, 2 May 2026 21:36:03 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=ymFj0D6x36pgorMOzTf8
+	ifRYUSMPXScU+QSfam4sCSQ=; b=T8TvGi+qB162VWIed6t50Vqo8GCSSx4vW1nn
+	dYkSqRzguGkp4VOZrzbZHkCnkyq9BgV/9gOV+CHGrKgASkQGYu4F9xw+bJBPzSAU
+	gZZu1Vkuh7bBzDV9BRkkQ2Z8NkN3WKpR81H1F3S4nxtJsDNoSQZ3rRuk3M8Kd9C7
+	qjFhsDh27nHFQisN0xgnw5SzLUoyrgxzVj1aTSp/l/ek1ALDfhuNg0CKp/PmF+Sg
+	IPcAXRAm8JMQ9rbqLAG4vs3nMgvFEueYLTdV8pSRUEXY9ZPiUJVLWUnecxLDDlhv
+	aJrPpErWYCRzpp8MCKhIgVndeT63O0AHfS+rR41kyTHM6n4qsw==
+Received: from bn1pr04cu002.outbound.protection.outlook.com (mail-eastus2azon11010001.outbound.protection.outlook.com [52.101.56.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4dwchyrpwk-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 02 May 2026 21:36:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I+0Kgb0kAn4dIIAP+5xTkA8B1bIxvUorv+hS5xaKFQEjvj2v5+UQk5Soa//Ti6rgRZwoUUc+TW1wSoB6T14C8Vo1giqnHka65Lb/xx/Q6H5xyP55otywDrYJ4JSz8ZAAcSsMBUjr4+1tOUfqq5eXSeXbtsg6GQ0TRDf7sL+OdUK5761kGvxGgYOSrIoec4oFtJ0HQuHOrGBnPU9NFUGhgPvYLqNnpC2I8BObuGFco0N4YA0wPnIYBQo6lnRXrMc10qweAsMKqZeN2WA+crdoo+qOgSO6VaGXuhmD9m8jxQvvuMsfstJzKngoK5LJdtVo9deolCMb8finE3hxztbdkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ymFj0D6x36pgorMOzTf8ifRYUSMPXScU+QSfam4sCSQ=;
+ b=ZBL2tKrLYSSWawbHMwcIUcEgzmgKohxREHrQTXux00IzQM+iFKFxZGS/+VqilvSqf4Dgs7ILTGfBJirA6jvOWqyI53HzlRQ4WC5mGlS4BKFna9LmUn3I1qOy3D2mZRQB0hJnggVZFPtvU2uujcbuoeAJO+Bv3rlA+BLpla2nYa4zGRHNre2V3jYjvBFY+2d8Go0TPH1CIeuAHRWvRYhvUsBPk/VbEYNZ0+p3Ti21yD5GykfhYeJVRTfUqDvD+OeRiPAGen5pcia8b3tOCpjWMWGZtFGdJvpSa+rBA+vG7DCTBU0sSFJAV32ZUbBcotdvyj4YHWKO0J8s3sZzz2K2Rw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ BL3PR11MB6506.namprd11.prod.outlook.com (2603:10b6:208:38d::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9870.24; Sun, 3 May 2026 04:36:01 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::3432:2eb3:d0a5:7831]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::3432:2eb3:d0a5:7831%6]) with mapi id 15.20.9870.022; Sun, 3 May 2026
+ 04:36:01 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] proftpd: upgrade 1.3.9 -> 1.3.9a
+Date: Sun,  3 May 2026 12:35:40 +0800
+Message-Id: <20260503043540.4063775-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SG2PR06CA0239.apcprd06.prod.outlook.com
+ (2603:1096:4:ac::23) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
 MIME-Version: 1.0
-References: <20260502205501.185550-1-tim.orling@konsulko.com>
- <20260502205501.185550-3-tim.orling@konsulko.com> <CADySD0F5+T_eiLstknJfbOfkBuoUu3fMoE=Xd91PQHrtL8U4Mw@mail.gmail.com>
-In-Reply-To: <CADySD0F5+T_eiLstknJfbOfkBuoUu3fMoE=Xd91PQHrtL8U4Mw@mail.gmail.com>
-From: Tim Orling <tim.orling@konsulko.com>
-Date: Sat, 2 May 2026 20:14:11 -0700
-X-Gm-Features: AVHnY4Iw6Ebe3iaGhl3VXPbeymZhC7kPywvyPesnfO0_FDr8fo9tuYjvdp3QrLo
-Message-ID: <CAOyo-87zZxzc7gg0VQQ-sXc2jWnPmF54jK5-Moq_A9L3JMckig@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH 3/3] nginx: upgrade mainline 1.29.7
- -> 1.29.8
-To: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000eb13860650e135cc"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|BL3PR11MB6506:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9d8157a3-8ed8-4e59-4612-08dea8cd7a73
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|366016|1800799024|52116014|376014|56012099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: 
+	aiXWrsuKLSLvrWmpJbE+HezBhoecELiHkTTRczDgre9jGYKSTCWDhr4rvv1ABPk6uIKwF8JT7+ULBrK6gMEUsHmIp59YtX3xYyv9gdToZvoDODzVemozwFytm048xiQlH5Ajw395GXpu/2ePUvq3cS1F4m+W00Osz3GSxcIIbB+umI9T7MQdXwLD36cmW7SATeoEZpsw3xFMNDzov1NztfiouMA72UmGf+PTApLA1JUJwEQpA7nWKO0GzdTvMOzRZeKQYXvEi2dZWwOM/S8Cw5QSPUuNyXJmqddv0cD30eu1UWNMjNMZMDr2Q3lgwuxllSWirro9smkiv08sRS+3mxDUBi8yl4CUXt6vToA2FQ2xWQQzDY3r3wHiQM+imhJR6NaC999+wb0hfadR9y+kyoFm26yEKWkOmr1jsk5kKbH07g34rWMsCAw2mMpZ0/wV+m01sXDAqm59PB0BZjjJsIPq70qfwdHrK3peDc1UAs/wsc9ZsLvOeXJlACsL9xRzbU5kp4hojbiwKAAbrr4ldfEYxt+TvUOCL9XWCEOdxRwXRxxjapFuvO7V1kUSzpSJjZiIW/H7b4sGxs+VlYZj1QXSoiCsW3Vcnk/yF9IVhJ76zQYcNxNpQkBFTe/oV461rhYTtcGTX56jzht871bAxT/pFlxQeAQXC7FGl6TMy9QBZek/vuWGUhBtq4utwPPdqdWfy44FCVdcflhJkL1s7A==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(52116014)(376014)(56012099003)(18002099003)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?wsQOxNF1tfH0OO/A+xTOjR296TmOIKPibYaCKgEMgglcutuxvmUfvb18Avxg?=
+ =?us-ascii?Q?b8fI4fcpAyNeq8rVCe8Rz/hY5clhQXND/FTf6b7d8L3Lbl874F+3eYOiaEnN?=
+ =?us-ascii?Q?s0JILqoDPWAmdImUailJrqWaSQ1fyYdsOBGYOnE/Sfa/nJ7Tf/SDw+ItNvOX?=
+ =?us-ascii?Q?lK28lrvr49BqzGvZAaJ05aDjMa+NtLGRMW6U9x7+0559g5pnAf9iugFNA24L?=
+ =?us-ascii?Q?L/o3C6yaUfnEIJDWf2XX2x9/SNOyKoP9fa2N23Ln06VMKcyQhia5la40LtNl?=
+ =?us-ascii?Q?k498eI3awILtuOvYSEwliedd54/+rO720A/o/Syb2dnYehK4niAOa1IEGhS7?=
+ =?us-ascii?Q?pweGfE6RmZUOs0th9x5sESQhceDGfCpd/dQr+I0e6bDfzuUNBT65++WUB4ZA?=
+ =?us-ascii?Q?BA8qgtRwTn93JNqD17JhGZVUjyIQuiP5M1LZy3quXZ0OPIh81PPB1gs7Nfhn?=
+ =?us-ascii?Q?rprVAHX2TQhCPZPfsapkPLAGRLdWOKgB21xFvnCbVJWN23mhoz2GHYzGV0Gg?=
+ =?us-ascii?Q?aufJjqrl04BtSd62Q6dKAl+GakB7H1ezxSCoDf70/72mg35Pq5wdfFjHq1vQ?=
+ =?us-ascii?Q?QryfBK6gfN42OlprYt8ehggsi9juf8O/UShjlrPlOq+dfiLgLX4gtMmfg4QE?=
+ =?us-ascii?Q?m2Dr7m5p2RWDXGO5CmnfKlqY7cU/48uGQwSmV1/96HYHgO3dUfjf2DtEg1jG?=
+ =?us-ascii?Q?FRUWRPF1OyWs5VgNIVRjZj1DVtIis7hGlhGpDyC36YbpkkFbnSvwSpHLb246?=
+ =?us-ascii?Q?RO3HuDi7G8NvvKGrHA8/c1OJzz1Dja3JwQQ2iTXxoB+eX6O0oC2M1WIb77nI?=
+ =?us-ascii?Q?54w9Bw2GQYD3+c76DbBjNZhmkUZaXbHfnIcCsWZslMCfPyJJkznm//04Gjsb?=
+ =?us-ascii?Q?GihtcFYxzSmb0SVH8kWjY+0MSJO2HwBYMNYmnZknKMsUBZj+Bfe1iOUbu6bk?=
+ =?us-ascii?Q?wtXeYC4wVmfoP3+xBCw5mZhxAfgOZHz/XZQ1fe+4HBxa3LyHvf8e7hfShZG3?=
+ =?us-ascii?Q?APzvFnWl33SAmlRvzEgbH3E1dN0nS7CGLcGnZgcbicN1p+3RkqtQ6dBDqHSQ?=
+ =?us-ascii?Q?+FrR1/9w6YHPWdvZN89BBboL33kTLdRSF+0V9A/paLtQTWgXrIV5RobzhzTt?=
+ =?us-ascii?Q?K/r2x35+ssBdqNRnKaE9mjMWWprD9ZGCwfzGG07E0piBfuHgbPbwhfkk+jtF?=
+ =?us-ascii?Q?NheBOdoPyzuMUIXowo+yZSSHjGEDMWdi87MES8E8DymGDzdiZjp8ws0cSlln?=
+ =?us-ascii?Q?xZvfiABr/6Z20ZXKLrZL9lKdYWVor71JwYguMnUgyx3nv51PvDGxXezpO6gX?=
+ =?us-ascii?Q?zcU9JS8UtCVMVesNMSkYChKlM102Vx0AN+Z9OAXj2a8UQpwp9l9nOyPL53nk?=
+ =?us-ascii?Q?Ac4fuH/JcHamPJT3gzqg0O4DhAdRKyBI8VZhEli1OAoFFGTLlBUhJjPcA41x?=
+ =?us-ascii?Q?gmBYyAkDF8oasBrF6bFyla+HUqSHctbuKM+3fqjX6Ty3QCCTn5+n1ohN8Txg?=
+ =?us-ascii?Q?Ig1C8sdIrOT1I3MZ1vfaryk05K+TXwi2erIWkus+W6LkbBneBXU7ZMvj45n8?=
+ =?us-ascii?Q?8Cti1AH9ToWtnlMEoTVK13ZykRrmZJRA3ilkOrUUo+aqc6ufYsawU8j24gC+?=
+ =?us-ascii?Q?XUJ7Dd9BI23B+KMjtRK9mvGl7sfB97QYEJYyfYCJe81HSqX17OzZLCgKf4/b?=
+ =?us-ascii?Q?phujhH3yaTAgVUOBd5DJy2N7efDWmGvQPAuh9qHBOvqUxwxB/vtMXUxV1ba5?=
+ =?us-ascii?Q?QJ0fYQFLMA=3D=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	TPryepKQQhmLk25gJVN8BiVxY2MoAOILcbeMeA6LJ0Ipo3glb9y8rVT+d3LfCOEv++ZC7e17xG+qmXT0kXXUsWkXosK714XxcH/Io0QQFfK0cUXpSsRYzpS3zo8J2+60nCmpReIrdYFSEqwNbqyerSolIcEf4PUUE3Tam1YKwqF8vMhyNxqNi1ihsd9gD/GTxBif7PdqwsjcWMLpcGmdabg8HYpd0aXpnfP3xJDmfZznwePjSy9OsZS43SlG/arOrGR0Obqns+kwq0lOm9CkUDONRO/sUzAe8CnppBDGboBI86xI7kijEWWY2m2bShKgiOaO0X7sbkmsuVQ6Y2G9OQ==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9d8157a3-8ed8-4e59-4612-08dea8cd7a73
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2026 04:36:01.2742
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: POz5B7Wqh2Qkk7u/2/h2r/ogMYqKMp7cUIEQNEh34djz0vUem8ehMeKoSCG9RASAWLvWZgqZiWygJ4GJ+RvdCA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR11MB6506
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTAzMDA0NCBTYWx0ZWRfX2ITHRLDLCvHo
+ OaPMzjsLKiZZ65Il9P+I6u3wNbXzJ2zP7zHOvykVHz+UV8FAhp32SOemr4cymSGGgldezglEAxq
+ ec4aLWLcUDRkhO3XSPgaBA1tKkhhPBmQj9TEukbI+3lIsoSgIt6bJmyQ0yGP0Y1cu3xwUbYif4K
+ i3fBklZheihGQT0L1oPR34sNgfO3lSRguiwDdNP1t57uXfvBXZwWxKDWFOyTgxOMkPqSMcq9jUc
+ VYbx0C9lltEGziXUts32B+lNpl6Z9rEzf23/2ZxZb74Jhox1AHefiPu9w/1RrvhiSspZ14cSbQE
+ L5smpCD/MK7ZH35zAPbZiE70zk6cWuDLCTTL2UqvasTyEdOxtl2w4tB8P4smj4AkpESw9bFUefq
+ rPMsjE/wR5fqiRtB3qqyld4U9rOIr94PnHmu4zGQQR8tZSizBowqlm69eXmM6YE9BtFC5Xuioww
+ FwPFKv2iRz4UGzBru7Q==
+X-Proofpoint-ORIG-GUID: BlIeopt_GRsPhtzGs9LzcerGL_FZlb_H
+X-Authority-Analysis: v=2.4 cv=LsSiDHdc c=1 sm=1 tr=0 ts=69f6d0b3 cx=c_pps
+ a=qHW1pi9L+1RZ0SKNcL3CYw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22 a=u_SgSZvrAAAA:20
+ a=xHmGWb7dAAAA:8 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8 a=tRRMV1B-YeCg5jPVoS0A:9
+ a=dUxtNc5KqGcdvnm1qQk7:22 a=FdTzh2GWekK77mhwV6Dw:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: BlIeopt_GRsPhtzGs9LzcerGL_FZlb_H
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-03_02,2026-04-30_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0 suspectscore=0
+ adultscore=0 clxscore=1015 malwarescore=0 bulkscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2605030044
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 May 2026 03:14:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126769
+ <openembedded-devel@lists.openembedded.org>; Sun, 03 May 2026 04:36:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126770
 
---000000000000eb13860650e135cc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Security fix: CVE-2026-42167
 
-On Sat, May 2, 2026 at 4:02=E2=80=AFPM Ankur Tyagi <ankur.tyagi85@gmail.com=
-> wrote:
+ChangeLog:
+https://github.com/proftpd/proftpd/blob/1.3.9/NEWS
 
-> On Sun, May 3, 2026 at 8:55=E2=80=AFAM Tim Orling via lists.openembedded.=
-org
-> <tim.orling=3Dkonsulko.com@lists.openembedded.org> wrote:
-> >
-> > From: Tim Orling <tim.orling@konsulko.com>
-> >
-> > 2026-04-07
-> > nginx 1.29.8 is the final release of the 1.29.x mainline branch,
-> > published a week before the 1.30.0 stable cut on 2026-04-14. After
-> > this point the 1.29.x branch is closed; new development will continue
-> > on a future 1.31.x mainline.
->
-> There isn't any difference between 1.30.0 and 1.29.8 except[1].
-> Don't see benefit in adding both versions.
->
-> There is a discussion already going around this[2], will be good to
-> hear your thoughts.
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../proftpd/{proftpd_1.3.9.bb => proftpd_1.3.9a.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9.bb => proftpd_1.3.9a.bb} (98%)
 
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb
+similarity index 98%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb
+index d64e0a0495..2e164a574b 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb
+@@ -4,8 +4,8 @@ HOMEPAGE = "http://www.proftpd.org"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
+ 
+-SRCREV = "ae25959adb05ae1d6ebfa1f36bf778c9c34e9410"
+-BRANCH = "${PV}"
++SRCREV = "ec8a5544e81df54e202f52f1f70d206439389577"
++BRANCH = "1.3.9"
+ 
+ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
+            file://basic.conf.patch \
+-- 
+2.34.1
 
-Good point. I was just updating to the latest =E2=80=9Cmainline=E2=80=9D ac=
-cording to the
-website. I=E2=80=99d suggest we wait for 1.31.x to branch and update the =
-=E2=80=9Cmainline=E2=80=9D
-recipe at that time. We should keep the =E2=80=9Cstable=E2=80=9D 1.30.0 upg=
-rade.
-
->
->
-> [1]
-> https://github.com/nginx/nginx/commit/654367cb11b08b0a5a67b08d5e1ff058de8=
-b13c3
-> [2]https://lists.openembedded.org/g/openembedded-devel/message/126762
->
-> cheers
-> Ankur
->
-> >
-> > Notable changes in 1.29.8:
-> >
-> >   * New 'max_headers' directive that bounds the number of HTTP headers
-> >     accepted per request, mitigating header-based DoS exposure.
-> >   * OpenSSL 4.0 build compatibility.
-> >   * The 'include' directive inside a 'geo' block now accepts wildcard
-> >     patterns, matching behaviour in other contexts.
-> >   * Bug fix: handling of HTTP 103 (Early Hints) responses received
-> >     from a proxied backend.
-> >   * Bug fix: $request_port and $is_request_port are now available in
-> >     subrequests (previously only in the originating request).
-> >
-> > Also refreshes the recipe header comment to reflect 1.30.x being the
-> > current stable branch (it had previously identified 1.28.x as stable).
-> >
-> > Signed-off-by: Tim Orling <tim.orling@konsulko.com>
-> > ---
-> >  meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 10 ----------
-> >  meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb | 11 +++++++++++
-> >  2 files changed, 11 insertions(+), 10 deletions(-)
-> >  delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> >  create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
-> >
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> > deleted file mode 100644
-> > index 4d884fcbb3..0000000000
-> > --- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-> > +++ /dev/null
-> > @@ -1,10 +0,0 @@
-> > -require nginx.inc
-> > -
-> > -# 1.28.x branch is the current stable branch, the recommended default
-> > -# 1.29.x is the current mainline branches containing all new features
-> > -DEFAULT_PREFERENCE =3D "-1"
-> > -
-> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad3=
-93f99"
-> > -
-> > -SRC_URI[sha256sum] =3D
-> "673f8fb8c0961c44fbd9410d6161831453609b44063d3f2948253fc2b5692139"
-> > -
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
-> b/meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
-> > new file mode 100644
-> > index 0000000000..f810ac219d
-> > --- /dev/null
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.29.8.bb
-> > @@ -0,0 +1,11 @@
-> > +require nginx.inc
-> > +
-> > +# 1.30.x branch is the current stable branch, the recommended default
-> > +# 1.29.x is the most recent mainline branch (final release before the
-> > +# 1.30.x stable cut on 2026-04-14)
-> > +DEFAULT_PREFERENCE =3D "-1"
-> > +
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79da1c70d587d3a199af9255ad3=
-93f99"
-> > +
-> > +SRC_URI[sha256sum] =3D
-> "7f1b985dace8fe706dfc288b83927c928f0ae60bcb7507c2d4e0025eca7280c3"
-> > +
-> > --
-> > 2.47.3
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#126766):
-> https://lists.openembedded.org/g/openembedded-devel/message/126766
-> > Mute This Topic: https://lists.openembedded.org/mt/119120498/3619737
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> ankur.tyagi85@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-
---000000000000eb13860650e135cc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Sat, May 2, 2026 at 4:02=E2=80=AFPM Ankur Tyagi &lt=
-;<a href=3D"mailto:ankur.tyagi85@gmail.com">ankur.tyagi85@gmail.com</a>&gt;=
- wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Sun, =
-May 3, 2026 at 8:55=E2=80=AFAM Tim Orling via <a href=3D"http://lists.opene=
-mbedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a=
-><br>
-&lt;tim.orling=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org" tar=
-get=3D"_blank">konsulko.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; From: Tim Orling &lt;<a href=3D"mailto:tim.orling@konsulko.com" target=
-=3D"_blank">tim.orling@konsulko.com</a>&gt;<br>
-&gt;<br>
-&gt; 2026-04-07<br>
-&gt; nginx 1.29.8 is the final release of the 1.29.x mainline branch,<br>
-&gt; published a week before the 1.30.0 stable cut on 2026-04-14. After<br>
-&gt; this point the 1.29.x branch is closed; new development will continue<=
-br>
-&gt; on a future 1.31.x mainline.<br>
-<br>
-There isn&#39;t any difference between 1.30.0 and 1.29.8 except[1].<br>
-Don&#39;t see benefit in adding both versions.<br>
-<br>
-There is a discussion already going around this[2], will be good to<br>
-hear your thoughts.</blockquote><div dir=3D"auto"><br></div><div dir=3D"aut=
-o">Good point. I was just updating to the latest =E2=80=9Cmainline=E2=80=9D=
- according to the website. I=E2=80=99d suggest we wait for 1.31.x to branch=
- and update the =E2=80=9Cmainline=E2=80=9D recipe at that time. We should k=
-eep the =E2=80=9Cstable=E2=80=9D 1.30.0 upgrade.</div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex" dir=3D"auto"><br>
-<br>
-[1]<a href=3D"https://github.com/nginx/nginx/commit/654367cb11b08b0a5a67b08=
-d5e1ff058de8b13c3" rel=3D"noreferrer" target=3D"_blank">https://github.com/=
-nginx/nginx/commit/654367cb11b08b0a5a67b08d5e1ff058de8b13c3</a><br>
-[2]<a href=3D"https://lists.openembedded.org/g/openembedded-devel/message/1=
-26762" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/=
-g/openembedded-devel/message/126762</a><br>
-<br>
-cheers<br>
-Ankur<br>
-<br>
-&gt;<br>
-&gt; Notable changes in 1.29.8:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0* New &#39;max_headers&#39; directive that bounds the numb=
-er of HTTP headers<br>
-&gt;=C2=A0 =C2=A0 =C2=A0accepted per request, mitigating header-based DoS e=
-xposure.<br>
-&gt;=C2=A0 =C2=A0* OpenSSL 4.0 build compatibility.<br>
-&gt;=C2=A0 =C2=A0* The &#39;include&#39; directive inside a &#39;geo&#39; b=
-lock now accepts wildcard<br>
-&gt;=C2=A0 =C2=A0 =C2=A0patterns, matching behaviour in other contexts.<br>
-&gt;=C2=A0 =C2=A0* Bug fix: handling of HTTP 103 (Early Hints) responses re=
-ceived<br>
-&gt;=C2=A0 =C2=A0 =C2=A0from a proxied backend.<br>
-&gt;=C2=A0 =C2=A0* Bug fix: $request_port and $is_request_port are now avai=
-lable in<br>
-&gt;=C2=A0 =C2=A0 =C2=A0subrequests (previously only in the originating req=
-uest).<br>
-&gt;<br>
-&gt; Also refreshes the recipe header comment to reflect 1.30.x being the<b=
-r>
-&gt; current stable branch (it had previously identified 1.28.x as stable).=
-<br>
-&gt;<br>
-&gt; Signed-off-by: Tim Orling &lt;<a href=3D"mailto:tim.orling@konsulko.co=
-m" target=3D"_blank">tim.orling@konsulko.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 meta-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.=
-7.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.7.bb</a> | 10 -------=
----<br>
-&gt;=C2=A0 meta-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.=
-8.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.8.bb</a> | 11 +++++++=
-++++<br>
-&gt;=C2=A0 2 files changed, 11 insertions(+), 10 deletions(-)<br>
-&gt;=C2=A0 delete mode 100644 meta-webserver/recipes-httpd/nginx/<a href=3D=
-"http://nginx_1.29.7.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.7.=
-bb</a><br>
-&gt;=C2=A0 create mode 100644 meta-webserver/recipes-httpd/nginx/<a href=3D=
-"http://nginx_1.29.8.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.8.=
-bb</a><br>
-&gt;<br>
-&gt; diff --git a/meta-webserver/recipes-httpd/nginx/<a href=3D"http://ngin=
-x_1.29.7.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.7.bb</a> b/met=
-a-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.7.bb" rel=3D"n=
-oreferrer" target=3D"_blank">nginx_1.29.7.bb</a><br>
-&gt; deleted file mode 100644<br>
-&gt; index 4d884fcbb3..0000000000<br>
-&gt; --- a/meta-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.=
-7.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.7.bb</a><br>
-&gt; +++ /dev/null<br>
-&gt; @@ -1,10 +0,0 @@<br>
-&gt; -require nginx.inc<br>
-&gt; -<br>
-&gt; -# 1.28.x branch is the current stable branch, the recommended default=
-<br>
-&gt; -# 1.29.x is the current mainline branches containing all new features=
-<br>
-&gt; -DEFAULT_PREFERENCE =3D &quot;-1&quot;<br>
-&gt; -<br>
-&gt; -LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D79da1c70d587d3a199af9=
-255ad393f99&quot;<br>
-&gt; -<br>
-&gt; -SRC_URI[sha256sum] =3D &quot;673f8fb8c0961c44fbd9410d6161831453609b44=
-063d3f2948253fc2b5692139&quot;<br>
-&gt; -<br>
-&gt; diff --git a/meta-webserver/recipes-httpd/nginx/<a href=3D"http://ngin=
-x_1.29.8.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.8.bb</a> b/met=
-a-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.8.bb" rel=3D"n=
-oreferrer" target=3D"_blank">nginx_1.29.8.bb</a><br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..f810ac219d<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-webserver/recipes-httpd/nginx/<a href=3D"http://nginx_1.29.=
-8.bb" rel=3D"noreferrer" target=3D"_blank">nginx_1.29.8.bb</a><br>
-&gt; @@ -0,0 +1,11 @@<br>
-&gt; +require nginx.inc<br>
-&gt; +<br>
-&gt; +# 1.30.x branch is the current stable branch, the recommended default=
-<br>
-&gt; +# 1.29.x is the most recent mainline branch (final release before the=
-<br>
-&gt; +# 1.30.x stable cut on 2026-04-14)<br>
-&gt; +DEFAULT_PREFERENCE =3D &quot;-1&quot;<br>
-&gt; +<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D79da1c70d587d3a199af9=
-255ad393f99&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;7f1b985dace8fe706dfc288b83927c928f0ae60b=
-cb7507c2d4e0025eca7280c3&quot;<br>
-&gt; +<br>
-&gt; --<br>
-&gt; 2.47.3<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#126766): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/126766" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/126766</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/11912049=
-8/3619737" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/119120498/3619737</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ankur.tyagi85@gmail=
-.com" target=3D"_blank">ankur.tyagi85@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div></div>
-
---000000000000eb13860650e135cc--
 
