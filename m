@@ -1,295 +1,169 @@
-Return-Path: <skandigraun@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 367D3FF885A
-	for <webhook@archiver.kernel.org>; Mon,  4 May 2026 14:08:59 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.15545.1777903736804624336
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A583CD3427
+	for <webhook@archiver.kernel.org>; Mon,  4 May 2026 22:54:53 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.27512.1777935288986743760
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 May 2026 07:08:57 -0700
+ Mon, 04 May 2026 15:54:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=it8mBI0A;
- spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: skandigraun@gmail.com)
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-43d73422431so3812542f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 May 2026 07:08:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Nl72F/9N;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-8353fd1cb5fso878425b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 May 2026 15:54:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777903735; x=1778508535; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o/bYFesHn1kIDI8fklk+0lHQz2id7d/lJYv40PzE0Ww=;
-        b=it8mBI0AdT0ysbYv2PUcR9FHMYSu3pgfFokbm2y5npAF1RKDOQLlLx2aOqudPtn2We
-         2mg4mqIJNm5BVXxGKjhqsrxqhDUlMlmswM3igg/cWgtO2jFm0K5bVzZjucKj2TIeXDZK
-         RkA5n+zF+pMvqV5iUnSBPTkdihMMWZfiigWW0FlaiCZaHT7dsWQSAvnsrF+dIQQCe0d9
-         r7qkxMltlUO+tnUSr/Vr/uyNrfuC+LucP/z2b7eOMJxE04iR76x6lIqQru8VYnCHtxZq
-         uuCcAQ5M3pPSCLr5/lqeoQAfJKMCHZW6GipYZ1szKzmmvo1o+ZFaLuO12RHyl1AtJgc3
-         P12w==
+        d=gmail.com; s=20251104; t=1777935288; x=1778540088; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=E+0MK1TD8LHF29R/J38mIFeUjCIqs/VJGJSF3NIKwpY=;
+        b=Nl72F/9NSNYqgT07P2OkRiDINF1baUz06gJEo6FPL6aqa+bqDCgsm4438t2fYF81/G
+         o+Ikw4VY5QBg7XiJ9LnXjETttLUUHNBlvr1oaj+qzsuCbyXYifVVkNbjQpYJasqrrzu6
+         ySzWhtDZ2xlL8sReZgGiBqd1cl6xQZDZgcorMhgQ6Eqb6m5NuNkjbwbWjWQhHOE1xHT8
+         kHqKd+rx5++vZ0sBOgC2HqRb3iSGxdOcN5ALN+FfWZ3VD5AzBF70kyjj2wZhhvBVGa/1
+         SFCCaUe+e3W2vpFrK53SLw1BUtQjoMZFvu0GmYOeCCiEy9dUjbcOolRf/fIiTQeDGkMs
+         7uJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777903735; x=1778508535;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=o/bYFesHn1kIDI8fklk+0lHQz2id7d/lJYv40PzE0Ww=;
-        b=VQMI9aY2mWWqoZTs8yJm9Ut2g6cpPprt+Cjzac4hQbYSLSpjh1tsiiiEqnSbgxocOe
-         1pA7kRv9VHxHUa5InUJvZ+4Cf0qgblHnVT5HqdRo/DzAWLZtEpxVM+jMkDDPqPK/v00I
-         o2pIQd/rhUaV3YCnMD0J7JmuLt88J9lwTjRtCsQ3f2d4qKQsJzGtHg0O0zDfVaEnnNT3
-         PJHCDqwt0PoZSdIi+FWVUreo8XfSeBvVznzbaDjRNJWmutkbcU85ybbD1Pg1LgvML87s
-         qqjP2MhsccZz/Gf9sv6NhFQDRIRM3OxL/QiWwJU67sgX/bH4uBrojogg4gqI10detl72
-         dPcA==
-X-Gm-Message-State: AOJu0YywlVh6L/z6kTEnLhQisbWvp6FraZ75D74dCxv/s0mzXovMTHOz
-	ZMHTfkuMmQovtPcZrCfe+Ejt/F1rx8+CBIC/NDlIDFLGPFX4QnV2OEQL5OOQcw==
-X-Gm-Gg: AeBDieuqT9muAcPUAZbi/U1hLNSunIztd+eWeZ9C7YEzW4bQqGHbQmBSgYjn7oDSk1Q
-	X53QJuj7WP2v5l+NlwMJI8T6JFBhme8FghxbqYMGtBSp3q5R2IY8GcbWccIGct5HoAkUbiBxU5j
-	hSB+cN3WFWTl1MqiZgufpm45gy/eWecoo2aStg7z8a8Ck8yGzspnlL9+DdUtko3idOF8ggRHj4q
-	8mTgxbzz8HDZEhtEKqxWi5FXYgM/xFW+se3pAZdGwv2zsQqu87ryk46ZlxXnN9iLgbakIGijo7c
-	/+yBPqzUSRhSfD4SxmWUF2lLpRZYHuN8GqW2pO1lrwodKqJWwrINA+XS+5sbiMGH4Jug8jVeFox
-	9/TJjlbhyZ/Ae29Wio0lPdHsbp8WGlhJep988NCN9sav/LDr1odoS5gUE09ulmi2WOLefMNoXdz
-	wONYbgYr9q58DSwScVb00AUUiWgJUbugbRqqa4eKR8Rw==
-X-Received: by 2002:a5d:6a04:0:b0:44b:e349:e6bc with SMTP id ffacd0b85a97d-44be349e6d8mr10361087f8f.3.1777903734820;
-        Mon, 04 May 2026 07:08:54 -0700 (PDT)
-Received: from desktop ([51.154.145.205])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-44a981defb3sm35263394f8f.20.2026.05.04.07.08.53
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20251104; t=1777935288; x=1778540088;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=E+0MK1TD8LHF29R/J38mIFeUjCIqs/VJGJSF3NIKwpY=;
+        b=qnfFbXvGPeyZf96hhThjUC9z/mX1FT2K/z7lVixW2g7EW2aEyw3JIXxHOxrO2Gi+f0
+         EvZatDRg2YvYV+lW2po0hIzZU98TouoRm3vMUV+EjJqS2ifYQnRL132YiHRJSMUsnzNi
+         7+iRknhlGVEaHfNsrVd2c+zB0D610MdP8t99HqONlCAtst0VrITQYmjwJYFpVca8sy+d
+         kDfkginhoroje8uRJIpUr1SJkulxY+oUgMz+rVVgdA3+lFOCXsCEodm30+ZnTjh/Ouvu
+         zRL/Iq+pV03Yvvf4sA/qDIEHASssrmN4pf40YJtBTliVIDFyJ6XqHWJf13o+qXwkREvz
+         FW/Q==
+X-Gm-Message-State: AOJu0Yxs3l41jFCq+AZ3UmjGWc79aO3mj/gbuulaoYNAAG9AUOZ8rLl5
+	6wac6YyCYr9vAWMi0XDAmJxklmuHjgtmRAdB7mAhKd63Y5A2NMwS9bjCJqPvXQ==
+X-Gm-Gg: AeBDiesA1khugXpjX4jSk3+F0YsB7hc9Eamvni8FGhh3brZZVt27f30pzwb9d+9syoj
+	rdsm1U2hJ3IPt99qi9svn+sy+4NdngXw/PUzhz17qmP/PvFR6agBuHB5jHl4NHd0KSFATdBeI69
+	Vh+XbzjZUUMKRkLpzBhv93rr6l2ZUe/RvokLntARNfI+j88iVRAfpGAa9wg0ZWiEX6i/5gZt5Vi
+	lyW4LPXN/skrnblcerwysjBPtVGFHFmjXjczRF94tgtpTmm8yAo9BzrYuptFl6wnVY1s4ULryV1
+	aORBdow97Fslmg2qhgrg8oFR6i7ZjFaUPo2mo40VfmwB2qK4KC7tI4eMcX8gP3T3xp018ZgsMzC
+	Lnefj9IxJ3W6ep/iB3N6FZvL5so0X3XKUTpdCIZzOweSxsyNDzdlUYWJHB2oiG3nJklaAuF5duh
+	IwzLBC4A3WYOsJVXJRySZdXLirxXcGGyuyH2juGDwVOc+483s6uUCoiYWIsg==
+X-Received: by 2002:a05:6a00:300f:b0:82f:51e8:b38e with SMTP id d2e1a72fcca58-838fe484162mr1021779b3a.24.1777935288099;
+        Mon, 04 May 2026 15:54:48 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-839460a00f7sm165259b3a.32.2026.05.04.15.54.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 May 2026 07:08:53 -0700 (PDT)
-From: Gyorgy Sarvari <skandigraun@gmail.com>
+        Mon, 04 May 2026 15:54:47 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][kirkstone][PATCH] python3-soupsieve: fix tests with Python 3.10.20
-Date: Mon,  4 May 2026 16:08:53 +0200
-Message-ID: <20260504140853.741289-1-skandigraun@gmail.com>
-X-Mailer: git-send-email 2.54.0
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][PATCH 1/2] thrift: upgrade 0.22.0 -> 0.23.0
+Date: Tue,  5 May 2026 10:54:29 +1200
+Message-ID: <20260504225430.1302619-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 May 2026 14:08:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126777
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 May 2026 22:54:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126778
 
-The latest Python upgrade in oe-core has broken some
-ptests. This backported patch fixes them, they should work
-with both the latest and previous versions.
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
+License-Update: add attribution section for the third-party public-domain code[1]
+
+Dropped patch which is now merged in the upstream version.
+
+Changelog:
+https://thrift.apache.org/changelog
+
+[1]https://github.com/apache/thrift/commit/1e5fa4b9b35ad6bfeb238d19897ace7826eda057
+
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- ...ments-for-changes-in-HTML-parser-285.patch | 190 ++++++++++++++++++
- .../python/python3-soupsieve_2.3.1.bb         |   8 +-
- 2 files changed, 194 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-soupsieve/0001-Adjustments-for-changes-in-HTML-parser-285.patch
+ .../0001-support-reproducible-builds.patch    | 49 -------------------
+ .../{thrift_0.22.0.bb => thrift_0.23.0.bb}    |  5 +-
+ 2 files changed, 2 insertions(+), 52 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
+ rename meta-oe/recipes-connectivity/thrift/{thrift_0.22.0.bb => thrift_0.23.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-soupsieve/0001-Adjustments-for-changes-in-HTML-parser-285.patch b/meta-python/recipes-devtools/python/python3-soupsieve/0001-Adjustments-for-changes-in-HTML-parser-285.patch
-new file mode 100644
-index 0000000000..6e0d225b31
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-soupsieve/0001-Adjustments-for-changes-in-HTML-parser-285.patch
-@@ -0,0 +1,190 @@
-+From b799b964ef020f18daab3d0b7193b217e7412050 Mon Sep 17 00:00:00 2001
-+From: Isaac Muse <faceless.shop@gmail.com>
-+Date: Wed, 17 Dec 2025 19:33:55 -0700
-+Subject: [PATCH] Adjustments for changes in HTML parser (#285)
-+
-+Fixes #284
-+
-+Fixes running with python 3.10.20
-+Upstream-Status: Backport [https://github.com/facelessuser/soupsieve/commit/046ce54956a0c30120038561e53b40994d29de2c]
-+
-+Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-+---
-+ soupsieve/css_match.py                  |  2 +-
-+ tests/test_extra/test_soup_contains.py  |  4 +++-
-+ tests/test_level2/test_lang.py          |  4 +++-
-+ tests/test_level3/test_root.py          | 11 ++++++++---
-+ tests/test_level4/test_default.py       |  4 +++-
-+ tests/test_level4/test_dir.py           |  4 +++-
-+ tests/test_level4/test_indeterminate.py |  5 ++++-
-+ 7 files changed, 25 insertions(+), 9 deletions(-)
-+
-+diff --git a/soupsieve/css_match.py b/soupsieve/css_match.py
-+index 79bb870..c168436 100644
-+--- a/soupsieve/css_match.py
-++++ b/soupsieve/css_match.py
-+@@ -1185,7 +1185,7 @@ class CSSMatch(_DocumentNav):
-+         # Use cached meta language.
-+         if not found_lang and self.cached_meta_lang:
-+             for cache in self.cached_meta_lang:
-+-                if root is cache[0]:
-++                if root is not None and cast(str, root) is cache[0]:
-+                     found_lang = cache[1]
-+ 
-+         # If we couldn't find a language, and the document is HTML, look to meta to determine language.
-+diff --git a/tests/test_extra/test_soup_contains.py b/tests/test_extra/test_soup_contains.py
-+index 66240db..fdd8027 100644
-+--- a/tests/test_extra/test_soup_contains.py
-++++ b/tests/test_extra/test_soup_contains.py
-+@@ -2,7 +2,9 @@
-+ from .. import util
-+ import warnings
-+ import soupsieve as sv
-++from bs4 import BeautifulSoup
-+ 
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ class TestSoupContains(util.TestCase):
-+     """Test soup-contains selectors."""
-+@@ -250,7 +252,7 @@ class TestSoupContains(util.TestCase):
-+         self.assert_selector(
-+             markup,
-+             'span:-soup-contains("iframe")',
-+-            ['2'],
-++            [] if IFRAME_TEXT else ['2'],
-+             flags=util.PYHTML
-+         )
-+ 
-+diff --git a/tests/test_level2/test_lang.py b/tests/test_level2/test_lang.py
-+index 83b9ee4..082921c 100644
-+--- a/tests/test_level2/test_lang.py
-++++ b/tests/test_level2/test_lang.py
-+@@ -1,6 +1,8 @@
-+ """Test language selector."""
-+ from .. import util
-++from bs4 import BeautifulSoup
-+ 
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ class TestLang(util.TestCase):
-+     """Test language selector."""
-+@@ -58,7 +60,7 @@ class TestLang(util.TestCase):
-+         self.assert_selector(
-+             markup,
-+             "p:lang(en)",
-+-            ['3'],
-++            [] if IFRAME_TEXT else ['3'],
-+             flags=util.PYHTML
-+         )
-+ 
-+diff --git a/tests/test_level3/test_root.py b/tests/test_level3/test_root.py
-+index 60f7e75..3c6843c 100644
-+--- a/tests/test_level3/test_root.py
-++++ b/tests/test_level3/test_root.py
-+@@ -1,6 +1,10 @@
-+ """Test root selectors."""
-+ from .. import util
-+ import soupsieve as sv
-++from bs4 import BeautifulSoup
-++import pytest
-++
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ 
-+ class TestRoot(util.TestCase):
-+@@ -65,7 +69,7 @@ class TestRoot(util.TestCase):
-+         self.assert_selector(
-+             self.MARKUP_IFRAME,
-+             ":root",
-+-            ["root", "root2"],
-++            ["root"] if IFRAME_TEXT else ["root", "root2"],
-+             flags=util.PYHTML
-+         )
-+ 
-+@@ -85,17 +89,18 @@ class TestRoot(util.TestCase):
-+         self.assert_selector(
-+             self.MARKUP_IFRAME,
-+             ":root div",
-+-            ["div", "div2", "other-div"],
-++            ["div", "other-div"] if IFRAME_TEXT else ["div", "div2", "other-div"],
-+             flags=util.PYHTML
-+         )
-+ 
-+         self.assert_selector(
-+             self.MARKUP_IFRAME,
-+             ":root > body > div",
-+-            ["div", "div2", "other-div"],
-++            ["div", "other-div"] if IFRAME_TEXT else ["div", "div2", "other-div"],
-+             flags=util.PYHTML
-+         )
-+ 
-++    @pytest.mark.skipif(IFRAME_TEXT, reason="Requires old Python HTML handling")
-+     def test_iframe(self):
-+         """
-+         Test that we only count `iframe` as root since the scoped element is the root.
-+diff --git a/tests/test_level4/test_default.py b/tests/test_level4/test_default.py
-+index 852948d..dd7b53a 100644
-+--- a/tests/test_level4/test_default.py
-++++ b/tests/test_level4/test_default.py
-+@@ -1,6 +1,8 @@
-+ """Test default selectors."""
-+ from .. import util
-++from bs4 import BeautifulSoup
-+ 
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ class TestDefault(util.TestCase):
-+     """Test default selectors."""
-+@@ -113,7 +115,7 @@ class TestDefault(util.TestCase):
-+         self.assert_selector(
-+             markup,
-+             ":default",
-+-            ['d1', 'd3', 'd4'],
-++            ['d1', 'd3'] if IFRAME_TEXT else ['d1', 'd3', 'd4'],
-+             flags=util.PYHTML
-+         )
-+ 
-+diff --git a/tests/test_level4/test_dir.py b/tests/test_level4/test_dir.py
-+index e427715..e1a68f2 100644
-+--- a/tests/test_level4/test_dir.py
-++++ b/tests/test_level4/test_dir.py
-+@@ -2,7 +2,9 @@
-+ """Test direction selectors."""
-+ from .. import util
-+ import soupsieve as sv
-++from bs4 import BeautifulSoup
-+ 
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ class TestDir(util.TestCase):
-+     """Test direction selectors."""
-+@@ -170,7 +172,7 @@ class TestDir(util.TestCase):
-+         self.assert_selector(
-+             markup,
-+             "div:dir(rtl)",
-+-            ['2'],
-++            [] if IFRAME_TEXT else ['2'],
-+             flags=util.PYHTML
-+         )
-+ 
-+diff --git a/tests/test_level4/test_indeterminate.py b/tests/test_level4/test_indeterminate.py
-+index 8e949ff..6867dae 100644
-+--- a/tests/test_level4/test_indeterminate.py
-++++ b/tests/test_level4/test_indeterminate.py
-+@@ -1,5 +1,8 @@
-+ """Test indeterminate selectors."""
-+ from .. import util
-++from bs4 import BeautifulSoup
-++
-++IFRAME_TEXT = BeautifulSoup('<iframe><div></div></iframe>', 'html.parser').iframe.text == '<div></div>'
-+ 
-+ 
-+ class TestIndeterminate(util.TestCase):
-+@@ -68,6 +71,6 @@ class TestIndeterminate(util.TestCase):
-+         self.assert_selector(
-+             markup,
-+             ":indeterminate",
-+-            ['radio1', 'radio3'],
-++            ['radio1'] if IFRAME_TEXT else ['radio1', 'radio3'],
-+             flags=util.PYHTML
-+         )
-diff --git a/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-index 0ef0c7e791..eec68682e4 100644
---- a/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-soupsieve_2.3.1.bb
-@@ -8,10 +8,10 @@ SRC_URI[sha256sum] = "b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
+deleted file mode 100644
+index 7fad4ddaa6..0000000000
+--- a/meta-oe/recipes-connectivity/thrift/thrift/0001-support-reproducible-builds.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From d4c19c3c88200c49d48c9d47971977627f98f51b Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Thu, 20 Nov 2025 11:43:45 +0800
+-Subject: [PATCH] support reproducible builds
+-
+-In order to support reproducible builds [1], while using bison to generate
+-source code, add COMPILE_FLAGS --file-prefix-map [2] to remove build path
+-prefix and source path prefix in the generated header file.
+-
+-[1] https://reproducible-builds.org/
+-[2] https://cgit.git.savannah.gnu.org/cgit/bison.git/commit/?id=dd878d18519689c7bbcd72de4c9f9e53085a3cbf
+-
+-Upstream-Status: Submitted [https://github.com/apache/thrift/pull/3246]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- compiler/cpp/CMakeLists.txt       | 2 +-
+- compiler/cpp/tests/CMakeLists.txt | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/compiler/cpp/CMakeLists.txt b/compiler/cpp/CMakeLists.txt
+-index 4c1c2c5..a1a8fcb 100644
+---- a/compiler/cpp/CMakeLists.txt
+-+++ b/compiler/cpp/CMakeLists.txt
+-@@ -30,7 +30,7 @@ find_package(BISON REQUIRED)
+- file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/thrift/)
+- 
+- # Create flex and bison files and build the lib parse static library
+--BISON_TARGET(thrifty ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc)
+-+BISON_TARGET(thrifty ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc COMPILE_FLAGS "--file-prefix-map=${CMAKE_BINARY_DIR}='' --file-prefix-map=${CMAKE_SOURCE_DIR}=''")
+- FLEX_TARGET(thriftl ${CMAKE_CURRENT_SOURCE_DIR}/src/thrift/thriftl.ll ${CMAKE_CURRENT_BINARY_DIR}/thrift/thriftl.cc)
+- ADD_FLEX_BISON_DEPENDENCY(thriftl thrifty)
+- 
+-diff --git a/compiler/cpp/tests/CMakeLists.txt b/compiler/cpp/tests/CMakeLists.txt
+-index 6a078ec..39f5bb2 100644
+---- a/compiler/cpp/tests/CMakeLists.txt
+-+++ b/compiler/cpp/tests/CMakeLists.txt
+-@@ -45,7 +45,7 @@ find_package(BISON REQUIRED)
+- file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/thrift/)
+- 
+- # Create flex and bison files and build the lib parse static library
+--BISON_TARGET(thrifty ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc)
+-+BISON_TARGET(thrifty ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thrifty.yy ${CMAKE_CURRENT_BINARY_DIR}/thrift/thrifty.cc COMPILE_FLAGS "--file-prefix-map=${CMAKE_BINARY_DIR}='' --file-prefix-map=${CMAKE_SOURCE_DIR}=''")
+- FLEX_TARGET(thriftl ${THRIFT_COMPILER_SOURCE_DIR}/src/thrift/thriftl.ll ${CMAKE_CURRENT_BINARY_DIR}/thrift/thriftl.cc)
+- ADD_FLEX_BISON_DEPENDENCY(thriftl thrifty)
+- 
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.23.0.bb
+similarity index 91%
+rename from meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
+rename to meta-oe/recipes-connectivity/thrift/thrift_0.23.0.bb
+index 8ca1d0085e..4f90628b4a 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.22.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.23.0.bb
+@@ -3,16 +3,15 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
+ HOMEPAGE = "https://thrift.apache.org/"
  
- inherit pypi python_setuptools_build_meta ptest
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=c40a383cb3f747e0c7abbf1482f194f0 \
++LIC_FILES_CHKSUM = "file://LICENSE;md5=bdfca4cb0874071cc3e42d2ae3b05a77 \
+                     file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
  
--SRC_URI += " \
--        file://run-ptest \
--        file://update_tests_for_latest_libxml.patch \
--"
-+SRC_URI += "file://run-ptest \
-+           file://update_tests_for_latest_libxml.patch \
-+           file://0001-Adjustments-for-changes-in-HTML-parser-285.patch \
-+           "
+ DEPENDS = "thrift-native boost flex-native bison-native openssl zlib"
  
- RDEPENDS:${PN}-ptest += " \
-         ${PYTHON_PN}-pytest \
+ SRC_URI = "https://downloads.apache.org/${BPN}/${PV}/${BP}.tar.gz \
+            file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
+-           file://0001-support-reproducible-builds.patch \
+            "
+-SRC_URI[sha256sum] = "794a0e455787960d9f27ab92c38e34da27e8deeda7a5db0e59dc64a00df8a1e5"
++SRC_URI[sha256sum] = "1859d932d2ae1f13d16c5a196931208c116310a5ff50f2bfd11d3db03be8f46f"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
 
