@@ -2,406 +2,3885 @@ Return-Path: <emailaddress.ashish@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC3FBCD3427
-	for <webhook@archiver.kernel.org>; Tue,  5 May 2026 15:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0847BFF8855
+	for <webhook@archiver.kernel.org>; Tue,  5 May 2026 15:07:01 +0000 (UTC)
 Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.41915.1777993620059472479
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.41914.1777993617730283415
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 May 2026 08:07:00 -0700
+ Tue, 05 May 2026 08:06:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gHx+asZc;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=eJX5GVwj;
  spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: emailaddress.ashish@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-365212191f6so2187376a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2026 08:07:00 -0700 (PDT)
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-356337f058aso3526584a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2026 08:06:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1777993619; x=1778598419; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1777993617; x=1778598417; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=i76pv/Y09XZF/7THw6BTCDJDPFl+MVWj1VGu4e/1j3M=;
-        b=gHx+asZckj2NopaSvxjo9/iGnASOA4SZHousN2i97moEuL5m9YzoIoJ5jVr8y/w9uZ
-         EjTUWjWrAD2vqRDeJZk1bGAn85zkq4qhSkTi+gOumz2L86K0K1do5T+K819aQz3lRkks
-         aaxHn4sizK1Qsu3jTBbVN1Sn86Ohl7VfHTlCgcmI+QUUWvfGTmhwoTIvQZOl/li+qd5e
-         H1FPzqTnZ+cQ/w43SL+HqK0Ti393eqIbGQMWOOHU5rQt5Ikhk3Y7zjWBdeDtMlo3RCBk
-         NcbZ8x/MJw0i3HVoLvslmKg0RqmVfaEB5Np6ebLCuVw+0USTP4p18PzGOEIx2tdPLyfL
-         7aXg==
+        bh=QNYEDKntebZO9feoqb4DiCWZguSrxRbyxXlET9tep+0=;
+        b=eJX5GVwjpiqEN5VjSBEYjhLasgswVv3GubJu+7XF21O/ik7igo9ileHn8kxtYQYLmM
+         1NbZ5Oy7UEeLB+BOQY73eVvyH0pSUTzoOiCTrWCHiUQ3gkhi0HIPYr1i7ELRJIti6MYG
+         88OL/PMYW8YtRkpV7ZbYOD85VmoUN96SRHvIBHRyvvhX8/ae6LJ//5b/u6odiG9y/kIb
+         89EwD2TwqZdS0KqaTAyj8Sv3WZPWOZBglygLYEOTKf1LV5DGgLfMvvFSiYB4ohKsAoP6
+         iF5BoyJe2fx4o+Bhj7BONEmH66MoL+qCALYj7RmYsCCj20pRXiTPheh7uNUDzr8zEkzi
+         r1lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1777993619; x=1778598419;
+        d=1e100.net; s=20251104; t=1777993617; x=1778598417;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=i76pv/Y09XZF/7THw6BTCDJDPFl+MVWj1VGu4e/1j3M=;
-        b=JNYKUBS6WdxpGJ7+HMqehcdjtoUVD9q0QXYbjkaxt97KuBfPI0p8yWXRNgGx8H4zj8
-         /Sb8Gh5P81dL7cene9uhDpvv3NsQFhL97jbbNLndKc1s6myfvJQcHmpEekLWC1XVXz21
-         P3Sbo2yB9KymxaFg0DbyEC7vu/yQVIiAxcjDivKWipeirrqC2BUs5iPwLCLmqUgxT5gm
-         Syz6wHEYAjDBqQfn9OkriefhQ5jjagDwrkeVyQPYhWAyeZY0h0lXTagQBVHjyGt0VbCn
-         rF4XtpVVSgMhqftMYs3HF82atP6kNskBcmylL3Pkhm/1IK6/aj0N9ZWCPo1Jyo4mB+Lk
-         jqvw==
-X-Gm-Message-State: AOJu0YwBtFeoUmE7kBA+mglF7Y8XIA28XOgS5ATkaZzVFGkVxTvC7DEO
-	u+1b1JWTRZUi2d7VDVOkW67L6p38sl8vFEcdvB8NX3xNplgSGYfrS3mwIZPaMA==
-X-Gm-Gg: AeBDiet3LzA6813glWgyq/ytxmnpbViLJdql1ju25kfNim9cr8nhtnCdzRGcGyihAhU
-	KrlmbRZnuVCKV1BWuWSgK+MFrNDBOkBPW4SLNTgu27DeSDNhjgj6YncA9Wonvib1ld0twwjg+oa
-	h51ssGWyqGahLhHWGk524V3o1CBHXsoCcIuGCQINtgqhrlYulvHOQq83Dfc7kxAzXfrN/B6Kz25
-	7t63/QuBmHM3kxeN4wn1FNT16w/qIA2WUC1gUvHs3ol6e2ltBeJfkPin4FDSzGdL2FWHKiTh7LN
-	ikhH0CXI2+A13jgjG5lJoia50MQ+VH9CvLDZgWoU4sIIj0tfdzkYdWwmstcwaLagIQXc8maL07Z
-	qk1Ygk85aAc8s8VAgM6oBOohGRrHOs3Z9ljbtb2zgyHtdR2Saybj9hCQD4aK/cA/1/2C18+lM+V
-	cBiMuTkBd0398=
-X-Received: by 2002:a17:90b:55cf:b0:35e:5051:fb18 with SMTP id 98e67ed59e1d1-3657761a357mr3488890a91.26.1777993617442;
-        Tue, 05 May 2026 08:06:57 -0700 (PDT)
+        bh=QNYEDKntebZO9feoqb4DiCWZguSrxRbyxXlET9tep+0=;
+        b=F12/9rM0wQHvJ61n3O6cWaZ50opZ/jliiqdM8cJdQyw4wlHh3LrBmXYtx6TUpMOA2e
+         1Ri38NpF35zJcI5blASIpZaEPgL+AzMoBrTa74GI/Z1+sul9u8xlhWCgnTu6rSKf1G+R
+         I5cbMMq6/384RBoecaqpibj78WjFyc6V7PnwmFey84P+u2m+/vdA+AKX3ul2Oi81APu6
+         2hPic8sA0FrMPX5cBLTqnF3JanYuQLr2PH0ZbA4xAlFhvw0dYSkB0+dczmIqumNDJ+fz
+         AEt8lni9YY1Q4OVfvla5HHoPqU7gdC+MZT72PEJQdMACNmbVR8Dr6pbGdjuk8mJbhdjr
+         +TZA==
+X-Gm-Message-State: AOJu0YzP9zMKSM5/oa6aF1CaVTCP+KZB/6JW9Dxu6/QujuWNvwUgC7aV
+	JXXEBUjJdzmKYmTyDdGQh430ifuHLOCbEBE7LF9FDIAjumEQxPiIZw1CbEKP4w==
+X-Gm-Gg: AeBDietvObiRIU+tDkVxiQqrNe7aBrTxfFM/o4FGfw4+zYJP6oV+c7spYx9cVxhvADV
+	ZckcWW4dEUfN/OY/uGeJ39iCRejVEUlQI2JgxdyKDBaGyatp2/bW/AAjmHtBWuUVMHzxL4fSbvB
+	AkrxUV0LiK6EgUuyVH1VupyGBnJLmsb1QOey7WRIxXPN9oWmtOUpQaLowHy0gQygeOvUnxdC306
+	5uzSZdi2zqGtqRPpdFbf1+IZaJXGt3lNnVW4Okri3GvKsWxfwZC0iMPmp2/6+FQhBDayYn7S5K2
+	OiG//rr5qzuwTEjG3F+6yTnUTCFCtD/idA3ZIJp/g1tUEQhqYy0OHnIrnWDl7g+5jTSDJ7k+9J4
+	wpbZS6neiIhqdl3AisB4mM2mtZcE6xjSf+oPei4xVj8lrmHUr32gQ1/6t69dq95UA8PMevfHAzU
+	WDO6EbNEjAYxo=
+X-Received: by 2002:a17:90b:2b45:b0:361:423d:2026 with SMTP id 98e67ed59e1d1-3650cdbcabfmr13627935a91.12.1777993613780;
+        Tue, 05 May 2026 08:06:53 -0700 (PDT)
 Received: from ashishkumar.. ([2406:7400:94:f3a8:779c:1a0f:5ac1:14ef])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364dbeb2db0sm20957092a91.10.2026.05.05.08.06.55
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-364dbeb2db0sm20957092a91.10.2026.05.05.08.06.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 May 2026 08:06:56 -0700 (PDT)
+        Tue, 05 May 2026 08:06:52 -0700 (PDT)
 From: AshishKumar Mishra <emailaddress.ashish@gmail.com>
 X-Google-Original-From: AshishKumar Mishra
 To: openembedded-devel@lists.openembedded.org
 Cc: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
-Subject: [meta-oe][PATCH v3 2/3] android-tools: move android-tools v29.x from dynamic-layers/selinux to meta-oe
-Date: Tue,  5 May 2026 20:36:32 +0530
-Message-ID: <20260505150634.192651-3-emailaddress.ashish@gmail.com>
+Subject: [meta-oe][PATCH v3 1/3] android-tools: remove android-tools 5.x from meta-oe/recipes-devtools
+Date: Tue,  5 May 2026 20:36:31 +0530
+Message-ID: <20260505150634.192651-2-emailaddress.ashish@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
 References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2026 15:07:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126790
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 May 2026 15:07:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126789
 
 From: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
 
-Relocate the recipe from dynamic-layers/selinux/ to the main
-meta-oe/recipes-devtools/ directory.
-
-The android-tools recipe (version 29.0.6.r14) was previously restricted
-to the selinux dynamic-layer.
-Investigation shows that version 29.0.6.r14 does not have a hard dependency
-on libselinux for core tool functionality.
-(adb, fastboot, and sparse image tools).
-- Basic runable test was done for binaries in android-tools-native
-- Checked for selinux absense by looking for selinx using $ ldd binary-name
-
-Changes:
-- Relocate recipe from dynamic-layers/selinux/ to recipes-devtools/
+We plan to upgrade android-tools from the legacy 5.1.1 version to 29.0.6.r14
+To achive this we are removing the older version from meta-oe/recipes-devtools/
 
 Signed-off-by: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
 ---
- .../android-tools/android-tools-conf/android-gadget-setup         | 0
- .../android-tools/android-tools-conf_1.0.bb                       | 0
- .../android-tools/android-tools/0001-Fixes-for-yocto-build.patch  | 0
- .../android-tools/0001-liblp-fix-building-with-GCC-14.patch       | 0
- ...002-android-tools-modifications-to-make-it-build-in-yoct.patch | 0
- ...003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch | 0
- .../android-tools/0004-adb-Fix-build-on-big-endian-systems.patch  | 0
- .../android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch     | 0
- .../android-tools/android-tools/adbd.mk                           | 0
- .../android-tools/android-tools/android-tools-adbd.service        | 0
- .../android-tools/android-tools/debian/Add-riscv64-support.patch  | 0
- .../android-tools/debian/Added-missing-headers.patch              | 0
- .../android-tools/android-tools/debian/Nonnull.patch              | 0
- .../android-tools/android-tools/debian/Vector-cast.patch          | 0
- .../android-tools/android-tools/debian/add-missing-headers.patch  | 0
- .../external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch     | 0
- .../external/libunwind/legacy_built-in_sync_functions.patch       | 0
- .../libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch   | 0
- .../libunwind-guard-unreachable-macro-to-avoid-redefinit.patch    | 0
- .../android-tools/debian/external/libunwind/user_pt_regs.patch    | 0
- .../android-tools/debian/fix-attribute-issue-with-gcc.patch       | 0
- .../android-tools/android-tools/debian/fix-build-on-non-x86.patch | 0
- .../android-tools/debian/fix-gettid-exception-declaration.patch   | 0
- .../android-tools/debian/fix-standard-namespace-errors.patch      | 0
- .../android-tools/debian/hard-code-build-number.patch             | 0
- .../android-tools/android-tools/debian/libusb-header-path.patch   | 0
- .../android-tools/debian/move-log-file-to-proper-dir.patch        | 0
- .../android-tools/android-tools/debian/simg_dump-python3.patch    | 0
- .../android-tools/android-tools/debian/stdatomic.patch            | 0
- .../android-tools/android-tools/debian/stub-out-fastdeploy.patch  | 0
- .../android-tools/debian/system/core/Add-riscv64-support.patch    | 0
- .../android-tools/debian/system/core/Added-missing-headers.patch  | 0
- .../android-tools/android-tools/debian/system/core/Nonnull.patch  | 0
- .../android-tools/debian/system/core/Vector-cast.patch            | 0
- .../android-tools/debian/system/core/add-missing-headers.patch    | 0
- .../android-tools-scope-write-macro-to-prevent-conflict-.patch    | 0
- .../debian/system/core/fix-attribute-issue-with-gcc.patch         | 0
- .../android-tools/debian/system/core/fix-build-on-non-x86.patch   | 0
- .../debian/system/core/fix-gettid-exception-declaration.patch     | 0
- .../debian/system/core/fix-standard-namespace-errors.patch        | 0
- .../android-tools/debian/system/core/hard-code-build-number.patch | 0
- .../android-tools/debian/system/core/libusb-header-path.patch     | 0
- .../libziparchive-fix-missing-fixed-width-integer-types-.patch    | 0
- .../debian/system/core/move-log-file-to-proper-dir.patch          | 0
- .../android-tools/debian/system/core/simg_dump-python3.patch      | 0
- .../android-tools/debian/system/core/stdatomic.patch              | 0
- .../android-tools/debian/system/core/stub-out-fastdeploy.patch    | 0
- .../debian/system/core/throw-exception-on-unknown-os.patch        | 0
- .../android-tools/debian/throw-exception-on-unknown-os.patch      | 0
- .../android-tools/android-tools/remount                           | 0
- .../android-tools/android-tools/rules_yocto.mk                    | 0
- .../android-tools/android-tools_29.0.6.r14.bb                     | 0
- 52 files changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools-conf/android-gadget-setup (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools-conf_1.0.bb (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0001-Fixes-for-yocto-build.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/adbd.mk (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/android-tools-adbd.service (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Add-riscv64-support.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Added-missing-headers.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Nonnull.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/Vector-cast.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/add-missing-headers.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-build-on-non-x86.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/fix-standard-namespace-errors.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/hard-code-build-number.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/libusb-header-path.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/simg_dump-python3.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/stdatomic.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/stub-out-fastdeploy.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Added-missing-headers.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Nonnull.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/Vector-cast.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/add-missing-headers.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/hard-code-build-number.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/libusb-header-path.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/simg_dump-python3.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/stdatomic.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/remount (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools/rules_yocto.mk (100%)
- rename meta-oe/{dynamic-layers/selinux/recipes-devtool => recipes-devtools}/android-tools/android-tools_29.0.6.r14.bb (100%)
+ .../10-adbd-configfs.conf                     |   4 -
+ .../android-gadget-cleanup                    |  24 --
+ .../android-gadget-setup                      |  38 --
+ .../android-gadget-start                      |   9 -
+ .../android-tools-conf-configfs_1.0.bb        |  38 --
+ .../android-tools-conf/android-gadget-setup   |  37 --
+ .../android-tools/android-tools-conf_1.0.bb   |  22 --
+ .../android-tools/android-tools/adb.mk        |  72 ----
+ .../android-tools/android-tools/adbd.mk       | 164 --------
+ .../android-tools/android-tools-adbd.service  |  13 -
+ ...scv-Add-risc-v-Android-config-header.patch | 361 ------------------
+ .../0001-adb-remove-selinux-extensions.patch  |  44 ---
+ ...define-strlcpy-for-glibc-based-syste.patch |  35 --
+ ...-Use-local-sockets-where-appropriate.patch |  70 ----
+ .../core/0003-adb-define-shell-command.patch  |  29 --
+ ...-adb-Fix-build-on-big-endian-systems.patch |  47 ---
+ .../0005-adb-add-base64-implementation.patch  | 350 -----------------
+ .../core/0006-adb-Musl-fixes.patch            | 130 -------
+ ...sb_linux.c-fix-build-with-glibc-2.28.patch |  26 --
+ ...008-adb-Allow-adbd-to-be-ran-as-root.patch |  23 --
+ ...Add-dt-parameter-to-specify-DT-image.patch | 110 ------
+ ...ux-capability.h-on-linux-systems-too.patch |  23 --
+ .../0011-Remove-bionic-specific-calls.patch   |  64 ----
+ ...laration-of-stlcat-strlcopy-function.patch |  50 ---
+ .../core/0013-adb-Support-riscv64.patch       | 191 ---------
+ ...add-u3-ss-descriptor-support-for-adb.patch | 344 -----------------
+ ...off-most-of-sparse_file_read_normal-.patch |  60 ---
+ ...se-Add-hole-mode-to-sparse_file_read.patch | 188 ---------
+ ...port-for-converting-holes-to-don-t-c.patch | 114 ------
+ .../android-tools/core/adb_libssl_11.diff     |  48 ---
+ .../core/b64_pton_function_decl.patch         |  14 -
+ .../android-tools/android-tools/ext4_utils.mk | 103 -----
+ ...ext4_utils-remove-selinux-extensions.patch |  39 --
+ ...add-o-argument-to-preserve-ownership.patch |  78 ----
+ ...unused-parameter-from-allocate_inode.patch |  69 ----
+ .../android-tools/android-tools/fastboot.mk   |  89 -----
+ .../android-tools/android-tools/gitignore     |  59 ---
+ .../0001-Remove-bionic-specific-calls.patch   |  25 --
+ ...t-define-gettid-if-glibc-2.30-is-use.patch |  51 ---
+ .../android-tools/android-tools/mkbootimg.mk  |  29 --
+ .../android-tools/android-tools_5.1.1.r37.bb  | 189 ---------
+ 41 files changed, 3473 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/adb.mk
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/build/0001-Riscv-Add-risc-v-Android-config-header.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0001-adb-remove-selinux-extensions.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0002-adb-Use-local-sockets-where-appropriate.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0003-adb-define-shell-command.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0004-adb-Fix-build-on-big-endian-systems.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0005-adb-add-base64-implementation.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0006-adb-Musl-fixes.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0008-adb-Allow-adbd-to-be-ran-as-root.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0010-Use-linux-capability.h-on-linux-systems-too.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0011-Remove-bionic-specific-calls.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0013-adb-Support-riscv64.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/core/b64_pton_function_decl.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/ext4_utils.mk
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0001-ext4_utils-remove-selinux-extensions.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/fastboot.mk
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/gitignore
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-Remove-bionic-specific-calls.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/mkbootimg.mk
+ delete mode 100644 meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
 
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf/android-gadget-setup
-rename to meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools-conf_1.0.bb
-rename to meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0001-Fixes-for-yocto-build.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0001-Fixes-for-yocto-build.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0001-Fixes-for-yocto-build.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0001-Fixes-for-yocto-build.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0001-liblp-fix-building-with-GCC-14.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0002-android-tools-modifications-to-make-it-build-in-yoct.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0003-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0004-adb-Fix-build-on-big-endian-systems.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch b/meta-oe/recipes-devtools/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/adbd.mk b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/adbd.mk
-rename to meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/android-tools-adbd.service
-rename to meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Add-riscv64-support.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/Add-riscv64-support.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Add-riscv64-support.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/Add-riscv64-support.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Added-missing-headers.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/Added-missing-headers.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Added-missing-headers.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/Added-missing-headers.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Nonnull.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/Nonnull.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Nonnull.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/Nonnull.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Vector-cast.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/Vector-cast.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/Vector-cast.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/Vector-cast.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/add-missing-headers.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/add-missing-headers.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/add-missing-headers.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/add-missing-headers.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/legacy_built-in_sync_functions.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/libunwind-fix-strchr-conformance-to-ISO-C23.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/libunwind-guard-unreachable-macro-to-avoid-redefinit.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/external/libunwind/user_pt_regs.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-attribute-issue-with-gcc.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-build-on-non-x86.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-build-on-non-x86.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-build-on-non-x86.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-build-on-non-x86.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-gettid-exception-declaration.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-standard-namespace-errors.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-standard-namespace-errors.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/fix-standard-namespace-errors.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/fix-standard-namespace-errors.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/hard-code-build-number.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/hard-code-build-number.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/hard-code-build-number.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/hard-code-build-number.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/libusb-header-path.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/libusb-header-path.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/libusb-header-path.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/libusb-header-path.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/move-log-file-to-proper-dir.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/simg_dump-python3.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/simg_dump-python3.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/simg_dump-python3.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/simg_dump-python3.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/stdatomic.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/stdatomic.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/stdatomic.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/stdatomic.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/stub-out-fastdeploy.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/stub-out-fastdeploy.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/stub-out-fastdeploy.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/stub-out-fastdeploy.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Add-riscv64-support.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Added-missing-headers.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Added-missing-headers.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Added-missing-headers.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Added-missing-headers.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Nonnull.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Nonnull.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Nonnull.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Nonnull.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Vector-cast.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Vector-cast.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/Vector-cast.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/Vector-cast.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/add-missing-headers.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/add-missing-headers.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/add-missing-headers.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/add-missing-headers.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/android-tools-scope-write-macro-to-prevent-conflict-.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-attribute-issue-with-gcc.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-build-on-non-x86.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-gettid-exception-declaration.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/fix-standard-namespace-errors.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/hard-code-build-number.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/hard-code-build-number.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/hard-code-build-number.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/hard-code-build-number.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/libusb-header-path.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/libusb-header-path.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/libusb-header-path.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/libusb-header-path.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/libziparchive-fix-missing-fixed-width-integer-types-.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/move-log-file-to-proper-dir.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/simg_dump-python3.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/simg_dump-python3.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/simg_dump-python3.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/simg_dump-python3.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/stdatomic.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/stdatomic.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/stdatomic.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/stdatomic.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/stub-out-fastdeploy.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/system/core/throw-exception-on-unknown-os.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch b/meta-oe/recipes-devtools/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch
-rename to meta-oe/recipes-devtools/android-tools/android-tools/debian/throw-exception-on-unknown-os.patch
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/remount b/meta-oe/recipes-devtools/android-tools/android-tools/remount
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/remount
-rename to meta-oe/recipes-devtools/android-tools/android-tools/remount
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/rules_yocto.mk b/meta-oe/recipes-devtools/android-tools/android-tools/rules_yocto.mk
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools/rules_yocto.mk
-rename to meta-oe/recipes-devtools/android-tools/android-tools/rules_yocto.mk
-diff --git a/meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb b/meta-oe/recipes-devtools/android-tools/android-tools_29.0.6.r14.bb
-similarity index 100%
-rename from meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools/android-tools_29.0.6.r14.bb
-rename to meta-oe/recipes-devtools/android-tools/android-tools_29.0.6.r14.bb
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
+deleted file mode 100644
+index ddf155a907..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/10-adbd-configfs.conf
++++ /dev/null
+@@ -1,4 +0,0 @@
+-[Service]
+-ExecStartPre=/usr/bin/android-gadget-setup
+-ExecStartPost=/usr/bin/android-gadget-start
+-ExecStopPost=/usr/bin/android-gadget-cleanup
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
+deleted file mode 100644
+index f27d77df51..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-cleanup
++++ /dev/null
+@@ -1,24 +0,0 @@
+-#!/bin/sh
+-
+-[ -d /sys/kernel/config/usb_gadget ] || exit 0
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-cd adb
+-
+-echo -n "" > UDC || true
+-
+-killall adbd || true
+-
+-umount /dev/usb-ffs/adb
+-
+-rm configs/c.1/ffs.usb0
+-
+-rmdir configs/c.1/strings/0x409
+-rmdir configs/c.1
+-
+-rmdir functions/ffs.usb0
+-rmdir strings/0x409
+-
+-cd ..
+-rmdir adb
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
+deleted file mode 100644
+index 47e4edb9be..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-setup
++++ /dev/null
+@@ -1,38 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-conf="Conf 1"
+-manufacturer=RPB
+-model="Android device"
+-product=0xd002
+-serial=0123456789ABCDEF
+-vendor=0x18d1
+-
+-if [ -r /etc/android-gadget-setup.machine ] ; then
+-	. /etc/android-gadget-setup.machine
+-fi
+-
+-[ -d /sys/kernel/config/usb_gadget ] || modprobe libcomposite
+-
+-cd /sys/kernel/config/usb_gadget
+-
+-[ -d adb ] && /usr/bin/android-gadget-cleanup || true
+-
+-mkdir adb
+-cd adb
+-
+-mkdir configs/c.1
+-mkdir functions/ffs.usb0
+-mkdir strings/0x409
+-mkdir configs/c.1/strings/0x409
+-echo -n "$vendor"  > idVendor
+-echo -n "$product" > idProduct
+-echo "$serial" > strings/0x409/serialnumber
+-echo "$manufacturer" > strings/0x409/manufacturer
+-echo "$model" > strings/0x409/product
+-echo "$conf" > configs/c.1/strings/0x409/configuration
+-ln -s functions/ffs.usb0 configs/c.1
+-
+-mkdir -p /dev/usb-ffs/adb
+-mount -t functionfs usb0 /dev/usb-ffs/adb
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
+deleted file mode 100644
+index 76b5e29624..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs/android-gadget-start
++++ /dev/null
+@@ -1,9 +0,0 @@
+-#!/bin/sh
+-
+-set -e
+-
+-sleep 10
+-
+-ls /sys/class/udc/ | head -n 1 | xargs echo -n > /sys/kernel/config/usb_gadget/adb/UDC
+-
+-echo "Setting UDC $(ls /sys/class/udc/ | head -n 1) for USB ADB Gadget usage"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
+deleted file mode 100644
+index 342e7fd1a5..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_1.0.bb
++++ /dev/null
+@@ -1,38 +0,0 @@
+-DESCRIPTION = "Different utilities from Android - corressponding configuration files for using ConfigFS"
+-SECTION = "console/utils"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-
+-S = "${UNPACKDIR}"
+-
+-SRC_URI = " \
+-    file://android-gadget-setup \
+-    file://android-gadget-start \
+-    file://android-gadget-cleanup \
+-    file://10-adbd-configfs.conf \
+-"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-setup ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-start ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-cleanup ${D}${bindir}
+-
+-    if [ -r ${UNPACKDIR}/android-gadget-setup.machine ] ; then
+-	install -d ${D}${sysconfdir}
+-	install -m 0644 ${UNPACKDIR}/android-gadget-setup.machine ${D}${sysconfdir}
+-    fi
+-
+-    install -d ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-    install -m 0644 ${UNPACKDIR}/10-adbd-configfs.conf ${D}${systemd_unitdir}/system/android-tools-adbd.service.d
+-}
+-
+-FILES:${PN} += " \
+-    ${systemd_unitdir}/system/ \
+-"
+-
+-PROVIDES += "android-tools-conf"
+-RPROVIDES:${PN} = "android-tools-conf"
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup b/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
+deleted file mode 100644
+index 26cf30eddd..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf/android-gadget-setup
++++ /dev/null
+@@ -1,37 +0,0 @@
+-#!/bin/sh
+-
+-[ ! -e /dev/pts ] && mkdir -p /dev/pts
+-[ ! -e /dev/pts/0 ] && mount devpts /dev/pts -t devpts
+-
+-# TODO enable the lines below once we have support for getprop
+-# retrieve the product info from Android
+-# manufacturer=$(getprop ro.product.manufacturer Android)
+-# model=$(getprop ro.product.model Android)
+-# serial=$(getprop ro.serialno 0123456789ABCDEF)
+-
+-#below are now needed in order to use FunctionFS for ADB, tested to work with 3.4+ kernels
+-if grep -q functionfs /proc/filesystems; then
+-    mkdir -p /dev/usb-ffs/adb
+-    mount -t functionfs adb /dev/usb-ffs/adb
+-    #android-gadget-setup doesn't provide below 2 and without them it won't work, so we provide them here.
+-    echo adb > /sys/class/android_usb/android0/f_ffs/aliases
+-    echo ffs > /sys/class/android_usb/android0/functions
+-fi
+-
+-manufacturer="$(cat /system/build.prop | grep -o 'ro.product.manufacturer=.*' | cut -d'=' -f 2)"
+-model="$(cat /system/build.prop | grep -o 'ro.product.model=.*' | cut -d'=' -f 2)"
+-# get the device serial number from /proc/cmdline directly(since we have no getprop on
+-# GNU/Linux)
+-serial="$(cat /proc/cmdline | sed 's/.*androidboot.serialno=//' | sed 's/ .*//')"
+-
+-echo $serial > /sys/class/android_usb/android0/iSerial
+-echo $manufacturer > /sys/class/android_usb/android0/iManufacturer
+-echo $model > /sys/class/android_usb/android0/iProduct
+-
+-echo "0" > /sys/class/android_usb/android0/enable
+-echo "18d1" > /sys/class/android_usb/android0/idVendor
+-echo "D002" > /sys/class/android_usb/android0/idProduct
+-echo "adb" > /sys/class/android_usb/android0/functions
+-echo "1" >  /sys/class/android_usb/android0/enable
+-
+-sleep 4
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
+deleted file mode 100644
+index 764d6b404f..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools-conf_1.0.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Different utilities from Android - corressponding configuration files"
+-SECTION = "console/utils"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+-
+-SRC_URI = "file://android-gadget-setup"
+-
+-S = "${UNPACKDIR}"
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+-do_install() {
+-    install -d ${D}${bindir}
+-    install -m 0755 ${UNPACKDIR}/android-gadget-setup ${D}${bindir}
+-}
+-
+-python () {
+-    pn = d.getVar('PN')
+-    profprov = d.getVar("PREFERRED_PROVIDER_" + pn)
+-    if profprov and pn != profprov:
+-        raise bb.parse.SkipRecipe("PREFERRED_PROVIDER_%s set to %s, not %s" % (pn, profprov, pn))
+-}
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/adb.mk b/meta-oe/recipes-devtools/android-tools/android-tools/adb.mk
+deleted file mode 100644
+index 0687c22c17..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/adb.mk
++++ /dev/null
+@@ -1,72 +0,0 @@
+-# Makefile for adb
+-
+-SRCDIR ?= $(S)
+-
+-VPATH += $(SRCDIR)/system/core/adb
+-adb_SRC_FILES += adb.c
+-adb_SRC_FILES += console.c
+-adb_SRC_FILES += transport.c
+-adb_SRC_FILES += transport_local.c
+-adb_SRC_FILES += transport_usb.c
+-adb_SRC_FILES += commandline.c
+-adb_SRC_FILES += adb_client.c
+-adb_SRC_FILES += adb_auth_host.c
+-adb_SRC_FILES += sockets.c
+-adb_SRC_FILES += services.c
+-adb_SRC_FILES += file_sync_client.c
+-adb_SRC_FILES += get_my_path_linux.c
+-adb_SRC_FILES += usb_linux.c
+-adb_SRC_FILES += usb_vendors.c
+-adb_SRC_FILES += fdevent.c
+-adb_OBJS := $(adb_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libcutils
+-libcutils_SRC_FILES += atomic.c
+-libcutils_SRC_FILES += hashmap.c
+-libcutils_SRC_FILES += native_handle.c
+-libcutils_SRC_FILES += config_utils.c
+-libcutils_SRC_FILES += cpu_info.c
+-libcutils_SRC_FILES += load_file.c
+-# libcutils_SRC_FILES += open_memstream.c
+-# libcutils_SRC_FILES += strdup16to8.c
+-# libcutils_SRC_FILES += strdup8to16.c
+-# libcutils_SRC_FILES += record_stream.c
+-# libcutils_SRC_FILES += process_name.c
+-# libcutils_SRC_FILES += threads.c
+-# libcutils_SRC_FILES += sched_policy.c
+-# libcutils_SRC_FILES += iosched_policy.c
+-libcutils_SRC_FILES += str_parms.c
+-libcutils_SRC_FILES += fs.c
+-libcutils_SRC_FILES += multiuser.c
+-libcutils_SRC_FILES += socket_inaddr_any_server.c
+-libcutils_SRC_FILES += socket_local_client.c
+-libcutils_SRC_FILES += socket_local_server.c
+-libcutils_SRC_FILES += socket_loopback_client.c
+-libcutils_SRC_FILES += socket_loopback_server.c
+-libcutils_SRC_FILES += socket_network_client.c
+-libcutils_SRC_FILES += sockets.c
+-libcutils_SRC_FILES += ashmem-host.c
+-libcutils_SRC_FILES += dlmalloc_stubs.c
+-libcutils_OBJS := $(libcutils_SRC_FILES:.c=.o)
+-
+-CFLAGS += -DANDROID
+-CFLAGS += -DWORKAROUND_BUG6558362
+-CFLAGS += -DADB_HOST=1
+-CFLAGS += -D_XOPEN_SOURCE -D_GNU_SOURCE
+-CFLAGS += -DANDROID_SMP=0
+-CFLAGS += -I$(SRCDIR)/system/core/adb
+-CFLAGS += -I$(SRCDIR)/system/core/include
+-CFLAGS += -include $(SRCDIR)/build/core/combo/include/arch/$(android_arch)/AndroidConfig.h
+-
+-LIBS += libcutils.a -lpthread -lcrypto
+-
+-all: adb
+-
+-adb: libcutils.a $(adb_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(adb_OBJS) $(LIBS)
+-
+-libcutils.a: $(libcutils_OBJS)
+-	$(AR) rcs $@ $(libcutils_OBJS)
+-
+-clean:
+-	$(RM) $(adb_OBJS) $(libcutils_OBJS) adb *.a
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+deleted file mode 100644
+index 31452ae104..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
++++ /dev/null
+@@ -1,164 +0,0 @@
+-# Makefile for adbd
+-
+-SRCDIR ?= $(S)
+-
+-VPATH += $(SRCDIR)/system/core/adb
+-adbd_SRC_FILES += adb.c
+-adbd_SRC_FILES += fdevent.c
+-adbd_SRC_FILES += transport.c
+-adbd_SRC_FILES += transport_local.c
+-adbd_SRC_FILES += transport_usb.c
+-adbd_SRC_FILES += adb_auth_client.c
+-adbd_SRC_FILES += sockets.c
+-adbd_SRC_FILES += services.c
+-adbd_SRC_FILES += file_sync_service.c
+-adbd_SRC_FILES += jdwp_service.c
+-adbd_SRC_FILES += framebuffer_service.c
+-adbd_SRC_FILES += remount_service.c
+-adbd_SRC_FILES += disable_verity_service.c
+-adbd_SRC_FILES += base64.c
+-adbd_SRC_FILES += usb_linux_client.c
+-adbd_OBJS := $(adbd_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/liblog
+-liblog_SRC_FILES += logd_write.c
+-liblog_SRC_FILES += log_event_write.c
+-liblog_SRC_FILES += logprint.c
+-liblog_SRC_FILES += event_tag_map.c
+-liblog_SRC_FILES += fake_log_device.c
+-liblog_OBJS := $(liblog_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/fs_mgr
+-fs_mgr_SRC_FILES += fs_mgr_fstab.c
+-fs_mgr_OBJS := $(fs_mgr_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libcutils
+-libcutils_SRC_FILES += atomic.c
+-libcutils_SRC_FILES += hashmap.c
+-libcutils_SRC_FILES += native_handle.c
+-libcutils_SRC_FILES += config_utils.c
+-libcutils_SRC_FILES += cpu_info.c
+-libcutils_SRC_FILES += load_file.c
+-# libcutils_SRC_FILES += open_memstream.c
+-# libcutils_SRC_FILES += strdup16to8.c
+-# libcutils_SRC_FILES += strdup8to16.c
+-# libcutils_SRC_FILES += record_stream.c
+-# libcutils_SRC_FILES += process_name.c
+-# libcutils_SRC_FILES += threads.c
+-# libcutils_SRC_FILES += sched_policy.c
+-# libcutils_SRC_FILES += iosched_policy.c
+-libcutils_SRC_FILES += str_parms.c
+-libcutils_SRC_FILES += fs.c
+-libcutils_SRC_FILES += multiuser.c
+-libcutils_SRC_FILES += socket_inaddr_any_server.c
+-libcutils_SRC_FILES += socket_local_client.c
+-libcutils_SRC_FILES += socket_local_server.c
+-libcutils_SRC_FILES += socket_loopback_client.c
+-libcutils_SRC_FILES += socket_loopback_server.c
+-libcutils_SRC_FILES += socket_network_client.c
+-libcutils_SRC_FILES += sockets.c
+-libcutils_SRC_FILES += ashmem-host.c
+-libcutils_SRC_FILES += dlmalloc_stubs.c
+-libcutils_SRC_FILES += klog.c
+-libcutils_SRC_FILES += properties.c
+-libcutils_OBJS := $(libcutils_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/external/libselinux/src
+-libselinux_SRC_FILES += booleans.c
+-libselinux_SRC_FILES += canonicalize_context.c
+-libselinux_SRC_FILES += disable.c
+-libselinux_SRC_FILES += enabled.c
+-libselinux_SRC_FILES += fgetfilecon.c
+-libselinux_SRC_FILES += fsetfilecon.c
+-libselinux_SRC_FILES += getenforce.c
+-libselinux_SRC_FILES += getfilecon.c
+-libselinux_SRC_FILES += getpeercon.c
+-libselinux_SRC_FILES += lgetfilecon.c
+-libselinux_SRC_FILES += load_policy.c
+-libselinux_SRC_FILES += lsetfilecon.c
+-libselinux_SRC_FILES += policyvers.c
+-libselinux_SRC_FILES += procattr.c
+-libselinux_SRC_FILES += setenforce.c
+-libselinux_SRC_FILES += setfilecon.c
+-libselinux_SRC_FILES += context.c
+-libselinux_SRC_FILES += mapping.c
+-libselinux_SRC_FILES += stringrep.c
+-libselinux_SRC_FILES += compute_create.c
+-libselinux_SRC_FILES += compute_av.c
+-libselinux_SRC_FILES += avc.c
+-libselinux_SRC_FILES += avc_internal.c
+-libselinux_SRC_FILES += avc_sidtab.c
+-libselinux_SRC_FILES += get_initial_context.c
+-libselinux_SRC_FILES += checkAccess.c
+-libselinux_SRC_FILES += sestatus.c
+-libselinux_SRC_FILES += deny_unknown.c
+-
+-libselinux_SRC_FILES += callbacks.c
+-libselinux_SRC_FILES += check_context.c
+-libselinux_SRC_FILES += freecon.c
+-libselinux_SRC_FILES += init.c
+-libselinux_SRC_FILES += label.c
+-libselinux_SRC_FILES += label_file.c
+-libselinux_SRC_FILES += label_android_property.c
+-libselinux_OBJS := $(libselinux_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/extras/ext4_utils
+-libext4_utils_SRC_FILES += make_ext4fs.c
+-libext4_utils_SRC_FILES += ext4fixup.c
+-libext4_utils_SRC_FILES += ext4_utils.c
+-libext4_utils_SRC_FILES += allocate.c
+-libext4_utils_SRC_FILES += contents.c
+-libext4_utils_SRC_FILES += extent.c
+-libext4_utils_SRC_FILES += indirect.c
+-libext4_utils_SRC_FILES += uuid.c
+-libext4_utils_SRC_FILES += sha1.c
+-libext4_utils_SRC_FILES += wipe.c
+-libext4_utils_SRC_FILES += crc16.c
+-libext4_utils_SRC_FILES += ext4_sb.c
+-libext4_utils_OBJS := $(libext4_utils_SRC_FILES:.c=.o)
+-
+-CFLAGS += -std=gnu11
+-CFLAGS += -DANDROID
+-CFLAGS += -DADB_HOST=0
+-CFLAGS += -D_XOPEN_SOURCE -D_GNU_SOURCE
+-CFLAGS += -DALLOW_ADBD_ROOT=1
+-CFLAGS += -DALLOW_ADBD_DISABLE_VERITY=1
+-CFLAGS += -DPROP_NAME_MAX=32
+-CFLAGS += -DPROP_VALUE_MAX=92
+-CFLAGS += -DAUDITD_LOG_TAG=1003
+-# CFLAGS += -DHOST
+-CFLAGS += -DANDROID_SMP=0
+-CFLAGS += -I$(SRCDIR)/system/core/adb
+-CFLAGS += -I$(SRCDIR)/system/core/include
+-CFLAGS += -I$(SRCDIR)/system/core/libsparse/include
+-CFLAGS += -I$(SRCDIR)/system/extras/ext4_utils
+-CFLAGS += -I$(SRCDIR)/system/core/fs_mgr/include
+-CFLAGS += -I$(SRCDIR)/hardware/libhardware/include
+-CFLAGS += -I$(SRCDIR)/external/libselinux/include
+-CFLAGS += -include $(SRCDIR)/build/core/combo/include/arch/$(android_arch)/AndroidConfig.h
+-
+-LIBS += liblog.a libfs_mgr.a libcutils.a libselinux.a libext4_utils.a -lpthread -lbsd -lpcre -lresolv -lcrypto
+-
+-all: adbd
+-
+-adbd: liblog.a libfs_mgr.a libcutils.a libselinux.a libext4_utils.a $(adbd_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(adbd_OBJS) $(LIBS)
+-
+-liblog.a: $(liblog_OBJS)
+-	$(AR) rcs $@ $(liblog_OBJS)
+-
+-libfs_mgr.a: $(fs_mgr_OBJS)
+-	$(AR) rcs $@ $(fs_mgr_OBJS)
+-
+-libcutils.a: $(libcutils_OBJS)
+-	$(AR) rcs $@ $(libcutils_OBJS)
+-
+-libselinux.a: $(libselinux_OBJS)
+-	export CFLAGS="-DANDROID -DHOST"
+-	$(AR) rcs $@ $(libselinux_OBJS)
+-
+-libext4_utils.a: $(libext4_utils_OBJS)
+-	$(AR) rcs $@ $(libext4_utils_OBJS)
+-
+-clean:
+-	$(RM) *.o *.a adbd
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service b/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
+deleted file mode 100644
+index b6661f2e39..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/android-tools-adbd.service
++++ /dev/null
+@@ -1,13 +0,0 @@
+-[Unit]
+-Description=Android Debug Bridge
+-ConditionPathExists=/etc/usb-debugging-enabled
+-Before=android-system.service
+-
+-[Service]
+-Type=simple
+-Restart=on-failure
+-ExecStartPre=-/usr/bin/android-gadget-setup adb
+-ExecStart=/usr/bin/adbd
+-
+-[Install]
+-WantedBy=basic.target
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/build/0001-Riscv-Add-risc-v-Android-config-header.patch b/meta-oe/recipes-devtools/android-tools/android-tools/build/0001-Riscv-Add-risc-v-Android-config-header.patch
+deleted file mode 100644
+index c091fd404b..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/build/0001-Riscv-Add-risc-v-Android-config-header.patch
++++ /dev/null
+@@ -1,361 +0,0 @@
+-From 82dce13ea7b5b31c63851bd67f66072413917e73 Mon Sep 17 00:00:00 2001
+-From: Chenxi Mao <maochenxi@eswin.com>
+-Date: Mon, 20 Apr 2020 15:32:40 +0800
+-Subject: [PATCH 1/1] Riscv: Add risc-v Android config header
+-
+----
+-Upstream-Status: Pending
+-
+- .../arch/linux-riscv64/AndroidConfig.h        | 340 ++++++++++++++++++
+- 1 file changed, 340 insertions(+)
+- create mode 100644 core/combo/include/arch/linux-riscv64/AndroidConfig.h
+-
+-diff --git a/core/combo/include/arch/linux-riscv64/AndroidConfig.h b/core/combo/include/arch/linux-riscv64/AndroidConfig.h
+-new file mode 100644
+-index 0000000000..bcbda8f87f
+---- /dev/null
+-+++ b/core/combo/include/arch/linux-riscv64/AndroidConfig.h
+-@@ -0,0 +1,340 @@
+-+/*
+-+ * Copyright (C) 2013 The Android Open Source Project
+-+ *
+-+ * Licensed under the Apache License, Version 2.0 (the "License");
+-+ * you may not use this file except in compliance with the License.
+-+ * You may obtain a copy of the License at
+-+ *
+-+ *      http://www.apache.org/licenses/LICENSE-2.0
+-+ *
+-+ * Unless required by applicable law or agreed to in writing, software
+-+ * distributed under the License is distributed on an "AS IS" BASIS,
+-+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-+ * See the License for the specific language governing permissions and
+-+ * limitations under the License.
+-+ */
+-+
+-+/*
+-+ * Android config -- "android-aarch64".  Used for ARM aarch64 device builds.
+-+ */
+-+#ifndef _ANDROID_CONFIG_H
+-+#define _ANDROID_CONFIG_H
+-+
+-+/*
+-+ * ===========================================================================
+-+ *                              !!! IMPORTANT !!!
+-+ * ===========================================================================
+-+ *
+-+ * This file is included by ALL C/C++ source files.  Don't put anything in
+-+ * here unless you are absolutely certain it can't go anywhere else.
+-+ *
+-+ * Any C++ stuff must be wrapped with "#ifdef __cplusplus".  Do not use "//"
+-+ * comments.
+-+ */
+-+
+-+/*
+-+ * Threading model.  Choose one:
+-+ *
+-+ * HAVE_PTHREADS - use the pthreads library.
+-+ * HAVE_WIN32_THREADS - use Win32 thread primitives.
+-+ *  -- combine HAVE_CREATETHREAD, HAVE_CREATEMUTEX, and HAVE__BEGINTHREADEX
+-+ */
+-+#define HAVE_PTHREADS
+-+
+-+/*
+-+ * Do we have pthread_setname_np()?
+-+ *
+-+ * (HAVE_PTHREAD_SETNAME_NP is used by WebKit to enable a function with
+-+ * the same name but different parameters, so we can't use that here.)
+-+ */
+-+#define HAVE_ANDROID_PTHREAD_SETNAME_NP
+-+
+-+/*
+-+ * Do we have the futex syscall?
+-+ */
+-+#define HAVE_FUTEX
+-+
+-+/*
+-+ * Process creation model.  Choose one:
+-+ *
+-+ * HAVE_FORKEXEC - use fork() and exec()
+-+ * HAVE_WIN32_PROC - use CreateProcess()
+-+ */
+-+#define HAVE_FORKEXEC
+-+
+-+/*
+-+ * Process out-of-memory adjustment.  Set if running on Linux,
+-+ * where we can write to /proc/<pid>/oom_adj to modify the out-of-memory
+-+ * badness adjustment.
+-+ */
+-+#define HAVE_OOM_ADJ
+-+
+-+/*
+-+ * IPC model.  Choose one:
+-+ *
+-+ * HAVE_SYSV_IPC - use the classic SysV IPC mechanisms (semget, shmget).
+-+ * HAVE_MACOSX_IPC - use Macintosh IPC mechanisms (sem_open, mmap).
+-+ * HAVE_WIN32_IPC - use Win32 IPC (CreateSemaphore, CreateFileMapping).
+-+ * HAVE_ANDROID_IPC - use Android versions (?, mmap).
+-+ */
+-+#define HAVE_ANDROID_IPC
+-+
+-+/*
+-+ * Memory-mapping model. Choose one:
+-+ *
+-+ * HAVE_POSIX_FILEMAP - use the Posix sys/mmap.h
+-+ * HAVE_WIN32_FILEMAP - use Win32 filemaps
+-+ */
+-+#define  HAVE_POSIX_FILEMAP
+-+
+-+/*
+-+ * Define this if you have <termio.h>
+-+ */
+-+#define  HAVE_TERMIO_H 1
+-+
+-+/*
+-+ * Define this if you have <sys/sendfile.h>
+-+ */
+-+#define  HAVE_SYS_SENDFILE_H 1
+-+
+-+/*
+-+ * Define this if you build against MSVCRT.DLL
+-+ */
+-+/* #define HAVE_MS_C_RUNTIME */
+-+
+-+/*
+-+ * Define this if you have sys/uio.h
+-+ */
+-+#define  HAVE_SYS_UIO_H 1
+-+
+-+/*
+-+ * Define this if your platforms implements symbolic links
+-+ * in its filesystems
+-+ */
+-+#define HAVE_SYMLINKS
+-+
+-+/*
+-+ * Define this if we have localtime_r().
+-+ */
+-+/* #define HAVE_LOCALTIME_R 1 */
+-+
+-+/*
+-+ * Define this if we have gethostbyname_r().
+-+ */
+-+/* #define HAVE_GETHOSTBYNAME_R */
+-+
+-+/*
+-+ * Define this if we have ioctl().
+-+ */
+-+#define HAVE_IOCTL
+-+
+-+/*
+-+ * Define this if we want to use WinSock.
+-+ */
+-+/* #define HAVE_WINSOCK */
+-+
+-+/*
+-+ * Define this if have clock_gettime() and friends
+-+ */
+-+#define HAVE_POSIX_CLOCKS
+-+
+-+/*
+-+ * Define this if we have linux style epoll()
+-+ */
+-+#define HAVE_EPOLL
+-+
+-+/*
+-+ * Endianness of the target machine.  Choose one:
+-+ *
+-+ * HAVE_ENDIAN_H -- have endian.h header we can include.
+-+ * HAVE_LITTLE_ENDIAN -- we are little endian.
+-+ * HAVE_BIG_ENDIAN -- we are big endian.
+-+ */
+-+#define HAVE_ENDIAN_H
+-+#define HAVE_LITTLE_ENDIAN
+-+
+-+#define _FILE_OFFSET_BITS 64
+-+/* #define _LARGEFILE_SOURCE 1 */
+-+
+-+/*
+-+ * Define if platform has off64_t (and lseek64 and other xxx64 functions)
+-+ */
+-+#define HAVE_OFF64_T
+-+
+-+/*
+-+ * Defined if we have the backtrace() call for retrieving a stack trace.
+-+ * Needed for CallStack to operate; if not defined, CallStack is
+-+ * non-functional.
+-+ */
+-+#define HAVE_BACKTRACE 0
+-+
+-+/*
+-+ * Defined if we have the cxxabi.h header for demangling C++ symbols.  If
+-+ * not defined, stack crawls will be displayed with raw mangled symbols
+-+ */
+-+#define HAVE_CXXABI 0
+-+
+-+/*
+-+ * Defined if we have the gettid() system call.
+-+ */
+-+#define HAVE_GETTID
+-+
+-+/*
+-+ * Defined if we have the sched_setscheduler() call
+-+ */
+-+#define HAVE_SCHED_SETSCHEDULER
+-+
+-+/*
+-+ * Add any extra platform-specific defines here.
+-+ */
+-+#ifndef __linux__
+-+#define __linux__
+-+#endif
+-+
+-+/*
+-+ * Define if we have <malloc.h> header
+-+ */
+-+#define HAVE_MALLOC_H
+-+
+-+/*
+-+ * Define if we're running on *our* linux on device or emulator.
+-+ */
+-+#define HAVE_ANDROID_OS 1
+-+
+-+/*
+-+ * Define if we have Linux-style non-filesystem Unix Domain Sockets
+-+ */
+-+#define HAVE_LINUX_LOCAL_SOCKET_NAMESPACE 1
+-+
+-+/*
+-+ * Define if we have Linux's inotify in <sys/inotify.h>.
+-+ */
+-+#define HAVE_INOTIFY 1
+-+
+-+/*
+-+ * Define if we have madvise() in <sys/mman.h>
+-+ */
+-+#define HAVE_MADVISE 1
+-+
+-+/*
+-+ * Define if tm struct has tm_gmtoff field
+-+ */
+-+#define HAVE_TM_GMTOFF 1
+-+
+-+/*
+-+ * Define if dirent struct has d_type field
+-+ */
+-+#define HAVE_DIRENT_D_TYPE 1
+-+
+-+/*
+-+ * Define if libc includes Android system properties implementation.
+-+ */
+-+#define HAVE_LIBC_SYSTEM_PROPERTIES 1
+-+
+-+/*
+-+ * Define if system provides a system property server (should be
+-+ * mutually exclusive with HAVE_LIBC_SYSTEM_PROPERTIES).
+-+ */
+-+/* #define HAVE_SYSTEM_PROPERTY_SERVER */
+-+
+-+/*
+-+ * What CPU architecture does this platform use?
+-+ */
+-+#define ARCH_AARCH64
+-+
+-+/*
+-+ * Define if the size of enums is as short as possible,
+-+ */
+-+/* #define HAVE_SHORT_ENUMS */
+-+
+-+/*
+-+ * sprintf() format string for shared library naming.
+-+ */
+-+#define OS_SHARED_LIB_FORMAT_STR    "lib%s.so"
+-+
+-+/*
+-+ * type for the third argument to mincore().
+-+ */
+-+#define MINCORE_POINTER_TYPE unsigned char *
+-+
+-+/*
+-+ * The default path separator for the platform
+-+ */
+-+#define OS_PATH_SEPARATOR '/'
+-+
+-+/*
+-+ * Is the filesystem case sensitive?
+-+ */
+-+#define OS_CASE_SENSITIVE
+-+
+-+/*
+-+ * Define if <sys/socket.h> exists.
+-+ */
+-+#define HAVE_SYS_SOCKET_H 1
+-+
+-+/*
+-+ * Define if the strlcpy() function exists on the system.
+-+ */
+-+#define HAVE_STRLCPY 1
+-+
+-+/*
+-+ * Define if the open_memstream() function exists on the system.
+-+ */
+-+/* #define HAVE_OPEN_MEMSTREAM 1 */
+-+
+-+/*
+-+ * Define if the BSD funopen() function exists on the system.
+-+ */
+-+#define HAVE_FUNOPEN 1
+-+
+-+/*
+-+ * Define if prctl() exists
+-+ */
+-+#define HAVE_PRCTL 1
+-+
+-+/*
+-+ * Define if writev() exists
+-+ */
+-+#define HAVE_WRITEV 1
+-+
+-+/*
+-+ * Define if <stdint.h> exists.
+-+ */
+-+#define HAVE_STDINT_H 1
+-+
+-+/*
+-+ * Define if <stdbool.h> exists.
+-+ */
+-+#define HAVE_STDBOOL_H 1
+-+
+-+/*
+-+ * Define if <sched.h> exists.
+-+ */
+-+#define HAVE_SCHED_H 1
+-+
+-+/*
+-+ * Define if pread() exists
+-+ */
+-+#define HAVE_PREAD 1
+-+
+-+/*
+-+ * Define if we have st_mtim in struct stat
+-+ */
+-+#define HAVE_STAT_ST_MTIM 1
+-+
+-+/*
+-+ * Define if printf() supports %zd for size_t arguments
+-+ */
+-+#define HAVE_PRINTF_ZD 1
+-+
+-+/*
+-+ * Define to 1 if <stdlib.h> provides qsort_r() with a BSD style function prototype.
+-+ */
+-+#define HAVE_BSD_QSORT_R 0
+-+
+-+/*
+-+ * Define to 1 if <stdlib.h> provides qsort_r() with a GNU style function prototype.
+-+ */
+-+#define HAVE_GNU_QSORT_R 0
+-+
+-+#endif /* _ANDROID_CONFIG_H */
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-adb-remove-selinux-extensions.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-adb-remove-selinux-extensions.patch
+deleted file mode 100644
+index 7d20c50680..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-adb-remove-selinux-extensions.patch
++++ /dev/null
+@@ -1,44 +0,0 @@
+-From 7b7200727413ca4a9bb132221c543ec033dffafa Mon Sep 17 00:00:00 2001
+-From: Sergio Schvezov <sergio.schvezov@canonical.com>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] adb: remove selinux extensions
+-
+-* drop useless includes of Android SELINUX extensions
+-* avoids having to clone another module
+-* this should be sent upstream
+-
+-Upstream-Status: Inappropriate
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- adb/file_sync_service.c | 3 ---
+- 1 file changed, 3 deletions(-)
+-
+-diff --git a/adb/file_sync_service.c b/adb/file_sync_service.c
+-index 7933858516..3cbd0cd863 100644
+---- a/adb/file_sync_service.c
+-+++ b/adb/file_sync_service.c
+-@@ -26,7 +26,6 @@
+- 
+- #include <errno.h>
+- #include <private/android_filesystem_config.h>
+--#include <selinux/android.h>
+- #include "sysdeps.h"
+- 
+- #define TRACE_TAG  TRACE_SYNC
+-@@ -73,7 +72,6 @@ static int mkdirs(char *name)
+-                 *x = '/';
+-                 return ret;
+-             }
+--            selinux_android_restorecon(name, 0);
+-         }
+-         *x++ = '/';
+-     }
+-@@ -251,7 +249,6 @@ static int handle_send_file(int s, char *path, uid_t uid,
+-     if(fd >= 0) {
+-         struct utimbuf u;
+-         adb_close(fd);
+--        selinux_android_restorecon(path, 0);
+-         u.actime = timestamp;
+-         u.modtime = timestamp;
+-         utime(path, &u);
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch
+deleted file mode 100644
+index 82e97152be..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From db3a3714be07c8ab51b9ae7b035e4afe9f39c645 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 7 Sep 2022 13:20:22 -0700
+-Subject: [PATCH] memory.h: Always define strlcpy for glibc based systems
+-
+-android-config.h file includes on compiler cmdline sets HAVE_STRLCPY
+-unconditionally, since bionic supports it, its no big deal on android
+-and also no problem when using musl since implementation exists for musl
+-too, but glibc does not provide this. So either we include libbsd or use
+-the implementation provided by android-tools here. We are currently
+-using the in tree implementation for systems which do not provide it
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/cutils/memory.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/include/cutils/memory.h b/include/cutils/memory.h
+-index e725cdd032..9e99353c58 100644
+---- a/include/cutils/memory.h
+-+++ b/include/cutils/memory.h
+-@@ -30,7 +30,7 @@ void android_memset16(uint16_t* dst, uint16_t value, size_t size);
+- /* size is given in bytes and must be multiple of 4 */
+- void android_memset32(uint32_t* dst, uint32_t value, size_t size);
+- 
+--#if !HAVE_STRLCPY
+-+#if !HAVE_STRLCPY || defined(__GLIBC__)
+- /* Declaration of strlcpy() for platforms that don't already have it. */
+- size_t strlcpy(char *dst, const char *src, size_t size);
+- #endif
+--- 
+-2.37.3
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0002-adb-Use-local-sockets-where-appropriate.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0002-adb-Use-local-sockets-where-appropriate.patch
+deleted file mode 100644
+index 3627110ad8..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0002-adb-Use-local-sockets-where-appropriate.patch
++++ /dev/null
+@@ -1,70 +0,0 @@
+-From d855f042ca09a358cebe2d3c1d29d512afd7ebb8 Mon Sep 17 00:00:00 2001
+-From: Hilko Bengen <bengen@debian.org>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] adb: Use local sockets where appropriate
+-
+-Upstream-Status: Inappropriate
+----
+- adb/adb.c             | 6 +++++-
+- adb/adb_client.c      | 5 +++--
+- adb/transport_local.c | 3 ++-
+- 3 files changed, 10 insertions(+), 4 deletions(-)
+-
+-diff --git a/adb/adb.c b/adb/adb.c
+-index 10a1e0da26..027edd9359 100644
+---- a/adb/adb.c
+-+++ b/adb/adb.c
+-@@ -1230,7 +1230,11 @@ int launch_server(int server_port)
+-  */
+- void build_local_name(char* target_str, size_t target_size, int server_port)
+- {
+--  snprintf(target_str, target_size, "tcp:%d", server_port);
+-+  if (gListenAll > 0) {
+-+    snprintf(target_str, target_size, "tcp:%d", server_port);
+-+  } else {
+-+    snprintf(target_str, target_size, "local:%d", server_port);
+-+  }
+- }
+- 
+- #if !ADB_HOST
+-diff --git a/adb/adb_client.c b/adb/adb_client.c
+-index eb1720d22c..a383faefe3 100644
+---- a/adb/adb_client.c
+-+++ b/adb/adb_client.c
+-@@ -185,12 +185,12 @@ int _adb_connect(const char *service)
+-         strcpy(__adb_error, "service name too long");
+-         return -1;
+-     }
+--    snprintf(tmp, sizeof tmp, "%04x", len);
+-+    snprintf(tmp, sizeof tmp, "%d", __adb_server_port);
+- 
+-     if (__adb_server_name)
+-         fd = socket_network_client(__adb_server_name, __adb_server_port, SOCK_STREAM);
+-     else
+--        fd = socket_loopback_client(__adb_server_port, SOCK_STREAM);
+-+        fd = socket_local_client(tmp, ANDROID_SOCKET_NAMESPACE_ABSTRACT, SOCK_STREAM);
+- 
+-     if(fd < 0) {
+-         strcpy(__adb_error, "cannot connect to daemon");
+-@@ -201,6 +201,7 @@ int _adb_connect(const char *service)
+-         return -1;
+-     }
+- 
+-+    snprintf(tmp, sizeof tmp, "%04x", len);
+-     if(writex(fd, tmp, 4) || writex(fd, service, len)) {
+-         strcpy(__adb_error, "write failure during connection");
+-         adb_close(fd);
+-diff --git a/adb/transport_local.c b/adb/transport_local.c
+-index 948cc15812..71582a8c88 100644
+---- a/adb/transport_local.c
+-+++ b/adb/transport_local.c
+-@@ -121,7 +121,8 @@ int local_connect_arbitrary_ports(int console_port, int adb_port)
+-     }
+- #endif
+-     if (fd < 0) {
+--        fd = socket_loopback_client(adb_port, SOCK_STREAM);
+-+        snprintf(buf, sizeof buf, "%d", adb_port);
+-+        fd = socket_local_client(buf, ANDROID_SOCKET_NAMESPACE_ABSTRACT, SOCK_STREAM);
+-     }
+- 
+-     if (fd >= 0) {
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0003-adb-define-shell-command.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0003-adb-define-shell-command.patch
+deleted file mode 100644
+index cf1d9cbc3d..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0003-adb-define-shell-command.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 4421c2e19946dcd651fd8ac022b96627fc526149 Mon Sep 17 00:00:00 2001
+-From: Fathi Boudra <fabo@debian.org>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] adb: define shell command
+-
+-we intend to run on Linux system so the shell is always /bin/sh,
+-for the host or the target.
+-
+-Upstream-Status: Inappropriate
+----
+- adb/services.c | 4 ----
+- 1 file changed, 4 deletions(-)
+-
+-diff --git a/adb/services.c b/adb/services.c
+-index 21b08dc201..d44b0c5068 100644
+---- a/adb/services.c
+-+++ b/adb/services.c
+-@@ -299,11 +299,7 @@ static int create_subproc_raw(const char *cmd, const char *arg0, const char *arg
+- }
+- #endif  /* !ABD_HOST */
+- 
+--#if ADB_HOST
+- #define SHELL_COMMAND "/bin/sh"
+--#else
+--#define SHELL_COMMAND "/system/bin/sh"
+--#endif
+- 
+- #if !ADB_HOST
+- static void subproc_waiter_service(int fd, void *cookie)
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0004-adb-Fix-build-on-big-endian-systems.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0004-adb-Fix-build-on-big-endian-systems.patch
+deleted file mode 100644
+index 7f03cd2beb..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0004-adb-Fix-build-on-big-endian-systems.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-From 548b8ca62c64a16305929e2eaf3d546d48de9c25 Mon Sep 17 00:00:00 2001
+-From: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+-Date: Tue, 21 Feb 2017 19:46:24 +0100
+-Subject: [PATCH] adb: Fix build on big endian systems
+-
+-The usb_linux_client.c file defines cpu_to_le16/32 by using the C
+-library htole16/32 function calls. However, cpu_to_le16/32 are used
+-when initializing structures, i.e in a context where a function call
+-is not allowed.
+-
+-It works fine on little endian systems because htole16/32 are defined
+-by the C library as no-ops. But on big-endian systems, they are
+-actually doing something, which might involve calling a function,
+-causing build failures.
+-
+-To solve this, we simply open-code cpu_to_le16/32 in a way that allows
+-them to be used when initializing structures.
+-
+-Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+----
+-Upstream-Status: Pending
+-
+- adb/usb_linux_client.c | 11 +++++++++--
+- 1 file changed, 9 insertions(+), 2 deletions(-)
+-
+-diff --git a/adb/usb_linux_client.c b/adb/usb_linux_client.c
+-index 8426e0ea14..6e8b5bbbd2 100644
+---- a/adb/usb_linux_client.c
+-+++ b/adb/usb_linux_client.c
+-@@ -34,8 +34,15 @@
+- #define MAX_PACKET_SIZE_FS	64
+- #define MAX_PACKET_SIZE_HS	512
+- 
+--#define cpu_to_le16(x)  htole16(x)
+--#define cpu_to_le32(x)  htole32(x)
+-+#if __BYTE_ORDER == __LITTLE_ENDIAN
+-+# define cpu_to_le16(x) (x)
+-+# define cpu_to_le32(x) (x)
+-+#else
+-+# define cpu_to_le16(x) ((((x) >> 8) & 0xffu) | (((x) & 0xffu) << 8))
+-+# define cpu_to_le32(x) \
+-+	((((x) & 0xff000000u) >> 24) | (((x) & 0x00ff0000u) >>  8) | \
+-+	 (((x) & 0x0000ff00u) <<  8) | (((x) & 0x000000ffu) << 24))
+-+#endif
+- 
+- struct usb_handle
+- {
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0005-adb-add-base64-implementation.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0005-adb-add-base64-implementation.patch
+deleted file mode 100644
+index 4827ffe042..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0005-adb-add-base64-implementation.patch
++++ /dev/null
+@@ -1,350 +0,0 @@
+-From 753bcb5971401b82fb2e6197d31c9e386f6d0392 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 15 Sep 2017 15:46:38 -0700
+-Subject: [PATCH] adb: add base64 implementation
+-
+-musl needs it
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- adb/adb_auth_client.c |   2 +-
+- adb/base64.c          | 315 ++++++++++++++++++++++++++++++++++++++++++
+- 2 files changed, 316 insertions(+), 1 deletion(-)
+- create mode 100644 adb/base64.c
+-
+-diff --git a/adb/adb_auth_client.c b/adb/adb_auth_client.c
+-index 55e9dcad19..104b413b8b 100644
+---- a/adb/adb_auth_client.c
+-+++ b/adb/adb_auth_client.c
+-@@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode *list)
+-         if (sep)
+-             *sep = '\0';
+- 
+--        ret = __b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
+-+        ret = b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
+-         if (ret != sizeof(key->key)) {
+-             D("%s: Invalid base64 data ret=%d\n", file, ret);
+-             free(key);
+-diff --git a/adb/base64.c b/adb/base64.c
+-new file mode 100644
+-index 0000000000..95da284d0d
+---- /dev/null
+-+++ b/adb/base64.c
+-@@ -0,0 +1,315 @@
+-+/*
+-+ * Copyright (c) 1996-1999 by Internet Software Consortium.
+-+ *
+-+ * Permission to use, copy, modify, and distribute this software for any
+-+ * purpose with or without fee is hereby granted, provided that the above
+-+ * copyright notice and this permission notice appear in all copies.
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM DISCLAIMS
+-+ * ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+-+ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL INTERNET SOFTWARE
+-+ * CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+-+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+-+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+-+ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+-+ * SOFTWARE.
+-+ */
+-+
+-+/*
+-+ * Portions Copyright (c) 1995 by International Business Machines, Inc.
+-+ *
+-+ * International Business Machines, Inc. (hereinafter called IBM) grants
+-+ * permission under its copyrights to use, copy, modify, and distribute this
+-+ * Software with or without fee, provided that the above copyright notice and
+-+ * all paragraphs of this notice appear in all copies, and that the name of IBM
+-+ * not be used in connection with the marketing of any product incorporating
+-+ * the Software or modifications thereof, without specific, written prior
+-+ * permission.
+-+ *
+-+ * To the extent it has a right to do so, IBM grants an immunity from suit
+-+ * under its patents, if any, for the use, sale or manufacture of products to
+-+ * the extent that such products are used for performing Domain Name System
+-+ * dynamic updates in TCP/IP networks by means of the Software.  No immunity is
+-+ * granted for any product per se or for any other function of any product.
+-+ *
+-+ * THE SOFTWARE IS PROVIDED "AS IS", AND IBM DISCLAIMS ALL WARRANTIES,
+-+ * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+-+ * PARTICULAR PURPOSE.  IN NO EVENT SHALL IBM BE LIABLE FOR ANY SPECIAL,
+-+ * DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER ARISING
+-+ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE, EVEN
+-+ * IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
+-+ */
+-+
+-+#if !defined(LINT) && !defined(CODECENTER)
+-+static const char rcsid[] = "$BINDId: base64.c,v 8.7 1999/10/13 16:39:33 vixie Exp $";
+-+#endif /* not lint */
+-+
+-+#include <sys/types.h>
+-+#include <sys/param.h>
+-+#include <sys/socket.h>
+-+
+-+#include <netinet/in.h>
+-+#include <arpa/inet.h>
+-+#include <arpa/nameser.h>
+-+
+-+#include <ctype.h>
+-+#include <resolv.h>
+-+#include <stdio.h>
+-+#include <stdlib.h>
+-+#include <stdint.h>
+-+#include <string.h>
+-+
+-+#define Assert(Cond) if (!(Cond)) abort()
+-+
+-+static const char Base64[] =
+-+	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+-+static const char Pad64 = '=';
+-+
+-+/* (From RFC1521 and draft-ietf-dnssec-secext-03.txt)
+-+   The following encoding technique is taken from RFC 1521 by Borenstein
+-+   and Freed.  It is reproduced here in a slightly edited form for
+-+   convenience.
+-+
+-+   A 65-character subset of US-ASCII is used, enabling 6 bits to be
+-+   represented per printable character. (The extra 65th character, "=",
+-+   is used to signify a special processing function.)
+-+
+-+   The encoding process represents 24-bit groups of input bits as output
+-+   strings of 4 encoded characters. Proceeding from left to right, a
+-+   24-bit input group is formed by concatenating 3 8-bit input groups.
+-+   These 24 bits are then treated as 4 concatenated 6-bit groups, each
+-+   of which is translated into a single digit in the base64 alphabet.
+-+
+-+   Each 6-bit group is used as an index into an array of 64 printable
+-+   characters. The character referenced by the index is placed in the
+-+   output string.
+-+
+-+                         Table 1: The Base64 Alphabet
+-+
+-+      Value Encoding  Value Encoding  Value Encoding  Value Encoding
+-+          0 A            17 R            34 i            51 z
+-+          1 B            18 S            35 j            52 0
+-+          2 C            19 T            36 k            53 1
+-+          3 D            20 U            37 l            54 2
+-+          4 E            21 V            38 m            55 3
+-+          5 F            22 W            39 n            56 4
+-+          6 G            23 X            40 o            57 5
+-+          7 H            24 Y            41 p            58 6
+-+          8 I            25 Z            42 q            59 7
+-+          9 J            26 a            43 r            60 8
+-+         10 K            27 b            44 s            61 9
+-+         11 L            28 c            45 t            62 +
+-+         12 M            29 d            46 u            63 /
+-+         13 N            30 e            47 v
+-+         14 O            31 f            48 w         (pad) =
+-+         15 P            32 g            49 x
+-+         16 Q            33 h            50 y
+-+
+-+   Special processing is performed if fewer than 24 bits are available
+-+   at the end of the data being encoded.  A full encoding quantum is
+-+   always completed at the end of a quantity.  When fewer than 24 input
+-+   bits are available in an input group, zero bits are added (on the
+-+   right) to form an integral number of 6-bit groups.  Padding at the
+-+   end of the data is performed using the '=' character.
+-+
+-+   Since all base64 input is an integral number of octets, only the
+-+         -------------------------------------------------
+-+   following cases can arise:
+-+
+-+       (1) the final quantum of encoding input is an integral
+-+           multiple of 24 bits; here, the final unit of encoded
+-+	   output will be an integral multiple of 4 characters
+-+	   with no "=" padding,
+-+       (2) the final quantum of encoding input is exactly 8 bits;
+-+           here, the final unit of encoded output will be two
+-+	   characters followed by two "=" padding characters, or
+-+       (3) the final quantum of encoding input is exactly 16 bits;
+-+           here, the final unit of encoded output will be three
+-+	   characters followed by one "=" padding character.
+-+   */
+-+
+-+int
+-+b64_ntop(const uint8_t* src, size_t srclength, char* target, size_t targsize)
+-+{
+-+	size_t datalength = 0;
+-+	uint8_t input[3];
+-+	uint8_t output[4];
+-+	size_t i;
+-+
+-+	while (2 < srclength) {
+-+		input[0] = *src++;
+-+		input[1] = *src++;
+-+		input[2] = *src++;
+-+		srclength -= 3;
+-+
+-+		output[0] = input[0] >> 2;
+-+		output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+-+		output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+-+		output[3] = input[2] & 0x3f;
+-+		Assert(output[0] < 64);
+-+		Assert(output[1] < 64);
+-+		Assert(output[2] < 64);
+-+		Assert(output[3] < 64);
+-+
+-+		if (datalength + 4 > targsize)
+-+			return (-1);
+-+		target[datalength++] = Base64[output[0]];
+-+		target[datalength++] = Base64[output[1]];
+-+		target[datalength++] = Base64[output[2]];
+-+		target[datalength++] = Base64[output[3]];
+-+	}
+-+
+-+	/* Now we worry about padding. */
+-+	if (0 != srclength) {
+-+		/* Get what's left. */
+-+		input[0] = input[1] = input[2] = '\0';
+-+		for (i = 0; i < srclength; i++)
+-+			input[i] = *src++;
+-+
+-+		output[0] = input[0] >> 2;
+-+		output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+-+		output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+-+		Assert(output[0] < 64);
+-+		Assert(output[1] < 64);
+-+		Assert(output[2] < 64);
+-+
+-+		if (datalength + 4 > targsize)
+-+			return (-1);
+-+		target[datalength++] = Base64[output[0]];
+-+		target[datalength++] = Base64[output[1]];
+-+		if (srclength == 1)
+-+			target[datalength++] = Pad64;
+-+		else
+-+			target[datalength++] = Base64[output[2]];
+-+		target[datalength++] = Pad64;
+-+	}
+-+	if (datalength >= targsize)
+-+		return (-1);
+-+	target[datalength] = '\0';	/* Returned value doesn't count \0. */
+-+	return (datalength);
+-+}
+-+
+-+/* skips all whitespace anywhere.
+-+   converts characters, four at a time, starting at (or after)
+-+   src from base - 64 numbers into three 8 bit bytes in the target area.
+-+   it returns the number of data bytes stored at the target, or -1 on error.
+-+ */
+-+
+-+int b64_pton(const char* src, uint8_t* target, size_t targsize)
+-+{
+-+	int tarindex, state, ch;
+-+	char *pos;
+-+
+-+	state = 0;
+-+	tarindex = 0;
+-+
+-+	while ((ch = *src++) != '\0') {
+-+		if (isspace(ch))	/* Skip whitespace anywhere. */
+-+			continue;
+-+
+-+		if (ch == Pad64)
+-+			break;
+-+
+-+		pos = strchr(Base64, ch);
+-+		if (pos == 0) 		/* A non-base64 character. */
+-+			return (-1);
+-+
+-+		switch (state) {
+-+		case 0:
+-+			if (target) {
+-+				if ((size_t)tarindex >= targsize)
+-+					return (-1);
+-+				target[tarindex] = (pos - Base64) << 2;
+-+			}
+-+			state = 1;
+-+			break;
+-+		case 1:
+-+			if (target) {
+-+				if ((size_t)tarindex + 1 >= targsize)
+-+					return (-1);
+-+				target[tarindex]   |=  (pos - Base64) >> 4;
+-+				target[tarindex+1]  = ((pos - Base64) & 0x0f)
+-+							<< 4 ;
+-+			}
+-+			tarindex++;
+-+			state = 2;
+-+			break;
+-+		case 2:
+-+			if (target) {
+-+				if ((size_t)tarindex + 1 >= targsize)
+-+					return (-1);
+-+				target[tarindex]   |=  (pos - Base64) >> 2;
+-+				target[tarindex+1]  = ((pos - Base64) & 0x03)
+-+							<< 6;
+-+			}
+-+			tarindex++;
+-+			state = 3;
+-+			break;
+-+		case 3:
+-+			if (target) {
+-+				if ((size_t)tarindex >= targsize)
+-+					return (-1);
+-+				target[tarindex] |= (pos - Base64);
+-+			}
+-+			tarindex++;
+-+			state = 0;
+-+			break;
+-+		default:
+-+			abort();
+-+		}
+-+	}
+-+
+-+	/*
+-+	 * We are done decoding Base-64 chars.  Let's see if we ended
+-+	 * on a byte boundary, and/or with erroneous trailing characters.
+-+	 */
+-+
+-+	if (ch == Pad64) {		/* We got a pad char. */
+-+		ch = *src++;		/* Skip it, get next. */
+-+		switch (state) {
+-+		case 0:		/* Invalid = in first position */
+-+		case 1:		/* Invalid = in second position */
+-+			return (-1);
+-+
+-+		case 2:		/* Valid, means one byte of info */
+-+			/* Skip any number of spaces. */
+-+			for ((void)NULL; ch != '\0'; ch = *src++)
+-+				if (!isspace(ch))
+-+					break;
+-+			/* Make sure there is another trailing = sign. */
+-+			if (ch != Pad64)
+-+				return (-1);
+-+			ch = *src++;		/* Skip the = */
+-+			/* Fall through to "single trailing =" case. */
+-+			/* FALLTHROUGH */
+-+
+-+		case 3:		/* Valid, means two bytes of info */
+-+			/*
+-+			 * We know this char is an =.  Is there anything but
+-+			 * whitespace after it?
+-+			 */
+-+			for ((void)NULL; ch != '\0'; ch = *src++)
+-+				if (!isspace(ch))
+-+					return (-1);
+-+
+-+			/*
+-+			 * Now make sure for cases 2 and 3 that the "extra"
+-+			 * bits that slopped past the last full byte were
+-+			 * zeros.  If we don't check them, they become a
+-+			 * subliminal channel.
+-+			 */
+-+			if (target && target[tarindex] != 0)
+-+				return (-1);
+-+		}
+-+	} else {
+-+		/*
+-+		 * We ended by seeing the end of the string.  Make sure we
+-+		 * have no partial bytes lying around.
+-+		 */
+-+		if (state != 0)
+-+			return (-1);
+-+	}
+-+
+-+	return (tarindex);
+-+}
+-+
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0006-adb-Musl-fixes.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0006-adb-Musl-fixes.patch
+deleted file mode 100644
+index 182b1eb29e..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0006-adb-Musl-fixes.patch
++++ /dev/null
+@@ -1,130 +0,0 @@
+-From 62d957a1271c88ec08d67984fbe31601f0bd41a9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 15 Sep 2017 15:50:57 -0700
+-Subject: [PATCH] adb: Musl fixes
+-
+-__nonnull is gcc specific
+-include sys/types.h for size_t
+-Do not redefine close() and lseek()
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- adb/adb.h                    |  2 ++
+- adb/disable_verity_service.c | 13 ++++++++-----
+- adb/framebuffer_service.c    |  7 ++++---
+- adb/sysdeps.h                | 12 ++++++------
+- 4 files changed, 20 insertions(+), 14 deletions(-)
+-
+---- a/adb/adb.h
+-+++ b/adb/adb.h
+-@@ -18,7 +18,9 @@
+- #define __ADB_H
+- 
+- #include <limits.h>
+-+#include <sys/types.h>
+- 
+-+#include "fdevent.h"
+- #include "adb_trace.h"
+- #include "transport.h"  /* readx(), writex() */
+- 
+---- a/adb/disable_verity_service.c
+-+++ b/adb/disable_verity_service.c
+-@@ -14,25 +14,32 @@
+-  * limitations under the License.
+-  */
+- 
+--#include "sysdeps.h"
+- 
+- #define  TRACE_TAG  TRACE_ADB
+- #include "adb.h"
+-+#include "sysdeps.h"
+-+#include "cutils/properties.h"
+-+#include "ext4_sb.h"
+-+#include <fs_mgr.h>
+- 
+- #include <stdio.h>
+- #include <stdarg.h>
+- #include <sys/stat.h>
+- #include <fcntl.h>
+- #include <inttypes.h>
+--
+--#include "cutils/properties.h"
+--#include "ext4_sb.h"
+--#include <fs_mgr.h>
+-+#include <unistd.h>
+-+#include <errno.h>
+-+#include <stdbool.h>
+-+
+-+#if defined(__linux__) && !defined(__GLIBC__)
+-+#define lseek64 lseek
+-+#define off64_t off_t
+-+#endif
+- 
+- #define FSTAB_PREFIX "/fstab."
+- struct fstab *fstab;
+- 
+--__attribute__((__format__(printf, 2, 3))) __nonnull((2))
+-+__attribute__((__format__(printf, 2, 3))) __attribute__((nonnull((2))))
+- static void write_console(int fd, const char* format, ...)
+- {
+-     char buffer[256];
+---- a/adb/framebuffer_service.c
+-+++ b/adb/framebuffer_service.c
+-@@ -14,6 +14,10 @@
+-  * limitations under the License.
+-  */
+- 
+-+#include "fdevent.h"
+-+#include "adb.h"
+-+#include "sysdeps.h"
+-+
+- #include <stdlib.h>
+- #include <stdio.h>
+- #include <unistd.h>
+-@@ -23,9 +27,6 @@
+- #include <sys/types.h>
+- #include <sys/wait.h>
+- 
+--#include "fdevent.h"
+--#include "adb.h"
+--
+- #include <linux/fb.h>
+- #include <sys/ioctl.h>
+- #include <sys/mman.h>
+---- a/adb/sysdeps.h
+-+++ b/adb/sysdeps.h
+-@@ -123,8 +123,8 @@ static __inline__ int  unix_close(int fd
+- {
+-     return close(fd);
+- }
+--#undef   close
+--#define  close   ____xxx_close
+-+//#undef   close
+-+//#define  close   ____xxx_close
+- 
+- static __inline__  int  unix_read(int  fd, void*  buf, size_t  len)
+- {
+-@@ -369,8 +369,8 @@ static __inline__ int  adb_close(int fd)
+- {
+-     return close(fd);
+- }
+--#undef   close
+--#define  close   ____xxx_close
+-+//#undef   close
+-+//#define  close   ____xxx_close
+- 
+- 
+- static __inline__  int  adb_read(int  fd, void*  buf, size_t  len)
+-@@ -392,8 +392,8 @@ static __inline__ int   adb_lseek(int  f
+- {
+-     return lseek(fd, pos, where);
+- }
+--#undef   lseek
+--#define  lseek   ___xxx_lseek
+-+//#undef   lseek
+-+//#define  lseek   ___xxx_lseek
+- 
+- static __inline__  int    adb_unlink(const char*  path)
+- {
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch
+deleted file mode 100644
+index 64fbce4cbe..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From de393bba41c8feff932c77d6c30233945f380d42 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Sat, 11 Aug 2018 13:23:37 +0000
+-Subject: [PATCH] adb: usb_linux.c: fix build with glibc-2.28
+-
+-* include sysmacros for major, minor
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- adb/usb_linux.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/adb/usb_linux.c b/adb/usb_linux.c
+-index f16bdd0361..c8a7732441 100644
+---- a/adb/usb_linux.c
+-+++ b/adb/usb_linux.c
+-@@ -22,6 +22,7 @@
+- #include <sys/ioctl.h>
+- #include <sys/types.h>
+- #include <sys/time.h>
+-+#include <sys/sysmacros.h>
+- #include <dirent.h>
+- #include <fcntl.h>
+- #include <errno.h>
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0008-adb-Allow-adbd-to-be-ran-as-root.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0008-adb-Allow-adbd-to-be-ran-as-root.patch
+deleted file mode 100644
+index ad21b5aaa6..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0008-adb-Allow-adbd-to-be-ran-as-root.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From 3a788e9168c9b9eac66c4fa479413f4a95c61be4 Mon Sep 17 00:00:00 2001
+-From: Florent Revest <revestflo@gmail.com>
+-Date: Mon, 30 Oct 2017 21:05:46 +0100
+-Subject: [PATCH] adb: Allow adbd to be ran as root
+-
+----
+-Upstream-Status: Pending
+-
+- adb/adb.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/adb/adb.c b/adb/adb.c
+-index 027edd9359..e0f7ecde45 100644
+---- a/adb/adb.c
+-+++ b/adb/adb.c
+-@@ -1271,6 +1271,7 @@ static int should_drop_privileges() {
+-     int secure = 0;
+-     char value[PROPERTY_VALUE_MAX];
+- 
+-+    return 0;
+-    /* run adbd in secure mode if ro.secure is set and
+-     ** we are not in the emulator
+-     */
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch
+deleted file mode 100644
+index a4dc6e1e35..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch
++++ /dev/null
+@@ -1,110 +0,0 @@
+-From dd195778a9930b7967b21a3b8eb390b70253dbad Mon Sep 17 00:00:00 2001
+-From: David Ng <dave@codeaurora.org>
+-Date: Fri, 27 Jul 2012 17:15:03 -0700
+-Subject: [PATCH] mkbootimg: Add --dt parameter to specify DT image
+-
+-New optional --dt parameter to specify a kernel device
+-tree image.
+-
+-Upstream-Status: Inappropriate
+----
+- mkbootimg/bootimg.h   |  7 +++++--
+- mkbootimg/mkbootimg.c | 21 +++++++++++++++++++++
+- 2 files changed, 26 insertions(+), 2 deletions(-)
+-
+-diff --git a/mkbootimg/bootimg.h b/mkbootimg/bootimg.h
+-index 9171d85a7b..308c537d6b 100644
+---- a/mkbootimg/bootimg.h
+-+++ b/mkbootimg/bootimg.h
+-@@ -41,8 +41,8 @@ struct boot_img_hdr
+- 
+-     unsigned tags_addr;    /* physical addr for kernel tags */
+-     unsigned page_size;    /* flash page size we assume */
+--    unsigned unused[2];    /* future expansion: should be 0 */
+--
+-+    unsigned dt_size;      /* device tree in bytes */
+-+    unsigned unused;       /* future expansion: should be 0 */
+-     unsigned char name[BOOT_NAME_SIZE]; /* asciiz product name */
+- 
+-     unsigned char cmdline[BOOT_ARGS_SIZE];
+-@@ -64,10 +64,13 @@ struct boot_img_hdr
+- ** +-----------------+
+- ** | second stage    | o pages
+- ** +-----------------+
+-+** | device tree     | p pages
+-+** +-----------------+
+- **
+- ** n = (kernel_size + page_size - 1) / page_size
+- ** m = (ramdisk_size + page_size - 1) / page_size
+- ** o = (second_size + page_size - 1) / page_size
+-+** p = (dt_size + page_size - 1) / page_size
+- **
+- ** 0. all entities are page_size aligned in flash
+- ** 1. kernel and ramdisk are required (size != 0)
+-diff --git a/mkbootimg/mkbootimg.c b/mkbootimg/mkbootimg.c
+-index fc92b4dc30..658052cdf2 100644
+---- a/mkbootimg/mkbootimg.c
+-+++ b/mkbootimg/mkbootimg.c
+-@@ -65,6 +65,7 @@ int usage(void)
+-             "       [ --board <boardname> ]\n"
+-             "       [ --base <address> ]\n"
+-             "       [ --pagesize <pagesize> ]\n"
+-+            "       [ --dt <filename> ]\n"
+-             "       -o|--output <filename>\n"
+-             );
+-     return 1;
+-@@ -105,6 +106,8 @@ int main(int argc, char **argv)
+-     char *cmdline = "";
+-     char *bootimg = 0;
+-     char *board = "";
+-+    char *dt_fn = 0;
+-+    void *dt_data = 0;
+-     unsigned pagesize = 2048;
+-     int fd;
+-     SHA_CTX ctx;
+-@@ -158,6 +161,8 @@ int main(int argc, char **argv)
+-                 fprintf(stderr,"error: unsupported page size %d\n", pagesize);
+-                 return -1;
+-             }
+-+        } else if(!strcmp(arg, "--dt")) {
+-+            dt_fn = val;
+-         } else {
+-             return usage();
+-         }
+-@@ -232,6 +237,14 @@ int main(int argc, char **argv)
+-         }
+-     }
+- 
+-+    if(dt_fn) {
+-+        dt_data = load_file(dt_fn, &hdr.dt_size);
+-+        if (dt_data == 0) {
+-+            fprintf(stderr,"error: could not load device tree image '%s'\n", dt_fn);
+-+            return 1;
+-+        }
+-+    }
+-+
+-     /* put a hash of the contents in the header so boot images can be
+-      * differentiated based on their first 2k.
+-      */
+-@@ -242,6 +255,10 @@ int main(int argc, char **argv)
+-     SHA_update(&ctx, &hdr.ramdisk_size, sizeof(hdr.ramdisk_size));
+-     SHA_update(&ctx, second_data, hdr.second_size);
+-     SHA_update(&ctx, &hdr.second_size, sizeof(hdr.second_size));
+-+    if(dt_data) {
+-+        SHA_update(&ctx, dt_data, hdr.dt_size);
+-+        SHA_update(&ctx, &hdr.dt_size, sizeof(hdr.dt_size));
+-+    }
+-     sha = SHA_final(&ctx);
+-     memcpy(hdr.id, sha,
+-            SHA_DIGEST_SIZE > sizeof(hdr.id) ? sizeof(hdr.id) : SHA_DIGEST_SIZE);
+-@@ -266,6 +283,10 @@ int main(int argc, char **argv)
+-         if(write_padding(fd, pagesize, hdr.second_size)) goto fail;
+-     }
+- 
+-+    if(dt_data) {
+-+        if(write(fd, dt_data, hdr.dt_size) != (ssize_t) hdr.dt_size) goto fail;
+-+        if(write_padding(fd, pagesize, hdr.dt_size)) goto fail;
+-+    }
+-     return 0;
+- 
+- fail:
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0010-Use-linux-capability.h-on-linux-systems-too.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0010-Use-linux-capability.h-on-linux-systems-too.patch
+deleted file mode 100644
+index 2c607ff67c..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0010-Use-linux-capability.h-on-linux-systems-too.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-From ef743c9c3c7452ae904a5c343ee2b759ab3a87cb Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Lo=C3=AFc=20Minier?= <loic.minier@ubuntu.com>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] Use linux/capability.h on linux systems too
+-
+-Upstream-Status: Inappropriate
+----
+- include/private/android_filesystem_config.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
+-index 2f528b95c8..3e0b00928e 100644
+---- a/include/private/android_filesystem_config.h
+-+++ b/include/private/android_filesystem_config.h
+-@@ -27,7 +27,7 @@
+- #include <sys/types.h>
+- #include <stdint.h>
+- 
+--#ifdef HAVE_ANDROID_OS
+-+#if defined(HAVE_ANDROID_OS) || defined(__linux__)
+- #include <linux/capability.h>
+- #else
+- #include "android_filesystem_capability.h"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0011-Remove-bionic-specific-calls.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0011-Remove-bionic-specific-calls.patch
+deleted file mode 100644
+index 5b18f461a3..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0011-Remove-bionic-specific-calls.patch
++++ /dev/null
+@@ -1,64 +0,0 @@
+-From 9eff8799831961c0edf6e37e5d4cbf43baa7c748 Mon Sep 17 00:00:00 2001
+-From: Fathi Boudra <fabo@debian.org>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] Remove bionic specific calls
+-
+-Upstream-Status: Inappropriate
+----
+- include/cutils/properties.h | 1 -
+- libcutils/properties.c      | 2 +-
+- liblog/logd_write.c         | 5 +++++
+- 3 files changed, 6 insertions(+), 2 deletions(-)
+-
+-diff --git a/include/cutils/properties.h b/include/cutils/properties.h
+-index 798db8b36f..7d01f28d6e 100644
+---- a/include/cutils/properties.h
+-+++ b/include/cutils/properties.h
+-@@ -19,7 +19,6 @@
+- 
+- #include <sys/cdefs.h>
+- #include <stddef.h>
+--#include <sys/system_properties.h>
+- #include <stdint.h>
+- 
+- #ifdef __cplusplus
+-diff --git a/libcutils/properties.c b/libcutils/properties.c
+-index b283658aa4..4151e7882c 100644
+---- a/libcutils/properties.c
+-+++ b/libcutils/properties.c
+-@@ -104,10 +104,10 @@ int32_t property_get_int32(const char *key, int32_t default_value) {
+-     return (int32_t)property_get_imax(key, INT32_MIN, INT32_MAX, default_value);
+- }
+- 
+-+#undef HAVE_LIBC_SYSTEM_PROPERTIES
+- #ifdef HAVE_LIBC_SYSTEM_PROPERTIES
+- 
+- #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+--#include <sys/_system_properties.h>
+- 
+- int property_set(const char *key, const char *value)
+- {
+-diff --git a/liblog/logd_write.c b/liblog/logd_write.c
+-index b2668cedb7..f5a44fe901 100644
+---- a/liblog/logd_write.c
+-+++ b/liblog/logd_write.c
+-@@ -23,6 +23,7 @@
+- #include <stdlib.h>
+- #include <string.h>
+- #include <sys/stat.h>
+-+#include <sys/syscall.h>
+- #include <sys/types.h>
+- #if (FAKE_LOG_DEVICE == 0)
+- #include <sys/socket.h>
+-@@ -205,7 +206,11 @@ static int __write_to_log_kernel(log_id_t log_id, struct iovec *vec, size_t nr)
+-     realtime_ts.tv_nsec = ts.tv_nsec;
+- 
+-     log_id_buf = log_id;
+-+#ifdef __BIONIC__
+-     tid = gettid();
+-+#else
+-+    tid = (pid_t) syscall(__NR_gettid);
+-+#endif
+- 
+-     newVec[0].iov_base   = (unsigned char *) &log_id_buf;
+-     newVec[0].iov_len    = sizeof_log_id_t;
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch
+deleted file mode 100644
+index b0feb65921..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch
++++ /dev/null
+@@ -1,50 +0,0 @@
+-From cd4525d760c6f88c9bf85f7bf488da79cd0d3264 Mon Sep 17 00:00:00 2001
+-From: Fathi Boudra <fabo@debian.org>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] Fix implicit declaration of stlcat/strlcopy functions
+-
+-Upstream-Status: Inappropriate
+----
+- adb/adb.c                | 1 +
+- fs_mgr/fs_mgr_fstab.c    | 2 +-
+- include/cutils/sockets.h | 2 +-
+- 3 files changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/adb/adb.c b/adb/adb.c
+-index e0f7ecde45..aaefd9b401 100644
+---- a/adb/adb.c
+-+++ b/adb/adb.c
+-@@ -41,6 +41,7 @@
+- #include <sys/prctl.h>
+- #include <getopt.h>
+- #include <selinux/selinux.h>
+-+#include <grp.h>
+- #else
+- #include "usb_vendors.h"
+- #endif
+-diff --git a/fs_mgr/fs_mgr_fstab.c b/fs_mgr/fs_mgr_fstab.c
+-index edd9591164..9ddb4643b5 100644
+---- a/fs_mgr/fs_mgr_fstab.c
+-+++ b/fs_mgr/fs_mgr_fstab.c
+-@@ -17,7 +17,7 @@
+- #include <ctype.h>
+- #include <stdio.h>
+- #include <stdlib.h>
+--#include <string.h>
+-+#include <bsd/string.h>
+- #include <sys/mount.h>
+- 
+- #include "fs_mgr_priv.h"
+-diff --git a/include/cutils/sockets.h b/include/cutils/sockets.h
+-index daf43ec944..d3270c69e7 100644
+---- a/include/cutils/sockets.h
+-+++ b/include/cutils/sockets.h
+-@@ -19,7 +19,7 @@
+- 
+- #include <errno.h>
+- #include <stdlib.h>
+--#include <string.h>
+-+#include <bsd/string.h>
+- #include <stdbool.h>
+- 
+- #ifdef HAVE_WINSOCK
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0013-adb-Support-riscv64.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0013-adb-Support-riscv64.patch
+deleted file mode 100644
+index 5138556d63..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0013-adb-Support-riscv64.patch
++++ /dev/null
+@@ -1,191 +0,0 @@
+-From 48ddf4fb999931942c359350fb31cd557514e1c6 Mon Sep 17 00:00:00 2001
+-From: Chenxi Mao <maochenxi@eswin.com>
+-Date: Mon, 20 Apr 2020 15:27:22 +0800
+-Subject: [PATCH 1/1] adb: Support riscv64
+-
+----
+-Upstream-Status: Pending
+-
+- include/cutils/atomic-inline.h  |   2 +
+- include/cutils/atomic-riscv64.h | 156 ++++++++++++++++++++++++++++++++
+- 2 files changed, 158 insertions(+)
+- create mode 100644 include/cutils/atomic-riscv64.h
+-
+-diff --git a/include/cutils/atomic-inline.h b/include/cutils/atomic-inline.h
+-index a31e913579..b5dc38209c 100644
+---- a/include/cutils/atomic-inline.h
+-+++ b/include/cutils/atomic-inline.h
+-@@ -55,6 +55,8 @@ extern "C" {
+- #include <cutils/atomic-mips64.h>
+- #elif defined(__mips__)
+- #include <cutils/atomic-mips.h>
+-+#elif defined(__riscv) && __riscv_xlen == 64
+-+#include <cutils/atomic-riscv64.h>
+- #else
+- #error atomic operations are unsupported
+- #endif
+-diff --git a/include/cutils/atomic-riscv64.h b/include/cutils/atomic-riscv64.h
+-new file mode 100644
+-index 0000000000..2664db5a86
+---- /dev/null
+-+++ b/include/cutils/atomic-riscv64.h
+-@@ -0,0 +1,156 @@
+-+/*
+-+ * Copyright (C) 2014 The Android Open Source Project
+-+ * All rights reserved.
+-+ *
+-+ * Redistribution and use in source and binary forms, with or without
+-+ * modification, are permitted provided that the following conditions
+-+ * are met:
+-+ *  * Redistributions of source code must retain the above copyright
+-+ *    notice, this list of conditions and the following disclaimer.
+-+ *  * Redistributions in binary form must reproduce the above copyright
+-+ *    notice, this list of conditions and the following disclaimer in
+-+ *    the documentation and/or other materials provided with the
+-+ *    distribution.
+-+ *
+-+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+-+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+-+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+-+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+-+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+-+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+-+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+-+ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+-+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+-+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+-+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+-+ * SUCH DAMAGE.
+-+ */
+-+
+-+#ifndef ANDROID_CUTILS_ATOMIC_RISCV64_H
+-+#define ANDROID_CUTILS_ATOMIC_RISCV64_H
+-+
+-+#include <stdint.h>
+-+
+-+#ifndef ANDROID_ATOMIC_INLINE
+-+#define ANDROID_ATOMIC_INLINE inline __attribute__((always_inline))
+-+#endif
+-+
+-+/*
+-+   TODOAArch64: Revisit the below functions and check for potential
+-+   optimizations using assembly code or otherwise.
+-+*/
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+void android_compiler_barrier(void)
+-+{
+-+    __asm__ __volatile__ ("" : : : "memory");
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+void android_memory_barrier(void)
+-+{
+-+    __asm__ __volatile__ ("fence rw,rw" : : : "memory");
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_acquire_load(volatile const int32_t *ptr)
+-+{
+-+    int32_t value = *ptr;
+-+    android_memory_barrier();
+-+    return value;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_release_load(volatile const int32_t *ptr)
+-+{
+-+    android_memory_barrier();
+-+    return *ptr;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+void android_atomic_acquire_store(int32_t value, volatile int32_t *ptr)
+-+{
+-+    *ptr = value;
+-+    android_memory_barrier();
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+void android_atomic_release_store(int32_t value, volatile int32_t *ptr)
+-+{
+-+    android_memory_barrier();
+-+    *ptr = value;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int android_atomic_cas(int32_t old_value, int32_t new_value,
+-+                       volatile int32_t *ptr)
+-+{
+-+    return __sync_val_compare_and_swap(ptr, old_value, new_value) != old_value;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int android_atomic_acquire_cas(int32_t old_value, int32_t new_value,
+-+                               volatile int32_t *ptr)
+-+{
+-+    int status = android_atomic_cas(old_value, new_value, ptr);
+-+    android_memory_barrier();
+-+    return status;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int android_atomic_release_cas(int32_t old_value, int32_t new_value,
+-+                               volatile int32_t *ptr)
+-+{
+-+    android_memory_barrier();
+-+    return android_atomic_cas(old_value, new_value, ptr);
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_add(int32_t increment, volatile int32_t *ptr)
+-+{
+-+    int32_t prev, status;
+-+    android_memory_barrier();
+-+    do {
+-+        prev = *ptr;
+-+        status = android_atomic_cas(prev, prev + increment, ptr);
+-+    } while (__builtin_expect(status != 0, 0));
+-+    return prev;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_inc(volatile int32_t *addr)
+-+{
+-+    return android_atomic_add(1, addr);
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_dec(volatile int32_t *addr)
+-+{
+-+    return android_atomic_add(-1, addr);
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_and(int32_t value, volatile int32_t *ptr)
+-+{
+-+    int32_t prev, status;
+-+    android_memory_barrier();
+-+    do {
+-+        prev = *ptr;
+-+        status = android_atomic_cas(prev, prev & value, ptr);
+-+    } while (__builtin_expect(status != 0, 0));
+-+    return prev;
+-+}
+-+
+-+extern ANDROID_ATOMIC_INLINE
+-+int32_t android_atomic_or(int32_t value, volatile int32_t *ptr)
+-+{
+-+    int32_t prev, status;
+-+    android_memory_barrier();
+-+    do {
+-+        prev = *ptr;
+-+        status = android_atomic_cas(prev, prev | value, ptr);
+-+    } while (__builtin_expect(status != 0, 0));
+-+    return prev;
+-+}
+-+
+-+#endif /* ANDROID_CUTILS_ATOMIC_RISCV_H */
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
+deleted file mode 100644
+index cf23f3c251..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0014-add-u3-ss-descriptor-support-for-adb.patch
++++ /dev/null
+@@ -1,344 +0,0 @@
+-From dae9a11f3a158357966399aef97c48b5f16934d9 Mon Sep 17 00:00:00 2001
+-From: Jiacheng Liu <jiacheng.liu@mediatek.com>
+-Date: Sat, 24 Jul 2021 11:01:18 +0800
+-Subject: [PATCH] android-tools: adb: add u3 ss descriptor support
+-
+-Porting u3 Superspeed descriptor support to open-embedded android-tools package.
+-This patch origins from the the patch in android project [1], but has been
+-modified for backporting to android-tools_5.1.1.r37.
+-
+-[1] https://android.googlesource.com/platform/system/core/+/d6ee9f26a5163af4121f4380264fcbd4e6851a17%5E%21
+-
+-Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
+-Signed-off-by: Jiacheng Liu <jiacheng.liu@mediatek.com>
+----
+-Upstream-Status: Pending
+-
+- adb/usb_linux_client.c | 275 +++++++++++++++++++++++++++++++----------
+- 1 file changed, 207 insertions(+), 68 deletions(-)
+-
+-diff --git a/adb/usb_linux_client.c b/adb/usb_linux_client.c
+-index 6e8b5bb..884e85e 100644
+---- a/adb/usb_linux_client.c
+-+++ b/adb/usb_linux_client.c
+-@@ -31,8 +31,10 @@
+- #define   TRACE_TAG  TRACE_USB
+- #include "adb.h"
+- 
+-+#define USB_EXT_PROP_UNICODE    1
+- #define MAX_PACKET_SIZE_FS	64
+- #define MAX_PACKET_SIZE_HS	512
+-+#define MAX_PACKET_SIZE_SS	1024
+- 
+- #if __BYTE_ORDER == __LITTLE_ENDIAN
+- # define cpu_to_le16(x) (x)
+-@@ -62,74 +64,185 @@ struct usb_handle
+-     int bulk_in;  /* "in" from the host's perspective => sink for adbd */
+- };
+- 
+--static const struct {
+--    struct usb_functionfs_descs_head header;
+--    struct {
+--        struct usb_interface_descriptor intf;
+--        struct usb_endpoint_descriptor_no_audio source;
+--        struct usb_endpoint_descriptor_no_audio sink;
+--    } __attribute__((packed)) fs_descs, hs_descs;
+--} __attribute__((packed)) descriptors = {
+--    .header = {
+--        .magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC),
+--        .length = cpu_to_le32(sizeof(descriptors)),
+--        .fs_count = 3,
+--        .hs_count = 3,
+-+struct func_desc {
+-+    struct usb_interface_descriptor intf;
+-+    struct usb_endpoint_descriptor_no_audio source;
+-+    struct usb_endpoint_descriptor_no_audio sink;
+-+} __attribute__((packed));
+-+
+-+struct ss_func_desc {
+-+    struct usb_interface_descriptor intf;
+-+    struct usb_endpoint_descriptor_no_audio source;
+-+    struct usb_ss_ep_comp_descriptor source_comp;
+-+    struct usb_endpoint_descriptor_no_audio sink;
+-+    struct usb_ss_ep_comp_descriptor sink_comp;
+-+} __attribute__((packed));
+-+
+-+struct desc_v1 {
+-+    struct usb_functionfs_descs_head_v1 {
+-+        __le32 magic;
+-+        __le32 length;
+-+        __le32 fs_count;
+-+        __le32 hs_count;
+-+    } __attribute__((packed)) header;
+-+    struct func_desc fs_descs, hs_descs;
+-+} __attribute__((packed));
+-+
+-+struct usb_os_desc_ext_prop {
+-+    uint32_t dwSize;
+-+    uint32_t dwPropertyDataType;
+-+
+-+    // Property name and value are transmitted as UTF-16, but the kernel only
+-+    // accepts ASCII values and performs the conversion for us.
+-+    uint16_t wPropertyNameLength;
+-+    char bPropertyName[20];
+-+
+-+    uint32_t dwPropertyDataLength;
+-+    char bProperty[39];
+-+} __attribute__((packed)) os_desc_guid = {
+-+    .dwSize = sizeof(struct usb_os_desc_ext_prop),
+-+    .dwPropertyDataType = cpu_to_le32(USB_EXT_PROP_UNICODE),
+-+    .wPropertyNameLength = cpu_to_le16(20),
+-+    .bPropertyName = "DeviceInterfaceGUID",
+-+    .dwPropertyDataLength = cpu_to_le32(39),
+-+    .bProperty = "{F72FE0D4-CBCB-407D-8814-9ED673D0DD6B}",
+-+};
+-+
+-+struct usb_ext_prop_values {
+-+    struct usb_os_desc_ext_prop guid;
+-+} __attribute__((packed));
+-+
+-+struct desc_v2 {
+-+    struct usb_functionfs_descs_head_v2 header;
+-+    // The rest of the structure depends on the flags in the header.
+-+    __le32 fs_count;
+-+    __le32 hs_count;
+-+    __le32 ss_count;
+-+    __le32 os_count;
+-+    struct func_desc fs_descs, hs_descs;
+-+    struct ss_func_desc ss_descs;
+-+    struct usb_os_desc_header os_header;
+-+    struct usb_ext_compat_desc os_desc;
+-+    struct usb_os_desc_header os_prop_header;
+-+    struct usb_ext_prop_values os_prop_values;
+-+} __attribute__((packed));
+-+
+-+static struct func_desc fs_descriptors = {
+-+    .intf = {
+-+        .bLength = sizeof(fs_descriptors.intf),
+-+        .bDescriptorType = USB_DT_INTERFACE,
+-+        .bInterfaceNumber = 0,
+-+        .bNumEndpoints = 2,
+-+        .bInterfaceClass = ADB_CLASS,
+-+        .bInterfaceSubClass = ADB_SUBCLASS,
+-+        .bInterfaceProtocol = ADB_PROTOCOL,
+-+        .iInterface = 1, /* first string from the provided table */
+-+    },
+-+    .source = {
+-+        .bLength = sizeof(fs_descriptors.source),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 1 | USB_DIR_OUT,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+-+    },
+-+    .sink = {
+-+        .bLength = sizeof(fs_descriptors.sink),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 2 | USB_DIR_IN,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+-+    },
+-+};
+-+
+-+static struct func_desc hs_descriptors = {
+-+    .intf = {
+-+        .bLength = sizeof(hs_descriptors.intf),
+-+        .bDescriptorType = USB_DT_INTERFACE,
+-+        .bInterfaceNumber = 0,
+-+        .bNumEndpoints = 2,
+-+        .bInterfaceClass = ADB_CLASS,
+-+        .bInterfaceSubClass = ADB_SUBCLASS,
+-+        .bInterfaceProtocol = ADB_PROTOCOL,
+-+        .iInterface = 1, /* first string from the provided table */
+-+    },
+-+    .source = {
+-+        .bLength = sizeof(hs_descriptors.source),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 1 | USB_DIR_OUT,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+-+    },
+-+    .sink = {
+-+        .bLength = sizeof(hs_descriptors.sink),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 2 | USB_DIR_IN,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+-+    },
+-+};
+-+
+-+static struct ss_func_desc ss_descriptors = {
+-+    .intf = {
+-+        .bLength = sizeof(ss_descriptors.intf),
+-+        .bDescriptorType = USB_DT_INTERFACE,
+-+        .bInterfaceNumber = 0,
+-+        .bNumEndpoints = 2,
+-+        .bInterfaceClass = ADB_CLASS,
+-+        .bInterfaceSubClass = ADB_SUBCLASS,
+-+        .bInterfaceProtocol = ADB_PROTOCOL,
+-+        .iInterface = 1, /* first string from the provided table */
+-+    },
+-+    .source = {
+-+        .bLength = sizeof(ss_descriptors.source),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 1 | USB_DIR_OUT,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_SS,
+-+    },
+-+    .source_comp = {
+-+        .bLength = sizeof(ss_descriptors.source_comp),
+-+        .bDescriptorType = USB_DT_SS_ENDPOINT_COMP,
+-+        .bMaxBurst = 4,
+-     },
+--    .fs_descs = {
+--        .intf = {
+--            .bLength = sizeof(descriptors.fs_descs.intf),
+--            .bDescriptorType = USB_DT_INTERFACE,
+--            .bInterfaceNumber = 0,
+--            .bNumEndpoints = 2,
+--            .bInterfaceClass = ADB_CLASS,
+--            .bInterfaceSubClass = ADB_SUBCLASS,
+--            .bInterfaceProtocol = ADB_PROTOCOL,
+--            .iInterface = 1, /* first string from the provided table */
+--        },
+--        .source = {
+--            .bLength = sizeof(descriptors.fs_descs.source),
+--            .bDescriptorType = USB_DT_ENDPOINT,
+--            .bEndpointAddress = 1 | USB_DIR_OUT,
+--            .bmAttributes = USB_ENDPOINT_XFER_BULK,
+--            .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+--        },
+--        .sink = {
+--            .bLength = sizeof(descriptors.fs_descs.sink),
+--            .bDescriptorType = USB_DT_ENDPOINT,
+--            .bEndpointAddress = 2 | USB_DIR_IN,
+--            .bmAttributes = USB_ENDPOINT_XFER_BULK,
+--            .wMaxPacketSize = MAX_PACKET_SIZE_FS,
+--        },
+-+    .sink = {
+-+        .bLength = sizeof(ss_descriptors.sink),
+-+        .bDescriptorType = USB_DT_ENDPOINT,
+-+        .bEndpointAddress = 2 | USB_DIR_IN,
+-+        .bmAttributes = USB_ENDPOINT_XFER_BULK,
+-+        .wMaxPacketSize = MAX_PACKET_SIZE_SS,
+-     },
+--    .hs_descs = {
+--        .intf = {
+--            .bLength = sizeof(descriptors.hs_descs.intf),
+--            .bDescriptorType = USB_DT_INTERFACE,
+--            .bInterfaceNumber = 0,
+--            .bNumEndpoints = 2,
+--            .bInterfaceClass = ADB_CLASS,
+--            .bInterfaceSubClass = ADB_SUBCLASS,
+--            .bInterfaceProtocol = ADB_PROTOCOL,
+--            .iInterface = 1, /* first string from the provided table */
+--        },
+--        .source = {
+--            .bLength = sizeof(descriptors.hs_descs.source),
+--            .bDescriptorType = USB_DT_ENDPOINT,
+--            .bEndpointAddress = 1 | USB_DIR_OUT,
+--            .bmAttributes = USB_ENDPOINT_XFER_BULK,
+--            .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+--        },
+--        .sink = {
+--            .bLength = sizeof(descriptors.hs_descs.sink),
+--            .bDescriptorType = USB_DT_ENDPOINT,
+--            .bEndpointAddress = 2 | USB_DIR_IN,
+--            .bmAttributes = USB_ENDPOINT_XFER_BULK,
+--            .wMaxPacketSize = MAX_PACKET_SIZE_HS,
+--        },
+-+    .sink_comp = {
+-+        .bLength = sizeof(ss_descriptors.sink_comp),
+-+        .bDescriptorType = USB_DT_SS_ENDPOINT_COMP,
+-+        .bMaxBurst = 4,
+-     },
+- };
+- 
+-+struct usb_ext_compat_desc os_desc_compat = {
+-+    .bFirstInterfaceNumber = 0,
+-+    .Reserved1 = cpu_to_le32(1),
+-+    .CompatibleID = { 'W', 'I', 'N', 'U', 'S', 'B', '\0', '\0'},
+-+    .SubCompatibleID = {0},
+-+    .Reserved2 = {0},
+-+};
+-+
+-+static struct usb_os_desc_header os_desc_header = {
+-+    .interface = cpu_to_le32(0),
+-+    .dwLength = cpu_to_le32(sizeof(os_desc_header) + sizeof(os_desc_compat)),
+-+    .bcdVersion = cpu_to_le32(1),
+-+    .wIndex = cpu_to_le32(4),
+-+    .bCount = cpu_to_le32(1),
+-+    .Reserved = cpu_to_le32(0),
+-+};
+-+
+-+static struct usb_os_desc_header os_prop_header = {
+-+    .interface = cpu_to_le32(0),
+-+    .dwLength = cpu_to_le32(sizeof(os_desc_header) + sizeof(struct usb_ext_prop_values)),
+-+    .bcdVersion = cpu_to_le32(1),
+-+    .wIndex = cpu_to_le32(5),
+-+    .wCount = cpu_to_le16(1),
+-+};
+-+
+- #define STR_INTERFACE_ "ADB Interface"
+- 
+- static const struct {
+-@@ -151,8 +264,6 @@ static const struct {
+-     },
+- };
+- 
+--
+--
+- static void *usb_adb_open_thread(void *x)
+- {
+-     struct usb_handle *usb = (struct usb_handle *)x;
+-@@ -270,6 +381,24 @@ static void usb_adb_init()
+- static void init_functionfs(struct usb_handle *h)
+- {
+-     ssize_t ret;
+-+    struct desc_v1 v1_descriptor = {};
+-+    struct desc_v2 v2_descriptor = {};
+-+
+-+    v2_descriptor.header.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC_V2);
+-+    v2_descriptor.header.length = cpu_to_le32(sizeof(v2_descriptor));
+-+    v2_descriptor.header.flags = FUNCTIONFS_HAS_FS_DESC | FUNCTIONFS_HAS_HS_DESC |
+-+                                 FUNCTIONFS_HAS_SS_DESC | FUNCTIONFS_HAS_MS_OS_DESC;
+-+    v2_descriptor.fs_count = 3;
+-+    v2_descriptor.hs_count = 3;
+-+    v2_descriptor.ss_count = 5;
+-+    v2_descriptor.os_count = 2;
+-+    v2_descriptor.fs_descs = fs_descriptors;
+-+    v2_descriptor.hs_descs = hs_descriptors;
+-+    v2_descriptor.ss_descs = ss_descriptors;
+-+    v2_descriptor.os_header = os_desc_header;
+-+    v2_descriptor.os_desc = os_desc_compat;
+-+    v2_descriptor.os_prop_header = os_prop_header;
+-+    v2_descriptor.os_prop_values.guid = os_desc_guid;
+- 
+-     if (h->control < 0) { // might have already done this before
+-         D("OPENING %s\n", USB_FFS_ADB_EP0);
+-@@ -279,10 +408,20 @@ static void init_functionfs(struct usb_handle *h)
+-             goto err;
+-         }
+- 
+--        ret = adb_write(h->control, &descriptors, sizeof(descriptors));
+-+        ret = adb_write(h->control, &v2_descriptor, sizeof(v2_descriptor));
+-         if (ret < 0) {
+--            D("[ %s: write descriptors failed: errno=%d ]\n", USB_FFS_ADB_EP0, errno);
+--            goto err;
+-+            D("[ %s: write v2_descriptor failed: errno=%d ]\n", USB_FFS_ADB_EP0, errno);
+-+            v1_descriptor.header.magic = cpu_to_le32(FUNCTIONFS_DESCRIPTORS_MAGIC);
+-+            v1_descriptor.header.length = cpu_to_le32(sizeof(v1_descriptor));
+-+            v1_descriptor.header.fs_count = 3;
+-+            v1_descriptor.header.hs_count = 3;
+-+            v1_descriptor.fs_descs = fs_descriptors;
+-+            v1_descriptor.hs_descs = hs_descriptors;
+-+	    ret = adb_write(h->control, &v1_descriptor, sizeof(v1_descriptor));
+-+	    if (ret < 0) {
+-+		D("[ %s: failed to write USB descriptors]\n", USB_FFS_ADB_EP0);
+-+		goto err;
+-+	    }
+-         }
+- 
+-         ret = adb_write(h->control, &strings, sizeof(strings));
+--- 
+-2.18.0
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch
+deleted file mode 100644
+index 5009c73a05..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-From 7b74d23ed955206a789a96bdc3288593e702afac Mon Sep 17 00:00:00 2001
+-From: Sean Anderson <sean.anderson@seco.com>
+-Date: Thu, 30 Dec 2021 15:16:08 -0500
+-Subject: [PATCH] libsparse: Split off most of sparse_file_read_normal into a
+- helper function
+-
+-This carves out the core of sparse_file_read_normal and splits it off so
+-it can be reused in the next patch. No functional change intended.
+-
+-Change-Id: Id00491fd7e5bb6fa28c517a0bb32b8b506539d4d
+-Upstream-Status: Backport [95657f3e5976d96073f7bbfe3a49192509999d1d]
+-Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+----
+- libsparse/sparse_read.c | 21 ++++++++++++++++-----
+- 1 file changed, 16 insertions(+), 5 deletions(-)
+-
+-diff --git a/libsparse/sparse_read.c b/libsparse/sparse_read.c
+-index 8e188e9a4..ee4abd86a 100644
+---- a/libsparse/sparse_read.c
+-+++ b/libsparse/sparse_read.c
+-@@ -353,13 +353,11 @@ static int sparse_file_read_sparse(struct sparse_file *s, int fd, bool crc)
+- 	return 0;
+- }
+- 
+--static int sparse_file_read_normal(struct sparse_file *s, int fd)
+-+static int do_sparse_file_read_normal(struct sparse_file *s, int fd, uint32_t* buf, int64_t offset,
+-+				      int64_t remain)
+- {
+- 	int ret;
+--	uint32_t *buf = malloc(s->block_size);
+--	unsigned int block = 0;
+--	int64_t remain = s->len;
+--	int64_t offset = 0;
+-+	unsigned int block = offset / s->block_size;
+- 	unsigned int to_read;
+- 	unsigned int i;
+- 	bool sparse_block;
+-@@ -403,6 +401,19 @@ static int sparse_file_read_normal(struct sparse_file *s, int fd)
+- 	return 0;
+- }
+- 
+-+static int sparse_file_read_normal(struct sparse_file* s, int fd)
+-+{
+-+	int ret;
+-+	uint32_t* buf = (uint32_t*)malloc(s->block_size);
+-+
+-+	if (!buf)
+-+		return -ENOMEM;
+-+
+-+	ret = do_sparse_file_read_normal(s, fd, buf, 0, s->len);
+-+	free(buf);
+-+	return ret;
+-+}
+-+
+- int sparse_file_read(struct sparse_file *s, int fd, bool sparse, bool crc)
+- {
+- 	if (crc && !sparse) {
+--- 
+-2.35.1.1320.gc452695387.dirty
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch
+deleted file mode 100644
+index e5221d2b4c..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch
++++ /dev/null
+@@ -1,188 +0,0 @@
+-From 41574b628ec4229c24dfe289af7b6978edcca4ed Mon Sep 17 00:00:00 2001
+-From: Sean Anderson <sean.anderson@seco.com>
+-Date: Thu, 30 Dec 2021 15:19:41 -0500
+-Subject: [PATCH] libsparse: Add "hole" mode to sparse_file_read
+-
+-This adds support for filesystem-level sparse files. These files have
+-holes which are not stored in the filesystem and when read are full of
+-zeros. While these zeros may be significant in some types of files,
+-other types of files may not care about the contents of holes. For
+-example, most filesystem creation tools write to all the blocks they
+-care about. Those blocks not written to will remain holes, and can be
+-safely represented by "don't care" chunks. Using "don't care" chunks
+-instead of fill chunks can result in a substantial reduction of the time
+-it takes to program a sparse image.
+-
+-To accomplish this, we extend the existing "sparse" boolean parameter to
+-be an enum of mode types. This enum represents the strategy we take when
+-reading in a file. For the most part the implementation is
+-straightforward. We use lseek to determine where the holes in the file
+-are, and then use do_sparse_file_read_normal to create chunks for the
+-data section. Note that every file has an implicit hole at its end.
+-
+-Change-Id: I0cfbf08886fca9a91cb753ec8734c84fcbe52c9f
+-Upstream-Status: Backport [f96466b05543b984ef7315d830bab4a409228d35]
+-Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+----
+- libsparse/img2simg.c              |  2 +-
+- libsparse/include/sparse/sparse.h | 32 +++++++++++---
+- libsparse/sparse_read.c           | 71 +++++++++++++++++++++++++++++--
+- 3 files changed, 93 insertions(+), 12 deletions(-)
+-
+-diff --git a/libsparse/img2simg.c b/libsparse/img2simg.c
+-index a0db36f45..2e171b613 100644
+---- a/libsparse/img2simg.c
+-+++ b/libsparse/img2simg.c
+-@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
+- 	}
+- 
+- 	sparse_file_verbose(s);
+--	ret = sparse_file_read(s, in, false, false);
+-+	ret = sparse_file_read(s, in, SPARSE_READ_MODE_NORMAL, false);
+- 	if (ret) {
+- 		fprintf(stderr, "Failed to read file\n");
+- 		exit(-1);
+-diff --git a/libsparse/include/sparse/sparse.h b/libsparse/include/sparse/sparse.h
+-index 8b757d22a..b68aa21a8 100644
+---- a/libsparse/include/sparse/sparse.h
+-+++ b/libsparse/include/sparse/sparse.h
+-@@ -196,23 +196,41 @@ int64_t sparse_file_len(struct sparse_file *s, bool sparse, bool crc);
+- int sparse_file_callback(struct sparse_file *s, bool sparse, bool crc,
+- 		int (*write)(void *priv, const void *data, int len), void *priv);
+- 
+-+/**
+-+ * enum sparse_read_mode - The method to use when reading in files
+-+ * @SPARSE_READ_MODE_NORMAL: The input is a regular file. Constant chunks of
+-+ *                           data (including holes) will be be converted to
+-+ *                           fill chunks.
+-+ * @SPARSE_READ_MODE_SPARSE: The input is an Android sparse file.
+-+ * @SPARSE_READ_MODE_HOLE: The input is a regular file. Holes will be converted
+-+ *                         to "don't care" chunks. Other constant chunks will
+-+ *                         be converted to fill chunks.
+-+ */
+-+enum sparse_read_mode {
+-+	SPARSE_READ_MODE_NORMAL = false,
+-+	SPARSE_READ_MODE_SPARSE = true,
+-+	SPARSE_READ_MODE_HOLE,
+-+};
+-+
+- /**
+-  * sparse_file_read - read a file into a sparse file cookie
+-  *
+-  * @s - sparse file cookie
+-  * @fd - file descriptor to read from
+-- * @sparse - read a file in the Android sparse file format
+-+ * @mode - mode to use when reading the input file
+-  * @crc - verify the crc of a file in the Android sparse file format
+-  *
+-- * Reads a file into a sparse file cookie.  If sparse is true, the file is
+-- * assumed to be in the Android sparse file format.  If sparse is false, the
+-- * file will be sparsed by looking for block aligned chunks of all zeros or
+-- * another 32 bit value.  If crc is true, the crc of the sparse file will be
+-- * verified.
+-+ * Reads a file into a sparse file cookie. If @mode is
+-+ * %SPARSE_READ_MODE_SPARSE, the file is assumed to be in the Android sparse
+-+ * file format. If @mode is %SPARSE_READ_MODE_NORMAL, the file will be sparsed
+-+ * by looking for block aligned chunks of all zeros or another 32 bit value. If
+-+ * @mode is %SPARSE_READ_MODE_HOLE, the file will be sparsed like
+-+ * %SPARSE_READ_MODE_NORMAL, but holes in the file will be converted to "don't
+-+ * care" chunks. If crc is true, the crc of the sparse file will be verified.
+-  *
+-  * Returns 0 on success, negative errno on error.
+-  */
+--int sparse_file_read(struct sparse_file *s, int fd, bool sparse, bool crc);
+-+int sparse_file_read(struct sparse_file *s, int fd, enum sparse_read_mode mode, bool crc);
+- 
+- /**
+-  * sparse_file_import - import an existing sparse file
+-diff --git a/libsparse/sparse_read.c b/libsparse/sparse_read.c
+-index ee4abd86a..81f48cc13 100644
+---- a/libsparse/sparse_read.c
+-+++ b/libsparse/sparse_read.c
+-@@ -414,16 +414,79 @@ static int sparse_file_read_normal(struct sparse_file* s, int fd)
+- 	return ret;
+- }
+- 
+--int sparse_file_read(struct sparse_file *s, int fd, bool sparse, bool crc)
+-+#ifdef __linux__
+-+static int sparse_file_read_hole(struct sparse_file* s, int fd)
+- {
+--	if (crc && !sparse) {
+-+	int ret;
+-+	uint32_t* buf = (uint32_t*)malloc(s->block_size);
+-+	int64_t end = 0;
+-+	int64_t start = 0;
+-+
+-+	if (!buf) {
+-+		return -ENOMEM;
+-+	}
+-+
+-+	do {
+-+		start = lseek(fd, end, SEEK_DATA);
+-+		if (start < 0) {
+-+			if (errno == ENXIO)
+-+				/* The rest of the file is a hole */
+-+				break;
+-+
+-+			error("could not seek to data");
+-+			free(buf);
+-+			return -errno;
+-+		} else if (start > s->len) {
+-+			break;
+-+		}
+-+
+-+		end = lseek(fd, start, SEEK_HOLE);
+-+		if (end < 0) {
+-+			error("could not seek to end");
+-+			free(buf);
+-+			return -errno;
+-+		}
+-+		end = min(end, s->len);
+-+
+-+		start = ALIGN_DOWN(start, s->block_size);
+-+		end = ALIGN(end, s->block_size);
+-+		if (lseek(fd, start, SEEK_SET) < 0) {
+-+			free(buf);
+-+			return -errno;
+-+		}
+-+
+-+		ret = do_sparse_file_read_normal(s, fd, buf, start, end - start);
+-+		if (ret) {
+-+			free(buf);
+-+			return ret;
+-+		}
+-+	} while (end < s->len);
+-+
+-+	free(buf);
+-+	return 0;
+-+}
+-+#else
+-+static int sparse_file_read_hole(struct sparse_file* s __unused, int fd __unused)
+-+{
+-+	return -ENOTSUP;
+-+}
+-+#endif
+-+
+-+int sparse_file_read(struct sparse_file *s, int fd, enum sparse_read_mode mode, bool crc)
+-+{
+-+	if (crc && mode != SPARSE_READ_MODE_SPARSE) {
+- 		return -EINVAL;
+- 	}
+- 
+--	if (sparse) {
+-+	switch (mode) {
+-+	case SPARSE_READ_MODE_SPARSE:
+- 		return sparse_file_read_sparse(s, fd, crc);
+--	} else {
+-+	case SPARSE_READ_MODE_NORMAL:
+- 		return sparse_file_read_normal(s, fd);
+-+	case SPARSE_READ_MODE_HOLE:
+-+		return sparse_file_read_hole(s, fd);
+-+	default:
+-+		return -EINVAL;
+- 	}
+- }
+- 
+--- 
+-2.35.1.1320.gc452695387.dirty
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch
+deleted file mode 100644
+index 9d19f58095..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch
++++ /dev/null
+@@ -1,114 +0,0 @@
+-From 00cce57eff1a0de3b93efa5da225e9eb33d19659 Mon Sep 17 00:00:00 2001
+-From: Sean Anderson <sean.anderson@seco.com>
+-Date: Thu, 30 Dec 2021 15:34:28 -0500
+-Subject: [PATCH] img2simg: Add support for converting holes to "don't care"
+- chunks
+-
+-This adds support for converting files with holes to "don't care"
+-chunks. This can result in a substantial reduction in the time it takes
+-to program an image if it has many holes.
+-
+-Generally, constants compared to argc have been reduced by one, since we
+-no longer have the program name as the first argument.
+-
+-Change-Id: I00750edc07d6415dcc07ae0351e9397b0222b7ba
+-Upstream-Status: Backport [6150b00b6025918da8c28e5c2f929ecdf480a9d6]
+-Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+----
+- libsparse/img2simg.c | 41 ++++++++++++++++++++++++++++++-----------
+- 1 file changed, 30 insertions(+), 11 deletions(-)
+-
+-diff --git a/libsparse/img2simg.c b/libsparse/img2simg.c
+-index 2e171b613..c985d5449 100644
+---- a/libsparse/img2simg.c
+-+++ b/libsparse/img2simg.c
+-@@ -40,25 +40,42 @@
+- 
+- void usage()
+- {
+--    fprintf(stderr, "Usage: img2simg <raw_image_file> <sparse_image_file> [<block_size>]\n");
+-+    fprintf(stderr, "Usage: img2simg [-s] <raw_image_file> <sparse_image_file> [<block_size>]\n");
+- }
+- 
+- int main(int argc, char *argv[])
+- {
+-+	char *arg_in;
+-+	char *arg_out;
+-+	enum sparse_read_mode mode = SPARSE_READ_MODE_NORMAL;
+-+	int extra;
+- 	int in;
+-+	int opt;
+- 	int out;
+- 	int ret;
+- 	struct sparse_file *s;
+- 	unsigned int block_size = 4096;
+- 	off64_t len;
+- 
+--	if (argc < 3 || argc > 4) {
+-+	while ((opt = getopt(argc, argv, "s")) != -1) {
+-+		switch (opt) {
+-+		case 's':
+-+			mode = SPARSE_READ_MODE_HOLE;
+-+			break;
+-+		default:
+-+			usage();
+-+			exit(-1);
+-+		}
+-+	}
+-+
+-+	extra = argc - optind;
+-+	if (extra < 2 || extra > 3) {
+- 		usage();
+- 		exit(-1);
+- 	}
+- 
+--	if (argc == 4) {
+--		block_size = atoi(argv[3]);
+-+	if (extra == 3) {
+-+		block_size = atoi(argv[optind + 2]);
+- 	}
+- 
+- 	if (block_size < 1024 || block_size % 4 != 0) {
+-@@ -66,22 +83,24 @@ int main(int argc, char *argv[])
+- 		exit(-1);
+- 	}
+- 
+--	if (strcmp(argv[1], "-") == 0) {
+-+	arg_in = argv[optind];
+-+	if (strcmp(arg_in, "-") == 0) {
+- 		in = STDIN_FILENO;
+- 	} else {
+--		in = open(argv[1], O_RDONLY | O_BINARY);
+-+		in = open(arg_in, O_RDONLY | O_BINARY);
+- 		if (in < 0) {
+--			fprintf(stderr, "Cannot open input file %s\n", argv[1]);
+-+			fprintf(stderr, "Cannot open input file %s\n", arg_in);
+- 			exit(-1);
+- 		}
+- 	}
+- 
+--	if (strcmp(argv[2], "-") == 0) {
+-+	arg_out = argv[optind + 1];
+-+	if (strcmp(arg_out, "-") == 0) {
+- 		out = STDOUT_FILENO;
+- 	} else {
+--		out = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0664);
+-+		out = open(arg_out, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0664);
+- 		if (out < 0) {
+--			fprintf(stderr, "Cannot open output file %s\n", argv[2]);
+-+			fprintf(stderr, "Cannot open output file %s\n", arg_out);
+- 			exit(-1);
+- 		}
+- 	}
+-@@ -96,7 +115,7 @@ int main(int argc, char *argv[])
+- 	}
+- 
+- 	sparse_file_verbose(s);
+--	ret = sparse_file_read(s, in, SPARSE_READ_MODE_NORMAL, false);
+-+	ret = sparse_file_read(s, in, mode, false);
+- 	if (ret) {
+- 		fprintf(stderr, "Failed to read file\n");
+- 		exit(-1);
+--- 
+-2.35.1.1320.gc452695387.dirty
+-
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff b/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
+deleted file mode 100644
+index ddb41ea4b0..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/adb_libssl_11.diff
++++ /dev/null
+@@ -1,48 +0,0 @@
+-Description: adb: Make compatible with openssl 1.1
+- OpenSSL version 1.1 brought some API changes which broke the build here,
+- fix that by accessing rsa->n (and e) directly, using RSA_get0_key instead.
+-Author: Chirayu Desai <chirayudesai1@gmail.com
+-Last-Update: 2016-11-10
+----
+-Upstream-Status: Pending
+-
+-This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+----
+-Upstream-Status: Pending
+-
+- system/core/adb/adb_auth_host.c |    5 +++--
+- 1 file changed, 3 insertions(+), 2 deletions(-)
+-
+---- a/adb/adb_auth_host.c
+-+++ b/adb/adb_auth_host.c
+-@@ -75,6 +75,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
+-     BIGNUM* rem = BN_new();
+--    BIGNUM* n = BN_new();
+-+    const BIGNUM* n;
+-     BIGNUM* n0inv = BN_new();
+-+    const BIGNUM* e;
+- 
+-     if (RSA_size(rsa) != RSANUMBYTES) {
+-         ret = 0;
+-@@ -82,7 +83,7 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
+-     }
+- 
+-     BN_set_bit(r32, 32);
+--    BN_copy(n, rsa->n);
+-+    RSA_get0_key(rsa, &n, &e, NULL);
+-     BN_set_bit(r, RSANUMWORDS * 32);
+-     BN_mod_sqr(rr, r, n, ctx);
+-     BN_div(NULL, rem, n, r32, ctx);
+-@@ -96,11 +97,10 @@ static int RSA_to_RSAPublicKey(RSA *rsa,
+-         BN_div(n, rem, n, r32, ctx);
+-         pkey->n[i] = BN_get_word(rem);
+-     }
+--    pkey->exponent = BN_get_word(rsa->e);
+-+    pkey->exponent = BN_get_word(e);
+- 
+- out:
+-     BN_free(n0inv);
+--    BN_free(n);
+-     BN_free(rem);
+-     BN_free(r);
+-     BN_free(rr);
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/core/b64_pton_function_decl.patch b/meta-oe/recipes-devtools/android-tools/android-tools/core/b64_pton_function_decl.patch
+deleted file mode 100644
+index 80410f1d2b..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/core/b64_pton_function_decl.patch
++++ /dev/null
+@@ -1,14 +0,0 @@
+-Add protoype declaration for  b64_pton
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/adb/adb_auth_client.c
+-+++ b/adb/adb_auth_client.c
+-@@ -29,6 +29,7 @@
+- 
+- #define TRACE_TAG TRACE_AUTH
+- 
+-+extern int b64_pton(const char* src, uint8_t* target, size_t targsize);
+- 
+- struct adb_public_key {
+-     struct listnode node;
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/ext4_utils.mk b/meta-oe/recipes-devtools/android-tools/android-tools/ext4_utils.mk
+deleted file mode 100644
+index c18aa9c4d2..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/ext4_utils.mk
++++ /dev/null
+@@ -1,103 +0,0 @@
+-# Makefile for ext4_utils
+-
+-SRCDIR ?= $(S)
+-
+-VPATH += $(SRCDIR)/system/extras/ext4_utils
+-make_ext4fs_SRC_FILES += make_ext4fs_main.c
+-make_ext4fs_SRC_FILES += canned_fs_config.c
+-make_ext4fs_OBJS := $(make_ext4fs_SRC_FILES:.c=.o)
+-
+-ext2simg_SRC_FILES += ext2simg.c
+-ext2simg_OBJS := $(ext2simg_SRC_FILES:.c=.o)
+-
+-ext4fixup_SRC_FILES += ext4fixup_main.c
+-ext4fixup_OBJS := $(ext4fixup_SRC_FILES:.c=.o)
+-
+-libext4_utils_SRC_FILES += make_ext4fs.c
+-libext4_utils_SRC_FILES += ext4fixup.c
+-libext4_utils_SRC_FILES += ext4_utils.c
+-libext4_utils_SRC_FILES += allocate.c
+-libext4_utils_SRC_FILES += contents.c
+-libext4_utils_SRC_FILES += extent.c
+-libext4_utils_SRC_FILES += indirect.c
+-libext4_utils_SRC_FILES += uuid.c
+-libext4_utils_SRC_FILES += sha1.c
+-libext4_utils_SRC_FILES += wipe.c
+-libext4_utils_SRC_FILES += crc16.c
+-libext4_utils_SRC_FILES += ext4_sb.c
+-libext4_utils_OBJS := $(libext4_utils_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libsparse
+-simg2img_SRC_FILES += simg2img.c
+-simg2img_SRC_FILES += sparse_crc32.c
+-simg2img_OBJS := $(simg2img_SRC_FILES:.c=.o)
+-
+-img2simg_SRC_FILES += img2simg.c
+-img2simg_OBJS := $(img2simg_SRC_FILES:.c=.o)
+-
+-simg2simg_SRC_FILES += simg2simg.c
+-simg2simg_SRC_FILES += sparse_crc32.c
+-simg2simg_OBJS := $(simg2simg_SRC_FILES:.c=.o)
+-
+-libsparse_SRC_FILES += backed_block.c
+-libsparse_SRC_FILES += output_file.c
+-libsparse_SRC_FILES += sparse.c
+-libsparse_SRC_FILES += sparse_crc32.c
+-libsparse_SRC_FILES += sparse_err.c
+-libsparse_SRC_FILES += sparse_read.c
+-libsparse_OBJS := $(libsparse_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/external/libselinux/src
+-libselinux_SRC_FILES += callbacks.c
+-libselinux_SRC_FILES += check_context.c
+-libselinux_SRC_FILES += freecon.c
+-libselinux_SRC_FILES += init.c
+-libselinux_SRC_FILES += label.c
+-libselinux_SRC_FILES += label_file.c
+-libselinux_SRC_FILES += label_android_property.c
+-libselinux_OBJS := $(libselinux_SRC_FILES:.c=.o)
+-
+-CFLAGS += -DANDROID
+-CFLAGS += -DHOST
+-CFLAGS += -I$(SRCDIR)/system/extras/ext4_utils
+-CFLAGS += -I$(SRCDIR)/system/core/include
+-CFLAGS += -I$(SRCDIR)/system/core/libsparse/include
+-CFLAGS += -I$(SRCDIR)/external/libselinux/include
+-CFLAGS += -include $(SRCDIR)/build/core/combo/include/arch/$(android_arch)/AndroidConfig.h
+-
+-all: make_ext4fs ext2simg ext4fixup simg2img img2simg simg2simg
+-
+-make_ext4fs: libext4_utils.a libsparse.a libselinux.a $(make_ext4fs_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(make_ext4fs_OBJS) \
+-		libext4_utils.a libsparse.a libselinux.a -lz -lpcre
+-
+-ext2simg: libext4_utils.a libselinux.a libsparse.a $(ext2simg_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(ext2simg_OBJS) \
+-		libext4_utils.a libselinux.a libsparse.a -lz -lpcre
+-
+-ext4fixup: libext4_utils.a libsparse.a $(ext4fixup_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(ext4fixup_OBJS) libext4_utils.a libsparse.a -lz
+-
+-simg2img: libsparse.a $(simg2img_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(simg2img_OBJS) libsparse.a -lz
+-
+-img2simg: libsparse.a $(img2simg_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(img2simg_OBJS) libsparse.a -lz
+-
+-simg2simg: libsparse.a $(simg2simg_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(simg2simg_OBJS) libsparse.a -lz
+-
+-libext4_utils.a: $(libext4_utils_OBJS)
+-	$(AR) rcs $@ $(libext4_utils_OBJS)
+-
+-libsparse.a: $(libsparse_OBJS)
+-	$(AR) rcs $@ $(libsparse_OBJS)
+-
+-libselinux.a: $(libselinux_OBJS)
+-	$(AR) rcs $@ $(libselinux_OBJS)
+-
+-clean:
+-	$(RM) $(make_ext4fs_OBJS) $(ext2simg_OBJS) $(ext4fixup_OBJS) \
+-		$(simg2img_OBJS) $(img2simg_OBJS) $(simg2simg_OBJS) \
+-		$(libext4_utils_OBJS) $(libsparse_OBJS) $(libselinux_OBJS) \
+-		make_ext4fs ext2simg ext4fixup simg2img img2simg simg2simg *.a
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0001-ext4_utils-remove-selinux-extensions.patch b/meta-oe/recipes-devtools/android-tools/android-tools/extras/0001-ext4_utils-remove-selinux-extensions.patch
+deleted file mode 100644
+index 4a19a5d65a..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0001-ext4_utils-remove-selinux-extensions.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 354604da9d152f1931e91991d3f34197fc8fc759 Mon Sep 17 00:00:00 2001
+-From: Sergio Schvezov <sergio.schvezov@canonical.com>
+-Date: Tue, 2 Oct 2018 16:36:54 +0000
+-Subject: [PATCH] ext4_utils: remove selinux extensions
+-
+-* drop useless includes of Android SELINUX extensions
+-* avoids having to clone another module
+-* this should be sent upstream
+-
+-Upstream-Status: Inappropriate
+----
+- ext4_utils/make_ext4fs.c      | 1 -
+- ext4_utils/make_ext4fs_main.c | 1 -
+- 2 files changed, 2 deletions(-)
+-
+-diff --git a/ext4_utils/make_ext4fs.c b/ext4_utils/make_ext4fs.c
+-index 2f89ae8a0..732afbed7 100644
+---- a/ext4_utils/make_ext4fs.c
+-+++ b/ext4_utils/make_ext4fs.c
+-@@ -62,7 +62,6 @@
+- 
+- #include <selinux/selinux.h>
+- #include <selinux/label.h>
+--#include <selinux/android.h>
+- 
+- #define O_BINARY 0
+- 
+-diff --git a/ext4_utils/make_ext4fs_main.c b/ext4_utils/make_ext4fs_main.c
+-index a6c5f6160..f8e7b9da9 100644
+---- a/ext4_utils/make_ext4fs_main.c
+-+++ b/ext4_utils/make_ext4fs_main.c
+-@@ -32,7 +32,6 @@
+- #ifndef USE_MINGW
+- #include <selinux/selinux.h>
+- #include <selinux/label.h>
+--#include <selinux/android.h>
+- #else
+- struct selabel_handle;
+- #endif
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch b/meta-oe/recipes-devtools/android-tools/android-tools/extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch
+deleted file mode 100644
+index 3b50ffbf36..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch
++++ /dev/null
+@@ -1,78 +0,0 @@
+-From b9254539811ce912bfd16dd1d185eba7a10cceff Mon Sep 17 00:00:00 2001
+-From: Markus Mayer <mmayer@mmayer.net>
+-Date: Wed, 7 Sep 2016 12:58:47 +0300
+-Subject: [PATCH] ext4_utils: add -o argument to preserve ownership
+-
+-See also https://android-review.googlesource.com/#/c/100312/
+-
+-Upstream-Status: Inappropriate
+----
+- ext4_utils/make_ext4fs.c      |  6 ++++++
+- ext4_utils/make_ext4fs_main.c | 10 ++++++++--
+- 2 files changed, 14 insertions(+), 2 deletions(-)
+-
+-diff --git a/ext4_utils/make_ext4fs.c b/ext4_utils/make_ext4fs.c
+-index 732afbed7..2cbf04399 100644
+---- a/ext4_utils/make_ext4fs.c
+-+++ b/ext4_utils/make_ext4fs.c
+-@@ -67,6 +67,8 @@
+- 
+- #endif
+- 
+-+int preserve_owner = 0;
+-+
+- /* TODO: Not implemented:
+-    Allocating blocks in the same block group as the file inode
+-    Hash or binary tree directories
+-@@ -185,6 +187,10 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
+- 		} else {
+- 			dentries[i].mtime = fixed_time;
+- 		}
+-+		if (preserve_owner) {
+-+			dentries[i].uid = stat.st_uid;
+-+			dentries[i].gid = stat.st_gid;
+-+		}
+- 		uint64_t capabilities;
+- 		if (fs_config_func != NULL) {
+- #ifdef ANDROID
+-diff --git a/ext4_utils/make_ext4fs_main.c b/ext4_utils/make_ext4fs_main.c
+-index f8e7b9da9..e82d43277 100644
+---- a/ext4_utils/make_ext4fs_main.c
+-+++ b/ext4_utils/make_ext4fs_main.c
+-@@ -47,13 +47,15 @@ struct selabel_handle;
+- extern struct fs_info info;
+- 
+- 
+-+extern int preserve_owner;
+-+
+- static void usage(char *path)
+- {
+- 	fprintf(stderr, "%s [ -l <len> ] [ -j <journal size> ] [ -b <block_size> ]\n", basename(path));
+- 	fprintf(stderr, "    [ -g <blocks per group> ] [ -i <inodes> ] [ -I <inode size> ]\n");
+- 	fprintf(stderr, "    [ -L <label> ] [ -f ] [ -a <android mountpoint> ]\n");
+- 	fprintf(stderr, "    [ -S file_contexts ] [ -C fs_config ] [ -T timestamp ]\n");
+--	fprintf(stderr, "    [ -z | -s ] [ -w ] [ -c ] [ -J ] [ -v ] [ -B <block_list_file> ]\n");
+-+	fprintf(stderr, "    [ -z | -s ] [ -w ] [ -c ] [ -J ] [ -o ] [ -v ] [ -B <block_list_file> ]\n");
+- 	fprintf(stderr, "    <filename> [<directory>]\n");
+- }
+- 
+-@@ -79,7 +81,7 @@ int main(int argc, char **argv)
+- 	struct selinux_opt seopts[] = { { SELABEL_OPT_PATH, "" } };
+- #endif
+- 
+--	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:T:C:B:fwzJsctv")) != -1) {
+-+	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:T:C:B:fwzJsctov")) != -1) {
+- 		switch (opt) {
+- 		case 'l':
+- 			info.len = parse_num(optarg);
+-@@ -142,6 +144,10 @@ int main(int argc, char **argv)
+- 			}
+- #endif
+- 			break;
+-+		case 'o':
+-+			preserve_owner = 1;
+-+			printf("Warning: Enabling 'preserve ownership', this is an unofficial feature!\n");
+-+			break;
+- 		case 'v':
+- 			verbose = 1;
+- 			break;
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch b/meta-oe/recipes-devtools/android-tools/android-tools/extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch
+deleted file mode 100644
+index b77c0ebc13..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch
++++ /dev/null
+@@ -1,69 +0,0 @@
+-From c9f8cb184a7218c97ff966db44da6dd814c0e273 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <martin.jansa@gmail.com>
+-Date: Fri, 21 Mar 2025 09:49:32 +0000
+-Subject: [PATCH] ext4_utils: drop unused parameter from allocate_inode()
+-
+-* fixes build with gcc-15:
+-  http://errors.yoctoproject.org/Errors/Details/848455/
+-
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c: In function 'make_directory':
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c:115:29: error: too many arguments to function 'allocate_inode'; expected 0, have 1
+-  115 |                 inode_num = allocate_inode(info);
+-      |                             ^~~~~~~~~~~~~~ ~~~~
+-In file included from TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c:32:
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/allocate.h:61:5: note: declared here
+-   61 | u32 allocate_inode();
+-      |     ^~~~~~~~~~~~~~
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c: In function 'make_file':
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c:183:21: error: too many arguments to function 'allocate_inode'; expected 0, have 1
+-  183 |         inode_num = allocate_inode(info);
+-      |                     ^~~~~~~~~~~~~~ ~~~~
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/allocate.h:61:5: note: declared here
+-   61 | u32 allocate_inode();
+-      |     ^~~~~~~~~~~~~~
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c: In function 'make_link':
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/contents.c:218:21: error: too many arguments to function 'allocate_inode'; expected 0, have 1
+-  218 |         inode_num = allocate_inode(info);
+-      |                     ^~~~~~~~~~~~~~ ~~~~
+-TOPDIR/tmp/work/core2-64-oe-linux/android-tools/5.1.1.r37/git/system/extras/ext4_utils/allocate.h:61:5: note: declared here
+-   61 | u32 allocate_inode();
+-      |     ^~~~~~~~~~~~~~
+-make: *** [<builtin>: contents.o] Error 1
+-
+-Upstream-Status: Pending [this whole code was removed in newer version android-9.0.0_r1 https://android.googlesource.com/platform/system/extras/+/7a837fcd6e9c0e0219f743052c78cc1c5988dfaf]
+-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+----
+- ext4_utils/contents.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/ext4_utils/contents.c b/ext4_utils/contents.c
+-index 3144de93f..ac1b71706 100644
+---- a/ext4_utils/contents.c
+-+++ b/ext4_utils/contents.c
+-@@ -112,7 +112,7 @@ u32 make_directory(u32 dir_inode_num, u32 entries, struct dentry *dentries,
+- 	len = blocks * info.block_size;
+- 
+- 	if (dir_inode_num) {
+--		inode_num = allocate_inode(info);
+-+		inode_num = allocate_inode();
+- 	} else {
+- 		dir_inode_num = EXT4_ROOT_INO;
+- 		inode_num = EXT4_ROOT_INO;
+-@@ -180,7 +180,7 @@ u32 make_file(const char *filename, u64 len)
+- 	struct ext4_inode *inode;
+- 	u32 inode_num;
+- 
+--	inode_num = allocate_inode(info);
+-+	inode_num = allocate_inode();
+- 	if (inode_num == EXT4_ALLOCATE_FAILED) {
+- 		error("failed to allocate inode\n");
+- 		return EXT4_ALLOCATE_FAILED;
+-@@ -215,7 +215,7 @@ u32 make_link(const char *link)
+- 	u32 inode_num;
+- 	u32 len = strlen(link);
+- 
+--	inode_num = allocate_inode(info);
+-+	inode_num = allocate_inode();
+- 	if (inode_num == EXT4_ALLOCATE_FAILED) {
+- 		error("failed to allocate inode\n");
+- 		return EXT4_ALLOCATE_FAILED;
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/fastboot.mk b/meta-oe/recipes-devtools/android-tools/android-tools/fastboot.mk
+deleted file mode 100644
+index b9ba95f38a..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/fastboot.mk
++++ /dev/null
+@@ -1,89 +0,0 @@
+-# Makefile for fastboot
+-
+-SRCDIR ?= $(S)
+-
+-VPATH += $(SRCDIR)/system/core/fastboot
+-fastboot_SRC_FILES += protocol.c
+-fastboot_SRC_FILES += engine.c
+-fastboot_SRC_FILES += bootimg.c
+-fastboot_SRC_FILES += fastboot.c
+-fastboot_SRC_FILES += util.c
+-fastboot_SRC_FILES += fs.c
+-fastboot_SRC_FILES += usb_linux.c
+-fastboot_SRC_FILES += util_linux.c
+-fastboot_OBJS := $(fastboot_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libzipfile
+-libzipfile_SRC_FILES += centraldir.c
+-libzipfile_SRC_FILES += zipfile.c
+-libzipfile_OBJS := $(libzipfile_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/extras/ext4_utils
+-libext4_utils_SRC_FILES += make_ext4fs.c
+-libext4_utils_SRC_FILES += ext4fixup.c
+-libext4_utils_SRC_FILES += ext4_utils.c
+-libext4_utils_SRC_FILES += allocate.c
+-libext4_utils_SRC_FILES += contents.c
+-libext4_utils_SRC_FILES += extent.c
+-libext4_utils_SRC_FILES += indirect.c
+-libext4_utils_SRC_FILES += uuid.c
+-libext4_utils_SRC_FILES += sha1.c
+-libext4_utils_SRC_FILES += wipe.c
+-libext4_utils_SRC_FILES += crc16.c
+-libext4_utils_SRC_FILES += ext4_sb.c
+-libext4_utils_OBJS := $(libext4_utils_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libsparse
+-libsparse_SRC_FILES += backed_block.c
+-libsparse_SRC_FILES += output_file.c
+-libsparse_SRC_FILES += sparse.c
+-libsparse_SRC_FILES += sparse_crc32.c
+-libsparse_SRC_FILES += sparse_err.c
+-libsparse_SRC_FILES += sparse_read.c
+-libsparse_OBJS := $(libsparse_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/external/libselinux/src
+-libselinux_SRC_FILES += callbacks.c
+-libselinux_SRC_FILES += check_context.c
+-libselinux_SRC_FILES += freecon.c
+-libselinux_SRC_FILES += init.c
+-libselinux_SRC_FILES += label.c
+-libselinux_SRC_FILES += label_file.c
+-libselinux_SRC_FILES += label_android_property.c
+-libselinux_OBJS := $(libselinux_SRC_FILES:.c=.o)
+-
+-CFLAGS += -std=gnu11
+-CFLAGS += -DANDROID
+-# CFLAGS += -DUSE_F2FS
+-CFLAGS += -DHOST
+-CFLAGS += -I$(SRCDIR)/system/core/fastboot
+-CFLAGS += -I$(SRCDIR)/system/core/include
+-CFLAGS += -I$(SRCDIR)/system/core/mkbootimg
+-CFLAGS += -I$(SRCDIR)/system/extras/ext4_utils
+-CFLAGS += -I$(SRCDIR)/system/extras/f2fs_utils
+-CFLAGS += -I$(SRCDIR)/system/core/libsparse/include
+-CFLAGS += -I$(SRCDIR)/external/libselinux/include
+-CFLAGS += -include $(SRCDIR)/build/core/combo/include/arch/$(android_arch)/AndroidConfig.h
+-
+-LIBS += libzipfile.a libext4_utils.a libsparse.a libselinux.a -lz -lpcre
+-
+-all: fastboot
+-
+-fastboot: libzipfile.a libext4_utils.a libsparse.a libselinux.a $(fastboot_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(fastboot_OBJS) $(LIBS)
+-
+-libzipfile.a: $(libzipfile_OBJS)
+-	$(AR) rcs $@ $(libzipfile_OBJS)
+-
+-libext4_utils.a: $(libext4_utils_OBJS)
+-	$(AR) rcs $@ $(libext4_utils_OBJS)
+-
+-libsparse.a: $(libsparse_OBJS)
+-	$(AR) rcs $@ $(libsparse_OBJS)
+-
+-libselinux.a: $(libselinux_OBJS)
+-	$(AR) rcs $@ $(libselinux_OBJS)
+-
+-clean:
+-	$(RM) $(fastboot_OBJS) $(libzipfile_OBJS) $(libext4_utils_OBJS) \
+-		$(libsparse_OBJS) $(libselinux_OBJS) fastboot *.a
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/gitignore b/meta-oe/recipes-devtools/android-tools/android-tools/gitignore
+deleted file mode 100644
+index b034c10a1e..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/gitignore
++++ /dev/null
+@@ -1,59 +0,0 @@
+-*
+-!.gitignore
+-!*.indirectionsymlink
+-!*.[ch]
+-!*.mk
+-!*.patch
+-!*.service
+-!NOTICE
+-!MODULE_LICENSE_*
+-!/system/
+-!/system/core/
+-!/system/core/adb/
+-!/system/core/fastboot/
+-!/system/core/fs_mgr/
+-!/system/core/fs_mgr/include/
+-!/system/core/include/
+-!/system/core/include/android/
+-!/system/core/include/cutils/
+-!/system/core/include/log/
+-!/system/core/include/mincrypt/
+-!/system/core/include/private/
+-!/system/core/include/utils/
+-!/system/core/include/zipfile/
+-!/system/core/liblog/
+-!/system/core/liblog/tests/
+-!/system/core/libcutils/
+-!/system/core/libmincrypt/
+-!/system/core/libzipfile/
+-!/system/core/libsparse/
+-!/system/core/libsparse/include/
+-!/system/core/libsparse/include/sparse/
+-!/system/core/libsparse/simg_dump.py
+-!/system/core/mkbootimg/
+-!/system/extras/
+-!/system/extras/ext4_utils/
+-!/system/extras/ext4_utils/mkuserimg.sh
+-!/system/extras/ext4_utils/test_ext4fixup
+-!/system/extras/f2fs_utils/
+-!/hardware/
+-!/hardware/libhardware/
+-!/hardware/libhardware/include/
+-!/hardware/libhardware/include/hardware/
+-!/external/
+-!/external/libselinux/
+-!/external/libselinux/include/
+-!/external/libselinux/include/selinux/
+-!/external/libselinux/src/
+-!/external/f2fs-tools/
+-!/external/f2fs-tools/include/
+-!/external/f2fs-tools/lib/
+-!/external/f2fs-tools/mkfs/
+-!/build/
+-!/build/core/
+-!/build/core/version_defaults.mk
+-!/build/core/combo/
+-!/build/core/combo/include/
+-!/build/core/combo/include/arch/
+-!/build/core/combo/include/arch/linux-*/
+-!/build/core/combo/include/arch/linux-*/AndroidConfig.h
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-Remove-bionic-specific-calls.patch b/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-Remove-bionic-specific-calls.patch
+deleted file mode 100644
+index 9de2593df8..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-Remove-bionic-specific-calls.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 36654a4484117e5f4d63a810c0d94bc9c7ee3a83 Mon Sep 17 00:00:00 2001
+-From: Fathi Boudra <fabo@debian.org>
+-Date: Tue, 2 Oct 2018 16:36:54 +0000
+-Subject: [PATCH] Remove bionic specific calls
+-
+-Upstream-Status: Inappropriate
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- src/procattr.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/procattr.c b/src/procattr.c
+-index f350808..761cf8e 100644
+---- a/src/procattr.c
+-+++ b/src/procattr.c
+-@@ -8,7 +8,7 @@
+- #include "selinux_internal.h"
+- #include "policy.h"
+- 
+--#ifdef HOST
+-+#ifndef __BIONIC__
+- static pid_t gettid(void)
+- {
+- 	return syscall(__NR_gettid);
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch b/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
+deleted file mode 100644
+index 8b5e4cf999..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From f4f9d24860e1b5cd4f6a014f3fda7cd33ebe5be7 Mon Sep 17 00:00:00 2001
+-From: Petr Lautrbach <plautrba@redhat.com>
+-Date: Sat, 27 Jul 2019 08:20:20 -0700
+-Subject: [PATCH] libselinux: Do not define gettid() if glibc >= 2.30 is used
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Since version 2.30 glibc implements gettid() system call wrapper, see
+-https://sourceware.org/bugzilla/show_bug.cgi?id=6399
+-
+-Fixes:
+-cc -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -m64 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -I../include -D_GNU_SOURCE  -DNO_ANDROID_BACKEND   -c -o procattr.o procattr.c
+-procattr.c:28:14: error: static declaration of ‘gettid’ follows non-static declaration
+-   28 | static pid_t gettid(void)
+-      |              ^~~~~~
+-In file included from /usr/include/unistd.h:1170,
+-                 from procattr.c:2:
+-/usr/include/bits/unistd_ext.h:34:16: note: previous declaration of ‘gettid’ was here
+-   34 | extern __pid_t gettid (void) __THROW;
+-      |                ^~~~~~
+-
+-Signed-off-by: Petr Lautrbach <plautrba@redhat.com>
+-Acked-by: Stephen Smalley <sds@tycho.nsa.gov>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- src/procattr.c | 14 +++++++++++++-
+- 1 file changed, 13 insertions(+), 1 deletion(-)
+-
+---- a/src/procattr.c
+-+++ b/src/procattr.c
+-@@ -8,12 +8,16 @@
+- #include "selinux_internal.h"
+- #include "policy.h"
+- 
+--#ifndef __BIONIC__
+-+/* Bionic and glibc >= 2.30 declare gettid() system call wrapper in unistd.h and
+-+ * has a definition for it */
+-+#if defined(__GLIBC_)
+-+#if !__GLIBC_PREREQ(2,30)
+- static pid_t gettid(void)
+- {
+- 	return syscall(__NR_gettid);
+- }
+- #endif
+-+#endif
+- 
+- static int getprocattrcon(char ** context,
+- 			  pid_t pid, const char *attr)
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/mkbootimg.mk b/meta-oe/recipes-devtools/android-tools/android-tools/mkbootimg.mk
+deleted file mode 100644
+index 519f609fd2..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools/mkbootimg.mk
++++ /dev/null
+@@ -1,29 +0,0 @@
+-# Makefile for mkbootimg
+-
+-SRCDIR ?= $(S)
+-
+-VPATH += $(SRCDIR)/system/core/mkbootimg
+-mkbootimg_SRC_FILES += mkbootimg.c
+-mkbootimg_OBJS := $(mkbootimg_SRC_FILES:.c=.o)
+-
+-VPATH += $(SRCDIR)/system/core/libmincrypt
+-libmincrypt_SRC_FILES := dsa_sig.c p256.c p256_ec.c p256_ecdsa.c rsa.c sha.c sha256.c
+-libmincrypt_OBJS := $(libmincrypt_SRC_FILES:.c=.o)
+-
+-CFLAGS += -DANDROID
+-CFLAGS += -I$(SRCDIR)/system/core/mkbootimg
+-CFLAGS += -I$(SRCDIR)/system/core/include
+-CFLAGS += -include $(SRCDIR)/build/core/combo/include/arch/$(android_arch)/AndroidConfig.h
+-
+-LIBS += libmincrypt.a
+-
+-all: mkbootimg
+-
+-mkbootimg: libmincrypt.a $(mkbootimg_OBJS)
+-	$(CC) -o $@ $(LDFLAGS) $(mkbootimg_OBJS) $(LIBS)
+-
+-libmincrypt.a: $(libmincrypt_OBJS)
+-	$(AR) rcs $@ $(libmincrypt_OBJS)
+-
+-clean:
+-	$(RM) $(mkbootimg_OBJS) $(libmincrypt_OBJS) mkbootimg *.a
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+deleted file mode 100644
+index c04a1ef8c4..0000000000
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ /dev/null
+@@ -1,189 +0,0 @@
+-DESCRIPTION = "Different utilities from Android"
+-SECTION = "console/utils"
+-LICENSE = "Apache-2.0 & GPL-2.0-only & BSD-2-Clause & BSD-3-Clause"
+-LIC_FILES_CHKSUM = " \
+-    file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10 \
+-    file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6 \
+-    file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f \
+-    file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+-"
+-DEPENDS = "libbsd libpcre zlib libcap"
+-DEPENDS:append:class-target = " openssl"
+-
+-ANDROID_MIRROR = "android.googlesource.com"
+-
+-# matches with android-5.1.1_r37
+-SRCREV_core = "2314b110bdebdbfd2d94c502282f9e57c849897e"
+-SRCREV_extras = "3ecbe8d841df96127d7855661293e5ab6ba6c205"
+-SRCREV_libhardware = "be55eb1f4d840c82ffaf7c47460df17ff5bc4d9b"
+-SRCREV_libselinux = "07e9e1339ad1ba608acfba9dce2d0f474b252feb"
+-SRCREV_build = "16e987def3d7d8f7d30805eb95cef69e52a87dbc"
+-
+-SRCREV_FORMAT = "core_extras_libhardware_libselinux_build"
+-SRC_URI = " \
+-    git://${ANDROID_MIRROR}/platform/system/core;name=core;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/system/core \
+-    git://${ANDROID_MIRROR}/platform/system/extras;name=extras;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/system/extras \
+-    git://${ANDROID_MIRROR}/platform/hardware/libhardware;name=libhardware;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/hardware/libhardware \
+-    git://${ANDROID_MIRROR}/platform/external/libselinux;name=libselinux;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/libselinux \
+-    git://${ANDROID_MIRROR}/platform/build;name=build;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/build \
+-    file://core/0001-adb-remove-selinux-extensions.patch;patchdir=system/core \
+-    file://core/0002-adb-Use-local-sockets-where-appropriate.patch;patchdir=system/core \
+-    file://core/0003-adb-define-shell-command.patch;patchdir=system/core \
+-    file://core/0004-adb-Fix-build-on-big-endian-systems.patch;patchdir=system/core \
+-    file://core/0005-adb-add-base64-implementation.patch;patchdir=system/core \
+-    file://core/0006-adb-Musl-fixes.patch;patchdir=system/core \
+-    file://core/0007-adb-usb_linux.c-fix-build-with-glibc-2.28.patch;patchdir=system/core \
+-    file://core/0008-adb-Allow-adbd-to-be-ran-as-root.patch;patchdir=system/core \
+-    file://core/0009-mkbootimg-Add-dt-parameter-to-specify-DT-image.patch;patchdir=system/core \
+-    file://core/0010-Use-linux-capability.h-on-linux-systems-too.patch;patchdir=system/core \
+-    file://core/0011-Remove-bionic-specific-calls.patch;patchdir=system/core \
+-    file://core/0012-Fix-implicit-declaration-of-stlcat-strlcopy-function.patch;patchdir=system/core \
+-    file://core/adb_libssl_11.diff;patchdir=system/core \
+-    file://core/b64_pton_function_decl.patch;patchdir=system/core \
+-    file://core/0013-adb-Support-riscv64.patch;patchdir=system/core \
+-    file://core/0014-add-u3-ss-descriptor-support-for-adb.patch;patchdir=system/core \
+-    file://core/0015-libsparse-Split-off-most-of-sparse_file_read_normal-.patch;patchdir=system/core \
+-    file://core/0016-libsparse-Add-hole-mode-to-sparse_file_read.patch;patchdir=system/core \
+-    file://core/0017-img2simg-Add-support-for-converting-holes-to-don-t-c.patch;patchdir=system/core \
+-    file://core/0001-memory.h-Always-define-strlcpy-for-glibc-based-syste.patch;patchdir=system/core \
+-    file://extras/0001-ext4_utils-remove-selinux-extensions.patch;patchdir=system/extras \
+-    file://extras/0002-ext4_utils-add-o-argument-to-preserve-ownership.patch;patchdir=system/extras \
+-    file://extras/0003-ext4_utils-drop-unused-parameter-from-allocate_inode.patch;patchdir=system/extras \
+-    file://libselinux/0001-Remove-bionic-specific-calls.patch;patchdir=external/libselinux \
+-    file://libselinux/0001-libselinux-Do-not-define-gettid-if-glibc-2.30-is-use.patch;patchdir=external/libselinux \
+-    file://android-tools-adbd.service \
+-    file://build/0001-Riscv-Add-risc-v-Android-config-header.patch;patchdir=build \
+-    file://gitignore \
+-    file://adb.mk;subdir=${BPN} \
+-    file://adbd.mk;subdir=${BPN} \
+-    file://ext4_utils.mk;subdir=${BPN} \
+-    file://fastboot.mk;subdir=${BPN} \
+-    file://mkbootimg.mk;subdir=${BPN} \
+-"
+-
+-
+-B = "${WORKDIR}/${BPN}"
+-
+-# http://errors.yoctoproject.org/Errors/Details/133881/
+-ARM_INSTRUCTION_SET:armv4 = "arm"
+-ARM_INSTRUCTION_SET:armv5 = "arm"
+-
+-COMPATIBLE_HOST:powerpc = "(null)"
+-COMPATIBLE_HOST:powerpc64 = "(null)"
+-COMPATIBLE_HOST:powerpc64le = "(null)"
+-
+-inherit systemd
+-
+-SYSTEMD_PACKAGES = "${PN}-adbd"
+-SYSTEMD_SERVICE:${PN}-adbd = "android-tools-adbd.service"
+-
+-# Find libbsd headers during native builds
+-CC:append:class-native = " -I${STAGING_INCDIR}"
+-CC:append:class-nativesdk = " -I${STAGING_INCDIR}"
+-
+-TOOLS = "adb fastboot ext4_utils mkbootimg adbd"
+-
+-# Adb needs sys/capability.h, which is not available for native*
+-TOOLS:class-native = "fastboot ext4_utils mkbootimg"
+-TOOLS:class-nativesdk = "fastboot ext4_utils mkbootimg"
+-
+-do_compile() {
+-    cp ${UNPACKDIR}/gitignore ${S}/.gitignore
+-
+-    # Setting both variables below causing our makefiles to not work with
+-    # implicit make rules
+-    CFLAGS="-ffile-prefix-map=${S}=${TARGET_DBGSRC_DIR}"
+-    unset CPPFLAGS
+-
+-    export SRCDIR=${S}
+-
+-    case "${HOST_ARCH}" in
+-      arm)
+-        export android_arch=linux-arm
+-      ;;
+-      aarch64)
+-        export android_arch=linux-arm64
+-      ;;
+-      riscv64)
+-        export android_arch=linux-riscv64
+-      ;;
+-      mips|mipsel)
+-        export android_arch=linux-mips
+-      ;;
+-      mips64|mips64el)
+-        export android_arch=linux-mips64
+-      ;;
+-      powerpc|powerpc64)
+-        export android_arch=linux-ppc
+-      ;;
+-      i586|i686|x86_64)
+-        export android_arch=linux-x86
+-      ;;
+-    esac
+-
+-    for tool in ${TOOLS}; do
+-      mkdir -p ${B}/${tool}
+-      oe_runmake -f ${UNPACKDIR}/${BPN}/${tool}.mk -C ${B}/${tool}
+-    done
+-}
+-
+-do_install() {
+-    if echo ${TOOLS} | grep -q "ext4_utils" ; then
+-        install -D -p -m0755 ${S}/system/core/libsparse/simg_dump.py ${D}${bindir}/simg_dump
+-        install -D -p -m0755 ${S}/system/extras/ext4_utils/mkuserimg.sh ${D}${bindir}/mkuserimg
+-
+-        install -m0755 ${B}/ext4_utils/ext2simg ${D}${bindir}
+-        install -m0755 ${B}/ext4_utils/ext4fixup ${D}${bindir}
+-        install -m0755 ${B}/ext4_utils/img2simg ${D}${bindir}
+-        install -m0755 ${B}/ext4_utils/make_ext4fs ${D}${bindir}
+-        install -m0755 ${B}/ext4_utils/simg2img ${D}${bindir}
+-        install -m0755 ${B}/ext4_utils/simg2simg ${D}${bindir}
+-    fi
+-
+-    if echo ${TOOLS} | grep -q "adb\>" ; then
+-        install -d ${D}${bindir}
+-        install -m0755 ${B}/adb/adb ${D}${bindir}
+-    fi
+-
+-    if echo ${TOOLS} | grep -q "adbd" ; then
+-        install -d ${D}${bindir}
+-        install -m0755 ${B}/adbd/adbd ${D}${bindir}
+-    fi
+-
+-    # Outside the if statement to avoid errors during do_package
+-    install -D -p -m0644 ${UNPACKDIR}/android-tools-adbd.service \
+-      ${D}${systemd_unitdir}/system/android-tools-adbd.service
+-
+-    if echo ${TOOLS} | grep -q "fastboot" ; then
+-        install -d ${D}${bindir}
+-        install -m0755 ${B}/fastboot/fastboot ${D}${bindir}
+-    fi
+-
+-    if echo ${TOOLS} | grep -q "mkbootimg" ; then
+-        install -d ${D}${bindir}
+-        install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
+-    fi
+-}
+-
+-PACKAGES =+ "${PN}-fstools ${PN}-adbd"
+-
+-RDEPENDS:${PN}-adbd = "${PN}-conf"
+-RDEPENDS:${PN}-fstools = "bash"
+-
+-FILES:${PN}-adbd = "\
+-    ${bindir}/adbd \
+-    ${systemd_unitdir}/system/android-tools-adbd.service \
+-"
+-
+-FILES:${PN}-fstools = "\
+-    ${bindir}/ext2simg \
+-    ${bindir}/ext4fixup \
+-    ${bindir}/img2simg \
+-    ${bindir}/make_ext4fs \
+-    ${bindir}/simg2img \
+-    ${bindir}/simg2simg \
+-    ${bindir}/simg_dump \
+-    ${bindir}/mkuserimg \
+-"
+-
+-BBCLASSEXTEND = "native"
 -- 
 2.43.0
 
