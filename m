@@ -1,275 +1,134 @@
-Return-Path: <louis.rannou@semalibre.com>
+Return-Path: <hjadon@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A3F3CD343F
-	for <webhook@archiver.kernel.org>; Thu,  7 May 2026 14:50:13 +0000 (UTC)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.13827.1778165402871213231
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C166DCD3439
+	for <webhook@archiver.kernel.org>; Thu,  7 May 2026 15:53:15 +0000 (UTC)
+Received: from alln-iport-3.cisco.com (alln-iport-3.cisco.com [173.37.142.90])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.15565.1778169192364767296
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 May 2026 07:50:04 -0700
+ Thu, 07 May 2026 08:53:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@semalibre.com header.s=dkim header.b=pvDHxUz+;
- spf=pass (domain: semalibre.com, ip: 185.246.84.56, mailfrom: louis.rannou@semalibre.com)
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 6AB551A356C;
-	Thu,  7 May 2026 14:50:00 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 376C860495;
-	Thu,  7 May 2026 14:50:00 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 8D006108194CA;
-	Thu,  7 May 2026 16:49:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=semalibre.com;
-	s=dkim; t=1778165399;
-	h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-language:in-reply-to:references;
-	bh=N/4B4hz9wBae423n+B/pC+WOuiflpDyn+15bY4KhFlE=;
-	b=pvDHxUz+R0m67VSWb8M4XgNvrGXipVwrz7v3TtLH0DHS7sOv5s3JbjShSr3kv/84lkHE5z
-	vNGBTY3tFGMiCMolo1VpU63yiidZqhUjfqeDidd6VcV8QK9+dx672h2opH6jhv8LtCdAvs
-	iACHhhB8HVPa5ZJ0rubBfu7oUHX4XkMsm1/GUFi9eo3ycXvMdjZMeINe0dH5bwzkOZsZnr
-	cSh0XQoVYxqBQlgv7eHrhaGiqeYvwuxk5lVLRQTLwDZanE88vEUs5dsi0UeWeZfyqCdRR7
-	kGdxy0crMVn4Talz4zKj+o3iROKhZxZShSWhACviNPybL27glhemC6WVbopy/Q==
-Content-Type: multipart/alternative;
- boundary="------------AOO4wHaDlsJi5fkZsYCQE6jO"
-Message-ID: <801db7e6-604a-4965-a984-d3d2e5dce18d@semalibre.com>
-Date: Thu, 7 May 2026 16:49:56 +0200
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=QPUTIBkq;
+ spf=pass (domain: cisco.com, ip: 173.37.142.90, mailfrom: hjadon@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=1875; q=dns/txt;
+  s=iport01; t=1778169192; x=1779378792;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=/E1otBwIZ00EeU2zgt5LnxCqVfNPXfHfD8p89WZW1pU=;
+  b=QPUTIBkqLcYGpm+POTXoGCtkbWPyR98umTgjaQamdDsfd72u1Ul3C4be
+   j1qr6YtE5rYFxy7vzIRZMGQ9vD1kEEnuS1VxkQUj0QlMMlEgQ43MuCjZU
+   sRqQtgP0tO1jGQ4eSX+pBjcMisx679qDR0o26L17IxAzkGYiiaOmR03UE
+   owYg+1mYmGI1KpP1ewDRYQNkbDw/meODowbnaXCZWAt60/emfNv4cwtPS
+   z/oyZtgyakExwahrwsimj8/33XOm6osy1Bt0Y4NIfzssNMfSPXnyK2QB/
+   tlJg+wcD9bFA6g/X7L0DkaXu6Hv6XKREZo63UXGgSdRWQAjx3NSarfnzL
+   w==;
+X-CSE-ConnectionGUID: XvYQr/20RUqsPjLI6LlAOw==
+X-CSE-MsgGUID: Xee4SVDIR1e8KtiycpqZWg==
+X-IPAS-Result: =?us-ascii?q?A0BDAgAbtPxp/4z/Ja1agjQQGoJTcl5DSZNaAY5XkjaBf?=
+ =?us-ascii?q?w8BAQEPNxoEAQGFBo00AiY0CQ4BAgQDAgMBAQEBAQEBAQEBAQEKAQEFAQEBA?=
+ =?us-ascii?q?gEHBYEOE4Zchl02ARgBLTBRC0SDAgGCOgM2AxG2UIIsgQGDKAGBVLIqDYJTA?=
+ =?us-ascii?q?QsUAYE4hT+CeoUjhW4nGxuBcoR9gh+CcYV3BIIigQ6FW4krSIEeA1ksAVUTD?=
+ =?us-ascii?q?QoLBwWBZgM1EioVbjIdgSM+F4EMGwcFgUuCOXJqgQKEYHgjLANOewMLGA1IE?=
+ =?us-ascii?q?Sw3FBsEPm4HikUdD4IwgQ+WQBOReKAdcQoog3SMHo8+hXwaM6prmQaSEpJHh?=
+ =?us-ascii?q?GiBaDyBWXAVgyIJShkPjl/KBCcyAjsCBwIHDQMLk2UBAQ?=
+IronPort-Data: A9a23:PRF8vqD8LNgx/BVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApGgmgjNSz
+ zAXDW2BbPiDMWCgfdtzPNmy/E8G78DTytFjOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
+ /02M4eGcYZsCCKB+39BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jWGthh
+ fuo+5eBYAL9hGYuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
+ P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
+ 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE8+tfNVtxZ9Uix/9sOWNq1
+ KI8LBkqcUXW7w626OrTpuhEnM8vKozveYgYoHwllWqfBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
+ pdfMGY3BPjDS0Un1lM/CJA3kOCurnL+aDZf7lmSoMLb5kCMkVYpjemzbIW9ltqidchYwn2mi
+ kP8pmmpIQ0bJdeH0Ai6/Sf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
+ FQZ/Ccrp6U++EGnCN7nUHWFTGWspBUQXZ9UVuY98gzIkvGS6AeCDW9CRTlEADA7iPILqfUR/
+ gfht7vU6fZH6tV5lVr1Gm+okA6P
+IronPort-HdrOrdr: A9a23:HVmpu67pbjEbN65zHgPXwP7XdLJyesId70hD6qm+c3Nom6uj5q
+ WTdZsgtCMc5Ax9ZJhCo6HjBED/exPhHPdOiOF7V4tKNzOJhILHFu1fBPPZsl7dMhy70PJB3q
+ F9dKU7ItjxAV9myfve2mCDYrIdKB3tytHPuQ8YpE0dKj1XVw==
+X-Talos-CUID: =?us-ascii?q?9a23=3A1BZyhWnPpLHJU1mck2Ee55ybIuvXOU3D/U7KZBX?=
+ =?us-ascii?q?gM1twU4WXbX7O3KdNtNU7zg=3D=3D?=
+X-Talos-MUID: =?us-ascii?q?9a23=3A/09rJQ8EKhfHva8aSGoHHcSQf/dl7viVNmwsq8w?=
+ =?us-ascii?q?L6+qYND17Iy6vszviFw=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.23,221,1770595200"; 
+   d="scan'208";a="752059647"
+Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
+  by alln-iport-3.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 07 May 2026 15:53:11 +0000
+Received: from sjc-ads-21441.cisco.com (sjc-ads-21441.cisco.com [10.128.164.182])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
+	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
+	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id 2E32B180001D0;
+	Thu,  7 May 2026 15:53:11 +0000 (GMT)
+Received: by sjc-ads-21441.cisco.com (Postfix, from userid 1879343)
+	id C6830CC1288; Thu,  7 May 2026 08:53:10 -0700 (PDT)
+From: "Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hjadon@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: vchavda@cisco.com
+Subject: [meta-python] [scarthgap] [PATCH] python-grpcio(-tools): add grpc:grpc to cve product
+Date: Thu,  7 May 2026 08:53:01 -0700
+Message-Id: <20260507155301.956004-1-hjadon@cisco.com>
+X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-networking][PATCH] openvpn: change bash rdepends to
- rrecommends
-To: Jose Quaresma <quaresma.jose@gmail.com>, skandigraun@gmail.com
-Cc: openembedded-devel@lists.openembedded.org,
- Louis Rannou <louis.rannou@non.se.com>, pascal.eberhard@se.com
-References: <20260506-bash-rr-v1-1-507ee57b7fe7@non.se.com>
- <4464a296-b5ef-46e4-a87d-90e9fcb29da3@gmail.com>
- <CANPvuRn42dyFcaDOhvjTQMkEEyumqaJ1YW3z7D=C_pviKAH_sQ@mail.gmail.com>
-Content-Language: en-US
-From: Louis Rannou <louis.rannou@semalibre.com>
-In-Reply-To: <CANPvuRn42dyFcaDOhvjTQMkEEyumqaJ1YW3z7D=C_pviKAH_sQ@mail.gmail.com>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+X-Outbound-Client-TLS: VERIFIED;sjc-ads-21441.cisco.com [10.128.164.182];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
+X-Outbound-SMTP-Client: 10.128.164.182, sjc-ads-21441.cisco.com
+X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 May 2026 14:50:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126813
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 May 2026 15:53:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126814
 
-This is a multi-part message in MIME format.
---------------AOO4wHaDlsJi5fkZsYCQE6jO
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+From: Peter Marko <peter.marko@siemens.com>
 
+These grpc python modules contain parts of grpc core.
+Each CVE needs to be assessed if the patch applies also to core parts
+included in each module.
 
+Note that so far there was never a CVE specific for python module, only
+for grpc:grpc and many of those needed to be fixed at leasts in grpcio:
 
-On 5/7/26 10:46, Jose Quaresma wrote:
->
->
-> Gyorgy Sarvari via lists.openembedded.org=20
-> <http://lists.openembedded.org>=20
-> <skandigraun=3Dgmail.com@lists.openembedded.org> escreveu (quinta,=20
-> 7/05/2026 =C3=A0(s) 08:39):
->
->
->     On 5/6/26 18:07, Louis Rannou via lists.openembedded.org
->     <http://lists.openembedded.org> wrote:
->     > From: Louis Rannou <louis.rannou@non.se.com>
->     >
->     > The dependency to bash is only required for dns-updown scripts.
->     As bash is
->     > under the GPLv3 license, it might be preferred to exclude it.
->     >
->     > Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
->     > ---
->     >=C2=A0 meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->     <http://openvpn_2.7.0.bb> | 2 +-
->     >=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)
->     >
->     > diff --git
->     a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->     <http://openvpn_2.7.0.bb>
->     b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->     <http://openvpn_2.7.0.bb>
->     > index 0cbe4641cd..d967a0dc12 100644
->     > --- a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->     <http://openvpn_2.7.0.bb>
->     > +++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->     <http://openvpn_2.7.0.bb>
->     > @@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D
->     "--enable-iproute2,,iproute2,iproute2-ip"
->     >=C2=A0 PACKAGECONFIG[systemd] =3D
->     "--enable-systemd,--disable-systemd,systemd"
->     >=C2=A0 PACKAGECONFIG[selinux] =3D
->     "--enable-selinux,--disable-selinux,libselinux"
->     >
->     > -RDEPENDS:${PN}:append =3D " bash"
->     > +RRECOMMENDS:${PN}:append =3D " bash"
->
->
->     In case bash is excluded (with PACKAGE_EXCLUDE, INCOMPATIBLE_LICENS=
-E,
->     BAD_RECOMMENDATIONS...) I would expect this change to throw an erro=
-r
->     still, the latest during package QA, when it scans the scripts for
->     missing dependencies - because the dependency itself is still prese=
-nt.
->     Does it not fail those checks?
->
-That is correct. The check fails, I ignore how I missed that.
+sqlite> select vendor, product, count(*) from products where product like '%grpc%' group by vendor, product;
+grpc|grpc|21
+grpck|grpck|1
+linuxfoundation|grpc_swift|9
+microsoft|grpconv|1
+opentelemetry|configgrpc|1
 
->
->     As an alternative, I wonder if it would make sense to install this
->     dns-updown script to a separate package, and make that depend on
->     bash only.
->
->
-> A new package would be more appropriate.
-> On the other hand, is bash really necessary? Sometimes it's just=20
-> shaband that's wrong on script
-> and POSIx /bin/sh can even be used.=C2=A0Could you try this?
-That was also my first thought. The scripts are not POSIX compliant=20
-unfortunately. It's quite sad as all older scripts used to be.
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit f993cb2ecb62193bcce8d3d0e06e180a7fef44b8)
+Signed-off-by: Himanshu Jadon <hjadon@cisco.com>
+---
+ .../recipes-devtools/python/python3-grpcio-tools_1.62.2.bb      | 2 ++
+ meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb    | 2 ++
+ 2 files changed, 4 insertions(+)
 
-I'll send a v2 with a package openvpn-dns-updown. Do you think I should=20
-add a rdepends between openvpn and this ? My first guess would be to not=20
-take the dependency as the dns-updown scripts are recent.
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
+index 5b8bbe681a..7f842c01a9 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
+@@ -21,3 +21,5 @@ do_compile:prepend() {
+ }
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++CVE_PRODUCT += "grpc:grpc"
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
+index 3581991a56..29c09675ef 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
+@@ -51,3 +51,5 @@ CLEANBROKEN = "1"
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ CCACHE_DISABLE = "1"
++
++CVE_PRODUCT += "grpc:grpc"
+-- 
+2.35.6
 
-Louis
---------------AOO4wHaDlsJi5fkZsYCQE6jO
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class=3D"moz-cite-prefix">On 5/7/26 10:46, Jose Quaresma wrote:<=
-br>
-    </div>
-    <blockquote type=3D"cite"
-cite=3D"mid:CANPvuRn42dyFcaDOhvjTQMkEEyumqaJ1YW3z7D=3DC_pviKAH_sQ@mail.gm=
-ail.com">
-      <div dir=3D"ltr">
-        <div dir=3D"ltr"><br>
-        </div>
-        <br>
-        <div class=3D"gmail_quote gmail_quote_container">
-          <div dir=3D"ltr" class=3D"gmail_attr">Gyorgy Sarvari via <a
-              href=3D"http://lists.openembedded.org"
-              moz-do-not-send=3D"true">lists.openembedded.org</a>
-            &lt;skandigraun=3D<a
-              href=3D"mailto:gmail.com@lists.openembedded.org"
-              moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext">gm=
-ail.com@lists.openembedded.org</a>&gt;
-            escreveu (quinta, 7/05/2026 =C3=A0(s) 08:39):<br>
-          </div>
-          <blockquote class=3D"gmail_quote"><br>
-            On 5/6/26 18:07, Louis Rannou via <a
-              href=3D"http://lists.openembedded.org" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">lists.openembedd=
-ed.org</a>
-            wrote:<br>
-            &gt; From: Louis Rannou &lt;<a
-              href=3D"mailto:louis.rannou@non.se.com" target=3D"_blank"
-              moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext">lo=
-uis.rannou@non.se.com</a>&gt;<br>
-            &gt; <br>
-            &gt; The dependency to bash is only required for dns-updown
-            scripts. As bash is<br>
-            &gt; under the GPLv3 license, it might be preferred to
-            exclude it.<br>
-            &gt; <br>
-            &gt; Signed-off-by: Louis Rannou &lt;<a
-              href=3D"mailto:louis.rannou@non.se.com" target=3D"_blank"
-              moz-do-not-send=3D"true" class=3D"moz-txt-link-freetext">lo=
-uis.rannou@non.se.com</a>&gt;<br>
-            &gt; ---<br>
-            &gt;=C2=A0 meta-networking/recipes-support/openvpn/<a
-              href=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">openvpn_2.7.0.bb=
-</a>
-            | 2 +-<br>
-            &gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-            &gt; <br>
-            &gt; diff --git a/meta-networking/recipes-support/openvpn/<a
-              href=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">openvpn_2.7.0.bb=
-</a>
-            b/meta-networking/recipes-support/openvpn/<a
-              href=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">openvpn_2.7.0.bb=
-</a><br>
-            &gt; index 0cbe4641cd..d967a0dc12 100644<br>
-            &gt; --- a/meta-networking/recipes-support/openvpn/<a
-              href=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">openvpn_2.7.0.bb=
-</a><br>
-            &gt; +++ b/meta-networking/recipes-support/openvpn/<a
-              href=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer"
-              target=3D"_blank" moz-do-not-send=3D"true">openvpn_2.7.0.bb=
-</a><br>
-            &gt; @@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D
-            "--enable-iproute2,,iproute2,iproute2-ip"<br>
-            &gt;=C2=A0 PACKAGECONFIG[systemd] =3D
-            "--enable-systemd,--disable-systemd,systemd"<br>
-            &gt;=C2=A0 PACKAGECONFIG[selinux] =3D
-            "--enable-selinux,--disable-selinux,libselinux"<br>
-            &gt;=C2=A0 <br>
-            &gt; -RDEPENDS:${PN}:append =3D " bash"<br>
-            &gt; +RRECOMMENDS:${PN}:append =3D " bash"<br>
-            <br>
-            <br>
-            In case bash is excluded (with PACKAGE_EXCLUDE,
-            INCOMPATIBLE_LICENSE,<br>
-            BAD_RECOMMENDATIONS...) I would expect this change to throw
-            an error<br>
-            still, the latest during package QA, when it scans the
-            scripts for<br>
-            missing dependencies - because the dependency itself is
-            still present.<br>
-            Does it not fail those checks?<br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-    That is correct. The check fails, I ignore how I missed that.=C2=A0<b=
-r>
-    <br>
-    <blockquote type=3D"cite"
-cite=3D"mid:CANPvuRn42dyFcaDOhvjTQMkEEyumqaJ1YW3z7D=3DC_pviKAH_sQ@mail.gm=
-ail.com">
-      <div dir=3D"ltr">
-        <div class=3D"gmail_quote gmail_quote_container">
-          <blockquote class=3D"gmail_quote"><br>
-            As an alternative, I wonder if it would make sense to
-            install this<br>
-            dns-updown script to a separate package, and make that
-            depend on bash only.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>A new package would be more appropriate.</div>
-          <div>On the other hand, is bash really necessary? Sometimes
-            it's just shaband that's wrong on script</div>
-          <div>and POSIx /bin/sh can even be used.=C2=A0Could you try thi=
-s?</div>
-        </div>
-      </div>
-    </blockquote>
-    That was also my first thought. The scripts are not POSIX compliant
-    unfortunately. It's quite sad as all older scripts used to be.<br>
-    <br>
-    I'll send a v2 with a package openvpn-dns-updown. Do you think I
-    should add a rdepends between openvpn and this ? My first guess
-    would be to not take the dependency as the dns-updown scripts are
-    recent.<br>
-    <br>
-    Louis
-  </body>
-</html>
-
---------------AOO4wHaDlsJi5fkZsYCQE6jO--
 
