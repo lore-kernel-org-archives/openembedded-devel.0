@@ -1,114 +1,87 @@
-Return-Path: <hjadon@cisco.com>
+Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9944DCD342F
-	for <webhook@archiver.kernel.org>; Fri,  8 May 2026 06:29:46 +0000 (UTC)
-Received: from alln-iport-1.cisco.com (alln-iport-1.cisco.com [173.37.142.88])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7633.1778221780273266413
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F4006CD342F
+	for <webhook@archiver.kernel.org>; Fri,  8 May 2026 07:39:01 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8470.1778225934044487829
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 May 2026 23:29:40 -0700
+ Fri, 08 May 2026 00:38:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=lIisHnpq;
- spf=pass (domain: cisco.com, ip: 173.37.142.88, mailfrom: hjadon@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QsRPdwB+;
+ spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-7bd5dde63dbso18052817b3.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 00:38:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1382; q=dns/txt;
-  s=iport01; t=1778221780; x=1779431380;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=X/+2XgecgidkvaSZ4y5AE1QyAb1EvUvXwP9h70kQSyc=;
-  b=lIisHnpquki59k5XkizQ+zL1HqpK8EA4yR4q6tlyBn7qsvjm66hPFm7O
-   ECxqDgkcBc9J5TjRnqEgCFUoSaaVy7Uqh/bjeUjtiSD5zZmDVJUzmG1cV
-   0APUKFJLT7lrQES9EV7VVqCQKGR17EvQ6dOTez6ezLk0FH/bsNaNsP6I0
-   MFdZ6g3m21udLj3gAtITmaEe2ghEocDcQZShRc6dCZ+p6tpUGE+lfZu81
-   999dMRO5nDveZ+e6vSjLhq8gL0h8HFPw9AyXObTfJrR89WshnVG3FMjRo
-   8Efa3q2+5HKwaCuA1YKWeOj0BuyT4OYt+KXT0cjNWQI/qwJzqMHBUVjV8
-   A==;
-X-CSE-ConnectionGUID: VX6szavlQPWTlXNI5kFerg==
-X-CSE-MsgGUID: tJV4IJwoQOaObCE1OCgCmw==
-X-IPAS-Result: =?us-ascii?q?A0BkAgCUgv1p/43/Ja1aHgEBCxIMggULgldyXkNJk1oBg?=
- =?us-ascii?q?nCLZ5I2gX8PAQEBDzcaBAEBhQaNNAImNAkOAQIEAwIDAQEBAQEBAQEBAQELA?=
- =?us-ascii?q?QEFAQEBAgEHBYEOE4Zchl02ARgBLTAmKwtEgwIBgjoDNgO1Z4IsgQGDKAHaG?=
- =?us-ascii?q?w2CUwELFAGBOIU/gnqFI4VuJxsbgXKEfYIfgWuBBoV3BF+BQ4EOjwhIgR4DW?=
- =?us-ascii?q?SwBVRMNCgsHBYFmAzUSKhUyPDIdgSM+F4EMGwcFgUuCOXJqgQKEYHgjLANOg?=
- =?us-ascii?q?QMDCxgNSBEsNxQbBD5uB4pHHQ+BNHw9NxqBPUkqATijQoIhoB1xCiiDdIwej?=
- =?us-ascii?q?z6FfBozqmsumFiSEpJHhGiBaDyBWXAVgyIJShkPjl/FXycyAjsCBwIHDQMLk?=
- =?us-ascii?q?WiBfQEB?=
-IronPort-Data: A9a23:+YM9aKAmRdC3gxVW/3/iw5YqxClBgxIJ4kV8jS/XYbTApDgm1WQCn
- zcYD26DM/fbYGbzLd53bozkphwGvJ+Gz99jOVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jWGthh
- fuo+5eBYAL9i2YtWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TE/cUwF1M/I4khwtlLBVFo1
- KEbBj0XYUXW7w626OrTpuhEnM8vKozveYgYoHwllW2fBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGY2BPjDS0Un1lM/CJA3kOCurnL+aDZf7lmSoMLb5kCMkFQgiOOwbYa9ltqiWedrwme6u
- WX/2G3eCDo3bfu0xhGA7Sf57gPItWahMG4IL5W/7vNsjViZy2AfBRFTWValrP2Rjk+lR8kZL
- FQZ/Ccrp6U++EGnCN7nUHWFTGWspBUQXZ9UVuY98gzIkvaS6AeCDW9CRTlEADA7iPILqfUR/
- gfht7vU6fZH7tV5lVr1Gm+okA6P
-IronPort-HdrOrdr: A9a23:9F6nPKMqAgDp2sBcTvejsMiBIKoaSvp037Dk7S9MoHtuA6mlfq
- +V/cjzuSWYtN9zYgBDpTn/Asm9qBrnnPYfi7X5Vo3NYOCJggeVxflZnOjf6gylPTHi/ehA0q
- olWa1/BNrsSWVet6/BkW2F+xJK+qjgzEhu7t2uqEtQcQ==
-X-Talos-CUID: =?us-ascii?q?9a23=3AJcNz/mom+ftb0sYGSjTWUQLmUf4VLGbPxWnUGne?=
- =?us-ascii?q?HNWJZbpzISnGd4qwxxg=3D=3D?=
-X-Talos-MUID: 9a23:w6xnZgpp0Vs8CzM1Yj4ezy1ACptJwbupMWcEtp8tlpCjHiNbPijI2Q==
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.23,223,1770595200"; 
-   d="scan'208";a="740903554"
-Received: from rcdn-l-core-04.cisco.com ([173.37.255.141])
-  by alln-iport-1.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 08 May 2026 06:29:21 +0000
-Received: from sjc-ads-21441.cisco.com (sjc-ads-21441.cisco.com [10.128.164.182])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-04.cisco.com (Postfix) with ESMTPS id E114E18000184;
-	Fri,  8 May 2026 06:29:20 +0000 (GMT)
-Received: by sjc-ads-21441.cisco.com (Postfix, from userid 1879343)
-	id 8CD15CC1288; Thu,  7 May 2026 23:29:20 -0700 (PDT)
-From: "Himanshu Jadon -X (hjadon - E INFOCHIPS PRIVATE LIMITED at Cisco)" <hjadon@cisco.com>
+        d=gmail.com; s=20251104; t=1778225933; x=1778830733; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=oFE+3Cl3vfi36Fg8+b9fmvN0Szu9yW5/8cpwN5bCqjY=;
+        b=QsRPdwB+VqAOQ3iESQoW6hbL3N1E9HFH5bKfrA3mK4cBijqipvLdv/Ip+V5rOkndAr
+         zEth35UV+HOTTzGO+4+Bgteq7vWF/fIe+hxNWnBnPvI+0SKkciTX6Ba1T2cCsmSYjuWm
+         cOAtoy3iYbfp8AXPRHFfohpNivea9OjrL0oI9nDpwLWMU3dh17SYS5w1HRn2KsZN8iDx
+         wI8yAxqHM4kUabuQwD7A6YPRbFLh+i8HnPQQ5n+LrO+UiMzuapshfuctBWeQMVCxfHVV
+         ePPxp2BOhNdXgNRBW7yvy3C8XsDRr5pN6Koe1NdBk8hG8CiPV6Ls7dOJ3tRdb7NJ0aTJ
+         eCJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778225933; x=1778830733;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oFE+3Cl3vfi36Fg8+b9fmvN0Szu9yW5/8cpwN5bCqjY=;
+        b=JADvq3DYYq79RiYeO++H7DNqXg6kN+jK6GbIUGYD9HNheBDbCzU64rW+YXPv5+qmnt
+         e4jSFpIUyYLkrJdf098h0CVvkALYPtok9r3yTEMd0H6phtGJzdhNbf1q6oipogEN6XvZ
+         QB0KpO+4ga0FaUGfz6EeNJSaHUen52ipsXSOU5Tg/wzmZtqcwwhK17S+cC2X0KA3f/xV
+         edxCFMuz8v43UD+jKGZWZahellYjXNxAL0bvzf5dEP5THDCb2+pdTh+tnXUavu4lmzmC
+         kMWjDDedZjJZewvHWV1e4Uj6Kt96Jp8p8ddj/R3Zbqyf0QAwsVfqGUBs1kFYYexH0yU7
+         VasA==
+X-Gm-Message-State: AOJu0YxW69LVcFKCAn+ctIIk3lGa7CPT3UHN7A/jE6FXPY8WZwfGfXhb
+	DW68WB41snsQsFDfic9pVxrk3XkT+QkpXSF13plj5Rx2brPwYTE4CkelKJsgBxED
+X-Gm-Gg: Acq92OFFYQgOCtmZb5aW0k4vvpsnbaCdbceaH7Q9WxvKUjRq5hSoebbqa0ksBBubVc1
+	8W2LRLqE21/6dU2WnAZIa/NZdeGH7Z7PvHROFrb8PBte8Az+mX8MYxz8/rut9A6OZmTPh6cSOp4
+	isXrFJ242+Mj9lGT4o8XhgLZfYCAWSACOVttPnVOdx6Ssjkq6wvLfWc94xG3DGZM2hJQ0wDbngs
+	YIPYJLLenHQwCTD/+mKBZcZuFzrW8cFbcimwP3fZWZuUJgd2U0C+ifLoEKBFKnqLptlCKBBOWQ8
+	0NcLSZNZNHoOfx7IqBW4Fp9ZrUMPvI9Y5tl540Cf1y9eRm6N4xowyjoJNJZbLr0pJiVULUI+kDN
+	fmYayHmYIDzuJ7kCvR4aiOsJ+WIkOP2kjjcyMjpXOTvWq7dIN/YSkACfyg+hNRng76h+7qllwLL
+	HuSyifBYtbG9//YexAPsl06A+yx31tI1u0IlKkFN79bTajsIagJ//3t9WU6N3esK1JwgmuqUje3
+	Awpsont/zB5AJFC71iNwlTclAUADMt6Ks6TyoNZ7Qyswuk=
+X-Received: by 2002:a05:690c:34c9:b0:7ba:f6b4:3550 with SMTP id 00721157ae682-7bdf5f0754fmr125286467b3.45.1778225932866;
+        Fri, 08 May 2026 00:38:52 -0700 (PDT)
+Received: from testing.. ([50.219.35.228])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-65d96bcdab3sm425248d50.14.2026.05.08.00.38.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 08 May 2026 00:38:52 -0700 (PDT)
+From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: vchavda@cisco.com
-Subject: [meta-networking] [scarthgap] [PATCH] open-vm-tools: Add entry to CVE_PRODUCT to support the product name
-Date: Thu,  7 May 2026 23:29:14 -0700
-Message-Id: <20260508062914.1959589-1-hjadon@cisco.com>
-X-Mailer: git-send-email 2.35.6
+Cc: Jason Schonberg <schonm@gmail.com>
+Subject: [meta-oe][scarthgap][PATCH] php: upgrade 8.2.30 -> 8.2.31
+Date: Fri,  8 May 2026 03:38:44 -0400
+Message-ID: <20260508073844.2675630-1-schonm@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-21441.cisco.com [10.128.164.182];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 10.128.164.182, sjc-ads-21441.cisco.com
-X-Outbound-Node: rcdn-l-core-04.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 06:29:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126822
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 07:39:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126823
 
-From: Het Patel <hetpat@cisco.com>
+This is a security release.
 
-- Added 'vmware:open_vm_tools' to CVE_PRODUCT to align with the NVD
-CPE and ensure accurate CVE reporting.
+Changelog: https://www.php.net/ChangeLog-8.php#8.2.31
 
-Signed-off-by: Het Patel <hetpat@cisco.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9b69587ecb92b3acb7b3092217357de9c1be14e6)
-Signed-off-by: Himanshu Jadon <hjadon@cisco.com>
+Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- .../recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb       | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/php/{php_8.2.30.bb => php_8.2.31.bb} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_8.2.30.bb => php_8.2.31.bb} (100%)
 
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
-index 1ef2781d6a..1bad8ea45b 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
-@@ -121,6 +121,6 @@ python() {
-         raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
- }
- 
--CVE_PRODUCT = "open-vm-tools vmware:tools"
-+CVE_PRODUCT = "open-vm-tools vmware:tools vmware:open_vm_tools"
- CVE_STATUS[CVE-2014-4199] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
- CVE_STATUS[CVE-2014-4200] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
+diff --git a/meta-oe/recipes-devtools/php/php_8.2.30.bb b/meta-oe/recipes-devtools/php/php_8.2.31.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/php/php_8.2.30.bb
+rename to meta-oe/recipes-devtools/php/php_8.2.31.bb
 -- 
-2.35.6
+2.43.0
 
 
