@@ -1,321 +1,294 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <zhe.he@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6281CD3436
-	for <webhook@archiver.kernel.org>; Fri,  8 May 2026 14:49:16 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.111.1778251748509531791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 572C9CD37AC
+	for <webhook@archiver.kernel.org>; Sat,  9 May 2026 03:08:09 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5369.1778296081682809963
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2026 07:49:08 -0700
+ Fri, 08 May 2026 20:08:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=PMCRCdxH;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-ba7a1cc0380so370245066b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 07:49:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778251747; cv=none;
-        d=google.com; s=arc-20240605;
-        b=An6B8aoULMbS1GJJbenpcWak9hN2cFAckV1B4l+V1qasCwBNmQWtvWmqe8M9DiTiTG
-         1E32G3hMigU38ye50keQIuIPi5RMleSBOchGgcMz3npA6fd/czy0sQMoqOG8u4mPS5mB
-         hzF9AqR9L7+uDYjNVCuTTybj1mfBGMFNQF3+xmVxO4ANKL4nJzuy/IDSGj3+d1wofIzF
-         OzfHc0qakKcoLuulrPbuBvqOf4Y4C2bXHv01x8voO0ORfVML3TDMVYwEz9FukA6E1SFt
-         8Ab8Elc5Jcuyitn9wudFBVhsXQiNf3b4khJ/+96DeVn5GqzdFjDr4t7LqK7om4ZY3uaz
-         34SA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=HtFr2mHIyDzP5yiGHvKDaX0VvK9MzDoTIBRJbS7TbOQ=;
-        fh=UPRPs2VgNClpU9dPk8hoVbj3nn0ZDu7crJEkYkfxoIY=;
-        b=Cprd1R8/yeRVTyAvyyWa94SWrKO/4lBopd8/FvNqPX5YuJQYtmmD20FDCNl+p8hbfy
-         wFEV/8LQ3+DpIv1o1EUGh7w8e2j3hrHimz2ta0phKWlvKwMTK3UwWm4acuDPCJp6aI9S
-         8vfH2Dm8Xrbw3W5oEWCUoJ2JifSKZCFirUNmODYFmpllrJT4ubT6r0ZE95zt3LFM/ehV
-         4ZqB4LHQX0m+yBLi0r1OjpyyortbYU4Gyw7BM6Bzfi2Iw9MXfBhJs/dj+rqAR/vFo1UU
-         Qwp748jGrfWlyT9MR1pRFXaLvUkZ4HZYxtVC9cGTItsNcqNDUjFV7iTG4HJXiaMREGMB
-         NFnA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778251747; x=1778856547; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=HtFr2mHIyDzP5yiGHvKDaX0VvK9MzDoTIBRJbS7TbOQ=;
-        b=PMCRCdxHT9AcHFXesHoiZE9Xoeq2iIIkGErDHdOQNBv4juhegWvQiH29q+qN03CQXO
-         gwIaXVXO0n2ywBncRPKOHZtP5h0NDXBsU9A5UEJkROhy4S+eE38RknuIsk/0K+YL8zxZ
-         5vyrwWbh7cQo82R4Z4MJMqxp6gshg1kxsGsRwtllkqWRoslhuFiaob57eKjycv5mOzjm
-         IwxLq8Hgr0pbJsjGLQUR4WPb7DBdwmABhmXLyeoUfpP6i/sX2VwiPA9u8uCj2eqGITd8
-         pbwbdmX0hezVt6+yPqHIYKipE3UFRojO8j59gSIbgKYAwfz7FIYy+yG3XYRB85NBJG4k
-         LHJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778251747; x=1778856547;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=HtFr2mHIyDzP5yiGHvKDaX0VvK9MzDoTIBRJbS7TbOQ=;
-        b=Z7VF24fUfvzpe3Hv2aOPhnJHOCJm5S3CFumahZkdaCOdvgLJ0d6hq42IC0dpx6qWAW
-         37oCxJ2ZqcXM3pCP+ShC+WCggs9hVhu8Itg4aZ0+QqLBiPrKkDFFgFFIJLEc9Z82m8zW
-         XNqrT4mgeAbkw/SlVHF0S9XHSNUDM4/NV2Skt7tm02MpSZSidWVoSnB55HASDcJMowx2
-         0pliMHd06XQJOuZLuqtZcyoelW5BfH+2kkMd4Un5T+sLEfxevYk8KwUm4NDi+qUaNbG2
-         5r/A39f16qFBaqN1HbqQuoXRwhqdWe/y8cz9re2Lr8Vv0uC6bn3kRaBD8ZxJ6GK9Z9FF
-         bAmw==
-X-Forwarded-Encrypted: i=1; AFNElJ/KjDmHUd+4BvDL5XFGMQcWJ0hviA/LXeXxFsvTvfMcMZGzKAuqB03tpW+vcd3C3P2x/YGDlJeLBLCOtro5/6JY56g=@lists.openembedded.org
-X-Gm-Message-State: AOJu0Ywkmz1Erc2iS4VlzhaEMaICspAUs74ldA2iCHOd/xTu3ds96X4O
-	kiXpWsEBbiGe/Y+MXCvEkKWiOhAksrmemAhwcGG6g3l7DO02kaZvcGqqDF+ue4AngZWJ3+gDAoC
-	BTSlHJk44zfmmLEOyxZUnNOBpWcy0iL6ZdWlJ
-X-Gm-Gg: Acq92OF1S7NFqUkjJOr0NXnPIF8JjBJukAOSk7RKrTNGON06FvnzgoM1Gauq0dF6z05
-	jHUmqU9s969AYTzOSvMt6Dtl4xrje9bSGe/zhPCYrd2cL6qIefh++mkJxvusYfjYn7/Dn2xD3J8
-	nRZyDguA7MJzHhwvxRZO2GmfOqU0f+BnlBp1r8NCASaua0/tyEHI+i1kW+M+m+l+c8NSsc5Rx3d
-	jvlylh4geizb/wvN8GALD4Pdqe8B59OGKETHs3NSqosV/MuLHEvrICHCX8i4Exthyyybn6bnUXH
-	+wUdyN55xN4JAfY96aYixnOVaqNsekOcGBXK3J/SMuBjx22c+ZgBfstuXD0V4jB1/43xfnxK+8r
-	THfFVi0qQNI6Z70k=
-X-Received: by 2002:a17:907:98d:b0:bc3:6b0e:1686 with SMTP id
- a640c23a62f3a-bc56f30a6bemr736145466b.37.1778251746631; Fri, 08 May 2026
- 07:49:06 -0700 (PDT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=QLFxOQeR;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9589cf1815=zhe.he@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6492SAP52052745
+	for <openembedded-devel@lists.openembedded.org>; Sat, 9 May 2026 03:08:00 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=bmJG7szSUV7Qm4DcVmTE
+	spiyTlSIo0xuZjTMKyh/xwQ=; b=QLFxOQeR1G0V2x7R8MK6m8yyUcQxuIDUG+AG
+	upHTcFZAjVvTgDMmB0NokjXtVTOPIYLdOwxemAULfiDfsvx3h5tb4fE6oOn2kJ4T
+	FEIsf5RwXcYDGjvmmj4V1WiQFdGK7gQmoOaqgVyo9sv+vwS3fNG8pk6kNbwjgtnf
+	dnfLNsniyQADOJskghpD1BVca1sKiO5SxNCa+siQbnj+PorKH2Ot9r/ib2iHVLp8
+	UwImKiEFK2yzUMweFGT/XqUzuVRy1gv7SDGdwoS1Pv/XH6S+JyVTz++G1/qYUn4C
+	Zvsa7UXOL5pnIFXAZv/MNV5eRz+vULNiU2PIFrsmXZyBtnn3JQ==
+Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012028.outbound.protection.outlook.com [52.101.53.28])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e1uw6g17m-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 03:08:00 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PFjSNCcFl/P1U9NISEpqqGHJFKDnwugH3QSsH1StEjQLfuuWri33zROduxc4oN000nxb7uoCyJZ0XpcnU1c6wjjDU1YZjX9vRB3hnzl54IuyEbFX3Y9fHCfmS/Gqwl6BVb6sRrkIqutfETiKSB4WtO9OBCbtd9ilZEPeEhnz9K34zdk1ey3naK/c3DVtxfhAFdqJYR7rLr4G953HiUmQrz9YUOb93XQLlxcp0iJuc17+KsFM+uTrT9zocvd/kNzl7ozWS9q5PtDObgFh9uMWtQPjYEWxCJYzuZRiSTt7QKEN98CH6NL8LDVG0DzA94nZV/qeMqkynuJQ1yw4XufHcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bmJG7szSUV7Qm4DcVmTEspiyTlSIo0xuZjTMKyh/xwQ=;
+ b=EbCyGsqRDeQ6OkEnlfIfODBzPeKh8Hhl8YAFS9MNpcRcNMwP90vBI7bnHJDAnvhahI/QSsweMlJ9a7qQ8t4qpcCtDt2MvbDg7e0ZCxHEkPNZakL52QaAI+n+RAXhO3ScDzJAWOeBASvZXeFvbLDfOSo1x3VN7j/mpdmBoYgqGMmK1Wa+ZZVRyXhqCkwMpW1HjgJU+n89SWW3drfYRZm29D6b+pRURKQXaGArUCvXAXLS/hJw2vtCXoLKGYG3a2h5B+1afnjJmkxrW7B9o75Jq8oWcgWggkYPYketdGwIE75EV/eZrUlmcuNtFYY8CABJCh0t4fLPGZVpY9zFr+A1XA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DM6PR11MB2633.namprd11.prod.outlook.com (2603:10b6:5:c0::14) by
+ SA1PR11MB6736.namprd11.prod.outlook.com (2603:10b6:806:25f::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.17; Sat, 9 May
+ 2026 03:07:57 +0000
+Received: from DM6PR11MB2633.namprd11.prod.outlook.com
+ ([fe80::7989:d63c:1bdb:60ef]) by DM6PR11MB2633.namprd11.prod.outlook.com
+ ([fe80::7989:d63c:1bdb:60ef%6]) with mapi id 15.20.9891.019; Sat, 9 May 2026
+ 03:07:57 +0000
+From: He Zhe <zhe.he@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] bpftool-native: Fix -Wdiscarded-qualifiers errors for glibc 2.42+
+Date: Sat,  9 May 2026 11:07:39 +0800
+Message-Id: <20260509030739.1773307-1-zhe.he@windriver.com>
+X-Mailer: git-send-email 2.34.1
+Content-Type: text/plain; charset=UTF-8
+X-ClientProxiedBy: TYWPR01CA0020.jpnprd01.prod.outlook.com
+ (2603:1096:400:aa::7) To SN6PR11MB2639.namprd11.prod.outlook.com
+ (2603:10b6:805:59::24)
 MIME-Version: 1.0
-References: <20260506-bash-rr-v1-1-507ee57b7fe7@non.se.com>
- <4464a296-b5ef-46e4-a87d-90e9fcb29da3@gmail.com> <CANPvuRn42dyFcaDOhvjTQMkEEyumqaJ1YW3z7D=C_pviKAH_sQ@mail.gmail.com>
- <801db7e6-604a-4965-a984-d3d2e5dce18d@semalibre.com>
-In-Reply-To: <801db7e6-604a-4965-a984-d3d2e5dce18d@semalibre.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Fri, 8 May 2026 15:48:55 +0100
-X-Gm-Features: AVHnY4JCL6B74daPn7a3UxsP1ZklUnw9xapHoq0aDrdGKt7u4B1Mc8MMOXw0_qA
-Message-ID: <CANPvuRn70QogSDqbWaYnUr_+27VB9u1V0_ubQKe6+ZSRUT=NJQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] openvpn: change bash rdepends to rrecommends
-To: Louis Rannou <louis.rannou@semalibre.com>
-Cc: skandigraun@gmail.com, openembedded-devel@lists.openembedded.org, 
-	Louis Rannou <louis.rannou@non.se.com>, pascal.eberhard@se.com
-Content-Type: multipart/alternative; boundary="000000000000ade7bd06514f7fa2"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR11MB2633:EE_|SA1PR11MB6736:EE_
+X-MS-Office365-Filtering-Correlation-Id: 91e7ce79-4c74-4d18-ca76-08dead782b27
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014|56012099003|18002099003|3023799003;
+X-Microsoft-Antispam-Message-Info: 
+	X3NcjUfoOqyfelZ3JvMab1JtfIgH8GqEXSIL9OwlxDvwBza0+pXZxP9BzrIpH0suUHaJJJ8M2LvUEfbZaIJZv/vctmYuaH9DDuNGtCnSuxzV3fMQFqPVVDfBmWlFUbVXbU7yxww+T0n9ZKGUTi6nddLvOVtR3x0pxaz22OD2A6KQ0/5rr/Fl4WGHlrN7JV0I699bM67jxtPcvigqJVj53XIhUaHjIagEZqUHQWYeX0yviXvWtU43qwZeDkL5rAS84NVMqB4s34nTTeBresUG5KtMDgNYjfyaJr7YNOZgYCwlHR0bcqbJPs/Ab1zeEZlcQs/LRxXizlc8PkmZU3jFOrf5kcbkiLAGsLq7GTAaaBga9nQKepgVvhxfOEGnji9W51T4imQkNbEJI7iT0PT/hGaK+S3tcvUWdQ8Vjjopb7FTXgw4G8OFPQM2MMuhGF4Z9084oQqQlekRQKXqe6P7PMH0haIHzDKwCMSJk1iI5UwOAqZyA605qWwp4uGmsqpU9oR0Xr5OiUiI2aKe+eaFfZTbNoganN3iMdoLnP4RbTvvj53/HBIik9dU7hGNH8/p6nYiFXpMChsb7y6JQEgmRduhbai92MlFfSAjGZ/wsxR65cwtWsn9DHV1iSH8FAK6Ju0CJzC0zmIuMWEpnaHD4Q9NR7RCVumUsaJZAE+HqLfXG8vm5wW6tW8xeJ+8XHHe75gsLSpzGmW/4SQa8Qhsq404tvUvw9jsm4dPg7I308UBVTs7LxhLfPwzxntpWs5u
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2633.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?MTNEZjRSM0FiOE81M1Y5T3dkUDZvQTM2bkcrOGtEUGZrcnpneUpxT0NIV0tK?=
+ =?utf-8?B?dEs2RHlYZG1VRU1yOWRoLzFHQVNSZVdPWHFDV1kzYkdiejZtWEoxbmZ1emZK?=
+ =?utf-8?B?MWtvTnB5VEVrNVlLZUh4M3NZWVV3dUdCd09TTnZrWm9Rc1gwbmIrYXBkWGJy?=
+ =?utf-8?B?b1EvalJ6OVp0UmsvOWNRa0tnc2hlQkhrSjZsUzFLOTlzSTN6d2FqWkE5OGwz?=
+ =?utf-8?B?cGh3cFNmUUxVWXA1cnA1WmVOcUpxR2lVZTRLTm51aS9MYXU2WENJQVRNMUVL?=
+ =?utf-8?B?dUpOZTZPRHRxMWMvL3UvZmttd3RpL2hHaGplYzBVVnVBZjNCdjVzUUN3ZWVE?=
+ =?utf-8?B?SDFLWTNwZUNUclZhelFMdFp6ay9zUWFTT2NFTUVjb29GZERTVTZBOXdkUVZW?=
+ =?utf-8?B?cmsrZXFvSTNLeDlNd3ZyRk1OT1l3MThyLzI3Uzczd002VkFzNjFBZ09TaC9C?=
+ =?utf-8?B?YnpxemZMVW1zVDdiMHN6WFVTR0J1eXh2RzhNY0tOVHpxV3hMOVFuTG1qdGFJ?=
+ =?utf-8?B?SkxrQnRuZ21PREV3eWl0QTdpMnpuWlU5cHhQUFdnM3FLOW5ZZWRmUVd4WTd5?=
+ =?utf-8?B?M29jdXhUbXE4QlRNKzJiaHloTFRIVzJxYW52aDdaNHpwTUV1TFQ4Z3hiMEM2?=
+ =?utf-8?B?elU5MmRVdVlXVFlEcDlFMEQ0bGZnb1FHdExpUjU4bkYxVkMrZ2M0eDRETUNH?=
+ =?utf-8?B?S3lTVDY0WitNd3hRWUMrZXlub0EvZFhHL0ViZkkxQXpzTjcrdzAzcDExWW1v?=
+ =?utf-8?B?dmRWZmZLQ2gvbVBwdXNwYVJWN2xSUU4yQzFSYmtTb1oxa3dsNmRwWVF6SnA3?=
+ =?utf-8?B?Qy9IQlFaeDFnMldDcU9OWk5JbXFsM1RrMDZwRmZJZGN0cUZ5STZ6MC9maHVN?=
+ =?utf-8?B?SXZmMWJBMW9YNERZVS9LZkdlcEozMTFITGtlOGFEc3dMK3VQbi9wZExidHdM?=
+ =?utf-8?B?VC9Xb1NhSCtsVm5yRUtpcHk0eDN2NC9CMTMzK0dTR1pXR3k4VUFyQnorUTVr?=
+ =?utf-8?B?TVpsODJ0MDFjRzJVTmxoUXlTcEhlYnNPK0hXTzZvVHJmbm1ZZWJCNDhaakdJ?=
+ =?utf-8?B?NytiZFRCUTRNYzE1d0xaS1UyTUkrL2RKT3RQRS84SFhDbWdTZnI2RmVUR2FS?=
+ =?utf-8?B?Z2wzemFGUmJkSVAxZWRicGRUdjZtV2o4dkhYazBneG93alNOdFMvTTNwbFcr?=
+ =?utf-8?B?Rk9YWkdSdlUxSUhsNTMrYklIOEs1ci84MWd3N25pQVV2cnQrMWlZVE1xR1Nl?=
+ =?utf-8?B?QnRlTkR4RVBLSlJEY0d3UXhiWEZtMlJ1cXBjNXRJS1FxOVdtVU9lL0pJNWp3?=
+ =?utf-8?B?REJveEFLdVlTS24wc3lHQ2l2bTVsdmNKK1U5U0FXeHJxOHkrQ1BqTnpBSU45?=
+ =?utf-8?B?cFJaQmpVUVdrTWkraWFaeWNGYzAzTm9jMkdSdWd5YUZSUkpJejlKZUNoMXBi?=
+ =?utf-8?B?Z0NBay94QUVVdG8ycmEwb1RpbEc0N2E0eGVLek9nSEswQ2dVL0lzaUxSUmZr?=
+ =?utf-8?B?MzN0R0lXeVpRTHRMZlN3L3JCREZocDdEcldjd0cxTzNUdENPcmRsOXp1TmJX?=
+ =?utf-8?B?bXEvTTZJRnI3bnF5aURub09wLzNkQzA0RVVtTGVhRFRaR0d0S29sa01qaG5D?=
+ =?utf-8?B?b1QzL1V0NmdKY3RSOWc2bmVOMGVGcnFnbEh4VEw4TVVRS2c1QjZELy9uVHQx?=
+ =?utf-8?B?ZW4yRzBNd3BYUTFReXBsZ0F2dlF5UFhjZ2pWckY1eDNwVTFRNmVIaGNNVVlu?=
+ =?utf-8?B?MlMrLzRKUlhLV3Y1MG1qSjlqYWViT2NVUlUyQWtmRUJqOVBWY2s2b0Z6VHl2?=
+ =?utf-8?B?WTRQRlpwNVpWSTRqbktQMUZ5QURSMXFZQWZ2TzdGUkpxRE9iVGhGNUExYkds?=
+ =?utf-8?B?bTZhSzNLdktZV2dtcDE4d1lpMENURWQvZDgxdEhsekdOamtOQ20yMXprdDBP?=
+ =?utf-8?B?SEtvb2FROEc1alN0ck9aMnRIamlnSFhrR2NTQ3Rza1JmSlZrY2pTakVONm1o?=
+ =?utf-8?B?SUMwb3FQTVpxMkp1QjJlY04xcnNZR0VSS2FIcytuamVsUWZiMVBxSUYxK1JY?=
+ =?utf-8?B?NzNjblgraWlSaTFwTVdPNFRRVWp1L0tUNCtqWmVtNU84b0lsNFRNYVY5a1pP?=
+ =?utf-8?B?UndCTVAreG9TakllQ0taalpwWWpodGxnWllXcE1LTDg0QWVqdmEzbGVyb1Ry?=
+ =?utf-8?B?SmVaVDhVVUlRZHdMMG1CWnFXVGtpdXB0aEthRmpEMGdhaXcwRi9hV1pZMW13?=
+ =?utf-8?B?UHhZa25UajNRNXIvOVhoanFNQjd1SXY0OTFwWTIyOXlOOFNtR2E0UHZCb21n?=
+ =?utf-8?B?Si8valRISEhFNWM2SU83VmVYMlZ2cW0yWXZteXY4bGh6a2l0MGQxdz09?=
+X-Exchange-RoutingPolicyChecked: 
+	EihFIMDO16P9GJG9SjAymdJ6js6sjkp4T5sGLrDE+CpEkMNIeuD/k1xBBKNmkFViTfjIqcq6rivNBzLYWFgHT9u53ZVQPmaadi6X783aGMOLMjaegjmYqXAfG1eEV31B4DQ23eYL99lfDCFOj29QipNqOCZzTGkD3lL5Z78vUGPbw/vyHhPloHFBZ+/HBCl0PKzQhqJ+QfQ1PkgIGOdWzg3FX90HKSFFLk6/Q+0m6mXYTBPoSpbUGrsZxWRTLyhqkrJLa+Y/RWxuUog6MEOsxw4OflWS3c9VO3D0wB5GAbsX3130H6URyTFjNfiSYtUxgbn6Hz5x0AeEr6tEVUz/Qw==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91e7ce79-4c74-4d18-ca76-08dead782b27
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2639.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 03:07:57.2776
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: x/Bh6jn+qBqC01ahiIX7sacipmBPhQKshxIJT3tPTIgvGKXXTHBHFPMdzMZEgZTqCB723Q4ZVehtPD1rkvJUgA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB6736
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA5MDAyOSBTYWx0ZWRfXzs0EI1SaEzvo
+ FBG/FjhpOswaWHni8qUk2BfNUyFCcR3gp59JJpbaplsPgEnylqdlKv5g19/ACoP3PkZZHHlb4SC
+ jyf9zQImN2mvvMEkND6+ITTpeaSVqhLk4kHrsVpEgnQmNMrSKpOU5O80PLEHfNUZFi2cKLBuGCR
+ l7fpo2oTWPKrln3fz4CoFzjevAL04EJN+sApr9lKun0hGwC/inSuAmt4XpFvFbzJlb05m+XgBHC
+ dIfgoTOVTzU8LvRxfqMSrDROgOFXd6askNUCz8N4L7jFEXkHedbja8+l6XSLt2+2VmHyTpCdLl6
+ et4wdtGlUisUSJCPoT4me1EbOsIpOGcBUUOzjwb11HWXhLijHkV7mbmNcFxwUtEGLyprBZIRlZ5
+ 5JOCc5B6HE3DikaHg2XYhE2AUPDDfODvdb+VG5F0FJpwuSY4BLNLhfzSIr22xOQMKSWqXRJg++q
+ cvmQpZKzqg0une8nsxg==
+X-Authority-Analysis: v=2.4 cv=d6nFDxjE c=1 sm=1 tr=0 ts=69fea510 cx=c_pps
+ a=B83JijZ7EzXLHUDiN273XA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8
+ a=iox4zFpeAAAA:8 a=ag1SF4gXAAAA:8 a=CAchc_BtILMKYomKS8sA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22 a=WzC6qhA0u3u7Ye7llzcV:22
+ a=Yupwre4RP9_Eg_Bd0iYG:22
+X-Proofpoint-GUID: aAg95sXF-UlLKhhgW6ZQTW1IBrKs86iV
+X-Proofpoint-ORIG-GUID: aAg95sXF-UlLKhhgW6ZQTW1IBrKs86iV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-09_01,2026-05-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 suspectscore=0
+ spamscore=0 adultscore=0 clxscore=1011 phishscore=0 malwarescore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
+ definitions=main-2605090029
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 6492SAP52052745
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 14:49:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126827
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 03:08:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126828
 
---000000000000ade7bd06514f7fa2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Backport a patch from kernel to fix the following build errors.
 
-Hi Louis,
+bbpf.c: In function =E2=80=98kallsyms_cb=E2=80=99:
+| libbpf.c:8192:13: error: assignment discards =E2=80=98const=E2=80=99 qu=
+alifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+|  8192 |         res =3D strstr(sym_name, ".llvm.");
+|       |             ^
+| libbpf.c: In function =E2=80=98avail_kallsyms_cb=E2=80=99:
+| libbpf.c:11497:31: error: assignment discards =E2=80=98const=E2=80=99 q=
+ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+| 11497 |                 if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
+|       |                               ^
+| libbpf.c: In function =E2=80=98resolve_full_path=E2=80=99:
+| libbpf.c:12085:35: error: assignment discards =E2=80=98const=E2=80=99 q=
+ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
+| 12085 |                         next_path =3D strchr(s, ':');
+|       |
 
-Louis Rannou <louis.rannou@semalibre.com> escreveu (quinta, 7/05/2026 =C3=
-=A0(s)
-15:50):
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ .../bpftool/bpftool-native_6.16.bb            |  5 +-
+ ...-Fix-Wdiscarded-qualifiers-under-C23.patch | 69 +++++++++++++++++++
+ 2 files changed, 73 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fi=
+x-Wdiscarded-qualifiers-under-C23.patch
 
->
->
-> On 5/7/26 10:46, Jose Quaresma wrote:
->
->
->
-> Gyorgy Sarvari via lists.openembedded.org <skandigraun=3D
-> gmail.com@lists.openembedded.org> escreveu (quinta, 7/05/2026 =C3=A0(s) 0=
-8:39):
->
->>
->> On 5/6/26 18:07, Louis Rannou via lists.openembedded.org wrote:
->> > From: Louis Rannou <louis.rannou@non.se.com>
->> >
->> > The dependency to bash is only required for dns-updown scripts. As bas=
-h
->> is
->> > under the GPLv3 license, it might be preferred to exclude it.
->> >
->> > Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
->> > ---
->> >  meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb | 2 +-
->> >  1 file changed, 1 insertion(+), 1 deletion(-)
->> >
->> > diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->> b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->> > index 0cbe4641cd..d967a0dc12 100644
->> > --- a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->> > +++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
->> > @@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D
->> "--enable-iproute2,,iproute2,iproute2-ip"
->> >  PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-systemd,system=
-d"
->> >  PACKAGECONFIG[selinux] =3D
->> "--enable-selinux,--disable-selinux,libselinux"
->> >
->> > -RDEPENDS:${PN}:append =3D " bash"
->> > +RRECOMMENDS:${PN}:append =3D " bash"
->>
->>
->> In case bash is excluded (with PACKAGE_EXCLUDE, INCOMPATIBLE_LICENSE,
->> BAD_RECOMMENDATIONS...) I would expect this change to throw an error
->> still, the latest during package QA, when it scans the scripts for
->> missing dependencies - because the dependency itself is still present.
->> Does it not fail those checks?
->>
-> That is correct. The check fails, I ignore how I missed that.
->
->
->> As an alternative, I wonder if it would make sense to install this
->> dns-updown script to a separate package, and make that depend on bash
->> only.
->>
->
-> A new package would be more appropriate.
-> On the other hand, is bash really necessary? Sometimes it's just shaband
-> that's wrong on script
-> and POSIx /bin/sh can even be used. Could you try this?
->
-> That was also my first thought. The scripts are not POSIX compliant
-> unfortunately. It's quite sad as all older scripts used to be.
->
-> I'll send a v2 with a package openvpn-dns-updown. Do you think I should
-> add a rdepends between openvpn and this ? My first guess would be to not
-> take the dependency as the dns-updown scripts are recent.
->
-
-I think we can ignore it for now, and in the meantime, who knows, maybe
-someone will port the
-script to posix and the package won't be necessary in future versions.
-
-Jose
-
-
->
-> Louis
->
-
-
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb b/meta=
+-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+index fe3ad6138e..edc635517a 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
+@@ -9,7 +9,10 @@ DEPENDS =3D "binutils-native elfutils-native"
+=20
+ inherit native bash-completion
+=20
+-SRC_URI =3D "${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz"
++SRC_URI =3D "\
++    ${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz \
++    file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch \
++"
+ SRC_URI[sha256sum] =3D "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab4=
+8516bcc1befbcd83"
+=20
+ S =3D "${UNPACKDIR}/linux-${PV}"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdisc=
+arded-qualifiers-under-C23.patch b/meta-oe/recipes-kernel/bpftool/bpftool=
+/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
+new file mode 100644
+index 0000000000..76b9aabb54
+--- /dev/null
++++ b/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-q=
+ualifiers-under-C23.patch
+@@ -0,0 +1,69 @@
++From ab21cf885fb2af179c44d8beeabd716133b9385d Mon Sep 17 00:00:00 2001
++From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
++Date: Sat, 6 Dec 2025 14:28:25 +0500
++Subject: [PATCH] libbpf: Fix -Wdiscarded-qualifiers under C23
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++commit d70f79fef65810faf64dbae1f3a1b5623cdb2345 upstream.
++
++glibc =E2=89=A5 2.42 (GCC 15) defaults to -std=3Dgnu23, which promotes
++-Wdiscarded-qualifiers to an error.
++
++In C23, strstr() and strchr() return "const char *".
++
++Change variable types to const char * where the pointers are never
++modified (res, sym_sfx, next_path).
++
++Suggested-by: Florian Weimer <fweimer@redhat.com>
++Suggested-by: Andrii Nakryiko <andrii@kernel.org>
++Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
++Link: https://lore.kernel.org/r/20251206092825.1471385-1-mikhail.v.gavri=
+lov@gmail.com
++Signed-off-by: Alexei Starovoitov <ast@kernel.org>
++[ shung-hsi.yu: needed to fix kernel build failure due to libbpf since g=
+libc
++  2.43+ (which adds 'const' qualifier to strstr) ]
++Signed-off-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
++Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
++
++Upstream-Status: Backport[https://git.kernel.org/pub/scm/linux/kernel/gi=
+t/stable/linux.git/commit/?h=3Dlinux-6.18.y&id=3Dab21cf885fb2af179c44d8be=
+eabd716133b9385d]
++Signed-off-by: He Zhe <zhe.he@windriver.com>
++---
++ tools/lib/bpf/libbpf.c | 7 ++++---
++ 1 file changed, 4 insertions(+), 3 deletions(-)
++
++diff --git a/tools/lib/bpf/libbpf.c b/tools/lib/bpf/libbpf.c
++index dd3b2f57082d..9c98c6adb6d0 100644
++--- a/tools/lib/bpf/libbpf.c
+++++ b/tools/lib/bpf/libbpf.c
++@@ -8245,7 +8245,7 @@ static int kallsyms_cb(unsigned long long sym_addr=
+, char sym_type,
++ 	struct bpf_object *obj =3D ctx;
++ 	const struct btf_type *t;
++ 	struct extern_desc *ext;
++-	char *res;
+++	const char *res;
++=20
++ 	res =3D strstr(sym_name, ".llvm.");
++ 	if (sym_type =3D=3D 'd' && res)
++@@ -11574,7 +11574,8 @@ static int avail_kallsyms_cb(unsigned long long =
+sym_addr, char sym_type,
++ 		 *
++ 		 *   [0] fb6a421fb615 ("kallsyms: Match symbols exactly with CONFIG_L=
+TO_CLANG")
++ 		 */
++-		char sym_trim[256], *psym_trim =3D sym_trim, *sym_sfx;
+++		char sym_trim[256], *psym_trim =3D sym_trim;
+++		const char *sym_sfx;
++=20
++ 		if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
++ 			return 0;
++@@ -12159,7 +12160,7 @@ static int resolve_full_path(const char *file, c=
+har *result, size_t result_sz)
++ 		if (!search_paths[i])
++ 			continue;
++ 		for (s =3D search_paths[i]; s !=3D NULL; s =3D strchr(s, ':')) {
++-			char *next_path;
+++			const char *next_path;
++ 			int seg_len;
++=20
++ 			if (s[0] =3D=3D ':')
++--=20
++2.34.1
++
 --=20
-Best regards,
+2.34.1
 
-Jos=C3=A9 Quaresma
-
---000000000000ade7bd06514f7fa2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Louis,</div><br><div class=3D"gmail_quote gmail_qu=
-ote_container"><div dir=3D"ltr" class=3D"gmail_attr">Louis Rannou &lt;<a hr=
-ef=3D"mailto:louis.rannou@semalibre.com">louis.rannou@semalibre.com</a>&gt;=
- escreveu (quinta, 7/05/2026 =C3=A0(s) 15:50):<br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex"><u></u>
-
- =20
-   =20
- =20
-  <div>
-    <br>
-    <br>
-    <div>On 5/7/26 10:46, Jose Quaresma wrote:<br>
-    </div>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <div dir=3D"ltr"><br>
-        </div>
-        <br>
-        <div class=3D"gmail_quote">
-          <div dir=3D"ltr" class=3D"gmail_attr">Gyorgy Sarvari via <a href=
-=3D"http://lists.openembedded.org" target=3D"_blank">lists.openembedded.org=
-</a>
-            &lt;skandigraun=3D<a href=3D"mailto:gmail.com@lists.openembedde=
-d.org" target=3D"_blank">gmail.com@lists.openembedded.org</a>&gt;
-            escreveu (quinta, 7/05/2026 =C3=A0(s) 08:39):<br>
-          </div>
-          <blockquote class=3D"gmail_quote"><br>
-            On 5/6/26 18:07, Louis Rannou via <a href=3D"http://lists.opene=
-mbedded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a=
->
-            wrote:<br>
-            &gt; From: Louis Rannou &lt;<a href=3D"mailto:louis.rannou@non.=
-se.com" target=3D"_blank">louis.rannou@non.se.com</a>&gt;<br>
-            &gt; <br>
-            &gt; The dependency to bash is only required for dns-updown
-            scripts. As bash is<br>
-            &gt; under the GPLv3 license, it might be preferred to
-            exclude it.<br>
-            &gt; <br>
-            &gt; Signed-off-by: Louis Rannou &lt;<a href=3D"mailto:louis.ra=
-nnou@non.se.com" target=3D"_blank">louis.rannou@non.se.com</a>&gt;<br>
-            &gt; ---<br>
-            &gt;=C2=A0 meta-networking/recipes-support/openvpn/<a href=3D"h=
-ttp://openvpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.=
-bb</a>
-            | 2 +-<br>
-            &gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-            &gt; <br>
-            &gt; diff --git a/meta-networking/recipes-support/openvpn/<a hr=
-ef=3D"http://openvpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn=
-_2.7.0.bb</a>
-            b/meta-networking/recipes-support/openvpn/<a href=3D"http://ope=
-nvpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a><br=
->
-            &gt; index 0cbe4641cd..d967a0dc12 100644<br>
-            &gt; --- a/meta-networking/recipes-support/openvpn/<a href=3D"h=
-ttp://openvpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.=
-bb</a><br>
-            &gt; +++ b/meta-networking/recipes-support/openvpn/<a href=3D"h=
-ttp://openvpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.=
-bb</a><br>
-            &gt; @@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D
-            &quot;--enable-iproute2,,iproute2,iproute2-ip&quot;<br>
-            &gt;=C2=A0 PACKAGECONFIG[systemd] =3D
-            &quot;--enable-systemd,--disable-systemd,systemd&quot;<br>
-            &gt;=C2=A0 PACKAGECONFIG[selinux] =3D
-            &quot;--enable-selinux,--disable-selinux,libselinux&quot;<br>
-            &gt;=C2=A0 <br>
-            &gt; -RDEPENDS:${PN}:append =3D &quot; bash&quot;<br>
-            &gt; +RRECOMMENDS:${PN}:append =3D &quot; bash&quot;<br>
-            <br>
-            <br>
-            In case bash is excluded (with PACKAGE_EXCLUDE,
-            INCOMPATIBLE_LICENSE,<br>
-            BAD_RECOMMENDATIONS...) I would expect this change to throw
-            an error<br>
-            still, the latest during package QA, when it scans the
-            scripts for<br>
-            missing dependencies - because the dependency itself is
-            still present.<br>
-            Does it not fail those checks?<br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-    That is correct. The check fails, I ignore how I missed that.=C2=A0<br>
-    <br>
-    <blockquote type=3D"cite">
-      <div dir=3D"ltr">
-        <div class=3D"gmail_quote">
-          <blockquote class=3D"gmail_quote"><br>
-            As an alternative, I wonder if it would make sense to
-            install this<br>
-            dns-updown script to a separate package, and make that
-            depend on bash only.<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>A new package would be more appropriate.</div>
-          <div>On the other hand, is bash really necessary? Sometimes
-            it&#39;s just shaband that&#39;s wrong on script</div>
-          <div>and POSIx /bin/sh can even be used.=C2=A0Could you try this?=
-</div>
-        </div>
-      </div>
-    </blockquote>
-    That was also my first thought. The scripts are not POSIX compliant
-    unfortunately. It&#39;s quite sad as all older scripts used to be.<br>
-    <br>
-    I&#39;ll send a v2 with a package openvpn-dns-updown. Do you think I
-    should add a rdepends between openvpn and this ? My first guess
-    would be to not take the dependency as the dns-updown scripts are
-    recent.<br></div></blockquote><div><br></div><div>I think we can ignore=
- it for now, and in the meantime, who knows, maybe someone will port the</d=
-iv><div>script to posix and the package won&#39;t be necessary in future ve=
-rsions.</div><div><br></div><div>Jose=C2=A0</div><div>=C2=A0</div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex"><div>
-    <br>
-    Louis
-  </div>
-
-</blockquote></div><div><br clear=3D"all"></div><div><br></div><span class=
-=3D"gmail_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_s=
-ignature"><div dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></=
-div></div></div>
-
---000000000000ade7bd06514f7fa2--
 
