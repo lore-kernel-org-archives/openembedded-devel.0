@@ -1,127 +1,139 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <matthias.p@variscite.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D779CD3447
-	for <webhook@archiver.kernel.org>; Sat,  9 May 2026 11:06:14 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10044.1778324772849843267
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 292FCCD37B2
+	for <webhook@archiver.kernel.org>; Sat,  9 May 2026 23:00:31 +0000 (UTC)
+Received: from DUZPR83CU001.outbound.protection.outlook.com (DUZPR83CU001.outbound.protection.outlook.com [52.101.66.109])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21139.1778367622577548074
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 May 2026 04:06:12 -0700
+ Sat, 09 May 2026 16:00:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=GwHZjyYN;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-836ed29d1e5so1224008b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 04:06:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778324772; x=1778929572; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SQcqfm8668KmDi4ZtM/FSfc+/hsQ37Hisg/DdeVf/24=;
-        b=GwHZjyYN738o1O87xqEF0KQbkjLENB2mUqXRxAwl0a2+ioZx5hUSimhFmAK4sfa6J4
-         CPDm9gzmc9RiEuflaybPZzMzIzCEcy/9yumTJfWNda3WCupmRcQ2d03NZrIpa8MqUsZU
-         NnmX/8P5r40rKTswELvY2g82qhyQTMLYQz1tqbjnVxkkOFUubGy17YdfvopGxXvqrfcd
-         g1UXjtmWqmswbViOY53eEc1eaDFuGTrGg5jBAva3vZh1spC9iPJLQUIg8DQ58PBifWBo
-         ToTvN69mbQcw3LwKoaq20OLGcc7CW7GobNr2Mj6rcvxyZEXgjzLzQ5rWKAyd5lZp+KsV
-         qvyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778324772; x=1778929572;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SQcqfm8668KmDi4ZtM/FSfc+/hsQ37Hisg/DdeVf/24=;
-        b=gtzc3n1LIAX4ps4/GsypywbF3orXVFAKdkhaEhOwVUyHLCOBznaivIR1kFWAF+4ye9
-         vpusrU0mYVTI5XTe7Xkx5VriLZ9CRtmx3TizTTzc6LHUB237ea1vCPTxMxwNUK/8tJid
-         muWw7jdfNEex8/rs6SvO2LzBgr35ZbKPM0AmaGJA3Je9DGbS4fTUsViunM6v4HwVoqBr
-         no4W/N4LvIIjVY4IbuOYp1raaxZi+989+Uh3LJBvYm6jaJ2+ZhRigK1Jl+i6SC6B+Qkx
-         Q4VV5p0Imqkr47WLj9NONbgR6j0QG5lL4eF3Cif7ZXYCb7iidkkNDJILhA3f5PPxB7yg
-         PGlw==
-X-Gm-Message-State: AOJu0YyPvMJ069giTkME6aHRagoTu2Vtjq4DnR0F1/MfCY5RqqTWwCX8
-	uaPIo3Qckau2OTAa77EUphtRdq1Ev7PcK+G0ucbIff2Ch80oGsEEQCFQCs7W7JM9
-X-Gm-Gg: Acq92OGhwWDA+0cUtEJzA777p2MeN2du6qwwyuiuO4ESz0+mFP/zZquXEzFemrWT3Hr
-	prVZRv3fepT3QE3OtecTFif5QXBZozA2P0yNtlx7UBSGy1qfmMN4O27wJ6/mG1J7iF1SD5l6nQz
-	Xmm2LlgBcBnq/f9YH7pZchoVpQE+JFGk+V9ftdtohHnnJ/nbsm0XH3oH91VcqmctZygC4Qu3qQK
-	EXhcb0sXOPTwG6n2xc5f7HPACMA1hNpuYDZztyNj6lBseblRLnhPgSkmBFy87kyAfRChXH6D/Lg
-	XEJLV5jfmF94Z6ji1M9J50VnbXSFHU9cqYqkFybzNQnaZDSbnsbwkO+IuKO7A2T6HsxDWlterHn
-	oGz/WeQOpo91xvbeaJVR77PamK4t4p/uKz5lAh9lCvN0Q+vvA9N6eJETUwc02Da4sqgZwIHZ4Yp
-	cxO6PqWPfqkIF5JasU2jSNRHXR+PBfZGPY6cggV2WNu/v3vuA=
-X-Received: by 2002:a05:6a00:27a8:b0:837:a211:4ed0 with SMTP id d2e1a72fcca58-83a5e13ef72mr15993470b3a.41.1778324771971;
-        Sat, 09 May 2026 04:06:11 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-83965d314f7sm15513951b3a.23.2026.05.09.04.06.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 May 2026 04:06:11 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
+ dkim=fail reason="dkim: body hash did not verify" header.i=@variscite.com header.s=selector2 header.b=LH3/Srp2;
+ spf=pass (domain: variscite.com, ip: 52.101.66.109, mailfrom: matthias.p@variscite.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TZSMoJpHeww9sSEjyl5CYGS7mtBnHS0P8q09vQEGNJt+x50Cv05/hufZH2gUYwxmDhgFMbShEGP4Cl9hBy6jmmIqVDdYMmvm/Zpl84VPZECI7YydCoi6hzyxKgTW31cRBvPpH947BokNGMoh4vTMPgyUER6/uNGgU7T/KoEvc4UXDKavbSvTmW+uSjfiMLX/sLQWufaBdIfzaNcEbdevvI2MLc7sTkdIh1xCWPic2Eje6EbYkPkaepbIXCP1KgHr9e0QbK9z95v6/Z3CXoafjhJcTcmb3CinWYBF++9I7vUlkiP9iqFAxRnPIH+La/xsRX6ucxXClCAEipFJQS13cA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vhnPUNXXZ8g/zu59Z3hKtLlIT8zrKtMmYl5OiQORfqE=;
+ b=phZW94UhHHRQ36lFOjEKY5zq+EcGiEvpVcrlVGxA93tGuTWm52qqAYvCRNVYIH2dZxnckL2gLEI0D9OZxQ9gxC1IrdMavgcJ+9fH6FQWd1spkY1aU+bvlgBrED6m1qPYRr4yhOtqhmViE+3vA+7QHmSGvTB0TqH7yx6UtsOAlOWpTmKv54cuTJ8MBi0ckXPALa5xtvgiMymrMrQCLqpJu1psfzvA+hUNe0eGEocr8jdGTXe5FWLfHvRIXl+bo6vnpN9ZgI3yOpYdRXaT1Q8TmK0sHlWuVa4OYOOM5gnet8Qb6zMbymju8IXUIsUrEJuQFJRt2b0mE5sywCQLIUc2bQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=variscite.com; dmarc=pass action=none
+ header.from=variscite.com; dkim=pass header.d=variscite.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=variscite.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vhnPUNXXZ8g/zu59Z3hKtLlIT8zrKtMmYl5OiQORfqE=;
+ b=LH3/Srp2xzJTjNKgM1FuGB2zgbYeC4PINt7Cj3N0g6k81WJnZu31drv2ezq29uzVbF23mScsS3a420lsKJdACOk/JtRSv77ITgLMEd52E6Iwe3OhAy0EipXk3TrBOtO12U6BY+fPFbIEE9aNcnundkTdMugKT/8GDRJ4fg8oKC3ByfQnLyuSkIe1ZdXaLluLIjJUd6hR5GOIRQIEbSaC7u6VHnjTWWKGLI5ec7J6nxrU61zuIRCbM7zTXK299XqIkdU9TecSau5bwpiwA3epD/cdSsSLX/Bu+cWvTR3UsIsJbnCcL42je5zjBU6a/sefqjit0u8k+ckDLnEo1KVTHg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=variscite.com;
+Received: from DB9PR08MB6715.eurprd08.prod.outlook.com (2603:10a6:10:26f::9)
+ by VE1PR08MB5791.eurprd08.prod.outlook.com (2603:10a6:800:1b1::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9769.21; Sat, 9 May
+ 2026 23:00:17 +0000
+Received: from DB9PR08MB6715.eurprd08.prod.outlook.com
+ ([fe80::e021:f0f7:11f0:80da]) by DB9PR08MB6715.eurprd08.prod.outlook.com
+ ([fe80::e021:f0f7:11f0:80da%3]) with mapi id 15.20.9891.019; Sat, 9 May 2026
+ 23:00:17 +0000
+From: Matthias Proske <matthias.p@variscite.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][PATCH v2 1/1] nginx: upgrade 1.29.7 -> 1.30.0
-Date: Sat,  9 May 2026 23:06:00 +1200
-Message-ID: <20260509110600.2726846-1-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
+CC: Matthias Proske <matthias.p@variscite.com>
+Subject: [meta-oe] [kirkstone] [PATCH] fmt: fix SRC_URI
+Date: Sun, 10 May 2026 01:00:07 +0200
+Message-ID: <20260509230006.8337-2-matthias.p@variscite.com>
+X-Mailer: git-send-email 2.54.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: CPAP307CA0004.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:3::17) To DB9PR08MB6715.eurprd08.prod.outlook.com
+ (2603:10a6:10:26f::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR08MB6715:EE_|VE1PR08MB5791:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9fb92d0e-062d-4345-9d80-08deae1ebcc3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|366016|376014|56012099003|3023799003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	LDZrk3mG9RpPKxkYQY2D5//qEkZksSHXIc/AP5Q2ek3FSWKkJHS008Vm7okjRy87bbtDQaYUmCxxJfk/APO3sro3PvjhljQm2Dw1tZapd/qj1ebD9+e4CPg6nfJPIqkynIctq4XaMAm4HBkKhX4LSg7Xh4zxMOnx167qMEOwTbxv5zsRYycGcQ6sAotgnixyv500xxFTSO0q/mSF0prDnh/C8xe3EG56jw37bIhCBfGBHKurP2gY2fQMIrI5BuWzLfz+Kd5JsG2TvCZdMBWMHgeg8DkPKE0onc9wNqww7vGA2UV0W6dKbNk4Ki4C6D9Ng9DJTMtLIlqWuoXGt+C30WqH2MqbLqRLDLDDNsvS6SiKjU0M3SafD1zvBzMq8pSVDOxnWONh6roFbfbPg+RXRwWjeecvSZEH3h1rBNpZ1AyhtLI0UVFxa5GZ7/Xpd5AA6tlzLgWmkS01Pjxo7SBIOhJ2qbyYc2Dy0n+pNnjVIfyWxMvMvNu1bHFmnXlD1ebs4RJLGtfpj+1j5xcdLej++yRrCIC5lN/u1tnQLH0QKSg1K04OqUXCNd8PLMDGAQknD+/eULbvBlm+9BbRuXWKG5W3+fRSd7H8ufdQ7tietEPOWJgM/bgpK80TM36R457xTkQ1ElMBt9P2TrwOhEtvhA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB9PR08MB6715.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(56012099003)(3023799003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?Ui035i9MBNY8VG0KO7jWGDzTUqhWbtnCkSB9t0nFa2zCcgdn5RVpOyqKbHse?=
+ =?us-ascii?Q?ikDFR7Mlk5AbDeIEl1VBvHlbfK5mVAWnl8IH9Rrf2nMyd+4jlKbfDSxS+/Bs?=
+ =?us-ascii?Q?f/U2m9GErBYuYTczBmU1h9Bl2BBc3XE7LZFHhpcQDDiTApsiMJkd29D7S2Y7?=
+ =?us-ascii?Q?F0swtnV8iqcCXMZPUoyU3Lfyt9aKfpwWfBOFbPNNGhbff3Mrn/d12soZjyrw?=
+ =?us-ascii?Q?nhRBQfIFv2M6G8umRGOp7g9BcMjr4rSO+YXubpXXKidKFar+/ue2wqK3uJuV?=
+ =?us-ascii?Q?gISJtVzf+PI+W/m1giuabOrp+DsYyN2mBe4WYMGccxPnWMrUCQkBqSoNfet4?=
+ =?us-ascii?Q?nQz34m8TVmMjDV37Qxlgjk3UVtntOQYrXuBCz3zlYV7YihSfI2WFxBUaAavM?=
+ =?us-ascii?Q?pLwcdpcgqBBv52rwKba0iZC7+61I3VmdTFNUGVWltv4SR2Ms1Ls9JfZ7PWJX?=
+ =?us-ascii?Q?J8AKfwSwPoqq9NacC0s6qG6g05hD5L2nSKOFkwm7BoI5uQNOdk5MGq0QD7BH?=
+ =?us-ascii?Q?2PwRvB70KL6jkQSTimnMqPEbieMzaR4jxrEwQ2kiYTHLUDqCaRWBSNkxf3Na?=
+ =?us-ascii?Q?htYjzfnnpEcsmkCuSAi6XkbkBIabWNouBeN2XELDt6NDSsHhbdhqRCmUpcBi?=
+ =?us-ascii?Q?h8ZrP+XiQK5e6fcPIy0pME7VlT6IfKSR+9w7YzRyAplytEBEuvs6Akc6wFyR?=
+ =?us-ascii?Q?cI6G94xl51uxZqPVAQrDj3yOOp3MpJrUc3DxkVO8KBWro4+soEt16R/kpsta?=
+ =?us-ascii?Q?OiahrADDZhv0dML75KgyCQIFPuG9DzLmrV4v5y/79ykrSAJtI+DkotOfh+ik?=
+ =?us-ascii?Q?1egzvDW0VITA4NXX7mJquVx1rbHEqV1WT3Ngy3+xMt7sCulw3RaybldtmJVi?=
+ =?us-ascii?Q?A8LEne5hZ9mWqs4Fn31CH46T8gyyk+MEbgTiIbZqODYW/XzQuXuDspNKuKQ3?=
+ =?us-ascii?Q?A1+QlSWY6xktvt0IGnLhYcw85Xx7z8EjuKsJ3cTAnxd9RfK6pMJnkxtInig6?=
+ =?us-ascii?Q?m+2ggMPtoyyp9qB+3pU+OV+OBi+q9dkwTzLoCpAy0MYvGuhPiFw+TW5rionj?=
+ =?us-ascii?Q?2WqRB8Mr84hqxofad62heCuc6PsixguW9eiYNYNJWtpDAod099BT82cfh9wK?=
+ =?us-ascii?Q?VisuBgbCFmK1wJLfdJxaYIGo0XSxS/HVL45YJyg1l8uJUWMVMz7VeOEiBd63?=
+ =?us-ascii?Q?zfrJQUmXP9D5YM0x+Ncc6nFuhqq7yZTl92f2EUqAODrQCZi6M0qXbq6EQg6k?=
+ =?us-ascii?Q?OAS48ehJk/htTcCLytFpTqbCzj46EiVAJ4vNfq+uQD63QLsEGSHA7Q1laxNY?=
+ =?us-ascii?Q?eweA9LOIoHjc4nnj+rhNCBgLV6m/Q+quYc77NAsCLnFPM8XBs2WEBPGzb4ij?=
+ =?us-ascii?Q?YiBlNfgk4jgreyn5URJwHmEBI5Z2xB/m4/jhpAbyPstIUWiRZA48AxmoUOuh?=
+ =?us-ascii?Q?hOuYse/1ulTj7+EjGg/ViUyrPkYUbWJjBxCR3LwffUxuvH6L9pCCVzLQxMXv?=
+ =?us-ascii?Q?YE0eYp7gF2x+Y7Aw/70HopU48sWNrsMDKa/Mym8IpX/m3cazWQrkxbd40nPn?=
+ =?us-ascii?Q?5wlz5A4TkRw8do+ybFPWB1qkLKJBGbiuOXV73hcBQceEFRngOfOukPlVX2G+?=
+ =?us-ascii?Q?VnZWufHbusyWp6hJOcK4sm6FuYbuWpsUWj3/mGymbDzm+/+JBC/+3BOlZojx?=
+ =?us-ascii?Q?sToG8NUpIQ0Wj1izP/I/gEEbwJq6wVi5qxzNyZxvnuZOefTaID/ILVmuYeU5?=
+ =?us-ascii?Q?UKnQ8DBCoi2Fa9HfRQpSb1tyiUNc3zQ=3D?=
+X-OriginatorOrg: variscite.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9fb92d0e-062d-4345-9d80-08deae1ebcc3
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR08MB6715.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 23:00:17.3320
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 399ae6ac-38f4-4ef0-94a8-440b0ad581de
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: plmc69NSm4/QOXSdi3pbgRovoYqDGjrXS7JIiwr8ubQYM+t868OsBTIu58vskVRrRXL7pIYCwNEriKFtHKfD0KFpp2y0wP6Wr6YEivxHYss=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5791
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 11:06:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126831
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 23:00:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126832
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+The source branch was renamed from master to main.
 
-1.30.0 stable version has been released, incorporating new features and bug
-fixes from the 1.29.x mainline branch (https://nginx.org/en/CHANGES-1.30)
-
-Also dropped v1.28 support.
-
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Signed-off-by: Matthias Proske <matthias.p@variscite.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb |  7 -------
- meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb | 10 ----------
- meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb |  6 ++++++
- 3 files changed, 6 insertions(+), 17 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
+ meta-oe/recipes-support/fmt/fmt_8.1.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-deleted file mode 100644
-index 9872a6de3b..0000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.28.3.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require nginx.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3dc49537b08b14c8b66ad247bb4c4593"
--
--SRC_URI[sha256sum] = "2c96a946bfb0882a21744ed429770a2123ae1828c7c48665092993ddee91a918"
--
--CVE_STATUS[CVE-2025-53859] = "cpe-stable-backport: Fix is included in 1.28.1"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-deleted file mode 100644
-index 4d884fcbb3..0000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.29.7.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require nginx.inc
--
--# 1.28.x branch is the current stable branch, the recommended default
--# 1.29.x is the current mainline branches containing all new features
--DEFAULT_PREFERENCE = "-1"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
--
--SRC_URI[sha256sum] = "673f8fb8c0961c44fbd9410d6161831453609b44063d3f2948253fc2b5692139"
--
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
-new file mode 100644
-index 0000000000..139fe24dcd
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.30.0.bb
-@@ -0,0 +1,6 @@
-+require nginx.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=79da1c70d587d3a199af9255ad393f99"
-+
-+SRC_URI[sha256sum] = "058188c64bf22baecaa72b809a6318a4f9ba623889c554feab03f7cb853ab31b"
-+
+diff --git a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb b/meta-oe/recipes-sup=
+port/fmt/fmt_8.1.1.bb
+index 54b8fd3d9e..6655d1311a 100644
+--- a/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
++++ b/meta-oe/recipes-support/fmt/fmt_8.1.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE =3D "https://fmt.dev"
+ LICENSE =3D "MIT"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Daf88d758f75f3c5c48a967501f2=
+4384b"
+=20
+-SRC_URI =3D "git://github.com/fmtlib/fmt;branch=3Dmaster;protocol=3Dhttps =
+\
++SRC_URI =3D "git://github.com/fmtlib/fmt;branch=3Dmain;protocol=3Dhttps \
+            file://run-ptest"
+ SRCREV =3D "b6f4ceaed0a0a24ccf575fab6c56dd50ccf6f1a9"
+=20
+--=20
+2.54.0
+
 
