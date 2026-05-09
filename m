@@ -1,294 +1,238 @@
-Return-Path: <zhe.he@windriver.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 572C9CD37AC
-	for <webhook@archiver.kernel.org>; Sat,  9 May 2026 03:08:09 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5369.1778296081682809963
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B206CD343F
+	for <webhook@archiver.kernel.org>; Sat,  9 May 2026 06:12:50 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7150.1778307163807300488
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 May 2026 20:08:02 -0700
+ Fri, 08 May 2026 23:12:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=QLFxOQeR;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9589cf1815=zhe.he@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6492SAP52052745
-	for <openembedded-devel@lists.openembedded.org>; Sat, 9 May 2026 03:08:00 GMT
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=hgx61Qbj;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=95896de4fb=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6495O89g422207
+	for <openembedded-devel@lists.openembedded.org>; Fri, 8 May 2026 23:12:43 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=bmJG7szSUV7Qm4DcVmTE
-	spiyTlSIo0xuZjTMKyh/xwQ=; b=QLFxOQeR1G0V2x7R8MK6m8yyUcQxuIDUG+AG
-	upHTcFZAjVvTgDMmB0NokjXtVTOPIYLdOwxemAULfiDfsvx3h5tb4fE6oOn2kJ4T
-	FEIsf5RwXcYDGjvmmj4V1WiQFdGK7gQmoOaqgVyo9sv+vwS3fNG8pk6kNbwjgtnf
-	dnfLNsniyQADOJskghpD1BVca1sKiO5SxNCa+siQbnj+PorKH2Ot9r/ib2iHVLp8
-	UwImKiEFK2yzUMweFGT/XqUzuVRy1gv7SDGdwoS1Pv/XH6S+JyVTz++G1/qYUn4C
-	Zvsa7UXOL5pnIFXAZv/MNV5eRz+vULNiU2PIFrsmXZyBtnn3JQ==
-Received: from bl0pr03cu003.outbound.protection.outlook.com (mail-eastusazon11012028.outbound.protection.outlook.com [52.101.53.28])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e1uw6g17m-1
+	:mime-version:subject:to; s=PPS06212021; bh=vSxVT/DDWwsy0+HIZbr6
+	GjCfZK9cwOlJkEKSiQ5cTQw=; b=hgx61QbjQS19zEj9AyPUBpUzNXsqnP9Tb+rF
+	+3IS/WVa5M7XZi7vASJAQI08VyGO+3jAO+0ffO5BxYylNpjcnSlQcdTvErkdhGJY
+	Bzv2TLmvROkiY5fZ9oCmim5zXvmu1TbNt/XPgvtOrBUuob0wnq3N3pofeJTgS8w8
+	qyg37kcpS6+srzuGJKYxfG/diDMYISEHKW8+4KUh4YtHtXlPBXaGSMe83qpXv1Jp
+	nYQoYRBBc5THOKIKLCqBY70gAiiT2hctSYsvx2cKshHFqk6vi2Vh/QwGfNBY+plN
+	nIqQqSCpS2aQMmXhe4TOAjburKHtANM0MY7gJfFhDzSMc1V0Og==
+Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012017.outbound.protection.outlook.com [40.93.195.17])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e1hkmguap-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 03:08:00 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 08 May 2026 23:12:42 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PFjSNCcFl/P1U9NISEpqqGHJFKDnwugH3QSsH1StEjQLfuuWri33zROduxc4oN000nxb7uoCyJZ0XpcnU1c6wjjDU1YZjX9vRB3hnzl54IuyEbFX3Y9fHCfmS/Gqwl6BVb6sRrkIqutfETiKSB4WtO9OBCbtd9ilZEPeEhnz9K34zdk1ey3naK/c3DVtxfhAFdqJYR7rLr4G953HiUmQrz9YUOb93XQLlxcp0iJuc17+KsFM+uTrT9zocvd/kNzl7ozWS9q5PtDObgFh9uMWtQPjYEWxCJYzuZRiSTt7QKEN98CH6NL8LDVG0DzA94nZV/qeMqkynuJQ1yw4XufHcQ==
+ b=m2DX8lyPyQ+mLUtnOfkXlhFKjara6FYiH2Z4Ls/PT7NP7ac7T97w2lZaCmjAfBLH+d6KAtgq2YMdBO1DRUB1qeOhXzSUVpbtYo3Sv6IcV0ZvEKi2dUeGGml61/L7zlp/yT4h7jhVrVLtzNsxT8Iikrvb2EefXfd5ibeGUyGJZdin7fhyMrjFBb38X24wLPnjcZhtNrMtnoxuJ52bBYntVAAyNUXy4u7OvJvvfc6DVYLdbu1ih+X0tfyT/m6kYIay9JmTZtWuuECbeXVyVWrcTUlTEOrGaBkKN467s7PJp7l7S3AJTIE692RcwUIk3vcHV+nEP1EFNJt29RlQQlWHRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bmJG7szSUV7Qm4DcVmTEspiyTlSIo0xuZjTMKyh/xwQ=;
- b=EbCyGsqRDeQ6OkEnlfIfODBzPeKh8Hhl8YAFS9MNpcRcNMwP90vBI7bnHJDAnvhahI/QSsweMlJ9a7qQ8t4qpcCtDt2MvbDg7e0ZCxHEkPNZakL52QaAI+n+RAXhO3ScDzJAWOeBASvZXeFvbLDfOSo1x3VN7j/mpdmBoYgqGMmK1Wa+ZZVRyXhqCkwMpW1HjgJU+n89SWW3drfYRZm29D6b+pRURKQXaGArUCvXAXLS/hJw2vtCXoLKGYG3a2h5B+1afnjJmkxrW7B9o75Jq8oWcgWggkYPYketdGwIE75EV/eZrUlmcuNtFYY8CABJCh0t4fLPGZVpY9zFr+A1XA==
+ bh=vSxVT/DDWwsy0+HIZbr6GjCfZK9cwOlJkEKSiQ5cTQw=;
+ b=ZmvACZEfAR1wpFVnGuzLQuH0BdKr5y8pDZnri6Pnt9aQFeAUZbCHmJHTxepuUt7EyhCiYKb8iQ/MLub4p8IXKQlFVcqX+nWwtG3m5Q0wjoVEkzYdFt0IwJHSTCin0MIYRyEyVwuKFzkvCiCvWllDmg/+IKolRzeQP1cc0wPUI/JUBaSU4+epGk8zJJyTMMUFex7fY1zCf0QWGuLEWukz2IYZ9SFWJoUv+iHa2vdcdh22vaSPCn5aw3teit3nrzK4bIZfIFfprTozn69EAVV1wAQGeFtPzHxVM0OUvM43LKP2bXBSVJ9bgAN7XjkIS68+MNip3CQeiL364jMRE4kaGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DM6PR11MB2633.namprd11.prod.outlook.com (2603:10b6:5:c0::14) by
- SA1PR11MB6736.namprd11.prod.outlook.com (2603:10b6:806:25f::21) with
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
+ SA3PR11MB8046.namprd11.prod.outlook.com (2603:10b6:806:2fb::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.17; Sat, 9 May
- 2026 03:07:57 +0000
-Received: from DM6PR11MB2633.namprd11.prod.outlook.com
- ([fe80::7989:d63c:1bdb:60ef]) by DM6PR11MB2633.namprd11.prod.outlook.com
- ([fe80::7989:d63c:1bdb:60ef%6]) with mapi id 15.20.9891.019; Sat, 9 May 2026
- 03:07:57 +0000
-From: He Zhe <zhe.he@windriver.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Sat, 9 May
+ 2026 06:12:40 +0000
+Received: from DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::3432:2eb3:d0a5:7831]) by DS0PR11MB6399.namprd11.prod.outlook.com
+ ([fe80::3432:2eb3:d0a5:7831%4]) with mapi id 15.20.9891.017; Sat, 9 May 2026
+ 06:12:40 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] bpftool-native: Fix -Wdiscarded-qualifiers errors for glibc 2.42+
-Date: Sat,  9 May 2026 11:07:39 +0800
-Message-Id: <20260509030739.1773307-1-zhe.he@windriver.com>
+Subject: [meta-networking][PATCH] postfix: upgrade 3.10.8 -> 3.10.9
+Date: Sat,  9 May 2026 14:12:25 +0800
+Message-Id: <20260509061225.586661-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.34.1
-Content-Type: text/plain; charset=UTF-8
-X-ClientProxiedBy: TYWPR01CA0020.jpnprd01.prod.outlook.com
- (2603:1096:400:aa::7) To SN6PR11MB2639.namprd11.prod.outlook.com
- (2603:10b6:805:59::24)
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SEWP216CA0059.KORP216.PROD.OUTLOOK.COM
+ (2603:1096:101:2ba::10) To DS0PR11MB6399.namprd11.prod.outlook.com
+ (2603:10b6:8:c8::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR11MB2633:EE_|SA1PR11MB6736:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91e7ce79-4c74-4d18-ca76-08dead782b27
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SA3PR11MB8046:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2df66972-595f-4fc4-e170-08dead91f964
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|38350700014|56012099003|18002099003|3023799003;
+	BCL:0;ARA:13230040|366016|376014|52116014|1800799024|18002099003|56012099003|38350700014;
 X-Microsoft-Antispam-Message-Info: 
-	X3NcjUfoOqyfelZ3JvMab1JtfIgH8GqEXSIL9OwlxDvwBza0+pXZxP9BzrIpH0suUHaJJJ8M2LvUEfbZaIJZv/vctmYuaH9DDuNGtCnSuxzV3fMQFqPVVDfBmWlFUbVXbU7yxww+T0n9ZKGUTi6nddLvOVtR3x0pxaz22OD2A6KQ0/5rr/Fl4WGHlrN7JV0I699bM67jxtPcvigqJVj53XIhUaHjIagEZqUHQWYeX0yviXvWtU43qwZeDkL5rAS84NVMqB4s34nTTeBresUG5KtMDgNYjfyaJr7YNOZgYCwlHR0bcqbJPs/Ab1zeEZlcQs/LRxXizlc8PkmZU3jFOrf5kcbkiLAGsLq7GTAaaBga9nQKepgVvhxfOEGnji9W51T4imQkNbEJI7iT0PT/hGaK+S3tcvUWdQ8Vjjopb7FTXgw4G8OFPQM2MMuhGF4Z9084oQqQlekRQKXqe6P7PMH0haIHzDKwCMSJk1iI5UwOAqZyA605qWwp4uGmsqpU9oR0Xr5OiUiI2aKe+eaFfZTbNoganN3iMdoLnP4RbTvvj53/HBIik9dU7hGNH8/p6nYiFXpMChsb7y6JQEgmRduhbai92MlFfSAjGZ/wsxR65cwtWsn9DHV1iSH8FAK6Ju0CJzC0zmIuMWEpnaHD4Q9NR7RCVumUsaJZAE+HqLfXG8vm5wW6tW8xeJ+8XHHe75gsLSpzGmW/4SQa8Qhsq404tvUvw9jsm4dPg7I308UBVTs7LxhLfPwzxntpWs5u
+	L2VBpX7S/2qvYHuF+7lTC1Ic+6BBE9Ms7ChI1aK/ZuTXSPTz2npELiQDxhLAm7Tzy18BAsKAn5JW6iown3dR4/N03CJmXWRvn7ojrOJLo0KsK6WjSDymnFrVNN7dtN+yOGV5wlsVFOQr/SKHytwAPBIDlYV6Lr8fc+2Z/6z/SXGFO1gBWAiSljXmN5k/KdrKpWdD9FyPtPR60xtSOfEwqRayRPXED8JnviS702To4eNsY8r757qi33yzcN9uNdxaTHrrmH4DzQW7TXgx57rTlhCyeyHdHslCAzSVwn9dTcEf/X2lt357BDOf63HtPXSQtAg4Ms/TEDJDeIag5ASZhEfcDgOgNc7aSWHc4tdCuur0uvXl6M7uaK4ejYVMtKywfVCblaINEKt+jTfNs/hiO8u75OcKS/Rl9Gd0BqBxu6f/eww/wP/1EdyLzS2IWyJFmM6ZzhMMBJnNi6iw3v40yjo/KAWqhEpPgHf0V+kiOOwFknIaV5NZNdTFl3s+tUsy7kkWP6IoxjPuk/w5Jzrr6Dftk+l9rmhxOjL5Dg8AyLIOpV4134yj33iMG2Fe0HAj/oYwdit+EsW3r+gOTNkS8HCL61Vw4lbyyihKXIigiRm+EURDBcURLQmQaLT79VoQml5xA/T00Li2XAwJnGu6J4lLe3wdrLYbdJLNs3W5+kCsU5u+SL419MbxsHQrJt844SGpc1nGXwjDvbMGm7an1Q==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR11MB2633.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(1800799024)(18002099003)(56012099003)(38350700014);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?MTNEZjRSM0FiOE81M1Y5T3dkUDZvQTM2bkcrOGtEUGZrcnpneUpxT0NIV0tK?=
- =?utf-8?B?dEs2RHlYZG1VRU1yOWRoLzFHQVNSZVdPWHFDV1kzYkdiejZtWEoxbmZ1emZK?=
- =?utf-8?B?MWtvTnB5VEVrNVlLZUh4M3NZWVV3dUdCd09TTnZrWm9Rc1gwbmIrYXBkWGJy?=
- =?utf-8?B?b1EvalJ6OVp0UmsvOWNRa0tnc2hlQkhrSjZsUzFLOTlzSTN6d2FqWkE5OGwz?=
- =?utf-8?B?cGh3cFNmUUxVWXA1cnA1WmVOcUpxR2lVZTRLTm51aS9MYXU2WENJQVRNMUVL?=
- =?utf-8?B?dUpOZTZPRHRxMWMvL3UvZmttd3RpL2hHaGplYzBVVnVBZjNCdjVzUUN3ZWVE?=
- =?utf-8?B?SDFLWTNwZUNUclZhelFMdFp6ay9zUWFTT2NFTUVjb29GZERTVTZBOXdkUVZW?=
- =?utf-8?B?cmsrZXFvSTNLeDlNd3ZyRk1OT1l3MThyLzI3Uzczd002VkFzNjFBZ09TaC9C?=
- =?utf-8?B?YnpxemZMVW1zVDdiMHN6WFVTR0J1eXh2RzhNY0tOVHpxV3hMOVFuTG1qdGFJ?=
- =?utf-8?B?SkxrQnRuZ21PREV3eWl0QTdpMnpuWlU5cHhQUFdnM3FLOW5ZZWRmUVd4WTd5?=
- =?utf-8?B?M29jdXhUbXE4QlRNKzJiaHloTFRIVzJxYW52aDdaNHpwTUV1TFQ4Z3hiMEM2?=
- =?utf-8?B?elU5MmRVdVlXVFlEcDlFMEQ0bGZnb1FHdExpUjU4bkYxVkMrZ2M0eDRETUNH?=
- =?utf-8?B?S3lTVDY0WitNd3hRWUMrZXlub0EvZFhHL0ViZkkxQXpzTjcrdzAzcDExWW1v?=
- =?utf-8?B?dmRWZmZLQ2gvbVBwdXNwYVJWN2xSUU4yQzFSYmtTb1oxa3dsNmRwWVF6SnA3?=
- =?utf-8?B?Qy9IQlFaeDFnMldDcU9OWk5JbXFsM1RrMDZwRmZJZGN0cUZ5STZ6MC9maHVN?=
- =?utf-8?B?SXZmMWJBMW9YNERZVS9LZkdlcEozMTFITGtlOGFEc3dMK3VQbi9wZExidHdM?=
- =?utf-8?B?VC9Xb1NhSCtsVm5yRUtpcHk0eDN2NC9CMTMzK0dTR1pXR3k4VUFyQnorUTVr?=
- =?utf-8?B?TVpsODJ0MDFjRzJVTmxoUXlTcEhlYnNPK0hXTzZvVHJmbm1ZZWJCNDhaakdJ?=
- =?utf-8?B?NytiZFRCUTRNYzE1d0xaS1UyTUkrL2RKT3RQRS84SFhDbWdTZnI2RmVUR2FS?=
- =?utf-8?B?Z2wzemFGUmJkSVAxZWRicGRUdjZtV2o4dkhYazBneG93alNOdFMvTTNwbFcr?=
- =?utf-8?B?Rk9YWkdSdlUxSUhsNTMrYklIOEs1ci84MWd3N25pQVV2cnQrMWlZVE1xR1Nl?=
- =?utf-8?B?QnRlTkR4RVBLSlJEY0d3UXhiWEZtMlJ1cXBjNXRJS1FxOVdtVU9lL0pJNWp3?=
- =?utf-8?B?REJveEFLdVlTS24wc3lHQ2l2bTVsdmNKK1U5U0FXeHJxOHkrQ1BqTnpBSU45?=
- =?utf-8?B?cFJaQmpVUVdrTWkraWFaeWNGYzAzTm9jMkdSdWd5YUZSUkpJejlKZUNoMXBi?=
- =?utf-8?B?Z0NBay94QUVVdG8ycmEwb1RpbEc0N2E0eGVLek9nSEswQ2dVL0lzaUxSUmZr?=
- =?utf-8?B?MzN0R0lXeVpRTHRMZlN3L3JCREZocDdEcldjd0cxTzNUdENPcmRsOXp1TmJX?=
- =?utf-8?B?bXEvTTZJRnI3bnF5aURub09wLzNkQzA0RVVtTGVhRFRaR0d0S29sa01qaG5D?=
- =?utf-8?B?b1QzL1V0NmdKY3RSOWc2bmVOMGVGcnFnbEh4VEw4TVVRS2c1QjZELy9uVHQx?=
- =?utf-8?B?ZW4yRzBNd3BYUTFReXBsZ0F2dlF5UFhjZ2pWckY1eDNwVTFRNmVIaGNNVVlu?=
- =?utf-8?B?MlMrLzRKUlhLV3Y1MG1qSjlqYWViT2NVUlUyQWtmRUJqOVBWY2s2b0Z6VHl2?=
- =?utf-8?B?WTRQRlpwNVpWSTRqbktQMUZ5QURSMXFZQWZ2TzdGUkpxRE9iVGhGNUExYkds?=
- =?utf-8?B?bTZhSzNLdktZV2dtcDE4d1lpMENURWQvZDgxdEhsekdOamtOQ20yMXprdDBP?=
- =?utf-8?B?SEtvb2FROEc1alN0ck9aMnRIamlnSFhrR2NTQ3Rza1JmSlZrY2pTakVONm1o?=
- =?utf-8?B?SUMwb3FQTVpxMkp1QjJlY04xcnNZR0VSS2FIcytuamVsUWZiMVBxSUYxK1JY?=
- =?utf-8?B?NzNjblgraWlSaTFwTVdPNFRRVWp1L0tUNCtqWmVtNU84b0lsNFRNYVY5a1pP?=
- =?utf-8?B?UndCTVAreG9TakllQ0taalpwWWpodGxnWllXcE1LTDg0QWVqdmEzbGVyb1Ry?=
- =?utf-8?B?SmVaVDhVVUlRZHdMMG1CWnFXVGtpdXB0aEthRmpEMGdhaXcwRi9hV1pZMW13?=
- =?utf-8?B?UHhZa25UajNRNXIvOVhoanFNQjd1SXY0OTFwWTIyOXlOOFNtR2E0UHZCb21n?=
- =?utf-8?B?Si8valRISEhFNWM2SU83VmVYMlZ2cW0yWXZteXY4bGh6a2l0MGQxdz09?=
+	=?us-ascii?Q?NTSUSeea77Pn0cVL44qmJrpTyFBNfx4T+Y0jKe7usgLCDZKFpfR6ZOMrSncI?=
+ =?us-ascii?Q?AJLmdBbK1VB4tf99MLkzJuhaPlYT7Zj/weNscpZYgZIjZ+LPXr5tyD1cmt61?=
+ =?us-ascii?Q?l1cm+2C/QcBzVIbcHDTKeHSnq5a+KcXOPjBzPBf0BY24XyhXjIMm9AWbqX4A?=
+ =?us-ascii?Q?Jy2pjxz+DcVGdvqnyL8O40WhpcA6sL71RuFVvSBSS0FUoEHI9dTgkO9B5sTx?=
+ =?us-ascii?Q?l+sZSR22almu+ybsTXteu9GzyC1L2QcOY9VRJSe2y4R4XbE6GuDL6Dec/8tj?=
+ =?us-ascii?Q?8cb/gVujKKstu9VUn6NoSeMelZL06cgpFja/Rk/C1X7tKh9EPtjj1rK7SmV6?=
+ =?us-ascii?Q?2Csgh9hCUKQ/I8PtOcjDN+IlIFPj5xvIEBUbw2k64GYfi/tcPFCAaPQ9yENH?=
+ =?us-ascii?Q?uDoUlQj5L5HBI7NHpdLVmpt0dMXMEpTlX+mpoRr5sdfiCVvxuZX+O2quOQim?=
+ =?us-ascii?Q?09u8us5LgAd/74GpjSs6qPWTd6VVoloIA6tzq2h7f052v+Xp6015bOsAVS5f?=
+ =?us-ascii?Q?X2unjgzJ7NkHe8gI4GlebjepSz8uineKZFCJqPmfMXVr0+U1l44/tRyTMCjf?=
+ =?us-ascii?Q?r0WajPrAPTPDC8zf9NhX+Vc+Vg+QeNqB2Mm8g8iynk9PBdg2lm85mKq7NRxG?=
+ =?us-ascii?Q?/BNA/AtRYT8T/Eiaq3FWSpUrOn2mAgKEOkDJ/k346WV7slLYHdxSJ8oZyztD?=
+ =?us-ascii?Q?BKlrDH92WGqM6fn25c3hVCZk4b4JZ8duyW9KWHshJpdrgZqHnOA2Qa3HhSsm?=
+ =?us-ascii?Q?pLCmYkCfuUBDZpDTxN1eDjULZUjOZmk11kRVXnnD1RYBo4Pbn8au5SBWK0x7?=
+ =?us-ascii?Q?wgVHh9bcPs4sVQO9REeek+tokJE4rNv06sqJ+D4ulsDqVEUg2d3A+Dz6sLFY?=
+ =?us-ascii?Q?KHdmVw8sOarcCVJHrgBbEr0FcV9NkgDt6Nv4TXp4acJlUJiiCeqJT9eFkVs+?=
+ =?us-ascii?Q?yRVM85Im55mTfxMalJi9p539/yVDSocIRUKhU7vkN2SL67nj2emOuwLohSQK?=
+ =?us-ascii?Q?BPHwWYaD6ZbGZ9q3n+k/a88oVeW0KQ7sAXFS83B+H1Ws3wxtjrXbue/Nk+2S?=
+ =?us-ascii?Q?/iFpJ54WVvOv8DniWFVlgNnnKQJYnEDsB9asOFA6/YppmxA5EM3J9jJLK7bb?=
+ =?us-ascii?Q?sENzNnEhjQthv1v6f/RSySUKQGlDVjdo1vTwbKCmraLRwUXDKX7j5QlP/3//?=
+ =?us-ascii?Q?SOtyMiPLDyW2Va68odsRykVyUqHGRunB/KTw6NXW7RhQGVDdGpE/y5np4DDU?=
+ =?us-ascii?Q?f0PBhT7yIm0f0qNZqGmx6wUeAiijZPTJb4KDExcAehCgbM7K3KxXkSO5U3jb?=
+ =?us-ascii?Q?cAg1QvYp94wOKmrvyQ5Qbl5FkuW4zi3cuuOFBcrBvzTEbAze8YsXxaq9VMFN?=
+ =?us-ascii?Q?NGOOM6VOPK7F17swwEZY1QGLfsccdhwr1pvO7Z6eviKtBhWSD/hvtCZo7cOe?=
+ =?us-ascii?Q?taBy+nyYjN6JTVCv3BK3hgMfLuDEQ8/cBgORENPIcrfawN6aJfNpdMD6QXlX?=
+ =?us-ascii?Q?gPwqSVHU4k4EIM+d8ZTdxk8cAwNziJ6cQAPWi5IM6R0+XzzZXoPoXIeemu0/?=
+ =?us-ascii?Q?KW+rGxiJDOXU1ObHnvgXUClnkvDR20gsMMCbGp3dsgNht9e7XS35/itIVvM/?=
+ =?us-ascii?Q?mQGROxE+aUuNlIksCUsCOOpUjj5d++yLn4owskd+hOnv1LFi4ILkS8mV0QqS?=
+ =?us-ascii?Q?/7mvfTa9sGVnr5DLDgciLRrnZP2+/6+I1az/Eib/BWiTqZxZCu5CRYlE/9n4?=
+ =?us-ascii?Q?Gmu4/Gqc7Q=3D=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	EihFIMDO16P9GJG9SjAymdJ6js6sjkp4T5sGLrDE+CpEkMNIeuD/k1xBBKNmkFViTfjIqcq6rivNBzLYWFgHT9u53ZVQPmaadi6X783aGMOLMjaegjmYqXAfG1eEV31B4DQ23eYL99lfDCFOj29QipNqOCZzTGkD3lL5Z78vUGPbw/vyHhPloHFBZ+/HBCl0PKzQhqJ+QfQ1PkgIGOdWzg3FX90HKSFFLk6/Q+0m6mXYTBPoSpbUGrsZxWRTLyhqkrJLa+Y/RWxuUog6MEOsxw4OflWS3c9VO3D0wB5GAbsX3130H6URyTFjNfiSYtUxgbn6Hz5x0AeEr6tEVUz/Qw==
+	uUYlZMlgnEcIzTNrvAfWRlQVzH9Vj76WMosWb7bujKQTT6y744i3NbsxwH5oB/UseP+1or3TF6zalY9MTUGkMi4Bxl4S05xnSuL0xzUSsFKgi4GJQGahSvptqflqvG//mLCghUElGjanT/13TiZya1znB/qipLuVyCEt1moMsNRYjOqcqFoR4CDUaXsezdAB/UAOydwRkJQPX4dOu9hrJYLE8olm4wTD+m0uyBWElwEGSogRF6uwln3Zh7cGjufkUgBis1GmN1sDGu/LCUw7dZoh+SQn6+Vtw2HEHDoAZRaUIog4b6Qq7kf3LVtRdHD7bNY2jQAR9836xb56AexJPw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91e7ce79-4c74-4d18-ca76-08dead782b27
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR11MB2639.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2df66972-595f-4fc4-e170-08dead91f964
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 03:07:57.2776
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 May 2026 06:12:40.1166
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: x/Bh6jn+qBqC01ahiIX7sacipmBPhQKshxIJT3tPTIgvGKXXTHBHFPMdzMZEgZTqCB723Q4ZVehtPD1rkvJUgA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB6736
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA5MDAyOSBTYWx0ZWRfXzs0EI1SaEzvo
- FBG/FjhpOswaWHni8qUk2BfNUyFCcR3gp59JJpbaplsPgEnylqdlKv5g19/ACoP3PkZZHHlb4SC
- jyf9zQImN2mvvMEkND6+ITTpeaSVqhLk4kHrsVpEgnQmNMrSKpOU5O80PLEHfNUZFi2cKLBuGCR
- l7fpo2oTWPKrln3fz4CoFzjevAL04EJN+sApr9lKun0hGwC/inSuAmt4XpFvFbzJlb05m+XgBHC
- dIfgoTOVTzU8LvRxfqMSrDROgOFXd6askNUCz8N4L7jFEXkHedbja8+l6XSLt2+2VmHyTpCdLl6
- et4wdtGlUisUSJCPoT4me1EbOsIpOGcBUUOzjwb11HWXhLijHkV7mbmNcFxwUtEGLyprBZIRlZ5
- 5JOCc5B6HE3DikaHg2XYhE2AUPDDfODvdb+VG5F0FJpwuSY4BLNLhfzSIr22xOQMKSWqXRJg++q
- cvmQpZKzqg0une8nsxg==
-X-Authority-Analysis: v=2.4 cv=d6nFDxjE c=1 sm=1 tr=0 ts=69fea510 cx=c_pps
- a=B83JijZ7EzXLHUDiN273XA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-MS-Exchange-CrossTenant-UserPrincipalName: kwQ4I6nzWdyQiMweppa7VHRy9h5bGyIRYVFWGAQPZjbQA9G7e7EbulE4A/S7VEptpmoW3OJghhd5yW2cS5ZKcw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB8046
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTA5MDA2MSBTYWx0ZWRfXwbuDHA1avqng
+ plSwIFQZ58VA6yTnBIINvRxxtQ95MuNOdc3RJ/l70YID1yxbEXyI1l0uZmvEwC7TYR4tjcmq07U
+ g/INe1U+zZM3QDWdP+iAF4YOZ1AIbKORf+cznjs3jSCjnglSyKz9aw+q8XmM7RkXbd1n4qcQEss
+ 0RMjeL8CHDqjojFs2PSc6awl/aY+KtmmKXltn4SVLyTc6zmGTAn7pig6+49oun0a42KwVCo3fqo
+ KYWakNfcRYrXTCDzPAmUlCl1z7cO7FN2ex3NIxrchNPLN9yuak5VEaQsIES6M1NX88ahd6t1wRt
+ TB2pQJr6+36Lh5wEDrGuQIok/o/ADzwhD7c77OLSovX3OMMd++E/bWy3qSPv5nXpUl0VxUQBmji
+ RpK6kgKGzZINom3hWW2YFgIVgNeqVD0oF7/M4ndVcTS1xAzFTZTtjGj6GaZxVUjJBlOEvyY65ix
+ dNtTPllKfIh5lMELymg==
+X-Authority-Analysis: v=2.4 cv=X+li7mTe c=1 sm=1 tr=0 ts=69fed05b cx=c_pps
+ a=mbkJAKHg+hX/fqCzz7NXWQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=fTW__CHxibyLmBMfj2wP:22
- a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=t7CeM3EgAAAA:8 a=20KFwNOVAAAA:8
- a=iox4zFpeAAAA:8 a=ag1SF4gXAAAA:8 a=CAchc_BtILMKYomKS8sA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=FdTzh2GWekK77mhwV6Dw:22 a=WzC6qhA0u3u7Ye7llzcV:22
- a=Yupwre4RP9_Eg_Bd0iYG:22
-X-Proofpoint-GUID: aAg95sXF-UlLKhhgW6ZQTW1IBrKs86iV
-X-Proofpoint-ORIG-GUID: aAg95sXF-UlLKhhgW6ZQTW1IBrKs86iV
+ a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=bi6dqmuHe4P4UrxVR6um:22 a=iKiJcTA2PjBS6x5JeXcw:22 a=e1GkridNAAAA:8
+ a=gmDo1nssAAAA:8 a=t7CeM3EgAAAA:8 a=vMPsV_Qpw6bpd4AMeWoA:9
+ a=6ft9yNkZjdd813gQxDxM:22 a=DmCNEmdWNTAeIjfGWauO:22 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-GUID: HpYAPN5ShfjCd7GukFTzUTqVlORirEtt
+X-Proofpoint-ORIG-GUID: HpYAPN5ShfjCd7GukFTzUTqVlORirEtt
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-09_01,2026-05-08_02,2025-10-01_01
+ definitions=2026-05-09_02,2026-05-08_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 lowpriorityscore=0 suspectscore=0
- spamscore=0 adultscore=0 clxscore=1011 phishscore=0 malwarescore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2604200000
- definitions=main-2605090029
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 6492SAP52052745
+ impostorscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0 phishscore=0
+ spamscore=0 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2605090061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 03:08:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126828
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 May 2026 06:12:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126829
 
-Backport a patch from kernel to fix the following build errors.
+Security fix: CVE-2026-43964
 
-bbpf.c: In function =E2=80=98kallsyms_cb=E2=80=99:
-| libbpf.c:8192:13: error: assignment discards =E2=80=98const=E2=80=99 qu=
-alifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
-|  8192 |         res =3D strstr(sym_name, ".llvm.");
-|       |             ^
-| libbpf.c: In function =E2=80=98avail_kallsyms_cb=E2=80=99:
-| libbpf.c:11497:31: error: assignment discards =E2=80=98const=E2=80=99 q=
-ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
-| 11497 |                 if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
-|       |                               ^
-| libbpf.c: In function =E2=80=98resolve_full_path=E2=80=99:
-| libbpf.c:12085:35: error: assignment discards =E2=80=98const=E2=80=99 q=
-ualifier from pointer target type [-Werror=3Ddiscarded-qualifiers]
-| 12085 |                         next_path =3D strchr(s, ':');
-|       |
+Add a patch to fix build with musl.
 
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../bpftool/bpftool-native_6.16.bb            |  5 +-
- ...-Fix-Wdiscarded-qualifiers-under-C23.patch | 69 +++++++++++++++++++
- 2 files changed, 73 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fi=
-x-Wdiscarded-qualifiers-under-C23.patch
+ .../files/0001-Fix-build-with-musl.patch      | 50 +++++++++++++++++++
+ .../{postfix_3.10.8.bb => postfix_3.10.9.bb}  |  3 +-
+ 2 files changed, 52 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
+ rename meta-networking/recipes-daemons/postfix/{postfix_3.10.8.bb => postfix_3.10.9.bb} (98%)
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb b/meta=
--oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
-index fe3ad6138e..edc635517a 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool-native_6.16.bb
-@@ -9,7 +9,10 @@ DEPENDS =3D "binutils-native elfutils-native"
-=20
- inherit native bash-completion
-=20
--SRC_URI =3D "${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz"
-+SRC_URI =3D "\
-+    ${KERNELORG_MIRROR}/linux/kernel/v6.x/linux-${PV}.tar.xz \
-+    file://0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch \
-+"
- SRC_URI[sha256sum] =3D "1a4be2fe6b5246aa4ac8987a8a4af34c42a8dd7d08b46ab4=
-8516bcc1befbcd83"
-=20
- S =3D "${UNPACKDIR}/linux-${PV}"
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdisc=
-arded-qualifiers-under-C23.patch b/meta-oe/recipes-kernel/bpftool/bpftool=
-/0001-libbpf-Fix-Wdiscarded-qualifiers-under-C23.patch
+diff --git a/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch b/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
 new file mode 100644
-index 0000000000..76b9aabb54
+index 0000000000..d09418eaac
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool/0001-libbpf-Fix-Wdiscarded-q=
-ualifiers-under-C23.patch
-@@ -0,0 +1,69 @@
-+From ab21cf885fb2af179c44d8beeabd716133b9385d Mon Sep 17 00:00:00 2001
-+From: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-+Date: Sat, 6 Dec 2025 14:28:25 +0500
-+Subject: [PATCH] libbpf: Fix -Wdiscarded-qualifiers under C23
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=3DUTF-8
-+Content-Transfer-Encoding: 8bit
++++ b/meta-networking/recipes-daemons/postfix/files/0001-Fix-build-with-musl.patch
+@@ -0,0 +1,50 @@
++From cbe5ba0deeba6329eed63eade06bb8c062d0d445 Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Fri, 8 May 2026 22:39:54 +0800
++Subject: [PATCH] Fix build with musl
 +
-+commit d70f79fef65810faf64dbae1f3a1b5623cdb2345 upstream.
++Guard glibc-specific version check with __GLIBC__ macro. When building
++with musl, __GLIBC__ is not defined, so the preprocessor previously fell
++through to the #else branch and defined NO_SNPRINTF, causing a build
++error:
 +
-+glibc =E2=89=A5 2.42 (GCC 15) defaults to -std=3Dgnu23, which promotes
-+-Wdiscarded-qualifiers to an error.
++vbuf_print.c: In function 'vbuf_print':
++vbuf_print.c:208:46: error: macro 'VBUF_SNPRINTF' passed 5 arguments, but takes just 4
++  208 |                     VSTRING_ADDNUM(fmt, width);
++      |                                              ^
++vbuf_print.c:126:9: note: macro 'VBUF_SNPRINTF' defined here
++  126 | #define VBUF_SNPRINTF(bp, sz, fmt, arg) do { \
++      |         ^~~~~~~~~~~~~
 +
-+In C23, strstr() and strchr() return "const char *".
++Wrap the entire block in #ifdef __GLIBC__ so that neither branch
++is entered on musl.
 +
-+Change variable types to const char * where the pointers are never
-+modified (res, sym_sfx, next_path).
++Upstream-Status: Pending
 +
-+Suggested-by: Florian Weimer <fweimer@redhat.com>
-+Suggested-by: Andrii Nakryiko <andrii@kernel.org>
-+Signed-off-by: Mikhail Gavrilov <mikhail.v.gavrilov@gmail.com>
-+Link: https://lore.kernel.org/r/20251206092825.1471385-1-mikhail.v.gavri=
-lov@gmail.com
-+Signed-off-by: Alexei Starovoitov <ast@kernel.org>
-+[ shung-hsi.yu: needed to fix kernel build failure due to libbpf since g=
-libc
-+  2.43+ (which adds 'const' qualifier to strstr) ]
-+Signed-off-by: Shung-Hsi Yu <shung-hsi.yu@suse.com>
-+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-+
-+Upstream-Status: Backport[https://git.kernel.org/pub/scm/linux/kernel/gi=
-t/stable/linux.git/commit/?h=3Dlinux-6.18.y&id=3Dab21cf885fb2af179c44d8be=
-eabd716133b9385d]
-+Signed-off-by: He Zhe <zhe.he@windriver.com>
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +---
-+ tools/lib/bpf/libbpf.c | 7 ++++---
-+ 1 file changed, 4 insertions(+), 3 deletions(-)
++ src/util/sys_defs.h | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/tools/lib/bpf/libbpf.c b/tools/lib/bpf/libbpf.c
-+index dd3b2f57082d..9c98c6adb6d0 100644
-+--- a/tools/lib/bpf/libbpf.c
-++++ b/tools/lib/bpf/libbpf.c
-+@@ -8245,7 +8245,7 @@ static int kallsyms_cb(unsigned long long sym_addr=
-, char sym_type,
-+ 	struct bpf_object *obj =3D ctx;
-+ 	const struct btf_type *t;
-+ 	struct extern_desc *ext;
-+-	char *res;
-++	const char *res;
-+=20
-+ 	res =3D strstr(sym_name, ".llvm.");
-+ 	if (sym_type =3D=3D 'd' && res)
-+@@ -11574,7 +11574,8 @@ static int avail_kallsyms_cb(unsigned long long =
-sym_addr, char sym_type,
-+ 		 *
-+ 		 *   [0] fb6a421fb615 ("kallsyms: Match symbols exactly with CONFIG_L=
-TO_CLANG")
-+ 		 */
-+-		char sym_trim[256], *psym_trim =3D sym_trim, *sym_sfx;
-++		char sym_trim[256], *psym_trim =3D sym_trim;
-++		const char *sym_sfx;
-+=20
-+ 		if (!(sym_sfx =3D strstr(sym_name, ".llvm.")))
-+ 			return 0;
-+@@ -12159,7 +12160,7 @@ static int resolve_full_path(const char *file, c=
-har *result, size_t result_sz)
-+ 		if (!search_paths[i])
-+ 			continue;
-+ 		for (s =3D search_paths[i]; s !=3D NULL; s =3D strchr(s, ':')) {
-+-			char *next_path;
-++			const char *next_path;
-+ 			int seg_len;
-+=20
-+ 			if (s[0] =3D=3D ':')
-+--=20
++diff --git a/src/util/sys_defs.h b/src/util/sys_defs.h
++index 74319f2..6d3c7d2 100644
++--- a/src/util/sys_defs.h
+++++ b/src/util/sys_defs.h
++@@ -794,12 +794,14 @@ extern int initgroups(const char *, int);
++ #define NATIVE_NEWALIAS_PATH "/usr/bin/newaliases"
++ #define NATIVE_COMMAND_DIR "/usr/sbin"
++ #define NATIVE_DAEMON_DIR "/usr/libexec/postfix"
+++#ifdef __GLIBC__
++ #if HAVE_GLIBC_API_VERSION_SUPPORT(2, 1)
++ #define SOCKADDR_SIZE	socklen_t
++ #define SOCKOPT_SIZE	socklen_t
++ #else
++ #define NO_SNPRINTF
++ #endif
+++#endif
++ #ifndef NO_IPV6
++ #define HAS_IPV6
++ #if HAVE_GLIBC_API_VERSION_SUPPORT(2, 4)
++-- 
 +2.34.1
 +
---=20
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb b/meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb
+similarity index 98%
+rename from meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb
+rename to meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb
+index 6b82c04fbe..633e4a7a0d 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.10.8.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.10.9.bb
+@@ -27,9 +27,10 @@ SRC_URI = "http://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+            file://0004-Fix-icu-config.patch \
+            file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+            file://0001-makedefs-Account-for-linux-7.x-version.patch \
++           file://0001-Fix-build-with-musl.patch \
+            "
+ 
+-SRC_URI[sha256sum] = "31d4b3eb8093d823b5a151f571719ff7c0462571bc95e6440d87ca525bfb096c"
++SRC_URI[sha256sum] = "d4b4daab0af2e0c16c0d2d5ac3c7680d5ebd2001ea054f7f2a601c759801bc13"
+ 
+ UPSTREAM_CHECK_URI = "https://www.postfix.org/announcements.html"
+ UPSTREAM_CHECK_REGEX = "postfix-(?P<pver>\d+(\.\d+)+)"
+-- 
 2.34.1
 
 
