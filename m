@@ -1,93 +1,147 @@
-Return-Path: <frederikbraendstrup@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD624CD37B9
-	for <webhook@archiver.kernel.org>; Mon, 11 May 2026 10:37:59 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.46985.1778495869745488955
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF912CD37B5
+	for <webhook@archiver.kernel.org>; Mon, 11 May 2026 10:42:19 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.46467.1778493496100308682
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2026 03:37:50 -0700
+ Mon, 11 May 2026 02:58:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nS94Uv/i;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: frederikbraendstrup@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-67f94c078e8so1759513a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 03:37:49 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Cqb5Zstr;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Y73y4JDB;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: bartosz.golaszewski@oss.qualcomm.com)
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64B7A64a1258560
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 09:44:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=iscswj0E7q5mU+8YQFO+NCGMePrEb4dKyhP
+	iyBaGfc4=; b=Cqb5Zstrh1qaJnQYL4+FNZhrWJJdpzRhQlXAcPRqpAyh66CLQzm
+	ge3cSOGlNQwW+N6h9wGbjX+8YsbkRQZt0A2q5anNGQAesRMoaAQ+haDzXUYZvTnR
+	c0kW8twmlgfs06kDGOQcPGhojl9EP71ffAR3k3WQxmm9vo0stKE587+BHioxdge9
+	ElFsYOHvh/Iwcj45maTYUgleAO55P7VJBBeBtxnloO73H1NRBuvVDvKhja4FmdE3
+	H0nABOp1qkrsUcJTzKICGKGuiDjhhT57WZE0QINNSatW1mmDC3t6D1tU3eJcVA/r
+	iiqW3qu+A5czrrLLgTJfC90F2SIjaK5BMHg==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e3ag20jtd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 09:44:21 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-514b5d6bb45so26253611cf.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 02:44:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778495868; x=1779100668; darn=lists.openembedded.org;
+        d=oss.qualcomm.com; s=google; t=1778492661; x=1779097461; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vnX0leLMxMI9T7ei50M2IKBenxNh3+oo02NcnEfqtUQ=;
-        b=nS94Uv/idFjJjqRioqBCWvfzWegPN5LQ5jqHr7ktcTFC1UM6s1s/l27wqWFLOhhITc
-         x7rpduQt73cR53MTLx189qq+LY631VrBl0umVYTROcPxPt6jurJuend5sz4Wo3myo+SQ
-         +BS7jcn9eahrd33x37wlpg0265xo44PIL7RdIWXJLqqpz8C6zf0yMDll+79W5/8MshiJ
-         Zetp83tXCW5brV9qVwL5q/XBCXfOq4clOSzUr+6SWT25tL6DsgacgwaL0yfNWjfciQpS
-         EbbKjonoZw57nowdtRaIvkam3SiiyxRebQvwqRJMZFigkuqGSZji7A2DDsRujlQvxzss
-         uKiQ==
+        bh=iscswj0E7q5mU+8YQFO+NCGMePrEb4dKyhPiyBaGfc4=;
+        b=Y73y4JDBq9gaWKooicFWEbL8QoDs3RlEHfzw0XCtxzFtHu6roY5eNmzeArPq52hNpw
+         n0EiRspbD73KUi43BoA30wiCeBfiurF+y0zSwSQTDjMJJijXuTqcPw4yGW7CqtyGn8G3
+         us5AuBFqUTqm4Qi1TY5c1gTUdvtxd1Hu8A5G3faQr9ivUmossbovR0u4fn9tmxDpzPGI
+         cCFfhKcty9i9HKffecW3/SLFRpLph7ssSc0ywOmEvWCVhfX0SYCu4PAILxWj7oXZkk4V
+         Eqx2JGnDdl9+qG0gylaEir28WaLOU6yL81+ZKqY6Kh4WT3mw1VzkMrQ9dXjdsNpOyw2y
+         Hp6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778495868; x=1779100668;
+        d=1e100.net; s=20251104; t=1778492661; x=1779097461;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=vnX0leLMxMI9T7ei50M2IKBenxNh3+oo02NcnEfqtUQ=;
-        b=hYCRzhxzB8qDaHK7akU/9Gni4OGKigahNG9t/H0UH+zMf0oS8K3Do+0eMQNqJbfUif
-         mJiI2vNpTpNnbzUi8zU0WmmYm7+LbluCDLdstaptcguPBF3rDZU4OWReU3rOmZ4BNaWF
-         FJNSxbeZJ9m6Z3XsbyrB3QdDmuTshAe4uJZ14n7YB/kD5lz297FtzlVyhuqXFB/BWQwZ
-         VgNE1J17RwFAcNv/Norw68tp2RL6J7Fv5vMzCRByIrrH+cw7DHvf2WuJclzpk/TzGf2b
-         sEoBvCE5EgBT6uzbsnU23iupJbqsHR8AueOoosNAQf4GbhQO2+QJ7rDnBtG3o7AAsRDr
-         0Yww==
-X-Gm-Message-State: AOJu0YwBR4QfxbDjIxfUVRsZkCT3vvgKVupLk1UdAk7NtG0G+WlQmYnp
-	kGlinoGJw1JEJFMugU+3Xu2b733WuzTfVO5JJ//hTDr9ryNIlJfs8e55BsoRqw==
-X-Gm-Gg: Acq92OF8Df1tzMHDiQYvQmrFyfZUb8L4L7EW045/QXJHgAbRD+LAmh5KRtrvAyVFzzR
-	rbAB2gFw32ts1V5B3cbqt5yoN442ZK1LHbQFwklwyv5J4Tl1RmvZth1TS8xXHCow6QS2cVSDgSR
-	V1/HIgXSuJ+FiqIo6ZHTIWC0U8E3cYkHnIhVqOjQx6EQ6vtQ71rLfAmU2M2SnFEN6u8+ha0I/wp
-	EIq+pGlCXrWkVgoL9kOwNtvjRBmT/U++geKGIPSppplzzPtTYHHfifgVjdOnyflb1EhTdE42yah
-	1xSabVmh/Oar5Um30lmqguygVi/4RThExzv5JBc+oq+GDOzeDNNIq8tYr7fdcspE+qVsCfn9bPB
-	q0qTwc70MfYwEpK+isKWneoWJnr6JfoW5P7/Oj/Agh6xf8VCQmnSHZ4MAAnR827zrxcFxpCHqoe
-	KFGttvVuh9VoT2wm4mvOoRvujULiCdesAK5AcWVN869aAY9oA=
-X-Received: by 2002:a17:907:9305:b0:ba7:7f6d:be4a with SMTP id a640c23a62f3a-bc56d132a0amr1349560166b.26.1778495867539;
-        Mon, 11 May 2026 03:37:47 -0700 (PDT)
-Received: from ws.taila4487.ts.net ([80.166.137.147])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bcac11b7084sm473753966b.28.2026.05.11.03.37.46
+        bh=iscswj0E7q5mU+8YQFO+NCGMePrEb4dKyhPiyBaGfc4=;
+        b=L6+6NryxecURnMRDHntx+R1Oxr2JJq7eXms4XnmP+V92mThG3IzT20UCjMzTLyU63v
+         7Ab1YVlQcdRkcHPskph/p+MBJrPFugpQdexiAdmd3tTyyb2sTeItfh3PX60tXKs3ojnS
+         yyUCXJxe650yuOkUIGapatOmLNwsP2n6oE/A2SNi9CpUFs0yo/ZT+KwE2UJJgHSlVg6D
+         7Pm/VnNuL+5YeD4zcd4OvGd09xL/SjfCjc2RKkkJQMCFD6dMJiyRs8zb7F6eYc13sJcU
+         66nP7r1u7Ighzz96qbnbYJCLFD3+h7MqzCeXtd2ch9UajyeyhqD/nfqUSEaj4vnv+KHx
+         MQ1A==
+X-Forwarded-Encrypted: i=1; AFNElJ+X7wTtbLnPB/WeJbozTdilPjFIFgthM2sILTY/xtI+1MQgEvLP0N8e0peUjBPW6oNSlM16hdjqoDPx4QhqPd9G0+U=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YyeQ9n8mhQqkJ2slv4OuxgBpKHqDfEIwNstj7NZMz7kEWUnFp0s
+	e4Lw5uG9vG/JDB9BV/lizvmO8qu7WBuajRT+OtY2+ZlQvfOgsWox37BEPFax/8kZMc9ypNFWJn5
+	RStU/sIduF9CzevAeudAZzl7S+2g0KNVzRAN+w5LPRRH8BEO1UsNETEWdpjTcJEKIM+1sDMm5y3
+	vIeCm2Iacq
+X-Gm-Gg: Acq92OEFIQNr3BrO4yJBKo2fvA5spoe2MTU2E6TF+SAUV5W3e7O/5UPUtRxrsoaHVY6
+	1sFjK985CcN0GqNUskRlGe44LtRF66BW8E3qxcjG0FWeIXcHKaZYMRXmYgjjo9mXcnXLAK7TBNK
+	xS2MvAPhukAvOh6/j9EXjxIDURXhW+Mr0N+FaeN/44nnjQRtrElmLeXcY552CjmEgn2uL6SQ5V9
+	4Yy0/Gb9ihC8yR52pg9268aP9eLZtdqEmStD2D9Gf52IFW8CeFddTmqBbgiImEQD1JuAGl2V5xW
+	gb183SMa0BAFSNVeAT6aCWx9Cf9xIyFDvBCti9tkU7DtZZwW7PzFPgppCRd6nhMUc2YQaNkp7tu
+	A45e/RNVdHrGt6uBzbQzk32TEu6Zff2aViI/asNs3msxU7yVZjQ==
+X-Received: by 2002:a05:622a:514d:b0:50f:340f:ff37 with SMTP id d75a77b69052e-51461c268d4mr303907891cf.22.1778492660690;
+        Mon, 11 May 2026 02:44:20 -0700 (PDT)
+X-Received: by 2002:a05:622a:514d:b0:50f:340f:ff37 with SMTP id d75a77b69052e-51461c268d4mr303907651cf.22.1778492660192;
+        Mon, 11 May 2026 02:44:20 -0700 (PDT)
+Received: from brgl-qcom.home ([2a01:cb1d:dc:7e00:63bd:c2f9:cedb:aa32])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48e6dafa61esm76717625e9.4.2026.05.11.02.44.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 May 2026 03:37:47 -0700 (PDT)
-From: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Frede Hoey Braendstrup <frederikbraendstrup@gmail.com>
-Subject: [meta-oe][PATCH 1/2] glaze: 7.3.3 -> 7.6.0
-Date: Mon, 11 May 2026 12:36:55 +0200
-Message-ID: <20260511103655.3350355-2-frederikbraendstrup@gmail.com>
-X-Mailer: git-send-email 2.54.0
+        Mon, 11 May 2026 02:44:19 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>,
+        openembedded-devel@lists.openembedded.org
+Cc: brgl@kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [meta-oe][PATCH] libgpiod: clean-up sub-packages
+Date: Mon, 11 May 2026 11:44:15 +0200
+Message-ID: <20260511094415.37134-1-bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
+X-Proofpoint-ORIG-GUID: f_xDLht0WoUNNbc5jbo_rh1nBDXOFDpa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTExMDEwNCBTYWx0ZWRfX1WPRtYrHTCz5
+ RH0+o4yQzA6xyv0/8fC/NrYjS+PrCEDUcizVlnCJfJK70OSYieDwrT14E2QUomSuoehFzVAPISJ
+ 99WWJkgCd0UICt/NmYVeBH8q7Dj83CY/JMTytJbPIf9o1nZrt8Fr7OdS4kmFAu8VQf2DDzmOm0j
+ c3fWPS9oVrIxHnOSToKRBI1bgqAYEbNhAsqFOZc918e74fmIIzYf8VrVTpEKVDkuj87hHL5zjKk
+ lOmjPINttMJfW5ArMClkzWFmkM66CUNL+TYPl2rwfJVLIZVnnx6dSYzmjMEw+j+Ihm8+zRiM+b5
+ rK6ICOf8nNMpmSYZ0xp8YjwDnOTaEBqfSgMBAOhFvZ4c/N/rkSogMtu3awKLf+PxM/miXL4AJTI
+ eZykdOVpV+52fokyjV2rSqw663qbtDrlMcvovFZBe8tFn9D6pTgypO5FE/qOMcdvR7YMt6uo4Ms
+ 3LsDYG5Y6TcBafg86LQ==
+X-Proofpoint-GUID: f_xDLht0WoUNNbc5jbo_rh1nBDXOFDpa
+X-Authority-Analysis: v=2.4 cv=NODlPU6g c=1 sm=1 tr=0 ts=6a01a4f5 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8 a=EqU-zman_-j1k7VoJq8A:9
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-11_03,2026-05-08_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 adultscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 impostorscore=0 spamscore=0 phishscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2604200000 definitions=main-2605110104
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 10:37:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126842
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 10:42:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126844
 
+The libgpiodbus shared library and the .typelib file for libgpiod GLib
+bindings are currently packaged in the main libgpiod package which
+should really only contain the core libgpiod shared library. Move them
+to libgpiod-manager and libgpiod-glib packages respectively.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
- .../recipes-support/glaze/{glaze_7.3.3.bb => glaze_7.6.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/glaze/{glaze_7.3.3.bb => glaze_7.6.0.bb} (92%)
+ meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/glaze/glaze_7.3.3.bb b/meta-oe/recipes-support/glaze/glaze_7.6.0.bb
-similarity index 92%
-rename from meta-oe/recipes-support/glaze/glaze_7.3.3.bb
-rename to meta-oe/recipes-support/glaze/glaze_7.6.0.bb
-index e733d166b2..7d0e1d87ae 100644
---- a/meta-oe/recipes-support/glaze/glaze_7.3.3.bb
-+++ b/meta-oe/recipes-support/glaze/glaze_7.6.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea4d29875d83fbbf50485c846dbbbed8"
- 
- SRC_URI = "git://github.com/stephenberry/glaze;protocol=https;branch=main;tag=v${PV}"
- 
--SRCREV = "dbf6caec935b768546587a413e45d033480c4483"
-+SRCREV = "e4d8b406bc509cf236a11bc455fad29a024d5fb2"
- 
- inherit cmake
- 
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
+index 2c8d9f1873..e6de4b0313 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.2.4.bb
+@@ -32,9 +32,13 @@ PACKAGES =+ "${PN}-gpiosim ${PN}-glib ${PN}-manager ${PN}-manager-cfg ${PN}-cli"
+ FILES:${PN}-tools += "${bindir}/gpionotify"
+ FILES:${PN}-gpiosim += "${libdir}/libgpiosim.so.*"
+ FILES:${PN}-gpiosim-dev += "${includedir}/gpiosim.h"
+-FILES:${PN}-glib += "${libdir}/libgpiod-glib.so.*"
++FILES:${PN}-glib += " \
++    ${libdir}/libgpiod-glib.so.* \
++    ${libdir}/girepository-1.0/* \
++"
+ FILES:${PN}-manager += " \
+     ${bindir}/gpio-manager \
++    ${libdir}/libgpiodbus.so.* \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_system_unitdir}/gpio-manager.service', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${sysconfdir}/init.d/gpio-manager', '', d)} \
+ "
 -- 
-2.54.0
+2.47.3
 
 
