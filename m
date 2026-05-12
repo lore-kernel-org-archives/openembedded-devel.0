@@ -1,190 +1,277 @@
-Return-Path: <Liyin.Zhang.CN@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57692CD4846
-	for <webhook@archiver.kernel.org>; Tue, 12 May 2026 02:25:51 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.66819.1778552746681245972
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6494DCD37BE
+	for <webhook@archiver.kernel.org>; Tue, 12 May 2026 04:36:02 +0000 (UTC)
+Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.68326.1778560556928190678
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2026 19:25:46 -0700
+ Mon, 11 May 2026 21:35:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=jaOsXZmd;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=959278113e=liyin.zhang.cn@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64C014ou2925284
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 02:25:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=PPS06212021; bh=cZ7CtR2HDG4mmwOgoSB7
-	p2TZi4aw4YsS1bOwe7tdDfs=; b=jaOsXZmdsbT1rFqOtt6H2gJZAXS2uOspa3Ha
-	8TLFrxxWdzAFISqTsRl/nrMZsunmktYgU2hvXXXxBLacgtrwjBuVl8srLkvO7KoU
-	8k7rdu09obTIf0Up9DzfgNqxeQceen4ykYZezdJBXO3vkzMVw8tkRsYd1+gbBLGm
-	aYHw4SH/TjL75ik7VDTuYe4bPTCPxeFYcsbO6MrEFgDeJULQqJzyh+e677v+++kG
-	UmvKJe20MFaSi85zlV4lL7LKEWiGeEMH/7gjjR2D4fgaW4QxTZvtaOFYF+U1QDLA
-	F/wGC+3mdnyX7Vbe5oli97GFhlk1O5QT9OMQeyOpuui4z7zO2w==
-Received: from sn4pr2101cu001.outbound.protection.outlook.com (mail-southcentralusazon11012007.outbound.protection.outlook.com [40.93.195.7])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e3nvhrarw-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 02:25:45 +0000 (GMT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FSaGu9YY3CHP1BrOH0VpHLgLJOn0kNtG2A7KbwWl5LjRUX4m4epXwxKlamUNOtkG5exFspAZx2MgBq/z2Eb5TYLHwpZF4csGz8G5BKbf8WsuD8taOdrkkZaGQkBbZMM6quPLKMbP4spELdFvo+a1Pa2rqrJKdZTnpJM4q3M5D1jfAo493e6JHgdZu0+MnZ8ISLcIcTIs8z8s1pQaSrTlPas1KiLQtp1WMr9EuDlX6A2mOCo6wM9Y/ugW7A7YiGF/kZbzECRgCOgM91NcJh/HbJ5+h371haDl1870KeKhyQdOdLAn4/EX3RgiHRjBJsUv25Y+4X3/KAG1EaYoanVo6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cZ7CtR2HDG4mmwOgoSB7p2TZi4aw4YsS1bOwe7tdDfs=;
- b=mYhElIhPRQ+2yZLGMWC6mI2NyOyeD70TCZk230IT4ub+tM4GAd7+09zb1M/aduwvOCvZ+QTThigUa+6cZ36zjKtI3Hi6BdmenuTF++ZQ5Ym9v9qCIz3Vj63UDc32+gu+RsrPnGLvRXrGyGhlap5lIBdxls7uv0ODdIfeYQWihYdi/+CMtjB+PepXGxitxgC9Hg0QPotoEbmvkqMCPaCOZ06kiRiN8A2n6EMneKZxLyLBOQtMpn/PGxWLI9TNfgPO+wqw+n4H0S+yeb8MMjhJB2r3vXHyRPDTbKladhNqy16t342RhHhRrbpeNmnSezZcwPPxi+RLuV3ChGOr9Yg8gQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from CYYPR11MB8430.namprd11.prod.outlook.com (2603:10b6:930:c6::19)
- by SJ5PPF20F246184.namprd11.prod.outlook.com (2603:10b6:a0f:fc02::819) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.23; Tue, 12 May
- 2026 02:25:43 +0000
-Received: from CYYPR11MB8430.namprd11.prod.outlook.com
- ([fe80::1d86:a34:519a:3b0d]) by CYYPR11MB8430.namprd11.prod.outlook.com
- ([fe80::1d86:a34:519a:3b0d%5]) with mapi id 15.20.9891.021; Tue, 12 May 2026
- 02:25:42 +0000
-From: liyin.zhang.cn@windriver.com
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][wrynose][PATCH] apache2: upgrade 2.4.66 -> 2.4.67
-Date: Tue, 12 May 2026 10:25:24 +0800
-Message-Id: <20260512022524.1591093-1-liyin.zhang.cn@windriver.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SL2P216CA0173.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:1b::13) To CYYPR11MB8430.namprd11.prod.outlook.com
- (2603:10b6:930:c6::19)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JtkbtZyF;
+ spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-65db820588aso1628220d50.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 21:35:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778560556; cv=none;
+        d=google.com; s=arc-20240605;
+        b=SJidpsf+R42zxrTrhLUJa/obegNRfYussy/l0Hh09CmkI+RQWM9DcIfrIOexgu/MC0
+         p+cYCRu5A6ECEjOegGxrQ/G3WLd1dYUT5cpI/rNkLdFwcvNwgIXvpVGPRRzleSWJMCDE
+         usmHxmeNf9Ymex/7GkWNbweI0576ZkzV2nThztuVP8kXv4XLaUXJ0MOg3ksUnaHyuoED
+         bMys1WHAjGYHeHHDd+haorw/lXDNBVQd1p2sNyQSsZT0D+QuEPL6S6mykqh2dyUkM+jV
+         yFIChiwwe4Wvq4PBnGlIINX/ixdCG9TUiUVoZbhchhkaoeHpW9Qd9ufeTTmqeIzL3sQf
+         HXPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=HmjqrufJmdW6h5vD7gKNFnaX76+32oxRY5TnKqr2NHE=;
+        fh=cX5R9mTFFKWDKYXAnGebsRNb6K1PdcMoSnKyLGEFfg4=;
+        b=kB2mVdkTPeBgbh02jD43NXTXRZRwk41r/7DkEdH6kSnHjNC4fWuShLvnS2D5JiKFT1
+         +fLY5j/HQ8Ai1bbdnc2S7eYm0X6p8XoPROkjxnO2qRjkqUE2rBwDJ8puk7W/VKSFeY9m
+         I1lsbi/TrAhQFPOE+4fiAnC/UyGpAVJOLnz6oYGfdLvorokxQ3H5GLOcBckMfAzCuSOK
+         Sjz0ya4wO3mNY3JXSXEPuuLLYBd2jhq2m/xhZAKK2d0Qw8/AquCwmU8K2yU52Skcw5Jx
+         GQXSQcIvrhHktbjp77zepQQZRHtZMCC7jnqWfpjb4hZR7pKmH3Q8eGdIHkEe0M6l2r09
+         Wz/w==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778560556; x=1779165356; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=HmjqrufJmdW6h5vD7gKNFnaX76+32oxRY5TnKqr2NHE=;
+        b=JtkbtZyF+YXbiQHPwowXMUwDGsJgcaHgT7PKJGdbaIfdBLhDXHYFxgcZ6m9TVHgrGt
+         LmMkruSC25qYDPkCOrqS4vGwb+PcMgXeiURz/vbUGQwTM4oLUUG51N/0rEERhyllHHAt
+         VUSDVkqLbSArPhCfzuI/szJOWHw3zMYsxtBCA8u/uz/sof/ta/hD0X2zF+8nSIGoMWYf
+         47vFIs+wZly1pe9AuXCGEOSncpiDhXZaaO7Q11Rofnzwff31GnRFybd1FRRSqvFja02L
+         ClVmBd/cvkPp1Fl+BruLKtSipgZPHYw8/I8zw6xDME8fK1QzgOFewWvQmOEUX/9WoRzW
+         y5AQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778560556; x=1779165356;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HmjqrufJmdW6h5vD7gKNFnaX76+32oxRY5TnKqr2NHE=;
+        b=MGTm9z/39z4jBcYGG/cpG7nxxbuvevbtNjmsm61SH64YMPz0b5PRXt6T4KF6YfZ0i3
+         qE2U56gkcKspxu1w7cBVmzqK8Yx1EBh9O9C/l7n9P34nZ1YQglQIyzAtbhnoY3Y2tMpJ
+         A5NzRBt/r/zJ4V9A3D0kAEWklceyvLThyCpXmxLVjjnrN3GIQr3Qkc+OfU9DXggY78wF
+         7N96C2IiYRJe2L/EaFdOS7VHC64u2ePCLSDH/ojM6fzdTn/54EPbOnl0begfqin/+xcc
+         BBRkVo2p+830kcVcIKGAsl5YN2iaQ88kZKu6E+UHoohmiqIg0PjJ8eUJywSFUSMTqGS8
+         bnVw==
+X-Gm-Message-State: AOJu0Yx5cBkHcvcxU40CdpGhvIZhP7Fe2kYahefuq9sFPyAhsapZruoi
+	Dx9xnknqSbk9cAGeMZ6ddRLUlzYkb2rPkBPITOjLGY/9mYItjcWQRtZjFTv9fswRtOzoMl9MRm9
+	dLck7joKyjxbhLItZV/7u6SdLjg0wEk8=
+X-Gm-Gg: Acq92OEXM4WSorl+7BJ1JzxChHepzSmEZKN+1OkGWSoQrcJQkP4KySRJsHXROl3RfAO
+	cZwDAWsIuaiuG7/ZXeEtlLK0aQS52wBJZ37UAslfmtMraC9wDgMQVedtgAj9TySJr34giPKoe++
+	md3mn/NT/ueyf+yPB+SqS8Sq31tlc/vo2peHHOX+SxUU+v7J+7U0c5LaAQs0yUjnqyC8WLBGlHw
+	A41a6hUQ2t8luXu/0RE0m9QpxhzPdnPANTvQoO++WG3iAnrh87RRXWfZlviWiOjywi9OM47rLak
+	aUYPmzEZ9Yg0Kw1wOD3zxkajLUgo1Lfk50v2isCzIAfzwwMDTa5vm2w72t6ZV+EQMd7zySATin6
+	L/MpZDk8Wo9b/8K0l/7RZHvR5ps+BpGyzb837msy80VLmFL5BGu7Um/4tTVUULylu7w7F/Hu1re
+	HNDgmd
+X-Received: by 2002:a05:690e:d58:b0:65c:1302:ee48 with SMTP id
+ 956f58d0204a3-65de1382769mr1063738d50.54.1778560556072; Mon, 11 May 2026
+ 21:35:56 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYYPR11MB8430:EE_|SJ5PPF20F246184:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ab7cce3-33e0-484e-4546-08deafcdc3ff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|52116014|376014|1800799024|18002099003|11063799003|38350700014|56012099003;
-X-Microsoft-Antispam-Message-Info: 
-	Eu8m06Fu5eJYMR2yEgnsgJw3kJTrr4aJTwYp5mBTPIakt+JwaNdYZXdh121o5+7Y1Jxfrw67VM8DbFoDYc+dfUfTDIqP4HqhsFaslZOrj+Wbj+w57kFVr19aXkf0lPEtwnUFozRgqdUwCI46SiTbx+a6np3BikHAwPU0EVvVN+URPdGA9MpYi8hx0VAAGrF4iTfrZgDrnI3qEDLEnkbRSy3TWKYwjnssJn6RnGaxHDEHFkSGYjkYf52uU2Xv7/NGWoCbsTeAupTG4gKgdL9IIXRkz/yA77nnFmV8aRc9x3yYrgB795DN2mNmn27Y9PghzRTryCM8W2AINM3fj6vQYFST9c4gqmW6MfOZ6DUSrDtNzKMdKAkTqsMzELlG+QTgLMnog9qi3o2tCEEx1YjcNL9ehOuFpdhlDpB8zS6FmBwDE9DdLay18HmaDG+00E6uPVnzf7ZNSkyyE3aaRMpeJ2mAFN5XwpZqXgjOiXbW00esA2pfqrtJDu0PBhxucov21BXASdcRlXMPNGgq3KGX7Fcsq5WTZdkGGb24zOay1Re/Z2Jtk2jjxF6KibDG1OQ1VWK2sdUFi8wL7/2iJBMSnSfnIpwIvzkv9Sciw963JHBKZwlF4KAG3KXB9U4WDYklhM5M/htZqLXaZOmrwDBHaf7txwIktSKYsF3f2g2ieUrf6RYv2NVPIZL66ZnrOdVGH1ojsnUIPlCEkG5OyAzN9mMcZtiJ6Fym3GBA+OQWV91aMRg0LDRidVbv80INIiNN
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CYYPR11MB8430.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(52116014)(376014)(1800799024)(18002099003)(11063799003)(38350700014)(56012099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?XPhCT4PUXszKQ4jk2SNMbGLHP5WKo4u4Xh98JMbX38sj6H/lzf6L5kY3eeE8?=
- =?us-ascii?Q?tn22g2XvWcGA1MlKp6sDzMi/G8UwaSBS4b9AlfyhTB/4gVycctHt9Gd8Yb3j?=
- =?us-ascii?Q?9BqoUxbPwO9QWGCQsnG5gGAxfGmwPHF606xQScvJLO+e3lW+E9sJ+riTy0F/?=
- =?us-ascii?Q?GIYTZDMRAKrB6nB2m62NIcogIuxSvyGC88Ryzq8gCZh+E23dqDc9NHTTUGRa?=
- =?us-ascii?Q?w8ARWORKsm55vQd+nvqeWg9luOaWDnanp8ixLpXJtFitS8UekIt2NBIJi3l4?=
- =?us-ascii?Q?MuM9jg+nhcGQNnYJV0UMVjZ1CgMeHdVkuEBt022aMiQ6AiLFxjqvasonKBXk?=
- =?us-ascii?Q?viEaBKbdzJFVSwt6Fgb3+E9LkKAKM89O9G5uR5oWwE+MsV0WpOIvampFYZBP?=
- =?us-ascii?Q?lm+JmdC3P5NWtXGHNnqzb38gzK3ca8wCenW4kbiCcy6b4f0iAAxHQcvs2anD?=
- =?us-ascii?Q?tRfPVZqUf7asRoaDdAt67vk4kSbp0bbVYsGr1wRfWNRm/3Yj0oq7DmtjzMQD?=
- =?us-ascii?Q?O/xNfJNXsb1Rrc6pMbO2VUgZrKmJtPvf+7/5w3t+RgzqBIvhs1ut7MMTgUQc?=
- =?us-ascii?Q?KeubnYAGkpRPOVTiB0S5s8PFASWnPjgGTN5EMTNuLbroT4oQHm2HLwIqw7VH?=
- =?us-ascii?Q?VcLfnh3NibxRAG0Bev33KykWy+gPkLYOTZcyIV8OubpVlHY8aRFf7Kd1eoWU?=
- =?us-ascii?Q?TeGPlkPq+Zry0+WpODuA46tW4A/F8wncCnk25gj5Mg/7boqCfQ1eNF5fvBHK?=
- =?us-ascii?Q?ON7Sce3pc3J+HBW3ZI7Axec//CM78sDIUePhLovgSX2zU2zn1QQNbWn7cl7F?=
- =?us-ascii?Q?sd0cZ5tcen3BY5GLGg0aHwe8HipnFsax6kgD6YHhEfiq1X7qb8Qwgn03g3Y1?=
- =?us-ascii?Q?p/Wtmd+Cp7FRELK+v6Htoc3HqNULnVgzJR4RzZdEy4XT1yRbuBVo5EK7A+qi?=
- =?us-ascii?Q?TRKQI/gFitMhUmRrvyCEwJ5UEm8mgtY4ywmE8Kfmn+RFINEfKE1DonHUchEM?=
- =?us-ascii?Q?F8k8lfKdd5pmbkyHsoI2WfaBIXBfNwKG4Wbzg2c3eeAOQoso5gsFSqmRJUCo?=
- =?us-ascii?Q?5byQEBjIEiZIjpsO9Pn8387ym/bpaXhvTOFCXCo/xxgkDODAwvBTv9D3yGxF?=
- =?us-ascii?Q?OaxkHa4VeBlTyyb1T94d/eUm0nuGn511L5ZEVfOBLqjnSKVwYZcCcCPWTOxC?=
- =?us-ascii?Q?qh4oXx9bRrkMcY3vMq3fYxy5bfWPWl4krVzvaKfvrjgvp2iWeKeWez/uQm5w?=
- =?us-ascii?Q?HkLXFV5pMNSpmvWilUG1piA4JkPDdfpGkBDsrBbJ//TASnlVQs7bVPNKtJtb?=
- =?us-ascii?Q?Qw6ZMdiL4aOMxQkX2Uqn/H0fr7O7CtlYYWQZuFckjWQ3XBe9UAvemWpiaZhD?=
- =?us-ascii?Q?BmKO/BHAfH0zsFJb78hpPejXO0UymQNcwzsZs4WReOMsfLr7sho2kwiVarGC?=
- =?us-ascii?Q?gIQLd4hZmeGQYUaKoA6BmJcnRVlLNRPzLjGY8wX5WYX22EwxCiLGSfarrQvI?=
- =?us-ascii?Q?+4G5Peq9Ei+U1wa9inj1klFw/BfrWxo2IDmlaIXuGDUUPWpfyQcBWSlBnK+h?=
- =?us-ascii?Q?Gp2x0FL0+Mm9WGDVDqHsioxz6ad4Jg0uU6h1qpDLvas4+3i3XyP9YTWo5mHY?=
- =?us-ascii?Q?y4dKrz9mHD7wjBw6vSqZRpRpyyNjbmx/OgN+CTzMoy0kYt1yuCB42ThvSmuX?=
- =?us-ascii?Q?0hatMeK23aXWsw3s3XgwO3luRyJQEN0n9NUXWr3DTgzlq2z6wgk9MaiUP+1B?=
- =?us-ascii?Q?MWlBNJ94smbEdUJsleyGHG/Le3RGpag=3D?=
-X-Exchange-RoutingPolicyChecked: 
-	Bs8W/JVwUz/Q7loKeT8Qg5c5eKLkwDOdd7cTqGWAGXFuImxDqeOmJXTBzqEVOG5FhZVjeAORZKnSLB6uB+vCZi1cpEuY/0X9zv1SSkhzWt6HR+CJXfVUlOWJKteMT/Glm619K4M2nkKS2tn1VPH8aztjmSGNDXkYEZSVxE8B5Odci/dLn5UCBUv6jqKRY4ZF+cXza8AdEmU7f2wnHgqfIJcH3MyCqDSonvtuzGGbpufLWbZDCdmwJY8S21ErHjbCcxeru9XNVt3A5s0SYgtpybDy8I8yrFN2P7C/7UkQkEyK4yIR1wgRsEA5osMQHX7lyStybN+JETZOzBTnCnuwcw==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ab7cce3-33e0-484e-4546-08deafcdc3ff
-X-MS-Exchange-CrossTenant-AuthSource: CYYPR11MB8430.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 02:25:42.8202
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RyFG58nYvJll9cE9/d1Lx47yaZ0BsGpBlI2O8387TgQSlbwqUf/uWTu9SRanTKCXmsYVrFpoFLUAn0j5AkLjuisusrOLE4jjvq4W+dE328s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF20F246184
-X-Proofpoint-GUID: -lTJCZ3JW9R1OzHHHt73V6MfXIzaEex6
-X-Proofpoint-ORIG-GUID: -lTJCZ3JW9R1OzHHHt73V6MfXIzaEex6
-X-Authority-Analysis: v=2.4 cv=b4mCJNGx c=1 sm=1 tr=0 ts=6a028fa9 cx=c_pps
- a=2WNp8eytYxiGqAsAszTi1Q==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=bi6dqmuHe4P4UrxVR6um:22 a=klDOsUkWDRETUCZYPvoE:22 a=mV9VRH-2AAAA:8
- a=t7CeM3EgAAAA:8 a=6PmuYHjm9Mjsl3llDxUA:9 a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTEyMDAyMCBTYWx0ZWRfX6jv/I8s2szpD
- 3o2cumAyDhXIE4NCnq4zftLuqR4U++3X3SCothCWCyS77Edk+hE1ylcikZZ7SScjnCgz0oz20dg
- xb+uc4dZ1wGcOt/fPPDvVyS+eilcWeIuYY3KLH724TSz0hNglKkEoWlNysjVRSQ829+lJ7wCc1v
- P4pstAP6bDI9dTPvjJZLyEoOZpWcld8A9qq3YPnb/z7GA8/L3LyyAiHHyJae+R75PVHkktYpSM8
- Mf0SjTVKdcxuu+yiK08DdebC/WFJGM+fdcz2wA3wQux5DiNf4agj/Y8JOyrDeZHGlFXvWYJzDgu
- Hi4r436sFAD+RBdMfbcv9rh+Q+vsIhtWpgh2FJixfEJjyGfrGLyhduNTSnoWnuKYoQlbHTSJIdN
- 3XmlJgAVZyYgIN9ErQ2iArekAQwT1wskJ1N9RpvLaMsNSpWYRKdLnFEGKlgjyr1xvDjJu4ea9G0
- keHbY9MP+i/R6nrjurg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-11_05,2026-05-08_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 spamscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 malwarescore=0 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605050000
- definitions=main-2605120020
+References: <20260511-bash-rr-v2-1-4987ca21e7d8@non.se.com>
+In-Reply-To: <20260511-bash-rr-v2-1-4987ca21e7d8@non.se.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 May 2026 21:35:28 -0700
+X-Gm-Features: AVHnY4JxQqOQT5eCn3lNdfbPb0aI15KltJJxauQ0kSX6YoUmJfCNuwFmXmw3Ano
+Message-ID: <CAMKF1soSKFt_BdUsN-ir=BWRsJOOwPPV9YYfR0HEcYZ2-uj-GA@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] openvpn: create an extra package
+ for the dns-updown script
+To: louis.rannou@semalibre.com
+Cc: openembedded-devel@lists.openembedded.org, 
+	Louis Rannou <louis.rannou@non.se.com>, pascal.eberhard@non.se.com
+Content-Type: multipart/alternative; boundary="00000000000028050c065197668a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 02:25:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126855
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 04:36:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126856
 
-From: Liyin Zhang <liyin.zhang.cn@windriver.com>
+--00000000000028050c065197668a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Security fixes:
-- CVE-2026-34059
-- CVE-2026-34032
-- CVE-2026-33857
-- CVE-2026-33523
-- CVE-2026-33007
-- CVE-2026-33006
-- CVE-2026-29169
-- CVE-2026-29168
-- CVE-2026-28780
-- CVE-2026-24072
-- CVE-2026-23918
+On Mon, May 11, 2026 at 4:56=E2=80=AFAM Louis Rannou via lists.openembedded=
+.org
+<louis.rannou=3Dsemalibre.com@lists.openembedded.org> wrote:
 
-See: https://archive.apache.org/dist/httpd/CHANGES_2.4.67
+> From: Louis Rannou <louis.rannou@non.se.com>
+>
+> The dns-updown script is written in bash which is under the GPLv3
+> license. As this script is optional, it is preffered to have it in an ext=
+ra
+> package.
+>
 
-Signed-off-by: Liyin Zhang <liyin.zhang.cn@windriver.com>
----
- .../apache2/{apache2_2.4.66.bb => apache2_2.4.67.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.66.bb => apache2_2.4.67.bb} (99%)
+Does ptest work ok after this change ?
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
-similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
-index 630c6f3b1b..082f533c85 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "94d7ff2b42acbb828e870ba29e4cbad48e558a79c623ad3596e4116efcfea25a"
-+SRC_URI[sha256sum] = "66cd206637b0d5c446fa7dabe75fe03525da8fb55855876c46288cd88b136aa4"
- 
- S = "${UNPACKDIR}/httpd-${PV}"
- 
--- 
-2.34.1
 
+>
+> Signed-off-by: Louis Rannou <louis.rannou@non.se.com>
+> ---
+> change in v2: new package openvpn-dns-updown
+> ---
+>  meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> index 0cbe4641cd..6ddebde4d1 100644
+> --- a/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.7.0.bb
+> @@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D
+> "--enable-iproute2,,iproute2,iproute2-ip"
+>  PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-systemd,systemd"
+>  PACKAGECONFIG[selinux] =3D "--enable-selinux,--disable-selinux,libselinu=
+x"
+>
+> -RDEPENDS:${PN}:append =3D " bash"
+> +RDEPENDS:${PN}-dns-updown:append =3D " bash"
+>  RDEPENDS:${PN}-ptest:append =3D " bash"
+>
+>  do_install:append() {
+> @@ -114,7 +114,7 @@ do_install_ptest() {
+>      cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}
+>  }
+>
+> -PACKAGES =3D+ " ${PN}-sample "
+> +PACKAGES =3D+ " ${PN}-dns-updown ${PN}-sample "
+>
+>  RRECOMMENDS:${PN} =3D "kernel-module-tun"
+>
+> @@ -124,5 +124,6 @@ FILES:${PN} +=3D
+> "${systemd_system_unitdir}/openvpn-server@.service \
+>                  ${systemd_system_unitdir}/openvpn-client@.service \
+>                  ${nonarch_libdir}/tmpfiles.d \
+>                 "
+> +FILES:${PN}-dns-updown =3D "${libexecdir}/openvpn/dns-updown"
+>  FILES:${PN}-sample =3D "${sysconfdir}/openvpn/sample/ \
+>                       "
+>
+> ---
+> base-commit: 420222862f5a6d95023b8f5f3b7e1808b2264ef9
+> change-id: 20260506-bash-rr-5fd0820519e4
+>
+> Best regards,
+> --
+> Louis Rannou <louis.rannou@non.se.com>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#126849):
+> https://lists.openembedded.org/g/openembedded-devel/message/126849
+> Mute This Topic: https://lists.openembedded.org/mt/119254470/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000028050c065197668a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, May 11,=
+ 2026 at 4:56=E2=80=AFAM Louis Rannou via <a href=3D"http://lists.openembed=
+ded.org">lists.openembedded.org</a> &lt;louis.rannou=3D<a href=3D"mailto:se=
+malibre.com@lists.openembedded.org">semalibre.com@lists.openembedded.org</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Fro=
+m: Louis Rannou &lt;<a href=3D"mailto:louis.rannou@non.se.com" target=3D"_b=
+lank">louis.rannou@non.se.com</a>&gt;<br>
+<br>
+The dns-updown script is written in bash which is under the GPLv3<br>
+license. As this script is optional, it is preffered to have it in an extra=
+<br>
+package.<br></blockquote><div><br></div><div>Does ptest work ok after this=
+=C2=A0change=C2=A0?</div><div>=C2=A0</div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
+adding-left:1ex">
+<br>
+Signed-off-by: Louis Rannou &lt;<a href=3D"mailto:louis.rannou@non.se.com" =
+target=3D"_blank">louis.rannou@non.se.com</a>&gt;<br>
+---<br>
+change in v2: new package openvpn-dns-updown<br>
+---<br>
+=C2=A0meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.7=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a> | 5 +++--<=
+br>
+=C2=A01 file changed, 3 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/meta-networking/recipes-support/openvpn/<a href=3D"http://open=
+vpn_2.7.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a> b/m=
+eta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.7.0.bb" =
+rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a><br>
+index 0cbe4641cd..6ddebde4d1 100644<br>
+--- a/meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.7=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a><br>
++++ b/meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.7=
+.0.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.7.0.bb</a><br>
+@@ -47,7 +47,7 @@ PACKAGECONFIG[iproute2] =3D &quot;--enable-iproute2,,ipro=
+ute2,iproute2-ip&quot;<br>
+=C2=A0PACKAGECONFIG[systemd] =3D &quot;--enable-systemd,--disable-systemd,s=
+ystemd&quot;<br>
+=C2=A0PACKAGECONFIG[selinux] =3D &quot;--enable-selinux,--disable-selinux,l=
+ibselinux&quot;<br>
+<br>
+-RDEPENDS:${PN}:append =3D &quot; bash&quot;<br>
++RDEPENDS:${PN}-dns-updown:append =3D &quot; bash&quot;<br>
+=C2=A0RDEPENDS:${PN}-ptest:append =3D &quot; bash&quot;<br>
+<br>
+=C2=A0do_install:append() {<br>
+@@ -114,7 +114,7 @@ do_install_ptest() {<br>
+=C2=A0 =C2=A0 =C2=A0cp -f ${S}/tests/t_lpback.sh ${D}/${PTEST_PATH}<br>
+=C2=A0}<br>
+<br>
+-PACKAGES =3D+ &quot; ${PN}-sample &quot;<br>
++PACKAGES =3D+ &quot; ${PN}-dns-updown ${PN}-sample &quot;<br>
+<br>
+=C2=A0RRECOMMENDS:${PN} =3D &quot;kernel-module-tun&quot;<br>
+<br>
+@@ -124,5 +124,6 @@ FILES:${PN} +=3D &quot;${systemd_system_unitdir}/openvp=
+n-server@.service \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${systemd_sys=
+tem_unitdir}/openvpn-client@.service \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${nonarch_lib=
+dir}/tmpfiles.d \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
++FILES:${PN}-dns-updown =3D &quot;${libexecdir}/openvpn/dns-updown&quot;<br=
+>
+=C2=A0FILES:${PN}-sample =3D &quot;${sysconfdir}/openvpn/sample/ \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 &quot;<br>
+<br>
+---<br>
+base-commit: 420222862f5a6d95023b8f5f3b7e1808b2264ef9<br>
+change-id: 20260506-bash-rr-5fd0820519e4<br>
+<br>
+Best regards,<br>
+-- <br>
+Louis Rannou &lt;<a href=3D"mailto:louis.rannou@non.se.com" target=3D"_blan=
+k">louis.rannou@non.se.com</a>&gt;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#126849): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/126849" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/126849</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119254470/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/119254470/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000028050c065197668a--
 
