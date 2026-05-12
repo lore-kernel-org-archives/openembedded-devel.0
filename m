@@ -2,270 +2,296 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9437CD37BE
-	for <webhook@archiver.kernel.org>; Tue, 12 May 2026 01:00:30 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.65461.1778547622463099251
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B9CECD4846
+	for <webhook@archiver.kernel.org>; Tue, 12 May 2026 02:03:01 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.66489.1778551379366494632
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 May 2026 18:00:23 -0700
+ Mon, 11 May 2026 19:03:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=j+lG0Ynb;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9592267a27=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64C0j0AM2999107
-	for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 01:00:21 GMT
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=sToBaVJX;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9592267a27=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64C1dWOq2667939
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 May 2026 19:02:58 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=PPS06212021;
-	 bh=BXBtJRf3vKPVVsrXDKUWITLbnUfr31ymqccr+UTw/PY=; b=j+lG0YnbODnO
-	zIZbWujii+g9xuVst8Z2dMHAJNFirbF9RnB9sMCssvml5tdCAdlMSGMxSsGYfni7
-	3HN7SHF2hBan1uh7okXgZMVKXhvIO9I8IBfUfWvRGktV50aT5/qGGhOdLnSKgJUm
-	6Xo+ADQwgGRpfywz9IAOWYRaW5Wd4FvgGgEIE7ctgq14M+uABUTTQbRqhuwS2sDK
-	7GrirNJ608JNEbbvExlD65jU4+cvC79gYRIjFzH/HG1UQrEsmAHw4ddzC3mUszd2
-	jPPrQEHo6izyH281AIy6lLxnHYYz+6GXwVwPsFRIuugBiUcJ+XrcueZyYmgu2BhF
-	iLJ3h3v7Nw==
-Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11011036.outbound.protection.outlook.com [52.101.52.36])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e3nvhr8px-1
+	 bh=xQMUJfSgbb9Ijh8YYQJjq9V/D++5v5QhqY/CLIuC0vg=; b=sToBaVJXvFQW
+	tawLsigc6CKdI2wpAaD3rmIF4dKTWWCQ95EmJLanAL7TGApHS1wuqlu3vpbndvTX
+	1y3VlVu5Lxo7oRDxZ02fmbGEDMa7KKtT6jXQAmKBTzCwSYv/0FqhDctUa28q+c2H
+	BY4roT2WGZuNEtkxFPwBM6PGIj8e6i2Kav+LG35jr6Iddj72wOZBXoab/IIUgoou
+	nN2Z6Zlu23CLyH2nTkA/YpHU5Ql6zqyM7ony1NfKuILkD0/eYnY6MC2rgfQ2VXUy
+	XPe9FQWOOHaZauzt/SwRlytpjJOlTOXqEc87StrcmE/WFOk57e+Kw50MN3nfYkqF
+	A4WPmunO6Q==
+Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011064.outbound.protection.outlook.com [40.93.194.64])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4e3nv90a16-1
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 12 May 2026 01:00:20 +0000 (GMT)
+	Mon, 11 May 2026 19:02:58 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hgFa6rkNxDvTgPhsf92VPS6dpDeBk9tiSABsk1P7O1x+ugM7MIQKlUYbpMJz0VuIlTGMBWElGAz69B1kEfFscZ7ziveW8y+LmjfLJsWpXvhPJhzscWWn4/Jy7nzTWcc2Win/oIt/dVQxR0KgLPannuKEG4YiNRbyPRLyIggnuojkKch5Fo2ze7iyH0kzJ292sf3Yh4F0jdHBFGSqDhWwzJ4q7+diJ2MqnYtbCJovU9F+ccx2ULaW3hd8fJbGbYOC0gzDC3L3BYGyrUBBtQc/LxsjeksDeImpYdHScjjAzFfOTAakdA8alzZcGE8tGy6wB0FKD9RHoRBT0FivTlYFKA==
+ b=n2rYqlKlOgThn2Hp9hZdm4D0T+sJx8FBxXTGNdWSLm2ANw/dDL1T2iy6v0emmMQlL+FFWj3oTUyTqtGXCQ75upq5PdqoIbYrYE22FM0Y8Tai5rHZXRD/kQ+3mB74jrZJPqPfDc60sWDN9OpjVUXzw9GGddoAFoEqnv8oDkHD+TXwozhmycRS/QaYAe3bgBOVtuy9woFuWJyGczjRxfuwzs9Gg6mr0lIAL4UwvkIk9wYbHEHz30tzTJjALgLjdiPVXnMSx7XIYrorw78XBQG8PCXwwfS97DFl0IC9TndLW2WjNMMu1VnqYrs1HJIMnwABb4Wb/5RyCaAQXlwqPhkdNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BXBtJRf3vKPVVsrXDKUWITLbnUfr31ymqccr+UTw/PY=;
- b=X7fl7qsYbQWFbZS82EfXEcdzlE80EUCwMoxDNMIllrxwuoX1URkBquXNvTTTSgt94GDfFgW9ZyLilkRxfRbVTjdFKLQptpzr2LmMs5R26XfYbkUHyCUvaGQHNPi6sKLLcwpVRAFeNoqY3Yvj40D53KyGv7fzx2B3BHaQTPJh0gg+eEP/C2+45qFhXS4GIKzIc9XzIo71BYU8szrJZEb9P1Inp3sbqA9GWpKc1ai47y/RXW/7OlABdhDtViCxnXQtsMYzGDzCMO1g9BpTNWtbqbwU5CTsx3O042yfULDUo+ILSD/+6eDqObtRJPqZZgj23BADGSqj1MbvOZil7zSdNA==
+ bh=xQMUJfSgbb9Ijh8YYQJjq9V/D++5v5QhqY/CLIuC0vg=;
+ b=Pu2Asi+oX2M0SzvAYZRb8Q7x6MfDKxxeyUkbTP9rXArlOA+PMEFp8bZdCJw0/6NTZ6osYFfagWYo6lHIxaxJyXB7+1t7Nj2D6ld1tT15d6VmoKZdSRERk/bjkRzrIWRJr4fWIiBKnEbwI8HVmrwRRkAQMlN/MwI2iMReKVIbCR10uWEsmXSTTnWc/LWj3Z8eoUxPmXOIPWnkkbvq9FcLo97NINGtFvBjgvuWJulLRrPRqywUXPEy+kDlk6+UCvKxwwp12p+DIII9d5kKSvVFRLtv5aMIqxaWN0SrTUQYn5+3erbAU2ntf4dlH0oX5/0WN7QwFNM5fa3RZ+MnBFBCKw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from DS0PR11MB6399.namprd11.prod.outlook.com (2603:10b6:8:c8::5) by
- SJ2PR11MB8497.namprd11.prod.outlook.com (2603:10b6:a03:57b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.21; Tue, 12 May
- 2026 01:00:16 +0000
+ DSWPR11MB9955.namprd11.prod.outlook.com (2603:10b6:8:369::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9891.23; Tue, 12 May 2026 02:02:56 +0000
 Received: from DS0PR11MB6399.namprd11.prod.outlook.com
  ([fe80::3432:2eb3:d0a5:7831]) by DS0PR11MB6399.namprd11.prod.outlook.com
  ([fe80::3432:2eb3:d0a5:7831%4]) with mapi id 15.20.9891.021; Tue, 12 May 2026
- 01:00:16 +0000
-Message-ID: <836eae13-2219-4e9a-82a0-660cd230e687@windriver.com>
-Date: Tue, 12 May 2026 09:00:09 +0800
+ 02:02:55 +0000
+Message-ID: <beba177b-c00d-4ecb-95d3-0b1b64a94dea@windriver.com>
+Date: Tue, 12 May 2026 10:02:50 +0800
 User-Agent: Mozilla Thunderbird
 Subject: Re: [oe] [meta-networking][PATCH] nftables: improve reproducibility
-To: yoann.congal@smile.fr, yi.zhao@eng.windriver.com,
-        openembedded-devel@lists.openembedded.org
+From: Yi Zhao <yi.zhao@windriver.com>
+To: yoann.congal@smile.fr, openembedded-devel@lists.openembedded.org
 References: <20260511142142.3620917-1-yi.zhao@windriver.com>
  <DIFXDYIPL4EY.3BAEX7B7MNLX0@smile.fr>
+ <836eae13-2219-4e9a-82a0-660cd230e687@windriver.com>
 Content-Language: en-US
-From: Yi Zhao <yi.zhao@windriver.com>
-In-Reply-To: <DIFXDYIPL4EY.3BAEX7B7MNLX0@smile.fr>
+In-Reply-To: <836eae13-2219-4e9a-82a0-660cd230e687@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: SE2P216CA0132.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:2c7::11) To DS0PR11MB6399.namprd11.prod.outlook.com
+X-ClientProxiedBy: TP0P295CA0016.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:5::20) To DS0PR11MB6399.namprd11.prod.outlook.com
  (2603:10b6:8:c8::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|SJ2PR11MB8497:EE_
-X-MS-Office365-Filtering-Correlation-Id: e02fb741-2882-4e28-6883-08deafc1d438
+X-MS-TrafficTypeDiagnostic: DS0PR11MB6399:EE_|DSWPR11MB9955:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11f0bb78-f70c-470e-be4f-08deafca954c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|4022899009|376014|366016|1800799024|12006099003|11063799003|22082099003|56012099003|18002099003|3023799003;
+	BCL:0;ARA:13230040|376014|366016|1800799024|4022899009|12006099003|18002099003|22082099003|11063799003|56012099003|3023799003;
 X-Microsoft-Antispam-Message-Info: 
-	f0/jZy3dO6ZBOFWUJLOv1YDj2sK9OpMg+ScgP0lDmqA3kFr6VSToUX7cfqcyPDkrZkHySGY38bYlH64hsGutKxhyUG3GIDquddilmfh+z+ctqFJPBHQcVM9Npea01zYMOFW7XUrW4xS6yQaD7PjGyHeMdFuo9NOMi63oseUGouM8fWd+68Vf/Un/2oe7nK1HPkLikYC7IHPhfq4r6Zk+RfaLRjIffDNpJIcHwb9v4LOwftCS076nL9wTdOkoO2iqT+EwLQnbKK4e8HQF3KI8AdeFKBYSD4sRZZkZgcgLb6pojuMEAyGhLvQLZpF9Q44fs38Z8Wb6QU+CqANuCq1THGcRZjh9zfK4WjKs99zISQZpBoRyeBBzfNoTiNLjjjxsDII5cA2W8h2PEJoTwRSLP6Dfu6ungZdkkf+0l3zNZ+RMaS9CmC6khuf2306FtJ70/kKNNegT8aQ0A2awNmi5ehA4NNMsEuw4xDLizziHHOZOH6EcMR1Q7eXBj4yDb1F9BvEAtiftM1feFlSjpUzLDX27FI8HgR6CoPKWIr6r+AZYJJ8vtwVjuLPbQFSjrc/nMi28O8lnHI7IYJrmr3VSXl4H7+kxvyFiWeyjBwL2llu9/dWVqPFfoTs8T2Q0NnrljnTAZqkNRZVhEOSNFmdFag==
+	9oqAxb1FWzecuYazGc2vN2bh6lBu3EUxnmxYCS63VlqsXJFdm13JCLbw3fNuxsOI1c/cxdL3hpqsnodhfpHa3TGMSjVcGm1mmsH8m3Ul3VQ9VAIWDH9KQsRzN8hKxmeWmGajsII1fcJ7LMDwVfjcHqdOyAk7cK3Fx+KG25WQUmHpfKO3MrzCVrGZMrqTw27/GTn0dXMMcdpcuval1jrVEqJFWjDApZBu96diWv1YzhayN7HYlnYZPxKLu1sLbNjBXR6MdPGVu+cCROJZBexc2G/Yu44s6bpCuwAATfu+RKC8UmLhU1z9uMqoPui6p+fZ3xBpx6v9QfufWD+xFegjlQBdOkcJIDoRvS/5r+HB2jRKESfYlcBUxmO9bB3sBxKHAIwNBM6OmyN1EanPxLAL8n5kVoUcfRFq7t2bYivuB8ZbMMyyikOjMeh0UiRdxe3jCqB5PDsSfophmKEItQ9XI/aG5vSpSlB0KzYGwdOpajGUZXUU1Lli3tuWlpOTNlhLmw9ZLcttF1iqLzuqF+jfyqYgfGH+kTEYHmWLYL1QZd5kwH3pnlWg4FRlxudaVB0mgj2xFFsdGIFdgAqPqjRLDJ0Bt2whOPKQsZbS9FcJZLTId+gZg//YobNgVEw+1WBfsVF1/sg8vQk4x7uCRufo0A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(4022899009)(376014)(366016)(1800799024)(12006099003)(11063799003)(22082099003)(56012099003)(18002099003)(3023799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB6399.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(4022899009)(12006099003)(18002099003)(22082099003)(11063799003)(56012099003)(3023799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Q1hTdHZBd0lIVHFKOW93MEpuVXZMVFFCSVhWc05xL0dPdmY5SjBrTEVXeS9x?=
- =?utf-8?B?ZjEzaVJkbC9BWTJBSE1vRzlZb2xXSTM0Nlo3WmdxL2pZV213eTZ6TE5SdHBs?=
- =?utf-8?B?L3Y3eWtFcmg3ZzEyOEl2ODlhVk1yb2YzWGIyZHVDdEQwMWt1Wm80UHhqZkxI?=
- =?utf-8?B?UW5BMUtkYnVoUTdsWW9ncnZnclhZMFhpUTFlVmtubXRBekpwTng0TmRjSDZM?=
- =?utf-8?B?Um5DUmp1Rkp3TjJnTUpVOERzMXQzakhVVzJBVDJDNTJZMi8zY2U0OGdUN2pu?=
- =?utf-8?B?WEJJdVZ6enlYZEhsTWNjdUhpY2g0MWJIYmhDWGVjcDQvSnZGR3k1cUlkTUVr?=
- =?utf-8?B?c1RWUXFiMklnM1dCK1V3emdVYzZjc0Fld1dONk9zS2Uvd21TZjREaVEvZ3VR?=
- =?utf-8?B?em41Q0tPUTVWTFMrWFQ0THh2bWpXUWpRQ2FWRnFPQzhMU0V5dUtDU09RdlNv?=
- =?utf-8?B?NWZhNncxeDNVeUxTWUZsN0JTV3pLSWJMaEdCVEI3TWs3VEc1V3ZUSnk5OTY0?=
- =?utf-8?B?UUt4cm5nNHpKNFFCdDltVm9YYWpTVGNDaEFPemFHT1hxdFNqRVZRTU5qSjFv?=
- =?utf-8?B?SjhtZnRNMTZmT0ZGRXQrcmVxK3FRNDk2aWxldXFlMHVZTkt4R1doY1hxK2JM?=
- =?utf-8?B?RUJsVHVtR0xhNDl2QUNld0psaStCdUFvbFd2ek9tN1VZWGZjVllEaXBuLzR6?=
- =?utf-8?B?elM4VmUwZFQvZTFMaEJlOUE1bmhhQjJyWXNqTW5aKzZKM0lJWWlHdmJYUHpj?=
- =?utf-8?B?eGJSMEZWQnZNaEtudHo2RDhkcXQ3MklmcHVvWGVHMTRaVThjTG9ZcXJ1UVlC?=
- =?utf-8?B?K21XdXZmOW80WEVOZzY1TjJ0VytXbEVmUmtxWTd3Mnh0S0JPWEx2OWRaQW9D?=
- =?utf-8?B?akxLcEViaXZUYXdSd0VRczlML1FESVg1L3lkRUhVY2NXN0Y3bXJCV2ZZa0Rk?=
- =?utf-8?B?ems1N3c3YUV4YzEyYk9ZU3RjRW10VVlodTRUaC9ZOWp3TkhOUmJ1R3lBdVJH?=
- =?utf-8?B?cndEeGJwbS9acWIwdzFmYUtFb1pQWTVFYXNVcldLSHRuVThmUHhPakszSUI4?=
- =?utf-8?B?QVdrenMyc2NWVFRJcis3ZEk3SzNuSXUvQjdYaE9lR2poWjJEd2hFNU5zT3JC?=
- =?utf-8?B?cTJOajIvMjV2R3g1MVYyYUlRZVkyR3J2S1MrY05MbXZaUG9ZcEhGamtvVXVV?=
- =?utf-8?B?VVBkSkVlZDY0eEJnY1Zxc2ZhazErelBSR0VuQTBleXYwYjJUbk0zdTFFT2g3?=
- =?utf-8?B?RjExbkxJNHdNM1NhL21xNlpzYm1wRVJhREJ0Ync3blhKME42VHFVcHZmM2VJ?=
- =?utf-8?B?SEt0bnJiT3NtN2JXVjhWTFFFMXY4bVZzcnZVVGdaeUtSM3ZKSDI0aGxjdFNL?=
- =?utf-8?B?dlpUMjBISTZYbHJxWTRpZFZ1UWxXWHFPcFVBOGwvclFkY2Vvakdjd2czRnI4?=
- =?utf-8?B?d21kUjRiZGhnRStua3VRQ0lTZ09LUHZxTXVzaGZnbDN5MksvYktxUC9Wd3g3?=
- =?utf-8?B?WnNVVTJsOG9ZNHhyL3JFbDZTeDlabGZYSnlWMVY4dkhtUlI3dkUyRTlUUm5q?=
- =?utf-8?B?M0hocGxJYXNjeFZhQ3ZhYnA0UzM3MEYzUGJoVlBzRDRub3ArZHpueHQ3QXdX?=
- =?utf-8?B?NTl2enBnVnpNWHg3Tjc1WVJhMzRBTlN6em8wUXJ0N0RyNkwwcmFFc1lkME9U?=
- =?utf-8?B?Zldob0pMZ0l2QXRmZ2VqL3c5bG42US9FRU9nTExpQzBkdEFMQTR2WDk2SzZl?=
- =?utf-8?B?eWJLZm1YYTBkaVVoS2dvSGxkT0JZemR3RmYzcmliWTllR0lGTEhlTVd2VWNE?=
- =?utf-8?B?KytpZHV4WUxNOE1IZy9RVWRDY0k4R2g4UmJ2N05BRW9XeHdBRlJHQWJmRXpX?=
- =?utf-8?B?TFhKQmwwd0FJREppUGdKVU50WmhhbmRxTG00SGRWWHZtcWVYSHBMUlUxaGRQ?=
- =?utf-8?B?STBGdExPZnM3VnFXVkVaSFMyZVM0VHJ2TFQ2ZjZJRVFQOGFuUWQ0MDI2MzNW?=
- =?utf-8?B?TmlXTllEemc3RUIrWGtRc2JsVWxtWUplZkFSMGZBRUp1TVBMMExUYTJVeHJi?=
- =?utf-8?B?K2kyVlBRSm1YNjFwZW81OTVOTzgxRWNSVmFLZHJGQUYyYkg5aGUvVytzT2Ir?=
- =?utf-8?B?cDl2Q2ZGRjNXUVBnc3poWHlqQUNtbHY0RHoxeGNXa0tWcElLTEp1R2wxZDA1?=
- =?utf-8?B?WmVWY01SYVlpdGkycTRFSzBOQVdSWm5ROFZ2a3h4VFlhUDFFbmlDWmRxaW1M?=
- =?utf-8?B?UTFzV3Z4WVF5TStSbDBjelJ1WVhxZ0p6Nk1NejVyRkZzU0pSUkxoNjhEZFAx?=
- =?utf-8?B?cldWVG5DeXY4S3ptSGFhbTFXVjlLWXZYQmNzN29NMVdXSlZtdDhTUT09?=
+	=?utf-8?B?THlncmk2QkVhVWJQU1h2ZUhCZjNNYWdVTkNVMldBbkg0MnFCMVBnZ2tmVGI3?=
+ =?utf-8?B?YnZnTExxRGZQKzN3NWlPRW41UGV4ekZtZlphdmxsODlDRlUxekxuU1dJWE1p?=
+ =?utf-8?B?bFEzdTdKWlhVVzN1YlFxeHMwOVhiUm5mK0I5Y1Y5bENWTXNTSU1QeXorVE8w?=
+ =?utf-8?B?SmluWVd0VHA3VWZDSnR6a3p2TG5Rc2dadm9rTHp5KzMxTy9pRytSR1drdHhQ?=
+ =?utf-8?B?eGwyZjU4WEozd1AxZlpzd0lHZWNRS1FvbElyTGg4VGlJeHM3OCtVb2xTU0V1?=
+ =?utf-8?B?K0hsVzdRem1HZFpqcGd6RGxMak9FVWhGYlBYWGY5aXpkY2lBNFVxRUtic0Ry?=
+ =?utf-8?B?MkpWdERHZ1pZMjFSV0ZhZzJUdmQxVmNBNi8vckFHKzBSTmNnelc0SnV4ZmNn?=
+ =?utf-8?B?L0l6U2huTmlNdG4yNHBpdHgvMlNwWXdQZUQ1YVlHcEt6OWpNTm1HdWdNV2VK?=
+ =?utf-8?B?dmxZSlZVbVNzblFYZGxRbW53RTZhMnJBU09IQ1NqQlNpRmVrT1BEbHlhTnpW?=
+ =?utf-8?B?VExJR1B1UHdsYmhUc2VZaGwrQThlVGNPUk1GWTBlQTdwUERrQkJBdXpYQ0Zy?=
+ =?utf-8?B?K0kvQmdnVlA5RFhEdXdLSlNsSFZlcFNuWlg1K2ZIencvVkcrRWV4Q2p5RUJK?=
+ =?utf-8?B?RU1uMjBkZHJqUDJMOEljWVZMNXNBeFRuS0JBQkFwMUsxSVY4UGR5bVFXVjhF?=
+ =?utf-8?B?WWFTQ25YQzNnaytvMERuaUZEOHRIQkRjRlo2VGRISmhnNVF2SnkwMG1SYWlJ?=
+ =?utf-8?B?d2tXcHRqZGMzOVdBd3pwZFZReHVOdzdOOHhEMGxvblZGWWVINlZKTVdDTXlB?=
+ =?utf-8?B?YWhoMzU5R1R5UURUTUp2R3c5Y2FWNGlhY2JORksrRUlhdW9EZFpQbUdPVU5a?=
+ =?utf-8?B?dzRyQ3dwazBCZGJXVHlzV2FwSDlLdUhMSTZ5RTFkTE1IZkZnbTdtUUlRb3BS?=
+ =?utf-8?B?d1NSVGVneTZBYWRVTkxhMXBmQVJqZjNsc0pKL0N3ZVBoTHR2dVB4Vm9qb01E?=
+ =?utf-8?B?Z0tVOG5uMlRveHc4QUIrVGFYbmFmaElXWjNGV2JYbVRPVjhrU1EyTCszcTh0?=
+ =?utf-8?B?T25RKzhTMlVRdXdxcldLM09sRklsUDd2Y3QrT01tWForZ1I5c2xLNzQvTXBX?=
+ =?utf-8?B?OVdUeGhKeTdkVlRJc0ZtMGRPNVhHR3hDUzJWcmU5a0JsSDYwSU0zOVJ0cDZu?=
+ =?utf-8?B?ZXNNUjVYdnJCNGJ0WHNmdksyRG1hc1ZzT3NxWTdGcCs2alVVQ0FVL3Y4MThJ?=
+ =?utf-8?B?MFRwVDNJY0xLVGRVeGFWZUQ3b1hNNjdQTFdwemh1K0FubEs1Snk0N1Z6cUxr?=
+ =?utf-8?B?dFEyVjJTcFVTQ1NDaVdIY01ZMnhlemtlV3libDNUVUR2aE5xclo0NDhtRUkx?=
+ =?utf-8?B?M0w2MWVHdGtEOTh0RkszWkg5MzNoNW9TUHlyZFFlZzNYK0RUajBWSXVpdUl0?=
+ =?utf-8?B?RzdDb2FKQVo4T2ZJMnhUcEdxM2s2bW8zTFJMRy83WWFvVEoyVHNzL09rMU9x?=
+ =?utf-8?B?dDdGeHNWd1lJcjV0eGNXTm1WRVFTWktVYjlUK0lURHZ6VXVkQ3F2Tlk4N0tT?=
+ =?utf-8?B?YjVmWk51TyswditQYjVNbTl6VGtQeFFSelJrdEdvdlNMM01qQ0Qzc1BuUWtz?=
+ =?utf-8?B?Q3ZLZ0ZHNVFpa2hFOFQxNVFGNEhQdGhaK0d3dkZURmNCNWFmOTg3YVZtR2Ri?=
+ =?utf-8?B?L1owcnk5NVJ4Q2dsZU9oYzh0VEozV09NRTRsUlBvT083Z3NwR1pkY1NaV0Fs?=
+ =?utf-8?B?VDh5aE5WVXg1Sys3dGRxWUNYbkVEU2tGWFIvbjEwa29nMjdQUGNTcDcyV3NR?=
+ =?utf-8?B?dk1sakFXQXZETG5lUXFZVzQwWDFXMjlGVHJuV2xkbFFrTUp3bmZTM3RHUWVT?=
+ =?utf-8?B?RSt4SUJiR3J6S3BIVzhDc21PSVpXR0ZnT3Qya3NPSUpVUGdnVVZ0RVJmT25R?=
+ =?utf-8?B?Y3Jxbnd6SXVZZnk0Y01Ob3dZWVdQVWk1RWVRbjU0eCtyQlR3eGVuYkdXcUtH?=
+ =?utf-8?B?YWdVaGdIa2xYWXBocjcvM0NIVmlnTGgxYm5rM3huYkN2T21xcFpqU2w1N1k0?=
+ =?utf-8?B?VVIzRjd3Qi9PMzF4MUZPU3Q0czNRd01JK1JxeCtVbHF0K2Q3Qk9qV0Q1YlMw?=
+ =?utf-8?B?eHg0QXo2T3NjUmZTWFRRaHlwMUptaWZiTmgxSnRYR1ZhVWhHNU5IVXpPUVcv?=
+ =?utf-8?B?ZkdMZzFTbkpXbkovNjdLWFYwZG03RlMvb0VYS3Y3UXh2UEFVVXhVQzkwaHpI?=
+ =?utf-8?B?NGRhTUc5TjlCeUZPTFNMMUYzbmNXdWlkTm0va3J1SFluMWZGRDlacnh2S0Rh?=
+ =?utf-8?B?WDYySjdzNHh4VG1NbGNKVUZZdGk3ZHBnQVdDTmN2N3o2WW1PVVVIUT09?=
 X-Exchange-RoutingPolicyChecked: 
-	wFPCs997xWVDycdOHhRZv7PamRIrp64ofPcXRsuieHiM5VrozFEcWcNjZkM7M0f5vsQqhm50LnFAGqfTJPC1uKRDSa/z9cfg2tb1e0SapAoE3hSzNYwbyHi3Vmb/rMSI0vQ2cUT3go+SIvUAdXvq6BrMQErbfpOcVKzvQ3BG18LisADMpmhhO1C7hjYo+fzJwQJUM+wJuFEBtr5cyPYYbABTrL6WM9SIvYwTU08aOrp5cOh2pNgc6qWoR76NyqZ2z3/eWVeKtVhU0nApLEazb7+PbczNCux7y4n0KPxdYAWNSKic1w2CaMNBVyViSDn/yMbafWXxMuwDiM/ha6Wb5w==
+	lBbC6bUqYIEmaYqUN11oy1zrn//C/VEMal3jcFgPcWRACVNhQRwMM6dTF4iNQ7CDUwHbno6vFOat5ab6npMnaeaTc8xXJm+QriAw8v/nZdcG/FIF0e2u1nouEyRVG8s9NF8KCqn5uubvdBE9lGWsIyqWHnFw4NjgKo5sqwiLyQYLxDq5W/tIjPf72xm/eqJm4BttNB/dte41lgLA8ZxrEZ8gFds/HLEKh1fCrS+YcgVOuVojS2+tvgbebjhX/uX5v/ycn6juD7CwqLNN0TR1D2M50y5zvYFG9CJulzoYvYvefftBaORX3sVQjZG3Ex7NP4i/iFoEwnaaIEYKiPaPdw==
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e02fb741-2882-4e28-6883-08deafc1d438
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11f0bb78-f70c-470e-be4f-08deafca954c
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB6399.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 01:00:16.0587
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2026 02:02:55.7684
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cEds95Ufo6qrcA2mt+UywEzrKcwbaigIsFkRCAqgNSvAwe8Kje0ZkIpa1aoF0ythSytV3OMAsRGmXhcA3jUX2Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR11MB8497
+X-MS-Exchange-CrossTenant-UserPrincipalName: b5JJ6LyZ5YPSw6NjH28H1FvzwoXp7at2rorpMMKhuoM2nB+8vDaSv7J93QoDCoZSEZd5FgmwMfDkGpXMGCA8Qg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR11MB9955
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-GUID: qqm291CA8U2AEESmUUIEnFuxU8lfVRvK
-X-Proofpoint-ORIG-GUID: gIB-_9lbgjDK7c-WyWRAj31WvJVrM-Tn
-X-Authority-Analysis: v=2.4 cv=b4mCJNGx c=1 sm=1 tr=0 ts=6a027ba4 cx=c_pps
- a=VYnc1ZjkwFV8r4Zgssgzxg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-Proofpoint-ORIG-GUID: spMZpcMGPa0BkjyfSSwWKCf4HGvOffXq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTEyMDAxNyBTYWx0ZWRfX2MSVGJh3p4FC
+ robQpYYaJczYxK/izm1y0utACCK+q8xS0wM1dkYpIWTg6YT4SVB8DQPW9yNG/FPSrez5QaUo5Ys
+ tBrPd2GExBhnWdtAh51tNlVYgeHmfI5X3+GbYnOOWol5LeLZ/K5zNiwprVpbfOiklKa2D9oTlge
+ 9x6m4IM5xx6EzFrf29/Ync5F7QWYJ5ah9qw6u/f64X40n9WZ/mCnqE8b4MateECLM1X+D8VsJun
+ Hi7wulPRtuoLSoL4uJomIC7L8GOnlZlAgsC/j7A6k+Q1pbkd68kyyGAXBuI+xaFsKQhH7LI2WeJ
+ 5djZZpIJVYYWTU4fH7nbIcDa79bPvLq3XPJS7+Hq4Ai0wVkg95WjUycdrzMWu1NkR3avEIk5puy
+ cO6GVwAuc0qkelflc2olciycEvH5xE9WkFgZXNrmbTxdNxmYB/NTD0vM1n4GDOi2LjgcsnNdj0A
+ VcctciG1X2NQguAq2MQ==
+X-Authority-Analysis: v=2.4 cv=OaWoyBTY c=1 sm=1 tr=0 ts=6a028a52 cx=c_pps
+ a=cAYAfY5XwGGlFG+HVYY7CQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=klDOsUkWDRETUCZYPvoE:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22 a=HK-ge7EqtdluswH-FwHe:22
  a=SsMK-6ewAAAA:8 a=3HDBlxybAAAA:8 a=Q4-j1AaZAAAA:8 a=t7CeM3EgAAAA:8
- a=aT7ecJGypZI4vDtHWbYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=auLIn29x5BNhK6Is0AYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
  a=49hUO6naoDravHwzbBTq:22 a=laEoCiVfU_Unz3mSdgXN:22 a=9H3Qd4_ONW2Ztcrla5EB:22
  a=FdTzh2GWekK77mhwV6Dw:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTEyMDAwNiBTYWx0ZWRfX8i/uAw/eBDl3
- eO/LDTQBiZwGPI+snSGPquW8pG3MKHrWvtaD+BQT0rXUAicL0iTiTzN+7A8J4SdWKduBXunr/v8
- h2+5miuEsxLXNPzlM2xv1ynt4ynvbfV/EEl4keZ1Koxkemwk2oop2ebbke/sxLaYj6xWyPVNpwS
- TP0YCXYpdv+jIjJrFinuXe02YPe9tAGWPJZ4E7dvANoVRIijYhnUBgHKWjsUM8PA/RP6Qq+xdP5
- lMTOVhdaedvrIlc6VNqGpCcWK9crY0sftCqD7gD4nDKFZOGZ41qYTwzMz1C8IXRmOVUE5YhtAz3
- LkTj70JdBvUGQclqW4zZ6CLKSirfEBeXKUZUfBLvSA730l8+txvdj3zIxATboAKN53ubTpfJPqg
- Ldr/ZnLYtI8JyyJY/5K0/12wDgjil+s30NXZr/FXbxUsA3Cl/01NsXcQrsDfzMUzSqOTvMIqia5
- HKlAGmXLQ/vPMVTVpQg==
+X-Proofpoint-GUID: iVVaoIq3vv6fTmeRL4LTgWQMDJh5uhwI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-05-11_05,2026-05-08_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 spamscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 malwarescore=0 adultscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ suspectscore=0 adultscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ phishscore=0 clxscore=1015 impostorscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605050000
- definitions=main-2605120006
+ definitions=main-2605120017
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 64C0j0AM2999107
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 64C1dWOq2667939
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 01:00:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126853
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 02:03:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126854
 
 
-On 5/11/26 22:43, Yoann Congal via lists.openembedded.org wrote:
-> On Mon May 11, 2026 at 4:21 PM CEST, Yi Zhao via lists.openembedded.org=
- wrote:
->> Use SOURCE_DATE_EPOCH to set MAKE_STAMP instead of using the current
->> time, thereby improving reproducibility.
->>
->> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> ---
->>   ...-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch | 34 +++++++++++++++++=
-++
->>   .../recipes-filter/nftables/nftables_1.1.6.bb |  1 +
->>   2 files changed, 35 insertions(+)
->>   create mode 100644 meta-networking/recipes-filter/nftables/nftables/=
-0001-configure.ac-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch
->>
->> diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-con=
-figure.ac-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch b/meta-networking/rec=
-ipes-filter/nftables/nftables/0001-configure.ac-set-MAKE_STAMP-to-SOURCE_=
-DATE_EPOCH.patch
->> new file mode 100644
->> index 0000000000..7d2f9c0dfe
->> --- /dev/null
->> +++ b/meta-networking/recipes-filter/nftables/nftables/0001-configure.=
-ac-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch
->> @@ -0,0 +1,34 @@
->> +From 77de073b1cc7413b1d230995851338345d56a8f8 Mon Sep 17 00:00:00 200=
-1
->> +From: Yi Zhao <yi.zhao@windriver.com>
->> +Date: Mon, 11 May 2026 15:52:29 +0800
->> +Subject: [PATCH] configure.ac: set MAKE_STAMP to SOURCE_DATE_EPOCH
->> +
->> +If SOURCE_DATE_EPOCH is set, use it to set MAKE_STAMP instead of the
->> +current time.
->> +
->> +Upstream-Status: Inappropriate [embedded specific]
-> I think that this patch should at least be sent upstream.
-> Reproducibility is not "embedded specific".
-> See https://reproducible-builds.org/
+On 5/12/26 09:00, Yi Zhao wrote:
+>
+> On 5/11/26 22:43, Yoann Congal via lists.openembedded.org wrote:
+>> On Mon May 11, 2026 at 4:21 PM CEST, Yi Zhao via=20
+>> lists.openembedded.org wrote:
+>>> Use SOURCE_DATE_EPOCH to set MAKE_STAMP instead of using the current
+>>> time, thereby improving reproducibility.
+>>>
+>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>> ---
+>>> =C2=A0 ...-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch | 34=20
+>>> +++++++++++++++++++
+>>> =C2=A0 .../recipes-filter/nftables/nftables_1.1.6.bb |=C2=A0 1 +
+>>> =C2=A0 2 files changed, 35 insertions(+)
+>>> =C2=A0 create mode 100644=20
+>>> meta-networking/recipes-filter/nftables/nftables/0001-configure.ac-se=
+t-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch
+>>>
+>>> diff --git=20
+>>> a/meta-networking/recipes-filter/nftables/nftables/0001-configure.ac-=
+set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch=20
+>>> b/meta-networking/recipes-filter/nftables/nftables/0001-configure.ac-=
+set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch=20
+>>>
+>>> new file mode 100644
+>>> index 0000000000..7d2f9c0dfe
+>>> --- /dev/null
+>>> +++=20
+>>> b/meta-networking/recipes-filter/nftables/nftables/0001-configure.ac-=
+set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch
+>>> @@ -0,0 +1,34 @@
+>>> +From 77de073b1cc7413b1d230995851338345d56a8f8 Mon Sep 17 00:00:00 20=
+01
+>>> +From: Yi Zhao <yi.zhao@windriver.com>
+>>> +Date: Mon, 11 May 2026 15:52:29 +0800
+>>> +Subject: [PATCH] configure.ac: set MAKE_STAMP to SOURCE_DATE_EPOCH
+>>> +
+>>> +If SOURCE_DATE_EPOCH is set, use it to set MAKE_STAMP instead of the
+>>> +current time.
+>>> +
+>>> +Upstream-Status: Inappropriate [embedded specific]
+>> I think that this patch should at least be sent upstream.
+>> Reproducibility is not "embedded specific".
+>> See https://reproducible-builds.org/
+>
+> Thanks.=C2=A0 I will send it upstream.
 
-Thanks.=C2=A0 I will send it upstream.
+
+I have checked upstream and found that this commit[1] in development=20
+branch has already resolved the reproducibility issue. However, since=20
+the changes involve multiple patches, backporting them is not appropriate.
+
+Therefore, I think we can keep the current Upstream-Status in the patch.=20
+It will be dropped upon the next release of nftables.
+
+[1]=20
+https://git.netfilter.org/nftables/commit/?id=3Dca86f206c92704170a295b8dc=
+7a41f6448835dde
 
 
 //Yi
 
-
->
-> Regards,
->
->> +
->> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> +---
->> + configure.ac | 5 ++++-
->> + 1 file changed, 4 insertions(+), 1 deletion(-)
->> +
->> +diff --git a/configure.ac b/configure.ac
->> +index 6825474..2b147af 100644
->> +--- a/configure.ac
->> ++++ b/configure.ac
->> +@@ -165,7 +165,10 @@ AC_CONFIG_COMMANDS([nftversion.h], [
->> + ])
->> + # Current date should be fetched exactly once per build,
->> + # so have 'make' call date and pass the value to every 'gcc' call
->> +-AC_SUBST([MAKE_STAMP], ["\$(shell date +%s)"])
->> ++AS_IF([test -n "$SOURCE_DATE_EPOCH"],
->> ++	[MAKE_STAMP=3D"$SOURCE_DATE_EPOCH"],
->> ++	[MAKE_STAMP=3D'$(shell date +%s)'])
->> ++AC_SUBST([MAKE_STAMP])
->> +
->> + AC_ARG_ENABLE([distcheck],
->> + 	      AS_HELP_STRING([--enable-distcheck], [Build for distcheck]),
->> +--
->> +2.34.1
->> +
->> diff --git a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb=
- b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
->> index d27e60a18d..5ab31f9b0c 100644
->> --- a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
->> +++ b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
->> @@ -12,6 +12,7 @@ DEPENDS =3D "libmnl libnftnl bison-native \
->>              ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gm=
-p', d)}"
->>  =20
->>   SRC_URI =3D "http://www.netfilter.org/projects/nftables/files/${BP}.=
-tar.xz \
->> +           file://0001-configure.ac-set-MAKE_STAMP-to-SOURCE_DATE_EPO=
-CH.patch \
->>              file://run-ptest \
->>             "
->>   SRC_URI[sha256sum] =3D "372931bda8556b310636a2f9020adc710f9bab66f47e=
-fe0ce90bff800ac2530c"
 >
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#126851): https://lists.openembedded.org/g/openembed=
-ded-devel/message/126851
-> Mute This Topic: https://lists.openembedded.org/mt/119256992/7283133
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[yi.zhao@eng.windriver.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> //Yi
 >
+>
+>>
+>> Regards,
+>>
+>>> +
+>>> +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>> +---
+>>> + configure.ac | 5 ++++-
+>>> + 1 file changed, 4 insertions(+), 1 deletion(-)
+>>> +
+>>> +diff --git a/configure.ac b/configure.ac
+>>> +index 6825474..2b147af 100644
+>>> +--- a/configure.ac
+>>> ++++ b/configure.ac
+>>> +@@ -165,7 +165,10 @@ AC_CONFIG_COMMANDS([nftversion.h], [
+>>> + ])
+>>> + # Current date should be fetched exactly once per build,
+>>> + # so have 'make' call date and pass the value to every 'gcc' call
+>>> +-AC_SUBST([MAKE_STAMP], ["\$(shell date +%s)"])
+>>> ++AS_IF([test -n "$SOURCE_DATE_EPOCH"],
+>>> ++=C2=A0=C2=A0=C2=A0 [MAKE_STAMP=3D"$SOURCE_DATE_EPOCH"],
+>>> ++=C2=A0=C2=A0=C2=A0 [MAKE_STAMP=3D'$(shell date +%s)'])
+>>> ++AC_SUBST([MAKE_STAMP])
+>>> +
+>>> + AC_ARG_ENABLE([distcheck],
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 AS_HELP=
+_STRING([--enable-distcheck], [Build for=20
+>>> distcheck]),
+>>> +--
+>>> +2.34.1
+>>> +
+>>> diff --git=20
+>>> a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb=20
+>>> b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
+>>> index d27e60a18d..5ab31f9b0c 100644
+>>> --- a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
+>>> +++ b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
+>>> @@ -12,6 +12,7 @@ DEPENDS =3D "libmnl libnftnl bison-native \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '',=20
+>>> 'gmp', d)}"
+>>> =C2=A0 =C2=A0 SRC_URI =3D=20
+>>> "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
+>>> + file://0001-configure.ac-set-MAKE_STAMP-to-SOURCE_DATE_EPOCH.patch =
+\
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 file://run-ptest \
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "
+>>> =C2=A0 SRC_URI[sha256sum] =3D=20
+>>> "372931bda8556b310636a2f9020adc710f9bab66f47efe0ce90bff800ac2530c"
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#126851):=20
+>> https://lists.openembedded.org/g/openembedded-devel/message/126851
+>> Mute This Topic: https://lists.openembedded.org/mt/119256992/7283133
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe:=20
+>> https://lists.openembedded.org/g/openembedded-devel/unsub=20
+>> [yi.zhao@eng.windriver.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
