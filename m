@@ -2,63 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB88ACD484C
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 05:05:08 +0000 (UTC)
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.730.1778648700591675525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4133CD484C
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 05:05:58 +0000 (UTC)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.731.1778648702951761476
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2026 22:05:00 -0700
+ Tue, 12 May 2026 22:05:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=o0fWqh/Y;
- spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-365cae89bf5so2764409a91.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 22:05:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=CiYGpYHY;
+ spf=pass (domain: gmail.com, ip: 209.85.216.47, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-366070f71adso5686931a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 22:05:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778648700; x=1779253500; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1778648702; x=1779253502; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FqI9LZ00tC3+zj2ZRVhCo3fn8gFbuzAcPV7/r8TKxmU=;
-        b=o0fWqh/Ya3KpyPZQFVhS3kCIhBLDFa5fWqgHUrQQDKqK8PM9B0BQCFxFJAuxMGtUmB
-         yLfiV8FArbtCdHcstxBGRAuMvU5MGs/8dmGc3834P4LVi8qjwA5SVO7nzaaZ5d+EIHn6
-         G3Ib+FENuY7OqMk+pxnDVUSDHJHoxJYNGPSl55h7w6kwyf6BWlfEBbYyR2z0lxDF+eL+
-         WQ3JhQHWsjz1Rn0NrrI4pcIXRzKkfG7/sVndheB2itC9EnoJh7JQgJVle+g70L6+Qh8s
-         Yl7AQAp6b6gihcyaiKZhf1f1NjJSWOaeWrQ7ScewURneUsYRWnAJVD/LTLD+h6v/QGEd
-         6dJQ==
+        bh=xLOAbUYCdBuC5KnFxYUSBXf3lqa4QTQLDkn4mkK7pzU=;
+        b=CiYGpYHY3GjoS2W+rVgoVm9M7WiQOhinT3+vOvOjPA0rJwk6Q5th/QIYKQGftawH3S
+         0AFofM5PtWpGY9wgwk3evc6I5liKfKJjJ1yqs4yZrlluqaVbX1xIDebM9OBjsg3IACtB
+         ACyPQ9X9LPnyWXdKcP03k+j4PYEsCzWKKKn1a89Sq2PPPOlQlH2tD+1OUEgeKBevzZkC
+         l/gPhuTdxOZN/ckyIvwzCejWLTyNasr3/CapM0uh7pQOJVJqgEXuzqmKZWDp/qhTYvsZ
+         +gwlvc6sCkg8SVJHXcbp95herycUBdjngaYEXFA6uTg3v/nQfedegIU086K85uindP2G
+         cr0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778648700; x=1779253500;
+        d=1e100.net; s=20251104; t=1778648702; x=1779253502;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=FqI9LZ00tC3+zj2ZRVhCo3fn8gFbuzAcPV7/r8TKxmU=;
-        b=d7TPdrJ7ToD80exvNe/oGb6zWbxdKRBjh3bjQFbFJWR6dAP3XKwEbA/T1mpBfYF/oN
-         szlwB2T+w50cFIFHTWGkm48TPrBgh0BLHuEgcm9+D9ncp9yycoxBuJq6z6PIo245FT9W
-         GrRmJbVQCxr/oWn903qoBfYkuvRzzGqTQQBbtD4sYpGSaMMi6mCzRf2pUl0ygp282cJP
-         ycAfetU9JoRzjvzojcD4cEuzYboQ8M16WRjn/UISV6e6DcUe8Znq7QwGgGdZ0CALZmxH
-         BEj4cr621EYNMHtIwRHIYsNbrx4k99bEeSl/m96jDeNPn48LLeFT99gJ1wzWS5Rx2ONz
-         6WfQ==
-X-Gm-Message-State: AOJu0YyRNjuO0q0hk3CWlGMMDR4Q1BHoZFyNSi5uux2L1/Q/Py5/lFzP
-	swc4y5ZhYW3Z4tfE9/4mZaz/TwDeb0p7qrSOYlL9dHbMzhD58eydbTOO7HHNXWIw
-X-Gm-Gg: Acq92OHarYOkadLAJvxuCM2ENcIZMsuFLO00g7ts9k6MT0t+uyphXzd4W5+CbNrAvDR
-	qzPFOGlLyAb5PQPRIRb67IrsZaON+QgHHJ4Wr8T/Q3RQn1HLIrnT03cAJhvrPaBEx0KxYDIMQ/m
-	/nCfNc1QPu/2pW8c40FuXYy+hItI8s405KBUsdWrumyofn0Wp78ZYHFUdm1nG/vvbVjJZSfIf70
-	fZYUWKjTFI97xrZ1LVqr8nqUwF/NJcUwLQ0NSUMcqd/tBNJIJD0eRS78ajJcxy33OuajrVQ6YVC
-	+IOjmWI5nFX//qjMKKpFM5gQwuedeUjQNfuTtgbR6acZi2zXPK0VItg+rMplPi4WRQqPoJxjpTA
-	DKN3keK+r36gZa24dpBHzmsmlie4U9rrDXRQs79bjCMfUyIZ0gmulrRozrNUnOdRFGpLgivdyNW
-	9bitwZQc9lEUpyRH4r+QULIq1G3s9e4y4rxabD
-X-Received: by 2002:a17:90b:574e:b0:365:3154:7b1 with SMTP id 98e67ed59e1d1-368f3e5d0a0mr2038967a91.26.1778648699720;
-        Tue, 12 May 2026 22:04:59 -0700 (PDT)
+        bh=xLOAbUYCdBuC5KnFxYUSBXf3lqa4QTQLDkn4mkK7pzU=;
+        b=copJDaBO/23ZmSrvUQ2nQnxPrDRe/TTcO0+aXywv8GvKBQDioIoUHR4axatTZy1+nA
+         zuvDC/qwaUzf+FVK1X00GYmnsYtCoRipeVHGT5gcHqmHGS3lgJHFLEMjnK7v/wvhCxGB
+         AEMkg4WMQFKtND96gFDcWBSxo+32qFvPRfBuP6fKHs0llEfWtPVwqL8YcO6llviEuOWC
+         ZnY+pbJ6dIiIn9s5I4Umc1g5J4w1Opl6/Savxep8NyFAySwCFXOguYc2cM7HE2isZvI+
+         +VsFk9B1NPH88BaS9sCczHnuYtvn7pT8JunqaQygdUz8x9FwX7o+L4emG7p8cmVY+Sxi
+         HFDw==
+X-Gm-Message-State: AOJu0YwW+jCEgTSczHPrGp/sHDyYJduqMBfc8U4G5Q6IHu2ii9Dcx8Lh
+	jpulMKbPrVLsJs3Ma7/2p6ya5nkKC/9Zftr8zjZl5OfcUQ4/8DBCj0FoMaHFAyFC
+X-Gm-Gg: Acq92OHe0x2bR9ejYmAtoQkSaAIxBg4z/+jxvSoGR27X6/J2D4sf9lu0rZkOhgtKmj6
+	QllxLEnm7MViWnOKMlNxT+FSwlQE+Lc6g4mUd01wqnliRifBfEJOdVirAdxRlUEReDazfyXVUtj
+	LLcpfm9GNeL/Rezwt713eOUbXsqp2Rt+7t8sH+wYW20eZwf8y03en+AXwjCEVm7jbwMopbf6M8z
+	TBXc+ufP7WXjmVv7SdiSlCuMZHdXJAHn/Kwb4xLN5AMgaBHBZakpeyDoLZkVNJrl6mHvXVwbWBR
+	OtVsrER25+bFCp5AgugEX/Xbp6nwXUiQJYt/GXthJHjiQMTBUKLKlRfYQIIr122mr0Lu1CVk6ha
+	e+yp1sGdfeM89sHgJlzT0zDnRUzdXb1iQIt9p6NqpX9cySGDEy2CATScHaaiIJ2sHVbus+TNBwb
+	6dTzrhXp5QiS7OJOZwTlE7mMgb5xRtbxK9ZClr
+X-Received: by 2002:a17:90b:5345:b0:366:479c:59e7 with SMTP id 98e67ed59e1d1-368f77f08demr1542641a91.4.1778648702110;
+        Tue, 12 May 2026 22:05:02 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368eddf5c58sm1696900a91.1.2026.05.12.22.04.57
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368eddf5c58sm1696900a91.1.2026.05.12.22.05.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 May 2026 22:04:59 -0700 (PDT)
+        Tue, 12 May 2026 22:05:01 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Liyin Zhang <liyin.zhang.cn@windriver.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-webserver][scarthgap][PATCH 2/8] apache2: upgrade 2.4.66 -> 2.4.67
-Date: Wed, 13 May 2026 17:04:43 +1200
-Message-ID: <20260513050450.3515182-2-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 3/8] firewalld: upgrade 1.3.2 -> 1.3.4
+Date: Wed, 13 May 2026 17:04:44 +1200
+Message-ID: <20260513050450.3515182-3-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260513050450.3515182-1-ankur.tyagi85@gmail.com>
 References: <20260513050450.3515182-1-ankur.tyagi85@gmail.com>
@@ -67,47 +66,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 05:05:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126945
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 05:05:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126946
 
-From: Liyin Zhang <liyin.zhang.cn@windriver.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Security fixes:
-- CVE-2026-34059
-- CVE-2026-34032
-- CVE-2026-33857
-- CVE-2026-33523
-- CVE-2026-33007
-- CVE-2026-33006
-- CVE-2026-29169
-- CVE-2026-29168
-- CVE-2026-28780
-- CVE-2026-24072
-- CVE-2026-23918
+https://github.com/firewalld/firewalld/releases/tag/v1.3.3
+https://github.com/firewalld/firewalld/releases/tag/v1.3.4
 
-See: https://archive.apache.org/dist/httpd/CHANGES_2.4.67
-
-Signed-off-by: Liyin Zhang <liyin.zhang.cn@windriver.com>
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../apache2/{apache2_2.4.66.bb => apache2_2.4.67.bb}            | 2 +-
+ .../firewalld/{firewalld_1.3.2.bb => firewalld_1.3.4.bb}        | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.66.bb => apache2_2.4.67.bb} (99%)
+ rename meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/{firewalld_1.3.2.bb => firewalld_1.3.4.bb} (99%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
+diff --git a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.2.bb b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.4.bb
 similarity index 99%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
-index 0e96643fc3..1a091d7eff 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.66.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.67.bb
-@@ -27,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
+rename from meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.2.bb
+rename to meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.4.bb
+index 52157cf9a8..bc61a4ad32 100644
+--- a/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.2.bb
++++ b/meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld/firewalld_1.3.4.bb
+@@ -10,7 +10,7 @@ SRC_URI = "\
+     file://firewalld.init \
+     file://run-ptest \
+ "
+-SRC_URI[sha256sum] = "aba0d8ce9617b906ea4866bf0bdfb2c2d5312f53b8e9e8e9e4d49bf330da5b5e"
++SRC_URI[sha256sum] = "d33ddcc3b78fb66aea23c880deaa85a2352ae4b54af9ef796a9cd16ddc1771e5"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "94d7ff2b42acbb828e870ba29e4cbad48e558a79c623ad3596e4116efcfea25a"
-+SRC_URI[sha256sum] = "66cd206637b0d5c446fa7dabe75fe03525da8fb55855876c46288cd88b136aa4"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
+ # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
+ DEPENDS = "intltool-native glib-2.0-native nftables"
 
