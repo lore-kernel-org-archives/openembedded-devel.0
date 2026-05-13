@@ -1,95 +1,98 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <piotr.wejman@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79A0ACD4F3E
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 10:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53145CD4851
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 13:15:13 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4838.1778669538760865172
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.7385.1778678103864679751
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 03:52:18 -0700
+ Wed, 13 May 2026 06:15:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=vxi07WFz;
- spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=mLy51rk0;
+ spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: piotr.wejman@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1E4321655
-	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:13 -0700 (PDT)
-Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 04B233F7B4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:17 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DD03D1C14;
+	Wed, 13 May 2026 06:14:57 -0700 (PDT)
+Received: from e134100.nice.arm.com (e134100.arm.com [10.34.101.65])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CE1E23F836;
+	Wed, 13 May 2026 06:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778669538; bh=fg08z7bRwRP7sB9elGmvYqm0axj3lTlF8bGC2CWazXw=;
-	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=vxi07WFzrpqEpkPnHYqswoU8Vj/FT1pkT7W/3PU+s2zsWMCnj45lYAD+pLMjhfisD
-	 mCeexf2nbfBn4gagVpNpPzEMxZniJmwZFT6Vy5/WoEKY4z6qbbOhtmINUBFozq9/gr
-	 9+Am89uGrLdcw0XfFfOe6JeZuhF3yrGqwrJH1BVI=
-From: Ross Burton <ross.burton@arm.com>
+	t=1778678103; bh=gU8cyDj1LkcR5d4vD2wFWTSqpZoPoSm75oUaCqXNe1g=;
+	h=From:To:Cc:Subject:Date:From;
+	b=mLy51rk0sAHwijNiIMcd3G+JF1/ub7n4AKxvBZmlSabzskwzRaeM3YWr+ThJVpML+
+	 +4RBbp+Yj3QHs8qzR2SSvzJ16eJbqVDIVhU1wpREUm//oYwhNDJ7oLDbivRkje36cC
+	 PvN73E8eIv4Eat5xEIydt0mhK9w5QfcbC+VaWoaI=
+From: Piotr Wejman <piotr.wejman@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 6/7] gnome-system-monitor: remove obsolete dependencies
-Date: Wed, 13 May 2026 11:52:09 +0100
-Message-ID: <20260513105210.2109216-6-ross.burton@arm.com>
+Cc: raj.khem@gmail.com,
+	joe@deserted.net,
+	Ross.Burton@arm.com,
+	Vincent.Mailhol@arm.com,
+	Piotr Wejman <piotr.wejman@arm.com>
+Subject: [meta-networking][PATCH v2] nftables: add systemd PACKAGECONFIG
+Date: Wed, 13 May 2026 15:14:42 +0200
+Message-ID: <20260513131442.2582068-1-piotr.wejman@arm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260513105210.2109216-1-ross.burton@arm.com>
-References: <20260513105210.2109216-1-ross.burton@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 10:52:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126970
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 13:15:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126972
 
-libhandy was removed when g-s-m ported to GTK 4.
+Add a systemd PACKAGECONFIG option to install nftables systemd unit files=
+.
+When "systemd" is present in DISTRO_FEATURES, the option is enabled and
+the service is installed but disabled by default.
 
-gnome-common is not required now that g-s-m uses Meson not autoconf.
-
-polkit was removed in g-s-m 3.36 (March 2020).
-
-Update the DISTRO_FEATURES check, polkit isn't required but opengl is
-via GTK 4.
-
-Signed-off-by: Ross Burton <ross.burton@arm.com>
+Signed-off-by: Piotr Wejman <piotr.wejman@arm.com>
 ---
- .../gnome-system-monitor/gnome-system-monitor_50.0.bb       | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ meta-networking/recipes-filter/nftables/nftables_1.1.6.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-m=
-onitor_50.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-syst=
-em-monitor_50.0.bb
-index 1ae11dda3b..29918605ef 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_=
-50.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_=
-50.0.bb
-@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954=
-499f7abaabaa882bbe"
+diff --git a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb b/=
+meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
+index cc57db3c81..04066c5fa9 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
+@@ -17,9 +17,9 @@ SRC_URI =3D "http://www.netfilter.org/projects/nftables=
+/files/${BP}.tar.xz \
+           "
+ SRC_URI[sha256sum] =3D "372931bda8556b310636a2f9020adc710f9bab66f47efe0c=
+e90bff800ac2530c"
 =20
- DEPENDS =3D " \
-     catch2 \
--    gnome-common-native \
-     libxml2-native \
-     glib-2.0-native \
-     glibmm-2.68 \
-@@ -13,15 +12,12 @@ DEPENDS =3D " \
-     libadwaita \
-     libgtop \
-     librsvg \
--    polkit \
--    libhandy \
- "
+-inherit autotools manpages pkgconfig ptest python3native
++inherit autotools manpages pkgconfig ptest python3native systemd
 =20
--
- inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_c=
-heck gettext
+-PACKAGECONFIG ?=3D "python readline json"
++PACKAGECONFIG ?=3D "python readline json ${@bb.utils.filter('DISTRO_FEAT=
+URES', 'systemd', d)}"
+ PACKAGECONFIG[editline] =3D "--with-cli=3Deditline, , libedit, , , linen=
+oise readline"
+ PACKAGECONFIG[json] =3D "--with-json, --without-json, jansson"
+ PACKAGECONFIG[linenoise] =3D "--with-cli=3Dlinenoise, , linenoise, , , e=
+ditline readline"
+@@ -28,10 +28,14 @@ PACKAGECONFIG[mini-gmp] =3D "--with-mini-gmp, --witho=
+ut-mini-gmp"
+ PACKAGECONFIG[python] =3D ""
+ PACKAGECONFIG[readline] =3D "--with-cli=3Dreadline, , readline, , , edit=
+line linenoise"
+ PACKAGECONFIG[xtables] =3D "--with-xtables, --without-xtables, iptables"
++PACKAGECONFIG[systemd] =3D "--with-unitdir=3D${systemd_system_unitdir}, =
+--without-unitdir"
 =20
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
--REQUIRED_DISTRO_FEATURES =3D "polkit"
-+REQUIRED_DISTRO_FEATURES =3D "opengl"
+ EXTRA_OECONF =3D " \
+     ${@bb.utils.contains_any('PACKAGECONFIG', 'editline linenoise readli=
+ne', '', '--without-cli', d)}"
 =20
- SRC_URI[archive.sha256sum] =3D "a4138aa754b4584c46de91fad1d685e27b12bc24=
-57de761863b6be02d84c4862"
++SYSTEMD_SERVICE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'system=
+d', 'nftables.service', '', d)}"
++SYSTEMD_AUTO_ENABLE:${PN} =3D "${@bb.utils.contains('PACKAGECONFIG', 'sy=
+stemd', 'disable', '', d)}"
++
+ PEP517_SOURCE_PATH =3D "${S}/py"
 =20
---=20
-2.43.0
-
+ # xtables will need it on musl see iptables
 
