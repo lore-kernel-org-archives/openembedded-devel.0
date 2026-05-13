@@ -1,129 +1,484 @@
-Return-Path: <f.pflug@pengutronix.de>
+Return-Path: <ernestvanhoecke@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FA24CD4851
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 14:46:15 +0000 (UTC)
-Received: from metis.whiteo.stw.pengutronix.de (metis.whiteo.stw.pengutronix.de [185.203.201.7])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.9352.1778683573403280732
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 093BFCD4F21
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 16:35:45 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1512.1778690137840041681
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 07:46:13 -0700
+ Wed, 13 May 2026 09:35:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=too many SPF records (domain: pengutronix.de, ip: 185.203.201.7, mailfrom: f.pflug@pengutronix.de)
-Received: from dude06.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::5c])
-	by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
-	(envelope-from <f.pflug@pengutronix.de>)
-	id 1wNAqh-0007kb-9g; Wed, 13 May 2026 16:46:11 +0200
-From: Fabian Pflug <f.pflug@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Fabian Pflug <f.pflug@pengutronix.de>
-Subject: [meta-oe][PATCH] pkcs11-provider: fix build error on 32 bit systems
-Date: Wed, 13 May 2026 16:44:31 +0200
-Message-ID: <20260513144559.219437-1-f.pflug@pengutronix.de>
-X-Mailer: git-send-email 2.47.3
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gd4m9wHy;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: ernestvanhoecke@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4891f625344so64213755e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 09:35:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1778690136; x=1779294936; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aPehHfRSu3vBNfIQ50shFk9IwKgUVT60nMiQPqIRdQc=;
+        b=gd4m9wHyA0hOxIATIGGKIP6UlfBFD0EMIvwxlyRpSUOwBdvP6Ua8T7IX5E+NVa8wm8
+         rgWhU6Q3RKVYAQPL7ndPle9PywOtkmbbdVY+MyEvCbccq84FnuXHOKUA/QO8ol9ctbVw
+         FARpxMNJBjLodUQZJP/JwttIJTvoWxvJx7q0uTjLabw88PR+vCTcyUgdzURUwHQbVEsm
+         0dvWD9AZ/jEtGmF63+4h20WDtQcmuKhIDBHWxpgZzqsNjTW1KUJhzMQPRODuPeMzmQga
+         Ic9RJeo1SDG15/8k3YM2Xc33PFmAtApfyy3rUkryGj6AQOIiBdMEcz6eYQLxyyoB1deB
+         QYlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778690136; x=1779294936;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=aPehHfRSu3vBNfIQ50shFk9IwKgUVT60nMiQPqIRdQc=;
+        b=c12r5oDdBs85yDg4w9zhNW+e9JpKAeL2UDaSf1T0Kci51HzAp1uQC7E8dPiK9egRfA
+         8do3u4nK3jCRdAhMfS9tEy8+J9boOUkWhC0hHmzbFburhoaIl9UrzEL5LDw4yneRUoBn
+         4amasDDdYwnX7lhX98kK7FKWhFxMmV7oaY2qfnqBLXSx0lhM2L1ajlZbky/lb7lqSaPV
+         qYl1uY2cKGQyR37KnRDqvC9Ntkf1vbOztojFz4A61ruAjdojAVMsbn6YAGNsP1h9B4br
+         Iqg+S95UTwQ+pSTVM7AeKDnHVtnY4QTY97YKqjzqS2gx2D6mhlzsEXYq0iN3z6zE3f0n
+         4bRA==
+X-Gm-Message-State: AOJu0Ywod4bM8FbN9PexJimfWkbxkTYDr5J3Hx8oRmOZESXhmh1O6RiY
+	FC85yfKDi6+kmn08bTE+4Bc71ByqjypXG/toNHdij+q5vLqPMpNagED0AAif5FBiRfGyASj7
+X-Gm-Gg: Acq92OEWRZGZxNN5si68xxSvFQy513V/m2dU+oj12DtDIzWSajAORKUaqNtA2MP3Bzy
+	jS/o2cSrFw2HQsGqRhu5SenJwrmO6EDwirXmqQiY6hbMK/qUgTT6Bpen3f4OfccYvS8tJo0TCuc
+	emXKAdBtHeWypMflWM9AZ4zHlcdhVxeGfMJNWcMPXQfrpUbJKylYcnuJN+Z5dzM7I9Ck6PoN62x
+	779XsAmfU9xFwEYXixzJ5AmEQ/fNVN1ljPUMySfnNztqEtnmh8nYGsFvNnCYNpxJl6/hmNBVRV0
+	YF1Os8QwgZQe2Fpjrj62c8Wqya6KHA0JUZbIxyP8WsN2r8fIe5wnZq5ZnumNIQ4TWcPHE7QHoDB
+	6MiNptrHuVz2tY76u12t3h+L/lo+5KS0KiCEXZTZGCCJjtuw4ha7rMBXsD8yMGmed0647SK7VFC
+	ZnY/74y9RgUdD6oxMBWZwE15xULZQM2oksRWeLMbTgGvAhh9ZrspyTcXong+EU54ucfNDTRjwCC
+	L7Cu3CuzGgkMumopfDm02/JOXALobqo6sWI
+X-Received: by 2002:a05:600c:8586:b0:488:aa33:dc8f with SMTP id 5b1f17b1804b1-48fd62ddf7amr4023785e9.0.1778690135680;
+        Wed, 13 May 2026 09:35:35 -0700 (PDT)
+Received: from ernest.corp.toradex.com (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fd62e1d84sm1270635e9.21.2026.05.13.09.35.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 May 2026 09:35:34 -0700 (PDT)
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	Khem Raj <raj.khem@gmail.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+	Peter Marko <peter.marko@siemens.com>,
+	Zeming LIU <zeming.liu@windriver.com>
+Subject: [meta-oe][PATCH] jsoncpp: Fix C++11 ABI breakage when compiled with C++17
+Date: Wed, 13 May 2026 18:35:11 +0200
+Message-ID: <20260513163511.435616-1-ernestvanhoecke@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:1101:1d::5c
-X-SA-Exim-Mail-From: f.pflug@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 14:46:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126974
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 16:35:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126975
 
-PKCS11 Provider did not build on 32 bit systems. Fixed Upstream with
-https://github.com/openssl-projects/pkcs11-provider/pull/689
+From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 
-Signed-off-by: Fabian Pflug <f.pflug@pengutronix.de>
+When jsoncpp is built with C++17, 1.9.7 drops several legacy overloads
+that C++11 consumers can still link against.
+
+Backport the upstream fix to restore compatibility.
+
+Fixes errors such as:
+|  undefined reference to `Json::Value::operator[](char const*)'
+
+Patch can be dropped when we move to 1.9.8.
+
+Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 ---
- ...-Fix-i686-build-failures-in-cipher.c.patch | 62 +++++++++++++++++++
- .../pkcs11-provider/pkcs11-provider_1.2.bb    |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-failures-in-cipher.c.patch
+This was previously sent to the openembedded-core mailing list by
+mistake: https://lore.kernel.org/openembedded-core/20260501160902.1164934-1-ernestvanhoecke@gmail.com/
+---
+ ...akage-when-compiled-with-C-17-1668-1.patch | 368 ++++++++++++++++++
+ .../recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb |   1 +
+ 2 files changed, 369 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
 
-diff --git a/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-failures-in-cipher.c.patch b/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-failures-in-cipher.c.patch
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
 new file mode 100644
-index 0000000000..479608b8f3
+index 000000000000..887bf14d2af5
 --- /dev/null
-+++ b/meta-oe/recipes-support/pkcs11-provider/files/0001-Fix-i686-build-failures-in-cipher.c.patch
-@@ -0,0 +1,62 @@
-+From aec4fe7e3c4d18cd5d0f98168df5884a141c6b69 Mon Sep 17 00:00:00 2001
-+From: Simo Sorce <simo@redhat.com>
-+Date: Thu, 19 Feb 2026 16:08:56 -0500
-+Subject: [PATCH] Fix i686 build failures in cipher.c
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
+@@ -0,0 +1,368 @@
++From c67034e4b4c722579ee15fddb8e4af8f04252b08 Mon Sep 17 00:00:00 2001
++From: Jordan Bayles <bayles.jordan@gmail.com>
++Date: Thu, 9 Apr 2026 10:37:08 -0700
++Subject: [PATCH] Fix C++11 ABI breakage when compiled with C++17 #1668 (#1675)
 +
-+Update AEAD functions to use CK_ULONG pointers for lengths and
-+introduce a temporary size_t variable for OSSL_PARAM calls. This
-+corrects pointer type mismatches that caused build failures in
-+Fedora Rawhide i686 scratch builds.
++When JSONCPP_HAS_STRING_VIEW was defined, the library dropped the
++`const char*` and `const String&` overloads for `operator[]`, `get`,
++`removeMember`, and `isMember`, breaking ABI compatibility for projects
++consuming the library with C++11.
 +
-+Upstream-Status: Backport [aec4fe7e3c4d18cd5d0f98168df5884a141c6b69]
++This change unconditionally declares and defines the legacy overloads
++so they are always exported, restoring compatibility.
 +
-+Signed-off-by: Simo Sorce <simo@redhat.com>
++This commit completely eliminates the ABI breakage that occurs across
++C++ standard boundaries when using `std::string_view`.
++
++Previously, when the library was built with C++17+, CMake would leak
++`JSONCPP_HAS_STRING_VIEW=1` as a PUBLIC definition. A C++11 consumer
++would receive this definition, attempt to parse the header, and fail
++with compiler errors because `std::string_view` is not available in
++their environment.
++
++Conversely, if the library was built in C++11 (without `string_view`
++symbols), a C++17 consumer would naturally define
++`JSONCPP_HAS_STRING_VIEW` based on `__cplusplus` inside `value.h`. The
++consumer would then call the declared `string_view` methods, resulting
++in linker errors because the methods weren't compiled into the library.
++
++By moving all `std::string_view` overloads directly into `value.h` as
++`inline` methods that delegate to the fundamental
++`const char*, const char*` methods:
++1. The consumer's compiler dictates whether the overloads are visible
++   (via `__cplusplus >= 201703L`).
++2. The consumer compiles the inline wrappers locally, removing any
++   reliance on the library's exported symbols for `std::string_view`.
++3. CMake no longer needs to pollute the consumer's environment with
++   PUBLIC compile definitions.
++
++Backported only the library/header changes. Upstream CI and example
++test additions are omitted.
++
++Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncpp/commit/c67034e4b4c722579ee15fddb8e4af8f04252b08]
++Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
 +---
-+ src/cipher.c | 11 ++++++-----
-+ 1 file changed, 6 insertions(+), 5 deletions(-)
++ include/json/value.h        | 54 ++++++++++++++++++++----------
++ src/lib_json/CMakeLists.txt |  9 -----
++ src/lib_json/json_value.cpp | 66 -------------------------------------
++ 3 files changed, 36 insertions(+), 93 deletions(-)
 +
-+diff --git a/src/cipher.c b/src/cipher.c
-+index faaa51b..4ccd3ad 100644
-+--- a/src/cipher.c
-++++ b/src/cipher.c
-+@@ -867,7 +867,7 @@ static CK_RV tls_aead_get_data(CK_MECHANISM_PTR mech, data_buffer *explicitiv,
-+ 
-+ static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *cctx,
-+                           const unsigned char **in, size_t *inl,
-+-                          unsigned char **out, size_t *outl)
-++                          unsigned char **out, CK_ULONG *outl)
-+ {
-+     data_buffer iv = { 0 };
-+     data_buffer tag = { 0 };
-+@@ -906,7 +906,7 @@ static CK_RV tls_pre_aead(struct p11prov_cipher_ctx *cctx,
++diff --git a/include/json/value.h b/include/json/value.h
++index f32f45609365..2007e6b4251d 100644
++--- a/include/json/value.h
+++++ b/include/json/value.h
++@@ -357,7 +357,8 @@ public:
++   Value(const StaticString& value);
++   Value(const String& value);
++ #ifdef JSONCPP_HAS_STRING_VIEW
++-  Value(std::string_view value);
+++  inline Value(std::string_view value)
+++      : Value(value.data(), value.data() + value.length()) {}
++ #endif
++   Value(bool value);
++   Value(std::nullptr_t ptr) = delete;
++@@ -405,7 +406,14 @@ public:
++   /** Get string_view of string-value.
++    *  \return false if !string. (Seg-fault if str is NULL.)
++    */
++-  bool getString(std::string_view* str) const;
+++  inline bool getString(std::string_view* str) const {
+++    char const* begin;
+++    char const* end;
+++    if (!getString(&begin, &end))
+++      return false;
+++    *str = std::string_view(begin, static_cast<size_t>(end - begin));
+++    return true;
+++  }
++ #endif
++   Int asInt() const;
++   UInt asUInt() const;
++@@ -496,12 +504,19 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Access an object value by name, create a null member if it does not exist.
++   /// \param key may contain embedded nulls.
++-  Value& operator[](std::string_view key);
+++  inline Value& operator[](std::string_view key) {
+++    return resolveReference(key.data(), key.data() + key.length());
+++  }
++   /// Access an object value by name, returns null if there is no member with
++   /// that name.
++   /// \param key may contain embedded nulls.
++-  const Value& operator[](std::string_view key) const;
++-#else
+++  inline const Value& operator[](std::string_view key) const {
+++    Value const* found = find(key.data(), key.data() + key.length());
+++    if (!found)
+++      return nullSingleton();
+++    return *found;
+++  }
+++#endif
++   /// Access an object value by name, create a null member if it does not exist.
++   /// \note Because of our implementation, keys are limited to 2^30 -1 chars.
++   /// Exceeding that will cause an exception.
++@@ -516,7 +531,6 @@ public:
++   /// that name.
++   /// \param key may contain embedded nulls.
++   const Value& operator[](const String& key) const;
++-#endif
++   /** \brief Access an object value by name, create a null member if it does not
++    * exist.
++    *
++@@ -533,8 +547,10 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++-  Value get(std::string_view key, const Value& defaultValue) const;
++-#else
+++  inline Value get(std::string_view key, const Value& defaultValue) const {
+++    return get(key.data(), key.data() + key.length(), defaultValue);
+++  }
+++#endif
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++   Value get(const char* key, const Value& defaultValue) const;
++@@ -542,7 +558,6 @@ public:
++   /// \note deep copy
++   /// \param key may contain embedded nulls.
++   Value get(const String& key, const Value& defaultValue) const;
++-#endif
++   /// Return the member named key if it exist, defaultValue otherwise.
++   /// \note deep copy
++   /// \note key may contain embedded nulls.
++@@ -588,13 +603,14 @@ public:
++   /// \pre type() is objectValue or nullValue
++   /// \post type() is unchanged
++ #if JSONCPP_HAS_STRING_VIEW
++-  void removeMember(std::string_view key);
++-#else
+++  inline void removeMember(std::string_view key) {
+++    removeMember(key.data(), key.data() + key.length(), nullptr);
+++  }
+++#endif
++   void removeMember(const char* key);
++   /// Same as removeMember(const char*)
++   /// \param key may contain embedded nulls.
++   void removeMember(const String& key);
++-#endif
++   /** \brief Remove the named map member.
++    *
++    *  Update 'removed' iff removed.
++@@ -602,13 +618,14 @@ public:
++    *  \return true iff removed (no exceptions)
++    */
++ #if JSONCPP_HAS_STRING_VIEW
++-  bool removeMember(std::string_view key, Value* removed);
++-#else
+++  inline bool removeMember(std::string_view key, Value* removed) {
+++    return removeMember(key.data(), key.data() + key.length(), removed);
+++  }
+++#endif
++   bool removeMember(String const& key, Value* removed);
++   /// Same as removeMember(const char* begin, const char* end, Value* removed),
++   /// but 'key' is null-terminated.
++   bool removeMember(const char* key, Value* removed);
++-#endif
++   /// Same as removeMember(String const& key, Value* removed)
++   bool removeMember(const char* begin, const char* end, Value* removed);
++   /** \brief Remove the indexed array element.
++@@ -622,15 +639,16 @@ public:
++ #ifdef JSONCPP_HAS_STRING_VIEW
++   /// Return true if the object has a member named key.
++   /// \param key may contain embedded nulls.
++-  bool isMember(std::string_view key) const;
++-#else
+++  inline bool isMember(std::string_view key) const {
+++    return isMember(key.data(), key.data() + key.length());
+++  }
+++#endif
++   /// Return true if the object has a member named key.
++   /// \note 'key' must be null-terminated.
++   bool isMember(const char* key) const;
++   /// Return true if the object has a member named key.
++   /// \param key may contain embedded nulls.
++   bool isMember(const String& key) const;
++-#endif
++   /// Same as isMember(String const& key)const
++   bool isMember(const char* begin, const char* end) const;
++
++diff --git a/src/lib_json/CMakeLists.txt b/src/lib_json/CMakeLists.txt
++index 03e9335525ca..a0695e9eba83 100644
++--- a/src/lib_json/CMakeLists.txt
+++++ b/src/lib_json/CMakeLists.txt
++@@ -131,9 +131,6 @@ if(BUILD_SHARED_LIBS)
++
++     target_compile_features(${SHARED_LIB} PUBLIC ${REQUIRED_FEATURES})
++
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${SHARED_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++
++     target_include_directories(${SHARED_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++@@ -168,9 +165,6 @@ if(BUILD_STATIC_LIBS)
++
++     target_compile_features(${STATIC_LIB} PUBLIC ${REQUIRED_FEATURES})
++
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${STATIC_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++
++     target_include_directories(${STATIC_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++@@ -198,9 +192,6 @@ if(BUILD_OBJECT_LIBS)
++
++     target_compile_features(${OBJECT_LIB} PUBLIC ${REQUIRED_FEATURES})
++
++-    if(JSONCPP_HAS_STRING_VIEW)
++-        target_compile_definitions(${OBJECT_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
++-    endif()
++
++     target_include_directories(${OBJECT_LIB} PUBLIC
++         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++diff --git a/src/lib_json/json_value.cpp b/src/lib_json/json_value.cpp
++index 74f77896fa7b..a8eb72d6b75f 100644
++--- a/src/lib_json/json_value.cpp
+++++ b/src/lib_json/json_value.cpp
++@@ -441,14 +441,6 @@ Value::Value(const String& value) {
++       value.data(), static_cast<unsigned>(value.length()));
 + }
-+ 
-+ static CK_RV tls_post_aead(struct p11prov_cipher_ctx *cctx, unsigned char *out,
-+-                           size_t *outl)
-++                           CK_ULONG *outl)
-+ {
-+     data_buffer explicitiv = { 0 };
-+     data_buffer tag = { 0 };
-+@@ -1475,15 +1475,16 @@ static int p11prov_common_set_ctx_params(void *vctx, const OSSL_PARAM params[])
-+                 return RET_OSSL_ERR;
-+             }
-+ 
-+-            int ret = OSSL_PARAM_get_octet_string(
-+-                p, (void **)&gcm->pIv, gcm->ulIvLen, &gcm->ulIvFixedBits);
-++            size_t iv_size;
-++            int ret = OSSL_PARAM_get_octet_string(p, (void **)&gcm->pIv,
-++                                                  gcm->ulIvLen, &iv_size);
-+             if (ret != RET_OSSL_OK || gcm->pIv == NULL) {
-+                 P11PROV_raise(ctx->provctx, CKR_HOST_MEMORY,
-+                               "Memory allocation failed");
-+                 return RET_OSSL_ERR;
-+             }
-+ 
-+-            gcm->ulIvFixedBits = BYTES_TO_BITS(gcm->ulIvFixedBits);
-++            gcm->ulIvFixedBits = BYTES_TO_BITS(iv_size);
-+             gcm->ivGenerator = CKG_GENERATE_COUNTER;
-+         } else {
-+             P11PROV_raise(ctx->provctx, CKR_MECHANISM_PARAM_INVALID,
-+-- 
-+2.47.3
 +
-diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
-index 1bdb4445e5..d95706d9e3 100644
---- a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
-+++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_1.2.bb
-@@ -19,6 +19,7 @@ SRCREV = "c7a5c8b62a0ff012b16574f01651254ef7e664ee"
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-Value::Value(std::string_view value) {
++-  initBasic(stringValue, true);
++-  value_.string_ = duplicateAndPrefixStringValue(
++-      value.data(), static_cast<unsigned>(value.length()));
++-}
++-#endif
++-
++ Value::Value(const StaticString& value) {
++   initBasic(stringValue);
++   value_.string_ = const_cast<char*>(value.c_str());
++@@ -656,21 +648,6 @@ bool Value::getString(char const** begin, char const** end) const {
++   return true;
++ }
++
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::getString(std::string_view* str) const {
++-  if (type() != stringValue)
++-    return false;
++-  if (value_.string_ == nullptr)
++-    return false;
++-  const char* begin;
++-  unsigned length;
++-  decodePrefixedString(this->isAllocated(), this->value_.string_, &length,
++-                       &begin);
++-  *str = std::string_view(begin, length);
++-  return true;
++-}
++-#endif
++-
++ String Value::asString() const {
++   switch (type()) {
++   case nullValue:
++@@ -1190,17 +1167,6 @@ Value* Value::demand(char const* begin, char const* end) {
++                       "objectValue or nullValue");
++   return &resolveReference(begin, end);
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-const Value& Value::operator[](std::string_view key) const {
++-  Value const* found = find(key.data(), key.data() + key.length());
++-  if (!found)
++-    return nullSingleton();
++-  return *found;
++-}
++-Value& Value::operator[](std::string_view key) {
++-  return resolveReference(key.data(), key.data() + key.length());
++-}
++-#else
++ const Value& Value::operator[](const char* key) const {
++   Value const* found = find(key, key + strlen(key));
++   if (!found)
++@@ -1221,7 +1187,6 @@ Value& Value::operator[](const char* key) {
++ Value& Value::operator[](const String& key) {
++   return resolveReference(key.data(), key.data() + key.length());
++ }
++-#endif
++
++ Value& Value::operator[](const StaticString& key) {
++   return resolveReference(key.c_str());
++@@ -1261,18 +1226,12 @@ Value Value::get(char const* begin, char const* end,
++   Value const* found = find(begin, end);
++   return !found ? defaultValue : *found;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-Value Value::get(std::string_view key, const Value& defaultValue) const {
++-  return get(key.data(), key.data() + key.length(), defaultValue);
++-}
++-#else
++ Value Value::get(char const* key, Value const& defaultValue) const {
++   return get(key, key + strlen(key), defaultValue);
++ }
++ Value Value::get(String const& key, Value const& defaultValue) const {
++   return get(key.data(), key.data() + key.length(), defaultValue);
++ }
++-#endif
++
++ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
++   if (type() != objectValue) {
++@@ -1288,31 +1247,13 @@ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
++   value_.map_->erase(it);
++   return true;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::removeMember(std::string_view key, Value* removed) {
++-  return removeMember(key.data(), key.data() + key.length(), removed);
++-}
++-#else
++ bool Value::removeMember(const char* key, Value* removed) {
++   return removeMember(key, key + strlen(key), removed);
++ }
++ bool Value::removeMember(String const& key, Value* removed) {
++   return removeMember(key.data(), key.data() + key.length(), removed);
++ }
++-#endif
++-
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-void Value::removeMember(std::string_view key) {
++-  JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
++-                      "in Json::Value::removeMember(): requires objectValue");
++-  if (type() == nullValue)
++-    return;
++
++-  CZString actualKey(key.data(), unsigned(key.length()),
++-                     CZString::noDuplication);
++-  value_.map_->erase(actualKey);
++-}
++-#else
++ void Value::removeMember(const char* key) {
++   JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
++                       "in Json::Value::removeMember(): requires objectValue");
++@@ -1323,7 +1264,6 @@ void Value::removeMember(const char* key) {
++   value_.map_->erase(actualKey);
++ }
++ void Value::removeMember(const String& key) { removeMember(key.c_str()); }
++-#endif
++
++ bool Value::removeIndex(ArrayIndex index, Value* removed) {
++   if (type() != arrayValue) {
++@@ -1353,18 +1293,12 @@ bool Value::isMember(char const* begin, char const* end) const {
++   Value const* value = find(begin, end);
++   return nullptr != value;
++ }
++-#ifdef JSONCPP_HAS_STRING_VIEW
++-bool Value::isMember(std::string_view key) const {
++-  return isMember(key.data(), key.data() + key.length());
++-}
++-#else
++ bool Value::isMember(char const* key) const {
++   return isMember(key, key + strlen(key));
++ }
++ bool Value::isMember(String const& key) const {
++   return isMember(key.data(), key.data() + key.length());
++ }
++-#endif
++
++ Value::Members Value::getMemberNames() const {
++   JSON_ASSERT_MESSAGE(
++--
++2.43.0
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+index 797f093f3349..354f4e91156a 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
+@@ -15,6 +15,7 @@ PE = "1"
  
- SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
- 
-+SRC_URI += "file://0001-Fix-i686-build-failures-in-cipher.c.patch"
- 
- inherit meson pkgconfig
+ SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
+ SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https;tag=${PV} \
++           file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch \
+            file://run-ptest \
+            "
  
 -- 
-2.47.3
+2.43.0
 
 
