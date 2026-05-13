@@ -2,62 +2,62 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E39ECD484C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A117CD37B6
 	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 05:06:09 +0000 (UTC)
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.733.1778648707490720291
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com [209.85.216.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.723.1778648705174014071
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2026 22:05:07 -0700
+ Tue, 12 May 2026 22:05:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=bmeLuV//;
- spf=pass (domain: gmail.com, ip: 209.85.216.46, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-3567e2b4159so3891938a91.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 22:05:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=UgCfF5J9;
+ spf=pass (domain: gmail.com, ip: 209.85.216.41, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f41.google.com with SMTP id 98e67ed59e1d1-367c26471f5so3001555a91.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 22:05:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778648707; x=1779253507; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1778648704; x=1779253504; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=LqpEK3IDu8ExxcMIK6EkbBP8K8GG72sBYfUfxTPCGnU=;
-        b=bmeLuV//KPooxr645wB8g32XCqoYbUyNMzK4MaNBwYprLXwhs7L+827zVVv7H0f3eB
-         FC80uLe1WrPO9JfSdzJvt0xMS4hmAV+cMNEdsg23I2T+yZa7YNcDUt9qFTgr3thdHcRs
-         zBgDiSkEbY2tn1aN9nohFqdnXzVXvnFwpBlTBS8oS5BseYsOj+0kkP1bRVkRZjCUYhcU
-         jVnkrNXW/Se7FuUlJ8t/rM66J7WB9yfxrJSddGjw08Mp6FAF7LfIwZaBS42ZM8C69n9c
-         nFh6pP9NPZ5BjIKQpkQtHFpKbmt7s8WwBTluX477V8mkVqidQmIWL8vzKeYESbtNdveF
-         JqaA==
+        bh=qYb7oOUhp5pdVPzLrI3Wt7BH4MssxcXIRedqxSVD+C4=;
+        b=UgCfF5J9BxkJK6Lelvzy1L+XIsetrshdOgiD4qm9imi/f7BZxaKnWyBipVT9OXBUxV
+         zW8IGOmslQhTEIF9sVhv1JxV9Wj6ibxi6XS8uJq0rx9bZwxxVmWchrL+WzUQjAFzuzlK
+         QW8PVsYNQc1Qd5H/d1HjQRoacETQhjJM9LQyQX2CsOeLZ4m7Ct1rzoFQkC+K6b4D3ji/
+         nGEOeCle6XzihRSt8Zf/HESzKicPT3J84/TmsQwN7jQQu1vrXSKSe877q2pjiddY8KL7
+         rPciMtwrVihuIE2YwtV+fIKvfyIVWBeHthqIPpzJ192FtmWGV8RfNMyueB8ijrfLL9S3
+         ICpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778648707; x=1779253507;
+        d=1e100.net; s=20251104; t=1778648704; x=1779253504;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=LqpEK3IDu8ExxcMIK6EkbBP8K8GG72sBYfUfxTPCGnU=;
-        b=HxVd2c6ywcdC9hZXKyfgeEl/5hahhN2UR0jI+LYiwaJKFC+ADVCAqViq9dxEUzqsOF
-         EK/HYb8ydPuxDhSeT00B9Hi0KPzon0JXHoo5A1Guxq6AOdXNqyIsFctLHH4vtYAQVLN2
-         jqms1X2rOCuWVr+IdkoZ41HIjtdEPq4DVGDzE5/llY4NFc4PkgHsCo1zIoBli3sfGjHm
-         O5rBOAg2dfSYxQovU6iE7Mqt5jFteAQ/alUhBux+gvf/5bUa4f4pZFAJv8kVzHJhY2h3
-         JoMZWIsLtlz5+MffW/1jMiqBTyINJ3tLUpCqEQnp7DyW5ovllhRYdvYW/un/1XzyEpvZ
-         TPFw==
-X-Gm-Message-State: AOJu0Yy23yZ9Iy0mu+monMu0lalajMUNN+6cX5gXEuha6U4BKGtYZJPN
-	cy67Fd3sFm7fAVFSGq4UFhqplrjzehxGFaxPT1Ydzj2opyhXGmVVEomR++nO6Ma/
-X-Gm-Gg: Acq92OFcpSCVp2IOLsq2wDzgy1RKY5CvoPHGOwpSQNN6AGbZ9JuoHGk/ccR+y+JQCHq
-	xWCJGnfQqM8YVQ18HFFN5ekpYErkexp0/DZxPwWsVCt5ALGhJmP/Nz7U3qNf1H2NLJ7d/FbQVME
-	4DD6RdCu5oQfAJ/RM2gzQh20Zg1c8dngXWuLxVBzZLdhWBrDDr+Dy0fM0ASUqOgdV6aiGHdEfs6
-	4I/XKSM/Qih5CrO9YzmScl4noFkwcJzYQZkBrV2/HrL9sZFFEht5qy4e9vo3Bk7WJn3PeJkBPu1
-	gpoeSv6rjF8VDS7bPAphIBIpxQvj9nxFimeKF0EEjAd4VdRNdYoSqwff6GLJRMKDwhXz9n2Q/Ip
-	Z3/rZYM08NORYOl/R6JaFoNIxbbPs5ZRT/Hcfga3hPqZiQ1KIiLzQNieT+hVEUo+JXURXBn8WnE
-	g7STCy1VTGWrOFH774wQNgEtEQopJFoNfMSa7a
-X-Received: by 2002:a17:90b:1b0d:b0:35f:b5df:453 with SMTP id 98e67ed59e1d1-368f79cd1dfmr1258351a91.22.1778648706749;
-        Tue, 12 May 2026 22:05:06 -0700 (PDT)
+        bh=qYb7oOUhp5pdVPzLrI3Wt7BH4MssxcXIRedqxSVD+C4=;
+        b=s0Autf4GN3rinL0qO61wyVaNzby05JKIXiL2CcY0fDggCIMqahGgClroDMPaptuXGp
+         L5D/9ZB+uTLRez6nPBBI0sjx27Z4C5tUtNCTUyYVsTgmmDstNVXTetIJeqesIVFhefLP
+         CgAV4ftKFPg3BoiwFQCFEw8L22v+x92gZ5IIL1QejLD9LEAvxQWL/RKYYDlnKhqtoDia
+         GtSny9Pn0bPl7CAN7HYnLq5SJHiTXQSq6BnHLVCPL4QZS98bGCWN2GAGG/3nyoUr5dxJ
+         kNOV6QV+Kz7xvKasXnc2IWKggyjPKS7vWpmWI2+D1qv7srD3BiOmIrtQ6qtkDAzvLmo+
+         H/ww==
+X-Gm-Message-State: AOJu0YwfAoRPZO7IA8m/JPG9lCKu2lcWVSQeHRC9OuYuJziLmkqDvEsr
+	Ve90E35RAsUPUZrnXDQbi9YQxNi0TWG65GzTXuIEtnvR8A5gYz0buisDKeDUovc6
+X-Gm-Gg: Acq92OEFKfskZQQwgH4r6R8QLRPRpDMrN3Ds4WFYnWxrx1RuTE42bnONt3pDO/f4GXG
+	8Tju8g3GGrRDHUOxq83BZvLmHmnnZUF9FnSKqRac6wmdFTu4PoKjFsNSEs9NrUoXaEKRTp0G8Qc
+	4vi8OCHEkl749UYze5sFZKHmnYmUX5iEVw6pZ2/DJY2yefWSDhpfcom1KT0zaAhzang1op5hOVE
+	/IyLlwEM5e0p3dh3gLCbmjpRbKNG6rcAx2Pdyr+bJNwr89Um5a7B2VFJk+sc0EIznDkq06NAGQf
+	m/fIsR79v2AYUtTfMpn1YxcA32/v17MuRZlJQSl9XjFb3JM0hwGRel4JZpaA5KN6qgtN1IiQiKN
+	YMp1E+aR1S9ed6WOMlVvocEoZKdv01JA7rYss91hRKjS3piAU/dSKNsNd9aE1Sz23xKaKAwG94K
+	0aAlw5ZjOz9sm4wudxCbj4LYB3qG9vg+oY7CQe
+X-Received: by 2002:a17:90a:51a1:b0:369:971:4888 with SMTP id 98e67ed59e1d1-36909714b3bmr33119a91.15.1778648704458;
+        Tue, 12 May 2026 22:05:04 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368eddf5c58sm1696900a91.1.2026.05.12.22.05.04
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368eddf5c58sm1696900a91.1.2026.05.12.22.05.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 May 2026 22:05:06 -0700 (PDT)
+        Tue, 12 May 2026 22:05:04 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 5/8] lcms: patch CVE-2026-41254
-Date: Wed, 13 May 2026 17:04:46 +1200
-Message-ID: <20260513050450.3515182-5-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][scarthgap][PATCH 4/8] frr: patch CVE-2026-28532
+Date: Wed, 13 May 2026 17:04:45 +1200
+Message-ID: <20260513050450.3515182-4-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260513050450.3515182-1-ankur.tyagi85@gmail.com>
 References: <20260513050450.3515182-1-ankur.tyagi85@gmail.com>
@@ -67,115 +67,344 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 05:06:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126948
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126947
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-Details: https://nvd.nist.gov/vuln/detail/CVE-2026-41254
-
-Backport the patches referenced by the NVD advisory.
+Details: https://nvd.nist.gov/vuln/detail/CVE-2026-28532
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../lcms/lcms/CVE-2026-41254_1.patch          | 30 ++++++++++++++++
- .../lcms/lcms/CVE-2026-41254_2.patch          | 36 +++++++++++++++++++
- meta-oe/recipes-support/lcms/lcms_2.16.bb     |  5 ++-
- 3 files changed, 70 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
- create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
+ .../frr/frr/CVE-2026-28532.patch              | 309 ++++++++++++++++++
+ .../recipes-protocols/frr/frr_9.1.3.bb        |   1 +
+ 2 files changed, 310 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2026-28532.patch
 
-diff --git a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2026-28532.patch b/meta-networking/recipes-protocols/frr/frr/CVE-2026-28532.patch
 new file mode 100644
-index 0000000000..7bf46706e5
+index 0000000000..39f5f569de
 --- /dev/null
-+++ b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
-@@ -0,0 +1,30 @@
-+From 524f3df7511b49543a65a7de2a08640777c1b29c Mon Sep 17 00:00:00 2001
-+From: Marti Maria <marti.maria@littlecms.com>
-+Date: Thu, 19 Feb 2026 09:07:20 +0100
-+Subject: [PATCH] Fix integer overflow in CubeSize()
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2026-28532.patch
+@@ -0,0 +1,309 @@
++From ea6982fe2ae7db40b0ea0ec42c283eb3b3178798 Mon Sep 17 00:00:00 2001
++From: Jafar Al-Gharaibeh <jafar@atcorp.com>
++Date: Wed, 4 Mar 2026 12:38:46 -0600
++Subject: [PATCH] ospfd: harden TE/SR TLV iteration against malformed lengths
 +
-+Thanks to @zerojackyi for reporting
++Use 32-bit counters and per-iteration TLV size bounds checks
++in OSPF TE/SR TLV parsers so malformed opaque LSAs cannot wrap
++loop accounting and advance pointers beyond the LSA buffer.
 +
-+(cherry picked from commit da6110b1d14abc394633a388209abd5ebedd7ab0)
++- Change loop accumulators from 16-bit to 32-bit (uint32_t) to
++  prevent wraparound
++- Rework TLV iteration so pointer advancement is controlled in-loop
++- Add per-iteration guard before advancing:
++  - `tlv_size <= (len - sum)` (or `length - sum`)
++- On malformed size, parser now logs and exits/breaks the loop
++  safely instead of stepping past buffer limits
 +
-+CVE: CVE-2026-41254
-+Upstream-Status: Backport [https://github.com/mm2/Little-CMS/commit/da6110b1d14abc394633a388209abd5ebedd7ab0]
++Signed-off-by: Jafar Al-Gharaibeh <jafar@atcorp.com>
++(cherry picked from commit d3e8aedb87671f38db59b0df908e25e1d4af027d)
++
++CVE: CVE-2026-28532
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/d3e8aedb87671f38db59b0df908e25e1d4af027d]
 +Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 +---
-+ src/cmslut.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ ospfd/ospf_sr.c | 50 ++++++++++++++++++++++++++++++--------
++ ospfd/ospf_te.c | 64 +++++++++++++++++++++++++++++++++++++++----------
++ 2 files changed, 91 insertions(+), 23 deletions(-)
 +
-+diff --git a/src/cmslut.c b/src/cmslut.c
-+index 1ea61a8..3488d0c 100644
-+--- a/src/cmslut.c
-++++ b/src/cmslut.c
-+@@ -460,7 +460,8 @@ void EvaluateCLUTfloatIn16(const cmsFloat32Number In[], cmsFloat32Number Out[],
-+ static
-+ cmsUInt32Number CubeSize(const cmsUInt32Number Dims[], cmsUInt32Number b)
-+ {
-+-    cmsUInt32Number rv, dim;
-++    cmsUInt32Number dim;
-++    cmsUInt64Number rv;
++diff --git a/ospfd/ospf_sr.c b/ospfd/ospf_sr.c
++index e26fe6f53a..11ca362a1b 100644
++--- a/ospfd/ospf_sr.c
+++++ b/ospfd/ospf_sr.c
++@@ -985,7 +985,8 @@ static struct sr_link *get_ext_link_sid(struct tlv_header *tlvh, size_t size)
++ 	struct ext_subtlv_rmt_itf_addr *rmt_itf;
 + 
-+     _cmsAssert(Dims != NULL);
++ 	struct tlv_header *sub_tlvh;
++-	uint16_t length = 0, sum = 0, i = 0;
+++	uint32_t length = 0, sum = 0;
+++	uint16_t i = 0;
 + 
-diff --git a/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
-new file mode 100644
-index 0000000000..0602258ef5
---- /dev/null
-+++ b/meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
-@@ -0,0 +1,36 @@
-+From 73ffd45705d368c159bb819ab0b1a033638c3ffe Mon Sep 17 00:00:00 2001
-+From: Marti Maria <marti.maria@littlecms.com>
-+Date: Thu, 12 Mar 2026 22:57:35 +0100
-+Subject: [PATCH] check for overflow
-+
-+Thanks to Guanni Qu for detecting & reporting the issue
-+
-+(cherry picked from commit e0641b1828d0a1af5ecb1b11fe22f24fceefd4bc)
-+
-+CVE: CVE-2026-41254
-+Upstream-Status: Backport [https://github.com/mm2/Little-CMS/commit/e0641b1828d0a1af5ecb1b11fe22f24fceefd4bc]
-+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
-+---
-+ src/cmslut.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/cmslut.c b/src/cmslut.c
-+index 3488d0c..f2d0ec4 100644
-+--- a/src/cmslut.c
-++++ b/src/cmslut.c
-+@@ -468,12 +468,12 @@ cmsUInt32Number CubeSize(const cmsUInt32Number Dims[], cmsUInt32Number b)
-+     for (rv = 1; b > 0; b--) {
-+ 
-+         dim = Dims[b-1];
-+-        if (dim <= 1) return 0;  // Error
-+-
-+-        rv *= dim;
-++        if (dim <= 1) return 0;  
-+ 
-+         // Check for overflow
-+         if (rv > UINT_MAX / dim) return 0;
++ 	/* Check TLV size */
++ 	if ((ntohs(tlvh->length) > size)
++@@ -1000,7 +1001,15 @@ static struct sr_link *get_ext_link_sid(struct tlv_header *tlvh, size_t size)
++ 	length = ntohs(tlvh->length) - EXT_TLV_LINK_SIZE;
++ 	sub_tlvh = (struct tlv_header *)((char *)(tlvh) + TLV_HDR_SIZE
++ 					 + EXT_TLV_LINK_SIZE);
++-	for (; sum < length && sub_tlvh; sub_tlvh = TLV_HDR_NEXT(sub_tlvh)) {
+++	for (; sum < length && sub_tlvh;) {
+++		uint32_t tlv_size = TLV_SIZE(sub_tlvh);
 ++
-++        rv *= dim;
-+     }
+++		if (tlv_size > length - sum) {
+++			zlog_warn("Malformed Extended Link sub-TLV size %u (remaining %u)",
+++				  tlv_size, length - sum);
+++			break;
+++		}
+++
++ 		switch (ntohs(sub_tlvh->type)) {
++ 		case EXT_SUBTLV_ADJ_SID:
++ 			adj_sid = (struct ext_subtlv_adj_sid *)sub_tlvh;
++@@ -1041,7 +1050,9 @@ static struct sr_link *get_ext_link_sid(struct tlv_header *tlvh, size_t size)
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(sub_tlvh);
+++		sum += tlv_size;
+++		if (sum < length)
+++			sub_tlvh = TLV_HDR_NEXT(sub_tlvh);
++ 	}
 + 
-+     // Again, prevent overflow
-diff --git a/meta-oe/recipes-support/lcms/lcms_2.16.bb b/meta-oe/recipes-support/lcms/lcms_2.16.bb
-index 8135f83a05..8a70572907 100644
---- a/meta-oe/recipes-support/lcms/lcms_2.16.bb
-+++ b/meta-oe/recipes-support/lcms/lcms_2.16.bb
-@@ -3,7 +3,10 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e9ce323c4b71c943a785db90142b228a"
++ 	IPV4_ADDR_COPY(&srl->itf_addr, &link->link_data);
++@@ -1062,7 +1073,7 @@ static struct sr_prefix *get_ext_prefix_sid(struct tlv_header *tlvh,
++ 	struct ext_subtlv_prefix_sid *psid;
++ 
++ 	struct tlv_header *sub_tlvh;
++-	uint16_t length = 0, sum = 0;
+++	uint32_t length = 0, sum = 0;
++ 
++ 	/* Check TLV size */
++ 	if ((ntohs(tlvh->length) > size)
++@@ -1077,7 +1088,15 @@ static struct sr_prefix *get_ext_prefix_sid(struct tlv_header *tlvh,
++ 	length = ntohs(tlvh->length) - EXT_TLV_PREFIX_SIZE;
++ 	sub_tlvh = (struct tlv_header *)((char *)(tlvh) + TLV_HDR_SIZE
++ 					 + EXT_TLV_PREFIX_SIZE);
++-	for (; sum < length && sub_tlvh; sub_tlvh = TLV_HDR_NEXT(sub_tlvh)) {
+++	for (; sum < length && sub_tlvh;) {
+++		uint32_t tlv_size = TLV_SIZE(sub_tlvh);
+++
+++		if (tlv_size > length - sum) {
+++			zlog_warn("Malformed Extended Prefix sub-TLV size %u (remaining %u)",
+++				  tlv_size, length - sum);
+++			break;
+++		}
+++
++ 		switch (ntohs(sub_tlvh->type)) {
++ 		case EXT_SUBTLV_PREFIX_SID:
++ 			psid = (struct ext_subtlv_prefix_sid *)sub_tlvh;
++@@ -1102,7 +1121,9 @@ static struct sr_prefix *get_ext_prefix_sid(struct tlv_header *tlvh,
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(sub_tlvh);
+++		sum += tlv_size;
+++		if (sum < length)
+++			sub_tlvh = TLV_HDR_NEXT(sub_tlvh);
++ 	}
++ 
++ 	osr_debug("  |-  Found SID %u for prefix %pFX", srp->sid,
++@@ -1364,7 +1385,7 @@ void ospf_sr_ri_lsa_update(struct ospf_lsa *lsa)
++ 	struct ri_sr_tlv_sid_label_range *ri_srlb = NULL;
++ 	struct ri_sr_tlv_sr_algorithm *algo = NULL;
++ 	struct sr_block srgb;
++-	uint16_t length = 0, sum = 0;
+++	uint32_t length = 0, sum = 0;
++ 	uint8_t msd = 0;
++ 
++ 	osr_debug("SR (%s): Process Router Information LSA 4.0.0.%u from %pI4",
++@@ -1392,8 +1413,15 @@ void ospf_sr_ri_lsa_update(struct ospf_lsa *lsa)
++ 	srgb.range_size = 0;
++ 	srgb.lower_bound = 0;
++ 
++-	for (tlvh = TLV_HDR_TOP(lsah); (sum < length) && (tlvh != NULL);
++-	     tlvh = TLV_HDR_NEXT(tlvh)) {
+++	for (tlvh = TLV_HDR_TOP(lsah); (sum < length) && (tlvh != NULL);) {
+++		uint32_t tlv_size = TLV_SIZE(tlvh);
+++
+++		if (tlv_size > length - sum) {
+++			zlog_warn("Malformed RI TLV size %u (remaining %u)", tlv_size,
+++				  length - sum);
+++			break;
+++		}
+++
++ 		switch (ntohs(tlvh->type)) {
++ 		case RI_SR_TLV_SR_ALGORITHM:
++ 			algo = (struct ri_sr_tlv_sr_algorithm *)tlvh;
++@@ -1410,7 +1438,9 @@ void ospf_sr_ri_lsa_update(struct ospf_lsa *lsa)
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(tlvh);
+++		sum += tlv_size;
+++		if (sum < length)
+++			tlvh = TLV_HDR_NEXT(tlvh);
++ 	}
++ 
++ 	/* Check if Segment Routing Capabilities has been found */
++diff --git a/ospfd/ospf_te.c b/ospfd/ospf_te.c
++index 1bddf97bde..8d01e4fd1d 100644
++--- a/ospfd/ospf_te.c
+++++ b/ospfd/ospf_te.c
++@@ -2121,7 +2121,7 @@ static int ospf_te_parse_te(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	struct ls_attributes *old, attr = {};
++ 	struct tlv_header *tlvh;
++ 	void *value;
++-	uint16_t len, sum;
+++	uint32_t len, sum;
++ 	uint8_t lsa_id;
++ 
++ 	/* Initialize Attribute */
++@@ -2151,11 +2151,19 @@ static int ospf_te_parse_te(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 
++ 	sum = sizeof(struct tlv_header);
++ 	/* Browse sub-TLV and fulfill Link State Attributes */
++-	for (tlvh = TLV_DATA(tlvh); sum < len; tlvh = TLV_HDR_NEXT(tlvh)) {
+++	tlvh = TLV_DATA(tlvh);
+++	while (sum < len) {
+++		uint32_t tlv_size = TLV_SIZE(tlvh);
++ 		uint32_t val32, tab32[2];
++ 		float valf, tabf[8];
++ 		struct in_addr addr;
++ 
+++		if (tlv_size > len - sum) {
+++			zlog_warn("Malformed TE sub-TLV size %u (remaining %u)", tlv_size,
+++				  len - sum);
+++			break;
+++		}
+++
++ 		value = TLV_DATA(tlvh);
++ 		switch (ntohs(tlvh->type)) {
++ 		case TE_LINK_SUBTLV_LCLIF_IPADDR:
++@@ -2250,7 +2258,9 @@ static int ospf_te_parse_te(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(tlvh);
+++		sum += tlv_size;
+++		if (sum < len)
+++			tlvh = TLV_HDR_NEXT(tlvh);
++ 	}
++ 
++ 	/* Get corresponding Edge from Link State Data Base */
++@@ -2350,7 +2360,7 @@ static int ospf_te_delete_te(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	struct tlv_header *tlvh;
++ 	struct in_addr addr;
++ 	struct ls_edge_key key = {.family = AF_UNSPEC};
++-	uint16_t len, sum;
+++	uint32_t len, sum;
++ 	uint8_t lsa_id;
++ 
++ 	/* Initialize TLV browsing */
++@@ -2362,14 +2372,25 @@ static int ospf_te_delete_te(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	sum = sizeof(struct tlv_header);
++ 
++ 	/* Browse sub-TLV to find Link ID */
++-	for (tlvh = TLV_DATA(tlvh); sum < len; tlvh = TLV_HDR_NEXT(tlvh)) {
+++	tlvh = TLV_DATA(tlvh);
+++	while (sum < len) {
+++		uint32_t tlv_size = TLV_SIZE(tlvh);
+++
+++		if (tlv_size > len - sum) {
+++			zlog_warn("Malformed TE sub-TLV size %u (remaining %u)", tlv_size,
+++				  len - sum);
+++			break;
+++		}
+++
++ 		if (ntohs(tlvh->type) == TE_LINK_SUBTLV_LCLIF_IPADDR) {
++ 			memcpy(&addr, TLV_DATA(tlvh), TE_LINK_SUBTLV_DEF_SIZE);
++ 			key.family = AF_INET;
++ 			IPV4_ADDR_COPY(&key.k.addr, &addr);
++ 			break;
++ 		}
++-		sum += TLV_SIZE(tlvh);
+++		sum += tlv_size;
+++		if (sum < len)
+++			tlvh = TLV_HDR_NEXT(tlvh);
++ 	}
++ 	if (key.family == AF_UNSPEC)
++ 		return 0;
++@@ -2444,7 +2465,7 @@ static int ospf_te_parse_ri(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	struct ls_node *node;
++ 	struct lsa_header *lsah = lsa->data;
++ 	struct tlv_header *tlvh;
++-	uint16_t len = 0, sum = 0;
+++	uint32_t len = 0, sum = 0;
++ 
++ 	/* Get vertex / Node from LSA Advertised Router ID */
++ 	vertex = get_vertex(ted, lsa);
++@@ -2455,13 +2476,18 @@ static int ospf_te_parse_ri(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 
++ 	/* Initialize TLV browsing */
++ 	len = lsa->size - OSPF_LSA_HEADER_SIZE;
++-	for (tlvh = TLV_HDR_TOP(lsah); sum < len && tlvh;
++-	     tlvh = TLV_HDR_NEXT(tlvh)) {
+++	for (tlvh = TLV_HDR_TOP(lsah); sum < len && tlvh;) {
+++		uint32_t tlv_size = TLV_SIZE(tlvh);
++ 		struct ri_sr_tlv_sr_algorithm *algo;
++ 		struct ri_sr_tlv_sid_label_range *range;
++ 		struct ri_sr_tlv_node_msd *msd;
++ 		uint32_t size, lower;
++ 
+++		if (tlv_size > len - sum) {
+++			zlog_warn("Malformed RI TLV size %u (remaining %u)", tlv_size, len - sum);
+++			break;
+++		}
+++
++ 		switch (ntohs(tlvh->type)) {
++ 		case RI_SR_TLV_SR_ALGORITHM:
++ 			if (TLV_BODY_SIZE(tlvh) < 1 ||
++@@ -2546,7 +2572,9 @@ static int ospf_te_parse_ri(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(tlvh);
+++		sum += tlv_size;
+++		if (sum < len)
+++			tlvh = TLV_HDR_NEXT(tlvh);
++ 	}
++ 
++ 	/* Vertex has been created or updated: export it */
++@@ -2758,7 +2786,8 @@ static int ospf_te_parse_ext_link(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	struct ext_tlv_link *ext;
++ 	struct ls_edge *edge;
++ 	struct ls_attributes *atr;
++-	uint16_t len = 0, sum = 0, i;
+++	uint32_t len = 0, sum = 0;
+++	uint16_t i;
++ 	uint32_t label;
++ 
++ 	/* Get corresponding Edge from Link State Data Base */
++@@ -2792,11 +2821,18 @@ static int ospf_te_parse_ext_link(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 	len -= EXT_TLV_LINK_SIZE;
++ 	tlvh = (struct tlv_header *)((char *)(ext) + TLV_HDR_SIZE
++ 				     + EXT_TLV_LINK_SIZE);
++-	for (; sum < len; tlvh = TLV_HDR_NEXT(tlvh)) {
+++	for (; sum < len;) {
+++		uint32_t tlv_size = TLV_SIZE(tlvh);
++ 		struct ext_subtlv_adj_sid *adj;
++ 		struct ext_subtlv_lan_adj_sid *ladj;
++ 		struct ext_subtlv_rmt_itf_addr *rmt;
++ 
+++		if (tlv_size > len - sum) {
+++			zlog_warn("Malformed Extended Link sub-TLV size %u (remaining %u)",
+++				  tlv_size, len - sum);
+++			break;
+++		}
+++
++ 		switch (ntohs(tlvh->type)) {
++ 		case EXT_SUBTLV_ADJ_SID:
++ 			if (TLV_BODY_SIZE(tlvh) != EXT_SUBTLV_ADJ_SID_SIZE)
++@@ -2875,7 +2911,9 @@ static int ospf_te_parse_ext_link(struct ls_ted *ted, struct ospf_lsa *lsa)
++ 		default:
++ 			break;
++ 		}
++-		sum += TLV_SIZE(tlvh);
+++		sum += tlv_size;
+++		if (sum < len)
+++			tlvh = TLV_HDR_NEXT(tlvh);
++ 	}
++ 
++ 	/* Export Link State Edge if needed */
+diff --git a/meta-networking/recipes-protocols/frr/frr_9.1.3.bb b/meta-networking/recipes-protocols/frr/frr_9.1.3.bb
+index 0287a6fb69..20a224b7d7 100644
+--- a/meta-networking/recipes-protocols/frr/frr_9.1.3.bb
++++ b/meta-networking/recipes-protocols/frr/frr_9.1.3.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/FRRouting/frr.git;protocol=https;branch=stable/9.1 \
+            file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_2.patch \
+            file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_3.patch \
+            file://CVE-2025-61099-61100-61101-61102-61103-61104-61105-61106-61107_4.patch \
++           file://CVE-2026-28532.patch \
+            "
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \
-+        file://CVE-2026-41254_1.patch \
-+        file://CVE-2026-41254_2.patch \
-+"
- SRC_URI[sha256sum] = "d873d34ad8b9b4cea010631f1a6228d2087475e4dc5e763eb81acc23d9d45a51"
- 
- DEPENDS = "tiff"
+ SRCREV = "ad1766d17be022587fe05ebe1a7bf10e1b7dce19"
 
