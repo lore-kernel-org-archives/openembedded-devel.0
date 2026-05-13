@@ -2,32 +2,32 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98AA0CD4F3C
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 10:52:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94A43CD4F3F
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 10:52:20 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4836.1778669536118026864
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4839.1778669539479051800
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 03:52:16 -0700
+ Wed, 13 May 2026 03:52:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=Fo4JVUkF;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=sbZMxQWA;
  spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5AAB71C14
-	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:10 -0700 (PDT)
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CC9831655
+	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:13 -0700 (PDT)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 42F1C3F7B4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:15 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A9AFC3F7B4
+	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778669535; bh=0SxkOJVvHKMVbJhzi36csz+ZEwiDzdZmHyDKYqqa37U=;
+	t=1778669539; bh=JvJEMup56r90AD9L/W2K4oTmFHSUfWaLJzF1GaRmt+U=;
 	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=Fo4JVUkF1TrZS9gMOMzaeHyV93d/2SQLKxuE3Llr3Y3X4s5x3S8lHTiWH2FcRHv1Z
-	 /LS0KrfuYVW+GbugyFJybNbfYlXsCtPJ3JB6KYypnaSW0xMNyfvAuqp+m1v+PQzWJw
-	 benHHwezRK5xRnwFw5mSlxrUsobLfux5ZSuG4FRE=
+	b=sbZMxQWARI2s2EZDHOr4+g0Hz4s8DJZ/CsAEcBJG43E7NVSub/TKHFmq++UIbGJgw
+	 ToOzg29WdhN3K972055KSy6gFxY7wgc08t3/ovR3tXz2KR/nx7tkFbUnDRcctV2DSb
+	 DAAG1VvVQr5/P2tGpKsFJBf1eAKCezSFNgczTmWc=
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 2/7] libdazzle: add recipe (from oe-core)
-Date: Wed, 13 May 2026 11:52:05 +0100
-Message-ID: <20260513105210.2109216-2-ross.burton@arm.com>
+Subject: [PATCH v2 7/7] nautilus: update dependencies
+Date: Wed, 13 May 2026 11:52:10 +0100
+Message-ID: <20260513105210.2109216-7-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260513105210.2109216-1-ross.burton@arm.com>
 References: <20260513105210.2109216-1-ross.burton@arm.com>
@@ -36,50 +36,43 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 10:52:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126966
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 10:52:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126971
 
-This was previously in oe-core but is being removed as it is no longer
-used by anything in that layer.
+libhandy was removed when g-s-m ported to GTK 4.
+
+Update the DISTRO_FEATURES checks to use GTK3DISTROFEATURES.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../libdazzle/libdazzle_3.44.0.bb              | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-gnome/recipes-support/libdazzle/libdazzle_3.44.0=
-.bb
+ meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/libdazzle/libdazzle_3.44.0.bb b/m=
-eta-gnome/recipes-support/libdazzle/libdazzle_3.44.0.bb
-new file mode 100644
-index 0000000000..9bca7e9dce
---- /dev/null
-+++ b/meta-gnome/recipes-support/libdazzle/libdazzle_3.44.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY =3D "The libdazzle library is a companion library to GObject and=
- Gtk+."
-+DESCRIPTION =3D "A wide range of components from utilities for GIO, widg=
-ets for \
-+GTK+, an animation framework, state machines, paneling and high-performa=
-nce \
-+counters are included."
-+LICENSE =3D "GPL-3.0-or-later"
-+HOMEPAGE =3D "https://gitlab.gnome.org/GNOME/libdazzle"
-+BUGTRACKER =3D "https://gitlab.gnome.org/GNOME/libdazzle/issues"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8f0e2cd40e05189ec81232da84bd6=
-e1a"
-+
-+inherit gnomebase upstream-version-is-even vala features_check gobject-i=
-ntrospection
-+
-+DEPENDS =3D "glib-2.0-native glib-2.0 gtk+3"
-+
-+SRC_URI[archive.sha256sum] =3D "3cd3e45eb6e2680cb05d52e1e80dd8f9d59d4765=
-212f0e28f78e6c1783d18eae"
-+
-+GIR_MESON_OPTION =3D 'with_introspection'
-+
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb b/meta-gn=
+ome/recipes-gnome/nautilus/nautilus_49.5.bb
+index 45e0969d66..9597ce5136 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb
+@@ -14,7 +14,6 @@ DEPENDS =3D " \
+     gtk4 \
+     libadwaita \
+     libcloudproviders \
+-    libhandy \
+     libportal \
+     libxml2 \
+     tinysparql \
+@@ -26,7 +25,8 @@ inherit gnomebase gsettings gobject-introspection gi-do=
+cgen gettext features_che
+=20
+ SRC_URI[archive.sha256sum] =3D "fa5655e73ee7953aecfe71fea67bfec0c67447e1=
+4e6df135aa3f80334386872c"
+=20
+-REQUIRED_DISTRO_FEATURES =3D "x11 opengl gobject-introspection-data"
++REQUIRED_DISTRO_FEATURES =3D "opengl gobject-introspection-data"
 +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+=20
+ GIDOCGEN_MESON_OPTION =3D "docs"
+ GIDOCGEN_MESON_ENABLE_FLAG =3D 'true'
 --=20
 2.43.0
 
