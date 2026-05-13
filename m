@@ -2,158 +2,143 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FFFCCD4F25
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 19:49:57 +0000 (UTC)
-Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5949.1778701796659667031
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AFFBCD4F21
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 19:52:07 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5874.1778701920971913947
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 12:49:56 -0700
+ Wed, 13 May 2026 12:52:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=M9zjiScK;
- spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-64e87a81639so8281985d50.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 12:49:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778701796; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=a9/BXXui;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-64e87a81639so8286229d50.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 12:52:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778701920; cv=none;
         d=google.com; s=arc-20240605;
-        b=PZny4HH3Ti5+KSODYmqf8KMQ+HY930s9Jtu6+A6znn5iNjkOmQDRZ6lrhKlK3+eBua
-         UOX6+k7LyGj1M/JtkyMbAGuMIzOLOaz2KGW4hJ24g5AIVoJgqeI+OeC0my6wfR5HVZJV
-         Iqch42rO8fz2TvLwHxc50PqVXa2ag6sm74FfDnSTWOqO9vIQhw9oNqf9vgj1rl8l48i+
-         EiuH6Ohq1nBCaC0syAfyF794dsQnLHHB0PfeZb2Vw1SSHus2kjkSzvcLdlfaSNIPJZ4f
-         GzFMSsgpPwbHWc6HjN6+9eIRsvTOYjkqa6/uETY7hA9H9LhwrAck+RSaqOKBU+T6+xNW
-         Dz9Q==
+        b=C7bfcamNRoHI8Y3AMmkradxYTDhuD/KtvVU4ul0R2FYOdex9t62kRvvx55sqMWvVqN
+         TdnouUalhUvwIgUdUzBouzysr2i+EzyC2++UvUWCgmNnFChQBXWsIYlAeUvv7cYiR1hT
+         ffKNVkMWzp1dE0cJbIftAVsbQRuL1+T+F8P+ngnc/IbaD+QgIpckcjWpBX9k7IyOcPwq
+         t87Z8DPmBmM/sfyj06qFfpyS+c61vaUIThz78xqbCi6tbbGApKwZTqSgp+NoMb+bmiYZ
+         CuvBjX/xtCjdaLwkFHm26GXxT1+lNsFnV8ST2t3mk+JxOOiEDl2d92F5ROEOuAR8am0T
+         UNMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
-        fh=mfhklTvqiisq5igNs/jzhZ4mkM6dpxjfjymdemI2h+M=;
-        b=KiEwT21y9vzCD70xmgk+l5PRXMHaV2M9UsU1lHa5oI//7CfQkhJeTwNWTpE/uFiV3J
-         Ek2kKsIb8HwAptBNvT2MMmA5CrCO8N4Yg/vP+8ahjP5QyOql1COgXvr0M6f04nH9JEAP
-         6pE1Z0M4rq1IfvUwXf/CWqJmGNnQEZfOuGy+4gpBA+ZpyXaWnEz1IKNIiWZtp2NuRlo1
-         Dq/ZfSm9YakEVkPc1uPMB3OIYqpJs3MWqcDv3TTcI7YezpNUgPMbdUrLLfw+T+IzSDbg
-         mTgb7Y1ufEJ4EdvHkVfOBXYohvolYsh/jq9TRu4drFZaCuKWIIL6jotDJxsTvNkmaeTt
-         1C5w==;
+        bh=Df2M3yqJdq+erxcg6Z7ZXdrcSmMJU3p8mjbZBV6e4Vk=;
+        fh=hOOZNshoD7E+ZlkLLUqqnV9XtxlbdrhypBmJDQPY6KI=;
+        b=frT1iD8pBp6I6KsyNmlznleln4+RynCSSLiuX8LGwH92uNuCV5ayG92iGVbdSchp8z
+         97rAry5NVss8KZzgDnXzJK9QLxdk/FVBGnEHz5hwIhBITk5nzgVzlCS8HQDUtaeMALf2
+         kBhOed41KK7kdE1SBbbqXxYSnuQjCiPaEHiTJD/0dkzW7eoxaeCwMRJ1288jzdq4gPso
+         0w7f7t4cjK5Pfz53dGUNS844EfVN37c4kpjO+1bNrUtSm1vpZn3m8MxpRN3YLBtjo5Oq
+         5fg3M7BeYA0+XQm0KBvrBKdmDacyi9d9U5zMlQDq2N/0Hps1oBqRtB4/fD8UGcs5vXK3
+         0pVA==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778701796; x=1779306596; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1778701920; x=1779306720; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
-        b=M9zjiScKcckXS48kljTOm9X9rJs46dm+jMNDx3DOW/gsM58BVfTVIsks60QlvOeuYR
-         4NR/e/QXPGm+bcArDIGYK8NopFAH14Uu6k9JY36BkRxST3beHs64B0r+pgWmBOumXxwc
-         3YzeO9aeCvzI1W75S36fB0x7QG/U5/MNxnvpkbUQvgqXNQk0og39zhwHUxvDT3T9qRKg
-         ehPVrxt4sCzZGOdIYG1Isum6HKk9P7ZZzmHlNPT5mrwEQXNE67DWucD0bEnFKDONDF6a
-         3nQTga5ubxQhQApx3yKgRUc1qG4DYZgV/u4Ot4H+MOBHcAFuvcTY2D0q8OIM32l4fqXv
-         leog==
+        bh=Df2M3yqJdq+erxcg6Z7ZXdrcSmMJU3p8mjbZBV6e4Vk=;
+        b=a9/BXXuiqsbtVGILU7gJ999eFNs2nrcLPRVgFbC/FrsMPF7il5SO/uXHcG4qfOEqEE
+         G1BGFYxSihkRXk+8B/Ettihej8Edxi5fK7PQ91V2/W/HpHW6JKpZE3XbHScC8f/VYG95
+         KlBgOaAZbuC+5Dtg+1OkLY77Iqs/FMaD91Fna+RK3OI94aiB7Q5EEWYepU5FYwPknYTs
+         8c6f5UnIvqEU8it0ASCqS9PEjqImWuDn1hjywjJzvnIeySOHUn95HCHa3hAqmX9aU3Bl
+         1ET5IWrUx0FToxJMLivHxh97iwi1oPvFj/St38iSmI/3xB8cOyK30NIL2zLWRkAptcsd
+         HznA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778701796; x=1779306596;
+        d=1e100.net; s=20251104; t=1778701920; x=1779306720;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
-        b=cHep1LUeN6gssE0SGKHQ8c1i1kWY5T2L/IwbE+eB74P5PCW2SEJY2IgUJZZez+BUGD
-         JBMjBCC8hnvg/FhGxZ2LAPtxtxVAjsAPC9eDQ5CTKTJlsI8fvfewk8l6b2hZgBnwh4JM
-         E3/TtYMNTJeJPhpV8g5HFih98NVyz2ySrK/eQCNoeO2B6N1tAPwGv9aIlD0PPUJ9++G/
-         fUsQ3w04zs1NHt4KztYTU1kuQ9SvD58EYPtryID8PiZW4R4OAwurKr4tG/u+MmDhXfLu
-         2zJZqy+epFroCNYGFNbR+v0Hs/OBKHJ9ypNA12L9e2/o9llVvre9KlhN3rPbNpAnNXDN
-         9wrw==
-X-Forwarded-Encrypted: i=1; AFNElJ9Q7+R15B+5Sg6y+PbuFDG1iZVXPjc41gaEeNXdBgeqkJlJTTdDTQggpdKnf7yXJs+HlRkaXrxzc3d8g7XZ2UhDI5k=@lists.openembedded.org
-X-Gm-Message-State: AOJu0YzK0sT6ypfU7i10ZWvUWBw7oKCpPEQ8U+l7lJ7GQnXb1VkNKvXo
-	z/a4rU94UBiqntA1HwLMm3tcOceO3UKU0507S7DxHAAhGBWa5k0e0XjUuRCd5nnU6f6G4N/4hKO
-	SjeeH09i4ywp/PtVnzgt/92IKrkp1s2Y=
-X-Gm-Gg: Acq92OGGF5P522Lc+Vr/baURQ0cAdtK5Rw8Reg4wI20xEn59BDw+FJcWrJuTGV/GCpN
-	AH0TWSP7EeJ6O8qCNV5wvX7hSFWfVtQB8ACoSDJnr7NFQpZqX6oKPoRm4cP1JhmXX2DAwn56SJh
-	HifbBBrC+GZYmBaYMC0CTs+J+2VorJf4qXX5jt2mxld2JapnN8+K9ijVV4NTX/qN0Gzpm+q/xZD
-	L8az2PXRpNO0QXSGEb/GYQLFxlT2YlQWgPBJKtON85NpjNMkQqf+vxhvYykdysIBeFqO43tiuA2
-	cevTadleaW8svV6CSWj/9Kqb2LvYnN09gpXgJ1uTC9fNqzb736LByECs+o7VhbtQ18eUVdkMWhR
-	tJTiyLX8D516RHP/hafdz6kQ4irpyjV1A+cz3baU4DYYHKDpCHPg180AmUkqypCBgTaRuDV8XFN
-	uibE6d
-X-Received: by 2002:a53:c047:0:10b0:651:c734:ed4b with SMTP id
- 956f58d0204a3-65df80fffaamr3524580d50.2.1778701795708; Wed, 13 May 2026
- 12:49:55 -0700 (PDT)
+        bh=Df2M3yqJdq+erxcg6Z7ZXdrcSmMJU3p8mjbZBV6e4Vk=;
+        b=ftz1HdysP37HNmtHjgueZ8Kd8p5N+Gczl7mJSQmAw9dVjZ2jqcxBXLkVWsjje7Sm5r
+         CeilB/HrGInS1K2QUyOZ9urYU6SyCDMINSxAyBhrMf4CdjC0ChDeX7fLK36h6Hyq7UBa
+         E2200Z3UhCUE7lcQFq3waeDtkc+EImcmZtWDhlrF5ZjKGnJqDBM8ZGMKHiSmY75wYv2m
+         /69ydajxFb4OCIUTbIatVwJnDO4dTfLUHvtJCqZzA3Z29pd1E5ZLEPfLdVIH5Z5zBowd
+         1KFoU/BCV6FEW/uUWQyNXGljO/5bb9arkE2pcUxFMoDZ5yBrB+74CizA94opZQeelJ+M
+         TpYQ==
+X-Gm-Message-State: AOJu0Yzex9ZNnGI7AfzpctkczfLyI0LzQVEP7vqsOKjSax0vlS+yyQ/R
+	CTghR8PL/hSFTTH6+AdSUwEWE0vn//LCbZDuoqn2fuq73Gsz/aKB8w39QNBMuevAAW8L/BYID1u
+	21OL20J33bgIAXV0gp7dAn+TbtVIS/1fyADv9k+0=
+X-Gm-Gg: Acq92OFIvJHLbnxi9nEmXTlmEbE9NThNYiIHZlJqQhzCgTZYXIO+xnknIeaU2jHHCS4
+	QKSfJbCZahV/G61LI8C9YiqXihh+dnpSFZKIauMf7PlqYF32sS4/ONWXGZ9Ikv4441ei+pMORjw
+	qyyNsn3UhFdVTblX4sBFjMFjyjbRIi2DSmnjkqVQ0XfwlG001jdjhno0V278W5Ig8k+/MLFErJ/
+	UmefDjpuRANSeQVuPsvml9aHATyhA1hKGypx4K2Qn9p93aEt/sObEeYVbswdVL2QGoU3Nhd8jCV
+	XfGrLLl/2Mcjce8xnuKFFOcIeijodV66WDziSZnJCq6ghE+g0NNBHkLVEACrOzQbm6Ww5+9QrJg
+	Uj06PSCRohAWOLQeSRt58062+3LrdYGyqHl+De1T35aw9xtxf3qi/VvEXH7nj2KltXpz296BB4x
+	z88zFe
+X-Received: by 2002:a05:690e:4290:10b0:651:bf58:446b with SMTP id
+ 956f58d0204a3-65df8102f23mr3445291d50.10.1778701920053; Wed, 13 May 2026
+ 12:52:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
- <2022222.1778130561122567168@lists.openembedded.org> <2115555.1778654861364723634@lists.openembedded.org>
- <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com> <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
- <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
-In-Reply-To: <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
+References: <20260513040555.377-1-wangmy@fujitsu.com> <20260513040555.377-20-wangmy@fujitsu.com>
+In-Reply-To: <20260513040555.377-20-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 May 2026 12:49:44 -0700
-X-Gm-Features: AVHnY4JCVOr0JaMveOS20AZ1-6Fc_FpozixMSCDXt0tYIMa_gF4w_LZcxtJkg78
-Message-ID: <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
-To: AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>
-Cc: Gyorgy Sarvari <skandigraun@gmail.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000b1d3020651b84806"
+Date: Wed, 13 May 2026 12:51:48 -0700
+X-Gm-Features: AVHnY4JRvSwa-MGD-8vJiyFqeucNxnPRFFJVAFfCYx9ZkDfSAHnZYBqvxEVFFYE
+Message-ID: <CAMKF1spF65ovYF=n45R8f+fFOKQ3B8jnyt_wBwJ4LMBFSqSR7w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH 20/56] magic-enum: upgrade 0.9.7 -> 0.9.8
+To: wangmy <wangmy@fujitsu.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000001b2dd80651b850d2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 19:49:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126976
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 19:52:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126977
 
---000000000000b1d3020651b84806
+--0000000000001b2dd80651b850d2
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Ashish,
+Hi Wang Mingyu,
 
-You can continue using this thread to discuss these errors.
+Do we need to keep "+git" for PV in this upgrade?
 
 Best regards,
 
 Khem Raj
 
 
-On Wed, May 13, 2026, 1:21=E2=80=AFAM AshishKumar Mishra <
-AshishKumar.Mishra@bmwtechworks.in> wrote:
+On Tue, May 12, 2026, 9:10=E2=80=AFPM wangmy via lists.openembedded.org <wa=
+ngmy=3D
+fujitsu.com@lists.openembedded.org> wrote:
 
-> This seems to be adbd.mk reported error  , will try locally reproducing
-> it
-> Is there any specific channel to discuss such error or I can continue
-> using the same thread ?
-> Or any specific person / team to address such communication ?
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../magic-enum/{magic-enum_0.9.7.bb =3D> magic-enum_0.9.8.bb}     | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-extended/magic-enum/{magic-enum_0.9.7.bb =3D>
+> magic-enum_0.9.8.bb} (95%)
 >
-> ------------------------------
-> *From:* Khem Raj <raj.khem@gmail.com>
-> *Sent:* 13 May 2026 12:56
-> *To:* skandigraun@gmail.com <skandigraun@gmail.com>
-> *Cc:* AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>;
-> openembedded-devel@lists.openembedded.org <
-> openembedded-devel@lists.openembedded.org>
-> *Subject:* Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and
-> cleanup
+> diff --git a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+> b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.8.bb
+> similarity index 95%
+> rename from meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+> rename to meta-oe/recipes-extended/magic-enum/magic-enum_0.9.8.bb
+> index 958ae21065..2243ca4e00 100644
+> --- a/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.7.bb
+> +++ b/meta-oe/recipes-extended/magic-enum/magic-enum_0.9.8.bb
+> @@ -16,7 +16,7 @@ SRC_URI =3D " \
+>      file://run-ptest \
+>  "
 >
-> You don't often get email from raj.khem@gmail.com. Learn why this is
-> important <https://aka.ms/LearnAboutSenderIdentification>
-> *Caution: "External email, be cautious especially with link(s),
-> attachment(s) or QR code(s)".*
-> there are some build issues I am seeing
+> -SRCREV =3D "7d87efb4a3dddbbe8caa9ca14eff05ede1102ab8"
+> +SRCREV =3D "1384769c66bd16ec9bb1353f45fe8ec8ccc12dbd"
+>  PV .=3D "+git"
 >
-> https://errors.yoctoproject.org/Errors/Details/938668/
->
-> On Tue, May 12, 2026 at 11:57=E2=80=AFPM Gyorgy Sarvari via lists.openemb=
-edded.org
-> <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
->
->
-> On 5/13/26 08:47, AshishKumar Mishra via lists.openembedded.org wrote:
-> > Hi Team,
-> > Can team please take this to be merged in master branch
-> >
->
-> It's currently undergoing tests in the master-next branch:
-> https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-next
->
->
+>  inherit cmake ptest
+> --
+> 2.43.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#126953):
-> https://lists.openembedded.org/g/openembedded-devel/message/126953
-> Mute This Topic: https://lists.openembedded.org/mt/119162735/1997914
+> View/Reply Online (#126905):
+> https://lists.openembedded.org/g/openembedded-devel/message/126905
+> Mute This Topic: https://lists.openembedded.org/mt/119292622/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -161,206 +146,85 @@ edded.org
 >
 >
 
---000000000000b1d3020651b84806
+--0000000000001b2dd80651b850d2
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"auto">Hi Ashish,<br><br>You can continue using this thread to d=
-iscuss these errors.<br><br>Best regards,<br><br>Khem Raj<div><br></div></d=
-iv><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
-ass=3D"gmail_attr">On Wed, May 13, 2026, 1:21=E2=80=AFAM AshishKumar Mishra=
- &lt;<a href=3D"mailto:AshishKumar.Mishra@bmwtechworks.in">AshishKumar.Mish=
-ra@bmwtechworks.in</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+<div dir=3D"auto">Hi Wang Mingyu,<br><br>Do we need to keep &quot;+git&quot=
+; for PV in this upgrade?<br><br>Best regards,<br><br>Khem Raj<div><br></di=
+v></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Tue, May 12, 2026, 9:10=E2=80=AFPM wangmy via <a=
+ href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;wang=
+my=3D<a href=3D"mailto:fujitsu.com@lists.openembedded.org">fujitsu.com@list=
+s.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
 " style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex">
-
-
-
-
-<div dir=3D"ltr">
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-This seems to be <a href=3D"http://adbd.mk" target=3D"_blank" rel=3D"norefe=
-rrer">adbd.mk</a> reported error=C2=A0 , will try locally reproducing it=C2=
-=A0</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-Is there any specific channel to discuss such error or I can continue using=
- the same thread ?</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
-Or any specific person / team to address such communication ?</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+padding-left:1ex">From: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.co=
+m" target=3D"_blank" rel=3D"noreferrer">wangmy@fujitsu.com</a>&gt;<br>
 <br>
-</div>
-<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
-bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
+=3D"_blank" rel=3D"noreferrer">wangmy@fujitsu.com</a>&gt;<br>
+---<br>
+=C2=A0.../magic-enum/{<a href=3D"http://magic-enum_0.9.7.bb" rel=3D"norefer=
+rer noreferrer" target=3D"_blank">magic-enum_0.9.7.bb</a> =3D&gt; <a href=
+=3D"http://magic-enum_0.9.8.bb" rel=3D"noreferrer noreferrer" target=3D"_bl=
+ank">magic-enum_0.9.8.bb</a>}=C2=A0 =C2=A0 =C2=A0| 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-oe/recipes-extended/magic-enum/{<a href=3D"http://magic-e=
+num_0.9.7.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.=
+9.7.bb</a> =3D&gt; <a href=3D"http://magic-enum_0.9.8.bb" rel=3D"noreferrer=
+ noreferrer" target=3D"_blank">magic-enum_0.9.8.bb</a>} (95%)<br>
 <br>
-</div>
-<div id=3D"m_-5165992933086938950appendonsend"></div>
-<hr style=3D"display:inline-block;width:98%">
-<div id=3D"m_-5165992933086938950divRplyFwdMsg" dir=3D"ltr"><font face=3D"C=
-alibri, sans-serif" style=3D"font-size:11pt" color=3D"#000000"><b>From:</b>=
- Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank" rel=
-=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
-<b>Sent:</b> 13 May 2026 12:56<br>
-<b>To:</b> <a href=3D"mailto:skandigraun@gmail.com" target=3D"_blank" rel=
-=3D"noreferrer">skandigraun@gmail.com</a> &lt;<a href=3D"mailto:skandigraun=
-@gmail.com" target=3D"_blank" rel=3D"noreferrer">skandigraun@gmail.com</a>&=
-gt;<br>
-<b>Cc:</b> AshishKumar Mishra &lt;<a href=3D"mailto:AshishKumar.Mishra@bmwt=
-echworks.in" target=3D"_blank" rel=3D"noreferrer">AshishKumar.Mishra@bmwtec=
-hworks.in</a>&gt;; <a href=3D"mailto:openembedded-devel@lists.openembedded.=
-org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembe=
-dded.org</a> &lt;<a href=3D"mailto:openembedded-devel@lists.openembedded.or=
-g" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembedd=
-ed.org</a>&gt;<br>
-<b>Subject:</b> Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration a=
-nd cleanup</font>
-<div>=C2=A0</div>
-</div>
-<div>
-<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" alig=
-n=3D"left" style=3D"background:revert;color:revert;direction:revert;font-si=
-ze:revert;height:revert;letter-spacing:revert;line-height:revert;margin:rev=
-ert;opacity:revert;outline:revert;overflow:revert;padding:revert;text-align=
-:revert;text-indent:revert;text-orientation:revert;text-overflow:revert;tex=
-t-transform:revert;vertical-align:revert;white-space:revert;word-break:reve=
-rt;word-spacing:revert;writing-mode:revert;zoom:revert;border:0px;display:t=
-able;width:100%;table-layout:fixed;float:none;border-spacing:0px">
-<tbody style=3D"background:revert;border:revert;color:revert;direction:reve=
-rt;font-size:revert;height:revert;letter-spacing:revert;line-height:revert;=
-margin:revert;opacity:revert;outline:revert;overflow:revert;padding:revert;=
-table-layout:revert;text-align:revert;text-indent:revert;text-orientation:r=
-evert;text-overflow:revert;text-transform:revert;vertical-align:revert;whit=
-e-space:revert;width:revert;word-break:revert;word-spacing:revert;writing-m=
-ode:revert;zoom:revert;display:block">
-<tr style=3D"background:revert;border:revert;color:revert;direction:revert;=
-display:revert;font-size:revert;height:revert;letter-spacing:revert;line-he=
-ight:revert;margin:revert;opacity:revert;outline:revert;overflow:revert;pad=
-ding:revert;table-layout:revert;text-align:revert;text-indent:revert;text-o=
-rientation:revert;text-overflow:revert;text-transform:revert;vertical-align=
-:revert;white-space:revert;width:revert;word-break:revert;word-spacing:reve=
-rt;writing-mode:revert;zoom:revert">
-<td valign=3D"middle" width=3D"1px" bgcolor=3D"#A6A6A6" cellpadding=3D"7px =
-2px 7px 2px" style=3D"background-image:revert;background-position:revert;ba=
-ckground-size:revert;background-repeat:revert;background-origin:revert;back=
-ground-clip:revert;border:revert;color:revert;direction:revert;display:reve=
-rt;font-size:revert;height:revert;letter-spacing:revert;line-height:revert;=
-margin:revert;opacity:revert;outline:revert;overflow:revert;table-layout:re=
-vert;text-align:revert;text-indent:revert;text-orientation:revert;text-over=
-flow:revert;text-transform:revert;vertical-align:revert;white-space:revert;=
-word-break:revert;word-spacing:revert;writing-mode:revert;zoom:revert;paddi=
-ng:7px 2px;background-color:rgb(166,166,166);width:0px">
-</td>
-<td valign=3D"middle" width=3D"100%" bgcolor=3D"#EAEAEA" cellpadding=3D"7px=
- 5px 7px 15px" color=3D"#212121" style=3D"background-image:revert;backgroun=
-d-position:revert;background-size:revert;background-repeat:revert;backgroun=
-d-origin:revert;background-clip:revert;border:revert;direction:revert;displ=
-ay:revert;height:revert;letter-spacing:revert;line-height:revert;margin:rev=
-ert;opacity:revert;outline:revert;overflow:revert;table-layout:revert;text-=
-indent:revert;text-orientation:revert;text-overflow:revert;text-transform:r=
-evert;vertical-align:revert;white-space:revert;word-break:revert;word-spaci=
-ng:revert;writing-mode:revert;zoom:revert;width:100%;background-color:rgb(2=
-34,234,234);padding:7px 5px 7px 15px;font-family:wf_segoe-ui_normal,&quot;S=
-egoe UI&quot;,&quot;Segoe WP&quot;,Tahoma,Arial,sans-serif;font-size:12px;f=
-ont-weight:normal;color:rgb(33,33,33);text-align:left">
-<div style=3D"background:revert;border:revert;color:revert;direction:revert=
-;display:revert;font-size:revert;height:revert;letter-spacing:revert;line-h=
-eight:revert;margin:revert;opacity:revert;outline:revert;overflow:revert;pa=
-dding:revert;table-layout:revert;text-align:revert;text-indent:revert;text-=
-orientation:revert;text-overflow:revert;text-transform:revert;vertical-alig=
-n:revert;white-space:revert;width:revert;word-break:revert;word-spacing:rev=
-ert;writing-mode:revert;zoom:revert">
-You don&#39;t often get email from <a href=3D"mailto:raj.khem@gmail.com" ta=
-rget=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>. <a href=3D"https=
-://aka.ms/LearnAboutSenderIdentification" style=3D"background:revert;color:=
-revert;direction:revert;display:revert;font-size:revert;opacity:revert" tar=
-get=3D"_blank" rel=3D"noreferrer">
-Learn why this is important</a> </div>
-</td>
-<td valign=3D"middle" align=3D"left" width=3D"75px" bgcolor=3D"#EAEAEA" cel=
-lpadding=3D"7px 5px 7px 5px" color=3D"#212121" style=3D"background-image:re=
-vert;background-position:revert;background-size:revert;background-repeat:re=
-vert;background-origin:revert;background-clip:revert;border:revert;directio=
-n:revert;display:revert;height:revert;letter-spacing:revert;line-height:rev=
-ert;margin:revert;opacity:revert;outline:revert;overflow:revert;table-layou=
-t:revert;text-indent:revert;text-orientation:revert;text-overflow:revert;te=
-xt-transform:revert;vertical-align:revert;white-space:revert;word-break:rev=
-ert;word-spacing:revert;writing-mode:revert;zoom:revert;width:75px;backgrou=
-nd-color:rgb(234,234,234);padding:7px 5px;font-family:wf_segoe-ui_normal,&q=
-uot;Segoe UI&quot;,&quot;Segoe WP&quot;,Tahoma,Arial,sans-serif;font-size:1=
-2px;font-weight:normal;color:rgb(33,33,33);text-align:left">
-</td>
-</tr>
-</tbody>
-</table>
-<div><span style=3D"color:red"><i>Caution: &quot;External email, be cautiou=
-s especially with link(s), attachment(s) or QR code(s)&quot;.</i></span>
-<div>
-<div dir=3D"ltr">there are some build issues I am seeing
-<div><br>
-</div>
-<div><a href=3D"https://errors.yoctoproject.org/Errors/Details/938668/" tar=
-get=3D"_blank" rel=3D"noreferrer">https://errors.yoctoproject.org/Errors/De=
-tails/938668/</a></div>
-</div>
+diff --git a/meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-en=
+um_0.9.7.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9=
+.7.bb</a> b/meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-enu=
+m_0.9.8.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9.=
+8.bb</a><br>
+similarity index 95%<br>
+rename from meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-enu=
+m_0.9.7.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9.=
+7.bb</a><br>
+rename to meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-enum_=
+0.9.8.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9.8.=
+bb</a><br>
+index 958ae21065..2243ca4e00 100644<br>
+--- a/meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-enum_0.9.=
+7.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9.7.bb</=
+a><br>
++++ b/meta-oe/recipes-extended/magic-enum/<a href=3D"http://magic-enum_0.9.=
+8.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">magic-enum_0.9.8.bb</=
+a><br>
+@@ -16,7 +16,7 @@ SRC_URI =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
+=C2=A0&quot;<br>
 <br>
-<div>
-<div dir=3D"ltr">On Tue, May 12, 2026 at 11:57=E2=80=AFPM Gyorgy Sarvari vi=
-a
-<a href=3D"http://lists.openembedded.org/" target=3D"_blank" rel=3D"norefer=
-rer">
-lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@li=
-sts.openembedded.org" target=3D"_blank" rel=3D"noreferrer">gmail.com@lists.=
-openembedded.org</a>&gt; wrote:<br>
-</div>
-<blockquote style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex">
+-SRCREV =3D &quot;7d87efb4a3dddbbe8caa9ca14eff05ede1102ab8&quot;<br>
++SRCREV =3D &quot;1384769c66bd16ec9bb1353f45fe8ec8ccc12dbd&quot;<br>
+=C2=A0PV .=3D &quot;+git&quot;<br>
 <br>
-On 5/13/26 08:47, AshishKumar Mishra via <a href=3D"http://lists.openembedd=
-ed.org/" rel=3D"noreferrer noreferrer" target=3D"_blank">
-lists.openembedded.org</a> wrote:<br>
-&gt; Hi Team,=C2=A0<br>
-&gt; Can team please take this to be merged in master branch=C2=A0<br>
-&gt; =C2=A0<br>
-<br>
-It&#39;s currently undergoing tests in the master-next branch:<br>
-<a href=3D"https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-n=
-ext" rel=3D"noreferrer noreferrer" target=3D"_blank">https://git.openembedd=
-ed.org/meta-openembedded/log/?h=3Dmaster-next</a><br>
-<br>
-<br>
+=C2=A0inherit cmake ptest<br>
+-- <br>
+2.43.0<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#126953): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/126953" rel=3D"noreferrer noreferrer" target=3D"_b=
-lank">
-https://lists.openembedded.org/g/openembedded-devel/message/126953</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119162735/199=
-7914" rel=3D"noreferrer noreferrer" target=3D"_blank">
-https://lists.openembedded.org/mt/119162735/1997914</a><br>
+View/Reply Online (#126905): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/126905" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">https://lists.openembedded.org/g/openembedded-devel/message/126905</a=
+><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119292622/199=
+7914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
+edded.org/mt/119292622/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank" rel=3D"noreferrer">
-openembedded-devel+owner@lists.openembedded.org</a><br>
+d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
+openembedded.org</a><br>
 Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">
-https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"m=
-ailto:raj.khem@gmail.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gma=
-il.com</a>]<br>
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmai=
+l.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>]<br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 <br>
-</blockquote>
-</div>
-</div>
-</div>
-</div>
-</div>
-
 </blockquote></div>
 
---000000000000b1d3020651b84806--
+--0000000000001b2dd80651b850d2--
 
