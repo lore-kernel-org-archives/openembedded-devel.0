@@ -1,484 +1,366 @@
-Return-Path: <ernestvanhoecke@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 093BFCD4F21
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 16:35:45 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.1512.1778690137840041681
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FFFCCD4F25
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 19:49:57 +0000 (UTC)
+Received: from mail-yx1-f44.google.com (mail-yx1-f44.google.com [74.125.224.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5949.1778701796659667031
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 09:35:38 -0700
+ Wed, 13 May 2026 12:49:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=gd4m9wHy;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: ernestvanhoecke@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4891f625344so64213755e9.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 09:35:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=M9zjiScK;
+ spf=pass (domain: gmail.com, ip: 74.125.224.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f44.google.com with SMTP id 956f58d0204a3-64e87a81639so8281985d50.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 12:49:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778701796; cv=none;
+        d=google.com; s=arc-20240605;
+        b=PZny4HH3Ti5+KSODYmqf8KMQ+HY930s9Jtu6+A6znn5iNjkOmQDRZ6lrhKlK3+eBua
+         UOX6+k7LyGj1M/JtkyMbAGuMIzOLOaz2KGW4hJ24g5AIVoJgqeI+OeC0my6wfR5HVZJV
+         Iqch42rO8fz2TvLwHxc50PqVXa2ag6sm74FfDnSTWOqO9vIQhw9oNqf9vgj1rl8l48i+
+         EiuH6Ohq1nBCaC0syAfyF794dsQnLHHB0PfeZb2Vw1SSHus2kjkSzvcLdlfaSNIPJZ4f
+         GzFMSsgpPwbHWc6HjN6+9eIRsvTOYjkqa6/uETY7hA9H9LhwrAck+RSaqOKBU+T6+xNW
+         Dz9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
+        fh=mfhklTvqiisq5igNs/jzhZ4mkM6dpxjfjymdemI2h+M=;
+        b=KiEwT21y9vzCD70xmgk+l5PRXMHaV2M9UsU1lHa5oI//7CfQkhJeTwNWTpE/uFiV3J
+         Ek2kKsIb8HwAptBNvT2MMmA5CrCO8N4Yg/vP+8ahjP5QyOql1COgXvr0M6f04nH9JEAP
+         6pE1Z0M4rq1IfvUwXf/CWqJmGNnQEZfOuGy+4gpBA+ZpyXaWnEz1IKNIiWZtp2NuRlo1
+         Dq/ZfSm9YakEVkPc1uPMB3OIYqpJs3MWqcDv3TTcI7YezpNUgPMbdUrLLfw+T+IzSDbg
+         mTgb7Y1ufEJ4EdvHkVfOBXYohvolYsh/jq9TRu4drFZaCuKWIIL6jotDJxsTvNkmaeTt
+         1C5w==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778690136; x=1779294936; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aPehHfRSu3vBNfIQ50shFk9IwKgUVT60nMiQPqIRdQc=;
-        b=gd4m9wHyA0hOxIATIGGKIP6UlfBFD0EMIvwxlyRpSUOwBdvP6Ua8T7IX5E+NVa8wm8
-         rgWhU6Q3RKVYAQPL7ndPle9PywOtkmbbdVY+MyEvCbccq84FnuXHOKUA/QO8ol9ctbVw
-         FARpxMNJBjLodUQZJP/JwttIJTvoWxvJx7q0uTjLabw88PR+vCTcyUgdzURUwHQbVEsm
-         0dvWD9AZ/jEtGmF63+4h20WDtQcmuKhIDBHWxpgZzqsNjTW1KUJhzMQPRODuPeMzmQga
-         Ic9RJeo1SDG15/8k3YM2Xc33PFmAtApfyy3rUkryGj6AQOIiBdMEcz6eYQLxyyoB1deB
-         QYlA==
+        d=gmail.com; s=20251104; t=1778701796; x=1779306596; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
+        b=M9zjiScKcckXS48kljTOm9X9rJs46dm+jMNDx3DOW/gsM58BVfTVIsks60QlvOeuYR
+         4NR/e/QXPGm+bcArDIGYK8NopFAH14Uu6k9JY36BkRxST3beHs64B0r+pgWmBOumXxwc
+         3YzeO9aeCvzI1W75S36fB0x7QG/U5/MNxnvpkbUQvgqXNQk0og39zhwHUxvDT3T9qRKg
+         ehPVrxt4sCzZGOdIYG1Isum6HKk9P7ZZzmHlNPT5mrwEQXNE67DWucD0bEnFKDONDF6a
+         3nQTga5ubxQhQApx3yKgRUc1qG4DYZgV/u4Ot4H+MOBHcAFuvcTY2D0q8OIM32l4fqXv
+         leog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778690136; x=1779294936;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1778701796; x=1779306596;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aPehHfRSu3vBNfIQ50shFk9IwKgUVT60nMiQPqIRdQc=;
-        b=c12r5oDdBs85yDg4w9zhNW+e9JpKAeL2UDaSf1T0Kci51HzAp1uQC7E8dPiK9egRfA
-         8do3u4nK3jCRdAhMfS9tEy8+J9boOUkWhC0hHmzbFburhoaIl9UrzEL5LDw4yneRUoBn
-         4amasDDdYwnX7lhX98kK7FKWhFxMmV7oaY2qfnqBLXSx0lhM2L1ajlZbky/lb7lqSaPV
-         qYl1uY2cKGQyR37KnRDqvC9Ntkf1vbOztojFz4A61ruAjdojAVMsbn6YAGNsP1h9B4br
-         Iqg+S95UTwQ+pSTVM7AeKDnHVtnY4QTY97YKqjzqS2gx2D6mhlzsEXYq0iN3z6zE3f0n
-         4bRA==
-X-Gm-Message-State: AOJu0Ywod4bM8FbN9PexJimfWkbxkTYDr5J3Hx8oRmOZESXhmh1O6RiY
-	FC85yfKDi6+kmn08bTE+4Bc71ByqjypXG/toNHdij+q5vLqPMpNagED0AAif5FBiRfGyASj7
-X-Gm-Gg: Acq92OEWRZGZxNN5si68xxSvFQy513V/m2dU+oj12DtDIzWSajAORKUaqNtA2MP3Bzy
-	jS/o2cSrFw2HQsGqRhu5SenJwrmO6EDwirXmqQiY6hbMK/qUgTT6Bpen3f4OfccYvS8tJo0TCuc
-	emXKAdBtHeWypMflWM9AZ4zHlcdhVxeGfMJNWcMPXQfrpUbJKylYcnuJN+Z5dzM7I9Ck6PoN62x
-	779XsAmfU9xFwEYXixzJ5AmEQ/fNVN1ljPUMySfnNztqEtnmh8nYGsFvNnCYNpxJl6/hmNBVRV0
-	YF1Os8QwgZQe2Fpjrj62c8Wqya6KHA0JUZbIxyP8WsN2r8fIe5wnZq5ZnumNIQ4TWcPHE7QHoDB
-	6MiNptrHuVz2tY76u12t3h+L/lo+5KS0KiCEXZTZGCCJjtuw4ha7rMBXsD8yMGmed0647SK7VFC
-	ZnY/74y9RgUdD6oxMBWZwE15xULZQM2oksRWeLMbTgGvAhh9ZrspyTcXong+EU54ucfNDTRjwCC
-	L7Cu3CuzGgkMumopfDm02/JOXALobqo6sWI
-X-Received: by 2002:a05:600c:8586:b0:488:aa33:dc8f with SMTP id 5b1f17b1804b1-48fd62ddf7amr4023785e9.0.1778690135680;
-        Wed, 13 May 2026 09:35:35 -0700 (PDT)
-Received: from ernest.corp.toradex.com (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-48fd62e1d84sm1270635e9.21.2026.05.13.09.35.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 May 2026 09:35:34 -0700 (PDT)
-From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	Khem Raj <raj.khem@gmail.com>
-Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
-	Peter Marko <peter.marko@siemens.com>,
-	Zeming LIU <zeming.liu@windriver.com>
-Subject: [meta-oe][PATCH] jsoncpp: Fix C++11 ABI breakage when compiled with C++17
-Date: Wed, 13 May 2026 18:35:11 +0200
-Message-ID: <20260513163511.435616-1-ernestvanhoecke@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        bh=/U8l3FQkLVpbH6+WpJO2lRusjzSsQYrICBle+MnKYRQ=;
+        b=cHep1LUeN6gssE0SGKHQ8c1i1kWY5T2L/IwbE+eB74P5PCW2SEJY2IgUJZZez+BUGD
+         JBMjBCC8hnvg/FhGxZ2LAPtxtxVAjsAPC9eDQ5CTKTJlsI8fvfewk8l6b2hZgBnwh4JM
+         E3/TtYMNTJeJPhpV8g5HFih98NVyz2ySrK/eQCNoeO2B6N1tAPwGv9aIlD0PPUJ9++G/
+         fUsQ3w04zs1NHt4KztYTU1kuQ9SvD58EYPtryID8PiZW4R4OAwurKr4tG/u+MmDhXfLu
+         2zJZqy+epFroCNYGFNbR+v0Hs/OBKHJ9ypNA12L9e2/o9llVvre9KlhN3rPbNpAnNXDN
+         9wrw==
+X-Forwarded-Encrypted: i=1; AFNElJ9Q7+R15B+5Sg6y+PbuFDG1iZVXPjc41gaEeNXdBgeqkJlJTTdDTQggpdKnf7yXJs+HlRkaXrxzc3d8g7XZ2UhDI5k=@lists.openembedded.org
+X-Gm-Message-State: AOJu0YzK0sT6ypfU7i10ZWvUWBw7oKCpPEQ8U+l7lJ7GQnXb1VkNKvXo
+	z/a4rU94UBiqntA1HwLMm3tcOceO3UKU0507S7DxHAAhGBWa5k0e0XjUuRCd5nnU6f6G4N/4hKO
+	SjeeH09i4ywp/PtVnzgt/92IKrkp1s2Y=
+X-Gm-Gg: Acq92OGGF5P522Lc+Vr/baURQ0cAdtK5Rw8Reg4wI20xEn59BDw+FJcWrJuTGV/GCpN
+	AH0TWSP7EeJ6O8qCNV5wvX7hSFWfVtQB8ACoSDJnr7NFQpZqX6oKPoRm4cP1JhmXX2DAwn56SJh
+	HifbBBrC+GZYmBaYMC0CTs+J+2VorJf4qXX5jt2mxld2JapnN8+K9ijVV4NTX/qN0Gzpm+q/xZD
+	L8az2PXRpNO0QXSGEb/GYQLFxlT2YlQWgPBJKtON85NpjNMkQqf+vxhvYykdysIBeFqO43tiuA2
+	cevTadleaW8svV6CSWj/9Kqb2LvYnN09gpXgJ1uTC9fNqzb736LByECs+o7VhbtQ18eUVdkMWhR
+	tJTiyLX8D516RHP/hafdz6kQ4irpyjV1A+cz3baU4DYYHKDpCHPg180AmUkqypCBgTaRuDV8XFN
+	uibE6d
+X-Received: by 2002:a53:c047:0:10b0:651:c734:ed4b with SMTP id
+ 956f58d0204a3-65df80fffaamr3524580d50.2.1778701795708; Wed, 13 May 2026
+ 12:49:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
+ <2022222.1778130561122567168@lists.openembedded.org> <2115555.1778654861364723634@lists.openembedded.org>
+ <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com> <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
+ <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
+In-Reply-To: <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 May 2026 12:49:44 -0700
+X-Gm-Features: AVHnY4JCVOr0JaMveOS20AZ1-6Fc_FpozixMSCDXt0tYIMa_gF4w_LZcxtJkg78
+Message-ID: <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
+To: AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>
+Cc: Gyorgy Sarvari <skandigraun@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000b1d3020651b84806"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 16:35:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126975
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 19:49:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126976
 
-From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+--000000000000b1d3020651b84806
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-When jsoncpp is built with C++17, 1.9.7 drops several legacy overloads
-that C++11 consumers can still link against.
+Hi Ashish,
 
-Backport the upstream fix to restore compatibility.
+You can continue using this thread to discuss these errors.
 
-Fixes errors such as:
-|  undefined reference to `Json::Value::operator[](char const*)'
+Best regards,
 
-Patch can be dropped when we move to 1.9.8.
+Khem Raj
 
-Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
----
-This was previously sent to the openembedded-core mailing list by
-mistake: https://lore.kernel.org/openembedded-core/20260501160902.1164934-1-ernestvanhoecke@gmail.com/
----
- ...akage-when-compiled-with-C-17-1668-1.patch | 368 ++++++++++++++++++
- .../recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb |   1 +
- 2 files changed, 369 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
-new file mode 100644
-index 000000000000..887bf14d2af5
---- /dev/null
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch
-@@ -0,0 +1,368 @@
-+From c67034e4b4c722579ee15fddb8e4af8f04252b08 Mon Sep 17 00:00:00 2001
-+From: Jordan Bayles <bayles.jordan@gmail.com>
-+Date: Thu, 9 Apr 2026 10:37:08 -0700
-+Subject: [PATCH] Fix C++11 ABI breakage when compiled with C++17 #1668 (#1675)
-+
-+When JSONCPP_HAS_STRING_VIEW was defined, the library dropped the
-+`const char*` and `const String&` overloads for `operator[]`, `get`,
-+`removeMember`, and `isMember`, breaking ABI compatibility for projects
-+consuming the library with C++11.
-+
-+This change unconditionally declares and defines the legacy overloads
-+so they are always exported, restoring compatibility.
-+
-+This commit completely eliminates the ABI breakage that occurs across
-+C++ standard boundaries when using `std::string_view`.
-+
-+Previously, when the library was built with C++17+, CMake would leak
-+`JSONCPP_HAS_STRING_VIEW=1` as a PUBLIC definition. A C++11 consumer
-+would receive this definition, attempt to parse the header, and fail
-+with compiler errors because `std::string_view` is not available in
-+their environment.
-+
-+Conversely, if the library was built in C++11 (without `string_view`
-+symbols), a C++17 consumer would naturally define
-+`JSONCPP_HAS_STRING_VIEW` based on `__cplusplus` inside `value.h`. The
-+consumer would then call the declared `string_view` methods, resulting
-+in linker errors because the methods weren't compiled into the library.
-+
-+By moving all `std::string_view` overloads directly into `value.h` as
-+`inline` methods that delegate to the fundamental
-+`const char*, const char*` methods:
-+1. The consumer's compiler dictates whether the overloads are visible
-+   (via `__cplusplus >= 201703L`).
-+2. The consumer compiles the inline wrappers locally, removing any
-+   reliance on the library's exported symbols for `std::string_view`.
-+3. CMake no longer needs to pollute the consumer's environment with
-+   PUBLIC compile definitions.
-+
-+Backported only the library/header changes. Upstream CI and example
-+test additions are omitted.
-+
-+Upstream-Status: Backport [https://github.com/open-source-parsers/jsoncpp/commit/c67034e4b4c722579ee15fddb8e4af8f04252b08]
-+Signed-off-by: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
-+---
-+ include/json/value.h        | 54 ++++++++++++++++++++----------
-+ src/lib_json/CMakeLists.txt |  9 -----
-+ src/lib_json/json_value.cpp | 66 -------------------------------------
-+ 3 files changed, 36 insertions(+), 93 deletions(-)
-+
-+diff --git a/include/json/value.h b/include/json/value.h
-+index f32f45609365..2007e6b4251d 100644
-+--- a/include/json/value.h
-++++ b/include/json/value.h
-+@@ -357,7 +357,8 @@ public:
-+   Value(const StaticString& value);
-+   Value(const String& value);
-+ #ifdef JSONCPP_HAS_STRING_VIEW
-+-  Value(std::string_view value);
-++  inline Value(std::string_view value)
-++      : Value(value.data(), value.data() + value.length()) {}
-+ #endif
-+   Value(bool value);
-+   Value(std::nullptr_t ptr) = delete;
-+@@ -405,7 +406,14 @@ public:
-+   /** Get string_view of string-value.
-+    *  \return false if !string. (Seg-fault if str is NULL.)
-+    */
-+-  bool getString(std::string_view* str) const;
-++  inline bool getString(std::string_view* str) const {
-++    char const* begin;
-++    char const* end;
-++    if (!getString(&begin, &end))
-++      return false;
-++    *str = std::string_view(begin, static_cast<size_t>(end - begin));
-++    return true;
-++  }
-+ #endif
-+   Int asInt() const;
-+   UInt asUInt() const;
-+@@ -496,12 +504,19 @@ public:
-+ #ifdef JSONCPP_HAS_STRING_VIEW
-+   /// Access an object value by name, create a null member if it does not exist.
-+   /// \param key may contain embedded nulls.
-+-  Value& operator[](std::string_view key);
-++  inline Value& operator[](std::string_view key) {
-++    return resolveReference(key.data(), key.data() + key.length());
-++  }
-+   /// Access an object value by name, returns null if there is no member with
-+   /// that name.
-+   /// \param key may contain embedded nulls.
-+-  const Value& operator[](std::string_view key) const;
-+-#else
-++  inline const Value& operator[](std::string_view key) const {
-++    Value const* found = find(key.data(), key.data() + key.length());
-++    if (!found)
-++      return nullSingleton();
-++    return *found;
-++  }
-++#endif
-+   /// Access an object value by name, create a null member if it does not exist.
-+   /// \note Because of our implementation, keys are limited to 2^30 -1 chars.
-+   /// Exceeding that will cause an exception.
-+@@ -516,7 +531,6 @@ public:
-+   /// that name.
-+   /// \param key may contain embedded nulls.
-+   const Value& operator[](const String& key) const;
-+-#endif
-+   /** \brief Access an object value by name, create a null member if it does not
-+    * exist.
-+    *
-+@@ -533,8 +547,10 @@ public:
-+ #ifdef JSONCPP_HAS_STRING_VIEW
-+   /// Return the member named key if it exist, defaultValue otherwise.
-+   /// \note deep copy
-+-  Value get(std::string_view key, const Value& defaultValue) const;
-+-#else
-++  inline Value get(std::string_view key, const Value& defaultValue) const {
-++    return get(key.data(), key.data() + key.length(), defaultValue);
-++  }
-++#endif
-+   /// Return the member named key if it exist, defaultValue otherwise.
-+   /// \note deep copy
-+   Value get(const char* key, const Value& defaultValue) const;
-+@@ -542,7 +558,6 @@ public:
-+   /// \note deep copy
-+   /// \param key may contain embedded nulls.
-+   Value get(const String& key, const Value& defaultValue) const;
-+-#endif
-+   /// Return the member named key if it exist, defaultValue otherwise.
-+   /// \note deep copy
-+   /// \note key may contain embedded nulls.
-+@@ -588,13 +603,14 @@ public:
-+   /// \pre type() is objectValue or nullValue
-+   /// \post type() is unchanged
-+ #if JSONCPP_HAS_STRING_VIEW
-+-  void removeMember(std::string_view key);
-+-#else
-++  inline void removeMember(std::string_view key) {
-++    removeMember(key.data(), key.data() + key.length(), nullptr);
-++  }
-++#endif
-+   void removeMember(const char* key);
-+   /// Same as removeMember(const char*)
-+   /// \param key may contain embedded nulls.
-+   void removeMember(const String& key);
-+-#endif
-+   /** \brief Remove the named map member.
-+    *
-+    *  Update 'removed' iff removed.
-+@@ -602,13 +618,14 @@ public:
-+    *  \return true iff removed (no exceptions)
-+    */
-+ #if JSONCPP_HAS_STRING_VIEW
-+-  bool removeMember(std::string_view key, Value* removed);
-+-#else
-++  inline bool removeMember(std::string_view key, Value* removed) {
-++    return removeMember(key.data(), key.data() + key.length(), removed);
-++  }
-++#endif
-+   bool removeMember(String const& key, Value* removed);
-+   /// Same as removeMember(const char* begin, const char* end, Value* removed),
-+   /// but 'key' is null-terminated.
-+   bool removeMember(const char* key, Value* removed);
-+-#endif
-+   /// Same as removeMember(String const& key, Value* removed)
-+   bool removeMember(const char* begin, const char* end, Value* removed);
-+   /** \brief Remove the indexed array element.
-+@@ -622,15 +639,16 @@ public:
-+ #ifdef JSONCPP_HAS_STRING_VIEW
-+   /// Return true if the object has a member named key.
-+   /// \param key may contain embedded nulls.
-+-  bool isMember(std::string_view key) const;
-+-#else
-++  inline bool isMember(std::string_view key) const {
-++    return isMember(key.data(), key.data() + key.length());
-++  }
-++#endif
-+   /// Return true if the object has a member named key.
-+   /// \note 'key' must be null-terminated.
-+   bool isMember(const char* key) const;
-+   /// Return true if the object has a member named key.
-+   /// \param key may contain embedded nulls.
-+   bool isMember(const String& key) const;
-+-#endif
-+   /// Same as isMember(String const& key)const
-+   bool isMember(const char* begin, const char* end) const;
-+
-+diff --git a/src/lib_json/CMakeLists.txt b/src/lib_json/CMakeLists.txt
-+index 03e9335525ca..a0695e9eba83 100644
-+--- a/src/lib_json/CMakeLists.txt
-++++ b/src/lib_json/CMakeLists.txt
-+@@ -131,9 +131,6 @@ if(BUILD_SHARED_LIBS)
-+
-+     target_compile_features(${SHARED_LIB} PUBLIC ${REQUIRED_FEATURES})
-+
-+-    if(JSONCPP_HAS_STRING_VIEW)
-+-        target_compile_definitions(${SHARED_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
-+-    endif()
-+
-+     target_include_directories(${SHARED_LIB} PUBLIC
-+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-+@@ -168,9 +165,6 @@ if(BUILD_STATIC_LIBS)
-+
-+     target_compile_features(${STATIC_LIB} PUBLIC ${REQUIRED_FEATURES})
-+
-+-    if(JSONCPP_HAS_STRING_VIEW)
-+-        target_compile_definitions(${STATIC_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
-+-    endif()
-+
-+     target_include_directories(${STATIC_LIB} PUBLIC
-+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-+@@ -198,9 +192,6 @@ if(BUILD_OBJECT_LIBS)
-+
-+     target_compile_features(${OBJECT_LIB} PUBLIC ${REQUIRED_FEATURES})
-+
-+-    if(JSONCPP_HAS_STRING_VIEW)
-+-        target_compile_definitions(${OBJECT_LIB} PUBLIC JSONCPP_HAS_STRING_VIEW=1)
-+-    endif()
-+
-+     target_include_directories(${OBJECT_LIB} PUBLIC
-+         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-+diff --git a/src/lib_json/json_value.cpp b/src/lib_json/json_value.cpp
-+index 74f77896fa7b..a8eb72d6b75f 100644
-+--- a/src/lib_json/json_value.cpp
-++++ b/src/lib_json/json_value.cpp
-+@@ -441,14 +441,6 @@ Value::Value(const String& value) {
-+       value.data(), static_cast<unsigned>(value.length()));
-+ }
-+
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-Value::Value(std::string_view value) {
-+-  initBasic(stringValue, true);
-+-  value_.string_ = duplicateAndPrefixStringValue(
-+-      value.data(), static_cast<unsigned>(value.length()));
-+-}
-+-#endif
-+-
-+ Value::Value(const StaticString& value) {
-+   initBasic(stringValue);
-+   value_.string_ = const_cast<char*>(value.c_str());
-+@@ -656,21 +648,6 @@ bool Value::getString(char const** begin, char const** end) const {
-+   return true;
-+ }
-+
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-bool Value::getString(std::string_view* str) const {
-+-  if (type() != stringValue)
-+-    return false;
-+-  if (value_.string_ == nullptr)
-+-    return false;
-+-  const char* begin;
-+-  unsigned length;
-+-  decodePrefixedString(this->isAllocated(), this->value_.string_, &length,
-+-                       &begin);
-+-  *str = std::string_view(begin, length);
-+-  return true;
-+-}
-+-#endif
-+-
-+ String Value::asString() const {
-+   switch (type()) {
-+   case nullValue:
-+@@ -1190,17 +1167,6 @@ Value* Value::demand(char const* begin, char const* end) {
-+                       "objectValue or nullValue");
-+   return &resolveReference(begin, end);
-+ }
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-const Value& Value::operator[](std::string_view key) const {
-+-  Value const* found = find(key.data(), key.data() + key.length());
-+-  if (!found)
-+-    return nullSingleton();
-+-  return *found;
-+-}
-+-Value& Value::operator[](std::string_view key) {
-+-  return resolveReference(key.data(), key.data() + key.length());
-+-}
-+-#else
-+ const Value& Value::operator[](const char* key) const {
-+   Value const* found = find(key, key + strlen(key));
-+   if (!found)
-+@@ -1221,7 +1187,6 @@ Value& Value::operator[](const char* key) {
-+ Value& Value::operator[](const String& key) {
-+   return resolveReference(key.data(), key.data() + key.length());
-+ }
-+-#endif
-+
-+ Value& Value::operator[](const StaticString& key) {
-+   return resolveReference(key.c_str());
-+@@ -1261,18 +1226,12 @@ Value Value::get(char const* begin, char const* end,
-+   Value const* found = find(begin, end);
-+   return !found ? defaultValue : *found;
-+ }
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-Value Value::get(std::string_view key, const Value& defaultValue) const {
-+-  return get(key.data(), key.data() + key.length(), defaultValue);
-+-}
-+-#else
-+ Value Value::get(char const* key, Value const& defaultValue) const {
-+   return get(key, key + strlen(key), defaultValue);
-+ }
-+ Value Value::get(String const& key, Value const& defaultValue) const {
-+   return get(key.data(), key.data() + key.length(), defaultValue);
-+ }
-+-#endif
-+
-+ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
-+   if (type() != objectValue) {
-+@@ -1288,31 +1247,13 @@ bool Value::removeMember(const char* begin, const char* end, Value* removed) {
-+   value_.map_->erase(it);
-+   return true;
-+ }
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-bool Value::removeMember(std::string_view key, Value* removed) {
-+-  return removeMember(key.data(), key.data() + key.length(), removed);
-+-}
-+-#else
-+ bool Value::removeMember(const char* key, Value* removed) {
-+   return removeMember(key, key + strlen(key), removed);
-+ }
-+ bool Value::removeMember(String const& key, Value* removed) {
-+   return removeMember(key.data(), key.data() + key.length(), removed);
-+ }
-+-#endif
-+-
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-void Value::removeMember(std::string_view key) {
-+-  JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
-+-                      "in Json::Value::removeMember(): requires objectValue");
-+-  if (type() == nullValue)
-+-    return;
-+
-+-  CZString actualKey(key.data(), unsigned(key.length()),
-+-                     CZString::noDuplication);
-+-  value_.map_->erase(actualKey);
-+-}
-+-#else
-+ void Value::removeMember(const char* key) {
-+   JSON_ASSERT_MESSAGE(type() == nullValue || type() == objectValue,
-+                       "in Json::Value::removeMember(): requires objectValue");
-+@@ -1323,7 +1264,6 @@ void Value::removeMember(const char* key) {
-+   value_.map_->erase(actualKey);
-+ }
-+ void Value::removeMember(const String& key) { removeMember(key.c_str()); }
-+-#endif
-+
-+ bool Value::removeIndex(ArrayIndex index, Value* removed) {
-+   if (type() != arrayValue) {
-+@@ -1353,18 +1293,12 @@ bool Value::isMember(char const* begin, char const* end) const {
-+   Value const* value = find(begin, end);
-+   return nullptr != value;
-+ }
-+-#ifdef JSONCPP_HAS_STRING_VIEW
-+-bool Value::isMember(std::string_view key) const {
-+-  return isMember(key.data(), key.data() + key.length());
-+-}
-+-#else
-+ bool Value::isMember(char const* key) const {
-+   return isMember(key, key + strlen(key));
-+ }
-+ bool Value::isMember(String const& key) const {
-+   return isMember(key.data(), key.data() + key.length());
-+ }
-+-#endif
-+
-+ Value::Members Value::getMemberNames() const {
-+   JSON_ASSERT_MESSAGE(
-+--
-+2.43.0
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-index 797f093f3349..354f4e91156a 100644
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.9.7.bb
-@@ -15,6 +15,7 @@ PE = "1"
- 
- SRCREV = "3455302847cf1e4671f1d8f5fa953fd46a7b1404"
- SRC_URI = "git://github.com/open-source-parsers/jsoncpp;branch=master;protocol=https;tag=${PV} \
-+           file://0001-Fix-C-11-ABI-breakage-when-compiled-with-C-17-1668-1.patch \
-            file://run-ptest \
-            "
- 
--- 
-2.43.0
+On Wed, May 13, 2026, 1:21=E2=80=AFAM AshishKumar Mishra <
+AshishKumar.Mishra@bmwtechworks.in> wrote:
 
+> This seems to be adbd.mk reported error  , will try locally reproducing
+> it
+> Is there any specific channel to discuss such error or I can continue
+> using the same thread ?
+> Or any specific person / team to address such communication ?
+>
+>
+> ------------------------------
+> *From:* Khem Raj <raj.khem@gmail.com>
+> *Sent:* 13 May 2026 12:56
+> *To:* skandigraun@gmail.com <skandigraun@gmail.com>
+> *Cc:* AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>;
+> openembedded-devel@lists.openembedded.org <
+> openembedded-devel@lists.openembedded.org>
+> *Subject:* Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and
+> cleanup
+>
+> You don't often get email from raj.khem@gmail.com. Learn why this is
+> important <https://aka.ms/LearnAboutSenderIdentification>
+> *Caution: "External email, be cautious especially with link(s),
+> attachment(s) or QR code(s)".*
+> there are some build issues I am seeing
+>
+> https://errors.yoctoproject.org/Errors/Details/938668/
+>
+> On Tue, May 12, 2026 at 11:57=E2=80=AFPM Gyorgy Sarvari via lists.openemb=
+edded.org
+> <skandigraun=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>
+> On 5/13/26 08:47, AshishKumar Mishra via lists.openembedded.org wrote:
+> > Hi Team,
+> > Can team please take this to be merged in master branch
+> >
+>
+> It's currently undergoing tests in the master-next branch:
+> https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-next
+>
+>
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#126953):
+> https://lists.openembedded.org/g/openembedded-devel/message/126953
+> Mute This Topic: https://lists.openembedded.org/mt/119162735/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000b1d3020651b84806
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Hi Ashish,<br><br>You can continue using this thread to d=
+iscuss these errors.<br><br>Best regards,<br><br>Khem Raj<div><br></div></d=
+iv><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Wed, May 13, 2026, 1:21=E2=80=AFAM AshishKumar Mishra=
+ &lt;<a href=3D"mailto:AshishKumar.Mishra@bmwtechworks.in">AshishKumar.Mish=
+ra@bmwtechworks.in</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">
+
+
+
+
+<div dir=3D"ltr">
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+This seems to be <a href=3D"http://adbd.mk" target=3D"_blank" rel=3D"norefe=
+rrer">adbd.mk</a> reported error=C2=A0 , will try locally reproducing it=C2=
+=A0</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Is there any specific channel to discuss such error or I can continue using=
+ the same thread ?</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+Or any specific person / team to address such communication ?</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<br>
+</div>
+<div id=3D"m_-5165992933086938950appendonsend"></div>
+<hr style=3D"display:inline-block;width:98%">
+<div id=3D"m_-5165992933086938950divRplyFwdMsg" dir=3D"ltr"><font face=3D"C=
+alibri, sans-serif" style=3D"font-size:11pt" color=3D"#000000"><b>From:</b>=
+ Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank" rel=
+=3D"noreferrer">raj.khem@gmail.com</a>&gt;<br>
+<b>Sent:</b> 13 May 2026 12:56<br>
+<b>To:</b> <a href=3D"mailto:skandigraun@gmail.com" target=3D"_blank" rel=
+=3D"noreferrer">skandigraun@gmail.com</a> &lt;<a href=3D"mailto:skandigraun=
+@gmail.com" target=3D"_blank" rel=3D"noreferrer">skandigraun@gmail.com</a>&=
+gt;<br>
+<b>Cc:</b> AshishKumar Mishra &lt;<a href=3D"mailto:AshishKumar.Mishra@bmwt=
+echworks.in" target=3D"_blank" rel=3D"noreferrer">AshishKumar.Mishra@bmwtec=
+hworks.in</a>&gt;; <a href=3D"mailto:openembedded-devel@lists.openembedded.=
+org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembe=
+dded.org</a> &lt;<a href=3D"mailto:openembedded-devel@lists.openembedded.or=
+g" target=3D"_blank" rel=3D"noreferrer">openembedded-devel@lists.openembedd=
+ed.org</a>&gt;<br>
+<b>Subject:</b> Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration a=
+nd cleanup</font>
+<div>=C2=A0</div>
+</div>
+<div>
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" alig=
+n=3D"left" style=3D"background:revert;color:revert;direction:revert;font-si=
+ze:revert;height:revert;letter-spacing:revert;line-height:revert;margin:rev=
+ert;opacity:revert;outline:revert;overflow:revert;padding:revert;text-align=
+:revert;text-indent:revert;text-orientation:revert;text-overflow:revert;tex=
+t-transform:revert;vertical-align:revert;white-space:revert;word-break:reve=
+rt;word-spacing:revert;writing-mode:revert;zoom:revert;border:0px;display:t=
+able;width:100%;table-layout:fixed;float:none;border-spacing:0px">
+<tbody style=3D"background:revert;border:revert;color:revert;direction:reve=
+rt;font-size:revert;height:revert;letter-spacing:revert;line-height:revert;=
+margin:revert;opacity:revert;outline:revert;overflow:revert;padding:revert;=
+table-layout:revert;text-align:revert;text-indent:revert;text-orientation:r=
+evert;text-overflow:revert;text-transform:revert;vertical-align:revert;whit=
+e-space:revert;width:revert;word-break:revert;word-spacing:revert;writing-m=
+ode:revert;zoom:revert;display:block">
+<tr style=3D"background:revert;border:revert;color:revert;direction:revert;=
+display:revert;font-size:revert;height:revert;letter-spacing:revert;line-he=
+ight:revert;margin:revert;opacity:revert;outline:revert;overflow:revert;pad=
+ding:revert;table-layout:revert;text-align:revert;text-indent:revert;text-o=
+rientation:revert;text-overflow:revert;text-transform:revert;vertical-align=
+:revert;white-space:revert;width:revert;word-break:revert;word-spacing:reve=
+rt;writing-mode:revert;zoom:revert">
+<td valign=3D"middle" width=3D"1px" bgcolor=3D"#A6A6A6" cellpadding=3D"7px =
+2px 7px 2px" style=3D"background-image:revert;background-position:revert;ba=
+ckground-size:revert;background-repeat:revert;background-origin:revert;back=
+ground-clip:revert;border:revert;color:revert;direction:revert;display:reve=
+rt;font-size:revert;height:revert;letter-spacing:revert;line-height:revert;=
+margin:revert;opacity:revert;outline:revert;overflow:revert;table-layout:re=
+vert;text-align:revert;text-indent:revert;text-orientation:revert;text-over=
+flow:revert;text-transform:revert;vertical-align:revert;white-space:revert;=
+word-break:revert;word-spacing:revert;writing-mode:revert;zoom:revert;paddi=
+ng:7px 2px;background-color:rgb(166,166,166);width:0px">
+</td>
+<td valign=3D"middle" width=3D"100%" bgcolor=3D"#EAEAEA" cellpadding=3D"7px=
+ 5px 7px 15px" color=3D"#212121" style=3D"background-image:revert;backgroun=
+d-position:revert;background-size:revert;background-repeat:revert;backgroun=
+d-origin:revert;background-clip:revert;border:revert;direction:revert;displ=
+ay:revert;height:revert;letter-spacing:revert;line-height:revert;margin:rev=
+ert;opacity:revert;outline:revert;overflow:revert;table-layout:revert;text-=
+indent:revert;text-orientation:revert;text-overflow:revert;text-transform:r=
+evert;vertical-align:revert;white-space:revert;word-break:revert;word-spaci=
+ng:revert;writing-mode:revert;zoom:revert;width:100%;background-color:rgb(2=
+34,234,234);padding:7px 5px 7px 15px;font-family:wf_segoe-ui_normal,&quot;S=
+egoe UI&quot;,&quot;Segoe WP&quot;,Tahoma,Arial,sans-serif;font-size:12px;f=
+ont-weight:normal;color:rgb(33,33,33);text-align:left">
+<div style=3D"background:revert;border:revert;color:revert;direction:revert=
+;display:revert;font-size:revert;height:revert;letter-spacing:revert;line-h=
+eight:revert;margin:revert;opacity:revert;outline:revert;overflow:revert;pa=
+dding:revert;table-layout:revert;text-align:revert;text-indent:revert;text-=
+orientation:revert;text-overflow:revert;text-transform:revert;vertical-alig=
+n:revert;white-space:revert;width:revert;word-break:revert;word-spacing:rev=
+ert;writing-mode:revert;zoom:revert">
+You don&#39;t often get email from <a href=3D"mailto:raj.khem@gmail.com" ta=
+rget=3D"_blank" rel=3D"noreferrer">raj.khem@gmail.com</a>. <a href=3D"https=
+://aka.ms/LearnAboutSenderIdentification" style=3D"background:revert;color:=
+revert;direction:revert;display:revert;font-size:revert;opacity:revert" tar=
+get=3D"_blank" rel=3D"noreferrer">
+Learn why this is important</a> </div>
+</td>
+<td valign=3D"middle" align=3D"left" width=3D"75px" bgcolor=3D"#EAEAEA" cel=
+lpadding=3D"7px 5px 7px 5px" color=3D"#212121" style=3D"background-image:re=
+vert;background-position:revert;background-size:revert;background-repeat:re=
+vert;background-origin:revert;background-clip:revert;border:revert;directio=
+n:revert;display:revert;height:revert;letter-spacing:revert;line-height:rev=
+ert;margin:revert;opacity:revert;outline:revert;overflow:revert;table-layou=
+t:revert;text-indent:revert;text-orientation:revert;text-overflow:revert;te=
+xt-transform:revert;vertical-align:revert;white-space:revert;word-break:rev=
+ert;word-spacing:revert;writing-mode:revert;zoom:revert;width:75px;backgrou=
+nd-color:rgb(234,234,234);padding:7px 5px;font-family:wf_segoe-ui_normal,&q=
+uot;Segoe UI&quot;,&quot;Segoe WP&quot;,Tahoma,Arial,sans-serif;font-size:1=
+2px;font-weight:normal;color:rgb(33,33,33);text-align:left">
+</td>
+</tr>
+</tbody>
+</table>
+<div><span style=3D"color:red"><i>Caution: &quot;External email, be cautiou=
+s especially with link(s), attachment(s) or QR code(s)&quot;.</i></span>
+<div>
+<div dir=3D"ltr">there are some build issues I am seeing
+<div><br>
+</div>
+<div><a href=3D"https://errors.yoctoproject.org/Errors/Details/938668/" tar=
+get=3D"_blank" rel=3D"noreferrer">https://errors.yoctoproject.org/Errors/De=
+tails/938668/</a></div>
+</div>
+<br>
+<div>
+<div dir=3D"ltr">On Tue, May 12, 2026 at 11:57=E2=80=AFPM Gyorgy Sarvari vi=
+a
+<a href=3D"http://lists.openembedded.org/" target=3D"_blank" rel=3D"norefer=
+rer">
+lists.openembedded.org</a> &lt;skandigraun=3D<a href=3D"mailto:gmail.com@li=
+sts.openembedded.org" target=3D"_blank" rel=3D"noreferrer">gmail.com@lists.=
+openembedded.org</a>&gt; wrote:<br>
+</div>
+<blockquote style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex">
+<br>
+On 5/13/26 08:47, AshishKumar Mishra via <a href=3D"http://lists.openembedd=
+ed.org/" rel=3D"noreferrer noreferrer" target=3D"_blank">
+lists.openembedded.org</a> wrote:<br>
+&gt; Hi Team,=C2=A0<br>
+&gt; Can team please take this to be merged in master branch=C2=A0<br>
+&gt; =C2=A0<br>
+<br>
+It&#39;s currently undergoing tests in the master-next branch:<br>
+<a href=3D"https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-n=
+ext" rel=3D"noreferrer noreferrer" target=3D"_blank">https://git.openembedd=
+ed.org/meta-openembedded/log/?h=3Dmaster-next</a><br>
+<br>
+<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#126953): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/126953" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">
+https://lists.openembedded.org/g/openembedded-devel/message/126953</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119162735/199=
+7914" rel=3D"noreferrer noreferrer" target=3D"_blank">
+https://lists.openembedded.org/mt/119162735/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank" rel=3D"noreferrer">
+openembedded-devel+owner@lists.openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">
+https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"m=
+ailto:raj.khem@gmail.com" target=3D"_blank" rel=3D"noreferrer">raj.khem@gma=
+il.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</blockquote></div>
+
+--000000000000b1d3020651b84806--
 
