@@ -2,32 +2,32 @@ Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94A43CD4F3F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79A0ACD4F3E
 	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 10:52:20 +0000 (UTC)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4839.1778669539479051800
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.4838.1778669538760865172
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 May 2026 03:52:19 -0700
+ Wed, 13 May 2026 03:52:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=sbZMxQWA;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@arm.com header.s=foss header.b=vxi07WFz;
  spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CC9831655
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1E4321655
 	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:13 -0700 (PDT)
 Received: from cesw-amp-gbt-1s-m12830-04.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id A9AFC3F7B4
-	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:18 -0700 (PDT)
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 04B233F7B4
+	for <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 03:52:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1778669539; bh=JvJEMup56r90AD9L/W2K4oTmFHSUfWaLJzF1GaRmt+U=;
+	t=1778669538; bh=fg08z7bRwRP7sB9elGmvYqm0axj3lTlF8bGC2CWazXw=;
 	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=sbZMxQWARI2s2EZDHOr4+g0Hz4s8DJZ/CsAEcBJG43E7NVSub/TKHFmq++UIbGJgw
-	 ToOzg29WdhN3K972055KSy6gFxY7wgc08t3/ovR3tXz2KR/nx7tkFbUnDRcctV2DSb
-	 DAAG1VvVQr5/P2tGpKsFJBf1eAKCezSFNgczTmWc=
+	b=vxi07WFzrpqEpkPnHYqswoU8Vj/FT1pkT7W/3PU+s2zsWMCnj45lYAD+pLMjhfisD
+	 mCeexf2nbfBn4gagVpNpPzEMxZniJmwZFT6Vy5/WoEKY4z6qbbOhtmINUBFozq9/gr
+	 9+Am89uGrLdcw0XfFfOe6JeZuhF3yrGqwrJH1BVI=
 From: Ross Burton <ross.burton@arm.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH v2 7/7] nautilus: update dependencies
-Date: Wed, 13 May 2026 11:52:10 +0100
-Message-ID: <20260513105210.2109216-7-ross.burton@arm.com>
+Subject: [PATCH v2 6/7] gnome-system-monitor: remove obsolete dependencies
+Date: Wed, 13 May 2026 11:52:09 +0100
+Message-ID: <20260513105210.2109216-6-ross.burton@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260513105210.2109216-1-ross.burton@arm.com>
 References: <20260513105210.2109216-1-ross.burton@arm.com>
@@ -37,42 +37,58 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 10:52:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126971
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126970
 
 libhandy was removed when g-s-m ported to GTK 4.
 
-Update the DISTRO_FEATURES checks to use GTK3DISTROFEATURES.
+gnome-common is not required now that g-s-m uses Meson not autoconf.
+
+polkit was removed in g-s-m 3.36 (March 2020).
+
+Update the DISTRO_FEATURES check, polkit isn't required but opengl is
+via GTK 4.
 
 Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../gnome-system-monitor/gnome-system-monitor_50.0.bb       | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb b/meta-gn=
-ome/recipes-gnome/nautilus/nautilus_49.5.bb
-index 45e0969d66..9597ce5136 100644
---- a/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_49.5.bb
-@@ -14,7 +14,6 @@ DEPENDS =3D " \
-     gtk4 \
+diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-m=
+onitor_50.0.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-syst=
+em-monitor_50.0.bb
+index 1ae11dda3b..29918605ef 100644
+--- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_=
+50.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_=
+50.0.bb
+@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954=
+499f7abaabaa882bbe"
+=20
+ DEPENDS =3D " \
+     catch2 \
+-    gnome-common-native \
+     libxml2-native \
+     glib-2.0-native \
+     glibmm-2.68 \
+@@ -13,15 +12,12 @@ DEPENDS =3D " \
      libadwaita \
-     libcloudproviders \
+     libgtop \
+     librsvg \
+-    polkit \
 -    libhandy \
-     libportal \
-     libxml2 \
-     tinysparql \
-@@ -26,7 +25,8 @@ inherit gnomebase gsettings gobject-introspection gi-do=
-cgen gettext features_che
+ "
 =20
- SRC_URI[archive.sha256sum] =3D "fa5655e73ee7953aecfe71fea67bfec0c67447e1=
-4e6df135aa3f80334386872c"
+-
+ inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_c=
+heck gettext
 =20
--REQUIRED_DISTRO_FEATURES =3D "x11 opengl gobject-introspection-data"
-+REQUIRED_DISTRO_FEATURES =3D "opengl gobject-introspection-data"
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+ ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+-REQUIRED_DISTRO_FEATURES =3D "polkit"
++REQUIRED_DISTRO_FEATURES =3D "opengl"
 =20
- GIDOCGEN_MESON_OPTION =3D "docs"
- GIDOCGEN_MESON_ENABLE_FLAG =3D 'true'
+ SRC_URI[archive.sha256sum] =3D "a4138aa754b4584c46de91fad1d685e27b12bc24=
+57de761863b6be02d84c4862"
+=20
 --=20
 2.43.0
 
