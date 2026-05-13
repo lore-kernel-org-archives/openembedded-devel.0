@@ -1,235 +1,91 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8194CD37B6
-	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 04:22:28 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.269.1778646139585403366
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04947CD484C
+	for <webhook@archiver.kernel.org>; Wed, 13 May 2026 05:04:59 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.720.1778648697713925633
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 May 2026 21:22:19 -0700
+ Tue, 12 May 2026 22:04:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=jHGy1rlO;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-64d5a7926cfso5883089d50.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 21:22:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1778646139; cv=none;
-        d=google.com; s=arc-20240605;
-        b=ae195rDeFaJ8E7B8+J5ONKtt2WvcLtuE8Ya08a1EnnZdrUlk10mqlt8kIBScaiHoXz
-         ZFaGy2EQbuXPhu4A+wvb/ZMF+EMMQD8IM9SnkprgtknjgJHrbKDFP9YxeqnFxwPEI0H3
-         fIuKmWe9SjfiovHFLd3jXEmNnd7dN2qmIN0c3Jgqe4ZZK8bYm1/5DjHa+1plHKOpPj5+
-         skZu90en6VH0/NExxGeBr7jRwY3SqHutfNiPoIqQNceppXGr80dep6KTWzKan00gXzbZ
-         PMmnIcRaoH1dwCmCr4tgqZvIHW4Nx3zYTE9ZVCityenWWiyzgIi5n0gNrutpAalgynet
-         /V3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=IvjCdOB+4O9PoyJBzhTZkBHvxJx89AW4q5/U/u7+HKk=;
-        fh=x4G9YHSntyZXDj08KtmJ2w3MTCEibcvnYP/K47cOljc=;
-        b=kk0PAo1D7zOnIujJ2g3F/kLpa16DvDviH1R0+WLqW3gT6qwKoJRWW6/04sQ3dndEDU
-         7c2yBGYXQW5rFqbXHdG94jskZe66uL29CBPpn6lSSwvRT6PdCWz35p/XQKAQ4EIs7pWP
-         +H1oQx1JsYbL8bTp8v866XtAQGuUfpLHwS0P05NoGeoyLLCgpJkneWWCKd8nk3IMxBiC
-         VT4jtxQ1HHqfcK2HIf+rRzMGoOwzBH2rLALLDmoZTps7oC3BVG+C/FSFlZuBIFjCmn+A
-         zijx3tGEoTB2Ls5r2HSVgrLQRDXBH28T03CWF3HIpbSYmMxlcwJ4nwt2ZxEihSUk539D
-         MhJQ==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=cuX5wUp5;
+ spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-3680540a6efso2235284a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 May 2026 22:04:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778646139; x=1779250939; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=IvjCdOB+4O9PoyJBzhTZkBHvxJx89AW4q5/U/u7+HKk=;
-        b=jHGy1rlOkzyhJKDWY1fNjVgqSO9/oHbObilqiviI72x9yTu6ta37DERCzMPMZZcZJO
-         JtlzlQNXW5esIxkSrDgzoL8MKJObYuUMRwlMbn03VhgmHIpBDMcM2sIQIfTP/PpNm/YW
-         jMU5V/GmAdUm4quqEzwOQ4rOQNMUg8wx32vJfRAaeX5RmyTvKkU6U+iVO829wxvf9qAI
-         UC2GhrNk7KFmlfSrUwfcGHXMSmy9qADHiTa4gGT+8hjZy5Xhg//cPxkJ9L34X2W4jlwa
-         Q3ga/NRR1VqApA6gfjtl5u+kv0w9RMZiQtjIaTectq06wk2XLmKC+whvFU61ERCbwitn
-         KYew==
+        d=gmail.com; s=20251104; t=1778648697; x=1779253497; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=v+AiOGT6zXno5jQrFizVIJSv+1R78pGHR1+/sN2UJyE=;
+        b=cuX5wUp5vlMe88y6E3Mj3y0NEWjclO9eaeRVcPooclqjkVSs6J5lTVIqOT3NUdj8P+
+         f5Zbit88eUIkdXQZ+R8Yc6m/FvwNF0W472IcLF42gqat8QvtwaL6ApcX7buFdnCY73Fh
+         b+9B85w7mDfLNdaUR683vST1XZl3Glf1vyZxrPWZRR+OgFxvymIcaGA03kzzpaBxPt4B
+         RI41iUmtYnp4pJvWoanIubz6oi9YoA2vmdDIWQX4nBWjURNL1FehfUlphbf3qLz+y2hj
+         1lWnMVtuXV24xUcpNff7StRRpZYlKgoz0WERDRF6f39KQHXyyP/srP6D8lgPKXGvAtqs
+         foHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778646139; x=1779250939;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1778648697; x=1779253497;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IvjCdOB+4O9PoyJBzhTZkBHvxJx89AW4q5/U/u7+HKk=;
-        b=YhmfTfiJ5wa/ycaTQ4NIZPAXbkhTaNDsjfNp2gAHshe7V0ItgEQg3XFfgxPCE/hwBl
-         z/LpczU7w6vwp6XuIo///zSKyC8DV8hnwB6XXkiv5co2WR4Wz4rKG89VYuj9WpbV5oq8
-         P9LCnyX4qC2sjFFFqMcxbpXyvBKspDWa+rhF7w6X7M041EmxVmkj+4BsFb9hDV08VwUF
-         fsIQo3U06ZvVOFukSnbzXwrpYA2hhVcp/7LCLA8ykpXnYwqYc80+5H9ZF7PQNgInXD2F
-         IyypW3IEuGWP2+DZtbPVk2cYvqMwUmfGVWEdTg0HrrYUKaUz/jQsPpRUR7qTTHJsPQdG
-         sNVg==
-X-Gm-Message-State: AOJu0YwSpMFONRik5cFWN+qFPH+vGQghoDl5bB5f57VCENnYrcPRPwJT
-	oE5YSwI9Beg0KSXrB1QqOX+oJsKjihsrHb3eFRP42FCR/E/uC9pOpgI+DTSocTgGJnjqD0dYTHl
-	F2qJyQsfAdg7oaQTqKW0+om+5Et+YM4S2csMYOUZ4eA==
-X-Gm-Gg: Acq92OHFKWfu3IQEHDjrrqlpAQ1C7UFzl9UEWzAMQ5waX4N2Tp46tsHVevqT4X41mMj
-	tDgygHg9xKwBrz3DrI1hq2VoFBX8LtHYuvVEwOCUGOENs2ZU7fk2IBTXsE9s9CU742E4btvhoDu
-	spVj2agzcAxq9HgvT0VNVqU6AvZfAmy5jGQSDXBPSTWfISWmGlXr3gRPBbC3lkqzvjnnuDHsnfn
-	mEl4/yCjM1y17IOum+CMBaCN0GNwoSgqc+I7HgWCG+4T7f4JfWyinfpo0DvDXD5UmlOJKtNl3X8
-	vIUoreueFMo1X5UbfWxf7LTBxl+eFJhtaitzMGPlgLwVirMOABE1HcKFFbDVs5kMX+NCNSMUcsx
-	wceIk1hGKrdVmgmwtKqI18fHtRRGWv0zKmqhm1VvBtFkKRRK3BSCGe+W7QGqbuR0B4Urv9PfNy8
-	qLk37c
-X-Received: by 2002:a05:690e:d56:b0:654:1261:8ba4 with SMTP id
- 956f58d0204a3-65df814dc87mr1025132d50.19.1778646138604; Tue, 12 May 2026
- 21:22:18 -0700 (PDT)
+        bh=v+AiOGT6zXno5jQrFizVIJSv+1R78pGHR1+/sN2UJyE=;
+        b=JDqMH/adDgGgIqpwjOnRUbbhqZaqrqyeUyQHHbauXYLv6ro7bZKJPolHQkawlNp3kp
+         NX11sjmBvzKuCWgXYeB8IfSKynDYLluIyzSgrGvFX3NRRdJwjxYfaBlOPSb3b669E18Y
+         eYbtv4mxp9RNvVg+xsMAIJzrzCZJn3XQ/oNuDGt1kF2V86SVeAoerBcMlxO1+H5P0Qz7
+         Yn5Cj4CF5k6eWGBjCdZvFqzrsxmGG+FFixq2NV0VQeqRCfhBKCG2YOrYlr1zKMqdT0Iy
+         BoaVHzJFjs8cthf5yEV969E0CeTGSXc0IEll+Ae8L3B/IV+IGPDAIUQpWIX8KJRS9hgq
+         OiZw==
+X-Gm-Message-State: AOJu0Yy4SHwWjmSz7ZeA8Vimy4cuLQ3tfn/JvDO8ezdsgTJjjoaUlmTq
+	L1jSr5ag7GvxsDG56/AZig3r3UNCIeZP5BuccNqXAFE/0s+zzOydsEGZ+sfXM6A/
+X-Gm-Gg: Acq92OFSWWpp0Nf5cp529b0PWoXNQ52Vpt/vRpzFSrfOIlPI7GqqLnhQr8hggbSWo2U
+	Q8OZQFZEpKOfaCBHgtCOM/Vfl+78Z2i+eD1XhDHO5SgmU9nFlBDmY/4k3GIbsFedMQYSbfez+pg
+	LYyTvjLwZSKwpSmwC8hlUWxCDbO4xqw1vLOhmJaWDoavYd6sr7sm7zWv+slmajPGVV7hXBkRkl0
+	lZIRFOYbhVBKzzzaKjKR3UNMmR1bmo0O0A25Z63b1yIuzHWxfz4xPOMT0dbQWvugTy16Dv8AFWg
+	MIERpEMH4vGzXBs+MNgq5aGVAdY/TcZ9eVgMP9vbz5Gqu719daGAMg4lwZDF4cJPYmOMAEl5e6U
+	XHrN0P0NQBMHseT3JVKy13s4hrexCEc070GNiu0klydUwZPVO2zI0K2Y8b/BFjr6CLg+tqCf16m
+	qc+xybqKrSyoG3XZDHOiNtoOtWzAJK4QMFtppatvF1wrR2x3o=
+X-Received: by 2002:a17:90b:58e4:b0:367:c442:3f24 with SMTP id 98e67ed59e1d1-368f79b61bemr1343637a91.19.1778648696903;
+        Tue, 12 May 2026 22:04:56 -0700 (PDT)
+Received: from NVAPF55DW0D-IPD.. ([203.211.108.128])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-368eddf5c58sm1696900a91.1.2026.05.12.22.04.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 May 2026 22:04:56 -0700 (PDT)
+From: ankur.tyagi85@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/8] exiftool: ignore CVE-2026-7580
+Date: Wed, 13 May 2026 17:04:42 +1200
+Message-ID: <20260513050450.3515182-1-ankur.tyagi85@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260506172256.1259293-1-piotr.wejman@arm.com>
-In-Reply-To: <20260506172256.1259293-1-piotr.wejman@arm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 12 May 2026 21:21:52 -0700
-X-Gm-Features: AVHnY4IBTHpmWnUFuWNSosK8fXlnvm47hQZ7IAGw2OqL0BvaKSAkJlbkMlo86dM
-Message-ID: <CAMKF1sqDsN9onLMvE9rOsQ9bFLCvYnAk1V0w+Ad-GVaVmdYKuA@mail.gmail.com>
-Subject: Re: [meta-networking][PATCH] nftables: add systemd PACKAGECONFIG
-To: Piotr Wejman <piotr.wejman@arm.com>
-Cc: openembedded-devel@lists.openembedded.org, joe@deserted.net, 
-	ross.burton@arm.com, vincent.mailhol@arm.com
-Content-Type: multipart/alternative; boundary="00000000000045d0cb0651ab5390"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 04:22:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126943
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 May 2026 05:04:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126944
 
---00000000000045d0cb0651ab5390
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-seeing this error
-https://errors.yoctoproject.org/Errors/Details/938664/
+The impacted function mentioned in the nvd[1] was introduced in v12.82[2],
+hence we can ignore this CVE.
 
-Seems to be related to this patch
+[1]https://nvd.nist.gov/vuln/detail/CVE-2026-7580
+[2]https://github.com/exiftool/exiftool/commit/280a7f0db71b5887be492d57723723cb196ad2f9
 
-On Wed, May 6, 2026 at 10:24=E2=80=AFAM Piotr Wejman <piotr.wejman@arm.com>=
- wrote:
+Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
+---
+ meta-oe/recipes-devtools/perl/exiftool_12.72.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-> Add a systemd PACKAGECONFIG option to install nftables systemd unit files=
-.
-> When "systemd" is present in DISTRO_FEATURES, the option is enabled and
-> the service is installed but disabled by default.
->
-> Signed-off-by: Piotr Wejman <piotr.wejman@arm.com>
-> ---
->  meta-networking/recipes-filter/nftables/nftables_1.1.6.bb | 8 ++++++--
->  1 file changed, 6 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
-> b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
-> index d27e60a18d..dbe0e8f9f5 100644
-> --- a/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
-> +++ b/meta-networking/recipes-filter/nftables/nftables_1.1.6.bb
-> @@ -16,9 +16,9 @@ SRC_URI =3D "
-> http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
->            "
->  SRC_URI[sha256sum] =3D
-> "372931bda8556b310636a2f9020adc710f9bab66f47efe0ce90bff800ac2530c"
->
-> -inherit autotools manpages pkgconfig ptest python3native
-> +inherit autotools manpages pkgconfig ptest python3native systemd
->
-> -PACKAGECONFIG ?=3D "python readline json"
-> +PACKAGECONFIG ?=3D "python readline json
-> ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
->  PACKAGECONFIG[editline] =3D "--with-cli=3Deditline, , libedit, , , linen=
-oise
-> readline"
->  PACKAGECONFIG[json] =3D "--with-json, --without-json, jansson"
->  PACKAGECONFIG[linenoise] =3D "--with-cli=3Dlinenoise, , linenoise, , ,
-> editline readline"
-> @@ -27,10 +27,14 @@ PACKAGECONFIG[mini-gmp] =3D "--with-mini-gmp,
-> --without-mini-gmp"
->  PACKAGECONFIG[python] =3D ""
->  PACKAGECONFIG[readline] =3D "--with-cli=3Dreadline, , readline, , , edit=
-line
-> linenoise"
->  PACKAGECONFIG[xtables] =3D "--with-xtables, --without-xtables, iptables"
-> +PACKAGECONFIG[systemd] =3D "--with-unitdir=3D${systemd_system_unitdir},
-> --without-unitdir"
->
->  EXTRA_OECONF =3D " \
->      ${@bb.utils.contains_any('PACKAGECONFIG', 'editline linenoise
-> readline', '', '--without-cli', d)}"
->
-> +SYSTEMD_SERVICE:${PN} =3D "nftables.service"
-> +SYSTEMD_AUTO_ENABLE:${PN} =3D "disable"
-> +
->  PEP517_SOURCE_PATH =3D "${S}/py"
->
->  # xtables will need it on musl see iptables
->
-
---00000000000045d0cb0651ab5390
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">seeing this error<div><a href=3D"https://errors.yoctoproje=
-ct.org/Errors/Details/938664/">https://errors.yoctoproject.org/Errors/Detai=
-ls/938664/</a></div><div><br></div><div>Seems to be related to this patch</=
-div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"=
-ltr" class=3D"gmail_attr">On Wed, May 6, 2026 at 10:24=E2=80=AFAM Piotr Wej=
-man &lt;<a href=3D"mailto:piotr.wejman@arm.com">piotr.wejman@arm.com</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Add a s=
-ystemd PACKAGECONFIG option to install nftables systemd unit files.<br>
-When &quot;systemd&quot; is present in DISTRO_FEATURES, the option is enabl=
-ed and<br>
-the service is installed but disabled by default.<br>
-<br>
-Signed-off-by: Piotr Wejman &lt;<a href=3D"mailto:piotr.wejman@arm.com" tar=
-get=3D"_blank">piotr.wejman@arm.com</a>&gt;<br>
----<br>
-=C2=A0meta-networking/recipes-filter/nftables/<a href=3D"http://nftables_1.=
-1.6.bb" rel=3D"noreferrer" target=3D"_blank">nftables_1.1.6.bb</a> | 8 ++++=
-++--<br>
-=C2=A01 file changed, 6 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/meta-networking/recipes-filter/nftables/<a href=3D"http://nfta=
-bles_1.1.6.bb" rel=3D"noreferrer" target=3D"_blank">nftables_1.1.6.bb</a> b=
-/meta-networking/recipes-filter/nftables/<a href=3D"http://nftables_1.1.6.b=
-b" rel=3D"noreferrer" target=3D"_blank">nftables_1.1.6.bb</a><br>
-index d27e60a18d..dbe0e8f9f5 100644<br>
---- a/meta-networking/recipes-filter/nftables/<a href=3D"http://nftables_1.=
-1.6.bb" rel=3D"noreferrer" target=3D"_blank">nftables_1.1.6.bb</a><br>
-+++ b/meta-networking/recipes-filter/nftables/<a href=3D"http://nftables_1.=
-1.6.bb" rel=3D"noreferrer" target=3D"_blank">nftables_1.1.6.bb</a><br>
-@@ -16,9 +16,9 @@ SRC_URI =3D &quot;<a href=3D"http://www.netfilter.org/pro=
-jects/nftables/files/$%7BBP%7D.tar.xz" rel=3D"noreferrer" target=3D"_blank"=
->http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;372931bda8556b310636a2f9020adc710f9bab66=
-f47efe0ce90bff800ac2530c&quot;<br>
-<br>
--inherit autotools manpages pkgconfig ptest python3native<br>
-+inherit autotools manpages pkgconfig ptest python3native systemd<br>
-<br>
--PACKAGECONFIG ?=3D &quot;python readline json&quot;<br>
-+PACKAGECONFIG ?=3D &quot;python readline json ${@bb.utils.filter(&#39;DIST=
-RO_FEATURES&#39;, &#39;systemd&#39;, d)}&quot;<br>
-=C2=A0PACKAGECONFIG[editline] =3D &quot;--with-cli=3Deditline, , libedit, ,=
- , linenoise readline&quot;<br>
-=C2=A0PACKAGECONFIG[json] =3D &quot;--with-json, --without-json, jansson&qu=
-ot;<br>
-=C2=A0PACKAGECONFIG[linenoise] =3D &quot;--with-cli=3Dlinenoise, , linenois=
-e, , , editline readline&quot;<br>
-@@ -27,10 +27,14 @@ PACKAGECONFIG[mini-gmp] =3D &quot;--with-mini-gmp, --wi=
-thout-mini-gmp&quot;<br>
-=C2=A0PACKAGECONFIG[python] =3D &quot;&quot;<br>
-=C2=A0PACKAGECONFIG[readline] =3D &quot;--with-cli=3Dreadline, , readline, =
-, , editline linenoise&quot;<br>
-=C2=A0PACKAGECONFIG[xtables] =3D &quot;--with-xtables, --without-xtables, i=
-ptables&quot;<br>
-+PACKAGECONFIG[systemd] =3D &quot;--with-unitdir=3D${systemd_system_unitdir=
-}, --without-unitdir&quot;<br>
-<br>
-=C2=A0EXTRA_OECONF =3D &quot; \<br>
-=C2=A0 =C2=A0 =C2=A0${@bb.utils.contains_any(&#39;PACKAGECONFIG&#39;, &#39;=
-editline linenoise readline&#39;, &#39;&#39;, &#39;--without-cli&#39;, d)}&=
-quot;<br>
-<br>
-+SYSTEMD_SERVICE:${PN} =3D &quot;nftables.service&quot;<br>
-+SYSTEMD_AUTO_ENABLE:${PN} =3D &quot;disable&quot;<br>
-+<br>
-=C2=A0PEP517_SOURCE_PATH =3D &quot;${S}/py&quot;<br>
-<br>
-=C2=A0# xtables will need it on musl see iptables<br>
-</blockquote></div>
-
---00000000000045d0cb0651ab5390--
+diff --git a/meta-oe/recipes-devtools/perl/exiftool_12.72.bb b/meta-oe/recipes-devtools/perl/exiftool_12.72.bb
+index f1d17a6799..68e7a79436 100644
+--- a/meta-oe/recipes-devtools/perl/exiftool_12.72.bb
++++ b/meta-oe/recipes-devtools/perl/exiftool_12.72.bb
+@@ -22,3 +22,4 @@ RDEPENDS:${PN} = " \
+ "
+ 
+ CVE_STATUS[CVE-2026-3102] = "not-applicable-platform: affects only MacOS"
++CVE_STATUS[CVE-2026-7580] = "cpe-incorrect: The current version (12.72) is not affected."
 
