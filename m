@@ -2,129 +2,130 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15AD0CD4F3C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14AE1CD37AC
 	for <webhook@archiver.kernel.org>; Thu, 14 May 2026 18:54:47 +0000 (UTC)
-Received: from mail-dl1-f50.google.com (mail-dl1-f50.google.com [74.125.82.50])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.18911.1778784884751057137
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.18913.1778784885873954946
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 May 2026 11:54:44 -0700
+ Thu, 14 May 2026 11:54:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=Eo78owiP;
- spf=pass (domain: gmail.com, ip: 74.125.82.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-dl1-f50.google.com with SMTP id a92af1059eb24-12c8f9846c8so12487442c88.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2026 11:54:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=kELfra2D;
+ spf=pass (domain: gmail.com, ip: 74.125.82.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-1331e851faaso125468c88.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2026 11:54:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778784884; x=1779389684; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Cep7ilD2naHeNWVKg7S4IARyCGFGQBrPpFqgd1m76TU=;
-        b=Eo78owiPSfgkGoLvCex4e57A1vBLN0j8Fjt41ce/Yi23IBGT4EwzYyYksBlo3PSgaB
-         BrtNmsiS8EsUEQPh7iHIMF51OdmDFQHG5d3J3KRX6mKkkusNe8h5sIJlPO8+SCKlXw5S
-         wfDoVI9rcaUC90h1ZNvObJHRZHni844HtJvzh7Khj06mqWWFdlChSTLosCMohGjtau2j
-         Fh7xBhQxMkXfU2l8zI+FkHyVT3cTjUzTT7uHhUO3jtVa0XS/GIUj3qX9xuud6S3bx6TF
-         Ff5JWLvhX4nz4lx3YnHQdG5tXMGHCmL2hHHRNloJr0F9LONRewALhd+qOvUSrnAkIDLW
-         vOFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778784884; x=1779389684;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1778784885; x=1779389685; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Cep7ilD2naHeNWVKg7S4IARyCGFGQBrPpFqgd1m76TU=;
-        b=JUetUUbFDUwzlcTtsEbiZBgW8TWvcsTv0lftGT+g3pTnwVOwRl1VCILK0puG8XmO2c
-         LKsE4evQgLshuPiCT+md90oTqtuPnT19gbaQSlY3W0V/Gy4fNwEl51eFno0yy5kdeJA5
-         WmopSg/BtWIg3+qzLVm7OQ9mD3G9hoprr6+gYycx5ycltcLGc5Hp37p0CExdpfvaD/qR
-         4Kyu10BWRlorajaw+ozAuBTyC2c393+AR9qX6qEwnWaWF0ErVg3i4wYkeG/oBJvDB9+E
-         1w29hsQ4lw9l97KcVCV5MosAM96BFmtaNkjDY/f3du6R8e8x++61hK78GZA2iJVRaicK
-         UeWg==
-X-Gm-Message-State: AOJu0YxO2YHIsmdipuDEx/UbwE4qBjePR4/7xddhJ+kbjLfFQm2HPY3G
-	PPfruro9hdVfB+IYk01Q7f6o+8h1O2ojiFxHCOEe+BScZ7/eANnux/BTHOPqpR/uL+0=
-X-Gm-Gg: Acq92OFH61hUBAP6ufVI+QqR4nsXSImYgt9qXc0FvQYQqOXOPmFDQrUy5tiZqx8Dlc5
-	WTpBoykahfMazZkTG7WPLckBqYWHxK5eGieVWenpAVWlhIpcz5ImZUUHbGnnffqDMh/Du5tbUv3
-	jplE5rZtTsxY746jT7qLbaM+oazb1FYpULpZSojmMgXmhTBCy6kwX9lriP2l7iZ/shrjNbuLI+v
-	ScUscn+j60hHvCvej8r3tG5Cs6iF2cpzbU4h9aFLrV4LQYyikUN+fC0B/KupA0mc3C4j+nlGy7l
-	Ra6bc6HpIcUdepfl94c5+sCOWGZb+tNxwiF6dSD36L4SKbDIkbRWmj0SXi79OWqtJ2FWLiDJ9hc
-	5vIODH1XYxoOH3exSRqHxHgCVXDQEGvtOHjVodMUVLjgc7+a6wwjlavIlHytkXR3O+r5wyqVKsq
-	izylmskSibI678SAv640bE7sCnbSLJnapdv+C77pCE0P94JwJUkhMBgzFseL5ZZf1mdbgJEbEjH
-	LfiUQuJ5ZtI9xC0Hfe81H3CyaIMF5TOHDKm26bWOlWRz6GoDdqM2L3eCkUKc1yELKGVzy0+/fKC
-	is1ZWyLfHqvKT6lu7VjAQIOQD/zE1VVde2d/jVmW
-X-Received: by 2002:a05:7022:660e:b0:130:6c8f:5aa3 with SMTP id a92af1059eb24-13504418706mr204395c88.12.1778784883847;
-        Thu, 14 May 2026 11:54:43 -0700 (PDT)
+        bh=kG9xeyfsSCUx8A/AhhpbzFcyFJvds0jwF1zSRlj70yA=;
+        b=kELfra2DKlp5wvDsS/hLyXHgVgQqiwC0yMP5jU3RpW2fdI104GCuTGuiKxMPw0r8Ih
+         sw3cKrxZ3eU8D/kLAHHxANu0TRrPf1zKGR++t4o1l9POFF0xkCHwdz7pYvh50y5AyL1v
+         I0zhLJfiMrE+uEJQoYMvlxAlbNe1+AUQ/gb9Hu7g2jc5/QnVRHGfvtCQzCprAmrnWp2W
+         cnmPSJSOdpUo8La7311sYbM8c+3WPs5Q5d5QK4VO4gBymQfU9Wmj23yHE5cjlEiaUEMb
+         0NLTeMFCruuwsBEfIISioVPey2sEct8u+Rhu1tCQPzcFaQiRAFS38Of+pbZVCZlr8uoF
+         VoDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1778784885; x=1779389685;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=kG9xeyfsSCUx8A/AhhpbzFcyFJvds0jwF1zSRlj70yA=;
+        b=PvkMJQimpKxehKd+rUy1wZzYhpX0DcmVKWfiyilW83TI3Hjbihu8O3618jFNbRCbhL
+         KUsWyVxKI/HGIZTlnW84Yh4/nYy4oHozNpT87P++HyrwlttvgLTCowskvg/VYjCgh2vV
+         NDD9Fh/OAgT14HuzL8o6WAp+Q3C5OSuIEFLnSJWCcdWzDwZSQ5kB15P615G7IPWUebfj
+         tuR/q8d8LklOsh7I3Mo5DlhI7hh49eMbZpdRWexbCL+yFbZsEqvMulYY2+bSbCLJIlzq
+         /05H9QSLMFXcv7vWKPZ07lkrpCJpREV807YUX4He7YqiYhXPxN6bxgKJt61GRVCjTEMR
+         0kCA==
+X-Gm-Message-State: AOJu0YyFsZ8Ll3ruVm0mpu+9DkVt1DCsT2XzJlbUc90/7V6S8YcycpmP
+	S09VLrI0lcxCDw9Nf34Lwm7Sa50ORtVLf08xZXgO5PWF9xqSV33unxOQFD6sysUxrs8=
+X-Gm-Gg: Acq92OGf2hiRfr8dQX0dL3EUy7nAKYtsNAz5qMVlMUmYsjadyoFZVvSnItPMpDGOHLq
+	/SqJrRpgXbXGPC2TbrgVNFdnYz3VDQFmN2Fm7UgoFg49gHGVAvLlwXCSbelee7u/DLgpSfN13BJ
+	0NHiK9iwX+D4EquBr08m9EK82aRxKoaOOnYxTWVpYO5GruL6hxXpG6cFHjWPdE0xkf+MY4J+9wb
+	nsSUiMG8nUoC2+bQCWu3WuUcybl0TmJdEtwculvopmOkt/wPBAxx2QahUVLjMUs7hagtYKQuB3c
+	rpYv4HL9mcJUzb/XnlPMy0s+Rfj5EgLDQ/HuP3pmsY3OeXZn7I9B8dHudIYMsh2XTroS3q1T93A
+	iZXzLYjhR7tWja4O4MH/lTnnawWTD7sgBdV6PhStnnzHSmMYa4HtZJRNUgRi0Fujhj3yKcGijUh
+	8OVPiU+1bWPZ6lHFUzuOYqcXkZ0n0kN3RRnIaOijO0Msp5qwFHhrN2DXJfyEOcYuqO6cGJJxIpT
+	FGBTwFeggFaF/NTs2X2nUSc04MNw/JujIP+bhyD0n3p9l8bmd3cVoGrzxSE5NoLoWsSYf7Kn4vm
+	TmGFMYmF5TLEaXAV8i32IxryOerFEdPDR6OeR9NU
+X-Received: by 2002:a05:7022:3d0e:b0:134:fc38:5d2f with SMTP id a92af1059eb24-135000b0fddmr374013c88.21.1778784884822;
+        Thu, 14 May 2026 11:54:44 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cbcb9ef5sm5422930c88.2.2026.05.14.11.54.42
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-134cbcb9ef5sm5422930c88.2.2026.05.14.11.54.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 May 2026 11:54:43 -0700 (PDT)
+        Thu, 14 May 2026 11:54:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-python][PATCH 1/3] python3-croniter: Fix build with newer trove and pathspec modules
-Date: Thu, 14 May 2026 11:54:39 -0700
-Message-ID: <20260514185441.1330509-1-khem.raj@oss.qualcomm.com>
+Subject: [meta-python][PATCH 2/3] python3-cucumber-tag-expressions: Fix build with newer uv build
+Date: Thu, 14 May 2026 11:54:40 -0700
+Message-ID: <20260514185441.1330509-2-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260514185441.1330509-1-khem.raj@oss.qualcomm.com>
+References: <20260514185441.1330509-1-khem.raj@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 14 May 2026 18:54:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126991
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/126992
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...r-versions-of-trove-classifiers-and-.patch | 28 +++++++++++++++++++
- .../python/python3-croniter_6.2.2.bb          |  2 ++
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
+ ...ax-required-version-of-uv-to-be-0.12.patch | 31 +++++++++++++++++++
+ .../python3-cucumber-tag-expressions_9.1.0.bb |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
 new file mode 100644
-index 0000000000..a20075a76f
+index 0000000000..e389b99fce
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-croniter/0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch
-@@ -0,0 +1,28 @@
-+From 297d149636d063a82b33d95ab59928a88db51e4e Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions/0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch
+@@ -0,0 +1,31 @@
++From 5cf10b111d61f00db2b3d9c8c6635fc31f3ceefd Mon Sep 17 00:00:00 2001
 +From: Khem Raj <khem.raj@oss.qualcomm.com>
-+Date: Thu, 14 May 2026 11:44:44 -0700
-+Subject: [PATCH] Allow using newer versions of trove-classifiers and pathspec
++Date: Thu, 14 May 2026 06:43:36 -0700
++Subject: [PATCH] pyprojects: Relax required version of uv to be < 0.12
 +
-+Upstream-Status: Pending
++Core now has 0.11.x and it fails this check
++
++| * Getting build dependencies for wheel...
++|
++| ERROR Missing dependencies:
++|       uv_build<0.11.0,>=0.10.0
++
++Upstream-Status: Inappropriate [OE Specific]
 +
 +Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 +---
-+ pyproject.toml | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ pyproject.toml | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/pyproject.toml b/pyproject.toml
-+index 657cc21..d1b9ce3 100644
++index b0f253e..b39d0fd 100644
 +--- a/pyproject.toml
 ++++ b/pyproject.toml
-+@@ -2,9 +2,9 @@
-+ requires = [
-+     "hatchling==1.29.0",
-+     "packaging==26.0",
-+-    "pathspec==1.0.4",
-++    "pathspec>=1.0.4",
-+     "pluggy==1.6.0",
-+-    "trove-classifiers==2026.1.14.14",
-++    "trove-classifiers>=2026.1.14.14",
-+ ]
-+ build-backend = "hatchling.build"
++@@ -1,6 +1,6 @@
++ [build-system]
++ build-backend = "uv_build"
++-requires = ["uv_build>=0.10.0,<0.11.0"]
+++requires = ["uv_build>=0.10.0,<0.12.0"]
 +
-diff --git a/meta-python/recipes-devtools/python/python3-croniter_6.2.2.bb b/meta-python/recipes-devtools/python/python3-croniter_6.2.2.bb
-index d217161d7d..a52dc5cbbb 100644
---- a/meta-python/recipes-devtools/python/python3-croniter_6.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-croniter_6.2.2.bb
-@@ -5,10 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
++ [project]
++ name = "cucumber-tag-expressions"
+diff --git a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb
+index add7031f1e..e26f20ebb8 100644
+--- a/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cucumber-tag-expressions_9.1.0.bb
+@@ -4,6 +4,7 @@ HOMEPAGE = "https://github.com/cucumber/tag-expressions"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=134f1026f0de92fd30e71976590a2868"
 
- PYPI_PACKAGE = "croniter"
++SRC_URI += "file://0001-pyprojects-Relax-required-version-of-uv-to-be-0.12.patch"
+ SRC_URI[sha256sum] = "d960383d5885300ebcbcb14e41657946fde2a59d5c0f485eb291bc6a0e228acc"
 
-+SRC_URI += "file://0001-Allow-using-newer-versions-of-trove-classifiers-and-.patch"
- SRC_URI[sha256sum] = "ba60832a5ec8e12e51b8691c3309a113d1cf6526bdf1a48150ce8ec7a532d0ab"
-
- inherit pypi python_hatchling
-
-+DEPENDS += "python3-pathspec python3-trove-classifiers"
- RDEPENDS:${PN} += " \
- 	python3-dateutil \
- 	python3-natsort \
+ inherit pypi python_setuptools_build_meta
 
