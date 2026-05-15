@@ -1,184 +1,156 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <ashishkumar.mishra@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C463CD343F
-	for <webhook@archiver.kernel.org>; Fri, 15 May 2026 08:19:27 +0000 (UTC)
-Received: from AS8PR04CU009.outbound.protection.outlook.com (AS8PR04CU009.outbound.protection.outlook.com [52.101.70.43])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.30376.1778833156813164822
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2026 01:19:17 -0700
-Authentication-Results: mx.groups.io;
- dkim=pass header.i=@siemens.com header.s=selector2 header.b=DgMklih0;
- spf=pass (domain: siemens.com, ip: 52.101.70.43, mailfrom: peter.marko@siemens.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yu9UXviKtAbblcl4y6/XP/W/m72ah7+clNBsuPiYo55jtmjTk9So9GQeXbjAkjiSu5QMcInLH3pwWZbmF5/65rvKZ7325XP6dONcO7ogscdIIRZ8GXC6DEy+vkN4mkEbNq9lfFr/jF8oh+tSpbInh9Ry4PSLPeFhMKIXlCIRV/qMVMw5sPIwmsfJZoLqwVaEiqDpy0NqUqelkxE7vrOj/ugZRvgSvuyCGR2mfbXgkiNGk/nqSrQNAHNoKqy944+GDVqcBqFargaqGj2cx8BBBXu5RaR3gDyqKW49wxODHwcN5n19iuDUpakwr0Hi0nfckHTFzWciBeQ+dCjbAMejQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6ypcCf+x4gCrxAQDq6RFAZZSY4UTfu2euMHRhR7RwcE=;
- b=lFSrUIIIoWqcxaO7j3GPfK8MDKBL6k5kwHaTTumSGfZDIECqgXXCJGewsYDprhSTJN/EbhwBPmCqaEdKFUXM+aToX8F2yqj6qZIpai3aNFvpfOmpSI224+faD8QNilHd5TCvZeGOi0X32CigL+7hZQtfBsRfyC9ocvhgpEOK1jO8PK1ekqtFmuT/6n16nZ0A4sDfAzJ6sb4Pj6DCTvyXImhYwsoPGYGPxyYvXkw6ZVs8TtgavVXkavZZ/77X5ey2jrYKRfJXDvhvo2nctWgj+ppSj6OVBfBgSKKKdqtN1GOs4r/8LoPG4Frz9y1JXSkG2vml/vGid0jpRlzPKm/T6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6ypcCf+x4gCrxAQDq6RFAZZSY4UTfu2euMHRhR7RwcE=;
- b=DgMklih02cvJ6lU8uExhJzvNbR5jb1aelq09wzUF7R5czAou3uVoqEDwcwpM4aJXDUVLT8XAP4uGhdPeiGlNlYHCYYoOR69Pg5gkEPhlom6PoFQ3HYvcn7w7q8EHwxtD5u5MObWyph3qAfXOeFZBXUD/738ARV/XRlKPpEiW3Cgk7ZGiy5sPwNvL77S2yrdHS9v1gRnAvUNBOpARe9y+lXosCbMoVr5mUTjBWvYaNO/dCf7KUXnMu/ivwdCKLS194qqV/rl0BzjFmQqa7WiC/JuWqbqoSwz4PVsDZk3l8wWzYg2A8SLu+d93+N91JzHaCRFvRjZBW7/m4Xd5EeVELQ==
-Received: from AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:420::16)
- by AS8PR10MB7425.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5a9::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.19; Fri, 15 May
- 2026 08:19:12 +0000
-Received: from AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a905:57e5:8858:d008]) by AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a905:57e5:8858:d008%5]) with mapi id 15.21.0025.016; Fri, 15 May 2026
- 08:19:12 +0000
-From: "Marko, Peter" <Peter.Marko@siemens.com>
-To: "hongxu.jia@windriver.com" <hongxu.jia@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-oe][PATCH v2] 7zip: update CVE_STATUS for
- fixed-version
-Thread-Topic: [oe] [meta-oe][PATCH v2] 7zip: update CVE_STATUS for
- fixed-version
-Thread-Index: AQHc5C8vT5bjVKO6TkuWnXMle+SQf7YOvhmw
-Date: Fri, 15 May 2026 08:19:12 +0000
-Message-ID: 
- <AS8PR10MB50732B434D0036674E59D126FD042@AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM>
-References: <meta-oe/recipes-extended/7zip/7zip_26.01.bb>
- <20260515055334.466550-1-hongxu.jia@windriver.com>
-In-Reply-To: <20260515055334.466550-1-hongxu.jia@windriver.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ActionId=9be5957d-064b-48e6-ad86-dea14cf4eb64;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_ContentBits=0;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Enabled=true;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Method=Standard;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Name=restricted;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SetDate=2026-05-15T08:17:13Z;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_SiteId=38ae3bcd-9579-4fd4-adda-b42e1495d55a;MSIP_Label_9d258917-277f-42cd-a3cd-14c4e9ee58bc_Tag=10,
- 3, 0, 1;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB5073:EE_|AS8PR10MB7425:EE_
-x-ms-office365-filtering-correlation-id: 376029bf-705c-49a2-dc68-08deb25aa523
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|1800799024|376014|366016|55112099003|38070700021|4143699003|11063799003|18002099003|56012099003|22082099003;
-x-microsoft-antispam-message-info: 
- SeSN9ys8Kcy5dMldCfHOM6GU7RqaRVnuLKW0z+HwI2LqMqDoJrylWU/4XkxR9AxodSrN0w/exebDMkZUPY5M7FLPR/8N/gqcVhwbEVk5yqoDZS0BOaUf7QGHGqAj4V6YPaCnynd5ZflUz2muADY+wisL5gNxLV0kTiQ4FCHEJsMbWUvVXAjlT/v2rGIIdcBj0wTMQ3uXx1gyIXKVh11gvaf6Oirf16nCocKY9wDD8+k2AbDG2HLQM0z9rG/UUbYlKGpSliiKqm+8Vmrlk8VeBx6iZIazNEwzCBeH6/JJC7R4DNJJSo/YoyHJknYIM9oeoJRmcQyXYzlFWGKo3CgkaOw6SH6a/2qAfgtoMled0NmWCZuc/rB8cRHuuJvoEq3YhtSxNVNx67+zmK/NS0r3rVF6Lxci3N2LZoOp1YzJ1EnvqwJPJucDiK1EFjmqi9S/0ueN4rbCtR7H8Uzr6vrZ9KsGP9w8QYrRrdOcyIpydJP2aiOArx+J2p34qj36vXz16cOfLpfoOXAYDmRXakG5ARoxl0NWBhkZOgtKmYPKfWydYmBrk6xTdNgFoPszOo7P/MUzFvP2WfegK0ZC7wd/366BdwzRPBRpqZ6Uf7yEPpof9q0SVJrc92kUQVr56vZ9zsfBXsbRana+Z7mrDnN5xgg1IfuR58Xglw3KjMdh1RthvYKuoLXTRf/3yB6kysWouLUHGOzJ0fmIkhsQ8GQYnw==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(55112099003)(38070700021)(4143699003)(11063799003)(18002099003)(56012099003)(22082099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?QZYUHm6VootB9alCMM9GJuSa+1fKBgpRk6HwQSADsoNuF/QMVUVE7iMY4ieb?=
- =?us-ascii?Q?pcIbY+SOsdzD8rHDYz/bBadEB2A3xyv8QF7EcHxBbdTMuS/ZSCT7E3PzOxjp?=
- =?us-ascii?Q?rNpsDUwmbTACTD9ISHMtFkLbPF+VRMruZtsdTULLABeX3xYSDywcPYgFdD6+?=
- =?us-ascii?Q?nPrl0JfukEBcWa0C+d6YsZUpYHa/l7rRfY6w2wobJkviVrQGoek4IHTDfCl4?=
- =?us-ascii?Q?U3f2ntbjgBD9nPtgnmGZwU9plMWtPlr5fNDnEjU2mX1klGo48Rzremm2Vfnq?=
- =?us-ascii?Q?dlSvs8kuEhJ/hGkX92TDOxEP37Rv8N89n45HMsNWUSu+kBQ7epkDzYDGRuVb?=
- =?us-ascii?Q?bDt62nxOGya+P4zHlX09+tRcgrUS5J4dpBcTxZJosk0p7VM8e11IRSiQCK9a?=
- =?us-ascii?Q?tT1FdSyKVknHJblSQmXEPvHlU2RwhEenkRIzOveNYXok8wOy2uY8MPiU/trb?=
- =?us-ascii?Q?bG0Q9xNDFhetFlJm5i/TwvU+CaYdMOTvFtRqix6qZDw2QDnX4IEOo+ysQteM?=
- =?us-ascii?Q?JuB4G6avLPmbt/JwVws05I8/moUicOU7VzoqB5xlqXZ6q0Xr13axaXzGpCy9?=
- =?us-ascii?Q?f77OesJgccJrExL7eqVeys3eWkDYeKWWpNTwxu3yV8ZKbdaFGH/UnMtaBdKB?=
- =?us-ascii?Q?UXH6icGLiTSfATSGm7+Y2e9/M71k1duS15DniBvF9DxoLEd2+LJVWL8fCkcO?=
- =?us-ascii?Q?RP/zHI30ZTOnUeQG3UecpmDgPkF2tgosZPDL0IQPwtoDiB3NxfjfA+yp3sPT?=
- =?us-ascii?Q?iRE8+0PDAblHuO/S5OZM4d2mqfPVCaGao4KMgWvug6d/g9uMbYzd8fhnbgzw?=
- =?us-ascii?Q?Zx91RRbSDhQbgyHWrCBz0efqz0YW9JcxILYG52juFzO3os3DPgCkdl9sAGQO?=
- =?us-ascii?Q?ad9DuCogy26VgOizytSzVgVhkh7bi2I0TYcy58grj9tO/MvKtAFQ+qWXJczw?=
- =?us-ascii?Q?q41Nhv07LiDqQIoSFOhNYDIEVcgjH2n1H8zfsajw4m8CAj1HwzrKiaznNnTb?=
- =?us-ascii?Q?6nEV4vHHRASUj42aAbYvIMik6M9Zl0C0C92j31Ikzh2AUjtbJG7qpcaxBwlS?=
- =?us-ascii?Q?8jHWvj5VNJkLgGvoCs3mcQ2QF6FF7mEj9TXT1SOrZ6iUWFSCiDpGKLlq0wEe?=
- =?us-ascii?Q?2OwjM/DQcDVkpFQuub7oUPg2xCwDLOwpWVsEwloUGCTsixxaBn/GhfVxVfwH?=
- =?us-ascii?Q?eGVZHbtRl0Iw+ovdy6eHwz6f9INbifoWjbXOcd7AreQTEtFGj/iWM9ygff9P?=
- =?us-ascii?Q?EkTCEGyeGN0q2xJG1rQXxvXdiaV7XOQTLHp8PyfdM3TE6mlHE1SvY/HHM9Oj?=
- =?us-ascii?Q?tovpevNtBxmsgJdirpr/KNZsBK/03jc3tA6c7IGeuhlAKmZMvx1VI5Vh+4or?=
- =?us-ascii?Q?AJOTzMlFMTzdoiGFnKjGxCFqkSKeGQ0DUls6qkOFrL5YTVtTiPPxMeBXlmL7?=
- =?us-ascii?Q?sDvPATJdraBGOHw2yzxNLTrJ4q2Rs7zf91EUg4XmQjbAbLhz4DgAM0rV6U5g?=
- =?us-ascii?Q?Pe1at9lpG6TBZ6n8WpDm53UU80jQCAfyMdjjNRWu6yyu5f33+5KPBo/5BLQZ?=
- =?us-ascii?Q?CT9nhhij8FJxgQZj0QutGYXklzPceHxZCpAWuqQpX62yF0H5Kp5fUasH2K13?=
- =?us-ascii?Q?09IPQGLxRWZF6ZwEqnO18sZIvWXrbC2BJf453IgFH97v7Pd2ldul06L3MfON?=
- =?us-ascii?Q?u1Ed0BwwqOapUyAle4+tQXTQACg2uAjgh3JHAOqVRQEez1bBgaKKuZ4pMtgw?=
- =?us-ascii?Q?0UhZYCk1sQ=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7A89CD4851
+	for <webhook@archiver.kernel.org>; Fri, 15 May 2026 10:23:51 +0000 (UTC)
+Subject: Re: [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
+To: openembedded-devel@lists.openembedded.org
+From: "AshishKumar Mishra" <ashishkumar.mishra@bmwtechworks.in>
+X-Originating-Location: Bengaluru, Karnataka, IN (49.207.56.113)
+X-Originating-Platform: Windows Edge 148
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB5073.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 376029bf-705c-49a2-dc68-08deb25aa523
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 May 2026 08:19:12.0426
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: rBI+GGvO/LN1HzljlKVjvL4nOKq1504TB2YYtROkNBKd3R4H9yZvxekrYJXknKt+xvDOVoKbPskhPwTlB2c42Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7425
+Date: Fri, 15 May 2026 03:23:46 -0700
+References: <20260505150634.192651-1-emailaddress.ashish@gmail.com> <2022222.1778130561122567168@lists.openembedded.org> <2115555.1778654861364723634@lists.openembedded.org> <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com> <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com> <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM> <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com> <1575450.1778745762950591364@lists.openembedded.org>
+In-Reply-To: <1575450.1778745762950591364@lists.openembedded.org>
+Message-ID: <1575450.1778840626136865406@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="1aDKkox5pIhkmcfBGxlf"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2026 08:19:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127003
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2026 10:23:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127004
 
-Hello,
+--1aDKkox5pIhkmcfBGxlf
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-what is the purpose of this patch?
-All these CVEs are already marked as fixed in sbom cve reports.
+Hi Khem / Team ,
 
-Peter
+Able to reproduce the build error with CLANG
+Brought meta-clang and tweaked the toolchain / cc / cxx provider as clang
+Will work to fix this and share the observation
 
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <openembedded-
-> devel@lists.openembedded.org> On Behalf Of hongxu via lists.openembedded.=
-org
-> Sent: Friday, May 15, 2026 7:54 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-oe][PATCH v2] 7zip: update CVE_STATUS for fixed-versi=
-on
->=20
-> These CVEs was fixed in current 7zip version
->=20
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  meta-oe/recipes-extended/7zip/7zip_26.01.bb | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-extended/7zip/7zip_26.01.bb b/meta-oe/recipe=
-s-
-> extended/7zip/7zip_26.01.bb
-> index 61be89c7ba..6da5b08347 100644
-> --- a/meta-oe/recipes-extended/7zip/7zip_26.01.bb
-> +++ b/meta-oe/recipes-extended/7zip/7zip_26.01.bb
-> @@ -68,3 +68,15 @@ RPROVIDES:${PN} +=3D "lib7z.so()(64bit) 7z lib7z.so"
->  RPROVIDES:${PN}-dev +=3D "lib7z.so()(64bit) 7z lib7z.so"
->=20
->  BBCLASSEXTEND =3D "native nativesdk"
-> +
-> +# https://nvd.nist.gov/vuln/detail/CVE-2022-47111
-> +CVE_STATUS[CVE-2022-47111] =3D "fixed-version: The issue was found in 7-=
-Zip
-> 22.01. Some later versions are unaffected."
-> +# https://nvd.nist.gov/vuln/detail/CVE-2022-47112
-> +CVE_STATUS[CVE-2022-47112] =3D "fixed-version: The issue was found in 7-=
-Zip
-> 22.01. Some later versions are unaffected."
-> +# https://sourceforge.net/p/sevenzip/patches/417/
-> +# https://www.appsecure.security/vulnerability-database/cve-2023-40481
-> +CVE_STATUS[CVE-2023-40481] =3D "fixed-version: That bug was fixed in v23=
-.00."
-> +# https://www.appsecure.security/vulnerability-database/CVE-2023-52168
-> +CVE_STATUS[CVE-2023-52168] =3D "fixed-version: A high-severity vulnerabi=
-lity
-> identified in the NtfsHandler.cpp NTFS handler of 7-Zip prior to version =
-24.01."
-> +# https://www.appsecure.security/vulnerability-database/CVE-2023-52169
-> +CVE_STATUS[CVE-2023-52169] =3D "fixed-version: Relates to the NtfsHandle=
-r.cpp
-> NTFS handler in 7-Zip, affecting versions prior to 24.01."
-> --
-> 2.34.1
+Sharing the error log to get an feedback just to avoid any gap's in customi=
+zation
 
+Below is the error :
+bake-builds/poky-master/build/tmp/work/cortexa57-oe-linux/android-tools/29.=
+0.6.r14/android-tools=3D/usr/src/debug/android-tools/29.0.6.r14 =C2=A0-ffil=
+e-prefix-map=3D/home/bti-001003/upstream/bitbake-builds/poky-master/build/t=
+mp/work/cortexa57-oe-linux/android-tools/29.0.6.r14/recipe-sysroot=3D =C2=
+=A0-ffile-prefix-map=3D/home/bti-001003/upstream/bitbake-builds/poky-master=
+/build/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.r14/recipe-sysroot-=
+native=3D =C2=A0-pipe -fvisibility-inlines-hidden -std=3Dgnu++20 -UADB_HOST=
+ -DADB_HOST=3D0 -DALLOW_ADBD_DISABLE_VERITY -DALLOW_ADBD_NO_AUTH -DPLATFORM=
+_TOOLS_VERSION=3D'"28.0.2"' =C2=A0-Isystem/core/diagnose_usb/include =C2=A0=
+-Isystem/core/adb/daemon/include -Isystem/core/adb/adbconnection/include -I=
+system/core/libasyncio/include -Isystem/core/libcutils/include -Isystem/cor=
+e/libcrypto_utils/include -Isystem/core/liblog/include/ -Isystem/core/libut=
+ils/include -Iframeworks/native/libs/adbd_auth/include -Wno-c++11-narrowing=
+ =C2=A0-DPAGE_SIZE=3D4096 -fPIC -Isystem/coreinclude -Isystem/core/adb -Isy=
+stem/core/base/include =C2=A0-Idebian/out/system/core -Isystem/tools/mkboot=
+img/include/bootimg -Isystem/core/fs_mgr/include -Isystem/core/fs_mgr/inclu=
+de_fstab -DADB_VERSION=3D'""' -D_GNU_SOURCE -Wl,-O1 -Wl,--hash-style=3Dgnu =
+-Wl,--as-needed -Wl,-z,relro,-z,now -Wl,-rpath=3D'$ORIGIN/../lib/android' -=
+Wl,-rpath-link=3D'$ORIGIN/../lib/android' -lpthread -Ldebian/out/system/cor=
+e -Ldebian/out/external/boringssl -lbase -lcrypto_utils -l:libcrypto.a -lcu=
+tils -llog -lresolv
+| aarch64-oe-linux-clang++: warning: treating 'c-header' input as 'c++-head=
+er' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+| aarch64-oe-linux-clang++: warning: treating 'c-header' input as 'c++-head=
+er' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+| aarch64-oe-linux-clang++: warning: treating 'c-header' input as 'c++-head=
+er' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+| aarch64-oe-linux-clang++: warning: treating 'c-header' input as 'c++-head=
+er' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+| aarch64-oe-linux-clang++: error: cannot specify -o when generating multip=
+le output files
+| make: *** [/home/bti-001003/upstream/bitbake-builds/poky-master/build/tmp=
+/work/cortexa57-oe-linux/android-tools/29.0.6.r14/sources/android-tools-29.=
+0.6.r14/debian/system/core/adbd.mk:84: build] Error 1
+| make: Leaving directory '/home/bti-001003/upstream/bitbake-builds/poky-ma=
+ster/build/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.r14/sources/and=
+roid-tools-29.0.6.r14'
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+ERROR: Task (/home/bti-001003/upstream/bitbake-builds/poky-master/layers/me=
+ta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_29.0.6=
+.r14.bb:do_compile) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1685 tasks of which 275 didn't need to be re=
+run and 1 failed.
+Summary: 1 task failed:
+/home/bti-001003/upstream/bitbake-builds/poky-master/layers/meta-openembedd=
+ed/meta-oe/recipes-devtools/android-tools/android-tools_29.0.6.r14.bb:do_co=
+mpile
+log: /home/bti-001003/upstream/bitbake-builds/poky-master/build/tmp/work/co=
+rtexa57-oe-linux/android-tools/29.0.6.r14/temp/log.do_compile.1623961
+Summary: There were 12 WARNING messages.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+~/upstream/bitbake-builds/poky-master/build :
+~/upstream/bitbake-builds/poky-master/build :
+
+--1aDKkox5pIhkmcfBGxlf
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi Khem / Team ,&nbsp;<br /><br />Able to reproduce the build error wi=
+th CLANG&nbsp;<br />Brought meta-clang and tweaked the toolchain / cc / cxx=
+ provider as clang&nbsp;</div>
+<div>Will work to fix this and share the observation&nbsp;</div>
+<div><br />Sharing the error log to get an feedback just to avoid any gap's=
+ in customization<br /><br />Below is the error :<br />
+<div>bake-builds/poky-master/build/tmp/work/cortexa57-oe-linux/android-tool=
+s/29.0.6.r14/android-tools=3D/usr/src/debug/android-tools/29.0.6.r14 &nbsp;=
+-ffile-prefix-map=3D/home/bti-001003/upstream/bitbake-builds/poky-master/bu=
+ild/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.r14/recipe-sysroot=3D =
+&nbsp;-ffile-prefix-map=3D/home/bti-001003/upstream/bitbake-builds/poky-mas=
+ter/build/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.r14/recipe-sysro=
+ot-native=3D &nbsp;-pipe -fvisibility-inlines-hidden -std=3Dgnu++20 -UADB_H=
+OST -DADB_HOST=3D0 -DALLOW_ADBD_DISABLE_VERITY -DALLOW_ADBD_NO_AUTH -DPLATF=
+ORM_TOOLS_VERSION=3D'"28.0.2"' &nbsp;-Isystem/core/diagnose_usb/include &nb=
+sp;-Isystem/core/adb/daemon/include -Isystem/core/adb/adbconnection/include=
+ -Isystem/core/libasyncio/include -Isystem/core/libcutils/include -Isystem/=
+core/libcrypto_utils/include -Isystem/core/liblog/include/ -Isystem/core/li=
+butils/include -Iframeworks/native/libs/adbd_auth/include -Wno-c++11-narrow=
+ing &nbsp;-DPAGE_SIZE=3D4096 -fPIC -Isystem/coreinclude -Isystem/core/adb -=
+Isystem/core/base/include &nbsp;-Idebian/out/system/core -Isystem/tools/mkb=
+ootimg/include/bootimg -Isystem/core/fs_mgr/include -Isystem/core/fs_mgr/in=
+clude_fstab -DADB_VERSION=3D'""' -D_GNU_SOURCE -Wl,-O1 -Wl,--hash-style=3Dg=
+nu -Wl,--as-needed -Wl,-z,relro,-z,now -Wl,-rpath=3D'$ORIGIN/../lib/android=
+' -Wl,-rpath-link=3D'$ORIGIN/../lib/android' -lpthread -Ldebian/out/system/=
+core -Ldebian/out/external/boringssl -lbase -lcrypto_utils -l:libcrypto.a -=
+lcutils -llog -lresolv<br />| aarch64-oe-linux-clang++: warning: treating '=
+c-header' input as 'c++-header' when in C++ mode, this behavior is deprecat=
+ed [-Wdeprecated]<br />| aarch64-oe-linux-clang++: warning: treating 'c-hea=
+der' input as 'c++-header' when in C++ mode, this behavior is deprecated [-=
+Wdeprecated]<br />| aarch64-oe-linux-clang++: warning: treating 'c-header' =
+input as 'c++-header' when in C++ mode, this behavior is deprecated [-Wdepr=
+ecated]<br />| aarch64-oe-linux-clang++: warning: treating 'c-header' input=
+ as 'c++-header' when in C++ mode, this behavior is deprecated [-Wdeprecate=
+d]<br />| aarch64-oe-linux-clang++: error: cannot specify -o when generatin=
+g multiple output files<br />| make: *** [/home/bti-001003/upstream/bitbake=
+-builds/poky-master/build/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.=
+r14/sources/android-tools-29.0.6.r14/debian/system/core/adbd.mk:84: build] =
+Error 1<br />| make: Leaving directory '/home/bti-001003/upstream/bitbake-b=
+uilds/poky-master/build/tmp/work/cortexa57-oe-linux/android-tools/29.0.6.r1=
+4/sources/android-tools-29.0.6.r14'<br />| ERROR: oe_runmake failed<br />| =
+WARNING: exit code 1 from a shell command.<br />ERROR: Task (/home/bti-0010=
+03/upstream/bitbake-builds/poky-master/layers/meta-openembedded/meta-oe/rec=
+ipes-devtools/android-tools/android-tools_29.0.6.r14.bb:do_compile) failed =
+with exit code '1'<br />NOTE: Tasks Summary: Attempted 1685 tasks of which =
+275 didn't need to be rerun and 1 failed.</div>
+<div>Summary: 1 task failed:<br />&nbsp; /home/bti-001003/upstream/bitbake-=
+builds/poky-master/layers/meta-openembedded/meta-oe/recipes-devtools/androi=
+d-tools/android-tools_29.0.6.r14.bb:do_compile<br />&nbsp; &nbsp; log: /hom=
+e/bti-001003/upstream/bitbake-builds/poky-master/build/tmp/work/cortexa57-o=
+e-linux/android-tools/29.0.6.r14/temp/log.do_compile.1623961<br />Summary: =
+There were 12 WARNING messages.<br />Summary: There were 2 ERROR messages, =
+returning a non-zero exit code.<br />&nbsp;~/upstream/bitbake-builds/poky-m=
+aster/build :<br />&nbsp;~/upstream/bitbake-builds/poky-master/build :&nbsp=
+;</div>
+</div>
+
+--1aDKkox5pIhkmcfBGxlf--
 
