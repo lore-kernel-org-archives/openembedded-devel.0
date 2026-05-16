@@ -1,202 +1,97 @@
-Return-Path: <schonm@gmail.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F49CD343F
-	for <webhook@archiver.kernel.org>; Fri, 15 May 2026 14:41:12 +0000 (UTC)
-Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.36491.1778856072086169998
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 489A8CD4F3C
+	for <webhook@archiver.kernel.org>; Sat, 16 May 2026 14:10:09 +0000 (UTC)
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.6378.1778940608357475371
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 May 2026 07:41:12 -0700
+ Sat, 16 May 2026 07:10:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=OUFwhNS8;
- spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: schonm@gmail.com)
-Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-65c305f381eso13263739d50.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2026 07:41:11 -0700 (PDT)
+ dkim=pass header.i=@theyoctojester-info.20251104.gappssmtp.com header.s=20251104 header.b=dfbO7/3u;
+ spf=neutral (domain: theyoctojester.info, ip: 74.125.82.172, mailfrom: jester@theyoctojester.info)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-2ee990e8597so2468679eec.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 16 May 2026 07:10:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1778940607; cv=none;
+        d=google.com; s=arc-20240605;
+        b=icA32GzglLC5CiqvF9WX1EPuq+2VuQLTasLvomWhuEeYU1GARSbrzx9HLN6vzVZS4K
+         PsFV1UsDyjCTlpAYse3Ot3odWNScvgtv9jYQURvc1yYfSXPhUM3Xcl8/GNzBUyA1lK+v
+         KLymRfCC8eUxgujNYQlG7pgsG+CFcv4xKWq5Ln/aQ9wl2R/4KypR5V9scLxlAgkb7/oR
+         kFxn4CSwGQ6wMkobsWhSEpnBRY47fs7GGVrm4iQyqAnEKLa0ZRsT7yVGEK807at68bLM
+         fs0/yqwIFmkHg5DCoarQLqzjP2pnT+Sgg29b1cvTYxReEhC8ogJxB291BNH4/Facf/Yb
+         7lUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=5+s8oihaKCLTDTIvXkzPyJagDHzLkRvXz07iqTAk68M=;
+        fh=Vo0wlyPvnipkyiqChzSbjUuER4FKcYGIB7Ny2WHFyV4=;
+        b=AZmuHoWkxqa3Ax+uOf3isDUEmTMJu3EfBTmcYs7fYzycvseP+8LbIzLZUHpJILvFOo
+         uvblmdgzpo4CPqc35xXStrIvtFek7bpLRCbFQ6bRb3pU272xIeOOMQvAXNyxFfy9DKEI
+         3iLOvTkGbvwecxHGg9s/zOkLm2DX5HeQ3TRI0qVGf8dzmYUxkCGBqPzfs7k7hcNjPIBT
+         a8H3XYhKQ7AA7X3uP8f3UaOGT9Gk016ovARL4TBY3lzqUeEiJHujZ8d6k9acUd87/F3k
+         5MNIagoUJ0+F4RYj7uSQ2abA9FIlcmMkortzpcPNvRpK5Z063NCc5/qacg3455c0YjQC
+         l4Wg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1778856071; x=1779460871; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qNoEYbKgnKv73H7Da8rx5VV8dpON3iK7KVcumOHBCdE=;
-        b=OUFwhNS8lt56iJY5wrnTPrbftQG2AkXcCqP//PiWDSev9qGkhYPvNoH1Axxeusw5Ig
-         4RqxRheuEoCHSGyWYqe7VOfxINys7QXg4WavdUlysidbuY8T58eHvUcoseQazfMbCK4U
-         UagmPvYK6IU2wmdzFgRrkeDEYwuf7E3TsLU9c933/rwfnS2N7bwb04xurUXtdPkZDRFk
-         suB11OBnpDiC+jvQYWC3B3wwUHBgKUIS9j7s2mseiw92M7dRnuJa31g0/OF/8kF3XlFx
-         Us+Zi94KL4qYFQV7GEJF2paeMDyN71YF4cy0Nt0Xn60qA1EPbFv3di0xHhvxOz03+5mX
-         KS5g==
+        d=theyoctojester-info.20251104.gappssmtp.com; s=20251104; t=1778940607; x=1779545407; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=5+s8oihaKCLTDTIvXkzPyJagDHzLkRvXz07iqTAk68M=;
+        b=dfbO7/3uZr9TathuNx+bkRAOKOdyCVyFnlUA10R8gF1rhrltF+qlnIX07i7I693UZo
+         2GH3yQ7w0liPPRcV1diRQXhLdF5ZcNQq2rP6Kvao6pS14HObF7qpMGTdtqCbM0hszL7o
+         64231DK2GJKoWf26vi2vS+7LEsCjww43aXRqLkArjlRMsYDIEcAC0XuAFD87udv75+v0
+         0GcggihUcRME983WxwrfhV2GsGM6qt2u675hnnv8oW7qjMSbp7K2f5oHhzPglaeJqqpE
+         MhP2JEnJeI9zHFoyBXMorkzkij4EhhxWSc9hq0q2E5+FylOPXT3JWSdYlEP5v1J4l35O
+         EzZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1778856071; x=1779460871;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qNoEYbKgnKv73H7Da8rx5VV8dpON3iK7KVcumOHBCdE=;
-        b=gD2aJX/Swc6AADy+5urC1CI6rbiP6RYUU5U+/f4O/nH9QhSbhRSHRhTH6NBYdUZgO4
-         Q4FiauqYHnDYAMfOjRU8ED3UWCNPrTetRF6CeBCbG7zepYONEX2jYQIlDdp5wWNFJ3i5
-         sOZA1SoaRDPM2vrCm2O4vTgAYCSr/3w/48ErNsbmQcbhVi5H0M3WKR6HAULfqCqog3QA
-         mDFuCmu3v1Tp1Y7kN2scJ4oKpOGryPdtf2dgflMmpIPAOtLiEdHxbFGa+NTqenfreqs9
-         t2YhXJvZ3+tfZFaWLOQ75WfKfAG0k8BEE8t5xjjarj0udqX1Z+B2vVNWjJ3fhlPEKNGS
-         AM0Q==
-X-Gm-Message-State: AOJu0Yw7IO1c+Gs9qbAEzeCx0XQ5jG4CyzX+EKkstx0+cmysbCkyRWN3
-	/HucNuH5wxKdPkgcLQEUHi7GSAkhcxdUY1FY74MnAcAVF389Ksq1FAVh+ZHbgVn4
-X-Gm-Gg: Acq92OFDPTJ1/YG8cRM8zi9BNURGQgY7zIqScOmM3ohe4aUy9g2Sy/IRA//d02cyuyk
-	HrM854UTAW8rWINEQChV1+hxAqFJfeeabLma9CRCz7JAqD4jo8es501qhOM4lj92i+wvUTJqu59
-	p7r0vGGkE2EChag+s2iBFcW5uvgltfFE2DCGy/JPTQWAaokO1v7HwaKjTY8wUDA6DaLsEwaRv6r
-	FIW7rXaR28ApNpSz2n7zceQEzjokI1sR8WTDNX6Wk9xkyjuPKi0x9NlVVbd945u2XlD2kty199x
-	a7NsohDmD7s8Qt+V2ZyL4hshAaRhNMEA3VcOMCD8UkzlsHSubnZp/TRZouMl30c6kWDm1cbZiQi
-	hsTvP+oN7h+zlBzl0f3Dd1w0nJsQdKa9du3jCzS4NTD6z3jON97fa8y8zu/I779ER0A0oAxEXcC
-	mzBBrTbE66X3jJv9G0FiAt794YMmG+vVYuRLi1ZQ0/bBYuI409XelYrg4MQo6YtlAvb3f1SCxCR
-	uTm0Oh6JNsfNvHohAa38SmUcfEjsBxyfvSfoWQIk5d2YGmZnMQ=
-X-Received: by 2002:a05:690c:c6ce:20b0:7bf:55b:8f9e with SMTP id 00721157ae682-7c95bf12374mr35290167b3.28.1778856070938;
-        Fri, 15 May 2026 07:41:10 -0700 (PDT)
-Received: from localhost.localdomain ([71.54.207.93])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7c7f5c965d6sm30662817b3.47.2026.05.15.07.41.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 May 2026 07:41:10 -0700 (PDT)
-From: Jason Schonberg <schonm@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-webserver][wynose][PATCH v2] Update README.md example with new branch name.
-Date: Fri, 15 May 2026 10:40:54 -0400
-Message-ID: <20260515144054.35848-1-schonm@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20251104; t=1778940607; x=1779545407;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=5+s8oihaKCLTDTIvXkzPyJagDHzLkRvXz07iqTAk68M=;
+        b=n7cUINc8sAJWYGJxKYtbmzNlqGRemsT7CmcF2oU2fubIfB3PDhqdhcgAUTUuTWRc0I
+         XkMBA2K2gjfMmwtUUQyrVUFDqzDaVcnrkGraaIZfKtNXhBUFlp1avikXRkuns40+ax47
+         Mr76vCW9wGfJYATK6Kwz/1e02D5+l6m51x4/yGYv+OeaJcYksYeejx1eOVca+kinAUt9
+         LAY6rWoQcDis1PsfjeTFqF5NzE1R5HYArBM664Bw66P+kPgQhoHU3wOYeLjLj/2WnlOr
+         6BqbSBFTWy/Yuq24EQtw8iOoHp9sVKPqRUTsXKsqjdpmaKQqlQPN8R6WdMaKCeNiEHcU
+         9PDg==
+X-Forwarded-Encrypted: i=1; AFNElJ9fWozoZXnh6tHtUkMUX6BA7rsmQbYLW06N6hVHEerwW4Hk7S3uNtINqB8d62Cj3I7Hm+FMQ971tbkWmQpGaQ9G48k=@lists.openembedded.org
+X-Gm-Message-State: AOJu0Yye2IjtuV4D9OqoZBUqZwSUD/FtwH9dFsiw8Rh9HxAKjr3l3WVh
+	SMrF7fdBgnaFZBDCsaYyXujX1GnJtl0K3/z/gHOVgpJZahNwHTOFPMn+zhJ0a0AOkcBiZgO8TLP
+	srwZGQtv0fMvcyWOpNxip66VOIvLC/ds0zTrN1/+oiw==
+X-Gm-Gg: Acq92OEy63ohCc/3w/U5joBlytBMMLwMJZGDnIJbj7VmZ4N1YbtTNeh3oufHjMsxkX+
+	TYcd6TXaxz6jk+ZN3BgAqIeqQ2xQBTyTOPpXL3lcUbEQg2nphk/b5/jkG6KG3UvtZ0IrXmy61PC
+	DJ0M6nlbZzPLLDRlMJl8EyLCEmY8MpQhnqgDuyBQ8OHfoF+XGsgFEKYdA4X1P13BteaybiZXARH
+	bHRlxhVtikdcbRXvGVTnG6D8xJioSLRfOFZYAgi6CUa9TKov6DE6Gns9gplsmq9sICplzDfXfud
+	sEog77GVuDNszv2uQKlj21KLn9Hbe06ypSfNx4BnXg==
+X-Received: by 2002:a05:7300:a504:b0:2e5:8ec2:82c9 with SMTP id
+ 5a478bee46e88-303986a15f3mr4079539eec.26.1778940607396; Sat, 16 May 2026
+ 07:10:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Sat, 16 May 2026 16:09:40 +0200
+X-Gm-Features: AVHnY4JOpMmOgJsnu88i-cow1E7fbcDMqOl05RBy-BoPq3EmO47iETOEwk9UNTc
+Message-ID: <CAEt6NwroHb9KvVr3kO9VCL+bsSQsu16DE14JOS2vQwZsdZ4Zfg@mail.gmail.com>
+Subject: OSS/ELC-NA meetup
+To: openembedded-members@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>, openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 May 2026 14:41:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127010
+ <openembedded-devel@lists.openembedded.org>; Sat, 16 May 2026 14:10:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127011
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
----
- meta-filesystems/README.md | 2 +-
- meta-gnome/README.md       | 2 +-
- meta-initramfs/README.md   | 2 +-
- meta-multimedia/README.md  | 2 +-
- meta-oe/README.md          | 2 +-
- meta-perl/README.md        | 2 +-
- meta-python/README.md      | 2 +-
- meta-webserver/README.md   | 2 +-
- meta-xfce/README.md        | 2 +-
- 9 files changed, 9 insertions(+), 9 deletions(-)
+Yo ho!
 
-diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md
-index 78a4429ce2..0fec1ee2d2 100644
---- a/meta-filesystems/README.md
-+++ b/meta-filesystems/README.md
-@@ -30,7 +30,7 @@ When sending single patches, please use something like:
- 
-    git send-email -1 -M \
-         --to openembedded-devel@lists.openembedded.org \
--        --subject-prefix='meta-filesystems][PATCH'
-+        --subject-prefix='meta-filesystems][wrynose][PATCH'
- 
- 
- Table of Contents
-diff --git a/meta-gnome/README.md b/meta-gnome/README.md
-index 6c23b4e671..579a4f11bb 100644
---- a/meta-gnome/README.md
-+++ b/meta-gnome/README.md
-@@ -11,6 +11,6 @@ branch: master
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-gnome][PATCH'
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-gnome][wrynose][PATCH'
- 
- Layer maintainer: Khem Raj <raj.khem@gmail.com>
-diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md
-index e074142be7..eefaa9a387 100644
---- a/meta-initramfs/README.md
-+++ b/meta-initramfs/README.md
-@@ -22,7 +22,7 @@ Send patches / pull requests to openembedded-devel@lists.openembedded.org
- with '[meta-initramfs]' in the subject.
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][PATCH'
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-initramfs][wrynose][PATCH'
- 
- Interim layer maintainer: Khem Raj <raj.khem@gmail.com>
- 
-diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
-index bda470a6f6..f55d965787 100644
---- a/meta-multimedia/README.md
-+++ b/meta-multimedia/README.md
-@@ -10,7 +10,7 @@ branch: master
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-multimedia][PATCH'
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-multimedia][wrynose][PATCH'
- 
- You are encouraged to fork the mirror on github https://github.com/openembedded/meta-openembedded to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like GitLab, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
- 
-diff --git a/meta-oe/README.md b/meta-oe/README.md
-index da6c4cbe79..dee6fb4cd4 100644
---- a/meta-oe/README.md
-+++ b/meta-oe/README.md
-@@ -19,7 +19,7 @@ sudo apt-get install gcc-multilib linux-libc-dev:i386
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
- 
- When sending single patches, please use something like:
--'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][PATCH"'
-+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-oe][wrynose][PATCH"'
- 
- You are encouraged to fork the mirror on GitHub https://github.com/openembedded/meta-openembedded
- to share your patches, this is preferred for patch sets consisting of more than one patch.
-diff --git a/meta-perl/README.md b/meta-perl/README.md
-index 9d56dbe8c6..3cf0bb7b9d 100644
---- a/meta-perl/README.md
-+++ b/meta-perl/README.md
-@@ -76,7 +76,7 @@ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
- '[meta-perl]' in the subject.
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][PATCH'
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-perl][wrynose][PATCH'
- 
- Layer maintainers:
-     Hongxu Jia <hongxu.jia@windriver.com>
-diff --git a/meta-python/README.md b/meta-python/README.md
-index 36c193957c..33caca8a19 100644
---- a/meta-python/README.md
-+++ b/meta-python/README.md
-@@ -31,7 +31,7 @@ Send pull requests to openembedded-devel@lists.openembedded.org with
- '[meta-python]' in the subject.
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix='meta-python][PATCH'
-+git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix='meta-python][wrynose][PATCH'
- 
- Maintenance
- -------------------------
-diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-index 17c7c76d94..35e04853de 100644
---- a/meta-webserver/README.md
-+++ b/meta-webserver/README.md
-@@ -54,7 +54,7 @@ with '[meta-webserver]' in the subject.
- 
- When sending single patches, please use something like:
- ```
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-webserver][PATCH"
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix="meta-webserver][wrynose][PATCH"
- ```
- 
- Layer maintainer: Derek Straka <derek@asterius.io>
-diff --git a/meta-xfce/README.md b/meta-xfce/README.md
-index 564590ff39..e7386b576b 100644
---- a/meta-xfce/README.md
-+++ b/meta-xfce/README.md
-@@ -16,7 +16,7 @@ BBMASK = "meta-xfce/recipes-multimedia"
- Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
- 
- When sending single patches, please use something like:
--git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][PATCH'
-+git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-xfce][wrynose][PATCH'
- 
- Layer maintainer: Kai Kang <kai.kang@windriver.com>
- Layer maintainer: Khem Raj <raj.khem@gmail.com>
--- 
-2.43.0
+We know that planning ahead is important! So if you plan to be at
+OSS/ELC NA next week, how about also planning to meet your fellow
+OpenEmbeddeders?
 
+Coordination is starting at
+https://discussion.openembedded.org/t/developer-meet-up-2026-elc-na/116,
+thanks Colin Pinnell McAllister
+
+Greetz,
+Josef
 
