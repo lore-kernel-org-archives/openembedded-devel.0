@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46B6DCD5BA7
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EAC6CD5BA4
 	for <webhook@archiver.kernel.org>; Tue, 19 May 2026 11:40:03 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19028.1779190788902791494
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.19312.1779190793042212446
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 May 2026 04:39:54 -0700
+ Tue, 19 May 2026 04:39:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=jJHa9fwL;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iQgLs6m2;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779190794; x=1810726794;
+  t=1779190793; x=1810726793;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8rKEVFmokEcrWV4JECUooJvYMY2ySrCF90AmenOS2Y0=;
-  b=jJHa9fwLnI24txLRRywaL/e8JHQNJN/XTrwJFQhuKSc6LRd3XaMOb5iT
-   +4Eop0EiZbQIhUCcb3lS3S7dgfAF8n4q1sHkWEWcygsS3w0/M5iULAffa
-   YUqSWkxCTFKi4zuPIZYJydVZxbo4E4gbbiWP6eZJwlWJFVaHhiQLT7jio
-   GVM2ltU3pBODjPOqbwCk+I1DYS1qTHgE77QUZ4CpgPD6iJq3DKTe3q+6e
-   gojbEA6EqDPYsDtvnaHc0M5AUdu+AXcSBFOkWDxNSKwAkKA/Sca4Ko4Ox
-   93P8DxA5FcuywGTLx8ekF7lSy3oeXYHazPF2hNmZpI/VvrUdG9Hb03di4
-   A==;
-X-CSE-ConnectionGUID: NFkT8BHOR2Odenk3Fl7XaA==
-X-CSE-MsgGUID: xV54LB0wR6u7enQK3SNGNw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11790"; a="244313202"
+  bh=G+z7KN/8vaA+PBJdJqlLZ+5YIzG5s+65UK0FLyrhzcY=;
+  b=iQgLs6m2ne014ESciieFmitk6oveigxid5d/OJx071V/IVGfj/xn8AfG
+   tYnCHdXDS36s/ML3zfCbcPMK69/MCTGLnL9oaBsPf7sc0Bf5kOPcy1Cd4
+   BnWuZI7avT02MakyjUqqH/X61MR2ikvXnhZVZw1dc+kqR0tL0PG+3ABql
+   RdZ1T10r1izDr5lgUKLHa8gcyCCJxsvhn7MZzq/nppuCe3Qg4I7PBAuwS
+   t3UUIsQ8bwm2Wqdo1vmvCcIBoA2C0eapjeMnZQAVfbfs8Rn1iio/gfls5
+   lO3Dmd1Z1n7pnOQIzTcX94SFUzvcYQXklU4QY7yC6wdbeDwXCaI9mhbgH
+   g==;
+X-CSE-ConnectionGUID: W22Lrjx2Qc+FeFPxoNeYmw==
+X-CSE-MsgGUID: 3h7jUyozTriRDEaLxOwTfA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11790"; a="240515035"
 X-IronPort-AV: E=Sophos;i="6.23,243,1770562800"; 
-   d="scan'208";a="244313202"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 May 2026 20:39:53 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
+   d="scan'208";a="240515035"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 May 2026 20:39:51 +0900
+Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 875FD42A304
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2026 11:39:53 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 5BA9E8200B9
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2026 11:39:51 +0000 (UTC)
 Received: from az2uksmom4.o.css.fujitsu.com (az2uksmom4.o.css.fujitsu.com [10.151.22.204])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 3268E1C00118
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2026 11:39:53 +0000 (UTC)
+	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 1308984F48D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2026 11:39:51 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id A016A405ECF;
-	Tue, 19 May 2026 11:39:50 +0000 (UTC)
+	by az2uksmom4.o.css.fujitsu.com (Postfix) with ESMTP id B559F4066DE;
+	Tue, 19 May 2026 11:39:48 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 13/38] python3-coverage: upgrade 7.13.5 -> 7.14.0
-Date: Tue, 19 May 2026 19:38:56 +0800
-Message-ID: <20260519113921.655-13-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH 12/38] lldpd: upgrade 1.0.21 -> 1.0.22
+Date: Tue, 19 May 2026 19:38:55 +0800
+Message-ID: <20260519113921.655-12-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260519113921.655-1-wangmy@fujitsu.com>
 References: <20260519113921.655-1-wangmy@fujitsu.com>
@@ -61,31 +61,39 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 May 2026 11:40:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127075
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127074
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+ * Fix:
+   + Fix out-of-bound read access when removing VLAN tag (CVE-2026-46433, #787)
+   + Reject 0-length management address in LLDP
+   + Fix race condition when creating the control socket
+   + Fix FDP MAC address
+   + Fix memory leak in the BSD bridge query path
+   + Fix duplicate management addresses when merging EDP VLAN frames
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-coverage_7.13.5.bb => python3-coverage_7.14.0.bb}  | 2 +-
+ .../recipes-daemons/lldpd/{lldpd_1.0.21.bb => lldpd_1.0.22.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-coverage_7.13.5.bb => python3-coverage_7.14.0.bb} (84%)
+ rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.21.bb => lldpd_1.0.22.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.13.5.bb b/meta-python/recipes-devtools/python/python3-coverage_7.14.0.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-coverage_7.13.5.bb
-rename to meta-python/recipes-devtools/python/python3-coverage_7.14.0.bb
-index 3cdce95d34..df8d140b8b 100644
---- a/meta-python/recipes-devtools/python/python3-coverage_7.13.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-coverage_7.14.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://coverage.readthedocs.io"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2ee41112a44fe7014dce33e26468ba93"
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.21.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb
+similarity index 96%
+rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.21.bb
+rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb
+index 73f7ac68a3..635d54931d 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.21.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.22.bb
+@@ -12,7 +12,7 @@ SRC_URI = "\
+     file://run-ptest \
+     "
  
--SRC_URI[sha256sum] = "c81f6515c4c40141f83f502b07bbfa5c240ba25bbe73da7b33f1e5b6120ff179"
-+SRC_URI[sha256sum] = "057a6af2f160a85384cde4ab36f0d2777bae1057bae255f95413cdd382aa5c74"
+-SRC_URI[sha256sum] = "5b1b0106079a0785b55e1be45cec40b66b41779f3ee6f1a8d2dbd75d389df091"
++SRC_URI[sha256sum] = "9587940ed2314a86774c5499f3dfb13a8eb86232a62d243a83a1f09886848e03"
  
- inherit pypi python_setuptools_build_meta
+ inherit autotools update-rc.d useradd systemd pkgconfig bash-completion github-releases ptest
  
 -- 
 2.43.0
