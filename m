@@ -2,14 +2,14 @@ Return-Path: <tgaige.opensource@witekio.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10DE8CD4F3D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27EB6CD5BA4
 	for <webhook@archiver.kernel.org>; Wed, 20 May 2026 14:25:11 +0000 (UTC)
 Received: from mx-relay26-hz12-if1.hornetsecurity.com (mx-relay26-hz12-if1.hornetsecurity.com [94.100.139.226])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13575.1779287100016148548
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13462.1779287109648633708
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 07:25:01 -0700
+ Wed, 20 May 2026 07:25:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@witekio.com header.s=selector1 header.b=Xz5qOYUC;
+ dkim=pass header.i=@witekio.com header.s=selector1 header.b=cZ5Giits;
  spf=permerror, err=parse error for token &{10 18 spf.hornetsecurity.com}: limit exceeded (domain: witekio.com, ip: 94.100.139.226, mailfrom: tgaige@witekio.com)
 ARC-Authentication-Results: i=2; mx-gate26-hz12.hornetsecurity.com 1;
  spf=pass reason=mailfrom (ip=52.101.65.127, headerfrom=witekio.com)
@@ -18,57 +18,57 @@ ARC-Authentication-Results: i=2; mx-gate26-hz12.hornetsecurity.com 1;
  header.d=witekio.com header.s=selector1 header.a=rsa-sha256; dmarc=pass
  header.from=witekio.com orig.disposition=pass
 ARC-Message-Signature: a=rsa-sha256;
- bh=6JJhyctDba4Zk9dxOeA0V8O5bezlF1RaJU4ONbQtJAE=; c=relaxed/relaxed;
+ bh=0Z21MkXhEqGodET+Oxu9u3s3LnymHcBvKYICjJku9as=; c=relaxed/relaxed;
  d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=2; s=hse1;
- t=1779287098;
- b=jwwc+FQ70XVtut6Vi9o/i64+eULJoxChwqBPs/Ds12SnraB6cCqqRW8rrO4f9HeqqzM+alY3
- y1Rvetc7PJwedpzJaDn/9Oxd3yWnGariSBBXro/jNl9lXtBG19k2sgTU+f0gAxTi0hlwCaUgj4b
- +SiaLhBWL89/mYhx2whWgqFOQoLhgOP501eQNwH1ZOYMHhDHD4ucyDlUI16H95r8MGeEK8J4JN6
- 1HBoGa9G4ytdWbJMwcOBpq4lD5fvdB6z4ZtM5Tvc2PWrGtVNOjzxigMErCJnIQGVJt1/O9yEHm1
- Qhvt2mB3SPSiOnOqncbSNUlemuLWZtBRTvQbDPJXM5Cbg==
+ t=1779287107;
+ b=K6yvEXJd09RRlK/gF3Xn2ti7aCdMbZeoS1jG1Jh30YN2iqv/sIAcecBfQLJB2WEPUuFgNI/y
+ u98RA932jMKJWV6J7pNDrW6Q1P7Fxpbcpnsz3t/u4qI1VHCeSUdnkFaQzdEh9rOwSBxNe9LZE1w
+ U7oWHmNMp+sU1sRPx1e6TmC46BPiPf3ACeiwcPp2zpVpYZT6vWQ3fbOPcdkZuYHElDgU6wsfxb4
+ lTeV1YCEoT8V5LqKUlbCrUgENX8QF4R3iirADQfHGT72/lEYGaiNxeBOlXv9Dvap9SBkw115azu
+ +N5pOWbH8bFgJlIMvSGw+WLOxftTvVIdp+1LDqV14yjqA==
 ARC-Seal: a=rsa-sha256; cv=pass; d=hornetsecurity.com; i=2; s=hse1;
- t=1779287098;
- b=NH7X4kxYR1TZ78x1SgJ695aWIAEe1cOieZh8MyUu/Sz0tOYB5ugExDvuFQElkxYMvghHcm2w
- v+OpBq0WRMwRPVYA6zb8loGD1LVpXHhoypiPhG1jdrv5AsG5pnXiWED5ZOxwPwpT18bLTKrVkyC
- 45YgYDdolrlNJ5mSq0OyHAw7luNe9M2/lzyXSLTwkJvV9eHfYubgI/7e2w1KTgJ6dBj3PisTQmY
- E6mYdGXDI1ze7sVZKAPrFvKlUZxW2d0mYXYCTSef743jvqmEPh/qiVGh/2bSosVWnaE5kzgso+l
- 3G9T0LDtLFXn6NRT2BCDPzcAOetgXSC2/V+s4QMG8RCFA==
+ t=1779287107;
+ b=E6wOJbIaKWu/+h+/VkAFfh7xDgYMhWtqGfJaXmAi/kqdQQWnFF4PiorJNB1WZ1Tpb3bx/dts
+ ig36zfF7VxP4W5GM6AcC6z4PGVCObng0K2U7CmszXgdLUI9+aOrO0MtzUtP2tuFaEcvYbScUHH8
+ s1MzXRtLWxb0acQB1XfPm0+6T2AjlisM27ivk28FnVAIEYIT0wqb0SFaJFnFAfGwWou0VwF3Gap
+ BXfn8VgIQaGJCLuQkpfgel9RbnfHaS52E+UmQvjWKZOVCKLIZwtKy++OIx+eeSZDClNdWjyllTJ
+ i7Ar2pQbnjVFqAq40dALtIUeppL6rdkdLSjk49T8JIjRA==
 Received: from mail-northeuropeazon11021127.outbound.protection.outlook.com ([52.101.65.127]) by mx-gate26-hz12;
- Wed, 20 May 2026 16:24:57 +0200
+ Wed, 20 May 2026 16:25:07 +0200
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dHjel1dpxCgvMWoN1KTD9Y1Pj35IBiEalHUpXkRcXmzt5Q+NoXKsrX0UXJvC2XDiIvSOjFLIdHRSIWiSJll7LAx38rmSRA2uxV3qPTu7bIB8BmV1LJhSNx8Q2i8IXGdH00A9VQPTJpAmVFvfz6gj0+wuN2XdOEfo2AarHAEFmZaOgcdhoW//2viQlnn1KR4sunU1gaDIRT2ZHq4q/0o/F7aacBdjhi+9kMlgvgyMv8yZeJrUpyXxmafNqeuAX+LXLQmT3sn6i+EP+E6CnxbQgo7b6eLdzGMtj9pCRrzVppUnpAdF7AYEgE0syc4rWRS7FxdxZkaNF+Zo1cHBZONsVw==
+ b=Mzyex63qa/Q/5H3wIEoJyE+eM5oVLGw3PokviHTofbVX6T4zaacvbyojl4iblNZ/E1pDVeF+at5IsaIKv0cdUI3T7f++cLVZzEe7x2VZwC/wAmr8afGFNEjPXh7LualXDml8O1W24gyfXjYTfI9fW3StHDbc8AFryTbW6b0rs4Ifrjj1KU50EaeODizuRFiCL0j1RJ9WLBB787PNVZQlCobwY06STm7upZ7H6cnR4VXCS8iXcEFLgBYQfUu0FQrD3EY7pFlleKmOI9PaDZpgYUy8jMx1KP2auGFRxUqmgCfbmKoLCJbMci9nQb0+KvgxmAAbwrS8SO+DQLFEQJUNTg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6JJhyctDba4Zk9dxOeA0V8O5bezlF1RaJU4ONbQtJAE=;
- b=TPY6OstpQwwIPXvrfXGmluPf3u6OGv79Jg76QtEMnfHNn+Vzld+Y0ItUaM12tsg6m+XJoulwWFjJwWfmca/b4F+YbAkMa36ditXN9dMAA4EbYNTDL1cjOs4TIV9fk8JwGV4J611hdT2DzLeVdr216OsgXDBQkDjVyMwfcrP8+Gn+wSF/oxuOHM2ru9RbPwR6qrhknl/bj08OOn51NAWw8Ns9bPO7xw4RgFazqMSItnkFemTsw5xUaW7DP3dcMD6bjqwhSZXcR1n0cxjB7eH4x6aTjrox5TwtB3fZHA/KGy2S3rugEBv1xruw8qDPR0+OmSrKOXXwRr6EESeKbs2qBA==
+ bh=0Z21MkXhEqGodET+Oxu9u3s3LnymHcBvKYICjJku9as=;
+ b=Fe8Z/vccpzR95fULNFSmeEpAwi7MOkuWX3sUYBneWEAf+O/2uPhYGsEYh9/HfwUjv7ISbQkU3D+GoolPyv7L4hKgfKzgIA6K0FwHoWmDGeGR4uUqaJdDhIbrAJ35IiYsrzMNAdVvbnUAhgndLLD7rDA/QJQJs0b42oNU4P0SRo1xXmNGqSsej9JzO7V1pUhN/xtPCswgzNYrvhMz0AeLvls/XoIXPLW8iEU8ijd1epEmjXnxmwPE2DnVvJc9eqnqjTDnMB4w3ocN9UNWGkWJLw1fotX54xxxA6BNJRBXyQxZbERKMRlirmYnu1mK4mRYuri7x8Z0ZGSkdBbJ6Whcmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=witekio.com; dmarc=pass action=none header.from=witekio.com;
  dkim=pass header.d=witekio.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=witekio.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6JJhyctDba4Zk9dxOeA0V8O5bezlF1RaJU4ONbQtJAE=;
- b=Xz5qOYUCjQEO7GhdziLL/z/1UpGO9O0Ln1nkwuBnB8NvOodiSf4JgFcCaioceE+BANqS8Xw7RoymWjVzPqpcK7bMV7J/olufBNz0bpoDj/qwlyVISnAAjVNts2/37UevNdGPXzwWsk/wemuP3YIRunkm6N+2Qe+a5yzfhtGQKzxHqw7ZzrQEPJpifOxna1wx/KZZti05xRvLBSQBjJHyBQnZGvxhjDHIoUkUQtP5qOYpn/m+uu5s6YAC7ueRYddR5dnl5yTpy0h7yw7HAMhraCbg2PhyW/30VNJ5FTXLDDgZb46/tq99p/Tc6xWKxxbDri4W02gqcI3keaOTGTDCEw==
+ bh=0Z21MkXhEqGodET+Oxu9u3s3LnymHcBvKYICjJku9as=;
+ b=cZ5GiitsRNOkXCoS5u5zSGLUIgTxJJidB7AAj+AJ4NTzME3qWTUyhLYE6sflqq95p6RK9Bj8DYUkcAoY8xVAze6s8jTWq92Fm9Wdc+F03J+z36AJuljV0h/FOi6bDa42BqTGJRAA3WeDF7nvTW3Gy26HFhJ2GpOA2OY1pjuP5Z7RpqkR9xB/vDK/OyTmIIM405004Y17+K4wFmTj9XYvOz3PhyMvgjEwKZTsrv2i50k+vq9ZjWjGkMbnw0t/PlLN7S8jt5UejgvOJmXNBitaHSQvm/ANMER7GCa8rtpwdm6bqlo3+nWIVj/cbTM5AguILWa+rjQc0v9Jox9sa++crQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=witekio.com;
 Received: from AM9P192MB1396.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:3ad::23)
  by PAWP192MB2388.EURP192.PROD.OUTLOOK.COM (2603:10a6:102:46f::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
- 2026 14:24:48 +0000
+ 2026 14:24:53 +0000
 Received: from AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
  ([fe80::25ed:86ef:4d24:3d38]) by AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
  ([fe80::25ed:86ef:4d24:3d38%5]) with mapi id 15.21.0025.023; Wed, 20 May 2026
- 14:24:48 +0000
+ 14:24:53 +0000
 From: tgaige.opensource@witekio.com
 To: openembedded-devel@lists.openembedded.org
 Cc: hsimeliere.opensource@witekio.com,
 	"Theo Gaige (Schneider Electric)" <tgaige.opensource@witekio.com>,
 	Bruno Vernay <bruno.vernay@se.com>
-Subject: [meta-webserver][scarthgap][PATCH 2/4] nginx: patch CVE-2026-42934
-Date: Wed, 20 May 2026 16:24:36 +0200
-Message-ID: <20260520142438.2126939-2-tgaige.opensource@witekio.com>
+Subject: [meta-webserver][scarthgap][PATCH 4/4] nginx: patch CVE-2026-42946
+Date: Wed, 20 May 2026 16:24:38 +0200
+Message-ID: <20260520142438.2126939-4-tgaige.opensource@witekio.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260520142438.2126939-1-tgaige.opensource@witekio.com>
 References: <20260520142438.2126939-1-tgaige.opensource@witekio.com>
@@ -80,62 +80,62 @@ X-ClientProxiedBy: ZR0P278CA0021.CHEP278.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM9P192MB1396:EE_|PAWP192MB2388:EE_
-X-MS-Office365-Filtering-Correlation-Id: f18dd5c3-bf26-4002-9bff-08deb67b8c7c
+X-MS-Office365-Filtering-Correlation-Id: 7b87eec1-9a7c-4dc9-0feb-08deb67b8f18
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: 
 	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|13003099007|38350700014|56012099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info: 
-	EyVSFSQ+szDxhTKcixZqVaZE1oOyoHqHmXdsIzfSKgo/6qYNKpdmhGwt2RYEUuwtpdVflgKUSNi8ncldIrOllHFHCUfRrAnHhfxzRLpazgcnQ0CGC4rXudPDIg3+NO6eFKK9TTVNSL0Rr0pflKha528Xupkjv2CKXE7V1fP/FKFMBspk+RwQV2rSLwERaFSCoBsldmhsz83ZZBAbyWg5QBe2queiss4/z765dUtOmXfg290eJBjGpWBodwOHPTR1yhyxh5WdRtVfQhsM8OdSY+N+nwG3DyiyQcnZClfkO4h/dKe6YXfoWQVB32D4tSSgNG9gKGVsH4CCx2fpG3EaYHhPUOej9/BoYioua/3KW/DYns8bSNMMBu+NNWf0qz9rcbJHvsZrwYvzUTbHL+JoOJKM0Mcz7iIgygLDXtWYurs43Eu3771K6uhWdU+rLW66N3HHpPhuX9BKyKB+1XyNg08pnC8W7jdZz367l7/8aJ4MehqK6Q1/GXxhd0rZgLTendmBzFyBThAqVD/GDS5R3G/I1L896x4GkJ9dQ1X0kcdEVl7n4BAPkYFScUeX+xgBw2zSP7h63b95695LZ87ux4S99LCLpsoDMz5Cr42L0Y6M5xqTiyqUyjRMm1/vgnf6R3xONuX8wzu0yEqzED8GSgl610la16qbj1X9cpWnUHmWUFqftaOdKXHSf0xArPVVPLADL76z73k+KQtDAJo1XAncSh0b/wuMKoVoinW6lhw/SV4ZLrYKGgc3vKGn1mB/
+	2yRVRvWPsw/c/jA57y8YPML50wlgJUJLhvV5Mo608CBiOjPXANNVbmWuDz/BdqbWOIuTB6VBHgM4YHWiCqKyOJ8zGjMKOIOI/xJDQgM9pbbopECbERIoY19udHV4TXW3cLW3f0+XskfvPHPMKwXyku8J6YQBd6n6q30zP8L0+XX5aUIW3Do5qLe7QYsKRSeZO88QUtWH5m+bbZB288/3L+IC0ZlE5nX6axi2Kw9+X6W/HceUVpaUr+YwlI4lCkTu8FBisWIIxUAoRMBvxP/4nE+ACSsjDYdd486hAVwScz9vyS+kUTR9UjY7HXCpVu2aSFOPyZ95rRpBfeoHw/eVHbu+RyRauki/TtLNbR8Rp85yeXpkddfLv1Dn18aY0cF9BuYkDw5pDc1hXjq+ODY34baWn1csjGw4EG7sV5VSmymx18K1zWhQZU0/594PUbKoxYxQAzCkGPUf7m9y4Ymz0C2UYmv7BDXHSrsGT8KzG7oEnPGUnlgU3jGenyv1u3Jl/MaUXLhvJ0U6ckgt/XWHpBNUjsOKUMiidLpc7rAqWXckm4nc8Uq8baBAlBp40pxA8D6mSszpIm94UZ0hZsajCNBJAaIP7L3q2DVH+Q0QGi2MCcpL90n5GkwhPWjWdNdOV5t4+hz4FkjFXNiq/ozNqx8t2RTPXker2Yl/KAMZGBbxt13maxHdWM6CQWRs/2yskBdNbLeB2De6XPpzbNgDQylqCrQs4Xy261zPuZe2MQvlMNq4bZGJD9E1XwHix4Nl
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9P192MB1396.EURP192.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(13003099007)(38350700014)(56012099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?kk7SqlAi/Kax0TBiVOEnfwB3vfbQIcX/Jysvnv73biPWWRco7Ej858qdBqfe?=
- =?us-ascii?Q?TyxDyds3mYaiI2U50Eu4hbdwVlbUrcmjKFrPn5EeCUazwAX7B7qqHHsKP5fE?=
- =?us-ascii?Q?8+ZnCrh35NU+lKxGg0snpXFwMXDhUehv6MX6epJOWqcOVTDDg57Q1cNKPKxB?=
- =?us-ascii?Q?DkuzJTHG7su80hi/A0f0yBd6o9sI2JWxJDkIfyP0ej4W8BRs9eIwCtUoHJw4?=
- =?us-ascii?Q?kVVamt7qeZzihEf9/LpcVxaI9FZg2riaRhwPUlOimONY41kQHARAVQZbisER?=
- =?us-ascii?Q?xCP9YsE7KaTUODwsrwYllPfPj/k+NCtFtncVqVirm4cWJc+69j4OCFE1jveS?=
- =?us-ascii?Q?Kg7HaiN0/P3vXn9gWGaxJYANZrZVPxUgcgPF5plI2ATnqDPqqSFxXbeMzI4C?=
- =?us-ascii?Q?F9x075KDdR4z3NylyCFUk5t1uDs89oCYYTpHfN2sX6OOe7MDc/Ol84XbyOJ8?=
- =?us-ascii?Q?TpYfZCOlldjdz4dy9Bn4bpN1WhCXNuvxLjCQYW9pHEZlY/i/W1v5ZhtmO1pQ?=
- =?us-ascii?Q?1VLzGFlKqgqQMoCf5PQpikz85WdYtwijuVMxIPEYxNelwZ16a5Ynz+GCw1s/?=
- =?us-ascii?Q?JdTSev5ktdGfBPqMpO9Lk9/huoaRUi5hzQGfI2GMe1tGJBIl6FRTRo6vnfLo?=
- =?us-ascii?Q?xA+nESypkRqJlwtQDj4eSVEo7R+lVZ2tZNqvfJwIDIb6/rlmHxI+vUp964oH?=
- =?us-ascii?Q?nQvyen83fBjqAcYD1NWOU04F0ZXzlVE6qRwTAIADcdzYe9Nnsh770MKGqDs+?=
- =?us-ascii?Q?q0GlHBUTHK8kPUhk1URxb94f2lOdrh6kvMA5pRwbo0DsGe+kltp3Q8YLR7Hy?=
- =?us-ascii?Q?sIZJBlgTLzZoG9kXAzB+32UaWoAEdnVNI34l2RgFrfHYV9l4vSbfLoIzOYFg?=
- =?us-ascii?Q?3UzNkWnMbB4B5Nr4+HqNyR7dXFKLgpBZWZZVFhXMNhktFsdoGwUHPO/wLCOU?=
- =?us-ascii?Q?6SuMQBt35TPd49dKQATRmWUBkEuzNWgwDveRtDkQrdol/ZlfUqaMIOu2iVlZ?=
- =?us-ascii?Q?xnOuVqD2AETH1UugpxwZ6Aad7BYJZ88xDldUsxgQz6ypiDfrbQqUCkiHxjgF?=
- =?us-ascii?Q?dL0Xl694bvnM4oLFzC7BgBHNZVJfWSU0W+MmGVe+DJVrqlNdJaODZxHsAxH4?=
- =?us-ascii?Q?YwdW3e9Hy2k3pjzSq0GkMnIkyhEqH0BjykLbQxCccl1VMU3p1+t0ccahuOPh?=
- =?us-ascii?Q?XJkV1fgVPRoKVjcYWU9OxWreeVEfme2mwNExjT3yooC3jX2VjaTrgMSxwpum?=
- =?us-ascii?Q?yD0P95gPC3BCzXp4on0oYpBINLAXRLhCdyRB5yJgrGqJa5Clwx0/VyckYMPI?=
- =?us-ascii?Q?pejA0ee5YPZhKodQuHMclB8MaUVwroNZxTbMKmVZ3ljbQbzTmL93AtKdJ6Ts?=
- =?us-ascii?Q?T35icGtkXiZuBkDBJdyMHTiofRgaFtmz8BM7l3+efMMOI3fpcGGqJYcpaEae?=
- =?us-ascii?Q?4g+vfZu4UnTBQPQcu6Q4K3eZZPPoK9kOmryuNEP4lb/kcrKBrH6ysaCuo0Kj?=
- =?us-ascii?Q?qvgZbkBFg6MrSOt48OSAlubAtanPz/1h+3zfK8HP/8Me1MnHfZtXTP2Tuc4Y?=
- =?us-ascii?Q?/EqPYABS1+MR9sxFRzU1d+REwI03WdNE0Sx3bfwbQ6IlsvJuAWALlmKWiHn6?=
- =?us-ascii?Q?5NIRWMR8MojUJHdt78yLIAPGC+rr8Hy0rs7A8V97LAWFwmHYo2isu2G0t4lY?=
- =?us-ascii?Q?AHhr0+d6uB88nVpTZxLr7h9g1ew/Tfib4Rt2ob81Y8jXq1rqVX2zZSpbc06k?=
- =?us-ascii?Q?I4mOmMaZFw=3D=3D?=
+	=?us-ascii?Q?GWX/bBMV71I4YZAmcO6nSlGHX3GAJOt2uE63Si3fOQIgMeExrM/xUcwYXmkc?=
+ =?us-ascii?Q?ZFSCFDvTKKc24T9WuR9PKQMQzHfjnGkiv93fvkK9GygJIy1zVdbWf0JeIjMT?=
+ =?us-ascii?Q?IYFpaiHdpPiEE/uHUk4oY7hMuGCUcpBIyM7j0UZuWlK7KiYAgV8mGlSwGhDd?=
+ =?us-ascii?Q?OdsI6TDgNGG5EXTsp9v0dY3wTierQG0W0t3jUJuTIlqp2jrZZNHxJS3yi/F0?=
+ =?us-ascii?Q?3e8OBF0Qf9YZxZBWcEIRxTpmPqd/fb+z3hlSPsQnV2lGzgvH2FcmOc+4PyaP?=
+ =?us-ascii?Q?H/1eJhmEz+uBDr9ifrSgV9X3tNcevqnv/1THF7oEsryMR1lNnxr0yMrqEDRD?=
+ =?us-ascii?Q?EuTv9QGOAtjbxLtz8LwJ+5nw/v7HvhvCrq65x9Tt60MzgHCTC7TdjTzCvFll?=
+ =?us-ascii?Q?4WHBo3kJgKgC0elPAMw5uE2JsuvywQwJKsQN322C0DRyIXv5evzBRkl1ssSz?=
+ =?us-ascii?Q?GJKW5HT9BcjLL+rniXxaJ8mHNQ3Hy0p/33nL33Qh0ZEfnyUpYQPLwo/Oox43?=
+ =?us-ascii?Q?GgD2e3OtpbI40zWQbR3xQCsNB1N50wx2GJXkzjXbutW8HJJyhiRq6D1fUEGf?=
+ =?us-ascii?Q?ORk2Vz7Fp2iKhNxGKMhkhBuypS4VcrLw05u3O8661TdoE7BcPck7p67Axg7C?=
+ =?us-ascii?Q?uQAxbOw3xNqSMVORCz+FcZ6gvm5CtgfwcbsRC8+9kvne+ybHEWCF2qt56piB?=
+ =?us-ascii?Q?qzNibSM9BG7TkwZZmqK9V7hoGaHx63yK8VtgnHimmhEHwUkSEjAiZSOfYIU2?=
+ =?us-ascii?Q?b54U9So7JMHxWLlGy19fsT2J4sqv5u9fFlzP3UGzq/mIbjH3wpebZqRVEpQq?=
+ =?us-ascii?Q?mw8Vor4Yn6kzlIv+3fGQq242gx7N3ZXBaNK+ggfyq99+5YsRisBpQcVOaZ5M?=
+ =?us-ascii?Q?loF0M9CpjlNakJUGeimR8kJvhv5/jvxliE7gBHkkxmafMu2IPOj2Rr+9lA6w?=
+ =?us-ascii?Q?/h9pON15W3G8pPWpFqmd4m/azSTmNL6bQDmVRr728r93QwwQ5O3rUrMHpyRt?=
+ =?us-ascii?Q?ZBaBlNm19O3zgZn+2Eq88VBU/hlBfbHyAm2rgjZ75ZEMOp3JJhFnsA2vKN8j?=
+ =?us-ascii?Q?7cX3YnQ3VfnvmJBWPVE4/RteDM/uyffI+VPve50iRfkZJeuUEGv2kdlKW8Z1?=
+ =?us-ascii?Q?eY5P8BjniX9wPGB8ed3nJjtjdGhwKfUBmdGjdGLyFBEJ+G8h2PWhmoORxpUV?=
+ =?us-ascii?Q?M0Im4+3gN0nuH1NNC/s9TMj9Sft4zzYK4QcYtKScckczDlXwO2cgDpoiFlD/?=
+ =?us-ascii?Q?PBTNnqwTipL2ir1VFZ/+AVIAPHc407qTc/tFgbiPd2DqAhDUD9+TDErDTIpu?=
+ =?us-ascii?Q?OfvWNhFVwazZDX9Mxd3uCFjkR1Jvq8Ctc+IX7fAETOrrUtLkb3gCCevABgHL?=
+ =?us-ascii?Q?mfTXV9RFRkLTxq7E8i0SRqXcpOTexmuDKr6P9fHoGLsWRnojKNB0EmhSOI5L?=
+ =?us-ascii?Q?RIviMAyyDWGXIj9NhOcB1qEhlqppKPaQMC0RKnWmxJbCeOpYuMPUAdXk2Qkf?=
+ =?us-ascii?Q?6Y6YyzBXHJKj8p711SH9qMfLWFDgCO2Uh/2Pde2ZOAXFJN54xE0TWdF/Yj7i?=
+ =?us-ascii?Q?iKsxQjquPOr+RaFaUljyqImoTDLk4gbiVex0CbG+Wqk3FduPUAQcYjfTMJdN?=
+ =?us-ascii?Q?HqvqeC7mNxELiVi7vQh026zmIk2dHqzlpTnZoyrscuNsh0pW7t/2mneZFAhJ?=
+ =?us-ascii?Q?2gPCbIxgFw9QWHwbvgyov+5WbFi5Wn3fEp9BZETnC9iWOFkb9a4mO1+jWjTp?=
+ =?us-ascii?Q?NSNmyCvo8g=3D=3D?=
 X-Exchange-RoutingPolicyChecked: 
-	mG1yO26WNS/QN3b9OQgVSni+/E2X6nLLGmYMcC1DEnAaDMsfINWKIsTKQE+pcL0GqHMBKpR+PyRMvEFqRtaVFRHg+0dax9F5uW+NCipDwquq4wcu4Ru8Vq9A3usgcEVgOqkGwV8Ev1aLnXw7kKG9er2jvBh2Gdoy6rhz063LFxmMTOP49MeTU/ofXNORja9nm7t4QofZG/nNiF71qIK9iKObQ2QOqN3qaQTEX8ysHgez6KYDMCQHBVb5+LQrZ3fJVhZzwCa/C4NE6QvlwhvMCtYwn2IroXoGXxr45U1JWfpf8OTZwugcyv0Dkef+r1N1Nw+EL6LFh/X9AK/hq6AxKA==
+	aGNGXr8OXwjtm/NRbfr3XIHiH2danYA980dnnn3lIne4AsrmewUcVkDtNQNuLLIbcaX5O6g8ECh5nYOi95DiBxyzL0nTcLb+ZeUozB+DXHw3mqTOb33z1cE7z07rkNuXuexxpfYOlQoc8EeqUMt3JaL0ffQk/lUoyDdCSUYzmfSSRvgk3vgWwJ10fVerCDfLQb2qBmxfdtf6IC9/RhUIle76hgLbCdQNi4RwcY558516y8F5l1Kd0OvJlSsQ6thLlurjpz8mprgfYiNpve5tQ2O2c1Ela1zc/GTcWzGMqTkWP6xGJ08aUIZ8pP70cdxlbxvZ4VYGAcmNcbZPrT3z5Q==
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
-	08yTJaHlfVpBdTm7Vy0svz9XEKC4bObCqGVyrbnrD4L49n/ajepHA3fROIK624WOSnbdZliHD2BE6woTVXRBybXwbiv5p7Ht9R6ypfA3jSsUXwPwpHhCja5QHokI3Zaa15gPyvs7KOXcFBaCA9tKeuuj2oKplBPSOi0QclXxW61aRyycgtIY79i4arEgeaJZ8Q+iz0yNUanCXj7yiH4/4ljZIr4vBu91yKCAkrrtQ4tvG4l7+3Fn+nHcuw1R6RjX0Dn9qQ2hSQtLkN9d1TCoF6SG54UL5RtR37RO4BoLRxKlSFP3WLTbCjzT4mOXfZsavjNgttHct+u5BBMyi1UeAapkdnBb2rJrcdVadxhnhY3/0nnxMcnIxcx6r/990CT68Y+3fNxTUAJtaVb1bU4nCoepgNVdRneoT2kt93RI10ke3ZXWqoWyOyWdiscVeLLdjdqTiLRrogVGseA94hFrsEOyJRUlLJAAds0drWQc/h8SY4OCTysuYaUWMDl3qXQzro6eNWX8rh8gmhanMoyml0pouZFzVefeXQc6KtFNXBuMN17bK7CH5j8as+Hn/1T7CTDKJxtO2aWfmC71PLg++lduIK0hmp6nGC0Yhb86LuVttWM9LyvSt6juPbkkJbRo
+	PyzYULSM6Zy+oQ7phepsWnsJd6XELhYnSfET2zLUcXOyGdu+4EfNJl4DtK61ot4X59ZqypbR9As4FJRM6i2BRSvD3RCA8D20Dy/vnKxUz1MR6K3qs1wnxOqWaJkycrxVFvpNLy0kdijfGhxv59Ks5gkdtNQWRMKhacrXZS0PSYd3kI8gbBxrBqAczmF+RVEzjvuYp4DGEhoEclU4IWbMBzUp+N9FVHGDG+zeVkDFQDfheeiPuhrShfJjm3xbJq7bmENOPwRlAKIsfXVB0kfFYM0YVt9gmidVbPFEtbp/kNbwZYYa2F8feEw79CEuzNa8bG0PhdcQu1ymzHsO1+oXk9pwpYQhSir914f8MxXgVuufCxgpflwcJImwsMQjcOWoE7TOaY4tcxbTzxwVUuVoibfXl7MmIVo3+QjQWNG+VBSQyIrUmydnTb10Z29JvRtK2MWChcZfwxSBLDfP6r5eJL+W0Z8e/XKhcpHRzUruEK1ZP0FJBG6KA7ui+MdW/mbU6LXg8wz8GIXnDlU52cYTDAmcR/u6zN8UfjlhN2qDOlLGa+PRG32S/l4QcJiP9RbfqmRWayhllBphXaQynjuNt50Z0wut8/QDarEO+Gg8IAtJNI341gx5hkSJmrIhXn7R
 X-OriginatorOrg: witekio.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f18dd5c3-bf26-4002-9bff-08deb67b8c7c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b87eec1-9a7c-4dc9-0feb-08deb67b8f18
 X-MS-Exchange-CrossTenant-AuthSource: AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 14:24:48.8375
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 14:24:53.2323
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 317e086a-301a-49af-9ea4-48a1c458b903
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QgVfhkRHsgApDsYcruxXDjrQ0AgVyjoEfLK1FCG44mGjsi9HY8gYdbBwu5quCJ5YapdrzBhCyCYHcnyvh45ZAw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: d6HHnMXCXx8Vh1laz2Fr8oqCGt0op19NnqjGL67xf3klsxi+iM8lg2k/MIfepfjszlHzDw+oyrskcjn6Mb0LBQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWP192MB2388
 X-cloud-security-sender: tgaige@witekio.com
 X-cloud-security-recipient: openembedded-devel@lists.openembedded.org
@@ -143,126 +143,195 @@ X-cloud-security-crypt: load encryption module
 X-cloud-security-Mailarchiv: E-Mail archived for: tgaige.opensource@witekio.com
 X-cloud-security-Mailarchivtype: outbound
 X-cloud-security-Virusscan: CLEAN
-X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on mx-gate26-hz12 with 4gLDMT57xsz1g3kr
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on mx-gate26-hz12 with 4gLDMg3Swmz1fxXg
 X-cloud-security-connect: mail-northeuropeazon11021127.outbound.protection.outlook.com[52.101.65.127], TLS=1, IP=52.101.65.127
-X-cloud-security-Digest: 49a1848fb861610df3cffc10ce8173b3
-X-cloud-security: scantime:1.335
+X-cloud-security-Digest: 9af9ce4998a463d39e1ebdc8a190d1cf
+X-cloud-security: scantime:1.349
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 14:25:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127118
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127120
 
 From: "Theo Gaige (Schneider Electric)" <tgaige.opensource@witekio.com>
 
-Backport patch [1] mentioned in [2].
+Backport patches [1] and [2] mentioned in [3].
 
-[1] https://github.com/nginx/nginx/commit/54b7945961b2eaafc480d6b85d9635d0db1c126a
+[1] https://github.com/nginx/nginx/commit/baef7fdac28e4e1fe26509b50b8d15603393e28e
 
-[2] https://security-tracker.debian.org/tracker/CVE-2026-42934
+[2] https://github.com/nginx/nginx/commit/39d7d0ba0799fcff6baee52b6525f45739593cfd
+
+[3] https://security-tracker.debian.org/tracker/CVE-2026-42946
 
 Signed-off-by: Theo Gaige (Schneider Electric) <tgaige.opensource@witekio.com>
 Reviewed-by: Bruno Vernay <bruno.vernay@se.com>
 ---
- .../nginx/nginx-1.24.0/CVE-2026-42934.patch   | 79 +++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.24.0.bb       |  1 +
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42934.patch
+ .../nginx-1.24.0/CVE-2026-42946-01.patch      | 46 ++++++++++
+ .../nginx-1.24.0/CVE-2026-42946-02.patch      | 91 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.24.0.bb       |  2 +
+ 3 files changed, 139 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-01.patch
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-02.patch
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42934.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42934.patch
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-01.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-01.patch
 new file mode 100644
-index 0000000000..b2a8142934
+index 0000000000..2418f69afc
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42934.patch
-@@ -0,0 +1,79 @@
-+From 9e8f535a9320a2f6bdc3ae9cf9e616ae0a29869e Mon Sep 17 00:00:00 2001
-+From: David Carlier <devnexen@gmail.com>
-+Date: Sun, 12 Apr 2026 07:13:23 +0100
-+Subject: [PATCH] Charset: fix buffer over-read in recode_from_utf8().
++++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-01.patch
+@@ -0,0 +1,46 @@
++From 7b45e652cc7e91fbc60cbb5f41eb4608e706bc03 Mon Sep 17 00:00:00 2001
++From: Sergey Kandaurov <pluknet@nginx.com>
++Date: Wed, 29 Apr 2026 21:56:51 +0400
++Subject: [PATCH 1/2] Upstream: reset parsing state after invalid status line
 +
-+When a multi-byte UTF-8 character was split across 3+ single-byte
-+buffers, the saved bytes continuation path had two related bugs:
++Previously, it was possible to start parsing headers with a wrong
++parsing state after status line was not recognized, as a fallback
++used in the scgi and uwsgi modules.
 +
-+ngx_utf8_decode() was called with the last saved-array index instead
-+of the byte count, causing it to report "incomplete" even when the
-+sequence was already complete.
++Reported by Leo Lin.
 +
-+The subsequent ngx_memcpy() used that same index as the copy length,
-+reading past the input buffer boundary.
-+
-+CVE: CVE-2026-42934
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/54b7945961b2eaafc480d6b85d9635d0db1c126a]
++CVE: CVE-2026-42946
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/baef7fdac28e4e1fe26509b50b8d15603393e28e]
 +Signed-off-by: Theo Gaige (Schneider Electric) <tgaige.opensource@witekio.com>
 +---
-+ .../modules/ngx_http_charset_filter_module.c  | 20 ++++++-------------
-+ 1 file changed, 6 insertions(+), 14 deletions(-)
++ src/http/modules/ngx_http_scgi_module.c  | 1 +
++ src/http/modules/ngx_http_uwsgi_module.c | 1 +
++ 2 files changed, 2 insertions(+)
 +
-+diff --git a/src/http/modules/ngx_http_charset_filter_module.c b/src/http/modules/ngx_http_charset_filter_module.c
-+index e52b96e..7a518e3 100644
-+--- a/src/http/modules/ngx_http_charset_filter_module.c
-++++ b/src/http/modules/ngx_http_charset_filter_module.c
-+@@ -689,7 +689,6 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
-+     u_char        c, *p, *src, *dst, *saved, **table;
-+     uint32_t      n;
-+     ngx_buf_t    *b;
-+-    ngx_uint_t    i;
-+     ngx_chain_t  *out, *cl, **ll;
++diff --git a/src/http/modules/ngx_http_scgi_module.c b/src/http/modules/ngx_http_scgi_module.c
++index 9fc18dc..3259820 100644
++--- a/src/http/modules/ngx_http_scgi_module.c
+++++ b/src/http/modules/ngx_http_scgi_module.c
++@@ -1029,6 +1029,7 @@ ngx_http_scgi_process_status_line(ngx_http_request_t *r)
 + 
-+     src = buf->pos;
-+@@ -783,18 +782,12 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
-+     ngx_log_debug1(NGX_LOG_DEBUG_HTTP, pool->log, 0,
-+                    "http charset utf saved: %z", ctx->saved_len);
++     if (rc == NGX_ERROR) {
++         u->process_header = ngx_http_scgi_process_header;
+++        r->state = 0;
++         return ngx_http_scgi_process_header(r);
++     }
 + 
-+-    p = src;
-+-
-+-    for (i = ctx->saved_len; i < NGX_UTF_LEN; i++) {
-+-        ctx->saved[i] = *p++;
-+-
-+-        if (p == buf->last) {
-+-            break;
-+-        }
-+-    }
-++    len = ngx_min(NGX_UTF_LEN - ctx->saved_len, (size_t) (buf->last - src));
-++    ngx_memcpy(&ctx->saved[ctx->saved_len], src, len);
-++    len += ctx->saved_len;
++diff --git a/src/http/modules/ngx_http_uwsgi_module.c b/src/http/modules/ngx_http_uwsgi_module.c
++index e4f721b..93bcad7 100644
++--- a/src/http/modules/ngx_http_uwsgi_module.c
+++++ b/src/http/modules/ngx_http_uwsgi_module.c
++@@ -1257,6 +1257,7 @@ ngx_http_uwsgi_process_status_line(ngx_http_request_t *r)
 + 
-+     saved = ctx->saved;
-+-    n = ngx_utf8_decode(&saved, i);
-++    n = ngx_utf8_decode(&saved, len);
++     if (rc == NGX_ERROR) {
++         u->process_header = ngx_http_uwsgi_process_header;
+++        r->state = 0;
++         return ngx_http_uwsgi_process_header(r);
++     }
 + 
-+     c = '\0';
++-- 
++2.43.0
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-02.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-02.patch
+new file mode 100644
+index 0000000000..089bd46a26
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-02.patch
+@@ -0,0 +1,91 @@
++From 7b5bea14a2a7a784751a8f86559bd3c3f109ed5b Mon Sep 17 00:00:00 2001
++From: Sergey Kandaurov <pluknet@nginx.com>
++Date: Wed, 29 Apr 2026 23:02:20 +0400
++Subject: [PATCH 2/2] Upstream: fixed parsing of split status lines
++
++If the first response line was split across reads and it didn't appear
++a status line, the portion already processed was lost.  To preserve ABI,
++the change reuses r->header_name_start for proper backtracking on status
++line fallback.
++
++CVE: CVE-2026-42946
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/39d7d0ba0799fcff6baee52b6525f45739593cfd]
++Signed-off-by: Theo Gaige (Schneider Electric) <tgaige.opensource@witekio.com>
++---
++ src/http/modules/ngx_http_proxy_module.c | 5 +++++
++ src/http/modules/ngx_http_scgi_module.c  | 5 +++++
++ src/http/modules/ngx_http_uwsgi_module.c | 5 +++++
++ 3 files changed, 15 insertions(+)
++
++diff --git a/src/http/modules/ngx_http_proxy_module.c b/src/http/modules/ngx_http_proxy_module.c
++index 9cc202c..19cbfa3 100644
++--- a/src/http/modules/ngx_http_proxy_module.c
+++++ b/src/http/modules/ngx_http_proxy_module.c
++@@ -1814,6 +1814,10 @@ ngx_http_proxy_process_status_line(ngx_http_request_t *r)
 + 
-+@@ -810,7 +803,7 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
++     u = r->upstream;
 + 
-+         /* incomplete UTF-8 symbol */
+++    if (r->state == 0) {
+++        r->header_name_start = u->buffer.pos;
+++    }
+++
++     rc = ngx_http_parse_status_line(r, &u->buffer, &ctx->status);
 + 
-+-        if (i < NGX_UTF_LEN) {
-++        if (len < NGX_UTF_LEN) {
-+             out = ngx_http_charset_get_buf(pool, ctx);
-+             if (out == NULL) {
-+                 return NULL;
-+@@ -823,8 +816,7 @@ ngx_http_charset_recode_from_utf8(ngx_pool_t *pool, ngx_buf_t *buf,
-+             b->sync = 1;
-+             b->shadow = buf;
++     if (rc == NGX_AGAIN) {
++@@ -1821,6 +1825,7 @@ ngx_http_proxy_process_status_line(ngx_http_request_t *r)
++     }
 + 
-+-            ngx_memcpy(&ctx->saved[ctx->saved_len], src, i);
-+-            ctx->saved_len += i;
-++            ctx->saved_len = len;
++     if (rc == NGX_ERROR) {
+++        u->buffer.pos = r->header_name_start;
 + 
-+             return out;
-+         }
++ #if (NGX_HTTP_CACHE)
++ 
++diff --git a/src/http/modules/ngx_http_scgi_module.c b/src/http/modules/ngx_http_scgi_module.c
++index 3259820..a04fd47 100644
++--- a/src/http/modules/ngx_http_scgi_module.c
+++++ b/src/http/modules/ngx_http_scgi_module.c
++@@ -1021,6 +1021,10 @@ ngx_http_scgi_process_status_line(ngx_http_request_t *r)
++ 
++     u = r->upstream;
++ 
+++    if (r->state == 0) {
+++        r->header_name_start = u->buffer.pos;
+++    }
+++
++     rc = ngx_http_parse_status_line(r, &u->buffer, status);
++ 
++     if (rc == NGX_AGAIN) {
++@@ -1029,6 +1033,7 @@ ngx_http_scgi_process_status_line(ngx_http_request_t *r)
++ 
++     if (rc == NGX_ERROR) {
++         u->process_header = ngx_http_scgi_process_header;
+++        u->buffer.pos = r->header_name_start;
++         r->state = 0;
++         return ngx_http_scgi_process_header(r);
++     }
++diff --git a/src/http/modules/ngx_http_uwsgi_module.c b/src/http/modules/ngx_http_uwsgi_module.c
++index 93bcad7..749254f 100644
++--- a/src/http/modules/ngx_http_uwsgi_module.c
+++++ b/src/http/modules/ngx_http_uwsgi_module.c
++@@ -1249,6 +1249,10 @@ ngx_http_uwsgi_process_status_line(ngx_http_request_t *r)
++ 
++     u = r->upstream;
++ 
+++    if (r->state == 0) {
+++        r->header_name_start = u->buffer.pos;
+++    }
+++
++     rc = ngx_http_parse_status_line(r, &u->buffer, status);
++ 
++     if (rc == NGX_AGAIN) {
++@@ -1257,6 +1261,7 @@ ngx_http_uwsgi_process_status_line(ngx_http_request_t *r)
++ 
++     if (rc == NGX_ERROR) {
++         u->process_header = ngx_http_uwsgi_process_header;
+++        u->buffer.pos = r->header_name_start;
++         r->state = 0;
++         return ngx_http_uwsgi_process_header(r);
++     }
 +-- 
 +2.43.0
 +
 diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-index b4bb1ccc67..7a94cb6172 100644
+index f9e40fa27f..26352a8814 100644
 --- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
 +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-@@ -10,6 +10,7 @@ SRC_URI:append = " \
-                   file://CVE-2026-28753.patch \
-                   file://CVE-2026-32647.patch \
+@@ -12,6 +12,8 @@ SRC_URI:append = " \
                    file://CVE-2026-40701.patch \
-+                  file://CVE-2026-42934.patch \
+                   file://CVE-2026-42934.patch \
+                   file://CVE-2026-42945.patch \
++                  file://CVE-2026-42946-01.patch \
++                  file://CVE-2026-42946-02.patch \
  "
  
  SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
