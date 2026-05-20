@@ -1,188 +1,226 @@
-Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
+Return-Path: <hsimeliere.opensource@witekio.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CB35CD4F3C
-	for <webhook@archiver.kernel.org>; Wed, 20 May 2026 11:34:30 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.10123.1779276863074466483
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82D36CD4F3C
+	for <webhook@archiver.kernel.org>; Wed, 20 May 2026 11:51:00 +0000 (UTC)
+Received: from mx-relay07-hz12-if1.hornetsecurity.com (mx-relay07-hz12-if1.hornetsecurity.com [94.100.139.207])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10418.1779277856948679324
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 04:34:23 -0700
+ Wed, 20 May 2026 04:50:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=PaYdU2Bf;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=JJq50KTy;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64K76lIq630202
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 11:34:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=hf4Hs8uTe+CH46TGVYCMGtHZcTCBNUGqXIc
-	qkYCipzo=; b=PaYdU2Bf4r/niE/7SBIG5LUitrdueYLBWwD0zhLoZrpfmAkhu05
-	G6HTI1dysrdXabSZfMof0LcpFQN6IAtNx8sChJ0yQwQjzP9kwBOYw0MZqU99vOgo
-	3QU6+kyTsqgJdlPjlFJBtXrEfAH8R8O1h0DhzZ02KBpwpT8X5owT5qTqNBD6hzlt
-	fdh2FygwKsvmN+2eD2Pk8Dx3qdMM8Hboddw3I9PDOzPoSiOeLyq2Ob8GV3ur8U7W
-	7LLbGr+TVrjs10Ox+JHuvB9FFMyGqcJKyuLaleqO/hKzLJ9PFDMc7fGbZX7+rklH
-	Dtb4QmtjGr0luPS+0qDJIM+US35yQpnrnRg==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e8t3nvjex-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 11:34:22 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-63a6257148cso3412189137.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 04:34:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1779276861; x=1779881661; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hf4Hs8uTe+CH46TGVYCMGtHZcTCBNUGqXIcqkYCipzo=;
-        b=JJq50KTyAS1WJ+d2Ue8ncTn5aj7BB1PfHik32oGf+SVHARNt3d8LxqdH8cfcn+C3hN
-         JCjsJhlLhU8O0QjxhI2pi/oUI3A3T62DCYTPdqYV/jEZb23FozH29p3xzsTwJIcQQXhm
-         Nk2cjeyD+jm05AYkFTQ96kgek80C82SA1swOzSHPD5frh8tKHLj9WTbl35jN0Y/9Nzxa
-         XNwElAyPpw/9BzKrt59fXp1KDhycYF7QOpznviOsPJIXXG5JgfVGWvBAbeldxJiOzIvE
-         RhrLyn1Hk3p+E210uYmXrMLHteVswW7/Ckey8JCgpSkfIIXc0P1SSZkjqQF288LY10su
-         RJ2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779276861; x=1779881661;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hf4Hs8uTe+CH46TGVYCMGtHZcTCBNUGqXIcqkYCipzo=;
-        b=ZR8JM069oXFpkMPMCGjLzINAxzCh7gR78lutGUktjA7+3LGqdSUambbn32i4drEjv0
-         Muu3wv6d1o8NIHkH9k/q9e2oLafpx1PnE3DY1/2CREV/8TSgGtA2lN+ywEco6L9eCpAJ
-         ai7yZzvVQST1091xL6agiWcVWUf4Gxn8DnHEU82WDNX4Om8xaaWfm7Y3lTgQbZ3wGzz6
-         c5UdPC5PZsSWWgggSoqSPGg6jrpie2VRm8Ml3Of66PPWcdothYhYHmYMKpxAXRo82his
-         C8UXbE9JLvZVhMPNxm+En0Klr+mQ9gsWYvtwdzBisBc7yBNPxnS8SqOFtKNYuacCK7rl
-         F5jQ==
-X-Gm-Message-State: AOJu0YzaxW2/hpBja+ykqTOhCe0ijkKJrRRhWpDwZblS0XnUNuHZbDKa
-	Dn1OjbUJ092m7YFUINlZYva0Qc6tlAuEl3mqCQcbQzmq+U4AGVbqPaV4xmF6TRvC5dndRghaf42
-	WQKS1aZQrWIr/6bzt2c0wunjAhpkxUCu3Gh7NxbjxQXP8A+dI3fdNTWUtV6Kmp/T470D93g1g1/
-	w5Jt6mVaQdPMY7svbb
-X-Gm-Gg: Acq92OFtArdUkz24lfmfXa+bjdzKdTgbzdBjfHnBZGGZyK6Srh59l2UW62mlJcuYmlU
-	k6uAoadswCtPJpDM+qh9ctvgb5w0Us3XC99uBQvc4MdJE8hDa2DQ39Hlaqvl5ViJ8YNpXqj2Hly
-	H+KrMCDABBB01zSm+XoJAcIPa6mbSAgulFU1F/Y7010F8n1Z5nTSdU9nL0zH0FwnV8jh0n7iasD
-	3cA1Bmje5F+ZcfrqGzfAOww9I/rS1YO2CLlcYU8V3s7Y0D6LsxO7cKosGod4RSuzvPaPu2UM5/1
-	0csJpDC6Irj3Q3iVeILQSbhJT2Wr/SNJaJPPuJsqYY6HyCBp8WH5CQpr3nNhVLCvfumWRWupNoE
-	gxafLwZg17oJZQX3kYupNcFM/2pzdze6hvzF60lSCWLunvai/4IlPwC2IA9CxltSCPU7TTN+PDD
-	yP7EEM/HHZiRQh+3Cy4/EyqKHELhvomkOwHBc=
-X-Received: by 2002:a05:6102:6042:b0:631:e729:4575 with SMTP id ada2fe7eead31-63a3d219e05mr11476546137.5.1779276861107;
-        Wed, 20 May 2026 04:34:21 -0700 (PDT)
-X-Received: by 2002:a05:6102:6042:b0:631:e729:4575 with SMTP id ada2fe7eead31-63a3d219e05mr11476530137.5.1779276860276;
-        Wed, 20 May 2026 04:34:20 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5a90f10c8b2sm4873026e87.17.2026.05.20.04.34.19
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 May 2026 04:34:19 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+ dkim=pass header.i=@witekio.com header.s=selector1 header.b=GFfrkRgR;
+ spf=permerror, err=parse error for token &{10 18 spf.hornetsecurity.com}: limit exceeded (domain: witekio.com, ip: 94.100.139.207, mailfrom: hsimeliere@witekio.com)
+ARC-Authentication-Results: i=2; mx-gate07-hz12.hornetsecurity.com 1;
+ spf=pass reason=mailfrom (ip=52.101.65.118, headerfrom=witekio.com)
+ smtp.mailfrom=witekio.com
+ smtp.helo=du2pr03cu002.outbound.protection.outlook.com; dkim=pass
+ header.d=witekio.com header.s=selector1 header.a=rsa-sha256; dmarc=pass
+ header.from=witekio.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=wrKcFzTsSTg+mu/ccfGEcqY/cy7Xb5NOhOfeUOh9L1E=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=2; s=hse1;
+ t=1779277854;
+ b=ZUPijY0ynKs0bS2xv2BdvO6v69Ew0lXGqwByWzXPLQf04VxOivpboPCJ016Fmhf2o/bdkzyf
+ RLOzC8WKqMQdaUIx1XXD/U3pAWd+6ukdgzaFFORRiHWWEP45Sb3TbJa6OTdyGYoIqkMShwBmOgi
+ 4MLQYnNymPHOWDQen1QDQFc69JFgbKy/26vrAohoGFdPxIbhqzzCmg11ioAR1YQCAgkVaMpLWRL
+ b2CC9L7jHqgW47P/3RWYIJwAbwqGAaqVbfKnIAKJykuoit4lz+Y4eSdn+xMvKSziX+UlAiMB4UI
+ 3bxjWZupkVytfOouHJPs8+kDg1tjzItkpe90OUL1f/9sQ==
+ARC-Seal: a=rsa-sha256; cv=pass; d=hornetsecurity.com; i=2; s=hse1;
+ t=1779277854;
+ b=OWKHrX3rMVcqJdJ2ze5aiTG5ZEjDCBAuD29BaJzUIoCtMUCK0oJvCk8EBwObIkvdiF+cDGWl
+ nLUsngTsnFdfIvRtEEe7aXKIY/YZctOr9Y3NuEVgy2cXgglZ9cCiJE0XJg9z1iJM3xOdlNiy2t6
+ fb03hYND2Sqb47fMzSXSi3Ic+fpwoKgqILcecyv8dw/ZiQ+GKmsB5s3YoQFFYzlysUy+UexW+sT
+ uJR7013Vamodn2i+hlpcO+fPtY6lnXqJCqrku9uQGeXm2wPwB8TncH+lCqktzvKqdOUf3/6UZf2
+ t7baXec5yja6iYgnlgkuO1jRCxLZPvxY5S23maBq7ieZQ==
+Received: from mail-northeuropeazon11021118.outbound.protection.outlook.com ([52.101.65.118]) by mx-gate07-hz12;
+ Wed, 20 May 2026 13:50:54 +0200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=atRSIu+Dbpcii+heAmTCoTVg8xEL1jOTmi2bDtk/iYNktIVlYlz8vyF6fhB/MtHej0+iue9vQHcwgvsOvxEonzUx/w+846PXHPmodqXXY6o8vqi4wbsijWp7jxMWeighWxwJ3rwi3KCtyV+/joh2whGvTvtviIaaX3O8+nlRCFyWQtIGvZW2gE9uD9TXtOE10Ksb6NMTNc83iLgvtqL8L+BHT064LnpVYKAP4HQ+MFXOrh85Y6wBBYfDbNEJLPNI0mwepHY5Liybpu+17h/2eEITe1sB3hO11lLD9Lsz1NWDy75p/3vhnN/6dIKHsAFpOj0lSUbzU40BG3fGXMD+7A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wrKcFzTsSTg+mu/ccfGEcqY/cy7Xb5NOhOfeUOh9L1E=;
+ b=oX/EbYMfgnqjqo4YlBafKD7fdNEERuglMZkQjgLyB/e26o2EUj7EPXYrH8i4zG3bjh0H6nYBsAyfb+0U14L6XZFE33/eCJdeqWjv2CcwxNiMBxBUmAoY5xin6Cx6WsYuV1/vAtzIgek0Ssnr5ko0YarFL+Jj5oJC5U6afWpTYfJPjdLcGFZghXT5EjFr/qwwpiX3N+7My0IK2m+wt8pzJOMktNDifbGPARqgoFzgR2mXYE7TTb8R1sUmZz9erc6KVOQ+nTB6TfJSeooDUX6Ppj2HOb5N8dtFsTdWs3E7MwZ3KB77XzJmaaldlfJL8HMxIEGnt1J7x28if2J/9PbDvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=witekio.com; dmarc=pass action=none header.from=witekio.com;
+ dkim=pass header.d=witekio.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=witekio.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wrKcFzTsSTg+mu/ccfGEcqY/cy7Xb5NOhOfeUOh9L1E=;
+ b=GFfrkRgRn/g5ona2ETJ+klGwTAak7OlSzsf+BiK6KJ1MGZCnbVKESEu7wJKQRnjX3++47wr687T5Suu23yzq+yjUQEZEYUN1f+GbEnxASQ9PQiMemc74vDwscJhAnQk1/kVm3A/M1aYHXn9ha8xDWO5NiIo6j7TTx7bNFsENlJA1YPEg2BNfv4OLpeKe2dXcxBQZMGrhpWOflg8hg2nH6SQ8oPRnXZdrMfX13gsxJi2aVt8OF/n57okreuJfsIy4wVDntUpCwhFKaLBAEmvhbP6xcy6h2kHbcQB8kks2hzn5fUKGeU5rgsG17GqnhOU+mUvHi2bEvs+lBQ0AxkfWiw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=witekio.com;
+Received: from MRWP192MB3504.EURP192.PROD.OUTLOOK.COM (2603:10a6:501:87::6) by
+ DB9P192MB2818.EURP192.PROD.OUTLOOK.COM (2603:10a6:10:5e7::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.14; Wed, 20 May 2026 11:50:48 +0000
+Received: from MRWP192MB3504.EURP192.PROD.OUTLOOK.COM
+ ([fe80::e437:672a:5abc:a0f4]) by MRWP192MB3504.EURP192.PROD.OUTLOOK.COM
+ ([fe80::e437:672a:5abc:a0f4%6]) with mapi id 15.21.0025.020; Wed, 20 May 2026
+ 11:50:47 +0000
+From: hsimeliere.opensource@witekio.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] mariadb: fix building for the ARMv8.3-A and later systems
-Date: Wed, 20 May 2026 14:34:18 +0300
-Message-ID: <20260520113418.2523208-1-dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
-MIME-Version: 1.0
+Cc: "Hugo SIMELIERE (Schneider Electric)" <hsimeliere.opensource@witekio.com>,
+	Bruno VERNAY <bruno.vernay@se.com>
+Subject: [oe][meta-oe][scarthgap][PATCH] nss: Fix CVE-2026-2781
+Date: Wed, 20 May 2026 13:50:32 +0200
+Message-ID: <20260520115032.3131401-1-hsimeliere.opensource@witekio.com>
+X-Mailer: git-send-email 2.43.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDExMSBTYWx0ZWRfX7bkVOW7B34o2
- 8K8TUM1fQf159IFiQ9+ZVAVy+EWB6FcB+U+J5d0aWx2rGq/KwgH31bBTaMsicTiQdt2uDn+3IC/
- 3veRi26QutlQQG3Ww9lPMA82BluhJjz8ey7ddzoV4jJypln9P6L2howmq1xW7BlCtjU2OACIsp1
- O8HUXroKiMfquRAR5AToapTyvh8JoHf9X0bxlG6IKRFZHr233w4QbJoc0UDQnQ8yXLYoIdaqFa4
- xY/adGOpQg1BAMUskR6cojaRnolhWcCei4xkHvZuxb7rFhN7IeAx288pzq85qoiJeq2Rrz7h3OY
- HFUYkimdAVe68QCvRgC/U7XhfVQCeqoYCz6Do5Aha6Qzx7NZqj0q9as4XHkaTMRJtcl9aJ9DsMJ
- GondIW2ijIwHPvo0AKR13Pogz8V2GC2z5i7nPtlPHPfDScF47YkJU3VPMpEpn+NrjO22RATTGi1
- iJVrBy8MZTsmnvqeLSg==
-X-Proofpoint-GUID: blIzOmwTaULKKtiaozK1fAfjrjkQRDK-
-X-Proofpoint-ORIG-GUID: blIzOmwTaULKKtiaozK1fAfjrjkQRDK-
-X-Authority-Analysis: v=2.4 cv=Mr9iLWae c=1 sm=1 tr=0 ts=6a0d9c3e cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=xqWC_Br6kY4A:10 a=NGcC8JguVDcA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=YMgV9FUhrdKAYTUUvYB2:22 a=hkEv4HZQAAAA:8 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8
- a=EAzCv-LrHoDSmWyZLzEA:9 a=-aSRE8QhW-JAV6biHavz:22 a=NA03pvyaApPJG5valX87:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-20_02,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- clxscore=1015 bulkscore=0 impostorscore=0 spamscore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
- definitions=main-2605200111
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P123CA0445.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a9::18) To MRWP192MB3504.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:501:87::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWP192MB3504:EE_|DB9P192MB2818:EE_
+X-MS-Office365-Filtering-Correlation-Id: f51d2346-ea5f-4290-ae75-08deb666086b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|52116014|366016|376014|1800799024|10070799003|18002099003|12006099003|25016099003|29003799003|56012099003|13003099007;
+X-Microsoft-Antispam-Message-Info: 
+	OpeJn1K+N4Xqjr79lv3Bqqw8THV8lLpIWz+KDUCoAw/PR4fSY0gwqhBDg5Exb1oUbJG6IhGQu9xCV48E0HSZRhxyg2MUyHRSrmxOevTHnZ7vFwMFwmhIwibaq2dQdQeamq3fNG4gyl39RKQDHvlnB/QvIHGI1FoD0O45glIBy/whzQ98Tnev9PnKKzk2ThrLN9llxTyB7Kd5hKxzJr5h0Ryk9LRNte5d5JvnR5sSTC1NZUNUvMbxPN/4Jat7RIBm9K5A+/poZ/lGH8N9fRGaPxguROEGB+iAAk6oVDhhfl0/k3RnMC1Gcq5eEAhYzZGtafwQDFHHLkHDVZlfOpWGWFY14/7bJnK4c7XvPX+st4XD6mMLzaFus+BBWSq+J94BAAs8AoXnp8UWc8Fk6bRUCyu4P7jMmPNrJ8+35OY3U0QPF3Fl0jZrzGDnCmFpW2RqUD8z7potYdekutG6MuzA5dDwdf9s7OpSs+h9TfVTfFYGmu7kTBNSF0PT9zPOm0R41I8k6AsaQCNQs4riFTwd+W+UrF3b6ykh/WpB49azpMw4vbCehV5KFUDkQrfM6O6qnfFi4zx137DiTZnEU5dLh5NXQ25v2yq5pzkKTbnPtF2vLAn7e+eZsbR0vhcJJDxmPnHPn4BhjBhUrgBAU6AKYrflL5jo77YGquPUKskfyvP/oMOJZG7YbIIwHMYBByQFW/yGVpzu9maAVcEQM9la5g==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MRWP192MB3504.EURP192.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(376014)(1800799024)(10070799003)(18002099003)(12006099003)(25016099003)(29003799003)(56012099003)(13003099007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?F/w2XLJe1kg+URFKFvf62RpQFcPOpe5Vsgyya3oc0WFwivjM7m1nw9SykOBH?=
+ =?us-ascii?Q?gabGkLOlw5HA1pZxKTuFhfNVN7pqPUJ+frbWjnq1+NiaxnAwouHDxyx8f3lb?=
+ =?us-ascii?Q?HW+p+6BRNQqrABM8B+PRX+CO0Cg6dOKJE5Yvdbcn02VgAt18jSWFZdIe3yI+?=
+ =?us-ascii?Q?2kNWCeBJ4lf9/jz1gCd9zKVBJykuOS7kHhUoT3T8msfLnnsrL0kM0M8ahOfU?=
+ =?us-ascii?Q?6VMiqzmetVFpuJn3c0M/sy71j0JFRABAjjto2IKXE+ALl5t4zDBuKFMllKkI?=
+ =?us-ascii?Q?g5J2u2+JEV574/1T+mdYAM94x89cMDHxXUut5brF1/zDVq4kKrBqu4gvl9fo?=
+ =?us-ascii?Q?md5ec0XoykkIhTH0JRANHRWb+JstQ2V1aZu4Jxe3qzvR6KawYmle4PR204L6?=
+ =?us-ascii?Q?3ZxDTTnAxJC8kdcrhqKE1A3/HrwOLYGVWFg79x1vyoWHEfB/h4Jrw7QHVrWP?=
+ =?us-ascii?Q?0uQWqEX4UGY073TGv4Io/C0QOkNAISq7YTw1r/E6bCb6d8ocwsZ80sB6Zp3c?=
+ =?us-ascii?Q?uM9UI0a6QRJbVRZG2OMuowUXI8dM0hkTxcCXUjttt4uE4jpBZ9rilpNYbssc?=
+ =?us-ascii?Q?UuEv9Qu2YW6DaDmXr/OXpk7Xkbk7xzPzywdLQlT03AuICbosrGXFWsKNQirm?=
+ =?us-ascii?Q?iryrJNwm70ZiH7fLoUuWX5Uk+TAhwbpWIR1GeZeQrPm5L2hYUhTktH94fHVg?=
+ =?us-ascii?Q?6trc9MVzpmK3Xp64iZb0nB7c/WiKJ7qdYqVdjk3gI0Uu6q5Q9+vvfHaV1Kxp?=
+ =?us-ascii?Q?ONGXMtjTUl1Qajotzm3rJ+Z9NNB5sp4ux/Gq6gINADg5IB1YtBAKh5eD+Nqy?=
+ =?us-ascii?Q?F180Yq4E14i3ubc+9e9mb6QZXVhI1Dl3mKO2DAJOrxLMvvuEGj+n9DmNqObd?=
+ =?us-ascii?Q?oQAJNasnt2U8GxlAz2EXbo7pCiRWtER2rc1lae+4SoweVj2XzyFhmlOB4+CT?=
+ =?us-ascii?Q?mxjA08Fa9expS5AeYI2qRqyS0JsuOvh9ZfDJiaoMMFdCz1ud4YJVPcaHRDIK?=
+ =?us-ascii?Q?RidmrMHW+gSRGybFZDH38jfLnKbBpa9GpbudBsRxFiiuA2ioDagNMfRLE/S0?=
+ =?us-ascii?Q?ppt/fKXX8cvSaUL1Hr0QatYNqb+ZnACj0SlrJQYACAjwLWjYLq1l4KXTWUA1?=
+ =?us-ascii?Q?CKsnVoHg/h+Cl6wIAwDU60QUsqcL2pqO+z14fRQqhXvi8X4tA4ZIiyewpAGi?=
+ =?us-ascii?Q?OtWDWSHPGcK5TsIbqfG2avr/valUogBgCfHP8Ohl2tD1i7WIPr9O+B2Io5u8?=
+ =?us-ascii?Q?GUwnVQKOnhFczaHWLbGXjmxRXUgjNOYuFQ4oo4m3RzTwclJreoFdaEgaTseS?=
+ =?us-ascii?Q?JuYWf2gVmGsLs/oSLg4GExsBVrW6vUoRgcvhIVl2DGk6lSOyAPZNFrxBZtp8?=
+ =?us-ascii?Q?9mhEjSYkav7BQeLCwIXWfKJ/qZOvynYsxAxc0e4don3XWXy87gQNDVxpuZ5B?=
+ =?us-ascii?Q?SjLfVbsbfKMUwbmsGz/jNyyKqO6sgc/vnLkGQvl4D+9NIy9Vr9c2QOd6r48q?=
+ =?us-ascii?Q?0ucbImNcas9dymENjiTx5qDnuXUUyJZ0o47OpuWIM/3vlIq/JdBVkFWeprYg?=
+ =?us-ascii?Q?DIQxvvov4AM1wqlUpZYP4xlYwRNaeaTERgoV80l909XmRlWZq/QEHyWuh0Jd?=
+ =?us-ascii?Q?1oxiFggPoLnmdM1Ce8jmAVADmGdXWjOQby/x9hG+hP0zIh+AathyKEfmFDSA?=
+ =?us-ascii?Q?HR0ckRKt/BZtOYr1WcuSGNqNGtWffzYrK9USH/eAWC4Z/OyPwklaYjdA52O6?=
+ =?us-ascii?Q?S2DH9WoFvwNPoFEpmdLu+cFpogkEagYjh/NUfnaOCqYhNYXGu3FwkPGvc3bq?=
+X-MS-Exchange-AntiSpam-MessageData-1: L+z3/oeC44RLtQ==
+X-Exchange-RoutingPolicyChecked: 
+	NcuGO2Qtn+w0ydw5vGx4RVhSTLeHzOyLRha2pePwV8p4ASv98fFjVJ944QgnmBApLYB389p0OSeFiNvlwCaok4g+9CT876jZSYmdyAFRcJWt95GywV6LwxJSNq0Tf5+n8iuMKuWcqBCbErNhvraeOgp3kHEzJRSd73qAwTvjcC8vrNSlzWbCEk/1Zawj3a3XYQ6F6K1LatAq/Xelh7/vzuNLyQmIXn8qfLmxFRmDbdy1h22xOyyVfnWK5h0xERBqaLJGJb0c7btXEgkquwJzylyda5WAxBPpZEwROdg5m0F6RjkDtBybzCkYd/g0q+h6wiLn0ppZrpX/hhOGdVyYew==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	lM097CVslItfeFmQb+jj4TeneOOjCYPm+OTjSpHmCXokTLDtua6m+1DFYGjQKMdo8xQlOGS82+z3GHHLZat5rwzjDyoB/XpJ7SOBxmXfRN/2k/93e/fRZSDUdeP/HBoSr9VpJGGWGZCD4o6pcGV8bIf4+TpWAaMnS2rh3S8553ovQQT/7QkXqj4Th3p4AFM0I4+uopSDwibjWyMuRgbKElSN0raWPEcELJRxn0kzWm+mWfXcuHlRaEEKn6PAKmwp7TmkHxhSMUsMOSxckj56rFUyvkl+su7wfCHt0cUcjHCPnrDq7Y2ZI6HPVes36Qk7cQeXJwO8V0UGcfjaLClDEnvqkVjGHDLQRZ3aDKm+LlNQpt6m8eB5rmt2KCOvKIXq1qfjbcY2fn+S2YeyfX9pzTlwnIuXLWZ5+uqei0atRHk5U6q5tiwZA5c3Gfn+/VFMFPJkfq13jDlNgUDglmOXrOXe4M7TqxUNlFOHJ59ez24GfRqs2KXlNNziqKvTZYS81LEpywdpwitq0OorlNx2Bb6jkgIDkw8Hp7rlG2xmaJZrJvmpGEl3zfY3BuXvNEPj7DPfC8BSmKosvEY/PtaBcoGuPVRxLrO1PoYHs/QtTPTyad453zAqdIDBasZ/VR2C
+X-OriginatorOrg: witekio.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f51d2346-ea5f-4290-ae75-08deb666086b
+X-MS-Exchange-CrossTenant-AuthSource: MRWP192MB3504.EURP192.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 11:50:47.8336
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 317e086a-301a-49af-9ea4-48a1c458b903
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9ruWdsHexfKkOI8M9YcLvFXd0sIgYPVi9cUBjb3lRTD1r7Tq087vao27Zqc5M1VKx84bGF1L0q2lJ4haV8a7Nw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P192MB2818
+X-cloud-security-sender: hsimeliere@witekio.com
+X-cloud-security-recipient: openembedded-devel@lists.openembedded.org
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for: hsimeliere.opensource@witekio.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on mx-gate07-hz12 with 4gL8xk4NTmz1b0vD
+X-cloud-security-connect: mail-northeuropeazon11021118.outbound.protection.outlook.com[52.101.65.118], TLS=1, IP=52.101.65.118
+X-cloud-security-Digest: 624e95421396aa5b1021dcde5cc75a0f
+X-cloud-security: scantime:1.364
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 11:34:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127108
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 11:51:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127109
 
-Building mariadb for ARMv8.3-A and later, fails with:
+From: "Hugo SIMELIERE (Schneider Electric)" <hsimeliere.opensource@witekio.com>
 
-Assembler messages:
-{standard input}:169: Error: selected processor does not support `retaa'
-{standard input}:271: Error: selected processor does not support `retaa'
+Pick patch from [1] as 3.9X upstream mirror backport of [2] mentioned in Debian report in [3].
 
-It happens because the pmem_cvap() funciton manually inserts the `.arch
-armv8-2.a` clause, making GAS believe that retaa instruction (inserted
-by GCC) is invalid. Bump the manually inserted clause to armv8.3-a, to
-prevent GAS from choking on the retaa instructions.
+[1] https://github.com/nss-dev/nss/commit/870d3b013e6b39540d14e67b3db89da5a96381bf
+[2] https://hg-edge.mozilla.org/projects/nss/rev/245385e16fa6
+[3] https://security-tracker.debian.org/tracker/CVE-2026-2781
 
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Hugo SIMELIERE (Schneider Electric) <hsimeliere.opensource@witekio.com>
+Reviewed-by: Bruno VERNAY <bruno.vernay@se.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
- ...-sync-cache.cc-bump-ARMv8-arch-to-AR.patch | 35 +++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-storage-innobase-sync-cache.cc-bump-ARMv8-arch-to-AR.patch
+ .../nss/nss/CVE-2026-2781.patch               | 36 +++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.98.bb       |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2026-2781.patch
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 9470184d3d43..456c1e1354e8 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -25,6 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://riscv32.patch \
-            file://0001-support-reproducible-builds.patch \
-            file://0001-storage-mroonga-CMakeLists.txt-fix-reproducible-buil.patch \
-+           file://0001-storage-innobase-sync-cache.cc-bump-ARMv8-arch-to-AR.patch \
-           "
- SRC_URI[sha256sum] = "14783ddc5edd966ff05aa0efd5ed6d3d369ed5b9e4080a448f00f87a9f0a4a6b"
- 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-storage-innobase-sync-cache.cc-bump-ARMv8-arch-to-AR.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-storage-innobase-sync-cache.cc-bump-ARMv8-arch-to-AR.patch
+diff --git a/meta-oe/recipes-support/nss/nss/CVE-2026-2781.patch b/meta-oe/recipes-support/nss/nss/CVE-2026-2781.patch
 new file mode 100644
-index 000000000000..dfb6c7795407
+index 0000000000..8c1798ec04
 --- /dev/null
-+++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-storage-innobase-sync-cache.cc-bump-ARMv8-arch-to-AR.patch
-@@ -0,0 +1,35 @@
-+From ac6553ff3a21eb048f623081b7b7e31e43d38d77 Mon Sep 17 00:00:00 2001
-+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-+Date: Wed, 20 May 2026 14:14:02 +0300
-+Subject: [PATCH] storage/innobase/sync/cache.cc: bump ARMv8 arch to ARMv8.3
++++ b/meta-oe/recipes-support/nss/nss/CVE-2026-2781.patch
+@@ -0,0 +1,36 @@
++From fc8a94cca3150a59075ae3fba82ae9758df0b187 Mon Sep 17 00:00:00 2001
++From: John Schanck <jschanck@mozilla.com>
++Date: Wed, 11 Feb 2026 17:21:49 +0000
++Subject: [PATCH] Bug 2009552 - avoid integer overflow in platform-independent
++ ghash. r=#nss-reviewers
 +
-+Building for ARMv8.3-A and later, fails with:
++Differential Revision: https://phabricator.services.mozilla.com/D278681
 +
-+Assembler messages:
-+{standard input}:169: Error: selected processor does not support `retaa'
-+{standard input}:271: Error: selected processor does not support `retaa'
++--HG--
++branch : NSS_3_90_BRANCH
 +
-+It happens because the pmem_cvap() funciton manually inserts the `.arch
-+armv8-2.a` clause, making GAS believe that retaa instruction (inserted
-+by GCC) is invalid. Bump the manually inserted clause to armv8.3-a, to
-+prevent GAS from choking on the retaa instructions.
++CVE: CVE-2026-2781
++Upstream-Status: Backport [https://github.com/nss-dev/nss/commit/870d3b013e6b39540d14e67b3db89da5a96381bf]
 +
-+Upstream-Status: Inappropriate [upstream ticket https://github.com/MariaDB/server/pull/3677#issuecomment-4497763227]
-+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
++(cherry picked from commit 870d3b013e6b39540d14e67b3db89da5a96381bf)
++Signed-off-by: Hugo SIMELIERE (Schneider Electric) <hsimeliere.opensource@witekio.com>
 +---
-+ storage/innobase/sync/cache.cc | 2 +-
++ nss/lib/freebl/gcm.c | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/storage/innobase/sync/cache.cc b/storage/innobase/sync/cache.cc
-+index c5e67709e22b..104a45cee9ee 100644
-+--- a/storage/innobase/sync/cache.cc
-++++ b/storage/innobase/sync/cache.cc
-+@@ -85,7 +85,7 @@ static void pmem_cvap(const void* buf, size_t size)
-+ #if defined __ARM_ARCH && __ARM_ARCH == 9
-+     __asm__ __volatile__(".arch armv9.4-a\n dc cvap, %0" :: "r"(u) : "memory");
-+ #else
-+-    __asm__ __volatile__(".arch armv8.2-a\n dc cvap, %0" :: "r"(u) : "memory");
-++    __asm__ __volatile__(".arch armv8.3-a\n dc cvap, %0" :: "r"(u) : "memory");
-+ #endif
++diff --git a/nss/lib/freebl/gcm.c b/nss/lib/freebl/gcm.c
++index 9ee7fc89b..d1410a9ad 100644
++--- a/nss/lib/freebl/gcm.c
+++++ b/nss/lib/freebl/gcm.c
++@@ -355,7 +355,7 @@ gcmHash_Update(gcmHashContext *ghash, const unsigned char *buf,
++     unsigned int blocks;
++     SECStatus rv;
 + 
-+   __asm__ __volatile__("dmb ishst" ::: "memory");
++-    ghash->cLen += (len * PR_BITS_PER_BYTE);
+++    ghash->cLen += ((uint64_t)len * PR_BITS_PER_BYTE);
++ 
++     /* first deal with the current buffer of data. Try to fill it out so
++      * we can hash it */
++-- 
++2.43.0
++
+diff --git a/meta-oe/recipes-support/nss/nss_3.98.bb b/meta-oe/recipes-support/nss/nss_3.98.bb
+index 9218b4d30b..0937b28bd5 100644
+--- a/meta-oe/recipes-support/nss/nss_3.98.bb
++++ b/meta-oe/recipes-support/nss/nss_3.98.bb
+@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/security/nss/releases/${VERSION_DIR}/src/$
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
+            file://CVE-2024-6602.patch \
+            file://CVE-2024-6609.patch \
++           file://CVE-2026-2781.patch \
+            "
+ SRC_URI[sha256sum] = "f549cc33d35c0601674bfacf7c6ad683c187595eb4125b423238d3e9aa4209ce"
+ 
 -- 
-2.47.3
+2.43.0
 
 
