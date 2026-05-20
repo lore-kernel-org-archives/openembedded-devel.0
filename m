@@ -1,138 +1,264 @@
-Return-Path: <david.partain@est.tech>
+Return-Path: <tgaige.opensource@witekio.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD7DCD4F54
-	for <webhook@archiver.kernel.org>; Wed, 20 May 2026 12:31:50 +0000 (UTC)
-Received: from de-smtp-delivery-123.mimecast.com (de-smtp-delivery-123.mimecast.com [194.104.111.123])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.11005.1779280220199385706
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 300A2CD4F3C
+	for <webhook@archiver.kernel.org>; Wed, 20 May 2026 14:25:01 +0000 (UTC)
+Received: from mx-relay26-hz12-if1.hornetsecurity.com (mx-relay26-hz12-if1.hornetsecurity.com [94.100.139.226])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.13452.1779287095951806304
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 05:30:20 -0700
+ Wed, 20 May 2026 07:24:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@non.se.com header.s=mimecast20240503 header.b=JJuzYEMw;
- spf=pass (domain: non.se.com, ip: 194.104.111.123, mailfrom: felix.piedallu@non.se.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=non.se.com;
-	s=mimecast20240503; t=1779280218;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=atG5hBJ1OM4FTTUh4pWOYthkfqxWISLPtZRPV4eyrG4=;
-	b=JJuzYEMwG6t6yBHxdHhCUkdn/p23VEW81M8QKb5zv8WqL6cx/PMDBZRq6/z0fHoo0Sg2sA
-	YLrsLvxCAOxD7az8tqS7e3Hi3/O99e33KOipwEPQuG1ewRPnYkkdJYB64oyXLspng2XzRP
-	zU6V/MsHUYGBspBP7YuUx3YVlWCKekGIVfrY44ZJ1iwgsIAnlZRqcprGilaPktrYZGF4Ci
-	8BCC8EeZ1wP6Zgaqrmy/+OsH3IpvJ6MW7f1Z9xSVExZpVqBmo/trrmUUbPzJRqv/LGsAti
-	MbefIgmeAN9rVtPGcuygOpchUvdDQV5/zPdD5Ns93sVICvUDGbL3kpvV0Td4hg==
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazon11010012.outbound.protection.outlook.com
- [52.101.84.12]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- de-mta-2-d2OKVjegOKuFI8E3UEYtow-1; Wed, 20 May 2026 14:24:05 +0200
-X-MC-Unique: d2OKVjegOKuFI8E3UEYtow-1
-X-Mimecast-MFC-AGG-ID: d2OKVjegOKuFI8E3UEYtow_1779279845
-Received: from GVXPR04MB10432.eurprd04.prod.outlook.com
- (2603:10a6:150:1e0::17) by AS8PR04MB8962.eurprd04.prod.outlook.com
- (2603:10a6:20b:42d::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.19; Wed, 20 May
- 2026 12:24:03 +0000
-Received: from GVXPR04MB10432.eurprd04.prod.outlook.com
- ([fe80::b697:7b78:fe36:bc1b]) by GVXPR04MB10432.eurprd04.prod.outlook.com
- ([fe80::b697:7b78:fe36:bc1b%4]) with mapi id 15.21.0025.023; Wed, 20 May 2026
- 12:24:03 +0000
-From: Felix Piedallu <felix.piedallu@non.se.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] lvm2: Do not install sbin/dmvdostats to sysroot
-Thread-Topic: [meta-oe][PATCH] lvm2: Do not install sbin/dmvdostats to sysroot
-Thread-Index: AQHc6FNkV7syS5sk/UumDjGU2lhRPg==
-Date: Wed, 20 May 2026 12:24:03 +0000
-Message-ID: <GVXPR04MB10432611A3D1366A242AC4037BE012@GVXPR04MB10432.eurprd04.prod.outlook.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_Enabled=True;MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_SiteId=6e51e1ad-c54b-4b39-b598-0ffe9ae68fef;MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_SetDate=2026-05-20T12:24:03.283Z;MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_Name=General;MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_ContentBits=1;MSIP_Label_57443d00-af18-408c-9335-47b5de3ec9b9_Method=Standard
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GVXPR04MB10432:EE_|AS8PR04MB8962:EE_
-x-ms-office365-filtering-correlation-id: b6af95de-c7fd-463c-fa9f-08deb66aae0c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|1800799024|376014|366016|11063799006|38070700021|56012099003|18002099003
-x-microsoft-antispam-message-info: TnDGkwPO2Ggf8AiCeQf5RS7sjb1a+hxfkh2f+RiLneI1u3ToNwztZMClOeYtQeAD5+VOF/5PcEM4GRTxog2rmMsT3OIG3fBd2MHse8bWvthETJIG8kCnIPXDdx+xSGwpiomZvOTz1wpJHqEbRCHubUTv0lwOgIff1w2kBdi4up8t64K9bP5z4Lr+v3CQkwh9YE2VBRH4fWbhfwqPvzRlBi8ZAFc9yH91AxeNPqhSkbpceVToBkKlTE+fWRLDvMxLYt1l4l+WVOJ+DLtokbhAdMdd7+Qw8yhxZulrldsUy/wQ2SyjSWzybBLsCIoYEjOyNPU7ExTdYRIp3SaQgbanE9CK5Q6Vvh99Ja/MhcJojh13HWQmaFiy7P2wrCREbauGD7RudxayZDucVPVECx+iveFjodGYm0d9Xqs3iOHVNgocFVVxIhDQNY05yN3I5mNGeOFiC4lKtUkDfYZJ376Agw8n+3DRegfv2Xs9EbAyENXRZ3KaCp/n97jmJ8YtoCs6BsDC+ZolQHPAraQRge155b9vZGP6D29txmsEQvLbrEGnbvmbkS7e/v5f5AHxah+w5Tx/289U+hDoUDDZ0/mWKlt9UcnH9G0banQUbBNavl09ZzRjk5u0m4PXITST2aq7+M9TT4E29fhLtdIVmobnzfZzubUwIqLOhL6xPxwxEUiICMQmHNCBQmPyPcmFAC1Aul9p+3WosxWJfNGnYS2x9+dWbEnMzE+4SZFEEvqdExQ5lfY2ZQ/ivn6QtEiFHa32
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR04MB10432.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(11063799006)(38070700021)(56012099003)(18002099003);DIR:OUT;SFP:1101
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?VZDkPfX0ZnD0Y0sTMaLxUFHi9HcvZDaF7tjnH7l1pyuA29CInpE1bMWM5J?=
- =?iso-8859-1?Q?HASr7ATP+zezfzDCCVJNXgr/4ql5AWAhQtk4t3ZOX1hEd/5bIyR/3aCUOr?=
- =?iso-8859-1?Q?tY1JvybUbB9fETohFr/B26QZ0mefCer7otKsfRIR2teOBKyXFxjY3okiP2?=
- =?iso-8859-1?Q?b7rZR50RbpMdAKUsmTcClCzdx+5Yl+sVP/TkGXLnlnWTWxDSKTrgE/Cjs9?=
- =?iso-8859-1?Q?I0vhPh30Adwyd7qlGW607V03w16HhFxEj+dx0Ck4T0o6HMdMdqxjDKi97i?=
- =?iso-8859-1?Q?mAQRWZBZ7fVP+TSe2BsZ3n5UdarLZgyb7SZcUU6GQD/80jJ6wNegQ1vrGZ?=
- =?iso-8859-1?Q?phRdEAMvc+11OFTB/zB8lIEheq6fQs9mj68O4EqhcWDsYVzjHum3+796WS?=
- =?iso-8859-1?Q?n2k0bHZijbOE4+TMkKDQpQVnpxW1AT3yBICvYaq3Ma872Tj/GKGMP7NhSm?=
- =?iso-8859-1?Q?geH6C1X9JvwRjUelAq3P3MuvKl+cK0YXZUu2sz73LdJMLfZ3EO1ZN22Bg3?=
- =?iso-8859-1?Q?SDsdrpniCz+FHKBZc74jpkbf8hqtfhOxzBsYFIjS8ANCylHviAdI3M5GjJ?=
- =?iso-8859-1?Q?XcEpI0JOnUyU4XHMNqKMXO6cIT3JjIKIMEeXO1dhvDqSJHjOr2MNNQXepX?=
- =?iso-8859-1?Q?BGkWPWoVJpb6YTQxLkzuaMytPlb7ohRiBEWdLtosMgG8QIG/tEP9ZnlXz8?=
- =?iso-8859-1?Q?/6kgAeZAu0+s8+sSqEBfG3rP42BdOB3ggYx+QCtkVbPX51/devCvFIOPgk?=
- =?iso-8859-1?Q?4vH2B6Otk4DxSxzGhI38H/LppPXkCPgBuMRNPuM0vyOmYrzJ75NWkPlS6m?=
- =?iso-8859-1?Q?kBwpf0bspH8J7kPTwHn6eelazVNzsyZpRTfK+ZFVZTXULUPlO8SV/Qp3yV?=
- =?iso-8859-1?Q?bsU8gV4j4TFS6utaWcu9kVlg69NNqD1wPf1jIzysx74FYhgmLe6nMb7ONu?=
- =?iso-8859-1?Q?OrazbEks3NbfWtUGfvPX4mVryHxM0pfXM1WOq7N+FToeIDmNTKQCiFiYoC?=
- =?iso-8859-1?Q?3OokN+rcFVnabcFCjLRl3eC5f5J5NM3kR/OlrRlvhRh421Jm+444r2pPjY?=
- =?iso-8859-1?Q?gRb7toOPcmswBAfzhGuzKYZbHmcpagPJb/M5U03rt0QKnevg2VPKaULac0?=
- =?iso-8859-1?Q?ZDuoKAO3G8NqO34QkDhI5fa/GT5c/4FNSddIAskFSHVtB03VBlc6PRT93s?=
- =?iso-8859-1?Q?gUZzVNpKJ8Iq392zWZO5UdRLiW2LNfUI3pGHQ1IXmwc4vRJASgvro4453C?=
- =?iso-8859-1?Q?6+BxPyS7sdpq4NWLjdfGQG2ZcRvgiyM+rVoYIRIzT98xqZhhHLej1q086h?=
- =?iso-8859-1?Q?eTiVtKBwq8u2yi37JU8l0mOZrF5Iga7ayVAoaA6AAlVLXsG+2SiBIyE5VQ?=
- =?iso-8859-1?Q?ZiJBK+pZbxaXJRG61XKt3+K/D+JQ+3HmOp9SEguBLeYQVtxIQqDpc1iIn6?=
- =?iso-8859-1?Q?L/wymxyxbIyfoFCvjpB6kFO3svj+5Py49A14vLzf9pHXUQQ1Ca4rqI5pGi?=
- =?iso-8859-1?Q?0qpSXFMXb2XHzxoNlfgyWCT6M+DN0ZuwbUN08wumHLcjDBXSGlkIbLnTyW?=
- =?iso-8859-1?Q?Sm6pL6JNWxqSoFwrvXPRnb2PaoyVzbdeF0HyA6XKXpobS7F3xEFsEpLchO?=
- =?iso-8859-1?Q?ueuWdy+CKzJ8RabOk3mEO4NDzms1jSep0OYeYJu1HcEnpkb23LW9byb67Y?=
- =?iso-8859-1?Q?eDhxcF8fAMgAUm6a+72lP7AG4Db7w820W5WC5tvqbxMbr3JrViu7Cwiidi?=
- =?iso-8859-1?Q?WuRIiEOha8tB7OIck0bD145exBfMLWtBqAgKp/sf2qN0+9?=
+ dkim=pass header.i=@witekio.com header.s=selector1 header.b=Tjye7Tyk;
+ spf=permerror, err=parse error for token &{10 18 spf.hornetsecurity.com}: limit exceeded (domain: witekio.com, ip: 94.100.139.226, mailfrom: tgaige@witekio.com)
+ARC-Authentication-Results: i=2; mx-gate26-hz12.hornetsecurity.com 1;
+ spf=pass reason=mailfrom (ip=52.101.65.127, headerfrom=witekio.com)
+ smtp.mailfrom=witekio.com
+ smtp.helo=du2pr03cu002.outbound.protection.outlook.com; dkim=pass
+ header.d=witekio.com header.s=selector1 header.a=rsa-sha256; dmarc=pass
+ header.from=witekio.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=dcxvMQX4+U1SebB1nNai7RD7hZ8hs33WoxeL8bkFt7g=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=2; s=hse1;
+ t=1779287093;
+ b=JhDiL+FCs1VQ9NF7PmXTsSmLcjUVZyPgE8iPtAywTnU5RdQilDT/RPPApZKXVygdy/ZkAkVO
+ VNgeNd+aqtdd7EcVwR3kCQNNQ2CytzW2D0C0UfkQC49N2wFkQsL4fTALI8hrvnoQ1Rad0MMNfYJ
+ oHjo3JjnpdxCrMxrhpRITfyHLsZ+1u/KTRwNJ6VS1ZxZ3MJuaOz1QOiQxePstCTOz0+0Eunn95L
+ sFqu2UHMecEVYPzZr1dVWjXdH8wk4euR9r/iUjrXn63V10MNeAiILi5e/+tQVK+gEAu8VIA9j7T
+ Uwl7uvW1AjAszkTGK7PJkszJxImMU3Zos9MSic34gLvlQ==
+ARC-Seal: a=rsa-sha256; cv=pass; d=hornetsecurity.com; i=2; s=hse1;
+ t=1779287093;
+ b=gJwFcSlIIKXBLO1LWCOtBAEBZgG2X/1ARzOZRVnwpYj7gGTN8Eyweb71ckAmKZMwHvB5w9+T
+ m/6prZYNdCxGYOvUQCmXjEcViCtnjTR12Pe2JSRQboIKni03kOQOvtfvCfGKtV4jwOxs4CXoHW4
+ LPPvuZvb1xuvxCAR/iqTmGeAMLLoXTCVIF96GprD39a5n89xJ0cYpajFqguhOlLizgchA1a4k14
+ 5PqGrBdktpfG1w5dQiVcIv9PEMQfjBmGxTJbiM9i1ur3OcM2gbSerJ5pQS62U4w6PvqWrHeejnq
+ v1J8PTUQsgu756rIa89Z1+JJOhYuXK6SubF7CjQvQLl0Q==
+Received: from mail-northeuropeazon11021127.outbound.protection.outlook.com ([52.101.65.127]) by mx-gate26-hz12;
+ Wed, 20 May 2026 16:24:53 +0200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yaBuLo+OnB8zY6L0YbeeZheFybTNjApqArtSpETXJzEDgrXXX+hkywUREpOGxcZnNRaw8Hl8tUGYDlA7480QR4J2CEoaJPiw6jMaDxBal6sDAR4Q6fJ0W/jjn5CbJv98qx8cgjqN03p7riKDk0JHLyW9rbi+U8M+7BVz0Wq9Rye0i8tOzj5N6QzjpmECwGREt8xvEcIoNMJs0+oBId6svMkxQeV77N43bHiAVt+BBeim/rlifCUeNptY48kaIpwIan26m0HwmvD5XxLW7o104VlYBlg6DuLQOGaMcOfAttnMF/ZmrJa0rAbBrua29GX7XVxVIW1IBg3j9u/DacyLJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dcxvMQX4+U1SebB1nNai7RD7hZ8hs33WoxeL8bkFt7g=;
+ b=hGj+xS3Eo1/FRQJKqKpLyLu5Gv9ZFOC8w+7QeRarkKitPtUzuHXAW0KSH6KogqBNlfNB6o4H2yiVmAShnKROmc9pcX/h4Lw6cs1yfQ3nkVi6Gs0xJEH12KYhLVpsj0TstaFdEIrEga0UBWeIllaYMiE08BhYZYrQna/0QsExMPkltc31oeNPlvMiTMHCDY3iuzMhlYLwKbzxL5MqWVbF0Tu7Pgv9GtO3tiL6jfjD0unbAXbduXJU76OGGHozfVXFIYOITTlcp1muxBsyvMVSbyHBJdhJpj9E58lfox6zweRtoYPvO/xrS1U63fwCRv5lA5t/Dqs1Lkw7eyLrYmDzCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=witekio.com; dmarc=pass action=none header.from=witekio.com;
+ dkim=pass header.d=witekio.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=witekio.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dcxvMQX4+U1SebB1nNai7RD7hZ8hs33WoxeL8bkFt7g=;
+ b=Tjye7Tyk9fM4Y4Qcvrh4kdzcUEnompE/YU2RdRAJxaTKV0Se3JqYjPkPCXrhZQXnbhhYLic5VgUq9kdi2nH3PQvsV3Y3H1xJ+Zczf1DykqqnkHhGjgVr/8ONl5VdQGFJ7y9ADN56IYNoWRPyp71gzTdBZJ4qP00Q3BXXhK2eJNdv3da7Mv0jw7nz7H46kv2AEN8+L99VPsdiKCpyInrZ1eIn+67Dnx+PzH+ds0Y2iJx9sS5dwFnMfIQV4No/Wz74Mba0ly6pxGstorqAz/EefpmRk2/CoglyKVDAltcBYa77Stb8f0afSOekqisyK+kK3EoHjsJEqyXcIiITrBwYYQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=witekio.com;
+Received: from AM9P192MB1396.EURP192.PROD.OUTLOOK.COM (2603:10a6:20b:3ad::23)
+ by PAWP192MB2388.EURP192.PROD.OUTLOOK.COM (2603:10a6:102:46f::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
+ 2026 14:24:46 +0000
+Received: from AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
+ ([fe80::25ed:86ef:4d24:3d38]) by AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
+ ([fe80::25ed:86ef:4d24:3d38%5]) with mapi id 15.21.0025.023; Wed, 20 May 2026
+ 14:24:46 +0000
+From: tgaige.opensource@witekio.com
+To: openembedded-devel@lists.openembedded.org
+Cc: hsimeliere.opensource@witekio.com,
+	"Theo Gaige (Schneider Electric)" <tgaige.opensource@witekio.com>,
+	Bruno Vernay <bruno.vernay@se.com>
+Subject: [meta-webserver][scarthgap][PATCH 1/4] nginx: patch CVE-2026-40701
+Date: Wed, 20 May 2026 16:24:35 +0200
+Message-ID: <20260520142438.2126939-1-tgaige.opensource@witekio.com>
+X-Mailer: git-send-email 2.43.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: ZR0P278CA0021.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1c::8) To AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:20b:3ad::23)
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: r2604sp8PhOaHFYd5Ml5MuAemFthvbl+NAH5vAR6y53VdKDoG5goAPOPwbUT+0apm40aUIxum0XLTrwGJN7B0hm2VYhxlkvC944sI/PJOQhYFdMI9Ex5zCFnOa/LPBEdquZzElZQZhneVzT0jff2QsLn67q2CiKf8te1hAvZSkzWFv7HOUKqBOl/UB0crhOq8vOD2tL8DO+eTgBYF0tI2cfGkWvXIOrJHwJ6tQ31ocvgGQdXFF8zGWVWq9RgR10rydwrDCFLVjn/1cneZBuAdHWycSYmxgNQ5SG/hH3hnkdtDNT0UfzYwvAL9111I3DJzv+ChA4NhDMhcgvmzdvvrA==
-X-OriginatorOrg: non.se.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9P192MB1396:EE_|PAWP192MB2388:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c7c92cf-544f-4acc-dcc4-08deb67b8b01
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230040|1800799024|52116014|376014|366016|13003099007|38350700014|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 
+	QlSsyApuD1dDKvmDj9w09dqDZPijEE5gtKbLAa3GPBu1/MkCV5thepn7i+gKCT8hizFfid6C6+TKJD8kSWr9I8G4ZGgKzwmdS0HfP1f/gxF8jcT/L+rNMoXyX4LedKyPVDExYsCfCBhJH3WkR6QeXTn/uhDQ+cx9kHwE0TIHIhOKA4KVo4FjAUNyH6ZVJxZcywDXFH79zOKW2oaMT6hYgl5JO0Z8V3kppboP0/DqJqGO1Uy4Ns6TyGWT77QBbyDpTN0x+WiJxjWYkOeUfviR2KJH35vNFnufG+rY38zMLRPrbtkgloNE52hpUVmRNHouykXczroYUrkxPKOXjyYsNrDuR0GQuTdPwf5UvgCP3JvRvtPCPEKj5qFjFCCycX2tFaazdPqSliS0O/5EmP84E+l/i8NfNoNS0ofmWM7jDhmOgf2tL3Mk5N0GTTbRDyXSOnS7YT8cN50UFnIAcmEWrtGVGKKHb2XMxRhHQHzDnRY1zjkhWtwQIm6tJw9Y7aLGHMiNFZZvymIak0Xoy4xZA+KUzgDcKqGYaxSjbymcdHNn+0nyEHFR25BTRMb61hO/+uprqBZSY4OZl2U0WCujIhyEJ1e9L/COD+OcFuhbLwSVVlsOUfh08jJBxEMfLxEkIGAm2RSdoQgpghd9p7/bZqK0tGlaehjmJZveBFFPllffWoq55WE4UkP9HX/gg0xPAFc+bWm5nXGhbjaeFHw9VNOQd/AStnsd9IVdCcciRDuOiAgqpna+bamLIGBZ7bPO
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9P192MB1396.EURP192.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(52116014)(376014)(366016)(13003099007)(38350700014)(56012099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?L7j1IxB2+hi/82nznjOEUU6p7o80WWY4ahPwpKPSaZKCHJRQxVi69eNejVJ+?=
+ =?us-ascii?Q?twsqXpj+0RVj+FSpztbtqbN0dXUh1uUNfFDrzDfR95fcomxqVpSU8Fp7wBJO?=
+ =?us-ascii?Q?vJHP+qUU5skzjyRG15kCqg/R095DFkwoJwmiJP/eYkF8d7oYy1ncPnMOhfli?=
+ =?us-ascii?Q?eSmUVMf/hselC5FtgHrBdgua03L82WiPTAdZpDM7/Iz3vcHFcIIpGmk8bXpa?=
+ =?us-ascii?Q?6y33Y6wQm5k7PIoy74bNy7hfgEO5US0pzZC/E1n5BFJLiWuc3KPrgSUG8/hc?=
+ =?us-ascii?Q?dNzUIEoYbZ0LLG5m7+X7qSlu/arRx9jtiJ+iqZZBm+ivdT59VaDRtUJDejnj?=
+ =?us-ascii?Q?/o+BXJll4Kd9o1DWqWa6bv0XIukVzHi9bnKFIHPKn+nYzsVmMkBKdRpuYUIV?=
+ =?us-ascii?Q?kb2HoENPa0WW0USjAMPl0jC9XgTsWp4fuSVvrnsF8Sae541i5sE05jRR1LUo?=
+ =?us-ascii?Q?YhyljYY32O0/vS5vUHfVvOxv1hBpLC9R2w8huA/Hmo0wlpZqKxoVZ4Bt0DMV?=
+ =?us-ascii?Q?Z/acU5CnoKk9HogXWwBOVrk+2CmHrNOlRe6iojS6VDoT4459SeUirJ6XxEY6?=
+ =?us-ascii?Q?DY59qk9PrnDHL1zY+4w8txDxapo43bM01HnuEAcLGRx0/aaZonNxUvAgu+PS?=
+ =?us-ascii?Q?9h4JjPLzFpXYk+LHHyWBigo8m1QipeCf8JCsN15ghhsH22LTJMBZ5WPpQ0wc?=
+ =?us-ascii?Q?IJfs9RMt/iTKu1Hzl12RmNLDmq84rYdw8I0c5pLx3lRflY1vAdH9FY8WuoII?=
+ =?us-ascii?Q?SOegLslVygfZjwyHn93oJ3A0nNgF7j/4SGA2Vr6fAF862NHmkRr1WEV6rS39?=
+ =?us-ascii?Q?thR9+ulYlUWG5HBMEcVRIvKtEjbEgPtZIPz4EOSfET6CVVqwL78Kythj4002?=
+ =?us-ascii?Q?EgKA0+oXxFe+ZPV2yD9m1yBbv84mgyc/cBH/q5ctLGc/NYj5wEs4SubjrT+r?=
+ =?us-ascii?Q?k77txFo9QOoNSdP289IAIanG7TAVcSPRLEKls+tqiItTe+j++Z5fEDV0x+g3?=
+ =?us-ascii?Q?zrdLooPW+NcsAJQ1lNEZP02ZK1M+6UwUKvZ4hvlznuQ7EjoZlWXq22TIonD4?=
+ =?us-ascii?Q?jLOKlahpTDVV/9agdewMwnbYfS9fG2LCJ+Qsa67mqBT8b3X+VECkbch7T0Io?=
+ =?us-ascii?Q?sxopSgZkBvnjUD3nKqkA+OshZsK7SMvhoTgb8kDEZPwxF73RrP5f46ZhPvWT?=
+ =?us-ascii?Q?wzOojCmGfMKJFQzdi/NA0Q4dnoSrIatuR1t1a94vdrMkR12r9W+CuZk1QZrN?=
+ =?us-ascii?Q?BVCb9/5vFG0xWxYhFNcyINcfAxQpn5OU/d5tC1QW1zimOrhdyFSr2K8ukF7T?=
+ =?us-ascii?Q?IOwXWgUZcynUqLR7fzS7D8JzmSpANa10wUqCqdho/v6S4sxpdYbLszvxRaDY?=
+ =?us-ascii?Q?yvAaMI716w27s5w9Ql0lVQuuEXuOr1ZT4UKp3zV/R2Xfzn7iJn91naSdIGSj?=
+ =?us-ascii?Q?Pzty7FxfT3rQPaTOvzwHMDoAOpLWjCOLvno5n+HnF8dTVIFS1Ie2RJj/MeYI?=
+ =?us-ascii?Q?WIkTxblBRNsUzfIRFvvlKW3n6a6TYD/z5Q2SsQTszbP+GCUUvmSvb8Ic0IDj?=
+ =?us-ascii?Q?vtJ1QdX1uYat/YirLo+nyC3DcyrQLlcUSIIHzIwCd2WMYwImBFQgE7sfoCvB?=
+ =?us-ascii?Q?L6KwmX8BiCCDSKOgze9Djzy1tlCgMeVuEoee7NkeNyQd3mfN066if85rQ6Ug?=
+ =?us-ascii?Q?g576YD+83/5c+gdDMhHs4xPJpSLauKIjrKrwCNpkW18ZDr9vcvd1XYnNUg6C?=
+ =?us-ascii?Q?HLta4r/olw=3D=3D?=
+X-Exchange-RoutingPolicyChecked: 
+	Si4cVU7L7jw9YTHQntEmXi0wY4UPJOBVWFM1bgNMlJULG1TWMEJm6is7Lv/K8+fc7Rg3/w6C1r3aPWN336tt/rX+Hc7oGtdaoN5zlsqkSWx6AfNIcBQWslIspHdPOWfCJypfGYVC8rKCiyQrhmWRYWq4DRMlkD5j8mXaW/LcbMxa3k8fpvpBrt0XEXobDrhX0UfI/gCJ58+SHSWHDvmsqK+YxJ9n4LFpij4+yd24X2pKSE2Kwk3kvvNTV6LcTkiy1JADoNiaKswS0vXfb+KUBemBdG0NY1oskRaXbB19s6r3ktZORXnHJtNreUnPiFic1ViVzMKi0F5NXN815hT9Hg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	YMdaIo0OJhCN1dTCT3M7kC8BfbHS7Quj7QC7/DUqDy8o76Geks1F61qRvUQHI1YtRd4NaX6uaBPiPHMaOTfoD5w8QwFLNmeW1mlOKbS5/VNRWwqA1BGAAp4RmdC3Awy65Eqoxed1qeFB+jgBENxPDtxt/1569jUiM8i8EphW9y+vZ+0XWsbxQVkWzmYArrj+NxEM/ZWnH+RlQTX603IJnmJ9y3vJ7AndoZ2FMKLdsXcXfQ7b9U4S3OHgzl4DEQw0iIQGEP7WZz7nNZUEdpm9NICUlL5dnUXR2GiRMxpSwxVcxBwJeF+A5NzuD9N8G4bRl8T1d+M9dRv5EFnTSoclKmtJ+6sTAu2hipYgCZzpkjUbLPhZnGFrW84F1T2Bxh1oeZ8s3gCbMSn3aQX3uqVLpLS93b5UTJ2puxhP2TQ5eUsxnhelEj3IZ2WNMsZ+D4NrW0QI/0NzrS8/gfx2uKjA6FU+Se6vYUQRaIdTnPsglVARD35o7UfD+5LP+rIk9TB6VRTcDyzXrxvIVnGbrufOolAhYpYGrbpZStsFp3gZfCm9g72cqbPgnsNj43lelIkNemVZCtCHZv7xGCTHAi6WaKQshm12JYtnRQNXeO5tzTI3uhEI0UZ9bbCJeQuyIpgD
+X-OriginatorOrg: witekio.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c7c92cf-544f-4acc-dcc4-08deb67b8b01
+X-MS-Exchange-CrossTenant-AuthSource: AM9P192MB1396.EURP192.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB10432.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6af95de-c7fd-463c-fa9f-08deb66aae0c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 May 2026 12:24:03.4973
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 14:24:46.4176
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 6e51e1ad-c54b-4b39-b598-0ffe9ae68fef
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: RnBVzu9EFL7IJ6vLzwMGayx4udq+EDc6UJjQHOQ0hdJNHy3vg1NsEujuQA6r45wBPmuCNZj6ddaeJuF+2GIeOQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8962
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: h308JyGaU11g-SbMntF1MXW6cR1FQNl2ModAYWAQUXk_1779279845
-X-Mimecast-Originator: non.se.com
-Content-Language: fr-FR
-Content-Type: text/plain; charset=WINDOWS-1252
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 317e086a-301a-49af-9ea4-48a1c458b903
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mPaMcxdrIshbe2voLYiy7K0ELpEzAmDuRz8FZ/UjMo+h4qQ6UvJoLE2mdFe1G0nWSQTMmwsGMYX5OWWNjL+b+w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWP192MB2388
+X-cloud-security-sender: tgaige@witekio.com
+X-cloud-security-recipient: openembedded-devel@lists.openembedded.org
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for: tgaige.opensource@witekio.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on mx-gate26-hz12 with 4gLDMP2KS2z1g3dN
+X-cloud-security-connect: mail-northeuropeazon11021127.outbound.protection.outlook.com[52.101.65.127], TLS=1, IP=52.101.65.127
+X-cloud-security-Digest: 7c87cb9dc62c55d1403ab723568188b8
+X-cloud-security: scantime:1.389
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 12:31:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127116
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 14:25:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127117
 
-Version 1.02.214 of lvm2 installs this executable as an alias=0Ato dmsetup =
-vdostats.=0A=0AThis conflicts with the executable installed by libdevmapper=
-.=0A=0ARemove this binary from the sysroot, just like dmsetup and dmstats.=
-=0A=0ASigned-off-by: F=E9lix Pi=E9dallu <felix.piedallu@non.se.com>=0A---=
-=0Alvm2-native now installs the binary dmvdostats. It is an=0Aalias to dmse=
-tup vdostats.=0A=0AThis conflicts with the same binary (or symlink) provide=
-d=0Aby libdevmapper.=0A=0AWe shall remove this binary from the sysroot just=
- like=0Admsetup and dmstats.=0A---=0A meta-oe/recipes-support/lvm2/lvm2.bb =
-| 1 +=0A 1 file changed, 1 insertion(+)=0A=0Adiff --git a/meta-oe/recipes-s=
-upport/lvm2/lvm2.bb b/meta-oe/recipes-support/lvm2/lvm2.bb=0Aindex 4bdf5f37=
-fb..d993d0a76b 100644=0A--- a/meta-oe/recipes-support/lvm2/lvm2.bb=0A+++ b/=
-meta-oe/recipes-support/lvm2/lvm2.bb=0A@@ -109,6 +109,7 @@ remove_libdevmap=
-per_sysroot_preprocess() {=0A     rm -f ${SYSROOT_DESTDIR}${libdir}/libdevm=
-apper.so* \=0A        ${SYSROOT_DESTDIR}${sbindir}/dmsetup \=0A        ${SY=
-SROOT_DESTDIR}${sbindir}/dmstats \=0A+       ${SYSROOT_DESTDIR}${sbindir}/d=
-mvdostats \=0A        ${SYSROOT_DESTDIR}${includedir}/libdevmapper.h \=0A  =
-      ${SYSROOT_DESTDIR}${libdir}/pkgconfig/devmapper.pc=0A }=0A=0A---=0Aba=
-se-commit: f8787b56f3d67142ab97cc4886afe31fac8b51bc=0Achange-id: 20260519-u=
-pstream-dmvdostats-d76f03e2c745=0A=0ABest regards,=0A--=0AF=E9lix Pi=E9dall=
-u <felix.piedallu@non.se.com>
+From: "Theo Gaige (Schneider Electric)" <tgaige.opensource@witekio.com>
+
+Backport patch [1] mentioned in [2].
+
+[1] https://github.com/nginx/nginx/commit/d2b8d47741820c9fb134c6731ecb40b21f3085b1
+
+[2] https://security-tracker.debian.org/tracker/CVE-2026-40701
+
+Signed-off-by: Theo Gaige (Schneider Electric) <tgaige.opensource@witekio.com>
+Reviewed-by: Bruno Vernay <bruno.vernay@se.com>
+---
+ .../nginx/nginx-1.24.0/CVE-2026-40701.patch   | 73 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.24.0.bb       |  1 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-40701.patch
+
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-40701.patch b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-40701.patch
+new file mode 100644
+index 0000000000..63bd7bd24e
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-40701.patch
+@@ -0,0 +1,73 @@
++From 7abc2a59d5d65bb981be7cababb029d60c995719 Mon Sep 17 00:00:00 2001
++From: Roman Arutyunyan <arut@nginx.com>
++Date: Tue, 21 Apr 2026 14:51:41 +0400
++Subject: [PATCH] OCSP: resolve cleanup on connection close
++
++Previously, when a client SSL connection was terminated (typically due to a
++timeout) while resolving an OCSP responder, the OCSP context was freed, but
++the resolve context was not.  This resulted in use-after-free on resolve
++completion.
++
++Reported by Leo Lin.
++
++CVE: CVE-2026-40701
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/d2b8d47741820c9fb134c6731ecb40b21f3085b1]
++Signed-off-by: Theo Gaige (Schneider Electric) <tgaige.opensource@witekio.com>
++---
++ src/event/ngx_event_openssl_stapling.c | 11 +++++++++++
++ 1 file changed, 11 insertions(+)
++
++diff --git a/src/event/ngx_event_openssl_stapling.c b/src/event/ngx_event_openssl_stapling.c
++index e3fa8c4..2aaf99b 100644
++--- a/src/event/ngx_event_openssl_stapling.c
+++++ b/src/event/ngx_event_openssl_stapling.c
++@@ -111,6 +111,7 @@ struct ngx_ssl_ocsp_ctx_s {
++ 
++     ngx_resolver_t              *resolver;
++     ngx_msec_t                   resolver_timeout;
+++    ngx_resolver_ctx_t          *resolve;
++ 
++     ngx_msec_t                   timeout;
++ 
++@@ -1303,6 +1304,10 @@ ngx_ssl_ocsp_done(ngx_ssl_ocsp_ctx_t *ctx)
++     ngx_log_debug0(NGX_LOG_DEBUG_EVENT, ctx->log, 0,
++                    "ssl ocsp done");
++ 
+++    if (ctx->resolve) {
+++        ngx_resolve_name_done(ctx->resolve);
+++    }
+++
++     if (ctx->peer.connection) {
++         ngx_close_connection(ctx->peer.connection);
++     }
++@@ -1395,7 +1400,10 @@ ngx_ssl_ocsp_request(ngx_ssl_ocsp_ctx_t *ctx)
++         resolve->data = ctx;
++         resolve->timeout = ctx->resolver_timeout;
++ 
+++        ctx->resolve = resolve;
+++
++         if (ngx_resolve_name(resolve) != NGX_OK) {
+++            ctx->resolve = NULL;
++             ngx_ssl_ocsp_error(ctx);
++             return;
++         }
++@@ -1484,6 +1492,7 @@ ngx_ssl_ocsp_resolve_handler(ngx_resolver_ctx_t *resolve)
++     }
++ 
++     ngx_resolve_name_done(resolve);
+++    ctx->resolve = NULL;
++ 
++     ngx_ssl_ocsp_connect(ctx);
++     return;
++@@ -1491,6 +1500,8 @@ ngx_ssl_ocsp_resolve_handler(ngx_resolver_ctx_t *resolve)
++ failed:
++ 
++     ngx_resolve_name_done(resolve);
+++    ctx->resolve = NULL;
+++
++     ngx_ssl_ocsp_error(ctx);
++ }
++ 
++-- 
++2.43.0
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+index b732e92b18..b4bb1ccc67 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+@@ -9,6 +9,7 @@ SRC_URI:append = " \
+                   file://CVE-2026-27654.patch \
+                   file://CVE-2026-28753.patch \
+                   file://CVE-2026-32647.patch \
++                  file://CVE-2026-40701.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+-- 
+2.43.0
 
 
