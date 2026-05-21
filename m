@@ -1,245 +1,163 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <adam.duskett@amarulasolutions.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1EB3CD5BAC
-	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 14:33:01 +0000 (UTC)
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.37893.1779373977292067394
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B528FCD5BAC
+	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 15:31:37 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.39421.1779377487814462135
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 May 2026 07:32:57 -0700
+ Thu, 21 May 2026 08:31:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=jPTzYgqU;
- spf=pass (domain: gmail.com, ip: 74.125.224.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-65c3ea2ebf7so7155086d50.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 07:32:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779373976; cv=none;
-        d=google.com; s=arc-20240605;
-        b=S7J36KG7kgT88EbwZKCqRrxj3ZTXR4sDwMw7Ej+l1JNBDr1tD/9lhOq203PQkv1wjp
-         cm9f9YEaYXcUVm3+Mbrya6PP/XvK30ZZkYTDMZ6qHGaooJX4sgVVWjyTC7t+G2J7YWZ8
-         OEv0VRpQmUSgkkslJO7kji/gGs+NFuk91Ppo7qX55Kxmw7UiTt4QYtFAks9yhxd4NFw+
-         b3yVo9Tgv1UndHzjrIe7Ze144kDhraFD+NCBdsoqlyojEemNIL6Ljj+MTD6wTS6ED34j
-         iTcScHdDevV4jyljrOjIwclVDq3F7LMF6XH1+/c+WE96cbOQqGsDfwZdUcfxZV4KhNzl
-         e4RQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=u5uJ8e416wnoxDqkLni5C9hetDZ8ussQTc6Ir1tSCkM=;
-        fh=xc7Pw1C2r64/D3IAczFTr6Vs+3vKL6I7LfJKgO2Lfwc=;
-        b=Zl+PNqVLqf8Tsi3eFT6YaDjUZfzr5QN5243p59ldg8VW7VJnpP3Cdb1KzPGwZ2iZDg
-         Hu8H4J/Av0FB7HVx8AUbrHA4DW7xGzGC/Jfnc436r2B0SfxRod60p1EhABQeTPyeDUwW
-         oqTB14Geh3VkcOS/rD6lZYDY7wk4VcWtHxlz61G6b12Mt6BOfKS3iSPecDnaNz0tTfQI
-         efjNc7if/XtHvCN3Y8++6mHS2Ybjf9KR5Pbk3VPWa0YsXIHnps9H4kyUD6C7E/Xwx2n1
-         U3O8+9XgJThv5zhfoNP8NvSGBxP3cMje5UEimVUJoItREbpor8+MDVtOCOjXKseUz417
-         sqyw==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dkim=pass header.i=@amarulasolutions.com header.s=google header.b=ehVH/S6J;
+ spf=pass (domain: amarulasolutions.com, ip: 209.85.218.44, mailfrom: adam.duskett@amarulasolutions.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-bcbf867a77eso81581766b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 08:31:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779373976; x=1779978776; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=u5uJ8e416wnoxDqkLni5C9hetDZ8ussQTc6Ir1tSCkM=;
-        b=jPTzYgqUtbhQ30402o7y7KPtA1D2cT3c885zPDxSaMaXEwUMf3EVDxir6ygKfpbNpz
-         fiE05whbvhFu9+YqhcvziY071vyl8aOChECg0Ro0u2grTlLZVv/aJKl0kpJQzoK8LzM/
-         R64+hriqggj0xi87YxvOpIwkXr/nHH2wirDQnVGPpa8ucIdtTGtqnfSN8JHv6OeJya3x
-         tH9EuBYzaf7Uqpg57oTg/w/jGtWw5zVVqPHdh7tusq+IUjHKfkbPTHuHYUqpRpztllbg
-         rS8RyLLLSxZfANWnlDhkRoI2pNt+NWrqJliCO3D89OlBKTUG//b3J+so4bS2U1D5Zwdt
-         FOGg==
+        d=amarulasolutions.com; s=google; t=1779377486; x=1779982286; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6VfIGaeoSbWwHbSzU0VkpwaQZnzB6Si31+pl0H+HRlk=;
+        b=ehVH/S6Jc/WClbS3WF/w3zrvWPUKrcmjLQUFkyn0f/hLiStqNYLd6kAv4Eq08vZSCN
+         Zi04kH0JRoq3gJK7b/p8QVLndSLsEXfHYyW8OtczlVBGLPeCkUzkpbq0xIt/tvuKjD3w
+         HuGX1IMtsdePXA16rkaJEPfYFTJhLsjzgOpjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779373976; x=1779978776;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1779377486; x=1779982286;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=u5uJ8e416wnoxDqkLni5C9hetDZ8ussQTc6Ir1tSCkM=;
-        b=ovsvRvK6hcwLAn7H6BCHu5KzgLLrv/CwaAQ2QsPS3l0rV6cf0Fkiaes79j2TnN+u4Z
-         cYn/Enevl9GnebSc70uaDj0atq6sz/h9m0WudiUxEgKBUt1IfqXyB1LpaZGShdiEsoz+
-         MJmDTVkOQB7nOujHm1Tmd/+nZOGwH822q9P2LMdCgEWwpTeOa55z7GKKVrcn/29B8T6o
-         bEf413UcuSqK9X2TKioJCu5EY94XOO4Bru7Q/leibMtNDv/oekKIDd67WEaNez7CFjI1
-         Jbkyxg7Z6GXNyJPWVkgz6RPq+/apcgQXQwpe4gRGQgRXEYRx4gE0dJThgOn2BwhrJD+8
-         WITw==
-X-Gm-Message-State: AOJu0Yzbs0cEChOkfzdxdRQzs5v6I+0/FM3fgIeF0jtpBfPiPSFF2oq+
-	zC19TUYkOgj9jGLcIpbz0bXGTM3Th8fW+AoF3xV09mKIqpZlSnJquw8naCAWHqObUHw9vKx22YZ
-	LQSEARfPrrFAQlgtFkMnchttYc5AJ9WE=
-X-Gm-Gg: Acq92OFm5Noo5aBjsdlSiOIHYVo3htlpv2v6mOusZZKQR2sZSkhSBUn6Vwn5ZKFmjfk
-	03k8h3VQ3QMhC3DJYzHDVKn/z5eksKlRAe/p/tMgdF+f8PJKvIFdIASGTAjEGJszWPIM9I1sgba
-	QGZXIwu7fNdDWltob5dVIQ0ua/mitegnqZ3SpNoRrXEMOwdsxdiXQkU4Aw2X2p9jcsrEkSpqfRv
-	oIjFN7cRCa8nrtSKclBufOHksFqp1LcvUhy4MFHSTbqFEB4F9beaqB6bwsltBblfYiEdLYMhGC/
-	gDY1l3/YQiku1i7RSn/ks7UFhBzjzHQ48KDMQxYC8rbyYsbbfqSeOIjfaC6IlLeop5qJZgdWtAL
-	NnaLlIX8L3A4CBcar6uxOgCUQy7mVa60Pm7JWs4VwqzJnE0AyksRagJzJcBx5PhuK4okaLd5x66
-	SgmRK8
-X-Received: by 2002:a05:690e:43db:b0:65e:3df3:1c75 with SMTP id
- 956f58d0204a3-65eae314a24mr1718699d50.46.1779373976348; Thu, 21 May 2026
- 07:32:56 -0700 (PDT)
+        bh=6VfIGaeoSbWwHbSzU0VkpwaQZnzB6Si31+pl0H+HRlk=;
+        b=nyz7m3VIpw2+CBUqmecW6KVLWX76T5Y7nj5txJixKENF6sLcC/Dc2xwyRevpHPdhrM
+         8JSTz2VANXHgoxmbeRbtBEUXCGKczUSglI+tZHHy7CqlMZz8O9JXn47/op8XAuuyEh42
+         7zqrvUsUnOu9beewTfnDeD2LItr5Z26r/0Ot/Vf9mLZgY5eQFTPgRepRxkoQCRE/Itkx
+         nMgYbDW0s7OeQgQSI6tBilKQSLpDDP8C7DwuACufFRTDpCNCGxoq7aRe3YyorE9+h6RX
+         lOtVte6MgHwa4uwpFVYi1zaAfLlrSTx28iLOSdX/DejCHDyNnIhYHUJ+wESCepED6qFG
+         1kBg==
+X-Gm-Message-State: AOJu0YwBdQdieSaBa1Sp61Gff5HDviQtE9uccYymg3tkGL5FWsEMBYXV
+	HZe1+M2z5qTBrAettYLpvX7AWbggaxen/O+0gzcWvDkm3Vdv3C+5Ut0/OEkbPA/nkFDLBkcIwqq
+	KbH58
+X-Gm-Gg: Acq92OH0KvAOBticFixS06LYzyq98rHkIsyhqpp5RZRG8E6sq5neS+7ykbaxyvRfIOe
+	Sx0nIy0VXF7WH5xRApHUesuf1HDY4Er0KM4a4dhkIM2fnNDcOnTjH8M21GMjMEV1/y0sK1YoN7j
+	FozzKSAGxbvwt03atSnKmAJDHcaomQxg/rYIFxEZHbFZEBqReN9u5kpQjutBio4An5fDhKAHPxK
+	3ctCwZFTk4gEhLkToxF7IME5adSr8zN2Qa9djFttzEmPWNpS7OmBu2wZxNOxDta+V/3d2aWAhGt
+	rU9QJwB1Z5B3Xj9MeK6ZPlrt+1BOPEZnctQRtNxPh75CLFeJf/xdkxgg3U+aEFhBHIyt7pR+cG5
+	jZvBa6ye4I8Veb211YCe7L5e4fxN6SSgIwi2StPiNlZ/lq6NYLpon8+d66P0IbHzn1fSaPsq+NE
+	6q0yBxZA1R6kC0VWv54RXIEwfDf75qJEyx20iXNSjIHqTeGdQgUtrnJqS0TJG8all2dqlZ9lX8Z
+	bx2eHEgkMqPy755N7VlDtY3dj1oGLld9tMuJDZapi1fEfpWCGMe3GJPNgZRp2Y+XfvuM9jH6Mvf
+	EYEp0mlL8k1VFQ2/tN8fRQ==
+X-Received: by 2002:a17:907:d1e:b0:ba3:3dd5:88de with SMTP id a640c23a62f3a-bdc14281fd2mr81262966b.5.1779377485946;
+        Thu, 21 May 2026 08:31:25 -0700 (PDT)
+Received: from adam.tail032493.ts.net (2001-1c00-8183-9900-dfb4-52e9-0b83-429b.cable.dynamic.v6.ziggo.nl. [2001:1c00:8183:9900:dfb4:52e9:b83:429b])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-bdc8aa03d78sm63786266b.44.2026.05.21.08.31.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 May 2026 08:31:25 -0700 (PDT)
+From: Adam Duskett <adam.duskett@amarulasolutions.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Adam Duskett <adam.duskett@amarulasolutions.com>
+Subject: [PATCH 1/1] [meta-oe] kmscon: fix zlib cross-compiling errors
+Date: Thu, 21 May 2026 17:31:23 +0200
+Message-ID: <20260521153123.2296946-1-adam.duskett@amarulasolutions.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-References: <20260519113921.655-1-wangmy@fujitsu.com> <20260519113921.655-18-wangmy@fujitsu.com>
-In-Reply-To: <20260519113921.655-18-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 21 May 2026 07:32:30 -0700
-X-Gm-Features: AVHnY4KDtd6ihbVTItsEMLNVi-G1IGuVOCKFnJQFt2eFegauNtjNUPOJS3Nbda0
-Message-ID: <CAMKF1sqjiukbxN0e9iNDztsGU_QOYK4A4N=TBuFJ9WLU7H7LvA@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH 18/38] python3-ldap: upgrade 3.4.5 -> 3.4.6
-To: wangmy@fujitsu.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c86f59065254c9ff"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 14:33:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127135
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 15:31:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127136
 
---000000000000c86f59065254c9ff
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+zlib compression was introduced in version 9.3.3. However, when
+cross-compiling kmscon for an architecture other than x86_64, the
+genunifont executable tries to use the build-systems zlib instead
+of the hosts zlib.
 
-This fails to fetch the new tarball. Meanwhile 3.6.7 has been released. I
-would suggest to go for 3.6.7 and submit a v2.
+This leads to the following error during compiling:
+libz.so: error adding symbols: file in wrong format
 
-On Tue, May 19, 2026 at 4:40=E2=80=AFAM wangmy via lists.openembedded.org <=
-wangmy=3D
-fujitsu.com@lists.openembedded.org> wrote:
+Fix this by adding a new native zlib dependency specifically for the
+genunifont executable.
 
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> - attrlist parameter is now properly checked before use, avoiding memory
->   errors due to type mismatches
-> - Fixed errors with requestName/requestValue in extop.dds
-> - ldif and ldap.schema modules now actively close sockets as they're
->   finished with them
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../python/{python3-ldap_3.4.5.bb =3D> python3-ldap_3.4.6.bb}     | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-networking/python/{python3-ldap_3.4.5.bb =3D>
-> python3-ldap_3.4.6.bb} (91%)
->
-> diff --git a/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-> b/meta-python/recipes-networking/python/python3-ldap_3.4.6.bb
-> similarity index 91%
-> rename from meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-> rename to meta-python/recipes-networking/python/python3-ldap_3.4.6.bb
-> index 5a176b5208..3c56dea31d 100644
-> --- a/meta-python/recipes-networking/python/python3-ldap_3.4.5.bb
-> +++ b/meta-python/recipes-networking/python/python3-ldap_3.4.6.bb
-> @@ -13,7 +13,7 @@ PYPI_PACKAGE =3D "python_ldap"
->
->  inherit pypi python_setuptools_build_meta
->
-> -SRC_URI[sha256sum] =3D
-> "b2f6ef1c37fe2c6a5a85212efe71311ee21847766a7d45fcb711f3b270a5f79a"
-> +SRC_URI[sha256sum] =3D
-> "83d6b65c7cbe627d81e556d0d03f3f450e3ac35ba9c1b6011f0097ac92effeb1"
->
->  do_configure:prepend() {
->      sed -i -e 's:^library_dirs =3D.*::' \
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127080):
-> https://lists.openembedded.org/g/openembedded-devel/message/127080
-> Mute This Topic: https://lists.openembedded.org/mt/119388869/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
+---
+ ...0001-fix-zlib-cross-compiling-errors.patch | 51 +++++++++++++++++++
+ .../recipes-graphics/kmscon/kmscon_9.3.5.bb   |  5 +-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/kmscon/files/0001-fix-zlib-cross-compiling-errors.patch
 
---000000000000c86f59065254c9ff
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/meta-oe/recipes-graphics/kmscon/files/0001-fix-zlib-cross-compiling-errors.patch b/meta-oe/recipes-graphics/kmscon/files/0001-fix-zlib-cross-compiling-errors.patch
+new file mode 100644
+index 0000000000..c720aa6dde
+--- /dev/null
++++ b/meta-oe/recipes-graphics/kmscon/files/0001-fix-zlib-cross-compiling-errors.patch
+@@ -0,0 +1,51 @@
++From 0ff9beddd959ec9afc99f64789fdfb959842ba52 Mon Sep 17 00:00:00 2001
++From: Adam Duskett <adam.duskett@amarulasolutions.com>
++Date: Thu, 21 May 2026 16:30:27 +0200
++Subject: [PATCH 1/1] fix zlib cross-compiling errors
++
++zlib compression was introduced in version 9.3.3. However, when
++cross-compiling kmscon for an architecture other than x86_64, the
++genunifont executable tries to use the build-systems zlib instead
++of the hosts zlib.
++
++This leads to the following error during compiling:
++libz.so: error adding symbols: file in wrong format
++
++Fix this by adding a new native zlib dependency specifically for the
++genunifont executable.
++
++Upstream-Status: Submitted [https://github.com/kmscon/kmscon/pull/402]
++Signed-off-by: Adam Duskett <adam.duskett@amarulasolutions.com>
++---
++ meson.build     | 1 +
++ src/meson.build | 2 +-
++ 2 files changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index f7c0858..74cf595 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -52,6 +52,7 @@ libudev_deps = dependency('libudev', version: '>=172')
++ dl_deps = dependency('dl')
++ threads_deps = dependency('threads')
++ zlib_deps = dependency('zlib')
+++zlib_deps_native = dependency('zlib', native: true)
++ 
++ python = find_program('python3')
++ 
++diff --git a/src/meson.build b/src/meson.build
++index 63d38ca..070e2a4 100644
++--- a/src/meson.build
+++++ b/src/meson.build
++@@ -159,7 +159,7 @@ endif
++ # Unifont Generator
++ # This generates the unifont sources from raw hex-encoded font data.
++ #
++-genunifont = executable('genunifont', 'genunifont.c', dependencies: [zlib_deps], native: true)
+++genunifont = executable('genunifont', 'genunifont.c', dependencies: [zlib_deps_native], native: true)
++ 
++ unifont_bin = custom_target('unifont-bin',
++   input: ['font_unifont_data.hex'],
++-- 
++2.54.0
++
+diff --git a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
+index b730faf414..83256480ee 100644
+--- a/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
++++ b/meta-oe/recipes-graphics/kmscon/kmscon_9.3.5.bb
+@@ -20,7 +20,10 @@ DEPENDS = "\
+     zlib \
+ "
+ 
+-SRC_URI = "git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV}"
++SRC_URI = "\
++    git://github.com/kmscon/kmscon;protocol=https;branch=main;tag=v${PV} \
++    file://0001-fix-zlib-cross-compiling-errors.patch \
++"
+ SRCREV = "a8832afb1dcca5bb4c0476d4c13c7239fecbd93a"
+ 
+ inherit meson pkgconfig systemd
+-- 
+2.54.0
 
-<div dir=3D"ltr">This fails to fetch the new tarball. Meanwhile 3.6.7 has b=
-een released. I would suggest to go for 3.6.7 and submit a v2.</div><br><di=
-v class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gma=
-il_attr">On Tue, May 19, 2026 at 4:40=E2=80=AFAM wangmy via <a href=3D"http=
-://lists.openembedded.org">lists.openembedded.org</a> &lt;wangmy=3D<a href=
-=3D"mailto:fujitsu.com@lists.openembedded.org">fujitsu.com@lists.openembedd=
-ed.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"m=
-argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">From: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=3D=
-"_blank">wangmy@fujitsu.com</a>&gt;<br>
-<br>
-Changelog:<br>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-- attrlist parameter is now properly checked before use, avoiding memory<br=
->
-=C2=A0 errors due to type mismatches<br>
-- Fixed errors with requestName/requestValue in extop.dds<br>
-- ldif and ldap.schema modules now actively close sockets as they&#39;re<br=
->
-=C2=A0 finished with them<br>
-<br>
-Signed-off-by: Wang Mingyu &lt;<a href=3D"mailto:wangmy@fujitsu.com" target=
-=3D"_blank">wangmy@fujitsu.com</a>&gt;<br>
----<br>
-=C2=A0.../python/{<a href=3D"http://python3-ldap_3.4.5.bb" rel=3D"noreferre=
-r" target=3D"_blank">python3-ldap_3.4.5.bb</a> =3D&gt; <a href=3D"http://py=
-thon3-ldap_3.4.6.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.=
-6.bb</a>}=C2=A0 =C2=A0 =C2=A0| 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-=C2=A0rename meta-python/recipes-networking/python/{<a href=3D"http://pytho=
-n3-ldap_3.4.5.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.5.b=
-b</a> =3D&gt; <a href=3D"http://python3-ldap_3.4.6.bb" rel=3D"noreferrer" t=
-arget=3D"_blank">python3-ldap_3.4.6.bb</a>} (91%)<br>
-<br>
-diff --git a/meta-python/recipes-networking/python/<a href=3D"http://python=
-3-ldap_3.4.5.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.5.bb=
-</a> b/meta-python/recipes-networking/python/<a href=3D"http://python3-ldap=
-_3.4.6.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.6.bb</a><b=
-r>
-similarity index 91%<br>
-rename from meta-python/recipes-networking/python/<a href=3D"http://python3=
--ldap_3.4.5.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.5.bb<=
-/a><br>
-rename to meta-python/recipes-networking/python/<a href=3D"http://python3-l=
-dap_3.4.6.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.6.bb</a=
-><br>
-index 5a176b5208..3c56dea31d 100644<br>
---- a/meta-python/recipes-networking/python/<a href=3D"http://python3-ldap_=
-3.4.5.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.5.bb</a><br=
->
-+++ b/meta-python/recipes-networking/python/<a href=3D"http://python3-ldap_=
-3.4.6.bb" rel=3D"noreferrer" target=3D"_blank">python3-ldap_3.4.6.bb</a><br=
->
-@@ -13,7 +13,7 @@ PYPI_PACKAGE =3D &quot;python_ldap&quot;<br>
-<br>
-=C2=A0inherit pypi python_setuptools_build_meta<br>
-<br>
--SRC_URI[sha256sum] =3D &quot;b2f6ef1c37fe2c6a5a85212efe71311ee21847766a7d4=
-5fcb711f3b270a5f79a&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;83d6b65c7cbe627d81e556d0d03f3f450e3ac35ba9c1b=
-6011f0097ac92effeb1&quot;<br>
-<br>
-=C2=A0do_configure:prepend() {<br>
-=C2=A0 =C2=A0 =C2=A0sed -i -e &#39;s:^library_dirs =3D.*::&#39; \<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127080): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127080" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127080</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119388869/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119388869/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000c86f59065254c9ff--
 
