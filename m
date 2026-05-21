@@ -1,190 +1,297 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ashishkumar.mishra@bmwtechworks.in>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37E02CD343F
-	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:16:31 +0000 (UTC)
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29341.1779336982113308922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49426CD4F3D
+	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:25:41 +0000 (UTC)
+Received: from MA0PR01CU012.outbound.protection.outlook.com (MA0PR01CU012.outbound.protection.outlook.com [40.107.57.6])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29443.1779337530733088168
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 21:16:22 -0700
+ Wed, 20 May 2026 21:25:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=AtLzRGWX;
- spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-65318dafbcbso5594093d50.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 21:16:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779336981; cv=none;
-        d=google.com; s=arc-20240605;
-        b=jXExB/3EshWt1kHFvPZtsgxgNSsSDHd5NKjjDR442KKGaIObXVuqJYHqB4mWJksItZ
-         6Osp6J5TJldEVBu4xRXCJ61A2K+Zsx6AYVnoAc80Elav65V3/AIpjw5vTRYRJ9r48bKf
-         Giq4xmZ3L0EAm4VXU1bshk1/lCrpvVLkhkqFHdMqz06JsChMQT2vgYtQDd4CkCx/RM7L
-         PQWdjO5UIb+BdBot4GrG79+iZfJmpMwyAFKAckXXP1jDv2clLzCjBEpk7xxBPYuY6eLo
-         Mvh+Ig4Dd1wV8eYwEK6pQhoiJngtjGqZg48AE4DErWjLdF7qXrcqI0RicsIeGL75hqO9
-         5d1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
-        fh=4YTjzO0C8RH/MztJHcaGYe1pZCao8Pv/ipu6VaPWe1w=;
-        b=ggYF4AyDSccVShOVa+UkpM/6vNqhbL9b5LYggUbADxYDt56/MNemss1ZvVHuWx5Qmi
-         UmGK3AWcUBMu2tT1y96KQyu2wLn2XXP3cnZaxmKDnHRG6n/DS3opmqTrkCijYjKNkLqA
-         msYbLIvqApsrnZ3bC6zjn5xq/4REBhW4QFOe4roDHKBCUycod3dRprctkTu30bNEqO29
-         FCphVHVFjAe9Y5UWnAui4VO7aN9wj2PROjmRX7lmPukMlKCDX4PyV+vT+y4+oARr+oZd
-         +4h13fmWW6qHwXLs6NKtUiI/CPesTZCPyK7l2jn2i/cKKAM7aNk8N6kZcQrXLSRUG1Wy
-         tc3g==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779336981; x=1779941781; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
-        b=AtLzRGWX3e2+Cn3saaF4QKl4At0be/h6H27C19R7di0/uH3WiDQYiPo96fZSjyfw0B
-         tv2mcYojZ7ILu806a1vSuLm2BCzPLCLHpjwXZQyGHvHZ+n5VYFWqYNX+xtm5Cbb366EX
-         FhrUgZ616vVthw0fYQs1pIue6UMhA76TiCGhyx2yGNrh569FblLpyoOzVlpNxwvJopUA
-         lXz1UnXSN0XLem40p/5l9LKrKH5krclhr16rEtOoXf3ZyR/VYm9GtumHzBBRkCZ8wnQK
-         Qlm2xamKMzh734oxs7ofv5IzGmoM9u5PKC1OlnVd4/92OF2r9V7b2ICbigpB/lGgeHVS
-         khow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779336981; x=1779941781;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
-        b=mgDHpmo6/BtKaOABqUxQwqKekhV+hMX+r/u9/l+ykAqFK7uM0lZrlHKVxwS7TlGbio
-         2I0tricmkQDrARfOrcL8k/tkqt5h/V7D38fmcHSAp6ASbD1a4FVp9puBzQ/Y2mUgklHM
-         U8jcQ2L/f1Ocy4MjzN6PMpgeXthfzqQwDX3NMbOtnj81lo7rqBWwmSL6C+Ju7N+ewPh2
-         jf+RcwVjMWlnnkhHElc73UHKXZ145IbFjxEvnZVl/eCWGunTzPSyNcB/HUfcKGDFfvcd
-         cqaIuo2GlDZjq6YJ+sPsuEJRBMlD7D6OBBUaOxmPU2gdZzRmHbo4yN6QkCETGoSY704l
-         BuXQ==
-X-Gm-Message-State: AOJu0YxkLIfZu0Gwee7k9Z6EPXYHTah3WoSA364nLiHpxWVG37u+VAY7
-	2Ri5cOlR93Bc0Fi4KqXJqNQzt0JGVhxvsF80quSxcTzsxjD1qgnMCiN2OsQcBwpGnstB8qhCiIy
-	bHLnpEb1mMyMdFe9vABfLycrMp0tsh+c=
-X-Gm-Gg: Acq92OGDENyuCvQVqqKbK67v893JSf8+rkVRqWtjWJPzxXSF/2Fsxxoedd8Dbfv9C2B
-	FKB3WjIZ+2tG/wa6j5tmqG3VJsu3wq1mmWDTz/mCSX6EUV87QuH43w/xcbRrxaq1AtlTkFe+sUt
-	Nz8lyc4ruysyhHjZxN2E99j21kHd5dm747fMxOcnr3EbnjsFACkk+B/dk1i8gEuKYjGYknV2Tq3
-	NBfrXqreis+DuO/3vVK0MpJ5KFeERfmYfLZVwXp1BVtS/MRS3x+AoQFp3p61MeR31a4l8WnohE0
-	mGY8v8gHf21EeLH5OMXR7lfwiza/G5pyrU6QOgR/hukSu1BA6+FHKCwKZaqN2L/73BRIDKL9nI5
-	dSdOCVlqI03triSa+Jm73TiMGwIcTHfLSgNh/kuYl2piJB+odHrhp+zidOV205VAJy6YaH10AGk
-	ch+8H4
-X-Received: by 2002:a05:690e:d05:b0:65c:4b93:4256 with SMTP id
- 956f58d0204a3-65eadfa77ddmr997336d50.15.1779336981146; Wed, 20 May 2026
- 21:16:21 -0700 (PDT)
-MIME-Version: 1.0
+ dkim=pass header.i=@bmwtechworks.in header.s=selector1 header.b=n8L3rQ9n;
+ spf=pass (domain: bmwtechworks.in, ip: 40.107.57.6, mailfrom: ashishkumar.mishra@bmwtechworks.in)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UIV9nWnuJYpNGf2Kof2TfSaodj0ygmGS4rk46fBQWEMP4490e/f2+ajNJpd7SqrLnJgzap320WG9k1kN3IpmjDOrDAyl54Ac3g98folwKOKDELmCDqB39QA4t/7vZG3BaajHOyKy9DdatUTgKUniC8fX8SIwnOwYXnNVR4yArQSZXEZmznwmPxyhyM+nzPmy5PlHpXvcUKPtFLI3RMlhvCX8B2uSOPBo5V8i7vTJN/75jEUBggv8YvwCdKwSwoJRzAON9BwdPJzSH2GfmhXFMQ1x7i6dSvWwTsRFNIaxgOGXZXmtUgwJ38sp7yHTPx/12AhFqv0yi9JNnUixoEjxRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kWlA6bpOTqKkJrRNdu1X9WEidR6xEzAcipvI779QKJA=;
+ b=cf8qYTEmt5pKlZ7nZ5U+9vLFGTQfjniXigELr+h+OhSc5r31nGPRwsrn+XyWrwqCQ9shy/lKIu8ZRbPfDsAlsllbJoqBKxe79bTdRVpi+WIw52eJfzit9KSdxnjxPhpidgu9uyeJKF7AfsgqKm7LCk5BiMaroIZ8hVLonWBCB1UnC75Mu4YFB/4IThAOiuvKcZ3Bs3Xy9w1doHEwISWu9qZ5VhOyBUKnpa/dqiWq3Fq7gFEHptPV40V7vbCtiXeriJqVf7AGeAIOj+ST2YFOuluXK6lQzku3gZP630xLCNt86G2WAnzxbyrlJrN10lVW+JXDIPfAVVeMm+FQ6vX0og==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
+ header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kWlA6bpOTqKkJrRNdu1X9WEidR6xEzAcipvI779QKJA=;
+ b=n8L3rQ9nhwIY/ZTKaHpThVYYyDUdASG6URzN2Hf5+jYs8mcO8bH9Z3M1VzauzzOLrys2qpPlaiCifTfbAPdDXWNgTERoI7GEGeEYB1mOoM7QhOKW9UKvsrT993x1hr/fkf9Qb+AuyDoeX9y1xOiiM93Lnwpf9Krlx/PVo8fMRQ9BAfAOauOOO2I9WkPylAJYp4f+NOMbgobsoFJQ8SBBoEzccvgKQJaj29MlyOaV2Su3uTpcRlfxmtz0aiTmbzZ+XBfeNlPuX/U3gPD15SgZxg+C9srEHqvQIMJWxGkogxhAYy+M0e8K9RnhVRtDNP4aH6+WFtm2RzL4kyaWWaIw3w==
+Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:db::8) by
+ PN0P287MB2120.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:1b7::10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.17; Thu, 21 May 2026 04:25:23 +0000
+Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+ ([fe80::884b:d8b9:54fa:499b]) by PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+ ([fe80::884b:d8b9:54fa:499b%5]) with mapi id 15.21.0048.016; Thu, 21 May 2026
+ 04:25:23 +0000
+From: AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>
+To: Khem Raj <raj.khem@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
+Thread-Topic: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and
+ cleanup
+Thread-Index: 
+ AQHc4qRpViq0TwpoL0ulzNhiF/0w2rYLhjwAgAAIMACAAA68RoAAwNkAgADMygCAAbm/AIAAA7cAgAArzwCACNfYpIAAAjKU
+Date: Thu, 21 May 2026 04:25:23 +0000
+Message-ID: 
+ <PN0P287MB03588FFCC9D4427C084EE601890E2@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
 References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
- <2022222.1778130561122567168@lists.openembedded.org> <2115555.1778654861364723634@lists.openembedded.org>
- <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com> <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
+ <2022222.1778130561122567168@lists.openembedded.org>
+ <2115555.1778654861364723634@lists.openembedded.org>
+ <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com>
+ <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
  <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
  <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com>
- <1575450.1778745762950591364@lists.openembedded.org> <1575450.1778840626136865406@lists.openembedded.org>
- <1824db6e-eded-4f5f-8626-c74406ef2670@gmail.com> <CAMKF1srFmVDNF=f2aU1SEYFv5MGXgZGOYc9150HDuBeTJg1V8g@mail.gmail.com>
- <1690109.1779097786262242307@lists.openembedded.org> <2251952.1779175643922816455@lists.openembedded.org>
+ <1575450.1778745762950591364@lists.openembedded.org>
+ <1575450.1778840626136865406@lists.openembedded.org>
+ <1824db6e-eded-4f5f-8626-c74406ef2670@gmail.com>
+ <CAMKF1srFmVDNF=f2aU1SEYFv5MGXgZGOYc9150HDuBeTJg1V8g@mail.gmail.com>
+ <1690109.1779097786262242307@lists.openembedded.org>
+ <2251952.1779175643922816455@lists.openembedded.org>
  <2273658.1779287978782701878@lists.openembedded.org>
-In-Reply-To: <2273658.1779287978782701878@lists.openembedded.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 May 2026 21:15:55 -0700
-X-Gm-Features: AVHnY4KEBUAAIC579Fg4pxyxWz9fCLv62lck_439Jo8UL3Nqf4BpnMXpjQ4lmw4
-Message-ID: <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
-To: ashishkumar.mishra@bmwtechworks.in
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b271b306524c2c55"
+ <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
+Accept-Language: en-IN, en-US
+Content-Language: en-IN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PN0P287MB0358:EE_|PN0P287MB2120:EE_
+x-ms-office365-filtering-correlation-id: 496550a3-0526-4e72-b82a-08deb6f0f9ab
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230040|1800799024|366016|4022899009|376014|39142699007|31052699007|13003099007|8096899003|22082099003|56012099003|18002099003|38070700021|55112099003|4143699003|5023799004|11063799006|6133799003;
+x-microsoft-antispam-message-info: 
+ aES4LRVI1By4EbctzGq5GEdkzor2YwRwdtsyLwaot0yqBI4LO3SIBSYfTVAaW6ZBfwYUFY4HgcdwWxQZIsHRsUdzWX4pNh0uVaRAHTo6EvvYkX6Aj7UdysHHPQ05R9GWzwUq3s5MVSmwNQDcw849bLu4F5QDKXhYZ6/PRy/fZEQHrA4Sli9/gRQF9dikH0qayFT2KzyP2eS80lVrnyl8I3ct4qWEMFI+aHox9NcUP+scRGXesuVoQX1n/xSb/CBYIFmak7JX3k9HKXEEVcunHWCldkWIVIOYNpwOIv2bxB2QcJVHQVroVqGzGzYFR7SkyGVCvESb0Gv1nq05sY0vrifOR7BkVKcKczzfR+ezJ67WJpvtjI5MBWQfqzfPM4Ui/5kwA54hEHA8Rl3AyWqcXHMh/g40G8unUTA3bpVng859wNyyPSYLVdL1D1ht5r6MybeusjD6Wag8gTild+VPLiLMHIg2f6cO6aFUZcbAGgtRMouLlfNPA+AjF07yiNbOmtBXx631WnN1h8eu2Bb2uJcO7UWJk4xdxlNqdhq3X6xgPZjOTkehpIbZtTd1h09IvjMuoc/ZjculnY80tLhqhMJJjwdkMSYHN5Hs1FIrqJXK19ig4Usbp/q/BO6ylKnFYqW5/wkTdG2aW0eEcwGrpiVgobKjcP/mMT2/undbKnARDk6NdU75bfMZ1foD5/C5
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0P287MB0358.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(4022899009)(376014)(39142699007)(31052699007)(13003099007)(8096899003)(22082099003)(56012099003)(18002099003)(38070700021)(55112099003)(4143699003)(5023799004)(11063799006)(6133799003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?UEdOL1FjTkF5bWJaZTNzZVpWWVMyRVBpaDhMcWp3VGJ0eFU2eGk1S3JuTzZi?=
+ =?utf-8?B?QmU4ak8wMk1Oa3NZNENPdmQ0QjFYRjREbDhqUEdGeTA3SmhmQTNYVHZpQzhH?=
+ =?utf-8?B?VThDdVNFSS9HM1ZFMytQZlR2UTl4WDg5NG95b2U1cWZoTzZQOTZLdWdSV2J1?=
+ =?utf-8?B?cmJONU9sTkxUeENKZ3BFMUIveVJXdUhTNVNuOUNqcnpja2hlUVFqTEpyMzJW?=
+ =?utf-8?B?Qjh3MEZNa1MvSDJaTEg4SVE5Rm45c2VoeTRCWmFRdng0bnFWOFBieXhMaDlG?=
+ =?utf-8?B?MEVKcVZQRnZ4WXhyU3QvbTI2cWFlVlVndHFmUkI1VVNFRjUxUU93Y3NMNXdT?=
+ =?utf-8?B?RDdxSWdkU3dkRzV6RmtZYWgvTGxQRFp5VnZjaC9GQVFia29qWEhILzNvRmZB?=
+ =?utf-8?B?MENWNGQ1czBXMWRPV2tkRTFtc3NvT2hBVTNEZm5kSXpGdW5pWkF5clJqV2dy?=
+ =?utf-8?B?VTR2ZWdvbU1xNWR2SE16S0pNMjRsaVVta2NMY2tiWjYvbDlqWnAvbnFFYmlv?=
+ =?utf-8?B?cGNiM1dsbWFyVHFGMVBIeHBsQ09qd1IxSHQxbmFzSU1ZMTZ6eWtuQVZ4WkFS?=
+ =?utf-8?B?aVFQcjZNL3M2czV2cHljNGc0U2JaUVBVdWkzcVhMOTIybkZ3eWxSRm9oZ0JS?=
+ =?utf-8?B?OENOaFVPbE5FMm9HZnNhc2p5TGsxN3BUN1VGakhDUyt5OFRuMklJdmRzWXky?=
+ =?utf-8?B?VkR0bURTcUtGTkZLc0hDT1lYa1cyL0hyektmNDFzQU1NNzBEWnBBV0pNbFMr?=
+ =?utf-8?B?ZUUxakNPVE9jcTRGTWxkTTJmaFNCYzB5VEQ5VzVLM3BUb2RvOUlQRHRaSlFN?=
+ =?utf-8?B?ejRKY0I1eEVuVDIxWm5pTnNpY3J4WXM3UXF0WVdQeGJHNWh4b2YrbHNjcUIy?=
+ =?utf-8?B?d1FVbW9ybVhWTUxoa3lwQ2MwcHRMbC9tVW9ISDBqY2dYendvdkFPWU5BdkQ4?=
+ =?utf-8?B?cVdsZ0p0aFFrRml1SnlEeXlWd1RMeHhWcjBLRG5nalVGNStITEpzVU96SzR1?=
+ =?utf-8?B?d2xzLzlMYUdud1lNUy8xWFdqMHd6eE9aVWtoVjNlWlkwcDNiMW9pbkJsOGhO?=
+ =?utf-8?B?NWZ3NEUxSUk4L2hYSUZweFlNSk5oN0VNc0FreGpxa2thZnlaTUowSkw4U3Qz?=
+ =?utf-8?B?YzhPd0FGMEYvS2JUY1V1c3c1RFVuUHV4dWM5UjlNVFRIbUUyUGptOVUzQ1Iv?=
+ =?utf-8?B?OTh6M0hNbWlsL2lJNC9SdWYxUTZhSVlybWNOcWl3U2x3NkQyNmFlSEVtUEZp?=
+ =?utf-8?B?RGxOTFZEdjVveUo4aVZZT1BMZlU1OEF3cm1rTFk1QTZoZjVDU3BEd0ZUV2dx?=
+ =?utf-8?B?MlhmejBkMmpEcWlsQndHTFV6Z21pSFpLeHp0eUM1S2RIbVdpbXJJMXByUVJK?=
+ =?utf-8?B?WkY4UUlZYlkydnRDbGZqYWpNT0QveW44aitGYmQrbjNyYWU5M3pZTTVqVmRU?=
+ =?utf-8?B?TkpBVk9LZFRpcTQ1VDdQV1J5bnZsSkxRTTQyOW15aVdtNnNjOXBmalJvTEdr?=
+ =?utf-8?B?K1lhdGZNS1l1NytYNHMwWTBQcUtnN1lzc2hzQXNFVFlISDNxWmxtUElrV0hW?=
+ =?utf-8?B?ZlZtNG9LV2U1cXFUbFlERStGZ1R4b1Q5S1ZpQjN3ZmMvditnaE9iem45QnpO?=
+ =?utf-8?B?Q05HNThIYkx1UC9QZDlhVkFzWkhUSGNiYzh3Q1BqZnNYUEQzVzgyaUJVbmx0?=
+ =?utf-8?B?N3ZYZk1FY2JoTGRnZUFPNk14WHI0ckF3OUN5SHFtY0tyMURkZm1BaU4ySnpN?=
+ =?utf-8?B?dnptVnNLMUw4Z2VKT2M3VkF6enRDaVVmM3VKMXJZVXZzcVdUcWYwckdBbHU5?=
+ =?utf-8?B?cWV6eTRQaEJENzRyakhyNkRZdVVRWE13S0cxUjBDeFkzUWFaQ1k3aXpPOGZz?=
+ =?utf-8?B?ekFYVytMZkxMOU1NZzNBWG9neDN2L1d1ek9QL1hFQTRGV2JIY2JUNWs1MkhS?=
+ =?utf-8?B?bFZlMkovOXgzZnlFbGZzVStsNm5RRWtkdEp3eEVjWWFDSGcvMzZMM0luczAx?=
+ =?utf-8?B?Y21qSGhoYnVoaFVPZWRRMUpCNk9rbVhoRHMvdmlQa0VWNG1VU0xUZG02WExB?=
+ =?utf-8?B?MmpJTXhRSzBRelZybTZCUFRYS2ZCcGEyRGo0RE9KWVpFRmh2UkRLK2tCTlRm?=
+ =?utf-8?B?dkZLTzFHamdvOG56TW12UEFjVzNzQ2Q2UHgrbEM2T0FTVGRnZWVwdGYxVzlE?=
+ =?utf-8?B?TlFkTGZ2N0ZnTlpjZCtUcnhjc01aL0VURVNRRStoOXJFdDZzMDhOU05NVExh?=
+ =?utf-8?B?WHlRNUgxSFNzbFJ6TldKa0hjcUM0ZkRsVGFhYVh2U2VRTDRvUks4dVVzd3Rr?=
+ =?utf-8?B?QTF3RmQzTWdXTW14cDI3SUJyMWRINzRORzFiKzdXWWlUbG5FUWNyZlVTQkJM?=
+ =?utf-8?Q?mZqbpz7D28xJQ4Ow=3D?=
+Content-Type: multipart/alternative;
+	boundary="_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_"
+MIME-Version: 1.0
+X-OriginatorOrg: bmwtechworks.in
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 496550a3-0526-4e72-b82a-08deb6f0f9ab
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 May 2026 04:25:23.0147
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 739P4dLInRqqsegBaMNhwG4lyBf8l3QdlWfXbMVqda8nJlzoOAywR/cwcC5/Uy/X+9lyEIv0AL2FAyVeqc7KVqITCphXHX7w+/dQ3dtndif2OOidlm4fhosgFw9Z7/BU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN0P287MB2120
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:16:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127129
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:25:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127130
 
---000000000000b271b306524c2c55
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This patch looks ok. For future, its good to send patches inline instead of
-attachments, makes it easy to review them
+U3VyZSBLaGVtDQpXaWxsIHNoYXJlIHRoZSBjb21wbGV0ZSBzZXQgb2YgcGF0Y2ggYWdhaW4gYXMg
+YSBmcmVzaCBSRkMgVjQNCg0KVGhhbmtzICwNCkFzaGlzaA0KDQoNCg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18NCkZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQpT
+ZW50OiAyMSBNYXkgMjAyNiAwOTo0NQ0KVG86IEFzaGlzaEt1bWFyIE1pc2hyYSA8QXNoaXNoS3Vt
+YXIuTWlzaHJhQGJtd3RlY2h3b3Jrcy5pbj4NCkNjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmc+DQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0ggdjMgMC8zXSBhbmRyb2lkLXRv
+b2xzOiBtaWdyYXRpb24gYW5kIGNsZWFudXANCg0KQ2F1dGlvbjogIkV4dGVybmFsIGVtYWlsLCBi
+ZSBjYXV0aW91cyBlc3BlY2lhbGx5IHdpdGggbGluayhzKSwgYXR0YWNobWVudChzKSBvciBRUiBj
+b2RlKHMpIi4NClRoaXMgcGF0Y2ggbG9va3Mgb2suIEZvciBmdXR1cmUsIGl0cyBnb29kIHRvIHNl
+bmQgcGF0Y2hlcyBpbmxpbmUgaW5zdGVhZCBvZiBhdHRhY2htZW50cywgbWFrZXMgaXQgZWFzeSB0
+byByZXZpZXcgdGhlbQ0KDQpPbiBXZWQsIE1heSAyMCwgMjAyNiBhdCA3OjM54oCvQU0gQXNoaXNo
+S3VtYXIgTWlzaHJhIHZpYSBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPGh0dHA6Ly9saXN0cy5vcGVu
+ZW1iZWRkZWQub3JnLz4gPGFzaGlzaGt1bWFyLm1pc2hyYT1ibXd0ZWNod29ya3MuaW5AbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86Ym13dGVjaHdvcmtzLmluQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmc+PiB3cm90ZToNCkhpIEtoZW0gLyBHeW9yZ3kgJiBUZWFtLA0KDQpDYW4geW91IHBsZWFz
+ZSBsZXQgbWUga25vdyBpZiBhbnkgYWRkaXRpb25hbCB0ZXN0IGkgY2FuIGRvIGxvY2FsbHkgYmVm
+b3JlIHNoYXJpbmcgdGhlICBwYXRjaGVzIGZvciBhbmRyb2lkLXRvb2xzIGZvciB0aGUgYWJvZXYg
+Q0kgZXJyb3INClRoZSBkZXRhaWxzIGFyZSB0d28gdGhyZWFkIGFib3ZlIGF0IGh0dHBzOi8vbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzEyNzA0OA0K
+DQpJIHdhcyBwbGFubmluZyB0byBzaGFyZSB0aGUgdXBzdHJlYW0gcGF0Y2ggdG9tb3Jyb3cgYXMg
+aGF2ZSB0byBzdGFydCBhbm90aGVyIHdvcmsgb24gcHJpb3JpdHkNCg0KVGhhbmtzICwNCkFzaGlz
+aA0KDQotPS09LT0tPS09LT0tPS09LT0tPS09LQ0KTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNz
+YWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQpWaWV3L1JlcGx5IE9ubGluZSAoIzEyNzEyMSk6IGh0
+dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdl
+LzEyNzEyMQ0KTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
+bXQvMTE5MTYyNzM1LzE5OTc5MTQNCkdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3du
+ZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsJTJCb3du
+ZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NClVuc3Vic2NyaWJlOiBodHRwczovL2xpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWIgW3Jhai5raGVtQGdtYWls
+LmNvbTxtYWlsdG86cmFqLmtoZW1AZ21haWwuY29tPl0NCi09LT0tPS09LT0tPS09LT0tPS09LT0t
+DQoNCg==
 
-On Wed, May 20, 2026 at 7:39=E2=80=AFAM AshishKumar Mishra via
-lists.openembedded.org <ashishkumar.mishra=3D
-bmwtechworks.in@lists.openembedded.org> wrote:
+--_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-> Hi Khem / Gyorgy & Team,
->
-> Can you please let me know if any additional test i can do locally before
-> sharing the  patches for android-tools for the aboev CI error
-> The details are two thread above at
-> https://lists.openembedded.org/g/openembedded-devel/message/127048
->
-> I was planning to share the upstream patch tomorrow as have to start
-> another work on priority
->
-> Thanks ,
-> Ashish
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127121):
-> https://lists.openembedded.org/g/openembedded-devel/message/127121
-> Mute This Topic: https://lists.openembedded.org/mt/119162735/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
+ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
+ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29m
+IiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01T
+Rm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
+MnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpTdXJlIEtoZW0mbmJzcDs8L2Rpdj4NCjxkaXYg
+Y2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19F
+bWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fu
+cy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpXaWxsIHNo
+YXJlIHRoZSBjb21wbGV0ZSBzZXQgb2YgcGF0Y2ggYWdhaW4gYXMgYSBmcmVzaCBSRkMgVjQmbmJz
+cDs8L2Rpdj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0iZm9udC1mYW1pbHk6
+IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmks
+IEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAs
+IDApOyI+DQo8YnI+DQo8L2Rpdj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0i
+Zm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZp
+Y2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xv
+cjogcmdiKDAsIDAsIDApOyI+DQpUaGFua3MgLDwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRv
+UHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0
+b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNp
+emU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCkFzaGlzaCZuYnNwOzwvZGl2Pg0KPGRp
+diBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9z
+X0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBz
+YW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4N
+CjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTog
+QXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwg
+SGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwg
+MCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJm
+b250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2Vydmlj
+ZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
+OiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBpZD0iYXBwZW5kb25zZW5kIj48
+L2Rpdj4NCjxociBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7d2lkdGg6OTglIiB0YWJpbmRl
+eD0iLTEiPg0KPGRpdiBpZD0iZGl2UnBseUZ3ZE1zZyIgZGlyPSJsdHIiPjxmb250IGZhY2U9IkNh
+bGlicmksIHNhbnMtc2VyaWYiIHN0eWxlPSJmb250LXNpemU6MTFwdCIgY29sb3I9IiMwMDAwMDAi
+PjxiPkZyb206PC9iPiBLaGVtIFJhaiAmbHQ7cmFqLmtoZW1AZ21haWwuY29tJmd0Ozxicj4NCjxi
+PlNlbnQ6PC9iPiAyMSBNYXkgMjAyNiAwOTo0NTxicj4NCjxiPlRvOjwvYj4gQXNoaXNoS3VtYXIg
+TWlzaHJhICZsdDtBc2hpc2hLdW1hci5NaXNocmFAYm13dGVjaHdvcmtzLmluJmd0Ozxicj4NCjxi
+PkNjOjwvYj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgJmx0O29w
+ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnJmd0Ozxicj4NCjxiPlN1Ympl
+Y3Q6PC9iPiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0ggdjMgMC8zXSBhbmRyb2lkLXRvb2xzOiBt
+aWdyYXRpb24gYW5kIGNsZWFudXA8L2ZvbnQ+DQo8ZGl2PiZuYnNwOzwvZGl2Pg0KPC9kaXY+DQo8
+ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjpyZWQiPjxpPkNhdXRpb246ICZxdW90O0V4dGVybmFsIGVt
+YWlsLCBiZSBjYXV0aW91cyBlc3BlY2lhbGx5IHdpdGggbGluayhzKSwgYXR0YWNobWVudChzKSBv
+ciBRUiBjb2RlKHMpJnF1b3Q7LjwvaT48L3NwYW4+DQo8ZGl2Pg0KPGRpdiBkaXI9Imx0ciI+VGhp
+cyBwYXRjaCBsb29rcyBvay4gRm9yIGZ1dHVyZSwgaXRzIGdvb2QgdG8gc2VuZCBwYXRjaGVzIGlu
+bGluZSZuYnNwO2luc3RlYWQgb2YgYXR0YWNobWVudHMsIG1ha2VzIGl0IGVhc3kgdG8gcmV2aWV3
+IHRoZW0mbmJzcDs8L2Rpdj4NCjxicj4NCjxkaXYgY2xhc3M9InhfZ21haWxfcXVvdGUgeF9nbWFp
+bF9xdW90ZV9jb250YWluZXIiPg0KPGRpdiBkaXI9Imx0ciIgY2xhc3M9InhfZ21haWxfYXR0ciI+
+T24gV2VkLCBNYXkgMjAsIDIwMjYgYXQgNzozOeKAr0FNIEFzaGlzaEt1bWFyIE1pc2hyYSB2aWEN
+CjxhIGhyZWY9Imh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnLyIgb3JpZ2luYWxzcmM9Imh0
+dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnLyI+DQpsaXN0cy5vcGVuZW1iZWRkZWQub3JnPC9h
+PiAmbHQ7YXNoaXNoa3VtYXIubWlzaHJhPTxhIGhyZWY9Im1haWx0bzpibXd0ZWNod29ya3MuaW5A
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZyI+Ym13dGVjaHdvcmtzLmluQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmc8L2E+Jmd0OyB3cm90ZTo8YnI+DQo8L2Rpdj4NCjxibG9ja3F1b3RlIGNsYXNzPSJ4X2dt
+YWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4OyBib3JkZXItbGVmdDox
+cHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTsgcGFkZGluZy1sZWZ0OjFleCI+DQo8ZGl2PjxzcGFu
+IHN0eWxlPSJib3gtc2l6aW5nOmJvcmRlci1ib3g7IGNvbG9yOnJnYig1MSw1MSw1MSk7IGZvbnQt
+c2l6ZToxNnB4OyBmb250LXN0eWxlOm5vcm1hbDsgZm9udC12YXJpYW50LWxpZ2F0dXJlczpub3Jt
+YWw7IGZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDsgZm9udC13ZWlnaHQ6NDAwOyBsZXR0ZXItc3Bh
+Y2luZzpub3JtYWw7IHRleHQtYWxpZ246c3RhcnQ7IHRleHQtaW5kZW50OjBweDsgdGV4dC10cmFu
+c2Zvcm06bm9uZTsgd29yZC1zcGFjaW5nOjBweDsgd2hpdGUtc3BhY2U6bm9ybWFsOyB0ZXh0LWRl
+Y29yYXRpb24tc3R5bGU6aW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRpYWw7IGZv
+bnQtZmFtaWx5OnN5c3RlbS11aSxSb2JvdG8sQXJpYWwsc2Fucy1zZXJpZjsgYmFja2dyb3VuZC1j
+b2xvcjpyZ2IoMjU1LDI1NSwyNTUpOyBkaXNwbGF5OmlubGluZSI+SGkNCiBLaGVtIC88c3BhbiBz
+dHlsZT0iYm94LXNpemluZzpib3JkZXItYm94Ij4mbmJzcDs8L3NwYW4+PC9zcGFuPjxzcGFuIHN0
+eWxlPSJib3gtc2l6aW5nOmJvcmRlci1ib3g7IGNvbG9yOnJnYig1MSw1MSw1MSk7IGZvbnQtc2l6
+ZToxNnB4OyBmb250LXN0eWxlOm5vcm1hbDsgZm9udC12YXJpYW50LWxpZ2F0dXJlczpub3JtYWw7
+IGZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDsgZm9udC13ZWlnaHQ6NDAwOyBsZXR0ZXItc3BhY2lu
+Zzpub3JtYWw7IHRleHQtYWxpZ246c3RhcnQ7IHRleHQtaW5kZW50OjBweDsgdGV4dC10cmFuc2Zv
+cm06bm9uZTsgd29yZC1zcGFjaW5nOjBweDsgd2hpdGUtc3BhY2U6bm9ybWFsOyB0ZXh0LWRlY29y
+YXRpb24tc3R5bGU6aW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRpYWw7IGZvbnQt
+ZmFtaWx5OnN5c3RlbS11aSxSb2JvdG8sQXJpYWwsc2Fucy1zZXJpZjsgYmFja2dyb3VuZC1jb2xv
+cjpyZ2IoMjU1LDI1NSwyNTUpOyBkaXNwbGF5OmlubGluZSI+R3lvcmd5PHNwYW4gc3R5bGU9ImJv
+eC1zaXppbmc6Ym9yZGVyLWJveCI+PHNwYW4gc3R5bGU9ImJveC1zaXppbmc6Ym9yZGVyLWJveCI+
+Jm5ic3A7PC9zcGFuPiZhbXA7DQogVGVhbSwmbmJzcDs8YnI+DQo8YnI+DQo8L3NwYW4+PC9zcGFu
+PkNhbiB5b3UgcGxlYXNlIGxldCBtZSBrbm93IGlmIGFueSBhZGRpdGlvbmFsIHRlc3QgaSBjYW4g
+ZG8gbG9jYWxseSBiZWZvcmUgc2hhcmluZyB0aGUmbmJzcDsgcGF0Y2hlcyBmb3IgYW5kcm9pZC10
+b29scyBmb3IgdGhlIGFib2V2IENJIGVycm9yJm5ic3A7PGJyPg0KVGhlIGRldGFpbHMgYXJlIHR3
+byB0aHJlYWQgYWJvdmUgYXQgPGEgaHJlZj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3MDQ4IiBvcmlnaW5hbHNyYz0iaHR0cHM6
+Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3
+MDQ4IiByZWw9Im5vb3BlbmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5l
+bWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS8xMjcwNDg8L2E+Jm5ic3A7
+PGJyPg0KPGJyPg0KSSB3YXMgcGxhbm5pbmcgdG8gc2hhcmUgdGhlIHVwc3RyZWFtIHBhdGNoIHRv
+bW9ycm93IGFzIGhhdmUgdG8gc3RhcnQgYW5vdGhlciB3b3JrIG9uIHByaW9yaXR5Jm5ic3A7PGJy
+Pg0KPGJyPg0KVGhhbmtzICw8L2Rpdj4NCjxkaXY+QXNoaXNoPC9kaXY+DQo8YnI+DQotPS09LT0t
+PS09LT0tPS09LT0tPS09LTxicj4NCkxpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2Vu
+dCB0byB0aGlzIGdyb3VwLjxicj4NClZpZXcvUmVwbHkgT25saW5lICgjMTI3MTIxKTogPGEgaHJl
+Zj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21l
+c3NhZ2UvMTI3MTIxIiBvcmlnaW5hbHNyYz0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3MTIxIiByZWw9Im5vcmVmZXJyZXIiIHRh
+cmdldD0iX2JsYW5rIj4NCmh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJl
+ZGRlZC1kZXZlbC9tZXNzYWdlLzEyNzEyMTwvYT48YnI+DQpNdXRlIFRoaXMgVG9waWM6IDxhIGhy
+ZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC8xMTkxNjI3MzUvMTk5NzkxNCIg
+b3JpZ2luYWxzcmM9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC8xMTkxNjI3MzUv
+MTk5NzkxNCIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcvbXQvMTE5MTYyNzM1LzE5OTc5MTQ8L2E+PGJyPg0KR3JvdXAgT3du
+ZXI6IDxhIGhyZWY9Im1haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwlMkJvd25lckBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnIiB0YXJnZXQ9Il9ibGFuayI+DQpvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZzwvYT48YnI+DQpVbnN1YnNjcmliZTogPGEgaHJlZj0iaHR0
+cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIiBv
+cmlnaW5hbHNyYz0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVk
+LWRldmVsL3Vuc3ViIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdldD0iX2JsYW5rIj4NCmh0dHBzOi8v
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1YjwvYT4gWzxh
+IGhyZWY9Im1haWx0bzpyYWoua2hlbUBnbWFpbC5jb20iIHRhcmdldD0iX2JsYW5rIj5yYWoua2hl
+bUBnbWFpbC5jb208L2E+XTxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPGJyPg0KPGJyPg0K
+PC9ibG9ja3F1b3RlPg0KPC9kaXY+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1sPg0K
 
---000000000000b271b306524c2c55
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">This patch looks ok. For future, its good to send patches =
-inline=C2=A0instead of attachments, makes it easy to review them=C2=A0</div=
-><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" clas=
-s=3D"gmail_attr">On Wed, May 20, 2026 at 7:39=E2=80=AFAM AshishKumar Mishra=
- via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &=
-lt;ashishkumar.mishra=3D<a href=3D"mailto:bmwtechworks.in@lists.openembedde=
-d.org">bmwtechworks.in@lists.openembedded.org</a>&gt; wrote:<br></div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex"><div><span style=3D"box-sizing=
-:border-box;color:rgb(51,51,51);font-size:16px;font-style:normal;font-varia=
-nt-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing=
-:normal;text-align:start;text-indent:0px;text-transform:none;word-spacing:0=
-px;white-space:normal;text-decoration-style:initial;text-decoration-color:i=
-nitial;font-family:system-ui,Roboto,Arial,sans-serif;background-color:rgb(2=
-55,255,255);display:inline">Hi Khem /<span style=3D"box-sizing:border-box">=
-=C2=A0</span></span><span style=3D"box-sizing:border-box;color:rgb(51,51,51=
-);font-size:16px;font-style:normal;font-variant-ligatures:normal;font-varia=
-nt-caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-=
-indent:0px;text-transform:none;word-spacing:0px;white-space:normal;text-dec=
-oration-style:initial;text-decoration-color:initial;font-family:system-ui,R=
-oboto,Arial,sans-serif;background-color:rgb(255,255,255);display:inline">Gy=
-orgy<span style=3D"box-sizing:border-box"><span style=3D"box-sizing:border-=
-box">=C2=A0</span>&amp; Team,=C2=A0<br><br></span></span>Can you please let=
- me know if any additional test i can do locally before sharing the=C2=A0 p=
-atches for android-tools for the aboev CI error=C2=A0<br>The details are tw=
-o thread above at <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/message/127048" rel=3D"noopener" target=3D"_blank">https://lists.open=
-embedded.org/g/openembedded-devel/message/127048</a>=C2=A0<br><br>I was pla=
-nning to share the upstream patch tomorrow as have to start another work on=
- priority=C2=A0<br><br>Thanks ,</div>
-<div>Ashish</div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127121): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127121" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127121</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119162735/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119162735/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---000000000000b271b306524c2c55--
+--_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_--
 
