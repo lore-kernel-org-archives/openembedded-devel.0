@@ -1,297 +1,261 @@
-Return-Path: <ashishkumar.mishra@bmwtechworks.in>
+Return-Path: <jeremie.dautheribes@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49426CD4F3D
-	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:25:41 +0000 (UTC)
-Received: from MA0PR01CU012.outbound.protection.outlook.com (MA0PR01CU012.outbound.protection.outlook.com [40.107.57.6])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29443.1779337530733088168
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60D70CD343F
+	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:58:21 +0000 (UTC)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29737.1779339495283744561
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 21:25:32 -0700
+ Wed, 20 May 2026 21:58:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bmwtechworks.in header.s=selector1 header.b=n8L3rQ9n;
- spf=pass (domain: bmwtechworks.in, ip: 40.107.57.6, mailfrom: ashishkumar.mishra@bmwtechworks.in)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UIV9nWnuJYpNGf2Kof2TfSaodj0ygmGS4rk46fBQWEMP4490e/f2+ajNJpd7SqrLnJgzap320WG9k1kN3IpmjDOrDAyl54Ac3g98folwKOKDELmCDqB39QA4t/7vZG3BaajHOyKy9DdatUTgKUniC8fX8SIwnOwYXnNVR4yArQSZXEZmznwmPxyhyM+nzPmy5PlHpXvcUKPtFLI3RMlhvCX8B2uSOPBo5V8i7vTJN/75jEUBggv8YvwCdKwSwoJRzAON9BwdPJzSH2GfmhXFMQ1x7i6dSvWwTsRFNIaxgOGXZXmtUgwJ38sp7yHTPx/12AhFqv0yi9JNnUixoEjxRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kWlA6bpOTqKkJrRNdu1X9WEidR6xEzAcipvI779QKJA=;
- b=cf8qYTEmt5pKlZ7nZ5U+9vLFGTQfjniXigELr+h+OhSc5r31nGPRwsrn+XyWrwqCQ9shy/lKIu8ZRbPfDsAlsllbJoqBKxe79bTdRVpi+WIw52eJfzit9KSdxnjxPhpidgu9uyeJKF7AfsgqKm7LCk5BiMaroIZ8hVLonWBCB1UnC75Mu4YFB/4IThAOiuvKcZ3Bs3Xy9w1doHEwISWu9qZ5VhOyBUKnpa/dqiWq3Fq7gFEHptPV40V7vbCtiXeriJqVf7AGeAIOj+ST2YFOuluXK6lQzku3gZP630xLCNt86G2WAnzxbyrlJrN10lVW+JXDIPfAVVeMm+FQ6vX0og==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bmwtechworks.in; dmarc=pass action=none
- header.from=bmwtechworks.in; dkim=pass header.d=bmwtechworks.in; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bmwtechworks.in;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kWlA6bpOTqKkJrRNdu1X9WEidR6xEzAcipvI779QKJA=;
- b=n8L3rQ9nhwIY/ZTKaHpThVYYyDUdASG6URzN2Hf5+jYs8mcO8bH9Z3M1VzauzzOLrys2qpPlaiCifTfbAPdDXWNgTERoI7GEGeEYB1mOoM7QhOKW9UKvsrT993x1hr/fkf9Qb+AuyDoeX9y1xOiiM93Lnwpf9Krlx/PVo8fMRQ9BAfAOauOOO2I9WkPylAJYp4f+NOMbgobsoFJQ8SBBoEzccvgKQJaj29MlyOaV2Su3uTpcRlfxmtz0aiTmbzZ+XBfeNlPuX/U3gPD15SgZxg+C9srEHqvQIMJWxGkogxhAYy+M0e8K9RnhVRtDNP4aH6+WFtm2RzL4kyaWWaIw3w==
-Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:db::8) by
- PN0P287MB2120.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:1b7::10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.17; Thu, 21 May 2026 04:25:23 +0000
-Received: from PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
- ([fe80::884b:d8b9:54fa:499b]) by PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
- ([fe80::884b:d8b9:54fa:499b%5]) with mapi id 15.21.0048.016; Thu, 21 May 2026
- 04:25:23 +0000
-From: AshishKumar Mishra <AshishKumar.Mishra@bmwtechworks.in>
-To: Khem Raj <raj.khem@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
-Thread-Topic: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and
- cleanup
-Thread-Index: 
- AQHc4qRpViq0TwpoL0ulzNhiF/0w2rYLhjwAgAAIMACAAA68RoAAwNkAgADMygCAAbm/AIAAA7cAgAArzwCACNfYpIAAAjKU
-Date: Thu, 21 May 2026 04:25:23 +0000
-Message-ID: 
- <PN0P287MB03588FFCC9D4427C084EE601890E2@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
-References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
- <2022222.1778130561122567168@lists.openembedded.org>
- <2115555.1778654861364723634@lists.openembedded.org>
- <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com>
- <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
- <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
- <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com>
- <1575450.1778745762950591364@lists.openembedded.org>
- <1575450.1778840626136865406@lists.openembedded.org>
- <1824db6e-eded-4f5f-8626-c74406ef2670@gmail.com>
- <CAMKF1srFmVDNF=f2aU1SEYFv5MGXgZGOYc9150HDuBeTJg1V8g@mail.gmail.com>
- <1690109.1779097786262242307@lists.openembedded.org>
- <2251952.1779175643922816455@lists.openembedded.org>
- <2273658.1779287978782701878@lists.openembedded.org>
- <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
-Accept-Language: en-IN, en-US
-Content-Language: en-IN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bmwtechworks.in;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PN0P287MB0358:EE_|PN0P287MB2120:EE_
-x-ms-office365-filtering-correlation-id: 496550a3-0526-4e72-b82a-08deb6f0f9ab
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: 
- BCL:0;ARA:13230040|1800799024|366016|4022899009|376014|39142699007|31052699007|13003099007|8096899003|22082099003|56012099003|18002099003|38070700021|55112099003|4143699003|5023799004|11063799006|6133799003;
-x-microsoft-antispam-message-info: 
- aES4LRVI1By4EbctzGq5GEdkzor2YwRwdtsyLwaot0yqBI4LO3SIBSYfTVAaW6ZBfwYUFY4HgcdwWxQZIsHRsUdzWX4pNh0uVaRAHTo6EvvYkX6Aj7UdysHHPQ05R9GWzwUq3s5MVSmwNQDcw849bLu4F5QDKXhYZ6/PRy/fZEQHrA4Sli9/gRQF9dikH0qayFT2KzyP2eS80lVrnyl8I3ct4qWEMFI+aHox9NcUP+scRGXesuVoQX1n/xSb/CBYIFmak7JX3k9HKXEEVcunHWCldkWIVIOYNpwOIv2bxB2QcJVHQVroVqGzGzYFR7SkyGVCvESb0Gv1nq05sY0vrifOR7BkVKcKczzfR+ezJ67WJpvtjI5MBWQfqzfPM4Ui/5kwA54hEHA8Rl3AyWqcXHMh/g40G8unUTA3bpVng859wNyyPSYLVdL1D1ht5r6MybeusjD6Wag8gTild+VPLiLMHIg2f6cO6aFUZcbAGgtRMouLlfNPA+AjF07yiNbOmtBXx631WnN1h8eu2Bb2uJcO7UWJk4xdxlNqdhq3X6xgPZjOTkehpIbZtTd1h09IvjMuoc/ZjculnY80tLhqhMJJjwdkMSYHN5Hs1FIrqJXK19ig4Usbp/q/BO6ylKnFYqW5/wkTdG2aW0eEcwGrpiVgobKjcP/mMT2/undbKnARDk6NdU75bfMZ1foD5/C5
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN0P287MB0358.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(4022899009)(376014)(39142699007)(31052699007)(13003099007)(8096899003)(22082099003)(56012099003)(18002099003)(38070700021)(55112099003)(4143699003)(5023799004)(11063799006)(6133799003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?UEdOL1FjTkF5bWJaZTNzZVpWWVMyRVBpaDhMcWp3VGJ0eFU2eGk1S3JuTzZi?=
- =?utf-8?B?QmU4ak8wMk1Oa3NZNENPdmQ0QjFYRjREbDhqUEdGeTA3SmhmQTNYVHZpQzhH?=
- =?utf-8?B?VThDdVNFSS9HM1ZFMytQZlR2UTl4WDg5NG95b2U1cWZoTzZQOTZLdWdSV2J1?=
- =?utf-8?B?cmJONU9sTkxUeENKZ3BFMUIveVJXdUhTNVNuOUNqcnpja2hlUVFqTEpyMzJW?=
- =?utf-8?B?Qjh3MEZNa1MvSDJaTEg4SVE5Rm45c2VoeTRCWmFRdng0bnFWOFBieXhMaDlG?=
- =?utf-8?B?MEVKcVZQRnZ4WXhyU3QvbTI2cWFlVlVndHFmUkI1VVNFRjUxUU93Y3NMNXdT?=
- =?utf-8?B?RDdxSWdkU3dkRzV6RmtZYWgvTGxQRFp5VnZjaC9GQVFia29qWEhILzNvRmZB?=
- =?utf-8?B?MENWNGQ1czBXMWRPV2tkRTFtc3NvT2hBVTNEZm5kSXpGdW5pWkF5clJqV2dy?=
- =?utf-8?B?VTR2ZWdvbU1xNWR2SE16S0pNMjRsaVVta2NMY2tiWjYvbDlqWnAvbnFFYmlv?=
- =?utf-8?B?cGNiM1dsbWFyVHFGMVBIeHBsQ09qd1IxSHQxbmFzSU1ZMTZ6eWtuQVZ4WkFS?=
- =?utf-8?B?aVFQcjZNL3M2czV2cHljNGc0U2JaUVBVdWkzcVhMOTIybkZ3eWxSRm9oZ0JS?=
- =?utf-8?B?OENOaFVPbE5FMm9HZnNhc2p5TGsxN3BUN1VGakhDUyt5OFRuMklJdmRzWXky?=
- =?utf-8?B?VkR0bURTcUtGTkZLc0hDT1lYa1cyL0hyektmNDFzQU1NNzBEWnBBV0pNbFMr?=
- =?utf-8?B?ZUUxakNPVE9jcTRGTWxkTTJmaFNCYzB5VEQ5VzVLM3BUb2RvOUlQRHRaSlFN?=
- =?utf-8?B?ejRKY0I1eEVuVDIxWm5pTnNpY3J4WXM3UXF0WVdQeGJHNWh4b2YrbHNjcUIy?=
- =?utf-8?B?d1FVbW9ybVhWTUxoa3lwQ2MwcHRMbC9tVW9ISDBqY2dYendvdkFPWU5BdkQ4?=
- =?utf-8?B?cVdsZ0p0aFFrRml1SnlEeXlWd1RMeHhWcjBLRG5nalVGNStITEpzVU96SzR1?=
- =?utf-8?B?d2xzLzlMYUdud1lNUy8xWFdqMHd6eE9aVWtoVjNlWlkwcDNiMW9pbkJsOGhO?=
- =?utf-8?B?NWZ3NEUxSUk4L2hYSUZweFlNSk5oN0VNc0FreGpxa2thZnlaTUowSkw4U3Qz?=
- =?utf-8?B?YzhPd0FGMEYvS2JUY1V1c3c1RFVuUHV4dWM5UjlNVFRIbUUyUGptOVUzQ1Iv?=
- =?utf-8?B?OTh6M0hNbWlsL2lJNC9SdWYxUTZhSVlybWNOcWl3U2x3NkQyNmFlSEVtUEZp?=
- =?utf-8?B?RGxOTFZEdjVveUo4aVZZT1BMZlU1OEF3cm1rTFk1QTZoZjVDU3BEd0ZUV2dx?=
- =?utf-8?B?MlhmejBkMmpEcWlsQndHTFV6Z21pSFpLeHp0eUM1S2RIbVdpbXJJMXByUVJK?=
- =?utf-8?B?WkY4UUlZYlkydnRDbGZqYWpNT0QveW44aitGYmQrbjNyYWU5M3pZTTVqVmRU?=
- =?utf-8?B?TkpBVk9LZFRpcTQ1VDdQV1J5bnZsSkxRTTQyOW15aVdtNnNjOXBmalJvTEdr?=
- =?utf-8?B?K1lhdGZNS1l1NytYNHMwWTBQcUtnN1lzc2hzQXNFVFlISDNxWmxtUElrV0hW?=
- =?utf-8?B?ZlZtNG9LV2U1cXFUbFlERStGZ1R4b1Q5S1ZpQjN3ZmMvditnaE9iem45QnpO?=
- =?utf-8?B?Q05HNThIYkx1UC9QZDlhVkFzWkhUSGNiYzh3Q1BqZnNYUEQzVzgyaUJVbmx0?=
- =?utf-8?B?N3ZYZk1FY2JoTGRnZUFPNk14WHI0ckF3OUN5SHFtY0tyMURkZm1BaU4ySnpN?=
- =?utf-8?B?dnptVnNLMUw4Z2VKT2M3VkF6enRDaVVmM3VKMXJZVXZzcVdUcWYwckdBbHU5?=
- =?utf-8?B?cWV6eTRQaEJENzRyakhyNkRZdVVRWE13S0cxUjBDeFkzUWFaQ1k3aXpPOGZz?=
- =?utf-8?B?ekFYVytMZkxMOU1NZzNBWG9neDN2L1d1ek9QL1hFQTRGV2JIY2JUNWs1MkhS?=
- =?utf-8?B?bFZlMkovOXgzZnlFbGZzVStsNm5RRWtkdEp3eEVjWWFDSGcvMzZMM0luczAx?=
- =?utf-8?B?Y21qSGhoYnVoaFVPZWRRMUpCNk9rbVhoRHMvdmlQa0VWNG1VU0xUZG02WExB?=
- =?utf-8?B?MmpJTXhRSzBRelZybTZCUFRYS2ZCcGEyRGo0RE9KWVpFRmh2UkRLK2tCTlRm?=
- =?utf-8?B?dkZLTzFHamdvOG56TW12UEFjVzNzQ2Q2UHgrbEM2T0FTVGRnZWVwdGYxVzlE?=
- =?utf-8?B?TlFkTGZ2N0ZnTlpjZCtUcnhjc01aL0VURVNRRStoOXJFdDZzMDhOU05NVExh?=
- =?utf-8?B?WHlRNUgxSFNzbFJ6TldKa0hjcUM0ZkRsVGFhYVh2U2VRTDRvUks4dVVzd3Rr?=
- =?utf-8?B?QTF3RmQzTWdXTW14cDI3SUJyMWRINzRORzFiKzdXWWlUbG5FUWNyZlVTQkJM?=
- =?utf-8?Q?mZqbpz7D28xJQ4Ow=3D?=
-Content-Type: multipart/alternative;
-	boundary="_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_"
+ dkim=fail reason="dkim: body hash did not verify" header.i=@bootlin.com header.s=dkim header.b=zJ0X/da1;
+ spf=pass (domain: bootlin.com, ip: 185.171.202.116, mailfrom: jeremie.dautheribes@bootlin.com)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 15917C2C64D
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:59:07 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id F0BD460718;
+	Thu, 21 May 2026 04:58:12 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id F3F3A107EA6B3;
+	Thu, 21 May 2026 06:58:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1779339492; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=bYc5QMh0pgHtuNuu19GBvZiJojyT4eunkHsJhVodKr4=;
+	b=zJ0X/da1Ux1m1VOlFeMWjELdD3DSt4ziS3GuUOhDi46T9/ebL5D091dxxpw5x3749bG2X0
+	Yp+eC1o8C1aaQ+MGxmhHXYb6nbyowOjBmuJ5vviqrjQzZpjsDoOLLow8x0KmvViRO9kHr7
+	8/NInmkPMmG5G6PBnFXWI6Fuas9nYdpyidwxf2yVO6SQHiv42ochMdE1b1XKFeDA/BZNYO
+	CKhaXVgAVQGeC98/+EaZOq1AeItsXOys5sbpXE5AL6V7DXCCochcjUy6GzGJqOUPRMS8eA
+	i+/UZwV6dCFSxRjyHX9axdjaqt3RfWK5aU0kJjhqy3KWkzspMRRK3E2t4aswvw==
+Message-ID: <63211b50-dda2-4a12-8053-48248a1087db@bootlin.com>
+Date: Thu, 21 May 2026 06:58:09 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: bmwtechworks.in
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PN0P287MB0358.INDP287.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 496550a3-0526-4e72-b82a-08deb6f0f9ab
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 May 2026 04:25:23.0147
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 970fa6fd-1031-4cc6-8c56-488f3c61cd05
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 739P4dLInRqqsegBaMNhwG4lyBf8l3QdlWfXbMVqda8nJlzoOAywR/cwcC5/Uy/X+9lyEIv0AL2FAyVeqc7KVqITCphXHX7w+/dQ3dtndif2OOidlm4fhosgFw9Z7/BU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN0P287MB2120
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-python][scarthgap][PATCH] python3-backports-zstd: add
+ recipe
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org, miquel.raynal@bootlin.com,
+ thomas.petazzoni@bootlin.com
+References: <20260519-add-backports-zstd-v1-1-b417d7d9c0eb@bootlin.com>
+ <CA+s=J=z4Dpaak7_X7VaP8SnJVSbNG0i9FMndQoY+uxAKFn8Nbw@mail.gmail.com>
+Content-Language: en-US, fr
+From: =?UTF-8?B?SsOpcsOpbWllIERhdXRoZXJpYmVz?=
+ <jeremie.dautheribes@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <CA+s=J=z4Dpaak7_X7VaP8SnJVSbNG0i9FMndQoY+uxAKFn8Nbw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:25:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127130
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:58:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127131
 
---_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+On 5/21/26 06:12, Anuj Mittal wrote:
+> On Tue, May 19, 2026 at 10:49=E2=80=AFPM J=C3=A9r=C3=A9mie Dautheribes =
+via
+> lists.openembedded.org
+> <jeremie.dautheribes=3Dbootlin.com@lists.openembedded.org> wrote:
+>>
+>> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jer=
+emie.dautheribes@bootlin.com>
+>> ---
+>> Hello,
+>>
+>> This patch adds support for the backports-zstd Python module in the
+>> Scarthgap branch. The recipe was previously part of the master branch =
+but
+>> was removed [1] because the module was integrated into the Python stan=
+dard
+>> library starting from Python 3.14.
+>>
+>> However, since Scarthgap uses Python 3.12, I believe it is reasonable =
+to
+>> include this backport for users on this branch.
+>>
+>> [1]: https://git.openembedded.org/meta-openembedded/commit/meta-python=
+?id=3Dd2539548d0c0e0a42a54fd35bb0e039e23396725
+>=20
+> Please include relevant parts in the commit message so we know why we
+> added a new recipe in scarthgap.
 
-U3VyZSBLaGVtDQpXaWxsIHNoYXJlIHRoZSBjb21wbGV0ZSBzZXQgb2YgcGF0Y2ggYWdhaW4gYXMg
-YSBmcmVzaCBSRkMgVjQNCg0KVGhhbmtzICwNCkFzaGlzaA0KDQoNCg0KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18NCkZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQpT
-ZW50OiAyMSBNYXkgMjAyNiAwOTo0NQ0KVG86IEFzaGlzaEt1bWFyIE1pc2hyYSA8QXNoaXNoS3Vt
-YXIuTWlzaHJhQGJtd3RlY2h3b3Jrcy5pbj4NCkNjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZyA8b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmc+DQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0ggdjMgMC8zXSBhbmRyb2lkLXRv
-b2xzOiBtaWdyYXRpb24gYW5kIGNsZWFudXANCg0KQ2F1dGlvbjogIkV4dGVybmFsIGVtYWlsLCBi
-ZSBjYXV0aW91cyBlc3BlY2lhbGx5IHdpdGggbGluayhzKSwgYXR0YWNobWVudChzKSBvciBRUiBj
-b2RlKHMpIi4NClRoaXMgcGF0Y2ggbG9va3Mgb2suIEZvciBmdXR1cmUsIGl0cyBnb29kIHRvIHNl
-bmQgcGF0Y2hlcyBpbmxpbmUgaW5zdGVhZCBvZiBhdHRhY2htZW50cywgbWFrZXMgaXQgZWFzeSB0
-byByZXZpZXcgdGhlbQ0KDQpPbiBXZWQsIE1heSAyMCwgMjAyNiBhdCA3OjM54oCvQU0gQXNoaXNo
-S3VtYXIgTWlzaHJhIHZpYSBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPGh0dHA6Ly9saXN0cy5vcGVu
-ZW1iZWRkZWQub3JnLz4gPGFzaGlzaGt1bWFyLm1pc2hyYT1ibXd0ZWNod29ya3MuaW5AbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86Ym13dGVjaHdvcmtzLmluQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc+PiB3cm90ZToNCkhpIEtoZW0gLyBHeW9yZ3kgJiBUZWFtLA0KDQpDYW4geW91IHBsZWFz
-ZSBsZXQgbWUga25vdyBpZiBhbnkgYWRkaXRpb25hbCB0ZXN0IGkgY2FuIGRvIGxvY2FsbHkgYmVm
-b3JlIHNoYXJpbmcgdGhlICBwYXRjaGVzIGZvciBhbmRyb2lkLXRvb2xzIGZvciB0aGUgYWJvZXYg
-Q0kgZXJyb3INClRoZSBkZXRhaWxzIGFyZSB0d28gdGhyZWFkIGFib3ZlIGF0IGh0dHBzOi8vbGlz
-dHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdlLzEyNzA0OA0K
-DQpJIHdhcyBwbGFubmluZyB0byBzaGFyZSB0aGUgdXBzdHJlYW0gcGF0Y2ggdG9tb3Jyb3cgYXMg
-aGF2ZSB0byBzdGFydCBhbm90aGVyIHdvcmsgb24gcHJpb3JpdHkNCg0KVGhhbmtzICwNCkFzaGlz
-aA0KDQotPS09LT0tPS09LT0tPS09LT0tPS09LQ0KTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNz
-YWdlcyBzZW50IHRvIHRoaXMgZ3JvdXAuDQpWaWV3L1JlcGx5IE9ubGluZSAoIzEyNzEyMSk6IGh0
-dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC9tZXNzYWdl
-LzEyNzEyMQ0KTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
-bXQvMTE5MTYyNzM1LzE5OTc5MTQNCkdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3du
-ZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsJTJCb3du
-ZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NClVuc3Vic2NyaWJlOiBodHRwczovL2xpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWIgW3Jhai5raGVtQGdtYWls
-LmNvbTxtYWlsdG86cmFqLmtoZW1AZ21haWwuY29tPl0NCi09LT0tPS09LT0tPS09LT0tPS09LT0t
-DQoNCg==
+Sure, will do in v2, thanks for the review!
 
---_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: base64
+>=20
+>> ---
+>>   ...oml-make-license-entries-compatible-with-.patch | 38 ++++++++++++=
+++++++++++
+>>   ...ojects.toml-lower-setuptools-requirements.patch | 31 ++++++++++++=
+++++++
+>>   .../python/python3-backports-zstd_1.5.0.bb         | 21 ++++++++++++
+>>   3 files changed, 90 insertions(+)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-backports-zst=
+d/0001-pyproject.toml-make-license-entries-compatible-with-.patch b/meta-=
+python/recipes-devtools/python/python3-backports-zstd/0001-pyproject.toml=
+-make-license-entries-compatible-with-.patch
+>> new file mode 100644
+>> index 0000000000..3e20085071
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd/0001-=
+pyproject.toml-make-license-entries-compatible-with-.patch
+>> @@ -0,0 +1,38 @@
+>> +From 1114b0d2b60056a3690be1f7629c112cf28ce367 Mon Sep 17 00:00:00 200=
+1
+>> +From: =3D?UTF-8?q?J=3DC3=3DA9r=3DC3=3DA9mie=3D20Dautheribes=3D20=3D28=
+Schneider=3D20Electric?=3D
+>> + =3D?UTF-8?q?=3D29?=3D <jeremie.dautheribes@bootlin.com>
+>> +Date: Fri, 15 May 2026 13:39:15 +0000
+>> +Subject: [PATCH] pyproject.toml: make license entries compatible with
+>> + setputools v69
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=3DUTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +The pypropject.toml uses license and license-files entries that are o=
+nly
+>> +compatible with seuptools >=3D v77, while Yocto Scarthgap only provid=
+es
+>> +setuptools v69.
+>> +
+>> +This is the only detected impact, otherwise the do_compile/do_package=
+ work
+>> +fine.
+>> +
+>> +Upstream-Status: Inappropriate [specific to OE LTS version]
+>> +Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <je=
+remie.dautheribes@bootlin.com>
+>> +---
+>> + pyproject.toml | 4 ++--
+>> + 1 file changed, 2 insertions(+), 2 deletions(-)
+>> +
+>> +diff --git a/pyproject.toml b/pyproject.toml
+>> +index ec9a1ea..18e6816 100644
+>> +--- a/pyproject.toml
+>> ++++ b/pyproject.toml
+>> +@@ -5,8 +5,8 @@ authors =3D [{ name =3D "Rogdham", email =3D "contact=
+@rogdham.net" }]
+>> + description =3D "Backport of compression.zstd"
+>> + readme =3D { file =3D "README.md", content-type =3D "text/markdown" =
+}
+>> + keywords =3D ["backport", "backports", "pep-784", "zstd"]
+>> +-license =3D "PSF-2.0"
+>> +-license-files =3D ["LICENSE.txt", "LICENSE_zstd.txt"]
+>> ++license =3D { text =3D "PSF-2.0" }
+>> ++#license-files =3D ["LICENSE.txt"]
+>> + classifiers =3D [
+>> +     "Development Status :: 5 - Production/Stable",
+>> +     "Intended Audience :: Developers",
+>> diff --git a/meta-python/recipes-devtools/python/python3-backports-zst=
+d/0002-pyprojects.toml-lower-setuptools-requirements.patch b/meta-python/=
+recipes-devtools/python/python3-backports-zstd/0002-pyprojects.toml-lower=
+-setuptools-requirements.patch
+>> new file mode 100644
+>> index 0000000000..7cbeeff61d
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd/0002-=
+pyprojects.toml-lower-setuptools-requirements.patch
+>> @@ -0,0 +1,31 @@
+>> +From 2ab6ba1d48a3d0e13382e346ba0a638548a5513e Mon Sep 17 00:00:00 200=
+1
+>> +From: =3D?UTF-8?q?J=3DC3=3DA9r=3DC3=3DA9mie=3D20Dautheribes=3D20=3D28=
+Schneider=3D20Electric?=3D
+>> + =3D?UTF-8?q?=3D29?=3D <jeremie.dautheribes@bootlin.com>
+>> +Date: Tue, 19 May 2026 14:06:43 +0000
+>> +Subject: [PATCH] pyprojects.toml: lower setuptools requirements
+>> +MIME-Version: 1.0
+>> +Content-Type: text/plain; charset=3DUTF-8
+>> +Content-Transfer-Encoding: 8bit
+>> +
+>> +Scarthgap provides setuptools v69, so adjust the requirement
+>> +accordingly.
+>> +
+>> +Upstream-Status: Inappropriate [specific to OE LTS version]
+>> +Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <je=
+remie.dautheribes@bootlin.com>
+>> +---
+>> + pyproject.toml | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/pyproject.toml b/pyproject.toml
+>> +index 18e6816..b5953e2 100644
+>> +--- a/pyproject.toml
+>> ++++ b/pyproject.toml
+>> +@@ -30,7 +30,7 @@ Source =3D "https://github.com/rogdham/backports.zs=
+td"
+>> + #
+>> +
+>> + [build-system]
+>> +-requires =3D ["setuptools>=3D80"]
+>> ++requires =3D ["setuptools>=3D69"]
+>> + build-backend =3D "setuptools.build_meta"
+>> +
+>> + [tool.setuptools.packages.find]
+>> diff --git a/meta-python/recipes-devtools/python/python3-backports-zst=
+d_1.5.0.bb b/meta-python/recipes-devtools/python/python3-backports-zstd_1=
+.5.0.bb
+>> new file mode 100644
+>> index 0000000000..0c83202b4a
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd_1.5.0=
+.bb
+>> @@ -0,0 +1,21 @@
+>> +SUMMARY =3D "Backport of compression.zstd"
+>> +DESCRIPTION =3D "Backport of PEP-784 'adding Zstandard to the standar=
+d library'"
+>> +HOMEPAGE =3D "https://github.com/Rogdham/backports.zstd/"
+>> +LICENSE =3D "0BSD & PSF-2.0"
+>> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D224f30639105a6ab845e06=
+8c2d0903ff \
+>> +                    file://LICENSE_zstd.txt;md5=3D85fffd6822a26cd7d2a=
+6eeb939ada0da \
+>> +                    file://src/c/pythoncapi-compat/COPYING;md5=3Df74f=
+54822fab8814a50330e4e4578b88 \
+>> +                    file://src/c/zstd/LICENSE;md5=3D0822a32f7acdbe013=
+606746641746ee8"
+>> +
+>> +inherit pypi python_setuptools_build_meta
+>> +
+>> +SRC_URI +=3D " \
+>> +        file://0001-pyproject.toml-make-license-entries-compatible-wi=
+th-.patch \
+>> +        file://0002-pyprojects.toml-lower-setuptools-requirements.pat=
+ch \
+>> +"
+>> +
+>> +SRC_URI[sha256sum] =3D "a5e622a82eb183b4fbe18032755ce0a15fa9a82f2adb9=
+b621620b91247aaedb7"
+>> +
+>> +PYPI_PACKAGE =3D "backports_zstd"
+>> +
+>> +BBCLASSEXTEND =3D "native nativesdk"
+>>
+>> ---
+>> base-commit: ae7dfb12245c7f9b9a353499e2688015bd4e6413
+>> change-id: 20260519-add-backports-zstd-0ccdda4bc156
+>>
+>> Best regards,
+>> --
+>> J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremie.dautheribe=
+s@bootlin.com>
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#127103): https://lists.openembedded.org/g/openembe=
+dded-devel/message/127103
+>> Mute This Topic: https://lists.openembedded.org/mt/119391866/3616702
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
+ [anuj.mittal@oss.qualcomm.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
 
-PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
-dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
-ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
-ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29m
-IiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01T
-Rm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
-MnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpTdXJlIEtoZW0mbmJzcDs8L2Rpdj4NCjxkaXYg
-Y2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19F
-bWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fu
-cy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpXaWxsIHNo
-YXJlIHRoZSBjb21wbGV0ZSBzZXQgb2YgcGF0Y2ggYWdhaW4gYXMgYSBmcmVzaCBSRkMgVjQmbmJz
-cDs8L2Rpdj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0iZm9udC1mYW1pbHk6
-IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZpY2UsIENhbGlicmks
-IEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xvcjogcmdiKDAsIDAs
-IDApOyI+DQo8YnI+DQo8L2Rpdj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29mIiBzdHlsZT0i
-Zm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01TRm9udFNlcnZp
-Y2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB0OyBjb2xv
-cjogcmdiKDAsIDAsIDApOyI+DQpUaGFua3MgLDwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRv
-UHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0
-b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNp
-emU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCkFzaGlzaCZuYnNwOzwvZGl2Pg0KPGRp
-diBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTogQXB0b3MsIEFwdG9z
-X0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBz
-YW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4N
-CjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJmb250LWZhbWlseTog
-QXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2VydmljZSwgQ2FsaWJyaSwg
-SGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9yOiByZ2IoMCwgMCwg
-MCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBjbGFzcz0iZWxlbWVudFRvUHJvb2YiIHN0eWxlPSJm
-b250LWZhbWlseTogQXB0b3MsIEFwdG9zX0VtYmVkZGVkRm9udCwgQXB0b3NfTVNGb250U2Vydmlj
-ZSwgQ2FsaWJyaSwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDEycHQ7IGNvbG9y
-OiByZ2IoMCwgMCwgMCk7Ij4NCjxicj4NCjwvZGl2Pg0KPGRpdiBpZD0iYXBwZW5kb25zZW5kIj48
-L2Rpdj4NCjxociBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7d2lkdGg6OTglIiB0YWJpbmRl
-eD0iLTEiPg0KPGRpdiBpZD0iZGl2UnBseUZ3ZE1zZyIgZGlyPSJsdHIiPjxmb250IGZhY2U9IkNh
-bGlicmksIHNhbnMtc2VyaWYiIHN0eWxlPSJmb250LXNpemU6MTFwdCIgY29sb3I9IiMwMDAwMDAi
-PjxiPkZyb206PC9iPiBLaGVtIFJhaiAmbHQ7cmFqLmtoZW1AZ21haWwuY29tJmd0Ozxicj4NCjxi
-PlNlbnQ6PC9iPiAyMSBNYXkgMjAyNiAwOTo0NTxicj4NCjxiPlRvOjwvYj4gQXNoaXNoS3VtYXIg
-TWlzaHJhICZsdDtBc2hpc2hLdW1hci5NaXNocmFAYm13dGVjaHdvcmtzLmluJmd0Ozxicj4NCjxi
-PkNjOjwvYj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgJmx0O29w
-ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnJmd0Ozxicj4NCjxiPlN1Ympl
-Y3Q6PC9iPiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0ggdjMgMC8zXSBhbmRyb2lkLXRvb2xzOiBt
-aWdyYXRpb24gYW5kIGNsZWFudXA8L2ZvbnQ+DQo8ZGl2PiZuYnNwOzwvZGl2Pg0KPC9kaXY+DQo8
-ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjpyZWQiPjxpPkNhdXRpb246ICZxdW90O0V4dGVybmFsIGVt
-YWlsLCBiZSBjYXV0aW91cyBlc3BlY2lhbGx5IHdpdGggbGluayhzKSwgYXR0YWNobWVudChzKSBv
-ciBRUiBjb2RlKHMpJnF1b3Q7LjwvaT48L3NwYW4+DQo8ZGl2Pg0KPGRpdiBkaXI9Imx0ciI+VGhp
-cyBwYXRjaCBsb29rcyBvay4gRm9yIGZ1dHVyZSwgaXRzIGdvb2QgdG8gc2VuZCBwYXRjaGVzIGlu
-bGluZSZuYnNwO2luc3RlYWQgb2YgYXR0YWNobWVudHMsIG1ha2VzIGl0IGVhc3kgdG8gcmV2aWV3
-IHRoZW0mbmJzcDs8L2Rpdj4NCjxicj4NCjxkaXYgY2xhc3M9InhfZ21haWxfcXVvdGUgeF9nbWFp
-bF9xdW90ZV9jb250YWluZXIiPg0KPGRpdiBkaXI9Imx0ciIgY2xhc3M9InhfZ21haWxfYXR0ciI+
-T24gV2VkLCBNYXkgMjAsIDIwMjYgYXQgNzozOeKAr0FNIEFzaGlzaEt1bWFyIE1pc2hyYSB2aWEN
-CjxhIGhyZWY9Imh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnLyIgb3JpZ2luYWxzcmM9Imh0
-dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnLyI+DQpsaXN0cy5vcGVuZW1iZWRkZWQub3JnPC9h
-PiAmbHQ7YXNoaXNoa3VtYXIubWlzaHJhPTxhIGhyZWY9Im1haWx0bzpibXd0ZWNod29ya3MuaW5A
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZyI+Ym13dGVjaHdvcmtzLmluQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc8L2E+Jmd0OyB3cm90ZTo8YnI+DQo8L2Rpdj4NCjxibG9ja3F1b3RlIGNsYXNzPSJ4X2dt
-YWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4IDAuOGV4OyBib3JkZXItbGVmdDox
-cHggc29saWQgcmdiKDIwNCwyMDQsMjA0KTsgcGFkZGluZy1sZWZ0OjFleCI+DQo8ZGl2PjxzcGFu
-IHN0eWxlPSJib3gtc2l6aW5nOmJvcmRlci1ib3g7IGNvbG9yOnJnYig1MSw1MSw1MSk7IGZvbnQt
-c2l6ZToxNnB4OyBmb250LXN0eWxlOm5vcm1hbDsgZm9udC12YXJpYW50LWxpZ2F0dXJlczpub3Jt
-YWw7IGZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDsgZm9udC13ZWlnaHQ6NDAwOyBsZXR0ZXItc3Bh
-Y2luZzpub3JtYWw7IHRleHQtYWxpZ246c3RhcnQ7IHRleHQtaW5kZW50OjBweDsgdGV4dC10cmFu
-c2Zvcm06bm9uZTsgd29yZC1zcGFjaW5nOjBweDsgd2hpdGUtc3BhY2U6bm9ybWFsOyB0ZXh0LWRl
-Y29yYXRpb24tc3R5bGU6aW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRpYWw7IGZv
-bnQtZmFtaWx5OnN5c3RlbS11aSxSb2JvdG8sQXJpYWwsc2Fucy1zZXJpZjsgYmFja2dyb3VuZC1j
-b2xvcjpyZ2IoMjU1LDI1NSwyNTUpOyBkaXNwbGF5OmlubGluZSI+SGkNCiBLaGVtIC88c3BhbiBz
-dHlsZT0iYm94LXNpemluZzpib3JkZXItYm94Ij4mbmJzcDs8L3NwYW4+PC9zcGFuPjxzcGFuIHN0
-eWxlPSJib3gtc2l6aW5nOmJvcmRlci1ib3g7IGNvbG9yOnJnYig1MSw1MSw1MSk7IGZvbnQtc2l6
-ZToxNnB4OyBmb250LXN0eWxlOm5vcm1hbDsgZm9udC12YXJpYW50LWxpZ2F0dXJlczpub3JtYWw7
-IGZvbnQtdmFyaWFudC1jYXBzOm5vcm1hbDsgZm9udC13ZWlnaHQ6NDAwOyBsZXR0ZXItc3BhY2lu
-Zzpub3JtYWw7IHRleHQtYWxpZ246c3RhcnQ7IHRleHQtaW5kZW50OjBweDsgdGV4dC10cmFuc2Zv
-cm06bm9uZTsgd29yZC1zcGFjaW5nOjBweDsgd2hpdGUtc3BhY2U6bm9ybWFsOyB0ZXh0LWRlY29y
-YXRpb24tc3R5bGU6aW5pdGlhbDsgdGV4dC1kZWNvcmF0aW9uLWNvbG9yOmluaXRpYWw7IGZvbnQt
-ZmFtaWx5OnN5c3RlbS11aSxSb2JvdG8sQXJpYWwsc2Fucy1zZXJpZjsgYmFja2dyb3VuZC1jb2xv
-cjpyZ2IoMjU1LDI1NSwyNTUpOyBkaXNwbGF5OmlubGluZSI+R3lvcmd5PHNwYW4gc3R5bGU9ImJv
-eC1zaXppbmc6Ym9yZGVyLWJveCI+PHNwYW4gc3R5bGU9ImJveC1zaXppbmc6Ym9yZGVyLWJveCI+
-Jm5ic3A7PC9zcGFuPiZhbXA7DQogVGVhbSwmbmJzcDs8YnI+DQo8YnI+DQo8L3NwYW4+PC9zcGFu
-PkNhbiB5b3UgcGxlYXNlIGxldCBtZSBrbm93IGlmIGFueSBhZGRpdGlvbmFsIHRlc3QgaSBjYW4g
-ZG8gbG9jYWxseSBiZWZvcmUgc2hhcmluZyB0aGUmbmJzcDsgcGF0Y2hlcyBmb3IgYW5kcm9pZC10
-b29scyBmb3IgdGhlIGFib2V2IENJIGVycm9yJm5ic3A7PGJyPg0KVGhlIGRldGFpbHMgYXJlIHR3
-byB0aHJlYWQgYWJvdmUgYXQgPGEgaHJlZj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
-L2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3MDQ4IiBvcmlnaW5hbHNyYz0iaHR0cHM6
-Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3
-MDQ4IiByZWw9Im5vb3BlbmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvbWVzc2FnZS8xMjcwNDg8L2E+Jm5ic3A7
-PGJyPg0KPGJyPg0KSSB3YXMgcGxhbm5pbmcgdG8gc2hhcmUgdGhlIHVwc3RyZWFtIHBhdGNoIHRv
-bW9ycm93IGFzIGhhdmUgdG8gc3RhcnQgYW5vdGhlciB3b3JrIG9uIHByaW9yaXR5Jm5ic3A7PGJy
-Pg0KPGJyPg0KVGhhbmtzICw8L2Rpdj4NCjxkaXY+QXNoaXNoPC9kaXY+DQo8YnI+DQotPS09LT0t
-PS09LT0tPS09LT0tPS09LTxicj4NCkxpbmtzOiBZb3UgcmVjZWl2ZSBhbGwgbWVzc2FnZXMgc2Vu
-dCB0byB0aGlzIGdyb3VwLjxicj4NClZpZXcvUmVwbHkgT25saW5lICgjMTI3MTIxKTogPGEgaHJl
-Zj0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21l
-c3NhZ2UvMTI3MTIxIiBvcmlnaW5hbHNyYz0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
-L2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTI3MTIxIiByZWw9Im5vcmVmZXJyZXIiIHRh
-cmdldD0iX2JsYW5rIj4NCmh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJl
-ZGRlZC1kZXZlbC9tZXNzYWdlLzEyNzEyMTwvYT48YnI+DQpNdXRlIFRoaXMgVG9waWM6IDxhIGhy
-ZWY9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC8xMTkxNjI3MzUvMTk5NzkxNCIg
-b3JpZ2luYWxzcmM9Imh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC8xMTkxNjI3MzUv
-MTk5NzkxNCIgcmVsPSJub3JlZmVycmVyIiB0YXJnZXQ9Il9ibGFuayI+DQpodHRwczovL2xpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcvbXQvMTE5MTYyNzM1LzE5OTc5MTQ8L2E+PGJyPg0KR3JvdXAgT3du
-ZXI6IDxhIGhyZWY9Im1haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwlMkJvd25lckBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnIiB0YXJnZXQ9Il9ibGFuayI+DQpvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZzwvYT48YnI+DQpVbnN1YnNjcmliZTogPGEgaHJlZj0iaHR0
-cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIiBv
-cmlnaW5hbHNyYz0iaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVk
-LWRldmVsL3Vuc3ViIiByZWw9Im5vcmVmZXJyZXIiIHRhcmdldD0iX2JsYW5rIj4NCmh0dHBzOi8v
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1YjwvYT4gWzxh
-IGhyZWY9Im1haWx0bzpyYWoua2hlbUBnbWFpbC5jb20iIHRhcmdldD0iX2JsYW5rIj5yYWoua2hl
-bUBnbWFpbC5jb208L2E+XTxicj4NCi09LT0tPS09LT0tPS09LT0tPS09LT0tPGJyPg0KPGJyPg0K
-PC9ibG9ja3F1b3RlPg0KPC9kaXY+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9ib2R5Pg0KPC9odG1sPg0K
+--=20
+J=C3=A9r=C3=A9mie Dautheribes, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
 
---_000_PN0P287MB03588FFCC9D4427C084EE601890E2PN0P287MB0358INDP_--
 
