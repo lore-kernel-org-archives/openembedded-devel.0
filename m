@@ -1,321 +1,190 @@
-Return-Path: <anuj.mittal@oss.qualcomm.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31C52CD4F3D
-	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:12:21 +0000 (UTC)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.29300.1779336735542711361
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37E02CD343F
+	for <webhook@archiver.kernel.org>; Thu, 21 May 2026 04:16:31 +0000 (UTC)
+Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.29341.1779336982113308922
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 May 2026 21:12:15 -0700
+ Wed, 20 May 2026 21:16:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Vl2D/asK;
- dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=dmB9lvXI;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.168.131, mailfrom: anuj.mittal@oss.qualcomm.com)
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64KM3YfA118977
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:12:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	4pc6tkIy/OWfkazP/1oCrbTBv9aEb33K0s3EoTcCMHE=; b=Vl2D/asKBfCTo+2w
-	iBjTYSdla6kiwmoyMHgU+dkk1TwDbPnrE5ZzeQLAfcVr5aJAMaRfbU8lFwcDToi4
-	zGp1r5iccdXe9wiDbthX475NxhfC3tEc9bLhxz90coSv6tP7+bQEauaOji1Rp/3j
-	nxE7pYGN/1Tppa1m3cyC9fckuFSAsHHAaPLae6BBiH+/vLSVoS1oseCqwVwmwO4t
-	aQX9QjhGMQBzmtUpD2MLc99GKpayg/CP8tgw71slSNYvOv+s2BCUzecyqK0FtY/x
-	RDnCX0j2belbtYixI53gXO6tPE2ynm6P3CAdlifN41L1VkbF3UqBUSSRO2uuEpwy
-	5mZl+A==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9ee8b13e-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:12:14 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-8ba9baef44cso79916746d6.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 21:12:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779336734; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=AtLzRGWX;
+ spf=pass (domain: gmail.com, ip: 74.125.224.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-65318dafbcbso5594093d50.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 May 2026 21:16:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779336981; cv=none;
         d=google.com; s=arc-20240605;
-        b=Lnriv70nPVEISA2pgAWa8GtqHDpEmR6Mbd+vPJltbHWGZqjMej2dnnQ2T/BNqVlaCP
-         eerTyeVDxMUbXbtFmdU6kvySHl8SjaKU2lPYe3gmt5IXQuI9jIQGD3h1zJPozMbEWvWF
-         UWKENdVvScwivtsscOieg3fQxdhzDVp8Y47c0TzIbk1UoJ6uOWQUhcyny1HJfkqNjLeS
-         R9HNXkKAkS49K8JASikYoz7w0SrnKZ79RZXZ8pCBK+EM0tSQPJ5mfesQRiy7Ph+7fH4L
-         CvBu9f21a9A1JekYKPIysBoatNJjp+Z+IU+XaZJdS6Y4tukWMepGhbCPVPQSPu4GdGX1
-         fs9Q==
+        b=jXExB/3EshWt1kHFvPZtsgxgNSsSDHd5NKjjDR442KKGaIObXVuqJYHqB4mWJksItZ
+         6Osp6J5TJldEVBu4xRXCJ61A2K+Zsx6AYVnoAc80Elav65V3/AIpjw5vTRYRJ9r48bKf
+         Giq4xmZ3L0EAm4VXU1bshk1/lCrpvVLkhkqFHdMqz06JsChMQT2vgYtQDd4CkCx/RM7L
+         PQWdjO5UIb+BdBot4GrG79+iZfJmpMwyAFKAckXXP1jDv2clLzCjBEpk7xxBPYuY6eLo
+         Mvh+Ig4Dd1wV8eYwEK6pQhoiJngtjGqZg48AE4DErWjLdF7qXrcqI0RicsIeGL75hqO9
+         5d1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=4pc6tkIy/OWfkazP/1oCrbTBv9aEb33K0s3EoTcCMHE=;
-        fh=5u3v+Jz2hQ+/WkxPVMyCCYG7ecaE1fTJeqNpqiLMBBg=;
-        b=BZAko6wcU3z1I50XpijVQWokFxGsdM6iJbVawZHMEwFacFZzBvGOqnbvfJhc+hSzLz
-         p2ZgBj2cmfA97ifcUG9ar9aO1eLYP41hTaB06sFDhkPk7TVd6Lf4/1cfmn7GPux1ub/k
-         56GHvdvyoYCFHJVr4Q6ADcqXV/WNMvrBgv2a9yVhCOvtRADyRQbNo21Dgr16tX8UWIy8
-         PVxnbx3hl082trxOnMUcrTIs6dprUyEnvLKJkoavIUQeptQ/oWowtJlq1l1CUtOcQI8k
-         tb0K6ky6LRtkNUMVU9qLLkXPVYdksVmtNwIqQVZ+8yvWj5kvQIDefaqpmhE9sDCXPSE0
-         xHaQ==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
+        fh=4YTjzO0C8RH/MztJHcaGYe1pZCao8Pv/ipu6VaPWe1w=;
+        b=ggYF4AyDSccVShOVa+UkpM/6vNqhbL9b5LYggUbADxYDt56/MNemss1ZvVHuWx5Qmi
+         UmGK3AWcUBMu2tT1y96KQyu2wLn2XXP3cnZaxmKDnHRG6n/DS3opmqTrkCijYjKNkLqA
+         msYbLIvqApsrnZ3bC6zjn5xq/4REBhW4QFOe4roDHKBCUycod3dRprctkTu30bNEqO29
+         FCphVHVFjAe9Y5UWnAui4VO7aN9wj2PROjmRX7lmPukMlKCDX4PyV+vT+y4+oARr+oZd
+         +4h13fmWW6qHwXLs6NKtUiI/CPesTZCPyK7l2jn2i/cKKAM7aNk8N6kZcQrXLSRUG1Wy
+         tc3g==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1779336734; x=1779941534; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=4pc6tkIy/OWfkazP/1oCrbTBv9aEb33K0s3EoTcCMHE=;
-        b=dmB9lvXIojdCiE1kbwnDB8YzS4o78+v1YrQXbsMqzmqLuY8/lkhow8g6YIpLz7+owl
-         dmO0IXg2+7nq3glqQGhsBrV10vj7KCuttUo/11CgSjH7jl1+vdQIKGovd3zByDPsHOdQ
-         /ufYZdGAqvQ0AtFN04UwD3VriPgkcTD47416ln0A0fJ2RF5J0eXNhzvqDLjx6l1xkdzj
-         WYZyGLrgSTg2wexkm62vVaHSHjIaZugXmdHtV7HqE/2hZT0TBCNeUJFW9J0KYSGw/fgD
-         baKdvvrs6mcvJGouSuA/U2pe6LUbcQg34rhC24yzNJI5g+hazi58R6+NsNy/BPM02YO2
-         BI8g==
+        d=gmail.com; s=20251104; t=1779336981; x=1779941781; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
+        b=AtLzRGWX3e2+Cn3saaF4QKl4At0be/h6H27C19R7di0/uH3WiDQYiPo96fZSjyfw0B
+         tv2mcYojZ7ILu806a1vSuLm2BCzPLCLHpjwXZQyGHvHZ+n5VYFWqYNX+xtm5Cbb366EX
+         FhrUgZ616vVthw0fYQs1pIue6UMhA76TiCGhyx2yGNrh569FblLpyoOzVlpNxwvJopUA
+         lXz1UnXSN0XLem40p/5l9LKrKH5krclhr16rEtOoXf3ZyR/VYm9GtumHzBBRkCZ8wnQK
+         Qlm2xamKMzh734oxs7ofv5IzGmoM9u5PKC1OlnVd4/92OF2r9V7b2ICbigpB/lGgeHVS
+         khow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779336734; x=1779941534;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=4pc6tkIy/OWfkazP/1oCrbTBv9aEb33K0s3EoTcCMHE=;
-        b=M0c8po5g9mYYzfx34qd4wVSxMv7G5ysCI5tpf5xTRfIyI0J0onuom/isyzevJQCWCw
-         0O0cBKiP0ydCke5MW9sMdohulgnH0SJDbhx2p7sLCApYNuWz1HPcVqve3gCdjNVWZPDn
-         4c7rrqrd3i19Md99ykUfhkz9q4tiZk2GFeb5s21vJexTUMOCmo3NbNeKI7o7O/66nEIg
-         5SQpf0S1mbI0qCq28me35x8eToX7uUec+fdmzXJK60O5g/nILIzFKrzA9tbqoQoiGSH7
-         RUfWmQl7A4N8y1SV8GP6sjfKofHg/fINVuKDPn+DhoZ+odW2QxTg978E5az3FDCv4row
-         ruYQ==
-X-Gm-Message-State: AOJu0Ywvf09hSYUMjmU+0+J2FxF2vVK1GVPB0dYZTxrBUUbaMA3aszHK
-	qRLjRhLcllzTYm0ukfmhHJeKvAdryaza5dZCu6u0Qbv7e5Mf/NpqVfqqzbffPQiqOnP0lLeOalw
-	zW04XOjymscEwQtdrKmnZBcsq3DVUQOkGELm774I6Aip2Ykx4fW3vRn/DLsM3qrUxZQt3lbTrfG
-	0WT7oaz3AKKd1WBt8Ya3tHffy8BZuVeKboBFEVVe+5bpXVMaek9bV0mOnuqT7auY7JpYhBJg==
-X-Gm-Gg: Acq92OFQdLvNHi+hxsu7dJ00TfTQTYJHMT/SuIN8CrqSqZjBmq4HDtIge6Wq4stKf5i
-	a3hoEdXa31bdOBz3SkWbpOBREBP5Gcv+TLyp2w0eO3z91klXwBRXtlgAHjQ1cxoLULoqwSSK1M6
-	4k+rr5QiO0paz38pIIQBJNcr+6NnWUoknX8qA65tZXlpOHKV51tu1qBz+Zn3voTG6kX0aDjM7Qq
-	4K4xToJ2IZgzdo=
-X-Received: by 2002:a05:6214:2a85:b0:8b2:2474:8f3a with SMTP id 6a1803df08f44-8cc6e371db6mr20504196d6.25.1779336733738;
-        Wed, 20 May 2026 21:12:13 -0700 (PDT)
-X-Received: by 2002:a05:6214:2a85:b0:8b2:2474:8f3a with SMTP id
- 6a1803df08f44-8cc6e371db6mr20503896d6.25.1779336733207; Wed, 20 May 2026
- 21:12:13 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779336981; x=1779941781;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=xDo+Wea+Tbrm51PA6mPPTPvO//kzA66F/j5ScW6M7dM=;
+        b=mgDHpmo6/BtKaOABqUxQwqKekhV+hMX+r/u9/l+ykAqFK7uM0lZrlHKVxwS7TlGbio
+         2I0tricmkQDrARfOrcL8k/tkqt5h/V7D38fmcHSAp6ASbD1a4FVp9puBzQ/Y2mUgklHM
+         U8jcQ2L/f1Ocy4MjzN6PMpgeXthfzqQwDX3NMbOtnj81lo7rqBWwmSL6C+Ju7N+ewPh2
+         jf+RcwVjMWlnnkhHElc73UHKXZ145IbFjxEvnZVl/eCWGunTzPSyNcB/HUfcKGDFfvcd
+         cqaIuo2GlDZjq6YJ+sPsuEJRBMlD7D6OBBUaOxmPU2gdZzRmHbo4yN6QkCETGoSY704l
+         BuXQ==
+X-Gm-Message-State: AOJu0YxkLIfZu0Gwee7k9Z6EPXYHTah3WoSA364nLiHpxWVG37u+VAY7
+	2Ri5cOlR93Bc0Fi4KqXJqNQzt0JGVhxvsF80quSxcTzsxjD1qgnMCiN2OsQcBwpGnstB8qhCiIy
+	bHLnpEb1mMyMdFe9vABfLycrMp0tsh+c=
+X-Gm-Gg: Acq92OGDENyuCvQVqqKbK67v893JSf8+rkVRqWtjWJPzxXSF/2Fsxxoedd8Dbfv9C2B
+	FKB3WjIZ+2tG/wa6j5tmqG3VJsu3wq1mmWDTz/mCSX6EUV87QuH43w/xcbRrxaq1AtlTkFe+sUt
+	Nz8lyc4ruysyhHjZxN2E99j21kHd5dm747fMxOcnr3EbnjsFACkk+B/dk1i8gEuKYjGYknV2Tq3
+	NBfrXqreis+DuO/3vVK0MpJ5KFeERfmYfLZVwXp1BVtS/MRS3x+AoQFp3p61MeR31a4l8WnohE0
+	mGY8v8gHf21EeLH5OMXR7lfwiza/G5pyrU6QOgR/hukSu1BA6+FHKCwKZaqN2L/73BRIDKL9nI5
+	dSdOCVlqI03triSa+Jm73TiMGwIcTHfLSgNh/kuYl2piJB+odHrhp+zidOV205VAJy6YaH10AGk
+	ch+8H4
+X-Received: by 2002:a05:690e:d05:b0:65c:4b93:4256 with SMTP id
+ 956f58d0204a3-65eadfa77ddmr997336d50.15.1779336981146; Wed, 20 May 2026
+ 21:16:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260519-add-backports-zstd-v1-1-b417d7d9c0eb@bootlin.com>
-In-Reply-To: <20260519-add-backports-zstd-v1-1-b417d7d9c0eb@bootlin.com>
-From: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
-Date: Thu, 21 May 2026 12:12:00 +0800
-X-Gm-Features: AVHnY4K_AMrNpwxb3A0Yoa6zgCQRcLza0IKY4FBYMqs10X-xtdxdp3BzAMaWCQE
-Message-ID: <CA+s=J=z4Dpaak7_X7VaP8SnJVSbNG0i9FMndQoY+uxAKFn8Nbw@mail.gmail.com>
-Subject: Re: [oe][meta-python][scarthgap][PATCH] python3-backports-zstd: add recipe
-To: jeremie.dautheribes@bootlin.com
-Cc: openembedded-devel@lists.openembedded.org, miquel.raynal@bootlin.com,
-        thomas.petazzoni@bootlin.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: T7JYCJ8aChq5L8jF2oiiAbwF3WWnxYDL
-X-Authority-Analysis: v=2.4 cv=e5k2j6p/ c=1 sm=1 tr=0 ts=6a0e861e cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=Q4-j1AaZAAAA:8 a=NEAV23lmAAAA:8 a=P-IC7800AAAA:8
- a=AHN3VR9gAAAA:8 a=EUspDBNiAAAA:8 a=xWcaT8NIUwj21e4Di14A:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22 a=9H3Qd4_ONW2Ztcrla5EB:22 a=d3PnA9EDa4IxuAV0gXij:22
- a=KY4itkV-wrzEik3ojJMI:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIxMDAzNyBTYWx0ZWRfX1d4zcrS+c+SC
- HZCuD6NwwWuIudnOqqLYLusac/FXQOy5E7IGB5c7Ng99FqXZi5Y+UA9k0XWR+6KSgLeTJYbocGC
- l/lRuI+oJzlU37eQzEHOj366RUtCxk94niHzujZ40QFBvhXdFSypdNE28eKTrmbIZxZIaY7a2VS
- I+py48NcUQME/KIq+Ha181Q8G6cduTUJsafGlCKxXqabk7LDy+FRulgSLK7wXztexCLOE2byb0+
- p9k0kCc5Q3IdGbZb7lpwgVmVp5UUxhV6YudJkkh8WSjhidNcYwtUI45w8tG/tqwQQMpI80xg14y
- 6wFZK5DXbL7s4HaBR+ezDYoYqqnRB6wa9tx06r+Tv2+2z9fAK38+/i//bcCVn0Dp3OMVMhV3OK8
- TR1+u/9RM1bVEiV25DOGJhiPZzc2IE6P57bGD2ma6EomzB+nVyMykohtGTCtS3WQERkH4UaL+0D
- IBVrWlPURzv6UOTWDTA==
-X-Proofpoint-GUID: T7JYCJ8aChq5L8jF2oiiAbwF3WWnxYDL
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-20_03,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605210037
+References: <20260505150634.192651-1-emailaddress.ashish@gmail.com>
+ <2022222.1778130561122567168@lists.openembedded.org> <2115555.1778654861364723634@lists.openembedded.org>
+ <6a719287-ab7f-486b-a9c4-ec5801e9e8af@gmail.com> <CAMKF1sp=Ae3MHJYK7fbAXokwEhayigWkOPjpzw+H4Mp3W3Bjow@mail.gmail.com>
+ <PN0P287MB0358EC7112FFB28C9B6157C089062@PN0P287MB0358.INDP287.PROD.OUTLOOK.COM>
+ <CAMKF1spvQfLjaAWu4_QJwU+_QPivKEw7SjTvxMzcc4+dieAmqA@mail.gmail.com>
+ <1575450.1778745762950591364@lists.openembedded.org> <1575450.1778840626136865406@lists.openembedded.org>
+ <1824db6e-eded-4f5f-8626-c74406ef2670@gmail.com> <CAMKF1srFmVDNF=f2aU1SEYFv5MGXgZGOYc9150HDuBeTJg1V8g@mail.gmail.com>
+ <1690109.1779097786262242307@lists.openembedded.org> <2251952.1779175643922816455@lists.openembedded.org>
+ <2273658.1779287978782701878@lists.openembedded.org>
+In-Reply-To: <2273658.1779287978782701878@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 May 2026 21:15:55 -0700
+X-Gm-Features: AVHnY4KEBUAAIC579Fg4pxyxWz9fCLv62lck_439Jo8UL3Nqf4BpnMXpjQ4lmw4
+Message-ID: <CAMKF1spFueVnbh9+dZOpxxZ-Rw3qFFsXLBkfiNwj7YGvDX=4jA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3 0/3] android-tools: migration and cleanup
+To: ashishkumar.mishra@bmwtechworks.in
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000b271b306524c2c55"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:12:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127128
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 May 2026 04:16:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127129
 
-On Tue, May 19, 2026 at 10:49=E2=80=AFPM J=C3=A9r=C3=A9mie Dautheribes via
-lists.openembedded.org
-<jeremie.dautheribes=3Dbootlin.com@lists.openembedded.org> wrote:
->
-> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
-e.dautheribes@bootlin.com>
-> ---
-> Hello,
->
-> This patch adds support for the backports-zstd Python module in the
-> Scarthgap branch. The recipe was previously part of the master branch but
-> was removed [1] because the module was integrated into the Python standar=
-d
-> library starting from Python 3.14.
->
-> However, since Scarthgap uses Python 3.12, I believe it is reasonable to
-> include this backport for users on this branch.
->
-> [1]: https://git.openembedded.org/meta-openembedded/commit/meta-python?id=
-=3Dd2539548d0c0e0a42a54fd35bb0e039e23396725
+--000000000000b271b306524c2c55
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Please include relevant parts in the commit message so we know why we
-added a new recipe in scarthgap.
+This patch looks ok. For future, its good to send patches inline instead of
+attachments, makes it easy to review them
 
-> ---
->  ...oml-make-license-entries-compatible-with-.patch | 38 ++++++++++++++++=
-++++++
->  ...ojects.toml-lower-setuptools-requirements.patch | 31 ++++++++++++++++=
-++
->  .../python/python3-backports-zstd_1.5.0.bb         | 21 ++++++++++++
->  3 files changed, 90 insertions(+)
+On Wed, May 20, 2026 at 7:39=E2=80=AFAM AshishKumar Mishra via
+lists.openembedded.org <ashishkumar.mishra=3D
+bmwtechworks.in@lists.openembedded.org> wrote:
+
+> Hi Khem / Gyorgy & Team,
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-backports-zstd/0=
-001-pyproject.toml-make-license-entries-compatible-with-.patch b/meta-pytho=
-n/recipes-devtools/python/python3-backports-zstd/0001-pyproject.toml-make-l=
-icense-entries-compatible-with-.patch
-> new file mode 100644
-> index 0000000000..3e20085071
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd/0001-pyp=
-roject.toml-make-license-entries-compatible-with-.patch
-> @@ -0,0 +1,38 @@
-> +From 1114b0d2b60056a3690be1f7629c112cf28ce367 Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?J=3DC3=3DA9r=3DC3=3DA9mie=3D20Dautheribes=3D20=3D28Sch=
-neider=3D20Electric?=3D
-> + =3D?UTF-8?q?=3D29?=3D <jeremie.dautheribes@bootlin.com>
-> +Date: Fri, 15 May 2026 13:39:15 +0000
-> +Subject: [PATCH] pyproject.toml: make license entries compatible with
-> + setputools v69
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +The pypropject.toml uses license and license-files entries that are only
-> +compatible with seuptools >=3D v77, while Yocto Scarthgap only provides
-> +setuptools v69.
-> +
-> +This is the only detected impact, otherwise the do_compile/do_package wo=
-rk
-> +fine.
-> +
-> +Upstream-Status: Inappropriate [specific to OE LTS version]
-> +Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jerem=
-ie.dautheribes@bootlin.com>
-> +---
-> + pyproject.toml | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/pyproject.toml b/pyproject.toml
-> +index ec9a1ea..18e6816 100644
-> +--- a/pyproject.toml
-> ++++ b/pyproject.toml
-> +@@ -5,8 +5,8 @@ authors =3D [{ name =3D "Rogdham", email =3D "contact@ro=
-gdham.net" }]
-> + description =3D "Backport of compression.zstd"
-> + readme =3D { file =3D "README.md", content-type =3D "text/markdown" }
-> + keywords =3D ["backport", "backports", "pep-784", "zstd"]
-> +-license =3D "PSF-2.0"
-> +-license-files =3D ["LICENSE.txt", "LICENSE_zstd.txt"]
-> ++license =3D { text =3D "PSF-2.0" }
-> ++#license-files =3D ["LICENSE.txt"]
-> + classifiers =3D [
-> +     "Development Status :: 5 - Production/Stable",
-> +     "Intended Audience :: Developers",
-> diff --git a/meta-python/recipes-devtools/python/python3-backports-zstd/0=
-002-pyprojects.toml-lower-setuptools-requirements.patch b/meta-python/recip=
-es-devtools/python/python3-backports-zstd/0002-pyprojects.toml-lower-setupt=
-ools-requirements.patch
-> new file mode 100644
-> index 0000000000..7cbeeff61d
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd/0002-pyp=
-rojects.toml-lower-setuptools-requirements.patch
-> @@ -0,0 +1,31 @@
-> +From 2ab6ba1d48a3d0e13382e346ba0a638548a5513e Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?J=3DC3=3DA9r=3DC3=3DA9mie=3D20Dautheribes=3D20=3D28Sch=
-neider=3D20Electric?=3D
-> + =3D?UTF-8?q?=3D29?=3D <jeremie.dautheribes@bootlin.com>
-> +Date: Tue, 19 May 2026 14:06:43 +0000
-> +Subject: [PATCH] pyprojects.toml: lower setuptools requirements
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +Scarthgap provides setuptools v69, so adjust the requirement
-> +accordingly.
-> +
-> +Upstream-Status: Inappropriate [specific to OE LTS version]
-> +Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jerem=
-ie.dautheribes@bootlin.com>
-> +---
-> + pyproject.toml | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/pyproject.toml b/pyproject.toml
-> +index 18e6816..b5953e2 100644
-> +--- a/pyproject.toml
-> ++++ b/pyproject.toml
-> +@@ -30,7 +30,7 @@ Source =3D "https://github.com/rogdham/backports.zstd"
-> + #
-> +
-> + [build-system]
-> +-requires =3D ["setuptools>=3D80"]
-> ++requires =3D ["setuptools>=3D69"]
-> + build-backend =3D "setuptools.build_meta"
-> +
-> + [tool.setuptools.packages.find]
-> diff --git a/meta-python/recipes-devtools/python/python3-backports-zstd_1=
-.5.0.bb b/meta-python/recipes-devtools/python/python3-backports-zstd_1.5.0.=
-bb
-> new file mode 100644
-> index 0000000000..0c83202b4a
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-backports-zstd_1.5.0.bb
-> @@ -0,0 +1,21 @@
-> +SUMMARY =3D "Backport of compression.zstd"
-> +DESCRIPTION =3D "Backport of PEP-784 'adding Zstandard to the standard l=
-ibrary'"
-> +HOMEPAGE =3D "https://github.com/Rogdham/backports.zstd/"
-> +LICENSE =3D "0BSD & PSF-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D224f30639105a6ab845e068c2=
-d0903ff \
-> +                    file://LICENSE_zstd.txt;md5=3D85fffd6822a26cd7d2a6ee=
-b939ada0da \
-> +                    file://src/c/pythoncapi-compat/COPYING;md5=3Df74f548=
-22fab8814a50330e4e4578b88 \
-> +                    file://src/c/zstd/LICENSE;md5=3D0822a32f7acdbe013606=
-746641746ee8"
-> +
-> +inherit pypi python_setuptools_build_meta
-> +
-> +SRC_URI +=3D " \
-> +        file://0001-pyproject.toml-make-license-entries-compatible-with-=
-.patch \
-> +        file://0002-pyprojects.toml-lower-setuptools-requirements.patch =
-\
-> +"
-> +
-> +SRC_URI[sha256sum] =3D "a5e622a82eb183b4fbe18032755ce0a15fa9a82f2adb9b62=
-1620b91247aaedb7"
-> +
-> +PYPI_PACKAGE =3D "backports_zstd"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
+> Can you please let me know if any additional test i can do locally before
+> sharing the  patches for android-tools for the aboev CI error
+> The details are two thread above at
+> https://lists.openembedded.org/g/openembedded-devel/message/127048
 >
-> ---
-> base-commit: ae7dfb12245c7f9b9a353499e2688015bd4e6413
-> change-id: 20260519-add-backports-zstd-0ccdda4bc156
+> I was planning to share the upstream patch tomorrow as have to start
+> another work on priority
 >
-> Best regards,
-> --
-> J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremie.dautheribes@b=
-ootlin.com>
->
+> Thanks ,
+> Ashish
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#127103): https://lists.openembedded.org/g/openembedde=
-d-devel/message/127103
-> Mute This Topic: https://lists.openembedded.org/mt/119391866/3616702
+> View/Reply Online (#127121):
+> https://lists.openembedded.org/g/openembedded-devel/message/127121
+> Mute This Topic: https://lists.openembedded.org/mt/119162735/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nuj.mittal@oss.qualcomm.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
+>
+
+--000000000000b271b306524c2c55
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This patch looks ok. For future, its good to send patches =
+inline=C2=A0instead of attachments, makes it easy to review them=C2=A0</div=
+><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" clas=
+s=3D"gmail_attr">On Wed, May 20, 2026 at 7:39=E2=80=AFAM AshishKumar Mishra=
+ via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &=
+lt;ashishkumar.mishra=3D<a href=3D"mailto:bmwtechworks.in@lists.openembedde=
+d.org">bmwtechworks.in@lists.openembedded.org</a>&gt; wrote:<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex"><div><span style=3D"box-sizing=
+:border-box;color:rgb(51,51,51);font-size:16px;font-style:normal;font-varia=
+nt-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing=
+:normal;text-align:start;text-indent:0px;text-transform:none;word-spacing:0=
+px;white-space:normal;text-decoration-style:initial;text-decoration-color:i=
+nitial;font-family:system-ui,Roboto,Arial,sans-serif;background-color:rgb(2=
+55,255,255);display:inline">Hi Khem /<span style=3D"box-sizing:border-box">=
+=C2=A0</span></span><span style=3D"box-sizing:border-box;color:rgb(51,51,51=
+);font-size:16px;font-style:normal;font-variant-ligatures:normal;font-varia=
+nt-caps:normal;font-weight:400;letter-spacing:normal;text-align:start;text-=
+indent:0px;text-transform:none;word-spacing:0px;white-space:normal;text-dec=
+oration-style:initial;text-decoration-color:initial;font-family:system-ui,R=
+oboto,Arial,sans-serif;background-color:rgb(255,255,255);display:inline">Gy=
+orgy<span style=3D"box-sizing:border-box"><span style=3D"box-sizing:border-=
+box">=C2=A0</span>&amp; Team,=C2=A0<br><br></span></span>Can you please let=
+ me know if any additional test i can do locally before sharing the=C2=A0 p=
+atches for android-tools for the aboev CI error=C2=A0<br>The details are tw=
+o thread above at <a href=3D"https://lists.openembedded.org/g/openembedded-=
+devel/message/127048" rel=3D"noopener" target=3D"_blank">https://lists.open=
+embedded.org/g/openembedded-devel/message/127048</a>=C2=A0<br><br>I was pla=
+nning to share the upstream patch tomorrow as have to start another work on=
+ priority=C2=A0<br><br>Thanks ,</div>
+<div>Ashish</div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#127121): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/127121" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/127121</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119162735/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/119162735/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000b271b306524c2c55--
 
