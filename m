@@ -2,309 +2,280 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DA041CD4F54
-	for <webhook@archiver.kernel.org>; Sat, 23 May 2026 05:02:02 +0000 (UTC)
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.3097.1779512515255791040
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BF66CD5BB1
+	for <webhook@archiver.kernel.org>; Sat, 23 May 2026 12:39:21 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7288.1779539960745234336
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2026 22:01:55 -0700
+ Sat, 23 May 2026 05:39:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=LM5PS0L8;
- spf=pass (domain: gmail.com, ip: 209.85.215.174, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-c80167f56cdso3620122a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2026 22:01:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=QABYV30F;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2bd9c3b550aso57742915ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 05:39:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779512514; x=1780117314; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1779539960; x=1780144760; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=6GoHHwb00pJLu7dmUJ+xg7MI9J44yL0FIQgTvekutco=;
-        b=LM5PS0L8wizWOzOhnAdQuXQi85YUgMOG9RLsYJX/jv+QFOUGN3bDRLXXoXZv1nfbQt
-         8Mu27A44eo9DmpoFX+Al817AHxeBPljwkU9ateo+DO2bpl8ZGBWeqwftQOe5iu4kKPil
-         e9M+UQ7EqFNZlVwkdjkNkWPO4+xempohIEStNm00p8pwJM9q3p6YYlwrw++zwMXutI52
-         Q4LThv4iT9FCjXYCgnKuti14dji7bujxNKCq2GFkQUu3/ec5xQH+sEd6RfIDo93x8fL6
-         tqPkwRFAb5h2tR8AVXehpz8ZXYiAxkf/LNvAhT6WB4ByxhmLaL2IUZrUCn0n0INVX51f
-         xK0g==
+        bh=QSRqNezVxsBH1BFX6zuHajB5kAgDAn/Zik0SAauqNkM=;
+        b=QABYV30FbzsWfsAb9qDtouVUkdks4SHqTpum+NF9FxGX4TEA0qVZEMJ/lLrz7zXBQ2
+         P8gplRmdhwerOMSRmzL8M3ErbWzsQZm84rtrFOpiQ91p67QvD8VgF6hG2xApqhElJpeY
+         WxCKOpQp3tG7lbcU/HHr867smLzoLZd904KYvjyDq5mPsvLxJmMsDyuGSFtO65+CgWB1
+         SKmr90lWlUMwMkeqGDWHKARCxhKQd+pFvlxaKm2fNiJ/7Gz/xGluinHccxbvlYA4m1TP
+         7tUXO6CtsDgw9hpfv/Idh7dDbY2lsCFJOw2PQ5i/h4Qw0R3YMpKzbhtLeK9bPNIRh2wB
+         ORxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779512514; x=1780117314;
+        d=1e100.net; s=20251104; t=1779539960; x=1780144760;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=6GoHHwb00pJLu7dmUJ+xg7MI9J44yL0FIQgTvekutco=;
-        b=e16woD1ZNVBUnmmdg/grA84ICRBOi6g4zzTEvuwkX/Dj++09zN5PbenFsJqz+CaOrw
-         xtptMICz9Da9j6qHoXYhYOy/B7p9VDPA5h/WboGslhDniBA61CFP+P+H8ppglah1UiXN
-         P1ZZRPh4/edTUA8BLyY7oYAndgIo17iAyMvla0cp/YqVLrbksxo0vydr1TjqYKfGVyNL
-         M4xdQU31F+Z4aOWcW2GsKuRczxG2Iw0rrIBASxPxfDu3kOK0iA4El1ah/nes6gM/Gl2N
-         u6ssJtOPIkVacnxdh5IyIuvuej8PD94w/M8pC6OnI4x7neIGAkNVPIw1KIHMegDWnt+T
-         w2LQ==
-X-Gm-Message-State: AOJu0YwuymhTgKzkS9WwrJdD6oCjpJO5vUfx2f16MrOVvuQ2LXonBzgE
-	fsYdE1k6tXv3FYDMWSMf6ggBwtHGuyUZKVU4HlO3zN52RKSwhIPL+V6hC8Ej4tvB
-X-Gm-Gg: Acq92OF8Lh6CJ0QFVhfXYD6/HPmIulcgv65TZhvhFtQDxicgPVmFWbecfTqPanlmoMZ
-	oB/nt3kkbtyTBVIGQu1z2ZaHHWthh8vzPAAHFTKKROcWxcQcJHaCfO8fEaZC4Xy8HaeC+HdTkZO
-	CYmCUz+5HqdBGJ9MVgRxMgC3mk5KoK0blf0cV29cS7bSg+Xw/wH6hXqF/bLh+k7S0ffliwpXdoU
-	xwZHuYSQNHh4zvjGzkSaUgUiuJ1HGSXPkUdueULD+PUgqeOUDef08Xe86m5Kb9z637WIi2MdQ/w
-	rwyTKJRqW7EnqK/CAQiitjfmj6Wj7KB2x50dxva8qoauJq6egKEcWS9tQp2JWiIcAESdRduUHRh
-	cNi47LOSXwXIIjliWQ1PGhCJ0p3ricAGZA7h/j2fnIuJyIKILr+COpqJp9qJQCnRyRvuqY1Tlch
-	rIKJuBEBDALb6rmoYJ4UjT77WGTg1JFSP6xWZHjnKvS4tvgdA=
-X-Received: by 2002:a05:6a20:d709:b0:3aa:ca34:61e7 with SMTP id adf61e73a8af0-3b328e27117mr6377020637.31.1779512514418;
-        Fri, 22 May 2026 22:01:54 -0700 (PDT)
+        bh=QSRqNezVxsBH1BFX6zuHajB5kAgDAn/Zik0SAauqNkM=;
+        b=Cjda23GsTOZHHKGr4lAO/1h23TkeAj9BrHhhqCPf5b6+jZ1ADWb/gJf4cCbfOe7HbW
+         BUxaac6ry/WzEI9EHzkSiFG6FtSlC/lzpVGGab9ayH2EGMt35Plh/ysdObqRZJhzb6dE
+         p3HcSxY3HJ6Hf6dMpk5fiGFP6fc1Wa2ldrRK+CzVMr+ZYHYo4M+vTAzKCICD9wyMxu42
+         k001q2HN/VjSRqb7c+CiOhOOiLqsAgtX7KF5NW0MoY75Wr+HWaWlvSnCNsBRcu7k/u9/
+         jOZFByV8Ut2X5L/pCLlJ9tuCWwmfJLNnlM1+vEVQJ206wYjUInw6kJBdJuwQa0HmvwPj
+         Z6hA==
+X-Gm-Message-State: AOJu0YzkP8uiUVaPfphJWH1c11aNumLDg6xGYHOmx6lggXwHME0gm/BS
+	6SpN5Vdy3mi753tcvsHcJ8xez8w2oqjJ6/iv7FgOCDXq9hlr2gJq0xAhPVYoPhUn
+X-Gm-Gg: Acq92OGuoTl1N/SzmujJVkAaCAE60QQ6vMCRU+vFwelMvlXAfonDmVJ47/CMq8inE/Z
+	uy8eW58B5dn29asxZtiyk4ch7QpjKqCkE9KJDnh0OpYGQ7lanK82sAPRnwBIvOdDsVAXJI2P+8M
+	sRp8Kh6qAVXhJbI7OSd0l6OOWy4UAvXzUz0PT4YT3PfAchMLAl+hxTXrIS8Zm5/7hKCiZKEdtJv
+	YTerRcGfpkUJpCR5CAT7U9+LWWfmdaKtnE/uBMKoUFcrmqUIIaxXaUESCw8ygRJlvT4U2Q2DVlq
+	QEh9YBKG7ux9DZ8BdxGPjaqkbz3IX9UdS+FORc4tBTKALHpeqe3flE6Q4lWtzr00KLoih7/S0WS
+	qDNeVvEwkV+gFf4iM9WMSPSA0XKFsYmCX/ADDBN1salpKmaJHZdWzGXSEX22ekAO+HvEOEjRXsN
+	rdhwHT65AE3u0t/YX2aCzG7S5fa4YPQergCpbu
+X-Received: by 2002:a17:903:1aae:b0:2b9:5d1b:73da with SMTP id d9443c01a7336-2beb0741079mr85312405ad.30.1779539960075;
+        Sat, 23 May 2026 05:39:20 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84164ad2ca6sm3423107b3a.5.2026.05.22.22.01.51
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2beb58b3058sm46152515ad.39.2026.05.23.05.39.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 May 2026 22:01:54 -0700 (PDT)
+        Sat, 23 May 2026 05:39:19 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Jason Schonberg <schonm@gmail.com>,
-	Khem Raj <khem.raj@oss.qualcomm.com>,
-	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][wrynose][PATCH 25/25] nodejs: upgrade 22.22.2 -> 22.22.3
-Date: Sat, 23 May 2026 17:00:27 +1200
-Message-ID: <20260523050028.848327-25-ankur.tyagi85@gmail.com>
+Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 2/3] redis: upgrade 7.2.12 -> 7.2.14
+Date: Sun, 24 May 2026 00:39:04 +1200
+Message-ID: <20260523123907.2609140-2-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260523050028.848327-1-ankur.tyagi85@gmail.com>
-References: <20260523050028.848327-1-ankur.tyagi85@gmail.com>
+In-Reply-To: <20260523123907.2609140-1-ankur.tyagi85@gmail.com>
+References: <20260523123907.2609140-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 05:02:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127175
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 12:39:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127177
 
-From: Jason Schonberg <schonm@gmail.com>
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
-With this upgrade, nodejs updated the llhttp dependency to version 9.3.1
-So some of the patches are nolonger necessary.
+Also refreshed patches to resolve patch fuzz QA issue.
 
-Changelog: https://github.com/nodejs/node/releases/tag/v22.22.3
+Bug and security fix release
+https://github.com/redis/redis/releases/tag/7.2.13
+https://github.com/redis/redis/releases/tag/7.2.14
 
-Signed-off-by: Jason Schonberg <schonm@gmail.com>
-Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit ea56a5e3ae463a1b9d28298f47f27b40e519ca6d)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../0001-detect-aarch64-Neon-correctly.patch  | 51 ----------------
- .../0001-fix-arm-Neon-intrinsics-types.patch  | 59 ------------------
- ...header-value-__builtin_ctzll-undefin.patch | 60 -------------------
- .../{nodejs_22.22.2.bb => nodejs_22.22.3.bb}  |  5 +-
- 4 files changed, 1 insertion(+), 174 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-detect-aarch64-Neon-correctly.patch
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-fix-arm-Neon-intrinsics-types.patch
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_22.22.2.bb => nodejs_22.22.3.bb} (96%)
+ .../0001-hiredis-use-default-CC-if-it-is-set.patch   | 12 ++++++++----
+ ...e-Makefile-to-use-environment-build-setting.patch |  6 +++---
+ .../0003-hack-to-force-use-of-libc-malloc.patch      |  8 ++++----
+ .../redis/0004-src-Do-not-reset-FINAL_LIBS.patch     |  6 +++---
+ ...GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 10 +++++-----
+ .../0006-Define-correct-gregs-for-RISCV32.patch      |  8 ++++----
+ .../redis/{redis_7.2.12.bb => redis_7.2.14.bb}       |  2 +-
+ 7 files changed, 28 insertions(+), 24 deletions(-)
+ rename meta-oe/recipes-extended/redis/{redis_7.2.12.bb => redis_7.2.14.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-detect-aarch64-Neon-correctly.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-detect-aarch64-Neon-correctly.patch
-deleted file mode 100644
-index 15de2c1119..0000000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-detect-aarch64-Neon-correctly.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From 41ec2d5302b77be27ca972102c29ce12471ed4b0 Mon Sep 17 00:00:00 2001
--From: Gyorgy Sarvari <skandigraun@gmail.com>
--Date: Thu, 12 Feb 2026 11:09:44 +0100
--Subject: [PATCH 2/2] detect aarch64 Neon correctly
--
--The llhttp vendored dependency of nodejs takes advantage of Arm NEON
--instructions when they are available, however they are detected by
--checking for an outdated CPU feature macro: it checks for __ARM_NEON__,
--however it is not defined by new compilers for aarch64, rather they
--set __ARM_NEON. The Arm C extension guide[1] refers to __ARM_NEON macro
--aswell.
--
--This patch changes the detection to check for both macros when detecting
--the availability of NEON instructions.
--
--The code this patch modifies is generated, so the patch itself isn't
--suitable for upstream submission, as the root cause of the error is
--in the generator itself. A PR has been submitted[2] to the generator
--project to rectify this issue.
--
--[1]: https://developer.arm.com/documentation/ihi0053/d/ - pdf, section 6.9
--[2]: https://github.com/nodejs/llparse/pull/84
--
--Upstream-Status: Inappropriate [see above]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- deps/llhttp/src/llhttp.c | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
--index a0e59e50..b069bbbb 100644
----- a/deps/llhttp/src/llhttp.c
--+++ b/deps/llhttp/src/llhttp.c
--@@ -10,7 +10,7 @@
--  #endif  /* _MSC_VER */
-- #endif  /* __SSE4_2__ */
-- 
---#ifdef __ARM_NEON__
--+#if defined(__ARM_NEON__) || defined(__ARM_NEON)
--  #include <arm_neon.h>
-- #endif  /* __ARM_NEON__ */
-- 
--@@ -2625,7 +2625,7 @@ static llparse_state_t llhttp__internal__run(
--         goto s_n_llhttp__internal__n_header_value_otherwise;
--       }
--       #endif  /* __SSE4_2__ */
---      #ifdef __ARM_NEON__
--+      #if defined(__ARM_NEON__) || defined(__ARM_NEON)
--       while (endp - p >= 16) {
--         uint8x16_t input;
--         uint8x16_t single;
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-fix-arm-Neon-intrinsics-types.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-fix-arm-Neon-intrinsics-types.patch
-deleted file mode 100644
-index ddbad575f0..0000000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-fix-arm-Neon-intrinsics-types.patch
-+++ /dev/null
-@@ -1,59 +0,0 @@
--From 3f4283dac7d88a89b42f1f2966a862cee5afe486 Mon Sep 17 00:00:00 2001
--From: Gyorgy Sarvari <skandigraun@gmail.com>
--Date: Thu, 12 Feb 2026 11:03:53 +0100
--Subject: [PATCH 1/2] fix arm Neon intrinsics types
--
--The current code calls these intrinsics with incorrect datatypes
--(it uses a vector of uint16 instead of uint8), causing compilation
--to fail with the following error:
--
--| ../deps/llhttp/src/llhttp.c: In function 'llhttp__internal__run':
--| ../deps/llhttp/src/llhttp.c:2645:9: note: use '-flax-vector-conversions' to permit conversions between vectors with differing element types or numbers of subparts
--|  2645 |         );
--|       |         ^
--| ../deps/llhttp/src/llhttp.c:2643:11: error: incompatible type for argument 1 of 'vandq_u16'
--|  2643 |           vcgeq_u8(input, vdupq_n_u8(' ')),
--
--To avoid this, set the correct intrinsics call that matches the
--actual arguments.
--
--The code that this patch modifies is generated code, so in itself
--this change isn't appropriate for upstream. The actual problem
--is in the code generator itself, for which a PR is already pending
--for merging[1]. This patch is a port of that PR.
--
--[1]: https://github.com/nodejs/llparse/pull/79
--
--Upstream-Status: Inappropriate [see above]
--Signed-off-by: Gyorgy Sarvari <skandigraun@gmail.com>
-----
-- deps/llhttp/src/llhttp.c | 12 ++++++------
-- 1 file changed, 6 insertions(+), 6 deletions(-)
--
--diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
--index aa4c4682..887603fd 100644
----- a/deps/llhttp/src/llhttp.c
--+++ b/deps/llhttp/src/llhttp.c
--@@ -2639,17 +2639,17 @@ static llparse_state_t llhttp__internal__run(
--         /* Find first character that does not match `ranges` */
--         single = vceqq_u8(input, vdupq_n_u8(0x9));
--         mask = single;
---        single = vandq_u16(
--+        single = vandq_u8(
--           vcgeq_u8(input, vdupq_n_u8(' ')),
--           vcleq_u8(input, vdupq_n_u8('~'))
--         );
---        mask = vorrq_u16(mask, single);
---        single = vandq_u16(
--+        mask = vorrq_u8(mask, single);
--+        single = vandq_u8(
--           vcgeq_u8(input, vdupq_n_u8(0x80)),
--           vcleq_u8(input, vdupq_n_u8(0xff))
--         );
---        mask = vorrq_u16(mask, single);
---        narrow = vshrn_n_u16(mask, 4);
--+        mask = vorrq_u8(mask, single);
--+        narrow = vshrn_n_u16(vreinterpretq_u16_u8(mask), 4);
--         match_mask = ~vget_lane_u64(vreinterpret_u64_u8(narrow), 0);
--         match_len = __builtin_ctzll(match_mask) >> 2;
--         if (match_len != 16) {
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch
-deleted file mode 100644
-index 683dddcf04..0000000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch
-+++ /dev/null
-@@ -1,60 +0,0 @@
--From a63a5faea54055973bf5f0a514444532563cc20d Mon Sep 17 00:00:00 2001
--From: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
--Date: Fri, 27 Feb 2026 20:58:43 +0530
--Subject: [PATCH] llhttp: fix NEON header value __builtin_ctzll undefined
-- behavior
--
--When all 16 bytes match the allowed range, match_mask becomes 0 after
--the bitwise NOT. Calling __builtin_ctzll(0) is undefined behavior per
--the C standard.
--
--The code expects match_len == 16 when all bytes match (so the branch
--is skipped and p += 16 continues the loop), but this relied on
--ctzll(0) returning 64, which is not guaranteed.
--
--GCC at -O2 exploits this UB by deducing that __builtin_ctzll() result
--is always in range [0, 63], and after >> 2 always in [0, 15], which
--is never equal to 16. The compiler then optimizes
--"if (match_len != 16)" to always-true, causing every valid 16-byte
--chunk to be falsely rejected as containing an invalid character.
--
--This manifests as HTTP 400 Bad Request (HPE_INVALID_HEADER_TOKEN) for
--any HTTP header value longer than 16 characters on ARM targets with
--NEON enabled.
--
--Fix by explicitly checking for match_mask == 0 and setting
--match_len = 16, avoiding the undefined behavior entirely. This bug
--affects both aarch64 and armv7 NEON targets.
--
--The fix has been merged upstream in llparse 7.3.1 [1] and is included
--in llhttp 9.3.1. This patch can be dropped when nodejs updates its
--bundled llhttp to >= 9.3.1.
--
--[1]: https://github.com/nodejs/llparse/pull/83
--
--Upstream-Status: Inappropriate
--Signed-off-by: Telukula Jeevan Kumar Sahu <j-sahu@ti.com>
-----
-- deps/llhttp/src/llhttp.c | 6 +++++-
-- 1 file changed, 5 insertions(+), 1 deletion(-)
--
--diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
--index 14b731e..b0a46c6 100644
----- a/deps/llhttp/src/llhttp.c
--+++ b/deps/llhttp/src/llhttp.c
--@@ -2651,7 +2651,11 @@ static llparse_state_t llhttp__internal__run(
--         mask = vorrq_u8(mask, single);
--         narrow = vshrn_n_u16(vreinterpretq_u16_u8(mask), 4);
--         match_mask = ~vget_lane_u64(vreinterpret_u64_u8(narrow), 0);
---        match_len = __builtin_ctzll(match_mask) >> 2;
--+        if (match_mask == 0) {
--+          match_len = 16;
--+        } else {
--+          match_len = __builtin_ctzll(match_mask) >> 2;
--+        }
--         if (match_len != 16) {
--           p += match_len;
--           goto s_n_llhttp__internal__n_header_value_otherwise;
---- 
--2.34.1
--
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.3.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_22.22.3.bb
-index 3a1385f70a..a13b71b762 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_22.22.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_22.22.3.bb
-@@ -31,9 +31,6 @@ SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-positional-args.patch \
-            file://0001-custom-env.patch \
-            file://0001-build-remove-redundant-mXX-flags-for-V8.patch \
--           file://0001-fix-arm-Neon-intrinsics-types.patch \
--           file://0001-detect-aarch64-Neon-correctly.patch \
--           file://0001-llhttp-fix-NEON-header-value-__builtin_ctzll-undefin.patch \
-            file://run-ptest \
-            "
- SRC_URI:append:class-target = " \
-@@ -42,7 +39,7 @@ SRC_URI:append:class-target = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "b6bedd3a8cacd5df7df015a5088264b12c74a277ba60684cb9642ae8eb743132"
-+SRC_URI[sha256sum] = "f3e6a578db1ab335a4a72785c1e87ad18a2cf6d2fc25747a1d741fb34af0bd0f"
+diff --git a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+index 51a6e9c957..035f533661 100644
+--- a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
++++ b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
+@@ -1,4 +1,4 @@
+-From 67990f216f2fbbc8a6699c700dfc089aa617905f Mon Sep 17 00:00:00 2001
++From 61ae3e0277ac92323584bbe75ce79de6e030e84a Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 17:39:52 -0600
+ Subject: [PATCH] hiredis: use default CC if it is set
+@@ -6,6 +6,10 @@ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
  
- S = "${UNPACKDIR}/node-v${PV}"
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
+ Instead of trying to automagically figure out CC, which breaks with OE
+ as CC has spaces in it, just skip it if one was already passed in.
+ 
+@@ -23,15 +27,15 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+  1 file changed, 2 deletions(-)
+ 
+ diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
+-index 7e41c97..54717e3 100644
++index bd2106b..9ce768d 100644
+ --- a/deps/hiredis/Makefile
+ +++ b/deps/hiredis/Makefile
+-@@ -42,8 +42,6 @@ endef
++@@ -36,8 +36,6 @@ endef
+  export REDIS_TEST_CONFIG
+  
+  # Fallback to gcc when $CC is not in $PATH.
+ -CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
+ -CXX:=$(shell sh -c 'type $${CXX%% *} >/dev/null 2>/dev/null && echo $(CXX) || echo g++')
+  OPTIMIZATION?=-O3
+- WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
++ WARNINGS=-Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
+  DEBUG_FLAGS?= -g -ggdb
+diff --git a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+index 17b533669b..c163aaae8b 100644
+--- a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
++++ b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
+@@ -1,4 +1,4 @@
+-From ef989aab052510bfda32b2b325a5f80b76c42677 Mon Sep 17 00:00:00 2001
++From a35a89981e28fb118efa86a798dacda826eb6f74 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Fri, 8 Feb 2013 20:22:19 -0600
+ Subject: [PATCH] lua: update Makefile to use environment build settings
+@@ -23,10 +23,10 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  3 files changed, 6 insertions(+), 12 deletions(-)
+ 
+ diff --git a/deps/Makefile b/deps/Makefile
+-index cbe3aef..76bc222 100644
++index 3bf0363..fd8765a 100644
+ --- a/deps/Makefile
+ +++ b/deps/Makefile
+-@@ -81,7 +81,6 @@ endif
++@@ -94,7 +94,6 @@ endif
+  # lua's Makefile defines AR="ar rcu", which is unusual, and makes it more
+  # challenging to cross-compile lua (and redis).  These defines make it easier
+  # to fit redis into cross-compilation environments, which typically set AR.
+diff --git a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+index f1021eef6c..f142ff6ec2 100644
+--- a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
++++ b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
+@@ -1,4 +1,4 @@
+-From b9586abcb803747301f6cc4ff93c7642bef693ea Mon Sep 17 00:00:00 2001
++From a6246b17e94a2f7ad3560787a476b18aa7a45358 Mon Sep 17 00:00:00 2001
+ From: Venture Research <tech@ventureresearch.com>
+ Date: Wed, 6 Feb 2013 20:51:02 -0600
+ Subject: [PATCH] hack to force use of libc malloc
+@@ -20,7 +20,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 7d75c83..35dd314 100644
++index 6a87909..b8e0d44 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+ @@ -13,7 +13,8 @@
+@@ -31,5 +31,5 @@ index 7d75c83..35dd314 100644
+ +# use fake uname option to force use of generic libc
+ +uname_S := "USE_LIBC_MALLOC"
+  uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
+- OPTIMIZATION?=-O2
+- DEPENDENCY_TARGETS=hiredis linenoise lua hdr_histogram
++ CLANG := $(findstring clang,$(shell sh -c '$(CC) --version | head -1'))
++ OPTIMIZATION?=-O3
+diff --git a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+index 958106e261..ecf8714d33 100644
+--- a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+@@ -1,4 +1,4 @@
+-From a4d87aca1c00c53b386ee7490223971e00873add Mon Sep 17 00:00:00 2001
++From 1b59adad94137eedfbcddb27adae74b80b4e0909 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Tue, 10 Sep 2019 20:04:26 -0700
+ Subject: [PATCH] src: Do not reset FINAL_LIBS
+@@ -16,10 +16,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile b/src/Makefile
+-index 35dd314..3770f96 100644
++index b8e0d44..3a68fa6 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -93,7 +93,7 @@ endif
++@@ -122,7 +122,7 @@ endif
+  
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(REDIS_LDFLAGS) $(DEBUG)
+diff --git a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+index d73c66c9d0..cd8fae4074 100644
+--- a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
++++ b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
+@@ -1,4 +1,4 @@
+-From 2e6311c9c7cd85bf63eab8fe92c08ec1ec01b6fc Mon Sep 17 00:00:00 2001
++From 5a58c573d486411a3a1585ca42bee70a661a983d Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 21 Dec 2019 12:09:51 -0800
+ Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
+@@ -16,12 +16,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+)
+ 
+ diff --git a/src/zmalloc.c b/src/zmalloc.c
+-index 1f33d09..5e182d1 100644
++index bbfa386..93e07ff 100644
+ --- a/src/zmalloc.c
+ +++ b/src/zmalloc.c
+-@@ -28,6 +28,7 @@
+-  * POSSIBILITY OF SUCH DAMAGE.
+-  */
++@@ -32,6 +32,7 @@
++ #include "config.h"
++ #include "solarisfixes.h"
+  
+ +#define _GNU_SOURCE
+  #include <stdio.h>
+diff --git a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+index bb3f5c607e..dd44797437 100644
+--- a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
++++ b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
+@@ -1,4 +1,4 @@
+-From 6149911f7a6fbaef3ed418408e2b501fa9479ffa Mon Sep 17 00:00:00 2001
++From 8a16ff40b75671725e4bd92b50a5f083460e796b Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 26 Oct 2020 21:32:22 -0700
+ Subject: [PATCH] Define correct gregs for RISCV32
+@@ -14,10 +14,10 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 24 insertions(+), 2 deletions(-)
+ 
+ diff --git a/src/debug.c b/src/debug.c
+-index bb76c5d..55a0696 100644
++index 684f692..2ee151f 100644
+ --- a/src/debug.c
+ +++ b/src/debug.c
+-@@ -1067,7 +1067,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
++@@ -1215,7 +1215,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
+      #endif
+  #elif defined(__linux__)
+      /* Linux */
+@@ -28,7 +28,7 @@ index bb76c5d..55a0696 100644
+      GET_SET_RETURN(uc->uc_mcontext.gregs[14], eip);
+      #elif defined(__X86_64__) || defined(__x86_64__)
+      GET_SET_RETURN(uc->uc_mcontext.gregs[16], eip);
+-@@ -1234,8 +1236,28 @@ void logRegisters(ucontext_t *uc) {
++@@ -1401,8 +1403,28 @@ void logRegisters(ucontext_t *uc) {
+      #endif
+  /* Linux */
+  #elif defined(__linux__)
+diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/redis/redis_7.2.12.bb
+rename to meta-oe/recipes-extended/redis/redis_7.2.14.bb
+index 2b4087a74b..93235e3707 100644
+--- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
++++ b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
+@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
+            file://0006-Define-correct-gregs-for-RISCV32.patch \
+           "
+-SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d0196bc"
++SRC_URI[sha256sum] = "21326da3f66c0aead4c8204c0ac52ff905337a77cadd169f75ac22835ea30025"
+ 
+ inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
  
 
