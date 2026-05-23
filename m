@@ -2,64 +2,64 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2B08CD5BC4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9B27CD5BB8
 	for <webhook@archiver.kernel.org>; Sat, 23 May 2026 05:01:42 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.3047.1779512495657346141
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.3091.1779512502200727880
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 May 2026 22:01:35 -0700
+ Fri, 22 May 2026 22:01:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=BLMDRT/6;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-841513664bbso1437946b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2026 22:01:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=gUhGOMCO;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: ankur.tyagi85@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-83659d38e38so3252961b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 May 2026 22:01:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779512495; x=1780117295; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1779512502; x=1780117302; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=DLo+vCOZ6y5jJdU09iERlJUFMQqbsKhIPhcAkRGWmnM=;
-        b=BLMDRT/6xBslrmmVFjBXrCOkQKru3KM6CUENPO8xr8JLbPXgvAZtNiEQ/4Li3RyTyg
-         sbzKxmjzF9IectIaNld57SO8vbLxoDFTQ98C6t1WEBV5D/unROultDmmanxpkzngkBMl
-         D34pICYNK7lkElESJNP5VrgnvDu5q+HAm291oYqfEf5UNEimM3bEjaaf1jVUOSQpS1J1
-         5CQU9B2+sSGzjbuOHyYAByzMqRdyRa0pxAUxHq0wFkjPdaV0S+EjJcPAjsLSTAGXmevH
-         2NddOrOMc/Z4uchYMNDVHUAzAThwHL5T1bAXSU7ZCNMmifpDvJSyNz5ZzL+iz7CrOIHu
-         WsLw==
+        bh=/cWA6r4DA3smYB6i6bQEd0p+ed93T0InZSkmOR0n0SA=;
+        b=gUhGOMCOtgalwBrsKJPu+fUm1wmde41piZ9sRr61zEKcuKKU7rXmaE2M7Rve0fW1uw
+         gujIvh/RdD8bg6dWMHMpMoYhroJyyr8VOGWleUEADW6wltu984w7/n79wsSQfm9PWZec
+         2gs+gCQ6ZqEiWL0hEv4PtCSTL+O9zC8EviNH5rKFGLCLh+HCXs0wS0qgJL37tKJ4wARr
+         lnQUCeVzSv3PDpynTtVfN7w9og67NDQFrMmBI578fMAZAO1D2xJYt0ryhEjxjkDjBRzu
+         BA0GHzKUGCQVXS3dtCo2pmTVSrqsWSiHNBZSb4ThIm6IKtA/vqNcM0Spa7sjetkUcwHy
+         whBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779512495; x=1780117295;
+        d=1e100.net; s=20251104; t=1779512502; x=1780117302;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=DLo+vCOZ6y5jJdU09iERlJUFMQqbsKhIPhcAkRGWmnM=;
-        b=mFCh5oTnq3HcakL6ED73kmE2kTDiN/rsg2r+ESxny33o5+w2ydYW7plrajgGOtvb2w
-         uzmLr7DdjHqyoYJ/clNHoL4pzX/KgU7bAmW99IB9BaaDVXrDo5qy/6nQOEerAjexnbfm
-         ATjfjbDCnb5kTSOFJjBmcBMmPzhHd+Qj9azbM0LfXW4IZOlf4EdWyQgx64FerCO7Jx64
-         KnEL1CHxY821EgxZgdFqUiSa0Y80J2BT7nX9TTIM1EMl5N2nW8dCCUA0UqVJzo1u9+ia
-         PJOHEh0B2Futr8J1jmZIZyHXyWKJ3ZFAVqKwo5c9Nj+I8AwHmPJLeZIC4FK2ulYkETR4
-         xqXg==
-X-Gm-Message-State: AOJu0Yz1MOLNv8GJkX9FvK49SkA26gCjyyZv+7P42hM62SL/3K2ABpb0
-	GN2R0qpOzOU49GS2WY/53GtIUiXHvHDgjKA7WlJwpAOHa0LLnLATxezjgo0PTval
-X-Gm-Gg: Acq92OHY6W1ig3zQIoBVImTsJdMMVfBZQPsKpB8ZMg50aG31VcCksWdREDVzFMfCi5h
-	Zis8nV4NfaG6JQpkQL72IFGtyCe93bJnQAlthpN0/azW66jFkrvoNCg/TR1R2UMYQESR9Y087tB
-	TeSMitpgdNGB3IygdJNpA78RvpGZ0cbHtuskSWzrZtxRPO7o+WNoHMDl6gfQfOIUsYc6hXNPY5e
-	KeLXYhx+nue0a0odHgCMQaUw/qf4peFklWjx00RezwbZGXHAgNwIzBPYyhxr/05bcO6u8MRt5nX
-	Yp3euZQcYAEYsxoDLwhvzfiJ+SWE3WLrRv8szoIpLbfargE4JeEuHpdNIbmUwkil9t3vIasP8i1
-	PmjsODOHaMCsGBqF4l4GuMbUkdXiFY8FTp8bR7ulqp4knns/F7yrRZiCoKJNOlUT5ez1/6seRkr
-	GiufIn7Gs1Kk81NqcRyhFZFOYLILPQWE9Ru5qiRwYq8m+1+0Q=
-X-Received: by 2002:a05:6a00:bd08:b0:824:b304:2d1e with SMTP id d2e1a72fcca58-84160c0d30dmr5167120b3a.8.1779512495042;
-        Fri, 22 May 2026 22:01:35 -0700 (PDT)
+        bh=/cWA6r4DA3smYB6i6bQEd0p+ed93T0InZSkmOR0n0SA=;
+        b=b8HQpuXaPypbvPu+80i2ysUd2r9Xajq1K06H3jTki3CnHWKXqjgLM+wlmEBKsjvTzS
+         xlNMhMGBxxUUqm5bx3xpkoIchYTkasYNv4WtDw22quhnHP3Oh1+whdCMRQP8cRTfrrve
+         pvh7HBlgpq9iMZ0K0PVCVzzbKACH4kbrvk0zGycvsHpfxfnocP0mkbjhPSnHTd2OS2bR
+         0O7/V4Ltco/HkB0jGLVqhxkUo3sABPjec7gkmzrtwY4ux6/N+jYlkzo7PL+Jz0odfm2b
+         BlxSstS93DpoMRQFvwLwClavJzLm8zLnX5aQLGvtu3EozFZoQQ+rnTnmPEM6NBsDKXvn
+         VYYQ==
+X-Gm-Message-State: AOJu0YyD0xVZqU6PX+wz8dVYFGuE5Bv/0gg9op+VmKLVd3Rg62cuW/lw
+	ZtBARucAZNFjvLoc5ubMYotcJlgtf39uZVXDzOoS7o1Ls8157K0iMaKNnzXlW6V2
+X-Gm-Gg: Acq92OGWmet/v1XhhjOdij9xuHN9f13V9PdBmN25ZB5uRcBLMEl31yVHF+G+tnEbs89
+	fvOznf7Ent60f98EUz197IYa/R4lebP8Sm668KP0Aokw0J1JcDMIprdndA2FNkKZkS9t+7Mb2cl
+	omeGuh3cpLsPKAxOjAK2/2jh9dxiuHTDphV/lpxvnWUNvU98gm9AG79mqLJylU5F3/Q0bDVE6jQ
+	VcVt1fLdVtWnMDBBy9tvxQXqWgH9DUxo3H4gu9yYn4Q9nLCfiCmhRDQP7py3xCnCuqCujT6+LQL
+	3wtOTCVwQWSy1C1zRbBdiPEVh5nG6bBdL7y2ygLujXhu/1vlYYlUuUGtz7YG1cNmWRSrYA0pexl
+	O2Q2Eot5kdFexSTb6AVPJcdG45HlYiLrcxfexxA15kEPQ2RkSJ07ED0DawHNnhz1isg14YH6aWm
+	E0zq4xnDdbfllEaSTePAapWTApFh6+5vQW/Xoo
+X-Received: by 2002:a05:6a00:4292:b0:83e:b125:ff30 with SMTP id d2e1a72fcca58-8415f2d6d66mr6384383b3a.7.1779512501592;
+        Fri, 22 May 2026 22:01:41 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84164ad2ca6sm3423107b3a.5.2026.05.22.22.01.32
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84164ad2ca6sm3423107b3a.5.2026.05.22.22.01.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 May 2026 22:01:34 -0700 (PDT)
+        Fri, 22 May 2026 22:01:41 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>,
 	Khem Raj <khem.raj@oss.qualcomm.com>,
 	Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-networking][wrynose][PATCH 19/25] dnsmasq: fix CVE-2026-4891
-Date: Sat, 23 May 2026 17:00:21 +1200
-Message-ID: <20260523050028.848327-19-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-networking][wrynose][PATCH 21/25] dnsmasq: fix CVE-2026-4893
+Date: Sat, 23 May 2026 17:00:23 +1200
+Message-ID: <20260523050028.848327-21-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260523050028.848327-1-ankur.tyagi85@gmail.com>
 References: <20260523050028.848327-1-ankur.tyagi85@gmail.com>
@@ -69,83 +69,77 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 05:01:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127169
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127171
 
 From: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 
-A heap-based out-of-bounds read vulnerability in the
-DNSSEC validation of dnsmasq allows remote attackers
-to cause a denial of service via a crafted DNS packet.
+An information disclosure vulnerability in dnsmasq allows remote
+attackers to bypass source checks via a crafted DNS packet with
+RFC 7871 client subnet information.
 
 Reference:
-[ https://nvd.nist.gov/vuln/detail/CVE-2026-4891 ]
+[ https://nvd.nist.gov/vuln/detail/CVE-2026-4893 ]
 
 Signed-off-by: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
-(cherry picked from commit a9de48a9fa55a254c0bf2eb528c81bd90e015c03)
+(cherry picked from commit b4c48536242d9aa7d1eaf968152fc83edea41923)
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
  .../recipes-support/dnsmasq/dnsmasq_2.92.bb   |  1 +
- .../dnsmasq/files/CVE-2026-4891.patch         | 40 +++++++++++++++++++
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch
+ .../dnsmasq/files/CVE-2026-4893.patch         | 34 +++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch
 
 diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.92.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.92.bb
-index 61cdccb241..850bfd2657 100644
+index cf900328ed..4ae650f7e7 100644
 --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.92.bb
 +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.92.bb
-@@ -17,6 +17,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
-            file://dnsmasq-resolved.conf \
-            file://CVE-2026-2291.patch \
+@@ -19,6 +19,7 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
             file://CVE-2026-4890.patch \
-+           file://CVE-2026-4891.patch \
+            file://CVE-2026-4891.patch \
+            file://CVE-2026-4892.patch \
++           file://CVE-2026-4893.patch \
  "
  SRC_URI[sha256sum] = "fd908e79ff37f73234afcb6d3363f78353e768703d92abd8e3220ade6819b1e1"
  
-diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch
+diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch
 new file mode 100644
-index 0000000000..e721f5ec0b
+index 0000000000..af7e4119e1
 --- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch
-@@ -0,0 +1,40 @@
-+commit 2cacea42e4d45717bd0ce3ccfe8e78960245e5da
++++ b/meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch
+@@ -0,0 +1,34 @@
++commit 434d68f2eb1a58744470698483a3ae09b5a9a870
 +Author: Simon Kelley <simon@thekelleys.org.uk>
-+Date:   Wed Mar 25 23:04:08 2026 +0000
++Date:   Wed Mar 25 23:22:37 2026 +0000
 +
-+Verify rdlen field in RRSIG packets. CVE-2026-4891
++Fix broken client subnet validation. CVE-2026-4893
 +    
 +Bug report from Royce M <royce@xchglabs.com>
 +    
-+This avoids crafted packets which give a value for rdlen _less_
-+then the space taken up by the fixed data and the signer's name
-+and engender a negative calculated length for the signature.
++Location: forward.c:713, edns0.c:421
++    
++With --add-subnet enabled, process_reply() passes the OPT record
++length (~23 bytes) instead of the packet length to check_source().
++All internal bounds checks fail, and the function always returns 1.
++ECS source validation per RFC 7871 Section 9.2 is completely bypassed.
 +
-+CVE: CVE-2026-4891
++CVE: CVE-2026-4893
 +
-+Upstream-Status: Backport [ https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=788b4e0f6c05217981b512bed4e5fea6f8855d01 ]
++Upstream-Status: Backport [ https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=e3a26d092e47bf1d18aeadb758e4ca35c83b5f2d ]
 +
 +Signed-off-by: Abhishek Bachiphale <Abhishek.Bachiphale@windriver.com>
 +
-+diff --git a/src/dnssec.c b/src/dnssec.c
-+index 0860daa..4bb0495 100644
-+--- a/src/dnssec.c
-++++ b/src/dnssec.c
-+@@ -546,10 +546,14 @@ static int validate_rrset(time_t now, struct dns_header *header, size_t plen, in
-+ 
-+ 	   *ttl_out = ttl;
-+ 	 }
-+-       
-++
-++      /* Don't trust rdlen not to be too small and give us a negative sig_len
-++	 It has already been checked that it doesn't run us off the end
-++	 of the packet. */
-++      if ((sig_len = rdlen - (p - psav)) <= 0)
-++	return STAT_BOGUS;
-++
-+       sig = p;
-+-      sig_len = rdlen - (p - psav);
-+-              
-+       nsigttl = htonl(orig_ttl);
++diff --git a/src/forward.c b/src/forward.c
++index e2f64c0..208480d 100644
++--- a/src/forward.c
+++++ b/src/forward.c
++@@ -724,7 +724,7 @@ static size_t process_reply(struct dns_header *header, time_t now, struct server
++       /* Get extended RCODE. */
++       rcode |= sizep[2] << 4;
 +       
-+       hash->update(ctx, 18, psav);
++-      if (option_bool(OPT_CLIENT_SUBNET) && !check_source(header, plen, pheader, query_source))
+++      if (option_bool(OPT_CLIENT_SUBNET) && !check_source(header, n, pheader, query_source))
++ 	{
++ 	  my_syslog(LOG_WARNING, _("discarding DNS reply: subnet option mismatch"));
++ 	  return 0;
 
