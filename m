@@ -2,280 +2,262 @@ Return-Path: <ankur.tyagi85@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BF66CD5BB1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E2AECD5BAC
 	for <webhook@archiver.kernel.org>; Sat, 23 May 2026 12:39:21 +0000 (UTC)
 Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7288.1779539960745234336
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7287.1779539958547443871
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 May 2026 05:39:20 -0700
+ Sat, 23 May 2026 05:39:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QABYV30F;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=NZRt36Db;
  spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2bd9c3b550aso57742915ad.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 05:39:20 -0700 (PDT)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2b4650d5f5cso33847195ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 05:39:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779539960; x=1780144760; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QSRqNezVxsBH1BFX6zuHajB5kAgDAn/Zik0SAauqNkM=;
-        b=QABYV30FbzsWfsAb9qDtouVUkdks4SHqTpum+NF9FxGX4TEA0qVZEMJ/lLrz7zXBQ2
-         P8gplRmdhwerOMSRmzL8M3ErbWzsQZm84rtrFOpiQ91p67QvD8VgF6hG2xApqhElJpeY
-         WxCKOpQp3tG7lbcU/HHr867smLzoLZd904KYvjyDq5mPsvLxJmMsDyuGSFtO65+CgWB1
-         SKmr90lWlUMwMkeqGDWHKARCxhKQd+pFvlxaKm2fNiJ/7Gz/xGluinHccxbvlYA4m1TP
-         7tUXO6CtsDgw9hpfv/Idh7dDbY2lsCFJOw2PQ5i/h4Qw0R3YMpKzbhtLeK9bPNIRh2wB
-         ORxQ==
+        d=gmail.com; s=20251104; t=1779539958; x=1780144758; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VAzqu7ECC86brspISSQjcsJ6gLkFkoKBy7gLMBzzrb8=;
+        b=NZRt36Db2ylB8Jjl53UJ+cUP0j0Bu5gJPnqxmwTbFTEcv4PX5r170DCfBoAYJSwzXV
+         yNc/IniJm41SfANut5O5APcyaC9StKD2ZJC3rebjehjO8kGYGwKPb1QZ2I+JMtIQjK2w
+         pXGT2lfvmAQEJTdl9yOKNbEpWKn+nrHeFEZvUITrVOq3BV6BQYOV8T4ymYBBmhQassOF
+         fSuaG21Gq8aUFu1QyWd3Mg5lfImdqLQKb8+sFcRW3NIsu5pu9B06Ie+8bfK6HppGdlkW
+         aTCBxxYP//65mNlxVDfeCsT7TTF7D4EjdOYFp7FC54Fyc8qSH3ENw5WksQzPES4qvAgj
+         R17A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779539960; x=1780144760;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=QSRqNezVxsBH1BFX6zuHajB5kAgDAn/Zik0SAauqNkM=;
-        b=Cjda23GsTOZHHKGr4lAO/1h23TkeAj9BrHhhqCPf5b6+jZ1ADWb/gJf4cCbfOe7HbW
-         BUxaac6ry/WzEI9EHzkSiFG6FtSlC/lzpVGGab9ayH2EGMt35Plh/ysdObqRZJhzb6dE
-         p3HcSxY3HJ6Hf6dMpk5fiGFP6fc1Wa2ldrRK+CzVMr+ZYHYo4M+vTAzKCICD9wyMxu42
-         k001q2HN/VjSRqb7c+CiOhOOiLqsAgtX7KF5NW0MoY75Wr+HWaWlvSnCNsBRcu7k/u9/
-         jOZFByV8Ut2X5L/pCLlJ9tuCWwmfJLNnlM1+vEVQJ206wYjUInw6kJBdJuwQa0HmvwPj
-         Z6hA==
-X-Gm-Message-State: AOJu0YzkP8uiUVaPfphJWH1c11aNumLDg6xGYHOmx6lggXwHME0gm/BS
-	6SpN5Vdy3mi753tcvsHcJ8xez8w2oqjJ6/iv7FgOCDXq9hlr2gJq0xAhPVYoPhUn
-X-Gm-Gg: Acq92OGuoTl1N/SzmujJVkAaCAE60QQ6vMCRU+vFwelMvlXAfonDmVJ47/CMq8inE/Z
-	uy8eW58B5dn29asxZtiyk4ch7QpjKqCkE9KJDnh0OpYGQ7lanK82sAPRnwBIvOdDsVAXJI2P+8M
-	sRp8Kh6qAVXhJbI7OSd0l6OOWy4UAvXzUz0PT4YT3PfAchMLAl+hxTXrIS8Zm5/7hKCiZKEdtJv
-	YTerRcGfpkUJpCR5CAT7U9+LWWfmdaKtnE/uBMKoUFcrmqUIIaxXaUESCw8ygRJlvT4U2Q2DVlq
-	QEh9YBKG7ux9DZ8BdxGPjaqkbz3IX9UdS+FORc4tBTKALHpeqe3flE6Q4lWtzr00KLoih7/S0WS
-	qDNeVvEwkV+gFf4iM9WMSPSA0XKFsYmCX/ADDBN1salpKmaJHZdWzGXSEX22ekAO+HvEOEjRXsN
-	rdhwHT65AE3u0t/YX2aCzG7S5fa4YPQergCpbu
-X-Received: by 2002:a17:903:1aae:b0:2b9:5d1b:73da with SMTP id d9443c01a7336-2beb0741079mr85312405ad.30.1779539960075;
-        Sat, 23 May 2026 05:39:20 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1779539958; x=1780144758;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VAzqu7ECC86brspISSQjcsJ6gLkFkoKBy7gLMBzzrb8=;
+        b=BYS3xFPft+qccYS1SiP4fzGQaGJsTBFrt3UziKaodm8SGEhGkqb+9Bo3Kvx5EuD6fb
+         E5ew9TYyQOhJ6HiNsYR6OFzxFm9fNg79e/pVpdg+EJR2bM2flOwuuRnQ1GwTGrMrHVAE
+         D4wCmK2LSZqb9W/ZMN6xsRlHlM2BWq02R/r/xQthJXyNA9uOkGthW8z9SmcGQQPhbPln
+         3f40ujm5+AcBKmHKaMKzBusCtZNqioBqpLQkNsISuYie7ZrqyQcdqUP6r2bwYO5grucH
+         3oDhn2NS4fM+XbqiGEhD9l+yP4mZYQwwBeMoElWKjpcbk81c5tlW1rqt6Q0rsjHq2nZA
+         NvVQ==
+X-Gm-Message-State: AOJu0YwcdGKHS9IkR8A2OQefbmXDFRcCGGjpD9fSdvWCsV3bLiKxtmXU
+	MxS24is3cx0bAAb4Z+XWG785mG7tubGBONnzRdUQTjxI331bHsMDoMnH9Rbjl2DV
+X-Gm-Gg: Acq92OHY/V7lvwKGrGnk57vJdf4hX+3G9gBeuJ7I7RrEnHrvsKxpsZG3M34eJkTgwpB
+	qk9gizcYQm0NS0F3xqz4Rh/8B0TdyCCweE7PCQ2DxqcGXrE6koCi3laDhu9qbwCw9dfS/Ofg6SQ
+	dxMIz0eGuZ1XzBMKQnRcaJgCH9ZzcK57lwAWNO0AW60Iqxss1A3RPvcmGtARfBQIDcyr4BPTDJH
+	GpXWmy3GoBGCFQPSZ7g4xP51yq8mHuhJu/x+/9o1f70o5O3FICEhwNyY9Gjnc8O5R8vU4Es6RwB
+	il7Yn5fA9xUPJ+xSWghalUpfoWYIAaEznEP1ZatPH+Zwtt6SuddjXhiFegOcWirrmHD2A7pHUFy
+	8eurDpDjzgRNLIHsFlWbbvNWdKOOrGpIlpPxsSsQ79ty/00J7cZQg4tbGh28Xla7JHTOZvieaaL
+	tZEYUKpi9VrnEuLLzs1B184WnYCU6SVxe1SvP8kIOlgFragQU=
+X-Received: by 2002:a17:903:24c:b0:2bc:9f51:2922 with SMTP id d9443c01a7336-2beb06c45e1mr74500155ad.41.1779539957685;
+        Sat, 23 May 2026 05:39:17 -0700 (PDT)
 Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2beb58b3058sm46152515ad.39.2026.05.23.05.39.18
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2beb58b3058sm46152515ad.39.2026.05.23.05.39.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 May 2026 05:39:19 -0700 (PDT)
+        Sat, 23 May 2026 05:39:17 -0700 (PDT)
 From: ankur.tyagi85@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 2/3] redis: upgrade 7.2.12 -> 7.2.14
-Date: Sun, 24 May 2026 00:39:04 +1200
-Message-ID: <20260523123907.2609140-2-ankur.tyagi85@gmail.com>
+Subject: [oe][meta-oe][scarthgap][PATCH 1/3] postgresql: upgrade 16.12 -> 16.14
+Date: Sun, 24 May 2026 00:39:03 +1200
+Message-ID: <20260523123907.2609140-1-ankur.tyagi85@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260523123907.2609140-1-ankur.tyagi85@gmail.com>
-References: <20260523123907.2609140-1-ankur.tyagi85@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 23 May 2026 12:39:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127177
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127176
 
 From: Ankur Tyagi <ankur.tyagi85@gmail.com>
 
 Also refreshed patches to resolve patch fuzz QA issue.
 
-Bug and security fix release
-https://github.com/redis/redis/releases/tag/7.2.13
-https://github.com/redis/redis/releases/tag/7.2.14
+Bug fix releases
+https://www.postgresql.org/docs/release/16.13/
+https://www.postgresql.org/docs/release/16.14/
 
 Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
 ---
- .../0001-hiredis-use-default-CC-if-it-is-set.patch   | 12 ++++++++----
- ...e-Makefile-to-use-environment-build-setting.patch |  6 +++---
- .../0003-hack-to-force-use-of-libc-malloc.patch      |  8 ++++----
- .../redis/0004-src-Do-not-reset-FINAL_LIBS.patch     |  6 +++---
- ...GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 10 +++++-----
- .../0006-Define-correct-gregs-for-RISCV32.patch      |  8 ++++----
- .../redis/{redis_7.2.12.bb => redis_7.2.14.bb}       |  2 +-
- 7 files changed, 28 insertions(+), 24 deletions(-)
- rename meta-oe/recipes-extended/redis/{redis_7.2.12.bb => redis_7.2.14.bb} (97%)
+ .../files/0001-Add-support-for-RISC-V.patch           |  7 ++-----
+ .../files/0002-Improve-reproducibility.patch          |  7 ++-----
+ ...figure.ac-bypass-autoconf-2.69-version-check.patch | 11 ++++-------
+ .../0004-config_info.c-not-expose-build-info.patch    |  9 +++------
+ ...005-postgresql-fix-ptest-failure-of-sysviews.patch |  7 ++-----
+ .../postgresql/files/not-check-libperl.patch          |  9 +++------
+ .../{postgresql_16.12.bb => postgresql_16.14.bb}      |  2 +-
+ 7 files changed, 17 insertions(+), 35 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_16.12.bb => postgresql_16.14.bb} (86%)
 
-diff --git a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
-index 51a6e9c957..035f533661 100644
---- a/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0001-hiredis-use-default-CC-if-it-is-set.patch
-@@ -1,4 +1,4 @@
--From 67990f216f2fbbc8a6699c700dfc089aa617905f Mon Sep 17 00:00:00 2001
-+From 61ae3e0277ac92323584bbe75ce79de6e030e84a Mon Sep 17 00:00:00 2001
- From: Venture Research <tech@ventureresearch.com>
- Date: Fri, 8 Feb 2013 17:39:52 -0600
- Subject: [PATCH] hiredis: use default CC if it is set
-@@ -6,6 +6,10 @@ MIME-Version: 1.0
- Content-Type: text/plain; charset=UTF-8
- Content-Transfer-Encoding: 8bit
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+index ebd3e03685..466206f87d 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+@@ -1,7 +1,7 @@
+-From ba079b8d6a50796db41bb0ddf4c22bfe022ef898 Mon Sep 17 00:00:00 2001
++From c0f5c3d176baf893658e9534256887633e18e3c4 Mon Sep 17 00:00:00 2001
+ From: "Richard W.M. Jones" <rjones@redhat.com>
+ Date: Sun, 20 Nov 2016 15:04:52 +0000
+-Subject: [PATCH 1/5] Add support for RISC-V.
++Subject: [PATCH] Add support for RISC-V.
  
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
- Instead of trying to automagically figure out CC, which breaks with OE
- as CC has spaces in it, just skip it if one was already passed in.
- 
-@@ -23,15 +27,15 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-  1 file changed, 2 deletions(-)
- 
- diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
--index 7e41c97..54717e3 100644
-+index bd2106b..9ce768d 100644
- --- a/deps/hiredis/Makefile
- +++ b/deps/hiredis/Makefile
--@@ -42,8 +42,6 @@ endef
-+@@ -36,8 +36,6 @@ endef
-  export REDIS_TEST_CONFIG
+ The architecture is sufficiently similar to aarch64 that simply
+ extending the existing aarch64 macro works.
+@@ -38,6 +38,3 @@ index c9fa84c..9b491e8 100644
   
-  # Fallback to gcc when $CC is not in $PATH.
- -CC:=$(shell sh -c 'type $${CC%% *} >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
- -CXX:=$(shell sh -c 'type $${CXX%% *} >/dev/null 2>/dev/null && echo $(CXX) || echo g++')
-  OPTIMIZATION?=-O3
-- WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
-+ WARNINGS=-Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wno-missing-field-initializers
-  DEBUG_FLAGS?= -g -ggdb
-diff --git a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-index 17b533669b..c163aaae8b 100644
---- a/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-@@ -1,4 +1,4 @@
--From ef989aab052510bfda32b2b325a5f80b76c42677 Mon Sep 17 00:00:00 2001
-+From a35a89981e28fb118efa86a798dacda826eb6f74 Mon Sep 17 00:00:00 2001
- From: Venture Research <tech@ventureresearch.com>
- Date: Fri, 8 Feb 2013 20:22:19 -0600
- Subject: [PATCH] lua: update Makefile to use environment build settings
-@@ -23,10 +23,10 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  3 files changed, 6 insertions(+), 12 deletions(-)
+  
+  /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+index b3e87cbc46..cce3319caa 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0002-Improve-reproducibility.patch
+@@ -1,7 +1,7 @@
+-From 084cc44215c1d5e6d33bc3d2e1d24da4fc98bdcd Mon Sep 17 00:00:00 2001
++From 97d56c79bf8807563d58cb08a8c5f3e3422e8740 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Mon, 28 Dec 2020 16:38:21 +0800
+-Subject: [PATCH 2/5] Improve reproducibility,
++Subject: [PATCH] Improve reproducibility,
  
- diff --git a/deps/Makefile b/deps/Makefile
--index cbe3aef..76bc222 100644
-+index 3bf0363..fd8765a 100644
- --- a/deps/Makefile
- +++ b/deps/Makefile
--@@ -81,7 +81,6 @@ endif
-+@@ -94,7 +94,6 @@ endif
-  # lua's Makefile defines AR="ar rcu", which is unusual, and makes it more
-  # challenging to cross-compile lua (and redis).  These defines make it easier
-  # to fit redis into cross-compilation environments, which typically set AR.
-diff --git a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
-index f1021eef6c..f142ff6ec2 100644
---- a/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0003-hack-to-force-use-of-libc-malloc.patch
-@@ -1,4 +1,4 @@
--From b9586abcb803747301f6cc4ff93c7642bef693ea Mon Sep 17 00:00:00 2001
-+From a6246b17e94a2f7ad3560787a476b18aa7a45358 Mon Sep 17 00:00:00 2001
- From: Venture Research <tech@ventureresearch.com>
- Date: Wed, 6 Feb 2013 20:51:02 -0600
- Subject: [PATCH] hack to force use of libc malloc
-@@ -20,7 +20,7 @@ Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-  1 file changed, 2 insertions(+), 1 deletion(-)
+ Remove build patch from binaries which pg_config do
+ not record var-CC, var-CFLAGS, and configure
+@@ -36,6 +36,3 @@ index 113029b..58842a6 100644
+  override CPPFLAGS += -DVAL_CFLAGS_SL="\"$(CFLAGS_SL)\""
+  override CPPFLAGS += -DVAL_LDFLAGS="\"$(STD_LDFLAGS)\""
+  override CPPFLAGS += -DVAL_LDFLAGS_EX="\"$(LDFLAGS_EX)\""
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+index 64d82e52c6..6c6a2c3323 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0003-configure.ac-bypass-autoconf-2.69-version-check.patch
+@@ -1,7 +1,7 @@
+-From 30b1b37d309f67ba6d58f2197bd917107bc7d56c Mon Sep 17 00:00:00 2001
++From 0a068e697b54037664eb485d1f31342f07caac0b Mon Sep 17 00:00:00 2001
+ From: Yi Fan Yu <yifan.yu@windriver.com>
+ Date: Fri, 5 Feb 2021 17:15:42 -0500
+-Subject: [PATCH 3/5] configure.ac: bypass autoconf 2.69 version check
++Subject: [PATCH] configure.ac: bypass autoconf 2.69 version check
  
- diff --git a/src/Makefile b/src/Makefile
--index 7d75c83..35dd314 100644
-+index 6a87909..b8e0d44 100644
- --- a/src/Makefile
- +++ b/src/Makefile
- @@ -13,7 +13,8 @@
-@@ -31,5 +31,5 @@ index 7d75c83..35dd314 100644
- +# use fake uname option to force use of generic libc
- +uname_S := "USE_LIBC_MALLOC"
-  uname_M := $(shell sh -c 'uname -m 2>/dev/null || echo not')
-- OPTIMIZATION?=-O2
-- DEPENDENCY_TARGETS=hiredis linenoise lua hdr_histogram
-+ CLANG := $(findstring clang,$(shell sh -c '$(CC) --version | head -1'))
-+ OPTIMIZATION?=-O3
-diff --git a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
-index 958106e261..ecf8714d33 100644
---- a/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0004-src-Do-not-reset-FINAL_LIBS.patch
+ for upgrade to autoconf 2.71
+ 
+@@ -13,12 +13,12 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+  1 file changed, 4 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 4f25567..b6b1eff 100644
++index 9e30e42..4a5937f 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch undefined macros
+  
+- AC_INIT([PostgreSQL], [16.12], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
++ AC_INIT([PostgreSQL], [16.14], [pgsql-bugs@lists.postgresql.org], [], [https://www.postgresql.org/])
+  
+ -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.69], [], [m4_fatal([Autoconf version 2.69 is required.
+ -Untested combinations of 'autoconf' and PostgreSQL versions are not
+@@ -27,6 +27,3 @@ index 4f25567..b6b1eff 100644
+  AC_COPYRIGHT([Copyright (c) 1996-2023, PostgreSQL Global Development Group])
+  AC_CONFIG_SRCDIR([src/backend/access/common/heaptuple.c])
+  AC_CONFIG_AUX_DIR(config)
+--- 
+-2.40.0
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+index ff0582ab80..f75f306b0c 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0004-config_info.c-not-expose-build-info.patch
+@@ -1,7 +1,7 @@
+-From 5be3ffdf767c1efcbfd2d1be87aa83f2e37e348e Mon Sep 17 00:00:00 2001
++From 474b18fefb4adbf394b30529a11348104c077299 Mon Sep 17 00:00:00 2001
+ From: Mingli Yu <mingli.yu@windriver.com>
+ Date: Mon, 1 Aug 2022 15:44:38 +0800
+-Subject: [PATCH 4/5] config_info.c: not expose build info
++Subject: [PATCH] config_info.c: not expose build info
+ 
+ Don't collect the build information to fix the buildpaths issue.
+ 
+@@ -14,7 +14,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+  2 files changed, 2 insertions(+), 70 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 27f382d..3dd6bb1 100644
++index 4a5937f..ece6463 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -23,7 +23,7 @@ AC_COPYRIGHT([Copyright (c) 1996-2023, PostgreSQL Global Development Group])
+@@ -114,6 +114,3 @@ index 09e78a6..86e4230 100644
+  	configdata[i].name = pstrdup("VERSION");
+  	configdata[i].setting = pstrdup("PostgreSQL " PG_VERSION);
+  	i++;
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+index af36da4927..0bc9ac9a27 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0005-postgresql-fix-ptest-failure-of-sysviews.patch
+@@ -1,7 +1,7 @@
+-From 1a8b94140988d2ee5ff987b0bb3e7c3e936b8c01 Mon Sep 17 00:00:00 2001
++From 83a2f0e9989269516f344fd665fa26c9828b5599 Mon Sep 17 00:00:00 2001
+ From: Manoj Saun <manojsingh.saun@windriver.com>
+ Date: Wed, 22 Mar 2023 08:07:26 +0000
+-Subject: [PATCH 5/5] postgresql: fix ptest failure of sysviews
++Subject: [PATCH] postgresql: fix ptest failure of sysviews
+ 
+ The patch "0001-config_info.c-not-expose-build-info.patch" hides the debug info
+ in pg_config table which reduces the count of rows from pg_config and leads to
+@@ -44,6 +44,3 @@ index 351e469..84c113e 100644
+  
+  -- We expect no cursors in this test; see also portals.sql
+  select count(*) = 0 as ok from pg_cursors;
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
+index 1f735f322b..b84b106232 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch
 @@ -1,4 +1,4 @@
--From a4d87aca1c00c53b386ee7490223971e00873add Mon Sep 17 00:00:00 2001
-+From 1b59adad94137eedfbcddb27adae74b80b4e0909 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Tue, 10 Sep 2019 20:04:26 -0700
- Subject: [PATCH] src: Do not reset FINAL_LIBS
-@@ -16,10 +16,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-From 56b830edecff1cac5f8a8a956e7a7eeef2aa7c17 Mon Sep 17 00:00:00 2001
++From 31543bddfed8882fa2d37998d966f3985fcdf351 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Tue, 27 Nov 2018 13:25:15 +0800
+ Subject: [PATCH] not check libperl under cross compiling
+@@ -20,10 +20,10 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
   1 file changed, 1 insertion(+), 1 deletion(-)
  
- diff --git a/src/Makefile b/src/Makefile
--index 35dd314..3770f96 100644
-+index b8e0d44..3a68fa6 100644
- --- a/src/Makefile
- +++ b/src/Makefile
--@@ -93,7 +93,7 @@ endif
-+@@ -122,7 +122,7 @@ endif
+ diff --git a/configure.ac b/configure.ac
+-index fba79ee..7170f26 100644
++index ecdfefd..9e30e42 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -2297,7 +2297,7 @@ Use --without-tcl to disable building PL/Tcl.])
++@@ -2307,7 +2307,7 @@ Use --without-tcl to disable building PL/Tcl.])
+  fi
   
-  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
-  FINAL_LDFLAGS=$(LDFLAGS) $(REDIS_LDFLAGS) $(DEBUG)
-diff --git a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-index d73c66c9d0..cd8fae4074 100644
---- a/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-@@ -1,4 +1,4 @@
--From 2e6311c9c7cd85bf63eab8fe92c08ec1ec01b6fc Mon Sep 17 00:00:00 2001
-+From 5a58c573d486411a3a1585ca42bee70a661a983d Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 21 Dec 2019 12:09:51 -0800
- Subject: [PATCH] Define _GNU_SOURCE to get PTHREAD_MUTEX_INITIALIZER
-@@ -16,12 +16,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+)
+  # check for <perl.h>
+@@ -32,6 +32,3 @@ index fba79ee..7170f26 100644
+    ac_save_CPPFLAGS=$CPPFLAGS
+    CPPFLAGS="$CPPFLAGS $perl_includespec"
+    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
+--- 
+-2.34.1
+-
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_16.12.bb b/meta-oe/recipes-dbs/postgresql/postgresql_16.14.bb
+similarity index 86%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_16.12.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_16.14.bb
+index fca2a487b4..36134bbd15 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_16.12.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_16.14.bb
+@@ -11,6 +11,6 @@ SRC_URI += "\
+    file://0005-postgresql-fix-ptest-failure-of-sysviews.patch \
+ "
  
- diff --git a/src/zmalloc.c b/src/zmalloc.c
--index 1f33d09..5e182d1 100644
-+index bbfa386..93e07ff 100644
- --- a/src/zmalloc.c
- +++ b/src/zmalloc.c
--@@ -28,6 +28,7 @@
--  * POSSIBILITY OF SUCH DAMAGE.
--  */
-+@@ -32,6 +32,7 @@
-+ #include "config.h"
-+ #include "solarisfixes.h"
-  
- +#define _GNU_SOURCE
-  #include <stdio.h>
-diff --git a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
-index bb3f5c607e..dd44797437 100644
---- a/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
-+++ b/meta-oe/recipes-extended/redis/redis/0006-Define-correct-gregs-for-RISCV32.patch
-@@ -1,4 +1,4 @@
--From 6149911f7a6fbaef3ed418408e2b501fa9479ffa Mon Sep 17 00:00:00 2001
-+From 8a16ff40b75671725e4bd92b50a5f083460e796b Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Mon, 26 Oct 2020 21:32:22 -0700
- Subject: [PATCH] Define correct gregs for RISCV32
-@@ -14,10 +14,10 @@ Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
-  1 file changed, 24 insertions(+), 2 deletions(-)
+-SRC_URI[sha256sum] = "b253ee949303ef5df00e24002600da4fb37e5ccfafa78718c6ea6a936b4d97f1"
++SRC_URI[sha256sum] = "f6d077142737920858ce958ccdb75c6ee137a63b5b0853c70693d401ac7e3471"
  
- diff --git a/src/debug.c b/src/debug.c
--index bb76c5d..55a0696 100644
-+index 684f692..2ee151f 100644
- --- a/src/debug.c
- +++ b/src/debug.c
--@@ -1067,7 +1067,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
-+@@ -1215,7 +1215,9 @@ static void* getAndSetMcontextEip(ucontext_t *uc, void *eip) {
-      #endif
-  #elif defined(__linux__)
-      /* Linux */
-@@ -28,7 +28,7 @@ index bb76c5d..55a0696 100644
-      GET_SET_RETURN(uc->uc_mcontext.gregs[14], eip);
-      #elif defined(__X86_64__) || defined(__x86_64__)
-      GET_SET_RETURN(uc->uc_mcontext.gregs[16], eip);
--@@ -1234,8 +1236,28 @@ void logRegisters(ucontext_t *uc) {
-+@@ -1401,8 +1403,28 @@ void logRegisters(ucontext_t *uc) {
-      #endif
-  /* Linux */
-  #elif defined(__linux__)
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/redis/redis_7.2.12.bb
-rename to meta-oe/recipes-extended/redis/redis_7.2.14.bb
-index 2b4087a74b..93235e3707 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-           "
--SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d0196bc"
-+SRC_URI[sha256sum] = "21326da3f66c0aead4c8204c0ac52ff905337a77cadd169f75ac22835ea30025"
- 
- inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
- 
+ CVE_STATUS[CVE-2017-8806] = "not-applicable-config: Doesn't apply to our configuration of postgresql so we can safely ignore it."
 
