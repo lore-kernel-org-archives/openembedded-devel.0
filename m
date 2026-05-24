@@ -2,70 +2,91 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B34DCD5BB1
-	for <webhook@archiver.kernel.org>; Sun, 24 May 2026 12:57:29 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.7604.1779627442468037522
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49CC7CD5BB1
+	for <webhook@archiver.kernel.org>; Sun, 24 May 2026 13:06:39 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.7733.1779627991257775345
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 May 2026 05:57:22 -0700
+ Sun, 24 May 2026 06:06:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=gpAy5M25;
- spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd95.aul.t-online.de (fwd95.aul.t-online.de [10.223.144.121])
-	by mailout06.t-online.de (Postfix) with SMTP id 94EC370D
-	for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 14:57:19 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.161.166]) by fwd95.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=EFpAvycO;
+ spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout12.t-online.de (Postfix) with SMTP id 6D058E61A
+	for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 15:06:29 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.161.166]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wR8ON-0Whidv0; Sun, 24 May 2026 14:57:19 +0200
+	esmtp id 1wR8XE-3djmEr0; Sun, 24 May 2026 15:06:28 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/3] mpv: add PACKAGECONFIG for mpris
-Date: Sun, 24 May 2026 14:57:09 +0200
-Message-ID: <20260524125709.9164-3-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] playerctl: add recipe
+Date: Sun, 24 May 2026 15:06:19 +0200
+Message-ID: <20260524130619.27250-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260524125709.9164-1-f_l_k@t-online.de>
-References: <20260524125709.9164-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1779627439-E7FFCF97-071A400D/0/0 CLEAN NORMAL
-X-TOI-MSGID: 61e9f0e0-97e9-43d4-a973-52a19e7caf9d
+X-TOI-EXPURGATEID: 150726::1779627988-DA7FB9E4-5D0EF109/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2f6584df-c068-4b4a-b394-d9d0f362c9a4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1779627439; i=f_l_k@t-online.de;
-	bh=UbjlyovTdvAFiN8ZXDPT8+aOfB9oVP1rCCKS9xxIjsc=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=gpAy5M25fTLQxBIR/MmltrOIZy9W4vtw8Y8uCdxrhCUw4GZO5WTVmZd3RB4Y27Wqi
-	 8HtaWgqakavlKDN/6bKEcHi6rk02q8jNOYE6PQDx7+YDd1z6M4xzstR2J8KggXIYjd
-	 aOz1Gwgeipy7+1pKkid0cHVuWC+ZagjmGPxtOQ/UAR11+SJFMJbeMsOKxM2Cd3XhN7
-	 egrYMjE0RzvIvGB8txuZhxXRYYM1234y8FKL89bqQKZ5Yz/+XNIUqjA4awpQtFViCu
-	 SIq/2JObXIJme523Xr7VCo/kF/EZ4n+UgyNGZFx9H+Bz5SR5XK3jeNdlp/XOsvON7O
-	 eJEnkQDaPSZjw==
+	s=20260216; t=1779627989; i=f_l_k@t-online.de;
+	bh=kkT5juGXeH1T60BfNpyzxkil9J2/JIMx7oiQCuNp5PU=;
+	h=From:To:Subject:Date;
+	b=EFpAvycOxnNDqSWDOE66HOpRJ0rF2cL/ghNy/3sSQwWMjP2Itw0/6qwOLzUU29E/M
+	 +vyco+c5yTambRxQW8MmSdG9Z7iT3bVkr/8jmbYbbR512GdYMIvnjFOsDGqFs+t2Hk
+	 It05anxyW2Ow3fJ9usgRxvh//7ud6Xli7O3cr7o/f32cd1cnn964yXdMAYXc+WD1i3
+	 KjmAly2H1Jfh51x8RlQWSp0S167IkPSxbxRIWQ1JCXTgubx5YHUMnKiaqDJKNp91/A
+	 w4UAuh1ftD1M+dzo/aHohBm1YAXKaa6TjgMGS8Fghkp2TbV6RZ1fBuTo2ILKk3iNEb
+	 6MEO1LsIIhp7A==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 12:57:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127187
+ <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 13:06:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127188
+
+Playerctl is a command-line utility and library for controlling media pla=
+yers that
+implement the MPRIS D-Bus Interface Specification. Playerctl makes it eas=
+y to bind
+player actions, such as play and pause, to media keys. You can also get m=
+etadata
+about the playing track such as the artist and title for integration into=
+ statusline
+generators or other command-line tools.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../playerctl/playerctl_2.4.1.bb                 | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.=
+bb
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb b/meta-oe/r=
-ecipes-multimedia/mplayer/mpv_0.41.0.bb
-index ccb66adb7a..02dbe64968 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.41.0.bb
-@@ -51,6 +51,7 @@ PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Denabled,-=
-Dlibarchive=3Ddisabled,libarchi
- PACKAGECONFIG[lcms2] =3D "-Dlcms2=3Denabled,-Dlcms2=3Ddisabled,lcms"
- PACKAGECONFIG[libmpv] =3D "-Dlibmpv=3Dtrue,-Dlibmpv=3Dfalse"
- PACKAGECONFIG[jack] =3D "-Djack=3Denabled,-Djack=3Ddisabled,jack"
-+PACKAGECONFIG[mpris] =3D ",,,playerctl mpv-mpris"
- PACKAGECONFIG[pipewire] =3D "-Dpipewire=3Denabled,-Dpipewire=3Ddisabled,=
-pipewire"
- PACKAGECONFIG[pulseaudio] =3D "-Dpulse=3Denabled,-Dpulse=3Ddisabled,puls=
-eaudio"
- PACKAGECONFIG[vaapi] =3D "-Dvaapi=3Denabled,-Dvaapi=3Ddisabled,libva"
+diff --git a/meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb b/me=
+ta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb
+new file mode 100644
+index 0000000000..d4c28b8543
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY =3D "For true players only: vlc, mpv, RhythmBox, web browsers, c=
+mus, mpd, spotify and others."
++LICENSE =3D "LGPL-3.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De6a600fd5e1d9cbde2d983680233a=
+d02"
++
++SRC_URI =3D "git://github.com/altdesktop/playerctl.git;protocol=3Dhttps;=
+branch=3Dmaster"
++
++DEPENDS =3D "glib-2.0"
++
++inherit meson pkgconfig gobject-introspection bash-completion
++
++EXTRA_OEMESON +=3D "--buildtype=3Drelease -Dbash-completions=3Dtrue -Dgt=
+k-doc=3Dfalse"
++
++SRCREV =3D "e5304e9dc9a0c0c32b3689c3f141cf266d27f59c"
++
++FILES:${PN} +=3D "${datadir}"
++
 --=20
 2.54.0
 
