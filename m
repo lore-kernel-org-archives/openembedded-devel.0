@@ -1,155 +1,136 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAD86CD5BBF
-	for <webhook@archiver.kernel.org>; Mon, 25 May 2026 05:12:27 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.9930.1779685941308520031
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19E8FCD5BBF
+	for <webhook@archiver.kernel.org>; Mon, 25 May 2026 06:50:28 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.10404.1779688662354338749
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 May 2026 22:12:21 -0700
+ Sun, 24 May 2026 22:57:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=XR9LXCI0;
- spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-69d42abd04dso2419101eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 22:12:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779685940; cv=none;
-        d=google.com; s=arc-20240605;
-        b=k+QEhC6YmLwaGFPPElEO5Pke5CLONDpX6/wM87cHtUmSJdsde3x30Uaf9+bIrNKVdo
-         88PcGcPdaP4E0gDHWKrBP/XmV+yclsPQdV4ll/LErkAIW43n1LJKPqjQUHsGqUdlzQU+
-         uwpium8wyScxvz/gvUtHN/y+HBb9XfcEa65lpdXs9mu2BWFRWhqtTmZgntjKzbsoB2Jx
-         X57RB8gWS/z2T/AwcZJnDJVQh4aB1xwr0Y+FyVESBVywOhygTJuETi7uwoqrcsAUji/m
-         a93zYz28ALiw7UaZwnAX+PoQdVHy4HIlMFqXZPtYLrJmtI9Cle574mC3QJ3jo+cdzJ5L
-         odLw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=aIOlv0F+FnK0exzst9UE30hIUjTtxGhH4fgvfAOF4bw=;
-        fh=LZspYXC3IzyIN8FmVwz229n7pZIWt1HqVNc3WYXGu+o=;
-        b=K5oBxYAD6jWQBRZe9XytBNib8ohcpG+vt6jtLZFbK5mlNjinWyQsjWeOv5RlJllSdB
-         99iJcYv6JjB0uYIUNEcz0nfd9tmVq8TwIpHG9nkGT/y1BNaBqqvDC6qVZMq0rv2Cjnvs
-         f9BDnu4+N8R11Bo6ySJYL5+Js2XkV0NwJhdxwsUqbj3EB+Rn8byanyvczF8CQpAVZIdR
-         4lycNhSpSZfNhqrk8M5ptWBgQwMGdFSWePlTwn5n4G8SWowlXJ5H3i/uifrWO7S9M/mA
-         NKE1FABRRqiMhyyQ0+YO9gnfhil/DiDEfGPjhUjoKUH5N+qq1T4tJHY4isW5JKx8kIUR
-         8r+A==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1779685940; x=1780290740; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=aIOlv0F+FnK0exzst9UE30hIUjTtxGhH4fgvfAOF4bw=;
-        b=XR9LXCI0s6p2xdUCLBJzo5ErjMe6qJaLVPsXBQ1xXRDT5QOYkb4g/KKcrJog2ja8NG
-         oQGrQZAXeWtP0pOKUOMa+1yACmmUvOCQ2UTf9h1BtXpBIStuBr8zfO10cO8BsApIb3Qa
-         2RWndJkBYVCrP3dAed3+l7ZbqRkFTgkcbIOVBgv1ca3ebRFJIIGqfJUM4k7FR/wPENbE
-         F9DWlaRrxC13/p/H44Mi2/e8h8sqTUVslc32Yn7jb5Lcjbhr14X5egB5wS5ZWoc8sbRP
-         pezUu57wynveu/I3dZVr1t0WFtoLpkJ/fhE2v7BBTgS8EJT9qUyLxYpg/f/oiWFhzKVC
-         3KWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779685940; x=1780290740;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=aIOlv0F+FnK0exzst9UE30hIUjTtxGhH4fgvfAOF4bw=;
-        b=lDkKZwMDAZIjD3BGPpzSIFj/q+T7hls48Ewm7bi2juIF8GHRjunHP+a0woaprEAUKp
-         Z9iCF8q8AYTnIAxTgHY4NaNnSZ5IGGMj0//Z++3wDGod0Z0G7/D5ibWJ47qxKI1l6Jfy
-         1zDsDdgf557mkpbk6rkReIoF0tvHwm+f8Y4GMHWax6b2ovAPrXcjxGf0QkumpfJ+frrZ
-         66noaT9SfKezjxtRhVA94dULCNu0P8H5gERAHTjwV8GalP11hnlifKdSRL9MHDNzo8pk
-         pc5Oc2OHoH3xbwgAS+KvOXcCZjh8smnvGlzxJVHHdUUNRD2m6Pd+/ZRnvG0PZDjbeN9R
-         eJcw==
-X-Gm-Message-State: AOJu0YzNm425oYVn/QN5tBHlZeIDQnMZl9LuLTcXNl+7ISB4CexoLp6Z
-	0mDZpD99Na9hI7wwWPNuuehlsAiHj2LanbWjGaTMi6Y/94qxp4UP2J4/qUFaVdABpEnhHpOp+FT
-	2hhtU8dGTs4S71dnScGa6eusnPXDcGt0=
-X-Gm-Gg: Acq92OGMP+GG9o2Sy6eqNYhiWmZ8fhw7aGx6nokTsZPdjAyH4RxyKeFGwd0B9TUighQ
-	z55b3tu0wca957y71bWRe6owDz/mmA9ID3Y3snPOp5YP6wBHyx96QthR4Ru2xqkqJ/0TJfjDb3A
-	mB/1ZFsG4rcYMW5NVguYoOYBnzXgWWmRPQWb+Atam7INJd6vOMdYVHfr+3pGOPPIO8XHGjZev3x
-	7nKMxtPPlYvfHoMThHft5tj4wxHX5iYsgA+TZvb+oPhLrqxLrPTcccnXlkA4hM9zAhJS/5z6nHJ
-	blyEK4nzqw==
-X-Received: by 2002:a05:6820:868b:b0:69b:5f97:de79 with SMTP id
- 006d021491bc7-69d7eb91b64mr5388859eaf.19.1779685940417; Sun, 24 May 2026
- 22:12:20 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Zsogs7XN;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9605107f15=shilong.jiao@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64P35JZI1347489
+	for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 22:57:42 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=n5Lq0r/jRtoD35YPXP4O
+	e+m73BULvQE2PWxv5paNc3s=; b=Zsogs7XNfh0xsB57oFU7dyyc9N7hYxxc7YMn
+	OUMUZtkzFE4YCZLBgRs59sG5VJTHS0iyx8yPmniQstDknmZoSdkiDlKebg+P25dW
+	8dglH0C6Jvz0bU305hG3tKuy3S2UWvJ+oMInxmNzMKRwmNy+LlZJ5YKJZ6N+grxl
+	G2REEQ6EgLtc5q+7x6sPo7th579lUf7w46tMYEBPkUkcutFztlt51VSZFwRa6Zpc
+	BvYPU9e7XkXylEDoExLGEwXTIsYSLtXxCe6iI432/jyTpJwANBrIKqULggyIxC9n
+	LIIX6FolfUyHKfxI4aJinwp6u0fwuXO9SUk+c7dkRWYMAt8i9g==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4ebbrehv3p-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 24 May 2026 22:57:41 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Sun, 24 May 2026 22:57:41 -0700
+Received: from pek-lpgtest26.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Sun, 24 May 2026 22:57:40 -0700
+From: Shilong.Jiao@eng.windriver.com
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] lcms: add ptest support
+Date: Mon, 25 May 2026 13:57:39 +0800
+Message-ID: <20260525055739.1795967-1-Shilong.Jiao@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260524125709.9164-1-f_l_k@t-online.de>
-In-Reply-To: <20260524125709.9164-1-f_l_k@t-online.de>
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Mon, 25 May 2026 17:12:09 +1200
-X-Gm-Features: AVHnY4KC993eijnL0sIxGs71fdnlu4VvMsNWpZdWtCa9CRww6D3ItwyAb8P1SNI
-Message-ID: <CADySD0GZTZpc7VpPmGd-k40X7iknMDu_kYQUcwnaP9HpMksUCw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/3] playerctl: add recipe
-To: f_l_k@t-online.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: 4v2HDQ-F5Ak4DmwWvRuXKagFyCb3ltvp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI1MDA1NiBTYWx0ZWRfX4O4O0Mj7y2R2
+ pv/rDVvpapp1rB39NA714nWrt3G7kb0F33taOtcK2DhReWsXhnh7VgeD+S+wEgZr+TA7eQIcRlO
+ htHX87WwjshmtcONm3o6NN4udp3bmYYpxba2rawFFUICO89n4SZmrk33pts4F4Mk/lmaiJU6I6c
+ I0vug0unPBDwMZSucPvS8wnbhZto/8mZ6+STRICajKmKPQPqdpmhmKxGF9ByqM1rlrCQBLCZzgY
+ rjYSQxqV6Vb1Wb6rvm579upuTE0a0wA/+uJy11yV9I0sdOVpE8bK2dhUzXuesnF5nuFdIpGpFie
+ HZxa3O5arrE4JoshFgW0tk6H+5lhawBWlpRwVlZxOc9h6pacY4jEsHPjwq1LTiops0wqmP3E7EG
+ 84A60o/kWCnkE/apWG7rqu/VjdyLYaXP5b+H6+DndG5YUSFJWJfLSnZ4M5YpsL/jOadW1eHOV86
+ ZT1btm5qXGG7O33E+ug==
+X-Authority-Analysis: v=2.4 cv=IMUyzAvG c=1 sm=1 tr=0 ts=6a13e4d5 cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=iKiJcTA2PjBS6x5JeXcw:22 a=t7CeM3EgAAAA:8 a=BjkWJgjJtEGrnpP-EDkA:9
+ a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-ORIG-GUID: 4v2HDQ-F5Ak4DmwWvRuXKagFyCb3ltvp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-25_01,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
+ phishscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605250056
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 May 2026 05:12:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127195
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 May 2026 06:50:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127196
 
-Last release and commit was Sep 2021, is upstream still active?
+From: Shilong Jiao <Shilong.Jiao@windriver.com>
 
-On Mon, May 25, 2026 at 12:57=E2=80=AFAM Markus Volk via
-lists.openembedded.org <f_l_k=3Dt-online.de@lists.openembedded.org>
-wrote:
->
-> Playerctl is a command-line utility and library for controlling media pla=
-yers that
-> implement the MPRIS D-Bus Interface Specification. Playerctl makes it eas=
-y to bind
-> player actions, such as play and pause, to media keys. You can also get m=
-etadata
-> about the playing track such as the artist and title for integration into=
- statusline
-> generators or other command-line tools.
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  .../playerctl/playerctl_2.4.1.bb                | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.=
-bb
->
-> diff --git a/meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb b/me=
-ta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb
-> new file mode 100644
-> index 0000000000..9d933e63b3
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/playerctl/playerctl_2.4.1.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "For true players only: vlc, mpv, RhythmBox, web browsers, c=
-mus, mpd, spotify and others."
-> +LICENSE =3D "LGPL-3.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De6a600fd5e1d9cbde2d983680233a=
-d02"
-> +
-> +SRC_URI =3D "git://github.com/altdesktop/playerctl.git;protocol=3Dhttps;=
-branch=3Dmaster"
-> +
-> +DEPENDS =3D "glib-2.0"
-> +RDEPENDS:${PN} =3D "glib-2.0"
-> +
-> +inherit meson pkgconfig gobject-introspection
-> +
-> +EXTRA_OEMESON +=3D "--buildtype=3Drelease -Dbash-completions=3Dtrue -Dgt=
-k-doc=3Dfalse"
-> +
-> +SRCREV =3D "e5304e9dc9a0c0c32b3689c3f141cf266d27f59c"
-> +
-> +FILES:${PN} +=3D "${datadir}"
-> +
-> --
-> 2.54.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127186): https://lists.openembedded.org/g/openembedde=
-d-devel/message/127186
-> Mute This Topic: https://lists.openembedded.org/mt/119466180/3619737
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
-nkur.tyagi85@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Add ptest support for lcms to enable automated testing of the
+color management engine functionality.
+
+Tested on qemux86-64 and qemuarm64:
+- All 79 test cases passed
+- Duration: ~163 seconds
+
+Signed-off-by: Shilong Jiao <Shilong.Jiao@windriver.com>
+---
+ meta-oe/recipes-support/lcms/lcms/run-ptest |  4 ++++
+ meta-oe/recipes-support/lcms/lcms_2.18.bb   | 15 ++++++++++++++-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+ create mode 100755 meta-oe/recipes-support/lcms/lcms/run-ptest
+
+diff --git a/meta-oe/recipes-support/lcms/lcms/run-ptest b/meta-oe/recipes-support/lcms/lcms/run-ptest
+new file mode 100755
+index 0000000000..20d954c193
+--- /dev/null
++++ b/meta-oe/recipes-support/lcms/lcms/run-ptest
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++cd $(dirname $0)
++./testcms 2>&1 | awk '/^Checking/{test=substr($0,10); sub(/ \.\.\.$/,"",test); getline; print (/FAIL!/ ? "FAIL: " : "PASS: ") test}'
+diff --git a/meta-oe/recipes-support/lcms/lcms_2.18.bb b/meta-oe/recipes-support/lcms/lcms_2.18.bb
+index 1ff3b3908f..72cca1843f 100644
+--- a/meta-oe/recipes-support/lcms/lcms_2.18.bb
++++ b/meta-oe/recipes-support/lcms/lcms_2.18.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e9ce323c4b71c943a785db90142b228a"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \
+            file://CVE-2026-41254_1.patch \
+            file://CVE-2026-41254_2.patch \
++           file://run-ptest \
+            "
+ SRC_URI[sha256sum] = "ee67be3566f459362c1ee094fde2c159d33fa0390aa4ed5f5af676f9e5004347"
+ 
+@@ -15,6 +16,18 @@ BBCLASSEXTEND = "native nativesdk"
+ 
+ S = "${UNPACKDIR}/lcms2-${PV}"
+ 
+-inherit autotools sourceforge-releases
++inherit autotools sourceforge-releases ptest
++
++do_compile_ptest() {
++    oe_runmake -C ${B}/testbed testcms
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}
++    install -m 0755 ${B}/testbed/testcms ${D}${PTEST_PATH}/
++    install -m 0644 ${S}/testbed/*.icc ${D}${PTEST_PATH}/
++}
++
++RDEPENDS:${PN}-ptest += "bash"
+ 
+ CVE_PRODUCT += "littlecms:little_cms_color_engine"
+-- 
+2.34.1
+
 
