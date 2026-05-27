@@ -2,154 +2,327 @@ Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 987CBCD5BD0
-	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 12:54:37 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17758.1779878747668982219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86AFBCD5BD0
+	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 13:06:07 +0000 (UTC)
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [185.185.170.37])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15511.1779869445847624292
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 03:45:47 -0700
+ Wed, 27 May 2026 01:10:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@qualcomm.com header.s=qcppdkim1 header.b=NNLAdbgp;
- dkim=fail reason="dkim: body hash did not verify" header.i=@oss.qualcomm.com header.s=google header.b=MpyPJaAe;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: wei.zhang@oss.qualcomm.com)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64R8mRXU1040710
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 10:45:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=; b=NNLAdbgpezknZWcP
-	c65zuEGAF0fw+++MoavgVtYeayznSZmDwCTS8xp63k6mJV5/unUv3HX5QbCQXpe7
-	7sWWxSeVpPHdNblRe+s2kBr6J77bIcuIDHPFj4ZVWxdb2fFtouQoW0RCs5TaZlIU
-	RhRXUKunEqjMNjoBi5D/kBHXaUnKcm7IexEU/lzq69E/s7vnPMTYQbhDHESF6Cfr
-	T7v3Y2GsCg0yuoXn1fPzttz/dPl3VctDjIWaEA4iXj2iLf20kggNVNLIBAmIt0m+
-	Arci8IzMSus4A6Lb992X7F957/LiqPICxmMeewQbckaQbPPh95lHrBgRFopm0a3c
-	524hQg==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4edh17axym-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 10:45:46 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-2f2d983d109so5460978eec.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 03:45:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1779878745; x=1780483545; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=;
-        b=MpyPJaAexzaWL+l7j4A+bpcWJGzlWgTIAtCbxhjXMDg7b7bFCAUpGerD0pnXhqhx5a
-         +1GGg/ihp9wJ0ONKt/ktOcsaMFxt0CjJb02es190q06XFNh4G5TISGKqIc8yEcIBS62g
-         EF6JySk0gBi7GhYcmcVhnA5MiacMT+n6CuR+5UXLZ1fuOZ/z0WepGJ91nqA2hj+y/cqZ
-         zj1gzcbLgc1Sq9YrWKQbFnm0cL5hfeuwSEVQhsdrqUrlK+ihSLy1y9mniJyxGaIQQPky
-         42wXG5FJyfnHEAk8H3zctJvbdk5HlAkr122lCZr8w2lhzZQDETGjKsbZC3Oa8JPpgm4d
-         lmlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1779878745; x=1780483545;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=;
-        b=ARgq3yyBYL0zK1gm81td1CvsBK/yxuYOvNUxaZ+/e469JLhDENagZ8KCNaVCwHQ0gK
-         y/MRzA5eXqCUUAbeT+u/YY7YPmZUU2a5QV0I30jv035yykjquzodWs9WKtsZTrsCziFz
-         yKuH+PRQlihnFW+j+/BqdTr0ODTusEJ8SXnsijrf0SyQi4Dd58baiZN7cu4zvTz0bpcs
-         GktNcogCqFWD/Cx4YF9Y0wzMfZR6Rxzae1VUtGd8fXWbauS0GeMmDtzjX8wqAtPtFN5x
-         XBmVRmaVcxcOkM/qYRqzqJ+Jq6iSWoas9yqrFu5anelk6rq8Et+iNqc/VcX/x81RDLmG
-         pKJQ==
-X-Gm-Message-State: AOJu0Ywy/e7I9NRkDO/PJmnsmSn6BW3lhBLoXL6a6tAlRH+MppKyiqqT
-	jldkmtGk2Sgly0kRxo/MFKj+0K1nJnGndpyoes++pmeR2JFTORCxmb53H83kn0lvItnoeF/LrVZ
-	egiLRYOwPNZDKZZTyPjzgpEq2QT1qn6KCnDHmzUeWGfZiDF/F863bMOP/YXxRq6G21dEArMUj8l
-	hhHV84rAME
-X-Gm-Gg: Acq92OGz3cg1nLEF6X5UAWLFy21ei82wFapoZ8PvrFkaokqBaVAm4OVouYeFGcAMYpY
-	GQDL+1g23jhtbwKqAVeMb04pAV2o+iYU9Xixy1YKeNcGl5OQmaFhF7XdI4HiNQoce5VcsEckW1K
-	HpRFyIOClLSYI+hlk2FjVxw/HjnBd+4AT4GYF0izcuYgCyRYz0bVy2vrqKEuIhpwq0T0xSlOHHG
-	cLx9EbIpDociZdO+DhzkYK2xC7rLmWOHkW5hmDg8ZCU8PS02InP8cOYMELBXcLKn87hcSzZr1uA
-	Gq2tW/cfhTp/YlOmtOnpiqYM9sFtyVHAA/8WfnP11XFJuT5Tr2ZY6g3EieYdmRjPkwVSlE6D+NY
-	0vvr61WjJ/H7bbUSOh4gbpbfcVeecDpdsqr8LZs7b63nV7GOI3oFLRA2ppSS7X2Rul7o1vFSN1m
-	JeZLezqarM1w==
-X-Received: by 2002:a05:7300:c89:b0:2db:2089:460f with SMTP id 5a478bee46e88-30449141cfcmr10074130eec.19.1779878745279;
-        Wed, 27 May 2026 03:45:45 -0700 (PDT)
-X-Received: by 2002:a05:7300:c89:b0:2db:2089:460f with SMTP id 5a478bee46e88-30449141cfcmr10074119eec.19.1779878744613;
-        Wed, 27 May 2026 03:45:44 -0700 (PDT)
-Received: from [10.110.95.222] (i-global254.qualcomm.com. [199.106.103.254])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3045245d6aesm11956020eec.26.2026.05.27.03.45.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 27 May 2026 03:45:44 -0700 (PDT)
-Message-ID: <b0633450-767d-45fa-a272-a19715dc554c@oss.qualcomm.com>
-Date: Wed, 27 May 2026 18:45:41 +0800
+ dkim=pass header.i=@iki.fi header.s=lahtoruutu header.b=OHtzeU7R;
+ spf=pass (domain: iki.fi, ip: 185.185.170.37, mailfrom: riku.voipio@iki.fi)
+Received: from helsinki.kos.to (helsinki.kos.to [IPv6:2a01:4f9:c012:87d7::1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: neurochip)
+	by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4gQMWN1kv7z49Q5h
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 11:01:03 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu;
+	t=1779868869;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type;
+	bh=Px+h8/E/8dOhLT5CT4NPilr5s2fJWI6tDBCZvZF876U=;
+	b=OHtzeU7RJku9BdA15ubKUkd2j8n4OkulJVbGxyCaKO+0B4YRck0lPwbfgG7WYHD4p7KgPi
+	J9+TMgrB5ZfqVo6kbUYaX9lPQ/VPRFq//30WiflDtWL/jIeqxQca1GjVlE72bkOeMowgSs
+	xynh0hlz3NKRyXfiU+H+5r4QQ+FzYp9sVhI4BncCWygArcOnQf/9BStbLoCLUdXmwkogC+
+	cBf7LO8GNiDqC3b1+9Q7b249x31+AmcWSRHmMSJRR1sxIE3MtGfD01TlGO/NoWmSnc3t23
+	rNI/Cvpb3uzj4ahVQa9dRXFScQxB9qQUJ7nVpBkzpeurq1VqXjN8Xx3p1/jurg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+	s=lahtoruutu; t=1779868869;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type;
+	bh=Px+h8/E/8dOhLT5CT4NPilr5s2fJWI6tDBCZvZF876U=;
+	b=p6+52g1+PSv5B6p4IH89SCaKSPu5x1xjErcVmfIwT7TMczcXEuFWXFlL26TrdF4oUadkZA
+	yI98ALyq96zgYREPhpQZbhUN96MpVQrJyTK3GGVHkn4ihRoBMvnTHuH+BwGYcCTpWuMuT2
+	dNtx1m8YE5gh4DUGISrhuhCkzQj5bGQiCb8qchRn/NM7XniycVh4IhbhNlBCMN88kb4m4v
+	yeDfh8GzklBkSP4e9Z7UlTlEYrn1tPlFH5lywSBlzm2RBSe/iLqdl5XmFC+CV+SkfW3qKS
+	vrL9WEuOhxLwb4Tr8FA0M+dx/CHVNdnU/oeqZfPrZG09/TN3GvWJWPhtjtPVYA==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=neurochip smtp.mailfrom=riku.voipio@iki.fi
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1779868869;
+	b=fZtdtscxiQiXOmGat4kCyHz6TgPZdYesquXRt4xfq29A3F1DDSPZPA5v0+qj+sf6XqPtjd
+	0JE1TbU0LyhN9OBm93/4kcoW7YsxEyZ9a0kAL/0CRJLkhvBhYFsQ0EOY6TRQ3UyvQnPVFk
+	RbIHxJRTmkzHEVIi1vK9u6DAlJL2QmkqYN3X4+HjfJLtDsRM+q+P7mdGzXr3hHpk+BlPRG
+	NtGkLpj7Tnwgfd5cn+I9GE5hgy/kQA8cbf6Gd7f2YOoWioSVdIdFa953QJDPoKYn/dSv+W
+	OFIS5AXR7uu0B3FdJ+J32RDW5W4l7qaaQPFdUtTmCKjijnJW3xEXRQABzqDq0w==
+Date: Wed, 27 May 2026 08:01:02 +0000
+From: Riku Voipio <riku.voipio@iki.fi>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe] [PATCH] edit: add recipe for 2.0.0 version
+Message-ID: <ahakvtL6O6MelWRf@helsinki.kos.to>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-oe][PATCH] hostapd: Fix clearing settings for color switch
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20260526082629.4120984-1-wei.zhang@oss.qualcomm.com>
- <zsxojndeb7cr64qbhg4uf7batcqxlhfwfhas7pvdi7pc4ry65o@qfs5nkzigjsq>
-From: "Wei Zhang (Stone)" <wei.zhang@oss.qualcomm.com>
-In-Reply-To: <zsxojndeb7cr64qbhg4uf7batcqxlhfwfhas7pvdi7pc4ry65o@qfs5nkzigjsq>
-X-Proofpoint-ORIG-GUID: K5J3KEZDytD8bt_NuvAHPSQ9ADxQozJ4
-X-Proofpoint-GUID: K5J3KEZDytD8bt_NuvAHPSQ9ADxQozJ4
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI3MDEwMyBTYWx0ZWRfX9AXHb3ec4f7r
- zxncNLXkPQ70oVCMAGlY1m+p7N30SwJiyJYr4fNSsXKb+Lf+toc3+3vLs5y0zMYGI912PunKJqR
- du0buFvJL82/HgSkpA3ikrTGVX84oBAqAz50UATetyfp7FFqUQYFLLspv7pwwvlV7NOHzMZRUEr
- if5JtkC2YKw9cltV50b5zIeV2cjjSIBZ/mCLylXiZ70LT/fF1NwSPapv0SAQHfAs8jUHMpRRgKm
- vY5J6cd6goHKHfM9Hn6vuEytVjzfLpC2B9AJm5ijJYlzCVbVe+8xQenbDfp/8ABMu52Wa9gO4d1
- 01SdZERRfiMpywq/hjamUKurFYybsidNsGEcaCI0+n2J1K/ixY5pvYE3JS6TOXRnfGwqoquPBn+
- +ZDW/yPArHHC4abe+LndLVY/bWSXUPN6bElgN5/uBTOV9uRkRrrL0TU2QLfkQajfZohIOP94siv
- O67G8xX2fbU41/1t4jQ==
-X-Authority-Analysis: v=2.4 cv=Gc0nWwXL c=1 sm=1 tr=0 ts=6a16cb5a cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zLPTmYEMXjj0z0NWFNAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-05-27_01,2026-05-26_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 phishscore=0 adultscore=0 lowpriorityscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605270103
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0031df01.pphosted.com id 64R8mRXU1040710
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 12:54:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127265
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 13:06:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127266
 
+Add recipe for edit 2.0.0, Microsoft's small terminal editor
+written in rust.
 
-On 5/27/2026 5:46 PM, Dmitry Baryshkov wrote:
-> On Tue, May 26, 2026 at 01:26:29AM -0700, Wei Zhang wrote:
->> cca_settings is used without zero initialization, which may
->> introduce random values and result in invalid nl80211
->> attributes.
->>
->> Without this fix, BSS color switch may fail completely and
->> the feature becomes non-functional. Initialize the structure
->> before use.
->>
->> Signed-off-by: Wei Zhang <wei.zhang@oss.qualcomm.com>
->> ---
->>   ...learing-up-settings-for-color-switch.patch | 34 +++++++++++++++++=
-++
->>   .../hostapd/hostapd_2.11.bb                   |  1 +
->>   2 files changed, 35 insertions(+)
->>   create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0002=
--hostapd-Fix-clearing-up-settings-for-color-switch.patch
->>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->
-> The patch also needs to be backported to the wrynose branch, I assume.
-> Should it be backported to older LTS branches?
-Yes, this needs to be backported to both wrynose and whinlatter. Both=20
-use hostapd 2.11, which introduced this regression.
-Older LTS branches (scarthgap, kirkstone) use hostapd 2.10 and are not=20
-affected.
+Edit uses ICU for search/replace, which requires a non-standard
+way to discover the ICU soname buildtime.
 
-Thanks=EF=BC=8C
-Wei
->
+Signed-off-by: Riku Voipio  <riku.voipio@iki.fi>
+---
+ meta-oe/recipes-extended/edit/edit-crates.inc | 203 ++++++++++++++++++
+ meta-oe/recipes-extended/edit/edit_2.0.0.bb   |  32 +++
+ 2 files changed, 235 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/edit/edit-crates.inc
+ create mode 100644 meta-oe/recipes-extended/edit/edit_2.0.0.bb
+
+diff --git a/meta-oe/recipes-extended/edit/edit-crates.inc b/meta-oe/recipes-extended/edit/edit-crates.inc
+new file mode 100644
+index 0000000000..69d7e9bab6
+--- /dev/null
++++ b/meta-oe/recipes-extended/edit/edit-crates.inc
+@@ -0,0 +1,203 @@
++# Autogenerated with 'bitbake -c update_crates edit'
++# from Cargo.lock
++SRC_URI += " \
++    crate://crates.io/aho-corasick/1.1.4 \
++    crate://crates.io/alloca/0.4.0 \
++    crate://crates.io/android_system_properties/0.1.5 \
++    crate://crates.io/anes/0.1.6 \
++    crate://crates.io/anstyle/1.0.14 \
++    crate://crates.io/anyhow/1.0.102 \
++    crate://crates.io/argh/0.1.19 \
++    crate://crates.io/argh_derive/0.1.19 \
++    crate://crates.io/argh_shared/0.1.19 \
++    crate://crates.io/autocfg/1.5.0 \
++    crate://crates.io/bumpalo/3.20.2 \
++    crate://crates.io/cast/0.3.0 \
++    crate://crates.io/cc/1.2.58 \
++    crate://crates.io/cfg-if/1.0.4 \
++    crate://crates.io/chrono/0.4.44 \
++    crate://crates.io/ciborium/0.2.2 \
++    crate://crates.io/ciborium-io/0.2.2 \
++    crate://crates.io/ciborium-ll/0.2.2 \
++    crate://crates.io/clap/4.6.0 \
++    crate://crates.io/clap_builder/4.6.0 \
++    crate://crates.io/clap_lex/1.1.0 \
++    crate://crates.io/core-foundation-sys/0.8.7 \
++    crate://crates.io/criterion/0.8.2 \
++    crate://crates.io/criterion-plot/0.8.2 \
++    crate://crates.io/crossbeam-deque/0.8.6 \
++    crate://crates.io/crossbeam-epoch/0.9.18 \
++    crate://crates.io/crossbeam-utils/0.8.21 \
++    crate://crates.io/crunchy/0.2.4 \
++    crate://crates.io/either/1.15.0 \
++    crate://crates.io/find-msvc-tools/0.1.9 \
++    crate://crates.io/getrandom/0.3.4 \
++    crate://crates.io/half/2.7.1 \
++    crate://crates.io/iana-time-zone/0.1.65 \
++    crate://crates.io/iana-time-zone-haiku/0.1.2 \
++    crate://crates.io/indoc/2.0.7 \
++    crate://crates.io/itertools/0.13.0 \
++    crate://crates.io/itoa/1.0.18 \
++    crate://crates.io/jobserver/0.1.34 \
++    crate://crates.io/js-sys/0.3.91 \
++    crate://crates.io/libc/0.2.183 \
++    crate://crates.io/log/0.4.29 \
++    crate://crates.io/memchr/2.8.0 \
++    crate://crates.io/num-traits/0.2.19 \
++    crate://crates.io/once_cell/1.21.4 \
++    crate://crates.io/oorandom/11.1.5 \
++    crate://crates.io/page_size/0.6.0 \
++    crate://crates.io/pico-args/0.5.0 \
++    crate://crates.io/pkg-config/0.3.32 \
++    crate://crates.io/plotters/0.3.7 \
++    crate://crates.io/plotters-backend/0.3.7 \
++    crate://crates.io/plotters-svg/0.3.7 \
++    crate://crates.io/proc-macro2/1.0.106 \
++    crate://crates.io/quote/1.0.45 \
++    crate://crates.io/r-efi/5.3.0 \
++    crate://crates.io/rayon/1.11.0 \
++    crate://crates.io/rayon-core/1.13.0 \
++    crate://crates.io/regex/1.12.3 \
++    crate://crates.io/regex-automata/0.4.14 \
++    crate://crates.io/regex-syntax/0.8.10 \
++    crate://crates.io/roxmltree/0.21.1 \
++    crate://crates.io/rustversion/1.0.22 \
++    crate://crates.io/same-file/1.0.6 \
++    crate://crates.io/serde/1.0.228 \
++    crate://crates.io/serde_core/1.0.228 \
++    crate://crates.io/serde_derive/1.0.228 \
++    crate://crates.io/serde_json/1.0.149 \
++    crate://crates.io/shlex/1.3.0 \
++    crate://crates.io/smallvec/1.15.1 \
++    crate://crates.io/syn/2.0.117 \
++    crate://crates.io/tinytemplate/1.2.1 \
++    crate://crates.io/toml-span/0.7.1 \
++    crate://crates.io/unicode-ident/1.0.24 \
++    crate://crates.io/version_check/0.9.5 \
++    crate://crates.io/walkdir/2.5.0 \
++    crate://crates.io/wasip2/1.0.2+wasi-0.2.9 \
++    crate://crates.io/wasm-bindgen/0.2.114 \
++    crate://crates.io/wasm-bindgen-macro/0.2.114 \
++    crate://crates.io/wasm-bindgen-macro-support/0.2.114 \
++    crate://crates.io/wasm-bindgen-shared/0.2.114 \
++    crate://crates.io/web-sys/0.3.91 \
++    crate://crates.io/winapi/0.3.9 \
++    crate://crates.io/winapi-i686-pc-windows-gnu/0.4.0 \
++    crate://crates.io/winapi-util/0.1.11 \
++    crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
++    crate://crates.io/windows-core/0.62.2 \
++    crate://crates.io/windows-implement/0.60.2 \
++    crate://crates.io/windows-interface/0.59.3 \
++    crate://crates.io/windows-link/0.2.1 \
++    crate://crates.io/windows-result/0.4.1 \
++    crate://crates.io/windows-strings/0.5.1 \
++    crate://crates.io/windows-sys/0.61.2 \
++    crate://crates.io/winresource/0.1.31 \
++    crate://crates.io/wit-bindgen/0.51.0 \
++    crate://crates.io/zerocopy/0.8.47 \
++    crate://crates.io/zerocopy-derive/0.8.47 \
++    crate://crates.io/zmij/1.0.21 \
++    crate://crates.io/zstd/0.13.3 \
++    crate://crates.io/zstd-safe/7.2.4 \
++    crate://crates.io/zstd-sys/2.0.16+zstd.1.5.7 \
++"
++
++SRC_URI[aho-corasick-1.1.4.sha256sum] = "ddd31a130427c27518df266943a5308ed92d4b226cc639f5a8f1002816174301"
++SRC_URI[alloca-0.4.0.sha256sum] = "e5a7d05ea6aea7e9e64d25b9156ba2fee3fdd659e34e41063cd2fc7cd020d7f4"
++SRC_URI[android_system_properties-0.1.5.sha256sum] = "819e7219dbd41043ac279b19830f2efc897156490d7fd6ea916720117ee66311"
++SRC_URI[anes-0.1.6.sha256sum] = "4b46cbb362ab8752921c97e041f5e366ee6297bd428a31275b9fcf1e380f7299"
++SRC_URI[anstyle-1.0.14.sha256sum] = "940b3a0ca603d1eade50a4846a2afffd5ef57a9feac2c0e2ec2e14f9ead76000"
++SRC_URI[anyhow-1.0.102.sha256sum] = "7f202df86484c868dbad7eaa557ef785d5c66295e41b460ef922eca0723b842c"
++SRC_URI[argh-0.1.19.sha256sum] = "211818e820cda9ca6f167a64a5c808837366a6dfd807157c64c1304c486cd033"
++SRC_URI[argh_derive-0.1.19.sha256sum] = "c442a9d18cef5dde467405d27d461d080d68972d6d0dfd0408265b6749ec427d"
++SRC_URI[argh_shared-0.1.19.sha256sum] = "e5ade012bac4db278517a0132c8c10c6427025868dca16c801087c28d5a411f1"
++SRC_URI[autocfg-1.5.0.sha256sum] = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
++SRC_URI[bumpalo-3.20.2.sha256sum] = "5d20789868f4b01b2f2caec9f5c4e0213b41e3e5702a50157d699ae31ced2fcb"
++SRC_URI[cast-0.3.0.sha256sum] = "37b2a672a2cb129a2e41c10b1224bb368f9f37a2b16b612598138befd7b37eb5"
++SRC_URI[cc-1.2.58.sha256sum] = "e1e928d4b69e3077709075a938a05ffbedfa53a84c8f766efbf8220bb1ff60e1"
++SRC_URI[cfg-if-1.0.4.sha256sum] = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
++SRC_URI[chrono-0.4.44.sha256sum] = "c673075a2e0e5f4a1dde27ce9dee1ea4558c7ffe648f576438a20ca1d2acc4b0"
++SRC_URI[ciborium-0.2.2.sha256sum] = "42e69ffd6f0917f5c029256a24d0161db17cea3997d185db0d35926308770f0e"
++SRC_URI[ciborium-io-0.2.2.sha256sum] = "05afea1e0a06c9be33d539b876f1ce3692f4afea2cb41f740e7743225ed1c757"
++SRC_URI[ciborium-ll-0.2.2.sha256sum] = "57663b653d948a338bfb3eeba9bb2fd5fcfaecb9e199e87e1eda4d9e8b240fd9"
++SRC_URI[clap-4.6.0.sha256sum] = "b193af5b67834b676abd72466a96c1024e6a6ad978a1f484bd90b85c94041351"
++SRC_URI[clap_builder-4.6.0.sha256sum] = "714a53001bf66416adb0e2ef5ac857140e7dc3a0c48fb28b2f10762fc4b5069f"
++SRC_URI[clap_lex-1.1.0.sha256sum] = "c8d4a3bb8b1e0c1050499d1815f5ab16d04f0959b233085fb31653fbfc9d98f9"
++SRC_URI[core-foundation-sys-0.8.7.sha256sum] = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
++SRC_URI[criterion-0.8.2.sha256sum] = "950046b2aa2492f9a536f5f4f9a3de7b9e2476e575e05bd6c333371add4d98f3"
++SRC_URI[criterion-plot-0.8.2.sha256sum] = "d8d80a2f4f5b554395e47b5d8305bc3d27813bacb73493eb1001e8f76dae29ea"
++SRC_URI[crossbeam-deque-0.8.6.sha256sum] = "9dd111b7b7f7d55b72c0a6ae361660ee5853c9af73f70c3c2ef6858b950e2e51"
++SRC_URI[crossbeam-epoch-0.9.18.sha256sum] = "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e"
++SRC_URI[crossbeam-utils-0.8.21.sha256sum] = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
++SRC_URI[crunchy-0.2.4.sha256sum] = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
++SRC_URI[either-1.15.0.sha256sum] = "48c757948c5ede0e46177b7add2e67155f70e33c07fea8284df6576da70b3719"
++SRC_URI[find-msvc-tools-0.1.9.sha256sum] = "5baebc0774151f905a1a2cc41989300b1e6fbb29aff0ceffa1064fdd3088d582"
++SRC_URI[getrandom-0.3.4.sha256sum] = "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd"
++SRC_URI[half-2.7.1.sha256sum] = "6ea2d84b969582b4b1864a92dc5d27cd2b77b622a8d79306834f1be5ba20d84b"
++SRC_URI[iana-time-zone-0.1.65.sha256sum] = "e31bc9ad994ba00e440a8aa5c9ef0ec67d5cb5e5cb0cc7f8b744a35b389cc470"
++SRC_URI[iana-time-zone-haiku-0.1.2.sha256sum] = "f31827a206f56af32e590ba56d5d2d085f558508192593743f16b2306495269f"
++SRC_URI[indoc-2.0.7.sha256sum] = "79cf5c93f93228cf8efb3ba362535fb11199ac548a09ce117c9b1adc3030d706"
++SRC_URI[itertools-0.13.0.sha256sum] = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
++SRC_URI[itoa-1.0.18.sha256sum] = "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
++SRC_URI[jobserver-0.1.34.sha256sum] = "9afb3de4395d6b3e67a780b6de64b51c978ecf11cb9a462c66be7d4ca9039d33"
++SRC_URI[js-sys-0.3.91.sha256sum] = "b49715b7073f385ba4bc528e5747d02e66cb39c6146efb66b781f131f0fb399c"
++SRC_URI[libc-0.2.183.sha256sum] = "b5b646652bf6661599e1da8901b3b9522896f01e736bad5f723fe7a3a27f899d"
++SRC_URI[log-0.4.29.sha256sum] = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
++SRC_URI[memchr-2.8.0.sha256sum] = "f8ca58f447f06ed17d5fc4043ce1b10dd205e060fb3ce5b979b8ed8e59ff3f79"
++SRC_URI[num-traits-0.2.19.sha256sum] = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
++SRC_URI[once_cell-1.21.4.sha256sum] = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
++SRC_URI[oorandom-11.1.5.sha256sum] = "d6790f58c7ff633d8771f42965289203411a5e5c68388703c06e14f24770b41e"
++SRC_URI[page_size-0.6.0.sha256sum] = "30d5b2194ed13191c1999ae0704b7839fb18384fa22e49b57eeaa97d79ce40da"
++SRC_URI[pico-args-0.5.0.sha256sum] = "5be167a7af36ee22fe3115051bc51f6e6c7054c9348e28deb4f49bd6f705a315"
++SRC_URI[pkg-config-0.3.32.sha256sum] = "7edddbd0b52d732b21ad9a5fab5c704c14cd949e5e9a1ec5929a24fded1b904c"
++SRC_URI[plotters-0.3.7.sha256sum] = "5aeb6f403d7a4911efb1e33402027fc44f29b5bf6def3effcc22d7bb75f2b747"
++SRC_URI[plotters-backend-0.3.7.sha256sum] = "df42e13c12958a16b3f7f4386b9ab1f3e7933914ecea48da7139435263a4172a"
++SRC_URI[plotters-svg-0.3.7.sha256sum] = "51bae2ac328883f7acdfea3d66a7c35751187f870bc81f94563733a154d7a670"
++SRC_URI[proc-macro2-1.0.106.sha256sum] = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
++SRC_URI[quote-1.0.45.sha256sum] = "41f2619966050689382d2b44f664f4bc593e129785a36d6ee376ddf37259b924"
++SRC_URI[r-efi-5.3.0.sha256sum] = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
++SRC_URI[rayon-1.11.0.sha256sum] = "368f01d005bf8fd9b1206fb6fa653e6c4a81ceb1466406b81792d87c5677a58f"
++SRC_URI[rayon-core-1.13.0.sha256sum] = "22e18b0f0062d30d4230b2e85ff77fdfe4326feb054b9783a3460d8435c8ab91"
++SRC_URI[regex-1.12.3.sha256sum] = "e10754a14b9137dd7b1e3e5b0493cc9171fdd105e0ab477f51b72e7f3ac0e276"
++SRC_URI[regex-automata-0.4.14.sha256sum] = "6e1dd4122fc1595e8162618945476892eefca7b88c52820e74af6262213cae8f"
++SRC_URI[regex-syntax-0.8.10.sha256sum] = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
++SRC_URI[roxmltree-0.21.1.sha256sum] = "f1964b10c76125c36f8afe190065a4bf9a87bf324842c05701330bba9f1cacbb"
++SRC_URI[rustversion-1.0.22.sha256sum] = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
++SRC_URI[same-file-1.0.6.sha256sum] = "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502"
++SRC_URI[serde-1.0.228.sha256sum] = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
++SRC_URI[serde_core-1.0.228.sha256sum] = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
++SRC_URI[serde_derive-1.0.228.sha256sum] = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
++SRC_URI[serde_json-1.0.149.sha256sum] = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
++SRC_URI[shlex-1.3.0.sha256sum] = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
++SRC_URI[smallvec-1.15.1.sha256sum] = "67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03"
++SRC_URI[syn-2.0.117.sha256sum] = "e665b8803e7b1d2a727f4023456bbbbe74da67099c585258af0ad9c5013b9b99"
++SRC_URI[tinytemplate-1.2.1.sha256sum] = "be4d6b5f19ff7664e8c98d03e2139cb510db9b0a60b55f8e8709b689d939b6bc"
++SRC_URI[toml-span-0.7.1.sha256sum] = "f22ba417d437b5fa5dcba6c27dbd6c14f38845315b724d89fed73b7a426451b7"
++SRC_URI[unicode-ident-1.0.24.sha256sum] = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
++SRC_URI[version_check-0.9.5.sha256sum] = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
++SRC_URI[walkdir-2.5.0.sha256sum] = "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
++SRC_URI[wasip2-1.0.2+wasi-0.2.9.sha256sum] = "9517f9239f02c069db75e65f174b3da828fe5f5b945c4dd26bd25d89c03ebcf5"
++SRC_URI[wasm-bindgen-0.2.114.sha256sum] = "6532f9a5c1ece3798cb1c2cfdba640b9b3ba884f5db45973a6f442510a87d38e"
++SRC_URI[wasm-bindgen-macro-0.2.114.sha256sum] = "18a2d50fcf105fb33bb15f00e7a77b772945a2ee45dcf454961fd843e74c18e6"
++SRC_URI[wasm-bindgen-macro-support-0.2.114.sha256sum] = "03ce4caeaac547cdf713d280eda22a730824dd11e6b8c3ca9e42247b25c631e3"
++SRC_URI[wasm-bindgen-shared-0.2.114.sha256sum] = "75a326b8c223ee17883a4251907455a2431acc2791c98c26279376490c378c16"
++SRC_URI[web-sys-0.3.91.sha256sum] = "854ba17bb104abfb26ba36da9729addc7ce7f06f5c0f90f3c391f8461cca21f9"
++SRC_URI[winapi-0.3.9.sha256sum] = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
++SRC_URI[winapi-i686-pc-windows-gnu-0.4.0.sha256sum] = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
++SRC_URI[winapi-util-0.1.11.sha256sum] = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
++SRC_URI[winapi-x86_64-pc-windows-gnu-0.4.0.sha256sum] = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
++SRC_URI[windows-core-0.62.2.sha256sum] = "b8e83a14d34d0623b51dce9581199302a221863196a1dde71a7663a4c2be9deb"
++SRC_URI[windows-implement-0.60.2.sha256sum] = "053e2e040ab57b9dc951b72c264860db7eb3b0200ba345b4e4c3b14f67855ddf"
++SRC_URI[windows-interface-0.59.3.sha256sum] = "3f316c4a2570ba26bbec722032c4099d8c8bc095efccdc15688708623367e358"
++SRC_URI[windows-link-0.2.1.sha256sum] = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
++SRC_URI[windows-result-0.4.1.sha256sum] = "7781fa89eaf60850ac3d2da7af8e5242a5ea78d1a11c49bf2910bb5a73853eb5"
++SRC_URI[windows-strings-0.5.1.sha256sum] = "7837d08f69c77cf6b07689544538e017c1bfcf57e34b4c0ff58e6c2cd3b37091"
++SRC_URI[windows-sys-0.61.2.sha256sum] = "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc"
++SRC_URI[winresource-0.1.31.sha256sum] = "0986a8b1d586b7d3e4fe3d9ea39fb451ae22869dcea4aa109d287a374d866087"
++SRC_URI[wit-bindgen-0.51.0.sha256sum] = "d7249219f66ced02969388cf2bb044a09756a083d0fab1e566056b04d9fbcaa5"
++SRC_URI[zerocopy-0.8.47.sha256sum] = "efbb2a062be311f2ba113ce66f697a4dc589f85e78a4aea276200804cea0ed87"
++SRC_URI[zerocopy-derive-0.8.47.sha256sum] = "0e8bc7269b54418e7aeeef514aa68f8690b8c0489a06b0136e5f57c4c5ccab89"
++SRC_URI[zmij-1.0.21.sha256sum] = "b8848ee67ecc8aedbaf3e4122217aff892639231befc6a1b58d29fff4c2cabaa"
++SRC_URI[zstd-0.13.3.sha256sum] = "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a"
++SRC_URI[zstd-safe-7.2.4.sha256sum] = "8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d"
++SRC_URI[zstd-sys-2.0.16+zstd.1.5.7.sha256sum] = "91e19ebc2adc8f83e43039e79776e3fda8ca919132d68a1fed6a5faca2683748"
+diff --git a/meta-oe/recipes-extended/edit/edit_2.0.0.bb b/meta-oe/recipes-extended/edit/edit_2.0.0.bb
+new file mode 100644
+index 0000000000..426cb2dc31
+--- /dev/null
++++ b/meta-oe/recipes-extended/edit/edit_2.0.0.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Microsoft's terminal text editor"
++HOMEPAGE = "https://github.com/microsoft/edit"
++DESCRIPTION = "A simple, fast terminal text editor from Microsoft, \
++               written in Rust."
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=040b55c26aec8b690f86784e2ce5c674"
++
++SRC_URI = "git://github.com/microsoft/edit.git;protocol=https;nobranch=1;tag=v${PV}"
++SRCREV = "d3f86975dc3c1298bf7300dbdf409a1df8d8b2b7"
++
++inherit cargo cargo-update-recipe-crates
++
++DEPENDS = "icu"
++
++# Let Yocto handle stripping instead of Cargo
++CARGO_BUILD_FLAGS += " --config profile.release.strip=false"
++
++# Bake the versioned ICU sonames into the binary at compile time by scanning
++# the sysroot for the actual major-versioned libicuuc.so.<N> symlink.
++do_compile:prepend() {
++    ICU_SONAME_VER=$(ls ${STAGING_LIBDIR}/libicuuc.so.* | grep -E '\.so\.[0-9]+$' | head -1 | xargs basename | cut -d. -f3)
++    export EDIT_CFG_ICUUC_SONAME="libicuuc.so.${ICU_SONAME_VER}"
++    export EDIT_CFG_ICUI18N_SONAME="libicui18n.so.${ICU_SONAME_VER}"
++}
++
++require ${BPN}-crates.inc
++
++# edit dlopen()s ICU at runtime for Unicode support; recommend the split
++# library packages produced by the icu recipe.
++RRECOMMENDS:${PN} = "libicuuc libicui18n"
++
+-- 
+2.47.3
+
 
