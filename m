@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCCD0CD5BD5
-	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:43 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16810.1779875381755207942
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14248CD6E44
+	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:44 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16966.1779875379898269362
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:49:43 -0700
+ Wed, 27 May 2026 02:49:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=l9sbQil6;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ZpCgktpL;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875383; x=1811411383;
+  t=1779875380; x=1811411380;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tdxcTBwAIB3rl8zHbRPnfx0ReGbd0Bs6CkMKZdGea1E=;
-  b=l9sbQil68WEKVtjuaJdwP6PESQ8ky4qGRKDsDEjeQ21UW7Xl0kbpX8qD
-   gU6fTIldjKj//Aoe7klrRyOLiT56S087vr7ChJnK3+grZvKJuGhcVJMpe
-   S4A5oQQtOUtG/58fIgw0rOo3fXVahrIJiNXC+J58PhgYpMZyI5BwwPTER
-   NvCvQi2YjayPkx6MBiDHTa+W5ohf3wKkJEUlOyZPfAbHbUlEcrF0pRJj7
-   LmeLNedcHPL0Ua6vGmXoYaWK7FrjKcIFV5A7wdXddMgRUVX86v8g94XRy
-   1hS8a+IXeCoI1mnCoEQBB88NxA7TNIy1bT0/2IT5Ep+3wDOJYAW47tB/Y
-   Q==;
-X-CSE-ConnectionGUID: T3WR0/PlQCGH3ZB2CqIw7Q==
-X-CSE-MsgGUID: sibqa3YtSd2WEd+4REK2EQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="241969866"
+  bh=reFGcaTl6H3P+VqRCqXvlXn01LInH7Oj8vVZ/YKL6pQ=;
+  b=ZpCgktpLC1ygGMouTaL99YnsK10VL3ugAunOgzYS8bOmD6z/ANhI2D9e
+   PDjMufh/2gEd5JM3RAwChgiIRa0Wadm8vdBx2QdfAx8FUnRhq++PYSr+4
+   FJ6Gz7kau4SGTSsWv6iKDLzopiyXdg64AL2ZGH8+ezh5ho48Cg/rE6dnH
+   7wHiKsiMdBBbOZxZmw8ihAHhkJHuCM6KGtjeu6ijJavO5gg8owfHUqAQP
+   l1YH0buEZ6NYBOgH3OGbB17AL+ow+1HuCwgpJFbjrlfxE9fV8suVyExuW
+   OjoG3cT8eiv0KNK45VI9rd3N5ol9q49lar2Lhz0FqKZz2PHXfhP0k1vWi
+   g==;
+X-CSE-ConnectionGUID: uaq68bs4Qm+mBnmYB5OOWA==
+X-CSE-MsgGUID: KHvO8wraSH+xPtyWNE2dUQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="228171233"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="241969866"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:42 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="228171233"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:38 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id C1DAC8203D3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:41 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 7B3BD42A338
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:38 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 7A4EA148AD33
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:41 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 31D55C006D8
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:38 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 7BA9382A2CC;
-	Wed, 27 May 2026 09:49:39 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 440B882A2D2;
+	Wed, 27 May 2026 09:49:36 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 51/56] python3-zeroconf: upgrade 0.148.0 -> 0.149.16
-Date: Wed, 27 May 2026 17:48:00 +0800
-Message-ID: <20260527094805.2039-51-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 49/56] python3-wrapt: upgrade 2.1.2 -> 2.2.1
+Date: Wed, 27 May 2026 17:47:58 +0800
+Message-ID: <20260527094805.2039-49-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -60,33 +60,33 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127258
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127256
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...python3-zeroconf_0.148.0.bb => python3-zeroconf_0.149.16.bb} | 2 +-
+ .../python/{python3-wrapt_2.1.2.bb => python3-wrapt_2.2.1.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.148.0.bb => python3-zeroconf_0.149.16.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-wrapt_2.1.2.bb => python3-wrapt_2.2.1.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.149.16.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.149.16.bb
-index fd083d6ee8..0a10048400 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.148.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.149.16.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9fe712b1bc27c5c4e9ecd7f31d208900"
+diff --git a/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb b/meta-python/recipes-devtools/python/python3-wrapt_2.2.1.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-wrapt_2.2.1.bb
+index ee57717a5c..859e36c55f 100644
+--- a/meta-python/recipes-devtools/python/python3-wrapt_2.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-wrapt_2.2.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=63a78af2900bfcc5ce482f3b8d445898"
  
--SRC_URI[sha256sum] = "03fcca123df3652e23d945112d683d2f605f313637611b7d4adf31056f681702"
-+SRC_URI[sha256sum] = "5e6b5a3b153c2cc2a8d9e6f6f189ec5638f7d9c86fc3e88a6c53eb6863761a5e"
+ inherit pypi python_setuptools_build_meta ptest-python-pytest
  
- inherit pypi python_poetry_core cython
+-SRC_URI[sha256sum] = "3996a67eecc2c68fd47b4e3c564405a5777367adfd9b8abb58387b63ee83b21e"
++SRC_URI[sha256sum] = "6744f504375775d7609c82c8d3d94af1c9a6f05586984536905908ba905277b9"
  
+ # python3-misc for 'this' module
+ RDEPENDS:${PN}-ptest += " \
 -- 
 2.43.0
 
