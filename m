@@ -1,134 +1,155 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <david.partain@est.tech>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FCCCCD5BD5
-	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:54 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16814.1779875386495525726
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 987CBCD5BD0
+	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 12:54:37 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.17758.1779878747668982219
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:49:46 -0700
+ Wed, 27 May 2026 03:45:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=awMEHNXv;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875386; x=1811411386;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=dN5pEnjKjFaGcPiu31UP/6UyHnOnHo51R6zbAENQZFA=;
-  b=awMEHNXvrEkNbcr1QX+KxUvLQp4MYWHSX2Nhl9n1Gs45HFbU6WWW0WYi
-   L/MT7Hf6vDwOuzpg7SWT2ZR+bcW4fM9aXmcXdwbc5tCNwB+NREK9v36mf
-   xzYsw4emNX222/z5tUoEjHZeyOZysOh8oLDv/5PW3mrg0XtGNUxHk0CKO
-   7thSmteClcm8u+LqC3gLV9fY6fmYzMhHXGfO8fZYIB1bY/inY3a0MVb9V
-   kWRv1O3F/OeZAm7sldayzNHgGio4jIheFoK1kmD7BUWmqUh6WvHqKynTv
-   j9RWOJkgl61iAymria/Wwa3Jsa0lOzJBpJfJ490pD+ZTH1wMe7eaDBADZ
-   g==;
-X-CSE-ConnectionGUID: Vv8sJ3xOTtuCzU9H0ZURQw==
-X-CSE-MsgGUID: 3Zd1XwyNQ/ubv6GODdw9uA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="220931956"
-X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="220931956"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:44 +0900
-Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id E778E42A338
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:44 +0000 (UTC)
-Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 9C3B41C4B515
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:44 +0000 (UTC)
-Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id B3E3C82A2C9;
-	Wed, 27 May 2026 09:49:42 +0000 (UTC)
-From: Wang Mingyu < wangmy@fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 53/56] sdbus-c++: upgrade 2.2.1 -> 2.3.1
-Date: Wed, 27 May 2026 17:48:02 +0800
-Message-ID: <20260527094805.2039-53-wangmy@fujitsu.com>
-X-Mailer: git-send-email 2.49.0.windows.1
-In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
-References: <20260527094805.2039-1-wangmy@fujitsu.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@qualcomm.com header.s=qcppdkim1 header.b=NNLAdbgp;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@oss.qualcomm.com header.s=google header.b=MpyPJaAe;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: wei.zhang@oss.qualcomm.com)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 64R8mRXU1040710
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 10:45:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=; b=NNLAdbgpezknZWcP
+	c65zuEGAF0fw+++MoavgVtYeayznSZmDwCTS8xp63k6mJV5/unUv3HX5QbCQXpe7
+	7sWWxSeVpPHdNblRe+s2kBr6J77bIcuIDHPFj4ZVWxdb2fFtouQoW0RCs5TaZlIU
+	RhRXUKunEqjMNjoBi5D/kBHXaUnKcm7IexEU/lzq69E/s7vnPMTYQbhDHESF6Cfr
+	T7v3Y2GsCg0yuoXn1fPzttz/dPl3VctDjIWaEA4iXj2iLf20kggNVNLIBAmIt0m+
+	Arci8IzMSus4A6Lb992X7F957/LiqPICxmMeewQbckaQbPPh95lHrBgRFopm0a3c
+	524hQg==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4edh17axym-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 10:45:46 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-2f2d983d109so5460978eec.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 03:45:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1779878745; x=1780483545; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=;
+        b=MpyPJaAexzaWL+l7j4A+bpcWJGzlWgTIAtCbxhjXMDg7b7bFCAUpGerD0pnXhqhx5a
+         +1GGg/ihp9wJ0ONKt/ktOcsaMFxt0CjJb02es190q06XFNh4G5TISGKqIc8yEcIBS62g
+         EF6JySk0gBi7GhYcmcVhnA5MiacMT+n6CuR+5UXLZ1fuOZ/z0WepGJ91nqA2hj+y/cqZ
+         zj1gzcbLgc1Sq9YrWKQbFnm0cL5hfeuwSEVQhsdrqUrlK+ihSLy1y9mniJyxGaIQQPky
+         42wXG5FJyfnHEAk8H3zctJvbdk5HlAkr122lCZr8w2lhzZQDETGjKsbZC3Oa8JPpgm4d
+         lmlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1779878745; x=1780483545;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XFHqyUCcmri0Wh5T8S9/wNQCWH3u1eXduiAp+LptaO4=;
+        b=ARgq3yyBYL0zK1gm81td1CvsBK/yxuYOvNUxaZ+/e469JLhDENagZ8KCNaVCwHQ0gK
+         y/MRzA5eXqCUUAbeT+u/YY7YPmZUU2a5QV0I30jv035yykjquzodWs9WKtsZTrsCziFz
+         yKuH+PRQlihnFW+j+/BqdTr0ODTusEJ8SXnsijrf0SyQi4Dd58baiZN7cu4zvTz0bpcs
+         GktNcogCqFWD/Cx4YF9Y0wzMfZR6Rxzae1VUtGd8fXWbauS0GeMmDtzjX8wqAtPtFN5x
+         XBmVRmaVcxcOkM/qYRqzqJ+Jq6iSWoas9yqrFu5anelk6rq8Et+iNqc/VcX/x81RDLmG
+         pKJQ==
+X-Gm-Message-State: AOJu0Ywy/e7I9NRkDO/PJmnsmSn6BW3lhBLoXL6a6tAlRH+MppKyiqqT
+	jldkmtGk2Sgly0kRxo/MFKj+0K1nJnGndpyoes++pmeR2JFTORCxmb53H83kn0lvItnoeF/LrVZ
+	egiLRYOwPNZDKZZTyPjzgpEq2QT1qn6KCnDHmzUeWGfZiDF/F863bMOP/YXxRq6G21dEArMUj8l
+	hhHV84rAME
+X-Gm-Gg: Acq92OGz3cg1nLEF6X5UAWLFy21ei82wFapoZ8PvrFkaokqBaVAm4OVouYeFGcAMYpY
+	GQDL+1g23jhtbwKqAVeMb04pAV2o+iYU9Xixy1YKeNcGl5OQmaFhF7XdI4HiNQoce5VcsEckW1K
+	HpRFyIOClLSYI+hlk2FjVxw/HjnBd+4AT4GYF0izcuYgCyRYz0bVy2vrqKEuIhpwq0T0xSlOHHG
+	cLx9EbIpDociZdO+DhzkYK2xC7rLmWOHkW5hmDg8ZCU8PS02InP8cOYMELBXcLKn87hcSzZr1uA
+	Gq2tW/cfhTp/YlOmtOnpiqYM9sFtyVHAA/8WfnP11XFJuT5Tr2ZY6g3EieYdmRjPkwVSlE6D+NY
+	0vvr61WjJ/H7bbUSOh4gbpbfcVeecDpdsqr8LZs7b63nV7GOI3oFLRA2ppSS7X2Rul7o1vFSN1m
+	JeZLezqarM1w==
+X-Received: by 2002:a05:7300:c89:b0:2db:2089:460f with SMTP id 5a478bee46e88-30449141cfcmr10074130eec.19.1779878745279;
+        Wed, 27 May 2026 03:45:45 -0700 (PDT)
+X-Received: by 2002:a05:7300:c89:b0:2db:2089:460f with SMTP id 5a478bee46e88-30449141cfcmr10074119eec.19.1779878744613;
+        Wed, 27 May 2026 03:45:44 -0700 (PDT)
+Received: from [10.110.95.222] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3045245d6aesm11956020eec.26.2026.05.27.03.45.43
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 27 May 2026 03:45:44 -0700 (PDT)
+Message-ID: <b0633450-767d-45fa-a272-a19715dc554c@oss.qualcomm.com>
+Date: Wed, 27 May 2026 18:45:41 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-oe][PATCH] hostapd: Fix clearing settings for color switch
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260526082629.4120984-1-wei.zhang@oss.qualcomm.com>
+ <zsxojndeb7cr64qbhg4uf7batcqxlhfwfhas7pvdi7pc4ry65o@qfs5nkzigjsq>
+From: "Wei Zhang (Stone)" <wei.zhang@oss.qualcomm.com>
+In-Reply-To: <zsxojndeb7cr64qbhg4uf7batcqxlhfwfhas7pvdi7pc4ry65o@qfs5nkzigjsq>
+X-Proofpoint-ORIG-GUID: K5J3KEZDytD8bt_NuvAHPSQ9ADxQozJ4
+X-Proofpoint-GUID: K5J3KEZDytD8bt_NuvAHPSQ9ADxQozJ4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI3MDEwMyBTYWx0ZWRfX9AXHb3ec4f7r
+ zxncNLXkPQ70oVCMAGlY1m+p7N30SwJiyJYr4fNSsXKb+Lf+toc3+3vLs5y0zMYGI912PunKJqR
+ du0buFvJL82/HgSkpA3ikrTGVX84oBAqAz50UATetyfp7FFqUQYFLLspv7pwwvlV7NOHzMZRUEr
+ if5JtkC2YKw9cltV50b5zIeV2cjjSIBZ/mCLylXiZ70LT/fF1NwSPapv0SAQHfAs8jUHMpRRgKm
+ vY5J6cd6goHKHfM9Hn6vuEytVjzfLpC2B9AJm5ijJYlzCVbVe+8xQenbDfp/8ABMu52Wa9gO4d1
+ 01SdZERRfiMpywq/hjamUKurFYybsidNsGEcaCI0+n2J1K/ixY5pvYE3JS6TOXRnfGwqoquPBn+
+ +ZDW/yPArHHC4abe+LndLVY/bWSXUPN6bElgN5/uBTOV9uRkRrrL0TU2QLfkQajfZohIOP94siv
+ O67G8xX2fbU41/1t4jQ==
+X-Authority-Analysis: v=2.4 cv=Gc0nWwXL c=1 sm=1 tr=0 ts=6a16cb5a cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=zLPTmYEMXjj0z0NWFNAA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-27_01,2026-05-26_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 phishscore=0 adultscore=0 lowpriorityscore=0
+ malwarescore=0 priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605270103
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0031df01.pphosted.com id 64R8mRXU1040710
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127261
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 12:54:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127265
 
-From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch
-refreshed for 2.3.1
+On 5/27/2026 5:46 PM, Dmitry Baryshkov wrote:
+> On Tue, May 26, 2026 at 01:26:29AM -0700, Wei Zhang wrote:
+>> cca_settings is used without zero initialization, which may
+>> introduce random values and result in invalid nl80211
+>> attributes.
+>>
+>> Without this fix, BSS color switch may fail completely and
+>> the feature becomes non-functional. Initialize the structure
+>> before use.
+>>
+>> Signed-off-by: Wei Zhang <wei.zhang@oss.qualcomm.com>
+>> ---
+>>   ...learing-up-settings-for-color-switch.patch | 34 +++++++++++++++++=
+++
+>>   .../hostapd/hostapd_2.11.bb                   |  1 +
+>>   2 files changed, 35 insertions(+)
+>>   create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0002=
+-hostapd-Fix-clearing-up-settings-for-color-switch.patch
+>>
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+>
+> The patch also needs to be backported to the wrynose branch, I assume.
+> Should it be backported to older LTS branches?
+Yes, this needs to be backported to both wrynose and whinlatter. Both=20
+use hostapd 2.11, which introduced this regression.
+Older LTS branches (scarthgap, kirkstone) use hostapd 2.10 and are not=20
+affected.
 
-Changelog:
-=============
-- Add coroutine support for client-side async calls
-- Add support for dumping variant to string
-- Introduce clang-tidy for static analysis and fix issues
-- Add deduction guides for Struct from std::tuple
-- Other fixes and improvements
-- Fix ABI compat issue by moving new virtual functions to the end of the class
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- ...x-error-factory-test-for-musl-libc-compatibil.patch | 10 ++++++----
- .../{sdbus-c++_2.2.1.bb => sdbus-c++_2.3.1.bb}         |  2 +-
- 2 files changed, 7 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++_2.2.1.bb => sdbus-c++_2.3.1.bb} (97%)
-
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++/0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch b/meta-oe/recipes-core/sdbus-c++/sdbus-c++/0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch
-index 118d84e290..6f366695ba 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++/0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++/0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch
-@@ -1,4 +1,4 @@
--From da0d6595c48905ec7d99f1a75878fbeb17972d75 Mon Sep 17 00:00:00 2001
-+From ee1f61e7b4ac2cd5eb383e92b9e6eb1640675f72 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 26 Nov 2025 23:29:53 -0800
- Subject: [PATCH] test: Fix error factory test for musl libc compatibility
-@@ -13,12 +13,14 @@ Upstream-Status: Pending
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- tests/unittests/Types_test.cpp | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
-+ tests/unittests/Types_test.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
-+diff --git a/tests/unittests/Types_test.cpp b/tests/unittests/Types_test.cpp
-+index 7405265..7a24f0c 100644
- --- a/tests/unittests/Types_test.cpp
- +++ b/tests/unittests/Types_test.cpp
--@@ -488,7 +488,7 @@ TEST(AnErrorFactory, CanCreateAnErrorFro
-+@@ -551,7 +551,7 @@ TEST(AnErrorFactory, CanCreateAnErrorFromErrno)
-      EXPECT_TRUE(error.isValid());
-  }
-  
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.2.1.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.3.1.bb
-similarity index 97%
-rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.2.1.bb
-rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.3.1.bb
-index 43646953f2..b752025dd4 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.2.1.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_2.3.1.bb
-@@ -16,7 +16,7 @@ PACKAGECONFIG[with-tests] = "-DSDBUSCPP_BUILD_TESTS=ON -DSDBUSCPP_INSTALL_TESTS=
- 
- DEPENDS += "expat"
- 
--SRCREV = "28b78822cfc5fbec4bd9906168493e9985f586ed"
-+SRCREV = "ca073434d2c03c2b619f7e23f285cebbf32c7e46"
- SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;tag=v${PV} \
-            file://0001-test-Fix-error-factory-test-for-musl-libc-compatibil.patch \
-            file://run-ptest"
--- 
-2.43.0
-
+Thanks=EF=BC=8C
+Wei
+>
 
