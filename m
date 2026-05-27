@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66378CD5BD5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77985CD4F54
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:33 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16960.1779875363919899971
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16800.1779875362281806675
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:49:25 -0700
+ Wed, 27 May 2026 02:49:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VKpEOzy5;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=G1bxvThy;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875364; x=1811411364;
+  t=1779875372; x=1811411372;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=cznyUGm6KTpTpdY7kq8cLQk46GG2XL+J+VIhi0FTwUo=;
-  b=VKpEOzy5BuPj5GkWu6Bz6S6Y8iLWNpA0+c3/3YixQyihuuFmmJQ9KWZt
-   un0OelFH9xFSQCdo8O1tUMJ75tw26KbI3uDFoRaEhybmxELqQr6K3IYP6
-   //mHDPKykCkNjrkk6eUTb3D+67MGtcfb2YnYZh8LMzwmIu0VwtvAXp3xz
-   Yyw6zAlirdIzOaFiXuzvb6urzv2JPAo80+Gg1ShEOEVmjLPFnNSj0hKfK
-   KRikyrwVowv15u2PJJDARvpR98SL8yziQqK4osVWxB3cGimSsxGryk0lB
-   HP6u3HO6o9WwoYM8lJyrCUnlgQ94+LGsyIKF+ZZt9I5cStzZnzc3O6VvI
+  bh=Kod0F5749BLCu5O+gQqyIEXY1oHqg4ANssJ9BAtA7cs=;
+  b=G1bxvThyXANO9y0/5UJ+dVHbszCV+qwx3lpKPNFgXD+7Z5SeuMzTrMrG
+   +Zsbl/RkAuGW56Yd59anfFdP87nvktGBLauiZQC+8usN0qwN6SgEjwG7F
+   E9f0TNQgSib3zxVuaXznFuUm8fj3D7n9T/jQov1EVQc8x6r6vnSaNLa//
+   H3jV9FeRucw8xw9vueiqXe+FBh6JLQg5Bg6J0EAJJVa8qAOy/+9CvuJ/X
+   0/u+aeEkz3yTvMUbj0RzzllIcblds1qnz2GhlLCzCgjsaZNPakuGc/a7u
+   BR40Ne+ApCat44st/+i3U5fd2Y5Q1Nn9VGezg41ahXpwyhtYobOsXCWCH
    g==;
-X-CSE-ConnectionGUID: WOfBjm5zTXe6uWr46G3QDA==
-X-CSE-MsgGUID: mOF9Dm3bSaq88oZzGl13TQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="220931933"
+X-CSE-ConnectionGUID: AR/rP5rTTFmk5JNY/8O1mA==
+X-CSE-MsgGUID: zKlu9iPuQuGu/d6p6Q3G4w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="245264248"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="220931933"
+   d="scan'208";a="245264248"
 Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:24 +0900
-Received: from az2uksmgm1.o.css.fujitsu.com (unknown [10.151.22.198])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:32 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 0F0B78203D2
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:24 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 1923DC00357
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:32 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id BA13C8D65CA
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:23 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id C46DBC0918A
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:31 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id BB90982A2CE;
-	Wed, 27 May 2026 09:49:21 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id BFBFC82A2D5;
+	Wed, 27 May 2026 09:49:29 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 40/56] python3-setuptools-git-versioning: upgrade 3.0.1 -> 3.1.0
-Date: Wed, 27 May 2026 17:47:49 +0800
-Message-ID: <20260527094805.2039-40-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 45/56] python3-stevedore: upgrade 5.7.0 -> 5.8.0
+Date: Wed, 27 May 2026 17:47:54 +0800
+Message-ID: <20260527094805.2039-45-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,36 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127247
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127252
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- Added a dynamic-metadata provider compatible with scikit-build-core.
-- Add support for git archive builds via a tracked .git_archival.txt file.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ning_3.0.1.bb => python3-setuptools-git-versioning_3.1.0.bb} | 2 +-
+ .../{python3-stevedore_5.7.0.bb => python3-stevedore_5.8.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-setuptools-git-versioning_3.0.1.bb => python3-setuptools-git-versioning_3.1.0.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-stevedore_5.7.0.bb => python3-stevedore_5.8.0.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.0.1.bb b/meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.1.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.1.0.bb
-index 561f1d06c6..433525d041 100644
---- a/meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-setuptools-git-versioning_3.1.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://setuptools-git-versioning.readthedocs.io"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=92e79e3a844e66731724600f3ac9c0d8"
+diff --git a/meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
+index cb194b6c15..58add335b5 100644
+--- a/meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb
++++ b/meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "c8a599bacf163b5d215552b5701faf5480ffc4d65426a5711a010b802e1590eb"
-+SRC_URI[sha256sum] = "612dfcf184addac9e1c2216f4f229724b2390e5bf613fb925ae80b84f2529172"
+-SRC_URI[sha256sum] = "31dd6fe6b3cbe921e21dcefabc9a5f1cf848cf538a1f27543721b8ca09948aa3"
++SRC_URI[sha256sum] = "b49867b32ca3016e94100e68dbf26e72aa7b8708d0a3f73c08aeb220370ac715"
  
- inherit pypi python_setuptools_build_meta
+ DEPENDS += "python3-pbr-native"
  
 -- 
 2.43.0
