@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 782DACD6E43
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9515FCD5BD5
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:48:31 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16925.1779875309172542350
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16926.1779875310921343147
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:48:29 -0700
+ Wed, 27 May 2026 02:48:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=FDfHSWgr;
- spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=dR2SA3Uh;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875309; x=1811411309;
+  t=1779875311; x=1811411311;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=5hPYjjx81sPZTC6lpjmQEimckxq+8eFa5VosNJoGClY=;
-  b=FDfHSWgrIb8/TfSBHgI3V1ZKAKOSRr8VB7M7JDZQPz7zlZPAKisRFwrs
-   Ns3Jebi9XP3IoT4tlx9vR8Z2T7DjLrR1ypnNhnpxuPl8khXei82FVMRKP
-   BTcsJs/OrU+Cd8+pxLWhPr4biwTHnz+j9R+iHvWoVRzWgVohb9/09qjqn
-   5YV+ORPRAO+wQ9ZA9AJEhqfp2jt57Nz9Fln1n4wG1Um4RRZhlWa2O7wbO
-   UPNFQKvhbKsZnshs6krwc49PwYhR1t2QHR3j6/n/eE0XUhq/g12S4oI8z
-   26qJBolFDY9Q5cKnx1AZV2BG6LklFKq+a+PRiMfXe5i38Ezois53K4bt3
+  bh=FSXllAWMLKCTZrnN2aX1i1BREtG2KuAdnpJJiW7EDPM=;
+  b=dR2SA3Uh29qXZZuzosnapKUeNeZ+lBs6lw1GgCd8QuaDfeu96+xr6JrQ
+   fgXJYh1PbqNKG8gb59r7XkBozmN33xVvR6rSaca9tfIWL22Vf+aDV8GXZ
+   SQyDLLkQyzT6aTL9eH9qV76W0kiW5w/Ef/f6SUwq4ENyRkYkXOlpPQX+d
+   yeQjWwN9/92qemXTAdBWRDAjsmZ1kA6/yBi9uKa4g/HKtsjbfFeyNZHRX
+   N7tgbecTG2A+OEPQgJUF0pXN4VFPc5a2Vl7+3cJsXVXA7aG3hNqmuLrJv
+   6QzZUXQj4lLKrehwNItL9Cq9kKnzbeLKSvGNaSdHslrbaYRe+huTnsotG
    Q==;
-X-CSE-ConnectionGUID: mZYyro/IRm2LK/GXB3x29w==
-X-CSE-MsgGUID: JO4nxLwrQYi+d3dp8F8Rqg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="219714692"
+X-CSE-ConnectionGUID: gBjbJ0nTS0S+eQ0mgomWWA==
+X-CSE-MsgGUID: sbvxjj1tTYemUxyjH2aVwA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="229391861"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="219714692"
-Received: from gmgwnl01.global.fujitsu.com (HELO mgmgwnl01.global.fujitsu.com) ([52.143.17.124])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:27 +0900
-Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
+   d="scan'208";a="229391861"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:29 +0900
+Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mgmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 9C9D54DE5
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:27 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 55BAB1002BB9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:29 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 536C8C03F75
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:27 +0000 (UTC)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 0CB75148AD33
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:29 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 7614582A2C9;
-	Wed, 27 May 2026 09:48:25 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 12D2082A2CC;
+	Wed, 27 May 2026 09:48:26 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 05/56] graphviz: upgrade 14.1.5 -> 15.0.0
-Date: Wed, 27 May 2026 17:47:14 +0800
-Message-ID: <20260527094805.2039-5-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 06/56] haveged: upgrade 1.9.20 -> 1.9.22
+Date: Wed, 27 May 2026 17:47:15 +0800
+Message-ID: <20260527094805.2039-6-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,37 +61,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127212
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127213
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ===========
-- The MinGW packages no longer have libgd-dependent components enabled.
-- **Breaking**: The 'diffimg' utility has been removed.
+* Add ReadWritePaths=/dev/shm to systemd service for semaphore creation
+  under ProtectSystem=full sandboxing
+* Fix privilege escalation via command socket (CVE-2026-41054)
+* Check peer credentials before reading command (CVE-2026-41054)
+* Handle failing opening of semaphore
+* Fix /dev/shm permissions to use sticky bit
+* Use chmod after mkdir to ensure correct /dev/shm permissions
+* Update libtool: add lib64 search paths, remove dead code
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../graphviz/{graphviz_14.1.5.bb => graphviz_15.0.0.bb}         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/graphviz/{graphviz_14.1.5.bb => graphviz_15.0.0.bb} (97%)
+ .../haveged/{haveged_1.9.20.bb => haveged_1.9.22.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.20.bb => haveged_1.9.22.bb} (91%)
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.5.bb b/meta-oe/recipes-graphics/graphviz/graphviz_15.0.0.bb
-similarity index 97%
-rename from meta-oe/recipes-graphics/graphviz/graphviz_14.1.5.bb
-rename to meta-oe/recipes-graphics/graphviz/graphviz_15.0.0.bb
-index 388de9b452..f8fdb47cf5 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_14.1.5.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_15.0.0.bb
-@@ -23,7 +23,7 @@ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-re
- SRC_URI:append:class-nativesdk = "\
-            file://graphviz-setup.sh \
- "
--SRC_URI[sha256sum] = "b017378835f7ca12f1a3f1db5c338d7e7af16b284b7007ad73ccec960c1b45b3"
-+SRC_URI[sha256sum] = "937fe4757687260e46a1c9a171cc677e3d4c89abd1efc8885ccb66467c3616ff"
+diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.20.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.22.bb
+similarity index 91%
+rename from meta-oe/recipes-extended/haveged/haveged_1.9.20.bb
+rename to meta-oe/recipes-extended/haveged/haveged_1.9.22.bb
+index 2ea12b3977..281fe1c2c9 100644
+--- a/meta-oe/recipes-extended/haveged/haveged_1.9.20.bb
++++ b/meta-oe/recipes-extended/haveged/haveged_1.9.22.bb
+@@ -6,8 +6,8 @@ HOMEPAGE = "https://www.issihosts.com/haveged/index.html"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
- UPSTREAM_CHECK_URI = "https://graphviz.org/download/"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+-SRCREV = "e2d96806273caa9ce7457e2f8669a3c40517ca27"
+-SRC_URI = "git://github.com/jirka-h/haveged.git;branch=master;protocol=https \
++SRCREV = "21bad00a09233855fbea14ac062bc72b5eabc9a6"
++SRC_URI = "git://github.com/jirka-h/haveged.git;branch=master;protocol=https;tag=v${PV} \
+ "
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/jirka-h/haveged/releases"
 -- 
 2.43.0
 
