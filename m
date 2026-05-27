@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50EB7CD5BD5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84EFECD6E46
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:02 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16795.1779875341485552435
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16941.1779875338055763111
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:49:01 -0700
+ Wed, 27 May 2026 02:48:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=aZc7v7Vm;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gV84NvDf;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875342; x=1811411342;
+  t=1779875338; x=1811411338;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=XNJaFRJNwy13oGt6DMtcGlQhfR+B7YM3Lzek/FCFYhc=;
-  b=aZc7v7VmOuagecQ6630sdS6KYqnogn50ZqsZxXqbA6bHSj7vVjWuQN+a
-   MnUZQojRRE6Gf6vmUV2rZLAJAmYw/MYpZm5SjbDK9Oj41nX1f8xlNC4o1
-   Vn1jsf540BRGerhp0PiHasDwttQajCLMcrDSiT5xpxjF/gmpxj+9vEuVg
-   O+Rmols8Zn+5W/wqpsrivmkPd9QEFZWpw/5a8fUYy3eXSQpHU/Jyvfvh7
-   vFsei2/OdfsdyTs2LsTB9SAauG0+8m7GYnzCfJv0CIslGfKoxVRpC1DVV
-   dsHZ8LfLW9/QrtVBaTrHhd9o+9+1tn2xNmT/AAWq2zZKYPirznhhTHGi5
+  bh=wcvHozzsGb1aaTwggsUwecVEGo6OsWyauD2tRowrpIY=;
+  b=gV84NvDftuM1K37Xm9qgeR9l2VJRzMGRw+LeWlsiXS0GpTnC49lYv2XE
+   UnwWSroOEH/Ih2f30G1dpD4caQB0SBQjMQu8PZFV6IFTO04HWRzxPypLw
+   TPNy7VGRpAcx2trLcyNMX1bEoqT8JYmaORvyF3mWLdADkg7qJBKaOk54d
+   qmLwdIQlrzxLjXlhGS0xINkDgyZt4++Rz8HTPQRcqvrmIHi8WQEONuUoy
+   s4KNlIxOnQxmoDS33/8DBTpL/3dVZp0QConB2q/V37pkbmQcsz2QbKGMJ
+   4ouwMEUnVQEqjdENtXQUQLwq4eJk/SrShjTSZ173GTq4ozc62IeY8Gc34
    w==;
-X-CSE-ConnectionGUID: Es/9scMESkqQkkxwDLyMkQ==
-X-CSE-MsgGUID: rYyppUyUQMy75v4aCunj+Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="241969821"
+X-CSE-ConnectionGUID: UU+NIsLlTmyaG5kXONzF+A==
+X-CSE-MsgGUID: 4cFWQhb7S2i2565HtgWGmg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="241434776"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="241969821"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:01 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="241434776"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:56 +0900
+Received: from az2nlsmgm3.fujitsu.com (unknown [10.150.26.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id E265E1002BB9
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:59 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 976AA1000143
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:56 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 98B99C252E9
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:59 +0000 (UTC)
+	by az2nlsmgm3.fujitsu.com (Postfix) with ESMTPS id 4BEC618915F6
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:56 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id A18B582A2CC;
-	Wed, 27 May 2026 09:48:57 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 6A2D882A2D2;
+	Wed, 27 May 2026 09:48:54 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 25/56] python3-faker: upgrade 40.18.0 -> 40.19.1
-Date: Wed, 27 May 2026 17:47:34 +0800
-Message-ID: <20260527094805.2039-25-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 23/56] python3-decorator: upgrade 5.2.1 -> 5.3.1
+Date: Wed, 27 May 2026 17:47:32 +0800
+Message-ID: <20260527094805.2039-23-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,36 +61,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127232
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127230
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Copyright year updated to 2026
+
 Changelog:
-=============
-- Add uuid1 and uuid7 providers to misc provider
-- Fix shared state mutation in en_IN pincode_in_state
+===========
+- Added license SPDX identifier to pyproject.toml
+- Added official support for Python 3.14
+- Fixed a bug with "return await"
+- Moved decorator.py to a package structure ('decorator/__init__.py') and
+  added a stub file ('decorator/__init__.pyi')
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-faker_40.18.0.bb => python3-faker_40.19.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-faker_40.18.0.bb => python3-faker_40.19.1.bb} (93%)
+ ...{python3-decorator_5.2.1.bb => python3-decorator_5.3.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-decorator_5.2.1.bb => python3-decorator_5.3.1.bb} (76%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-faker_40.18.0.bb b/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
-similarity index 93%
-rename from meta-python/recipes-devtools/python/python3-faker_40.18.0.bb
-rename to meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
-index 029b407070..7774e72dde 100644
---- a/meta-python/recipes-devtools/python/python3-faker_40.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
+diff --git a/meta-python/recipes-devtools/python/python3-decorator_5.2.1.bb b/meta-python/recipes-devtools/python/python3-decorator_5.3.1.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-decorator_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-decorator_5.3.1.bb
+index e0ab87f89e..611db8a3f5 100644
+--- a/meta-python/recipes-devtools/python/python3-decorator_5.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-decorator_5.3.1.bb
+@@ -7,9 +7,9 @@ can be abused and you should not try to solve every problem with a \
+ decorator, just because you can."
  
--SRC_URI[sha256sum] = "2207575c0e8f90e6ccd6dbef764de875c614d16d3db4eee9712d9a00087f2e70"
-+SRC_URI[sha256sum] = "76fa71fd3bf320db25e5504eb356f9a76b8a95cd6098524d006f446035b6b89d"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=69f84fd117b2398674e12b8380df27c8"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fb3c386712bc6cfb52aae3692d1ebbd4"
  
- inherit pypi setuptools3 ptest-python-pytest
+-SRC_URI[sha256sum] = "65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360"
++SRC_URI[sha256sum] = "4cbcdd55a6efadb9dbea26b858f4fb3264567b52d69ca0d25b721b553f60ea82"
+ 
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.43.0
