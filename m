@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77985CD4F54
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3E5DCD6E44
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:33 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16800.1779875362281806675
+Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16962.1779875366953803211
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:49:32 -0700
+ Wed, 27 May 2026 02:49:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=G1bxvThy;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Y/zLzweg;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875372; x=1811411372;
+  t=1779875367; x=1811411367;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Kod0F5749BLCu5O+gQqyIEXY1oHqg4ANssJ9BAtA7cs=;
-  b=G1bxvThyXANO9y0/5UJ+dVHbszCV+qwx3lpKPNFgXD+7Z5SeuMzTrMrG
-   +Zsbl/RkAuGW56Yd59anfFdP87nvktGBLauiZQC+8usN0qwN6SgEjwG7F
-   E9f0TNQgSib3zxVuaXznFuUm8fj3D7n9T/jQov1EVQc8x6r6vnSaNLa//
-   H3jV9FeRucw8xw9vueiqXe+FBh6JLQg5Bg6J0EAJJVa8qAOy/+9CvuJ/X
-   0/u+aeEkz3yTvMUbj0RzzllIcblds1qnz2GhlLCzCgjsaZNPakuGc/a7u
-   BR40Ne+ApCat44st/+i3U5fd2Y5Q1Nn9VGezg41ahXpwyhtYobOsXCWCH
-   g==;
-X-CSE-ConnectionGUID: AR/rP5rTTFmk5JNY/8O1mA==
-X-CSE-MsgGUID: zKlu9iPuQuGu/d6p6Q3G4w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="245264248"
+  bh=HyZD7g8yl1K6mqkkihxG621tjmPcwn/Yj6am1Q3i10s=;
+  b=Y/zLzweg7ysyjozc6LKaADaAMTZKNGyR0qIhpim2pFYuW55BPQxh0pMf
+   0+Sd0QFm76DbPUvZ0r72vM3kgzQtGngigPY1E4YBD+vqHvK5cWcw6471l
+   t8bm05jQopnpLlMgjB2LUh6qwRUwHp4QGg8cDSCuRR1ADzN0QRDLwXwoO
+   2RD4gJiU06ko1R9KlcNsggP5zPzEnYHuP/Tl4hDOGd7DTiapG+HkbyOB3
+   2MfAArLpxzXGuEdCgMv/rk76r1IFRN/MNb+NjWg8KFGhn8aQvB5LNvywe
+   moj2Jz/AHYmgA6GzQRmtJFCB/Goite3qaeGa1EiWkBcsthSdai1Voh7Bo
+   w==;
+X-CSE-ConnectionGUID: qFApYL2YTW2cG4sjBpNgmA==
+X-CSE-MsgGUID: DKpcVcD6QXuIumF0MOUotg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="240144244"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="245264248"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:32 +0900
-Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
+   d="scan'208";a="240144244"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:25 +0900
+Received: from az2nlsmgm1.o.css.fujitsu.com (unknown [10.150.26.203])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 1923DC00357
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:32 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 89CC242A338
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:25 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id C46DBC0918A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:31 +0000 (UTC)
+	by az2nlsmgm1.o.css.fujitsu.com (Postfix) with ESMTPS id 3D03DC04279
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:25 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id BFBFC82A2D5;
-	Wed, 27 May 2026 09:49:29 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 5AB3A82A2CC;
+	Wed, 27 May 2026 09:49:23 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 45/56] python3-stevedore: upgrade 5.7.0 -> 5.8.0
-Date: Wed, 27 May 2026 17:47:54 +0800
-Message-ID: <20260527094805.2039-45-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 41/56] python3-socketio: upgrade 5.16.1 -> 5.16.2
+Date: Wed, 27 May 2026 17:47:50 +0800
+Message-ID: <20260527094805.2039-41-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,32 +61,37 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127252
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127248
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+Changelog:
+===========
+- Prevent unnecessary resource allocations
+- Add zizmor to CI builds
+
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-stevedore_5.7.0.bb => python3-stevedore_5.8.0.bb}  | 2 +-
+ .../{python3-socketio_5.16.1.bb => python3-socketio_5.16.2.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-stevedore_5.7.0.bb => python3-stevedore_5.8.0.bb} (80%)
+ rename meta-python/recipes-devtools/python/{python3-socketio_5.16.1.bb => python3-socketio_5.16.2.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb b/meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
-index cb194b6c15..58add335b5 100644
---- a/meta-python/recipes-devtools/python/python3-stevedore_5.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-stevedore_5.8.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://docs.openstack.org/stevedore/latest/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.16.1.bb b/meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python3-socketio_5.16.1.bb
+rename to meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb
+index 10372e83cc..97a378b879 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_5.16.1.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_5.16.2.bb
+@@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
  
--SRC_URI[sha256sum] = "31dd6fe6b3cbe921e21dcefabc9a5f1cf848cf538a1f27543721b8ca09948aa3"
-+SRC_URI[sha256sum] = "b49867b32ca3016e94100e68dbf26e72aa7b8708d0a3f73c08aeb220370ac715"
+ PYPI_PACKAGE = "python_socketio"
  
- DEPENDS += "python3-pbr-native"
+-SRC_URI[sha256sum] = "f863f98eacce81ceea2e742f6388e10ca3cdd0764be21d30d5196470edf5ea89"
++SRC_URI[sha256sum] = "ad88c228d921646efa436c0a0df217e364ef30ec072df4041484e54d49c15989"
  
+ PACKAGECONFIG ?= "asyncio_client client"
+ PACKAGECONFIG[asyncio_client] = ",,,python3-aiohttp python3-websockets"
 -- 
 2.43.0
 
