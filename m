@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7EB9CD6E44
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B846CCD4F54
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:48:41 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16929.1779875317228347347
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.16927.1779875312736448436
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:48:37 -0700
+ Wed, 27 May 2026 02:48:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mi/O4RML;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Bp7fJuyw;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875317; x=1811411317;
+  t=1779875314; x=1811411314;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=l1K3L/7HOzndfXr0e7jHouyU6Q0fMW6GnMR1XaL8sLk=;
-  b=mi/O4RMLGzjLq8AAoGBXeKKCNzpEjrFY4nchJvkeHlecKdP2ivEyIby+
-   qI8BvswVfpCOKIRCRrKj2mLLtDks9O5ttB2F4gCV2DH5GopHISYhSJpjY
-   oVzrURzmwE4clfFXrEnavaW7mfQnFFM1XofrXs934E3lR9wmmwh9riUwg
-   Ttyw9Jd1v7lQ4W1IusIwjS/lxSPC1E2JrBbZGk2y3AI39fRq0Yd3SwLiN
-   /uyyjztEUVq7fLy2p+snkNOnxe3zEPbUPy/4ko5+CZdjOY6BiDGB/i1AW
-   QTMu8qMDWo0rGffS5jypdeKOINjIYAanUlFJhqD163w7JzZwpwB5k4dje
-   w==;
-X-CSE-ConnectionGUID: T9tazAopRN+Bus/5ptX4pA==
-X-CSE-MsgGUID: PAkB4OhfRMWt+5skiG7WAA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="241434757"
+  bh=jFGboQVRuM1fE3w9hu1NshnlU+3aFfIglJyh9jPrmGk=;
+  b=Bp7fJuywkg9ADPnllwoDIuas7C3pqukGRWaPNwHnAyQVkl6yeKmEyWYD
+   8I9k0ZK82LQNRsD1baN8ixMomZV74YhUryY8ei+SMXH33VKxsmV9aiGg8
+   pqnstI/cBuZZ1NX+XCN+KiyxLnEM6DNi1PhboRBWh0Xyf/y9BFE6wWPET
+   yXC/Wdo+hd3ci+mLJdzcn22dBHJRL314+knND5y1WfxOS1LlG4CU/YMtM
+   zaiZyySM5MC8b12dn6uNuYwE7mE4e2rJEWZiFtMk0EgkO3cX6o5yXQ2K8
+   Sd2vygXEB9BVJ6S3n8UVprWp+HgtUHrlyF9XDemyXuf9FfrPu6TOEeQP6
+   g==;
+X-CSE-ConnectionGUID: Rpek+8rjRXGTu3PT+spzXQ==
+X-CSE-MsgGUID: KrW+OfGNSrq2BqQrtiqMUA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="245264182"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="241434757"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:35 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="245264182"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:34 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id B3BC08203D2
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:35 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 13C6E1000143
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:34 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 6C6AE14003C3
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:35 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id B6B561C135FF
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:33 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 737B782A2CC;
-	Wed, 27 May 2026 09:48:33 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id D410182A2C9;
+	Wed, 27 May 2026 09:48:31 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-perl] [PATCH 10/56] libio-compress-perl: upgrade 2.219 -> 2.220
-Date: Wed, 27 May 2026 17:47:19 +0800
-Message-ID: <20260527094805.2039-10-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH 09/56] libhtml-parser-perl: upgrade 3.83 -> 3.85
+Date: Wed, 27 May 2026 17:47:18 +0800
+Message-ID: <20260527094805.2039-9-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,38 +61,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127217
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127216
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Copyright updated to 2000
+
 Changelog:
-==========
-* remove use of eval in globmapper. #73
-* Update zipdetails to version 4.006.
-* Fix typo in fastForward #72
-* Fix issue with "rawdeflate` option in AnyInflate.
+============
+- Replace deprecated uvuni_to_utf8() with uvchr_to_utf8()
+- Fix heap-use-after-free in _decode_entities (CVE-2026-8829)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ibio-compress-perl_2.219.bb => libio-compress-perl_2.220.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libio/{libio-compress-perl_2.219.bb => libio-compress-perl_2.220.bb} (93%)
+ ...ibhtml-parser-perl_3.83.bb => libhtml-parser-perl_3.85.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libhtml/{libhtml-parser-perl_3.83.bb => libhtml-parser-perl_3.85.bb} (89%)
 
-diff --git a/meta-perl/recipes-perl/libio/libio-compress-perl_2.219.bb b/meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb
-similarity index 93%
-rename from meta-perl/recipes-perl/libio/libio-compress-perl_2.219.bb
-rename to meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb
-index ef05e69460..05c8dd2e82 100644
---- a/meta-perl/recipes-perl/libio/libio-compress-perl_2.219.bb
-+++ b/meta-perl/recipes-perl/libio/libio-compress-perl_2.220.bb
-@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=a05fdd79b87a410b617
+diff --git a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.83.bb b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb
+similarity index 89%
+rename from meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.83.bb
+rename to meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb
+index 2fb16a5672..88f95c2e4f 100644
+--- a/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.83.bb
++++ b/meta-perl/recipes-perl/libhtml/libhtml-parser-perl_3.85.bb
+@@ -3,13 +3,13 @@ HOMEPAGE = "https://metacpan.org/release/OALDERS/HTML-Parser-3.83"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/IO-Compress-${PV}.tar.gz"
+-LIC_FILES_CHKSUM = "file://README;beginline=996;endline=1000;md5=cab05784294bb47dc319aeced156e96a"
++LIC_FILES_CHKSUM = "file://README;beginline=996;endline=1000;md5=68b329da9893e34099c7d8ad5cb9c940"
  
--SRC_URI[sha256sum] = "d3f509c4ec2f75d3ea6621b96aef61329a23711c11efb2222c837db1370433e9"
-+SRC_URI[sha256sum] = "9d96ea291f2c54ef367c7396b857d93ba1ac1c4b2f1bce13ed8a3e5f3eebb627"
+ DEPENDS += "perl"
  
- S = "${UNPACKDIR}/IO-Compress-${PV}"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/O/OA/OALDERS/HTML-Parser-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "7278ce9791256132b26a71a5719451844704bb9674b58302c3486df43584f8c0"
++SRC_URI[sha256sum] = "fd42ba6abe07241cf0ad57be246c3980065f683e4465e59b46af9efebc8e0c71"
+ 
+ S = "${UNPACKDIR}/HTML-Parser-${PV}"
  
 -- 
 2.43.0
