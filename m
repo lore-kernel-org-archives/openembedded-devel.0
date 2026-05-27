@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CB17CD4F54
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50EB7CD5BD5
 	for <webhook@archiver.kernel.org>; Wed, 27 May 2026 09:49:02 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16932.1779875328565226714
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16795.1779875341485552435
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 May 2026 02:48:54 -0700
+ Wed, 27 May 2026 02:49:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=iq4RnDec;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=aZc7v7Vm;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1779875334; x=1811411334;
+  t=1779875342; x=1811411342;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=YIJJpYJS3lnThmXSax6PuPLSTqER17/aqcmdC6gJlII=;
-  b=iq4RnDeceBF4I+wjIZ2JLgjLxnn2eu40xdZXP3uSfSdS1Zrw8Lp+4ydS
-   MNNBGIWyXp1NJDiT3k6Ri+g19kN2Y+xSiqXrTQK33ZS9ohndzyRb6/TB0
-   6wCoxSxTJ/IPldTrqBgU4h70XuSB8rkyaik6qN3LFvMkN3ipajAJUSGUp
-   2JZ/Abo62W8NN22h5pNd6ym1Cpty5UXnYrBJpyGF8FBTM3X4gpCIm6jp7
-   MF7SnCRTaMrEqyf3aBkn7G8ROWk2Oj5brtPC3OoMWqAcb+g+wjze0fF5j
-   NFwchzrMRFBLcCQTwJa9iD+3+yT3k5hnWhPbzPM8jRHvVws9wQq7I7nJ3
-   A==;
-X-CSE-ConnectionGUID: gEo7KpMwSB+QS/NB9bL3aA==
-X-CSE-MsgGUID: noqG9wP8T6KP0EuEx1T1hw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="229391887"
+  bh=XNJaFRJNwy13oGt6DMtcGlQhfR+B7YM3Lzek/FCFYhc=;
+  b=aZc7v7VmOuagecQ6630sdS6KYqnogn50ZqsZxXqbA6bHSj7vVjWuQN+a
+   MnUZQojRRE6Gf6vmUV2rZLAJAmYw/MYpZm5SjbDK9Oj41nX1f8xlNC4o1
+   Vn1jsf540BRGerhp0PiHasDwttQajCLMcrDSiT5xpxjF/gmpxj+9vEuVg
+   O+Rmols8Zn+5W/wqpsrivmkPd9QEFZWpw/5a8fUYy3eXSQpHU/Jyvfvh7
+   vFsei2/OdfsdyTs2LsTB9SAauG0+8m7GYnzCfJv0CIslGfKoxVRpC1DVV
+   dsHZ8LfLW9/QrtVBaTrHhd9o+9+1tn2xNmT/AAWq2zZKYPirznhhTHGi5
+   w==;
+X-CSE-ConnectionGUID: Es/9scMESkqQkkxwDLyMkQ==
+X-CSE-MsgGUID: rYyppUyUQMy75v4aCunj+Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11798"; a="241969821"
 X-IronPort-AV: E=Sophos;i="6.24,171,1774278000"; 
-   d="scan'208";a="229391887"
-Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:48:53 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+   d="scan'208";a="241969821"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 May 2026 18:49:01 +0900
+Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 5DC9842A33A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:53 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id E265E1002BB9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:59 +0000 (UTC)
 Received: from az2nlsmom1.o.css.fujitsu.com (unknown [10.150.26.198])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 1769B100D211
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:53 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 98B99C252E9
+	for <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:48:59 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id 3615982A2C9;
-	Wed, 27 May 2026 09:48:50 +0000 (UTC)
+	by az2nlsmom1.o.css.fujitsu.com (Postfix) with ESMTP id A18B582A2CC;
+	Wed, 27 May 2026 09:48:57 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 21/56] python3-aiohappyeyeballs: upgrade 2.6.1 -> 2.6.2
-Date: Wed, 27 May 2026 17:47:30 +0800
-Message-ID: <20260527094805.2039-21-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 25/56] python3-faker: upgrade 40.18.0 -> 40.19.1
+Date: Wed, 27 May 2026 17:47:34 +0800
+Message-ID: <20260527094805.2039-25-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260527094805.2039-1-wangmy@fujitsu.com>
 References: <20260527094805.2039-1-wangmy@fujitsu.com>
@@ -61,37 +61,36 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 May 2026 09:49:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127228
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127232
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-- Clear error on empty addr_infos in start_connection
-- Stop verify_no_lingering_tasks from leaking an event loop
-- Optimize obtaining event-loop down to 1 line
+=============
+- Add uuid1 and uuid7 providers to misc provider
+- Fix shared state mutation in en_IN pincode_in_state
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...happyeyeballs_2.6.1.bb => python3-aiohappyeyeballs_2.6.2.bb} | 2 +-
+ .../{python3-faker_40.18.0.bb => python3-faker_40.19.1.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohappyeyeballs_2.6.1.bb => python3-aiohappyeyeballs_2.6.2.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-faker_40.18.0.bb => python3-faker_40.19.1.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.1.bb b/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.2.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.1.bb
-rename to meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.2.bb
-index 441016fd23..05edac0c5b 100644
---- a/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohappyeyeballs_2.6.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohappyeyeballs"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fcf6b249c2641540219a727f35d8d2c2"
+diff --git a/meta-python/recipes-devtools/python/python3-faker_40.18.0.bb b/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-faker_40.18.0.bb
+rename to meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
+index 029b407070..7774e72dde 100644
+--- a/meta-python/recipes-devtools/python/python3-faker_40.18.0.bb
++++ b/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
  
--SRC_URI[sha256sum] = "c3f9d0113123803ccadfdf3f0faa505bc78e6a72d1cc4806cbd719826e943558"
-+SRC_URI[sha256sum] = "e202810ee718bd01fc6ef49e8ea53d023d5cb6b581076d7925aa499fa55dbe64"
+-SRC_URI[sha256sum] = "2207575c0e8f90e6ccd6dbef764de875c614d16d3db4eee9712d9a00087f2e70"
++SRC_URI[sha256sum] = "76fa71fd3bf320db25e5504eb356f9a76b8a95cd6098524d006f446035b6b89d"
  
- inherit pypi python_poetry_core
+ inherit pypi setuptools3 ptest-python-pytest
  
 -- 
 2.43.0
