@@ -2,67 +2,70 @@ Return-Path: <filipe.pires@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02277CD5BD5
-	for <webhook@archiver.kernel.org>; Thu, 28 May 2026 21:04:46 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.20677.1780002279105216664
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B5ECCD5BD5
+	for <webhook@archiver.kernel.org>; Thu, 28 May 2026 21:16:36 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21083.1780002993717675020
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 May 2026 14:04:39 -0700
+ Thu, 28 May 2026 14:16:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=W9cr81Qf;
- spf=pass (domain: konsulko.com, ip: 209.85.208.48, mailfrom: filipe.pires@konsulko.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-68bd9fce347so157792a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 28 May 2026 14:04:38 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=V91cVOqK;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.43, mailfrom: filipe.pires@konsulko.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4908b92904fso15607315e9.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 May 2026 14:16:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1780002277; x=1780607077; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=opq7wvcljoN+H79HzjhFKxaoqU+tIkTu9dXcGUt3PPQ=;
-        b=W9cr81QfTYOyJHG9RMzFjaUf/pxA3cm8GYlpqjsqNTxki/EwvHRsbGJtCP9KTTd8N9
-         ZE9jh/4kijMo2S/1cyGxd6WvSVu1Inrm60qkcgEuQAURi/MxCgp+03HKNG3uYgHgnLWB
-         CKlLOs0z9EBFyxBrWIKeZe8F6/KFy/eF35bZg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780002277; x=1780607077;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=konsulko.com; s=google; t=1780002992; x=1780607792; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
         bh=opq7wvcljoN+H79HzjhFKxaoqU+tIkTu9dXcGUt3PPQ=;
-        b=acrAYtyg90ndZRWTGtuZrkzTor8968ejl4lKy3GbP5AF3hDOu/4RTbpV5olqwx3uv5
-         Yy0A2Bog/0MsC/ZQMYYjWVVc01jkmrtmnH7lsOUnZnT/dZlJBLCihkHZ1JqZv5ochqWL
-         CywxnvoLIEC8rXaipVHow10h+PF//D3fbl/19LygXvJgVhQYqfi83DpsVbe3c5x6hAoC
-         n/BBy28c/P5aATBoj9xxzPWT/0QRA8YBGyYXvx3hxHxhxYVaSlXWoHu5rN9VWdN+BuLz
-         1uUj4X0Gk3L9TQMbCxxsVOq4MLeB/6AHJjzICttslvAeaotCdgva46xmS5EEbPRBP8et
-         u5Og==
-X-Gm-Message-State: AOJu0Yzk2fCx5n39JMLO/tRbqVaPFOwrqJhFp9IzgTwgLOY24E0pikMf
-	AHJ51glW4YhZCR5e83r/ZXgE0xn8e11Noq7xnLRk8eE1YSfgB4+cnE2eXG5VqpE8VI2HDVWUVNz
-	dUKvOrz8=
-X-Gm-Gg: Acq92OGY6BEjMcnc2fSBV+GrTD4mWQguVErMG8GO3/w3YI2Ff4Njrd9Le2eoRJWtaUm
-	h058wF5cEfyeNXxdy9CNq88SxXWRNmi+K7jPLJLhgOmS3nJ7SLyt+9Sd4L19nyVu46LelZcCcmn
-	Xd+e1LvQOnP14RjeT56JhEDytgUzEPt7zhWjH8qjn1kJA7k27wyuScxKMm8eWO0DlbS9uR+BRd/
-	l62wjaKohbO+wezQbtXcfI7TwyQL8klge3TyD3aAjdhJgT9Vrnezbpb7dveBg9kQSLsJClSyjaf
-	e5h4Ei4u9qbt/U2OyH0Ba/L/5zd5xDGEfpubkCACPC8uY6xlRVAfesj6eytfn8w7UTD0FxPVT25
-	B/94F3+50CvFaoSme05YcOAhLimnYgziroMjRjPKqbfdSiu91RNpK4CxY2D5bqgajR6j3f75Xb9
-	Q3AWUnO6GrwQMkJknmRoU3H8d057EXpajgW89frUl3g4KJWPr3/6wfS6o=
-X-Received: by 2002:a05:600d:840c:10b0:490:53d3:47a9 with SMTP id 5b1f17b1804b1-4909c0787dfmr1819165e9.3.1780001901482;
-        Thu, 28 May 2026 13:58:21 -0700 (PDT)
+        b=V91cVOqK6qLidyQQzGtklRXqYHgEau+f3sSNKu/iVnBe/x5PDQOGZ0HA3tmfxk3bnY
+         HD8yNpE6MGRpnlxYYiDpbASeFbjGu19CElX152J6y+Fu7t+uKvHAetp1aXHhHY0M9elT
+         +lL+O0sWPqKdwu452Sp9t4r9cBqU6mAXmmGRg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780002992; x=1780607792;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=opq7wvcljoN+H79HzjhFKxaoqU+tIkTu9dXcGUt3PPQ=;
+        b=EGcYOOk2KQE3irB3V07iFoj4oZBzTr2/Eilo+ZUIOWxjl6ZAUI43Z06Vz7mqOJUe7c
+         vLiO1M2cZ+sGbDsNkvIQF/+8KuAFAxz+ckQV4Lej1zJXvH8avuBduX8XmpKu1F3ZOyGu
+         KKOo5UxUsRVlMAOQOhmsNRtS6LMXPlTEAyqZTzEVVAWQnKCtRJSX92ZkpmvU7b50xNMY
+         Pt6oXZwV3dYQ4CldquZIEAsfi2MUa/Yye8vTjqrBYEAamn8+QnoCPrRv1TxR/D7joIAz
+         JJvbIQ+L9/HfPOr6QSjsOozJrogAqq3TrL99WN2GPr3ZbiQ7VJH2zL3xHZE5SPYz41b0
+         nGgQ==
+X-Gm-Message-State: AOJu0YzhGEXFsCJYNZ4xbPbarb7TPpnTzDCxKJOu3pacWfWlsKccMfHb
+	vLn38erPX3tdaMc32EM0kqBgKiDNqbyOz9PffTlWMaf2+b+vd+Nz5krIhsQEOfMdqpfNzs2wlYg
+	M68INTss=
+X-Gm-Gg: Acq92OE5gX57Bm/pPmgkTj7aNWQufrSaBtDqFayTxH7qHYdGqT7e8g7EcCKEzn+9WUf
+	fmAf2VFAw36GyxtvuDILlgwl5hs5mxyflaGyvAZIaDxmgibgbD4TaheAnoDqK265sJs6H5DwmXr
+	r8kgYo/XGwAJF9s0fCa5Ig7oiSu4x4mra7VgSRDnkzC2e7hMRZ1KKcv2T3D4d2mBtXhnhP2HQj2
+	3sorx1/CjvNwIy/SG4zmSd1fkOtxM9YW14npoQ9zNZ1pI6dpRkD3o1Yme52dJc6g4MctPERfCVx
+	tG4n3bxITpJka11LsoIDz/44TrOQPTfdeAdu7P5p9ms3PnrVR8jWFCHle/ApmUso78uUCRKFYdk
+	4itZXLYlBXMNGc0qRoCgthrY+eK3skg3JqbUBs6gMX5NcqQnuROX7Rb3+MQCUCIJFTpw6D70PW4
+	kWdrQKJhtYTjvliPzO2YJfBamTDuIcEYj3/B/zqDP/vj2X
+X-Received: by 2002:a05:6000:460b:b0:45e:655d:6f7 with SMTP id ffacd0b85a97d-45ef144a50emr49232f8f.24.1780002991985;
+        Thu, 28 May 2026 14:16:31 -0700 (PDT)
 Received: from thinkpad.lan ([2001:818:c3da:6c00:a4e3:eb54:80ab:d9ad])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909235f98bsm90043355e9.1.2026.05.28.13.58.20
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45edb54903csm16170763f8f.6.2026.05.28.14.16.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 May 2026 13:58:20 -0700 (PDT)
+        Thu, 28 May 2026 14:16:30 -0700 (PDT)
 From: fpires96 <filipe.pires@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Filipe Pires <filipe.pires@konsulko.com>
-Subject: [PATCH meta-openembedded] radvd: upgrade 2.20 -> 2.21
-Date: Thu, 28 May 2026 21:58:16 +0100
-Message-ID: <20260528205816.3586664-1-filipe.pires@konsulko.com>
+Subject: [meta-networking][PATCH v2] radvd: upgrade 2.20 -> 2.21
+Date: Thu, 28 May 2026 22:16:26 +0100
+Message-ID: <20260528211626.3591278-1-filipe.pires@konsulko.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20260528205816.3586664-1-filipe.pires@konsulko.com>
+References: <20260528205816.3586664-1-filipe.pires@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 May 2026 21:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127275
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 May 2026 21:16:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127276
 
 From: Filipe Pires <filipe.pires@konsulko.com>
 
