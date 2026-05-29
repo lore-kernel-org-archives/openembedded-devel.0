@@ -2,103 +2,202 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 326E2CD6E51
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31949CD6E43
 	for <webhook@archiver.kernel.org>; Fri, 29 May 2026 12:17:16 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.8824.1780056602407357662
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.8834.1780056596363571178
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 May 2026 05:10:02 -0700
+ Fri, 29 May 2026 05:09:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=QZKyV+Ga;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: alexander.v.yurkov@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-45e8a834cc2so8559637f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 May 2026 05:10:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=ZI7FlnA1;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alexander.v.yurkov@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-45ef4223be7so276983f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 May 2026 05:09:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780056601; x=1780661401; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=G3Bzw8zpZHb7NNhv7GM0X0pHWOiHdAA4RUrQo3d3MoM=;
-        b=QZKyV+GaWr8sA/UFPnhRucKzQNyNu8liUwhFR1Dqrg0nZbLGLCzAOJ/vi1DY9vT9mn
-         tKEY88OYu4ABFeozLk6ea8pPtkP1k85xsBv2XKtFNkbuQfP3bTAkOx1f0O5TxxMKq4o/
-         J95D75BL94GgGhjSF7Qj39uxh8Uch9KZunlYUAZkCczmvHTml6xYzbMvyEU449SF5BA2
-         rPG93nWtwK3xWgNXj/IeFf1JKHUh2LWeNk8l6deygNff0JI+Vo4k9iL82k545RQrbRjv
-         WNmrVM9T6oIM0puPFNY0A1Ma6F58Jhu6G1Y5WKUtQ2XssQxMaEVnqrEwS90hqfQI9BT5
-         WDGw==
+        d=gmail.com; s=20251104; t=1780056594; x=1780661394; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=u7HhbjdqOo2fE5yOfXMFrjksMFwNOzgDNHYLj8mY3l8=;
+        b=ZI7FlnA1R5MuYyQgEZjXuvHFg0O+dFUew161U4PXnLtdhKAST1QoBX7nnxJrkJIfB7
+         1egVSpRc41Bkllx1fgu52muJpAUA9YCV+RsyaQXs2xoQcvu2BujTCuLEAKQ4uvIVaJmY
+         0LudzzpVRhNYT1UlJluueLE8VnoCqX1+sPJLGbZ1W4mfIFylOrQf0peSNUp41alEFyIS
+         h6AxVkvivydYEvXVVYm9MvAJ/NmydVeJGNGCHb5n+2BPcuUek9WLcdxVWgVjrpuuQsFY
+         p4TOwlXhiaWoYMESovtlvWKjrJK7icP44SdmphF5MwXHjmBLEyISPHCzBOFNvc3PUS5N
+         Z6Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780056601; x=1780661401;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=G3Bzw8zpZHb7NNhv7GM0X0pHWOiHdAA4RUrQo3d3MoM=;
-        b=aLKHkvd3d70FufW+pEWAUlWhSfY9ubmbJ4O5nJJZDOHNslNnG8fWKZA9OlNOkgPFy8
-         CFTPYOPvx5zhPhzxlZedEG8ZmNWTWdL8wr5Clo3JdwFn+/a575yRgw6lXpMqV5UhzKWM
-         13l+Uo/db9p4p4WdH3Brypvvewde/qYhQ8v9BhN8qxvThFtEnP8N1sMPbrIldYWL8Jhv
-         gIhcJSOPaSMov9/nhsMhozpGOKoLBfbecGNtU72rZbbRLIPz5CjEi1SEpknxwIOI9uAR
-         C2KO2+yw/2Jaa6D66kXAIDmeBUn15NbldxQxH13bB2htxhM7TxgsbJ68QARxR2RcSYQ0
-         Kevw==
-X-Gm-Message-State: AOJu0YzCXTwABbz74EiK742lslJkB8ZRkzq5MCAzfK0emlymFMIJp0Fl
-	92o4OIHBiv6xlH4SiOIPTEokrwYGF1KLsN6p+5A3qhDuMzfAmiyzWq0/cn/cPD7akdY=
-X-Gm-Gg: Acq92OHfDcK30B49Jr8KwUdkofPeirR1iNCrwjN3nVSkaAxPT5P5z464k6ualp7wkgB
-	MQDnS+zvQRwupGKIwOWBRSIY96Zj0YRHtA5HfsEGmMG24mygPpLdWGxJXluAfFRJxJR975Hzshm
-	JanBkXuyr8CiKa0UIf4NYeJDz51qZqIzvWEp1AjHjcXHMSqedG46rIx5AcyA54qTO9UsLrQPeGT
-	k9qAOIZWf/Isj/JCCirNFbReg8CGH5JHVcUSIuqEgDvu0F0pC9CRfLXTPrMRP9kYIZ4AHCuCTkN
-	83RaY9WQANxFzIer1v7uLPCLQJ4TkXHS4XsUNBqnqx5gB2y1Kscpbk83D1/433bsx9Y08erT1yG
-	4SOzQJrq+Sq4mzMWCyHkS0E2C7HwHpuMenIIVNgxNjAPCd3B37pTokiV86e52pg5VpBuRIYG78N
-	j+K9luJNTzwug8BK2ml4/12UsdPF36aMe1lG8xc2J1mA1XLXNq
-X-Received: by 2002:a5d:6906:0:b0:45e:ea71:c6e1 with SMTP id ffacd0b85a97d-45ef144a647mr3337320f8f.21.1780056600636;
-        Fri, 29 May 2026 05:10:00 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1780056594; x=1780661394;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=u7HhbjdqOo2fE5yOfXMFrjksMFwNOzgDNHYLj8mY3l8=;
+        b=pCUi9W+oRI8iOayWvuubEUcP4q2bpkleq7vl1e+NJPjabR/ToWHa2JJDrT4rWYOJbv
+         0a0/Iy03YNKRgcfM38XNd+VFMACz8VU0PCT2qHq/O3u76SBiCv6RQARAO3tTv9US4xMj
+         jgWfVCUk26gbTDqSFdkVegGnE46s5wsEZ7Xyb4w0tlg9wig88Ao8VSSggKcPcKXfbBn1
+         GTkqQPfmgcIPIaK1zXKcKyaF15IKp0eDb7d4VUWXXcwmHvSPNjJLts2twxGHX7SmTPSL
+         4xzYcsAf4mUE1li+EKZxJu1zlbUAhz79y/C6sU6IZFJ7QbccHbUSm4b0eHXErQBJ/WKi
+         EbPQ==
+X-Gm-Message-State: AOJu0Yy/0y3fjB6FdZVa5OlGnQ8Gd5JRERxKBKquQnfpOjCvRRmV1hiW
+	11p83IX5EU3aLx2Lb3uIqA4VxLwh+lXBOGbOyUlwx1Jw+oNFz2cady53b8YP2gXDxQY=
+X-Gm-Gg: Acq92OGSB1FmjxaTpYnN7rdhQNlmddXe4iXu5UsbUxNUI6Mp0/w6eRGyAAlSSUSoMXL
+	R2vnmh7FQeswEIlDh/kvzOvZlkmS23ckqD46oppKXGrpmWv9xoRMdbT5mwl9412LjpxEMDS+oM0
+	ww0MBjcqkpfz4CI6NUOefE2gG3mBvcL0hMa9lIUBQPRrA+v+Dq2R/1OLK6VZlgxoYPjEudPAUtg
+	Vvw2U/k81slAPtWjn7nbSnO6KsgWaYVjSikPNym/ukghA6HmmhDNahMtTqKDjFlP4yxP/jbR36A
+	FCYucHuj0TZ6fpe4vKQbPn5DnegQ3DLyjsx+OVkR71GXI7OrI8ofhq3teKFTOKH/l95cglloL2d
+	yrch/XPOzKToNf55Uy6RgZd2MArTYts6cQQbQvtCQ1ddd8xrFsS1tS1iNRHoSv/F51jZWlFQTAP
+	K7HidL73CKkyKh5Jtm20VBZwTt274Nvwnol3AB0/lcL6F8kNFQ
+X-Received: by 2002:a05:6000:461b:b0:45e:73b4:e731 with SMTP id ffacd0b85a97d-45ef143d42bmr4566675f8f.14.1780056594136;
+        Fri, 29 May 2026 05:09:54 -0700 (PDT)
 Received: from Ubuntu-2204-jammy-amd64-base.. ([2a01:4f8:272:3f67::2])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34c50f6sm3572495f8f.16.2026.05.29.05.09.59
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34c50f6sm3572495f8f.16.2026.05.29.05.09.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 May 2026 05:09:59 -0700 (PDT)
+        Fri, 29 May 2026 05:09:53 -0700 (PDT)
 From: alexander.v.yurkov@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Yurkov <alexander.v.yurkov@gmail.com>
-Subject: [PATCH 2/2] syslog-ng: Add an option to make awk optional.
-Date: Fri, 29 May 2026 12:09:46 +0000
-Message-ID: <2f78e6bc74f8df296707f94a936ecc614606b29c.1780050236.git.alexander.v.yurkov@gmail.com>
+Subject: [PATCH 1/2] syslog-ng: Add backport patches from syslog-ng.
+Date: Fri, 29 May 2026 12:09:45 +0000
+Message-ID: <630c6256d52d36ebcb805c20c13a4867da6b4aaa.1780050236.git.alexander.v.yurkov@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <630c6256d52d36ebcb805c20c13a4867da6b4aaa.1780050236.git.alexander.v.yurkov@gmail.com>
-References: <630c6256d52d36ebcb805c20c13a4867da6b4aaa.1780050236.git.alexander.v.yurkov@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 29 May 2026 12:17:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127288
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127287
 
 From: Alexander Yurkov <alexander.v.yurkov@gmail.com>
 
-Breaking change: Awk will now be turned off by default.
-The change is introduced to avoid licensing issues: Syslog-ng is GPLv2,
-gawk is GPLv3.
+Backport patches from syslog-ng for options to disable awk.
+Gawk dependency in syslog-ng can only be turned off in the right way via
+options.
 
 Signed-off-by: Alexander Yurkov <alexander.v.yurkov@gmail.com>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...at-Add-option-in-cmake-to-remove-awk.patch | 37 +++++++++++++
+ ...dd-option-in-autotools-to-remove-awk.patch | 55 +++++++++++++++++++
+ .../syslog-ng/syslog-ng_4.11.0.bb             |  4 +-
+ 3 files changed, 95 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/0001-feat-Add-option-in-cmake-to-remove-awk.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/0002-feat-Add-option-in-autotools-to-remove-awk.patch
 
+diff --git a/meta-oe/recipes-support/syslog-ng/files/0001-feat-Add-option-in-cmake-to-remove-awk.patch b/meta-oe/recipes-support/syslog-ng/files/0001-feat-Add-option-in-cmake-to-remove-awk.patch
+new file mode 100644
+index 0000000000..931b83a1d0
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/0001-feat-Add-option-in-cmake-to-remove-awk.patch
+@@ -0,0 +1,37 @@
++From 57df53d6132cc77251cea746ad6ab6cfd9c8a9f1 Mon Sep 17 00:00:00 2001
++From: Alexander Yurkov <alexander.v.yurkov@gmail.com>
++Date: Thu, 28 May 2026 21:01:40 +0000
++Subject: [PATCH] feat: Add option in cmake to remove awk.
++
++Add an option in cmake to remove the need for awk to avoid licensing issues.
++
++Upstream-Status: Backport [cd7ca1019aca0619f83035f2b11e8f3a22c51a33]
++
++Signed-off-by: Alexander Yurkov <alexander.v.yurkov@gmail.com>
++---
++ scl/CMakeLists.txt | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/scl/CMakeLists.txt b/scl/CMakeLists.txt
++index e3f8c1d..bef4d50 100644
++--- a/scl/CMakeLists.txt
+++++ b/scl/CMakeLists.txt
++@@ -54,8 +54,17 @@ set(SCL_DIRS
++     azure
++ )
++
+++option(ENABLE_SCL_SYSLOGCONF_AWK "Install scl/syslogconf/convert-syslogconf.awk" ON)
+++
++ install(DIRECTORY ${SCL_DIRS} DESTINATION share/syslog-ng/include/scl
++-        USE_SOURCE_PERMISSIONS)
+++        USE_SOURCE_PERMISSIONS
+++        PATTERN "convert-syslogconf.awk" EXCLUDE)
+++
+++if (ENABLE_SCL_SYSLOGCONF_AWK)
+++    install(FILES syslogconf/convert-syslogconf.awk
+++            DESTINATION share/syslog-ng/include/scl/syslogconf)
+++endif()
+++
++ install(FILES scl.conf DESTINATION share/syslog-ng/include)
++
++ if (NOT EXISTS ${CMAKE_INSTALL_PREFIX}/etc/syslog-ng.conf)
+diff --git a/meta-oe/recipes-support/syslog-ng/files/0002-feat-Add-option-in-autotools-to-remove-awk.patch b/meta-oe/recipes-support/syslog-ng/files/0002-feat-Add-option-in-autotools-to-remove-awk.patch
+new file mode 100644
+index 0000000000..976066c3ff
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/0002-feat-Add-option-in-autotools-to-remove-awk.patch
+@@ -0,0 +1,55 @@
++From dc42135ae830e34df7939bf3c08934904c402fa6 Mon Sep 17 00:00:00 2001
++From: Alexander Yurkov <alexander.v.yurkov@gmail.com>
++Date: Thu, 28 May 2026 21:04:27 +0000
++Subject: [PATCH] feat: Add option in autotools to remove awk.
++
++The option is to avoid licensing issues, and awk is turned off by
++default.
++
++Upstream-Status: Backport [eda6d019710048e81f00f3497d5f1143f3eca803]
++
++Signed-off-by: Alexander Yurkov <alexander.v.yurkov@gmail.com>
++---
++ configure.ac    | 7 +++++++
++ scl/Makefile.am | 3 +++
++ 2 files changed, 10 insertions(+)
++
++diff --git a/configure.ac b/configure.ac
++index b283836..b6c487b 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -639,6 +639,12 @@ AC_ARG_ENABLE(all-modules,
++     AS_HELP_STRING([--enable-all-modules], [Forcibly enable all modules. (default: auto)]),
++     , enable_all_modules="auto")
++
+++AC_ARG_ENABLE([scl-syslogconf-awk],
+++  [AS_HELP_STRING([--disable-scl-syslogconf-awk],
+++                  [Do not install scl/syslogconf/convert-syslogconf.awk])],
+++  [],
+++  [enable_scl_syslogconf_awk=yes])
+++
++ if test "x$enable_all_modules" != "xauto"; then
++    state="$enable_all_modules"
++
++@@ -2685,6 +2691,7 @@ AM_CONDITIONAL([HAVE_GETRANDOM], [test x$ac_cv_func_getrandom = xyes])
++ AM_CONDITIONAL([HAVE_FMEMOPEN], [test x$ac_cv_func_fmemopen = xyes])
++ AM_CONDITIONAL([HAVE_JAVAH], [test -n "$JAVAH_BIN"])
++ AM_CONDITIONAL(ENABLE_IPV6, [test $enable_ipv6 = yes])
+++AM_CONDITIONAL([ENABLE_SCL_SYSLOGCONF_AWK], [test "x$enable_scl_syslogconf_awk" = "xyes"])
++
++ AM_CONDITIONAL(OS_TYPE_MACOS, [test $ostype = "Darwin"])
++ AM_CONDITIONAL(OS_TYPE_FREEBSD, [test $ostype = "FreeBSD"])
++diff --git a/scl/Makefile.am b/scl/Makefile.am
++index 17d1a55..62b9d01 100644
++--- a/scl/Makefile.am
+++++ b/scl/Makefile.am
++@@ -71,6 +71,9 @@ scl-install-data-local:
++		$(install_sh_DATA) $(srcdir)/scl/scl.conf  $(DESTDIR)/$(config_includedir)/scl.conf; \
++	fi
++	(cd $(srcdir)/scl; tar cf - $(SCL_SUBDIRS)) | (cd $(DESTDIR)/$(scldir) && tar xf - --no-same-owner)
+++if !ENABLE_SCL_SYSLOGCONF_AWK
+++	rm -f $(DESTDIR)/$(scldir)/syslogconf/convert-syslogconf.awk
+++endif
++	chmod -R u+rwX $(DESTDIR)/$(scldir)
++
++ scl-uninstall-local:
 diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
-index 9c6f62856b..65cb8f7db2 100644
+index 1846758681..9c6f62856b 100644
 --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
 +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.11.0.bb
-@@ -67,6 +67,7 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
- PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
- PACKAGECONFIG[native] = "--enable-native,--disable-native,,"
- PACKAGECONFIG[examples] = "--enable-example-modules,--disable-example-modules,,"
-+PACKAGECONFIG[scl-syslogconf-awk] = "--enable-scl-syslogconf-awk,--disable-scl-syslogconf-awk,,gawk"
+@@ -23,7 +23,9 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
+            file://syslog-ng-tmp.conf \
+            file://syslog-ng.service-the-syslog-ng-service.patch \
+            file://0001-Fix-buildpaths-warning.patch \
+-"
++           file://0001-feat-Add-option-in-cmake-to-remove-awk.patch \
++           file://0002-feat-Add-option-in-autotools-to-remove-awk.patch \
++           "
+ SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
  
- do_install:append() {
-     install -d ${D}${sysconfdir}/${BPN}
-@@ -108,7 +109,7 @@ do_install:append() {
- }
- 
- FILES:${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools ${systemd_unitdir}/system/multi-user.target.wants/*"
--RDEPENDS:${PN} += "gawk ${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
-+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
- 
- FILES:${PN}-jconf += " \
- ${datadir}/${BPN}/include/scl/cim \
+ SRC_URI[sha256sum] = "37ea0d4588533316de122df4e1b249867b0a0575f646c7478d0cc4d747462943"
 
