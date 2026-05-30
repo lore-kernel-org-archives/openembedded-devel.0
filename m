@@ -2,93 +2,92 @@ Return-Path: <filipe.pires@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E1EDCD6E4A
-	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 12:06:26 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.5411.1780142783482682976
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21048CD5BD0
+	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 12:12:56 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.5612.1780143167712014375
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 May 2026 05:06:23 -0700
+ Sat, 30 May 2026 05:12:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=aUKHoU3R;
- spf=pass (domain: konsulko.com, ip: 209.85.221.45, mailfrom: filipe.pires@konsulko.com)
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-45ef5146b56so764093f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 05:06:23 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Dc5EUDBk;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: filipe.pires@konsulko.com)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49068493267so45955675e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 05:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1780142782; x=1780747582; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1780143166; x=1780747966; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O4Fh0aH1hPxJa+4Q/JDYJR/1dUnRyDNegh/ygCI/TB0=;
-        b=aUKHoU3Rkn/6YksOiKPorZQYV8DdMm3wuWLoZ2c3V74ked67WleZDOPTTcfshIm8E3
-         NChNj8KEcBFCBLlqNlkmabW68YJbLU5k+wEOnK/wilA6XX5szF/mCQEw8i/kS7tFDwU3
-         DzHQ3jkDalH5nVBsC1ZFYgSE2qY0zcttDTi6A=
+        bh=eb83jv49yfdQgmIijTuW/pCUOHFy80TShfMD1oCQx7I=;
+        b=Dc5EUDBk4UUmps9X8icJJzAmSq2K0F/zeLvJfNYuNCmiW5ReaoouKBsMqbvV6zdlnQ
+         w59LJxapStl/JvxOgTwKvLOTtYL1IurSM0fXg8PYCIebFtl7QIqHnnHK6ZspRO7JPwMv
+         Q1dJaUMeVLhJFFS+nWkpV7vsv5WlR4wmDXabs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780142782; x=1780747582;
+        d=1e100.net; s=20251104; t=1780143166; x=1780747966;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=O4Fh0aH1hPxJa+4Q/JDYJR/1dUnRyDNegh/ygCI/TB0=;
-        b=IBIbREUcC0ALBcOQDYtPjg6NHTFa5Rvp1PoJ0RZQKbHtWgKYjO/qg+XPYbSN/xT0Kp
-         b3A9uIEvueWmIX5ySl1JGjqzoeybfz4BxM8GNOTd1TfPzHkN7KP7c2T7RHrjOxtM/SRt
-         1vLYeOnzFyyuFBr7/a4vP6nIL178O0g0mtuIgxrmARWeRIToBq4h0xmTuCi1oh8DvjIw
-         +HRWnZmzHQGqllceI+/HSFPVgJwfdwuKbhgzqfUHj8DzwGnw3ySJeJHQJT7MpF21ep4P
-         VVKj34N8oh2oPTmEtSg5My81RdfunCkMPk+Nlde2opf3W/ope31hfBcVJMwEV+L1KlHM
-         3Jkw==
-X-Gm-Message-State: AOJu0Yz94YunUY/jnNjyQNUYKiJFQ8q36PdDkFv73G7OlEkVDuIxhpx4
-	n9qyJP9ShmzaulvNFwPnINyytad8QtqqUZlQotDKrexzU5rr2OmhFOQIGrSo99n880KPDgxyiCd
-	fQuiB2UQ=
-X-Gm-Gg: Acq92OGAdfspz6nEt9BKwg/jsyPLxPlhG8KFPbe1PjxwqP6IHLp/fyyE6ZylntbTsR2
-	RJZnO1Xf28G/L31PiHy5dVuMCKsibDSLYry6X8XAURZLGMWpOsxb8a2LOl/cLGgEg+tKw1kL/PN
-	DHpmlCaHqqEsGqOGYTFys1gDEyUpoqReOyxMgkZQ/TOvZ2xuiiUqF8OMYj+ybD0rJ8BW5TZaBND
-	nJO7ueMcf7BPOkVHE6SgkSk5iMVWoOC6pT5bb92SwDo2VAAgfQDQoEPhkbtBoTamhtUBmoKzTxM
-	fzTQfD5uks6FRexBgeYf+EoJ3xcoZRfHP7QgL8vzRaj3xI7Qs18jU1vnoK0U2sBsQGMGKZNCB4E
-	1SL90FLNnB1vQVGq+N71c+vJ0v01Ut3owAWRBEsCNxwushrG/80uOX+M5UJc3ZYQd3PJQ4+/A/D
-	FdS3fC12NDJsPrbpGkUnmJBHSicWKDyumBnGCODR32NRYS
-X-Received: by 2002:adf:e981:0:b0:45b:d872:592d with SMTP id ffacd0b85a97d-45ef6ea9788mr3519506f8f.10.1780142781942;
-        Sat, 30 May 2026 05:06:21 -0700 (PDT)
+        bh=eb83jv49yfdQgmIijTuW/pCUOHFy80TShfMD1oCQx7I=;
+        b=bj14b67SL5K1BdzPCN8TWa13BXXSyMl02ZSrya/mf8j7X728r2rbMADcnntzPPBV5N
+         7Q/HoD2CRJvs2dBTAw98+hgnVTNQjYQJrWC0AzDUr4dLJSzha1xdPkODtm3NFSCnJQn8
+         Z2Y0FGmy2G64XYwgU127UpTEiErboN6PdZAOJS4694jpry30Ul9f8icWH9fqJGHcQeXS
+         8WFnvOz0H96zDqW4uE4yIphzUJVqNzjc30vkjfJS6juzPhkMkEdQ/0xO7CuJpydWyPa3
+         D2FiPscnqp/0n8a2E/cHBdCdQ9zV5qel3pXmQD9ATrmel54tpbxgH28WE5nSdp7Ect3T
+         2NpA==
+X-Gm-Message-State: AOJu0YyX770kXr9gQn+ESJ+h9P7bxqggIMbe3zmpD0hPSGxg5e1fAOZO
+	WISFo2+OiAMmH+o9rLNytEEWXuYtiPDZU27gHK1mIbksKn9d5zu2tAi+Mde22ov4normYtM38cH
+	Nfm5ESaA=
+X-Gm-Gg: Acq92OEzJ9wDyhaMC6756/rWoY/cZYfn2x+xGPV/J7YHbUMDW3+2VFYr63BL7MwJbja
+	P3S/HD8zduraDwkClwg+WGMfJzsFhE58peerbdwkWsL/cCsk3A95RrXi12pDODGglZUdIEIdaV+
+	QFBI1w6dd2IasVkMFOOziL9/6vJMaqv69bgNArZ90d4Rz+nOldJ5EZlSmCOBkecSgDbw07j3l3R
+	6mgJuHJDT8ZpzvjLWclz4bqRpWwMUF75/VnaTcUf/rP/UZYIWr8DtHKEnZcfjPvCcaCJAWBa0pq
+	PaKpkTPYysRMtO6+2yoQYht5TirIZQg9CD/YsWpMyoiA3RqJQkYIXkSuWDzipgKUDqXBfXrRiD0
+	p6v21vhbAP+Xx07tiz0tarUwEOnQVLp8YbNni3ljRQsbVeUM3cKcZoJFNMjfzFKrYMk4kiO2LdJ
+	Rtfqtwu6YvSOPoV34holwtKZpdBq8KdARPkKt5L7Ng1npd
+X-Received: by 2002:a05:600c:c48e:b0:490:a646:9d75 with SMTP id 5b1f17b1804b1-490a6469ec3mr18039625e9.9.1780143166000;
+        Sat, 30 May 2026 05:12:46 -0700 (PDT)
 Received: from thinkpad.lan ([2001:818:c3da:6c00:a4e3:eb54:80ab:d9ad])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34bd896sm9786213f8f.14.2026.05.30.05.06.21
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef3563cb9sm11018594f8f.29.2026.05.30.05.12.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 May 2026 05:06:21 -0700 (PDT)
+        Sat, 30 May 2026 05:12:45 -0700 (PDT)
 From: fpires96 <filipe.pires@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Filipe Pires <filipe.pires@konsulko.com>
-Subject: [meta-networking][PATCH] vnstat: upgrade 2.6 -> 2.13
-Date: Sat, 30 May 2026 13:06:03 +0100
-Message-ID: <20260530120603.3938857-1-filipe.pires@konsulko.com>
+Subject: [meta-oe][PATCH] lcov: upgrade 1.16 -> 2.4
+Date: Sat, 30 May 2026 13:12:31 +0100
+Message-ID: <20260530121231.3939854-1-filipe.pires@konsulko.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 12:06:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127299
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 12:12:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127300
 
 From: Filipe Pires <filipe.pires@konsulko.com>
 
 Signed-off-by: Filipe Pires <filipe.pires@konsulko.com>
 ---
- .../recipes-support/vnstat/{vnstat_2.6.bb => vnstat_2.13.bb}   | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-networking/recipes-support/vnstat/{vnstat_2.6.bb => vnstat_2.13.bb} (83%)
+ meta-oe/recipes-support/lcov/{lcov_1.16.bb => lcov_2.4.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/lcov/{lcov_1.16.bb => lcov_2.4.bb} (95%)
 
-diff --git a/meta-networking/recipes-support/vnstat/vnstat_2.6.bb b/meta-networking/recipes-support/vnstat/vnstat_2.13.bb
-similarity index 83%
-rename from meta-networking/recipes-support/vnstat/vnstat_2.6.bb
-rename to meta-networking/recipes-support/vnstat/vnstat_2.13.bb
-index cf3f41c5a1..6f67777972 100644
---- a/meta-networking/recipes-support/vnstat/vnstat_2.6.bb
-+++ b/meta-networking/recipes-support/vnstat/vnstat_2.13.bb
-@@ -6,8 +6,7 @@ SECTION = "net"
- DEPENDS = "gd sqlite3"
+diff --git a/meta-oe/recipes-support/lcov/lcov_1.16.bb b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+similarity index 95%
+rename from meta-oe/recipes-support/lcov/lcov_1.16.bb
+rename to meta-oe/recipes-support/lcov/lcov_2.4.bb
+index a889b3fa82..210cae45f6 100755
+--- a/meta-oe/recipes-support/lcov/lcov_1.16.bb
++++ b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+@@ -51,7 +51,7 @@ RDEPENDS:${PN}:append:class-target = " \
+     gcov-symlinks \
+ "
+ SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
++SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
  
- SRC_URI = "https://github.com/vergoh/vnstat/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "fe2928a81243cc8a532a357f97221736"
--SRC_URI[sha256sum] = "89276e0a7281943edb554b874078278ad947dc312938a2451e03eb80679f7ff7"
-+SRC_URI[sha256sum] = "c9fe19312d1ec3ddfbc4672aa951cf9e61ca98dc14cad3d3565f7d9803a6b187"
- 
- inherit autotools pkgconfig systemd
- 
+ UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
 2.49.0
 
