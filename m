@@ -2,92 +2,143 @@ Return-Path: <filipe.pires@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21048CD5BD0
-	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 12:12:56 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.5612.1780143167712014375
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A4FACD6E4A
+	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 12:24:56 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5672.1780143894361459930
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 May 2026 05:12:48 -0700
+ Sat, 30 May 2026 05:24:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Dc5EUDBk;
- spf=pass (domain: konsulko.com, ip: 209.85.128.47, mailfrom: filipe.pires@konsulko.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49068493267so45955675e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 05:12:47 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ePeysO2j;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: filipe.pires@konsulko.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-490426d72f7so76991745e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 05:24:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1780143166; x=1780747966; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1780143892; x=1780748692; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eb83jv49yfdQgmIijTuW/pCUOHFy80TShfMD1oCQx7I=;
-        b=Dc5EUDBk4UUmps9X8icJJzAmSq2K0F/zeLvJfNYuNCmiW5ReaoouKBsMqbvV6zdlnQ
-         w59LJxapStl/JvxOgTwKvLOTtYL1IurSM0fXg8PYCIebFtl7QIqHnnHK6ZspRO7JPwMv
-         Q1dJaUMeVLhJFFS+nWkpV7vsv5WlR4wmDXabs=
+        bh=xBfoYEIv0T+h339ompJXCA6r9NvL/mOI43GbwPnr0MY=;
+        b=ePeysO2jkYdP7ZC+a9SYB/DVvZMaXPj8dBcGsHGQ7MJOlDwk/DiL4xphhvD75uZ2K/
+         TBnO2M/Fd7lIILXy8AsdSdDuWvco5KCA/UBNJ/CUwB5uWDRfaDhhzdwr/gVDjqqES0tc
+         Hg6zd35KXB0z+ojR4C6gcr8JUsjtU51/vm0fI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780143166; x=1780747966;
+        d=1e100.net; s=20251104; t=1780143892; x=1780748692;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=eb83jv49yfdQgmIijTuW/pCUOHFy80TShfMD1oCQx7I=;
-        b=bj14b67SL5K1BdzPCN8TWa13BXXSyMl02ZSrya/mf8j7X728r2rbMADcnntzPPBV5N
-         7Q/HoD2CRJvs2dBTAw98+hgnVTNQjYQJrWC0AzDUr4dLJSzha1xdPkODtm3NFSCnJQn8
-         Z2Y0FGmy2G64XYwgU127UpTEiErboN6PdZAOJS4694jpry30Ul9f8icWH9fqJGHcQeXS
-         8WFnvOz0H96zDqW4uE4yIphzUJVqNzjc30vkjfJS6juzPhkMkEdQ/0xO7CuJpydWyPa3
-         D2FiPscnqp/0n8a2E/cHBdCdQ9zV5qel3pXmQD9ATrmel54tpbxgH28WE5nSdp7Ect3T
-         2NpA==
-X-Gm-Message-State: AOJu0YyX770kXr9gQn+ESJ+h9P7bxqggIMbe3zmpD0hPSGxg5e1fAOZO
-	WISFo2+OiAMmH+o9rLNytEEWXuYtiPDZU27gHK1mIbksKn9d5zu2tAi+Mde22ov4normYtM38cH
-	Nfm5ESaA=
-X-Gm-Gg: Acq92OEzJ9wDyhaMC6756/rWoY/cZYfn2x+xGPV/J7YHbUMDW3+2VFYr63BL7MwJbja
-	P3S/HD8zduraDwkClwg+WGMfJzsFhE58peerbdwkWsL/cCsk3A95RrXi12pDODGglZUdIEIdaV+
-	QFBI1w6dd2IasVkMFOOziL9/6vJMaqv69bgNArZ90d4Rz+nOldJ5EZlSmCOBkecSgDbw07j3l3R
-	6mgJuHJDT8ZpzvjLWclz4bqRpWwMUF75/VnaTcUf/rP/UZYIWr8DtHKEnZcfjPvCcaCJAWBa0pq
-	PaKpkTPYysRMtO6+2yoQYht5TirIZQg9CD/YsWpMyoiA3RqJQkYIXkSuWDzipgKUDqXBfXrRiD0
-	p6v21vhbAP+Xx07tiz0tarUwEOnQVLp8YbNni3ljRQsbVeUM3cKcZoJFNMjfzFKrYMk4kiO2LdJ
-	Rtfqtwu6YvSOPoV34holwtKZpdBq8KdARPkKt5L7Ng1npd
-X-Received: by 2002:a05:600c:c48e:b0:490:a646:9d75 with SMTP id 5b1f17b1804b1-490a6469ec3mr18039625e9.9.1780143166000;
-        Sat, 30 May 2026 05:12:46 -0700 (PDT)
+        bh=xBfoYEIv0T+h339ompJXCA6r9NvL/mOI43GbwPnr0MY=;
+        b=Xw0LGnvIfKh9yfS+ROvWlzlA0lKgjTCskRCp1nmHsohzTP94Oj+BjOX3wiSSx9UPBP
+         9LbnF6Z9MLS7YIyOG8OVemyNRMCsdd3nEaoNE1qyHyEVEM/xcTOOCvLMxJw7zb6DFJCs
+         Z4Z7pxlpawEBZ3KU23Kkv3z8uBpiOCzVrYAfmtT4mEtOs4SYTsARBcZ+Ggppp8g6k6e0
+         27HgiqfPRQofxHIZ+s7IA55qdlyc/HYecR70ObU+h1f83o+93JGQ0ap6gtTN7EKbTVwx
+         00s5gLuDsBZFTomRjqQ/L1IdRkQkbY2pHAra7FRBBaH//cv0izdFeFNbie9EY9o0vhS2
+         1/SA==
+X-Gm-Message-State: AOJu0YxWf56ZvBAlkg+y/M9vgeY/bkJOrZd1+ZrpmfQTqZotLYnOIOLf
+	zoStkoM4ExEAvk7EyPg+bTS39uj/stP8Qp8XYE/OZHdUgO6mkM/Lk6b5Pg7OZsp6HG0h46/NK2C
+	yLa8Vv8E=
+X-Gm-Gg: Acq92OHieWs2jq3rmlAmA40XEOdaf6u57mx7C/57fPzG5qWDvLLbMZniInaCSJHIIL3
+	4vuTXsQtum8qTHM+e7S3OXFF7X8f2WTFA2F+09nV/gixNpQdviNYUdI3fyta5yx1X5H3C+epO9S
+	sVMOr7lcCT5lgU8RlltPbtC0jgvaJDtIauQGmcXjatJ1fc+p5/XlWtfUlZ5nw0L1dRuy9BZ0Qav
+	OFJyS8CLeaJkUFaMDwpRymeV/NR3mavphZcGVZsFx2XqjszIe8dypC+JM060NeH4kq0pxoKqmZu
+	FZHHCAn/+JInTVgFb97i/CU3j89FEB56yDgrRcR+tKPhAH+blmd0yQHSyjgkEnIlcwWPlZSM/Z2
+	xQP+PgR0sxzQLBO/NI0RYl2zCMGmjsHWgj28hjkFCaSyFtlLpratY/Dr1E7XTsfz7Rl+yuo/6Lv
+	/3fbj/MaoYPJwFS0nFG+Yo2GXJDbGUMx4uUTQ1GG0CaGzI
+X-Received: by 2002:a05:600d:844a:10b0:48a:557e:6b4f with SMTP id 5b1f17b1804b1-490a293afe2mr44999625e9.23.1780143892439;
+        Sat, 30 May 2026 05:24:52 -0700 (PDT)
 Received: from thinkpad.lan ([2001:818:c3da:6c00:a4e3:eb54:80ab:d9ad])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef3563cb9sm11018594f8f.29.2026.05.30.05.12.45
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-45ef34c3081sm10904347f8f.15.2026.05.30.05.24.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 May 2026 05:12:45 -0700 (PDT)
+        Sat, 30 May 2026 05:24:51 -0700 (PDT)
 From: fpires96 <filipe.pires@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Filipe Pires <filipe.pires@konsulko.com>
-Subject: [meta-oe][PATCH] lcov: upgrade 1.16 -> 2.4
-Date: Sat, 30 May 2026 13:12:31 +0100
-Message-ID: <20260530121231.3939854-1-filipe.pires@konsulko.com>
+Subject: [meta-networking][PATCH] miniupnpd: upgrade 2.1.20191006 -> 2.3.10
+Date: Sat, 30 May 2026 13:24:30 +0100
+Message-ID: <20260530122430.3974914-1-filipe.pires@konsulko.com>
 X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 12:12:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127300
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 12:24:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127301
 
 From: Filipe Pires <filipe.pires@konsulko.com>
 
+  Drop 0001-Add-OpenEmbedded-cross-compile-case.patch as genconfig.sh
+  was removed upstream in 2.3.x.
+
 Signed-off-by: Filipe Pires <filipe.pires@konsulko.com>
 ---
- meta-oe/recipes-support/lcov/{lcov_1.16.bb => lcov_2.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/lcov/{lcov_1.16.bb => lcov_2.4.bb} (95%)
+ ...-Add-OpenEmbedded-cross-compile-case.patch | 38 -------------------
+ ...pd_2.1.20191006.bb => miniupnpd_2.3.10.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 40 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
+ rename meta-networking/recipes-connectivity/miniupnpd/{miniupnpd_2.1.20191006.bb => miniupnpd_2.3.10.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/lcov/lcov_1.16.bb b/meta-oe/recipes-support/lcov/lcov_2.4.bb
-similarity index 95%
-rename from meta-oe/recipes-support/lcov/lcov_1.16.bb
-rename to meta-oe/recipes-support/lcov/lcov_2.4.bb
-index a889b3fa82..210cae45f6 100755
---- a/meta-oe/recipes-support/lcov/lcov_1.16.bb
-+++ b/meta-oe/recipes-support/lcov/lcov_2.4.bb
-@@ -51,7 +51,7 @@ RDEPENDS:${PN}:append:class-target = " \
-     gcov-symlinks \
- "
- SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
--SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
-+SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch b/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
+deleted file mode 100644
+index e33d8eac1d..0000000000
+--- a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 54698856e5602bbd9d61e855814c854a013b4840 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 22 Dec 2018 18:47:45 -0800
+-Subject: [PATCH] Add OpenEmbedded cross compile case
+-
+-Upstream-Status: Submitted [https://github.com/miniupnp/miniupnp/pull/410]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- genconfig.sh | 11 +++++++++++
+- 1 file changed, 11 insertions(+)
+-
+---- a/genconfig.sh
+-+++ b/genconfig.sh
+-@@ -103,6 +103,12 @@ if [ -f ../shared/tomato_version ]; then
+- 	OS_VERSION="Tomato $TOMATO_VER"
+- fi
+- 
+-+# OpenEmbedded special case
+-+if [ -f ./os.openembedded ]; then
+-+	OS_NAME=OpenEmbedded
+-+	OS_VERSION=$(cat ./os.openembedded)
+-+fi
+-+
+- ${RM} ${CONFIGFILE}
+- 
+- echo "/* MiniUPnP Project" >> ${CONFIGFILE}
+-@@ -346,6 +352,11 @@ case $OS_NAME in
+- 		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
+- 		FW=iptables
+- 		;;
+-+	OpenEmbedded)
+-+		OS_URL=http://www.openembedded.org/
+-+		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
+-+		FW=iptables
+-+		;;
+- 	AstLinux)
+- 		OS_URL=http://www.astlinux.org/
+- 		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.3.10.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+rename to meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.3.10.bb
+index b7ba37f290..f7e1518f2c 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
++++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.3.10.bb
+@@ -13,9 +13,8 @@ DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack openssl"
  
- UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
- UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;downloadfilename=${BP}.tar.gz \
+            file://miniupnpd.service \
+-           file://0001-Add-OpenEmbedded-cross-compile-case.patch \
+            "
+-SRC_URI[sha256sum] = "218fad7af31f3c22fb4c9db28a55a2a8b5067d41f5b38f52008a057a00d2206d"
++SRC_URI[sha256sum] = "f9c34ed3632fb60cd248dd5897bd98479a103a75688b056ca2f069e68ab32987"
+ 
+ UPSTREAM_CHECK_URI = "https://miniupnp.tuxfamily.org/files/"
+ UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar"
 -- 
 2.49.0
 
