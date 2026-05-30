@@ -1,110 +1,93 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <filipe.pires@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95489CD4F54
-	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 08:19:29 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.2695.1780129162348074807
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D386CD6E4A
+	for <webhook@archiver.kernel.org>; Sat, 30 May 2026 11:48:56 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.5129.1780141732814988437
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 May 2026 01:19:23 -0700
+ Sat, 30 May 2026 04:48:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=CsZBm7qt;
- spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd91.aul.t-online.de (fwd91.aul.t-online.de [10.223.144.117])
-	by mailout08.t-online.de (Postfix) with SMTP id 410C0E799
-	for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 10:18:59 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.169.166]) by fwd91.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wTEuF-2ZJ5hh0; Sat, 30 May 2026 10:18:55 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=MdqnsnN6;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.50, mailfrom: filipe.pires@konsulko.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-49068493267so45865065e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 04:48:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1780141731; x=1780746531; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=igwDM0Qvm+eXK2YugKAo2H7HRfcM3WdDCpZlFORSJRM=;
+        b=MdqnsnN6BhfJhw+fg4zWVf3f6XgFMaS0Q1i6PUuOfXda06RMcja7eRvgg/QmtpLNSP
+         TGxDYORkj3qmo8AN5fZh6lTjw4q0r0MRHQ4OvVmJSL7haZatzW8ND+iNvDi3vZLrEbt7
+         jNhqUcWw6mK5KJbG+uEsbtBJLuNpBtjLMW8mc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780141731; x=1780746531;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=igwDM0Qvm+eXK2YugKAo2H7HRfcM3WdDCpZlFORSJRM=;
+        b=R+CYszQxi9MHuyj2VKBk8Cg/XKAf49FfuJ06XX8IS4GRPpSBzcAMFiuZDqk6UkFkfz
+         uePUSZTFxX6RsTNL4s81cgta2swrt2JKJcSNXk9b3f9Px5+VaTOax2UmaRgmcfqnn1Rb
+         RBn3NvwC91m68RCyepBWHsTWXnR03tQc8JVI0Ga4tLWZoBxBkAwru0WBuXlC7AlnBYl2
+         tsEaOJAuaohfXsWtqS8I7gQe1JeV4jXwskiDutnG6ljFZFUvlIJ1zqiOvuficPaSaWFM
+         kTMP5j0nrc6tFlFllzZ4PvD3w9UZElktZYdhuB62vUE5F5JysG/Z8rb8D2ywQh6Qym5B
+         GdHg==
+X-Gm-Message-State: AOJu0YxXaWfOmhvGqzvCsBwpAaVC1D7HUglJSryRfOx9fZ+bU1Q0nQRP
+	KEEF8vDjmXBO6CEUxp28Z4wPfMcCcnTiMaq4mdgpiog7kh3QkxqHIG3uTuY6QG1/Nv1STPQk2ge
+	QGVsqgfc=
+X-Gm-Gg: Acq92OFfR0knA3V/JF9wyobWGpmY1Ot4u3m4FhDkuCIlXkFLYFPGLcf+/ASIKpnqh3Q
+	BDwXttor863GCLH3DlF2y694RAuNIRP14aD4mFJC0Ww1E69UFJLkhfxdFyt711HnplQSoALq+vx
+	cTaB84/B0b6yyFFpbgN+fMpxwLxr4XIyqqdD/QM+ifOIhqOmJrDJxKh5ON8RH2oIeDQn4Dx7N+h
+	vDKFaU5ITJJL9Nyor4EjaI6ey7J+kxHfAP3buoiz8nY4CnfBdEohU6iQDWFFN/EN80hPRLv1rPY
+	0Kfd/TY6PSyxzEfXxokzV84J6E0OWf+7Y9t6m2GrK+1AqcXDsb4PKne+UFrS6R9yeRtom8mjt+1
+	Dwqh8da1SjWzId9CeP3cHG+bsUxGRuf/yJgiJrlfW89yAKnoG6QwP6xOAUBZAuDF8thNYNVvjGm
+	ijIIIFpcpknV3C5kcluSiwL5OGPRX70NEpWp6P3p/c5rcP
+X-Received: by 2002:a05:600c:4da4:b0:48f:f7cc:f703 with SMTP id 5b1f17b1804b1-490a2943b2cmr39357645e9.30.1780141730751;
+        Sat, 30 May 2026 04:48:50 -0700 (PDT)
+Received: from thinkpad.lan ([2001:818:c3da:6c00:a4e3:eb54:80ab:d9ad])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909cabfd6esm110021255e9.15.2026.05.30.04.48.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 30 May 2026 04:48:50 -0700 (PDT)
+From: fpires96 <filipe.pires@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] gd: fix build with gcc 16
-Date: Sat, 30 May 2026 10:18:37 +0200
-Message-ID: <20260530081837.2192126-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.54.0
+Cc: Filipe Pires <filipe.pires@konsulko.com>
+Subject: [meta-networking][PATCH] memcached: upgrade 1.6.41 -> 1.6.42
+Date: Sat, 30 May 2026 12:48:25 +0100
+Message-ID: <20260530114825.3936122-1-filipe.pires@konsulko.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1780129135-90FF6F83-9AC380E0/0/0 CLEAN NORMAL
-X-TOI-MSGID: 67240c5f-d843-4db5-978e-9d880c126472
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1780129139; i=f_l_k@t-online.de;
-	bh=fEptGDr4t+vSbt2KAsXCqOaUHg8XI626ZI6/bMWmHWU=;
-	h=From:To:Subject:Date;
-	b=CsZBm7qtkVCvsMbQopG8Q7dJOpU6Sx3qKJtwfJwQMGND4xHRyKCEBZgKdZg2PwG0y
-	 PXEStIZLCi+MudUKuONOXCqf7eJefz7QuR9OnU6z62mQzQsmqk/5W+J8FJVcR3Wduu
-	 5SZFVI29/pIIIuDhxrpT4wa1JjVXFJ7CxIrJxQRlQFrR5ZOYLZ03uEqPS6UhreGtJR
-	 RAUNA+2TgHYOc06l77xCrQvcznbzCz3yZaoJSjPMw55HqEHtu8RBzsVHgs3/ftwSQd
-	 v9G1B3kuMJ/Yrk56ShFj1TKQmyNhfhKhWceYKaQxPnxE3dwYpilxs9S3/AwN1dY9Nc
-	 5oUKyoyZMo3YA==
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 08:19:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127295
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 May 2026 11:48:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127296
 
-https://github.com/libgd/libgd/issues/990
+From: Filipe Pires <filipe.pires@konsulko.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-gd.c-fix-maybe_uninitialized.patch   | 26 +++++++++++++++++++
- meta-oe/recipes-support/gd/gd_2.3.3.bb        |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-support/gd/gd/0001-gd.c-fix-maybe_uni=
-nitialized.patch
+ .../memcached/{memcached_1.6.41.bb => memcached_1.6.42.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/memcached/{memcached_1.6.41.bb => memcached_1.6.42.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/gd/gd/0001-gd.c-fix-maybe_uninitiali=
-zed.patch b/meta-oe/recipes-support/gd/gd/0001-gd.c-fix-maybe_uninitializ=
-ed.patch
-new file mode 100644
-index 0000000000..9fd51da68f
---- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd/0001-gd.c-fix-maybe_uninitialized.pat=
-ch
-@@ -0,0 +1,26 @@
-+From 1bb2911c02193d32f1458b771c485980fd100010 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sat, 30 May 2026 10:12:26 +0200
-+Subject: [PATCH] gd.c: fix maybe_uninitialized
-+
-+Upstream-Status: Pending [https://github.com/libgd/libgd/issues/990]
-+---
-+ src/gd.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/gd.c b/src/gd.c
-+index fd8d1aa2..6ffdd41f 100644
-+--- a/src/gd.c
-++++ b/src/gd.c
-+@@ -2069,7 +2069,7 @@ BGD_DECLARE(void) gdImageArc (gdImagePtr im, int c=
-x, int cy, int w, int h, int s
-+ BGD_DECLARE(void) gdImageFilledArc (gdImagePtr im, int cx, int cy, int =
-w, int h, int s, int e,
-+ 									int color, int style)
-+ {
-+-	gdPoint pts[363];
-++	gdPoint pts[363] =3D {0};
-+ 	int i, pti;
-+ 	int lx =3D 0, ly =3D 0;
-+ 	int fx =3D 0, fy =3D 0;
-+--=20
-+2.54.0
-+
-diff --git a/meta-oe/recipes-support/gd/gd_2.3.3.bb b/meta-oe/recipes-sup=
-port/gd/gd_2.3.3.bb
-index 062c4b4a8f..cc78fd8de7 100644
---- a/meta-oe/recipes-support/gd/gd_2.3.3.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.3.3.bb
-@@ -16,6 +16,7 @@ DEPENDS =3D "freetype libpng jpeg zlib tiff"
- SRC_URI =3D "git://github.com/libgd/libgd.git;nobranch=3D1;protocol=3Dht=
-tps \
-            file://0001-Fix-deprecared-function-prototypes.patch \
-            file://Fix-ftype-missing-const.patch \
-+           file://0001-gd.c-fix-maybe_uninitialized.patch \
-            "
-=20
- SRCREV =3D "b5319a41286107b53daa0e08e402aa1819764bdc"
---=20
-2.54.0
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.41.bb b/meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+similarity index 95%
+rename from meta-networking/recipes-support/memcached/memcached_1.6.41.bb
+rename to meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+index e41ebdb171..28d8ba3cf9 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.6.41.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.6.42.bb
+@@ -20,7 +20,7 @@ RDEPENDS:${PN} += "perl perl-module-posix perl-module-autoloader \
+     "
+ 
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz"
+-SRC_URI[sha256sum] = "e097073c156eeff9e12655b054f446d57374cfba5c132dcdbe7fac64e728286a"
++SRC_URI[sha256sum] = "50f08b879d4f9d36dea9d905e9eaade15c708e38db7e9a73fc21dc8b45395de7"
+ 
+ CVE_STATUS[CVE-2022-26635] = "disputed: this is a problem of applications using php-memcached inproperly"
+ 
+-- 
+2.49.0
 
 
