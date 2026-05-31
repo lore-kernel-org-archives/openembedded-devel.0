@@ -2,484 +2,583 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F6B4CD6E56
-	for <webhook@archiver.kernel.org>; Sun, 31 May 2026 09:53:56 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.4517.1780221226501106757
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BC6CCD5BD1
+	for <webhook@archiver.kernel.org>; Sun, 31 May 2026 09:56:26 +0000 (UTC)
+Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com [209.85.219.47])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.4510.1780221380999579532
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2026 02:53:46 -0700
+ Sun, 31 May 2026 02:56:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=YDfCgfeQ;
- spf=pass (domain: gmail.com, ip: 209.85.219.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-8ccf6a63a45so13099156d6.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2026 02:53:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780221225; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=J4x1c6we;
+ spf=pass (domain: gmail.com, ip: 209.85.219.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-qv1-f47.google.com with SMTP id 6a1803df08f44-8ce9df48e1bso6085776d6.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2026 02:56:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780221380; cv=none;
         d=google.com; s=arc-20240605;
-        b=J3j5BYg5wjHKRI9r0eQUuavwmR0WFpfvGR6LCRm6hU7Lv3xVtcFLmnQQzVIY83s1bk
-         kf3fxZcTm0R+Xv3Rz9SCMV1+L0NlTT5QbPP6eAE7ZXbuR6HmItAKTgW3LUSH/ZTXl5RI
-         An7IyfbklWDBaDXYw6EqL+5QoBu1JjnsWO1MipLrxeWEhPAwZlKnVZoBhoFHPyiDVAmY
-         cMdOlMDzIFvw1klXjS+j+KYJejXYit6oC74UHCOvZp9jrulckNXR33rlPKtJKTnFABQA
-         QK8Gv0HVbvpLA11c/xdIU7+svHkjSvixJI0yeEqXaQZvqzGxenB1y0qai8LmIDeqdk2h
-         HVHQ==
+        b=YJQLlbCJNQyO7FFgCr5/2/jyMSLYTaOI+uFn+ZOgD/I907+DLM31hZaDq8n6exw6Oh
+         26FOHtWPAMsMoITu8bw6Elan1RwcTly5mChXIwIDZxWQIjjphTsFeu355sFInmlBBij4
+         3ocqEZ/zBOGfGO68Fw71sxq5HPqOM1w69U2FTJq6TqaF1PO1vpprQYS72GHkIG6/55eq
+         HGrSvRbC5hJHtLGGMR+1dXkVmk9Jzst+/IGtvvJRKH9xSa8jze7SzJjMX0WgEvkjXITu
+         Wb6bgXebNeRxGbHqLGUZ7igjaUSzYgslHu5PXBXcp6Ye99cNhcAkaRGlSm74W9Pbj3Dx
+         leow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=qi5PcMxnokQvdhjs4Ll1gsC8JURcPToXFjWD72cOGMk=;
-        fh=a51YKbcHr/o3aEwkHFF5yF567ifSC9pRPPDUBAqvpS0=;
-        b=DQXmhC86YunHdpTZ0H/YWLIDyTyE2Iq7UyA0tjMjDxJXywfr0HohzdgWwfcNHkDTls
-         f00Bt3bKl7ITNF4iuwqTmw2Q8QX7OCmVSbOhq5BVfsY5eVQ0KnPDL1bM/CghyZqtuOyr
-         cWTFGeA4fTSkexbw+hfPGIo3OVqnt8lMivipeTDYY8vxBCLtTTDuMQS6jMkumShmtSVR
-         IjXfGTLpmNizjER6iw6dQSbLqX8XukGMznO1KlbmuODA0zzPKc0omPW7/sKlmcsnEyNW
-         y+hY57y2TSJeVwnHZ+yxJnDPbN5FQMicARcEm3TuxzFuJsxzIVbn9QS73S1n63lA8+HA
-         ChOQ==;
+        bh=M2JTB3r7FouaLktAPRuKLKrtP8168EimMQq62Zx2Lio=;
+        fh=i0UEVGX6XKvJAmzXVKuwop3O/ShkJNeDIU5NtFbZzgQ=;
+        b=MsVWwTRMSCmIKFXNXaKX8nU6sbxSvbHYeDZNKcNZyo1HVElh4usHs6F9LHiOLZje0x
+         YCIsHl7RC57CIRMaUZ6xKiQj+2aHUNwJLhi5yag4ChE1OXi+mPHYO34mBx6V72yceGEy
+         w//oISVvXnuFKF3W0VvjEDWdrwbutURsae9d12F4271TpOr8t0K6OeAOkrlDEUX/79yJ
+         ysio3XK0sW8dJohQWHdB+8swglzJD+2vmCkjl5sjFf8SgMazcNvALckdQfp1SbZd1GqN
+         8B7B3sz7H8pu2JWQr+mBEzVsyHCewczsC+YnK9PiUvURYe7hcGSzOMhaWwJqWdj7LpNJ
+         hG/g==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780221225; x=1780826025; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1780221380; x=1780826180; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=qi5PcMxnokQvdhjs4Ll1gsC8JURcPToXFjWD72cOGMk=;
-        b=YDfCgfeQqvHRPjej3QFraT31Y2kT6YB596LWIQyh1xWVZg+dghr/u3s0Q53nIyYksz
-         JLwQZDB3qPGmlQ8tg/5/3smEr8kMGff7KIGBgYFqBAOqK8OaC2ZH1frCkjQBOYG8lLeJ
-         ZxjAE402iYtI/9mZX6oOna2lSEfZ6t8o4++RMuMQSWGF3de7JJWtGVq3ZXpyOr4MJC5W
-         H9IYpSyP3boSVQs6neEjQJOMTxjJuHinbYpuN3KXqhRX5ENScZ5n2QoKpd+nK0Yu20Zv
-         0XarVrdv0UahBWyaMkRFegEOpywSReuHSL06XkSiSIjbd35GSSY24Xqr4DSpCo+lB2XZ
-         1WEw==
+        bh=M2JTB3r7FouaLktAPRuKLKrtP8168EimMQq62Zx2Lio=;
+        b=J4x1c6weub5QqRamspqkXq8g+2TOZ3ZPi58e4ZWUS6aOl02QDN8qzQ3iTt5MJ7NjBu
+         Iq8MtSzDqEDKSuv1E5ZZkwFBz225w07I0FNYFwcTcHFEapg1xN25vAGQH8rLL+SeN6rv
+         VPoFIvw87QOfk8VZWhPSMFSYoV/FHg22TLNZKn609/xj11KGzq/4ykZHSy/V2SL80xXS
+         BDl2JBZ6Q7dWjrYc9C+wceACWie0P4EuFlK7NzjGZ9MIlGj9ToO6Vp8ssUWd9NRNkEj9
+         AOs+hQy2bpgdtvY8Xmsat1lHXrTi2LLX2h3CENwINb/pRTQkdp7bIhUdQbunejm1nqM8
+         ZrIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780221225; x=1780826025;
+        d=1e100.net; s=20251104; t=1780221380; x=1780826180;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=qi5PcMxnokQvdhjs4Ll1gsC8JURcPToXFjWD72cOGMk=;
-        b=C66kZbNhLuT9oixSIR5r2hvRq5Er0DMHluDNChIg4zwX9TDxlUrDi2+EPrz+IQqTvt
-         2GHyLmkibwAIJnDskmUQi9nDgarQKxO7Go8/jekhL9iNoUMePfksTVSF2klmWF8usoAv
-         MkabNcXdy1+fFVCPv75JAatSN8pC+5tBnEOi8WUgqto5aXZOvQPEb1vVwPeEITuj+/F1
-         PJEhRLXFTVADs1C8jefngbv2SlB8pJ52/k1b5rla9Mb4tpvgcwL0eM7N2mV0CRy/sBOt
-         4xGVuIp/9w7y7RsVy6EVXtdn862+9DDpFNvlRd2yYT4EWKC8fo/zqBAXaV7/K5dP0jtx
-         nTbw==
-X-Gm-Message-State: AOJu0YwZaTly66NNgDhueWMa4hauHCOaCvCH56a1TYhVPRO2JlBxZ4+Q
-	UGjRGqWL665ReMAXUWBnTbxPheyGEbfDvC+SKJPN57inkBIEt+yyn7uiR7co09MxPyJ0k8d7Vft
-	86J2CzaEGUewIf+8mU8PRUayvyoNeskLZPZqogj0GgAbG
-X-Gm-Gg: Acq92OGQjReJi92O2bXZv63Hyumi4mxLYyYGUvftoN7offqVfjdteP6TpYnkVKKgmD7
-	JUk7ENKFRvT1nMZRl4k2Jd4pCAlgkdDEOxKKSNARURi2czEaVW6uLzvziCMuA90sw9Y50FFQHaV
-	igOPm6/nzt0K0uVeEDpLBmVO3dDXY4uWDCMoWj3Vvlyh9dlYQ3Z8CqvKgE4480HlU1Hx09wLB1k
-	mb0m8tlOsY/CcCh1rzufcqpuV+rwsPvnD7t7txohgxEbs7TgIy+LBsIaabT6wwEN6d6n8ifnFop
-	7ClowUix4nwl7DkFdFNQBLoO3LxCsBD5W8fRYz9oRm3EIlITwknM6Lg9Lo0VvwYSbTkTnFr1eam
-	W73vW6RAq791h7JGWdJpswK1yH/mQwElma6mJ6/MWW5oKQzXb8GKzVTA7paK469Bv45uhB/j3z5
-	nFmhksd6O5UCN6ENwd
-X-Received: by 2002:a05:6214:468d:b0:8b2:8b6:4bcf with SMTP id
- 6a1803df08f44-8ccefa69ab5mr118673266d6.0.1780221225208; Sun, 31 May 2026
- 02:53:45 -0700 (PDT)
+        bh=M2JTB3r7FouaLktAPRuKLKrtP8168EimMQq62Zx2Lio=;
+        b=mz0xvlOj1VhFxRzIh3kUaVvOuWWOdHELtEiNnB5CS2+jaOH8A+iLlydBygQDJhxFzY
+         Hze5NeVYr/EP1QZNMF+KHLMcY1rPgKhBRjWl9AB3WRosnaY7tBan6Yp1aDDOjDr/jsOh
+         F+B+tFwcs1/YkvuiSueDVOHusI0OyhQXOzc4xOZFMaHb7+2s3jLXrDW9egNWQPUD14wv
+         zGlK2DEuIDdMVJbl1aDmnn3EHEsIuHftyfPlMqhyeuQAGA7Wxz1RWASZqUikD3R91EaR
+         HXILqBxvFI94Y78A4U+6Yp/F7i2WYrq2j21+YC95D9a0wPF5JqBxJds6wbac64qnOEIM
+         vo2w==
+X-Gm-Message-State: AOJu0YwES/h+RmLYjVrnIZX5g9PPo4unuGewcqUqnYRQs/rqlkY74iXO
+	xaaO0WltRFOWWHYqyXf/LFjh/pP6Q3q3gBQckyiMrsaAL1gHZPZhPQ4uEUGLLrzAsCkIwgm7gUu
+	D3q8AHtMBkz57KjD2Cqv6UBDrd23MvzdhoWus5qzNeBTA
+X-Gm-Gg: Acq92OH8xZua/51cCIm5vLv9qicBbAb3Tms8CsKyOeSCkkFKhMSHj9CD0sBSiT9E4SI
+	Pn2Fch8m4aDP4cEkmN4WbSV6UAaYv9r0mRZ1VvAjmEpVzjIgN7EAtSO3qeQ+smciufKppWHpvns
+	P1Bdc97JtblqKvf6k0r7rDANC09QXM4Yq+3Q83SQ/dzNqZv+4IO/BV6SYdwsGq+zkCEOabLzZRY
+	6s4Vuk1e3EvvfpkI4acViyKQ/y3fxAHZJZJF2QA62r7fG1IzUHxsOEVt4bm7g4gKY7jTRhkpfN4
+	yPX4R60DiHZ8CMl3sm6BJZYQuFXmXK2HxIaEmKxJmNdpVAVaPLK8//0R0k0rNVgNhM+hkXLxOvu
+	CZG/Yt+mHzeAoUf2xVF9ClS8EZB8KuXanv3cgbBjTMldmkYWEJhC7lPTaijOPArenNJ4xwisUSg
+	qNFuFzf1M41cZIPCgLsQkGWkZRmOg=
+X-Received: by 2002:ad4:5ecc:0:b0:8ce:f1b:74ec with SMTP id
+ 6a1803df08f44-8ce0f1b76f9mr52219376d6.25.1780221379005; Sun, 31 May 2026
+ 02:56:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260528014218.171858-1-Shilong.Jiao@windriver.com>
-In-Reply-To: <20260528014218.171858-1-Shilong.Jiao@windriver.com>
+References: <cover.1779718757.git.anuj.mittal@oss.qualcomm.com>
+In-Reply-To: <cover.1779718757.git.anuj.mittal@oss.qualcomm.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 31 May 2026 11:53:18 +0200
-X-Gm-Features: AVHnY4JrIXfH1LMWw_p0VEqLSCPHz_l0H1lt_2bgO0g7lhjByEcTPx2r8B5pUG8
-Message-ID: <CAMKF1sprFWJhwg=+mbiZnOWzDmB3Jyb7i_sZLDzqCUiH+j8hNA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] lcms: add ptest support
-To: Shilong.Jiao@eng.windriver.com
+Date: Sun, 31 May 2026 11:55:52 +0200
+X-Gm-Features: AVHnY4LAOiR_vQDJYeWTfBV0q2eByjdbCMsABX10U_52AefDO1PlyDh2T-dRchU
+Message-ID: <CAMKF1sq8j-=OLDj-iWTgAsuUVtsRjBBBFryvx5UC_t5YcC=axw@mail.gmail.com>
+Subject: Re: [PATCH 00/29] Scarthgap pull request
+To: Anuj Mittal <anuj.mittal@oss.qualcomm.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c0126106531a0d12"
+Content-Type: multipart/alternative; boundary="000000000000ead0b506531a169b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2026 09:53:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127303
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2026 09:56:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127304
 
---000000000000c0126106531a0d12
+--000000000000ead0b506531a169b
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Please forward port and test this patch to master branch
+lgtm, merged now. Thanks Anuj
 
-On Thu, May 28, 2026 at 3:42=E2=80=AFAM Shilong.Jiao via lists.openembedded=
-.org
-<Shilong.Jiao=3Deng.windriver.com@lists.openembedded.org> wrote:
+On Mon, May 25, 2026 at 4:27=E2=80=AFPM Anuj Mittal <anuj.mittal@oss.qualco=
+mm.com>
+wrote:
 
-> From: Shilong Jiao <Shilong.Jiao@windriver.com>
+> Mostly CVE fixes and a few bug fix only upgrades. There's a new recipe fo=
+r
+> python3-backports-zstd that introduces this module for Python 3.12 which
+> didn't
+> have this.
 >
-> Test results:
-> root@qemux86-64:~# ptest-runner lcms
-> START: ptest-runner
-> 2026-05-28T01:12
-> BEGIN: /usr/lib/lcms/ptest
-> PASS: Base types ...Ok.
-> PASS: quick floor ...Ok.
-> PASS: Fixed point 15.16 representation ...Ok.
-> PASS: D50 roundtrip ...Ok.
-> PASS: 1D interpolation in 2pt tables ...Ok.
-> PASS: 1D interpolation in 4pt tables ...Ok.
-> PASS: 1D interpolation in 18pt tables ...Ok.
-> PASS: 1D interpolation in descending 3pt tables ...Ok.
-> PASS: 1D interpolation in descending 18pt tables ...Ok.
-> PASS: 3D interpolation Trilinear (float)  ...Ok.
-> PASS: 3D interpolation Trilinear (16)  ...Ok.
-> PASS: Reverse interpolation 4 -> 3 ......Ok.
-> PASS: 3D interpolation with granularity ...Ok.
-> PASS: 4D interpolation with granularity ...Ok.
-> PASS: 6D interpolation with granularity ...Ok.
-> PASS: 8D interpolation with granularity ...Ok.
-> PASS: Lab to XYZ and back (float only)  ...Ok.
-> PASS: Lab V2 encoding ...Ok.
-> PASS: Blackbody radiator ...Ok.
-> PASS: Linear gamma curves (float) ....Ok.
-> PASS: Curve 2.2 (float) ...|Err|<0.001953 .Ok.
-> PASS: Curve 1.8 (table) ...|Err|<0.053287 .Ok.
-> PASS: Curve 3.0 (table) ...|Err|<0.049726 .Ok.
-> PASS: Curve 2.2 (word table) ...|Err|<0.972654 .Ok.
-> PASS: Parametric curves ...Ok.
-> PASS: Join curves descending ...Ok.
-> PASS: Join curves sRGB (Float) ...Ok.
-> PASS: Join curves sigmoidal ...Ok.
-> PASS: 1 Stage LUT  ...Ok.
-> PASS: 2 Stage LUT (16 bits) ...Ok.
-> PASS: 3 Stage LUT (16 bits) ...Ok.
-> PASS: 4 Stage LUT (16 bits) ...Ok.
-> PASS: 5 Stage LUT (16 bits)  ...Ok.
-> PASS: 6 Stage LUT (16 bits)  ...Ok.
-> PASS: XYZ to XYZ LUT (float only)  ...Ok.
-> PASS: Named Color LUT ...Ok.
-> PASS: Floating point formatters ...Ok.
-> PASS: ChangeBuffersFormat ...Ok.
-> PASS: Multilocalized Unicode (II) ...Ok.
-> PASS: Create named color profile ...Ok.
-> PASS: Header version ...Ok.
-> PASS: Error reporting on bad profiles ...Ok.
-> PASS: Curves only transforms .........Ok.
-> PASS: Encoded Lab->Lab transforms ...Ok.
-> PASS: Matrix-shaper transform (float) ...Ok.
-> PASS: Matrix-shaper transform (8 bits) ...Ok.
-> PASS: Known values across matrix-shaper ...Ok.
-> PASS: Gray Lab input profile ...Ok.
-> PASS: Gray Lab output profile ...Ok.
-> PASS: Matrix-shaper proofing transform (16 bits) ...Ok.
-> PASS: CMYK roundtrip on perceptual transform ...Ok.
-> PASS: Black ink only preservation ...Ok.
-> PASS: Deciding curve types ...Ok.
-> PASS: TAC detection ...Ok.
-> PASS: CGATS parser on junk ...Ok.
-> PASS: PostScript generator ...Ok.
-> PASS: MD5 digest ...Ok.
-> PASS: floating point tags on XYZ ...Ok.
-> PASS: Parametric curve on Rec709 ...Ok.
-> PASS: Floating Point segmented curve with short sampled segment ...Ok.
-> PASS: Check MetaTag ...Ok.
-> PASS: Set free a tag ...Ok.
-> PASS: Planar 8 optimization ...Ok.
-> PASS: Swap endian feature ...Ok.
-> PASS: Forged MPE profile ...Ok.
-> PASS: Empty MLUC ...Ok.
-> PASS: OkLab color space ...Ok.
-> PASS: centering of Lab16 ...Ok.
-> PASS: Unbounded mode w/ integer output ...Ok.
-> PASS: Bad CGATS file ...Ok.
-> PASS: Gamut check on floats ...Ok.
-> PASS: Context memory handling ...Ok.
-> PASS: Alarm codes context ...Ok.
-> PASS: 1D interpolation plugin ...Ok.
-> PASS: Parametric curve plugin ...Ok.
-> PASS: Tag type plugin ...Ok.
-> PASS: Optimization plugin ...Ok.
-> PASS: Full transform plugin ...Ok.
-> PASS: Double from float ...Ok.
-> DURATION: 11
-> END: /usr/lib/lcms/ptest
-> 2026-05-28T01:13
-> STOP: ptest-runner
-> TOTAL: 1 FAIL: 0
+> Tested locally and on autobuilder:
 >
-> Signed-off-by: Shilong Jiao <Shilong.Jiao@windriver.com>
-> ---
->  .../conf/include/ptest-packagelists-meta-oe.inc   |  1 +
->  meta-oe/recipes-support/lcms/lcms/run-ptest       |  4 ++++
->  meta-oe/recipes-support/lcms/lcms_2.18.bb         | 15 ++++++++++++++-
->  3 files changed, 19 insertions(+), 1 deletion(-)
->  create mode 100755 meta-oe/recipes-support/lcms/lcms/run-ptest
+> https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/builds/1538
 >
-> diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> index a9cbaf6982..8432ebfbf2 100644
-> --- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> +++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-> @@ -26,6 +26,7 @@ PTESTS_FAST_META_OE =3D "\
->      imagemagick \
->      jemalloc \
->      jq \
-> +    lcms \
->      leveldb \
->      libcereal \
->      libdbi-perl \
-> diff --git a/meta-oe/recipes-support/lcms/lcms/run-ptest
-> b/meta-oe/recipes-support/lcms/lcms/run-ptest
-> new file mode 100755
-> index 0000000000..20d954c193
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/lcms/lcms/run-ptest
-> @@ -0,0 +1,4 @@
-> +#!/bin/sh
-> +
-> +cd $(dirname $0)
-> +./testcms 2>&1 | awk '/^Checking/{test=3Dsubstr($0,10); sub(/
-> \.\.\.$/,"",test); getline; print (/FAIL!/ ? "FAIL: " : "PASS: ") test}'
-> diff --git a/meta-oe/recipes-support/lcms/lcms_2.18.bb
-> b/meta-oe/recipes-support/lcms/lcms_2.18.bb
-> index 1ff3b3908f..72cca1843f 100644
-> --- a/meta-oe/recipes-support/lcms/lcms_2.18.bb
-> +++ b/meta-oe/recipes-support/lcms/lcms_2.18.bb
-> @@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D
-> "file://LICENSE;md5=3De9ce323c4b71c943a785db90142b228a"
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \
->             file://CVE-2026-41254_1.patch \
->             file://CVE-2026-41254_2.patch \
-> +           file://run-ptest \
->             "
->  SRC_URI[sha256sum] =3D
-> "ee67be3566f459362c1ee094fde2c159d33fa0390aa4ed5f5af676f9e5004347"
+> The following changes since commit
+> ae7dfb12245c7f9b9a353499e2688015bd4e6413:
 >
-> @@ -15,6 +16,18 @@ BBCLASSEXTEND =3D "native nativesdk"
+>   jq: Stick to C17 until next release (2026-05-05 06:57:17 +0530)
 >
->  S =3D "${UNPACKDIR}/lcms2-${PV}"
+> are available in the Git repository at:
 >
-> -inherit autotools sourceforge-releases
-> +inherit autotools sourceforge-releases ptest
-> +
-> +do_compile_ptest() {
-> +    oe_runmake -C ${B}/testbed testcms
-> +}
-> +
-> +do_install_ptest() {
-> +    install -d ${D}${PTEST_PATH}
-> +    install -m 0755 ${B}/testbed/testcms ${D}${PTEST_PATH}/
-> +    install -m 0644 ${S}/testbed/*.icc ${D}${PTEST_PATH}/
-> +}
-> +
-> +RDEPENDS:${PN}-ptest +=3D "bash"
+>   https://git.openembedded.org/meta-openembedded-contrib anujm/scarthgap
 >
->  CVE_PRODUCT +=3D "littlecms:little_cms_color_engine"
+> https://git.openembedded.org/meta-openembedded-contrib/log/?h=3Danujm/sca=
+rthgap
+>
+> for you to fetch changes up to d8cc4e44001c7257273d290ce8c4496e93d32841:
+>
+>   postgresql: upgrade 16.12 -> 16.14 (2026-05-25 08:05:43 +0530)
+>
+> ----------------------------------------------------------------
+>
+> Ankur Tyagi (8):
+>   exiftool: ignore CVE-2026-7580
+>   firewalld: upgrade 1.3.2 -> 1.3.4
+>   frr: patch CVE-2026-28532
+>   lcms: patch CVE-2026-41254
+>   lcms: patch CVE-2026-42798
+>   postfix: upgrade 3.8.12 -> 3.8.16
+>   nanomsg: upgrade 1.2.1 -> 1.2.2
+>   postgresql: upgrade 16.12 -> 16.14
+>
+> Gyorgy Sarvari (1):
+>   python3-ecdsa: set CVE_PRODUCT
+>
+> Het Patel (3):
+>   abseil-cpp: Add CVE_PRODUCT to support product name
+>   onig: Add CVE_PRODUCT to support product name
+>   open-vm-tools: Add entry to CVE_PRODUCT to support the product name
+>
+> Hitendra Prajapati (2):
+>   wireshark: fix for CVE-2025-13946
+>   strongswan: fix for CVE-2026-35334
+>
+> Hugo SIMELIERE (Schneider Electric) (5):
+>   nss: Fix CVE-2026-2781
+>   dnsmasq: Fix CVE-2026-4891
+>   dnsmasq: Fix CVE-2026-4892
+>   dnsmasq: Fix CVE-2026-4893
+>   dnsmasq: Fix CVE-2026-5172
+>
+> Jason Schonberg (1):
+>   php: upgrade 8.2.30 -> 8.2.31
+>
+> J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric ) (1):
+>   python3-backports-zstd: add recipe
+>
+> Liyin Zhang (1):
+>   apache2: upgrade 2.4.66 -> 2.4.67
+>
+> Peter Marko (1):
+>   python-grpcio(-tools): add grpc:grpc to cve product
+>
+> Sudhir Dumbhare (1):
+>   libssh: set status for CVE-2025-14821
+>
+> Theo Gaige (1):
+>   dash: fix CVE-2026-31323
+>
+> Theo Gaige (Schneider Electric) (4):
+>   nginx: patch CVE-2026-40701
+>   nginx: patch CVE-2026-42934
+>   nginx: patch CVE-2026-42945
+>   nginx: patch CVE-2026-42946
+>
+>  ...{firewalld_1.3.2.bb =3D> firewalld_1.3.4.bb} |   2 +-
+>  .../{nanomsg_1.2.1.bb =3D> nanomsg_1.2.2.bb}    |   2 +-
+>  .../{postfix_3.8.12.bb =3D> postfix_3.8.16.bb}  |   2 +-
+>  .../frr/frr/CVE-2026-28532.patch              | 309 ++++++++++++++++++
+>  .../recipes-protocols/frr/frr_9.1.3.bb        |   1 +
+>  .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |   4 +
+>  .../dnsmasq/files/CVE-2026-4891.patch         |  44 +++
+>  .../dnsmasq/files/CVE-2026-4892.patch         |  41 +++
+>  .../dnsmasq/files/CVE-2026-4893.patch         |  38 +++
+>  .../dnsmasq/files/CVE-2026-5172.patch         |  39 +++
+>  .../open-vm-tools/open-vm-tools_12.3.5.bb     |   2 +-
+>  .../strongswan/CVE-2026-35334.patch           | 255 +++++++++++++++
+>  .../strongswan/strongswan_5.9.14.bb           |   1 +
+>  .../wireshark/files/CVE-2025-13946.patch      |  51 +++
+>  .../wireshark/wireshark_4.2.14.bb             |   1 +
+>  .../files/0001-Add-support-for-RISC-V.patch   |   7 +-
+>  .../files/0002-Improve-reproducibility.patch  |   7 +-
+>  ...c-bypass-autoconf-2.69-version-check.patch |  11 +-
+>  ...-config_info.c-not-expose-build-info.patch |   9 +-
+>  ...gresql-fix-ptest-failure-of-sysviews.patch |   7 +-
+>  .../postgresql/files/not-check-libperl.patch  |   9 +-
+>  ...ostgresql_16.12.bb =3D> postgresql_16.14.bb} |   2 +-
+>  .../abseil-cpp/abseil-cpp_20240116.3.bb       |   3 +
+>  .../recipes-devtools/perl/exiftool_12.72.bb   |   1 +
+>  .../php/{php_8.2.30.bb =3D> php_8.2.31.bb}      |   2 +-
+>  .../dash/dash/CVE-2026-31323.patch            |  43 +++
+>  meta-oe/recipes-shells/dash/dash_0.5.12.bb    |   5 +-
+>  .../lcms/lcms/CVE-2026-41254_1.patch          |  30 ++
+>  .../lcms/lcms/CVE-2026-41254_2.patch          |  36 ++
+>  .../lcms/lcms/CVE-2026-42798.patch            |  38 +++
+>  meta-oe/recipes-support/lcms/lcms_2.16.bb     |   6 +-
+>  .../recipes-support/libssh/libssh_0.10.6.bb   |   2 +
+>  .../nss/nss/CVE-2026-2781.patch               |  36 ++
+>  meta-oe/recipes-support/nss/nss_3.98.bb       |   1 +
+>  meta-oe/recipes-support/onig/onig_6.9.9.bb    |   3 +
+>  ...ake-license-entries-compatible-with-.patch |  38 +++
+>  ...s.toml-lower-setuptools-requirements.patch |  31 ++
+>  .../python/python3-backports-zstd_1.5.0.bb    |  21 ++
+>  .../python/python3-ecdsa_0.19.0.bb            |   2 +
+>  .../python/python3-grpcio-tools_1.62.2.bb     |   2 +
+>  .../python/python3-grpcio_1.62.2.bb           |   2 +
+>  .../{apache2_2.4.66.bb =3D> apache2_2.4.67.bb}  |   2 +-
+>  .../nginx/nginx-1.24.0/CVE-2026-40701.patch   |  73 +++++
+>  .../nginx/nginx-1.24.0/CVE-2026-42934.patch   |  79 +++++
+>  .../nginx/nginx-1.24.0/CVE-2026-42945.patch   |  46 +++
+>  .../nginx-1.24.0/CVE-2026-42946-01.patch      |  46 +++
+>  .../nginx-1.24.0/CVE-2026-42946-02.patch      |  91 ++++++
+>  .../recipes-httpd/nginx/nginx_1.24.0.bb       |   5 +
+>  48 files changed, 1445 insertions(+), 43 deletions(-)
+>  rename
+> meta-networking/dynamic-layers/meta-python/recipes-connectivity/firewalld=
+/{
+> firewalld_1.3.2.bb =3D> firewalld_1.3.4.bb} (99%)
+>  rename meta-networking/recipes-connectivity/nanomsg/{nanomsg_1.2.1.bb =
+=3D>
+> nanomsg_1.2.2.bb} (94%)
+>  rename meta-networking/recipes-daemons/postfix/{postfix_3.8.12.bb =3D>
+> postfix_3.8.16.bb} (99%)
+>  create mode 100644
+> meta-networking/recipes-protocols/frr/frr/CVE-2026-28532.patch
+>  create mode 100644
+> meta-networking/recipes-support/dnsmasq/files/CVE-2026-4891.patch
+>  create mode 100644
+> meta-networking/recipes-support/dnsmasq/files/CVE-2026-4892.patch
+>  create mode 100644
+> meta-networking/recipes-support/dnsmasq/files/CVE-2026-4893.patch
+>  create mode 100644
+> meta-networking/recipes-support/dnsmasq/files/CVE-2026-5172.patch
+>  create mode 100644
+> meta-networking/recipes-support/strongswan/strongswan/CVE-2026-35334.patc=
+h
+>  create mode 100644
+> meta-networking/recipes-support/wireshark/files/CVE-2025-13946.patch
+>  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.12.bb =3D>
+> postgresql_16.14.bb} (86%)
+>  rename meta-oe/recipes-devtools/php/{php_8.2.30.bb =3D> php_8.2.31.bb}
+> (99%)
+>  create mode 100644 meta-oe/recipes-shells/dash/dash/CVE-2026-31323.patch
+>  create mode 100644
+> meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1.patch
+>  create mode 100644
+> meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2.patch
+>  create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-42798.patc=
+h
+>  create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2026-2781.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-backports-zstd/0001-pyproject=
+.toml-make-license-entries-compatible-with-.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-backports-zstd/0002-pyproject=
+s.toml-lower-setuptools-requirements.patch
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-backports-zstd_1.5.0.bb
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.66.bb =3D>
+> apache2_2.4.67.bb} (99%)
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-40701.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42934.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42945.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-01.patch
+>  create mode 100644
+> meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CVE-2026-42946-02.patch
+>
 > --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127269):
-> https://lists.openembedded.org/g/openembedded-devel/message/127269
-> Mute This Topic: https://lists.openembedded.org/mt/119523997/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> 2.54.0
 >
 >
 
---000000000000c0126106531a0d12
+--000000000000ead0b506531a169b
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Please forward port and test this patch to master branch=
-=C2=A0</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Thu, May 28, 2026 at 3:42=E2=80=AFAM Shilo=
-ng.Jiao via <a href=3D"http://lists.openembedded.org">lists.openembedded.or=
-g</a> &lt;Shilong.Jiao=3D<a href=3D"mailto:eng.windriver.com@lists.openembe=
-dded.org">eng.windriver.com@lists.openembedded.org</a>&gt; wrote:<br></div>=
+<div dir=3D"ltr">lgtm, merged now. Thanks Anuj</div><br><div class=3D"gmail=
+_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Mon,=
+ May 25, 2026 at 4:27=E2=80=AFPM Anuj Mittal &lt;<a href=3D"mailto:anuj.mit=
+tal@oss.qualcomm.com">anuj.mittal@oss.qualcomm.com</a>&gt; wrote:<br></div>=
 <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">From: Shilong Jiao &lt;<a=
- href=3D"mailto:Shilong.Jiao@windriver.com" target=3D"_blank">Shilong.Jiao@=
-windriver.com</a>&gt;<br>
+left:1px solid rgb(204,204,204);padding-left:1ex">Mostly CVE fixes and a fe=
+w bug fix only upgrades. There&#39;s a new recipe for<br>
+python3-backports-zstd that introduces this module for Python 3.12 which di=
+dn&#39;t<br>
+have this.<br>
 <br>
-Test results:<br>
-root@qemux86-64:~# ptest-runner lcms<br>
-START: ptest-runner<br>
-2026-05-28T01:12<br>
-BEGIN: /usr/lib/lcms/ptest<br>
-PASS: Base types ...Ok.<br>
-PASS: quick floor ...Ok.<br>
-PASS: Fixed point 15.16 representation ...Ok.<br>
-PASS: D50 roundtrip ...Ok.<br>
-PASS: 1D interpolation in 2pt tables ...Ok.<br>
-PASS: 1D interpolation in 4pt tables ...Ok.<br>
-PASS: 1D interpolation in 18pt tables ...Ok.<br>
-PASS: 1D interpolation in descending 3pt tables ...Ok.<br>
-PASS: 1D interpolation in descending 18pt tables ...Ok.<br>
-PASS: 3D interpolation Trilinear (float)=C2=A0 ...Ok.<br>
-PASS: 3D interpolation Trilinear (16)=C2=A0 ...Ok.<br>
-PASS: Reverse interpolation 4 -&gt; 3 ......Ok.<br>
-PASS: 3D interpolation with granularity ...Ok.<br>
-PASS: 4D interpolation with granularity ...Ok.<br>
-PASS: 6D interpolation with granularity ...Ok.<br>
-PASS: 8D interpolation with granularity ...Ok.<br>
-PASS: Lab to XYZ and back (float only)=C2=A0 ...Ok.<br>
-PASS: Lab V2 encoding ...Ok.<br>
-PASS: Blackbody radiator ...Ok.<br>
-PASS: Linear gamma curves (float) ....Ok.<br>
-PASS: Curve 2.2 (float) ...|Err|&lt;0.001953 .Ok.<br>
-PASS: Curve 1.8 (table) ...|Err|&lt;0.053287 .Ok.<br>
-PASS: Curve 3.0 (table) ...|Err|&lt;0.049726 .Ok.<br>
-PASS: Curve 2.2 (word table) ...|Err|&lt;0.972654 .Ok.<br>
-PASS: Parametric curves ...Ok.<br>
-PASS: Join curves descending ...Ok.<br>
-PASS: Join curves sRGB (Float) ...Ok.<br>
-PASS: Join curves sigmoidal ...Ok.<br>
-PASS: 1 Stage LUT=C2=A0 ...Ok.<br>
-PASS: 2 Stage LUT (16 bits) ...Ok.<br>
-PASS: 3 Stage LUT (16 bits) ...Ok.<br>
-PASS: 4 Stage LUT (16 bits) ...Ok.<br>
-PASS: 5 Stage LUT (16 bits)=C2=A0 ...Ok.<br>
-PASS: 6 Stage LUT (16 bits)=C2=A0 ...Ok.<br>
-PASS: XYZ to XYZ LUT (float only)=C2=A0 ...Ok.<br>
-PASS: Named Color LUT ...Ok.<br>
-PASS: Floating point formatters ...Ok.<br>
-PASS: ChangeBuffersFormat ...Ok.<br>
-PASS: Multilocalized Unicode (II) ...Ok.<br>
-PASS: Create named color profile ...Ok.<br>
-PASS: Header version ...Ok.<br>
-PASS: Error reporting on bad profiles ...Ok.<br>
-PASS: Curves only transforms .........Ok.<br>
-PASS: Encoded Lab-&gt;Lab transforms ...Ok.<br>
-PASS: Matrix-shaper transform (float) ...Ok.<br>
-PASS: Matrix-shaper transform (8 bits) ...Ok.<br>
-PASS: Known values across matrix-shaper ...Ok.<br>
-PASS: Gray Lab input profile ...Ok.<br>
-PASS: Gray Lab output profile ...Ok.<br>
-PASS: Matrix-shaper proofing transform (16 bits) ...Ok.<br>
-PASS: CMYK roundtrip on perceptual transform ...Ok.<br>
-PASS: Black ink only preservation ...Ok.<br>
-PASS: Deciding curve types ...Ok.<br>
-PASS: TAC detection ...Ok.<br>
-PASS: CGATS parser on junk ...Ok.<br>
-PASS: PostScript generator ...Ok.<br>
-PASS: MD5 digest ...Ok.<br>
-PASS: floating point tags on XYZ ...Ok.<br>
-PASS: Parametric curve on Rec709 ...Ok.<br>
-PASS: Floating Point segmented curve with short sampled segment ...Ok.<br>
-PASS: Check MetaTag ...Ok.<br>
-PASS: Set free a tag ...Ok.<br>
-PASS: Planar 8 optimization ...Ok.<br>
-PASS: Swap endian feature ...Ok.<br>
-PASS: Forged MPE profile ...Ok.<br>
-PASS: Empty MLUC ...Ok.<br>
-PASS: OkLab color space ...Ok.<br>
-PASS: centering of Lab16 ...Ok.<br>
-PASS: Unbounded mode w/ integer output ...Ok.<br>
-PASS: Bad CGATS file ...Ok.<br>
-PASS: Gamut check on floats ...Ok.<br>
-PASS: Context memory handling ...Ok.<br>
-PASS: Alarm codes context ...Ok.<br>
-PASS: 1D interpolation plugin ...Ok.<br>
-PASS: Parametric curve plugin ...Ok.<br>
-PASS: Tag type plugin ...Ok.<br>
-PASS: Optimization plugin ...Ok.<br>
-PASS: Full transform plugin ...Ok.<br>
-PASS: Double from float ...Ok.<br>
-DURATION: 11<br>
-END: /usr/lib/lcms/ptest<br>
-2026-05-28T01:13<br>
-STOP: ptest-runner<br>
-TOTAL: 1 FAIL: 0<br>
+Tested locally and on autobuilder:<br>
 <br>
-Signed-off-by: Shilong Jiao &lt;<a href=3D"mailto:Shilong.Jiao@windriver.co=
-m" target=3D"_blank">Shilong.Jiao@windriver.com</a>&gt;<br>
----<br>
-=C2=A0.../conf/include/ptest-packagelists-meta-oe.inc=C2=A0 =C2=A0|=C2=A0 1=
- +<br>
-=C2=A0meta-oe/recipes-support/lcms/lcms/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0|=C2=A0 4 ++++<br>
-=C2=A0meta-oe/recipes-support/lcms/<a href=3D"http://lcms_2.18.bb" rel=3D"n=
-oreferrer" target=3D"_blank">lcms_2.18.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0| 15 ++++++++++++++-<br>
-=C2=A03 files changed, 19 insertions(+), 1 deletion(-)<br>
-=C2=A0create mode 100755 meta-oe/recipes-support/lcms/lcms/run-ptest<br>
+<a href=3D"https://autobuilder.yoctoproject.org/valkyrie/#/builders/81/buil=
+ds/1538" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproj=
+ect.org/valkyrie/#/builders/81/builds/1538</a><br>
 <br>
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/=
-conf/include/ptest-packagelists-meta-oe.inc<br>
-index a9cbaf6982..8432ebfbf2 100644<br>
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc<br>
-@@ -26,6 +26,7 @@ PTESTS_FAST_META_OE =3D &quot;\<br>
-=C2=A0 =C2=A0 =C2=A0imagemagick \<br>
-=C2=A0 =C2=A0 =C2=A0jemalloc \<br>
-=C2=A0 =C2=A0 =C2=A0jq \<br>
-+=C2=A0 =C2=A0 lcms \<br>
-=C2=A0 =C2=A0 =C2=A0leveldb \<br>
-=C2=A0 =C2=A0 =C2=A0libcereal \<br>
-=C2=A0 =C2=A0 =C2=A0libdbi-perl \<br>
-diff --git a/meta-oe/recipes-support/lcms/lcms/run-ptest b/meta-oe/recipes-=
-support/lcms/lcms/run-ptest<br>
-new file mode 100755<br>
-index 0000000000..20d954c193<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-support/lcms/lcms/run-ptest<br>
-@@ -0,0 +1,4 @@<br>
-+#!/bin/sh<br>
+The following changes since commit ae7dfb12245c7f9b9a353499e2688015bd4e6413=
+:<br>
+<br>
+=C2=A0 jq: Stick to C17 until next release (2026-05-05 06:57:17 +0530)<br>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib" r=
+el=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-opene=
+mbedded-contrib</a> anujm/scarthgap<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded-contrib/lo=
+g/?h=3Danujm/scarthgap" rel=3D"noreferrer" target=3D"_blank">https://git.op=
+enembedded.org/meta-openembedded-contrib/log/?h=3Danujm/scarthgap</a><br>
+<br>
+for you to fetch changes up to d8cc4e44001c7257273d290ce8c4496e93d32841:<br=
+>
+<br>
+=C2=A0 postgresql: upgrade 16.12 -&gt; 16.14 (2026-05-25 08:05:43 +0530)<br=
+>
+<br>
+----------------------------------------------------------------<br>
+<br>
+Ankur Tyagi (8):<br>
+=C2=A0 exiftool: ignore CVE-2026-7580<br>
+=C2=A0 firewalld: upgrade 1.3.2 -&gt; 1.3.4<br>
+=C2=A0 frr: patch CVE-2026-28532<br>
+=C2=A0 lcms: patch CVE-2026-41254<br>
+=C2=A0 lcms: patch CVE-2026-42798<br>
+=C2=A0 postfix: upgrade 3.8.12 -&gt; 3.8.16<br>
+=C2=A0 nanomsg: upgrade 1.2.1 -&gt; 1.2.2<br>
+=C2=A0 postgresql: upgrade 16.12 -&gt; 16.14<br>
+<br>
+Gyorgy Sarvari (1):<br>
+=C2=A0 python3-ecdsa: set CVE_PRODUCT<br>
+<br>
+Het Patel (3):<br>
+=C2=A0 abseil-cpp: Add CVE_PRODUCT to support product name<br>
+=C2=A0 onig: Add CVE_PRODUCT to support product name<br>
+=C2=A0 open-vm-tools: Add entry to CVE_PRODUCT to support the product name<=
+br>
+<br>
+Hitendra Prajapati (2):<br>
+=C2=A0 wireshark: fix for CVE-2025-13946<br>
+=C2=A0 strongswan: fix for CVE-2026-35334<br>
+<br>
+Hugo SIMELIERE (Schneider Electric) (5):<br>
+=C2=A0 nss: Fix CVE-2026-2781<br>
+=C2=A0 dnsmasq: Fix CVE-2026-4891<br>
+=C2=A0 dnsmasq: Fix CVE-2026-4892<br>
+=C2=A0 dnsmasq: Fix CVE-2026-4893<br>
+=C2=A0 dnsmasq: Fix CVE-2026-5172<br>
+<br>
+Jason Schonberg (1):<br>
+=C2=A0 php: upgrade 8.2.30 -&gt; 8.2.31<br>
+<br>
+J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric ) (1):<br>
+=C2=A0 python3-backports-zstd: add recipe<br>
+<br>
+Liyin Zhang (1):<br>
+=C2=A0 apache2: upgrade 2.4.66 -&gt; 2.4.67<br>
+<br>
+Peter Marko (1):<br>
+=C2=A0 python-grpcio(-tools): add grpc:grpc to cve product<br>
+<br>
+Sudhir Dumbhare (1):<br>
+=C2=A0 libssh: set status for CVE-2025-14821<br>
+<br>
+Theo Gaige (1):<br>
+=C2=A0 dash: fix CVE-2026-31323<br>
+<br>
+Theo Gaige (Schneider Electric) (4):<br>
+=C2=A0 nginx: patch CVE-2026-40701<br>
+=C2=A0 nginx: patch CVE-2026-42934<br>
+=C2=A0 nginx: patch CVE-2026-42945<br>
+=C2=A0 nginx: patch CVE-2026-42946<br>
+<br>
+=C2=A0...{<a href=3D"http://firewalld_1.3.2.bb" rel=3D"noreferrer" target=
+=3D"_blank">firewalld_1.3.2.bb</a> =3D&gt; <a href=3D"http://firewalld_1.3.=
+4.bb" rel=3D"noreferrer" target=3D"_blank">firewalld_1.3.4.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://nanomsg_1.2.1.bb" rel=3D"noreferrer" target=3D=
+"_blank">nanomsg_1.2.1.bb</a> =3D&gt; <a href=3D"http://nanomsg_1.2.2.bb" r=
+el=3D"noreferrer" target=3D"_blank">nanomsg_1.2.2.bb</a>}=C2=A0 =C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0.../{<a href=3D"http://postfix_3.8.12.bb" rel=3D"noreferrer" target=
+=3D"_blank">postfix_3.8.12.bb</a> =3D&gt; <a href=3D"http://postfix_3.8.16.=
+bb" rel=3D"noreferrer" target=3D"_blank">postfix_3.8.16.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0.../frr/frr/CVE-2026-28532.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 | 309 ++++++++++++++++++<br>
+=C2=A0.../recipes-protocols/frr/<a href=3D"http://frr_9.1.3.bb" rel=3D"nore=
+ferrer" target=3D"_blank">frr_9.1.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
+=A0 =C2=A01 +<br>
+=C2=A0.../recipes-support/dnsmasq/<a href=3D"http://dnsmasq_2.90.bb" rel=3D=
+"noreferrer" target=3D"_blank">dnsmasq_2.90.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
+=A04 +<br>
+=C2=A0.../dnsmasq/files/CVE-2026-4891.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 44 +++<br>
+=C2=A0.../dnsmasq/files/CVE-2026-4892.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 41 +++<br>
+=C2=A0.../dnsmasq/files/CVE-2026-4893.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 38 +++<br>
+=C2=A0.../dnsmasq/files/CVE-2026-5172.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 39 +++<br>
+=C2=A0.../open-vm-tools/<a href=3D"http://open-vm-tools_12.3.5.bb" rel=3D"n=
+oreferrer" target=3D"_blank">open-vm-tools_12.3.5.bb</a>=C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 =C2=A02 +-<br>
+=C2=A0.../strongswan/CVE-2026-35334.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0| 255 +++++++++++++++<br>
+=C2=A0.../strongswan/<a href=3D"http://strongswan_5.9.14.bb" rel=3D"norefer=
+rer" target=3D"_blank">strongswan_5.9.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+=C2=A0.../wireshark/files/CVE-2025-13946.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+51 +++<br>
+=C2=A0.../wireshark/<a href=3D"http://wireshark_4.2.14.bb" rel=3D"noreferre=
+r" target=3D"_blank">wireshark_4.2.14.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 +<br>
+=C2=A0.../files/0001-Add-support-for-RISC-V.patch=C2=A0 =C2=A0|=C2=A0 =C2=
+=A07 +-<br>
+=C2=A0.../files/0002-Improve-reproducibility.patch=C2=A0 |=C2=A0 =C2=A07 +-=
+<br>
+=C2=A0...c-bypass-autoconf-2.69-version-check.patch |=C2=A0 11 +-<br>
+=C2=A0...-config_info.c-not-expose-build-info.patch |=C2=A0 =C2=A09 +-<br>
+=C2=A0...gresql-fix-ptest-failure-of-sysviews.patch |=C2=A0 =C2=A07 +-<br>
+=C2=A0.../postgresql/files/not-check-libperl.patch=C2=A0 |=C2=A0 =C2=A09 +-=
+<br>
+=C2=A0...<a href=3D"http://ostgresql_16.12.bb" rel=3D"noreferrer" target=3D=
+"_blank">ostgresql_16.12.bb</a> =3D&gt; <a href=3D"http://postgresql_16.14.=
+bb" rel=3D"noreferrer" target=3D"_blank">postgresql_16.14.bb</a>} |=C2=A0 =
+=C2=A02 +-<br>
+=C2=A0.../abseil-cpp/<a href=3D"http://abseil-cpp_20240116.3.bb" rel=3D"nor=
+eferrer" target=3D"_blank">abseil-cpp_20240116.3.bb</a>=C2=A0 =C2=A0 =C2=A0=
+ =C2=A0|=C2=A0 =C2=A03 +<br>
+=C2=A0.../recipes-devtools/perl/<a href=3D"http://exiftool_12.72.bb" rel=3D=
+"noreferrer" target=3D"_blank">exiftool_12.72.bb</a>=C2=A0 =C2=A0|=C2=A0 =
+=C2=A01 +<br>
+=C2=A0.../php/{<a href=3D"http://php_8.2.30.bb" rel=3D"noreferrer" target=
+=3D"_blank">php_8.2.30.bb</a> =3D&gt; <a href=3D"http://php_8.2.31.bb" rel=
+=3D"noreferrer" target=3D"_blank">php_8.2.31.bb</a>}=C2=A0 =C2=A0 =C2=A0 |=
+=C2=A0 =C2=A02 +-<br>
+=C2=A0.../dash/dash/CVE-2026-31323.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 43 +++<br>
+=C2=A0meta-oe/recipes-shells/dash/<a href=3D"http://dash_0.5.12.bb" rel=3D"=
+noreferrer" target=3D"_blank">dash_0.5.12.bb</a>=C2=A0 =C2=A0 |=C2=A0 =C2=
+=A05 +-<br>
+=C2=A0.../lcms/lcms/CVE-2026-41254_1.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 30 ++<br>
+=C2=A0.../lcms/lcms/CVE-2026-41254_2.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 |=C2=A0 36 ++<br>
+=C2=A0.../lcms/lcms/CVE-2026-42798.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 |=C2=A0 38 +++<br>
+=C2=A0meta-oe/recipes-support/lcms/<a href=3D"http://lcms_2.16.bb" rel=3D"n=
+oreferrer" target=3D"_blank">lcms_2.16.bb</a>=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+=C2=A06 +-<br>
+=C2=A0.../recipes-support/libssh/<a href=3D"http://libssh_0.10.6.bb" rel=3D=
+"noreferrer" target=3D"_blank">libssh_0.10.6.bb</a>=C2=A0 =C2=A0|=C2=A0 =C2=
+=A02 +<br>
+=C2=A0.../nss/nss/CVE-2026-2781.patch=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 36 ++<br>
+=C2=A0meta-oe/recipes-support/nss/<a href=3D"http://nss_3.98.bb" rel=3D"nor=
+eferrer" target=3D"_blank">nss_3.98.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A01 +<br>
+=C2=A0meta-oe/recipes-support/onig/<a href=3D"http://onig_6.9.9.bb" rel=3D"=
+noreferrer" target=3D"_blank">onig_6.9.9.bb</a>=C2=A0 =C2=A0 |=C2=A0 =C2=A0=
+3 +<br>
+=C2=A0...ake-license-entries-compatible-with-.patch |=C2=A0 38 +++<br>
+=C2=A0...s.toml-lower-setuptools-requirements.patch |=C2=A0 31 ++<br>
+=C2=A0.../python/<a href=3D"http://python3-backports-zstd_1.5.0.bb" rel=3D"=
+noreferrer" target=3D"_blank">python3-backports-zstd_1.5.0.bb</a>=C2=A0 =C2=
+=A0 |=C2=A0 21 ++<br>
+=C2=A0.../python/<a href=3D"http://python3-ecdsa_0.19.0.bb" rel=3D"noreferr=
+er" target=3D"_blank">python3-ecdsa_0.19.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
+=C2=A0.../python/<a href=3D"http://python3-grpcio-tools_1.62.2.bb" rel=3D"n=
+oreferrer" target=3D"_blank">python3-grpcio-tools_1.62.2.bb</a>=C2=A0 =C2=
+=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../python/<a href=3D"http://python3-grpcio_1.62.2.bb" rel=3D"norefer=
+rer" target=3D"_blank">python3-grpcio_1.62.2.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A02 +<br>
+=C2=A0.../{<a href=3D"http://apache2_2.4.66.bb" rel=3D"noreferrer" target=
+=3D"_blank">apache2_2.4.66.bb</a> =3D&gt; <a href=3D"http://apache2_2.4.67.=
+bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.67.bb</a>}=C2=A0 |=C2=
+=A0 =C2=A02 +-<br>
+=C2=A0.../nginx/nginx-1.24.0/CVE-2026-40701.patch=C2=A0 =C2=A0|=C2=A0 73 ++=
++++<br>
+=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42934.patch=C2=A0 =C2=A0|=C2=A0 79 ++=
++++<br>
+=C2=A0.../nginx/nginx-1.24.0/CVE-2026-42945.patch=C2=A0 =C2=A0|=C2=A0 46 ++=
 +<br>
-+cd $(dirname $0)<br>
-+./testcms 2&gt;&amp;1 | awk &#39;/^Checking/{test=3Dsubstr($0,10); sub(/ \=
-.\.\.$/,&quot;&quot;,test); getline; print (/FAIL!/ ? &quot;FAIL: &quot; : =
-&quot;PASS: &quot;) test}&#39;<br>
-diff --git a/meta-oe/recipes-support/lcms/<a href=3D"http://lcms_2.18.bb" r=
-el=3D"noreferrer" target=3D"_blank">lcms_2.18.bb</a> b/meta-oe/recipes-supp=
-ort/lcms/<a href=3D"http://lcms_2.18.bb" rel=3D"noreferrer" target=3D"_blan=
-k">lcms_2.18.bb</a><br>
-index 1ff3b3908f..72cca1843f 100644<br>
---- a/meta-oe/recipes-support/lcms/<a href=3D"http://lcms_2.18.bb" rel=3D"n=
-oreferrer" target=3D"_blank">lcms_2.18.bb</a><br>
-+++ b/meta-oe/recipes-support/lcms/<a href=3D"http://lcms_2.18.bb" rel=3D"n=
-oreferrer" target=3D"_blank">lcms_2.18.bb</a><br>
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3De9ce323c4b7=
-1c943a785db90142b228a&quot;<br>
-=C2=A0SRC_URI =3D &quot;${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2026-41254_1.patch \<b=
+=C2=A0.../nginx-1.24.0/CVE-2026-42946-01.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+46 +++<br>
+=C2=A0.../nginx-1.24.0/CVE-2026-42946-02.patch=C2=A0 =C2=A0 =C2=A0 |=C2=A0 =
+91 ++++++<br>
+=C2=A0.../recipes-httpd/nginx/<a href=3D"http://nginx_1.24.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">nginx_1.24.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+=C2=A0 =C2=A05 +<br>
+=C2=A048 files changed, 1445 insertions(+), 43 deletions(-)<br>
+=C2=A0rename meta-networking/dynamic-layers/meta-python/recipes-connectivit=
+y/firewalld/{<a href=3D"http://firewalld_1.3.2.bb" rel=3D"noreferrer" targe=
+t=3D"_blank">firewalld_1.3.2.bb</a> =3D&gt; <a href=3D"http://firewalld_1.3=
+.4.bb" rel=3D"noreferrer" target=3D"_blank">firewalld_1.3.4.bb</a>} (99%)<b=
 r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://CVE-2026-41254_2.patch \<b=
-r>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;ee67be3566f459362c1ee094fde2c159d33fa039=
-0aa4ed5f5af676f9e5004347&quot;<br>
+=C2=A0rename meta-networking/recipes-connectivity/nanomsg/{<a href=3D"http:=
+//nanomsg_1.2.1.bb" rel=3D"noreferrer" target=3D"_blank">nanomsg_1.2.1.bb</=
+a> =3D&gt; <a href=3D"http://nanomsg_1.2.2.bb" rel=3D"noreferrer" target=3D=
+"_blank">nanomsg_1.2.2.bb</a>} (94%)<br>
+=C2=A0rename meta-networking/recipes-daemons/postfix/{<a href=3D"http://pos=
+tfix_3.8.12.bb" rel=3D"noreferrer" target=3D"_blank">postfix_3.8.12.bb</a> =
+=3D&gt; <a href=3D"http://postfix_3.8.16.bb" rel=3D"noreferrer" target=3D"_=
+blank">postfix_3.8.16.bb</a>} (99%)<br>
+=C2=A0create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2026=
+-28532.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
+2026-4891.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
+2026-4892.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
+2026-4893.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-=
+2026-5172.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/strongswan/strongs=
+wan/CVE-2026-35334.patch<br>
+=C2=A0create mode 100644 meta-networking/recipes-support/wireshark/files/CV=
+E-2025-13946.patch<br>
+=C2=A0rename meta-oe/recipes-dbs/postgresql/{<a href=3D"http://postgresql_1=
+6.12.bb" rel=3D"noreferrer" target=3D"_blank">postgresql_16.12.bb</a> =3D&g=
+t; <a href=3D"http://postgresql_16.14.bb" rel=3D"noreferrer" target=3D"_bla=
+nk">postgresql_16.14.bb</a>} (86%)<br>
+=C2=A0rename meta-oe/recipes-devtools/php/{<a href=3D"http://php_8.2.30.bb"=
+ rel=3D"noreferrer" target=3D"_blank">php_8.2.30.bb</a> =3D&gt; <a href=3D"=
+http://php_8.2.31.bb" rel=3D"noreferrer" target=3D"_blank">php_8.2.31.bb</a=
+>} (99%)<br>
+=C2=A0create mode 100644 meta-oe/recipes-shells/dash/dash/CVE-2026-31323.pa=
+tch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_1=
+.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-41254_2=
+.patch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/lcms/lcms/CVE-2026-42798.p=
+atch<br>
+=C2=A0create mode 100644 meta-oe/recipes-support/nss/nss/CVE-2026-2781.patc=
+h<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-backpo=
+rts-zstd/0001-pyproject.toml-make-license-entries-compatible-with-.patch<br=
+>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-backpo=
+rts-zstd/0002-pyprojects.toml-lower-setuptools-requirements.patch<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-backports-zstd_1.5.0.bb" rel=3D"noreferrer" target=3D"_blank">p=
+ython3-backports-zstd_1.5.0.bb</a><br>
+=C2=A0rename meta-webserver/recipes-httpd/apache2/{<a href=3D"http://apache=
+2_2.4.66.bb" rel=3D"noreferrer" target=3D"_blank">apache2_2.4.66.bb</a> =3D=
+&gt; <a href=3D"http://apache2_2.4.67.bb" rel=3D"noreferrer" target=3D"_bla=
+nk">apache2_2.4.67.bb</a>} (99%)<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-40701.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-42934.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-42945.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-42946-01.patch<br>
+=C2=A0create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.24.0/CV=
+E-2026-42946-02.patch<br>
 <br>
-@@ -15,6 +16,18 @@ BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
-<br>
-=C2=A0S =3D &quot;${UNPACKDIR}/lcms2-${PV}&quot;<br>
-<br>
--inherit autotools sourceforge-releases<br>
-+inherit autotools sourceforge-releases ptest<br>
-+<br>
-+do_compile_ptest() {<br>
-+=C2=A0 =C2=A0 oe_runmake -C ${B}/testbed testcms<br>
-+}<br>
-+<br>
-+do_install_ptest() {<br>
-+=C2=A0 =C2=A0 install -d ${D}${PTEST_PATH}<br>
-+=C2=A0 =C2=A0 install -m 0755 ${B}/testbed/testcms ${D}${PTEST_PATH}/<br>
-+=C2=A0 =C2=A0 install -m 0644 ${S}/testbed/*.icc ${D}${PTEST_PATH}/<br>
-+}<br>
-+<br>
-+RDEPENDS:${PN}-ptest +=3D &quot;bash&quot;<br>
-<br>
-=C2=A0CVE_PRODUCT +=3D &quot;littlecms:little_cms_color_engine&quot;<br>
 -- <br>
-2.34.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127269): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127269" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127269</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119523997/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119523997/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+2.54.0<br>
 <br>
 </blockquote></div>
 
---000000000000c0126106531a0d12--
+--000000000000ead0b506531a169b--
 
