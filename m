@@ -1,145 +1,97 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <nmjain23@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A8AACD6E52
-	for <webhook@archiver.kernel.org>; Sun, 31 May 2026 18:29:29 +0000 (UTC)
-Received: from GVXPR05CU001.outbound.protection.outlook.com (GVXPR05CU001.outbound.protection.outlook.com [52.101.83.143])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.12276.1780252161822196079
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA8F7CD6E4C
+	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 07:20:20 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.23059.1780298414623508691
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 May 2026 11:29:22 -0700
+ Mon, 01 Jun 2026 00:20:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=DiOPmdwz;
- spf=pass (domain: navimatix.de, ip: 52.101.83.143, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zBzzQRUex/dwysoEgz391aOrB5AW2q4EXnVsrEGPIYbijrkeB05+8ty7FFY/pWcMh5rv77YplsfEyN7L/IbxREF73VXIK9+tFuvOy5ubsAr+0Ewmcu177yVgtASv73PZGCiIcgwq8wobNE3uipHc8PaEjLNrFOcej+MV6kqgD81VmB0tudFcLvF6ne/NXEKEj9UHKj47T9FZDFmLbXX0eEPJgkDgZKO4xKVb5nit5JwOJqCNp5MoiL43FDTNd4MneY53Q2yf8ky9b5m7w+OZzyPEvkCWWd9Y0zrdxcFEr8GCptag/x0ubj4TgqVySwlUe7UclSc8vf1WTG6Uz9hUMA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S0q6EtXkeipt4fxphywwH2pYrP7Q0sLFd4xZTCwBxLo=;
- b=RHeh4D1xsCgi1f23EKComhwUjLhHPqjeKw3goty/BU0o7x4HJsh5s81jjlDI65NYUNtyibHv+pmiFFaMuUdJCAobodky7ZpzaeSwo7enu8gBPUcFh0PZntUxjBzpWoulCIR8j6ffdidO4NaTak3I/UTa2eot7PNKLhsQm+RSztqpEAPHfnCQI3H06x29F6FOwynRVd3/lIrO6e1mjaaB3wvJOXHJUa91/YKhguDrnudeQ41nrZKNs/lYok3/8ftCtK7Dv+VbmFo9iUEBX3DkoVPanDlwMGF3dQCTKcyLK7XmD5DrOmiQ6nMvYuPLDA9ziTBPv6nkj8PKvtp6ySdwcg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S0q6EtXkeipt4fxphywwH2pYrP7Q0sLFd4xZTCwBxLo=;
- b=DiOPmdwz/tYXifySh0cY3ptjA4Y8u/MgpA/yq/36+AgvUeqsHHeNEIRhEigvxh6YGWCe14S8pxD+2Ne9JfxUTKfcMCp1Oam0z5ty2mHbE9WdQDvF0snWKnNP6qcIiFk7WYSbz1PilZp19g2xjgGpf+aiwSHoym4OzbLwTDYhxtw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8) by GV2PR01MB11612.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2a5::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Sun, 31 May
- 2026 18:29:12 +0000
-Received: from GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- ([fe80::d5c3:2dea:3d98:25fd]) by
- GV2PR01MB11835.eurprd01.prod.exchangelabs.com ([fe80::d5c3:2dea:3d98:25fd%3])
- with mapi id 15.21.0071.014; Sun, 31 May 2026 18:29:12 +0000
-Date: Sun, 31 May 2026 20:29:11 +0200
-From: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-CC: =?utf-8?B?SsO2cmc=?= Sommer <joerg.sommer@navimatix.de>
-Subject: [PATCH] ssh-audit: Add 3.3.0 of ssh configuration auditing tool
-Message-ID: <2d4617d478dd063ac66e2299c5f1da3eaed598c9.1780252150.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE1P281CA0074.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:26::15) To GV2PR01MB11835.eurprd01.prod.exchangelabs.com
- (2603:10a6:150:2cb::8)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=Gij1igZb;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: nmjain23@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-36d630c0e35so1419372a91.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 00:20:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780298414; x=1780903214; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aa7v75OmwjV5lC+UF8lGwUp2rNSMuO5EoYuD2nF42qI=;
+        b=Gij1igZbTyNjolWATR2GbNBT9TWMUqlNtjxegqKFas5TGnNcF58S8jSh+4h6eQePlO
+         JDAuuLUY2Wfj6MwYDYwBB6sG/PWdLsq4IKJv9CFIBlJEFOefRIewiOlPplONPs2IpW1Z
+         FfJ5PQsBCVW4aQPTY9QWHwP5xycFhUAwHBvBHduMh/x/qk4yNM4fqu0lRs0cU+l5Um3g
+         sJJqS/YpyFXNpvKdb6GQBMumNyIQps+X0aDLdtf+75lxen3yH6rJRK/Oj2pamfo7pnKK
+         oO7O7O93JhcuXkDqmHkLk+DH+vwCP00R/6mQZpKmp5l/shtsie39TmwO7X7pmqR7HHXE
+         HVdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780298414; x=1780903214;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aa7v75OmwjV5lC+UF8lGwUp2rNSMuO5EoYuD2nF42qI=;
+        b=cLJ9Zp3fGzCb2sfYl3VQbeKwaVUMHTLFQl1138Z6xg/0PXoQpjrrdGNiSFALbPrTvU
+         4RP2wTqakUrwRozGVcTTEadLMjHX3hQCiVfIzgnE+kLN5SNNlQn5/UnUEsoH4EZnbKbQ
+         gWEfvwhHoFFN3ZjHi4+mOtA88MiZM+WmCei1eZqCfa2MrwAYn2VzvfzsYdLP/XVViyC1
+         XTidue9ZOv47r1MW/TwnbXNE+DgsHFSV9X4y5zmgpdlB6x5jL1sVDo4gycK3wG2pr+x1
+         0jmvyukirk8jQ9hkwGtQHrQvV8X8WXGU6z9CCREEqtOKMHgwsJAQQRcWrPhJ8lnJiJKr
+         k+bw==
+X-Gm-Message-State: AOJu0YxF8X3Z+BsIVYdVEboLq4vPaD3RNmKk5tzHiElAc+4pCKxxgj6m
+	6OZ+zMWZPHoRsU1AaHxeHlfKpqMfhoPAMlXT+gZBU8WVRkL0jN83BMWiHXbDmA==
+X-Gm-Gg: Acq92OGqAHWBJYsySeSGfd/RoyAHrLUsXwY0DJ4mTo7YtDuinQlasZp+UR33tkX73KK
+	czTpEhlTwRsRozZSE3dDK2ZcmkzL0rvHMGipMEVBZq7XWJLhvKyTMPi+sGgb618Pj+gEvs/us6X
+	1mNeQXzw1/c6asl2vXSHHeLbeqdAWJ5gWUpSeu6sat373143n4pU+1QrKKnqfyUBXaWFXGzZFus
+	MTpqlEQRqz1vIYiVWE39AoYpn+irr9uf2rXA1NuR+suTBg6KuKZbnDa4TXPidyMvJqkDoekp3dx
+	Rkt/k0mqJlHzasX6QkLvWa+M+eMe50Z+JpQqvdO2m2eEwgZugIuirFH0a8vHHKHaDCy/S774MFb
+	ZNGFHtKqfB2LJZ0yPp5xF1crYRhDU9gaX7G+bju1uPs2dAis1wgY0nq37BYTBbyC0loxXyTnEDh
+	jYhwzVmqJB764KtpCG9NrioKfRwwyrI2qyOYUlDf3I7wUP1tf2ySEEtbDNPxMQvvAHzxgfa6eQ1
+	Q==
+X-Received: by 2002:a05:6a21:9f07:b0:3a2:bd1d:d679 with SMTP id adf61e73a8af0-3b427f9e1d7mr11014949637.48.1780298413973;
+        Mon, 01 Jun 2026 00:20:13 -0700 (PDT)
+Received: from LL-3450LLL.. ([103.133.67.152])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c85771a789bsm9886114a12.4.2026.06.01.00.20.12
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 01 Jun 2026 00:20:13 -0700 (PDT)
+From: Naman Jain <nmjain23@gmail.com>
+X-Google-Original-From: Naman Jain <naman.jain@partner.bmw.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta][scarthgap][PATCH] libssh: ignore CVE-2025-14821
+Date: Mon,  1 Jun 2026 12:50:01 +0530
+Message-Id: <20260601072001.2491831-1-naman.jain@partner.bmw.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR01MB11835:EE_|GV2PR01MB11612:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a86e4ef-bf61-4575-0d40-08debf42832b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|366016|1800799024|376014|6133799003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	0oIOe5v3U6NPakRIu3vcXwb/cYiAcjbOXNc3vLRB6ZHlaLb7mMtjLPqbGBj1r9xjxJFrOXDBUn13Q7Or2SpFuQeubHas70gPELZwbe992SopYxa5TdsBh1cpAdwNsEK++uR8AMutXEeW6FbrFK8ZVexjuZB859Mpj1KOo+er+/3XQIWYKc6OuvwcJz26Ge2hjPXmi54NSgi0qAMwds6tcoTzXdDrp9BF70QwAJbAMq3wcNKfqVrDq+D248zJWQLgMaaKIU5DgNqlgcWizd8eRXjkfOq8Dwjhp9qNAebQrBbOdxt4hjsb7/OeX1MHFTpJPg0KF/Htz1N+uRYfdPjGORQ1ycgJQoMCdujTyenVBfmQw9U9m7qz6ctfEXk0A5G9JPmSWT3+pIDxwcSzsf1qyA8hp34/PJtuhVavVrXtJ+rpIO94/yARkIT8z+lvlslvVI2TF4yatg5sgnBmMHMzgwLnY9bLY0Lr9LH6euN7N2cupfcxAFyaf220Q9AK1+7ov39NDMmUyqzqkfOW6To3xX16S0a3ask7RGh4Nch6rZIyJ1hUWpZqfkes5wkq9WG2cqQvBOKiZp9dXaDlp84E9LQm7xM4vPpnRcvRY5SK4PL56yDPDLxwzFdXBoXkFGy1vIQFWTYt4cMljKK5F7nK36NTqc14GAejEkbe3867/UxILluf17EXvZB542/RhRU6NsAgmHL54bhxK4vESzRNZQ==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR01MB11835.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(6133799003)(18002099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?wzn08Yc5L1M1a1veGjKyNVEmsl3Pi6T1f9BxV4ziYHLDXnoPtI0t7ev8B00c?=
- =?us-ascii?Q?Qv77WfM51JvRAMdoLWw6lYyDY6ZKqPmxceqGuGNzPTNYbvIhjV91T6YtNf0X?=
- =?us-ascii?Q?Osf56iXHbTkNmfGLdiuJJlsV/ti+4kS3WEMDRufxV9eRURSEYEgtIEgpT7c6?=
- =?us-ascii?Q?9WM9k79plhmZngFGYQD5ufGD7OyrEDFhr/6mK+GhzMr0PDwYC148IMQs1Izf?=
- =?us-ascii?Q?9zbWB8h5H4thaURoXF2V1XiIj5foB++n6cvf7wm0nNOIRWUUpnMVWQFEauvf?=
- =?us-ascii?Q?aRIZORkMsx0mMIl5Jzm40ZRMblat9wpZK5cp1sNxzjqZXHTjnAeiuE6SnSr9?=
- =?us-ascii?Q?gmAi1SkomZTMsS7TqajztnG9zPRZnl0FGKfXRFPkrIHnh+Kjk1cRzRCGXRac?=
- =?us-ascii?Q?DlHxDhwMCjk8kr6maj4zwYizfG+mttEl0AdY3OTqde9ILtgyAwW5LVR4vT2Y?=
- =?us-ascii?Q?h3RvAbkYAgjG4q3W9QEgwWApGO/OPWc+ku7m9HJEk9Goul0kWv4g4yvDAPb+?=
- =?us-ascii?Q?Ty6vUSvpxFkePNgx6mEexJcv3CflOqzXYaMrwmeCfvtiGN0X8buVdxDU/rkP?=
- =?us-ascii?Q?vH4LdSbqbgja3pjPerEq5e71HPCNYUyDQ0iB1Fss7EKTVNvdIGY1DGmHI4N7?=
- =?us-ascii?Q?9HlGbWxpELvO3X02CJ5OPu1TnCPh3JR2JPPvYR4csyphv8JthwoDUQzSE7QJ?=
- =?us-ascii?Q?zgaDQD+Wo867n9Yd8ucrPB1H5dCjYQp5Gq4pVqURqViGb6xagYbXZDrD3xRm?=
- =?us-ascii?Q?Ef+/WC5lnKPcQLfVFLO6SklWOxnGouki7WE1cp53FjYx+0tr47ei6ZV0c3ot?=
- =?us-ascii?Q?QMr+SNZ0wjn5MbcKbHRESyjSrZ5nUv3J9RMU+FmNi6OPQ9+gnu9iH8TgpgQT?=
- =?us-ascii?Q?sp/HAit15scLXl9fOQ7ywG6INetPPo5AT/tx9Ut1SNTdUgDvP9Ayn674W9rq?=
- =?us-ascii?Q?FdJDGv3SWD/9EqKOMjtoGJV52A1IIx0wY6C3F4xDGQik3YC6iwsrUODERAFb?=
- =?us-ascii?Q?Arayb5E+qvlE8QHJ4I1wc4WPoWsZstfw6DGV9tWOuNF8sb/eCsgzGbUIUlyz?=
- =?us-ascii?Q?KfeDisB9sNoE6CoL4TG/opEoiwEuT7tnDeFftyDztGstqF38K+I6nAC6sEBa?=
- =?us-ascii?Q?b/AAGhkTNYw1RYWcDk9wZgFM2ywqtI+Gwt8vossQikDZPzTlvek8hGu+moX6?=
- =?us-ascii?Q?2CdNrNlSp0qXaQWaUdPcxzDHOzcEblsOfBnty1ucMdzEk6yUu2OZ2SUw+7QS?=
- =?us-ascii?Q?dx6w/Toam9+rOP3DzRxDHM/cuXNZWZ6i0yuf7SQ0Kfu4N6z5sIUq4+hlV52l?=
- =?us-ascii?Q?cYLNhpcHy3rkSudSaMJxCXnGGgcxDSOPLhfWhQRJRca8PPhvTZNVycgzh9Jj?=
- =?us-ascii?Q?Z9DquWTbZRCL8zI3fyMCMcbnqfSHOcQkrSfjtCZCW52KLjHhNQEwBmG9w70p?=
- =?us-ascii?Q?a2WKK5Pap9wK7+nYSHgVOhkOpVDG0Xo9HlfsRZe/VSv9wqjtKdi+C6Fja6FP?=
- =?us-ascii?Q?YcDxEjyKyFJQ9jsar5nfgk56Cwv/Y3Xx88VaMerHZQzkCjHJ1PFI5sJbozE6?=
- =?us-ascii?Q?ahnGdmSZHavpRaY5UUV1nQ+QT3ZivYWYFzlrQcHR2H00R3i9GHBjsR9xGFRk?=
- =?us-ascii?Q?FbKq+HSiOhTIVR+586CRoUi9qSFp4n+QpLbz1MULAmTK79Jy1n7SqZl45yHI?=
- =?us-ascii?Q?aG3+P+mO0HpTS5HUb4PkS3w/SxRYXnytAlXNJWZ7O9HXUXggxQS/9owCUK1l?=
- =?us-ascii?Q?Yi6vLfo0O5VCxwkEj3ZMvIeco2bxtVo=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a86e4ef-bf61-4575-0d40-08debf42832b
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR01MB11835.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2026 18:29:12.4130
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BJjbx3LPvMZIOnEoezNWRXfmuDmPClBrrnoHg5BeX3nbnfKHLIoChbQlOoLGUiXpmx7HPk4lA6ZGntFbHJuPnC6BPvUkxCAsomCOupyIBSo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR01MB11612
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 May 2026 18:29:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127305
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 07:20:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127306
 
-From: J=F6rg Sommer <joerg.sommer@navimatix.de>
+Ignore CVE-2025-14821 as it is only applicable
+for windows.
 
-Signed-off-by: J=F6rg Sommer <joerg.sommer@navimatix.de>
+Reference: [https://security-tracker.debian.org/tracker/CVE-2025-14821]
+
+Signed-off-by: Naman Jain <naman.jain@partner.bmw.de>
 ---
- meta-oe/recipes-security/ssh-audit/ssh-audit_3.3.0.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-oe/recipes-security/ssh-audit/ssh-audit_3.3.0.bb
+ meta-oe/recipes-support/libssh/libssh_0.10.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-security/ssh-audit/ssh-audit_3.3.0.bb b/meta-o=
-e/recipes-security/ssh-audit/ssh-audit_3.3.0.bb
-new file mode 100644
-index 0000000000..634b7e0823
---- /dev/null
-+++ b/meta-oe/recipes-security/ssh-audit/ssh-audit_3.3.0.bb
-@@ -0,0 +1,11 @@
-+SUMMARY =3D "An SSH server and client configuration auditing tool"
-+HOMEPAGE =3D "https://github.com/jtesta/ssh-audit"
-+BUGTRACKER =3D "https://github.com/jtesta/ssh-audit/issues"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D8745b0cfd015df0e3199253390de893=
-5"
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
+index 189305fd2e..5f270eb183 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
++++ b/meta-oe/recipes-support/libssh/libssh_0.10.6.bb
+@@ -46,6 +46,8 @@ PACKAGECONFIG[tests] = "-DUNIT_TESTING=1, -DUNIT_TESTING=0, cmocka"
+ 
+ ARM_INSTRUCTION_SET:armv5 = "arm"
+ 
++CVE_STATUS[CVE-2025-14821] = "not-applicable-platform: The vulnerability is Windows specific"
 +
-+SRC_URI[sha256sum] =3D "b76e36ac9844f45d64986c9f293a4b46766a10412dc29fb43b=
-d52d0f6661a5b0"
-+
-+PYPI_PACKAGE =3D "ssh_audit"
-+
-+inherit pypi python_setuptools_build_meta
---=20
-2.53.0
+ EXTRA_OECMAKE = " \
+     -DWITH_PCAP=1 \
+     -DWITH_SFTP=1 \
+-- 
+2.34.1
 
 
