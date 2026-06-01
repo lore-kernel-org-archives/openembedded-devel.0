@@ -2,71 +2,70 @@ Return-Path: <ecordonnier@snap.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6731DCD5BD1
-	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 08:45:31 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.23918.1780303522057858592
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 997A7CD5BD1
+	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 08:51:11 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.24001.1780303861113386352
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2026 01:45:22 -0700
+ Mon, 01 Jun 2026 01:51:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@snap.com header.s=google header.b=XRs4lY1l;
- spf=pass (domain: snapchat.com, ip: 209.85.128.41, mailfrom: ecordonnier@snapchat.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-490a7629380so10993845e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 01:45:21 -0700 (PDT)
+ dkim=pass header.i=@snap.com header.s=google header.b=LOEVVxvS;
+ spf=pass (domain: snapchat.com, ip: 209.85.128.51, mailfrom: ecordonnier@snapchat.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-490a7876f8cso9389455e9.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 01:51:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=snap.com; s=google; t=1780303520; x=1780908320; darn=lists.openembedded.org;
+        d=snap.com; s=google; t=1780303859; x=1780908659; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VNKpLccThvAora04AQC5cIbuvoBJf9jFOXSK5f8nSCg=;
-        b=XRs4lY1lzA0V3i9b0oGXb3JTYvhWmpwHoYgyGiaRME5kabbbCYVrqz9dFlPTTPssB+
-         fmN5u3WzmVn/IFG0h2DFxOYkuaGWQsJu5R4FYpHeq1rPL+eeb9KTK5gEnDueLWnYfHps
-         qzUXByhPZC6x8Di7xP1q2eAkiRPEi1XiAAJHk=
+        bh=vfHZcCO0GK6jAFdR480F9qFusHL3eE2Lwh5PeBR4MzI=;
+        b=LOEVVxvS1ezeXLbGSSmpAeMC70NXygtTIBIUPxXNEh/gnTMFBQGppQI9pnae1SR9zN
+         NBfCF1YanTYpZBQs25ewMlRicADjdo7wWM8bY05cF7+MlS/DRqv/XoD/3m6tZ80m7c/8
+         y4aXm/iHhaTPF4H4tbQhxLOxyZHPMPn0pBJig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780303520; x=1780908320;
+        d=1e100.net; s=20251104; t=1780303859; x=1780908659;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=VNKpLccThvAora04AQC5cIbuvoBJf9jFOXSK5f8nSCg=;
-        b=JwieBlUv28k0XK7LJU03mx9pBZ2fUSgo5X1p/Z0zulYJXzl3ucyFkECPAuycZkULCi
-         QVfMjGrzgwpG9yXmceOT8DjBkI0/r0tOJ8vTtxsanr8fGoVfWDYxAobVFvb3dX4fjW+e
-         GhfDgA9d8HqRMJbQjJAj3jgqsaNrD9854kHNZap+lys8zTmpYpFK9nuNGzO/m594SmDU
-         3nhU6m0AQr9sUDRkV8949zhZeQ2VRFnXX3mDKJEAwnit3U24R8T+436QR8AZMDeLHuHO
-         D0g5kZkPxgScItRMxJS2lJ2Vo1mGJ4xlwm1XRupw7qIBwcuPa+3bpre3jmxWhVev4FKI
-         H/SA==
-X-Gm-Message-State: AOJu0YzqKPjhbqjd3v7f8JPKcq+eQal2qUslFVQKnX/v43Yki8FoaFdE
-	qmvITwin4sMZoRsDxo8SdvJZct9cqeAI6i+Q+xSn7ACNCQ2AiZzhQ6gpr0N1Y0hZ4sjtY5OrfF8
-	4YY4e6bo=
-X-Gm-Gg: Acq92OHCQkYdsl714aKDrQhrsreiUqc9UbBgnagodJMZIa723Eq9mbLRCQa01qGHjKo
-	zwhqqyv2ZFwyTl2T/YLanYn/kHDX1/Gd8rEV4jaRjlCCO8n5Nf0Tm+WdMoWIWbZM903D4HzMlz9
-	e6j2CfRdxT/6J4nqp/p93E13g0QwP5ql/Y51abPUfyS4Vi0BgSajIMN20tM2WosLprvwiQSYImX
-	EUPovMHs7UrkXRVo8GbzNtyOjfutgzsAT6FZ59d7CkYMs5E8j07XJv0a9uTZTx0YUIWNh98HzoC
-	8nbgZzbk3MPtLepiRIYm1dEk4IHaMR1NvMuH/Rtf+AyceIyZ31/ltABdLR4q6tUKigtqGwR6Sw7
-	7EgooAvJnS0xXCIIVIaYSDs2SoG70IkpNsAuTRe3qJwoQTcUhLP5+xujclU56KJNcX6p5LAMfjU
-	J6spwELIR2thhoN4eUKd2jTtM8m1HSXrs6lcOH1PAE1UrvwZ42LyxYdhbKQpquu1r7U4SezUlWc
-	hyv
-X-Received: by 2002:a05:600c:1d11:b0:48e:8741:fd42 with SMTP id 5b1f17b1804b1-490a291fa6fmr184048595e9.12.1780303518653;
-        Mon, 01 Jun 2026 01:45:18 -0700 (PDT)
+        bh=vfHZcCO0GK6jAFdR480F9qFusHL3eE2Lwh5PeBR4MzI=;
+        b=ZUYbi7498nekPeLpsrIa3hlV4GDN5YFc76/B1gejkjNUEeJ9bi+jgKDzZOyjccB9dY
+         kY4SeUQu6XZw/GNzlVyrQoH7Cg/ffS2eK72n38wxL+EyKaey4mhKQ/5WMMsMqGXxm6mt
+         mbInssGom95zAq060GdrAtIQyGFzgbO9yZYeoxFkfT1e5LDdMlpvE3nVMAF/wcO6pXMM
+         e94x8LD6OHv9sFrRaskq3Q4QtE+4w1Bt71ZF6KUy7gArVRATiipaSeH5P52GJLcMTgh8
+         Gp3s/lM8V2Dn3gpXZBEQHCWvxU7oqzZyXKk0f4bTbMbjU203ZR2xyt2n//9cgJ+TDOfN
+         +sXA==
+X-Gm-Message-State: AOJu0YyznvGgd7QLeuXFVDcOyurpwz52c3u2KHOeNoJFFyClSBxwaSgj
+	lwlV2NjGP8wHYM/X6dcQkSi2nd1SRcLJAuXL+uW8yjqYoByrHOTZ7KaHTj0y8/nhoXZlHsd44/1
+	xiWq3vRE=
+X-Gm-Gg: Acq92OGYdcD211KxkaQrqJeXf4H7wUhR+ygOhuhbQrnCNthW9vr0DiKgmAmQXtskpnb
+	Hxq6lB/tA9UUvqP/Ha3urUst02ClzWDFtJVcbbd4+u8bW1TSR7C5WmFETv8fivnIq19XcXXiRFE
+	T3woULsQ6kcxvF7PozEa71Z/gNMpiGvSCrJuu6ANZxZxtpqwoX1na2lYPk5R+LuM3uytgQSkozC
+	ps4KnAZN/QA+IVxGulr2RN25X4Om97gAe6FS7i48H6Gt0SeTwxYz5M66bnbOuAZq6Go0P96t0N7
+	5A9Pr28USGLUyvWgSBrXr3+efp3IB8smdzrJKUPVTrQUv1GAS0Ta8T6MuGcCzmY/YuxemN7T3vm
+	93aUbkkyqELFfxfh3fvAEO9EiBl2xa7q5cHc5WR/taCVs6AbHHfxNXCrJ7uVcRXR0ZufWAPSQUu
+	laWtUzjqPj/gi3kZg0xOLrLG3c92msFdfHWUA59CRhO93QTmRYWo6lc7TkRWEx1C3tNBC4/b3mf
+	Nzs
+X-Received: by 2002:a05:600c:6004:b0:48f:e230:80a2 with SMTP id 5b1f17b1804b1-490a2966ea0mr133156505e9.32.1780303857989;
+        Mon, 01 Jun 2026 01:50:57 -0700 (PDT)
 Received: from lj8k2dq3.sc-core.net ([62.67.186.33])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4909caa7e17sm249325345e9.9.2026.06.01.01.45.17
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490aeab0955sm6021445e9.4.2026.06.01.01.50.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Jun 2026 01:45:18 -0700 (PDT)
+        Mon, 01 Jun 2026 01:50:57 -0700 (PDT)
 From: ecordonnier@snap.com
 To: openembedded-devel@lists.openembedded.org
-Cc: bot-snapci <bot-snapci@snapchat.com>,
-	Etienne Cordonnier <ecordonnier@snap.com>
+Cc: Etienne Cordonnier <ecordonnier@snap.com>
 Subject: [meta-oe][PATCH] uutils-coreutils: upgrade 0.8.0 -> 0.9.0
-Date: Mon,  1 Jun 2026 10:44:47 +0200
-Message-ID: <20260601084448.1619893-1-ecordonnier@snap.com>
+Date: Mon,  1 Jun 2026 10:50:45 +0200
+Message-ID: <20260601085045.1627231-1-ecordonnier@snap.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 08:45:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127309
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 08:51:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127310
 
-From: bot-snapci <bot-snapci@snapchat.com>
+From: Etienne Cordonnier <ecordonnier@snap.com>
 
 See release notes at https://github.com/uutils/coreutils/releases/tag/0.9.0
 
