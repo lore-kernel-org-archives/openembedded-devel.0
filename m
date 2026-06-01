@@ -2,33 +2,33 @@ Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B903CD5BD1
-	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 12:03:25 +0000 (UTC)
-Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.26898.1780315393453719960
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D037CD6E56
+	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:25 +0000 (UTC)
+Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.27002.1780315701296363229
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2026 05:03:15 -0700
+ Mon, 01 Jun 2026 05:08:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=TfqJTYsK;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-1334352-20260601120309ba9a8b91cd000207a4-pvafko@rts-flowmailer.siemens.com)
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260601120309ba9a8b91cd000207a4
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=Nf5mb3JO;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-1334352-20260601120817b15d9e2714000207f9-zg0tbq@rts-flowmailer.siemens.com)
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20260601120817b15d9e2714000207f9
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 01 Jun 2026 14:03:09 +0200
+        Mon, 01 Jun 2026 14:08:17 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=andrej.kozemcak@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
  bh=voddR+AF4b9UhBvMqtQ5geI3n6PoEQhy/Pdt7VAIL5Y=;
- b=TfqJTYsKo0ErPowhKrD4MlGBV83RCGXgi0DS5cMZbN9p7pjYux1BU1AKcHAK/GcjVHLRqk
- DywDEllwNq7SP16j+4YuCyw6/7ga8XOxzsuV9LS0X0AaNpSpaQPwfGYoEI5daapjJ+gl0+3A
- Ke4+Ms01UxvtYuiZwDQ2AGmYRH1Db04X+LrW2CHYCPzQRdCYy5IUnhrr/mXh2mlDEUyee//b
- wBm17oIJGLFldB61+3ib1KII8tFjTNpeq+bcKD0B3J2QOAjLCHG2E0jp5hnK73rz7YvqOm68
- 2RiiS8yM7agZXcwB3lfycLT7k85Y36WxeAUo9TPUbkmof1ULXrmNQ6pw==;
+ b=Nf5mb3JOLfb37+foUkAPg7lgGCWLmuvoH/61/vS9sdQp2HjXb+ek5F8hR3+hdy6vsQkPd6
+ DwDoNBpsEf7caTReW5OBh4rAjKI/sHbrOPhcSJ+NX4QQuKCv2KoVt6Ifp3cXV1+7vZOK6Hr9
+ vD/+23+OEHFZsV1xi4H/thu+WzNy1VAigoxbqLuczNQwg+ekJYbnCg9cB4KdPwlYLHgL3M2L
+ kbamCABL/V4mZnRfEdj3NmJ1UIRuST7AYQ/s2c0YyiZj2tSbfk+I/NgkNt6rNtYrT27zqDGY
+ 0CeB+RpkPJDiJkkny72CoDrtYQKOxY55W8O+Q47EaLH5YVvRA+JUuGcg==;
 From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][wrynose][PATCH] poco: fix timezone and data time parser issue
-Date: Mon,  1 Jun 2026 14:02:53 +0200
-Message-ID: <20260601120254.6685-1-andrej.kozemcak@siemens.com>
+Subject: [meta-oe][PATCH v2] poco: fix timezone and data time parser issue
+Date: Mon,  1 Jun 2026 14:08:08 +0200
+Message-ID: <20260601120809.7245-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -37,8 +37,8 @@ Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 12:03:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127313
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 12:08:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127314
 
 Patch contains tree patches which was merge to poco at once
 and fix "time" issues
