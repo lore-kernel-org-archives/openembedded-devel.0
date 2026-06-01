@@ -2,33 +2,33 @@ Return-Path: <andrej.kozemcak@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88779CD6E55
-	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 11:45:25 +0000 (UTC)
-Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.26496.1780314321319242024
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B903CD5BD1
+	for <webhook@archiver.kernel.org>; Mon,  1 Jun 2026 12:03:25 +0000 (UTC)
+Received: from mta-65-225.siemens.flowmailer.net (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.26898.1780315393453719960
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2026 04:45:23 -0700
+ Mon, 01 Jun 2026 05:03:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=YQ8DcIPC;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-1334352-202606011145172c8f5d606d0002077e-jgfhms@rts-flowmailer.siemens.com)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202606011145172c8f5d606d0002077e
+ dkim=pass header.i=andrej.kozemcak@siemens.com header.s=fm1 header.b=TfqJTYsK;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.225, mailfrom: fm-1334352-20260601120309ba9a8b91cd000207a4-pvafko@rts-flowmailer.siemens.com)
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id 20260601120309ba9a8b91cd000207a4
         for <openembedded-devel@lists.openembedded.org>;
-        Mon, 01 Jun 2026 13:45:18 +0200
+        Mon, 01 Jun 2026 14:03:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=andrej.kozemcak@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=SIdpCy0Ite0kwdJQ6QvzK0ANckAoVvvZFMUzkL4Xh6s=;
- b=YQ8DcIPCt+MoXOS/dV8O59Zo7Tf/UhaJCKBwIeuWLkCyzmq73ygOqi9ZpI7CF2v0c5Otk+
- osYJOkRjA3FMSDkVgWz4sau5kyi6wpjQJ6cmDXVetW1J4VAdp9uurGmKKT4OBZqPYMm3Uulo
- N5jy9Q0XNxf7b28z+HECXKl4nYuXZo+qeuUVps1idnBm/w5gl8lROsDKHNuM3OW2fLd/pe1z
- U4qXSB9WX4skZZ4UqMT/Ys94Ehk+75sFPdvZch8WK1caYom0h0HH1sY0RNv0C7u6ns600tsj
- 7KXG4GM5r7i34aAE5Foh2vr3NGe3ylutGqCNhcZ89S4PAR+LejxkcW9w==;
+ bh=voddR+AF4b9UhBvMqtQ5geI3n6PoEQhy/Pdt7VAIL5Y=;
+ b=TfqJTYsKo0ErPowhKrD4MlGBV83RCGXgi0DS5cMZbN9p7pjYux1BU1AKcHAK/GcjVHLRqk
+ DywDEllwNq7SP16j+4YuCyw6/7ga8XOxzsuV9LS0X0AaNpSpaQPwfGYoEI5daapjJ+gl0+3A
+ Ke4+Ms01UxvtYuiZwDQ2AGmYRH1Db04X+LrW2CHYCPzQRdCYy5IUnhrr/mXh2mlDEUyee//b
+ wBm17oIJGLFldB61+3ib1KII8tFjTNpeq+bcKD0B3J2QOAjLCHG2E0jp5hnK73rz7YvqOm68
+ 2RiiS8yM7agZXcwB3lfycLT7k85Y36WxeAUo9TPUbkmof1ULXrmNQ6pw==;
 From: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andrej Kozemcak <andrej.kozemcak@siemens.com>
-Subject: [meta-oe][PATCH] poco: fix timezone and data time parser issue
-Date: Mon,  1 Jun 2026 13:45:03 +0200
-Message-ID: <20260601114504.3699-1-andrej.kozemcak@siemens.com>
+Subject: [meta-oe][wrynose][PATCH] poco: fix timezone and data time parser issue
+Date: Mon,  1 Jun 2026 14:02:53 +0200
+Message-ID: <20260601120254.6685-1-andrej.kozemcak@siemens.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -37,9 +37,58 @@ Feedback-ID: 519:519-1334352:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 11:45:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127312
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jun 2026 12:03:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127313
 
+Patch contains tree patches which was merge to poco at once
+and fix "time" issues
+
+1 - fix(Foundation): Timezone: invalidate utcOffset cache when /etc/localtime changes
+
+Poco commit 1850dc16aabf5980a490bb1b66086d6695abb823 introduced a
+TZInfo cache for the UTC offset to avoid repeated tzset() syscalls.
+The cache is invalidated only when the TZ environment variable changes.
+However, the TZ variable is process-local: if a different process (e.g.
+a timezone configuration daemon or an init script) changes the system
+timezone by updating /etc/localtime, the running process is not notified
+and its TZ environment variable remains unchanged.
+
+On systems that switch timezone by updating /etc/localtime (a symlink)
+without touching the TZ env var, the cache is therefore never invalidated
+and Timezone::utcOffset() returns the stale value computed at startup.
+
+Fix by extending cacheTZ()/tzChanged() to also track the inode and
+mtime of /etc/localtime via stat(2).  When either changes the cache is
+considered stale and reloaded, preserving the performance benefit for
+the common case where neither TZ nor /etc/localtime changes between
+calls.
+
+2 - fix(Foundation): DateTimeParser: %S consume optional fractional seconds
+
+Parsing ISO 8601 date strings that contain both fractional seconds and a
+timezone offset (e.g. "2013-10-07T08:23:19.120-04:00") with the format
+"%Y-%m-%dT%H:%M:%S%z" raises a SyntaxException:
+
+  - %S consumes the integer seconds but stops at '.', leaving
+    ".120-04:00" unconsumed.
+  - %z (parseTZD) is called next but sees '.' and returns without
+    consuming anything.
+  - The trailing-garbage check then raises SyntaxException.
+
+Extend the %S case to consume and discard an optional fractional-second
+suffix ('.' or ',' followed by one or more digits) immediately after
+parsing the integer seconds.  This mirrors the existing %s behaviour and
+allows %z to see the timezone designator directly, keeping the
+trailing-garbage check fully effective for truly invalid input.
+
+3 - test(DateTimeParserTest): add ISO8601 fractional seconds parser test
+
+Add testISO8601FracSeconds to verify that DateTimeParser correctly
+handles fractional-second suffixes (dot and comma separated) in
+ISO8601_FORMAT strings, and rejects malformed input such as a
+bare decimal point with no digits.
+
+Signed-off-by: Andrej Kozemcak <andrej.kozemcak@siemens.com>
 ---
  ...er-trailing-timezone-designators-Tim.patch | 240 ++++++++++++++++++
  meta-oe/recipes-support/poco/poco_1.15.2.bb   |   1 +
