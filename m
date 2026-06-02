@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7625CD6E6A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BA3FCD6E67
 	for <webhook@archiver.kernel.org>; Tue,  2 Jun 2026 10:08:34 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.21490.1780394905802162692
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.21218.1780394903928373431
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2026 03:08:26 -0700
+ Tue, 02 Jun 2026 03:08:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=eUjvuM1b;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Asx4JEmQ;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1780394906; x=1811930906;
+  t=1780394904; x=1811930904;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8S0WoFQk09C1FxfSlq2mlX5wBZCL6u5+ygDO8tQDt8c=;
-  b=eUjvuM1b6D8k7c7Ra9SPAVxr2hmoR/7dOYu4PoZx2k1ltFRsTzstdrvn
-   I1ybp4eUVyOOYKUyb4xXhWlwy9UqdTlgz279xxQ2uQJ/J1PIUM6sV/X1D
-   1E00/TaphKGmxObeIG9IxGrUnW4mzryKpZLvvbdq4oEwGdWqq46MBx8Tn
-   M76QLyiAEPAPq9qJlI6WXryrbp+O/bFYiK1xxQS6ggPDDq44xv2B6d8Ci
-   /GWHF5z6B6eaT7Qpyw5NrI2uZncVhJ7OdP6tSW9jNLIa7sk5Jxp/M5m/M
-   ChsvcCLEcWuNNd/5OQF5yIHTz9nV7wsPG+UT9yoJen9irWls9q7JN+9Ac
+  bh=BajaZIqVLtgSjp0ip8GVN/fREr89quIMcYie2tXBwRs=;
+  b=Asx4JEmQs3MOYucSziJCKN12jN1XA/XPKq7/cBHUEgGZsJ11Q99z/imw
+   sN+pB760KH8P2OBS9FzIihJ+GFNgLnKguBgRLUV/pbpAIZo2JGQgybSBX
+   KLDNNwfiQHJE6dBXmUq5RU5fCQZanBvdcpjzNoh0mXLRDqqCWUHAjzYOF
+   luwTj1tA0vqshlO8P39H2LUua/Y77HpESaGBGlIty6OplMj3VO2Kgns8T
+   zjedUjhHzl5pAw5K46kFoXplCmXbAR2CCFxeC40vthykNY9lptCox8HBp
+   AG74/+3PUc16UmmImNhKeIf3O1pS5boQ0+ejeqMAzbtXJXM45hmC6ZoGG
    w==;
-X-CSE-ConnectionGUID: 1A3W7ZiHTW+msT1fHeW1uA==
-X-CSE-MsgGUID: rQpLPgnLTyuIQeE6nriaWg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11804"; a="242743055"
+X-CSE-ConnectionGUID: aJGG2rYkQqSIVBgW1O/liw==
+X-CSE-MsgGUID: /gQiesjFSg2LT3i00oK35w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11804"; a="220405970"
 X-IronPort-AV: E=Sophos;i="6.24,183,1774278000"; 
-   d="scan'208";a="242743055"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jun 2026 19:08:25 +0900
-Received: from az2uksmgm2.o.css.fujitsu.com (unknown [10.151.22.199])
+   d="scan'208";a="220405970"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jun 2026 19:08:22 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 385411002B84
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:24 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 86C311000348
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:22 +0000 (UTC)
 Received: from az2nlsmom2.o.css.fujitsu.com (unknown [10.150.26.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id E33D2181AA54
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:23 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id 3C3491C1C25F
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:22 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id ED8D418005AE;
-	Tue,  2 Jun 2026 10:08:21 +0000 (UTC)
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id D6CEB1800107;
+	Tue,  2 Jun 2026 10:08:19 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-xfce] [PATCH 12/38] libxfce4windowing: upgrade 4.20.5 -> 4.20.6
-Date: Tue,  2 Jun 2026 18:07:28 +0800
-Message-ID: <20260602100755.2117-12-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 11/38] libwacom: upgrade 2.18.0 -> 2.19.0
+Date: Tue,  2 Jun 2026 18:07:27 +0800
+Message-ID: <20260602100755.2117-11-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260602100755.2117-1-wangmy@fujitsu.com>
 References: <20260602100755.2117-1-wangmy@fujitsu.com>
@@ -61,56 +61,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 10:08:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127334
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127333
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=============
-- Add xfw_screen_get_monitor_for_gdk_monitor()
-- Add missing "New in 4.20.6" docs section
-- Add missing chain up to parent class
-- I18n: Update po/LINGUAS list
-- XfwMonitor: Fix (xdg_)output_done event handling
-- XfwMonitor: Fix typo and initialize class member
-- Ignore workarea/workspace count mismatches
-- Fix incorrect max to clamp workspace number to
-- Implement workspace geometry for wayland
-- Add XfwWorkspace:geometry property
-- Fix missing workspace signal connections in test program
-- Add test program to enumerate workspaces
-- Fix X11 workspace geometry and layout getting out of date
-- Fix incorrect col & row ordering for Wayland workspace coordinates
-- Fix width -> height typo for XfwWorkspaceX11 geometry
-- Add fallback monitor on X11 if XRandR doesn't report anything
-- Don't depend on wayland-scanner and wayland-protocols
-- XfwWindowWayland: Connect to XfwScreen::monitor-added
-- XfwWindowWayland: Connect to XfwScreen::monitor-removed
-- Translation Updates:
-  Georgian, Kazakh, Korean, Lao, Russian, Turkish
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...{libxfce4windowing_4.20.5.bb => libxfce4windowing_4.20.6.bb} | 2 +-
+ .../libwacom/{libwacom_2.18.0.bb => libwacom_2.19.0.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/libxfce4windowing/{libxfce4windowing_4.20.5.bb => libxfce4windowing_4.20.6.bb} (90%)
+ rename meta-gnome/recipes-support/libwacom/{libwacom_2.18.0.bb => libwacom_2.19.0.bb} (93%)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.6.bb
-similarity index 90%
-rename from meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb
-rename to meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.6.bb
-index 59374d7947..615367a684 100644
---- a/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.5.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4windowing/libxfce4windowing_4.20.6.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
- DEPENDS = "xfce4-dev-tools-native glib-2.0 gtk+3"
+diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.18.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.19.0.bb
+similarity index 93%
+rename from meta-gnome/recipes-support/libwacom/libwacom_2.18.0.bb
+rename to meta-gnome/recipes-support/libwacom/libwacom_2.19.0.bb
+index 7bbeb5583a..853b035805 100644
+--- a/meta-gnome/recipes-support/libwacom/libwacom_2.18.0.bb
++++ b/meta-gnome/recipes-support/libwacom/libwacom_2.19.0.bb
+@@ -8,7 +8,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
  
- XFCEBASEBUILDCLASS = "meson"
--SRC_URI[sha256sum] = "6b4e19a66db650c9c8a88f00bbf266e9ced0070b7dbc0aaeea05be0fc6a2eb4d"
-+SRC_URI[sha256sum] = "2d06b6a567c965afbca1a51419fc728fd83bd0460e30ab62c34564d5e0aac9e3"
+ SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https;tag=${BP}"
+-SRCREV = "44df53b14b008a8252427aa6b41128efada43b3a"
++SRCREV = "b697d5a70f0e4dd4c18512b38911eebba33a4558"
  
- inherit features_check gobject-introspection gtk-doc xfce vala gettext
- 
+ DEPENDS = " \
+     libxml2-native \
 -- 
 2.43.0
 
