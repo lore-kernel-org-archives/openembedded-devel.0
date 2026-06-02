@@ -1,113 +1,91 @@
-Return-Path: <sudumbha@cisco.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB21CC5DF71
-	for <webhook@archiver.kernel.org>; Tue,  2 Jun 2026 06:41:18 +0000 (UTC)
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.19125.1780382469315890647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD8E6CD6E4A
+	for <webhook@archiver.kernel.org>; Tue,  2 Jun 2026 10:08:03 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.21481.1780394882972472487
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jun 2026 23:41:09 -0700
+ Tue, 02 Jun 2026 03:08:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=hLiO9wgg;
- spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: sudumbha@cisco.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=930; q=dns/txt;
-  s=iport01; t=1780382469; x=1781592069;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=f2hsmWCH6gQ5PX5hKeJYwQDKJo9/iNMhPu1cZe3OAdk=;
-  b=hLiO9wgge7pMKdckMnDAxo02IeMTm5LubrpujzZK+/dB6bMQfLGTlrs4
-   zDSLDswgRF48zHZgtMQHJmqbY9zEUQj0XfqGiHHY5K/tZA8Lc/lFIXgPy
-   DO5vnJ4zUtpP08RrgG4kNPQp5ZcB06POl12TtnnNTCAarFAqT/seZIT5a
-   7YfxV4XNnHcKE3vSVmzXUet06yQYJ/mQGtEInKw12sHYvHmRm9AfrxVlV
-   9WGga+A1C/FhHQ5DQOLA9zzqHPLZws22tdtN+FFSF/zxjUbKv2ii84fiP
-   cDItiQBqq5zu1MqYlAtaKEjkOeNwVBdTUh3zRxihQEhEpByhu27PEHyAs
-   g==;
-X-CSE-ConnectionGUID: 7qAtQetbTy25Gn8LX8U/nw==
-X-CSE-MsgGUID: l3Xl27HsQN6nbl1zQcMZHw==
-X-IPAS-Result: =?us-ascii?q?A0BEAgC6eR5q/5P/Ja1aglmCV3JfQkmUKoIknhuBfg8BA?=
- =?us-ascii?q?QEPPRQEAQGFBgKNMgImNAkOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDYZbAgEDMgEYAT0gMSsrGYMCAYJzAgERsk2CLIEBgygBPwJDUNsoA?=
- =?us-ascii?q?QsUAYE4hT+IHXMBhHsnGxuBcoR9gQWBXAGCLoV3BIIigQyQAUiBHgNZLAFVE?=
- =?us-ascii?q?w0KCwcFgWYDNRIqFW4yHYEjPheBCxsHBYFKgVVqgQSFFSMfAzmBF4F/gStsa?=
- =?us-ascii?q?RADCxgNSBEsNxQbBD5uB4tvFw+CNYEOLASoHqEOCiiDdIwhlToaM6prC5h7j?=
- =?us-ascii?q?gmVZmmEaIFoPIFHCwdwFYMiCUoZD444J4VDx2ckNQI7AQEHAgcOAwuBaJF9A?=
- =?us-ascii?q?QE?=
-IronPort-Data: A9a23:3YIWqKAwSWS+uRVW/3niw5YqxClBgxIJ4kV8jS/XYbTApDIhhmAEz
- WsWXzqPPazeZmLxeop1adix/R8O6pDUzIA1OVdlrnsFo1CmBibm6XV1Cm+qYkt+++WaFBoPA
- /02M4eGdIZvCCeA+n9BC5C5xVFkz6aEW7HgP+DNPyF1VGdMRTwo4f5Zs7ZRbrVA357jX2thh
- fuo+5eBYAH9gmYuWo4pw/vrRC1H7ayaVAww5jTSVdgT1HfCmn8cCo4oJK3ZBxPQXolOE+emc
- P3Ixbe/83mx109F5gSNy+uTnuUiG9Y+DCDW4pZkc/HKbitq+kTe5p0G2M80Mi+7vdkmc+dZk
- 72hvbToIesg0zaldO41C3G0GAkmVUFKFSOuzXWX6aSuI0P6n3TEnOxHEHg7IYck67wqLmce0
- cxIFXcLcUXW7w626OrTpuhEnM8vKozveYgYoHwllGmfBvc9SpeFSKLPjTNa9G5v3YYVQrCEO
- pdfMGYwBPjDS0Un1lM/E48ygeKihnDXeDxDo1XTrq0yi4TW5FAhgOa1b4OLILRmQ+1RxXac/
- D3m5F3fXBcQMIWN8DGgwFKz07qncSTTHdh6+KeD3vlyjVuew2YeBBEbWR63rOe0jma6WslDM
- AoT4icooK04+UCnQ9W7WAe3yENopTYGUNZWVul/4waXx++Nu0CSB3MPSXhKb9lOWNIKeAHGH
- 2Shx7vBbQGDepXMIZ5B3t94dQ+PBBU=
-IronPort-HdrOrdr: A9a23:yMJ+sK0LWM3HJ97kFp+6xwqjBJ4kLtp133Aq2lEZdPUzSL39qy
- nAppomPHPP5Qr5HUtQ+uxoW5PwJE80i6QV3WB5B97LN2PbUSmTXeNfBODZrAEIdReTygck78
- ddWpk7LsHsBl5nisu/ygy5H9E8hOSjysmT9IDjJ7MHd3ASV0mmhD0JbDqmLg==
-X-Talos-CUID: 9a23:Aerii29oo4TWIlri6pGVvxENM9wcf2HX8GaKfmC+WUJZGIDST0DFrQ==
-X-Talos-MUID: =?us-ascii?q?9a23=3A4+2BDgz9d4qf/YiV4g2VbTma4QyaqKD1OERXzrU?=
- =?us-ascii?q?dgu/aMyZ0YiWkhxGFYpByfw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.24,182,1774310400"; 
-   d="scan'208";a="488607162"
-Received: from rcdn-l-core-10.cisco.com ([173.37.255.147])
-  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 02 Jun 2026 06:41:08 +0000
-Received: from sjc-ads-12007.cisco.com (sjc-ads-12007.cisco.com [171.70.97.7])
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ItXFG8O1;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1780394883; x=1811930883;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=nnF0L7cPx34KFjEZgRXD+0tD/R2KfeGhM6UVkyP/RyI=;
+  b=ItXFG8O1QHb8IG6gRw3Bqw+at6Qvt7U2RC3QPkdTuov2ye4BS11xsIXD
+   qnqyWx7qhzjV5r+jLMk22NWF/bBECcZgPcV18r+ZS5v7L7NSez8B8cm0W
+   4vwhUfgbx8y3z6u4BgNC8pBdGzJfEaOHzbIAGPuz+eaZcJRxHdVDvQzUT
+   6k2wmG8jUEv/XGec9e+ZAis29HDtJv5MR8UADv7vavAmO6+fPn9g/PZEY
+   FxPIkQt2H0hZqIduCJhHPE+C7MVzfH+Q0z+7Z5ewL3BhK99tRMC5Gpxem
+   tKdgegROxtb/ivikJJQCNhTmoj1DqhGp2thNmCsnh1zl6mjEBEK+zhDi3
+   Q==;
+X-CSE-ConnectionGUID: 0fkZN7gyTOqy5EljdNhUKg==
+X-CSE-MsgGUID: NUBvE2AmQNuSBHWFVGhOTg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11804"; a="230084871"
+X-IronPort-AV: E=Sophos;i="6.24,183,1774278000"; 
+   d="scan'208";a="230084871"
+Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jun 2026 19:08:01 +0900
+Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-10.cisco.com (Postfix) with ESMTPS id 832C918000273
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 06:41:08 +0000 (GMT)
-Received: by sjc-ads-12007.cisco.com (Postfix, from userid 1840713)
-	id 2FB19CB6A93; Mon,  1 Jun 2026 23:41:08 -0700 (PDT)
-From: "Sudhir Dumbhare -X (sudumbha - E INFOCHIPS PRIVATE LIMITED at Cisco)" <sudumbha@cisco.com>
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 481011002B84
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:01 +0000 (UTC)
+Received: from az2nlsmom2.o.css.fujitsu.com (unknown [10.150.26.200])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id F2FFF14771D5
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jun 2026 10:08:00 +0000 (UTC)
+Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
+	by az2nlsmom2.o.css.fujitsu.com (Postfix) with ESMTP id EE861180051C;
+	Tue,  2 Jun 2026 10:07:58 +0000 (UTC)
+From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][scarthgap][PATCH 2/2] python3-grpcio: set status for CVE-2026-33186
-Date: Mon,  1 Jun 2026 23:39:14 -0700
-Message-Id: <20260602063912.4104825-2-sudumbha@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260602063912.4104825-1-sudumbha@cisco.com>
-References: <20260602063912.4104825-1-sudumbha@cisco.com>
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/38] ctags: upgrade 6.2.20260524.0 -> 6.2.20260531.0
+Date: Tue,  2 Jun 2026 18:07:17 +0800
+Message-ID: <20260602100755.2117-1-wangmy@fujitsu.com>
+X-Mailer: git-send-email 2.49.0.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-12007.cisco.com [171.70.97.7];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.70.97.7, sjc-ads-12007.cisco.com
-X-Outbound-Node: rcdn-l-core-10.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 06:41:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127322
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 10:08:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127323
 
-From: Sudhir Dumbhare <sudumbha@cisco.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-The vulnerability only affects the Go implementation of the library,
-not the Python one. Ignore this CVE due to this.
-
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2026-33186
-
-Signed-off-by: Sudhir Dumbhare <sudumbha@cisco.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../ctags/{ctags_6.2.20260524.0.bb => ctags_6.2.20260531.0.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.2.20260524.0.bb => ctags_6.2.20260531.0.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-index eaa48a5d5c..1c41eff3f0 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-@@ -54,3 +54,5 @@ BBCLASSEXTEND = "native nativesdk"
- CCACHE_DISABLE = "1"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260524.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.2.20260524.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb
+index 93f63526db..195b8b850e 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260524.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- CVE_PRODUCT += "grpc:grpc"
-+
-+CVE_STATUS[CVE-2026-33186] = "cpe-incorrect: the vulnerability affects only the go implementation"
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "4a77f4e9fdbea8350b8d7b145780e2d9027bd083"
++SRCREV = "5a1b5c54579fb749e96918be009a3f5c611d6d03"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
+ 
+ 
 -- 
-2.35.6
+2.43.0
 
 
