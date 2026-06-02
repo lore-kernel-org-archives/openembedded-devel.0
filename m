@@ -2,63 +2,63 @@ Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C872FCD6E60
-	for <webhook@archiver.kernel.org>; Tue,  2 Jun 2026 15:39:04 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.1321.1780414742884867053
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8A6ECD6E60
+	for <webhook@archiver.kernel.org>; Tue,  2 Jun 2026 15:39:14 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.1302.1780414752685278257
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jun 2026 08:39:03 -0700
+ Tue, 02 Jun 2026 08:39:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=O21CdSIi;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-490ac357c55so22257375e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 08:39:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=FRuVdckX;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49068493267so67113315e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 08:39:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780414741; x=1781019541; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1780414751; x=1781019551; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=nwarqPNvn4Z/ywyn626BtrONLcLrTb3fkt+WDahp/j0=;
-        b=O21CdSIiOroAXTISI9iAbBbUPQkkGcZRaKOXyB0S0EnsgCR2x64c5IERzdTqByIstG
-         eUMHaGVO8T/yIE4Q99KVGvHvp5wt8DP2K6phPzLhu+TmFmXqetny7GX5k5xv1UFjMOf1
-         d1a96D7q5u2u7nX5YWTEn7QD75W6EUmvLtB3WlhVKXjQr8V8ml4VCpWcq8oDjwsjp4B5
-         ElUsmy7ALDpj6mC20yB9EUgAMWSgWaAVKIFH8oCz9RPg+ydj2QFSLLl9s74yUBr2kSvI
-         UFeJf0Rnqr5/NSYIBYBOuyl1axRJgb/fEItxnLtBL5LYkV7bm5G/feuBfM1F7Km/tvQy
-         Gg/A==
+        bh=GpBV3TbczOTM/C8CKE861TAVVrPUQVcPRZh7brdHMYQ=;
+        b=FRuVdckXq/9UwTsL2TabaxpBpFg10w3jBYvStonfyJNBHnxCeMc91F+I1GrjBlDd5i
+         nz9Am13Oxr6g/ok6UweWzP5R2VQy7RbaVK6XBk+sJw8hGwmB4+Y8Pfysq67kL9OCPxSd
+         sK52z3ZrapzeUgKbrblWzoVf9/EqlqeqhrU4ZWxhunUobPVu/gQCUGd5GWdU/0Yrfg1K
+         9izaR7aeQ4y+ijBfcabHWoGuQaOznez4XOzdBsO0lHp61Ru+gfcM561l4bUJdex81hQY
+         symwaLP7+oERK0g0JhukQtWmSDr5nnz4U60edvGuEVkacXjvfZsGKhBgZCOK5eVVxHi5
+         RA4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780414741; x=1781019541;
+        d=1e100.net; s=20251104; t=1780414751; x=1781019551;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=nwarqPNvn4Z/ywyn626BtrONLcLrTb3fkt+WDahp/j0=;
-        b=BYye0IzZ7mpMdHGVTtFFqCySXlFcvzaNZLyIWd686q4GkkLcpHL/KAxO88ekbUpATH
-         QFoPCnZZRLNf33QQ8/AUFxsJWvKOyNINuFVDZyFKwlDKblqlxY5eIy3F9tNwuIr3v4Cu
-         +FligByPHUpZli4FgJ5xRF74Cl85IL06KYGzVS+h1YdacVqJvw3mERZEj/PFaXlnKOkd
-         iat7K/d0dv4uztlUWgm1JHVAihsat29i5bsfsfE/roJS2+BH02df9kiuC4zkfGuqRhBz
-         3oBzSYxgT7b4QmYEInQ2jowRK8pMrRHjw4/sgse6Dc1iVhT1WGsPZVi7wFLvzWbG6uuS
-         scgA==
-X-Gm-Message-State: AOJu0YxkVWQgWZW/WpL3EIDw+O6obEwxCh+Yh1CtYttxgLis5QvZedIO
-	gtSpf1Xac8y4HcUZGllkNWySvjFOpyKpshxHWci/VQcl8BwmmGilGbRQNOFjJw==
-X-Gm-Gg: Acq92OHzyFeO82+I0FhNTVroBh4756RB/wzFb+RAC+Xpg1Qx4D1W2Dbsphl6rAC5GA0
-	V9fKvtBRJWOkoFPUxVDfWRb26kaOxEwX0eNyHEgM5dT2TG139+pHTh7wOwKrYLrtOt6q4GgVAyV
-	SFGnMlMiA7tN2D18V+1nFSjrNe9LmDcTSKoqAxFaTBGuM62y9BQcnOc+W9wLFVkFISTsa0sFJ7Q
-	kmd0UNGnmCNhuKicwK0QNfwJ4Af6ZEm5YnaI9M5EGnpQD3/6AuNB2bXu5mp68KBMHBHxygXloSp
-	QJSiVTpby3wzZwUMAoRoeoGS/VemMUZeu8aZm10oKVmsD0lzaOwxvcdVUUwL9EV17iFx3KUAu/L
-	W9lF/dF6PCEMLD7dMLL6rpzMQOiPkpCvEhSh6lrv+Gk7Jrr17BAPCmgMtOSZahpY63pbhCPwslM
-	ivyFXdVA1LvDzj2AVsXEnH6tMUxz0DWwBXjqmDquI4VSaFaSfFtgxQqjmO3KQHG+2SaHlJ8QjCl
-	Sjke8LlLxyY8p/z2iKGWA==
-X-Received: by 2002:a05:600c:3515:b0:490:b355:9c70 with SMTP id 5b1f17b1804b1-490b5058859mr4204895e9.11.1780414741147;
-        Tue, 02 Jun 2026 08:39:01 -0700 (PDT)
+        bh=GpBV3TbczOTM/C8CKE861TAVVrPUQVcPRZh7brdHMYQ=;
+        b=sX3T5rj7zEJ+vUM5ftaCy3HxLwsIISrGNfGuAuMhPYbbAFuBDwc1gDiOT6znF23rn3
+         SecqTba83/6Ewm9GYeVpn/czRcHMxF+Dk1/GGkFGWI8bpIsONSJs668tjplvByBwCKoB
+         Qgsvoh+6baMnmCGgag/oftIHAQfIsORaWUjKTDqmTQNr5TzSr0Q1+sGyw024r3l+Pmvt
+         z33H+WjCHPxAo7FVWhU6dwt2ADME1y86D1KobJBeevBh33UfXc9Eb7R2Plrb4XzhZpcT
+         5piPr6ks72HcTrat5lGau5IFqHiZ/4ScxHqQ8myDxOkTCsrHswPOZhTix1BoMlI2xSwF
+         SsmA==
+X-Gm-Message-State: AOJu0YxuMQAS0M2XwPWjGQHGAuQjpjFa+hZq5HA3ZFIaNKSlpSZfTBOF
+	njlYZO6vHiAAJ+9aH+uc6t6VgBfVy25EmfVwSyNK0zUn55y4kNDJfZD25a7L1Q==
+X-Gm-Gg: Acq92OG5GVSrtaJagMmYpDxUaHT64MvkF4Ot5CQxiQQWIvsry2hWPC/goNBpbHf1g1D
+	F4jCtvu7v3TrFWmdAVs3KdOWiaHjlENs1lITe0kzg/pd4AVLK4takE1XPDBYAr7/yEYVbpvUyZB
+	1SWM489Z/O9pL74pYCdC+XAFc2Pt3QAbEjUyIbHcMnVeauGSnNdvhvJbKIMi3nFP4ubn7E9UitW
+	QzLIYoLbq2eieqyrbt+sq1qFG0cC7Uah9VCzT+ZHFLAHAK8OBqCRJYmUmbbknyzZjdz2IERW7Xx
+	6TYhD/AmMJQgN29iGSBMBlVeblQK2M4Jlo+kPN0ZGYepEXZBmGuysk0xQohcv/5V+gCMpUqpVJv
+	3TAv63qijjSNBTXPW4VGdK1ooU2g1iyFPFW2gq4PFl/CXyswfFuAZIseIp5kjMtwsFmcT5W+/3m
+	kyPMBpx3H5MRqKdM1xPrLhpbHH9aZyERrgxyWh7Y00zapxprlvM5oPxbc36tYsr13S3ZQlTFYZC
+	jf6SzFt5+5W+fIO6nZWDw==
+X-Received: by 2002:a05:600c:4e52:b0:490:9d1b:f086 with SMTP id 5b1f17b1804b1-490b50801b0mr4623345e9.14.1780414751024;
+        Tue, 02 Jun 2026 08:39:11 -0700 (PDT)
 Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b0e3431bsm70154115e9.12.2026.06.02.08.39.00
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490b0e3431bsm70154115e9.12.2026.06.02.08.39.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jun 2026 08:39:00 -0700 (PDT)
+        Tue, 02 Jun 2026 08:39:10 -0700 (PDT)
 From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH 2/3] mdns: Unpick directory changes during install
-Date: Tue,  2 Jun 2026 16:35:50 +0100
-Message-ID: <20260602153548.97549-5-alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH 3/3] mdns: Add additional clients
+Date: Tue,  2 Jun 2026 16:35:52 +0100
+Message-ID: <20260602153548.97549-7-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260602153548.97549-3-alex.kiernan@gmail.com>
 References: <20260602153548.97549-3-alex.kiernan@gmail.com>
@@ -67,82 +67,49 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 15:39:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127367
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jun 2026 15:39:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127368
 
-Be explicit about where we're taking the installation pieces from rather than
-having the complexity of mixed build/source pieces based on current directory
-and then confusing anyone who tries to append to do_install.
+Several useful clients are available as part of the overall mDNSResponder
+build, package these alongside the main binary.
 
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- .../mdns/mdns_2881.100.56.0.1.bb              | 44 ++++++++-----------
- 1 file changed, 19 insertions(+), 25 deletions(-)
+ .../recipes-protocols/mdns/mdns_2881.100.56.0.1.bb    | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/meta-networking/recipes-protocols/mdns/mdns_2881.100.56.0.1.bb b/meta-networking/recipes-protocols/mdns/mdns_2881.100.56.0.1.bb
-index 3950ee666fc4..391c4898fb47 100644
+index 391c4898fb47..4bbf012b832e 100644
 --- a/meta-networking/recipes-protocols/mdns/mdns_2881.100.56.0.1.bb
 +++ b/meta-networking/recipes-protocols/mdns/mdns_2881.100.56.0.1.bb
-@@ -66,42 +66,36 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- MDNS_BUILDDIR = "build/${@bb.utils.contains('PACKAGECONFIG','debug','debug','prod', d)}"
+@@ -77,6 +77,10 @@ do_install () {
+ 	install -d ${D}${INIT_D_DIR}
  
- do_install () {
--	cd mDNSPosix
--
-+	install -d ${D}${bindir}
-+	install -d ${D}${includedir}
-+	install -d ${D}${libdir}
-+	install -d ${D}${mandir}/man5
-+	install -d ${D}${mandir}/man8
- 	install -d ${D}${sbindir}
--	install ${MDNS_BUILDDIR}/mdnsd ${D}${sbindir}
-+	install -d ${D}${sysconfdir}
-+	install -d ${D}${systemd_system_unitdir}
-+	install -d ${D}${INIT_D_DIR}
+ 	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mdnsd ${D}${sbindir}
++	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSClientPosix ${D}${bindir}
++	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSNetMonitor ${D}${bindir}
++	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSProxyResponderPosix ${D}${bindir}
++	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mDNSResponderPosix ${D}${bindir}
  
--	install -d ${D}${libdir}
--	install -m 0644 ${MDNS_BUILDDIR}/libdns_sd.so ${D}${libdir}/libdns_sd.so.1
--	ln -s libdns_sd.so.1 ${D}${libdir}/libdns_sd.so
-+	install ${B}/mDNSPosix/${MDNS_BUILDDIR}/mdnsd ${D}${sbindir}
+ 	install -m 0644 ${B}/mDNSPosix/${MDNS_BUILDDIR}/libdns_sd.so ${D}${libdir}/libdns_sd.so.1
+ 	ln -s libdns_sd.so.1 ${D}${libdir}/libdns_sd.so
+@@ -117,7 +121,7 @@ pkg_prerm:${PN}-libnss-mdns () {
+ SYSTEMD_SERVICE:${PN} = "mdns.service"
+ INITSCRIPT_NAME = "mdns"
  
--	install -d ${D}${includedir}
--	install -m 0644 ../mDNSShared/dns_sd.h ${D}${includedir}
-+	install -m 0644 ${B}/mDNSPosix/${MDNS_BUILDDIR}/libdns_sd.so ${D}${libdir}/libdns_sd.so.1
-+	ln -s libdns_sd.so.1 ${D}${libdir}/libdns_sd.so
+-PACKAGE_BEFORE_PN = "${PN}-libnss-mdns"
++PACKAGE_BEFORE_PN = "${PN}-libnss-mdns ${PN}-clients"
  
--	install -d ${D}${mandir}/man8
--	install -m 0644 ../mDNSShared/mDNSResponder.8 ${D}${mandir}/man8/mdnsd.8
-+	install -m 0644 ${B}/mDNSShared/dns_sd.h ${D}${includedir}
-+	install -m 0644 ${B}/mDNSShared/mDNSResponder.8 ${D}${mandir}/man8/mdnsd.8
+ RRECOMMENDS:${PN}:append:libc-glibc = " ${PN}-libnss-mdns"
  
--	install -d ${D}${bindir}
--	install -m 0755 ../Clients/build/dns-sd ${D}${bindir}
-+	install -m 0755 ${B}/Clients/build/dns-sd ${D}${bindir}
+@@ -125,4 +129,9 @@ FILES_SOLIBSDEV = "${libdir}/libdns_sd.so"
+ FILES:${PN}-libnss-mdns = "${sysconfdir}/nss_mdns.conf ${libdir}/libnss_mdns*.so*"
+ RPROVIDES:${PN}-libnss-mdns = "libnss-mdns"
  
--	install -d ${D}${libdir}
--	oe_libinstall -C ${MDNS_BUILDDIR} -so libnss_mdns-0.2 ${D}${libdir}
-+	oe_libinstall -C ${B}/mDNSPosix/${MDNS_BUILDDIR} -so libnss_mdns-0.2 ${D}${libdir}
- 	ln -s libnss_mdns-0.2.so ${D}${libdir}/libnss_mdns.so.2
- 
--	install -d ${D}${sysconfdir}
--	install -m 0644 nss_mdns.conf ${D}${sysconfdir}
-+	install -m 0644 ${B}/mDNSPosix/nss_mdns.conf ${D}${sysconfdir}
-+	install -m 0644 ${B}/mDNSPosix/nss_mdns.conf.5 ${D}${mandir}/man5
-+	install -m 0644 ${B}/mDNSPosix/libnss_mdns.8 ${D}${mandir}/man8
- 
--	install -d ${D}${mandir}/man5
--	install -m 0644 nss_mdns.conf.5 ${D}${mandir}/man5
--
--	install -d ${D}${mandir}/man8
--	install -m 0644 libnss_mdns.8 ${D}${mandir}/man8
--
--	install -d ${D}${systemd_system_unitdir}
- 	install -m 0644 ${UNPACKDIR}/mdns.service ${D}${systemd_system_unitdir}
- 
--	install -d ${D}${INIT_D_DIR}
--	install mdnsd.sh ${D}${INIT_D_DIR}/mdns
-+	install ${B}/mDNSPosix/mdnsd.sh ${D}${INIT_D_DIR}/mdns
- }
- 
- pkg_postinst:${PN}-libnss-mdns () {
++FILES:${PN}-clients = "${bindir}/mDNSClientPosix \
++                       ${bindir}/mDNSNetMonitor \
++                       ${bindir}/mDNSProxyResponderPosix \
++                       ${bindir}/mDNSResponderPosix"
++
+ RPROVIDES:${PN} += "libdns-sd"
 
