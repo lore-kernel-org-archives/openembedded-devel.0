@@ -2,149 +2,197 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8003ACD6E55
-	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 21:07:13 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.30603.1780520831184806558
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2932BCD6E55
+	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 21:54:45 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.31461.1780523683062317611
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2026 14:07:11 -0700
+ Wed, 03 Jun 2026 14:54:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=JMt/KDHV;
- spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout11.t-online.de (Postfix) with SMTP id CBC681CAE2
-	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Jun 2026 23:07:08 +0200 (CEST)
-Received: from fedora.fritz.box ([84.154.172.112]) by fwd79.t-online.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=f_l_k@t-online.de header.s=20260216 header.b=Mwb+mKQK;
+ spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout09.t-online.de (Postfix) with SMTP id 096FF380CA
+	for <openembedded-devel@lists.openembedded.org>; Wed,  3 Jun 2026 23:54:40 +0200 (CEST)
+Received: from fedora.fritz.box ([84.154.172.112]) by fwd83.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wUsnr-3RRniT0; Wed, 3 Jun 2026 23:07:07 +0200
+	esmtp id 1wUtXq-10JmCH0; Wed, 3 Jun 2026 23:54:38 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: update 1.6.5 -> 1.6.6
-Date: Wed,  3 Jun 2026 23:07:00 +0200
-Message-ID: <20260603210700.55840-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] libsdl2-net: remove backport patch
+Date: Wed,  3 Jun 2026 23:54:27 +0200
+Message-ID: <20260603215427.319623-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1780520827-57FFD426-272BCE23/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5f22c3d0-5eff-411c-b611-adb6ade4f34d
+X-TOI-EXPURGATEID: 150726::1780523678-71FF9408-037BB4B0/0/0 CLEAN NORMAL
+X-TOI-MSGID: 040fda62-40ae-4a43-8771-63606490406b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1780520828; i=f_l_k@t-online.de;
-	bh=HUwPBQDZzUJ3Oo+sihdyKsC1RZb9AdUz4vf9LkfmqEQ=;
+	s=20260216; t=1780523679; i=f_l_k@t-online.de;
+	bh=9cwrxHtl8V7OgZNbnfTUr5jLrSWEnkg9jGqBCWg8ptI=;
 	h=From:To:Subject:Date;
-	b=JMt/KDHVRqtCKPdAqql2AHoTRms+Sw5nlj0bA24OD8+UXHlAnUJqCkY5TwU6/cvxS
-	 YCP/ggQ9imsoYOX5pKtl2ROue81YNqyCsIwEiokVzHQWxdeMdEJYErOw9pamYDSFMm
-	 LCH0tAVil0Zl9pkcCkRlDnKzTrdGYFWgKgWfKiAO+Iqvahow35mXqlrZ72fmL8Fw74
-	 rZKUXCxtGPCBuq24Nqv+Xnyr7wZ7xVFSF+3E1C04oTRWoB94SJ5irqBOjHyHqi8p2o
-	 2lXnURUox6vrK7A7dVaLCnKvr88+mxAjjHeUSv/pAIQf6apZRRNKnGnDPzppcneJmL
-	 NeL2VOqrx9OfA==
+	b=Mwb+mKQKVe8S36kvZ0dwHON2QPAQCYmv4+pJIwccHodUeAm0MbPGSoGw2NYPC1T0K
+	 41hfP+jCYH/H3Yvp92ghqS8rXeKXM7Gzqc0YDMaTLw2wM3kArxj5qhiKrcwggq/E5B
+	 X94b8w0/iclAmvPaybluPIqQsqafI5+4IrXRkK8PmSThZZSgs6GV/IxauAPBPAF7A5
+	 9AZHzkCRg7pQYzo04ZImmHOtfG0PwF3B8ziVz1uNelwZODBg76Xi3AayQcLRtJmLFp
+	 PsydGBEYp+z6vViUWWyq2JFvuYXbhEqfsf3Bb9AWn6YXVZ/cR6G2spjZXD/+cf3fFW
+	 td5BiUz3eWucw==
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 21:07:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127388
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 21:54:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127389
 
-- ncurses is not a required dependency -> make it a PACKAGECONFIG
+Currently build fails with:
 
-PipeWire 1.6.6 (2026-05-26)
+Hunk #1 FAILED at 204.
+1 out of 1 hunk FAILED -- rejects in file CMakeLists.txt
+Patch 0001-cmake-always-install-SDL2_net.pc.patch does not apply (enforce=
+ with -f)
 
-This is a bugfix release that is API and ABI compatible with the previous
-1.6.x releases.
-
-Highlights
-  - Fix a bug in the server code that could leave snap clients without
-    sound. (#5270)
-  - Relax LADSPA path loading again, absolute paths are only blocked in
-    unsafe cases.
-  - Fix a volume restore issue in filter-graph when using custom volume
-    controls.
-  - Small fixes and improvements.
-
-PipeWire
-  - Fix the meta permission check on metadata.
-  - Make sure we don't accept too many fds.
-  - Fix potential race with buffer allocation and Suspend. (#3547)
-
-SPA
-  - Relax LADSPA path loading. Absolute paths are allowed when loading
-    modules from a config file. They are now only blocked when loading
-    the pulse ladspa modules and filter-chains in nodes because those
-    can load ladspa plugins in other processes. (#5222)
-  - Fix a regression in the dither noise that was silent when no input
-    was available. (#5260)
-  - Fix volume initialization in filter-graph. (#5192)
-
-Pulse-server
-  - Fix a bug in the server code that could leave snap clients without
-    sound. (#5270)
-  - Be more careful with the stream suspend messages and only send them
-    when the stream is monitoring. (#5273)
-  - Fix monitor mode in pavucontrol.
-
-Tools
-  - Fix midifile SysEx writing in pw-cat and ensure the header is written
-    correctly on close.
-  - Make sure pw-cat does not try to convert Midi to UMP.
+Remove the patch
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../pipewire/{pipewire_1.6.5.bb =3D> pipewire_1.6.6.bb}     | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.6.5.bb =3D=
-> pipewire_1.6.6.bb} (99%)
+ ...001-cmake-always-install-SDL2_net.pc.patch | 93 -------------------
+ .../libsdl/libsdl2-net_2.4.0.bb               |  4 +-
+ 2 files changed, 1 insertion(+), 96 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/libsdl/libsdl2-net/0001-cmak=
+e-always-install-SDL2_net.pc.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.5.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.5.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.bb
-index 5d610f5172..c8631904ff 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.5.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.6.6.bb
-@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM =3D " \
-     file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931c1a \
- "
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-net/0001-cmake-alway=
+s-install-SDL2_net.pc.patch b/meta-oe/recipes-graphics/libsdl/libsdl2-net=
+/0001-cmake-always-install-SDL2_net.pc.patch
+deleted file mode 100644
+index 0a717a60ae..0000000000
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-net/0001-cmake-always-insta=
+ll-SDL2_net.pc.patch
++++ /dev/null
+@@ -1,93 +0,0 @@
+-From 6aceea847131f8ee208d8b8adec336fafcf30d48 Mon Sep 17 00:00:00 2001
+-From: Anonymous Maarten <anonymous.maarten@gmail.com>
+-Date: Wed, 31 Aug 2022 15:15:43 +0200
+-Subject: [PATCH] cmake: always install SDL2_net.pc
+-
+-Upstream-Status: Backport [https://github.com/libsdl-org/SDL_net/commit/=
+fb8031364ad852d51faf5b64040440857f5e8f26]
+-
+-Signed-off-by: Mark Jonas <toertel@gmail.com>
+----
+- CMakeLists.txt | 67 ++++++++++++++++++++++++++++----------------------
+- 1 file changed, 37 insertions(+), 30 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index bf30a70..c34e3f0 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -204,39 +204,46 @@ if(SDL2NET_INSTALL)
+-         COMPONENT devel
+-     )
+-
+--    if(SDL2NET_BUILD_SHARED_LIBS)
+--        # Only create a .pc file for a shared SDL2_net
+--        set(prefix "${CMAKE_INSTALL_PREFIX}")
+--        set(exec_prefix "\${prefix}")
+--        set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
+--        set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+--        set(PACKAGE "${PROJECT_NAME}")
+--        set(VERSION "${FULL_VERSION}")
+--        set(SDL_VERSION "${SDL_REQUIRED_VERSION}")
+--        string(JOIN " " PC_REQUIRES ${PC_REQUIRES})
+--        string(JOIN " " PC_LIBS ${PC_LIBS})
+--        configure_file("${PROJECT_SOURCE_DIR}/SDL2_net.pc.in" "${CMAKE_=
+CURRENT_BINARY_DIR}/SDL2_net.pc.intermediate" @ONLY)
+--        file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/SDL2_net-$<CO=
+NFIG>.pc" INPUT "${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc.intermediate")
+--
+--        set(PC_DESTDIR)
+--        if(CMAKE_SYSTEM_NAME MATCHES FreeBSD)
+--            # FreeBSD uses ${PREFIX}/libdata/pkgconfig
+--            set(PC_DESTDIR "libdata/pkgconfig")
+-+        if(SDL2NET_BUILD_SHARED_LIBS)
+-+            set(ENABLE_SHARED_TRUE "")
+-+            set(ENABLE_SHARED_FALSE "#")
+-+            set(ENABLE_STATIC_TRUE "#")
+-+            set(ENABLE_STATIC_FALSE "")
+-         else()
+--            set(PC_DESTDIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+-+            set(ENABLE_SHARED_TRUE "#")
+-+            set(ENABLE_SHARED_FALSE "")
+-+            set(ENABLE_STATIC_TRUE "")
+-+            set(ENABLE_STATIC_FALSE "#")
+-         endif()
+--        # Only install a SDL2_net.pc file in Release mode
+--        install(CODE "
+--            if(CMAKE_INSTALL_CONFIG_NAME MATCHES \"Release\")
+--                # FIXME: use file(COPY_FILE) if minimum CMake version >=
+=3D 3.21
+--                execute_process(COMMAND \"\${CMAKE_COMMAND}\" -E copy_i=
+f_different
+--                    \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net-$<CONFIG>.pc=
+\"
+--                    \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc\")
+--                file(INSTALL DESTINATION \"\${CMAKE_INSTALL_PREFIX}/${P=
+C_DESTDIR}\"
+--                    TYPE FILE
+--                    FILES \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc\")
+--            endif()" COMPONENT devel)
+-+
+-+    set(prefix "${CMAKE_INSTALL_PREFIX}")
+-+    set(exec_prefix "\${prefix}")
+-+    set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
+-+    set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+-+    set(PACKAGE "${PROJECT_NAME}")
+-+    set(VERSION "${FULL_VERSION}")
+-+    set(SDL_VERSION "${SDL_REQUIRED_VERSION}")
+-+    string(JOIN " " PC_REQUIRES ${PC_REQUIRES})
+-+    string(JOIN " " PC_LIBS ${PC_LIBS})
+-+    configure_file("${PROJECT_SOURCE_DIR}/SDL2_net.pc.in" "${CMAKE_CURR=
+ENT_BINARY_DIR}/SDL2_net.pc.intermediate" @ONLY)
+-+    file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/SDL2_net-$<CONFIG=
+>.pc" INPUT "${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc.intermediate")
+-+
+-+    set(PC_DESTDIR)
+-+    if(CMAKE_SYSTEM_NAME MATCHES FreeBSD)
+-+        # FreeBSD uses ${PREFIX}/libdata/pkgconfig
+-+        set(PC_DESTDIR "libdata/pkgconfig")
+-+    else()
+-+        set(PC_DESTDIR "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+-     endif()
+-+    # Always install SDL2_net.pc: libraries might be different between =
+config modes
+-+    install(CODE "
+-+        # FIXME: use file(COPY_FILE) if minimum CMake version >=3D 3.21
+-+        execute_process(COMMAND \"\${CMAKE_COMMAND}\" -E copy_if_differ=
+ent
+-+            \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net-$<CONFIG>.pc\"
+-+            \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc\")
+-+        file(INSTALL DESTINATION \"\${CMAKE_INSTALL_PREFIX}/${PC_DESTDI=
+R}\"
+-+            TYPE FILE
+-+            FILES \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_net.pc\")" COMPONE=
+NT devel)
+-
+-     if(SDL2NET_BUILD_SHARED_LIBS AND (APPLE OR (UNIX AND NOT ANDROID)))
+-         install(
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.4.0.bb b/meta-=
+oe/recipes-graphics/libsdl/libsdl2-net_2.4.0.bb
+index dbaf35ff38..abdfd94122 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.4.0.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-net_2.4.0.bb
+@@ -4,9 +4,7 @@ LICENSE =3D "Zlib"
+ LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D036a54229112040a743509a86=
+b30c80c"
 =20
--DEPENDS =3D "dbus ncurses"
-+DEPENDS =3D "dbus"
-=20
--SRCREV =3D "55848f4260a2d2302f9f6bd304d82616976ef9af"
-+SRCREV =3D "a1c1d9f9f128ec987f23a0140a1704b8f8781787"
- BRANCH =3D "${@oe.utils.trim_version('${PV}', 2)}"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-${BRANCH};protocol=3Dhttps;tag=3D${PV}"
- SRC_URI +=3D "file://0002-spa-plugins-alsa-acp-compat.h-p-is-already-con=
-st-do-.patch"
-@@ -91,7 +91,8 @@ PACKAGECONFIG:class-target ??=3D " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-=
-system-service systemd-user-service', '', d)} \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} =
+ SRC_URI =3D " \
+-  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz =
 \
-     ${PIPEWIRE_SESSION_MANAGER} \
--    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw=
--cat raop sndfile v4l2 udev volume webrtc-echo-cancelling libcamera readl=
-ine \
-+    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw=
--cat raop sndfile v4l2 udev volume webrtc-echo-cancelling \
-+    libcamera readline ncurses \
- "
+-  file://0001-cmake-always-install-SDL2_net.pc.patch \
+-"
++  https://www.libsdl.org/projects/SDL_net/release/SDL2_net-${PV}.tar.gz"
+ S =3D "${UNPACKDIR}/SDL2_net-${PV}"
 =20
- # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
-@@ -121,6 +122,7 @@ PACKAGECONFIG[libcamera] =3D "-Dlibcamera=3Denabled,-=
-Dlibcamera=3Ddisabled,libcamera l
- PACKAGECONFIG[libcanberra] =3D "-Dlibcanberra=3Denabled,-Dlibcanberra=3D=
-disabled,libcanberra"
- PACKAGECONFIG[libusb] =3D "-Dlibusb=3Denabled,-Dlibusb=3Ddisabled,libusb=
-"
- PACKAGECONFIG[media-session] =3D ",,,pipewire-media-session,,wireplumber=
-"
-+PACKAGECONFIG[ncurses] =3D ",,ncurses"
- PACKAGECONFIG[pulseaudio] =3D "-Dlibpulse=3Denabled,-Dlibpulse=3Ddisable=
-d,pulseaudio,,${MLPREFIX}pipewire-pulse"
- PACKAGECONFIG[pipewire-alsa] =3D "-Dpipewire-alsa=3Denabled,-Dpipewire-a=
-lsa=3Ddisabled,alsa-lib"
- PACKAGECONFIG[pipewire-jack] =3D "-Dpipewire-jack=3Denabled -Dlibjack-pa=
-th=3D${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=3Ddisabled,jack,,=
-${MLPREFIX}pipewire-jack,jack"
+ inherit cmake pkgconfig
 --=20
 2.54.0
 
