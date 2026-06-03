@@ -1,154 +1,172 @@
-Return-Path: <ankur.tyagi85@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21046CD6E55
-	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 09:42:38 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.16200.1780479742586552334
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E942CD6E55
+	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 12:00:39 +0000 (UTC)
+Received: from outbound8.mail.transip.nl (outbound8.mail.transip.nl [136.144.136.8])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.16897.1780483203136787275
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2026 02:42:22 -0700
+ Wed, 03 Jun 2026 03:40:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=isfQ3eFG;
- spf=pass (domain: gmail.com, ip: 209.85.216.45, mailfrom: ankur.tyagi85@gmail.com)
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-36c68964315so2411308a91.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 02:42:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780479742; x=1781084542; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BCHzXw4QdKgiMX3dtpdl7AqYAdzx/GgrWrZJ/Hl4VwM=;
-        b=isfQ3eFGQ2DcE0D/CHNB8Xl6jJEbtw0I+tdUS9J5yV1yQD4KFMj0gjqAcijA2HVJWF
-         I9CKRkELQgX7HPEXvRE62CK1yQ2Ijm2df3M3XsX6EJ5zE+5o2JuctoS+Y/yxy7rJ/eX1
-         ExAk53ckNXjhca0NuYkcfQ5vm3ClTHoinv3J6X+r75RxKJFGQJJ9mGZv4hTORq4ZKLSo
-         WmOzNgwBpmXZ0dnm02DHVvDrE3TF1NFBtWhkDPE/hCtAEk6PYEUdnuNjV18/GQKscWmA
-         HatLXR/JpdWWxzzLAN7Qv2Ar0+1hRy7A1CeZn0plLj+lOKZNEFZjHo7Ye608J2YbfPms
-         d5uA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780479742; x=1781084542;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=BCHzXw4QdKgiMX3dtpdl7AqYAdzx/GgrWrZJ/Hl4VwM=;
-        b=FKkpGv6sW1O1PXsRnhPLHOX/K2CuYW0kDMHRDtGqBfXVlEpTLAWgk3wzsLM/aFv6tK
-         FjqfG8YS9tKJyiMTEpd/aZk8g/k8y0FBr23bV/rDy23ykr7B5aIXgWrUn5RQUNpRZFbI
-         gIv3Z5/42UeDqxANxeIx+zRgN9tDyeWrf4q/VJhuE59mckl7KehkQppqOJ5AxJqfLrWI
-         GdSLjXv2x1zRGwIWmLO8RxYeZeGHOMJmPdRLcRMpo0RjusUVQGuCoT4aXZFBZROhlJ/h
-         ey46vwAh5H8GW5WHAQse3fs7bKzI2Gf91k7iA08tnUoexu1/Y71syKEkijk3qAysQRxa
-         W1fw==
-X-Gm-Message-State: AOJu0YxDhZPquXcfqE+TSXgkneHoj6E4nGbmdw6+UCHKl/F0p/kSp8tv
-	ChQaQSdKvHMMGVVj3fv27fQ+f6Kc3g8sByLXB/3tubfEhj+B9MDLwnydZGmDsg==
-X-Gm-Gg: Acq92OHFDPnFSRnGVrwYOAM2H5+qXsvr6O0voa1aY1hQpolFilL1TCiT0sxoVTIZ42l
-	8x7IJgmsvolgqCv+870TRMGOtAu3kPd0zsTUe6m9cO5U3WJNrd0oTGdeWeUbyG0Oy3CYZAHBHw2
-	gDDV4MCu2wI1sqvlQftLfCdPC7IwtaomfRZ+01QLrXD9xZbOG+4bVmiNLw3vH1HgAUTIvtBCP6R
-	o1nHJLLkFKCb7/q0sYHdPkCex9AiGabOv5vr3tD4LDAK4xro6o9eMInlBvdrnY2Y2vAYaXxg8BX
-	yuQ/OCw6GQgs32rT9nKeE0Dt7VRh8HkcLK+UedrPKyJUSH4khayuCVNaExJ1UB3EuhEeAWuHLif
-	BdBOYKXYquDwTdXcxAj3M8pChN6BDK19h7AXI/STsy9ZpuwfFzyQ/2H3cOpV2vD8KyDQWPnFjyz
-	htVzKWsl8R3dFbvu+zlbLe8EElalMnJo6HUuQUC2RoZuod4JY=
-X-Received: by 2002:a17:902:d592:b0:2bd:a529:4b5e with SMTP id d9443c01a7336-2c1644dc8f7mr26756705ad.41.1780479741867;
-        Wed, 03 Jun 2026 02:42:21 -0700 (PDT)
-Received: from NVAPF55DW0D-IPD.. ([203.211.105.153])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2c16609e627sm19660035ad.52.2026.06.03.02.42.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jun 2026 02:42:21 -0700 (PDT)
-From: ankur.tyagi85@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Subject: [oe][meta-oe][scarthgap][PATCH 3/3] redis: upgrade 7.2.12 -> 7.2.14
-Date: Wed,  3 Jun 2026 21:42:07 +1200
-Message-ID: <20260603094207.218632-3-ankur.tyagi85@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260603094207.218632-1-ankur.tyagi85@gmail.com>
-References: <20260603094207.218632-1-ankur.tyagi85@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=ZEW3K4KD;
+ spf=pass (domain: myspectrum.nl, ip: 136.144.136.8, mailfrom: jeroen@myspectrum.nl)
+Received: from submission6.mail.transip.nl (unknown [10.103.8.157])
+	by outbound8.mail.transip.nl (Postfix) with ESMTP id 4gVkjX1d47zY76j6;
+	Wed,  3 Jun 2026 12:40:00 +0200 (CEST)
+Received: from yellow.myspectrum.nl (unknown [IPv6:2a01:7c8:bb0c:45:5054:ff:fe01:854])
+	by submission6.mail.transip.nl (Postfix) with ESMTPSA id 4gVkjW5NfCz3ZVDrh;
+	Wed,  3 Jun 2026 12:39:59 +0200 (CEST)
+Received: from [192.168.178.17] (212-204-162-136.cable.dynamic.v4.ziggo.nl [212.204.162.136])
+	(Authenticated sender: jeroen@myspectrum.nl)
+	by yellow.myspectrum.nl (Postfix) with ESMTPSA id EBE0C20144;
+	Wed,  3 Jun 2026 10:39:58 +0000 (UTC)
+Authentication-Results: yellow.myspectrum.nl;
+	auth=pass smtp.auth=jeroen@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
+Message-ID: <194e3c6b-3c34-4cdb-a0dd-f168374888e9@myspectrum.nl>
+Date: Wed, 3 Jun 2026 12:39:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] gd: fix build with gcc 16
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20260530081837.2192126-1-f_l_k@t-online.de>
+ <cdc55fbc-4ea9-452d-93cc-2eec2fd1a8c7@myspectrum.nl>
+ <4651ae38-19f8-4b7e-95da-19cbaf3b7bf7@myspectrum.nl>
+ <RUR1GT.7FBB4YSJA2AH1@t-online.de>
+From: "Jeroen Hofstee" <jeroen@myspectrum.nl>
+In-Reply-To: <RUR1GT.7FBB4YSJA2AH1@t-online.de>
+X-Scanned-By: ClueGetter at submission6.mail.transip.nl
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=transip-a; d=myspectrum.nl; t=1780483199; h=from:subject:to:cc:
+ references:in-reply-to:date:mime-version:content-type;
+ bh=2OCG1uXxv1YWLnkEPCsPxjTuUvgMmQepEG7eWLlFX74=;
+ b=ZEW3K4KDvcVitjaOTibFDTbLe2haKOUIMPRGRBRpVCPXdLUHbAF87WSqhRHmNjUSIHei0X
+ VAdQ6O6tsTuP9Wv/1Qjx3PlINl5SQgsQs9CMOhxLtHhR0x/lj8P0FCUCbgMlFcWenVmmqJ
+ YUHeAYkQRaARB/aBlscplDCQfmu6iP/3KMDnoqvr/kdQP69+jHYOk65doyrJgXb+KR6wiD
+ wPMeEhTX0uM4Ih1lHxZ2o2Zykm9YVRzZ2ZyEbHQlpo1yCRLIUTENdKR7id3Zb6RxgpQ17P
+ v7Wg2VQgX9Zab6VmHemN2o3ib+dWYcwK6h3jqyHtgMUpm+k1DXIJS5zVJzpVVQ==
+X-Report-Abuse-To: abuse@transip.nl
+Content-Type: multipart/alternative;
+ boundary="------------KeXG6PfSig7YR7Knz9UoHp4m"
+Content-Language: en-US
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 09:42:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127379
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 12:00:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127380
 
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+--------------KeXG6PfSig7YR7Knz9UoHp4m
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Bug and security fix release
-https://github.com/redis/redis/releases/tag/7.2.13
-https://github.com/redis/redis/releases/tag/7.2.14
+Hi Markus,
 
-Signed-off-by: Ankur Tyagi <ankur.tyagi85@gmail.com>
----
- .../0001-hiredis-use-default-CC-if-it-is-set.patch              | 0
- ...2-lua-update-Makefile-to-use-environment-build-setting.patch | 0
- .../0003-hack-to-force-use-of-libc-malloc.patch                 | 0
- .../0004-src-Do-not-reset-FINAL_LIBS.patch                      | 0
- ...05-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch | 0
- .../0006-Define-correct-gregs-for-RISCV32.patch                 | 0
- .../redis/{redis-7.2.12 => redis-7.2.14}/init-redis-server      | 0
- .../redis/{redis-7.2.12 => redis-7.2.14}/redis.conf             | 0
- .../redis/{redis-7.2.12 => redis-7.2.14}/redis.service          | 0
- .../recipes-extended/redis/{redis_7.2.12.bb => redis_7.2.14.bb} | 2 +-
- 10 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0001-hiredis-use-default-CC-if-it-is-set.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0002-lua-update-Makefile-to-use-environment-build-setting.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0003-hack-to-force-use-of-libc-malloc.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0004-src-Do-not-reset-FINAL_LIBS.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/0006-Define-correct-gregs-for-RISCV32.patch (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/init-redis-server (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/redis.conf (100%)
- rename meta-oe/recipes-extended/redis/{redis-7.2.12 => redis-7.2.14}/redis.service (100%)
- rename meta-oe/recipes-extended/redis/{redis_7.2.12.bb => redis_7.2.14.bb} (97%)
+On 6/3/26 10:35, Markus Volk wrote:
 
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0001-hiredis-use-default-CC-if-it-is-set.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0001-hiredis-use-default-CC-if-it-is-set.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0001-hiredis-use-default-CC-if-it-is-set.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0001-hiredis-use-default-CC-if-it-is-set.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0002-lua-update-Makefile-to-use-environment-build-setting.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0002-lua-update-Makefile-to-use-environment-build-setting.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0003-hack-to-force-use-of-libc-malloc.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0003-hack-to-force-use-of-libc-malloc.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0003-hack-to-force-use-of-libc-malloc.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0003-hack-to-force-use-of-libc-malloc.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0004-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0004-src-Do-not-reset-FINAL_LIBS.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0004-src-Do-not-reset-FINAL_LIBS.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0004-src-Do-not-reset-FINAL_LIBS.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/0006-Define-correct-gregs-for-RISCV32.patch b/meta-oe/recipes-extended/redis/redis-7.2.14/0006-Define-correct-gregs-for-RISCV32.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/0006-Define-correct-gregs-for-RISCV32.patch
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/0006-Define-correct-gregs-for-RISCV32.patch
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/init-redis-server b/meta-oe/recipes-extended/redis/redis-7.2.14/init-redis-server
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/init-redis-server
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/init-redis-server
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/redis.conf b/meta-oe/recipes-extended/redis/redis-7.2.14/redis.conf
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/redis.conf
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/redis.conf
-diff --git a/meta-oe/recipes-extended/redis/redis-7.2.12/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.14/redis.service
-similarity index 100%
-rename from meta-oe/recipes-extended/redis/redis-7.2.12/redis.service
-rename to meta-oe/recipes-extended/redis/redis-7.2.14/redis.service
-diff --git a/meta-oe/recipes-extended/redis/redis_7.2.12.bb b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
-similarity index 97%
-rename from meta-oe/recipes-extended/redis/redis_7.2.12.bb
-rename to meta-oe/recipes-extended/redis/redis_7.2.14.bb
-index 2b4087a74b..93235e3707 100644
---- a/meta-oe/recipes-extended/redis/redis_7.2.12.bb
-+++ b/meta-oe/recipes-extended/redis/redis_7.2.14.bb
-@@ -17,7 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-            file://0005-Define-_GNU_SOURCE-to-get-PTHREAD_MUTEX_INITIALIZER.patch \
-            file://0006-Define-correct-gregs-for-RISCV32.patch \
-           "
--SRC_URI[sha256sum] = "97c60478a7c777ac914ca9d87a7e88ba265926456107e758c62d8f971d0196bc"
-+SRC_URI[sha256sum] = "21326da3f66c0aead4c8204c0ac52ff905337a77cadd169f75ac22835ea30025"
- 
- inherit autotools-brokensep pkgconfig update-rc.d systemd useradd
- 
+> However, 'Rejected' seemed like a somewhat inappropriate upstream 
+> status as well, since this was just an issue,
+> not a pull request, and the solution was even suggested by the 
+> maintainer himself. He just hasn't been able
+> to reproduce the problem yet, so more feedback is needed to convince 
+> him that people have an issue here.
+>
+> Who's to blame is a different story :)
+>
+> That's why I chose 'Pending', but if necessary I can of course make 
+> this 'Rejected'.
+
+
+Don't get me wrong btw, I don't really mind the patch, I mind the warning.
+
+Since it flags there "might" be an issue there.
+Maintainer looks at it, euuh no, there is now issue -> closes issue.
+But that warnings is still there, so OE gets patched and marked as pending,
+that is asking for that patch to pending for a long time.
+
+That makes the "pending" state a bit doubtful. And I agree with you that
+rejected is at the opposite end.
+
+As said, I don't really mind, I just don't like a "possible" issue 
+taking time
+of several people.
+
+For what it is worth btw, char a[1000] = {0}; will initialize the whole 
+array.
+
+I doubt it matters in this case, but it likely does cost you runtime 
+performance,
+just to get rid of a likely useless warning.
+
+Regards,
+Jeroen
+
+--------------KeXG6PfSig7YR7Knz9UoHp4m
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
+-8">
+  </head>
+  <body>
+    <p>Hi Markus,<br>
+      <br>
+      On 6/3/26 10:35, Markus Volk wrote:</p>
+    <blockquote type=3D"cite" cite=3D"mid:RUR1GT.7FBB4YSJA2AH1@t-online.d=
+e">
+      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DU=
+TF-8">
+      <div id=3D"geary-body" dir=3D"auto">
+        <div>
+          <div>However, 'Rejected' seemed like a somewhat inappropriate
+            upstream status as well, since this was just an issue,=C2=A0<=
+/div>
+          <div>not a pull request, and the solution was even suggested
+            by the maintainer himself. He just hasn't been able</div>
+          <div>to reproduce the problem yet, so more feedback is needed
+            to convince him that people have an issue here.</div>
+          <div><br>
+          </div>
+          <div>Who's to blame is a different story :)</div>
+          <div><br>
+          </div>
+          <div>That's why I chose 'Pending', but if necessary I can of
+            course make this 'Rejected'.</div>
+        </div>
+      </div>
+    </blockquote>
+    <p><br>
+    </p>
+    <p>Don't get me wrong btw, I don't really mind the patch, I mind the
+      warning.<br>
+      <br>
+      Since it flags there "might" be an issue there.<br>
+      Maintainer looks at it, euuh no, there is now issue -&gt; closes
+      issue.<br>
+      But that warnings is still there, so OE gets patched and marked as
+      pending,<br>
+      that is asking for that patch to pending for a long time.</p>
+    <p>That makes the "pending" state a bit doubtful. And I agree with
+      you that<br>
+      rejected is at the opposite end.</p>
+    <p>As said, I don't really mind, I just don't like a "possible"
+      issue taking time<br>
+      of several people.<br>
+      <br>
+      For what it is worth btw, char a[1000] =3D {0}; will initialize the
+      whole array.<br>
+      <br>
+      I doubt it matters in this case, but it likely does cost you
+      runtime performance,<br>
+      just to get rid of a likely useless warning.<br>
+      <br>
+      Regards,<br>
+      Jeroen</p>
+  </body>
+</html>
+
+--------------KeXG6PfSig7YR7Knz9UoHp4m--
 
