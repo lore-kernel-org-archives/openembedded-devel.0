@@ -1,172 +1,110 @@
-Return-Path: <philip@balister.org>
+Return-Path: <tafil@tafhub.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E942CD6E55
-	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 12:00:39 +0000 (UTC)
-Received: from outbound8.mail.transip.nl (outbound8.mail.transip.nl [136.144.136.8])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.16897.1780483203136787275
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBBADCD6E55
+	for <webhook@archiver.kernel.org>; Wed,  3 Jun 2026 13:25:49 +0000 (UTC)
+Received: from mail.tafhub.de (mail.tafhub.de [5.189.191.204])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.20205.1780493147163376213
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jun 2026 03:40:04 -0700
+ Wed, 03 Jun 2026 06:25:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@myspectrum.nl header.s=transip-a header.b=ZEW3K4KD;
- spf=pass (domain: myspectrum.nl, ip: 136.144.136.8, mailfrom: jeroen@myspectrum.nl)
-Received: from submission6.mail.transip.nl (unknown [10.103.8.157])
-	by outbound8.mail.transip.nl (Postfix) with ESMTP id 4gVkjX1d47zY76j6;
-	Wed,  3 Jun 2026 12:40:00 +0200 (CEST)
-Received: from yellow.myspectrum.nl (unknown [IPv6:2a01:7c8:bb0c:45:5054:ff:fe01:854])
-	by submission6.mail.transip.nl (Postfix) with ESMTPSA id 4gVkjW5NfCz3ZVDrh;
-	Wed,  3 Jun 2026 12:39:59 +0200 (CEST)
-Received: from [192.168.178.17] (212-204-162-136.cable.dynamic.v4.ziggo.nl [212.204.162.136])
-	(Authenticated sender: jeroen@myspectrum.nl)
-	by yellow.myspectrum.nl (Postfix) with ESMTPSA id EBE0C20144;
-	Wed,  3 Jun 2026 10:39:58 +0000 (UTC)
-Authentication-Results: yellow.myspectrum.nl;
-	auth=pass smtp.auth=jeroen@myspectrum.nl smtp.mailfrom=jeroen@myspectrum.nl
-Message-ID: <194e3c6b-3c34-4cdb-a0dd-f168374888e9@myspectrum.nl>
-Date: Wed, 3 Jun 2026 12:39:58 +0200
+ dkim=fail reason="dkim: body hash did not verify" header.i=@tafhub.de header.s=dkim header.b=bhGVv2wc;
+ spf=pass (domain: tafhub.de, ip: 5.189.191.204, mailfrom: tafil@tafhub.de)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 777DB1880D57;
+	Wed,  3 Jun 2026 15:25:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tafhub.de; s=dkim;
+	t=1780493144; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=6hKL/IIu6ntWPwh+cK2uwGUz1mqlt6+jZo3AmSm/hzM=;
+	b=bhGVv2wc01lg6Lp9heb6T0/V35s6NZTW9jKerRutpOoJfpqe9EK8Gdbxg2iv6Wzpa+TPAg
+	BIcZ+7Rt2o4XDWGe41Ihxq+m1OnxPhOL8rwxHHMXBedvCKlRnQxaIPavHPEv+0xAEk6YXy
+	ts+AMDuZWkuR0EUXrsOEbThMrAK7XxtPpHdYEJqU4I6+V6k4QBPam0zhz5aOLYtJKiAtUm
+	p8APnhJo2WDl+EfhFZNZ6lvr+vZQ4c3QW4yZy9f8VYAFnrBIIwdrN5X9FYkV7zIMBQCa1M
+	ioKidRVfuZ81H2caATBay6FFg486s1Oi8+N+vtOxjVtQ0G/yxOPvtDbeMG4M4g==
+From: Tafil Avdyli <tafil@tafhub.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tafil Avdyli <tafil@tafhub.de>
+Subject: [meta-oe][PATCH] fastfetch: upgrade 2.63.1 -> 2.64.0
+Date: Wed,  3 Jun 2026 15:25:23 +0200
+Message-ID: <20260603132523.100251-1-tafil@tafhub.de>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] gd: fix build with gcc 16
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20260530081837.2192126-1-f_l_k@t-online.de>
- <cdc55fbc-4ea9-452d-93cc-2eec2fd1a8c7@myspectrum.nl>
- <4651ae38-19f8-4b7e-95da-19cbaf3b7bf7@myspectrum.nl>
- <RUR1GT.7FBB4YSJA2AH1@t-online.de>
-From: "Jeroen Hofstee" <jeroen@myspectrum.nl>
-In-Reply-To: <RUR1GT.7FBB4YSJA2AH1@t-online.de>
-X-Scanned-By: ClueGetter at submission6.mail.transip.nl
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=transip-a; d=myspectrum.nl; t=1780483199; h=from:subject:to:cc:
- references:in-reply-to:date:mime-version:content-type;
- bh=2OCG1uXxv1YWLnkEPCsPxjTuUvgMmQepEG7eWLlFX74=;
- b=ZEW3K4KDvcVitjaOTibFDTbLe2haKOUIMPRGRBRpVCPXdLUHbAF87WSqhRHmNjUSIHei0X
- VAdQ6O6tsTuP9Wv/1Qjx3PlINl5SQgsQs9CMOhxLtHhR0x/lj8P0FCUCbgMlFcWenVmmqJ
- YUHeAYkQRaARB/aBlscplDCQfmu6iP/3KMDnoqvr/kdQP69+jHYOk65doyrJgXb+KR6wiD
- wPMeEhTX0uM4Ih1lHxZ2o2Zykm9YVRzZ2ZyEbHQlpo1yCRLIUTENdKR7id3Zb6RxgpQ17P
- v7Wg2VQgX9Zab6VmHemN2o3ib+dWYcwK6h3jqyHtgMUpm+k1DXIJS5zVJzpVVQ==
-X-Report-Abuse-To: abuse@transip.nl
-Content-Type: multipart/alternative;
- boundary="------------KeXG6PfSig7YR7Knz9UoHp4m"
-Content-Language: en-US
+X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 12:00:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127380
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jun 2026 13:25:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127381
 
---------------KeXG6PfSig7YR7Knz9UoHp4m
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Add PACKAGECONFIG entries for new optional build dependencies:
+- libva for new Codec module
+- libvdpau for new Codec module
+- lua for Lua scripting support
 
-Hi Markus,
+Disable following CMake options explicitly:
+- ENABLE_QUICKJS: no recipe exists for this yet
+- ENABLE_EET: no recipe exists for this yet (introduced previously in 2.6=
+3.0)
 
-On 6/3/26 10:35, Markus Volk wrote:
+Changelog: https://github.com/fastfetch-cli/fastfetch/releases/tag/2.64.0
 
-> However, 'Rejected' seemed like a somewhat inappropriate upstream 
-> status as well, since this was just an issue,
-> not a pull request, and the solution was even suggested by the 
-> maintainer himself. He just hasn't been able
-> to reproduce the problem yet, so more feedback is needed to convince 
-> him that people have an issue here.
->
-> Who's to blame is a different story :)
->
-> That's why I chose 'Pending', but if necessary I can of course make 
-> this 'Rejected'.
+Signed-off-by: Tafil Avdyli <tafil@tafhub.de>
+---
+ .../fastfetch/{fastfetch_2.63.1.bb =3D> fastfetch_2.64.0.bb} | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/fastfetch/{fastfetch_2.63.1.bb =3D> fastf=
+etch_2.64.0.bb} (91%)
 
-
-Don't get me wrong btw, I don't really mind the patch, I mind the warning.
-
-Since it flags there "might" be an issue there.
-Maintainer looks at it, euuh no, there is now issue -> closes issue.
-But that warnings is still there, so OE gets patched and marked as pending,
-that is asking for that patch to pending for a long time.
-
-That makes the "pending" state a bit doubtful. And I agree with you that
-rejected is at the opposite end.
-
-As said, I don't really mind, I just don't like a "possible" issue 
-taking time
-of several people.
-
-For what it is worth btw, char a[1000] = {0}; will initialize the whole 
-array.
-
-I doubt it matters in this case, but it likely does cost you runtime 
-performance,
-just to get rid of a likely useless warning.
-
-Regards,
-Jeroen
-
---------------KeXG6PfSig7YR7Knz9UoHp4m
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF=
--8">
-  </head>
-  <body>
-    <p>Hi Markus,<br>
-      <br>
-      On 6/3/26 10:35, Markus Volk wrote:</p>
-    <blockquote type=3D"cite" cite=3D"mid:RUR1GT.7FBB4YSJA2AH1@t-online.d=
-e">
-      <meta http-equiv=3D"content-type" content=3D"text/html; charset=3DU=
-TF-8">
-      <div id=3D"geary-body" dir=3D"auto">
-        <div>
-          <div>However, 'Rejected' seemed like a somewhat inappropriate
-            upstream status as well, since this was just an issue,=C2=A0<=
-/div>
-          <div>not a pull request, and the solution was even suggested
-            by the maintainer himself. He just hasn't been able</div>
-          <div>to reproduce the problem yet, so more feedback is needed
-            to convince him that people have an issue here.</div>
-          <div><br>
-          </div>
-          <div>Who's to blame is a different story :)</div>
-          <div><br>
-          </div>
-          <div>That's why I chose 'Pending', but if necessary I can of
-            course make this 'Rejected'.</div>
-        </div>
-      </div>
-    </blockquote>
-    <p><br>
-    </p>
-    <p>Don't get me wrong btw, I don't really mind the patch, I mind the
-      warning.<br>
-      <br>
-      Since it flags there "might" be an issue there.<br>
-      Maintainer looks at it, euuh no, there is now issue -&gt; closes
-      issue.<br>
-      But that warnings is still there, so OE gets patched and marked as
-      pending,<br>
-      that is asking for that patch to pending for a long time.</p>
-    <p>That makes the "pending" state a bit doubtful. And I agree with
-      you that<br>
-      rejected is at the opposite end.</p>
-    <p>As said, I don't really mind, I just don't like a "possible"
-      issue taking time<br>
-      of several people.<br>
-      <br>
-      For what it is worth btw, char a[1000] =3D {0}; will initialize the
-      whole array.<br>
-      <br>
-      I doubt it matters in this case, but it likely does cost you
-      runtime performance,<br>
-      just to get rid of a likely useless warning.<br>
-      <br>
-      Regards,<br>
-      Jeroen</p>
-  </body>
-</html>
-
---------------KeXG6PfSig7YR7Knz9UoHp4m--
+diff --git a/meta-oe/recipes-support/fastfetch/fastfetch_2.63.1.bb b/meta=
+-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb
+similarity index 91%
+rename from meta-oe/recipes-support/fastfetch/fastfetch_2.63.1.bb
+rename to meta-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb
+index bb4db47a49..951aa50ce4 100644
+--- a/meta-oe/recipes-support/fastfetch/fastfetch_2.63.1.bb
++++ b/meta-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb
+@@ -11,12 +11,14 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2090e7d93d=
+f7ad5a3d41f6fb4226ac76"
+ DEPENDS =3D "yyjson"
+=20
+ SRC_URI =3D "git://github.com/fastfetch-cli/fastfetch.git;protocol=3Dhtt=
+ps;branch=3Dmaster;tag=3D${PV}"
+-SRCREV =3D "acf610416c2d5bb1438f723699aca47647fbeba5"
++SRCREV =3D "d48bd733f062f374c382d67b59023c08925b0f40"
+=20
+ inherit cmake pkgconfig
+=20
+ EXTRA_OECMAKE +=3D "\
+     -DENABLE_SYSTEM_YYJSON=3DON \
++    -DENABLE_EET=3DOFF \
++    -DENABLE_QUICKJS=3DOFF \
+ "
+=20
+ PACKAGECONFIG ??=3D "\
+@@ -42,10 +44,13 @@ PACKAGECONFIG[freetype] =3D "-DENABLE_FREETYPE=3DON,-=
+DENABLE_FREETYPE=3DOFF,freetype"
+ PACKAGECONFIG[gio] =3D "-DENABLE_GIO=3DON,-DENABLE_GIO=3DOFF,glib-2.0"
+ PACKAGECONFIG[glx] =3D "-DENABLE_GLX=3DON,-DENABLE_GLX=3DOFF,virtual/lib=
+gles2"
+ PACKAGECONFIG[imagemagick] =3D "-DENABLE_IMAGEMAGICK7=3DON -DENABLE_IMAG=
+EMAGICK6=3DOFF,-DENABLE_IMAGEMAGICK7=3DOFF -DENABLE_IMAGEMAGICK6=3DOFF,im=
+agemagick"
++PACKAGECONFIG[lua] =3D "-DENABLE_LUA=3DON,-DENABLE_LUA=3DOFF,lua"
+ PACKAGECONFIG[opencl] =3D "-DENABLE_OPENCL=3DON,-DENABLE_OPENCL=3DOFF,op=
+encl-headers virtual/libopencl1"
+ PACKAGECONFIG[pulseaudio] =3D "-DENABLE_PULSE=3DON,-DENABLE_PULSE=3DOFF,=
+pulseaudio"
+ PACKAGECONFIG[rpm] =3D "-DENABLE_RPM=3DON,-DENABLE_RPM=3DOFF,rpm"
+ PACKAGECONFIG[sqlite3] =3D "-DENABLE_SQLITE3=3DON,-DENABLE_SQLITE3=3DOFF=
+,sqlite3"
++PACKAGECONFIG[vaapi] =3D "-DENABLE_VA=3DON,-DENABLE_VA=3DOFF,libva"
++PACKAGECONFIG[vdpau] =3D "-DENABLE_VDPAU=3DON,-DENABLE_VDPAU=3DOFF,libvd=
+pau"
+ PACKAGECONFIG[vulkan] =3D "-DENABLE_VULKAN=3DON,-DENABLE_VULKAN=3DOFF,vu=
+lkan-loader"
+ PACKAGECONFIG[wayland] =3D "-DENABLE_WAYLAND=3DON,-DENABLE_WAYLAND=3DOFF=
+,wayland"
+ PACKAGECONFIG[xcb] =3D "-DENABLE_XCB_RANDR=3DON,-DENABLE_XCB_RANDR=3DOFF=
+,libxcb"
 
