@@ -1,116 +1,94 @@
-Return-Path: <sudumbha@cisco.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B86DCD6E78
-	for <webhook@archiver.kernel.org>; Thu,  4 Jun 2026 14:41:34 +0000 (UTC)
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.13229.1780584087846696698
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D131CD6E6D
+	for <webhook@archiver.kernel.org>; Thu,  4 Jun 2026 16:12:05 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.15488.1780589518674047907
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Jun 2026 07:41:28 -0700
+ Thu, 04 Jun 2026 09:11:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport01 header.b=XlZEcXux;
- spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: sudumbha@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=lBtLeFKB;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-490c0c92cffso2493505e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Jun 2026 09:11:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=1454; q=dns/txt;
-  s=iport01; t=1780584087; x=1781793687;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=EJlcH0C7f3DT3Da40B5/qenTu+SmdZe33VdgpJ4zeWU=;
-  b=XlZEcXux7toX/ng1eYU8GXpWBcAhKIE+gfB8IIjcKu5Mq1s9pReRyWeV
-   METJG0a2zn+vCqnhUO+JcAoHFKNxTEVtfNldwwKjV0OfbwvxpbJx1ru66
-   ZCa2/B1N5LKnME1duFD8NAIG7/S3kitfX3neXfFPTFOpbyQfies15JHki
-   uAk87QCxQHljCFtALnHBYBoh/h8WGUwc+KFuVaePRXhy8Mp90J36tri+r
-   yFfOe/j2izcrn7QBfKwp+ScH9ZZyvCdHZ3Oth1Zi6HjGhbBR7KtWoIgvd
-   JRYt8M9e/pwvIw5DDZ1N5S1U04siUIlcLWa80Zeu8L+bel0PUGR0+KCI/
-   g==;
-X-CSE-ConnectionGUID: 7dJkcrxURF6BFzvXyxST0Q==
-X-CSE-MsgGUID: YUvvcCl/QG+TN4T7Qp5fpw==
-X-IPAS-Result: =?us-ascii?q?A0DGAgACjSFq/4z/Ja1aglmCV3RfQkmUKoIknhuBfg8BA?=
- =?us-ascii?q?QEPRA0EAQGFBgKNMwImNQgOAQIEAwIDAQEBAQEBAQEBAQELAQEFAQEBAgEHB?=
- =?us-ascii?q?YEOE4ZPDYZbAgEDMgEYAT0gMSsrGYMCAYJzAgERshuCLIEBgygBPwJDUNsqA?=
- =?us-ascii?q?QsUAYE4hT+IHXMBhHsnGxuBcoR9gQWBXAEBgUhlhXcEgiKBDJBVSIEeA1ksA?=
- =?us-ascii?q?VUTDQoLBwWBZgM1EioVbjIdgSM+F4ELGwcFgUqBSWqBAoUSIx8DOYEXgXyBK?=
- =?us-ascii?q?GlpFTFFAwsYDUgRLDcUGwQ+bgeMKBcPgjcxXSyoIqEOCiiDdIwhlToaM6prC?=
- =?us-ascii?q?5h7jgmVZmmEaIFqAzeBRwsHcBWDIglKGQ+OOCeDRIF/xTEkNQIJMgEBBwIHD?=
- =?us-ascii?q?gMLgWiRfQEB?=
-IronPort-Data: A9a23:UkENZKjKZ4nm7ZyszSXKbx9dX161MBEKZh0ujC45NGQN5FlHY01je
- htvDzyEP6uLN2b2L410Poiz9koP78OEmoVgS1A/rXg1RCJjpJueD7x1DKtf0wB+jyHnZBg6h
- ynLQoCYdKjYdleF+FH1dOOn9SUgvU2xbuKUIPbePSxsThNTRi4kiBZy88Y0mYcAbeKRW2thg
- vus5ZeDULOZ82QsaDxMtfrf8EoHUMna4Vv0gHRvPZing3eG/5UlJMp3Db28KXL+Xr5VEoaSL
- 87fzKu093/u5BwkDNWoiN7TKiXmlZaLYGBiIlIPM0STqkAqSh4ai87XB9JAAatjsAhlqvgqo
- Dl7WTNcfi9yVkHEsLx1vxC1iEiSN4UekFPMCSDXXcB+UyQqflO0q8iCAn3aMqVH9sR0Cntey
- MY2dhojfA6zlvKN/OqCH7wEasQLdKEHPasFsX1miDWcBvE8TNWbGOPB5MRT23E7gcUm8fT2P
- pVCL2EwKk6dPlsWZg9/5JEWxI9EglHkbjFFrViVrII84nPYy0p6172F3N/9JozbFZgPzxbJz
- o7A11XEHA8RH9jY8BXGzlTwurD2hX71QJ1HQdVU8dYv2jV/3Fc7DwUbU1a+q/S1hkOyHt5SN
- UEQ0i4vtrQpskuzQ9/wWhe1rHKJslgbQdU4LgEhwBuGxqyR50OSAXIJC2YaLtcnr8QxAzct0
- zdlgu/UONCmi5XNIVr1y1tehWra1fQ9RYPaWRI5cA==
-IronPort-HdrOrdr: A9a23:k+7u/6iwfxnaMO2VmueaXispAHBQXvYji2hC6mlwRA09TyX+rb
- HLoB1173HJYVoqNU3I3OrwW5VoIkmskKKdn7NxAV7KZmCP0wGVxcNZnOnfKlbbdBEWmNQw6U
- 4ZSchDIey1K0RmhsDn5wT9OdMhzN6btJ2Mv47lvhBQpcUAUdAY0++/YTzrdHFLeA==
-X-Talos-CUID: 9a23:Oe5YcmMCURirVe5DByVF90UOCv0fXCP34mXOE16oMloxcejA
-X-Talos-MUID: =?us-ascii?q?9a23=3AdIIjUQ0ZTK2qRc/iZ2D12pGxdjUj0pmwFksmldI?=
- =?us-ascii?q?/lIq4E3BMZA6F0TqvXdpy?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.24,187,1774310400"; 
-   d="scan'208";a="489852989"
-Received: from rcdn-l-core-03.cisco.com ([173.37.255.140])
-  by rcdn-iport-6.cisco.com with ESMTP/TLS/TLS_AES_256_GCM_SHA384; 04 Jun 2026 14:41:27 +0000
-Received: from sjc-ads-12007.cisco.com (sjc-ads-12007.cisco.com [171.70.97.7])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
-	 client-signature RSA-PSS (4096 bits) client-digest SHA256)
-	(Client CN "ciscoit-managed-infra-smtp-auth.cisco.com", Issuer "Internal Private TLS SubCA" (verified OK))
-	by rcdn-l-core-03.cisco.com (Postfix) with ESMTPS id E5B6E18000617
-	for <openembedded-devel@lists.openembedded.org>; Thu,  4 Jun 2026 14:41:26 +0000 (GMT)
-Received: by sjc-ads-12007.cisco.com (Postfix, from userid 1840713)
-	id 936B5CB6A93; Thu,  4 Jun 2026 07:41:26 -0700 (PDT)
-From: "Sudhir Dumbhare -X (sudumbha - E INFOCHIPS PRIVATE LIMITED at Cisco)" <sudumbha@cisco.com>
+        d=gmail.com; s=20251104; t=1780589517; x=1781194317; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=S3YlvkGdDpjPH/en5cMBED/DEm2/hdNe0NSvnTWTO70=;
+        b=lBtLeFKBTRYmF0YOrvfza+5VjBFXMUeytmrCE6YLJCjO5lTAb0jE+P/mbC4CHOFvVm
+         3k6oSyYqLdofDzcYwcNcSCo3tIZaNQKP5PSw5WFAdRB9QPRu2s2G9/Beve2+0E60Iy/H
+         8RGcpcChl/Zc8NkVl2ElJiZwP7MJ4MocLavMX9hUeN3QqpT6oa+inVdGDpnefv3qbPGb
+         0+Kb61ikiNflu0hCm36WrjSz8oBl1raHaWFZVzwfoHcARGSCFdbWGCqsC2G9l86tqDTR
+         oDvwWseSqzj4x0j3pWcNdDYNMiTkNGhWZzQFsRRlt75U+dWQFDbpWMAExUqSIFOKYT6y
+         2UjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780589517; x=1781194317;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=S3YlvkGdDpjPH/en5cMBED/DEm2/hdNe0NSvnTWTO70=;
+        b=D/SwhJYP9S5bcpSjGGJ4A/TVANZIJLjRfthFOtXBsQWwf6V1fuqdqr7Y288uSJG/Lt
+         sZP3oyI1w/AhgvwdCdT9brU4XOLqoSWpQoxg+s4ykc03mXU2bVKABglNE/m76Eof2Vh1
+         iDYhqZJQzJUQd+VUmS8KLnG2C7qWbg/nXUAN/MmwsBTW5Ug6sWonC31brX3Ze6QrIfX+
+         iu6BRRsyVGKhgcv2qgkaWcD2lob++J0T70U/pWce1qk+LtRGUfscxgwF8sJ1hjVaakgZ
+         cJradCsLnOJ5j8E8SxpkDWQfoLxESvy4UrNdLenUeJ7/Y/jvCEse59CTnIzEso/tS+dj
+         WCbQ==
+X-Gm-Message-State: AOJu0Yws9D46uqKe3XOiejBA+l8LEsSbtjrzUxpw5hL10MfB5RP+MTv+
+	li8fgP07GE8P29WU8KS3RJQMm7WSreJCT89zaUzJ2yqj/gkoVtOr18YTMWzbjw==
+X-Gm-Gg: Acq92OGlnWz0PNc5CjW9wHStd0zrQk200rEqubDKoqAjGVpyGNJpWEwPrQZ0FNYktfe
+	inSxAHOivRyM6h1KPMzU/ddqeBbg5ZG0inQmUsFC0CKpIgS6vQjN7zK8F0FZ0Jyo87j0fefp9jt
+	+LSgEenxNSgpOz5vmRegN9QiZgqPRIjI958fSiqvM22n2z1iRUtmWcBQ2brQJqhuA5nnsPpvKmb
+	2FNUCnP22mv4eQO7wSUgmblgE5RqfUnf9MuskJXxb74uT06JuCWCnxGsTtH1fO3VrrdSiJiTSf0
+	ZlIs8C1AlhN5u+jYaDbbTC71olOioQgd9+R1jkdpiXVGBBY+9guRzflydv2DoMsLFlZh+vBcUUb
+	Ozgbk5ylRBSDrE6ezPBd+ODjbMRp04VCZCrLrMSN3jnzak4P6lL7IftNqTSqP532Q3NXoc397QN
+	4x0I//9F7DwBvSn6xc0c8gIZ3ExuI77scBT5oQOV7YgJ7QRNVo2XTeUJ9L8r66rGX5yvD3iB+vN
+	HXTpb1rnPyu6MrTLfKwagQDf5KVLCQ=
+X-Received: by 2002:a05:600c:3ba0:b0:490:bb45:79da with SMTP id 5b1f17b1804b1-490bb457aadmr108675155e9.13.1780589516791;
+        Thu, 04 Jun 2026 09:11:56 -0700 (PDT)
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-490bc3fd663sm91771505e9.10.2026.06.04.09.11.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Jun 2026 09:11:51 -0700 (PDT)
+From: martin.jansa@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [oe][meta-python][scarthgap][PATCH 3/3] python3-grpcio-tools: set status for CVE-2024-11407
-Date: Thu,  4 Jun 2026 07:39:09 -0700
-Message-Id: <20260604143907.2864663-3-sudumbha@cisco.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20260604143907.2864663-1-sudumbha@cisco.com>
-References: <20260604143907.2864663-1-sudumbha@cisco.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] cunit: set CLEANBROKEN
+Date: Thu,  4 Jun 2026 18:11:45 +0200
+Message-ID: <20260604161145.2420902-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-Client-TLS: VERIFIED;sjc-ads-12007.cisco.com [171.70.97.7];TLSv1.3;TLS_AES_256_GCM_SHA384;256;ciscoit-managed-infra-smtp-auth.cisco.com
-X-Outbound-SMTP-Client: 171.70.97.7, sjc-ads-12007.cisco.com
-X-Outbound-Node: rcdn-l-core-03.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Jun 2026 14:41:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127401
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Jun 2026 16:12:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127402
 
-From: Sudhir Dumbhare <sudumbha@cisco.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-Analysis:
-- CVE-2024-11407 [1] affects gRPC-C++ servers with transmit zero copy enabled.
-- The upstream fix modifies gRPC core runtime source
-  src/core/lib/event_engine/posix_engine/posix_endpoint.cc [2].
-- python3-grpcio-tools does not include or compile this runtime source.
-- Hence CVE-2024-11407 is not applicable to python3-grpcio-tools.
+otherwise it tries to run:
+/bin/sh /Users/aks/code/os/cunit/cunit/missing autoconf
+and fails
 
-[1] https://nvd.nist.gov/vuln/detail/CVE-2024-11407
-[2] https://github.com/grpc/grpc/commit/e9046b2bbebc0cb7f5dc42008f807f6c7e98e791
-
-Signed-off-by: Sudhir Dumbhare <sudumbha@cisco.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../recipes-devtools/python/python3-grpcio-tools_1.62.2.bb       | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-test/cunit/cunit_2.1-3.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
-index 63abf6e3cf..71cabf0d01 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio-tools_1.62.2.bb
-@@ -26,3 +26,4 @@ CVE_PRODUCT += "grpc:grpc"
+diff --git a/meta-oe/recipes-test/cunit/cunit_2.1-3.bb b/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
+index 75ba477757..fd51e024bb 100644
+--- a/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
++++ b/meta-oe/recipes-test/cunit/cunit_2.1-3.bb
+@@ -34,3 +34,8 @@ FILES:${PN}-dev += "${datadir}/CUnit"
+ FILES:${PN}-doc += "${docdir}"
  
- CVE_STATUS[CVE-2026-33186] = "cpe-incorrect: this CVE is for golang version of grpc"
- CVE_STATUS[CVE-2024-7246] = "not-applicable-config: the vulnerable gRPC C-core HPACK parser code is not present in grpcio-tools"
-+CVE_STATUS[CVE-2024-11407] = "not-applicable-config: CVE affects gRPC C++ server zero-copy transport code, which is not present in grpcio-tools"
--- 
-2.35.6
-
+ BBCLASSEXTEND = "native"
++
++# NOTE: make clean
++# CDPATH="${ZSH_VERSION+.}:" && cd . && /bin/sh /Users/aks/code/os/cunit/cunit/missing autoconf
++# /bin/sh: 0: cannot open /Users/aks/code/os/cunit/cunit/missing: No such file
++CLEANBROKEN = "1"
 
