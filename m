@@ -2,96 +2,180 @@ Return-Path: <schonm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F1A0CD8C8C
-	for <webhook@archiver.kernel.org>; Sat,  6 Jun 2026 15:00:38 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.17489.1780758031114560714
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09B72CD8C85
+	for <webhook@archiver.kernel.org>; Sun,  7 Jun 2026 00:39:28 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.25924.1780792765037064483
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Jun 2026 08:00:31 -0700
+ Sat, 06 Jun 2026 17:39:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=mJ0R8ypF;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: schonm@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-7e8b45dfb3dso37147517b3.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2026 08:00:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=UScw89o6;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: schonm@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-7e8b45dfb3dso39801757b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2026 17:39:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780758030; x=1781362830; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=r+qHN2prSDtQOaTKfkzf7M4kHdj+ndd5RNYhxtiaaCw=;
-        b=mJ0R8ypFXnjs2G9rPfWJOm5jYQr57J7TSAPm416gAi28/t7QiG9Rax+Y0PCGotDEyU
-         Z90wF3o09WirQIDC/C2em3EPm+Ed0xbU9RXrGoENXidfZSffrD2neGFYMQaSac7jpU2w
-         qKMqcRMZwOnmVQQDvOgs+PDfCxfcAKmORJFc33VVGw3z5iUp18sT4Tkshw2Ariv3h9Q4
-         /dt6WtARS/fikam+g//PIKtk3fWxxoshQWX/zxiaSh+mVbm3FgDXXBEBovVgVPUJO9JZ
-         Psi68Zkghd4QR8rCqaw6Ms3VA9ugK1aKozSymDQYW6L8ite2F6Rgfd2+UaIhkOzNbF2d
-         +aAw==
+        d=gmail.com; s=20251104; t=1780792764; x=1781397564; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WZRiVtbXMxsIItFm5qpQTzseu+7fyD1KdCdhl+gqDAA=;
+        b=UScw89o6dREhRbS9S5TAiR6CUFbcTFatZSEb7oRTFj09N4B8CPrF/DZ4QJkr/jV1Y9
+         QmJy5yXEvSllVHPY0f4VJ84SvScmVpPleHU5Pmffzf+E0FZSsO4UbVBUTgaMW+Lh3g3i
+         vwbCspGKem3dt1uCcl1bahk38y3Hnxz7Gx/fKxUFoPvdTYv+5tq7ZgAYdDVCmVJNUv0K
+         Kl7Yu68BOiD7UT8eUY/9vyg7Kh3UX7fiAUireC59ME3d1uc9mQvHkZaoJ91bivKCO4WN
+         AQ7O/+DF14d5ki6Ojcpe6+Hs6ouXNwaHk6GU2rkqThj3cFRkyZR4Z7xPZHh0FTjZvhsb
+         WozQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780758030; x=1781362830;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=r+qHN2prSDtQOaTKfkzf7M4kHdj+ndd5RNYhxtiaaCw=;
-        b=FcQhjuQSVScN0Gs3NlNlea0+0Bxw1janhWYwD/A7zmGZCFJpoZ1z6G4birK0kRx4yH
-         uQvwv/gS066AaFINv+vts4oH0p9V9Aa4E1fccU/AnVMV5WN2EOb8QHbaPvXgpft2C2Mg
-         sT82duAea/sYaMOhZJl3ocfzX/y8HqUUhrWw87d88BsxKGJLnj0xy2mP/X362Mq0cQxJ
-         poZyp0zv03cky5dhPwDSKEkJu+HZqRq7LkNFFNXPfnnu09tBFa4qbfO64Fkwd238FLxK
-         sTgyUbc68egfc9vJTeKLHJjURCcyaxXnbnCTmCaEp40tGP48cKK0e09qelqoWwUYPLMw
-         N4qg==
-X-Gm-Message-State: AOJu0YwRohpSwWfUrC4XfqcxuZM65kFaeF5zbMcOWyIQSe1RZaHcN8LH
-	FeYjAAO4UHUZvZR/N5vnnAb+3l/I/eFQmnUovRK/NEtVNsJPhxp29hjYsJWA6Nig
-X-Gm-Gg: Acq92OEudoz8dXGScVcUFcBuUDCRFcA+oBbLGW3tSROGwUApzTOX86Lwc+61ulqe2Gx
-	Kci5SNxvzVldtOY4jiehyesKIm8cg2wqsFNTuJYgYFu4TJJjU05G0TLdsX1XoqHkrMuDjDL7U+b
-	7fnh0VmiRrrWEyoox01n6xMOXYKQ9qtJtfDyn0z0TNrRTEYsmkBImF5ugg8ph/ohbOH+ShcZwJq
-	5oCbqLsnlMi0z50JDel7Zpz3ARDxMBTDnvJIhsIkLe1OYkRrRMw/8gSOmHEQSl7KLsjh5Jn7/cQ
-	m9kmtlex0nQ4YfMFBSMeFHJqqiChhjhW4VKiygpINUwIwkmg60/uiIDWZN88EnoRlX4wJ9CBcJL
-	M0XvQIrRehkWcJYv0dqv54vOaRSKYNVOKdLFlL+nUxXaT7V2xJ23MT0PKY5bkiAB2egYwaOjBWi
-	TYAVWwAvLjnzn5fx1I8L7QPeAmLuiP7E05w8podlbH3ONl1uz4p2KZrF1nnh5hgJndiyxrrclqm
-	fegA9KzxQG6EHmyVkizOMvNZGs+pCwl0LV2cFI8lLXKLT1ufyU0gPljeQVPHg==
-X-Received: by 2002:a05:690c:b15:b0:7d1:cd93:c8f1 with SMTP id 00721157ae682-7ed0c22f784mr80744647b3.21.1780758029844;
-        Sat, 06 Jun 2026 08:00:29 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1780792764; x=1781397564;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WZRiVtbXMxsIItFm5qpQTzseu+7fyD1KdCdhl+gqDAA=;
+        b=aWmr39dZEUuTaJXz7/HrwEmVbbMNXqaBqdUMZYS2YcswltaIafXfNOz8rwkAp86eRC
+         3iAoy1QJid3zjA/91zj9WqMdZuLdoPOZvGQVBKeqo+snblopGDZj+sUlKGV40aUllXYR
+         7tkGUemnotigoe2xxliY20jr0ycslTYN6u5l7iTQ9a4ar6SitHJDOUg4iyQCUjAK1IaQ
+         t6TkhzkcfT6djl1keZFRNWaWGaPfre12sRKHPmH+e69yCMIeSxlgYGihqDmdqOMBS0J1
+         SEsP3PV2osPjJDz/peEIuKYpgb3WyGNZg/gBqcndYY+mrC4WNw/Om5mRC9rGyh3SBKlM
+         m6MQ==
+X-Gm-Message-State: AOJu0YxVNwQLsjhKoLgzRZizCkjb08NLJvvC22kPY6UIFA7PTGjyj/AR
+	3BqB4BzpA4e08ebYBPHWMCnow6ZkB0agId/TYmym9NNqszDJB0F0YkyU4tZPFDJ3
+X-Gm-Gg: Acq92OHX9VaV42AIeRZvTKB+/f1KEw3PNC7DF01Ks2oFAXFXYUrxJkxa62TtSBTp+On
+	4NaSh5udrEkUg9z9Ig8EBLj71Y0kId4GFDSO7tHXzj3CRxCv0lYWedmMJ/r9ELwuoZMMRYpG3vw
+	8ELp6My/eTPVCpu2tXInfasba/2hW4ZOVecqsQBH4PGQYIqvuPUXbhTypCobMwUyJUiRjH0gApb
+	AhVmMkytaK2bOj+pG/K+i0jeCKWncLOPXzUy5eCp+NXjpmk+Z05h2UbHH7GZWW32RBLOQKqQ8IG
+	U33TNB2kFTVSUhCCYr8ynujRcaM8K9R7eO9/t7KM/xn9KoUBnEWiVn3Gqn2YDwDGT0D40IQwAwb
+	RmHhPR3KcBQmRI8o1mjdZh1TUlI8jkteiB0U2JbF1d5QeQoHAKXbGJKiEbPaK8LM+CoE4DSqeFW
+	B2u+y6AwcLsuerIxjjcbWH6Vzl4zXKO5jCdfOVd8TK0uXUTnHf6fhZGv2SBbZ8Jaw6Z+FYfwICC
+	rnNH8O2uoYuPx+cIPeChONn5OcvxlniXvsguh43w4yaGWAShn01CEODmBsKFw==
+X-Received: by 2002:a05:690c:45c5:b0:7d1:b184:5407 with SMTP id 00721157ae682-7ed0b871b0bmr91870127b3.18.1780792763891;
+        Sat, 06 Jun 2026 17:39:23 -0700 (PDT)
 Received: from localhost.localdomain ([71.54.207.93])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-7ea2167b40bsm62202497b3.17.2026.06.06.08.00.29
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-7ef63767910sm5568487b3.30.2026.06.06.17.39.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 06 Jun 2026 08:00:29 -0700 (PDT)
+        Sat, 06 Jun 2026 17:39:23 -0700 (PDT)
 From: Jason Schonberg <schonm@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jason Schonberg <schonm@gmail.com>
-Subject: [meta-oe][PATCH 2/2] php: upgrade 8.5.6 -> 8.5.7
-Date: Sat,  6 Jun 2026 11:00:03 -0400
-Message-ID: <20260606150003.1054238-2-schonm@gmail.com>
+Subject: [meta-oe][PATCH v2 1/2] gsoap: upgrade 2.8.137 -> 2.8.142
+Date: Sat,  6 Jun 2026 20:38:51 -0400
+Message-ID: <20260607003852.5315-1-schonm@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260606150003.1054238-1-schonm@gmail.com>
-References: <20260606150003.1054238-1-schonm@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Jun 2026 15:00:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127409
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Jun 2026 00:39:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127410
 
-This is a bug fix release.
+From the changelog.md file:
 
-Changelog: https://www.php.net/ChangeLog-8.php#8.5.7
+Version 2.8.142 (04/25/2026)
+---
+- Update heap memory management to free all auxiliary hash table data upon calling `soap_end()`, i.e. in addition to `soap_done()`, unless compiled in DEBUG mode that verifies memory consistency keeping auxiliary data until `soap_done()` is called.  This change aligns the behavior with pre-2.8.140 releases, while still benefiting from fast `soap_unlink()`.
+
+Version 2.8.141 (04/08/2026)
+---
+- New HTTP-STREAMS plugin for persistent http(s) connections ("streams") to accelerate client threads.
+- Minor update to support OpenSSL 4.
+
+Version 2.8.140 (01/25/2026)
+---
+- Improved heap memory management (for deserialization storage) with a much faster `soap_unlink()` implementation by using pointer hash tables.
+- Faster JSON parsers `json.c` (via `xml-rpc.c`) and `json.cpp` (via `xml-rpc.cpp`) with faster `soap_unlink()`.
+- Changed `soap_link()` (an internal API function) to another fail-safe combination `soap_new_link()` and `soap_set_link()`.
+- Fixed wsdl2h issue with a missing namespace URI (not found but needed to form a valid QName) when a schema A imports a schema B and schema B includes a chameleon schema C that defines an attributeGroup that is referenced by an attributeGroup reference in schema A.
+
+Version 2.8.139 (07/14/2025)
+---
+- Add `WITH_POSIX_STRERROR_R` to force XSI-compliant POSIX `strerror_r` usage when compiling `stdsoap2.c` or `stdsoap2.cpp` from source; e.g. when compiling on Musl Linux the compile-time detection of the XSI-compliant `strerror_r` may fail, which leads to a compiler error.  To avoid this run `./configure CFLAGS=-DWITH_POSIX_STRERROR_R CXXFLAGS=-DWITH_POSIX_STRERROR_R`.
+- Minor improvement of the `SOAP_XML_IGNORENS` (ignore XML namespaces) logic when performing non-strict XML validation (`SOAP_XML_STRICT` is not enabled) when ignoring extra XML extensibility elements in an inbound SOAP/XML message; no longer produces validation errors for non-serializable XML to "safely" ignore, unless strict XML validation is enabled with `SOAP_XML_STRICT`, as expected.
+
+Version 2.8.138 (03/24/2025)
+---
+- The wsdl2h tool with SSL/TLS enabled for https no longer supports legacy SSLv3, only TLS 1.0 to 1.3, this avoids potential TLS/SSL handshake errors.
+- Corrected a logic bug in wsdl2h for attribute/elemenet reference qualification for C++ class and C struct members in the generated header interface file for soapcpp2; the issue occurs in certain schema use cases when attributes/elements are referenced in the same schema target namespace, but depends on the schema attribute/element default form qualifications; the problem was inadvertently introduced in 2.8.95 despite our extensive test suite that includes the official W3C XML Data Bindings in gsoap/samples/autotest: this old problem was actually visible in the AttributeReferenceUnqualified log.  Because this is a specific case, the problem does not affect ONVIF and many other WSDLs and schemas.
 
 Signed-off-by: Jason Schonberg <schonm@gmail.com>
 ---
- meta-oe/recipes-devtools/php/php_8.5.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...d_l-signature-on-non-glibc-linux-musl-s.patch | 16 ++++++++--------
+ .../gsoap/{gsoap_2.8.137.bb => gsoap_2.8.142.bb} |  2 +-
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-support/gsoap/{gsoap_2.8.137.bb => gsoap_2.8.142.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.5.7.bb b/meta-oe/recipes-devtools/php/php_8.5.7.bb
-index db5bba9ccc..7c714c17a1 100644
---- a/meta-oe/recipes-devtools/php/php_8.5.7.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.5.7.bb
-@@ -32,7 +32,7 @@ UPSTREAM_CHECK_REGEX = "releases/tag/php-(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
+index df27a59ee7..51ffde158e 100644
+--- a/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
++++ b/meta-oe/recipes-support/gsoap/gsoap/0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch
+@@ -24,7 +24,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  #if GSOAP_VERSION != GSOAP_LIB_VERSION
+  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
+  #endif
+-@@ -5457,7 +5462,7 @@ tcp_gethostbyname(struct soap *soap, con
++@@ -5460,7 +5465,7 @@ tcp_gethostbyname(struct soap *soap, con
+  {
+  #if (defined(_AIX43) || defined(TRU64) || defined(HP_UX)) && defined(HAVE_GETHOSTBYNAME_R)
+    struct hostent_data ht_data;
+@@ -33,7 +33,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+    int r;
+    char *tmpbuf = soap->tmpbuf;
+    size_t tmplen = sizeof(soap->tmpbuf);
+-@@ -5490,7 +5495,7 @@ tcp_gethostbyname(struct soap *soap, con
++@@ -5493,7 +5498,7 @@ tcp_gethostbyname(struct soap *soap, con
+      hostent = NULL;
+      soap->errnum = h_errno;
+    }
+@@ -46,8 +46,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+    {
+  #ifndef WIN32
+  # ifdef HAVE_STRERROR_R
+--#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
+-+#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
++-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
+++#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
+      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
+      if (err != 0)
+        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
+@@ -65,7 +65,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  #if GSOAP_VERSION != GSOAP_LIB_VERSION
+  # error "GSOAP VERSION MISMATCH IN LIBRARY: PLEASE REINSTALL PACKAGE"
+  #endif
+-@@ -5490,7 +5495,7 @@ tcp_gethostbyname(struct soap *soap, con
++@@ -5493,7 +5498,7 @@ tcp_gethostbyname(struct soap *soap, con
+      hostent = NULL;
+      soap->errnum = h_errno;
+    }
+@@ -74,12 +74,12 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+    while ((r = gethostbyname_r(addr, hostent, tmpbuf, tmplen, &hostent, &soap->errnum)) < 0)
+    {
+      if (tmpbuf != soap->tmpbuf)
+-@@ -23192,7 +23197,7 @@ soap_strerror(struct soap *soap)
++@@ -23263,7 +23268,7 @@ soap_strerror(struct soap *soap)
+    {
+  #ifndef WIN32
+  # ifdef HAVE_STRERROR_R
+--#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
+-+#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600)))
++-#  if !defined(_GNU_SOURCE) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
+++#  if !defined(__GLIBC__) || (!(~_GNU_SOURCE+1) && ((!defined(_POSIX_C_SOURCE) && !defined(_XOPEN_SOURCE)) || (_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600))) || defined(WITH_POSIX_STRERROR_R)
+      err = strerror_r(err, soap->msgbuf, sizeof(soap->msgbuf)); /* XSI-compliant */
+      if (err != 0)
+        soap_strcpy(soap->msgbuf, sizeof(soap->msgbuf), "unknown error");
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.137.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb
+similarity index 93%
+rename from meta-oe/recipes-support/gsoap/gsoap_2.8.137.bb
+rename to meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb
+index b91187c13f..974d99434a 100644
+--- a/meta-oe/recipes-support/gsoap/gsoap_2.8.137.bb
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.142.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7eaf5d4df67c0db38549ba3c714a37d6 \
  
- S = "${UNPACKDIR}/php-${PV}"
+ SRC_URI = "https://prdownloads.sourceforge.net/${BPN}2/${BPN}_${PV}.zip \
+            file://0001-Provide-strtod_l-signature-on-non-glibc-linux-musl-s.patch"
+-SRC_URI[sha256sum] = "a6c9fb9088efd60ad0e983fa83d8440fe128514db22297b5b3f2de302106e55c"
++SRC_URI[sha256sum] = "6d7196bd6591ec2977474c681e351b4a33eb5c2d64c9e2e6727b004f330b3752"
  
--SRC_URI[sha256sum] = "4457240f65f0c59a620920d66cdab1b12100a431e03ad9febe38b13a1b25957f"
-+SRC_URI[sha256sum] = "4ef9355f784d4b320151eb3f31c5941c0da297025eedb97f2838b2ce73dd59bf"
+ inherit autotools
  
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
 -- 
 2.43.0
 
