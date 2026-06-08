@@ -1,290 +1,249 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <zeming.liu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 467CDCD8C92
-	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 01:23:43 +0000 (UTC)
-Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.44653.1780881816619970667
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D921ECD8C92
+	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 02:41:13 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.45671.1780886467167940772
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jun 2026 18:23:36 -0700
+ Sun, 07 Jun 2026 19:41:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=goqe3tgc;
- spf=pass (domain: gmail.com, ip: 74.125.224.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-660e9ea26b9so3445460d50.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jun 2026 18:23:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780881816; cv=none;
-        d=google.com; s=arc-20240605;
-        b=EeN7k69cUbkD3WdsDpWWaMXL1i2PNW5ewe+bHrNzNYByZztt3XESdoYJMd0ZS1tzxY
-         PlnFlz1WYU+FBnnAmnYBLTzrEAiQ8PUbRzSzmSslA+B2/89xIxH6RUV8zmPAWJSt9eGH
-         h4+0u+C3ltA/kLoKRCJKtlsSbgBGZ1AzYnY7TMjyo8xpkTmdtB2FyY+HGw5uPjt7woa9
-         J1ZWiHawBiGljOxdoNmQYxW/NO6KgYykE78TIj6IsBfz6HnBmfD+xwlZWmQhgQKiFtkW
-         rjmAvacMlXw69uS8eiynS29a6hB1cZ2AEQQiRtTr9ZpACAn1ndgLQ1izF6tqpVW5RmHy
-         DdSA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=o7DASDOxhZOD09w88sEQuFXg2555o40U7tQtvev7VQk=;
-        fh=t00iliNe9pL0QaiZgATkfZzbJzbg/gzT7cLy1S2kUZs=;
-        b=KL2i6i0FNK676PZV1mOG66JF1laKbh53M/AwZdfhwiPb9cT20SaHDxMEXXQUWePU0R
-         H/gFma73n7soYojDOHECMlnbxaAZ29R/sCVDZfWCmyqGIvC786NQF3nAmz5y1iXmIzOe
-         XrV0Kq3zeEMbi+SxO11/5d8TyDHUCiUqzieKhtT69Gf80A95vYPtdufjtfjOIvWpJcwq
-         b9gptXpdRy4yVR1PM1eiw5ixISVuthUNdR7yJK1fbCcMs3pcpqJnx+gAzVi0oihvkxg9
-         jcbfmOtNSlmbUPmEpl47SYXrKWDU0cmgMoZY5GuDlGUjxsHlNAS70VB680M8GIuw3jku
-         19fA==;
-        darn=lists.openembedded.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780881816; x=1781486616; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=o7DASDOxhZOD09w88sEQuFXg2555o40U7tQtvev7VQk=;
-        b=goqe3tgcpbdVDW5N/rtNdUcfUm0rI7DQr2n0adRnBYIRxk5hwcHEqhmaObB805KOQA
-         0QxkfDBOT5ajLcPOspDGrFb/RWyCfBhiB0SHwx6MNhckawIE0nXH0/flq4HfSIuy6X8V
-         I1VqOPrlj0nTjRrdOkmST+XGQmlyS2XlpFrctEQ8E4JPYGD2RVx4KCyXrTQo9Wara+ii
-         720+SUEkcD3x4taynn8GYoacWOSbbwu2hjI2cJUSTmP9DVYEhmVqZ1+sLwX3UM6n/T6l
-         vS+XUl1P46P83LRWHdUDeSNWCVMgxdI1ZNAUXVbKPKNnx0PA/RaBqrrnB4tshyw0+FwQ
-         fuVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780881816; x=1781486616;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=o7DASDOxhZOD09w88sEQuFXg2555o40U7tQtvev7VQk=;
-        b=NvYNmbZihwaweYt+bQcHbxY94C03rBy6c/H6MmZzxBO8iaWB6W3dbK2Wxzl3T5I8iB
-         63NjKBypWt0Tz8T1qL71bEebHhW7h/mFHAX6EncNOGbKBEUWYmPltBE02gbVquV8WKQJ
-         mGZYg3Pxs25P3JgPLWInVjpmV0ZRDo4TJRz3Tbqi5Qzz2Pvv+wmh8dNQ9WvS9kYNo72g
-         I934k8dKBedsVB8F7UaIuheVG3DiixWtMiWS9513MkxiCvtAllqkKrR1jny5BxFN2HzM
-         h08AmCPZMx5Bvc1maZy9JHq92K7zcLsmk9v4Qi0PT06Ig1d7JwjAJnMYfW6MvEBQsjj9
-         nbTA==
-X-Gm-Message-State: AOJu0YzQSPY/Znr41EdfMnSVredd6q6qvfvOVNHbEdTW8Yl6ZKXb+bkB
-	+98scwLGrnvy0QNW+O2aqIYblnFutWQQbVvfLmDIptZrWS8Wpw/Z+SYEn2/X41x+2UJEOLn+V2G
-	HWFJqI/WTHGZ22XnpimPZt2knnw7pGC1iJ5ot
-X-Gm-Gg: Acq92OGKfMxtTMQCY107VIVPonYKTnjz4M3KnCrBg64BcPdSUoTUJWfJZzHQ+yHiTnF
-	uJMRbtpRuDCfB+kkCgUHWpJJu91o/DwAVSxsthP5OdGqYhJ6oLg/odxpiCNtvZRxMj4s9wrperZ
-	0vgoiJoX9TloV/q5RCNxKJLrXh7RspXPGHLT7q7vus/A5YsozU4GDanwPjVDxOr/FxhWCKY8EPZ
-	Est3tY7TQCLs+VC+0MHZh/lyptQtOBMV8skEDvswtI6nF8+0wQzATyBXUsvBjsrv5lzwUYr6xXm
-	YeScSYZYsZoX7ksTTGbSO5+WfQM+JQOBBMmzPxsAh9hyFCcvEXtv82eKOPX2vH6rIxwaVFgAAaL
-	mB+0r2iHC0kET8X1teL/RhUDTVEFHeP2ARSEL2XyssAOw3Ikz+9zJ2yjEwt6xOGLt+Ic6+/0/vw
-	dlBJg1gkXqlVlZCwo=
-X-Received: by 2002:a05:690e:11c8:b0:65c:5bfd:b20f with SMTP id
- 956f58d0204a3-66106fb0091mr11344991d50.61.1780881815627; Sun, 07 Jun 2026
- 18:23:35 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=orcAAQJr;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=06195fa49a=zeming.liu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6581MbHN3258779
+	for <openembedded-devel@lists.openembedded.org>; Sun, 7 Jun 2026 19:41:06 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PPS06212021; bh=NSME22pInhIdjtNia9Gs
+	/mcj4gO2egYL7JYzSq6reVc=; b=orcAAQJrgHVoWtl8WnQK+TwppZzMUMF6v4r8
+	1pF2NxNOv3rdInYHLD7LvYuEQA8lJ5CcXMfpuIyhTg/gZTcpohHjjiZrveGR63cN
+	uPgD5fm80mESMLMi9Z3AWqId4YqVWrUDoQKQ3fV0UAWo53Bb0/OVM7yb5CyG+xKA
+	HmIC89fBxUPw8u8Ne7NBRr1QtaNn/QXDkB3zebZ3wmG5EVugxVsv/hDV8VnXUp07
+	QI6Y6u5kLbzXLtXbq8nAx+19b5wWFS5pkATHog3+evE//NzWu0tiRMzbC3dTmHO2
+	l2Yasfc3PTdLBRMB7QSh6CQvdy4hnSFnKSfV+4MSSOiNrzO79Q==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [128.224.246.36])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4emk2gsqe1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jun 2026 19:41:06 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (10.11.224.121) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Sun, 7 Jun 2026 19:41:05 -0700
+Received: from pek-lpgtest20.wrs.com (10.11.232.110) by
+ ala-exchng01.corp.ad.wrs.com (10.11.224.121) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Sun, 7 Jun 2026 19:41:05 -0700
+From: Zeming LIU <zeming.liu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] Add ptest support for googletest
+Date: Mon, 8 Jun 2026 10:41:04 +0800
+Message-ID: <20260608024104.3167248-1-zeming.liu@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CADySD0FfPTgtq69dE4VpCQomg9=ws+EoX07h+rhFmffuyGS+5g@mail.gmail.com>
- <20260529085309.3596033-1-filipe.pires@konsulko.com>
-In-Reply-To: <20260529085309.3596033-1-filipe.pires@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 7 Jun 2026 18:23:08 -0700
-X-Gm-Features: AVVi8CcmKiCgSe0tj_LP4i27E0hiZmfoX9IPNfbAs4zb_eEXTVaQZ3xC83OtWZY
-Message-ID: <CAMKF1soBRvKyYydVgB76ajLYcELGU=Dp6yZs9EK0xsRzWmZ4jQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v3] radvd: upgrade 2.20 -> 2.21
-To: filipe.pires@konsulko.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000001ec970653b3dc42"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Authority-Analysis: v=2.4 cv=VZHH+lp9 c=1 sm=1 tr=0 ts=6a262bc2 cx=c_pps
+ a=AbJuCvi4Y3V6hpbCNWx0WA==:117 a=AbJuCvi4Y3V6hpbCNWx0WA==:17
+ a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=iKiJcTA2PjBS6x5JeXcw:22 a=t7CeM3EgAAAA:8 a=NEAV23lmAAAA:8
+ a=NrnYaHKmP-iorIhI7WIA:9 a=FdTzh2GWekK77mhwV6Dw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA4MDAyMiBTYWx0ZWRfX2G+H0aqJ+c7Z
+ XtTpwj/CSbK4LEn26UpQ9WHccODJl13T+aETm7XutTrFxwaiHbB7UD64cLmai8bOTpPYUinXc/L
+ z3hJZyy/z9bUOGkm2L8eMqfgW4T3xPpkrOtA6cU7gxvYH+AOZwhOp3NMCCmSroMixJbLJBxmism
+ 5HvshtTCdCY3tcIzabtqD6Te52ks7tbYXQlP8UM88hmnyL1We34i0MbW37i1Sga4qPRppwlEj/b
+ PwBazSc8zdCWfKu/ZD1d8ueWqZpSXMnGIYtkNIhzn8COr11zy/O6FlAPK6nynpzNqoynvayNBvK
+ B3gWwxFXimJTCmTmPqyt71/LSab+eIsPyNcNb0Ker2b8k75sEfHVeRIv32nH7uwwdb3DKBnQOpd
+ X72xvQWELldTXoF3Ljsqded4XvSY10U/nXaArabBRjCUuYE4JNsIR/KiV01ZfUKe6ouRLqdnpL6
+ NwDuk5lKrFNS/oQAC3A==
+X-Proofpoint-GUID: x11f0kAo8LG9vOwq3hK2-O7tDnXVsEBH
+X-Proofpoint-ORIG-GUID: x11f0kAo8LG9vOwq3hK2-O7tDnXVsEBH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-08_01,2026-06-05_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 phishscore=0 adultscore=0 bulkscore=0
+ lowpriorityscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606080022
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 01:23:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127418
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 02:41:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127419
 
---00000000000001ec970653b3dc42
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Test result:
+root@qemux86-64:~# ptest-runner googletest
+START: ptest-runner
+2026-06-08T02:33
+BEGIN: /usr/lib/googletest/ptest
+PASS: gmock-actions_test
+PASS: gmock-cardinalities_test
+PASS: gmock_ex_test
+PASS: gmock-function-mocker_test
+PASS: gmock-internal-utils_test
+PASS: gmock-matchers-arithmetic_test
+PASS: gmock-matchers-comparisons_test
+PASS: gmock-matchers-containers_test
+PASS: gmock-matchers-misc_test
+PASS: gmock-more-actions_test
+PASS: gmock-nice-strict_test
+PASS: gmock-port_test
+PASS: gmock-spec-builders_test
+PASS: gmock_link_test
+PASS: gmock_test
+PASS: gmock_stress_test
+PASS: gmock-more-actions_no_exception_test
+PASS: gmock_no_rtti_test
+PASS: googletest-death-test-test
+PASS: gtest_environment_test
+PASS: googletest-filepath-test
+PASS: googletest-listener-test
+PASS: gtest_main_unittest
+PASS: googletest-message-test
+PASS: gtest_no_test_unittest
+PASS: googletest-options-test
+PASS: googletest-param-test-test
+PASS: googletest-port-test
+PASS: gtest_pred_impl_unittest
+PASS: gtest_premature_exit_test
+PASS: googletest-printers-test
+PASS: gtest_prod_test
+PASS: gtest_repeat_test
+PASS: gtest_sole_header_test
+PASS: gtest_stress_test
+PASS: googletest-test-part-test
+PASS: gtest_throw_on_failure_ex_test
+PASS: gtest-typed-test_test
+PASS: gtest_unittest
+PASS: gtest-unittest-api_test
+PASS: gtest_skip_in_environment_setup_test
+PASS: gtest_skip_test
+PASS: gtest-death-test_ex_nocatch_test
+PASS: gtest-death-test_ex_catch_test
+PASS: gtest_no_rtti_unittest
+PASS: googletest-break-on-failure-unittest
+PASS: gtest_skip_check_output_test
+PASS: gtest_skip_environment_check_output_test
+PASS: googletest-catch-exceptions-test
+PASS: googletest-color-test
+PASS: googletest-env-var-test
+PASS: googletest-filter-unittest
+PASS: gtest_help_test
+PASS: googletest-list-tests-unittest
+PASS: googletest-output-test
+PASS: googletest-shuffle-test
+PASS: googletest-throw-on-failure-test
+PASS: googletest-uninitialized-test
+PASS: gtest_list_output_unittest
+PASS: gtest_xml_outfiles_test
+PASS: googletest-json-outfiles-test
+PASS: gtest_xml_output_unittest
+PASS: googletest-json-output-unittest
+DURATION: 16
+END: /usr/lib/googletest/ptest
+2026-06-08T02:34
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
-fails to build
+Signed-off-by: Zeming LIU <zeming.liu@windriver.com>
+---
+ .../include/ptest-packagelists-meta-oe.inc    |  1 +
+ .../recipes-test/googletest/files/run-ptest   |  3 ++
+ .../googletest/googletest_1.17.0.bb           | 44 ++++++++++++++++++-
+ 3 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-test/googletest/files/run-ptest
 
-https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inlin=
-e
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index f43bdf3c70..0467d1f424 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -23,6 +23,7 @@ PTESTS_FAST_META_OE = "\
+     function2 \
+     fwupd \
+     gcab \
++    googletest \
+     hunspell \
+     imagemagick \
+     jemalloc \
+diff --git a/meta-oe/recipes-test/googletest/files/run-ptest b/meta-oe/recipes-test/googletest/files/run-ptest
+new file mode 100644
+index 0000000000..da46c68550
+--- /dev/null
++++ b/meta-oe/recipes-test/googletest/files/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++ctest | sed -u 's/\*\*\*/   /g' | awk '/Test +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"); print $6": "$4; fflush();}'
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb b/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
+index c8ed80053d..4d5340b994 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.17.0.bb
+@@ -7,15 +7,20 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
+ PROVIDES += "gmock gtest"
+ 
+ SRC_URI = "git://github.com/google/googletest.git;branch=v1.17.x;protocol=https \
++           file://run-ptest \
+           "
+ SRCREV = "52eb8108c5bdec04579160ae17225d66034bd723"
+ 
+-inherit cmake pkgconfig
++inherit cmake pkgconfig ptest
+ 
+ # allow for shared libraries, but do not default to them
+ #
+ PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
+ 
++EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dgtest_build_tests=ON -Dgmock_build_tests=ON', '', d)}"
++
++DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'rsync-native', '', d)}"
++
+ CXXFLAGS:append = " -fPIC"
+ 
+ ALLOW_EMPTY:${PN} = "1"
+@@ -35,3 +40,40 @@ do_configure:prepend() {
+     # there isn't python in HOSTTOOLS so "env python" fails
+     sed -i 's@^#!/usr/bin/env python$@#!/usr/bin/env python3@g' ${S}/googlemock/test/*py ${S}/googletest/test/*py
+ }
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/lib
++
++    ptest_libs="libshared_gmock_main.so \
++                libgtest_dll.so \
++                libgmock_main_no_exception.so \
++                libgtest_main_no_exception.so \
++                libgtest_no_exception.so \
++                libgtest_main_no_rtti.so \
++               "
++    for i in ${ptest_libs}; do
++        [ -f ${B}/lib/${i} ] && install -m 0755 ${B}/lib/${i} ${D}${PTEST_PATH}/lib
++    done
++
++    rsync -a ${B}/googletest ${D}${PTEST_PATH} \
++          --exclude CMakeFiles \
++          --exclude cmake_install.cmake \
++          --exclude Makefile \
++          --exclude generated
++    install -d ${D}${PTEST_PATH}/googletest/test
++    cp ${S}/googletest/test/*.py ${D}${PTEST_PATH}/googletest/test
++    cp ${S}/googletest/test/*.txt ${D}${PTEST_PATH}/googletest/test
++    rsync -a ${B}/googlemock ${D}${PTEST_PATH} \
++          --exclude CMakeFiles \
++          --exclude cmake_install.cmake \
++          --exclude Makefile \
++          --exclude generated
++    cp ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
++    sed -i -e 's#${B}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
++    sed -i -e 's#${S}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
++    sed -i -e 's#${RECIPE_SYSROOT_NATIVE}##g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
++    sed -i -e 's#${PYTHON}#/usr/bin/python3#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
++    sed -i -e 's#${WORKDIR}##g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
++}
++
++RDEPENDS:${PN}-ptest += "cmake sed python3-datetime python3-difflib python3-json python3-xml python3-misc python3-unittest"
+-- 
+2.34.1
 
-On Fri, May 29, 2026 at 1:53=E2=80=AFAM fpires96 via lists.openembedded.org
-<filipe.pires=3Dkonsulko.com@lists.openembedded.org> wrote:
-
-> From: Filipe Pires <filipe.pires@konsulko.com>
->
-> The litech.org distribution URL is no longer available for this release,
-> so switch to fetching directly from the upstream git repository. This
-> also fixes the src-uri-bad QA warning for using GitHub archive URLs.
->
-> radvd 2.21 hardens radvdump against malformed input (CVE-2026-48715).
-> ---
->  .../radvd/{radvd_2.20.bb =3D> radvd_2.21.bb}                | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->  rename meta-networking/recipes-daemons/radvd/{radvd_2.20.bb =3D>
-> radvd_2.21.bb} (93%)
->
-> diff --git a/meta-networking/recipes-daemons/radvd/radvd_2.20.bb
-> b/meta-networking/recipes-daemons/radvd/radvd_2.21.bb
-> similarity index 93%
-> rename from meta-networking/recipes-daemons/radvd/radvd_2.20.bb
-> rename to meta-networking/recipes-daemons/radvd/radvd_2.21.bb
-> index d02433c5ec..7f4cb41431 100644
-> --- a/meta-networking/recipes-daemons/radvd/radvd_2.20.bb
-> +++ b/meta-networking/recipes-daemons/radvd/radvd_2.21.bb
-> @@ -6,7 +6,7 @@ Discovery for IP Version 6 (IPv6). With these \
->  advertisements hosts can automatically configure their \
->  addresses and some other parameters. They also can \
->  choose a default router based on these advertisements."
-> -HOMEPAGE =3D "http://www.litech.org/radvd/"
-> +HOMEPAGE =3D "https://github.com/radvd-project/radvd"
->  SECTION =3D "net"
->  DEPENDS =3D "flex-native bison-native libdaemon libbsd"
->
-> @@ -14,14 +14,16 @@ DEPENDS =3D "flex-native bison-native libdaemon libbs=
-d"
->  LICENSE =3D "radvd"
->  LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D73ebbf7182ae996e65e8fadc9a8=
-c45db"
->
-> -SRC_URI =3D "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
-> +SRCREV =3D "a8500f4035b52028c90b0a938dfe8cd65e38fb50"
-> +SRC_URI =3D "git://
-> github.com/radvd-project/radvd.git;branch=3Dmaster;tag=3Dv${PV};protocol=
-=3Dhttps
-> <http://github.com/radvd-project/radvd.git;branch=3Dmaster;tag=3Dv$%7BPV%=
-7D;protocol=3Dhttps>
-> \
->             file://radvd.init \
->             file://radvd.service \
->             file://volatiles.03_radvd \
->             file://radvd.default \
->             file://radvd.conf \
->             "
-> -SRC_URI[sha256sum] =3D
-> "af37c5a81d59f3bdc00d83056606ffa1810d4550beed6caa4f81181246494220"
-> +
-> +S =3D "${WORKDIR}/git"
->
->  UPSTREAM_CHECK_URI =3D "https://github.com/radvd-project/radvd/releases"
->  UPSTREAM_CHECK_REGEX =3D "releases/tag/v(?P<pver>\d+(\.\d+)+)"
-> --
-> 2.49.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#127284):
-> https://lists.openembedded.org/g/openembedded-devel/message/127284
-> Mute This Topic: https://lists.openembedded.org/mt/119544056/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000001ec970653b3dc42
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">fails to build=C2=A0<div><br></div><div><a href=3D"https:/=
-/autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inline">http=
-s://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inline</a=
-></div></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Fri, May 29, 2026 at 1:53=E2=80=AFAM fpire=
-s96 via <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a=
-> &lt;filipe.pires=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org"=
->konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
- rgb(204,204,204);padding-left:1ex">From: Filipe Pires &lt;<a href=3D"mailt=
-o:filipe.pires@konsulko.com" target=3D"_blank">filipe.pires@konsulko.com</a=
->&gt;<br>
-<br>
-The <a href=3D"http://litech.org" rel=3D"noreferrer" target=3D"_blank">lite=
-ch.org</a> distribution URL is no longer available for this release,<br>
-so switch to fetching directly from the upstream git repository. This<br>
-also fixes the src-uri-bad QA warning for using GitHub archive URLs.<br>
-<br>
-radvd 2.21 hardens radvdump against malformed input (CVE-2026-48715).<br>
----<br>
-=C2=A0.../radvd/{<a href=3D"http://radvd_2.20.bb" rel=3D"noreferrer" target=
-=3D"_blank">radvd_2.20.bb</a> =3D&gt; <a href=3D"http://radvd_2.21.bb" rel=
-=3D"noreferrer" target=3D"_blank">radvd_2.21.bb</a>}=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 8 +++++---<br>
-=C2=A01 file changed, 5 insertions(+), 3 deletions(-)<br>
-=C2=A0rename meta-networking/recipes-daemons/radvd/{<a href=3D"http://radvd=
-_2.20.bb" rel=3D"noreferrer" target=3D"_blank">radvd_2.20.bb</a> =3D&gt; <a=
- href=3D"http://radvd_2.21.bb" rel=3D"noreferrer" target=3D"_blank">radvd_2=
-.21.bb</a>} (93%)<br>
-<br>
-diff --git a/meta-networking/recipes-daemons/radvd/<a href=3D"http://radvd_=
-2.20.bb" rel=3D"noreferrer" target=3D"_blank">radvd_2.20.bb</a> b/meta-netw=
-orking/recipes-daemons/radvd/<a href=3D"http://radvd_2.21.bb" rel=3D"norefe=
-rrer" target=3D"_blank">radvd_2.21.bb</a><br>
-similarity index 93%<br>
-rename from meta-networking/recipes-daemons/radvd/<a href=3D"http://radvd_2=
-.20.bb" rel=3D"noreferrer" target=3D"_blank">radvd_2.20.bb</a><br>
-rename to meta-networking/recipes-daemons/radvd/<a href=3D"http://radvd_2.2=
-1.bb" rel=3D"noreferrer" target=3D"_blank">radvd_2.21.bb</a><br>
-index d02433c5ec..7f4cb41431 100644<br>
---- a/meta-networking/recipes-daemons/radvd/<a href=3D"http://radvd_2.20.bb=
-" rel=3D"noreferrer" target=3D"_blank">radvd_2.20.bb</a><br>
-+++ b/meta-networking/recipes-daemons/radvd/<a href=3D"http://radvd_2.21.bb=
-" rel=3D"noreferrer" target=3D"_blank">radvd_2.21.bb</a><br>
-@@ -6,7 +6,7 @@ Discovery for IP Version 6 (IPv6). With these \<br>
-=C2=A0advertisements hosts can automatically configure their \<br>
-=C2=A0addresses and some other parameters. They also can \<br>
-=C2=A0choose a default router based on these advertisements.&quot;<br>
--HOMEPAGE =3D &quot;<a href=3D"http://www.litech.org/radvd/" rel=3D"norefer=
-rer" target=3D"_blank">http://www.litech.org/radvd/</a>&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/radvd-project/radvd" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/radvd-project/radvd</a=
->&quot;<br>
-=C2=A0SECTION =3D &quot;net&quot;<br>
-=C2=A0DEPENDS =3D &quot;flex-native bison-native libdaemon libbsd&quot;<br>
-<br>
-@@ -14,14 +14,16 @@ DEPENDS =3D &quot;flex-native bison-native libdaemon li=
-bbsd&quot;<br>
-=C2=A0LICENSE =3D &quot;radvd&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://COPYRIGHT;md5=3D73ebbf7182ae996e65e=
-8fadc9a8c45db&quot;<br>
-<br>
--SRC_URI =3D &quot;<a href=3D"http://v6web.litech.org/radvd/dist/radvd-$%7B=
-PV%7D.tar.gz" rel=3D"noreferrer" target=3D"_blank">http://v6web.litech.org/=
-radvd/dist/radvd-${PV}.tar.gz</a> \<br>
-+SRCREV =3D &quot;a8500f4035b52028c90b0a938dfe8cd65e38fb50&quot;<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/radvd-project/radvd.g=
-it;branch=3Dmaster;tag=3Dv$%7BPV%7D;protocol=3Dhttps" rel=3D"noreferrer" ta=
-rget=3D"_blank">github.com/radvd-project/radvd.git;branch=3Dmaster;tag=3Dv$=
-{PV};protocol=3Dhttps</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://radvd.init \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://radvd.service \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://volatiles.03_radvd \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://radvd.default \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://radvd.conf \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
--SRC_URI[sha256sum] =3D &quot;af37c5a81d59f3bdc00d83056606ffa1810d4550beed6=
-caa4f81181246494220&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-<br>
-=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://github.com/radvd-proj=
-ect/radvd/releases" rel=3D"noreferrer" target=3D"_blank">https://github.com=
-/radvd-project/radvd/releases</a>&quot;<br>
-=C2=A0UPSTREAM_CHECK_REGEX =3D &quot;releases/tag/v(?P&lt;pver&gt;\d+(\.\d+=
-)+)&quot;<br>
--- <br>
-2.49.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127284): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127284" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127284</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119544056/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119544056/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000001ec970653b3dc42--
 
