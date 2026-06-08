@@ -2,141 +2,145 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CF35CD8C90
-	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 01:22:43 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.44813.1780881753291322367
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49E33CD8C90
+	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 01:23:03 +0000 (UTC)
+Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.44820.1780881776306757590
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jun 2026 18:22:33 -0700
+ Sun, 07 Jun 2026 18:22:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=oZBC01xg;
- spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-7dc67a5e102so38691817b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jun 2026 18:22:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780881752; cv=none;
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=WvZXkDGd;
+ spf=pass (domain: gmail.com, ip: 74.125.224.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-66077f6c438so3154324d50.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jun 2026 18:22:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780881775; cv=none;
         d=google.com; s=arc-20240605;
-        b=UUieviFbHr197aEyG3xwb81+BMy6AlhyUCOShUKD3w1bLWEoCh7nPiGRzdlUCmPR4N
-         +T17NlF/jveaNCyBDNNou+dJm7fjDG0h6cKPKQAyqyw7cHInGJwMwr2bjku9085C1rNj
-         WBu/Y8IdmqAHrAh/4o4IdkQU1dSTo8rTPogdwcZeMEK2MMAefva31TrLSQmUiOdYRmNF
-         5emeaYQbbfgXt0Ck5MFVqRqELjeeeC8xDUT2fpVB4T4MPoDfQvqhv+/EjOE/lDmNXQ2Z
-         4npsZfAsgCGg7pPLpGekvWnuiA2p+A5+wCr8tjw40+R2kcpBeBX2Bo+Bpxasj3TPz7ia
-         3AiQ==
+        b=HtpsQRmGKglM9eu2igr78py6K5do9z7z0Aydlc4VU38TpKVw2kKSPf5aDsa66DNk30
+         jEEDZECymGcauxNbrgNyFPD6Y+sC2c/sXy2HsyUqLa8xTKozBYW1eCF6kJasEGA7aidn
+         BBKVYDQwf7DfC1YISl+UlGD/gIstsU1vwqIK0Gz4tlC3lTDZMOjwCwpy34bR7e9svGwG
+         md8/4eIcBRSJ1hAn+qlXNJebrJjKsihnFlgDBF3rZ/3uKTb+2ryA5Xombsn0R18NIQvu
+         fv+m5joLvAwpOk9fUPpooVybgyfaFF3AEiB9of11OHMF3opt3FzD5npuA6grK0x1LylL
+         /5Pw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=MudHzrmh5yvLLD3eq8sdKMWa6wOMCW39BATLp01lryI=;
+        bh=mbK8a8c7Av0xGeVe02bp9XNqq/IgL0poYYHLNRfULlI=;
         fh=t00iliNe9pL0QaiZgATkfZzbJzbg/gzT7cLy1S2kUZs=;
-        b=RK+nW1vG8PJHrb9vZPROjhkYnvLiu34R3pPSteLwwFw/F/bhMDx+aGstQOeepC6YW6
-         3gDCf1z++15M198nDk5ZFvqx67oSW5JdQS3ebiycBvNX/lWzP1iiljzNEGntJMCMGLKe
-         00su47IoarFNIly8BTKhvEl3NpPGFgFpxlqPc3YFYjY9qzpuQAh/4IWzY4t8gAUx3KKx
-         rKqGAVp5G3OPr9p7bPG6+K7iy7X7j8LiTy7LCU568Z9aTn+evPwdlfB7ICx+vS+Bf/Uu
-         8GU82zL5msRffL/UuDXezL0C1e7QYD9ByxXc8bzrdfuqtCY4d4iLs0cN67OmtQ6b+GWW
-         MX5w==;
+        b=X0cSJEZtYKQ6TQ+ClBVOoqigpp+WTGCi2AhdWxZfKV3eotFTQOBq0OWJs1BceXOEq0
+         X0ew5R2wEb5loM1s/FIg1E4cYw/JRIrsREI/WaPykt+/V2B/7j319pYBQjkCD85AeI1S
+         7J1k9WMoQIS/1XyKtdmDQBdLpQ3JCYfGQuM4jQdoA5zjaPM6lSuB+IxM5RTgQh1MCwC0
+         6F+dql1Bpyp9y58JOXc87P+b0pHP3whP7tvu0Tfmv2TrDO83ywkvxxlxe+On1QSwvFgE
+         v97oZDMctWfHnXVxOuRy4vQ7kD+tc5Pu6IK9/VA5NFg/DNBDb9uMZ1qQ4SfXr5QLuWsc
+         V+Jw==;
         darn=lists.openembedded.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780881752; x=1781486552; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1780881775; x=1781486575; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=MudHzrmh5yvLLD3eq8sdKMWa6wOMCW39BATLp01lryI=;
-        b=oZBC01xg//y/eP/9MKfKzUg5FnwcZHa/6G603VkU+YFVAVrCHbSDpU/Lj0p8B0xQR9
-         X/Cprw0oaPP1v10RK5UkWSktm1TSYq+T3ye6WDGJISRYZzlEwpeVJbh/pQ+pVzU3IMss
-         fJbYZ5VS+bb2rf7V/ecZ8Ut04gWuNU2vZRB6A7IqT2Y8vHa5dEULGFtDAuYLI5MEQ4E/
-         N8ku014ATqsRlkE9UB8zLtXGPSKCO24A4Jgv/sye6tzacNv9XLUN13a5rxcm9lW8E119
-         rbdHt8rbvJlNwWbni8YIBVYthXcynZAHRsXgyUnpmH+/E0IP0IGCnSvutIEdVC7uVzyd
-         fsGg==
+        bh=mbK8a8c7Av0xGeVe02bp9XNqq/IgL0poYYHLNRfULlI=;
+        b=WvZXkDGdN3+dcvqOqaGYeznYKQ7VVDBO8Vv0SXax3/sFXrmROnvfl/c1QJDgt699zR
+         Sx629wcrSc+v43JL7Z2oZmQ74oiC/O8lQoMFylJgoDUB8eZRcvShbuJDjZDESDbjz8U7
+         hGIZ913wGdkeaP12xejh2NjebRkxuT7yw7aYPT72AMIPdS87Ie2KUtA8yUsfTjk3Cv3Q
+         8/NVLw8TVvcNCxoVKFo/OMz570jcfOLZd+47bm9wyvASP9MpCm4Bmd5dm+kSNM7BLESF
+         bva2u4s31EgQUl1xFLe8GZWV9z8RoiCZdcn2eoSTduSV5k1y/e/YqUGokBof2UuNoWO/
+         4ZXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780881752; x=1781486552;
+        d=1e100.net; s=20251104; t=1780881775; x=1781486575;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MudHzrmh5yvLLD3eq8sdKMWa6wOMCW39BATLp01lryI=;
-        b=qP81RmxoAcYNB9byYUWYvfMs3cBLUamv59Z1IvXSAIRWRjZWrUgT69oDilMZGpfrCW
-         EgJDSwmH7HFR6ntlnzkFHaePsbouQcQj4KqMGnzig6ggqla4+Qubkr4jxpXPjV7j2Rzd
-         v+dVHBQdsga9r6w/rNVYXni+NeR8Jn5NPl8nHwIfROeEAOn0Mso3Q9CbCUQdr92IOv5Y
-         mScA7rKWQJ7wiX5E+YjAVxUSfVOWsaxa64HE0ah072buDQXgUOYNwcC6YOWnoyYOY7ie
-         HlFnIgCalnFpxcKDEtQpbc8erQ9KixMUBDHICG37g4+Cek9hrkqDg08zAiLG8eynrU3m
-         OdAw==
-X-Gm-Message-State: AOJu0YxgzvWXpvabk9uPZyOoQEx0L7ou6eFXnIjqFZbyZq+C9NTUKcHw
-	6TdosF/G+0hl0yHjys/5bHJ4EMCK3RH7FKZgZRtjIZCx+/qCPOABT0rC2W3lRhk1OdPNm/Wpmqq
-	gy7MKkEGl/uyyng6omWy3xeQCZLQTWRyvMFsb
-X-Gm-Gg: Acq92OFs4Vd+aZ528/3x7Y+vlB4bK6RlCT+MhW2ykB/Hq3zjKSoaLPr6dE8bsc8v2pc
-	sB2nyHK4Me/pL+ms0a5kQqVcwX4/tOv3w7Awjxehl7ZjISqf80fa++k/uOPe42xzmaXfjf78t8B
-	HAmoDCHcfWP16MFQ1rQljwVHZ9K62D4an1HN6vLonLOiqKoUeAGYTUiLH6bOvsB+F3vxCYsG9NO
-	SUARHGvE7043pbE1f/6+YYF8b46pEjAJk6r9a/b3/JkgE6IFHwxc4uTM3XpWQqNF8aNu//oDl5h
-	1M2/0PQq2eqUnSOG94BUgKGz5dfxm1TKidrwS/G94jvXDoq/yLLVxDm+ELJlJl1zOuBGK0oZQf2
-	vrQsILmfO1rhvTwPNbhjBU09Tp/nmD33+9OmIS8UeeJlawNboIRIMRLke9ZakvOIekNd5UWYsXT
-	XP/FOI68jUcvKTU8KQ+56rRjdTnQ==
-X-Received: by 2002:a05:690e:4144:b0:660:62e5:9303 with SMTP id
- 956f58d0204a3-661070cbcd8mr11486396d50.63.1780881751926; Sun, 07 Jun 2026
- 18:22:31 -0700 (PDT)
+        bh=mbK8a8c7Av0xGeVe02bp9XNqq/IgL0poYYHLNRfULlI=;
+        b=fH1sgDdGSuMw9iCU3S67bs5boLzHwRkA4DG4SEe/hhvrUo9zLDN2LVYym5AfY8TucZ
+         IuxjeHisDcZAleF9zJ4gjEHc4RQstMWdSt0tnKSaYvrYyi4UJC2XXF7eqqCfP+rb2cMu
+         xB84LWyRmkMKjfhiV6ULgQPBbrZDhOdCg4SMUxLwsxk6TKFUjFNbYqgSjnZbCSxULmgP
+         IdZNtkqaQP/dpJLSybBm0Ruj+m22IW8Q9iNCN9FAJR2Hyr1p/AY4/a2sao8ljWjdA4Aq
+         mdJhupj3u0yV0yQHop6NIK4xKtbqPAGxdM7LdQeWOVndA1SDRkda+U38zkTagN9dU54i
+         mRCg==
+X-Gm-Message-State: AOJu0YwNAz4gdINQ1n/NMuha9251MZYNJJKQDksWLcNp9ZhJejl3cizG
+	wumMPj0K6h30oEs8Q5YmuvwFIHH9Z3al5LGympEodvP0VkXNeCp+MImySDjLiLEBcUfo4VP8/+c
+	McHjAcELj0nxlXScSo5D2YN4oeUMMeSMj1Kng
+X-Gm-Gg: Acq92OFFDvxmYPwArP6o9mkanBjjcVs/sQksxOqBsv1/R1/Iwc+nTkTfGg/5ki5neYS
+	wWN/HqJ97PjuDZYYvnBTVYh2/vMrrNbMnyGStxTrEUdscB5ordCEq5yAsdS4VMyQU2nR0iNNwXG
+	N1ARxHho3nYRx+q3qKIRuiZxYuC+Iafo/yxjSDaJaxBDubVWj7re/mn3r0Rod8z6olcN8GrVszB
+	aOmD96wunQJJ/mDZU9jwbdMxyvRl/QHGiym5Nm6vzsXWCdd0+mBXdlmmLTBxhdhcCr1R7IKB+lg
+	vZ7fYV32M/8cOfjWGEpzXEkHjhKE1Pd4SFrGbYoa8i1tvWEggRKIXbqOLHITwOoeQwdxJDALT5h
+	6CjKjpomKnaJzhRx6TRB+DkuCaC4FwcHopbhU0y/A39isTo/1PENskxFCibs0b4PGX+yZhvEp9i
+	1xCh8VZ53zE/ZW2Hk=
+X-Received: by 2002:a05:690e:134d:b0:660:5b90:b426 with SMTP id
+ 956f58d0204a3-66108356e59mr11477250d50.46.1780881775343; Sun, 07 Jun 2026
+ 18:22:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260530115358.3937038-1-filipe.pires@konsulko.com>
-In-Reply-To: <20260530115358.3937038-1-filipe.pires@konsulko.com>
+References: <20260530121231.3939854-1-filipe.pires@konsulko.com>
+In-Reply-To: <20260530121231.3939854-1-filipe.pires@konsulko.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 7 Jun 2026 18:22:05 -0700
-X-Gm-Features: AVVi8Cf-DMgXTfVSZox5SRtHgp6nBNCCWGkLEFmSCTU7saJqSFV6qWvNjd9M9oA
-Message-ID: <CAMKF1sodcK=YEiDcC4HoN8HpBBRar=mbMkL_MGzHbgrFjgq_HA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] lftp: upgrade 4.9.2 -> 4.9.3
+Date: Sun, 7 Jun 2026 18:22:30 -0700
+X-Gm-Features: AVVi8Cf5su_DazTlJF1_Qk3DnMdkCB-E244Yx-LhUnzW0g7-j9D0t5lz_Jv55uM
+Message-ID: <CAMKF1soBNh0aVkjWkuN6yEAFO4Y2wYnQWLtEYjRWAamCOxRPQg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] lcov: upgrade 1.16 -> 2.4
 To: filipe.pires@konsulko.com
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000035eacd0653b3d859"
+Content-Type: multipart/alternative; boundary="0000000000009b3e8f0653b3d9b2"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 01:22:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127416
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 01:23:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127417
 
---00000000000035eacd0653b3d859
+--0000000000009b3e8f0653b3d9b2
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I am seeing build failures
+fails to build
 
 https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inlin=
 e
 
-On Sat, May 30, 2026 at 4:54=E2=80=AFAM fpires96 via lists.openembedded.org
+On Sat, May 30, 2026 at 5:12=E2=80=AFAM fpires96 via lists.openembedded.org
 <filipe.pires=3Dkonsulko.com@lists.openembedded.org> wrote:
 
 > From: Filipe Pires <filipe.pires@konsulko.com>
 >
+> Signed-off-by: Filipe Pires <filipe.pires@konsulko.com>
 > ---
->  .../recipes-connectivity/lftp/{lftp_4.9.2.bb =3D> lftp_4.9.3.bb} | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->  rename meta-networking/recipes-connectivity/lftp/{lftp_4.9.2.bb =3D>
-> lftp_4.9.3.bb} (89%)
+>  meta-oe/recipes-support/lcov/{lcov_1.16.bb =3D> lcov_2.4.bb} | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-support/lcov/{lcov_1.16.bb =3D> lcov_2.4.bb} (95%=
+)
 >
-> diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-> b/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
-> similarity index 89%
-> rename from meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-> rename to meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
-> index 927916f985..0b1ce1a376 100644
-> --- a/meta-networking/recipes-connectivity/lftp/lftp_4.9.2.bb
-> +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.9.3.bb
-> @@ -7,8 +7,7 @@ LICENSE =3D "GPL-3.0-only"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
->
->  SRC_URI =3D "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2"
-> -SRC_URI[md5sum] =3D "42ec1793c386702bc2734ffbc8a5cff1"
+> diff --git a/meta-oe/recipes-support/lcov/lcov_1.16.bb
+> b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+> similarity index 95%
+> rename from meta-oe/recipes-support/lcov/lcov_1.16.bb
+> rename to meta-oe/recipes-support/lcov/lcov_2.4.bb
+> index a889b3fa82..210cae45f6 100755
+> --- a/meta-oe/recipes-support/lcov/lcov_1.16.bb
+> +++ b/meta-oe/recipes-support/lcov/lcov_2.4.bb
+> @@ -51,7 +51,7 @@ RDEPENDS:${PN}:append:class-target =3D " \
+>      gcov-symlinks \
+>  "
+>  SRC_URI =3D "
+> https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-=
+${PV}.tar.gz
+> "
 > -SRC_URI[sha256sum] =3D
-> "8a07cbf4df09b107fe3fc41d133ee2f6cea6ef4c33ccf06c8448ad058cd96b7e"
+> "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
 > +SRC_URI[sha256sum] =3D
-> "adceaef1bd21a38d07c973233fab603813c431f0a8dcbd23239fa9a41ae17b6e"
+> "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
 >
->  inherit autotools gettext pkgconfig
->
+>  UPSTREAM_CHECK_URI =3D "https://github.com/linux-test-project/lcov/relea=
+ses
+> "
+>  UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
 > --
 > 2.49.0
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#127297):
-> https://lists.openembedded.org/g/openembedded-devel/message/127297
-> Mute This Topic: https://lists.openembedded.org/mt/119560865/1997914
+> View/Reply Online (#127300):
+> https://lists.openembedded.org/g/openembedded-devel/message/127300
+> Mute This Topic: https://lists.openembedded.org/mt/119561081/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
 > raj.khem@gmail.com]
@@ -144,75 +148,77 @@ On Sat, May 30, 2026 at 4:54=E2=80=AFAM fpires96 via lists.openembedded.org
 >
 >
 
---00000000000035eacd0653b3d859
+--0000000000009b3e8f0653b3d9b2
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">I am seeing build failures<div><br></div><div><a href=3D"h=
-ttps://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inline=
-">https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inl=
-ine</a></div></div><br><div class=3D"gmail_quote gmail_quote_container"><di=
-v dir=3D"ltr" class=3D"gmail_attr">On Sat, May 30, 2026 at 4:54=E2=80=AFAM =
-fpires96 via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
-rg</a> &lt;filipe.pires=3D<a href=3D"mailto:konsulko.com@lists.openembedded=
-.org">konsulko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">From: Filipe Pires &lt;<a href=3D"=
-mailto:filipe.pires@konsulko.com" target=3D"_blank">filipe.pires@konsulko.c=
-om</a>&gt;<br>
+<div dir=3D"ltr">fails to build<div><br></div><div><a href=3D"https://autob=
+uilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inline">https://au=
+tobuilder.yoctoproject.org/valkyrie/api/v2/logs/7081084/raw_inline</a></div=
+></div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr=
+" class=3D"gmail_attr">On Sat, May 30, 2026 at 5:12=E2=80=AFAM fpires96 via=
+ <a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;f=
+ilipe.pires=3D<a href=3D"mailto:konsulko.com@lists.openembedded.org">konsul=
+ko.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"=
+gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
+4,204,204);padding-left:1ex">From: Filipe Pires &lt;<a href=3D"mailto:filip=
+e.pires@konsulko.com" target=3D"_blank">filipe.pires@konsulko.com</a>&gt;<b=
+r>
 <br>
+Signed-off-by: Filipe Pires &lt;<a href=3D"mailto:filipe.pires@konsulko.com=
+" target=3D"_blank">filipe.pires@konsulko.com</a>&gt;<br>
 ---<br>
-=C2=A0.../recipes-connectivity/lftp/{<a href=3D"http://lftp_4.9.2.bb" rel=
-=3D"noreferrer" target=3D"_blank">lftp_4.9.2.bb</a> =3D&gt; <a href=3D"http=
-://lftp_4.9.3.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.3.bb</a>} |=
- 3 +--<br>
-=C2=A01 file changed, 1 insertion(+), 2 deletions(-)<br>
-=C2=A0rename meta-networking/recipes-connectivity/lftp/{<a href=3D"http://l=
-ftp_4.9.2.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.2.bb</a> =3D&gt=
-; <a href=3D"http://lftp_4.9.3.bb" rel=3D"noreferrer" target=3D"_blank">lft=
-p_4.9.3.bb</a>} (89%)<br>
+=C2=A0meta-oe/recipes-support/lcov/{<a href=3D"http://lcov_1.16.bb" rel=3D"=
+noreferrer" target=3D"_blank">lcov_1.16.bb</a> =3D&gt; <a href=3D"http://lc=
+ov_2.4.bb" rel=3D"noreferrer" target=3D"_blank">lcov_2.4.bb</a>} | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+=C2=A0rename meta-oe/recipes-support/lcov/{<a href=3D"http://lcov_1.16.bb" =
+rel=3D"noreferrer" target=3D"_blank">lcov_1.16.bb</a> =3D&gt; <a href=3D"ht=
+tp://lcov_2.4.bb" rel=3D"noreferrer" target=3D"_blank">lcov_2.4.bb</a>} (95=
+%)<br>
 <br>
-diff --git a/meta-networking/recipes-connectivity/lftp/<a href=3D"http://lf=
-tp_4.9.2.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.2.bb</a> b/meta-=
-networking/recipes-connectivity/lftp/<a href=3D"http://lftp_4.9.3.bb" rel=
-=3D"noreferrer" target=3D"_blank">lftp_4.9.3.bb</a><br>
-similarity index 89%<br>
-rename from meta-networking/recipes-connectivity/lftp/<a href=3D"http://lft=
-p_4.9.2.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.2.bb</a><br>
-rename to meta-networking/recipes-connectivity/lftp/<a href=3D"http://lftp_=
-4.9.3.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.3.bb</a><br>
-index 927916f985..0b1ce1a376 100644<br>
---- a/meta-networking/recipes-connectivity/lftp/<a href=3D"http://lftp_4.9.=
-2.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.2.bb</a><br>
-+++ b/meta-networking/recipes-connectivity/lftp/<a href=3D"http://lftp_4.9.=
-3.bb" rel=3D"noreferrer" target=3D"_blank">lftp_4.9.3.bb</a><br>
-@@ -7,8 +7,7 @@ LICENSE =3D &quot;GPL-3.0-only&quot;<br>
-=C2=A0LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Dd32239bcb673463ab874e=
-80d47fae504&quot;<br>
+diff --git a/meta-oe/recipes-support/lcov/<a href=3D"http://lcov_1.16.bb" r=
+el=3D"noreferrer" target=3D"_blank">lcov_1.16.bb</a> b/meta-oe/recipes-supp=
+ort/lcov/<a href=3D"http://lcov_2.4.bb" rel=3D"noreferrer" target=3D"_blank=
+">lcov_2.4.bb</a><br>
+similarity index 95%<br>
+rename from meta-oe/recipes-support/lcov/<a href=3D"http://lcov_1.16.bb" re=
+l=3D"noreferrer" target=3D"_blank">lcov_1.16.bb</a><br>
+rename to meta-oe/recipes-support/lcov/<a href=3D"http://lcov_2.4.bb" rel=
+=3D"noreferrer" target=3D"_blank">lcov_2.4.bb</a><br>
+index a889b3fa82..210cae45f6 100755<br>
+--- a/meta-oe/recipes-support/lcov/<a href=3D"http://lcov_1.16.bb" rel=3D"n=
+oreferrer" target=3D"_blank">lcov_1.16.bb</a><br>
++++ b/meta-oe/recipes-support/lcov/<a href=3D"http://lcov_2.4.bb" rel=3D"no=
+referrer" target=3D"_blank">lcov_2.4.bb</a><br>
+@@ -51,7 +51,7 @@ RDEPENDS:${PN}:append:class-target =3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0gcov-symlinks \<br>
+=C2=A0&quot;<br>
+=C2=A0SRC_URI =3D &quot;<a href=3D"https://github.com/linux-test-project/lc=
+ov/releases/download/v$%7BPV%7D/lcov-$%7BPV%7D.tar.gz" rel=3D"noreferrer" t=
+arget=3D"_blank">https://github.com/linux-test-project/lcov/releases/downlo=
+ad/v${PV}/lcov-${PV}.tar.gz</a>&quot;<br>
+-SRC_URI[sha256sum] =3D &quot;987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c=
+2ba5224995668e3240b&quot;<br>
++SRC_URI[sha256sum] =3D &quot;3457825c6b2fe4ef77c782b82a23875c84a3c95524382=
+3f05d8f2dec0d455820&quot;<br>
 <br>
-=C2=A0SRC_URI =3D &quot;<a href=3D"http://lftp.yar.ru/ftp/lftp-$%7BPV%7D.ta=
-r.bz2" rel=3D"noreferrer" target=3D"_blank">http://lftp.yar.ru/ftp/lftp-${P=
-V}.tar.bz2</a>&quot;<br>
--SRC_URI[md5sum] =3D &quot;42ec1793c386702bc2734ffbc8a5cff1&quot;<br>
--SRC_URI[sha256sum] =3D &quot;8a07cbf4df09b107fe3fc41d133ee2f6cea6ef4c33ccf=
-06c8448ad058cd96b7e&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;adceaef1bd21a38d07c973233fab603813c431f0a8dcb=
-d23239fa9a41ae17b6e&quot;<br>
-<br>
-=C2=A0inherit autotools gettext pkgconfig<br>
-<br>
+=C2=A0UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://github.com/linux-test=
+-project/lcov/releases" rel=3D"noreferrer" target=3D"_blank">https://github=
+.com/linux-test-project/lcov/releases</a>&quot;<br>
+=C2=A0UPSTREAM_CHECK_REGEX =3D &quot;(?P&lt;pver&gt;\d+(\.\d+)+)&quot;<br>
 -- <br>
 2.49.0<br>
 <br>
 <br>
 -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 Links: You receive all messages sent to this group.<br>
-View/Reply Online (#127297): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/127297" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/127297</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119560865/199=
+View/Reply Online (#127300): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/127300" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/127300</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/119561081/199=
 7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/119560865/1997914</a><br>
+t/119561081/1997914</a><br>
 Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
 d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
 ><br>
@@ -224,5 +230,5 @@ et=3D"_blank">raj.khem@gmail.com</a>]<br>
 <br>
 </blockquote></div>
 
---00000000000035eacd0653b3d859--
+--0000000000009b3e8f0653b3d9b2--
 
