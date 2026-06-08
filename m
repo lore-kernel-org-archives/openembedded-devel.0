@@ -1,217 +1,114 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE938CD6E79
-	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 22:51:44 +0000 (UTC)
-Received: from CY3PR05CU001.outbound.protection.outlook.com (CY3PR05CU001.outbound.protection.outlook.com [40.93.201.63])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.67353.1780959096457590135
- for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jun 2026 15:51:36 -0700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEF97CD8CA7
+	for <webhook@archiver.kernel.org>; Mon,  8 Jun 2026 23:12:24 +0000 (UTC)
+Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.67861.1780960340755717505
+ for <Openembedded-devel@lists.openembedded.org>;
+ Mon, 08 Jun 2026 16:12:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=selector1 header.b=vFIkEHwU;
- spf=pass (domain: ti.com, ip: 40.93.201.63, mailfrom: reatmon@ti.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AUmlgXNIs6p0Y8pmJ1xqz7Kcugo3HGonA7yzPcvaUIPg2YuvhPkwCZETDPASovtpBj1dIaVfM46JxrWzpqqIg6pF/tSOPewettmGp/9jS5UB2Us1ioqD9aWgTy+v+D4TrPYck1ZOcsyFBO9VclZGHrPVEH4ZnUxTtRyzQg7c+QKM5EUZEFjXvzkJj6yvZ0CiyOa0ic4ZdCJm49PbZ1d00uSnL5LGW5eDyMU2n0dn8m4ey4Q6xeTD8EC8vpek/yS24uTqX66/3431rnS3FJnI84+32xDUMf8rryV+Pch0MWxIkP7gwrniu2JYtmInJmVhuY17CAnG+zxqbsq3iUemYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+jbpnoLwHoSPXFG6NGIoHWBERxEM6nZCvSvd2qvGtH8=;
- b=RDsdev+By+8j65p0gjuoLMnU20mgOYgudyIsvnh3nabixs7Lvrk2eLZ8EytO9xoK8QA90Cskxm9zBR7/0JJcNGlTvNyf4x7WIqLA7Woezp1UpQ0+UNRGz1SB5NDY86/nGNxhn9DjtSB2O74tafSNrt5phOXnoXJmZ3vUN51uL2e2PWE9t1YeXtGY5N7SGSB2rbO1FWmxmOU6bDu195Gd9OWKfHMfqbXCNfEdL8G0z57v6oAHOXP/kX0fBjCKgv764/hsay3fhfENlvJ3lT4xrXFepUxvpkXdDZNZ/7E2nKC5N4lYCQyX5JCDF8079jdsA+Y+LsPNuU/fe+qP+yI5nA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+jbpnoLwHoSPXFG6NGIoHWBERxEM6nZCvSvd2qvGtH8=;
- b=vFIkEHwUU8mM9tJQxhhSPZcNjuqurVL2vm0KBhPTG6a1yDDD6PiRy76u651u5x9ze1HKFk8YT5j5Zn1CbsYJVekAszXU+2G9IxoRfb2TVCv5+Y+gG1aP8nuZ6Ev5Cxt31qTyYmlC28rrgxOPztlOOwN/kIuJh2baxZTPYpOfSMA=
-Received: from MN2PR22CA0018.namprd22.prod.outlook.com (2603:10b6:208:238::23)
- by DS4PR10MB997597.namprd10.prod.outlook.com (2603:10b6:8:31e::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Mon, 8 Jun 2026
- 22:51:33 +0000
-Received: from BL6PEPF0001AB4B.namprd04.prod.outlook.com
- (2603:10b6:208:238:cafe::45) by MN2PR22CA0018.outlook.office365.com
- (2603:10b6:208:238::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.13 via Frontend Transport; Mon, 8
- Jun 2026 22:51:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF0001AB4B.mail.protection.outlook.com (10.167.242.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Mon, 8 Jun 2026 22:51:32 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 8 Jun
- 2026 17:51:32 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 8 Jun
- 2026 17:51:32 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 8 Jun 2026 17:51:32 -0500
-Received: from grumpy (grumpy.dhcp.ti.com [128.247.81.229])
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 658MpWgt354748
-	for <openembedded-devel@lists.openembedded.org>; Mon, 8 Jun 2026 17:51:32 -0500
-Received: from reatmon by grumpy with local (Exim 4.97)
-	(envelope-from <reatmon@ti.com>)
-	id 1wWioe-0000000Gpst-0Z9G
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2026 17:51:32 -0500
-From: Ryan Eatmon <reatmon@ti.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] opencl-cts: update to release 2026-05-05
-Date: Mon, 8 Jun 2026 17:51:32 -0500
-Message-ID: <20260608225132.4012664-1-reatmon@ti.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=JqTlHaaC;
+ spf=pass (domain: gmail.com, ip: 74.125.224.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-6607048fa62so4897463d50.1
+        for <Openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 16:12:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780960340; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TAqfrHKSZxWTA8iYnFcuMjf7k0u/dDdzxtYNfKB1A/2XOjQ0DlZHsSwdF3aNBtLKxa
+         Ma1to3Dyz/OX+0618ddpj6Sc/T7qIhckiWLv6D0y6sLr3HFHeec/E1zgtoW2z3bDwAKB
+         M9aAtCggIDurFWUAxd6xmlB1P72vezHeIM6QJJVW/PoOIUFbseB2nxEae4IhLWy7hAwD
+         x1Cuk9c0FDGJE+X9pRtbOOYrPkq2fk9LdztzSO71hXAUbYhqb94vioyHs9NMSAlqGH1r
+         D93FH3eD7Xhx88LgHQGcfPJpbkPvgGMwXVStzge/Y6S9dqnA90Rnt7MhlnxqF8PJCkAs
+         ohPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=aA1PTlIQpUuyoYWfVfMjm+2ss6R/gbA4X45odmD2ff4=;
+        fh=8zJdW+oNUiUnP74dbMVZ4YwJbClZ6dA+woNTiwLfAqM=;
+        b=ZPuZxF+8v3++FuLh7GG+P4tM94gcH2s/fP2H24jAxqZKfWCuUZXCldRv+bKw7vJvk9
+         oSUtoj/B58f7oQ3rs26uc0ep052NsP8BA3Kt+NAqETCYfrv3oErYcJodB4Hz4JIifjEE
+         ecn/fl3MdI0Ej26DYQWbzhKeA2DNpw0jOMO8HbXCF9Jgz35fwtM30pqzmsVCvxEEnr6v
+         Zuqa2OvRzH2RGgJwPJjQPzEDaBZ5LUKk2rjVQuxnG8nToT8TyyD/SMWQsQ3QmU4CKqWn
+         x9LrEJbC6Zq1MlRpijvcuOZmLwZqsJ4Ckndvc+YaWQkRT/E8jdgffCqBk+9Qf3LZegT1
+         rPtg==;
+        darn=lists.openembedded.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1780960340; x=1781565140; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=aA1PTlIQpUuyoYWfVfMjm+2ss6R/gbA4X45odmD2ff4=;
+        b=JqTlHaaCWEBH3IvmBzj4OwsoXSqgScMLjhOn3j/9dLGEG7LvjRRpt+RQH7EuHwY5I6
+         D7DoN41i4g8GSi7wf1msk2VPR58nNgnpOyLPbAeicAWdHEit9X5k7oazmWDKzmf295jB
+         z+/DW+krKivCMCWy4Bt1OVczOfroGxv66IdAQtDGcNoPkz6oiDPhNB1uAM0lY1PoyKzi
+         /UVQFeNOq9Dqw2da6tqj5/IM1a/on2fd469gSk6RLS9voX1av7EuA/E+veXMO5Ni2WR1
+         Khctn2uZszitkLKKWURxX3FyqrgZnU8wlUF80I2y75p2jtFnXl2fWN23eN/QNm/zNFAP
+         1kbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1780960340; x=1781565140;
+        h=to:subject:message-id:date:from:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=aA1PTlIQpUuyoYWfVfMjm+2ss6R/gbA4X45odmD2ff4=;
+        b=Ppp244DfnPTFK/Le1UspHWVR8hNUaSFzKRfIpFl7yg64msMZ6pbIZUp9VKdpePHoLZ
+         iG0jKkBTlaYOUMK7FSseZiSale2Cm9tLySmScalOx8miDBJekWX8BJ+qAQUvulhESay9
+         2cnE/BuEOoJxffVKqnqkps023f609Y6Qy7Ue9GNyK9SAWYSv6gLknuSPeA6DUclGYE9y
+         7jWUI4fj8JpNnPxUmWH1oMNOp6vO35g4V5g96gOrPpvJG3oJLaLQxb1ay7npPSht2Zcl
+         Vd/WthHCMkoy3BOR0sTdAlAQs1oLsEUv0k/hclmNwEuyML7qP7Qc+9E61ntE8k8sljl6
+         VsFA==
+X-Gm-Message-State: AOJu0Yzu+PSDYcylUqlWI4o/od5BQWtBnrsNdJ7EEiMzQytxsFVaxZeE
+	7MmBdAmoTjtmZXnf1WVoJ6Fh5eGhRiUspVZeVrFDobAYHwhn9ZNgLFWI98QVhn7QZAo4AhF5dcz
+	3LlO7qoWNx3idoh4H4+HI3n5LZsK9FeXPZ+0jVSE=
+X-Gm-Gg: Acq92OG7VYn62VsfuG/gCj/mywei/YT+FO4idgxntRy56alkWP80OBdjHkBoAPsMBc8
+	E0n5u/tdB5SZH9Sd/p41WYzlUdcgR1jXNolkRWDFbdHL3JkiSyxwla2JtVBtrWb/jLxrbgA5LGn
+	5Bpye5+84An0Ga0JWWQ3yLvbIVpaHCMDwaN7naCd2UFVNvazYb4PSh0KdArvks29wC+LrgqVuJX
+	/yMEi4qitZAM2jEd0FKswqXFm0KWoEXwqOFYjDUqjX1XdH7bhMHFtGlz1Z8bHITUm/K7Cf3Cq5n
+	uMDRWkrLfPbyEeiiAD9vMJ3mhmRF+8DEj3/wtUCvYHq4h9j2Ri6oPTRooRJk+ygjIyX5vRV63rI
+	ZcvY8opolf7Ag6mLjdZG2o79s015AWa952Ai3RcJy7AxhlcJAj4dfGLHiHGIQHq/ZNYgYczaZFK
+	USJ67i77zyNxSjltM=
+X-Received: by 2002:a05:690e:1182:b0:650:39d6:6983 with SMTP id
+ 956f58d0204a3-6614f5b1099mr162260d50.5.1780960339766; Mon, 08 Jun 2026
+ 16:12:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4B:EE_|DS4PR10MB997597:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2122a71b-a720-40d4-bcf9-08dec5b07cac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: 
-	BCL:0;ARA:13230040|1800799024|82310400026|36860700016|376014|6133799003|3023799007|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: 
-	EiMLQR1Dw7E4VOx64Vl4Obfi/di3IlrQ4cDiAnnmnmaDaDUEWebR8CTnjck2gOf+xW0AkNxSBN9SaYLbcOa0cA1ya+aI/gsdPAq12sBi6H7+UxKn7MBILP1E0hYWV23Z6oko0jXHQliZPo3BRHwLJVQcbn+tYgOpNgSGItGfKo22mO1t9wdDiT7Zeu3C2bYRKfPJuTfy3txHZ7de3xux7ScOktZjZtw5fUs2TW0Z6o78lgaYIVtUF98GHpr8wekh/GuTovdy5EJIwMOhV8ysgZnLZYTPmZqYOoB5n2DyvpqNTdNN+latzLjQGo0YHqa8jFFOTrbWYdleAcQ9lLvAKxWanV9uof/Z6tN92LSzA+Jfqb3SS3aTDR9YakBPgl71l4M1f+g6ZE6YV1y98jtmD2Vul68UaqWGhoFj9pmf79Wtx4bN3bCLs04wC/ZnR0m2g8W3O4oaOg/Skg7+Xti8LJa3q+3OYtvFctNQIThpDfHzkA+RmO+DaTOCEE6ebL2ZJvzvdH/fOEzyBn1NPcOcx79lcNfnryQPWAxCCavYiisJXzGGU2uq4+KzbYfzS8Gcl7O/GzyoE4J3W3vYGvBlgBupFjRdKimqntwa2u6ek86vtomHgpjumxPdm/9E9LogwCGmlwVHWYT3grzZ9unLPD7wMWF1X3E3YgPuNPucCwAQcYVwJ+WDdGqyoK9sx09xRplhevbb5rPdUFhy4SG9Ts7eT1eZhbSR+Qa9/77+MiE=
-X-Forefront-Antispam-Report: 
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(6133799003)(3023799007)(18002099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	OsImBdcXQDKAXcfcGj6KCl1cMIxxkiUgBCS2LuN+lQylyDyb4yCO5PJOidIEFrhPapbkyza85y45NXrXPc2f8waQdj4/nW8d+4GKWBPC34KBYsF4FDcjYHoZ9fB2jeKww5Kzsz0Qafvz1IJZfTIQxpkCHx6WWeuZmcOOcuu1BYmSuk/ghJmVJnqdAEgnrQu5fE8/itLMZckGdaqN61E/cuyULpbLqgp4u4AMoGbs2VaC2Sb6Wtd2GlzbPqybfaZu8OZ8vUHP4D4ccVre/jL6HEwAHwH9OiEv8uOtR/HCwb+pemUf/MNMn7v4GzcGbjYvYV9A+xYwWC3PU74cmTHQDfPLF7tOW+O45Bg0kz9vvKOKtocYdnHvWGBczs8g9IrYtrUJ8PLfRm7gyfKu915RBnm/t8XyAT0cfBqJZJLA1pHaFQaSMnTi+kAtmdP/N+YU
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 22:51:32.8642
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2122a71b-a720-40d4-bcf9-08dec5b07cac
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BL6PEPF0001AB4B.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR10MB997597
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 Jun 2026 16:11:53 -0700
+X-Gm-Features: AVVi8CfDbBfK5TilHLUGGCRVyXEjWZNQGs4oamlw3vCWHyhRwXj3M2m0-IJ9PHY
+Message-ID: <CAMKF1sq2JtpgEWVmGAXp1QTmYOiMWyajir-bHDRN56pr_E-bJQ@mail.gmail.com>
+Subject: GCC 16 and meta-openembedded
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Deepesh Varatharajan <deepesh.varatharajan@windriver.com>
+Content-Type: multipart/alternative; boundary="0000000000006930630653c624c4"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 22:51:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127424
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jun 2026 23:12:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127425
 
-Update OpenCL CTS to the latest release.  With the move of the
-opencl-headers and other opencl-* packages to a newer version, this one
-also needs to update to fix compile issues related to the header
-changes.
+--0000000000006930630653c624c4
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Ryan Eatmon <reatmon@ti.com>
----
- .../files/0001-Ignore-Compiler-Warnings.patch | 43 -------------------
- ...2025.04.14.bb =3D> opencl-cts_2026.05.05.bb} |  9 ++--
- 2 files changed, 4 insertions(+), 48 deletions(-)
- delete mode 100644 meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-=
-Warnings.patch
- rename meta-oe/recipes-core/opencl/{opencl-cts_2025.04.14.bb =3D> opencl-c=
-ts_2026.05.05.bb} (80%)
+Hi All,
 
-diff --git a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warning=
-s.patch b/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.p=
-atch
-deleted file mode 100644
-index 2495f195c1..0000000000
---- a/meta-oe/recipes-core/opencl/files/0001-Ignore-Compiler-Warnings.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 082ce10dd191f036f5a6e1fb31134e9736ba3643 Mon Sep 17 00:00:00 2001
--From: Antonios Christidis <a-christidis@ti.com>
--Date: Fri, 17 Jan 2025 15:05:39 -0600
--Subject: [PATCH] Create CMake option ENABLE_WERROR
--
--This creates an option that can be toggled on or off when configuring the =
-project.
--By default, it's set to ON
--
--Upstream-Status: Pending
--Signed-off-by: Antonios Christidis <a-christidis@ti.com>
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- CMakeLists.txt | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -19,6 +19,16 @@ add_definitions(-DCL_USE_DEPRECATED_OPEN
-- add_definitions(-DCL_NO_EXTENSION_PROTOTYPES)
-- add_definitions(-DCL_ENABLE_BETA_EXTENSIONS)
--=20
--+option(ENABLE_WERROR "Enable warnings as errors" ON)
--+
--+if(ENABLE_WERROR)
--+  if(MSVC)
--+    add_compile_options(/WX)
--+  else()
--+    add_compile_options(-Werror)
--+  endif()
--+endif()
--+
-- option(USE_CL_EXPERIMENTAL "Use Experimental definitions" OFF)
-- if(USE_CL_EXPERIMENTAL)
--   add_definitions(-DCL_EXPERIMENTAL)
--@@ -99,7 +109,6 @@ if(CMAKE_COMPILER_IS_GNUCC OR "${CMAKE_C
--     add_cxx_flag_if_supported(-Wmisleading-indentation)
--     add_cxx_flag_if_supported(-Wunused-function)
--     add_cxx_flag_if_supported(-Wunused-variable)
---    add_cxx_flag_if_supported(-Werror)
--     if(NOT CMAKE_BUILD_TYPE MATCHES "Release|RelWithDebInfo|MinSizeRel")
--         # Enable more warnings if not doing a release build.
--         add_cxx_flag_if_supported(-Wall)
-diff --git a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb b/meta-oe=
-/recipes-core/opencl/opencl-cts_2026.05.05.bb
-similarity index 80%
-rename from meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
-rename to meta-oe/recipes-core/opencl/opencl-cts_2026.05.05.bb
-index fe1d6075e2..e99c305d9a 100644
---- a/meta-oe/recipes-core/opencl/opencl-cts_2025.04.14.bb
-+++ b/meta-oe/recipes-core/opencl/opencl-cts_2026.05.05.bb
-@@ -7,16 +7,15 @@ inherit pkgconfig cmake features_check
-=20
- REQUIRED_DISTRO_FEATURES =3D "opencl"
-=20
--DEPENDS +=3D "opencl-headers virtual/libopencl1 spirv-tools-native"
-+DEPENDS +=3D "opencl-headers virtual/libopencl1 spirv-headers spirv-tools-=
-native"
- RDEPENDS:${PN} +=3D "python3-core python3-io"
-=20
-=20
--SRC_URI =3D "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=3Dhttps=
-;branch=3Dmain;lfs=3D0 \
--	   file://0001-Ignore-Compiler-Warnings.patch"
-+SRC_URI =3D "git://github.com/KhronosGroup/OpenCL-CTS.git;protocol=3Dhttps=
-;branch=3Dmain;lfs=3D0"
-=20
--SRCREV =3D "e96edaef8b582c2412a2aab4b82f5c88af88617d"
-+SRCREV =3D "0979549a997090c0569da4c4e995422b8f73f1fe"
-=20
--EXTRA_OECMAKE:append =3D " -DENABLE_WERROR=3DOFF -DCL_INCLUDE_DIR=3D${STAG=
-ING_INCDIR} -DCL_LIB_DIR=3D${STAGING_LIBDIR} -DOPENCL_LIBRARIES=3DOpenCL"
-+EXTRA_OECMAKE:append =3D " --compile-no-warning-as-error -DSPIRV_INCLUDE_D=
-IR=3D${STAGING_EXECPREFIXDIR} -DCL_INCLUDE_DIR=3D${STAGING_INCDIR} -DCL_LIB=
-_DIR=3D${STAGING_LIBDIR} -DOPENCL_LIBRARIES=3DOpenCL"
-=20
- PACKAGECONFIG =3D " \
- 	${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl gles', '', d)} =
-\
---=20
-2.43.0
+GCC 16 is now in core, however there are few failures seen in
+meta-openembedded layers.
 
+https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs/7083446/raw_inline
+
+Any help in fixing these recipes is appreciated
+
+Thanks
+-Khem
+
+--0000000000006930630653c624c4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi All,<div><br></div><div>GCC 16 is now in core, however =
+there are few failures seen in meta-openembedded layers.</div><div><br></di=
+v><div><a href=3D"https://autobuilder.yoctoproject.org/valkyrie/api/v2/logs=
+/7083446/raw_inline">https://autobuilder.yoctoproject.org/valkyrie/api/v2/l=
+ogs/7083446/raw_inline</a></div><div><br></div><div>Any help in fixing thes=
+e recipes is appreciated</div><div><br></div><div>Thanks</div><div>-Khem</d=
+iv><div><br></div></div>
+
+--0000000000006930630653c624c4--
 
