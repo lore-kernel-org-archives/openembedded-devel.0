@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57594CD8CAA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58851CD8CAD
 	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 10:29:31 +0000 (UTC)
-Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.76498.1781000969465925488
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.76497.1781000966146332942
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2026 03:29:29 -0700
+ Tue, 09 Jun 2026 03:29:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=B4TQXbVX;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=LvJIRlkN;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1781000969; x=1812536969;
+  t=1781000966; x=1812536966;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=sF0tCZrgZ5t3T+DbR47f9xwdO6gV1F/7dBcCGWRQ2ro=;
-  b=B4TQXbVX4WKiFBCDGVeBdWP8qT8z8CEYuRbKOjr+zaafjYoHVtxqIqpT
-   Zlp3vY2cvg7GmlvU/ohxarNiDIind/7VbvPsJY6rVnsUgnRmFA5L5/k79
-   66lJSukaHzmZil5i818436xA41BJuqh0DLoVa3t1C2QAIxyHHXDHjQGe+
-   /d0b28IVKLdoEtOcqVVPmCkGa7eZ2lVYWqHpzA5/CFjcFNTD/S4ct1TId
-   Z0eH6xetY/+8glutEE0iSBboMjxsaaxR+g6GcO59DlgO6tANxq3R2HsfJ
-   p7jk2TUHcz9zu4SBeZwLeZ5/+hmtdLa6+fkdQZGNdwMxuvrm4SY3EL91Y
-   g==;
-X-CSE-ConnectionGUID: CWBqd/lSREWW0O26X8WYEQ==
-X-CSE-MsgGUID: sQ8GCwjjRiKV0icU6juTxA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="243544175"
+  bh=nCFP5rFm41iLtHKnhk3GiGEyzfklpjmgphUdnnpb9Iw=;
+  b=LvJIRlkNQdGtwRPtEM74Mpbu2DXdSAIWdEOFHLDgKEQDIRCI6Tk+GFlj
+   ioBBOWPqDu3uXBhzS8ACW+N6k+Ec+3hLrI05XZjUQr64R2beXdWC5e8BY
+   BAG7NjmGjNHHz993u35M8QrO3R5X73310ZuZRvqYRS39/h9H/MHz61AG5
+   46w+Ukq+mjGQpxuIq6kruwGUcYl3wN8q7vneqbkxf/y2bpOCxl0zRHCpC
+   9U4pYoX3/pHY33teDrvnSEuFFmZ65hlegZ6Cb5TWG6jSPXIf8jr30bb7c
+   70XuqMXn3MaQxTgRiBKZ/O4RaqMWWEPoNdiJ72OPAQ9cT9Z0wYQ2BkW1Q
+   A==;
+X-CSE-ConnectionGUID: NzOfuB6iSk6Auzp5Dpq5tg==
+X-CSE-MsgGUID: tyH4XQmPSpSsfrcEicJ8dw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="231500919"
 X-IronPort-AV: E=Sophos;i="6.24,196,1774278000"; 
-   d="scan'208";a="243544175"
-Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:29:27 +0900
-Received: from az2uksmgm4.o.css.fujitsu.com (unknown [10.151.22.201])
+   d="scan'208";a="231500919"
+Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:29:24 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 6DC381C1C70A
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:27 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 483B61000340
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:24 +0000 (UTC)
 Received: from az2uksmom3.o.css.fujitsu.com (unknown [10.151.22.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm4.o.css.fujitsu.com (Postfix) with ESMTPS id 26FED14771F3
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:27 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id EC8721C0094C
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:23 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 4EFCE10003C5;
-	Tue,  9 Jun 2026 10:29:25 +0000 (UTC)
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 0347110003C5;
+	Tue,  9 Jun 2026 10:29:21 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 03/30] fastfetch: upgrade 2.64.0 -> 2.64.2
-Date: Tue,  9 Jun 2026 18:28:46 +0800
-Message-ID: <20260609102913.2204-3-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/30] ctags: upgrade 6.2.20260531.0 -> 6.2.20260607.0
+Date: Tue,  9 Jun 2026 18:28:45 +0800
+Message-ID: <20260609102913.2204-2-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260609102913.2204-1-wangmy@fujitsu.com>
 References: <20260609102913.2204-1-wangmy@fujitsu.com>
@@ -61,48 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:29:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127457
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127456
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Features: =========
-- Adds a CMake option -DPACKAGES_REMOVE_DISABLED to remove detection code of
-  disabled packages (-DPACKAGES_DISABLE_<PACKAGE_NAME>) for slightly smaller
-  binary size (Packages)
-
-Bugfixes: =========
-- Fixes compatibility issues with Lua 5.3
-- Avoid possible infinite recursion in encode_json when encoding deeply nested
-  tables or circular references
-- Fixes compilation issues when building with old macOS SDKs
-- Fixes image rendering being wiped quickly (#2374)
-- Fixes ASCII logo being overwritten in --dynamic-interval mode
-- Internal fixes
-
-Logos: =======
-- Updates OpenWrt and adds a small variant
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../fastfetch/{fastfetch_2.64.0.bb => fastfetch_2.64.2.bb}      | 2 +-
+ .../ctags/{ctags_6.2.20260531.0.bb => ctags_6.2.20260607.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/fastfetch/{fastfetch_2.64.0.bb => fastfetch_2.64.2.bb} (98%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.2.20260531.0.bb => ctags_6.2.20260607.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb b/meta-oe/recipes-support/fastfetch/fastfetch_2.64.2.bb
-similarity index 98%
-rename from meta-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb
-rename to meta-oe/recipes-support/fastfetch/fastfetch_2.64.2.bb
-index 951aa50ce4..8a953508eb 100644
---- a/meta-oe/recipes-support/fastfetch/fastfetch_2.64.0.bb
-+++ b/meta-oe/recipes-support/fastfetch/fastfetch_2.64.2.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2090e7d93df7ad5a3d41f6fb4226ac76"
- DEPENDS = "yyjson"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb
+index 195b8b850e..0d0604239a 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.2.20260531.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.2.20260607.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI = "git://github.com/fastfetch-cli/fastfetch.git;protocol=https;branch=master;tag=${PV}"
--SRCREV = "d48bd733f062f374c382d67b59023c08925b0f40"
-+SRCREV = "636471c3669201b37fca587e2882eaf3c7062aeb"
+ inherit autotools-brokensep pkgconfig manpages
  
- inherit cmake pkgconfig
+-SRCREV = "5a1b5c54579fb749e96918be009a3f5c611d6d03"
++SRCREV = "0361a1da51a9cb680732451ab0c35c41bc914bda"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https;tag=p${PV}"
+ 
  
 -- 
 2.43.0
