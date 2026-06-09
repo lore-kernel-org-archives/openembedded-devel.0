@@ -2,65 +2,65 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC031CD8CBF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD0FCCD8CA4
 	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 14:21:27 +0000 (UTC)
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.81026.1781014879983443289
+Received: from mail-dy1-f172.google.com (mail-dy1-f172.google.com [74.125.82.172])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.81024.1781014877833426882
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2026 07:21:20 -0700
+ Tue, 09 Jun 2026 07:21:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=nuL6yjXU;
- spf=pass (domain: gmail.com, ip: 74.125.82.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-304d8362a58so3386704eec.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 07:21:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20251104 header.b=N5P+WWH9;
+ spf=pass (domain: gmail.com, ip: 74.125.82.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-dy1-f172.google.com with SMTP id 5a478bee46e88-304ec41197bso5350122eec.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 07:21:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1781014879; x=1781619679; darn=lists.openembedded.org;
+        d=gmail.com; s=20251104; t=1781014877; x=1781619677; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RkyeaIfiaRNBPo7zdOoR+5WowVieXo0oPcVpB676/zw=;
-        b=nuL6yjXUUno6sjlINYMNVJgsP0eu+ztYl1HMyapfF4b3FAVHaBusw7iA64kC6RUGXR
-         yeyBqjvfKNlY7Exg8+1v8H2P9WT5Nmn3ekJ+5e3S2pgvDCgjqoWTdCIEgPU5wB7VDxUC
-         f5dTHQaH84Je0JGbaljjBo8Mz7vJF5X5QEMxHhRfjryWhDSn6JMOy0/Ze0drGIEYtRU6
-         Mf1suWEF8hYfyEGd17lUIfEBuwobkpGj9e7cyAk9GIAsM0FBpcXLVGtc0Fe2F71vErN+
-         83TW5QatuTbyQduFPgwXUBV/wYtTLTWIcEf8lt0bmbar+uT7jAcvArxs+QCVdzoXO3oy
-         7YZA==
+        bh=xNglT2gQP/6Gf7aoU09sTSAVLIiLYo3ZnbK9yRtL39Q=;
+        b=N5P+WWH9Sd3y5fbdQy4EfCOHqGgDxQgFWL+/sIvcKTd2gkJXbkNosjs1PGjsoPIMK9
+         BZUkjvBpJMHKXbO+HAp1t3Dm4y55ED30AjDdnVTLuIHq7VjTtD3pWlYzbER7S+d+1sdQ
+         1/u/gVZZUL/T7AMdWMZVDvjdvMhdPfSPB4jA9RrC82epWXd0+sJSr0Nw9uBOjdinl1Ns
+         E4TFPfvcw6sboSvflEAONsESVgTdXW5zK5d8hYAlFlLFguKha3pZG/CgboicbahxOJCY
+         FwUFEaVZLpg2E/ytXknuj1GTfrBeeyjyp4JJfkCF1Bncs5IV02hO9zl/MkaQumfazp0S
+         IGcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1781014879; x=1781619679;
+        d=1e100.net; s=20251104; t=1781014877; x=1781619677;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to;
-        bh=RkyeaIfiaRNBPo7zdOoR+5WowVieXo0oPcVpB676/zw=;
-        b=kc2kUeQTTZN9Iqevb7w9Jf1fyUAXaNKtsRQqvv0g/UmxLAjkDQdARYu/I8ALSQuH/F
-         ATfVLkjBKQSPbOnUU8GDXpwr3HuwAT7aUMpkUackokPdkTzaxghbD6uSH/9f20vhH/1x
-         /WxEQJRJmS6qlg4TmOtLPy/bjpU5TwIoOtQWjzJz+hen1LJQl6Vldx3mVxr+77YMF+Ln
-         eqnnKaskfByUT9BcuE4kk+FJtbHO+7qAKUvhdQCWqUa828hvFgepFabes9ba9KWzirhq
-         f18PB9tdXyAbLIFqS+7Xq9GTKC4V4nF9Q4iM7diNSrVeU1UAPAXh1/hkHvGO/5WSjicY
-         LCzg==
-X-Gm-Message-State: AOJu0Yw00/COVa3x059pZBk1OZRhRhdRqKE1fu7NRx5crLYwq3sVS0ON
-	SwY8S/cRJviYaNNp5U14Bbl0eO4P2k5UBl6/sZo1nBR8Bjddxxu8oQsALJrZgYNK9aGmvA==
-X-Gm-Gg: Acq92OGHK4s6DDCuLbQZD2pA46jzBW1diDPBv/wbu2UPlv4dQnmxTYQc3ULAqee84w0
-	528yi5C3B5Yippo39MuYUcYMYLjNLYAqdpE9c/3g9G29cEmP1+hbYLsp4HC/6z7O7EunaPsRGtC
-	TRb913+KSIeNTssz6kTMD/LddyrXevOp1kC8ugMyIbul1OgqFEGHpwsbw08DbwSnB7LCS6wrmMU
-	1QjlIhbb/dce9mLbTU8Val+YtcSYLAbQUBLgZvEhX8Ep0SNZtsAuqyvT8SMKz8yZJWSrQiUqJRe
-	CavDPnt+71J55clsjG8UB1rP+voe0vWsFVqZKQ1KEZIV+9IyAH7bA1pcHzeRyzROCS0mCKRC9j7
-	22vEdGC1uyY0qLlrp0wwbB7dI6/uxUB6o9NoAL5HdyGVtROHM2Of/iUjShmFNLu9FF+OBD0uP9X
-	UOXeG0GuOQZCZTZvmo72D6IqGrhSH7Jm65v6UyPsijbFj7ylz4qefYsysdjt4mhVwttEP/HSxYT
-	hvPWepVoQgOYDM31Nn/Wo8a+pHVLX0uxtguZW/W90yXEZuF5ItpWNJI51BGEAMAwN3ATIcHrHTO
-	oAP+VddoSJBzkcYDDvPofz/H2zaNNNHbVnAKZXbEoDjRDTsyDUc=
-X-Received: by 2002:a05:7301:19ad:b0:304:6822:2cb2 with SMTP id 5a478bee46e88-3077ffb50e4mr11090327eec.11.1781014879073;
-        Tue, 09 Jun 2026 07:21:19 -0700 (PDT)
+        bh=xNglT2gQP/6Gf7aoU09sTSAVLIiLYo3ZnbK9yRtL39Q=;
+        b=hOO6aqKIr0hggpFWyawiQRYhRlNqSR3vNji3KXD7s/xHA8n7s8labsCLzuCcZFR8zN
+         FaetUsEuwXeI2J4N9VBzjlgZxx7PQjD5uhIMdVxRoDlCoTyGkNgt436NKMwPb5ffGwit
+         Aihzobf3wMzh3IRcPgnQSUEy1GfdD1RRNsI01mE7Ew2RaUyyQq2MFLpu3cAxk3FTWlcl
+         Cl8Bl+mJwCthG4k79iRnEluoxACLQqw+q1Ft7V0KW6fUZcBPKNsw+9i0R2wG148PTkfJ
+         8EqtgyimnZ2Vs/+UDud7REBLxUjGLKDcy607ev4shKok+iFAlRbnnRZBDhXmvwgz/+Om
+         itvg==
+X-Gm-Message-State: AOJu0YycbiisIp/8Hk7ueVQeCLbt+r43RkqSzvpTHJ/zs3ARYBpU1Vx0
+	flOC+yamhURGgeJU3I7M+ZeE7tov6n7/C6GnHyyd2G02v6Mmrp++GvXQnQ0bYlPCAjpbIA==
+X-Gm-Gg: Acq92OGXZumnBRUCdA+xFvg/1y/DDVPDzccqVUVUCue87UOo5CV8danxgdeQg4w4wxh
+	1MNMHzUZkPtAx0CPpkpf4IWWCvsPNQsXmS2UoaD1wNqTt34UusJuzS/1o6gjSSF+IVrOIB3Ryis
+	jfGnD7A7dufTCd7sdvfcyfNkaWJ7/muDFeOitiOR6Cn7VOppjEpLCOogsx5F5hpqi6R7OZtJYmJ
+	8AQiBvyjScpk6mQcmupgPWPJeaceVHEqeG9LvXKbE71rBSErQ/6ouiENGCHbOEzqhjtQABk/ktk
+	GohlloqgdxzJaQdmj66fsz4vttRwrp0knTyCi5WMFUU6Jq8kajTe9/7uWFBb3jcWGOniYiqfjkh
+	JycgbfBkGsa5xt4salUptc/5pg/MExQIjnlBdBC5xoQsyYsPw7y8khrG+0JK/aQyTXMUvWJKXoN
+	jblhFYyZvZjcwAfavCdmxasKP/tZMod+wOisQ1rIeoeVnDwbtNHGTz2Fql3nkI7poxU4IpO0kkX
+	r6EbyQr1DKOeiLOOYyc8YBXfQUpzosf2u25piyU4XWzDR1siL4gzbX7oS/V9jTP0grFc6jTVtsT
+	hcjKpeN2gD/efyWrfrJm3l356ko6tPfznXP/SsjG40It+XmZ2Oc=
+X-Received: by 2002:a05:7300:cd97:b0:304:997c:d4b6 with SMTP id 5a478bee46e88-3077b721517mr12166584eec.17.1781014877128;
+        Tue, 09 Jun 2026 07:21:17 -0700 (PDT)
 Received: from apollo.localdomain ([208.95.233.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074df3b234sm27099386eec.23.2026.06.09.07.21.18
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3074df3b234sm27099386eec.23.2026.06.09.07.21.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 07:21:18 -0700 (PDT)
+        Tue, 09 Jun 2026 07:21:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 X-Google-Original-From: Khem Raj <khem.raj@oss.qualcomm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <khem.raj@oss.qualcomm.com>
-Subject: [meta-perl][PATCH 11/11] libtext-diff-perl: upgrade 1.41 -> 1.45
-Date: Tue,  9 Jun 2026 07:21:05 -0700
-Message-ID: <20260609142105.1439225-11-khem.raj@oss.qualcomm.com>
+Subject: [meta-perl][PATCH 09/11] libextutils-config-perl: upgrade 0.008 -> 0.010
+Date: Tue,  9 Jun 2026 07:21:03 -0700
+Message-ID: <20260609142105.1439225-9-khem.raj@oss.qualcomm.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260609142105.1439225-1-khem.raj@oss.qualcomm.com>
 References: <20260609142105.1439225-1-khem.raj@oss.qualcomm.com>
@@ -70,44 +70,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 14:21:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127498
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127496
 
-Maintainership moved on CPAN from OVID to NEILB, so update the
-SRC_URI author path and HOMEPAGE accordingly. Refresh
-LIC_FILES_CHKSUM for the updated FSF address in the bundled GPL
-text; the licensing (Artistic-1.0 | GPL-2.0-or-later) is unchanged.
+Refresh LIC_FILES_CHKSUM: upstream reformatted the bundled Artistic
+license text ("Artistic License 1.0" -> "Perl Artistic License 1.0");
+the licensing (Artistic-1.0 | GPL-1.0-or-later) is unchanged.
 
 Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
 ---
- ...ibtext-diff-perl_1.41.bb => libtext-diff-perl_1.45.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-perl/recipes-perl/libtext/{libtext-diff-perl_1.41.bb => libtext-diff-perl_1.45.bb} (74%)
+ ...onfig-perl_0.008.bb => libextutils-config-perl_0.010.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-perl/recipes-perl/libextutils/{libextutils-config-perl_0.008.bb => libextutils-config-perl_0.010.bb} (74%)
 
-diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.45.bb
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.010.bb
 similarity index 74%
-rename from meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-rename to meta-perl/recipes-perl/libtext/libtext-diff-perl_1.45.bb
-index 90bd555403..0857996681 100644
---- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.45.bb
-@@ -6,15 +6,15 @@ faster than shelling out to a system's diff executable for small files, \
- and generally slower on larger files."
- SECTION = "libs"
+rename from meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
+rename to meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.010.bb
+index 401f607571..b40e0ffc5b 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.008.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-config-perl_0.010.bb
+@@ -4,11 +4,11 @@ SECTION = "libs"
 
--HOMEPAGE = "https://metacpan.org/release/OVID/Text-Diff-1.41"
-+HOMEPAGE = "https://metacpan.org/release/NEILB/Text-Diff-1.45"
+ HOMEPAGE = "https://metacpan.org/dist/ExtUtils-Config"
 
- LICENSE = "Artistic-1.0 | GPL-2.0-or-later"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9e795454c53c99fe48b8180eb5917b10"
+-LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1932ab4d8b84c25fd7967aa18088e57e"
++LICENSE = "Artistic-1.0-Perl | GPL-1.0-or-later"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ddb4d526cd95b017e23486893490883e"
 
--SRC_URI = "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz \
-+SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEILB/Text-Diff-${PV}.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[sha256sum] = "a67f50a48e313c1680cc662109ce5f913ea71454db355d0cf4db87ac89d2d2fa"
-+SRC_URI[sha256sum] = "e8baa07b1b3f53e00af3636898bbf73aec9a0ff38f94536ede1dbe96ef086f04"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Config-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "ae5104f634650dce8a79b7ed13fb59d67a39c213a6776cfdaa3ee749e62f1a8c"
++SRC_URI[sha256sum] = "82e7e4e90cbe380e152f5de6e3e403746982d502dd30197a123652e46610c66d"
 
- S = "${UNPACKDIR}/Text-Diff-${PV}"
+ S = "${UNPACKDIR}/ExtUtils-Config-${PV}"
 
 
