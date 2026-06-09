@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB1A4CD8CAD
-	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 10:30:01 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.76244.1781000996589781803
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 409BDCD8CBF
+	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 10:30:02 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.msgproc02-g2.76506.1781001001384476458
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2026 03:29:57 -0700
+ Tue, 09 Jun 2026 03:30:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mfRlOf0b;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Y1Wxmi/P;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1781000996; x=1812536996;
+  t=1781001002; x=1812537002;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=88E0Z6gdlkemuc491WBCr1ck75HDjEiKh6WQK61lLbA=;
-  b=mfRlOf0bO3swzO5vm6o80rP5VcepZGiWxWclccoTWKooHClCRCMM4wxf
-   puKRUT0w+Rxgvz1gPwfeQ0By+vPijO7K8+9NNy1VWQ9fqXKGP8hfz5pxe
-   eofpmCMqaOW2xzxpktQ14aKwotsLXrMK2oTfThJVlnQEW8BMmjlAztKya
-   KYSg81eQaprgIij+wcY9SfjFop5ZCqf0Y5SsKPM1GLuT3KAMcd+1tCyoL
-   kOzqFuLZ5YhWehutti07MKCAVkGTbZXIXykgihOPAMogSSGuMfm8nFoYr
-   thVBom90bUoI1PFk+Nkn8ka9RaZ1CMvdU+U5vAEjiQRQ9ENWgDbczk4oa
-   Q==;
-X-CSE-ConnectionGUID: 5sXPchmOTLya4loysfs8tw==
-X-CSE-MsgGUID: 6qUQ9DDLT82NzHLJRitvAw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="242941906"
+  bh=XUXSoPO8qf1gzcfxmkXE+VcHdzD0kC2+GFT8BZ73OGg=;
+  b=Y1Wxmi/PoPB9nzXcCY7GGK1dAwNfvExFjsiBNI8OBv+Fp2KhsRnZ9t79
+   oS6H4biD58U3uFT21YNO0NwXqp/B+kR81lQZSF3mw/ynoUHj7fccsCzaD
+   KqUSNl7jqR7Hr0KnZ974+QzuVYWy8eSZTuwflYKUt0KRWS0GCnjH9Z6b0
+   i8IIde0EsDFEBFkgAQj6Uixr7WwWkSsHbjPVIqxnBsyjUinKbOi2dkToZ
+   kW3mWNqOghrnJ4xr3xD9HD+p4JlIMlvj4OtvQM6KRKmVzg4qCWOVdVF3M
+   dd8BAgkCfJXvCMAbEMBissT+brk8+jgbeUVSQTo4R7df+04dd8ol9eMDc
+   A==;
+X-CSE-ConnectionGUID: eBci6C1uSsi+5w8c86mfmA==
+X-CSE-MsgGUID: L60p4J1MQgykG2iCo6ebrg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="243463256"
 X-IronPort-AV: E=Sophos;i="6.24,196,1774278000"; 
-   d="scan'208";a="242941906"
+   d="scan'208";a="243463256"
 Received: from gmgwuk01.global.fujitsu.com ([172.187.114.235])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:29:55 +0900
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:30:00 +0900
 Received: from az2uksmgm3.o.css.fujitsu.com (unknown [10.151.22.200])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id 26F6A1002B85
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:55 +0000 (UTC)
+	by gmgwuk01.global.fujitsu.com (Postfix) with ESMTPS id C887B1002805
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:59 +0000 (UTC)
 Received: from az2uksmom3.o.css.fujitsu.com (unknown [10.151.22.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id D00ABC170A9
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:54 +0000 (UTC)
+	by az2uksmgm3.o.css.fujitsu.com (Postfix) with ESMTPS id 7E470C091AB
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:59 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 078BC10003C5;
-	Tue,  9 Jun 2026 10:29:52 +0000 (UTC)
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id ACCD310003CF;
+	Tue,  9 Jun 2026 10:29:57 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 14/30] python3-cbor2: upgrade 6.1.1 -> 6.1.2
-Date: Tue,  9 Jun 2026 18:28:57 +0800
-Message-ID: <20260609102913.2204-14-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 17/30] python3-faker: upgrade 40.19.1 -> 40.21.0
+Date: Tue,  9 Jun 2026 18:29:00 +0800
+Message-ID: <20260609102913.2204-17-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260609102913.2204-1-wangmy@fujitsu.com>
 References: <20260609102913.2204-1-wangmy@fujitsu.com>
@@ -60,39 +60,39 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:30:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127468
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:30:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127471
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Fixed incorrect tracking of string references for definite-length text
-  strings of length greater than 65536
-- Fixed cbor2.load() crash caused by incorrect handling of internal read buffer
-  extension during stream deserialization.
+=========
+- Add banks list for en_GB locale
+- Add pan and gstin generators to en_IN SSN provider
+- Improve barcode provider test coverage
+- Bump liskin/gh-problem-matcher-wrap from 3 to 4
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../python/{python3-cbor2_6.1.1.bb => python3-cbor2_6.1.2.bb}   | 2 +-
+ .../{python3-faker_40.19.1.bb => python3-faker_40.21.0.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cbor2_6.1.1.bb => python3-cbor2_6.1.2.bb} (86%)
+ rename meta-python/recipes-devtools/python/{python3-faker_40.19.1.bb => python3-faker_40.21.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cbor2_6.1.1.bb b/meta-python/recipes-devtools/python/python3-cbor2_6.1.2.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-cbor2_6.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-cbor2_6.1.2.bb
-index 4b4406ffbf..b8e92ca361 100644
---- a/meta-python/recipes-devtools/python/python3-cbor2_6.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-cbor2_6.1.2.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a79e64179819c7ce293372c059f1dbd8"
- DEPENDS += "python3-setuptools-scm-native"
+diff --git a/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb b/meta-python/recipes-devtools/python/python3-faker_40.21.0.bb
+similarity index 93%
+rename from meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
+rename to meta-python/recipes-devtools/python/python3-faker_40.21.0.bb
+index 7774e72dde..7c44c5cbed 100644
+--- a/meta-python/recipes-devtools/python/python3-faker_40.19.1.bb
++++ b/meta-python/recipes-devtools/python/python3-faker_40.21.0.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/joke2k/faker"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=53360c4126f7d03b63cb79b0dab9e9e1"
  
--SRC_URI[sha256sum] = "6f0644869e0fdcd6f3874330b8f1cebd009f33191de43acf609dc2409cd362c4"
-+SRC_URI[sha256sum] = "6b43037a66947dee5af0abb1a4c3a13b3abac5a4a3f32f9771efbbcd030fd909"
+-SRC_URI[sha256sum] = "76fa71fd3bf320db25e5504eb356f9a76b8a95cd6098524d006f446035b6b89d"
++SRC_URI[sha256sum] = "2fdee1b650a723a54432db9c6dfe17cfa29d1adc8bd60520444a07698524ba4d"
  
- inherit pypi python_setuptools3_rust cargo-update-recipe-crates ptest-python-pytest
+ inherit pypi setuptools3 ptest-python-pytest
  
 -- 
 2.43.0
