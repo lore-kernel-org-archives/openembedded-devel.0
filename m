@@ -1,279 +1,151 @@
-Return-Path: <nitin.wankhade333@gmail.com>
+Return-Path: <dmitry.baryshkov@oss.qualcomm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C5FCCD6E79
-	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 09:25:48 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.msgproc01-g2.75310.1780997138879593564
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09139CD6E79
+	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 10:05:41 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.75926.1780999536771467223
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2026 02:25:38 -0700
+ Tue, 09 Jun 2026 03:05:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20251104 header.b=I3A5WWgj;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: nitin.wankhade333@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-8422575d1e4so358394b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 02:25:38 -0700 (PDT)
+ dkim=pass header.i=@qualcomm.com header.s=qcppdkim1 header.b=Ku8qDc8G;
+ dkim=pass header.i=@oss.qualcomm.com header.s=google header.b=Hzb5o4Y8;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: oss.qualcomm.com, ip: 205.220.180.131, mailfrom: dmitry.baryshkov@oss.qualcomm.com)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6599xnCt2245910
+	for <openembedded-devel@lists.openembedded.org>; Tue, 9 Jun 2026 10:05:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=htmgCTchr2D+DUHx+xJ2yCtc
+	F4q7+39J49tVz5gmyys=; b=Ku8qDc8GX/42vGO38/OqD1l3zTPZo68XIKy+bjpT
+	6Z3WroyzNG+fyGoGC1s2h8yRBNMqJsYbStsVvo3TcvDawPfErnrbqwfMOje4mCDC
+	ruvjYJBup50twAdnoSteBNX7zUT2CJhOF3UCmxco5jeOxD5ACZ2Nr4nMny4aa85i
+	cs0SCu2yGhncAYpqxgYU5WTwPpBgq/KFEn7MFSVb36O/de1wElEzjI2jbtLA6y8d
+	LIjddZVNo64DmyGBfbGY/KxbMY74RUcsOKmLtVfaDbTLDOiKau4MC4e/AKoQYCM4
+	7re4rCuOXu1UUB4Uz6kKHQRBFMFapKJKt9HXubi37BzBTw==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4epdds8xv9-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:05:35 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-6c6dc39a6afso2833238137.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 03:05:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1780997138; x=1781601938; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OKb3F8u6yu9zILsWpMAVzjxjiBLrRTje3kO2A+7q7jA=;
-        b=I3A5WWgjmGtGSZkrj5Bsn2PopcHvkbE1QaeEbmgUQrwTE17MQaw4+EWiKVT08jwcyR
-         EJK25w6WkxzEHKNZ1qKeHpnBf2mzki0ZQoQwzDrxvZWr4Np/iVdytBMefDogCjAAPXPu
-         7ygQfhRDjcI9JUrSSQbzzGSfmtEpLpjar9ZiPLt8cIEdiU0VMGktwJEvlKoP5imQ9MQH
-         tODx6OY41WK5dT2W7suponmuK2X+O7MIhHkgD9rYt3dZgkCX2oCajmcHGjAZpoKIGeBx
-         LzIXyca6bCn/sobEYbo6ACeIxvjGxU3lDCAZDtzBmuTCHRJKgUtEU3JJry++KlLa2XsQ
-         eXnw==
+        d=oss.qualcomm.com; s=google; t=1780999535; x=1781604335; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=htmgCTchr2D+DUHx+xJ2yCtcF4q7+39J49tVz5gmyys=;
+        b=Hzb5o4Y8Y3ZWkdIwhEzjfm9mC5AGlD4lWemH2rZUZ2FKFry2QChc/4Nb7FbaMsBwRk
+         6NpEugXttPd43fDY+rb8b4BQ+3Qo3Onivt6J5mAw/tu+DYTRPB1CqdxBmC81x+tVrY6c
+         H4VxWw1HC9vNGwTl+Wd5Y5fYE/7zGAG0f4ZACza8/Obj3L24+q64MDIScthu/6ZY4arr
+         xbatEB8BIQF2B86Pfl/e3cRngSCQ6L8sqy+jeiwEcrqzUAZpf0TOUaA7StF/cF9MN8pR
+         hYOAUeKc5Lk891f/7b+jZ52R621s+IUsJ51gPzoa/zFMKaxU8vDnuQ6Xv9hgbglSHmQb
+         Qt+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1780997138; x=1781601938;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=OKb3F8u6yu9zILsWpMAVzjxjiBLrRTje3kO2A+7q7jA=;
-        b=MzxrE8mhqmFEkboA8LdXjXa1m2AHu6OJCjTBBTTZH1XajzaF8dMkXHtxzZVsyCf8MU
-         yUmx/vVLZHjMeS2MVuYta+2FOMqkd427nM950N9UB7admj6altY8qQFtL9Eazx7mbiJn
-         EGmYptkkXGUUm/9wJbrIQ56FqL69K7mrXJ6H7iTTq+U3SkUqvnfxLypiTQz5L52/beR+
-         +KnkMpM/AxaLnQTDciEzZxbF5ze8naZ6V3FUQvc8kRY8w+kfDNJO+kMg0SkkrQak+CnT
-         B1ahrHorGcUfXZoBzvYaNpimxrvXs/G1nHrKXs9dC4RnXh4b6kKUNlhT8cRb7ZE7gUNx
-         1l3g==
-X-Gm-Message-State: AOJu0YyFVZsRrOJZsT9rze/0An1nAD8eBZZ07At+7tbBI3ROzHT4PEpG
-	eQ8MTD9TRVb5DusjU+mdNEp9fDjgryr6veVS25vYyZvc3e7VNxk9fzg2oYPzAT3SyPBNng==
-X-Gm-Gg: Acq92OG+Ov+QP9k+2XHch+jZFsboD2SF4iAkjaCpbl+913xqkY6sKbbgPk4quiDrTfg
-	dti+r9SOD0a2T0QoO5o/2QYLM57e/2HW71lLT+90abqdmGsYvENsYpIWhxQFbGxzITy5mG+gUKI
-	vQsaxxx0XLMSGsO/IcXpODA1e71gukfoagj9hUxbiEGRSCk/1M8lQ3lVP/PnqJlrN3Q6PYvWvzZ
-	ujrWUs+uxB1+k6ShM/GJQjV4yqfnZTKyUooTGPGWg4Lg/MXn4/zPG+H9dGBibePIMM8IoTU8Q58
-	Y1PyH0q04079q8F7Td7UANYeN4QV9YT5s+HoQR58hmPXatWO0rOWLgQNKoh1Dq2KhBGV1J4HD8o
-	nMb0fWCC/ghpFhvcBvA2JOjUlp11uAQGbSzB3oATQ6vj/WItYU2iPUIrLVKq/zZLxh5KSNFiWto
-	a5ldmCubCDIvBdBtWwwO4R4UYZLBv9EH9OCMXBYaFyD29B6ZR5dDG3S2CIk5B3/w==
-X-Received: by 2002:a05:6a21:35c6:b0:39f:1dc2:70c with SMTP id adf61e73a8af0-3b4cd4de4a1mr7523997637.6.1780997138167;
-        Tue, 09 Jun 2026 02:25:38 -0700 (PDT)
-Received: from L-15597L.www.tendawifi.com ([36.255.86.179])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-c85df043223sm16496633a12.8.2026.06.09.02.25.36
+        d=1e100.net; s=20251104; t=1780999535; x=1781604335;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=htmgCTchr2D+DUHx+xJ2yCtcF4q7+39J49tVz5gmyys=;
+        b=Gf+syzhw95HStpvs1S/Ju7c0ZrSfzbogA3fmLbFqiCVntqKfg0i4wc81z7hKRbIs8D
+         qFLq8lGvsNnKE/MqiyN4faOyBJz9U8xNAj3HOmd5LU+JVkq48UgIhwQJW4auAn9SeyK2
+         3PvyTA/hVE2PcapGHQhbQkWmnkWIyG9pmZVu7nvAScOLeRkyBOFud9zXWv4tgn3RN2hM
+         SlKQ0o7sMDgRECMYoVh+VNvrUSwWOUdYfS//iPBQw5KLwt4t3tbbAcZttRckNRksL18/
+         ve4GIfW6IfWDk/lKKo/+HRt1f1yVLRAf6lUtgrpUtzlLQwgVQYrANYvJ+unKt4WTq8dE
+         H3ig==
+X-Gm-Message-State: AOJu0Ywmkdxl6klzUOkB6xBbE18hCyni3XL9zUAw10xpeW+6CWw+ONEF
+	hwTyoEZVeVSXW1wrov2/ner8R5F8XLK0JNzFlrZQZUh6R/mRprQT488ypWiGBEC3Z6oiPFXUB/0
+	aNmXhZsCdBYcUj0/Q54f2lt+aWhH6Aot8JD7X8jSvnGYzex9PIMuiRx9XYk8IHpiACspQFMfD4w
+	9KW7Kgh/TX
+X-Gm-Gg: Acq92OHb1WyKy0fQQsiQO4/jF08DRMY3d815W54h0kq8GiOV8sEhcO0ceGWCx4TXTue
+	6LhzoyO91cIna3alpGhIdKp/MiuM+lD3G/LqfvTZN6jyjR4Yua1TnUS0eu9DxvFybMyRCA+wbGv
+	7rxrRTx2EcVpY4FbaZJStyLxD4WzAmhT8pY1eIlmgKFTfPCAmHU+sS1H0Dn5TuWNZJOGAOa4Nd1
+	znRz7G1sA7EXxO13X8bt9piuuYxuwkeexsIvf235bJc1nRYct+YCj6ae6e1InEWGblyAByF1ZVg
+	8mjV+ZY2qP6gky+j9+sSX9GSpe8LTeLYSd+1QOYU4Ta5FvxJw18aIedpq0aBICQJ1nKKDUOhM77
+	j495gvfqK/IteMk62EyvZ/mLI3OGOBerKi7HkssDx/hc+5qL5IM8GgRY8UzAFs9qGh1C9DpVX+e
+	falMup16TjpkUkaQAg7gKqUskN1KgEsIJkhksUkrjxckdbwg==
+X-Received: by 2002:a05:6102:149a:b0:636:c0c:4d91 with SMTP id ada2fe7eead31-6ff07fd12f7mr10506530137.28.1780999534921;
+        Tue, 09 Jun 2026 03:05:34 -0700 (PDT)
+X-Received: by 2002:a05:6102:149a:b0:636:c0c:4d91 with SMTP id ada2fe7eead31-6ff07fd12f7mr10506508137.28.1780999534483;
+        Tue, 09 Jun 2026 03:05:34 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5aa7b9929cfsm4468115e87.75.2026.06.09.03.05.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jun 2026 02:25:37 -0700 (PDT)
-From: Nitin Wankhade <nitin.wankhade333@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Nitin.Wankhade@kpit.com
-Subject: [OE-core][scarthgap][PATCH V2 4/6] strongswan: Fix CVE-2026-35331
-Date: Tue,  9 Jun 2026 14:54:05 +0530
-Message-Id: <20260609092407.893299-4-nitin.wankhade333@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260609092407.893299-1-nitin.wankhade333@gmail.com>
-References: <20260609092407.893299-1-nitin.wankhade333@gmail.com>
+        Tue, 09 Jun 2026 03:05:33 -0700 (PDT)
+Date: Tue, 9 Jun 2026 13:05:31 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: AshishKumar Mishra <emailaddress.ashish@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org,
+        AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>,
+        Khem Raj <khem.raj@oss.qualcomm.com>
+Subject: Re: [meta-oe][PATCH v4 1/4] android-tools: remove android-tools 5.x
+ from meta-oe/recipes-devtools
+Message-ID: <relbc3u3fwyfvt37xybbegkc2iezia7xelbyo4tjh6n77xt4i5@dvjvs2whwggq>
+References: <20260524065341.82660-1-emailaddress.ashish@gmail.com>
+ <20260524065341.82660-2-emailaddress.ashish@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260524065341.82660-2-emailaddress.ashish@gmail.com>
+X-Proofpoint-ORIG-GUID: epVOFwbwshasxTOzdJXApwIt1-ulYHAq
+X-Authority-Analysis: v=2.4 cv=EI42FVZC c=1 sm=1 tr=0 ts=6a27e56f cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=WId3VufB3h2Ij2heIogA:9 a=CjuIK1q_8ugA:10 a=crWF4MFLhNY0qMRaF8an:22
+X-Proofpoint-GUID: epVOFwbwshasxTOzdJXApwIt1-ulYHAq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA5MDA5NCBTYWx0ZWRfXw53x7X8Jee94
+ I+AA21+iOuxlBIwkY1JGn6g8NqnCsewVdNTCxRN4OcSMsUya+Gf7sF2BDniFrhajGeH4fe01nmQ
+ 0YlF06/zDOoKsknw+GXeqNMvtAdtbmSJa1JNJF0Zi5UzdgHXTznzqLCWLRESHvmO5uQEd77S5y1
+ kY5fFQ2k7d2jhMm8cVun1rNidMB+PK3G0VRkB21BiduY2d/z29yPobxGTVLiRk5FFC54mPIqefj
+ 5scTYKNRtICCwdQ5Yv3SX25jwjJsWL6qJBWsz/XwROOXByeSv8g1kfy+zIbktjwaHY+s92YbUie
+ fhg9iMfRh8xI4CPcD+yPdaXYnWbabQSD8KQziezlNC3PIq4ugRUiPWKkEQbuk4mrsegc5Vxe68F
+ Q4OOoewaX52KVkiUWTUOWf+IlvIDPDMnDm/qxsLZBqTfH7CWXPUcAC9jkKZOPmEitO3LGT2u8AE
+ lB5/FHiKK5Jqwwt/bgw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-09_02,2026-06-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 adultscore=0 bulkscore=0 phishscore=0
+ suspectscore=0 malwarescore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606090094
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 09:25:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127449
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:05:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127452
 
-Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit/64130ede5cd8f61edd35a1b488c874fa328a42b0]
-                          [https://github.com/strongswan/strongswan/commit/c66143db48bab9eb82cc86190687938b809611eb]
+On Sun, May 24, 2026 at 12:23:37PM +0530, AshishKumar Mishra wrote:
+> From: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
+> 
+> We plan to upgrade android-tools from the legacy 5.1.1 version to 29.0.6.r14
+> To achive this we are removing the older version from meta-oe/recipes-devtools/
+> 
+> Signed-off-by: AshishKumar Mishra <ashishkumar.mishra@bmwtechworks.in>
+> Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+> ---
+>  .../10-adbd-configfs.conf                     |   4 -
+>  .../android-gadget-cleanup                    |  24 --
+>  .../android-gadget-setup                      |  38 --
+>  .../android-gadget-start                      |   9 -
+>  .../android-tools-conf-configfs_1.0.bb        |  38 --
 
-Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
----
- ...-insensitive-matching-and-reject-exc.patch | 176 ++++++++++++++++++
- .../strongswan/strongswan_5.9.14.bb           |   1 +
- 2 files changed, 177 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/strongswan/constraints-Case-insensitive-matching-and-reject-exc.patch
+Thanks, this broke android-tools-adb for anybody using upstream ConfigFS
+approach instead of the Google's /sys/class/android_usb/ (not available
+upstream). I'll send a partial revert, but please test your changes on
+the upstream Linux kernels before sending them out.
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan/constraints-Case-insensitive-matching-and-reject-exc.patch b/meta-networking/recipes-support/strongswan/strongswan/constraints-Case-insensitive-matching-and-reject-exc.patch
-new file mode 100644
-index 0000000000..86e530d7e0
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/strongswan/constraints-Case-insensitive-matching-and-reject-exc.patch
-@@ -0,0 +1,176 @@
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Mon, 23 Mar 2026 17:45:11 +0100
-+Subject: constraints: Case-insensitive matching and reject excluded DN name
-+ constraints
-+
-+The case is generally ignored when matching identities.  So this is
-+an issue with excluded name constraints where a malicious intermediate
-+CA could evade the constraints by issuing certificates with names that
-+just modify the case (e.g. strongSwan.org instead strongswan.org).
-+
-+Note that it's likely that permitted name constraints are preferred over
-+excluded name constraints as it might be difficult to come up with a
-+conclusive list of names to exclude.
-+
-+With directoryName (DN) name constraints the issue is a bit more comples.
-+Some RDNs have to be matched in a case-insensitive manner, which we e.g.
-+do in `identification.c::rdn_equals`.  By not doing it for name
-+constraints, a malicious intermediate CA could evade an excluded name
-+constraint just by modifying the case in such an RDN.
-+
-+While we could use the mentioned function in `dn_matches`, this doesn't
-+properly fix the problem because the function is basically too strict.
-+Especially in regards to RDNs of type UTF8String, which are only compared
-+binary.  To match these properly, we'd have to implement the string
-+preparation described in RFC 5280, section 7.1 and the referenced RFCs.
-+Until that's the case, we reject excluded name constraints of type
-+directoryName as we are unable to enforce them.
-+
-+Fixes: a2b340764fac ("Implemented NameConstraint matching in constraints plugin")
-+Fixes: CVE-2026-35331
-+
-+CVE: CVE-2026-35331
-+Upstream-Status: Backport [https://github.com/strongswan/strongswan/commit/64130ede5cd8f61edd35a1b488c874fa328a42b0]
-+                          [https://github.com/strongswan/strongswan/commit/c66143db48bab9eb82cc86190687938b809611eb]
-+Signed-off-by: Nitin Wankhade <nitin.wankhade333@gmail.com>
-+===
-+diff --git a/src/libstrongswan/plugins/constraints/constraints_validator.c b/src/libstrongswan/plugins/constraints/constraints_validator.c
-+index 27bdb89..daa7bfa 100644
-+--- a/src/libstrongswan/plugins/constraints/constraints_validator.c
-++++ b/src/libstrongswan/plugins/constraints/constraints_validator.c
-+@@ -55,6 +55,18 @@ static bool check_pathlen(x509_t *issuer, int pathlen)
-+ 	return TRUE;
-+ }
-+ 
-++/**
-++ * Check if the constraint and ID strings match case-insensitively
-++ */
-++static bool string_matches(chunk_t constraint, chunk_t id)
-++{
-++       /* make sure the two strings have actually the same length */
-++       return constraint.len == id.len &&
-++                  memchr(constraint.ptr, 0, constraint.len) == NULL &&
-++                  memchr(id.ptr, 0, id.len) == NULL &&
-++                  strncasecmp(constraint.ptr, id.ptr, constraint.len) == 0;
-++}
-++
-+ /**
-+  * Check if a FQDN constraint matches
-+  */
-+@@ -70,7 +82,7 @@ static bool fqdn_matches(identification_t *constraint, identification_t *id)
-+ 		return FALSE;
-+ 	}
-+ 	diff = chunk_create(i.ptr, i.len - c.len);
-+-	if (!chunk_equals(c, chunk_skip(i, diff.len)))
-++	if (!string_matches(c, chunk_skip(i, diff.len)))
-+ 	{
-+ 		return FALSE;
-+ 	}
-+@@ -101,10 +113,10 @@ static bool email_matches(identification_t *constraint, identification_t *id)
-+ 	}
-+ 	if (memchr(c.ptr, '@', c.len))
-+ 	{	/* constraint is a full email address */
-+-		return chunk_equals(c, i);
-++		return string_matches(c, i);
-+ 	}
-+ 	diff = chunk_create(i.ptr, i.len - c.len);
-+-	if (!chunk_equals(c, chunk_skip(i, diff.len)))
-++	if (!string_matches(c, chunk_skip(i, diff.len)))
-+ 	{
-+ 		return FALSE;
-+ 	}
-+@@ -389,9 +401,17 @@ static bool collect_constraints(x509_t *x509, bool permitted, hashtable_t **out)
-+ 		type = constraint->get_type(constraint);
-+ 		switch (type)
-+ 		{
-++			case ID_DER_ASN1_DN:
-++                               if (!permitted)
-++                               {
-++                                       DBG1(DBG_CFG, "excluded %N NameConstraint not supported",
-++                                                id_type_names, type);
-++                                       success = FALSE;
-++                                       break;
-++                               }
-++                               /* fall-through */
-+ 			case ID_FQDN:
-+ 			case ID_RFC822_ADDR:
-+-			case ID_DER_ASN1_DN:
-+ 			case ID_IPV4_ADDR_SUBNET:
-+ 			case ID_IPV6_ADDR_SUBNET:
-+ 				break;
-+diff --git a/src/libstrongswan/tests/suites/test_certnames.c b/src/libstrongswan/tests/suites/test_certnames.c
-+index 2549fb6..14570ee 100644
-+--- a/src/libstrongswan/tests/suites/test_certnames.c
-++++ b/src/libstrongswan/tests/suites/test_certnames.c
-+@@ -207,8 +207,10 @@ static struct {
-+ 	bool good;
-+ } permitted_san[] = {
-+ 	{ ".strongswan.org", "test.strongswan.org", TRUE },
-++	{ ".strongswan.org", "test.strongSwan.org", TRUE },
-+ 	{ "strongswan.org", "test.strongswan.org", TRUE },
-+ 	{ "a.b.c.strongswan.org", "d.a.b.c.strongswan.org", TRUE },
-++	{ "a.b.c.strongswan.org", "d.A.b.C.strongswan.org", TRUE },
-+ 	{ "a.b.c.strongswan.org", "a.b.c.d.strongswan.org", FALSE },
-+ 	{ "strongswan.org", "strongswan.org.com", FALSE },
-+ 	{ ".strongswan.org", "strongswan.org", FALSE },
-+@@ -216,8 +218,11 @@ static struct {
-+ 	{ "strongswan.org", "swan.org", FALSE },
-+ 	{ "strongswan.org", "swan.org", FALSE },
-+ 	{ "tester@strongswan.org", "tester@strongswan.org", TRUE },
-++	{ "tester@strongswan.org", "tester@strongSwan.org", TRUE },
-++	{ "tester@strongswan.org", "TESTER@strongswan.org", TRUE },
-+ 	{ "tester@strongswan.org", "atester@strongswan.org", FALSE },
-+ 	{ "email:strongswan.org", "tester@strongswan.org", TRUE },
-++	{ "email:strongswan.org", "tester@strongSwan.org", TRUE },
-+ 	{ "email:strongswan.org", "tester@test.strongswan.org", FALSE },
-+ 	{ "email:.strongswan.org", "tester@test.strongswan.org", TRUE },
-+ 	{ "email:.strongswan.org", "tester@strongswan.org", FALSE },
-+@@ -248,11 +253,11 @@ static struct {
-+ 	char *subject;
-+ 	bool good;
-+ } excluded_dn[] = {
-+-	{ "C=CH, O=another", "C=CH, O=strongSwan, CN=tester", TRUE },
-+-	{ "C=CH, O=another", "C=CH, O=anot", TRUE },
-+-	{ "C=CH, O=another", "C=CH, O=anot, CN=tester", TRUE },
-++	{ "C=CH, O=another", "C=CH, O=strongSwan, CN=tester", FALSE },
-++	{ "C=CH, O=another", "C=CH, O=anot", FALSE },
-++	{ "C=CH, O=another", "C=CH, O=anot, CN=tester", FALSE },
-+ 	{ "C=CH, O=another", "C=CH, O=another, CN=tester", FALSE },
-+-	{ "C=CH, O=another", "C=CH, CN=tester, O=another", TRUE },
-++	{ "C=CH, O=another", "C=CH, CN=tester, O=another", FALSE },
-+ };
-+ 
-+ START_TEST(test_excluded_dn)
-+@@ -281,7 +286,9 @@ static struct {
-+ } excluded_san[] = {
-+ 	{ ".strongswan.org", "test.strongswan.org", FALSE },
-+ 	{ "strongswan.org", "test.strongswan.org", FALSE },
-++	{ "strongswan.org", "test.strongSwan.org", FALSE },
-+ 	{ "a.b.c.strongswan.org", "d.a.b.c.strongswan.org", FALSE },
-++	{ "a.b.c.strongswan.org", "d.a.b.C.strongswan.org", FALSE },
-+ 	{ "a.b.c.strongswan.org", "a.b.c.d.strongswan.org", TRUE },
-+ 	{ "strongswan.org", "strongswan.org.com", TRUE },
-+ 	{ ".strongswan.org", "strongswan.org", TRUE },
-+@@ -289,8 +296,10 @@ static struct {
-+ 	{ "strongswan.org", "swan.org", TRUE },
-+ 	{ "strongswan.org", "swan.org", TRUE },
-+ 	{ "tester@strongswan.org", "tester@strongswan.org", FALSE },
-++	{ "tester@strongswan.org", "TESTER@strongswan.org", FALSE },
-+ 	{ "tester@strongswan.org", "atester@strongswan.org", TRUE },
-+ 	{ "email:strongswan.org", "tester@strongswan.org", FALSE },
-++	{ "email:strongswan.org", "tester@strongSwan.org", FALSE },
-+ 	{ "email:strongswan.org", "tester@test.strongswan.org", TRUE },
-+ 	{ "email:.strongswan.org", "tester@test.strongswan.org", FALSE },
-+ 	{ "email:.strongswan.org", "tester@strongswan.org", TRUE },
-+@@ -418,9 +427,9 @@ static struct {
-+ 	char *subject;
-+ 	bool good;
-+ } excluded_dn_levels[] = {
-+-	{ "C=CH, O=strongSwan", "C=CH", "C=DE", TRUE },
-++	{ "C=CH, O=strongSwan", "C=CH", "C=DE", FALSE },
-+ 	{ "C=CH, O=strongSwan", "C=CH", "C=CH", FALSE },
-+-	{ "C=CH, O=strongSwan", "C=DE", "C=CH", TRUE },
-++	{ "C=CH, O=strongSwan", "C=DE", "C=CH", FALSE },
-+ 	{ "C=CH, O=strongSwan", "C=DE", "C=DE", FALSE },
-+ 	{ "C=CH, O=strongSwan", "C=DE", "C=CH, O=strongSwan", FALSE },
-+ 	{ NULL, "C=CH", "C=CH, O=strongSwan", FALSE },
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-index 85fd95d6b8..41a4de845f 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.14.bb
-@@ -15,6 +15,7 @@ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://tls-server-Prevent-infinite-loop-if-supported-versio.patch \
-            file://pkcs5-pkcs7-Avoid-NULL-pointer-dereference-when-veri.patch \
-            file://libsimaka-Reject-zero-length-EAP-SIM-AKA-attributes.patch \
-+           file://constraints-Case-insensitive-matching-and-reject-exc.patch \
-            "
- 
- SRC_URI[sha256sum] = "728027ddda4cb34c67c4cec97d3ddb8c274edfbabdaeecf7e74693b54fc33678"
+>  .../android-tools-conf/android-gadget-setup   |  37 --
+>  .../android-tools/android-tools-conf_1.0.bb   |  22 --
+>  .../android-tools/android-tools/adb.mk        |  72 ----
+>  .../android-tools/android-tools/adbd.mk       | 164 --------
+>  .../android-tools/android-tools-adbd.service  |  13 -
+>  ...scv-Add-risc-v-Android-config-header.patch | 361 ------------------
+> 
+
 -- 
-2.34.1
-
+With best wishes
+Dmitry
 
