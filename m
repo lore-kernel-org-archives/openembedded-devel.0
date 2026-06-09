@@ -2,56 +2,56 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B939DCD8CAA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABD2BCD8CA8
 	for <webhook@archiver.kernel.org>; Tue,  9 Jun 2026 10:29:51 +0000 (UTC)
 Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
  by mx.groups.io with SMTP id smtpd.msgproc02-g2.76503.1781000987360731933
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jun 2026 03:29:51 -0700
+ Tue, 09 Jun 2026 03:29:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=hG8D35H7;
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=LyukHTwB;
  spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1781000991; x=1812536991;
+  t=1781000989; x=1812536989;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=zO8w2qnzoQvI6qDPjA6S17j6Uy/YAYbStUPkRIKBvbM=;
-  b=hG8D35H7iAk9NpI/P+a08WmN8RAfspFOEx/uvlQQZvU3akQFputWA7Dt
-   vJwxdSC7JxCbT/1SIkAVqnaHKJksczyXPW0jXzcmW2SkIjW9d7mcBcNxa
-   YuYotbeVjUhW1YpmlDQoPZs2PiqpghkpbynNKHo1xcVmbVlJX3GtGXMXi
-   F+hx0KjOfsacENmIl3LfxVz7rC8MB6l74DZORjVx/4nGAGUrl68QMSCga
-   eUJzbmRe4nm+Jrpf/xg9advWTU0XN13hk2ImEUisZJ5UOD4ubmRuCpl1T
-   /K7Zq/LBVYBMz64DXLaWdkM2vTRkmFnj/cBzRLx+M4OKD3hdNvyFdYz0Z
-   Q==;
-X-CSE-ConnectionGUID: GfLEt0C5RCGDRtGNBN5XVw==
-X-CSE-MsgGUID: GJsUjyufSwej6StN52Bw2w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="241652295"
+  bh=qTaptHcKsoPtcgyqHzPvgczIt4zfbenirk30tt+PjQg=;
+  b=LyukHTwB8EKjSa+A6+AkGKGLFYPGU+tMPIcvWm0fdowTuIth3fUaqjNK
+   HpP04HWwXsl5rrOMGsQqCZ3LP8J54vv0+4op3ZFtPkhr6dpsI+fwcZrYa
+   TR0bvpbvNzuAEKr171u2zT9xu5AnwzXwoTAaCAqzcA4cx7j41P95nmiTa
+   xBvDbjxQnXHts7R98R9nmr35ojA+UvQRgtMCxCZsgJqsOltpESQcFbMfm
+   T1p6LqLAq27gCyHiNNUUs10/msSEgXtLSNPOBA3gpk4bu/G9BobW/flwJ
+   9y2xjN4bLQm3Cg6o08GX1YZYVoPqRth4OiDdtsU2ZKamBfi/WXEXm9hdW
+   w==;
+X-CSE-ConnectionGUID: iAduR/2kQ9KtA3BOaSaFhw==
+X-CSE-MsgGUID: +n24XjGTQICUzlTxNXI16g==
+X-IronPort-AV: E=McAfee;i="6800,10657,11811"; a="241652294"
 X-IronPort-AV: E=Sophos;i="6.24,196,1774278000"; 
-   d="scan'208";a="241652295"
+   d="scan'208";a="241652294"
 Received: from gmgwnl01.global.fujitsu.com ([52.143.17.124])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:29:50 +0900
-Received: from az2nlsmgm4.fujitsu.com (unknown [10.150.26.204])
+  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2026 19:29:49 +0900
+Received: from az2nlsmgm2.o.css.fujitsu.com (unknown [10.150.26.202])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 939D442A305
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:50 +0000 (UTC)
+	by gmgwnl01.global.fujitsu.com (Postfix) with ESMTPS id 153D41C000CD
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:49 +0000 (UTC)
 Received: from az2uksmom3.o.css.fujitsu.com (unknown [10.151.22.205])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by az2nlsmgm4.fujitsu.com (Postfix) with ESMTPS id 4972F102FBB0
-	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:50 +0000 (UTC)
+	by az2nlsmgm2.o.css.fujitsu.com (Postfix) with ESMTPS id B8E9D1C0094C
+	for <openembedded-devel@lists.openembedded.org>; Tue,  9 Jun 2026 10:29:48 +0000 (UTC)
 Received: from G08FNSTD200057.g08.fujitsu.local (unknown [10.167.135.104])
-	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id 5AD6210003CE;
-	Tue,  9 Jun 2026 10:29:48 +0000 (UTC)
+	by az2uksmom3.o.css.fujitsu.com (Postfix) with ESMTP id C1ED910003CF;
+	Tue,  9 Jun 2026 10:29:46 +0000 (UTC)
 From: Wang Mingyu < wangmy@fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 11/30] proftpd: upgrade 1.3.9a -> 1.3.9b
-Date: Tue,  9 Jun 2026 18:28:54 +0800
-Message-ID: <20260609102913.2204-11-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 10/30] pcsc-tools: upgrade 1.7.4 -> 1.7.5
+Date: Tue,  9 Jun 2026 18:28:53 +0800
+Message-ID: <20260609102913.2204-10-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.49.0.windows.1
 In-Reply-To: <20260609102913.2204-1-wangmy@fujitsu.com>
 References: <20260609102913.2204-1-wangmy@fujitsu.com>
@@ -61,52 +61,32 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 09 Jun 2026 10:29:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127465
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127464
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-==========
-- Issue 2057 - SQL Injection in mod_wrap2_sql via reverse DNS
-  hostname (CVE-2026-44331).
-- Issue 2056 - Incomplete fix for session management with OpenSSL 3.2.x or
-  later, when using TLSv1.2 or earlier.  This complements the fix for
-  Issue #1963.
-- Issue 2098 - Hard quota limits on uploads do not cause SFTP WRITE requests
-  to fail as expected.
-- Issue 2102 - SSH payload length underflow calculation for ETM/ChaChaPoly
-  algorithms in mod_sftp.
-- Issue 2104 - SSH packet with empty payload triggers null pointer dereference
-  in mod_sftp.
-- Issue 2106 - Bad DSA signatures can lead to out-of-bounds read of heap memory
-  in mod_sftp.
-- Issue 2108 - Mismatched RSA/DSA algorithm signatures can lead to null
-  dereference in mod_sftp.
-- Issue 2115 - SFTP request payload length underflow calculation in mod_sftp.
-- Issue 2120 - Several modules fail to build using OpenSSL 4.0.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../proftpd/{proftpd_1.3.9a.bb => proftpd_1.3.9b.bb}            | 2 +-
+ .../pcsc-tools/{pcsc-tools_1.7.4.bb => pcsc-tools_1.7.5.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.9a.bb => proftpd_1.3.9b.bb} (99%)
+ rename meta-oe/recipes-support/pcsc-tools/{pcsc-tools_1.7.4.bb => pcsc-tools_1.7.5.bb} (92%)
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9b.bb
-similarity index 99%
-rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb
-rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.9b.bb
-index 2e164a574b..3da67c9e1c 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9a.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.9b.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
- LICENSE = "GPL-2.0-or-later"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
+diff --git a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.4.bb b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.5.bb
+similarity index 92%
+rename from meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.4.bb
+rename to meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.5.bb
+index 2a003cbb46..34057af2db 100644
+--- a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.4.bb
++++ b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=94d55d512a9ba36caa9b7df079bae19f"
  
--SRCREV = "ec8a5544e81df54e202f52f1f70d206439389577"
-+SRCREV = "390b21555268bbc64b66d2dfa7ae40476419b80f"
- BRANCH = "1.3.9"
+ SRC_URI = "git://github.com/LudovicRousseau/pcsc-tools;protocol=https;branch=master;tag=${PV}"
  
- SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https;tag=v${PV} \
+-SRCREV = "52c6a3fda367d2badf618a2e0b8f9e59a02f16ff"
++SRCREV = "fbd5649502ebcc2d4d0ad1a88c5ae2cde7ecc39f"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
 2.43.0
 
