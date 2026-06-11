@@ -1,153 +1,117 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AAFCCD98C7
-	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 21:11:46 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.msgproc02-g2.56917.1781212300291845813
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98F45CD98C7
+	for <webhook@archiver.kernel.org>; Thu, 11 Jun 2026 21:25:26 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.msgproc01-g2.54549.1781205475865153712
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jun 2026 14:11:40 -0700
+ Thu, 11 Jun 2026 12:17:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=f_l_k@t-online.de header.s=20260216 header.b=ExM+8MZc;
- spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout11.t-online.de (Postfix) with SMTP id 0C6111CCE8;
-	Thu, 11 Jun 2026 23:11:38 +0200 (CEST)
-Received: from [192.168.178.63] ([84.154.168.237]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1wXmga-3SmIO80; Thu, 11 Jun 2026 23:11:36 +0200
-Date: Thu, 11 Jun 2026 23:11:31 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] cairomm: fix LIC_FILES_CHECKSUM
-To: raj.khem@gmail.com
-Cc: "Khem Raj via lists.openembedded.org"
-	<raj.khem=gmail.com@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Message-Id: <77KHGT.POOUGQLQCU6T@t-online.de>
-In-Reply-To: <CAMKF1soU7MJBKh1QxLvYZXyFZY4PJy2rZ31cuXoLKUToZgLUHg@mail.gmail.com>
-References: <20260611205607.2081431-1-f_l_k@t-online.de>
-	<CAMKF1soU7MJBKh1QxLvYZXyFZY4PJy2rZ31cuXoLKUToZgLUHg@mail.gmail.com>
-X-Mailer: geary/46.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O9Eh5eg1;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0622d0867b=venkatasainath.ravikanti@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 65BISIRw375452;
+	Thu, 11 Jun 2026 12:17:50 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=cc:content-transfer-encoding:content-type:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	PPS06212021; bh=kWMYAQZLZpmAxvn72B1bEN5HEIMSBKa8tichDmibUB4=; b=
+	O9Eh5eg1FjVtA3Qrp9F7pYaSA0GqW/nGamZbDZ4/0I5/ftW/+vHxwP/7M59fji4y
+	ZQ0nBcXhcmdvHD68kARmfUxqKZduUb3lHeZg6MyiVRnijbsDenJ1tOet/ZqCiTd+
+	JPIjaIW0ISCwgJmAlat0kQNzVASX8j2K5Mxt6WXaJNlJCJRzi231PF+U+/o2J+bi
+	D//RfZ4j+Bb3J2F1WVFs5nK340kLs22Z2p78VXodb1ejR/XgCNYuPcRclQp4OWUj
+	f9XiWvUz2EcwM1s6KSk0V19lvRu5LQEUWC3GZ1JvPOqbmnHZTON62nyhjJdPSJLS
+	3AE4OgQx1WIbl9D4qTNRAQ==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [128.224.246.37])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 4eqe7ahqxd-2
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 11 Jun 2026 12:17:50 -0700 (PDT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.61; Thu, 11 Jun 2026 12:17:49 -0700
+Received: from oak-lpgbuild10.wrs.com (10.11.232.110) by
+ ALA-EXCHNG02.corp.ad.wrs.com (10.11.224.122) with Microsoft SMTP Server id
+ 15.1.2507.61 via Frontend Transport; Thu, 11 Jun 2026 12:17:49 -0700
+From: "Ravikanti, Venkatasainath" <Venkatasainath.Ravikanti@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Randy.MacLeod@windriver.com>, <khem.raj@oss.qualcomm.com>,
+        <li.zhou@windriver.com>, <wangmy@fujitsu.com>,
+        <venkatasainath.ravikanti@windriver.com>
+Subject: [meta-oe][wrynose][PATCH 1/2] haveged: upgrade 1.9.19 -> 1.9.20
+Date: Thu, 11 Jun 2026 19:17:48 +0000
+Message-ID: <20260611191749.2897262-2-venkatasainath.ravikanti@windriver.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260611191749.2897262-1-venkatasainath.ravikanti@windriver.com>
+References: <20260611191749.2897262-1-venkatasainath.ravikanti@windriver.com>
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-XatFwv16Z8MhHOLsYAeR"
-X-TOI-EXPURGATEID: 150726::1781212297-20FF683F-D3AB5B7C/0/0 CLEAN NORMAL
-X-TOI-MSGID: c2f60fbf-1793-4ea2-9cb3-308040035365
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=t-online.de;
-	s=20260216; t=1781212297; i=f_l_k@t-online.de;
-	bh=/6U87YYSNMTMga/dPa92foEd50VvfzaYyl7eqmbMwtA=;
-	h=Date:From:Subject:To:Cc:In-Reply-To:References;
-	b=ExM+8MZcGvIi+m7nxtbHMt+sc/aDKzoYMDydLtSb+TbMYqRvR7j8Y2BZanRfZx8Up
-	 f2MRIxdxJZc4aCheHPpfvJ00dVg/Vix99pG8IR/1/lOtLnKH5qn9snJflcvTfGectN
-	 t8aFjBczph7UM5Eu4U9mrAYkAhyVqDKPekZ2NUhwxaNFa8SbnD8+R47we/PWFl5o8G
-	 adch1jpXtfygmmcXq5de2CmaNU2dQ2RD+JJHHvIr3L6AnzEJ/Mtt/s4vbE5qfY+MmK
-	 TqTA61OXklyu8w7yEZMPDngTh2uwI3CEQcCdJ+z2TTkgmlpsH2WjRkGfKpkzaI1tTB
-	 w6xhA43AM1VeA==
+X-Proofpoint-ORIG-GUID: 77pJkfsbtffBPNvUbSkqzDhQYPDcKlgJ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDE5MyBTYWx0ZWRfXzOm+ALReM3zo
+ ohkr5uTHffFi8CbpH5z+2og938QUPQnp+hRlUpow55cmHuIj9vK06QutiDqcjFGWkQYL521vb51
+ 0Sn+8Obk5wFBd3iy9uxhzqWPMCqv4g6hyzPO1yLVS85O8OxB5248vgSaW6zVfDyveXKJ+/gC/DQ
+ +PAR8STz4HzDQTqMvhHLdwUgIwec2nzSYiXfjh6reCPgfXgWudl5bssJv22SUC1pxrXMqACERR4
+ 04iplQE1OTF3idLPMA7c9vi/uzBpo7Lklk+ORsn0R95miocetOxORzT+c9T83XnADg/9f+KIzhw
+ obA5USk2rv3bQ9F/XGTPQNSjKY167IfOS+oUNKlc12XAFmxnowk8EM4IYcvcImSO9ztr9U28NH1
+ G935tBDhVVD3AR1e6TRDcG0tojczv0BLrzy/M2jyPhaZQ++lbkRG1jkONO6f7J2G05ZJ7dHsDW5
+ LsJey/dspfaQnw3y7vA==
+X-Proofpoint-GUID: 77pJkfsbtffBPNvUbSkqzDhQYPDcKlgJ
+X-Authority-Analysis: v=2.4 cv=P+cKQCAu c=1 sm=1 tr=0 ts=6a2b09de cx=c_pps
+ a=Lg6ja3A245NiLSnFpY5YKQ==:117 a=Lg6ja3A245NiLSnFpY5YKQ==:17
+ a=FelO9ux0wxsA:10 a=VkNPw1HP01LnGYTKEx00:22 a=bi6dqmuHe4P4UrxVR6um:22
+ a=iKiJcTA2PjBS6x5JeXcw:22 a=8nEx1NFfAAAA:20 a=kh0PQnTzAAAA:8 a=t7CeM3EgAAAA:8
+ a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=xSd44BTG_p2soQ2pMy4A:9
+ a=4Y7iCZ2k6v-lWCGmfGXo:22 a=FdTzh2GWekK77mhwV6Dw:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDE5MyBTYWx0ZWRfX9bZLjlawSESZ
+ 7hT3Flsnf5rnuicYlqOENCoqPN7rMbKNp8QaWGxuKyCB4rJgRELIEB7CnrWoU1pn4CaSGFcvy5S
+ tJL5C2hO+4wb8PPmpzCdb2e4fSV9ETstVDr1xM1jomUZuVNlIw6o
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-11_04,2026-06-11_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
+ malwarescore=0 spamscore=0 suspectscore=0 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606110193
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from 45-33-107-173.ip.linodeusercontent.com [45.33.107.173] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2026 21:11:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127536
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Jun 2026 21:25:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/127539
 
---=-XatFwv16Z8MhHOLsYAeR
-Content-Type: text/plain; charset=us-ascii; format=flowed
+From: Li Zhou <li.zhou@windriver.com>
 
-Am Do, 11. Jun 2026 um 14:01:07 -07:00:00 schrieb Khem Raj via 
-lists.openembedded.org <raj.khem=gmail.com@lists.openembedded.org>:
-> I wonder if it needs to be backported to older branches as well. If 
-> so how D are does it have to go.
+ChangeLog:
+https://github.com/jirka-h/haveged/releases/tag/v1.9.20
 
-I think this has just been changed recently since I  see this error 
-only after the recent recipe updates:
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
+Signed-off-by: Khem Raj <khem.raj@oss.qualcomm.com>
+Signed-off-by: Venkatasainath Ravikanti <venkatasainath.ravikanti@windriver.com>
+---
+ .../haveged/{haveged_1.9.19.bb => haveged_1.9.20.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.19.bb => haveged_1.9.20.bb} (94%)
 
-ERROR: cairomm-1.16-1.18.1-r0 do_populate_lic: QA Issue: cairomm-1.16: 
-The LIC_FILES_CHKSUM does not match for 
-file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9 
-<file://copying;md5=c46bda00ffbb0ba1dac22f8d087f54d9/>
-cairomm-1.16: The new md5 checksum is 4bf661c1e3793e55c8d1051bc5e0ae21
-cairomm-1.16: Here is the selected license text:
-vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-                  GNU LESSER GENERAL PUBLIC LICENSE
-                       Version 2.1, February 1999
-
- Copyright (C) 1991, 1999 Free Software Foundation, Inc.
- <<https://fsf.org/>>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
-
-[This is the first released version of the Lesser GPL. It also counts
- as the successor of the GNU Library Public License, version 2, hence
-...
-school, if any, to sign a "copyright disclaimer" for the library, if
-necessary. Here is a sample; alter the names:
-
-  Yoyodyne, Inc., hereby disclaims all copyright interest in the
-  library `Frob' (a library for tweaking knobs) written by James Random 
-Hacker.
-
-  <signature of Moe Ghoul>, 1 April 1990
-  Moe Ghoul, President of Vice
-
-That's all there is to it!
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-cairomm-1.16: Check if the license information has changed in 
-/home/flk/bitbake/bitbake-builds/oe/build/tmp/work/corei7-64-oe-linux/cairomm-1.16/1.18.1/sources/cairomm-1.18.1/COPYING 
-to verify that the LICENSE value "LGPL-2.0-only" remains valid 
-[license-checksum]
-ERROR: cairomm-1.16-1.18.1-r0 do_populate_lic: Fatal QA errors were 
-found, failing task.
-ERROR: Logfile of failure stored in: 
-/home/flk/bitbake/bitbake-builds/oe/build/tmp/work/corei7-64-oe-linux/cairomm-1.16/1.18.1/temp/log.do_populate_lic.1866026
-ERROR: Task 
-(/home/flk/bitbake/bitbake-builds/oe/layers/meta-openembedded/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.1.bb:do_populate_lic) 
-failed with exit code '1'
-
-
-
---=-XatFwv16Z8MhHOLsYAeR
-Content-Type: text/html; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto">Am Do, 11. Jun 2026 um 14:01:07 -07:00:=
-00 schrieb Khem Raj via lists.openembedded.org &lt;raj.khem=3Dgmail.com@lis=
-ts.openembedded.org&gt;:<br><blockquote type=3D"cite">I wonder if it needs =
-to be backported to older branches as well. If so how D are does it have to=
- go.</blockquote><div><br></div><div>I think this has just been changed rec=
-ently since I &nbsp;see this error only after the recent recipe updates:</d=
-iv><div><br></div><div>ERROR: cairomm-1.16-1.18.1-r0 do_populate_lic: QA Is=
-sue: cairomm-1.16: The LIC_FILES_CHKSUM does not match for <a href=3D"file:=
-//COPYING;md5=3Dc46bda00ffbb0ba1dac22f8d087f54d9">file://COPYING;md5=3Dc46b=
-da00ffbb0ba1dac22f8d087f54d9</a></div><div>cairomm-1.16: The new md5 checks=
-um is 4bf661c1e3793e55c8d1051bc5e0ae21</div><div>cairomm-1.16: Here is the =
-selected license text:</div><div>vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv=
-vvvvvvvvvvvvvvvvvvvvvvvvvvvv</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; GNU LESSER GENERAL PUBLIC LICENSE</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp;Version 2.1, February 1999</div><div><br></div><div>&nbsp;Copyright (C)=
- 1991, 1999 Free Software Foundation, Inc.</div><div>&nbsp;&lt;<a href=3D"h=
-ttps://fsf.org/">https://fsf.org/</a>&gt;</div><div>&nbsp;Everyone is permi=
-tted to copy and distribute verbatim copies</div><div>&nbsp;of this license=
- document, but changing it is not allowed.</div><div><br></div><div>[This i=
-s the first released version of the Lesser GPL.  It also counts</div><div>&=
-nbsp;as the successor of the GNU Library Public License, version 2, hence</=
-div><div>...</div><div>school, if any, to sign a "copyright disclaimer" for=
- the library, if</div><div>necessary.  Here is a sample; alter the names:</=
-div><div><br></div><div>&nbsp; Yoyodyne, Inc., hereby disclaims all copyrig=
-ht interest in the</div><div>&nbsp; library `Frob' (a library for tweaking =
-knobs) written by James Random Hacker.</div><div><br></div><div>&nbsp; &lt;=
-signature of Moe Ghoul&gt;, 1 April 1990</div><div>&nbsp; Moe Ghoul, Presid=
-ent of Vice</div><div><br></div><div>That's all there is to it!</div><div>^=
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</div>=
-<div>cairomm-1.16: Check if the license information has changed in /home/fl=
-k/bitbake/bitbake-builds/oe/build/tmp/work/corei7-64-oe-linux/cairomm-1.16/=
-1.18.1/sources/cairomm-1.18.1/COPYING to verify that the LICENSE value "LGP=
-L-2.0-only" remains valid [license-checksum]</div><div>ERROR: cairomm-1.16-=
-1.18.1-r0 do_populate_lic: Fatal QA errors were found, failing task.</div><=
-div>ERROR: Logfile of failure stored in: /home/flk/bitbake/bitbake-builds/o=
-e/build/tmp/work/corei7-64-oe-linux/cairomm-1.16/1.18.1/temp/log.do_populat=
-e_lic.1866026</div><div>ERROR: Task (/home/flk/bitbake/bitbake-builds/oe/la=
-yers/meta-openembedded/meta-oe/recipes-graphics/cairo/cairomm-1.16_1.18.1.b=
-b:do_populate_lic) failed with exit code '1'</div><div><br></div></div>
---=-XatFwv16Z8MhHOLsYAeR--
+diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.20.bb
+similarity index 94%
+rename from meta-oe/recipes-extended/haveged/haveged_1.9.19.bb
+rename to meta-oe/recipes-extended/haveged/haveged_1.9.20.bb
+index 69de5628c4..2ea12b3977 100644
+--- a/meta-oe/recipes-extended/haveged/haveged_1.9.19.bb
++++ b/meta-oe/recipes-extended/haveged/haveged_1.9.20.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "https://www.issihosts.com/haveged/index.html"
+ LICENSE = "GPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-SRCREV = "0ef7dd915ee8be4ca2bb10b5cc2bee92b8ede61d"
++SRCREV = "e2d96806273caa9ce7457e2f8669a3c40517ca27"
+ SRC_URI = "git://github.com/jirka-h/haveged.git;branch=master;protocol=https \
+ "
+ 
+-- 
+2.54.0
 
 
